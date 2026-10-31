@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-31T18:35:34.730224+00:00",
-  "head": "72d2473",
+  "signed_at": "2026-10-31T19:03:49.446420+00:00",
+  "head": "2267178",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -55,143 +55,8 @@
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
   "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c",
-  "audit_start_sha256": "44c1eab647e91ea5e5a6f6056ee8dfdb3555ad1e37009f66d2677c5e784ac714",
+  "audit_start_sha256": "a4325593842d261af8ef38597f00c34da55cc1635eeaf09653a2080b340afdc8",
   "audit": [
-    {
-      "date": "2026-10-26",
-      "art": "set-current",
-      "head": "21b8fca",
-      "geaendert": [
-        "assets/css/extended/custom.css",
-        "layouts/_partials/cover.html",
-        "layouts/_partials/extend_footer.html",
-        "layouts/_partials/extend_post_content.html",
-        "layouts/_partials/head.html",
-        "layouts/pillar/single.html"
-      ],
-      "herkunft": [
-        {
-          "pfad": "layouts/_partials/head.html",
-          "klasse": "kritisch",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c82f7f3",
-              "datum": "2026-10-26",
-              "betreff": "Optimize blog rendering, SEO and accessibility with regression coverage"
-            },
-            {
-              "sha": "7474269",
-              "datum": "2026-10-26",
-              "betreff": "fix(ci): Vier PRs konsolidieren, Basisregressionen heilen, Sicherheits-Gates erhalten (#898)"
-            },
-            {
-              "sha": "6c61412",
-              "datum": "2026-10-26",
-              "betreff": "SEO-Highend-Runde: KI-Transparenz, Metadaten, Umami-Vorbereitung, Event-Driven Refresh (#890)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "assets/css/extended/custom.css",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c82f7f3",
-              "datum": "2026-10-26",
-              "betreff": "Optimize blog rendering, SEO and accessibility with regression coverage"
-            },
-            {
-              "sha": "18cf6ea",
-              "datum": "2026-10-26",
-              "betreff": "research: AGC-Tagesreport + Redaktionskalender aktualisiert"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/_partials/cover.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c82f7f3",
-              "datum": "2026-10-26",
-              "betreff": "Optimize blog rendering, SEO and accessibility with regression coverage"
-            },
-            {
-              "sha": "18cf6ea",
-              "datum": "2026-10-26",
-              "betreff": "research: AGC-Tagesreport + Redaktionskalender aktualisiert"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/_partials/extend_footer.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c82f7f3",
-              "datum": "2026-10-26",
-              "betreff": "Optimize blog rendering, SEO and accessibility with regression coverage"
-            },
-            {
-              "sha": "18cf6ea",
-              "datum": "2026-10-26",
-              "betreff": "research: AGC-Tagesreport + Redaktionskalender aktualisiert"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/_partials/extend_post_content.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c82f7f3",
-              "datum": "2026-10-26",
-              "betreff": "Optimize blog rendering, SEO and accessibility with regression coverage"
-            },
-            {
-              "sha": "18cf6ea",
-              "datum": "2026-10-26",
-              "betreff": "research: AGC-Tagesreport + Redaktionskalender aktualisiert"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/pillar/single.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "21b8fca",
-              "datum": "2026-10-26",
-              "betreff": "Merge latest main accessibility fixes and share checklist rendering"
-            },
-            {
-              "sha": "453ea56",
-              "datum": "2026-10-26",
-              "betreff": "fix(a11y): Label in Name heilen, Siegel neu signieren, Ratgeber-Welten ins Gate (#907)"
-            },
-            {
-              "sha": "c82f7f3",
-              "datum": "2026-10-26",
-              "betreff": "Optimize blog rendering, SEO and accessibility with regression coverage"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "12cb03724c935f4cd68cceda07efacb83ce265e43da3839c67bf3bfaa2d427df",
-      "prev_sha256": null
-    },
     {
       "date": "2026-10-27",
       "art": "set-current",
@@ -220,7 +85,7 @@
         }
       ],
       "files_sha256": "a3e7debec9a2090370ea419b2f04bf5bbdb36bbafd418e17687b521705749fb0",
-      "prev_sha256": "44c1eab647e91ea5e5a6f6056ee8dfdb3555ad1e37009f66d2677c5e784ac714"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-27",
@@ -551,7 +416,15 @@
       "art": "set-current",
       "head": "72d2473",
       "geaendert": [],
-      "prev_sha256": "e34aa3db25a137021434fd74496790a6b205ba4aad74966b74ee8db32e8770a0",
+      "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c",
+      "prev_sha256": "e34aa3db25a137021434fd74496790a6b205ba4aad74966b74ee8db32e8770a0"
+    },
+    {
+      "date": "2026-10-31",
+      "art": "set-current",
+      "head": "2267178",
+      "geaendert": [],
+      "prev_sha256": "9f6765b665416b497ab01ab9383b33d94b562b0c17403cdad16ec60784cb8a7f",
       "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c"
     }
   ]

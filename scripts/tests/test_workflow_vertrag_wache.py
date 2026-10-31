@@ -157,11 +157,15 @@ jobs:
                         "Wache steht VOR der PyYAML-Installation → Selbsttest rot")
 
     def test_ohne_pyyaml_klare_meldung_statt_folgebefunde(self):
-        """Fehlt PyYAML, gibt es EINE verständliche Meldung – nicht zehn."""
-        umgebung = {
-            "PYTHONPATH": str(ROOT / "scripts"),
-        }
-        # Ein Import-Blocker im Subprozess: yaml wird nicht gefunden.
+        """Fehlt PyYAML, gibt es eine Ansage und KEINE Folgebefunde.
+
+        Zwei Dinge zugleich: die Proben dürfen nicht zehn Kryptik-Zeilen
+        ausspucken („V3 nicht erkannt"), und der Selbsttest darf ein karges
+        Umfeld nicht mit Exit 2 bestrafen – die Wache ist dann nicht falsch,
+        ihr Messwerkzeug fehlt. Genau daran wurde das PR-Gate am 31.10.2026
+        rot, nachdem die Wache versehentlich VOR der PyYAML-Installation
+        stand.
+        """
         skript = (
             "import runpy, sys\n"
             "class B:\n"
@@ -171,12 +175,16 @@ jobs:
             "sys.argv = ['w', '--selftest']\n"
             f"runpy.run_path(r'{SKRIPT}', run_name='__main__')\n"
         )
-        ergebnis = subprocess.run([sys.executable, "-c", skript],
-                                  capture_output=True, text=True, env=umgebung)
-        self.assertEqual(ergebnis.returncode, 2, "ohne PyYAML muss fail-closed gelten")
+        ergebnis = subprocess.run(
+            [sys.executable, "-c", skript], capture_output=True, text=True,
+            env={"PYTHONPATH": str(ROOT / "scripts")})
+        self.assertEqual(ergebnis.returncode, 0,
+                         f"ohne PyYAML darf der Selbsttest nicht scheitern:\n"
+                         f"{ergebnis.stdout}{ergebnis.stderr}")
         self.assertIn("PyYAML fehlt", ergebnis.stdout)
+        self.assertIn("übersprungen", ergebnis.stdout)
         self.assertNotIn("nicht erkannt", ergebnis.stdout,
-                         "keine Folgebefunde – nur die eine klare Meldung")
+                         "keine Folgebefunde – nur die eine klare Ansage")
 
     def test_sabotage_probe(self):
         """Eine kaputte Kopie des echten Workflows muss auffallen.

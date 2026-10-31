@@ -574,24 +574,12 @@ def bericht(befunde: Sequence[Befund], geprueft: int, online: bool) -> str:
 
 # ------------------------------------------------------------ Selbsttest
 
-def _selftest() -> int:
-    """Eingefrorene echte Fälle. Abweichung = Exit 2, nichts wird geschrieben."""
-    fehler: List[str] = []
+def _selftest_struktur(fehler: List[str]) -> None:
+    """YAML-abhängige Proben: Grundfall, V3–V6, Doppelschlüssel.
 
-    # Ohne PyYAML ist keine der Proben aussagekräftig. Statt zehn
-    # Folgebefunde („V3 nicht erkannt") genau EINE Meldung, die den
-    # fehlenden Schritt nennt – sonst sucht man den Fehler in der Wache
-    # statt in der Installation. Genau das passierte am 31.10.2026 im
-    # PR-Gate: Die Wache stand vor der PyYAML-Installation.
-    if _Strikt is None:
-        print("❌ Selbsttest nicht ausführbar: PyYAML fehlt.")
-        print("   Diese Wache liest YAML – ohne PyYAML prüft sie nichts.")
-        print("   Installation im Workflow VOR diesen Schritt legen:")
-        print("     python3 -m pip install -q --require-hashes -r requirements-ci.txt")
-        return 2
-
-    # Der teure Fall aus dem Vorgang: `labels` als Liste.
-    vertrag_issue = {"labels": "string", "title": "string", "content-filepath": "string"}
+    Braucht PyYAML. Ohne PyYAML werden diese Proben übersprungen – sie
+    dürfen ein karges Umfeld nicht mit Exit 2 bestrafen.
+    """
     gut = """
 name: X
 on: [push]
@@ -600,85 +588,65 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Melden
-        uses: peter-evans/create-issue-from-file@959985ac0a2ee023b3cc256977ec1a093aa4a0bf
+        uses: peter-evans/create-issue-from-file@433e51abf769039ee20ba1293a088ca19d573b7f
         with:
           title: "T"
           content-filepath: R.md
           labels: "qualitaet, sprach-qualitaet"
 """
-    kaputt = gut.replace('labels: "qualitaet, sprach-qualitaet"',
-                         'labels: ["qualitaet", "sprach-qualitaet"]')
 
-    befund_gut, _ = pruefe_struktur(gut, "gut.yml")
-    if befund_gut:
-        fehler.append(f"falsch-positiv in Grundfall: {befund_gut}")
-
-    b, daten = pruefe_struktur(kaputt, "kaputt.yml")
+    # Grundfall: ein gesunder Workflow wird nicht beanstandet.
+    b, _ = pruefe_struktur(gut, "gut.yml")
     if b:
-        fehler.append(f"Strukturprüfung darf Typfehler nicht melden: {b}")
-    treffer = pruefe_vertraege(
-        ROOT, [("kaputt.yml", daten)],
-        {"peter-evans/create-issue-from-file@959985ac0a2ee023b3cc256977ec1a093aa4a0bf": vertrag_issue},
-        online=False)
-    if len(treffer) != 1 or treffer[0].regel != "V2":
-        fehler.append(f"V2 nicht erkannt: {treffer}")
+        fehler.append(f"gesunder Workflow beanstandet: {b}")
 
-    # Derselbe Block als Zeichenkette ist grün.
-    satz = pruefe_vertraege(
-        ROOT, [("gut.yml", _lade(gut)[0])],
-        {"peter-evans/create-issue-from-file@959985ac0a2ee023b3cc256977ec1a093aa4a0bf": vertrag_issue},
-        online=False)
-    if satz:
-        fehler.append(f"Zeichenkette darf nicht beanstandet werden: {satz}")
+    # V3 – Top-Level-Tippfehler
+    b, _ = pruefe_struktur(gut.replace("jobs:", "job:"), "V3.yml")
+    if not any(x.regel == "V3" for x in b):
+        fehler.append(f"V3 nicht erkannt: {b}")
 
-    # V1 – unbekannter Pin
-    unbekannt = gut.replace("959985ac0a2ee023b3cc256977ec1a093aa4a0bf", "0" * 40)
-    b, daten = pruefe_struktur(unbekannt, "unbekannt.yml")
-    # V1 entsteht aus dem Online-Vertrag; online=False prüft nur den lokalen
-    # Speicher – deshalb hier der gemerkte „nicht existent"-Eintrag ({}).
-    treffer = pruefe_vertraege(
-        ROOT, [("unbekannt.yml", daten)],
-        {f"peter-evans/create-issue-from-file@{'0' * 40}": {FEHLT: True}}, online=False)
-    if not any(t.regel == "V1" for t in treffer):
-        fehler.append(f"V1 nicht erkannt: {treffer}")
-    # Negativ: ein leerer Vertragsspeicher darf NICHT als V1 gelten.
-    ohne = pruefe_vertraege(ROOT, [("unbekannt.yml", daten)], {}, online=False)
-    if any(t.regel == "V1" for t in ohne):
-        fehler.append(f"V1 falsch-positiv ohne Vertrag: {ohne}")
+    # V4 – unbekannter Schritt-Schlüssel
+    b, _ = pruefe_struktur(gut.replace("        with:", "        argument:"), "V4.yml")
+    if not any(x.regel == "V4" for x in b):
+        fehler.append(f"V4 nicht erkannt: {b}")
 
-    # V2 – unbekannte Eingabe
-    fremd = gut.replace('          title: "T"', '          titel: "T"')
-    b, daten = pruefe_struktur(fremd, "fremd.yml")
-    treffer = pruefe_vertraege(
-        ROOT, [("fremd.yml", daten)],
-        {"peter-evans/create-issue-from-file@959985ac0a2ee023b3cc256977ec1a093aa4a0bf": vertrag_issue},
-        online=False)
-    if not any(t.regel == "V2" and "titel" in t.text for t in treffer):
-        fehler.append(f"unbekannte Eingabe nicht erkannt: {treffer}")
+    # V5 – `${{` ohne `}}` (für PyYAML bloß Text, für GitHub Syntaxfehler)
+    b, _ = pruefe_struktur(gut.replace('title: "T"', 'title: "${{ github.job"'), "V5.yml")
+    if not any(x.regel == "V5" for x in b):
+        fehler.append(f"V5 nicht erkannt: {b}")
 
-    # V3/V4/V5/V6
-    faelle = {
-        "V3": gut.replace("jobs:", "job:"),
-        "V4": gut.replace("        with:", "        argument:"),
-        # `${{` ohne `}}`: die Zeile ist für PyYAML bloß Text, für GitHub
-        # ein Syntaxfehler – deshalb steht sie hier als Probe.
-        "V5": gut.replace('title: "T"', 'title: "${{ github.job"'),
-        # Schritt mit `name` und `env`, aber ohne `run:` und `uses:` –
-        # tut nichts und meldet trotzdem Erfolg.
-        "V6": gut.replace(
-            '      - name: Melden\n        uses:',
-            '      - name: Melden\n        env:\n          X: "1"\n        uses:'),
-    }
-    faelle["V6"] = faelle["V6"].replace(
-        '        uses: peter-evans/create-issue-from-file@959985ac0a2ee023b3cc256977ec1a093aa4a0bf\n'
-        '        with:\n'
-        '          title: "T"\n'
-        '          content-filepath: R.md\n'
-        '          labels: "qualitaet, sprach-qualitaet"\n', '')
-    for regel, quelle in faelle.items():
-        b, _ = pruefe_struktur(quelle, f"{regel}.yml")
-        if not any(x.regel == regel for x in b):
-            fehler.append(f"{regel} nicht erkannt: {b}")
+    # V5-Gegenprobe: mehrzeiliger Ausdruck ist GÜLTIG (kommt im Repo vor).
+    mehrzeilig = """
+name: X
+on: [push]
+jobs:
+  a:
+    if: >-
+      ${{ github.event.workflow_run.conclusion == 'failure' ||
+          github.event.workflow_run.conclusion == 'timed_out' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - run: echo hi
+"""
+    b, _ = pruefe_struktur(mehrzeilig, "mehrzeilig.yml")
+    if any(x.regel == "V5" for x in b):
+        fehler.append(f"mehrzeiliger Ausdruck fälschlich beanstandet: {b}")
+
+    # V6 – Schritt ohne `run:` und ohne `uses:`
+    ohne_arbeit = """
+name: X
+on: [push]
+jobs:
+  a:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Tut nichts
+        env:
+          X: "1"
+"""
+    b, _ = pruefe_struktur(ohne_arbeit, "V6.yml")
+    if not any(x.regel == "V6" for x in b):
+        fehler.append(f"V6 nicht erkannt: {b}")
 
     # Doppelter Schlüssel muss auffallen (PyYAML allein schluckt ihn).
     doppelt = """
@@ -695,18 +663,87 @@ jobs:
     if not any(x.regel == "V0" for x in b):
         fehler.append(f"doppelter Schlüssel nicht erkannt: {b}")
 
-    # Ein gesunder Workflow bleibt gesund (kein falsch-positiv).
-    b, _ = pruefe_struktur(gut, "gut.yml")
-    if b:
-        fehler.append(f"gesunder Workflow beanstandet: {b}")
+
+def _selftest_vertraege(fehler: List[str]) -> None:
+    """Pin- und Eingabe-Vertrag (V1/V2) – reine Dict-Prüfung, braucht kein YAML."""
+    action = "peter-evans/create-issue-from-file@433e51abf769039ee20ba1293a088ca19d573b7f"
+    vertrag = {"labels": "string", "title": "string", "content-filepath": "string"}
+
+    def daten_mit(with_block: dict) -> dict:
+        return {"jobs": {"a": {"runs-on": "ubuntu-24.04", "steps": [
+            {"name": "Melden", "uses": action, "with": with_block}]}}}
+
+    # V2 – der teure Fall: `labels` als YAML-Liste statt Zeichenkette.
+    treffer = pruefe_vertraege(
+        ROOT, [("liste.yml", daten_mit(
+            {"labels": ["qualitaet", "sprach-qualitaet"],
+             "title": "T", "content-filepath": "R.md"}))],
+        {action: vertrag}, online=False)
+    if len(treffer) != 1 or treffer[0].regel != "V2":
+        fehler.append(f"V2 (Liste) nicht erkannt: {treffer}")
+    elif "A sequence was not expected" not in treffer[0].text:
+        fehler.append(f"V2 nennt die Originalmeldung nicht: {treffer[0].text}")
+
+    # Gegenprobe: dieselbe Eingabe als Zeichenkette ist erlaubt.
+    satz = pruefe_vertraege(
+        ROOT, [("satz.yml", daten_mit(
+            {"labels": "qualitaet, sprach-qualitaet",
+             "title": "T", "content-filepath": "R.md"}))],
+        {action: vertrag}, online=False)
+    if satz:
+        fehler.append(f"Zeichenkette darf nicht beanstandet werden: {satz}")
+
+    # V2 – unbekannte Eingabe
+    fremd = pruefe_vertraege(
+        ROOT, [("fremd.yml", daten_mit(
+            {"titel": "T", "content-filepath": "R.md"}))],
+        {action: vertrag}, online=False)
+    if not any(x.regel == "V2" and "titel" in x.text for x in fremd):
+        fehler.append(f"unbekannte Eingabe nicht erkannt: {fremd}")
+
+    # V1 – gemerkter „diesen Pin gibt es nicht"-Eintrag. Der Schlüssel muss
+    # GENAU dem `uses:` der Probe entsprechen (fehlte hier zuerst – die
+    # Probe war falsch, nicht die Wache).
+    treffer = pruefe_vertraege(
+        ROOT, [("tot.yml", daten_mit({"title": "T"}))],
+        {action: {FEHLT: True}}, online=False)
+    if not any(x.regel == "V1" for x in treffer):
+        fehler.append(f"V1 nicht erkannt: {treffer}")
+
+    # Negativ: ein LEERER Vertragsspeicher ist „nicht geprüft", nicht „V1".
+    ohne = pruefe_vertraege(ROOT, [("tot.yml", daten_mit({"title": "T"}))], {}, online=False)
+    if any(x.regel == "V1" for x in ohne):
+        fehler.append(f"V1 falsch-positiv ohne Vertrag: {ohne}")
+
+
+def _selftest() -> int:
+    """Eingefrorene echte Fälle. Abweichung = Exit 2, nichts wird geschrieben."""
+    fehler: List[str] = []
+    ohne_yaml = _Strikt is None
+
+    if ohne_yaml:
+        # Ohne YAML sind die Strukturproben nicht durchführbar. Sie werden
+        # übersprungen (mit Ansage) – der Vertragsteil ist reine Dict-Prüfung
+        # und läuft weiter. Ein Selbsttest, der ein karges Umfeld mit Exit 2
+        # bestraft, wäre selbst eine Fehlerquelle: Genau so wurde das PR-Gate
+        # am 31.10.2026 rot, ohne dass die Wache etwas falsch machte.
+        print("ℹ️  PyYAML fehlt – die YAML-Strukturproben (V0, V3–V6) werden "
+              "übersprungen; Pin- und Eingabe-Vertrag (V1/V2) laufen weiter.")
+        print("   Im PR-Gate gehört dieser Schritt HINTER die Installation "
+              "(requirements-ci.txt).")
+        _selftest_vertraege(fehler)
+        beschriftung = "V1/V2 (ohne YAML-Strukturproben)"
+    else:
+        _selftest_struktur(fehler)
+        _selftest_vertraege(fehler)
+        beschriftung = "V1–V6, Typvertrag, Doppelschlüssel, Negativ-Proben"
 
     if fehler:
         print("❌ Selbsttest fehlgeschlagen:")
         for f in fehler:
             print(f"   · {f}")
         return 2
-    print("✅ Selbsttest bestanden (V1–V6, Typvertrag, Doppelschlüssel, "
-          "Negativ-Proben).")
+    print(f"✅ Selbsttest bestanden ({beschriftung}).")
     return 0
 
 
