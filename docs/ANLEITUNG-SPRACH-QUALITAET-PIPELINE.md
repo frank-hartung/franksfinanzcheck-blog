@@ -2,6 +2,7 @@
 
 > **Datei:** `.github/workflows/sprach-qualitaet-pipeline.yml`
 > **Rollout:** Highend · **Zeitplan:** täglich 04:30 UTC · **Manuell auslösbar** über Actions
+> **Stand:** 31.10.2026 – Reparatur nach #977 (siehe Abschnitt 11)
 
 ## 1. Was die Pipeline tut
 
@@ -38,8 +39,12 @@ Alle Engines laufen 100 % offline, ohne API, ohne externen Dienst, ohne Datenabf
 | Exit-Code | Bedeutung | Pipeline-Aktion |
 |---|---|---|
 | 0 | Sauber / gelaufen | ✅ Grün, Artefakte gesichert |
-| 1 | Offene kritische Funde (nur strict) | ⚠️ Workflow rot, Issue wird eröffnet |
-| 2 | Selbsttest rot (Sabotage) | 🛑 Abbruch, keine Datei angefasst, kein Commit |
+| 1 | Offene kritische Funde (nur strict) | ⚠️ Issue + Artefakte + History, **dann** roter Lauf (Schritt 10) |
+| 2 | Selbsttest rot (Sabotage) | 🛑 Abbruch, keine Datei angefasst, **kein** History-Commit |
+
+Der Gate-Exit wird echt erfasst (`set +e` → `RC=$?` → `gate_exit_code`), nicht
+über `|| true` verschluckt. Fehlt der Code oder ist er unbekannt, wertet die
+Pipeline den Lauf als `sabotage` (fail-closed) – geraten wird nicht.
 
 ## 5. Artefakte & Reports
 
@@ -59,7 +64,14 @@ History-Files (versioniert, dedupliziert pro Tag) werden automatisch committed:
 - `data/hardcases_history.jsonl`
 - `data/sprachglatt_history.jsonl`
 - `data/zeit_rechtschreibung_history.jsonl`
+- `data/lektor_history.jsonl`
+- `data/grammar_whitelist.txt`
 
+Der Commit geht ausschließlich über `scripts/git_sync.sh --push-only`
+(Push-Wache: Retries, Rebase gegen Parallel-Bots; roher `git push` ist im
+Bestand verboten). Dafür braucht der Workflow `permissions: contents: write` –
+ohne dieses Recht ist der Push technisch unmöglich, und ein verschluckter
+Fehler würde die History still im Runner verfallen lassen.
 ## 6. Automatische Issue-Eröffnung
 
 Im `strict`-Modus bei Qualitätsverstoß (offene kritische Funde) wird automatisch ein GitHub Issue eröffnet:
@@ -67,6 +79,11 @@ Im `strict`-Modus bei Qualitätsverstoß (offene kritische Funde) wird automatis
 - Titel: „🚨 Sprach-Qualität: offene kritische Funde (Copy-Editing-Gate)“
 - Inhalt: der aktuelle `COPY-EDITING-REPORT.md`
 - Labels: `qualitaet`, `sprach-qualitaet`, `automatisiert`
+
+Vor dem Issue legt der Schritt „Labels sicherstellen (C12)“ alle drei Labels
+mit `gh label create … --force` an. Ein fehlendes Label lässt `gh issue`
+mit HTTP 422 scheitern – dann gäbe es einen Qualitätsverstoß ohne Meldung
+(#209).
 
 ## 7. Lokale Nutzung (ohne GitHub)
 
@@ -103,3 +120,24 @@ Die Einzel-Workflows bleiben als unabhängige, manuell startbare Wachen bestehen
 ## 10. Änderungshistorie
 
 - Highend-Rollout: Kombination aller sprachlichen Engines zu einer Pipeline, definierte Schwellen, automatische Issue-Eröffnung, Artefakt-Sicherung, versionierte History.
+- 31.10.2026: Reparatur der fünf roten Vertragsverletzungen (Abschnitt 11).
+
+## 11. Reparatur 31.10.2026 (Highend-Audit nach #977)
+
+Der Workflow stand auf rot, obwohl die Engines grün waren – fünf unabhängige
+Vertragsbrüche mit derselben Wurzel: **Eine Zusage ohne Beweis ist keine
+Zusage.**
+
+| Befund | Wirkung | Reparatur |
+|---|---|---|
+| `${{ inputs.* }}` in vier `run:`-Blöcken | Template-Injection-Risiko; Eingaben wurden ungeprüft in die Shell interpoliert | Eingaben nur über `env:` (`EINGABE_MODUS`, `EINGABE_SCOPE`, `EINGABE_DATEI`), Ausgaben über `$GITHUB_OUTPUT` |
+| `... || true` und `echo $?` | `$?` las den Exit von `true` (immer 0) – der Strict-Modus konnte nie greifen | `set +e`, `RC=$?`, Bewertung in eigenem Schritt, unbekannte Codes = `sabotage` |
+| `git push || true` bei `contents: read` | Push technisch unmöglich, Fehler verschluckt, History verfiel im Runner | `scripts/git_sync.sh --push-only` + `permissions: contents: write` |
+| Issuelabels nie angelegt | HTTP 422 beim Melden (Klasse #209) | Schritt „Labels sicherstellen (C12)“ mit `--force` |
+| `setup-python` v5.1.1 | repo-weit einheitlicher Pin verletzt | `5fda3b95…` (v7.0.0) |
+
+Beweis statt Behauptung: `scripts/tests/test_workflow_push_rechte.py` prüft die
+Rechte-Klasse für **alle** Workflows, die committen und pushen, sowie
+Exit-Erfassung und Label-Reihenfolge in dieser Datei. Die Schalter- und
+Beweisseite des Gates prüft
+`scripts/tests/test_copy_editing_gate_schnittstelle.py`.

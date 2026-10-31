@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-08-31
+lastmod: 2026-10-31
 title: "Versicherungen: Der große Ratgeber für den richtigen Schutz"
 description: "Versicherungen im Überblick: Privathaftpflicht, Wohngebäude, Hausrat, Kfz, Zahnzusatz und Unfallversicherung – welcher Schutz wirklich unverzichtbar ist."
 date: 2026-08-08
@@ -99,6 +99,8 @@ Jedes Jahr im Herbst werben Kfz-Versicherer mit neuen Konditionen. Da sich Typkl
 * **Fahrleistung realistisch angeben:** Wenn du durch Homeoffice weniger fährst, melde das deinem Versicherer – das senkt die Prämie sofort.
 * **Werkstattbindung prüfen:** Wenn du die Reparatur in einer Partnerwerkstatt der Versicherung durchführen lässt, sparst du rund 10 bis 20&nbsp;% der Kaskobeiträge.
 * **Selbstbeteiligung clever wählen:** Eine Selbstbeteiligung von 150&nbsp;€ bei Teilkasko und 300&nbsp;€ bei Vollkasko bietet das beste Preis-Leistungs-Verhältnis.
+
+Wie du den Wechsel durchrechnest, welche Kündigungsfrist gilt und wo die bis zu 800&nbsp;€ Ersparnis herkommen, steht im Ratgeber [Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/).
 
 👉 **Kfz-Versicherung vergleichen und Jahresprämie senken:** [**→ Jetzt Kfz-Versicherung vergleichen**](/go/kfz-versicherung/)
 

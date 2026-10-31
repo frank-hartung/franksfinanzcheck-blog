@@ -21,6 +21,15 @@
 #    - Selbsttest vor JEDEM Schreibvorgang; Abweichung = Exit 2, kein Schreiben.
 #    - Titel/Frontmatter-Anker/Shortcodes/URLs nie schreiben.
 #
+#  Schalter-Vertrag (31.10.2026):
+#    Jede Engine bekommt nur die Schalter, die sie wirklich auswertet
+#    (`ENGINE_FAEHIGKEITEN`, geprüft gegen den Quelltext). Vorher lief ein
+#    gemeinsamer Argument-Satz an alle sechs Engines: `--file` und
+#    `--include-drafts` waren bei hardcases/lektor/readability stille
+#    Platzhalter, die Engine prüfte weiter den ganzen Bestand.
+#    `--file` bei einer Engine ohne Einzeldatei-Modus bricht jetzt ab (Exit 2),
+#    statt still den Umfang zu wechseln.
+#
 #  Aufruf:
 #    python3 scripts/copy_editing_gate.py                    # voller Highend-Lauf
 #    python3 scripts/copy_editing_gate.py --file X.md        # einzelner Artikel
@@ -39,6 +48,7 @@
 # ============================================================================
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import subprocess
@@ -57,6 +67,43 @@ SCRIPTS = {
     "lektor": "lektor_guard.py",
     "readability": "readability_check.py",
 }
+
+# ---------------------------------------------------- Schalter-Fähigkeiten (SSOT)
+# Befund 31.10.2026 (Highend-Audit): Der Gate reichte EINEN gemeinsamen
+# Argument-Satz an alle sechs Engines weiter – auch Schalter, die eine Engine
+# gar nicht auswertet. Folge: `--file` und `--include-drafts` waren für
+# hardcases/lektor/readability stille Platzhalter, die Engine lief weiter über
+# den GANZEN Bestand, während der Lauf „ein Artikel“ versprach. `--strict` und
+# `--json` wurden ebenso blind verteilt.
+#
+# Diese Tabelle ist die Wahrheit über die Schnittstelle: nur was hier steht,
+# wird übergeben. Sie ist gegen den Quelltext geprüft (`_faehigkeiten_pruefen`),
+# damit sie nicht still veraltet – in beide Richtungen:
+#   · Engine lernt einen Schalter, Tabelle weiß es nicht  → Beweis rot
+#   · Tabelle behauptet einen Schalter, Engine ignoriert ihn → Beweis rot
+#
+# Bedeutung der Spalten:
+#   --file            Einzeldatei-Modus (sonst läuft die Engine über alles)
+#   --json            maschinenlesbare Ausgabe auf stdout bzw. Report-Datei
+#   --fix             schreibender Heil-Modus (harte Allowlist)
+#   --strict          Exit 1 bei offenen Funden
+#   --include-drafts  Entwürfe einschließen; fehlt der Schalter, prüft die
+#                     Engine Entwürfe ohnehin immer (dokumentiert, kein Verlust)
+#   --new-only        nur Artikel von heute
+ENGINE_FAEHIGKEITEN: dict[str, set[str]] = {
+    "grammar":     {"--file", "--json", "--fix", "--strict", "--include-drafts", "--new-only"},
+    "hardcases":   {"--file", "--fix", "--new-only"},          # immer inkl. Entwürfe, kein JSON
+    "zeit":        {"--file", "--json", "--fix", "--strict", "--include-drafts", "--new-only"},
+    "sprachglatt": {"--file", "--json", "--fix", "--strict", "--include-drafts", "--new-only"},
+    "lektor":      {"--file", "--fix", "--new-only"},          # immer inkl. Entwürfe, kein JSON
+    "readability": {"--file", "--json", "--new-only"},         # liest nur, heilt nicht
+}
+
+# Engines ohne Entwurfs-Filter prüfen Entwürfe IMMER – dort ist
+# `--include-drafts` kein Verlust, sondern ohnehin erfüllt.
+IMMER_MIT_ENTWUERFEN = {"hardcases", "lektor", "readability"}
+# Engines, die grundsätzlich nicht schreiben (kein --fix).
+NUR_LESEND = {"readability"}
 
 REPORT_DEFAULT = ROOT / "COPY-EDITING-REPORT.md"
 JSON_DEFAULT = ROOT / ".copy_editing_report.json"
@@ -81,10 +128,180 @@ def _run(engine: str, extra_args: list[str] | None = None) -> subprocess.Complet
     return subprocess.run(cmd, cwd=str(ROOT), capture_output=True, text=True)
 
 
+def _quelltext_flag(engine: str, flag: str) -> bool:
+    """Steht der Schalter als Literal im Engine-Quelltext?
+
+    Bewusst grob (beide Anführungszeichen, auch `--file=`-Form): Die Probe
+    soll Veraltung der Tabelle anzeigen, nicht die Argumentanalyse der Engine
+    nachbauen. Ein Schalter, der nur im Docstring steht, ist trotzdem ein
+    Befund – dann muss der Docstring korrigiert werden, nicht die Probe.
+    """
+    try:
+        src = (ROOT / "scripts" / SCRIPTS[engine]).read_text(encoding="utf-8")
+    except OSError:
+        return False
+    return (f'"{flag}"' in src) or (f"'{flag}'" in src) or (f'"{flag}="' in src)
+
+
+def _faehigkeiten_pruefen() -> list[str]:
+    """Tabelle gegen Quelltext: beide Richtungen, fail-closed.
+
+    Liefert eine Liste verständlicher Befunde (leer = Tabelle stimmt).
+    """
+    befunde: list[str] = []
+    for engine in SCRIPTS:
+        tabelle = ENGINE_FAEHIGKEITEN.get(engine)
+        if tabelle is None:
+            befunde.append(f"{engine}: fehlt in ENGINE_FAEHIGKEITEN – der Gate "
+                           f"würde die Engine ohne Schalter aufrufen.")
+            continue
+        for flag in ("--file", "--json", "--fix", "--strict",
+                     "--include-drafts", "--new-only"):
+            hat_quelle = _quelltext_flag(engine, flag)
+            steht_tabelle = flag in tabelle
+            if hat_quelle and not steht_tabelle:
+                befunde.append(
+                    f"{engine}: kann {flag}, steht aber nicht in der Tabelle – "
+                    f"der Schalter wird nie übergeben (stiller Scope-Verlust).")
+            elif steht_tabelle and not hat_quelle:
+                befunde.append(
+                    f"{engine}: Tabelle verspricht {flag}, der Quelltext kennt ihn "
+                    f"nicht – die Engine würde ihn ignorieren.")
+        if "--fix" in tabelle and engine in NUR_LESEND:
+            befunde.append(f"{engine}: steht als schreibend in der Tabelle, "
+                           f"ist aber als rein lesend deklariert.")
+    for engine in ENGINE_FAEHIGKEITEN:
+        if engine not in SCRIPTS:
+            befunde.append(f"{engine}: in der Tabelle, aber keine Gate-Engine – "
+                           f"Tabelle prüfen.")
+    return befunde
+
+
+def _engine_args(engine: str, *, fix: bool, strict: bool, new_only: bool,
+                 include_drafts: bool, only_file: str | None) -> list[str]:
+    """Baut die Argumentliste NUR aus den Fähigkeiten der Engine.
+
+    Jeder nicht übergebene Schalter wird benannt, wenn er den Prüfumfang
+    verändert – ein stiller Fallback auf den ganzen Bestand darf es nicht
+    geben.
+    """
+    faehig = ENGINE_FAEHIGKEITEN.get(engine, set())
+    args: list[str] = []
+    if fix and "--fix" in faehig:
+        args.append("--fix")
+
+    if strict and "--strict" in faehig:
+        args.append("--strict")
+
+    if new_only and "--new-only" in faehig:
+        args.append("--new-only")
+    elif new_only:
+        print(f"⚠️  {engine}: kennt kein --new-only – prüft den ganzen Bestand "
+              f"(bewusst, nicht still).")
+
+    if only_file:
+        if "--file" in faehig:
+            args += ["--file", only_file]
+        else:
+            print(f"🛑 {engine}: kennt keinen Einzeldatei-Modus (--file) – der "
+                  f"Lauf würde über den ganzen Bestand gehen. Abbruch statt "
+                  f"stillem Scope-Wechsel.")
+            raise SystemExit(2)
+
+    if include_drafts and "--include-drafts" in faehig:
+        args.append("--include-drafts")
+    elif include_drafts and engine not in IMMER_MIT_ENTWUERFEN:
+        print(f"⚠️  {engine}: kennt kein --include-drafts und filtert Entwürfe "
+              f"nicht immer heraus – Entwürfe bleiben außen vor (bewusst).")
+
+    # readability_check liefert seinen Flesch-Ø nur über --json auf stdout;
+    # hardcases/lektor liefern gar kein JSON (Gate liest ihre .md-Reports).
+    if "--json" in faehig:
+        args.append("--json")
+    return args
+
+
 def _selftest(engine: str) -> tuple[bool, str]:
     """Läuft den Selbsttest einer Engine. Liefert (grün, ausgabe)."""
     res = _run(engine, ["--selftest"])
     return res.returncode == 0, (res.stdout or "") + (res.stderr or "")
+
+
+# ---------------------------------------------------- C15: Beweis schreibt nicht
+# Befund 31.10.2026 (PR-Gate, Schritt „Governance-Selbsttests“): Der Aufruf
+# `copy_editing_gate.py --selftest` hinterließ `M data/lektor_history.jsonl`.
+# Ursache: `lektor_guard.py` kannte keinen Beweispfad – `--selftest` startete
+# den VOLLEN Bestandslauf samt History-Anhang. Damit war ausgerechnet die
+# Beweisführung der Verstoß, den C15 verbietet („ein Prüflauf, der nebenbei
+# heilt, verändert die Messgröße, die er prüfen will“).
+#
+# Zwei Lagen sichern die Klasse jetzt ab:
+#   1. `lektor_guard.py --selftest` prüft nur die Fälle und schreibt nichts.
+#   2. Diese Funktion nimmt vor und nach der Selbsttest-Phase einen
+#      Fingerabdruck des Arbeitsbaums. Weicht er ab, ist der Beweis ungültig –
+#      fail-closed, unabhängig davon, WELCHE Engine schreibt. Eine künftige
+#      Engine mit demselben Fehler fällt damit sofort auf, statt monatelang
+#      History-Zeilen zu hinterlassen.
+def _arbeitsbaum_abdruck() -> dict[str, str] | None:
+    """(Status, Inhalt) jedes sichtbaren Pfads – oder None ohne git.
+
+    Nur versionierte und nicht-ignorierte Dateien: Reports sind per
+    `.gitignore` ausgenommen (sie werden bei jedem Lauf neu geschrieben und
+    sind kein Betriebszustand). Erfasst werden Status UND SHA-256, damit auch
+    eine Datei auffällt, die schon vorher geändert war und jetzt anders ist.
+    """
+    try:
+        res = subprocess.run(
+            ["git", "status", "--porcelain=v1", "--untracked-files=all"],
+            cwd=str(ROOT), capture_output=True, text=True, timeout=60,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        return None
+    if res.returncode != 0:
+        return None
+    abdruck: dict[str, str] = {}
+    for zeile in res.stdout.splitlines():
+        if len(zeile) < 4:
+            continue
+        status, pfad = zeile[:2], zeile[3:].split(" -> ")[-1]
+        try:
+            with open(ROOT / pfad, "rb") as fh:
+                inhalt = hashlib.sha256(fh.read()).hexdigest()
+        except OSError:
+            inhalt = "—"
+        abdruck[pfad] = f"{status}:{inhalt}"
+    return abdruck
+
+
+def _schreibspuren(vorher: dict[str, str] | None) -> list[str] | None:
+    """Was hat sich seit `vorher` im Arbeitsbaum geändert? None = nicht messbar."""
+    nachher = _arbeitsbaum_abdruck()
+    if vorher is None or nachher is None:
+        return None
+    spuren = []
+    for pfad in sorted(set(vorher) | set(nachher)):
+        alt, neu = vorher.get(pfad), nachher.get(pfad)
+        if alt == neu:
+            continue
+        if alt is None:
+            spuren.append(f"neu: {pfad}")
+        elif neu is None:
+            spuren.append(f"weg: {pfad}")
+        else:
+            spuren.append(f"geändert: {pfad}")
+    return spuren
+
+
+def _schreibschutz_meldung(spuren: list[str]) -> None:
+    print("🛑 C15: DER BEWEISLAUF HAT IN DEN ARBEITSBAUM GESCHRIEBEN.")
+    print("   Ein Selbsttest, der Dateien anfasst, ist kein Beweis – er ist ein Vorgang.")
+    print("   Betroffene Pfade:")
+    for spur in spuren[:20]:
+        print(f"     · {spur}")
+    if len(spuren) > 20:
+        print(f"     … und {len(spuren) - 20} weitere")
+    print("   Reparatur: die Engine braucht einen reinen `--selftest`-Pfad")
+    print("   (Fälle prüfen, nichts schreiben), oder der Aufruf hier ist falsch.")
 
 
 def _analyse(engine: str, args: list[str]) -> tuple[int, str, str]:
@@ -127,26 +344,29 @@ def main(argv: list[str] | None = None) -> int:
         elif a == "--report" and i + 1 < len(argv):
             report_path = Path(argv[i + 1])
 
-    engine_args: list[str] = []
-    if do_fix:
-        engine_args.append("--fix")
-    if include_drafts:
-        engine_args.append("--include-drafts")
-    if new_only:
-        engine_args.append("--new-only")
-    if only_file:
-        engine_args += ["--file", only_file]
-    # readability_check liefert seinen Flesch-Ø nur über --json auf stdout;
-    # das brauchen wir für den Schwellen-Check, also immer mitgeben.
-    engine_args.append("--json")
+    # Argumente werden PRO ENGINE gebaut (ENGINE_FAEHIGKEITEN): ein Schalter,
+    # den eine Engine nicht auswertet, darf nicht als Placebo mitlaufen.
+    def _args_fuer(engine: str) -> list[str]:
+        return _engine_args(engine, fix=do_fix, strict=strict, new_only=new_only,
+                            include_drafts=include_drafts, only_file=only_file)
 
     # ========================================================================
     # PHASE 0 – Selbsttests aller Engines (Sabotage-Schutz, fail-closed)
     # ========================================================================
+    # Vor dem Beweis ein Fingerabdruck des Arbeitsbaums: Ein Selbsttest, der
+    # Dateien schreibt, ist kein Beweis (C15) – und die Spuren müssen VOR dem
+    # Ereignis bekannt sein, sonst sind sie nicht zuordenbar.
+    abdruck_vorher = _arbeitsbaum_abdruck()
     st_results: dict[str, tuple[bool, str]] = {}
     for name in SCRIPTS:
         ok, out = _selftest(name)
         st_results[name] = (ok, out)
+    spuren_der_selbsttests = _schreibspuren(abdruck_vorher)
+
+    # Die Schalter-Tabelle ist Teil des Vertrags: Sie behauptet, was die
+    # Engines können. Weicht sie vom Quelltext ab, prüft der Gate anders als
+    # dokumentiert – das ist ein Beweisfehler, kein Schönheitsfehler.
+    schnittstellen_befunde = _faehigkeiten_pruefen()
 
     if selftest_only:
         print("🔍 COPY-EDITING-GATE – Selbsttest aller Engines")
@@ -163,6 +383,20 @@ def main(argv: list[str] | None = None) -> int:
         if not alle_grün:
             print("\n🛑 SELBSTTEST ROT – mindestens eine Engine sabotagegefährdet.")
             return 2
+        if schnittstellen_befunde:
+            print("\n🛑 SCHNITTSTELLEN-BEWEIS ROT – Tabelle und Engines weichen ab:")
+            for befund in schnittstellen_befunde:
+                print(f"   · {befund}")
+            return 2
+        if spuren_der_selbsttests:
+            _schreibschutz_meldung(spuren_der_selbsttests)
+            return 2
+        if spuren_der_selbsttests is None:
+            print("⚠️  Arbeitsbaum-Abdruck nicht möglich (git fehlt) – der "
+                  "Schreibschutz-Beweis entfällt für diesen Lauf.")
+        else:
+            print("🔒 Schreibschutz-Beweis: kein Selbsttest hat den Arbeitsbaum "
+                  "verändert.")
         print("\n✅ Alle Engines-Selbsttests grün – Gate ist scharf.")
         return 0
 
@@ -172,6 +406,17 @@ def main(argv: list[str] | None = None) -> int:
             if not ok:
                 print(f"  {name}: {out.strip().splitlines()[:3]}")
         return 2
+    if schnittstellen_befunde:
+        print("🛑 SCHNITTSTELLEN-BEWEIS ROT – Tabelle und Engines weichen ab:")
+        for befund in schnittstellen_befunde:
+            print(f"   · {befund}")
+        return 2
+    # Derselbe Schreibschutz gilt für JEDEN Lauf: erst beweisen, dann heilen.
+    # Schreibt schon der Beweis, ist die Messgröße verändert, bevor gemessen
+    # wird – dann wird nichts geheilt.
+    if spuren_der_selbsttests:
+        _schreibschutz_meldung(spuren_der_selbsttests)
+        return 2
 
     # ========================================================================
     # PHASE 1–6 – Engines in fixer Reihenfolge
@@ -180,9 +425,7 @@ def main(argv: list[str] | None = None) -> int:
     alle_strict_rot = False
 
     for name in SCRIPTS:
-        args = list(engine_args)
-        if strict:
-            args.append("--strict")
+        args = _args_fuer(name)
 
         rc, out, err = _analyse(name, args)
         result = {"rc": rc, "stdout": out, "stderr": err, "json": None}

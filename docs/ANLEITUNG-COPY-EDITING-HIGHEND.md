@@ -1,7 +1,8 @@
 # Copy-Editing Highend – FranksFinanzcheck (Profi-Agentur-Level)
 
 > **Zustand:** aktiv · Rollout: Highend · Gilt für: alle Blogartikel (de-DE, YMYL)
-> **Quelle:** `.claude/skills/copy-editing/SKILL_DE.md` + `scripts/copy_edoting_gate.py` + `.github/workflows/sprach-qualitaet-pipeline.yml`
+> **Quelle:** `.claude/skills/copy-editing/SKILL_DE.md` + `scripts/copy_editing_gate.py` + `.github/workflows/sprach-qualitaet-pipeline.yml`
+> **Stand:** 31.10.2026 – Schalter-Vertrag und reiner Beweispfad (Abschnitt 10)
 
 ## 1. Ziel
 
@@ -56,6 +57,40 @@ Die folgenden bereits installierten Offline-Engines werden von `scripts/copy_edi
 - Titel/Frontmatter-Anker/Shortcodes/URLs nie schreiben.
 - Jeder Schreibvorgang läuft über `sprachkern.write_verified` + Selbsttest vor jedem Lauf.
 - Selbsttest rot (Exit 2) = Abbruch, keine Datei wird angefasst.
+- **Ein Beweislauf schreibt nichts (C15).** `--selftest` prüft ausschließlich die
+  eingefrorenen Fälle – kein Report, keine History, kein Artikel. Der Gate misst
+  das zusätzlich selbst: Vor und nach der Selbsttest-Phase nimmt er einen
+  Fingerabdruck des Arbeitsbaums; jede Abweichung ist Exit 2.
+
+### 3.1 Schalter-Vertrag (welche Engine was versteht)
+
+Der Gate baut die Argumente **pro Engine** aus `ENGINE_FAEHIGKEITEN`. Ein
+Schalter, den eine Engine nicht auswertet, läuft nicht mehr als Placebo mit –
+bis zum 31.10.2026 bekam jede Engine denselben Satz, und `--file` /
+`--include-drafts` waren bei `hardcases`, `lektor` und `readability` stille
+Platzhalter (die Engine prüfte weiter den ganzen Bestand).
+
+| Engine | `--file` | `--json` | `--fix` | `--strict` | `--include-drafts` | `--new-only` |
+|---|---|---|---|---|---|---|
+| `grammar_check` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `hardcases_guard` | ✅ | – | ✅ | – | immer | ✅ |
+| `zeit_rechtschreibung` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `sprachglatt` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `lektor_guard` | ✅ | – | ✅ | – | immer | ✅ |
+| `readability_check` | ✅ | ✅ | – (liest nur) | – | immer | ✅ |
+
+„immer“ = die Engine filtert Entwürfe nicht heraus, prüft sie also ohnehin.
+
+Regeln des Vertrags:
+
+- `--file` bei einer Engine ohne Einzeldatei-Modus → **Abbruch (Exit 2)** statt
+  stillem Wechsel auf den ganzen Bestand.
+- Die Tabelle ist gegen den Quelltext geprüft (`_faehigkeiten_pruefen`). Beide
+  Drift-Richtungen sind rot: Engine kann mehr als die Tabelle sagt, oder die
+  Tabelle verspricht, was die Engine ignoriert.
+- Neue Engine oder neuer Schalter: Tabelle **und** die betroffene Engine
+  ändern; `python3 scripts/copy_editing_gate.py --selftest` beweist danach,
+  dass beides zusammenpasst.
 
 ## 4. Schwellen (Highend-Profi-Agentur)
 
@@ -129,6 +164,8 @@ Nach dem automatischen Durchlauf entscheidet die menschliche Endredaktion über:
 | `scripts/copy_editing_gate.py` | Hochorchestrierung aller Engines |
 | `.github/workflows/sprach-qualitaet-pipeline.yml` | Automatisierte tägliche Pipeline |
 | `docs/ANLEITUNG-SPRACH-QUALITAET-PIPELINE.md` | Workflow-Dokumentation (dieses Dokument ergänzt) |
+| `scripts/tests/test_copy_editing_gate_schnittstelle.py` | Beweis: Schalter-Vertrag + reiner Beweislauf |
+| `scripts/tests/test_workflow_push_rechte.py` | Beweis: Push-Rechte, Exit-Erfassung, Label-Reihenfolge |
 
 ## 9. Regressionstest
 
@@ -136,5 +173,37 @@ Vor Änderungen an den Engines:
 
 ```bash
 python3 scripts/copy_editing_gate.py --selftest
-# Alle 6 Engines müssen grün sein (Exit 0).
+# Alle 6 Engines müssen grün sein (Exit 0) – und der Arbeitsbaum danach
+# unverändert (git status bleibt leer).
 ```
+
+Die Suite dazu:
+
+```bash
+python3 -m unittest scripts.tests.test_copy_editing_gate_schnittstelle -v
+python3 -m unittest scripts.tests.test_workflow_push_rechte -v
+```
+
+## 10. Reparatur 31.10.2026 – warum diese Seite so streng ist
+
+Nach dem Merge von #977 lief das PR-Gate rot, obwohl alle Engines grün waren.
+Der Grund war eine einzige Zeile in `lektor_guard.py`: Es kannte keinen reinen
+Beweispfad. `--selftest` prüfte die 17 Fälle – und begann danach den vollen
+Bestandslauf, der eine Zeile an `data/lektor_history.jsonl` anhängte. Der
+Beweis war damit selbst der Vorgang, den die Vertragsregel C15 verbietet
+(„Beweisen ist nicht Heilen“).
+
+Zwei Konsequenzen, die dauerhaft gelten:
+
+1. **Reiner Beweispfad ist Pflicht.** Jede Engine, die schreiben kann, muss
+   `--selftest` als Trockenlauf führen (nur prüfen, Exit-Code, keine Datei).
+   `lektor_guard.py` dokumentiert das im Kopf; `copy_editing_gate.py` prüft es
+   zur Laufzeit über den Arbeitsbaum-Fingerabdruck.
+2. **Kein Schalter ohne Wirkung.** Der Gate reicht nur weiter, was die Engine
+   auswertet (Abschnitt 3.1). Der stille Rückfall auf den ganzen Bestand ist
+   ein Scope-Bruch, kein Komfortverlust.
+
+Die zweite Hälfte des Befunds lag im Workflow: `git push || true` bei
+`permissions: contents: read` konnte nie funktionieren, und der Fehler war
+unsichtbar. Details und Beweise in
+`docs/ANLEITUNG-SPRACH-QUALITAET-PIPELINE.md`, Abschnitt 11.

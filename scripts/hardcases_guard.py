@@ -74,6 +74,14 @@ HISTORY = ROOT / "data" / "hardcases_history.jsonl"
 
 DO_FIX = "--fix" in sys.argv
 NEW_ONLY = "--new-only" in sys.argv
+# --file <pfad>: genau EIN Artikel (Scope des Copy-Editing-Gate). Ohne den
+# Schalter prüft die Wache den ganzen Bestand – im Gate-Modus „file“ war das
+# bis zum 31.10.2026 ein anderer Prüfumfang als zugesagt.
+ONLY_FILE = ""
+if "--file" in sys.argv:
+    _i = sys.argv.index("--file")
+    if _i + 1 < len(sys.argv):
+        ONLY_FILE = sys.argv[_i + 1]
 
 # ---- Zone-Schutz: Frontmatter, Code, URLs, Linkziele, CTA-Disclaimers ----
 PROTECT_RX = re.compile(
@@ -243,6 +251,17 @@ def selftest() -> list:
 # ------------------------------------------------------------ Lauf
 def posts_paths():
     from post_utils import list_post_paths
+    if ONLY_FILE:
+        pfad = Path(ONLY_FILE)
+        if not pfad.is_absolute():
+            pfad = Path(__file__).resolve().parent.parent / pfad
+        if not pfad.exists():
+            print(f"🛑 Hardcases: --file {ONLY_FILE} existiert nicht – kein Lauf.")
+            sys.exit(2)
+        if not pfad.resolve().is_relative_to((Path(__file__).resolve().parent.parent).resolve()):
+            print(f"🛑 Hardcases: --file {ONLY_FILE} liegt außerhalb des Repos – kein Lauf.")
+            sys.exit(2)
+        return [str(pfad)]
     paths = list_post_paths()
     if NEW_ONLY:
         today = datetime.now(timezone.utc).date().isoformat()

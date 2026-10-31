@@ -45,6 +45,8 @@
 #    python3 scripts/lektor_guard.py --fix       # deterministisch fixen
 #    python3 scripts/lektor_guard.py --fix --ai  # + KI-Leitzeilen (L5)
 #    python3 scripts/lektor_guard.py --new-only  # Engine-Modus
+#    python3 scripts/lektor_guard.py --file <pfad>   # genau ein Artikel
+#    python3 scripts/lektor_guard.py --selftest  # reiner Beweis, schreibt nichts
 #
 #  Ausgabe: LEKTOR-REPORT.md + data/lektor_history.jsonl · Exit 0.
 # ============================================================
@@ -69,6 +71,15 @@ DO_FIX = "--fix" in sys.argv
 USE_AI = "--ai" in sys.argv
 DRY_RUN = "--dry-run" in sys.argv
 NEW_ONLY = "--new-only" in sys.argv
+SELFTEST_ONLY = "--selftest" in sys.argv
+# --file <pfad>: genau EIN Artikel (Scope des Copy-Editing-Gate). Ohne den
+# Schalter prüft das Lektorat den ganzen Bestand – im Gate-Modus „file“ war
+# das bis zum 31.10.2026 eine stille Lüge über den Prüfumfang.
+ONLY_FILE = ""
+if "--file" in sys.argv:
+    _i = sys.argv.index("--file")
+    if _i + 1 < len(sys.argv):
+        ONLY_FILE = sys.argv[_i + 1]
 # Redaktions-Politur-Modus (12.08., Frank): --ai-budget N
 #  KI-Heilung nur fuer die N lautesten Fund-Dateien, Rest bleibt Report.
 AI_BUDGET = None
@@ -635,6 +646,21 @@ def lektor_line(line: str, stats, reports=None, fname="", line_no=0, du_dominant
 
 def target_files():
     files = []
+    if ONLY_FILE:
+        pfad = Path(ONLY_FILE)
+        if not pfad.is_absolute():
+            pfad = ROOT / pfad
+        # Ein --file außerhalb des Bestands ist ein Bedienfehler, kein
+        # leerer Lauf: lieber laut scheitern als still nichts prüfen.
+        if not pfad.exists():
+            print(f"🛑 Lektor: --file {ONLY_FILE} existiert nicht – kein Lauf.")
+            sys.exit(2)
+        # Nur der eigene Blog: ein Pfad außerhalb des Repos ist ein
+        # Bedienfehler, kein Prüfauftrag (und im Fix-Modus ein Schreibziel).
+        if not pfad.resolve().is_relative_to(ROOT.resolve()):
+            print(f"🛑 Lektor: --file {ONLY_FILE} liegt außerhalb des Repos – kein Lauf.")
+            sys.exit(2)
+        return [pfad]
     for d in ("posts", "pillar"):
         dd = ROOT / "content" / d
         if dd.is_dir():
@@ -654,6 +680,21 @@ def target_files():
 
 
 def main() -> None:
+    # BEWEIS-PFAD (C15): `--selftest` prüft AUSSCHLIESSLICH die Fälle und
+    # schreibt nichts – keinen Report, keine History, keinen Artikel. Bis zum
+    # 31.10.2026 rief der Copy-Editing-Gate genau diese Flagge auf und bekam
+    # einen vollen Bestandslauf mit History-Anhang zurück: Ein Beweislauf
+    # hinterließ Arbeitsspuren (`data/lektor_history.jsonl`) und war damit
+    # selbst der Verstoß, den C15 verbietet.
+    if SELFTEST_ONLY:
+        fehler = run_selftest()
+        if fehler:
+            print("🛑 LEKTOR-SELBSTTEST ROT:")
+            print("\n".join(fehler))
+            sys.exit(2)
+        print(f"✅ Lektor-Selbsttest: {len(SELFTEST)} Fälle grün (kein Schreiben).")
+        sys.exit(0)
+
     # SABOTAGE-SCHUTZ zuerst: Lektorat testet sich selbst (offline),
     # BEVOR irgendeine Datei angefasst wird.
     fehler = run_selftest()
@@ -725,6 +766,11 @@ def main() -> None:
     L += ["", "---", "_Verlagslektorat: Du-Duktus, keine Echo-Woerter, keine Buerokratie-Phrasen, max 3 Ausrufezeichen. KI nur bei --ai._"]
     REPORT.write_text("\n".join(L) + "\n", encoding="utf-8")
     print("\n".join(L[:25]))
+    if DRY_RUN:
+        # Ein Trockenlauf beweist, er dokumentiert keinen Betriebsvorgang
+        # (dieselbe Logik wie C15/C27: der Beweis ist kein Vorgang).
+        print("ℹ️  DRY-RUN: keine History-Zeile geschrieben (LEKTOR-REPORT.md bleibt unversioniert).")
+        return
     HISTORY.parent.mkdir(exist_ok=True)
     with HISTORY.open("a", encoding="utf-8") as fh:
         fh.write(json.dumps({"date": date.today().isoformat(), "mode": mode,
