@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-31T05:53:52Z",
+  "generated_at": "2026-10-31T09:46:11Z",
   "modus": "kandidaten",
-  "commit": "6279bdb718b732ddc3c42194c5992ba1a847b382",
+  "commit": "3b2f1fb7fdce329ba7762073eaa0e468045ffa90",
   "kapazitaet": {
     "stichtag": "2026-10-31",
     "artikel": 110,
@@ -1285,7 +1285,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen": {
-      "sha256": "c8d65a3f09b02d98255a5dade5fe46eef8d2eb1b22c1322336c3a5903be01287",
+      "sha256": "be6610b89f45498aa9ee259d2ce3eb2e290b7db6707c581a8f849e4817b8e43f",
       "urteil": "warnung",
       "risikoklasse": "erhoeht",
       "dimensionen": {
@@ -1299,7 +1299,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
       "sha256": "ac2b9a487ae92bc6c647e2cf6e6a887a722e3b9e1670d6b1835c6ef4d5f8cab6",
