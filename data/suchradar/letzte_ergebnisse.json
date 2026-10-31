@@ -1,5 +1,5 @@
 {
- "zeitstempel": "2026-10-30T13:48:40.869967+02:00",
+ "zeitstempel": "2026-10-31T13:23:22.793498+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 25,
  "zaehlung": {
@@ -130,16 +130,6 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Schutz",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
    "anfrage": "Secondhand Kleidung",
    "eigener_rang": 0,
    "vorher": 0,
@@ -240,6 +230,16 @@
    "sichtbar": false
   },
   {
+   "anfrage": "Solaranlage Zuschuss",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
    "anfrage": "Stromanbieter wechseln",
    "eigener_rang": 0,
    "vorher": 0,
@@ -293,7 +293,7 @@
     ]
    },
    {
-    "domaene": "bank99.at",
+    "domaene": "peaks.com",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 4,
@@ -303,7 +303,7 @@
     ]
    },
    {
-    "domaene": "peaks.com",
+    "domaene": "bank99.at",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 5,
@@ -333,7 +333,7 @@
     ]
    },
    {
-    "domaene": "fonio.ai",
+    "domaene": "vr.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 8,
@@ -343,7 +343,7 @@
     ]
    },
    {
-    "domaene": "vr.de",
+    "domaene": "fonio.ai",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 9,
