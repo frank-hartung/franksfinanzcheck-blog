@@ -1,9 +1,10 @@
 # Figma einrichten – Schritt für Schritt
 
-**Stand:** 31.10.2026 · **Dauer:** etwa 15 Minuten · **Voraussetzung:** ein
-kostenloses Figma-Konto
+**Stand:** 31.10.2026 · **Dauer:** etwa 18 Minuten · **Voraussetzung:** ein
+kostenloses Figma-Konto (Schritt 0)
 
-Diese Anleitung führt dich von null bis zur fertigen Design-Datei. Du brauchst
+Diese Anleitung führt dich von null bis zur fertigen Design-Datei —
+angefangen beim Konto. Du brauchst
 dafür **kein** SDK, kein Terminal-Wissen und keine Zugangsschlüssel. Alles, was
 du in Figma brauchst, liegt fertig im Repository.
 
@@ -13,7 +14,7 @@ du in Figma brauchst, liegt fertig im Repository.
 
 ---
 
-## Schritt 0 – Was du am Ende hast
+## Überblick – Was du am Ende hast
 
 | | |
 |---|---|
@@ -23,6 +24,42 @@ du in Figma brauchst, liegt fertig im Repository.
 | Komponenten | 18 Sets mit den Achsen **Zustand × Modus** |
 
 ---
+
+## Schritt 0 – Figma-Konto anlegen (3 Minuten, einmalig)
+
+Ohne Konto lässt sich keine Datei öffnen — und ohne geöffnete Datei gibt es
+kein Menü, kein Plugin, keinen Import. Wer hier hängen bleibt, sucht meist
+das Figma-Menü in der Dateiübersicht statt in einer Datei.
+
+1. [figma.com](https://www.figma.com) öffnen → oben rechts **Get started**
+2. Anmeldeweg wählen: **Google** oder **Apple** (keine Bestätigungsmail
+   nötig) oder **E-Mail + Passwort**
+3. Bei E-Mail: Bestätigungslink in der Mail anklicken
+4. Plan **Free / Starter** wählen — er reicht vollständig aus
+5. Die Einstiegsfragen („Wofür nutzt du Figma?") dürfen übersprungen werden
+
+> **Kein bezahlter Plan nötig.** Eine Design-Datei und ein Development-Plugin
+> sind im kostenlosen Plan enthalten. Angebote wie *Create team* oder
+> *Upgrade* sind für diese Einrichtung irrelevant.
+
+### Wo das Figma-Menü ist
+
+In einer **geöffneten Datei** (nicht im Dashboard) sitzt es oben links in der
+Werkzeugleiste: das **Figma-Logo** (fünf Formen, oft einfarbig grau), in
+manchen Versionen drei Striche (☰).
+
+```
+[Figma-Logo ☰] [Pfeil] … [Dateiname] … [Present] [Share]
+```
+
+**Verlässlicher als jeder Klickpfad:** `Strg + K` (Mac: `⌘ + K`) drücken und
+den Befehl eintippen, zum Beispiel `Import plugin from manifest`.
+
+Weitere Wege zum selben Ziel:
+- Rechtsklick auf eine leere Stelle der Zeichenfläche → *Plugins → Development*
+- macOS: Bildschirmleiste → **Figma → Plugins → Development**
+- Schmales Fenster: Figma blendet Teile der Leiste aus — Fenster breiter
+  ziehen, dann erscheint das Logo wieder
 
 ## Schritt 1 – Dateien bereitlegen (2 Minuten)
 
@@ -255,6 +292,9 @@ Die eine Warnung ist **P8** — sie verschwindet mit Schritt 7.
 
 | Symptom | Ursache | Lösung |
 |---|---|---|
+| Ich finde das Figma-Menü nicht | Ansicht ist das Dashboard, nicht eine Datei | Datei per Doppelklick öffnen — dann erscheint die Werkzeugleiste |
+| Figma-Menü trotz geöffneter Datei unsichtbar | Fenster zu schmal | Fenster breiter ziehen oder `Strg + -` (Zoom heraus) |
+| Ich kann keine Datei öffnen | Kein Konto / nicht angemeldet | Schritt 0: Konto anlegen bzw. anmelden |
 | „Import plugin from manifest“ fehlt | Ansicht ist kein Design-File | Datei öffnen, nicht das Dashboard |
 | `manifest.json` wird nicht akzeptiert | Datei einzeln kopiert | Alle drei Dateien im selben Ordner |
 | Ich finde kein ZIP im Repository | Es gibt keins (Absicht) | Branch wählen, *Code → Download ZIP*; siehe Schritt 1 |
