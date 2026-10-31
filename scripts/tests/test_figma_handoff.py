@@ -168,6 +168,36 @@ class PluginVertrag(unittest.TestCase):
         self.assertEqual(quelle.count("DATA_MARKE"), 1)
 
 
+class LokaleSichtOhneFigma(unittest.TestCase):
+    """Der Weg ohne Figma: Design-System im Browser, ohne Netz und Anmeldung."""
+
+    def test_seite_existiert_und_ist_eigenstaendig(self):
+        pfad = handoff.OUT / "design-system.html"
+        self.assertTrue(pfad.exists(), "design-system.html fehlt")
+        text = pfad.read_text(encoding="utf-8")
+        self.assertNotRegex(text, r"https?://", "die Seite darf nichts nachladen")
+        self.assertIn("data-modus", text)
+        self.assertIn("<script>", text)
+        self.assertIn("<style>", text)
+
+    def test_beide_modi_tragen_dieselben_rollen(self):
+        text = (handoff.OUT / "design-system.html").read_text(encoding="utf-8")
+        rollen = handoff.ssot_rollen() if hasattr(handoff, "ssot_rollen") else \
+            set(ssot()["figma"]["semantic"]["light"])
+        for rolle in rollen:
+            with self.subTest(rolle=rolle):
+                self.assertIn("--" + rolle.replace("_", "-") + ":", text)
+
+    def test_alle_komponenten_sind_abgebildet(self):
+        text = (handoff.OUT / "design-system.html").read_text(encoding="utf-8")
+        self.assertGreaterEqual(text.count('class="karte"'), len(ssot()["components"]))
+
+    def test_kontrasttabelle_ist_vollstaendig(self):
+        text = (handoff.OUT / "design-system.html").read_text(encoding="utf-8")
+        # 12 Rollenpaare × 2 Modi
+        self.assertGreaterEqual(text.count(":1</td>"), 20)
+
+
 class PluginLaeuftWirklich(unittest.TestCase):
     """Das Plugin wird gegen eine nachgebildete Figma-API ausgeführt."""
 
@@ -207,8 +237,8 @@ class GateFaengtLuecken(unittest.TestCase):
         ids = [b["id"] for b in gate.lauf()]
         self.assertEqual(len(ids), len(set(ids)))
 
-    def test_es_gibt_mindestens_34_kriterien(self):
-        self.assertGreaterEqual(len(gate.lauf()), 34)
+    def test_es_gibt_mindestens_36_kriterien(self):
+        self.assertGreaterEqual(len(gate.lauf()), 36)
 
     def test_sabotage_am_manifest_wird_erkannt(self):
         original = (handoff.PLUGIN_OUT / "manifest.json").read_text(encoding="utf-8")

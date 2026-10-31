@@ -1,5 +1,11 @@
 # Figma einrichten – Schritt für Schritt
 
+> **Du brauchst kein Figma, um das Design-System zu sehen.** Öffne
+> `design/handoff/design-system.html` im Browser — Farben, Typografie,
+> Komponenten, Abstände und die Kontrast-Matrix, mit Umschaltung
+> Hell/Dunkel, ohne Anmeldung und ohne Netz. Figma ist nur nötig, wenn du
+> tatsächlich Layouts **zeichnen** willst.
+
 **Stand:** 31.10.2026 · **Dauer:** etwa 18 Minuten · **Voraussetzung:** ein
 kostenloses Figma-Konto (Schritt 0)
 
@@ -337,6 +343,7 @@ Die eine Warnung ist **P8** — sie verschwindet mit Schritt 7.
 | „Import plugin from manifest“ fehlt, ich stehe im Teamordner | Ein Ordner ist keine Datei — der Befehl lebt nur in geöffneten Design-Dateien | Erst **+ → Design file** anlegen, Datei öffnen, dann `Strg + K` |
 | Import fehlt trotz geöffneter Datei | FigJam / Figma Slides statt Design-Datei | Neues **Design file** anlegen (Manifest erlaubt nur `figma`) |
 | Import fehlt in der Browser-Version | Browser-Beschränkung | Figma-Desktop-App verwenden |
+| Menüpunkt fehlt überall, auch in der Desktop-App | Development-Bereich im Plan/Konto nicht verfügbar | **Kein Figma nötig:** `design/handoff/design-system.html` im Browser öffnen |
 | Figma-Menü trotz geöffneter Datei unsichtbar | Fenster zu schmal | Fenster breiter ziehen oder `Strg + -` (Zoom heraus) |
 | Ich kann keine Datei öffnen | Kein Konto / nicht angemeldet | Schritt 0: Konto anlegen bzw. anmelden |
 | „Import plugin from manifest“ fehlt | Ansicht ist kein Design-File | Datei öffnen, nicht das Dashboard |

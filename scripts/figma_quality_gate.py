@@ -222,7 +222,7 @@ def s8() -> str | None:
 def e1() -> str | None:
     erwartet = ["figma-tokens.tokens.json", "relume-project-brief.md",
                 "component-inventory.md", "patterns.md", "ANNOTATIONEN.md",
-                "spezifikation.html", "handoff-manifest.json"]
+                "spezifikation.html", "design-system.html", "handoff-manifest.json"]
     fehlt = [n for n in erwartet if not (HANDOFF / n).exists()]
     return ("fehlt: " + ", ".join(fehlt)) if fehlt else None
 
@@ -316,6 +316,30 @@ def e8() -> str | None:
         return "Seiten fehlen im Brief: " + ", ".join(fehlt)
     if "erfinde keine" not in text.lower() and "keine erfundenen" not in text.lower():
         return "die Anti-Erfindungs-Leitplanke fehlt"
+    return None
+
+
+@kriterium("E9", "Lokale Design-System-Sicht lebt ohne Netz und ohne Figma", "Exporte", "fehler")
+def e9() -> str | None:
+    """Der Weg für alle, bei denen der Plugin-Import nicht verfügbar ist.
+
+    Die Seite muss aus sich heraus funktionieren: keine externen Dateien,
+    keine Anmeldung, kein Netz. Und sie muss beide Modi tragen, sonst kann
+    man den Dunkelmodus nicht prüfen.
+    """
+    text = lies(HANDOFF / "design-system.html")
+    if not text:
+        return "design/handoff/design-system.html fehlt"
+    if re.search(r"https?://", text):
+        return "die Seite lädt etwas aus dem Netz – sie muss eigenständig sein"
+    if "data-modus" not in text:
+        return "keine Modus-Umschaltung (Hell/Dunkel)"
+    rollen = set(ssot()["figma"]["semantic"]["light"])
+    fehlend = [r for r in rollen if ("--" + r.replace("_", "-") + ":") not in text]
+    if fehlend:
+        return "Rollen fehlen als CSS-Variablen: " + ", ".join(sorted(fehlend)[:5])
+    if text.count('class="karte"') < len(ssot()["components"]):
+        return "nicht alle Komponenten sind abgebildet"
     return None
 
 
@@ -663,7 +687,7 @@ def main() -> int:
 def selftest() -> int:
     """Sabotage-Proben: eine Prüfung, die nichts fängt, ist keine Prüfung."""
     bericht = {b["id"]: b for b in lauf()}
-    assert len(bericht) >= 34, f"nur {len(bericht)} Kriterien – erwartet ≥ 34"
+    assert len(bericht) >= 36, f"nur {len(bericht)} Kriterien – erwartet ≥ 36"
     assert bericht["K1"]["ok"], bericht["K1"]["befund"]
     assert bericht["K2"]["ok"], bericht["K2"]["befund"]
     assert bericht["E3"]["ok"], bericht["E3"]["befund"]

@@ -37,6 +37,7 @@ GENERATED = (
     "patterns.md",
     "ANNOTATIONEN.md",
     "spezifikation.html",
+    "design-system.html",
     "handoff-manifest.json",
 )
 PLUGIN_GENERATED = ("code.js",)
@@ -711,6 +712,269 @@ def spezifikation(data: dict[str, Any], rules: dict[str, Any]) -> str:
 """
 
 
+def komponenten_katalog(data: dict[str, Any]) -> str:
+    """Alle Komponenten mit ihren Zuständen – als echte Flächen, nicht als Tabelle.
+
+    Die Darstellung ist bewusst schematisch: Sie zeigt Rollenbindung, Radius,
+    Zustand und Modus. Ein Klick auf „Dunkel" oben schaltet die ganze Seite um,
+    weil jede Fläche ihre Farben aus denselben CSS-Variablen zieht wie der Blog.
+    """
+    karten = []
+    for c in data["components"]:
+        zustaende = ", ".join(STATE_LABELS.get(z, z) for z in c["states"] if z != "dark")
+        karten.append(f"""      <article class="karte">
+        <div class="probe" data-probe="{c['id']}">
+          <span class="probe-label">{c['figma'].split('/')[-1]}</span>
+        </div>
+        <h3>{c['figma']}</h3>
+        <p class="code"><code>{c['code']}</code></p>
+        <p class="meta">Zustände: {zustaende}</p>
+        <p class="a11y">{c['accessibility']}</p>
+      </article>""")
+    return "\n".join(karten)
+
+
+def design_system_seite(data: dict[str, Any], rules: dict[str, Any]) -> str:
+    """Eine eigenständige Seite: Design-System zum Ansehen und Prüfen.
+
+    Sie ersetzt kein Entwurfswerkzeug, aber sie beantwortet die Fragen, für die
+    man sonst Figma öffnet: Wie sehen die Komponenten aus? Stimmen die Farben
+    in beiden Modi? Halten die Kontraste? Und wie verhält sich die Seite auf
+    390 px? Alles direkt im Browser, ohne Anmeldung und ohne Netz.
+    """
+    figma = data["figma"]
+    farben = figma["primitives"]["colors"]
+    typo = figma["typography"]
+    sem = figma["semantic"]
+    a11y = rules.get("barrierefreiheit", {})
+    schatten = figma["primitives"]["elevation"]
+
+    def variablen(mode: str) -> str:
+        return "\n".join(
+            f"      --{rolle.replace('_', '-')}: {farben[ziel]};"
+            for rolle, ziel in sem[mode].items())
+
+    swatches = "".join(
+        f'<li><span class="sw" style="background:{wert}"></span>'
+        f'<strong>{name}</strong><small>{wert}</small></li>'
+        for name, wert in farben.items())
+
+    typo_proben = "".join(
+        f'<div class="typo-row">'
+        f'<div class="typo-probe" style="font-family:{t["family"]},system-ui;'
+        f'font-size:{min(t["size_px"], 40)}px;font-weight:{t["weight"]};'
+        f'line-height:{t["line_height"]};'
+        f'{"font-style:italic;" if str(t.get("style", "")) == "italic" else ""}">'
+        f'{"Fixkosten im Griff" if name.startswith("h") else "Klar rechnen statt hoffen"}</div>'
+        f'<dl><dt>{name}</dt><dd>{t["size_px"]} / {t["mobile_px"]} px · '
+        f'{t["weight"]} · {t["family"]}</dd></dl></div>'
+        for name, t in typo.items())
+
+    abstaende = "".join(
+        f'<li><span class="bar" style="width:{px}px"></span><code>{px}</code></li>'
+        for px in figma["primitives"]["spacing_px"])
+
+    matrix = "".join(
+        f'<tr><td>{mode}</td><td>{label}</td><td class="num">{wert:.2f}:1</td>'
+        f'<td>{"✓" if wert >= 4.5 else "✗"}</td></tr>'
+        for mode, label, _vg, _hg, _a, _b, wert in kontrast_matrix(data))
+
+    return f"""<!doctype html>
+<html lang="de" data-modus="hell">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FranksFinanzcheck – Design-System</title>
+<style>
+  /* Dieselben Rollen wie im Blog: eine Variable je Rolle, zwei Modi. */
+  :root {{
+{variablen('light')}
+    --radius-sm: {figma['primitives']['radius_px']['sm']}px;
+    --radius-md: {figma['primitives']['radius_px']['md']}px;
+    --radius-lg: {figma['primitives']['radius_px']['lg']}px;
+    --radius-pill: {figma['primitives']['radius_px']['pill']}px;
+  }}
+  html[data-modus="dunkel"] {{
+{variablen('dark')}
+  }}
+  * {{ box-sizing: border-box; }}
+  html {{ scroll-behavior: smooth; }}
+  @media (prefers-reduced-motion: reduce) {{ html {{ scroll-behavior: auto; }} * {{ transition: none !important; }} }}
+  body {{
+    margin: 0; background: var(--background); color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 18px; line-height: 1.65; -webkit-font-smoothing: antialiased;
+    transition: background .3s, color .3s;
+  }}
+  h1, h2, h3 {{ font-family: Inter, system-ui, sans-serif; color: var(--heading);
+    text-wrap: balance; margin: 0; }}
+  a {{ color: var(--heading); }}
+  .huelle {{ max-width: 1120px; margin: 0 auto; padding: 0 24px 96px; }}
+  header.kopf {{
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 40px 24px 32px; margin-bottom: 56px;
+  }}
+  header.kopf .innen {{ max-width: 1120px; margin: 0 auto; }}
+  header.kopf h1 {{ font-size: clamp(30px, 5vw, 48px); letter-spacing: -.02em; }}
+  header.kopf p {{ color: var(--text-secondary); max-width: 68ch; margin: 12px 0 0; }}
+  .strich {{ width: 96px; height: 5px; background: var(--action);
+    border-radius: var(--radius-pill); margin: 20px 0; }}
+  .schalter {{ display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }}
+  .schalter button {{
+    font: inherit; font-size: 15px; font-weight: 700; cursor: pointer;
+    min-height: 44px; padding: 0 20px; border-radius: var(--radius-pill);
+    border: 1px solid var(--border); background: var(--surface);
+    color: var(--text); transition: background .16s, color .16s;
+  }}
+  .schalter button[aria-pressed="true"] {{
+    background: var(--action); color: var(--action-text); border-color: var(--action);
+  }}
+  .schalter button:focus-visible {{ outline: 3px solid var(--focus); outline-offset: 2px; }}
+  section {{ margin-top: 72px; scroll-margin-top: 24px; }}
+  h2 {{ font-size: 26px; }}
+  h2::after {{ content: ""; display: block; width: 56px; height: 2px;
+    background: var(--action); margin-top: 10px; }}
+  .lead {{ color: var(--text-secondary); max-width: 72ch; margin: 14px 0 26px; }}
+  /* Farbfelder */
+  ul.swatches {{ list-style: none; padding: 0; margin: 0;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; }}
+  ul.swatches li {{ background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 12px; display: flex;
+    flex-direction: column; gap: 4px; }}
+  .sw {{ display: block; height: 44px; border-radius: var(--radius-sm);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.10); margin-bottom: 6px; }}
+  ul.swatches strong {{ font-size: 14px; }}
+  ul.swatches small {{ color: var(--text-secondary); font-size: 12px;
+    font-variant-numeric: tabular-nums; }}
+  /* Typografie */
+  .typo-row {{ border-bottom: 1px solid var(--border); padding: 20px 0; }}
+  .typo-row dl {{ margin: 10px 0 0; display: flex; gap: 12px; align-items: baseline; }}
+  .typo-row dt {{ font-weight: 700; font-size: 13px; color: var(--heading); }}
+  .typo-row dd {{ margin: 0; font-size: 13px; color: var(--text-secondary); }}
+  /* Komponenten */
+  .raster {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }}
+  .karte {{ background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 18px; box-shadow: {schatten['karte']}; }}
+  .karte h3 {{ font-size: 15px; margin: 0 0 2px; }}
+  .karte .code {{ margin: 0 0 8px; }}
+  .karte code {{ font-size: 12px; background: var(--surface-soft);
+    padding: 2px 6px; border-radius: 6px; }}
+  .karte .meta {{ font-size: 13px; color: var(--text-secondary); margin: 0 0 8px; }}
+  .karte .a11y {{ font-size: 13px; margin: 0; color: var(--text); }}
+  .probe {{ min-height: 64px; border-radius: var(--radius-md);
+    background: var(--surface-soft); display: flex; align-items: center;
+    justify-content: center; margin-bottom: 12px; padding: 12px; }}
+  .probe-label {{ font-size: 13px; font-weight: 700; color: var(--heading); }}
+  .probe[data-probe^="button"] {{ background: var(--action); }}
+  .probe[data-probe^="button"] .probe-label {{ color: var(--action-text); }}
+  .probe[data-probe="callout"] {{ background: var(--surface-soft);
+    border-left: 4px solid var(--heading); justify-content: flex-start; }}
+  .probe[data-probe="pinterest-cta"] {{ background: {farben['pinterest']}; }}
+  .probe[data-probe="pinterest-cta"] .probe-label {{ color: #fff; }}
+  /* Abstände */
+  ul.abstaende {{ list-style: none; padding: 0; margin: 0; }}
+  ul.abstaende li {{ display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }}
+  .bar {{ height: 12px; background: var(--heading); border-radius: 3px; }}
+  ul.abstaende code {{ font-size: 12px; color: var(--text-secondary); }}
+  /* Tabellen */
+  table {{ width: 100%; border-collapse: collapse; font-size: 14px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); overflow: hidden; }}
+  th, td {{ text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); }}
+  th {{ background: var(--surface-soft); font-size: 12px; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--heading); }}
+  .num {{ font-variant-numeric: tabular-nums; }}
+  .fuss {{ margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--border);
+    font-size: 14px; color: var(--text-secondary); }}
+  @media (max-width: 600px) {{
+    body {{ font-size: 17px; }}
+    .huelle {{ padding: 0 16px 72px; }}
+    header.kopf {{ padding: 28px 16px 24px; }}
+    section {{ margin-top: 52px; }}
+  }}
+</style>
+</head>
+<body>
+<header class="kopf"><div class="innen">
+  <h1>{data['projekt']['name']}<br />Design-System</h1>
+  <p>{data['projekt']['produkt']}. {data['projekt']['ziel']}.</p>
+  <div class="strich"></div>
+  <div class="schalter" role="group" aria-label="Farbschema">
+    <button type="button" id="btn-hell" aria-pressed="true">Hell</button>
+    <button type="button" id="btn-dunkel" aria-pressed="false">Dunkel</button>
+  </div>
+</div></header>
+
+<main class="huelle">
+  <section id="farben">
+    <h2>1. Farben</h2>
+    <p class="lead">{len(farben)} Werte, alle aus dem Marken-Regelwerk. Jede Rolle
+      darunter ist ein Alias auf genau einen dieser Werte.</p>
+    <ul class="swatches">{swatches}</ul>
+  </section>
+
+  <section id="typografie">
+    <h2>2. Typografie</h2>
+    <p class="lead">Jede Stufe mit Desktop- und Mobilwert. Die Probe zeigt die
+      Desktop-Größe; auf schmalen Geräten greift der kleinere Wert.</p>
+    {typo_proben}
+  </section>
+
+  <section id="komponenten">
+    <h2>3. Komponenten</h2>
+    <p class="lead">Schematische Proben, keine fertigen Layouts. Sie zeigen
+      Rollenbindung, Radius und Zustandsliste — der Rest entsteht beim Bauen.
+      Schalte oben auf „Dunkel", um beide Modi zu prüfen.</p>
+    <div class="raster">
+{komponenten_katalog(data)}
+    </div>
+  </section>
+
+  <section id="abstand">
+    <h2>4. Abstand</h2>
+    <p class="lead">{figma['grid']['basis_px']}-px-Grundraster mit den
+      dokumentierten Feinstufen {', '.join(str(x) for x in figma['grid']['feinstufen_px'])} px.</p>
+    <ul class="abstaende">{abstaende}</ul>
+  </section>
+
+  <section id="kontrast">
+    <h2>5. Kontrast</h2>
+    <p class="lead">Gerechnet nach WCAG 2.2, Soll {a11y.get('kontrast_fliesstext_min', 4.5)}:1
+      für Fließtext. Die Tabelle ist der Nachweis, nicht die Behauptung.</p>
+    <table>
+      <thead><tr><th>Modus</th><th>Paarung</th><th>Kontrast</th><th>AA</th></tr></thead>
+      <tbody>{matrix}</tbody>
+    </table>
+  </section>
+
+  <p class="fuss">Erzeugt von <code>scripts/design_handoff.py</code> aus
+    <code>data/design/handoff.yaml</code>. Diese Seite braucht kein Netz, keine
+    Anmeldung und kein Figma. Verbindlich bleiben DESIGN.md und das Regelwerk.</p>
+</main>
+
+<script>
+  (function () {{
+    var html = document.documentElement;
+    var hell = document.getElementById('btn-hell');
+    var dunkel = document.getElementById('btn-dunkel');
+    function setze(modus) {{
+      html.setAttribute('data-modus', modus);
+      hell.setAttribute('aria-pressed', String(modus === 'hell'));
+      dunkel.setAttribute('aria-pressed', String(modus === 'dunkel'));
+      try {{ localStorage.setItem('ff-design-modus', modus); }} catch (e) {{}}
+    }}
+    var gespeichert = null;
+    try {{ gespeichert = localStorage.getItem('ff-design-modus'); }} catch (e) {{}}
+    if (gespeichert === 'dunkel') setze('dunkel');
+    hell.addEventListener('click', function () {{ setze('hell'); }});
+    dunkel.addEventListener('click', function () {{ setze('dunkel'); }});
+  }})();
+</script>
+</body>
+</html>
+"""
+
+
 def plugin_daten(data: dict[str, Any]) -> dict[str, Any]:
     """Der Datenblock, den das Figma-Plugin als einzige Wahrheit liest."""
     figma = data["figma"]
@@ -773,6 +1037,7 @@ def render(data: dict[str, Any], rules: dict[str, Any]) -> dict[str, str]:
         "patterns.md": pattern_bibliothek(data),
         "ANNOTATIONEN.md": annotationen(data, rules),
         "spezifikation.html": spezifikation(data, rules),
+        "design-system.html": design_system_seite(data, rules),
     }
 
 
