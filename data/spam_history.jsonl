@@ -25733,3 +25733,5 @@
 {"ts": "2026-10-30T23:24:57Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 6}
 {"ts": "2026-10-31T05:49:05Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
 {"ts": "2026-10-31T05:49:05Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 6}
+{"ts": "2026-10-31T09:41:21Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
+{"ts": "2026-10-31T09:41:21Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 6}
