@@ -46,7 +46,7 @@ quellen:
     url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/hausratversicherung-auf-den-wert-der-einrichtung-kommts-an-13889"
     herausgeber: "Verbraucherzentrale"
     datum: "2026-10-24"
-faktencheck: "2026-09-27"
+faktencheck: "2026-10-30"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
   status: "freigegeben"

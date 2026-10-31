@@ -31,7 +31,25 @@ gleiche Unterschrift tragen – `--check` beweist das bei jedem Lauf, und
 Modi:
   python3 scripts/abbildungen_ableiten.py            # erzeugen + einbinden (idempotent, heilt Altfassungen)
   python3 scripts/abbildungen_ableiten.py --check    # Exit 1 bei fehlender/gleicher Unterschrift
+  python3 scripts/abbildungen_ableiten.py --nachzug  # nur die veralteten Bildzeilen nachziehen (Heiler, Exit 0)
   python3 scripts/abbildungen_ableiten.py --selftest # Regelprüfung ohne Dateischreiben
+
+WARUM ES `--nachzug` GIBT (30.10.2026)
+--------------------------------------
+Die Unterschrift ist ABGELEITET – aus Titel, Kernsätzen und Abschnittsnamen.
+Damit veraltet sie durch jede Textpflege, ohne dass jemand die Abbildung
+anfasst: Titel-Gate, Casing, Keyword-Optimizer, Lesbarkeits-Heiler,
+Affiliate-Deep-Links, Duplikat-Wache. Genau das ist am 30.10.2026 passiert –
+FF5 meldete 21 Beiträge, obwohl der Fehler in der Textpflege entstand und
+niemand die Abbildung nachzog; der Befund landete bei jedem fremden PR.
+
+Dieser Modus schließt die Lücke am Erzeuger: Er schreibt AUSSCHLIESSLICH die
+abgeleiteten Dateien (2 SVGs + Bildzeile) der Beiträge, die einen Befund
+haben. Kein neuer Satz, keine neue Aussage, keine Byte-Änderung an den
+anderen Beiträgen. Er ist ein Heiler und deshalb Exit 0; das Gate bleibt
+`--check`. Jede geänderte Datei wird als Zeile `ÄNDERUNG <pfad>` gemeldet,
+damit der Aufrufer (git_sync.sh) genau diese Pfade stagen kann – und nicht
+blind `git add -A` benutzt.
 """
 import glob
 import html
@@ -260,6 +278,18 @@ def pruefe_post(path, problems, gesehen):
         MERK: caption_merkkarte(title, sentences),
         ABLAUF: caption_ablauf(title, steps),
     }
+    # DIE ABBILDUNG SELBST IST AUCH ABGELEITET (30.10.2026).
+    # Bis hierher prüfte `--check` nur Einbindung und Unterschrift. Ändert
+    # sich die `kurzantwort`, bleibt die Unterschrift (sie nennt bewusst nur
+    # den Titel) grün – und im Bild stehen weiter die ALTEN Zahlen. Ein
+    # veralteter Betrag in einer Grafik ist schlimmer als eine veraltete
+    # Zeile: Er sieht aus wie ein Beleg. Deshalb wird die SVG-Ausgabe gegen
+    # die Ableitung geprüft; sie ist eine reine Funktion von Titel,
+    # Kernsätzen und Abschnittsnamen – bytegleich reproduzierbar.
+    erwartete_svg = {
+        MERK: merkkarte_svg(title, sentences),
+        ABLAUF: ablauf_svg(title, steps),
+    }
     for name in (MERK, ABLAUF):
         if not os.path.isfile(os.path.join(folder, name)):
             problems.append(f"{slug}: Datei fehlt {name}")
@@ -281,7 +311,31 @@ def pruefe_post(path, problems, gesehen):
                             "sich unterscheiden (#824)")
         else:
             gesehen[erwartet[name]] = slug
+        bild_pfad = os.path.join(folder, name)
+        if os.path.isfile(bild_pfad):
+            with open(bild_pfad, encoding="utf-8") as fh:
+                if fh.read() != erwartete_svg[name]:
+                    problems.append(
+                        f"{slug}: Bild zeigt nicht mehr den aktuellen Text "
+                        f"({name}) – nachziehen")
     return problems
+
+
+def befund_je_slug(slugs):
+    """slug → Befunde. Die eine Wahrheit für `--check` UND `--nachzug`.
+
+    Eigene Funktion, damit der Heiler nicht eine zweite, leicht abweichende
+    Messung benutzt: Was `--check` rot macht, ist genau das, was `--nachzug`
+    nachzieht.
+    """
+    aus = {}
+    gesehen = {}
+    for slug in slugs:
+        probleme = []
+        pruefe_post(find_post(slug), probleme, gesehen)
+        if probleme:
+            aus[slug] = probleme
+    return aus
 
 
 def check(slugs):
@@ -291,11 +345,39 @@ def check(slugs):
     Genau die wörtlich gleiche Bildzeile in 20 Artikeln hat die
     Release-Scorecard 25-mal blockiert.
     """
-    problems = []
-    gesehen = {}
-    for slug in slugs:
-        pruefe_post(find_post(slug), problems, gesehen)
-    return problems
+    return [problem for probleme in befund_je_slug(slugs).values()
+            for problem in probleme]
+
+
+def nachzug(slugs):
+    """Zieht nur die Bildzeilen nach, die nicht mehr zum Text passen.
+
+    Heiler, kein Gate: Exit 0 auch dann, wenn ein Beitrag nicht nachziehbar
+    ist (zu wenige Abschnitte, fehlender Ordner). Was offen bleibt, wird
+    gemeldet – `--check` entscheidet danach hart.
+
+    Rückgabe: Liste der nachgezogenen Slugs. Jede berührte Datei wird als
+    `ÄNDERUNG <pfad>` gemeldet (relativ zur Repo-Wurzel), damit der Aufrufer
+    exakt diese Pfade stagen kann.
+    """
+    nachgezogen = []
+    for slug in befund_je_slug(slugs):
+        pfad = find_post(slug)
+        ordner = os.path.dirname(pfad)
+        try:
+            render(pfad, write=True)
+        except SystemExit as exc:          # zu wenige Abschnitte o. Ä.
+            print(f"  ⚠ {slug[:60]}: nicht nachziehbar – {exc}")
+            continue
+        rest = befund_je_slug([slug])
+        if rest:
+            print(f"  ⚠ {slug[:60]}: weiterhin offen – {rest[slug][0]}")
+            continue
+        nachgezogen.append(slug)
+        print(f"  ↻ {slug[:60]}: Bildzeile aus dem aktuellen Text nachgezogen")
+        for datei in (os.path.join(ordner, MERK), os.path.join(ordner, ABLAUF), pfad):
+            print(f"ÄNDERUNG {os.path.relpath(datei, BLOG_DIR)}")
+    return nachgezogen
 
 
 def selftest():
@@ -340,6 +422,11 @@ def main(argv):
     if "--selftest" in argv:
         return selftest()
     slugs = load_slugs()
+    if "--nachzug" in argv:
+        gezogen = nachzug(slugs)
+        print(f"Abbildungen-Nachzug: {len(slugs)} Beiträge | "
+              f"nachgezogen: {len(gezogen)}")
+        return 0
     if "--check" in argv:
         problems = check(slugs)
         for p in problems:

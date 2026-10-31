@@ -170,7 +170,12 @@ def run_fix(root: Path = CONTENT, posts_dir: Path = POSTS,
         text = path.read_text(encoding="utf-8")
         new_text, count, _ = heal_text(text, slugs)
         if count and do_write:
-            path.write_text(new_text, encoding="utf-8")
+            import editorial_review_gate as _ymyl_gate
+            if _ymyl_gate.automatic_change_findings(text, new_text):
+                count = 0
+                new_text = text
+            else:
+                path.write_text(new_text, encoding="utf-8")
         if count:
             stats["files"] += 1
             stats["fixes"] += count
@@ -240,6 +245,9 @@ def requeue_healed_holds(posts_dir: Path = POSTS,
             continue
         # Verifikation: nach der Heilung darf kein R8-URL-LEERZEICHEN bleiben
         if scan_url_leerzeichen(healed):
+            continue
+        import editorial_review_gate as _ymyl_gate
+        if _ymyl_gate.automatic_change_findings(text, healed):
             continue
         # Inhalt schreiben, dann in die Re-Queue legen (draft bleibt draft!)
         index.write_text(healed, encoding="utf-8")

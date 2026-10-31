@@ -253,8 +253,11 @@ def _check_internal_links():
                     FIXED.append(("A3", slug, f"Lesetipp-Link ergänzt (→ {rslug})"))
                 if changed:
                     parts[2] = body
-                    c = join_article(parts[1], parts[2], parts[0])
-                    open(p, "w", encoding="utf-8").write(c)
+                    c_neu = join_article(parts[1], parts[2], parts[0])
+                    import editorial_review_gate as _ymyl_gate
+                    if not _ymyl_gate.automatic_change_findings(c, c_neu):
+                        c = c_neu
+                        open(p, "w", encoding="utf-8").write(c)
             # Verifikation NACH der Heilung – nur Reste alarmieren
             n = _count_internal_links(c)
             if n >= 2:
@@ -319,9 +322,11 @@ def _check_autor():
                 mm = re.search(r"^(categories:.*)$", c, re.M)
                 if mm:
                     c2 = c[:mm.end()] + "\n" + f'author: "{AUTHOR}"\n' + c[mm.end():]
-                    open(p, "w", encoding="utf-8").write(c2)
-                    FIXED.append(("A7", slug, "author ergänzt"))
-                    continue  # geheilt + verifizierbar → kein Alarm (Sofortheilung)
+                    import editorial_review_gate as _ymyl_gate
+                    if not _ymyl_gate.automatic_change_findings(c, c2):
+                        open(p, "w", encoding="utf-8").write(c2)
+                        FIXED.append(("A7", slug, "author ergänzt"))
+                        continue  # geheilt + verifizierbar → kein Alarm (Sofortheilung)
             PROBLEMS.append(("A7", slug, "author fehlt/abweichend"))
 
 
@@ -405,10 +410,13 @@ def _check_cta():
                    f"[**Jetzt {label}**](/go/{go_key}/) – in wenigen Minuten "
                    f"siehst du, was du sparst.\n")
             parts[2] = body[:ip] + cta + body[ip:]
-            with open(p, "w", encoding="utf-8") as fh:
-                fh.write(join_article(parts[1], parts[2], parts[0]))
-            FIXED.append(("A8", slug, f"Affiliate-CTA ergänzt (→ /go/{go_key}/)"))
-            continue  # geheilt + verifizierbar → kein Alarm (Sofortheilung)
+            c_neu = join_article(parts[1], parts[2], parts[0])
+            import editorial_review_gate as _ymyl_gate
+            if not _ymyl_gate.automatic_change_findings(c, c_neu):
+                with open(p, "w", encoding="utf-8") as fh:
+                    fh.write(c_neu)
+                FIXED.append(("A8", slug, f"Affiliate-CTA ergänzt (→ /go/{go_key}/)"))
+                continue  # geheilt + verifizierbar → kein Alarm (Sofortheilung)
         PROBLEMS.append(("A8", slug, "kein Affiliate-CTA (Monetarisierung)"))
 
 

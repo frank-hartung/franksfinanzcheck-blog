@@ -1213,6 +1213,33 @@ history:
     \  \n#Mietwagen #Reise #Frugalismus #Geldsparen"
   ref: '117525734870640551'
   ai: true
+- posted_at: '2026-10-30T19:40:24.461220+01:00'
+  channel: mastodon
+  slug: 2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht
+  title: 'Frugalismus Familie: Clever sparen ohne Verzicht'
+  angle: thread
+  url: https://mastodon.social/@FranksFinanzcheck/117531321037727209
+  ok: true
+  text: 'Frugalismus Familie: Clever sparen ohne Verzicht
+
+
+    Frugalismus mit Familie heißt, Fixkosten und laufende Ausgaben zu prüfen, statt
+    an kleinen Freuden zu sparen.'
+  ref: '117531321037727209'
+  ai: false
+- posted_at: '2026-10-31T00:01:53.361253+01:00'
+  channel: mastodon
+  slug: 2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege
+  title: 'Flugvergleich im Winter: So findest du echte Billigflüge'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117532348748029850
+  ok: true
+  text: '✈️ Spare im Winter bei Flügen, wenn du flexibel und transparent buchst. Nutze
+    Meta‑Suchmaschinen, fliege Dienstag oder Mittwoch und prüfe alle Gebühren (z. B.
+    50 € Basis + 30 € Koffer). https://franksfinanzcheck.de/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+    #Mietwagen #Reise #Billigfluege'
+  ref: '117532348748029850'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1238,4 +1265,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-10-30T12:27:46.417571+01:00'
+updated_at: '2026-10-31T00:01:57.722533+01:00'

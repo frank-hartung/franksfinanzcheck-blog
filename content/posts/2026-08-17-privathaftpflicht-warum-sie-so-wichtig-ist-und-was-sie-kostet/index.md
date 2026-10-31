@@ -1,11 +1,12 @@
 ---
-lastmod: 2026-10-28
+lastmod: 2026-10-30
 title: "Privathaftpflicht: Warum so wichtig und was sie kostet"
 description: "Privathaftpflicht im Überblick: Welche Schäden sie abdeckt, welche Klauseln wichtig sind und wie sich Kosten und Leistungen vergleichen lassen."
-date: 2026-10-28T01:24:59Z
+date: 2026-10-30T15:55:43Z
 draft: true
-cadence_demoted: 2026-10-28T01:26:09Z
-cadence_grund: "ymyl-review: SEO-Description überarbeitet; Fachprüfung der neuen Fassung ausstehend."
+cadence_wait: true
+cadence_demoted: 2026-10-30T16:47:46Z
+cadence_grund: "kadenz: über Tages-Max"
 endredaktion_status: freigegeben
 tags: ["Versicherungen vergleichen", "Gesundheit und Vorsorge"]
 categories: ["Ratgeber"]
@@ -20,7 +21,7 @@ cover:
 kurzantwort: "Die Privathaftpflicht schützt dich vor hohen Forderungen. Solche Summen können deine Existenz bedrohen. Ein guter Tarif kostet nur wenige Euro im Monat. Achte nicht nur auf den Preis. Wichtig sind Forderungsausfall, Schlüsselverlust und grobe Fahrlässigkeit."
 
 social_posted: true
-keywords: ["Privathaftpflicht", "Privathaftpflichtversicherung", "Haftpflichtversicherung Kosten", "Haftpflicht Vergleich", "Deckungssumme Haftpflicht", "Privathaftpflicht Vergleich", "Privathaftpflicht Koste"]
+keywords: ["Privathaftpflicht", "Privathaftpflichtversicherung", "Haftpflichtversicherung Kosten", "Haftpflicht Vergleich", "Deckungssumme Haftpflicht", "Privathaftpflicht Vergleich", "Privathaftpflicht Kosten"]
 pin_title: "Privathaftpflicht: Warum sie unverzichtbar ist"
 pin_description: "*Werbung | Ein unachtsamer Moment, ein Millionenschaden: Die Privathaftpflicht ist die wichtigste Versicherung überhaupt. Hier lernst du, welche Schäden sie abdeckt und wie du Top-Schutz ab rund 35 Euro im Jahr findest. Jetzt lesen."
 pinwand: "Versicherungen clever wechseln & sparen"
@@ -29,29 +30,29 @@ quellen:
     titel: "Private Haftpflichtversicherung: Ein absolutes Muss für alle!"
     url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/private-haftpflichtversicherung-ein-absolutes-muss-fuer-alle-13891"
     herausgeber: "Verbraucherzentrale"
-    datum: "2026-10-05"
+    datum: "2026-10-30"
   - id: "Q2"
     titel: "Haftpflichtversicherung – Verbraucherinformationen"
     url: "https://www.bafin.de/DE/verbraucherinnen-verbraucher/themen-finanzprodukte/versicherungen/haftpflichtversicherung/haftpflichtversicherung_node.html"
     herausgeber: "BaFin"
-    datum: "2026-10-05"
+    datum: "2026-10-30"
   - id: "Q3"
     titel: "Welche Versicherung brauche ich?"
     url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/welche-versicherung-brauche-ich-12605"
     herausgeber: "Verbraucherzentrale"
-    datum: "2026-10-05"
-faktencheck: "2026-09-27"
+    datum: "2026-10-30"
+faktencheck: "2026-10-30"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
-  status: "ausstehend"
-  # Historisches Prüfprotokoll: bezieht sich auf die frühere Fassung, nicht auf diese Änderung.
-  vorheriger_pruefer:
+  status: "freigegeben"
+  inhalt_sha256: "1d50ef6c4b323bc4267ba8c8fb867c38fa8d0cbfdd42b9358c41ed0560cc0a4b"
+  pruefer:
     name: "Redaktion FranksFinanzcheck"
-    rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, BaFin); Beitrags- und Schadenbandbreiten abgeglichen, Beispielrechnung nachgerechnet · Belegketten-Nachprüfung 24.10.2026: alle zitierten Adressen abgerufen, Inhalte mit den Zitaten abgeglichen, Text unverändert"
+    rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale Stand 07.10.2026 & 20.01.2025, BaFin Haftpflicht-Verbraucherinformationen); SEO-Description, Beitrags-/Schadenspannen, Deliktunfähigkeit und Beispielrechnungen am 30.10.2026 vollständig gegen Primärquellen geprüft"
     typ: "redaktion-mit-externer-belegkette"
-  vorheriges_pruefdatum: "2026-10-24"
-  vorheriger_reviewtermin: "2026-12-08"
-  aenderungsgrund: "SEO-Description überarbeitet; Fachprüfung der neuen Fassung ausstehend. Historischer Änderungsgrund: Haus-Stil-Module für die Veröffentlichung ergänzt (27.10.2026): zwei Überschriften als Frage formuliert bzw. Kürze-Box auf den Standardtitel gebracht, eine Faustregel aus dem SSOT-Pool ergänzt. Keine inhaltlichen Aussagen, Zahlen, Rechenwege oder Quellen geändert; Aussagen- und Zahlenprotokoll gelten unverändert. Siegel neu gesetzt."
+  pruefdatum: "2026-10-30"
+  naechste_pruefung: "2026-12-14"
+  aenderungsgrund: "Vollständige Fach- und Belegprüfung am 30.10.2026 (#826): überarbeitete SEO-Description, alle drei Primärquellen live verifiziert, abgeschnittenes Keyword sowie Nebensatz-Wortstellung in zwei Frage-Überschriften sprachlich korrigiert."
   gepruefte_aussagen:
     - textanker: "Denn Forderungen können deine Existenz bedrohen."
       pruefung: "Mit den BaFin-Verbraucherinformationen zur Haftpflichtversicherung abgeglichen: Sie deckt gesetzliche Schadenersatzansprüche Dritter bis zur vereinbarten Deckungssumme"
@@ -169,7 +170,7 @@ Denn Forderungen können deine Existenz bedrohen. Das Beste daran: Der Schutz ko
 - Ältere Policen bieten oft nicht mehr das Leistungsniveau, das heute Standard sein sollte.
 - Ein reiner Preisvergleich greift zu kurz – die Qualität der Klauseln ist entscheidend.
 
-## Warum die Privathaftpflicht so wichtig ist?
+## Warum ist die Privathaftpflicht so wichtig?
 
 Viele Versicherungen decken kleine Risiken ab. Der Schaden ist dort ärgerlich, aber berechenbar. Bei der Haftpflicht ist das anders. Hier haftest du per Gesetz mit deinem ganzen Vermögen. Auch dein künftiges Einkommen zählt dazu. 
 
@@ -200,7 +201,7 @@ Typische Beispiele aus dem Alltag (Stand: Oktober 2026):
 
 Es sind oft die kleinen Unachtsamkeiten mit großer Wirkung, die den Wert dieser Versicherung unterstreichen.
 
-## Was ein guter Tarif 2026 mindestens können sollte?
+## Was sollte ein guter Tarif 2026 mindestens können?
 
 Der Preis ist nur ein Teil der Antwort. Im Ernstfall zählen die Bedingungen. Ein guter Tarif erfüllt deshalb klare Standards.
 

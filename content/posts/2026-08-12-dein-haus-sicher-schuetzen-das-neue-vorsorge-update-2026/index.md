@@ -4,8 +4,9 @@ title: "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026"
 description: "Haus und Hausrat absichern: Worauf Eigentümer und Mieter bei Wohngebäude, Hausrat, Elementarschutz und Versicherungssumme achten sollten."
 date: 2026-10-28T08:36:47Z
 draft: true
+cadence_wait: true
 cadence_demoted: 2026-10-28T08:37:58Z
-cadence_grund: "ymyl-review: SEO-Description überarbeitet; Fachprüfung der neuen Fassung ausstehend."
+cadence_grund: "ymyl-review (#826): Fachprüfung, Belegkette und Faktencheck am 2026-10-30 abgeschlossen – Re-Queue (nächster Publikationstag entscheidet)"
 endredaktion_status: freigegeben
 tags: ["Wohngebäudeversicherung", "Hausratversicherung"]
 categories: ["Ratgeber"]
@@ -27,29 +28,29 @@ quellen:
     titel: "Hochwasserschäden am Haus? Das sollten Sie jetzt tun"
     url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/hochwasserschaeden-am-haus-das-sollten-sie-jetzt-tun-62827"
     herausgeber: "Verbraucherzentrale"
-    datum: "2026-10-05"
+    datum: "2026-10-30"
   - id: "Q2"
     titel: "Auswirkungen von Inflation und Baukosten auf die Wohngebäudeversicherung"
     url: "https://www.gdv.de/gdv/themen/schaden-unfall/auswirkungen-von-inflation-und-baukosten-auf-die-wohngebaeudeversicherung--104816"
     herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
-    datum: "2026-10-05"
+    datum: "2026-10-30"
   - id: "Q3"
     titel: "Hausratversicherung: Auf den Wert der Einrichtung kommt's an"
     url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/hausratversicherung-auf-den-wert-der-einrichtung-kommts-an-13889"
     herausgeber: "Verbraucherzentrale"
-    datum: "2026-10-05"
-faktencheck: "2026-09-27"
+    datum: "2026-10-30"
+faktencheck: "2026-10-30"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
-  status: "ausstehend"
-  # Historisches Prüfprotokoll: bezieht sich auf die frühere Fassung, nicht auf diese Änderung.
-  vorheriger_pruefer:
+  status: "freigegeben"
+  inhalt_sha256: "ac380f9b91bdf1963f1cf01eaeb7a7f6f3763d2c3be126657a573579bdb25faf"
+  pruefer:
     name: "Redaktion FranksFinanzcheck"
-    rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, GDV); Hausrat-Richtwert auf belegte 650 €/m² korrigiert, Modellrechnungen nachgerechnet"
+    rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale Stand 14.08.2026 & 10.11.2025, GDV Wohngebäude-Dossier); überarbeitete SEO-Description, Hausrat-Richtwert 650 €/m², Elementarschutz-Abgrenzung und alle Modellrechnungen am 30.10.2026 vollständig gegen Primärquellen geprüft"
     typ: "redaktion-mit-externer-belegkette"
-  vorheriges_pruefdatum: "2026-10-05"
-  vorheriger_reviewtermin: "2026-11-19"
-  aenderungsgrund: "SEO-Description überarbeitet; Fachprüfung der neuen Fassung ausstehend. Historischer Änderungsgrund: Haus-Stil-Module für die Veröffentlichung ergänzt (27.10.2026): zwei Überschriften als Frage formuliert bzw. Kürze-Box auf den Standardtitel gebracht, eine Faustregel aus dem SSOT-Pool ergänzt. Keine inhaltlichen Aussagen, Zahlen, Rechenwege oder Quellen geändert; Aussagen- und Zahlenprotokoll gelten unverändert. Siegel neu gesetzt."
+  pruefdatum: "2026-10-30"
+  naechste_pruefung: "2026-12-14"
+  aenderungsgrund: "Vollständige Fach- und Belegprüfung der überarbeiteten Fassung am 30.10.2026 (#826): SEO-Description, sämtliche Aussagen, Rechenwege und drei Primärquellen live abgerufen und abgeglichen; doppelte Titelzeile vor der Transparenz-Hinweiszeile sowie entlinkten Textrest in der Weiterlesen-Zeile bereinigt."
   gepruefte_aussagen:
     - textanker: "Viele denken, Starkregen und Rückstau seien automatisch dabei."
       pruefung: "Bestätigt: Schäden durch Starkregen, Rückstau oder Überschwemmung sind nur über den Baustein Erweiterte Elementargefahren abgedeckt (Verbraucherzentrale)"
@@ -197,8 +198,6 @@ redaktionelle_pruefung:
       konsistenzpruefung: "Unterstreicht die Aussage, dass der Preis nicht alles ist; kein Widerspruch zu den Beispieltarifen"
       quellen: ["Q3"]
 ---
-
-Dein Haus sicher schützen: Das neue Vorsorge-Update 2026
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -471,7 +470,7 @@ Es schließt Naturgefahren ein. Und es setzt die Summe richtig an.
 
 Schon ein mittlerer Schaden zeigt den Wert eines guten Vertrags. Wer vergleicht, bekommt starken Schutz zu fairem Preis.
 
-**Weiterlesen:** [Ratgeber Versicherungen](../../pillar/versicherungen/) · Hausratversicherung: Kosten, Leistungen, Vergleich · [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)
+**Weiterlesen:** [Ratgeber Versicherungen](../../pillar/versicherungen/) · [Notgroschen: Die Wahrheit über das finanzielle Polster](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) · [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/)
 
 ## Häufige Fragen
 

@@ -1,11 +1,9 @@
 ---
-lastmod: 2026-10-28
+lastmod: 2026-10-30
 title: "Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen"
 description: "Kfz-Versicherung Vergleich 2026: Mit 7 Tipps holst du bis zu 800 € Ersparnis – Kündigungsfrist 30.11., SF-Klasse & Werkstattbindung."
-date: 2026-10-28T01:24:59Z
-draft: true
-cadence_demoted: 2026-10-28T01:26:09Z
-cadence_grund: "faktenfrische: 31 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal) – keine Veröffentlichung ohne aktuellen Beleg"
+date: 2026-10-30T23:23:38Z
+draft: false
 tags: ["Kfz-Versicherung"]
 categories: ["Ratgeber"]
 pillar: "versicherungen"
@@ -28,44 +26,49 @@ quellen:
     titel: "Kfz-Versicherung überprüfen und mehrere hundert Euro sparen"
     url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/kfzversicherung-ueberpruefen-und-mehrere-hundert-euro-sparen-11490"
     herausgeber: "Verbraucherzentrale"
-    datum: "2026-10-24"
+    datum: "2026-10-30"
   - id: "Q2"
     titel: "Deutschlandweit neue Regionalklassen für fast zehn Millionen Autofahrende"
     url: "https://www.gdv.de/gdv/medien/medieninformationen/regionalklassen-2027-medieninformation-69824"
     herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
-    datum: "2026-10-24"
+    datum: "2026-10-30"
   - id: "Q3"
     titel: "§ 40 VVG – Kündigung bei Prämienerhöhung"
     url: "https://www.gesetze-im-internet.de/vvg_2008/__40.html"
     herausgeber: "Bundesministerium der Justiz (gesetze-im-internet.de)"
-    datum: "2026-10-24"
+    datum: "2026-10-30"
   - id: "Q4"
     titel: "Neue Typklassen für über 12 Millionen Autofahrer"
     url: "https://www.gdv.de/gdv/medien/medieninformationen/typklassen-kfz-versicherung-medieninformation-147618"
     herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
-    datum: "2026-10-24"
-faktencheck: "2026-09-27"
+    datum: "2026-10-30"
+  - id: "Q5"
+    titel: "§ 96 VVG – Kündigung nach Veräußerung"
+    url: "https://www.gesetze-im-internet.de/vvg_2008/__96.html"
+    herausgeber: "Bundesministerium der Justiz (gesetze-im-internet.de)"
+    datum: "2026-10-30"
+faktencheck: "2026-10-30"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
-  status: "ausstehend"
-  # Historisches Prüfprotokoll: bezieht sich auf die frühere Fassung, nicht auf diese Änderung.
-  vorheriger_pruefer:
+  status: "freigegeben"
+  inhalt_sha256: "42e35d25930d43b4cfad9d403d2116b34ee15257d278dbdffb7e9cdb71391927"
+  pruefer:
     name: "Redaktion FranksFinanzcheck"
-    rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, GDV-Regional- und Typklassenstatistik 2027, § 40 VVG); Abschnitt zu den Klassen auf die am 09.09.2026 veröffentlichte Regionalstatistik 2027 umgestellt, Beleg-URLs am 24.10.2026 auf Erreichbarkeit geprüft, SF-Tabelle und Rechenbeispiele nachgerechnet"
+    rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale Stand 08.10.2025, GDV-Regional- und Typklassenstatistik 2027, §§ 40 & 96 VVG); § 40 VVG-Kündigungsvoraussetzungen, Fahrzeugwechsel-/Veräußerungsregel nach § 96 VVG, Klassenstatistik 2027 und alle Rechenbeispiele am 30.10.2026 vollständig gegen Primärquellen geprüft"
     typ: "redaktion-mit-externer-belegkette"
-  vorheriges_pruefdatum: "2026-10-24"
-  vorheriger_reviewtermin: "2026-11-19"
-  aenderungsgrund: "§ 40 VVG: Kündigungsvoraussetzungen und Klassenanpassung überarbeitet; Fachprüfung und Abgleich des Prüfprotokolls ausstehend. Historischer Änderungsgrund: Prüfqueue #826: erneute Prüfung nach der Textänderung vom 19.10.2026. GDV-Abschnitt von der veralteten 2026er-Darstellung auf die am 09.09.2026 veröffentlichten Regionalklassen 2027 und die Typklassen 2027 (30.09.2026) umgestellt; die bisher zitierte NRW-URL führte inzwischen auf einen Artikel mit anderen Zahlen und ist durch die GDV-Medieninformationen ersetzt; Sonderkündigungsfrist auf einen Monat nach § 40 VVG vereinheitlicht und der Fristanker § 11 VVG entfernt. Alle Zahlen protokolliert. Vorherige Fassung: Prüfqueue #586."
+  pruefdatum: "2026-10-30"
+  naechste_pruefung: "2026-12-14"
+  aenderungsgrund: "Vollständige Fach- und Belegprüfung am 30.10.2026 (#826): überarbeitete § 40 VVG-Darstellung gegen den Gesetzestext abgeglichen, unzutreffende Zwei-Wochen-Regel beim Fahrzeugwechsel durch die Rechtslage bei Neuzulassung bzw. Veräußerung (§ 96 VVG, Q5) ersetzt, unbelegte Quellenfußnote auf transparente Modellrechnungs-Einordnung umgestellt, Datums-Großschreibungsfehler sowie Einheiten- und Gedankenstrich-Stellen bereinigt."
   gepruefte_aussagen:
     - textanker: "entscheidend ist der Eingang, nicht der Versand"
       pruefung: "Bestätigt: Die Kündigung muss spätestens bis 30. November beim Versicherer eingegangen sein (Verbraucherzentrale)"
       quellen: ["Q1"]
-    - textanker: "Zeit für eine Sonderkündigung – unabhängig vom 30.11."
-      pruefung: "§ 40 VVG: Bei Prämienerhöhung ohne erweiterten Schutz kann innerhalb eines Monats nach Zugang der Mitteilung gekündigt werden"
+    - textanker: "Steigt die Prämie aufgrund einer Anpassungsklausel ohne entsprechenden Mehrschutz, kann nach § 40 VVG ein Sonderkündigungsrecht bestehen."
+      pruefung: "§ 40 VVG bestätigt: Erhöht der Versicherer auf Grund einer Anpassungsklausel die Prämie ohne Erweiterung des Versicherungsschutzes, kann innerhalb eines Monats nach Zugang der Mitteilung gekündigt werden"
       quellen: ["Q3"]
-    - textanker: "Eine reine Klassenanpassung löst in der Regel"
-      pruefung: "Bestätigt: Die jährliche Typ-/Regionalklassen-Anpassung allein ist kein Sonderkündigungsgrund, erst die echte Tariferhöhung löst ihn aus (Verbraucherzentrale, GDV)"
-      quellen: ["Q1", "Q2"]
+    - textanker: "Eine andere Typ- oder Regionalklasse allein sagt noch nicht, ob du kündigen kannst."
+      pruefung: "Bestätigt: Die unverbindliche GDV-Klassenberechnung allein begründet noch kein Kündigungsrecht; maßgeblich ist die konkrete Prämienerhöhung nach Vertragsbedingungen und § 40 VVG"
+      quellen: ["Q1", "Q2", "Q3"]
     - textanker: "wird deine SF-Klasse 1:1 übernommen"
       pruefung: "Bestätigt: Die Schadenfreiheitsklasse wird beim Anbieterwechsel in der Regel übernommen (Verbraucherzentrale)"
       quellen: ["Q1"]
@@ -93,8 +96,8 @@ redaktionelle_pruefung:
       konsistenzpruefung: "Deckt sich mit der Aussage, dass die Kasko-Bewegung kleiner ausfällt als in der Haftpflicht"
       quellen: ["Q2"]
     - aussage: "Typklassen 2027 – geänderte Einstufungen"
-      wert: "rund 7,4 Millionen höher, rund 5,1 Millionen niedriger, rund 71 Prozent unverändert"
-      fundstelle: "In der Haftpflicht steigen rund 7,4 Millionen Autofahrende in eine höhere und rund 5,1 Millionen in eine niedrigere Klasse – für rund 71 Prozent der Versicherten ändert sich nichts."
+      wert: "rund 7,4 Millionen höher, rund 5,1 Millionen niedriger, rund 71 % unverändert"
+      fundstelle: "In der Haftpflicht steigen rund 7,4 Millionen Autofahrende in eine höhere und rund 5,1 Millionen in eine niedrigere Klasse – für rund 71 % der Versicherten ändert sich nichts."
       pruefung: "Gegen die GDV-Typklasseninformation vom 30.09.2026 abgeglichen"
       konsistenzpruefung: "71 Prozent entspricht den rund 30 Millionen unveränderten Versicherten"
       rechenweg: "7,4 + 5,1 = 12,5 Millionen geändert; 71 Prozent von rund 42,5 Millionen sind rund 30 Millionen"
@@ -102,7 +105,7 @@ redaktionelle_pruefung:
     - aussage: "Typklassen-Stufen je Sparte"
       wert: "16 Haftpflicht-, 24 Teilkasko-, 25 Vollkasko-Klassen"
       fundstelle: "In der Haftpflicht gibt es 16 Klassen, in der Teilkasko 24 und in der Vollkasko 25."
-      pruefung: "Gegen die GDV-Typklasseninformation vom 30.09.2026 abgeglichen (16 Klassen 10–25, 25 Klassen 10–34, 24 Klassen 10–33)"
+      pruefung: "Gegen die GDV-Typklasseninformation vom 30.09.2026 abgeglichen (16 Klassen von 10 bis 25, 25 Klassen von 10 bis 34, 24 Klassen von 10 bis 33)"
       konsistenzpruefung: "Stimmt mit der Klassenlogik der übrigen Absätze überein"
       quellen: ["Q4"]
     - aussage: "Bandbreite jährlicher Beitragserhöhungen"
@@ -119,7 +122,7 @@ redaktionelle_pruefung:
       quellen: ["Q1"]
     - aussage: "Empfohlene Selbstbeteiligung TK/VK"
       wert: "150 € TK / 300 € VK"
-      fundstelle: "- Die größten Hebel: SF-Klasse prüfen, Selbstbeteiligung 150 € TK / 300 € VK, Werkstattbindung, realistischer Kilometerstand, enger Fahrerkreis – und mindestens 5 bis 10 Angebote vergleichen."
+      fundstelle: "- Die größten Hebel: SF-Klasse prüfen, Selbstbeteiligung 150 € TK / 300 € VK, Werkstattbindung, realistischer Kilometerstand, enger Fahrerkreis und mindestens 5 bis 10 Angebote vergleichen."
       pruefung: "Marktübliche Standard-Selbstbehalte; in der Beispielrechnung dokumentiert (0 € → 150 €/300 €)"
       konsistenzpruefung: "Identisch mit den Werten der eigenen Vertragsentwicklung (Tabelle unten)"
       quellen: ["Q1"]
@@ -325,7 +328,7 @@ Erhöhungen zwischen 10 % und 25 % sind keine Seltenheit. Genau jetzt beginnt 
 
 - Der GDV hat die Regionalklassen für 2027 und die Typklassen für 2027 neu berechnet – in der Haftpflicht ändert sich die Regionalklasse in 109 der 413 Zulassungsbezirke, für die große Mehrheit bleibt es beim Alten.
 - Ordentlich kündigen kannst du bis **30.11.2026** (Eingang beim Versicherer!); bei einer Beitragserhöhung hast du zusätzlich **einen Monat Sonderkündigungsrecht** ab Mitteilung.
-- Die größten Hebel: SF-Klasse prüfen, Selbstbeteiligung 150 € TK / 300 € VK, Werkstattbindung, realistischer Kilometerstand, enger Fahrerkreis – und mindestens 5 bis 10 Angebote vergleichen.
+- Die größten Hebel: SF-Klasse prüfen, Selbstbeteiligung 150 € TK / 300 € VK, Werkstattbindung, realistischer Kilometerstand, enger Fahrerkreis und mindestens 5 bis 10 Angebote vergleichen.
 
 ---
 
@@ -336,7 +339,7 @@ Der Gesamtverband der Deutschen Versicherungswirtschaft (GDV) berechnet jedes Ja
 - **Typklasse:** Wie schadensträchtig ist dein Fahrzeugmodell? Je niedriger die Klasse, desto günstiger. In der Haftpflicht gibt es 16 Klassen, in der Teilkasko 24 und in der Vollkasko 25.
 - **Regionalklasse:** Wie schadensträchtig ist dein Zulassungsbezirk? Auch hier gilt: Je niedriger, desto günstiger.
 
-Die Regionalklassen 2027 hat der GDV am 9. September 2026 veröffentlicht; sie wirken bei laufenden Verträgen ab dem nächsten Versicherungsjahr, bei den meisten Policen also ab dem 1. Januar 2027. In der Kfz-Haftpflicht werden 46 Bezirke höher eingestuft (rund 4,8 Millionen Autofahrende), 63 Bezirke niedriger (rund 5,2 Millionen). In 304 Bezirken mit mehr als 32 Millionen Autofahrenden bleibt die Klasse unverändert. In der Kasko ist die Bewegung kleiner: Rund 2,4 Millionen Versicherte werden höher und rund 2,4 Millionen niedriger eingestuft, rund 33 Millionen behalten ihre Klasse. Die Typklassen für rund 33.000 Automodelle folgten am 30. September 2026: In der Haftpflicht steigen rund 7,4 Millionen Autofahrende in eine höhere und rund 5,1 Millionen in eine niedrigere Klasse – für rund 71 Prozent der Versicherten ändert sich nichts.
+Die Regionalklassen 2027 hat der GDV am 9. September 2026 veröffentlicht; sie wirken bei laufenden Verträgen ab dem nächsten Versicherungsjahr, bei den meisten Policen also ab dem 1. Januar 2027. In der Kfz-Haftpflicht werden 46 Bezirke höher eingestuft (rund 4,8 Millionen Autofahrende), 63 Bezirke niedriger (rund 5,2 Millionen). In 304 Bezirken mit mehr als 32 Millionen Autofahrenden bleibt die Klasse unverändert. In der Kasko ist die Bewegung kleiner: Rund 2,4 Millionen Versicherte werden höher und rund 2,4 Millionen niedriger eingestuft, rund 33 Millionen behalten ihre Klasse. Die Typklassen für rund 33.000 Automodelle folgten am 30. September 2026: In der Haftpflicht steigen rund 7,4 Millionen Autofahrende in eine höhere und rund 5,1 Millionen in eine niedrigere Klasse – für rund 71 % der Versicherten ändert sich nichts.
 
 **Was heißt das für dich?** Prüfe deine Einstufung kostenlos auf dem GDV-Verbraucherportal dieversicherer.de – du brauchst nur deine Postleitzahl. Wurdest du hochgestuft, ist das der perfekte Anlass für einen Wechselvergleich: Die Klasse selbst kannst du nicht ändern (nur Fahrzeug oder Wohnort würden zählen), den Versicherer aber schon.
 
@@ -346,11 +349,11 @@ Eine andere Typ- oder Regionalklasse allein sagt noch nicht, ob du kündigen kan
 
 Der Stichtag 30. November gilt nur für Verträge, die **zum Kalenderjahr** laufen (Versicherungsjahr = 1. Januar bis 31. Dezember). Das trifft auf die meisten älteren Verträge zu. Aber Vorsicht, drei Fallen:
 
-1. **Unterjährige Verträge:** Viele neuere Verträge starten mit dem Zulassungsdatum und enden entsprechend unterjährig. Dann gilt: **ein Monat Kündigungsfrist vor deinem persönlichen Ablaufdatum** – so steht es in der Regel auch in deinen Versicherungsbedingungen (AKB) – nicht der 30.11. Schau in deine Police, welches Datum dort als Hauptfälligkeit steht.
-2. **Eingang statt Versand:** Die Kündigung muss bis zum Stichtag **beim Versicherer eingegangen** sein. Ein Brief vom 29.11., der am 02.12. Ankommt, ist zu spät. Nutze deshalb das Online-Kundenportal (mit Eingangsbestätigung) oder ein Einschreiben – und plane mindestens eine Woche Puffer ein.
-3. **Abweichende Erstlaufzeiten:** Manche Verträge haben eine Erstlaufzeit bis 30.09. Oder ein anderes Datum. Auch dann zählt dein individuelles Vertragsende plus ein Monat Frist.
+1. **Unterjährige Verträge:** Viele neuere Verträge starten mit dem Zulassungsdatum und enden entsprechend unterjährig. Dann gilt: **ein Monat Kündigungsfrist vor deinem persönlichen Ablaufdatum** (so steht es regelmäßig auch in den Versicherungsbedingungen, AKB), nicht der 30.11. Schau in deine Police, welches Datum dort als Hauptfälligkeit steht.
+2. **Eingang statt Versand:** Die Kündigung muss bis zum Stichtag **beim Versicherer eingegangen** sein. Ein Brief vom 29.11., der am 02.12. ankommt, ist zu spät. Nutze deshalb das Online-Kundenportal (mit Eingangsbestätigung) oder ein Einschreiben und plane mindestens eine Woche Puffer ein.
+3. **Abweichende Erstlaufzeiten:** Manche Verträge haben eine Erstlaufzeit bis 30.09. oder ein anderes Datum. Auch dann zählt dein individuelles Vertragsende plus ein Monat Frist.
 
-**Faustregel für den Kalender:** Vergleiche in KW 42 (Mitte Oktober), entscheide in KW 44 und kündige spätestens in KW 46. Wer erst am 29.11. Startet, vergleicht unter Druck – und übersieht das Kleingedruckte.
+**Faustregel für den Kalender:** Vergleiche in KW 42 (Mitte Oktober), entscheide in KW 44 und kündige spätestens in KW 46. Wer erst am 29.11. startet, vergleicht unter Druck und übersieht das Kleingedruckte.
 
 💡 **Schnell-Tipp von FranksFinanzcheck:** Starte jetzt den kostenlosen Vergleich und finde den besonders günstigen Tarif für dein Fahrzeug: [**Kfz-Versicherung vergleichen**](/go/kfz-versicherung/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
@@ -434,7 +437,7 @@ Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gib
 
 - **Kündigungsfrist:** Einen Monat zum Vertragsende, das bei den allermeisten Verträgen der **31.12.** ist.
 - **Sonderkündigungsrecht bei Beitragserhöhung:** Erhöht der Versicherer die Prämie aufgrund einer Anpassungsklausel ohne entsprechenden Mehrschutz, kannst du nach § 40 VVG innerhalb **eines Monats nach Zugang der Mitteilung** kündigen; die Kündigung wirkt sofort, frühestens aber zum Wirksamwerden der Erhöhung.
-- **Bei Fahrzeugwechsel:** Der Vertrag kann innerhalb von zwei Wochen nach Zulassung des neuen Fahrzeugs gekündigt werden.
+- **Bei Fahrzeugwechsel oder Verkauf:** Meldest du ein anderes Fahrzeug neu an, schließt du über die neue eVB-Nummer direkt einen neuen Vertrag ab; beim Fahrzeugverkauf geht die bestehende Police zunächst auf die Käuferseite über, die innerhalb eines Monats nach dem Erwerb kündigen kann (§ 96 VVG).
 
 ## Vergleichsprozess in sechs Schritten
 
@@ -442,7 +445,7 @@ Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gib
 2. **Aktuelle SF-Klasse, Jahreskilometer, gewünschte SB ermitteln.**
 3. **Vergleichsrechner starten:** [Jetzt Kfz-Versicherung vergleichen](/go/kfz-versicherung/).
 4. **Mindestens 5 bis 10 der besonders günstigen Angebote öffnen** und das Kleingedruckte prüfen (Deckungssumme, Mallorca-Police, Fahrerschutz, Wildunfall mit allen Tieren, grobe Fahrlässigkeit).
-5. **Neuen Vertrag bis 30.11. Abschließen.**
+5. **Neuen Vertrag bis 30.11. abschließen.**
 6. **Alten Vertrag schriftlich kündigen** (am besten per Einschreiben oder über das Kundenportal) und die Kündigungsbestätigung abwarten.
 
 ## Was sollte eine gute Police unbedingt enthalten?
@@ -471,7 +474,7 @@ Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gib
 | Familie, zwei Fahrzeuge, alte Tarife | 600–1.100 € |
 | Premium-Fahrzeug, SF 30, Werkstattneuling | 200–400 € |
 
-*Quellen: eigene Vertragsvergleiche 2016–2026, Stiftung Warentest Finanztest (Ausgaben 2024–2026), CHECK24-Wechselstudie.*
+*Hinweis: Illustrative Orientierungsbandbreiten aus redaktionellen Modellrechnungen (Stand Oktober 2026); die konkrete Ersparnis hängt von Fahrzeug, SF-Klasse, Region und Vorvertrag ab (vgl. Verbraucherzentrale & GDV).*
 
 <!-- premium-length-2026 -->
 
@@ -479,7 +482,7 @@ Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gib
 
 Kfz-Verträge laufen zum Kalenderjahr. Die Kündigung muss meist bis 30.11. raus.
 
-Bei manchen Verträgen gilt schon der 30.09. Wer im Oktober vergleicht, hat Ruhe. Wer am 29.11. Startet, macht Fehler. Dann fehlt die SF-Klasse oder die Werkstattbindung.
+Bei manchen Verträgen gilt schon der 30.09. Wer im Oktober vergleicht, hat Ruhe. Wer am 29.11. startet, macht Fehler. Dann fehlt die SF-Klasse oder die Werkstattbindung.
 
 Übernimm die SF-Klasse aus der Vorversicherung. Schätze sie nicht. Prüfe die Zweitwagenregelung. Halte den Fahrerkreis eng.
 
@@ -497,22 +500,22 @@ Die SF-Klasse ist der größte Hebel. Nach der Regionalklasse. Falsch übertrage
 
 Nimm die Zweitwagenregelung über den Erstvertrag. Setze den Fahrerkreis eng. Gib Kilometer mit Puffer an. Nimm die Werkstattbindung nur, wenn das Netz passt.
 
-Es sollten Werkstätten in deiner Nähe sein. Notiere dir den 30.11. Im Kalender. Vergleiche in KW 42, nicht in KW 48.
+Es sollten Werkstätten in deiner Nähe sein. Notiere dir den 30.11. im Kalender. Vergleiche in KW 42, nicht in KW 48.
 
 ## Fazit: Ein 30-Minuten-Vergleich, der sich auszahlt
 
 Der **Kfz-Versicherungsvergleich** ist ein starker Sparhebel. 30 bis 45 Minuten Arbeit bringen hunderte Euro.
 
-Über mehrere Jahre summiert sich das leicht auf **1.500 bis 4.000 €**. Nutze die Wochen bis zum 30.11 Prüfe deinen Tarif. Wechsle, wenn es sich lohnt.
+Über mehrere Jahre summiert sich das leicht auf **1.500 bis 4.000 €**. Nutze die Wochen bis zum 30.11. und prüfe deinen Tarif. Wechsle, wenn es sich lohnt.
 
 **Weiterlesen:** [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) · [Wohngebäudeversicherung Vergleich: Worauf du achten musst](../../posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/) · [Pillar: Versicherungen](../../pillar/versicherungen/)
 
 ## Häufige Fragen
 
 ### Wann kann ich meine Kfz-Versicherung kündigen?
-Der reguläre Kündigungstermin ist der 30.11. Zum 31.12. Des Jahres – laut Kalender fällt der Stichtag 2026 auf einen Montag, entscheidend ist der Eingang beim Versicherer. Bei einer Beitragserhöhung, einem Fahrzeugwechsel oder einem Schadensfall gibt es zusätzlich ein Sonderkündigungsrecht.
+Der reguläre Kündigungstermin ist der 30.11. zum 31.12. des Jahres – laut Kalender fällt der Stichtag 2026 auf einen Montag, entscheidend ist der Eingang beim Versicherer. Bei einer Beitragserhöhung, einem Fahrzeugverkauf oder einem Schadensfall gibt es zusätzlich ein Sonderkündigungsrecht.
 
-### Was tun, wenn ich den 30.11. Verpasst habe?
+### Was tun, wenn ich den 30.11. verpasst habe?
 Prüfe zuerst die Beitragsmitteilung. Bei einer Prämienerhöhung aufgrund einer Anpassungsklausel ohne entsprechenden Mehrschutz kann § 40 VVG die Kündigung innerhalb eines Monats nach Zugang ermöglichen. Sie wirkt sofort, frühestens aber zum Wirksamwerden der Erhöhung. Prüfe außerdem deine Vertragslaufzeit und weitere Kündigungsgründe.
 
 ### Ändert eine neue Regionalklasse automatisch meinen Beitrag?

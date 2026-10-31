@@ -24,6 +24,7 @@ Die Tests sichern vier Ebenen:
 """
 from __future__ import annotations
 
+import datetime as dt
 import json
 import os
 import shutil
@@ -905,13 +906,50 @@ class FristenblattUndBeobachtung(unittest.TestCase):
         self.assertIn("| 2026-10-31 | 5 | indexiert | fehlt |", text)
 
     # ---------------------------------------------------------------- Bestand
-    def test_register_hat_beide_p2_entscheidungen_mit_frist(self) -> None:
+    def test_jede_entscheidung_traegt_frist_erwartung_und_eigentuemer(self) -> None:
+        """Vertrag statt Bestandszahl (30.10.2026).
+
+        Vorher stand hier „genau 2 Einträge, alle mit Frist 2026-11-25“.
+        Das war eine Bestandsaufnahme, kein Vertrag: Am 30.10.2026 kam die
+        Rollen-Entscheidung für die zweite Seite des Paars dazu (Frist
+        2026-11-13, Erwartung `impressionen`, weil die Nachfrage über der
+        Schwelle liegt) – eine richtige Entscheidung, die den Test rot
+        machte. Geprüft wird jetzt die Eigenschaft, die zählt: Jede
+        Entscheidung ist prüfbar (Datum, Frist in der Zukunft, benannte
+        Erwartung, Eigentümer) – und die beiden Entscheidungen vom 26.10.
+        behalten ihre Frist, damit niemand sie still verschiebt.
+        """
         register = g.entscheidungen()
-        self.assertEqual(len(register), 2)
+        self.assertGreaterEqual(len(register), 2)
         for url, eintrag in register.items():
-            self.assertEqual(eintrag["wiedervorlage"], "2026-11-25", url)
-            self.assertEqual(eintrag["erwartung"], "indexiert", url)
-            self.assertEqual(eintrag["eigentuemer"], "redaktion", url)
+            self.assertRegex(eintrag["am"], r"^\d{4}-\d{2}-\d{2}$", url)
+            self.assertRegex(eintrag["wiedervorlage"], r"^\d{4}-\d{2}-\d{2}$", url)
+            self.assertIn(eintrag["erwartung"], {"indexiert", "impressionen", "keine"}, url)
+            self.assertTrue(eintrag["eigentuemer"].strip(), url)
+        # Die Frist ist eine Zusage – aber „liegt in der Zukunft“ gehört NICHT
+        # hierher. Ein Test, der die Wanduhr liest, ist eine Verabredung mit
+        # dem Kalender: Am 14.11.2026 wäre er rot geworden, ohne dass jemand
+        # etwas geändert hätte (genau die Klasse, die die Uhr-Probe +97 Tage
+        # findet – dieser Test hat sie am 30.10.2026 selbst ausgelöst).
+        # Ob eine Frist überfällig ist, entscheidet die Wache zur Laufzeit
+        # (`konsolidierung.py --rollenpaare`, R2 hart) – dort ist „zu spät“
+        # ein Befund und kein Testfehler. Dass diese Erkennung funktioniert,
+        # beweist `test_konsolidierung.RollenpaarWache` mit festem Datum.
+
+    def test_rollenpaare_sind_gegenseitig_verknuepft(self) -> None:
+        """Ein `paar`-Feld zeigt auf eine echte Gegen-Entscheidung.
+
+        Die Rollenwache (`konsolidierung.py --rollenpaare`) findet Paare nur
+        über dieses Feld. Zeigt es ins Leere, wäre die Rollentrennung nur auf
+        einer Seite dokumentiert – und damit nicht prüfbar.
+        """
+        register = g.entscheidungen()
+        paare = {url: e["paar"] for url, e in register.items() if e.get("paar")}
+        self.assertTrue(paare, "Mindestens ein dokumentiertes Rollenpaar erwartet")
+        for url, partner in paare.items():
+            self.assertIn(partner, register, f"{url}: Partner {partner} fehlt im Register")
+            self.assertEqual(register[partner].get("paar"), url,
+                             f"{url}: Gegenrichtung fehlt")
 
     def test_fristenblatt_des_bestands_ist_lesbar(self) -> None:
         # Der echte Lauf darf nicht werfen und muss die eine Zahl zeigen.

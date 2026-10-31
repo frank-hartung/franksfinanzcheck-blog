@@ -1,93 +1,112 @@
 {
   "version": 1,
-  "generated_at": "2026-10-30T11:36:18Z",
+  "generated_at": "2026-10-31T09:46:11Z",
   "modus": "kandidaten",
-  "commit": "369800da1aa95d4346ee186f0c37cfd80a98fe8f",
+  "commit": "3b2f1fb7fdce329ba7762073eaa0e468045ffa90",
   "kapazitaet": {
-    "stichtag": "2026-10-30",
+    "stichtag": "2026-10-31",
     "artikel": 110,
-    "faellig": 11,
-    "ueberfaellig": 10,
+    "faellig": 9,
+    "ueberfaellig": 8,
     "ueberfaellig_max_tage": 3,
     "naechste_frist": {
       "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
       "frist": "2026-11-03",
-      "restlaufzeit": 4
+      "restlaufzeit": 3
     },
-    "budget": 3,
+    "budget": 4,
     "laeufe_je_tag": 1.0,
-    "kapazitaet_je_tag": 3.0,
+    "kapazitaet_je_tag": 4.0,
     "bedarf_je_tag": 2.678,
     "bedarf_je_woche": 18.7,
-    "deckung_prozent": 112.0,
-    "horizont_tage": 60,
+    "deckung_prozent": 149.4,
+    "horizont_tage": 120,
     "vorlauf_tage": 7,
     "nachhol_frist_tage": 7,
-    "abbau_tage": 4,
-    "verletzungen_alt": 8,
+    "abbau_tage": 2,
+    "verletzungen_alt": 9,
     "verletzungen_neu": 0,
+    "verletzungen_folge": 0,
+    "verletzungen_folge_seiten": 0,
     "verletzungen": [
+      {
+        "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+        "titel": "Sicher heizen: Was sie abdeckt und wie lange sie läuft",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 3,
+        "vorher_faellig": true,
+        "folgeprüfung": false
+      },
       {
         "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
         "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 2,
-        "vorher_faellig": true
+        "tage_zu_spaet": 3,
+        "vorher_faellig": true,
+        "folgeprüfung": false
       },
       {
         "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
         "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 2,
-        "vorher_faellig": true
+        "tage_zu_spaet": 3,
+        "vorher_faellig": true,
+        "folgeprüfung": false
       },
       {
         "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
         "titel": "Preisgarantie Gas: Was bei Preiserhöhung hilft",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 2,
-        "vorher_faellig": true
+        "tage_zu_spaet": 3,
+        "vorher_faellig": true,
+        "folgeprüfung": false
       },
       {
         "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
         "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 2,
-        "vorher_faellig": true
+        "tage_zu_spaet": 3,
+        "vorher_faellig": true,
+        "folgeprüfung": false
       },
       {
         "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
         "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 2,
-        "vorher_faellig": true
+        "tage_zu_spaet": 3,
+        "vorher_faellig": true,
+        "folgeprüfung": false
       },
       {
         "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
         "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 2,
-        "vorher_faellig": true
+        "tage_zu_spaet": 3,
+        "vorher_faellig": true,
+        "folgeprüfung": false
       },
       {
         "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
         "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 2,
-        "vorher_faellig": true
+        "tage_zu_spaet": 3,
+        "vorher_faellig": true,
+        "folgeprüfung": false
       },
       {
         "slug": "2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden",
         "titel": "Kostenloses Girokonto ohne Gebühren finden",
-        "frist": "2026-10-30",
+        "frist": "2026-10-31",
         "tage_zu_spaet": 1,
-        "vorher_faellig": true
+        "vorher_faellig": true,
+        "folgeprüfung": false
       }
     ],
-    "offen_im_horizont": 8,
+    "offen_im_horizont": 110,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
-    "empfohlenes_budget": 3,
+    "sockel": 3,
+    "empfohlenes_budget": 4,
     "empfehlung_erreicht": true,
     "hartes_limit": 10
   },
@@ -161,7 +180,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
-      "sha256": "8a23bff63cc1022bdf3d92a531e95489b70f5628190d471c8b8f64c2eb4d0098",
+      "sha256": "13944ef778846474b423adeec99df03566b4f818a0dc6f9169a891df90f7a59b",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -196,12 +215,12 @@
     },
     "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": {
       "sha256": "0c8c9e33367ef2dff83a4d6a2ea8d807fd8f0a90240811c9b5761586297f1fb4",
-      "urteil": "warnung",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "warnung",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -246,7 +265,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
-      "sha256": "65b7c8605a6d40966d06408a1e8f356b88c7498cd70c99e32a4aa52e5b27c2bd",
+      "sha256": "299fdd8db663a78af932f7989a52c10538079362bb99c70d10ee1b60cb5fd638",
       "urteil": "freigabe-reif",
       "risikoklasse": "erhoeht",
       "dimensionen": {
@@ -280,7 +299,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": {
-      "sha256": "6c9d2a078b5bc50e3944c08a8c6f8b728ff2f950ac27f3e594c9ae0803848e24",
+      "sha256": "59a778c169a0bf5a9003c0a7f40f8f3d0da75696eea30b75969e321ff7ee7c98",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -297,7 +316,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
-      "sha256": "84c8d3dfaa07751b66041bf23a4e2c4864e7434b13e4dfc143621447ecff35fe",
+      "sha256": "4b99ee8fcda7ceed0d815637531daebbdf6b65b49cbbc32a9fbcda08d5b12963",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -332,12 +351,12 @@
     },
     "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
       "sha256": "4567f782095f1bb2246588c34e1b0a5398644fac7bbf91af176eecf6f95e6654",
-      "urteil": "warnung",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "warnung",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -348,7 +367,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "a9fa9e7407125f65010f90b9b43cff0a52c75ad0f3c889b5b97f6a1098fdecd5",
+      "sha256": "610dfd9c9cf7ad21e4d6c8483d657744d39a411f3a7c2f9c5f5411eb3b2d03a4",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -365,7 +384,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
-      "sha256": "4bf2411e61d0fd7aa9f477541d9d6fcaca2014b99763e471139adcc087cea7d7",
+      "sha256": "fd6b640957c69ba88455a277213e4497d7d98b5a7d7975736879b2095514c038",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -382,7 +401,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
-      "sha256": "89a108108ab83fe72e90c94102fe4406e0db939d9b63ae6f3e9600c27a289ca2",
+      "sha256": "46ecb69bf1992ab0cdd306acc6b9d652e31f275ed9f861caaef14e807f149339",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -413,6 +432,23 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
+      "siegel_drift": "unverändert"
+    },
+    "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen": {
+      "sha256": "653d2819ec9dfe3203027c156da216aa65d2b979a5d5a6715e7bd3c62232f0cb",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "hoch",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "bestanden",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-12-14",
       "siegel_drift": "unverändert"
     },
     "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
@@ -671,15 +707,15 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
-      "sha256": "043f64009e708f1fbbcdcd309de4c390522421a4e43b65de95db0c6d2602f64a",
-      "urteil": "freigabe-reif",
+      "sha256": "53790cadd7328f641de8c14746eafe971c0be6d55908b31d1a09b7df3e5c7c00",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
@@ -994,7 +1030,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
-      "sha256": "962d154001280346385742815956b0ef11c4f02d61002d6db19f9ee5b3f33e66",
+      "sha256": "96f82ae3c3adfcbcb60210f6550f675a0d375a02fc1502649ba03b34dab20d13",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1130,7 +1166,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt": {
-      "sha256": "487a2ae2fb88735a7548da23d3813ebd4366777db88c1510ede703aeadbb9e17",
+      "sha256": "899e7c63fc94f4cd2c351b0c3af3bbd41f245f234a59d097baa76cf42eb424ec",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1147,7 +1183,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
-      "sha256": "8e8f895e975b059b1012aad2e2af92b56cd1e5f5453e5d4f0c715c2dd4af6fe2",
+      "sha256": "5bdfc3ec90e9d1d1214ada206a25e06b57461f027b5c620c117aab0629d8de86",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1249,7 +1285,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen": {
-      "sha256": "c8d65a3f09b02d98255a5dade5fe46eef8d2eb1b22c1322336c3a5903be01287",
+      "sha256": "be6610b89f45498aa9ee259d2ce3eb2e290b7db6707c581a8f849e4817b8e43f",
       "urteil": "warnung",
       "risikoklasse": "erhoeht",
       "dimensionen": {
@@ -1263,7 +1299,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
       "sha256": "ac2b9a487ae92bc6c647e2cf6e6a887a722e3b9e1670d6b1835c6ef4d5f8cab6",
@@ -1314,7 +1350,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-25",
-      "siegel_drift": "neu versiegelt"
+      "siegel_drift": "unverändert"
     }
   }
 }

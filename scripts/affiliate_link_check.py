@@ -487,6 +487,9 @@ def fix_post(post, dry=True):
     pattern = re.compile(r"https://a\.check24\.net/misc/click\.php\?pid=80968&aid=18(?![&\w])")
     new_content, n = pattern.subn(lambda m: expected_url, content)
     if n:
+        import editorial_review_gate as _ymyl_gate
+        if _ymyl_gate.automatic_change_findings(content, new_content):
+            return 0
         if not dry:
             open(post["path"], "w", encoding="utf-8").write(new_content)
         return n

@@ -1,0 +1,135 @@
+name: Sprach-Qualitäts-Pipeline (Highend, Profi-Agentur)
+
+# ============================================================================
+#  SPRACH-QUALITÄTS-PIPELINE – kombinierter Highend-Durchlauf aller
+#  sprachlichen Engines für FranksFinanzcheck (de-DE, YMYL).
+#
+#  Führt in fixer Reihenfolge aus:
+#    1. Selbsttests aller Engines (Sabotage-Schutz, fail-closed, Exit 2)
+#    2. grammar_check (LT1–LT4)        – Grammatik/Rechtschreibung offline
+#    3. hardcases_guard (H1–H9)        – deutsche Fest-Fehler
+#    4. zeit_rechtschreibung           – ZEIT-Niveau (Premium/offline)
+#    5. sprachglatt (DW1–DW9 + V1)     – Glättung (DeepL-Write-Nachbau)
+#    6. lektor_guard (L1–L12)          – Verlags-Lektorat
+#    7. readability_check              – Flesch-Amstad, Satzlänge, …
+#
+#  Strict-Modus: Exit 1 bei offenen kritischen Funden → Workflow rot.
+#  Reports werden als Workflow-Artefakte gespeichert; History bleibt versioniert.
+#
+#  Zeitplan: täglich 04:30 UTC (nach der Redaktions-Politur 03:45 UTC).
+#  Manuell auslösbar: Actions → „Sprach-Qualitäts-Pipeline“ → Run.
+# ============================================================================
+
+on:
+  schedule:
+    - cron: "30 4 * * *"   # täglich 04:30 UTC
+  workflow_dispatch:
+    inputs:
+      modus:
+        description: "report (Default) | fix | strict"
+        required: false
+        default: "report"
+      scope:
+        description: "bestand (alle Artikel) | new-only (heute) | file (einzelner Pfad)"
+        required: false
+        default: "bestand"
+      file_pfad:
+        description: "Pfad zum einzelnen Artikel (nur bei scope=file)"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+  issues: write   # für automatische Issue-Erstellung bei Qualitätsverstoß
+
+concurrency:
+  group: sprach-qualitaet-pipeline
+  cancel-in-progress: false
+
+jobs:
+  sprach-qualitaet:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Python-Umgebung einrichten
+        uses: actions/setup-python@61d628b9a742929cda3c2e491831c06da9874835 # v5.1.1
+        with:
+          python-version: "3.11"
+
+      - name: Abhängigkeiten installieren (gepinnt, --require-hashes)
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install --require-hashes -r requirements-ci.txt
+
+      - name: Copy-Editing-Gate (Selbsttest + alle Engines)
+        id: gate
+        run: |
+          ARGS="--report COPY-EDITING-REPORT.md --json"
+          if [ "${{ inputs.modus }}" = "fix" ]; then ARGS="$ARGS --fix"; fi
+          if [ "${{ inputs.modus }}" = "strict" ]; then ARGS="$ARGS --strict"; fi
+          if [ "${{ inputs.scope }}" = "new-only" ]; then ARGS="$ARGS --new-only"; fi
+          if [ "${{ inputs.scope }}" = "file" ] && [ -n "${{ inputs.file_pfad }}" ]; then
+            ARGS="$ARGS --file ${{ inputs.file_pfad }}"
+          fi
+          echo ">>> copy_editing_gate.py $ARGS"
+          python3 scripts/copy_editing_gate.py $ARGS || true
+          echo "gate_exit_code=$?" >> $GITHUB_OUTPUT
+
+      - name: Qualitäts-Status auswerten
+        id: status
+        run: |
+          GATE_EXIT="${{ steps.gate.outputs.gate_exit_code }}"
+          if [ "$GATE_EXIT" = "2" ]; then
+            echo "🛑 Selbsttest rot – Sabotage verhindert, Pipeline abgebrochen."
+            echo "qualitaet=sabotage" >> $GITHUB_OUTPUT
+            exit 2
+          elif [ "$GATE_EXIT" = "1" ] && [ "${{ inputs.modus }}" = "strict" ]; then
+            echo "⚠️ Strict-Modus: offene kritische Funde – Qualitätsverstoß."
+            echo "qualitaet=verstoß" >> $GITHUB_OUTPUT
+          else
+            echo "✅ Pipeline durchgelaufen (Modus: ${{ inputs.modus }})."
+            echo "qualitaet=ok" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Issue bei Qualitätsverstoß eröffnen (strict)
+        if: steps.status.outputs.qualitaet == 'verstoß'
+        uses: peter-evans/create-issue-from-file@959985ac0a2ee023b3cc256977ec1a093aa4a0bf # v4.0.1
+        with:
+          title: "🚨 Sprach-Qualität: offene kritische Funde (Copy-Editing-Gate)"
+          content-filepath: COPY-EDITING-REPORT.md
+          labels: ["qualitaet", "sprach-qualitaet", "automatisiert"]
+          assignees: ""
+
+      - name: Reports als Artefakte sichern
+        if: always()
+        uses: actions/upload-artifact@49538c08a0826eef0d640c58a59e7a5e2b50aaef # v4.4.3
+        with:
+          name: sprach-qualitaet-reports
+          path: |
+            COPY-EDITING-REPORT.md
+            .copy_editing_report.json
+            GRAMMATIK-REPORT.md
+            .grammar_report.json
+            HARDCASES-REPORT.md
+            ZEIT-RECHTSCHREIBUNG-REPORT.md
+            .zeit_rechtschreibung_report.json
+            SPRACHGLATT-REPORT.md
+            .sprachglatt_report.json
+            LEKTOR-REPORT.md
+          retention-days: 30
+
+      - name: History-Commit (versioniert, dedupliziert)
+        if: steps.status.outputs.qualitaet != 'sabotage'
+        run: |
+          git config user.name "franksfinanzcheck-bot"
+          git config user.email "bot@franksfinanzcheck.de"
+          git add data/copy_editing_history.jsonl data/hardcases_history.jsonl data/sprachglatt_history.jsonl data/zeit_rechtschreibung_history.jsonl data/grammar_whitelist.txt 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(sprache): Copy-Editing-Highend History-Update [skip ci]" || true
+            git push || true
+          fi

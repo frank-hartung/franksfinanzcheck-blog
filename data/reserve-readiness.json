@@ -2,7 +2,7 @@
   "target": 6,
   "ready": 5,
   "pool_size": 6,
-  "generated_at": "2026-10-30T12:54:43Z",
+  "generated_at": "2026-10-30T19:20:55Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
@@ -41,9 +41,9 @@
     {
       "slug": "2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
       "ready": false,
-      "sha256": "01e7614e698db09f86d8d4ce9ce29de37600b567cf832f83fbb4e765d59aae90",
+      "sha256": "aa5a6542b5f6c77da6d59b14f0a6c704d0978b6c8fc48cbe8eb7a4423cbecd13",
       "flesch": 67.5,
-      "measured_at": "2026-10-30T12:52:11Z",
+      "measured_at": "2026-10-30T19:20:55Z",
       "reason": "Reserve-Qualitäts-Gate: RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Nach ein bis zwei Jahren zerbröckelt das Material oft.",
       "details": [
         "RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Nach ein bis zwei Jahren zerbröckelt das Material oft."
@@ -113,7 +113,7 @@
   ],
   "measurement": {
     "kind": "partial",
-    "run_id": "41058324288",
+    "run_id": "41114151470",
     "run_attempt": "1"
   },
   "ausgebucht": {
@@ -124,12 +124,9 @@
     "tool": "scripts/reserve_recert.py"
   },
   "recert": {
-    "at": "2026-10-30T12:54:43Z",
+    "at": "2026-10-30T19:20:55Z",
     "renewed": [
-      "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "2026-10-30-energieeffiziente-geraete-so-sinken-deine-fixkosten",
-      "2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-      "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem"
+      "2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen"
     ],
     "tool": "scripts/reserve_recert.py"
   }

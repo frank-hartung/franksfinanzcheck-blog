@@ -380,7 +380,12 @@ def main() -> None:
         r = res["stats"]["R"] + res["stats"]["KI"]
         if res["text"] is not None and r > 0 and DO_FIX:
             path = p
-            if res["text"] != path.read_text(encoding="utf-8"):
+            old_raw = path.read_text(encoding="utf-8")
+            if res["text"] != old_raw:
+                import editorial_review_gate as _ymyl_gate
+                if _ymyl_gate.automatic_change_findings(old_raw, res["text"]):
+                    findings.append((res["file"], res["stats"]))
+                    continue
                 path.write_text(res["text"], encoding="utf-8")
                 if not DRY_RUN:
                     touched.append((res["file"], res["stats"]))

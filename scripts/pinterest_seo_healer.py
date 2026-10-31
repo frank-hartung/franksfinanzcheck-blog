@@ -635,7 +635,11 @@ def heal_article(a: dict) -> tuple[bool, list[str]]:
             title = title[: TITLE_MAX - 1].rstrip() + "…"
             title = ensure_colon_title(strip_ellipsis(title))
     title = trim_hanging_prep(title)
-    if title != orig_title:
+    import editorial_review_gate as _ymyl_gate
+    ymyl_geschuetzt = _ymyl_gate.automatic_write_protected(a["path"])
+    if ymyl_geschuetzt:
+        title = orig_title
+    elif title != orig_title:
         content = fm_set(content, "title", title)
         actions.append(f"Titel → {title}")
 
@@ -711,7 +715,7 @@ def heal_article(a: dict) -> tuple[bool, list[str]]:
 
     # H2 Description
     desc = a["description"]
-    if len(desc) < DESC_OPT_MIN or len(desc) > DESC_MAX or not desc:
+    if not ymyl_geschuetzt and (len(desc) < DESC_OPT_MIN or len(desc) > DESC_MAX or not desc):
         new_desc = extend_description(desc, kws, title)
         if new_desc != desc:
             content = fm_set(content, "description", new_desc)
@@ -791,6 +795,8 @@ def heal_article(a: dict) -> tuple[bool, list[str]]:
 
     changed = content != a["content"]
     if changed:
+        if _ymyl_gate.automatic_change_findings(a["content"], content):
+            return False, ["YMYL-Schreibschutz: versiegelte Felder bleiben unberührt"]
         open(a["path"], "w", encoding="utf-8").write(content)
         a["content"] = content
         a["title"] = title

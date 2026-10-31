@@ -1,18 +1,18 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-10-30 12:55 UTC  
+**Stand:** 2026-10-30 23:36 UTC  
 **Stufe:** OK  
-**Befund:** Letzter Publikationstag (2026-10-30): 2 Artikel – Ziel erfüllt. – Bestand: 4 von Gates gehalten (ältester 2 Tage: ymyl-review: SEO-Description überarbeitet; Fachprüfung der neuen Fassung ausstehend.)
+**Befund:** Letzter Publikationstag (2026-10-30): 3 Artikel – Ziel erfüllt. – Bestand: 3 förderfähig in der Re-Queue
 
 | Kennzahl | Wert |
 |---|---|
 | Heute | 2026-10-30 (Freitag) |
 | Publikationstag heute | ja |
-| Artikel letzter Publikationstag (2026-10-30) | 2 |
+| Artikel letzter Publikationstag (2026-10-30) | 3 |
 | Letzter Artikel überhaupt | 2026-10-30 (0 Tage her) |
-| Live-Artikel gesamt | 72 |
-| Förderfähig in der Re-Queue | 0 |
-| Von Gates gehalten (braucht Korrektur) | 4 |
+| Live-Artikel gesamt | 73 |
+| Förderfähig in der Re-Queue | 3 |
+| Von Gates gehalten (braucht Korrektur) | 0 |
 | Mindestziel/Tag | 2 |
 
 _Wird bei jedem Lauf aktualisiert (auch bei Leerlauf) – diese Datei kann nicht einfrieren._

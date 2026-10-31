@@ -300,6 +300,10 @@ def set_lastmod(a, new_body):
     if len(parts) == 3:
         content = join_article(parts[1], new_body, parts[0])
 
+    old_raw = open(a["path"], encoding="utf-8").read()
+    import editorial_review_gate as _ymyl_gate
+    if _ymyl_gate.automatic_change_findings(old_raw, content):
+        return None
     open(a["path"], "w", encoding="utf-8").write(content)
     return today_iso
 
@@ -325,9 +329,12 @@ def main():
         except Exception:
             tracking = {}
 
+    import editorial_review_gate as _ymyl_gate
     # Priorisieren
     scored = []
     for a in pages:
+        if _ymyl_gate.automatic_write_protected(a["path"]):
+            continue
         s = priority_score(a, links, tracking)
         scored.append((s, a))
     scored.sort(key=lambda x: -x[0])
@@ -362,6 +369,9 @@ def main():
             failed.append(a["slug"])
             continue
         lastmod = set_lastmod(a, new_body)
+        if not lastmod:
+            failed.append(a["slug"])
+            continue
         tracking[a["slug"]] = TODAY.isoformat()
         updated.append({"slug": a["slug"], "title": a["title"], "date": lastmod})
         print(f"  ✅ Aktualisiert (lastmod {lastmod})")

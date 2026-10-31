@@ -1030,11 +1030,14 @@ def main() -> int:
         if DO_FIX:
             new_body, n, removed = auto_fix(str(p.relative_to(ROOT)), body)
             if n:
-                p.write_text(raw.replace(body, new_body), encoding="utf-8")
-                fixed_any = True
-                for _, d in removed:
-                    all_finds.append((str(p.relative_to(ROOT)), "FIX", d, 0))
-                print(f"  ✂ {p.relative_to(ROOT)}: {n} Duplikat(e) entfernt")
+                neu_raw = raw.replace(body, new_body)
+                import editorial_review_gate as _ymyl_gate
+                if not _ymyl_gate.automatic_change_findings(raw, neu_raw):
+                    p.write_text(neu_raw, encoding="utf-8")
+                    fixed_any = True
+                    for _, d in removed:
+                        all_finds.append((str(p.relative_to(ROOT)), "FIX", d, 0))
+                    print(f"  ✂ {p.relative_to(ROOT)}: {n} Duplikat(e) entfernt")
         all_finds += check_article(p, paths)
 
     # D3/D4 über Artikel hinweg (einmalig, report-only; Sicherheit:
