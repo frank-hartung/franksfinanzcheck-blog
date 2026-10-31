@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:telegram:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im
  -ueberblick:takeaway:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261031T095231Z
+DTSTAMP:20261031T110000Z
 DTSTART:20261101T060000Z
 DTEND:20261101T061500Z
 SUMMARY:Telegram (Kanal): Stromkosten senken: Clevere Haushaltsgeräte 
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkos
  ten-falle:vergleich:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261031T095231Z
+DTSTAMP:20261031T110000Z
 DTSTART:20261108T060000Z
 DTEND:20261108T061500Z
 SUMMARY:Telegram (Kanal): VPN Zuhause: Schutzschild oder unnötige Fixk
@@ -38,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sof
  ort-senken:takeaway:2026-11-14@franksfinanzcheck.de
-DTSTAMP:20261031T095231Z
+DTSTAMP:20261031T110000Z
 DTSTART:20261114T060000Z
 DTEND:20261114T061500Z
 SUMMARY:Telegram (Kanal): Kleine Energiespar‑Tricks: Deine Kosten sofo

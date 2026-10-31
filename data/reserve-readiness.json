@@ -1,6 +1,6 @@
 {
   "target": 6,
-  "ready": 5,
+  "ready": 4,
   "pool_size": 6,
   "generated_at": "2026-10-31T09:58:42Z",
   "candidates": [
@@ -23,20 +23,10 @@
     },
     {
       "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "ready": true,
+      "ready": false,
       "sha256": "71638155665f0bfe9ab421f2a1ad937e911e26476e9a2afaeb47e53516031592",
-      "flesch": 74.0,
       "measured_at": "2026-10-31T09:56:18Z",
-      "score": 0.946,
-      "parts": {
-        "spelling": 0.98,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 0.5,
-        "readability": 1.0
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar",

@@ -1,5 +1,5 @@
 {
- "stand": "2026-10-30T13:48:40.869967+02:00",
+ "stand": "2026-10-31T13:23:22.793498+02:00",
  "rankings": [
   {
    "anfrage": "DSL Anbieter Vergleich",
@@ -83,16 +83,6 @@
   },
   {
    "anfrage": "SF-Klasse retten",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Schutz",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -193,6 +183,16 @@
   },
   {
    "anfrage": "Solaranlage Kosten",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Solaranlage Zuschuss",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,

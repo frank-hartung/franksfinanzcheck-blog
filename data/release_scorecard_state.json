@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "generated_at": "2026-10-31T10:20:50Z",
+  "generated_at": "2026-10-31T12:43:36Z",
   "modus": "kandidaten",
-  "commit": "260860de99ee7ec72bf4907c66223ee183560c25",
+  "commit": "22a19c6e43a9af4da574323b3df8fa6753966ff9",
   "kapazitaet": {
     "stichtag": "2026-10-31",
     "artikel": 110,
-    "faellig": 9,
+    "faellig": 8,
     "ueberfaellig": 8,
     "ueberfaellig_max_tage": 3,
     "naechste_frist": {
@@ -23,8 +23,8 @@
     "horizont_tage": 120,
     "vorlauf_tage": 7,
     "nachhol_frist_tage": 7,
-    "abbau_tage": 2,
-    "verletzungen_alt": 9,
+    "abbau_tage": 1,
+    "verletzungen_alt": 8,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
@@ -90,14 +90,6 @@
         "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
         "frist": "2026-10-28",
         "tage_zu_spaet": 3,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      },
-      {
-        "slug": "2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden",
-        "titel": "Kostenloses Girokonto ohne Gebühren finden",
-        "frist": "2026-10-31",
-        "tage_zu_spaet": 1,
         "vorher_faellig": true,
         "folgeprüfung": false
       }
@@ -381,7 +373,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "fd6b640957c69ba88455a277213e4497d7d98b5a7d7975736879b2095514c038",
@@ -401,7 +393,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
-      "sha256": "46ecb69bf1992ab0cdd306acc6b9d652e31f275ed9f861caaef14e807f149339",
+      "sha256": "2ecbcc39d5fc6e6dced5bbad70c2f71fe1993ae248e789220f995b01a264caad",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -435,7 +427,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen": {
-      "sha256": "653d2819ec9dfe3203027c156da216aa65d2b979a5d5a6715e7bd3c62232f0cb",
+      "sha256": "6383d21f4ce8ac0e3665fb8da9d66a7c706220519fccb515f99e015f30e4b513",
       "urteil": "freigabe-reif",
       "risikoklasse": "hoch",
       "dimensionen": {
@@ -449,7 +441,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-14",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
       "sha256": "cebe1c665b11df10f24940c44dad8f770bfc2aaec981af0f8bbdb0fd109e2dd7",
@@ -656,7 +648,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": {
-      "sha256": "9540a8febb8b0826ce0e4d5fe595bc27540ce736b91a0092a308dccf45bae91a",
+      "sha256": "ca5ded901a64f2a6c39915a46a6b99b2e837ef41886eb16a87299531c35db7fe",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -707,21 +699,21 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
-      "sha256": "53790cadd7328f641de8c14746eafe971c0be6d55908b31d1a09b7df3e5c7c00",
-      "urteil": "blockiert",
+      "sha256": "60102e6e0f699e0ad42cf3b35d1f806cb58a61292fca514459f7a0b7c5790e08",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
       "sha256": "e0d24fa143ec3d60806004d1fcb5d6ed621c72063dbe584002d7f6deb219a108",
@@ -928,7 +920,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
-      "sha256": "85164728247fee94d6de9f8500fe6cd05ceb76f76dc14ebb37c48596e16bca3e",
+      "sha256": "f249651a24ac564a5449fc0831413846325c8631668a7929dcd044a01d6e140c",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1200,7 +1192,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
-      "sha256": "096d4b713e0f8afe77f850eb566461012de2429d92c1d918ffcfba585b8fa178",
+      "sha256": "39e973d8bf8064c55451d6b681f32d2a69bfc0e5e4969c2349932d56f459696f",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1268,7 +1260,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks": {
-      "sha256": "a1393ed2d7bfc4fddbeebce9a618a361060915b5356d3f91e5f880dd973ce2a2",
+      "sha256": "94ac5936dafedf78047a14701fbee6ad4fe22ba220fa001baba3092db31abb5c",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1285,7 +1277,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen": {
-      "sha256": "be6610b89f45498aa9ee259d2ce3eb2e290b7db6707c581a8f849e4817b8e43f",
+      "sha256": "5d509269a30cfef415e7806dc0efcbfa010d53daf5385fa1da58d2218ed0943a",
       "urteil": "warnung",
       "risikoklasse": "erhoeht",
       "dimensionen": {
@@ -1319,7 +1311,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht": {
-      "sha256": "9831b3fc0b667d7ddb84257c1115ef36eb76abdab9c014a3b3c922e087fba39b",
+      "sha256": "900e5195f0b0c18e2199b82cacddb2eb1f7d767862410b15fccf6e05dae20eaf",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {

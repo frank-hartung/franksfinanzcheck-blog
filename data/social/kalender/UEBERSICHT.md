@@ -1,6 +1,6 @@
 # 🗓️ Social-Media-Veröffentlichungskalender – Übersicht
 
-> Automatisch aktualisiert: 31.10.2026 10:52 (Europe/Berlin)
+> Automatisch aktualisiert: 31.10.2026 12:00 (Europe/Berlin)
 
 Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffentlichungskalender – als lesbare Markdown-Datei und als abonnierbare `.ics`-Datei fürs Handy, Outlook, Google- oder Apple-Kalender.
 
@@ -210,6 +210,7 @@ Für **jeden Kanal** gibt es hier einen eigenen, laufend aktualisierten Veröffe
 - **09:15** ⏳ Threads · _nutzen_ · Lastschrift und Dauerauftrag: Was du prüfen solltest
 - **09:45** ⏳ Facebook (Seite) · _vergleich_ · WLAN verbessern: So bringst du stabilen Speed in jede Ecke
 - **10:15** ⏳ Pinterest · _takeaway_ · DSL-Vergleich: So findest du den günstigsten Internettarif
+- **11:45** ⏳ Instagram · _nutzen_ · DSL-Wechselbonus sichern: So sparst du beim Internetvertrag
 
 ---
 *Legende: ⏳ geplant · ✅ veröffentlicht · ⚪ Standby (Zugang fehlt) · 🚫 zurückgestellt.*  
