@@ -165,13 +165,18 @@ jobs:
         ihr Messwerkzeug fehlt. Genau daran wurde das PR-Gate am 31.10.2026
         rot, nachdem die Wache versehentlich VOR der PyYAML-Installation
         stand.
+
+        WIE PyYAML HIER FEHLT (Lehre aus genau diesem Lauf): Ein
+        `sys.meta_path`-Finder mit `find_module`/`load_module` ist die
+        Legacy-API – Python 3.12 hat sie entfernt, und in der CI läuft 3.12.
+        Der Test war dort rot, lokal (3.11) grün. Jetzt wird das Modul nicht
+        simuliert, sondern der Import ueber einen Eintrag in `sys.modules`
+        auf `None` gesetzt: das ist versionfest und wirkt bei JEDEM
+        `import yaml`, auch bei einem spaeteren Neu-Import.
         """
         skript = (
             "import runpy, sys\n"
-            "class B:\n"
-            "    def find_module(self, n, p=None): return self if n == 'yaml' else None\n"
-            "    def load_module(self, n): raise ImportError(n)\n"
-            "sys.meta_path.insert(0, B())\n"
+            "sys.modules['yaml'] = None\n"
             "sys.argv = ['w', '--selftest']\n"
             f"runpy.run_path(r'{SKRIPT}', run_name='__main__')\n"
         )
