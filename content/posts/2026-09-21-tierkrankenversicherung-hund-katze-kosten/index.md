@@ -17,7 +17,7 @@ kurzantwort: "Eine Tierkrankenversicherung kann sich lohnen, wenn du hohe Tierar
 social_posted: true
 keywords: ["Tierkrankenversicherung Hund", "Tierkrankenversicherung Katze", "Tierarztkosten absichern", "Haustier Versicherung", "OP Versicherung Tier", "Tierkrankenversicherung für Hund & Katze", "Tierkrankenversicherung", "realistisch"]
 pin_title: "Tierkrankenversicherung: Hund & Katze richtig einschätzen"
-pin_description: "*Werbung | Tierkrankenversicherung für Hund und Katze im ehrlichen Kosten-Check: OP-Schutz vs. Vollschutz, Notdienst-Gebühren nach GOT und Tarif-Fallen. #tierarztkostenabsichern #haustierversicherung #opversicherungtier"
+pin_description: "*Werbung | Tierkrankenversicherung für Hund und Katze: Wann sich OP-Schutz oder Vollschutz lohnt, was Tarife kosten und worauf du im Kleingedruckten achtest. Mehr Spartipps auf FranksFinanzcheck! #tierkrankenversicherung #hund #katze"
 pinwand: "Versicherung | Haustier & Finanzen"
 quellen:
   - id: "Q1"
