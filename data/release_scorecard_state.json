@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-31T12:43:36Z",
+  "generated_at": "2026-10-31T13:20:24Z",
   "modus": "kandidaten",
-  "commit": "22a19c6e43a9af4da574323b3df8fa6753966ff9",
+  "commit": "589382467eb88699e1b7ad31e1d9183cbc3e0669",
   "kapazitaet": {
     "stichtag": "2026-10-31",
     "artikel": 110,
@@ -373,7 +373,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "fd6b640957c69ba88455a277213e4497d7d98b5a7d7975736879b2095514c038",
@@ -441,7 +441,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-14",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
       "sha256": "cebe1c665b11df10f24940c44dad8f770bfc2aaec981af0f8bbdb0fd109e2dd7",
@@ -713,7 +713,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
       "sha256": "e0d24fa143ec3d60806004d1fcb5d6ed621c72063dbe584002d7f6deb219a108",
