@@ -578,6 +578,18 @@ def _selftest() -> int:
     """Eingefrorene echte Fälle. Abweichung = Exit 2, nichts wird geschrieben."""
     fehler: List[str] = []
 
+    # Ohne PyYAML ist keine der Proben aussagekräftig. Statt zehn
+    # Folgebefunde („V3 nicht erkannt") genau EINE Meldung, die den
+    # fehlenden Schritt nennt – sonst sucht man den Fehler in der Wache
+    # statt in der Installation. Genau das passierte am 31.10.2026 im
+    # PR-Gate: Die Wache stand vor der PyYAML-Installation.
+    if _Strikt is None:
+        print("❌ Selbsttest nicht ausführbar: PyYAML fehlt.")
+        print("   Diese Wache liest YAML – ohne PyYAML prüft sie nichts.")
+        print("   Installation im Workflow VOR diesen Schritt legen:")
+        print("     python3 -m pip install -q --require-hashes -r requirements-ci.txt")
+        return 2
+
     # Der teure Fall aus dem Vorgang: `labels` als Liste.
     vertrag_issue = {"labels": "string", "title": "string", "content-filepath": "string"}
     gut = """

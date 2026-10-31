@@ -139,6 +139,45 @@ jobs:
         self.assertIn("geprueft", daten)
         self.assertEqual(daten["befunde"], [])
 
+    def test_wache_laeuft_nach_der_pyyaml_installation(self):
+        """Im PR-Gate MUSS die Wache hinter der PyYAML-Installation stehen.
+
+        Am 31.10.2026 stand sie beim ersten Versuch davor: `setup-python`
+        bringt PyYAML nicht mit, der Selbsttest wurde rot (V0 „PyYAML
+        fehlt") – der Befund war richtig, aber er sah aus wie ein Fehler in
+        der Wache. Diese Probe hält die Reihenfolge fest.
+        """
+        text = (ROOT / ".github" / "workflows" / "integrity-lock.yml").read_text(
+            encoding="utf-8")
+        stelle_wache = text.find("workflow_vertrag_wache.py --selftest")
+        stelle_pyyaml = text.find("requirements-ci.txt")
+        self.assertGreater(stelle_wache, 0, "Wache fehlt im PR-Gate")
+        self.assertGreater(stelle_pyyaml, 0, "PyYAML-Installation fehlt im PR-Gate")
+        self.assertLess(stelle_pyyaml, stelle_wache,
+                        "Wache steht VOR der PyYAML-Installation → Selbsttest rot")
+
+    def test_ohne_pyyaml_klare_meldung_statt_folgebefunde(self):
+        """Fehlt PyYAML, gibt es EINE verständliche Meldung – nicht zehn."""
+        umgebung = {
+            "PYTHONPATH": str(ROOT / "scripts"),
+        }
+        # Ein Import-Blocker im Subprozess: yaml wird nicht gefunden.
+        skript = (
+            "import runpy, sys\n"
+            "class B:\n"
+            "    def find_module(self, n, p=None): return self if n == 'yaml' else None\n"
+            "    def load_module(self, n): raise ImportError(n)\n"
+            "sys.meta_path.insert(0, B())\n"
+            "sys.argv = ['w', '--selftest']\n"
+            f"runpy.run_path(r'{SKRIPT}', run_name='__main__')\n"
+        )
+        ergebnis = subprocess.run([sys.executable, "-c", skript],
+                                  capture_output=True, text=True, env=umgebung)
+        self.assertEqual(ergebnis.returncode, 2, "ohne PyYAML muss fail-closed gelten")
+        self.assertIn("PyYAML fehlt", ergebnis.stdout)
+        self.assertNotIn("nicht erkannt", ergebnis.stdout,
+                         "keine Folgebefunde – nur die eine klare Meldung")
+
     def test_sabotage_probe(self):
         """Eine kaputte Kopie des echten Workflows muss auffallen.
 
