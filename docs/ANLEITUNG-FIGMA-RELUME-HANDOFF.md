@@ -45,6 +45,10 @@ den Fall, dass jemand die Struktur von Hand nachvollziehen will.
 
 ### Weg A – Plugin „FranksFinanzcheck – Design System“ (empfohlen)
 
+> **Schritt für Schritt mit Screenshots-Pfaden, Fehlerliste und Prüfschritten:**
+> [`ANLEITUNG-FIGMA-EINRICHTUNG.md`](ANLEITUNG-FIGMA-EINRICHTUNG.md).
+> Dieses Kapitel ist die Kurzfassung.
+
 1. Eine leere Datei **„FranksFinanzcheck – Design System“** anlegen.
 2. In Figma auf **Plugins → Development → Import plugin from manifest …**
    klicken und `figma/design-system-builder/manifest.json` auswählen.

@@ -84,6 +84,7 @@ viele Bot-Dateien (Recherche-Briefs aus RSS/Web, Social-Kommentare,
    `npm run figma:bauen` aus; `code.js` ist Ausgabe. Das Plugin baut Variablen,
    Stile und Komponenten-Sets (Achsen **Zustand × Modus**), läuft ohne Netz
    und legt bei einem zweiten Lauf nichts doppelt an.
+   Einrichtung für Menschen: `docs/ANLEITUNG-FIGMA-EINRICHTUNG.md`.
 7. **„Highend“ wird gemessen.** Vor jedem Abschluss einer Design-Arbeit:
    `npm run figma:selftest && npm run design:handoff:check && npm run figma:gate`.
    Das Gate prüft 33 Kriterien über SSOT, Exporte, Plugin, Skills und Doku.

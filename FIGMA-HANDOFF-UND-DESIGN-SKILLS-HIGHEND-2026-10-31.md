@@ -102,8 +102,9 @@ verfälschte Kontrastzeilen und erfundene CSS-Klassen werden erkannt.
 
 Figma-Dateien und Plugin-Installationen lassen sich ohne Konto nicht anlegen –
 das bleibt eine Handlung des Kontoinhabers, bewusst ohne SaaS-Token im Repo.
-Der Ablauf steht vollständig in `docs/ANLEITUNG-FIGMA-RELUME-HANDOFF.md`
-(Weg A = Plugin, Weg B = manuell über Tokens Studio).
+Der Ablauf steht vollständig in `docs/ANLEITUNG-FIGMA-EINRICHTUNG.md`
+(8 Schritte, Fehlerliste, Prüfschritte) und in
+`docs/ANLEITUNG-FIGMA-RELUME-HANDOFF.md` (Weg A = Plugin, Weg B = Tokens Studio).
 
 ## Grenzen, ehrlich benannt
 

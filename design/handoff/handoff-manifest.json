@@ -8,7 +8,7 @@
     "data/design/regelwerk.yaml": "ce85498f7f51e74ac76e8b7ee3d56cf244faa9e4499620f031ea6bf2b9bc513c",
     "DESIGN.md": "b333322f93f9a571351a23a4c1240117160fe7dd5af070accc93a0662a48f9a9",
     "PRODUCT.md": "3073948f7c99aa67e0126a1870c7d329738d2353b7b7bcd948e3a433f5ec6010",
-    "figma/design-system-builder/source.js": "705154c2373650819187551fb06f4ae767a5b1269edcadf2fbaebe73cba84370"
+    "figma/design-system-builder/source.js": "6765fc311252b521e25b05a91da74a9556bb8f54cd06216c9245bd176dbf366d"
   },
   "artifacts": {
     "ANNOTATIONEN.md": "ea105f5384cd7d2415fc445e39a405b852e8ff54b7666ef17523bfdf7ea3dab7",
@@ -19,6 +19,6 @@
     "spezifikation.html": "b8cfbb2521d6796d953a9c6774719eac2c216505fdaa32494b2dd9114b02e9ad"
   },
   "plugins": {
-    "figma/design-system-builder/code.js": "e12ec20afddd21df53cbc1d9e01b65e7fb645267699d9307d8caaea5e596431f"
+    "figma/design-system-builder/code.js": "c2d246dc8da243479ec7b698071794309db470b7459693e172378abde458b9de"
   }
 }

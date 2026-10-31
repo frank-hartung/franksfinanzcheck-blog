@@ -151,6 +151,49 @@ function protokollFeld(text, feld) {
   return m ? Number(m[1]) : null;
 }
 
+// Fehlen die Rechte, darf das Plugin NICHTS halb bauen – weder Seiten noch
+// Variablen. Es muss abbrechen und den Grund nennen. Dieses Szenario prüft
+// genau das: ein abgelehnter Zugriff ist die häufigste Ursache für einen
+// abgebrochenen Erstaufbau.
+async function pruefeRechteSchutz() {
+  const html = readFileSync(join(PLUGIN, 'ui.html'), 'utf8');
+  const quelle = readFileSync(join(PLUGIN, 'code.js'), 'utf8');
+  const faelle = [
+    { name: 'ohne Seitenwechsel (currentpage)', ohneSeitenwechsel: true, ohneSchriften: false },
+    { name: 'ohne Schriften/Stile (textreview)', ohneSeitenwechsel: false, ohneSchriften: true },
+  ];
+  const befund = [];
+  for (const fall of faelle) {
+    const zustand = { seiten: [], protokoll: '' };
+    const api = {
+      root: { children: [] },
+      createPage() {
+        const p = { name: 'S' + (zustand.seiten.length + 1), children: [], appendChild() {} };
+        zustand.seiten.push(p);
+        this.root.children.push(p);
+        return p;
+      },
+      setCurrentPageAsync: fall.ohneSeitenwechsel ? undefined : async () => {},
+      loadAllPagesAsync: async () => {},
+      loadFontAsync: fall.ohneSchriften ? undefined : async () => {},
+      showUI() {}, closePlugin() {},
+      ui: { postMessage(m) { if (m && m.type === 'fertig') zustand.protokoll = m.text; }, onmessage: null },
+      getLocalTextStyles: () => [], getLocalPaintStyles: () => [], getLocalEffectStyles: () => [],
+    };
+    // eslint-disable-next-line no-new-func
+    new Function('__html__', 'figma', quelle)(html, api);
+    api.ui.onmessage({ type: 'aufbauen' });
+    await new Promise((r) => setTimeout(r, 250));
+    if (zustand.seiten.length !== 0) {
+      befund.push(fall.name + ': es wurden trotzdem ' + zustand.seiten.length + ' Seiten gebaut');
+    }
+    if (!String(zustand.protokoll).startsWith('⛔')) {
+      befund.push(fall.name + ': kein klarer Abbruchhinweis im Protokoll');
+    }
+  }
+  return befund;
+}
+
 async function main() {
   const html = readFileSync(join(PLUGIN, 'ui.html'), 'utf8');
   const { api, zustand } = baueFigma();
@@ -179,7 +222,7 @@ async function main() {
     vorhanden: protokollFeld(zustand.protokoll, 'Bereits vorhanden: '),
   };
 
-  const befund = [];
+  const befund = await pruefeRechteSchutz();
   if (!String(ersterLauf.protokoll).startsWith('✅')) befund.push('erster Lauf endet nicht mit ✅');
   if (ersterLauf.seiten !== 7) befund.push('erwartet 7 Seiten, gebaut ' + ersterLauf.seiten);
   if (ersterLauf.sammlungen !== 4) befund.push('erwartet 4 Variablen-Sammlungen, gebaut ' + ersterLauf.sammlungen);
@@ -200,6 +243,7 @@ async function main() {
       + ersterLauf.farbstile + ' Farbstile · ' + ersterLauf.effektstile + ' Schatten · '
       + ersterLauf.komponenten + ' Komponenten-Sets');
     console.log('  Lauf 2: Neu ' + zweiterLauf.neu + ' · vorhanden ' + zweiterLauf.vorhanden);
+    console.log('  Rechte-Schutz: fehlende Rechte brechen ab, ohne halb zu bauen');
     if (befund.length) {
       console.log('  ❌ ' + befund.length + ' Befund(e):');
       for (const b of befund) console.log('     · ' + b);

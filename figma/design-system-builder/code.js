@@ -769,6 +769,24 @@ async function bestand() {
 }
 
 /* ---------- Lauf ---------- */
+/* ---------- Rechte ---------- */
+// Ein Plugin mit `documentAccess: dynamic-page` braucht zwei Dinge, die Figma
+// beim Start einmalig abfragt: den Seitenwechsel (`currentpage`) und den
+// Zugriff auf Schriften und Stile (`textreview`). Fehlt eines – ältere Figma-
+// Version, abgelehnte Abfrage, kopierter Aufruf –, bricht der Aufbau sonst
+// MITTENDRIN ab und hinterlässt eine halb gefüllte Datei. Deshalb wird vorher
+// geprüft und im Zweifel gar nicht erst gebaut.
+function fehlendeRechte() {
+  const fehlt = [];
+  if (typeof figma.setCurrentPageAsync !== 'function') {
+    fehlt.push('currentpage (Seitenwechsel)');
+  }
+  if (typeof figma.loadFontAsync !== 'function') {
+    fehlt.push('textreview (Schriften und Stile)');
+  }
+  return fehlt;
+}
+
 async function main() {
   // Jeder Lauf berichtet nur über sich selbst. Ohne diesen Reset würde
   // ein zweiter Lauf die Ergebnisse des ersten mitzählen und „Neu: 128“
@@ -823,6 +841,18 @@ async function main() {
 }
 
 async function los() {
+  const fehlt = fehlendeRechte();
+  if (fehlt.length) {
+    figma.ui.postMessage({
+      type: 'fertig',
+      text: '⛔ Aufbau nicht gestartet – es fehlt der Zugriff:\n· '
+        + fehlt.join('\n· ')
+        + '\n\nSo beheben: Plugin in Figma schließen, mit „Plugins → Development → '
+        + 'FranksFinanzcheck“ neu starten und die Zugriffsabfrage mit „Allow“ '
+        + 'bestätigen. In älteren Figma-Versionen: Figma aktualisieren.',
+    });
+    return;
+  }
   await figma.loadAllPagesAsync();
   await main();
   figma.ui.postMessage({ type: 'bestand', zahlen: await bestand() });
