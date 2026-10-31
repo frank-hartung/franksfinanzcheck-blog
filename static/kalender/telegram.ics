@@ -7,45 +7,45 @@ X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:telegram:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im
- -ueberblick:takeaway:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261031T095231Z
+ -ueberblick:nutzen:2026-11-01@franksfinanzcheck.de
+DTSTAMP:20261031T105851Z
 DTSTART:20261101T060000Z
 DTEND:20261101T061500Z
 SUMMARY:Telegram (Kanal): Stromkosten senken: Clevere Haushaltsgeräte 
- im Überblick (takeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Telegram (Kanal)
- \nArtikel: https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-
- senken-clevere-haushaltsgeraete-im-ueberblick/
+ im Überblick (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-se
+ nken-clevere-haushaltsgeraete-im-ueberblick/
 URL:https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-c
  levere-haushaltsgeraete-im-ueberblick/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkos
- ten-falle:vergleich:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261031T095231Z
+ ten-falle:nutzen:2026-11-08@franksfinanzcheck.de
+DTSTAMP:20261031T105851Z
 DTSTART:20261108T060000Z
 DTEND:20261108T061500Z
 SUMMARY:Telegram (Kanal): VPN Zuhause: Schutzschild oder unnötige Fixk
- osten-Falle? (vergleich)
-DESCRIPTION:Status: geplant\nWinkel: vergleich\nKanal: Telegram (Kanal
- )\nArtikel: https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause
- -schutzschild-oder-unnoetige-fixkosten-falle/
+ osten-Falle? (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-sc
+ hutzschild-oder-unnoetige-fixkosten-falle/
 URL:https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzsc
  hild-oder-unnoetige-fixkosten-falle/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sof
- ort-senken:takeaway:2026-11-14@franksfinanzcheck.de
-DTSTAMP:20261031T095231Z
+ ort-senken:nutzen:2026-11-14@franksfinanzcheck.de
+DTSTAMP:20261031T105851Z
 DTSTART:20261114T060000Z
 DTEND:20261114T061500Z
 SUMMARY:Telegram (Kanal): Kleine Energiespar‑Tricks: Deine Kosten sofo
- rt senken (takeaway)
-DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Telegram (Kanal)
- \nArtikel: https://franksfinanzcheck.de/posts/2026-10-12-kleine-energ
- iespar-tricks-die-deine-kosten-sofort-senken/
+ rt senken (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-12-kleine-energie
+ spar-tricks-die-deine-kosten-sofort-senken/
 URL:https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiespar-t
  ricks-die-deine-kosten-sofort-senken/
 STATUS:TENTATIVE
