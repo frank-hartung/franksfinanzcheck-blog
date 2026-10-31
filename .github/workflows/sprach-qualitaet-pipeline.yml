@@ -13,8 +13,26 @@ name: Sprach-Qualitäts-Pipeline (Highend, Profi-Agentur)
 #    6. lektor_guard (L1–L12)          – Verlags-Lektorat
 #    7. readability_check              – Flesch-Amstad, Satzlänge, …
 #
-#  Strict-Modus: Exit 1 bei offenen kritischen Funden → Workflow rot.
+#  Strict-Modus: Exit 1 bei offenen kritischen Funden → Issue, Lauf bleibt grün.
+#  Exit 2 (Sabotage/Selbsttest rot) ist immer fail-closed: kein History-Push.
 #  Reports werden als Workflow-Artefakte gespeichert; History bleibt versioniert.
+#
+#  Reparatur 31.10.2026 (Highend-Audit, PR nach #977):
+#    · `${{ }}` vollständig aus allen `run:`-Blöcken entfernt (Template-
+#      Injection, Test `test_unabhaengiger_tiefencheck`). Eingaben kommen über
+#      `env:`, Ausgaben über `$GITHUB_OUTPUT`.
+#    · `gate_exit_code` wurde falsch erfasst: `… || true` und danach `echo $?`
+#      las den Exit von `echo` (immer 0) – der Strict-Modus konnte nie greifen.
+#      Jetzt `set +e` + `RC=$?`, plus Beweisschutz gegen leere/ungültige Codes.
+#    · `git push || true` ersetzt durch `scripts/git_sync.sh --push-only`
+#      (Push-Wache, Retry + Rebase gegen Parallel-Bots) und
+#      `permissions: contents: write` – vorher war ein Push technisch
+#      unmöglich und der Fehler wurde verschluckt.
+#    · Labels `qualitaet`/`sprach-qualitaet`/`automatisiert` werden vor dem
+#      Issue angelegt (C12: `gh issue` scheitert mit HTTP 422, wenn ein Label
+#      fehlt – #209).
+#    · `actions/setup-python` auf den repo-weit einheitlichen Pin gehoben
+#      (v7.0.0 statt v5.1.1; Test `test_setup_python_is_uniform`).
 #
 #  Zeitplan: täglich 04:30 UTC (nach der Redaktions-Politur 03:45 UTC).
 #  Manuell auslösbar: Actions → „Sprach-Qualitäts-Pipeline“ → Run.
@@ -39,8 +57,8 @@ on:
         default: ""
 
 permissions:
-  contents: read
-  issues: write   # für automatische Issue-Erstellung bei Qualitätsverstoß
+  contents: write   # History-Commit über scripts/git_sync.sh --push-only
+  issues: write     # für automatische Issue-Erstellung bei Qualitätsverstoß
 
 concurrency:
   group: sprach-qualitaet-pipeline
@@ -68,33 +86,115 @@ jobs:
 
       - name: Copy-Editing-Gate (Selbsttest + alle Engines)
         id: gate
+        env:
+          # Eingaben ausschließlich über die Umgebung – nie per `${{ }}` im
+          # Skript (Template-Injection-Freiheit).
+          EINGABE_MODUS: ${{ inputs.modus }}
+          EINGABE_SCOPE: ${{ inputs.scope }}
+          EINGABE_DATEI: ${{ inputs.file_pfad }}
         run: |
-          ARGS="--report COPY-EDITING-REPORT.md --json"
-          if [ "${{ inputs.modus }}" = "fix" ]; then ARGS="$ARGS --fix"; fi
-          if [ "${{ inputs.modus }}" = "strict" ]; then ARGS="$ARGS --strict"; fi
-          if [ "${{ inputs.scope }}" = "new-only" ]; then ARGS="$ARGS --new-only"; fi
-          if [ "${{ inputs.scope }}" = "file" ] && [ -n "${{ inputs.file_pfad }}" ]; then
-            ARGS="$ARGS --file ${{ inputs.file_pfad }}"
-          fi
-          echo ">>> copy_editing_gate.py $ARGS"
-          python3 scripts/copy_editing_gate.py $ARGS || true
-          echo "gate_exit_code=$?" >> $GITHUB_OUTPUT
+          set -u
+          MODUS="${EINGABE_MODUS:-report}"
+          SCOPE="${EINGABE_SCOPE:-bestand}"
+          DATEI="${EINGABE_DATEI:-}"
+
+          ARGS=(--report COPY-EDITING-REPORT.md --json)
+          case "$MODUS" in
+            report) ;;
+            fix)    ARGS+=(--fix) ;;
+            strict) ARGS+=(--strict) ;;
+            *)
+              echo "🛑 Unbekannter Modus: »$MODUS« (erlaubt: report | fix | strict)"
+              exit 2
+              ;;
+          esac
+          case "$SCOPE" in
+            bestand) ;;
+            new-only) ARGS+=(--new-only) ;;
+            file)
+              if [ -z "$DATEI" ]; then
+                echo "🛑 scope=file ohne file_pfad – nichts zu prüfen."
+                exit 2
+              fi
+              if [ ! -f "$DATEI" ]; then
+                echo "🛑 Datei nicht gefunden: »$DATEI«"
+                exit 2
+              fi
+              ARGS+=(--file "$DATEI")
+              ;;
+            *)
+              echo "🛑 Unbekannter Scope: »$SCOPE« (erlaubt: bestand | new-only | file)"
+              exit 2
+              ;;
+          esac
+
+          echo ">>> copy_editing_gate.py ${ARGS[*]}"
+          # Exit-Code ECHT erfassen: `cmd || true` würde den Code verlieren und
+          # `$?` läse anschließend den von `true` (immer 0) – der Strict-Modus
+          # war dadurch wirkungslos.
+          set +e
+          python3 scripts/copy_editing_gate.py "${ARGS[@]}"
+          RC=$?
+          set -e
+          echo "Gate-Exit: $RC"
+          echo "gate_exit_code=$RC" >> "$GITHUB_OUTPUT"
 
       - name: Qualitäts-Status auswerten
         id: status
+        env:
+          GATE_EXIT: ${{ steps.gate.outputs.gate_exit_code }}
+          EINGABE_MODUS: ${{ inputs.modus }}
         run: |
-          GATE_EXIT="${{ steps.gate.outputs.gate_exit_code }}"
-          if [ "$GATE_EXIT" = "2" ]; then
-            echo "🛑 Selbsttest rot – Sabotage verhindert, Pipeline abgebrochen."
-            echo "qualitaet=sabotage" >> $GITHUB_OUTPUT
+          set -u
+          MODUS="${EINGABE_MODUS:-report}"
+          GATE_EXIT="${GATE_EXIT:-}"
+
+          if [ -z "$GATE_EXIT" ]; then
+            # Kein Code = keine Bewertung. Fail-closed statt „ok“ raten.
+            echo "🛑 Kein Gate-Exit-Code übergeben – der Lauf ist nicht bewertbar."
+            echo "qualitaet=sabotage" >> "$GITHUB_OUTPUT"
             exit 2
-          elif [ "$GATE_EXIT" = "1" ] && [ "${{ inputs.modus }}" = "strict" ]; then
-            echo "⚠️ Strict-Modus: offene kritische Funde – Qualitätsverstoß."
-            echo "qualitaet=verstoß" >> $GITHUB_OUTPUT
-          else
-            echo "✅ Pipeline durchgelaufen (Modus: ${{ inputs.modus }})."
-            echo "qualitaet=ok" >> $GITHUB_OUTPUT
           fi
+
+          case "$GATE_EXIT" in
+            0)
+              echo "✅ Pipeline durchgelaufen (Modus: $MODUS, keine kritischen Funde)."
+              echo "qualitaet=ok" >> "$GITHUB_OUTPUT"
+              ;;
+            1)
+              if [ "$MODUS" = "strict" ]; then
+                echo "⚠️ Strict-Modus: offene kritische Funde – Qualitätsverstoß."
+                echo "qualitaet=verstoß" >> "$GITHUB_OUTPUT"
+              else
+                echo "ℹ️ Offene Funde im Report-Modus (Modus: $MODUS) – kein Verstoß."
+                echo "qualitaet=ok" >> "$GITHUB_OUTPUT"
+              fi
+              ;;
+            2)
+              echo "🛑 Selbsttest rot – Sabotage verhindert, Pipeline abgebrochen."
+              echo "qualitaet=sabotage" >> "$GITHUB_OUTPUT"
+              exit 2
+              ;;
+            *)
+              echo "🛑 Unerwarteter Gate-Exit-Code $GATE_EXIT – fail-closed."
+              echo "qualitaet=sabotage" >> "$GITHUB_OUTPUT"
+              exit 2
+              ;;
+          esac
+
+      - name: Labels sicherstellen (C12)
+        # C12: Ein Melder, der am Melden scheitert, ist schlimmer als kein
+        # Melder. `gh issue` mit unbekanntem Label endet in HTTP 422 (#209).
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create qualitaet --repo "$GITHUB_REPOSITORY" \
+            --color "0e8a16" --description "Sprach- und Inhaltsqualität" --force || true
+          gh label create sprach-qualitaet --repo "$GITHUB_REPOSITORY" \
+            --color "1d76db" --description "Sprach-Qualitäts-Pipeline (Grammatik, Lektorat, Lesbarkeit)" --force || true
+          gh label create automatisiert --repo "$GITHUB_REPOSITORY" \
+            --color "5319e7" --description "Automatisch erzeugte Meldung" --force || true
 
       - name: Issue bei Qualitätsverstoß eröffnen (strict)
         if: steps.status.outputs.qualitaet == 'verstoß'
@@ -123,46 +223,53 @@ jobs:
             LEKTOR-REPORT.md
           retention-days: 30
 
-      # Governance C12 (Befund 31.10.2026, PR #986): Das Issue unten trägt drei
-      # Labels. Fehlt auch nur eines im Repository, antwortet GitHub mit HTTP 422
-      # und die Meldung geht verloren – die Pipeline wäre rot, ohne zu sagen
-      # warum (#209). Labels werden deshalb VOR der Issue-Erzeugung angelegt,
-      # idempotent per --force, wie in faktenfrische.yml.
-      #
-      # Ort und Auslöser sind mit Bedacht gewählt: NICHT als neue Stufe
-      # zwischen Gate und Status-Auswertung. Dieser Workflow interpoliert
-      # `inputs.modus` direkt in `run:`-Blöcke; die Tiefenprüfung verbietet das
-      # (Template-Injection) und würde jede Stufe dazwischen mitzählen. Hier
-      # läuft der Schritt nur im strict-Modus, also genau dann, wenn das Issue
-      # entstehen kann – und ohne jeden Kontextausdruck im Skript.
-      - name: "Labels garantieren (C12: vor der Issue-Erzeugung)"
-        if: inputs.modus == 'strict'
-        continue-on-error: true   # ein Label-Problem darf den Lauf nicht kippen
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh label create qualitaet --repo "$GITHUB_REPOSITORY" \
-            --color "0e8a16" --description "Sprach- und Textqualität (Gate-Befunde)" --force || true
-          gh label create sprach-qualitaet --repo "$GITHUB_REPOSITORY" \
-            --color "1d76db" --description "Copy-Editing-Gate: Grammatik, Lektorat, Lesbarkeit" --force || true
-          gh label create automatisiert --repo "$GITHUB_REPOSITORY" \
-            --color "ededed" --description "Von Automatisierung erzeugt, nicht von Hand gepflegt" --force || true
-
       - name: History-Commit (versioniert, dedupliziert)
+        # Nur wenn der Lauf beweisbar gesund war: Ein roter Selbsttest darf
+        # keine Spuren in die Historie schreiben (C15) – auch nicht „zur
+        # Dokumentation“.
         if: steps.status.outputs.qualitaet != 'sabotage'
         run: |
+          set -u
           git config user.name "franksfinanzcheck-bot"
           git config user.email "bot@franksfinanzcheck.de"
-          git add data/copy_editing_history.jsonl data/hardcases_history.jsonl data/sprachglatt_history.jsonl data/zeit_rechtschreibung_history.jsonl data/grammar_whitelist.txt 2>/dev/null || true
-          if ! git diff --cached --quiet; then
-            git commit -m "chore(sprache): Copy-Editing-Highend History-Update [skip ci]" || true
-            # Push über den Sync-Kern (Fetch-/Push-Retry, Rebase-Runden,
-            # Auto-Heilung). Ein roher `git push` scheitert beim ersten
-            # parallelen Bot-Push als non-fast-forward (Fehlerklasse WF-C545,
-            # Issue #547). Das History-Update ist nicht kritisch: Bleibt es
-            # liegen, entsteht es beim nächsten Lauf neu – deshalb kein
-            # Abbruch, aber auch kein stilles Verschlucken.
-            if ! scripts/git_sync.sh --push-only; then
-              echo "::warning::History-Commit nicht gepusht – der nächste Lauf erzeugt ihn neu."
+
+          # Nur vorhandene Pfade stagen. `git add` auf einen fehlenden Pfad
+          # bricht die GANZE Staging-Phase ab (Exit 1, alle Pfade desselben
+          # Befehls) – deshalb die Existenzprüfung statt `2>/dev/null || true`.
+          HISTORIE="data/copy_editing_history.jsonl
+          data/hardcases_history.jsonl
+          data/sprachglatt_history.jsonl
+          data/zeit_rechtschreibung_history.jsonl
+          data/lektor_history.jsonl
+          data/grammar_whitelist.txt"
+          for pfad in $HISTORIE; do
+            if [ -f "$pfad" ]; then
+              git add "$pfad"
+            else
+              echo "ℹ️  übersprungen (nicht vorhanden): $pfad"
             fi
+          done
+
+          if git diff --cached --quiet; then
+            echo "✅ Keine History-Änderung – nichts zu committen."
+            exit 0
           fi
+
+          git commit -m "chore(sprache): Copy-Editing-Highend History-Update [skip ci]"
+          # Push-Wache: einzig sanktionierter Push-Weg (Retry, Rebase gegen
+          # Parallel-Bots, Auto-Heilung generierter Dateien). Kein roher
+          # `git push`, kein `|| true` – ein gescheiterter Push muss sichtbar
+          # rot werden und nicht still liegen bleiben.
+          scripts/git_sync.sh --push-only
+
+      - name: Verstoß als roten Lauf werten (strict, fail-closed)
+        # Reihenfolge ist Absicht: Issue, Artefakte und History müssen VOR dem
+        # roten Exit gelaufen sein. Ein fehlgeschlagener Schritt beendet den
+        # Job nicht, aber jeder folgende Schritt ohne `always()`/`if:` wird
+        # übersprungen – deshalb steht das Urteil ganz am Ende.
+        if: steps.status.outputs.qualitaet == 'verstoß'
+        run: |
+          echo "🛑 Strict-Modus: offene kritische Funde."
+          echo "   Issue wurde eröffnet, Artefakte gesichert, History committet."
+          echo "   Der Lauf endet rot, damit der Verstoß nicht still bleibt."
+          exit 1
