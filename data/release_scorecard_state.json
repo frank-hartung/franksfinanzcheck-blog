@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-10-31T10:55:02Z",
-  "modus": "live",
-  "commit": "366582d903daaeda84ad934cbfdbc878b7a2633b",
+  "generated_at": "2026-10-31T12:43:36Z",
+  "modus": "kandidaten",
+  "commit": "22a19c6e43a9af4da574323b3df8fa6753966ff9",
   "kapazitaet": {
     "stichtag": "2026-10-31",
     "artikel": 110,
@@ -359,7 +359,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "a9fa9e7407125f65010f90b9b43cff0a52c75ad0f3c889b5b97f6a1098fdecd5",
+      "sha256": "610dfd9c9cf7ad21e4d6c8483d657744d39a411f3a7c2f9c5f5411eb3b2d03a4",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -407,7 +407,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-12",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": {
       "sha256": "c525dbe11299b94ad68da4d05691155ac6b74b6afdc2d37f3ad0165f08a36efd",
@@ -427,7 +427,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen": {
-      "sha256": "653d2819ec9dfe3203027c156da216aa65d2b979a5d5a6715e7bd3c62232f0cb",
+      "sha256": "6383d21f4ce8ac0e3665fb8da9d66a7c706220519fccb515f99e015f30e4b513",
       "urteil": "freigabe-reif",
       "risikoklasse": "hoch",
       "dimensionen": {
@@ -441,7 +441,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-14",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
       "sha256": "cebe1c665b11df10f24940c44dad8f770bfc2aaec981af0f8bbdb0fd109e2dd7",
@@ -662,7 +662,7 @@
         "revision": "blockiert"
       },
       "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster": {
       "sha256": "b31fc40aa586caf1b63d1428b21dbb550b48082c952f1cd59bfcc92e116037f7",
@@ -699,21 +699,21 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
-      "sha256": "53790cadd7328f641de8c14746eafe971c0be6d55908b31d1a09b7df3e5c7c00",
-      "urteil": "blockiert",
+      "sha256": "60102e6e0f699e0ad42cf3b35d1f806cb58a61292fca514459f7a0b7c5790e08",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
       "sha256": "e0d24fa143ec3d60806004d1fcb5d6ed621c72063dbe584002d7f6deb219a108",
@@ -934,7 +934,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-03",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {
       "sha256": "059173bbc23270022d238537119199f574985f9fdab1e0885e3ee7ce9f7c8262",
@@ -1206,7 +1206,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
       "sha256": "54e71d129d6eeceb019b2f002f4d9cc9584571207e86b612370f23f676409037",
@@ -1274,7 +1274,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen": {
       "sha256": "5d509269a30cfef415e7806dc0efcbfa010d53daf5385fa1da58d2218ed0943a",
@@ -1291,7 +1291,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
       "sha256": "ac2b9a487ae92bc6c647e2cf6e6a887a722e3b9e1670d6b1835c6ef4d5f8cab6",
@@ -1325,7 +1325,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege": {
       "sha256": "4888495ec6eb137ab0122f7d5db181da55fc72c241f309d7a481e671834b2499",
