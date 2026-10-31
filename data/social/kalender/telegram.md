@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 31.10.2026 17:09 (Europe/Berlin)  
+> Automatisch aktualisiert: 31.10.2026 21:29 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -12,12 +12,9 @@
 
 ## Kommende Beiträge
 
-### Sa, 31. Oktober 2026
-- **18:00** ⏳ Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/
 ### So, 01. November 2026
-- **07:00** ⏳ ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/
+- **07:00** ⏳ Stromkosten senken: Clevere Haushaltsgeräte im Überblick — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/
 ### So, 08. November 2026
 - **07:00** ⏳ VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle? — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/

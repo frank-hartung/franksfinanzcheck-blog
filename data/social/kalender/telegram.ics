@@ -6,39 +6,24 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest
- -du-richtig:nutzen:2026-10-31@franksfinanzcheck.de
-DTSTAMP:20261031T160954Z
-DTSTART:20261031T170000Z
-DTEND:20261031T171500Z
-SUMMARY:Telegram (Kanal): Wärmepumpe vs. Gasheizung 2026: So entscheid
- est du richtig (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs
- -gasheizung-2026-so-entscheidest-du-richtig/
-URL:https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gashe
- izung-2026-so-entscheidest-du-richtig/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-
- monatlichen:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261031T160954Z
+UID:telegram:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im
+ -ueberblick:nutzen:2026-11-01@franksfinanzcheck.de
+DTSTAMP:20261031T202907Z
 DTSTART:20261101T060000Z
 DTEND:20261101T061500Z
-SUMMARY:Telegram (Kanal): ETF-Sparplan starten: Deine Schritt-für-Schr
- itt-Anleitung (nutzen)
+SUMMARY:Telegram (Kanal): Stromkosten senken: Clevere Haushaltsgeräte 
+ im Überblick (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-s
- tarten-schritt-fuer-schritt-zum-monatlichen/
-URL:https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten
- -schritt-fuer-schritt-zum-monatlichen/
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-se
+ nken-clevere-haushaltsgeraete-im-ueberblick/
+URL:https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-c
+ levere-haushaltsgeraete-im-ueberblick/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkos
  ten-falle:nutzen:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261031T160954Z
+DTSTAMP:20261031T202907Z
 DTSTART:20261108T060000Z
 DTEND:20261108T061500Z
 SUMMARY:Telegram (Kanal): VPN Zuhause: Schutzschild oder unnötige Fixk
@@ -53,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sof
  ort-senken:nutzen:2026-11-14@franksfinanzcheck.de
-DTSTAMP:20261031T160954Z
+DTSTAMP:20261031T202907Z
 DTSTART:20261114T060000Z
 DTEND:20261114T061500Z
 SUMMARY:Telegram (Kanal): Kleine Energiespar‑Tricks: Deine Kosten sofo
