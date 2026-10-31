@@ -1,17 +1,17 @@
 {
- "generated_at": "2026-10-28 17:13:29 UTC",
- "verdict_changed": false,
+ "generated_at": "2026-10-31 10:06:21 UTC",
+ "verdict_changed": true,
  "state_schema_version": 2,
  "exit_code": 0,
- "checked": 69,
+ "checked": 73,
  "healed": [],
  "healed_count": 0,
  "content_problems": [],
  "unresolved_problems": [],
  "errors": [],
  "build": {
-  "built": true,
-  "reason": "public/ veraltet → Hugo-Rebuild",
+  "built": false,
+  "reason": "public/ aktuell (kein Rebuild nötig)",
   "ok": true
  },
  "exemptions": {

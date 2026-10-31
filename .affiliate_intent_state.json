@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-10-28 17:07:40 UTC",
+ "generated_at": "2026-10-31 10:06:23 UTC",
  "exit_code": 0,
- "modus": "REPORT",
- "checked_articles": 107,
- "checked_links": 248,
+ "modus": "FIX",
+ "checked_articles": 111,
+ "checked_links": 257,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -86,36 +86,58 @@
   },
   {
    "code": "IW2",
-   "slug": "2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen",
-   "line": 104,
-   "route": "allgemein",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
-   "slug": "2026-10-26-gastarife-vergleichen-vor-dem-herbst",
-   "line": 150,
-   "route": "allgemein",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
    "slug": "2026-10-28-dsl-und-internet-flat-guenstig-sichern",
-   "line": 107,
+   "line": 94,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
    "severity": "P3",
    "blocking": false,
    "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „DSL- & Internettarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW4",
+   "slug": "2026-10-30-energieeffiziente-geraete-so-sinken-deine-fixkosten",
+   "line": 20,
+   "route": "strom",
+   "slot": "top",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "Verbotenes Paar: Artikelthema „Gastarife“ → Route „Stromtarife“. Fund 19.09.2026: Gas-Rechnungsartikel mit Anker „Gasvergleich“ → /go/strom/ – Gas und Strom sind getrennte Rechner; der Haupt-CTA eines Gas-Artikels gehört auf Gas. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/gas/?"
+  },
+  {
+   "code": "IW4",
+   "slug": "2026-10-30-energieeffiziente-geraete-so-sinken-deine-fixkosten",
+   "line": 76,
+   "route": "strom",
+   "slot": "mid",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "Verbotenes Paar: Artikelthema „Gastarife“ → Route „Stromtarife“. Fund 19.09.2026: Gas-Rechnungsartikel mit Anker „Gasvergleich“ → /go/strom/ – Gas und Strom sind getrennte Rechner; der Haupt-CTA eines Gas-Artikels gehört auf Gas. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/gas/?"
+  },
+  {
+   "code": "IW4",
+   "slug": "2026-10-30-energieeffiziente-geraete-so-sinken-deine-fixkosten",
+   "line": 155,
+   "route": "strom",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "Verbotenes Paar: Artikelthema „Gastarife“ → Route „Stromtarife“. Fund 19.09.2026: Gas-Rechnungsartikel mit Anker „Gasvergleich“ → /go/strom/ – Gas und Strom sind getrennte Rechner; der Haupt-CTA eines Gas-Artikels gehört auf Gas. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/gas/?"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden",
+   "line": 99,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Girokonto der C24 Bank“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   }
  ],
  "errors": []

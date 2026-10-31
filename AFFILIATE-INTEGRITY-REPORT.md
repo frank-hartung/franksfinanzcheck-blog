@@ -1,10 +1,10 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-10-28 17:13:29 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-10-31 10:06:21 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 69 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
+**Geprüfte Live-Artikel:** 73 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
 
-**Build:** public/ veraltet → Hugo-Rebuild
+**Build:** public/ aktuell (kein Rebuild nötig)
 
 🎉 Alle CTA-Boxen sind strukturell intakt, jedes Linkziel ist in `scripts/check24_links.yaml` registriert, jeder Link erscheint tatsächlich im gebauten HTML (AI4) und jede `/go/`-Seite leitet auf die registrierte Partner-URL weiter (AI5).
 
@@ -31,6 +31,7 @@
 | 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen | 2 → 3 ✅ | /go/gas/ |
 | 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet | 0 → 1 ✅ | /go/dsl/ |
 | 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife | 2 → 3 ✅ | /go/dsl/, /go/handytarife/ |
+| 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen | 2 → 3 ✅ | /go/kfz-versicherung/ |
 | 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich | 2 → 3 ✅ | /go/tagesgeld/ |
 | 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn | 0 → 1 ✅ | /go/gas/ |
 | 2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen | 0 → 1 ✅ | /go/girokonto/ |
@@ -81,6 +82,9 @@
 | 2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto | 3 → 3 ✅ | /go/kreditkarte/ |
 | 2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks | 3 → 3 ✅ | /go/strom/ |
 | 2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen | 2 → 3 ✅ | /go/tagesgeld/ |
+| 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen | 1 → 2 ✅ | /go/mietwagen/ |
+| 2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht | 3 → 3 ✅ | /go/allgemein/ |
+| 2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege | 1 → 2 ✅ | /go/fluege/ |
 
 ## Hinweise (nicht blockierend)
 
