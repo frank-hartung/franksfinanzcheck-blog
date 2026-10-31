@@ -163,6 +163,37 @@ das nur **einmal** machen.
 
 ---
 
+### Wenn Figma nach einer Plugin-ID fragt
+
+Manche Figma-Versionen zeigen beim Import einen **Plugin-ID-Fehler**. Das ist
+kein Fehler in den Dateien, sondern eine Sicherheitsabfrage: Figma will wissen,
+welchem Plugin dieses Manifest gehört.
+
+**Zwei Wege, beide in Ordnung:**
+
+**A – Figma die ID vergeben lassen (empfohlen für den Erstimport)**
+1. Im Dialog auf **Generate ID** klicken
+2. Die angezeigte Nummer kopieren
+3. `manifest.json` in einem Texteditor öffnen (Notepad, TextEdit)
+4. Nach der Zeile `"name": …` einfügen:
+   ```json
+   "id": "1234567890123456789",
+   ```
+   (die kopierte Nummer, mit Komma am Ende)
+5. Speichern, in Figma erneut **Import plugin from manifest** → die Datei
+   wieder auswählen
+
+**B – Feld gar nicht erst mitgeben**
+Das ausgelieferte Manifest enthält **kein** `id`-Feld. Beim Development-Import
+vergibt Figma die ID selbst. Wichtig: Ein **leeres** `"id": ""` ist kein
+gültiger Wert und kann den Import blockieren — Feld also entweder ganz
+weglassen oder mit echter Nummer füllen, niemals leer lassen.
+
+> **Die ID gehört nicht ins Repository.** Sie ist an dein Figma-Konto
+> gebunden. Trage sie nach dem Import in `data/design/handoff.yaml` unter
+> `figma.plugin_id` ein (Schritt 7) — dort ist sie als Text dokumentiert,
+> nicht als Zugangsmittel.
+
 ## Schritt 4 – Plugin starten (1 Minute)
 
 1. **Plugins → Development → FranksFinanzcheck – Design System**
@@ -310,6 +341,8 @@ Die eine Warnung ist **P8** — sie verschwindet mit Schritt 7.
 | Ich kann keine Datei öffnen | Kein Konto / nicht angemeldet | Schritt 0: Konto anlegen bzw. anmelden |
 | „Import plugin from manifest“ fehlt | Ansicht ist kein Design-File | Datei öffnen, nicht das Dashboard |
 | `manifest.json` wird nicht akzeptiert | Datei einzeln kopiert | Alle drei Dateien im selben Ordner |
+| Figma meldet „Plugin ID“ beim Import | Manifest ohne/vor leere `id` | **Generate ID** → Nummer in `manifest.json` eintragen, neu importieren |
+| Import bricht ohne Meldung ab | Manifest mit leerem `"id": ""` | `id`-Zeile entfernen oder echte ID einsetzen |
 | Ich finde kein ZIP im Repository | Es gibt keins (Absicht) | Branch wählen, *Code → Download ZIP*; siehe Schritt 1 |
 | Figma meldet „Cannot find main“ | `code.js` heißt `code.js.txt` | Dateiendung korrigieren |
 | Ordner wirkt leer / nur `source.js` | Nur die Quelldatei geladen | `manifest.json`, `code.js` und `ui.html` dazunehmen |

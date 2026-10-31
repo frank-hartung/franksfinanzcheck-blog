@@ -332,8 +332,12 @@ def p1() -> str | None:
     for feld in ("name", "api", "main", "editorType"):
         if not d.get(feld):
             return f"Pflichtfeld `{feld}` fehlt"
-    if "id" not in d:
-        return "das Feld `id` fehlt (auch leer muss es stehen, siehe P8)"
+    # Ein LEERES "id": "" ist kein gültiger Wert: Figma kann darauf mit einem
+    # Plugin-ID-Fehler reagieren und verlangt eine per „Generate ID" erzeugte
+    # ID. Beim Development-Import vergibt Figma die ID selbst – das Feld
+    # gehört also entweder GAR NICHT oder mit gültiger ID in die Datei.
+    if "id" in d and not str(d["id"]).strip():
+        return "`id` ist leer – Feld entfernen (Figma vergibt die ID) oder Generate ID nutzen"
     if (d.get("networkAccess") or {}).get("allowedDomains") != ["none"]:
         return "networkAccess.allowedDomains muss [\"none\"] sein – das Plugin braucht kein Netz"
     if d.get("main") != "code.js" or not (PLUGIN / "code.js").exists():
@@ -429,7 +433,8 @@ def p8() -> str | None:
     ssot_id = str((ssot().get("figma", {}) or {}).get("plugin_id", "") or "")
     if not d.get("id") and not ssot_id:
         return ("noch keine Figma-Plugin-ID – sie entsteht erst beim ersten Import; "
-                "nach dem Import in data/design/handoff.yaml → figma.plugin_id eintragen")
+                "dann in data/design/handoff.yaml → figma.plugin_id eintragen "
+                "(das Manifest bleibt ohne `id`, Figma kennt sie)")
     if d.get("id") and ssot_id and d["id"] != ssot_id:
         return f"Manifest-ID {d['id']!r} ≠ SSOT-ID {ssot_id!r} – die Datei driftet"
     return None
