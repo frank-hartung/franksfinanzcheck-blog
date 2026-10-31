@@ -124,8 +124,18 @@ Stimmen die Größen grob, ist das Paket vollständig.
 ## Schritt 2 – Figma-Datei anlegen (1 Minute)
 
 1. Öffne [figma.com](https://www.figma.com) und melde dich an.
-2. **New design file** (im Dashboard oben rechts).
+2. **New design file** (im Dashboard oben rechts) — im Teamordner über
+   **+ → Design file**.
 3. Benenne die Datei exakt: **`FranksFinanzcheck – Design System`**
+
+> **Teamordner ≠ Datei.** Ein Teamordner („FranksFinanzcheck – Design System")
+> ist nur die Ablage. „Import plugin from manifest" gibt es ausschließlich
+> **innerhalb einer geöffneten Design-Datei**. Wer im Ordner steht, findet den
+> Befehl nicht — und sucht an der falschen Stelle. Erst die Datei öffnen,
+> dann importieren.
+>
+> **Auch der Dateityp zählt:** Das Manifest erlaubt `editorType: ["figma"]`.
+> In **FigJam** und **Figma Slides** existiert der Plugin-Import nicht.
 
 Der Name ist kein Geschmack: Er steht so in `data/design/handoff.yaml` und
 verbindet Datei und SSOT. Ein Tippfehler fällt später im Qualitäts-Gate auf.
@@ -293,6 +303,9 @@ Die eine Warnung ist **P8** — sie verschwindet mit Schritt 7.
 | Symptom | Ursache | Lösung |
 |---|---|---|
 | Ich finde das Figma-Menü nicht | Ansicht ist das Dashboard, nicht eine Datei | Datei per Doppelklick öffnen — dann erscheint die Werkzeugleiste |
+| „Import plugin from manifest“ fehlt, ich stehe im Teamordner | Ein Ordner ist keine Datei — der Befehl lebt nur in geöffneten Design-Dateien | Erst **+ → Design file** anlegen, Datei öffnen, dann `Strg + K` |
+| Import fehlt trotz geöffneter Datei | FigJam / Figma Slides statt Design-Datei | Neues **Design file** anlegen (Manifest erlaubt nur `figma`) |
+| Import fehlt in der Browser-Version | Browser-Beschränkung | Figma-Desktop-App verwenden |
 | Figma-Menü trotz geöffneter Datei unsichtbar | Fenster zu schmal | Fenster breiter ziehen oder `Strg + -` (Zoom heraus) |
 | Ich kann keine Datei öffnen | Kein Konto / nicht angemeldet | Schritt 0: Konto anlegen bzw. anmelden |
 | „Import plugin from manifest“ fehlt | Ansicht ist kein Design-File | Datei öffnen, nicht das Dashboard |
