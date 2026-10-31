@@ -1,6 +1,6 @@
 # Release-Scorecard – die Produktionswahrheit
 
-**Stand:** 2026-10-31 · **Modus:** kandidaten · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
+**Stand:** 2026-10-31 · **Modus:** live · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
 
 > Eine Zeile pro Artikel, acht Dimensionen, ein Wahrheitsort. Was hier rot ist, ist rot – nichts wird weggeklammert.
 
@@ -106,11 +106,11 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 | Kennzahl | Wert |
 |---|---|
 | Seiten im Bestand (Posts + Ratgeber) | 110 |
-| Fällig heute / überfällig | 9 / 8 |
+| Fällig heute / überfällig | 8 / 8 |
 | Bedarf | 2,68 Prüfungen/Tag (18,7/Woche) |
 | Angebot | 4,00/Tag (Budget 4 × 1,00 Läufe/Tag) |
 | **Deckung** | **149 %** |
-| Rückstand abgebaut | in 2 Tagen (Frist 7 Tage) |
+| Rückstand abgebaut | in 1 Tagen (Frist 7 Tage) |
 | Nächste Frist | `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig` am 2026-11-03 (in 3 Tagen) |
 | Empfohlenes Budget | 4 je Lauf (Limit 10) |
 
@@ -166,7 +166,7 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 
 - `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler` – T1w-zeichenlaenge-optimum: Zeichenlänge ueber-optimum (18072 Zeichen, Optimum 12.000–18.000)
 - `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` – T1w-zeichenlaenge-optimum: Zeichenlänge ueber-optimum (18186 Zeichen, Optimum 12.000–18.000)
-- `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (10323 Zeichen, Optimum 12.000–18.000)
+- `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (10324 Zeichen, Optimum 12.000–18.000)
 
 ## Entwürfe – was vor dem Livegang noch offen ist
 
@@ -202,7 +202,7 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 | `2026-10-30-energieeffiziente-geraete-so-sinken-deine-fixkosten` | standard | nicht erforderlich | frisch geprüft vor 1 Tagen (Intervall 45 Tage) | 2026-12-14 |
 | `2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen` | standard | nicht erforderlich | frisch geprüft vor 1 Tagen (Intervall 30 Tage) | 2026-11-29 |
 | `2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem` | standard | nicht erforderlich | frisch geprüft vor 1 Tagen (Intervall 45 Tage) | 2026-12-14 |
-| `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden` | erhoeht | nicht erforderlich | Erstrecherche – noch nie faktengeprüft | unbekannt (Erstrecherche ausstehend) ⚠️ überfällig |
+| `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden` | erhoeht | nicht erforderlich | frisch geprüft vor 0 Tagen (Intervall 45 Tage) | 2026-12-15 |
 
 ## Ausnahmen (Falsch-Alarm-Protokoll)
 
