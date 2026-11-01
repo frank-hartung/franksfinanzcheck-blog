@@ -393,3 +393,6 @@
 {"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": ["data/skill_portfolio.yaml"], "head": "d0af9d055"}
 {"date": "2026-11-01", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-11-01", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 2, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 2, "modus": "heal", "geheilt": ["data/skill_lizenzen.json", "data/skill_portfolio.yaml"], "head": "957b02b4a"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 0, "modus": "verify"}
