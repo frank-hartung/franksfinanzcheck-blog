@@ -86,7 +86,10 @@ class EchterStandTests(unittest.TestCase):
         wurzel = sv.Path(WURZEL)
         eigene = sorted(p.name for p in (wurzel / sv.SKILL_ORDNER).iterdir()
                         if p.is_dir() and p.name.startswith(sv.EIGEN_PRÄFIX))
-        self.assertEqual(["ff-ausliefern", "ff-ki-automation", "ff-marke-text",
+        # ff-lektorat kam am 01.11.2026 dazu: die deutsche Lektorats-Ausgabe lag
+        # bis dahin in fremdem Haus (copy-editing) und wäre bei jedem
+        # `npx skills update` gelöscht worden. Eigenes Regelwerk gehört in ff-*.
+        self.assertEqual(["ff-ausliefern", "ff-ki-automation", "ff-lektorat", "ff-marke-text",
                           "ff-oberflaeche", "ff-produzieren", "ff-pruefen"], eigene)
         for name in eigene:
             refs = list((wurzel / sv.SKILL_ORDNER / name / "references").glob("*.md"))
@@ -363,6 +366,62 @@ class LizenzTests(unittest.TestCase):
                 '{\n "schema": 1,\n "schema": 2\n}\n', encoding="utf-8")
             funde, _ = _befunde(wurzel)
             self.assertTrue([f for f in funde if "doppelter Schlüssel" in f.meldung])
+
+
+class BibliotheksTests(unittest.TestCase):
+    """K9/K10 – die zwei Fragen, die beim Nachladen von 53 Fremd-Skills entstanden
+    (01.11.2026): Was kostet die Bibliothek in jeder Session, und welche Datei
+    löscht der nächste `npx skills update`?"
+
+    Beide sind aus einem echten Vorgang abgeleitet, nicht aus einer Möglichkeit:
+    die Bibliothek wuchs auf 75 Skills (~14.000 Tokens Beschreibung), und das
+    Update hat die deutsche `copy-editing`-Ausgabe entfernt, während der Vertrag
+    grün meldete.
+    """
+
+    def test_k9_summe_der_beschreibungen_ist_budgetiert(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            viele = {f"fremd-{i}": "---\nname: fremd-%d\ndescription: „%s“\n---\n\n# F\n"
+                                  % (i, "z" * 400) for i in range(150)}
+            wurzel = sv._fixture(sv.Path(tmp) / "k9", fremd=viele,
+                                 lock={"version": 1, "skills": {n: {"source": "a/b",
+                                                                     "skillPath": "s/SKILL.md"}
+                                                               for n in viele}},
+                                 lizenz={"schema": 1, "eigene": {"skills": ["ff-eins"]},
+                                         "skills": {n: {"quelle": "a/b", "lizenz": "MIT"} for n in viele}})
+            funde, _ = _befunde(wurzel)
+            self.assertTrue([f for f in funde if f.klasse == "K9"],
+                            "150 Beschreibungen zu 400 Zeichen (≈ 58 KB) sind mehr Vorladelast als "
+                            "das Budget erlaubt – der Detektor muss anschlagen")
+
+    def test_k10_eigene_datei_im_fremd_ordner_warnt_nur(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            wurzel = _lizenz_fixture(tmp, {"schema": 1, "eigene": {"skills": ["ff-eins"]},
+                                           "skills": {"fremd": {"quelle": "a/b", "lizenz": "MIT"}}})
+            sv._schreibe(wurzel, f"{sv.SKILL_ORDNER}/fremd/LICENSE.txt", "MIT License\n")
+            sv._schreibe(wurzel, f"{sv.SKILL_ORDNER}/fremd/SKILL_DE.md", "---\nname: fremd-de\n---\n")
+            funde, warnungen = _befunde(wurzel)
+            self.assertEqual([], [f for f in funde if f.klasse == "K10"],
+                             "eine Zusatzdatei darf das Gate nicht rot machen – sie ist eine "
+                             "Löschankündigung, kein Rechtsfehler")
+            self.assertTrue([w for w in warnungen if w.klasse == "K10" and "SKILL_DE.md" in w.meldung])
+
+    def test_k10_schweigt_im_sauberen_fremd_ordner(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            wurzel = _lizenz_fixture(tmp, {"schema": 1, "eigene": {"skills": ["ff-eins"]},
+                                           "skills": {"fremd": {"quelle": "a/b", "lizenz": "MIT"}}})
+            sv._schreibe(wurzel, f"{sv.SKILL_ORDNER}/fremd/LICENSE.txt", "MIT License\n")
+            sv._schreibe(wurzel, f"{sv.SKILL_ORDNER}/fremd/references/taktik.md", "# Taktik\n")
+            _, warnungen = _befunde(wurzel)
+            self.assertEqual([], [w for w in warnungen if w.klasse == "K10"],
+                             "upstream-eigene Dateien sind keine Löschankündigung")
+
+    def test_echter_stand_haelt_das_beschreibungs_budget(self):
+        wurzel = sv.Path(WURZEL)
+        funde, _, _ = sv.befunde(wurzel, stichtag=STICHTAG)
+        self.assertEqual([], [f for f in funde if f.klasse == "K9"],
+                         "die Beschreibungen im echten Bestand zahlen jede Session – "
+                         "wer sie wachsen lässt, hebt BESCHREIBUNG_KB_MAX bewusst an")
 
 
 class VerweisTests(unittest.TestCase):

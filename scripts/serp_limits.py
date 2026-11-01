@@ -56,6 +56,13 @@ import re
 DESC_MIN_ZEICHEN = 100
 DESC_MAX_ZEICHEN = 155
 
+# Optimum-Untergrenze: darunter passt die Description zwar (>= 100), aber sie
+# verschenkt Platz. Sie stand am 01.11.2026 als Literal 120 in drei Schreibern
+# (meta_optimizer, pinterest_seo_healer, length_policy) – dieselbe Zahl, drei
+# Kopien, dieselbe Bruchstelle. Sie gehört hierher, weil sie denselben Satz
+# beantwortet wie die Grenzen darüber: wie viel Snippet will ich füllen?
+DESC_OPT_MIN_ZEICHEN = 120
+
 # Pixelgrenze des Desktop-Snippets und die Schrift, in der sie gilt.
 DESC_MAX_PX = 985
 SCHRIFT_PX = 14.0

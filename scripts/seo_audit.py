@@ -29,10 +29,15 @@ POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 PUBLIC_DIR = os.path.join(BLOG_DIR, "public")
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 from post_utils import list_post_paths, slug_of  # noqa: E402
+import serp_limits  # noqa: E402
 
 # SEO-Schwellenwerte (Google-Best-Practices 2026)
 TITLE_MIN, TITLE_MAX = 30, 65
-DESC_MIN, DESC_MAX = 70, 165
+# WF-984 (01.11.2026): Hier standen 70/165 als eigenes Zahlenpaar – der
+# Audit schwieg damit bei Descriptions, die der Markt abschneidet (die
+# 156-Zeichen-Ursache vom 27.10.2026). Der Audit ist ein LESER, kein
+# Schreiber: er übernimmt das Fenster der SSOT unverändert.
+DESC_MIN, DESC_MAX = serp_limits.DESC_MIN_ZEICHEN, serp_limits.DESC_MAX_ZEICHEN
 WORDS_MIN = 300
 INTERNAL_LINKS_MIN = 2
 

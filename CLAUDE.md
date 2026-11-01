@@ -186,6 +186,7 @@ Ablageort. **Wer an der Sache arbeitet, liest den Skill vorher.**
 | Was nach außen als Text steht: Artikel, Titel, Description, Cover, `lastmod`, Tags, Offenlegung, Rechtschreibung, Pins, Social-Texte (LinkedIn-Pack), README-Wortlaut | `ff-marke-text` | ZEIT-Latte mit eigener Stimme, eine Zahl zwei Messstellen, Tag-Register, artikelgenaue Kennzeichnung, Grenzen des Fremd-Packs |
 | Jede Oberfläche: CSS, Farbe, Dark Mode, Variante, Figma/Relume, Templates, Browser-JS, Werkzeuge, `_headers` | `ff-oberflaeche` | Design-Vertrag (siehe oben), Laufzeit-Robustheit, Produktzusage der Werkzeuge |
 | Jeder Weg nach draußen: Modell, Secret, Recherche, Antwortwerk/Werkbank, Suchradar, Schaltwerk, Kosten | `ff-ki-automation` | Transportweg T1–T9, Werkbank B1–B9, Kostensperre, Leitplanken der Automationen |
+| Ein deutscher Artikel soll vor der Auslieferung durch das Lektorat: Seven Sweeps, KI-Tells, YMYL-Panel, Engine-Kette LT/DW/H/L | `ff-lektorat` | sieben Pässe, Reihenfolge der Engine, Schwellen, finale Checkliste |
 
 ## Neues Wissen? Nicht hier. (Größenbudget, DAUERVORGABE)
 
@@ -209,9 +210,11 @@ Wochen gebraucht werden. Damit das nicht zurückwächst:
    Verweise auf Abschnitte (`§4`, „Regel 6“) löst K7 auf. Ein toter Befehl ist
    ein Befund, kein Tippfehler.
 5. **Fremde Skills:** `npx skills update` pflegt nur, was in
-   `skills-lock.json` steht. Jeder vendored Skill braucht eine `LICENSE`
-   (bei Apache-2.0 zusätzlich `NOTICE`) und einen Eintrag in
-   `data/skill_lizenzen.json` – geprüft von K6. `ff-*` stehen nie im Lock.
+   `skills-lock.json` steht, und ersetzt dabei den **ganzen** Ordner – danach
+   `git status .claude/skills` prüfen (K10). Jeder vendored Skill braucht eine
+   `LICENSE` (bei Apache-2.0 zusätzlich `NOTICE`) und einen Eintrag in
+   `data/skill_lizenzen.json` (K6); die Summe aller Beschreibungen ist
+   budgetiert, weil sie jede Session mitzahlt (K9). `ff-*` stehen nie im Lock.
 
 ## Prüfen, bevor etwas gilt (Mindestpaket)
 

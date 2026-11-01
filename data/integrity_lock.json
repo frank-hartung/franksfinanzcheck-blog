@@ -1,10 +1,12 @@
 {
   "schema": 2,
-  "signed_at": "2026-11-01T13:09:27.643378+00:00",
-  "head": "8dbb3b3",
+  "signed_at": "2026-11-01T16:41:17.729944+00:00",
+  "head": "bb432d4",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
+    "data/skill_lizenzen.json": "63a51b75877f46d32fc0f202ae4db5dc0f80ce4ebab37432e792fbdc167856a2",
+    "data/skill_portfolio.yaml": "7e0e1003e24555cfb30fbe2e55f5963c426ea2b1e2b39fdc5240cce10e136752",
     "hugo.toml": "f69433af403fbb87704acce7336bca462480fb257b84e900690bf31294c31078",
     "layouts/_default/_markup/render-link.html": "9a86a24714a88557ea49d065f1edbd203688fa0798e70e8bd08a15a1b1a86b3c",
     "layouts/_partials/affiliate_anchor_attrs.html": "8a39d9c76656f2df3486520f774412ed8cbc5ba7e578af442ecede528ffaa1be",
@@ -45,6 +47,8 @@
     "scripts/redaktions_standard.py": "0d1a4384c9ad2f403156ad15596aa4845de927f6be5417ea3ca3fe6804de2009",
     "scripts/reserve_artifacts.py": "f0a5e4affec798d3033b5c34fbc50688e2f9bca69ab0632d31cf9a727bfb3a6f",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
+    "scripts/skills_portfolio.py": "572f4e84f62cb797ea2b06961fb8b016af34c7422aa96222f80eca373ed6c0db",
+    "scripts/skills_vertrag.py": "56b7eccef0bf260a4fe7a86c1f33d36ee2913759f77ac101a4e2f2ba171dbd22",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
     "scripts/tag_casing.py": "4e9f41c58f3293df189dc69a39763ee4637fe69cab1a181a39e6e4b65203c3d0",
     "scripts/wachen_vertrag.py": "9288fd85a130a8d73aa27cc3a9d14a3b09f8c161f57193a801e74c20ded7ba14",
@@ -52,247 +56,19 @@
     "static/apple-touch-icon.png": "3c2d0bd63fb48baa1e9a47cfb2494d64b5c136be4ed9e621973ad2a54fac4332",
     "static/favicon.svg": "7cb1626650f3b20a856e792668c914bba8424c060b6c6f0b7c6e04fdfb0fb6d5",
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
-    "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
+    "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5",
+    "scripts/serp_limits.py": "cb3d4a55874bea7edb944c5d0239bcd0912db6ec075e48588d21e57cb4397c5f"
   },
-  "files_sha256": "7c71f23a05a8eb721931f2afdf614d310ff2c31e766af430d0cedb6370bce265",
-  "audit_start_sha256": "697582844d87187e66fd8ee6c4c9126db3721f0986fe5278a100c86df07128e6",
+  "files_sha256": "1a564c68e678de62e3d59aae83fa355b6fd6f1684cd6184d799c1ffcad7207dc",
+  "audit_start_sha256": "e34aa3db25a137021434fd74496790a6b205ba4aad74966b74ee8db32e8770a0",
   "audit": [
-    {
-      "date": "2026-10-28",
-      "art": "set-current",
-      "head": "9b91737",
-      "geaendert": [
-        "scripts/internal_linker.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/internal_linker.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c406a14",
-              "datum": "2026-10-28",
-              "betreff": "ci(seo): SEO-Parität als Gate bei jedem PR und nächtlich am echten Build"
-            },
-            {
-              "sha": "3f67b54",
-              "datum": "2026-10-28",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "b4c4aec0eff32722c2acd9caec86019b440d3492ae6775ed1f604adb6a197e0f",
-      "prev_sha256": null
-    },
-    {
-      "date": "2026-10-29",
-      "art": "heal",
-      "head": "af40ad901",
-      "geaendert": [
-        "scripts/internal_linker.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/internal_linker.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "9bb3e86c1",
-              "datum": "2026-10-29",
-              "betreff": "fix(ymyl): restore sealed versions and protect maintenance writers (#826) (#940)"
-            },
-            {
-              "sha": "e83a4b1af",
-              "datum": "2026-10-28",
-              "betreff": "feat(seo): Linkvorschläge, Cornerstones, Fokus-Keywords und Social-Vorschau (#924)"
-            },
-            {
-              "sha": "585676ee2",
-              "datum": "2026-10-05",
-              "betreff": "fix(reserve): Content-Reserve dauerhaft heilen statt auffüllen (#594)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "104a08f860dde39cdc8bea4e44346733dfb26563e8902138d600425fd639862d",
-      "prev_sha256": "697582844d87187e66fd8ee6c4c9126db3721f0986fe5278a100c86df07128e6"
-    },
-    {
-      "date": "2026-10-30",
-      "art": "set-current",
-      "head": "0388be0",
-      "geaendert": [
-        "scripts/casing_guard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/casing_guard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "0388be0",
-              "datum": "2026-10-30",
-              "betreff": "fix(governance): #888 Messfrische und Protokollwahrheit dauerhaft heilen"
-            },
-            {
-              "sha": "57a4361",
-              "datum": "2026-10-30",
-              "betreff": "fix(faktenfrische): #911 Strom- und Gasratgeber fachlich heilen und dauerhaft absichern (#955)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "441425c5b85516db5d81ae6ec569c4b8fe2f1cf0a8b6c0b619d3262f71c8023b",
-      "prev_sha256": "fca32aaab09ad6fc8969b69c130c629d10a8aaaec7e1115defe95da57a990110"
-    },
-    {
-      "date": "2026-10-30",
-      "art": "set-current",
-      "head": "b75cc84",
-      "geaendert": [
-        "scripts/affiliate_integrity_gate.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/affiliate_integrity_gate.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "b75cc84",
-              "datum": "2026-10-30",
-              "betreff": "fix(affiliate): #948 – roter Selbsttest nennt seinen Befund, Alarmweg wieder erreichbar"
-            },
-            {
-              "sha": "414629d",
-              "datum": "2026-10-30",
-              "betreff": "research: AGC-Tagesreport + Redaktionskalender aktualisiert"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "47d509104e0345dbeab520a2dbf5056de4cb2de6dfdc24efbaced019fdbb1a4a",
-      "prev_sha256": "afb8d73ee194df7272017cee54e516ea871955fb9b2f94f6a9be7af8e6929b66"
-    },
-    {
-      "date": "2026-10-30",
-      "art": "heal",
-      "head": "5269ec9",
-      "geaendert": [
-        "scripts/reserve_artifacts.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/reserve_artifacts.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "e0705af",
-              "datum": "2026-10-30",
-              "betreff": "fix(regression,layout): #900-Nachtrag – Zertifikat darf nicht lügen, DOM zurück unter Budget"
-            },
-            {
-              "sha": "7474269",
-              "datum": "2026-10-26",
-              "betreff": "fix(ci): Vier PRs konsolidieren, Basisregressionen heilen, Sicherheits-Gates erhalten (#898)"
-            },
-            {
-              "sha": "7531865",
-              "datum": "2026-10-24",
-              "betreff": "social: Autopilot-Plan aktualisiert + Beiträge versendet"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "aee54aec8609faa6ba914e5a9a77e7afb8defd4925e8cd9922016c638cb9a8f5",
-      "prev_sha256": "34d829557e173a52ee65c6621f6f037af80acfae7595c716bb94905961c898f0"
-    },
-    {
-      "date": "2026-10-31",
-      "art": "set-current",
-      "head": "6eb2ea8",
-      "geaendert": [
-        "scripts/lektor_guard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/lektor_guard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "6eb2ea8",
-              "datum": "2026-10-31",
-              "betreff": "fix(lektor): `--selftest` prüft nur noch – der Hauptlauf schrieb History"
-            },
-            {
-              "sha": "22a19c6",
-              "datum": "2026-10-31",
-              "betreff": "chore(suchradar): Erfassungslauf 2026-10-31 11:23"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "c7a06afc3a18386d7b9388d7c693e35a2e27f853174a1c78b53f2f189ef67fa1",
-      "prev_sha256": "aab2ba216be517dd4c5cadfbdc11ecfb73d783992cce8a0a40987eef9bbd9cf0"
-    },
-    {
-      "date": "2026-10-31",
-      "art": "set-current",
-      "head": "ea2435e8c",
-      "geaendert": [
-        "scripts/hardcases_guard.py",
-        "scripts/lektor_guard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/hardcases_guard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "a5af34f90",
-              "datum": "2026-10-31",
-              "betreff": "fix(sprache): Copy-Editing-Gate prüft nur, was es prüfen kann – und schreibt beim Beweis nichts (#987)"
-            }
-          ],
-          "commits_art": "seit-signatur"
-        },
-        {
-          "pfad": "scripts/lektor_guard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "a5af34f90",
-              "datum": "2026-10-31",
-              "betreff": "fix(sprache): Copy-Editing-Gate prüft nur, was es prüfen kann – und schreibt beim Beweis nichts (#987)"
-            }
-          ],
-          "commits_art": "seit-signatur"
-        }
-      ],
-      "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c",
-      "prev_sha256": "b94498c4e426799b4766c10498300545df127e4bf73caecdd12bebfafc7c8016"
-    },
     {
       "date": "2026-10-31",
       "art": "set-current",
       "head": "e73b997",
       "geaendert": [],
       "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c",
-      "prev_sha256": "1c68222f511a9b0e8d46cada5e711f9acc6aa741c41e83afa0d4ff039e761fc1"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-31",
@@ -320,8 +96,84 @@
     },
     {
       "date": "2026-11-01",
+      "art": "add",
+      "head": "292a0ae",
+      "geaendert": [
+        "scripts/skills_vertrag.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/skills_vertrag.py",
+          "klasse": "fest",
+          "urteil": "NEU UNTER SIEGEL",
+          "commits": [],
+          "commits_art": "neu-unter-siegel"
+        }
+      ],
+      "files_sha256": "a24e49fb5197fb3b7e4b6e1fca4133893293918262d5cb960057084b390a3127",
+      "prev_sha256": "404d0cf33fc19c8e685cbe7f52b8291dd0155c3164627175da2e847c2f4a2ee6"
+    },
+    {
+      "date": "2026-11-01",
+      "art": "add",
+      "head": "292a0ae",
+      "geaendert": [
+        "data/skill_lizenzen.json"
+      ],
+      "herkunft": [
+        {
+          "pfad": "data/skill_lizenzen.json",
+          "klasse": "fest",
+          "urteil": "NEU UNTER SIEGEL",
+          "commits": [],
+          "commits_art": "neu-unter-siegel"
+        }
+      ],
+      "files_sha256": "2110875dde28a0f82a32e95a4296461d60d6ba161bc4f6457ff1ecd8aede0ed0",
+      "prev_sha256": "da1b74e38121bfcc551ec1df412e2d4f5f0156f2b948e508294c3b31a657b4dd"
+    },
+    {
+      "date": "2026-11-01",
+      "art": "add",
+      "head": "292a0ae",
+      "geaendert": [
+        "scripts/skills_portfolio.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/skills_portfolio.py",
+          "klasse": "fest",
+          "urteil": "NEU UNTER SIEGEL",
+          "commits": [],
+          "commits_art": "neu-unter-siegel"
+        }
+      ],
+      "files_sha256": "22e68f04b5b4a638172e0b51232440bc7df77829dc6969cdc03ddce898cebf35",
+      "prev_sha256": "d63b06ebe4de03608faad884d6851b7911d6cd0b61a2440702dfc00abfcb4342"
+    },
+    {
+      "date": "2026-11-01",
+      "art": "add",
+      "head": "292a0ae",
+      "geaendert": [
+        "data/skill_portfolio.yaml"
+      ],
+      "herkunft": [
+        {
+          "pfad": "data/skill_portfolio.yaml",
+          "klasse": "fest",
+          "urteil": "NEU UNTER SIEGEL",
+          "commits": [],
+          "commits_art": "neu-unter-siegel"
+        }
+      ],
+      "files_sha256": "c51aa01e9407d2d99740f1e0efcf2a296fa0da5bf836ca07ce375ea7c0cb8ba1",
+      "prev_sha256": "5a883b9d53bbdbe55a714a7c1c4f4db8de59443e4be24a25e5e78166606ae7b5"
+    },
+    {
+      "date": "2026-11-01",
       "art": "heal",
-      "head": "8dbb3b3",
+      "head": "292a0ae",
       "geaendert": [
         "scripts/redaktions_standard.py"
       ],
@@ -330,23 +182,105 @@
           "pfad": "scripts/redaktions_standard.py",
           "klasse": "fest",
           "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "bb3fb29",
-              "datum": "2026-11-01",
-              "betreff": "Faktenfrische #964 – Teil 1: Pflicht-Kennzeichnung dauerhaft geheilt + DSL-Befunde geschlossen (#995)"
-            },
-            {
-              "sha": "b9c44e1",
-              "datum": "2026-10-30",
-              "betreff": "redaktion: neue Artikel auf Capital/WiWo/ZEIT-Standard (Wache + Gate)"
-            }
-          ],
-          "commits_art": "letzte-commits"
+          "commits": [],
+          "commits_art": "seit-signatur"
         }
       ],
-      "prev_sha256": "404d0cf33fc19c8e685cbe7f52b8291dd0155c3164627175da2e847c2f4a2ee6",
-      "files_sha256": "7c71f23a05a8eb721931f2afdf614d310ff2c31e766af430d0cedb6370bce265"
+      "files_sha256": "96a8896c41b0ed46cbc92fd1bf3669eec75e2a8cd4ced71a45cfdd55ab2e45cf",
+      "prev_sha256": "8a1dcc3abd9589ba67871474cdf5974c04dcb52a7eb0538b2cd441cd76f27d52"
+    },
+    {
+      "date": "2026-11-01",
+      "art": "heal",
+      "head": "6504f72",
+      "geaendert": [
+        "data/skill_lizenzen.json",
+        "data/skill_portfolio.yaml"
+      ],
+      "herkunft": [
+        {
+          "pfad": "data/skill_lizenzen.json",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "6504f72",
+              "datum": "2026-11-01",
+              "betreff": "feat(skills): marketingskills kuratiert (50) auf aktuellem main, Portfolio P1-P7, Lektorat im eigenen Haus"
+            },
+            {
+              "sha": "4d69d6a",
+              "datum": "2026-11-01",
+              "betreff": "fix(seo): GSC-Befunde W10/W11 geheilt – volle Verlinkung, Duplikate null (#998)"
+            },
+            {
+              "sha": "49287ef",
+              "datum": "2026-11-01",
+              "betreff": "Add animate skill for Claude Code (#1000)"
+            }
+          ],
+          "commits_art": "seit-signatur"
+        },
+        {
+          "pfad": "data/skill_portfolio.yaml",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "6504f72",
+              "datum": "2026-11-01",
+              "betreff": "feat(skills): marketingskills kuratiert (50) auf aktuellem main, Portfolio P1-P7, Lektorat im eigenen Haus"
+            }
+          ],
+          "commits_art": "seit-signatur"
+        }
+      ],
+      "files_sha256": "2b075b079c386c809a49383b548469a4ca8d12ba53139d3ff23b3ec28d6efa64",
+      "prev_sha256": "60386f7c569f95cb375abfb79daf04cb4e724f9980c07b51617dc69a09cb72ca"
+    },
+    {
+      "date": "2026-11-01",
+      "art": "heal",
+      "head": "ba12044",
+      "geaendert": [
+        "data/skill_portfolio.yaml"
+      ],
+      "herkunft": [
+        {
+          "pfad": "data/skill_portfolio.yaml",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "ba12044",
+              "datum": "2026-11-01",
+              "betreff": "fix(skills): Portfolio-YAML parbar – Anführungszeichen am Zeilenende geschlossen"
+            }
+          ],
+          "commits_art": "seit-signatur"
+        }
+      ],
+      "files_sha256": "38b8967d072bc1da2924e6c954e58eed92c42684df2989ba8a8e81906b2c9db5",
+      "prev_sha256": "63997d28ec060e34a137a126ef686508f4056d72bdec92a3b0e3aa92b461a900"
+    },
+    {
+      "date": "2026-11-01",
+      "art": "add",
+      "head": "bb432d4",
+      "geaendert": [
+        "scripts/serp_limits.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/serp_limits.py",
+          "klasse": "fest",
+          "urteil": "NEU UNTER SIEGEL",
+          "commits": [],
+          "commits_art": "neu-unter-siegel"
+        }
+      ],
+      "prev_sha256": "ad2f21ec4a3717f049b2a13c322caba1b7ce70e54e831e52a880694ea692cc1e",
+      "files_sha256": "1a564c68e678de62e3d59aae83fa355b6fd6f1684cd6184d799c1ffcad7207dc"
     }
   ]
 }
