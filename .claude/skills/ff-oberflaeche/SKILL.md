@@ -69,7 +69,7 @@ deshalb keinen zweiten Text hier.
 | Wie baue ich ein Fangnetz, was verbietet R1–R13, wie altern Ausnahmen? | `references/robustheit.md` (C31, #740-Ausnahme `head.html`) |
 | Was macht ein Werkzeug zum Produkt, welche Zusage ist hart, wie sitzen die `_headers`? | `references/produkte-und-header.md` (W1–W7, S1/S2) |
 | Wie gehe ich fertigen UI-Code durch, bevor ich „erledigt" melde? | `references/web-richtlinien.md` (24 Punkte in sechs Gruppen, jeder Punkt mit Gate oder Fundstelle) |
-| Hält meine Bewegung die Skala, hat jeder Lift ein Druck-Feedback, animiert etwas Layout-Eigenschaften? | `scripts/bewegungs_wache.py` (B1–B6, `npm run bewegung:check`, **in `GUARDS`**) – die Skala (13 Stufen) steht in `DESIGN.md` §6.1 und maschinenlesbar in `data/design/regelwerk.yaml`; Layout-Ausnahmen nur, wenn sie in §6.1 **namentlich** genannt sind. Ausnahmen mit Grund, Entscheidung **und Frist** in `data/bewegungs_wache_ausnahmen.yaml`. Vorgang: `BEWEGUNG-AUDIT-HIGHEND-2026-11-01.md` |
+| Hält meine Bewegung die Skala, hat jeder Lift ein Druck-Feedback, animiert etwas Layout-Eigenschaften? | `scripts/bewegungs_wache.py` (B1–B6, `npm run bewegung:check`, **in `GUARDS`**) – die Skala (13 Stufen) steht in `DESIGN.md` §6.1 und maschinenlesbar in `data/design/regelwerk.yaml`; Layout-Ausnahmen nur, wenn sie in §6.1 **namentlich** genannt sind. Ausnahmen mit Grund, Entscheidung **und Frist** in `data/bewegungs_wache_ausnahmen.yaml`. **Druck-Feedback je Flächentyp** (Button `scale(.97)`, Karte nur `translateY(0)`, Zeile `translateX(0)`, `:active` hinter `:hover` und mit dem Elternkontext der Basisregel) steht als Tabelle in `DESIGN.md` §6.2. Vorgang: `BEWEGUNG-AUDIT-HIGHEND-2026-11-01.md` (Nachtrag 2) |
 
 ## Kommando-Notausgang
 

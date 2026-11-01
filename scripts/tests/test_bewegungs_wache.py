@@ -39,13 +39,14 @@ WACHE = SCRIPTS / "bewegungs_wache.py"
 REGELWERK = ROOT / "data" / "design" / "regelwerk.yaml"
 BERICHT = ROOT / "BEWEGUNG-AUDIT-HIGHEND-2026-11-01.md"
 
-# Eingefrorener Bestand NACH Schritt 1 (Skala erweitert, 01.11.2026).
-# Vorher: 42 Befunde (41 × B1, 1 × B4) und 107 Hinweise. Die Skala steht
-# jetzt in DESIGN.md §6.1 + regelwerk.yaml, `ease` ist ausdrücklich erlaubt –
-# deshalb 0 Befunde. Was bleibt, sind die zwei `transition: all` und die Lifts
-# ohne Druck-Feedback (Politur, kein Vertragsbruch).
+# Eingefrorener Bestand NACH Schritt 1 + B5-Heilung (01.11.2026).
+# Vorher: 42 Befunde (41 × B1, 1 × B4) und 107 Hinweise; nach Schritt 1 noch
+# 40 Hinweise (2 × B3, 38 × B5). Die 38 Lifts sind inzwischen Fläche für
+# Fläche geheilt und die zwei `transition: all` ausgeschrieben – deshalb 0/0.
+# Die Zahl darf nur fallen. Steigt sie, hat jemand Bewegung ohne Skala
+# eingebaut und niemand hat es gemerkt, bis dieser Test lief.
 BESTAND_BEFUNDE = 0
-BESTAND_HINWEISE = 40         # B3 (2) + B5 (38)
+BESTAND_HINWEISE = 0          # B3/B5 = 0 seit dem B5-Nachtrag
 
 
 def wache(*argumente: str) -> subprocess.CompletedProcess:

@@ -211,10 +211,23 @@ def easings(dekoration: str) -> list[str]:
 
 
 def einstieg(selektor: str) -> str:
-    """Der Selektor ohne die Zustands-Pseudo-Klasse – die Kennung einer
-    Fläche, an der Druck-Feedback hängen müsste."""
-    basis = re.sub(r"::?(hover|focus-visible|focus-within|focus|active)\b", "", selektor)
-    return re.sub(r"\s+", " ", basis).strip()
+    """Die Kennung(en) einer Fläche ohne Zustands-Pseudo-Klasse.
+
+    Gibt eine Liste zurück, weil ein Regelkopf fast immer eine Selektorliste
+    ist (`.a:hover, .a:focus-visible`). Ohne das Zerlegen blieb die
+    Druckfläche offen, obwohl ihr `:active` längst existierte – ein Prüfer,
+    der falsch zählt, ist schlimmer als keiner. Pseudo-ELEMENTE (::after,
+    ::before) fallen ganz heraus: ein Glanzstreifen ist Dekoration, keine
+    Fläche, die man drückt.
+    """
+    kennungen = []
+    for teil in selektor.split(","):
+        basis = re.sub(r"::?(hover|focus-visible|focus-within|focus|active)\b", "", teil)
+        basis = re.sub(r"\s+", " ", basis).strip()
+        if not basis or "::" in basis:
+            continue
+        kennungen.append(basis)
+    return kennungen
 
 
 # ------------------------------------------------------------------ Regeln laden
@@ -515,18 +528,35 @@ def pruefe_baum(wurzel: Path, erlaubte_dauern: set[float],
                         "B4", rel, block.zeile, sel[:70],
                         f"Layout-Eigenschaft `{eigenschaft}` animiert – "
                         "erzwingt Reflow (DESIGN.md §6/§7)."))
-            if re.search(r":(hover|focus-visible|focus-within)\b", sel) \
-                    and "prefers-reduced-motion" not in block.medien \
-                    and re.search(r"(?:^|[;\s])transform\s*:", block.rumpf):
-                aktive_selektoren.setdefault(rel, []).append(einstieg(sel))
+            # Nur DIREKTE Flächen zählen für B5. Bewegt sich ein Kind, weil der
+            # ELTERNTEIL gehovert wird (`.karte:hover .bild`,
+            # `.karte:hover .pfeil`), ist das eine Zierbewegung – die
+            # Druckfläche ist der Elternteil und wird dort geprüft. Eine
+            # Anweisung „gib dem Bild ein :active" wäre Unsinn, und ein
+            # Prüfer, der Unsinn verlangt, wird zu Recht ignoriert.
+            zustaende = re.findall(r":(hover|focus-visible|focus-within)\b", sel)
+            nachfahren = bool(re.search(r":(?:hover|focus-visible|focus-within)\b[^,]*\s+[^,\s]",
+                                        sel))
+            # `transform: none` ist KEIN Lift – das ist das ausdrückliche
+            # Abschalten (z. B. `.ff-nl-top__cta:hover` wechselt nur die
+            # Farbe). Wer dort ein `:active` verlangt, verlangt eine
+            # Bewegung, die die Fläche bewusst nicht hat.
+            hebt = re.search(r"(?:^|[;\s])transform\s*:\s*(?!none\b)\S", block.rumpf)
+            if zustaende and not nachfahren and hebt \
+                    and "prefers-reduced-motion" not in block.medien:
+                aktive_selektoren.setdefault(rel, []).extend(einstieg(sel))
         for block in bloecke:
             sel = re.sub(r"\s+", " ", block.selektor).strip()
             if ":active" in sel:
-                gesehen.add((rel, einstieg(sel)))
+                gesehen.update((rel, kennung) for kennung in einstieg(sel))
+                # Der Zustand gilt für dieselbe Fläche in JEDER Datei: eine
+                # Druck-Rückmeldung in zzz-agency-polish.css deckt auch den
+                # Lift in z-premium-blog.css (Ladereihenfolge, gleiche Fläche).
+                gesehen.update(("*", kennung) for kennung in einstieg(sel))
 
     for rel, kandidaten in aktive_selektoren.items():
         for kandidat in kandidaten:
-            if (rel, kandidat) in gesehen:
+            if (rel, kandidat) in gesehen or ("*", kandidat) in gesehen:
                 continue
             if (rel, "B5") in ausnahmen_keys:
                 continue
@@ -637,6 +667,31 @@ def selbsttest() -> int:
                 ".karte:active { transform: scale(.98); }\n")
     pruefe("L10 Lift mit :active bleibt still",
            not [f for f in h if f.klasse == "B5"], [f.klasse for f in h])
+
+    # 7b) Ein Kind, das vom Eltern-Hover mitbewegt wird, ist keine Druckfläche
+    _, h = lauf(".karte:hover { transform: translateY(-2px); }\n"
+                ".karte:hover .bild { transform: scale(1.03); }\n"
+                ".karte:hover { transform: translateY(-2px); }\n"
+                ".karte:active { transform: scale(.98); }\n")
+    pruefe("L10b Kind-Bewegung erzeugt keinen eigenen B5-Hinweis",
+           not [f for f in h if "bild" in f.selektor], [f.selektor for f in h])
+
+    # 7c) Selektorlisten werden zerlegt – sonst bliebe eine Fläche offen,
+    #     deren `:active` längst existiert
+    _, h = lauf(".cta a:hover, .cta a:focus-visible { transform: translateY(-2px); }\n"
+                ".cta a:active { transform: translateY(0); }\n")
+    pruefe("L10c Selektorliste mit gemeinsamem :active bleibt still",
+           not [f for f in h if f.klasse == "B5"], [f.selektor for f in h])
+
+    # 7d) Ein Pseudo-Element ist keine Druckfläche
+    _, h = lauf(".cta:hover::after { transform: translateX(20px); }\n")
+    pruefe("L10d ::after erzeugt keinen B5-Hinweis",
+           not [f for f in h if f.klasse == "B5"], [f.selektor for f in h])
+
+    # 7e) `transform: none` ist kein Lift
+    _, h = lauf(".nurfarbe:hover { background: red; transform: none; }\n")
+    pruefe("L10e ausdrückliches transform:none erzeugt keinen B5-Hinweis",
+           not [f for f in h if f.klasse == "B5"], [f.selektor for f in h])
 
     # 8) Kommentare zählen nicht (auskommentierte Regel ist keine Regel)
     b, h = lauf("/* .a { transition: all .7s left; } */\n.b { color: red; }")

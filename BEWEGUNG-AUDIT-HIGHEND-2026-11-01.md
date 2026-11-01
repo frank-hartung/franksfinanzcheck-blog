@@ -7,7 +7,8 @@
 > danach steht die Wache im Gate. Was das geändert hat, steht in
 > „Nachtrag: Schritt 1 umgesetzt" am Ende; die Messung oben bleibt als
 > Vorher-Stand stehen, weil ein Bericht, der sich selbst überschreibt,
-> nichts belegt.
+> nichts belegt. **Nachtrag 2 (01.11.2026):** B5 ist geheilt – 29 Flächen
+> mit Druck-Feedback, Hinweise 40 → **0**. Der Nachtrag 2 steht ganz unten.
 > Prüfer: `scripts/bewegungs_wache.py` (B1–B6) · Ausnahmen:
 > `data/bewegungs_wache_ausnahmen.yaml` · Regeln: `DESIGN.md` §6/§7,
 > `data/design/regelwerk.yaml`.
@@ -169,11 +170,10 @@ Stilhinweis.
 
 ### Was offen bleibt (bewusst, mit Ort)
 
-* **B5, 38 Lifts ohne `:active`** – kein Vertragsbruch, aber §6.2 verlangt es
-  jetzt ausdrücklich. Heilung je Fläche (Buttons/Karten/Chips), nicht pauschal:
-  Ein Bild-Zoom braucht kein Druck-Feedback. Bis dahin Hinweis, kein Blocker.
-* **B3, 2 × `transition: all`** (`.ff-kurzantwort__badge`, `.ff-kurzantwort.ff-voice-active`)
-  – Eigenschaften ausbuchstabieren (`background-color, color, box-shadow`).
+* ~~**B5, 38 Lifts ohne `:active`**~~ – **erledigt, siehe Nachtrag 2.** Heilung
+  je Fläche (Buttons/Karten/Chips), nicht pauschal: Ein Bild-Zoom braucht kein
+  Druck-Feedback.
+* ~~**B3, 2 × `transition: all`**~~ – **erledigt, siehe Nachtrag 2.**
 * **`@media (hover: hover)`** fehlt an 37 von 38 Hover-Lifts. Auf Touch löst
   der erste Tap den Hover aus, bevor er klickt. Eigener Vorgang, weil es
   Verhalten ändert und nicht nur Zahlen.
@@ -208,3 +208,96 @@ Nicht die Zahlen – die kamen aus dem Repo. Beigetragen hat er die
 (Zustandswechsel), und dass ein Lift ohne Druck-Feedback eine halbe Rückmeldung
 ist. Genau daraus wurde B5 – der Befund, den keine bestehende Wache im Haus
 gestellt hat.
+
+## Nachtrag 2: B5 geheilt, B3 ausgeschrieben (01.11.2026)
+
+Der Auftrag war ausdrücklich **gefiltert**: nur echte Druck-Flächen –
+Buttons, Karten, Chips, Listenzeilen. Getrennt vom zweiten Vorgang
+(`@media (hover: hover)`, 37 Flächen), damit beides einzeln rückabwickelbar
+bleibt. Kein Suchen-und-Ersetzen; jedes Maß wurde an der Fläche entschieden.
+
+### Die Wache musste zuerst richtig messen
+
+Von den 38 gemeldeten B5-Fällen waren **6 keine Flächen**: Bilder und
+Deko-Elemente, die der Hover der *Karte* bewegt (`.post-entry .entry-cover img`,
+`.ff-related-card__img`, `.ff-pc-card__img`, `.ff-saison-card-cta svg`). Ein
+`:active` auf einem Bild ist sinnlos. Drei Korrekturen an
+`scripts/bewegungs_wache.py`, jede mit eigenem Selbsttest (26 → **30** Fälle):
+
+| Korrektur | Vorher falsch | Warum |
+|---|---|---|
+| Nachfahren ausschließen | `.karte:hover .bild` galt als Fläche | Der Druck gehört auf die Karte, nicht auf das Bild |
+| Selektorlisten teilen, Pseudoelemente fallen lassen | `.a:hover, a:focus-visible` blieb „offen", obwohl `a:active` existierte | Ein `::after` kann keinen Druckzustand haben |
+| `transform: none` ist kein Lift | Dark-Mode-Reset zählte als Lift | Sonst fordert die Wache Feedback für eine Bewegung, die es nicht gibt |
+| `:active` gilt flächenweit über alle Dateien | `custom.css` und `zzz-agency-polish.css` stylen dieselbe Pille | Eine Heilung an einer Stelle ist eine Heilung |
+
+38 → 32 Meldungen nach den drei Korrekturen. Das sind **29 verschiedene
+Flächen**: drei Meldungen nannten eine Fläche, die in zwei Dateien steht
+(`.post-entry` in `custom.css` *und* `z-premium-blog.css`,
+`.ff-pinterest-cta-btn` in `custom.css` *und* `zzz-agency-polish.css`).
+Gezählt wird die Fläche, nicht die Fundstelle.
+
+### Was gesetzt wurde – und warum unterschiedlich
+
+| Regel | Flächen | Selektoren |
+|---|---|---|
+| `translateY(0) scale(.97)` (+ Schatten zurück, wo der Hover einen setzt) | **15** | `.ff-btn`, `.ff-cockpit__submit`, `.ff-course-cta__btn`, `.ff-home-ctas a`, `.ff-kompass__cta`, `.ff-nl-strip .ff-nl-strip__cta`, `.ff-nl__chip`, `.ff-pc-chip`, `.ff-pillar-box__btn`, `.ff-pillar-card__cta-btn`, `.ff-pillar-nav__chip`, `.ff-pinterest-cta-btn`, `.ff-wz-andere__liste a`, `.ff-wz__btn`, `.newsletter-footer a` |
+| `translateY(0)` (kein Schrumpfen) | **10** | `.post-entry`, `.ff-pinterest-cta`, `.ff-pillar-card`, `.ff-pc-card`, `.ff-related-card`, `.ff-wz-karte`, `.ff-wz-weiter__karte`, `.ff-saison-card`, `.ff-saison-pillar`, `.ff-nl-themen__karte` |
+| `translateX(0)` | **2** | `.ff-audit-item`, `.ff-mini-toc a` |
+| `scale(.96)` (Fläche, die bei Hover **wächst**) | **1** | `.ff-ki-trigger` |
+| kein `transform`, nur Farbe/Rahmen | **1** | `.terms-index a` |
+| **Summe** | **29** | |
+
+Die 29 sind am Diff gezählt, nicht geschätzt
+(`git diff 6ffa3a4 -- assets/css/extended | grep`).
+
+`.post-entry` ist die eine Karte, die schon `:focus-within` hatte – sie bekommt
+`translateY(0)` und der Schleier (`::before`) bleibt auch beim Druck an, sonst
+flackerte die Fläche im Klickmoment.
+
+**`.post-entry` ist der eine Fall, der eine Entscheidung brauchte:**
+`custom.css:250` setzt dort `:hover` – und `custom.css` ist `FEST` in
+`scripts/integrity_guard.py` *und* in `data/integrity_lock.json`. Die Datei
+bleibt unangetastet; die Heilung steht in `z-premium-blog.css`, das dieselbe
+Fläche ohnehin mit `translateY(-5px)` und `:focus-within` führt (die
+`custom.css`-Regel ist dort schon überschrieben). Wer die Sperre später
+auflöst, findet das `:active` an der wirksamen Stelle.
+
+Zwei technische Details, die sonst still wirkungslos geblieben wären:
+
+1. **Elternkontext mitschreiben.** Die Basisregel lautet
+   `.ff-nl-strip .ff-nl-strip__cta` (0,2,0). Ein `.ff-nl-strip__cta:active`
+   (0,1,1) verliert dagegen und hätte nie gedrückt.
+2. **`:active` hinter `:hover`.** Gleiche Spezifität, spätere Regel gewinnt;
+   steht das `:active` davor, gewinnt im Druckmoment der Hover.
+
+### Vorher / Nachher, gemessen
+
+```
+vorher   (6ffa3a4):  0 Befunde   40 Hinweise (2 × B3, 38 × B5)
+nachher  (dieser Commit):  0 Befunde    0 Hinweise
+```
+
+`DESIGN.md` §6.2 nennt jetzt das Maß je Flächentyp (Tabelle), damit die
+nächste Fläche nicht neu geraten wird. Der eingefrorene Bestand in
+`scripts/tests/test_bewegungs_wache.py` steht auf 0/0 – er darf nur fallen.
+
+### Was weiterhin offen ist
+
+* **`@media (hover: hover)`, 37 Flächen** – eigener Vorgang, absichtlich nicht
+  in diesem Commit: Er ändert Verhalten (erster Tap löst auf Touch keinen
+  Hover mehr aus), nicht nur Zahlen.
+* **5 tote Deklarationen** (`custom.css:244`/`:625`,
+  `z-premium-blog.css:210`/`:545`/`:2496`) – aufräumen, wenn die Flächen
+  ohnehin angefasst werden.
+* **Gerenderte Prüfung** (`design-metrics`, `design-shots`) fehlt in diesem
+  Sandkasten weiterhin: kein Hugo, kein `playwright-core`. Die Aussage
+  „drückt sich richtig an" ist damit **statisch** belegt, nicht fotografiert.
+
+### Nachweis (lokal, 01.11.2026)
+
+```
+python3 scripts/bewegungs_wache.py --selftest     ✅ 30 Fälle grün
+python3 scripts/bewegungs_wache.py                ✅ 21 Dateien, 0 Befunde, 0 Hinweise
+python3 -m unittest scripts.tests.test_bewegungs_wache
+```

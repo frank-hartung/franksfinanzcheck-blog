@@ -167,9 +167,22 @@ Dokumentierte Ausnahmen, jede mit Grund:
 - `@media (prefers-reduced-motion: reduce)`: alle Lifts/Transitionen aus
   (custom.css + zzz-agency-polish.css §8).
 - **Lift braucht Druck:** Wer bei `:hover`/`:focus-visible` einen
-  `transform`-Lift setzt, setzt für dieselbe Fläche ein `:active`
-  (`transform: scale(.97)` oder `translateY(0)`). Heute fehlt das an 38
-  Flächen – B5 im Audit, Heilung dort geplant.
+  `transform`-Lift setzt, setzt für dieselbe Fläche ein `:active`. Das
+  `:active` steht **hinter** dem `:hover`, auf derselben Spezifität, und
+  trägt den Elternkontext mit, wenn die Basisregel ihn trägt
+  (`.ff-nl-strip .ff-nl-strip__cta:active`, nicht `.ff-nl-strip__cta:active`).
+  Das Maß hängt an der Fläche, nicht am Geschmack:
+
+  | Flächentyp | `:active` | Warum |
+  |---|---|---|
+  | Button, Chip, CTA | `translateY(0) scale(.97)` + Schatten zurück | Die kleine Fläche darf schrumpfen – das ist die Fingerkuppe |
+  | Karte (> 200px) | `translateY(0)` | `scale(.97)` auf 400px liest sich als Zoom-Fehler, nicht als Druck |
+  | Listenzeile, TOC-Link | `translateX(0)` bzw. Farbe/Rahmen | Der Lift war seitlich bzw. gar nicht vorhanden |
+  | Fläche, die bei Hover **wächst** | `scale(.96)` | Der Druck muss die Gegenrichtung sein (`.ff-ki-trigger`) |
+
+  Kein `:active` auf reinen Kind-Elementen (Bild im Karten-Hover) – dort
+  gehört die Rückmeldung auf die Karte. Stand 01.11.2026: **29 Flächen
+  geheilt, B5 = 0** (`scripts/bewegungs_wache.py`), ohne `(hover: hover)`.
 - Fokus: `:focus-visible` mit 3px solid #FFB300 – sichtbar in beiden Modi
   (verifiziert). Nicht per outline:none entfernen.
 

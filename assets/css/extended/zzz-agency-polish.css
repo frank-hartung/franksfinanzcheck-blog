@@ -200,6 +200,14 @@ input, textarea {
   transform: translateY(-2px);
 }
 
+/* Druck-Feedback (DESIGN.md §6.2, 01.11.2026): Der Lift sagt „hier geht es
+   weiter", das Zusammendrücken sagt „gehört". Ohne das zweite wirkt der
+   Button beim Klick stumm. 0.18s = Takt-Stufe (§6.1). */
+.ff-btn:active {
+  transform: translateY(0) scale(.97);
+  box-shadow: 0 2px 8px rgba(255, 179, 0, 0.28);
+}
+
 .ff-btn-primary {
   background: var(--ff-yellow);
   color: var(--ff-anthracite) !important;
@@ -407,6 +415,10 @@ input, textarea {
   box-shadow: var(--ff-shadow-2);
 }
 
+.ff-pinterest-cta:active {
+  transform: translateY(0);
+}
+
 :root[data-theme="dark"] .ff-pinterest-cta {
   background: var(--ff-surface);
   border-color: var(--ff-border-card);
@@ -458,6 +470,10 @@ input, textarea {
 .ff-pinterest-cta-btn:hover {
   background: #ad081b;
   transform: translateY(-1px);
+}
+
+.ff-pinterest-cta-btn:active {
+  transform: translateY(0) scale(.97);
 }
 
 @media (max-width: 680px) {
@@ -714,6 +730,10 @@ input, textarea {
   transform: translateY(-1px);
 }
 
+.ff-pillar-box__btn:active {
+  transform: translateY(0) scale(.97);
+}
+
 :root[data-theme="dark"] .ff-pillar-box__btn {
   background: var(--ff-emerald-bright);
   color: #0E5A43 !important;
@@ -760,6 +780,10 @@ input, textarea {
 .ff-related-card:hover {
   transform: translateY(-3px);
   box-shadow: var(--ff-shadow-2);
+}
+
+.ff-related-card:active {
+  transform: translateY(0);
 }
 
 :root[data-theme="dark"] .ff-related-card {
@@ -1024,6 +1048,10 @@ input, textarea {
   transform: translateY(-1px);
 }
 
+.ff-pillar-nav__chip:active {
+  transform: translateY(0) scale(.97);
+}
+
 :root[data-theme="dark"] .ff-pillar-nav__chip {
   background: var(--ff-surface);
   color: var(--ff-emerald-bright);
@@ -1073,6 +1101,12 @@ input, textarea {
 .ff-pillar-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--ff-shadow-2);
+}
+
+/* Druck-Feedback: Die Karte nimmt ihren Lift zurück. Kein scale(.97) –
+   auf einer 400px-Fläche sähe das wie ein Zoom-Fehler aus. */
+.ff-pillar-card:active {
+  transform: translateY(0);
 }
 
 :root[data-theme="dark"] .ff-pillar-card {
@@ -1233,6 +1267,10 @@ input, textarea {
 .ff-pillar-card__cta-btn:hover {
   background: var(--ff-yellow-dark);
   transform: translateY(-1px);
+}
+
+.ff-pillar-card__cta-btn:active {
+  transform: translateY(0) scale(.97);
 }
 
 /* Spar-Matrix */
@@ -1701,6 +1739,10 @@ footer.footer span:last-child a {
   transform: translateY(-1px);
 }
 
+.newsletter-footer a:active {
+  transform: translateY(0) scale(.97);
+}
+
 :root[data-theme="dark"] .newsletter-footer a {
   background: var(--ff-emerald-bright);
   color: #0E5A43 !important;
@@ -1972,6 +2014,10 @@ details.toc a {
   box-shadow: var(--ff-shadow-2);
 }
 
+.ff-pc-card:active {
+  transform: translateY(0);
+}
+
 :root[data-theme="dark"] .ff-pc-card {
   background: var(--ff-surface);
   border-color: var(--ff-border-card);
@@ -2113,6 +2159,12 @@ details.toc a {
   transform: translateY(-1px);
 }
 
+/* Kleine Pille: sie darf leicht nachgeben (scale .97), aber ohne Lift-Trick –
+   beim Drücken verschwindet die Bewegung ganz. */
+.ff-pc-chip:active {
+  transform: translateY(0) scale(.97);
+}
+
 :root[data-theme="dark"] .ff-pc-chip {
   color: var(--ff-emerald-bright);
 }
@@ -2143,7 +2195,6 @@ details.toc a {
     padding-top: 22px;
   }
 }
-
 
 /* ============================================================
    11. TABELLEN AUSSERHALB VON .post-content – LESBARKEIT
@@ -2832,6 +2883,10 @@ details.toc a {
   box-shadow: var(--ff-shadow-2);
 }
 
+.ff-kompass__cta:active {
+  transform: translateY(0) scale(.97);
+}
+
 :root[data-theme="dark"] .ff-kompass__cta {
   background: var(--ff-emerald-bright);
   color: var(--ff-emerald-dark) !important;
@@ -3112,6 +3167,11 @@ details.toc a {
   box-shadow: 0 6px 20px rgba(255, 179, 0, 0.45);
 }
 
+.ff-cockpit__submit:active {
+  transform: translateY(0) scale(.97);
+  box-shadow: var(--ff-glow-cta);
+}
+
 .ff-cockpit__reset,
 .ff-cockpit__copy {
   padding: 10px 14px;
@@ -3374,6 +3434,13 @@ details.toc a {
 .ff-audit-item:hover {
   border-color: var(--ff-emerald, #0E5A43);
   transform: translateX(2px);
+}
+
+/* Prüfpunkt-Zeile: Der Hover schiebt sie 2px nach rechts („hier bist du"),
+   der Klick nimmt die Bewegung zurück – scale wäre auf einer Zeile mit
+   Text unscharf, translateX(0) ist die ehrliche Antwort. */
+.ff-audit-item:active {
+  transform: translateX(0);
 }
 
 .ff-audit-item__checkbox {
@@ -3857,6 +3924,11 @@ details.toc a {
   color: #ffffff;
 }
 
+.ff-course-cta__btn:active {
+  transform: translateY(0) scale(.97);
+  box-shadow: 0 2px 10px rgba(14, 90, 67, 0.3);
+}
+
 :root[data-theme="dark"] .ff-course-cta__btn {
   background: var(--ff-emerald-bright, #7FD1B4);
   color: #0E5A43;
@@ -3948,7 +4020,6 @@ details.toc a {
 .ff-pillar-card__badge-row {
   margin-bottom: 12px;
 }
-
 
 /* ============================================================
    18. EDITORIAL BRAND CORE — KOSTENPROFIL (03.10.2026)
