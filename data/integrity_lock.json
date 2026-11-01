@@ -1,10 +1,11 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-31T19:27:29.596004+00:00",
-  "head": "36f7663",
+  "signed_at": "2026-11-01T14:32:11.060118+00:00",
+  "head": "887248e",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
+    "data/skill_lizenzen.json": "4505bab37654ba72ac5a08c8af4e34cc1753eb8c744034cdcd9cf990fd0ef264",
     "hugo.toml": "f69433af403fbb87704acce7336bca462480fb257b84e900690bf31294c31078",
     "layouts/_default/_markup/render-link.html": "9a86a24714a88557ea49d065f1edbd203688fa0798e70e8bd08a15a1b1a86b3c",
     "layouts/_partials/affiliate_anchor_attrs.html": "8a39d9c76656f2df3486520f774412ed8cbc5ba7e578af442ecede528ffaa1be",
@@ -42,9 +43,10 @@
     "scripts/plagiat_guard.py": "de3081e551947a12f4ad6f8cce586a62f1cba3cb14e660ed428139ed8b2ed707",
     "scripts/politur_ruine_heiler.py": "a0235c6f3be647685431d7f907a10d92d8ea671e10378a3a6e28d81b398fc408",
     "scripts/publikations_vertrag.py": "aed03d792f446b714c453a45d3d59cae12cbffd478ea144dd2a8987dd28c2dcf",
-    "scripts/redaktions_standard.py": "112f0d85299b5545d4adc308ff05090cbda9cc95b9f26738519117b21a04b827",
+    "scripts/redaktions_standard.py": "da9e8f2ac9a38c3f7736e5385a48d88960573f720bab6d81c00a10d07972b945",
     "scripts/reserve_artifacts.py": "f0a5e4affec798d3033b5c34fbc50688e2f9bca69ab0632d31cf9a727bfb3a6f",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
+    "scripts/skills_vertrag.py": "84b21c7c03efa6b411dae61748b945de4a10303085e5d1eb348bc88e4773209b",
     "scripts/stil_guard.py": "acf5aa4fca64992a3250d298e2b4dfdfca808310cc1608de8529c495d7294e1f",
     "scripts/tag_casing.py": "4e9f41c58f3293df189dc69a39763ee4637fe69cab1a181a39e6e4b65203c3d0",
     "scripts/wachen_vertrag.py": "9288fd85a130a8d73aa27cc3a9d14a3b09f8c161f57193a801e74c20ded7ba14",
@@ -54,161 +56,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c",
-  "audit_start_sha256": "0ec2a604ce91c4c75faf2c656d56754297c7783039ba029e2a3e6738ec8248aa",
+  "files_sha256": "47eeabcb3f070ac8c2d466259775a5e70a6cd3f6b74f121697e287cb8147bc74",
+  "audit_start_sha256": "afb8d73ee194df7272017cee54e516ea871955fb9b2f94f6a9be7af8e6929b66",
   "audit": [
-    {
-      "date": "2026-10-27",
-      "art": "set-current",
-      "head": "833472b",
-      "geaendert": [
-        "layouts/_partials/extend_post_content.html",
-        "layouts/_partials/header.html",
-        "layouts/_partials/home_clusters.html",
-        "layouts/pillar/single.html"
-      ],
-      "herkunft": [
-        {
-          "pfad": "layouts/_partials/extend_post_content.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "e25525c",
-              "datum": "2026-10-27",
-              "betreff": "SEO: Karten tragen einen Titel-Link, Backlink-Kadenz wird gemessen, Einbett-Block als Angebot"
-            },
-            {
-              "sha": "5320cbd",
-              "datum": "2026-10-27",
-              "betreff": "fix(backup): enforce explicit main-only environment policy (#914)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/_partials/header.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "9c855fc",
-              "datum": "2026-10-27",
-              "betreff": "fix(seo): Linktexte, Alt-Texte und Teilen-Zeile nach Seobility-Befund"
-            },
-            {
-              "sha": "5320cbd",
-              "datum": "2026-10-27",
-              "betreff": "fix(backup): enforce explicit main-only environment policy (#914)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/_partials/home_clusters.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "9c855fc",
-              "datum": "2026-10-27",
-              "betreff": "fix(seo): Linktexte, Alt-Texte und Teilen-Zeile nach Seobility-Befund"
-            },
-            {
-              "sha": "5320cbd",
-              "datum": "2026-10-27",
-              "betreff": "fix(backup): enforce explicit main-only environment policy (#914)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/pillar/single.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "e25525c",
-              "datum": "2026-10-27",
-              "betreff": "SEO: Karten tragen einen Titel-Link, Backlink-Kadenz wird gemessen, Einbett-Block als Angebot"
-            },
-            {
-              "sha": "5320cbd",
-              "datum": "2026-10-27",
-              "betreff": "fix(backup): enforce explicit main-only environment policy (#914)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "709a3c85eb2885bc0d0f4690363cf5fd9a38826efa0a1d050375090a447331bf",
-      "prev_sha256": null
-    },
-    {
-      "date": "2026-10-28",
-      "art": "set-current",
-      "head": "9b91737",
-      "geaendert": [
-        "scripts/internal_linker.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/internal_linker.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c406a14",
-              "datum": "2026-10-28",
-              "betreff": "ci(seo): SEO-Parität als Gate bei jedem PR und nächtlich am echten Build"
-            },
-            {
-              "sha": "3f67b54",
-              "datum": "2026-10-28",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "b4c4aec0eff32722c2acd9caec86019b440d3492ae6775ed1f604adb6a197e0f",
-      "prev_sha256": "0ec2a604ce91c4c75faf2c656d56754297c7783039ba029e2a3e6738ec8248aa"
-    },
-    {
-      "date": "2026-10-29",
-      "art": "heal",
-      "head": "af40ad901",
-      "geaendert": [
-        "scripts/internal_linker.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/internal_linker.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "9bb3e86c1",
-              "datum": "2026-10-29",
-              "betreff": "fix(ymyl): restore sealed versions and protect maintenance writers (#826) (#940)"
-            },
-            {
-              "sha": "e83a4b1af",
-              "datum": "2026-10-28",
-              "betreff": "feat(seo): Linkvorschläge, Cornerstones, Fokus-Keywords und Social-Vorschau (#924)"
-            },
-            {
-              "sha": "585676ee2",
-              "datum": "2026-10-05",
-              "betreff": "fix(reserve): Content-Reserve dauerhaft heilen statt auffüllen (#594)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "104a08f860dde39cdc8bea4e44346733dfb26563e8902138d600425fd639862d",
-      "prev_sha256": "697582844d87187e66fd8ee6c4c9126db3721f0986fe5278a100c86df07128e6"
-    },
     {
       "date": "2026-10-30",
       "art": "set-current",
@@ -237,7 +87,7 @@
         }
       ],
       "files_sha256": "441425c5b85516db5d81ae6ec569c4b8fe2f1cf0a8b6c0b619d3262f71c8023b",
-      "prev_sha256": "fca32aaab09ad6fc8969b69c130c629d10a8aaaec7e1115defe95da57a990110"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-30",
@@ -402,8 +252,71 @@
       "art": "set-current",
       "head": "36f7663",
       "geaendert": [],
-      "prev_sha256": "49cacb46ab15d2740cf3b2e8753060453b01133e69c821024c69d59bb11f4e44",
-      "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c"
+      "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c",
+      "prev_sha256": "49cacb46ab15d2740cf3b2e8753060453b01133e69c821024c69d59bb11f4e44"
+    },
+    {
+      "date": "2026-11-01",
+      "art": "add",
+      "head": "359e51d",
+      "geaendert": [
+        "scripts/skills_vertrag.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/skills_vertrag.py",
+          "klasse": "fest",
+          "urteil": "NEU UNTER SIEGEL",
+          "commits": [],
+          "commits_art": "neu-unter-siegel"
+        }
+      ],
+      "files_sha256": "8bb19f1fa6576da6a0b4e9282a7b97395ee256a99541611fb44118a5101faa00",
+      "prev_sha256": "404d0cf33fc19c8e685cbe7f52b8291dd0155c3164627175da2e847c2f4a2ee6"
+    },
+    {
+      "date": "2026-11-01",
+      "art": "add",
+      "head": "359e51d",
+      "geaendert": [
+        "data/skill_lizenzen.json"
+      ],
+      "herkunft": [
+        {
+          "pfad": "data/skill_lizenzen.json",
+          "klasse": "fest",
+          "urteil": "NEU UNTER SIEGEL",
+          "commits": [],
+          "commits_art": "neu-unter-siegel"
+        }
+      ],
+      "files_sha256": "df16b180d10728de27a26814ef09147c074b048853864f7fca7fe6802f3b93d6",
+      "prev_sha256": "f402c41a49f9da449c9c01a6a6d37dbcd22e003343b8f6cc11577b17a5b19725"
+    },
+    {
+      "date": "2026-11-01",
+      "art": "set-current",
+      "head": "887248e",
+      "geaendert": [
+        "scripts/redaktions_standard.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/redaktions_standard.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "887248e",
+              "datum": "2026-11-01",
+              "betreff": "fix(wachen): roter Selbsttest nennt jetzt die Grundlage, nicht die Wache"
+            }
+          ],
+          "commits_art": "seit-signatur"
+        }
+      ],
+      "prev_sha256": "57505dbdcf7be68861ab50bd2ab1152ca32fb8d55cff47a0fb08a48e81cfc978",
+      "files_sha256": "47eeabcb3f070ac8c2d466259775a5e70a6cd3f6b74f121697e287cb8147bc74"
     }
   ]
 }

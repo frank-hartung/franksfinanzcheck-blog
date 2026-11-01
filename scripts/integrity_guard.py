@@ -293,6 +293,17 @@ FEST = {
     # Syntax. Wer sie halb macht, nimmt jeder anderen Wache ihren Beweis;
     # deshalb unter dasselbe Siegel wie die Schwellen-Wachen.
     "scripts/wachen_vertrag.py",
+    # Skill-Vertrag und sein Lizenz-Register (01.11.2026, Doku-Umbau): Die Wache
+    # hält Kernbudget, Router, Laufbarkeit der Runbook-Befehle und die Lizenz-
+    # deckung jedes vendored Skills zusammen, das Register sagt, welcher Fremd-
+    # code überhaupt im Repo stehen darf. Wer die beiden tauscht, schreibt die
+    # Regeln um, ohne dass ein Gate aufsteht – und Fremdlizenz-Schwindel ist die
+    # einzige Klasse, die ein Repo nicht mehr loswird, wenn sie erst gemergt ist.
+    # FEST, nicht KRITISCH: kein Render-Hook, keine Affiliate-Kohärenz, aber
+    # regsetzend; ein HARD STOP wäre hier unverhältnismäßig, ein Beleg-Drift ist
+    # über --heal selbst signierbar.
+    "scripts/skills_vertrag.py",
+    "data/skill_lizenzen.json",
 }
 
 NEU_OHNE_SIGNATUR = " (neu ohne Signatur)"
