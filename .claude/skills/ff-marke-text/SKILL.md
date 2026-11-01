@@ -67,14 +67,18 @@ ist wörtlich aus `CLAUDE.md` übernommen.
 | Wo muss die Offenlegung hin, was genau muss sie sagen? | `references/kennzeichnung.md` (#623) |
 | Pin-Ziel defekt, Hashtag-Zahl, Instagram-Winkel blind? | `references/verbreitung.md` (C37, C43, #716) |
 
-## Fremd-Skills für Social-Texte (LinkedIn-Pack, MIT, seit 01.11.2026)
+## Fremd-Skills: Social-Pack und Marketing-Pack
 
-17 vendored Skills aus `charlie947/social-media-skills` (MIT, `LICENSE.txt` liegt in
-jedem Ordner; Register `data/skill_lizenzen.json`, Lock `skills-lock.json`, Wache
-K4/K6). Sie liefern Handwerk für LinkedIn-Texte, das `scripts/social_copywriter.py`
-nicht abdeckt: Hooks, Framework-Formate, Selbstbewertung, Grafik-Briefings.
-**Sie sind Vorschlag, nicht Vertrag** – was in diesem Skill und in
-`data/social/channels.yaml` steht, gilt.
+Zwei vendored Anlagen liefern Handwerk, das `scripts/social_copywriter.py` und die
+Redaktions-Engine nicht abdecken. **Sie sind Vorschlag, nicht Vertrag** – was in
+diesem Skill und in `data/social/channels.yaml` steht, gilt (K3 verlangt seit
+01.11.2026, dass **jeder** installierte Skill in einem Router steht: ein Skill,
+den niemand nennt, kostet bei jedem Start Beschreibung und wird nie gewählt).
+
+### Social-Pack (`charlie947/social-media-skills`, MIT, 17 Skills)
+
+`LICENSE.txt` liegt in jedem Ordner; Register `data/skill_lizenzen.json`, Lock
+`skills-lock.json` (K4/K6).
 
 | Auftrag | Skill |
 |---|---|
@@ -104,10 +108,33 @@ Drei Grenzen, die keine Auslegung sind:
    der Skills sind keine Belege dieses Blogs (D15) und die Fremdmessung-Sperre
    gilt unverändert: Was hier nicht gemessen ist, wird nicht behauptet.
 
-Pflege nur über den CLI (`npx -y skills@1.7.4 add|update|remove`), danach
-Lizenztext und Register nachziehen und `npm run skills:check` fahren. Die Anlage
-kostet rund 2.200 Tokens Auswahltext bei jedem Start (17 Beschreibungen) – wer
-sie verkleinert, entfernt Skills; Beschreibungen kürzen hält nicht, weil
+### Marketing-Pack (`coreyhaines31/marketingskills`, MIT)
+
+Elf Skills aus der Anlage, die schon vor dem Social-Pack im Repo lag. Sie decken
+die Arbeit an Auffindbarkeit und Wettbewerb ab; die Grenze steht in der letzten
+Spalte, weil diese Skills den Markt beschreiben, nicht dieses Haus.
+
+| Auftrag | Skill | Grenze im Haus |
+|---|---|---|
+| Seitenaufbau, Navigation, interne Verlinkung | `site-architecture` | kein URL-Umbau ohne Redirect-Plan, keine Taxonomie-Archive (D17) |
+| Technisches SEO-Audit | `seo-audit` | der Befund ist ein Vorschlag; Wahrheit sind die Gates (`npm run seo:check`) |
+| Strukturierte Daten | `schema` | JSON-LD entsteht im Template, nicht als Text im Artikel |
+| Viele Seiten aus einer Vorlage | `programmatic-seo` | nur über die Engine (`ff-produzieren`), nie als Textlawine |
+| Auffindbarkeit in KI-Antworten | `ai-seo` | keine Zitierquoten behaupten, die niemand gemessen hat (D15) |
+| Wettbewerber vergleichen | `competitor-profiling`, `competitors` | es gelten die Vergleichsgrundsätze, nicht die des Skills |
+| Themenplan, Ideen, Kalender | `content-strategy` | Slots und Quote rechnet `ff-produzieren` |
+| Werbetext, Headline, CTA | `copywriting` | ZEIT-Latte und eigene Stimme gewinnen (D3) |
+| Bestehenden Text nachschärfen | `copy-editing` | Lesbarkeit misst `lesbarkeit_schreiber.py` (D14) |
+
+Nicht hier geroutet: `analytics` (Messung – gesperrt, siehe `ff-pruefen`),
+`cro` und `animate` (Oberfläche – siehe `ff-oberflaeche`).
+
+### Pflege beider Anlagen
+
+Nur über den CLI (`npx -y skills@1.7.4 add|update|remove`), danach Lizenztext und
+Register nachziehen und `npm run skills:check` fahren. Das Social-Pack kostet
+rund 2.200 Tokens Auswahltext bei jedem Start (17 Beschreibungen) – wer
+verkleinert, entfernt Skills; Beschreibungen kürzen hält nicht, weil
 `npx skills update` sie überschreibt.
 
 ## Kommando-Notausgang

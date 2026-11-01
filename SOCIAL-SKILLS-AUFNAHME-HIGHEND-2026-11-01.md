@@ -1,9 +1,11 @@
-# Social-Skills: 17 Fremd-Skills aufgenommen, `animate` nachgewiesen (Highend, 01.11.2026)
+# Social-Skills: 17 Fremd-Skills aufgenommen, Router-Pflicht für alle (Highend, 01.11.2026)
 
-> Status: aufgenommen und vertraglich grün. Wahrheitsort für den Betrieb ist
-> `docs/ANLEITUNG-SKILLS.md`; der Router für den Alltag steht in
-> `.claude/skills/ff-marke-text/SKILL.md` („Fremd-Skills für Social-Texte“).
-> Diese Datei hält Auftrag, Messung, Entscheidungen und Preis fest.
+> Status: aufgenommen, geheilt, vertraglich grün. Wahrheitsort für den Betrieb ist
+> `docs/ANLEITUNG-SKILLS.md`; die Router stehen in
+> `.claude/skills/ff-marke-text/SKILL.md` („Fremd-Skills: Social-Pack und
+> Marketing-Pack“), `.claude/skills/ff-oberflaeche/SKILL.md` und
+> `.claude/skills/ff-pruefen/SKILL.md`. Diese Datei hält Auftrag, Messung,
+> Entscheidungen und Preis fest.
 
 ## Auftrag
 
@@ -24,13 +26,14 @@ kopiert**, `skills-lock.json` von 19 auf **36** Einträge gewachsen.
 | Einträge in `skills-lock.json` | 19 | **36** |
 | Einträge in `data/skill_lizenzen.json` | 18 | **36** (jeder fremde Skill genau einmal) |
 | Fremd-Skills mit `LICENSE`-Text im Ordner | 18 von 19 | **36 von 36** |
+| Fremd-Skills ohne Router | 13 (unsichtbar: K3 prüfte nur `ff-*`) | **0** |
 | `python3 scripts/skills_vertrag.py` | 1 Befund (`animate`, K6) | **0 Befunde**, 2 Warnungen (K8, Betreiberakt) |
 | Kern `CLAUDE.md` | 239 Zeilen / 17,4 KB | 240 Zeilen / 17,6 KB (Budget 420 / 32 KB) |
-| `ff-marke-text/SKILL.md` | 85 Zeilen | 129 Zeilen (Budget 200) |
+| `ff-marke-text/SKILL.md` | 85 Zeilen | 155 Zeilen (Budget 200) |
 
 Die Quelle: `charlie947/social-media-skills`, MIT (Copyright (c) 2026 Charlie
-Hills), 17 Skills, ~166 KB, letzter Upstream-Push 18.10.2026, kein archiviertes
-Repo. Eine reine Anlage aus `SKILL.md`-Dateien – **keine** `.py`-, `.js`- oder
+Hills), 17 Skills, ~166 KB, letzter Upstream-Push 18.10.2026, nicht archiviert.
+Eine reine Anlage aus `SKILL.md`-Dateien – **keine** `.py`-, `.js`- oder
 Shell-Dateien, also kein ausführbarer Fremdcode im Baum (Redos-Wache und
 Abhängigkeits-Wache damit nicht berührt, nachgesehen statt angenommen).
 
@@ -45,10 +48,41 @@ Abhängigkeits-Wache damit nicht berührt, nachgesehen statt angenommen).
    die die Nutzungsgrenze festhält. Ohne Eintrag meldet K6 bei jedem Lauf einen
    Befund – das war direkt nach dem CLI der Fall (18 Befunde).
 3. **Router.** Ein installierter Skill, den kein Text nennt, wird nicht geladen.
-   Die Router-Tabelle steht deshalb dort, wo der Auftrag entsteht – in
-   `ff-marke-text` („Was draußen als Text steht“), nicht als 17 Zeilen im Kern
-   (K1). Im Kern wurde nur die eine Zeile des Skill-Routers ergänzt
+   Die Router-Tabelle steht dort, wo der Auftrag entsteht – in `ff-marke-text`
+   („Was draußen als Text steht“), nicht als 17 Zeilen im Kern (K1). Im Kern
+   wurde nur die eine Zeile des Skill-Routers ergänzt
    („Social-Texte (LinkedIn-Pack)“), kein Abschnitt, keine zweite Zahl.
+4. **Die Klasse heilen, nicht den Einzelfall.** Siehe nächster Abschnitt – der
+   Aufnahme-Lauf hat gezeigt, dass 13 Fremd-Skills in *keinem* Router standen.
+
+## Die Klasse statt des Einzelfalls: K3 gilt jetzt für jeden Skill
+
+Beim Nachtragen der Router-Zeilen fiel der eigentliche Befund auf: **K3 prüfte
+nur `ff-*`**. Für vendored Skills gab es keine Router-Pflicht – sie bezahlten
+ihre Beschreibung bei jedem Start und wurden nie ausgewählt. Nachgemessen:
+
+* mit der alten, groben Prüfung (Name irgendwo als Zeichenkette): **10** Skills
+  ohne Router;
+* mit der neuen, genauen Prüfung (Name in Rückstrichen, wie das Repo ihn überall
+  schreibt): **13** – `analytics`, `schema` und `cro` kamen vorher durch, weil
+  das Wort zufällig in einer Prosa-Zeile stand. Ein Router, der „Analytics“ im
+  Satz sagt, routet keinen Skill.
+
+Geheilt wurde beides: die Wache und der Bestand.
+
+| Ort | Was jetzt dort steht |
+|---|---|
+| `scripts/skills_vertrag.py` (K3) | Router-Pflicht für **jeden** installierten Skill: eigener Skill → Kern; vendored → Kern **oder** ein `ff-*`-Einstieg, jeweils in Rückstrichen. `references/` zählt nicht (was erst nach dem Nachlesen sichtbar wird, ist kein Router). |
+| `ff-marke-text` | Marketing-Pack: `site-architecture`, `seo-audit`, `schema`, `programmatic-seo`, `ai-seo`, `competitor-profiling`, `competitors`, `content-strategy`, `copywriting`, `copy-editing` – jede Zeile mit der Grenze, die im Haus gilt. |
+| `ff-oberflaeche` | `animate` (Bewegung) und `cro` (Conversion) im UI-Router. |
+| `ff-pruefen` | `analytics` als **außer Betrieb**: der Skill beschreibt Tracking-Einbau, den die Fremdmessung-Sperre verbietet. |
+
+Beweis statt Behauptung: `--selftest` hat jetzt **19** eingefrorene Fälle
+(neu: fremder Skill ohne Router, mit Gegenprobe „im `ff-*`-Einstieg genannt →
+still“), `scripts/tests/test_skills_vertrag.py` **36** Tests (drei neue: Befund,
+Gegenprobe über `ff-*`, und der Prosa-Fall „Name ohne Rückstriche ist kein
+Router“). Der Lizenz-Fixture trägt seinen Router jetzt selbst, damit K6-Fälle
+weiter K6 messen und nicht versehentlich K3.
 
 ## Nebenbefund, den K6 sofort gefunden hat: `animate`
 
@@ -96,27 +130,50 @@ kein Nebensatz: Die Umbau-Entscheidung vom 01.11.2026 hat einen zweiten Schwung
 Fremd-Skills mit **~1.500** Tokens Dauerlast *abgelehnt*. Diese Aufnahme
 überschreitet diese Linie – bewusst und auf Auftrag, weil sie nicht Gate-Wissen
 dupliziert, sondern Handwerk für einen Kanal liefert, der tatsächlich sendet
-(LinkedIn, Priorität 3). Wer die Last senken will, entfernt Skills; das Kürzen
-von Beschreibungen hält nicht, weil `npx skills update` sie überschreibt.
+(LinkedIn, Priorität 3). Genau deshalb ist die Router-Pflicht jetzt scharf: Was
+Dauerlast kostet, muss wenigstens auffindbar sein. Wer die Last senken will,
+entfernt Skills; das Kürzen von Beschreibungen hält nicht, weil
+`npx skills update` sie überschreibt.
 
 ## Verifikation (alles am 01.11.2026 gelaufen)
 
 | Prüfung | Ergebnis |
 |---|---|
-| `python3 scripts/skills_vertrag.py` | 0 Befunde, 2 Warnungen (K8: Wache und Register ungezeichnet – Betreiberakt) |
-| `python3 scripts/skills_vertrag.py --selftest` | 17 Fälle grün |
-| `python3 -m unittest scripts.tests.test_skills_vertrag` | 33 Tests OK (1 Skip: Umzugs-Auszug `.cache/CLAUDE.md.orig` liegt nicht mehr vor) |
+| `python3 scripts/skills_vertrag.py` | 0 Befunde, 2 Warnungen (K8: Wache und Register ungezeichnet – Betreiberakt, siehe unten) |
+| `python3 scripts/skills_vertrag.py --selftest` | 19 Fälle grün (17 vorher + Router-Fall mit Gegenprobe) |
+| `npm run test:skills` | 36 Tests OK (1 Skip: Umzugs-Auszug `.cache/CLAUDE.md.orig` liegt nicht mehr vor) |
 | `python3 scripts/skript_syntax_wache.py` | 623 Dateien grün |
-| `python3 scripts/fremdmessung_sperre.py` | keine Spur, grün |
+| `python3 scripts/fremdmessung_sperre.py` | keine Spur, grün (auch nach der `analytics`-Sperrnotiz) |
 | `python3 scripts/trigger_wache.py --check` | 98 Workflows, 0 Befunde |
-| `python3 scripts/governance_contract.py --quick` | **nicht lauffähig in dieser Umgebung**: `pinterest_ziele.py` importiert `yaml`, PyYAML fehlt (vorbestehend, unabhängig von dieser Änderung) |
+| `python3 scripts/governance_contract.py --quick` | **43 Regeln grün** – im ersten Anlauf scheiterte der Lauf an fehlendem PyYAML; nach Installation der gepinnten Fassung (`pyyaml==6.0.3` aus `requirements-ci.in`) läuft er durch |
+| `npm run build:vertrag` / Hugo-Bau | nicht angetastet: diese Änderung berührt kein Template, keinen Workflow, keine Pipeline-Stufe |
+
+## Offener Betreiberakt (K8) – Besitzer und Schließpfad
+
+Die zwei K8-Warnungen sind kein Befund und blockieren nichts, aber sie brauchen
+einen Besitzer (D12): **Inhaber**, nicht Agent – `data/integrity_lock.json` steht
+auf der Liste der sicherheitsrelevanten Dateien, die nur mit ausdrücklichem
+Auftrag geändert werden. Der Schluss ist ein Zug, wenn der Stand grün ist:
+
+```bash
+python3 scripts/skills_vertrag.py            # muss 0 Befunde zeigen (heute: 0)
+python3 scripts/integrity_guard.py --add=scripts/skills_vertrag.py
+python3 scripts/integrity_guard.py --add=data/skill_lizenzen.json
+python3 scripts/integrity_guard.py           # Gegenprobe: Siegel trägt beide
+```
+
+Bis dahin gilt: Wer die Wache oder das Register austauscht, tauscht eine
+Entscheidung aus, ohne dass es laut wird – das ist der Grund, warum K8 die
+beiden Dateien überhaupt aufführt.
 
 ## Offene Entscheidung des Inhabers
 
 Der Pack ist vollständig aufgenommen; niemand muss etwas tun. Wenn die 2.200
 Tokens Dauerlast nicht gewollt sind, ist die Verkleinerung ein CLI-Lauf, kein
 Handgriff am Lock – Kandidaten in dieser Reihenfolge (externer Dienst oder
-Format ohne Auftrag in diesem Repo):
+Format ohne Auftrag in diesem Repo). Nach jedem Entfernen: Registerzeile und
+Router-Zeile löschen, `npm run skills:check` fahren (K4, K6 und jetzt auch K3
+melden jede Waise).
 
 ```bash
 npx -y skills@1.7.4 remove reels-scripting -y      # Apify + Gemini, keine Quelle im Haus
@@ -126,6 +183,3 @@ npx -y skills@1.7.4 remove gemini-infographic -y   # dito
 npx -y skills@1.7.4 remove youtube-thumbnail -y    # Format ohne Kanal im Repo
 npx -y skills@1.7.4 remove niche-research -y       # Live-Browser, T1-Sperre
 ```
-
-Danach Registerzeile und Router-Zeile nachziehen, `npm run skills:check`
-fahren – Entfernen ist derselbe Vorgang wie Aufnehmen, nur rückwärts.

@@ -79,8 +79,12 @@ Danach ist die Arbeit nicht fertig, sondern überprüfbar:
    „unbekannt“ nur mit `ausnahme` (`grund`, `entscheidung`, `faellig`).
    Eine Ausnahme ohne Frist ist eine stille Abschaffung; eine abgelaufene
    meldet als Warnung und blockiert die Auslieferung nicht.
-3. **Router:** ein Satz, wann der Skill zu lesen ist. Ein Skill ohne Router-
-   zeile wird nicht gefunden (K3).
+3. **Router:** ein Satz, wann der Skill zu lesen ist – in Rückstrichen
+   (`` `name` ``), denn nur so zählt er. Ein Skill ohne Routerzeile wird nicht
+   gefunden und kostet trotzdem bei jedem Start seine Beschreibung (K3, seit
+   01.11.2026 für **jeden** installierten Skill, nicht nur `ff-*`). Bei einem
+   Fremd-Skill gehört der Satz in den zuständigen `ff-*`-Einstieg, weil
+   `npx skills update` den Fremd-Text überschreibt – nicht in die Fremd-Datei.
 4. **Entfernen:** Ordner *und* `skills-lock.json`-Eintrag *und* Registerzeile.
    Ein Eintrag ohne Ordner warnt, ein Ordner ohne Eintrag ist ein Befund.
 
@@ -101,7 +105,7 @@ npm run test:skills                          # Selbsttest + 31 Unit-Tests
 |---|---|---|
 | K1 | Kern ≤ 420 Zeilen / ≤ 32 KB, `SKILL.md` ≤ 200 Zeilen | Der Kern sammelt wieder Details |
 | K2 | `name` == Ordner, `description` 80–1024 Zeichen, kein Markup | Der Skill wird nicht ausgewählt |
-| K3 | jeder `ff-*` im Router, jede Referenz verlinkt und vorhanden | Eine Regel wird nie gelesen |
+| K3 | jeder `ff-*` im Kern-Router, **jeder vendored Skill** in einem Router (Kern oder `ff-*`-Einstieg, in Rückstrichen), jede Referenz verlinkt und vorhanden | Eine Regel wird nie gelesen – oder ein Skill kostet Dauerlast ohne je gewählt zu werden |
 | K4 | installierter Fremd-Skill im Lock, kein `ff-*` im Lock | Herkunft oder Update-Recht fehlt |
 | K5 | `npm run`-Name, Pfad und Flagge in Code-Zäunen | Das Runbook befehlt einen Schritt, den es nicht gibt |
 | K6 | Lizenztext, NOTICE, Ausnahme mit Grund und Frist | Fremder Code ohne Erlaubnis im Repo |

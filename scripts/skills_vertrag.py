@@ -24,9 +24,12 @@ PRÜFUNGEN
   K2  Form: jeder Skill hat `SKILL.md` mit Frontmatter; `name` == Ordnername,
       kleinschreibig mit Bindestrichen, ≤ 64 Zeichen; `description` 80–1024
       Zeichen (1.024 ist die harte Obergrenze der Skill-Validierung).
-  K3  Erreichbarkeit: jeder `ff-*`-Skill steht im Router des Kerns; jede
+  K3  Erreichbarkeit: jeder `ff-*`-Skill steht im Router des Kerns, jeder
+      VENDORED Skill in einem Router (Kern oder `ff-*`-Einstieg); jede
       `references/*.md` ist im Skill verlinkt, und jede verlinkte Datei existiert.
-      Eine ungelesene Regel ist eine abgeschaffte Regel.
+      Eine ungelesene Regel ist eine abgeschaffte Regel – und ein Skill, den
+      niemand nennt, kostet Dauerlast ohne je ausgewählt zu werden (seit
+      01.11.2026, Social-Pack: 36 Beschreibungen ≈ 6.300 Tokens im Vorlauf).
   K4  Herkunft: jeder vendored Skill steht in `skills-lock.json` und umgekehrt;
       kein `ff-*` darf dort stehen (der Lock gehört `npx skills`).
   K5  Befehle in Code-Zäunen sind ausführbar: jedes `npm run …` aus
@@ -269,11 +272,35 @@ def k3_erreichbarkeit(root: Path) -> list[Fund]:
     ordner = root / SKILL_ORDNER
     if not ordner.is_dir():
         return funde
-    for d in sorted(p for p in ordner.iterdir() if p.is_dir() and p.name.startswith(EIGEN_PRÄFIX)):
+    # Auch ein FREMDER Skill braucht eine Router-Zeile. Seit dem 01.11.2026
+    # (Social-Pack) stehen mit einem Schlag 36 Beschreibungen im Vorlauf: rund
+    # 6.300 Tokens bei jedem Start. Ein Skill, den kein Einstiegstext nennt,
+    # bezahlt diese Last und wird trotzdem nie ausgewählt – die Doppelstrafe
+    # aus Dauerlast und Wirkungslosigkeit. Deshalb gilt K3 seit dem 01.11.2026
+    # für jeden installierten Skill; eigener Router ist der Kern, fremder
+    # Router sind Kern ODER die `ff-*`-Einstiege (`SKILL.md`, nicht `references/`
+    # – was erst nach dem Nachlesen sichtbar wird, ist kein Router).
+    ff_einstiege = "\n".join(
+        _text(root, f"{SKILL_ORDNER}/{p.parent.name}/SKILL.md") or ""
+        for p in sorted(ordner.glob(f"{EIGEN_PRÄFIX}*/SKILL.md")))
+    for d in sorted(p for p in ordner.iterdir() if p.is_dir()):
         rel = f"{SKILL_ORDNER}/{d.name}"
-        if d.name not in kern:
-            funde.append(Fund("K3", rel, "", f"`{d.name}` steht in keinem Router des Kerns – "
-                                             "der Agent weiß nicht, wann er lesen soll, und lässt ihn an."))
+        # Ein Router nennt den Skill beim Namen, nicht als Wort im Satz: „Analytics“
+        # in einer Prosa-Zeile ist kein Router für `analytics`. Deshalb zählt nur
+        # die Rückstrich-Schreibweise, die dieses Repo überall benutzt.
+        genannt = f"`{d.name}`"
+        if d.name.startswith(EIGEN_PRÄFIX):
+            if genannt not in kern:
+                funde.append(Fund("K3", rel, "", f"`{d.name}` steht in keinem Router des Kerns – "
+                                                 "der Agent weiß nicht, wann er lesen soll, und lässt ihn an."))
+        elif genannt not in kern and genannt not in ff_einstiege:
+            funde.append(Fund("K3", rel, "", f"`{d.name}` steht in keinem Router (Kern oder "
+                                             "`ff-*`-Einstieg) – der Skill kostet bei jedem Start Beschreibung "
+                                             "und wird nie ausgewählt. Router-Zeile nachziehen (Kern bei "
+                                             "jedem Auftrag, sonst der zuständige Skill) oder entfernen: "
+                                             "`npx -y skills@1.7.4 remove <name> -y`."))
+        if not d.name.startswith(EIGEN_PRÄFIX):
+            continue
         skill_md = _text(root, f"{rel}/SKILL.md") or ""
         for ref in sorted((d / "references").glob("*.md")) if (d / "references").is_dir() else []:
             if ref.name not in skill_md:
@@ -860,7 +887,26 @@ def selftest() -> int:
         if not any(f.klasse == "K6" and "vorbehalten" in f.meldung for f in funde):
             fehler.append("K6: eine Lizenz außerhalb des Freie-Sets ohne Ausnahme bleibt ohne Befund.")
 
-        # 16) Der Selbsttest prüft sich selbst, nicht das Netz: kein Befund
+        # 16) K3: fremder Skill ohne Router-Zeile – kostet Dauerlast und wird
+        #     nie ausgewählt. Mit Gegenprobe: dieselbe Anlage MIT Router bleibt still.
+        wurzel = _fixture(Path(tmp) / "k3fremd",
+                          fremd={"fremd-skill": "---\nname: fremd-skill\ndescription: „d“\n---\n\n# F\n"},
+                          lock={"version": 1, "skills": {"fremd-skill": {"source": "a/b",
+                                                                         "skillPath": "s/SKILL.md"}}},
+                          lizenz={"schema": 1, "eigene": {"skills": ["ff-eins"]},
+                                  "skills": {"fremd-skill": {"quelle": "a/b", "lizenz": "MIT"}}})
+        _schreibe(wurzel, f"{SKILL_ORDNER}/fremd-skill/LICENSE.txt", "MIT\n")
+        erzwinge("K3 fremder Skill ohne Router", wurzel, "K3")
+        # Gegenprobe: derselbe Baum, aber der `ff-*`-Einstieg nennt den Skill.
+        _schreibe(wurzel, f"{SKILL_ORDNER}/ff-eins/SKILL.md",
+                  GRUND_SKILL.format(name="ff-eins", titel="Prüfen", ref="eins.md",
+                                     desc=("Benutzen, wenn dieses Repo geprüft werden muss: Commit, Merge, "
+                                           "Befund, neue Wache oder ein Selbsttest, der nicht das eigene Modul "
+                                           "prüft. Auslöser sind auch 'welcher Test?' und 'das Gate ist rot'. "
+                                           "Nicht für Deploy-Reihenfolge. Fremd: `fremd-skill`.")))
+        erzwinge("K3 Gegenprobe fremder Skill im Router", wurzel, None)
+
+        # 17) Der Selbsttest prüft sich selbst, nicht das Netz: kein Befund
         #     hängt an einer Wanduhr (Datum ist gesetzt, nicht geraten).
         funde_heute, _, _ = befunde(Path(tmp) / "sauber")
         geprueft += 1
@@ -874,10 +920,10 @@ def selftest() -> int:
             print("   -", f)
         return 2
     print(f"✅ skills_vertrag --selftest OK ({geprueft} eingefrorene Fälle: Gegenprobe, Kernbudget, "
-          "Name und Beschreibung, verwaiste Referenz, ff-* im Lock, Fremd-Skill ohne Herkunft, "
-          "toter Befehl, Vorlagen-Ausnahme, Lizenztext, Ausnahme ohne und mit abgelaufener Frist, "
-          "Lizenz außerhalb des Freie-Sets, toter Regelwerk-Verweis, Siegelumfang und fehlende "
-          "Zeichnung, Uhr-Unabhängigkeit).")
+          "Name und Beschreibung, verwaiste Referenz, fremder Skill ohne Router (mit Gegenprobe), "
+          "ff-* im Lock, Fremd-Skill ohne Herkunft, toter Befehl, Vorlagen-Ausnahme, Lizenztext, "
+          "Ausnahme ohne und mit abgelaufener Frist, Lizenz außerhalb des Freie-Sets, toter "
+          "Regelwerk-Verweis, Siegelumfang und fehlende Zeichnung, Uhr-Unabhängigkeit).")
     return 0
 
 
