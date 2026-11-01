@@ -166,6 +166,34 @@ Bis dahin gilt: Wer die Wache oder das Register austauscht, tauscht eine
 Entscheidung aus, ohne dass es laut wird – das ist der Grund, warum K8 die
 beiden Dateien überhaupt aufführt.
 
+## Befund aus dem Vorbestand: `main` ist am Siegel rot (nicht aus diesem PR)
+
+Das PR-Gate „Integritäts-Siegel“ meldet rot – **vor** dieser Arbeit und ohne
+Zusammenhang mit ihr. Der Guard nennt die Abweichung selbst:
+
+```
+🟠 Festrelevante Abweichungen: scripts/redaktions_standard.py
+| Datei | Klasse | Arbeitsbaum | Herkunft | Urteil |
+| scripts/redaktions_standard.py | fest | = HEAD | zuletzt: 1491ec7 (2026-11-01, #1003) | VERSIEGELBAR |
+```
+
+Belege, dass es nicht dieser Branch ist:
+
+* `scripts/redaktions_standard.py` ist im Siegel (`data/integrity_lock.json`),
+  wurde zuletzt in **`1491ec7`** angefasst – dem Commit, auf dem dieser Branch
+  aufsetzt;
+* `git diff 1491ec7..HEAD -- scripts/redaktions_standard.py` ist leer;
+* `scripts/skills_vertrag.py` und `data/skill_lizenzen.json` stehen **nicht**
+  im Siegel (genau das meldet K8) – dieser Branch kann das Siegel also gar
+  nicht brechen.
+
+Der Schluss ist ein Betreiberakt, weil `data/integrity_lock.json` auf der Liste
+der sicherheitsrelevanten Dateien steht: `python3 scripts/integrity_guard.py
+--heal` signiert ausschließlich belegten, committeten Drift der Klasse FEST –
+hier genau der Fall; `--set-current` bleibt die menschliche Entscheidung für
+kritische Knoten. Ein Agent, der das Siegel stillschweigend nachzieht, hebt
+genau den Schutz auf, den der Guard verspricht.
+
 ## Offene Entscheidung des Inhabers
 
 Der Pack ist vollständig aufgenommen; niemand muss etwas tun. Wenn die 2.200
