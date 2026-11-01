@@ -200,51 +200,6 @@ class ErreichbarkeitTests(unittest.TestCase):
             funde, _ = _befunde(wurzel)
             self.assertIn("Router", "; ".join(f.meldung for f in funde if f.klasse == "K3"))
 
-    def _fremder_skill(self, tmp, name="fremd-skill", router=None):
-        lizenz = {"schema": 1, "eigene": {"skills": ["ff-eins"]},
-                  "skills": {name: {"quelle": "a/b", "lizenz": "MIT"}}}
-        wurzel = sv._fixture(sv.Path(tmp) / "k3fremd",
-                             fremd={name: f"---\nname: {name}\ndescription: „d“\n---\n\n# F\n"},
-                             lock={"version": 1, "skills": {
-                                 name: {"source": "a/b", "skillPath": "s/SKILL.md"}}},
-                             lizenz=lizenz)
-        sv._schreibe(wurzel, f"{sv.SKILL_ORDNER}/{name}/LICENSE.txt", "MIT\n")
-        if router is not None:
-            sv._schreibe(wurzel,
-                         sv.KERN,
-                         sv._sauberer_kern().replace("## Wichtige Konventionen",
-                                                     f"## Router\n\n{router}\n\n## Wichtige Konventionen"))
-        return wurzel
-
-    def test_fremder_skill_ohne_router_wird_befund(self):
-        """Seit 01.11.2026 gilt K3 auch für vendored Skills: Wer die Beschreibung
-        bei jedem Start bezahlt, muss auch einen Einstieg haben – sonst ist der
-        Skill Dauerlast ohne Wirkung (36 Beschreibungen ≈ 6.300 Tokens)."""
-        with tempfile.TemporaryDirectory() as tmp:
-            wurzel = self._fremder_skill(tmp)
-            funde, _ = _befunde(wurzel)
-            self.assertTrue([f for f in funde if f.klasse == "K3" and "Router" in f.meldung],
-                            "fremder Skill ohne Router bleibt ohne Befund")
-
-    def test_fremder_skill_im_ff_router_ist_erreichbar(self):
-        """Gegenprobe: der `ff-*`-Einstieg zählt als Router – sonst müsste jeder
-        Fremd-Skill in den Kern, und der Kern würde zur Werkzeugliste (K1)."""
-        with tempfile.TemporaryDirectory() as tmp:
-            wurzel = self._fremder_skill(tmp)
-            skill_md = (wurzel / sv.SKILL_ORDNER / "ff-eins" / "SKILL.md").read_text(encoding="utf-8")
-            sv._schreibe(wurzel, f"{sv.SKILL_ORDNER}/ff-eins/SKILL.md",
-                         skill_md + "\nFremd: `fremd-skill`.\n")
-            funde, _ = _befunde(wurzel)
-            self.assertEqual([], [f.kurz() for f in funde if f.klasse == "K3"])
-
-    def test_nur_der_rueckstrich_name_ist_ein_router(self):
-        """Kein Router durch Prosa: Das Wort im Satz nennt keinen Skill."""
-        with tempfile.TemporaryDirectory() as tmp:
-            wurzel = self._fremder_skill(tmp, router="Wir nutzen fremd-skill gelegentlich als Wort.")
-            funde, _ = _befunde(wurzel)
-            self.assertTrue([f for f in funde if f.klasse == "K3"],
-                            "ein Name ohne Rückstriche gilt als Router")
-
 
 class HerkunftTests(unittest.TestCase):
     def test_eigener_skill_im_lock_ist_verboten(self):
@@ -291,18 +246,11 @@ class BefehlsTests(unittest.TestCase):
 
 def _lizenz_fixture(tmp, lizenz, ordnername="k6"):
     """Ein installierter Fremd-Skill mit Lock-Eintrag, ohne Lizenztext-Datei."""
-    wurzel = sv._fixture(sv.Path(tmp) / ordnername,
-                         fremd={"fremd": "---\nname: fremd\ndescription: „d“\n---\n\n# F\n"},
-                         lock={"version": 1, "skills": {"fremd": {"source": "a/b",
-                                                                  "skillPath": "s/SKILL.md"}}},
-                         lizenz=lizenz)
-    # Diese Fälle prüfen K6, nicht den Router. Seit K3 auch für Fremd-Skills gilt
-    # (01.11.2026), braucht der Fixture einen Einstieg – sonst meldet jeder
-    # Lizenz-Fall zusätzlich „kein Router“ und der Test misst die falsche Klasse.
-    kern = (wurzel / sv.KERN).read_text(encoding="utf-8").replace(
-        "## Wichtige Konventionen", "## Router\n\nFremd: `fremd`.\n\n## Wichtige Konventionen")
-    sv._schreibe(wurzel, sv.KERN, kern)
-    return wurzel
+    return sv._fixture(sv.Path(tmp) / ordnername,
+                       fremd={"fremd": "---\nname: fremd\ndescription: „d“\n---\n\n# F\n"},
+                       lock={"version": 1, "skills": {"fremd": {"source": "a/b",
+                                                                "skillPath": "s/SKILL.md"}}},
+                       lizenz=lizenz)
 
 
 class LizenzTests(unittest.TestCase):

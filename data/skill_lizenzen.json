@@ -7,14 +7,13 @@
     "pbakaus/impeccable": "https://github.com/pbakaus/impeccable/blob/main/LICENSE",
     "Leonxlnx/taste-skill": "https://github.com/Leonxlnx/taste-skill/blob/main/LICENSE",
     "Panniantong/Agent-Reach": "https://github.com/Panniantong/Agent-Reach/blob/main/LICENSE",
-    "charlie947/social-media-skills": "https://github.com/charlie947/social-media-skills/blob/main/LICENSE",
-    "emilkowalski/skills": "https://github.com/emilkowalski/skills/blob/main/LICENSE"
+    "emilkowalski/skills": "https://github.com/emilkowalski/skills/blob/main/LICENSE",
+    "charlie947/social-media-skills": "https://github.com/charlie947/social-media-skills/blob/main/LICENSE"
   },
   "notiz": {
     "anthropics/skills": "Das Upstream-Repo trägt zusätzlich THIRD_PARTY_NOTICES.md in der Root; die drei hier genutzten Skills (frontend-design, skill-creator, webapp-testing) bringen je eine eigene LICENSE.txt (Apache-2.0) mit, die unverändert kopiert ist.",
     "pbakaus/impeccable": "Apache-2.0 verlangt die Weitergabe eines vorhandenen NOTICE (§4(d)) – deshalb liegt NOTICE.md neben LICENSE.txt.",
-    "charlie947/social-media-skills": "17 Skills, alle MIT (Copyright (c) 2026 Charlie Hills), Lizenztext je Ordner kopiert. Inhaltlich LinkedIn-Handwerk (Post, Hook, Score, Karussell, Profil) – die Anlage ist Text- und Ideenhandwerk: keine Apify-, Gemini- oder Notion-Aufrufe, keine neuen Secrets (D20/T1, ff-ki-automation), keine Messung (Fremdmessung-Sperre).",
-    "emilkowalski/skills": "`animate` lag seit dem Design-Rollout installiert im Repo, ohne Lizenztext und ohne Registereintrag – K6 hat das am 01.11.2026 gemeldet. MIT-Text (Copyright (c) 2026 Emil Kowalski) liegt im Ordner, der Eintrag ist ergänzt; dieselbe Lücke wurde am 01.11.2026 auf zwei Wegen geschlossen (main und dieser Branch)."
+    "charlie947/social-media-skills": "17 Skills, alle MIT (Copyright (c) 2026 Charlie Hills), Lizenztext je Ordner kopiert. Inhaltlich LinkedIn-Handwerk (Post, Hook, Score, Karussell, Profil) – die Anlage ist Text- und Ideenhandwerk: keine Apify-, Gemini- oder Notion-Aufrufe, keine neuen Secrets (D20/T1, ff-ki-automation), keine Messung (Fremdmessung-Sperre)."
   },
   "skills": {
     "ab-testing": {
@@ -143,6 +142,8 @@
     },
     "hook-generator": {
       "quelle": "charlie947/social-media-skills",
+      "lizenz": "MIT"
+    },
     "image": {
       "quelle": "coreyhaines31/marketingskills",
       "lizenz": "MIT"
@@ -152,32 +153,6 @@
       "lizenz": "Apache-2.0",
       "notiz": true
     },
-    "newsletter-voice": {
-      "quelle": "charlie947/social-media-skills",
-      "lizenz": "MIT"
-    },
-    "niche-research": {
-      "quelle": "charlie947/social-media-skills",
-      "lizenz": "MIT"
-    },
-    "pinned-comment": {
-      "quelle": "charlie947/social-media-skills",
-      "lizenz": "MIT"
-    },
-    "post-formatter": {
-      "quelle": "charlie947/social-media-skills",
-      "lizenz": "MIT"
-    },
-    "post-scorer": {
-      "quelle": "charlie947/social-media-skills",
-      "lizenz": "MIT"
-    },
-    "post-writer": {
-      "quelle": "charlie947/social-media-skills",
-      "lizenz": "MIT"
-    },
-    "profile-optimizer": {
-      "quelle": "charlie947/social-media-skills",
     "influencer-marketing": {
       "quelle": "coreyhaines31/marketingskills",
       "lizenz": "MIT"
@@ -214,6 +189,14 @@
       "quelle": "coreyhaines31/marketingskills",
       "lizenz": "MIT"
     },
+    "newsletter-voice": {
+      "quelle": "charlie947/social-media-skills",
+      "lizenz": "MIT"
+    },
+    "niche-research": {
+      "quelle": "charlie947/social-media-skills",
+      "lizenz": "MIT"
+    },
     "offers": {
       "quelle": "coreyhaines31/marketingskills",
       "lizenz": "MIT"
@@ -222,8 +205,24 @@
       "quelle": "coreyhaines31/marketingskills",
       "lizenz": "MIT"
     },
+    "pinned-comment": {
+      "quelle": "charlie947/social-media-skills",
+      "lizenz": "MIT"
+    },
     "popups": {
       "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "post-formatter": {
+      "quelle": "charlie947/social-media-skills",
+      "lizenz": "MIT"
+    },
+    "post-scorer": {
+      "quelle": "charlie947/social-media-skills",
+      "lizenz": "MIT"
+    },
+    "post-writer": {
+      "quelle": "charlie947/social-media-skills",
       "lizenz": "MIT"
     },
     "pricing": {
@@ -234,7 +233,19 @@
       "quelle": "coreyhaines31/marketingskills",
       "lizenz": "MIT"
     },
+    "profile-optimizer": {
+      "quelle": "charlie947/social-media-skills",
+      "lizenz": "MIT"
+    },
     "programmatic-seo": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "prospecting": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "public-relations": {
       "quelle": "coreyhaines31/marketingskills",
       "lizenz": "MIT"
     },
@@ -244,12 +255,6 @@
     },
     "reels-scripting": {
       "quelle": "charlie947/social-media-skills",
-    "prospecting": {
-      "quelle": "coreyhaines31/marketingskills",
-      "lizenz": "MIT"
-    },
-    "public-relations": {
-      "quelle": "coreyhaines31/marketingskills",
       "lizenz": "MIT"
     },
     "referrals": {
@@ -288,14 +293,16 @@
       "quelle": "anthropics/skills",
       "lizenz": "Apache-2.0"
     },
-    "voice-builder": {
-      "quelle": "charlie947/social-media-skills",
     "social": {
       "quelle": "coreyhaines31/marketingskills",
       "lizenz": "MIT"
     },
     "video": {
       "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "voice-builder": {
+      "quelle": "charlie947/social-media-skills",
       "lizenz": "MIT"
     },
     "webapp-testing": {

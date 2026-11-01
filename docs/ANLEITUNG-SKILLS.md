@@ -107,11 +107,11 @@ Danach ist die Arbeit nicht fertig, sondern überprüfbar:
    Eine Ausnahme ohne Frist ist eine stille Abschaffung; eine abgelaufene
    meldet als Warnung und blockiert die Auslieferung nicht.
 3. **Router:** ein Satz, wann der Skill zu lesen ist – in Rückstrichen
-   (`` `name` ``), denn nur so zählt er. Ein Skill ohne Routerzeile wird nicht
-   gefunden und kostet trotzdem bei jedem Start seine Beschreibung (K3, seit
-   01.11.2026 für **jeden** installierten Skill, nicht nur `ff-*`). Bei einem
-   Fremd-Skill gehört der Satz in den zuständigen `ff-*`-Einstieg, weil
-   `npx skills update` den Fremd-Text überschreibt – nicht in die Fremd-Datei.
+   (`` `name` ``), denn nur so findet ihn ein Agent. Bei einem Fremd-Skill
+   gehört der Satz in den zuständigen `ff-*`-Einstieg, weil `npx skills update`
+   den Fremd-Text überschreibt. K3 erzwingt die Routerzeile für `ff-*`; für
+   vendored Skills ist sie Handwerk, nicht Wache – dort misst K9 den Preis
+   (Summe der Beschreibungen) und K10 die Herkunft der Zusatzdateien.
 4. **Entfernen:** Ordner *und* `skills-lock.json`-Eintrag *und* Registerzeile.
    Ein Eintrag ohne Ordner warnt, ein Ordner ohne Eintrag ist ein Befund.
 
@@ -177,7 +177,7 @@ npm run test:skills                          # Selbsttest + 31 Unit-Tests
 |---|---|---|
 | K1 | Kern ≤ 420 Zeilen / ≤ 32 KB, `SKILL.md` ≤ 200 Zeilen | Der Kern sammelt wieder Details |
 | K2 | `name` == Ordner, `description` 80–1024 Zeichen, kein Markup | Der Skill wird nicht ausgewählt |
-| K3 | jeder `ff-*` im Kern-Router, **jeder vendored Skill** in einem Router (Kern oder `ff-*`-Einstieg, in Rückstrichen), jede Referenz verlinkt und vorhanden | Eine Regel wird nie gelesen – oder ein Skill kostet Dauerlast ohne je gewählt zu werden |
+| K3 | jeder `ff-*` im Router, jede Referenz verlinkt und vorhanden | Eine Regel wird nie gelesen |
 | K4 | installierter Fremd-Skill im Lock, kein `ff-*` im Lock | Herkunft oder Update-Recht fehlt |
 | K5 | `npm run`-Name, Pfad und Flagge in Code-Zäunen | Das Runbook befehlt einen Schritt, den es nicht gibt |
 | K6 | Lizenztext, NOTICE, Ausnahme mit Grund und Frist | Fremder Code ohne Erlaubnis im Repo |
@@ -257,17 +257,19 @@ Handwerk – Hook, Post, Framework-Format, Selbstbewertung, Karussell-Briefing,
 Profil, Newsletter-Stimme. Vorgang und Messung:
 `SOCIAL-SKILLS-AUFNAHME-HIGHEND-2026-11-01.md`.
 
-* **Router:** die Tabelle steht in `.claude/skills/ff-marke-text/SKILL.md` unter
-  „Fremd-Skills für Social-Texte“ – dort, wo der Auftrag entsteht. Im Kern wurde
-  nur die eine Zeile des Skill-Routers um „Social-Texte (LinkedIn-Pack)“
-  ergänzt; 17 Zeilen im Kern wären Dauerlast (K1).
+* **Router:** die Tabellen stehen in `.claude/skills/ff-marke-text/SKILL.md`
+  unter „Fremd-Skills: Social-Pack und Marketing-Pack“ – dort, wo der Auftrag
+  entsteht. Im Kern wurde nur die eine Zeile des Skill-Routers um „Social-Texte
+  (LinkedIn-Pack)“ ergänzt; 17 Zeilen im Kern wären Dauerlast (K1).
 * **Grenze der Nutzung:** `data/social/channels.yaml` gewinnt gegen jede
   Skill-Empfehlung (Zeichen, Hashtags, Emoji, Link im ersten Kommentar, Deutsch).
   Keine Apify-, Gemini- oder Browser-Wege, keine neuen Secrets (D20/T1), keine
   Messung; fehlt der Zugang, endet der Skill an dieser Stelle.
 * **Preis:** ~2.164 Tokens Auswahltext bei jedem Start (8.656 Zeichen über 17
-  `description`-Felder). Wer verkleinert, entfernt Skills über den CLI – Kürzen
-  der Beschreibung überschreibt das nächste `npx skills update`.
+  `description`-Felder). Damit liegt die Bibliothek bei **55,5 von 56 KB** des
+  K9-Budgets: der nächste Schwung passt nicht mehr ohne Entscheidung. Wer
+  verkleinert, entfernt Skills über den CLI – Kürzen der Beschreibung
+  überschreibt das nächste `npx skills update`.
 * **Nebenbefund:** `animate` (emilkowalski/skills) lag ohne `LICENSE.txt` und
   ohne Registereintrag im Repo; K6 hat es beim ersten Lauf am neuen Bestand
   gemeldet. Text und Eintrag sind nachgezogen, `standen` ergänzt. Damit gilt
