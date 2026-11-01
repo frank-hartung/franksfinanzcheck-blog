@@ -459,6 +459,32 @@ await run('WF-9E5A: Fristwarnung rot → „Sicherung ist gelaufen“, Zugang er
   true, ['Die Sicherung ist gelaufen', 'Zugänge erneuern', 'Environment `backup`',
          '<!-- alert-runbook: backup-frist -->'],
   null, ['Häufigste Ursachen', 'API-Key abgelaufen', 'Einrichtung unvollständig']);
+// 01.11.2026 (WF-9E5A / #923): Der Rueckweg-Beweis ist eine eigene Aussage.
+//     Konstellation aus der Frischwache: Die Sicherung lief, nur die
+//     Kurzpruefung der Wiederherstellbarkeit ist rot (z. B. ein Syntaxfehler in
+//     restore_drill.sh). Der alte Rat („gelaufen, Datei-Befunde unten") verlangt
+//     einen Neustart – der aendert an einem Syntaxfehler nichts.
+await run('#923: Wiederherstellbarkeit rot -> eigener Rat, kein Neustart-Versprechen',
+  { workflowName: 'Backup-Frischwache (operative RPO-Wache)', branch: 'main', event: 'schedule',
+    conclusion: 'failure',
+    jobs: [{ name: 'Backup-Frische pruefen (RPO 24 h / 52 h)', conclusion: 'failure',
+             html_url: 'https://x/jobs/9231',
+             steps: [{ name: 'Kurzpruefung Wiederherstellbarkeit (strukturell, ohne Secrets)',
+                       conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: backup-restore -->',
+         'Rückweg ist aber nicht belegt', 'restore_drill.sh',
+         'Ein Lauf ohne geprüfte Familie endet mit Exit 2 statt mit „bestanden“',
+         'actions/workflows/backup-frischwache.yml',
+         'docs/ANLEITUNG-OFFSITE-BACKUP.md', 'Abschnitt „Wiederherstellung“'],
+  null, ['API-Key abgelaufen', 'GROQ', 'Häufigste Ursachen', 'Einrichtung unvollständig']);
+// Gegenprobe: derselbe Schrittname in einem fremden Workflow bleibt beim
+// allgemeinen Runbook – die Klasse haengt am Workflow, nicht am Wort.
+await run('#923-Gegenprobe: gleicher Schrittname in fremdem Workflow -> Standard-Rat',
+  { workflowName: 'Bot-Watchdog', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'Lauf', conclusion: 'failure', html_url: 'https://x/jobs/9232',
+             steps: [{ name: 'Kurzpruefung Wiederherstellbarkeit', conclusion: 'failure' }] }] },
+  true, ['Häufigste Ursachen'], null, ['<!-- alert-runbook: backup-restore']);
+
 // Andere Backup-Schritte: eigenes Runbook ohne GROQ/GEMINI-Rat.
 await run('WF-9E5A: Export rot → Backup-Runbook ohne GROQ/GEMINI-Rat',
   { workflowName: 'Offsite-Backup', branch: 'main', event: 'schedule', conclusion: 'failure',

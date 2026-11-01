@@ -24,6 +24,16 @@
 #  werden am Ende gelöscht – auch bei Abbruch. Die Passphrase kommt aus
 #  BACKUP_PASSPHRASE oder wird verdeckt abgefragt (nicht in der History).
 #
+#  KEIN SCHEIN-GRÜN (01.11.2026, Vorgang WF-9E5A / #923):
+#    Bis hierher endete der Aufruf mit `--nur-git --nur-kv` (oder einem
+#    Setzen beider Schalter) mit Exit 0 und dem Satz „RESTORE-DRILL
+#    BESTANDEN“ – ohne eine einzige Datei geprüft zu haben. Genau diese
+#    Zeile wäre im Betrieb als Wiederherstellungs-Nachweis zitiert worden.
+#    Jetzt gilt: Beide Familien sind voreingestellt; wird eine ausdrücklich
+#    abgewählt (`--nur-git`/`--nur-kv`), steht das im Abschluss, und ohne
+#    geprüfte Familie endet der Lauf mit Exit 2 (Aufruf verstanden, aber
+#    nichts bewiesen) statt mit einem falschen Bestanden.
+#
 #  Exit: 0 = Wiederherstellung bewiesen · 1 = GESCHEITERT (laut) · 2 = Aufruf
 #  AUFRUF (aus dem Repo-Wurzelverzeichnis, mit `gh auth login` angemeldet):
 #    bash scripts/restore_drill.sh --repo frank-hartung/franksfinanzcheck-backup
@@ -43,6 +53,7 @@ BUNDLE=""
 KVDATEI=""
 GIT=1
 KV=1
+GEPRUEFT=""
 MAX_ALTER_H=48
 
 cleanup() { rm -rf "$WORK"; }
@@ -139,6 +150,7 @@ if [ "$KV" = 1 ]; then
   esac
   python3 "$HIER/kv_backup.py" --pruefen "$KVDATEI" \
     || fail "KV-Sicherung ist strukturell nicht wiederherstellbar (Meldungen oben)"
+  GEPRUEFT="${GEPRUEFT:+$GEPRUEFT, }Abonnenten (KV)"
   echo "✓ KV: entschlüsselt und vollständig – Rückspielen: Anleitung, Abschnitt „Ernstfall“ (wrangler kv bulk put … --remote)"
 fi
 
@@ -155,7 +167,19 @@ if [ "$GIT" = 1 ]; then
   [ -s "$BUNDLE" ] || fail "Bundle ist leer (0 Bytes)"
 
   R="$WORK/restore"
-  git clone --quiet "$BUNDLE" "$R" 2>/dev/null \
+  # Enthaltenen Branch ausdrücklich wählen (01.11.2026, #923): Ein Bundle, in
+  # dem HEAD auf keinen der mitgelieferten Refs zeigt, lässt `git clone` mit
+  # einer bloßen WARNUNG einen LEEREN Arbeitsbaum anlegen – der Drill hätte
+  # danach „kein HEAD im Restore“ gemeldet, obwohl das Bundle in Ordnung ist.
+  # `main` hat Vorrang, sonst der erste enthaltene Branch.
+  KOPF_BRANCH="$(git bundle list-heads "$BUNDLE" 2>/dev/null \
+    | awk '{print $2}' | sed -n 's#^refs/heads/##p' | grep -x 'main' || true)"
+  if [ -z "$KOPF_BRANCH" ]; then
+    KOPF_BRANCH="$(git bundle list-heads "$BUNDLE" 2>/dev/null \
+      | awk '{print $2}' | sed -n 's#^refs/heads/##p' | head -n 1)"
+  fi
+  [ -n "$KOPF_BRANCH" ] || fail "Bundle enthält keinen Branch (nur Tags/HEAD) – nicht wiederherstellbar"
+  git clone --quiet --branch "$KOPF_BRANCH" "$BUNDLE" "$R" 2>/dev/null \
     || fail "git clone aus dem Bundle fehlgeschlagen – Bundle unbrauchbar"
   git -C "$R" rev-parse --verify -q HEAD >/dev/null || fail "kein HEAD im Restore"
   [ -f "$R/hugo.toml" ]                    || fail "hugo.toml fehlt im Restore"
@@ -164,6 +188,7 @@ if [ "$GIT" = 1 ]; then
   [ -f "$R/content/impressum/index.md" ]   || fail "Impressum fehlt im Restore (DDG-Pflicht!)"
   [ -f "$R/content/datenschutz/index.md" ] || fail "Datenschutzerklärung fehlt im Restore"
   DATEIEN=$(git -C "$R" ls-files | wc -l | tr -d ' ')
+  GEPRUEFT="${GEPRUEFT:+$GEPRUEFT, }Repository (Git-Bundle, ${DATEIEN} Dateien)"
   echo "✓ Struktur: HEAD ok · ${DATEIEN} Dateien · ${POSTS} Artikel · Rechtsseiten vorhanden"
 
   if command -v hugo >/dev/null 2>&1; then
@@ -177,4 +202,10 @@ if [ "$GIT" = 1 ]; then
   fi
 fi
 
-echo "✅ RESTORE-DRILL BESTANDEN – die geprüften Sicherungen sind vollständig wiederherstellbar."
+if [ -z "$GEPRUEFT" ]; then
+  echo "🛑 RESTORE-DRILL: Es wurde NICHTS geprüft (--nur-git und --nur-kv zugleich)." >&2
+  echo "   Ein Lauf ohne Prüfung darf nicht „bestanden“ heißen. Aufruf: --nur-git ODER --nur-kv ODER ohne Schalter (beides)." >&2
+  exit 2
+fi
+echo "✅ RESTORE-DRILL BESTANDEN – geprüft: $GEPRUEFT."
+echo "   Vollständig wiederherstellbar: aus dem Backup lässt sich ein Arbeitsstand bauen (HEAD, Rechtsseiten, Abonnenten-Daten)."
