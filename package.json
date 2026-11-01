@@ -91,6 +91,8 @@
     "design:handoff:check": "python3 scripts/design_handoff.py --check",
     "design:quality": "npm run design:handoff:check && npm run design:gate && npm run test:design",
     "test:design": "python3 -m unittest scripts.tests.test_design_varianten",
+    "bewegung:check": "python3 scripts/bewegungs_wache.py",
+    "test:bewegung": "python3 scripts/bewegungs_wache.py --selftest && python3 -m unittest scripts.tests.test_bewegungs_wache",
     "test:toc": "node scripts/ff_toc_beweglich_test.mjs && node scripts/ff_heading_glyph_guard_test.mjs && python3 scripts/mini_toc_premium_guard.py --selftest && python3 scripts/mini_toc_premium_guard.py",
     "cockpit:check": "python3 scripts/fixkosten_kompass_guard.py --selftest && python3 scripts/fixkosten_kompass_guard.py --source-only && hugo --minify --cleanDestinationDir && python3 scripts/fixkosten_kompass_guard.py --public public",
     "test:cockpit": "python3 -m unittest scripts.tests.test_fixkosten_kompass && node --test tools/fixkosten-cockpit.test.mjs",

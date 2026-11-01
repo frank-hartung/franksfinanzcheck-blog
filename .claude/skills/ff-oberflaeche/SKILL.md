@@ -69,6 +69,7 @@ deshalb keinen zweiten Text hier.
 | Wie baue ich ein Fangnetz, was verbietet R1–R13, wie altern Ausnahmen? | `references/robustheit.md` (C31, #740-Ausnahme `head.html`) |
 | Was macht ein Werkzeug zum Produkt, welche Zusage ist hart, wie sitzen die `_headers`? | `references/produkte-und-header.md` (W1–W7, S1/S2) |
 | Wie gehe ich fertigen UI-Code durch, bevor ich „erledigt" melde? | `references/web-richtlinien.md` (24 Punkte in sechs Gruppen, jeder Punkt mit Gate oder Fundstelle) |
+| Hält meine Bewegung die Skala (0,16/0,18/0,3 s, Haus-Kurve), hat jeder Lift ein Druck-Feedback, animiert etwas Layout-Eigenschaften? | `scripts/bewegungs_wache.py` (B1–B6, `npm run bewegung:check`) – Regeln aus `DESIGN.md` §6/§7 und `data/design/regelwerk.yaml`, Ausnahmen mit Grund **und Frist** in `data/bewegungs_wache_ausnahmen.yaml`. Bestand und Heilungsplan: `BEWEGUNG-AUDIT-HIGHEND-2026-11-01.md` |
 
 ## Kommando-Notausgang
 
@@ -79,6 +80,7 @@ npm run werkzeuge:check                      # W1–W7: Quelle + Build + public/
 npm run test:toc                             # „Im Artikel“-Navigation, V1–V14
 npm run test:a11y:browser                    # axe-core im gerenderten DOM (WCAG AA)
 python3 scripts/design_handoff.py --check    # Marken- und Exportdrift
+npm run bewegung:check                       # B1–B6: Dauer, Easing, Lift, Druck-Feedback
 ```
 
 ## Nicht zuständig für
