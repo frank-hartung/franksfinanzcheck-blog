@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "generated_at": "2026-10-31T21:43:24Z",
+  "generated_at": "2026-11-01T01:20:22Z",
   "modus": "kandidaten",
-  "commit": "121e11308a84ace4e22d211106b47de535736f56",
+  "commit": "3955319f02eb8e87253248798a9068f941132631",
   "kapazitaet": {
-    "stichtag": "2026-10-31",
+    "stichtag": "2026-11-01",
     "artikel": 110,
     "faellig": 8,
     "ueberfaellig": 8,
-    "ueberfaellig_max_tage": 3,
+    "ueberfaellig_max_tage": 4,
     "naechste_frist": {
       "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
       "frist": "2026-11-03",
-      "restlaufzeit": 3
+      "restlaufzeit": 2
     },
     "budget": 4,
     "laeufe_je_tag": 1.0,
@@ -33,7 +33,7 @@
         "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
         "titel": "Sicher heizen: Was sie abdeckt und wie lange sie läuft",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 3,
+        "tage_zu_spaet": 4,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -41,7 +41,7 @@
         "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
         "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 3,
+        "tage_zu_spaet": 4,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -49,7 +49,7 @@
         "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
         "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 3,
+        "tage_zu_spaet": 4,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -57,7 +57,7 @@
         "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
         "titel": "Preisgarantie Gas: Was bei Preiserhöhung hilft",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 3,
+        "tage_zu_spaet": 4,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -65,7 +65,7 @@
         "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
         "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 3,
+        "tage_zu_spaet": 4,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -73,7 +73,7 @@
         "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
         "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 3,
+        "tage_zu_spaet": 4,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -81,7 +81,7 @@
         "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
         "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 3,
+        "tage_zu_spaet": 4,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -89,7 +89,7 @@
         "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
         "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 3,
+        "tage_zu_spaet": 4,
         "vorher_faellig": true,
         "folgeprüfung": false
       }
