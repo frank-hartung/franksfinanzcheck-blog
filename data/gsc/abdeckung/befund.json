@@ -465,7 +465,7 @@
   },
   {
    "aufwand": "S",
-   "beleg": "117 indexiert bei 104 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (7 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (4 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /tags/ (1 Impr.), /tags/dns-server-%C3%A4ndern/ (1 Impr.)",
+   "beleg": "117 indexiert bei 104 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (6 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (4 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /tags/ (1 Impr.), /tags/dns-server-%C3%A4ndern/ (1 Impr.)",
    "dringlichkeit": "P2",
    "id": "M4",
    "owner": "Automat",
@@ -540,22 +540,22 @@
    },
    {
     "grund": "verlinkt",
-    "impressionen": 44,
+    "impressionen": 52,
     "inlinks": 17,
     "lastmod_tage": 18,
     "outlinks": 2,
-    "position": 34.14,
+    "position": 35.79,
     "score": 13.1,
     "url": "/pillar/internet-dsl/"
    },
    {
     "grund": "verlinkt",
-    "impressionen": 16,
+    "impressionen": 17,
     "inlinks": 7,
     "lastmod_tage": 13,
     "outlinks": 11,
-    "position": 44.44,
-    "score": 8.68,
+    "position": 45.82,
+    "score": 9.02,
     "url": "/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/"
    },
    {
@@ -1730,7 +1730,7 @@
   "repo": "public/sitemap.xml"
  },
  "schema": 1,
- "stand": "2026-11-01T12:50:48Z",
+ "stand": "2026-11-01T13:04:01Z",
  "tote_ziele": [],
  "ursachen": [
   {
@@ -1904,9 +1904,9 @@
   ],
   "top_nicht_live": [
    {
-    "impressionen": 7,
+    "impressionen": 6,
     "klicks": 0,
-    "position": 19.43,
+    "position": 21.17,
     "url": "/posts/kuehlschrank-strom-sparen-einstellung/",
     "weiterleitung": "/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/"
    },

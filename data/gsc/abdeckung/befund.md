@@ -57,8 +57,8 @@
 | Score | Seite | Impressionen | Inlinks | Grund |
 |---|---|---|---|---|
 | 13.45 | `/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/` | 58 | 2 | verlinkt |
-| 13.1 | `/pillar/internet-dsl/` | 44 | 17 | verlinkt |
-| 8.68 | `/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/` | 16 | 7 | verlinkt |
+| 13.1 | `/pillar/internet-dsl/` | 52 | 17 | verlinkt |
+| 9.02 | `/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/` | 17 | 7 | verlinkt |
 | 8.51 | `/impressum/` | 14 | 7 | verlinkt |
 | 8.44 | `/pillar/` | 9 | 2 | verlinkt |
 | 8.42 | `/datenschutz/` | 14 | 6 | verlinkt |
@@ -93,7 +93,7 @@
 | M2 | P1 | Crawl-Nachfrage für gefundene, nicht abgerufene Seiten | 69 „Gefunden – zurzeit nicht indexiert“ bei 104 indexierbaren Seiten |
 | M10 | P2 | Neuen Abdeckungs-Export einlesen | Stand 2026-10-19 · 13 Tage alt |
 | M3 | P2 | Redaktions-Queue für „gecrawlt, nicht indexiert“ | 4 × „Gecrawlt – zurzeit nicht indexiert“ |
-| M4 | P2 | Index-Altlasten benennen statt mitzählen | 117 indexiert bei 104 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (7 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (4 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /tags/ (1 Impr.), /tags/dns-server-%C3%A4ndern/ (1 Impr.) |
+| M4 | P2 | Index-Altlasten benennen statt mitzählen | 117 indexiert bei 104 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (6 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (4 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /tags/ (1 Impr.), /tags/dns-server-%C3%A4ndern/ (1 Impr.) |
 | M7 | P2 | Sprung im Abdeckungsbericht erklären | Diagramm 2026-10-17: indexiert 138 → 117 |
 | M9 | P2 | Indexquote als Zielgröße etablieren | 117 von 437 bekannten URLs |
 | M5 | P3 | noindex-Bestand als Vertrag führen | 5 × robotsNoIndex in content/ · GSC 5 |
