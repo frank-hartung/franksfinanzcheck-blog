@@ -2260,6 +2260,35 @@ def wirkungsprobe() -> int:
     return 0
 
 
+# Die Haus-Markierung aller Stellen, an denen ein Skript eine fehlende
+# Bibliothek meldet (hier: `editorial_review_gate.ParseError`). Kein
+# Freifahrtschein – nur die präzisere Ansprache im Selbsttest.
+GRUND_MARKIERUNG = "PyYAML fehlt"
+
+
+def _messgrundlage_fehlt() -> bool:
+    """Fragt die Grundlage, nicht die Fälle: blockiert eine fehlende Bibliothek
+    den Messpfad des Selbsttests?
+
+    Am 01.11.2026 hat ein roter Selbsttest einen Agenten einen Umweg von zwei
+    Stunden und einen falschen Satz in einen Bericht gekostet („die Wache ist
+    erweislich kaputt"). Kaputt war nichts: Der Interpreter hatte PyYAML nicht,
+    der Publikations-Vertrag meldet ohne ihn fail-closed, und der Gegenprobe-Fall
+    „gute Änderung bleibt still" kann ohne Messung nicht still bleiben. Wer das
+    nicht unterscheidet, meldet entweder eine Defekt-Story oder – schlimmer – grün.
+    """
+    try:
+        # Zwei verschiedene Körper – bei bytegleichen Texten short-courced der
+        # Vertrag (nichts geändert, nichts zu messen) und die Frage nach der
+        # Grundlage würde „grundlos grün" beantworten.
+        gruende = _vertrag_gruende({"slug": "probe", "fm": 'title: "X"',
+                                    "body": "Kurzer Satz hier."},
+                                   "Kurzer Satz steht hier. Noch ein kurzer Satz folgt.")
+    except Exception:  # noqa: BLE001 – die Frage ist die Grundlage, nicht der Fall
+        return True
+    return any(GRUND_MARKIERUNG in g for g in gruende)
+
+
 def selftest():
     fehler = []
     for name, fn, erwartung in SELFTEST:
@@ -2271,6 +2300,28 @@ def selftest():
         if ist != erwartung:
             fehler.append(f"{name}: {ist}, erwartet {erwartung}")
     if fehler:
+        # Diagnose vor Urteil (01.11.2026). Dieser Block meldete je Failure
+        # „die Wache selbst ist defekt" – und traf damit daneben: Am 01.11.2026
+        # sah ein Agent Exit 2, hielt die Wache für logisch kaputt und schrieb
+        # genau das in einen Bericht, dabei fehlte nur PyYAML im Interpreter
+        # (der Selbsttest fährt über den Publikations-Vertrag, und der parst
+        # Frontmatter mit yaml – ohne Grundlage meldet er fail-closed, das ist
+        # Absicht). Mit `pip install -r requirements-ci.txt` sind alle 48 Fälle
+        # grün. Beides bleibt Exit 2 – eine Messung ohne Grundlage ist kein Grün
+        # (C33) – aber nur eines davon ist ein Befund an der Wache, und nur das
+        # erste gehört dem Leser zuerst gesagt.
+        if _messgrundlage_fehlt():
+            print("🛑 SELBSTTEST BLOCKIERT – die Prüfgrundlage fehlt, nicht die Wache "
+                  "(Exit 2, keine Datei wird geschrieben):")
+            for f in fehler:
+                print("   -", f)
+            print("   Der Publikations-Vertrag meldet fail-closed, weil eine "
+                  "Bibliothek fehlt – ohne Messung ist kein Fall beweisbar, auch "
+                  "die Gegenprobe nicht. Exit 2 bleibt deshalb richtig (keine "
+                  "Messung ist kein Grün), nur das Urteil über die Wache wäre falsch.")
+            print("   Beheben: python3 -m pip install -r requirements-ci.txt "
+                  "(Zeile `pyyaml==6.0.3`), dann neu laufen lassen.")
+            return 2
         print("🛑 SELBSTTEST FEHLGESCHLAGEN – die Wache selbst ist defekt "
               "(Exit 2, keine Datei wird geschrieben):")
         for f in fehler:
