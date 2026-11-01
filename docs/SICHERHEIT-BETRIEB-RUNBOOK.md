@@ -897,3 +897,92 @@ Melder selbst ist. Zwei Titel, zwei Räte, ein Werkzeug.
 **Die Reihenfolge der Reparatur, wenn beides rot ist:** erst den Kanal heilen
 (F3: eine Fassung, `node --check`), dann den Deploy-Zugang (A4/D2). Solange der
 Melder tot ist, ist jede andere Meldung nur zufällig zu sehen – auch diese.
+
+---
+
+## G. Das Siegel über dem Regelkern der Skills (01.11.2026)
+
+Seit dem Skill-Umbau meldet `scripts/skills_vertrag.py` in K8 den Siegelstand –
+als **Warnung mit Schlusszeile, nie als Befund**. Diese Seite hier ist der
+Auftrag, den die Warnung ankündigt. Der Grund für die Zurückhaltung derselbe wie
+bei Issue #316: Ein HARD STOP auf eine ungezeichnete Datei bestraft die
+Produktion, nicht den Austausch. Zeichnen bleibt ein Menschenakt.
+
+### G1 · Zwei Dateien gehören ins Siegel – in dieser Reihenfolge
+
+Der Stand des Berichts (nachzulesen mit `python3 scripts/skills_vertrag.py`):
+
+```text
+[K8] scripts/skills_vertrag.py   – steht weder in KRITISCH/FEST noch im Siegel
+[K8] data/skill_lizenzen.json    – steht weder in KRITISCH/FEST noch im Siegel
+```
+
+Beide Dateien *entscheiden*: die Wache hält Kernbudget, Router, Befehle und
+Lizenzdeckungen zusammen, das Register sagt, welcher Fremdcode überhaupt im Repo
+stehen darf. Wer sie austauscht, schreibt die Regeln um, ohne dass ein Gate
+aufsteht – und genau das ist die Klasse, die `integrity_guard.py` seit dem
+12.08. schließt.
+
+**Schritt 0 · Vorbedingung, nicht überspringbar.** `npm run test:redaktion` ist
+rot (Fall „Vertrag-gute-aenderung-still“, Exit 2) – vor dem Umbau so gewesen und
+auf einem frischen Auschecken von `51e0270` nachgeprüft, also nicht vom Skill-
+Umbau gemacht. `scripts/redaktions_standard.py` steht in FEST und ist
+versiegelt. Wer **jetzt** signiert, wäscht den defekten Stand: Das Siegel würde
+erklären, ein Zustand sei gut, dessen eigener Selbsttest Nein sagt. Erst der
+Inhaber heilt die Wache, dann wird gezeichnet. Dass kein Agent diesen Schritt
+erledigt, ist kein Zögern, sondern der Unterschied zwischen Schutz und
+Selbstbestätigung.
+
+**Schritt 1 · Klasse.** In `scripts/integrity_guard.py` den Block `FEST` um die
+beiden Pfade erweitern – mit dem üblichen Kommentarblock, warum FEST und nicht
+KRITISCH: kein Render-Hook, keine Affiliate-Kohärenz, aber regsetzend. Die Klasse
+ist die Anmeldung zum Schloss; `--add` lehnt Pfade außerhalb von KRITISCH/FEST
+ab, es gibt keinen Weg direkt ins Lot.
+
+**Schritt 2 · Zeichnen, im selben Zug wie die Klassenänderung.**
+
+```bash
+python3 scripts/integrity_guard.py --add=scripts/skills_vertrag.py
+python3 scripts/integrity_guard.py --add=data/skill_lizenzen.json
+python3 scripts/integrity_guard.py --set-current
+```
+
+Ein Commit davor oder danach ist kein Versehen, sondern ein rotes PR-Gate: eine
+Datei in FEST ohne Zeichnung wirft `.github/workflows/integrity-lock.yml` bei
+jedem Pull Request (#316-Muster – der Alarm galt der Produktion).
+
+**Schritt 3 · Nachweis, nicht Gefühl.**
+
+```bash
+python3 scripts/integrity_guard.py --drift-audit   # die beiden Pfade tauchen nicht mehr auf
+python3 scripts/skills_vertrag.py                   # 0 Befunde, 0 Warnungen – K8 verstummt
+npm run test:skills                                 # 17 Selbsttest-Fälle, 33 Unit-Tests
+git diff data/integrity_lock.json                   # Akte mit `art` und Datum je Signatur
+```
+
+Eine Signatur ohne Akteneintrag ist keine – das Protokoll schreibt die Herkunft
+mit (`audit` im Lock), und nur daran lässt sich #346 von einer bewussten Zeichnung
+unterscheiden.
+
+### G2 · Was der Audit sonst noch meldet
+
+`--drift-audit` nennt aktuell `scripts/redaktions_standard.py` als FEST-Drift mit
+Urteil „VERSIEGELBAR“ (Arbeitsbaum = HEAD, zuletzt `51e0270`). Die Tabelle gilt
+für jeden künftigen Fund:
+
+| Was der Audit sagt | Was folgt | Was nicht folgt |
+|---|---|---|
+| FEST-Drift, Selbsttests grün | `--heal` (belegt: committet, bytegleich, nicht KRITISCH) | `--set-current` auf Vorrat |
+| FEST-Drift, Selbsttest rot | erst heilen (Schritt 0), dann zeichnen | Signatur unter dem defekten Stand |
+| KRITISCH-Abweichung | Ursache über `--drift-audit` klären, dann Mensch entscheidet | `--heal` (hebt für KRITISCH nie die Sperre auf) |
+| Lock unlesbar oder zusammengeschnitten | `--repair-lock --dry-run` lesen, dann reparieren | neuen Lock von Hand tippen |
+
+### G3 · Was schon geregelt ist (kein Auftrag)
+
+Das Siegel selbst ist seit #346 durch `merge=binary` geschützt. Seit dem
+01.11.2026 gilt dasselbe für `data/skill_lizenzen.json` und `skills-lock.json`
+(`.gitattributes`): Beide sind Register, die ein Werkzeug schreibt – ein
+Text-Merge zweier Fassungen hätte dort einen Hash auf einer Datei, die so nicht
+existiert, und einen Lizenz-Eintrag, den niemand geprüft hat. `merge=union` wäre
+eine Erfindung, weil eine Vereinigung von Herkunftsangaben keine zweite Messung
+ist, sondern ein drittes Gerücht.

@@ -1,9 +1,11 @@
 # DESIGN.md – Design-System von FranksFinanzcheck
 
 > Technische Design-System-Dokumentation. Wird von KI-Agenten (Impeccable,
-> frontend-design, taste-skill, web-design-guidelines) gemeinsam mit
-> PRODUCT.md vor jeder UI-Arbeit gelesen. Stand: 12.09.2026
-> (Design-Skills-Rollout). Generiert aus dem echten CSS-Bestand
+> frontend-design, taste-skill) gemeinsam mit PRODUCT.md vor jeder UI-Arbeit
+> gelesen; der Review des fertigen Codes läuft über die hauseigene Prüfliste
+> `.claude/skills/ff-oberflaeche/references/web-richtlinien.md` (seit 01.11.2026
+> statt des Fremd-Skills `web-design-guidelines`, dessen Herkunft ungeklärt war).
+> Stand: 12.09.2026 (Design-Skills-Rollout), Kopf nachgezogen 01.11.2026. Generiert aus dem echten CSS-Bestand
 > (assets/css/extended/) und mit `e2e/design-metrics.mjs` verifiziert.
 
 ## 1. Farb-Tokens

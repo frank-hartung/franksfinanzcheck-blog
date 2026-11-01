@@ -13,6 +13,21 @@
 # Kein `merge=union`: Ein Vereinigen der Akten wäre hier eine Fälschung.
 data/integrity_lock.json merge=binary
 
+# HERKUNFTS-REGISTER SIND KEIN TEXT (01.11.2026)
+# `data/skill_lizenzen.json` (Lizenz zu jedem vendored Skill) und
+# `skills-lock.json` (vom Skills-CLI geschriebene Herkunft samt `computedHash`)
+# werden nie von Hand gepflegt: der CLI schreibt den Lock, das Register hält
+# deckungsgleich zu ihm. Ein Text-Merge zweier Fassungen macht hier nichts, was
+# je ein Werkzeug geschrieben hätte – beim Lock ein Hash auf einer Datei, die in
+# dieser Form nicht existiert, im Register ein Eintrag ohne Lizenztext. Beide
+# Fälle melden die Wachen erst NACH dem Merge (K4/K6 in
+# `scripts/skills_vertrag.py`), dann aber für jeden Pull-Request. Wie beim
+# Siegel (#346) gilt deshalb: lieber ein sichtbarer Konflikt, den ein Mensch mit
+# `npx skills` und einem Nachtrag im Register auflöst. Kein `merge=union` –
+# eine Vereinigung von Herkunftsangaben wäre eine Erfindung.
+data/skill_lizenzen.json merge=binary
+skills-lock.json merge=binary
+
 # SEARCH-CONSOLE-DATEN SIND EINE MESSUNG, KEIN TEXT (24.10.2026)
 # Am 21.10.2026 trafen zwei Bot-Branches (`automation/gsc-tagesdaten-*`) auf
 # denselben drei Dateien aufeinander, und Git hat sie als Text zusammengesetzt:
