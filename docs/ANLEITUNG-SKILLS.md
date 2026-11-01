@@ -92,7 +92,7 @@ Danach ist die Arbeit nicht fertig, sondern überprüfbar:
 ```bash
 python3 scripts/skills_vertrag.py            # K1–K8, Exit 0/1/2
 python3 scripts/skills_vertrag.py --md       # für die Lauf-Summary
-python3 scripts/skills_vertrag.py --selftest # 16 Sabotage-Fälle + Gegenproben
+python3 scripts/skills_vertrag.py --selftest # 17 Sabotage-Fälle + Gegenproben
 npm run skills:check                         # dasselbe, im Hausstil
 npm run test:skills                          # Selbsttest + 31 Unit-Tests
 ```
@@ -112,6 +112,14 @@ K8 ist **immer eine Warnung, nie ein Befund**. Zeichnen ist ein Betreiberakt,
 und ein Gate, das eine ungezeichnete Datei hart rot macht, bestraft die falsche
 Seite: Am 19.09.2026 (Issue #316) stoppte ein HARD STOP die Content-Engine im
 ersten Schritt, weil sechs geheilte Skripte nicht neu gezeichnet waren.
+
+Am 01.11.2026 ist K8 stumm: `scripts/skills_vertrag.py` und
+`data/skill_lizenzen.json` stehen in `FEST` und sind gezeichnet (52 Dateien,
+`docs/SICHERHEIT-BETRIEB-RUNBOOK.md` § G1–G4). Für die Aufnahme eines Skills
+ändert das nichts am Ablauf – ein belegenbarer Drift heilt die Engine selbst
+(`--heal`), eine Signatur ist nur bei ungeklärter Änderung nötig. Wer die
+Zusage antastet (Klasse oder Lock-Eintrag entfernt), verliert einen
+Dauerfall in `test_skills_vertrag.py`.
 
 ## Im Gate seit 01.11.2026
 
@@ -204,3 +212,22 @@ Register-Eintrag trägt den wirklichen Lizenzwortlaut – nicht beschönigt auf 
 Kürzel – plus Ausnahme mit Grund, Entscheidung und Frist, und K6 meldet, solange
 die Frist läuft. Eine Frist ohne Entscheidung ist hier kein
 Aufschub, sondern der Bericht, dass niemand entschieden hat.
+
+## Stand der Dinge (01.11.2026, nach dem dritten Schwung)
+
+| | |
+|---|---|
+| Fremd-Skills | 18 installiert, 18 mit Lizenztext im Ordner, 0 Ausnahmen |
+| Kern | `CLAUDE.md` 239 Zeilen / 17,5 KB (Budget 420 / 32 KB) |
+| Eigene Skills | 6 × `ff-*`, 26 `references/*.md` – 25 wörtlich aus dem Kern, 1 hausgemacht (markiert) |
+| Siegel | Wache und Lizenz-Register in `FEST` und gezeichnet (52 Dateien); `.gitattributes` führt `scripts/skills_vertrag.py` |
+| Nachweis | `skills_vertrag` 0 Befunde / 0 Warnungen · Selbsttest 17 Fälle · 34 Unit-Tests |
+
+Ein Nebensatz zur Grundlage dieser Prüfungen, weil er die häufigste
+Falschmeldung in diesem Repo liefert: Mehrere Wachen parsen YAML für ihren
+eigenen Selbsttest (`redaktions_standard.py` über den Publikations-Vertrag).
+Ohne die in `requirements-ci.txt` gepinnte Bibliothek melden sie
+fail-closed Exit 2 – das ist **keine** kaputte Wache, sondern eine unvollständige
+Umgebung, und seit dem 01.11.2026 sagt der Selbsttest das auch so. Wer also
+über diese Zeilen stolpert und `npm run test:redaktion` rot sieht:
+`python3 -m pip install -r requirements-ci.txt`, dann nochmal.
