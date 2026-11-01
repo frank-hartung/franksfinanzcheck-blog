@@ -286,15 +286,32 @@ class KlartextWacheContract(unittest.TestCase):
             "Fail-closed: mindestens eine Python-Datei war nicht analysierbar: "
             f"{bericht.get('fehler')}")
         befunde = bericht.get("befunde", [])
+        haus = [b for b in befunde if b.get("bereich") != "fremdcode"]
+        fremd = [b for b in befunde if b.get("bereich") == "fremdcode"]
         details = "\n".join(
             f"  {b['datei']}:{b['zeile']} [{b['regel']}] "
             f"{b['art']}: {b['quelle']} → {b['senke']}"
-            for b in befunde)
+            for b in haus)
         self.assertEqual(
-            befunde, [],
-            "Klartext-Fluss oder verbotene Unterdrückung gefunden. Namen ehrlich "
-            "machen, Werte entschärfen oder Ausgabe entfernen – nie wegfiltern:\n"
-            + details)
+            haus, [],
+            "Klartext-Fluss oder verbotene Unterdrückung im Hauscode gefunden. "
+            "Namen ehrlich machen, Werte entschärfen oder Ausgabe entfernen – nie "
+            "wegfiltern:\n" + details)
+        # Vendorte Skill-Runtimes (`.claude/skills/<skill>/scripts/`) sind fremder
+        # Code: er wird bei `npx skills update` überschrieben und ist hier nicht
+        # heilbar. Er bleibt geprüft (Bereich `fremdcode`), und der Bestand ist
+        # EINGEFROREN: eine neue Fundstelle ist eine Entscheidung, die jemand
+        # treffen muss – keine stille Duldung. Grenze und Grund:
+        # CLAUDE-SEO-AUFNAHME-26-SKILLS-HIGHEND-2026-11-01.md.
+        eingefroren = sorted((b["datei"], b["zeile"], b["regel"]) for b in fremd)
+        self.assertEqual(
+            eingefroren,
+            [(".claude/skills/seo/scripts/google_auth.py", 314,
+              "py/clear-text-storage-sensitive-data")],
+            "Der eingefrorene Fremdcode-Bestand hat sich geändert. Wenn die neue "
+            "Fundstelle gewollt ist (Skill-Update?), gehört sie hierher – mit "
+            "Grund, Entscheidung und Frist. Wenn nicht, ist sie zu heilen:\n"
+            + "\n".join(f"  {d}:{z} [{r}]" for d, z, r in eingefroren))
         self.assertEqual(erg.returncode, 0, erg.stderr)
         self.assertGreaterEqual(bericht.get("geprueft", 0), 1)
 

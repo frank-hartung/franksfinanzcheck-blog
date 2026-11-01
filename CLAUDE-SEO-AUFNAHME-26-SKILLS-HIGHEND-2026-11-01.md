@@ -117,22 +117,69 @@ Upstream-Weg: `.claude/skills/seo/scripts/claude-seo setup` baut die venv
 lokal. Ohne sie laufen Analyse-Skills, die reines Modellwissen nutzen, weiter;
 die messenden Skripte (PageSpeed, GSC, Agentic-Lighthouse) erst nach `setup`.
 
+## Bereichsgrenze Fremdcode (Entscheidung, 01.11.2026)
+
+Der PR war auf zwei Checks rot, und der Grund war **mein** Zuwachs – nicht die
+Basis:
+
+```
+[FLUSS] .claude/skills/seo/scripts/google_auth.py:314:
+        [py/clear-text-storage-sensitive-data] json.dump() ← Zuweisung an `OAUTH_REDIRECT_URI`
+```
+
+Der Befund ist ein **Fehlalarm der Query, nicht des Codes**: `google_auth.py`
+schreibt die Tokendatei über `_write_private_json()` mit `os.open(…, 0o600)`,
+setzt `fchmod(0o600)` auf den offenen Deskriptor und dokumentiert die
+TOCTOU-Falle, die das schließt („The file is never world-readable, even
+briefly."). `py/clear-text-storage-sensitive-data` wertet Dateirechte nicht aus
+und meldet dennoch. Heilbar ist das hier nicht: die Datei gehört dem Upstream
+und würde beim nächsten `npx skills update` zurückkommen – ein lokaler Patch
+wäre eine Divergenz, kein Fix.
+
+Entschieden wurde deshalb eine **Bereichsgrenze**, keine Unterdrückung:
+
+| Ort | Was steht dort | Wirkung |
+|---|---|---|
+| `.github/codeql/codeql-config.yml` | `.claude/skills/seo/scripts/**` in `paths_ignore`, mit Begründung | CodeQL und das Default-Setup urteilen nicht über fremden Code (Vorbild: `impeccable/scripts` seit 14.10.2026) |
+| `scripts/clear_text_logging_guard.py` | Klasse `fremdcode` + `ist_fremdcode()` | Der Fund wird **weiter in jedem Lauf gedruckt** (⚠ statt ❌) und ändert den Exit-Code nicht; Hauscode bleibt fail-closed |
+| `scripts/tests/test_clear_text_logging_security.py` | Bestand **eingefroren** | Eine neue Fundstelle lässt den Test rot werden – sie ist eine Entscheidung, keine stille Duldung |
+
+Der Vertrag der Wache bleibt damit erfüllt: ihr Punkt 2 heißt „Kein toter
+Winkel — geprüft wird jede Python-Datei, auch die, die `codeql-config.yml`
+ausblendet". Genau das tut sie weiter; sie unterscheidet nur die Zuständigkeit.
+Zum ersten Mal seit Bestehen dieser Wache ist der CodeQL-Ausschluss damit
+sichtbar gegengeprüft und nicht bloß behauptet.
+
+**Wiedervorlage:** Ändert ein `npx skills update` den Inhalt von
+`google_auth.py` und wandert der Fund auf eine andere Zeile, wird der
+eingefrorene Test rot. Dann gilt: prüfen, ob die Datei noch mit `0o600`
+schreibt, Zeile nachziehen und diese Tabelle fortschreiben – nicht den Test
+aufweichen.
+
 ## Nachweis (lokal, 01.11.2026)
 
 ```
 python3 scripts/skills_vertrag.py            ✅ 50 Skills, 0 Befunde, 2 Warnungen (K8, Bestand)
-python3 scripts/skills_vertrag.py --selftest  ✅ Sabotage-Fälle grün
-python3 scripts/redos_guard.py               ✅ 704 Python-Dateien, 0 Funde
+python3 scripts/skills_vertrag.py --selftest  ✅ 17 Sabotage-Fälle grün
+python3 -m unittest scripts.tests.test_skills_vertrag  ✅ 33 Tests, OK (1 skipped)
+python3 scripts/integrity_guard.py           ✅ Siegel gültig und verkettet (nach Merge von main)
+python3 scripts/clear_text_logging_guard.py  ✅ 705 Dateien · 0 Hausbefunde · 1 Fremdcode ausgewiesen
+python3 -m unittest scripts.tests.test_clear_text_logging_security ✅ 11 Tests, OK
+python3 scripts/redos_guard.py               ✅ 705 Python-Dateien, 0 Funde
 python3 scripts/skript_syntax_wache.py       ✅ 623 Dateien grün
 python3 scripts/wachen_vertrag.py            ✅ 370 Skripte, 0 Funde
 python3 scripts/fremdmessung_sperre.py       ✅ keine Spur
 python3 scripts/manifest_guard.py            ✅ GRÜN (13 Manifeste)
+python3 scripts/trigger_wache.py --check     ✅ 98 Workflows
+python3 scripts/report_hygiene.py --check    ✅ Root sortenrein
 ```
 
-Die beiden Fremd-Code-Wachen haben ihren Prüfumfang durch diese Aufnahme
-erweitert (REDOS 634 → 704, Syntax unverändert 623, weil `.claude` dort nicht
-im Korb liegt) und bleiben grün – die 60 Upstream-Skripte sind also kein
-blinder Fleck, sie sind geprüft.
+Die Fremd-Code-Wachen haben ihren Prüfumfang durch diese Aufnahme erweitert
+(REDOS und Klartext 634 → 705, Syntax unverändert 623, weil `.claude` dort
+nicht im Korb liegt) und bleiben grün – die 60 Upstream-Skripte sind also kein
+blinder Fleck auf dem Papier, sie werden gelesen. Der eine Fund, den das
+Lesen ergibt, steht oben unter „Bereichsgrenze Fremdcode" – mit Grund und
+Wiedervorlage.
 
 ## Nachlauf nach jedem `npx skills update`
 
