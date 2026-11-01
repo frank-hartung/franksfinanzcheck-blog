@@ -141,6 +141,9 @@ produktion:
   - skill: marketing-psychology
     rolle: "Leserführung ohne Manipulation: Verlustaversion, Anker, Defaults"
     kanaele: [blog]
+  - skill: niche-research
+    rolle: "belegte Nachrichtenlage der letzten 7 Tage vor dem Schreiben – Recherche mit Datum und Link statt Themen-Bauchgefühl"
+    kanaele: [blog, suchmaschine]
   werkzeuge-und-oberflaeche:
   - skill: cro
     rolle: "Conversion auf Werkzeugseiten und Artikel-Abschluss (Newsletter-Anmeldung)"
@@ -182,6 +185,47 @@ produktion:
   - skill: emails
     rolle: "Newsletter-Sequenzen (Willkommen, Präferenzen, Rückgewinnung)"
     kanaele: [newsletter]
+  # --- Social-Pack (charlie947/social-media-skills, 01.11.2026, MIT) ------
+  # Das Paket ist für LinkedIn geschrieben. Zugeordnet wird es hier NICHT
+  # wegen der Herkunft, sondern wegen der Kanäle, die dieser Blog hat:
+  # Mastodon (scripts/mastodon_manual_post.py), Instagram
+  # (scripts/social_video.py), Pinterest (scripts/pinterest_ziele.py) und
+  # Newsletter (newsletter-worker). Was nur auf LinkedIn zielt, steht unten
+  # unter `ausgeschlossen` – ein Skill für einen Kanal, den es nicht gibt,
+  # wäre eine Behauptung.
+  - skill: voice-builder
+    rolle: "Stimme des Hauses als eine Datei aus 3–5 Textproben – Vorlage für Lektorat und Kurztexte"
+    kanaele: [blog, newsletter]
+  - skill: newsletter-voice
+    rolle: "Stimmen-Datei speziell für Newsletter-Ausgaben (läuft nach voice-builder)"
+    kanaele: [newsletter]
+  - skill: post-writer
+    rolle: "Kurzbeitrag in der Stimme des Hauses – Mastodon- und Instagram-Beschriftung statt Artikel"
+    kanaele: [mastodon, instagram]
+  - skill: post-formatter
+    rolle: "Beitragsgerüst PAS/AIDA/BAB auf mobile Zeilenlänge – Mastodon-Zeichen und Instagram-Absätze"
+    kanaele: [mastodon, instagram]
+  - skill: hook-generator
+    rolle: "Einstiegszeilen für Kurzbeiträge: zwei Zeilen, Zahl plus Widerspruch – ohne Klick-Köder"
+    kanaele: [mastodon, instagram]
+  - skill: content-matrix
+    rolle: "Ideen-Matrix Säulen × Formate als Vorlauf für data/topics.yaml und die Reserve"
+    kanaele: [blog]
+  - skill: post-scorer
+    rolle: "Entwurf gegen die eigene Wirkungshistorie prüfen, nicht gegen Bauchgefühl"
+    kanaele: [mastodon, instagram]
+  - skill: gemini-carousel
+    rolle: "Karussell 1080×1350 aus Artikelinhalt – Pinterest-Pin-Serie und Instagram-Slides"
+    kanaele: [pinterest, instagram]
+  - skill: gemini-infographic
+    rolle: "Whiteboard-Infografik als Bildauftrag – Beiwerk zum Artikel, Pin-Bild"
+    kanaele: [pinterest, blog]
+  - skill: graphic-designer
+    rolle: "entscheidet HTML/CSS-Grafik oder KI-Infografik für das Beitragsbild"
+    kanaele: [instagram, pinterest]
+  - skill: quote-post
+    rolle: "Zitat-Grafik plus Beschriftung – kurze Zitatstrecke, kein Motivationsposter"
+    kanaele: [instagram, pinterest]
   bestand-und-messung:
   - skill: analytics
     rolle: "Messplan, Ereignisse, UTM – Grundlage jeder Aussage über Wirkung"
@@ -339,6 +383,32 @@ ausgeschlossen:
     grund: "Handwerk am Regelwerk selbst – LEBT, wird aber nicht wie ein Themenskill budgetiert (kein Beschreibungs-Beitrag)"
     entscheidung: "bleibt installiert, nicht Teil des Themen-Budgets (Ausnahme von P3)"
     faellig: "2027-03-31"
+  # Social-Pack: kein Kanal oder kein Werkzeugweg (01.11.2026).
+  # Alle sechs bleiben installiert (Nachweis des Einkaufs, kein ausführbarer
+  # Code), zahlen aber kein Themen-Budget. Entfernung ist eine eigene
+  # Entscheidung des Inhabers – sie würde die Beschreibungs-Summe (K9, aktuell
+  # 55,5 von 56 KB) um rund 3,0 KB entlasten und ist darum bis zur Frist zu
+  # treffen.
+  reels-scripting:
+    grund: "verlangt Apify (Scrape der Referenz) und Gemini (Transkript) – beides ist per D20/T1 gesperrt; einen Ersatzweg für ein fremdes Reel gibt es im Haus nicht"
+    entscheidung: "bleibt installiert als Nachweis des Einkaufs, ohne Themen-Budget; Entfernung bis zur Frist entscheiden (entlastet K9 um ~0,7 KB)"
+    faellig: "2026-12-31"
+  profile-optimizer:
+    grund: "baut ein LinkedIn-Profil um (Headline, About, Featured) – diesen Blog gibt es auf LinkedIn nicht"
+    entscheidung: "bleibt installiert als Nachweis des Einkaufs, ohne Themen-Budget; Entfernung bis zur Frist entscheiden (entlastet K9 um ~0,5 KB)"
+    faellig: "2026-12-31"
+  analytics-dashboard:
+    grund: "liest einen LinkedIn-Analytics-Export und baut daraus ein React-Dashboard – Export und Kanal fehlen hier"
+    entscheidung: "bleibt installiert als Nachweis des Einkaufs, ohne Themen-Budget; Entfernung bis zur Frist entscheiden (entlastet K9 um ~0,5 KB)"
+    faellig: "2026-12-31"
+  pinned-comment:
+    grund: "erster Kommentar unter einem LinkedIn-Beitrag – ohne LinkedIn-Beiträge gegenstandslos"
+    entscheidung: "bleibt installiert als Nachweis des Einkaufs, ohne Themen-Budget; Entfernung bis zur Frist entscheiden (entlastet K9 um ~0,3 KB)"
+    faellig: "2026-12-31"
+  youtube-thumbnail:
+    grund: "Vorschaubild für einen YouTube-Kanal – der Blog hat keinen (siehe `video`: Instagram/Reels, kein YouTube)"
+    entscheidung: "bleibt installiert als Nachweis des Einkaufs, ohne Themen-Budget; Entfernung bis zur Frist entscheiden (entlastet K9 um ~0,5 KB)"
+    faellig: "2026-12-31"
 
 # --- Grenzen des Budgets ------------------------------------------------
 # `budget_kb` ist die Summe der Beschreibungen für Skills mit Thema. K9 in
