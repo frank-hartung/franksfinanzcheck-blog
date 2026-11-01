@@ -910,6 +910,16 @@ Produktion, nicht den Austausch. Zeichnen bleibt ein Menschenakt.
 
 ### G1 · Zwei Dateien gehören ins Siegel – in dieser Reihenfolge
 
+> **Ausgeführt am 01.11.2026** (`81e45a6 chore(siegel): Skill-Vertrag und
+> Lizenz-Register unter Schloss, Zeichnung § G1`). Stand danach: 52 Dateien im
+> Lock, `--gate` grün, `--drift-audit` meldet „Kein Drift“, und der Skill-Vertrag
+> ist zum ersten Mal völlig still (0 Befunde, 0 Warnungen). Die eigentliche
+> Arbeit lag in Schritt 0 – und ihr Ergebnis war eine Verwechslung, die G2
+> festhält.
+>
+> Der Abschnitt steht weiter als stehende Regel, nicht als Protokoll: er ist die
+> Anleitung für den nächsten Fall dieser Klasse.
+
 Der Stand des Berichts (nachzulesen mit `python3 scripts/skills_vertrag.py`):
 
 ```text
@@ -923,15 +933,14 @@ stehen darf. Wer sie austauscht, schreibt die Regeln um, ohne dass ein Gate
 aufsteht – und genau das ist die Klasse, die `integrity_guard.py` seit dem
 12.08. schließt.
 
-**Schritt 0 · Vorbedingung, nicht überspringbar.** `npm run test:redaktion` ist
-rot (Fall „Vertrag-gute-aenderung-still“, Exit 2) – vor dem Umbau so gewesen und
-auf einem frischen Auschecken von `51e0270` nachgeprüft, also nicht vom Skill-
-Umbau gemacht. `scripts/redaktions_standard.py` steht in FEST und ist
-versiegelt. Wer **jetzt** signiert, wäscht den defekten Stand: Das Siegel würde
-erklären, ein Zustand sei gut, dessen eigener Selbsttest Nein sagt. Erst der
-Inhaber heilt die Wache, dann wird gezeichnet. Dass kein Agent diesen Schritt
-erledigt, ist kein Zögern, sondern der Unterschied zwischen Schutz und
-Selbstbestätigung.
+**Schritt 0 · Vorbedingung, nicht überspringbar.** Gezeichnet wird nur ein Stand,
+dessen Selbsttests grün sind – sonst erklärt das Schloss einen Zustand für gut,
+dessen eigene Messung Nein sagt. Ausgeführt heißt hier: `python3
+scripts/selftest_runner.py` über den ganzen Bestand (261 Wachen, davon eine
+einzige rot – `cover_render_check.py`, Grund: pillow fehlte, nach
+`pip install -r requirements-ci.txt` grün), `integrity_guard.py --selftest`
+(9 Fälle) und `redaktions_standard.py --selftest` (48 Fälle). Die Regel bleibt,
+ihre Anwendung am 01.11.2026 war lehrreicher als gedacht: siehe G2.
 
 **Schritt 1 · Klasse.** In `scripts/integrity_guard.py` den Block `FEST` um die
 beiden Pfade erweitern – mit dem üblichen Kommentarblock, warum FEST und nicht
@@ -966,9 +975,21 @@ unterscheiden.
 
 ### G2 · Was der Audit sonst noch meldet
 
-`--drift-audit` nennt aktuell `scripts/redaktions_standard.py` als FEST-Drift mit
-Urteil „VERSIEGELBAR“ (Arbeitsbaum = HEAD, zuletzt `51e0270`). Die Tabelle gilt
-für jeden künftigen Fund:
+Der Fall, der diesen Abschnitt ausgelöst hat, ist anders ausgegangen als
+angenommen – und die Lehre ist der nützlichere Teil. `--drift-audit` meldete
+`scripts/redaktions_standard.py` als FEST-Drift, der Selbsttest der Wache war
+rot, und ein Bericht schrieb: „die Wache ist erweislich kaputt.“ Beides war
+gemessen, die Deutung war falsch. Der Selbsttest fährt über den
+Publikations-Vertrag, der Frontmatter mit PyYAML parst; ohne die in
+`requirements-ci.txt` gepinnte Bibliothek meldet der Vertrag fail-closed – und
+dann kann der Gegenprobe-Fall „gute Änderung bleibt still“ nicht still bleiben.
+Mit der Grundlage: 48/48 grün, im Gate ohnehin seit je. Die Wache war nie
+defekt, **die Meldung** war es; sie unterscheidet jetzt („Prüfgrundlage fehlt“
+gegen „Wache defekt“, Exit 2 in beiden Fällen – keine Messung ist kein Grün,
+aber eine unvollständige Umgebung ist kein Befund am Code). Reihenfolge für
+alle künftigen roten Selbsttests: erst die Grundlage prüfen, dann die Wache.
+
+Die Tabelle gilt für jeden Fund:
 
 | Was der Audit sagt | Was folgt | Was nicht folgt |
 |---|---|---|
@@ -976,6 +997,51 @@ für jeden künftigen Fund:
 | FEST-Drift, Selbsttest rot | erst heilen (Schritt 0), dann zeichnen | Signatur unter dem defekten Stand |
 | KRITISCH-Abweichung | Ursache über `--drift-audit` klären, dann Mensch entscheidet | `--heal` (hebt für KRITISCH nie die Sperre auf) |
 | Lock unlesbar oder zusammengeschnitten | `--repair-lock --dry-run` lesen, dann reparieren | neuen Lock von Hand tippen |
+
+### G4 · Was die Zeichnung im Betrieb ändert – und was offen bleibt
+
+**Für den Alltag ändert sich nichts Neues.** Die beiden Dateien stehen in FEST,
+nicht in KRITISCH: ein *belegter* Drift (committet, bytegleich mit dem Commit,
+nicht KRITISCH) heilt die Engine im ersten Schritt selbst (`--heal`), und das
+PR-Gate prüft nur, ob der signierte Stand zum Baum passt. Wer einen Skill
+aufnimmt und `data/skill_lizenzen.json` nachzieht, braucht dafür keine
+menschliche Unterschrift. Er braucht sie erst, wenn die Änderung ungeklärt ist –
+und genau dann ist das der gewünschte Alarm.
+
+**Zwei Entscheidungen bleiben beim Betreiber**, hier notiert, damit sie nicht
+als Vergessenheit enden:
+
+| Möglichkeit | Was dagegen spricht | Was dafür spricht | Wenn ja |
+|---|---|---|---|
+| `skills-lock.json` versiegeln | jede legitime `npx skills update` erzeugt Drift; die Akte füllt sich | der Lock ist die Herkunftsurkunde des Fremdcodes – sein Austausch lenkt künftige Updates um | `FEST` + `--add=skills-lock.json`, Zeichnung im selben Zug |
+| `scripts/integrity_guard.py` versiegeln | zirkulär: der Zeichner im Schloss | `KRITISCH`/`FEST` ist die Zugangskontrolle selbst; ohne Siegel kann sie jeder abschalten, der die Regel setzt | `FEST` + `--add=scripts/integrity_guard.py` **und** ein zweiter, anderer Prüfer (z. B. ein Fall in `wachen_vertrag.py`), sonst kontrolliert sich das Werkzeug selbst |
+
+Zur zweiten Zeile der ehrliche Stand: Das Schloss ist **selbstbezüglich** –
+`integrity_guard.py` entscheidet, was es schützt, und liegt nicht selbst drin.
+Das ist kein neuer Befund (er besteht seit 12.08.2026), aber er gehört benannt,
+solange die Rede darauf kommt: Kette (`prev_sha256`, `files_sha256`) und Akten
+in `data/integrity_history.jsonl` machen den Austausch *sichtbar*, nicht
+*unmöglich*.
+
+**Wo die Akten liegen, steht hier, weil es beim nächsten Mal zählt.** Die
+Zeichnung schreibt an drei Orte, und sie sind nicht gleich wert:
+`data/integrity_lock.json` trägt das Fenster der letzten **12** Signaturen
+(`audit`, mit `art`, `head`, `geaendert`, Herkunft je Datei) – die beiden
+`--add`-Vorgänge von heute stehen dort, rotieren aber nach zwölf weiteren
+Signaturen heraus. `data/integrity_history.jsonl` ist append-only und
+**proportional**: eine Zeile je `set-current` (modus, Klassen-Zählung, geänderte
+Dateien) – `--add` schreibt dort nicht hin. Dauerhaft ist der Vorgang deshalb
+über die einzige Stelle, die nichts vergisst: `git log -- data/integrity_lock.json`,
+denn der Lock ist versioniert. Wer also später fragen will, wer eine Datei
+unter Schloss gebracht hat und mit welcher Begründung, sucht im Commit, nicht im
+Fenster.
+
+**Folge für #998** (GSC-Heilung, am 01.11.2026 offen): der Zweig zeichnet den
+Lock selbst neu (13:09 UTC, head `8dbb3b3`, 50 Dateien). Nach § G1 auf `main`
+sind es 52 Dateien – wegen `merge=binary` gibt das einen bewussten Konflikt
+statt eines Zusammenschnitts (#346-Regel). Auflösung auf #998: Lock-Fassung von
+`main` nehmen, dann `python3 scripts/integrity_guard.py --heal`; die 50er-Fassung
+würde die beiden neuen Siegel-Einträge still zurücknehmen.
 
 ### G3 · Was schon geregelt ist (kein Auftrag)
 

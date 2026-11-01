@@ -123,6 +123,50 @@ class EchterStandTests(unittest.TestCase):
                 self.assertIn(ueberschrift, friher,
                               f"„{ueberschrift}“ in {pfad.name} stammt nicht aus dem Kern")
 
+    def test_siegelzusage_bleibt_stehen(self):
+        """Wache und Lizenz-Register stehen unter Schloss – die *Zusage*, nicht
+        die aktuelle Zeichnung.
+
+        Die Zeichnung ändert sich mit jeder Heilung, die Klassenliste ist der
+        Vertrag: wer `scripts/skills_vertrag.py` oder `data/skill_lizenzen.json`
+        austauscht, muss das begründen. Geprüft wird deshalb die Zugehörigkeit
+        zu KRITISCH/FEST und die Aufnahme in `data/integrity_lock.json` – nicht
+        der Hash. Ein Dauerfall, der bei jedem legitimen Skill-Update rot wird,
+        wird nicht geheilt, er wird abgeschafft; das hier bleibt auch nach jeder
+        `--heal` grün.
+        """
+        import ast
+
+        wurzel = sv.Path(WURZEL)
+        quelltext = (wurzel / sv.SIEGEL_GUARD).read_text(encoding="utf-8")
+        mengen: dict[str, set] = {}
+        for knoten in ast.parse(quelltext).body:
+            if not isinstance(knoten, ast.Assign) or not isinstance(
+                    knoten.value, (ast.Set, ast.List, ast.Tuple)):
+                continue
+            for ziel in knoten.targets:
+                if isinstance(ziel, ast.Name) and ziel.id in ("KRITISCH", "FEST"):
+                    mengen.setdefault(ziel.id, set()).update(
+                        e.value for e in knoten.value.elts
+                        if isinstance(e, ast.Constant) and isinstance(e.value, str))
+        gedeckt = mengen.get("KRITISCH", set()) | mengen.get("FEST", set())
+        with open(os.path.join(WURZEL, "data", "integrity_lock.json"), encoding="utf-8") as fh:
+            gezeichnet = set((json.load(fh).get("files") or {}))
+        self.assertTrue(gedeckt, "KRITISCH/FEST nicht lesbar – der Test wäre sonst eine leere Messung")
+        for rel in sv.SIEGEL_PFLICHT:
+            self.assertIn(rel, gedeckt,
+                          f"{rel} ist aus KRITISCH/FEST gefallen – die Zusage aus "
+                          "docs/SICHERHEIT-BETRIEB-RUNBOOK.md § G1 wäre zurückgenommen")
+            self.assertIn(rel, gezeichnet,
+                          f"{rel} fehlt im Siegel – `python3 scripts/integrity_guard.py "
+                          f"--add={rel}` (Zeichnung im selben Zug, sonst steht das PR-Gate rot)")
+        for rel in sv.SIEGEL_PFLICHT:
+            with open(os.path.join(WURZEL, ".gitattributes"), encoding="utf-8") as fh:
+                if rel.endswith(".py"):
+                    self.assertIn(f"{rel} merge=binary", fh.read(),
+                                  f"{rel} ist versiegelt, aber .gitattributes nennt es nicht – "
+                                  "der Block ist die Signaturliste, eine abweichende Liste ist ein Befund")
+
     def test_lizenzregister_vollständig(self):
         wurzel = sv.Path(WURZEL)
         register = json.loads((wurzel / sv.LIZENZ_DATEI).read_text(encoding="utf-8"))
