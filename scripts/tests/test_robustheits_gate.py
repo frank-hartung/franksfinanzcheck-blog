@@ -462,8 +462,15 @@ class VerdrahtungTests(unittest.TestCase):
     def test_dokumentation_ist_verlinkt(self):
         self.assertTrue((ROOT / "docs/ANLEITUNG-ROBUSTHEIT.md").exists(),
                         "Runbook fehlt")
-        claude = (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
-        self.assertIn("robustheits_gate.py", claude,
+        # Seit dem Skill-Umbau (#999, 01.11.2026) trägt nicht mehr CLAUDE.md
+        # das Detail, sondern der geroutete Skill: Robustheit lebt in
+        # ff-oberflaeche (SKILL.md + references/robustheit.md). Der Vertrag –
+        # der Leitfaden nennt die Wache – gilt unverändert.
+        flaechen = [ROOT / "CLAUDE.md",
+                    ROOT / ".claude" / "skills" / "ff-oberflaeche" / "SKILL.md",
+                    ROOT / ".claude" / "skills" / "ff-oberflaeche" / "references" / "robustheit.md"]
+        text = "\n".join(p.read_text(encoding="utf-8") for p in flaechen if p.exists())
+        self.assertIn("robustheits_gate.py", text,
                       "Der Leitfaden für Agenten nennt die Wache nicht")
 
 

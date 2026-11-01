@@ -373,7 +373,15 @@ class AnleitungVertrag(unittest.TestCase):
     def test_leitfaden_und_npm_skript(self):
         # Der Leitfaden für Agenten nennt Prüfer und Grundsatz – sonst „heilt“
         # der nächste Agent das Rot mit continue-on-error.
+        # Seit dem Skill-Umbau (#999, 01.11.2026) ist der Leitfaden zweistufig:
+        # CLAUDE.md routet, die ff-*-Skills tragen das Detail. Backup/merge
+        # lebt seither in ff-ausliefern – der Vertrag gilt unverändert, nur
+        # der Ablageort hat gewechselt.
         leitfaden = (REPO / "CLAUDE.md").read_text(encoding="utf-8")
+        skill = (REPO / ".claude" / "skills" / "ff-ausliefern" /
+                 "references" / "bestand-backup-merge.md")
+        self.assertTrue(skill.exists(), "ff-ausliefern-Referenz fehlt")
+        leitfaden += "\n" + skill.read_text(encoding="utf-8")
         self.assertIn("scripts/backup_einrichtung.py", leitfaden)
         self.assertIn("Fail-closed bleibt", leitfaden)
         import json
