@@ -228,7 +228,10 @@ class FaktenfrischeRobustheit(unittest.TestCase):
             eintrag = queue["laeufe"][0]
             self.assertEqual(eintrag["grund"], "Erstrecherche")
             self.assertEqual(eintrag["geo"], 50)
-            self.assertEqual(eintrag["aenderungen"], ["faktencheck: 2026-11-01"])
+            # Kein festes Datum: Die Uhr-Probe fährt diese Suite unter einer
+            # um 97 Tage vorgestellten Uhr – ein Literal wäre dort rot.
+            self.assertEqual(len(eintrag["aenderungen"]), 1)
+            self.assertTrue(eintrag["aenderungen"][0].startswith("faktencheck: "))
             neu = ff.lade_artikel(art["pfad"])
             self.assertEqual(eintrag["fassung_sha256"], ff.ledger.pruef_hash(neu))
             self.assertIn("faktencheck:", Path(art["pfad"]).read_text(encoding="utf-8"))
