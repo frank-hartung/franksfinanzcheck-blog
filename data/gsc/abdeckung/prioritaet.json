@@ -1,14 +1,14 @@
 {
  "kontingent": 200,
- "ohne_inlink": 7,
+ "ohne_inlink": 6,
  "seiten": [
   {
    "grund": "verlinkt",
-   "impressionen": 44,
+   "impressionen": 52,
    "inlinks": 17,
    "lastmod_tage": null,
    "outlinks": 2,
-   "position": 34.14,
+   "position": 35.79,
    "score": 11.0,
    "url": "/pillar/internet-dsl/"
   },
@@ -21,16 +21,6 @@
    "position": 32.9,
    "score": 11.0,
    "url": "/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/"
-  },
-  {
-   "grund": "kein redaktioneller Inlink",
-   "impressionen": 0,
-   "inlinks": 0,
-   "lastmod_tage": null,
-   "outlinks": 1,
-   "position": null,
-   "score": 7.0,
-   "url": "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/"
   },
   {
    "grund": "kein redaktioneller Inlink",
@@ -74,12 +64,12 @@
   },
   {
    "grund": "verlinkt",
-   "impressionen": 16,
+   "impressionen": 17,
    "inlinks": 7,
    "lastmod_tage": null,
    "outlinks": 11,
-   "position": 44.44,
-   "score": 6.33,
+   "position": 45.82,
+   "score": 6.67,
    "url": "/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/"
   },
   {
@@ -177,7 +167,7 @@
    "impressionen": 7,
    "inlinks": 6,
    "lastmod_tage": null,
-   "outlinks": 1,
+   "outlinks": 2,
    "position": 17.0,
    "score": 4.63,
    "url": "/pillar/versicherungen/"
@@ -221,6 +211,16 @@
    "position": 4.5,
    "score": 4.22,
    "url": "/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/"
+  },
+  {
+   "grund": "nur ein Inlink",
+   "impressionen": 0,
+   "inlinks": 1,
+   "lastmod_tage": null,
+   "outlinks": 1,
+   "position": null,
+   "score": 4.0,
+   "url": "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/"
   },
   {
    "grund": "verlinkt",
@@ -1043,11 +1043,10 @@
    "url": "/werkzeuge/tarifwechsel-entscheidungsbaum/"
   }
  ],
- "stand": "2026-10-31",
+ "stand": "2026-11-01",
  "welle1": [
   "/pillar/internet-dsl/",
   "/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/",
-  "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/",
   "/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/",
   "/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/",
   "/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/",
@@ -1067,6 +1066,7 @@
   "/posts/",
   "/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/",
   "/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/",
+  "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/",
   "/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
   "/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/",
   "/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/",
@@ -1089,7 +1089,6 @@
  "welle1_absolut": [
   "https://franksfinanzcheck.de/pillar/internet-dsl/",
   "https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/",
-  "https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/",
   "https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/",
   "https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/",
   "https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/",
@@ -1109,6 +1108,7 @@
   "https://franksfinanzcheck.de/posts/",
   "https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/",
   "https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/",
+  "https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/",
   "https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
   "https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/",
   "https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/",

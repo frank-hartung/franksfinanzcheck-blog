@@ -1,6 +1,6 @@
 # Befund Abdeckung
 
-## Abdeckung (Search Console, Stand 2026-10-19, 12 Tage alt)
+## Abdeckung (Search Console, Stand 2026-10-19, 13 Tage alt)
 
 **Gesamtbild: 🟢 GRÜN** · Quelle: `google-search-console (Abdeckungsbericht, CSV-Export)` · Gegenprobe: `content/ (Näherung, kein Build gemessen)`
 
@@ -38,8 +38,8 @@
 
 ### Redaktionelle Verlinkung
 
-- 5 von 79 Inhaltsseiten ohne redaktionellen Inlink, 0 ohne ausgehenden Link, Median 6 ausgehende Links je Seite.
-- Verlinkungsauftrag: 10 Quelle-Ziel-Paare (`--verlinkung --apply`).
+- 4 von 79 Inhaltsseiten ohne redaktionellen Inlink, 0 ohne ausgehenden Link, Median 6 ausgehende Links je Seite.
+- Verlinkungsauftrag: 9 Quelle-Ziel-Paare (`--verlinkung --apply`).
 
 ### Links ins Leere
 
@@ -52,16 +52,16 @@
 
 | Score | Seite | Impressionen | Inlinks | Grund |
 |---|---|---|---|---|
-| 11.0 | `/pillar/internet-dsl/` | 44 | 17 | verlinkt |
+| 11.0 | `/pillar/internet-dsl/` | 52 | 17 | verlinkt |
 | 11.0 | `/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/` | 58 | 2 | verlinkt |
-| 7.0 | `/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/` | 0 | 0 | kein redaktioneller Inlink |
 | 7.0 | `/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/` | 0 | 0 | kein redaktioneller Inlink |
 | 7.0 | `/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/` | 0 | 0 | kein redaktioneller Inlink |
 | 7.0 | `/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/` | 0 | 0 | kein redaktioneller Inlink |
 | 7.0 | `/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/` | 0 | 0 | kein redaktioneller Inlink |
-| 6.33 | `/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/` | 16 | 7 | verlinkt |
+| 6.67 | `/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/` | 17 | 7 | verlinkt |
 | 5.76 | `/impressum/` | 14 | 7 | verlinkt |
 | 5.67 | `/datenschutz/` | 14 | 6 | verlinkt |
+| 5.67 | `/pillar/konto-karten/` | 14 | 11 | verlinkt |
 
 ### Sprünge im Verlauf
 
@@ -74,10 +74,10 @@
 | Kriterium | Ziel | Status | Messung |
 |---|---|---|---|
 | Gate grün (kein Rückschritt, kein Widerspruch) | sofort | ✅ | Gate: gruen |
-| Abdeckungsbefund nicht älter als 14 Tage | laufend | ✅ | Stand 2026-10-19 (12 Tage alt) |
+| Abdeckungsbefund nicht älter als 14 Tage | laufend | ✅ | Stand 2026-10-19 (13 Tage alt) |
 | 404er mit Nachfrage triagiert | sofort | 🛑 | 193 ohne Erklärung im Bestand |
 | Indexquote steigt | 14 Tage | ❔ | 26.8 % bei 1 Momentaufnahme(n) |
-| Seiten ohne redaktionellen Inlink | 30 Tage | 🛑 | 5 Seiten |
+| Seiten ohne redaktionellen Inlink | 30 Tage | 🛑 | 4 Seiten |
 
 ### Maßnahmen (Auszug)
 
@@ -85,9 +85,9 @@
 |---|---|---|---|
 | M1 | P1 | 404-Detail-Liste einlesen und triagieren | Übersicht: 223 × 404 · erklärbar 30 · offen 193 |
 | M2 | P1 | Crawl-Nachfrage für gefundene, nicht abgerufene Seiten | 69 „Gefunden – zurzeit nicht indexiert“ bei 104 indexierbaren Seiten |
-| M10 | P2 | Neuen Abdeckungs-Export einlesen | Stand 2026-10-19 · 12 Tage alt |
+| M10 | P2 | Neuen Abdeckungs-Export einlesen | Stand 2026-10-19 · 13 Tage alt |
 | M3 | P2 | Redaktions-Queue für „gecrawlt, nicht indexiert“ | 4 × „Gecrawlt – zurzeit nicht indexiert“ |
-| M4 | P2 | Index-Altlasten benennen statt mitzählen | 117 indexiert bei 104 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (7 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (4 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /tags/ (1 Impr.), /tags/dns-server-%C3%A4ndern/ (1 Impr.) |
+| M4 | P2 | Index-Altlasten benennen statt mitzählen | 117 indexiert bei 104 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (6 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (4 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /tags/ (1 Impr.), /tags/dns-server-%C3%A4ndern/ (1 Impr.) |
 | M7 | P2 | Sprung im Abdeckungsbericht erklären | Diagramm 2026-10-17: indexiert 138 → 117 |
 | M9 | P2 | Indexquote als Zielgröße etablieren | 117 von 437 bekannten URLs |
 | M5 | P3 | noindex-Bestand als Vertrag führen | 5 × robotsNoIndex in content/ · GSC 5 |
