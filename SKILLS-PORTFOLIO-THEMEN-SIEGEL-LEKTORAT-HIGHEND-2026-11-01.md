@@ -19,6 +19,7 @@ Der Blog beantwortet sie selbst, wenn man ihn fragt. Gemessen am 01.11.2026:
 | Themenwelten (`data/themenwelten.json`) | **6** – strom-sparen (33 Artikel), frugalismus (25), internet-dsl (18), konto-karten (10), mietwagen (9), versicherungen (8) |
 | Kanäle mit Beleg im Baum | Newsletter (`newsletter-worker`), Pinterest (`scripts/pinterest_ziele.py`), Mastodon, Instagram (`scripts/social_video.py`), Suche (`scripts/gsc_abdeckung.py`), Presse (`content/presse`) |
 | Werkzeuge | 10 Seiten unter `content/werkzeuge` |
+| Fremd-Skills von `main` übernommen | `animate` (emilkowalski/skills, MIT) – beim Neuaufsetzen auf `origin/main` bewahrt und dem Kanal Werkzeuge zugeordnet |
 
 Die Antwort hat damit zwei Hälften, und nur eine davon kauft Skills ein:
 **sechs Inhaltswelten**, die die Content-Engine mit Artikeln füllt, und **sechs
@@ -26,7 +27,7 @@ Kanäle**, an denen Redaktion und Technik arbeiten.
 
 ## Der Ort: `data/skill_portfolio.yaml` + `scripts/skills_portfolio.py`
 
-Das Portfolio ist die eine Zuordnung – jedes der 56 Fremd-Skills steht entweder
+Das Portfolio ist die eine Zuordnung – jedes der 57 Fremd-Skills steht entweder
 unter `produktion` (Thema, Rolle, belegter Kanal) oder unter `ausgeschlossen`
 (Grund, Entscheidung, Frist). Der Lauf prüft P1–P7:
 
@@ -49,12 +50,12 @@ Themenwelten sind. Aufgefallen ist es beim ersten Lauf, nicht im Bericht.
 
 ## Was jetzt entschieden ist (gemessen, nicht geschätzt)
 
-**28 Skills und 5.384 Tokens** dienen einem Thema:
+**29 Skills und 5.502 Tokens** dienen einem Thema:
 
 | Thema | Skills | Tokens |
 |---|---|---|
 | suche-und-ki-sichtbarkeit | 7 | 1.332 |
-| werkzeuge-und-oberflaeche | 8 | 1.191 |
+| werkzeuge-und-oberflaeche | 9 | 1.309 |
 | bestand-und-messung | 4 | 921 |
 | verbreitung | 3 | 665 |
 | wettbewerb | 3 | 657 |
@@ -147,9 +148,9 @@ stehen: Wer die Datei wieder in den Fremd-Ordner legt, hört es sofort.
 ## Nachweis (alles in diesem Lauf ausgeführt)
 
 ```
-python3 scripts/skills_vertrag.py               → 63 Skills, 0 Befunde, 0 Warnungen
+python3 scripts/skills_vertrag.py               → 64 Skills, 0 Befunde, 0 Warnungen
 python3 scripts/skills_vertrag.py --selftest    → OK, 21 Fälle (vorher 19)
-python3 scripts/skills_portfolio.py             → 28 mit Thema, 31 ausgeschlossen, 0/0
+python3 scripts/skills_portfolio.py             → 29 mit Thema, 31 ausgeschlossen, 0/0
 python3 scripts/skills_portfolio.py --selftest  → OK, 15 Fälle
 npm run test:skills                             → OK, 37 Tests (1 skipped)
 npm run trigger:check                           → 98 Workflows, 0 Befunde
@@ -169,7 +170,7 @@ Schutzdateien sind unter `FEST` und gezeichnet.
    Themenwelt aufmacht, muss sie hier eintragen; das ist Absicht.
 2. **Die Fristen sind Arbeit.** 31 Ausschlüsse laufen am 2027-03-31 ab. P5
    warnt dann, blockiert nicht – entschieden wird trotzdem von einem Menschen.
-3. **Trefferqualität bleibt ungemessen.** 63 Skills mit teils überlappenden
+3. **Trefferqualität bleibt ungemessen.** 64 Skills mit teils überlappenden
    Beschreibungen (`copywriting` / `copy-editing` / `ff-lektorat`) können falsch
    auslösen. Das Portfolio ordnet Zweck und Kosten, nicht Trefferquote; dafür
    wäre die `skill-creator`-Auswertung der nächste Schritt.

@@ -122,7 +122,7 @@ Stelle, und `scripts/skills_portfolio.py` hält die Antwort ehrlich.
 
 ```
 Themen (12)      sechs Inhaltswelten + sechs Kanäle, jede mit Belegpfad
-produktion       Skill → Thema + Rolle + Kanal   (28 Skills, ≈ 5.400 Tokens)
+produktion       Skill → Thema + Rolle + Kanal   (29 Skills, ≈ 5.400 Tokens)
 ausgeschlossen   Skill → Grund + Entscheidung + Frist   (31 Skills)
 ```
 
