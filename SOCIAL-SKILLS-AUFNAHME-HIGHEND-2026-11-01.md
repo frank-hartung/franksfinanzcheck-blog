@@ -146,6 +146,7 @@ entfernt Skills; das Kürzen von Beschreibungen hält nicht, weil
 | `python3 scripts/fremdmessung_sperre.py` | keine Spur, grün (auch nach der `analytics`-Sperrnotiz) |
 | `python3 scripts/trigger_wache.py --check` | 98 Workflows, 0 Befunde |
 | `python3 scripts/governance_contract.py --quick` | **43 Regeln grün** – im ersten Anlauf scheiterte der Lauf an fehlendem PyYAML; nach Installation der gepinnten Fassung (`pyyaml==6.0.3` aus `requirements-ci.in`) läuft er durch |
+| `python3 -m unittest discover -s scripts/tests` | 4.975 Tests; nach den zwei Test-Heilungen und dem Register bleiben **1** Fehlschlag: der Siegel-Drift aus `1491ec7` (Betreiberakt, siehe oben) |
 | `npm run build:vertrag` / Hugo-Bau | nicht angetastet: diese Änderung berührt kein Template, keinen Workflow, keine Pipeline-Stufe |
 
 ## Offener Betreiberakt (K8) – Besitzer und Schließpfad
@@ -193,6 +194,24 @@ der sicherheitsrelevanten Dateien steht: `python3 scripts/integrity_guard.py
 hier genau der Fall; `--set-current` bleibt die menschliche Entscheidung für
 kritische Knoten. Ein Agent, der das Siegel stillschweigend nachzieht, hebt
 genau den Schutz auf, den der Guard verspricht.
+
+## Nebenbefund: `main` war vor diesem PR viermal rot – zwei Klassen geheilt
+
+Der PR-Regressionslauf (`publication-reliability-tests.yml`,
+`python3 -m unittest discover -s scripts/tests`, 4.975 Tests) war **vor** diesem
+Branch rot. Vier Fehlschläge, alle mit Herkunft außerhalb dieses Auftrags:
+
+| Test | Ursache | Behandlung |
+|---|---|---|
+| `test_backup_einrichtung.AnleitungVertrag.test_leitfaden_und_npm_skript` | suchte `scripts/backup_einrichtung.py` **nur** in `CLAUDE.md`; der Name liegt seit dem Umbau vom 01.11.2026 in `ff-ausliefern/references/bestand-backup-merge.md` | **geheilt**: der Test liest den Leitfaden, wie er seit dem Umbau existiert – Kern **plus** `ff-*`-Skills (dieselbe Regel, die K3 auf der Skill-Seite durchsetzt) |
+| `test_robustheits_gate.VerdrahtungTests.test_dokumentation_ist_verlinkt` | dito für `robustheits_gate.py` (liegt in `ff-oberflaeche`) | **geheilt**, gleicher Helfer |
+| `test_inhalts_register.FachpruefungRegisterTests.test_register_ist_aktuell` | `data/fachpruefung_register.yaml` war veraltet (Artikel wurden umformuliert, Register nicht neu erzeugt) | **geheilt** über den Erzeuger, nicht von Hand: `python3 scripts/fachpruefung_register.py` – 6 Zeilen, ausschließlich abgeleitete Zitate (D7) |
+| `test_integrity_guard.RepoSealTests.test_ausgelieferter_baum_passt_zum_siegel` | Siegel-Drift aus `1491ec7` (`scripts/redaktions_standard.py`) | **nicht angefasst**: Betreiberakt, siehe Abschnitt oben |
+
+Die ersten beiden sind derselbe Fehlertyp wie der Kern dieses PRs: Ein Prüfer
+zeigt auf den alten Ablageort, nachdem das Regelwerk umgezogen ist. Ein Test,
+der „Regel verschwunden“ meldet, obwohl sie nur in einem Skill liegt, ist die
+Test-Variante von „Skill ohne Router“ – er wird rot, ohne dass etwas fehlt.
 
 ## Offene Entscheidung des Inhabers
 

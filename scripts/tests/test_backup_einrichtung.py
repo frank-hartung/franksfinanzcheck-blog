@@ -38,6 +38,21 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
 SCRIPTS = REPO / "scripts"
+
+def leitfaden_text() -> str:
+    """Der Leitfaden der Agenten ist seit dem Umbau vom 01.11.2026 Kern **plus**
+    `ff-*`-Skills (Progressive Disclosure, `docs/ANLEITUNG-SKILLS.md`). Wer nur
+    `CLAUDE.md` liest, prüft den alten Ablageort und meldet eine Regel als
+    verschwunden, die lediglich umgezogen ist – derselbe Fehler, den K3 auf der
+    Skill-Seite verbietet.
+    """
+    ordner = REPO / ".claude" / "skills"
+    teile = [(REPO / "CLAUDE.md").read_text(encoding="utf-8")]
+    for muster in ("ff-*/SKILL.md", "ff-*/references/*.md"):
+        for pfad in sorted(ordner.glob(muster)):
+            teile.append(pfad.read_text(encoding="utf-8"))
+    return "\n".join(teile)
+
 sys.path.insert(0, str(SCRIPTS))
 
 import backup_einrichtung as be  # noqa: E402
@@ -372,8 +387,11 @@ class AnleitungVertrag(unittest.TestCase):
 
     def test_leitfaden_und_npm_skript(self):
         # Der Leitfaden für Agenten nennt Prüfer und Grundsatz – sonst „heilt“
-        # der nächste Agent das Rot mit continue-on-error.
-        leitfaden = (REPO / "CLAUDE.md").read_text(encoding="utf-8")
+        # der nächste Agent das Rot mit continue-on-error. Gelesen wird der
+        # ganze Leitfaden (Kern + `ff-*`-Skills), nicht nur der Kern: seit dem
+        # Umbau vom 01.11.2026 liegt der Grundsatz in
+        # `ff-ausliefern/references/bestand-backup-merge.md`.
+        leitfaden = leitfaden_text()
         self.assertIn("scripts/backup_einrichtung.py", leitfaden)
         self.assertIn("Fail-closed bleibt", leitfaden)
         import json
