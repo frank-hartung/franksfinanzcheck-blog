@@ -301,6 +301,43 @@ bestehenden Reviewers, keine Änderung von `wait_timer` oder
 (ein Required Reviewer auf `github-pages` würde die Veröffentlichung anhalten –
 diese Entscheidung bleibt bewusst beim Menschen).
 
+**Die Freigabe ist ein Klick – und der Wartezustand ist bewacht (01.11.2026):**
+Sobald `cloudflare-produktion` einen Required Reviewer trägt und der
+Admin-Bypass aus ist, ist jeder Worker-Deploy **zweistufig**. Das ist die
+gewollte Wirkung, sie hat aber einen stillen Preis:
+
+> Ein Lauf, der auf Freigabe wartet, wird nicht rot, meldet nichts und altert
+> nur. Er belegt dabei den Concurrency-Slot `worker-deploy`; der nächste Push
+> reiht sich dahinter ein, und der Nachweis für #922 entsteht nie.
+
+Deshalb gibt es zwei Griffe, die zusammengehören:
+
+1. **Freigeben** – im Lauf *Review deployments* → Environment wählen →
+   *Approve and deploy*. Ohne Oberfläche, mit eigenem Token:
+   ```bash
+   R=frank-hartung/franksfinanzcheck-blog
+   gh api "repos/$R/actions/runs/<run_id>/pending_deployments"          # environment_ids lesen
+   gh api -X POST "repos/$R/actions/runs/<run_id>/pending_deployments" \
+     -F environment_ids[]=<id> -f state=approved \
+     -f comment="Produktionsdeploy freigegeben"
+   ```
+   Abbrechen (`state=rejected`) ist der zweite legitime Ausgang. Was **nicht**
+   geht: den Lauf still liegen lassen – er blockiert die Kette.
+2. **Sehen, dass es wartet** – `scripts/worker_freigabe_wache.py` liest die
+   Läufe von `worker-deploy.yml` und `worker-zugang-pruefen.yml` (nur
+   `actions: read`, kein Schreibzugriff) und nennt jeden Lauf, der über der
+   Schwelle wartet, mit Alter und Lauf-Link:
+   ```bash
+   npm run worker:freigabe                     # Standard: 120 Minuten
+   python3 scripts/worker_freigabe_wache.py --check --schwelle 45 --md -
+   python3 scripts/worker_freigabe_wache.py --selftest        # 20 Fälle, offline
+   ```
+   Die Sicherheits-Wache führt ihn täglich als Schritt „Wartende
+   Deploy-Freigaben“: Exit `1` ist eine **Warnung** (ein Mensch muss handeln,
+   die Zusammenfassung trägt den Link), Exit `2` ist **rot** (Zustand nicht
+   belegbar – ungeprüft gilt nicht als sauber, C33). Junge Wartung unter der
+   Schwelle bleibt still; sie ist normal und kein Befund.
+
 ---
 
 ### A5 · Automatik-Kette auf dem eigenen Rechner (Finding F-04)
@@ -560,6 +597,11 @@ kostet deshalb keine zweite Freigabe-Runde mehr. Klassen und Massnahmen:
    Environment hinterlegen; keine Werte in Issues/Chat/Reports schreiben. Der
    Deploy-Zugang benötigt neben dem Schreibrecht auch `Workers Scripts: Read`.
 3. Actions → **„Cloudflare-Worker deployen“** → `newsletter-worker` von `main`.
+   Seit der Freigabe-Regel hält der Secret-tragende Job an, bis ein Mensch ihn
+   freigibt (A4, „Die Freigabe ist ein Klick“). Diesen Halt meldet die
+   Sicherheits-Wache täglich als „Wartende Deploy-Freigaben“
+   (`npm run worker:freigabe`) – ein wartender Lauf ist kein grüner Deploy,
+   sondern der Grund, warum #922 noch offen ist.
    Nach der Environment-Freigabe liest `scripts/worker_ressourcen.py` über den
    Deploy-Zugang die **bestehende produktive Bindung** `ABO` aus `ff-newsletter`
    und setzt deren KV-ID nur für diesen Lauf ein. Eine manuell kopierte
