@@ -489,3 +489,33 @@ python3 scripts/editorial_scorecard.py                          # Casing-Zeile m
 
 Hintergrund, Belege und Abgrenzung:
 [`GOVERNANCE-888-DAUERHEILUNG-HIGHEND-2026-10-30.md`](../GOVERNANCE-888-DAUERHEILUNG-HIGHEND-2026-10-30.md).
+
+## Skill-Vertrag: Kernbudget, Herkunft, Lizenz (01.11.2026)
+
+Der Agenten-Leitfaden war 2.532 Zeilen lang und wurde bei **jedem** Start
+voll geladen – rund 40.000 Tokens Regelwerk für Aufträge, die zwei davon
+brauchen. Seit dem 01.11.2026 trägt `CLAUDE.md` nur noch, was jeden Auftrag
+angeht (237 Zeilen); die 63 Detailabschnitte liegen wörtlich in repo-eigenen
+Skills unter `.claude/skills/ff-*`. Damit das keine Verschiebung auf Zeit ist,
+prüft eine Wache die vier Rückfallarten:
+
+| Klasse | Sperre |
+|---|---|
+| K1 | Kern ≤ 420 Zeilen / ≤ 32 KB, `SKILL.md` ≤ 200 Zeilen – neuer Detailtext ist ein Befund |
+| K3 | jeder `ff-*` im Router, jede `references/*.md` verlinkt und vorhanden |
+| K4 | vendored Skills im `skills-lock.json`, **keine** `ff-*` darin (Update-Schutz) |
+| K5 | jeder `npm run`-Name, Pfad und jede Flagge in einem Code-Zaun läuft wirklich |
+| K6 | Lizenztext neben jedem Fremd-`SKILL.md`, NOTICE bei Apache-2.0, Ausnahme nur mit Frist |
+| K7 | `§N`, „Regel N“, „Abschnitt X“ aus `scripts/` und Workflows lösen auf |
+
+```bash
+npm run skills:check                                 # prüfen (Exit 0/1/2)
+npm run test:skills                                  # Selbsttest (13 Fälle) + 31 Unit-Tests
+python3 scripts/skills_vertrag.py --md               # Block für die Lauf-Summary
+```
+
+Die Wache steht im vertraglichen Minimum (`GUARDS`, C6) und läuft damit mit dem
+Qualitäts-Gate – ohne Workflow-Änderung. Ablageentscheidung, Skill-Gründung und
+der Weg für neue Fremd-Skills:
+[`ANLEITUNG-SKILLS.md`](ANLEITUNG-SKILLS.md) · Vorgang und Zahlen:
+[`SKILLS-UMBAU-UND-LIZENZ-NACHWEIS-HIGHEND-2026-11-01.md`](../SKILLS-UMBAU-UND-LIZENZ-NACHWEIS-HIGHEND-2026-11-01.md).
