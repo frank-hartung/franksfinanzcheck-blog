@@ -6,56 +6,11 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – LinkedIn
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:linkedin:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkos
- ten-falle:nutzen:2026-11-02@franksfinanzcheck.de
-DTSTAMP:20261031T202907Z
+UID:linkedin:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest
+ -du-richtig:nutzen:2026-11-02@franksfinanzcheck.de
+DTSTAMP:20261101T115349Z
 DTSTART:20261102T064500Z
 DTEND:20261102T070000Z
-SUMMARY:LinkedIn: VPN Zuhause: Schutzschild oder unnötige Fixkosten-Fa
- lle? (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
-  https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzschi
- ld-oder-unnoetige-fixkosten-falle/
-URL:https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzsc
- hild-oder-unnoetige-fixkosten-falle/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:linkedin:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sof
- ort-senken:nutzen:2026-11-03@franksfinanzcheck.de
-DTSTAMP:20261031T202907Z
-DTSTART:20261103T064500Z
-DTEND:20261103T070000Z
-SUMMARY:LinkedIn: Kleine Energiespar‑Tricks: Deine Kosten sofort senke
- n (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
-  https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiespar-tri
- cks-die-deine-kosten-sofort-senken/
-URL:https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiespar-t
- ricks-die-deine-kosten-sofort-senken/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:linkedin:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstiger
- en-konto:nutzen:2026-11-04@franksfinanzcheck.de
-DTSTAMP:20261031T202907Z
-DTSTART:20261104T064500Z
-DTEND:20261104T070000Z
-SUMMARY:LinkedIn: Bankgebühren senken: 7 Schritte zum günstigeren Kont
- o (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
-  https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken-7
- -schritte-zum-guenstigeren-konto/
-URL:https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken
- -7-schritte-zum-guenstigeren-konto/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:linkedin:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest
- -du-richtig:nutzen:2026-11-05@franksfinanzcheck.de
-DTSTAMP:20261031T202907Z
-DTSTART:20261105T064500Z
-DTEND:20261105T070000Z
 SUMMARY:LinkedIn: Wärmepumpe vs. Gasheizung 2026: So entscheidest du r
  ichtig (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -66,26 +21,26 @@ URL:https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gashe
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:linkedin:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-
- monatlichen:nutzen:2026-11-06@franksfinanzcheck.de
-DTSTAMP:20261031T202907Z
-DTSTART:20261106T064500Z
-DTEND:20261106T070000Z
-SUMMARY:LinkedIn: ETF-Sparplan starten: Deine Schritt-für-Schritt-Anle
- itung (nutzen)
+UID:linkedin:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstiger
+ en-konto:nutzen:2026-11-03@franksfinanzcheck.de
+DTSTAMP:20261101T115349Z
+DTSTART:20261103T064500Z
+DTEND:20261103T070000Z
+SUMMARY:LinkedIn: Bankgebühren senken: 7 Schritte zum günstigeren Kont
+ o (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
-  https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-s
- chritt-fuer-schritt-zum-monatlichen/
-URL:https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten
- -schritt-fuer-schritt-zum-monatlichen/
+  https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken-7
+ -schritte-zum-guenstigeren-konto/
+URL:https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken
+ -7-schritte-zum-guenstigeren-konto/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im
- -ueberblick:nutzen:2026-11-09@franksfinanzcheck.de
-DTSTAMP:20261031T202907Z
-DTSTART:20261109T064500Z
-DTEND:20261109T070000Z
+ -ueberblick:nutzen:2026-11-04@franksfinanzcheck.de
+DTSTAMP:20261101T115349Z
+DTSTART:20261104T064500Z
+DTEND:20261104T070000Z
 SUMMARY:LinkedIn: Stromkosten senken: Clevere Haushaltsgeräte im Überb
  lick (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -96,26 +51,26 @@ URL:https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-c
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:linkedin:2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekas
- se-fuellen:nutzen:2026-11-10@franksfinanzcheck.de
-DTSTAMP:20261031T202907Z
-DTSTART:20261110T064500Z
-DTEND:20261110T070000Z
-SUMMARY:LinkedIn: Strategisch sparen: So kannst du deine Reisekasse fü
- llen (nutzen)
+UID:linkedin:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-
+ monatlichen:nutzen:2026-11-05@franksfinanzcheck.de
+DTSTAMP:20261101T115349Z
+DTSTART:20261105T064500Z
+DTEND:20261105T070000Z
+SUMMARY:LinkedIn: ETF-Sparplan starten: Deine Schritt-für-Schritt-Anle
+ itung (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
-  https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-so-
- kannst-du-deine-reisekasse-fuellen/
-URL:https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-s
- o-kannst-du-deine-reisekasse-fuellen/
+  https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-s
+ chritt-fuer-schritt-zum-monatlichen/
+URL:https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten
+ -schritt-fuer-schritt-zum-monatlichen/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartr
- icks:nutzen:2026-11-11@franksfinanzcheck.de
-DTSTAMP:20261031T202907Z
-DTSTART:20261111T064500Z
-DTEND:20261111T070000Z
+ icks:nutzen:2026-11-06@franksfinanzcheck.de
+DTSTAMP:20261101T115349Z
+DTSTART:20261106T064500Z
+DTEND:20261106T070000Z
 SUMMARY:LinkedIn: Energieeffizienz im Haushalt: 5 schnelle Spartricks 
  (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -126,11 +81,26 @@ URL:https://franksfinanzcheck.de/posts/2026-10-24-energieeffizienz-im-
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:linkedin:2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekas
+ se-fuellen:nutzen:2026-11-09@franksfinanzcheck.de
+DTSTAMP:20261101T115349Z
+DTSTART:20261109T064500Z
+DTEND:20261109T070000Z
+SUMMARY:LinkedIn: Strategisch sparen: So kannst du deine Reisekasse fü
+ llen (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
+  https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-so-
+ kannst-du-deine-reisekasse-fuellen/
+URL:https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-s
+ o-kannst-du-deine-reisekasse-fuellen/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:linkedin:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzich
- t:nutzen:2026-11-12@franksfinanzcheck.de
-DTSTAMP:20261031T202907Z
-DTSTART:20261112T064500Z
-DTEND:20261112T070000Z
+ t:nutzen:2026-11-10@franksfinanzcheck.de
+DTSTAMP:20261101T115349Z
+DTSTART:20261110T064500Z
+DTEND:20261110T070000Z
 SUMMARY:LinkedIn: Frugalismus Familie: Clever sparen ohne Verzicht (nu
  tzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -142,10 +112,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:linkedin:2026-10-28-flugvergleich-im-winter-so-findest-du-echte-bi
- lligfluege:nutzen:2026-11-13@franksfinanzcheck.de
-DTSTAMP:20261031T202907Z
-DTSTART:20261113T064500Z
-DTEND:20261113T070000Z
+ lligfluege:nutzen:2026-11-11@franksfinanzcheck.de
+DTSTAMP:20261101T115349Z
+DTSTART:20261111T064500Z
+DTEND:20261111T070000Z
 SUMMARY:LinkedIn: Flugvergleich im Winter: So findest du echte Billigf
  lüge (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
@@ -153,6 +123,35 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
  r-so-findest-du-echte-billigfluege/
 URL:https://franksfinanzcheck.de/posts/2026-10-28-flugvergleich-im-win
  ter-so-findest-du-echte-billigfluege/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:linkedin:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-spa
+ ren:nutzen:2026-11-12@franksfinanzcheck.de
+DTSTAMP:20261101T115349Z
+DTSTART:20261112T064500Z
+DTEND:20261112T070000Z
+SUMMARY:LinkedIn: Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen
+  (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
+  https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergl
+ eich-bis-zu-800-euro-sparen/
+URL:https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-ver
+ gleich-bis-zu-800-euro-sparen/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:linkedin:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-13@fra
+ nksfinanzcheck.de
+DTSTAMP:20261101T115349Z
+DTSTART:20261113T064500Z
+DTEND:20261113T070000Z
+SUMMARY:LinkedIn: DSL-Wechselbonus sichern: So sparst du beim Internet
+ vertrag (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: LinkedIn\nArtikel:
+  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
+URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
+ hern/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR
