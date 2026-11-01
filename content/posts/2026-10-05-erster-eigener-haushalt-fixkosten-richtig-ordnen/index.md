@@ -213,7 +213,7 @@ Ausgaben, die du steuerst, ohne Vertrag: Lebensmittel, Kleidung, Freizeit. Sie g
 
 Für gemeinsame Fixkosten ist ein separates Konto praktisch. Achte darauf, dass alle Abbuchungen dort eingehen und die Beiträge ins Konto fließen, bevor sie fällig werden.
 
-**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [Großeinkauf und Vorrat](../../posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/)
+**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [Großeinkauf und Vorrat](../../posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/) · [Frugalismus Familie](../../posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/)
 **Lesetipp:** [Haushaltsbuch führen: App, Excel oder Stift im Vergleich](../../posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/)
 
 ---

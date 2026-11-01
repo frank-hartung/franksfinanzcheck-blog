@@ -1,41 +1,18 @@
 {
   "target": 6,
-  "ready": 3,
-  "pool_size": 6,
-  "generated_at": "2026-10-31T14:39:53Z",
+  "ready": 6,
+  "pool_size": 7,
+  "generated_at": "2026-11-01T15:45:37Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
       "ready": true,
       "sha256": "cb3bf3d7be2180edff5fcefa860e8623f50fa8a4c2727513861e1fe7ba87cd18",
       "flesch": 66.7,
-      "measured_at": "2026-10-31T09:55:31Z",
+      "measured_at": "2026-11-01T15:38:41Z",
       "score": 0.984,
       "parts": {
         "spelling": 0.92,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "ready": false,
-      "sha256": "5f24a2368b3b10ede0e02d1e49563f2cdcdfc2d531eb5f8e727ecef6c0d6dd6d",
-      "flesch": 72.8,
-      "measured_at": "2026-10-31T14:39:52Z",
-      "reason": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…wichtiger hinweis dieser artikel dient ausschließlich der allgemeinen information und…“ – doppelte Passage, manuell reparieren; R15-PHRASEN",
-      "details": [
-        "🛑 2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
-        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…wichtiger hinweis dieser artikel dient ausschließlich der allgemeinen information und…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…stellt keine anlage rechts oder steuerberatung dar prüfe konditionen und…“ – doppelte Passage, manuell reparieren",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
-      "score": 0.996,
-      "parts": {
-        "spelling": 0.98,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -49,7 +26,7 @@
       "ready": true,
       "sha256": "026a4df794c249f5d138d8530485aac93a4e2f09abc336b0d00cf67c72704604",
       "flesch": 61.6,
-      "measured_at": "2026-10-31T09:57:06Z",
+      "measured_at": "2026-11-01T15:39:51Z",
       "score": 0.952,
       "parts": {
         "spelling": 0.94,
@@ -62,18 +39,11 @@
       }
     },
     {
-      "slug": "2026-10-30-energieeffiziente-geraete-so-sinken-deine-fixkosten",
-      "ready": false,
-      "sha256": "41a5b625076f91ebbff1458e008cbabdf24fd6bcf053cd54f0c24c63d15d0254",
-      "measured_at": "2026-10-31T09:57:54Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
-    },
-    {
       "slug": "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem",
       "ready": true,
       "sha256": "b5e79ef506a6a8b269bce6ad13af6f8ba636cfc766aa67fd7ab42ab36c3fa52e",
       "flesch": 67.1,
-      "measured_at": "2026-10-31T09:58:41Z",
+      "measured_at": "2026-11-01T15:41:01Z",
       "score": 0.986,
       "parts": {
         "spelling": 1.0,
@@ -86,15 +56,28 @@
       }
     },
     {
-      "slug": "2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-      "ready": false,
-      "sha256": "51a9064a1f24f0bdf5dcab3b72e75dfcb342b90d03b851909ae4d16695bad7db",
-      "flesch": 66.4,
-      "measured_at": "2026-10-31T14:39:53Z",
-      "reason": "Reserve-Qualitäts-Gate: RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Nach ein bis zwei Jahren zerbröckelt das Material oft.",
-      "details": [
-        "RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Nach ein bis zwei Jahren zerbröckelt das Material oft."
-      ],
+      "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
+      "ready": true,
+      "sha256": "fdfc2fd2dff9a1fe1417f996c5c3a30747b18a4a72397ad82c4306632a2fe1fc",
+      "flesch": 67.3,
+      "measured_at": "2026-11-01T15:42:10Z",
+      "score": 0.962,
+      "parts": {
+        "spelling": 0.88,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.96,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-11-01-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
+      "ready": true,
+      "sha256": "3988fe8a79b5c05081a3371b020a08ce748041ce87d46b18dbb4d650f768fd52",
+      "flesch": 66.6,
+      "measured_at": "2026-11-01T15:43:18Z",
       "score": 0.942,
       "parts": {
         "spelling": 0.92,
@@ -105,19 +88,51 @@
         "affiliate": 1.0,
         "readability": 0.95
       }
+    },
+    {
+      "slug": "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck",
+      "ready": false,
+      "sha256": "9e7c7b72ba9dc7534c47a0658e4a78e846e53fb94bc58a340419a8b8cc822e8f",
+      "flesch": 72.0,
+      "measured_at": "2026-11-01T15:44:29Z",
+      "reason": "Faktenfrische nicht bestanden: 16c61b47411ffd3b241d (praezision): Die Aussage, ein Streik des Flughafenpersonals sei stets ein „außergewöhnlicher Umstand“, für den die Airline nicht zahlen muss, fehlt an einer konkreten Quelle.; 569da8c4cef",
+      "details": [
+        "🛑 2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "Faktenfrische nicht bestanden: 16c61b47411ffd3b241d (praezision): Die Aussage, ein Streik des Flughafenpersonals sei stets ein „außergewöhnlicher Umstand“, für den die Airline nicht zahlen muss, fehlt an einer konkreten Quelle.; 569da8c4cef2bca9441c (praezision): Die Aussage, ein Fluggast‑Portal behalte „oft 30 % Provision“ sei nicht durch messbare Daten oder Quellen gestützt.; 6c2384a7c6ae2e34da00 (praezision): Die Darstellung, die Schlichtungsstelle für den öffentlichen Personenverkehr (söp) sei kostenlos und eine offizielle staatliche Instanz, wird nicht durch die angegebene Quelle belegt.; b1d88089903f3d072cba (luecke): Die Behauptung, die Verjährungsfrist von drei Jahren beginne am Jahresende des jeweiligen Jahres, wird von der Quelle nicht bestätigt.; b2a2f7afd351e811cf15 (luecke): Der Artikel nennt konkrete Pauschalbeträge von 250 €, 400 € bzw. 600 € für Kurz‑, Mittel‑ und Langstrecken, ohne dass diese Beträge durch die angegebene Quelle belegt werden.",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 0.885,
+      "parts": {
+        "spelling": 0.9,
+        "meta": 0.5499999999999999,
+        "structure": 1.0,
+        "typography": 0.92,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.9
+      }
+    },
+    {
+      "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "ready": true,
+      "sha256": "8b2bfd854fd76ec4416f34211b3eb73d701860b77a115a0be239fd5b164dea34",
+      "flesch": 72.6,
+      "measured_at": "2026-11-01T15:45:37Z",
+      "score": 0.996,
+      "parts": {
+        "spelling": 0.98,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
     }
   ],
   "measurement": {
-    "kind": "partial",
-    "run_id": "41211080745",
+    "kind": "full",
+    "run_id": "41321007535",
     "run_attempt": "1"
-  },
-  "recert": {
-    "at": "2026-10-31T14:39:53Z",
-    "renewed": [
-      "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen"
-    ],
-    "tool": "scripts/reserve_recert.py"
   }
 }

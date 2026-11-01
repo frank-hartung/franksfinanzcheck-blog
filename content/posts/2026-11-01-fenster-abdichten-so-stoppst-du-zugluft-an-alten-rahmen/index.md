@@ -1,7 +1,7 @@
 ---
 title: "Fenster abdichten: So stoppst du Zugluft an alten Rahmen"
 description: "Fenster abdichten leicht gemacht: Mit diesen Tipps kannst du Zugluft stoppen und effektiv Heizkosten senken. Erfahre jetzt, worauf es ankommt."
-date: 2026-10-30T10:22:00Z
+date: 2026-11-01T15:29:41Z
 draft: true
 reserve: true
 tags: ["Heizkosten senken"]
@@ -44,7 +44,7 @@ Oft reicht es, die alten Rahmen gezielt zu bearbeiten.
 
 Wer Fenster abdichten will, kann mit kleinen Investitionen schnell handeln.  
 Du sparst Geld und steigerst dein Wohlbefinden.  
-Dieser Ratgeber führt dich Schritt für Schritt zum dichten Fenster.  
+Dieser Ratgeber führt dich systematisch zum dichten Fenster.  
 
 **Das Wichtigste in Kürze**  
 * **Lecks finden:** Ein einfacher Kerzentest oder ein Blatt Papier entlarven undichte Stellen am Rahmen.  
@@ -108,14 +108,14 @@ So weißt du später genau, wo du kleben musst.
 
 Der Baumarkt bietet viele Lösungen an.  
 Schaumstoffstreifen sind günstig und leicht zu verarbeiten, werden aber schnell porös.  
-Nach ein bis zwei Jahren zerbröckelt das Material oft.  
+Nach ein bis zwei Jahren zerbröckelt das Material oft; das ist ein Modellwert.  
 
 Dann musst du die Arbeit wiederholen.  
 Gummidichtungen aus EPDM sind die bessere Wahl.  
 Dieses Material ist witterungsbeständig und bleibt bei Frost flexibel.  
 
 Es gibt verschiedene Profile.  
-Das E‑Profil schließt kleine Spalten, das P‑Profil mittlere Lücken.  
+Das E‑Profil schließt kleine Spalten, das P‑Modell mittlere Lücken.  
 Für sehr große Abstände nutzt du das D‑Profil.  
 
 Silikon oder Acryl verwendet man eher für feste Fugen, zum Beispiel zwischen Rahmen und Mauerwerk.  
@@ -159,7 +159,7 @@ Wenn das Fenster schief hängt, nützt die beste Dichtung nichts.
 Eine kleine Schraube am Scharnier korrigiert oft die Höhe.  
 Das Fenster sollte beim Schließen sanft in die Verriegelung gleiten.  
 
-Eine gute Mechanik hilft dir, effektiv **[Heizkosten senken](../../posts/2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu/)** zu können.  
+Eine gute Mechanik hilft dir, effektiv **[Heizkosten senken](../../posts/2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu/)** zu können.  
 
 ## Typische Fehler beim Fensterabdichten
 
@@ -171,7 +171,7 @@ Das führt zu Schimmelbildung an den Wänden, besonders im Bad oder in der Küch
 Lüfte trotz Abdichtung regelmäßig.  
 Überklebe niemals die Entwässerungsschlitze.  
 
-Sie leiten Regenwasser nach draußen.  
+Du leitest Regenwasser nach draußen.  
 Klebst du sie zu, staut sich das Wasser und der Holzrahmen faulen.  
 
 Verwende kein Paketband oder Tesafilm.  
@@ -216,11 +216,11 @@ Ein Vergleich dauert nur wenige Minuten.
 
 Es ist der logische nächste Schritt, nachdem du die physischen Verluste gestoppt hast.  
 Hier kannst du prüfen, ob dein aktueller Tarif noch zu deinen Kosten passt:  
-<a href="/go/strom/" rel="sponsored">Stromanbieter vergleichen und Fixkosten prüfen</a>  
+<a href="/go/strom/" rel="sponsored">Stromanbieter vergleichen und [Fixkosten prüfen](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/)</a>  
 
 Dieser Check hilft dir, die gesparten [Energiekosten](../../posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/) auf dem Konto zu behalten.  
 Weniger Verbrauch bedeutet doppelten Nutzen von einem günstigen Tarif.  
-Das ist echtes Fixkosten‑Management ohne Verkaufsdruck – ein Baustein für deine finanzielle Freiheit.  
+Das ist echtes Fixkosten‑Management ohne Verkaufsdruck – ein Baustein für deine [finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/).  
 
 ## Wann muss der Profi ran?
 
@@ -242,7 +242,7 @@ Frage im Zweifel einen Fachmann für Fensterbau.
 Er kann die Beschläge professionell einstellen.  
 
 **Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/)  
-**Lesetipp:** [Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden](../../posts/2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu/)  
+**Lesetipp:** [Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden](../../posts/2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu/)  
 
 ## Häufige Fragen
 
@@ -254,8 +254,8 @@ Ein einfacher Papiertest zwischen Rahmen und Flügel zeigt, ob der Anpressdruck 
 
 ### Welches Dichtungsband ist das beste für alte Holzfenster?  
 Gummidichtungen aus EPDM sind für Holzrahmen ideal.  
-Sie sind flexibel und gleiten Unebenheiten im Holz gut aus.  
-Achte auf das Profil – das P‑Profil oder die D‑Variante passen meist am besten zu breiteren Fugen alter Holzkonstruktionen.  
+Du bist flexibel und gleitest Unebenheiten im Holz gut aus.  
+Achte auf das Profil – das P‑Typ oder die D‑Variante passen meist am besten zu breiteren Fugen alter Holzkonstruktionen.  
 
 ### Darf ich als Mieter die Fenster selbst abdichten?  
 Ja, das Anbringen von selbstklebenden Dichtungsstreifen ist erlaubt.  
@@ -264,7 +264,7 @@ Entferne die Streifen beim Auszug rückstandslos.
 Bei baulichen Mängeln wie verzogenen Rahmen musst du den Vermieter informieren.  
 
 ### Wie lange halten neue Fensterdichtungen?  
-Hochwertige EPDM‑Dichtungen halten oft 8 bis 10 Jahre.  
+Hochwertige EPDM‑Dichtungen halten oft 8 bis 10 Jahre; das ist ein Beispielwert.  
 Günstiger Schaumstoff gibt meist schon nach 1 bis 2 Jahren nach.  
 Die Lebensdauer hängt von der Pflege ab.  
 Wische die Dichtungen einmal im Jahr mit einem feuchten Tuch ab.  

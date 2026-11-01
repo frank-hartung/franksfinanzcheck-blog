@@ -3,6 +3,7 @@ title: "Änderungsprotokoll: Was wir wann aufgrund welcher Quelle geändert habe
 seoTitle: "Änderungsprotokoll: Korrekturen & Quellen"
 description: "Korrekturen, Quellenwechsel und Methodik-Updates von FranksFinanzcheck – mit Datum, Anlass, Beleg und Nachweis jeder Änderung."
 draft: false
+lastmod: 2026-10-27
 author: "Frank Hartung"
 showToc: false
 ---

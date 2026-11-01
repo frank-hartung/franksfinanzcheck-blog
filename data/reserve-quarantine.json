@@ -1,1 +1,14 @@
-{}
+{
+  "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck": {
+    "datei_sha256": "9e7c7b72ba9dc7534c47a0658e4a78e846e53fb94bc58a340419a8b8cc822e8f",
+    "first": "2026-11-01T15:45:37Z",
+    "grund": "Faktenfrische nicht bestanden: 16c61b47411ffd3b241d (praezision): Die Aussage, ein Streik des Flughafenpersonals sei stets ein „außergewöhnlicher Umstand“, für den die Airline nicht zahlen muss, fehlt an einer konkreten Quelle.; 569da8c4cef",
+    "hits": 1,
+    "laeufe": [
+      "run:41321007535"
+    ],
+    "last": "2026-11-01T15:45:37Z",
+    "lauf": "run:41321007535",
+    "signatur": "faktenfrische nicht bestanden: <n>c<n>b<n>ffd<n>b<n>d (praezision): die aussage, ein streik des flughafenpersonals sei stets ein „außergewöhnlicher umstand“, für den die airline nicht zahlen muss, feh"
+  }
+}

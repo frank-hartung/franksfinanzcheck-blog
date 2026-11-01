@@ -15,7 +15,7 @@ ki_redaktion_status: "review"
 redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
-  aenderungsgrund: "Fachliche Überarbeitung nach den Faktenfrische-Befunden (#911); Abgleich der Regeln mit den Veröffentlichungen der Bundesnetzagentur am 30.10.2026; redaktionelle Schlussprüfung ausstehend"
+  aenderungsgrund: "Fachliche Überarbeitung nach den Faktenfrische-Befunden (#911); Abgleich der Regeln mit den Veröffentlichungen der Bundesnetzagentur am 30.10.2026; am 01.11.2026 YMYL-Disclaimer auf den Hausstandard (ki_shared.py DISCLAIMER) zurückgeführt, Duplikat-Befund D4-X gegenüber dem Gastarife-Artikel geheilt; redaktionelle Schlussprüfung ausstehend"
 kurzantwort: "Ob ein Stromwechsel Geld spart, hängt von deinem Jahresverbrauch, deinem alten Tarif und den vollständigen Kosten des neuen Angebots ab. Rechne Arbeitspreis mal Verbrauch plus Grundpreis und prüfe danach Laufzeit, Kündigungsfrist und Preisgarantie im Vertrag. Kündigung und Lieferantenwechsel sind für Haushaltskunden kostenfrei; der technische Wechsel ist seit dem 6. Juni 2025 an Werktagen binnen 24 Stunden möglich (Bundesnetzagentur)."
 pin_title: "Stromtarif vergleichen: Kosten und Bedingungen prüfen"
 pin_description: "*Werbung | Stromtarife fair vergleichen: Jahreskosten, Vertragsbedingungen und Kündigungsfristen prüfen – mit nachvollziehbarer Beispielrechnung. Mehr Spartipps auf FranksFinanzcheck! #stromanbieter #wechseln #stromvergleich"
@@ -187,4 +187,4 @@ Wenn du zusätzlich deinen Verbrauch senken willst, findest du im Ratgeber zu [S
 
 *Werbung: Dieser Artikel enthält Affiliate-Links. Bei einem Abschluss über diese Links können wir eine Provision erhalten. Der Preis für dich ändert sich dadurch nicht.*
 
-_Wichtiger Hinweis: Dieser Artikel dient der allgemeinen Information und ersetzt keine Rechtsberatung. Maßgeblich sind dein Vertrag und die aktuellen gesetzlichen Vorgaben._
+_Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information und stellt keine Anlage-, Rechts- oder Steuerberatung dar. Prüfe Konditionen und Bedingungen immer beim jeweiligen Anbieter._

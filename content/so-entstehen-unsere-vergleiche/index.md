@@ -2,6 +2,7 @@
 title: "So entstehen unsere Vergleiche: das Bewertungsraster"
 description: "So bewerten wir Vergleichsportale: Kriterien, Ausschlüsse und Rechenwege – Provisionen bestimmen keine Platzierung. Mit öffentlichem Bewertungsraster."
 draft: false
+lastmod: 2026-10-25
 author: "Frank Hartung"
 showToc: true
 ---
