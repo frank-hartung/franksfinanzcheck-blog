@@ -187,6 +187,14 @@ Ablageort. **Wer an der Sache arbeitet, liest den Skill vorher.**
 | Jede Oberfläche: CSS, Farbe, Dark Mode, Variante, Figma/Relume, Templates, Browser-JS, Werkzeuge, `_headers` | `ff-oberflaeche` | Design-Vertrag (siehe oben), Laufzeit-Robustheit, Produktzusage der Werkzeuge |
 | Jeder Weg nach draußen: Modell, Secret, Recherche, Antwortwerk/Werkbank, Suchradar, Schaltwerk, Kosten | `ff-ki-automation` | Transportweg T1–T9, Werkbank B1–B9, Kostensperre, Leitplanken der Automationen |
 
+**Fremd-Skills mit eigenem Router:** `seo` (AgriciDaniel/claude-seo) ist der Hub
+für SEO-Analyse jenseits der Haus-Gates – Audit, technisch, GEO, Agentic
+Readiness, hreflang, Sitemap, Schema, Bilder, Local, Backlinks, Drift. Er
+verteilt auf 25 `seo-*`-Unterskills; Werkzeuge laufen über
+`.claude/skills/seo/scripts/claude-seo run <script.py>`. Der Hub liefert
+**Analyse**, nicht die Hausregel: was veröffentlicht wird, entscheiden weiter
+die Gates (`npm run test:*`, `.github/workflows/seo-paritaet.yml`).
+
 ## Neues Wissen? Nicht hier. (Größenbudget, DAUERVORGABE)
 
 Dieser Kern kostet jeden Agenten bei jedem Start Tokens. Er war am 01.11.2026

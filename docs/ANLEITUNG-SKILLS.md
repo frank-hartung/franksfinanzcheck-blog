@@ -132,9 +132,18 @@ Hand gesetzter Hash sieht gültig aus und ist es nie (an `frontend-design` und
 ```bash
 npx -y skills@1.7.4 add <owner>/<repo> --skill <name> -a claude-code -y
 npx -y skills@1.7.4 update
-npx -y skills@1.7.4 check
+npx -y skills@1.7.4 check      # ACHTUNG: schreibt (siehe Kasten unten)
 npx -y skills@1.7.4 remove <name> -y
 ```
+
+> **`check` ist kein Lesezugriff (gemessen 01.11.2026).** Der Befehl meldet
+> nicht „veraltet“, sondern **aktualisiert**: er schrieb zehn vorhandene Skills
+> um, ersetzte `agent-reach` durch einen Symlink nach `.agents/skills/` und
+> legte `agent/skills/` und `data/skills/` an. Weil dieses Repo echte Ordner mit
+> inline-`LICENSE.txt` versioniert (keine Symlink-Farm), wurde der Lauf
+> vollständig zurückgerollt. Wer den Bestand nicht anfassen will, benutzt
+> `npx -y skills@1.7.4 add <owner>/<repo> --skill '*' -a claude-code -y`
+> gezielt – oder nimmt die Änderungen aus `git status` bewusst in Kauf.
 
 Ohne `-y` bleibt der CLI an einer Ja/Nein-Frage stehen und tut nichts – im
 Automatenlauf heißt das: keine Wirkung, aber ein grüner Schritt. Reihenfolge
@@ -171,6 +180,43 @@ an der Website ändern (10 Python-Helfer, drei Agenten-Dokumente, Auswertung in
 der Wegwerf-Kopie). Vor der Aufnahme geprüft: Syntaxwache, REDOS-Wache,
 Wachen-Vertrag und Fremdmessung-Sperre blieben grün, K6 meldete sofort den
 fehlenden Register-Eintrag – so soll es sein.
+
+## Im Bestand: `claude-seo` (AgriciDaniel/claude-seo, MIT) – 26 Skills mit eigener Runtime
+
+Aufgenommen am 01.11.2026 auf Anweisung (Befehl: `npx skills add
+AgriciDaniel/claude-seo`). Das ist die erste Anlage, die **mehr als einen Skill
+und eigenen ausführbaren Code** mitbringt. Drei Dinge daran sind nicht
+selbsterklärend und gehören deshalb hierher:
+
+1. **Ein Paket, 26 Skills.** Der CLI legt alle 26 als Geschwisterordner ab
+   (`seo` als Hub plus 25 `seo-*`). Ihre Beschreibungen liegen ab jetzt in
+   jedem Agenten-Start mit: 2.039 Tokens gegen 3.335 Tokens Bestand – **+61 %
+   Dauerlast**. Das ist der Preis, nicht die Beigabe.
+2. **Die Runtime liegt im Hub-Ordner, nicht in `scripts/`.** Die Skills rufen
+   `"${CLAUDE_PLUGIN_ROOT}/scripts/claude-seo" run <script.py>`; außerhalb eines
+   Plugins ist diese Variable leer. Wie das Upstream-`install.sh` für
+   Handinstallationen ersetzt auch dieser Checkout den Token – hier auf den
+   Repo-Pfad `.claude/skills/seo/scripts/claude-seo` (32 `.md`-Dateien, 151
+   Token). `scripts/`, `schema/`, `data/`, `hooks/` und `requirements.txt`
+   liegen deshalb **neben** dem `SKILL.md` des Hubs, weil `runtime.py` seinen
+   Wurzelpfad als `parent.parent` auflöst. Venv bauen:
+   `.claude/skills/seo/scripts/claude-seo setup` (das Ergebnis ist nicht
+   versioniert).
+3. **Lizenz je Ordner, Volltext statt Zeiger.** Upstream legt eine 143-Byte-
+   Datei ab, die nur auf die Root-Lizenz verweist, und lässt fünf Ordner ganz
+   ohne. Ein Verweis führt die Permission Notice nicht mit, die MIT verlangt –
+   in allen 26 Ordnern liegt daher der unveränderte MIT-Volltext der
+   Root-Lizenz (1.069 Bytes).
+
+**Nach jedem `npx skills update` sind 2 und 3 weg.** Der CLI kopiert wieder den
+Upstream-Stand: die `CLAUDE_PLUGIN_ROOT`-Token kehren zurück, die Lizenzdateien
+werden wieder Zeiger. Der Nachlauf ist derselbe wie bei der Aufnahme und steht
+als Befehlskette im Vorgangsbericht
+`CLAUDE-SEO-AUFNAHME-26-SKILLS-HIGHEND-2026-11-01.md`.
+
+Grenze zum Haus: der Hub liefert **Analyse**, nicht die Veröffentlichungsregel.
+Was auf die Website darf, entscheiden weiter `ff-produzieren`, `ff-marke-text`
+und `seo-paritaet.yml`; die 26 Skills ersetzen keine Wache.
 
 ## Abgelehnt und begründet: `xlsx` (anthropics/skills)
 
