@@ -124,7 +124,7 @@ Zwei Hinweise für die Heilung, gemessen am Fall:
   seit #783 fernhält – sie schlägt korrekt an. Die Wache ist also nicht
   vergessen, sie ist erweislich kaputt.
 
-## Offene Punkte (bewusst nicht entschieden)
+## Offene Punkte (bewusst nicht entschieden — am selben Tag geschlossen, siehe letzter Abschnitt)
 
 1. **`web-design-guidelines` ohne Lizenz.** Upstream `vercel-labs/agent-skills`
    führt weder LICENSE noch `license`-Feld. Die Ausnahme im Register trägt Grund,
@@ -144,3 +144,141 @@ Zwei Hinweise für die Heilung, gemessen am Fall:
    wenigstens den Lock-Eintrag), und ob die 228 Root-Berichte in dieselbe
    Struktur umziehen – dieser Umbau hat gezeigt, dass Verschieben ohne
    Inhaltsumbruch billiger ist als Aufräumen durch Löschen.
+
+## Zweiter Schwung: die vier offenen Punkte, umgesetzt (01.11.2026)
+
+Auftrag: keiner der vier Punkte darf als Fußnote enden. Stand nach diesem
+Abschnitt: 1, 3 und 4 sind erledigt, 2 ist vorbereitet und bleibt ein
+Menschenakt – mit Kommando, Reihenfolge und Grund.
+
+### 1 · Vercel-Lizenzfrage: geschlossen, nicht verlängert
+
+Entfernt über den Werkzeugweg, nicht durch Löschen im Ordner:
+
+```bash
+npx -y skills@1.7.4 remove web-design-guidelines -y
+```
+
+Der CLI nimmt damit exakt das, wofür er den Eintrag je geschrieben hat: die
+Skill-Datei und ihren `skills-lock.json`-Eintrag (`a6a44d54…`). Ohne `-y` steht
+er an einer Ja/Nein-Frage und tut nichts – im Automatenlauf ein grüner Schritt
+ohne Wirkung, deshalb gehört der Schalter in jede Doku.
+
+Was der Skill tat, liegt jetzt hausgemacht:
+`.claude/skills/ff-oberflaeche/references/web-richtlinien.md`, 24 Punkte in sechs
+Gruppen (Struktur, Wahrnehmbarkeit, Bewegung/Zeit, Zeiger/Tastatur, Text im
+Interface, Kopf/Ressourcen). Jeder Punkt ist entweder an einem bestehenden Gate
+beweisbar (Kontrast, A11y, Werkzeuge, Kopf, Variante) oder im Review mit Datei
+und Zeile zu benennen – die Liste ist bewusst keine Geschmacks-Erweiterung,
+sondern die Summe dessen, was dieses Repo schon messen kann. Kern-Tabelle und
+`DESIGN.md`-Kopf zeigen seither dorthin. Im Register steht der Fall unter
+`erledigte_faelle` (Grund, Heilung, Datum), die Ausnahme selbst ist weg:
+**18 Fremd-Skills, 18 Lizenztexte, 0 Ausnahmen.**
+
+Nebenbefund mit Wert: `npx skills` hat den Lock-Eintrag **an der richtigen Stelle**
+ausgetauscht (alphabetisch, Format erhalten) – der Lock ist also nicht nur
+schreibbar, sondern round-trip-fähig. `computedHash` ist dabei **nicht** die
+SHA-256 von `SKILL.md` (an `frontend-design` und `webapp-testing` nachgerechnet);
+ein von Hand gesetzter Hash sähe gültig aus und wäre es nie. Seit diesem Tag
+steht das in `docs/ANLEITUNG-SKILLS.md` und `.gitattributes` trägt
+`merge=binary` für beide Register – dieselbe Klasse wie der kaputte
+Merge-Schnitt des Siegels (#346), nur hier mit Herkunftsangaben statt Hashes.
+
+### 2 · Siegel: K8 meldet den Stand, die Unterschrift bleibt beim Betreiber
+
+Nagelt man `scripts/skills_vertrag.py` und `data/skill_lizenzen.json` nicht ins
+Schloss, entscheidet jeder Schreibende über Lizenzen und Kernbudget, ohne dass
+es laut wird. Neu geprüft wird das in **K8**, und zwar immer als **Warnung mit
+Schlusszeile** – nie als Befund:
+
+```text
+[K8] scripts/skills_vertrag.py – steht weder in KRITISCH/FEST noch im Siegel – …
+```
+
+Der Verzicht auf Exit 1 ist keine Feigheit, sondern die Lehre aus #316: Ein HARD
+STOP auf eine ungezeichnete Datei traf am 19.09.2026 die Content-Engine im
+ersten Schritt, während der eigentliche Fehler eine vergessene Signatur war. Ein
+Gate, das Produktion geiselt, um eine Formalität beizubringen, verliert die
+Debatte in der ersten Woche.
+
+Warum hier **nicht** signiert wurde: `npm run test:redaktion` ist rot (Fall
+„Vertrag-gute-aenderung-still“, auf frischem Auschecken von `51e0270`
+reproduziert, also vorbestehend), und `scripts/redaktions_standard.py` ist
+FEST-versiegelt. Eine Signatur auf diesem Stand würde den Defekt waschen – das
+Schloss erklärt dann einen Zustand für gut, dessen eigener Selbsttest Nein sagt.
+Der Auftrag mit Reihenfolge, Kommandos und der Audit-Tabelle steht in
+`docs/SICHERHEIT-BETRIEB-RUNBOOK.md` § G1–G3. Vorgesehen ist außerdem:
+`--add=` akzeptiert einen Pfad nur, wenn er in `KRITISCH` oder `FEST` steht
+(Zeile ~1810 der Wache) – die Klassenerweiterung gehört deshalb in denselben
+Commit wie die Zeichnung, sonst steht jedes PR-Gate rot.
+
+### 3 · Eigener Schritt im Gate
+
+`.github/workflows/link-check.yml` hat seit heute einen eigenen Schritt vor dem
+Hugo-Bau-Vertrag:
+
+```yaml
+- name: Skill-Vertrag (Kernbudget, Router, Herkunft, Lizenz, Siegelstand)
+```
+
+Er fährt Prüfung, Selbsttest und Regressionstests. Der Trigger brauchte keine
+Änderung (der Workflow läuft auf push/PR/Plan ohne `paths:`-Filter), und der
+vorhandene Schritt „Gate-Fehlschlag melden“ verwendet `failure()` – ein Fall
+dieses Schrittes meldet sich also von selbst, mit dem gefallenen Schritt im Text,
+was „Reihenfolge statt Raterei“ (C14) heißt. `governance_contract.py --quick`
+prüft nach wie vor 43 Regeln in beide Richtungen und steht auf Grün, die
+Wache stand bereits vorher in `GUARDS` (C6).
+
+### 4 · Zwei Anlagen, die Prüfung bestanden – eine abgelehnt
+
+**`skill-creator` (anthropics/skills, Apache-2.0) aufgenommen**: 256 KB, 18
+Dateien, `LICENSE.txt` liegt bei und ist **bytegleich** mit dem von
+`webapp-testing` (11.345 B reines Apache-2.0, keine Zusatzklausel). Vorher am
+Kratz-Baum geprüft: Syntaxwache 623 grün, REDOS 643 Dateien 0 Funde (+9),
+Wachen-Vertrag 370/0, Fremdmessung-Sperre still – und **K6 meldete sofort den
+fehlenden Register-Eintrag**. Genau dafür ist die Wache da: eine neue Anlage kann
+nicht ohne Herkunftsnachweis hineinschlüpfen.
+
+**`xlsx` (dasselbe Haus) abgelehnt – mit Messung statt Bauch.** 63 Dateien,
+1.102.893 Bytes, und eine `LICENSE.txt` über 1.467 Bytes, die exakt das
+verbietet, was ein Vendor-Ordner ist: „may not extract these materials from the
+Services or retain copies of these materials outside the Services … create
+derivative works … distribute“. Dasselbe Blatt bei `pdf` und `docx`. Und selbst
+ohne das: im Repo liegt keine Tabellenkalkulation – die beiden .xlsx/.pdf-Dateien
+wurden am 31.08.2026 daraus entfernt („gehören in Notion/Drive, nicht ins
+Git-Repo“, `docs/CLEANUP-REPORT-2026-08-31.md`).
+
+Die Lizenzmischung in diesem Haus war der Anlass, **K6 nachzuschärfen**: `MIT`
+und `Apache-2.0` sind nachprüfbare Freigaben, jeder andere Wert braucht
+Ausnahme mit Grund, Entscheidung und Frist – das Repo-Zeichen eines Upstreams
+sagt nichts über seinen Ordner. Dabei fiel die zweite Lücke auf: Die Ausnahme
+beendete den Prüfschritt bisher mit `continue`, und hat damit den Lizenztext
+gleich mit erledigt. Jetzt endet der Block nur bei „unbekannt“ (wo es per Definition
+nichts zu kopieren gibt); bei einer bekannten Sonderlizenz bleibt die
+Volltextpflicht. Zwei Tests, ein Selbsttest-Fall.
+
+### Nachweis
+
+| Prüfung | Ergebnis |
+|---|---|
+| `python3 scripts/skills_vertrag.py` | 24 Skills · 0 Befunde · 2 Warnungen (K8, erwarteter Siegelhinweis) |
+| `python3 scripts/skills_vertrag.py --selftest` | ✅ 17 Fälle (vorher 13) |
+| `python3 -m unittest scripts.tests.test_skills_vertrag` | ✅ 33 Tests (vorher 31) |
+| `governance_contract.py --quick` | ✅ 43 Regeln, in beide Richtungen |
+| `skript_syntax_wache.py` · `wachen_vertrag.py` · `redos_guard.py` | ✅ 623 · 370/0 · 643/0 |
+| `fremdmessung_sperre.py` | ✅ keine Spur, auch nicht in den neuen Skill-Ordnern |
+| `report_hygiene.py --check` | ✅ Root sortenrein |
+| `design_handoff.py --check` | ✅ nach Generatorlauf (Kopfzeile in `DESIGN.md` hatte der Manifest-Hash erwartet – geheilt mit `python3 scripts/design_handoff.py`, ein Hash in `design/handoff/handoff-manifest.json`, 8 weitere Artefakte bytegleich) |
+| Kern und Skills | `CLAUDE.md` 239 Zeilen / 17,5 KB (Budget 420 / 32 KB) · `ff-oberflaeche` 87 Zeilen (Budget 200) |
+| `content/` | unverändert, kein Artikel angefasst |
+
+### Was bleibt
+
+Zeichnen (Betreiber, § G). `hugo` steht in dieser Sandbox nicht zur Verfügung,
+der Bau bleibt damit ungeprüft – er wird auch im Gate gebaut, und keiner der
+geänderten Pfade liegt im Hugo-Eingabebaum (`.claude/`, `CLAUDE.md`,
+`skills-lock.json`, `data/skill_lizenzen.json` werden nicht gerendert).
+`scripts/redaktions_standard.py` bleibt der vorbestehende Defekt, dessen Heilung
+die Signatur voraussetzt, nicht umgekehrt. Und die Quartalsfrage aus Punkt 4
+(228 Root-Berichte in dieselbe Struktur) ist unbeantwortet – dieser Umbau hat
+nur gezeigt, dass Verschieben billiger ist als Aufräumen durch Löschen.
