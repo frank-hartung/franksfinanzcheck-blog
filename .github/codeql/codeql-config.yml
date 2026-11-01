@@ -45,7 +45,11 @@ packs:
   javascript:
     - codeql/javascript-queries:AlertSuppression.ql
 
-paths_ignore:
+# Der Schlüssel heißt `paths-ignore` (Bindestrich), nicht `paths_ignore`.
+# Bis 01.11.2026 stand hier die Unterstrich-Variante: CodeQL liest sie
+# nicht, die Liste war damit wirkungslos – aufgefallen erst, als der
+# vendorte claude-seo-Code trotz Eintrag im SARIF auftauchte.
+paths-ignore:
   - "**/*.min.js"
   - "**/*.min.css"
   - ".claude/skills/impeccable/scripts/**"

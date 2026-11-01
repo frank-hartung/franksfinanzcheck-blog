@@ -95,7 +95,7 @@ REGEL_STORAGE = "py/clear-text-storage-sensitive-data"
 # OAuth-Tokendatei in `google_auth.py` über `_write_private_json()` mit
 # `os.open(..., 0o600)` plus `fchmod` – die Datei ist nie weltlesbar. Die
 # Query `py/clear-text-storage-sensitive-data` wertet Dateirechte nicht aus und
-# meldet dennoch. Dieselbe Grenze steht seit demselben Tag als `paths_ignore`
+# meldet dennoch. Dieselbe Grenze steht seit demselben Tag als `paths-ignore`
 # in `.github/codeql/codeql-config.yml` (Vorbild: `impeccable/scripts`), damit
 # GitHubs Default-Setup nicht auf fremdem Code steht. Punkt 2 des Vertrags
 # oben („kein toter Winkel") bleibt erfüllt, weil dieser Lauf die Datei

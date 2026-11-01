@@ -120,38 +120,57 @@ die messenden Skripte (PageSpeed, GSC, Agentic-Lighthouse) erst nach `setup`.
 ## Bereichsgrenze Fremdcode (Entscheidung, 01.11.2026)
 
 Der PR war auf zwei Checks rot, und der Grund war **mein** Zuwachs – nicht die
-Basis:
+Basis. Es waren am Ende **zwei** Fundstellen in derselben Datei, aus zwei
+verschiedenen Werkzeugen:
 
-```
-[FLUSS] .claude/skills/seo/scripts/google_auth.py:314:
-        [py/clear-text-storage-sensitive-data] json.dump() ← Zuweisung an `OAUTH_REDIRECT_URI`
-```
+| Werkzeug | Stelle | Regel | Bewertung |
+|---|---|---|---|
+| `clear_text_logging_guard.py` (lokal) | `google_auth.py:314` | `py/clear-text-storage-sensitive-data` | Fehlalarm: die Tokendatei wird über `_write_private_json()` mit `os.open(…, 0o600)` + `fchmod` geschrieben, „never world-readable, even briefly" |
+| CodeQL (CI, SARIF) | `google_auth.py:615` | `py/clear-text-logging-sensitive-data` | Fehlalarm: gedruckt wird die `auth_url` – öffentliche `client_id`, `state`, PKCE-Challenge, kein Secret. Der Upstream schreibt das selbst als Kommentar an die Zeile und verwirft den Alert |
 
-Der Befund ist ein **Fehlalarm der Query, nicht des Codes**: `google_auth.py`
-schreibt die Tokendatei über `_write_private_json()` mit `os.open(…, 0o600)`,
-setzt `fchmod(0o600)` auf den offenen Deskriptor und dokumentiert die
-TOCTOU-Falle, die das schließt („The file is never world-readable, even
-briefly."). `py/clear-text-storage-sensitive-data` wertet Dateirechte nicht aus
-und meldet dennoch. Heilbar ist das hier nicht: die Datei gehört dem Upstream
-und würde beim nächsten `npx skills update` zurückkommen – ein lokaler Patch
-wäre eine Divergenz, kein Fix.
-
-Entschieden wurde deshalb eine **Bereichsgrenze**, keine Unterdrückung:
+Heilbar ist das hier nicht: die Datei gehört dem Upstream und käme beim
+nächsten `npx skills update` zurück – ein lokaler Patch wäre Divergenz, kein
+Fix. Entschieden wurde deshalb eine **Bereichsgrenze**, keine Unterdrückung:
 
 | Ort | Was steht dort | Wirkung |
 |---|---|---|
-| `.github/codeql/codeql-config.yml` | `.claude/skills/seo/scripts/**` in `paths_ignore`, mit Begründung | CodeQL und das Default-Setup urteilen nicht über fremden Code (Vorbild: `impeccable/scripts` seit 14.10.2026) |
+| `.github/codeql/codeql-config.yml` | `.claude/skills/seo/scripts/**` in `paths-ignore`, mit Begründung | CodeQL und das Default-Setup urteilen nicht über fremden Code (Vorbild: `impeccable/scripts` seit 14.10.2026) |
 | `scripts/clear_text_logging_guard.py` | Klasse `fremdcode` + `ist_fremdcode()` | Der Fund wird **weiter in jedem Lauf gedruckt** (⚠ statt ❌) und ändert den Exit-Code nicht; Hauscode bleibt fail-closed |
 | `scripts/tests/test_clear_text_logging_security.py` | Bestand **eingefroren** | Eine neue Fundstelle lässt den Test rot werden – sie ist eine Entscheidung, keine stille Duldung |
 
-Der Vertrag der Wache bleibt damit erfüllt: ihr Punkt 2 heißt „Kein toter
-Winkel — geprüft wird jede Python-Datei, auch die, die `codeql-config.yml`
-ausblendet". Genau das tut sie weiter; sie unterscheidet nur die Zuständigkeit.
-Zum ersten Mal seit Bestehen dieser Wache ist der CodeQL-Ausschluss damit
-sichtbar gegengeprüft und nicht bloß behauptet.
+Der Vertrag der Wache bleibt erfüllt: Punkt 2 heißt „Kein toter Winkel —
+geprüft wird jede Python-Datei, auch die, die `codeql-config.yml` ausblendet".
+Genau das tut sie weiter; sie unterscheidet nur die Zuständigkeit.
+
+**Grenze der Grenze, ehrlich benannt:** Die lokale Wache sieht Zeile 314, nicht
+615 – ihre Namens-Heuristik erkennt `auth_url` nicht als sensible Quelle,
+CodeQL schon. Die beiden Sichten sind also nicht deckungsgleich, und der
+eingefrorene Test pinnt nur, was die Wache tatsächlich sieht. Wer die
+doppelte Sicht braucht, nimmt den CodeQL-Lauf; wer sie nicht mehr braucht,
+darf die Bereichsgrenze streichen.
+
+### Der eigentliche Nebenbefund: die Ausschlussliste war wirkungslos
+
+Beim Prüfen, warum `google_auth.py` **trotz Eintrag** im SARIF auftauchte, kam
+der Grund heraus: In `.github/codeql/codeql-config.yml` stand
+
+```yaml
+paths_ignore:          # ← falsch
+```
+
+CodeQL liest nur `paths-ignore` (Bindestrich). Die Liste war seit ihrer
+Einführung am 14.10.2026 **wirkungslos** – auch der `impeccable`-Eintrag, der
+dort als „begründet ausgeschlossen" dokumentiert ist. Aufgefallen ist das nie,
+weil in `impeccable/scripts` kein Fund lag: eine stille Ausnahme, die niemandem
+auffiel, weil sie nichts verhinderte.
+
+Korrigiert auf `paths-ignore`, mit einem Kommentar direkt über dem Schlüssel,
+damit die Verwechslung nicht zurückkehrt. Das ist die Art Befund, die diese
+Aufnahme nebenbei bezahlt hat: nicht der Skill, sondern der wirkungslose
+Ausschluss daneben.
 
 **Wiedervorlage:** Ändert ein `npx skills update` den Inhalt von
-`google_auth.py` und wandert der Fund auf eine andere Zeile, wird der
+`google_auth.py` und wandert Fund 314 auf eine andere Zeile, wird der
 eingefrorene Test rot. Dann gilt: prüfen, ob die Datei noch mit `0o600`
 schreibt, Zeile nachziehen und diese Tabelle fortschreiben – nicht den Test
 aufweichen.
