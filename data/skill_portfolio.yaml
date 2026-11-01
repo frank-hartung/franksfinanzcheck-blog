@@ -221,6 +221,14 @@ produktion:
   - skill: emails
     rolle: "Newsletter-Sequenzen (Willkommen, Präferenzen, Rückgewinnung)"
     kanaele: [newsletter]
+  # --- Social-Pack (charlie947/social-media-skills, 01.11.2026, MIT) ------
+  # Das Paket ist für LinkedIn geschrieben. Zugeordnet wird es hier NICHT
+  # wegen der Herkunft, sondern wegen der Kanäle, die dieser Blog hat:
+  # Mastodon (scripts/mastodon_manual_post.py), Instagram
+  # (scripts/social_video.py), Pinterest (scripts/pinterest_ziele.py) und
+  # Newsletter (newsletter-worker). Was nur auf LinkedIn zielt, steht unten
+  # unter `ausgeschlossen` – ein Skill für einen Kanal, den es nicht gibt,
+  # wäre eine Behauptung.
   bestand-und-messung:
   - skill: analytics
     rolle: "Messplan, Ereignisse, UTM – Grundlage jeder Aussage über Wirkung"
@@ -390,6 +398,12 @@ ausgeschlossen:
     grund: "Handwerk am Regelwerk selbst – LEBT, wird aber nicht wie ein Themenskill budgetiert (kein Beschreibungs-Beitrag)"
     entscheidung: "bleibt installiert, nicht Teil des Themen-Budgets (Ausnahme von P3)"
     faellig: "2027-03-31"
+  # Social-Pack: kein Kanal oder kein Werkzeugweg (01.11.2026).
+  # Alle sechs bleiben installiert (Nachweis des Einkaufs, kein ausführbarer
+  # Code), zahlen aber kein Themen-Budget. Entfernung ist eine eigene
+  # Entscheidung des Inhabers – sie würde die Beschreibungs-Summe (K9, aktuell
+  # 55,5 von 56 KB) um rund 3,0 KB entlasten und ist darum bis zur Frist zu
+  # treffen.
   seo-local:
     grund: "der Blog hat kein lokales Geschäft und kein Google-Business-Profil"
     entscheidung: "bleibt als Paketbestand installiert, zählt nicht zum Themen-Budget; Wiedervorlage bei lokalem Angebot"

@@ -106,8 +106,12 @@ Danach ist die Arbeit nicht fertig, sondern überprüfbar:
    „unbekannt“ nur mit `ausnahme` (`grund`, `entscheidung`, `faellig`).
    Eine Ausnahme ohne Frist ist eine stille Abschaffung; eine abgelaufene
    meldet als Warnung und blockiert die Auslieferung nicht.
-3. **Router:** ein Satz, wann der Skill zu lesen ist. Ein Skill ohne Router-
-   zeile wird nicht gefunden (K3).
+3. **Router:** ein Satz, wann der Skill zu lesen ist – in Rückstrichen
+   (`` `name` ``), denn nur so findet ihn ein Agent. Bei einem Fremd-Skill
+   gehört der Satz in den zuständigen `ff-*`-Einstieg, weil `npx skills update`
+   den Fremd-Text überschreibt. K3 erzwingt die Routerzeile für `ff-*`; für
+   vendored Skills ist sie Handwerk, nicht Wache – dort misst K9 den Preis
+   (Summe der Beschreibungen) und K10 die Herkunft der Zusatzdateien.
 4. **Entfernen:** Ordner *und* `skills-lock.json`-Eintrag *und* Registerzeile.
    Ein Eintrag ohne Ordner warnt, ein Ordner ohne Eintrag ist ein Befund.
 
@@ -122,8 +126,8 @@ Stelle, und `scripts/skills_portfolio.py` hält die Antwort ehrlich.
 
 ```
 Themen (12)      sechs Inhaltswelten + sechs Kanäle, jede mit Belegpfad
-produktion       Skill → Thema + Rolle + Kanal   (29 Skills, ≈ 5.400 Tokens)
-ausgeschlossen   Skill → Grund + Entscheidung + Frist   (31 Skills)
+produktion       Skill → Thema + Rolle + Kanal   (41 Skills, ≈ 7.000 Tokens)
+ausgeschlossen   Skill → Grund + Entscheidung + Frist   (35 Skills)
 ```
 
 Die Unterscheidung `art: inhalt | kanal` ist die eigentliche Antwort:
@@ -291,6 +295,33 @@ als Befehlskette im Vorgangsbericht
 Grenze zum Haus: der Hub liefert **Analyse**, nicht die Veröffentlichungsregel.
 Was auf die Website darf, entscheiden weiter `ff-produzieren`, `ff-marke-text`
 und `seo-paritaet.yml`; die 26 Skills ersetzen keine Wache.
+## Zurückgezogen: 17 Social-Skills (`charlie947/social-media-skills`, MIT)
+
+Aufgenommen am 01.11.2026 mit #1006, am selben Tag wieder abgezogen – nicht
+wegen der Qualität, sondern wegen der Rechnung. Vorgang und Messung bleiben in
+`SOCIAL-SKILLS-AUFNAHME-HIGHEND-2026-11-01.md` stehen; dieser Abschnitt sagt,
+was daraus geworden ist.
+
+* **Der Grund ist K9, nicht der Geschmack.** `skills_vertrag.py` misst alle
+  Beschreibungen zusammen: nach dem SEO-Paket (26 Skills) und dem Social-Pack
+  (17) waren es **62,7 KB gegen 56 KB**. Beide Aufnahmen passen einzeln, zusammen
+  nicht. Die Grenze wurde **nicht** angehoben: sie ist die Dauerlast, die jeder
+  Agenten-Start zahlt, und ein Regler, der bei jedem Zug nachgibt, misst nichts.
+* **Die Entscheidung des Inhabers:** das SEO-Paket bleibt vollständig (26 Skills,
+  eigener Hub samt Runtime), das Social-Pack geht. Abgezogen wurde über den CLI
+  (`npx skills remove …`, 17 Namen), nicht per `git rm` – Lock und Ordner bleiben
+  so in der Hand des Werkzeugs.
+* **Was danach nachgezogen ist:** `skills-lock.json` 99 → 82, Register
+  `data/skill_lizenzen.json` 99 → 82 (K4/K6: so viele Fremd-Skills wie
+  Lizenztexte), `data/skill_portfolio.yaml` ohne die 11 Zuordnungen und
+  6 Ausschlüsse des Packs (P1–P7), Router-Tabelle in
+  `.claude/skills/ff-marke-text/SKILL.md` und die Zeile in `CLAUDE.md` bereinigt
+  (K3: kein Router nennt einen Skill, den es nicht gibt).
+* **Was bleibt:** `data/social/channels.yaml`, `scripts/social_copywriter.py` und
+  die Verbreitungs-Kette sind Hauscode und von alldem unberührt. Wer die
+  Social-Texte wieder mit Fremd-Handwerk unterlegen will, braucht zuerst Platz
+  im K9-Budget – vorher ist die Antwort: kein Platz, keine Aufnahme.
+
 
 ## Abgelehnt und begründet: `xlsx` (anthropics/skills)
 

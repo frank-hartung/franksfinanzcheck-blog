@@ -28,7 +28,10 @@ wörtlich aus `CLAUDE.md` übernommen.
 
 1. **Skills zuerst:** `impeccable` (UI entwerfen/polieren/auditieren – liest
    `PRODUCT.md` + `DESIGN.md` zuerst), `frontend-design` (neue visuelle Identität),
-   `design-taste-frontend` (Anti-Slop), `webapp-testing` (Browser-Interaktion).
+   `design-taste-frontend` (Anti-Slop), `webapp-testing` (Browser-Interaktion),
+   `animate` (Bewegung von der Entscheidung her aufbauen: ob, wozu, welches
+   Werkzeug, welche Kurve – nicht „Effekt drauf“) und `cro` (Conversion auf Seite
+   und Formular; die Messung dazu bleibt gesperrt, siehe `ff-pruefen`).
    Diese vier stehen im Kern-Router, weil sie jeden UI-Auftrag angehen. Der
    **Review** des fertigen Codes läuft über `references/web-richtlinien.md` –
    hausgemacht, seit `web-design-guidelines` (Vercel, Herkunft ungeklärt) am
