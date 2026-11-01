@@ -67,6 +67,49 @@ ist wörtlich aus `CLAUDE.md` übernommen.
 | Wo muss die Offenlegung hin, was genau muss sie sagen? | `references/kennzeichnung.md` (#623) |
 | Pin-Ziel defekt, Hashtag-Zahl, Instagram-Winkel blind? | `references/verbreitung.md` (C37, C43, #716) |
 
+## Fremd-Skills für Social-Texte (LinkedIn-Pack, MIT, seit 01.11.2026)
+
+17 vendored Skills aus `charlie947/social-media-skills` (MIT, `LICENSE.txt` liegt in
+jedem Ordner; Register `data/skill_lizenzen.json`, Lock `skills-lock.json`, Wache
+K4/K6). Sie liefern Handwerk für LinkedIn-Texte, das `scripts/social_copywriter.py`
+nicht abdeckt: Hooks, Framework-Formate, Selbstbewertung, Grafik-Briefings.
+**Sie sind Vorschlag, nicht Vertrag** – was in diesem Skill und in
+`data/social/channels.yaml` steht, gilt.
+
+| Auftrag | Skill |
+|---|---|
+| Erster Satz, Hook für einen Post | `hook-generator` (6 Varianten, je 2 Zeilen) |
+| Post aus einer Idee, ohne Framework | `post-writer` |
+| Post streng nach PAS/AIDA/BAB/STAR/SLAY | `post-formatter` (≤ 20 Zeilen) |
+| Ideenvorrat von 24–40 Posts | `content-matrix` |
+| Entwurf gegen Muster prüfen | `post-scorer` (nur der redaktionelle Teil, Grenze 2) |
+| Zitat-Post, Pinned Comment | `quote-post`, `pinned-comment` |
+| Profil, Newsletter-Stimme, Stimme aus Schreibproben | `profile-optimizer`, `newsletter-voice`, `voice-builder` |
+| Karussell, Infografik, Thumbnail, Reel-Skript, Grafik | `gemini-carousel`, `gemini-infographic`, `youtube-thumbnail`, `reels-scripting`, `graphic-designer` |
+| Kanal recherchieren, Zahlen ansehen | `niche-research`, `analytics-dashboard` |
+
+Drei Grenzen, die keine Auslegung sind:
+
+1. **Der Kanal-Vertrag gewinnt.** Zeichenbudget, Hashtag-Zahl, Emoji-Verbot, Link
+   im ersten Kommentar, Anrede stehen in `data/social/channels.yaml`. Der Pack
+   kennt nur LinkedIn und hängt Hashtags gern an den Textkörper; der Hauskanal
+   erlaubt 3–5 in camelCase am Ende und null Emoji. Geschrieben wird auf Deutsch
+   (D3), nicht in der englischen Vorlage.
+2. **Keine Fremdwege, keine neuen Secrets (D20/T1).** `post-scorer` (Apify),
+   `reels-scripting` (Apify + `GOOGLE_AI_API_KEY`), `niche-research` (Live-Browser)
+   und die Gemini-Skills beschreiben Werkzeuge, die dieses Repo nicht hat und
+   nicht bekommt. Genutzt wird der redaktionelle Teil – Muster, Fragen, Struktur;
+   fehlt der Zugang, endet der Skill dort und erfindet keine Messung.
+3. **Kein Zahlenversprechen aus Fremdtext.** Reichweiten- und CTR-Behauptungen
+   der Skills sind keine Belege dieses Blogs (D15) und die Fremdmessung-Sperre
+   gilt unverändert: Was hier nicht gemessen ist, wird nicht behauptet.
+
+Pflege nur über den CLI (`npx -y skills@1.7.4 add|update|remove`), danach
+Lizenztext und Register nachziehen und `npm run skills:check` fahren. Die Anlage
+kostet rund 2.200 Tokens Auswahltext bei jedem Start (17 Beschreibungen) – wer
+sie verkleinert, entfernt Skills; Beschreibungen kürzen hält nicht, weil
+`npx skills update` sie überschreibt.
+
 ## Kommando-Notausgang
 
 ```bash

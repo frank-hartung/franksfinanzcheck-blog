@@ -172,6 +172,29 @@ der Wegwerf-Kopie). Vor der Aufnahme geprüft: Syntaxwache, REDOS-Wache,
 Wachen-Vertrag und Fremdmessung-Sperre blieben grün, K6 meldete sofort den
 fehlenden Register-Eintrag – so soll es sein.
 
+## Neu im Bestand: 17 Social-Skills (`charlie947/social-media-skills`, MIT)
+
+Aufgenommen am 01.11.2026 auf Auftrag des Inhabers (`npx skills add …`): LinkedIn-
+Handwerk – Hook, Post, Framework-Format, Selbstbewertung, Karussell-Briefing,
+Profil, Newsletter-Stimme. Vorgang und Messung:
+`SOCIAL-SKILLS-AUFNAHME-HIGHEND-2026-11-01.md`.
+
+* **Router:** die Tabelle steht in `.claude/skills/ff-marke-text/SKILL.md` unter
+  „Fremd-Skills für Social-Texte“ – dort, wo der Auftrag entsteht. Im Kern wurde
+  nur die eine Zeile des Skill-Routers um „Social-Texte (LinkedIn-Pack)“
+  ergänzt; 17 Zeilen im Kern wären Dauerlast (K1).
+* **Grenze der Nutzung:** `data/social/channels.yaml` gewinnt gegen jede
+  Skill-Empfehlung (Zeichen, Hashtags, Emoji, Link im ersten Kommentar, Deutsch).
+  Keine Apify-, Gemini- oder Browser-Wege, keine neuen Secrets (D20/T1), keine
+  Messung; fehlt der Zugang, endet der Skill an dieser Stelle.
+* **Preis:** ~2.164 Tokens Auswahltext bei jedem Start (8.656 Zeichen über 17
+  `description`-Felder). Wer verkleinert, entfernt Skills über den CLI – Kürzen
+  der Beschreibung überschreibt das nächste `npx skills update`.
+* **Nebenbefund:** `animate` (emilkowalski/skills) lag ohne `LICENSE.txt` und
+  ohne Registereintrag im Repo; K6 hat es beim ersten Lauf am neuen Bestand
+  gemeldet. Text und Eintrag sind nachgezogen, `standen` ergänzt. Damit gilt
+  erstmals wirklich: so viele Fremd-Skills wie Lizenztexte.
+
 ## Abgelehnt und begründet: `xlsx` (anthropics/skills)
 
 Nicht aufgenommen, und zwar aus zwei Gründen, die beide nachprüfbar sind
