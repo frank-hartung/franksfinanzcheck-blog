@@ -68,7 +68,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 DSL läuft über das Kupferkabel, das fast überall liegt. Neu ist die bessere Technik an den Enden der Leitung. Sie holt mehr Tempo aus dem gleichen Kabel.
 
-Seit 2026 nutzen die großen Anbieter die Technik mit dem Namen Vectoring im Modellfall. Sie senkt das Rauschen auf der Leitung. In der Stadt sind damit bis zu 250 Mbps stabil drin.
+Seit 2026 nutzen die großen Anbieter die Technik mit dem Namen Vectoring; das ist ein Modellwert. Sie senkt das Rauschen auf der Leitung. In der Stadt sind damit bis zu 250 Mbps stabil drin.
 
 Ein gutes Angebot hat einen kleinen Grundpreis und klare Zusatzkosten. Viele Verträge verstecken die Miete für den Router oder Pakete für den Service. Rechne jeden Posten einzeln, dann siehst du den wahren Preis.
 
@@ -82,7 +82,7 @@ Die meisten zahlen für Tempo, das sie nie nutzen. Dabei lässt sich dein Bedarf
 
 Ein Film in Full‑HD braucht rund 10 Mbps. In 4K sind es etwa 25 Mbps. Eine Videokonferenz kommt mit wenigen Megabit aus.
 
-Rechne zwei Filme und einen Arbeitsplatz zusammen als Beispielwert. Du bleibst fast immer unter 100 Mbps.
+Rechne zwei Filme und einen Arbeitsplatz zusammen. Du bleibst fast immer unter 100 Mbps.
 
 | Haushaltsprofil | Typische Nutzung | Sinnvolle Bandbreite |
 |-----------------|------------------|----------------------|
@@ -99,13 +99,13 @@ Und nur wer oft große Dateien hochlädt, braucht die teure 250er-Stufe. Ein zu 
 
 Nicht jeder Tarif mit viel Tempo ist günstig. Preiswert heißt hier zweierlei. Der Grundpreis liegt im unteren Drittel, und die Kosten bleiben über die Laufzeit stabil.
 
-Für 50 Mbps zahlst du heute meist **ca als Modellwert. 20–40 €** im Monat. Der Preis hängt vom Anbieter und von der Bindung ab.
+Für 50 Mbps zahlst du heute meist **ca. 20–40 €** im Monat. Der Preis hängt vom Anbieter und von der Bindung ab.
 
-Achte auf eine Preisgarantie über mindestens 12 Monate im Rechenfall. Ohne Garantie darf der Anbieter bald erhöhen, oft um bis zu 10 %.
+Achte auf eine Preisgarantie über mindestens 12 Monate. Ohne Garantie darf der Anbieter bald erhöhen, oft um bis zu 10 %.
 
 Prüfe zudem, ob ein Limit für Daten gilt. Ein Tarif ohne Limit ist bequem, kostet aber häufig mehr.
 
-Rechne am Ende immer über 24 Monate im Rechenbeispiel. Viele Angebote sind nur ein halbes Jahr billig.
+Rechne am Ende immer über 24 Monate. Viele Angebote sind nur ein halbes Jahr billig.
 
 Ziehe Prämien und Gutschriften von der Summe ab. Erst diese Zahl macht zwei Verträge vergleichbar.
 
@@ -113,7 +113,7 @@ Ziehe Prämien und Gutschriften von der Summe ab. Erst diese Zahl macht zwei Ver
 
 Treue Kunden zahlen den vollen Preis. Neukunden bekommen Rabatt. Genau das ist dein Hebel.
 
-Wer alle zwei bis drei Jahre wechselt, sichert sich Prämien und bessere Preise als Modellannahme. Oft ist auch der Anschluss gratis. In zwei Jahren kommen so bis zu 300 € zusammen.
+Wer alle zwei bis drei Jahre wechselt, sichert sich Prämien und bessere Preise. Oft ist auch der Anschluss gratis. In zwei Jahren kommen so bis zu 300 € zusammen.
 
 Der Wechsel läuft heute fast von allein. Der neue Anbieter meldet alles um, und deine Leitung bleibt an. Deine Rufnummer nimmst du einfach mit.
 
@@ -144,7 +144,7 @@ An vielen Adressen gibt es heute drei Techniken. Sie kosten unterschiedlich viel
 
 Kabel liefert viel Tempo beim Laden, aber oft wenig beim Hochladen. Glasfaser ist in beide Richtungen schnell und bleibt auch abends stabil. DSL ist langsamer, dafür fast überall verfügbar und meist am günstigsten.
 
-Prüfe deine Adresse vor dem Wechsel im Modellfall. Liegt Glasfaser bereits im Haus, ist der Aufpreis von rund 5 € im Monat oft gut angelegt. Fehlt die Leitung, bleibt DSL die preiswerte Wahl.
+Prüfe deine Adresse vor dem Wechsel. Liegt Glasfaser bereits im Haus, ist der Aufpreis von rund 5 € im Monat oft gut angelegt. Fehlt die Leitung, bleibt DSL die preiswerte Wahl.
 
 ## Was tun, wenn die Leitung zu langsam ist?
 
@@ -180,7 +180,7 @@ Bleibt der Anschluss auch per Kabel langsam, miss das Tempo an mehreren Tagen. L
 So gehst du vor:  
 
 1. **Bedarf ermitteln:** Notiere, welche Geräte du hast und wie viel Bandbreite du im Alltag nutzt.
-2 als Beispielwert. **Tarife recherchieren:** Nutze Vergleichsportale, filtere nach Grundpreis < 30 € und Mindestlaufzeit ≤ 12 Monate.
+2. **Tarife recherchieren:** Nutze Vergleichsportale, filtere nach Grundpreis < 30 € und Mindestlaufzeit ≤ 12 Monate.
 3. **Kosten kalkulieren:** Erstelle eine Mini‑Tabelle mit Grundpreis, Zusatzgebühren und möglichen Einrichtungs‑Aufwendungen.
 4. **[Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) prüfen:** Trage das Datum des nächsten möglichen Wechsels in deinen Kalender ein.
 5. **Vertrag unterschreiben:** Achte darauf, dass alle besprochenen Konditionen schriftlich festgehalten sind.
@@ -227,7 +227,7 @@ Die Tabelle zeigt ein Muster. Ein kleiner Grundpreis geht oft mit einem gratis R
 Stelle deinen Grundpreis und alle Gebühren den Spannen aus der Tabelle gegenüber. Liegst du darüber, lohnt sich ein Wechsel.
 
 ### Welche Vertragslaufzeit ist optimal für einen preiswerten Anschluss?
-Kurze Verträge bis 12 Monate halten dich beweglich als Modellwert. Du kommst schnell wieder raus, wenn der Preis steigt. Das hilft, solange dein Bedarf nicht feststeht.
+Kurze Verträge bis 12 Monate halten dich beweglich. Du kommst schnell wieder raus, wenn der Preis steigt. Das hilft, solange dein Bedarf nicht feststeht.
 
 ### Brauche ich wirklich einen neuen Router, wenn ich wechsle?
 Nur dann, wenn dein altes Gerät das neue Tempo nicht schafft. Sieh in das Datenblatt. Oft reicht ein Update der Software.
@@ -245,13 +245,13 @@ Nutze dein Kündigungsfenster aus dem 4K‑Prüfpfad. Hebe den Brief mit der Erh
 
 Jetzt hast du alles beisammen. Du findest einen günstigen Anschluss, umgehst die Fallen und senkst deine festen Kosten.
 
-Nutze den 4K‑Prüfpfad im Rechenfall. Rechne die Summe für 24 Monate aus. Dann surfst du entspannt und sparsam.### Welche Rolle spielt der Router beim Tempo?
+Nutze den 4K‑Prüfpfad. Rechne die Summe für 24 Monate aus. Dann surfst du entspannt und sparsam.### Welche Rolle spielt der Router beim Tempo?
 
 Viel. Ein alter Router bremst die Leitung. Stell ihn frei, nicht in einen Schrank. Per Kabel misst du am ehrlichsten.
 
 ### Lohnt sich ein Glasfaser-Anschluss?
 
-Kommt auf deinen Ort an im Rechenbeispiel. Wo Glasfaser liegt, gibt es oft schnelle Tarife. Vergleiche Anschlusskosten und Monatsmiete. Rechne zwei Jahre durch, nicht nur den Start.
+Kommt auf deinen Ort an. Wo Glasfaser liegt, gibt es oft schnelle Tarife. Vergleiche Anschlusskosten und Monatsmiete. Rechne zwei Jahre durch, nicht nur den Start.
 
 ### Was tun bei dauerhaftem Tempo-Mangel?
 

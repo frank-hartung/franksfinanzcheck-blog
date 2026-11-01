@@ -36,7 +36,7 @@ quellen:
 faktencheck: 2026-09-28
 ---
 
-Standby Kosten im Check: Zwei Watt im Standby wirken harmlos im Modellfall. Zehn Geräte mit zusammen 20 Watt kosten bei 37 Cent pro kWh aber knapp **65 € im Jahr**. Kein [finanzieller](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) Weltuntergang – nur ein teures rotes Lämpchen.
+Standby Kosten im Check: Zwei Watt im Standby wirken harmlos. Zehn Geräte mit zusammen 20 Watt kosten bei 37 Cent pro kWh aber knapp **65 € im Jahr**. Kein [finanzieller](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) Weltuntergang – nur ein teures rotes Lämpchen.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -75,7 +75,7 @@ Für eine konstante Leistung lautet die Formel:
 
 > Watt × Stunden pro Tag × 365 ÷ 1.000 = kWh pro Jahr
 
-Dann multiplizierst du mit deinem Preis pro kWh als Modellwert. Der BDEW-Schnitt von 37,0 Cent pro kWh{{< beleg kennzahl="bdew-haushaltsstrompreis" kurz="BDEW" >}} dient hier nur als Rechenwert. Auf deiner Rechnung steht dein echter Preis.
+Dann multiplizierst du mit deinem Preis pro kWh. Der BDEW-Schnitt von 37,0 Cent pro kWh{{< beleg kennzahl="bdew-haushaltsstrompreis" kurz="BDEW" >}} dient hier nur als Rechenwert. Auf deiner Rechnung steht dein echter Preis.
 
 | Dauerlast | Verbrauch pro Jahr | Kosten bei 0,37 €/kWh |
 |---:|---:|---:|
@@ -85,7 +85,7 @@ Dann multiplizierst du mit deinem Preis pro kWh als Modellwert. Der BDEW-Schnitt
 | 20 Watt | 175,2 kWh | 64,82 € |
 | 30 Watt | 262,8 kWh | 97,24 € |
 
-Das zeigt auch, wo du anfangen solltest: Ein Ladegerät mit 0,1 Watt Leerlauf lohnt keine Mühe im Rechenfall. Eine alte Gerätegruppe mit 18 Watt schon.
+Das zeigt auch, wo du anfangen solltest: Ein Ladegerät mit 0,1 Watt Leerlauf lohnt keine Mühe; das ist ein Rechenbeispiel. Eine alte Gerätegruppe mit 18 Watt schon.
 
 ## Wo sich die erste Messung meistens lohnt?
 
@@ -152,7 +152,7 @@ Angenommen, die TV-Ecke zieht ausgeschaltet 14 Watt. Du trennst sie im Schnitt 1
 - Kostenersparnis bei 0,37 €/kWh: **rund 34 € pro Jahr**
 - Preis der Leiste: beispielsweise 15 €
 
-In diesem Fall zahlt sich der Kauf schon im ersten Jahr aus im Rechenbeispiel. Zieht die Gruppe aber nur 1 Watt, spart dieselbe Leiste kaum 2,50 € im Jahr.
+In diesem Fall zahlt sich der Kauf schon im ersten Jahr aus. Zieht die Gruppe aber nur 1 Watt, spart dieselbe Leiste kaum 2,50 € im Jahr.
 
 ## Der 30-Minuten-Standby-Check
 
@@ -240,7 +240,7 @@ Rechne Komfort mit ein. Eine Leiste, die hinter dem Schrank unerreichbar bleibt,
 
 Vor einer Reise kannst du mehr abschalten als an einem normalen Abend. Drucker, Monitor, Konsole, Audioanlage und unnötige Netzteile dürfen oft komplett vom Netz. Kühlschrank, Router für Sicherheitsfunktionen und Smart-Home-Technik brauchen eine bewusste Einzelentscheidung.
 
-Nutze dafür eine kurze Abreise-Liste als Modellwert. Prüfe auch, ob Zeitschaltuhren oder automatische Routinen nach der Rückkehr noch stimmen. Das vermeidet den Klassiker: Zwei Wochen gut gespart und danach drei Monate WLAN oder TV-Zone im falschen Komfortmodus betrieben.
+Nutze dafür eine kurze Abreise-Liste. Prüfe auch, ob Zeitschaltuhren oder automatische Routinen nach der Rückkehr noch stimmen. Das vermeidet den Klassiker: Zwei Wochen gut gespart und danach drei Monate WLAN oder TV-Zone im falschen Komfortmodus betrieben.
 
 Der Messwert zählt.
 
@@ -250,7 +250,7 @@ Der Messwert zählt.
 
 Standby-Kosten sinken am schnellsten, wenn du Gruppen statt Kleinkram prüfst. Miss TV-Ecke und Arbeitsplatz, rechne mit deinem Strompreis und schalte nur unkritische Funktionen ab.
 
-Dein nächster Schritt dauert zehn Minuten: Miss heute Abend die TV-Leiste im ausgeschalteten Zustand im Rechenfall. Liegt sie deutlich über 5 Watt, prüfst du Schnellstart, Konsole und Soundanlage einzeln.
+Dein nächster Schritt dauert zehn Minuten: Miss heute Abend die TV-Leiste im ausgeschalteten Zustand. Liegt sie deutlich über 5 Watt, prüfst du Schnellstart, Konsole und Soundanlage einzeln.
 
 **Weiterlesen:** [Stromfresser im ganzen Haushalt finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/)
 

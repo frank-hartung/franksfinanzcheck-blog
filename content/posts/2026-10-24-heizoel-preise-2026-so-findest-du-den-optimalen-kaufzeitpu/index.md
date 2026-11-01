@@ -65,7 +65,7 @@ So erkennst du das Muster der Preise für deine Region sehr genau. Wer den Markt
 
 ## Warum lohnt es sich, Heizöl rechtzeitig zu bestellen?
 
-Ein früher Kauf sichert dir den tiefen Preis, bevor die Saison für das Heizen wieder richtig anzieht als Modellwert. Du [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) hohe Kosten am Ende vom Jahr von 10 % bis zu 20 % im Herbst.
+Ein früher Kauf sichert dir den tiefen Preis, bevor die Saison für das Heizen wieder richtig anzieht. Du [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) hohe Kosten am Ende vom Jahr von 10 % bis zu 20 % im Herbst.
 
 Diese Ersparnis kannst du für andere Dinge in deinem Haushalt nutzen. Wer wartet, bis der Tank fast leer ist, verliert seine Macht als Käufer. Du musst dann zu jedem Preis kaufen, den der Markt gerade verlangt. Das führt oft zu Frust und leeren Taschen am Ende des Monats.
 

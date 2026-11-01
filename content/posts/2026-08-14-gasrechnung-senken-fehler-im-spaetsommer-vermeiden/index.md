@@ -73,7 +73,7 @@ Beides hält die Wärme fest und kostet dich Geld. Riechst du Gas oder zeigt das
 
 ## Das Wichtigste in Kürze
 
-Der Check vor dem Winter zahlt sich aus im Modellfall. Ein Haus braucht oft 18.000 kWh im Jahr. Schon ein Cent je kWh macht dann 180 € im Jahr aus.
+Der Check vor dem Winter zahlt sich aus. Ein Haus braucht oft 18.000 kWh im Jahr. Schon ein Cent je kWh macht dann 180 € im Jahr aus.
 
 - Ein niedriger Abschlag ist keine Ersparnis, sondern lediglich eine Vorauszahlung auf die Endabrechnung.
 - Vergleiche Gastarife immer auf Basis deines realen Jahresverbrauchs und des effektiven Gesamtpreises.
@@ -100,7 +100,7 @@ Beispielrechnung (Stand: Oktober 2026):
 | **voraussichtliche Jahreskosten** | **ca. 2.265,00 €** |
 | **rechnerischer Monatsabschlag** | **ca. 188,75 €** |
 
-Steht dein Abschlag hier nur bei 150 €, fehlen am Ende über 460 € als Beispielwert. Rechne einen Bonus erst mit, wenn du die Bedingungen sicher erfüllst.
+Steht dein Abschlag hier nur bei 150 €, fehlen am Ende über 460 €; das ist ein Beispielwert. Rechne einen Bonus erst mit, wenn du die Bedingungen sicher erfüllst.
 
 ### Besser so
 
@@ -120,7 +120,7 @@ Achte beim Vergleich mindestens auf:
 
 Stelle das Portal zuerst auf „ohne Boni“. Dann siehst du den reinen Preis für die Energie. Prüfe die letzten Konditionen immer direkt beim Anbieter.
 
-Für ein Haus liegt der Preis 2026 meist bei 10,5 bis 13,5 Cent je kWh als Modellwert. Je nach Region und Menge gibt es Abweichungen. Liegt dein Tarif klar darüber, hast du Luft nach unten.
+Für ein Haus liegt der Preis 2026 meist bei 10,5 bis 13,5 Cent je kWh; das ist ein Modellwert. Je nach Region und Menge gibt es Abweichungen. Liegt dein Tarif klar darüber, hast du Luft nach unten.
 
 ## Fehler 3: Ohne Zählerstand in die Heizperiode starten
 
@@ -165,7 +165,7 @@ Vorsicht gilt beim Nachfüllen von Wasser. Viele neue Geräte brauchen aufbereit
 1. Aktuelle Einstellungen dokumentieren (Foto der Anzeige).
 2. Die offizielle Bedienungsanleitung zurate ziehen.
 3. Änderungen nur in kleinen Schritten vornehmen.
-4 im Rechenfall. Die Auswirkung über 2–3 Tage beobachten.
+4. Die Auswirkung über 2–3 Tage beobachten.
 5. Bei Unsicherheit die Einstellungen auf den Ursprungswert zurücksetzen.
 
 ## Was Verbrauchsmaßnahmen realistisch bringen?
@@ -243,11 +243,11 @@ Gehe [Schritt für Schritt](../../posts/2026-10-12-dein-weg-zu-geringeren-monats
 
 Welcher Schritt hat gewirkt? Das lässt sich dann nicht mehr sagen. Ein Schritt nach dem anderen bringt dir mehr.
 
-Lies den Zähler nach zwei Wochen Heizbetrieb erneut ab als Modellannahme. So siehst du Fehler früh. Und zwar bevor die teuren Monate Januar und Februar kommen.
+Lies den Zähler nach zwei Wochen Heizbetrieb erneut ab. So siehst du Fehler früh. Und zwar bevor die teuren Monate Januar und Februar kommen.
 
 Echtes Sparen braucht beides: einen guten Tarif und einen klugen Verbrauch. Wer nur auf den Preis schaut und dabei Wärme verschenkt, zahlt am Ende trotzdem zu viel.
 
-Mit einem klaren Plan sinken die Gaskosten oft um 10 bis 15 % im Modellfall. Kalt wird es dabei nicht.
+Mit einem klaren Plan sinken die Gaskosten oft um 10 bis 15 %; das ist ein Modellwert. Kalt wird es dabei nicht.
 
 
 Mit Temperatur, Abschlag und Tarif im Blick senkst du deine Gasrechnung spürbar – 10 bis 15 % sind realistisch.
@@ -270,13 +270,13 @@ Mit diesen zwei Zahlen siehst du in wenigen Minuten, ob dein Tarif noch mithalte
 Nein. Ein kleiner Abschlag schont nur den Monat. Die Gesamtkosten ergeben sich aus Verbrauch und Tarif. Zu niedrige Abschläge enden in einer hohen Nachzahlung.
 
 ### Wann sollte ich den Gastarif vergleichen?
-Vergleiche, wenn deine Preisgarantie endet als Beispielwert. Oder wenn eine Erhöhung ins Haus steht. Auch nach 12 Monaten ohne Blick auf den Markt lohnt es sich. Der Oktober ist dafür ein guter Monat.
+Vergleiche, wenn deine Preisgarantie endet. Oder wenn eine Erhöhung ins Haus steht. Auch nach 12 Monaten ohne Blick auf den Markt lohnt es sich. Der Oktober ist dafür ein guter Monat.
 
 ### Muss ich Heizkörper jedes Jahr entlüften?
 Nein, das musst du nicht. Entlüfte nur, wenn es gluckert oder der Heizkörper ungleich warm wird. Zu häufiges Entlüften senkt den Druck ohne Grund.
 
 ### Wie viel spart ein Grad weniger?
-Pro Grad weniger sparst du rund 6 % der Heizenergie als Modellwert. Wie viel Euro das sind, hängt von deinem Haus und vom Preis ab.
+Pro Grad weniger sparst du rund 6 % der Heizenergie; das ist ein Modellwert. Wie viel Euro das sind, hängt von deinem Haus und vom Preis ab.
 
 ### Darf ich den Gasanbieter auch im Winter wechseln?
 Ja. Du darfst jederzeit wechseln, wenn du die Frist einhältst. Oder wenn du ein Sonderkündigungsrecht hast. Dein Gas fließt dabei ohne Lücke weiter.

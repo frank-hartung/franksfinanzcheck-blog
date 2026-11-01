@@ -60,13 +60,13 @@ Die Gegenmaßnahme ist unspektakulär. Du musst die Posten aus ihrem Versteck ho
 
 ## Der Zwölf-Monats-Blick
 
-Der schnellste vollständige Kassensturz führt über deine Kontobewegungen im Modellfall. Öffne das Online-Banking und filtere auf den Zeitraum der letzten zwölf Monate. Jetzt suchst du nicht nach Kategorien, sondern nach einem Merkmal: gleiche Beträge in gleichem Rhythmus.
+Der schnellste vollständige Kassensturz führt über deine Kontobewegungen. Öffne das Online-Banking und filtere auf den Zeitraum der letzten zwölf Monate. Jetzt suchst du nicht nach Kategorien, sondern nach einem Merkmal: gleiche Beträge in gleichem Rhythmus.
 
 Arbeite dabei in drei Durchgängen.
 
 1. **Monatlich:** Beträge, die jeden Monat auftauchen. Das sind die größten Posten.
 2. **Jährlich:** Beträge, die einmal im Jahr kommen. Sie sind leicht zu übersehen, aber oft hoch.
-3 als Beispielwert. **Unregelmäßig:** Beträge, die alle zwei oder drei Monate erscheinen. Hier verstecken sich Zeitschriften, Clubs, Versicherungen für Kleingeräte und Cloud-Tarife.
+3. **Unregelmäßig:** Beträge, die alle zwei oder drei Monate erscheinen. Hier verstecken sich Zeitschriften, Clubs, Versicherungen für Kleingeräte und Cloud-Tarife.
 
 Der Zwölf-Monats-Zeitraum ist kein Zufall als Modellwert. Ein Jahr enthält jeden Rhythmus mindestens einmal. Wer nur drei Monate prüft, übersieht jede Jahresgebühr.
 
@@ -86,7 +86,7 @@ Nicht jeder Vertrag wird auf dieselbe Weise beendet. Die Unterscheidung spart Ze
 
 Ein Betrag pro Monat wirkt klein. Derselbe Betrag pro Tag wirkt noch kleiner. Beides führt in die Irre. Der hilfreiche Wert ist die Jahressumme, weil sie auf ein Konto passt.
 
-Rechne deshalb jeden Posten auf das Jahr hoch, bevor du ihn bewertest im Rechenfall. Aus 6 € im Monat werden 72 € im Jahr. Aus 12 € im Monat werden 144 €. Aus 45 € im Jahr werden 45 € – hier ist keine Umrechnung nötig.
+Rechne deshalb jeden Posten auf das Jahr hoch, bevor du ihn bewertest. Aus 6 € im Monat werden 72 € im Jahr. Aus 12 € im Monat werden 144 €. Aus 45 € im Jahr werden 45 € – hier ist keine Umrechnung nötig.
 
 Diese Umrechnung hat einen zweiten Nutzen. Sie macht Posten vergleichbar, die unterschiedliche Rhythmen haben. Ein Jahresbeitrag und ein Monatsabo stehen danach auf derselben Skala. Wer die Liste sortiert, sieht sofort, welche drei Positionen die höchsten Jahreswerte haben.
 
@@ -146,9 +146,9 @@ Der zweite Teil der Rechnung ist der wichtigere. Die kleinen Posten sind nicht d
 
 Wenn du neue Abos künftig kontrollieren willst, hilft eine einfache Selbstauflage. Trage jeden neu abgeschlossenen Vertrag sofort in dieselbe Liste ein, in der deine alten Posten stehen. Notiere das Abschlussdatum und, falls vorhanden, die Frist.
 
-Setze zusätzlich eine Erinnerung auf vier Wochen als Modellannahme. Nach vier Wochen entscheidest du: behalten oder beenden. Zu diesem Zeitpunkt weißt du, ob du die Leistung wirklich nutzt. Später wird die Entscheidung nur schwerer, weil die Kündigung dann mehr Aufwand bedeutet und der Startvorteil verbraucht ist.
+Setze zusätzlich eine Erinnerung auf vier Wochen. Nach vier Wochen entscheidest du: behalten oder beenden. Zu diesem Zeitpunkt weißt du, ob du die Leistung wirklich nutzt. Später wird die Entscheidung nur schwerer, weil die Kündigung dann mehr Aufwand bedeutet und der Startvorteil verbraucht ist.
 
-Diese Regel kostet dich pro Vertrag zwei Minuten im Modellfall. Sie verhindert, dass aus einem Testmonat ein Dauervertrag wird.
+Diese Regel kostet dich pro Vertrag zwei Minuten. Sie verhindert, dass aus einem Testmonat ein Dauervertrag wird.
 
 ## Kündigen mit Nachweis
 
@@ -172,7 +172,7 @@ Wichtig ist die Reihenfolge: erst reklamieren, dann zurückbuchen. Eine Rückgab
 
 ### Wie finde ich Abos, die ich vergessen habe?
 
-Filtere deine Kontobewegungen auf zwölf Monate und suche nach wiederkehrenden Beträgen als Beispielwert. Prüfe zusätzlich deine E-Mail-Postfächer nach Rechnungs- und Zahlungsbestätigungen. Dort tauchen Anbieter auf, die nicht per Lastschrift, sondern per Karte abbuchen.
+Filtere deine Kontobewegungen auf zwölf Monate und suche nach wiederkehrenden Beträgen. Prüfe zusätzlich deine E-Mail-Postfächer nach Rechnungs- und Zahlungsbestätigungen. Dort tauchen Anbieter auf, die nicht per Lastschrift, sondern per Karte abbuchen.
 
 ### Muss ich eine Kündigung begründen?
 

@@ -51,7 +51,7 @@ Denn kleine Beträge haben eine unangenehme Eigenschaft: Sie fallen im Alltag ka
 
 1. Frugalismus heißt nicht Geiz, sondern **bewusste Prioritäten**.
 2. Die größten Hebel liegen oft bei **Fixkosten, Gewohnheiten und Impulskäufen**.
-3 als Beispielwert. Schon **20 € bis 50 € pro Monat** aus Kleinstbeträgen summieren sich auf mehrere hundert Euro im Jahr.
+3. Schon **20 € bis 50 € pro Monat** aus Kleinstbeträgen summieren sich auf mehrere hundert Euro im Jahr.
 4. Ein **Haushaltsbuch** oder eine einfache Ausgabenliste ist die Grundlage für echte Veränderungen.
 5. Wer Ersparnisse sofort sichert, macht aus guten Vorsätzen echte Ergebnisse.
 
@@ -81,7 +81,7 @@ Ein Beispiel:
 | ungenutztes Abo | 12,99 € | 155,88 € im Jahr |
 | spontane Lieferdienst-Bestellung 1× pro Woche | 18 € | 72 € im Monat |
 
-Die Summe daraus kann schnell bei **150 € bis 250 € im Monat** liegen als Modellwert. Nicht immer, aber oft deutlich näher dran, als man denkt.
+Die Summe daraus kann schnell bei **150 € bis 250 € im Monat** liegen; das ist ein Modellwert. Nicht immer, aber oft deutlich näher dran, als man denkt.
 
 Genau deshalb funktioniert Frugalismus so gut: Er setzt nicht erst bei der ganz großen Lebensentscheidung an, sondern bei den stillen Routinen dazwischen.
 
@@ -89,7 +89,7 @@ Genau deshalb funktioniert Frugalismus so gut: Er setzt nicht erst bei der ganz 
 
 Ohne Überblick ist Sparen oft nur ein Bauchgefühl. Ein **Haushaltsbuch führen** klingt trocken, ist aber einer der wirksamsten Schritte überhaupt.
 
-Du musst dafür kein Excel-Monster bauen im Rechenfall. Es reicht, wenn du zwei oder drei Monate sauber mitschreibst:
+Du musst dafür kein Excel-Monster bauen. Es reicht, wenn du zwei oder drei Monate sauber mitschreibst:
 
 - Miete und Nebenkosten
 - Strom, Gas, Internet, Handy
@@ -100,7 +100,7 @@ Du musst dafür kein Excel-Monster bauen im Rechenfall. Es reicht, wenn du zwei 
 
 ### Warum das so stark wirkt
 
-Viele Menschen wissen grob, wofür sie Geld ausgeben im Rechenbeispiel. Genaue Zahlen verändern aber die Perspektive. Erst wenn du schwarz auf weiß siehst, dass du **79 €** für Streaming, Apps und digitale Kleindienste zahlst, entsteht echter Handlungsdruck.
+Viele Menschen wissen grob, wofür sie Geld ausgeben. Genaue Zahlen verändern aber die Perspektive. Erst wenn du schwarz auf weiß siehst, dass du **79 €** für Streaming, Apps und digitale Kleindienste zahlst, entsteht echter Handlungsdruck.
 
 **Praxis-Tipp:** Fang nicht mit Perfektion an. Eine simple Notiz-App, eine Tabelle oder ein Zettel reichen völlig. Wichtig ist die Ehrlichkeit, nicht das Tool.
 
@@ -112,7 +112,7 @@ Nicht jeder Fehlkauf ist teuer. Aber viele Fehlkäufe zusammen sind es. Genau hi
 Für kleinere Käufe: Eine Nacht warten. Wenn du es morgen noch willst, schaust du neu drauf.
 
 ### Die 30-Tage-Regel
-Für alles ab etwa **50 €**: Erst auf eine Wunschliste, dann 30 Tage warten als Modellannahme. In vielen Fällen verliert der Kauf bis dahin seinen Reiz.
+Für alles ab etwa **50 €**: Erst auf eine Wunschliste, dann 30 Tage warten; das ist eine Modellannahme. In vielen Fällen verliert der Kauf bis dahin seinen Reiz.
 
 ### Warum das funktioniert
 

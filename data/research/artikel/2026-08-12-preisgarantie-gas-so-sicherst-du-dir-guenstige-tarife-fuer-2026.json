@@ -1,0 +1,38 @@
+{
+  "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+  "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
+  "erzeugt": "2026-11-01 10:13 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 1,
+    "klasse": "saisonal",
+    "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+    "alter_tage": 34,
+    "intervall": 30,
+    "frist": "2026-10-28",
+    "restlaufzeit": -4
+  },
+  "geo": {
+    "punkte": 6,
+    "maximum": 6,
+    "prozent": 100,
+    "offen": [],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": true,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": true
+    }
+  },
+  "treffer": [],
+  "befunde": [],
+  "fehler": [
+    "feedparser nicht installiert (pip install feedparser)",
+    "feedparser nicht installiert (pip install feedparser)",
+    "bundesnetzagentur.de: Jina-Reader-Abruf fehlgeschlagen (<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>)"
+  ],
+  "fassung_sha256": "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af",
+  "fachpruefung": "übersprungen (kein KI-Schlüssel: GROQ_API_KEY/GEMINI_API_KEY)"
+}

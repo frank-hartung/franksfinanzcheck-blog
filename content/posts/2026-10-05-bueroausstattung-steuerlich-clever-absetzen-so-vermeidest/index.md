@@ -64,7 +64,7 @@ Das Finanzamt trennt scharf: Arbeitsmittel auf der einen Seite, private Käufe a
 
 Es zählt die echte Nutzung, nicht der Name auf der Rechnung. Ein Schreibtisch im Arbeitszimmer ist ein Arbeitsmittel. Derselbe Tisch im Kinderzimmer ist es nicht.
 
-Nutzt du ein Gerät gemischt, teilst du die Kosten als Beispielwert. Liegt der Job-Anteil bei 80 %, setzt du 80 % vom Preis an.
+Nutzt du ein Gerät gemischt, teilst du die Kosten. Liegt der Job-Anteil bei 80 %, setzt du 80 % vom Preis an.
 
 Bei überwiegend privaten Geräten gilt eine Grenze als Modellwert. Liegt der berufliche Anteil unter 10 %, erkennt das Finanzamt nichts an. Zwischen 10 und 90 % rechnest du anteilig. Die Quote solltest du kurz begründen können.
 
@@ -90,7 +90,7 @@ Der Hebel bei **Büroausstattung steuerlich clever absetzen: So geht's** sitzt n
 
 Entscheidend sind 800 € netto. Kostet ein Gegenstand höchstens 800 € netto, gilt er als geringwertiges Wirtschaftsgut nach § 6 Abs. 2 EStG. Dann ziehst du den vollen Betrag im Kaufjahr ab. Mit 19 % Umsatzsteuer sind das rund 952 € brutto.
 
-Liegt der Preis darüber, verteilst du die Kosten über die Nutzungsdauer im Rechenfall. Büromöbel stehen in der amtlichen Tabelle mit 13 Jahren. Ein Schreibtisch für 1.300 € bringt dir also rund 100 € pro Jahr. Dafür 13 Jahre lang.
+Liegt der Preis darüber, verteilst du die Kosten über die Nutzungsdauer. Büromöbel stehen in der amtlichen Tabelle mit 13 Jahren. Ein Schreibtisch für 1.300 € bringt dir also rund 100 € pro Jahr. Dafür 13 Jahre lang.
 
 Für Computer, Notebooks, Monitore und Zubehör erlaubt die Finanzverwaltung eine Nutzungsdauer von einem Jahr. Technik wirkt deshalb fast immer sofort. Der Preis spielt dabei keine Rolle.
 
@@ -109,7 +109,7 @@ Neben der Büroausstattung gibt es die Tagespauschale nach § 4 Abs. 5 Satz 1 Nr
 
 Dafür brauchst du kein eigenes Arbeitszimmer. Auch der Küchentisch zählt. Am selben Tag gibt es aber nur eines: Tagespauschale oder Entfernungspauschale. Die Pauschale gilt pro Person, nicht pro Haushalt.
 
-Noch ein Punkt für deine Erwartung: Werbungskosten wirken erst über dem Pauschbetrag von 1.230 € im Rechenbeispiel. Den zieht das Finanzamt ohnehin ab. Deshalb lohnt es sich, Büroausstattung und Pauschale zusammen zu rechnen. Erst die Summe schiebt dich über die Schwelle.
+Noch ein Punkt für deine Erwartung: Werbungskosten wirken erst über dem Pauschbetrag von 1.230 €; das ist ein Rechenbeispiel. Den zieht das Finanzamt ohnehin ab. Deshalb lohnt es sich, Büroausstattung und Pauschale zusammen zu rechnen. Erst die Summe schiebt dich über die Schwelle.
 
 > 💶 **Spar-Tipp zwischendurch:** Dein Tagesgeld liegt bei der C24 Bank verzinst und täglich verfügbar: [**C24 Bank Tagesgeld-Zinsen ansehen**](/go/tagesgeld/)
 
@@ -156,7 +156,7 @@ Das Beispiel zeigt den Hebel: Einzelne Kleinbeträge verpuffen im Pauschbetrag. 
 
 ## Fünf Fehler, die dich bares Geld kosten
 
-1 als Modellannahme. **Keine Trennung von privat und beruflich.** Wer 100 % ansetzt, obwohl das Gerät abends im Wohnzimmer steht, riskiert die komplette Streichung.
+1. **Keine Trennung von privat und beruflich.** Wer 100 % ansetzt, obwohl das Gerät abends im Wohnzimmer steht, riskiert die komplette Streichung.
 2. **Belege zu spät gesichert.** Ohne Rechnung kein Abzug. Scanne direkt nach dem Kauf, nicht im Folgenden Frühjahr.
 3. **Die Grenze falsch gelesen.** Maßgeblich sind 800 € netto je Gegenstand – nicht der Bruttobetrag und nicht die Rechnungssumme.
 4. **Pauschale und Pendlerweg doppelt angesetzt.** Für denselben Tag gibt es nur eines von beidem. Das fällt beim Abgleich sofort auf.
@@ -164,11 +164,11 @@ Das Beispiel zeigt den Hebel: Einzelne Kleinbeträge verpuffen im Pauschbetrag. 
 
 ## Jahres-Check: Büroausstattung steuerlich clever absetzen
 
-Setze dir vier feste Termine: April, Juli, Oktober und Januar im Modellfall. Zehn Minuten pro Quartal reichen. In der Zeit erfasst du neue Käufe und zählst die Homeoffice-Tage. Als Nachweis genügt ein Kalendereintrag mit dem Kürzel HO.
+Setze dir vier feste Termine: April, Juli, Oktober und Januar. Zehn Minuten pro Quartal reichen. In der Zeit erfasst du neue Käufe und zählst die Homeoffice-Tage. Als Nachweis genügt ein Kalendereintrag mit dem Kürzel HO.
 
 Plane auch die Erstattung ein. Wer das Geld nicht sofort ausgibt, sondern auf ein [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) legt, finanziert damit den nächsten Kauf. Mit einem Haushaltsbuch behältst du die Beträge im Blick.
 
-Prüfe vor jedem Neukauf drei Dinge als Beispielwert. Brauchst du das Gerät wirklich beruflich? Liegt der Nettopreis unter 800 €? Passt der Kauf noch in dieses Steuerjahr?
+Prüfe vor jedem Neukauf drei Dinge. Brauchst du das Gerät wirklich beruflich? Liegt der Nettopreis unter 800 €? Passt der Kauf noch in dieses Steuerjahr?
 
 Wer im Dezember bestellt, verschiebt den Abzug oft ins Folgejahr. Es zählt das Datum der Anschaffung.
 
@@ -199,13 +199,13 @@ Ja. Büroausstattung und Tagespauschale sind zwei getrennte Posten. Beide gehör
 
 Dann kann das Finanzamt die Ausgabe streichen. Hebe Nachweise bis zum fertigen Steuerbescheid auf. Läuft eine Abschreibung, hebe sie über die ganze Nutzungsdauer auf.
 
-Mit Inventur, sauberen Belegen und der 800-Euro-Grenze im Kopf kannst du deine Büroausstattung steuerlich clever absetzen im Rechenfall. Dann macht dir auch das Finanzamt keinen Strich durch die Rechnung.### Zählt ein zweiter Bildschirm als Arbeitsmittel?
+Mit Inventur, sauberen Belegen und der 800-Euro-Grenze im Kopf kannst du deine Büroausstattung steuerlich clever absetzen; das ist ein Rechenbeispiel. Dann macht dir auch das Finanzamt keinen Strich durch die Rechnung.### Zählt ein zweiter Bildschirm als Arbeitsmittel?
 
 Ja, wenn du ihn für die Arbeit nutzt. Notiere den Zweck zum Beleg. Bei gemischter Nutzung teilst du den Betrag auf.
 
 ### Wie lange muss ich Belege aufbewahren?
 
-Bewahre sie so lange, wie das Finanzamt noch prüfen darf im Rechenbeispiel. Meist sind es vier Jahre ab Abgabe. Digitale Belege liegen in einem Ordner je Jahr. Das reicht für die meisten Fälle.
+Bewahre sie so lange, wie das Finanzamt noch prüfen darf. Meist sind es vier Jahre ab Abgabe. Digitale Belege liegen in einem Ordner je Jahr. Das reicht für die meisten Fälle.
 
 ### Was gilt für Geräte aus dem Job?
 

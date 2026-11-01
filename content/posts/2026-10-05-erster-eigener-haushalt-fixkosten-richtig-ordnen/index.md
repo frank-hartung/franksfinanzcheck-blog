@@ -49,7 +49,7 @@ faktencheck: 2026-10-13
 kurzantwort: "Im ersten eigenen Haushalt entscheiden vier Blöcke über das Monatsbudget: Wohnen, Energie, Verträge und Alltag. Sortiere sie nach Fälligkeit, nicht nach Höhe, und führe ein Konto für Fixkosten getrennt vom Alltagskonto. Prüfe jeden Vertrag nach den ersten drei Monaten, sobald du deinen echten Verbrauch kennst."
 ---
 
-Die erste Wohnung hat einen eigenen Geruch: Farbe, Karton, neue Möbel im Modellfall. Nach vier Wochen kommt per Post die erste Rechnung, die niemand im Blick hatte. Sie ist selten hoch. Sie ist nur überraschend.
+Die erste Wohnung hat einen eigenen Geruch: Farbe, Karton, neue Möbel. Nach vier Wochen kommt per Post die erste Rechnung, die niemand im Blick hatte. Sie ist selten hoch. Sie ist nur überraschend.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -84,7 +84,7 @@ Die Reihenfolge beim Einzug ist keine Geschmacksfrage. Manche Dinge müssen sofo
 
 **In der ersten Woche:** Ummeldung deiner Adresse bei der Meldebehörde und beim Arbeitgeber. Ändere die Adresse zusätzlich bei Bank, Kartenanbietern und Onlinediensten.
 
-**In den ersten zwei Wochen:** Internet beauftragen als Modellwert. Die Umschaltung braucht Vorlauf, besonders in Neubauten. Wer wartet, arbeitet wochenlang mit mobilen Daten.
+**In den ersten zwei Wochen:** Internet beauftragen. Die Umschaltung braucht Vorlauf, besonders in Neubauten. Wer wartet, arbeitet wochenlang mit mobilen Daten.
 
 **Im ersten Monat:** Prüfe, welche Verträge aus dem vorherigen Haushalt noch laufen. Gemeinschaftsverträge in WGs werden oft vergessen und weiter gezahlt.
 
@@ -127,7 +127,7 @@ Die vier Blöcke mit den Beträgen aus der Modellrechnung:
 
 Ein häufiger Anfängerfehler ist die Vermischung. Fixkosten sind monatlich und planbar. Rücklagen sind unregelmäßig und trotzdem berechenbar.
 
-Rechne deine jährlichen Posten auf einen Monat um im Rechenfall. Ein Betrag von 240 € im Jahr sind 20 € im Monat. Wenn du diese Umrechnung vornimmst, ist jede Jahresrechnung bereits bezahlt, wenn sie kommt.
+Rechne deine jährlichen Posten auf einen Monat um. Ein Betrag von 240 € im Jahr sind 20 € im Monat. Wenn du diese Umrechnung vornimmst, ist jede Jahresrechnung bereits bezahlt, wenn sie kommt.
 
 Dieser Trick klingt banal und wirkt sofort. Die Verbraucherzentrale beschreibt dasselbe Vorgehen für ein [Haushaltsbuch](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/haushaltsbuch-fuehren-so-behalten-sie-ihre-ausgaben-im-blick-10496): Ausgaben nach Rhythmus sortieren, nicht nach Kategorie.
 
@@ -141,11 +141,11 @@ Den Unterschied zwischen Kontoführung und Kosten findest du im [Ratgeber Giroko
 
 ## Erster eigener Haushalt: typische Fehler in den ersten Monaten
 
-**Der Vertrag mit der längsten Laufzeit wird zuerst unterschrieben.** Genau umgekehrt wäre besser im Rechenbeispiel. Beginne mit monatlich kündbaren Verträgen und entscheide erst nach drei Monaten, ob du länger binden willst.
+**Der Vertrag mit der längsten Laufzeit wird zuerst unterschrieben.** Genau umgekehrt wäre besser. Beginne mit monatlich kündbaren Verträgen und entscheide erst nach drei Monaten, ob du länger binden willst.
 
 **Die Nebenkostenvorauszahlung wird als feste Größe behandelt.** Sie ist eine Prognose. Am Ende des Jahres wird abgerechnet, und die Abweichung kann in beide Richtungen gehen.
 
-**Kleinbeträge werden nicht mitgezählt.** Fünf Euro hier, acht Euro dort als Modellannahme. Diese Beträge tauchen nie in einer Aufstellung auf, weil sie nicht als Ausgabe wahrgenommen werden.
+**Kleinbeträge werden nicht mitgezählt.** Fünf Euro hier, acht Euro dort. Diese Beträge tauchen nie in einer Aufstellung auf, weil sie nicht als Ausgabe wahrgenommen werden.
 
 **Anschaffungen werden zu Verträgen.** Ein Möbelstück auf Raten wird zur Fixkostenposition, die länger bleibt als das Möbelstück.
 
@@ -171,11 +171,11 @@ Teile jeden Betrag durch zwölf und überweise den Betrag monatlich auf ein Rüc
 
 ## Der erste Vertrag mit langer Laufzeit
 
-Früher oder später kommt der Moment, in dem du einen Vertrag über zwei Jahre abschließt im Modellfall. Internet- und Mobilfunkverträge funktionieren häufig so. Der Gesetzgeber begrenzt die erste Bindung auf höchstens zwei Jahre. Danach kannst du mit einem Monat Vorlauf aussteigen.
+Früher oder später kommt der Moment, in dem du einen Vertrag über zwei Jahre abschließt. Internet- und Mobilfunkverträge funktionieren häufig so. Der Gesetzgeber begrenzt die erste Bindung auf höchstens zwei Jahre. Danach kannst du mit einem Monat Vorlauf aussteigen.
 
 Prüfe vor der Unterschrift zwei Dinge. Erstens: Was kostet der Vertrag nach Ablauf einer Aktion? Zweitens: Wie ist der Gesamtpreis über die ganze Laufzeit, gerechnet mit Router, Zusatzoptionen und Anschlussgebühr?
 
-Diese zweite Rechnung entscheidet oft anders als der erste Blick als Beispielwert. Ein niedriger Startpreis mit teurem Gerät und hoher Folgegebühr ist über 24 Monate nicht günstiger als ein höherer Preis ohne Zusatzkosten.
+Diese zweite Rechnung entscheidet oft anders als der erste Blick. Ein niedriger Startpreis mit teurem Gerät und hoher Folgegebühr ist über 24 Monate nicht günstiger als ein höherer Preis ohne Zusatzkosten.
 
 ## Der erste Haushalt in einer WG
 

@@ -126,13 +126,13 @@ Dein Messgerät zeigt entweder direkt kWh oder eine Leistung in Watt.
 **Bei konstanter Dauerlast:**
 > Jahresverbrauch = Watt × 24 × 365 ÷ 1.000
 
-**Beispiel:** Eine Gerätegruppe zieht unnötig 18 Watt als Modellwert. Umgerechnet sind das **157,7 kWh im Jahr**. Bei 0,37 € pro kWh kostet sie rund **58 € jährlich**.
+**Beispiel:** Eine Gerätegruppe zieht unnötig 18 Watt; das ist ein Modellwert. Umgerechnet sind das **157,7 kWh im Jahr**. Bei 0,37 € pro kWh kostet sie rund **58 € jährlich**.
 
-Zum Einordnen reicht ein Vergleich: 1 Watt Dauerlast kostet bei 0,37 € pro kWh etwa 3 € im Jahr. 10 Watt rund 32 € im Rechenfall. Miss aber nicht erst jeden Stecker einzeln. Prüfe zuerst die großen Gruppen. So wird aus „zieht bestimmt viel" eine echte Zahl.
+Zum Einordnen reicht ein Vergleich: 1 Watt Dauerlast kostet bei 0,37 € pro kWh etwa 3 € im Jahr. 10 Watt rund 32 €; das ist ein Rechenbeispiel. Miss aber nicht erst jeden Stecker einzeln. Prüfe zuerst die großen Gruppen. So wird aus „zieht bestimmt viel" eine echte Zahl.
 
 ## Kühlgeräte: erst messen, dann über Ersatz reden
 
-Kühlschrank und Gefriertruhe laufen ständig im Rechenbeispiel. Trotzdem ist „älter als zehn Jahre" allein kein guter Grund zum Kauf. Das UBA rät: Miss den Verbrauch des alten Geräts und vergleiche ihn mit passenden neuen Geräten.
+Kühlschrank und Gefriertruhe laufen ständig. Trotzdem ist „älter als zehn Jahre" allein kein guter Grund zum Kauf. Das UBA rät: Miss den Verbrauch des alten Geräts und vergleiche ihn mit passenden neuen Geräten.
 
 Achte beim Vergleich auf:
 
@@ -145,7 +145,7 @@ Ein zu großes neues Gerät kann trotz guter Klasse mehr Strom brauchen als ein 
 
 ### Beispiel für die Amortisation
 
-Dein altes Gerät verbraucht gemessen 310 kWh im Jahr als Modellannahme. Das passende Neugerät ist mit 140 kWh angegeben.
+Dein altes Gerät verbraucht gemessen 310 kWh im Jahr; das ist eine Modellannahme. Das passende Neugerät ist mit 140 kWh angegeben.
 
 - Differenz: **170 kWh** (im Modellfall)
 - Ersparnis bei 0,37 €/kWh: **62,90 € pro Jahr**
@@ -217,7 +217,7 @@ Dieser Test ist eine Momentaufnahme. Kühlgeräte und Pumpen schalten währendde
 
 ### Plausibilitätscheck mit der Rechnung
 
-Teile deinen Jahresverbrauch durch 8.760 Stunden im Rechenfall. Bei 3.500 kWh ergibt sich rechnerisch eine mittlere Leistung von rund 400 Watt. Ständig fließen deshalb noch lange keine 400 Watt.
+Teile deinen Jahresverbrauch durch 8.760 Stunden. Bei 3.500 kWh ergibt sich rechnerisch eine mittlere Leistung von rund 400 Watt. Ständig fließen deshalb noch lange keine 400 Watt.
 
 Herd und Waschmaschine erzeugen Spitzen, während nachts oft deutlich weniger läuft. Der Mittelwert hilft nur, eine gemessene Dauerlast einzuordnen.
 

@@ -144,7 +144,7 @@ Notiere auch, wie sich der Strahl anfühlt. Ein Duschkopf mit hohem Durchfluss u
 
 Ein Versuch mit kleinem Aufwand zeigt dir, wo du stehst. Stelle den Eimer aus dem Keller ins Bad oder nutze einen Messbecher.
 
-Halte an drei Tagen hintereinander die Duschzeit fest im Modellfall. Miss an einem Tag zusätzlich, wie lange es dauert, bis warmes Wasser ankommt. Schreib die drei Werte auf einen Zettel.
+Halte an drei Tagen hintereinander die Duschzeit fest. Miss an einem Tag zusätzlich, wie lange es dauert, bis warmes Wasser ankommt. Schreib die drei Werte auf einen Zettel.
 
 Am Ende der Woche kennst du zwei Zahlen: deine durchschnittliche Duschzeit und deine Wartezeit. Die Duschzeit beeinflusst den Verbrauch dauerhaft. Die Wartezeit zeigt, ob ein Teil der Energie in der Leitung verschwindet statt bei dir.
 
@@ -156,7 +156,7 @@ Auf der Abrechnung stehen drei Werte, die du nebeneinander lesen musst: der Gesa
 
 Der Verteilerschlüssel bestimmt, wie dein Anteil berechnet wird. Manche Anlagen verteilen Warmwasserkosten nach gemessenem Verbrauch, andere nach Wohnfläche, wieder andere nach Personenzahl. Diese Auswahl steht in der Abrechnung oder in der Teilungserklärung.
 
-Vergleiche zwei Jahre nebeneinander als Beispielwert. Wenn der Gesamtverbrauch steigt, während dein Anteil gleich bleibt, ist der Anstieg nicht bei dir entstanden. Wenn dein Anteil schneller steigt als der Gesamtverbrauch, lohnt die Nachfrage.
+Vergleiche zwei Jahre nebeneinander. Wenn der Gesamtverbrauch steigt, während dein Anteil gleich bleibt, ist der Anstieg nicht bei dir entstanden. Wenn dein Anteil schneller steigt als der Gesamtverbrauch, lohnt die Nachfrage.
 
 Diese Gegenüberstellung dauert [fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) und ersetzt jede Vermutung über die Nachbarn.
 
