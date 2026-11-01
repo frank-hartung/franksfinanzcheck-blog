@@ -371,3 +371,7 @@
 {"date": "2026-10-31", "kritisch": 0, "fest": 0, "modus": "set-current", "geaendert": []}
 {"date": "2026-10-31", "kritisch": 0, "fest": 0, "modus": "set-current", "geaendert": []}
 {"date": "2026-10-31", "kritisch": 0, "fest": 0, "modus": "set-current", "geaendert": []}
+{"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": ["scripts/redaktions_standard.py"], "head": "8dbb3b3"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 0, "modus": "verify"}
