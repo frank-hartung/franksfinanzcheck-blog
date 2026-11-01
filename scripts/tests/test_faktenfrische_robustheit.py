@@ -1,4 +1,5 @@
-"""Offline-Regressionen für externe Daten und die Schreibgrenze."""
+"""Offline-Regressionen für externe Daten, die Schreibgrenze und #984."""
+import contextlib
 import hashlib
 import json
 import tempfile
@@ -161,6 +162,116 @@ class FaktenfrischeRobustheit(unittest.TestCase):
         self.assertEqual(ff.datum_aus_feed('2026-02-30'), '')
         self.assertEqual(ff.datum_aus_feed('31 Feb 2026'), '')
         self.assertEqual(ff.datum_aus_feed('Fri, 26 Sep 2026 08:00'), '2026-09-26')
+
+    # ------------------------------------------------------------------
+    # #984 – der Lauf überlebt den eigenen Schreibvorgang
+    # ------------------------------------------------------------------
+    def _main_lauf(self, tmp, artikel, *, anwenden, recherchiere=None,
+                   claude=None, extra=()):
+        """main() mit Attrappen laufen lassen: kein Netz, kein echter Bestand."""
+        dossier = dict(self.dossier, fehler=[], begriffe=[], kanaele=[],
+                       erzeugt="2026-10-31 10:34 UTC")
+        patches = [
+            patch.object(ff.sys, "argv", ["faktenfrische.py", "--apply"]),
+            patch.object(ff, "selftest", return_value=0),
+            patch.object(ff, "lade_config", return_value=self.cfg),
+            patch.object(ff, "alle_artikel", return_value=artikel),
+            patch.object(ff, "geo_reife", return_value={"prozent": 50, "offen": []}),
+            patch.object(ff, "faelligkeit", return_value={
+                "faellig": True, "prio": 0, "grund": "Erstrecherche",
+                "frist": None, "restlaufzeit": None}),
+            patch.object(ff, "budget_fuer_lauf",
+                         return_value=(len(artikel), {"quelle": "Test"})),
+            patch.object(ff, "_kapazitaet_nachrechnen", return_value={}),
+            patch.object(ff, "recherchiere", side_effect=recherchiere or (
+                lambda art, cfg, offline=False: dict(dossier))),
+            patch.object(ff, "claude_fachpruefung", side_effect=claude or (
+                lambda *a, **k: ([], [self.dossier["treffer"][0]], "geprüft (test)"))),
+            patch.object(ff, "artikel_anwenden", side_effect=anwenden),
+            patch.object(ff, "dossier_schreiben"),
+            patch.object(ff.ledger, "entscheidungen_laden", return_value={}),
+            patch.object(ff, "QUEUE_PFAD", str(Path(tmp) / "queue.json")),
+            patch.object(ff, "HISTORIE_PFAD", str(Path(tmp) / "history.jsonl")),
+            patch.object(ff, "REPORT_PFAD", str(Path(tmp) / "report.md")),
+        ] + list(extra)
+        with contextlib.ExitStack() as stack:
+            for p in patches:
+                stack.enter_context(p)
+            return ff.main()
+
+    def _seite(self, tmp, slug="seite"):
+        pfad = Path(tmp) / slug / "index.md"
+        pfad.parent.mkdir(parents=True, exist_ok=True)
+        pfad.write_text('---\ntitle: "Test"\n---\n\nText.\n', encoding="utf-8")
+        return ff.lade_artikel(str(pfad))
+
+    def test_schreiben_dann_neu_lesen_beendet_den_lauf_nicht(self):
+        """#984: Der Lauf schrieb die Seite, verlor dann `_faellig` und starb.
+
+        Queue, Report und Ledger fielen aus; fünf belegte Befunde lagen nur
+        noch im Dossier. Der Lauf muss den Schreibvorgang überleben und die
+        Bilanz aus der geschriebenen Fassung ziehen.
+        """
+        with tempfile.TemporaryDirectory() as tmp:
+            art = self._seite(tmp)
+
+            def schreibe(artikel, quellen, datum, trocken):
+                pfad = Path(artikel["pfad"])
+                pfad.write_text(pfad.read_text(encoding="utf-8").replace(
+                    "---\n\nText.", f"---\nfaktencheck: {datum}\n\nText."),
+                    encoding="utf-8")
+                return [f"faktencheck: {datum}"]
+
+            rc = self._main_lauf(tmp, [art], anwenden=schreibe)
+            self.assertEqual(rc, 0)
+            queue = json.loads((Path(tmp) / "queue.json").read_text(encoding="utf-8"))
+            eintrag = queue["laeufe"][0]
+            self.assertEqual(eintrag["grund"], "Erstrecherche")
+            self.assertEqual(eintrag["geo"], 50)
+            self.assertEqual(eintrag["aenderungen"], ["faktencheck: 2026-11-01"])
+            neu = ff.lade_artikel(art["pfad"])
+            self.assertEqual(eintrag["fassung_sha256"], ff.ledger.pruef_hash(neu))
+            self.assertIn("faktencheck:", Path(art["pfad"]).read_text(encoding="utf-8"))
+            self.assertTrue((Path(tmp) / "history.jsonl").exists())
+
+    def test_eine_kaputte_seite_kostet_nicht_die_beweise_der_anderen(self):
+        """#984: Eine Seite darf den Lauf nicht mitnehmen – Exit 5, Beweise bleiben."""
+        with tempfile.TemporaryDirectory() as tmp:
+            kaputt = self._seite(tmp, "kaputt")
+            gut = self._seite(tmp, "gut")
+
+            def recherche(art, cfg, offline=False):
+                if art["slug"] == "kaputt":
+                    raise RuntimeError("Kanal explodiert")
+                return dict(self.dossier, fehler=[], begriffe=[], kanaele=[],
+                            erzeugt="2026-10-31 10:34 UTC")
+
+            bericht = []
+            rc = self._main_lauf(
+                tmp, [kaputt, gut], anwenden=lambda *a, **k: [], recherchiere=recherche,
+                extra=[patch.object(ff, "report_schreiben",
+                                    side_effect=lambda *a, **k: bericht.append(k))])
+            self.assertEqual(rc, 5)
+            queue = json.loads((Path(tmp) / "queue.json").read_text(encoding="utf-8"))
+            self.assertEqual([a["slug"] for a in queue["abbrueche"]], ["kaputt"])
+            self.assertIn("RuntimeError: Kanal explodiert", queue["abbrueche"][0]["fehler"])
+            self.assertEqual([l["slug"] for l in queue["laeufe"]], ["gut"])
+            self.assertEqual(queue["uebersicht"]["abbrueche"], 1)
+            self.assertEqual(bericht[0]["abbrueche"][0]["slug"], "kaputt")
+            self.assertEqual(len((Path(tmp) / "history.jsonl").read_text(
+                encoding="utf-8").strip().splitlines()), 1)
+
+    def test_nicht_neu_lesbare_fassung_bricht_nur_die_seite_ab(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            art = self._seite(tmp)
+            rc = self._main_lauf(
+                tmp, [art], anwenden=lambda *a, **k: ["faktencheck: 2026-11-01"],
+                extra=[patch.object(ff, "lade_artikel", return_value=None)])
+            self.assertEqual(rc, 5)
+            queue = json.loads((Path(tmp) / "queue.json").read_text(encoding="utf-8"))
+            self.assertEqual(queue["abbrueche"][0]["slug"], "seite")
+            self.assertIn("nicht erneut lesbar", queue["abbrueche"][0]["fehler"])
+            self.assertEqual(queue["laeufe"], [])
 
     def test_stale_article_is_not_overwritten(self):
         with tempfile.TemporaryDirectory() as tmp:

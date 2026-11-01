@@ -230,13 +230,41 @@ python3 scripts/faktenfrische.py --scope pillar --apply   # nur Ratgeberseiten
 python3 scripts/faktenfrische.py --scope posts --apply    # nur Blogartikel
 python3 scripts/faktenfrische.py --file content/posts/<slug>/index.md
 python3 scripts/faktenfrische.py --offline       # ohne Netz: nur GEO-Reife
-python3 scripts/faktenfrische.py --selftest      # 23 eingefrorene Fälle
+python3 scripts/faktenfrische.py --selftest      # 29 eingefrorene Fälle
 npm run test:faktenfrische                       # Selbsttests + Offline-Regressionen
 npm run faktenfrische                            # = Trockenlauf
 ```
 
 Exit-Codes: `0` gelaufen · `1` offene Befunde (nur `--strict`) ·
-`2` Selbsttest/Konfiguration rot · `3` keine Quelle erreichbar (CI warnt).
+`2` Selbsttest/Konfiguration rot (nichts geschrieben) · `3` keine Quelle
+erreichbar · `4` KI-Fachprüfung unvollständig · `5` mindestens eine Seite
+brach ab (Queue, Report und Ledger sind geschrieben).
+
+## Wenn ein Lauf abbricht (#984, 01.11.2026)
+
+Der Lauf vom 31.10.2026 schrieb eine Seite, verlor danach seine Buchhaltung
+(`KeyError: _faellig`), und **Queue, Report und Ledger fielen mit ihm aus**.
+Übrig blieben ein Dossier mit fünf belegten Befunden und ein Alarm, der nur
+den letzten Schritt nannte. Drei Konsequenzen gelten dauerhaft:
+
+1. **Seiten sind isoliert.** Eine Seite prüfen, schreiben und bilanzieren ist
+   eine Einheit (`verarbeite_seite`). Wirft sie, steht sie mit Ursache unter
+   „Abgebrochene Seiten“ in Report und Queue, der Lauf macht weiter und endet
+   mit **Exit 5**. Kein stiller Teilerfolg: Der Ausfall bleibt rot.
+2. **Neuladen löscht keine Buchhaltung.** `_faellig`, `_geo` und `bereich`
+   sind Lauf-Wissen, nicht Datei-Wissen. Die geschriebene Fassung wird
+   getrennt zurückgegeben (`fassung_nach_schreiben`) und ersetzt den
+   Lauf-Datensatz nicht. Der Selbsttest friert den Fall ein (ST8).
+3. **Die Meldung nennt die Ursache.** Der Workflow schreibt das Protokoll in
+   `faktenfrische-lauf.log` (Artefakt + Step-Summary) und übersetzt den
+   Exit-Code in der letzten Zeile in Klartext. Wer ein Ticket liest, muss
+   nicht raten und kein fremdes Blob-Log laden.
+
+**Nachlese.** Befunde, die nur im Dossier stehen, holt
+`python3 scripts/faktenfrische_befund_ledger.py --nachlese --apply` ins
+Ledger – idempotent, ohne erfundene Fassung und ohne je einen Befund zu
+schließen. Der Bestands-Workflow fährt sie nach jedem Lauf, auch nach einem
+Abbruch.
 
 ## GEO-Reife
 
