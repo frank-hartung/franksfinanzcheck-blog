@@ -26,21 +26,6 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-
-def leitfaden_text() -> str:
-    """Der Leitfaden der Agenten ist seit dem Umbau vom 01.11.2026 Kern **plus**
-    `ff-*`-Skills (Progressive Disclosure, `docs/ANLEITUNG-SKILLS.md`). Wer nur
-    `CLAUDE.md` liest, prüft den alten Ablageort und meldet eine Regel als
-    verschwunden, die lediglich umgezogen ist – derselbe Fehler, den K3 auf der
-    Skill-Seite verbietet.
-    """
-    ordner = ROOT / ".claude" / "skills"
-    teile = [(ROOT / "CLAUDE.md").read_text(encoding="utf-8")]
-    for muster in ("ff-*/SKILL.md", "ff-*/references/*.md"):
-        for pfad in sorted(ordner.glob(muster)):
-            teile.append(pfad.read_text(encoding="utf-8"))
-    return "\n".join(teile)
-
 sys.path.insert(0, str(ROOT / "scripts"))
 import robustheits_gate as gate  # noqa: E402
 
@@ -477,10 +462,15 @@ class VerdrahtungTests(unittest.TestCase):
     def test_dokumentation_ist_verlinkt(self):
         self.assertTrue((ROOT / "docs/ANLEITUNG-ROBUSTHEIT.md").exists(),
                         "Runbook fehlt")
-        # Der Leitfaden ist seit dem Umbau vom 01.11.2026 Kern + `ff-*`-Skills;
-        # die Wache steht in `ff-oberflaeche` (SKILL.md und references/).
-        leitfaden = leitfaden_text()
-        self.assertIn("robustheits_gate.py", leitfaden,
+        # Seit dem Skill-Umbau (#999, 01.11.2026) trägt nicht mehr CLAUDE.md
+        # das Detail, sondern der geroutete Skill: Robustheit lebt in
+        # ff-oberflaeche (SKILL.md + references/robustheit.md). Der Vertrag –
+        # der Leitfaden nennt die Wache – gilt unverändert.
+        flaechen = [ROOT / "CLAUDE.md",
+                    ROOT / ".claude" / "skills" / "ff-oberflaeche" / "SKILL.md",
+                    ROOT / ".claude" / "skills" / "ff-oberflaeche" / "references" / "robustheit.md"]
+        text = "\n".join(p.read_text(encoding="utf-8") for p in flaechen if p.exists())
+        self.assertIn("robustheits_gate.py", text,
                       "Der Leitfaden für Agenten nennt die Wache nicht")
 
 

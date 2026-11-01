@@ -38,21 +38,6 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
 SCRIPTS = REPO / "scripts"
-
-def leitfaden_text() -> str:
-    """Der Leitfaden der Agenten ist seit dem Umbau vom 01.11.2026 Kern **plus**
-    `ff-*`-Skills (Progressive Disclosure, `docs/ANLEITUNG-SKILLS.md`). Wer nur
-    `CLAUDE.md` liest, prüft den alten Ablageort und meldet eine Regel als
-    verschwunden, die lediglich umgezogen ist – derselbe Fehler, den K3 auf der
-    Skill-Seite verbietet.
-    """
-    ordner = REPO / ".claude" / "skills"
-    teile = [(REPO / "CLAUDE.md").read_text(encoding="utf-8")]
-    for muster in ("ff-*/SKILL.md", "ff-*/references/*.md"):
-        for pfad in sorted(ordner.glob(muster)):
-            teile.append(pfad.read_text(encoding="utf-8"))
-    return "\n".join(teile)
-
 sys.path.insert(0, str(SCRIPTS))
 
 import backup_einrichtung as be  # noqa: E402
@@ -387,11 +372,16 @@ class AnleitungVertrag(unittest.TestCase):
 
     def test_leitfaden_und_npm_skript(self):
         # Der Leitfaden für Agenten nennt Prüfer und Grundsatz – sonst „heilt“
-        # der nächste Agent das Rot mit continue-on-error. Gelesen wird der
-        # ganze Leitfaden (Kern + `ff-*`-Skills), nicht nur der Kern: seit dem
-        # Umbau vom 01.11.2026 liegt der Grundsatz in
-        # `ff-ausliefern/references/bestand-backup-merge.md`.
-        leitfaden = leitfaden_text()
+        # der nächste Agent das Rot mit continue-on-error.
+        # Seit dem Skill-Umbau (#999, 01.11.2026) ist der Leitfaden zweistufig:
+        # CLAUDE.md routet, die ff-*-Skills tragen das Detail. Backup/merge
+        # lebt seither in ff-ausliefern – der Vertrag gilt unverändert, nur
+        # der Ablageort hat gewechselt.
+        leitfaden = (REPO / "CLAUDE.md").read_text(encoding="utf-8")
+        skill = (REPO / ".claude" / "skills" / "ff-ausliefern" /
+                 "references" / "bestand-backup-merge.md")
+        self.assertTrue(skill.exists(), "ff-ausliefern-Referenz fehlt")
+        leitfaden += "\n" + skill.read_text(encoding="utf-8")
         self.assertIn("scripts/backup_einrichtung.py", leitfaden)
         self.assertIn("Fail-closed bleibt", leitfaden)
         import json
@@ -531,13 +521,34 @@ class RueckwegVertrag(unittest.TestCase):
         with tempfile.TemporaryDirectory() as ordner:
             q = Path(ordner)
             quelle = q / "quelle"
-            for unter in ("content/posts", "content/impressum", "content/datenschutz"):
+            # Der Attrappen-Bestand muss wirklich baubar sein: Der Drill führt
+            # mit installiertem Hugo einen Beweis-Build aus dem Restore aus
+            # (≥ 30 HTML-Seiten). Vor dem 01.11.2026 stand hier hugo.toml="x"
+            # und 21 leere Dateien – grün lief das nur, solange im Prüfjob
+            # kein Hugo lag; seit install-hugo dort steht, wäre jeder Lauf rot
+            # gewesen (Fund in PR #998). Jetzt: gültige Minimal-Konfiguration,
+            # drei Ein-Zeilen-Layouts, 30 Beiträge → 34 HTML-Seiten im Build.
+            for unter in ("content/posts", "content/impressum", "content/datenschutz",
+                          "layouts/_default"):
                 (quelle / unter).mkdir(parents=True)
-            for nummer in range(21):
-                (quelle / "content" / "posts" / f"p{nummer}.md").write_text("x\n", encoding="utf-8")
-            (quelle / "content" / "impressum" / "index.md").write_text("a\n", encoding="utf-8")
-            (quelle / "content" / "datenschutz" / "index.md").write_text("b\n", encoding="utf-8")
-            (quelle / "hugo.toml").write_text("x\n", encoding="utf-8")
+            for nummer in range(30):
+                (quelle / "content" / "posts" / f"p{nummer}.md").write_text(
+                    f"---\ntitle: \"Probe {nummer}\"\ndraft: false\n---\nInhalt {nummer}.\n",
+                    encoding="utf-8")
+            (quelle / "content" / "impressum" / "index.md").write_text(
+                "---\ntitle: \"Impressum\"\n---\nImpressum.\n", encoding="utf-8")
+            (quelle / "content" / "datenschutz" / "index.md").write_text(
+                "---\ntitle: \"Datenschutz\"\n---\nDatenschutz.\n", encoding="utf-8")
+            (quelle / "hugo.toml").write_text(
+                'baseURL = "https://example.invalid/"\n'
+                'title = "Restore-Drill"\n'
+                'disableKinds = ["taxonomy", "term", "rss", "sitemap", "robotsTXT"]\n',
+                encoding="utf-8")
+            (quelle / "layouts" / "index.html").write_text("{{ .Title }}\n", encoding="utf-8")
+            (quelle / "layouts" / "_default" / "single.html").write_text(
+                "{{ .Title }}\n", encoding="utf-8")
+            (quelle / "layouts" / "_default" / "list.html").write_text(
+                "{{ .Title }}\n", encoding="utf-8")
             # HEAD muss auf einem Branch liegen: `git clone` eines Bundles mit
             # losem HEAD (detached) ergibt einen leeren Arbeitsbaum.
             for befehl in (["git", "init", "-q", "-b", "main"],
