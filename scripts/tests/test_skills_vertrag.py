@@ -92,9 +92,17 @@ class EchterStandTests(unittest.TestCase):
             refs = list((wurzel / sv.SKILL_ORDNER / name / "references").glob("*.md"))
             self.assertGreaterEqual(len(refs), 1, f"{name} hat keine references-Datei")
 
-    def test_wörtliche_übernahme_kein_umgeschrieben(self):
-        """Jede Referenz-Datei trägt den Hinweis auf die wörtliche Übernahme –
-        und jeder dort verlinkte Abschnittstitel stand so im früheren Kern."""
+    def test_herkunft_jeder_referenzDatei_markiert(self):
+        """Jede Referenz-Datei sagt, woher ihr Text stammt: „Wörtlich aus
+        `CLAUDE.md` übernommen“ oder „Hausgemacht, nicht übernommen“.
+
+        Die zweite Marke ist seit 2026-11-01 nötig: `ff-oberflaeche/references/
+        web-richtlinien.md` ersetzt die entfernte Fremd-Liste und ist bewusst
+        eigene Arbeit – ein Text, der wie eine Übernahme aussieht, aber keine ist,
+        wäre die schlechtere Lüge. Wer „wörtlich“ schreibt, muss sich am
+        früheren Kern messen lassen: jeder Abschnittstitel muss dort gestanden
+        haben (sonst wurde zusammengefasst und als Treue verkauft).
+        """
         wurzel = sv.Path(WURZEL)
         alt = os.path.join(WURZEL, ".cache", "CLAUDE.md.orig")
         if not os.path.exists(alt):
@@ -103,7 +111,14 @@ class EchterStandTests(unittest.TestCase):
             friher = fh.read()
         for pfad in (wurzel / sv.SKILL_ORDNER).glob(f"{sv.EIGEN_PRÄFIX}*/references/*.md"):
             text = pfad.read_text(encoding="utf-8")
-            self.assertIn("Wörtlich aus `CLAUDE.md` übernommen", text, str(pfad))
+            uebernommen = "Wörtlich aus `CLAUDE.md` übernommen" in text
+            selbst = "Hausgemacht, nicht übernommen" in text
+            self.assertTrue(uebernommen or selbst,
+                            f"{pfad} nennt keine Herkunft – weder Übernahme noch eigenes Werk")
+            self.assertFalse(uebernommen and selbst,
+                             f"{pfad} beansprucht beide Herkünfte gleichzeitig")
+            if selbst:
+                continue
             for ueberschrift in [ln[4:].strip() for ln in text.split("\n") if ln.startswith("### ")]:
                 self.assertIn(ueberschrift, friher,
                               f"„{ueberschrift}“ in {pfad.name} stammt nicht aus dem Kern")
@@ -117,7 +132,14 @@ class EchterStandTests(unittest.TestCase):
                          "vendored Skills ohne Lizenz-Eintrag")
         for name in fremde:
             eintrag = register["skills"][name]
-            self.assertIn(eintrag["lizenz"], ("MIT", "Apache-2.0", "unbekannt"), name)
+            lizenz = str(eintrag["lizenz"]).strip().casefold().replace("_", "-")
+            if lizenz not in sv.FREIE_LIZENZEN:
+                self.assertIn("ausnahme", eintrag,
+                              f"{name}: Lizenz „{eintrag['lizenz']}“ ist keine nachprüfbare "
+                              "Freigabe und hat keine Ausnahme – Grund, Entscheidung und Frist "
+                              "sind Pflicht")
+            else:
+                self.assertIn(eintrag["lizenz"], ("MIT", "Apache-2.0"), name)
             if eintrag["lizenz"] != "unbekannt":
                 da = [p.name for p in (wurzel / sv.SKILL_ORDNER / name).iterdir()
                       if p.name.upper().startswith("LICENSE")]
@@ -245,6 +267,31 @@ class LizenzTests(unittest.TestCase):
                 "fremd": {"quelle": "a/b", "lizenz": "unbekannt"}}})
             funde, _ = _befunde(wurzel)
             self.assertTrue([f for f in funde if f.klasse == "K6" and "Ausnahme" in f.meldung])
+
+    def test_sonderlizenz_ohne_ausnahme_ist_befund(self):
+        """Der Fall `xlsx`/`pdf`/`docx` aus anthropics/skills: diese Ordner tragen
+        eine vorbehaltene Lizenz mit Verbot, die Materialien außerhalb des Dienstes
+        zu behalten. Das ist kein Freifahrtschein, weil drei andere Ordner desselben
+        Hauses Apache-2.0 zeigen – also derselbe Ausnahmekern wie bei „unbekannt“,
+        sonst nichts."""
+        with tempfile.TemporaryDirectory() as tmp:
+            wurzel = self._wurzel(tmp, {"schema": 1, "eigene": {"skills": ["ff-eins"]}, "skills": {
+                "fremd": {"quelle": "a/b", "lizenz": "vorbehalten"}}})
+            funde, _ = _befunde(wurzel)
+            self.assertTrue([f for f in funde if f.klasse == "K6" and "vorbehalten" in f.meldung
+                             and "Ausnahme" in f.meldung])
+
+    def test_sonderlizenz_mit_ausnahme_verlangt_dennoch_text(self):
+        """Eine Entscheidung ersetzt den Lizenztext nicht: wer eine Sonderlizenz in
+        Kauf nimmt, muss sie trotzdem im Ordner liegen haben."""
+        with tempfile.TemporaryDirectory() as tmp:
+            wurzel = self._wurzel(tmp, {"schema": 1, "eigene": {"skills": ["ff-eins"]}, "skills": {
+                "fremd": {"quelle": "a/b", "lizenz": "vorbehalten", "ausnahme": {
+                    "grund": "Tabellenimport, solange kein eigener Reader trägt",
+                    "entscheidung": "Betrieb bis zum eigenen Import, dann entfernen",
+                    "faellig": "2099-12-31"}}}})
+            funde, _ = _befunde(wurzel)
+            self.assertTrue([f for f in funde if f.klasse == "K6" and "Lizenztext" in f.meldung])
 
     def test_abgelaufene_frist_warnt_nur(self):
         with tempfile.TemporaryDirectory() as tmp:

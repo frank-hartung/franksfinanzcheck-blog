@@ -39,6 +39,12 @@ PRÜFUNGEN
   K7  Verweise ins Regelwerk lösen auf: `CLAUDE.md §N` / „Regel N“ zeigt auf
       ein existierendes nummeriertes Gebot, „Abschnitt X“ auf eine Überschrift
       in `CLAUDE.md` oder einem Skill.
+  K8  Siegelstand: das Integritätsschloss (`data/integrity_lock.json`) muss den
+      Regelkern der Skills mittragen – Wache und Lizenz-Register entscheiden
+      über den Bestand, das sind keine Notizen. Gelesen wird, was `scripts/integrity_guard.py` als
+      KRITISCH/FEST führt. Immer eine Warnung mit Schlusszeile, nie ein Befund:
+      Zeichnen ist ein Betreiberakt, und ein Gate, das dafür rot wird, bestraft
+      die falsche Seite (Issue #316 – der HARD STOP traf die Content-Engine).
 
 Aufruf:
   python3 scripts/skills_vertrag.py                  # prüfen (Befund = Exit 1)
@@ -51,6 +57,8 @@ Exit: 0 = sauber · 1 = Befund · 2 = Hausfehler (unlesbare Quelle, Selbsttest)
 from __future__ import annotations
 
 import argparse
+import ast
+import hashlib
 import json
 import os
 import re
@@ -75,6 +83,15 @@ NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 DESC_MIN, DESC_MAX = 80, 1024
 EIGEN_PRÄFIX = "ff-"
 LIZENZ_MUSTER = ("LICENSE", "LICENCE", "COPYING")
+SIEGEL_GUARD = Path("scripts/integrity_guard.py")
+SIEGEL_LOCK = Path("data/integrity_lock.json")
+# Wer diese zwei Dateien ändert, ändert die Regel – nicht nur ihren Text. Das
+# Integritätsschloss soll den Austausch laut machen; geprüft wird das in K8.
+SIEGEL_PFLICHT = ("scripts/skills_vertrag.py", "data/skill_lizenzen.json")
+# Lizenzen, deren Text hier liegend nachgeprüft werden kann. Alles andere – auch
+# eine im Upstream-Ordnerbehälter zu lesende Sonderklausel – braucht denselben
+# Ausnahmekern wie „unbekannt“: Grund, Entscheidung, Frist.
+FREIE_LIZENZEN = ("mit", "apache-2.0")
 
 Fund = namedtuple("Fund", "klasse pfad stelle meldung")
 Warn = namedtuple("Warn", "klasse pfad stelle meldung")
@@ -418,10 +435,16 @@ def k6_lizenz(root: Path, stichtag: date) -> tuple[list[Fund], list[Warn]]:
         if not lizenz:
             funde.append(Fund("K6", str(LIZENZ_DATEI), name, "Eintrag ohne `lizenz`."))
             continue
-        if lizenz.lower() == "unbekannt":
+        if lizenz.strip().casefold().replace("_", "-") not in FREIE_LIZENZEN:
+            # Kein „unbekannt“ und doch keine Freigabe: Das Haus anthropics/skills
+            # mischt die Lizenzen je Ordner (skill-creator/frontend-design/
+            # webapp-testing Apache-2.0, xlsx/pdf/docx eine vorbehaltene Lizenz mit
+            # Verbot, die Materialien außerhalb des Dienstes zu behalten). Wer so
+            # einen Ordner vendort, braucht die gleiche Entscheidung wie bei
+            # „unbekannt“ – das Repo-Zeichen allein ist kein Nachweis.
             ausnahme = daten.get("ausnahme")
             if not isinstance(ausnahme, dict):
-                funde.append(Fund("K6", rel, "", "Lizenz „unbekannt“ ohne Ausnahme – "
+                funde.append(Fund("K6", rel, "", f"Lizenz „{lizenz}“ ohne Ausnahme – "
                                                   "ein Vermerk ohne Entscheidung ist ein Wegsehen."))
                 continue
             for feld in ("grund", "entscheidung", "faellig"):
@@ -437,7 +460,13 @@ def k6_lizenz(root: Path, stichtag: date) -> tuple[list[Fund], list[Warn]]:
                                       "Ausnahme abgelaufen – Lizenzfrage wieder offen "
                                       "(Bericht und Warnung, kein Blocker; so verhindert eine "
                                       "Frist einen Dauerläufer, ohne die Auslieferung zu geiseln)."))
-            continue
+            if lizenz.strip().casefold() == "unbekannt":
+                # Nur hier endet der Block: „unbekannt“ heißt, es gibt keinen
+                # Text, der neben dem SKILL.md liegen könnte. Bei einer
+                # bekannten Sonderlizenz gilt der nächste Prüfschritt weiter –
+                # die Ausnahme dokumentiert die Entscheidung, sie ersetzt
+                # nicht den Volltext.
+                continue
         hat = [p.name for p in sorted((root / rel).iterdir())
                if any(p.name.upper().startswith(m) for m in LIZENZ_MUSTER)]
         if not hat:
@@ -485,6 +514,95 @@ def k7_verweise(root: Path) -> list[Fund]:
     return funde
 
 
+# ---------------------------------------------------------------- K8 Siegelstand
+def _siegel_klassen(root: Path) -> tuple[set[str], set[str]]:
+    """`KRITISCH` und `FEST` aus `scripts/integrity_guard.py` – gelesen, nicht importiert.
+
+    Der Import würde das Skript ausführen: es liest `sys.argv` schon beim Laden
+    und signiert je nach Aufruf. `ast` reicht, so stehen die beiden Mengen da.
+    """
+    quelltext = _text(root, SIEGEL_GUARD)
+    if quelltext is None:
+        return set(), set()
+    try:
+        modul = ast.parse(quelltext)
+    except SyntaxError:
+        return set(), set()
+    mengen: dict[str, set[str]] = {}
+    for knoten in getattr(modul, "body", []):
+        if not isinstance(knoten, ast.Assign) or not isinstance(knoten.value, (ast.Set, ast.List, ast.Tuple)):
+            continue
+        for ziel in knoten.targets:
+            if isinstance(ziel, ast.Name) and ziel.id in ("KRITISCH", "FEST"):
+                werte = {e.value for e in knoten.value.elts if isinstance(e, ast.Constant) and isinstance(e.value, str)}
+                mengen.setdefault(ziel.id, set()).update(werte)
+    return mengen.get("KRITISCH", set()), mengen.get("FEST", set())
+
+
+def k8_siegel(root: Path) -> list[Warn]:
+    """K8 meldet den Siegelstand – als Warnung, nie als Befund.
+
+    Signieren ist ein Betreiberakt: Ein Gate, das eine ungezeichnete Datei hart
+    rot macht, bestraft die falsche Seite. Am 19.09.2026 (Issue #316) stoppte
+    genau so ein HARD STOP die Content-Engine im ersten Schritt, weil sechs
+    geheilte Skripte nicht neu gezeichnet waren – der Alarm galt der Produktion,
+    nicht dem Saboteur. Deshalb: Hinweis mit der Schlusszeile, Entscheidung beim
+    Menschen.
+    """
+    text = _text(root, SIEGEL_LOCK)
+    if text is None:
+        return [Warn("K8", str(SIEGEL_LOCK), "",
+                     "kein Siegel – der Schutz vor Austausch der Regelwachen ist ungeklärt "
+                     "(Betreiberakt: `python3 scripts/integrity_guard.py --set-current`).")]
+    try:
+        lock = json.loads(text)
+    except ValueError as exc:
+        return [Warn("K8", str(SIEGEL_LOCK), str(getattr(exc, "lineno", "")),
+                     "unlesbar – ein kaputtes Siegel meldet Scheinsicherheit, nie Sicherheit. "
+                     "Belegte Heilung: `python3 scripts/integrity_guard.py --repair-lock --dry-run`.")]
+    dateien = lock.get("files") if isinstance(lock, dict) else None
+    if not isinstance(dateien, dict):
+        return [Warn("K8", str(SIEGEL_LOCK), "files",
+                     "fehlt oder ist kein Objekt – das Siegel ist nicht prüfbar "
+                     "(`--repair-lock --dry-run` zeigt die Fassung aus Git).")]
+    kritisch, fest = _siegel_klassen(root)
+    if not kritisch and not fest:
+        return [Warn("K8", str(SIEGEL_GUARD), "",
+                     "KRITISCH/FEST nicht lesbar – der Siegelumfang ist nicht feststellbar. "
+                     "Das ist kein Grund zum Wegsehen: `python3 scripts/integrity_guard.py --drift-audit` "
+                     "antwortet trotzdem.")]
+    warnungen: list[Warn] = []
+    for rel in SIEGEL_PFLICHT:
+        gezeichnet = rel in dateien
+        in_der_klasse = rel in kritisch or rel in fest
+        if not in_der_klasse and not gezeichnet:
+            warnungen.append(Warn("K8", rel, "",
+                                  "steht weder in KRITISCH/FEST noch im Siegel – die Datei entscheidet über "
+                                  "Lizenzen und Kernbudget, ihr Austausch wäre lautlos. Schluss in einem Zug: "
+                                  "in `FEST` aufnehmen UND `python3 scripts/integrity_guard.py "
+                                  f"--add={rel}` zeichnen (nur ein Stand mit grünen Selbsttests), sonst steht "
+                                  "das PR-Gate auf Rot, ohne dass jemand etwas verschuldet hätte."))
+            continue
+        if in_der_klasse and not gezeichnet:
+            warnungen.append(Warn("K8", rel, "",
+                                  "in KRITISCH/FEST, aber nie gezeichnet – jede Abweichung bleibt unbemerkt. "
+                                  f"Schluss: `python3 scripts/integrity_guard.py --add={rel}`."))
+            continue
+        pfad = root / rel
+        if not pfad.is_file():
+            warnungen.append(Warn("K8", rel, "Siegel",
+                                  "das Siegel trägt diese Datei, sie liegt aber nicht im Baum – "
+                                  "`python3 scripts/integrity_guard.py --drift-audit` zeigt die Herkunft."))
+            continue
+        if hashlib.sha256(pfad.read_bytes()).hexdigest() != dateien.get(rel):
+            warnungen.append(Warn("K8", rel, "Siegel",
+                                  "Abweichung vom gezeichneten Stand. Belegt (committet, bytegleich, kein "
+                                  "KRITISCH) ist das signierbar mit `python3 scripts/integrity_guard.py --heal`; "
+                                  "ungeklärt ist es ein Fall für den Betreiber, nicht für eine Unterschrift unter "
+                                  "einem defekten Stand."))
+    return warnungen
+
+
 # ---------------------------------------------------------------- Bilanz
 def befunde(root: Path, stichtag: date | None = None) -> tuple[list[Fund], list[Warn], int]:
     tag = stichtag or date.today()
@@ -496,7 +614,7 @@ def befunde(root: Path, stichtag: date | None = None) -> tuple[list[Fund], list[
     k4_f, k4_w = k4_herkunft(root)
     k6_f, k6_w = k6_lizenz(root, tag)
     alle += k4_f + k6_f
-    warnungen += k4_w + k6_w
+    warnungen += k4_w + k6_w + k8_siegel(root)
     ordner = root / SKILL_ORDNER
     geprueft = len([p for p in ordner.iterdir() if p.is_dir()]) if ordner.is_dir() else 0
     return alle, warnungen, geprueft
@@ -504,7 +622,7 @@ def befunde(root: Path, stichtag: date | None = None) -> tuple[list[Fund], list[
 
 def bericht(funde: list[Fund], warnungen: list[Warn], geprueft: int) -> str:
     zeilen = [
-        "## Skill-Vertrag – Kernbudget, Herkunft, Erreichbarkeit",
+        "## Skill-Vertrag – Kernbudget, Herkunft, Lizenz, Siegelstand",
         "",
         f"Geprüft: {geprueft} Skill(s) unter `{SKILL_ORDNER}`, Kern `{KERN}`, "
         f"Lock `{LOCK}`, Lizenz-Register `{LIZENZ_DATEI}`.",
@@ -512,7 +630,8 @@ def bericht(funde: list[Fund], warnungen: list[Warn], geprueft: int) -> str:
     ]
     if not funde and not warnungen:
         zeilen.append("✅ Befundfrei: der Kern hält sein Budget, jeder Skill ist erreichbar, "
-                      "vendored Skills sind lizenziert und jeder Befehl im Runbook läuft.")
+                      "vendored Skills sind lizenziert, jeder Befehl im Runbook läuft und der "
+                      "Siegelstand ist geklärt.")
     if warnungen:
         zeilen += ["", "**Warnungen (kein Blocker):**", ""]
         zeilen += [f"- {w.kurz()}" for w in warnungen]
@@ -557,7 +676,8 @@ def _sauberer_kern() -> str:
 def _fixture(wurzel: Path, *, kern: str | None = None, skill_md: str | None = None,
              refs: dict[str, str] | None = None, lock: dict | None = None,
              lizenz: dict | None = None, pakete: dict | None = None,
-             fremd: dict[str, str] | None = None) -> Path:
+             fremd: dict[str, str] | None = None, siegel: dict | None = None,
+             guard_fest: list[str] | None = "default") -> Path:
     _schreibe(wurzel, KERN, kern if kern is not None else _sauberer_kern())
     _schreibe(wurzel, "package.json", json.dumps({"name": "x", "scripts": pakete or {}}))
     desc = ("Benutzen, wenn dieses Repo geprüft werden muss: Commit, Merge, Befund, "
@@ -575,6 +695,23 @@ def _fixture(wurzel: Path, *, kern: str | None = None, skill_md: str | None = No
     if lizenz is None:
         lizenz = {"schema": 1, "skills": {}, "eigene": {"skills": ["ff-eins"]}}
     _schreibe(wurzel, str(LIZENZ_DATEI), json.dumps(lizenz, ensure_ascii=False))
+    # Siegel: ohne Angabe trägt der Fixture-Baum beide Schutzdateien – sonst
+    # meldet jede Gegenprobe eine K8-Warnung, die mit dem Fall nichts zu tun hat.
+    if guard_fest is not None:
+        mengen = "KRITISCH = set()\nFEST = {%s}\n" % ", ".join(
+            '"%s"' % rel for rel in (guard_fest if isinstance(guard_fest, list) else SIEGEL_PFLICHT))
+        _schreibe(wurzel, str(SIEGEL_GUARD), "#!/usr/bin/env python3\n" + mengen)
+        # Die Wache selbst liegt im Fixture nicht im Baum – ohne Platzhalter
+        # wäre jeder saubere Fall ein „Siegel trägt eine fehlende Datei".
+        if not (wurzel / SIEGEL_PFLICHT[0]).is_file():
+            _schreibe(wurzel, SIEGEL_PFLICHT[0],
+                      "#!/usr/bin/env python3\n# Fixture-Platzhalter für die Wache.\n")
+    if siegel is None and guard_fest is not None:
+        gezeichnet = {rel: hashlib.sha256((wurzel / rel).read_bytes()).hexdigest()
+                      for rel in SIEGEL_PFLICHT if (wurzel / rel).is_file()}
+        siegel = {"schema": 1, "files": gezeichnet}
+    if siegel is not None:
+        _schreibe(wurzel, str(SIEGEL_LOCK), json.dumps(siegel, ensure_ascii=False))
     return wurzel
 
 
@@ -687,7 +824,43 @@ def selftest() -> int:
         if "K7" not in klassen:
             fehler.append(f"K7: toter Verweis ins Regelwerk bleibt ohne Befund (Klassen: {sorted(klassen)}).")
 
-        # 13) Der Selbsttest prüft sich selbst, nicht das Netz: kein Befund
+        # 13) K8: Siegelumfang kennt die zwei Schutzdateien nicht = Warnung, nie
+        #     Befund (Zeichnen bleibt Betreiberakt, das Gate darf nicht kneifen).
+        wurzel = _fixture(Path(tmp) / "k8a", guard_fest=["assets/css/extended/custom.css"],
+                          siegel={"schema": 1, "files": {}})
+        funde, warnungen, _ = befunde(wurzel, stichtag=date(2027, 1, 15))
+        geprueft += 1
+        if any(f.klasse == "K8" for f in funde):
+            fehler.append("K8: ungezeichnete Datei darf das Gate nicht blockieren – Zeichnen ist Betreiberakt.")
+        if sum(1 for w in warnungen if w.klasse == "K8") != 2:
+            fehler.append(f"K8: 2 Warnungen (Wache + Register) erwartet, gekommen "
+                          f"{sum(1 for w in warnungen if w.klasse == 'K8')}.")
+
+        # 14) K8: in der Klasse, aber nie gezeichnet – und: gezeichnet = still.
+        wurzel = _fixture(Path(tmp) / "k8b", siegel={"schema": 1, "files": {}})
+        _, warnungen, _ = befunde(wurzel, stichtag=date(2027, 1, 15))
+        geprueft += 1
+        if not any(w.klasse == "K8" and "nie gezeichnet" in w.meldung for w in warnungen):
+            fehler.append("K8: Datei in FEST, aber ohne Zeichnung bleibt ohne Hinweis.")
+        wurzel = _fixture(Path(tmp) / "k8c")
+        _, warnungen, _ = befunde(wurzel, stichtag=date(2027, 1, 15))
+        geprueft += 1
+        if any(w.klasse == "K8" for w in warnungen):
+            fehler.append("K8: ein tragendes Siegel meldet trotzdem – " + warnungen[0].kurz())
+
+        # 15) K6: eine Lizenz außerhalb des Freie-Sets braucht denselben
+        #     Ausnahmekern wie „unbekannt“ (der Fall xlsx: vorbehaltene Lizenz).
+        wurzel = _fixture(Path(tmp) / "k6d",
+                          fremd={"fremd-skill": "---\nname: fremd-skill\ndescription: „d“\n---\n\n# F\n"},
+                          lock={"version": 1, "skills": {"fremd-skill": {"source": "a/b", "skillPath": "s/SKILL.md"}}},
+                          lizenz={"schema": 1, "eigene": {"skills": ["ff-eins"]}, "skills": {
+                              "fremd-skill": {"quelle": "a/b", "lizenz": "vorbehalten"}}})
+        funde, _, _ = befunde(wurzel, stichtag=date(2027, 1, 15))
+        geprueft += 1
+        if not any(f.klasse == "K6" and "vorbehalten" in f.meldung for f in funde):
+            fehler.append("K6: eine Lizenz außerhalb des Freie-Sets ohne Ausnahme bleibt ohne Befund.")
+
+        # 16) Der Selbsttest prüft sich selbst, nicht das Netz: kein Befund
         #     hängt an einer Wanduhr (Datum ist gesetzt, nicht geraten).
         funde_heute, _, _ = befunde(Path(tmp) / "sauber")
         geprueft += 1
@@ -703,13 +876,14 @@ def selftest() -> int:
     print(f"✅ skills_vertrag --selftest OK ({geprueft} eingefrorene Fälle: Gegenprobe, Kernbudget, "
           "Name und Beschreibung, verwaiste Referenz, ff-* im Lock, Fremd-Skill ohne Herkunft, "
           "toter Befehl, Vorlagen-Ausnahme, Lizenztext, Ausnahme ohne und mit abgelaufener Frist, "
-          "toter Regelwerk-Verweis, Uhr-Unabhängigkeit).")
+          "Lizenz außerhalb des Freie-Sets, toter Regelwerk-Verweis, Siegelumfang und fehlende "
+          "Zeichnung, Uhr-Unabhängigkeit).")
     return 0
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Skill-Vertrag: Kernbudget, Herkunft, "
-                                                 "Erreichbarkeit, Befehle, Lizenzen, Verweise")
+                                                 "Erreichbarkeit, Befehle, Lizenzen, Verweise, Siegelstand")
     parser.add_argument("--selftest", action="store_true", help="Sabotage-Schutz (offline, uhrfest)")
     parser.add_argument("--json", action="store_true", help="Maschinenausgabe")
     parser.add_argument("--md", action="store_true", help="Markdown für die Lauf-Summary")
