@@ -66,6 +66,7 @@ from __future__ import annotations
 
 import argparse
 import glob
+import hashlib
 import importlib.util
 import json
 import os
@@ -182,25 +183,62 @@ def _leere_verzeichnisse(root: str) -> set:
     return treffer
 
 
+def _pfad_abdruck(pfad: str) -> str:
+    """SHA-256 (kurz) des Dateiinhalts – oder eine Marke, wenn nicht lesbar.
+
+    WARUM INHALT STATT NUR STATUS (Dauerheilung WF-D4E0 #983, 01.11.2026):
+    `git status` meldet eine bereits geänderte Datei weiter als `M pfad`,
+    auch wenn ein Selbsttest sie EIN WEITERES MAL beschreibt. Die Statuszeile
+    allein ist dann blind für den zweiten Schreibvorgang – `nachher − vorher`
+    bleibt leer, der Beweislauf heilt unbemerkt (genau die C15-Klasse, die am
+    31.10. den Vorrat rot machte: `copy_editing_gate --selftest` beschrieb
+    `data/lektor_history.jsonl`). Der Inhalt macht jeden Schreibvorgang
+    sichtbar. Dieselbe Härtung fährt `copy_editing_gate.py` seit #987; hier
+    wird die Wächter-Wache, die jenen Befund trägt, auf denselben Stand gebracht.
+
+    Auf einem frischen CI-Baum ist `git status` leer – es wird nichts gelesen,
+    die Prüfung kostet nichts. Nur ein bereits schmutziger Pfad wird gehasht.
+    """
+    try:
+        with open(pfad, "rb") as fh:
+            return hashlib.sha256(fh.read()).hexdigest()[:16]
+    except OSError:
+        return "—"
+
+
 def arbeitsbaum(root: str = BLOG_DIR):
     """Zustand des Arbeitsbaums als Menge, oder None wenn Git nicht antwortet.
 
     Zwei Spuren in EINER Menge, damit jeder Vergleich (nachher − vorher)
     beide Schadensarten sieht:
-      · `git status --porcelain` – geänderte, neue, gelöschte Dateien,
+      · `git status --porcelain` (Status UND Inhalts-Abdruck) – geänderte,
+        neue, gelöschte Dateien; der Abdruck fängt auch den Schreibvorgang in
+        eine schon vorher geänderte Datei (C15, #983 – siehe `_pfad_abdruck`),
       · `_leere_verzeichnisse()` – was Git grundsätzlich nicht zeigen kann.
 
     None heißt: Die C15-Wache kann hier nicht beweisen – und das wird gemeldet,
     statt die Prüfung still auszuschalten.
     """
     try:
-        r = subprocess.run(("git", "-C", root, "status", "--porcelain"),
+        # -z: NUL-getrennte, unquotierte Pfade (robust bei Leerzeichen/Umlauten);
+        # bei Umbenennung/Kopie folgt der Quellpfad als eigenes Feld.
+        r = subprocess.run(("git", "-C", root, "status", "--porcelain=v1", "-z"),
                            capture_output=True, text=True, timeout=60)
     except (OSError, subprocess.SubprocessError):
         return None
     if r.returncode != 0:
         return None
-    spuren = {z.strip() for z in r.stdout.splitlines() if z.strip()}
+    spuren = set()
+    felder = r.stdout.split("\0")
+    i = 0
+    while i < len(felder):
+        eintrag, i = felder[i], i + 1
+        if len(eintrag) < 4:
+            continue
+        status, pfad = eintrag[:2], eintrag[3:]
+        if "R" in status or "C" in status:
+            i += 1                       # Quellpfad von Umbenennung/Kopie überspringen
+        spuren.add(f"{status} {pfad}#{_pfad_abdruck(os.path.join(root, pfad))}")
     return spuren | _leere_verzeichnisse(root)
 
 
@@ -540,7 +578,13 @@ def _selftest() -> int:
               "import os, sys\n"
               "with open(os.path.join(os.environ['RUNNER_BAUM'],\n"
               "                       'heiler-rest.md'), 'w') as fh:\n"
-              "    fh.write('x')\nsys.exit(0)\n")
+              "    fh.write('x')\n"
+              # #983-Signatur: an eine SCHON VORHER geänderte, versionierte
+              # Chronik abhängen. Die Statuszeile (`M chronik.jsonl`) bleibt
+              # gleich – nur der Inhalts-Abdruck sieht den zweiten Append.
+              "with open(os.path.join(os.environ['RUNNER_BAUM'],\n"
+              "                       'chronik.jsonl'), 'a') as fh:\n"
+              "    fh.write('{\"selbsttest heilt\": 3}\\n')\nsys.exit(0)\n")
         # Ordner-Leiche: grün, schreibt keine Datei – lässt aber ein LEERES
         # Verzeichnis unter content/ zurück (der reale n8n-Bridge-Fall).
         # Git meldet das nie; die Wache muss es trotzdem finden.
@@ -568,6 +612,20 @@ def _selftest() -> int:
                     os.path.join(skripte, "selftest_clock.py"))
         subprocess.run(("git", "-C", tmp, "init", "-q", "."),
                        capture_output=True, text=True, timeout=60)
+        # #983: eine versionierte Chronik, die ein früherer Schritt bereits
+        # geändert hat. `schreiber.py` hängt zur Beweiszeit weiter an – die
+        # C15-Wache muss das sehen, obwohl `git status` weiter `M chronik.jsonl`
+        # meldet. Ohne Inhalts-Abdruck wäre dieser Append unsichtbar.
+        chronik = os.path.join(tmp, "chronik.jsonl")
+        with open(chronik, "w", encoding="utf-8") as fh:
+            fh.write('{"baseline": 1}\n')
+        subprocess.run(("git", "-C", tmp, "add", "chronik.jsonl"),
+                       capture_output=True, text=True, timeout=60)
+        subprocess.run(("git", "-C", tmp, "-c", "user.email=selftest@local",
+                        "-c", "user.name=selftest", "commit", "-qm", "chronik"),
+                       capture_output=True, text=True, timeout=60)
+        with open(chronik, "a", encoding="utf-8") as fh:
+            fh.write('{"frueherer schritt": 2}\n')
 
         os.environ["RUNNER_BOMB_GRENZE"] = (dt.date.today()
                                             + dt.timedelta(days=2)).isoformat()
@@ -603,6 +661,10 @@ def _selftest() -> int:
             fehler.append("Erwähnung ohne Implementierung bleibt ohne Hinweis")
         if "heiler-rest.md" not in texte or "C15" not in texte:
             fehler.append("C15-Wache sieht den schreibenden Selbsttest nicht")
+        if "chronik.jsonl" not in texte:
+            fehler.append("C15-Wache sieht den Append in eine schon vorher geänderte "
+                          "Datei nicht (#983: die Statuszeile allein ist blind, nur der "
+                          "Inhalts-Abdruck fängt den zweiten Schreibvorgang)")
         if "LEERES VERZEICHNIS content/entwuerfe/" not in texte:
             fehler.append("C15-Wache sieht das leer zurückgelassene Verzeichnis "
                           "nicht – genau diese Lücke ließ am 03.10.2026 den "
