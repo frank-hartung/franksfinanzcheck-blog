@@ -10,7 +10,7 @@ pillar: "mietwagen"
 author: "Frank Hartung"
 keywords: ["Flugverspätung Entschädigung", "Fluggastrechte", "Entschädigung beantragen", "Flugverspätung", "Entschädigung"]
 pin_title: "Flugverspätung Entschädigung: So holst du dein Geld zurück"
-pin_description: "*Werbung | Flugverspätung Entschädigung sichern: Lerne deine Fluggastrechte kennen. Wir zeigen dir, wie du einfach eine Entschädigung beantragen kannst. Tipps vom Pro Mehr Spartipps auf FranksFinanzcheck! #flugverspaetung #entschaedigung #fluggastrechte"
+pin_description: "*Werbung | Flugverspätung Entschädigung: Prüfe deine Fluggastrechte, sichere Belege und fordere dein Geld Schritt für Schritt zurück. Mehr Spartipps auf FranksFinanzcheck! #flugverspaetung #entschaedigung #fluggastrechte"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
