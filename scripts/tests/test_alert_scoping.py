@@ -315,6 +315,37 @@ class ProdScopingAlarm(unittest.TestCase):
         self.assertIn("workerGateFailed ? 'sicherheit-worker'", code)
         self.assertIn("liveNachweisFailed ? 'sicherheit-nachweis'", code)
 
+    def test_972_abhaengigkeits_audit_hat_eigenen_rat(self):
+        # WF-E813 / #972 (01.11.2026): Im Lauf 41199051921 waren der
+        # Abhängigkeits-Job (sieben HIGH-Funde an pypdf==6.21.2) UND die
+        # Live-Messung rot. Die Meldung riet ausschließlich zu Headern und
+        # Worker – für den Audit-Job gab es keine Klasse. Ein Rat, der den
+        # roten Job nicht nennt, ist eine falsche Fährte: Der Befolgende
+        # repariert die Edge, der Bestand bleibt rot.
+        code = _kommentarfrei(_text())
+        m = re.search(r"const runbookKlasse = (.*?);", code, re.S)
+        self.assertIsNotNone(m)
+        klassen = re.findall(r"'([a-z-]+)'", m.group(1))
+        self.assertIn("sicherheit-abhaengigkeiten", klassen)
+        # Eigene Ursache ⇒ eigener Rat vor den Live-Klassen.
+        self.assertLess(klassen.index("sicherheit-abhaengigkeiten"), klassen.index("sicherheit-live"))
+        # Erkannt wird an den Schrittnamen des Jobs – nicht am Jobnamen: Der
+        # Rat muss auch greifen, wenn der Job umbenannt wird (Lehre aus #922).
+        self.assertIn("includes('Advisory-Audit')", code)
+        self.assertIn("includes('Struktur-Gate – jeder Pin')", code)
+        gewaehlt = re.findall(r"runbookKlasse === '([a-z-]+)'", code)
+        self.assertIn("sicherheit-abhaengigkeiten", gewaehlt)
+        # Der Rat nennt den Schließpfad (Runbook E) und die Werkzeuge.
+        self.assertIn("npm run deps:audit", code)
+        self.assertIn("npm run deps:check", code)
+        self.assertIn("docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, Abschnitt E", code)
+        # Gegenprobe: Die Live-Klassen bleiben unverändert erreichbar.
+        for alt in ("sicherheit-header", "sicherheit-worker", "sicherheit-nachweis"):
+            self.assertIn(alt, gewaehlt)
+        # Und nichts davon ist in der Simulation vergessen.
+        sim = (REPO / "scripts/tests/sim/alert_scoping_sim.mjs").read_text(encoding="utf-8")
+        self.assertIn("#972", sim, "Simulation ohne Audit-Szenario – die Klasse wäre dort ungeprüft")
+
     def test_tagesdefizit_fachkanal_verhindert_duplikat(self):
         # Vertrag 6 (#602): Ein ehrlich roter Quotenschritt darf nur dann
         # stummgeschaltet werden, wenn das engine-deficit-Fach-Issue mit

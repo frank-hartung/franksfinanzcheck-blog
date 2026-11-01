@@ -58,10 +58,16 @@ jobs:
       - name: Repository auschecken
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Abhängigkeiten installieren
+      - name: Abhängigkeiten installieren (gepinnt, ein Manifest)
+        # WF-E813 / #972 (01.11.2026): Hier standen sechs Pakete AD HOC.
+        # Sie waren in keinem Manifest – der Advisory-Audit hat sie nie
+        # geprüft, Dependabot hat sie nie aktualisiert. Jetzt eine Quelle:
+        # requirements-poppy.txt (exakte Pins, Regel A1/A7 der
+        # Abhängigkeits-Wache).
         run: |
-          python3 -m pip install -q pyyaml feedparser pypdf \
-            youtube-transcript-api trafilatura lxml_html_clean
+          set -euo pipefail
+          python3 -m pip install -q --disable-pip-version-check \
+            -r requirements-poppy.txt
 
       - name: Selbsttest (fail-closed)
         run: |

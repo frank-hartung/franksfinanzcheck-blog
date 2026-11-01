@@ -35,6 +35,27 @@
 #       Advisory-API und nennt Paket, Version, Schweregrad, Fix und
 #       Herkunftsdatei.
 #
+#  DIE DRITTE BLINDSTELLE (WF-E813 / #972, 01.11.2026)
+#  --------------------------------------------------------------
+#  Der Bestand war nach A1/A2 sauber gepinnt – und trotzdem lief
+#  am 31.10.2026 ein grüner Struktur-Lauf neben einem roten Audit:
+#  `pypdf==6.21.2` (7× HIGH) stand im Lock, Dependabot hatte den
+#  Fix-PR (#988) geöffnet, aber der Struktur-Test sah keinen Grund,
+#  ihn zu verlangen. Gleichzeitig installieren mehrere Workflows
+#  Pakete AD HOC aus der Registry (`pip install pyyaml pypdf …`) –
+#  diese Versionen stehen in keiner Requirements-Datei und wurden
+#  vom Audit deshalb NIE geprüft. „0 Struktur-Fehler“ war damit
+#  keine Aussage über alles, was ausgeliefert wird.
+#  Zwei Regeln schließen das:
+#    A7  Ein `pip install` in einem Workflow ohne `-r <datei>` ist
+#        nur erlaubt, wenn JEDES Paket exakt gepinnt ist (`==`).
+#    A8  Dasselbe für `pip install` im Image-Build (Dockerfile):
+#        ein Build-Artefakt ist Auslieferung.
+#  Und A9 macht den Audit selbst ehrlich: Liegt für die geprüfte
+#  Version ein Fix vor, ist der Befund nur dann geschlossen, wenn
+#  der BESTAND den Fix bereits ausliefert – sonst meldet der Lauf
+#  „veralteter Pin“, nicht bloß „betroffen“.
+#
 #  ZWEI BETRIEBSARTEN, WEIL SIE VERSCHIEDENE FRAGEN BEANTWORTEN
 #  ------------------------------------------------------------
 #    --check   OFFLINE, deterministisch, in Sekunden:
@@ -113,6 +134,8 @@ REGEL_LOCK = "A3"         # Manifest mit Abhängigkeiten ohne Lockfile (Warnung)
 REGEL_AKTION = "A4"       # Action ohne SHA-Pin oder ohne Versionskommentar
 REGEL_DOCKER = "A5"       # bewegliches Image-Tag
 REGEL_MEHRFACH = "A6"     # gleiche Anforderung mit zwei Versionen
+REGEL_LAUFZEIT = "A7"     # Ad-hoc-pip-Install im Workflow ohne Pin/Hash
+REGEL_IMAGE_PIP = "A8"    # pip-Install im Image-Build ohne Pin
 
 SCHWERE_FEHLER = "fehler"
 SCHWERE_WARNUNG = "warnung"
@@ -599,6 +622,139 @@ def pruefe_doppelte(root: Path) -> List[Befund]:
     return befunde
 
 
+RE_PIP_INSTALL = re.compile(r"\bpip3?\s+install\b|\bpython3?\s+-m\s+pip\s+install\b")
+RE_INSTALL_ZEILE = re.compile(
+    r"""^\s*(?:-\s*)?(?P<name>[A-Za-z0-9][A-Za-z0-9._-]*)
+        (?P<extra>\[[^\]]*\])?
+        (?P<rest>.*)$""",
+    re.VERBOSE,
+)
+# Argumente, die kein Paket nennen, sondern den Aufruf steuern.
+WERKZEUG_PAKETE = {"pip", "setuptools", "wheel"}
+PIP_SCHALTER_MIT_WERT = {
+    "--index-url", "-i", "--extra-index-url", "--find-links", "-f", "--trusted-host",
+    "--target", "-t", "--prefix", "--root", "--platform", "--python-version",
+    "--implementation", "--abi", "--src", "--upgrade-strategy", "--timeout",
+    "--retries", "--cache-dir", "--log", "--proxy", "--cert", "--client-cert",
+    "--constraint", "-c", "--requirement", "-r", "--progress-bar", "--only-binary",
+    "--no-binary", "--config-settings", "-C", "--report", "--python", "--editable", "-e",
+    "--global-option", "--install-option",
+}
+
+
+def _pip_argumente(zeile: str) -> List[str]:
+    """Zerlegt eine `pip install …`-Zeile in ihre Argumente (ohne Kommentar).
+
+    Reihenfolge ist wichtig: Erst den Befehl FINDEN, dann hinter ihm
+    abschneiden. Wer vorher an `&&` trennt, verliert genau die Kette, um die
+    es geht – `apt-get install … && pip install …` (Whisper-Image) war
+    deshalb am 01.11.2026 unsichtbar.
+    """
+    # Reine Kommentarzeilen (Dockerfile/YAML) nennen keinen Befehl – der
+    # Satz „wird nach pip install wieder entfernt“ ist Prosa, kein Install.
+    if zeile.lstrip().startswith("#"):
+        return []
+    treffer = RE_PIP_INSTALL.search(zeile)
+    if not treffer:
+        return []
+    # Zitat-Erkennung: `… pip install X …` in Prosa (Rat, Fehlertext) steht
+    # mitten im Satz; ein echter Aufruf steht am Zeilenanfang (nach
+    # Einrückung) oder nach einem Shell-Trenner.
+    vorher = zeile[: treffer.start()]
+    if vorher.strip() and not re.search(r"(?:^|[|;]|&&?|run:|RUN |\$\()\s*$", vorher):
+        return []
+    rest = zeile[treffer.end():]
+    for trenner in (" #", "\t#", "||", "&&", ";", "|"):
+        rest = rest.split(trenner, 1)[0]
+    rest = rest.split("`", 1)[0]
+    return rest.replace("\\", " ").split()
+
+
+def pruefe_pip_ad_hoc(text: str, quelle: str, regel: str) -> List[Befund]:
+    """A7/A8: `pip install` ohne Requirements-Datei muss exakt gepinnt sein.
+
+    WARUM (WF-E813 / #972): Ein Ad-hoc-Install ist eine ausgelieferte
+    Version ohne Manifest. Sie fehlt in `requirements-ci.txt`, wird vom
+    Advisory-Audit nie abgefragt und von Dependabot nie aktualisiert –
+    der Bestand kann also nachweislich grün sein und trotzdem eine
+    bekannte Schwachstelle im Lauf tragen. Ein `==` macht daraus eine
+    Aussage; `--require-hashes` ist für `-r`-Dateien weiterhin Pflicht
+    (die Wache prüft die Pins dort über A1/A2).
+    """
+    befunde: List[Befund] = []
+    for nummer, roh in _fortsetzungen(text):
+        argumente = _pip_argumente(roh)
+        if not argumente:
+            continue
+        if any(a in ("-r", "--requirement") or a.startswith("--requirement=") for a in argumente):
+            # Gepflegte Requirements-Datei: A1/A2 prüfen die Pins dort.
+            continue
+        if any(a == "-e" or a == "--editable" or a.startswith("-e") and a != "-e"
+               for a in argumente):
+            continue
+        if any(a in ("--version", "-V", "--help", "-h") for a in argumente):
+            continue
+        offen: List[str] = []
+        ueberspringen = False
+        for roh_arg in argumente:
+            if ueberspringen:
+                ueberspringen = False
+                continue
+            arg = roh_arg.strip('"\'')
+            if not arg or arg.startswith("-") and arg not in ("-e",):
+                if arg in PIP_SCHALTER_MIT_WERT:
+                    ueberspringen = True
+                continue
+            if RE_URL.match(arg) or arg.startswith(".") or "/" in arg:
+                # URL/Pfad-Abhängigkeit: keine Version, keine Registry-Aussage.
+                continue
+            treffer = RE_INSTALL_ZEILE.match(arg)
+            if not treffer:
+                continue
+            # Werkzeug-Aktualisierung (pip/setuptools/wheel) ist kein
+            # ausgeliefertes Paket, sondern das Installationsprogramm selbst.
+            if treffer.group("name").lower() in WERKZEUG_PAKETE:
+                continue
+            rest = treffer.group("rest") or ""
+            if "==" in rest and "==" in rest.split(";")[0]:
+                version = rest.split("==", 1)[1].split(";")[0].split(",")[0].strip()
+                if version.endswith(".*"):
+                    offen.append(f"{treffer.group('name')}{rest.split(';')[0].strip()}")
+                continue
+            offen.append(arg)
+        for paket in offen:
+            befunde.append(
+                Befund(
+                    regel,
+                    SCHWERE_FEHLER,
+                    quelle,
+                    nummer,
+                    f"`pip install {paket}` nennt keine exakte Version. Eine Ad-hoc-"
+                    "Installation steht in keinem Manifest: Sie wird nie auditiert und nie "
+                    "aktualisiert. Bitte `==<version>` schreiben oder eine gepinnte "
+                    "Requirements-Datei mit `-r` verwenden.",
+                )
+            )
+    return befunde
+
+
+def pruefe_laufzeit_installationen(root: Path) -> List[Befund]:
+    """A7: Workflows · A8: Image-Builds (Dockerfiles) mit pip."""
+    befunde: List[Befund] = []
+    for ordner in (".github/workflows", ".github/actions"):
+        for pfad in sorted((root / ordner).glob("**/*.yml")):
+            befunde += pruefe_pip_ad_hoc(
+                pfad.read_text(encoding="utf-8"), _rel(pfad, root), REGEL_LAUFZEIT
+            )
+    for pfad in sorted(root.glob("**/Dockerfile*")):
+        if "node_modules" in pfad.parts:
+            continue
+        befunde += pruefe_pip_ad_hoc(
+            pfad.read_text(encoding="utf-8"), _rel(pfad, root), REGEL_IMAGE_PIP
+        )
+    return befunde
+
+
 def pruefe_struktur(root: Path) -> List[Befund]:
     """Alle Offline-Regeln – deterministisch, ohne Netz."""
     befunde: List[Befund] = []
@@ -609,6 +765,7 @@ def pruefe_struktur(root: Path) -> List[Befund]:
         befunde += pruefe_manifest_paar(manifest, lock, root)
     befunde += pruefe_actions(root)
     befunde += pruefe_doppelte(root)
+    befunde += pruefe_laufzeit_installationen(root)
     for muster in ("tools/n8n/docker-compose.yml", "tools/n8n/Dockerfile*"):
         for pfad in sorted(root.glob(muster)):
             befunde += parse_container(pfad.read_text(encoding="utf-8"), _rel(pfad, root))
@@ -917,10 +1074,16 @@ def run_selftest() -> List[str]:
         _schreibe(baum, "requirements-ci.in", "pillow==13.0.0\n")
         _schreibe(baum, "requirements-ci.txt", "pillow==12.3.0 \\\n    --hash=sha256:aa\n")
         _schreibe(baum, "package.json", json.dumps({"devDependencies": {"wrangler": "^4.0.0"}}))
-        _schreibe(baum, ".github/workflows/w.yml", "      - uses: owner/action@v3\n")
+        _schreibe(
+            baum,
+            ".github/workflows/w.yml",
+            "      - uses: owner/action@v3\n"
+            "      - run: python3 -m pip install -q pyyaml\n",
+        )
+        _schreibe(baum, "tools/x/Dockerfile", "RUN pip install fastapi\n")
         befunde = pruefe_struktur(baum)
         regeln = _regeln(befunde)
-        for regel in (REGEL_PIN, REGEL_SSOT, REGEL_LOCK, REGEL_AKTION):
+        for regel in (REGEL_PIN, REGEL_SSOT, REGEL_LOCK, REGEL_AKTION, REGEL_LAUFZEIT, REGEL_IMAGE_PIP):
             pruefe(f"Struktur/{regel}", regel in regeln, f"gefeuert: {regeln}")
 
         # Gegenprobe: sauberer Baum muss grün bleiben.
@@ -934,11 +1097,58 @@ def run_selftest() -> List[str]:
             _schreibe(
                 sauber,
                 ".github/workflows/w.yml",
-                "      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1\n",
+                "      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1\n"
+                "      - run: python3 -m pip install -q --require-hashes -r requirements-ci.txt\n",
             )
+            _schreibe(sauber, "tools/x/Dockerfile", "RUN pip install fastapi==0.143.1\n")
             _schreibe(sauber, "tools/n8n/docker-compose.yml", "    image: n8nio/n8n:2.43.5\n")
             sauber_befunde = pruefe_struktur(sauber)
             pruefe("Gegenprobe/sauber", not sauber_befunde, f"unerwartet: {[b.als_dict() for b in sauber_befunde]}")
+
+    # --- 5b · Ad-hoc-Installationen (A7/A8, WF-E813 / #972) ----------
+    # Sabotage: ungepinnte Ad-hoc-Installs in Workflow und Image-Build.
+    a7 = pruefe_pip_ad_hoc(
+        "run: |\n"
+        "  python3 -m pip install -q pyyaml pypdf==6.21.4 \\\n"
+        "    edge-tts\n"
+        "  pip install --break-system-packages --index-url https://x.invalid/simple trafilatura\n"
+        "  python3 -m pip install --upgrade pip\n"
+        "  python3 -m pip install -r requirements-ci.txt\n"
+        "# Prosa: nach pip install wieder entfernt\n"
+        "  python3 -m pip install --require-hashes -r requirements-tts.txt\n"
+        # PROSA-Gegenprobe (WF-E813 / #972): Ein Rat, der den Befehl nur
+        # zitiert, darf A7 nicht auslösen – sonst wäre die eigene Meldung
+        # des Kanals ein Struktur-Fehler (genau das passierte beim Einbau).
+        "                '4. Jedes `pip install X` ohne `-r` ist ungepinnt.',\n"
+        "  # Dockerfile-Kommentar: Build-Werkzeuge werden nach pip install entfernt\n",
+        "wf.yml",
+        REGEL_LAUFZEIT,
+    )
+    offen = [b.text.split("`")[1] for b in a7]
+    pruefe("A7/ungepinnt erkannt", len(a7) == 3, f"gefeuert: {offen}")
+    pruefe("A7/Pin ist zufrieden", not any("pypdf" in o for o in offen), f"falsch: {offen}")
+    pruefe("A7/-r ist zufrieden", not any("requirements" in o for o in offen), f"falsch: {offen}")
+    pruefe("A7/Werkzeug pip ist zufrieden", not any("`pip " in o or o.endswith(" pip`") for o in offen),
+           f"falsch: {offen}")
+    # Kette mit Shell-Trenner (Whisper-Image): `apt-get … && pip install …`
+    # war am 01.11.2026 unsichtbar, weil der Parser VOR dem Befehl trennte.
+    kette = pruefe_pip_ad_hoc(
+        "RUN apt-get update && pip install -y fastapi==0.143.1 uvicorn\n", "D", REGEL_IMAGE_PIP
+    )
+    pruefe("A8/Kette erkannt", [b.text for b in kette] and "uvicorn" in kette[0].text,
+           f"gefeuert: {[b.text for b in kette]}")
+    a8 = pruefe_pip_ad_hoc(
+        "RUN pip install --no-cache-dir fastapi==0.143.1 uvicorn\n"
+        "# 3) Build-Werkzeuge werden nach pip install wieder entfernt\n"
+        "RUN pip install \\\n    'pyyaml>=6' \\\n    pillow\n",
+        "Dockerfile.x",
+        REGEL_IMAGE_PIP,
+    )
+    pruefe("A8/Image-Build erkannt",
+           {b.regel for b in a8} == {REGEL_IMAGE_PIP} and len(a8) == 3
+           and "uvicorn" in a8[0].text and "pyyaml>=6" in a8[1].text and "pillow" in a8[2].text,
+           f"gefeuert: {[b.text for b in a8]}")
+    pruefe("Gegenprobe/A8-sauber", pruefe_pip_ad_hoc("RUN pip install fastapi==0.143.1\n", "D", REGEL_IMAGE_PIP) == [])
 
     # --- 6 · Audit: Treffer, Gegenprobe, Störung ----------------------
     dep = Anforderung("npm", "lodash", "4.17.15", "package-lock.json", 0, "lock")
@@ -1005,7 +1215,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             for eintrag in fehler:
                 print(f"   · {eintrag}", file=sys.stderr)
             return 2
-        print("✅ Selbsttest bestanden (5 Parser, 6 Strukturregeln, 3 Gegenproben, Budget-Schutz).")
+        print("✅ Selbsttest bestanden (5 Parser, 8 Strukturregeln inkl. Ad-hoc-Install, "
+              "4 Gegenproben, Budget-Schutz).")
         return 0
 
     if not args.check and not args.audit:
