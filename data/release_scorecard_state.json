@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-01T15:52:50Z",
+  "generated_at": "2026-11-01T17:06:57Z",
   "modus": "kandidaten",
-  "commit": "4d69d6ad3753f91774caf5ecc90369ecb14e6362",
+  "commit": "314f46fa9216c977e9a64f2eb425bb682371a734",
   "kapazitaet": {
     "stichtag": "2026-11-01",
     "artikel": 111,
@@ -409,7 +409,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-14",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
       "sha256": "6b42ef045826777b03e0f60f495b0d5f6cc15259157a13dc60dbe6c2f18f7e58",
@@ -868,7 +868,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
       "sha256": "bbd7ed777f9380772a3004e80a4f2459f7aa31dca6d1ed2485adae45cab7140e",
@@ -885,7 +885,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-13",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
       "sha256": "210313b43d55ddbb5b7bb253229dd544051dc44cdf315763dbf60c05145aa1f9",
@@ -953,7 +953,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-19",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen": {
       "sha256": "3f59055e99eda77cc605ed716d138714557f496366b4ac815574677ffcf57b3d",
@@ -970,7 +970,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": {
       "sha256": "a30ebd4e12ddf0909d283a07798eaaadcc1223ad6a9e53352fa181ea660286e5",
@@ -1004,7 +1004,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-06",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
       "sha256": "098672533c8845ccea0f99df60928598d679c2b7c3047fec20ad887c04190ae9",
@@ -1021,7 +1021,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": {
       "sha256": "2c024ec6c15b726ab376f37ecdf5e00bb69ee414a89d750cbf2ab59fdff2ff8a",
@@ -1293,7 +1293,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege": {
       "sha256": "20e96b9dd489b5e1b1a912b88d042f58c825997d56c5eae477f6a68ac6532882",
@@ -1310,7 +1310,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-25",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     }
   }
 }
