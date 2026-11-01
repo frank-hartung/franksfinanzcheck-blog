@@ -51,14 +51,14 @@ faktencheck: "2026-10-30"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
   status: "freigegeben"
-  inhalt_sha256: "42e35d25930d43b4cfad9d403d2116b34ee15257d278dbdffb7e9cdb71391927"
+  inhalt_sha256: "8da8bd265b4de4068c9f29b6b2f9423b775f484e4ab69ed0518e96587113a1bb"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale Stand 08.10.2025, GDV-Regional- und Typklassenstatistik 2027, §§ 40 & 96 VVG); § 40 VVG-Kündigungsvoraussetzungen, Fahrzeugwechsel-/Veräußerungsregel nach § 96 VVG, Klassenstatistik 2027 und alle Rechenbeispiele am 30.10.2026 vollständig gegen Primärquellen geprüft"
     typ: "redaktion-mit-externer-belegkette"
   pruefdatum: "2026-10-30"
   naechste_pruefung: "2026-12-14"
-  aenderungsgrund: "Vollständige Fach- und Belegprüfung am 30.10.2026 (#826): überarbeitete § 40 VVG-Darstellung gegen den Gesetzestext abgeglichen, unzutreffende Zwei-Wochen-Regel beim Fahrzeugwechsel durch die Rechtslage bei Neuzulassung bzw. Veräußerung (§ 96 VVG, Q5) ersetzt, unbelegte Quellenfußnote auf transparente Modellrechnungs-Einordnung umgestellt, Datums-Großschreibungsfehler sowie Einheiten- und Gedankenstrich-Stellen bereinigt."
+  aenderungsgrund: "Vollständige Fach- und Belegprüfung am 30.10.2026 (#826): überarbeitete § 40 VVG-Darstellung gegen den Gesetzestext abgeglichen, unzutreffende Zwei-Wochen-Regel beim Fahrzeugwechsel durch die Rechtslage bei Neuzulassung bzw. Veräußerung (§ 96 VVG, Q5) ersetzt, unbelegte Quellenfußnote auf transparente Modellrechnungs-Einordnung umgestellt, Datums-Großschreibungsfehler sowie Einheiten- und Gedankenstrich-Stellen bereinigt. Zusatzversiegelung 01.11.2026 (W11-Heilung): Weiterlesen-Zeile von zwei Entwurfs-Zielen (Privathaftpflicht, Wohngebäude) auf Live-Artikel umgehängt (Abos und Verträge, Handyvertrag kündigen); Ratgeber Versicherungen bleibt verlinkt. Kein Fakt, keine Zahl, kein Rechenweg und keine Quelle geändert – Aussagen- und Zahlenprotokoll der Prüfung vom 30.10.2026 gilt unverändert."
   gepruefte_aussagen:
     - textanker: "entscheidend ist der Eingang, nicht der Versand"
       pruefung: "Bestätigt: Die Kündigung muss spätestens bis 30. November beim Versicherer eingegangen sein (Verbraucherzentrale)"
@@ -508,7 +508,7 @@ Der **Kfz-Versicherungsvergleich** ist ein starker Sparhebel. 30 bis 45 Minuten 
 
 Über mehrere Jahre summiert sich das leicht auf **1.500 bis 4.000 €**. Nutze die Wochen bis zum 30.11. und prüfe deinen Tarif. Wechsle, wenn es sich lohnt.
 
-**Weiterlesen:** [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) · [Wohngebäudeversicherung Vergleich: Worauf du achten musst](../../posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/) · [Pillar: Versicherungen](../../pillar/versicherungen/)
+**Weiterlesen:** [Abos und Verträge: Der stille Posten im Haushaltsplan](../../posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/) · [Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) · [Ratgeber Versicherungen](../../pillar/versicherungen/)
 
 ## Häufige Fragen
 

@@ -15,7 +15,7 @@ ki_redaktion_status: "review"
 redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
-  aenderungsgrund: "Fachliche Überarbeitung nach den Faktenfrische-Befunden (#911); Abgleich der Regeln mit der Bundesnetzagentur und der Verbraucherzentrale am 30.10.2026; redaktionelle Schlussprüfung ausstehend"
+  aenderungsgrund: "Fachliche Überarbeitung nach den Faktenfrische-Befunden (#911); Abgleich der Regeln mit der Bundesnetzagentur und der Verbraucherzentrale am 30.10.2026; am 01.11.2026 zwei Absätze eigenständig formuliert (Duplikat-Befund D3-X/D4-X gegenüber dem Stromanbieter-Artikel), Fakten und Quellen unverändert; redaktionelle Schlussprüfung ausstehend"
 kurzantwort: "Vergleiche Gastarife mit deinem echten Jahresverbrauch und den vollständigen Kosten aus Arbeitspreis und Grundpreis, mit und ohne Bonus. Prüfe Laufzeit, Kündigungsfrist und den genauen Umfang einer Preisgarantie im Vertrag; eine einheitliche Standarddauer gibt es nicht. Die Bundesnetzagentur genehmigt keine Endkundenpreise, setzt aber die Regeln für Wechsel und Preisänderungen. Ein Grad weniger Raumtemperatur senkt den Verbrauch nach Angaben der Verbraucherzentrale um etwa sechs Prozent."
 pin_title: "Gastarife vergleichen: Kosten und Fristen prüfen"
 pin_description: "*Werbung | Gastarife fundiert vergleichen: Gesamtkosten und Vertragsbedingungen prüfen, Preisänderungen einordnen und den Gasverbrauch realistisch berechnen. Mehr Spartipps auf FranksFinanzcheck! #gasvergleich #gaskosten #sparen"
@@ -107,7 +107,7 @@ Steuern, Abgaben, Umlagen und Netzentgelte können außerhalb der Garantie liege
 
 ## Neuer Preis: Frist und Sonderrecht
 
-Als Haushaltskunde muss dich dein Anbieter spätestens einen Monat vor einem neuen Preis informieren. Die Mitteilung muss Grund, Voraussetzungen und Umfang nennen. In der Regel darfst du dann ohne Einhaltung der normalen Frist kündigen.
+Ein neuer Gaspreis kündigt sich schriftlich an: Der Lieferant muss dich als Haushaltskunde mindestens einen Monat vor dem Inkrafttreten anschreiben und darlegen, was sich warum und in welchem Umfang ändert (Q1). An diese Mitteilung ist in der Regel ein Sonderkündigungsrecht geknüpft – du kannst dann sofort kündigen, ohne die sonst übliche Frist einzuhalten.
 
 Die Kündigung muss vor dem Tag beim Anbieter ankommen, ab dem der neue Preis gilt. Der Vertrag endet am Vortag. Eine Ausnahme gilt bei einer getrennten Anpassungsklausel, wenn nur hoheitlich bedingte Kosten weitergegeben werden. Wird eine Änderung der Umsatzsteuer eins zu eins weitergegeben, hast du kein Sonderrecht, weder bei einer Erhöhung noch bei einer Senkung.
 
@@ -145,7 +145,7 @@ Ein niedriger Arbeitspreis kann durch einen hohen Grundpreis aufgezehrt werden. 
 
 Ein Portal zeigt eine Auswahl, nicht den gesamten Markt. Anbieter, Filter und Sortierung unterscheiden sich. Verlass dich nicht auf ein pauschales Versprechen, dass dort alle Tarife oder alle Bedingungen erscheinen. Prüfe die Unterlagen beim Anbieter, bevor du abschließt.
 
-Vorsicht bei Vorkasse. Die Behörde warnt, dass Vorauszahlungen bei einer Insolvenz des Anbieters verloren gehen können. Die Belieferung ist über die Ersatzversorgung gesichert, dein vorausgezahltes Geld nicht.
+Mit Vorauszahlung verbundene Tarife lohnen einen besonders genauen Blick in die Bedingungen. Die Bundesnetzagentur weist darauf hin, dass Vorabzahlungen in der Insolvenz eines Lieferanten verloren sein können (Q1). Deine Gasversorgung steht danach trotzdem still – sie springt auf die Ersatzversorgung um. Das bereits gezahlte Geld zurückzuholen, ist dagegen mühsam und oft vergebens.
 
 Für den Vergleich brauchst du Postleitzahl und Verbrauch. Notiere den Preis mit und ohne Bonus. Speichere das Angebot. So kannst du später nachvollziehen, auf welcher Grundlage du unterschrieben hast.
 
@@ -191,7 +191,7 @@ Das solltest du nicht voraussetzen. Angebote und Darstellungen unterscheiden sic
 
 Dort gelten eigene Informations- und Kündigungsregeln. Die Behörde nennt eine Kündigungsfrist von zwei Wochen. Prüfe die Vertragsart, statt eine Frist aus einem anderen Tarif zu übernehmen.
 
-Ein belastbarer Vergleich beginnt bei deiner Abrechnung. Er endet mit dem vollständigen Vertrag und einem Termin im Kalender. Die Beispielwerte helfen beim Rechenweg; sie sind keine Marktpreise. Prüfe Fristen und Bedingungen in deinen Originalunterlagen, bevor du wechselst.
+Die Beispielrechnungen zeigen den Weg, nicht den Markt: Dein Ergebnis beginnt mit der eigenen Abrechnung und endet mit dem unterschriebenen Vertrag. Lies Fristen und Bedingungen in den Originalunterlagen, bevor du dich festlegst – und trag dir das Ende von Bindung und Garantie gleich mit in den Kalender ein.
 
 Wie du den Stromvertrag prüfst, steht im [Ratgeber zum Stromanbieterwechsel](../../posts/2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen/). Wenn du zuerst den Verbrauch senken willst, findest du im Ratgeber zu [Energieeffizienz im Haushalt](../../posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/) fünf Ansätze. Und wer eine bestehende Gasgarantie einordnen möchte, liest die Hinweise zur [Gaspreisgarantie](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/).
 
@@ -201,4 +201,4 @@ Wie du den Stromvertrag prüfst, steht im [Ratgeber zum Stromanbieterwechsel](..
 
 *Werbung: Dieser Artikel enthält Affiliate-Links. Bei einem Abschluss über diese Links können wir eine Provision erhalten. Der Preis für dich ändert sich dadurch nicht.*
 
-_Wichtiger Hinweis: Dieser Artikel dient der allgemeinen Information und ersetzt keine Rechts-, Energie- oder Heizungsberatung. Maßgeblich sind dein Vertrag und die aktuellen gesetzlichen Vorgaben._
+_Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information und stellt keine Anlage-, Rechts- oder Steuerberatung dar. Prüfe Konditionen und Bedingungen immer beim jeweiligen Anbieter._
