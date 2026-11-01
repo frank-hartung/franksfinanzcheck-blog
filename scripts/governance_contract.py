@@ -604,7 +604,16 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # und ein Dateizugriff ohne Not. Die Wache hält Pinning (M3), die
           # Server-Allowlist (M4), die Herkunftsziele (M5) und den Geheimnis-
           # Freiraum (M2) fest. Ohne C6 liefe ihr Selbsttest nie.
-          "mcp_wache.py"]
+          "mcp_wache.py",
+          # Skill-Vertrag (01.11.2026): Der Agenten-Leitfaden war 2.532 Zeilen
+          # lang und wurde auf repo-eigene Skills umgelegt. Ohne diese Wache
+          # wächst der Kern zurück, verwaist ein Detail in `references/`, steht
+          # vendored Fremd-Code ohne Lizenz im Repo und überschreibt
+          # `npx skills update` Regelwerk – vier Arten, auf die ein Regelwerk
+          # lautlos abgeschafft wird. K5 prüft außerdem jeden Befehl in einem
+          # Runbook-Zaun gegen `package.json`: ein Schritt ohne Erzeuger ist
+          # genau der Fehler, den #806 als „Datenlage offen“ meldet.
+          "skills_vertrag.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.

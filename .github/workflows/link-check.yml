@@ -118,6 +118,21 @@ jobs:
             scripts.tests.test_datenschutz_freigabe
 
       # ------------------------------------------------------------
+      #  SKILL-VERTRAG K1–K8 (01.11.2026)
+      #  Der Regelkern war 2.532 Zeilen / 157,9 KB – rund 39.700 Tokens, bevor
+      #  die erste Aufgabe stand. Zerlegt in Kern + sechs ff-*-Skills, gilt
+      #  seither ein Budget, und die Herkunft jedes vendored Skills muss im
+      #  Register stehen. Ohne Schritt im Gate wäre das eine Ordnung für die
+      #  halbe Woche: dieser Lauf ruft dasselbe wie `npm run skills:check` und
+      #  `npm run test:skills` lokal.
+      # ------------------------------------------------------------
+      - name: Skill-Vertrag (Kernbudget, Router, Herkunft, Lizenz, Siegelstand)
+        run: |
+          python3 scripts/skills_vertrag.py
+          python3 scripts/skills_vertrag.py --selftest
+          python3 -m unittest scripts.tests.test_skills_vertrag
+
+      # ------------------------------------------------------------
       #  HUGO-BUILD-VERTRAG (H1–H8, 03.10.2026)
       #  Prüft, dass JEDER Hugo-Bau im Repo über die gemeinsame Action
       #  läuft und seinen Fehler laut meldet. Am 02.10.2026 kostete die
