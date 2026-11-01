@@ -383,3 +383,5 @@
 {"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "verify"}
 {"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": ["data/skill_lizenzen.json"], "head": "0f9f068"}
 {"date": "2026-11-01", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": ["data/skill_portfolio.yaml"], "head": "e3585d1"}
