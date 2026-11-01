@@ -1,6 +1,6 @@
 {
   "target": 6,
-  "ready": 6,
+  "ready": 5,
   "pool_size": 7,
   "generated_at": "2026-11-01T15:45:37Z",
   "candidates": [
@@ -40,20 +40,10 @@
     },
     {
       "slug": "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem",
-      "ready": true,
+      "ready": false,
       "sha256": "b5e79ef506a6a8b269bce6ad13af6f8ba636cfc766aa67fd7ab42ab36c3fa52e",
-      "flesch": 67.1,
       "measured_at": "2026-11-01T15:41:01Z",
-      "score": 0.986,
-      "parts": {
-        "spelling": 1.0,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.96,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
