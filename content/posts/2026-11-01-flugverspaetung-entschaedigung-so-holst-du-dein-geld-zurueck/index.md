@@ -1,6 +1,7 @@
 ---
 title: "Flugverspätung Entschädigung: So holst du dein Geld zurück"
 description: "Flugverspätung Entschädigung: Prüfe deine Fluggastrechte, sichere Belege und fordere dein Geld Schritt für Schritt zurück – ohne Anwalt."
+description: "Flugverspätung Entschädigung sichern: Lerne deine Fluggastrechte kennen. Wir zeigen dir, wie du einfach eine Entschädigung beantragen kannst. Tipps…"
 date: 2026-11-01T15:29:40Z
 draft: true
 reserve: true
