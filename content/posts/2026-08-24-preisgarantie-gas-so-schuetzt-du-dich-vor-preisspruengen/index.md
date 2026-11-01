@@ -34,7 +34,7 @@ quellen:
     url: "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/"
     herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
     datum: "2026-08-24"
-faktencheck: 2026-09-28
+faktencheck: 2026-11-01
 ---
 
 Eine [Preisgarantie beim Gas](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/) klingt beruhigend. Springt der Börsenpreis, warnt schnell eine Schlagzeile. Sollst du jetzt sofort einen Vertrag für zwei Jahre unterschreiben? Bleib ruhig. Der Preis an der Börse wirkt nicht eins zu eins und nicht sofort auf deinen Tarif als Kunde.

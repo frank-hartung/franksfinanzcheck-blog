@@ -1,7 +1,7 @@
 {
   "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
   "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
-  "erzeugt": "2026-11-01 10:13 UTC",
+  "erzeugt": "2026-11-01 11:27 UTC",
   "faellig": {
     "faellig": true,
     "prio": 1,
@@ -26,13 +26,42 @@
       "faktencheck": true
     }
   },
-  "treffer": [],
-  "befunde": [],
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesnetzagentur.de",
+      "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "datum": "",
+      "quelle": "bundesnetzagentur.de",
+      "kanal": "web",
+      "auszug": "Title: Bundesnetzagentur - Energie\n\n*   [_Energie_](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html)\n    *   [Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html)\n\n*   [Breitbandversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Breitband/start.html)\n        *   [Kupfer-Glas-Migration](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Kupfer-Glas/start.html)\n        *   [Funk und Frequenzen](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Frequenzen/start.html)\n        *   [Nummerierung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Nummerierung/start.html)\n        *   [Unternehmenspflichten](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Unternehmenspflichten/start.html)\n        *   [Technik und Produktsicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Technik/start.html)\n        *   [Öffentliche Sicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/OeffentlicheSicherheit/start.html)\n        *   [Grundversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Grundversorgung/start.html)\n\n*   [Allgemeines](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Grundversorgung/start2.html)\n            *   [Unterversorgungsfeststellung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Grundversorgung/Unterversorgungsfeststellungen/start.html)\n\n*   [Digitales und Telekommunikation](https://www.bundesnetzagentur.de/DE/Vportal/TK/start.html)\n    *   [Energie](https://www.bundesnetzagentur.de/DE/Vportal/Energie/start.html)\n    *   [Post](https://www.bundesnetzagentur.de/DE/Vportal/Post/start.html)\n    *   [Anfragen und",
+      "score": 2,
+      "belegfaehig": true,
+      "herausgeber": "Bundesnetzagentur",
+      "rang": 1,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur für Januar 2026 (360 €) wird durch die allgemeine Übersichtsseite der Behörde nicht gestützt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    }
+  ],
   "fehler": [
-    "feedparser nicht installiert (pip install feedparser)",
-    "feedparser nicht installiert (pip install feedparser)",
-    "bundesnetzagentur.de: Jina-Reader-Abruf fehlgeschlagen (<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>)"
+    "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
+    "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
   ],
   "fassung_sha256": "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af",
-  "fachpruefung": "übersprungen (kein KI-Schlüssel: GROQ_API_KEY/GEMINI_API_KEY)"
+  "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)"
 }

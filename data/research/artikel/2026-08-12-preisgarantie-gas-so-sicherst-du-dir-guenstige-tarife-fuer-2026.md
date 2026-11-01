@@ -1,6 +1,6 @@
 # Faktenfrische: Preisgarantie Gas: So sicherst du günstige Tarife
 
-> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-01 10:13 UTC.
+> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-01 11:27 UTC.
 > Agent-Reach-Kanäle, nur lesend. Fundstellen sind Signale, keine Freigabe.
 
 - **Artikel:** `content/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/index.md`
@@ -12,13 +12,28 @@
 
 ## Fundstellen
 
-_Keine thematisch passende Fundstelle in diesem Lauf._
+### Referenzseite bundesnetzagentur.de
+
+- ✅ belegfähig · Herausgeber: Bundesnetzagentur
+- Quelle: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>
+
+> Title: Bundesnetzagentur - Energie
+> 
+> *   [_Energie_](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html)
+>     *   [Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html)
+> 
+> *   [Breitbandversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Breitband/start.html)
+>         *   [Kupfer-Glas-Migration](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Kupfer-Glas/start.html)
+>         *   [Funk und Frequenzen](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Frequenzen/start.html)
+>   
 
 ## Fachliche Befunde (KI-Fachprüfung)
 
-Status: übersprungen (kein KI-Schlüssel: GROQ_API_KEY/GEMINI_API_KEY)
+Status: geprüft (gemini:gemini-3-flash-preview)
 
-_Keine Befunde gemeldet; Prüfstatus siehe oben._
+- **luecke** – Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur für Januar 2026 (360 €) wird durch die allgemeine Übersichtsseite der Behörde nicht gestützt. (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
+- **luecke** – Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg. (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
+- **luecke** – Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist. (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
 
 ## Offene GEO-Punkte
 
@@ -26,6 +41,5 @@ _Keine Befunde gemeldet; Prüfstatus siehe oben._
 
 ## Kanal-Störungen
 
-- feedparser nicht installiert (pip install feedparser)
-- feedparser nicht installiert (pip install feedparser)
-- bundesnetzagentur.de: Jina-Reader-Abruf fehlgeschlagen (<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>)
+- Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)
+- Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)

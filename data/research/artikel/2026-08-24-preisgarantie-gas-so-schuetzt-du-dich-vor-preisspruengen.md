@@ -1,6 +1,6 @@
 # Faktenfrische: Preisgarantie Gas: Was bei Preiserhöhung hilft
 
-> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-01 10:13 UTC.
+> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-01 11:29 UTC.
 > Agent-Reach-Kanäle, nur lesend. Fundstellen sind Signale, keine Freigabe.
 
 - **Artikel:** `content/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/index.md`
@@ -12,13 +12,30 @@
 
 ## Fundstellen
 
-_Keine thematisch passende Fundstelle in diesem Lauf._
+### Referenzseite bundesnetzagentur.de
+
+- ✅ belegfähig · Herausgeber: Bundesnetzagentur
+- Quelle: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>
+
+> Title: Bundesnetzagentur - Energie
+> 
+> *   [_Energie_](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html)
+>     *   [Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html)
+> 
+> *   [Digitales und Telekommunikation](https://www.bundesnetzagentur.de/DE/Vportal/TK/start.html)
+>     *   [Energie](https://www.bundesnetzagentur.de/DE/Vportal/Energie/start.html)
+>     *   [Post](https://www.bundesnetzagentur.de/DE/Vportal/Post/start.html)
+>     *   [Anfragen und Beschwerden](https://www.bundesnetzagentur.de/DE/Vportal/AnfragenBeschwerden/start.ht
 
 ## Fachliche Befunde (KI-Fachprüfung)
 
-Status: übersprungen (kein KI-Schlüssel: GROQ_API_KEY/GEMINI_API_KEY)
+Status: geprüft (groq:openai/gpt-oss-120b)
 
-_Keine Befunde gemeldet; Prüfstatus siehe oben._
+- **luecke** – Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher angekündigt werden muss, ohne dafür eine Quelle anzugeben. (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
+- **luecke** – Der angegebene durchschnittliche Gaspreis von 11,93 Cent/kWh für 2026 (laut BDEW) wird nicht durch eine Quelle belegt. (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
+- **luecke** – Die Angabe, dass die Verbraucherzentrale etwa 6 % weniger Heizenergie pro Grad niedrigerer Raumtemperatur nennt, fehlt eine Quellenangabe. (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
+- **praezision** – Die Aussage, dass man „in der Regel“ zum Zeitpunkt der Preisänderung Sonderkündigungsrecht hat, ist unpräzise und wird nicht durch eine konkrete Regelung belegt. (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
+- **praezision** – Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf den Anbieter überträgt und dafür ein höherer Startpreis üblich ist, fehlt eine konkrete Quelle und bleibt vage. (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
 
 ## Offene GEO-Punkte
 
@@ -26,6 +43,5 @@ _Keine Befunde gemeldet; Prüfstatus siehe oben._
 
 ## Kanal-Störungen
 
-- feedparser nicht installiert (pip install feedparser)
-- feedparser nicht installiert (pip install feedparser)
-- bundesnetzagentur.de: Jina-Reader-Abruf fehlgeschlagen (<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>)
+- Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (<urlopen error timed out>)
+- Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)

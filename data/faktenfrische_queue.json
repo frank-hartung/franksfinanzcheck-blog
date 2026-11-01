@@ -1,5 +1,5 @@
 {
-  "erzeugt": "2026-11-01 10:13 UTC",
+  "erzeugt": "2026-11-01 11:29 UTC",
   "uebersicht": {
     "gesamt": 110,
     "ratgeber": 6,
@@ -9,9 +9,108 @@
     "budget": 4,
     "budget_quelle": "Auto-Skalierung (Deckungsrechnung)",
     "geo_schnitt": 94,
-    "befunde": 20,
-    "befunde_im_lauf": 0,
+    "befunde": 41,
+    "befunde_im_lauf": 16,
     "fachbefunde": [
+      {
+        "typ": "praezision",
+        "text": "Die Bewerbung des Vergleichsportals mit dem Superlativ 'Die besten Tarife' erfolgt ohne messbare Daten oder Auswahlkriterien in der Recherchegrundlage.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "124ff2c3cd3917c274aa",
+        "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+        "fassung_sha256": "98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die im Artikel als Fakten genannten Gaspreise für Oktober 2026 (11 bis 13 Cent/kWh) sind nicht durch die Fundstelle belegt, die lediglich eine allgemeine Themenübersicht darstellt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "7bdec96c0329769bebe6",
+        "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+        "fassung_sha256": "98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der für den Verbraucherschutz zentrale Regulierungsrahmen (Sonderkündigungsrecht, Informationspflichten der Versorger) wird in der Fundstelle nicht inhaltlich bestätigt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "a56734aa032e0ed9e0c4",
+        "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+        "fassung_sha256": "98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "30caa57be394afb62947",
+        "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "fassung_sha256": "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "32a3ea879f2cf126b3a7",
+        "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "fassung_sha256": "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur für Januar 2026 (360 €) wird durch die allgemeine Übersichtsseite der Behörde nicht gestützt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "c583efe1ce02df3ca2d7",
+        "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "fassung_sha256": "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Keine Quelle für die Aussage, dass das Gesetz bei einem Tarifwechsel die Grundversorgung garantiert – regulatorischer Rahmen fehlt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "437b809ffbf41e5af434",
+        "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+        "fassung_sha256": "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Keine Quelle für die Behauptung, dass ein Grad weniger Raumtemperatur rund 6 % Energie einspart – Prozent‑Angabe fehlt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "9fbacd9942c2dfa1447f",
+        "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+        "fassung_sha256": "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Keine Quelle für die Angabe, dass durch Optimierungsmaßnahmen 10‑15 % Einsparungen realistisch sind – Prozent‑Wert unbelegt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "da30cbb5fbc8c801daf0",
+        "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+        "fassung_sha256": "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Keine Quelle für die Aussage, dass im Oktober 2026 bessere Gaspreise gelten – Preis‑Trend‑Behauptung fehlt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "db8a69f08dc0020adebd",
+        "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+        "fassung_sha256": "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Keine Quelle für die Angabe, dass ein Einfamilienhaus typischerweise 18.000 kWh/Jahr verbraucht – Verbrauchszahl ist unbelegt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "e834f4702e87194affe7",
+        "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+        "fassung_sha256": "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
       {
         "id": "47f855cb4f0fe1e5c65f",
         "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
@@ -103,6 +202,51 @@
         "zuletzt_gesehen": "2026-10-30 11:01 UTC"
       },
       {
+        "typ": "luecke",
+        "text": "Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher angekündigt werden muss, ohne dafür eine Quelle anzugeben.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "252413dcc16cea146beb",
+        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf den Anbieter überträgt und dafür ein höherer Startpreis üblich ist, fehlt eine konkrete Quelle und bleibt vage.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "48a0a962046c8315270e",
+        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Die Aussage, dass man „in der Regel“ zum Zeitpunkt der Preisänderung Sonderkündigungsrecht hat, ist unpräzise und wird nicht durch eine konkrete Regelung belegt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "9326152f4d788cff56bd",
+        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der angegebene durchschnittliche Gaspreis von 11,93 Cent/kWh für 2026 (laut BDEW) wird nicht durch eine Quelle belegt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "ab4d084fd367c8e4d518",
+        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Angabe, dass die Verbraucherzentrale etwa 6 % weniger Heizenergie pro Grad niedrigerer Raumtemperatur nennt, fehlt eine Quellenangabe.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "d215addd22dea72c44df",
+        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
         "id": "05be346e82c80b2a8664",
         "slug": "2026-10-28-dsl-und-internet-flat-guenstig-sichern",
         "fassung_sha256": "legacy-unbekannt",
@@ -146,6 +290,56 @@
         "text": "Die Angabe, dass für zwei HD‑Streams gleichzeitig etwa 30 Mbit/s benötigt werden, ist nicht durch Daten belegt und lässt Spielraum für Fehlinterpretationen.",
         "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
         "zuletzt_gesehen": "2026-10-30 11:01 UTC"
+      },
+      {
+        "id": "176642ea8acfa44f1152",
+        "slug": "2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden",
+        "fassung_sha256": "84d8b5643fc7bdd1ad750d8d3acc88d309ed6b10586b30c7bde1eb05f2a418ac",
+        "typ": "luecke",
+        "text": "Behauptung, dass Inlands‑Überweisungen in der Regel kostenlos sind, fehlt eine entsprechende Quelle.",
+        "beleg": "",
+        "zuletzt_gesehen": "2026-10-31 10:34 UTC",
+        "herkunft": "dossier-nachlese"
+      },
+      {
+        "id": "2520f45d441ef87614e3",
+        "slug": "2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden",
+        "fassung_sha256": "84d8b5643fc7bdd1ad750d8d3acc88d309ed6b10586b30c7bde1eb05f2a418ac",
+        "typ": "luecke",
+        "text": "Behauptung, dass ein kostenloses Girokonto keine reguläre Kontoführungsgebühr erhebt, wird nicht durch die bereitgestellten Quellen belegt.",
+        "beleg": "",
+        "zuletzt_gesehen": "2026-10-31 10:34 UTC",
+        "herkunft": "dossier-nachlese"
+      },
+      {
+        "id": "33bda5941052d9334598",
+        "slug": "2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden",
+        "fassung_sha256": "84d8b5643fc7bdd1ad750d8d3acc88d309ed6b10586b30c7bde1eb05f2a418ac",
+        "typ": "luecke",
+        "text": "Quantitative Aussage, dass ein kostenloses Girokonto mindestens ein Drittel der bisherigen Kontokosten einsparen kann, ist unbelegt.",
+        "beleg": "",
+        "zuletzt_gesehen": "2026-10-31 10:34 UTC",
+        "herkunft": "dossier-nachlese"
+      },
+      {
+        "id": "7406eaba3aa749c46f4b",
+        "slug": "2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden",
+        "fassung_sha256": "84d8b5643fc7bdd1ad750d8d3acc88d309ed6b10586b30c7bde1eb05f2a418ac",
+        "typ": "luecke",
+        "text": "Zeitangabe, dass die Kontoeröffnung meist innerhalb weniger Werktage abgeschlossen ist, wird nicht durch die genannten Quellen gestützt.",
+        "beleg": "",
+        "zuletzt_gesehen": "2026-10-31 10:34 UTC",
+        "herkunft": "dossier-nachlese"
+      },
+      {
+        "id": "9f47e6d2aa8cf2a8ff91",
+        "slug": "2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden",
+        "fassung_sha256": "84d8b5643fc7bdd1ad750d8d3acc88d309ed6b10586b30c7bde1eb05f2a418ac",
+        "typ": "luecke",
+        "text": "Angabe, dass die meisten Banken ein Mindestguthaben von ein paar hundert Euro verlangen, fehlt eine fundierte Quelle.",
+        "beleg": "",
+        "zuletzt_gesehen": "2026-10-31 10:34 UTC",
+        "herkunft": "dossier-nachlese"
       },
       {
         "id": "360dbd44c71db04f43e0",
@@ -203,442 +397,109 @@
     "deckung_prozent": 149.4,
     "bedarf_je_woche": 18.7,
     "abbau_tage": 1,
-    "nachhol_frist_tage": 7
-  },
-  "fachbefunde": [
-    {
-      "id": "47f855cb4f0fe1e5c65f",
-      "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
-      "fassung_sha256": "legacy-unbekannt",
-      "typ": "luecke",
-      "text": "Angaben zu möglichen Einsparungen beim Kfz‑Versicherungswechsel (150 €‑400 € bzw. 180 €‑350 €) sind ohne Quellenangabe; keine der genannten Zahlen findet sich in den bereitgestellten Statistiken.",
-      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-    },
-    {
-      "id": "6b0aa3429d97e8c74ed8",
-      "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
-      "fassung_sha256": "legacy-unbekannt",
-      "typ": "luecke",
-      "text": "Die Behauptung, technische Maßnahmen beim Heizen senken den Energieverbrauch um 8 %‑12 %, wird nicht belegt; die bereitgestellten Daten enthalten lediglich die allgemeine Preisentwicklung von Energie (+14,9 %).",
-      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-    },
-    {
-      "id": "7f66ec82ee1a3f095b0c",
-      "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
-      "fassung_sha256": "legacy-unbekannt",
-      "typ": "praezision",
-      "text": "Die Aussage, der Herbst sei die „lukrativste Spar‑Saison des Jahres“, ist nicht durch messbare Daten gestützt; ein Vergleich mit anderen Jahreszeiten fehlt.",
-      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-    },
-    {
-      "id": "84c991c5d152b14a2675",
-      "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
-      "fassung_sha256": "legacy-unbekannt",
-      "typ": "luecke",
-      "text": "Gesamteinsparungen von 500 €‑1.300 € pro Haushalt werden als Modellrechnung präsentiert, jedoch ohne Kennzeichnung als Modell und ohne Quellenangabe.",
-      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-    },
-    {
-      "id": "a70e7adc97c58317ccc1",
-      "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
-      "fassung_sha256": "legacy-unbekannt",
-      "typ": "luecke",
-      "text": "Das angegebene Sparpotenzial von 50 €‑80 € durch saisonale Lebensmittel‑ und Vorratshaltung ist nicht mit einer Quelle untermauert.",
-      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-    },
-    {
-      "id": "0051151e6c46f4c2bdb3",
-      "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
-      "fassung_sha256": "legacy-unbekannt",
-      "typ": "luecke",
-      "text": "Der Artikel nennt eine Kautionshöhe von 900 € bis 2.500 €, ohne dass die Verbraucherzentrale diese Spanne angibt.",
-      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-    },
-    {
-      "id": "0790f52160dfaa819917",
-      "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
-      "fassung_sha256": "legacy-unbekannt",
-      "typ": "luecke",
-      "text": "Die angegebene Ersparnis von 145 € bei einer einwöchigen Anmietung ist nicht durch Zahlen der Verbraucherzentrale gedeckt.",
-      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-    },
-    {
-      "id": "53c3fde8e986e6560890",
-      "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
-      "fassung_sha256": "legacy-unbekannt",
-      "typ": "luecke",
-      "text": "Die Behauptung, dass Flughafen‑Mietstationen 15 %‑25 % teurer sind, wird von der Verbraucherzentrale nicht bestätigt.",
-      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-    },
-    {
-      "id": "89adecebaae75c147402",
-      "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
-      "fassung_sha256": "legacy-unbekannt",
-      "typ": "luecke",
-      "text": "Die Aussage, dass eine „Zero‑Excess“-Option die Kaution komplett auf 0 € senkt und dafür 5 €‑12 € pro Tag kostet, wird von der Verbraucherzentrale nicht belegt.",
-      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-    },
-    {
-      "id": "a1a269b73a1b9c2dfc88",
-      "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
-      "fassung_sha256": "legacy-unbekannt",
-      "typ": "luecke",
-      "text": "Der Hinweis, dass eine Vollkasko ohne Selbstbeteiligung nur 3 €‑8 € pro Tag mehr kostet, fehlt in den Angaben der Verbraucherzentrale.",
-      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-    },
-    {
-      "id": "05be346e82c80b2a8664",
-      "slug": "2026-10-28-dsl-und-internet-flat-guenstig-sichern",
-      "fassung_sha256": "legacy-unbekannt",
-      "typ": "luecke",
-      "text": "Wechselboni von 50 € bis 100 € werden genannt, jedoch fehlt jede belegbare Angabe zu deren Höhe oder Häufigkeit.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-    },
-    {
-      "id": "d0a5cf7bb64eb0cd46c8",
-      "slug": "2026-10-28-dsl-und-internet-flat-guenstig-sichern",
-      "fassung_sha256": "legacy-unbekannt",
-      "typ": "luecke",
-      "text": "Der Artikel erwähnt keinen regulatorischen Rahmen (z. B. Informations‑ und Preisbindungspflichten der Bundesnetzagentur) obwohl die Fundstelle darauf hinweist, dass solche Vorgaben existieren.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-    },
-    {
-      "id": "ec53e181336df8dc61ac",
-      "slug": "2026-10-28-dsl-und-internet-flat-guenstig-sichern",
-      "fassung_sha256": "legacy-unbekannt",
-      "typ": "luecke",
-      "text": "Der Artikel behauptet, dass DSL‑Verträge häufig eine Laufzeit von 24 Monaten haben und danach eine Kündigungsfrist von einem Monat gilt, ohne dafür eine Quelle anzugeben.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-    },
-    {
-      "id": "f3f9184bfca9b097f68e",
-      "slug": "2026-10-28-dsl-und-internet-flat-guenstig-sichern",
-      "fassung_sha256": "legacy-unbekannt",
-      "typ": "luecke",
-      "text": "Die 50‑30‑20‑Regel wird als allgemein gültige Budget‑Methode dargestellt, ohne Hinweis, dass es sich um ein Modell handelt oder Quelle dafür zu nennen.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-    },
-    {
-      "id": "fb4d2260f4fa291c35ae",
-      "slug": "2026-10-28-dsl-und-internet-flat-guenstig-sichern",
-      "fassung_sha256": "legacy-unbekannt",
-      "typ": "praezision",
-      "text": "Die Angabe, dass für zwei HD‑Streams gleichzeitig etwa 30 Mbit/s benötigt werden, ist nicht durch Daten belegt und lässt Spielraum für Fehlinterpretationen.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-    },
-    {
-      "id": "360dbd44c71db04f43e0",
-      "slug": "versicherungen",
-      "fassung_sha256": "legacy-unbekannt",
-      "typ": "luecke",
-      "text": "Preisangaben für die Privathaftpflicht (35 – 65 € jährlich) werden ohne Quellenangabe genannt.",
-      "beleg": "https://www.gdv.de/gdv/medien/medieninformationen",
-      "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-    },
-    {
-      "id": "a4f736ca6f8f1a70fe60",
-      "slug": "versicherungen",
-      "fassung_sha256": "legacy-unbekannt",
-      "typ": "praezision",
-      "text": "Der Hinweis, dass ein jährlicher Kfz‑Wechsel‑Check zum Stichtag 30. November „fast immer“ zu Einsparungen führt, ist pauschal und nicht durch konkrete Daten gestützt.",
-      "beleg": "",
-      "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-    },
-    {
-      "id": "c2de49121dea2b8b7cc6",
-      "slug": "versicherungen",
-      "fassung_sha256": "legacy-unbekannt",
-      "typ": "luecke",
-      "text": "Die Empfehlung einer Mindestdeckungssumme von 50 Millionen Euro für Personen‑, Sach‑ und Vermögensschäden in der Privathaftpflicht wird nicht durch eine Quelle belegt.",
-      "beleg": "https://www.gdv.de/gdv/medien/medieninformationen",
-      "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-    },
-    {
-      "id": "de9bc512fad04e99c1da",
-      "slug": "versicherungen",
-      "fassung_sha256": "legacy-unbekannt",
-      "typ": "praezision",
-      "text": "Die Aussage, dass Elementarschäden bei Wohn‑ und Hausratversicherung „unverzichtbar“ seien, ist ein unqualifiziertes Superlativ ohne messbare Grundlage.",
-      "beleg": "",
-      "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-    },
-    {
-      "id": "e7ab68c9e3b2f443c904",
-      "slug": "versicherungen",
-      "fassung_sha256": "legacy-unbekannt",
-      "typ": "luecke",
-      "text": "Die Behauptung, dass ein Kfz‑Wechsel zum 30. November jährlich 100 – 300 € spart, fehlt jede belegbare Marktinformation.",
-      "beleg": "https://www.gdv.de/gdv/medien/medieninformationen",
-      "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-    }
-  ],
-  "kapazitaet": {
-    "stichtag": "2026-11-01",
-    "artikel": 110,
-    "faellig": 8,
-    "ueberfaellig": 8,
-    "ueberfaellig_max_tage": 4,
-    "naechste_frist": {
-      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
-      "frist": "2026-11-03",
-      "restlaufzeit": 2
-    },
-    "budget": 4,
-    "laeufe_je_tag": 1.0,
-    "kapazitaet_je_tag": 4.0,
-    "bedarf_je_tag": 2.678,
-    "bedarf_je_woche": 18.7,
-    "deckung_prozent": 149.4,
-    "horizont_tage": 120,
-    "vorlauf_tage": 7,
     "nachhol_frist_tage": 7,
-    "abbau_tage": 1,
-    "verletzungen_alt": 8,
-    "verletzungen_neu": 0,
-    "verletzungen_folge": 0,
-    "verletzungen_folge_seiten": 0,
-    "verletzungen": [
-      {
-        "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
-        "titel": "Sicher heizen: Was sie abdeckt und wie lange sie läuft",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 4,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      },
-      {
-        "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
-        "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 4,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      },
-      {
-        "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
-        "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 4,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      },
-      {
-        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
-        "titel": "Preisgarantie Gas: Was bei Preiserhöhung hilft",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 4,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      },
-      {
-        "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
-        "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 4,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      },
-      {
-        "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
-        "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 4,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      },
-      {
-        "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
-        "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 4,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      },
-      {
-        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-        "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 4,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      }
-    ],
-    "offen_im_horizont": 110,
-    "puenktlich": true,
-    "rueckstand_abgebaut": true
+    "abbrueche": 0
   },
-  "offen": [
-    {
-      "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
-      "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
-      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-      "faellig": true,
-      "frist": "2026-10-28",
-      "geo": 100
-    },
-    {
-      "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
-      "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
-      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-      "faellig": true,
-      "frist": "2026-10-28",
-      "geo": 83
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
-      "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
-      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-      "faellig": true,
-      "frist": "2026-10-28",
-      "geo": 100
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-      "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
-      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-      "faellig": true,
-      "frist": "2026-10-28",
-      "geo": 100
-    },
-    {
-      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
-      "titel": "Gasabschlag berechnen: So planst du die Heizsaison richtig",
-      "grund": "frisch geprüft vor 28 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-03",
-      "geo": 100
-    },
-    {
-      "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
-      "titel": "Weihnachten Budget planen: Ohne Schulden durch die Feiertage",
-      "grund": "frisch geprüft vor 28 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-03",
-      "geo": 100
-    },
-    {
-      "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
-      "titel": "Campingurlaub planen: Budget für Platz und Fahrt",
-      "grund": "frisch geprüft vor 25 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-06",
-      "geo": 83
-    },
-    {
-      "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
-      "titel": "Urlaub sparen: Budget, Buchung und Kosten im Blick",
-      "grund": "frisch geprüft vor 25 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-06",
-      "geo": 83
-    },
-    {
-      "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
-      "titel": "Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig",
-      "grund": "frisch geprüft vor 25 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-06",
-      "geo": 100
-    },
-    {
-      "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "titel": "Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden",
-      "grund": "frisch geprüft vor 25 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-06",
-      "geo": 100
-    }
-  ],
-  "laeufe": [
-    {
-      "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
-      "titel": "Sicher heizen: Was sie abdeckt und wie lange sie läuft",
-      "fassung_sha256": "98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b",
-      "bereich": "artikel",
-      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-      "treffer": 0,
-      "quellen": 0,
-      "befunde": [],
-      "geo": 100,
-      "fehler": [
-        "feedparser nicht installiert (pip install feedparser)",
-        "feedparser nicht installiert (pip install feedparser)",
-        "bundesnetzagentur.de: Jina-Reader-Abruf fehlgeschlagen (<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>)"
-      ],
-      "fachpruefung": "übersprungen (kein KI-Schlüssel: GROQ_API_KEY/GEMINI_API_KEY)",
-      "aenderungen": []
-    },
-    {
-      "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
-      "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
-      "fassung_sha256": "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af",
-      "bereich": "artikel",
-      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-      "treffer": 0,
-      "quellen": 0,
-      "befunde": [],
-      "geo": 100,
-      "fehler": [
-        "feedparser nicht installiert (pip install feedparser)",
-        "feedparser nicht installiert (pip install feedparser)",
-        "bundesnetzagentur.de: Jina-Reader-Abruf fehlgeschlagen (<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>)"
-      ],
-      "fachpruefung": "übersprungen (kein KI-Schlüssel: GROQ_API_KEY/GEMINI_API_KEY)",
-      "aenderungen": []
-    },
-    {
-      "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
-      "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
-      "fassung_sha256": "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316",
-      "bereich": "artikel",
-      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-      "treffer": 0,
-      "quellen": 0,
-      "befunde": [],
-      "geo": 100,
-      "fehler": [
-        "feedparser nicht installiert (pip install feedparser)",
-        "feedparser nicht installiert (pip install feedparser)",
-        "bundesnetzagentur.de: Jina-Reader-Abruf fehlgeschlagen (<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>)"
-      ],
-      "fachpruefung": "übersprungen (kein KI-Schlüssel: GROQ_API_KEY/GEMINI_API_KEY)",
-      "aenderungen": []
-    },
-    {
-      "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
-      "titel": "Preisgarantie Gas: Was bei Preiserhöhung hilft",
-      "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
-      "bereich": "artikel",
-      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-      "treffer": 0,
-      "quellen": 0,
-      "befunde": [],
-      "geo": 100,
-      "fehler": [
-        "feedparser nicht installiert (pip install feedparser)",
-        "feedparser nicht installiert (pip install feedparser)",
-        "bundesnetzagentur.de: Jina-Reader-Abruf fehlgeschlagen (<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>)"
-      ],
-      "fachpruefung": "übersprungen (kein KI-Schlüssel: GROQ_API_KEY/GEMINI_API_KEY)",
-      "aenderungen": []
-    }
-  ],
   "fachbefunde": [
+    {
+      "typ": "praezision",
+      "text": "Die Bewerbung des Vergleichsportals mit dem Superlativ 'Die besten Tarife' erfolgt ohne messbare Daten oder Auswahlkriterien in der Recherchegrundlage.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "124ff2c3cd3917c274aa",
+      "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+      "fassung_sha256": "98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b",
+      "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die im Artikel als Fakten genannten Gaspreise für Oktober 2026 (11 bis 13 Cent/kWh) sind nicht durch die Fundstelle belegt, die lediglich eine allgemeine Themenübersicht darstellt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "7bdec96c0329769bebe6",
+      "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+      "fassung_sha256": "98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b",
+      "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der für den Verbraucherschutz zentrale Regulierungsrahmen (Sonderkündigungsrecht, Informationspflichten der Versorger) wird in der Fundstelle nicht inhaltlich bestätigt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "a56734aa032e0ed9e0c4",
+      "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+      "fassung_sha256": "98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b",
+      "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "30caa57be394afb62947",
+      "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+      "fassung_sha256": "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af",
+      "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "32a3ea879f2cf126b3a7",
+      "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+      "fassung_sha256": "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af",
+      "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur für Januar 2026 (360 €) wird durch die allgemeine Übersichtsseite der Behörde nicht gestützt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "c583efe1ce02df3ca2d7",
+      "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+      "fassung_sha256": "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af",
+      "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Keine Quelle für die Aussage, dass das Gesetz bei einem Tarifwechsel die Grundversorgung garantiert – regulatorischer Rahmen fehlt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "437b809ffbf41e5af434",
+      "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+      "fassung_sha256": "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316",
+      "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Keine Quelle für die Behauptung, dass ein Grad weniger Raumtemperatur rund 6 % Energie einspart – Prozent‑Angabe fehlt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "9fbacd9942c2dfa1447f",
+      "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+      "fassung_sha256": "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316",
+      "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Keine Quelle für die Angabe, dass durch Optimierungsmaßnahmen 10‑15 % Einsparungen realistisch sind – Prozent‑Wert unbelegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "da30cbb5fbc8c801daf0",
+      "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+      "fassung_sha256": "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316",
+      "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Keine Quelle für die Aussage, dass im Oktober 2026 bessere Gaspreise gelten – Preis‑Trend‑Behauptung fehlt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "db8a69f08dc0020adebd",
+      "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+      "fassung_sha256": "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316",
+      "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Keine Quelle für die Angabe, dass ein Einfamilienhaus typischerweise 18.000 kWh/Jahr verbraucht – Verbrauchszahl ist unbelegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "e834f4702e87194affe7",
+      "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+      "fassung_sha256": "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316",
+      "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+    },
     {
       "id": "47f855cb4f0fe1e5c65f",
       "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
@@ -728,6 +589,51 @@
       "text": "Der Hinweis, dass eine Vollkasko ohne Selbstbeteiligung nur 3 €‑8 € pro Tag mehr kostet, fehlt in den Angaben der Verbraucherzentrale.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
       "zuletzt_gesehen": "2026-10-30 11:01 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher angekündigt werden muss, ohne dafür eine Quelle anzugeben.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "252413dcc16cea146beb",
+      "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+      "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
+      "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf den Anbieter überträgt und dafür ein höherer Startpreis üblich ist, fehlt eine konkrete Quelle und bleibt vage.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "48a0a962046c8315270e",
+      "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+      "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
+      "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Aussage, dass man „in der Regel“ zum Zeitpunkt der Preisänderung Sonderkündigungsrecht hat, ist unpräzise und wird nicht durch eine konkrete Regelung belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "9326152f4d788cff56bd",
+      "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+      "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
+      "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der angegebene durchschnittliche Gaspreis von 11,93 Cent/kWh für 2026 (laut BDEW) wird nicht durch eine Quelle belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "ab4d084fd367c8e4d518",
+      "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+      "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
+      "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Angabe, dass die Verbraucherzentrale etwa 6 % weniger Heizenergie pro Grad niedrigerer Raumtemperatur nennt, fehlt eine Quellenangabe.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "d215addd22dea72c44df",
+      "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+      "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
+      "zuletzt_gesehen": "2026-11-01 11:29 UTC"
     },
     {
       "id": "05be346e82c80b2a8664",
@@ -870,9 +776,344 @@
       "zuletzt_gesehen": "2026-10-30 11:01 UTC"
     }
   ],
-  "nachlese": {
-    "zeit": "2026-11-01 09:31 UTC",
-    "ergaenzt": 5,
-    "quelle": "data/research/artikel"
-  }
+  "kapazitaet": {
+    "stichtag": "2026-11-01",
+    "artikel": 110,
+    "faellig": 8,
+    "ueberfaellig": 8,
+    "ueberfaellig_max_tage": 4,
+    "naechste_frist": {
+      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+      "frist": "2026-11-03",
+      "restlaufzeit": 2
+    },
+    "budget": 4,
+    "laeufe_je_tag": 1.0,
+    "kapazitaet_je_tag": 4.0,
+    "bedarf_je_tag": 2.678,
+    "bedarf_je_woche": 18.7,
+    "deckung_prozent": 149.4,
+    "horizont_tage": 120,
+    "vorlauf_tage": 7,
+    "nachhol_frist_tage": 7,
+    "abbau_tage": 1,
+    "verletzungen_alt": 8,
+    "verletzungen_neu": 0,
+    "verletzungen_folge": 0,
+    "verletzungen_folge_seiten": 0,
+    "verletzungen": [
+      {
+        "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+        "titel": "Sicher heizen: Was sie abdeckt und wie lange sie läuft",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 4,
+        "vorher_faellig": true,
+        "folgeprüfung": false
+      },
+      {
+        "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 4,
+        "vorher_faellig": true,
+        "folgeprüfung": false
+      },
+      {
+        "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+        "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 4,
+        "vorher_faellig": true,
+        "folgeprüfung": false
+      },
+      {
+        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "titel": "Preisgarantie Gas: Was bei Preiserhöhung hilft",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 4,
+        "vorher_faellig": true,
+        "folgeprüfung": false
+      },
+      {
+        "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+        "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 4,
+        "vorher_faellig": true,
+        "folgeprüfung": false
+      },
+      {
+        "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
+        "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 4,
+        "vorher_faellig": true,
+        "folgeprüfung": false
+      },
+      {
+        "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+        "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 4,
+        "vorher_faellig": true,
+        "folgeprüfung": false
+      },
+      {
+        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
+        "frist": "2026-10-28",
+        "tage_zu_spaet": 4,
+        "vorher_faellig": true,
+        "folgeprüfung": false
+      }
+    ],
+    "offen_im_horizont": 110,
+    "puenktlich": true,
+    "rueckstand_abgebaut": true
+  },
+  "abbrueche": [],
+  "offen": [
+    {
+      "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+      "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
+      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "faellig": true,
+      "frist": "2026-10-28",
+      "geo": 100
+    },
+    {
+      "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
+      "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
+      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "faellig": true,
+      "frist": "2026-10-28",
+      "geo": 83
+    },
+    {
+      "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+      "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
+      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "faellig": true,
+      "frist": "2026-10-28",
+      "geo": 100
+    },
+    {
+      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+      "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
+      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "faellig": true,
+      "frist": "2026-10-28",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+      "titel": "Gasabschlag berechnen: So planst du die Heizsaison richtig",
+      "grund": "frisch geprüft vor 28 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-03",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
+      "titel": "Weihnachten Budget planen: Ohne Schulden durch die Feiertage",
+      "grund": "frisch geprüft vor 28 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-03",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+      "titel": "Campingurlaub planen: Budget für Platz und Fahrt",
+      "grund": "frisch geprüft vor 25 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-06",
+      "geo": 83
+    },
+    {
+      "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+      "titel": "Urlaub sparen: Budget, Buchung und Kosten im Blick",
+      "grund": "frisch geprüft vor 25 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-06",
+      "geo": 83
+    },
+    {
+      "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+      "titel": "Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig",
+      "grund": "frisch geprüft vor 25 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-06",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "titel": "Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden",
+      "grund": "frisch geprüft vor 25 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-06",
+      "geo": 100
+    }
+  ],
+  "laeufe": [
+    {
+      "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+      "titel": "Sicher heizen: Was sie abdeckt und wie lange sie läuft",
+      "fassung_sha256": "98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b",
+      "bereich": "artikel",
+      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [
+        {
+          "typ": "luecke",
+          "text": "Die im Artikel als Fakten genannten Gaspreise für Oktober 2026 (11 bis 13 Cent/kWh) sind nicht durch die Fundstelle belegt, die lediglich eine allgemeine Themenübersicht darstellt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Der für den Verbraucherschutz zentrale Regulierungsrahmen (Sonderkündigungsrecht, Informationspflichten der Versorger) wird in der Fundstelle nicht inhaltlich bestätigt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "praezision",
+          "text": "Die Bewerbung des Vergleichsportals mit dem Superlativ 'Die besten Tarife' erfolgt ohne messbare Daten oder Auswahlkriterien in der Recherchegrundlage.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        }
+      ],
+      "geo": 100,
+      "fehler": [
+        "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
+        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+      ],
+      "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)",
+      "aenderungen": [
+        "faktencheck: 2026-11-01"
+      ]
+    },
+    {
+      "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+      "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
+      "fassung_sha256": "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af",
+      "bereich": "artikel",
+      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [
+        {
+          "typ": "luecke",
+          "text": "Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur für Januar 2026 (360 €) wird durch die allgemeine Übersichtsseite der Behörde nicht gestützt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        }
+      ],
+      "geo": 100,
+      "fehler": [
+        "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
+        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+      ],
+      "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)",
+      "aenderungen": [
+        "faktencheck: 2026-11-01"
+      ]
+    },
+    {
+      "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+      "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
+      "fassung_sha256": "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316",
+      "bereich": "artikel",
+      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [
+        {
+          "typ": "luecke",
+          "text": "Keine Quelle für die Aussage, dass im Oktober 2026 bessere Gaspreise gelten – Preis‑Trend‑Behauptung fehlt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Keine Quelle für die Angabe, dass ein Einfamilienhaus typischerweise 18.000 kWh/Jahr verbraucht – Verbrauchszahl ist unbelegt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Keine Quelle für die Behauptung, dass ein Grad weniger Raumtemperatur rund 6 % Energie einspart – Prozent‑Angabe fehlt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Keine Quelle für die Angabe, dass durch Optimierungsmaßnahmen 10‑15 % Einsparungen realistisch sind – Prozent‑Wert unbelegt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Keine Quelle für die Aussage, dass das Gesetz bei einem Tarifwechsel die Grundversorgung garantiert – regulatorischer Rahmen fehlt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        }
+      ],
+      "geo": 100,
+      "fehler": [
+        "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (<urlopen error timed out>)",
+        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+      ],
+      "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)",
+      "aenderungen": [
+        "faktencheck: 2026-11-01"
+      ]
+    },
+    {
+      "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+      "titel": "Preisgarantie Gas: Was bei Preiserhöhung hilft",
+      "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
+      "bereich": "artikel",
+      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [
+        {
+          "typ": "luecke",
+          "text": "Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher angekündigt werden muss, ohne dafür eine Quelle anzugeben.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Der angegebene durchschnittliche Gaspreis von 11,93 Cent/kWh für 2026 (laut BDEW) wird nicht durch eine Quelle belegt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Angabe, dass die Verbraucherzentrale etwa 6 % weniger Heizenergie pro Grad niedrigerer Raumtemperatur nennt, fehlt eine Quellenangabe.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "praezision",
+          "text": "Die Aussage, dass man „in der Regel“ zum Zeitpunkt der Preisänderung Sonderkündigungsrecht hat, ist unpräzise und wird nicht durch eine konkrete Regelung belegt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "praezision",
+          "text": "Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf den Anbieter überträgt und dafür ein höherer Startpreis üblich ist, fehlt eine konkrete Quelle und bleibt vage.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        }
+      ],
+      "geo": 100,
+      "fehler": [
+        "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (<urlopen error timed out>)",
+        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+      ],
+      "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)",
+      "aenderungen": [
+        "faktencheck: 2026-11-01"
+      ]
+    }
+  ]
 }

@@ -34,7 +34,7 @@ quellen:
   - titel: "Kündigung und Widerruf bei Energieverträgen"
     url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Kuendigung/start.html"
     herausgeber: "Bundesnetzagentur"
-faktencheck: 2026-09-28
+faktencheck: 2026-11-01
 ---
 
 Du willst sicher heizen? Die Gaspreise schwanken stark (Stand: Oktober 2026). Eine Preisgarantie ist deshalb kein Luxus, sondern ein Werkzeug für deine Planung.
