@@ -23,6 +23,7 @@ Fünf Ebenen, damit „die Skala gilt" nicht von einem grünen Lauf abhängt:
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import sys
 import unittest
@@ -38,10 +39,13 @@ WACHE = SCRIPTS / "bewegungs_wache.py"
 REGELWERK = ROOT / "data" / "design" / "regelwerk.yaml"
 BERICHT = ROOT / "BEWEGUNG-AUDIT-HIGHEND-2026-11-01.md"
 
-# Eingefrorener Bestand am 01.11.2026 (BEWEGUNG-AUDIT-…).
-# Sinkt die Zahl, gehört sie hier gesenkt – das ist die Heilung.
-BESTAND_BEFUNDE = 42          # B1 (41) + B4 (1)
-BESTAND_HINWEISE = 107        # B2 (67) + B3 (2) + B5 (38)
+# Eingefrorener Bestand NACH Schritt 1 (Skala erweitert, 01.11.2026).
+# Vorher: 42 Befunde (41 × B1, 1 × B4) und 107 Hinweise. Die Skala steht
+# jetzt in DESIGN.md §6.1 + regelwerk.yaml, `ease` ist ausdrücklich erlaubt –
+# deshalb 0 Befunde. Was bleibt, sind die zwei `transition: all` und die Lifts
+# ohne Druck-Feedback (Politur, kein Vertragsbruch).
+BESTAND_BEFUNDE = 0
+BESTAND_HINWEISE = 40         # B3 (2) + B5 (38)
 
 
 def wache(*argumente: str) -> subprocess.CompletedProcess:
@@ -119,9 +123,61 @@ class Bestand(unittest.TestCase):
                              "Neue Hinweise (Easing/`all`/Lift) – siehe Bericht.")
 
     def test_ohne_befund_ist_der_exitcode_null(self):
-        """Belegt die Verdrahtung: der Bestandslauf darf nicht still grün sein."""
-        lauf = wache("--json", "--nur-hinweise")
-        self.assertEqual(lauf.returncode, 0, lauf.stderr)
+        """Der Bestandslauf ist grün – sonst darf die Wache nicht ins Gate."""
+        lauf = wache("--json")
+        self.assertEqual(lauf.returncode, 0, lauf.stdout[-400:] + lauf.stderr)
+
+    def test_kein_befund_mehr_im_bestand(self):
+        """Schritt 1 ist vollzogen: keine Dauer außerhalb der Skala, keine
+        undokumentierte Layout-Animation. Fällt hier etwas auf, hat jemand
+        Bewegung ohne Skala eingebaut."""
+        daten = json.loads(wache("--json").stdout)
+        self.assertEqual([f["klasse"] for f in daten["befunde"]], [],
+                         "Bewegung außerhalb der Skala – erst §6.1/Regelwerk "
+                         "entscheiden, dann eintragen (nie umgekehrt).")
+
+
+class SkalaSynchron(unittest.TestCase):
+    """DESIGN.md §6.1 (Prosa) und regelwerk.yaml (Maschine) müssen dasselbe
+    sagen. Zwei Wahrheitsorte ohne Abgleich sind der Fehler, den dieses Repo
+    an `serp_limits.py` schon einmal beschrieben hat – und der Grund, warum
+    die Dauer-Liste am 01.11.2026 überhaupt auffiel."""
+
+    def test_jede_dauer_in_6_1_steht_im_regelwerk(self):
+        text = (ROOT / "DESIGN.md").read_text(encoding="utf-8")
+        abschnitt = text[text.index("### 6.1"):text.index("### 6.2")]
+        aus_prosa = {round(float(w.replace(",", ".")), 4)
+                     for w in re.findall(r"\|\s*(?:\*\*)?\w+(?:\+)?(?:\*\*)?\s*\|\s*([0-9],[0-9]+) s", abschnitt)}
+        dauern, _ = bw.skala(REGELWERK)
+        self.assertEqual(aus_prosa - dauern, set(),
+                         "Dauer in §6.1, aber nicht im Regelwerk – das Gate "
+                         "würde sie als Verstoß melden.")
+        self.assertEqual(dauern - aus_prosa, set(),
+                         "Dauer im Regelwerk, aber nicht in §6.1 – dann steht "
+                         "eine Zahl ohne Aufgabe in der Skala.")
+
+    def test_ease_ist_ausdruecklich_erlaubt(self):
+        """67 ausgelieferte Deklarationen nutzen `ease`. Ein Verbot im
+        Regelwerk hätte sie alle zu Befunden gemacht, ohne dass sich am
+        Verhalten etwas ändert."""
+        _, kurven = bw.skala(REGELWERK)
+        self.assertIn("ease", kurven)
+        daten = json.loads(wache("--json").stdout)
+        self.assertEqual([f for f in daten["hinweise"] if f["klasse"] == "B2"], [])
+
+    def test_layout_ausnahmen_stehen_in_prosa_und_maschine(self):
+        texte = (ROOT / "DESIGN.md").read_text(encoding="utf-8")
+        abschnitt = texte[texte.index("### 6.1"):texte.index("### 6.2")]
+        for eintrag in bw.layout_ausnahmen(REGELWERK):
+            selektor = eintrag["selektor"]
+            self.assertIn(selektor, abschnitt,
+                          f"{selektor} steht im Regelwerk, aber nicht in §6.1")
+            self.assertTrue(str(eintrag.get("grund") or "").strip(),
+                            f"{selektor}: Ausnahme ohne Grund")
+
+    def test_layout_ausnahme_braucht_einen_grund(self):
+        for eintrag in bw.layout_ausnahmen(REGELWERK):
+            self.assertIn("grund", eintrag)
 
 
 class Abgrenzung(unittest.TestCase):
@@ -159,15 +215,14 @@ class Verdrahtung(unittest.TestCase):
         quelle = WACHE.read_text(encoding="utf-8")
         self.assertIn('"--selftest"', quelle)
 
-    def test_wache_ist_nicht_im_gate_blockiert_aber_dokumentiert(self):
-        """Solange der Bestand rot ist, steht sie NICHT in GUARDS – das ist
-        eine Entscheidung, keine Vergesslichkeit, und steht im Bericht."""
+    def test_wache_steht_im_vertraglichen_minimum(self):
+        """Seit der Heilung (0 Befunde) gehört sie zu GUARDS. Eine Wache, die
+        niemand verlangt, führt irgendwann niemand aus – und dann wächst die
+        Skala wieder unbemerkt."""
         import governance_contract as gc
-        if BERICHT.is_file():
-            text = BERICHT.read_text(encoding="utf-8")
-            self.assertIn("GUARDS", text)
-        if "bewegungs_wache.py" not in gc.GUARDS:
-            self.skipTest("bewusst nicht im vertraglichen Minimum (Bestand rot)")
+        self.assertIn("bewegungs_wache.py", gc.GUARDS,
+                      "ohne Platz in GUARDS läuft ihr Selbsttest im Qualitäts-"
+                      "Gate nie")
 
     def test_skill_nennt_die_wache(self):
         skill = ROOT / ".claude/skills/ff-oberflaeche/SKILL.md"

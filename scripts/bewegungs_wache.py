@@ -81,6 +81,7 @@ from __future__ import annotations
 import argparse
 import datetime
 import json
+import os
 import re
 import sys
 from dataclasses import dataclass, asdict
@@ -89,7 +90,12 @@ from pathlib import Path
 BLOG_DIR = Path(__file__).resolve().parent.parent
 CSS_KORPUS = ("assets/css/extended", "assets/css/varianten")
 REGELWERK = BLOG_DIR / "data" / "design" / "regelwerk.yaml"
-AUSNAHMEN = BLOG_DIR / "data" / "bewegungs_wache_ausnahmen.yaml"
+# Über BEWEGUNGS_AUSNAHMEN überschreibbar: Der Selbsttest und die Tests
+# müssen die AUSNAHME-Logik prüfen können, auch wenn im Repo (absichtlich)
+# keine Ausnahme steht. Eine Datei, die man nur im Ernstfall testen kann,
+# wird im Ernstfall zum ersten Mal getestet.
+AUSNAHMEN = Path(os.environ.get("BEWEGUNGS_AUSNAHMEN",
+                                BLOG_DIR / "data" / "bewegungs_wache_ausnahmen.yaml"))
 
 # Was ein Korpus mindestens enthalten muss. Eine Wache, die 0 Dateien
 # geprüft hat, ist nicht grün, sondern blind (Lehre aus Meldung #900:
@@ -98,12 +104,12 @@ MIN_DATEIEN = 10
 
 LAYOUT_EIGENSCHAFTEN = ("width", "height", "top", "left", "right", "bottom",
                         "margin", "padding")
-# `width` in einer Transition ist NUR für den in DESIGN.md §6 ausdrücklich
-# genannten Fall erlaubt (Voice-Progress, `.18s linear`). Die Wache erkennt
-# ihn am Selektor-Namen – nicht am Ermessen. Ein zweiter Balken (Werkzeuge,
-# `.3s cubic-bezier`) ist damit ein Befund und keine stillschweigende
-# Ausnahme: Entweder er kommt in DESIGN.md §6 oder er animiert `transform`.
-FORTSCHRITTS_MUSTER = re.compile(r"progress|railfill|meter")
+# Keine Layout-Animation (DESIGN.md §6/§7) – AUSSER den Fällen, die
+# DESIGN.md §6.1 namentlich nennt. Die Liste steht maschinenlesbar in
+# `marke.layout_animation_ausnahmen` (regelwerk.yaml), damit es keine
+# zweite Wahrheit im Code gibt: Wer eine Ausnahme will, schreibt sie dorthin
+# – mit Grund – und der Mensch liest sie in §6.1.
+LAYOUT_AUSNAHMEN_SCHLUESSEL = "layout_animation_ausnahmen"
 
 BEFUND_KLASSEN = {
     "B1": "Dauer außerhalb der Skala",
@@ -212,36 +218,91 @@ def einstieg(selektor: str) -> str:
 
 
 # ------------------------------------------------------------------ Regeln laden
-def skala(regelwerk: Path) -> tuple[set[float], set[str]]:
-    """Dauer- und Easing-Skala aus dem Regelwerk lesen – eine Wahrheit.
+def _skala_aus_yaml(text: str) -> tuple[set[float], set[str]]:
+    """Erster Leser: echtes YAML. Wirft ImportError, wenn PyYAML fehlt."""
+    import yaml  # type: ignore
 
-    Ohne PyYAML gibt es einen kleinen Leser für genau die zwei Listen;
-    eine Wache, die an einer fehlenden Abhängigkeit stirbt, prüft nichts.
+    daten = yaml.safe_load(text) or {}
+    marke = daten.get("marke") or {}
+    dauern = {round(float(w), 4) for w in marke.get("uebergang_dauer_s_erlaubt") or []}
+    kurven = {re.sub(r"\s+", "", str(k)).lower() for k in marke.get("easing_erlaubt") or []}
+    return dauern, kurven
+
+
+def _yaml_liste(text: str, schluessel: str) -> list[str]:
+    """Zweiter Leser für EINE Liste – beide YAML-Schreibweisen.
+
+    Blockform (`schluessel:` + eingerückte `- wert`) und Inline-Form
+    (`schluessel: [a, b]`). Die Blockform ist der Grund, warum es diesen
+    Leser überhaupt gibt: `easing_erlaubt` steht so im Regelwerk, und ein
+    Leser, der nur `[...]` kennt, findet dort nichts.
     """
+    zeilen = text.splitlines()
+    for nummer, zeile in enumerate(zeilen):
+        treffer = re.match(rf"^(\s*){re.escape(schluessel)}\s*:\s*(.*)$", zeile)
+        if not treffer:
+            continue
+        einrueckung, rest = len(treffer.group(1)), treffer.group(2).strip()
+        if rest.startswith("["):
+            # Inline-Form, ggf. über mehrere Zeilen umbrochen.
+            gesamt = rest
+            folge = nummer + 1
+            while "]" not in gesamt and folge < len(zeilen):
+                gesamt += " " + zeilen[folge].split("#", 1)[0].strip()
+                folge += 1
+            inhalt = gesamt[gesamt.index("[") + 1:gesamt.rfind("]")] if "]" in gesamt else gesamt[1:]
+            return [t.strip().strip("\"'") for t in inhalt.split(",") if t.strip()]
+        werte = []
+        for folge in zeilen[nummer + 1:]:
+            if not folge.strip() or folge.strip().startswith("#"):
+                continue
+            eintrag = re.match(r"^(\s*)-\s*(.+?)\s*$", folge)
+            if not eintrag or len(eintrag.group(1)) <= einrueckung:
+                break
+            werte.append(eintrag.group(2).strip().strip("\"'"))
+        return werte
+    return []
+
+
+def _skala_rueckfall(text: str) -> tuple[set[float], set[str]]:
+    """Zweiter Leser ohne Abhängigkeit – dieselben Zahlen, andere Mittel."""
+    dauern = {round(float(w), 4)
+              for w in _yaml_liste(text, "uebergang_dauer_s_erlaubt")}
+    kurven = {re.sub(r"\s+", "", k).lower() for k in _yaml_liste(text, "easing_erlaubt")}
+    return dauern, kurven
+
+
+def layout_ausnahmen(regelwerk: Path) -> list[dict]:
+    """Die dokumentierten Ausnahmen von „keine Layout-Animation" (DESIGN.md §6.1)."""
     text = regelwerk.read_text(encoding="utf-8")
     try:
         import yaml  # type: ignore
         daten = yaml.safe_load(text) or {}
-        marke = daten.get("marke") or {}
-        werte = [round(float(w), 4) for w in marke.get("uebergang_dauer_s_erlaubt") or []]
-        kurven = {re.sub(r"\s+", "", str(k)).lower() for k in marke.get("easing_erlaubt") or []}
-        if not werte or not kurven:
-            raise ValueError("marke.uebergang_dauer_s_erlaubt/easing_erlaubt leer")
-        return set(werte), kurven
+        roh = (daten.get("marke") or {}).get(LAYOUT_AUSNAHMEN_SCHLUESSEL) or []
+        return [e for e in roh if isinstance(e, dict) and str(e.get("selektor") or "").strip()]
     except ImportError:
         pass
+    return [e for e in _yaml_block(text, LAYOUT_AUSNAHMEN_SCHLUESSEL)
+            if str(e.get("selektor") or "").strip()]
 
-    def liste(schluessel: str) -> list[str]:
-        treffer = re.search(rf"^\s*{schluessel}\s*:\s*\[(.*?)\]", text, re.M | re.S)
-        if not treffer:
-            return []
-        return [teil.strip().strip("\"'") for teil in treffer.group(1).split(",") if teil.strip()]
 
-    werte = [round(float(w), 4) for w in liste("uebergang_dauer_s_erlaubt")]
-    kurven = {re.sub(r"\s+", "", k).lower() for k in liste("easing_erlaubt")}
-    if not werte or not kurven:
-        raise ValueError("Skala nicht lesbar – weder YAML noch Rückfall-Leser fanden Werte")
-    return set(werte), kurven
+def skala(regelwerk: Path) -> tuple[set[float], set[str]]:
+    """Dauer- und Easing-Skala aus dem Regelwerk lesen – eine Wahrheit.
+
+    Zwei Leser, ein Ergebnis: PyYAML (CI) und der Rückfallleser (nackter
+    Sandkasten). Fehlt eine der beiden Listen, ist das ein Fehler und keine
+    leere Skala – eine leere Skala würde jedes `transition` als Verstoß
+    melden und wäre damit ein Totalalarm statt einer Prüfung.
+    """
+    text = regelwerk.read_text(encoding="utf-8")
+    try:
+        dauern, kurven = _skala_aus_yaml(text)
+    except ImportError:
+        dauern, kurven = _skala_rueckfall(text)
+    if not dauern or not kurven:
+        raise ValueError("marke.uebergang_dauer_s_erlaubt / easing_erlaubt nicht "
+                         f"lesbar (Dauern {sorted(dauern)}, Kurven {sorted(kurven)})")
+    return dauern, kurven
 
 
 def _rel(pfad: Path) -> str:
@@ -252,22 +313,104 @@ def _rel(pfad: Path) -> str:
         return pfad.name
 
 
-def ausnahmen(pfad: Path, stichtag: datetime.date) -> tuple[list[dict], list[Fund]]:
-    """Ausnahmen lesen: Grund, Frist, und ob sie noch greifen."""
+def _yaml_block(text: str, schluessel: str) -> list[dict]:
+    """Eine YAML-Blockliste von Objekten lesen – ohne PyYAML.
+
+    Deckt genau die Form, die dieses Repo in `bewegungs_wache_ausnahmen.yaml`
+    und `marke.layout_animation_ausnahmen` benutzt:
+
+        schluessel:
+          - pfad: a.css          # Schlüssel direkt am Bindestrich
+            grund: >             # mehrzeiliger Textblock
+              Satz eins.
+              Satz zwei.
+            faellig: 2026-12-31  # Schlüssel auf Eintragsebene
+
+    Was dieser Leser nicht versteht, fällt weg. Das ist die sichere Richtung:
+    eine nicht gelesene Ausnahme lässt den Befund stehen, statt eine
+    unbelegte Freigabe zu erzeugen. Die Rückfallliste ist nötig, weil der
+    CI-Runner PyYAML hat, ein nackter Sandkasten aber nicht – und eine Wache,
+    die dort blind ist, meldet dort Unsinn.
+    """
+    zeilen = text.splitlines()
+    beginn = None
+    for nummer, roh in enumerate(zeilen):
+        treffer = re.match(rf"^(\s*){re.escape(schluessel)}\s*:\s*(.*)$", roh)
+        if treffer:
+            if treffer.group(2).strip() == "[]":
+                return []
+            beginn = nummer + 1
+            basis = len(treffer.group(1))
+            break
+    if beginn is None:
+        return []
+
+    eintraege: list[dict] = []
+    aktuell: dict | None = None
+    block_schluessel: str | None = None
+    block: list[str] = []
+    block_einrueckung = 0
+
+    def block_abschliessen() -> None:
+        nonlocal block_schluessel, block
+        if aktuell is not None and block_schluessel:
+            aktuell[block_schluessel] = " ".join(block).strip()
+        block_schluessel, block = None, []
+
+    def abschliessen() -> None:
+        nonlocal aktuell
+        block_abschliessen()
+        if aktuell is not None:
+            eintraege.append(aktuell)
+        aktuell = None
+
+    for roh in zeilen[beginn:]:
+        if not roh.strip() or roh.strip().startswith("#"):
+            continue
+        if len(roh) - len(roh.lstrip()) <= basis and not roh.lstrip().startswith("-"):
+            break  # Liste zu Ende (nächster Schlüssel auf gleicher Ebene)
+        inhalt = roh.split("#", 1)[0].rstrip()
+        if block_schluessel is not None:
+            if len(inhalt) - len(inhalt.lstrip()) > block_einrueckung:
+                block.append(inhalt.strip())
+                continue
+            block_abschliessen()
+        start_eintrag = re.match(r"^(\s*)-\s*(.*)$", inhalt)
+        if start_eintrag:
+            abschliessen()
+            aktuell = {}
+            rest = start_eintrag.group(2).strip()
+            if rest:
+                schluessel_teil, _, wert = rest.partition(":")
+                if wert.strip() in (">", "|", ">-", "|-"):
+                    block_schluessel = schluessel_teil.strip()
+                    block = []
+                    block_einrueckung = len(inhalt) - len(inhalt.lstrip())
+                else:
+                    aktuell[schluessel_teil.strip()] = wert.strip().strip("\"'")
+            continue
+        if aktuell is None:
+            continue
+        treffer = re.match(r"^\s+([A-Za-z_][\w-]*)\s*:\s*(.*)$", inhalt)
+        if not treffer:
+            continue
+        schluessel_teil, wert = treffer.group(1), treffer.group(2).strip()
+        if wert in (">", "|", ">-", "|-"):
+            block_schluessel = schluessel_teil
+            block = []
+            block_einrueckung = len(inhalt) - len(inhalt.lstrip())
+        else:
+            aktuell[schluessel_teil] = wert.strip("\"'")
+    abschliessen()
+    return eintraege
+
+
+def _pruefe_ausnahmen(eintraege, rel: str, stichtag: datetime.date) -> tuple[list[dict], list[Fund]]:
+    """Eine Logik für beide Leser: Grund, Frist, und ob die Frist noch läuft."""
     funde: list[Fund] = []
-    if not pfad.is_file():
-        return [], funde
-    rel = _rel(pfad)
-    try:
-        import yaml  # type: ignore
-        daten = yaml.safe_load(pfad.read_text(encoding="utf-8")) or {}
-    except ImportError:
-        return [], funde
-    eintraege = daten.get("ausnahmen") or []
     if not isinstance(eintraege, list):
-        return [], [Fund("B6", rel, 0, "-",
-                         "`ausnahmen` ist keine Liste.")]
-    sauber = []
+        return [], [Fund("B6", rel, 0, "-", "`ausnahmen` ist keine Liste.")]
+    sauber: list[dict] = []
     for nummer, eintrag in enumerate(eintraege, 1):
         stelle = f"Eintrag {nummer}"
         if not isinstance(eintrag, dict):
@@ -286,22 +429,42 @@ def ausnahmen(pfad: Path, stichtag: datetime.date) -> tuple[list[dict], list[Fun
             try:
                 datum = datetime.date.fromisoformat(faellig)
             except ValueError:
+                alle_pflichten_da = False
                 funde.append(Fund("B6", rel, nummer, stelle,
                                   f"`faellig: {faellig}` ist kein ISO-Datum (JJJJ-MM-TT)."))
-                continue
-            if datum < stichtag:
-                funde.append(Fund("B6", rel, nummer, stelle,
-                                  f"Frist {faellig} ist abgelaufen – die Ausnahme "
-                                  "verlängert sich nicht von selbst."))
+            else:
+                if datum < stichtag:
+                    funde.append(Fund("B6", rel, nummer, stelle,
+                                      f"Frist {faellig} ist abgelaufen – die Ausnahme "
+                                      "verlängert sich nicht von selbst."))
+                elif str(eintrag.get("grund") or "").strip() and \
+                        not str(eintrag.get("entscheidung") or "").strip():
+                    funde.append(Fund("B6", rel, nummer, stelle,
+                                      "ohne `entscheidung` – wer hat sie beschlossen? "
+                                      "Eine Frist ohne Entscheidung ist ein Aufschub."))
         if alle_pflichten_da:
             sauber.append(eintrag)
     return sauber, funde
 
 
-# ------------------------------------------------------------------ Prüfen
+def ausnahmen(pfad: Path, stichtag: datetime.date) -> tuple[list[dict], list[Fund]]:
+    """Ausnahmen lesen: Grund, Frist, und ob sie noch greifen."""
+    if not pfad.is_file():
+        return [], []
+    rel = _rel(pfad)
+    try:
+        import yaml  # type: ignore
+        daten = yaml.safe_load(pfad.read_text(encoding="utf-8")) or {}
+    except ImportError:
+        return _pruefe_ausnahmen(_yaml_block(pfad.read_text(encoding="utf-8"), "ausnahmen"),
+                                 rel, stichtag)
+    return _pruefe_ausnahmen(daten.get("ausnahmen") or [], rel, stichtag)
+
+
 def pruefe_baum(wurzel: Path, erlaubte_dauern: set[float],
                 erlaubte_kurven: set[str], ausnahme_liste: list[dict],
-                dateien: list[Path] | None = None) -> tuple[list[Fund], list[Fund], int]:
+                dateien: list[Path] | None = None,
+                layout_frei: list[str] | None = None) -> tuple[list[Fund], list[Fund], int]:
     """B1–B5 über einen CSS-Baum. Gibt (Befunde, Hinweise, Dateizahl)."""
     pfade = dateien or [p for ordner in CSS_KORPUS
                         for p in sorted((wurzel / ordner).glob("*.css"))]
@@ -344,8 +507,8 @@ def pruefe_baum(wurzel: Path, erlaubte_dauern: set[float],
                 for eigenschaft in LAYOUT_EIGENSCHAFTEN:
                     if not re.search(rf"(?:^|[\s,]){eigenschaft}(?:\s|,|$)", wert):
                         continue
-                    if eigenschaft == "width" and FORTSCHRITTS_MUSTER.search(sel.lower()):
-                        continue  # DESIGN.md §6: dokumentierte Ausnahme
+                    if any(muster in sel for muster in (layout_frei or ())):
+                        continue  # DESIGN.md §6.1: namentlich dokumentierte Ausnahme
                     if (rel, "B4") in ausnahmen_keys:
                         continue
                     befunde.append(Fund(
@@ -449,13 +612,21 @@ def selbsttest() -> int:
     b, _ = lauf(".a { transition: left .16s ease; }")
     pruefe("L7 animiertes `left` ist B4", [f.klasse for f in b] == ["B4"])
 
-    # 6) Fortschrittsbalken ist die dokumentierte Ausnahme (DESIGN.md §6)
-    b, _ = lauf(".ff-voice-progress { transition: width .16s linear; }")
-    pruefe("L8 Fortschrittsbalken-Breite bleibt erlaubt", not b, [f.meldung for f in b])
-
-    # 6b) Ein zweiter Balken ist keine dokumentierte Ausnahme
-    b, _ = lauf(".ff-wz__balken-fuellung { transition: width .3s cubic-bezier(.2,.7,.2,1); }")
-    pruefe("L8b Werkzeug-Balken ist B4 (nicht in DESIGN.md §6 dokumentiert)",
+    # 6) Nur die in DESIGN.md §6.1 genannten Selektoren dürfen Layout animieren
+    frei = [".ff-voice-progress"]
+    with tempfile.TemporaryDirectory() as tmp:
+        ordner = Path(tmp) / "assets" / "css" / "extended"
+        ordner.mkdir(parents=True)
+        (ordner / "probe.css").write_text(
+            ".ff-voice-progress { transition: width .18s linear; }\n"
+            ".ff-wz__balken-fuellung { transition: width .3s linear; }\n",
+            encoding="utf-8")
+        for i in range(MIN_DATEIEN - 1):
+            (ordner / f"leer{i}.css").write_text(".x{color:red}\n", encoding="utf-8")
+        b, _, _ = pruefe_baum(Path(tmp), skala_dauer, skala_kurve, [], layout_frei=frei)
+    pruefe("L8 dokumentierte Layout-Ausnahme bleibt erlaubt",
+           not [f for f in b if ".ff-voice-progress" in f.selektor], [f.selektor for f in b])
+    pruefe("L8b nicht gelistete Layout-Animation ist B4",
            [f.klasse for f in b] == ["B4"], [f.klasse for f in b])
 
     # 7) Lift ohne Druck → Hinweis B5; mit `:active` → still
@@ -506,7 +677,8 @@ def selbsttest() -> int:
         pruefe("L17 abgelaufene Frist ist ein Befund",
                any("abgelaufen" in f.meldung for f in funde), [f.meldung for f in funde])
 
-    # 13) Skala-Rückfallleser: ohne PyYAML dieselben Zahlen
+    # 13) Beide Leser liefern dasselbe – geprüft am ECHTEN Regelwerk, ohne
+    #     sich darauf zu verlassen, ob PyYAML in dieser Umgebung da ist.
     with tempfile.TemporaryDirectory() as tmp:
         rw = Path(tmp) / "regelwerk.yaml"
         rw.write_text("marke:\n  uebergang_dauer_s_erlaubt: [0.16, 0.3]\n"
@@ -515,6 +687,53 @@ def selbsttest() -> int:
         werte, kurven = skala(rw)
         pruefe("L18 Skala wird aus dem Regelwerk gelesen",
                werte == {0.16, 0.3} and "ease-out" in kurven, f"{werte} {kurven}")
+        rueck = _skala_rueckfall(rw.read_text(encoding="utf-8"))
+        pruefe("L18a Rückfallleser liest die Blockliste `easing_erlaubt`",
+               rueck[1] == kurven, f"Rückfall {rueck[1]} vs. YAML {kurven}")
+        try:
+            yaml_leser = _skala_aus_yaml(rw.read_text(encoding="utf-8"))
+        except ImportError:
+            yaml_leser = None
+        pruefe("L18b beide Leser sind sich einig",
+               yaml_leser is None or yaml_leser == rueck, f"{yaml_leser} vs {rueck}")
+
+    # 13b) Ausnahmedatei OHNE PyYAML lesbar (dieser Fall ist real: der
+    #      Sandkasten hat kein yaml, der CI-Runner schon)
+    with tempfile.TemporaryDirectory() as tmp:
+        datesi = Path(tmp) / "ausnahmen.yaml"
+        datesi.write_text(
+            "ausnahmen:\n"
+            "  - pfad: a.css\n"
+            "    klasse: B1\n"
+            "    grund: >\n"
+            "      Zwei Zeilen Grund,\n"
+            "      die zusammengehören.\n"
+            "    entscheidung: \"Mensch, 01.11.2026\"\n"
+            "    faellig: 2026-12-31\n",
+            encoding="utf-8")
+        roh = _yaml_block(datesi.read_text(encoding="utf-8"), "ausnahmen")
+        pruefe("L18d Rückfallleser liest die Ausnahmen (Block-Grund)",
+               len(roh) == 1 and "zusammengehören" in roh[0].get("grund", ""), str(roh))
+        sauber, funde = _pruefe_ausnahmen(roh, "x.yaml", datetime.date(2026, 11, 1))
+        pruefe("L18e Rückfall-Ausnahme ist gültig", len(sauber) == 1 and not funde,
+               [f.meldung for f in funde])
+
+    # 13c) Eine Ausnahme ohne `entscheidung` ist ein Aufschub, kein Beschluss
+    sauber, funde = _pruefe_ausnahmen(
+        [{"pfad": "a.css", "grund": "x", "faellig": "2026-12-31"}],
+        "x.yaml", datetime.date(2026, 11, 1))
+    pruefe("L18f Ausnahme ohne Entscheidung wird gemeldet",
+           any("entscheidung" in f.meldung for f in funde), [f.meldung for f in funde])
+
+    # 14) Fehlt eine Liste, ist das ein Fehler – keine leere Skala
+    with tempfile.TemporaryDirectory() as tmp:
+        kaputt = Path(tmp) / "kaputt.yaml"
+        kaputt.write_text("marke:\n  uebergang_dauer_s_erlaubt: [0.16]\n", encoding="utf-8")
+        try:
+            skala(kaputt)
+            pruefe("L18c fehlende Easing-Liste ist ein Fehler", False, "keine Ausnahme")
+        except ValueError:
+            pruefe("L18c fehlende Easing-Liste ist ein Fehler", True)
 
     # 14) Leerer Baum ist ein Fehler, keine Entwarnung
     with tempfile.TemporaryDirectory() as tmp:
@@ -565,8 +784,14 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     ausnahme_liste, ausnahme_funde = ausnahmen(AUSNAHMEN, stichtag)
+    try:
+        layout_frei = [str(e["selektor"]) for e in layout_ausnahmen(REGELWERK)]
+    except (OSError, ValueError) as fehler:
+        print(f"🛑 Layout-Ausnahmen nicht lesbar: {fehler}")
+        return 2
     befunde, hinweise, dateizahl = pruefe_baum(
-        BLOG_DIR, erlaubte_dauern, erlaubte_kurven, ausnahme_liste)
+        BLOG_DIR, erlaubte_dauern, erlaubte_kurven, ausnahme_liste,
+        layout_frei=layout_frei)
 
     if dateizahl < MIN_DATEIEN:
         print(f"🛑 Nur {dateizahl} Stylesheet(s) gefunden (Minimum {MIN_DATEIEN}) – "

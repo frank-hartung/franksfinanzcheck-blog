@@ -191,6 +191,16 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           "hugo_build_vertrag.py",
           "editorial_scorecard.py", "cwv_guard.py", "secrets_age_guard.py",
           "decay_radar.py", "governance_gate.py", "readability_check.py",
+          # Bewegungs-Wache (01.11.2026, Audit nach Aufnahme des Skills
+          # `emil-design-eng`): DESIGN.md §6 nannte zwei Uebergangsdauern,
+          # ausgeliefert wurden zehn – geprueft wurde die Skala nur in
+          # `assets/css/varianten/`, also an Dateien, die die Basis nie
+          # beruehrt. Gemessen: 41 Dauern ausserhalb der Skala, 38 Lifts
+          # ohne Druck-Feedback. Nach der Heilung (Skala in §6.1 + Regelwerk)
+          # steht die Wache hier, damit die Skala nicht wieder unbemerkt
+          # waechst: eine Wache, die niemand verlangt, fuehrt irgendwann
+          # niemand aus (C6).
+          "bewegungs_wache.py",
           # Lesbarkeits-Heiler (07.10.2026, WACHE-609): Er ist der Heiler
           # der zweiten Haelfte des Lesbarkeits-Tors (Flesch >= 60 als
           # Publish-Kriterium, #585) und beweist seine Wirkung als

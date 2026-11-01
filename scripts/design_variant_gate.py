@@ -77,6 +77,11 @@ BEKANNTE_SCHLUESSEL = {
     "marke": {
         "farben_erlaubt", "variablen_praefixe_erlaubt", "rgba_basen_erlaubt",
         "radien_px_erlaubt", "uebergang_dauer_s_erlaubt", "easing_erlaubt",
+        # 01.11.2026: Die dokumentierten Layout-Ausnahmen (DESIGN.md §6.1)
+        # sind maschinenlesbar, damit die Bewegungs-Wache sie nicht im Code
+        # nachbauen muss. Ein unbekannter Schlüssel bleibt ein Fehler – das
+        # Gate kennt ihn ab jetzt namentlich.
+        "layout_animation_ausnahmen",
         "verbote", "pflichten", "css_budget_bytes",
     },
     "barrierefreiheit": {

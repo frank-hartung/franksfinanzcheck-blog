@@ -2,7 +2,12 @@
 
 > Auftrag: „den Rest des Repos gegen den neuen Skill prüfen – Übergänge,
 > Hover-/Fokuszustände, `prefers-reduced-motion`" (nach Aufnahme von
-> `emil-design-eng`). Ergebnis: **gemessen, nicht repariert.**
+> `emil-design-eng`). **Nachtrag 01.11.2026:** Schritt 1 ist umgesetzt —
+> die Skala wurde um die gemessenen Stufen **erweitert** (nicht weggedrückt),
+> danach steht die Wache im Gate. Was das geändert hat, steht in
+> „Nachtrag: Schritt 1 umgesetzt" am Ende; die Messung oben bleibt als
+> Vorher-Stand stehen, weil ein Bericht, der sich selbst überschreibt,
+> nichts belegt.
 > Prüfer: `scripts/bewegungs_wache.py` (B1–B6) · Ausnahmen:
 > `data/bewegungs_wache_ausnahmen.yaml` · Regeln: `DESIGN.md` §6/§7,
 > `data/design/regelwerk.yaml`.
@@ -117,3 +122,89 @@ einen Hugo-Bau (Hugo fehlt im Sandkasten). Die Zahlen oben sind deshalb
 **statisch am Quelltext** gemessen – was für Dauer/Easing/Lift ausreicht
 (alles Deklarationen), aber nichts über gerenderte Kontraste oder CLS sagt.
 Diese Ebenen bleiben `design-metrics` + Lighthouse.
+
+## Nachtrag: Schritt 1 umgesetzt (01.11.2026)
+
+Der Auftrag lautete: **Skala erweitern, nicht die 41 Stellen umschreiben.**
+Begründung: Die zehn vorkommenden Werte waren kein Zufall, sondern eine nie
+aufgeschriebene Skala (Text → Pille → Lift → Zustand → Panel → Aufdecken →
+Fläche → Bild → Reveal). Sie zu vereinheitlichen hätte das Gefühl aller
+Flächen gleichzeitig verschoben – ohne Screenshot-Vergleich und ohne Freigabe.
+
+### Was geändert wurde
+
+| Datei | Änderung |
+|---|---|
+| `DESIGN.md` §6 | Neu gefasst: **6.1 Skala** (13 Stufen, jede mit Aufgabe und Beispielselektor), **6.2 Pflichten** (reduzierte Bewegung, Lift braucht Druck, Fokusring) |
+| `data/design/regelwerk.yaml` | `uebergang_dauer_s_erlaubt` 3 → 13 Werte; `easing_erlaubt` + `ease`; **neu** `layout_animation_ausnahmen` (3 Fälle, je mit `grund`) |
+| `scripts/design_variant_gate.py` | kennt den neuen Schlüssel namentlich (ein unbekannter Schlüssel bleibt ein Fehler – das Gate lehrt sonst Regeln, die niemand prüft) |
+| `scripts/bewegungs_wache.py` | liest die Layout-Ausnahmen aus dem Regelwerk statt aus einer Konstante im Code; Rückfallleser für **beide** YAML-Formen (Inline-Liste, Blockliste von Objekten) |
+| `scripts/governance_contract.py` | `bewegungs_wache.py` in `GUARDS` (C6) – der Selbsttest läuft im Qualitäts-Gate |
+| `scripts/tests/test_bewegungs_wache.py` | 19 Tests, davon eine eigene Klasse **SkalaSynchron**: Prosa §6.1 und Regelwerk dürfen nicht auseinanderlaufen |
+
+**Zwei Sonderfälle wurden entschieden, nicht verbogen:**
+
+1. **`ease` ist jetzt erlaubt** (in §6.1 und im Regelwerk). 67 ausgelieferte
+   Deklarationen nutzen es. Ein Verbot im Regelwerk hätte sie alle zu Befunden
+   gemacht, ohne dass sich am Verhalten etwas ändert – und eine
+   „Vereinheitlichung" per Suchen-und-Ersetzen über 67 Stellen verschiebt das
+   Gefühl jeder Fläche. B2 bleibt als **Hinweis** stehen: Politur je Fläche,
+   hinter `node e2e/design-shots.mjs`.
+2. **Layout-Animationen:** `width` bleibt verboten, außer den drei Fällen, die
+   §6.1 **namentlich** nennt (Voice-Progress, Kurzantwort-Progress,
+   Werkzeug-Rangbalken). Die Liste steht maschinenlesbar im Regelwerk – es gibt
+   keine Ausnahme im Code, die nicht in der Prosa steht (Test
+   `test_layout_ausnahmen_stehen_in_prosa_und_maschine`).
+
+### Vorher / Nachher, gemessen
+
+```
+vorher   (365ca36):  42 Befunde  (41 × B1 Dauer, 1 × B4 Layout)   107 Hinweise
+nachher  (dieser Commit):  0 Befunde                              40 Hinweise (2 × B3, 38 × B5)
+```
+
+Die Wache ist damit **grün** und steht in `GUARDS`. Ab jetzt gilt: Eine neue
+Dauer, die nicht in §6.1 und im Regelwerk steht, ist ein Befund – nicht ein
+Stilhinweis.
+
+### Was offen bleibt (bewusst, mit Ort)
+
+* **B5, 38 Lifts ohne `:active`** – kein Vertragsbruch, aber §6.2 verlangt es
+  jetzt ausdrücklich. Heilung je Fläche (Buttons/Karten/Chips), nicht pauschal:
+  Ein Bild-Zoom braucht kein Druck-Feedback. Bis dahin Hinweis, kein Blocker.
+* **B3, 2 × `transition: all`** (`.ff-kurzantwort__badge`, `.ff-kurzantwort.ff-voice-active`)
+  – Eigenschaften ausbuchstabieren (`background-color, color, box-shadow`).
+* **`@media (hover: hover)`** fehlt an 37 von 38 Hover-Lifts. Auf Touch löst
+  der erste Tap den Hover aus, bevor er klickt. Eigener Vorgang, weil es
+  Verhalten ändert und nicht nur Zahlen.
+* **5 tote Deklarationen** durch Ladereihenfolge (`custom.css:244`/`:625`,
+  `z-premium-blog.css:210`/`:545`/`:2496`) – aufräumen, wenn die betroffenen
+  Flächen ohnehin angefasst werden.
+
+### Nachweis (lokal, 01.11.2026)
+
+```
+python3 scripts/bewegungs_wache.py --selftest        ✅ 26 Fälle grün
+python3 scripts/bewegungs_wache.py                   ✅ 21 Dateien, 0 Befunde, 40 Hinweise
+python3 scripts/bewegungs_wache.py --json            ✅ mit und ohne PyYAML identisch (geprüft)
+python3 -m unittest scripts.tests.test_bewegungs_wache  ✅ 19 Tests
+python3 scripts/design_variant_gate.py               ✅ BESTANDEN (neuer Regelwerk-Schlüssel bekannt)
+python3 -m unittest scripts.tests.test_design_varianten ✅ 40 Tests
+python3 scripts/governance_contract.py --quick       ✅ 43 Regeln, beide Richtungen
+python3 scripts/selftest_runner.py --ohne-uhr-probe  ✅ bewegungs_wache.py Exit 0 im Sammellauf
+```
+
+**Vorbestand, nicht von dieser Änderung:** Der Sammellauf über alle
+Selbsttests ist in diesem Sandkasten rot – 66 der 80 roten Fälle scheitern an
+fehlendem `pyyaml` (das CI-Requirements-File enthält es, `requirements-ci.in:23`),
+14 sind unabhängige Altbefunde (u. a. `redaktions_standard.py`, in
+`SKILLS-UMBAU-…-2026-11-01.md` schon dokumentiert). `bewegungs_wache.py` läuft
+in diesem Sammellauf **grün** – mit und ohne PyYAML.
+
+## Was der Skill dabei tatsächlich beigetragen hat
+
+Nicht die Zahlen – die kamen aus dem Repo. Beigetragen hat er die
+**Reihenfolge der Fragen**: ob animiert werden soll (Frequenz), welche Kurve
+(Zustandswechsel), und dass ein Lift ohne Druck-Feedback eine halbe Rückmeldung
+ist. Genau daraus wurde B5 – der Befund, den keine bestehende Wache im Haus
+gestellt hat.
