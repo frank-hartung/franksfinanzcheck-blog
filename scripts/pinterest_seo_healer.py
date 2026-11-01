@@ -42,6 +42,7 @@ sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 import pinterest_hashtags as ph  # noqa: E402 – Hashtag-SSOT (#729)
 from post_utils import list_post_paths, slug_of, join_article  # noqa: E402
 import reserve_schreibschutz as schutz  # noqa: E402  – #900
+import serp_limits  # noqa: E402  (SSOT: Snippet-Fenster – keine zweite Zahl)
 
 REPORT = os.path.join(BLOG_DIR, "PINTEREST-SEO-HEALER-REPORT.md")
 DO_FIX = "--fix" in sys.argv
@@ -51,8 +52,16 @@ AS_JSON = "--json" in sys.argv
 # Google SERP + Pinterest 2026
 TITLE_MIN, TITLE_MAX = 30, 60
 TITLE_OPT_MIN, TITLE_OPT_MAX = 50, 60
-DESC_MIN, DESC_MAX = 70, 160
-DESC_OPT_MIN, DESC_OPT_MAX = 120, 160
+# WF-984 (01.11.2026): Hier standen DESC_MIN, DESC_MAX = 70, 160 und
+# DESC_OPT_MIN, DESC_OPT_MAX = 120, 160. Das war ein ZWEITER Maßstab neben
+# `serp_limits` (100–155 Zeichen UND ≤ 985 px). Das Ergebnis stand am
+# 01.11.2026 in `content/posts/2026-11-01-flugverspaetung-…`: 156 Zeichen,
+# 1009 px – innerhalb des Limits dieses Schreibers, außerhalb des Marktes.
+# `meta_optimizer.py` hatte dieselbe Lektion am 29.10.2026 schon gelernt;
+# dieser Schreiber nicht. Seit heute liest er das Fenster aus der SSOT.
+DESC_MIN, DESC_MAX = serp_limits.DESC_MIN_ZEICHEN, serp_limits.DESC_MAX_ZEICHEN
+DESC_OPT_MIN = serp_limits.DESC_OPT_MIN_ZEICHEN
+DESC_OPT_MAX = serp_limits.DESC_MAX_ZEICHEN
 PIN_TITLE_MAX = 100
 PIN_TITLE_OPT = 60
 PIN_DESC_MIN = 220
@@ -78,6 +87,27 @@ STOP = {
 
 def _selftest() -> list[str]:
     err = []
+    # WF-984 (01.11.2026): Der Schreiber hing an einem eigenen Limit (160),
+    # der Markt prüft 155/985 px. Der Vorfall ist eingefroren: eine Description
+    # mit 156 Zeichen darf hier nicht mehr unverändert herauskommen.
+    if DESC_MAX != serp_limits.DESC_MAX_ZEICHEN:
+        err.append(f"DESC_MAX {DESC_MAX} ≠ SSOT {serp_limits.DESC_MAX_ZEICHEN}")
+    if DESC_OPT_MAX != serp_limits.DESC_MAX_ZEICHEN:
+        err.append(f"DESC_OPT_MAX {DESC_OPT_MAX} ≠ SSOT {serp_limits.DESC_MAX_ZEICHEN}")
+    vorfall = ("Flugverspätung Entschädigung sichern: Lerne deine Fluggastrechte kennen. "
+               "Wir zeigen dir, wie du einfach eine Entschädigung beantragen kannst. Tipps vom Pro.")
+    geheilt = extend_description(vorfall, ["Flugverspätung Entschädigung"],
+                                 "Flugverspätung Entschädigung: So holst du dein Geld zurück")
+    if serp_limits.befunde(geheilt, min_zeichen=0):
+        err.append("extend_description liefert weiter eine Description außerhalb des Snippet-Fensters: "
+                   + ", ".join(a for a, _ in serp_limits.befunde(geheilt, min_zeichen=0)))
+    # Gegenprobe: ein Text, der schon im Optimum (≥ DESC_OPT_MIN) und im
+    # Fenster liegt, wird NICHT angefasst. Ein kürzerer wird absichtlich
+    # verlängert – das ist die Aufgabe der Funktion, kein Fehler.
+    gut = ("Stromkosten senken: Tarife vergleichen, Wechselbonus sichern, Abschläge prüfen. "
+           "So bleibt dein Budget planbar statt zufällig.")
+    if extend_description(gut, [], "Stromkosten senken") != gut:
+        err.append("extend_description verändert eine passende Description")
     if PIN_DESC_MAX != 500:
         err.append("PIN_DESC_MAX ≠ 500")
     if PIN_TITLE_MAX != 100:
@@ -487,14 +517,17 @@ def extend_description(desc: str, keywords: list[str], title: str) -> str:
             break
         if add.strip().lower()[:18] in desc.lower():
             continue
-        if len(desc) + len(add) <= DESC_OPT_MAX:
+        # Zeichenzahl allein reicht nicht: 150 Zeichen aus breiten Wörtern
+        # laufen über 985 px. Geprüft wird deshalb das GANZE Fenster der SSOT,
+        # bevor ein Zusatz übernommen wird.
+        if not serp_limits.befunde(desc + add, min_zeichen=0):
             desc += add
-    if len(desc) > DESC_MAX:
-        cut = desc[: DESC_MAX - 1]
-        sp = cut.rfind(" ")
-        if sp > DESC_MAX * 0.7:
-            cut = cut[:sp]
-        desc = cut.rstrip(" ,.;:") + "…"
+    if serp_limits.befunde(desc, min_zeichen=0):
+        # Kürzen an der Wortgrenze, gegen BEIDE Grenzen – dieselbe Funktion,
+        # die auch `meta_optimizer` und die Wache benutzen (#925).
+        gekuerzt = serp_limits.auf_snippet_kuerzen(desc, min_zeichen=0)
+        if gekuerzt is not None:
+            desc = gekuerzt
     return desc
 
 

@@ -137,6 +137,11 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # deaktivierter Admin-Bypass live belegt sind; sein Selbsttest gehört
           # zum vertraglichen Minimum.
           "worker_environment_guard.py",
+          # Themen-Portfolio der Fremd-Skills (01.11.2026, P1–P7): Es
+          # entscheidet, welches Skill Dauerlast zahlen darf, und wird damit zu
+          # einer Wache mit Folgen. Sein Selbsttest gehört deshalb ins
+          # vertragliche Minimum (C6) – ein Vertrag ohne Lauf ist Prosa.
+          "skills_portfolio.py",
           # Der Einrichtungsweg zur Produktionsfreigabe (WF-829B / #922,
           # 30.10.2026): Das Gate konnte die fehlende Freigabe nur MELDEN,
           # nichts im Repository konnte sie herstellen – und eine GitHub-API

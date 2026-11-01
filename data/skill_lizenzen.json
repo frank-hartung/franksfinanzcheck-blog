@@ -16,6 +16,18 @@
     "AgriciDaniel/claude-seo": "26 Skills als vendorbare Anlage aufgenommen (01.11.2026). Upstream legt je Skill eine 143-Byte-Lizenzdatei ab, die nur auf die Root-Lizenz verweist; da ein Verweis die Permission Notice nicht mitführt, liegt in jedem der 26 Ordner der unveränderte MIT-Volltext der Root-Lizenz (1.069 Bytes). Die Runtime (scripts/, schema/, data/, hooks/, requirements.txt) liegt im Hub-Ordner .claude/skills/seo/; der Upstream-Token ${CLAUDE_PLUGIN_ROOT} ist auf den Repo-Pfad umgeschrieben, wie es das Upstream-install.sh für Handinstallationen ebenfalls tut."
   },
   "skills": {
+    "ab-testing": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "ad-creative": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "ads": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
     "agent-reach": {
       "quelle": "Panniantong/Agent-Reach",
       "lizenz": "MIT"
@@ -32,6 +44,26 @@
       "quelle": "emilkowalski/skills",
       "lizenz": "MIT"
     },
+    "attribution": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "churn-prevention": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "co-marketing": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "cold-email": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "community-marketing": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
     "competitor-profiling": {
       "quelle": "coreyhaines31/marketingskills",
       "lizenz": "MIT"
@@ -41,6 +73,10 @@
       "lizenz": "MIT"
     },
     "content-strategy": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "conversion-tracking": {
       "quelle": "coreyhaines31/marketingskills",
       "lizenz": "MIT"
     },
@@ -56,20 +92,124 @@
       "quelle": "coreyhaines31/marketingskills",
       "lizenz": "MIT"
     },
+    "customer-research": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
     "design-taste-frontend": {
       "quelle": "Leonxlnx/taste-skill",
+      "lizenz": "MIT"
+    },
+    "directory-submissions": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "emails": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "events": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "free-tools": {
+      "quelle": "coreyhaines31/marketingskills",
       "lizenz": "MIT"
     },
     "frontend-design": {
       "quelle": "anthropics/skills",
       "lizenz": "Apache-2.0"
     },
+    "image": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
     "impeccable": {
       "quelle": "pbakaus/impeccable",
       "lizenz": "Apache-2.0",
       "notiz": true
     },
+    "influencer-marketing": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "launch": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "lead-magnets": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "link-building": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "marketing-council": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "marketing-ideas": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "marketing-loops": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "marketing-plan": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "marketing-psychology": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "offers": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "onboarding": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "popups": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "pricing": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "product-marketing": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
     "programmatic-seo": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "prospecting": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "public-relations": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "referrals": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "reverse-engineer-marketing": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "revops": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "sales-enablement": {
       "quelle": "coreyhaines31/marketingskills",
       "lizenz": "MIT"
     },
@@ -86,7 +226,7 @@
       "lizenz": "MIT"
     },
     "seo-audit": {
-      "quelle": "coreyhaines31/marketingskills",
+      "quelle": "AgriciDaniel/claude-seo",
       "lizenz": "MIT"
     },
     "seo-backlinks": {
@@ -181,6 +321,10 @@
       "quelle": "AgriciDaniel/claude-seo",
       "lizenz": "MIT"
     },
+    "signup": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
     "site-architecture": {
       "quelle": "coreyhaines31/marketingskills",
       "lizenz": "MIT"
@@ -188,6 +332,14 @@
     "skill-creator": {
       "quelle": "anthropics/skills",
       "lizenz": "Apache-2.0"
+    },
+    "social": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "video": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
     },
     "webapp-testing": {
       "quelle": "anthropics/skills",
@@ -197,12 +349,13 @@
   "eigene": {
     "hinweis": "Die ff-*-Skills sind repo-eigen: kein Eintrag in skills-lock.json, kein Lizenzvermerk nötig, nie von `npx skills update` überschreibbar.",
     "skills": [
-      "ff-pruefen",
       "ff-ausliefern",
-      "ff-produzieren",
+      "ff-ki-automation",
+      "ff-lektorat",
       "ff-marke-text",
       "ff-oberflaeche",
-      "ff-ki-automation"
+      "ff-produzieren",
+      "ff-pruefen"
     ]
   },
   "erledigte_faelle": {
