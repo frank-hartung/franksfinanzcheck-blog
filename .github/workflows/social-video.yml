@@ -90,10 +90,16 @@ jobs:
           ffmpeg -hide_banner -filters | grep -q " drawtext " \
             || { echo "::error::ffmpeg ohne drawtext – Untertitel nicht renderbar."; exit 1; }
 
-      - name: Abhängigkeiten installieren
+      - name: Abhängigkeiten installieren (gepinnt, zwei Manifeste)
+        # WF-E813 / #972 (01.11.2026): `pyyaml pillow edge-tts` standen hier
+        # ad hoc – ohne Manifest, ohne Audit, ohne Dependabot. Gepinnt:
+        # requirements-ci.txt (pyyaml, pillow) + requirements-tts.txt (edge-tts).
         run: |
-          python3 -m pip install -q --disable-pip-version-check pyyaml pillow edge-tts \
-            || python3 -m pip install -q --break-system-packages pyyaml pillow edge-tts
+          set -euo pipefail
+          python3 -m pip install -q --disable-pip-version-check \
+            -r requirements-ci.txt -r requirements-tts.txt \
+            || python3 -m pip install -q --break-system-packages \
+              -r requirements-ci.txt -r requirements-tts.txt
 
       # Fail-closed: Ein Video mit erfundener Zahl ist schlimmer als kein Video.
       - name: Selbsttest (fail-closed)

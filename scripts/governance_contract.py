@@ -145,6 +145,13 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # zum vertraglichen Minimum, sonst verkommt das Gate zur Dauer-
           # Meldung ohne Schließpfad.
           "worker_environment_einrichten.py",
+          # Wartende Deploy-Freigaben (WF-829B / #922, 01.11.2026): Seit das
+          # Environment einen Required Reviewer trägt, ist jeder Worker-Deploy
+          # zweistufig — und ein Lauf, der auf Freigabe wartet, wird nicht rot,
+          # meldet nichts und blockiert still den Concurrency-Slot. Diese Wache
+          # macht genau diesen Zustand sichtbar; ihr Selbsttest gehört ins
+          # vertragliche Minimum (C6), sonst meldet sie irgendwann niemand mehr.
+          "worker_freigabe_wache.py",
           # Entity-/Marken-Wache (25.10.2026, SERP-Live-Pruefung Abschnitt 3):
           # Google ordnete die Markensuche dem Kreditvergleich FINANZCHECK.de
           # zu, waehrend der siteweite Person-Knoten nur Pinterest als sameAs

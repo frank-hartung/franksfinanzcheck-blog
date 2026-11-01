@@ -19,6 +19,6 @@ feedparser==6.0.14
 fonttools==4.67.0
 pillow==13.0.0
 pillow-avif-plugin==1.6.0
-pypdf==6.21.2
+pypdf==6.21.4
 pyyaml==6.0.3
 requests==2.34.2

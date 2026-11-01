@@ -1201,17 +1201,17 @@ jobs:
               && sudo apt-get install -y -qq ffmpeg \
               || echo "⚠ ffmpeg nicht installierbar → miniaudio muss greifen"
           fi
-          python3 -m pip install -q miniaudio 2>/dev/null \
-            || python3 -m pip install -q --break-system-packages miniaudio \
-            || echo "⚠ miniaudio nicht installierbar (ffmpeg bleibt Hauptweg)"
-          # edge-tts: kostenlos, kein Key, männliche Neuralstimmen DE/EN.
-          python3 -m pip install -q edge-tts 2>/dev/null \
-            || python3 -m pip install -q --break-system-packages edge-tts \
-            || echo "⚠ edge-tts nicht installierbar → Piper/Browser-Fallback"
-          # piper-tts: lokale Offline-Stimmen als lizenzsichere zweite Stufe.
-          python3 -m pip install -q piper-tts 2>/dev/null \
-            || python3 -m pip install -q --break-system-packages piper-tts \
-            || echo "⚠ piper-tts nicht installierbar → edge/Browser-Fallback"
+          # GEPINNT (WF-E813 / #972, 01.11.2026): Hier standen `miniaudio`,
+          # `edge-tts` und `piper-tts` ohne Version. Ein Ad-hoc-Install ist
+          # eine ausgelieferte Version ohne Manifest – der Advisory-Audit
+          # hat sie nie gesehen, Dependabot nie aktualisiert. Quelle ist
+          # jetzt requirements-tts.txt; die Weichheit bleibt: jede Stufe
+          # darf ausfallen, aber nur mit bekannter Version.
+          python3 -m pip install -q --disable-pip-version-check \
+            -r requirements-tts.txt 2>/dev/null \
+            || python3 -m pip install -q --break-system-packages \
+              -r requirements-tts.txt \
+            || echo "⚠ TTS-Pakete nicht installierbar → Piper/Browser-Fallback"
           ffmpeg -version | head -1 || echo "⚠ ffmpeg fehlt → nur WAV ohne Mastering"
           # Zeigt Engines, Rezept-Version UND den gefundenen Dekoder an.
           python3 scripts/ff_voice_audio.py --engines || true
