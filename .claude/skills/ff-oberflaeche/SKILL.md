@@ -30,9 +30,10 @@ wörtlich aus `CLAUDE.md` übernommen.
    `PRODUCT.md` + `DESIGN.md` zuerst), `frontend-design` (neue visuelle Identität),
    `design-taste-frontend` (Anti-Slop), `webapp-testing` (Browser-Interaktion),
    `animate` (Bewegung von der Entscheidung her aufbauen: ob, wozu, welches
-   Werkzeug, welche Kurve – nicht „Effekt drauf“) und `cro` (Conversion auf Seite
-   und Formular; die Messung dazu bleibt gesperrt, siehe `ff-pruefen`).
-   Diese vier stehen im Kern-Router, weil sie jeden UI-Auftrag angehen. Der
+   Werkzeug, welche Kurve – nicht „Effekt drauf“), `emil-design-eng` (Motion,
+   Easing, Interaktions-Feedback, Komponenten-Politur) und `cro` (Conversion auf
+   Seite und Formular; die Messung dazu bleibt gesperrt, siehe `ff-pruefen`).
+   Diese sechs stehen im Kern-Router, weil sie jeden UI-Auftrag angehen. Der
    **Review** des fertigen Codes läuft über `references/web-richtlinien.md` –
    hausgemacht, seit `web-design-guidelines` (Vercel, Herkunft ungeklärt) am
    2026-11-01 über den Skills-CLI entfernt wurde.
@@ -71,6 +72,7 @@ deshalb keinen zweiten Text hier.
 | Wie baue ich ein Fangnetz, was verbietet R1–R13, wie altern Ausnahmen? | `references/robustheit.md` (C31, #740-Ausnahme `head.html`) |
 | Was macht ein Werkzeug zum Produkt, welche Zusage ist hart, wie sitzen die `_headers`? | `references/produkte-und-header.md` (W1–W7, S1/S2) |
 | Wie gehe ich fertigen UI-Code durch, bevor ich „erledigt" melde? | `references/web-richtlinien.md` (24 Punkte in sechs Gruppen, jeder Punkt mit Gate oder Fundstelle) |
+| Hält meine Bewegung die Skala, hat jeder Lift ein Druck-Feedback, animiert etwas Layout-Eigenschaften? | `scripts/bewegungs_wache.py` (B1–B6, `npm run bewegung:check`, **in `GUARDS`**) – die Skala (13 Stufen) steht in `DESIGN.md` §6.1 und maschinenlesbar in `data/design/regelwerk.yaml`; Layout-Ausnahmen nur, wenn sie in §6.1 **namentlich** genannt sind. Ausnahmen mit Grund, Entscheidung **und Frist** in `data/bewegungs_wache_ausnahmen.yaml`. **Druck-Feedback je Flächentyp** (Button `scale(.97)`, Karte nur `translateY(0)`, Zeile `translateX(0)`, `:active` hinter `:hover` und mit dem Elternkontext der Basisregel) steht als Tabelle in `DESIGN.md` §6.2. Vorgang: `BEWEGUNG-AUDIT-HIGHEND-2026-11-01.md` (Nachtrag 2) |
 
 ## Kommando-Notausgang
 
@@ -81,6 +83,7 @@ npm run werkzeuge:check                      # W1–W7: Quelle + Build + public/
 npm run test:toc                             # „Im Artikel“-Navigation, V1–V14
 npm run test:a11y:browser                    # axe-core im gerenderten DOM (WCAG AA)
 python3 scripts/design_handoff.py --check    # Marken- und Exportdrift
+npm run bewegung:check                       # B1–B6: Dauer, Easing, Lift, Druck-Feedback
 ```
 
 ## Nicht zuständig für

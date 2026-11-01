@@ -1,12 +1,12 @@
 {
   "schema": 2,
-  "signed_at": "2026-11-01T18:10:41.080405+00:00",
-  "head": "3189c7c",
+  "signed_at": "2026-11-01T18:14:54.084346+00:00",
+  "head": "957b02b4a",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
-    "data/skill_lizenzen.json": "5bddcd37289ef7fb0309cafe21911a45c5030593027687169d6d2454c8246743",
-    "data/skill_portfolio.yaml": "9d3fa65f4f1cc75135f6f15e83b4048e8312720d677c03752fde873845d0a165",
+    "data/skill_lizenzen.json": "13fc016eb7abdddc262e4fc4ee3c4b435b30a603a53ef9db685156908cac9acd",
+    "data/skill_portfolio.yaml": "1432a475ef223bc4166a9789d5c1cfd61a8f4de185cbffdeece161f2d53654f3",
     "hugo.toml": "f69433af403fbb87704acce7336bca462480fb257b84e900690bf31294c31078",
     "layouts/_default/_markup/render-link.html": "9a86a24714a88557ea49d065f1edbd203688fa0798e70e8bd08a15a1b1a86b3c",
     "layouts/_partials/affiliate_anchor_attrs.html": "8a39d9c76656f2df3486520f774412ed8cbc5ba7e578af442ecede528ffaa1be",
@@ -59,7 +59,7 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "ab573c4af5c368e74b3f39b34673e8393ddd34d2b875dc5e3c643d7ffd62b40e",
+  "files_sha256": "14b7163886f240f01dbaa6a0272f2d6908cd16e52751a4150a8e81db569404bc",
   "audit_start_sha256": "404d0cf33fc19c8e685cbe7f52b8291dd0155c3164627175da2e847c2f4a2ee6",
   "audit": [
     {
@@ -321,7 +321,7 @@
     {
       "date": "2026-11-01",
       "art": "heal",
-      "head": "3189c7c",
+      "head": "957b02b4a",
       "geaendert": [
         "data/skill_lizenzen.json",
         "data/skill_portfolio.yaml"
@@ -333,19 +333,19 @@
           "urteil": "VERSIEGELBAR",
           "commits": [
             {
-              "sha": "3189c7c",
+              "sha": "957b02b4a",
               "datum": "2026-11-01",
-              "betreff": "merge: origin/main (17 Social-Skills) – SEO-Paket bleibt, Social-Pack weicht dem K9-Budget"
+              "betreff": "merge: main erneut nachgezogen (17 Social-Skills, K3-Routerpflicht)"
             },
             {
-              "sha": "782f4e2",
+              "sha": "782f4e271",
               "datum": "2026-11-01",
               "betreff": "feat(skills): 17 Social-Skills aufgenommen, K3-Routerpflicht für jeden Skill (#1006)"
             },
             {
-              "sha": "0f9f068",
+              "sha": "55f30ff60",
               "datum": "2026-11-01",
-              "betreff": "Merge remote-tracking branch 'origin/main' into arena/19c3ee23-franksfinanzcheck-blog"
+              "betreff": "merge: main erneut nachgezogen (38 Marketing-Skills, ff-lektorat)"
             }
           ],
           "commits_art": "letzte-commits"
@@ -356,26 +356,26 @@
           "urteil": "VERSIEGELBAR",
           "commits": [
             {
-              "sha": "3189c7c",
+              "sha": "957b02b4a",
               "datum": "2026-11-01",
-              "betreff": "merge: origin/main (17 Social-Skills) – SEO-Paket bleibt, Social-Pack weicht dem K9-Budget"
+              "betreff": "merge: main erneut nachgezogen (17 Social-Skills, K3-Routerpflicht)"
             },
             {
-              "sha": "782f4e2",
+              "sha": "782f4e271",
               "datum": "2026-11-01",
               "betreff": "feat(skills): 17 Social-Skills aufgenommen, K3-Routerpflicht für jeden Skill (#1006)"
             },
             {
-              "sha": "e3585d1",
+              "sha": "b01d3edb1",
               "datum": "2026-11-01",
-              "betreff": "feat(skills): claude-seo im Themen-Portfolio zugeordnet (P1)"
+              "betreff": "fix(skills): emil-design-eng im Themen-Portfolio zugeordnet (P1)"
             }
           ],
           "commits_art": "letzte-commits"
         }
       ],
       "prev_sha256": "ed17e1f416294b2271125c8cc39c4b59e1b3804f9ce71fafd3727dc7cfb59536",
-      "files_sha256": "ab573c4af5c368e74b3f39b34673e8393ddd34d2b875dc5e3c643d7ffd62b40e"
+      "files_sha256": "14b7163886f240f01dbaa6a0272f2d6908cd16e52751a4150a8e81db569404bc"
     }
   ]
 }
