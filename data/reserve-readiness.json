@@ -2,7 +2,7 @@
   "target": 6,
   "ready": 3,
   "pool_size": 6,
-  "generated_at": "2026-10-31T14:39:53Z",
+  "generated_at": "2026-11-01T15:23:30Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
@@ -24,14 +24,12 @@
     {
       "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ready": false,
-      "sha256": "5f24a2368b3b10ede0e02d1e49563f2cdcdfc2d531eb5f8e727ecef6c0d6dd6d",
-      "flesch": 72.8,
-      "measured_at": "2026-10-31T14:39:52Z",
-      "reason": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…wichtiger hinweis dieser artikel dient ausschließlich der allgemeinen information und…“ – doppelte Passage, manuell reparieren; R15-PHRASEN",
+      "sha256": "9cb6cfc46792bb35323fa735184462eb4cb225c5935681a0c97fb37cdc577770",
+      "flesch": 73.7,
+      "measured_at": "2026-11-01T15:23:28Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Du INTERNLINK hohe Kosten am Ende vom Jahr von 10 % bis zu 20 % im Herbst.",
       "details": [
-        "🛑 2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
-        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…wichtiger hinweis dieser artikel dient ausschließlich der allgemeinen information und…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…stellt keine anlage rechts oder steuerberatung dar prüfe konditionen und…“ – doppelte Passage, manuell reparieren",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+        "RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Du INTERNLINK hohe Kosten am Ende vom Jahr von 10 % bis zu 20 % im Herbst."
       ],
       "score": 0.996,
       "parts": {
@@ -64,9 +62,23 @@
     {
       "slug": "2026-10-30-energieeffiziente-geraete-so-sinken-deine-fixkosten",
       "ready": false,
-      "sha256": "41a5b625076f91ebbff1458e008cbabdf24fd6bcf053cd54f0c24c63d15d0254",
-      "measured_at": "2026-10-31T09:57:54Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
+      "sha256": "68a42f3a1bad5f93f62850902ae75556d4515f19d9885d7d404460e22998a8f4",
+      "flesch": 67.3,
+      "measured_at": "2026-11-01T15:23:29Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 6 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Energieeffiziente Geräte verbrauchen deutlich weniger Strom als Modelle von vor zehn oder fünfzehn Jahren.",
+      "details": [
+        "RS5: 6 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Energieeffiziente Geräte verbrauchen deutlich weniger Strom als Modelle von vor zehn oder fünfzehn Jahren."
+      ],
+      "score": 0.958,
+      "parts": {
+        "spelling": 0.86,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.96,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
     },
     {
       "slug": "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem",
@@ -88,9 +100,9 @@
     {
       "slug": "2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
       "ready": false,
-      "sha256": "51a9064a1f24f0bdf5dcab3b72e75dfcb342b90d03b851909ae4d16695bad7db",
-      "flesch": 66.4,
-      "measured_at": "2026-10-31T14:39:53Z",
+      "sha256": "dc3531f1a3c06ea9ef5970de31994d7a01e348091c31908785d43c1b49012a7e",
+      "flesch": 66.7,
+      "measured_at": "2026-11-01T15:23:30Z",
       "reason": "Reserve-Qualitäts-Gate: RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Nach ein bis zwei Jahren zerbröckelt das Material oft.",
       "details": [
         "RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Nach ein bis zwei Jahren zerbröckelt das Material oft."
@@ -109,13 +121,14 @@
   ],
   "measurement": {
     "kind": "partial",
-    "run_id": "41211080745",
+    "run_id": "41320918920",
     "run_attempt": "1"
   },
   "recert": {
-    "at": "2026-10-31T14:39:53Z",
+    "at": "2026-11-01T15:23:30Z",
     "renewed": [
       "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "2026-10-30-energieeffiziente-geraete-so-sinken-deine-fixkosten",
       "2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen"
     ],
     "tool": "scripts/reserve_recert.py"
