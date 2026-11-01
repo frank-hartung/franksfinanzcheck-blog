@@ -95,6 +95,35 @@ python3 scripts/report_hygiene.py --check         ✅ Root sortenrein
 python3 scripts/governance_contract.py --quick    ✅ 43 Regeln, beide Richtungen
 ```
 
+## Nebenbefund aus der Abnahme (nicht verursacht, aber belegt)
+
+`python3 scripts/redaktions_standard.py --selftest` ist auf `main` **rot**
+(Exit 2, Fall `Vertrag-gute-aenderung-still`) – nachgewiesen in einem frischen
+Worktree auf dem Ausgangscommit `51e0270`, also unabhängig von diesem Umbau.
+
+Warum das hier steht: Die Wache steht im vertraglichen Minimum (`GUARDS`, C6).
+Der volle Vertragslauf führt den Selbsttest aus – damit ist der Qualitäts-Gate
+auf jedem Push rot, ohne dass ein Gate etwas am Blog gefunden hätte. Das ist die
+Klasse „ein Befund, der die Arbeit blockiert, statt sie zu beschreiben“.
+
+**Nicht geheilt, mit Grund:** `scripts/redaktions_standard.py` ist KRITISCH
+versiegelt (`data/integrity_lock.json`, 50 Dateien) und `.gitattributes` setzt
+`merge=binary` auf alle signierten Skripte. Eine Änderung daran verlangt die
+menschliche Neu-Signatur (`integrity_guard.py --set-current`), die kein Agent
+ersetzt. Der Befund gehört in den nächsten Siegel-Termin – nicht in einen
+Unterdrückungs-Kommentar.
+
+Zwei Hinweise für die Heilung, gemessen am Fall:
+* Der Fixture-Text und sein „gutes“ Gegenstück unterscheiden sich in Länge und
+  Wortwahl (`Kurzer Satz hier.` → `Kurzer Satz steht hier.`); der Vertrag meldet
+  einen Grund, wo der Fall Stille erwartet. Das ist entweder eine zu enge
+  Tolerz im Fall oder eine zu scharfe Regel im Detektor – beides entscheidbar,
+  aber nur mit dem Original-Vorgang WF-54C4/#607 im Blick.
+* `test_selbsttest_der_redaktions_wache_laeuft` in
+  `scripts/tests/test_wachen_vertrag.py` ist die Sperre, die diesen Zustand
+  seit #783 fernhält – sie schlägt korrekt an. Die Wache ist also nicht
+  vergessen, sie ist erweislich kaputt.
+
 ## Offene Punkte (bewusst nicht entschieden)
 
 1. **`web-design-guidelines` ohne Lizenz.** Upstream `vercel-labs/agent-skills`
