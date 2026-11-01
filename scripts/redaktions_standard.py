@@ -71,6 +71,7 @@ sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 from post_utils import (list_post_paths, slug_of,  # noqa: E402
                         join_article, strip_generator_scaffolding)
 import llm_client  # noqa: E402
+import sprachkern  # noqa: E402
 
 # YMYL-Schutz (Premium-Fix #613): Hochrisiko-Artikel mit gültigem Siegel
 # dürfen nicht von der KI-Heilung umgeschrieben werden – sonst bricht das
@@ -1370,7 +1371,24 @@ _RS5_DETERMINISTIC_MARKERS = (
 
 
 def _heal_rs5_block(block: str, marker_idx: int) -> tuple[str, int]:
-    """Qualifiziert den ersten unbelegten Zahlen-Satz eines Absatzes als Modellwert."""
+    """Qualifiziert den ersten unbelegten Zahlen-Satz eines Absatzes als Modellwert.
+
+    WARUM NEU (01.11.2026, #964): Der Heiler suchte die ERSTE Satzgrenze im
+    Absatz (`re.search(r"([.!?])(\s+|$)")`) und setzte dort „ im Modellfall“
+    ein. Dieser Punkt ist aber nicht immer eine Satzgrenze: Bei „ca.“, „z. B.“,
+    einer Ordnungszahl („3. **Tür“) oder einem Datum („30. November“) stand
+    die Kennzeichnung MITTEN im Wort, bei „… 460 €. Rechne“ hinter dem Betrag,
+    aber im nächsten Satz. Ergebnis im Bestand: 494 zerstückelte
+    Kennzeichnungen in 63 Dateien („ca im Modellfall. 500 €“, „bis zum 30 als
+    Beispielwert. November“) – live und in den Snippets.
+
+    Die Heilung ist jetzt zielsicher: Der Satz mit der Zahlenbehauptung wird
+    bestimmt (Abkürzungen und Ordinaldaten sind keine Grenze), und die
+    Kennzeichnung hängt als eigener Teilsatz an SEINEM Ende:
+    „… über 460 €; das ist ein Beispielwert.“ Diese Form ist nach jedem
+    Satzende grammatisch und trägt den Ausdruck, den RS5 als Modellannahme
+    akzeptiert. Die Aussage selbst bleibt unverändert.
+    """
     lines = block.splitlines()
     for i, ln in enumerate(lines):
         s_ln = ln.lstrip()
@@ -1380,14 +1398,67 @@ def _heal_rs5_block(block: str, marker_idx: int) -> tuple[str, int]:
             marker = _RS5_DETERMINISTIC_MARKERS[
                 marker_idx % len(_RS5_DETERMINISTIC_MARKERS)
             ]
-            m = re.search(r"([.!?])(\s+|$)", ln)
-            if m:
-                pos = m.start(1)
-                lines[i] = ln[:pos] + f" {marker}" + ln[pos:]
-            else:
-                lines[i] = ln.rstrip() + f" ({marker})"
+            lines[i] = _kennzeichnung_ans_satzende(ln, marker)
             return "\n".join(lines), marker_idx + 1
     return block, marker_idx
+
+
+# Abkürzungen und Ordinaldaten, nach deren Punkt KEIN Satz endet. Dieselbe
+# Liste wie `_reserve_numeric_claim_findings.abbrev_re` – eine Regel, zwei
+# Leser; ein neuer Eintrag muss an beiden Stellen nicht nachgezogen werden,
+# weil diese Funktion die Grenzen selbst bestimmt.
+_KEIN_SATZENDE = re.compile(
+    r"\b(?:ca|bzw|usw|ggf|inkl|mind|max|vgl|nr|abs|z|B|Dr|Prof|Art|Rn|S|"
+    r"d\.h|u\.a|evtl|etc|Mio|Mrd|Std)$", re.I)
+_MONATSNAME = re.compile(
+    r"\s*(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|"
+    r"November|Dezember)\b")
+_KENNZEICHNUNG_NOMEN = {
+    "im Modellfall": "Modellwert",
+    "als Modellwert": "Modellwert",
+    "als Beispielwert": "Beispielwert",
+    "im Rechenfall": "Rechenbeispiel",
+    "im Rechenbeispiel": "Rechenbeispiel",
+    "als Modellannahme": "Modellannahme",
+}
+
+
+def _satzgrenzen(zeile: str) -> list[int]:
+    """Echte Satzenden (Index des Terminators) – ohne Abkürzung und Datum."""
+    grenzen = []
+    for m in re.finditer(r"[.!?](?=\s|$)", zeile):
+        i = m.start()
+        if zeile[i] == ".":
+            if _KEIN_SATZENDE.search(zeile[max(0, i - 10):i]):
+                continue
+            if zeile[:i].rstrip().endswith("."):   # „z. B.“ / „u. a.“
+                continue
+            if re.search(r"\d$", zeile[:i]) and _MONATSNAME.match(zeile[i + 1:]):
+                continue
+        grenzen.append(i)
+    return grenzen
+
+
+def _kennzeichnung_ans_satzende(zeile: str, marker: str) -> str:
+    """Hängt die Kennzeichnung als Teilsatz an das Satzende des Zahlensatzes."""
+    nomen = _KENNZEICHNUNG_NOMEN.get(marker, "Modellwert")
+    grenzen = _satzgrenzen(zeile)
+    # Der Zahlensatz: der erste Satz, den `_reserve_numeric_claim_findings`
+    # ohne Modellkennzeichnung beanstandet.
+    start = 0
+    for ende in grenzen:
+        satz = zeile[start:ende + 1]
+        if _reserve_numeric_claim_findings(satz) and "§" not in satz:
+            rumpf = satz[:-1].rstrip().rstrip(",;:")
+            termin = satz[-1]
+            rest = zeile[ende + 1:]
+            return f"{rumpf}; {sprachkern._praedikativ(nomen)}{termin}{rest}"
+        start = ende + 1
+    # Kein Satzende gefunden (Absatz ohne Punkt): als eigener Satz anhängen.
+    rumpf = zeile.rstrip()
+    trenner = "" if rumpf.endswith((".", "!", "?")) else "."
+    satz = sprachkern._praedikativ(nomen)
+    return f"{rumpf}{trenner} {satz[0].upper()}{satz[1:]}."
 
 
 def fix_rs4_rs5_deterministic(body: str) -> tuple[str, list[str]]:

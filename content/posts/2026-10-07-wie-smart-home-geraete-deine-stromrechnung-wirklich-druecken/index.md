@@ -194,7 +194,7 @@ Vergleich Wochen unter gleichen Bedingungen: ähnliche Temperaturen, gleiche Rä
 Nimm mit, was dir gehört und ohne Umbau funktioniert. Prüfe vor dem Kauf, ob du Veränderungen sauber rückgängig machen kannst und ob die Erlaubnis der Verwaltung nötig ist. Verkabelte Lösungen bleiben oft im Gebäude – dann profitiert der Vermieter von den Verbesserungen, nicht dein Stromtarif.
 
 ### Reicht nicht auch eine schaltbare Steckdosenleiste?
-Für viele Standby-Fälle: ja als Beispielwert. Eine Leiste mit Schalter trennt mehrere Geräte mit einem Handgriff vom Netz. Eine smarte Lösung lohnt dagegen dort, wo ein Zeitplan oder ein echter Messwert weiterhilft. Prüfe nach zwei Wochen, ob die Regel noch zu deinem Alltag passt; wenn nicht, stell sie um oder nimm sie zurück.
+Für viele Standby-Fälle: ja. Eine Leiste mit Schalter trennt mehrere Geräte mit einem Handgriff vom Netz. Eine smarte Lösung lohnt dagegen dort, wo ein Zeitplan oder ein echter Messwert weiterhilft. Prüfe nach zwei Wochen, ob die Regel noch zu deinem Alltag passt; wenn nicht, stell sie um oder nimm sie zurück.
 
 ---
 

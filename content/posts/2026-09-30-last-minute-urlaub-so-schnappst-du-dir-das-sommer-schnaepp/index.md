@@ -47,11 +47,11 @@ faktencheck: 2026-10-14
 
 ## Last-Minute-Urlaub: So ordnest du mögliche Preisvorteile ein
 
-Kurzfristige Angebote können günstiger sein im Modellfall. Doch ein Preisvorteil ist nicht planbar. Eine 2026 von WELT zitierte Verbraucherexpertin hält die mögliche Ersparnis für schwer vorhersehbar. Nachlässe von bis zu 50 % seien Einzelfälle. Sie sind keine verlässliche Erwartung ([Einordnung zu Last-Minute-Angeboten](https://www.welt.de/reise/article6a327762e495aff7b58467a5/last-minute-urlaub-winken-wirklich-die-besten-schnaeppchen-wenn-man-auf-den-letzten-druecker-bucht.html)).
+Kurzfristige Angebote können günstiger sein. Doch ein Preisvorteil ist nicht planbar. Eine 2026 von WELT zitierte Verbraucherexpertin hält die mögliche Ersparnis für schwer vorhersehbar. Nachlässe von bis zu 50 % seien Einzelfälle. Sie sind keine verlässliche Erwartung ([Einordnung zu Last-Minute-Angeboten](https://www.welt.de/reise/article6a327762e495aff7b58467a5/last-minute-urlaub-winken-wirklich-die-besten-schnaeppchen-wenn-man-auf-den-letzten-druecker-bucht.html)).
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Der Deutsche Reiseverband definiert Last Minute so: höchstens 14 Tage zwischen Buchung und Abreise als Beispielwert. Das ZDF gibt diese Definition wieder. Portale verwenden den Begriff teilweise breiter. Verlasse dich deshalb nicht auf die Überschrift des Angebots. Prüfe Abreise, Leistungen und Vertragsbedingungen ([ZDF-Ratgeber](https://www.zdfheute.de/ratgeber/last-minute-urlaub-angebote-sommer-100.html)).
+Der Deutsche Reiseverband definiert Last Minute so: höchstens 14 Tage zwischen Buchung und Abreise. Das ZDF gibt diese Definition wieder. Portale verwenden den Begriff teilweise breiter. Verlasse dich deshalb nicht auf die Überschrift des Angebots. Prüfe Abreise, Leistungen und Vertragsbedingungen ([ZDF-Ratgeber](https://www.zdfheute.de/ratgeber/last-minute-urlaub-angebote-sommer-100.html)).
 
 **Das Wichtigste in Kürze**  
 - **Keine Spargarantie:** Kurzfristige Angebote können günstiger sein, müssen es aber nicht.
@@ -184,7 +184,7 @@ Buche nicht in Hektik. Buche nicht, weil der Countdown auf der Seite läuft. Buc
 
 Der beste Zeitpunkt ist nicht der letzte Tag als Modellwert. Er ist auch nicht drei Monate im Voraus. Er ist der Moment, in dem du den Gesamtpreis kennst. In dem du die Bedingungen gelesen hast. In dem du mit anderen Angeboten verglichen hast.
 
-Das kann zwei Wochen vor Abreise sein im Rechenfall. Das kann auch zwei Tage vor Abreise sein.
+Das kann zwei Wochen vor Abreise sein. Das kann auch zwei Tage vor Abreise sein.
 
 ### Mietwagenpreise separat vergleichen
 

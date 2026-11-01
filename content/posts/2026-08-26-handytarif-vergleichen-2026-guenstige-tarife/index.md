@@ -41,7 +41,7 @@ Du willst Handytarif-vergleichen im Modellfall? Hast du deinen [Handyvertrag](..
 
 Der Markt ist 2026 hart umkämpft als Beispielwert. Discounter und Submarken unterbieten sich mit Allnet-Flats. Teilweise ist 5G für unter 10 € drin.
 
-Doch das **kleingedruckte** hat Fallstricke als Modellwert. Da sind Datenautomatik, Roaming-Gebühren und die 24-Monate-Laufzeit. Worauf es beim **Handytarif-Vergleich** ankommt, zeigt dieser Überblick. Mit einem Wechsel sparst du bis zu **360 € im Jahr**.
+Doch das **kleingedruckte** hat Fallstricke. Da sind Datenautomatik, Roaming-Gebühren und die 24-Monate-Laufzeit. Worauf es beim **Handytarif-Vergleich** ankommt, zeigt dieser Überblick. Mit einem Wechsel sparst du bis zu **360 € im Jahr**.
 
 
 
@@ -91,7 +91,7 @@ Telefon- und SMS-Flat in alle Netze. Dazu kommt Datenvolumen. Der Klassiker ist 
 
 ### 3. Flex-Tarife (monatlich kündbar)
 
-Volle Tarif-Leistung, nur 1 Monat Laufzeit als Modellannahme. Seit 2022 gilt: Nach 24 Monaten muss der Anbieter in einen monatlich kündbaren Tarif wechseln.
+Volle Tarif-Leistung, nur 1 Monat Laufzeit. Seit 2022 gilt: Nach 24 Monaten muss der Anbieter in einen monatlich kündbaren Tarif wechseln.
 
 - **Vorteile:** Maximale Flexibilität.
 - **Nachteile:** Etwas teurer als 24-Monats-Tarife.
@@ -99,11 +99,11 @@ Volle Tarif-Leistung, nur 1 Monat Laufzeit als Modellannahme. Seit 2022 gilt: Na
 
 ### 4. 5G-Tarife
 
-Wie LTE, nur mit 5G-Zugang als Beispielwert. Über 60 % der Haushalte haben 2026 schon ein 5G-Handy.
+Wie LTE, nur mit 5G-Zugang. Über 60 % der Haushalte haben 2026 schon ein 5G-Handy.
 
 - **Vorteile:** Höhere Spitzengeschwindigkeiten, weniger überlastet in Städten.
 - **Nachteile:** Nur sinnvoll mit 5G-fähigem Gerät und an Orten mit 5G-Abdeckung.
-- **Preis:** 5G ist heute bereits ab ca als Modellwert. 8–12 € im Monat verfügbar.
+- **Preis:** 5G ist heute bereits ab ca. 8–12 € im Monat verfügbar.
 
 ## Die 8-Punkte-Checkliste für den Tarifvergleich
 
@@ -111,7 +111,7 @@ Bevor du einen Vertrag abschließt, prüfe systematisch diese acht Kriterien:
 
 1. **Netz:** Passt die Netzqualität an Wohnung, Arbeitsplatz und auf den täglichen Wegen?
 2. **Datenvolumen:** Wie viel GB verbrauchst du wirklich? In den Einstellungen deines Smartphones unter "Mobiles Netz" / "Datennutzung" siehst du den exakten Verbrauch der letzten Monate.
-3 im Rechenfall. **Geschwindigkeit:** Reichen 25 Mbit/s (LTE) oder brauchst du 50–300 Mbit/s (5G)?
+3. **Geschwindigkeit:** Reichen 25 Mbit/s (LTE) oder brauchst du 50–300 Mbit/s (5G)?
 4. **Telefonie & SMS:** Telefonie-Flat in alle deutschen Netze ist Standard. SMS-Flat immer seltener genutzt, aber meist inklusive.
 5. **EU-Roaming:** Seit 2017 innerhalb der EU ohne Aufpreis – achte aber auf die Faire-Use-Regelungen und die Schweiz (oft nicht inklusive).
 6. **Laufzeit:** Maximale 24 Monate, danach automatisch monatlich kündbar. Vorsicht bei "Flat mit Mindestlaufzeit 24 Monate und automatischer Verlängerung um 12 Monate".
@@ -157,9 +157,9 @@ Oft kostet das extra. Drei Nachbuchungen verdoppeln den Monatspreis. **Lösung:*
 
 ### 2. Lange Mindestlaufzeiten mit stillschweigender Verlängerung
 
-24 Monate Laufzeit im Rechenbeispiel. Dann verlängert sich der Vertrag oft automatisch.
+24 Monate Laufzeit. Dann verlängert sich der Vertrag oft automatisch.
 
-Willst du das nicht, musst du 3 Monate vorher kündigen als Modellannahme. Seit Dezember 2021 ist diese Praxis meist unwirksam. Doch einige Anbieter versuchen es weiter. **Empfehlung:** Kündige direkt nach der Aktivierung schriftlich.
+Willst du das nicht, musst du 3 Monate vorher kündigen. Seit Dezember 2021 ist diese Praxis meist unwirksam. Doch einige Anbieter versuchen es weiter. **Empfehlung:** Kündige direkt nach der Aktivierung schriftlich.
 
 
 ### 3. "EU-Roaming inklusive", aber mit Einschränkungen
@@ -174,7 +174,7 @@ Aktionspreise gelten oft nur 6 bis 12 Monate als Beispielwert. Danach steigt der
 
 ### 5. "Hotline kostet extra"
 
-Manche Discounter nehmen Geld für den Telefon-Support als Modellwert. Oder es gibt nur einen Chat. **Lösung:** Ist dir Support wichtig, wähle eine 0800-Hotline.
+Manche Discounter nehmen Geld für den Telefon-Support. Oder es gibt nur einen Chat. **Lösung:** Ist dir Support wichtig, wähle eine 0800-Hotline.
 
 ## Rufnummernmitnahme: So funktioniert der Wechsel
 
@@ -188,7 +188,7 @@ Manche Discounter nehmen Geld für den Telefon-Support als Modellwert. Oder es g
 
 ## Zusatz-Tipp: Combo-Angebote nutzen
 
-Viele Anbieter geben Rabatt beim Bündel im Rechenfall. Handy plus DSL aus einer Hand spart oft bis zu 20 € im Monat.
+Viele Anbieter geben Rabatt beim Bündel. Handy plus DSL aus einer Hand spart oft bis zu 20 € im Monat.
 
 Aber Vorsicht: Prüfe vorher die Einzelpreise. Manchmal ist das Bündel teurer. Einen guten DSL-Tarif findest du über den [DSL-Vergleich](/go/dsl/). Mehr dazu steht in meinem [Ratgeber zum richtigen DSL-Tarif](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/).
 
@@ -199,7 +199,7 @@ Aber Vorsicht: Prüfe vorher die Einzelpreise. Manchmal ist das Bündel teurer. 
 
 Discounter nutzen das Telekom-, Vodafone- oder O2-Netz. Ein 5G-Logo heißt nicht, dass 5G an deinem Bahnhof ankommt. Prüfe die Netzkarte.
 
-Teste 7 Tage, bevor du 24 Monate bindest im Rechenbeispiel. Hängst du oft im WLAN, reichen 8 bis 15 GB. Pendelst du viel, zählt das Netz auf dem Land mehr. Der billigste Gigabyte-Preis in der Stadt hilft dir dort nicht.
+Teste 7 Tage, bevor du 24 Monate bindest. Hängst du oft im WLAN, reichen 8 bis 15 GB. Pendelst du viel, zählt das Netz auf dem Land mehr. Der billigste Gigabyte-Preis in der Stadt hilft dir dort nicht.
 
 
 Starte die Rufnummernmitnahme parallel zum neuen Vertrag. Nicht erst danach. Die Portierung in 24 Stunden ist heute Standard. Mauert der Altanbieter, eskaliere mit der Vertragsnummer.
@@ -238,7 +238,7 @@ Gerade wer viel reist oder beruflich erreichbar sein muss, kann dadurch flexible
 
 Noch nie war der Markt so günstig als Modellannahme. Allnet-Flats mit 5G gibt es unter 10 €. Trotzdem zahlen Millionen 25 bis 40 € für alte Verträge.
 
-Ein Vergleich dauert 15 Minuten im Modellfall. Er bringt **200 bis 360 € im Jahr**. Prüfe Netz, Volumen und Kleingedrucktes. Der Aufwand lohnt sich dauerhaft.
+Ein Vergleich dauert 15 Minuten. Er bringt **200 bis 360 € im Jahr**. Prüfe Netz, Volumen und Kleingedrucktes. Der Aufwand lohnt sich dauerhaft.
 
 
 **Weiterlesen:** [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/) · [VPN Zuhause](../../posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/)
@@ -246,10 +246,10 @@ Ein Vergleich dauert 15 Minuten im Modellfall. Er bringt **200 bis 360 € im J
 ## Häufige Fragen
 
 ### Welcher Handytarif ist der passende?
-Den „attraktiven“ Tarif gibt es nicht als Beispielwert. Es zählen dein Verhalten, die Abdeckung und der Preis. Die meisten Nutzer liegen mit 10 bis 25 GB richtig. Im Telekom- oder Vodafone-Netz kostet das 7,99 bis 14,99 €.
+Den „attraktiven“ Tarif gibt es nicht. Es zählen dein Verhalten, die Abdeckung und der Preis. Die meisten Nutzer liegen mit 10 bis 25 GB richtig. Im Telekom- oder Vodafone-Netz kostet das 7,99 bis 14,99 €.
 
 ### Wie viel Datenvolumen brauche ich?
-Messe den Verbrauch deines Smartphones als Modellwert. Die meisten kommen mit 10 bis 15 GB aus. Power-User brauchen 25 GB oder mehr. Vor allem bei Hotspot und HD-Streaming.
+Messe den Verbrauch deines Smartphones. Die meisten kommen mit 10 bis 15 GB aus. Power-User brauchen 25 GB oder mehr. Vor allem bei Hotspot und HD-Streaming.
 
 ### Lohnt sich 5G gegenüber LTE?
 Du brauchst ein 5G-Handy und gute Abdeckung vor Ort. Dann ist 5G die sichere Wahl. Auf dem Land reicht LTE oft völlig.
@@ -258,10 +258,10 @@ Du brauchst ein 5G-Handy und gute Abdeckung vor Ort. Dann ist 5G die sichere Wah
 Ja. Die Mitnahme ist gesetzlich garantiert und kostenlos. Sie geht auch während der Laufzeit. Der alte Anbieter muss nur zustimmen.
 
 ### Was passiert am Ende der 24-monatigen Laufzeit?
-Der Vertrag verlängert sich nicht automatisch um 24 Monate im Rechenfall. Er wird monatlich kündbar. Du kannst also jederzeit mit einem Monat Frist wechseln.
+Der Vertrag verlängert sich nicht automatisch um 24 Monate. Er wird monatlich kündbar. Du kannst also jederzeit mit einem Monat Frist wechseln.
 
 ### Was ist der Unterschied zwischen Prepaid und Vertrag?
-Prepaid lädst du im Voraus auf im Rechenbeispiel. Das gibt volle Kontrolle ohne Bindung. Ein Vertrag ist oft günstiger. Er bindet dich aber 24 Monate. Für die meisten ist ein flexibler Vertrag heute besser.
+Prepaid lädst du im Voraus auf. Das gibt volle Kontrolle ohne Bindung. Ein Vertrag ist oft günstiger. Er bindet dich aber 24 Monate. Für die meisten ist ein flexibler Vertrag heute besser.
 
 ---
 

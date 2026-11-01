@@ -41,7 +41,7 @@ faktencheck: "2026-09-27"
 
 Im Kern geht es darum, Geld nicht automatisch auszugeben, nur weil es gerade bequem ist. Du senkst teure Routinen, streichst Ballast und gibst bewusster für das aus, was dir wirklich wichtig ist. Das ist kein Verzichtsprojekt. Das ist saubere Prioritätensetzung.
 
-Wer damit anfängt, muss nicht sofort alles umkrempeln im Modellfall. Schon ein oder zwei gute Gewohnheiten schaffen oft **50 € bis 200 € mehr Spielraum im Monat**. Genau darum geht es in diesen **5 einfachen Frugalismus-Tricks für den Alltag**.
+Wer damit anfängt, muss nicht sofort alles umkrempeln. Schon ein oder zwei gute Gewohnheiten schaffen oft **50 € bis 200 € mehr Spielraum im Monat**. Genau darum geht es in diesen **5 einfachen Frugalismus-Tricks für den Alltag**.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -81,7 +81,7 @@ Dazu zählen vor allem:
 
 ### Warum das so viel bringt
 
-Ein Abo für 12 € im Monat wirkt harmlos als Beispielwert. Drei davon sind schon 36 €. Dazu noch 8 € zu viel fürs Konto, 10 € beim Handy und 15 € beim Strom – und plötzlich liegen **50 € bis 70 € im Monat** einfach so auf der Straße.
+Ein Abo für 12 € im Monat wirkt harmlos; das ist ein Beispielwert. Drei davon sind schon 36 €. Dazu noch 8 € zu viel fürs Konto, 10 € beim Handy und 15 € beim Strom – und plötzlich liegen **50 € bis 70 € im Monat** einfach so auf der Straße.
 
 ### Kleines Rechenbeispiel
 
@@ -107,7 +107,7 @@ Energie ist ein Frugalismus-Klassiker, weil kleine Änderungen hier lange wirken
 - Warmwasser bewusster nutzen
 - Dichtungen und Zugluft prüfen
 
-Ein Grad weniger Raumtemperatur kann grob **6 % Heizenergie** sparen als Modellwert. Bei 120 € monatlichen Heizkosten sind das etwa **7 € pro Monat**. Zusammen mit einem besseren Tarif wird aus einer kleinen Gewohnheit schnell ein ordentlicher Betrag.
+Ein Grad weniger Raumtemperatur kann grob **6 % Heizenergie** sparen; das ist ein Modellwert. Bei 120 € monatlichen Heizkosten sind das etwa **7 € pro Monat**. Zusammen mit einem besseren Tarif wird aus einer kleinen Gewohnheit schnell ein ordentlicher Betrag.
 
 ### Gute Ergänzungen dazu
 
@@ -181,7 +181,7 @@ Darum gilt: Jede Ersparnis braucht sofort einen festen Platz.
 - Extra-Konto für Urlaub, Reparaturen und Notgroschen
 - Ersparnisse aus Tarifwechseln direkt umleiten
 
-Wenn du durch einen Tarifwechsel 18 € im Monat sparst, gehen genau diese 18 € direkt auf ein separates Konto im Modellfall. Sonst lösen sie sich im Alltag fast immer wieder auf.
+Wenn du durch einen Tarifwechsel 18 € im Monat sparst, gehen genau diese 18 € direkt auf ein separates Konto; das ist ein Modellwert. Sonst lösen sie sich im Alltag fast immer wieder auf.
 
 **Faustregel:** Frugalismus scheitert seltener am Sparen als am Liegenlassen der Ersparnis auf dem Hauptkonto.
 

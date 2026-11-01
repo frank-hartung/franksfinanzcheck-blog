@@ -48,7 +48,7 @@ Willst du echte **[finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-du
 
 * Am Anfang steht die Haltung: Wer seine Ausgaben nicht kennt, kann sie nicht steuern.
 * Automatische Abläufe bilden das Fundament für dein wachsendes Kapital.
-* Kleine monatliche Beträge führen über ca als Beispielwert. 15 bis 30 Jahre zu Wohlstand.
+* Kleine monatliche Beträge führen über ca. 15 bis 30 Jahre zu Wohlstand.
 * Bewusster Verzicht heute sichert dir morgen deine persönliche Unabhängigkeit.
 * Transparenz über alle Kosten verhindert unnötige Geldverluste.
 
@@ -157,15 +157,15 @@ Das Ergebnis zeigt, wann sich dein Geld verdoppelt. Bei 6 % sind das rund 12
 | 8 % | 176.000 € | 9 |
 | 10 % | 224.000 € | 7,2 |
 
-Berücksichtige die Inflation als Modellwert. Bei einer durchschnittlichen Inflationsrate von ca. 2 % verliert das Geld jedes Jahr etwa 2 % seiner Kaufkraft.
+Berücksichtige die Inflation. Bei einer durchschnittlichen Inflationsrate von ca. 2 % verliert das Geld jedes Jahr etwa 2 % seiner Kaufkraft.
 
-Rechne das Endkapital mit realer Rendite (nominale Rendite – Inflation) im Rechenfall. Bei 7 % nominal und 2 % Inflation bleibt eine reale Rendite von etwa 5 %. Das reale Endkapital nach 20 Jahren beträgt dann etwa 124.000 €, immer noch ein beachtlicher Vermögenszuwachs.
+Rechne das Endkapital mit realer Rendite (nominale Rendite – Inflation). Bei 7 % nominal und 2 % Inflation bleibt eine reale Rendite von etwa 5 %. Das reale Endkapital nach 20 Jahren beträgt dann etwa 124.000 €, immer noch ein beachtlicher Vermögenszuwachs.
 
 > 💶 **Spar‑Tipp zwischendurch:** Faire Konditionen gibt es online in wenigen Minuten: [**C24 Bank Tagesgeld-Zinsen ansehen**](/go/tagesgeld/)
 
 ## So gehst du vor: Deine ersten Schritte
 
-Starte heute mit deiner Bestandsaufnahme im Rechenbeispiel. Liste alle Einnahmen, Ausgaben und Schulden auf – zwei Wochen [Haushaltsbuch](../../posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/) reichen, um die Posten zu sehen, die wirklich Bewegung zulassen. Sei ehrlich zu dir, nur Fakten helfen weiter.
+Starte heute mit deiner Bestandsaufnahme. Liste alle Einnahmen, Ausgaben und Schulden auf – zwei Wochen [Haushaltsbuch](../../posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/) reichen, um die Posten zu sehen, die wirklich Bewegung zulassen. Sei ehrlich zu dir, nur Fakten helfen weiter.
 
 Bilde zuerst einen Notgroschen. Drei bis sechs Monatsausgaben sind ein guter Wert. Lege sie auf ein [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/).
 
@@ -179,7 +179,7 @@ Lies Bücher und seriöse Quellen. Wer mehr weiß, bleibt ruhig. Kontinuität sc
 
 1. **Einnahmen & Fixkosten erfassen** (Miete, Versicherungen, Abos).
 2. **Variable Kosten analysieren** (Essen, Freizeit, Shopping).
-3 als Modellannahme. **Notgroschen anlegen** (mind. 3 Monate, ideal 6).
+3. **Notgroschen anlegen** (mind. 3 Monate, ideal 6).
 4. **Schulden priorisieren** – zuerst hochverzinsliche Kredite.
 5. **Dauerauftrag für Sparplan einrichten** (ETF, Indexfonds).
 6. **Finanz‑App installieren** und Kategorien anpassen.
@@ -253,7 +253,7 @@ Beide Wege unterstützen **[finanzielle Freiheit](../../posts/2026-08-24-mehr-fr
 
 ## Fazit: Finanzielle Freiheit – denk dich reich, handle bewusst
 
-Der Hebel bei **finanzielle Freiheit erreichen** sitzt nicht im Verzicht, sondern in der Reihenfolge: erst der Dauerauftrag, dann der Rest des Monats im Modellfall. Ein Beispiel von 300 € monatlich wird bei 7 % über 20 Jahre zu rund 156.000 €; nach Abzug der Inflation bleiben etwa 124.000 € echte Kaufkraft. Ein [Tagesgeldkonto mit fairen Zinsen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) hält den Notgroschen zusammen, vermehrt ihn aber nicht – das erledigt der Sparplan. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
+Der Hebel bei **finanzielle Freiheit erreichen** sitzt nicht im Verzicht, sondern in der Reihenfolge: erst der Dauerauftrag, dann der Rest des Monats. Ein Beispiel von 300 € monatlich wird bei 7 % über 20 Jahre zu rund 156.000 €; nach Abzug der Inflation bleiben etwa 124.000 € echte Kaufkraft. Ein [Tagesgeldkonto mit fairen Zinsen](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) hält den Notgroschen zusammen, vermehrt ihn aber nicht – das erledigt der Sparplan. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.
 
 **Faustregel:** Wer mindestens 10 % seines Nettoeinkommens sofort nach Gehaltseingang spart, reduziert seine Ausgaben später um rund ein Drittel.
 
@@ -273,7 +273,7 @@ Sie kosten mehr, als der Markt bringt. Eine Ausnahme: sehr günstige Immobilienk
 
 Jede Anlage hat Risiken. Aktien schwanken.
 
-Immobilien kosten für Reparaturen als Beispielwert. Breite Streuung senkt das Risiko. Über 15 Jahre schrumpft die Gefahr stark.
+Immobilien kosten für Reparaturen. Breite Streuung senkt das Risiko. Über 15 Jahre schrumpft die Gefahr stark.
 
 ### Muss ich auf alles verzichten, um finanzielle Freiheit zu erreichen?
 
@@ -293,7 +293,7 @@ Nutze eine Finanz‑App, die deine Konten per API verbindet. Lege Kategorien an 
 
 ### Welchen ETF sollte ich für den ersten Sparplan wählen?
 
-Ein breit diversifizierter Welt‑ETF (z als Modellwert. B. MSCI All‑Country World) bietet günstige Kosten (TER ≈ 0,15 %) und deckt über 20 Märkte ab.
+Ein breit diversifizierter Welt‑ETF (z. B. MSCI All‑Country World) bietet günstige Kosten (TER ≈ 0,15 %) und deckt über 20 Märkte ab.
 
 Achte auf die Gesamtkostenquote, die Fondsgröße und die Replikationsmethode (physisch vs. synthetisch). Für Einsteiger ist ein physisch replizierender ETF empfehlenswert.
 

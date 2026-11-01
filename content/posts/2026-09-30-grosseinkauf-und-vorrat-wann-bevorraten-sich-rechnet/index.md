@@ -126,13 +126,13 @@ Ein Vorratsplan passt auf eine Seite. Fünf Spalten reichen.
 
 Fülle die Liste einmal mit den zwanzig Artikeln, die du wirklich regelmäßig kaufst. Diese Liste ist der Unterschied zwischen einem Vorrat und einem Lagerbestand, den niemand überblickt.
 
-Aktualisiere sie beim Einkauf im Modellfall. Wenn ein Artikel zwei Monate lang nicht nachgekauft wurde, ist er wahrscheinlich entbehrlich. Wenn ein Artikel zweimal im Monat ausgeht, war die Menge zu klein.
+Aktualisiere sie beim Einkauf. Wenn ein Artikel zwei Monate lang nicht nachgekauft wurde, ist er wahrscheinlich entbehrlich. Wenn ein Artikel zweimal im Monat ausgeht, war die Menge zu klein.
 
 ## Schwund messbar machen
 
-Die meisten Haushalte wissen nicht, wie viel sie wegwerfen als Beispielwert. Eine einfache Strichliste am Kühlschrank ändert das innerhalb von zwei Wochen.
+Die meisten Haushalte wissen nicht, wie viel sie wegwerfen. Eine einfache Strichliste am Kühlschrank ändert das innerhalb von zwei Wochen.
 
-Trage jeden weggeworfenen Artikel mit Datum und ungefährer Menge ein als Modellwert. Am Ende der zwei Wochen hast du eine kurze Liste. Unter ihr steht der Betrag, der in dieser Zeit verloren ging. Dieses Ergebnis ist die Grundlage für jede weitere Entscheidung über den Vorrat.
+Trage jeden weggeworfenen Artikel mit Datum und ungefährer Menge ein. Am Ende der zwei Wochen hast du eine kurze Liste. Unter ihr steht der Betrag, der in dieser Zeit verloren ging. Dieses Ergebnis ist die Grundlage für jede weitere Entscheidung über den Vorrat.
 
 Wer seine Ausgaben strukturiert erfassen möchte, findet bei der Verbraucherzentrale ein erprobtes Vorgehen für ein [Haushaltsbuch](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/haushaltsbuch-fuehren-so-behalten-sie-ihre-ausgaben-im-blick-10496).
 
@@ -140,7 +140,7 @@ Wer seine Ausgaben strukturiert erfassen möchte, findet bei der Verbraucherzent
 
 In einer kleinen Wohnung konkurriert der Vorrat mit dem Wohnraum. Wer sieben Kartons Nudeln in der Abstellkammer stapelt, hat Platz verloren, um einen Jahresvorrat zu halten, den er nicht braucht.
 
-Die praktische Grenze liegt niedriger als viele denken: ein bis drei Monate für haltbare Grundnahrungsmittel im Rechenfall. Alles darüber ist weniger Vorratshaltung als Lagerhaltung.
+Die praktische Grenze liegt niedriger als viele denken: ein bis drei Monate für haltbare Grundnahrungsmittel. Alles darüber ist weniger Vorratshaltung als Lagerhaltung.
 
 Wichtig ist die Reihenfolge. Neue Ware nach hinten, ältere nach vorn. Diese Regel kostet keine Zeit und verhindert den häufigsten Fall von Schwund.
 
@@ -156,7 +156,7 @@ Setze deshalb eine Grenze in Euro, nicht in Packungen. Ein Betrag, den du aus de
 
 Ein Angebot ist nur dann ein Vorteil, wenn der Preis niedriger ist als dein üblicher. Dafür brauchst du deinen üblichen Preis.
 
-Führe für die zehn Artikel, die du am häufigsten kaufst, eine kleine Liste im Rechenbeispiel. Notiere den Preis je Einheit und das Datum des letzten Einkaufs. Nach drei Monaten kennst du deinen Durchschnitt und erkennst, ob ein Angebot wirklich günstig ist.
+Führe für die zehn Artikel, die du am häufigsten kaufst, eine kleine Liste. Notiere den Preis je Einheit und das Datum des letzten Einkaufs. Nach drei Monaten kennst du deinen Durchschnitt und erkennst, ob ein Angebot wirklich günstig ist.
 
 Diese Liste hat einen zweiten Effekt: Sie zeigt dir, welche Preise sich stärker bewegen als andere. Für die Bewegung gibt es den Verbraucherpreisindex als gesamtwirtschaftliche Orientierung, den das Statistische Bundesamt monatlich veröffentlicht ([Verbraucherpreisindex](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html)). Für die einzelne Packung entscheidet aber immer dein eigener Durchschnitt.
 
@@ -176,7 +176,7 @@ Der Rhythmus hat einen messbaren Vorteil. Jeder zusätzliche Einkauf endet erfah
 
 Plane die großen Einkäufe bewusst in die erste und dritte Woche. So liegen sie weit auseinander, und du merkst im Vorrat, ob die Mengen passen. Der kurze Einkauf bleibt für Frischware und für das, was tatsächlich ausgegangen ist.
 
-Notiere nach jedem großen Einkauf, was du nachkaufen musstest als Modellannahme. Diese kurze Liste ist aussagekräftiger als jede Planungsvorlage. Nach drei Monaten kennst du die Posten, die du dauerhaft zu knapp kalkulierst.
+Notiere nach jedem großen Einkauf, was du nachkaufen musstest. Diese kurze Liste ist aussagekräftiger als jede Planungsvorlage. Nach drei Monaten kennst du die Posten, die du dauerhaft zu knapp kalkulierst.
 
 ## Der Notvorrat als eigenes Budget
 

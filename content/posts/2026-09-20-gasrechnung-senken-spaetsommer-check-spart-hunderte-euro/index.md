@@ -87,7 +87,7 @@ Rechne anschließend:
 
 ### Beispiel
 
-16.000 kWh × 0,109 €/kWh + 168 € Grundpreis ergeben **1.912 €** als Modellwert. Durch zwölf geteilt sind das rund **159 € im Monat**.
+16.000 kWh × 0,109 €/kWh + 168 € Grundpreis ergeben **1.912 €**; das ist ein Modellwert. Durch zwölf geteilt sind das rund **159 € im Monat**.
 
 Der aktuelle Abschlag kann davon abweichen. Eine kleinere Rate macht die Energie nicht günstiger. Sie erhöht nur das Risiko einer Nachzahlung.
 
@@ -183,7 +183,7 @@ Mehr als drei Sofortaufgaben brauchst du nicht. Der Rest bekommt einen Termin.
 
 ## Wie du den Tarif fair vergleichst?
 
-Der BDEW nennt für 2026 einen Durchschnitt von 11,93 Cent pro Kilowattstunde bei Einfamilienhäusern im Rechenfall. Nimm das nur als grobe Orientierung. Postleitzahl, Jahresmenge und Vertragsbedingungen entscheiden, was am Ende wirklich auf deiner Rechnung steht.
+Der BDEW nennt für 2026 einen Durchschnitt von 11,93 Cent pro Kilowattstunde bei Einfamilienhäusern; das ist ein Rechenbeispiel. Nimm das nur als grobe Orientierung. Postleitzahl, Jahresmenge und Vertragsbedingungen entscheiden, was am Ende wirklich auf deiner Rechnung steht.
 
 Die Verbraucherzentrale empfiehlt unter anderem:
 
@@ -197,13 +197,13 @@ Rechne das erste und zweite Jahr getrennt. Ein günstiges Bonusjahr kann danach 
 
 ## Was ein Wechsel realistisch bringen kann
 
-Die Bundesnetzagentur rechnete für Januar 2026 bei 20.000 kWh vor: Ein Gaslieferantenwechsel spart im Schnitt etwa 360 € im Rechenbeispiel. Das ist nur ein Durchschnitt, kein persönliches Versprechen.
+Die Bundesnetzagentur rechnete für Januar 2026 bei 20.000 kWh vor: Ein Gaslieferantenwechsel spart im Schnitt etwa 360 €; das ist ein Rechenbeispiel. Das ist nur ein Durchschnitt, kein persönliches Versprechen.
 
 Deine Ersparnis berechnest du so:
 
 > Bisherige Jahreskosten – neue Jahreskosten = Tarifvorteil
 
-Beispiel: Kostet der alte Vertrag 2.400 € und ein vergleichbarer neuer 2.050 €, beträgt der rechnerische Vorteil 350 € als Modellannahme. Prüfe Bonusbedingungen und Grundpreis, bevor du abschließt.
+Beispiel: Kostet der alte Vertrag 2.400 € und ein vergleichbarer neuer 2.050 €, beträgt der rechnerische Vorteil 350 €; das ist eine Modellannahme. Prüfe Bonusbedingungen und Grundpreis, bevor du abschließt.
 
 ## Verbrauchssparen ohne Doppelzählung
 
@@ -253,7 +253,7 @@ Wenn du mit anderen zusammenwohnst, verteile Aufgaben eindeutig. „Wir lesen de
 
 Bearbeite zuerst die Sicherheit, dann Fristen, danach Geld und Komfort. Ein Gasgeruch duldet keinen Preisvergleich. Eine Kündigungsfrist kann schon morgen ablaufen. Der staubige Heizkörper wartet dagegen locker bis zum Wochenende.
 
-Für Geldthemen hilft eine einfache Regel: Beginne mit dem Punkt, der laut deiner Rechnung den größten Unterschied im Jahr macht im Modellfall. Ein Tarifabstand von 300 € ist dringlicher als eine Thermostateinstellung für fünf Euro. Bei Technik zählt aber nicht nur die Eurozahl. Ein kleines Leck oder ein Fehlercode braucht auch bei unklarer Ersparnis eine fachliche Prüfung.
+Für Geldthemen hilft eine einfache Regel: Beginne mit dem Punkt, der laut deiner Rechnung den größten Unterschied im Jahr macht. Ein Tarifabstand von 300 € ist dringlicher als eine Thermostateinstellung für fünf Euro. Bei Technik zählt aber nicht nur die Eurozahl. Ein kleines Leck oder ein Fehlercode braucht auch bei unklarer Ersparnis eine fachliche Prüfung.
 
 Streiche erledigte Punkte und übertrage offene Aufgaben mit neuem Datum. So bleibt das Ergebnisblatt kurz. Nach dem Winter vergleichst du es mit Rechnung und Zählerreihe. Dann siehst du, welche Entscheidung Wirkung hatte und welche nur gut klang.
 
@@ -266,7 +266,7 @@ Der Check wirkt besser, wenn du ihn nicht jedes Jahr neu erfinden musst. Verteil
 - **Januar:** Zwischenstand beim Verbrauch ziehen und Abschlag plausibilisieren.
 - **acht Wochen vor Vertragsende:** Markt vergleichen und Kündigungsfrist prüfen als Beispielwert.
 
-Jeder Termin dauert höchstens 15 Minuten als Modellwert. Hinterlege beim Kalendereintrag ein Foto der letzten Checkliste oder den Ordner mit den Vertragsdaten. Dann beginnt die nächste Runde nicht wieder mit der Suche nach der Rechnung.
+Jeder Termin dauert höchstens 15 Minuten. Hinterlege beim Kalendereintrag ein Foto der letzten Checkliste oder den Ordner mit den Vertragsdaten. Dann beginnt die nächste Runde nicht wieder mit der Suche nach der Rechnung.
 
 Ein fester Rhythmus verhindert auch falsche Reaktionen. Der hohe Januarverbrauch ist bei Frost normal und kein Grund, sofort an fünf Einstellungen zu drehen. Ein steigender Preis trotz stabilem Verbrauch weist dagegen eher zum Vertrag.
 

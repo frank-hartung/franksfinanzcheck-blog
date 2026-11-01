@@ -78,7 +78,7 @@ Das Fest trifft deine Kasse gleich doppelt. Der Dezember ist ohnehin ein teurer 
 
 Eine Familie mit vier Köpfen zahlt für Geschenke, Essen, Baum und Fahrt schnell mehrere hundert Euro. Ohne Plan hängt diese Summe am Gehalt vom Dezember. Oder sie landet auf der Kreditkarte.
 
-Mit zehn Wochen Vorlauf sieht das anders aus im Modellfall. Aus einem dicken Betrag werden kleine Raten, die kaum wehtun. Nebenbei gewinnst du Zeit zum Vergleichen.
+Mit zehn Wochen Vorlauf sieht das anders aus. Aus einem dicken Betrag werden kleine Raten, die kaum wehtun. Nebenbei gewinnst du Zeit zum Vergleichen.
 
 Wer im November kauft, zahlt den normalen Preis. Wer am 22. Dezember durch die Läden hetzt, zahlt den Preis der Eile.
 
@@ -93,7 +93,7 @@ Teile die Kosten auf sechs Töpfe auf statt auf eine große Zahl. So siehst du a
 3. **Deko und Baum:** Tannenbaum, Lichterketten und Zubehör, das nur einmal im Jahr gekauft wird.
 4. **Anreise und Mobilität:** Bahn, Kraftstoff oder Fahrkarten zu Verwandten und Freunden.
 5. **Spenden und gute Taten:** Der bewusste Betrag für gemeinnützige Zwecke, die dir am Herzen liegen.
-6 als Beispielwert. **Puffer:** Etwa zehn bis fünfzehn Prozent der Gesamtsumme für alles Unvorhergesehene.
+6. **Puffer:** Etwa zehn bis fünfzehn Prozent der Gesamtsumme für alles Unvorhergesehene.
 
 Der Puffer ist kein Luxus. Er fängt die Ausgaben auf, die jeden starren Plan sprengen. Dazu zählt das Geschenk für den Gast, der plötzlich vor der Tür steht.
 
@@ -132,7 +132,7 @@ Ist dein Einkommen kleiner, halbiere die Beträge. Das Prinzip bleibt gleich. Es
 
 ## Warum lohnt sich ein rollierendes Budget für das ganze Jahr?
 
-Am ruhigsten läuft es, wenn du im Januar beginnst als Modellwert. Bleibt dein Ziel bei 600 €, reicht ein fester Auftrag über 50 € im Monat. **Rechenweg Jahresrate:** 600 € geteilt durch 12 Monate sind 50 € im Monat.
+Am ruhigsten läuft es, wenn du im Januar beginnst. Bleibt dein Ziel bei 600 €, reicht ein fester Auftrag über 50 € im Monat. **Rechenweg Jahresrate:** 600 € geteilt durch 12 Monate sind 50 € im Monat.
 
 Zwölf kleine Raten merkst du im Alltag kaum. Im Dezember liegt das Geld dann bereit. Du musst nichts mehr kürzen und nichts mehr leihen.
 
@@ -142,7 +142,7 @@ Nutze dafür ein Unterkonto deiner Bank oder ein kostenloses [Tagesgeldkonto](..
 
 ## Welche Kosten übersehen die meisten Haushalte?
 
-Die großen Posten hat fast jeder auf dem Schirm im Rechenfall. Teuer wird es durch die kleinen Dinge, an die niemand denkt. In Summe sind das oft 80 € bis 150 € pro Haushalt.
+Die großen Posten hat fast jeder auf dem Schirm. Teuer wird es durch die kleinen Dinge, an die niemand denkt. In Summe sind das oft 80 € bis 150 € pro Haushalt.
 
 | Versteckter Posten | Typischer Betrag | Wann er anfällt |
 |---|---|---|
@@ -152,7 +152,7 @@ Die großen Posten hat fast jeder auf dem Schirm im Rechenfall. Teuer wird es du
 | Geschenkpapier und Karten | ca. 10–20 € | Erste Dezemberwoche |
 | Silvester und Jahreswechsel | ca. 30–80 € | Direkt nach dem Fest |
 
-Nimm diese Posten in deinen Puffer auf im Rechenbeispiel. Dann bleibt der Topf auch dann heil, wenn das Paket zur Schwester 18 € Porto kostet. Plane Silvester gleich mit, denn es folgt nur eine Woche später.
+Nimm diese Posten in deinen Puffer auf. Dann bleibt der Topf auch dann heil, wenn das Paket zur Schwester 18 € Porto kostet. Plane Silvester gleich mit, denn es folgt nur eine Woche später.
 
 ## Wie setzt du dein Weihnachtsgeld am klügsten ein?
 
@@ -160,7 +160,7 @@ Viele Betriebe zahlen im November ein Weihnachtsgeld. Dieses Geld ist eine Chanc
 
 Bewährt hat sich eine einfache Drittel-Regel. Ein Drittel geht in das Fest, ein Drittel auf das Tagesgeld, ein Drittel tilgt teure Schulden. Hast du keinen Kredit, wandert dieser Teil in deinen [Notgroschen](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/).
 
-Ein Beispiel mit 900 € netto: 300 € für das Fest, 300 € als Rücklage, 300 € gegen den Dispo als Modellannahme. Damit senkst du die Zinsen im Januar und hast das Fest trotzdem bezahlt. Wer alles sofort ausgibt, spürt im Februar nichts mehr davon.
+Ein Beispiel mit 900 € netto: 300 € für das Fest, 300 € als Rücklage, 300 € gegen den Dispo; das ist eine Modellannahme. Damit senkst du die Zinsen im Januar und hast das Fest trotzdem bezahlt. Wer alles sofort ausgibt, spürt im Februar nichts mehr davon.
 
 ## Welche typischen Fehler solltest du rund ums Festbudget vermeiden?
 
@@ -174,7 +174,7 @@ Ein Beispiel mit 900 € netto: 300 € für das Fest, 300 € als Rücklage,
 
 Am teuersten wird der Griff zum Dispo im Modellfall. Viele Banken nehmen dafür mehr als zwölf Prozent Zinsen. Ein Geschenk für 100 € kostet dich so nach ein paar Monaten deutlich mehr als im Laden.
 
-Rechne es einmal durch als Beispielwert. Bleiben 600 € ein halbes Jahr im Minus, zahlst du rund 36 € extra. Dafür bekommst du nichts, außer Ärger im Januar.
+Rechne es einmal durch. Bleiben 600 € ein halbes Jahr im Minus, zahlst du rund 36 € extra. Dafür bekommst du nichts, außer Ärger im Januar.
 
 ## Wie gelingt die Budgetplanung Schritt für Schritt in fünf Phasen?
 
@@ -182,7 +182,7 @@ Rechne es einmal durch als Beispielwert. Bleiben 600 € ein halbes Jahr im Min
 2. **Budgettöpfe füllen:** Verteile die Summe auf die sechs Kategorien und passe die Gewichtung an deine Prioritäten an.
 3. **Wochenrate berechnen und automatisieren:** Teile das Budget durch die verbleibenden Wochen und richte eine automatische Überweisung ein.
 4. **Geschenkeliste erstellen:** Notiere für jede Person eine Idee samt Höchstbetrag und kaufe gezielt nach Plan ein.
-5 als Modellwert. **Wöchentliche Kurzkontrolle durchführen:** Zehn Minuten am Sonntag genügen, um getätigte Einkäufe zu verbuchen und den Puffer zu prüfen.
+5. **Wöchentliche Kurzkontrolle durchführen:** Zehn Minuten am Sonntag genügen, um getätigte Einkäufe zu verbuchen und den Puffer zu prüfen.
 
 **Weiterlesen:** [Ratgeber Frugalismus und sparsames Leben](../../pillar/frugalismus/) **Lesetipp:** [Mehr Freiheit durch Verzicht: Clevere Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) · [7 Gewohnheiten für finanzielle Freiheit](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/)
 

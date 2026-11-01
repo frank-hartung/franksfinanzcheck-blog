@@ -273,6 +273,256 @@ def prompt_echo_im_feld(wert: str) -> str:
     return treffer.group(0).strip() if treffer else ""
 
 
+# ------------------------------------- Pflicht-Kennzeichnung (01.11.2026, #964)
+# DER VORFALL: Der deterministische RS5-Heiler
+# (`redaktions_standard._heal_rs5_block`) suchte die ERSTE Satzgrenze im
+# Absatz und setzte dort „ im Modellfall“ / „ als Beispielwert“ ein – ohne zu
+# prüfen, ob dieser Punkt eine Satzgrenze ist. Bei „ca.“, „z. B.“, „Nov.“
+# oder einer Jahreszahl steht er mitten im Wort; bei „… 460 €.“ steht er
+# hinter dem Betrag, aber vor dem Rest des Satzes. Ergebnis im Bestand:
+# 494 zerstückelte Kennzeichnungen in 63 Dateien – live, in Snippets und in
+# den Faktenfrische-Befunden von #964 („ca im Modellfall. 500 €“,
+# „bis zum 30 als Beispielwert. November“, „3 als Modellwert. **Tür“).
+#
+# Diese Muster sind die gemeinsame Wahrheit (SSOT): `write_verified`
+# verweigert jede Schrift, die eine NEUE Ruine einführt, und
+# `textverstaendnis_guard` meldet sie als R18 (Audit + Publish-Gate).
+PFLICHT_MARKER = (
+    r"(?:im Modellfall|als Beispielwert|als Modellwert|im Rechenfall|"
+    r"im Rechenbeispiel|als Modellannahme)"
+)
+
+# R18a – Kennzeichnung klebt an einer Abkürzung: „ca im Modellfall.“,
+# „z als Modellwert.“ Die Abkürzung hat ihren Punkt an die Kennzeichnung
+# verloren. Im deutschen Satz nie korrekt.
+PFLICHT_MARKER_ABKUERZUNG = re.compile(
+    rf"\b(?:ca|z|B|evtl|ggf|bzw|etc|usw|inkl|zzgl|max|min|Mio|Mrd|Std|"
+    rf"Abs|Nr|vgl|sog)\s+{PFLICHT_MARKER}\b", re.I)
+
+# R18b – Kennzeichnung klebt an einer nackten Zahl: „bis zum 30 als
+# Beispielwert. November“, „3 als Modellwert. **Tür-Zugluftstopper**“.
+# Zahl und Wort gehören zusammen; die Kennzeichnung hat sie getrennt.
+PFLICHT_MARKER_ZAHL = re.compile(rf"\d\s+{PFLICHT_MARKER}\b")
+
+# R18c – Kennzeichnung beendet einen Satz, obwohl danach Text folgt:
+# „… fehlen am Ende über 460 € als Beispielwert. Rechne einen Bonus …“.
+# „als Beispielwert“ ist adverbial und kann einen Satz nicht beschließen –
+# es sei denn als Prädikativ nach einer Kopula („… ist ein Beispielwert.“).
+# Genau diese Ausnahme bleibt frei; alles andere ist zerschnittenes Deutsch.
+PFLICHT_MARKER_SATZ = re.compile(rf"{PFLICHT_MARKER}\.[ \t]+(?=\S)")
+_KOPULA_PRAEDIKATIV = re.compile(
+    r"\b(?:ist|sind|war|waren|bleibt|bleiben|wird|werden|gilt|gelten|heißt|"
+    r"heisst|nennt man|nennen wir)\b[^.!?]{0,60}$", re.I)
+
+PFLICHT_MARKER_RUINEN = (
+    ("R18-MARKER-ABKUERZUNG", PFLICHT_MARKER_ABKUERZUNG,
+     "Pflicht-Kennzeichnung klebt an einer Abkürzung"),
+    ("R18-MARKER-ZAHL", PFLICHT_MARKER_ZAHL,
+     "Pflicht-Kennzeichnung klebt an einer nackten Zahl"),
+    ("R18-MARKER-SATZ", PFLICHT_MARKER_SATZ,
+     "Pflicht-Kennzeichnung zerschneidet einen Satz"),
+)
+
+
+def pflicht_marker_funde(text: str) -> list:
+    """Zerstückelte Modell-/Beispiel-Kennzeichnungen (R18a–R18c) als Liste.
+
+    Rückgabe: [(Regel, Fundstelle, Zeichenindex)]. Deterministisch, offline.
+    Leere Liste ⇔ keine Ruine.
+    """
+    text = text or ""
+    out = []
+    for regel, rx, _desc in PFLICHT_MARKER_RUINEN:
+        if regel == "R18-MARKER-SATZ":
+            continue
+        for m in rx.finditer(text):
+            out.append((regel, m.group(0), m.start()))
+    # R18c: Die Kennzeichnung beschließt einen Satz, obwohl danach Text folgt.
+    # „als Beispielwert“ ist adverbial und kann keinen Satz beschließen –
+    # außer als Prädikativ nach einer Kopula („… ist ein Beispielwert.“).
+    # Diese Form bleibt frei; alles andere ist zerschnittenes Deutsch.
+    for m in PFLICHT_MARKER_SATZ.finditer(text):
+        anfang = _satzanfang_vor(text, m.start())
+        if _KOPULA_PRAEDIKATIV.search(text[anfang:m.start()]):
+            continue
+        out.append(("R18-MARKER-SATZ", m.group(0).strip(), m.start()))
+    out.sort(key=lambda e: e[2])
+    return out
+
+
+# --- Reparatur (deterministisch, ohne Bedeutungseingriff) -------------------
+# Die Reparatur setzt die Kennzeichnung NICHT neu irgendwohin, sondern stellt
+# die vom Heiler zerschnittene Stelle wieder her und hängt die Kennzeichnung
+# als eigenen Teilsatz an das Ende des betroffenen Satzes:
+#
+#   „… über 460 € als Beispielwert. Rechne …“
+#     → „… über 460 €. Rechne …“                (Satz wiederhergestellt)
+#     → „… über 460 €; das ist ein Beispielwert.“ (Kennzeichnung sauber)
+#
+# Diese Form ist nach jedem Satzende grammatisch (nach Betrag, nach Verb,
+# nach Nebensatz) und trägt weiterhin den Ausdruck, den RS5 als
+# Modellannahme akzeptiert. Der Wortlaut der Aussage bleibt unverändert.
+_MARKER_NOMEN = (
+    ("im Modellfall", "Modellwert"),
+    ("als Modellwert", "Modellwert"),
+    ("als Beispielwert", "Beispielwert"),
+    ("im Rechenfall", "Rechenbeispiel"),
+    ("im Rechenbeispiel", "Rechenbeispiel"),
+    ("als Modellannahme", "Modellannahme"),
+)
+
+_ABKUERZUNG_PUNKT = (
+    r"(?:ca|z|B|evtl|ggf|bzw|etc|usw|inkl|zzgl|max|min|Mio|Mrd|Std|Abs|Nr|"
+    r"vgl|sog|d\.h|u\.a|z\.B|Dr|Prof|St|Tel|Art|Rn|S)"
+)
+_MONATE = (r"(?:Januar|Februar|März|April|Mai|Juni|Juli|August|September|"
+           r"Oktober|November|Dezember)")
+_SAETZE_UNABHAENGIG = re.compile(rf"{_ABKUERZUNG_PUNKT}\.$")
+_MONATE_RX = re.compile(_MONATE)
+_SATZENDE = re.compile(r"[.!?](?=\s|$)")
+_ZAHLBEHAUPTUNG = re.compile(
+    r"\d[\d.,]*\s*(?:€|EUR|Euro|%|Prozent|kWh|ct|Cent|Mbit/s|GB|MB|km|Watt|W)"
+    r"|(?<![\w.,])\d{3,}(?:[.,]\d+)*(?![\w.])", re.I)
+# Kopula am Satzende („… ist eine Modellannahme.“) – dort ist die
+# Kennzeichnung bereits korrekt als Prädikativ eingebaut.
+_KOPULA_ENDE = re.compile(
+    r"\b(?:ist|sind|war|waren|bleibt|bleiben|gilt|gelten|heisst|heißt)\b"
+    r"[^.!?]{0,40}$", re.I)
+
+
+def _satz_spans(zeile: str) -> list[tuple[int, int]]:
+    """Satzspannen einer Zeile; Abkürzungen und Ordinaldaten sind keine Grenze."""
+    spans, start = [], 0
+    for m in _SATZENDE.finditer(zeile):
+        i = m.start()
+        if zeile[i] == "." and _SAETZE_UNABHAENGIG.search(zeile[max(0, i - 8):i + 1]):
+            continue
+        if (zeile[i] == "." and re.search(r"\d$", zeile[:i])
+                and re.match(rf"\s*{_MONATE}\b", zeile[i + 1:])):
+            continue
+        spans.append((start, i + 1))
+        start = i + 1
+    if start < len(zeile.rstrip()):
+        spans.append((start, len(zeile)))
+    return spans
+
+
+_MARKER_RX = re.compile(rf"\b{PFLICHT_MARKER}\b")
+_GLUE_VOR = re.compile(
+    rf"(\b{_ABKUERZUNG_PUNKT}|(?<![\d.,])\d{{1,2}})\s+$", re.I)
+_TERMINATOR = re.compile(r"[.!?](?=\s|$)")
+
+
+def _satzende_ab(text: str, pos: int = 0) -> int | None:
+    """Index des ersten echten Satzendes ab `pos` (None: kein Satzende)."""
+    for m in _TERMINATOR.finditer(text, pos):
+        i = m.start()
+        if text[i] == ".":
+            if _SAETZE_UNABHAENGIG.search(text[max(0, i - 8):i + 1]):
+                continue
+            if re.search(r"\d$", text[:i]) and _MONATE_RX.match(text[i + 1:]):
+                continue
+        return i
+    return None
+
+
+def _satzanfang_vor(text: str, pos: int) -> int:
+    """Index nach dem letzten echten Satzende vor `pos`."""
+    letzte = 0
+    for m in _TERMINATOR.finditer(text, 0, pos):
+        i = m.start()
+        if text[i] == ".":
+            if _SAETZE_UNABHAENGIG.search(text[max(0, i - 8):i + 1]):
+                continue
+            if re.search(r"\d$", text[:i]) and _MONATE_RX.match(text[i + 1:]):
+                continue
+        letzte = i + 1
+    return letzte
+
+
+def _praedikativ(nomen: str) -> str:
+    """Korrekte Artikelform des Teilsatzes: „das ist ein Modellwert.“ /
+    „das ist eine Modellannahme.“ – Genus aus dem Nomen, nicht geraten."""
+    unbestimmt = "eine" if nomen.endswith(("annahme", "regel", "schätzung")) else "ein"
+    return f"das ist {unbestimmt} {nomen}"
+
+
+def _marker_reparatur(zeile: str, treffer: re.Match, nomen: str) -> str:
+    """Repariert EINE zerstückelte Kennzeichnung in einer Zeile."""
+    vor, rest = zeile[:treffer.start()], zeile[treffer.end():]
+    # (a) Klebstelle: „ca als Modellannahme.“ / „30 als Beispielwert. November“
+    #     / „3 als Modellwert. **Tür“ → der Punkt gehört zur Abkürzung, zum
+    #     Datum oder zur Ordnungszahl.
+    glue = _GLUE_VOR.search(vor)
+    if glue and rest.startswith(".") and not rest.startswith(".."):
+        return f"{vor[:glue.start()]}{glue.group(1)}.{rest[1:]}"
+    # (b) Marker beschließt einen Satz, obwohl Text folgt.
+    #     Trägt der Satz eine Zahl, wird sie als Teilsatz ans Satzende gehängt
+    #     („… 460 €; das ist ein Beispielwert. Rechne …“).
+    #     Trägt er keine, kennzeichnet der Marker nichts und fällt ersatzlos
+    #     weg – ein angehängter Füllsatz wäre genau die Maschinen-Prosa, die
+    #     #964 abstellt.
+    if rest.startswith(".") and rest[1:].strip():
+        satz = vor[_satzanfang_vor(vor, len(vor)):]
+        if _ZAHLBEHAUPTUNG.search(satz):
+            return f"{vor.rstrip()}; {_praedikativ(nomen)}{rest}"
+        return f"{vor.rstrip()}{rest}"
+    # (c) Marker mitten im Satz: als Teilsatz ans Satzende hängen.
+    ohne = vor.rstrip()
+    zusammen = ohne + rest
+    anfang = _satzanfang_vor(zusammen, len(ohne))
+    satzende = _satzende_ab(zusammen, len(ohne)) or _satzende_ab(zusammen, 0)
+    if satzende is None:
+        trenner = "" if zusammen.rstrip().endswith(('.', '!', '?')) else "."
+        return f"{zusammen.rstrip()}{trenner} {_praedikativ(nomen)}."
+    satz = zusammen[anfang:satzende]
+    rumpf = zusammen[:satzende].rstrip().rstrip(",;:")
+    if _ZAHLBEHAUPTUNG.search(satz) and not _KOPULA_ENDE.search(satz):
+        return f"{rumpf}; {_praedikativ(nomen)}{zusammen[satzende:]}"
+    return f"{rumpf}{zusammen[satzende:]}"
+
+
+# Überschrift, Tabelle, Zitat und Code sind keine Fließsätze: dort kann die
+# Kennzeichnung keinen Satz zerschneiden. Aufzählungspunkte SIND Fließtext –
+# gerade die umbrochenen Zeilen darin tragen die Ruinen.
+_STRUKTUR_ZEILE = re.compile(r"(?:#{1,6}\s|[|>]|```|\*\*?[^*]*\*\*?\s*$)")
+
+
+def pflicht_marker_heilen(text: str) -> tuple[str, int]:
+    """Repariert zerstückelte Kennzeichnungen zeilenweise. → (Text, Anzahl).
+
+    Tabellen, Zitate, Überschriften, Listen und Code bleiben unangetastet:
+    dort steht die Kennzeichnung nie in einem Fließsatz, den sie zerschneiden
+    könnte. Idempotent; die Aussage (jede Zahl, jeder Betrag) bleibt erhalten.
+    """
+    if not text or not pflicht_marker_funde(text):
+        return text, 0
+    geaendert = 0
+    zeilen = text.split("\n")
+    for i, zeile in enumerate(zeilen):
+        if not pflicht_marker_funde(zeile):
+            continue
+        kopf = zeile.lstrip()
+        # Nur echte Struktur bleibt unangetastet. Eine Zeile, die mit einer
+        # Fett-Marke beginnt („**Modellrechnung:** …“), ist Fließtext.
+        if not kopf or _STRUKTUR_ZEILE.match(kopf):
+            continue
+        aktuell, anzahl = zeile, 0
+        # Von hinten nach vorn: Positionen der noch offenen Treffer bleiben gültig.
+        for treffer in reversed(list(_MARKER_RX.finditer(zeile))):
+            nomen = next((w for p, w in _MARKER_NOMEN if p == treffer.group(0)),
+                         "Modellwert")
+            neu = _marker_reparatur(aktuell, _MARKER_RX.search(aktuell, treffer.start()), nomen) \
+                if _MARKER_RX.search(aktuell, treffer.start()) else aktuell
+            if neu != aktuell:
+                anzahl += 1
+                aktuell = neu
+        if anzahl and not pflicht_marker_funde(aktuell):
+            zeilen[i] = aktuell
+            geaendert += anzahl
+    return "\n".join(zeilen), geaendert
+
+
 def politur_ruine_funde(text: str) -> list:
     """Alle Politur-Ruinen in `text` als Liste (Regel, Fundstelle).
 
@@ -283,6 +533,8 @@ def politur_ruine_funde(text: str) -> list:
     for regel, rx, _desc in POLITUR_RUINEN:
         for m in rx.finditer(text):
             out.append((regel, m.group(0)))
+    for regel, fund, _pos in pflicht_marker_funde(text):
+        out.append((regel, fund))
     return out
 
 

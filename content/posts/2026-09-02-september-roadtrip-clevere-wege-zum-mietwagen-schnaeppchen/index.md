@@ -46,7 +46,7 @@ In der Praxis scheitern solche Pläne an banalen Hürden. Man bucht zu spät, od
 
 **Das Wichtigste in Kürze**
 
-- **Preisvorteil:** Im September fallen die Mietpreise gegenüber August oft um 40 bis 50 % im Modellfall. Das Angebot ist groß, die Nachfrage sinkt.
+- **Preisvorteil:** Im September fallen die Mietpreise gegenüber August oft um 40 bis 50 %; das ist ein Modellwert. Das Angebot ist groß, die Nachfrage sinkt.
 - **Kostentransparenz:** Nur die Tankregelung „Voll/Voll“ [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) vor Servicegebühren und teurem Sprit.
 - **Sicherheitsnetz:** Du brauchst eine [Vollkasko ohne Selbstbeteiligung](../../posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/) und eine echte Kreditkarte. Sonst wird es an der Station teuer.
 
@@ -84,7 +84,7 @@ Wie groß der Unterschied ausfällt, zeigt ein Rechenbeispiel. Wir nehmen eine W
 | September (Nebensaison) | 210,00 € | 120,00 € | 330,00 € |
 | **Ersparnis** | **240,00 €** | **30,00 €** | **270,00 €** |
 
-Das richtige Zeitfenster halbiert die Kosten fast als Beispielwert. Die 270 € steckst du besser in gutes Essen oder in zwei Tage mehr Urlaub.
+Das richtige Zeitfenster halbiert die Kosten fast. Die 270 € steckst du besser in gutes Essen oder in zwei Tage mehr Urlaub.
 
 ## Die Tankregelung: Fair geht vor
 
@@ -131,7 +131,7 @@ Der dritte Hebel ist die Strecke. Grenzübertritte sind in der EU meist erlaubt,
 
 Ebenso wichtig ist das Kilometerlimit. „Unbegrenzte Kilometer“ geben dir die größte Freiheit. Begrenzte Tarife sind billiger, doch jeder Extra-Kilometer kostet.
 
-Rechne deine Route grob durch und plane 20 % Puffer ein im Rechenbeispiel. Spontane Abstecher sind der Reiz eines Roadtrips.
+Rechne deine Route grob durch und plane 20 % Puffer ein; das ist ein Rechenbeispiel. Spontane Abstecher sind der Reiz eines Roadtrips.
 
 ## Die Rückgabe: So vermeidest du Stress am Ende
 

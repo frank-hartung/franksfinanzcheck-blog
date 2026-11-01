@@ -53,7 +53,7 @@ Umzugskartons sind planbar, der Router nicht. Zwischen alter und neuer Wohnung l
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Die meisten Probleme beim Umzug entstehen nicht an der Technik im Modellfall. Sie entstehen an der Reihenfolge. Wer zwei Wochen zu spät meldet, bekommt keinen Schadenersatz für verlorene Wochen, sondern einen neuen Termin.
+Die meisten Probleme beim Umzug entstehen nicht an der Technik. Sie entstehen an der Reihenfolge. Wer zwei Wochen zu spät meldet, bekommt keinen Schadenersatz für verlorene Wochen, sondern einen neuen Termin.
 
 ## Zwei Fragen vor dem ersten Anruf
 
@@ -95,7 +95,7 @@ Trage diesen Termin in den Kalender ein. Wenn die Nummer nach dem Umzug nicht er
 
 Die wichtigste Zahl beim Umzug ist nicht der Preis, sondern die Vorlaufzeit. Wer früh meldet, kann Termine beeinflussen. Wer spät meldet, nimmt den erstbesten.
 
-1 als Beispielwert. **Sechs bis acht Wochen vorher:** Verfügbarkeit an der neuen Adresse klären. Anbieter informieren, wenn du umziehst.
+1. **Sechs bis acht Wochen vorher:** Verfügbarkeit an der neuen Adresse klären. Anbieter informieren, wenn du umziehst.
 2. **Vier bis fünf Wochen vorher:** Auftrag für den Umzug oder Neuvertrag erteilen. Rufnummernmitnahme ausdrücklich beantragen.
 3. **Drei Wochen vorher:** Bestätigung prüfen. Termin, Rufnummer, Preis und Laufzeit müssen schriftlich vorliegen.
 4. **Zwei Wochen vorher:** Kündigung des alten Vertrags, falls ein Wechsel nötig ist. Kündigung und Neuanmeldung aufeinander abstimmen, damit keine Lücke entsteht.
@@ -159,7 +159,7 @@ Beim Thema Umzug und Internet entscheidet Dokumentation über den Verlauf. Lege 
 
 Hinein gehören: der Umzugsauftrag mit Datum, jede Bestätigung des Anbieters, der Technikertermin, die Bestätigung der Rufnummernmitnahme, Fotos von Geräten und Anschlussdosen sowie Notizen zu Telefonaten mit Namen und Uhrzeit.
 
-Diese Sammlung kostet zehn Minuten als Modellwert. Sie ist der Unterschied zwischen einer schnellen Klärung und einer längeren Auseinandersetzung. Die Verbraucherzentrale beschreibt unter [Probleme beim Anbieterwechsel](https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658), welche Schritte Verbrauchern dabei üblicherweise weiterhelfen.
+Diese Sammlung kostet zehn Minuten. Sie ist der Unterschied zwischen einer schnellen Klärung und einer längeren Auseinandersetzung. Die Verbraucherzentrale beschreibt unter [Probleme beim Anbieterwechsel](https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/probleme-beim-anbieterwechsel-so-wehren-sie-sich-10658), welche Schritte Verbrauchern dabei üblicherweise weiterhelfen.
 
 ## Was du nach vier Wochen prüfen solltest
 
@@ -167,12 +167,12 @@ Der Umzug ist abgeschlossen, die Kartons sind leer. Jetzt beginnt der Teil, den 
 
 Vier Wochen nach der Umschaltung hast du vier Fragen zu beantworten im Rechenfall.
 
-1 im Rechenbeispiel. **Kommt die Leistung an?** Miss zu unterschiedlichen Tageszeiten. Ein einzelner Wert sagt wenig, drei Werte über drei Tage sagen mehr.
+1. **Kommt die Leistung an?** Miss zu unterschiedlichen Tageszeiten. Ein einzelner Wert sagt wenig, drei Werte über drei Tage sagen mehr.
 2. **Stimmt die erste Rechnung?** Prüfe, ob Anschlussgebühr, erster Monat und Zusatzoptionen den vereinbarten Angaben entsprechen.
 3. **Steht die Rufnummer in den Vertragsdaten?** Sie sollte schriftlich bestätigt sein, nicht nur funktionieren.
 4. **Läuft der alte Vertrag aus?** Wenn du gewechselt hast, kontrolliere die Schlussabrechnung des alten Anbieters.
 
-Wenn einer dieser Punkte nicht stimmt, melde ihn sofort als Modellannahme. Vier Wochen sind kein später Zeitpunkt, aber die Beweislage ist noch frisch.
+Wenn einer dieser Punkte nicht stimmt, melde ihn sofort. Vier Wochen sind kein später Zeitpunkt, aber die Beweislage ist noch frisch.
 
 ## Wenn zwei Anbieter dir zwei Rechnungen schicken
 
@@ -208,7 +208,7 @@ Ein Neuvertrag ist häufig günstiger, weil Neukundenkonditionen gelten. Rechne 
 
 ### Wann sollte ich mit dem alten Anbieter sprechen?
 
-Sobald der Umzugstermin feststeht im Modellfall. Sechs bis acht Wochen Vorlauf geben dir Wahlmöglichkeiten bei Terminen.
+Sobald der Umzugstermin feststeht. Sechs bis acht Wochen Vorlauf geben dir Wahlmöglichkeiten bei Terminen.
 
 **Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Tarif prüfen](../../posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/) · [VPN Zuhause](../../posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/)
 **Lesetipp:** [DSL-Anbieter wechseln: Warum Treue dich bares Geld kostet](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/)

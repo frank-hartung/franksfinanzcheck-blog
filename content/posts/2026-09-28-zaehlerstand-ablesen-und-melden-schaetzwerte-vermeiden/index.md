@@ -44,7 +44,7 @@ faktencheck: 2026-10-13
 kurzantwort: "Zählerstände werden zum Ende des Abrechnungszeitraums abgelesen und dem Versorger gemeldet. Wer den Termin verpasst, riskiert eine Schätzung auf Basis früherer Verbräuche. Ein Foto des Zählers mit Datum, Zählernummer und allen Vorkommastellen belegt den Wert und lässt sich später nachreichen."
 ---
 
-Irgendwann im Jahr hängt eine Karte an der Wohnungstür oder es kommt eine E-Mail mit der Bitte, den Zählerstand zu übermitteln im Modellfall. Die meisten Menschen erledigen das in zwei Minuten. Die anderen zahlen im Zweifel dafür.
+Irgendwann im Jahr hängt eine Karte an der Wohnungstür oder es kommt eine E-Mail mit der Bitte, den Zählerstand zu übermitteln. Die meisten Menschen erledigen das in zwei Minuten. Die anderen zahlen im Zweifel dafür.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -187,7 +187,7 @@ Bei einer Ablesekarte füllst du dieselben Felder aus und fotografierst sie vor 
 
 Ein Ordner genügt. Pro Abrechnungsjahr ein Blatt mit: Datum, Zählerstand, Zählernummer und – falls vorhanden – dem gemeldeten Wert.
 
-Dazu kommen die Jahresrechnungen und bei Wechseln die Schlussabrechnung als Beispielwert. Nach drei Jahren darfst du alte Jahre aussortieren – wenn keine Fragen offen sind.
+Dazu kommen die Jahresrechnungen und bei Wechseln die Schlussabrechnung. Nach drei Jahren darfst du alte Jahre aussortieren – wenn keine Fragen offen sind.
 
 **Faustregel:** Lies den Zähler vor jeder Abrechnung selbst ab und dokumentiere den Stand mit Datum – Schätzwerte weichen systematisch von deinem echten Verbrauch ab.
 
