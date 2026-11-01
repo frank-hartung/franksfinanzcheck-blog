@@ -79,6 +79,11 @@ on:
       # Ändert er sich, muss dieser Lauf ihn prüfen – er trägt die Freigabe.
       - "scripts/worker_environment_einrichten.py"
       - "scripts/tests/test_worker_environment_einrichten.py"
+      # WF-829B / #922 (01.11.2026): Ein Lauf, der auf die Freigabe
+      # eines Menschen wartet, wird nicht rot – er altert nur und
+      # blockiert still den Concurrency-Slot `worker-deploy`.
+      - "scripts/worker_freigabe_wache.py"
+      - "scripts/tests/test_worker_freigabe_wache.py"
       - "scripts/alert_resolve_gate.py"
       - "scripts/tests/test_alert_resolve_gate.py"
       - "scripts/tests/test_worker_betrieb_wache.py"
@@ -138,6 +143,11 @@ on:
       # Ändert er sich, muss dieser Lauf ihn prüfen – er trägt die Freigabe.
       - "scripts/worker_environment_einrichten.py"
       - "scripts/tests/test_worker_environment_einrichten.py"
+      # WF-829B / #922 (01.11.2026): Ein Lauf, der auf die Freigabe
+      # eines Menschen wartet, wird nicht rot – er altert nur und
+      # blockiert still den Concurrency-Slot `worker-deploy`.
+      - "scripts/worker_freigabe_wache.py"
+      - "scripts/tests/test_worker_freigabe_wache.py"
       - "scripts/alert_resolve_gate.py"
       - "scripts/tests/test_alert_resolve_gate.py"
       - "scripts/tests/test_worker_betrieb_wache.py"
@@ -204,12 +214,13 @@ jobs:
       - name: Betriebs-Wache – Deckel, Turnstile, Schlüsselrollen (F-02/F-03/F-08, offline)
         run: |
           set -euo pipefail
-          python3 -m unittest scripts.tests.test_worker_betrieb_wache scripts.tests.test_worker_deploy_vorbereiten scripts.tests.test_worker_ressourcen scripts.tests.test_worker_zugang scripts.tests.test_worker_environment_guard scripts.tests.test_worker_environment_einrichten
+          python3 -m unittest scripts.tests.test_worker_betrieb_wache scripts.tests.test_worker_deploy_vorbereiten scripts.tests.test_worker_ressourcen scripts.tests.test_worker_zugang scripts.tests.test_worker_environment_guard scripts.tests.test_worker_environment_einrichten scripts.tests.test_worker_freigabe_wache
           python3 scripts/worker_deploy_vorbereiten.py --selftest
           python3 scripts/worker_ressourcen.py --selftest
           python3 scripts/worker_zugang.py --selftest
           python3 scripts/worker_environment_guard.py --selftest
           python3 scripts/worker_environment_einrichten.py --selftest
+          python3 scripts/worker_freigabe_wache.py --selftest
           python3 scripts/worker_betrieb_wache.py --selftest
           python3 scripts/worker_betrieb_wache.py --offline
 
@@ -389,6 +400,30 @@ jobs:
           fi
           if [ "$code" = "1" ]; then
             echo "::warning title=Produktions-Environment::Die Freigabe ist nicht vollständig eingerichtet; der Worker-Deploy bleibt fail-closed gesperrt. Einrichten: python3 scripts/worker_environment_einrichten.py --anwenden (plus ein Schalter im Dashboard – der Lauf nennt ihn)."
+          fi
+          exit 0
+
+      # Ein Lauf, der auf die Freigabe eines Menschen wartet, wird nicht rot und
+      # meldet nichts — er altert nur und belegt dabei den Concurrency-Slot
+      # `worker-deploy`. Genau dieser stille Zustand liegt zwischen dem
+      # Absichern des Environments und dem grünen Deploy, der #922 schließt.
+      # Deshalb steht er hier täglich: Warnstufe mit Lauf-Link (ein Mensch muss
+      # handeln), rot nur, wenn der Zustand nicht belegbar ist (C33).
+      - name: Wartende Deploy-Freigaben (täglich)
+        if: ${{ !cancelled() }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          code=0
+          python3 scripts/worker_freigabe_wache.py --check --md "$GITHUB_STEP_SUMMARY" || code=$?
+          if [ "$code" = "2" ]; then
+            echo "::error title=Wartende Deploy-Freigabe::Der Freigabezustand ist nicht belegbar (Netz oder Rechte). Ungeprüft gilt nicht als sauber."
+            exit 1
+          fi
+          if [ "$code" = "1" ]; then
+            echo "::warning title=Wartende Deploy-Freigabe::Ein Worker-Deploy wartet über der Schwelle auf Freigabe. Der Lauf blockiert den Concurrency-Slot und hält den Nachweis für #922 offen. Freigeben oder abbrechen — der Lauf-Link steht in der Zusammenfassung."
           fi
           exit 0
 
