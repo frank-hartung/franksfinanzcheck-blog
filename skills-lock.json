@@ -19,6 +19,12 @@
       "skillPath": "skills/analytics/SKILL.md",
       "computedHash": "1c9cf1dff99c5da6b229c20e0a5fdb50fade4805f887768942cc82e9b567087e"
     },
+    "animate": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/animate/SKILL.md",
+      "computedHash": "7598d33e7f60dd5c24531eaaa897621cc3bdb48e8050324211627973bc59c4ce"
+    },
     "competitor-profiling": {
       "source": "coreyhaines31/marketingskills",
       "sourceType": "github",
