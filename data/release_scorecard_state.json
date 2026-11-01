@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-01T11:50:13Z",
-  "modus": "live",
-  "commit": "51e0270c6325f67b8f1d114b1fd3b5992ed20c55",
+  "generated_at": "2026-11-01T12:11:26Z",
+  "modus": "kandidaten",
+  "commit": "c6e88a4d4bb017bbafa6ef3d6bdcbedc00000749",
   "kapazitaet": {
     "stichtag": "2026-11-01",
     "artikel": 110,
@@ -103,7 +103,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": {
       "sha256": "58f8c1be70bd6e74a39afbeba7a3e53bb2a4e3dd3887388d989fa6a64a8a006f",
@@ -137,7 +137,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
       "sha256": "32be58a77cad35cf56401658bd12211d18487bb68d223800d6a3f40cd8812677",
@@ -154,7 +154,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
       "sha256": "6c052908dea1d6d0acc229e09929d492706834b4d587f164e3bd1ebe991e87df",
@@ -327,7 +327,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "89a0c12e0a1c0d33d03894132b50be3f8002eec8b658e9e504bdb7775140caac",
+      "sha256": "9b2680fc6458e25053d8aba78065b7472841708103ecd7520361775084a3f322",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -358,7 +358,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
       "sha256": "2ecbcc39d5fc6e6dced5bbad70c2f71fe1993ae248e789220f995b01a264caad",
