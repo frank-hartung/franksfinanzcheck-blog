@@ -215,6 +215,15 @@ FEST = {
     # Ohne Siegel ist „welche Themen bedient der Blog" wieder verhandelbar.
     "scripts/skills_portfolio.py",
     "data/skill_portfolio.yaml",
+    # Snippet-Grenzen (01.11.2026, WF-984): Die Datei ist seit dem 27.10.
+    # die einzige Quelle für 100/155 Zeichen, 985 px und das Kürzen. Am
+    # 01.11. kam heraus, dass sie es nur für die LESER war – vier Schreiber
+    # führten weiter eigene Zahlen (160/156/165/120). Wer diese Datei
+    # bewegt, bewegt das Fenster der gesamten Site und aller Pinterest-Pins,
+    # ohne dass irgendein Gate es merkt: metadaten_wache und seo_cockpit
+    # lesen sie, und ein zu weites Fenster macht sie STUMM, nicht rot.
+    # Genau diese Stummheit hat den 156-Zeichen-Befund zweimal durchgelassen.
+    "scripts/serp_limits.py",
     # Lesbarkeits-Heiler (07.10.2026, WACHE-609): Er bewegt das harte
     # Publish-Kriterium `readability_check.NEW_FLESCH_MIN` (60,0) und ist
     # damit eine Schwellen-Wache wie publikations_vertrag.py – wer hier

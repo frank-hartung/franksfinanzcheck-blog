@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-11-01T15:53:06.779871+00:00",
-  "head": "ba12044",
+  "signed_at": "2026-11-01T16:41:17.729944+00:00",
+  "head": "bb432d4",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -56,57 +56,19 @@
     "static/apple-touch-icon.png": "3c2d0bd63fb48baa1e9a47cfb2494d64b5c136be4ed9e621973ad2a54fac4332",
     "static/favicon.svg": "7cb1626650f3b20a856e792668c914bba8424c060b6c6f0b7c6e04fdfb0fb6d5",
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
-    "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
+    "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5",
+    "scripts/serp_limits.py": "cb3d4a55874bea7edb944c5d0239bcd0912db6ec075e48588d21e57cb4397c5f"
   },
-  "files_sha256": "38b8967d072bc1da2924e6c954e58eed92c42684df2989ba8a8e81906b2c9db5",
-  "audit_start_sha256": "1c68222f511a9b0e8d46cada5e711f9acc6aa741c41e83afa0d4ff039e761fc1",
+  "files_sha256": "1a564c68e678de62e3d59aae83fa355b6fd6f1684cd6184d799c1ffcad7207dc",
+  "audit_start_sha256": "e34aa3db25a137021434fd74496790a6b205ba4aad74966b74ee8db32e8770a0",
   "audit": [
-    {
-      "date": "2026-10-31",
-      "art": "set-current",
-      "head": "ea2435e8c",
-      "geaendert": [
-        "scripts/hardcases_guard.py",
-        "scripts/lektor_guard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/hardcases_guard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "a5af34f90",
-              "datum": "2026-10-31",
-              "betreff": "fix(sprache): Copy-Editing-Gate prüft nur, was es prüfen kann – und schreibt beim Beweis nichts (#987)"
-            }
-          ],
-          "commits_art": "seit-signatur"
-        },
-        {
-          "pfad": "scripts/lektor_guard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "a5af34f90",
-              "datum": "2026-10-31",
-              "betreff": "fix(sprache): Copy-Editing-Gate prüft nur, was es prüfen kann – und schreibt beim Beweis nichts (#987)"
-            }
-          ],
-          "commits_art": "seit-signatur"
-        }
-      ],
-      "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c",
-      "prev_sha256": null
-    },
     {
       "date": "2026-10-31",
       "art": "set-current",
       "head": "e73b997",
       "geaendert": [],
       "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c",
-      "prev_sha256": "1c68222f511a9b0e8d46cada5e711f9acc6aa741c41e83afa0d4ff039e761fc1"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-31",
@@ -298,8 +260,27 @@
           "commits_art": "seit-signatur"
         }
       ],
-      "prev_sha256": "63997d28ec060e34a137a126ef686508f4056d72bdec92a3b0e3aa92b461a900",
-      "files_sha256": "38b8967d072bc1da2924e6c954e58eed92c42684df2989ba8a8e81906b2c9db5"
+      "files_sha256": "38b8967d072bc1da2924e6c954e58eed92c42684df2989ba8a8e81906b2c9db5",
+      "prev_sha256": "63997d28ec060e34a137a126ef686508f4056d72bdec92a3b0e3aa92b461a900"
+    },
+    {
+      "date": "2026-11-01",
+      "art": "add",
+      "head": "bb432d4",
+      "geaendert": [
+        "scripts/serp_limits.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/serp_limits.py",
+          "klasse": "fest",
+          "urteil": "NEU UNTER SIEGEL",
+          "commits": [],
+          "commits_art": "neu-unter-siegel"
+        }
+      ],
+      "prev_sha256": "ad2f21ec4a3717f049b2a13c322caba1b7ce70e54e831e52a880694ea692cc1e",
+      "files_sha256": "1a564c68e678de62e3d59aae83fa355b6fd6f1684cd6184d799c1ffcad7207dc"
     }
   ]
 }
