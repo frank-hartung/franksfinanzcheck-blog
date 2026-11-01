@@ -210,9 +210,18 @@ Hand gesetzter Hash sieht gültig aus und ist es nie (an `frontend-design` und
 ```bash
 npx -y skills@1.7.4 add <owner>/<repo> --skill <name> -a claude-code -y
 npx -y skills@1.7.4 update
-npx -y skills@1.7.4 check
+npx -y skills@1.7.4 check      # ACHTUNG: schreibt (siehe Kasten unten)
 npx -y skills@1.7.4 remove <name> -y
 ```
+
+> **`check` ist kein Lesezugriff (gemessen 01.11.2026).** Der Befehl meldet
+> nicht „veraltet“, sondern **aktualisiert**: er schrieb zehn vorhandene Skills
+> um, ersetzte `agent-reach` durch einen Symlink nach `.agents/skills/` und
+> legte `agent/skills/` und `data/skills/` an. Weil dieses Repo echte Ordner mit
+> inline-`LICENSE.txt` versioniert (keine Symlink-Farm), wurde der Lauf
+> vollständig zurückgerollt. Wer den Bestand nicht anfassen will, benutzt
+> `npx -y skills@1.7.4 add <owner>/<repo> --skill '*' -a claude-code -y`
+> gezielt – oder nimmt die Änderungen aus `git status` bewusst in Kauf.
 
 Ohne `-y` bleibt der CLI an einer Ja/Nein-Frage stehen und tut nichts – im
 Automatenlauf heißt das: keine Wirkung, aber ein grüner Schritt. Reihenfolge
@@ -250,46 +259,69 @@ der Wegwerf-Kopie). Vor der Aufnahme geprüft: Syntaxwache, REDOS-Wache,
 Wachen-Vertrag und Fremdmessung-Sperre blieben grün, K6 meldete sofort den
 fehlenden Register-Eintrag – so soll es sein.
 
-## Neu im Bestand: 17 Social-Skills (`charlie947/social-media-skills`, MIT)
+## Im Bestand: `claude-seo` (AgriciDaniel/claude-seo, MIT) – 26 Skills mit eigener Runtime
 
-Aufgenommen am 01.11.2026 auf Auftrag des Inhabers (`npx skills add …`): LinkedIn-
-Handwerk – Hook, Post, Framework-Format, Selbstbewertung, Karussell-Briefing,
-Profil, Newsletter-Stimme. Vorgang und Messung:
-`SOCIAL-SKILLS-AUFNAHME-HIGHEND-2026-11-01.md`.
+Aufgenommen am 01.11.2026 auf Anweisung (Befehl: `npx skills add
+AgriciDaniel/claude-seo`). Das ist die erste Anlage, die **mehr als einen Skill
+und eigenen ausführbaren Code** mitbringt. Drei Dinge daran sind nicht
+selbsterklärend und gehören deshalb hierher:
 
-* **Router:** die Tabellen stehen in `.claude/skills/ff-marke-text/SKILL.md`
-  unter „Fremd-Skills: Social-Pack und Marketing-Pack“ – dort, wo der Auftrag
-  entsteht. Im Kern wurde nur die eine Zeile des Skill-Routers um „Social-Texte
-  (LinkedIn-Pack)“ ergänzt; 17 Zeilen im Kern wären Dauerlast (K1).
-* **Grenze der Nutzung:** `data/social/channels.yaml` gewinnt gegen jede
-  Skill-Empfehlung (Zeichen, Hashtags, Emoji, Link im ersten Kommentar, Deutsch).
-  Keine Apify-, Gemini- oder Browser-Wege, keine neuen Secrets (D20/T1), keine
-  Messung; fehlt der Zugang, endet der Skill an dieser Stelle.
-* **Preis:** ~2.164 Tokens Auswahltext bei jedem Start (8.656 Zeichen über 17
-  `description`-Felder). Damit liegt die Bibliothek bei **55,5 von 56 KB** des
-  K9-Budgets: der nächste Schwung passt nicht mehr ohne Entscheidung. Wer
-  verkleinert, entfernt Skills über den CLI – Kürzen der Beschreibung
-  überschreibt das nächste `npx skills update`.
-* **Themen-Portfolio (P1–P7):** `data/skill_portfolio.yaml` verlangt für jedes
-  Fremd-Skill eine Entscheidung. Nachgetragen am 01.11.2026: **11** Skills
-  stehen unter `verbreitung` bzw. `text-und-redaktion` – die Kanäle Mastodon,
-  Instagram, Pinterest, Newsletter und Blog existieren mit Belegpfad, und die
-  Skills dieses Packs liefern Texte und Bildaufträge ohne externen Aufruf
-  (Stimmen-Datei, Kurzbeitrag, Framework-Format, Ideen-Matrix, Infografik- und
-  Karussell-Briefing, Zitat-Grafik, Nischen-Recherche). **6** stehen unter
-  `ausgeschlossen`, weil Kanal oder Werkzeugweg fehlt: `profile-optimizer`,
-  `analytics-dashboard`, `pinned-comment` (LinkedIn), `youtube-thumbnail`
-  (kein YouTube-Kanal), `post-scorer` (eigene Beitrags-Historie über Apify) und
-  `reels-scripting` (Apify + Gemini, D20/T1). Sie bleiben als Nachweis des
-  Einkaufs installiert, zahlen aber kein Themen-Budget; die Frist für die
-  Entfernung steht im Ausschluss (zusammen ≈ 3,0 KB K9-Entlastung).
-  Vorher meldete `skills_portfolio.py` **17 × P1** – das Gate „Skill-Vertrag“
-  war deshalb rot: eine Aufnahme, die das Portfolio nicht kennt, ist eine
-  offene Rechnung, kein Vollzug.
-* **Nebenbefund:** `animate` (emilkowalski/skills) lag ohne `LICENSE.txt` und
-  ohne Registereintrag im Repo; K6 hat es beim ersten Lauf am neuen Bestand
-  gemeldet. Text und Eintrag sind nachgezogen, `standen` ergänzt. Damit gilt
-  erstmals wirklich: so viele Fremd-Skills wie Lizenztexte.
+1. **Ein Paket, 26 Skills.** Der CLI legt alle 26 als Geschwisterordner ab
+   (`seo` als Hub plus 25 `seo-*`). Ihre Beschreibungen liegen ab jetzt in
+   jedem Agenten-Start mit: 2.039 Tokens gegen 3.335 Tokens Bestand – **+61 %
+   Dauerlast**. Das ist der Preis, nicht die Beigabe.
+2. **Die Runtime liegt im Hub-Ordner, nicht in `scripts/`.** Die Skills rufen
+   `"${CLAUDE_PLUGIN_ROOT}/scripts/claude-seo" run <script.py>`; außerhalb eines
+   Plugins ist diese Variable leer. Wie das Upstream-`install.sh` für
+   Handinstallationen ersetzt auch dieser Checkout den Token – hier auf den
+   Repo-Pfad `.claude/skills/seo/scripts/claude-seo` (32 `.md`-Dateien, 151
+   Token). `scripts/`, `schema/`, `data/`, `hooks/` und `requirements.txt`
+   liegen deshalb **neben** dem `SKILL.md` des Hubs, weil `runtime.py` seinen
+   Wurzelpfad als `parent.parent` auflöst. Venv bauen:
+   `.claude/skills/seo/scripts/claude-seo setup` (das Ergebnis ist nicht
+   versioniert).
+3. **Lizenz je Ordner, Volltext statt Zeiger.** Upstream legt eine 143-Byte-
+   Datei ab, die nur auf die Root-Lizenz verweist, und lässt fünf Ordner ganz
+   ohne. Ein Verweis führt die Permission Notice nicht mit, die MIT verlangt –
+   in allen 26 Ordnern liegt daher der unveränderte MIT-Volltext der
+   Root-Lizenz (1.069 Bytes).
+
+**Nach jedem `npx skills update` sind 2 und 3 weg.** Der CLI kopiert wieder den
+Upstream-Stand: die `CLAUDE_PLUGIN_ROOT`-Token kehren zurück, die Lizenzdateien
+werden wieder Zeiger. Der Nachlauf ist derselbe wie bei der Aufnahme und steht
+als Befehlskette im Vorgangsbericht
+`CLAUDE-SEO-AUFNAHME-26-SKILLS-HIGHEND-2026-11-01.md`.
+
+Grenze zum Haus: der Hub liefert **Analyse**, nicht die Veröffentlichungsregel.
+Was auf die Website darf, entscheiden weiter `ff-produzieren`, `ff-marke-text`
+und `seo-paritaet.yml`; die 26 Skills ersetzen keine Wache.
+## Zurückgezogen: 17 Social-Skills (`charlie947/social-media-skills`, MIT)
+
+Aufgenommen am 01.11.2026 mit #1006, am selben Tag wieder abgezogen – nicht
+wegen der Qualität, sondern wegen der Rechnung. Vorgang und Messung bleiben in
+`SOCIAL-SKILLS-AUFNAHME-HIGHEND-2026-11-01.md` stehen; dieser Abschnitt sagt,
+was daraus geworden ist.
+
+* **Der Grund ist K9, nicht der Geschmack.** `skills_vertrag.py` misst alle
+  Beschreibungen zusammen: nach dem SEO-Paket (26 Skills) und dem Social-Pack
+  (17) waren es **62,7 KB gegen 56 KB**. Beide Aufnahmen passen einzeln, zusammen
+  nicht. Die Grenze wurde **nicht** angehoben: sie ist die Dauerlast, die jeder
+  Agenten-Start zahlt, und ein Regler, der bei jedem Zug nachgibt, misst nichts.
+* **Die Entscheidung des Inhabers:** das SEO-Paket bleibt vollständig (26 Skills,
+  eigener Hub samt Runtime), das Social-Pack geht. Abgezogen wurde über den CLI
+  (`npx skills remove …`, 17 Namen), nicht per `git rm` – Lock und Ordner bleiben
+  so in der Hand des Werkzeugs.
+* **Was danach nachgezogen ist:** `skills-lock.json` 99 → 82, Register
+  `data/skill_lizenzen.json` 99 → 82 (K4/K6: so viele Fremd-Skills wie
+  Lizenztexte), `data/skill_portfolio.yaml` ohne die 11 Zuordnungen und
+  6 Ausschlüsse des Packs (P1–P7), Router-Tabelle in
+  `.claude/skills/ff-marke-text/SKILL.md` und die Zeile in `CLAUDE.md` bereinigt
+  (K3: kein Router nennt einen Skill, den es nicht gibt).
+* **Was bleibt:** `data/social/channels.yaml`, `scripts/social_copywriter.py` und
+  die Verbreitungs-Kette sind Hauscode und von alldem unberührt. Wer die
+  Social-Texte wieder mit Fremd-Handwerk unterlegen will, braucht zuerst Platz
+  im K9-Budget – vorher ist die Antwort: kein Platz, keine Aufnahme.
+
 
 ## Abgelehnt und begründet: `xlsx` (anthropics/skills)
 

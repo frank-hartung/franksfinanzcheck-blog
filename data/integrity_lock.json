@@ -1,12 +1,12 @@
 {
   "schema": 2,
-  "signed_at": "2026-11-01T18:14:54.084346+00:00",
-  "head": "957b02b4a",
+  "signed_at": "2026-11-01T19:13:31.294398+00:00",
+  "head": "4366b11",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
-    "data/skill_lizenzen.json": "13fc016eb7abdddc262e4fc4ee3c4b435b30a603a53ef9db685156908cac9acd",
-    "data/skill_portfolio.yaml": "1432a475ef223bc4166a9789d5c1cfd61a8f4de185cbffdeece161f2d53654f3",
+    "data/skill_lizenzen.json": "ec409974a58cc6d13f376916f756508de26d3ebe8202b2857d4d00f5558af254",
+    "data/skill_portfolio.yaml": "7e0491819e4d268bf7f166217e74b9fa72dc4cd59652cea1034f117d702062a2",
     "hugo.toml": "f69433af403fbb87704acce7336bca462480fb257b84e900690bf31294c31078",
     "layouts/_default/_markup/render-link.html": "9a86a24714a88557ea49d065f1edbd203688fa0798e70e8bd08a15a1b1a86b3c",
     "layouts/_partials/affiliate_anchor_attrs.html": "8a39d9c76656f2df3486520f774412ed8cbc5ba7e578af442ecede528ffaa1be",
@@ -59,17 +59,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "14b7163886f240f01dbaa6a0272f2d6908cd16e52751a4150a8e81db569404bc",
-  "audit_start_sha256": "404d0cf33fc19c8e685cbe7f52b8291dd0155c3164627175da2e847c2f4a2ee6",
+  "files_sha256": "211e0a24e25cfddc98e731fae1b4bf4d4218d51ee77ac53eddc76db727f95910",
+  "audit_start_sha256": "da1b74e38121bfcc551ec1df412e2d4f5f0156f2b948e508294c3b31a657b4dd",
   "audit": [
-    {
-      "date": "2026-10-31",
-      "art": "set-current",
-      "head": "36f7663",
-      "geaendert": [],
-      "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c",
-      "prev_sha256": null
-    },
     {
       "date": "2026-11-01",
       "art": "add",
@@ -87,7 +79,7 @@
         }
       ],
       "files_sha256": "a24e49fb5197fb3b7e4b6e1fca4133893293918262d5cb960057084b390a3127",
-      "prev_sha256": "404d0cf33fc19c8e685cbe7f52b8291dd0155c3164627175da2e847c2f4a2ee6"
+      "prev_sha256": null
     },
     {
       "date": "2026-11-01",
@@ -374,8 +366,67 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "ed17e1f416294b2271125c8cc39c4b59e1b3804f9ce71fafd3727dc7cfb59536",
-      "files_sha256": "14b7163886f240f01dbaa6a0272f2d6908cd16e52751a4150a8e81db569404bc"
+      "files_sha256": "14b7163886f240f01dbaa6a0272f2d6908cd16e52751a4150a8e81db569404bc",
+      "prev_sha256": "ed17e1f416294b2271125c8cc39c4b59e1b3804f9ce71fafd3727dc7cfb59536"
+    },
+    {
+      "date": "2026-11-01",
+      "art": "heal",
+      "head": "4366b11",
+      "geaendert": [
+        "data/skill_lizenzen.json",
+        "data/skill_portfolio.yaml"
+      ],
+      "herkunft": [
+        {
+          "pfad": "data/skill_lizenzen.json",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "4366b11",
+              "datum": "2026-11-01",
+              "betreff": "merge: origin/main (Design-Heilung #1008) – Register neu gebaut"
+            },
+            {
+              "sha": "5296b51",
+              "datum": "2026-11-01",
+              "betreff": "fix(design): B5 geheilt – 29 Flächen mit Druck-Feedback, Wache 0/0 (#1008)"
+            },
+            {
+              "sha": "3189c7c",
+              "datum": "2026-11-01",
+              "betreff": "merge: origin/main (17 Social-Skills) – SEO-Paket bleibt, Social-Pack weicht dem K9-Budget"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        },
+        {
+          "pfad": "data/skill_portfolio.yaml",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "4366b11",
+              "datum": "2026-11-01",
+              "betreff": "merge: origin/main (Design-Heilung #1008) – Register neu gebaut"
+            },
+            {
+              "sha": "5296b51",
+              "datum": "2026-11-01",
+              "betreff": "fix(design): B5 geheilt – 29 Flächen mit Druck-Feedback, Wache 0/0 (#1008)"
+            },
+            {
+              "sha": "3189c7c",
+              "datum": "2026-11-01",
+              "betreff": "merge: origin/main (17 Social-Skills) – SEO-Paket bleibt, Social-Pack weicht dem K9-Budget"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "f8f0f22ef557fff43d7c131669a252abd039abd5dc6d5801f0e6db04bc4c0770",
+      "files_sha256": "211e0a24e25cfddc98e731fae1b4bf4d4218d51ee77ac53eddc76db727f95910"
     }
   ]
 }

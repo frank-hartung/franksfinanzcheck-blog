@@ -67,50 +67,21 @@ ist wörtlich aus `CLAUDE.md` übernommen.
 | Wo muss die Offenlegung hin, was genau muss sie sagen? | `references/kennzeichnung.md` (#623) |
 | Pin-Ziel defekt, Hashtag-Zahl, Instagram-Winkel blind? | `references/verbreitung.md` (C37, C43, #716) |
 
-## Fremd-Skills: Social-Pack und Marketing-Pack
+## Fremd-Skills: Marketing-Pack
 
-Zwei vendored Anlagen liefern Handwerk, das `scripts/social_copywriter.py` und die
-Redaktions-Engine nicht abdecken. **Sie sind Vorschlag, nicht Vertrag** – was in
+Diese Anlage liefert Handwerk, das `scripts/social_copywriter.py` und die
+Redaktions-Engine nicht abdecken. **Sie ist Vorschlag, nicht Vertrag** – was in
 diesem Skill und in `data/social/channels.yaml` steht, gilt (K3 verlangt seit
 01.11.2026, dass **jeder** installierte Skill in einem Router steht: ein Skill,
 den niemand nennt, kostet bei jedem Start Beschreibung und wird nie gewählt).
 
-### Social-Pack (`charlie947/social-media-skills`, MIT, 17 Skills)
-
-`LICENSE.txt` liegt in jedem Ordner; Register `data/skill_lizenzen.json`, Lock
-`skills-lock.json` (K4/K6).
-
-| Auftrag | Skill |
-|---|---|
-| Erster Satz, Hook für einen Post | `hook-generator` (6 Varianten, je 2 Zeilen) |
-| Post aus einer Idee, ohne Framework | `post-writer` |
-| Post streng nach PAS/AIDA/BAB/STAR/SLAY | `post-formatter` (≤ 20 Zeilen) |
-| Ideenvorrat von 24–40 Posts | `content-matrix` |
-| Entwurf gegen Muster prüfen | `post-scorer` (nur der redaktionelle Teil, Grenze 2) |
-| Zitat-Post, Pinned Comment | `quote-post`, `pinned-comment` |
-| Profil, Newsletter-Stimme, Stimme aus Schreibproben | `profile-optimizer`, `newsletter-voice`, `voice-builder` |
-| Karussell, Infografik, Thumbnail, Reel-Skript, Grafik | `gemini-carousel`, `gemini-infographic`, `youtube-thumbnail`, `reels-scripting`, `graphic-designer` |
-| Kanal recherchieren, Zahlen ansehen | `niche-research`, `analytics-dashboard` |
-
-Drei Grenzen, die keine Auslegung sind:
-
-1. **Der Kanal-Vertrag gewinnt.** Zeichenbudget, Hashtag-Zahl, Emoji-Verbot, Link
-   im ersten Kommentar, Anrede stehen in `data/social/channels.yaml`. Der Pack
-   kennt nur LinkedIn und hängt Hashtags gern an den Textkörper; der Hauskanal
-   erlaubt 3–5 in camelCase am Ende und null Emoji. Geschrieben wird auf Deutsch
-   (D3), nicht in der englischen Vorlage.
-2. **Keine Fremdwege, keine neuen Secrets (D20/T1).** `post-scorer` (Apify),
-   `reels-scripting` (Apify + `GOOGLE_AI_API_KEY`), `niche-research` (Live-Browser)
-   und die Gemini-Skills beschreiben Werkzeuge, die dieses Repo nicht hat und
-   nicht bekommt. Genutzt wird der redaktionelle Teil – Muster, Fragen, Struktur;
-   fehlt der Zugang, endet der Skill dort und erfindet keine Messung.
-3. **Kein Zahlenversprechen aus Fremdtext.** Reichweiten- und CTR-Behauptungen
-   der Skills sind keine Belege dieses Blogs (D15) und die Fremdmessung-Sperre
-   gilt unverändert: Was hier nicht gemessen ist, wird nicht behauptet.
+Das SEO-Paket `claude-seo` liegt nicht hier, sondern am Hub `seo` (siehe
+`CLAUDE.md`, „Fremd-Skills mit eigenem Router"): es hat eigene Werkzeuge und eine
+eigene Zuständigkeit.
 
 ### Marketing-Pack (`coreyhaines31/marketingskills`, MIT)
 
-Elf Skills aus der Anlage, die schon vor dem Social-Pack im Repo lag. Sie decken
+Elf Skills aus dieser Anlage. Sie decken
 die Arbeit an Auffindbarkeit und Wettbewerb ab; die Grenze steht in der letzten
 Spalte, weil diese Skills den Markt beschreiben, nicht dieses Haus.
 
@@ -132,10 +103,10 @@ Nicht hier geroutet: `analytics` (Messung – gesperrt, siehe `ff-pruefen`),
 ### Pflege beider Anlagen
 
 Nur über den CLI (`npx -y skills@1.7.4 add|update|remove`), danach Lizenztext und
-Register nachziehen und `npm run skills:check` fahren. Das Social-Pack kostet
-rund 2.200 Tokens Auswahltext bei jedem Start (17 Beschreibungen) – wer
-verkleinert, entfernt Skills; Beschreibungen kürzen hält nicht, weil
-`npx skills update` sie überschreibt.
+Register nachziehen und `npm run skills:check` fahren. Wer verkleinert, entfernt
+Skills; Beschreibungen kürzen hält nicht, weil `npx skills update` sie
+überschreibt. Der K9-Vorrat ist mit dem SEO-Paket aufgebraucht: 56 KB sind die
+Grenze, und sie wird nicht stillschweigend verschoben.
 
 ## Kommando-Notausgang
 

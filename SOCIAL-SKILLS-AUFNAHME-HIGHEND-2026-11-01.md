@@ -1,5 +1,10 @@
 # Social-Skills: 17 Fremd-Skills aufgenommen, Bibliothek am K9-Budget (Highend, 01.11.2026)
 
+> **ZURÜCKGEZOGEN am 01.11.2026.** Das Paket ist wieder abgezogen:
+> SEO-Paket (26) und Social-Pack (17) zusammen 62,7 KB gegen 56 KB K9-Budget.
+> Die Entscheidung und der Nachvollzug stehen in `docs/ANLEITUNG-SKILLS.md`,
+> Abschnitt „Zurückgezogen: 17 Social-Skills“. Diese Akte bleibt als Vorgang.
+
 > Status: aufgenommen, vertraglich grün, in `main` eingemerged und aufgelöst.
 > Wahrheitsort für den Betrieb ist `docs/ANLEITUNG-SKILLS.md`; die Router stehen
 > in `.claude/skills/ff-marke-text/SKILL.md` („Fremd-Skills: Social-Pack und
