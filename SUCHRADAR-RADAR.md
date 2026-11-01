@@ -1,6 +1,6 @@
 # SUCHRADAR – Status
 
-> Stand: 2026-10-31 13:23:22 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
+> Stand: 2026-11-01 14:12:01 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
 > Schlüssellos · 0 € · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md`
 
 ## Lauf
@@ -12,7 +12,7 @@
 | Aus dem Zwischenspeicher | 0 |
 | Fehlgeschlagen | 3 |
 | Übersprungen (Budget) | 0 |
-| Treffer gesamt | 184 |
+| Treffer gesamt | 187 |
 | Davon organisch | 10 |
 | Eigene Treffer | 0 von 22 Anfragen |
 
@@ -22,7 +22,7 @@
 |---|---|
 | Anfragen mit echtem Suchindex | 1 von 22 |
 | Anfragen nur mit Wissens-Rückfall | 21 |
-| Organische Treffer | 10 von 184 |
+| Organische Treffer | 10 von 187 |
 | Rückfall-Anteil | 95 % |
 | Aussagekraft | eingeschraenkt |
 
@@ -45,14 +45,14 @@ _Kein eigener Treffer in den gemessenen Anfragen._
 |---|---|---|---|---|
 | ing.de | 1 | 1 | 1.0 | 1 |
 | lexware.de | 1 | 1 | 2.0 | 2 |
-| sparkasse.de | 1 | 1 | 3.0 | 3 |
-| peaks.com | 1 | 0 | 4.0 | 4 |
-| bank99.at | 1 | 0 | 5.0 | 5 |
-| mlp-financify.de | 1 | 0 | 6.0 | 6 |
-| meetadam.io | 1 | 0 | 7.0 | 7 |
-| vr.de | 1 | 0 | 8.0 | 8 |
+| bank99.at | 1 | 1 | 3.0 | 3 |
+| mlp-financify.de | 1 | 0 | 4.0 | 4 |
+| schuldnerberatung.de | 1 | 0 | 5.0 | 5 |
+| sparkasse.de | 1 | 0 | 6.0 | 6 |
+| peaks.com | 1 | 0 | 7.0 | 7 |
+| meetadam.io | 1 | 0 | 8.0 | 8 |
 | fonio.ai | 1 | 0 | 9.0 | 9 |
-| finanzenfroh.com | 1 | 0 | 10.0 | 10 |
+| verivox.de | 1 | 0 | 10.0 | 10 |
 
 ## Störungen
 
@@ -60,7 +60,7 @@ _Kein eigener Treffer in den gemessenen Anfragen._
 |---|---|
 | franksfinanzcheck.de | Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Treffer / |
 | Gaskosten senken | Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Treffer / htt |
-| Seniorenkonto | Kein Anbieter lieferte Treffer für 'Seniorenkonto': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Treffer / https: |
+| Tarife Sofortleistung Haken | Kein Anbieter lieferte Treffer für 'Tarife Sofortleistung Haken': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Tr |
 
 ## Einordnung
 

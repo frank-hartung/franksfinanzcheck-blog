@@ -31,7 +31,7 @@ quellen:
   - titel: "Kündigung und Widerruf bei Energieverträgen"
     url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Kuendigung/start.html"
     herausgeber: "Bundesnetzagentur"
-faktencheck: 2026-09-28
+faktencheck: 2026-11-01
 ---
 
 Ein Tarifportal findet in Sekunden hunderte Gastarife. Danach kommt die echte Arbeit: Filter zurücksetzen, Bonus ausblenden und schauen, ob Preisgarantie und Laufzeit überhaupt zueinander passen.

@@ -1,6 +1,6 @@
 # Faktenfrische: Gasrechnung senken: Fehler im Spätsommer vermeiden
 
-> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-01 10:13 UTC.
+> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-01 11:28 UTC.
 > Agent-Reach-Kanäle, nur lesend. Fundstellen sind Signale, keine Freigabe.
 
 - **Artikel:** `content/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/index.md`
@@ -12,13 +12,30 @@
 
 ## Fundstellen
 
-_Keine thematisch passende Fundstelle in diesem Lauf._
+### Referenzseite bundesnetzagentur.de
+
+- ✅ belegfähig · Herausgeber: Bundesnetzagentur
+- Quelle: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>
+
+> Title: Bundesnetzagentur - Energie
+> 
+> *   [_Energie_](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html)
+>     *   [Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html)
+> 
+> *   [Digitales und Telekommunikation](https://www.bundesnetzagentur.de/DE/Vportal/TK/start.html)
+>     *   [Energie](https://www.bundesnetzagentur.de/DE/Vportal/Energie/start.html)
+>     *   [Post](https://www.bundesnetzagentur.de/DE/Vportal/Post/start.html)
+>     *   [Anfragen und Beschwerden](https://www.bundesnetzagentur.de/DE/Vportal/AnfragenBeschwerden/start.ht
 
 ## Fachliche Befunde (KI-Fachprüfung)
 
-Status: übersprungen (kein KI-Schlüssel: GROQ_API_KEY/GEMINI_API_KEY)
+Status: geprüft (groq:openai/gpt-oss-120b)
 
-_Keine Befunde gemeldet; Prüfstatus siehe oben._
+- **luecke** – Keine Quelle für die Aussage, dass im Oktober 2026 bessere Gaspreise gelten – Preis‑Trend‑Behauptung fehlt. (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
+- **luecke** – Keine Quelle für die Angabe, dass ein Einfamilienhaus typischerweise 18.000 kWh/Jahr verbraucht – Verbrauchszahl ist unbelegt. (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
+- **luecke** – Keine Quelle für die Behauptung, dass ein Grad weniger Raumtemperatur rund 6 % Energie einspart – Prozent‑Angabe fehlt. (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
+- **luecke** – Keine Quelle für die Angabe, dass durch Optimierungsmaßnahmen 10‑15 % Einsparungen realistisch sind – Prozent‑Wert unbelegt. (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
+- **luecke** – Keine Quelle für die Aussage, dass das Gesetz bei einem Tarifwechsel die Grundversorgung garantiert – regulatorischer Rahmen fehlt. (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
 
 ## Offene GEO-Punkte
 
@@ -26,6 +43,5 @@ _Keine Befunde gemeldet; Prüfstatus siehe oben._
 
 ## Kanal-Störungen
 
-- feedparser nicht installiert (pip install feedparser)
-- feedparser nicht installiert (pip install feedparser)
-- bundesnetzagentur.de: Jina-Reader-Abruf fehlgeschlagen (<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>)
+- Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (<urlopen error timed out>)
+- Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)

@@ -1,5 +1,5 @@
 {
- "stand": "2026-10-31T13:23:22.793498+02:00",
+ "stand": "2026-11-01T14:12:01.968331+02:00",
  "domaenen": [
   {
    "domaene": "ing.de",
@@ -22,7 +22,7 @@
    ]
   },
   {
-   "domaene": "sparkasse.de",
+   "domaene": "bank99.at",
    "treffer": 1,
    "top3": 1,
    "bester_rang": 3,
@@ -32,7 +32,7 @@
    ]
   },
   {
-   "domaene": "peaks.com",
+   "domaene": "mlp-financify.de",
    "treffer": 1,
    "top3": 0,
    "bester_rang": 4,
@@ -42,7 +42,7 @@
    ]
   },
   {
-   "domaene": "bank99.at",
+   "domaene": "schuldnerberatung.de",
    "treffer": 1,
    "top3": 0,
    "bester_rang": 5,
@@ -52,7 +52,7 @@
    ]
   },
   {
-   "domaene": "mlp-financify.de",
+   "domaene": "sparkasse.de",
    "treffer": 1,
    "top3": 0,
    "bester_rang": 6,
@@ -62,7 +62,7 @@
    ]
   },
   {
-   "domaene": "meetadam.io",
+   "domaene": "peaks.com",
    "treffer": 1,
    "top3": 0,
    "bester_rang": 7,
@@ -72,7 +72,7 @@
    ]
   },
   {
-   "domaene": "vr.de",
+   "domaene": "meetadam.io",
    "treffer": 1,
    "top3": 0,
    "bester_rang": 8,
@@ -92,7 +92,7 @@
    ]
   },
   {
-   "domaene": "finanzenfroh.com",
+   "domaene": "verivox.de",
    "treffer": 1,
    "top3": 0,
    "bester_rang": 10,

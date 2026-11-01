@@ -1,5 +1,5 @@
 {
- "zeitstempel": "2026-10-31T13:23:22.793498+02:00",
+ "zeitstempel": "2026-11-01T14:12:01.968331+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 25,
  "zaehlung": {
@@ -8,16 +8,16 @@
   "fehler": 3,
   "uebersprungen": 0
  },
- "treffer_gesamt": 184,
+ "treffer_gesamt": 187,
  "treffer_organisch": 10,
  "datenqualitaet": {
   "anfragen_erfolgreich": 22,
   "anfragen_organisch": 1,
   "anfragen_rueckfall": 21,
-  "treffer_gesamt": 184,
+  "treffer_gesamt": 187,
   "treffer_organisch": 10,
-  "treffer_rueckfall": 174,
-  "rueckfall_anteil": 0.946,
+  "treffer_rueckfall": 177,
+  "rueckfall_anteil": 0.947,
   "anbieter": {
    "wikipedia": 21,
    "searxng": 1
@@ -34,8 +34,8 @@
    "fehler": "Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer | https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   },
   {
-   "anfrage": "Seniorenkonto",
-   "fehler": "Kein Anbieter lieferte Treffer für 'Seniorenkonto': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer | https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
+   "anfrage": "Tarife Sofortleistung Haken",
+   "fehler": "Kein Anbieter lieferte Treffer für 'Tarife Sofortleistung Haken': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer | https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   }
  ],
  "rang": [
@@ -120,127 +120,127 @@
    "sichtbar": false
   },
   {
-   "anfrage": "SF-Klasse retten",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Secondhand Kleidung",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Secondhand Möbel",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Secondhand tauschen",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Sinnvolle Versicherungen Angestellte",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Smart Home",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Smart-Home",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Smart-Home-Geräte",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Smart-Plug",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Smarte Steckdosen",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Solaranlage Kosten",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Solaranlage Zuschuss",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
    "anfrage": "Stromanbieter wechseln",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Tarif",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Tarife",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Tarife vergleichen",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Tarifvergleich",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Tarifwechsel",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Taschengeld Kinder",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Test",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Tibber Alternative",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Tierarzt Rücklage",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Tierversicherung",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Tipps",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Trockner Stromverbrauch",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -283,7 +283,7 @@
     ]
    },
    {
-    "domaene": "sparkasse.de",
+    "domaene": "bank99.at",
     "treffer": 1,
     "top3": 1,
     "bester_rang": 3,
@@ -293,7 +293,7 @@
     ]
    },
    {
-    "domaene": "peaks.com",
+    "domaene": "mlp-financify.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 4,
@@ -303,7 +303,7 @@
     ]
    },
    {
-    "domaene": "bank99.at",
+    "domaene": "schuldnerberatung.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 5,
@@ -313,7 +313,7 @@
     ]
    },
    {
-    "domaene": "mlp-financify.de",
+    "domaene": "sparkasse.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 6,
@@ -323,7 +323,7 @@
     ]
    },
    {
-    "domaene": "meetadam.io",
+    "domaene": "peaks.com",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 7,
@@ -333,7 +333,7 @@
     ]
    },
    {
-    "domaene": "vr.de",
+    "domaene": "meetadam.io",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 8,
@@ -353,7 +353,7 @@
     ]
    },
    {
-    "domaene": "finanzenfroh.com",
+    "domaene": "verivox.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 10,

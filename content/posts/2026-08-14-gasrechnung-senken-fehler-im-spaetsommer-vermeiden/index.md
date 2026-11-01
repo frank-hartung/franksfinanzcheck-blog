@@ -32,7 +32,7 @@ quellen:
     url: "https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892"
     herausgeber: "Verbraucherzentrale"
     datum: "2026-09-24"
-faktencheck: 2026-09-28
+faktencheck: 2026-11-01
 ---
 
 Wer seine [Gasrechnung senken](../../posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/) will, sollte jetzt handeln. Die ersten kalten Nächte sind da. In diesen Wochen entscheidet sich, wie teuer dein Winter wird.
