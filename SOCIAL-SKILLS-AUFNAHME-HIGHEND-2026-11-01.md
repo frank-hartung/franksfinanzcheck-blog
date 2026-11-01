@@ -120,41 +120,81 @@ anheben (Entscheidung des Inhabers, nicht eines Agenten).
 
 | Prüfung | Ergebnis |
 |---|---|
-| `python3 scripts/skills_vertrag.py` | 0 Befunde, 1 Warnung (K8: Register ungezeichnet – Betreiberakt, siehe unten) |
-| `python3 scripts/skills_vertrag.py --selftest` | 23 Fälle grün (`main`s Fassung) |
+| `python3 scripts/skills_vertrag.py` | 81 Skills, 0 Befunde, 0 Warnungen (K1–K10) |
+| `python3 scripts/skills_vertrag.py --selftest` | 21 eingefrorene Fälle grün (`main`s Fassung) |
+| `python3 scripts/skills_portfolio.py` | 41 Skills mit Thema, 36 ausgeschlossen, 0 Befunde, 0 Warnungen – Themen 12, ≈ 7.031 Tokens |
+| `python3 -m unittest scripts.tests.test_skills_vertrag` | 37 Tests grün (1 übersprungen) |
 | `python3 scripts/skript_syntax_wache.py` | 624 Dateien grün (nach Heilung eines kaputten Auto-Merges in `skills_vertrag.py`) |
-| `python3 scripts/integrity_guard.py` | Siegel trägt den Kern wieder (nach `--heal`, siehe unten) |
-| `python3 -c "fachpruefung_register --check"` | Register aktuell |
-| PR-Gate (GitHub) | Qualitäts-Gate, CodeQL, ReDoS/Klartext/URL-Wachen, YMYL, Syntax, Robustheit, Beweis, Entity, Raster, Lesehilfen grün |
+| `python3 scripts/artefakt_waechter.py` | 542 Artefakte heil (nach Heilung eines doppelten `description`-Schlüssels, siehe unten) |
+| `python3 scripts/integrity_guard.py` | „Der Kern entspricht exakt dem letzten signierten Zustand“ |
+| `python3 scripts/gsc_artefakte_guard.py --check` | vier Search-Console-Dateien gültig, eindeutig, passend |
+| PR-Gate (GitHub) | Integritäts-Siegel, Gate, CodeQL, ReDoS/Klartext/URL-Wachen, YMYL, Beweis, Lesehilfen, Quellseite, Abhängigkeiten grün |
 
-## Offener Betreiberakt (K8)
+## Das Siegel: was die Aufnahme erzwungen hat (K8)
 
-`main` hat am 01.11.2026 (`cbc43ad6`) **`scripts/skills_vertrag.py` und
-`data/skill_lizenzen.json` ins Siegel genommen**. Damit ist jede
-Register-Änderung – also jede Skill-Aufnahme – eine Siegel-Änderung. Der
-vorgesehene Schluss ist ein Zug, nachdem der Stand committet und grün ist:
+`main` hat am 01.11.2026 (`cbc43ad6`) **`scripts/skills_vertrag.py`,
+`data/skill_lizenzen.json` und `data/skill_portfolio.yaml` ins Siegel
+genommen**. Damit ist jede Skill-Aufnahme eine Siegel-Änderung: K8 meldete die
+Differenz als Warnung mit dem Schließpfad.
+
+Ausgeführt wurde genau dieser Pfad, in dieser Reihenfolge:
 
 ```bash
 python3 scripts/skills_vertrag.py                 # 0 Befunde
-python3 scripts/integrity_guard.py --heal         # signiert belegten Drift der Klasse FEST
-python3 scripts/integrity_guard.py                # Gegenprobe: „entspricht exakt dem signierten Zustand“
+git commit …                                      # erst der belegte Stand
+python3 scripts/integrity_guard.py --heal         # signiert nur committeten, bytegleichen Drift der Klasse FEST
+python3 scripts/integrity_guard.py                # Gegenprobe: entspricht exakt dem signierten Zustand
 ```
 
-Ein Agent, der das Siegel ohne diesen Nachweis nachzieht, hebt den Schutz auf,
-den K8 verspricht – deshalb steht es hier und im Runbook, nicht im Kopf.
+`--heal` signiert ausschließlich belegten Drift der Klasse FEST; KRITISCH bleibt
+HARD STOP. Die Herkunft steht im Lock unter `audit` und in
+`data/integrity_history.jsonl` (Commits `c48585ae`, `4603f232`, `cbc43ad6`).
+Wer die Zeichnung nicht will, kann sie zurücknehmen – dann steht der Kern wieder
+als „versiegelbar“ da und `--gate` wird rot, bis der Inhaber zeichnet.
+
+## Zwei Funde, die das Gate gefunden hat (und keiner kam aus dem Pack)
+
+1. **`skills_portfolio.py` meldete 17 × P1.** `main`s Themen-Portfolio
+   (P1–P7, `data/skill_portfolio.yaml`) verlangt für jedes Fremd-Skill eine
+   Entscheidung. Die 17 neuen standen nirgends – das Gate „Skill-Vertrag“ war
+   rot. Nachgetragen: **11 Skills** unter `verbreitung` / `text-und-redaktion`
+   (Mastodon, Instagram, Pinterest, Newsletter, Blog – alle mit Belegpfad;
+   die Skills liefern Texte und Bildaufträge, ohne einen externen Dienst
+   aufzurufen), **6 Skills** unter `ausgeschlossen`, weil Kanal oder
+   Werkzeugweg fehlt: `profile-optimizer`, `analytics-dashboard`,
+   `pinned-comment` (LinkedIn gibt es hier nicht), `youtube-thumbnail` (kein
+   YouTube-Kanal), `post-scorer` (eigene Beitrags-Historie über Apify),
+   `reels-scripting` (Apify + Gemini, D20/T1). Alle sechs bleiben als Nachweis
+   des Einkaufs installiert, zahlen aber kein Themen-Budget; die Frist
+   (`2026-12-31`) steht im Ausschluss, zusammen ≈ 3,0 KB K9-Entlastung.
+2. **`artefakt_waechter.py` meldete A6.** Ein Reserve-Entwurf trug zwei
+   `description:`-Zeilen – ein Hugo-Build-Killer. Der Blob stammt aus `main`
+   (`cbc43ad63`, #1004) und kam mit dem Merge herein; behoben durch Entfernen
+   der abgeschnittenen zweiten Zeile, der Entwurf ist `draft: true`.
 
 ## Offene Entscheidung des Inhabers
 
-Der Pack ist vollständig aufgenommen; niemand muss etwas tun. Wenn die 2.164
-Tokens nicht gewollt sind, ist die Verkleinerung ein CLI-Lauf – Kandidaten mit
-externem Dienst oder Format ohne Auftrag in diesem Repo. Nach jedem Entfernen:
-Registerzeile und Router-Zeile löschen, `npm run skills:check` fahren.
+Der Pack ist vollständig aufgenommen und vollständig zugeordnet; niemand muss
+etwas tun. Wenn die 2.164 Tokens nicht gewollt sind, ist die Verkleinerung ein
+CLI-Lauf – die sechs Skills ohne Kanal oder Werkzeugweg sind die ersten
+Kandidaten, weil dort nichts verloren geht, was hier trägt.
 
 ```bash
 npx -y skills@1.7.4 remove reels-scripting -y      # Apify + Gemini, keine Quelle im Haus
 npx -y skills@1.7.4 remove analytics-dashboard -y  # .xlsx-Export, im Repo unerwünscht
-npx -y skills@1.7.4 remove gemini-carousel -y      # Karussell über externen Bildweg
-npx -y skills@1.7.4 remove gemini-infographic -y   # dito
+npx -y skills@1.7.4 remove profile-optimizer -y    # LinkedIn-Profil, kein Kanal hier
+npx -y skills@1.7.4 remove pinned-comment -y       # LinkedIn-Kommentar, kein Kanal hier
 npx -y skills@1.7.4 remove youtube-thumbnail -y    # Format ohne Kanal im Repo
-npx -y skills@1.7.4 remove niche-research -y      # Live-Browser, T1-Sperre
+npx -y skills@1.7.4 remove post-scorer -y          # verlangt eigene Beitrags-Historie
 ```
+
+Nach jedem Entfernen: Registerzeile, Ausschluss-Eintrag und Router-Zeile
+löschen, `npm run skills:check` und `python3 scripts/skills_portfolio.py` fahren.
+
+## Was der Pack NICHT liefert (damit es nicht später überrascht)
+
+`gemini-carousel`, `gemini-infographic`, `graphic-designer` und `quote-post`
+erzeugen **Bildaufträge (Prompts)**, keine Bilder. Der Bildweg des Hauses
+bleibt der bestehende; ein Gemini- oder Apify-Zugang wird nicht angelegt
+(D20/T1). `post-scorer` und `analytics-dashboard` setzen eine LinkedIn-Historie
+voraus, die es hier nicht gibt – sie stehen darum unter `ausgeschlossen`.

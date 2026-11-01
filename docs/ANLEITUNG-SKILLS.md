@@ -126,8 +126,8 @@ Stelle, und `scripts/skills_portfolio.py` hält die Antwort ehrlich.
 
 ```
 Themen (12)      sechs Inhaltswelten + sechs Kanäle, jede mit Belegpfad
-produktion       Skill → Thema + Rolle + Kanal   (29 Skills, ≈ 5.400 Tokens)
-ausgeschlossen   Skill → Grund + Entscheidung + Frist   (31 Skills)
+produktion       Skill → Thema + Rolle + Kanal   (41 Skills, ≈ 7.000 Tokens)
+ausgeschlossen   Skill → Grund + Entscheidung + Frist   (35 Skills)
 ```
 
 Die Unterscheidung `art: inhalt | kanal` ist die eigentliche Antwort:
@@ -270,6 +270,22 @@ Profil, Newsletter-Stimme. Vorgang und Messung:
   K9-Budgets: der nächste Schwung passt nicht mehr ohne Entscheidung. Wer
   verkleinert, entfernt Skills über den CLI – Kürzen der Beschreibung
   überschreibt das nächste `npx skills update`.
+* **Themen-Portfolio (P1–P7):** `data/skill_portfolio.yaml` verlangt für jedes
+  Fremd-Skill eine Entscheidung. Nachgetragen am 01.11.2026: **11** Skills
+  stehen unter `verbreitung` bzw. `text-und-redaktion` – die Kanäle Mastodon,
+  Instagram, Pinterest, Newsletter und Blog existieren mit Belegpfad, und die
+  Skills dieses Packs liefern Texte und Bildaufträge ohne externen Aufruf
+  (Stimmen-Datei, Kurzbeitrag, Framework-Format, Ideen-Matrix, Infografik- und
+  Karussell-Briefing, Zitat-Grafik, Nischen-Recherche). **6** stehen unter
+  `ausgeschlossen`, weil Kanal oder Werkzeugweg fehlt: `profile-optimizer`,
+  `analytics-dashboard`, `pinned-comment` (LinkedIn), `youtube-thumbnail`
+  (kein YouTube-Kanal), `post-scorer` (eigene Beitrags-Historie über Apify) und
+  `reels-scripting` (Apify + Gemini, D20/T1). Sie bleiben als Nachweis des
+  Einkaufs installiert, zahlen aber kein Themen-Budget; die Frist für die
+  Entfernung steht im Ausschluss (zusammen ≈ 3,0 KB K9-Entlastung).
+  Vorher meldete `skills_portfolio.py` **17 × P1** – das Gate „Skill-Vertrag“
+  war deshalb rot: eine Aufnahme, die das Portfolio nicht kennt, ist eine
+  offene Rechnung, kein Vollzug.
 * **Nebenbefund:** `animate` (emilkowalski/skills) lag ohne `LICENSE.txt` und
   ohne Registereintrag im Repo; K6 hat es beim ersten Lauf am neuen Bestand
   gemeldet. Text und Eintrag sind nachgezogen, `standen` ergänzt. Damit gilt
