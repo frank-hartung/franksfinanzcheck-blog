@@ -1,0 +1,36 @@
+# ============================================================
+#  AUSNAHMEN DER BEWEGUNGS-WACHE (B1–B6)
+#  Geprüft von scripts/bewegungs_wache.py · Vorgang:
+#  BEWEGUNG-AUDIT-HIGHEND-2026-11-01.md
+# ------------------------------------------------------------
+#  WOZU DIESE DATEI DA IST
+#  Eine Ausnahme ist ein Satz mit drei Teilen: WAS (pfad + klasse),
+#  WARUM (grund) und BIS WANN (faellig). Fehlt einer, meldet die
+#  Wache einen Befund (B6) – eine Ausnahme ohne Frist ist eine stille
+#  Abschaffung, eine abgelaufene verlängert sich nicht von selbst.
+#
+#  WANN EIN EINTRAG RICHTIG IST
+#  Wenn die Abweichung GEWOLLT ist und in DESIGN.md §6 gehört, aber
+#  dort (noch) nicht steht: erst Ausnahme mit Frist, dann den §6-Text
+#  nachziehen, dann die Ausnahme löschen. Eine Ausnahme ist ein
+#  Zwischenschritt, kein Zustand.
+#
+#  WANN EIN EINTRAG FALSCH IST
+#  Wenn er nur den Bestand vor dem Prüfer schützt. Der Bestand ist am
+#  01.11.2026 gemessen (41 × B1, 1 × B4, 2 × B3, 38 × B5) und wird in
+#  BEWEGUNG-AUDIT-HIGHEND-2026-11-01.md abgearbeitet – nicht hier
+#  weggedrückt. Die Liste unten ist deshalb ABSICHTLICH LEER.
+#
+#  FORMAT (Beispiel, bewusst auskommentiert – kein Eintrag ohne Grund):
+#
+#  ausnahmen:
+#    - pfad: assets/css/extended/zz-beispiel.css
+#      klasse: B1                       # B1 | B2 | B3 | B4 | B5
+#      grund: >
+#        Warum dieser eine Wert richtig ist und warum er nicht in die
+#        Skala wandert (z. B. „Kameravorschau braucht 0,7 s, DESIGN.md
+#        §6 nennt sie nicht").
+#      entscheidung: "Mensch, 01.11.2026"   # wer hat entschieden
+#      faellig: 2026-12-31                  # JJJJ-MM-TT, Pflicht
+# ============================================================
+ausnahmen: []

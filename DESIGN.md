@@ -110,12 +110,79 @@ CTA-Glow (einziger zulässiger Akzent-Schatten):
 
 ## 6. Interaktion & Motion
 
-- Übergänge: 0.16s (Micro) / 0.3s (Flächen), cubic-bezier(.2,.7,.2,1) /
-  ease-out. Kein bounce/elastic, keine Layout-Properties (einzig dokumentierte
-  Ausnahme: Voice-Progress-Balken width .18s linear – kontinuierliche
-  Wertanzeige).
+### 6.1 Die Skala (erweitert 01.11.2026, gemessen statt geschätzt)
+
+Bis 31.10.2026 nannte dieser Abschnitt zwei Dauern (0,16 s / 0,3 s). Die
+Messung vom 01.11.2026 (`scripts/bewegungs_wache.py`, Vorgang
+`BEWEGUNG-AUDIT-HIGHEND-2026-11-01.md`) fand im ausgelieferten CSS zehn
+verschiedene Werte. Das war kein Zufall, sondern eine Skala, die nie
+aufgeschrieben wurde: Jede Stufe hat eine Aufgabe, und die Zuordnung war über
+19 Dateien hinweg konsistent. Sie steht jetzt hier – und nur hier; das
+maschinenlesbare Spiegelbild ist `data/design/regelwerk.yaml`, geprüft von der
+Bewegungs-Wache (B1/B2) **und** vom Varianten-Gate.
+
+| Stufe | Dauer | Wofür | Belegt in |
+|---|---|---|---|
+| Sofort | 0,10 s | Rückmeldung auf einer Textzeile (Link in einer Liste) – kürzer als ein Blinzeln, damit Klicken nicht bremst | `.terms-index a` |
+| Sofort+ | 0,12 s | Zwei Flächen, die im Verbund umschalten (Wortmarke + Lautstärkebalken im Vorleser); 0,16 s wirkte dort träge | `.ff-voice-w--now` |
+| Micro | 0,15 s | Chip, Pille, kleiner Button: Farb- und Rahmenwechsel unter dem Finger | `.ff-pillar-nav__chip`, `.ff-table-btn`, `.ff-teilen__aktion`, `.ff-beleg__link` |
+| Micro+ | 0,16 s | Standard-Innenwechsel (Fläche, Text, Klammer) – die Haus-Stufe | `zz-newsletter.css`, `zz-werkzeuge.css` |
+| Takt | 0,18 s | Lift, der als Bewegung gelesen wird (Karte, CTA, Kachel) – hier lohnt die Haus-Kurve | `.ff-btn`, `.ff-saison-card`, `.ff-kompass__cta` |
+| Zustand | 0,20 s | Ein Zustand schaltet sichtbar um (Badge live, Kopfleiste verdichtet) | `.header`, `.ff-kurzantwort__badge` |
+| Panel | 0,22 s | Overlay/Panel öffnet und schließt; länger als Micro, weil eine Fläche kommt und geht | `.ff-ki-panel`, `.ff-home-ctas a` |
+| Aufklappen | 0,25 s | Inhalt wird aufgeschlagen (Pfeil, Kurzantwort im Vorlesemodus) | `.ff-offenlegung__pfeil`, `.ff-kurzantwort` |
+| Aufdecken | 0,28 s | Ein Element taucht beim Scrollen auf | `.post-entry` (Reveal), `.ff-mini-toc` |
+| Fläche | 0,30 s | Größerer Flächenwechsel; alles darüber wirkt zäh | (Bestand) |
+| Bildfläche | 0,40 s | Zoom/Hover auf einem Bild – Bildbewegung darf ruhiger sein als UI | `.ff-related-card__img`, `.ff-pc-card__img` |
+| Reveal | 0,65 s | Einmalige Enthüllung beim Scrollen (kein Hover, kein Klick) | `.ff-in-view`, `.ff-home-ctas a::after` |
+| Bildruhe | 0,70 s | Cover-Zoom im Teaser: langsam, damit das Auge nicht springt | `.post-entry .entry-cover img` |
+
+**Warum das keine Beliebigkeit ist:** 0,10/0,15/0,16 (Text und kleine
+Kontrolle) liegen unter der Schwelle, ab der eine Bewegung als Bewegung
+wahrgenommen wird – sie sollen nur den Übergang verstecken. Ab 0,18 s wird
+Bewegung *gemeint*; dort greift die Haus-Kurve
+`cubic-bezier(.2,.7,.2,1)`. Über 0,4 s steht nur noch, was einmalig oder
+Bild ist.
+
+**Easing:** `cubic-bezier(.2,.7,.2,1)` für alles, was sich bewegt (Lift,
+Panel, Reveal), `ease-out` für Farb-/Rahmenwechsel, `linear` ausschließlich
+für kontinuierliche Wertanzeige. Der generische Wert `ease` ist **kein
+Verstoß**, aber ein Hinweis: Er trifft die Absicht selten (67 Stellen,
+B2 im Audit).
+
+**Layout-Properties:** keine (width/height/top/left/margin/padding).
+Dokumentierte Ausnahmen, jede mit Grund:
+1. **Voice-Progress** – `.ff-voice-progress { width … linear }`: Die Breite
+   *ist* der Wert; ein `scaleX` würde die Rundung an den Enden verzerren.
+2. **Kurzantwort-Progress** – `.ff-kurzantwort__progress`: gleiche Bauart,
+   gleicher Grund.
+3. **Werkzeug-Rangbalken** – `.ff-wz__balken-fuellung { width .3s }`: Der
+   Balken wird beim Aufbau *einmal* gesetzt (nicht pro Frame). Das ist kein
+   Dauer-Reflow, sondern ein einzelner Layout-Schritt; `transform: scaleX`
+   wäre hier gleichwertig, aber der Balken hat einen `border-radius: 999px`,
+   den `scaleX` ungleichmäßig staucht.
+
+### 6.2 Pflicht bei Bewegung
+
 - `@media (prefers-reduced-motion: reduce)`: alle Lifts/Transitionen aus
   (custom.css + zzz-agency-polish.css §8).
+- **Lift braucht Druck:** Wer bei `:hover`/`:focus-visible` einen
+  `transform`-Lift setzt, setzt für dieselbe Fläche ein `:active`. Das
+  `:active` steht **hinter** dem `:hover`, auf derselben Spezifität, und
+  trägt den Elternkontext mit, wenn die Basisregel ihn trägt
+  (`.ff-nl-strip .ff-nl-strip__cta:active`, nicht `.ff-nl-strip__cta:active`).
+  Das Maß hängt an der Fläche, nicht am Geschmack:
+
+  | Flächentyp | `:active` | Warum |
+  |---|---|---|
+  | Button, Chip, CTA | `translateY(0) scale(.97)` + Schatten zurück | Die kleine Fläche darf schrumpfen – das ist die Fingerkuppe |
+  | Karte (> 200px) | `translateY(0)` | `scale(.97)` auf 400px liest sich als Zoom-Fehler, nicht als Druck |
+  | Listenzeile, TOC-Link | `translateX(0)` bzw. Farbe/Rahmen | Der Lift war seitlich bzw. gar nicht vorhanden |
+  | Fläche, die bei Hover **wächst** | `scale(.96)` | Der Druck muss die Gegenrichtung sein (`.ff-ki-trigger`) |
+
+  Kein `:active` auf reinen Kind-Elementen (Bild im Karten-Hover) – dort
+  gehört die Rückmeldung auf die Karte. Stand 01.11.2026: **29 Flächen
+  geheilt, B5 = 0** (`scripts/bewegungs_wache.py`), ohne `(hover: hover)`.
 - Fokus: `:focus-visible` mit 3px solid #FFB300 – sichtbar in beiden Modi
   (verifiziert). Nicht per outline:none entfernen.
 

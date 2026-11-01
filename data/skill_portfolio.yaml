@@ -172,6 +172,9 @@ produktion:
   - skill: animate
     rolle: "Bewegung in der Oberfläche bauen (Transition, Einblendung) – Motion, die einen Zweck hat"
     kanaele: [website]
+  - skill: emil-design-eng
+    rolle: "Detailhandwerk an Interaktion und Motion: Easing, Timing, Hover-/Druck-Feedback, prefers-reduced-motion – Grundlage des Bewegungs-Audits und der Wache B1–B6"
+    kanaele: [website]
   verbreitung:
   - skill: social
     rolle: "Mastodon- und Instagram-Texte, Repurposing der Artikel"

@@ -151,6 +151,12 @@
       "skillPath": "skills/emails/SKILL.md",
       "computedHash": "09d3406cb503e77f70681b79efc51fb7d2bc58dd29e452ee66e0cf5a11e493ce"
     },
+    "emil-design-eng": {
+      "source": "emilkowalski/skill",
+      "sourceType": "github",
+      "skillPath": "skills/emil-design-eng/SKILL.md",
+      "computedHash": "51f2537e04d15911b41d78e2de24c36a0e26d41beae15e82a954fe5496a5eda9"
+    },
     "events": {
       "source": "coreyhaines31/marketingskills",
       "sourceType": "github",

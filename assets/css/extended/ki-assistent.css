@@ -54,6 +54,12 @@
   transform: scale(1.08);
   box-shadow: 0 4px 12px rgba(15, 52, 43, .35);
 }
+
+/* Der runde Trigger ist die einzige Fläche, bei der Hover VERGRÖSSERT.
+   Dann muss der Druck der Gegenschlag sein, nicht ein zweiter Lift. */
+.ff-ki-trigger:active {
+  transform: scale(.96);
+}
 .ff-ki-trigger:focus-visible {
   outline: 3px solid var(--ff-ki-akzent);
   outline-offset: 3px;
