@@ -1,14 +1,36 @@
-generated_at: '2026-10-31T09:57:28Z'
-start_date: '2026-11-01'
+generated_at: '2026-11-01T10:47:39Z'
+start_date: '2026-11-02'
 cadence: Mo/Mi/Fr · 2–3 Artikel/Tag (DAUERVORGABE)
 slots:
 - date: '2026-11-02'
   weekday: Mon
   slot: 1
-  topic: Stromanbieter wechseln und bis zu 300 Euro sparen
+  topic: 'Grundversorgung raus: So entkommst du dem teuersten Stromtarif'
   pillar: strom-sparen
-  source: campaign:herbst-energiewechsel-2026
-  campaign: herbst-energiewechsel-2026
+  source: campaign:winter-energie-2026-27
+  campaign: winter-energie-2026-27
+  cta: Jetzt Strom- & Gaspreise vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
+    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
+
+    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
+    höher aus als erwartet – der Schock kommt mit der Heizperiode.
+
+    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
+    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
+
+    - [news] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu
+    an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.'
+- date: '2026-11-04'
+  weekday: Wed
+  slot: 2
+  topic: 'Ökostrom wechseln: Günstig und seriös im Vergleich'
+  pillar: strom-sparen
+  source: campaign:winter-energie-2026-27
+  campaign: winter-energie-2026-27
   cta: Jetzt Strom- & Gaspreise vergleichen
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
@@ -26,124 +48,195 @@ slots:
     - [trending] Zwischen variablen Tarifen und Festpreisverträgen gibt es 2026 wieder
     größere Preisunterschiede – pauschale Empfehlungen greifen hier zu kurz, es kommt
     auf den eigenen Verbrauch an.'
-- date: '2026-11-04'
-  weekday: Wed
-  slot: 2
-  topic: 'Strom-Nachzahlung vermeiden: So berechnest du die richtigen Abschläge'
-  pillar: strom-sparen
-  source: campaign:herbst-energiewechsel-2026
-  campaign: herbst-energiewechsel-2026
-  cta: Jetzt Strom- & Gaspreise vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
-    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
-
-    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
-    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
-
-    - [viral_outlier] Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe
-
-    - [trending] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
-    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.'
 - date: '2026-11-06'
   weekday: Fri
   slot: 3
-  topic: 'Strompreis im Herbst 2026: Jetzt wechseln oder warten?'
-  pillar: strom-sparen
-  source: campaign:herbst-energiewechsel-2026
-  campaign: herbst-energiewechsel-2026
-  cta: Jetzt Strom- & Gaspreise vergleichen
+  topic: 'Kfz-Versicherung wechseln zum 1. Januar: Diese Fristen gelten'
+  pillar: versicherungen
+  source: campaign:kfz-wechselsaison-2027
+  campaign: kfz-wechselsaison-2027
+  cta: Jetzt Kfz-Versicherung vergleichen
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
-    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
+    - [evergreen] Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember
 
-    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
-    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
+    - [news] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
+    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
+    statt sie automatisch zu verlängern.
 
-    - [news] Zwischen variablen Tarifen und Festpreisverträgen gibt es 2026 wieder
-    größere Preisunterschiede – pauschale Empfehlungen greifen hier zu kurz, es kommt
-    auf den eigenen Verbrauch an.
+    - [trending] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
+    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
+    statt sie automatisch zu verlängern.
 
-    - [trending] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
-    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.'
+    - [niche_hook] Jahresabschluss-Check: Diese 4 Versicherungen solltest du im Dezember
+    kündigen'
 - date: '2026-11-09'
   weekday: Mon
   slot: 4
-  topic: 'Gas-Abschlag winterfest: So planst du die Heizsaison richtig'
-  pillar: strom-sparen
-  source: campaign:herbst-energiewechsel-2026
-  campaign: herbst-energiewechsel-2026
-  cta: Jetzt Strom- & Gaspreise vergleichen
+  topic: 'Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
+  pillar: versicherungen
+  source: campaign:kfz-wechselsaison-2027
+  campaign: kfz-wechselsaison-2027
+  cta: Jetzt Kfz-Versicherung vergleichen
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
-    höher aus als erwartet – der Schock kommt mit der Heizperiode.
+    - [evergreen] Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember
 
-    - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
-    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
+    - [niche_hook] Jahresabschluss-Check: Diese 4 Versicherungen solltest du im Dezember
+    kündigen
 
-    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
-    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
+    - [pain_point] Policen werden automatisch verlängert und Jahr für Jahr teurer
+    – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel.
 
-    - [viral_outlier] Preisgarantie Gas: So schützt du dich vor Preissprüngen'
+    - [news] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
+    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
+    statt sie automatisch zu verlängern.'
 - date: '2026-11-11'
   weekday: Wed
   slot: 5
-  topic: 'Smart Home: Diese Geräte sparen wirklich Strom'
-  pillar: strom-sparen
+  topic: 5 Fehler beim Mietwagen-Buchen und wie du sie vermeidest
+  pillar: mietwagen
   source: topics
-  campaign: herbst-energiewechsel-2026
-  cta: Jetzt Strom- & Gaspreise vergleichen
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
-    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
+    - [pain_point] Mietwagen-Buchungen mit hoher Kaution und versteckten Zusatzgebühren
+    verderben die Urlaubskasse – die Fallen liegen im Kleingedruckten.
 
-    - [evergreen] Energiekosten senken mit kleinen Veränderungen
+    - [viral_outlier] Spätsommer-Schnäppchen: Mietwagen jetzt günstig buchen
 
-    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
-    höher aus als erwartet – der Schock kommt mit der Heizperiode.
+    - [niche_hook] Dein Mietwagen im Ausland am besten buchen
 
-    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
-    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.'
+    - [evergreen] Mietwagen-Tarife im Vergleich für den Urlaub'
 - date: '2026-11-13'
   weekday: Fri
   slot: 6
-  topic: 'Heizöl kaufen: Wann ist der beste Zeitpunkt?'
-  pillar: strom-sparen
-  source: topics
-  campaign: herbst-energiewechsel-2026
-  cta: Jetzt Strom- & Gaspreise vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
-    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
-
-    - [trending] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
-    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
-
-    - [news] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu
-    an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.
-
-    - [trending] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise
-    neu an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.'
-- date: '2026-11-16'
-  weekday: Mon
-  slot: 7
-  topic: 'Seniorenkonto: Worauf es bei Kontoführung und Zugang ankommt'
+  topic: Die Vorteile von Online-Konten und wie du sie nutzt
   pillar: konto-karten
   source: topics
   campaign: null
   cta: Jetzt bei CHECK24 vergleichen
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
+
+    - [trending] Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der
+    genaue Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen
+    Monaten wieder fallen.
+
+    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
+    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.
+
+    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
+    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.
+
+    - [trending] Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
+    sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
+    inzwischen öfter als nur beim Kontowechsel.'
+- date: '2026-11-16'
+  weekday: Mon
+  slot: 7
+  topic: Wie du mit einem Smart-Plug Energie sparen kannst
+  pillar: strom-sparen
+  source: topics
+  campaign: winter-energie-2026-27
+  cta: Jetzt Strom- & Gaspreise vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
+    höher aus als erwartet – der Schock kommt mit der Heizperiode.
+
+    - [evergreen] Heizperiode vorbereiten im Spätsommer
+
+    - [niche_hook] Heizperiode vorbereiten im Spätsommer
+
+    - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
+    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.'
+- date: '2026-11-18'
+  weekday: Wed
+  slot: 8
+  topic: Günstige Gasanbieter für den Haushalt finden
+  pillar: strom-sparen
+  source: topics
+  campaign: winter-energie-2026-27
+  cta: Jetzt Strom- & Gaspreise vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [news] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu
+    an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.
+
+    - [trending] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise
+    neu an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.
+
+    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
+    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
+
+    - [news] Zwischen variablen Tarifen und Festpreisverträgen gibt es 2026 wieder
+    größere Preisunterschiede – pauschale Empfehlungen greifen hier zu kurz, es kommt
+    auf den eigenen Verbrauch an.'
+- date: '2026-11-20'
+  weekday: Fri
+  slot: 9
+  topic: 'Bargeldlos bezahlen im Ausland: Die besten Karten ohne Gebühren'
+  pillar: konto-karten
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
+    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.
+
+    - [evergreen] Kontoeröffnung mit günstigen Gebühren
+
+    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
+    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.
+
+    - [trending] Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der
+    genaue Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen
+    Monaten wieder fallen.'
+- date: '2026-11-23'
+  weekday: Mon
+  slot: 10
+  topic: 'Jahresabschluss-Check: Diese 4 Versicherungen solltest du im Dezember kündigen'
+  pillar: versicherungen
+  source: topics
+  campaign: kfz-wechselsaison-2027
+  cta: Jetzt Kfz-Versicherung vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [niche_hook] Jahresabschluss-Check: Diese 4 Versicherungen solltest du im Dezember
+    kündigen
+
+    - [evergreen] Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember
+
+    - [news] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
+    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
+    statt sie automatisch zu verlängern.
+
+    - [trending] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
+    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
+    statt sie automatisch zu verlängern.'
+- date: '2026-11-25'
+  weekday: Wed
+  slot: 11
+  topic: Dein Online-Banking und Kontomanagement optimieren
+  pillar: konto-karten
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
+    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.
 
     - [trending] Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
     sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
@@ -153,110 +246,24 @@ slots:
     genaue Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen
     Monaten wieder fallen.
 
-    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
-    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.
-
     - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
     vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.'
-- date: '2026-11-18'
-  weekday: Wed
-  slot: 8
-  topic: Wie du beim Mietwagenkauf Geld sparen kannst
-  pillar: mietwagen
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [evergreen] Mietwagen mit Elektroauto: So klappt die Fahrt in den Urlaub
-
-    - [pain_point] Mietwagen-Buchungen mit hoher Kaution und versteckten Zusatzgebühren
-    verderben die Urlaubskasse – die Fallen liegen im Kleingedruckten.
-
-    - [viral_outlier] Spätsommer-Schnäppchen: Mietwagen jetzt günstig buchen
-
-    - [evergreen] 10 Tipps für günstige Reisekreditkarten'
-- date: '2026-11-20'
+- date: '2026-11-27'
   weekday: Fri
-  slot: 9
-  topic: 'Sparziel sichtbar machen: So bleiben deine Vorsätze im Alltag'
-  pillar: konto-karten
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [evergreen] 10 Tipps für günstige Reisekreditkarten
-
-    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
-    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.
-
-    - [viral_outlier] Haushaltsbuch führen: App, Excel oder Papier?
-
-    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
-    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.'
-- date: '2026-11-23'
-  weekday: Mon
-  slot: 10
-  topic: 'Weihnachtsgeld clever umschulden: So nutzt du die Prämie für eine Sondertilgung'
-  pillar: konto-karten
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
-    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.
-
-    - [evergreen] 10 Tipps für günstige Reisekreditkarten
-
-    - [trending] Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
-    sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
-    inzwischen öfter als nur beim Kontowechsel.
-
-    - [trending] Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der
-    genaue Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen
-    Monaten wieder fallen.'
-- date: '2026-11-25'
-  weekday: Wed
-  slot: 11
-  topic: Stromkosten senken mit cleveren Haushaltsgeräten
+  slot: 12
+  topic: 'Wasserkosten senken: Wo im Haushalt das meiste verloren geht'
   pillar: strom-sparen
   source: topics
-  campaign: herbst-energiewechsel-2026
+  campaign: winter-energie-2026-27
   cta: Jetzt Strom- & Gaspreise vergleichen
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [evergreen] Energiekosten senken mit kleinen Veränderungen
+    - [evergreen] Heizperiode vorbereiten im Spätsommer
 
-    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
-    höher aus als erwartet – der Schock kommt mit der Heizperiode.
+    - [niche_hook] Heizperiode vorbereiten im Spätsommer
 
-    - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
-    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
+    - [news] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu
+    an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.
 
-    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
-    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.'
-- date: '2026-11-27'
-  weekday: Fri
-  slot: 12
-  topic: 'Router-Sicherheit: So schützt du dein Heimnetzwerk in 15 Minuten'
-  pillar: internet-dsl
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [pain_point] Funklöcher in Wohnung oder Homeoffice nerven täglich – oft liegt
-    es nicht am Anbieter, sondern an Router und WLAN-Aufbau.
-
-    - [niche_hook] Router-Position optimieren: Mehr Empfang ohne neues Gerät
-
-    - [evergreen] WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?
-
-    - [niche_hook] VPN für Zuhause: Brauchst du das wirklich?'
+    - [viral_outlier] Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe'
