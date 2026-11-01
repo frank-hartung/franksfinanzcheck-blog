@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 01.11.2026 12:53 (Europe/Berlin)  
+> Automatisch aktualisiert: 01.11.2026 19:27 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -12,18 +12,15 @@
 
 ## Kommende Beiträge
 
-### So, 01. November 2026
-- **18:00** ⏳ Energieeffizienz im Haushalt: 5 schnelle Spartricks — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/
 ### So, 08. November 2026
-- **07:00** ⏳ Bankgebühren senken: 7 Schritte zum günstigeren Konto — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/
-### Sa, 14. November 2026
 - **07:00** ⏳ Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/
+### Sa, 14. November 2026
+- **07:00** ⏳ Bankgebühren senken: 7 Schritte zum günstigeren Konto — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/
 ### So, 15. November 2026
-- **07:00** ⏳ ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/
+- **07:00** ⏳ Stromkosten senken: Clevere Haushaltsgeräte im Überblick — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/
 
 ## Zuletzt veröffentlicht
 

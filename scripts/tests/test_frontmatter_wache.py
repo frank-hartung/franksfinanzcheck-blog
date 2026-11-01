@@ -95,6 +95,64 @@ class DerAusfallVom2610Test(unittest.TestCase):
         self.assertEqual([], [b for b in pruefe(SAUBER) if b["schwere"] == w.BLOCKER])
 
 
+class DoppelterSchluesselToetetDenBauTest(unittest.TestCase):
+    """Der Fall vom 01.11.2026 (WF-990) – er hat `main` unbebaubar gemacht.
+
+    Beim Squash-Merge von PR #1004 entstand in einer Datei eine zweite
+    `description`-Zeile. Der Wächter sah sie, stufte sie aber als HINWEIS
+    ein („YAML nimmt still den letzten Wert") – für PyYAML richtig, für
+    Hugo falsch: Hugo bricht mit „mapping key already defined" ab. Der
+    Schritt blieb grün, der Merge ging durch, `main` war tot.
+
+    Die Lehre steht im zweiten Test: Die Doppelt-Prüfung ist die EINZIGE
+    Instanz, die den Fall sieht. Der YAML-Parser verschweigt ihn, weil er
+    den letzten Wert nimmt und den ersten still verwirft. Deshalb ist sie
+    BLOCKER und nicht Hinweis – ein Befund, der den Bau tötet, darf kein
+    Hinweis sein.
+    """
+
+    KAPUTT_DOPPELT = SAUBER.replace(
+        "draft: false", "draft: false\ndescription: \"zweite Angabe\"")
+
+    def test_ist_ein_blocker_nicht_bloss_ein_hinweis(self) -> None:
+        befunde = pruefe(self.KAPUTT_DOPPELT)
+        doppelt = [b for b in befunde if "steht doppelt" in b["meldung"]]
+        self.assertTrue(doppelt, "doppelter Schlüssel wird nicht erkannt")
+        self.assertEqual(w.BLOCKER, doppelt[0]["schwere"],
+                         "ein Duplikat toetet den Hugo-Bau – es ist ein Blocker")
+
+    def test_ohne_pyyaml_ebenso_scharf(self) -> None:
+        befunde = pruefe(self.KAPUTT_DOPPELT, yaml_modul="ohne")
+        doppelt = [b for b in befunde if "steht doppelt" in b["meldung"]]
+        self.assertTrue(doppelt, "ohne PyYAML ist der Fall unsichtbar")
+        self.assertEqual(w.BLOCKER, doppelt[0]["schwere"])
+
+    def test_der_yaml_parser_ist_hier_blind(self) -> None:
+        """Gegenprobe, die den Grund für die Einstufung festhält.
+
+        Wenn ein YAML-Parser diesen Text anstandslos parst, dann NUR, weil
+        er den ersten Wert still wegwirft. Genau darum darf man sich bei
+        dieser Klasse nicht auf ihn verlassen – und genau darum steht die
+        Prüfung ohne Parser (Schicht 1).
+        """
+        try:
+            import yaml  # noqa: F401
+        except ImportError:  # pragma: no cover – nackter Runner
+            self.skipTest("PyYAML fehlt")
+        import yaml
+        fm = self.KAPUTT_DOPPELT.split("---\n")[1]
+        daten = yaml.safe_load(fm)          # kein Fehler …
+        # … und der erste Wert ist still weg. Das ist der Grund, warum der
+        # Wächter hier NICHT auf den Parser baut.
+        self.assertEqual("zweite Angabe", daten["description"])
+        self.assertEqual(2, fm.count("description:"),
+                         "hier müssen zwei Angaben im Text stehen – sonst "
+                         "belegt der Test nichts")
+        self.assertEqual(2, sum(1 for z in self.KAPUTT_DOPPELT.splitlines()
+                                if z.startswith("description:")),
+                         "und der Scanner muss genau zwei Zeilen sehen")
+
+
 class HeilungTest(unittest.TestCase):
     """Die Heilung muss beweisbar verlustfrei sein."""
 
