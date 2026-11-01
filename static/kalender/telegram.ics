@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:telegram:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest
  -du-richtig:nutzen:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261101T182722Z
+DTSTAMP:20261101T225419Z
 DTSTART:20261108T060000Z
 DTEND:20261108T061500Z
 SUMMARY:Telegram (Kanal): Wärmepumpe vs. Gasheizung 2026: So entscheid
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstiger
  en-konto:nutzen:2026-11-14@franksfinanzcheck.de
-DTSTAMP:20261101T182722Z
+DTSTAMP:20261101T225419Z
 DTSTART:20261114T060000Z
 DTEND:20261114T061500Z
 SUMMARY:Telegram (Kanal): Bankgebühren senken: 7 Schritte zum günstige
@@ -38,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im
  -ueberblick:nutzen:2026-11-15@franksfinanzcheck.de
-DTSTAMP:20261101T182722Z
+DTSTAMP:20261101T225419Z
 DTSTART:20261115T060000Z
 DTEND:20261115T061500Z
 SUMMARY:Telegram (Kanal): Stromkosten senken: Clevere Haushaltsgeräte 
