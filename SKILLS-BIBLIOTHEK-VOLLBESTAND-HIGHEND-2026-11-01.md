@@ -2,8 +2,19 @@
 
 > Status: umgesetzt, gemessen, geprüft. Enthält den Vollbestand (53) **und** den
 > Rückbau um `sms`/`paywalls`/`aso` am selben Tag – beide Zahlen stehen unten,
-> der Rückbau ist die gültige: 62 Skill-Ordner, davon 50 aus
-> `coreyhaines31/marketingskills` und 6 aus den übrigen Quellen. Betriebsanleitung: `docs/ANLEITUNG-SKILLS.md`.
+> der Rückbau ist die gültige: **64** Skill-Ordner, davon **57** aus sechs
+> Fremd-Quellen (50 `coreyhaines31/marketingskills`, 3 `anthropics/skills` und
+> je 1 aus `Panniantong/Agent-Reach`, `emilkowalski/skills`,
+> `Leonxlnx/taste-skill`, `pbakaus/impeccable`) und **7** repo-eigen (`ff-*`).
+> Betriebsanleitung: `docs/ANLEITUNG-SKILLS.md`.
+>
+> **Nachtrag 01.11.2026, abends:** Die Zahlen dieses Berichts stammen aus dem
+> Lauf am Vormittag (62/56/6, 11.790 Tokens). Seitdem kamen der
+> Themen-Portfolio-Schnitt, das eigene `ff-lektorat` und der geerbte
+> `animate`-Skill dazu – der gültige Stand steht in
+> `SKILLS-PORTFOLIO-THEMEN-SIEGEL-LEKTORAT-HIGHEND-2026-11-01.md`. Die Tabelle
+> unten ist auf diesen Stand nachgezogen, damit sie nicht als zweite Wahrheit
+> stehen bleibt; die Erzählung des Tages ist unverändert historisch.
 > Vorgänger mit den Zahlen des Umbaus: `SKILLS-UMBAU-UND-LIZENZ-NACHWEIS-HIGHEND-2026-11-01.md`.
 
 ## Der Auftrag und was er ausgelöst hat
@@ -32,15 +43,30 @@ nützlich ist, sondern was sie dauerhaft kostet.
 
 | Befund | vorher | Vollbestand (53) | **gültig nach Rückbau** |
 |---|---|---|---|
-| Skill-Ordner unter `.claude/skills/` | 24 | 65 | **62** |
-| davon Fremd-Skills | 18 | 59 | **56** |
-| davon repo-eigen (`ff-*`) | 6 | 6 | **6** |
-| Einträge in `skills-lock.json` | 18 | 59 | **56** |
-| Dateien im Skill-Baum | ~250 | 687 | **667** |
-| Lizenztexte in den Fremd-Ordnern | 18 | 59 | **56** |
-| Summe aller `description` | 16.198 Zeichen (≈ 4.050 Tokens) | 49.142 · 48,0 KB · ≈ 12.285 Tokens | **47.162 Zeichen · 46,1 KB · ≈ 11.790 Tokens** |
+| Skill-Ordner unter `.claude/skills/` | 24 | 65 | **62** → **64** |
+| davon Fremd-Skills | 18 | 59 | **56** → **57** |
+| davon repo-eigen (`ff-*`) | 6 | 6 | **6** → **7** |
+| Einträge in `skills-lock.json` | 18 | 59 | **56** → **57** |
+| Dateien im Skill-Baum | ~250 | 687 | **667** → **671** |
+| Lizenztexte in den Fremd-Ordnern | 18 | 59 | **56** → **57** |
+| Summe aller `description` | 16.198 Zeichen (≈ 4.050 Tokens) | 49.142 · 48,0 KB · ≈ 12.285 Tokens | **46.272 Zeichen · 45,2 KB · ≈ 11.568 Tokens** |
 | Beschreibungen über dem Limit 1.024 | 0 | 0 (längste: `social` 1.021) | **0** |
-| `skills_vertrag.py` | 0 Befunde, 2 Warnungen | 0 Befunde, 3 Warnungen | **0 Befunde, 3 Warnungen** (K8 ×2, K10 ×1) |
+| `skills_vertrag.py` | 0 Befunde, 2 Warnungen | 0 Befunde, 3 Warnungen | **0 Befunde, 0 Warnungen** (K8 geheilt, K10 geheilt) |
+
+Die letzte Spalte führt beide Stände: links die Zahl des Vormittagslaufs,
+rechts der heute gemessene. Zur Ehrlichkeit der Herkunft: Die 62/56/6 und die
+47.162 Zeichen (≈ 11.790 Tokens) stammen aus dem Vormittagslauf, dessen Baum in
+diesem Branch nicht mehr existiert (die Historie wurde am selben Tag neu
+aufgebaut). Sie sind hier **nicht nachrechenbar** und stehen deshalb als
+Protokoll, nicht als Messwert.
+
+Was nachrechenbar ist: heute 64 Ordner, 57 Fremd, 7 eigen, 46.272 Zeichen
+(≈ 11.568 Tokens). Die Differenz von −890 Zeichen gegenüber dem Protokoll lässt
+sich nicht auf einzelne Skills zurückführen – zwei Skills kamen hinzu
+(`ff-lektorat` 490, `animate` 472 Zeichen), die Gegenbuchung liegt in den
+Fremd-Beschreibungen, ohne dass ich sie hier pro Datei belegen könnte. Wer die
+Dauerlast beurteilen will, nimmt die **11.568**; wer die Entscheidung von
+damals nachlesen will, die 11.790.
 
 ## Rückbau am selben Tag: `sms`, `paywalls`, `aso`
 
@@ -64,7 +90,8 @@ data/skill_lizenzen.json   → 3 Einträge gelöscht (sonst K6-Warnung „Regist
 
 Wirkung, gerechnet in Tokens: **—495 Tokens Dauerlast** (`aso` 115, `paywalls`
 192, `sms` 187). Ehrlich dazu: Das ist der kleinste Teil des Preises. Der große
-Posten bleibt die Entscheidung für die Bibliothek selbst (~11.790 Tokens), und
+Posten bleibt die Entscheidung für die Bibliothek selbst (~11.790 Tokens am
+Vormittag, seit dem Abendlauf 11.568), und
 die drei waren die einzigen mit einem **sachlichen** Grund zum Gehen – alle
 anderen haben mit Blog, Suche, Text oder Auslieferung zu tun. Wer weiter sparen
 will, muss die Frage anders stellen (welche Themen der Blog überhaupt bedient),
@@ -110,7 +137,8 @@ sieht es nicht.
 ## Zwei neue Prüfungen (K9, K10) statt einer Notiz
 
 **K9 – Beschreibungs-Budget.** Die Summe aller `description`-Zeichen muss unter
-`BESCHREIBUNG_KB_MAX = 56 KB` bleiben (heute 46,1 KB ≈ 11.790 Tokens). Ein
+`BESCHREIBUNG_KB_MAX = 56 KB` bleiben (am 01.11. vormittags 46,1 KB ≈ 11.790
+Tokens, abends 45,2 KB ≈ 11.568 Tokens). Ein
 Befund ist nicht die einzelne lange Beschreibung (das ist K2), sondern die
 Summe: Wer sie reißt, entscheidet über Vorladelast jeder Session, nicht über
 Dateien. Die Grenze ist bewusst **heute** gesetzt und nicht großzügig – sie ist
@@ -133,29 +161,30 @@ Zeile – nur der Kommentar sagt jetzt K1–K10.
 ## Nachweis (alles in diesem Lauf ausgeführt)
 
 ```
-python3 scripts/skills_vertrag.py             → 62 Skills, 0 Befunde, 3 Warnungen
-python3 scripts/skills_vertrag.py --selftest  → OK (19 eingefrorene Fälle)
+python3 scripts/skills_vertrag.py             → 64 Skills, 0 Befunde, 0 Warnungen
+python3 scripts/skills_vertrag.py --selftest  → OK (21 eingefrorene Fälle)
 npm run test:skills                           → OK (37 Tests, 1 skipped)
 npm run trigger:check                         → 98 Workflows, 0 Befunde
-python3 scripts/skript_syntax_wache.py        → 623 Dateien, grün
+python3 scripts/skript_syntax_wache.py        → 624 Dateien, grün
 ```
 
-Die drei Warnungen sind keine offenen Fehler, sondern der Stand:
+Der Stand der drei Warnungen von damals – **beide geheilt**, jeweils an der
+Ursache statt an der Meldung:
 
-* **K8 ×2** – `scripts/skills_vertrag.py` und `data/skill_lizenzen.json` stehen
-  nicht in `FEST`/Siegel. Zeichnen ist ein Betreiberakt (und
-  `integrity_guard.py --add` verlangt einen eigenen, ruhigen Lauf) – hier
-  absichtlich **nicht** getan, damit keine Unterschrift unter einem Stand
-  entsteht, den dieser Lauf selbst verändert hat.
-* **K10 ×1** – die sechs `copy-editing`-Dateien. Dauerhaft gehört die deutsche
-  Ausgabe in einen `ff-*`-Skill; solange sie im Fremd-Ordner liegt, ist die
-  Warnung die Quittung dafür.
+* **K8 ×2 – geheilt.** `scripts/skills_vertrag.py` und
+  `data/skill_lizenzen.json` stehen seit dem Abendlauf in `FEST` und sind
+  signiert (der Betreiberakt, der hier bewusst offenblieb, ist nachgeholt).
+* **K10 ×1 – geheilt.** Die sechs deutschen `copy-editing`-Dateien liegen nicht
+  mehr im Fremd-Ordner, sondern als eigenes `ff-lektorat` im Haus. Damit
+  überlebt die Betreiberarbeit jedes `npx skills update`, und der Fremd-Ordner
+  ist wieder der des Upstream – bytegleich, wie es sein soll.
 
 ## Grenzen, die dazugehören
 
-1. **Der Preis ist dauerhaft.** 11.790 Tokens Beschreibung liegen ab jetzt in
-   jeder Session. Das ist die bewusste Entscheidung von heute, keine Messung,
-   die sich von selbst erledigt; K9 hält sie sichtbar und begrenzt.
+1. **Der Preis ist dauerhaft.** 11.568 Tokens Beschreibung (Stand Abend;
+   vormittags 11.790) liegen ab jetzt in jeder Session. Das ist die bewusste
+   Entscheidung von heute, keine Messung, die sich von selbst erledigt; K9 hält
+   sie sichtbar und begrenzt.
 2. **Der Bestand ist nicht versioniert abgesichert.** K4 liest `skills-lock.json`,
    die 53 Ordner liegen als Dateien im Repo. `npx skills update` ist damit
    jederzeit in der Lage, den Baum zu verändern – der Git-Diff ist der einzige
@@ -163,7 +192,7 @@ Die drei Warnungen sind keine offenen Fehler, sondern der Stand:
 3. **Die zwölf sind nicht mehr „unsere".** Wo früher deutsche Ergänzungen im
    `copy-editing`-Ordner lagen, liegt jetzt Upstream-Text; die deutsche Fassung
    steht daneben und ist mit jedem Update erneut zu retten.
-4. **Trefferqualität ist nicht gemessen.** 62 Skills mit teils überlappenden
+4. **Trefferqualität ist nicht gemessen.** 64 Skills mit teils überlappenden
    Beschreibungen (`copywriting` / `copy-editing` / `ff-marke-text`) können
    falsch auslösen. Die `skill-creator`-Auswertung wäre der nächste Schritt –
    nicht Teil dieses Auftrags.
