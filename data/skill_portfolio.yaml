@@ -1,0 +1,345 @@
+# ============================================================
+#  SKILL-PORTFOLIO – welches Fremd-Skill dient welchem Thema?
+#
+#  WARUM DIESE DATEI (01.11.2026)
+#  ------------------------------
+#  Am 01.11.2026 wurde die Fremd-Bibliothek auf 53 Skills erweitert, drei
+#  wieder entfernt und danach gefragt: „Wenn 11.790 Tokens zu teuer sind,
+#  welche Themen bedient der Blog überhaupt?" Die Frage war richtig, der
+#  Ort für die Antwort fehlte. Ohne Antwort zahlt jede Session die
+#  Beschreibung jedes Skills, auch der elf, die hier kein Thema haben –
+#  und niemand kann sagen, welcher Skill gehen darf.
+#
+#  Diese Datei ist dieser Ort. Sie ist die EINE Zuordnung:
+#    · Produktion (`themen`) – ein oder mehrere Blog-Themen je Skill
+#    · Ausschluss (`ausgeschlossen`) – mit Grund, Entscheidung und Frist,
+#      also nachprüfbar statt „brauchen wir nicht"
+#  Die Themen-IDs sind NICHT neu erfunden: sie stammen aus
+#  `data/themenwelten.json` (die sechs Themenwelten der Website) plus zwei
+#  Redaktions-Achsen, die der Blog nachweislich bedient (Suche/KI,
+#  Werkzeuge). Geprüft von `scripts/skills_portfolio.py` (P1–P6).
+#
+#  Kern-Regel: Ein Skill, das weder unter `themen` noch unter
+#  `ausgeschlossen` steht, ist ein Befund (P1) – es zahlt Dauerlast ohne
+#  Zweck. Ein Skill, dessen Thema keinen Belegpfad hat, ist ebenfalls ein
+#  Befund (P2): das Thema wird dann nicht bedient, sondern behauptet.
+#
+#  Aufruf:  python3 scripts/skills_portfolio.py  |  npm run skills:portfolio
+# ============================================================
+
+schema: 1
+
+# --- Themen des Blogs, jedes mit einem Beleg im Baum ---------------------
+# `quelle` ist der Pfad, der die Behauptung „dieses Thema existiert" trägt.
+# Fehlt die Datei, prüft P2 das Thema als ungedeckt und meldet es.
+#
+# `art` beantwortet eine Frage, die P4 sonst falsch stellt:
+#   inhalt  – eine der sechs Themenwelten. Sie wird von der Content-Engine
+#             mit Artikeln bedient (140 Dateien, Engine + Reserve), NICHT von
+#             einem Marketing-Skill. Ein „Thema ohne Marketing-Skill" ist hier
+#             der Normalfall, kein Loch; der Beleg ist die Artikelzahl (P4).
+#   kanal   – Redaktions-Achsen (Suche, Text, Werkzeuge, Verbreitung,
+#             Messung, Wettbewerb). Hier MUSS ein Skill hängen, sonst wird
+#             die Achse behauptet.
+# Die Trennlinie ist die eigentliche Antwort auf „welche Themen bedient der
+# Blog": sechs Inhaltswelten, sechs Kanäle – und nur für die Kanäle kauft
+# der Blog Fremd-Skills ein.
+themen:
+  strom-sparen:
+    art: inhalt
+    name: "Strom & Gas sparen"
+    quelle: "content/pillar/strom-sparen"
+  internet-dsl:
+    art: inhalt
+    name: "Internet, DSL & Handy"
+    quelle: "content/pillar/internet-dsl"
+  versicherungen:
+    art: inhalt
+    name: "Versicherungen & Vorsorge"
+    quelle: "content/pillar/versicherungen"
+  konto-karten:
+    art: inhalt
+    name: "Konto, Karten & Zinsen"
+    quelle: "content/pillar/konto-karten"
+  frugalismus:
+    art: inhalt
+    name: "Frugalismus & Budget"
+    quelle: "content/pillar/frugalismus"
+  mietwagen:
+    art: inhalt
+    name: "Mietwagen & Reisen"
+    quelle: "content/pillar/mietwagen"
+  suche-und-ki-sichtbarkeit:
+    art: kanal
+    name: "Gefunden werden: Google, KI-Antworten, Verlinkung"
+    quelle: "docs/ANLEITUNG-GEO-PROTOKOLL.md"
+  text-und-redaktion:
+    art: kanal
+    name: "Text: schreiben, prüfen, Stimme halten"
+    quelle: "content/methodik"
+  werkzeuge-und-oberflaeche:
+    art: kanal
+    name: "Werkzeuge und Oberfläche der Website"
+    quelle: "content/werkzeuge"
+  verbreitung:
+    art: kanal
+    name: "Verbreitung: Newsletter, Pinterest, Social, Presse"
+    quelle: "newsletter-worker"
+  bestand-und-messung:
+    art: kanal
+    name: "Bestand und Messung: Zahlen, die tragen"
+    quelle: "data/kennzahlen_register.yaml"
+  wettbewerb:
+    art: kanal
+    name: "Wettbewerb und Positionierung"
+    quelle: "KONKURRENZANALYSE-ZEIT-ONLINE-2026-09-28.md"
+
+# --- Kanäle, die es wirklich gibt (Belegpfad statt Behauptung) -----------
+# Ein Skill, das einen Kanal bedient, muss an einem dieser Pfade hängen –
+# sonst arbeitet er für einen Kanal, den der Blog nicht hat (Wachstums-
+# bibliothek: Community, Events, Influencer …).
+kanaele:
+  website: "layouts"
+  newsletter: "newsletter-worker"
+  pinterest: "scripts/pinterest_ziele.py"
+  mastodon: "scripts/mastodon_manual_post.py"
+  instagram: "scripts/social_video.py"
+  suchmaschine: "scripts/gsc_abdeckung.py"
+  presse: "content/presse"
+  blog: "content/posts"
+
+produktion:
+  suche-und-ki-sichtbarkeit:
+  - skill: ai-seo
+    rolle: "Zitierbarkeit in KI-Antworten (AEO/GEO) – Kernauftrag des Blogs seit 09/2026"
+    kanaele: [suchmaschine, website]
+  - skill: seo-audit
+    rolle: "technische und On-Page-Prüfung der 105 Artikel und 6 Pillars"
+    kanaele: [suchmaschine, website]
+  - skill: schema
+    rolle: "JSON-LD (Article, FAQ, Breadcrumb) – Rich Results und Entitäten"
+    kanaele: [website]
+  - skill: site-architecture
+    rolle: "Pillar-/Cluster-Struktur, interne Verlinkung, URL-Hygiene"
+    kanaele: [website]
+  - skill: programmatic-seo
+    rolle: "Vorlagen-Seiten für Tarif-/Vergleichsmuster statt Handarbeit"
+    kanaele: [website, suchmaschine]
+  - skill: link-building
+    rolle: "Backlinks für YMYL-Finanzthemen (Ohne-Fremdmessung-Sperre beachten)"
+    kanaele: [suchmaschine, presse]
+  - skill: content-strategy
+    rolle: "Cluster- und Themenplanung über die sechs Welten – Vorlage für data/topics.yaml und die Reserve"
+    kanaele: [blog, website]
+  text-und-redaktion:
+  - skill: copywriting
+    rolle: "neue Texte: Artikel-Einstieg, Landingpages, Werkzeug-Beiwerk"
+    kanaele: [blog, website]
+  - skill: copy-editing
+    rolle: "Endredaktion und KI-Tell-Entfernung – die deutsche Fassung liegt daneben"
+    kanaele: [blog]
+  - skill: marketing-psychology
+    rolle: "Leserführung ohne Manipulation: Verlustaversion, Anker, Defaults"
+    kanaele: [blog]
+  werkzeuge-und-oberflaeche:
+  - skill: cro
+    rolle: "Conversion auf Werkzeugseiten und Artikel-Abschluss (Newsletter-Anmeldung)"
+    kanaele: [website, newsletter]
+  - skill: popups
+    rolle: "Newsletter-Erfassung im Artikel – mit Consent-Grenze des Hauses"
+    kanaele: [newsletter, website]
+  - skill: impeccable
+    rolle: "Design-Politur und Kritik der Oberfläche (liest PRODUCT.md/DESIGN.md)"
+    kanaele: [website]
+  - skill: design-taste-frontend
+    rolle: "Anti-Slop-Disziplin bei neuen Bausteinen"
+    kanaele: [website]
+  - skill: frontend-design
+    rolle: "eigene visuelle Identität statt Template-Optik"
+    kanaele: [website]
+  - skill: webapp-testing
+    rolle: "Playwright-Prüfung der Werkzeuge – Bedienung, nicht nur Rendering"
+    kanaele: [website]
+  - skill: image
+    rolle: "Cover und Artikelbilder (CLS-Gate, Alt-Text-Standard)"
+    kanaele: [website, blog]
+  - skill: video
+    rolle: "Kurzvideos aus Artikeln (scripts/social_video.py) – Instagram/Reels, kein YouTube-Kanal"
+    kanaele: [instagram]
+  - skill: animate
+    rolle: "Bewegung in der Oberfläche bauen (Transition, Einblendung) – Motion, die einen Zweck hat"
+    kanaele: [website]
+  verbreitung:
+  - skill: social
+    rolle: "Mastodon- und Instagram-Texte, Repurposing der Artikel"
+    kanaele: [mastodon, instagram]
+  - skill: public-relations
+    rolle: "Presse und Zitatfähigkeit für YMYL-Themen"
+    kanaele: [presse]
+  - skill: emails
+    rolle: "Newsletter-Sequenzen (Willkommen, Präferenzen, Rückgewinnung)"
+    kanaele: [newsletter]
+  bestand-und-messung:
+  - skill: analytics
+    rolle: "Messplan, Ereignisse, UTM – Grundlage jeder Aussage über Wirkung"
+    kanaele: [website, newsletter]
+  - skill: conversion-tracking
+    rolle: "Affiliate-Klicks und Newsletter-Anmeldung messbar machen"
+    kanaele: [website]
+  - skill: attribution
+    rolle: "welcher Kanal trägt – Selbstauskunft statt Dashboard-Glauben"
+    kanaele: [website, newsletter]
+  - skill: ab-testing
+    rolle: "Änderungen an Titeln/Werkzeugen falsifizierbar prüfen"
+    kanaele: [website]
+  wettbewerb:
+  - skill: competitors
+    rolle: "Vergleichs- und Alternativseiten (Finanztip, Zeit Online)"
+    kanaele: [suchmaschine, website]
+  - skill: competitor-profiling
+    rolle: "Profil und Positionierung der Wettbewerber"
+    kanaele: [suchmaschine]
+  - skill: reverse-engineer-marketing
+    rolle: "deren Wachstumsweg nachvollziehen statt raten"
+    kanaele: [suchmaschine]
+
+# --- Ausgeschlossen: bezahlt keine Dauerlast mehr -----------------------
+# Jeder Eintrag trägt `grund` (warum nicht), `entscheidung` (was passiert)
+# und `faellig` (wann neu entschieden wird). Ohne Frist wäre der Ausschluss
+# eine stille Abschaffung – dieselbe Regel wie bei den Lizenz-Ausnahmen (K6).
+ausgeschlossen:
+  # Geschäftsmodell eines SaaS: der Blog verkauft keine Software.
+  ads:
+    grund: "bezahlte Kampagnen (Google/Meta/LinkedIn) – der Blog hat kein Werbebudget und keine Paid-Konten"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  ad-creative:
+    grund: "Anzeigentexte in Massen – ohne Anzeigenkonten gegenstandslos"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  offers:
+    grund: "Angebotsbau für ein Produkt, das verkauft wird – hier gibt es kein Produkt, nur Rat"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  pricing:
+    grund: "Preisgestaltung für ein Abo/eine Lizenz – kein Abo, keine Lizenz"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  paywalls:
+    grund: "Zahlwand in einer App – der Blog ist offen und bleibt es"
+    entscheidung: "am 01.11.2026 entfernt"
+    faellig: "2027-06-30"
+  sales-enablement:
+    grund: "Vertriebsmaterial für ein Verkaufsteam – es gibt kein Verkaufsteam"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  prospecting:
+    grund: "B2B-Liste potenzieller Kunden – der Blog verkauft nicht an Firmen"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  cold-email:
+    grund: "Kaltakquise an Firmen – ohne Verkauf gegenstandslos; zumal UWG §7 hier eine rote Linie ist"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  revops:
+    grund: "Lead-Lebenszyklus und CRM-Übergabe – es gibt keinen Vertriebstrichter"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  product-marketing:
+    grund: "Produkt-Kontextdokument für ein Produkt, das es nicht gibt"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  marketing-plan:
+    grund: "Gesamt-Marketingplan für Kunden/Unternehmen – der Blog ist ein Redaktionsbetrieb mit eigenem Fahrplan (data/editorial_calendar.yaml)"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  launch:
+    grund: "Produkt- und Feature-Launch – der Blog startet keine Produkte"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  onboarding:
+    grund: "Aktivierung nach Registrierung in einer App – hier gibt es Konten nur für den Newsletter"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  signup:
+    grund: "Registrierungsstrecke einer App – die Newsletter-Anmeldung deckt `cro` und `popups` ab"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  # Plattform: es gibt keine App und keine Telefonliste.
+  aso:
+    grund: "App-Store-/Play-Listing – der Blog ist eine Website, keine App"
+    entscheidung: "am 01.11.2026 entfernt"
+    faellig: "2027-06-30"
+  sms:
+    grund: "SMS/MMS/WhatsApp an eine Telefonliste – es gibt keine Nummernliste und keine Einwilligung dafür"
+    entscheidung: "am 01.11.2026 entfernt"
+    faellig: "2027-06-30"
+  # Wachstumsbibliothek: Kanäle, die der Blog nicht hat.
+  marketing-ideas:
+    grund: "Ideen-Bibliothek für SaaS-Marketing – Leitfrage „was sollen wir posten", hier trägt der Redaktionsplan"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  marketing-council:
+    grund: "simulierter Marketing-Beirat – Entscheidungen dieses Repos begründet der Bericht, nicht ein Gremium"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  marketing-loops:
+    grund: "selbstlaufende Marketing-Schleifen – die Automatik dieses Repos ist die Content-Engine, nicht ein Loop-Baukasten"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  co-marketing:
+    grund: "Partnerkampagnen mit Fremdfirmen – für einen YMYL-Finanzblog ein Transparenzrisiko ohne Gegenwert"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  community-marketing:
+    grund: "Discord-/Slack-Community – es gibt keine Community-Plattform"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  events:
+    grund: "Webinare, Konferenzen, Sponsoring – kein Veranstaltungsformat im Betrieb"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  influencer-marketing:
+    grund: "Creator-Kooperationen – Kennzeichnungspflicht und Glaubwürdigkeit kollidieren mit der Offenlegung des Hauses"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  referrals:
+    grund: "Empfehlungsprogramm mit Prämie – rechtlich heikel und ohne Produkt nicht sinnvoll"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  lead-magnets:
+    grund: "PDF-Köder für E-Mail-Erfassung – der Blog hat Werkzeuge; ein zweiter Köder wäre Dublette"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  free-tools:
+    grund: "Planung kostenloser Marketing-Werkzeuge – die zehn Werkzeuge stehen bereits, geplant wird im Werkbank-Register"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  churn-prevention:
+    grund: "Kündigungsstrecke und Rückgewinnung für Abos – es gibt kein Abo"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  customer-research:
+    grund: "Kundeninterviews und Umfragen – Rückmeldung läuft über Kommentare, Presse und GSC-Daten"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  directory-submissions:
+    grund: "Einträge in Startup-/SaaS-Verzeichnisse – kein Startup, kein SaaS"
+    entscheidung: "nicht installiert"
+    faellig: "2027-03-31"
+  # Werkzeuge des Agenten, nicht des Blogs.
+  agent-reach:
+    grund: "Recherche-Werkzeug des Agenten – LEBT, wird aber nicht wie ein Themenskill budgetiert (kein Beschreibungs-Beitrag)"
+    entscheidung: "bleibt installiert, nicht Teil des Themen-Budgets (Ausnahme von P3)"
+    faellig: "2027-03-31"
+  skill-creator:
+    grund: "Handwerk am Regelwerk selbst – LEBT, wird aber nicht wie ein Themenskill budgetiert (kein Beschreibungs-Beitrag)"
+    entscheidung: "bleibt installiert, nicht Teil des Themen-Budgets (Ausnahme von P3)"
+    faellig: "2027-03-31"
+
+# --- Grenzen des Budgets ------------------------------------------------
+# `budget_kb` ist die Summe der Beschreibungen für Skills mit Thema. K9 in
+# scripts/skills_vertrag.py begrenzt die Gesamtsumme; P3 begrenzt den Teil,
+# der einem Thema dient. Zwei Grenzen, zwei Bedeutungen – und die zweite
+# ist die, die sagt: so viel Themenbetrieb leisten wir uns.
+budget_kb: 56.0

@@ -203,6 +203,18 @@ FEST = {
     # Marken-Lockup & Artefakte (12.08. Runde 2: Logo = Blog-weite Marke):
     "scripts/bake_brand.py",
     "scripts/brand_guard.py",
+    # Regelkern der Skills (01.11.2026, K8 aus skills_vertrag.py): Die Wache
+    # entscheidet, ob der Kern sein Budget haelt und ob jedes vendored Skill
+    # lizenziert ist; das Register ist ihre Wahrheit. Beide waren bis heute
+    # ungezeichnet – wer sie tauscht, tauscht den Bestand lautlos. Der Pfad
+    # steht zuerst in FEST, dann zeichnet `--add` (fail-closed seit 16.10.).
+    "scripts/skills_vertrag.py",
+    "data/skill_lizenzen.json",
+    # Themen-Portfolio (01.11.2026, P1–P7 aus skills_portfolio.py): Es
+    # entscheidet, welches Fremd-Skill Dauerlast zahlen darf und welches nicht.
+    # Ohne Siegel ist „welche Themen bedient der Blog" wieder verhandelbar.
+    "scripts/skills_portfolio.py",
+    "data/skill_portfolio.yaml",
     # Lesbarkeits-Heiler (07.10.2026, WACHE-609): Er bewegt das harte
     # Publish-Kriterium `readability_check.NEW_FLESCH_MIN` (60,0) und ist
     # damit eine Schwellen-Wache wie publikations_vertrag.py – wer hier
