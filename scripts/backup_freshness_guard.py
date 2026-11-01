@@ -31,8 +31,11 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import io
 import json
+import os
 import sys
+from contextlib import redirect_stdout
 import urllib.error
 import urllib.request
 
@@ -196,6 +199,25 @@ def bericht(ergebnis: dict) -> str:
 # ------------------------------------------------------------------
 # Selbsttest – 12 Fälle, offline, kein Netz
 # ------------------------------------------------------------------
+def _main_gefangen(argumente: list[str], umgebung: dict | None = None) -> tuple[str, int]:
+    """Ruft `main` mit leerer Umgebung auf und fängt die Ausgabe ein.
+
+    Nur für den Selbsttest: Der Aufruf darf kein Netz berühren (ohne Token
+    endet er fail-closed) und keine echten Workflow-Befehle ausgeben.
+    """
+    puffer = io.StringIO()
+    alt = dict(os.environ)
+    try:
+        os.environ.clear()
+        os.environ.update(umgebung or {})
+        with redirect_stdout(puffer):
+            rc = main(argumente)
+    finally:
+        os.environ.clear()
+        os.environ.update(alt)
+    return puffer.getvalue(), rc
+
+
 def selbsttest() -> int:
     fehler = []
     jetzt = dt.datetime(2026, 10, 15, 12, 0, tzinfo=dt.timezone.utc)
@@ -303,32 +325,103 @@ def selbsttest() -> int:
     if r["urteil"] != "fehler" or len(r["befunde"]) != 2:
         fehler.append(f"F11: leeres Repo nicht korrekt: {r}")
 
+    # F12 (01.11.2026, WF-9E5A / #923): Die Eingabe-Auflösung lieferte mit
+    # `--repo` OHNE Positionsargument immer ein leeres Ziel. Genau so rufen
+    # Anleitung und `npm run backup:frische` die Wache auf: Fehlalarm über eine
+    # Eingabe, die da war. Geprüft wird die reine Funktion (ohne Netz), damit
+    # die Klasse dauerhaft zu ist.
+    umg_mit = {"BACKUP_REPO": "frank-hartung/franksfinanzcheck-backup", "ZIEL_REPO": "alt/ziel"}
+    faelle = (
+        (("frank-hartung/franksfinanzcheck-backup", ""), "frank-hartung/franksfinanzcheck-backup"),
+        (("", "frank-hartung/franksfinanzcheck-backup"), "frank-hartung/franksfinanzcheck-backup"),
+        (("flag/gewinnt", "position/verliert"), "flag/gewinnt"),
+        (("", ""), "frank-hartung/franksfinanzcheck-backup"),
+    )
+    for (flag, position), soll in faelle:
+        ist = repo_bestimmen(flag, position, umg_mit)
+        if ist != soll:
+            fehler.append(f"F12: repo_bestimmen({flag!r}, {position!r}) = {ist!r}, erwartet {soll!r}")
+    if repo_bestimmen("", "", {"ZIEL_REPO": "alt/ziel"}) != "alt/ziel":
+        fehler.append("F12: ZIEL_REPO-Rückfall (alter Variablenname) greift nicht")
+    if repo_bestimmen("", "", {}) != "":
+        fehler.append("F12: ohne jede Angabe muss leer herauskommen (fail-closed)")
+    # Die Kommandozeile selbst: `--repo` ohne Positionsargument muss ankommen.
+    # Gemessen am Argumentparser, ohne Netz – der Token ist absichtlich leer.
+    aus, rc = _main_gefangen(["--repo", "frank-hartung/franksfinanzcheck-backup", "--json"])
+    if "Kein gültiges Backup-Repo angegeben" in aus:
+        fehler.append("F12: --repo ohne Positionsargument gilt weiterhin als „kein Ziel“ (Fehlalarm #923)")
+    if rc != 1 or "Kein Token angegeben" not in aus:
+        fehler.append(f"F12: ohne Token muss die Wache fail-closed mit Token-Hinweis enden (rc={rc})")
+    # Token-Reihenfolge: das Ziel-Secret vor dem Lauf-Token.
+    if token_bestimmen({"GITHUB_TOKEN": "lauf", "BACKUP_REPO_TOKEN": "ziel"}) != "ziel":
+        fehler.append("F12: BACKUP_REPO_TOKEN muss dem allgemeinen Lauf-Token vorgehen")
+
     if fehler:
         for e in fehler:
             print(f"❌ {e}")
         print(f"🛑 backup_freshness_guard-Selbsttest: {len(fehler)} Abweichung(en).")
         return 1
-    print("✅ backup_freshness_guard-Selbsttest: 12 Fallgruppen – frisch, gelb, rot, Grenzen, 401/404/Netz, Eingaben, Datum, Entwürfe, mehrere Releases, leeres Repo.")
+    print("✅ backup_freshness_guard-Selbsttest: 13 Fallgruppen – frisch, gelb, rot, Grenzen, "
+          "401/404/Netz, Eingaben, Datum, Entwürfe, mehrere Releases, leeres Repo und die "
+          "Eingabe-Auflösung, die am 01.11.2026 `--repo` verwarf (#923).")
     return 0
+
+
+def repo_bestimmen(von_flag: str = "", von_position: str = "",
+                   umgebung: dict | None = None) -> str:
+    """Quelle des Ziel-Repos: `--repo`, dann Positionsargument, dann Umgebung.
+
+    WARUM DAS EINE EIGENE FUNKTION IST (01.11.2026, Vorgang WF-9E5A / #923):
+    Die alte Fassung stand als eine Zeile da:
+
+        repo = args.repo or sys.argv[1] if len(sys.argv) > 1 and "/" in sys.argv[1] else ""
+
+    Python bindet das als `(args.repo or sys.argv[1]) if … else ""` – die
+    Bedingung galt also AUCH für den über `--repo` übergebenen Wert. Lief der
+    Aufruf ohne Positionsargument (`… --repo besitzer/name --json`, genau die
+    Form in der Anleitung und in `npm run backup:frische`), war das Ergebnis
+    immer `""`: Die Wache meldete „Kein gültiges Backup-Repo angegeben“ und
+    Exit 1 – ein Fehlalarm über eine Eingabe, die sehr wohl da war. Im
+    Workflow fiel das nicht auf, weil dort `BACKUP_REPO` als Umgebungsvariable
+    gesetzt ist und der Rückfall griff.
+    """
+    umgebung = os.environ if umgebung is None else umgebung
+    for wert in (von_flag, von_position):
+        if (wert or "").strip():
+            return wert.strip()
+    # Umgebungsfallback: BACKUP_REPO wie im Workflow, dann ZIEL_REPO (alter Name)
+    return (umgebung.get("BACKUP_REPO") or umgebung.get("ZIEL_REPO") or "").strip()
+
+
+def token_bestimmen(umgebung: dict | None = None) -> str:
+    """Lese-Token: erst die Backup-Variablen, dann die Workflow-Vorgaben.
+
+    `BACKUP_REPO_TOKEN`/`ZIEL_TOKEN` stehen vor `GITHUB_TOKEN`: Sie sind im
+    Backup-Job genau für das private Ziel gedacht. Der Lauf-Token bleibt der
+    letzte Rückfall für lokale Aufrufe mit `gh auth login`.
+    """
+    umgebung = os.environ if umgebung is None else umgebung
+    for name in ("GH_TOKEN", "BACKUP_REPO_TOKEN", "ZIEL_TOKEN", "GITHUB_TOKEN"):
+        wert = (umgebung.get(name) or "").strip()
+        if wert:
+            return wert
+    return ""
 
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Prüft, ob das Offsite-Backup aktuell ist.")
+    ap.add_argument("repo_positional", nargs="?", default="", metavar="BESITZER/NAME",
+                    help="Backup-Repository (alternativ --repo)")
     ap.add_argument("--repo", default="", help="Backup-Repository (besitzer/name)")
     ap.add_argument("--json", action="store_true", help="Maschinenlesbares JSON")
     ap.add_argument("--selftest", action="store_true", help="Offline-Selbsttest")
-    ap.add_argument("--check", action="store_true", help="Alias für Standardprüfung (CI)")
-    args = ap.parse_args(argv)
+    ap.add_argument("--check", action="store_true",
+                    help="Alias für Standardprüfung (CI, gleiches Verhalten)")
+    args = ap.parse_args(list(sys.argv[1:] if argv is None else argv))
     if args.selftest:
         return selbsttest()
-    repo = args.repo or sys.argv[1] if len(sys.argv) > 1 and "/" in sys.argv[1] else ""
-    # Umgebungsfallback: BACKUP_REPO wie im Workflow
-    if not repo:
-        repo = __import__("os").environ.get("BACKUP_REPO") or __import__("os").environ.get("ZIEL_REPO") or ""
-    token = __import__("os").environ.get("GH_TOKEN") or __import__("os").environ.get("GITHUB_TOKEN") or __import__("os").environ.get("ZIEL_TOKEN") or ""
-    # Repo aus Umgebung falls als erstes Positionsargument ohne Flag übergeben wurde
-    if not repo and len(sys.argv) > 1 and "/" in sys.argv[1] and not sys.argv[1].startswith("-"):
-        repo = sys.argv[1]
+    repo = repo_bestimmen(args.repo, args.repo_positional)
+    token = token_bestimmen()
     ergebnis = pruefe_freshness(repo, token)
     if args.json:
         print(json.dumps(ergebnis, ensure_ascii=False, indent=2))

@@ -1,6 +1,6 @@
 # Anleitung: Offsite-Backup einrichten, prüfen, wiederherstellen
 
-> Vorgang WF-9E5A · Meldung #923 · Stand 29.10.2026 (Highend-Dauerheilung)
+> Vorgang WF-9E5A · Meldung #923 · Stand 01.11.2026 (Highend-Dauerheilung)
 > Workflows `.github/workflows/backup-offsite.yml` + `backup-frischwache.yml` · Prüfer `scripts/backup_einrichtung.py` ·
 > Frische-Wache `scripts/backup_freshness_guard.py` · Probe `scripts/restore_drill.sh` · Export `scripts/kv_backup.py` ·
 > Einrichtungs-Wizard `scripts/backup_einrichten_wizard.sh`
@@ -62,7 +62,30 @@ in `hugo.toml`), und der Worker antwortet (Newsletter-Lauf vom 13.10.2026:
 (Art. 7 Abs. 1 DSGVO), der ohne diese Einrichtung **nur** in Cloudflare
 liegt. Deshalb jetzt einrichten, vor den ersten Anmeldungen.
 
-### Live-Status 29.10.2026 – WF-9E5A #923
+### Live-Status 01.11.2026 – WF-9E5A #923
+
+Der Lauf `41187477202` (31.10.2026) ist **weiterhin im Schritt
+„Voraussetzungen prüfen“ rot** – und das ist richtig. Die Annotationen nennen
+unverändert E1 `BACKUP_REPO`, E2 `BACKUP_REPO_TOKEN`, E3 `BACKUP_PASSPHRASE`,
+E5 `CF_KV_BACKUP_TOKEN` und E6 `KV_NAMESPACE_ID_ABO` als fehlend; E8
+(Environment „backup“) steht jedem Branch offen (`deployment_branch_policy:
+null`, keine Branch-Policy). E4 ist vorhanden, E7 bleibt optional.
+
+Am 01.11.2026 wurden diese fünf offenen Punkte **erneut live geprüft und
+bestätigt** (GitHub-API des Repos): E1–E3/E5/E6 sind ohne Inhaber-Zugangsdaten
+nicht herstellbar, und die Schreib-Endpunkte für Variablen, Secrets,
+Repositories und Environment-Policies antworten dem Agenten-Token mit
+`403 Resource not accessible by integration`. Es wurden **keine** Secrets,
+Variablen, Repositories oder Environment-Regeln erfunden, überschrieben oder
+in Chat/Repository abgelegt.
+
+Was in diesem Stand **code-seitig** dauerhaft behoben wurde, ist die Klasse
+„grün, ohne geprüft zu haben“ im Rückweg-Beweis – siehe Abschnitt
+„Wiederherstellung“ (Exit 2 statt „bestanden“, eigener Alarm-Rat
+`backup-restore`, automatische Gegenprobe in der Frischwache) und
+`WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-11-01.md`.
+
+### Live-Status 29.10.2026 – WF-9E5A #923 (Archiv)
 
 Der aktuelle rote Lauf `40847586847` ist **kein Fehler im Exportcode** und
 kein Fall für einen Neustart. Die fail-closed-Prüfung hat korrekt festgestellt,
@@ -101,9 +124,9 @@ Marken-Oberflächen-Wache vom 20.09.2026:
 | **RTO** (Wiederherstellung) | < 30 Min. für KV, < 60 Min. für Repo | Probe `restore_drill.sh` in < 5 Min.; Ernstfall-Anleitung unten mit `gh release download` + `openssl` + `wrangler kv bulk put --remote` |
 | **Aufbewahrung** | Repo 14, KV 35 Releases (Entwürfe) | `backup-offsite.yml` KEEP=14 / 35; älteste darüber automatische Löschung |
 | **Verschlüsselung** | AES-256-CBC/PBKDF2, Bundle 200k, KV 600k | Workflow + Prüfer `backup_einrichtung.py` E3 (≥ 20 Zeichen, empfohlen 32+) |
-| **Prüfung** | 8 Live-Punkte E1–E8 je Lauf, 3 Frist-Stufen, 18 Fallgruppen Selbsttest | `backup_einrichtung.py --selftest`, `test_backup_einrichtung` (39 Tests, inkl. Wizard-Vertrag) |
+| **Prüfung** | 8 Live-Punkte E1–E8 je Lauf, 3 Frist-Stufen, 18 Fallgruppen Selbsttest | `backup_einrichtung.py --selftest`, `test_backup_einrichtung` (47 Tests, inkl. Wizard- und Rückweg-Vertrag) |
 | **Ablauf-Warnung** | 30 Tage gelb, 14 Tage rot (nach Sicherung) | `BACKUP_FRIST_TAGE` → letzter Schritt `Fristwarnung` + Alerting `backup-frist` |
-| **Operative Wache** | Täglich 13:00 UTC, beide Familien `backup-*` + `kv-backup-*` | `backup_freshness_guard.py` (12 Fälle) + Workflow `backup-frischwache.yml` → Alerting `backup-frisch` |
+| **Operative Wache** | Täglich 13:00 UTC, beide Familien `backup-*` + `kv-backup-*` | `backup_freshness_guard.py` (13 Fälle, inkl. Eingabe-Auflösung) + Workflow `backup-frischwache.yml` → Alerting `backup-frisch` |
 
 **Was gesichert wird – vollständig:**
 
@@ -367,6 +390,20 @@ Die Probe läuft so ab:
 
 Ist die neueste Sicherung älter als 48 Stunden, warnt sie. Mit `--nur-kv`
 oder `--nur-git` lässt sich die Probe eingrenzen.
+
+**Kein Schein-Grün (01.11.2026, #923):** Ein Lauf ohne geprüfte Familie –
+also `--nur-kv` **und** `--nur-git` zugleich – endet mit **Exit 2** und dem
+Hinweis „Es wurde NICHTS geprüft“. Vorher meldete genau dieser Aufruf
+„RESTORE-DRILL BESTANDEN“ und hätte als Wiederherstellungs-Nachweis zitiert
+werden können. Der Abschlusssatz nennt jetzt ausdrücklich, *was* geprüft
+wurde (`geprüft: Abonnenten (KV), Repository (Git-Bundle, …)`).
+
+Dieselbe Prüfung läuft automatisiert: Die Frischwache
+(`backup-frischwache.yml`, Schritt „Kurzprüfung Wiederherstellbarkeit“)
+prüft Syntax und Selbsttest und führt die Gegenprobe aus (Drill ohne Familie
+muss Exit 2 liefern). Ist dieser Schritt rot, meldet das Alerting die Klasse
+`backup-restore`: „Sicherung gelaufen, Rückweg nicht belegt“ – ein Neustart
+hilft dort nicht, der Code muss repariert werden.
 
 ### Ernstfall: Abonnenten zurückspielen
 

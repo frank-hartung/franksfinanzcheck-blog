@@ -541,6 +541,20 @@ jobs:
             // E1–E8 prüfen Konfiguration, Fristen prüfen Ablauf, Frischwache prüft Ausführung.
             const isBackupFrisch = wfName === 'Backup-Frischwache (operative RPO-Wache)';
             const backupFrisch = isBackupFrisch;
+            // 01.11.2026 (WF-9E5A / #923): Die Wiederherstellbarkeit ist eine
+            // eigene Aussage – im Repo-Job, aber auch in der Frischwache (dort
+            // ist sie der einzige automatisierte Rückweg-Nachweis). Das Backup
+            // kann vollständig gelaufen sein, und trotzdem ist der Rückweg nicht
+            // belegt; der Rat lautet dann nicht „nochmal starten“ (ein
+            // Syntaxfehler in restore_drill.sh bleibt bei jedem Neustart), sondern
+            // „den Rückweg prüfen“. Bewusst VOR backupFrisch geprüft: sonst
+            // verschluckt der allgemeine Frische-Rat („Scheduler-Hänger, Token“)
+            // den einzigen, der hier zutrifft.
+            // Nur die beiden Backup-Workflows: Ein gleichnamiger Schritt in
+            // einem fremden Kanal behält sein eigenes Runbook (Gegenprobe in
+            // der Simulation).
+            const backupRestore = (isBackup || isBackupFrisch) && !backupEinrichtung &&
+              failedStepNames.some(s => String(s).includes('Wiederherstellbarkeit'));
             // ================================================================
             //  WF-53E2 / #780 (16.10.2026): EIN ROTER SELBSTTEST IST EINE
             //  CODE-REGRESSION – KEIN SCHLÜSSEL, KEIN AUSFALL, KEIN NEUSTART
@@ -589,6 +603,12 @@ jobs:
               : engineFinalClassifierFailed ? 'engine-schlussklassifikation'
               : backupEinrichtung ? 'backup-einrichtung'
               : backupFrist ? 'backup-frist'
+              // 01.11.2026 (#923): Der Rückweg-Beweis hat einen eigenen Rat –
+              // „gelaufen“ und „wiederherstellbar“ sind zwei Aussagen. Steht
+              // deshalb VOR backupFrisch: In der Frischwache ist dieser Schritt
+              // der einzige automatisierte Rückweg-Nachweis, und der allgemeine
+              // Frische-Rat („Scheduler-Hänger, Token“) träfe hier nie zu.
+              : backupRestore ? 'backup-restore'
               : isBackup ? 'backup'
               : backupFrisch ? 'backup-frisch'
               : installFailed ? 'installation'
@@ -798,6 +818,12 @@ jobs:
                     '1. **Die Sicherung ist gelaufen.** Rot ist nur die Fristwarnung: Ein Zugang läuft in weniger als 14 Tagen ab.',
                     '2. Welcher, nennt die Annotation des Schritts „Fristwarnung“. Neuen Zugang erzeugen und das Secret im Environment `backup` ersetzen: ' + backupAnleitung + ', Abschnitt „Zugänge erneuern“.',
                     '3. Der nächste grüne Lauf (nachts oder per „Run workflow“) schließt diese Meldung automatisch.'
+                  ]
+                : runbookKlasse === 'backup-restore'
+                ? [
+                    '1. **Die Sicherung ist gelaufen – ihr Rückweg ist aber nicht belegt.** Rot ist die Kurzprüfung der Wiederherstellung: Syntax von `scripts/restore_drill.sh` bzw. `scripts/backup_einrichten_wizard.sh` oder der Selbsttest von `scripts/kv_backup.py`. Solange der Rückweg nicht geprüft ist, gilt ein Backup nicht als Sicherung – ein Neustart ändert daran nichts.',
+                    '2. Lokal nachstellen und reparieren: `npm run test:backup` (Selbsttests + Verträge) und `bash -n scripts/restore_drill.sh`. Danach die echte Probe gegen das private Ziel: `npm run backup:probe` – sie entschlüsselt Bundle und KV-Export und prüft Struktur, Rechtsseiten und Abonnenten-Daten. Ein Lauf ohne geprüfte Familie endet mit Exit 2 statt mit „bestanden“.',
+                    '3. Der nächste grüne Lauf von „Backup-Frischwache“ (täglich 13:00 UTC, auch per „Run workflow“) schließt diese Meldung automatisch. Runbook und Ernstfall-Anleitung: ' + backupAnleitung + ', Abschnitt „Wiederherstellung“. Läufe: ' + repoUrl + '/actions/workflows/backup-frischwache.yml'
                   ]
                 : runbookKlasse === 'backup'
                 ? [

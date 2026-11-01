@@ -49,6 +49,11 @@ on:
       # hätte dann über einen Code geurteilt, der gar nicht lief.
       - "scripts/backup_einrichtung.py"
       - "scripts/kv_backup.py"
+      # Trigger-Wache W1 (01.11.2026, #923): Der Job führt seit diesem Stand
+      # auch die Gegenprobe des Rückweg-Beweises aus. Ohne diesen Pfad würde
+      # eine Änderung an restore_drill.sh den Lauf nicht auslösen – die
+      # Prüfung liefe nie über den Code, den sie prüft.
+      - "scripts/restore_drill.sh"
       - "scripts/tests/test_backup_einrichtung.py"
       - ".github/workflows/backup-frischwache.yml"
       - ".github/workflows/backup-offsite.yml"
@@ -151,10 +156,37 @@ jobs:
             exit 1
           fi
 
+      # WF-9E5A / #923 (01.11.2026): Diese Kurzpruefung ist der EINZIGE
+      # automatische Nachweis, dass der Rueckweg noch funktioniert. Sie traegt
+      # deshalb den stabilen Wortteil „Wiederherstellbarkeit“ im Namen – das
+      # Fehler-Alerting erkennt daran die Klasse `backup-restore` („gelaufen,
+      # aber Rueckweg nicht belegt“) und riet sonst zu einem Neustart, der an
+      # einem Syntaxfehler nichts aendert.
       - name: Kurzpruefung Wiederherstellbarkeit (strukturell, ohne Secrets)
-        if: always()
         run: |
+          set -euo pipefail
+          # Kein `if: always()`: Ein Nachweis, der nur nach einem roten
+          # Frische-Schritt laeuft, waere die Umkehrung von fail-closed. Er
+          # laeuft immer, solange der Job nicht abgebrochen ist.
           bash -n scripts/restore_drill.sh
           bash -n scripts/backup_einrichten_wizard.sh
           python3 scripts/kv_backup.py --selftest
-          echo "Restore-Drill-Code geprueft (Syntax + Selbsttest gruen)."
+          # Seit #923: Ein Drill ohne geprueste Familie darf nicht „bestanden“
+          # heissen. Die Gegenprobe haelt genau diese Grenze fest.
+          set +e
+          AUSGABE="$(bash scripts/restore_drill.sh --repo probe/kein-zugriff --nur-git --nur-kv 2>&1)"
+          RC=$?
+          set -e
+          if [ "$RC" -ne 2 ] || ! printf '%s' "$AUSGABE" | grep -q "NICHTS geprueft\|NICHTS geprüft"; then
+            echo "::error::Der Restore-Drill meldet fuer einen Aufruf ohne gepruefte Familie kein Exit 2 (rc=$RC) – Schein-Gruen im Rueckweg-Beweis. Ausgabe: $AUSGABE"
+            exit 1
+          fi
+          echo "Restore-Drill-Code geprueft (Syntax + Selbsttest gruen, Schein-Gruen ausgeschlossen)."
+          {
+            echo "## Wiederherstellbarkeit"
+            echo ""
+            echo "- Syntax `restore_drill.sh` / `backup_einrichten_wizard.sh`: ok"
+            echo "- Selbsttest `kv_backup.py`: ok"
+            echo "- Ein Drill ohne geprueste Familie endet mit Exit 2 (kein Schein-Gruen)."
+            echo "- Echte Probe gegen das private Ziel: \`npm run backup:probe\` (Anleitung, Abschnitt „Wiederherstellung“)."
+          } >> "$GITHUB_STEP_SUMMARY"

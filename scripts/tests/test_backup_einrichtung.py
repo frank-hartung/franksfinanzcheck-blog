@@ -475,6 +475,135 @@ class FrischwacheVertrag(unittest.TestCase):
         self.assertIn("RPO", alert)
 
 
+class RueckwegVertrag(unittest.TestCase):
+    """WF-9E5A / #923 (01.11.2026): Ein Drill, der nichts prüft, ist grün.
+
+    Befund: `restore_drill.sh --nur-git --nur-kv` endete mit Exit 0 und dem
+    Satz „RESTORE-DRILL BESTANDEN“, ohne eine einzige Datei angesehen zu haben.
+    Genau diese Zeile wäre im Betrieb als Wiederherstellungs-Nachweis zitiert
+    worden. Dazu kam die Frischwache-Kurzprüfung mit `if: always()`: Sie lief
+    auch dann, wenn der Job davor schon rot war – der Rückweg-Nachweis hing am
+    Ausgang einer anderen Messung.
+    """
+
+    DRILL = SCRIPTS / "restore_drill.sh"
+
+    @staticmethod
+    def _werkzeuge() -> bool:
+        import shutil
+        return all(shutil.which(w) for w in ("bash", "git", "openssl"))
+
+    def test_ohne_gepruefte_familie_kein_bestanden(self):
+        if not self._werkzeuge():
+            self.skipTest("bash/git/openssl fehlen lokal (CI hat sie)")
+        lauf = subprocess.run(["bash", str(self.DRILL), "--repo", "probe/kein-zugriff",
+                               "--nur-git", "--nur-kv"],
+                              capture_output=True, text=True, timeout=120)
+        self.assertEqual(lauf.returncode, 2,
+                         "ein Drill ohne geprüfte Familie darf NICHT bestanden melden:\n"
+                         + lauf.stdout + lauf.stderr)
+        self.assertNotIn("BESTANDEN", lauf.stdout)
+        self.assertIn("NICHTS", lauf.stderr)
+
+    def test_gesunde_sicherung_wird_mit_nachweis_bestanden(self):
+        if not self._werkzeuge():
+            self.skipTest("bash/git/openssl fehlen lokal (CI hat sie)")
+        import json
+        import tempfile
+        with tempfile.TemporaryDirectory() as ordner:
+            q = Path(ordner)
+            quelle = q / "quelle"
+            for unter in ("content/posts", "content/impressum", "content/datenschutz"):
+                (quelle / unter).mkdir(parents=True)
+            for nummer in range(21):
+                (quelle / "content" / "posts" / f"p{nummer}.md").write_text("x\n", encoding="utf-8")
+            (quelle / "content" / "impressum" / "index.md").write_text("a\n", encoding="utf-8")
+            (quelle / "content" / "datenschutz" / "index.md").write_text("b\n", encoding="utf-8")
+            (quelle / "hugo.toml").write_text("x\n", encoding="utf-8")
+            # HEAD muss auf einem Branch liegen: `git clone` eines Bundles mit
+            # losem HEAD (detached) ergibt einen leeren Arbeitsbaum.
+            for befehl in (["git", "init", "-q", "-b", "main"],
+                           ["git", "-c", "user.email=t@example.invalid",
+                            "-c", "user.name=Test", "add", "-A"],
+                           ["git", "-c", "user.email=t@example.invalid",
+                            "-c", "user.name=Test", "commit", "-qm", "i"]):
+                subprocess.run(befehl, cwd=quelle, check=True, capture_output=True)
+            subprocess.run(["git", "bundle", "create", str(q / "sicherung.bundle"), "main"],
+                           cwd=quelle, check=True, capture_output=True)
+            passphrase = "kein-echtes-geheimnis-nur-probe-1234"
+            subprocess.run(["openssl", "enc", "-aes-256-cbc", "-pbkdf2", "-iter", "200000", "-salt",
+                            "-in", str(q / "sicherung.bundle"), "-out", str(q / "sicherung.bundle.enc"),
+                            "-pass", f"pass:{passphrase}"], check=True, capture_output=True)
+            (q / "kv.json").write_text(json.dumps({
+                "version": 1, "kv": {"namespace": "x" * 32, "anzahl": 1,
+                                     "werte": {"abo:probe@example.invalid": json.dumps({"status": "active"})},
+                                     "ablauf": {}}}), encoding="utf-8")
+            subprocess.run(["openssl", "enc", "-aes-256-cbc", "-pbkdf2", "-iter", "600000", "-salt",
+                            "-in", str(q / "kv.json"), "-out", str(q / "kv.json.enc"),
+                            "-pass", f"pass:{passphrase}"], check=True, capture_output=True)
+            umgebung = {**__import__("os").environ, "BACKUP_PASSPHRASE": passphrase}
+            lauf = subprocess.run(["bash", str(self.DRILL), "--bundle", str(q / "sicherung.bundle.enc"),
+                                   "--kv", str(q / "kv.json.enc")],
+                                  capture_output=True, text=True, timeout=180, env=umgebung)
+            self.assertEqual(lauf.returncode, 0, lauf.stdout + lauf.stderr)
+            self.assertIn("RESTORE-DRILL BESTANDEN", lauf.stdout)
+            # Der Abschluss nennt, WAS geprüft wurde – keine pauschale Zusage.
+            self.assertIn("geprüft: Abonnenten (KV), Repository (Git-Bundle", lauf.stdout)
+
+    def test_falsche_passphrase_bleibt_rot(self):
+        if not self._werkzeuge():
+            self.skipTest("bash/git/openssl fehlen lokal (CI hat sie)")
+        import tempfile
+        with tempfile.TemporaryDirectory() as ordner:
+            datei = Path(ordner) / "x.bundle.enc"
+            datei.write_bytes(b"kein gueltiger schluesseltext" * 10)
+            lauf = subprocess.run(["bash", str(self.DRILL), "--bundle", str(datei), "--nur-git"],
+                                  capture_output=True, text=True, timeout=120,
+                                  env={**__import__("os").environ, "BACKUP_PASSPHRASE": "falsch-falsch-123"})
+            self.assertEqual(lauf.returncode, 1, lauf.stdout + lauf.stderr)
+            self.assertIn("nicht entschlüsselbar", lauf.stderr)
+            self.assertNotIn("BESTANDEN", lauf.stdout)
+
+
+class FrischwacheKommandozeile(unittest.TestCase):
+    """#923: `--repo` OHNE Positionsargument wurde verworfen.
+
+    Anleitung und `npm run backup:frische` rufen genau so auf. Ergebnis war
+    „Kein gültiges Backup-Repo angegeben“ – ein Fehlalarm über eine Eingabe,
+    die da war. Im Workflow fiel es nicht auf (dort greift `BACKUP_REPO`).
+    """
+
+    SKRIPT = SCRIPTS / "backup_freshness_guard.py"
+
+    def _lauf(self, argumente: list[str]) -> subprocess.CompletedProcess:
+        import os
+        umgebung = {k: v for k, v in os.environ.items()
+                    if k not in ("GH_TOKEN", "GITHUB_TOKEN", "BACKUP_REPO",
+                                 "ZIEL_REPO", "BACKUP_REPO_TOKEN", "ZIEL_TOKEN")}
+        return subprocess.run([sys.executable, str(self.SKRIPT), *argumente],
+                              capture_output=True, text=True, timeout=120, env=umgebung)
+
+    def test_repo_flag_ohne_positionsargument_kommt_an(self):
+        lauf = self._lauf(["--repo", "frank-hartung/franksfinanzcheck-backup", "--json"])
+        self.assertNotIn("Kein gültiges Backup-Repo angegeben", lauf.stdout,
+                         "--repo wurde erneut verworfen (Fehlalarm #923)")
+        # Ohne Token bleibt es fail-closed – aber aus dem richtigen Grund.
+        self.assertEqual(lauf.returncode, 1)
+        self.assertIn("Kein Token angegeben", lauf.stdout)
+        import json
+        daten = json.loads(lauf.stdout)
+        self.assertEqual(daten["repo"], "frank-hartung/franksfinanzcheck-backup")
+
+    def test_positionsargument_bleibt_erlaubt(self):
+        lauf = self._lauf(["frank-hartung/franksfinanzcheck-backup", "--json"])
+        self.assertNotIn("Kein gültiges Backup-Repo angegeben", lauf.stdout)
+
+    def test_ohne_jede_angabe_bleibt_es_fail_closed(self):
+        lauf = self._lauf(["--json"])
+        self.assertEqual(lauf.returncode, 1)
+        self.assertIn("Kein gültiges Backup-Repo angegeben", lauf.stdout)
+
+
 class WizardVertrag(unittest.TestCase):
     """Der Einrichtungs-Wizard ist der geprüfte Schnellweg durch die einzige
     verbliebene Inhaber-Aufgabe (#761). Er darf vom npm-Kurzbefehl und der

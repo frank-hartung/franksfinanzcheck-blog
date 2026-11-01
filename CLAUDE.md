@@ -2237,6 +2237,21 @@ nie eingerichtet. Das Rot war richtig. Die Meldung riet aber zu „API-Key
   lokale Simulation und meldet trotzdem Erfolg.
 - **Wiederherstellung beweisen:** `bash scripts/restore_drill.sh --repo <privates Backup-Repo>`
   (KV + Git, entschlüsselt in einem 0700-Temp-Verzeichnis).
+- **Ein Drill ohne Prüfung ist kein Drill (01.11.2026, #923).** Ein Aufruf
+  ohne geprüfte Familie (`--nur-kv` und `--nur-git` zugleich) endete bisher
+  mit Exit 0 und „RESTORE-DRILL BESTANDEN“ – ein Nachweis über nichts. Jetzt
+  Exit 2, und der Abschluss nennt die geprüften Familien. Der enthaltene
+  Branch wird ausdrücklich aus dem Bundle gewählt (sonst klont Git bei
+  abweichendem HEAD still einen leeren Baum). Die Frischwache prüft das
+  jeden Tag inkl. Gegenprobe; ein roter Rückweg-Nachweis meldet die Klasse
+  `backup-restore` („gelaufen, aber Rückweg nicht belegt“) statt eines
+  Neustart-Rats, der an einem Syntaxfehler nichts ändert.
+- **Eingaben der Wachen werden geprüft, nicht nur ihre Messung:** In
+  `backup_freshness_guard.py` verwarf ein Vorrang-Fehler (`a or b if … else ""`)
+  jedes `--repo` ohne Positionsargument – also genau den Aufruf aus Anleitung
+  und `npm run backup:frische`. Seit #923 zerlegt `repo_bestimmen()` die Quellen
+  (Flag → Position → `BACKUP_REPO`/`ZIEL_REPO`), und der Selbsttest (13.
+  Fallgruppe) hält die Klasse zu.
 - **Frische operativ überwachen (Highend-Ergänzung 22.10.2026, automatisiert 24.10.2026):** E1–E8 prüfen die
   *Konfiguration* – ob die Sicherung laufen *kann*. Ob sie *jüngst lief*, misst
   `scripts/backup_freshness_guard.py --repo <privates Backup-Repo>` (52 h rot,
@@ -2253,8 +2268,9 @@ nie eingerichtet. Das Rot war richtig. Die Meldung riet aber zu „API-Key
   gesperrt); `npm run backup:status` prüft den Stand ohne Änderung. Agenten
   setzen weiterhin keine Secrets und umschreiben keine offenen Alarm-Issues
   von Hand.
-- Tests: `npm run test:backup` (Frische-Wache 12 Fälle, E8 REST- und
-  Fail-closed-Wizard-Verträge) ·
+- Tests: `npm run test:backup` (Frische-Wache 13 Fälle, E8 REST- und
+  Fail-closed-Wizard-Verträge, Rückweg-Vertrag: Exit 2 ohne Familie,
+  belegter Bestanden-Satz, falsche Passphrase rot) ·
   Alarm-Szenarien in `scripts/tests/sim/alert_scoping_sim.mjs` (58 Szenarien,
   inkl. Lagebild-Verfall und Reihenfolgeschutz) · Anleitung
   `docs/ANLEITUNG-OFFSITE-BACKUP.md` · Bericht
@@ -2264,7 +2280,9 @@ nie eingerichtet. Das Rot war richtig. Die Meldung riet aber zu „API-Key
   `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-26.md` und
   `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-27.md` und
   `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-10-29.md` (Live-Befund #923,
-  Ref-/Token-Defense-in-depth; Inhaber-Einrichtung bleibt offen).
+  Ref-/Token-Defense-in-depth; Inhaber-Einrichtung bleibt offen) und
+  `WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-11-01.md` (Live-Befund erneut belegt;
+  Schein-Grün im Rückweg-Beweis und verworfene `--repo`-Eingabe geheilt).
 
 ## Ein Rebase ist ein neuer Stand – erst grün, dann mergen (seit WF-53E2 / #780, 16.10.2026)
 

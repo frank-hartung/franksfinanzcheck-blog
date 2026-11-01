@@ -232,6 +232,38 @@ class ProdScopingAlarm(unittest.TestCase):
         self.assertIn("#925-Gegenprobe", sim_text,
                       "ohne Gegenprobe fehlt der Beleg, dass nur die Messgates umziehen")
 
+    def test_wf_9e5a_923_rueckweg_hat_eigenes_runbook(self):
+        """01.11.2026 (#923): „gelaufen“ und „wiederherstellbar“ sind zwei
+        Aussagen.
+
+        Vorfall: Die Kurzprüfung der Wiederherstellbarkeit ist der einzige
+        automatisierte Rückweg-Nachweis. War sie rot, riet der allgemeine
+        Frische-Rat zu Scheduler/Token und „neu starten“ – ein Syntaxfehler in
+        `restore_drill.sh` bleibt bei jedem Neustart. Deshalb eine eigene
+        Klasse mit eigenem Rat, gebunden an die beiden Backup-Workflows.
+        """
+        self.assertIn("const backupRestore = (isBackup || isBackupFrisch)", self.code)
+        self.assertIn("includes('Wiederherstellbarkeit')", self.code)
+        m = re.search(r"const runbookKlasse = (.*?);", self.code, re.S)
+        klassen = re.findall(r"'([a-z-]+)'", m.group(1))
+        self.assertIn("backup-restore", klassen, "Klasse fehlt – der Rat wäre der allgemeine")
+        self.assertLess(klassen.index("backup-restore"), klassen.index("backup-frisch"),
+                        "Rückweg-Rat muss vor dem allgemeinen Frische-Rat stehen")
+        self.assertLess(klassen.index("backup-einrichtung"), klassen.index("backup-restore"),
+                        "die Einrichtung bleibt die erste Antwort, wenn sie offen ist")
+        self.assertIn("Rückweg ist aber nicht belegt", self.code)
+        self.assertIn("Ende mit Exit 2 statt mit „bestanden“".replace("Ende", "endet"), self.code)
+        # Die genannten Befehle/Dateien müssen existieren (kein Rat ins Leere).
+        for pfad in ("scripts/restore_drill.sh", "scripts/backup_frischwache.yml"):
+            del pfad
+        self.assertTrue((REPO / "scripts" / "restore_drill.sh").is_file())
+        self.assertTrue((REPO / ".github" / "workflows" / "backup-frischwache.yml").is_file())
+        self.assertIn("/actions/workflows/backup-frischwache.yml", self.code)
+        # Verhaltensprobe: positives Szenario UND Gegenprobe (fremder Kanal).
+        sim_text = (REPO / "scripts" / "tests" / "sim" / "alert_scoping_sim.mjs").read_text(encoding="utf-8")
+        self.assertIn("#923: Wiederherstellbarkeit rot", sim_text)
+        self.assertIn("#923-Gegenprobe", sim_text)
+
     def test_offene_meldung_wird_bei_klassenwechsel_nachgefuehrt(self):
         # WF-9E5A / #761: Die Meldung entstand, bevor es die Klasse
         # „Einrichtung unvollständig“ gab, und riet zu GROQ/GEMINI. Der
@@ -568,6 +600,11 @@ class VerhaltensSimulation(unittest.TestCase):
                                          # Prüfknopf für den Deploy-Zugang,
                                          # nur lesend, mit eigenem Alarm-Kanal.
                                          "Deploy-Zugang prüfen",
+                                         # WF-9E5A/#923 (01.11.2026): Die
+                                         # Kurzprüfung der Wiederherstellbarkeit
+                                         # ist eine eigene Aussage – eigener Rat
+                                         # `backup-restore` statt „neu starten“.
+                                         "Backup-Frischwache (operative RPO-Wache)",
                                          boeser_name)}
             json.dump(identitaeten, idf, ensure_ascii=False)
             ident_pfad = idf.name
