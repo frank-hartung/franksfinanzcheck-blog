@@ -1,11 +1,11 @@
 {
   "schema": 2,
-  "signed_at": "2026-11-01T16:41:17.729944+00:00",
-  "head": "bb432d4",
+  "signed_at": "2026-11-01T17:23:13.302157+00:00",
+  "head": "0f9f068",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
-    "data/skill_lizenzen.json": "63a51b75877f46d32fc0f202ae4db5dc0f80ce4ebab37432e792fbdc167856a2",
+    "data/skill_lizenzen.json": "aa7b9523b1e2d9b9f4d9f307e64b9565b6fc0190c134528326a5a0d79f4aefad",
     "data/skill_portfolio.yaml": "7e0e1003e24555cfb30fbe2e55f5963c426ea2b1e2b39fdc5240cce10e136752",
     "hugo.toml": "f69433af403fbb87704acce7336bca462480fb257b84e900690bf31294c31078",
     "layouts/_default/_markup/render-link.html": "9a86a24714a88557ea49d065f1edbd203688fa0798e70e8bd08a15a1b1a86b3c",
@@ -46,6 +46,7 @@
     "scripts/publikations_vertrag.py": "aed03d792f446b714c453a45d3d59cae12cbffd478ea144dd2a8987dd28c2dcf",
     "scripts/redaktions_standard.py": "0d1a4384c9ad2f403156ad15596aa4845de927f6be5417ea3ca3fe6804de2009",
     "scripts/reserve_artifacts.py": "f0a5e4affec798d3033b5c34fbc50688e2f9bca69ab0632d31cf9a727bfb3a6f",
+    "scripts/serp_limits.py": "cb3d4a55874bea7edb944c5d0239bcd0912db6ec075e48588d21e57cb4397c5f",
     "scripts/shortcode_guard.py": "3302394794bb2bc48ff8fcb9dd8232ce966f6d1f5e81255c3fd1df28a20c07b4",
     "scripts/skills_portfolio.py": "572f4e84f62cb797ea2b06961fb8b016af34c7422aa96222f80eca373ed6c0db",
     "scripts/skills_vertrag.py": "56b7eccef0bf260a4fe7a86c1f33d36ee2913759f77ac101a4e2f2ba171dbd22",
@@ -56,27 +57,18 @@
     "static/apple-touch-icon.png": "3c2d0bd63fb48baa1e9a47cfb2494d64b5c136be4ed9e621973ad2a54fac4332",
     "static/favicon.svg": "7cb1626650f3b20a856e792668c914bba8424c060b6c6f0b7c6e04fdfb0fb6d5",
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
-    "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5",
-    "scripts/serp_limits.py": "cb3d4a55874bea7edb944c5d0239bcd0912db6ec075e48588d21e57cb4397c5f"
+    "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "1a564c68e678de62e3d59aae83fa355b6fd6f1684cd6184d799c1ffcad7207dc",
-  "audit_start_sha256": "e34aa3db25a137021434fd74496790a6b205ba4aad74966b74ee8db32e8770a0",
+  "files_sha256": "272467b7f5fdf1d64b45aa22171c5ee0e8e318997daf3a0c9ed309b7414a3813",
+  "audit_start_sha256": "9f6765b665416b497ab01ab9383b33d94b562b0c17403cdad16ec60784cb8a7f",
   "audit": [
-    {
-      "date": "2026-10-31",
-      "art": "set-current",
-      "head": "e73b997",
-      "geaendert": [],
-      "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c",
-      "prev_sha256": null
-    },
     {
       "date": "2026-10-31",
       "art": "set-current",
       "head": "72d2473",
       "geaendert": [],
       "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c",
-      "prev_sha256": "e34aa3db25a137021434fd74496790a6b205ba4aad74966b74ee8db32e8770a0"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-31",
@@ -279,8 +271,43 @@
           "commits_art": "neu-unter-siegel"
         }
       ],
-      "prev_sha256": "ad2f21ec4a3717f049b2a13c322caba1b7ce70e54e831e52a880694ea692cc1e",
-      "files_sha256": "1a564c68e678de62e3d59aae83fa355b6fd6f1684cd6184d799c1ffcad7207dc"
+      "files_sha256": "1a564c68e678de62e3d59aae83fa355b6fd6f1684cd6184d799c1ffcad7207dc",
+      "prev_sha256": "ad2f21ec4a3717f049b2a13c322caba1b7ce70e54e831e52a880694ea692cc1e"
+    },
+    {
+      "date": "2026-11-01",
+      "art": "heal",
+      "head": "0f9f068",
+      "geaendert": [
+        "data/skill_lizenzen.json"
+      ],
+      "herkunft": [
+        {
+          "pfad": "data/skill_lizenzen.json",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "0f9f068",
+              "datum": "2026-11-01",
+              "betreff": "Merge remote-tracking branch 'origin/main' into arena/19c3ee23-franksfinanzcheck-blog"
+            },
+            {
+              "sha": "cbc43ad",
+              "datum": "2026-11-01",
+              "betreff": "feat(skills): Themen-Portfolio (P1–P7), Siegel für Wache+Register, Lektorat ins eigene Haus (#1004)"
+            },
+            {
+              "sha": "da74e4e",
+              "datum": "2026-11-01",
+              "betreff": "Merge remote-tracking branch 'origin/main' into arena/19c3ee23-franksfinanzcheck-blog"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "d8e66b61523dedf953f91ceee6501174daee4d8c70b6ac3c8ebcd6e4d268216b",
+      "files_sha256": "272467b7f5fdf1d64b45aa22171c5ee0e8e318997daf3a0c9ed309b7414a3813"
     }
   ]
 }
