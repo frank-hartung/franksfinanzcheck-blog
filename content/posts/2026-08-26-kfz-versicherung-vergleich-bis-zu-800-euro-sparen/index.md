@@ -508,7 +508,7 @@ Der **Kfz-Versicherungsvergleich** ist ein starker Sparhebel. 30 bis 45 Minuten 
 
 Über mehrere Jahre summiert sich das leicht auf **1.500 bis 4.000 €**. Nutze die Wochen bis zum 30.11. und prüfe deinen Tarif. Wechsle, wenn es sich lohnt.
 
-**Weiterlesen:** [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/) · [Wohngebäudeversicherung Vergleich: Worauf du achten musst](../../posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/) · [Pillar: Versicherungen](../../pillar/versicherungen/)
+**Weiterlesen:** [Abos und Verträge: Der stille Posten im Haushaltsplan](../../posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/) · [Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) · [Ratgeber Versicherungen](../../pillar/versicherungen/)
 
 ## Häufige Fragen
 

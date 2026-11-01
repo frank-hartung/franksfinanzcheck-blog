@@ -2,6 +2,7 @@
 title: "Datenschutzerklärung"
 description: "Datenschutzhinweise zu Hosting, eigenem Klickzähler, Affiliate-Links, Newsletter, Feedback und deinen Rechten auf Auskunft und Löschung."
 draft: false
+lastmod: 2026-10-27
 showToc: true
 ---
 

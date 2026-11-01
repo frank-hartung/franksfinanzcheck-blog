@@ -1,8 +1,8 @@
 # Befund Abdeckung
 
-## Abdeckung (Search Console, Stand 2026-10-19, 12 Tage alt)
+## Abdeckung (Search Console, Stand 2026-10-19, 13 Tage alt)
 
-**Gesamtbild: 🟢 GRÜN** · Quelle: `google-search-console (Abdeckungsbericht, CSV-Export)` · Gegenprobe: `content/ (Näherung, kein Build gemessen)`
+**Gesamtbild: 🟢 GRÜN** · Quelle: `google-search-console (Abdeckungsbericht, CSV-Export)` · Gegenprobe: `public/sitemap.xml`
 
 | Kennzahl | Wert |
 |---|---|
@@ -12,6 +12,16 @@
 | indexierbare Seiten im Repo | 104 |
 | Index-Puffer (Altlasten) | 13 |
 | Impressionen im Zeitraum | 62 (2.07/Tag, 6 Tage ohne) |
+
+| Bestand (am Build gemessen) | Wert |
+|---|---|
+| Gebaute URLs | 401 |
+| davon indexierbar (Sitemap) | 104 |
+| davon bewusst nicht indexierbar | 297 (davon 251 Weiterleitungsseiten) |
+| Crawl-Fläche je indexierbarer Seite | 3.86 : 1 |
+| Klassen nicht indexierbar | Weiterleitungsseiten 251, /go/-Gateways 20, Pager-Seiten 19, Newsletter-Funnel 4, Veröffentlichungskalender 1, Pinterest-Autorisierung 1, Suche 1 |
+| Indexierbar nach Sektion | posts 74, werkzeuge 10, pillar 7, studien 2, übrige Einzelseiten 11 |
+| Nicht-Index-Einträge je gebauter URL | 0.8 (im Rahmen des Bestands) |
 
 | Grund | Seiten | Erwartung | Urteil |
 |---|---|---|---|
@@ -25,7 +35,6 @@
 ### Widersprüche
 
 - ℹ️ **W5** 117 Seiten sind im Index, indexierbar sind 104 – 13 Einträge sind Altlasten (entfernte, weitergeleitete oder abgeschaltete URLs). Sie kosten kein Crawl-Budget mehr, verzerren aber jede Quote.
-- ℹ️ **W11** 2 Linkziel(e) im Inhalt werden nicht gebaut (Entwurf oder gelöscht). Das Rendering zeigt dort nur Text – die Verlinkung ist wirkungslos: veröffentlichen oder entlinken.
 
 ### Vertrag: noindex-Bestand und Gateways — 🟢 in Ordnung
 
@@ -38,13 +47,8 @@
 
 ### Redaktionelle Verlinkung
 
-- 5 von 79 Inhaltsseiten ohne redaktionellen Inlink, 0 ohne ausgehenden Link, Median 6 ausgehende Links je Seite.
-- Verlinkungsauftrag: 10 Quelle-Ziel-Paare (`--verlinkung --apply`).
-
-### Links ins Leere
-
-- `/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/` – 1 Quelle(n); die Seite wird nicht gebaut, der Link erscheint als Text.
-- `/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/` – 2 Quelle(n); die Seite wird nicht gebaut, der Link erscheint als Text.
+- 0 von 79 Inhaltsseiten ohne redaktionellen Inlink, 0 ohne ausgehenden Link, Median 6 ausgehende Links je Seite.
+- Verlinkungsauftrag: 1 Quelle-Ziel-Paar (`--verlinkung --apply`).
 
 ### Anfrage-Wellen (M2)
 
@@ -52,21 +56,23 @@
 
 | Score | Seite | Impressionen | Inlinks | Grund |
 |---|---|---|---|---|
-| 11.0 | `/pillar/internet-dsl/` | 44 | 17 | verlinkt |
-| 11.0 | `/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/` | 58 | 2 | verlinkt |
-| 7.0 | `/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/` | 0 | 0 | kein redaktioneller Inlink |
-| 7.0 | `/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/` | 0 | 0 | kein redaktioneller Inlink |
-| 7.0 | `/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/` | 0 | 0 | kein redaktioneller Inlink |
-| 7.0 | `/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/` | 0 | 0 | kein redaktioneller Inlink |
-| 7.0 | `/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/` | 0 | 0 | kein redaktioneller Inlink |
-| 6.33 | `/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/` | 16 | 7 | verlinkt |
-| 5.76 | `/impressum/` | 14 | 7 | verlinkt |
-| 5.67 | `/datenschutz/` | 14 | 6 | verlinkt |
+| 13.45 | `/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/` | 58 | 2 | verlinkt |
+| 13.1 | `/pillar/internet-dsl/` | 44 | 17 | verlinkt |
+| 8.68 | `/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/` | 16 | 7 | verlinkt |
+| 8.51 | `/impressum/` | 14 | 7 | verlinkt |
+| 8.44 | `/pillar/` | 9 | 2 | verlinkt |
+| 8.42 | `/datenschutz/` | 14 | 6 | verlinkt |
+| 7.78 | `/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/` | 7 | 2 | verlinkt |
+| 7.77 | `/pillar/konto-karten/` | 14 | 11 | verlinkt |
+| 7.58 | `/pillar/versicherungen/` | 7 | 6 | verlinkt |
+| 7.17 | `/posts/` | 5 | 1 | nur ein Inlink |
 
 ### Sprünge im Verlauf
 
 - **2026-10-17** · nicht_indexiert +59 – kein Beleg im Repo gefunden
 - **2026-10-17** · indexiert -21 – Größenordnung passt – Ursache noch nicht belegt
+  - Kandidat: /go/-Gateways (20), Abweichung 5 %
+  - Kandidat: Pager-Seiten (19), Abweichung 10 %
   - Kandidat: Taxonomie-URLs (abgeschaltet) (23), Abweichung 10 %
 
 ### Abnahme
@@ -74,10 +80,10 @@
 | Kriterium | Ziel | Status | Messung |
 |---|---|---|---|
 | Gate grün (kein Rückschritt, kein Widerspruch) | sofort | ✅ | Gate: gruen |
-| Abdeckungsbefund nicht älter als 14 Tage | laufend | ✅ | Stand 2026-10-19 (12 Tage alt) |
+| Abdeckungsbefund nicht älter als 14 Tage | laufend | ✅ | Stand 2026-10-19 (13 Tage alt) |
 | 404er mit Nachfrage triagiert | sofort | 🛑 | 193 ohne Erklärung im Bestand |
 | Indexquote steigt | 14 Tage | ❔ | 26.8 % bei 1 Momentaufnahme(n) |
-| Seiten ohne redaktionellen Inlink | 30 Tage | 🛑 | 5 Seiten |
+| Seiten ohne redaktionellen Inlink | 30 Tage | ✅ | 0 Seiten |
 
 ### Maßnahmen (Auszug)
 
@@ -85,7 +91,7 @@
 |---|---|---|---|
 | M1 | P1 | 404-Detail-Liste einlesen und triagieren | Übersicht: 223 × 404 · erklärbar 30 · offen 193 |
 | M2 | P1 | Crawl-Nachfrage für gefundene, nicht abgerufene Seiten | 69 „Gefunden – zurzeit nicht indexiert“ bei 104 indexierbaren Seiten |
-| M10 | P2 | Neuen Abdeckungs-Export einlesen | Stand 2026-10-19 · 12 Tage alt |
+| M10 | P2 | Neuen Abdeckungs-Export einlesen | Stand 2026-10-19 · 13 Tage alt |
 | M3 | P2 | Redaktions-Queue für „gecrawlt, nicht indexiert“ | 4 × „Gecrawlt – zurzeit nicht indexiert“ |
 | M4 | P2 | Index-Altlasten benennen statt mitzählen | 117 indexiert bei 104 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (7 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (4 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /tags/ (1 Impr.), /tags/dns-server-%C3%A4ndern/ (1 Impr.) |
 | M7 | P2 | Sprung im Abdeckungsbericht erklären | Diagramm 2026-10-17: indexiert 138 → 117 |

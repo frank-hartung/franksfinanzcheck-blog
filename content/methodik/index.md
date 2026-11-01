@@ -4,6 +4,7 @@ title: "So arbeiten wir: Beweissystem, Methodik & Redaktionsstandards"
 seoTitle: "So arbeiten wir: Beweissystem & Methodik"
 description: "So arbeiten wir mit Quellen, Rechenwegen und Vergleichskriterien. Prüfe, wie Empfehlungen entstehen und wie Änderungen dokumentiert werden."
 draft: false
+lastmod: 2026-10-27
 author: "Frank Hartung"
 showToc: true
 ---
