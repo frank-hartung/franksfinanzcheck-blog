@@ -513,13 +513,34 @@ class RueckwegVertrag(unittest.TestCase):
         with tempfile.TemporaryDirectory() as ordner:
             q = Path(ordner)
             quelle = q / "quelle"
-            for unter in ("content/posts", "content/impressum", "content/datenschutz"):
+            # Der Attrappen-Bestand muss wirklich baubar sein: Der Drill führt
+            # mit installiertem Hugo einen Beweis-Build aus dem Restore aus
+            # (≥ 30 HTML-Seiten). Vor dem 01.11.2026 stand hier hugo.toml="x"
+            # und 21 leere Dateien – grün lief das nur, solange im Prüfjob
+            # kein Hugo lag; seit install-hugo dort steht, wäre jeder Lauf rot
+            # gewesen (Fund in PR #998). Jetzt: gültige Minimal-Konfiguration,
+            # drei Ein-Zeilen-Layouts, 30 Beiträge → 34 HTML-Seiten im Build.
+            for unter in ("content/posts", "content/impressum", "content/datenschutz",
+                          "layouts/_default"):
                 (quelle / unter).mkdir(parents=True)
-            for nummer in range(21):
-                (quelle / "content" / "posts" / f"p{nummer}.md").write_text("x\n", encoding="utf-8")
-            (quelle / "content" / "impressum" / "index.md").write_text("a\n", encoding="utf-8")
-            (quelle / "content" / "datenschutz" / "index.md").write_text("b\n", encoding="utf-8")
-            (quelle / "hugo.toml").write_text("x\n", encoding="utf-8")
+            for nummer in range(30):
+                (quelle / "content" / "posts" / f"p{nummer}.md").write_text(
+                    f"---\ntitle: \"Probe {nummer}\"\ndraft: false\n---\nInhalt {nummer}.\n",
+                    encoding="utf-8")
+            (quelle / "content" / "impressum" / "index.md").write_text(
+                "---\ntitle: \"Impressum\"\n---\nImpressum.\n", encoding="utf-8")
+            (quelle / "content" / "datenschutz" / "index.md").write_text(
+                "---\ntitle: \"Datenschutz\"\n---\nDatenschutz.\n", encoding="utf-8")
+            (quelle / "hugo.toml").write_text(
+                'baseURL = "https://example.invalid/"\n'
+                'title = "Restore-Drill"\n'
+                'disableKinds = ["taxonomy", "term", "rss", "sitemap", "robotsTXT"]\n',
+                encoding="utf-8")
+            (quelle / "layouts" / "index.html").write_text("{{ .Title }}\n", encoding="utf-8")
+            (quelle / "layouts" / "_default" / "single.html").write_text(
+                "{{ .Title }}\n", encoding="utf-8")
+            (quelle / "layouts" / "_default" / "list.html").write_text(
+                "{{ .Title }}\n", encoding="utf-8")
             # HEAD muss auf einem Branch liegen: `git clone` eines Bundles mit
             # losem HEAD (detached) ergibt einen leeren Arbeitsbaum.
             for befehl in (["git", "init", "-q", "-b", "main"],
