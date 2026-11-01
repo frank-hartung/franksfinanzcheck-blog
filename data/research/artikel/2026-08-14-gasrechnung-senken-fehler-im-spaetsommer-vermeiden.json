@@ -1,0 +1,38 @@
+{
+  "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+  "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
+  "erzeugt": "2026-11-01 10:13 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 1,
+    "klasse": "saisonal",
+    "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+    "alter_tage": 34,
+    "intervall": 30,
+    "frist": "2026-10-28",
+    "restlaufzeit": -4
+  },
+  "geo": {
+    "punkte": 6,
+    "maximum": 6,
+    "prozent": 100,
+    "offen": [],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": true,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": true
+    }
+  },
+  "treffer": [],
+  "befunde": [],
+  "fehler": [
+    "feedparser nicht installiert (pip install feedparser)",
+    "feedparser nicht installiert (pip install feedparser)",
+    "bundesnetzagentur.de: Jina-Reader-Abruf fehlgeschlagen (<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>)"
+  ],
+  "fassung_sha256": "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316",
+  "fachpruefung": "übersprungen (kein KI-Schlüssel: GROQ_API_KEY/GEMINI_API_KEY)"
+}

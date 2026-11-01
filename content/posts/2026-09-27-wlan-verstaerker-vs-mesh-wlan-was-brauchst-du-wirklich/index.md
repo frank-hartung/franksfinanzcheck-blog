@@ -119,7 +119,7 @@ Ein Mesh‑System besteht aus mehreren Stationen (meist zwei oder drei), die zus
 
 ## Die entscheidende Frage vor jedem Kauf
 
-Halte kurz inne und stelle fest, **welches** Problem du überhaupt hast als Modellwert. Dafür brauchst du nur dein Handy oder einen Laptop und zehn Minuten.
+Halte kurz inne und stelle fest, **welches** Problem du überhaupt hast. Dafür brauchst du nur dein Handy oder einen Laptop und zehn Minuten.
 
 ### Schritt 1: Direkt am Router messen
 
@@ -137,7 +137,7 @@ Wiederhole denselben Test in dem Raum, in dem das WLAN schwächelt. Notiere auch
 | Schon am Router langsam | **Vertrags‑ oder Leitungsproblem** | erst Tarif prüfen, keine Technik kaufen |
 | Überall mäßig, abends schlimmer | häufig **Auslastung** oder alter Router | Router‑Tausch oder [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) prüfen |
 
-Genau der zweite Fall ist der teuerste Denkfehler: Da kaufen Menschen ein 300‑Euro‑Mesh‑System und merken danach, dass der Engpass gar nicht im WLAN lag, sondern in einem alten 16‑Mbit‑Vertrag im Rechenfall. Neue Technik kann kein Tempo verteilen, das nie am Anschluss ankommt.
+Genau der zweite Fall ist der teuerste Denkfehler: Da kaufen Menschen ein 300‑Euro‑Mesh‑System und merken danach, dass der Engpass gar nicht im WLAN lag, sondern in einem alten 16‑Mbit‑Vertrag; das ist ein Rechenbeispiel. Neue Technik kann kein Tempo verteilen, das nie am Anschluss ankommt.
 
 > 💶 **Spar‑Tipp zwischendurch:** Beim Internet sparst du oft nicht durch „noch mehr Geschwindigkeit“, sondern durch den passenderen Tarif. Prüfe deshalb immer Bedarf plus Effektivpreis gemeinsam: [**DSL‑Tarif prüfen & sparen**](/go/dsl/)
 

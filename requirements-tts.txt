@@ -1,0 +1,23 @@
+# ============================================================
+#  TTS-/VIDEO-KETTE – optionale, aber gepinnte Laufzeitpakete
+#  (WF-E813 / #972, 01.11.2026)
+# ------------------------------------------------------------
+#  WARUM DIESE DATEI EXISTIERT
+#  `deploy.yml` (Vertonung) und `social-video.yml` installierten
+#  `edge-tts`, `miniaudio`, `piper-tts` und `pillow` ad hoc. Die
+#  Installationen sind bewusst weich (fällt ein Paket aus, greift
+#  die nächste Stufe), aber „weich installierbar“ heißt nicht
+#  „unbekannte Version“: Ein ungepinnter Install ist eine
+#  ausgelieferte Version ohne Manifest – nie auditiert, nie
+#  aktualisiert (Befund WF-E813 / #972).
+#
+#  REGEL: exakte Pins. Der Audit prüft jede Zeile gegen die
+#  Advisory-Datenbank; Regel A7 der Abhängigkeits-Wache verbietet
+#  neue Ad-hoc-Installs ohne `-r`.
+#
+#  pyyaml und pillow stehen bereits in `requirements-ci.txt` –
+#  dort und nur dort, damit es keine zweite Wahrheit gibt.
+# ============================================================
+edge-tts==7.3.1
+miniaudio==1.71
+piper-tts==1.8.0

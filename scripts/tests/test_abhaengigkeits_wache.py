@@ -178,6 +178,78 @@ class StrukturRegelnTest(unittest.TestCase):
         self.assertEqual([b.regel for b in befunde], [wache.REGEL_MEHRFACH])
 
 
+class AdHocInstallationTest(unittest.TestCase):
+    """Regeln A7/A8 (WF-E813 / #972, 01.11.2026).
+
+    Der Vorfall: `poppy-werkbank.yml`, `deploy.yml` und `social-video.yml`
+    installierten neun Pakete AD HOC. Sie standen in keinem Manifest, wurden
+    vom Advisory-Audit nie geprüft und von Dependabot nie aktualisiert –
+    und `pypdf==6.21.2` (7× HIGH) lebte genau in so einer Installation
+    weiter, während der Struktur-Lauf „0 Fehler“ meldete.
+    """
+
+    def regeln(self, text: str, regel: str) -> list[str]:
+        return [b.regel for b in wache.pruefe_pip_ad_hoc(text, "w.yml", regel)]
+
+    def test_ungepinntes_install_ist_a7(self) -> None:
+        self.assertEqual(self.regeln("      - run: pip install pyyaml pypdf\n", wache.REGEL_LAUFZEIT),
+                         [wache.REGEL_LAUFZEIT, wache.REGEL_LAUFZEIT])
+
+    def test_exakter_pin_ist_zufrieden(self) -> None:
+        self.assertEqual(self.regeln("      - run: pip install pyyaml==6.0.3 pypdf==6.21.4\n",
+                                     wache.REGEL_LAUFZEIT), [])
+
+    def test_bereich_und_wildcard_sind_offen(self) -> None:
+        self.assertEqual(len(self.regeln("pip install 'pyyaml>=6' pillow==13.*\n", wache.REGEL_LAUFZEIT)), 2)
+
+    def test_requirements_datei_ist_zufrieden(self) -> None:
+        # A1/A2 prüfen die Pins DORT – hier darf nichts doppelt feuern.
+        self.assertEqual(self.regeln("python3 -m pip install --require-hashes -r requirements-ci.txt\n",
+                                     wache.REGEL_LAUFZEIT), [])
+
+    def test_schalter_und_werkzeug_sind_keine_pakete(self) -> None:
+        self.assertEqual(self.regeln(
+            "pip install --upgrade pip\n"
+            "pip install --index-url https://x.invalid/simple --break-system-packages pyyaml==6.0.3\n",
+            wache.REGEL_LAUFZEIT), [])
+
+    def test_prosa_und_kommentar_loesen_nicht_aus(self) -> None:
+        # Ein Rat, der den Befehl ZITIERT, ist kein Aufruf. Ohne diese
+        # Gegenprobe wäre die eigene Meldung des Kanals ein Struktur-Fehler.
+        self.assertEqual(self.regeln(
+            "  # nach pip install wieder entfernt\n"
+            "                        '4. Jedes `pip install X` ohne `-r` ist ungepinnt.',\n",
+            wache.REGEL_LAUFZEIT), [])
+
+    def test_kette_mit_shell_trenner_ist_sichtbar(self) -> None:
+        # Whisper-Image: `apt-get … && pip install …`. Der erste Parser
+        # schnitt VOR dem Befehl ab und sah die Installation nie.
+        treffer = wache.pruefe_pip_ad_hoc(
+            "RUN apt-get update && pip install --no-cache-dir fastapi==1 uvicorn\n",
+            "Dockerfile.x", wache.REGEL_IMAGE_PIP)
+        self.assertEqual([b.regel for b in treffer], [wache.REGEL_IMAGE_PIP])
+        self.assertIn("uvicorn", treffer[0].text)
+
+    def test_mehrzeiliger_befehl_wird_zusammengefuehrt(self) -> None:
+        treffer = wache.pruefe_pip_ad_hoc(
+            "RUN pip install \\\n    fastapi==1 \\\n    uvicorn\n", "Dockerfile.x", wache.REGEL_IMAGE_PIP)
+        self.assertEqual(len(treffer), 1)
+
+    def test_repo_bestand_ist_gepinnt(self) -> None:
+        """DAUERVERTRAG: Kein Workflow und kein Image installiert ad hoc."""
+        befunde = [b for b in wache.pruefe_laufzeit_installationen(ROOT)
+                   if b.schwere == wache.SCHWERE_FEHLER]
+        self.assertEqual(befunde, [], f"Ad-hoc-Installationen: {[b.als_dict() for b in befunde]}")
+
+    def test_dependabot_pflegt_die_neuen_manifeste(self) -> None:
+        """Ein Pin ohne Update-Weg veraltet still."""
+        text = (ROOT / ".github/dependabot.yml").read_text(encoding="utf-8")
+        for paket in ("pypdf", "edge-tts", "piper-tts", "trafilatura"):
+            self.assertIn(f'dependency-name: "{paket}"', text)
+        for datei in ("requirements-poppy.txt", "requirements-tts.txt"):
+            self.assertTrue((ROOT / datei).is_file(), f"{datei} fehlt")
+
+
 class AuditTest(unittest.TestCase):
     def quelle(self, daten: dict) -> wache.DateiAdvisoryQuelle:
         return wache.DateiAdvisoryQuelle(daten)

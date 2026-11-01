@@ -65,7 +65,7 @@ Lege Ziel und Zeitraum fest. Setze eine Obergrenze. Hole Angebote ein und zähle
 **Rechenbeispiel:** Es bleiben vier Monate bis zur Zahlung.  
 **Rechenbeispiel:** Dann fehlen noch 450 €, das entspricht 112,50 € pro Monat. Beide Beispiele beruhen auf frei gewählten Annahmen, keine Marktpreise.
 
-**Modellrechnung:** Reichen 120 € nicht, ändere den Plan im Modellfall. Nimm ein günstigeres Ziel, einen späteren Termin oder ein kleineres Programm. Ein Kredit ist kein Ersatz für einen tragfähigen Sparplan.
+**Modellrechnung:** Reichen 120 € nicht, ändere den Plan; das ist ein Modellwert. Nimm ein günstigeres Ziel, einen späteren Termin oder ein kleineres Programm. Ein Kredit ist kein Ersatz für einen tragfähigen Sparplan.
 
 ## Der 4K-Prüfpfad für dein Urlaubsbudget
 

@@ -13,6 +13,13 @@ liefert Exit 4 (bei vollständigem Kanalausfall Exit 3). Der Bestands-Workflow
 sichert Diagnoseartefakte und meldet den Lauf anschließend als fehlgeschlagen.
 YMYL-Schutz und Re-Queue-Gate bleiben maßgeblich.
 
+Seiten sind isoliert (#984, 01.11.2026): Wirft eine Seite, wird sie mit
+Seite und Ursache als Abbruch geführt, der Lauf arbeitet weiter und schreibt
+Queue, Report, Historie und Ledger. Der Lauf endet dann mit Exit 5 – die
+Beweise überleben den Fehler, der Ausfall bleibt trotzdem sichtbar. Nach dem
+Schreiben wird die hinterlassene Fassung neu gelesen; sie ersetzt den
+Lauf-Datensatz nicht, dessen `_faellig`/`_geo`/`bereich` nur der Lauf kennt.
+
 KI-Antworten müssen das erwartete JSON-Schema erfüllen, andernfalls wird der
 nächste verfügbare Anbieter versucht. Quellen-URLs müssen im Dossier stehen und
 auf der Allowlist liegen; Titel und Datum stammen aus dem Dossier, der
@@ -36,6 +43,24 @@ python3 scripts/faktenfrische.py --offline --max 3
 Die Offline-Tests benötigen die Projektabhängigkeiten PyYAML und feedparser;
 sie verwenden weder echte Netzabrufe noch KI-Schlüssel. Live-Kanäle und
 Provider müssen separat in der vorgesehenen Betriebsumgebung geprüft werden.
+
+## Nachlese: kein Befund bleibt nur im Dossier (#984)
+
+Ein Dossier entsteht **vor** der Bilanz des Laufs. Bricht der Lauf danach ab,
+lagen seine Befunde bis zum 01.11.2026 ausschließlich in
+`data/research/artikel/<slug>.json` – unsichtbar für Redaktion, Publish-Gate
+und Scorecard, während die Maschine „nichts gefunden“ meldete. Die Nachlese
+liest die Dossiers und ergänzt ausschließlich, was im Ledger fehlt:
+
+```sh
+python3 scripts/faktenfrische_befund_ledger.py --nachlese           # Trockenlauf
+python3 scripts/faktenfrische_befund_ledger.py --nachlese --apply   # ergänzen
+```
+
+Sie ist idempotent, schließt nie einen Befund und übernimmt nichts ohne
+echten Fassungs-Hash – eine Entscheidung muss an genau die geprüfte Fassung
+gebunden bleiben. Der Bestands-Workflow fährt sie nach jedem Lauf (auch nach
+einem Abbruch) und committet das Ergebnis mit den Dossiers.
 
 ## Befund-Register und Dauerheilung
 

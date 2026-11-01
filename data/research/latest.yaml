@@ -1,5 +1,5 @@
-generated_at: '2026-10-31T09:57:28Z'
-day: '2026-10-31'
+generated_at: '2026-11-01T10:47:38Z'
+day: '2026-11-01'
 mode: deterministic
 teams:
   trending:
@@ -28,13 +28,13 @@ teams:
     pillar: versicherungen
     signal: trending
     source: aktuelle_entwicklungen:versicherung-beitragsanpassung-jahresende
-    score: 0.65
+    score: 0.7
   - topic: Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste
       Ergebnis nimmt, lässt oft bares Geld liegen.
     pillar: versicherungen
     signal: trending
     source: aktuelle_entwicklungen:versicherung-vergleichsportale-nicht-vollstaendig
-    score: 0.65
+    score: 0.7
   - topic: Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
       sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
       inzwischen öfter als nur beim Kontowechsel.
@@ -83,63 +83,72 @@ teams:
     signal: news
     source: aktuelle_entwicklungen:energie-variable-vs-fest
     score: 0.85
+  - topic: Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende –
+      ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
+      statt sie automatisch zu verlängern.
+    pillar: versicherungen
+    signal: news
+    source: aktuelle_entwicklungen:versicherung-beitragsanpassung-jahresende
+    score: 0.8
+  - topic: Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste
+      Ergebnis nimmt, lässt oft bares Geld liegen.
+    pillar: versicherungen
+    signal: news
+    source: aktuelle_entwicklungen:versicherung-vergleichsportale-nicht-vollstaendig
+    score: 0.8
   evergreen:
-  - topic: 'Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren'
+  - topic: 'Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung'
     pillar: frugalismus
     signal: evergreen
-    source: 'topics:Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren'
+    source: 'topics:Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung'
     score: 0.85
-    keywords:
-    - Neujahrsvorsätze Geld
-    - finanzielle Ziele 2027
-    - Sparziele erreichen
-    - Gewohnheiten ändern
-  - topic: Energiekosten senken mit kleinen Veränderungen
+    keywords: []
+  - topic: Heizperiode vorbereiten im Spätsommer
     pillar: strom-sparen
     signal: evergreen
-    source: topics:Energiekosten senken mit kleinen Veränderungen
+    source: topics:Heizperiode vorbereiten im Spätsommer
     score: 0.85
     keywords:
-    - Energie
-    - Kosten
-    - SparTipps
-  - topic: 'WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?'
+    - Gasrechnung senken
+    - Heizkosten sparen
+    - Herbst Vorbereitung
+    - Heizung prüfen
+  - topic: Die besten DSL-Tarife für Zuhause und unterwegs
     pillar: internet-dsl
     signal: evergreen
-    source: 'topics:WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?'
+    source: topics:Die besten DSL-Tarife für Zuhause und unterwegs
     score: 0.85
     keywords:
-    - WLAN verbessern
-    - DSL Hacks
-    - Schnelles Internet zuhause
-    - Mesh Netzwerk
-  - topic: 'Mietwagen mit Elektroauto: So klappt die Fahrt in den Urlaub'
+    - DSL-Tarife
+    - Zuhause
+    - unterwegs
+  - topic: Mietwagen-Tarife im Vergleich für den Urlaub
     pillar: mietwagen
     signal: evergreen
-    source: 'topics:Mietwagen mit Elektroauto: So klappt die Fahrt in den Urlaub'
+    source: topics:Mietwagen-Tarife im Vergleich für den Urlaub
     score: 0.85
     keywords:
-    - E-Auto Mietwagen
-    - Elektromobilität
-    - Urlaub
-  - topic: 10 Tipps für günstige Reisekreditkarten
+    - Mietwagen
+    - Tarife
+    - Vergleich
+  - topic: Kontoeröffnung mit günstigen Gebühren
     pillar: konto-karten
     signal: evergreen
-    source: topics:10 Tipps für günstige Reisekreditkarten
+    source: topics:Kontoeröffnung mit günstigen Gebühren
     score: 0.85
     keywords:
-    - Reisekreditkarten
-    - günstige Karten
-    - Reisekosten sparen
-  - topic: 'Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
+    - Kontoeröffnung
+    - Günstige Gebühren
+    - Kontenvergleich
+  - topic: 'Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
     pillar: versicherungen
     signal: evergreen
-    source: 'topics:Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
+    source: 'topics:Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
     score: 0.85
     keywords:
-    - Rechtsschutzversicherung
-    - Rechtsschutz Leistungen
-    - Rechtsstreit versichern
+    - Versicherungen prüfen Jahresende
+    - Policen kündigen Dezember
+    - überversichert was kündigen
   pain_points:
   - topic: Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft merken
       Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
@@ -243,60 +252,64 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 10 Tipps für günstige Reiseversicherungen
+  - topic: Dein Mietwagen im Ausland am besten buchen
+    pillar: mietwagen
+    signal: niche_hook
+    source: topics:Dein Mietwagen im Ausland am besten buchen
+    score: 0.55
+    keywords:
+    - Mietwagen
+    - Ausland
+    - Buchen
+  - topic: Heizperiode vorbereiten im Spätsommer
+    pillar: strom-sparen
+    signal: niche_hook
+    source: topics:Heizperiode vorbereiten im Spätsommer
+    score: 0.55
+    keywords:
+    - Gasrechnung senken
+    - Heizkosten sparen
+    - Herbst Vorbereitung
+    - Heizung prüfen
+  - topic: 'Jahresabschluss-Check: Diese 4 Versicherungen solltest du im Dezember
+      kündigen'
     pillar: versicherungen
     signal: niche_hook
-    source: topics:10 Tipps für günstige Reiseversicherungen
+    source: 'topics:Jahresabschluss-Check: Diese 4 Versicherungen solltest du im Dezember
+      kündigen'
     score: 0.55
     keywords:
-    - Reiseversicherung
-    - Versicherungsvergleich
-    - Günstige Versicherungen
-  - topic: 'Fahrradversicherung fürs E-Bike: Lohnt sich der Schutz?'
+    - Versicherungen prüfen Jahresende
+    - Policen kündigen Dezember
+    - Unnötige Versicherungen kündigen
+    - Doppelversicherung vermeiden
+  - topic: Reiseversicherungen im Test
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Fahrradversicherung fürs E-Bike: Lohnt sich der Schutz?'
+    source: topics:Reiseversicherungen im Test
     score: 0.55
     keywords:
-    - Fahrradversicherung
-    - E-Bike versichern
-    - Fahrraddiebstahl Schutz
-  - topic: 'Handytarife vergleichen: So findest du den günstigsten Tarif'
+    - Reise
+    - Versicherung
+    - Test
+  - topic: 'Streaming-Qualität: Wie viel Bandbreite du wirklich brauchst'
     pillar: internet-dsl
     signal: niche_hook
-    source: 'topics:Handytarife vergleichen: So findest du den günstigsten Tarif'
+    source: 'topics:Streaming-Qualität: Wie viel Bandbreite du wirklich brauchst'
     score: 0.55
     keywords:
-    - Handytarif vergleichen
-    - Handyvertrag wechseln
-    - Günstiger Handytarif
-  - topic: 'Handyvertrag kündigen: So kommst du aus der Vertragsverlängerung'
-    pillar: internet-dsl
+    - Streaming Bandbreite
+    - Internetgeschwindigkeit
+    - Streaming ruckelt
+  - topic: Versteckte Kosten im Mietwagenvertrag entschlüsseln
+    pillar: mietwagen
     signal: niche_hook
-    source: 'topics:Handyvertrag kündigen: So kommst du aus der Vertragsverlängerung'
+    source: topics:Versteckte Kosten im Mietwagenvertrag entschlüsseln
     score: 0.55
     keywords:
-    - Handyvertrag kündigen
-    - Mobilfunk sparen
-    - Tarifwechsel
-  - topic: 'Router-Position optimieren: Mehr Empfang ohne neues Gerät'
-    pillar: internet-dsl
-    signal: niche_hook
-    source: 'topics:Router-Position optimieren: Mehr Empfang ohne neues Gerät'
-    score: 0.55
-    keywords:
-    - Router Standort
-    - WLAN Empfang verbessern
-    - WLAN Tipps
-  - topic: 'VPN für Zuhause: Brauchst du das wirklich?'
-    pillar: internet-dsl
-    signal: niche_hook
-    source: 'topics:VPN für Zuhause: Brauchst du das wirklich?'
-    score: 0.55
-    keywords:
-    - VPN Zuhause
-    - VPN sinnvoll
-    - Internet Sicherheit
+    - Mietwagenvertrag
+    - versteckte Kosten
+    - Urlaubskasse
 live_web:
   enabled: false
   findings: []

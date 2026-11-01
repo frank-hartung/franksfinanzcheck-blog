@@ -115,7 +115,7 @@ Die beiden Verbrauchsfälle aus der Modellrechnung im Vergleich:
 2. **Sondertarife vergleichen.** Achte auf Laufzeit, [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/), Preisgarantie und Bonusbedingungen. Ein Neukundenbonus verzerrt den ersten Jahresvergleich.
 3. **Auftrag erteilen und warten.** Der neue Anbieter meldet den Wechsel an. Du musst nichts selbst kündigen, solange du in der Grundversorgung bist und der Auftrag sauber erteilt ist.
 
-Kontrolliere nach zwei Wochen, ob du eine Bestätigung mit Lieferbeginn erhalten hast im Modellfall. Fehlt sie, frage nach.
+Kontrolliere nach zwei Wochen, ob du eine Bestätigung mit Lieferbeginn erhalten hast. Fehlt sie, frage nach.
 
 ## Der Abschlag im Auffangtarif
 

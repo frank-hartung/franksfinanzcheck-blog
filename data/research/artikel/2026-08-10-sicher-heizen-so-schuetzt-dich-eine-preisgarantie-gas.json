@@ -1,0 +1,38 @@
+{
+  "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+  "titel": "Sicher heizen: Was sie abdeckt und wie lange sie läuft",
+  "erzeugt": "2026-11-01 10:13 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 1,
+    "klasse": "saisonal",
+    "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+    "alter_tage": 34,
+    "intervall": 30,
+    "frist": "2026-10-28",
+    "restlaufzeit": -4
+  },
+  "geo": {
+    "punkte": 6,
+    "maximum": 6,
+    "prozent": 100,
+    "offen": [],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": true,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": true
+    }
+  },
+  "treffer": [],
+  "befunde": [],
+  "fehler": [
+    "feedparser nicht installiert (pip install feedparser)",
+    "feedparser nicht installiert (pip install feedparser)",
+    "bundesnetzagentur.de: Jina-Reader-Abruf fehlgeschlagen (<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>)"
+  ],
+  "fassung_sha256": "98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b",
+  "fachpruefung": "übersprungen (kein KI-Schlüssel: GROQ_API_KEY/GEMINI_API_KEY)"
+}

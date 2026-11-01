@@ -427,6 +427,26 @@ jobs:
               failedStepNames.some(s => String(s).includes('Worker-Zustand'));
             const liveNachweisFailed = istSicherheitsWache &&
               failedStepNames.some(s => String(s).includes('Live-Nachweis abschließen'));
+            // ================================================================
+            //  WF-E813 / #972 (01.11.2026): DAS AUDIT-ROT HATTE KEINEN RAT
+            //  --------------------------------------------------------------
+            //  Im Lauf 41199051921 (31.10.2026) waren ZWEI unabhängige Jobs
+            //  rot: „Abhängigkeiten (Pins offline · Audit online)“ wegen
+            //  sieben HIGH-Funden an `pypdf==6.21.2` – und die Live-Messung
+            //  (F-01 + Worker). Die Meldung, die daraus wurde (#972), sprach
+            //  ausschließlich von Headern und Worker: Für den Audit-Job gab
+            //  es keine Klasse, also fiel er in den Live-Rat. Wer den Rat
+            //  befolgte, reparierte die Edge – der grüne Offline-Job blieb
+            //  rot, und niemand erfuhr warum.
+            //  Der Audit ist eine eigene Ursache mit eigenem Schließpfad
+            //  (Runbook E2) und bekommt deshalb eine eigene Klasse, die VOR
+            //  den Live-Klassen steht. Nennt beide Lagen, wenn beide rot sind.
+            // ================================================================
+            const abhaengigkeitenFailed = istSicherheitsWache &&
+              failedStepNames.some(s => String(s).includes('Advisory-Audit') ||
+                String(s).includes('Struktur-Gate – jeder Pin') ||
+                String(s).includes('Vertragstests der Wache') ||
+                String(s).includes('Eigenprüfung (Sabotage- und Gegenproben)'));
             // 26.10.2026 (WF-E813-Folgebefund): Der Produktions-Deploy der
             // Worker („Cloudflare-Worker deployen“) bricht fail-closed ab,
             // wenn der Zugang im Environment `cloudflare-produktion` fehlt.
@@ -597,6 +617,9 @@ jobs:
               // Klasse in einer offenen Meldung, muss der Rat neu geschrieben
               // werden. Ohne eigenen Namen bliebe er stehen (Schaden aus
               // WF-9E5A #761) – deshalb ist die Kette hier die einzige Quelle.
+              // #972: Der Abhängigkeits-Job ist eine eigene Ursache (Audit/Pins)
+              // und darf nicht als Header-/Worker-Befund gelesen werden.
+              : abhaengigkeitenFailed ? 'sicherheit-abhaengigkeiten'
               : headerGateFailed && workerGateFailed ? 'sicherheit-live'
               : headerGateFailed ? 'sicherheit-header'
               : workerGateFailed ? 'sicherheit-worker'
@@ -822,6 +845,14 @@ jobs:
                       '1. **Abhängigkeiten nicht installierbar.** Zum Installieren braucht der Lauf keinen API-Key – die Ursache liegt im Paketstand. Bei npm ist meist `package.json` oder `package-lock.json` defekt (z. B. ein Merge-Rest): `python3 scripts/manifest_guard.py` (oder `npm run manifest:check`) nennt Datei, Zeile und Ursache.',
                       '2. Bei pip: Paketname und Version im roten Schritt prüfen. Erst danach einen Registry- oder GitHub-Ausfall prüfen (https://www.githubstatus.com) und den Lauf neu starten.'
                     ]
+                  : runbookKlasse === 'sicherheit-abhaengigkeiten'
+                    ? [
+                        '1. **Einordnung:** Rot ist der Job „Abhängigkeiten“. Er prüft den AUSGELIEFERTEN Bestand gegen die Advisory-Datenbank (Online-Audit, nur im Tageslauf/auf Zuruf) und – bei jedem Push – die Struktur: exakte Pins, Quelle ↔ Hash-Lock, Lockfiles, Action-SHAs, Image-Tags und seit dem 01.11.2026 jedes `pip install` ohne `-r` (Regeln A1–A8).',
+                        '2. **Nachfahren:** `npm run deps:audit` (Exit 1 = Fundstelle, Exit 2 = Störung) und `npm run deps:check` (offline). Beide nennen Paket, Version, GHSA, Fix und die Herkunftsdatei; der Bericht steht als Annotation und im Lauf-Log.',
+                        '3. **Heilen (Exit 1):** Version auf die genannte `first_patched_version` pinnen – bei pip in `requirements-ci.in` UND `requirements-ci.txt` gemeinsam (neue Hashes, Regel A2 prüft die Gleichheit); bei den optionalen Manifesten `requirements-poppy.txt`/`requirements-tts.txt` genügt die eine Zeile. Danach `npm run deps:check && npm run deps:audit`. Eine Ad-hoc-Installation in einem Workflow (A7/A8) wird nicht gepinnt, sondern durch `-r <manifest>` ersetzt.',
+                        '4. **Störung (Exit 2) ist kein Freibrief:** Netz, Rate-Limit oder fehlendes Token heißen UNGEPRÜFT, nicht sauber. Lauf per „Run workflow“ wiederholen, nichts auf Verdacht ändern.',
+                        '5. **Wenn hier zusätzlich F-01/Worker rot sind:** Das ist ein zweiter, unabhängiger Befund (die Meldung nennt beide Jobs). Der Edge-Weg steht in `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A1; die Klasse dieser Meldung ist trotzdem der Bestand – erst die Pins, dann die Live-Messung. Runbook: Abschnitt E, Beweisführung `ABHAENGIGKEITS-SICHERHEIT-PREMIUM-2026-10-24.md`.'
+                      ]
                   : runbookKlasse === 'sicherheit-live'
                     ? [
                         '1. **Zwei unabhängige Live-Prüfungen sind rot:** F-01 (Sicherheits-Header) UND Worker-Zustand (F-02/F-03/F-08). Nur die Header zu reparieren reicht nicht. Die einzelnen Messbefunde stehen als Annotationen und in der Lauf-Zusammenfassung; die bereinigten Berichte liegen im Artefakt `sicherheits-live-nachweis`.',

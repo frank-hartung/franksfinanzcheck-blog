@@ -1,0 +1,25 @@
+# ============================================================
+#  POPPY-WERKBANK – Quellen-Einsammeln und Aufbereiten
+#  (WF-E813 / #972, 01.11.2026)
+# ------------------------------------------------------------
+#  WARUM DIESE DATEI EXISTIERT
+#  `poppy-werkbank.yml` installierte sechs Pakete AD HOC aus der
+#  Registry (`pip install pyyaml feedparser pypdf …`). Diese
+#  Versionen standen in keinem Manifest: Sie wurden vom
+#  Advisory-Audit nie abgefragt und von Dependabot nie
+#  aktualisiert. Genau so konnte am 31.10.2026 ein Lauf mit
+#  sieben offenen HIGH-Funden an `pypdf` „grün“ wirken, weil der
+#  Struktur-Test keine Datei fand, in der die Version steht.
+#
+#  REGEL: Jede Zeile trägt `==<version>`. Geprüft wird das von
+#  `scripts/abhaengigkeits_wache.py` (Regel A1 für die Pins,
+#  Regel A7 für jedes `pip install` ohne `-r`). Der Audit liest
+#  diese Datei mit – was hier steht, ist ausgeliefert und wird
+#  gegen die Advisory-Datenbank geprüft.
+# ============================================================
+pyyaml==6.0.3
+feedparser==6.0.14
+pypdf==6.21.4
+youtube-transcript-api==1.2.4
+trafilatura==2.3.1
+lxml_html_clean==0.4.6

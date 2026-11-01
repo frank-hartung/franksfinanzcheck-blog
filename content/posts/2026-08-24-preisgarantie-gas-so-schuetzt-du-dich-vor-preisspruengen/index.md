@@ -76,7 +76,7 @@ Versorger kaufen Gas zu verschiedenen Zeiten und über verschiedene Verträge ei
 
 Auch ein fallender Börsenpreis kommt nicht immer sofort bei dir an. Genau deshalb vergleichst du deinen Tarif mit Angeboten von heute. Eine einzelne Tagesbewegung sagt nichts über das ganze Jahr.
 
-Zur Einordnung: 2026 lag der Gaspreis fürs Einfamilienhaus laut BDEW im Schnitt bei 11,93 Cent je kWh als Beispielwert. Das zeigt nur den Markt von gestern. Über den Winter und über das Angebot bei dir sagt die Zahl nichts.
+Zur Einordnung: 2026 lag der Gaspreis fürs Einfamilienhaus laut BDEW im Schnitt bei 11,93 Cent je kWh; das ist ein Beispielwert. Das zeigt nur den Markt von gestern. Über den Winter und über das Angebot bei dir sagt die Zahl nichts.
 
 ## Wie eine Preisgarantie den Schock begrenzt
 
@@ -101,7 +101,7 @@ Angenommen, dein Verbrauch liegt bei 20.000 kWh. Tarif A kostet 10,8 Cent pro kW
 | A steigt nach 6 Monaten für 60 % des Verbrauchs um 1,5 ct | 2.520 € | 2.440 € |
 | A sinkt nicht, Marktangebote werden 1 ct günstiger | 2.340 € bis Wechsel | 2.440 € gebunden |
 
-Die zweite Zeile rechnet mit 12.000 kWh × 1,5 Cent = 180 € Mehrkosten als Modellwert. Tarif B kostet anfangs 100 € mehr. In diesem Fall wäre er aber 80 € günstiger.
+Die zweite Zeile rechnet mit 12.000 kWh × 1,5 Cent = 180 € Mehrkosten; das ist ein Modellwert. Tarif B kostet anfangs 100 € mehr. In diesem Fall wäre er aber 80 € günstiger.
 
 Das ist keine Vorhersage. Es zeigt nur den Preis für die Sicherheit. Eine Garantie kauft dir Planung – keine sichere Ersparnis.
 
@@ -141,7 +141,7 @@ Kündige selbst, schriftlich, und verlange eine Bestätigung. Beim normalen Wech
 
 Steigt der Arbeitspreis von 10,5 auf 12,0 Cent, beträgt der Unterschied 1,5 Cent pro kWh im Rechenfall.
 
-Bei 18.000 kWh wären das für ein volles Jahr **270 €** im Rechenbeispiel. Gilt der neue Preis nur für einen Teil des Abrechnungsjahres, musst du den Verbrauch zeitanteilig aufteilen. Gasverbrauch fällt nicht gleichmäßig an; der Winter wiegt stärker.
+Bei 18.000 kWh wären das für ein volles Jahr **270 €**; das ist ein Rechenbeispiel. Gilt der neue Preis nur für einen Teil des Abrechnungsjahres, musst du den Verbrauch zeitanteilig aufteilen. Gasverbrauch fällt nicht gleichmäßig an; der Winter wiegt stärker.
 
 Notiere deshalb zum Änderungsdatum den Zählerstand und übermittle ihn nach Vorgabe. So wird die Abgrenzung nachvollziehbarer.
 

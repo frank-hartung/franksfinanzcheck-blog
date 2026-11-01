@@ -37,7 +37,7 @@ quellen:
 faktencheck: "2026-10-13"
 ---
 
-DSL-Wechselbonus sichern im Check: Viele Haushalte zahlen für ihr Internet noch denselben Preis wie vor drei oder vier Jahren im Modellfall. Glasfaser und schnelle Leitungen sind längst Standard. Trotzdem bleiben viele im alten, teuren Vertrag. Der Grund: Der Wechsel klingt kompliziert – ist er aber meist nicht. Genau hier locken Anbieter mit Rabatten, Startguthaben und dem klassischen **DSL-Wechselbonus**. (Stand: Oktober 2026)
+DSL-Wechselbonus sichern im Check: Viele Haushalte zahlen für ihr Internet noch denselben Preis wie vor drei oder vier Jahren. Glasfaser und schnelle Leitungen sind längst Standard. Trotzdem bleiben viele im alten, teuren Vertrag. Der Grund: Der Wechsel klingt kompliziert – ist er aber meist nicht. Genau hier locken Anbieter mit Rabatten, Startguthaben und dem klassischen **DSL-Wechselbonus**. (Stand: Oktober 2026)
 
 Ein Problem bleibt aber: Ein hoher Bonus auf dem Werbebanner sieht toll aus. Das macht den Tarif aber noch lange nicht zum Schnäppchen. Erst wenn du Bonus, Grundgebühr, Anschlusskosten und Laufzeit genau zusammenrechnest, siehst du die Wahrheit: Sparst du wirklich – oder zahlst du nur eine hübsch verpackte Startprämie selbst?
 
@@ -58,7 +58,7 @@ Ein Problem bleibt aber: Ein hoher Bonus auf dem Werbebanner sieht toll aus. Das
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Prüfe nicht nur die Höhe des Bonus, sondern konzentriere dich auf den Preis über die gesamte Laufzeit von zwei Jahren als Modellwert. Dort versteckt sich die wahre Kostenfalle oder eben die echte Ersparnis: [**Internet & DSL vergleichen**](/go/dsl/)  
+💡 **Schnell-Tipp von FranksFinanzcheck:** Prüfe nicht nur die Höhe des Bonus, sondern konzentriere dich auf den Preis über die gesamte Laufzeit von zwei Jahren. Dort versteckt sich die wahre Kostenfalle oder eben die echte Ersparnis: [**Internet & DSL vergleichen**](/go/dsl/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Was ein DSL-Wechselbonus überhaupt ist?
@@ -77,7 +77,7 @@ Wichtig ist nur: Schau genau hin, **wie** dieser Vorteil verrechnet wird – und
 
 ## Der häufigste Denkfehler: Bonus mit Ersparnis verwechseln
 
-Ein Tarif mit **ca im Rechenfall. 200 € bis 300 € Bonus** wirkt auf den ersten Blick unschlagbar. Steigt der Preis aber ab dem 13. Monat stark an, oder kommt eine hohe Routermiete dazu, kann die Rechnung nach 24 Monaten am Ende höher sein. Ein Tarif mit kleinerem Bonus, aber fairer Grundgebühr, schneidet dann oft besser ab.
+Ein Tarif mit **ca. 200 € bis 300 € Bonus** wirkt auf den ersten Blick unschlagbar. Steigt der Preis aber ab dem 13. Monat stark an, oder kommt eine hohe Routermiete dazu, kann die Rechnung nach 24 Monaten am Ende höher sein. Ein Tarif mit kleinerem Bonus, aber fairer Grundgebühr, schneidet dann oft besser ab.
 
 Es gilt weiterhin die goldene Regel:
 
@@ -132,7 +132,7 @@ Das ist die einfachste Variante. Der Bonus wird direkt mit deinen ersten Rechnun
 Dieser Bonus ist oft hoch. Dafür musst du selbst aktiv werden. Meist musst du nach dem Start deines Anschlusses die erste Rechnung im Portal hochladen. Wer die Frist verpasst, verliert bares Geld.
 
 ### 3. Freimonate oder stark reduzierte Startpreise
-Hier läuft der Bonus über den Preis selbst als Modellannahme. Du zahlst in den ersten Monaten (z. B. 6 bis 12 Monate) nur einen kleinen Betrag von **ca. 10 € bis 20 €**. Danach steigt der Preis auf das normale Niveau.
+Hier läuft der Bonus über den Preis selbst. Du zahlst in den ersten Monaten (z. B. 6 bis 12 Monate) nur einen kleinen Betrag von **ca. 10 € bis 20 €**. Danach steigt der Preis auf das normale Niveau.
 
 ### 4. Hardware-Zuschuss
 Manche Anbieter locken mit guten Routern oder Spielekonsolen. Prüfe genau: Brauchst du die Hardware wirklich? Oder wäre ein echter Preisnachlass mehr wert für dich?
@@ -142,7 +142,7 @@ Manche Anbieter locken mit guten Routern oder Spielekonsolen. Prüfe genau: Brau
 Ein Wechsel lohnt sich im Oktober 2026 besonders oft, wenn:
 
 - Dein aktueller Vertrag die Mindestlaufzeit überschritten hat,
-- du monatlich deutlich mehr als **ca im Modellfall. 40 € bis 50 €** für Standard-DSL (100–250 Mbit/s) zahlst,
+- du monatlich deutlich mehr als **ca. 40 € bis 50 €** für Standard-DSL (100–250 Mbit/s) zahlst,
 - du noch einen alten Vertrag ohne moderne Glasfaser-Optionen nutzt,
 - dein aktueller Anbieter keine Treue-Rabatte gewährt,
 - die Verbindungsqualität nicht mehr deinen Anforderungen entspricht.
@@ -153,13 +153,13 @@ Ein Wechsel senkt oft nicht nur den Preis. Er bringt dir bei gleichen Kosten oft
 
 Ein großer Bonus darf nie über schlechte Leistung oder hohe Folgekosten hinwegtäuschen. Kritisch wird es dann, wenn der Tarif ab Jahr zwei so teuer wird, dass er die ganze Ersparnis wieder auffrisst. Auch versteckte Kosten sind ein Warnsignal: Manche Extras werden nach drei Probemonaten von selbst zum teuren Abo.
 
-Achte zudem auf die Routermiete: Schon **ca als Beispielwert. 6 € bis 9 €** im Monat summieren sich über zwei Jahre zu einer stattlichen Summe. Das schmälert den "tollen Bonus" schnell wieder.
+Achte zudem auf die Routermiete: Schon **ca. 6 € bis 9 €** im Monat summieren sich über zwei Jahre zu einer stattlichen Summe. Das schmälert den "tollen Bonus" schnell wieder.
 
 ## Warum du nicht bis zur letzten Woche warten solltest
 
 Hektik ist beim [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) ein schlechter Ratgeber. Wer erst kurz vor Ende der [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) sucht, übersieht oft das Kleingedruckte.
 
-Ein Vorlauf von **ca als Modellwert. 3 bis 4 Monaten** ist ideal, um:
+Ein Vorlauf von **ca. 3 bis 4 Monaten** ist ideal, um:
 
 - In Ruhe Tarife und Boni zu vergleichen,
 - die Hardware-Kompatibilität zu prüfen,
@@ -278,16 +278,16 @@ Für deinen Geldbeutel zählt die Summe, die am Ende nach 24 Monaten übrig blei
 Das ist ein Geldvorteil für Neukunden. Er kommt als Gutschrift, Cashback oder Hardware-Rabatt. So macht er den Wechsel attraktiver.
 
 ### Wie hoch kann die Ersparnis realistisch sein?
-Je nach Tarif sparen Haushalte durch den Wechsel oft **ca als Beispielwert. 300 € bis 500 €** über die ganze Laufzeit von zwei Jahren.
+Je nach Tarif sparen Haushalte durch den Wechsel oft **ca. 300 € bis 500 €** über die ganze Laufzeit von zwei Jahren.
 
 ### Ist Cashback besser als eine direkte Gutschrift?
 Das hängt von dir ab. Gutschriften auf der Rechnung sind bequem, denn sie laufen von selbst. Cashback ist oft höher, du musst aber selbst Unterlagen einreichen.
 
 ### Sollte ich meinen Router mieten oder kaufen?
-Rechne die Mietkosten über 24 Monate hoch (oft **ca als Modellwert. 150 € bis 200 €**). Oft ist der Kauf nach zwei Jahren günstiger. Dann gehört dir das Gerät auch.
+Rechne die Mietkosten über 24 Monate hoch (oft **ca. 150 € bis 200 €**). Oft ist der Kauf nach zwei Jahren günstiger. Dann gehört dir das Gerät auch.
 
 ### Wie früh sollte ich mit dem Wechsel anfangen?
-Am besten startest du **ca im Rechenfall. 3 bis 6 Monate** vor Ende deiner Laufzeit mit dem Vergleich. So bleibt genug Zeit für die besten Bonus-Aktionen.
+Am besten startest du **ca. 3 bis 6 Monate** vor Ende deiner Laufzeit mit dem Vergleich. So bleibt genug Zeit für die besten Bonus-Aktionen.
 
 ### Reicht der Bonus allein als Entscheidungskriterium?
 Nein. Er ist wichtig, aber nur ein Teil vom Ganzen. Der **24-Monats-Effektivpreis** zeigt die echte Ersparnis.

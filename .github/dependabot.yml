@@ -94,6 +94,44 @@ updates:
         patterns: ["*"]
         update-types: ["minor", "patch"]
 
+  # WF-E813 / #972 (01.11.2026): Die 2026-10-31 noch AD HOC installierten
+  # Pakete (Poppy-Werkbank, TTS-Kette) stehen jetzt in eigenen Manifesten.
+  # Ohne diesen Block würde der Audit sie zwar prüfen, Dependabot sie aber
+  # nie aktualisieren – ein Pin ohne Update-Weg veraltet still.
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Berlin"
+    cooldown:
+      default-days: 7
+      semver-major-days: 30
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "chore(deps)"
+    labels: ["dependencies"]
+    # Eigene Gruppe, damit die Wochen-PRs der CI-Pins nicht mit den
+    # optionalen Werkbank-Paketen in einem PR landen (ein PR = ein Risiko).
+    groups:
+      python-optionale-werkbank:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+    allow:
+      - dependency-name: "pyyaml"
+      - dependency-name: "feedparser"
+      - dependency-name: "pypdf"
+      - dependency-name: "youtube-transcript-api"
+      - dependency-name: "trafilatura"
+      - dependency-name: "lxml_html_clean"
+      - dependency-name: "edge-tts"
+      - dependency-name: "miniaudio"
+      - dependency-name: "piper-tts"
+        update-types: ["version-update:semver-minor", "version-update:semver-patch"]
+
+  # (Die Manifeste liegen in /: requirements-poppy.txt, requirements-tts.txt)
+
   # n8n-Host: Image-Tags in docker-compose.yml und das Whisper-Dockerfile.
   - package-ecosystem: "docker-compose"
     directory: "/tools/n8n"

@@ -1449,6 +1449,47 @@ die Ursachen lagen davor:
   `python3 -m unittest scripts.tests.test_reserve_pipeline`.
   Vorgangsbericht: `WF-D4E0-612-DAUERHEILUNG-PREMIUM-2026-10-07.md`.
 
+## Ein wartender Deploy ist kein grüner Deploy (WF-829B/#922, 01.11.2026)
+
+Der Vorgang #922 bestand bis zum 31.10. aus einer richtigen Entscheidung
+(„kein Worker-Deploy ohne nachgewiesene Produktionsfreigabe“) und einem
+Zustand, den das Repository nicht herstellen kann: `cloudflare-produktion`
+trägt seit seiner automatischen Anlage am 25.10.2026 13:20:15 UTC
+`protection_rules: []`, `deployment_branch_policy: null` und
+`can_admins_bypass: true`. Ein Schreibversuch mit dem Agenten-Token endet
+mit HTTP 403 (gemessen am 30.10. und erneut am 01.11.2026) – „Resource not
+accessible by integration“ ist ein **Rechtebefund**, keine Code-Regression.
+Der Schalter bleibt ein Handgriff im Dashboard; alles andere ist vorbereitet.
+
+- **Die zweite Stufe hat einen stillen Preis.** Mit Required Reviewer und
+  abgeschaltetem Admin-Bypass hält jeder Deploy an, bis ein Mensch freigibt.
+  Ein solcher Lauf wird **nicht rot**, meldet nichts und belegt dabei den
+  Concurrency-Slot `worker-deploy`; der nächste Push reiht sich dahinter ein,
+  und der Nachweis für #922 entsteht nie. Genau das ist die Lehre vom
+  24.10.2026 in neuer Form: nicht der laute Ausfall fehlt, sondern der leise.
+- **Die Wache:** `scripts/worker_freigabe_wache.py` liest ausschließlich die
+  Läufe von `worker-deploy.yml` und `worker-zugang-pruefen.yml`
+  (`actions: read`), bewertet `waiting`/`pending`/`action_required` gegen eine
+  Schwelle (Standard 120 Minuten) und nennt Alter und Lauf-Link. Junge Wartung
+  bleibt still; über der Schwelle ist es eine Warnung mit Schließpfad
+  (freigeben oder abbrechen), unlesbare Antworten sind Exit 2 (C33).
+  Lauf-Links werden aus geprüfter Repository-Angabe und geprüfter Lauf-ID
+  gebaut, nie aus der API-Antwort übernommen; das Token steht nur im Header.
+- **Einordnung:** Warnstufe statt Rot, weil ein wartender Lauf kein Defekt ist,
+  sondern eine offene Entscheidung – rot ohne Schließpfad wäre der Dauer-Alarm,
+  den C14 verbietet. „Nicht belegbar“ bleibt dagegen rot.
+- **Vertrag:** `worker_freigabe_wache.py` steht im vertraglichen Minimum
+  (GUARDS/C6), ihr Selbsttest (20 Fälle) und 23 Vertragstests laufen im
+  Sicherheits-Lauf mit; `test:sicherheit`, `npm run worker:freigabe`,
+  `npm run test:worker:freigabe` und der tägliche Schritt „Wartende
+  Deploy-Freigaben“ halten sie scharf.
+- Runbook: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A4 („Die Freigabe ist ein
+  Klick“) und D2. Vorgang:
+  `WARTUNG-VEROEFFENTLICHUNG-WF-829B-922-DAUERHEILUNG-HIGHEND-2026-11-01.md`.
+- **Was #922 schließt:** zwei grüne Deploy-Jobs, nachgewiesen über
+  `scripts/alert_resolve_gate.py` – nicht ein grüner Plan, nicht ein grüner
+  Zugangs-Check und nicht ein grüner Freigabe-Bericht.
+
 ## Die Seite darf nie stumm sterben (Robustheit der Laufzeit, C31, seit 07.10.2026)
 
 **Lehre aus vier Befunden, die kein Build-Gate sehen konnte.** Dieser Blog hat

@@ -35,7 +35,7 @@ quellen:
 faktencheck: 2026-10-07
 ---
 
-Jeden Monat kommt dein Gehalt auf das Konto im Modellfall. Davon bleiben am Ende vielleicht 50 € für dich frei. Du willst dieses Geld nicht einfach nur auf dem Sparbuch parken. Dein Ziel ist es, das Kapital langfristig und sicher zu vermehren.
+Jeden Monat kommt dein Gehalt auf das Konto. Davon bleiben am Ende vielleicht 50 € für dich frei. Du willst dieses Geld nicht einfach nur auf dem Sparbuch parken. Dein Ziel ist es, das Kapital langfristig und sicher zu vermehren.
 
 Du hast sicher schon von einem ETF-Sparplan gehört. Aber welche Schritte sind für den Start wirklich nötig?
 
@@ -44,7 +44,7 @@ Welche Fallen lauern auf dem Weg zum Erfolg? Hier gehst du von der ersten Idee b
 **Das Wichtigste in Kürze**  
 - Ein ETF-Sparplan kauft für dich automatisch Anteile an einem Fonds. Das System ist ideal für [kleine Beträge](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/).
 - Die Kosten bestehen aus der Gebühr für die Order, der TER des Fonds und der Gebühr für das Depot.
-- Ein Beitrag von 50 € im Monat kann über 20 Jahre stark wachsen als Beispielwert. Bei 5 % Rendite im Jahr entstehen rund 30.000 €.
+- Ein Beitrag von 50 € im Monat kann über 20 Jahre stark wachsen; das ist ein Beispielwert. Bei 5 % Rendite im Jahr entstehen rund 30.000 €.
 - Häufiges Wechseln der Strategie oder hohe [Kosten reduzieren](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/) deinen Gewinn am Ende deutlich.
 
 ---
@@ -77,11 +77,11 @@ In starken Phasen kaufst du automatisch weniger Anteile ein. Das nennt man den D
 | Depotgebühr | 0 € bis 5 € im Monat | Oft ist das Depot bei einem Sparplan kostenlos. |
 | Spread beim Kauf | 0,02 % bis 0,1 % | Das ist der Unterschied zwischen Kauf und Verkauf. |
 
-Bei einem günstigen Anbieter liegen deine Kosten unter 0,2 % des Kapitals als Modellwert. Achte bei der Wahl deines Brokers auf diese transparenten Angaben. Hohe Gebühren fressen über die Jahre einen großen Teil deines Zinseszinseffekts auf. Vergleiche deshalb die Konditionen genau, bevor du den ersten Euro überweist.
+Bei einem günstigen Anbieter liegen deine Kosten unter 0,2 % des Kapitals; das ist ein Modellwert. Achte bei der Wahl deines Brokers auf diese transparenten Angaben. Hohe Gebühren fressen über die Jahre einen großen Teil deines Zinseszinseffekts auf. Vergleiche deshalb die Konditionen genau, bevor du den ersten Euro überweist.
 
 ## So wählst du den passenden ETF
 
-Zuerst entscheidest du dich für einen breiten Markt im Rechenfall. Ein Index wie der MSCI World enthält über 1.500 Firmen aus der ganzen Welt.
+Zuerst entscheidest du dich für einen breiten Markt. Ein Index wie der MSCI World enthält über 1.500 Firmen aus der ganzen Welt.
 
 Auch der Euro-Stoxx-50 mit den größten Firmen der Eurozone ist eine Option. Prüfe danach immer die TER des Fonds. Ein niedriger Wert erhöht deine Rendite über die lange Laufzeit.
 
@@ -144,9 +144,9 @@ Das ist besonders nützlich, wenn sich dein Einkommen ändert oder du eine Pause
 
 ### Gibt es ein Mindestvolumen für gebührenfreie Sparpläne?
 
-Das hängt stark von deinem gewählten Anbieter ab im Rechenbeispiel. Einige Broker ermöglichen den Start schon ab einem Euro im Monat.
+Das hängt stark von deinem gewählten Anbieter ab. Einige Broker ermöglichen den Start schon ab einem Euro im Monat.
 
-Andere Anbieter verlangen mindestens 25 oder 50 € pro Ausführung im Modellfall. Prüfe diese Grenze in der Liste der Konditionen deines Brokers. So [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du Überraschungen bei der ersten Ausführung deines Plans.
+Andere Anbieter verlangen mindestens 25 oder 50 € pro Ausführung; das ist ein Modellwert. Prüfe diese Grenze in der Liste der Konditionen deines Brokers. So [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du Überraschungen bei der ersten Ausführung deines Plans.
 
 ### Was passiert, wenn mein Konto nicht genug Deckung hat?
 

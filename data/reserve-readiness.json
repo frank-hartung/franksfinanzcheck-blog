@@ -1,6 +1,6 @@
 {
   "target": 6,
-  "ready": 4,
+  "ready": 3,
   "pool_size": 6,
   "generated_at": "2026-10-31T14:39:53Z",
   "candidates": [
@@ -63,20 +63,10 @@
     },
     {
       "slug": "2026-10-30-energieeffiziente-geraete-so-sinken-deine-fixkosten",
-      "ready": true,
+      "ready": false,
       "sha256": "41a5b625076f91ebbff1458e008cbabdf24fd6bcf053cd54f0c24c63d15d0254",
-      "flesch": 67.2,
       "measured_at": "2026-10-31T09:57:54Z",
-      "score": 0.958,
-      "parts": {
-        "spelling": 0.86,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.96,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem",
