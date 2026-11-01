@@ -131,6 +131,39 @@ produktion:
   - skill: content-strategy
     rolle: "Cluster- und Themenplanung über die sechs Welten – Vorlage für data/topics.yaml und die Reserve"
     kanaele: [blog, website]
+  - skill: seo
+    rolle: "Hub des Pakets: routet auf die 25 Unterskills, wenn das SEO-Thema klar, der Ablauf aber offen ist"
+    kanaele: [suchmaschine, website]
+  - skill: seo-technical
+    rolle: "technischer Audit (Crawlbarkeit, Rendering, Core Web Vitals) als zweite Sicht neben den Haus-Gates"
+    kanaele: [suchmaschine, website]
+  - skill: seo-geo
+    rolle: "Sichtbarkeit in KI-Antworten (AI Overviews, ChatGPT, Perplexity) – Kernauftrag des Blogs seit 09/2026"
+    kanaele: [suchmaschine]
+  - skill: seo-agentic
+    rolle: "Agent-Readiness: llms.txt, Markdown-Zustellung, Lighthouse Agentic Browsing"
+    kanaele: [website, suchmaschine]
+  - skill: seo-schema
+    rolle: "JSON-LD-Entwurf und Prüfung gegen Rich-Result-Anforderungen"
+    kanaele: [website]
+  - skill: seo-sitemap
+    rolle: "Sitemap-Analyse und Abgleich mit den tatsächlich indexierten URLs"
+    kanaele: [suchmaschine, website]
+  - skill: seo-images
+    rolle: "Alt-Text, Formate und Ladeverhalten der Artikelbilder"
+    kanaele: [website]
+  - skill: seo-page
+    rolle: "Einzel-URL-Review (On-Page, Meta, Schema) ohne vollen Site-Audit"
+    kanaele: [website]
+  - skill: seo-sxo
+    rolle: "Intent- und SERP-Typ-Diagnose, wenn Rankings trotz gutem Text ausbleiben"
+    kanaele: [suchmaschine]
+  - skill: seo-plan
+    rolle: "Strategie- und Maßnahmenplan je Themenwelt"
+    kanaele: [suchmaschine, blog]
+  - skill: seo-programmatic
+    rolle: "Vorlagen-Seiten und URL-Muster für Tarif- und Vergleichsmuster"
+    kanaele: [website, suchmaschine]
   text-und-redaktion:
   - skill: copywriting
     rolle: "neue Texte: Artikel-Einstieg, Landingpages, Werkzeug-Beiwerk"
@@ -141,6 +174,15 @@ produktion:
   - skill: marketing-psychology
     rolle: "Leserführung ohne Manipulation: Verlustaversion, Anker, Defaults"
     kanaele: [blog]
+  - skill: seo-content
+    rolle: "E-E-A-T-Prüfung der Artikel: Erfahrung, Belege, Autorenschaft"
+    kanaele: [blog]
+  - skill: seo-content-brief
+    rolle: "Content-Briefs für die Reserve: Zielkeyword, Gliederung, interne Links"
+    kanaele: [blog]
+  - skill: seo-cluster
+    rolle: "Keyword-Cluster nach SERP-Überlappung als Vorlage für die Themenplanung"
+    kanaele: [blog, suchmaschine]
   werkzeuge-und-oberflaeche:
   - skill: cro
     rolle: "Conversion auf Werkzeugseiten und Artikel-Abschluss (Newsletter-Anmeldung)"
@@ -192,6 +234,12 @@ produktion:
   - skill: ab-testing
     rolle: "Änderungen an Titeln/Werkzeugen falsifizierbar prüfen"
     kanaele: [website]
+  - skill: seo-google
+    rolle: "GSC-, PSI- und CrUX-Auswertung als Gegenprobe zu scripts/gsc_abdeckung.py"
+    kanaele: [suchmaschine]
+  - skill: seo-drift
+    rolle: "Baseline und Diff der SEO-kritischen Elemente nach einem Deploy – Git für On-Page"
+    kanaele: [website]
   wettbewerb:
   - skill: competitors
     rolle: "Vergleichs- und Alternativseiten (Finanztip, Zeit Online)"
@@ -207,6 +255,12 @@ produktion:
 # Jeder Eintrag trägt `grund` (warum nicht), `entscheidung` (was passiert)
 # und `faellig` (wann neu entschieden wird). Ohne Frist wäre der Ausschluss
 # eine stille Abschaffung – dieselbe Regel wie bei den Lizenz-Ausnahmen (K6).
+  - skill: seo-backlinks
+    rolle: "Verweisprofil und Lücken gegenüber Finanztip und Zeit Online"
+    kanaele: [suchmaschine]
+  - skill: seo-competitor-pages
+    rolle: "Vergleichs- und Alternativseiten als Seitenmuster"
+    kanaele: [suchmaschine, website]
 ausgeschlossen:
   # Geschäftsmodell eines SaaS: der Blog verkauft keine Software.
   ads:
@@ -335,6 +389,34 @@ ausgeschlossen:
   skill-creator:
     grund: "Handwerk am Regelwerk selbst – LEBT, wird aber nicht wie ein Themenskill budgetiert (kein Beschreibungs-Beitrag)"
     entscheidung: "bleibt installiert, nicht Teil des Themen-Budgets (Ausnahme von P3)"
+    faellig: "2027-03-31"
+  seo-local:
+    grund: "der Blog hat kein lokales Geschäft und kein Google-Business-Profil"
+    entscheidung: "bleibt als Paketbestand installiert, zählt nicht zum Themen-Budget; Wiedervorlage bei lokalem Angebot"
+    faellig: "2027-03-31"
+  seo-maps:
+    grund: "Geo-Grid- und GBP-Tracking setzen ein Google-Business-Profil voraus, das es nicht gibt"
+    entscheidung: "bleibt installiert, dient keinem Thema; Wiedervorlage zusammen mit seo-local"
+    faellig: "2027-03-31"
+  seo-ecommerce:
+    grund: "der Blog verkauft keine Produkte – Monetarisierung ist Affiliate, kein Shop"
+    entscheidung: "bleibt installiert, dient keinem Thema; Wiedervorlage bei eigenem Produkt"
+    faellig: "2027-03-31"
+  seo-hreflang:
+    grund: "einsprachige deutsche Seite – hreflang ohne Adressaten"
+    entscheidung: "bleibt installiert, dient keinem Thema; Wiedervorlage bei zweiter Sprache"
+    faellig: "2027-03-31"
+  seo-dataforseo:
+    grund: "kostenpflichtige Fremd-API ohne Konto und ohne Auftrag"
+    entscheidung: "bleibt installiert, aber ohne Schlüssel ungenutzt; Wiedervorlage nur mit Beschluss zum Einkauf"
+    faellig: "2027-03-31"
+  seo-image-gen:
+    grund: "verlangt Gemini/banana-MCP; die Bilder entstehen in der eigenen Pipeline"
+    entscheidung: "bleibt installiert, dient keinem Thema; Wiedervorlage bei Wechsel der Bildstrecke"
+    faellig: "2027-03-31"
+  seo-flow:
+    grund: "Sammlung generischer FLOW-Prompts (CC BY 4.0) ohne Messbeleg im Haus"
+    entscheidung: "bleibt installiert, dient keinem Thema; ersetzt keine Wache und keine Messung"
     faellig: "2027-03-31"
 
 # --- Grenzen des Budgets ------------------------------------------------
