@@ -25,7 +25,16 @@ class MetaTests(unittest.TestCase):
             "<body>", "<body><svg><title>Diagramm mit drei Balken</title></svg>")
         self.assertNotIn("M4", regeln(text))
 
-    def test_description_fenster_110_bis_156(self):
+    def test_description_fenster_ist_das_marktfenster(self):
+        """Seit 01.11.2026 misst die Wache das Fenster der SSOT (100–155).
+
+        Vorher führte sie 110–156 – zwei Zahlen, die nirgends sonst galten.
+        Der Test friert die Bindung ein, nicht die Zahl: er vergleicht gegen
+        `serp_limits`, damit eine Änderung dort hier ankommt statt zu driften.
+        """
+        import serp_limits as sl
+        self.assertEqual((w.DESC_MIN, w.DESC_MAX),
+                         (sl.DESC_MIN_ZEICHEN, sl.DESC_MAX_ZEICHEN))
         alt = ("Eine Seitenbeschreibung im Fenster des Website Checks: Sie nennt "
                "das Thema, bleibt konkret und ist lang genug, damit Google sie "
                "nicht abschneidet.")

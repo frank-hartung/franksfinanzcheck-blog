@@ -1,6 +1,7 @@
 # ANLEITUNG: Skills und der geteilte Leitfaden
 
-Stand: 01.11.2026 · Verantwortlich: `scripts/skills_vertrag.py` (K1–K8) ·
+Stand: 01.11.2026 · Verantwortlich: `scripts/skills_vertrag.py` (K1–K10) und
+`scripts/skills_portfolio.py` (P1–P7) ·
 Vorgang und Zahlen: `SKILLS-UMBAU-UND-LIZENZ-NACHWEIS-HIGHEND-2026-11-01.md` ·
 Auftrag: Regelwerk so ablegen, dass es **gewirkt** wird, nicht nur exists.
 
@@ -19,9 +20,10 @@ braucht. Ersparnis: rund 35.000 Tokens Regelwerk pro Session, 89 % weniger
 Vorladelast, bei unverändertem Regelbestand.
 
 ```
-CLAUDE.md                      ← Kern: 239 Zeilen, 17 KB, Nummer ist Vertrag
+CLAUDE.md                      ← Kern: 242 Zeilen, 18 KB, Nummer ist Vertrag
 .claude/skills/
   ff-pruefen/     SKILL.md + references/*.md   ← Details wörtlich aus dem Kern
+  ff-lektorat/    SKILL.md + 4 references + evals.md  ← eigene deutsche Ausgabe
   ff-ausliefern/  …
   ff-produzieren/ …
   ff-marke-text/  …
@@ -30,9 +32,11 @@ CLAUDE.md                      ← Kern: 239 Zeilen, 17 KB, Nummer ist Vertrag
   <fremd>/        SKILL.md + LICENSE.txt       ← aus skills-lock.json, npx skills update
 skills-lock.json               ← nur Fremdquellen
 data/skill_lizenzen.json       ← Herkunft und Lizenz je Skill
+data/skill_portfolio.yaml      ← welches Skill dient welchem Thema (oder ist ausgeschlossen)
+data/skill_ergaenzungen.json   ← umgezogene/verlorene Zusatzdateien (K10)
 ```
 
-## Die sechs Skills und ihre Grenze
+## Die sieben Skills und ihre Grenze
 
 | Skill | Zuständig für | Nicht zuständig für |
 |---|---|---|
@@ -42,6 +46,7 @@ data/skill_lizenzen.json       ← Herkunft und Lizenz je Skill
 | `ff-marke-text` | README-Markenfläche, Abschlussvermerk, ZEIT-Latte, Metadaten/SERP, Tags, Offenlegung, Pins | Layout/CSS |
 | `ff-oberflaeche` | Design-Disziplin, Laufzeit-Robustheit, Werkzeuge, `_headers` | Wer wann produziert |
 | `ff-ki-automation` | KI-Transportweg, Werkbank, Recherche, Suchradar, Schaltwerk, Kostensperre | Bewertung der Ergebnisse |
+| `ff-lektorat` | deutsches Lektorat vor Auslieferung: Seven Sweeps, KI-Tells, YMYL-Panel, Engine-Kette, finale Checkliste | neue Texte schreiben, Layout/CSS |
 
 Die Grenze ist keine Dekoration: Wer eine Regel ablegt, entscheidet, **wer sie
 in Zukunft liest**. Eine Regel im falschen Skill wird bei dem Auftrag nicht
@@ -70,6 +75,28 @@ npx skills add <owner>/<repo>          # Quelle landet in skills-lock.json
 python3 scripts/skills_vertrag.py      # was fehlt noch? (K4, K6)
 ```
 
+**Achtung, `--skill '*'`.** Ein Aufruf mit allen Skills schreibt **jeden** Ordner
+neu – auch die, die schon liegen. Am 01.11.2026 hat genau das die deutsche
+`copy-editing`-Ausgabe gelöscht (`SKILL_DE.md`, `evals-de.json`, vier
+`references/*-de.md`), und der Vertrag blieb grün.
+
+**Die Lehre ist nicht „retten", sondern „verlassen".** Eine repo-eigene Datei
+in einem Fremd-Ordner ist eine Löschung auf Zeit; sie gehört in ein
+`ff-*`-Skill, das niemand überschreibt. Genau so ist der Fall geschlossen: die
+deutsche Ausgabe ist jetzt `ff-lektorat` (SKILL.md + vier references +
+`evals/evals.md`), und `data/skill_ergaenzungen.json` führt den Umzug mit
+Herkunft, Ziel und Datum. K10 prüft seither drei Zustände: angekommen (still),
+zurückgefallen (Warnung), verloren (Befund).
+
+Für den Notfall bleibt der Blick nach dem Update (Wiederherstellung ist ein
+Rettungsgriff, kein Betriebsmodell):
+
+```bash
+npx -y skills@1.7.4 add <owner>/<repo> --skill '*' -a claude-code -y
+git status --short .claude/skills        # was hat der CLI ersetzt?
+git checkout HEAD -- .claude/skills/<ordner>   # nur zur Rettung, dann umziehen
+```
+
 Danach ist die Arbeit nicht fertig, sondern überprüfbar:
 
 1. **Lizenztext in den Ordner.** `LICENSE.txt` aus der Upstream-Root oder dem
@@ -86,6 +113,51 @@ Danach ist die Arbeit nicht fertig, sondern überprüfbar:
 
 `skills-lock.json` ist für Fremdquellen da. **`ff-*` stehen dort nie** – sonst
 überschreibt das nächste `npx skills update` repo-eigenes Regelwerk (K4).
+
+## Welche Themen bedient der Blog? (`data/skill_portfolio.yaml`)
+
+Die Frage entsteht bei jedem neuen Fremd-Skill: Es kostet Dauerlast in jeder
+Session, auch wenn es nie gelesen wird. Das Portfolio beantwortet sie an einer
+Stelle, und `scripts/skills_portfolio.py` hält die Antwort ehrlich.
+
+```
+Themen (12)      sechs Inhaltswelten + sechs Kanäle, jede mit Belegpfad
+produktion       Skill → Thema + Rolle + Kanal   (29 Skills, ≈ 5.400 Tokens)
+ausgeschlossen   Skill → Grund + Entscheidung + Frist   (31 Skills)
+```
+
+Die Unterscheidung `art: inhalt | kanal` ist die eigentliche Antwort:
+
+* **inhalt** – die sechs Themenwelten aus `data/themenwelten.json`. Sie werden
+  von der Content-Engine mit Artikeln bedient (105 Artikel tragen `pillar:`),
+  **nicht** von einem Marketing-Skill. Ein fehlendes Skill ist hier normal;
+  ein Thema ohne Artikel ist ein Befund (P7).
+* **kanal** – Suche/KI, Text, Werkzeuge, Verbreitung, Messung, Wettbewerb.
+  Hier **muss** ein Skill hängen, sonst wird die Achse behauptet (P4).
+
+Ein Kanal ist nur dann ein Kanal, wenn ein Pfad ihn belegt (`kanaele`:
+`newsletter-worker`, `scripts/pinterest_ziele.py`, `content/presse` …). Ein
+Skill für Discord, Events oder Influencer fällt damit durch – nicht weil es
+schlecht ist, sondern weil es hier nichts bedient.
+
+```bash
+python3 scripts/skills_portfolio.py             # P1–P7 prüfen
+python3 scripts/skills_portfolio.py --selftest  # 15 Sabotage-Fälle + Gegenproben
+npm run skills:portfolio                        # dasselbe im Hausstil
+```
+
+| Klasse | Prüft | Fund heißt |
+|---|---|---|
+| P1 | Jedes installierte Fremd-Skill ist einem Thema zugeordnet oder ausgeschlossen | Dauerlast ohne Entscheidung |
+| P2 | Jedes Thema und jeder Kanal hat einen existierenden Belegpfad | Das Thema wird behauptet, nicht bedient |
+| P3 | Summe der Beschreibungen aller Themen-Skills ≤ `budget_kb` | Der Themenbetrieb wächst ohne Entscheidung |
+| P4 | Kanal-Thema hat ein Skill; jedes Skill hat `rolle` und belegte `kanaele` | Achse ohne Fahrer oder Kanal, den es nicht gibt |
+| P5 | Ausschluss trägt Grund, Entscheidung, Frist; abgelaufene Frist warnt | Stille Abschaffung |
+| P6 | Kein Skill gleichzeitig in `produktion` und `ausgeschlossen` | Eine Entscheidung, zwei Antworten |
+| P7 | Jedes Inhaltsthema hat Artikel (`pillar:` im Frontmatter) | Leere Kachel auf der Startseite |
+
+P5 ist **immer nur eine Warnung**. Eine Frist soll erinnern, nicht das Gate
+schließen – dieselbe Linie wie K6 und K8.
 
 ## Der Nachweis
 
@@ -107,6 +179,8 @@ npm run test:skills                          # Selbsttest + 31 Unit-Tests
 | K6 | Lizenztext, NOTICE, Ausnahme mit Grund und Frist | Fremder Code ohne Erlaubnis im Repo |
 | K7 | `§N` / „Regel N“ / „Abschnitt X“ aus `scripts/` und Workflows | Ein Verweis läuft ins Leere |
 | K8 | Siegelstand: tragen `KRITISCH`/`FEST` und `data/integrity_lock.json` Wache und Lizenz-Register? | Der Regelkern ist austauschbar, ohne dass es laut wird |
+| K9 | Summe aller `description` ≤ 56 KB (≈ 14.000 Tokens) | Die Bibliothek wächst still in jede Session hinein |
+| K10 | Zusatzdatei in fremdem Ordner (Warnung) und jeder Stand aus `data/skill_ergaenzungen.json` am Ziel | Ein `npx skills update` löscht repo-eigene Dateien ohne Meldung |
 
 K8 ist **immer eine Warnung, nie ein Befund**. Zeichnen ist ein Betreiberakt,
 und ein Gate, das eine ungezeichnete Datei hart rot macht, bestraft die falsche
