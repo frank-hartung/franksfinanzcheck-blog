@@ -384,6 +384,50 @@ await run('#654-Reproduktion: npm ci rot auf main → Manifest-Diagnose, kein AP
   true, ['Abhängigkeiten nicht installierbar', 'manifest_guard.py', '### Fehlgeschlagene Schritte',
          '<!-- alert-runbook: installation -->'],
   null, ['API-Key abgelaufen']);
+// 9e. WF-E813 / #972 (01.11.2026): Der Abhängigkeits-Job der Sicherheits-Wache
+//     war rot (sieben HIGH-Funde an `pypdf==6.21.2`) und bekam KEINEN eigenen
+//     Rat – die Meldung sprach nur von Headern und Worker. Wer dem Rat folgte,
+//     reparierte die Edge, während der Bestand rot blieb. Der Audit ist eine
+//     eigene Ursache und muss den Schließpfad selbst nennen.
+await run('#972-Reproduktion: nur der Advisory-Audit rot → Abhängigkeits-Rat, kein Header-Rat',
+  { workflowName: 'Sicherheits-Wache', branch: 'main', event: 'schedule', conclusion: 'failure',
+    runId: 41199051921,
+    jobs: [{ name: 'Abhängigkeiten (Pins offline · Audit online)', conclusion: 'failure',
+             html_url: 'https://x/jobs/124531032562',
+             steps: [{ name: 'Eigenprüfung (Sabotage- und Gegenproben)', conclusion: 'success' },
+                     { name: 'Struktur-Gate – jeder Pin ist eine Aussage (offline)', conclusion: 'success' },
+                     { name: 'Advisory-Audit – ausgelieferte Versionen gegen die Datenbank', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: sicherheit-abhaengigkeiten -->', 'npm run deps:audit', 'npm run deps:check',
+         'first_patched_version', 'Abschnitt E'],
+  null, ['Sicherheits-Header', 'Worker:', 'API-Key abgelaufen', 'Häufigste Ursachen']);
+// 9f. #972: Audit UND Live-Messung rot (der echte Zustand vom 31.10.2026).
+//     Die Klasse bleibt der Bestand – und der Rat nennt den ZWEITEN Befund,
+//     statt ihn zu verschweigen.
+await run('#972: Audit + Header/Worker rot → Abhängigkeits-Rat nennt beide Lagen',
+  { workflowName: 'Sicherheits-Wache', branch: 'main', event: 'schedule', conclusion: 'failure',
+    runId: 41199051922,
+    jobs: [
+      { name: 'Abhängigkeiten (Pins offline · Audit online)', conclusion: 'failure',
+        html_url: 'https://x/jobs/124531032562',
+        steps: [{ name: 'Advisory-Audit – ausgelieferte Versionen gegen die Datenbank', conclusion: 'failure' }] },
+      { name: 'Live-Messung (täglich und auf Zuruf)', conclusion: 'failure',
+        html_url: 'https://x/jobs/124531071373',
+        steps: [{ name: 'Sicherheits-Header auswerten (F-01) · Befund · Störung · grün', conclusion: 'failure' },
+                { name: 'Worker-Zustand auswerten (F-02/F-03/F-08) · Befund · Störung · grün', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: sicherheit-abhaengigkeiten -->', 'Wenn hier zusätzlich F-01/Worker rot sind',
+         'npm run deps:audit'],
+  null, ['Häufigste Ursachen', 'API-Key abgelaufen']);
+// 9g. Gegenprobe: Rot NUR in der Live-Messung behält den Edge-Rat. Die neue
+//     Klasse darf den bestehenden Schließpfad von A1 nicht verdrängen.
+await run('#972-Gegenprobe: nur F-01 rot → weiterhin Header-Rat',
+  { workflowName: 'Sicherheits-Wache', branch: 'main', event: 'schedule', conclusion: 'failure',
+    runId: 41199051923,
+    jobs: [{ name: 'Live-Messung (täglich und auf Zuruf)', conclusion: 'failure',
+             html_url: 'https://x/jobs/124531071373',
+             steps: [{ name: 'Sicherheits-Header auswerten (F-01) · Befund · Störung · grün', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: sicherheit-header -->', 'cloudflare/edge-schutz.md'],
+  null, ['alert-runbook: sicherheit-abhaengigkeiten']);
+
 // 10. Deploy: die Manifest-Wache rot → dieselbe Diagnose (Produktionspfad).
 // 9b. WF-7B6B / #925 (29.10.2026): Das Snippet-Gate misst den gebauten
 //     Bestand gegen die SSOT (155 Zeichen / 985 px). Vorfall: eine

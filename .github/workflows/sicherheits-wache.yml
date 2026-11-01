@@ -104,6 +104,13 @@ on:
       - "scripts/tests/test_github_kommando.py"
       - "requirements*.txt"
       - "requirements-ci.in"
+      # WF-E813 / #972 (01.11.2026): Die zuvor AD HOC installierten Pakete
+      # stehen jetzt in eigenen Manifesten. Ändert sich dort eine Version,
+      # muss dieser Lauf die Pins (A1), die Quelle und den Audit prüfen –
+      # sonst wäre der neue Pin wieder eine Aussage ohne Wächter.
+      - "requirements-poppy.txt"
+      - "requirements-tts.txt"
+      - "tools/n8n/Dockerfile*"
       - "package.json"
       - "package-lock.json"
       - "tools/*/package.json"
@@ -165,6 +172,13 @@ on:
       - "scripts/tests/test_github_kommando.py"
       - "requirements*.txt"
       - "requirements-ci.in"
+      # WF-E813 / #972 (01.11.2026): Die zuvor AD HOC installierten Pakete
+      # stehen jetzt in eigenen Manifesten. Ändert sich dort eine Version,
+      # muss dieser Lauf die Pins (A1), die Quelle und den Audit prüfen –
+      # sonst wäre der neue Pin wieder eine Aussage ohne Wächter.
+      - "requirements-poppy.txt"
+      - "requirements-tts.txt"
+      - "tools/n8n/Dockerfile*"
       - "package.json"
       - "package-lock.json"
       - "tools/*/package.json"
