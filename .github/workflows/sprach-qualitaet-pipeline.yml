@@ -198,16 +198,21 @@ jobs:
 
       - name: Issue bei Qualitätsverstoß eröffnen (strict)
         if: steps.status.outputs.qualitaet == 'verstoß'
-        uses: peter-evans/create-issue-from-file@959985ac0a2ee023b3cc256977ec1a093aa4a0bf # v4.0.1
+        uses: peter-evans/create-issue-from-file@433e51abf769039ee20ba1293a088ca19d573b7f # v4.0.1
         with:
           title: "🚨 Sprach-Qualität: offene kritische Funde (Copy-Editing-Gate)"
           content-filepath: COPY-EDITING-REPORT.md
-          labels: ["qualitaet", "sprach-qualitaet", "automatisiert"]
+          # `labels`/`assignees` sind bei dieser Action kommagetrennte
+          # ZEICHENKETTEN – keine YAML-Liste. Eine Liste hier macht die
+          # GANZE Datei ungültig: „(Line: 205, Col: 19): A sequence was
+          # not expected“, der Workflow wird verworfen und jeder Push
+          # erzeugt einen Lauf mit 0 Jobs. Genau das war er.
+          labels: "qualitaet, sprach-qualitaet, automatisiert"
           assignees: ""
 
       - name: Reports als Artefakte sichern
         if: always()
-        uses: actions/upload-artifact@49538c08a0826eef0d640c58a59e7a5e2b50aaef # v4.4.3
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: sprach-qualitaet-reports
           path: |

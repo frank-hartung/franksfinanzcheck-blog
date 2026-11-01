@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-10-31T16:57:17.673500+00:00",
-  "head": "ea2435e8c",
+  "signed_at": "2026-10-31T19:27:29.596004+00:00",
+  "head": "36f7663",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -55,266 +55,8 @@
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
   "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c",
-  "audit_start_sha256": "ed1807d74a2ef753d047e071633a0a9ec1f964228a1cb55e75399421c13e3cf6",
+  "audit_start_sha256": "0ec2a604ce91c4c75faf2c656d56754297c7783039ba029e2a3e6738ec8248aa",
   "audit": [
-    {
-      "date": "2026-10-26",
-      "art": "heal",
-      "head": "a792e81",
-      "geaendert": [
-        "scripts/reserve_artifacts.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/reserve_artifacts.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "7474269",
-              "datum": "2026-10-26",
-              "betreff": "fix(ci): Vier PRs konsolidieren, Basisregressionen heilen, Sicherheits-Gates erhalten (#898)"
-            }
-          ],
-          "commits_art": "seit-signatur"
-        }
-      ],
-      "files_sha256": "8841ad35ace38d58a9cb009418c44177cf7da60c16246d422135e7d90f6ed210",
-      "prev_sha256": null
-    },
-    {
-      "date": "2026-10-26",
-      "art": "set-current",
-      "head": "aef612d",
-      "geaendert": [
-        "layouts/_partials/extend_post_content.html",
-        "layouts/_partials/header.html",
-        "layouts/pillar/single.html"
-      ],
-      "herkunft": [
-        {
-          "pfad": "layouts/_partials/extend_post_content.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "aef612d",
-              "datum": "2026-10-26",
-              "betreff": "fix(a11y): Label in Name heilen, Siegel neu signieren, Ratgeber-Welten ins Gate"
-            },
-            {
-              "sha": "b6de502",
-              "datum": "2026-10-26",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/_partials/header.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "aef612d",
-              "datum": "2026-10-26",
-              "betreff": "fix(a11y): Label in Name heilen, Siegel neu signieren, Ratgeber-Welten ins Gate"
-            },
-            {
-              "sha": "b6de502",
-              "datum": "2026-10-26",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/pillar/single.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "aef612d",
-              "datum": "2026-10-26",
-              "betreff": "fix(a11y): Label in Name heilen, Siegel neu signieren, Ratgeber-Welten ins Gate"
-            },
-            {
-              "sha": "b6de502",
-              "datum": "2026-10-26",
-              "betreff": "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "52515cb9df27ff40ce8ff842e7d585844d9a4aea492d378a5377cc96b8013d0c",
-      "prev_sha256": "ed1807d74a2ef753d047e071633a0a9ec1f964228a1cb55e75399421c13e3cf6"
-    },
-    {
-      "date": "2026-10-26",
-      "art": "set-current",
-      "head": "21b8fca",
-      "geaendert": [
-        "assets/css/extended/custom.css",
-        "layouts/_partials/cover.html",
-        "layouts/_partials/extend_footer.html",
-        "layouts/_partials/extend_post_content.html",
-        "layouts/_partials/head.html",
-        "layouts/pillar/single.html"
-      ],
-      "herkunft": [
-        {
-          "pfad": "layouts/_partials/head.html",
-          "klasse": "kritisch",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c82f7f3",
-              "datum": "2026-10-26",
-              "betreff": "Optimize blog rendering, SEO and accessibility with regression coverage"
-            },
-            {
-              "sha": "7474269",
-              "datum": "2026-10-26",
-              "betreff": "fix(ci): Vier PRs konsolidieren, Basisregressionen heilen, Sicherheits-Gates erhalten (#898)"
-            },
-            {
-              "sha": "6c61412",
-              "datum": "2026-10-26",
-              "betreff": "SEO-Highend-Runde: KI-Transparenz, Metadaten, Umami-Vorbereitung, Event-Driven Refresh (#890)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "assets/css/extended/custom.css",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c82f7f3",
-              "datum": "2026-10-26",
-              "betreff": "Optimize blog rendering, SEO and accessibility with regression coverage"
-            },
-            {
-              "sha": "18cf6ea",
-              "datum": "2026-10-26",
-              "betreff": "research: AGC-Tagesreport + Redaktionskalender aktualisiert"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/_partials/cover.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c82f7f3",
-              "datum": "2026-10-26",
-              "betreff": "Optimize blog rendering, SEO and accessibility with regression coverage"
-            },
-            {
-              "sha": "18cf6ea",
-              "datum": "2026-10-26",
-              "betreff": "research: AGC-Tagesreport + Redaktionskalender aktualisiert"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/_partials/extend_footer.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c82f7f3",
-              "datum": "2026-10-26",
-              "betreff": "Optimize blog rendering, SEO and accessibility with regression coverage"
-            },
-            {
-              "sha": "18cf6ea",
-              "datum": "2026-10-26",
-              "betreff": "research: AGC-Tagesreport + Redaktionskalender aktualisiert"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/_partials/extend_post_content.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c82f7f3",
-              "datum": "2026-10-26",
-              "betreff": "Optimize blog rendering, SEO and accessibility with regression coverage"
-            },
-            {
-              "sha": "18cf6ea",
-              "datum": "2026-10-26",
-              "betreff": "research: AGC-Tagesreport + Redaktionskalender aktualisiert"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        },
-        {
-          "pfad": "layouts/pillar/single.html",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "21b8fca",
-              "datum": "2026-10-26",
-              "betreff": "Merge latest main accessibility fixes and share checklist rendering"
-            },
-            {
-              "sha": "453ea56",
-              "datum": "2026-10-26",
-              "betreff": "fix(a11y): Label in Name heilen, Siegel neu signieren, Ratgeber-Welten ins Gate (#907)"
-            },
-            {
-              "sha": "c82f7f3",
-              "datum": "2026-10-26",
-              "betreff": "Optimize blog rendering, SEO and accessibility with regression coverage"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "12cb03724c935f4cd68cceda07efacb83ce265e43da3839c67bf3bfaa2d427df",
-      "prev_sha256": "cd074ba68ce5d9cb9080995842ea6d635631a126609106cfddbb9d9527a93d04"
-    },
-    {
-      "date": "2026-10-27",
-      "art": "set-current",
-      "head": "6dda09c",
-      "geaendert": [
-        "hugo.toml"
-      ],
-      "herkunft": [
-        {
-          "pfad": "hugo.toml",
-          "klasse": "kritisch",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "6dda09c",
-              "datum": "2026-10-27",
-              "betreff": "feat(seo): Sitecheck-2016-Kriterien umsetzen und dauerhaft bewachen"
-            },
-            {
-              "sha": "b6f0265",
-              "datum": "2026-10-27",
-              "betreff": "chore(schaltwerk): Automationslauf 2026-10-27 14:22"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "a3e7debec9a2090370ea419b2f04bf5bbdb36bbafd418e17687b521705749fb0",
-      "prev_sha256": "44c1eab647e91ea5e5a6f6056ee8dfdb3555ad1e37009f66d2677c5e784ac714"
-    },
     {
       "date": "2026-10-27",
       "art": "set-current",
@@ -400,7 +142,7 @@
         }
       ],
       "files_sha256": "709a3c85eb2885bc0d0f4690363cf5fd9a38826efa0a1d050375090a447331bf",
-      "prev_sha256": "a4325593842d261af8ef38597f00c34da55cc1635eeaf09653a2080b340afdc8"
+      "prev_sha256": null
     },
     {
       "date": "2026-10-28",
@@ -628,7 +370,39 @@
           "commits_art": "seit-signatur"
         }
       ],
-      "prev_sha256": "b94498c4e426799b4766c10498300545df127e4bf73caecdd12bebfafc7c8016",
+      "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c",
+      "prev_sha256": "b94498c4e426799b4766c10498300545df127e4bf73caecdd12bebfafc7c8016"
+    },
+    {
+      "date": "2026-10-31",
+      "art": "set-current",
+      "head": "e73b997",
+      "geaendert": [],
+      "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c",
+      "prev_sha256": "1c68222f511a9b0e8d46cada5e711f9acc6aa741c41e83afa0d4ff039e761fc1"
+    },
+    {
+      "date": "2026-10-31",
+      "art": "set-current",
+      "head": "72d2473",
+      "geaendert": [],
+      "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c",
+      "prev_sha256": "e34aa3db25a137021434fd74496790a6b205ba4aad74966b74ee8db32e8770a0"
+    },
+    {
+      "date": "2026-10-31",
+      "art": "set-current",
+      "head": "2267178",
+      "geaendert": [],
+      "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c",
+      "prev_sha256": "9f6765b665416b497ab01ab9383b33d94b562b0c17403cdad16ec60784cb8a7f"
+    },
+    {
+      "date": "2026-10-31",
+      "art": "set-current",
+      "head": "36f7663",
+      "geaendert": [],
+      "prev_sha256": "49cacb46ab15d2740cf3b2e8753060453b01133e69c821024c69d59bb11f4e44",
       "files_sha256": "854b55dcfe32da3e78c83f562b6c6670dc53604438bf58533afb423fa0e3df5c"
     }
   ]

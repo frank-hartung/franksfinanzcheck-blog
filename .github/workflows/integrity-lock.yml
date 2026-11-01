@@ -139,6 +139,35 @@ jobs:
       - name: Messwerkzeug vervollständigen (PyYAML)
         run: python3 -m pip install -q --disable-pip-version-check --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
 
+      # REIHENFOLGE IST PFLICHT: Diese Wache liest YAML, und
+      # `actions/setup-python` bringt PyYAML NICHT mit. Am 31.10.2026 stand
+      # sie beim ersten Versuch VOR diesem Schritt und wurde im Selbsttest
+      # rot (V0 „PyYAML fehlt") – richtig, aber mit einer Meldung, die wie
+      # ein Werkzeugfehler aussah. Sie gehört hinter die Installation.
+      # Dauerhafte Antwort auf WF-SPRACHE (31.10.2026): Die Sprach-Qualitäts-
+      # Pipeline war monatelang tot, ohne dass es jemand sehen konnte. Ein
+      # einziger Typfehler (`labels:` als YAML-Liste statt kommagetrennter
+      # Zeichenkette) machte die GANZE Datei ungültig: GitHub verwarf sie,
+      # jeder Push erzeugte einen Lauf mit 0 Jobs, kein Check-Run am Commit,
+      # keine Meldung. PyYAML sieht davon nichts – die Datei ist ja
+      # syntaktisch einwandfrei.
+      #
+      # Diese Wache prüft deshalb die Schicht zwischen YAML und GitHub:
+      #   V1  Jeder gepinnte `uses:`-SHA existiert beim Anbieter. Genau hier
+      #       steckten ZWEI tote Pins in derselben Datei
+      #       (create-issue-from-file@959985ac…, upload-artifact@49538c08…).
+      #   V2  Jede `with:`-Eingabe ist in der `action.yml` deklariert und
+      #       hat den richtigen YAML-Typ (Liste vs. Zeichenkette).
+      #   V3–V6 Top-Level-/Job-/Schritt-Schlüssel, `${{ }}`-Klammern,
+      #       Schritte ohne `run:`/`uses:`.
+      # `--online` löst die Anbieter-Verträge auf; ohne Netz prüft die Wache
+      # V3–V6 vollständig und meldet für V1/V2 nichts Falsches.
+      - name: Workflow-Vertrags-Wache (die Stelle, an der PyYAML blind ist)
+        run: |
+          python3 scripts/workflow_vertrag_wache.py --selftest
+          python3 scripts/workflow_vertrag_wache.py --online --gate
+
+
       - name: Artefakt-Wächter (Maschinen-Artefakte strukturell heil)
         run: |
           python3 scripts/artefakt_waechter.py --selftest
