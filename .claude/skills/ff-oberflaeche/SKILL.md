@@ -28,8 +28,9 @@ wörtlich aus `CLAUDE.md` übernommen.
 
 1. **Skills zuerst:** `impeccable` (UI entwerfen/polieren/auditieren – liest
    `PRODUCT.md` + `DESIGN.md` zuerst), `frontend-design` (neue visuelle Identität),
-   `design-taste-frontend` (Anti-Slop), `webapp-testing` (Browser-Interaktion).
-   Diese vier stehen im Kern-Router, weil sie jeden UI-Auftrag angehen. Der
+   `design-taste-frontend` (Anti-Slop), `emil-design-eng` (Motion, Easing,
+   Interaktions-Feedback, Komponenten-Politur), `webapp-testing` (Browser-Interaktion).
+   Diese fünf stehen im Kern-Router, weil sie jeden UI-Auftrag angehen. Der
    **Review** des fertigen Codes läuft über `references/web-richtlinien.md` –
    hausgemacht, seit `web-design-guidelines` (Vercel, Herkunft ungeklärt) am
    2026-11-01 über den Skills-CLI entfernt wurde.

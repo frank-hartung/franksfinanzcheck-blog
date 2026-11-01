@@ -60,6 +60,7 @@ viele Bot-Dateien (Recherche-Briefs aus RSS/Web, Social-Kommentare,
    | `ff-oberflaeche` → `references/web-richtlinien.md` | UI-Code-Review gegen die Haus-Richtlinie (24 Punkte, je mit Gate oder Fundstelle) |
    | `frontend-design` (Anthropic) | Neue Oberflächen mit eigener visueller Identität |
    | `design-taste-frontend` (taste-skill) | Anti-Slop-Disziplin bei Frontend-Arbeiten |
+   | `emil-design-eng` (emilkowalski/skills) | Detailhandwerk an Interaktion und Motion: Animation, Easing, Timing, Hover/Fokus-Feedback, `prefers-reduced-motion`, Komponenten-Politur |
    | `webapp-testing` (Anthropic) | Browser-Interaktion/Test mit Playwright |
    | `agent-reach` | **Jede** Internet-Recherche/Suche/URL-Lektüre (Twitter, Reddit, YouTube, GitHub, RSS, Web …) – auch bei deutschen Aufträgen („recherchiere …", „suche …", „was sagt man über …“) |
    Aktualisierung, Aufnahme und Entfernung laufen über den Skills-CLI

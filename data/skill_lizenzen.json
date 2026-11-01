@@ -6,7 +6,8 @@
     "coreyhaines31/marketingskills": "https://github.com/coreyhaines31/marketingskills/blob/main/LICENSE",
     "pbakaus/impeccable": "https://github.com/pbakaus/impeccable/blob/main/LICENSE",
     "Leonxlnx/taste-skill": "https://github.com/Leonxlnx/taste-skill/blob/main/LICENSE",
-    "Panniantong/Agent-Reach": "https://github.com/Panniantong/Agent-Reach/blob/main/LICENSE"
+    "Panniantong/Agent-Reach": "https://github.com/Panniantong/Agent-Reach/blob/main/LICENSE",
+    "emilkowalski/skills": "https://github.com/emilkowalski/skills/blob/main/LICENSE"
   },
   "notiz": {
     "anthropics/skills": "Das Upstream-Repo trägt zusätzlich THIRD_PARTY_NOTICES.md in der Root; die drei hier genutzten Skills (frontend-design, skill-creator, webapp-testing) bringen je eine eigene LICENSE.txt (Apache-2.0) mit, die unverändert kopiert ist.",
@@ -51,6 +52,10 @@
     },
     "design-taste-frontend": {
       "quelle": "Leonxlnx/taste-skill",
+      "lizenz": "MIT"
+    },
+    "emil-design-eng": {
+      "quelle": "emilkowalski/skills",
       "lizenz": "MIT"
     },
     "frontend-design": {

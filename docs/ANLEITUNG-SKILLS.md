@@ -204,3 +204,44 @@ Register-Eintrag trägt den wirklichen Lizenzwortlaut – nicht beschönigt auf 
 Kürzel – plus Ausnahme mit Grund, Entscheidung und Frist, und K6 meldet, solange
 die Frist läuft. Eine Frist ohne Entscheidung ist hier kein
 Aufschub, sondern der Bericht, dass niemand entschieden hat.
+
+## Aufgenommen am 01.11.2026: `emil-design-eng` (emilkowalski/skills, MIT)
+
+Auftrag war der Befehl `npx skills add emilkowalski/skill`. Das Repo heißt
+inzwischen `emilkowalski/skills` (GitHub leitet weiter, `/skill` → `/skills`),
+es trägt 16 Skills und liegt unter MIT (1.070-Byte-`LICENSE`, Copyright 2026
+Emil Kowalski).
+
+**Nicht alle 16.** Von den 16 deckt genau einer einen bereits gebauten Teil
+dieser Website ab: Bewegung und Interaktions-Feedback. Die übrigen 15 sind für
+dieses Repo entweder gegenstandslos oder schädlich:
+
+| Skill(s) | Warum nicht |
+|---|---|
+| `animate-expo`, `write-swift`, `mobile-native` | React Native / Expo, Swift, iOS – das Repo ist Hugo + Papier-CSS, kein App-Build |
+| `ask-sonner` | Sonner ist eine React-Toast-Bibliothek; im Repo gibt es kein React |
+| `break-ui`, `prototype`, `pick-ui-library` | Werkbänke für App-Komponenten; UI-Änderungen laufen hier über Variante + Messung + Freigabe (`docs/ANLEITUNG-DESIGN-VARIANTEN.md`), nicht über einen Prototyp |
+| `animate`, `improve-animations`, `review-animations`, `find-animation-opportunities`, `animation-performance`, `animation-vocabulary`, `apple-design` | Motion-Werkstatt; die Entscheidungen, die hier zählen (CSS-Transition, `prefers-reduced-motion`, CLS, Dark Mode), stehen in `ff-oberflaeche` + `emil-design-eng`. Acht weitere Beschreibungen im Dauer-Kontext wären Last ohne neue Regel |
+
+**Befehl, wie er lief** (Version gepinnt wie im Runbook oben, `-y` gegen die
+Ja/Nein-Frage):
+
+```bash
+npx -y skills@1.7.4 add emilkowalski/skill --skill emil-design-eng -a claude-code -y
+```
+
+Ergebnis: `.claude/skills/emil-design-eng/SKILL.md` (27.123 Bytes) **und** der
+Lock-Eintrag entstanden zusammen; `computedHash` kommt vom CLI, nicht von Hand.
+Danach nach Protokoll: `LICENSE.txt` aus der Upstream-Root unverändert kopiert
+(MIT, kein `NOTICE` nötig), Register-Eintrag `quelle` + `lizenz: MIT` in
+`data/skill_lizenzen.json`, Quelle in `standen`, und die Router-Zeile in
+`CLAUDE.md` (UI-Tabelle) plus die Fünf-Nennung in
+`ff-oberflaeche/SKILL.md`. `python3 scripts/skills_vertrag.py` meldet seither
+25 Skills, 0 Befunde – vor dem Register-Eintrag meldete K6 genau einen.
+
+**Was der Skill hier tut:** Easing- und Timing-Entscheidungen für Übergänge,
+Hover/Fokus-Rückmeldung, Druck-Feedback, `prefers-reduced-motion` als Pflicht
+statt Höflichkeit, Detailpolitur an Komponenten. Er ändert keine Regel dieser
+Website – `PRODUCT.md`, `DESIGN.md`, `README.md`-Markenfläche und die
+24-Punkte-Richtlinie in `ff-oberflaeche/references/web-richtlinien.md` bleiben
+die Wahrheitsorte; der Skill liefert das Handwerk, das Urteil bleibt hausgemacht.
