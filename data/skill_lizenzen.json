@@ -1,48 +1,108 @@
 {
   "schema": 1,
-  "hinweis": "Lizenz-Nachweis für jeden vendored Skill unter .claude/skills/. Geprüft von scripts/skills_vertrag.py (K6). Eine Quelle: diese Datei – Lizenztexte liegen als LICENSE.txt/NOTICE.md neben dem SKILL.md. Ein Eintrag ohne 'lizenz' ist ein Befund, keine Lücke.",
+  "hinweis": "Lizenz-Nachweis für jeden vendored Skill unter .claude/skills/. Geprüft von scripts/skills_vertrag.py (K6). Eine Quelle: diese Datei – Lizenztexte liegen als LICENSE.txt/NOTICE.md neben dem SKILL.md. Ein Eintrag ohne 'lizenz' ist ein Befund, keine Lücke. Geschlossene Fälle stehen in 'erledigte_faelle', damit der Weg nachvollziehbar bleibt.",
   "standen": {
     "anthropics/skills": "https://github.com/anthropics/skills/tree/main/skills",
     "coreyhaines31/marketingskills": "https://github.com/coreyhaines31/marketingskills/blob/main/LICENSE",
     "pbakaus/impeccable": "https://github.com/pbakaus/impeccable/blob/main/LICENSE",
     "Leonxlnx/taste-skill": "https://github.com/Leonxlnx/taste-skill/blob/main/LICENSE",
-    "Panniantong/Agent-Reach": "https://github.com/Panniantong/Agent-Reach/blob/main/LICENSE",
-    "vercel-labs/agent-skills": "https://github.com/vercel-labs/agent-skills"
+    "Panniantong/Agent-Reach": "https://github.com/Panniantong/Agent-Reach/blob/main/LICENSE"
   },
   "notiz": {
-    "anthropics/skills": "Das Upstream-Repo trägt zusätzlich THIRD_PARTY_NOTICES.md in der Root; die beiden hier genutzten Skills (frontend-design, webapp-testing) bringen je eine eigene LICENSE.txt (Apache-2.0) mit, die unverändert kopiert ist.",
+    "anthropics/skills": "Das Upstream-Repo trägt zusätzlich THIRD_PARTY_NOTICES.md in der Root; die drei hier genutzten Skills (frontend-design, skill-creator, webapp-testing) bringen je eine eigene LICENSE.txt (Apache-2.0) mit, die unverändert kopiert ist.",
     "pbakaus/impeccable": "Apache-2.0 verlangt die Weitergabe eines vorhandenen NOTICE (§4(d)) – deshalb liegt NOTICE.md neben LICENSE.txt."
   },
   "skills": {
-    "agent-reach": { "quelle": "Panniantong/Agent-Reach", "lizenz": "MIT" },
-    "ai-seo": { "quelle": "coreyhaines31/marketingskills", "lizenz": "MIT" },
-    "analytics": { "quelle": "coreyhaines31/marketingskills", "lizenz": "MIT" },
-    "competitor-profiling": { "quelle": "coreyhaines31/marketingskills", "lizenz": "MIT" },
-    "competitors": { "quelle": "coreyhaines31/marketingskills", "lizenz": "MIT" },
-    "content-strategy": { "quelle": "coreyhaines31/marketingskills", "lizenz": "MIT" },
-    "copy-editing": { "quelle": "coreyhaines31/marketingskills", "lizenz": "MIT" },
-    "copywriting": { "quelle": "coreyhaines31/marketingskills", "lizenz": "MIT" },
-    "cro": { "quelle": "coreyhaines31/marketingskills", "lizenz": "MIT" },
-    "design-taste-frontend": { "quelle": "Leonxlnx/taste-skill", "lizenz": "MIT" },
-    "frontend-design": { "quelle": "anthropics/skills", "lizenz": "Apache-2.0" },
-    "impeccable": { "quelle": "pbakaus/impeccable", "lizenz": "Apache-2.0", "notiz": true },
-    "programmatic-seo": { "quelle": "coreyhaines31/marketingskills", "lizenz": "MIT" },
-    "schema": { "quelle": "coreyhaines31/marketingskills", "lizenz": "MIT" },
-    "seo-audit": { "quelle": "coreyhaines31/marketingskills", "lizenz": "MIT" },
-    "site-architecture": { "quelle": "coreyhaines31/marketingskills", "lizenz": "MIT" },
-    "webapp-testing": { "quelle": "anthropics/skills", "lizenz": "Apache-2.0" },
-    "web-design-guidelines": {
-      "quelle": "vercel-labs/agent-skills",
-      "lizenz": "unbekannt",
-      "ausnahme": {
-        "grund": "Das Upstream-Repo führt weder eine LICENSE-Datei noch ein license-Feld; nach Copyright-Grundrecht bleibt die Nutzung nur mit Einwilligung des Autors sicher. Der Skill ist seit 12.09.2026 in Betrieb und wird für den UI-Code-Review gebraucht.",
-        "entscheidung": "Inhaber muss vor der Frist entscheiden: (a) Lizenz beim upstream erfragen, (b) durch einen eigenen Haus-Leitfaden ersetzen (empfohlen – die Regeln stehen längst in DESIGN.md und ff-oberflaeche), oder (c) den Skill entfernen. Ein bloßes Hinausschieben ist keine Entscheidung.",
-        "faellig": "2026-12-31"
-      }
+    "agent-reach": {
+      "quelle": "Panniantong/Agent-Reach",
+      "lizenz": "MIT"
+    },
+    "ai-seo": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "analytics": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "competitor-profiling": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "competitors": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "content-strategy": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "copy-editing": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "copywriting": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "cro": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "design-taste-frontend": {
+      "quelle": "Leonxlnx/taste-skill",
+      "lizenz": "MIT"
+    },
+    "frontend-design": {
+      "quelle": "anthropics/skills",
+      "lizenz": "Apache-2.0"
+    },
+    "impeccable": {
+      "quelle": "pbakaus/impeccable",
+      "lizenz": "Apache-2.0",
+      "notiz": true
+    },
+    "programmatic-seo": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "schema": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "seo-audit": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "site-architecture": {
+      "quelle": "coreyhaines31/marketingskills",
+      "lizenz": "MIT"
+    },
+    "skill-creator": {
+      "quelle": "anthropics/skills",
+      "lizenz": "Apache-2.0"
+    },
+    "webapp-testing": {
+      "quelle": "anthropics/skills",
+      "lizenz": "Apache-2.0"
     }
   },
   "eigene": {
     "hinweis": "Die ff-*-Skills sind repo-eigen: kein Eintrag in skills-lock.json, kein Lizenzvermerk nötig, nie von `npx skills update` überschreibbar.",
-    "skills": ["ff-pruefen", "ff-ausliefern", "ff-produzieren", "ff-marke-text", "ff-oberflaeche", "ff-ki-automation"]
+    "skills": [
+      "ff-pruefen",
+      "ff-ausliefern",
+      "ff-produzieren",
+      "ff-marke-text",
+      "ff-oberflaeche",
+      "ff-ki-automation"
+    ]
+  },
+  "erledigte_faelle": {
+    "web-design-guidelines": {
+      "grund": "vercel-labs/agent-skills führte weder eine LICENSE-Datei noch ein license-Feld; die Ausnahme im Register (Frist 31.12.2026) ist nicht verlängert, sondern geschlossen worden.",
+      "heilung": "Entfernt über den Skills-CLI (`npx -y skills@1.7.4 remove web-design-guidelines -y`), also samt Lock-Eintrag – nicht von Hand gelöscht. Die Regel-Substanz, die der Skill für den UI-Code-Review lieferte, liegt hausgemacht in `.claude/skills/ff-oberflaeche/references/web-richtlinien.md`; das Skills-Handwerk liefert die Anlage `skill-creator` aus demselben Haus wie frontend-design.",
+      "stand": "2026-11-01"
+    }
   }
 }

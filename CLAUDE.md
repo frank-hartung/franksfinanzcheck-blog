@@ -6,7 +6,7 @@
 > enthält nur, was *jeden* Auftrag angeht; ihr früherer Umfang von 2.532 Zeilen
 > war Dauerlast, kein Nutzen.
 > Diese Datei lesen Agenten (Claude Code & kompatible) automatisch beim Start.
-> Budget und Nachweis: `python3 scripts/skills_vertrag.py` (K1–K7).
+> Budget und Nachweis: `python3 scripts/skills_vertrag.py` (K1–K8).
 
 ## Das Repository in einem Satz
 
@@ -57,12 +57,14 @@ viele Bot-Dateien (Recherche-Briefs aus RSS/Web, Social-Kommentare,
    | Skill | Wann |
    |---|---|
    | `impeccable` | Designen/Polierten/Kritisieren/Auditieren von UI (liest PRODUCT.md + DESIGN.md zuerst!) |
-   | `web-design-guidelines` (Vercel) | UI-Code-Review gegen Web Interface Guidelines |
+   | `ff-oberflaeche` → `references/web-richtlinien.md` | UI-Code-Review gegen die Haus-Richtlinie (24 Punkte, je mit Gate oder Fundstelle) |
    | `frontend-design` (Anthropic) | Neue Oberflächen mit eigener visueller Identität |
    | `design-taste-frontend` (taste-skill) | Anti-Slop-Disziplin bei Frontend-Arbeiten |
    | `webapp-testing` (Anthropic) | Browser-Interaktion/Test mit Playwright |
    | `agent-reach` | **Jede** Internet-Recherche/Suche/URL-Lektüre (Twitter, Reddit, YouTube, GitHub, RSS, Web …) – auch bei deutschen Aufträgen („recherchiere …", „suche …", „was sagt man über …“) |
-   Aktualisierung: `npx skills update` (Quellen in `skills-lock.json`).
+   Aktualisierung, Aufnahme und Entfernung laufen über den Skills-CLI
+   (`npx -y skills@<version> update|add|remove`, Quellen in `skills-lock.json`) –
+   nie von Hand am Lock. Neues Skill-Handwerk: `skill-creator` (anthropics, Apache-2.0).
 2. **PRODUCT.md und DESIGN.md lesen, bevor eine Farbe geändert wird.**
    Sie enthalten die Marken-Tokens, Anti-References und harten Gates.
    **Layout-Umbauten gehören in eine Variante, nicht in die Basis**
@@ -218,7 +220,7 @@ hugo --destination public                    # baut? (Extended 0.164 nötig)
 npm run seo:check                            # Serp-Grenzen, Linktexte, Überschriftenrang
 python3 scripts/skript_syntax_wache.py       # kompiliert der liegende Stand?
 python3 scripts/<betroffene Wache>.py --selftest   # die Wache, nicht dein Gefühl
-python3 scripts/skills_vertrag.py            # Kern- und Skill-Vertrag (K1–K7)
+python3 scripts/skills_vertrag.py            # Kern- und Skill-Vertrag (K1–K8)
 ```
 
 Alles Weitere – welche Suite zu welcher Änderung gehört, wie ein Selbsttest

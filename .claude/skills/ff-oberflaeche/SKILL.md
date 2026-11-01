@@ -27,10 +27,12 @@ wörtlich aus `CLAUDE.md` übernommen.
 ## Die harten Kernregeln
 
 1. **Skills zuerst:** `impeccable` (UI entwerfen/polieren/auditieren – liest
-   `PRODUCT.md` + `DESIGN.md` zuerst), `web-design-guidelines` (Review gegen
-   Web Interface Guidelines), `frontend-design` (neue visuelle Identität),
+   `PRODUCT.md` + `DESIGN.md` zuerst), `frontend-design` (neue visuelle Identität),
    `design-taste-frontend` (Anti-Slop), `webapp-testing` (Browser-Interaktion).
-   Diese fünf stehen im Kern-Router, weil sie jeden UI-Auftrag angehen.
+   Diese vier stehen im Kern-Router, weil sie jeden UI-Auftrag angehen. Der
+   **Review** des fertigen Codes läuft über `references/web-richtlinien.md` –
+   hausgemacht, seit `web-design-guidelines` (Vercel, Herkunft ungeklärt) am
+   2026-11-01 über den Skills-CLI entfernt wurde.
 2. **`PRODUCT.md` und `DESIGN.md` lesen, bevor eine Farbe geändert wird.**
 3. **Layout-Umbauten gehören in eine Variante, nicht in die Basis:**
    `assets/css/varianten/<id>.css` + Eintrag in `data/design/varianten.yaml`,
@@ -55,7 +57,7 @@ wörtlich aus `CLAUDE.md` übernommen.
 
 ## Katalog
 
-Die fünf Basissätze (Skills zuerst, Tokens lesen, Variante statt Basis, Dark
+Die sechs Basissätze (Skills zuerst, Review gegen die Haus-Richtlinie, Tokens lesen, Variante statt Basis, Dark
 Mode, keine Inline-Farben, Handoff-Vertrag) stehen **wörtlich im Kern** unter
 „Verhalten beim UI-/Design-Arbeiten“ – sie gelten bei jedem Auftrag und haben
 deshalb keinen zweiten Text hier.
@@ -65,6 +67,7 @@ deshalb keinen zweiten Text hier.
 | Wie laufen Variante, Messung und Freigabe im Detail, was prüft `figma_quality_gate.py`? | `CLAUDE.md` §UI/Design + `docs/ANLEITUNG-DESIGN-VARIANTEN.md`, `docs/ANLEITUNG-FIGMA-RELUME-HANDOFF.md` |
 | Wie baue ich ein Fangnetz, was verbietet R1–R13, wie altern Ausnahmen? | `references/robustheit.md` (C31, #740-Ausnahme `head.html`) |
 | Was macht ein Werkzeug zum Produkt, welche Zusage ist hart, wie sitzen die `_headers`? | `references/produkte-und-header.md` (W1–W7, S1/S2) |
+| Wie gehe ich fertigen UI-Code durch, bevor ich „erledigt" melde? | `references/web-richtlinien.md` (24 Punkte in sechs Gruppen, jeder Punkt mit Gate oder Fundstelle) |
 
 ## Kommando-Notausgang
 

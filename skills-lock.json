@@ -97,11 +97,11 @@
       "skillPath": "skills/site-architecture/SKILL.md",
       "computedHash": "20ea864cae2d3261fd233dd5175d8aa0b806857447083c175ed9250066efff90"
     },
-    "web-design-guidelines": {
-      "source": "vercel-labs/agent-skills",
+    "skill-creator": {
+      "source": "anthropics/skills",
       "sourceType": "github",
-      "skillPath": "skills/web-design-guidelines/SKILL.md",
-      "computedHash": "a6a44d5498f7e8f68289902f3dedfc6f38ae0cee1e96527c80724cf27f727c2a"
+      "skillPath": "skills/skill-creator/SKILL.md",
+      "computedHash": "5ea13a6d9f0d4bb694405d79acd00cadec0d21bb138c4dd10fcf3c500cb835c2"
     },
     "webapp-testing": {
       "source": "anthropics/skills",
