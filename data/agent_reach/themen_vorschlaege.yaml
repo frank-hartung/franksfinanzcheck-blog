@@ -9,6 +9,13 @@
 # ============================================================
 version: 1
 vorschlaege:
+- titel: Füllstandsvorgaben bei Gasspeichern nicht erreicht
+  url: https://www.tagesschau.de/wirtschaft/energie/gasspeicher-vorgaben-ziel-verfehlt-100.html
+  quelle: Tagesschau Wirtschaft (RSS)
+  erfasst: '2026-11-01T17:46:48'
+  brief: ''
+  status: offen
+  notiz: RSS-Trigger des Schaltwerks – Quellenprüfung erforderlich.
 - titel: Inflationsrate geht im Oktober auf 2,8 Prozent zurück
   url: https://www.tagesschau.de/wirtschaft/verbraucher/inflationsrate-deutschland-oktober-100.html
   quelle: Tagesschau Wirtschaft (RSS)
@@ -240,4 +247,4 @@ vorschlaege:
   brief: 2026-09-28-internet-recherche.json
   status: offen
   notiz: Automatisch erfasst aus 2026-09-28-internet-recherche.json – Quellenprüfung erforderlich.
-zuletzt_ergaenzt: '2026-10-30T20:18:32'
+zuletzt_ergaenzt: '2026-11-01T17:46:48'

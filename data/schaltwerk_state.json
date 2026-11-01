@@ -64,6 +64,7 @@
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/inland/bericht-aus-berlin-stromsteuer-100.html": "2026-10-26T12:30:43+01:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/arbeitsmarkt/ig-metall-tarifverhandlungen-104.html": "2026-10-07T09:10:22+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/dorfkneipe-rettung-brandenburg-100.html": "2026-10-25T13:31:56+01:00",
+    "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/energie/gasspeicher-vorgaben-ziel-verfehlt-100.html": "2026-11-01T17:46:48+01:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/finanzen/marktberichte/marktbericht-dax-asml-tsmc-berichtssaison-102.html": "2026-10-15T07:50:53+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/ig-metall-wirtschaftsmeldung-oktober2026-100.html": "2026-10-27T20:36:38+01:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/konjunktur/inflation-eurozone-anstieg-102.html": "2026-10-04T16:20:48+02:00",
@@ -81,7 +82,7 @@
     "reach-signale-kuratieren": "2026-10-26T18:38:08+01:00",
     "standby-erinnerung": "2026-10-04T23:53:19+02:00",
     "stiller-kanal": "2026-10-12T21:17:05+02:00",
-    "verbraucher-nachrichten": "2026-10-30T20:18:32+01:00",
+    "verbraucher-nachrichten": "2026-11-01T17:46:48+01:00",
     "wochenbericht": "2026-10-18T19:17:16+02:00"
   },
   "marker": {
@@ -179,7 +180,8 @@
       "2026-10-25": 1,
       "2026-10-26": 1,
       "2026-10-27": 2,
-      "2026-10-30": 1
+      "2026-10-30": 1,
+      "2026-11-01": 1
     },
     "wochenbericht": {
       "2026-10-18": 1
