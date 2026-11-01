@@ -61,6 +61,8 @@
 #  EXIT: 0 gelaufen · 1 offene fachliche Befunde (nur --strict)
 #        2 Selbsttest rot / Konfigurationsfehler
 #        3 keine einzige Quelle erreichbar · 4 KI-Fachprüfung unvollständig
+#        5 mindestens eine Seite brach ab (Queue, Report und Ledger sind
+#          trotzdem geschrieben – Beweise überleben den Fehler, #984)
 # ============================================================
 from __future__ import annotations
 
@@ -73,6 +75,7 @@ import os
 import re
 import subprocess
 import sys
+import traceback
 import urllib.parse
 import urllib.request
 
@@ -251,6 +254,48 @@ def lade_artikel(pfad: str) -> dict | None:
         "body": body,
         "roh": roh,
     }
+
+
+# Felder, die NUR der Lauf kennt und die in keiner Datei stehen. Wer eine
+# frisch gelesene Fassung an ihre Stelle setzt, verliert sie (#984).
+LAUF_FELDER = ("_faellig", "_geo", "bereich")
+
+
+class ArtikelAbbruch(RuntimeError):
+    """Eine einzelne Seite ist nicht abschließbar – der Lauf bleibt beweisfähig.
+
+    Der Fehler beendet NICHT den Lauf: Queue, Report und Ledger werden
+    trotzdem geschrieben, damit ein Abbruch keinen Befund verschluckt. Der
+    Lauf endet dann mit Exit 5 und nennt Seite und Ursache.
+    """
+
+
+def fassung_nach_schreiben(art: dict) -> dict:
+    """Die hinterlassene Fassung erneut lesen – getrennt von der Buchhaltung.
+
+    `lade_artikel()` liefert ausschließlich, was in der Datei steht. Der Lauf
+    hängt daran abgeleitete Felder (`_faellig`, `_geo`, `bereich`), die der
+    Lauf-Eintrag danach braucht. Am 31.10.2026 wurde das Ergebnis dieser
+    Funktion an `art` zurückgebunden; der nächste Zugriff auf `_faellig`
+    beendete den Lauf mit `KeyError`, nachdem die erste Seite geschrieben
+    war: Queue, Report und Ledger fielen aus, fünf belegte Befunde lagen nur
+    noch im Dossier (Vorgang WF-8F6F / #984). Deshalb gilt:
+
+      * die neue Fassung wird GETRENNT zurückgegeben (`fassung`),
+      * die Lauf-Buchhaltung bleibt an `art`,
+      * und die neue Fassung trägt sie zusätzlich mit sich, falls sie später
+        doch jemand allein weiterreicht.
+
+    Nicht lesbar = lauter Abbruch dieser Seite, keine stillen Ersatzwerte.
+    """
+    neu = lade_artikel(art["pfad"])
+    if neu is None:
+        raise ArtikelAbbruch(f"geschriebene Fassung nicht erneut lesbar: {art['pfad']}")
+    for feld in LAUF_FELDER:
+        if feld in art:
+            neu[feld] = art[feld]
+    neu.setdefault("bereich", art.get("bereich", "artikel"))
+    return neu
 
 
 def alle_artikel(scope: str = "alle") -> list[dict]:
@@ -1151,7 +1196,8 @@ def _report_deckung(uebersicht: dict) -> list[str]:
     return zeilen
 
 
-def report_schreiben(laeufe: list[dict], uebersicht: dict, trocken: bool) -> None:
+def report_schreiben(laeufe: list[dict], uebersicht: dict, trocken: bool,
+                     abbrueche: list[dict] | None = None) -> None:
     z = [
         "# Faktenfrische-Report",
         "",
@@ -1172,6 +1218,8 @@ def report_schreiben(laeufe: list[dict], uebersicht: dict, trocken: bool) -> Non
         f"(Budget {uebersicht.get('budget')}: {uebersicht.get('budget_quelle')})",
         f"- Durchschnittliche GEO-Reife: **{uebersicht['geo_schnitt']} %**",
         f"- Offene fachliche Befunde: **{uebersicht['befunde']}**",
+        f"- Abgebrochene Seiten in diesem Lauf: "
+        f"**{uebersicht.get('abbrueche', len(abbrueche or []))}**",
         "",
         "## Deckung (Bedarf gegen Angebot)",
         "",
@@ -1202,6 +1250,15 @@ def report_schreiben(laeufe: list[dict], uebersicht: dict, trocken: bool) -> Non
           for b in uebersicht.get("fachbefunde", [])]
     if not uebersicht.get("fachbefunde"):
         z.append("_Keine offenen Fachbefunde im Ledger._")
+    z += ["", "## Abgebrochene Seiten (Lauf unvollständig)", ""]
+    if abbrueche:
+        z.append("Diese Seiten wurden **nicht** abgeschlossen. Der Rest des Laufs "
+                 "ist gültig; Queue, Report und Ledger sind geschrieben (#984).")
+        z.append("")
+        for a in abbrueche:
+            z.append(f"- **{a.get('slug', '?')}** · `{a.get('fehler', 'unbekannt')}`")
+    else:
+        z.append("_Keine – jede ausgewählte Seite wurde abgeschlossen._")
     z += ["", "## Status der Fachprüfung", ""]
     z += [f"- {l['slug']}: {l.get('fachpruefung', 'unbekannt')}" for l in laeufe] or ["- Kein Artikel bearbeitet."]
     z += ["", "## GEO-Lücken im Bestand", ""]
@@ -1213,13 +1270,101 @@ def report_schreiben(laeufe: list[dict], uebersicht: dict, trocken: bool) -> Non
 
 
 # ----------------------------------------------------------------------
+# Eine Seite je Durchgang
+# ----------------------------------------------------------------------
+
+def lauf_eintrag(art: dict, fassung: dict, dossier: dict, quellen: list[dict],
+                 befunde: list[dict], status: str,
+                 aenderungen: list[str]) -> dict:
+    """Der Lauf-Eintrag: Inhalt aus der geschriebenen `fassung`, Buchhaltung aus `art`.
+
+    Die Trennung ist der Kern der Reparatur #984: `_faellig` und `_geo` sind
+    Lauf-Wissen, `slug`/`titel`/Fassungs-Hash sind Datei-Wissen. Wer beides
+    vermischt, verliert entweder die Bilanz oder den Beweis.
+    """
+    faellig = art.get("_faellig") or {}
+    geo = art.get("_geo") or {}
+    return {
+        "slug": fassung["slug"], "titel": fassung["titel"],
+        "fassung_sha256": ledger.pruef_hash(fassung),
+        "bereich": art.get("bereich", "artikel"),
+        "grund": str(faellig.get("grund") or "unbekannt"),
+        "treffer": len(dossier.get("treffer") or []),
+        "quellen": len(quellen),
+        "befunde": befunde,
+        "geo": int(geo.get("prozent") or 0),
+        "fehler": dossier.get("fehler") or [],
+        "fachpruefung": status,
+        "aenderungen": aenderungen,
+    }
+
+
+def verarbeite_seite(art: dict, cfg: dict, *, trocken: bool = False,
+                     schreiben: bool = False) -> tuple[dict, bool]:
+    """Eine Seite prüfen, schreiben, bilanzieren: (Lauf-Eintrag, bleibt_offen).
+
+    Eine Seite ist eine Einheit. Wirft sie, fängt `main()` den Fehler und
+    arbeitet weiter – die Beweise des Laufs (Queue, Report, Ledger) dürfen
+    nicht an einer einzelnen Seite sterben (#984).
+    """
+    print(f"\n▸ {art['titel'][:70]}\n  Fälligkeit: {art['_faellig']['grund']}")
+    dossier = recherchiere(art, cfg, offline=trocken)
+    print(f"  Fundstellen: {len(dossier['treffer'])}"
+          + (f" · Störungen: {len(dossier['fehler'])}" if dossier["fehler"] else ""))
+
+    befunde, claude_quellen, status = claude_fachpruefung(
+        art, dossier, cfg, trocken=trocken)
+    print(f"  KI-Fachprüfung: {status}")
+    quellen = claude_quellen or quellen_aus_dossier(dossier, cfg)
+
+    aenderungen: list[str] = []
+    offen = False
+    geprueft = status.startswith("geprüft (")
+    if schreiben and not trocken and (not geprueft or not quellen):
+        offen = True
+        print("  ⚠ Prüfung unvollständig oder belegfähige Quelle fehlt – Artikel bleibt unverändert.")
+    if schreiben and quellen and geprueft:
+        # Offene Fachbefunde: keine ungeprüfte neue Belegkette neben dem
+        # alten Text installieren. Das Prüfdatum dokumentiert den Check;
+        # F4 hält die Veröffentlichung bis zur redaktionellen Entscheidung.
+        aenderungen = artikel_anwenden(
+            art, [] if befunde else quellen, heute().isoformat(), trocken=False)
+        if any(a.startswith("ABGEBROCHEN:") for a in aenderungen):
+            offen = True
+        for a in aenderungen:
+            print(f"  ✍ {a}")
+        if any(a.startswith("faktencheck:") for a in aenderungen):
+            if rearm_faktenfrische_hold(art, "; ".join(aenderungen)):
+                aenderungen.append("faktenfrische-Hold: Re-Queue aktiviert")
+                print("  ♻ Faktenfrische-Hold: Re-Queue aktiviert (kein Direkt-Publish)")
+    elif quellen and not schreiben:
+        print(f"  (Trockenlauf) {len(quellen)} Belege bereit – mit --apply schreiben")
+
+    dossier_schreiben(art, dossier, art["_geo"], art["_faellig"], befunde,
+                      trocken=False, fachpruefung=status)
+
+    # Nach dem Schreiben neu lesen: Das Ledger bindet an die tatsächlich
+    # hinterlassene Fassung, nicht an einen inzwischen veralteten Input.
+    # Die neue Fassung ersetzt `art` NICHT – dort steht die Lauf-Buchhaltung.
+    fassung = art
+    if any(a.startswith("quellen:") or a.startswith("faktencheck:")
+           for a in aenderungen):
+        fassung = fassung_nach_schreiben(art)
+    return (lauf_eintrag(art, fassung, dossier, quellen, befunde, status,
+                         aenderungen), offen)
+
+
+# ----------------------------------------------------------------------
 # Selbsttest (eingefrorene Fälle – läuft vor JEDEM Schreibvorgang)
 # ----------------------------------------------------------------------
 
 def selftest() -> int:
     fehler = []
+    gezaehlt = 0
 
     def pruefe(name, ist, soll):
+        nonlocal gezaehlt
+        gezaehlt += 1
         if ist != soll:
             fehler.append(f"{name}: {ist!r} != {soll!r}")
 
@@ -1304,12 +1449,41 @@ def selftest() -> int:
     pruefe("ST7b", bool(nur_posts) and all(a["bereich"] == "artikel" for a in nur_posts), True)
     pruefe("ST7c", len(alle_artikel("alle")), len(nur_pillar) + len(nur_posts))
 
+    # ST8 – Neuladen nach dem Schreiben (#984): Datei-Wissen und Lauf-Wissen
+    # sind zwei Dinge. Am 31.10.2026 verlor der Lauf nach dem ersten
+    # Schreibvorgang seine Buchhaltung (`KeyError: _faellig`) und damit Queue,
+    # Report und Ledger – fünf belegte Befunde blieben nur im Dossier.
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        pfad = os.path.join(tmp, "index.md")
+        with open(pfad, "w", encoding="utf-8") as fh:
+            fh.write('---\ntitle: "Girokonto"\nfaktencheck: 2026-10-31\n---\n\nText.\n')
+        alt = lade_artikel(pfad)
+        alt["_faellig"] = {"grund": "Erstrecherche", "faellig": True, "prio": 0}
+        alt["_geo"] = {"prozent": 50, "offen": []}
+        alt["bereich"] = "artikel"
+        neu = fassung_nach_schreiben(alt)
+        pruefe("ST8a", (neu["_faellig"], neu["_geo"], neu["bereich"]),
+               (alt["_faellig"], alt["_geo"], "artikel"))
+        pruefe("ST8b", neu["titel"], "Girokonto")
+        eintrag = lauf_eintrag(alt, neu, {"treffer": [1], "fehler": []}, [], [],
+                               "geprüft (test)", ["faktencheck: 2026-10-31"])
+        pruefe("ST8c", (eintrag["grund"], eintrag["geo"], eintrag["treffer"]),
+               ("Erstrecherche", 50, 1))
+        pruefe("ST8d", eintrag["fassung_sha256"], ledger.pruef_hash(neu))
+        try:
+            fassung_nach_schreiben(dict(alt, pfad=os.path.join(tmp, "fehlt.md")))
+            abbruch = "still"
+        except ArtikelAbbruch:
+            abbruch = "Abbruch"
+        pruefe("ST8e", abbruch, "Abbruch")
+
     if fehler:
         print("🛑 Selbsttest FAKTENFRISCHE rot:")
         for f in fehler:
             print("   -", f)
         return 2
-    print("✅ Selbsttest Faktenfrische: 23/23 Fälle grün.")
+    print(f"✅ Selbsttest Faktenfrische: {gezaehlt}/{gezaehlt} Fälle grün.")
     return 0
 
 
@@ -1409,61 +1583,25 @@ def main() -> int:
           f"{len(auswahl)} in diesem Lauf (Budget {budget}, {budget_info['quelle']})"
           + (" · OFFLINE" if args.offline else ""))
 
-    laeufe, befunde_gesamt, unvollstaendig = [], 0, []
+    laeufe, befunde_gesamt, unvollstaendig, abbrueche = [], 0, [], []
     for art in auswahl:
-        print(f"\n▸ {art['titel'][:70]}\n  Fälligkeit: {art['_faellig']['grund']}")
-        dossier = recherchiere(art, cfg, offline=args.offline)
-        print(f"  Fundstellen: {len(dossier['treffer'])}"
-              + (f" · Störungen: {len(dossier['fehler'])}" if dossier["fehler"] else ""))
-
-        befunde, claude_quellen, status = claude_fachpruefung(
-            art, dossier, cfg, trocken=args.offline)
-        print(f"  KI-Fachprüfung: {status}")
-        quellen = claude_quellen or quellen_aus_dossier(dossier, cfg)
-
-        aenderungen = []
-        geprueft = status.startswith("geprüft (")
-        if args.apply and not args.offline and (not geprueft or not quellen):
+        # Seiten-Isolation (#984): Ein Fehler auf EINER Seite beendet nicht
+        # den Lauf. Sonst gehen Queue, Report und Ledger verloren – und mit
+        # ihnen die Befunde der Seiten, die längst geschrieben waren.
+        try:
+            eintrag, offen = verarbeite_seite(
+                art, cfg, trocken=args.offline, schreiben=args.apply)
+        except Exception as exc:  # noqa: BLE001 – Beweise überleben den Fehler
+            fehler = f"{type(exc).__name__}: {exc}"
+            abbrueche.append({"slug": art.get("slug") or "?", "fehler": fehler})
+            print(f"  🛑 Seite abgebrochen – der Lauf macht weiter: {fehler}",
+                  file=sys.stderr)
+            traceback.print_exc()
+            continue
+        laeufe.append(eintrag)
+        befunde_gesamt += len(eintrag["befunde"])
+        if offen:
             unvollstaendig.append(art)
-            print("  ⚠ Prüfung unvollständig oder belegfähige Quelle fehlt – Artikel bleibt unverändert.")
-        if args.apply and quellen and geprueft:
-            # Offene Fachbefunde: keine ungeprüfte neue Belegkette neben dem
-            # alten Text installieren. Das Prüfdatum dokumentiert den Check;
-            # F4 hält die Veröffentlichung bis zur redaktionellen Entscheidung.
-            aenderungen = artikel_anwenden(
-                art, [] if befunde else quellen, heute().isoformat(), trocken=False)
-            if any(a.startswith("ABGEBROCHEN:") for a in aenderungen):
-                unvollstaendig.append(art)
-            for a in aenderungen:
-                print(f"  ✍ {a}")
-            if any(a.startswith("faktencheck:") for a in aenderungen):
-                if rearm_faktenfrische_hold(art, "; ".join(aenderungen)):
-                    aenderungen.append("faktenfrische-Hold: Re-Queue aktiviert")
-                    print("  ♻ Faktenfrische-Hold: Re-Queue aktiviert (kein Direkt-Publish)")
-        elif quellen and not args.apply:
-            print(f"  (Trockenlauf) {len(quellen)} Belege bereit – mit --apply schreiben")
-
-        dossier_schreiben(art, dossier, art["_geo"], art["_faellig"], befunde,
-                          trocken=False, fachpruefung=status)
-        befunde_gesamt += len(befunde)
-        # Nach dem Schreiben neu lesen: Das Ledger bindet an die tatsächlich
-        # hinterlassene Fassung, nicht an einen inzwischen veralteten Input.
-        if any(a.startswith("quellen:") or a.startswith("faktencheck:") for a in aenderungen):
-            aktuelle_fassung = lade_artikel(art["pfad"])
-            if aktuelle_fassung is None:
-                print("🛑 Geprüfte Fassung nicht erneut lesbar", file=sys.stderr)
-                return 2
-            art = aktuelle_fassung
-        laeufe.append({
-            "slug": art["slug"], "titel": art["titel"],
-            "fassung_sha256": ledger.pruef_hash(art),
-            "bereich": art.get("bereich", "artikel"),
-            "grund": art["_faellig"]["grund"], "treffer": len(dossier["treffer"]),
-            "quellen": len(quellen), "befunde": befunde,
-            "geo": art["_geo"]["prozent"], "fehler": dossier["fehler"],
-            "fachpruefung": status,
-            "aenderungen": aenderungen,
-        })
 
     # Ein Lauf ersetzt nie die offene Redaktions-Queue. Auch eine spätere
     # "ohne Befund"-Antwort löscht keinen menschlich zu entscheidenden Fund.
@@ -1501,14 +1639,17 @@ def main() -> int:
         "bedarf_je_woche": kapazitaet.get("bedarf_je_woche"),
         "abbau_tage": kapazitaet.get("abbau_tage"),
         "nachhol_frist_tage": kapazitaet.get("nachhol_frist_tage"),
+        "abbrueche": len(abbrueche),
     }
-    report_schreiben(laeufe, uebersicht, trocken=not args.apply)
+    report_schreiben(laeufe, uebersicht, trocken=not args.apply,
+                     abbrueche=abbrueche)
 
     queue_tmp = Path(str(QUEUE_PFAD) + ".tmp")
     with queue_tmp.open("w", encoding="utf-8") as fh:
         json.dump({"erzeugt": jetzt_utc(), "uebersicht": uebersicht,
                    "fachbefunde": fachbefunde,
                    "kapazitaet": kapazitaet,
+                   "abbrueche": abbrueche,
                    "offen": [{"slug": a["slug"], "titel": a["titel"],
                               "grund": a["_faellig"]["grund"],
                               "faellig": bool(a["_faellig"]["faellig"]),
@@ -1530,11 +1671,23 @@ def main() -> int:
     print(f"\nGEO-Reife im Bestand: {uebersicht['geo_schnitt']} % · "
           f"Report: {os.path.relpath(REPORT_PFAD, BLOG_DIR)}")
 
-    alle_kanaele_tot = bool(auswahl) and all(
-        l["treffer"] == 0 and l["fehler"] for l in laeufe)
+    # „Keine Quelle erreichbar“ ist eine Aussage über ALLE Seiten. Eine
+    # abgebrochene Seite ist keine Messung – ohne diese Bedingung hätte
+    # `all()` über eine leere Liste die Klasse „Netz tot“ erfunden (#984).
+    alle_kanaele_tot = (bool(auswahl) and not abbrueche
+                        and len(laeufe) == len(auswahl)
+                        and all(l["treffer"] == 0 and l["fehler"] for l in laeufe))
     if alle_kanaele_tot and not args.offline:
         print("⚠ Keine einzige Quelle erreichbar – Kanalmatrix prüfen.", file=sys.stderr)
         return 3
+    if abbrueche:
+        # Kein stiller Teilerfolg: Die Beweise sind geschrieben, der Lauf ist
+        # es nicht. Der Exit nennt die Klasse, die Step-Summary die Ursache.
+        print(f"⚠ {len(abbrueche)} Seite(n) brachen ab – Queue, Report und Ledger "
+              "sind gesichert; Ursachen siehe unten.", file=sys.stderr)
+        for a in abbrueche:
+            print(f"   - {a['slug']}: {a['fehler']}", file=sys.stderr)
+        return 5
     if args.apply and unvollstaendig:
         print("⚠ Recherche oder Schreibvorgang unvollständig – betroffene Artikel bleiben in der Queue.",
               file=sys.stderr)

@@ -27,6 +27,19 @@
 #  `hartes_limit_pro_lauf`), + Vorlauf `planung.vorlauf_tage`, damit
 #  Arbeit VOR der roten Kante beginnt.
 #
+#  WARUM DER LAUF SEITEN ISOLIERT (Reparatur #984, 01.11.2026)
+#  ----------------------------------------------------------
+#  Am 31.10.2026 schrieb der Lauf die erste Seite erfolgreich und starb
+#  danach an `KeyError: '_faellig'`: Queue, Report und Ledger wurden nie
+#  geschrieben, fünf belegte Befunde lagen nur noch im Dossier, und der
+#  Alarm nannte allein „Unvollständige Recherche melden“. Drei Antworten:
+#    · scripts/faktenfrische.py – Seiten-Isolation (Exit 5), getrennte
+#      Fassung nach dem Schreiben, Protokoll in der Step-Summary.
+#    · scripts/faktenfrische_befund_ledger.py --nachlese – Dossier-Befunde
+#      erreichen das Ledger auch dann, wenn der Lauf danach abbricht.
+#    · dieser Workflow – Protokoll sichern, Nachlese fahren (auch nach
+#      einem Abbruch), Ursache in Klartext melden.
+#
 #  Der Lauf schreibt NUR Frontmatter (`quellen`, `faktencheck`)
 #  und Dossiers unter data/research/artikel/. Artikeltexte
 #  ändert er nie – fachliche Befunde gehen als Issue an einen
@@ -98,10 +111,40 @@ jobs:
           # budget.max_artikel_pro_lauf, Obergrenze hartes_limit_pro_lauf).
           # Eine Zahl schaltet die Skalierung für diesen Lauf bewusst ab.
           if [ "${EINGABE_MAX}" = "auto" ] || [ -z "${EINGABE_MAX}" ]; then
-            python3 scripts/faktenfrische.py --apply
+            ARGS=(--apply)
           else
-            python3 scripts/faktenfrische.py --apply --max "${EINGABE_MAX}"
+            ARGS=(--apply --max "${EINGABE_MAX}")
           fi
+          # PROTOKOLL MITSCHREIBEN (#984): Der Alarm vom 31.10.2026 nannte nur
+          # „Unvollständige Recherche melden“ – die echte Ursache (ein
+          # KeyError nach dem ersten Schreibvorgang) stand im Job-Log. Das
+          # liegt auf einem fremden Blob-Host und ist aus einem Agenten- oder
+          # Notfall-Kontext oft nicht abrufbar. Ab jetzt steht der Schluss des
+          # Protokolls in der Step-Summary und im Artefakt.
+          set -o pipefail
+          rc=0
+          python3 scripts/faktenfrische.py "${ARGS[@]}" 2>&1 \
+            | tee faktenfrische-lauf.log || rc=$?
+          echo "exit=${rc}" >> "$GITHUB_OUTPUT"
+          exit "${rc}"
+
+      # ------------------------------------------------------------
+      # NACHLESE (#984): Das Dossier einer Seite entsteht VOR der Bilanz
+      # des Laufs. Bricht der Lauf danach ab, liegen die Befunde dieser
+      # Seite nur noch im Dossier – unsichtbar für Redaktion, Publish-Gate
+      # und Scorecard, während die Maschine „nichts gefunden“ meldet.
+      # Die Nachlese liest die Dossiers und ergänzt idempotent, was im
+      # Ledger fehlt. Sie schließt nie einen Befund und erfindet keine
+      # Fassung. `continue-on-error`, damit ein Fehler hier den Dossier-
+      # Commit nicht verhindert – der letzte Schritt macht ihn trotzdem rot.
+      # ------------------------------------------------------------
+      - name: Nachlese – Dossier-Befunde ins Ledger
+        id: nachlese
+        if: always()
+        continue-on-error: true
+        run: |
+          python3 scripts/faktenfrische_befund_ledger.py --nachlese --apply \
+            | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Belege & Dossiers committen
         env:
@@ -151,6 +194,7 @@ jobs:
           name: faktenfrische-report
           path: |
             FAKTENFRISCHE-REPORT.md
+            faktenfrische-lauf.log
             data/faktenfrische_queue.json
             data/research/artikel/*.md
           if-no-files-found: ignore
@@ -187,8 +231,43 @@ jobs:
           echo "::error::Faktenfrische unterdeckt – der Rückstand ist nicht fristgerecht abbaubar (#912). Details im Schritt davor, im Report und in RELEASE-SCORECARD.md."
           exit 1
 
-      - name: Unvollständige Recherche melden
-        if: steps.lauf.outcome == 'failure'
+      # Die Meldung nennt ab jetzt die ECHTE Ursache (#984). Vorher stand im
+      # Ticket nur der Name dieses Schritts; wer das Log nicht laden konnte,
+      # musste raten. Der Exit-Code des Laufs ist eine Klasse, keine Meinung:
+      #   2 Beweisstand/Konfiguration · 3 keine Quelle · 4 Prüfung unvollständig
+      #   5 Seite abgebrochen (Beweise gesichert)
+      - name: Unvollständige Recherche melden (mit Ursache)
+        if: steps.lauf.outcome == 'failure' || steps.nachlese.outcome == 'failure'
+        # Ausdrücke gehen über `env`, nie direkt in `run:` – Template-Injection
+        # ist die Fehlerklasse aus dem Tiefencheck vom 30.10.2026 (#973).
+        env:
+          LAUF_EXIT: ${{ steps.lauf.outputs.exit }}
+          NACHLESE: ${{ steps.nachlese.outcome }}
         run: |
-          echo "::error::Faktenfrische nicht abgeschlossen. Details stehen im Lauf und im Report; betroffene Artikel bleiben unverändert."
+          rc="${LAUF_EXIT}"
+          if [ "${rc}" = "0" ]; then
+            grund="Die Recherche selbst lief durch; die Nachlese der Dossier-Befunde ist fehlgeschlagen – das Ledger wurde nicht ergänzt."
+          else
+            case "${rc}" in
+              2) grund="Beweisstand oder Konfiguration ungültig – der Lauf hat vorsorglich nichts geschrieben." ;;
+              3) grund="Keine einzige Quelle erreichbar – Kanalmatrix/Feeds in data/agent_reach/faktenfrische.yaml prüfen." ;;
+              4) grund="KI-Fachprüfung unvollständig – betroffene Seiten bleiben unverändert in der Queue." ;;
+              5) grund="Mindestens eine Seite brach mit einem Fehler ab; Queue, Report und Ledger sind gesichert, die Seite bleibt in der Queue." ;;
+              *) grund="Unbekannter Exit-Code – die Ursache steht in den letzten Logzeilen." ;;
+            esac
+          fi
+          if [ "${NACHLESE}" = "failure" ] && [ "${rc}" != "0" ]; then
+            grund="${grund} Zusätzlich ist die Nachlese der Dossier-Befunde fehlgeschlagen."
+          fi
+          {
+            echo "## Faktenfrische nicht abgeschlossen (Exit ${rc})"
+            echo ""
+            echo "**Einordnung:** ${grund}"
+            echo ""
+            echo "**Letzte Zeilen des Laufs:**"
+            echo '```'
+            tail -n 40 faktenfrische-lauf.log 2>/dev/null || echo "Kein Laufprotokoll vorhanden."
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "::error::Faktenfrische nicht abgeschlossen (Exit ${rc}). ${grund}"
           exit 1

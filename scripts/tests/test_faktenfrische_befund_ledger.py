@@ -158,6 +158,52 @@ class LedgerTests(unittest.TestCase):
         self.assertIn("publish_gate.fakten_befund_failures", Path(rs.__file__).read_text())
         self.assertIn("fakten_befund_failures(candidates)", Path(pg.__file__).read_text())
 
+    # ------------------------------------------------------------------
+    # #984 – Nachlese: Dossier-Befunde dürfen nicht außerhalb des Ledgers enden
+    # ------------------------------------------------------------------
+    def _dossier(self, name, fassung=None, befunde=None):
+        dossier_dir = Path(self.tmp.name) / "artikel"
+        dossier_dir.mkdir(exist_ok=True)
+        daten = {"slug": name, "erzeugt": "2026-10-31 10:34 UTC",
+                 "befunde": befunde if befunde is not None else [self.finding]}
+        if fassung is not None:
+            daten["fassung_sha256"] = fassung
+        (dossier_dir / f"{name}.json").write_text(json.dumps(daten), encoding="utf-8")
+        return dossier_dir
+
+    def test_nachlese_holt_verlorene_dossier_befunde_ins_ledger(self):
+        """#984: Ein Abbruch nach dem Dossier-Schreiben verschluckt keinen Befund."""
+        dossier_dir = self._dossier("seite", ledger.body_hash("Fassung Seite"))
+        self.assertEqual({e["slug"] for e in ledger.offene_befunde(self.queue, self.decisions)}, {"a"})
+        ergebnis = ledger.nachlese_anwenden(dossier_dir, self.queue)
+        self.assertEqual(ergebnis["ergaenzt"], 1)
+        offen = ledger.offene_befunde(self.queue, self.decisions)
+        self.assertEqual({(e["slug"], e["id"]) for e in offen},
+                         {("a", self.entry["id"]),
+                          ("seite", ledger.befund_id("seite", self.finding))})
+        # Idempotent: zweimal ist einmal – und nichts wird dabei geschlossen.
+        self.assertEqual(ledger.nachlese_anwenden(dossier_dir, self.queue)["fehlend"], [])
+        self.assertEqual(len(ledger.zusammenfuehren(
+            ledger._json_object(self.queue), [])), 2)
+
+    def test_nachlese_erfindet_keine_fassung_und_schweigt_nicht(self):
+        """Ohne echten SHA-256 ist eine spätere Entscheidung nicht bindbar."""
+        dossier_dir = self._dossier("ohne_hash")
+        (dossier_dir / "kaputt.json").write_text("{kaputt", encoding="utf-8")
+        ergebnis = ledger.nachlese(dossier_dir, self.queue)
+        self.assertEqual(ergebnis["fehlend"], [])
+        self.assertEqual(ergebnis["befunde_im_dossier"], 0)
+        self.assertTrue(any("ohne_hash.json" in h and "Fassungs-Hash" in h
+                            for h in ergebnis["hinweise"]))
+        self.assertTrue(any("kaputt.json" in h for h in ergebnis["hinweise"]))
+        # Eine vorhandene Entscheidung bleibt unberührt – die Nachlese schließt nie.
+        decision = {"slug": "a", "befund_id": self.entry["id"],
+                    "fassung_sha256": self.entry["fassung_sha256"],
+                    "entschieden_von": "Redaktion", "begruendung": "Preisangabe entfernt"}
+        self.decisions.write_text(yaml.safe_dump({"entscheidungen": [decision]}))
+        ledger.nachlese_anwenden(dossier_dir, self.queue)
+        self.assertEqual(ledger.offene_befunde(self.queue, self.decisions), [])
+
     def test_unbekannte_legacy_fassung_kann_nicht_unterschrieben_werden(self):
         self.decisions.write_text(yaml.safe_dump({"entscheidungen": [{
             "slug": "a", "befund_id": self.entry["id"], "fassung_sha256": "legacy-unbekannt",
