@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "generated_at": "2026-11-01T13:38:44Z",
+  "generated_at": "2026-11-01T17:06:57Z",
   "modus": "kandidaten",
-  "commit": "eed00158861aeac0a9b9ac588a75d0e27cc9fd01",
+  "commit": "314f46fa9216c977e9a64f2eb425bb682371a734",
   "kapazitaet": {
     "stichtag": "2026-11-01",
-    "artikel": 110,
+    "artikel": 111,
     "faellig": 4,
     "ueberfaellig": 4,
     "ueberfaellig_max_tage": 4,
@@ -17,9 +17,9 @@
     "budget": 4,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 4.0,
-    "bedarf_je_tag": 2.678,
-    "bedarf_je_woche": 18.7,
-    "deckung_prozent": 149.4,
+    "bedarf_je_tag": 2.7,
+    "bedarf_je_woche": 18.9,
+    "deckung_prozent": 148.1,
     "horizont_tage": 120,
     "vorlauf_tage": 7,
     "nachhol_frist_tage": 7,
@@ -62,7 +62,7 @@
         "folgeprüfung": false
       }
     ],
-    "offen_im_horizont": 110,
+    "offen_im_horizont": 111,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
     "sockel": 3,
@@ -395,7 +395,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen": {
-      "sha256": "6383d21f4ce8ac0e3665fb8da9d66a7c706220519fccb515f99e015f30e4b513",
+      "sha256": "efdefc29509ebb6ed09337d78f16024186dd8084202a6d6f78d77f7cdc9525ac",
       "urteil": "freigabe-reif",
       "risikoklasse": "hoch",
       "dimensionen": {
@@ -854,7 +854,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet": {
-      "sha256": "fd2f4825b11628063363618d2ce0c8f3342a06cf5b3a5731b5e2653b4f34b600",
+      "sha256": "ce56fe906faa42acd16e6cf8040d109e96a0b6d1662bb1a929e90fa2bbfed2c6",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -871,7 +871,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
-      "sha256": "fb50654a9c4c81b6d61a8ec39c2e5c7e6570b8b65013b4cda313f14ba55220ed",
+      "sha256": "bbd7ed777f9380772a3004e80a4f2459f7aa31dca6d1ed2485adae45cab7140e",
       "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -939,7 +939,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest": {
-      "sha256": "51cfdf8918077b2172c22e96f712751e210208335db4a4e11acc5216280b3b68",
+      "sha256": "b086f138bd70a28f325e3271a73e4fee062f98beaa94bbc64ae127138bb1f6fd",
       "urteil": "freigabe-reif",
       "risikoklasse": "erhoeht",
       "dimensionen": {
@@ -956,7 +956,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen": {
-      "sha256": "187106967a5d5513bed5d20838807d66a66243b292a00bfb9b08d350f7e94bbb",
+      "sha256": "3f59055e99eda77cc605ed716d138714557f496366b4ac815574677ffcf57b3d",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -990,7 +990,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
-      "sha256": "152099c908679a284b81b20e68beb4fd7898a6f969f0d93438dd5e8b2f938346",
+      "sha256": "3608d4e91a696cdceff233597b963147de040395b2d3fd5879a78605210e5860",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1007,7 +1007,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
-      "sha256": "e6370268fae896703d20d3787f194e893e9a79ebfb4cc974318921dbf499e9fc",
+      "sha256": "098672533c8845ccea0f99df60928598d679c2b7c3047fec20ad887c04190ae9",
       "urteil": "freigabe-reif",
       "risikoklasse": "erhoeht",
       "dimensionen": {
@@ -1279,7 +1279,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht": {
-      "sha256": "900e5195f0b0c18e2199b82cacddb2eb1f7d767862410b15fccf6e05dae20eaf",
+      "sha256": "eda71f46069de2d4641d5015bb971baa3430e51880d30d35fbd5f7c8e433d07d",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1296,7 +1296,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege": {
-      "sha256": "4888495ec6eb137ab0122f7d5db181da55fc72c241f309d7a481e671834b2499",
+      "sha256": "20e96b9dd489b5e1b1a912b88d042f58c825997d56c5eae477f6a68ac6532882",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {

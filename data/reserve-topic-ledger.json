@@ -234,6 +234,14 @@
     "infra_fehler": 0,
     "letzter_versuch": "2026-09-30"
   },
+  "Flugverspätung: So bekommst du deine Entschädigung": {
+    "fehler": 0,
+    "grund": "produziert: flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-11-01",
+    "letzter_versuch": "2026-11-01",
+    "sperre_bis": "2027-04-30"
+  },
   "Frugal leben mit Familie: So klappt Sparen auch mit Kindern": {
     "fehler": 0,
     "grund": "produziert: frugalismus-familie-clever-sparen-ohne-verzicht",

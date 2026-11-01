@@ -2,6 +2,7 @@
 title: "Über mich und diesen Blog"
 description: "Über Frank Hartung und FranksFinanzcheck: Verantwortlichkeiten, Methodik, Quellenprüfung und transparente Finanzierung."
 draft: false
+lastmod: 2026-10-25
 showToc: true
 ---
 

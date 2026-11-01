@@ -2,6 +2,7 @@
 title: "Transparenz: Wie sich FranksFinanzcheck finanziert"
 description: "Wie FranksFinanzcheck Provisionen erhält, wo Werbung gekennzeichnet wird und warum Vergütung keine Reihenfolge bestimmt."
 draft: false
+lastmod: 2026-10-25
 author: "Frank Hartung"
 showToc: true
 ---
