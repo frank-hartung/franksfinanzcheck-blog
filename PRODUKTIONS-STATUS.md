@@ -1,17 +1,17 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-11-01 23:28 UTC  
+**Stand:** 2026-11-02 15:45 UTC  
 **Stufe:** OK  
-**Befund:** Letzter Publikationstag (2026-10-30): 3 Artikel – Ziel erfüllt. – Bestand: 3 förderfähig in der Re-Queue
+**Befund:** Letzter Publikationstag (2026-11-02): 3 Artikel – Ziel erfüllt.
 
 | Kennzahl | Wert |
 |---|---|
-| Heute | 2026-11-01 (Sonntag) |
-| Publikationstag heute | nein |
-| Artikel letzter Publikationstag (2026-10-30) | 3 |
-| Letzter Artikel überhaupt | 2026-10-30 (2 Tage her) |
-| Live-Artikel gesamt | 73 |
-| Förderfähig in der Re-Queue | 3 |
+| Heute | 2026-11-02 (Montag) |
+| Publikationstag heute | ja |
+| Artikel letzter Publikationstag (2026-11-02) | 3 |
+| Letzter Artikel überhaupt | 2026-11-02 (0 Tage her) |
+| Live-Artikel gesamt | 76 |
+| Förderfähig in der Re-Queue | 0 |
 | Von Gates gehalten (braucht Korrektur) | 0 |
 | Mindestziel/Tag | 2 |
 
