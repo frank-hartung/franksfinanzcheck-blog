@@ -347,6 +347,21 @@ class ProdScopingAlarm(unittest.TestCase):
         self.assertIn("workerGateFailed ? 'sicherheit-worker'", code)
         self.assertIn("liveNachweisFailed ? 'sicherheit-nachweis'", code)
 
+    def test_972_live_rat_nennt_den_environment_blocker(self):
+        # WF-E813 / #972 (02.11.2026): Der Live-Rat nannte den Worker-Deploy
+        # und den Leseschlüssel, aber nicht den Schritt, der den Deploy
+        # tatsächlich blockiert: `Produktions-Environment absichern`. Wer den
+        # Rat befolgte, suchte den Schlüssel und fand keinen – der Lauf war
+        # schon vor Wrangler am Environment-Guard gescheitert. Der Rat muss
+        # die Policy zuerst nennen und den read-only Prüfer zeigen.
+        code = _kommentarfrei(_text())
+        self.assertIn("Produktions-Environment absichern", code)
+        self.assertIn("worker_environment_guard.py --check", code)
+        self.assertIn("worker_environment_einrichten.py --anwenden", code)
+        self.assertIn("Proxy aktiv", code)
+        self.assertIn("npm run worker:environment", code)
+        self.assertIn("npm run edge:freigabe", code)
+
     def test_972_abhaengigkeits_audit_hat_eigenen_rat(self):
         # WF-E813 / #972 (01.11.2026): Im Lauf 41199051921 waren der
         # Abhängigkeits-Job (sieben HIGH-Funde an pypdf==6.21.2) UND die
