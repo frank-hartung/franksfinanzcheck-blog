@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-10-31
+lastmod: 2026-11-02
 title: "Versicherungen: Der große Ratgeber für den richtigen Schutz"
 description: "Versicherungen im Überblick: Privathaftpflicht, Wohngebäude, Hausrat, Kfz, Zahnzusatz und Unfallversicherung – welcher Schutz wirklich unverzichtbar ist."
 date: 2026-08-08
@@ -61,6 +61,8 @@ Nach dem Bürgerlichen Gesetzbuch (§&nbsp;823 BGB) haftest du für Schäden, di
 
 Wichtig sind dabei Deckungssummen, Mietsachschäden und Gefälligkeitshandlungen. Der Schnell-Tipp darunter nennt die Faustregel für die Deckungssumme.
 
+Die Einzelheiten zu Leistungen, Kosten und typischen Lücken stehen im Ratgeber [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/).
+
 💡 **Schnell-Tipp von Frank:** Achte bei Neuverträgen auf eine Mindestdeckungssumme von 50 Millionen Euro für Personen-, Sach- und Vermögensschäden sowie den Einschluss von Forderungsausfalldeckung (wenn dir jemand ohne Haftpflicht einen Schaden zufügt).
 
 👉 **Privathaftpflicht vergleichen und günstig absichern:** [**→ Jetzt Haftpflicht vergleichen**](/go/haftpflicht/)
@@ -72,6 +74,8 @@ Wichtig sind dabei Deckungssummen, Mietsachschäden und Gefälligkeitshandlungen
 Für Haus- und Wohnungseigentümer ist die Wohngebäudeversicherung die wichtigste Sachpolice, während Mieter mit einer Hausratversicherung ihr gesamtes bewegliches Mobiliar absichern. Durch die Zunahme extremer Wetterereignisse hat sich die Risikolage in den letzten Jahren drastisch verändert.
 
 Die wichtigsten Standards, die Elementarschaden-Erweiterung und die Klauseln, die im Schadenfall zählen, stehen direkt darunter.
+
+Für Eigentümer vertieft der [Wohngebäudeversicherungs-Vergleich](../../posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/) die Tarifwahl. Wer Gebäude, Hausrat und Naturgefahren zusammen denken will, findet im [Vorsorge-Update für dein Haus](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) den Überblick.
 
 ### Wichtige Klauseln für deinen Hausrat- & Gebäudeschutz:
 * **Verzicht auf Einrede der groben Fahrlässigkeit:** Dein Versicherer zahlt auch dann, wenn eine brennende Kerze kurz unbeaufsichtigt blieb oder ein gekipptes Fenster bei Starkregen offen stand.

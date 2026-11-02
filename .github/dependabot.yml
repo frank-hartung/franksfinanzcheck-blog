@@ -29,9 +29,17 @@ updates:
     # Bestand einheitlich; scripts/actions_version_guard.py bewacht es.
     # Seit 14.10.2026 sind alle Actions auf Commit-SHA gepinnt (M-09);
     # Dependabot aktualisiert SHA und Versionskommentar gemeinsam.
+    # Seit #1014: Major-Updates getrennt halten. Sonst blockiert ein Major
+    # die gesamte Gruppe, obwohl Patch/Minor automatisch prüfbar wären.
+    # Beide Gruppen zusammen decken jeden Semver-Typ ab; die Wache verlangt
+    # trotzdem EINEN SHA je Action über alle Workflows/Composite-Actions.
     groups:
       github-actions:
         patterns: ["*"]
+        update-types: ["minor", "patch"]
+      github-actions-major:
+        patterns: ["*"]
+        update-types: ["major"]
 
   # E2E-Tests (Playwright) – Design-Skills-Rollout 12.09.2026.
   - package-ecosystem: "npm"
@@ -89,48 +97,31 @@ updates:
     commit-message:
       prefix: "chore(deps)"
     labels: ["dependencies"]
+    # Ein Eintrag pro Ecosystem/Verzeichnis/Branch: zwei pip-Blöcke für
+    # / lehnt Dependabot ab. Gruppen unterscheiden Paketnamen, NICHT Dateien;
+    # gemeinsam mit CI verwendete Pakete landen daher in der ersten Gruppe.
+    # Nicht zugeordnete (u. a. Major-)Updates bleiben einzelne PRs zur Prüfung.
     groups:
+      python-optionale-werkbank:
+        patterns:
+          - "pyyaml"
+          - "feedparser"
+          - "pypdf"
+          - "youtube-transcript-api"
+          - "trafilatura"
+          - "lxml-html-clean"
+          - "edge-tts"
+          - "miniaudio"
+          - "piper-tts"
+        update-types: ["minor", "patch"]
       python:
         patterns: ["*"]
         update-types: ["minor", "patch"]
-
-  # WF-E813 / #972 (01.11.2026): Die 2026-10-31 noch AD HOC installierten
-  # Pakete (Poppy-Werkbank, TTS-Kette) stehen jetzt in eigenen Manifesten.
-  # Ohne diesen Block würde der Audit sie zwar prüfen, Dependabot sie aber
-  # nie aktualisieren – ein Pin ohne Update-Weg veraltet still.
-  - package-ecosystem: "pip"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "06:00"
-      timezone: "Europe/Berlin"
-    cooldown:
-      default-days: 7
-      semver-major-days: 30
-    open-pull-requests-limit: 3
-    commit-message:
-      prefix: "chore(deps)"
-    labels: ["dependencies"]
-    # Eigene Gruppe, damit die Wochen-PRs der CI-Pins nicht mit den
-    # optionalen Werkbank-Paketen in einem PR landen (ein PR = ein Risiko).
-    groups:
-      python-optionale-werkbank:
-        patterns: ["*"]
-        update-types: ["minor", "patch"]
-    allow:
-      - dependency-name: "pyyaml"
-      - dependency-name: "feedparser"
-      - dependency-name: "pypdf"
-      - dependency-name: "youtube-transcript-api"
-      - dependency-name: "trafilatura"
-      - dependency-name: "lxml_html_clean"
-      - dependency-name: "edge-tts"
-      - dependency-name: "miniaudio"
+    # Piper-Major-Versionen weiterhin nicht automatisch als Versionsupdate
+    # vorschlagen; Sicherheitsupdates sind von dieser SemVer-Regel ausgenommen.
+    ignore:
       - dependency-name: "piper-tts"
-        update-types: ["version-update:semver-minor", "version-update:semver-patch"]
-
-  # (Die Manifeste liegen in /: requirements-poppy.txt, requirements-tts.txt)
+        update-types: ["version-update:semver-major"]
 
   # n8n-Host: Image-Tags in docker-compose.yml und das Whisper-Dockerfile.
   - package-ecosystem: "docker-compose"

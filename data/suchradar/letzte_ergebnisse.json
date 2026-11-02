@@ -1,25 +1,25 @@
 {
- "zeitstempel": "2026-11-01T14:12:01.968331+02:00",
+ "zeitstempel": "2026-11-02T16:00:46.102382+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 25,
  "zaehlung": {
-  "ok": 22,
+  "ok": 21,
   "cache": 0,
-  "fehler": 3,
+  "fehler": 4,
   "uebersprungen": 0
  },
- "treffer_gesamt": 187,
+ "treffer_gesamt": 177,
  "treffer_organisch": 10,
  "datenqualitaet": {
-  "anfragen_erfolgreich": 22,
+  "anfragen_erfolgreich": 21,
   "anfragen_organisch": 1,
-  "anfragen_rueckfall": 21,
-  "treffer_gesamt": 187,
+  "anfragen_rueckfall": 20,
+  "treffer_gesamt": 177,
   "treffer_organisch": 10,
-  "treffer_rueckfall": 177,
-  "rueckfall_anteil": 0.947,
+  "treffer_rueckfall": 167,
+  "rueckfall_anteil": 0.944,
   "anbieter": {
-   "wikipedia": 21,
+   "wikipedia": 20,
    "searxng": 1
   },
   "aussagekraft": "eingeschraenkt"
@@ -36,6 +36,10 @@
   {
    "anfrage": "Tarife Sofortleistung Haken",
    "fehler": "Kein Anbieter lieferte Treffer für 'Tarife Sofortleistung Haken': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer | https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
+  },
+  {
+   "anfrage": "Tipps",
+   "fehler": "Kein Anbieter lieferte Treffer für 'Tipps': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer | https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   }
  ],
  "rang": [
@@ -121,16 +125,6 @@
   },
   {
    "anfrage": "Stromanbieter wechseln",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Tarif",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -230,7 +224,7 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Tipps",
+   "anfrage": "Trockner Stromverbrauch",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -240,7 +234,7 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Trockner Stromverbrauch",
+   "anfrage": "Umschuldung sparen",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -283,7 +277,7 @@
     ]
    },
    {
-    "domaene": "bank99.at",
+    "domaene": "sparkasse.de",
     "treffer": 1,
     "top3": 1,
     "bester_rang": 3,
@@ -293,7 +287,7 @@
     ]
    },
    {
-    "domaene": "mlp-financify.de",
+    "domaene": "bank99.at",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 4,
@@ -303,7 +297,7 @@
     ]
    },
    {
-    "domaene": "schuldnerberatung.de",
+    "domaene": "peaks.com",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 5,
@@ -313,7 +307,7 @@
     ]
    },
    {
-    "domaene": "sparkasse.de",
+    "domaene": "mlp-financify.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 6,
@@ -323,7 +317,7 @@
     ]
    },
    {
-    "domaene": "peaks.com",
+    "domaene": "meetadam.io",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 7,
@@ -333,7 +327,7 @@
     ]
    },
    {
-    "domaene": "meetadam.io",
+    "domaene": "vr.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 8,
@@ -353,7 +347,7 @@
     ]
    },
    {
-    "domaene": "verivox.de",
+    "domaene": "accountable.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 10,
@@ -368,6 +362,6 @@
  },
  "quota": {
   "searxng": 1,
-  "wikipedia": 21
+  "wikipedia": 20
  }
 }

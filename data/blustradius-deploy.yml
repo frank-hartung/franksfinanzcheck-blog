@@ -285,6 +285,12 @@ schritte:
     schuetzt: Publish-Gate (harte Qualitäts-, Affiliate-, Fakten- und YMYL-Freigaben)
     grund: Ohne lauffähigen Recherchevertrag ginge Ungeprüftes live (YMYL).
 
+  - name: Faktenfrische Gas – Rückfallschutz #996
+    klasse: inhalt
+    grund: >-
+      Ein Rückfall in unbelegte Gaspreis- oder Rechtsaussagen muss die
+      Veröffentlichung blockieren, bis der Inhalt fachlich geprüft ist.
+
   - name: Publish-Gate (harte Qualitäts-, Affiliate-, Fakten- und YMYL-Freigaben)
     klasse: inhalt
     grund: >-
@@ -344,6 +350,12 @@ schritte:
   - name: YMYL-Bestand – nur fachlich freigegebene Live-Artikel
     klasse: inhalt
     grund: Fachfreigabe für Geld-/Gesundheitsinhalte – härtester Inhaltsvertrag im Haus.
+
+  - name: LCP-Manifest aus finalem Live-Bestand erzeugen
+    klasse: inhalt
+    grund: >-
+      Preload-Policy und AVIF-Varianten gehören zum finalen Live-Bestand;
+      fehlende Varianten sind ein Inhaltsbefund, kein Messwerkzeug-Ausfall.
 
   - name: Gate-Heilungsdiff merken (alle Gates, inkl. Publish-Gate)
     klasse: infra
