@@ -1089,6 +1089,21 @@ class WizardScheinGruenVertrag(unittest.TestCase):
                 self.assertNotIn("hinweis ", zeile,
                                  f"„nicht prüfbar“ landet weiter in hinweis(): {zeile.strip()}")
 
+    @staticmethod
+    def _wizard_umgebung(ordner: str) -> dict:
+        """Umgebung für den Wizard-Lauf: gh-Attrappe vorn, CI-Marker weg.
+
+        Der Wizard verweigert in CI bewusst den Dienst (`GITHUB_ACTIONS` gesetzt
+        -> sofort Exit 1, „Menschen-Schritt“). Ohne dieses Aufräumen prüft der
+        Test in der CI nicht den Befund, sondern nur den CI-Riegel – er wäre
+        also grün bzw. rot aus dem falschen Grund. Beide Wege sind ein eigener
+        Vertrag (siehe `test_in_ci_wird_der_menschen_schritt_verweigert`).
+        """
+        import os
+        umgebung = {k: v for k, v in os.environ.items() if k != "GITHUB_ACTIONS"}
+        umgebung["PATH"] = f"{ordner}:{umgebung.get('PATH', '')}"
+        return umgebung
+
     def test_check_mit_verdeckten_secrets_endet_rot(self):
         """Der echte Aufruf gegen eine gh-Attrappe, der den Fehler zeigte."""
         import os
@@ -1111,11 +1126,33 @@ class WizardScheinGruenVertrag(unittest.TestCase):
             gh.chmod(0o755)
             lauf = subprocess.run(["bash", str(self.WIZARD), "--check"],
                                   capture_output=True, text=True, timeout=180,
-                                  env={**os.environ, "PATH": f"{ordner}:{os.environ.get('PATH', '')}"})
+                                  env=self._wizard_umgebung(ordner))
         self.assertEqual(lauf.returncode, 1,
                          "ungeprüfte Pflichtpunkte ergaben wieder Exit 0:\n" + lauf.stdout)
         self.assertNotIn("Alle Pflichtpunkte sind eingerichtet", lauf.stdout)
         self.assertIn("NICHT bestätigt", lauf.stdout)
+
+    def test_in_ci_wird_der_menschen_schritt_verweigert(self):
+        """Die Einrichtung ist ein Menschen-Schritt – in CI nie „grün“ durchlaufen.
+
+        Ohne diesen Riegel würde ein Workflow die E1–E8-Prüfung mit den
+        Runner-Rechten „bestaetigen“, die am Entwicklerrechner ganz andere sind.
+        """
+        import os
+        import tempfile
+        with tempfile.TemporaryDirectory() as ordner:
+            gh = Path(ordner) / "gh"
+            gh.write_text("#!/usr/bin/env bash\nexit 1\n", encoding="utf-8")
+            gh.chmod(0o755)
+            lauf = subprocess.run(
+                ["bash", str(self.WIZARD), "--check"], capture_output=True, text=True,
+                timeout=180,
+                env={**os.environ, "GITHUB_ACTIONS": "true",
+                     "PATH": f"{ordner}:{os.environ.get('PATH', '')}"})
+        self.assertEqual(lauf.returncode, 1,
+                         "in CI lief der Einrichtungs-Wizard durch:\n" + lauf.stdout)
+        self.assertIn("In CI verweigert", lauf.stdout + lauf.stderr)
+        self.assertNotIn("Alle Pflichtpunkte sind eingerichtet", lauf.stdout)
 
 
 class NamensVertrag(unittest.TestCase):
