@@ -29,9 +29,17 @@ updates:
     # Bestand einheitlich; scripts/actions_version_guard.py bewacht es.
     # Seit 14.10.2026 sind alle Actions auf Commit-SHA gepinnt (M-09);
     # Dependabot aktualisiert SHA und Versionskommentar gemeinsam.
+    # Seit #1014: Major-Updates getrennt halten. Sonst blockiert ein Major
+    # die gesamte Gruppe, obwohl Patch/Minor automatisch prüfbar wären.
+    # Beide Gruppen zusammen decken jeden Semver-Typ ab; die Wache verlangt
+    # trotzdem EINEN SHA je Action über alle Workflows/Composite-Actions.
     groups:
       github-actions:
         patterns: ["*"]
+        update-types: ["minor", "patch"]
+      github-actions-major:
+        patterns: ["*"]
+        update-types: ["major"]
 
   # E2E-Tests (Playwright) – Design-Skills-Rollout 12.09.2026.
   - package-ecosystem: "npm"
