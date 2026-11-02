@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 02.11.2026 14:38 (Europe/Berlin)  
+> Automatisch aktualisiert: 03.11.2026 00:08 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Mo, 02. November 2026
-- **17:30** ⏳ DSL-Vergleich: So findest du den günstigsten Internettarif — _thread_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/
 ### Di, 03. November 2026
 - **07:30** ⏳ Privathaftpflicht: Warum so wichtig und was sie kostet — _zitat_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/
@@ -33,14 +30,9 @@
 ### Mo, 09. November 2026
 - **07:30** ⏳ DNS-Server wechseln: Datenschutz, Filter und Einrichtung — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/
-- **11:30** ⏳ Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen — _zahl_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/
 ### Mi, 11. November 2026
 - **07:30** ⏳ WLAN verbessern: So bringst du stabilen Speed in jede Ecke — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/
-### Sa, 14. November 2026
-- **17:30** ⏳ Wohngebäudeversicherung Vergleich: Worauf du achten musst — _zahl_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/
 ### Mo, 16. November 2026
 - **07:30** ⏳ Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 € — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/
@@ -49,6 +41,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 03.11.2026 00:08 · DSL-Vergleich: So findest du den günstigsten Internettarif → https://mastodon.social/@FranksFinanzcheck/117549362262666799
 - ✅ 02.11.2026 14:38 · Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 → https://mastodon.social/@FranksFinanzcheck/117547119746092264
 - ✅ 31.10.2026 11:58 · Kostenloses Girokonto: Ein Konto ohne Gebühren finden → https://mastodon.social/@FranksFinanzcheck/117535167605047830
 - ✅ 31.10.2026 00:01 · Flugvergleich im Winter: So findest du echte Billigflüge → https://mastodon.social/@FranksFinanzcheck/117532348748029850
@@ -58,7 +51,6 @@
 - ✅ 28.10.2026 19:55 · Gasrechnung senken: Fehler im Spätsommer vermeiden → https://mastodon.social/@FranksFinanzcheck/117520055691320012
 - ✅ 28.10.2026 12:25 · ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung → https://mastodon.social/@FranksFinanzcheck/117518286645334223
 - ✅ 27.10.2026 17:43 · Preisgarantie Gas: So sicherst du günstige Tarife → https://mastodon.social/@FranksFinanzcheck/117513874714476845
-- ✅ 27.10.2026 11:41 · Energieeffizienz im Haushalt: 5 schnelle Spartricks → https://mastodon.social/@FranksFinanzcheck/117512449068863753
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

@@ -6,26 +6,26 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartr
- icks:nutzen:2026-11-02@franksfinanzcheck.de
-DTSTAMP:20261102T133826Z
-DTSTART:20261102T170000Z
-DTEND:20261102T171500Z
-SUMMARY:Telegram (Kanal): Energieeffizienz im Haushalt: 5 schnelle Spa
- rtricks (nutzen)
+UID:telegram:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest
+ -du-richtig:nutzen:2026-11-08@franksfinanzcheck.de
+DTSTAMP:20261102T230844Z
+DTSTART:20261108T060000Z
+DTEND:20261108T061500Z
+SUMMARY:Telegram (Kanal): Wärmepumpe vs. Gasheizung 2026: So entscheid
+ est du richtig (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-24-energieeffizie
- nz-im-haushalt-5-schnelle-spartricks/
-URL:https://franksfinanzcheck.de/posts/2026-10-24-energieeffizienz-im-
- haushalt-5-schnelle-spartricks/
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs
+ -gasheizung-2026-so-entscheidest-du-richtig/
+URL:https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gashe
+ izung-2026-so-entscheidest-du-richtig/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstiger
- en-konto:nutzen:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261102T133826Z
-DTSTART:20261108T060000Z
-DTEND:20261108T061500Z
+ en-konto:nutzen:2026-11-14@franksfinanzcheck.de
+DTSTAMP:20261102T230844Z
+DTSTART:20261114T060000Z
+DTEND:20261114T061500Z
 SUMMARY:Telegram (Kanal): Bankgebühren senken: 7 Schritte zum günstige
  ren Konto (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
@@ -36,18 +36,18 @@ URL:https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:telegram:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest
- -du-richtig:nutzen:2026-11-15@franksfinanzcheck.de
-DTSTAMP:20261102T133826Z
+UID:telegram:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im
+ -ueberblick:nutzen:2026-11-15@franksfinanzcheck.de
+DTSTAMP:20261102T230844Z
 DTSTART:20261115T060000Z
 DTEND:20261115T061500Z
-SUMMARY:Telegram (Kanal): Wärmepumpe vs. Gasheizung 2026: So entscheid
- est du richtig (nutzen)
+SUMMARY:Telegram (Kanal): Stromkosten senken: Clevere Haushaltsgeräte 
+ im Überblick (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs
- -gasheizung-2026-so-entscheidest-du-richtig/
-URL:https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gashe
- izung-2026-so-entscheidest-du-richtig/
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-se
+ nken-clevere-haushaltsgeraete-im-ueberblick/
+URL:https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-c
+ levere-haushaltsgeraete-im-ueberblick/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

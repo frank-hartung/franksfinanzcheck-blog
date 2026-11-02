@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Reddit
 
-> Automatisch aktualisiert: 02.11.2026 14:38 (Europe/Berlin)  
+> Automatisch aktualisiert: 03.11.2026 00:08 (Europe/Berlin)  
 > Profil: https://www.reddit.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `reddit.ics`
 
@@ -12,9 +12,7 @@
 
 ## Kommende Beiträge
 
-### Mo, 02. November 2026
-- **14:15** ⚪ ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/
+_Aktuell nichts eingeplant – der Autopilot füllt den Plan beim nächsten Lauf._
 
 ## Zuletzt veröffentlicht
 

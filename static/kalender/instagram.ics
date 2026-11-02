@@ -6,41 +6,11 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Instagram
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:instagram:2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spart
- ricks:nutzen:2026-11-02@franksfinanzcheck.de
-DTSTAMP:20261102T133826Z
-DTSTART:20261102T174500Z
-DTEND:20261102T180000Z
-SUMMARY:Instagram: Energieeffizienz im Haushalt: 5 schnelle Spartricks
-  (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-10-24-energieeffizienz-im-h
- aushalt-5-schnelle-spartricks/
-URL:https://franksfinanzcheck.de/posts/2026-10-24-energieeffizienz-im-
- haushalt-5-schnelle-spartricks/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:instagram:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstige
- ren-konto:nutzen:2026-11-05@franksfinanzcheck.de
-DTSTAMP:20261102T133826Z
+UID:instagram:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheides
+ t-du-richtig:nutzen:2026-11-05@franksfinanzcheck.de
+DTSTAMP:20261102T230844Z
 DTSTART:20261105T104500Z
 DTEND:20261105T110000Z
-SUMMARY:Instagram: Bankgebühren senken: 7 Schritte zum günstigeren Kon
- to (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken-
- 7-schritte-zum-guenstigeren-konto/
-URL:https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken
- -7-schritte-zum-guenstigeren-konto/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:instagram:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheides
- t-du-richtig:nutzen:2026-11-06@franksfinanzcheck.de
-DTSTAMP:20261102T133826Z
-DTSTART:20261106T104500Z
-DTEND:20261106T110000Z
 SUMMARY:Instagram: Wärmepumpe vs. Gasheizung 2026: So entscheidest du 
  richtig (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -51,26 +21,26 @@ URL:https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gashe
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum
- -monatlichen:nutzen:2026-11-07@franksfinanzcheck.de
-DTSTAMP:20261102T133826Z
-DTSTART:20261107T104500Z
-DTEND:20261107T110000Z
-SUMMARY:Instagram: ETF-Sparplan starten: Deine Schritt-für-Schritt-Anl
- eitung (nutzen)
+UID:instagram:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstige
+ ren-konto:nutzen:2026-11-06@franksfinanzcheck.de
+DTSTAMP:20261102T230844Z
+DTSTART:20261106T104500Z
+DTEND:20261106T110000Z
+SUMMARY:Instagram: Bankgebühren senken: 7 Schritte zum günstigeren Kon
+ to (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-
- schritt-fuer-schritt-zum-monatlichen/
-URL:https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten
- -schritt-fuer-schritt-zum-monatlichen/
+ : https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken-
+ 7-schritte-zum-guenstigeren-konto/
+URL:https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken
+ -7-schritte-zum-guenstigeren-konto/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-i
- m-ueberblick:nutzen:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261102T133826Z
-DTSTART:20261108T104500Z
-DTEND:20261108T110000Z
+ m-ueberblick:nutzen:2026-11-07@franksfinanzcheck.de
+DTSTAMP:20261102T230844Z
+DTSTART:20261107T104500Z
+DTEND:20261107T110000Z
 SUMMARY:Instagram: Stromkosten senken: Clevere Haushaltsgeräte im Über
  blick (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -81,9 +51,39 @@ URL:https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-c
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:instagram:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum
+ -monatlichen:nutzen:2026-11-08@franksfinanzcheck.de
+DTSTAMP:20261102T230844Z
+DTSTART:20261108T104500Z
+DTEND:20261108T110000Z
+SUMMARY:Instagram: ETF-Sparplan starten: Deine Schritt-für-Schritt-Anl
+ eitung (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-
+ schritt-fuer-schritt-zum-monatlichen/
+URL:https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten
+ -schritt-fuer-schritt-zum-monatlichen/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spart
+ ricks:nutzen:2026-11-09@franksfinanzcheck.de
+DTSTAMP:20261102T230844Z
+DTSTART:20261109T104500Z
+DTEND:20261109T110000Z
+SUMMARY:Instagram: Energieeffizienz im Haushalt: 5 schnelle Spartricks
+  (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-10-24-energieeffizienz-im-h
+ aushalt-5-schnelle-spartricks/
+URL:https://franksfinanzcheck.de/posts/2026-10-24-energieeffizienz-im-
+ haushalt-5-schnelle-spartricks/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:instagram:2026-10-25-strategisch-sparen-so-kannst-du-deine-reiseka
  sse-fuellen:nutzen:2026-11-10@franksfinanzcheck.de
-DTSTAMP:20261102T133826Z
+DTSTAMP:20261102T230844Z
 DTSTART:20261110T104500Z
 DTEND:20261110T110000Z
 SUMMARY:Instagram: Strategisch sparen: So kannst du deine Reisekasse f
@@ -98,7 +98,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzic
  ht:nutzen:2026-11-11@franksfinanzcheck.de
-DTSTAMP:20261102T133826Z
+DTSTAMP:20261102T230844Z
 DTSTART:20261111T104500Z
 DTEND:20261111T110000Z
 SUMMARY:Instagram: Frugalismus Familie: Clever sparen ohne Verzicht (n
@@ -113,7 +113,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-28-flugvergleich-im-winter-so-findest-du-echte-b
  illigfluege:nutzen:2026-11-12@franksfinanzcheck.de
-DTSTAMP:20261102T133826Z
+DTSTAMP:20261102T230844Z
 DTSTART:20261112T104500Z
 DTEND:20261112T110000Z
 SUMMARY:Instagram: Flugvergleich im Winter: So findest du echte Billig
@@ -126,24 +126,24 @@ URL:https://franksfinanzcheck.de/posts/2026-10-28-flugvergleich-im-win
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sp
- aren:nutzen:2026-11-13@franksfinanzcheck.de
-DTSTAMP:20261102T133826Z
+UID:instagram:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-
+ update-2026:nutzen:2026-11-13@franksfinanzcheck.de
+DTSTAMP:20261102T230844Z
 DTSTART:20261113T104500Z
 DTEND:20261113T110000Z
-SUMMARY:Instagram: Kfz-Versicherung Vergleich 2026: Bis zu 800 € spare
- n (nutzen)
+SUMMARY:Instagram: Dein Haus sicher schützen: Das neue Vorsorge-Update
+  2026 (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-verg
- leich-bis-zu-800-euro-sparen/
-URL:https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-ver
- gleich-bis-zu-800-euro-sparen/
+ : https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schu
+ etzen-das-neue-vorsorge-update-2026/
+URL:https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-sch
+ uetzen-das-neue-vorsorge-update-2026/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-14@fr
  anksfinanzcheck.de
-DTSTAMP:20261102T133826Z
+DTSTAMP:20261102T230844Z
 DTSTART:20261114T104500Z
 DTEND:20261114T110000Z
 SUMMARY:Instagram: DSL-Wechselbonus sichern: So sparst du beim Interne
@@ -156,18 +156,33 @@ URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-
- update-2026:nutzen:2026-11-15@franksfinanzcheck.de
-DTSTAMP:20261102T133826Z
+UID:instagram:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-un
+ d-was-sie-kostet:nutzen:2026-11-15@franksfinanzcheck.de
+DTSTAMP:20261102T230844Z
 DTSTART:20261115T104500Z
 DTEND:20261115T110000Z
-SUMMARY:Instagram: Dein Haus sicher schützen: Das neue Vorsorge-Update
-  2026 (nutzen)
+SUMMARY:Instagram: Privathaftpflicht: Warum so wichtig und was sie kos
+ tet (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schu
- etzen-das-neue-vorsorge-update-2026/
-URL:https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-sch
- uetzen-das-neue-vorsorge-update-2026/
+ : https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-war
+ um-sie-so-wichtig-ist-und-was-sie-kostet/
+URL:https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-wa
+ rum-sie-so-wichtig-ist-und-was-sie-kostet/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgara
+ ntie-gas:nutzen:2026-11-17@franksfinanzcheck.de
+DTSTAMP:20261102T230844Z
+DTSTART:20261117T104500Z
+DTEND:20261117T110000Z
+SUMMARY:Instagram: Sicher heizen: Was sie abdeckt und wie lange sie lä
+ uft (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schu
+ etzt-dich-eine-preisgarantie-gas/
+URL:https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-sch
+ uetzt-dich-eine-preisgarantie-gas/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

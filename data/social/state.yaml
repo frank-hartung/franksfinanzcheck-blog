@@ -1284,6 +1284,21 @@ history:
     #Wohngebaeude #Versicherung #Hausratversicherung #Hausversicherung'
   ref: '117547119746092264'
   ai: false
+- posted_at: '2026-11-03T00:08:31.920637+01:00'
+  channel: mastodon
+  slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
+  title: 'DSL-Vergleich: So findest du den günstigsten Internettarif'
+  angle: thread
+  url: https://mastodon.social/@FranksFinanzcheck/117549362262666799
+  ok: true
+  text: 'DSL-Vergleich: So findest du den günstigsten Internettarif
+
+
+    Ein transparenter DSL-Vergleich berechnet die effektiven Monatspreise über die
+    gesamte 24-monatige Vertragslaufzeit inklusive aller Aktionsrabatte, Router-Gebühren
+    und Wechselprämien.'
+  ref: '117549362262666799'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1309,4 +1324,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-11-02T14:38:25.387431+01:00'
+updated_at: '2026-11-03T00:08:43.347624+01:00'
