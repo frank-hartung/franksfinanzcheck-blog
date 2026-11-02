@@ -242,10 +242,16 @@ class AdHocInstallationTest(unittest.TestCase):
         self.assertEqual(befunde, [], f"Ad-hoc-Installationen: {[b.als_dict() for b in befunde]}")
 
     def test_dependabot_pflegt_die_neuen_manifeste(self) -> None:
-        """Ein Pin ohne Update-Weg veraltet still."""
+        """Die schnelle Offline-Wache benötigt keine zusätzlichen Python-Pakete.
+
+        Die vollständige YAML-Vertragsprüfung liegt in
+        test_dependabot_actions_policy und läuft im Regressionsworkflow.
+        """
         text = (ROOT / ".github/dependabot.yml").read_text(encoding="utf-8")
+        self.assertEqual(text.count('package-ecosystem: "pip"'), 1)
+        self.assertIn('python-optionale-werkbank:', text)
         for paket in ("pypdf", "edge-tts", "piper-tts", "trafilatura"):
-            self.assertIn(f'dependency-name: "{paket}"', text)
+            self.assertIn(f'"{paket}"', text)
         for datei in ("requirements-poppy.txt", "requirements-tts.txt"):
             self.assertTrue((ROOT / datei).is_file(), f"{datei} fehlt")
 
