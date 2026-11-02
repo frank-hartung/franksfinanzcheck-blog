@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-02T13:39:22Z",
+  "generated_at": "2026-11-02T14:13:47Z",
   "modus": "kandidaten",
-  "commit": "519a882c5f4f6e362117276b2619696eba076c6b",
+  "commit": "69f08c40c654e63eda3d8030eec790ee85fdbaf1",
   "kapazitaet": {
     "stichtag": "2026-11-02",
     "artikel": 112,
@@ -32,7 +32,7 @@
     "offen_im_horizont": 112,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
-    "sockel": 3,
+    "sockel": 4,
     "empfohlenes_budget": 4,
     "empfehlung_erreicht": true,
     "hartes_limit": 10
@@ -56,7 +56,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": {
-      "sha256": "633ce9e60688f04ba49228fc47da2f3df9dc3df8559f286d7be99a2662ca7ed8",
+      "sha256": "1ff0b2bba616b6160a2415405d96e0bf962297f9494f9b7e721c0d0aab446c18",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -64,13 +64,13 @@
         "quellen": "bestanden",
         "faktenalter": "blockiert",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
       "sha256": "518d46f3fe8729a56931239e8ae505b0442caeb73638d4ff8adcb43906890a06",
@@ -107,24 +107,24 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
-      "sha256": "f2471e7f149988583dc71a6ac9e45d82b053de9004f411b3b1c767400677289f",
+      "sha256": "367c9e3b2e9db26b714d8a73d6fddad68b7814feaf8b4f271b816b9dda9bf8ec",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "blockiert",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
-      "sha256": "32be58a77cad35cf56401658bd12211d18487bb68d223800d6a3f40cd8812677",
+      "sha256": "b7c87348608f9f730d73b454fd13336cbd4c4e8f150ba9bc263a9a056522f4cf",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -138,7 +138,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
       "sha256": "6c052908dea1d6d0acc229e09929d492706834b4d587f164e3bd1ebe991e87df",
@@ -345,7 +345,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "89a0c12e0a1c0d33d03894132b50be3f8002eec8b658e9e504bdb7775140caac",
+      "sha256": "9b2680fc6458e25053d8aba78065b7472841708103ecd7520361775084a3f322",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -359,24 +359,24 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
-      "sha256": "77ab628f991fa7399a2821116bb4cec13a62bcfc7fb6bca87d97c38c5ca72b0a",
+      "sha256": "6ad5c5814b790efedd9e44fb53ddb9d3f4002b680ad4a53e8d40257e87ed5faf",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "blockiert",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
       "sha256": "2ecbcc39d5fc6e6dced5bbad70c2f71fe1993ae248e789220f995b01a264caad",
