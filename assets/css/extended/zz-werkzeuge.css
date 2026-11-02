@@ -277,6 +277,11 @@
   box-shadow: 0 5px 14px rgba(14, 90, 67, .34);
 }
 
+.ff-wz__btn:active {
+  transform: translateY(0) scale(.97);
+  box-shadow: 0 2px 8px rgba(14, 90, 67, .28);
+}
+
 .ff-wz__btn:focus-visible {
   outline: 3px solid var(--ff-yellow, #FFB300);
   outline-offset: 2px;
@@ -740,6 +745,10 @@
   box-shadow: var(--ff-wz-schatten-hoch);
 }
 
+.ff-wz-karte:active {
+  transform: translateY(0);
+}
+
 .ff-wz-karte:focus-visible {
   outline: 3px solid var(--ff-yellow, #FFB300);
   outline-offset: 3px;
@@ -899,6 +908,10 @@
   border-color: var(--ff-wz-linie);
 }
 
+.ff-wz-weiter__karte:active {
+  transform: translateY(0);
+}
+
 .ff-wz-weiter__karte:focus-visible {
   outline: 3px solid var(--ff-yellow, #FFB300);
   outline-offset: 3px;
@@ -951,6 +964,7 @@
 }
 
 .ff-wz-andere__liste a:hover { transform: translateY(-1px); }
+.ff-wz-andere__liste a:active { transform: translateY(0) scale(.97); }
 
 .ff-wz-andere__liste a:focus-visible {
   outline: 3px solid var(--ff-yellow, #FFB300);

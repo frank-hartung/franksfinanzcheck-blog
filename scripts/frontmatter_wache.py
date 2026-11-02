@@ -49,6 +49,17 @@ Bewertung: **BLOCKER** = Hugo kann die Seite nicht bauen oder liest den
 Wert anders, als er dasteht. **HINWEIS** = baut, ist aber eine stille
 Falle (z. B. Kommentar schneidet den Wert ab).
 
+WF-990 (01.11.2026, Duplikat statt Hinweis): Ein doppelter Schlüssel war
+hier als HINWEIS eingestuft, mit der Begründung „YAML nimmt still den
+letzten Wert". Das stimmt für PyYAML und ist für Hugo FALSCH: Hugo bricht
+den Bau mit „mapping key \"description\" already defined" ab. Genau diese
+Einstufung hat am 01.11.2026 den Squash-Merge von PR #1004 durchgelassen –
+der Wächter sah den Fund, der Schritt blieb grün, `main` war danach nicht
+mehr baubar. Die Konsequenz: Die Doppelt-Prüfung des Scanners (F3) ist die
+EINZIGE Stelle, die den Fall ohne Parser sieht – der YAML-Parser ist hier
+blind, weil er den letzten Wert nimmt und den ersten still verwirft. Ein
+Befund, der den Bau tötet, darf kein Hinweis sein.
+
   F1  GERÜST      Frontmatter vorhanden und geschlossen (`---`, `+++`
                   oder JSON-Objekt am Dateianfang). Offenes Frontmatter
                   ist ein Bau-Abbruch, kein Stilthema.
@@ -360,11 +371,17 @@ def scanne_yaml(fm: str, startzeile: int, pfad: str,
 
         if einzug == 0 and not rest_zeile.startswith("-"):
             if key in gesehen:
+                # WF-990: BLOCKER, nicht HINWEIS. Hugo bricht an einem
+                # doppelten Mapping-Schlüssel den ganzen Bau ab – PyYAML
+                # nimmt still den letzten Wert, deshalb sieht der Parser
+                # (Schicht 2) den Fall nie. Dieser Scanner ist die einzige
+                # Instanz, die ihn vor dem Bau findet.
                 befunde.append(Befund(
-                    "F3", HINWEIS, pfad, nr, 1,
+                    "F3", BLOCKER, pfad, nr, 1,
                     f"Schlüssel `{key}` steht doppelt (zuerst Zeile "
-                    f"{gesehen[key]}). YAML nimmt still den letzten Wert – "
-                    f"die erste Angabe ist wirkungslos."))
+                    f"{gesehen[key]}). Hugo bricht den Bau daran ab "
+                    f"(mapping key already defined); ein YAML-Parser nimmt "
+                    f"still den letzten Wert und verschweigt den ersten."))
             gesehen.setdefault(key, nr)
 
         # ---- Wert klassifizieren ----
@@ -1033,8 +1050,18 @@ def main(argv: list[str] | None = None) -> int:
           f"Hinweise: {len(hinweise)} | Tiefenprüfung: "
           f"{'YAML-Parser' if tief else 'Scanner'}")
     if blocker:
-        print("Heilung: python3 scripts/frontmatter_wache.py --fix "
-              "(zitiert die betroffenen Werte, ohne den Text zu ändern)")
+        # WF-990: Ein Duplikat ist NICHT von --fix heilbar, und die alte
+        # Zeile behauptete genau das. Ein Reparaturhinweis, der ins Leere
+        # führt, ist schlimmer als keiner – er erzieht zum Wegsehen.
+        doppelt = [b for b in blocker if "steht doppelt" in b["meldung"]]
+        if doppelt:
+            print(f"ACHTUNG: {len(doppelt)} Blocker sind doppelte Schlüssel – "
+                  "die kann --fix NICHT heilen. Es fehlt eine Angabe, und nur "
+                  "ein Mensch entscheidet, welche gilt (die Beschreibung gilt "
+                  "dort, wo sie inhaltlich richtig ist, nicht die letzte).")
+        if len(doppelt) < len(blocker):
+            print("Heilung: python3 scripts/frontmatter_wache.py --fix "
+                  "(zitiert die betroffenen Werte, ohne den Text zu ändern)")
     return 1 if rot else 0
 
 

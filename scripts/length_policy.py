@@ -20,7 +20,11 @@ from __future__ import annotations
 
 import os
 import re
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import serp_limits  # noqa: E402
 
 # --- Body (Artikel / Pillar) --------------------------------
 POSTS = {
@@ -53,8 +57,13 @@ PIN_TITLE_MIN, PIN_TITLE_OPT, PIN_TITLE_MAX = 40, 60, 100
 PIN_DESC_MIN, PIN_DESC_OPT_MIN, PIN_DESC_OPT_MAX, PIN_DESC_MAX = 220, 280, 480, 500
 
 # --- Google SERP --------------------------------------------
+# WF-984 (01.11.2026): Die Meta-Description las hier 160 – als einzige
+# der drei Grenzen im Haus die großzügigste. Die Policy beschreibt jetzt
+# nur noch das, was die SSOT ohnehin sagt; ein Aufrufer, der sie liest,
+# kann damit nicht mehr über das Marktfenster hinausschreiben.
 TITLE_MIN, TITLE_MAX = 30, 60
-META_DESC_OPT_MIN, META_DESC_OPT_MAX = 120, 160
+META_DESC_OPT_MIN = serp_limits.DESC_OPT_MIN_ZEICHEN
+META_DESC_OPT_MAX = serp_limits.DESC_MAX_ZEICHEN
 
 MARKER = "<!-- premium-length-2026 -->"
 

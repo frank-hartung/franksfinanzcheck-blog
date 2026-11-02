@@ -2,6 +2,7 @@
 title: "Der 15-Minuten-Fixkosten-Check"
 description: "Der FranksFinanzcheck-Kurzcheck: Wiederkehrende Ausgaben finden, Fristen prüfen und ohne Verkaufsdruck entscheiden, was sich wirklich ändern sollte."
 draft: false
+lastmod: 2026-10-25
 showToc: true
 cover:
   image: "images/covers/brand-franksfinanzcheck.jpg"

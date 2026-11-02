@@ -372,3 +372,35 @@
 {"date": "2026-10-31", "kritisch": 0, "fest": 0, "modus": "set-current", "geaendert": []}
 {"date": "2026-10-31", "kritisch": 0, "fest": 0, "modus": "set-current", "geaendert": []}
 {"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/redaktions_standard.py"]}
+{"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": ["scripts/redaktions_standard.py"], "head": "8dbb3b3"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 2, "modus": "heal", "geheilt": ["data/skill_lizenzen.json", "data/skill_portfolio.yaml"], "head": "6504f72"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": ["data/skill_portfolio.yaml"], "head": "ba12044"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": ["data/skill_lizenzen.json"], "head": "0f9f068"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": ["data/skill_portfolio.yaml"], "head": "e3585d1"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": ["data/skill_lizenzen.json"], "head": "55f30ff60"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": ["data/skill_portfolio.yaml"], "head": "b01d3edb1"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": ["data/skill_lizenzen.json"], "head": "c48585aed"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 1, "modus": "heal", "geheilt": ["data/skill_portfolio.yaml"], "head": "d0af9d055"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 2, "modus": "heal", "geheilt": ["data/skill_lizenzen.json", "data/skill_portfolio.yaml"], "head": "3189c7c"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 2, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 2, "modus": "heal", "geheilt": ["data/skill_lizenzen.json", "data/skill_portfolio.yaml"], "head": "957b02b4a"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 0, "modus": "verify"}
+{"date": "2026-11-01", "kritisch": 0, "fest": 2, "modus": "heal", "geheilt": ["data/skill_lizenzen.json", "data/skill_portfolio.yaml"], "head": "4366b11"}

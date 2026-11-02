@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-10-10
+lastmod: 2026-11-02
 title: "Preisgarantie Gas: So sicherst du günstige Tarife"
 description: "Gastarife mit Preisgarantie richtig vergleichen: Filter, Gesamtpreis, Bonus, Laufzeit und Garantieumfang in einer Schritt-für-Schritt-Anleitung."
 date: 2026-08-12T08:35:12Z
@@ -20,10 +20,9 @@ pin_title: Gaspreise steigen? Jetzt Tarif mit Preisgarantie sichern
 pin_description: "*Werbung | Vor der Heizsaison ziehen viele Anbieter die Preise an – mit einer Preisgarantie von 12 bis 24 Monaten bist du dagegen gefeit: Jetzt Gastarife mit fester Preisbindung vergleichen und teure Preissprünge einfach aussitzen. 5 Minuten Aufwand, ein Jahr Ruhe. Jetzt sichern!"
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
-  - titel: "BDEW-Gaspreisanalyse August 2026"
-    url: "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/"
-    herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
-    datum: "2026-08-24"
+  - titel: "Preise und Abschläge"
+    url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html"
+    herausgeber: "Bundesnetzagentur"
   - titel: "So finden Sie den passenden Strom- oder Gastarif"
     url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-finden-sie-den-passenden-strom-oder-gastarif-6436"
     herausgeber: "Verbraucherzentrale"
@@ -42,7 +41,7 @@ Dieser Leitfaden führt dich in zehn Minuten von der Jahresrechnung bis zur sich
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Tarife kannst du über unseren Partner-Vergleich prüfen: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Preisgarantie Gas: So startest du ohne Stress
@@ -82,9 +81,9 @@ Dein Abschlag gehört nicht ins Verbrauchsfeld. Er ist nur eine Vorauszahlung. N
 **Beispiel:**
 - 18.000 kWh × 0,118 €/kWh = 2.124 € (als Modellwert)
 - Grundpreis = 180 €
-- aktuelle Jahreskosten = **2.304 €**
+- angenommene Jahreskosten = **2.304 €**
 
-Diese Zahl ist deine Vergleichsbasis. Ein Bonus aus einem früheren Jahr zählt nicht mehr.
+Im Beispiel ist das die Vergleichsbasis. Nutze für deine Rechnung deine eigenen Werte; ein Bonus aus einem früheren Jahr zählt nicht mehr.
 
 ## Minute 3: Portalfilter neutral einstellen
 
@@ -100,7 +99,7 @@ Warum? Vergleichsportale verdienen an vermittelten Abschlüssen. Das macht sie n
 
 ## Minute 4: Laufzeit und Kündigung prüfen
 
-Rund zwölf Monate Laufzeit sind für viele Haushalte ein guter Mittelweg. Du hast feste Preise und bleibst trotzdem flexibel.
+Rund zwölf Monate Laufzeit können ein Mittelweg sein. Feste Preise gibt es nur für die Bestandteile und den Zeitraum, die Garantie abdeckt.
 
 Prüfe:
 
@@ -113,7 +112,7 @@ Zeitlich sollte die Garantie nicht deutlich vor der festen Bindung enden. Sonst 
 
 ## Minute 5: Garantieumfang lesen
 
-Eine enge Garantie lässt oft Steuern, Abgaben, Umlagen oder Netz-Kosten außen vor. Eine breite Garantie schützt mehr. Sie kostet aber meist auch mehr.
+Eine enge Garantie lässt oft Steuern, Abgaben, Umlagen oder Netz-Kosten außen vor. Eine breite Garantie schützt mehr Bestandteile. Vergleiche ihren Gesamtpreis mit anderen Angeboten; ein Aufpreis ist nicht zwingend.
 
 Markiere in den Tarifbedingungen:
 
@@ -182,7 +181,9 @@ Für den Abschluss brauchst du meist Zählernummer oder Marktlokations-ID, bishe
 
 Ausnahmen: Bei sehr knapper Frist, bei Sonderkündigung wegen Preiserhöhung oder bei Umzug kümmerst du dich besser selbst um die Kündigung.
 
-Notiere den Zählerstand zum Wechseltermin und gib ihn wie verlangt durch. Leitung und Zähler bleiben gleich. Kommt es zu Verzögerungen, greift die Grund- oder Ersatzversorgung.
+Notiere den Zählerstand zum Wechseltermin und gib ihn wie verlangt durch. Leitung und Zähler bleiben gleich. Nach der [Bundesnetzagentur zu Vertragsarten](https://www.bundesnetzagentur.de/DE/Vportal/Energie/Vertragsarten/start.html) kommt bei weiterem Verbrauch je nach Fall Grund- oder Ersatzversorgung in Betracht; die Preise können abweichen.
+
+Bei Preisänderungen müssen Lieferanten Haushaltskunden grundsätzlich mindestens einen Monat vorher verständlich über Grund, Voraussetzungen und Umfang sowie das Sonderkündigungsrecht informieren; in der Grundversorgung gelten zusätzliche Pflichten. Verbraucher können grundsätzlich zum Zeitpunkt der Änderung kündigen, mit Ausnahmen etwa bei vereinbarter separierter Klausel für bestimmte hoheitliche Änderungen oder reiner Umsatzsteuerweitergabe. Details erklärt die [Bundesnetzagentur zu Preisen und Abschlägen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html).
 
 ## Wie du die mögliche Ersparnis berechnest?
 
@@ -190,9 +191,7 @@ Notiere den Zählerstand zum Wechseltermin und gib ihn wie verlangt durch. Leitu
 
 Bei 20.000 kWh bedeuten schon 1,5 Cent weniger Arbeitspreis 300 € pro Jahr; das ist eine Modellannahme. Grundpreis und Bonus können die Differenz verändern.
 
-Für Januar 2026 rechnete die Bundesnetzagentur vor: Bei 20.000 kWh Verbrauch sparst du im Schnitt rund 360 € durch einen Wechsel; das ist ein Modellwert. Das ist nur ein Durchschnittswert, kein Versprechen für dich persönlich.
-
-Der BDEW-Schnitt liegt bei 11,93 Cent pro kWh im Einfamilienhaus; das ist ein Beispielwert. Das zeigt nur die grobe Lage am Markt. Regionale Angebote und alte Verträge weichen davon ab.
+Ob ein Wechsel tatsächlich spart, hängt von deinem bisherigen Vertrag, dem Angebot und deinem Verbrauch ab. Vergleiche die Jahreskosten einschließlich Grundpreis und prüfe Bonusbedingungen getrennt.
 
 ## Wann 24 Monate trotzdem passen können?
 

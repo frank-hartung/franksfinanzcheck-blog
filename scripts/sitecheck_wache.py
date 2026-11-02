@@ -20,7 +20,7 @@ und Sitemap.
 Regeln (harte Funde = Exit 1, Hinweise = Exit 0):
   M1  Doctype vorhanden                 M2  html lang + charset
   M3  viewport                         M4  Title 1–60 Zeichen
-  M5  Description 110–156 Zeichen      M6  genau ein https-Canonical
+  M5  Description 100–155 Zeichen      M6  genau ein https-Canonical
   M7  kein generator-Tag               M8  Title/Description eindeutig
   S1  genau eine H1, max. 80 Zeichen   S2  keine Überschriftensprünge
   S3  keine obsoleten Tags             S4  Bilder mit alt/Maßen/loading
@@ -60,9 +60,17 @@ from pathlib import Path
 BLOG_DIR = Path(__file__).resolve().parent.parent
 STANDARD_SITE = BLOG_DIR / "public"
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import serp_limits  # noqa: E402
+
 TITLE_MAX = 60
-DESC_MIN = 110
-DESC_MAX = 156
+# WF-984 (01.11.2026): Hier standen eigene Zahlen (110/156). Das Fenster
+# stand damit ein drittes Mal im Haus – 160 in metadaten_wache, 165 im
+# seo_audit, 156 hier. Gemessen wird die GEBAUTE Seite; der Maßstab ist
+# derselbe wie an der Quelle, sonst prüft die Wache ihr eigenes Fenster
+# und nicht das des Marktes.
+DESC_MIN = serp_limits.DESC_MIN_ZEICHEN
+DESC_MAX = serp_limits.DESC_MAX_ZEICHEN
 H1_MAX = 80
 TEXT_MIN = 600
 SCRIPT_MAX = 6

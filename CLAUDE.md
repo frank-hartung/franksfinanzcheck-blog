@@ -60,6 +60,7 @@ viele Bot-Dateien (Recherche-Briefs aus RSS/Web, Social-Kommentare,
    | `ff-oberflaeche` → `references/web-richtlinien.md` | UI-Code-Review gegen die Haus-Richtlinie (24 Punkte, je mit Gate oder Fundstelle) |
    | `frontend-design` (Anthropic) | Neue Oberflächen mit eigener visueller Identität |
    | `design-taste-frontend` (taste-skill) | Anti-Slop-Disziplin bei Frontend-Arbeiten |
+   | `emil-design-eng` (emilkowalski/skills) | Detailhandwerk an Interaktion und Motion: Animation, Easing, Timing, Hover/Fokus-Feedback, `prefers-reduced-motion`, Komponenten-Politur |
    | `webapp-testing` (Anthropic) | Browser-Interaktion/Test mit Playwright |
    | `agent-reach` | **Jede** Internet-Recherche/Suche/URL-Lektüre (Twitter, Reddit, YouTube, GitHub, RSS, Web …) – auch bei deutschen Aufträgen („recherchiere …", „suche …", „was sagt man über …“) |
    Aktualisierung, Aufnahme und Entfernung laufen über den Skills-CLI
@@ -183,9 +184,18 @@ Ablageort. **Wer an der Sache arbeitet, liest den Skill vorher.**
 | Etwas gilt erst nach dem Prüfen: Commit, Merge, neue/geänderte Wache, Befund, kaputtes `data/*.json`, `npm ci`-Lauffehler | `ff-pruefen` | vollständiger Prüfkatalog `npm run test:*`, Selbsttest- und Wachen-Vertrag, Artefakt-Ganzheit, Report-Erzeuger |
 | Die Live-Site erreicht oder blockiert etwas: Workflow, Action, Deploy, Pages, Worker, Hugo-Bau, Pflicht-Check, Alarm-Issue, Backup, Rebase | `ff-ausliefern` | CI-Verträge, eine Hugo-Bau-Action, Blustradius und Siegel-Reihenfolge, Alarm-Routing, Release-Scorecard, Merge-Disziplin |
 | Der Bestand an Artikeln: Engine, Themenplan, Reserve, Faktenfrische, Dubletten und Phrasen, YMYL, Heiler, Slots und Quote | `ff-produzieren` | zwei Bahnen, eine Messlatte, Heiler-Pflicht, Zahlenbeleg, Schreibvertrag |
-| Was nach außen als Text steht: Artikel, Titel, Description, Cover, `lastmod`, Tags, Offenlegung, Rechtschreibung, Pins, README-Wortlaut | `ff-marke-text` | ZEIT-Latte mit eigener Stimme, eine Zahl zwei Messstellen, Tag-Register, artikelgenaue Kennzeichnung |
+| Was nach außen als Text steht: Artikel, Titel, Description, Cover, `lastmod`, Tags, Offenlegung, Rechtschreibung, Pins, README-Wortlaut | `ff-marke-text` | ZEIT-Latte mit eigener Stimme, eine Zahl zwei Messstellen, Tag-Register, artikelgenaue Kennzeichnung, Grenzen des Fremd-Packs |
 | Jede Oberfläche: CSS, Farbe, Dark Mode, Variante, Figma/Relume, Templates, Browser-JS, Werkzeuge, `_headers` | `ff-oberflaeche` | Design-Vertrag (siehe oben), Laufzeit-Robustheit, Produktzusage der Werkzeuge |
 | Jeder Weg nach draußen: Modell, Secret, Recherche, Antwortwerk/Werkbank, Suchradar, Schaltwerk, Kosten | `ff-ki-automation` | Transportweg T1–T9, Werkbank B1–B9, Kostensperre, Leitplanken der Automationen |
+| Ein deutscher Artikel soll vor der Auslieferung durch das Lektorat: Seven Sweeps, KI-Tells, YMYL-Panel, Engine-Kette LT/DW/H/L | `ff-lektorat` | sieben Pässe, Reihenfolge der Engine, Schwellen, finale Checkliste |
+
+**Fremd-Skills mit eigenem Router:** `seo` (AgriciDaniel/claude-seo) ist der Hub
+für SEO-Analyse jenseits der Haus-Gates – Audit, technisch, GEO, Agentic
+Readiness, hreflang, Sitemap, Schema, Bilder, Local, Backlinks, Drift. Er
+verteilt auf 25 `seo-*`-Unterskills; Werkzeuge laufen über
+`.claude/skills/seo/scripts/claude-seo run <script.py>`. Der Hub liefert
+**Analyse**, nicht die Hausregel: was veröffentlicht wird, entscheiden weiter
+die Gates (`npm run test:*`, `.github/workflows/seo-paritaet.yml`).
 
 ## Neues Wissen? Nicht hier. (Größenbudget, DAUERVORGABE)
 
@@ -209,9 +219,11 @@ Wochen gebraucht werden. Damit das nicht zurückwächst:
    Verweise auf Abschnitte (`§4`, „Regel 6“) löst K7 auf. Ein toter Befehl ist
    ein Befund, kein Tippfehler.
 5. **Fremde Skills:** `npx skills update` pflegt nur, was in
-   `skills-lock.json` steht. Jeder vendored Skill braucht eine `LICENSE`
-   (bei Apache-2.0 zusätzlich `NOTICE`) und einen Eintrag in
-   `data/skill_lizenzen.json` – geprüft von K6. `ff-*` stehen nie im Lock.
+   `skills-lock.json` steht, und ersetzt dabei den **ganzen** Ordner – danach
+   `git status .claude/skills` prüfen (K10). Jeder vendored Skill braucht eine
+   `LICENSE` (bei Apache-2.0 zusätzlich `NOTICE`) und einen Eintrag in
+   `data/skill_lizenzen.json` (K6); die Summe aller Beschreibungen ist
+   budgetiert, weil sie jede Session mitzahlt (K9). `ff-*` stehen nie im Lock.
 
 ## Prüfen, bevor etwas gilt (Mindestpaket)
 

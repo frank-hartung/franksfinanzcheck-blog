@@ -118,18 +118,23 @@ jobs:
             scripts.tests.test_datenschutz_freigabe
 
       # ------------------------------------------------------------
-      #  SKILL-VERTRAG K1–K8 (01.11.2026)
+      #  SKILL-VERTRAG K1–K10 + PORTFOLIO P1–P7 (01.11.2026)
       #  Der Regelkern war 2.532 Zeilen / 157,9 KB – rund 39.700 Tokens, bevor
       #  die erste Aufgabe stand. Zerlegt in Kern + sechs ff-*-Skills, gilt
       #  seither ein Budget, und die Herkunft jedes vendored Skills muss im
-      #  Register stehen. Ohne Schritt im Gate wäre das eine Ordnung für die
-      #  halbe Woche: dieser Lauf ruft dasselbe wie `npm run skills:check` und
-      #  `npm run test:skills` lokal.
+      #  Register stehen. Das Portfolio P1–P7 beantwortet danach die Frage,
+      #  die beim Wachsen der Bibliothek offenblieb: welches Skill dient
+      #  welchem Blog-Thema – und welches ist mit Grund ausgeschlossen.
+      #  Ohne Schritt im Gate wäre das eine Ordnung für die halbe Woche:
+      #  dieser Lauf ruft dasselbe wie `npm run skills:check`,
+      #  `npm run skills:portfolio` und `npm run test:skills` lokal.
       # ------------------------------------------------------------
       - name: Skill-Vertrag (Kernbudget, Router, Herkunft, Lizenz, Siegelstand)
         run: |
           python3 scripts/skills_vertrag.py
           python3 scripts/skills_vertrag.py --selftest
+          python3 scripts/skills_portfolio.py
+          python3 scripts/skills_portfolio.py --selftest
           python3 -m unittest scripts.tests.test_skills_vertrag
 
       # ------------------------------------------------------------

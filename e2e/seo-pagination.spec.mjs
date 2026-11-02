@@ -1,5 +1,11 @@
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import { test, expect, SITE_ORIGIN } from './fixtures.mjs';
 import { newestArticlePath } from './helpers.mjs';
+
+const WURZEL = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 test.describe('SEO-Regressionen: Pagination, Sitemap, Metadaten', () => {
   test('echte Folgeseiten: noindex, eigene Canonical-URL, eindeutiger Titel', async ({ page }) => {
@@ -33,10 +39,21 @@ test.describe('SEO-Regressionen: Pagination, Sitemap, Metadaten', () => {
     expect(xml).toContain(`<loc>${SITE_ORIGIN}/posts/</loc>`);
     expect(xml).toContain(`<loc>${SITE_ORIGIN}/pillar/</loc>`);
     expect(xml).not.toMatch(/<loc>[^<]*\/page\/\d+/);
+    // Rechtsseiten-Frische ist nur mit belegtem Redaktionsdatum erlaubt
+    // (W10-Heilung 01.11.2026): Die Sitemap trägt lastmod, wenn und nur wenn
+    // das Frontmatter ein lastmod deklariert – und dann exakt dieses Datum.
+    // „Heute“ oder das Datum fremder Artikel (Template-Default) bleiben
+    // erfundene Frische und fallen hier auf.
     for (const slug of ['ueber', 'impressum', 'datenschutz']) {
       const entry = xml.match(new RegExp(`<url>\\s*<loc>${SITE_ORIGIN}/${slug}/</loc>(.*?)</url>`, 's'));
       expect(entry).not.toBeNull();
-      expect(entry[1]).not.toContain('<lastmod>');
+      const deklariert = readFileSync(path.join(WURZEL, 'content', slug, 'index.md'), 'utf8')
+        .match(/^lastmod:\s*(\d{4}-\d{2}-\d{2})\b/m);
+      if (!deklariert) {
+        expect(entry[1]).not.toContain('<lastmod>');
+      } else {
+        expect(entry[1]).toContain(`<lastmod>${deklariert[1]}</lastmod>`);
+      }
     }
   });
   test('SEO-Title konsistent; Artikel-Daten und Autorenrolle widerspruchsfrei', async ({ page }) => {

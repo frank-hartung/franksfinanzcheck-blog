@@ -143,7 +143,7 @@ Wenn du deine Festnetznummer behalten willst, gib das beim neuen Anbieter an. An
 
 **Faustregel:** Entscheide nach Preis, Leistung und Wechselablauf zusammen. Ein günstiger Startpreis reicht nicht, wenn der Gesamtpreis oder die Bedingungen unklar bleiben.
 
-**Weiterlesen:** [Ratgeber Internet und DSL](../../pillar/internet-dsl/) · [DSL-Vergleich: Anschluss und Tarif prüfen](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) · [Preiswert surfen: DSL-Anschluss prüfen](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/)
+**Weiterlesen:** [Ratgeber Internet und DSL](../../pillar/internet-dsl/) · [DSL-Vergleich: Anschluss und Tarif prüfen](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) · [Preiswert surfen: DSL-Anschluss prüfen](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/) · [Kfz-Versicherung Vergleich 2026](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/)
 
 ## Häufige Fragen
 

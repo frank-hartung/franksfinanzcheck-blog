@@ -38,6 +38,14 @@
     border-color: var(--ff-emerald, var(--border));
 }
 
+/* Kein Lift auf dieser Fläche (nur Farbe/Rahmen) – also auch kein Lift-
+   Rückzug: Der Druck verdichtet den Rahmen eine Stufe, das ist die
+   Rückmeldung ohne Bewegung (DESIGN.md §6.2: kein erzwungener Lift). */
+.terms-index a:active {
+    border-color: var(--ff-emerald);
+    color: var(--primary);
+}
+
 /* ---------- Gruppen ---------- */
 .terms-group {
     margin-top: calc(var(--content-gap) * 1.2);

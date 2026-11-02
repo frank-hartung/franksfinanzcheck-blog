@@ -9,14 +9,14 @@
   },
   {
    "kriterium": "Abdeckungsbefund nicht älter als 14 Tage",
-   "messung": "Stand 2026-10-19 (13 Tage alt)",
+   "messung": "Stand 2026-10-19 (14 Tage alt)",
    "naechster_schritt": "Export einlesen (`--import`)",
    "status": "erfuellt",
    "ziel": "laufend"
   },
   {
    "kriterium": "404er mit Nachfrage triagiert",
-   "messung": "193 ohne Erklärung im Bestand",
+   "messung": "189 ohne Erklärung im Bestand",
    "naechster_schritt": "Detail-Liste `Nicht gefunden (404).csv` einlesen",
    "status": "offen",
    "ziel": "sofort"
@@ -30,9 +30,9 @@
   },
   {
    "kriterium": "Seiten ohne redaktionellen Inlink",
-   "messung": "4 Seiten",
+   "messung": "0 Seiten",
    "naechster_schritt": "Verlinkungsauftrag (`--verlinkung --apply`)",
-   "status": "offen",
+   "status": "erfuellt",
    "ziel": "30 Tage"
   }
  ],
@@ -40,7 +40,7 @@
   {
    "blockiert": "P1-Weiterleitungsplan",
    "braucht": "Search Console → Indexierung → Seiten → „Nicht gefunden (404)“ → Exportieren; Datei hier einlesen mit `--vorschlaege`.",
-   "frage": "Welche 193 URLs liefern 404, und welche davon haben noch Nachfrage?",
+   "frage": "Welche 189 URLs liefern 404, und welche davon haben noch Nachfrage?",
    "wirkung": "Nur so lässt sich zwischen „vergessen“ (Weiterleitung) und „richtig entsorgt“ (404 bleibt) unterscheiden. Ohne Liste wäre jede Zuordnung geraten."
   },
   {
@@ -86,13 +86,13 @@
  },
  "gruende": [
   {
-   "basis": "erklärbar sind 23 Taxonomie-URLs (seit 29.09.2026 abgeschaltet: 20 Tag- und Kategorie-Archive) plus 7 bewusst entfallene Alt-URLs (Regel D). Der Rest ist Historie, die nur die Detail-Liste aufklärt.",
+   "basis": "erklärbar sind 27 Taxonomie-URLs (seit 29.09.2026 abgeschaltet: 24 Tag- und Kategorie-Archive) plus 7 bewusst entfallene Alt-URLs (Regel D). Der Rest ist Historie, die nur die Detail-Liste aufklärt.",
    "bedeutung": "Die URL wurde aufgerufen und existiert nicht. Für Nutzer harmlos, für Suchmaschinen ein Signal: Die Seite ist weg. Handlungsbedarf entsteht nur dort, wo die URL noch Nachfrage hat (Impressionen, Backlinks, interne Links).",
-   "erwartung": 30,
+   "erwartung": 34,
    "erwartung_art": "genau",
    "grund": "Nicht gefunden (404)",
    "klasse": "historie",
-   "offen": 193,
+   "offen": 189,
    "quelle": "Website",
    "schluessel": "not_found",
    "seiten": 223,
@@ -101,9 +101,9 @@
    "validierung": "Fehlgeschlagen"
   },
   {
-   "basis": "Obergrenze ist der Bestand: 104 indexierbare Seiten. Alles darunter ist ein Rückstand beim Abrufen, kein Auszeichnungsfehler.",
+   "basis": "Obergrenze ist der Bestand: 107 indexierbare Seiten. Alles darunter ist ein Rückstand beim Abrufen, kein Auszeichnungsfehler.",
    "bedeutung": "Google kennt die URL aus der Sitemap oder einem Link, hat sie aber noch nicht abgerufen. Das ist eine Frage des Crawl-Budgets und der Autorität, nicht der Auszeichnung.",
-   "erwartung": 104,
+   "erwartung": 107,
    "erwartung_art": "hoechstens",
    "grund": "Gefunden – zurzeit nicht indexiert",
    "klasse": "inhalt",
@@ -148,7 +148,7 @@
   {
    "basis": "Google hat gelesen und sich dagegen entschieden. Die Gegenprobe ist redaktionell: eigenständiger Inhalt, klare Suchabsicht, kein Duplikat.",
    "bedeutung": "Google hat die Seite gelesen und sich gegen den Index entschieden. Technisch ist alles in Ordnung; es fehlt an Substanz, Einzigartigkeit oder Nachfrage. Redaktionelles Signal, kein Technikdefekt.",
-   "erwartung": 104,
+   "erwartung": 107,
    "erwartung_art": "hoechstens",
    "grund": "Gecrawlt – zurzeit nicht indexiert",
    "klasse": "inhalt",
@@ -178,19 +178,21 @@
  ],
  "kandidaten": {
   "davon_dokumentiert": 258,
-  "davon_ohne_entscheidung": 38,
-  "davon_taxonomie": 23,
-  "gesamt": 296,
+  "davon_ohne_entscheidung": 48,
+  "davon_taxonomie": 27,
+  "gesamt": 306,
   "nach_herkunft": {
    "dokumentiert": 258,
-   "taxonomie": 23,
+   "taxonomie": 27,
    "top-seiten": 3,
-   "variante": 12
+   "variante": 18
   },
   "ohne_entscheidung": [
    "/categories/",
    "/categories/news/",
    "/categories/ratgeber/",
+   "/posts/dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026(1)/",
+   "/posts/dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/",
    "/posts/etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen(1)/",
    "/posts/etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/",
    "/posts/flugvergleich-im-winter-so-findest-du-echte-billigfluege(1)/",
@@ -201,8 +203,12 @@
    "/posts/kfz-versicherung-vergleich-bis-zu-800-euro-sparen/",
    "/posts/posts(1)/",
    "/posts/posts/",
+   "/posts/privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet(1)/",
+   "/posts/privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/",
    "/posts/strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen(1)/",
    "/posts/strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/",
+   "/posts/wohngebaeudeversicherung-vergleich-worauf-du-achten-musst(1)/",
+   "/posts/wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/",
    "/tags/",
    "/tags/budget-planen/",
    "/tags/dns-server-%C3%A4ndern/",
@@ -213,8 +219,10 @@
    "/tags/gasrechnung-prüfen/",
    "/tags/gastarif-wechseln/",
    "/tags/geld-sparen-im-alltag/",
+   "/tags/gesundheit-und-vorsorge/",
    "/tags/girokonto/",
    "/tags/haushaltsbuch-führen/",
+   "/tags/hausratversicherung/",
    "/tags/heizkosten-senken/",
    "/tags/internet-und-mobilfunk/",
    "/tags/kfz-versicherung/",
@@ -225,7 +233,9 @@
    "/tags/sparmethoden/",
    "/tags/stromkosten-senken/",
    "/tags/tagesgeld-und-zinsen/",
-   "/tags/wlan-verbessern/"
+   "/tags/versicherungen-vergleichen/",
+   "/tags/wlan-verbessern/",
+   "/tags/wohngebäudeversicherung/"
   ]
  },
  "kennzahlen": {
@@ -265,7 +275,7 @@
   "delta_3_nicht_indexiert": 59,
   "delta_7_indexiert": -22,
   "delta_7_nicht_indexiert": 67,
-  "detail_alter_tage": 6,
+  "detail_alter_tage": 7,
   "detail_fehlend": [
    "Nicht gefunden (404).csv",
    "Gefunden – zurzeit nicht indexiert.csv",
@@ -277,7 +287,7 @@
   "detail_stand": "2026-10-26",
   "detail_urls": 4,
   "detail_vorhanden": 1,
-  "export_alter_tage": 13,
+  "export_alter_tage": 14,
   "gruende": {
    "crawled_not_indexed": 4,
    "discovered_not_indexed": 69,
@@ -288,15 +298,15 @@
   },
   "impressionen_je_tag": 2.07,
   "impressionen_summe": 62,
-  "index_puffer": 13,
+  "index_puffer": 10,
   "indexiert": 117,
-  "inhaltsseiten": 79,
-  "live_indexierbar": 104,
+  "inhaltsseiten": 82,
+  "live_indexierbar": 107,
   "median_auslink": 6,
   "nicht_indexiert": 320,
   "nicht_indexiert_je_build_seite": null,
   "ohne_auslink": 0,
-  "ohne_inlink": 4,
+  "ohne_inlink": 0,
   "quote_indexiert": 26.8,
   "robots_gesperrt": 18,
   "sitemap_ohne_lastmod": null,
@@ -305,7 +315,7 @@
   "tage_im_export": 30,
   "tage_mit_impression": 24,
   "tage_ohne_impression": 6,
-  "tote_ziele": 2
+  "tote_ziele": 0
  },
  "kpi": {
   "aktuell": {
@@ -345,7 +355,7 @@
    "delta_3_nicht_indexiert": 59,
    "delta_7_indexiert": -22,
    "delta_7_nicht_indexiert": 67,
-   "detail_alter_tage": 6,
+   "detail_alter_tage": 7,
    "detail_fehlend": [
     "Nicht gefunden (404).csv",
     "Gefunden – zurzeit nicht indexiert.csv",
@@ -357,7 +367,7 @@
    "detail_stand": "2026-10-26",
    "detail_urls": 4,
    "detail_vorhanden": 1,
-   "export_alter_tage": 13,
+   "export_alter_tage": 14,
    "gruende": {
     "crawled_not_indexed": 4,
     "discovered_not_indexed": 69,
@@ -368,15 +378,15 @@
    },
    "impressionen_je_tag": 2.07,
    "impressionen_summe": 62,
-   "index_puffer": 13,
+   "index_puffer": 10,
    "indexiert": 117,
-   "inhaltsseiten": 79,
-   "live_indexierbar": 104,
+   "inhaltsseiten": 82,
+   "live_indexierbar": 107,
    "median_auslink": 6,
    "nicht_indexiert": 320,
    "nicht_indexiert_je_build_seite": null,
    "ohne_auslink": 0,
-   "ohne_inlink": 4,
+   "ohne_inlink": 0,
    "quote_indexiert": 26.8,
    "robots_gesperrt": 18,
    "sitemap_ohne_lastmod": null,
@@ -385,7 +395,7 @@
    "tage_im_export": 30,
    "tage_mit_impression": 24,
    "tage_ohne_impression": 6,
-   "tote_ziele": 2
+   "tote_ziele": 0
   },
   "reihen": [
    {
@@ -415,33 +425,33 @@
  "massnahmen": [
   {
    "aufwand": "S",
-   "beleg": "Übersicht: 223 × 404 · erklärbar 30 · offen 193",
+   "beleg": "Übersicht: 223 × 404 · erklärbar 34 · offen 189",
    "dringlichkeit": "P1",
    "id": "M1",
    "owner": "Mensch (Export) + Automat",
    "schritt": "Search Console → Indexierung → Seiten → „Nicht gefunden (404)“ → Exportieren, dann `python3 scripts/gsc_abdeckung.py --vorschlaege <datei>`.",
    "titel": "404-Detail-Liste einlesen und triagieren",
-   "wirkung": "193 der 223 404er sind ohne Detail-Liste unerklärt. Die Triage trennt Nachfrage (Weiterleitung) von Entsorgung (404 bleibt)."
+   "wirkung": "189 der 223 404er sind ohne Detail-Liste unerklärt. Die Triage trennt Nachfrage (Weiterleitung) von Entsorgung (404 bleibt)."
   },
   {
    "aufwand": "M",
-   "beleg": "69 „Gefunden – zurzeit nicht indexiert“ bei 104 indexierbaren Seiten",
+   "beleg": "69 „Gefunden – zurzeit nicht indexiert“ bei 107 indexierbaren Seiten",
    "dringlichkeit": "P1",
    "id": "M2",
    "owner": "Automat + Redaktion",
    "schritt": "Interne Links auf die betroffenen Seiten verdichten (jede Seite aus mindestens zwei Artikeln erreichbar), Änderungsdatum ehrlich setzen, Publikations-Kadenz auf 2/Tag begrenzen; wöchentlich `scripts/gsc_indexierung.py --pruefen` für den Status je URL.",
    "titel": "Crawl-Nachfrage für gefundene, nicht abgerufene Seiten",
-   "wirkung": "69 von 104 indexierbaren Seiten hat Google noch nicht abgerufen (66.3 % des Bestands). Das ist der größte Einzelposten und der einzige, der sich ohne Google-Zugriff bewegen lässt: interne Verlinkung, Aktualität, Autorität."
+   "wirkung": "69 von 107 indexierbaren Seiten hat Google noch nicht abgerufen (64.5 % des Bestands). Das ist der größte Einzelposten und der einzige, der sich ohne Google-Zugriff bewegen lässt: interne Verlinkung, Aktualität, Autorität."
   },
   {
    "aufwand": "S",
-   "beleg": "Stand 2026-10-19 · 13 Tage alt",
+   "beleg": "Stand 2026-10-19 · 14 Tage alt",
    "dringlichkeit": "P2",
    "id": "M10",
    "owner": "Mensch",
    "schritt": "Search Console → Indexierung → Seiten → Exportieren, dann `python3 scripts/gsc_abdeckung.py --import <verzeichnis> --audit --schreiben`.",
    "titel": "Neuen Abdeckungs-Export einlesen",
-   "wirkung": "Der Befund steht auf dem Stand von vor 13 Tagen. Zahlen, die älter als vier Wochen sind, taugen nicht als Entscheidungsgrundlage."
+   "wirkung": "Der Befund steht auf dem Stand von vor 14 Tagen. Zahlen, die älter als vier Wochen sind, taugen nicht als Entscheidungsgrundlage."
   },
   {
    "aufwand": "M",
@@ -455,7 +465,7 @@
   },
   {
    "aufwand": "S",
-   "beleg": "117 indexiert bei 104 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (6 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (4 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /tags/ (1 Impr.), /tags/dns-server-%C3%A4ndern/ (1 Impr.)",
+   "beleg": "117 indexiert bei 107 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (6 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (3 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (2 Impr.), /tags/ (1 Impr.), /tags/dns-server-%C3%A4ndern/ (1 Impr.)",
    "dringlichkeit": "P2",
    "id": "M4",
    "owner": "Automat",
@@ -516,15 +526,15 @@
  ],
  "prioritaet": {
   "kontingent": 200,
-  "ohne_inlink": 6,
+  "ohne_inlink": 2,
   "seiten": [
    {
     "grund": "verlinkt",
-    "impressionen": 52,
+    "impressionen": 63,
     "inlinks": 17,
     "lastmod_tage": null,
     "outlinks": 2,
-    "position": 35.79,
+    "position": 37.71,
     "score": 11.0,
     "url": "/pillar/internet-dsl/"
    },
@@ -539,53 +549,13 @@
     "url": "/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/"
    },
    {
-    "grund": "kein redaktioneller Inlink",
-    "impressionen": 0,
-    "inlinks": 0,
-    "lastmod_tage": null,
-    "outlinks": 8,
-    "position": null,
-    "score": 7.0,
-    "url": "/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/"
-   },
-   {
-    "grund": "kein redaktioneller Inlink",
-    "impressionen": 0,
-    "inlinks": 0,
-    "lastmod_tage": null,
-    "outlinks": 8,
-    "position": null,
-    "score": 7.0,
-    "url": "/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/"
-   },
-   {
-    "grund": "kein redaktioneller Inlink",
-    "impressionen": 0,
-    "inlinks": 0,
-    "lastmod_tage": null,
-    "outlinks": 5,
-    "position": null,
-    "score": 7.0,
-    "url": "/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/"
-   },
-   {
-    "grund": "kein redaktioneller Inlink",
-    "impressionen": 0,
-    "inlinks": 0,
-    "lastmod_tage": null,
-    "outlinks": 4,
-    "position": null,
-    "score": 7.0,
-    "url": "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/"
-   },
-   {
     "grund": "verlinkt",
-    "impressionen": 17,
+    "impressionen": 21,
     "inlinks": 7,
     "lastmod_tage": null,
     "outlinks": 11,
-    "position": 45.82,
-    "score": 6.67,
+    "position": 46.52,
+    "score": 8.0,
     "url": "/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/"
    },
    {
@@ -681,9 +651,9 @@
    {
     "grund": "verlinkt",
     "impressionen": 7,
-    "inlinks": 6,
+    "inlinks": 9,
     "lastmod_tage": null,
-    "outlinks": 2,
+    "outlinks": 5,
     "position": 17.0,
     "score": 4.63,
     "url": "/pillar/versicherungen/"
@@ -733,10 +703,20 @@
     "impressionen": 0,
     "inlinks": 1,
     "lastmod_tage": null,
-    "outlinks": 1,
+    "outlinks": 3,
     "position": null,
     "score": 4.0,
-    "url": "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/"
+    "url": "/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/"
+   },
+   {
+    "grund": "nur ein Inlink",
+    "impressionen": 0,
+    "inlinks": 1,
+    "lastmod_tage": null,
+    "outlinks": 5,
+    "position": null,
+    "score": 4.0,
+    "url": "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/"
    },
    {
     "grund": "verlinkt",
@@ -821,7 +801,7 @@
    {
     "grund": "verlinkt",
     "impressionen": 2,
-    "inlinks": 15,
+    "inlinks": 16,
     "lastmod_tage": null,
     "outlinks": 5,
     "position": 29.5,
@@ -881,12 +861,22 @@
    {
     "grund": "verlinkt",
     "impressionen": 0,
-    "inlinks": 10,
+    "inlinks": 11,
     "lastmod_tage": null,
     "outlinks": 8,
     "position": null,
     "score": 1.0,
     "url": "/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/"
+   },
+   {
+    "grund": "verlinkt",
+    "impressionen": 0,
+    "inlinks": 3,
+    "lastmod_tage": null,
+    "outlinks": 3,
+    "position": null,
+    "score": 1.0,
+    "url": "/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/"
    },
    {
     "grund": "verlinkt",
@@ -901,12 +891,22 @@
    {
     "grund": "verlinkt",
     "impressionen": 0,
-    "inlinks": 2,
+    "inlinks": 3,
     "lastmod_tage": null,
     "outlinks": 6,
     "position": null,
     "score": 1.0,
     "url": "/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/"
+   },
+   {
+    "grund": "verlinkt",
+    "impressionen": 0,
+    "inlinks": 3,
+    "lastmod_tage": null,
+    "outlinks": 5,
+    "position": null,
+    "score": 1.0,
+    "url": "/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/"
    },
    {
     "grund": "verlinkt",
@@ -947,6 +947,16 @@
     "position": null,
     "score": 1.0,
     "url": "/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/"
+   },
+   {
+    "grund": "verlinkt",
+    "impressionen": 0,
+    "inlinks": 2,
+    "lastmod_tage": null,
+    "outlinks": 3,
+    "position": null,
+    "score": 1.0,
+    "url": "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/"
    },
    {
     "grund": "verlinkt",
@@ -1081,7 +1091,7 @@
    {
     "grund": "verlinkt",
     "impressionen": 0,
-    "inlinks": 13,
+    "inlinks": 15,
     "lastmod_tage": null,
     "outlinks": 7,
     "position": null,
@@ -1213,7 +1223,7 @@
     "impressionen": 0,
     "inlinks": 2,
     "lastmod_tage": null,
-    "outlinks": 4,
+    "outlinks": 5,
     "position": null,
     "score": 1.0,
     "url": "/posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/"
@@ -1223,7 +1233,7 @@
     "impressionen": 0,
     "inlinks": 3,
     "lastmod_tage": null,
-    "outlinks": 5,
+    "outlinks": 6,
     "position": null,
     "score": 1.0,
     "url": "/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/"
@@ -1263,7 +1273,7 @@
     "impressionen": 0,
     "inlinks": 14,
     "lastmod_tage": null,
-    "outlinks": 7,
+    "outlinks": 8,
     "position": null,
     "score": 1.0,
     "url": "/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/"
@@ -1273,7 +1283,7 @@
     "impressionen": 0,
     "inlinks": 2,
     "lastmod_tage": null,
-    "outlinks": 6,
+    "outlinks": 7,
     "position": null,
     "score": 1.0,
     "url": "/posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/"
@@ -1293,7 +1303,7 @@
     "impressionen": 0,
     "inlinks": 3,
     "lastmod_tage": null,
-    "outlinks": 6,
+    "outlinks": 7,
     "position": null,
     "score": 1.0,
     "url": "/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/"
@@ -1303,7 +1313,7 @@
     "impressionen": 0,
     "inlinks": 20,
     "lastmod_tage": null,
-    "outlinks": 7,
+    "outlinks": 8,
     "position": null,
     "score": 1.0,
     "url": "/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/"
@@ -1311,7 +1321,7 @@
    {
     "grund": "verlinkt",
     "impressionen": 0,
-    "inlinks": 25,
+    "inlinks": 26,
     "lastmod_tage": null,
     "outlinks": 6,
     "position": null,
@@ -1377,6 +1387,36 @@
     "position": null,
     "score": 1.0,
     "url": "/posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/"
+   },
+   {
+    "grund": "verlinkt",
+    "impressionen": 0,
+    "inlinks": 2,
+    "lastmod_tage": null,
+    "outlinks": 8,
+    "position": null,
+    "score": 1.0,
+    "url": "/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/"
+   },
+   {
+    "grund": "verlinkt",
+    "impressionen": 0,
+    "inlinks": 2,
+    "lastmod_tage": null,
+    "outlinks": 8,
+    "position": null,
+    "score": 1.0,
+    "url": "/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/"
+   },
+   {
+    "grund": "verlinkt",
+    "impressionen": 0,
+    "inlinks": 2,
+    "lastmod_tage": null,
+    "outlinks": 6,
+    "position": null,
+    "score": 1.0,
+    "url": "/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/"
    },
    {
     "grund": "verlinkt",
@@ -1559,14 +1599,10 @@
     "url": "/werkzeuge/tarifwechsel-entscheidungsbaum/"
    }
   ],
-  "stand": "2026-11-01",
+  "stand": "2026-11-02",
   "welle1": [
    "/pillar/internet-dsl/",
    "/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/",
-   "/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/",
-   "/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/",
-   "/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/",
-   "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/",
    "/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/",
    "/impressum/",
    "/datenschutz/",
@@ -1582,7 +1618,8 @@
    "/posts/",
    "/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/",
    "/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/",
-   "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/",
+   "/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/",
+   "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/",
    "/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
    "/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/",
    "/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/",
@@ -1598,17 +1635,16 @@
    "/pillar/strom-sparen/",
    "/posts/2026-08-10-dsl-wechselbonus-sichern/",
    "/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/",
+   "/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/",
    "/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/",
    "/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/",
-   "/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/"
+   "/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/",
+   "/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/",
+   "/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/"
   ],
   "welle1_absolut": [
    "https://franksfinanzcheck.de/pillar/internet-dsl/",
    "https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/",
-   "https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/",
-   "https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/",
-   "https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/",
-   "https://franksfinanzcheck.de/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/",
    "https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/",
    "https://franksfinanzcheck.de/impressum/",
    "https://franksfinanzcheck.de/datenschutz/",
@@ -1624,7 +1660,8 @@
    "https://franksfinanzcheck.de/posts/",
    "https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/",
    "https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/",
-   "https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/",
+   "https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/",
+   "https://franksfinanzcheck.de/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/",
    "https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
    "https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/",
    "https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/",
@@ -1640,14 +1677,17 @@
    "https://franksfinanzcheck.de/pillar/strom-sparen/",
    "https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/",
    "https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/",
+   "https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/",
    "https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/",
    "https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/",
-   "https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/"
+   "https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/",
+   "https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/",
+   "https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/"
   ],
   "welle2": [
-   "/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/",
    "/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/",
    "/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/",
+   "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/",
    "/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/",
    "/posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/",
    "/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/",
@@ -1691,6 +1731,9 @@
    "/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/",
    "/posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/",
    "/posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/",
+   "/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/",
+   "/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/",
+   "/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/",
    "/aenderungsprotokoll/",
    "/cockpit/",
    "/methodik/",
@@ -1720,22 +1763,8 @@
   "repo": "content/ (Näherung, kein Build gemessen)"
  },
  "schema": 1,
- "stand": "2026-11-01T11:49:36Z",
- "tote_ziele": [
-  {
-   "quellen": [
-    "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/"
-   ],
-   "ziel": "/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/"
-  },
-  {
-   "quellen": [
-    "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/",
-    "/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/"
-   ],
-   "ziel": "/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/"
-  }
- ],
+ "stand": "2026-11-02T13:28:12Z",
+ "tote_ziele": [],
  "ursachen": [
   {
    "bewertung": "kein Beleg im Repo gefunden",
@@ -1754,8 +1783,8 @@
    "git": null,
    "kandidaten": [
     {
-     "abweichung_prozent": 10,
-     "anzahl": 23,
+     "abweichung_prozent": 29,
+     "anzahl": 27,
      "klasse": "Taxonomie-URLs (abgeschaltet)"
     }
    ],
@@ -1782,69 +1811,23 @@
   ],
   "ohne_ein": [
    "/",
-   "/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/",
-   "/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/",
-   "/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/",
-   "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/",
    "/suche/",
    "/werkzeuge/"
   ],
-  "summe": 588
+  "summe": 612
  },
  "verlinkungsauftrag": [
   {
    "grund": "gleicher Pillar",
-   "inlinks_jetzt": 0,
-   "quelle": "/posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/",
-   "ziel": "/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/"
+   "inlinks_jetzt": 1,
+   "quelle": "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/",
+   "ziel": "/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/"
   },
   {
    "grund": "gleicher Pillar",
-   "inlinks_jetzt": 0,
-   "quelle": "/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/",
-   "ziel": "/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/"
-  },
-  {
-   "grund": "gleicher Pillar",
-   "inlinks_jetzt": 0,
-   "quelle": "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/",
-   "ziel": "/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/"
-  },
-  {
-   "grund": "gleicher Pillar",
-   "inlinks_jetzt": 0,
-   "quelle": "/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/",
-   "ziel": "/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/"
-  },
-  {
-   "grund": "gleicher Pillar",
-   "inlinks_jetzt": 0,
-   "quelle": "/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/",
-   "ziel": "/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/"
-  },
-  {
-   "grund": "gleicher Pillar",
-   "inlinks_jetzt": 0,
-   "quelle": "/posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/",
-   "ziel": "/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/"
-  },
-  {
-   "grund": "gleicher Pillar",
-   "inlinks_jetzt": 0,
+   "inlinks_jetzt": 1,
    "quelle": "/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/",
    "ziel": "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/"
-  },
-  {
-   "grund": "gleicher Pillar",
-   "inlinks_jetzt": 0,
-   "quelle": "/posts/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen/",
-   "ziel": "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/"
-  },
-  {
-   "grund": "ähnliches Thema",
-   "inlinks_jetzt": 1,
-   "quelle": "/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/",
-   "ziel": "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/"
   }
  ],
  "vertrag": {
@@ -1898,7 +1881,7 @@
   ],
   "entfallen": 7,
   "gateways": 20,
-  "indexierbar": 104,
+  "indexierbar": 107,
   "noindex": [
    "/newsletter/",
    "/newsletter/abmelden/",
@@ -1920,7 +1903,7 @@
    "methodik": 1,
    "newsletter-checkliste": 1,
    "pillar": 7,
-   "posts": 74,
+   "posts": 77,
    "presse": 1,
    "so-entstehen-unsere-vergleiche": 1,
    "startseite": 1,
@@ -1941,8 +1924,10 @@
    "/tags/gasrechnung-prüfen/",
    "/tags/gastarif-wechseln/",
    "/tags/geld-sparen-im-alltag/",
+   "/tags/gesundheit-und-vorsorge/",
    "/tags/girokonto/",
    "/tags/haushaltsbuch-führen/",
+   "/tags/hausratversicherung/",
    "/tags/heizkosten-senken/",
    "/tags/internet-und-mobilfunk/",
    "/tags/kfz-versicherung/",
@@ -1952,7 +1937,9 @@
    "/tags/reisekosten-sparen/",
    "/tags/stromkosten-senken/",
    "/tags/tagesgeld-und-zinsen/",
-   "/tags/wlan-verbessern/"
+   "/tags/versicherungen-vergleichen/",
+   "/tags/wlan-verbessern/",
+   "/tags/wohngebäudeversicherung/"
   ],
   "top_nicht_live": [
    {
@@ -1963,16 +1950,16 @@
     "weiterleitung": "/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/"
    },
    {
-    "impressionen": 4,
+    "impressionen": 3,
     "klicks": 0,
-    "position": 6.25,
+    "position": 7.33,
     "url": "/posts/2026-08-07-frugalismus-fuer-den-erfolg/",
     "weiterleitung": "/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/"
    },
    {
-    "impressionen": 1,
+    "impressionen": 2,
     "klicks": 0,
-    "position": 80.0,
+    "position": 85.0,
     "url": "/posts/elementarschadenversicherung-hochwasser-starkregen/",
     "weiterleitung": "/pillar/versicherungen/"
    },
@@ -2018,12 +2005,7 @@
   {
    "regel": "W5",
    "schwere": "hinweis",
-   "text": "117 Seiten sind im Index, indexierbar sind 104 – 13 Einträge sind Altlasten (entfernte, weitergeleitete oder abgeschaltete URLs). Sie kosten kein Crawl-Budget mehr, verzerren aber jede Quote."
-  },
-  {
-   "regel": "W11",
-   "schwere": "hinweis",
-   "text": "2 Linkziel(e) im Inhalt werden nicht gebaut (Entwurf oder gelöscht). Das Rendering zeigt dort nur Text – die Verlinkung ist wirkungslos: veröffentlichen oder entlinken."
+   "text": "117 Seiten sind im Index, indexierbar sind 107 – 10 Einträge sind Altlasten (entfernte, weitergeleitete oder abgeschaltete URLs). Sie kosten kein Crawl-Budget mehr, verzerren aber jede Quote."
   }
  ]
 }

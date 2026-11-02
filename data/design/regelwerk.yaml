@@ -97,15 +97,46 @@ marke:
   # Radius-Skala (DESIGN.md §4). Werte in px; 999 = Pille.
   radien_px_erlaubt: [0, 8, 12, 16, 999]
 
-  # Übergangsdauern (DESIGN.md §6). Sekunden.
-  uebergang_dauer_s_erlaubt: [0.16, 0.18, 0.3]
+  # Übergangsdauern (DESIGN.md §6.1). Sekunden. Erweitert am 01.11.2026:
+  # Die zwei dokumentierten Stufen waren nicht die, die ausgeliefert
+  # wurden. Die Messung (scripts/bewegungs_wache.py) fand zehn – jede mit
+  # einer Aufgabe (Text → Pille → Lift → Zustand → Panel → Aufdecken →
+  # Fläche → Bild → Reveal). Aufgeschrieben statt weggedrückt; Vorgang in
+  # BEWEGUNG-AUDIT-HIGHEND-2026-11-01.md.
+  uebergang_dauer_s_erlaubt: [0.1, 0.12, 0.15, 0.16, 0.18, 0.2, 0.22,
+                             0.25, 0.28, 0.3, 0.4, 0.65, 0.7]
 
-  # Easing-Kurven (DESIGN.md §6).
+  # Easing-Kurven (DESIGN.md §6.1).
   easing_erlaubt:
     - "ease-out"
     - "linear"
     - "cubic-bezier(.2,.7,.2,1)"
     - "cubic-bezier(0.2,0.7,0.2,1)"
+    # `ease` ist seit 01.11.2026 ausdrücklich erlaubt (DESIGN.md §6.1):
+    # 67 ausgelieferte Deklarationen nutzen es, und ein Verbot ohne Ersatz
+    # wäre eine Massenänderung am Gefühl aller Flächen gewesen. Die
+    # Bewegungs-Wache B2 zählt es als HINWEIS, nicht als Befund. Wer es
+    # ersetzt, tut das je Fläche hinter einem Screenshot-Vergleich – nicht
+    # per Suchen-und-Ersetzen über 67 Stellen.
+    - "ease"
+
+  # Dokumentierte Ausnahmen von „keine Layout-Animation" (DESIGN.md §6.1).
+  # `selektor` ist ein Teilstring, der im Regelkopf vorkommen muss. Wer hier
+  # etwas einträgt, schreibt denselben Fall mit Grund in §6.1 – sonst gibt es
+  # zwei Wahrheiten. Geprüft von scripts/bewegungs_wache.py (B4).
+  layout_animation_ausnahmen:
+    - selektor: ".ff-voice-progress"
+      eigenschaft: "width"
+      grund: "Die Breite IST der Wert; scaleX würde die 999px-Rundung verzerren."
+    - selektor: ".ff-kurzantwort__progress"
+      eigenschaft: "width"
+      grund: "Gleiche Bauart wie der Voice-Progress, gleicher Grund."
+    - selektor: ".ff-wz__balken-fuellung"
+      eigenschaft: "width"
+      grund: >
+        Wird beim Aufbau des Ergebnisses EINMAL gesetzt, nicht pro Frame –
+        ein einzelner Layout-Schritt, kein Dauer-Reflow. scaleX wäre
+        gleichwertig, staucht aber die 999px-Rundung.
 
   # Benannte Verbote. Jeder Schlüssel wird vom Gate einzeln geprüft;
   # `muster` ist ein Python-Regex auf den CSS-Quelltext (Kleinschreibung).

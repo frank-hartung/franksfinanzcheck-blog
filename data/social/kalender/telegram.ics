@@ -7,10 +7,10 @@ X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:telegram:2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartr
- icks:nutzen:2026-11-01@franksfinanzcheck.de
-DTSTAMP:20261101T115349Z
-DTSTART:20261101T170000Z
-DTEND:20261101T171500Z
+ icks:nutzen:2026-11-02@franksfinanzcheck.de
+DTSTAMP:20261102T133826Z
+DTSTART:20261102T170000Z
+DTEND:20261102T171500Z
 SUMMARY:Telegram (Kanal): Energieeffizienz im Haushalt: 5 schnelle Spa
  rtricks (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstiger
  en-konto:nutzen:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261101T115349Z
+DTSTAMP:20261102T133826Z
 DTSTART:20261108T060000Z
 DTEND:20261108T061500Z
 SUMMARY:Telegram (Kanal): Bankgebühren senken: 7 Schritte zum günstige
@@ -37,10 +37,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest
- -du-richtig:nutzen:2026-11-14@franksfinanzcheck.de
-DTSTAMP:20261101T115349Z
-DTSTART:20261114T060000Z
-DTEND:20261114T061500Z
+ -du-richtig:nutzen:2026-11-15@franksfinanzcheck.de
+DTSTAMP:20261102T133826Z
+DTSTART:20261115T060000Z
+DTEND:20261115T061500Z
 SUMMARY:Telegram (Kanal): Wärmepumpe vs. Gasheizung 2026: So entscheid
  est du richtig (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
@@ -48,21 +48,6 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
  -gasheizung-2026-so-entscheidest-du-richtig/
 URL:https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gashe
  izung-2026-so-entscheidest-du-richtig/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-
- monatlichen:nutzen:2026-11-15@franksfinanzcheck.de
-DTSTAMP:20261101T115349Z
-DTSTART:20261115T060000Z
-DTEND:20261115T061500Z
-SUMMARY:Telegram (Kanal): ETF-Sparplan starten: Deine Schritt-für-Schr
- itt-Anleitung (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-s
- tarten-schritt-fuer-schritt-zum-monatlichen/
-URL:https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten
- -schritt-fuer-schritt-zum-monatlichen/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

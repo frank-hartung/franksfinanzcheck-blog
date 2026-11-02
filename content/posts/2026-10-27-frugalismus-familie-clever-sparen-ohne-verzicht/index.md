@@ -278,7 +278,7 @@ Dein **Familienbudget** wird es dir danken.
 
 
 
-**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
+**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [ETF-Sparplan starten](../../posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/)
 **Lesetipp:** [Haushaltskosten reduzieren: So gewinnst du die Kontrolle](../../posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/)
 
 ## Häufige Fragen

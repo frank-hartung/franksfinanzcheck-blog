@@ -320,6 +320,13 @@
   transform: translateY(-1px);
 }
 
+/* Der Chip ist ein <label> über einer Checkbox (newsletter_form.html):
+   :active am Label feuert beim Drücken mit, auch wenn danach der
+   Auswahlzustand bleibt. */
+.ff-nl__chip:active {
+  transform: translateY(0) scale(.97);
+}
+
 /* Die Checkbox bleibt als fokussierbares Element erhalten, optisch trägt der
    Chip – :has() markiert den Auswahlzustand, ohne :has() bleibt die echte
    Checkbox sichtbar (kein Auswahlzustand, der verschwinden kann). */
@@ -579,6 +586,12 @@
   transform: translateY(-1px);
 }
 
+/* Der Selektor trägt den Elternkontext mit, weil die Basisregel ihn hat
+   (`.ff-nl-strip .ff-nl-strip__cta`) – sonst bliebe der Druck wirkungslos. */
+.ff-nl-strip .ff-nl-strip__cta:active {
+  transform: translateY(0) scale(.97);
+}
+
 /* Der Text im Knopf: umbrochen wird der Knopf, nicht die Zeile – „Anmelden“
    darf nie als „Anmel-de“ enden. */
 .ff-nl-strip__cta-text {
@@ -684,6 +697,10 @@
 .ff-nl-themen__karte:hover {
   border-color: var(--ff-emerald);
   transform: translateY(-1px);
+}
+
+.ff-nl-themen__karte:active {
+  transform: translateY(0);
 }
 
 .ff-nl-themen__karte:has(input:checked) {

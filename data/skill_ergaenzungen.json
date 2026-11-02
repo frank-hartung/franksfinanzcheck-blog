@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "hinweis": "Register der repo-eigenen Dateien, die in einem FREMDEN Skill-Ordner lagen. Gehört zu K10 in scripts/skills_vertrag.py. Ein Stand ist geschlossen, wenn jede Datei an ihrem `ziel` liegt; liegt sie wieder unter `alt`, warnt K10; fehlt sie an beiden Orten, ist es ein Befund (Verlust durch npx skills update). Neue eigene Dateien gehören NICHT in einen Fremd-Ordner – dafür gibt es .claude/skills/ff-*.",
+  "staende": [
+    {
+      "fall": "copy-editing: deutsche Ausgabe im Fremd-Ordner",
+      "befund": "Am 01.11.2026 hat `npx -y skills@1.7.4 add coreyhaines31/marketingskills --skill '*' -a claude-code -y` den Ordner `.claude/skills/copy-editing` neu geschrieben und dabei sechs repo-eigene Dateien gelöscht (SKILL_DE.md, evals/evals-de.json, vier references/*-de.md, seit 21.09.2026). Der Skill-Vertrag meldete in diesem Lauf 0 Befunde, weil er nur Lizenzen und ff-* kannte. Aus Git wiederhergestellt, dann in eigenes Haus umgezogen.",
+      "entscheidung": "Die deutsche Ausgabe ist ein eigenes Skill geworden: `ff-lektorat` (SKILL.md + vier references + evals.md). Fremde Ordner werden nicht mehr gerettet, sondern verlassen – ein `npx skills update` kann dort nichts mehr zerstören.",
+      "datum": "2026-11-01",
+      "status": "geheilt",
+      "dateien": [
+        { "alt": ".claude/skills/copy-editing/SKILL_DE.md", "ziel": ".claude/skills/ff-lektorat/SKILL.md" },
+        { "alt": ".claude/skills/copy-editing/references/ai-tells-de.md", "ziel": ".claude/skills/ff-lektorat/references/ai-tells.md" },
+        { "alt": ".claude/skills/copy-editing/references/checkliste-de.md", "ziel": ".claude/skills/ff-lektorat/references/checkliste.md" },
+        { "alt": ".claude/skills/copy-editing/references/werkzeugkette-de.md", "ziel": ".claude/skills/ff-lektorat/references/werkzeugkette.md" },
+        { "alt": ".claude/skills/copy-editing/references/ymyl-panel-de.md", "ziel": ".claude/skills/ff-lektorat/references/ymyl-panel.md" },
+        { "alt": ".claude/skills/copy-editing/evals/evals-de.json", "ziel": ".claude/skills/ff-lektorat/evals/evals.md" }
+      ],
+      "nebenbefund": "Die Datei `evals-de.json` enthielt nie JSON, sondern Markdown mit Tabellen. Im eigenen Haus heißt sie `evals.md` – eine Endung, die nicht lügt. Maschinenlesbare Fälle würden als eigene JSON-Datei danebenliegen."
+    }
+  ]
+}

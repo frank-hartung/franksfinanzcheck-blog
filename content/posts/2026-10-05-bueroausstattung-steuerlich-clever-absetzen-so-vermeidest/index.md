@@ -174,7 +174,7 @@ Wer im Dezember bestellt, verschiebt den Abzug oft ins Folgejahr. Es zählt das 
 
 Noch ein Hinweis zur Einordnung: Dieser Text erklärt die allgemeinen Regeln und ersetzt keine Steuerberatung. Hast du ein echtes Arbeitszimmer oder bist selbstständig, hilft der Blick ins Gesetz. Auch ein Lohnsteuerhilfeverein ist eine gute Adresse.
 
-**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [Großeinkauf und Vorrat](../../posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/)
+**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [Großeinkauf und Vorrat](../../posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/) · [Frugalismus Familie](../../posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/)
 **Lesetipp:** [Weihnachten Budget planen: Ohne Schulden durch die Feiertage](../../posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/)
 
 ## Häufige Fragen

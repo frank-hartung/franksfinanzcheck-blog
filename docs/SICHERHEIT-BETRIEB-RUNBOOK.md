@@ -104,6 +104,41 @@ kein Code-Fehler.** Genau dafür steht die Diagnose: Fehlt `cf-ray` und
 `server: cloudflare` in der Antwort, liegt die Zone nicht hinter dem Proxy,
 und der Bericht verweist auf Schritt 1 statt auf die Regel.
 
+### A1b · Live-Abschluss #972 — die Reihenfolge
+
+Die Sicherheits-Wache misst zwei unabhängige Dinge: die Header der Seite
+(F-01) und das authentifizierte Betriebsbild des Workers (F-02/F-03/F-08).
+Beides muss grün sein; ein grüner Offline-Lauf, ein grüner Plan oder ein
+einzelnes grünes Ziel genügt nicht. Die Reihenfolge ist so gewählt, dass
+jeder Schritt den nächsten belegt:
+
+1. **Environment absichern** (A4): Required Reviewer `Frank Hartung`,
+   Deployment branches and tags → `Selected` → ausschließlich `main`,
+   *Allow administrators to bypass configured protection rules* → **aus**.
+   Reviewer und Branch-Regel kann
+   `python3 scripts/worker_environment_einrichten.py --anwenden --reviewer frank-hartung`
+   mit einem Token setzen, das `Environments: read/write` darf; den
+   Bypass-Schalter stellt nur das Dashboard. `npm run worker:environment`
+   muss Exit 0 melden.
+2. **Zugang hinterlegen** (A4): `CF_WORKERS_DEPLOY_TOKEN` (Workers Scripts:
+   Read + Deploy) und `CLOUDFLARE_ACCOUNT_ID` im Environment
+   `cloudflare-produktion`. Prüfen ohne Deploy:
+   Actions → „Deploy-Zugang prüfen“ → *Run workflow* (`main`).
+3. **Worker deployen** (D2): Actions → „Cloudflare-Worker deployen“ →
+   `newsletter-worker` von `main`. Der Secret-Job hält auf Freigabe; den
+   Lauf freigeben oder abbrechen (A4, „Die Freigabe ist ein Klick“). Der
+   Lauf muss `/healthz` mit `bau == ff-newsletter-2026-10-24` belegen.
+4. **Edge-Regel anwenden** (A1): `npm run edge:freigabe` (Exit 0), dann
+   `npm run edge:freigabe:apply`, dann `npm run edge:b7` und den
+   Datenschutztext committen. Der Apply braucht
+   `CLOUDFLARE_API_TOKEN` mit `Zone.DNS:Edit`, `Zone.Settings:Edit`,
+   `Zone.Transform Rules:Edit` für diese Zone.
+5. **Live-Nachweis:** `gh workflow run sicherheits-wache.yml --ref main`.
+   Nur der vollständige erfolgreiche Live-Job schließt #972. Die Warnung
+   „Produktions-Environment“ bleibt danach als #922-Nachweis bestehen, bis
+   der Bypass-Schalter im Dashboard steht; sie ist keine Live-Sicherheits-
+   Abweichung, sondern die Vorbedingung für den nächsten Deploy.
+
 ---
 
 ### A2 · Mengenregeln an der Edge (Finding F-03)

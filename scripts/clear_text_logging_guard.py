@@ -82,6 +82,37 @@ ROOT = Path(__file__).resolve().parents[1]
 REGEL_LOGGING = "py/clear-text-logging-sensitive-data"
 REGEL_STORAGE = "py/clear-text-storage-sensitive-data"
 
+# BEREICHSGRENZE FREMdCODE (01.11.2026, Aufnahme von claude-seo)
+# ---------------------------------------------------------------
+# Vendorte Skill-Runtimes (`.claude/skills/<skill>/scripts/`) sind fremder
+# Code: er wird bei `npx skills update` überschrieben, gehört keinem Hausauftrag
+# und ist hier nicht heilbar – die Heilung läge beim Upstream. Er wird deshalb
+# weiterhin GEPRÜFT und weiterhin GEMELDET, aber als Fremdcode-Befund (⚠, Exit
+# 0), nicht als Hausbefund (❌, Exit 1). Das ist eine Klassifikation, keine
+# Unterdrückung: kein Fund verschwindet aus dem Log.
+#
+# Warum die Grenze überhaupt nötig war: `claude-seo` schreibt seine
+# OAuth-Tokendatei in `google_auth.py` über `_write_private_json()` mit
+# `os.open(..., 0o600)` plus `fchmod` – die Datei ist nie weltlesbar. Die
+# Query `py/clear-text-storage-sensitive-data` wertet Dateirechte nicht aus und
+# meldet dennoch. Dieselbe Grenze steht seit demselben Tag als `paths-ignore`
+# in `.github/codeql/codeql-config.yml` (Vorbild: `impeccable/scripts`), damit
+# GitHubs Default-Setup nicht auf fremdem Code steht. Punkt 2 des Vertrags
+# oben („kein toter Winkel") bleibt erfüllt, weil dieser Lauf die Datei
+# ausdrücklich weiterliest und ausweist.
+FREMDCODE_TEILE = (".claude", "skills")
+FREMDCODE_UNTERORDNER = "scripts"
+
+
+def ist_fremdcode(datei: str | Path, wurzel: Path = ROOT) -> bool:
+    """True für `.claude/skills/<skill>/scripts/…` – vendorte Fremd-Runtime."""
+    try:
+        teile = Path(datei).resolve().relative_to(Path(wurzel).resolve()).parts
+    except (ValueError, OSError):
+        return False
+    return (len(teile) >= 5 and tuple(teile[:2]) == FREMDCODE_TEILE
+            and teile[3] == FREMDCODE_UNTERORDNER)
+
 # --------------------------------------------------------------------------- #
 #  1 · Namens-Heuristik – 1:1 aus SensitiveDataHeuristics.qll übersetzt
 # --------------------------------------------------------------------------- #
@@ -961,22 +992,39 @@ def main(argv=None) -> int:
 
     pfade = [Path(x) for x in a.pfade] if a.pfade else python_dateien(ROOT)
     befunde, fehler = pruefe(pfade, ROOT)
+    haus = [b for b in befunde if not ist_fremdcode(b.datei, ROOT)]
+    fremd = [b for b in befunde if ist_fremdcode(b.datei, ROOT)]
 
     if a.json:
-        print(json.dumps({"befunde": [asdict(b) for b in befunde], "fehler": fehler,
-                          "geprueft": len(pfade)}, ensure_ascii=False, indent=2))
+        print(json.dumps({"befunde": [dict(asdict(b), bereich=("fremdcode" if ist_fremdcode(b.datei, ROOT)
+                                                              else "haus"))
+                                      for b in befunde],
+                          "fehler": fehler, "geprueft": len(pfade),
+                          "haus": len(haus), "fremdcode": len(fremd)},
+                         ensure_ascii=False, indent=2))
         if fehler:
             return 2
-        return 1 if befunde else 0
+        return 1 if haus else 0
 
     for f in fehler:
         print(f"⚠ {f}")
-    if befunde:
-        unterdrueckt = [b for b in befunde if b.art == "unterdrueckung"]
-        print(f"❌ KLARTEXT-WACHE: {len(befunde)} Befund(e) in {len(pfade)} Dateien "
-              f"({len(unterdrueckt)} davon nur per Kommentar unterdrückt – "
-              f"das Default-Setup sieht sie trotzdem).")
-        for b in befunde:
+    if fremd:
+        print(f"⚠ FREMDCODE: {len(fremd)} Fundstelle(n) in vendorten Skill-Runtimes "
+              f"({len(pfade)} Dateien geprüft). Der Code gehört dem Upstream, wird bei "
+              f"`npx skills update` überschrieben und ist hier nicht heilbar – gemeldet "
+              f"wird er trotzdem, in jedem Lauf.")
+        for b in fremd:
+            marke = "UNTERDRÜCKT" if b.art == "unterdrueckung" else "FLUSS"
+            print(f"   [{marke}] {b.als_text()}")
+        print("   Entscheidung, Grund und Nachlauf: "
+              "CLAUDE-SEO-AUFNAHME-26-SKILLS-HIGHEND-2026-11-01.md, Abschnitt "
+              "„Bereichsgrenze Fremdcode\".")
+    if haus:
+        unterdrueckt = [b for b in haus if b.art == "unterdrueckung"]
+        print(f"❌ KLARTEXT-WACHE: {len(haus)} Befund(e) im Hauscode "
+              f"({len(pfade)} Dateien geprüft, {len(unterdrueckt)} davon nur per Kommentar "
+              f"unterdrückt – das Default-Setup sieht sie trotzdem).")
+        for b in haus:
             marke = "UNTERDRÜCKT" if b.art == "unterdrueckung" else "FLUSS"
             print(f"   [{marke}] {b.als_text()}")
         print("\n   Heilung: den NAMEN ehrlich machen (z. B. `pflicht_env` statt `secrets`),")
@@ -985,7 +1033,8 @@ def main(argv=None) -> int:
         return 2 if fehler else 1
     if not a.quiet:
         print(f"✅ Klartext-Wache: {len(pfade)} Python-Dateien, keine Klartext-Fundstelle "
-              f"(Regeln: {REGEL_LOGGING}, {REGEL_STORAGE}).")
+              f"im Hauscode ({len(fremd)} Fremdcode-Fundstelle(n) ausgewiesen; "
+              f"Regeln: {REGEL_LOGGING}, {REGEL_STORAGE}).")
     return 0 if not fehler else 2
 
 

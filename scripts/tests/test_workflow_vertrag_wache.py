@@ -23,8 +23,9 @@ und genau deshalb monatelang.
 Warum keine bestehende Wache das gefunden hat: `yaml.safe_load` liefert
 für diesen Block einen vollkommen normalen Dict. Ob die Action den Wert
 als Liste verträgt, weiß PyYAML nicht. `trigger_wache.py` liest nur den
-`on:`-Ausschnitt, `actions_version_guard.py` lässt SHA-Pins per Regel A3
-absichtlich unangetastet.
+`on:`-Ausschnitt. `actions_version_guard.py` prüft seit #1014 die
+SHA-/Versions-Konsistenz im Bestand; Anbieter-Existenz und Eingabe-Verträge
+bleiben die Aufgabe dieser Wache.
 
 DIESE SUITE HÄLT DIE KLASSE GESCHLOSSEN
 ---------------------------------------
@@ -42,6 +43,7 @@ Ausführung:
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import sys
 import unittest
@@ -117,8 +119,8 @@ jobs:
                     "49538c08a0826eef0d640c58a59e7a5e2b50aaef"):
             self.assertNotIn(tot, text,
                              f"toter Pin ist zurück: {tot[:12]}…")
-        self.assertIn("peter-evans/create-issue-from-file@433e51abf769", text)
-        self.assertIn("actions/upload-artifact@cf430e030ddb", text)
+        self.assertRegex(text, r"peter-evans/create-issue-from-file@[0-9a-f]{40} # v\d+\.\d+\.\d+")
+        self.assertRegex(text, r"actions/upload-artifact@[0-9a-f]{40} # v\d+\.\d+\.\d+")
 
     def test_alle_workflows_offline_ohne_befund(self):
         """V3–V6 gelten für den ganzen Bestand, nicht nur für die Pipeline."""
@@ -207,9 +209,11 @@ jobs:
         self.assertNotEqual(kaputt2, text)
         befunde, daten = wache.pruefe_struktur(kaputt2, "kaputt2.yml")
         self.assertEqual(befunde, [])
+        match = re.search(r"peter-evans/create-issue-from-file@([0-9a-f]{40})", text)
+        self.assertIsNotNone(match, "Issue-Action fehlt in der Pipeline")
         treffer = wache.pruefe_vertraege(
             ROOT, [("kaputt2.yml", daten)],
-            {"peter-evans/create-issue-from-file@433e51abf769039ee20ba1293a088ca19d573b7f":
+            {f"peter-evans/create-issue-from-file@{match.group(1)}":
              {"labels": "string", "title": "string", "content-filepath": "string",
               "assignees": "string"}},
             online=False,

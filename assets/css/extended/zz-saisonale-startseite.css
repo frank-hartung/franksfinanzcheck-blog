@@ -249,6 +249,10 @@
   border-color: var(--ff-saison-akzent);
 }
 
+.ff-saison-pillar:active {
+  transform: translateY(0);
+}
+
 /* ---------- 5. Karten: Aufmacher + zwei Nachrücker ---------- */
 .ff-saison-liste {
   display: grid;
@@ -289,6 +293,10 @@
   border-color: var(--ff-border-card);
   border-inline-start-color: var(--ff-saison-akzent);
   box-shadow: var(--ff-shadow-2);
+}
+
+.ff-saison-card:active {
+  transform: translateY(0);
 }
 
 .ff-saison-card-meta {

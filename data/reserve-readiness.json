@@ -1,41 +1,18 @@
 {
   "target": 6,
-  "ready": 3,
-  "pool_size": 6,
-  "generated_at": "2026-10-31T14:39:53Z",
+  "ready": 5,
+  "pool_size": 7,
+  "generated_at": "2026-11-02T11:42:18Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
       "ready": true,
       "sha256": "cb3bf3d7be2180edff5fcefa860e8623f50fa8a4c2727513861e1fe7ba87cd18",
       "flesch": 66.7,
-      "measured_at": "2026-10-31T09:55:31Z",
+      "measured_at": "2026-11-02T11:36:55Z",
       "score": 0.984,
       "parts": {
         "spelling": 0.92,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
-      "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "ready": false,
-      "sha256": "5f24a2368b3b10ede0e02d1e49563f2cdcdfc2d531eb5f8e727ecef6c0d6dd6d",
-      "flesch": 72.8,
-      "measured_at": "2026-10-31T14:39:52Z",
-      "reason": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…wichtiger hinweis dieser artikel dient ausschließlich der allgemeinen information und…“ – doppelte Passage, manuell reparieren; R15-PHRASEN",
-      "details": [
-        "🛑 2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
-        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…wichtiger hinweis dieser artikel dient ausschließlich der allgemeinen information und…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…stellt keine anlage rechts oder steuerberatung dar prüfe konditionen und…“ – doppelte Passage, manuell reparieren",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
-      "score": 0.996,
-      "parts": {
-        "spelling": 0.98,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -49,7 +26,7 @@
       "ready": true,
       "sha256": "026a4df794c249f5d138d8530485aac93a4e2f09abc336b0d00cf67c72704604",
       "flesch": 61.6,
-      "measured_at": "2026-10-31T09:57:06Z",
+      "measured_at": "2026-11-02T11:37:49Z",
       "score": 0.952,
       "parts": {
         "spelling": 0.94,
@@ -62,18 +39,11 @@
       }
     },
     {
-      "slug": "2026-10-30-energieeffiziente-geraete-so-sinken-deine-fixkosten",
-      "ready": false,
-      "sha256": "41a5b625076f91ebbff1458e008cbabdf24fd6bcf053cd54f0c24c63d15d0254",
-      "measured_at": "2026-10-31T09:57:54Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
-    },
-    {
       "slug": "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem",
       "ready": true,
-      "sha256": "b5e79ef506a6a8b269bce6ad13af6f8ba636cfc766aa67fd7ab42ab36c3fa52e",
+      "sha256": "ad0969c0a822afc57b2282b2d9f66fb4d39733404375d046a7826bfd20ceda8e",
       "flesch": 67.1,
-      "measured_at": "2026-10-31T09:58:41Z",
+      "measured_at": "2026-11-02T11:38:42Z",
       "score": 0.986,
       "parts": {
         "spelling": 1.0,
@@ -86,38 +56,57 @@
       }
     },
     {
-      "slug": "2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-      "ready": false,
-      "sha256": "51a9064a1f24f0bdf5dcab3b72e75dfcb342b90d03b851909ae4d16695bad7db",
-      "flesch": 66.4,
-      "measured_at": "2026-10-31T14:39:53Z",
-      "reason": "Reserve-Qualitäts-Gate: RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Nach ein bis zwei Jahren zerbröckelt das Material oft.",
-      "details": [
-        "RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Nach ein bis zwei Jahren zerbröckelt das Material oft."
-      ],
-      "score": 0.942,
+      "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
+      "ready": true,
+      "sha256": "fdfc2fd2dff9a1fe1417f996c5c3a30747b18a4a72397ad82c4306632a2fe1fc",
+      "flesch": 67.3,
+      "measured_at": "2026-11-02T11:39:36Z",
+      "score": 0.962,
       "parts": {
-        "spelling": 0.92,
+        "spelling": 0.88,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.6799999999999999,
+        "typography": 0.96,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.95
       }
+    },
+    {
+      "slug": "2026-11-01-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
+      "ready": false,
+      "sha256": "3988fe8a79b5c05081a3371b020a08ce748041ce87d46b18dbb4d650f768fd52",
+      "measured_at": "2026-11-02T11:40:30Z",
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
+    },
+    {
+      "slug": "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck",
+      "ready": true,
+      "sha256": "722e590d7e31e5406851c4b421c5c3130c816ef23b6f3986fb2f25c102db8f7b",
+      "flesch": 72.0,
+      "measured_at": "2026-11-02T11:41:25Z",
+      "score": 0.93,
+      "parts": {
+        "spelling": 0.9,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 0.92,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.9
+      }
+    },
+    {
+      "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "ready": false,
+      "sha256": "8b2bfd854fd76ec4416f34211b3eb73d701860b77a115a0be239fd5b164dea34",
+      "measured_at": "2026-11-02T11:42:18Z",
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     }
   ],
   "measurement": {
-    "kind": "partial",
-    "run_id": "41211080745",
+    "kind": "full",
+    "run_id": "41437248834",
     "run_attempt": "1"
-  },
-  "recert": {
-    "at": "2026-10-31T14:39:53Z",
-    "renewed": [
-      "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen"
-    ],
-    "tool": "scripts/reserve_recert.py"
   }
 }

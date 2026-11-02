@@ -3,6 +3,7 @@ title: "Presse & Expertise"
 heading: "Presse, Interviews und fachliche Zusammenarbeit"
 description: "Pressekontakt, Expertenthemen, zitierfähige Daten und Interviewanfragen an Frank Hartung von FranksFinanzcheck."
 draft: false
+lastmod: 2026-10-27
 showToc: true
 ---
 

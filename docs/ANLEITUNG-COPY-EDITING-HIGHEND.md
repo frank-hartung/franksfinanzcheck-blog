@@ -1,7 +1,7 @@
 # Copy-Editing Highend – FranksFinanzcheck (Profi-Agentur-Level)
 
 > **Zustand:** aktiv · Rollout: Highend · Gilt für: alle Blogartikel (de-DE, YMYL)
-> **Quelle:** `.claude/skills/copy-editing/SKILL_DE.md` + `scripts/copy_editing_gate.py` + `.github/workflows/sprach-qualitaet-pipeline.yml`
+> **Quelle:** `.claude/skills/ff-lektorat/SKILL.md` + `scripts/copy_editing_gate.py` + `.github/workflows/sprach-qualitaet-pipeline.yml`
 > **Stand:** 31.10.2026 – Schalter-Vertrag und reiner Beweispfad (Abschnitt 10)
 
 ## 1. Ziel
@@ -17,7 +17,7 @@ Jeder Blogartikel soll sprachlich auf dem Niveau einer professionellen Finanzred
 
 ### 2.1 Die Seven Sweeps (menschlicher Lektoratsdurchgang)
 
-Jeder Artikel durchläuft sieben Lektorats-Pässe (siehe `SKILL_DE.md`):
+Jeder Artikel durchläuft sieben Lektorats-Pässe (siehe `ff-lektorat/SKILL.md`):
 
 | Sweep | Fokus | Kernfrage |
 |---|---|---|
@@ -155,12 +155,12 @@ Nach dem automatischen Durchlauf entscheidet die menschliche Endredaktion über:
 
 | Pfad | Zweck |
 |---|---|
-| `.claude/skills/copy-editing/SKILL_DE.md` | Deutsche Skill-Definition (Seven Sweeps, AI-Tells, YMYL-Panel) |
-| `.claude/skills/copy-editing/references/checkliste-de.md` | Finale QA-Checkliste |
-| `.claude/skills/copy-editing/references/ai-tells-de.md` | KI-Muster erkennen und entfernen |
-| `.claude/skills/copy-editing/references/ymyl-panel-de.md` | Multi-Persona-Review für Finanzartikel |
-| `.claude/skills/copy-editing/references/werkzeugkette-de.md` | Engine-Orchestrierung und Schwellen |
-| `.claude/skills/copy-editing/evals/evals-de.json` | Eingefrorene Testfälle (Regression) |
+| `.claude/skills/ff-lektorat/SKILL.md` | Deutsche Skill-Definition (Seven Sweeps, AI-Tells, YMYL-Panel) |
+| `.claude/skills/ff-lektorat/references/checkliste.md` | Finale QA-Checkliste |
+| `.claude/skills/ff-lektorat/references/ai-tells.md` | KI-Muster erkennen und entfernen |
+| `.claude/skills/ff-lektorat/references/ymyl-panel.md` | Multi-Persona-Review für Finanzartikel |
+| `.claude/skills/ff-lektorat/references/werkzeugkette.md` | Engine-Orchestrierung und Schwellen |
+| `.claude/skills/ff-lektorat/evals/evals.md` | Eingefrorene Testfälle (Regression) |
 | `scripts/copy_editing_gate.py` | Hochorchestrierung aller Engines |
 | `.github/workflows/sprach-qualitaet-pipeline.yml` | Automatisierte tägliche Pipeline |
 | `docs/ANLEITUNG-SPRACH-QUALITAET-PIPELINE.md` | Workflow-Dokumentation (dieses Dokument ergänzt) |

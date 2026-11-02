@@ -1,6 +1,7 @@
 # ANLEITUNG: Skills und der geteilte Leitfaden
 
-Stand: 01.11.2026 · Verantwortlich: `scripts/skills_vertrag.py` (K1–K8) ·
+Stand: 01.11.2026 · Verantwortlich: `scripts/skills_vertrag.py` (K1–K10) und
+`scripts/skills_portfolio.py` (P1–P7) ·
 Vorgang und Zahlen: `SKILLS-UMBAU-UND-LIZENZ-NACHWEIS-HIGHEND-2026-11-01.md` ·
 Auftrag: Regelwerk so ablegen, dass es **gewirkt** wird, nicht nur exists.
 
@@ -19,9 +20,10 @@ braucht. Ersparnis: rund 35.000 Tokens Regelwerk pro Session, 89 % weniger
 Vorladelast, bei unverändertem Regelbestand.
 
 ```
-CLAUDE.md                      ← Kern: 239 Zeilen, 17 KB, Nummer ist Vertrag
+CLAUDE.md                      ← Kern: 242 Zeilen, 18 KB, Nummer ist Vertrag
 .claude/skills/
   ff-pruefen/     SKILL.md + references/*.md   ← Details wörtlich aus dem Kern
+  ff-lektorat/    SKILL.md + 4 references + evals.md  ← eigene deutsche Ausgabe
   ff-ausliefern/  …
   ff-produzieren/ …
   ff-marke-text/  …
@@ -30,9 +32,11 @@ CLAUDE.md                      ← Kern: 239 Zeilen, 17 KB, Nummer ist Vertrag
   <fremd>/        SKILL.md + LICENSE.txt       ← aus skills-lock.json, npx skills update
 skills-lock.json               ← nur Fremdquellen
 data/skill_lizenzen.json       ← Herkunft und Lizenz je Skill
+data/skill_portfolio.yaml      ← welches Skill dient welchem Thema (oder ist ausgeschlossen)
+data/skill_ergaenzungen.json   ← umgezogene/verlorene Zusatzdateien (K10)
 ```
 
-## Die sechs Skills und ihre Grenze
+## Die sieben Skills und ihre Grenze
 
 | Skill | Zuständig für | Nicht zuständig für |
 |---|---|---|
@@ -42,6 +46,7 @@ data/skill_lizenzen.json       ← Herkunft und Lizenz je Skill
 | `ff-marke-text` | README-Markenfläche, Abschlussvermerk, ZEIT-Latte, Metadaten/SERP, Tags, Offenlegung, Pins | Layout/CSS |
 | `ff-oberflaeche` | Design-Disziplin, Laufzeit-Robustheit, Werkzeuge, `_headers` | Wer wann produziert |
 | `ff-ki-automation` | KI-Transportweg, Werkbank, Recherche, Suchradar, Schaltwerk, Kostensperre | Bewertung der Ergebnisse |
+| `ff-lektorat` | deutsches Lektorat vor Auslieferung: Seven Sweeps, KI-Tells, YMYL-Panel, Engine-Kette, finale Checkliste | neue Texte schreiben, Layout/CSS |
 
 Die Grenze ist keine Dekoration: Wer eine Regel ablegt, entscheidet, **wer sie
 in Zukunft liest**. Eine Regel im falschen Skill wird bei dem Auftrag nicht
@@ -70,6 +75,28 @@ npx skills add <owner>/<repo>          # Quelle landet in skills-lock.json
 python3 scripts/skills_vertrag.py      # was fehlt noch? (K4, K6)
 ```
 
+**Achtung, `--skill '*'`.** Ein Aufruf mit allen Skills schreibt **jeden** Ordner
+neu – auch die, die schon liegen. Am 01.11.2026 hat genau das die deutsche
+`copy-editing`-Ausgabe gelöscht (`SKILL_DE.md`, `evals-de.json`, vier
+`references/*-de.md`), und der Vertrag blieb grün.
+
+**Die Lehre ist nicht „retten", sondern „verlassen".** Eine repo-eigene Datei
+in einem Fremd-Ordner ist eine Löschung auf Zeit; sie gehört in ein
+`ff-*`-Skill, das niemand überschreibt. Genau so ist der Fall geschlossen: die
+deutsche Ausgabe ist jetzt `ff-lektorat` (SKILL.md + vier references +
+`evals/evals.md`), und `data/skill_ergaenzungen.json` führt den Umzug mit
+Herkunft, Ziel und Datum. K10 prüft seither drei Zustände: angekommen (still),
+zurückgefallen (Warnung), verloren (Befund).
+
+Für den Notfall bleibt der Blick nach dem Update (Wiederherstellung ist ein
+Rettungsgriff, kein Betriebsmodell):
+
+```bash
+npx -y skills@1.7.4 add <owner>/<repo> --skill '*' -a claude-code -y
+git status --short .claude/skills        # was hat der CLI ersetzt?
+git checkout HEAD -- .claude/skills/<ordner>   # nur zur Rettung, dann umziehen
+```
+
 Danach ist die Arbeit nicht fertig, sondern überprüfbar:
 
 1. **Lizenztext in den Ordner.** `LICENSE.txt` aus der Upstream-Root oder dem
@@ -79,13 +106,62 @@ Danach ist die Arbeit nicht fertig, sondern überprüfbar:
    „unbekannt“ nur mit `ausnahme` (`grund`, `entscheidung`, `faellig`).
    Eine Ausnahme ohne Frist ist eine stille Abschaffung; eine abgelaufene
    meldet als Warnung und blockiert die Auslieferung nicht.
-3. **Router:** ein Satz, wann der Skill zu lesen ist. Ein Skill ohne Router-
-   zeile wird nicht gefunden (K3).
+3. **Router:** ein Satz, wann der Skill zu lesen ist – in Rückstrichen
+   (`` `name` ``), denn nur so findet ihn ein Agent. Bei einem Fremd-Skill
+   gehört der Satz in den zuständigen `ff-*`-Einstieg, weil `npx skills update`
+   den Fremd-Text überschreibt. K3 erzwingt die Routerzeile für `ff-*`; für
+   vendored Skills ist sie Handwerk, nicht Wache – dort misst K9 den Preis
+   (Summe der Beschreibungen) und K10 die Herkunft der Zusatzdateien.
 4. **Entfernen:** Ordner *und* `skills-lock.json`-Eintrag *und* Registerzeile.
    Ein Eintrag ohne Ordner warnt, ein Ordner ohne Eintrag ist ein Befund.
 
 `skills-lock.json` ist für Fremdquellen da. **`ff-*` stehen dort nie** – sonst
 überschreibt das nächste `npx skills update` repo-eigenes Regelwerk (K4).
+
+## Welche Themen bedient der Blog? (`data/skill_portfolio.yaml`)
+
+Die Frage entsteht bei jedem neuen Fremd-Skill: Es kostet Dauerlast in jeder
+Session, auch wenn es nie gelesen wird. Das Portfolio beantwortet sie an einer
+Stelle, und `scripts/skills_portfolio.py` hält die Antwort ehrlich.
+
+```
+Themen (12)      sechs Inhaltswelten + sechs Kanäle, jede mit Belegpfad
+produktion       Skill → Thema + Rolle + Kanal   (41 Skills, ≈ 7.000 Tokens)
+ausgeschlossen   Skill → Grund + Entscheidung + Frist   (35 Skills)
+```
+
+Die Unterscheidung `art: inhalt | kanal` ist die eigentliche Antwort:
+
+* **inhalt** – die sechs Themenwelten aus `data/themenwelten.json`. Sie werden
+  von der Content-Engine mit Artikeln bedient (105 Artikel tragen `pillar:`),
+  **nicht** von einem Marketing-Skill. Ein fehlendes Skill ist hier normal;
+  ein Thema ohne Artikel ist ein Befund (P7).
+* **kanal** – Suche/KI, Text, Werkzeuge, Verbreitung, Messung, Wettbewerb.
+  Hier **muss** ein Skill hängen, sonst wird die Achse behauptet (P4).
+
+Ein Kanal ist nur dann ein Kanal, wenn ein Pfad ihn belegt (`kanaele`:
+`newsletter-worker`, `scripts/pinterest_ziele.py`, `content/presse` …). Ein
+Skill für Discord, Events oder Influencer fällt damit durch – nicht weil es
+schlecht ist, sondern weil es hier nichts bedient.
+
+```bash
+python3 scripts/skills_portfolio.py             # P1–P7 prüfen
+python3 scripts/skills_portfolio.py --selftest  # 15 Sabotage-Fälle + Gegenproben
+npm run skills:portfolio                        # dasselbe im Hausstil
+```
+
+| Klasse | Prüft | Fund heißt |
+|---|---|---|
+| P1 | Jedes installierte Fremd-Skill ist einem Thema zugeordnet oder ausgeschlossen | Dauerlast ohne Entscheidung |
+| P2 | Jedes Thema und jeder Kanal hat einen existierenden Belegpfad | Das Thema wird behauptet, nicht bedient |
+| P3 | Summe der Beschreibungen aller Themen-Skills ≤ `budget_kb` | Der Themenbetrieb wächst ohne Entscheidung |
+| P4 | Kanal-Thema hat ein Skill; jedes Skill hat `rolle` und belegte `kanaele` | Achse ohne Fahrer oder Kanal, den es nicht gibt |
+| P5 | Ausschluss trägt Grund, Entscheidung, Frist; abgelaufene Frist warnt | Stille Abschaffung |
+| P6 | Kein Skill gleichzeitig in `produktion` und `ausgeschlossen` | Eine Entscheidung, zwei Antworten |
+| P7 | Jedes Inhaltsthema hat Artikel (`pillar:` im Frontmatter) | Leere Kachel auf der Startseite |
+
+P5 ist **immer nur eine Warnung**. Eine Frist soll erinnern, nicht das Gate
+schließen – dieselbe Linie wie K6 und K8.
 
 ## Der Nachweis
 
@@ -107,6 +183,8 @@ npm run test:skills                          # Selbsttest + 31 Unit-Tests
 | K6 | Lizenztext, NOTICE, Ausnahme mit Grund und Frist | Fremder Code ohne Erlaubnis im Repo |
 | K7 | `§N` / „Regel N“ / „Abschnitt X“ aus `scripts/` und Workflows | Ein Verweis läuft ins Leere |
 | K8 | Siegelstand: tragen `KRITISCH`/`FEST` und `data/integrity_lock.json` Wache und Lizenz-Register? | Der Regelkern ist austauschbar, ohne dass es laut wird |
+| K9 | Summe aller `description` ≤ 56 KB (≈ 14.000 Tokens) | Die Bibliothek wächst still in jede Session hinein |
+| K10 | Zusatzdatei in fremdem Ordner (Warnung) und jeder Stand aus `data/skill_ergaenzungen.json` am Ziel | Ein `npx skills update` löscht repo-eigene Dateien ohne Meldung |
 
 K8 ist **immer eine Warnung, nie ein Befund**. Zeichnen ist ein Betreiberakt,
 und ein Gate, das eine ungezeichnete Datei hart rot macht, bestraft die falsche
@@ -140,9 +218,18 @@ Hand gesetzter Hash sieht gültig aus und ist es nie (an `frontend-design` und
 ```bash
 npx -y skills@1.7.4 add <owner>/<repo> --skill <name> -a claude-code -y
 npx -y skills@1.7.4 update
-npx -y skills@1.7.4 check
+npx -y skills@1.7.4 check      # ACHTUNG: schreibt (siehe Kasten unten)
 npx -y skills@1.7.4 remove <name> -y
 ```
+
+> **`check` ist kein Lesezugriff (gemessen 01.11.2026).** Der Befehl meldet
+> nicht „veraltet“, sondern **aktualisiert**: er schrieb zehn vorhandene Skills
+> um, ersetzte `agent-reach` durch einen Symlink nach `.agents/skills/` und
+> legte `agent/skills/` und `data/skills/` an. Weil dieses Repo echte Ordner mit
+> inline-`LICENSE.txt` versioniert (keine Symlink-Farm), wurde der Lauf
+> vollständig zurückgerollt. Wer den Bestand nicht anfassen will, benutzt
+> `npx -y skills@1.7.4 add <owner>/<repo> --skill '*' -a claude-code -y`
+> gezielt – oder nimmt die Änderungen aus `git status` bewusst in Kauf.
 
 Ohne `-y` bleibt der CLI an einer Ja/Nein-Frage stehen und tut nichts – im
 Automatenlauf heißt das: keine Wirkung, aber ein grüner Schritt. Reihenfolge
@@ -179,6 +266,70 @@ an der Website ändern (10 Python-Helfer, drei Agenten-Dokumente, Auswertung in
 der Wegwerf-Kopie). Vor der Aufnahme geprüft: Syntaxwache, REDOS-Wache,
 Wachen-Vertrag und Fremdmessung-Sperre blieben grün, K6 meldete sofort den
 fehlenden Register-Eintrag – so soll es sein.
+
+## Im Bestand: `claude-seo` (AgriciDaniel/claude-seo, MIT) – 26 Skills mit eigener Runtime
+
+Aufgenommen am 01.11.2026 auf Anweisung (Befehl: `npx skills add
+AgriciDaniel/claude-seo`). Das ist die erste Anlage, die **mehr als einen Skill
+und eigenen ausführbaren Code** mitbringt. Drei Dinge daran sind nicht
+selbsterklärend und gehören deshalb hierher:
+
+1. **Ein Paket, 26 Skills.** Der CLI legt alle 26 als Geschwisterordner ab
+   (`seo` als Hub plus 25 `seo-*`). Ihre Beschreibungen liegen ab jetzt in
+   jedem Agenten-Start mit: 2.039 Tokens gegen 3.335 Tokens Bestand – **+61 %
+   Dauerlast**. Das ist der Preis, nicht die Beigabe.
+2. **Die Runtime liegt im Hub-Ordner, nicht in `scripts/`.** Die Skills rufen
+   `"${CLAUDE_PLUGIN_ROOT}/scripts/claude-seo" run <script.py>`; außerhalb eines
+   Plugins ist diese Variable leer. Wie das Upstream-`install.sh` für
+   Handinstallationen ersetzt auch dieser Checkout den Token – hier auf den
+   Repo-Pfad `.claude/skills/seo/scripts/claude-seo` (32 `.md`-Dateien, 151
+   Token). `scripts/`, `schema/`, `data/`, `hooks/` und `requirements.txt`
+   liegen deshalb **neben** dem `SKILL.md` des Hubs, weil `runtime.py` seinen
+   Wurzelpfad als `parent.parent` auflöst. Venv bauen:
+   `.claude/skills/seo/scripts/claude-seo setup` (das Ergebnis ist nicht
+   versioniert).
+3. **Lizenz je Ordner, Volltext statt Zeiger.** Upstream legt eine 143-Byte-
+   Datei ab, die nur auf die Root-Lizenz verweist, und lässt fünf Ordner ganz
+   ohne. Ein Verweis führt die Permission Notice nicht mit, die MIT verlangt –
+   in allen 26 Ordnern liegt daher der unveränderte MIT-Volltext der
+   Root-Lizenz (1.069 Bytes).
+
+**Nach jedem `npx skills update` sind 2 und 3 weg.** Der CLI kopiert wieder den
+Upstream-Stand: die `CLAUDE_PLUGIN_ROOT`-Token kehren zurück, die Lizenzdateien
+werden wieder Zeiger. Der Nachlauf ist derselbe wie bei der Aufnahme und steht
+als Befehlskette im Vorgangsbericht
+`CLAUDE-SEO-AUFNAHME-26-SKILLS-HIGHEND-2026-11-01.md`.
+
+Grenze zum Haus: der Hub liefert **Analyse**, nicht die Veröffentlichungsregel.
+Was auf die Website darf, entscheiden weiter `ff-produzieren`, `ff-marke-text`
+und `seo-paritaet.yml`; die 26 Skills ersetzen keine Wache.
+## Zurückgezogen: 17 Social-Skills (`charlie947/social-media-skills`, MIT)
+
+Aufgenommen am 01.11.2026 mit #1006, am selben Tag wieder abgezogen – nicht
+wegen der Qualität, sondern wegen der Rechnung. Vorgang und Messung bleiben in
+`SOCIAL-SKILLS-AUFNAHME-HIGHEND-2026-11-01.md` stehen; dieser Abschnitt sagt,
+was daraus geworden ist.
+
+* **Der Grund ist K9, nicht der Geschmack.** `skills_vertrag.py` misst alle
+  Beschreibungen zusammen: nach dem SEO-Paket (26 Skills) und dem Social-Pack
+  (17) waren es **62,7 KB gegen 56 KB**. Beide Aufnahmen passen einzeln, zusammen
+  nicht. Die Grenze wurde **nicht** angehoben: sie ist die Dauerlast, die jeder
+  Agenten-Start zahlt, und ein Regler, der bei jedem Zug nachgibt, misst nichts.
+* **Die Entscheidung des Inhabers:** das SEO-Paket bleibt vollständig (26 Skills,
+  eigener Hub samt Runtime), das Social-Pack geht. Abgezogen wurde über den CLI
+  (`npx skills remove …`, 17 Namen), nicht per `git rm` – Lock und Ordner bleiben
+  so in der Hand des Werkzeugs.
+* **Was danach nachgezogen ist:** `skills-lock.json` 99 → 82, Register
+  `data/skill_lizenzen.json` 99 → 82 (K4/K6: so viele Fremd-Skills wie
+  Lizenztexte), `data/skill_portfolio.yaml` ohne die 11 Zuordnungen und
+  6 Ausschlüsse des Packs (P1–P7), Router-Tabelle in
+  `.claude/skills/ff-marke-text/SKILL.md` und die Zeile in `CLAUDE.md` bereinigt
+  (K3: kein Router nennt einen Skill, den es nicht gibt).
+* **Was bleibt:** `data/social/channels.yaml`, `scripts/social_copywriter.py` und
+  die Verbreitungs-Kette sind Hauscode und von alldem unberührt. Wer die
+  Social-Texte wieder mit Fremd-Handwerk unterlegen will, braucht zuerst Platz
+  im K9-Budget – vorher ist die Antwort: kein Platz, keine Aufnahme.
+
 
 ## Abgelehnt und begründet: `xlsx` (anthropics/skills)
 
@@ -231,3 +382,43 @@ fail-closed Exit 2 – das ist **keine** kaputte Wache, sondern eine unvollstän
 Umgebung, und seit dem 01.11.2026 sagt der Selbsttest das auch so. Wer also
 über diese Zeilen stolpert und `npm run test:redaktion` rot sieht:
 `python3 -m pip install -r requirements-ci.txt`, dann nochmal.
+## Aufgenommen am 01.11.2026: `emil-design-eng` (emilkowalski/skills, MIT)
+
+Auftrag war der Befehl `npx skills add emilkowalski/skill`. Das Repo heißt
+inzwischen `emilkowalski/skills` (GitHub leitet weiter, `/skill` → `/skills`),
+es trägt 16 Skills und liegt unter MIT (1.070-Byte-`LICENSE`, Copyright 2026
+Emil Kowalski).
+
+**Nicht alle 16.** Von den 16 deckt genau einer einen bereits gebauten Teil
+dieser Website ab: Bewegung und Interaktions-Feedback. Die übrigen 15 sind für
+dieses Repo entweder gegenstandslos oder schädlich:
+
+| Skill(s) | Warum nicht |
+|---|---|
+| `animate-expo`, `write-swift`, `mobile-native` | React Native / Expo, Swift, iOS – das Repo ist Hugo + Papier-CSS, kein App-Build |
+| `ask-sonner` | Sonner ist eine React-Toast-Bibliothek; im Repo gibt es kein React |
+| `break-ui`, `prototype`, `pick-ui-library` | Werkbänke für App-Komponenten; UI-Änderungen laufen hier über Variante + Messung + Freigabe (`docs/ANLEITUNG-DESIGN-VARIANTEN.md`), nicht über einen Prototyp |
+| `animate`, `improve-animations`, `review-animations`, `find-animation-opportunities`, `animation-performance`, `animation-vocabulary`, `apple-design` | Motion-Werkstatt; die Entscheidungen, die hier zählen (CSS-Transition, `prefers-reduced-motion`, CLS, Dark Mode), stehen in `ff-oberflaeche` + `emil-design-eng`. Acht weitere Beschreibungen im Dauer-Kontext wären Last ohne neue Regel |
+
+**Befehl, wie er lief** (Version gepinnt wie im Runbook oben, `-y` gegen die
+Ja/Nein-Frage):
+
+```bash
+npx -y skills@1.7.4 add emilkowalski/skill --skill emil-design-eng -a claude-code -y
+```
+
+Ergebnis: `.claude/skills/emil-design-eng/SKILL.md` (27.123 Bytes) **und** der
+Lock-Eintrag entstanden zusammen; `computedHash` kommt vom CLI, nicht von Hand.
+Danach nach Protokoll: `LICENSE.txt` aus der Upstream-Root unverändert kopiert
+(MIT, kein `NOTICE` nötig), Register-Eintrag `quelle` + `lizenz: MIT` in
+`data/skill_lizenzen.json`, Quelle in `standen`, und die Router-Zeile in
+`CLAUDE.md` (UI-Tabelle) plus die Fünf-Nennung in
+`ff-oberflaeche/SKILL.md`. `python3 scripts/skills_vertrag.py` meldet seither
+25 Skills, 0 Befunde – vor dem Register-Eintrag meldete K6 genau einen.
+
+**Was der Skill hier tut:** Easing- und Timing-Entscheidungen für Übergänge,
+Hover/Fokus-Rückmeldung, Druck-Feedback, `prefers-reduced-motion` als Pflicht
+statt Höflichkeit, Detailpolitur an Komponenten. Er ändert keine Regel dieser
+Website – `PRODUCT.md`, `DESIGN.md`, `README.md`-Markenfläche und die
+24-Punkte-Richtlinie in `ff-oberflaeche/references/web-richtlinien.md` bleiben
+die Wahrheitsorte; der Skill liefert das Handwerk, das Urteil bleibt hausgemacht.

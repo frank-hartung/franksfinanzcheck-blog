@@ -195,6 +195,13 @@ body.ff-scrolled .header {
   box-shadow: 0 14px 30px rgba(0,0,0,.18);
 }
 
+/* Druck-Feedback für die Hero-CTAs (DESIGN.md §6.2). Der Glanz-Streifen
+   (::after) bleibt beim Drücken stehen – er ist Dekoration, kein Zustand. */
+.ff-home-ctas a:active {
+  transform: translateY(0) scale(.97);
+  box-shadow: 0 6px 16px rgba(0,0,0,.16);
+}
+
 .ff-home-ctas a:hover::after,
 .ff-home-ctas a:focus-visible::after {
   transform: translateX(62%) rotate(18deg);
@@ -222,6 +229,15 @@ body.ff-scrolled .header {
   box-shadow: var(--ff-card-shadow);
 }
 
+/* Druck-Feedback (DESIGN.md §6.2, B5). Der Eintrag hat mit `:focus-within`
+   bereits die Tastatur-Rückmeldung – dieselbe Geste. `:active` ergänzt nur
+   noch den Zeigefinger: Der Lift fällt auf 0 zurück, ohne zu schrumpfen
+   (eine 400px-Karte mit `scale(.97)` liest sich als Zoom-Fehler). Die
+   Nachbarregel daneben hebt den Schleier für beide Zustände an. */
+.post-entry:active {
+  transform: translateY(0);
+}
+
 .post-entry::before {
   content: "";
   position: absolute;
@@ -234,7 +250,8 @@ body.ff-scrolled .header {
 }
 
 .post-entry:hover::before,
-.post-entry:focus-within::before {
+.post-entry:focus-within::before,
+.post-entry:active::before {
   opacity: 1;
 }
 
@@ -1196,7 +1213,11 @@ details:not(.toc)[open] > summary::before {
   font-weight: 700;
   letter-spacing: .04em;
   color: var(--ff-emerald);
-  transition: all .2s ease;
+  /* Ausgeschrieben statt `all` (DESIGN.md §6.1, B3): Der Zustandswechsel
+     ändert Hintergrund, Schrift, Rahmen und Schatten – und nichts sonst.
+     Mit `all` zöge später jede neue Eigenschaft an dieser Pille mit. */
+  transition: background .2s ease, color .2s ease,
+              border-color .2s ease, box-shadow .2s ease;
 }
 
 .ff-kurzantwort__badge-dot {
@@ -1247,7 +1268,10 @@ details:not(.toc)[open] > summary::before {
 .ff-kurzantwort.ff-voice-active {
   border-left-color: var(--ff-accent, #ffb300);
   box-shadow: 0 6px 24px rgba(20, 87, 68, .14), inset 0 0 0 1px color-mix(in srgb, var(--ff-emerald) 32%, transparent);
-  transition: all .25s ease;
+  /* Der Vorlesemodus ändert linke Kante (3px) und Schatten. Statt `all`
+     beide Eigenschaften – und die Kante in der Fläche-Stufe .3s, weil sie
+     sichtbar breiter wird (§6.1). */
+  transition: border-left-color .3s ease, box-shadow .3s ease;
 }
 
 @keyframes ff-pulse {
@@ -1681,6 +1705,10 @@ details.toc .inner a:focus-visible {
 
 .ff-mini-toc a:hover {
   transform: translateX(1px);
+}
+
+.ff-mini-toc a:active {
+  transform: translateX(0);
 }
 
 .ff-mini-toc a[aria-current="true"] {

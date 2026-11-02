@@ -230,7 +230,7 @@ Prüfe den Namen. Prüfe das Datum. Prüfe den Flughafen. Ein Tippfehler kann te
 
 ## Danke fürs lesen
 
-Bis hierhin hast du die wichtigsten Regeln. Du weißt, [worauf du achten](../../posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/) musst. Du weißt, wo Fallen lauern. Du weißt, wie du fair vergleichst. Das ist viel mehr als das, was viele Schnellbucher wissen.
+Bis hierhin hast du die wichtigsten Regeln. Du weißt, worauf du achten musst. Du weißt, wo Fallen lauern. Du weißt, [wie du fair vergleichst](../../posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/). Das ist viel mehr als das, was viele Schnellbucher wissen.
 
 Buche klug. Buche fair. Und hab eine schöne Reise.
 

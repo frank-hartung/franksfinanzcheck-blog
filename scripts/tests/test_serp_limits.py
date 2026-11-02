@@ -254,6 +254,78 @@ class Bindung(unittest.TestCase):
             text = (REPO / relativ).read_text(encoding='utf-8')
             self.assertNotIn('DESC_MAX_ZEICHEN = 155', text, relativ)
 
+    def test_alle_schreiber_und_leser_haengen_an_der_ssot(self):
+        """Der Rückfall-Wächter – die eigentliche Heilung vom 01.11.2026.
+
+        Die 156-Zeichen-Ursache vom 27.10.2026 heilte, wer die Quelle band.
+        Sie kam zurück, weil die SCHREIBER und die zweite Messstelle ihr
+        eigenes Fenster weiterführten: 160 im Pinterest-Heiler, 156 in der
+        Sitecheck-Wache, 165 im seo_audit, 160 in der length_policy. Jede
+        dieser Dateien war für sich plausibel – und zusammen hatten sie
+        vier Maßstäbe.
+
+        Dieser Test ist bewusst eine Liste und keine Stichprobe: er nennt
+        jede Datei, die eine Description-Grenze führt, beim Namen. Eine
+        neue Datei fällt nicht durch, weil sie vergessen wurde, sondern
+        weil sie hier fehlt – der Test zwingt zur Entscheidung, ob sie
+        importiert oder warum sie es nicht tut.
+        """
+        import importlib
+        module = {
+            'sitecheck_wache': ('DESC_MIN', 'DESC_MAX'),
+            'seo_audit': ('DESC_MIN', 'DESC_MAX'),
+            'length_policy': ('META_DESC_OPT_MIN', 'META_DESC_OPT_MAX'),
+            'pinterest_seo_healer': ('DESC_MIN', 'DESC_MAX',
+                                     'DESC_OPT_MIN', 'DESC_OPT_MAX'),
+            'meta_optimizer': ('DESC_MIN', 'DESC_MAX', 'DESC_OPT_MIN',
+                               'DESC_OPT_MAX'),
+            'keyword_optimizer': ('DESC_MAX', 'DESC_OPT_MAX'),
+        }
+        for name, konstanten in module.items():
+            with self.subTest(datei=name):
+                mod = importlib.import_module(name)
+                self.assertIs(mod.serp_limits, sl,
+                              f'{name} importiert serp_limits nicht')
+                soll = {
+                    'DESC_MIN': sl.DESC_MIN_ZEICHEN,
+                    'DESC_MAX': sl.DESC_MAX_ZEICHEN,
+                    'DESC_OPT_MIN': sl.DESC_OPT_MIN_ZEICHEN,
+                    'DESC_OPT_MAX': sl.DESC_MAX_ZEICHEN,
+                    'META_DESC_OPT_MIN': sl.DESC_OPT_MIN_ZEICHEN,
+                    'META_DESC_OPT_MAX': sl.DESC_MAX_ZEICHEN,
+                }
+                for k in konstanten:
+                    self.assertEqual(getattr(mod, k), soll[k],
+                                     f'{name}.{k} weicht von der SSOT ab')
+
+    def test_keine_datei_setzt_das_fenster_als_zahl(self):
+        """Gegenprobe zur Liste oben: die Zahlen 155/156/160/165 dürfen in
+        keiner Description-Konstante mehr als Literal stehen. Kommentare
+        sind ausgenommen – dort DARF die Geschichte stehen."""
+        verboten = re.compile(
+            r'^\s*(?:DESC|META_DESC|PIN_DESC)[A-Z_]*(?:MIN|MAX)\s*=\s*\d+',
+            re.MULTILINE)
+        treffer = {}
+        for pfad in sorted((REPO / 'scripts').glob('*.py')):
+            if pfad.name in ('serp_limits.py', 'skills_vertrag.py',
+                             'length_policy.py', 'pinterest_check.py',
+                             'pinterest_duplicate_guard.py',
+                             'pinterest_pin_text_sync.py'):
+                continue  # SSOT, Vertragsmaß, Pinterest-eigene Felder (≤500)
+            text = pfad.read_text(encoding='utf-8')
+            for m in verboten.finditer(text):
+                treffer.setdefault(pfad.name, []).append(m.group(0).strip())
+        erlaubt = {
+            'sitecheck_wache.py': [], 'seo_audit.py': [],
+            'metadaten_wache.py': [], 'seo_cockpit.py': [],
+            'meta_optimizer.py': [], 'keyword_optimizer.py': [],
+            'pinterest_seo_healer.py': [], 'quality_score.py': [],
+        }
+        unerwartet = {k: v for k, v in treffer.items() if k not in erlaubt}
+        self.assertEqual(unerwartet, {},
+                         'neue eigene Description-Grenze(n) gefunden – bitte '
+                         'an serp_limits binden statt Zahl kopieren')
+
 
 if __name__ == '__main__':
     unittest.main()

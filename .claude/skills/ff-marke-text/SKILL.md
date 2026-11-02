@@ -67,6 +67,47 @@ ist wörtlich aus `CLAUDE.md` übernommen.
 | Wo muss die Offenlegung hin, was genau muss sie sagen? | `references/kennzeichnung.md` (#623) |
 | Pin-Ziel defekt, Hashtag-Zahl, Instagram-Winkel blind? | `references/verbreitung.md` (C37, C43, #716) |
 
+## Fremd-Skills: Marketing-Pack
+
+Diese Anlage liefert Handwerk, das `scripts/social_copywriter.py` und die
+Redaktions-Engine nicht abdecken. **Sie ist Vorschlag, nicht Vertrag** – was in
+diesem Skill und in `data/social/channels.yaml` steht, gilt (K3 verlangt seit
+01.11.2026, dass **jeder** installierte Skill in einem Router steht: ein Skill,
+den niemand nennt, kostet bei jedem Start Beschreibung und wird nie gewählt).
+
+Das SEO-Paket `claude-seo` liegt nicht hier, sondern am Hub `seo` (siehe
+`CLAUDE.md`, „Fremd-Skills mit eigenem Router"): es hat eigene Werkzeuge und eine
+eigene Zuständigkeit.
+
+### Marketing-Pack (`coreyhaines31/marketingskills`, MIT)
+
+Elf Skills aus dieser Anlage. Sie decken
+die Arbeit an Auffindbarkeit und Wettbewerb ab; die Grenze steht in der letzten
+Spalte, weil diese Skills den Markt beschreiben, nicht dieses Haus.
+
+| Auftrag | Skill | Grenze im Haus |
+|---|---|---|
+| Seitenaufbau, Navigation, interne Verlinkung | `site-architecture` | kein URL-Umbau ohne Redirect-Plan, keine Taxonomie-Archive (D17) |
+| Technisches SEO-Audit | `seo-audit` | der Befund ist ein Vorschlag; Wahrheit sind die Gates (`npm run seo:check`) |
+| Strukturierte Daten | `schema` | JSON-LD entsteht im Template, nicht als Text im Artikel |
+| Viele Seiten aus einer Vorlage | `programmatic-seo` | nur über die Engine (`ff-produzieren`), nie als Textlawine |
+| Auffindbarkeit in KI-Antworten | `ai-seo` | keine Zitierquoten behaupten, die niemand gemessen hat (D15) |
+| Wettbewerber vergleichen | `competitor-profiling`, `competitors` | es gelten die Vergleichsgrundsätze, nicht die des Skills |
+| Themenplan, Ideen, Kalender | `content-strategy` | Slots und Quote rechnet `ff-produzieren` |
+| Werbetext, Headline, CTA | `copywriting` | ZEIT-Latte und eigene Stimme gewinnen (D3) |
+| Bestehenden Text nachschärfen | `copy-editing` | Lesbarkeit misst `lesbarkeit_schreiber.py` (D14) |
+
+Nicht hier geroutet: `analytics` (Messung – gesperrt, siehe `ff-pruefen`),
+`cro` und `animate` (Oberfläche – siehe `ff-oberflaeche`).
+
+### Pflege beider Anlagen
+
+Nur über den CLI (`npx -y skills@1.7.4 add|update|remove`), danach Lizenztext und
+Register nachziehen und `npm run skills:check` fahren. Wer verkleinert, entfernt
+Skills; Beschreibungen kürzen hält nicht, weil `npx skills update` sie
+überschreibt. Der K9-Vorrat ist mit dem SEO-Paket aufgebraucht: 56 KB sind die
+Grenze, und sie wird nicht stillschweigend verschoben.
+
 ## Kommando-Notausgang
 
 ```bash

@@ -8,6 +8,15 @@
 #   · .claude/skills/impeccable/scripts – vendored Skill-Tooling (Upstream
 #     v4.x, wird bei Skill-Updates überschrieben, läuft ausschließlich im
 #     Betreiber-Browser – kein Produktionscode der Website).
+#   · .claude/skills/seo/scripts – vendorte claude-seo-Runtime (Upstream
+#     v2.5.0, MIT, wird bei `npx skills update` überschrieben). Aufgenommen am
+#     01.11.2026, weil `google_auth.py` in `_write_private_json()` die
+#     Tokendatei korrekt mit os.open(0o600) + fchmod schreibt und die Query
+#     `py/clear-text-storage-sensitive-data` Dateirechte nicht auswertet.
+#     Die Datei ist KEIN toter Winkel: `scripts/clear_text_logging_guard.py`
+#     liest sie weiter und weist sie als Fremdcode-Befund aus (Punkt 2 seines
+#     Vertrags). Entscheidung und Nachlauf: CLAUDE-SEO-AUFNAHME-26-SKILLS-
+#     HIGHEND-2026-11-01.md.
 #   · node_modules – Abhängigkeiten (Dependabot wacht separat über Versionen).
 #
 # Eigener Produktionscode (static/, layouts/, newsletter-worker/, scripts/,
@@ -36,8 +45,13 @@ packs:
   javascript:
     - codeql/javascript-queries:AlertSuppression.ql
 
-paths_ignore:
+# Der Schlüssel heißt `paths-ignore` (Bindestrich), nicht `paths_ignore`.
+# Bis 01.11.2026 stand hier die Unterstrich-Variante: CodeQL liest sie
+# nicht, die Liste war damit wirkungslos – aufgefallen erst, als der
+# vendorte claude-seo-Code trotz Eintrag im SARIF auftauchte.
+paths-ignore:
   - "**/*.min.js"
   - "**/*.min.css"
   - ".claude/skills/impeccable/scripts/**"
+  - ".claude/skills/seo/scripts/**"
   - "node_modules/**"

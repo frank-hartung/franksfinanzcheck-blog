@@ -5,8 +5,8 @@
   "generator_version": 1,
   "sources": {
     "data/design/handoff.yaml": "fd0af6448e659e1514b54e5222d8c1f5c4d52c77136e8ed81d02f69a081be3f6",
-    "data/design/regelwerk.yaml": "fe66a5df8592f766f5d483e8c61d1e7788becc2ad9f409a3c4ba4060a169f03c",
-    "DESIGN.md": "58fb185a5acfaf803dbf2b65ad93223dc388079591b83e6f16e154b0fc66b646",
+    "data/design/regelwerk.yaml": "651ed69018ec1c78b6988b39f5921524d65ee7babf174147203b1adadd44740b",
+    "DESIGN.md": "ec9b84e992c9c22109555212088d3f34b7006e18121aafe9f89e2dd7d45e2671",
     "PRODUCT.md": "3073948f7c99aa67e0126a1870c7d329738d2353b7b7bcd948e3a433f5ec6010",
     "figma/design-system-builder/source.js": "abe47696d82e15e5c208c31b5e311f94d53f2aba57a6eabcdee3bc5c61ea987d"
   },

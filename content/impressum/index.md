@@ -2,6 +2,7 @@
 title: "Impressum"
 description: "Impressum gemäß § 5 DDG und § 18 Abs. 2 MStV – mit Anbieterkennzeichnung und Pflichtangaben für vermittelte Versicherungsangebote."
 draft: false
+lastmod: 2026-10-27
 showToc: false
 ---
 

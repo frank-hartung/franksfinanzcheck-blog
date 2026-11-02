@@ -45,6 +45,14 @@ PRÜFUNGEN
       KRITISCH/FEST führt. Immer eine Warnung mit Schlusszeile, nie ein Befund:
       Zeichnen ist ein Betreiberakt, und ein Gate, das dafür rot wird, bestraft
       die falsche Seite (Issue #316 – der HARD STOP traf die Content-Engine).
+  K9  Beschreibungs-Budget: die Summe aller `description`-Zeichen liegt unter
+      `BESCHREIBUNG_KB_MAX`. Jede Beschreibung steht dauerhaft im Kontext jeder
+      Session; 53 nachgeladene Fremd-Skills sind eine Entscheidung über rund
+      12.000 Tokens, nicht über 53 Dateien.
+  K10 Herkunft der Zusatzdateien: liegt in einem Fremd-Ordner eine `*-de.md`,
+      `evals-de.json` oder `SKILL_DE.md`, die nicht im Lock steht, ist sie
+      repo-eigen – und der nächste `npx skills update` löscht sie still. Am
+      01.11.2026 so geschehen mit der deutschen `copy-editing`-Ausgabe.
 
 Aufruf:
   python3 scripts/skills_vertrag.py                  # prüfen (Befund = Exit 1)
@@ -92,6 +100,20 @@ SIEGEL_PFLICHT = ("scripts/skills_vertrag.py", "data/skill_lizenzen.json")
 # eine im Upstream-Ordnerbehälter zu lesende Sonderklausel – braucht denselben
 # Ausnahmekern wie „unbekannt“: Grund, Entscheidung, Frist.
 FREIE_LIZENZEN = ("mit", "apache-2.0")
+# Die Oberklasse aller Beschreibungen. Am 01.11.2026 lag der Bestand bei 75
+# Skills × bis zu 1.024 Zeichen ≈ 14.000 Tokens Dauerlast in jeder Session –
+# eine Bibliothek, die jeden Auftrag mitbezahlt. Das Budget ist der Grund,
+# warum ein weiterer Schwung nur mit Entscheidung dazukommt (K9).
+BESCHREIBUNG_KB_MAX = 56.0
+# K10: Dateien, die im Fremd-Ordner bleiben dürfen, obwohl der CLI ihn beim
+# nächsten `update` ersetzt. `SKILL_DE.md` ist die repo-eigene deutsche
+# Ausgabe von `copy-editing` (SKILL_DE.md + evals-de.json + vier
+# references/*-de.md, seit 21.09.2026). Am 01.11.2026 hat `npx skills update`
+# sie gelöscht, ohne dass eine Wache etwas merkte – der Vertrag war grün.
+NACHWEIS_DATEIEN = ("SKILL_DE.md",)
+NACHWEIS_MUSTER = ("-de.md", "evals-de.json")
+# Wo die umgezogenen Ergänzungen verzeichnet sind (K10).
+ERGAENZUNGEN = Path("data/skill_ergaenzungen.json")
 
 Fund = namedtuple("Fund", "klasse pfad stelle meldung")
 Warn = namedtuple("Warn", "klasse pfad stelle meldung")
@@ -603,18 +625,129 @@ def k8_siegel(root: Path) -> list[Warn]:
     return warnungen
 
 
+# ---------------------------------------------------------------- K9 Beschreibungs-Budget
+def k9_beschreibungs_budget(root: Path) -> list[Fund]:
+    """Die Beschreibungen sind der Preis der Bibliothek – und niemand sieht ihn.
+
+    Jede `description` steht in jeder Session im Kontext, unabhängig vom Auftrag;
+    am 01.11.2026 waren das bei 75 Skills rund 14.000 Tokens. Ein Befund ist
+    deshalb nicht die einzelne lange Beschreibung (die prüft K2), sondern die
+    Summe: Wer sie überschreitet, entscheidet über Vorladelast, nicht über Dateien.
+    """
+    ordner = root / SKILL_ORDNER
+    if not ordner.is_dir():
+        return []
+    zeichen = 0
+    for d in sorted(p for p in ordner.iterdir() if p.is_dir()):
+        fm = frontmatter(_zeilen(root, f"{SKILL_ORDNER}/{d.name}/SKILL.md"))
+        zeichen += len(" ".join(str(fm.get("description", "")).split()))
+    kilo = zeichen / 1024
+    if kilo <= BESCHREIBUNG_KB_MAX:
+        return []
+    return [Fund("K9", str(SKILL_ORDNER), f"{kilo:.1f} KB",
+                 f"alle Beschreibungen zusammen sind {kilo:.1f} KB (~{zeichen // 4} Tokens) und "
+                 f"liegen über dem Budget von {BESCHREIBUNG_KB_MAX:.0f} KB. Diese Last zahlt jede "
+                 "Session, auch wenn der Skill nie gelesen wird: Beschreibungen kürzen, Skills "
+                 "entfernen oder die Grenze bewusst anheben – aber nicht stillschweigend wachsen lassen.")]
+
+
+# ---------------------------------------------------------------- K10 Zusatzdateien
+def _ist_nachweis(name: str) -> bool:
+    """Trägt diese Datei einen repo-eigenen Zusatz? Nur dann ist sie gefährdet."""
+    return name in NACHWEIS_DATEIEN or any(name.endswith(m) for m in NACHWEIS_MUSTER)
+
+
+def k10_zusatzdateien(root: Path) -> tuple[list[Fund], list[Warn]]:
+    """Ein Update, das fremde Ordner neu schreibt, löscht Eigenes – laut oder nie.
+
+    Der Skills-CLI kennt nur, was im Upstream liegt, und schreibt beim `update`
+    den ganzen Ordner neu. Am 01.11.2026 hat `npx -y skills@1.7.4 add … --skill '*'`
+    die deutsche `copy-editing`-Ausgabe entfernt (SKILL_DE.md, evals-de.json,
+    vier references/*-de.md) – und der Vertrag blieb grün, weil er nur Lizenzen
+    und `ff-*` kannte.
+
+    Die Heilung ist nicht „retten und hoffen", sondern **umziehen**: die
+    Ergänzung gehört in ein `ff-*`-Skill, wo sie niemand überschreibt. Der
+    geschlossene Fall steht deshalb mit Ziel in `data/skill_ergaenzungen.json`,
+    und diese Prüfung fragt ab jetzt genau eine Sache: Liegt jede dort
+    verzeichnete Datei **noch** da, wo sie nicht hingehört (Warnung), oder ist
+    sie an ihrem Ziel (still)? Fehlt sie an beiden Orten, ist das ein Befund –
+    dann war es ein `update`, kein Umzug.
+
+    Dazu bleibt die alte Warnung für jeden **neuen** Fund in einem Fremd-Ordner:
+    Wer künftig eine `*-de.md` in fremdes Haus legt, hört das sofort.
+    """
+    funde: list[Fund] = []
+    warnungen: list[Warn] = []
+    ordner = root / SKILL_ORDNER
+    if not ordner.is_dir():
+        return funde, warnungen
+
+    # 1) Was liegt JETZT repo-eigen in einem Fremd-Ordner? (Warnung, ein Fund je Ordner)
+    for d in sorted(p for p in ordner.iterdir() if p.is_dir()):
+        if d.name.startswith(EIGEN_PRÄFIX):
+            continue
+        eigene = [datei.relative_to(d).as_posix() for datei in sorted(d.rglob("*"))
+                  if datei.is_file() and _ist_nachweis(datei.name)]
+        if not eigene:
+            continue
+        warnungen.append(Warn("K10", f"{SKILL_ORDNER}/{d.name}", str(len(eigene)),
+                              f"repo-eigene Datei(en) in einem Fremd-Ordner – `npx skills update` "
+                              f"ersetzt diesen Ordner und löscht sie: {', '.join(eigene)}. Nach jedem "
+                              "Update `git status .claude/skills` prüfen; dauerhaft gehört die Regel "
+                              "in einen `ff-*`-Skill, nicht in fremdes Haus."))
+
+    # 2) Was stand früher dort? Jeder Eintrag muss an seinem Ziel angekommen sein.
+    text = _text(root, ERGAENZUNGEN)
+    if text is None:
+        return funde, warnungen
+    try:
+        register = json.loads(text)
+    except ValueError as enc:
+        return [Fund("K10", str(ERGAENZUNGEN), "", f"unlesbar: {enc} – ohne Register ist "
+                                                   "„verschwunden“ von „umgezogen“ nicht zu trennen.")], warnungen
+    staende = (register or {}).get("staende") or []
+    if not isinstance(staende, list):
+        return [Fund("K10", str(ERGAENZUNGEN), "staende", "kein Verzeichnis von Ständen.")], warnungen
+    for stand in staende:
+        if not isinstance(stand, dict):
+            funde.append(Fund("K10", str(ERGAENZUNGEN), "", "Eintrag ohne Angaben."))
+            continue
+        for datei in stand.get("dateien") or []:
+            alt_pfad = str(datei.get("alt") or "")
+            ziel = str(datei.get("ziel") or "")
+            if not alt_pfad:
+                funde.append(Fund("K10", str(ERGAENZUNGEN), str(stand.get("fall")),
+                                  "Eintrag ohne `alt` – ohne Herkunft ist der Umzug nicht prüfbar."))
+                continue
+            if ziel and (root / ziel).is_file():
+                continue                      # angekommen
+            if (root / alt_pfad).is_file():
+                warnungen.append(Warn("K10", alt_pfad, "",
+                                      "liegt wieder (oder noch) im Fremd-Ordner – der nächste "
+                                      f"`npx skills update` löscht sie. Ziel laut Register: `{ziel or '—'}`."))
+                continue
+            funde.append(Fund("K10", alt_pfad, "",
+                              "fehlt und ist am Ziel nicht angekommen – das ist kein Umzug, sondern "
+                              f"ein Verlust durch ein `update`. Ziel laut Register: `{ziel or '—'}`; "
+                              "aus Git wiederherstellen und umziehen."))
+    return funde, warnungen
+
+
 # ---------------------------------------------------------------- Bilanz
 def befunde(root: Path, stichtag: date | None = None) -> tuple[list[Fund], list[Warn], int]:
     tag = stichtag or date.today()
     alle: list[Fund] = []
     warnungen: list[Warn] = []
     geprueft = 0
-    for funde in (k1_budget(root), k2_form(root), k3_erreichbarkeit(root), k5_befehle(root), k7_verweise(root)):
+    for funde in (k1_budget(root), k2_form(root), k3_erreichbarkeit(root), k5_befehle(root),
+                  k7_verweise(root), k9_beschreibungs_budget(root)):
         alle += funde
     k4_f, k4_w = k4_herkunft(root)
     k6_f, k6_w = k6_lizenz(root, tag)
-    alle += k4_f + k6_f
-    warnungen += k4_w + k6_w + k8_siegel(root)
+    k10_f, k10_w = k10_zusatzdateien(root)
+    alle += k4_f + k6_f + k10_f
+    warnungen += k4_w + k6_w + k10_w + k8_siegel(root)
     ordner = root / SKILL_ORDNER
     geprueft = len([p for p in ordner.iterdir() if p.is_dir()]) if ordner.is_dir() else 0
     return alle, warnungen, geprueft
@@ -860,7 +993,64 @@ def selftest() -> int:
         if not any(f.klasse == "K6" and "vorbehalten" in f.meldung for f in funde):
             fehler.append("K6: eine Lizenz außerhalb des Freie-Sets ohne Ausnahme bleibt ohne Befund.")
 
-        # 16) Der Selbsttest prüft sich selbst, nicht das Netz: kein Befund
+        # 16) K9: Summe der Beschreibungen über dem Budget – nicht die einzelne
+        #     Beschreibung (das ist K2), sondern die Vorladelast der Bibliothek.
+        viele = {f"fremd-{i}": "---\nname: fremd-%d\ndescription: „%s“\n---\n\n# F\n" % (i, "z" * 400)
+                 for i in range(int(BESCHREIBUNG_KB_MAX * 1024 / 400) + 2)}
+        wurzel = _fixture(Path(tmp) / "k9", fremd=viele,
+                          lock={"version": 1, "skills": {n: {"source": "a/b", "skillPath": "s/SKILL.md"}
+                                                         for n in viele}},
+                          lizenz={"schema": 1, "eigene": {"skills": ["ff-eins"]},
+                                  "skills": {n: {"quelle": "a/b", "lizenz": "MIT", "notiz": ""}
+                                             for n in viele}})
+        for n in viele:
+            _schreibe(wurzel, f"{SKILL_ORDNER}/{n}/LICENSE.txt", "MIT License\n")
+        funde, _, _ = befunde(wurzel, stichtag=date(2027, 1, 15))
+        geprueft += 1
+        if not any(f.klasse == "K9" for f in funde):
+            fehler.append("K9: Beschreibungs-Summe über dem Budget bleibt ohne Befund.")
+
+        # 17) K10: drei Zustände eines Umzugs – angekommen (still), Rückfall
+        #     (Warnung), Verlust (Befund). Der echte Fall copy-editing → ff-lektorat.
+        def _k10_wurzel(marke: str, *, alt_datei: bool, ziel_datei: bool) -> Path:
+            w = _fixture(Path(tmp) / marke,
+                         fremd={"fremd-skill": "---\nname: fremd-skill\ndescription: „d“\n---\n\n# F\n"},
+                         lock={"version": 1, "skills": {"fremd-skill": {"source": "a/b",
+                                                                       "skillPath": "s/SKILL.md"}}},
+                         lizenz={"schema": 1, "eigene": {"skills": ["ff-eins", "ff-neu"]},
+                                 "skills": {"fremd-skill": {"quelle": "a/b", "lizenz": "MIT"}}})
+            _schreibe(w, f"{SKILL_ORDNER}/fremd-skill/LICENSE.txt", "MIT License\n")
+            _schreibe(w, str(ERGAENZUNGEN), json.dumps({"schema": 1, "staende": [{
+                "fall": "x", "dateien": [{"alt": f"{SKILL_ORDNER}/fremd-skill/SKILL_DE.md",
+                                          "ziel": f"{SKILL_ORDNER}/ff-neu/SKILL_DE.md"}]}]}))
+            _schreibe(w, f"{SKILL_ORDNER}/ff-neu/SKILL.md",
+                      "---\nname: ff-neu\ndescription: \"d\"\n---\n\n# N\n")
+            if alt_datei:
+                _schreibe(w, f"{SKILL_ORDNER}/fremd-skill/SKILL_DE.md", "# Eigenes\n")
+            if ziel_datei:
+                _schreibe(w, f"{SKILL_ORDNER}/ff-neu/SKILL_DE.md", "# Eigenes\n")
+            return w
+
+        # angekommen: still
+        funde, warnungen, _ = befunde(_k10_wurzel("k10a", alt_datei=False, ziel_datei=True),
+                                      stichtag=date(2027, 1, 15))
+        geprueft += 1
+        if [f for f in funde + warnungen if f.klasse == "K10"]:
+            fehler.append("K10: ein abgeschlossener Umzug darf nichts melden.")
+        # Rückfall: Warnung, kein Befund
+        funde, warnungen, _ = befunde(_k10_wurzel("k10b", alt_datei=True, ziel_datei=True),
+                                      stichtag=date(2027, 1, 15))
+        geprueft += 1
+        if [f for f in funde if f.klasse == "K10"] or not [w for w in warnungen if w.klasse == "K10"]:
+            fehler.append("K10: eine zurückgelegte Datei muss warnen, nicht blockieren.")
+        # Verlust: Befund
+        funde, _, _ = befunde(_k10_wurzel("k10c", alt_datei=False, ziel_datei=False),
+                              stichtag=date(2027, 1, 15))
+        geprueft += 1
+        if not [f for f in funde if f.klasse == "K10" and "Verlust" in f.meldung]:
+            fehler.append("K10: eine verschwundene Ergänzung ist ein Befund, keine Warnung.")
+
+        # 18) Der Selbsttest prüft sich selbst, nicht das Netz: kein Befund
         #     hängt an einer Wanduhr (Datum ist gesetzt, nicht geraten).
         funde_heute, _, _ = befunde(Path(tmp) / "sauber")
         geprueft += 1
@@ -877,7 +1067,7 @@ def selftest() -> int:
           "Name und Beschreibung, verwaiste Referenz, ff-* im Lock, Fremd-Skill ohne Herkunft, "
           "toter Befehl, Vorlagen-Ausnahme, Lizenztext, Ausnahme ohne und mit abgelaufener Frist, "
           "Lizenz außerhalb des Freie-Sets, toter Regelwerk-Verweis, Siegelumfang und fehlende "
-          "Zeichnung, Uhr-Unabhängigkeit).")
+          "Zeichnung, Beschreibungs-Budget, Umzug/Rückfall/Verlust einer Zusatzdatei, Uhr-Unabhängigkeit).")
     return 0
 
 

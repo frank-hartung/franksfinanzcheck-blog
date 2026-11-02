@@ -1,12 +1,9 @@
 ---
-lastmod: 2026-10-28
+lastmod: 2026-11-02
 title: "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026"
 description: "Haus und Hausrat absichern: Worauf Eigentümer und Mieter bei Wohngebäude, Hausrat, Elementarschutz und Versicherungssumme achten sollten."
-date: 2026-10-28T08:36:47Z
-draft: true
-cadence_wait: true
-cadence_demoted: 2026-10-28T08:37:58Z
-cadence_grund: "ymyl-review (#826): Fachprüfung, Belegkette und Faktencheck am 2026-10-30 abgeschlossen – Re-Queue (nächster Publikationstag entscheidet)"
+date: 2026-11-02T06:11:38Z
+draft: false
 endredaktion_status: freigegeben
 tags: ["Wohngebäudeversicherung", "Hausratversicherung"]
 categories: ["Ratgeber"]

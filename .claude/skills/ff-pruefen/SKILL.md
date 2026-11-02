@@ -62,12 +62,21 @@ schützen**. Die Details in `references/` sind wörtlich aus `CLAUDE.md`
 ## Kommando-Notausgang
 
 ```bash
-python3 scripts/skills_vertrag.py            # dieser Skill-Vertrag (K1–K6)
+python3 scripts/skills_vertrag.py            # dieser Skill-Vertrag (K1–K8)
 python3 -m unittest discover -s scripts/tests -p "test_skills_vertrag.py"
 python3 scripts/skript_syntax_wache.py       # liegt der Stand kompilierfähig?
 python3 scripts/wachen_vertrag.py            # halbe Aufrufe, halbe Konstanten
 npm run manifest:check                       # Manifest + Lockfile
 ```
+
+## Fremd-Skill außer Betrieb: `analytics`
+
+Der Skill `analytics` (coreyhaines31/marketingskills) beschreibt Tracking-Einbau –
+Ereignisse, UTM, Tag-Manager, Auswertung. Dieses Repo hat **keine**
+Besucher-Messung und bekommt keine nachgerüstet (Fremdmessung-Sperre, C40,
+`scripts/fremdmessung_sperre.py`). Gelesen wird er, um zu erkennen, was hier
+gesperrt ist – nie, um es umzusetzen. Wer ihn anwendet, baut die Anbindung
+wieder ein, die am 19.10.2026 restlos entfernt wurde (#806).
 
 ## Nicht zuständig für
 

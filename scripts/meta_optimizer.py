@@ -43,7 +43,8 @@ DESC_MIN, DESC_MAX = serp_limits.DESC_MIN_ZEICHEN, serp_limits.DESC_MAX_ZEICHEN
 # Optimale CTR-Bereiche (für den 100er-Score im Meta-Report). 120 ist eine
 # Vorliebe, keine Grenze: die Grenze ist die SSOT.
 TITLE_OPT_MIN, TITLE_OPT_MAX = 50, 60
-DESC_OPT_MIN, DESC_OPT_MAX = 120, DESC_MAX
+DESC_OPT_MIN = serp_limits.DESC_OPT_MIN_ZEICHEN
+DESC_OPT_MAX = DESC_MAX
 KEYWORDS_MIN = 3
 
 
