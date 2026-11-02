@@ -36,6 +36,7 @@ from __future__ import annotations
 
 import ast
 import os
+import importlib.util
 import subprocess
 import sys
 import tempfile
@@ -241,7 +242,53 @@ class Vorfall766BleibtGeheilt(unittest.TestCase):
                      "waehle_faustregel", "ersetze_generische_faustregel"):
             self.assertIn(name, quelle, f"{name} fehlt – halbe Fassung (#783)")
 
+    def test_selbsttest_unterscheidet_grundlage_von_defekt(self):
+        """Die Diagnose darf kein Schlupfloch werden.
+
+        Ohne PyYAML meldet der Selbsttest „Prüfgrundlage fehlt" (01.11.2026 –
+        sonst hält ein Beitragender eine intakte Wache für kaputt und eine
+        unvollständige Umgebung für einen Befund). Aber ein echter Logikfehler muss trotz
+        installierter Grundlage weiter hart als „Wache defekt" beantwortet
+        werden: Wer die Diagnose weichredet, hätte eine Unterdrückung im
+        Selbsttest gebaut – genau das, was Regel 6 verbietet.
+        """
+        import contextlib
+        import io
+        import redaktions_standard as rs
+
+        original = (rs.SELFTEST, rs._messgrundlage_fehlt)
+        try:
+            rs.SELFTEST = [("Sabotage-falsche-erwartung", lambda: False, True)]
+            for grundlage, erwartet in ((False, "die Wache selbst ist defekt"),
+                                        (True, "Prüfgrundlage fehlt")):
+                rs._messgrundlage_fehlt = lambda fixed=grundlage: fixed
+                ausgabe = io.StringIO()
+                with contextlib.redirect_stdout(ausgabe):
+                    ruckgabe = rs.selftest()
+                text = ausgabe.getvalue()
+                self.assertEqual(2, ruckgabe,
+                                 f"Grundlage={grundlage}: Exit {ruckgabe}, erwartet 2 "
+                                 "(keine Messung ist kein Grün)")
+                self.assertIn(erwartet, text,
+                              f"Grundlage={grundlage}: Urteil trifft nicht zu – " + text[:180])
+                if not grundlage:
+                    self.assertNotIn("Prüfgrundlage fehlt", text,
+                                     "echter Defekt weggeredet")
+        finally:
+            rs.SELFTEST, rs._messgrundlage_fehlt = original
+
     def test_selbsttest_der_redaktions_wache_laeuft(self):
+        # Die Wache parst im Selbsttest Frontmatter über den Publikations-Vertrag,
+        # und der braucht PyYAML. Ohne Grundlage meldet er fail-closed Exit 2 –
+        # das ist richtig so, aber es ist keine kaputte Wache, sondern eine
+        # unvollständige Umgebung. Der Skip nennt den Grund und das Kommando,
+        # damit die Unterscheidung nicht wieder denselben Umweg kostet
+        # (01.11.2026: ein Agent hielt die Wache für logisch defekt und
+        #  schrieb das in einen Bericht, statt in die Umgebung zu schauen).
+        if importlib.util.find_spec("yaml") is None:
+            self.skipTest("PyYAML fehlt im Interpreter des Tests – Selbsttest der "
+                          "Redaktions-Wache braucht ihn (fail-closed ohne). Beheben: "
+                          "python3 -m pip install -r requirements-ci.txt")
         ergebnis = subprocess.run([sys.executable, REDAKTION, "--selftest"],
                                   cwd=WURZEL, capture_output=True, text=True,
                                   timeout=600)

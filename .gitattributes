@@ -93,7 +93,10 @@ content/posts/*-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/ind
 # selbst: `merge=binary` macht den Text-Zusammenschnitt technisch unmoeglich –
 # bei parallelen Aenderungen entscheidet EINE Fassung, und der Selbsttest der
 # Wache beweist danach, dass sie in sich stimmt (scripts/wachen_vertrag.py).
-# Die Liste ist die Signaturliste aus data/integrity_lock.json.
+# Die Liste ist die Signaturliste aus data/integrity_lock.json – seit dem
+# 01.11.2026 auch für `scripts/skills_vertrag.py`, die Wache über Kernbudget
+# und Lizenzdeckung (ihr Register `data/skill_lizenzen.json` und der
+# Skills-Lock stehen weiter oben unter derselben Regel).
 scripts/affiliate_integrity_gate.py merge=binary
 scripts/affiliate_marketer.py merge=binary
 scripts/artefakt_waechter.py merge=binary
@@ -116,6 +119,7 @@ scripts/publikations_vertrag.py merge=binary
 scripts/redaktions_standard.py merge=binary
 scripts/reserve_artifacts.py merge=binary
 scripts/shortcode_guard.py merge=binary
+scripts/skills_vertrag.py merge=binary
 scripts/stil_guard.py merge=binary
 scripts/tag_casing.py merge=binary
 scripts/wachen_vertrag.py merge=binary
