@@ -404,3 +404,4 @@
 {"date": "2026-11-01", "kritisch": 0, "fest": 2, "modus": "heal", "geheilt": ["data/skill_lizenzen.json", "data/skill_portfolio.yaml"], "head": "957b02b4a"}
 {"date": "2026-11-01", "kritisch": 0, "fest": 0, "modus": "verify"}
 {"date": "2026-11-01", "kritisch": 0, "fest": 2, "modus": "heal", "geheilt": ["data/skill_lizenzen.json", "data/skill_portfolio.yaml"], "head": "4366b11"}
+{"date": "2026-11-02", "kritisch": 0, "fest": 4, "modus": "set-current", "geaendert": ["scripts/publikations_vertrag.py", "scripts/redaktions_standard.py", "scripts/skills_vertrag.py", "scripts/wachen_vertrag.py"]}

@@ -39,6 +39,8 @@ Ausführung:
     npm run test:skills
 """
 
+import ast
+import hashlib
 import json
 import os
 import subprocess
@@ -481,6 +483,59 @@ class VerdrahtungTests(unittest.TestCase):
                            capture_output=True, text=True, timeout=300)
         self.assertEqual(0, r.returncode, r.stdout + r.stderr)
         self.assertIn("selftest OK", r.stdout)
+
+
+class SiegelTests(unittest.TestCase):
+    """K8 (#1001) – alle vier Schutzdateien des Skill-Regelkerns bleiben im Siegel."""
+
+    def test_k8_warnt_ohne_zu_blockieren_wenn_siegel_fehlt(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            wurzel = sv._fixture(
+                sv.Path(tmp) / "k8",
+                guard_fest=["assets/css/extended/custom.css"],
+                siegel={"schema": 1, "files": {}},
+            )
+            funde, warnungen = _befunde(wurzel)
+            self.assertEqual([], [f for f in funde if f.klasse == "K8"])
+            self.assertEqual(len(sv.SIEGEL_PFLICHT),
+                             sum(1 for w in warnungen if w.klasse == "K8"))
+
+    def test_siegelzusage_bleibt_stehen(self):
+        wurzel = sv.Path(WURZEL)
+        self.assertEqual(
+            (
+                "scripts/skills_vertrag.py",
+                "data/skill_lizenzen.json",
+                "scripts/skills_portfolio.py",
+                "data/skill_portfolio.yaml",
+            ),
+            sv.SIEGEL_PFLICHT,
+        )
+        baum = ast.parse((wurzel / sv.SIEGEL_GUARD).read_text(encoding="utf-8"))
+        fest: set[str] = set()
+        for knoten in baum.body:
+            if (isinstance(knoten, ast.Assign)
+                    and isinstance(knoten.targets[0], ast.Name)
+                    and knoten.targets[0].id == "FEST"):
+                fest = {ast.literal_eval(e) for e in knoten.value.elts}
+        lock = json.loads((wurzel / sv.SIEGEL_LOCK).read_text(encoding="utf-8"))
+        files = lock.get("files") or {}
+        gitattributes = {
+            ln.strip()
+            for ln in (wurzel / ".gitattributes").read_text(encoding="utf-8").splitlines()
+            if ln.strip() and not ln.strip().startswith("#")
+        }
+        for pfad in sv.SIEGEL_PFLICHT:
+            self.assertIn(pfad, fest, f"{pfad} muss dauerhaft in integrity_guard.FEST stehen")
+            self.assertIn(pfad, files, f"{pfad} muss in data/integrity_lock.json gezeichnet sein")
+            erwartet = hashlib.sha256((wurzel / pfad).read_bytes()).hexdigest()
+            eintrag = files[pfad]
+            gezeichnet = eintrag.get("sha256") if isinstance(eintrag, dict) else eintrag
+            self.assertEqual(erwartet, gezeichnet, f"{pfad}: Siegel-Hash weicht vom Arbeitsbaum ab")
+            self.assertIn(f"{pfad} merge=binary", gitattributes,
+                          f"{pfad} muss in .gitattributes mit merge=binary geschützt sein")
+        self.assertEqual([], [w.kurz() for w in sv.k8_siegel(wurzel)],
+                         "K8 muss im gezeichneten Bestand vollständig verstummen")
 
 
 if __name__ == "__main__":

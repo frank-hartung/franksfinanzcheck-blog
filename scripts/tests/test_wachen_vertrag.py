@@ -35,6 +35,7 @@ Lauf: python3 -m unittest scripts.tests.test_wachen_vertrag
 from __future__ import annotations
 
 import ast
+import importlib.util
 import os
 import importlib.util
 import subprocess
@@ -45,6 +46,7 @@ import unittest
 WURZEL = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 WACHE = os.path.join(WURZEL, "scripts", "wachen_vertrag.py")
 REDAKTION = os.path.join(WURZEL, "scripts", "redaktions_standard.py")
+PUBLIKATION = os.path.join(WURZEL, "scripts", "publikations_vertrag.py")
 GATE = os.path.join(WURZEL, ".github", "workflows", "link-check.yml")
 
 sys.path.insert(0, os.path.join(WURZEL, "scripts"))
@@ -278,6 +280,11 @@ class Vorfall766BleibtGeheilt(unittest.TestCase):
             rs.SELFTEST, rs._messgrundlage_fehlt = original
 
     def test_selbsttest_der_redaktions_wache_laeuft(self):
+        if importlib.util.find_spec("yaml") is None:
+            self.skipTest(
+                "PyYAML fehlt in diesem lokalen Interpreter (requirements-ci.txt); "
+                "der Diagnose-Vertrag ohne PyYAML wird im Nachbartest geprüft"
+            )
         # Die Wache parst im Selbsttest Frontmatter über den Publikations-Vertrag,
         # und der braucht PyYAML. Ohne Grundlage meldet er fail-closed Exit 2 –
         # das ist richtig so, aber es ist keine kaputte Wache, sondern eine
@@ -292,7 +299,42 @@ class Vorfall766BleibtGeheilt(unittest.TestCase):
         ergebnis = subprocess.run([sys.executable, REDAKTION, "--selftest"],
                                   cwd=WURZEL, capture_output=True, text=True,
                                   timeout=600)
-        self.assertEqual(0, ergebnis.returncode, ergebnis.stdout + ergebnis.stderr)
+        ausgabe = ergebnis.stdout + ergebnis.stderr
+        self.assertEqual(0, ergebnis.returncode, ausgabe)
+        self.assertNotIn("Prüfgrundlage fehlt", ausgabe)
+
+    def test_fehlende_bibliothek_wird_als_grundlage_gemeldet_nicht_als_defekt(self):
+        """#1001: Fehlt PyYAML, bleibt der Lauf fail-closed (Exit 2, C33), nennt
+        aber ehrlich die fehlende Prüfgrundlage statt eines Wachen-Defekts."""
+        treiber = (
+            "import importlib.abc, importlib.util as _iu, runpy, sys\n"
+            "_orig = _iu.find_spec\n"
+            "_iu.find_spec = lambda n, *a, **k: ("
+            "None if (n == 'yaml' or n.startswith('yaml.')) else _orig(n, *a, **k))\n"
+            "class _Sperre(importlib.abc.MetaPathFinder):\n"
+            "    def find_spec(self, fullname, path, target=None):\n"
+            "        if fullname == 'yaml' or fullname.startswith('yaml.'):\n"
+            "            raise ModuleNotFoundError(\"No module named 'yaml'\")\n"
+            "        return None\n"
+            "sys.meta_path.insert(0, _Sperre())\n"
+            "sys.modules.pop('yaml', None)\n"
+            "sys.argv = [sys.argv[1], '--selftest']\n"
+            "runpy.run_path(sys.argv[0], run_name='__main__')\n"
+        )
+        for skript in (REDAKTION, PUBLIKATION):
+            ergebnis = subprocess.run(
+                [sys.executable, "-c", treiber, skript],
+                cwd=WURZEL, capture_output=True, text=True, timeout=600,
+            )
+            ausgabe = ergebnis.stdout + ergebnis.stderr
+            self.assertEqual(
+                2, ergebnis.returncode,
+                f"{os.path.basename(skript)}: ohne PyYAML muss Exit 2 (fail-closed) bleiben: {ausgabe}",
+            )
+            self.assertIn("Prüfgrundlage fehlt", ausgabe)
+            self.assertIn("requirements-ci.txt", ausgabe)
+            self.assertIn("nicht defekt", ausgabe)
+            self.assertNotIn("die Wache selbst ist defekt", ausgabe)
 
 
 class VerdrahtungTest(unittest.TestCase):
@@ -360,6 +402,35 @@ class VerdrahtungTest(unittest.TestCase):
         self.assertEqual(2, ergebnis.returncode, ergebnis.stdout + ergebnis.stderr)
         self.assertIn("steht nicht in KRITISCH oder FEST", ergebnis.stdout)
         self.assertEqual(vorher, _lies(os.path.join(WURZEL, "data", "integrity_lock.json")))
+
+    def test_w5_meldet_fehlendes_merge_binary_fuer_versiegelte_wache(self):
+        """#1001: Eine versiegelte Quelltext-Wache ohne merge=binary wird als W5 gemeldet."""
+        wurzel = _mini_baum({
+            "scripts/ganze.py": VOLLSTAENDIGE_WACHE,
+            "scripts/integrity_guard.py": (
+                '#!/usr/bin/env python3\nKRITISCH = set()\nFEST = {"scripts/ganze.py"}\n'
+            ),
+            ".gitattributes": "*.jsonl merge=union\n",
+        })
+        funde = wv.befunde(wurzel, ausnahmen={})
+        self.assertTrue(
+            any(f.klasse == "W5-MERGE-BINARY" and f.stelle == "scripts/ganze.py" for f in funde),
+            [f.kurz() for f in funde],
+        )
+        # Auch eine Ausnahme in wachen_vertrag_ausnahmen.yaml darf W5 nie zudecken.
+        verdeckt = wv.befunde(
+            wurzel,
+            ausnahmen={".gitattributes": {"grund": "Versuch", "seit": "2026-11-02"}},
+        )
+        self.assertTrue(any(f.klasse == "W5-MERGE-BINARY" for f in verdeckt))
+        # Gegenprobe: mit merge=binary verschwindet W5.
+        with open(os.path.join(wurzel, ".gitattributes"), "a", encoding="utf-8") as fh:
+            fh.write("scripts/ganze.py merge=binary\n")
+        self.assertEqual([], [f.kurz() for f in wv.befunde(wurzel, ausnahmen={})])
+
+    def test_alle_versiegelten_quelltext_wachen_tragen_merge_binary(self):
+        """Kein versiegeltes `scripts/*.py` in KRITISCH|FEST darf ohne merge=binary stehen."""
+        self.assertEqual([], [f.kurz() for f in wv.merge_binary_befunde(WURZEL)])
 
 
 if __name__ == "__main__":

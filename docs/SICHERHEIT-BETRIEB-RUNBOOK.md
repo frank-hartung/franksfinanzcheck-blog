@@ -935,16 +935,18 @@ Melder tot ist, ist jede andere Meldung nur zufällig zu sehen – auch diese.
 
 ---
 
-## G. Das Siegel über dem Regelkern der Skills (01.11.2026)
+## G. Das Siegel über dem Regelkern der Skills (01./02.11.2026, #1001/#1004)
 
 Seit dem Skill-Umbau meldet `scripts/skills_vertrag.py` in K8 den Siegelstand –
-als **Warnung mit Schlusszeile, nie als Befund**. Diese Seite hier ist der
-Auftrag, den die Warnung ankündigt. Der Grund für die Zurückhaltung derselbe wie
-bei Issue #316: Ein HARD STOP auf eine ungezeichnete Datei bestraft die
-Produktion, nicht den Austausch. Zeichnen bleibt ein Menschenakt.
+als **Warnung mit Schlusszeile, nie als Befund**. Der Grund für die
+Zurückhaltung ist derselbe wie bei Issue #316: Ein HARD STOP auf eine
+ungezeichnete Datei bestraft die Produktion, nicht den Austausch. Zeichnen
+bleibt ein Betreiberakt.
 
-### G1 · Zwei Dateien gehören ins Siegel – in dieser Reihenfolge
+### G1 · Vier Dateien stehen im Siegel – ausgeführt und bewacht
 
+Der Skill-Regelkern umfasst vier Dateien (`SIEGEL_PFLICHT` in
+`scripts/skills_vertrag.py`):
 > **Ausgeführt am 01.11.2026** (`81e45a6 chore(siegel): Skill-Vertrag und
 > Lizenz-Register unter Schloss, Zeichnung § G1`). Stand danach: 52 Dateien im
 > Lock, `--gate` grün, `--drift-audit` meldet „Kein Drift“, und der Skill-Vertrag
@@ -958,10 +960,44 @@ Produktion, nicht den Austausch. Zeichnen bleibt ein Menschenakt.
 Der Stand des Berichts (nachzulesen mit `python3 scripts/skills_vertrag.py`):
 
 ```text
-[K8] scripts/skills_vertrag.py   – steht weder in KRITISCH/FEST noch im Siegel
-[K8] data/skill_lizenzen.json    – steht weder in KRITISCH/FEST noch im Siegel
+scripts/skills_vertrag.py      – Kernbudget, Router, Befehle, Lizenzen, K8–K10
+data/skill_lizenzen.json       – Herkunfts- und Lizenzregister aller Fremd-Skills
+scripts/skills_portfolio.py    – Themenzuordnung und Ausschlussvertrag P1–P7
+data/skill_portfolio.yaml      – Portfolio-SSOT der Themenwelten und Kanäle
 ```
 
+Alle vier Dateien stehen in `scripts/integrity_guard.py` unter `FEST` und sind
+in `data/integrity_lock.json` mit SHA-256 und verketteter Audit-Spur gezeichnet
+(**55 Kerndateien** insgesamt, darunter auch `scripts/serp_limits.py`). K8 in
+`scripts/skills_vertrag.py` schweigt seither (`0 Befunde, 0 Warnungen`), und
+`SiegelTests.test_siegelzusage_bleibt_stehen` in
+`scripts/tests/test_skills_vertrag.py` sperrt Klasse, Signatur, Prüfsumme und
+`merge=binary`-Schutz dauerhaft gegen Rückfall.
+
+**Aufklärung des vermeintlichen Defekts aus Schritt 0 (#1001, 02.11.2026).**
+Der am 01.11.2026 beobachtete rote Lauf von `redaktions_standard.py --selftest`
+(`Vertrag-gute-aenderung-still`, Exit 2) war **kein Defekt der Wache**: In der
+Prüfumgebung fehlte `PyYAML` aus `requirements-ci.txt`. Ohne `PyYAML` fällt die
+YMYL-Schreibprüfung in `editorial_review_gate.py` absichtlich fail-closed zurück
+(`ParseError: PyYAML fehlt`), und die alte Selbsttest-Ausgabe nannte jeden
+Abweichungsfall pauschal „die Wache selbst ist defekt“. Mit installierter
+Prüfgrundlage bestehen alle **48 eingefrorenen Fälle** in
+`redaktions_standard.py --selftest`, alle Proben in
+`publikations_vertrag.py --selftest` sowie sämtliche **263 Wachen** im
+`selftest_runner.py`.
+
+Seit #1001 gilt über die ganze Kette (`redaktions_standard.py`,
+`publikations_vertrag.py`, `selftest_runner.py`):
+- **Fail-closed bleibt unantastbar (Exit 2, C33):** Eine fehlende Bibliothek
+  wird niemals zu Exit 0 geschönt.
+- **Scharfe Diagnose statt Falschalarm:** Fehlt `PyYAML` (bzw. ein Paket aus
+  `requirements-ci.in`), melden die Wachen ausdrücklich `Prüfgrundlage fehlt`
+  samt gepinntem Installationsbefehl
+  `python3 -m pip install --require-hashes -r requirements-ci.txt` – und prüfen
+  die übrigen Detektoren trotzdem weiter, damit sich kein echter Logikfehler
+  hinter einer fehlenden Bibliothek verstecken kann.
+
+**Nachweis für künftige Zeichnungen am Skill-Regelkern:**
 Beide Dateien *entscheiden*: die Wache hält Kernbudget, Router, Befehle und
 Lizenzdeckungen zusammen, das Register sagt, welcher Fremdcode überhaupt im Repo
 stehen darf. Wer sie austauscht, schreibt die Regeln um, ohne dass ein Gate
@@ -986,28 +1022,21 @@ ab, es gibt keinen Weg direkt ins Lot.
 **Schritt 2 · Zeichnen, im selben Zug wie die Klassenänderung.**
 
 ```bash
-python3 scripts/integrity_guard.py --add=scripts/skills_vertrag.py
-python3 scripts/integrity_guard.py --add=data/skill_lizenzen.json
+python3 -m pip install --require-hashes -r requirements-ci.txt
+python3 scripts/redaktions_standard.py --selftest
+python3 scripts/publikations_vertrag.py --selftest
 python3 scripts/integrity_guard.py --set-current
-```
-
-Ein Commit davor oder danach ist kein Versehen, sondern ein rotes PR-Gate: eine
-Datei in FEST ohne Zeichnung wirft `.github/workflows/integrity-lock.yml` bei
-jedem Pull Request (#316-Muster – der Alarm galt der Produktion).
-
-**Schritt 3 · Nachweis, nicht Gefühl.**
-
-```bash
-python3 scripts/integrity_guard.py --drift-audit   # die beiden Pfade tauchen nicht mehr auf
-python3 scripts/skills_vertrag.py                   # 0 Befunde, 0 Warnungen – K8 verstummt
-npm run test:skills                                 # 17 Selbsttest-Fälle, 33 Unit-Tests
-git diff data/integrity_lock.json                   # Akte mit `art` und Datum je Signatur
+python3 scripts/integrity_guard.py --gate
+python3 scripts/integrity_guard.py --drift-audit
+python3 scripts/skills_vertrag.py
+npm run test:skills
 ```
 
 Eine Signatur ohne Akteneintrag ist keine – das Protokoll schreibt die Herkunft
 mit (`audit` im Lock), und nur daran lässt sich #346 von einer bewussten Zeichnung
 unterscheiden.
 
+### G2 · Entscheidungstabelle für künftige Drift-Befunde
 ### G2 · Was der Audit sonst noch meldet
 
 Der Fall, der diesen Abschnitt ausgelöst hat, ist anders ausgegangen als
@@ -1028,11 +1057,24 @@ Die Tabelle gilt für jeden Fund:
 
 | Was der Audit sagt | Was folgt | Was nicht folgt |
 |---|---|---|
-| FEST-Drift, Selbsttests grün | `--heal` (belegt: committet, bytegleich, nicht KRITISCH) | `--set-current` auf Vorrat |
-| FEST-Drift, Selbsttest rot | erst heilen (Schritt 0), dann zeichnen | Signatur unter dem defekten Stand |
+| FEST-Drift, Selbsttests mit `requirements-ci.txt` grün | `--heal` (belegt: committet, bytegleich, nicht KRITISCH) oder `--set-current` im selben Commit wie die Quelltext-Änderung | `--set-current` auf Vorrat |
+| Selbsttest meldet `Prüfgrundlage fehlt` (Exit 2) | `python3 -m pip install --require-hashes -r requirements-ci.txt`, danach Selbsttest erneut fahren | Wache als „kaputt“ abschreiben oder blind neu zeichnen |
+| FEST-Drift, Selbsttest meldet echten Detektor-Defekt | erst Wache heilen, Selbsttest grün beweisen, dann zeichnen | Signatur unter dem defekten Stand |
 | KRITISCH-Abweichung | Ursache über `--drift-audit` klären, dann Mensch entscheidet | `--heal` (hebt für KRITISCH nie die Sperre auf) |
 | Lock unlesbar oder zusammengeschnitten | `--repair-lock --dry-run` lesen, dann reparieren | neuen Lock von Hand tippen |
 
+### G3 · Merge-Schutz ohne Lücke (`W5-MERGE-BINARY`)
+
+Das Siegel selbst ist seit #346 durch `merge=binary` geschützt. Dasselbe gilt
+für alle vier Register- und Portfolio-Dateien des Skill-Systems
+(`data/skill_lizenzen.json`, `data/skill_portfolio.yaml`,
+`data/skill_ergaenzungen.json`, `skills-lock.json`) sowie für **sämtliche**
+versiegelten Quelltext-Wachen (`scripts/*.py` in `KRITISCH | FEST`, darunter
+`scripts/skills_vertrag.py`, `scripts/skills_portfolio.py` und
+`scripts/serp_limits.py`). Damit neue `FEST`-Aufnahmen in `.gitattributes` nie
+wieder vergessen werden, prüft `scripts/wachen_vertrag.py` die Deckungsgleichheit
+zwischen `integrity_guard.py` und `.gitattributes` dauerhaft als harte Klasse
+`W5-MERGE-BINARY` (aktiv in C39 bei jedem Push und Pull Request).
 ### G4 · Was die Zeichnung im Betrieb ändert – und was offen bleibt
 
 **Für den Alltag ändert sich nichts Neues.** Die beiden Dateien stehen in FEST,
@@ -1080,10 +1122,12 @@ würde die beiden neuen Siegel-Einträge still zurücknehmen.
 
 ### G3 · Was schon geregelt ist (kein Auftrag)
 
-Das Siegel selbst ist seit #346 durch `merge=binary` geschützt. Seit dem
-01.11.2026 gilt dasselbe für `data/skill_lizenzen.json` und `skills-lock.json`
-(`.gitattributes`): Beide sind Register, die ein Werkzeug schreibt – ein
-Text-Merge zweier Fassungen hätte dort einen Hash auf einer Datei, die so nicht
-existiert, und einen Lizenz-Eintrag, den niemand geprüft hat. `merge=union` wäre
-eine Erfindung, weil eine Vereinigung von Herkunftsangaben keine zweite Messung
-ist, sondern ein drittes Gerücht.
+### G4 · Abgeschlossene Betreiber-Entscheidungen aus dem Skill-Umbau
+
+| Punkt | Entscheidung und Stand |
+|---|---|
+| Lizenzlose / unfreie Fremd-Skills | `web-design-guidelines` (ohne Lizenz) über `npx -y skills@1.7.4 remove` entfernt und durch hausgemachte `ff-oberflaeche/references/web-richtlinien.md` ersetzt; `xlsx`/`pdf`/`docx` wegen restriktiver Sonderklausel abgelehnt; K6 erzwingt Freigabe (`MIT`/`Apache-2.0`) oder befristete Ausnahme samt Volltext |
+| Siegel über Wachen & Registern | alle vier Dateien in `SIEGEL_PFLICHT` (`skills_vertrag.py`, `skill_lizenzen.json`, `skills_portfolio.py`, `skill_portfolio.yaml`) unter `FEST` gezeichnet (55 Kerndateien); K8 = 0 Warnungen |
+| Eigener Gate-Schritt | `Skill-Vertrag` läuft als eigener Schritt in `.github/workflows/link-check.yml` vor dem Hugo-Bau-Vertrag sowie über `GUARDS` (C6) in `governance_contract.py --quick` |
+| Schutz repo-eigener Ergänzungen | deutsche Lektorats-Ausgabe aus dem Fremd-Ordner nach `.claude/skills/ff-lektorat/` überführt und in `data/skill_ergaenzungen.json` verankert (K10); `ff-*` im `skills-lock.json` bleibt durch K4 verboten |
+| Beschreibungs-Budget | K9 deckelt die Vorladelast aller Skill-Beschreibungen hart auf `56,0 KB`; Themen-Skills stehen zusätzlich unter P1–P7 in `scripts/skills_portfolio.py` |

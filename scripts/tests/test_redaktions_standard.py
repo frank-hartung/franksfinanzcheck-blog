@@ -28,11 +28,14 @@ nicht angefasst.
 """
 from __future__ import annotations
 
+import importlib.util
+import io
 import os
 import subprocess
 import sys
 import tempfile
 import unittest
+from contextlib import redirect_stdout
 from pathlib import Path
 from unittest import mock
 
@@ -120,6 +123,8 @@ class VertragImSchreiberTest(unittest.TestCase):
             neu = rs.heal_article_ai(self.a, self.res, verworfen)
         return neu, verworfen
 
+    @unittest.skipIf(importlib.util.find_spec("yaml") is None,
+                     "PyYAML fehlt in diesem lokalen Interpreter (requirements-ci.txt)")
     def test_gute_heilung_wird_uebernommen(self):
         neu, verworfen = self._heile(ANTWORT_OK)
         self.assertIsNotNone(neu, f"gute KI-Antwort wurde verworfen: {verworfen}")
@@ -128,6 +133,8 @@ class VertragImSchreiberTest(unittest.TestCase):
         self.assertEqual([], res2["hart_missing"])
         self.assertEqual([], verworfen)
 
+    @unittest.skipIf(importlib.util.find_spec("yaml") is None,
+                     "PyYAML fehlt in diesem lokalen Interpreter (requirements-ci.txt)")
     def test_flesch_absturz_wird_verworfen(self):
         neu, verworfen = self._heile(ANTWORT_SCHWER)
         self.assertIsNone(neu, "KI-Änderung unter Flesch 60 wurde geschrieben (#607)")
@@ -135,6 +142,8 @@ class VertragImSchreiberTest(unittest.TestCase):
         self.assertTrue(any("V1" in str(v.get("grund", "")) for v in verworfen),
                         f"V1-Grund fehlt: {verworfen}")
 
+    @unittest.skipIf(importlib.util.find_spec("yaml") is None,
+                     "PyYAML fehlt in diesem lokalen Interpreter (requirements-ci.txt)")
     def test_neue_intro_formel_wird_verworfen(self):
         neu, verworfen = self._heile(ANTWORT_INTRO)
         self.assertIsNone(neu, "neue R7-Formel wurde geschrieben (#607)")
@@ -324,6 +333,8 @@ class FaustregelDauerheilungTest(unittest.TestCase):
         self.assertIn("## Was kostet der Anschluss?", neu,
                       "--nur-faustregel darf RS2 nicht verändern")
 
+    @unittest.skipIf(importlib.util.find_spec("yaml") is None,
+                     "PyYAML fehlt in diesem lokalen Interpreter (requirements-ci.txt)")
     def test_main_produktionslauf_heilt_rs3_und_wahrt_den_publish_vertrag(self):
         """Der echte --fix-Pfad schreibt nur nach bestandenem Vertrag."""
         body = (
@@ -392,9 +403,24 @@ class FaustregelDauerheilungTest(unittest.TestCase):
                          f"spezifischer Warmwasser-Pool-Satz wurde nicht priorisiert: {grund}")
         self.assertIn(satz, rs.faustregel_saetze())
 
+    @unittest.skipIf(importlib.util.find_spec("yaml") is None,
+                     "PyYAML fehlt in diesem lokalen Interpreter (requirements-ci.txt)")
     def test_eingebetteter_selbsttest_bleibt_gruen(self):
         """Der Unit-Lauf soll Strukturdrift der Selbsttest-Fixtures mitfangen."""
         self.assertEqual(0, rs.selftest())
+
+    def test_selbsttest_trennt_fehlende_pruefgrundlage_von_wachen_defekt(self):
+        """#1001: Fehlt PyYAML, bleibt Exit 2 (C33), aber ohne falsche Defekt-Diagnose."""
+        puffer = io.StringIO()
+        with mock.patch.object(rs, "_messgrundlage_fehlt",
+                               return_value=["PyYAML fehlt (requirements-ci.txt)"]), \
+                redirect_stdout(puffer):
+            code = rs.selftest()
+        ausgabe = puffer.getvalue()
+        self.assertEqual(2, code)
+        self.assertIn(rs.GRUND_MARKIERUNG, ausgabe)
+        self.assertIn("nicht defekt", ausgabe)
+        self.assertNotIn("die Wache selbst ist defekt", ausgabe)
 
 
 class HeilerAufrufVertragTest(unittest.TestCase):

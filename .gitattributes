@@ -13,19 +13,25 @@
 # Kein `merge=union`: Ein Vereinigen der Akten wäre hier eine Fälschung.
 data/integrity_lock.json merge=binary
 
-# HERKUNFTS-REGISTER SIND KEIN TEXT (01.11.2026)
-# `data/skill_lizenzen.json` (Lizenz zu jedem vendored Skill) und
+# HERKUNFTS-REGISTER SIND KEIN TEXT (01.11.2026, ergänzt 02.11.2026 / #1001)
+# `data/skill_lizenzen.json` (Lizenz zu jedem vendored Skill),
+# `data/skill_portfolio.yaml` (Themenzuordnung und Ausschlüsse unter FEST),
+# `data/skill_ergaenzungen.json` (K10-Umzugsnachweis eigener Ergänzungen) und
 # `skills-lock.json` (vom Skills-CLI geschriebene Herkunft samt `computedHash`)
-# werden nie von Hand gepflegt: der CLI schreibt den Lock, das Register hält
-# deckungsgleich zu ihm. Ein Text-Merge zweier Fassungen macht hier nichts, was
-# je ein Werkzeug geschrieben hätte – beim Lock ein Hash auf einer Datei, die in
-# dieser Form nicht existiert, im Register ein Eintrag ohne Lizenztext. Beide
-# Fälle melden die Wachen erst NACH dem Merge (K4/K6 in
-# `scripts/skills_vertrag.py`), dann aber für jeden Pull-Request. Wie beim
+# werden nie zeilenweise gemergt: der CLI schreibt den Lock, Register und
+# Portfolio halten deckungsgleich zu ihm und liegen unter dem Siegel. Ein
+# Text-Merge zweier Fassungen macht hier nichts, was je ein Werkzeug geschrieben
+# hätte – beim Lock ein Hash auf einer Datei, die in dieser Form nicht existiert,
+# im Register ein Eintrag ohne Lizenztext, im Portfolio ein doppelt geführter
+# Skill (P6) samt gebrochenem Siegel. Beide Fälle melden die Wachen erst NACH
+# dem Merge (K4/K6/K10 in `scripts/skills_vertrag.py`, P1–P7 in
+# `scripts/skills_portfolio.py`), dann aber für jeden Pull-Request. Wie beim
 # Siegel (#346) gilt deshalb: lieber ein sichtbarer Konflikt, den ein Mensch mit
 # `npx skills` und einem Nachtrag im Register auflöst. Kein `merge=union` –
 # eine Vereinigung von Herkunftsangaben wäre eine Erfindung.
+data/skill_ergaenzungen.json merge=binary
 data/skill_lizenzen.json merge=binary
+data/skill_portfolio.yaml merge=binary
 skills-lock.json merge=binary
 
 # SEARCH-CONSOLE-DATEN SIND EINE MESSUNG, KEIN TEXT (24.10.2026)
@@ -118,7 +124,9 @@ scripts/politur_ruine_heiler.py merge=binary
 scripts/publikations_vertrag.py merge=binary
 scripts/redaktions_standard.py merge=binary
 scripts/reserve_artifacts.py merge=binary
+scripts/serp_limits.py merge=binary
 scripts/shortcode_guard.py merge=binary
+scripts/skills_portfolio.py merge=binary
 scripts/skills_vertrag.py merge=binary
 scripts/stil_guard.py merge=binary
 scripts/tag_casing.py merge=binary

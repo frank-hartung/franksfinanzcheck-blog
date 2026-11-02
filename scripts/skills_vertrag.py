@@ -93,9 +93,15 @@ EIGEN_PRÄFIX = "ff-"
 LIZENZ_MUSTER = ("LICENSE", "LICENCE", "COPYING")
 SIEGEL_GUARD = Path("scripts/integrity_guard.py")
 SIEGEL_LOCK = Path("data/integrity_lock.json")
-# Wer diese zwei Dateien ändert, ändert die Regel – nicht nur ihren Text. Das
-# Integritätsschloss soll den Austausch laut machen; geprüft wird das in K8.
-SIEGEL_PFLICHT = ("scripts/skills_vertrag.py", "data/skill_lizenzen.json")
+# Wer diese vier Dateien des Skill-Regelkerns ändert, ändert die Regel – nicht
+# nur ihren Text (Vertrag, Lizenzregister, Portfolio-Wache, Themen-Portfolio).
+# Das Integritätsschloss soll den Austausch laut machen; geprüft wird das in K8.
+SIEGEL_PFLICHT = (
+    "scripts/skills_vertrag.py",
+    "data/skill_lizenzen.json",
+    "scripts/skills_portfolio.py",
+    "data/skill_portfolio.yaml",
+)
 # Lizenzen, deren Text hier liegend nachgeprüft werden kann. Alles andere – auch
 # eine im Upstream-Ordnerbehälter zu lesende Sonderklausel – braucht denselben
 # Ausnahmekern wie „unbekannt“: Grund, Entscheidung, Frist.
@@ -828,17 +834,19 @@ def _fixture(wurzel: Path, *, kern: str | None = None, skill_md: str | None = No
     if lizenz is None:
         lizenz = {"schema": 1, "skills": {}, "eigene": {"skills": ["ff-eins"]}}
     _schreibe(wurzel, str(LIZENZ_DATEI), json.dumps(lizenz, ensure_ascii=False))
-    # Siegel: ohne Angabe trägt der Fixture-Baum beide Schutzdateien – sonst
+    # Siegel: ohne Angabe trägt der Fixture-Baum alle vier Schutzdateien – sonst
     # meldet jede Gegenprobe eine K8-Warnung, die mit dem Fall nichts zu tun hat.
     if guard_fest is not None:
         mengen = "KRITISCH = set()\nFEST = {%s}\n" % ", ".join(
             '"%s"' % rel for rel in (guard_fest if isinstance(guard_fest, list) else SIEGEL_PFLICHT))
         _schreibe(wurzel, str(SIEGEL_GUARD), "#!/usr/bin/env python3\n" + mengen)
-        # Die Wache selbst liegt im Fixture nicht im Baum – ohne Platzhalter
-        # wäre jeder saubere Fall ein „Siegel trägt eine fehlende Datei".
-        if not (wurzel / SIEGEL_PFLICHT[0]).is_file():
-            _schreibe(wurzel, SIEGEL_PFLICHT[0],
-                      "#!/usr/bin/env python3\n# Fixture-Platzhalter für die Wache.\n")
+        # Die Wachen und das Portfolio liegen im Fixture nicht im Baum – ohne
+        # Platzhalter wäre jeder saubere Fall ein „Siegel trägt eine fehlende Datei".
+        for rel in SIEGEL_PFLICHT:
+            if not (wurzel / rel).is_file():
+                inhalt = ("schema: 1\n" if rel.endswith(".yaml")
+                          else "#!/usr/bin/env python3\n# Fixture-Platzhalter für die Wache.\n")
+                _schreibe(wurzel, rel, inhalt)
     if siegel is None and guard_fest is not None:
         gezeichnet = {rel: hashlib.sha256((wurzel / rel).read_bytes()).hexdigest()
                       for rel in SIEGEL_PFLICHT if (wurzel / rel).is_file()}
@@ -957,7 +965,7 @@ def selftest() -> int:
         if "K7" not in klassen:
             fehler.append(f"K7: toter Verweis ins Regelwerk bleibt ohne Befund (Klassen: {sorted(klassen)}).")
 
-        # 13) K8: Siegelumfang kennt die zwei Schutzdateien nicht = Warnung, nie
+        # 13) K8: Siegelumfang kennt die vier Schutzdateien nicht = Warnung, nie
         #     Befund (Zeichnen bleibt Betreiberakt, das Gate darf nicht kneifen).
         wurzel = _fixture(Path(tmp) / "k8a", guard_fest=["assets/css/extended/custom.css"],
                           siegel={"schema": 1, "files": {}})
@@ -965,8 +973,8 @@ def selftest() -> int:
         geprueft += 1
         if any(f.klasse == "K8" for f in funde):
             fehler.append("K8: ungezeichnete Datei darf das Gate nicht blockieren – Zeichnen ist Betreiberakt.")
-        if sum(1 for w in warnungen if w.klasse == "K8") != 2:
-            fehler.append(f"K8: 2 Warnungen (Wache + Register) erwartet, gekommen "
+        if sum(1 for w in warnungen if w.klasse == "K8") != len(SIEGEL_PFLICHT):
+            fehler.append(f"K8: {len(SIEGEL_PFLICHT)} Warnungen (vier Schutzdateien) erwartet, gekommen "
                           f"{sum(1 for w in warnungen if w.klasse == 'K8')}.")
 
         # 14) K8: in der Klasse, aber nie gezeichnet – und: gezeichnet = still.

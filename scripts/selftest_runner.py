@@ -387,11 +387,76 @@ def _syntaxfehler(pfad: str):
     return None
 
 
+CI_PAKET_IMPORTE = {
+    "brotli": "brotli",
+    "cryptography": "cryptography",
+    "feedparser": "feedparser",
+    "fonttools": "fontTools",
+    "pillow": "PIL",
+    "pillow-avif-plugin": "pillow_avif",
+    "pypdf": "pypdf",
+    "pyyaml": "yaml",
+    "requests": "requests",
+}
+
+
+def pruefe_grundlage(python: str, baum_wurzel: str = BLOG_DIR) -> list[str]:
+    """Prüft die in `requirements-ci.in` gepinnten Pakete im Ziel-Interpreter (#1001).
+
+    Fehlt `requirements-ci.in` (z. B. isolierter Mini-Baum im Selbsttest), gibt es
+    nichts zu melden. Fehlen Pakete im gewählten Interpreter, nennt der Runner die
+    fehlende Prüfgrundlage ganz oben – statt dutzende Folgefehler wie defekte
+    Wachen aussehen zu lassen. Fail-closed bleibt erhalten: fehlende Pakete sind
+    ein Befund (kein stilles Grün, C33).
+    """
+    req_pfad = os.path.join(baum_wurzel, "requirements-ci.in")
+    if not os.path.isfile(req_pfad):
+        return []
+    pakete: list[tuple[str, str]] = []
+    with open(req_pfad, encoding="utf-8") as fh:
+        for roh in fh:
+            zeile = roh.split("#", 1)[0].strip()
+            if not zeile or "==" not in zeile:
+                continue
+            paket = zeile.split("==", 1)[0].strip().lower()
+            if paket:
+                pakete.append((paket, CI_PAKET_IMPORTE.get(paket, paket.replace("-", "_"))))
+    if not pakete:
+        return []
+    probe = (
+        "import importlib.util, json, sys; "
+        "paare = json.loads(sys.argv[1]); "
+        "print(json.dumps([p for p, m in paare if importlib.util.find_spec(m) is None]))"
+    )
+    try:
+        lauf = subprocess.run(
+            [python, "-c", probe, json.dumps(pakete)],
+            capture_output=True, text=True, timeout=30,
+        )
+    except OSError as exc:
+        return [f"Python-Interpreter `{python}` nicht ausführbar ({exc.__class__.__name__}: {exc})"]
+    if lauf.returncode != 0:
+        return [f"Python-Interpreter `{python}` konnte Prüfgrundlage nicht prüfen (Exit {lauf.returncode})"]
+    try:
+        fehlend = json.loads(lauf.stdout.strip() or "[]")
+    except ValueError:
+        return []
+    if not fehlend:
+        return []
+    liste = ", ".join(fehlend)
+    return [
+        f"Prüfgrundlage fehlt im Python-Interpreter (`{python}`): fehlende Pakete aus "
+        f"`requirements-ci.in`: {liste} — Installation: `{python} -m pip install "
+        "--require-hashes -r requirements-ci.txt` (abhängige Wachen schlagen ohne diese "
+        "Pakete bewusst fail-closed fehl; das ist kein Wachen-Defekt, #1001)."
+    ]
+
+
 def pruefen(python: str = "python3", uhr_probe: bool = True,
             skript_dir: str = SKRIPT_DIR, deckel: int = ZEITDECKEL,
             baum_wurzel: str = BLOG_DIR) -> dict:
     """Basis-Lauf + Uhr-Proben über alle entdeckten Selbsttests."""
-    befunde: list = []
+    befunde: list = pruefe_grundlage(python, baum_wurzel)
     hinweise: list = []
     vorher = arbeitsbaum(baum_wurzel)
     if vorher is None:
@@ -757,6 +822,23 @@ def _selftest() -> int:
                            deckel=60, baum_wurzel=tmp)["befunde"]):
             fehler.append("leerer Dateibaum läuft als grün durch")
 
+        # Prüfgrundlage (#1001): fehlendes Paket aus requirements-ci.in wird
+        # ausdrücklich als fehlende Prüfgrundlage (kein Wachen-Defekt) benannt,
+        # vorhandenes Paket bleibt still.
+        req_test = os.path.join(tmp, "requirements-ci.in")
+        with open(req_test, "w", encoding="utf-8") as fh:
+            fh.write("json==1.0.0\n")
+        if pruefe_grundlage(sys.executable, tmp):
+            fehler.append(f"vorhandenes Paket fälschlich als fehlend gemeldet: "
+                          f"{pruefe_grundlage(sys.executable, tmp)}")
+        with open(req_test, "w", encoding="utf-8") as fh:
+            fh.write("nicht_installiertes_paket_1001==0.0.1\n")
+        grund_befunde = pruefe_grundlage(sys.executable, tmp)
+        if not any("Prüfgrundlage fehlt" in b and "requirements-ci.txt" in b
+                   and "nicht_installiertes_paket_1001" in b for b in grund_befunde):
+            fehler.append(f"fehlende Prüfgrundlage nicht klar benannt: {grund_befunde}")
+        os.remove(req_test)
+
         # Markdown muss Befund, Hinweis UND Grün können – mit gegebenem Datum
         if "🔴 Befunde" not in als_md(erg, stand=dt.date(2026, 9, 18)):
             fehler.append("Markdown verschluckt die Befunde")
@@ -783,7 +865,7 @@ def _selftest() -> int:
         return 2
     print("✅ Runner-Selbsttest grün: Entdeckung (nur echte Kennung), SSOT-Abgleich, "
           "Ausnahmen- und Gefahren-Pflicht, rote Wache, Datumsbombe, C15-Wache, "
-          "leerer Baum, Verdrahtungs-Nachweis, Markdown.")
+          "leerer Baum, Verdrahtungs-Nachweis, Prüfgrundlagen-Diagnose, Markdown.")
     return 0
 
 
