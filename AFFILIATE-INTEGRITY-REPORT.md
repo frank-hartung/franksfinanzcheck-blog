@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-11-01 10:56:59 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-11-02 11:55:18 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 73 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
+**Geprüfte Live-Artikel:** 76 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -14,6 +14,7 @@
 |:---|:---:|:---|
 | 2026-08-10-dsl-wechselbonus-sichern | 3 → 3 ✅ | /go/dsl/ |
 | 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas | 2 → 3 ✅ | /go/gas/ |
+| 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026 | 3 → 3 ✅ | /go/wohngebaeudeversicherung/ |
 | 2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden | 1 → 2 ✅ | /go/girokonto/ |
 | 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026 | 2 → 3 ✅ | /go/gas/ |
 | 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden | 2 → 3 ✅ | /go/gas/ |
@@ -22,6 +23,8 @@
 | 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke | 3 → 3 ✅ | /go/dsl/ |
 | 2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan | 0 → 1 ✅ | /go/allgemein/ |
 | 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren | 2 → 3 ✅ | /go/girokonto/ |
+| 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet | 3 → 3 ✅ | /go/haftpflicht/ |
+| 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst | 3 → 3 ✅ | /go/wohngebaeudeversicherung/ |
 | 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet | 3 → 3 ✅ | /go/dsl/ |
 | 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden | 2 → 3 ✅ | /go/strom/ |
 | 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause | 3 → 3 ✅ | /go/dsl/ |
