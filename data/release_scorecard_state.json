@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "generated_at": "2026-11-02T12:49:37Z",
-  "modus": "kandidaten",
-  "commit": "4abf8bf53a35117fc73e48fcbf2f2320f4f40691",
+  "generated_at": "2026-11-02T13:27:08Z",
+  "modus": "live",
+  "commit": "1c51b5fe3e51d9f1f9868c4eb21937771dc87601",
   "kapazitaet": {
     "stichtag": "2026-11-02",
-    "artikel": 111,
-    "faellig": 4,
-    "ueberfaellig": 4,
-    "ueberfaellig_max_tage": 5,
+    "artikel": 112,
+    "faellig": 1,
+    "ueberfaellig": 0,
+    "ueberfaellig_max_tage": 0,
     "naechste_frist": {
       "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
       "frist": "2026-11-03",
@@ -17,52 +17,19 @@
     "budget": 4,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 4.0,
-    "bedarf_je_tag": 2.7,
-    "bedarf_je_woche": 18.9,
-    "deckung_prozent": 148.1,
+    "bedarf_je_tag": 2.733,
+    "bedarf_je_woche": 19.1,
+    "deckung_prozent": 146.3,
     "horizont_tage": 120,
     "vorlauf_tage": 7,
     "nachhol_frist_tage": 7,
     "abbau_tage": 0,
-    "verletzungen_alt": 4,
+    "verletzungen_alt": 0,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
-    "verletzungen": [
-      {
-        "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
-        "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 5,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      },
-      {
-        "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
-        "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 5,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      },
-      {
-        "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
-        "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 5,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      },
-      {
-        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-        "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 5,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      }
-    ],
-    "offen_im_horizont": 111,
+    "verletzungen": [],
+    "offen_im_horizont": 112,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
     "sockel": 3,
@@ -392,7 +359,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "77ab628f991fa7399a2821116bb4cec13a62bcfc7fb6bca87d97c38c5ca72b0a",
@@ -667,7 +634,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": {
-      "sha256": "a703a09e8b7124405f6e1eadc2cc28d4542cca57454095e0ecd68c6f5cc5c85d",
+      "sha256": "17374cba99477b1d151ce9cebf6a499681bb8f6a29931d318a519fd1541f9270",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -678,10 +645,10 @@
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
-        "revision": "blockiert"
+        "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
+      "naechste_pruefung": "2026-12-02",
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster": {
       "sha256": "e849bee63507955ebabed76762840e08d8f4d3eb1e3eb2a166cae91a9e8de39b",
@@ -735,7 +702,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
-      "sha256": "c71861ce1a4d36d5bc29b479960c1654ab728703d187927b7fac545154b4b4c4",
+      "sha256": "e4c69f4d11c55700f5765ead33b0174bf76f19f3e30ffcee169b43d7250c617e",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -746,10 +713,10 @@
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
-        "revision": "blockiert"
+        "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
+      "naechste_pruefung": "2026-12-02",
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": {
       "sha256": "77281a07f9bb48bf2a55836387a216fc25cbb20ab1e8b4ed0aeca9a952cf29c2",
@@ -786,7 +753,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
-      "sha256": "4750d34ca95558c88039c4cdef1d5c83d40991b7241f2fc7c8234ef56d71bb1e",
+      "sha256": "d5ee61582c01c2f579514d059861fc8b574ac5e2307f7cd7b10a112f3cbbd37a",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -797,13 +764,13 @@
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
-        "revision": "blockiert"
+        "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
+      "naechste_pruefung": "2026-12-02",
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": {
-      "sha256": "40b8e08d768ead2368fcb9412033d0b100ee40526019bb8cd30477883aae6da6",
+      "sha256": "025510b0f4f7d9db5b112b53bbe533e269b8a4323b48edd16113fcc425a2215b",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -814,10 +781,10 @@
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
-        "revision": "blockiert"
+        "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-10-28",
-      "siegel_drift": "unverändert"
+      "naechste_pruefung": "2026-12-02",
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet": {
       "sha256": "bd25240483bcd9c81b195d124cddfc72a518bf4917688e53c4ffd22a17504681",
