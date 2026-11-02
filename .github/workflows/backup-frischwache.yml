@@ -93,12 +93,32 @@ jobs:
           python3 scripts/kv_backup.py --selftest
           python3 scripts/backup_einrichtung.py --selftest
 
-      - name: Einrichtung als Kontext (kein Block, nur Einordnung)
+      # ================================================================
+      #  EINRICHTUNG ALS BLOCK, NICHT ALS FUßNOTE (#923, 02.11.2026)
+      #  ------------------------------------------------------------
+      #  BEFUND: Dieser Schritt hieß „kein Block, nur Einordnung“ und endete
+      #  fest mit `exit 0`. Belegt am Lauf 41335523844 (01.11.): E1/E2 waren
+      #  offen (kein BACKUP_REPO, kein Ziel-Token), die Sicherung existierte
+      #  nicht – und die RPO-Wache meldete zehnmal hintereinander **grün**.
+      #  Der einzige sichtbare Hinweis war eine `notice` im Log, die kein
+      #  Alerting liest. Eine Wache, die „keine Sicherung vorhanden“ als
+      #  Erfolg ausgibt, ist die Umkehrung ihres Zwecks: Sie hätte den
+      #  Ausfall, den sie überwacht, für alle Zeit verdeckt.
+      #  Jetzt: rot mit eigenem Rat. Die Klasse „Einrichtung unvollständig“
+      #  (Rückweg über „Voraussetzungen prüfen“) trägt weiterhin den
+      #  Einrichtungs-Rat; hier steht derselbe Schrittname NICHT, damit der
+      #  Rat des Offsite-Jobs nicht doppelt vergeben wird.
+      # ================================================================
+      - name: Voraussetzungen prüfen (fail-closed – kein Schein-Grün)
         run: |
-          python3 scripts/backup_einrichtung.py --pruefen || {
-            echo "::notice::Einrichtungspruefung rot – Frischwache kann erst nach gruenem Offsite-Backup aussagekraeftig messen. Siehe docs/ANLEITUNG-OFFSITE-BACKUP.md (E1–E8)."
-          }
-          exit 0
+          set +e
+          python3 scripts/backup_einrichtung.py --pruefen
+          code=$?
+          set -e
+          if [ "$code" != "0" ]; then
+            echo "::error::Die Offsite-Sicherung ist nicht eingerichtet (E1–E8 offen) – die Frischwache kann deshalb nichts messen und meldet NICHT grün. Siehe docs/ANLEITUNG-OFFSITE-BACKUP.md, Abschnitt „Live-Status“."
+            exit 1
+          fi
 
       - name: Frische messen (beide Release-Familien, Entwuerfe eingeschlossen)
         run: |

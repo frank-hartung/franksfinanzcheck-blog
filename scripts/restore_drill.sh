@@ -12,7 +12,9 @@
 #    KV    kv-backup-*  kv-export.json.enc → entschlüsseln (PBKDF2 600k) →
 #                       scripts/kv_backup.py --pruefen (Struktur, Zähler,
 #                       keine verwaisten Tokens) – im Log nur Zähler
-#    Alter              neueste Sicherung älter als 48 h → Warnung
+#    Alter              neueste Sicherung älter als 36 h → Warnung, ab 52 h → Fehler
+#                       (dieselben Grenzen wie backup_freshness_guard.py: die Probe
+#                       und die tägliche Wache dürfen nicht verschiedene Zusagen machen)
 #
 #  Stand 15.10.2026 (Vorgang WF-9E5A / #761): Die Fassung vom 27.08.2026
 #  lud `backup.bundle` aus den Releases des ÖFFENTLICHEN Blog-Repos. Dort
@@ -54,7 +56,11 @@ KVDATEI=""
 GIT=1
 KV=1
 GEPRUEFT=""
-MAX_ALTER_H=48
+# RPO-Zusage: 24 h, Toleranz 52 h (Scheduler-Verspätung), Frühwarnung 36 h.
+# #923: Vorher warnte der Drill erst ab 48 h und bestand dann weiter –
+# eine Sicherung, die die eigene RPO-Zusage reißt, ist kein Erfolg.
+MAX_ALTER_WARN_H=36
+MAX_ALTER_ROT_H=52
 
 cleanup() { rm -rf "$WORK"; }
 trap cleanup EXIT
@@ -126,8 +132,10 @@ holen() {
   erstellt="${zeile#* }"
   alter="$(python3 -c 'import sys, datetime as d; t = d.datetime.fromisoformat(sys.argv[1].replace("Z", "+00:00")); print(int((d.datetime.now(d.timezone.utc) - t).total_seconds() // 3600))' "$erstellt" 2>/dev/null || echo "?")"
   echo "· neueste Sicherung: $tag (vor ${alter} h)" >&2
-  if [ "$alter" != "?" ] && [ "$alter" -gt "$MAX_ALTER_H" ]; then
-    echo "⚠️  $tag ist älter als ${MAX_ALTER_H} h – läuft der nächtliche Workflow „Offsite-Backup“ noch grün?" >&2
+  if [ "$alter" != "?" ] && [ "$alter" -gt "$MAX_ALTER_ROT_H" ]; then
+    fail "$tag ist ${alter} h alt – das ist älter als die RPO-Toleranz von ${MAX_ALTER_ROT_H} h. Die Sicherung ist nicht frisch; eine Wiederherstellung wäre ein Datenverlust von ${alter} Stunden."
+  elif [ "$alter" != "?" ] && [ "$alter" -gt "$MAX_ALTER_WARN_H" ]; then
+    echo "⚠️  $tag ist älter als ${MAX_ALTER_WARN_H} h – läuft der nächtliche Workflow „Offsite-Backup“ noch grün?" >&2
   fi
   for name in "$@"; do
     if gh release download "$tag" --repo "$REPO" --pattern "$name" --dir "$WORK" --clobber >/dev/null 2>&1; then

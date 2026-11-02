@@ -189,7 +189,12 @@ class RepositoryContractTest(unittest.TestCase):
                         workflow.index("workflow_vertrag_wache.py --online --gate"))
 
     def test_empty_tree_and_unresolved_drift_fail_closed(self):
-        with tempfile.TemporaryDirectory() as tmp, contextlib.redirect_stdout(io.StringIO()):
+        # Sabotage-Läufe schreiben ihre `::error::`-Zeile auf stderr. In CI
+        # würde GitHub daraus eine rote Annotation auf `.github` machen und
+        # den Job wie echten Pin-Drift aussehen lassen – deshalb hier (und in
+        # `test_json_reports_machine_readable_findings`) stderr abfangen.
+        with tempfile.TemporaryDirectory() as tmp, contextlib.redirect_stdout(io.StringIO()), \
+                contextlib.redirect_stderr(io.StringIO()):
             self.assertEqual(avg.main(["--root", tmp, "--gate"]), 1)
             root = Path(tmp)
             path = root / ".github/workflows/a.yml"
@@ -205,7 +210,7 @@ class RepositoryContractTest(unittest.TestCase):
             path.parent.mkdir(parents=True)
             path.write_text(line(OLD) + line(NEW))
             output = io.StringIO()
-            with contextlib.redirect_stdout(output):
+            with contextlib.redirect_stdout(output), contextlib.redirect_stderr(io.StringIO()):
                 result = avg.main(["--root", tmp, "--gate", "--json"])
             self.assertEqual(result, 1)
             payload = json.loads(output.getvalue())

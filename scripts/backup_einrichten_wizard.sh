@@ -135,6 +135,13 @@ abschnitt() { printf '\n%s==> %s%s\n' "$FETT" "$*" "$ENDE"; }
 ok()        { printf '  %s✅ %s%s\n' "$GRUEN" "$*" "$ENDE"; }
 offen()     { printf '  %s❌ %s%s\n' "$ROT" "$*" "$ENDE"; OFFENE=$((OFFENE + 1)); }
 hinweis()   { printf '  %s⚠️  %s%s\n' "$GELB" "$*" "$ENDE"; }
+# EIGENER TOPF FÜR „NICHT PRÜFBAR“ (02.11.2026, #923): Ein Punkt, den dieser
+# Rechner nicht lesen kann, ist NICHT erledigt. Vorher landete jede solche
+# Zeile in `hinweis` – und der Abschluss zählte nur `offen`. Ergebnis:
+# „Alle Pflichtpunkte sind eingerichtet“ bei vier ungelesenen Secrets und
+# ungeprüftem E8 (reproduziert mit einer gh-Attrappe, Exit 0). Jetzt zählt
+# `ungeprueft` mit und der Abschluss sagt es ausdrücklich.
+ungeprueft() { printf '  %s❓ %s%s\n' "$GELB" "$*" "$ENDE"; UNGEPRUEFT=$((UNGEPRUEFT + 1)); }
 info()      { printf '  ·  %s\n' "$*"; }
 link()      { printf '  🔗 %s\n' "$*" >&2; }
 
@@ -282,7 +289,7 @@ pruefe_e8() {  # Return 0 nur bei nachgewiesener Regel: exakt Branch main
       link "$EINSTELLUNGEN_UMGEBUNGEN"
       return 1 ;;
     *)
-      hinweis "E8 nicht prüfbar (Environment-API nicht lesbar: braucht Recht „administration“ für $QUELLE)"
+      ungeprueft "E8 nicht prüfbar (Environment-API nicht lesbar: braucht Recht „administration“ für $QUELLE) – E8 ist NICHT bestätigt"
       link "$EINSTELLUNGEN_UMGEBUNGEN"
       return 1 ;;
   esac
@@ -291,6 +298,7 @@ pruefe_e8() {  # Return 0 nur bei nachgewiesener Regel: exakt Branch main
 # ------------------------------------------------------------ Modus: --check
 check() {
   OFFENE=0
+  UNGEPRUEFT=0
   abschnitt "Offsite-Backup – Einrichtungsprüfung (lokal, E1–E8)"
   info "Quelle: $QUELLE · Ziel: $ZIEL · Environment: $UMGEBUNG"
   info "Tiefprüfung (Token-Gültigkeit, Namespace, Fristen): Lauf „Offsite-Backup“ → Job-Zusammenfassung"
@@ -328,7 +336,7 @@ check() {
     case $? in
       0) ok "$label – Secret vorhanden" ;;
       1) offen "$label – Secret fehlt" ;;
-      *) hinweis "$label – nicht prüfbar (Secret-Liste nicht lesbar: Recht „administration“ nötig)" ;;
+      *) ungeprueft "$label – nicht prüfbar (Secret-Liste nicht lesbar: Recht „administration“ nötig) – Anwesenheit NICHT bestätigt" ;;
     esac
   done
 
@@ -340,9 +348,9 @@ check() {
        case $? in
          0) ok "E4 CLOUDFLARE_ACCOUNT_ID – Repo-Secret vorhanden" ;;
          1) offen "E4 CLOUDFLARE_ACCOUNT_ID fehlt (weder Environment- noch Repo-Secret)" ;;
-         *) hinweis "E4 CLOUDFLARE_ACCOUNT_ID – nicht prüfbar (Secret-Liste nicht lesbar)" ;;
+         *) ungeprueft "E4 CLOUDFLARE_ACCOUNT_ID – nicht prüfbar (Secret-Liste nicht lesbar) – NICHT bestätigt" ;;
        esac ;;
-    *) hinweis "E4 CLOUDFLARE_ACCOUNT_ID – nicht prüfbar (Secret-Liste nicht lesbar)" ;;
+    *) ungeprueft "E4 CLOUDFLARE_ACCOUNT_ID – nicht prüfbar (Secret-Liste nicht lesbar) – NICHT bestätigt" ;;
   esac
 
   # E6 KV-Namespace (Variable, 32 Hex-Zeichen)
@@ -367,13 +375,28 @@ check() {
   fi
 
   abschnitt "Ergebnis"
-  if [ "$OFFENE" -eq 0 ]; then
-    echo "  ${GRUEN}${FETT}Alle Pflichtpunkte sind eingerichtet.${ENDE}"
+  if [ "$OFFENE" -eq 0 ] && [ "$UNGEPRUEFT" -eq 0 ]; then
+    echo "  ${GRUEN}${FETT}Alle Pflichtpunkte sind eingerichtet und geprüft.${ENDE}"
     info "Nächster Schritt: gh workflow run backup-offsite.yml --ref main"
-    info "Der erste grüne Lauf schließt Meldung #761 automatisch."
+    info "Der erste grüne Lauf schließt Meldung #923 automatisch."
     return 0
   fi
+  if [ "$OFFENE" -eq 0 ]; then
+    # Der Fall, der am 02.11.2026 falsches Grün erzeugte: nichts fehlt
+    # nachweislich – aber mehrere Punkte sind ungeprüft. „Ungeprüft“ ist
+    # keine Freigabe, sondern eine offene Frage (Exit 1, klare Sprache).
+    echo "  ${GELB}${FETT}$UNGEPRUEFT Punkt(e) NICHT bestätigt.${ENDE} Das ist kein Grün: Ohne Leserecht auf"
+    echo "  die Secret-Liste bzw. die Environment-Regeln lässt sich die Einrichtung hier nicht belegen."
+    info "Beleg statt Vermutung: Actions → „Offsite-Backup“ → „Run workflow“ (Branch main)."
+    info "Die Job-Zusammenfassung prüft E1–E8 mit echten Token (E2/E5 live) und nennt jeden offenen Punkt."
+    link "https://github.com/$QUELLE/actions/workflows/backup-offsite.yml"
+    info "Anleitung: $ANLEITUNG"
+    return 1
+  fi
   echo "  ${ROT}${FETT}$OFFENE Pflichtpunkt(e) offen.${ENDE} Einrichtung: npm run backup:einrichten (bash scripts/backup_einrichten_wizard.sh)"
+  if [ "$UNGEPRUEFT" -gt 0 ]; then
+    echo "  ${GELB}Dazu $UNGEPRUEFT Punkt(e) nicht bestätigt (Leserechte fehlen).${ENDE}"
+  fi
   info "Anleitung: $ANLEITUNG"
   return 1
 }

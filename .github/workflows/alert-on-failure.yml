@@ -555,6 +555,17 @@ jobs:
             // der Simulation).
             const backupRestore = (isBackup || isBackupFrisch) && !backupEinrichtung &&
               failedStepNames.some(s => String(s).includes('Wiederherstellbarkeit'));
+            // 02.11.2026 (WF-9E5A / #923): Die Frischwache prüft die
+            // Einrichtung inzwischen SELBST und wird rot, wenn E1–E8 offen
+            // sind. Vorher lief sie zehnmal grün, obwohl keine einzige
+            // Sicherung existierte (Lauf 41335523844: E1/E2 fehlten, Job grün)
+            // – eine RPO-Wache, die „nichts gesichert" als Erfolg meldet,
+            // verdeckt genau den Ausfall, den sie überwacht. Der neue rote
+            // Schritt trägt bewusst denselben Namen wie im Offsite-Job; die
+            // Klasse bleibt trotzdem EIGENE Einrichtung (der Rat lautet dort
+            // „Einrichtung unvollständig", nicht „Scheduler-Hänger").
+            const backupFrischEinrichtung = isBackupFrisch &&
+              failedStepNames.some(s => String(s).includes('Voraussetzungen prüfen'));
             // ================================================================
             //  WF-53E2 / #780 (16.10.2026): EIN ROTER SELBSTTEST IST EINE
             //  CODE-REGRESSION – KEIN SCHLÜSSEL, KEIN AUSFALL, KEIN NEUSTART
@@ -601,7 +612,7 @@ jobs:
             // ================================================================
             const runbookKlasse = enginePhase05Failed ? 'engine-fruehabbruch'
               : engineFinalClassifierFailed ? 'engine-schlussklassifikation'
-              : backupEinrichtung ? 'backup-einrichtung'
+              : (backupEinrichtung || backupFrischEinrichtung) ? 'backup-einrichtung'
               : backupFrist ? 'backup-frist'
               // 01.11.2026 (#923): Der Rückweg-Beweis hat einen eigenen Rat –
               // „gelaufen“ und „wiederherstellbar“ sind zwei Aussagen. Steht
@@ -795,6 +806,11 @@ jobs:
             const backupAnleitung = '[`docs/ANLEITUNG-OFFSITE-BACKUP.md`](' + repoUrl +
               '/blob/' + encodeURI(defaultBranch) + '/docs/ANLEITUNG-OFFSITE-BACKUP.md)';
             const backupLaeufe = repoUrl + '/actions/workflows/backup-offsite.yml';
+            // 02.11.2026 (#923): Der Einrichtungs-Rat wird jetzt aus ZWEI
+            // Workflows ausgelöst (Offsite-Backup und Frischwache). Er nennt
+            // deshalb beide Läufe – ein Rat, der nur auf den halben Weg zeigt,
+            // schickt den Betreiber nach dem Lesen wieder ins Suchen.
+            const backupFrischLaeufe = repoUrl + '/actions/workflows/backup-frischwache.yml';
             const handlung = runbookKlasse === 'engine-fruehabbruch'
               ? [
                   '1. **Frühabbruch vor der Endabnahme:** Phase 0.5 ist der fehlgeschlagene Pflichtschritt. Falls „Do not report a quota deficit as success“ ebenfalls rot ist, ist es nur die Schlussklassifikation. Das belegt weder ein Tagesdefizit noch einen API-Key-Ausfall.',
@@ -811,7 +827,7 @@ jobs:
                 ? [
                     '1. **Einrichtung unvollständig – ein Neustart hilft nicht.** „Voraussetzungen prüfen“ ist absichtlich rot (fail-closed): Mindestens ein Zugang oder Ziel der Sicherung fehlt, ist falsch oder abgelaufen. Bis das erledigt ist, werden Abonnenten und Einwilligungsnachweise NICHT gesichert.',
                     '2. Den **jüngsten** Lauf öffnen ([Läufe von „Offsite-Backup“](' + backupLaeufe + '), oberster Eintrag) → **Summary**: Die Checkliste E1–E8 nennt jeden offenen Punkt mit dem Link, unter dem er erledigt wird. Schritt für Schritt: ' + backupAnleitung + '.',
-                    '3. Danach Actions → „Offsite-Backup“ → „Run workflow“ (Branch `main`). Der erste grüne Lauf schließt diese Meldung automatisch.'
+                    '3. Danach Actions → „Offsite-Backup“ → „Run workflow“ (Branch `main`). Der erste grüne Lauf dort schließt diese Meldung automatisch. Derselbe Befund erscheint seit dem 02.11.2026 auch in der [„Backup-Frischwache“](' + backupFrischLaeufe + '): Sie meldet nicht mehr grün, solange nichts gesichert wird.'
                   ]
                 : runbookKlasse === 'backup-frist'
                 ? [
