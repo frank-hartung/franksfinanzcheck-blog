@@ -1,0 +1,229 @@
+{
+  "datum": "2026-11-02",
+  "erzeugt_utc": "2026-11-02 16:02 UTC",
+  "agent_reach": "Agent Reach v1.5.0",
+  "kanal_ok": 7,
+  "kanal_fehler": 1,
+  "ergebnisse": {
+    "rss": {
+      "Tagesschau – alle Meldungen": {
+        "treffer": [
+          {
+            "titel": "Digitalgipfel in Berlin: Merz fordert mehr digitale Souveränität",
+            "url": "https://www.tagesschau.de/inland/digitalgipfel-wildberger-merz-ki-100.html",
+            "datum": "2026-11-02T15:43",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Afghanistans Kindern droht ein tödlicher Winter",
+            "url": "https://www.tagesschau.de/ausland/asien/afghanistan-haumanitare-lage-100.html",
+            "datum": "2026-11-02T15:07",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Merz verurteilt Krawalle am Rande der Jugendproteste",
+            "url": "https://www.tagesschau.de/inland/jugendproteste-gewalt-merz-100.html",
+            "datum": "2026-11-02T14:59",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Massive Cyberattacke auf Linken-Abgeordnete in Berlin",
+            "url": "https://www.tagesschau.de/inland/innenpolitik/cyberattacke-linkspartei-mail-postfaecher-100.html",
+            "datum": "2026-11-02T14:14",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "AfD und Linke: Warum Extremismus-Vergleiche zu kurz greifen",
+            "url": "https://www.tagesschau.de/inland/innenpolitik/extremismus-linke-afd-100.html",
+            "datum": "2026-11-02T14:09",
+            "quelle": "Tagesschau – alle Meldungen"
+          }
+        ],
+        "fehler": null
+      },
+      "DER SPIEGEL – Wirtschaft": {
+        "treffer": [
+          {
+            "titel": "Wirtschaft in den USA: Wo Amerika Deutschland beim Wachstum überholt",
+            "url": "https://www.spiegel.de/wirtschaft/wirtschaft-in-den-usa-wo-amerika-deutschland-beim-wachstum-ueberholt-a-bd92e004-087f-482f-a7e9-fd122df22a7a#ref=rss",
+            "datum": "Mon, 2 Nov 2026 ",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Spritpreisdeckel: Autofahrern droht Preisschub zum Jahreswechsel",
+            "url": "https://www.spiegel.de/wirtschaft/service/spritpreisdeckel-wirkungsloser-deckel-koennte-preisschub-zum-jahreswechsel-bringen-a-b34ba65b-5d0b-437e-8c0c-82864c2d7955#ref=rss",
+            "datum": "Mon, 2 Nov 2026 ",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Deutschlandticket: Verkehrsbetriebe streiten über höhere Verkaufsprovisionen",
+            "url": "https://www.spiegel.de/wirtschaft/service/deutschlandticket-verkehrsbetriebe-streiten-ueber-hoehere-verkaufsprovisionen-a-eac444c3-e2f6-416e-b098-9f8fc3312fcc#ref=rss",
+            "datum": "Mon, 2 Nov 2026 ",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "CDU: Katherina Reiche formuliert erste Pläne für Spritpreisdeckel",
+            "url": "https://www.spiegel.de/wirtschaft/katherina-reiche-cdu-formuliert-erste-plaene-fuer-spritpreisdeckel-a-f41e4366-d70a-485a-959b-f5d16256e46a#ref=rss",
+            "datum": "Mon, 2 Nov 2026 ",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Ryanair: Kerosinkosten drücken Gewinn der Billigfluggesellschaft – Sparprogramm angekündigt",
+            "url": "https://www.spiegel.de/wirtschaft/ryanair-kerosinkosten-druecken-gewinn-der-billigfluggesellschaft-sparprogramm-angekuendigt-a-e32d95f1-0c26-4a9f-b1f3-808e00b659f5#ref=rss",
+            "datum": "Mon, 2 Nov 2026 ",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          }
+        ],
+        "fehler": null
+      },
+      "heise online (Internet/Telekommunikation)": {
+        "treffer": [
+          {
+            "titel": "Lamtto RC38 im Test: Babykamera mit Wireless-Adapter für Carplay & Android Auto",
+            "url": "https://www.heise.de/bestenlisten/testbericht/lamtto-rc38-im-test-babykamera-mit-wireless-adapter-fuer-carplay-und-android-auto/gfmc5n9?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-11-02T16:00",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Claude Code: Anthropic verschärft Regeln gegen Spieleklone",
+            "url": "https://www.heise.de/news/Claude-Code-Anthropic-verschaerft-Regeln-gegen-Spieleklone-11508349.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-11-02T15:49",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "robots.txt auf Diät: Ein einziger Befehl soll alle KI-Trainer stoppen",
+            "url": "https://www.heise.de/news/KI-Training-Ein-Eintrag-in-der-robots-txt-soll-bald-fuer-alle-Bots-reichen-11508208.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-11-02T15:22",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Kostenlose Grafik-App: Canva hat Affinity fürs iPad veröffentlicht",
+            "url": "https://www.heise.de/news/Kostenlose-Grafik-App-Canva-hat-Affinity-fuers-iPad-veroeffentlicht-11508236.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-11-02T15:16",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "heise+ | Softwareentwicklung mit KI: IT-Manager über Effizienzgewinne, Kosten, Risiken",
+            "url": "https://www.heise.de/hintergrund/Softwareentwicklung-mit-KI-IT-Manager-ueber-Effizienzgewinne-Kosten-Risiken-11377391.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus",
+            "datum": "2026-11-02T15:00",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "youtube": {
+      "Strompreis senken Anbieter wechseln": {
+        "treffer": [
+          {
+            "titel": "Geld sparen mit Strom/Gas Anbieter Wechsel | Frugalismus Tipps",
+            "url": "https://www.youtube.com/watch?v=TmCaACcZgN8",
+            "kanal": "BusinessWikinger",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Dein Stromtarifwechsel in nur 5 Schritten - SPARE bis zu €850!",
+            "url": "https://www.youtube.com/watch?v=U4K-J6fDdqw",
+            "kanal": "Verträge, Vorsorge & Sparpotenziale",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "TIBBER - Stromkosten senken! Geld Sparen, Stromtarif, Strombörse",
+            "url": "https://www.youtube.com/watch?v=a6flroWreNk",
+            "kanal": "Frührentner",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "STROMKOSTEN SENKEN LEICHT GEMACHT",
+            "url": "https://www.youtube.com/watch?v=AV6klzZwCeo",
+            "kanal": "Energiepreis Reduktion",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Stromverbrauch reduzieren Teil 2 ⚡ [Tutorial] Stromkosten senken & Energie Sparen!",
+            "url": "https://www.youtube.com/watch?v=VpOv9XBgO-c",
+            "kanal": "Finanzen-im-Griff",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      },
+      "ETF Sparplan für Anfänger erklärt": {
+        "treffer": [
+          {
+            "titel": "Alles über ETFs in nur 15 Minuten: Index, Sparplan, Steuern",
+            "url": "https://www.youtube.com/watch?v=r80NOOdFIn8",
+            "kanal": "Finanztip",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "So fängst du 2026 mit dem Investieren an (in 10 Min!)",
+            "url": "https://www.youtube.com/watch?v=eTCTGwFO1-Y",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Investieren in ETFs: DAS musst du VORHER wissen!",
+            "url": "https://www.youtube.com/watch?v=b0jlsAiAT04",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF Sparplan: Schritt-für-Schritt zum ETF Portfolio",
+            "url": "https://www.youtube.com/watch?v=LCLpqN99_iU",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETFs verstehen & kaufen: Dein Start mit Depot, ETF-Auswahl, Sparplan",
+            "url": "https://www.youtube.com/watch?v=PTJ0tFzUdR0",
+            "kanal": "Finanztip",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      },
+      "Kreditkarten Vergleich ohne Jahresgebühr": {
+        "treffer": [
+          {
+            "titel": "Kreditkarten ohne Auslandsgebühren (2026) Welche lohnt sich wirklich?",
+            "url": "https://www.youtube.com/watch?v=2HuHTzSNDvE",
+            "kanal": "GeldRat",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten-Vergleich 2026: NEUER Testsieger? Die besten kostenlosen Kreditkarten! | Finanzfluss",
+            "url": "https://www.youtube.com/watch?v=jNOYUslvA1I",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten Vergleich: Die besten kostenlosen Kreditkarten 2025! | Finanzfluss",
+            "url": "https://www.youtube.com/watch?v=r0VXMVcN1k4",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "0€ Kreditkarten Vergleich (2026) Welche ist die Beste?",
+            "url": "https://www.youtube.com/watch?v=6onQLIHJ-R0",
+            "kanal": "GeldRat",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "3 Kreditkarten ohne Jahresgebühr im Vergleich: Amazon Visa, TF Bank und Free.at Kreditkarte",
+            "url": "https://www.youtube.com/watch?v=cqbuXUZSbv0",
+            "kanal": "Broker-Test.at",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "github": {
+      "haushaltsbuch": {
+        "treffer": [],
+        "fehler": "gh-Fehler: gh: To use GitHub CLI in a GitHub Actions workflow, set the GH_TOKEN environment variable. Example:"
+      }
+    }
+  }
+}
