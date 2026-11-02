@@ -9,6 +9,34 @@
 # ============================================================
 version: 1
 vorschlaege:
+- titel: STROMKOSTEN SENKEN LEICHT GEMACHT
+  url: https://www.youtube.com/watch?v=AV6klzZwCeo
+  quelle: YouTube
+  erfasst: '2026-11-02T19:13:37'
+  brief: 2026-11-02-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-11-02-internet-recherche.json – Quellenprüfung erforderlich.
+- titel: TIBBER - Stromkosten senken! Geld Sparen, Stromtarif, Strombörse
+  url: https://www.youtube.com/watch?v=a6flroWreNk
+  quelle: YouTube
+  erfasst: '2026-11-02T19:13:37'
+  brief: 2026-11-02-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-11-02-internet-recherche.json – Quellenprüfung erforderlich.
+- titel: 'CDU: Katherina Reiche formuliert erste Pläne für Spritpreisdeckel'
+  url: https://www.spiegel.de/wirtschaft/katherina-reiche-cdu-formuliert-erste-plaene-fuer-spritpreisdeckel-a-f41e4366-d70a-485a-959b-f5d16256e46a#ref=rss
+  quelle: DER SPIEGEL – Wirtschaft
+  erfasst: '2026-11-02T19:13:37'
+  brief: 2026-11-02-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-11-02-internet-recherche.json – Quellenprüfung erforderlich.
+- titel: 'Spritpreisdeckel: Autofahrern droht Preisschub zum Jahreswechsel'
+  url: https://www.spiegel.de/wirtschaft/service/spritpreisdeckel-wirkungsloser-deckel-koennte-preisschub-zum-jahreswechsel-bringen-a-b34ba65b-5d0b-437e-8c0c-82864c2d7955#ref=rss
+  quelle: DER SPIEGEL – Wirtschaft
+  erfasst: '2026-11-02T19:13:37'
+  brief: 2026-11-02-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-11-02-internet-recherche.json – Quellenprüfung erforderlich.
 - titel: IG Metall weitet im Tarifstreit Warnstreiks aus
   url: https://www.tagesschau.de/wirtschaft/arbeitsmarkt/ig-metall-warnstreiks-120.html
   quelle: Tagesschau Wirtschaft (RSS)
@@ -254,4 +282,4 @@ vorschlaege:
   brief: 2026-09-28-internet-recherche.json
   status: offen
   notiz: Automatisch erfasst aus 2026-09-28-internet-recherche.json – Quellenprüfung erforderlich.
-zuletzt_ergaenzt: '2026-11-02T08:37:08'
+zuletzt_ergaenzt: '2026-11-02T19:13:37'
