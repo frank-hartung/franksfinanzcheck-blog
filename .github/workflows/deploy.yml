@@ -991,6 +991,15 @@ jobs:
       - name: YMYL-Bestand – nur fachlich freigegebene Live-Artikel
         run: python3 scripts/editorial_review_gate.py --published --strict
 
+      # #1014: Erst NACH Publish-Gate, Auslieferungs-Isolation und YMYL-Bestand
+      # steht der endgültige Live-Bestand fest. Das LCP-Manifest wird daraus
+      # vor dem finalen Build erzeugt, damit neu veröffentlichte Artikel nicht
+      # erst beim Wochen-SEO-Lauf ihren Preload-Eintrag erhalten. Fehlende
+      # AVIF-Varianten sind ein Inhaltsbefund und stoppen den Deploy bewusst
+      # (kein || true). Eine Manifest-Änderung löst über gate_diff den Rebuild aus.
+      - name: LCP-Manifest aus finalem Live-Bestand erzeugen
+        run: python3 scripts/lcp_image_optimizer.py --fix
+
       - name: Gate-Heilungsdiff merken (alle Gates, inkl. Publish-Gate)
         id: gate_diff
         run: |

@@ -1,5 +1,5 @@
-generated_at: '2026-11-01T10:47:38Z'
-day: '2026-11-01'
+generated_at: '2026-11-02T11:40:22Z'
+day: '2026-11-02'
 mode: deterministic
 teams:
   trending:
@@ -252,37 +252,24 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: Dein Mietwagen im Ausland am besten buchen
-    pillar: mietwagen
+  - topic: 'Balkon bepflanzen: So senkst du die Gemüsekosten'
+    pillar: frugalismus
     signal: niche_hook
-    source: topics:Dein Mietwagen im Ausland am besten buchen
+    source: 'topics:Balkon bepflanzen: So senkst du die Gemüsekosten'
     score: 0.55
     keywords:
-    - Mietwagen
-    - Ausland
-    - Buchen
-  - topic: Heizperiode vorbereiten im Spätsommer
-    pillar: strom-sparen
-    signal: niche_hook
-    source: topics:Heizperiode vorbereiten im Spätsommer
-    score: 0.55
-    keywords:
-    - Gasrechnung senken
-    - Heizkosten sparen
-    - Herbst Vorbereitung
-    - Heizung prüfen
-  - topic: 'Jahresabschluss-Check: Diese 4 Versicherungen solltest du im Dezember
-      kündigen'
+    - Balkon Gemüse
+    - Kräuter ziehen
+    - Gemüse selber ziehen
+  - topic: Günstige Reiseversicherungen für den Sommerurlaub finden
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Jahresabschluss-Check: Diese 4 Versicherungen solltest du im Dezember
-      kündigen'
+    source: topics:Günstige Reiseversicherungen für den Sommerurlaub finden
     score: 0.55
     keywords:
-    - Versicherungen prüfen Jahresende
-    - Policen kündigen Dezember
-    - Unnötige Versicherungen kündigen
-    - Doppelversicherung vermeiden
+    - Reiseversicherung
+    - Sommerurlaub
+    - Versicherungsvergleich
   - topic: Reiseversicherungen im Test
     pillar: versicherungen
     signal: niche_hook
@@ -292,24 +279,33 @@ teams:
     - Reise
     - Versicherung
     - Test
-  - topic: 'Streaming-Qualität: Wie viel Bandbreite du wirklich brauchst'
-    pillar: internet-dsl
+  - topic: 'Stromanbieter wechseln: Tarife prüfen und Kosten senken'
+    pillar: strom-sparen
     signal: niche_hook
-    source: 'topics:Streaming-Qualität: Wie viel Bandbreite du wirklich brauchst'
+    source: 'topics:Stromanbieter wechseln: Tarife prüfen und Kosten senken'
     score: 0.55
     keywords:
-    - Streaming Bandbreite
-    - Internetgeschwindigkeit
-    - Streaming ruckelt
-  - topic: Versteckte Kosten im Mietwagenvertrag entschlüsseln
+    - Stromanbieter wechseln
+    - Stromvergleich
+    - Stromkosten senken
+  - topic: Stromspar-Apps im Test für den Haushalt
+    pillar: strom-sparen
+    signal: niche_hook
+    source: topics:Stromspar-Apps im Test für den Haushalt
+    score: 0.55
+    keywords:
+    - Stromspar-Apps
+    - Haushalt
+    - Test
+  - topic: Wie du beim Mietwagenkauf Geld sparen kannst
     pillar: mietwagen
     signal: niche_hook
-    source: topics:Versteckte Kosten im Mietwagenvertrag entschlüsseln
+    source: topics:Wie du beim Mietwagenkauf Geld sparen kannst
     score: 0.55
     keywords:
-    - Mietwagenvertrag
-    - versteckte Kosten
-    - Urlaubskasse
+    - Mietwagenkauf
+    - Geld sparen
+    - Tipps
 live_web:
   enabled: false
   findings: []
