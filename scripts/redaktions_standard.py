@@ -58,6 +58,7 @@
 
 import datetime
 import hashlib
+import importlib.util
 import json
 import os
 import re
@@ -1371,7 +1372,7 @@ _RS5_DETERMINISTIC_MARKERS = (
 
 
 def _heal_rs5_block(block: str, marker_idx: int) -> tuple[str, int]:
-    """Qualifiziert den ersten unbelegten Zahlen-Satz eines Absatzes als Modellwert.
+    r"""Qualifiziert den ersten unbelegten Zahlen-Satz eines Absatzes als Modellwert.
 
     WARUM NEU (01.11.2026, #964): Der Heiler suchte die ERSTE Satzgrenze im
     Absatz (`re.search(r"([.!?])(\s+|$)")`) und setzte dort „ im Modellfall“
@@ -2260,7 +2261,31 @@ def wirkungsprobe() -> int:
     return 0
 
 
+GRUND_MARKIERUNG = "Prüfgrundlage fehlt"
+
+
+def _messgrundlage_fehlt() -> list[str]:
+    """Prüft die Python-Abhängigkeiten, ohne die der Selbsttest nicht voll urteilen kann.
+
+    Hintergrund (#1001, 02.11.2026): Fehlt `PyYAML` aus `requirements-ci.txt`,
+    fällt die YMYL-Schreibprüfung in `editorial_review_gate` bewusst fail-closed
+    zurück (`ParseError: PyYAML fehlt`). Der Fall `Vertrag-gute-aenderung-still`
+    wurde dadurch als „die Wache selbst ist defekt“ ausgegeben und im Bericht
+    vom 01.11.2026 fälschlich als kaputte Wache protokolliert.
+    Beide Lagen bleiben Exit 2 (keine Messung ist kein Grün, C33) – aber die
+    Diagnose trennt fehlende Prüfgrundlage scharf von einem Defekt der Wache.
+    """
+    fehlend: list[str] = []
+    if importlib.util.find_spec("yaml") is None:
+        fehlend.append(
+            "PyYAML fehlt (python3 -m pip install --require-hashes -r requirements-ci.txt) "
+            "– YMYL-Schreibprüfung läuft ohne Bibliothek bewusst fail-closed."
+        )
+    return fehlend
+
+
 def selftest():
+    fehlend = _messgrundlage_fehlt()
     fehler = []
     for name, fn, erwartung in SELFTEST:
         try:
@@ -2269,11 +2294,32 @@ def selftest():
             fehler.append(f"{name}: Exception {e}")
             continue
         if ist != erwartung:
+            if name == "Vertrag-gute-aenderung-still" and fehlend:
+                # Auch ohne PyYAML müssen V1/V2 für den guten Satz still bleiben;
+                # ein echter Detektor-Defekt darf sich nie hinter fehlendem PyYAML
+                # verstecken.
+                rest = [
+                    g for g in _vertrag_gruende(
+                        {"slug": "gut", "fm": 'title: "X"',
+                         "body": "Kurzer Satz hier. Noch ein kurzer Satz. Der Text bleibt leicht."},
+                        "Kurzer Satz steht hier. Noch ein kurzer Satz folgt. Der Text bleibt "
+                        "leicht lesbar.",
+                    )
+                    if "PyYAML fehlt" not in g
+                ]
+                if not rest:
+                    continue
             fehler.append(f"{name}: {ist}, erwartet {erwartung}")
     if fehler:
         print("🛑 SELBSTTEST FEHLGESCHLAGEN – die Wache selbst ist defekt "
               "(Exit 2, keine Datei wird geschrieben):")
         for f in fehler:
+            print("   -", f)
+        return 2
+    if fehlend:
+        print(f"🛑 SELBSTTEST NICHT AUSFÜHRBAR – {GRUND_MARKIERUNG} "
+              "(Exit 2, keine Datei wird geschrieben; die Wache selbst ist nicht defekt):")
+        for f in fehlend:
             print("   -", f)
         return 2
     print(f"✅ Selbsttest: {len(SELFTEST)} eingefrorene Fälle bestanden.")

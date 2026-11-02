@@ -72,6 +72,7 @@
 # ============================================================
 from __future__ import annotations
 
+import importlib.util
 import os
 import sys
 
@@ -183,8 +184,27 @@ def _sim(name: str) -> str:
         return fh.read()
 
 
+GRUND_MARKIERUNG = "Prüfgrundlage fehlt"
+
+
+def _messgrundlage_fehlt() -> list[str]:
+    """Prüft Python-Abhängigkeiten für den vollständigen Selbsttest (#1001)."""
+    fehlend: list[str] = []
+    if importlib.util.find_spec("yaml") is None:
+        fehlend.append(
+            "PyYAML fehlt (python3 -m pip install --require-hashes -r requirements-ci.txt) "
+            "– YMYL-Schreibprüfung läuft ohne Bibliothek bewusst fail-closed."
+        )
+    return fehlend
+
+
+def _ohne_yaml_hinweis(gruende: list[str]) -> list[str]:
+    return [g for g in gruende if "PyYAML fehlt" not in g]
+
+
 def selftest() -> int:
     """Sabotage-Proben: Fehler MÜSSEN erkannt werden, Gutes MUSS still bleiben."""
+    fehlend = _messgrundlage_fehlt()
     fehler: list[str] = []
 
     gut_alt = ("---\ntitle: \"X\"\ndraft: false\n---\n\n"
@@ -204,14 +224,17 @@ def selftest() -> int:
                              "In diesem Beitrag erfährst du alles Wichtige.")
 
     # 1) Gute Änderung bleibt still.
-    if pruefe("gut", gut_alt, gut_neu):
-        fehler.append(f"gute Änderung wird verworfen: {pruefe('gut', gut_alt, gut_neu)[:1]}")
+    gut_gruende = pruefe("gut", gut_alt, gut_neu)
+    gut_echt = _ohne_yaml_hinweis(gut_gruende) if fehlend else gut_gruende
+    if gut_echt:
+        fehler.append(f"gute Änderung wird verworfen: {gut_echt[:1]}")
 
     # 2) Flesch-Absturz unter die Schwelle wird erkannt (Kernfall WF-54C4).
     gruende = pruefe("hart", gut_alt, schwer_neu)
-    if not any(g.startswith("V1") for g in gruende):
+    v1_gruende = [g for g in gruende if g.startswith("V1")]
+    if not v1_gruende:
         fehler.append("V1: Absinken unter die Publish-Schwelle wird nicht erkannt")
-    elif "V1" in gruende[0] and "Flesch" not in gruende[0]:
+    elif "Flesch" not in v1_gruende[0]:
         fehler.append("V1: Meldung nennt den Flesch-Wert nicht")
 
     # 3) Neue harte Verständnis-Regel wird erkannt (R7 „In diesem Beitrag“).
@@ -220,7 +243,8 @@ def selftest() -> int:
         fehler.append("V2: neu eingeführte R7-Intro-Formel wird nicht erkannt")
 
     # 4) Altlasten werden nicht angelastet: Der Fund steht schon VORHER drin.
-    if pruefe("altlast", r7_neu, r7_neu):
+    altlast_gruende = pruefe("altlast", r7_neu, r7_neu)
+    if (_ohne_yaml_hinweis(altlast_gruende) if fehlend else altlast_gruende):
         fehler.append("V2: unveränderte Altlast wird fälschlich als neuer Fund gemeldet")
 
     # 5) Die Schwelle ist importiert, nicht kopiert: Wer sie anhebt, hebt sie
@@ -228,7 +252,7 @@ def selftest() -> int:
     echtes_min = readability_check.NEW_FLESCH_MIN
     try:
         readability_check.NEW_FLESCH_MIN = 99.0
-        if not pruefe("schwelle", gut_alt, gut_neu):
+        if not any(g.startswith("V1") for g in pruefe("schwelle", gut_alt, gut_neu)):
             fehler.append("V1: Schwelle wird nicht aus readability_check importiert "
                           "(angehobene SSOT änderte das Urteil nicht)")
     finally:
@@ -249,15 +273,23 @@ def selftest() -> int:
                           "(Flesch-Absturz fehlt)")
         if not any("R7-INTRO-FORMEL" in g for g in echte_gruende):
             fehler.append("Vorfall WF-54C4: der reale R7-Fund wird nicht mehr erkannt")
-        if pruefe("vorfall-ok", vorher, vorher):
+        vorfall_ok = pruefe("vorfall-ok", vorher, vorher)
+        if (_ohne_yaml_hinweis(vorfall_ok) if fehlend else vorfall_ok):
             fehler.append("Vorfall WF-54C4: der unveränderte Ursprungstext gilt "
                           "fälschlich als Verstoß")
     except OSError as exc:
         fehler.append(f"Vorfall-Material (scripts/tests/sim/wf54c4) nicht lesbar: {exc}")
 
     if fehler:
-        print("🛑 PUBLIKATIONS-VERTRAG – SELFTEST FEHLGESCHLAGEN:")
+        print("🛑 PUBLIKATIONS-VERTRAG – SELFTEST FEHLGESCHLAGEN "
+              "(Exit 2, die Wache selbst ist defekt):")
         for f in fehler:
+            print(f"   - {f}")
+        return 2
+    if fehlend:
+        print(f"🛑 PUBLIKATIONS-VERTRAG – SELBSTTEST NICHT AUSFÜHRBAR: {GRUND_MARKIERUNG} "
+              "(Exit 2, die Wache selbst ist nicht defekt):")
+        for f in fehlend:
             print(f"   - {f}")
         return 2
     print("✅ PUBLIKATIONS-VERTRAG-SELFTEST bestanden: V1 (Flesch-Absturz unter die "

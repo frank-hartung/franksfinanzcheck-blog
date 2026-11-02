@@ -396,3 +396,27 @@ statt Höflichkeit, Detailpolitur an Komponenten. Er ändert keine Regel dieser
 Website – `PRODUCT.md`, `DESIGN.md`, `README.md`-Markenfläche und die
 24-Punkte-Richtlinie in `ff-oberflaeche/references/web-richtlinien.md` bleiben
 die Wahrheitsorte; der Skill liefert das Handwerk, das Urteil bleibt hausgemacht.
+
+## Siegel über dem Skill-Regelkern (K8 + `W5-MERGE-BINARY`)
+
+Alle vier regelsetzenden Dateien des Skill-Systems (`SIEGEL_PFLICHT` in
+`scripts/skills_vertrag.py`) liegen unter `FEST` im Integritätsschloss
+(`data/integrity_lock.json`) und stehen mit `merge=binary` in `.gitattributes`:
+
+- `scripts/skills_vertrag.py` und `data/skill_lizenzen.json`
+- `scripts/skills_portfolio.py` und `data/skill_portfolio.yaml`
+
+Wer eine dieser Dateien bewusst ändert (z. B. nach Aufnahme oder Rückzug eines
+Fremd-Skills), zeichnet das Siegel im **selben Commit** neu und prüft K8 sowie
+das Schloss gegen den Arbeitsbaum:
+
+```bash
+python3 scripts/integrity_guard.py --set-current
+python3 scripts/integrity_guard.py --gate
+python3 scripts/skills_vertrag.py
+npm run test:skills
+```
+
+Ohne Neu-Zeichnung schlägt `.github/workflows/integrity-lock.yml` im Pull Request
+an, und K8 nennt die abweichende Datei beim Namen (`docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, § G1–G4).
+

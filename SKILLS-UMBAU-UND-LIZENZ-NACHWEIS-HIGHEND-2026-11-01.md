@@ -282,3 +282,34 @@ geänderten Pfade liegt im Hugo-Eingabebaum (`.claude/`, `CLAUDE.md`,
 die Signatur voraussetzt, nicht umgekehrt. Und die Quartalsfrage aus Punkt 4
 (228 Root-Berichte in dieselbe Struktur) ist unbeantwortet – dieser Umbau hat
 nur gezeigt, dass Verschieben billiger ist als Aufräumen durch Löschen.
+
+---
+
+## Nachtrag und Richtigstellung (02.11.2026, #1001)
+
+Das Tagesprotokoll oben bleibt als historischer Befund unverändert stehen; zwei
+Aussagen darin sind am Folgetag gemessen, widerlegt und dauerhaft behoben worden:
+
+1. **`scripts/redaktions_standard.py` war weder `KRITISCH` versiegelt noch
+   defekt.** Die Datei steht unter `FEST` (nicht `KRITISCH`), und der am
+   01.11.2026 beobachtete rote Lauf (`Vertrag-gute-aenderung-still`, Exit 2)
+   entstand allein dadurch, dass der lokale Prüf-Interpreter ohne `PyYAML` aus
+   `requirements-ci.txt` lief: `editorial_review_gate.py` verweigert die
+   YMYL-Schreibprüfung ohne `PyYAML` bewusst fail-closed, und die alte
+   Selbsttest-Ausgabe meldete das pauschal als „die Wache selbst ist defekt“.
+   Mit `python3 -m pip install --require-hashes -r requirements-ci.txt` bestehen
+   alle **48 eingefrorenen Fälle** in `redaktions_standard.py --selftest`, alle
+   Proben in `publikations_vertrag.py --selftest` und alle **263 Wachen + 526
+   Uhr-Proben** in `selftest_runner.py`. Seit #1001 trennen beide Wachen und der
+   Runner scharf zwischen `Prüfgrundlage fehlt` (weiterhin fail-closed Exit 2,
+   C33) und einem echten Detektor-Defekt.
+2. **Das Siegel über dem Skill-Regelkern ist gezeichnet und doppelt gesperrt.**
+   Alle vier Dateien in `SIEGEL_PFLICHT` (`scripts/skills_vertrag.py`,
+   `data/skill_lizenzen.json`, `scripts/skills_portfolio.py`,
+   `data/skill_portfolio.yaml`) stehen in `integrity_guard.py` unter `FEST`,
+   sind in `data/integrity_lock.json` signiert (**55 Kerndateien**) und tragen
+   in `.gitattributes` `merge=binary`. `scripts/wachen_vertrag.py` prüft die
+   `merge=binary`-Parität aller versiegelten `scripts/*.py` dauerhaft als harte
+   Klasse `W5-MERGE-BINARY` (C39), und `test_siegelzusage_bleibt_stehen` in
+   `scripts/tests/test_skills_vertrag.py` hält K8 bei `0 Warnungen` fest.
+

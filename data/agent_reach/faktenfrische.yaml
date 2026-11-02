@@ -41,7 +41,7 @@ intervalle:
   erstrecherche_bei_erstellung: true
 
 budget:
-  max_artikel_pro_lauf: 3       # Rotation statt Rundumschlag (Sockel)
+  max_artikel_pro_lauf: 4       # Rotation statt Rundumschlag (Sockel; ab 112 Seiten 4/Tag für ≥110 % Deckung, C45)
   max_treffer_je_artikel: 6     # so viele Fundstellen ins Dossier
   max_quellen_frontmatter: 4    # so viele Belege in den Artikel
   web_max_zeichen: 1800         # Klartext-Auszug je Webseite

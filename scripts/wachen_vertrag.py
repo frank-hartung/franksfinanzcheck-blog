@@ -112,6 +112,7 @@ KLASSEN = {
     "W2-HALBER-AUFRUF": "Aufgerufener Name ohne Definition in dieser Datei – der Aufruf endet in einem NameError.",
     "W3-HALBE-KONSTANTE": "Gelesene Modul-Konstante ohne Definition in dieser Datei.",
     "W4-AUSNAHME": "Die Ausnahmedatei ist unbekannt, unbegründet, undatiert oder abgelaufen.",
+    "W5-MERGE-BINARY": "Versiegelte Quelltext-Wache aus KRITISCH/FEST fehlt mit merge=binary in .gitattributes.",
     "W9-SYNTAX": "Die Datei ist kein gültiges Python – dann gilt hier keine Aussage über Namen.",
 }
 
@@ -310,6 +311,73 @@ def ausnahmebefunde(ausnahmen: dict, gedeckt: set, root: Path | str,
 
 
 # ---------------------------------------------------------------------------
+#  W5 – merge=binary für alle versiegelten Quelltext-Wachen (#783 / #1001)
+# ---------------------------------------------------------------------------
+
+def merge_binary_befunde(root: Path | str) -> list[Fund]:
+    """Jede Quelltext-Wache (`scripts/*.py`) unter `KRITISCH | FEST` muss in
+    `.gitattributes` mit `merge=binary` stehen.
+
+    Hintergrund (#783 / #1001, 02.11.2026): C39 verspricht in seinem Vertrag,
+    dass versiegelte Kerndateien textuell gar nicht mehr zusammengesetzt werden
+    können. Am 01.11.2026 kamen drei neue Wachen (`skills_vertrag.py`,
+    `skills_portfolio.py`, `serp_limits.py`) nach `FEST`, ohne in
+    `.gitattributes` nachgezogen zu werden – weil keine Prüfung Quelle
+    (`integrity_guard.py`) und Merge-Sperre (`.gitattributes`) gegeneinander hielt.
+    Isolierte Mini-Bäume ohne `integrity_guard.py` oder `.gitattributes` bleiben
+    unberührt; liegen beide vor, ist jede Lücke ein harter Befund.
+    """
+    root = Path(root)
+    guard_pfad = root / "scripts" / "integrity_guard.py"
+    attr_pfad = root / ".gitattributes"
+    if not (guard_pfad.is_file() and attr_pfad.is_file()):
+        return []
+    try:
+        baum = ast.parse(guard_pfad.read_text(encoding="utf-8"),
+                         filename="scripts/integrity_guard.py")
+    except (OSError, SyntaxError) as exc:
+        return [Fund("W5-MERGE-BINARY", "scripts/integrity_guard.py", "0",
+                     f"Siegel-Quelle nicht lesbar ({exc.__class__.__name__}) – "
+                     "merge=binary-Abgleich nicht führbar.")]
+    versiegelt: set[str] = set()
+    for knoten in baum.body:
+        if (isinstance(knoten, ast.Assign)
+                and len(knoten.targets) == 1
+                and isinstance(knoten.targets[0], ast.Name)
+                and knoten.targets[0].id in ("KRITISCH", "FEST")
+                and isinstance(knoten.value, (ast.Set, ast.List, ast.Tuple))):
+            for el in knoten.value.elts:
+                if isinstance(el, ast.Constant) and isinstance(el.value, str):
+                    versiegelt.add(el.value)
+    quelltext_wachen = sorted(
+        p for p in versiegelt if p.startswith("scripts/") and p.endswith(".py")
+    )
+    if not quelltext_wachen:
+        return []
+    try:
+        attr_zeilen = attr_pfad.read_text(encoding="utf-8").splitlines()
+    except OSError as exc:
+        return [Fund("W5-MERGE-BINARY", ".gitattributes", "0",
+                     f"nicht lesbar ({exc.__class__.__name__})")]
+    geschuetzt: set[str] = set()
+    for roh in attr_zeilen:
+        zeile = roh.strip()
+        if not zeile or zeile.startswith("#"):
+            continue
+        teile = zeile.split()
+        if len(teile) >= 2 and "merge=binary" in teile[1:]:
+            geschuetzt.add(teile[0])
+    return [
+        Fund("W5-MERGE-BINARY", ".gitattributes", pfad,
+             f"`{pfad}` steht unter dem Siegel (KRITISCH/FEST), fehlt aber als "
+             f"`{pfad} merge=binary` in `.gitattributes` – ein Text-Merge "
+             "könnte wieder eine halbe Fassung zusammensetzen (#783/#1001).")
+        for pfad in quelltext_wachen
+        if pfad not in geschuetzt
+    ]
+
+
+# ---------------------------------------------------------------------------
 #  Gesamtlauf
 # ---------------------------------------------------------------------------
 
@@ -338,6 +406,7 @@ def befunde(root: Path | str = BLOG_DIR, ausnahmen: dict | None = None,
         akzeptiert.extend(verdeckt)
     funde = [f for f in rohe if f not in verdeckt]
     funde += ausnahmebefunde(ausnahmen, gedeckt, root, ausnahmen_fehler)
+    funde += merge_binary_befunde(root)
     return funde
 
 
@@ -575,6 +644,20 @@ def selftest() -> int:
         (wurzel / "scripts" / "scharf.py").chmod(0o500)
         pruefe("Prüfling-wird-nicht-ausgeführt", befunde(wurzel, ausnahmen={}) == [])
 
+        # --- W5: versiegelte Quelltext-Wachen tragen merge=binary (#1001) ---
+        _fall(wurzel, "integrity_guard.py",
+              '#!/usr/bin/env python3\nKRITISCH = set()\nFEST = {"scripts/ganze_wache.py"}\n')
+        (wurzel / ".gitattributes").write_text("*.jsonl merge=union\n", encoding="utf-8")
+        funde = befunde(wurzel, ausnahmen={})
+        pruefe("Fehlendes-merge-binary-fuer-FEST-Wache-wird-gemeldet",
+               any(f.klasse == "W5-MERGE-BINARY" and f.stelle == "scripts/ganze_wache.py"
+                   for f in funde))
+        (wurzel / ".gitattributes").write_text(
+            "*.jsonl merge=union\nscripts/ganze_wache.py merge=binary\n", encoding="utf-8"
+        )
+        pruefe("Vollstaendiges-merge-binary-ist-gruen",
+               befunde(wurzel, ausnahmen={}) == [])
+
     if fehler:
         print("🛑 SELBSTTEST FEHLGESCHLAGEN – der Wachen-Vertrag ist defekt "
               "(Exit 2, kein Fund wird gemeldet):")
@@ -583,7 +666,8 @@ def selftest() -> int:
         return 2
     print(f"✅ Wachen-Vertrag: Selbsttest grün ({geprueft} eingefrorene Fälle: "
           "der Vorfall #783 als Miniatur, seine Gegenprobe, Marker-Paar-Regel, "
-          "Ausnahme-Lebenszyklus, Nicht-Ausführung des Prüflings).")
+          "Ausnahme-Lebenszyklus, Nicht-Ausführung des Prüflings, "
+          "merge=binary-Parität für versiegelte Wachen).")
     return 0
 
 

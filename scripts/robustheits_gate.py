@@ -286,7 +286,7 @@ def erstpartei_js(root: Path) -> list[str]:
 
 
 def skript_bloecke(quelltext: str) -> list[str]:
-    """Inhalt aller <script>-Blöcke (ohne type=…-Dateninseln wie JSON-LD).
+    r"""Inhalt aller <script>-Blöcke (ohne type=…-Dateninseln wie JSON-LD).
 
     Das End-Tag erlaubt alles bis zur Klammer (`</script >`, `</script\n>`,
     `</script data-ff="1">`): Browser nehmen Leerraum und Attribute im End-Tag
