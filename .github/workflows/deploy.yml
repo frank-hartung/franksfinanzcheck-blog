@@ -821,6 +821,9 @@ jobs:
       - name: Faktenfrische-Selbsttest (Recherchevertrag vor Veröffentlichung)
         run: python3 scripts/faktenfrische.py --selftest
 
+      - name: Faktenfrische Gas – Rückfallschutz #996
+        run: python3 -m unittest scripts.tests.test_faktenfrische_996
+
       - name: Publish-Gate (harte Qualitäts-, Affiliate-, Fakten- und YMYL-Freigaben)
         run: python3 scripts/publish_gate.py
 

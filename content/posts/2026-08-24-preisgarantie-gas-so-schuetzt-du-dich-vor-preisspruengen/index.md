@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-09-28
+lastmod: 2026-11-02
 title: "Preisgarantie Gas: Was bei Preiserhöhung hilft"
 description: "Preisgarantie Gas: Steigt der Preis trotz Garantie? So prüfst du die Klausel, rechnest Marktrisiken ein und nutzt Widerspruch oder Sonderkündigung."
 date: 2026-08-24T08:35:12Z
@@ -17,7 +17,7 @@ kurzantwort: "Eine Gaspreisgarantie dämpft Preissprünge nur bei den vertraglic
 social_posted: true
 keywords: ["Preisgarantie Gas", "Gaspreissprünge", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich", "Gaspreisgarantie", "Preiserhöhung"]
 pin_title: "Preisgarantie Gas: So schützt du dich vor Preissprüngen"
-pin_description: "*Werbung | Der Spätsommer ist die beste Zeit für den Gaswechsel: bevor die Heizperiode die Preise anzieht. Vergleiche Tarife mit Preisgarantie und Wechselbonus, in nur 5 Minuten Aufwand. Jetzt die Schritt-für-Schritt-Anleitung lesen."
+pin_description: "*Werbung | Vergleiche Gastarife und prüfe Preisgarantie, Bonusbedingungen und Laufzeit. Ob sich ein Wechsel lohnt, hängt vom konkreten Angebot ab."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
   - titel: "Informationen zu Strom- und Gaspreisen für Haushaltskunden"
@@ -30,10 +30,9 @@ quellen:
     url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-finden-sie-den-passenden-strom-oder-gastarif-6436"
     herausgeber: "Verbraucherzentrale"
     datum: "2026-07-29"
-  - titel: "BDEW-Gaspreisanalyse August 2026"
-    url: "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/"
-    herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
-    datum: "2026-08-24"
+  - titel: "Heizung: 10 einfache Tipps zum Heizkosten sparen"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892"
+    herausgeber: "Verbraucherzentrale"
 faktencheck: 2026-11-01
 ---
 
@@ -45,7 +44,7 @@ Wichtig wird es erst, wenn dein Anbieter den Preis wirklich ändert oder deine G
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Tarife kannst du über unseren Partner-Vergleich prüfen: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ![Merkkarte: Kernaussagen zu Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-merkkarte.svg)
@@ -56,7 +55,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Leg das Schreiben neben deinen Vertrag. Markiere den alten und den neuen Preis je kWh. Markiere auch den Tag, an dem der neue Preis gelten soll. Suche danach die Stelle zum Preis-Schutz. So erkennst du, ob der Grund im Brief zu dem Schutz im Vertrag passt.
 
-Rechne dann den Preis für ein Jahr mit deinem Verbrauch. Lass dabei den Bonus weg. Vergleiche den Wert mit zwei neuen Angeboten. Ein Wechsel kann gut sein – muss aber die beste Wahl sein. Dein alter Vertrag kann auch mit neuem Preis noch fair sein.
+Rechne dann den Preis für ein Jahr mit deinem Verbrauch. Lass dabei den Bonus weg. Vergleiche den Wert mit zwei neuen Angeboten. Ein Wechsel kann gut sein, muss aber nicht die beste Wahl sein. Dein alter Vertrag kann auch mit neuem Preis noch fair sein.
 
 Mach ein Foto vom Zähler, bevor ein neuer Preis gilt. Speichere Brief, Vertrag und Foto an einem Ort. Das hilft, wenn du später nachfragen oder kündigen willst. Bei Streit holst du dir Rat, statt Zahlungen ohne Plan zu stoppen.
 
@@ -65,7 +64,7 @@ Mach ein Foto vom Zähler, bevor ein neuer Preis gilt. Speichere Brief, Vertrag 
 - Börsenpreis und Haushaltsgaspreis sind nicht dasselbe.
 - Eine Garantie schützt nur die ausdrücklich erfassten Preisbestandteile.
 - Lies bei einer Erhöhung Änderungsgrund, neuen Preis und Wirksamkeitsdatum.
-- In der Regel kannst du zum Zeitpunkt der Preisänderung Sonderkündigen.
+- Bei einer einseitigen Preisänderung kannst du grundsätzlich zum Zeitpunkt der Änderung sonderkündigen; Ausnahmen sind möglich.
 - Bestimmte hoheitliche Anpassungen oder Umsatzsteueränderungen können anders behandelt werden.
 - Kündige bei knapper Sonderfrist selbst und nachweisbar.
 - Schließe keinen teuren Tarif nur aus Angst vor einer Schlagzeile ab.
@@ -76,11 +75,11 @@ Versorger kaufen Gas zu verschiedenen Zeiten und über verschiedene Verträge ei
 
 Auch ein fallender Börsenpreis kommt nicht immer sofort bei dir an. Genau deshalb vergleichst du deinen Tarif mit Angeboten von heute. Eine einzelne Tagesbewegung sagt nichts über das ganze Jahr.
 
-Zur Einordnung: 2026 lag der Gaspreis fürs Einfamilienhaus laut BDEW im Schnitt bei 11,93 Cent je kWh; das ist ein Beispielwert. Das zeigt nur den Markt von gestern. Über den Winter und über das Angebot bei dir sagt die Zahl nichts.
+Für deine Entscheidung vergleiche aktuelle Angebote für deinen Wohnort und deinen Verbrauch mit dem Gesamtpreis deines Vertrags.
 
 ## Wie eine Preisgarantie den Schock begrenzt
 
-Eine Preisgarantie gibt einen Teil des Risikos an den Anbieter ab. Dafür kann der Startpreis höher sein. Geschützt bist du aber nur so weit, wie die Klausel es sagt.
+Eine Preisgarantie begrenzt dein Risiko steigender Preise bei den vertraglich geschützten Bestandteilen. Ob ein vergleichbarer Tarif dafür mehr kostet, zeigt erst der konkrete Preisvergleich; ein Aufpreis ist nicht zwingend.
 
 Typische Ausnahmen betreffen:
 
@@ -117,9 +116,9 @@ Vergleiche dann die Änderung mit deiner Preisgarantie. Steigt ein geschützter 
 
 ## Was die Bundesnetzagentur zu Preisänderungen sagt
 
-Eine Preisänderung muss meist einen Monat vorher angekündigt werden. Der Brief muss klar sein und Grund, Bedingung und Umfang nennen. Meist darfst du zum Tag vor dem neuen Preis Sonderkündigen.
+Laut [Bundesnetzagentur zu Preisen und Abschlägen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html) müssen Lieferanten Haushaltskunden grundsätzlich mindestens einen Monat vor einer Preisänderung verständlich über Grund, Voraussetzungen und Umfang informieren und auf das Sonderkündigungsrecht hinweisen. In der Grundversorgung gelten zusätzliche Informationspflichten.
 
-Es gibt Ausnahmen. Bei bestimmten staatlich veranlassten Preisänderungen kann das Sonderkündigungsrecht entfallen, wenn das vorher so vereinbart war. Auch eine reine Weitergabe der Umsatzsteuer wird anders behandelt.
+Bei einer einseitigen Preisänderung können Verbraucher grundsätzlich ohne Frist zum Zeitpunkt der Änderung kündigen; der Vertrag endet am Vortag. Ausnahmen gelten unter anderem bei einer vereinbarten separierten Preisanpassungsklausel für bestimmte hoheitliche Änderungen und bei der reinen Weitergabe einer Umsatzsteueränderung. Prüfe die konkrete Klausel und das Schreiben.
 
 Darum lautet die sichere Regel: **Nicht nur die Überschrift lesen. Änderungsgrund und Vertragsklausel entscheiden.**
 
@@ -131,7 +130,7 @@ Schreib dem Anbieter, auf welche Klausel du dich beziehst. Widersprich nachweisb
 
 ### Wenn die Erhöhung zulässig erscheint
 
-Rechne den neuen Jahrespreis aus und vergleiche ihn. Du darfst das Sonderkündigungsrecht nutzen, musst es aber nicht. Trotz Erhöhung kann dein alter Vertrag günstiger sein als ein neues Angebot.
+Rechne den neuen Jahrespreis aus und vergleiche ihn. Wenn ein Sonderkündigungsrecht besteht, kannst du es nutzen, musst es aber nicht. Trotz Erhöhung kann dein alter Vertrag günstiger sein als ein neues Angebot.
 
 ### Wenn die Frist knapp ist
 
@@ -181,7 +180,7 @@ Eine längere Garantie ist nicht automatisch sicherer. Wenn du dafür schon am S
 
 Garantierte Preise schützen nicht vor einem kalten Winter oder höherer Raumtemperatur. Senkst du den Verbrauch, reduziert sich auch dein Risiko bei jeder künftigen Preisänderung.
 
-Prüfe deshalb Raumtemperaturen, Lüftung, freie Heizkörper und Anlagenzustand. Die Verbraucherzentrale nennt etwa 6 % weniger Heizenergie pro Grad niedrigere Raumtemperatur als Faustwert. Wie viel du sparst, hängt von Gebäude und Ausgangswert ab.
+Prüfe deshalb Raumtemperaturen, Lüftung, freie Heizkörper und Anlagenzustand. Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892) nennt etwa 6 % weniger Heizenergie pro Grad niedrigere Raumtemperatur als Faustwert. Wie viel du sparst, hängt von Gebäude und Ausgangswert ab.
 
 > 💡 **Schnell-Tipp von FranksFinanzcheck:** Rechne den neuen Jahrespreis mit deinem echten Verbrauch und vergleiche erst dann: [**Gastarife prüfen**](/go/gas/). Der Link ist Werbung; für dich entstehen keine Mehrkosten.
 
@@ -200,7 +199,7 @@ Erhöhung widerspricht der Garantie, Schreiben ist intransparent oder neuer Jahr
 
 Auch Schweigen ist ein Anlass zum Prüfen. Läuft die Garantie aus, kann der Vertrag zunächst zum bisherigen Preis weitergehen. Dein Schutz gegen spätere Änderungen ist dann aber weg.
 
-Rechne vier bis acht Wochen vorher den aktuellen Jahrespreis und vergleiche ihn mit neuen Angeboten. Kündige nicht vorschnell, wenn der Bestandsvertrag weiter güntig ist. Notiere stattdessen, wie flexibel du nach der Mindestlaufzeit wechseln kannst.
+Rechne vier bis acht Wochen vorher den aktuellen Jahrespreis und vergleiche ihn mit neuen Angeboten. Kündige nicht vorschnell, wenn der Bestandsvertrag weiter günstig ist. Notiere stattdessen, wie flexibel du nach der Mindestlaufzeit wechseln kannst.
 
 Es gibt drei mögliche Entscheidungen:
 
@@ -248,10 +247,10 @@ Wenn heute ein Preisschreiben im Postfach liegt, fotografiere zuerst den Zähler
 ## Häufige Fragen
 
 **Gilt das Sonderkündigungsrecht bei jeder Preiserhöhung?**
-In der Regel ja, aber es gibt Ausnahmen. Etwa bei bestimmten separat vereinbarten hoheitlichen Anpassungen oder Umsatzsteueränderungen. Prüfe das konkrete Schreiben.
+Grundsätzlich ja: Kündige zum Zeitpunkt der Änderung; der Vertrag endet am Vortag. Ausnahmen gelten etwa bei einer vereinbarten separierten Klausel für bestimmte hoheitliche Anpassungen oder reiner Umsatzsteuerweitergabe. Prüfe das konkrete Schreiben.
 
 **Wie schnell muss der Anbieter informieren?**
-Haushaltskunden müssen grundsätzlich einen Monat vor Wirksamwerden der Preisänderung informiert werden.
+Haushaltskunden müssen grundsätzlich mindestens einen Monat vor der Preisänderung informiert werden. In der Grundversorgung gelten zusätzliche Pflichten; bei reiner Umsatzsteuerweitergabe gelten Ausnahmen.
 
 **Bleibt mein Abschlag trotz Garantie gleich?**
 Nicht zwingend. Verbrauchsprognose oder ausgenommene Preisbestandteile können den Abschlag verändern. Verlange eine nachvollziehbare Berechnung.
