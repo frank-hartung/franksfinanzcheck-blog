@@ -31,7 +31,7 @@ quellen:
     url: "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/"
     herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
     datum: "2026-08-24"
-faktencheck: 2026-09-28
+faktencheck: 2026-11-02
 ---
 
 Eine Nachzahlung hat meist einen einfachen Grund: mehr verbraucht, teurer bezahlt oder zu wenig vorausgezahlt. Manchmal kommen geschätzte Zählerstände oder ein falscher Zeitraum dazu. Trennst du diese Teile, verstehst du deine Gasrechnung in zehn Minuten.

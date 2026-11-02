@@ -1,15 +1,15 @@
 {
-  "erzeugt": "2026-11-01 11:29 UTC",
+  "erzeugt": "2026-11-02 12:50 UTC",
   "uebersicht": {
-    "gesamt": 110,
+    "gesamt": 111,
     "ratgeber": 6,
-    "faellig": 8,
+    "faellig": 4,
     "vorlauf": 6,
     "bearbeitet": 4,
     "budget": 4,
     "budget_quelle": "Auto-Skalierung (Deckungsrechnung)",
     "geo_schnitt": 94,
-    "befunde": 41,
+    "befunde": 57,
     "befunde_im_lauf": 16,
     "fachbefunde": [
       {
@@ -247,6 +247,150 @@
         "zuletzt_gesehen": "2026-11-01 11:29 UTC"
       },
       {
+        "typ": "luecke",
+        "text": "Es fehlt der Hinweis auf das offizielle Beschwerdeportal der Bundesnetzagentur, über das Verbraucher Probleme mit Anbietern direkt melden können.",
+        "beleg": "",
+        "id": "3f0a88ede9d44ee910cb",
+        "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+        "fassung_sha256": "7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der Ratgeber versäumt es, bei der Tarifprüfung auf die behördlichen Schlichtungsverfahren hinzuweisen, die Verbrauchern bei Streitigkeiten mit Energieversorgern zur Verfügung stehen.",
+        "beleg": "",
+        "id": "51e259fd2d8582e774f7",
+        "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+        "fassung_sha256": "7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der Artikel erwähnt keine behördlichen Informationsquellen wie das Verbraucher-Radar, das Transparenz über den Energiemarkt und Verbraucherschutzthemen bietet.",
+        "beleg": "",
+        "id": "55f8eeedc587cf0895ee",
+        "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+        "fassung_sha256": "7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Es fehlt der Hinweis auf die behördliche Anlaufstelle für Anfragen und Beschwerden im Bereich Energie, die über die rein zivilrechtliche Meldung beim Vermieter hinausgeht.",
+        "beleg": "",
+        "id": "045ff990e44a7035e9a0",
+        "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
+        "fassung_sha256": "9bf7efbf6eb1d4a2fa70aaa34f3caf1a938955b3986bd93ebdad278ca2f11d21",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der Ratgeber empfiehlt Tarifvergleiche und Mängelmeldungen, lässt aber den für den Energiemarkt relevanten Regulierungsrahmen für den Verbraucherschutz (Schlichtungsverfahren) unerwähnt.",
+        "beleg": "",
+        "id": "8919c2d1145af782d17a",
+        "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
+        "fassung_sha256": "9bf7efbf6eb1d4a2fa70aaa34f3caf1a938955b3986bd93ebdad278ca2f11d21",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Die Markttransparenz und der Verbraucherschutz im Energiesektor werden durch das 'Verbraucher-Radar' der Bundesnetzagentur statistisch erfasst; dieser Kontext fehlt bei der Einordnung von Marktdaten.",
+        "beleg": "",
+        "id": "c39938841291b1e9e140",
+        "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
+        "fassung_sha256": "9bf7efbf6eb1d4a2fa70aaa34f3caf1a938955b3986bd93ebdad278ca2f11d21",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Aussage, dass die Verbraucherzentrale empfiehlt, Boni im ersten Vergleich auszublenden, fehlt eine Quellenangabe.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "0aa915539d57841e5014",
+        "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+        "fassung_sha256": "ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der angegebene BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird nicht belegt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "5e1be48085014a836807",
+        "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+        "fassung_sha256": "ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Die pauschale Formulierung, dass bei zentraler Heizung der Vermieter oder die Eigentümergemeinschaft den Anbieter wählt, ist zu ungenau und nicht belegt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "6fdf31c3b68b6122bd0d",
+        "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+        "fassung_sha256": "ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der Artikel behauptet, dass laut Bundesnetzagentur Preisänderungen klar angekündigt und begründet sein müssen, liefert jedoch keinen Beleg dafür.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "c27c182c615bd7ca3b78",
+        "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+        "fassung_sha256": "ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Es wird angegeben, dass bei einer Preisänderung in der Regel ein Sonderkündigungsrecht besteht, ohne dafür eine Quelle zu nennen.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "e1e40e9bbbdd109df86e",
+        "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+        "fassung_sha256": "ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quellenangabe.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "334751e6f61ad0033fe4",
+        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird ohne Quelle angegeben.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "36759a5efe5e8e5163d0",
+        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt rund 180 € im Jahr“ wird nicht belegt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "942922d1afd7844618e9",
+        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“ ist ein Superlativ ohne messbare Daten oder Vergleichskriterien.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "d41f0d5ce8798df0211b",
+        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne Quellenangabe genannt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "e139d0769faadd04392a",
+        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
+        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+      },
+      {
         "id": "05be346e82c80b2a8664",
         "slug": "2026-10-28-dsl-und-internet-flat-guenstig-sichern",
         "fassung_sha256": "legacy-unbekannt",
@@ -390,13 +534,13 @@
     "geo_luecken": {
       "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 9,
       "Mindestens eine Tabelle (extrahierbare Struktur)": 12,
-      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 13,
-      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 1,
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 14,
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 2,
       "FAQ-Abschnitt (FAQPage-Schema, Antwortmaschinen-Futter)": 3
     },
-    "deckung_prozent": 149.4,
-    "bedarf_je_woche": 18.7,
-    "abbau_tage": 1,
+    "deckung_prozent": 148.1,
+    "bedarf_je_woche": 18.9,
+    "abbau_tage": 0,
     "nachhol_frist_tage": 7,
     "abbrueche": 0
   },
@@ -636,6 +780,150 @@
       "zuletzt_gesehen": "2026-11-01 11:29 UTC"
     },
     {
+      "typ": "luecke",
+      "text": "Es fehlt der Hinweis auf das offizielle Beschwerdeportal der Bundesnetzagentur, über das Verbraucher Probleme mit Anbietern direkt melden können.",
+      "beleg": "",
+      "id": "3f0a88ede9d44ee910cb",
+      "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+      "fassung_sha256": "7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648",
+      "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der Ratgeber versäumt es, bei der Tarifprüfung auf die behördlichen Schlichtungsverfahren hinzuweisen, die Verbrauchern bei Streitigkeiten mit Energieversorgern zur Verfügung stehen.",
+      "beleg": "",
+      "id": "51e259fd2d8582e774f7",
+      "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+      "fassung_sha256": "7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648",
+      "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der Artikel erwähnt keine behördlichen Informationsquellen wie das Verbraucher-Radar, das Transparenz über den Energiemarkt und Verbraucherschutzthemen bietet.",
+      "beleg": "",
+      "id": "55f8eeedc587cf0895ee",
+      "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+      "fassung_sha256": "7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648",
+      "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Es fehlt der Hinweis auf die behördliche Anlaufstelle für Anfragen und Beschwerden im Bereich Energie, die über die rein zivilrechtliche Meldung beim Vermieter hinausgeht.",
+      "beleg": "",
+      "id": "045ff990e44a7035e9a0",
+      "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
+      "fassung_sha256": "9bf7efbf6eb1d4a2fa70aaa34f3caf1a938955b3986bd93ebdad278ca2f11d21",
+      "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der Ratgeber empfiehlt Tarifvergleiche und Mängelmeldungen, lässt aber den für den Energiemarkt relevanten Regulierungsrahmen für den Verbraucherschutz (Schlichtungsverfahren) unerwähnt.",
+      "beleg": "",
+      "id": "8919c2d1145af782d17a",
+      "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
+      "fassung_sha256": "9bf7efbf6eb1d4a2fa70aaa34f3caf1a938955b3986bd93ebdad278ca2f11d21",
+      "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Markttransparenz und der Verbraucherschutz im Energiesektor werden durch das 'Verbraucher-Radar' der Bundesnetzagentur statistisch erfasst; dieser Kontext fehlt bei der Einordnung von Marktdaten.",
+      "beleg": "",
+      "id": "c39938841291b1e9e140",
+      "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
+      "fassung_sha256": "9bf7efbf6eb1d4a2fa70aaa34f3caf1a938955b3986bd93ebdad278ca2f11d21",
+      "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Aussage, dass die Verbraucherzentrale empfiehlt, Boni im ersten Vergleich auszublenden, fehlt eine Quellenangabe.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "0aa915539d57841e5014",
+      "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+      "fassung_sha256": "ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c",
+      "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der angegebene BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird nicht belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "5e1be48085014a836807",
+      "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+      "fassung_sha256": "ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c",
+      "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die pauschale Formulierung, dass bei zentraler Heizung der Vermieter oder die Eigentümergemeinschaft den Anbieter wählt, ist zu ungenau und nicht belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "6fdf31c3b68b6122bd0d",
+      "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+      "fassung_sha256": "ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c",
+      "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der Artikel behauptet, dass laut Bundesnetzagentur Preisänderungen klar angekündigt und begründet sein müssen, liefert jedoch keinen Beleg dafür.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "c27c182c615bd7ca3b78",
+      "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+      "fassung_sha256": "ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c",
+      "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Es wird angegeben, dass bei einer Preisänderung in der Regel ein Sonderkündigungsrecht besteht, ohne dafür eine Quelle zu nennen.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "e1e40e9bbbdd109df86e",
+      "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+      "fassung_sha256": "ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c",
+      "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quellenangabe.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "334751e6f61ad0033fe4",
+      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+      "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
+      "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird ohne Quelle angegeben.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "36759a5efe5e8e5163d0",
+      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+      "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
+      "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt rund 180 € im Jahr“ wird nicht belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "942922d1afd7844618e9",
+      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+      "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
+      "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“ ist ein Superlativ ohne messbare Daten oder Vergleichskriterien.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "d41f0d5ce8798df0211b",
+      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+      "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
+      "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne Quellenangabe genannt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "e139d0769faadd04392a",
+      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+      "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
+      "zuletzt_gesehen": "2026-11-02 12:50 UTC"
+    },
+    {
       "id": "05be346e82c80b2a8664",
       "slug": "2026-10-28-dsl-und-internet-flat-guenstig-sichern",
       "fassung_sha256": "legacy-unbekannt",
@@ -777,68 +1065,36 @@
     }
   ],
   "kapazitaet": {
-    "stichtag": "2026-11-01",
-    "artikel": 110,
-    "faellig": 8,
-    "ueberfaellig": 8,
-    "ueberfaellig_max_tage": 4,
+    "stichtag": "2026-11-02",
+    "artikel": 111,
+    "faellig": 4,
+    "ueberfaellig": 4,
+    "ueberfaellig_max_tage": 5,
     "naechste_frist": {
       "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
       "frist": "2026-11-03",
-      "restlaufzeit": 2
+      "restlaufzeit": 1
     },
     "budget": 4,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 4.0,
-    "bedarf_je_tag": 2.678,
-    "bedarf_je_woche": 18.7,
-    "deckung_prozent": 149.4,
+    "bedarf_je_tag": 2.7,
+    "bedarf_je_woche": 18.9,
+    "deckung_prozent": 148.1,
     "horizont_tage": 120,
     "vorlauf_tage": 7,
     "nachhol_frist_tage": 7,
-    "abbau_tage": 1,
-    "verletzungen_alt": 8,
+    "abbau_tage": 0,
+    "verletzungen_alt": 4,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
     "verletzungen": [
       {
-        "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
-        "titel": "Sicher heizen: Was sie abdeckt und wie lange sie läuft",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 4,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      },
-      {
-        "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
-        "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 4,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      },
-      {
-        "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
-        "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 4,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      },
-      {
-        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
-        "titel": "Preisgarantie Gas: Was bei Preiserhöhung hilft",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 4,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      },
-      {
         "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
         "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 4,
+        "tage_zu_spaet": 5,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -846,7 +1102,7 @@
         "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
         "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 4,
+        "tage_zu_spaet": 5,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -854,7 +1110,7 @@
         "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
         "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 4,
+        "tage_zu_spaet": 5,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -862,53 +1118,21 @@
         "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
         "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 4,
+        "tage_zu_spaet": 5,
         "vorher_faellig": true,
         "folgeprüfung": false
       }
     ],
-    "offen_im_horizont": 110,
+    "offen_im_horizont": 111,
     "puenktlich": true,
     "rueckstand_abgebaut": true
   },
   "abbrueche": [],
   "offen": [
     {
-      "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
-      "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
-      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-      "faellig": true,
-      "frist": "2026-10-28",
-      "geo": 100
-    },
-    {
-      "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
-      "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
-      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-      "faellig": true,
-      "frist": "2026-10-28",
-      "geo": 83
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
-      "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
-      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-      "faellig": true,
-      "frist": "2026-10-28",
-      "geo": 100
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-      "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
-      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-      "faellig": true,
-      "frist": "2026-10-28",
-      "geo": 100
-    },
-    {
       "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
       "titel": "Gasabschlag berechnen: So planst du die Heizsaison richtig",
-      "grund": "frisch geprüft vor 28 Tagen (Intervall 30 Tage)",
+      "grund": "frisch geprüft vor 29 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-03",
       "geo": 100
@@ -916,7 +1140,7 @@
     {
       "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
       "titel": "Weihnachten Budget planen: Ohne Schulden durch die Feiertage",
-      "grund": "frisch geprüft vor 28 Tagen (Intervall 30 Tage)",
+      "grund": "frisch geprüft vor 29 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-03",
       "geo": 100
@@ -924,7 +1148,7 @@
     {
       "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
       "titel": "Campingurlaub planen: Budget für Platz und Fahrt",
-      "grund": "frisch geprüft vor 25 Tagen (Intervall 30 Tage)",
+      "grund": "frisch geprüft vor 26 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-06",
       "geo": 83
@@ -932,7 +1156,7 @@
     {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
       "titel": "Urlaub sparen: Budget, Buchung und Kosten im Blick",
-      "grund": "frisch geprüft vor 25 Tagen (Intervall 30 Tage)",
+      "grund": "frisch geprüft vor 26 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-06",
       "geo": 83
@@ -940,15 +1164,15 @@
     {
       "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
       "titel": "Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig",
-      "grund": "frisch geprüft vor 25 Tagen (Intervall 30 Tage)",
+      "grund": "frisch geprüft vor 26 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-06",
       "geo": 100
     },
     {
-      "slug": "2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "titel": "Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden",
-      "grund": "frisch geprüft vor 25 Tagen (Intervall 30 Tage)",
+      "grund": "frisch geprüft vor 26 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-06",
       "geo": 100
@@ -956,28 +1180,28 @@
   ],
   "laeufe": [
     {
-      "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
-      "titel": "Sicher heizen: Was sie abdeckt und wie lange sie läuft",
-      "fassung_sha256": "98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b",
+      "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+      "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
+      "fassung_sha256": "7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648",
       "bereich": "artikel",
-      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "grund": "35 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
       "treffer": 1,
       "quellen": 1,
       "befunde": [
         {
           "typ": "luecke",
-          "text": "Die im Artikel als Fakten genannten Gaspreise für Oktober 2026 (11 bis 13 Cent/kWh) sind nicht durch die Fundstelle belegt, die lediglich eine allgemeine Themenübersicht darstellt.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+          "text": "Der Ratgeber versäumt es, bei der Tarifprüfung auf die behördlichen Schlichtungsverfahren hinzuweisen, die Verbrauchern bei Streitigkeiten mit Energieversorgern zur Verfügung stehen.",
+          "beleg": ""
         },
         {
           "typ": "luecke",
-          "text": "Der für den Verbraucherschutz zentrale Regulierungsrahmen (Sonderkündigungsrecht, Informationspflichten der Versorger) wird in der Fundstelle nicht inhaltlich bestätigt.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+          "text": "Es fehlt der Hinweis auf das offizielle Beschwerdeportal der Bundesnetzagentur, über das Verbraucher Probleme mit Anbietern direkt melden können.",
+          "beleg": ""
         },
         {
-          "typ": "praezision",
-          "text": "Die Bewerbung des Vergleichsportals mit dem Superlativ 'Die besten Tarife' erfolgt ohne messbare Daten oder Auswahlkriterien in der Recherchegrundlage.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+          "typ": "luecke",
+          "text": "Der Artikel erwähnt keine behördlichen Informationsquellen wie das Verbraucher-Radar, das Transparenz über den Energiemarkt und Verbraucherschutzthemen bietet.",
+          "beleg": ""
         }
       ],
       "geo": 100,
@@ -987,31 +1211,76 @@
       ],
       "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)",
       "aenderungen": [
-        "faktencheck: 2026-11-01"
+        "faktencheck: 2026-11-02"
       ]
     },
     {
-      "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
-      "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
-      "fassung_sha256": "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af",
+      "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
+      "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
+      "fassung_sha256": "9bf7efbf6eb1d4a2fa70aaa34f3caf1a938955b3986bd93ebdad278ca2f11d21",
       "bereich": "artikel",
-      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "grund": "35 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
       "treffer": 1,
       "quellen": 1,
       "befunde": [
         {
           "typ": "luecke",
-          "text": "Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur für Januar 2026 (360 €) wird durch die allgemeine Übersichtsseite der Behörde nicht gestützt.",
+          "text": "Der Ratgeber empfiehlt Tarifvergleiche und Mängelmeldungen, lässt aber den für den Energiemarkt relevanten Regulierungsrahmen für den Verbraucherschutz (Schlichtungsverfahren) unerwähnt.",
+          "beleg": ""
+        },
+        {
+          "typ": "luecke",
+          "text": "Es fehlt der Hinweis auf die behördliche Anlaufstelle für Anfragen und Beschwerden im Bereich Energie, die über die rein zivilrechtliche Meldung beim Vermieter hinausgeht.",
+          "beleg": ""
+        },
+        {
+          "typ": "praezision",
+          "text": "Die Markttransparenz und der Verbraucherschutz im Energiesektor werden durch das 'Verbraucher-Radar' der Bundesnetzagentur statistisch erfasst; dieser Kontext fehlt bei der Einordnung von Marktdaten.",
+          "beleg": ""
+        }
+      ],
+      "geo": 83,
+      "fehler": [
+        "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
+        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+      ],
+      "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)",
+      "aenderungen": [
+        "faktencheck: 2026-11-02"
+      ]
+    },
+    {
+      "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+      "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
+      "fassung_sha256": "ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c",
+      "bereich": "artikel",
+      "grund": "35 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [
+        {
+          "typ": "luecke",
+          "text": "Der Artikel behauptet, dass laut Bundesnetzagentur Preisänderungen klar angekündigt und begründet sein müssen, liefert jedoch keinen Beleg dafür.",
           "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
           "typ": "luecke",
-          "text": "Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg.",
+          "text": "Es wird angegeben, dass bei einer Preisänderung in der Regel ein Sonderkündigungsrecht besteht, ohne dafür eine Quelle zu nennen.",
           "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
           "typ": "luecke",
-          "text": "Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist.",
+          "text": "Der angegebene BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird nicht belegt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Aussage, dass die Verbraucherzentrale empfiehlt, Boni im ersten Vergleich auszublenden, fehlt eine Quellenangabe.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "praezision",
+          "text": "Die pauschale Formulierung, dass bei zentraler Heizung der Vermieter oder die Eigentümergemeinschaft den Anbieter wählt, ist zu ungenau und nicht belegt.",
           "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         }
       ],
@@ -1020,99 +1289,54 @@
         "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
         "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
       ],
-      "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)",
+      "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)",
       "aenderungen": [
-        "faktencheck: 2026-11-01"
+        "faktencheck: 2026-11-02"
       ]
     },
     {
-      "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
-      "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
-      "fassung_sha256": "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316",
+      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+      "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
+      "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
       "bereich": "artikel",
-      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "grund": "35 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
       "treffer": 1,
       "quellen": 1,
       "befunde": [
         {
           "typ": "luecke",
-          "text": "Keine Quelle für die Aussage, dass im Oktober 2026 bessere Gaspreise gelten – Preis‑Trend‑Behauptung fehlt.",
+          "text": "Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne Quellenangabe genannt.",
           "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
           "typ": "luecke",
-          "text": "Keine Quelle für die Angabe, dass ein Einfamilienhaus typischerweise 18.000 kWh/Jahr verbraucht – Verbrauchszahl ist unbelegt.",
+          "text": "Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quellenangabe.",
           "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
           "typ": "luecke",
-          "text": "Keine Quelle für die Behauptung, dass ein Grad weniger Raumtemperatur rund 6 % Energie einspart – Prozent‑Angabe fehlt.",
+          "text": "Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt rund 180 € im Jahr“ wird nicht belegt.",
           "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
           "typ": "luecke",
-          "text": "Keine Quelle für die Angabe, dass durch Optimierungsmaßnahmen 10‑15 % Einsparungen realistisch sind – Prozent‑Wert unbelegt.",
+          "text": "Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird ohne Quelle angegeben.",
           "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
-          "typ": "luecke",
-          "text": "Keine Quelle für die Aussage, dass das Gesetz bei einem Tarifwechsel die Grundversorgung garantiert – regulatorischer Rahmen fehlt.",
+          "typ": "praezision",
+          "text": "Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“ ist ein Superlativ ohne messbare Daten oder Vergleichskriterien.",
           "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         }
       ],
       "geo": 100,
       "fehler": [
-        "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (<urlopen error timed out>)",
+        "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (<urlopen error [Errno 111] Connection refused>)",
         "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
       ],
       "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)",
       "aenderungen": [
-        "faktencheck: 2026-11-01"
-      ]
-    },
-    {
-      "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
-      "titel": "Preisgarantie Gas: Was bei Preiserhöhung hilft",
-      "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
-      "bereich": "artikel",
-      "grund": "34 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-      "treffer": 1,
-      "quellen": 1,
-      "befunde": [
-        {
-          "typ": "luecke",
-          "text": "Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher angekündigt werden muss, ohne dafür eine Quelle anzugeben.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Der angegebene durchschnittliche Gaspreis von 11,93 Cent/kWh für 2026 (laut BDEW) wird nicht durch eine Quelle belegt.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Die Angabe, dass die Verbraucherzentrale etwa 6 % weniger Heizenergie pro Grad niedrigerer Raumtemperatur nennt, fehlt eine Quellenangabe.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "praezision",
-          "text": "Die Aussage, dass man „in der Regel“ zum Zeitpunkt der Preisänderung Sonderkündigungsrecht hat, ist unpräzise und wird nicht durch eine konkrete Regelung belegt.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "praezision",
-          "text": "Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf den Anbieter überträgt und dafür ein höherer Startpreis üblich ist, fehlt eine konkrete Quelle und bleibt vage.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        }
-      ],
-      "geo": 100,
-      "fehler": [
-        "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (<urlopen error timed out>)",
-        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
-      ],
-      "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)",
-      "aenderungen": [
-        "faktencheck: 2026-11-01"
+        "faktencheck: 2026-11-02"
       ]
     }
   ]

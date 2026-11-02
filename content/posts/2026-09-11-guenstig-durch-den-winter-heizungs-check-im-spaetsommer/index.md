@@ -32,7 +32,7 @@ quellen:
     url: "https://www.energiewechsel.de/KAENEF/Redaktion/DE/PDF-Anlagen/BEG/beg-richtlinien-juli-2026/20260720-beg-einzelmassnahmen.pdf"
     herausgeber: "Bundesministerium für Wirtschaft und Energie"
     datum: "2026-07-20"
-faktencheck: 2026-09-28
+faktencheck: 2026-11-02
 ---
 
 Heizungs-Check im Check: Der erste kalte Montag ist ein schlechter Zeitpunkt für diese Entdeckung: Drei Heizkörper gluckern, und die Therme meldet eine Störung. Im Spätsommer findest du dieselben Probleme – ohne Jacke, ohne Notdienst, ohne Zeitdruck.

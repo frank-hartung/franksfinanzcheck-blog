@@ -35,7 +35,7 @@ quellen:
   - titel: "Lieferantenwechsel"
     url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Lieferantenwechsel/artikel.html"
     herausgeber: "Bundesnetzagentur"
-faktencheck: 2026-09-28
+faktencheck: 2026-11-02
 ---
 
 Willst du deine [Gasrechnung senken](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/), solltest du im Spätsommer handeln. Eine Stunde im September erspart dir den hektischen Samstag im November. Nicht, weil jeder Check automatisch hunderte Euro bringt. Sondern weil du so früh siehst, ob Tarif, Abschlag, Heizkörper oder Fachbetrieb deine Aufmerksamkeit brauchen.
