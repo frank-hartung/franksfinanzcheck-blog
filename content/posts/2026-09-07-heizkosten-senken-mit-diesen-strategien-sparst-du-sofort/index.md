@@ -32,7 +32,7 @@ quellen:
     url: "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/"
     herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
     datum: "2026-08-24"
-faktencheck: 2026-09-28
+faktencheck: 2026-11-02
 ---
 
 Heizkosten sinken selten durch einen Trick. Meist hilft die einfache Kombination: ein Grad weniger, richtig lüften, Wärme nicht hinter dem Sofa verstecken und den Verbrauch regelmäßig ablesen.

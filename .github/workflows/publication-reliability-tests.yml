@@ -17,6 +17,8 @@ on:
       - 'data/reserve-*.json'
       - '.gitattributes'
       - 'scripts/**'
+      # Die Dependabot-Policy wird in der Suite strukturell geprüft.
+      - '.github/dependabot.yml'
       - '.github/workflows/**'
       # Die Commit-Sperre der Markenfläche und ihre Selbstscharfstellung
       # werden hier mitgeprüft (WF-A4E0): Änderungen am Haken müssen die
