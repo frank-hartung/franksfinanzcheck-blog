@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "generated_at": "2026-11-01T23:44:30Z",
+  "generated_at": "2026-11-02T06:18:31Z",
   "modus": "kandidaten",
-  "commit": "157def83795e23b37122f348171e9ca5e5080811",
+  "commit": "ab45b1f822f14caab9a48b15c35006033475b856",
   "kapazitaet": {
-    "stichtag": "2026-11-01",
+    "stichtag": "2026-11-02",
     "artikel": 111,
     "faellig": 4,
     "ueberfaellig": 4,
-    "ueberfaellig_max_tage": 4,
+    "ueberfaellig_max_tage": 5,
     "naechste_frist": {
       "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
       "frist": "2026-11-03",
-      "restlaufzeit": 2
+      "restlaufzeit": 1
     },
     "budget": 4,
     "laeufe_je_tag": 1.0,
@@ -33,7 +33,7 @@
         "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
         "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 4,
+        "tage_zu_spaet": 5,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -41,7 +41,7 @@
         "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
         "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 4,
+        "tage_zu_spaet": 5,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -49,7 +49,7 @@
         "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
         "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 4,
+        "tage_zu_spaet": 5,
         "vorher_faellig": true,
         "folgeprüfung": false
       },
@@ -57,7 +57,7 @@
         "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
         "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
         "frist": "2026-10-28",
-        "tage_zu_spaet": 4,
+        "tage_zu_spaet": 5,
         "vorher_faellig": true,
         "folgeprüfung": false
       }
@@ -104,6 +104,23 @@
       },
       "naechste_pruefung": "2026-12-01",
       "siegel_drift": "unverändert"
+    },
+    "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
+      "sha256": "518d46f3fe8729a56931239e8ae505b0442caeb73638d4ff8adcb43906890a06",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "hoch",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "bestanden",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-12-14",
+      "siegel_drift": "neu versiegelt"
     },
     "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": {
       "sha256": "58f8c1be70bd6e74a39afbeba7a3e53bb2a4e3dd3887388d989fa6a64a8a006f",
@@ -240,6 +257,40 @@
       },
       "naechste_pruefung": "2026-11-11",
       "siegel_drift": "unverändert"
+    },
+    "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
+      "sha256": "3572ba22f4f8761a1da485017114c803f9d6e21dc59165b5a83d83416381bd79",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "hoch",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "bestanden",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-12-14",
+      "siegel_drift": "neu versiegelt"
+    },
+    "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": {
+      "sha256": "280d4bda6a4a1496ff4df1e3beca2e029d3f163f0f7e46c11aca1fb457108765",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "hoch",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "bestanden",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-19",
+      "siegel_drift": "neu versiegelt"
     },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
       "sha256": "1d49ca08e222704e74b5c5df91aa62ae29772a6cca6ac382c5c3a28c7da8960f",
