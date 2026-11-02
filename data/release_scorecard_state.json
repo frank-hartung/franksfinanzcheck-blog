@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-02T06:18:31Z",
+  "generated_at": "2026-11-02T09:10:23Z",
   "modus": "kandidaten",
-  "commit": "ab45b1f822f14caab9a48b15c35006033475b856",
+  "commit": "6f5e7f20f2687dd2d631b1213cc877f4360993f3",
   "kapazitaet": {
     "stichtag": "2026-11-02",
     "artikel": 111,
@@ -120,7 +120,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-14",
-      "siegel_drift": "neu versiegelt"
+      "siegel_drift": "unverändert"
     },
     "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": {
       "sha256": "58f8c1be70bd6e74a39afbeba7a3e53bb2a4e3dd3887388d989fa6a64a8a006f",
@@ -273,7 +273,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-14",
-      "siegel_drift": "neu versiegelt"
+      "siegel_drift": "unverändert"
     },
     "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": {
       "sha256": "280d4bda6a4a1496ff4df1e3beca2e029d3f163f0f7e46c11aca1fb457108765",
@@ -290,7 +290,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-19",
-      "siegel_drift": "neu versiegelt"
+      "siegel_drift": "unverändert"
     },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
       "sha256": "1d49ca08e222704e74b5c5df91aa62ae29772a6cca6ac382c5c3a28c7da8960f",
