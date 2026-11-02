@@ -83,7 +83,7 @@ Eigenschaften, die PyYAML **sehen kann**:
 | --- | --- | --- |
 | `yaml.safe_load` in Tests | Syntax | Der Block ist gültiges YAML. Ein Dict. Fertig. |
 | `trigger_wache.py` | `on:` / `paths` | Liest nur den Trigger-Ausschnitt. |
-| `actions_version_guard.py` | eine Version je Action | Regel A3 lässt SHA-Pins **absichtlich** unangetastet – ein toter Pin ist für sie unsichtbar. |
+| `actions_version_guard.py` | ein SHA + eine Version je Anbieter-Repo | Prüft seit #1014 die Konsistenz aller Pins (inkl. Unteraktionen/Composite-Actions). Ob ein Pin beim Anbieter existiert und die Eingaben passen, bleibt Aufgabe dieser Wache. |
 | `workflow_js_wache.py` | JavaScript in `script:` | Prüft Skripte, nicht `with:`-Verträge. |
 | `integrity_guard.py` | Kerndateien, Siegel | Hashes, keine Semantik. |
 
@@ -139,12 +139,36 @@ Eigenschaften, die für den Dauerbetrieb wichtig sind:
 
 Die Wache läuft im **PR-Gate** `Integritäts-Siegel`
 (`.github/workflows/integrity-lock.yml`), direkt neben der
-Actions-Versions-Wache – mit Selbsttest davor, damit ein kaputter Prüfer nicht
+Actions-Pin-Wache – mit Selbsttest davor, damit ein kaputter Prüfer nicht
 grün meldet.
+
+Seit #1014 gilt für `scripts/actions_version_guard.py`:
+
+* **A1** – ein Anbieter-Repo hat im gesamten Bestand genau einen SHA und eine
+  Version. `github/codeql-action/init`, `/analyze` und `/upload-sarif` werden
+  zusammen geprüft; Workflows und Composite-Actions ebenfalls.
+* **A2** – fremde Actions brauchen eine vollständige, kleingeschriebene
+  Commit-SHA. Tags und Branches sind keine Pins.
+* **A3** – jeder Pin trägt `# vX.Y.Z`; derselbe SHA darf nicht unter zwei
+  Versionen geführt werden.
+* **A4** – lokale Actions und `docker://` sind ausgenommen.
+
+Mehrere gültige SHA/Version-Paare sind ein Befund ohne automatischen Kandidaten.
+Die Wache rät nicht anhand der lexikalisch größeren SHA oder eines Kommentars,
+welches Release neuer ist. `--fix` ergänzt nur fehlende/abweichende Kommentare
+zu einem bereits eindeutigen SHA. Teil-Bumps werden über Dependabot vollständig
+übernommen. Die Anbieter-Existenz und Eingabe-Verträge prüft anschließend diese
+Wache mit `--online`.
+
+Dependabot trennt dafür Major-Updates in eine eigene Gruppe
+(`github-actions-major`). Patch/Minor bleiben in `github-actions` und können
+nach grünen Pflicht-Checks automatisch mergen; Major-Updates bleiben manuell.
+Der Auto-Merge akzeptiert ausschließlich die Semver-Stufen `patch` und `minor`,
+nicht mehr alles außer `major` – unbekannte Stufen gehen in die manuelle Prüfung.
 
 ### 4.4 Der Nachweis
 
-`scripts/tests/test_workflow_vertrag_wache.py` – 9 Proben, darunter:
+`scripts/tests/test_workflow_vertrag_wache.py` – 12 Proben, darunter:
 
 * der **echte Fall** wird erkannt (Liste → V2 mit der Originalmeldung),
 * die **Zeichenkette** wird nicht beanstandet,

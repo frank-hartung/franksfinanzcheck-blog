@@ -189,7 +189,21 @@ def check_manifest(manifest: dict[str, Any]) -> list[str]:
 
 
 def write_manifest(manifest: dict[str, Any]) -> None:
+    """Idempotent schreiben: gleiche Bild-Policy behält ihren Zeitstempel.
+
+    Ein Deploy darf das Manifest nach jeder Veröffentlichung auffrischen,
+    ohne bei unverändertem Bestand einen reinen Timestamp-Commit zu erzeugen.
+    """
     MANIFEST.parent.mkdir(parents=True, exist_ok=True)
+    if MANIFEST.exists():
+        try:
+            existing = json.loads(MANIFEST.read_text(encoding="utf-8"))
+            comparable_old = {k: v for k, v in existing.items() if k != "generatedAt"}
+            comparable_new = {k: v for k, v in manifest.items() if k != "generatedAt"}
+            if comparable_old == comparable_new:
+                return
+        except (json.JSONDecodeError, OSError):
+            pass
     tmp = MANIFEST.with_suffix(".json.tmp")
     tmp.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     tmp.replace(MANIFEST)

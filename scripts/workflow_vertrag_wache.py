@@ -36,9 +36,9 @@
 #      und liefert den `with:`-Block als normalen Dict – ob die
 #      Action den Wert als Liste verträgt, weiß PyYAML nicht.
 #    · `trigger_wache.py` liest bewusst nur den `on:`-Ausschnitt.
-#    · `actions_version_guard.py` lässt SHA-Pins per Regel A3
-#      ABSICHTLICH unangetastet – ein Pin, den es beim Anbieter nicht
-#      (mehr) gibt, ist für diese Wache unsichtbar.
+#    · `actions_version_guard.py` prüft seit #1014 SHA-/Versions-Konsistenz
+#      im Bestand. Ob ein Pin beim Anbieter existiert und die Eingaben zum
+#      gepinnten Action-Vertrag passen, bleibt die Aufgabe dieser Wache.
 #
 #  Genau diese beiden Lücken schließt diese Wache:
 #
