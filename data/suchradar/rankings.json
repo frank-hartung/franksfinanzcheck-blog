@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-01T14:12:01.968331+02:00",
+ "stand": "2026-11-02T16:00:46.102382+02:00",
  "rankings": [
   {
    "anfrage": "DSL Anbieter Vergleich",
@@ -83,16 +83,6 @@
   },
   {
    "anfrage": "Stromanbieter wechseln",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Tarif",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -192,7 +182,7 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Tipps",
+   "anfrage": "Trockner Stromverbrauch",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -202,7 +192,7 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Trockner Stromverbrauch",
+   "anfrage": "Umschuldung sparen",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,

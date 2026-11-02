@@ -1263,6 +1263,27 @@ history:
     #Girokonto #Konto #KostenlosesGirokonto #C24Bank'
   ref: '117535167605047830'
   ai: false
+- posted_at: '2026-11-02T14:38:16.034212+01:00'
+  channel: mastodon
+  slug: 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
+  title: 'Dein Haus sicher schützen: Das neue Vorsorge-Update 2026'
+  angle: zahl
+  url: https://mastodon.social/@FranksFinanzcheck/117547119746092264
+  ok: true
+  text: '💶 Dein Haus sicher schützen: Das neue Vorsorge-Update 2026
+
+
+    Guter Schutz für dein Zuhause hat drei Teile: die passende Police für Gebäude
+    oder Hausrat, einen Schutz gegen Naturgefahren und eine Summe, die zum heutigen
+    Wert passt.
+
+
+    https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #Wohngebaeude #Versicherung #Hausratversicherung #Hausversicherung'
+  ref: '117547119746092264'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1288,4 +1309,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-11-01T23:54:17.658946+01:00'
+updated_at: '2026-11-02T14:38:25.387431+01:00'

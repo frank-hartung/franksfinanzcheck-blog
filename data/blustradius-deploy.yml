@@ -285,6 +285,12 @@ schritte:
     schuetzt: Publish-Gate (harte Qualitäts-, Affiliate-, Fakten- und YMYL-Freigaben)
     grund: Ohne lauffähigen Recherchevertrag ginge Ungeprüftes live (YMYL).
 
+  - name: Faktenfrische Gas – Rückfallschutz #996
+    klasse: inhalt
+    grund: >-
+      Ein Rückfall in unbelegte Gaspreis- oder Rechtsaussagen muss die
+      Veröffentlichung blockieren, bis der Inhalt fachlich geprüft ist.
+
   - name: Publish-Gate (harte Qualitäts-, Affiliate-, Fakten- und YMYL-Freigaben)
     klasse: inhalt
     grund: >-

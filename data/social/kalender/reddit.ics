@@ -5,4 +5,19 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Reddit
 X-WR-TIMEZONE:Europe/Berlin
+BEGIN:VEVENT
+UID:reddit:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-mo
+ natlichen:nutzen:2026-11-02@franksfinanzcheck.de
+DTSTAMP:20261102T133826Z
+DTSTART:20261102T131500Z
+DTEND:20261102T133000Z
+SUMMARY:Reddit: ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleit
+ ung (nutzen)
+DESCRIPTION:Status: Standby (Zugang fehlt)\nWinkel: nutzen\nKanal: Red
+ dit\nArtikel: https://franksfinanzcheck.de/posts/2026-10-24-etf-sparp
+ lan-starten-schritt-fuer-schritt-zum-monatlichen/
+URL:https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten
+ -schritt-fuer-schritt-zum-monatlichen/
+STATUS:TENTATIVE
+END:VEVENT
 END:VCALENDAR

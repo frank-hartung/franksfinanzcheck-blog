@@ -12,6 +12,8 @@ import sys
 import unittest
 from pathlib import Path
 
+from scripts import abhaengigkeits_wache as wache
+
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import actions_version_guard as pin_wache  # noqa: E402
@@ -29,6 +31,39 @@ class DependabotActionsPolicyTest(unittest.TestCase):
         cls.config = yaml.safe_load((ROOT / ".github/dependabot.yml").read_text())
         cls.workflow = yaml.safe_load(
             (ROOT / ".github/workflows/dependabot-automerge.yml").read_text())
+
+    def test_pip_root_deckt_ci_und_optionale_manifeste_ab(self):
+        pip = [entry for entry in self.config["updates"]
+               if entry["package-ecosystem"] == "pip" and entry.get("directory") == "/"]
+        self.assertEqual(len(pip), 1, "Doppelte pip-Root-Konfiguration lehnt Dependabot ab")
+        entry = pip[0]
+        self.assertNotIn("allow", entry, "Optionale Allowlist darf CI-Pakete nicht ausschließen")
+        groups = entry["groups"]
+        self.assertEqual(list(groups), ["python-optionale-werkbank", "python"])
+
+        def normalize(name):
+            return re.sub(r"[-_.]+", "-", name).lower()
+
+        patterns = {normalize(name) for name in groups["python-optionale-werkbank"]["patterns"]}
+        for datei in ("requirements-poppy.txt", "requirements-tts.txt"):
+            path = ROOT / datei
+            self.assertTrue(path.is_file(), f"{datei} fehlt")
+            packages = {normalize(a.name) for a in wache.parse_requirements(path.read_text(encoding="utf-8"))}
+            self.assertTrue(packages, f"{datei} darf nicht leer sein")
+            self.assertLessEqual(packages, patterns)
+        self.assertEqual(groups["python"]["patterns"], ["*"])
+        for group in groups.values():
+            self.assertEqual(set(group["update-types"]), {"minor", "patch"})
+        self.assertEqual(entry["ignore"], [{"dependency-name": "piper-tts",
+                                           "update-types": ["version-update:semver-major"]}])
+
+    def test_kein_exakt_doppeltes_ecosystem_verzeichnis(self):
+        gesehen = set()
+        for entry in self.config["updates"]:
+            for directory in entry.get("directories", [entry.get("directory")]):
+                key = (entry["package-ecosystem"], directory, entry.get("target-branch"))
+                self.assertNotIn(key, gesehen, f"Doppelter Dependabot-Eintrag: {key}")
+                gesehen.add(key)
 
     def test_actions_groups_partition_semver_types(self):
         entry = next(u for u in self.config["updates"]
