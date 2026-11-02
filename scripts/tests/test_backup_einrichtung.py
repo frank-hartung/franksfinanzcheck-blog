@@ -695,6 +695,8 @@ ok() { :; }
 offen() { :; }
 hinweis() { :; }
 link() { :; }
+# #923: „nicht prüfbar“ hat einen eigenen Zähler (kein grüner Punkt).
+ungeprueft() { :; }
 ''' + funktionen + "\npruefe_e8\n"
         umgebung = {
             **__import__("os").environ,
@@ -915,6 +917,242 @@ for p in json.load(sys.stdin).get("branch_policies", []):
         anleitung = ANLEITUNG.read_text(encoding="utf-8")
         self.assertIn("npm run backup:einrichten", anleitung)
         self.assertIn("npm run backup:status", anleitung)
+
+
+class RueckwegFrischeVertrag(unittest.TestCase):
+    """#923 (02.11.2026): Probe und Wache dürfen nicht verschiedene Zusagen machen.
+
+    Der Drill warnte bis 01.11.2026 erst ab 48 h und meldete dann „BESTANDEN“,
+    während die tägliche Frischwache dieselbe Sicherung ab 52 h als RPO-Verstoß
+    rot färbte. Zwei Grenzen für dieselbe Zusage sind eine Zusage zu viel.
+    """
+
+    DRILL = SCRIPTS / "restore_drill.sh"
+
+    def test_grenzen_decken_sich_mit_der_wache(self):
+        import backup_freshness_guard as fg
+        text = self.DRILL.read_text(encoding="utf-8")
+        self.assertIn(f"MAX_ALTER_WARN_H={fg.MAX_ALTER_GELB_H}", text)
+        self.assertIn(f"MAX_ALTER_ROT_H={fg.MAX_ALTER_ROT_H}", text)
+        # Über der Toleranz ist der Drill NICHT bestanden (kein bloßes Warnen).
+        self.assertIn('fail "$tag ist ${alter} h alt', text)
+
+    def test_anleitung_nennt_dieselben_grenzen(self):
+        anleitung = ANLEITUNG.read_text(encoding="utf-8")
+        self.assertIn("über **36 h** eine Warnung", anleitung)
+        self.assertIn("über\n**52 h** Exit 1", anleitung.replace("\r", ""))
+        self.assertNotIn("älter als 48 Stunden, warnt sie", anleitung)
+
+
+
+class Exportvertrag(unittest.TestCase):
+    """#923 (02.11.2026): Der Export darf einen Fehler nicht in „leer“ verwandeln.
+
+    Belegt mit echten Aufrufen gegen eine API-Attrappe: Eine D1-Antwort mit
+    HTTP 200 und `success: false` wurde zur leeren Tabelle, ein KV-Export ohne
+    Schlüssel bestand die Probe, und `--wrangler-bulk` schrieb eine leere
+    Rückspiel-Datei mit Exit 0. In allen drei Fällen wäre der Verlust erst im
+    Ernstfall aufgefallen.
+    """
+
+    SKRIPT = SCRIPTS / "kv_backup.py"
+
+    @staticmethod
+    def _modul():
+        import importlib
+        sys.path.insert(0, str(SCRIPTS))
+        return importlib.import_module("kv_backup")
+
+    def test_d1_stoerung_wird_nicht_zur_leeren_tabelle(self):
+        kb = self._modul()
+        echt = kb.HTTP
+        try:
+            kb.HTTP = lambda *_a, **_k: {"success": False,
+                                         "errors": [{"code": 7403, "message": "internal error"}]}
+            with self.assertRaises(RuntimeError) as ctx:
+                kb.d1_export("tok", "acc", "db")
+            self.assertIn("7403", str(ctx.exception))
+        finally:
+            kb.HTTP = echt
+
+    def test_leerer_export_ist_nur_mit_beleg_vollstaendig(self):
+        kb = self._modul()
+        leer = {"version": 1, "kv": {"namespace": "ns", "anzahl": 0, "werte": {}, "ablauf": {}}}
+        self.assertTrue(any("kein einziger KV-Schlüssel" in f for f in kb.pruefen(leer)),
+                        "ein Export ohne einen Schlüssel galt als vollständig")
+        belegt = dict(leer, leer_bestaetigt=True,
+                      kv=dict(leer["kv"], titel="ABO"))
+        self.assertEqual(kb.pruefen(belegt), [])
+
+    def test_d1_ohne_zeilenliste_ist_ein_befund(self):
+        kb = self._modul()
+        ex = {"version": 1, "kv": {"namespace": "ns", "anzahl": 0,
+                                   "werte": {}, "ablauf": {}},
+              "leer_bestaetigt": True,
+              "d1": {"datenbank": "db", "tabellen": {"klicks": None}}}
+        self.assertTrue(any("d1.klicks" in f for f in kb.pruefen(ex)), kb.pruefen(ex))
+
+    def test_leere_rueckspiel_datei_ist_kein_erfolg(self):
+        kb = self._modul()
+        import json
+        import tempfile
+        ex = {"version": 1,
+              "kv": {"namespace": "ns", "anzahl": 1,
+                     "werte": {"abo:a@example.invalid": json.dumps({"status": "active"})},
+                     "ablauf": {"abo:a@example.invalid": 1000}}}
+        self.assertEqual(kb.ablauf_verlust(ex, jetzt=2_000_000_000),
+                         ["abo:a@example.invalid"])
+        with tempfile.TemporaryDirectory() as ordner:
+            datei = Path(ordner) / "ex.json"
+            datei.write_text(json.dumps(ex), encoding="utf-8")
+            lauf = subprocess.run([sys.executable, str(self.SKRIPT), "--wrangler-bulk", str(datei)],
+                                  capture_output=True, text=True, timeout=60)
+        self.assertEqual(lauf.returncode, 1,
+                         "eine leere Rückspiel-Datei meldete Erfolg:\n" + lauf.stdout + lauf.stderr)
+        self.assertIn("LEER", lauf.stderr)
+        self.assertIn("abgelaufen", lauf.stderr)
+
+    def test_probe_befund_beendet_den_export_rot(self):
+        kb = self._modul()
+        import json
+        import tempfile
+        fehlend = {"version": 1, "kv": {"namespace": "ns", "anzahl": 5,
+                                        "werte": {"abo:a@example.invalid":
+                                                  json.dumps({"status": "active"})},
+                                        "ablauf": {}}}
+        with tempfile.TemporaryDirectory() as ordner:
+            ziel = Path(ordner) / "export.json"
+            with redirect_stdout(io.StringIO()):
+                rc = kb.main(["--out", str(ziel)], _export=lambda _e: fehlend)
+        self.assertEqual(rc, 1, "ein Export, den die eigene Probe bemängelt, war grün")
+
+
+class FrischwacheEinrichtungVertrag(unittest.TestCase):
+    """#923 (02.11.2026): Die Frischwache meldete grün, während nichts gesichert wurde.
+
+    Belegt am Lauf 41335523844: E1/E2 offen, keine Sicherung vorhanden, der Job
+    „Backup-Frische pruefen (RPO 24 h / 52 h)“ erfolgreich. Der Schritt
+    „Einrichtung als Kontext (kein Block, nur Einordnung)“ endete fest mit
+    `exit 0` – zehn Läufe lang. Eine Wache, die den Ausfall, den sie überwacht,
+    als Erfolg ausgibt, ist schlimmer als keine.
+    """
+
+    WF = REPO / ".github" / "workflows" / "backup-frischwache.yml"
+
+    def test_einrichtung_blockiert_die_frischwache(self):
+        text = self.WF.read_text(encoding="utf-8")
+        self.assertNotIn("Einrichtung als Kontext (kein Block", text,
+                         "der Einrichtungsschritt darf nicht mehr als Fußnote laufen")
+        self.assertIn("python3 scripts/backup_einrichtung.py --pruefen", text)
+        # Der Schritt muss bei offenem Punkt rot werden – kein `exit 0`/`|| true`.
+        self.assertRegex(text, r"backup_einrichtung\.py --pruefen\n\s+code=\$\?")
+        self.assertIn('exit 1', text)
+        self.assertNotIn("|| true", text.split("Voraussetzungen prüfen (fail-closed")[1][:800])
+
+    def test_schrittname_wird_vom_alerting_erkannt(self):
+        alarm = (REPO / ".github" / "workflows" / "alert-on-failure.yml").read_text(encoding="utf-8")
+        self.assertIn("backupFrischEinrichtung", alarm)
+        self.assertIn("includes('Voraussetzungen prüfen')", alarm)
+        # Der Rat verweist auch auf den Frischwache-Lauf – sonst halber Weg.
+        self.assertIn("backupFrischLaeufe", alarm)
+
+    def test_simulation_prueft_beide_richtungen(self):
+        sim = (REPO / "scripts" / "tests" / "sim" / "alert_scoping_sim.mjs").read_text(encoding="utf-8")
+        self.assertIn("#923: Frischwache rot in", sim)
+        self.assertIn("#923-Gegenprobe: Frischwache rot beim Messen", sim)
+
+
+class WizardScheinGruenVertrag(unittest.TestCase):
+    """#923 (02.11.2026): „Alle Pflichtpunkte eingerichtet“ bei ungeprüften Punkten.
+
+    Reproduziert mit einer gh-Attrappe (Variablen lesbar, Secret-Liste nicht,
+    Environment-API 404): Der Wizard meldete Exit 0 und „Alle Pflichtpunkte
+    sind eingerichtet“, obwohl E2, E3, E4, E5 und E8 gar nicht geprüft werden
+    konnten. Ein ungeprüfter Punkt ist kein grüner Punkt.
+    """
+
+    WIZARD = SCRIPTS / "backup_einrichten_wizard.sh"
+
+    def setUp(self):
+        self.text = self.WIZARD.read_text(encoding="utf-8")
+
+    def test_ungeprueft_ist_ein_eigener_zustand(self):
+        self.assertIn("ungeprueft()", self.text)
+        self.assertIn("UNGEPRUEFT=$((UNGEPRUEFT + 1))", self.text)
+        # Abschluss verlangt BEIDE Zähler auf null.
+        self.assertIn('[ "$OFFENE" -eq 0 ] && [ "$UNGEPRUEFT" -eq 0 ]', self.text)
+        # Kein Prüfpunkt darf „nicht prüfbar“ als bloßen Hinweis behandeln.
+        for zeile in self.text.splitlines():
+            if "nicht prüfbar" in zeile or "nicht pruefbar" in zeile:
+                if zeile.lstrip().startswith("#"):
+                    continue
+                self.assertNotIn("hinweis ", zeile,
+                                 f"„nicht prüfbar“ landet weiter in hinweis(): {zeile.strip()}")
+
+    @staticmethod
+    def _wizard_umgebung(ordner: str) -> dict:
+        """Umgebung für den Wizard-Lauf: gh-Attrappe vorn, CI-Marker weg.
+
+        Der Wizard verweigert in CI bewusst den Dienst (`GITHUB_ACTIONS` gesetzt
+        -> sofort Exit 1, „Menschen-Schritt“). Ohne dieses Aufräumen prüft der
+        Test in der CI nicht den Befund, sondern nur den CI-Riegel – er wäre
+        also grün bzw. rot aus dem falschen Grund. Beide Wege sind ein eigener
+        Vertrag (siehe `test_in_ci_wird_der_menschen_schritt_verweigert`).
+        """
+        import os
+        umgebung = {k: v for k, v in os.environ.items() if k != "GITHUB_ACTIONS"}
+        umgebung["PATH"] = f"{ordner}:{umgebung.get('PATH', '')}"
+        return umgebung
+
+    def test_check_mit_verdeckten_secrets_endet_rot(self):
+        """Der echte Aufruf gegen eine gh-Attrappe, der den Fehler zeigte."""
+        import os
+        import tempfile
+        with tempfile.TemporaryDirectory() as ordner:
+            gh = Path(ordner) / "gh"
+            gh.write_text(
+                "#!/usr/bin/env bash\n"
+                'case "$*" in\n'
+                '  "auth status"*) exit 0 ;;\n'
+                '  "variable get BACKUP_REPO"*) echo "frank-hartung/franksfinanzcheck-backup"; exit 0 ;;\n'
+                '  "variable get KV_NAMESPACE_ID_ABO"*) echo "0123456789abcdef0123456789abcdef"; exit 0 ;;\n'
+                '  "variable get "*) exit 1 ;;\n'
+                '  api*"secrets"*) echo "{\\"message\\":\\"Resource not accessible by integration\\"}" >&2; exit 1 ;;\n'
+                '  api*"repos/frank-hartung/franksfinanzcheck-backup"*) echo \'{"private": true}\'; exit 0 ;;\n'
+                '  api*"deployment-branch-policies"*) exit 1 ;;\n'
+                '  api*"environments/backup"*) exit 1 ;;\n'
+                'esac\n'
+                "exit 1\n", encoding="utf-8")
+            gh.chmod(0o755)
+            lauf = subprocess.run(["bash", str(self.WIZARD), "--check"],
+                                  capture_output=True, text=True, timeout=180,
+                                  env=self._wizard_umgebung(ordner))
+        self.assertEqual(lauf.returncode, 1,
+                         "ungeprüfte Pflichtpunkte ergaben wieder Exit 0:\n" + lauf.stdout)
+        self.assertNotIn("Alle Pflichtpunkte sind eingerichtet", lauf.stdout)
+        self.assertIn("NICHT bestätigt", lauf.stdout)
+
+    def test_in_ci_wird_der_menschen_schritt_verweigert(self):
+        """Die Einrichtung ist ein Menschen-Schritt – in CI nie „grün“ durchlaufen.
+
+        Ohne diesen Riegel würde ein Workflow die E1–E8-Prüfung mit den
+        Runner-Rechten „bestaetigen“, die am Entwicklerrechner ganz andere sind.
+        """
+        import os
+        import tempfile
+        with tempfile.TemporaryDirectory() as ordner:
+            gh = Path(ordner) / "gh"
+            gh.write_text("#!/usr/bin/env bash\nexit 1\n", encoding="utf-8")
+            gh.chmod(0o755)
+            lauf = subprocess.run(
+                ["bash", str(self.WIZARD), "--check"], capture_output=True, text=True,
+                timeout=180,
+                env={**os.environ, "GITHUB_ACTIONS": "true",
+                     "PATH": f"{ordner}:{os.environ.get('PATH', '')}"})
+        self.assertEqual(lauf.returncode, 1,
+                         "in CI lief der Einrichtungs-Wizard durch:\n" + lauf.stdout)
+        self.assertIn("In CI verweigert", lauf.stdout + lauf.stderr)
+        self.assertNotIn("Alle Pflichtpunkte sind eingerichtet", lauf.stdout)
 
 
 class NamensVertrag(unittest.TestCase):

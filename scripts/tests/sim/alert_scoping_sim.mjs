@@ -521,6 +521,36 @@ await run('#923: Wiederherstellbarkeit rot -> eigener Rat, kein Neustart-Verspre
          'actions/workflows/backup-frischwache.yml',
          'docs/ANLEITUNG-OFFSITE-BACKUP.md', 'Abschnitt „Wiederherstellung“'],
   null, ['API-Key abgelaufen', 'GROQ', 'Häufigste Ursachen', 'Einrichtung unvollständig']);
+// 02.11.2026 (WF-9E5A / #923): Die Frischwache meldete zehnmal grün, obwohl
+//     keine Sicherung existierte (Lauf 41335523844: E1/E2 offen). Der
+//     Einrichtungs-Schritt ist jetzt rot; der Rat muss „Einrichtung
+//     unvollständig" sein – nicht der Frische-Rat („Scheduler-Hänger"), denn
+//     ein Scheduler kann keine Sicherung auslösen, die nie eingerichtet wurde.
+await run('#923: Frischwache rot in „Voraussetzungen prüfen" -> Einrichtungs-Rat, nicht Frische-Rat',
+  { workflowName: 'Backup-Frischwache (operative RPO-Wache)', branch: 'main', event: 'schedule',
+    conclusion: 'failure',
+    jobs: [{ name: 'Backup-Frische pruefen (RPO 24 h / 52 h)', conclusion: 'failure',
+             html_url: 'https://x/jobs/9233',
+             steps: [{ name: 'Selbsttest (Wache prueft sich selbst – fail-closed)', conclusion: 'success' },
+                     { name: 'Voraussetzungen prüfen (fail-closed – kein Schein-Grün)', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: backup-einrichtung -->',
+         'Einrichtung unvollständig – ein Neustart hilft nicht',
+         'docs/ANLEITUNG-OFFSITE-BACKUP.md',
+         'actions/workflows/backup-frischwache.yml'],
+  null, ['<!-- alert-runbook: backup-frisch -->', 'Scheduler-Hänger ignoriert', 'API-Key abgelaufen',
+         '<!-- alert-runbook: backup-restore -->']);
+// Gegenprobe: Ein echter Frischebefund (Alter) behält den RPO-Rat.
+await run('#923-Gegenprobe: Frischwache rot beim Messen -> RPO-Rat bleibt',
+  { workflowName: 'Backup-Frischwache (operative RPO-Wache)', branch: 'main', event: 'schedule',
+    conclusion: 'failure',
+    jobs: [{ name: 'Backup-Frische pruefen (RPO 24 h / 52 h)', conclusion: 'failure',
+             html_url: 'https://x/jobs/9234',
+             steps: [{ name: 'Voraussetzungen prüfen (fail-closed – kein Schein-Grün)', conclusion: 'success' },
+                     { name: 'Frische messen (beide Release-Familien, Entwuerfe eingeschlossen)',
+                       conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: backup-frisch -->', 'Häufigste Ursachen'],
+  null, ['<!-- alert-runbook: backup-einrichtung -->']);
+
 // Gegenprobe: derselbe Schrittname in einem fremden Workflow bleibt beim
 // allgemeinen Runbook – die Klasse haengt am Workflow, nicht am Wort.
 await run('#923-Gegenprobe: gleicher Schrittname in fremdem Workflow -> Standard-Rat',

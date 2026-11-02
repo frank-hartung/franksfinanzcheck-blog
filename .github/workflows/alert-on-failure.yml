@@ -555,6 +555,17 @@ jobs:
             // der Simulation).
             const backupRestore = (isBackup || isBackupFrisch) && !backupEinrichtung &&
               failedStepNames.some(s => String(s).includes('Wiederherstellbarkeit'));
+            // 02.11.2026 (WF-9E5A / #923): Die Frischwache prüft die
+            // Einrichtung inzwischen SELBST und wird rot, wenn E1–E8 offen
+            // sind. Vorher lief sie zehnmal grün, obwohl keine einzige
+            // Sicherung existierte (Lauf 41335523844: E1/E2 fehlten, Job grün)
+            // – eine RPO-Wache, die „nichts gesichert" als Erfolg meldet,
+            // verdeckt genau den Ausfall, den sie überwacht. Der neue rote
+            // Schritt trägt bewusst denselben Namen wie im Offsite-Job; die
+            // Klasse bleibt trotzdem EIGENE Einrichtung (der Rat lautet dort
+            // „Einrichtung unvollständig", nicht „Scheduler-Hänger").
+            const backupFrischEinrichtung = isBackupFrisch &&
+              failedStepNames.some(s => String(s).includes('Voraussetzungen prüfen'));
             // ================================================================
             //  WF-53E2 / #780 (16.10.2026): EIN ROTER SELBSTTEST IST EINE
             //  CODE-REGRESSION – KEIN SCHLÜSSEL, KEIN AUSFALL, KEIN NEUSTART
@@ -601,7 +612,7 @@ jobs:
             // ================================================================
             const runbookKlasse = enginePhase05Failed ? 'engine-fruehabbruch'
               : engineFinalClassifierFailed ? 'engine-schlussklassifikation'
-              : backupEinrichtung ? 'backup-einrichtung'
+              : (backupEinrichtung || backupFrischEinrichtung) ? 'backup-einrichtung'
               : backupFrist ? 'backup-frist'
               // 01.11.2026 (#923): Der Rückweg-Beweis hat einen eigenen Rat –
               // „gelaufen“ und „wiederherstellbar“ sind zwei Aussagen. Steht
@@ -795,6 +806,11 @@ jobs:
             const backupAnleitung = '[`docs/ANLEITUNG-OFFSITE-BACKUP.md`](' + repoUrl +
               '/blob/' + encodeURI(defaultBranch) + '/docs/ANLEITUNG-OFFSITE-BACKUP.md)';
             const backupLaeufe = repoUrl + '/actions/workflows/backup-offsite.yml';
+            // 02.11.2026 (#923): Der Einrichtungs-Rat wird jetzt aus ZWEI
+            // Workflows ausgelöst (Offsite-Backup und Frischwache). Er nennt
+            // deshalb beide Läufe – ein Rat, der nur auf den halben Weg zeigt,
+            // schickt den Betreiber nach dem Lesen wieder ins Suchen.
+            const backupFrischLaeufe = repoUrl + '/actions/workflows/backup-frischwache.yml';
             const handlung = runbookKlasse === 'engine-fruehabbruch'
               ? [
                   '1. **Frühabbruch vor der Endabnahme:** Phase 0.5 ist der fehlgeschlagene Pflichtschritt. Falls „Do not report a quota deficit as success“ ebenfalls rot ist, ist es nur die Schlussklassifikation. Das belegt weder ein Tagesdefizit noch einen API-Key-Ausfall.',
@@ -811,7 +827,7 @@ jobs:
                 ? [
                     '1. **Einrichtung unvollständig – ein Neustart hilft nicht.** „Voraussetzungen prüfen“ ist absichtlich rot (fail-closed): Mindestens ein Zugang oder Ziel der Sicherung fehlt, ist falsch oder abgelaufen. Bis das erledigt ist, werden Abonnenten und Einwilligungsnachweise NICHT gesichert.',
                     '2. Den **jüngsten** Lauf öffnen ([Läufe von „Offsite-Backup“](' + backupLaeufe + '), oberster Eintrag) → **Summary**: Die Checkliste E1–E8 nennt jeden offenen Punkt mit dem Link, unter dem er erledigt wird. Schritt für Schritt: ' + backupAnleitung + '.',
-                    '3. Danach Actions → „Offsite-Backup“ → „Run workflow“ (Branch `main`). Der erste grüne Lauf schließt diese Meldung automatisch.'
+                    '3. Danach Actions → „Offsite-Backup“ → „Run workflow“ (Branch `main`). Der erste grüne Lauf dort schließt diese Meldung automatisch. Derselbe Befund erscheint seit dem 02.11.2026 auch in der [„Backup-Frischwache“](' + backupFrischLaeufe + '): Sie meldet nicht mehr grün, solange nichts gesichert wird.'
                   ]
                 : runbookKlasse === 'backup-frist'
                 ? [
@@ -856,9 +872,9 @@ jobs:
                   : runbookKlasse === 'sicherheit-live'
                     ? [
                         '1. **Zwei unabhängige Live-Prüfungen sind rot:** F-01 (Sicherheits-Header) UND Worker-Zustand (F-02/F-03/F-08). Nur die Header zu reparieren reicht nicht. Die einzelnen Messbefunde stehen als Annotationen und in der Lauf-Zusammenfassung; die bereinigten Berichte liegen im Artefakt `sicherheits-live-nachweis`.',
-                        '2. **F-01:** BEFUND = es wurde gemessen, und etwas fehlt. Ohne aktiven Proxy kann die Header-Regel nicht wirken: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A1 (beide DNS-Hosts Proxied, SSL Full oder Full (strict), Regel `FF Sicherheits-Header` mit acht Kopfzeilen aus `cloudflare/edge-schutz.md` – per `npm run edge:freigabe:apply`, danach `npm run edge:b7:apply`). Bei STOERUNG nichts an Cloudflare auf Verdacht ändern.',
-                        '3. **Worker:** Die Worker-Annotation nennt die konkrete Abweichung oder STOERUNG (Deploy-Diagnose über `/healthz`-Build-Stempel `bau` vs. Zugangs-Diagnose `NEWSLETTER_WORKER_EXPORT_KEY`). Runbook A3/A4 und D2: Widget UND Prüfung abgleichen, Tagesdeckel prüfen, bei unvollständigem authentifiziertem Betriebsbild den tatsächlich ausgeführten Worker-Deploy und den Leseschlüssel prüfen. Der Deploy-Resolver liest nach der Environment-Freigabe die bestehende `ABO`-Bindung aus `ff-newsletter`; fehlende/mehrdeutige Bindungen brechen rot ab. `KV_NAMESPACE_ID_ABO` ist dafür nur optionaler Bootstrap, für das separate Backup weiterhin erforderlich. Ein grüner Plan mit übersprungenem Deploy ist kein Deploy-Nachweis. Keine Schlüssel veröffentlichen und keinen Bot-Schutz abschalten.',
-                        '4. **Abschluss:** Nach den belegten Korrekturen die Sicherheits-Wache auf `main` manuell starten. Nur ein vollständiger erfolgreicher Live-Nachweis schließt diesen Vorgang; ein grüner Offline-/Push-Lauf, fehlender Leseschlüssel oder TEILWEISE genügt nicht.'
+                        '2. **F-01:** BEFUND = es wurde gemessen, und etwas fehlt. Die Header-Annotation nennt die Diagnose: Proxy aktiv (`cf-ray`/`server: cloudflare`) → die Transform Rule `FF Sicherheits-Header` fehlt oder ist unvollständig; Proxy fehlt → zuerst DNS/Proxy (A1 Schritt 1), nicht die Regel. A1: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md` (beide DNS-Hosts proxied, SSL Full oder Full (strict), acht Kopfzeilen aus `cloudflare/edge-schutz.md`) – per `npm run edge:freigabe:apply`, danach `npm run edge:b7:apply`. Bei STOERUNG nichts an Cloudflare auf Verdacht ändern.',
+                        '3. **Worker:** Die Worker-Annotation nennt die konkrete Abweichung oder STOERUNG (Deploy-Diagnose über `/healthz`-Build-Stempel `bau` vs. Zugangs-Diagnose `NEWSLETTER_WORKER_EXPORT_KEY`). Fehlt `bau` und ist der letzte Worker-Deploy am Schritt `Produktions-Environment absichern` gescheitert, zuerst das Environment absichern: Reviewer, exakt `main`, Admin-Bypass aus. Read-only: `python3 scripts/worker_environment_guard.py --check`; Einrichtung: `python3 scripts/worker_environment_einrichten.py --anwenden --reviewer frank-hartung` (Reviewer + Branch), Bypass im Dashboard. Der Deploy bleibt fail-closed, bis die Policy steht. Danach Actions → „Cloudflare-Worker deployen“ → `newsletter-worker` von `main`; der Job hält auf Freigabe. Runbook A3/A4 und D2; der Deploy-Resolver liest die bestehende `ABO`-Bindung aus `ff-newsletter`, `KV_NAMESPACE_ID_ABO` bleibt nur optionaler Bootstrap. Keine Schlüssel veröffentlichen und keinen Bot-Schutz abschalten.',
+                        '4. **Abschluss:** Nach den belegten Korrekturen `npm run worker:environment` (Exit 0) und `npm run edge:freigabe` (Exit 0) prüfen, dann die Sicherheits-Wache auf `main` manuell starten. Nur ein vollständiger erfolgreicher Live-Nachweis schließt diesen Vorgang; ein grüner Offline-/Push-Lauf, fehlender Leseschlüssel oder TEILWEISE genügt nicht.'
                       ]
                   : runbookKlasse === 'sicherheit-worker'
                     ? [

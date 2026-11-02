@@ -62,7 +62,33 @@ in `hugo.toml`), und der Worker antwortet (Newsletter-Lauf vom 13.10.2026:
 (Art. 7 Abs. 1 DSGVO), der ohne diese Einrichtung **nur** in Cloudflare
 liegt. Deshalb jetzt einrichten, vor den ersten Anmeldungen.
 
-### Live-Status 01.11.2026 – WF-9E5A #923
+### Live-Status 02.11.2026 – WF-9E5A #923 (aktuell)
+
+Gegen die echte GitHub-API geprüft am 02.11.2026, 09:20 UTC:
+
+| Prüfung | Ergebnis |
+|---|---|
+| Lauf `41295239096` (01.11., 09:56 UTC) | `backup`-Job **success**, `kv-backup` **failure** in „Voraussetzungen prüfen“ |
+| Zehn Läufe 23.10.–01.11. | **alle** `failure` im selben Schritt – derselbe Zustand wie am 15.10. |
+| Erwarteter Lauf 02.11., 03:00 UTC | **nicht vorhanden** (Scheduler-Aussetzer, nicht nachgeholt) |
+| Frischwache `41335523844` (01.11., 18:13 UTC) | **success** – obwohl E1/E2 offen sind und keine einzige Sicherung existiert |
+| Environment `backup` | `deployment_branch_policy: null`, `protection_rules: []` (E8 offen) |
+| Repository `frank-hartung/franksfinanzcheck-backup` | **404** – existiert nicht |
+| Variablen/Secrets (Agenten-Token) | `403 Resource not accessible by integration` |
+
+Daraus zwei Befunde, die dieser Stand geheilt hat (Einzelheiten und Belege in
+`WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-11-02.md`):
+
+1. **Die Frischwache war grün, ohne etwas zu überwachen.** Ihr Schritt
+   „Einrichtung als Kontext“ endete fest mit `exit 0`; ein fehlendes Ziel war
+   nur eine `notice` im Log. Seit diesem Stand ist der Schritt rot
+   („Voraussetzungen prüfen“, eigene Klasse `backup-einrichtung`).
+2. **Der Export konnte einen Fehler in „leer“ verwandeln.** Eine D1-Antwort
+   mit `success: false` wurde zur leeren Tabelle, ein KV-Export ohne
+   Schlüssel bestand die Probe, `--wrangler-bulk` schrieb eine leere
+   Rückspiel-Datei mit Exit 0. Alles drei ist jetzt fail-closed.
+
+### Live-Status 01.11.2026 – WF-9E5A #923 (Archiv)
 
 Der Lauf `41187477202` (31.10.2026) ist **weiterhin im Schritt
 „Voraussetzungen prüfen“ rot** – und das ist richtig. Die Annotationen nennen
@@ -388,8 +414,11 @@ Die Probe läuft so ab:
 4. Sie beweist, dass sich das Git-Bundle klonen lässt und Artikel und
    Rechtsseiten enthält.
 
-Ist die neueste Sicherung älter als 48 Stunden, warnt sie. Mit `--nur-kv`
-oder `--nur-git` lässt sich die Probe eingrenzen.
+Die Probe prüft das **Alter** der neuesten Sicherung mit denselben Grenzen wie
+die Frischwache (`backup_freshness_guard.py`): über **36 h** eine Warnung, über
+**52 h** Exit 1 – denn eine Sicherung, die die eigene RPO-Zusage reißt, ist
+kein bestandener Rückweg (bis 01.11.2026 warnte sie erst ab 48 h und bestand
+dann weiter). Mit `--nur-kv` oder `--nur-git` lässt sich die Probe eingrenzen.
 
 **Kein Schein-Grün (01.11.2026, #923):** Ein Lauf ohne geprüfte Familie –
 also `--nur-kv` **und** `--nur-git` zugleich – endet mit **Exit 2** und dem
