@@ -1,6 +1,6 @@
 {
   "target": 6,
-  "ready": 7,
+  "ready": 5,
   "pool_size": 7,
   "generated_at": "2026-11-02T11:42:18Z",
   "candidates": [
@@ -74,20 +74,10 @@
     },
     {
       "slug": "2026-11-01-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-      "ready": true,
+      "ready": false,
       "sha256": "3988fe8a79b5c05081a3371b020a08ce748041ce87d46b18dbb4d650f768fd52",
-      "flesch": 66.6,
       "measured_at": "2026-11-02T11:40:30Z",
-      "score": 0.942,
-      "parts": {
-        "spelling": 0.92,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.6799999999999999,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck",
@@ -108,20 +98,10 @@
     },
     {
       "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "ready": true,
+      "ready": false,
       "sha256": "8b2bfd854fd76ec4416f34211b3eb73d701860b77a115a0be239fd5b164dea34",
-      "flesch": 72.6,
       "measured_at": "2026-11-02T11:42:18Z",
-      "score": 0.996,
-      "parts": {
-        "spelling": 0.98,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     }
   ],
   "measurement": {

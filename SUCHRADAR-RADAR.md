@@ -1,6 +1,6 @@
 # SUCHRADAR – Status
 
-> Stand: 2026-11-01 14:12:01 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
+> Stand: 2026-11-02 16:00:46 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
 > Schlüssellos · 0 € · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md`
 
 ## Lauf
@@ -8,22 +8,22 @@
 | Kennzahl | Wert |
 |---|---|
 | Anfragen geplant | 25 |
-| Erfolgreich | 22 |
+| Erfolgreich | 21 |
 | Aus dem Zwischenspeicher | 0 |
-| Fehlgeschlagen | 3 |
+| Fehlgeschlagen | 4 |
 | Übersprungen (Budget) | 0 |
-| Treffer gesamt | 187 |
+| Treffer gesamt | 177 |
 | Davon organisch | 10 |
-| Eigene Treffer | 0 von 22 Anfragen |
+| Eigene Treffer | 0 von 21 Anfragen |
 
 ## Datenqualität
 
 | Kennzahl | Wert |
 |---|---|
-| Anfragen mit echtem Suchindex | 1 von 22 |
-| Anfragen nur mit Wissens-Rückfall | 21 |
-| Organische Treffer | 10 von 187 |
-| Rückfall-Anteil | 95 % |
+| Anfragen mit echtem Suchindex | 1 von 21 |
+| Anfragen nur mit Wissens-Rückfall | 20 |
+| Organische Treffer | 10 von 177 |
+| Rückfall-Anteil | 94 % |
 | Aussagekraft | eingeschraenkt |
 
 _Nur organische Treffer gehen in Rang und Wettbewerb ein. Der Wikipedia-Rückfall verhindert leere Läufe, ist aber kein Ranking._
@@ -33,7 +33,7 @@ _Nur organische Treffer gehen in Rang und Wettbewerb ein. Der Wikipedia-Rückfal
 | Anbieter | Abrufe | Limit |
 |---|---|---|
 | searxng | 1 | 400 |
-| wikipedia | 21 | 300 |
+| wikipedia | 20 | 300 |
 
 ## Eigene Sichtbarkeit
 
@@ -45,14 +45,14 @@ _Kein eigener Treffer in den gemessenen Anfragen._
 |---|---|---|---|---|
 | ing.de | 1 | 1 | 1.0 | 1 |
 | lexware.de | 1 | 1 | 2.0 | 2 |
-| bank99.at | 1 | 1 | 3.0 | 3 |
-| mlp-financify.de | 1 | 0 | 4.0 | 4 |
-| schuldnerberatung.de | 1 | 0 | 5.0 | 5 |
-| sparkasse.de | 1 | 0 | 6.0 | 6 |
-| peaks.com | 1 | 0 | 7.0 | 7 |
-| meetadam.io | 1 | 0 | 8.0 | 8 |
+| sparkasse.de | 1 | 1 | 3.0 | 3 |
+| bank99.at | 1 | 0 | 4.0 | 4 |
+| peaks.com | 1 | 0 | 5.0 | 5 |
+| mlp-financify.de | 1 | 0 | 6.0 | 6 |
+| meetadam.io | 1 | 0 | 7.0 | 7 |
+| vr.de | 1 | 0 | 8.0 | 8 |
 | fonio.ai | 1 | 0 | 9.0 | 9 |
-| verivox.de | 1 | 0 | 10.0 | 10 |
+| accountable.de | 1 | 0 | 10.0 | 10 |
 
 ## Störungen
 
@@ -61,6 +61,7 @@ _Kein eigener Treffer in den gemessenen Anfragen._
 | franksfinanzcheck.de | Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Treffer / |
 | Gaskosten senken | Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Treffer / htt |
 | Tarife Sofortleistung Haken | Kein Anbieter lieferte Treffer für 'Tarife Sofortleistung Haken': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Tr |
+| Tipps | Kein Anbieter lieferte Treffer für 'Tipps': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Treffer / https://priv.a |
 
 ## Einordnung
 
