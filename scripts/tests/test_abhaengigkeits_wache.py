@@ -21,12 +21,9 @@ nur „grün" können. Diese Tests halten deshalb drei Zusagen fest:
 from __future__ import annotations
 
 import json
-import re
 import tempfile
 import unittest
 from pathlib import Path
-
-import yaml
 
 from scripts import abhaengigkeits_wache as wache
 
@@ -245,39 +242,18 @@ class AdHocInstallationTest(unittest.TestCase):
         self.assertEqual(befunde, [], f"Ad-hoc-Installationen: {[b.als_dict() for b in befunde]}")
 
     def test_dependabot_pflegt_die_neuen_manifeste(self) -> None:
-        """Ein gemeinsamer pip-Eintrag deckt alle Root-Manifeste ab."""
-        config = yaml.safe_load((ROOT / ".github/dependabot.yml").read_text(encoding="utf-8"))
-        pip = [entry for entry in config["updates"]
-               if entry["package-ecosystem"] == "pip" and entry.get("directory") == "/"]
-        self.assertEqual(len(pip), 1, "Doppelte pip-Root-Konfiguration lehnt Dependabot ab")
-        entry = pip[0]
-        self.assertNotIn("allow", entry, "Kein Paket durch eine optionale Allowlist ausschließen")
-        groups = entry["groups"]
-        self.assertEqual(list(groups), ["python-optionale-werkbank", "python"])
-        def normalize(name: str) -> str:
-            return re.sub(r"[-_.]+", "-", name).lower()
+        """Die schnelle Offline-Wache benötigt keine zusätzlichen Python-Pakete.
 
-        patterns = {normalize(name) for name in groups["python-optionale-werkbank"]["patterns"]}
+        Die vollständige YAML-Vertragsprüfung liegt in
+        test_dependabot_actions_policy und läuft im Regressionsworkflow.
+        """
+        text = (ROOT / ".github/dependabot.yml").read_text(encoding="utf-8")
+        self.assertEqual(text.count('package-ecosystem: "pip"'), 1)
+        self.assertIn('python-optionale-werkbank:', text)
+        for paket in ("pypdf", "edge-tts", "piper-tts", "trafilatura"):
+            self.assertIn(f'"{paket}"', text)
         for datei in ("requirements-poppy.txt", "requirements-tts.txt"):
-            pfad = ROOT / datei
-            self.assertTrue(pfad.is_file(), f"{datei} fehlt")
-            pakete = {normalize(a.name) for a in wache.parse_requirements(pfad.read_text(encoding="utf-8"))}
-            self.assertTrue(pakete, f"{datei} darf nicht leer sein")
-            self.assertLessEqual(pakete, patterns)
-        self.assertEqual(groups["python"]["patterns"], ["*"])
-        for group in groups.values():
-            self.assertEqual(set(group["update-types"]), {"minor", "patch"})
-        self.assertEqual(entry["ignore"], [{"dependency-name": "piper-tts",
-                                           "update-types": ["version-update:semver-major"]}])
-
-    def test_dependabot_keine_doppelten_ecosystem_verzeichnisse(self) -> None:
-        config = yaml.safe_load((ROOT / ".github/dependabot.yml").read_text(encoding="utf-8"))
-        gesehen = set()
-        for entry in config["updates"]:
-            for directory in entry.get("directories", [entry.get("directory")]):
-                key = (entry["package-ecosystem"], directory, entry.get("target-branch"))
-                self.assertNotIn(key, gesehen, f"Doppelter Dependabot-Eintrag: {key}")
-                gesehen.add(key)
+            self.assertTrue((ROOT / datei).is_file(), f"{datei} fehlt")
 
 
 class AuditTest(unittest.TestCase):
