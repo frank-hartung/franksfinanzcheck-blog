@@ -35,6 +35,33 @@ nicht hergestellt werden. Was ein Agent aber **muss**, ist dafür zu sorgen,
 dass dieser Zustand nicht als Erfolg gemeldet wird. Drei Wachen taten genau
 das.
 
+### 2a. Nachtrag 12:55 UTC — der Lauf von heute bestätigt die Heilung
+
+Zwischen Befund und Abgabe lief **`41428440948` (02.11., 10:23 UTC)**, der erste
+Lauf nach dem fail-closed-Stand im Offsite-Workflow:
+
+| Job | Ergebnis |
+|---|---|
+| `backup` (Bundle + Release) | success |
+| `KV-/D1-Backup` | **failure**, Schritt 4 „Voraussetzungen prüfen (fail-closed – kein Schein-Grün)“ |
+| Frischwache | noch nicht neu gelaufen — dort greift diese Abgabe |
+
+Der Job scheitert jetzt **an der Sache** und nennt sie im Klartext (Annotation
+aus dem Lauf, gekürzt):
+
+- `Environment backup: jeder Branch darf das Environment nutzen … Selected → nur main`
+- `fehlt → KV_NAMESPACE_ID_ABO` (Repository-Variable)
+- `fehlt → CF_KV_BACKUP_TOKEN` (Secret, Workers KV: Read)
+- `fehlt → BACKUP_PASSPHRASE` (Secret, 32+ Zeichen)
+- `fehlt → BACKUP_REPO_TOKEN` (Secret, fine-grained, nur Backup-Repo)
+- `fehlt → BACKUP_REPO` (Variable; Repo `frank-hartung/franksfinanzcheck-backup` → 404)
+
+Das ist der gewünschte Zustand: **rot an der richtigen Stelle, mit Adresse**
+statt grün über einer offenen Lücke. Kein Punkt davon ist durch Code heilbar –
+jeder braucht eine Entscheidung des Inhabers. Nachgeprüft um 12:55 UTC:
+`backup` hat weiterhin `protection_rules: []` und
+`deployment_branch_policy: null`, das Ziel-Repo antwortet **404**.
+
 ## 3. Die vier Defekte — reproduziert, nicht behauptet
 
 ### L-01 · Die RPO-Wache meldete zehnmal grün, ohne etwas zu überwachen
@@ -125,7 +152,7 @@ Workflow behält sein Runbook; ein belegt leerer Namespace bleibt gültig.
 | `python3 scripts/kv_backup.py --selftest` | ✅ inkl. F-E1…F-E7 |
 | `python3 scripts/backup_einrichtung.py --selftest` | ✅ 18 Fallgruppen |
 | `python3 scripts/backup_freshness_guard.py --selftest` | ✅ 13 Fallgruppen |
-| `python3 -m unittest scripts.tests.test_backup_einrichtung` | ✅ **59 Tests** (13 YAML-Skips lokal, CI hat PyYAML) |
+| `python3 -m unittest scripts.tests.test_backup_einrichtung` | ✅ **60 Tests** (lokal 13 YAML-Skips; in CI-Nachahmung mit PyYAML alle 60) |
 | `python3 -m unittest scripts.tests.test_alert_scoping` | ✅ 30 Tests, Simulation **76/76** |
 | `bash scripts/restore_drill.sh --repo … --nur-git --nur-kv` | ✅ Exit 2, „Es wurde NICHTS geprüft“ |
 | `python3 scripts/workflow_js_wache.py --check` | ✅ alle `github-script`-Blöcke kompilieren |
@@ -136,6 +163,30 @@ Workflow behält sein Runbook; ein belegt leerer Namespace bleibt gültig.
 | `python3 scripts/manifest_guard.py` · `abhaengigkeits_wache.py --check` | ✅ grün |
 | Wizard `--check` gegen `gh`-Attrappe | ✅ **Exit 1**, „5 Punkt(e) NICHT bestätigt“ |
 | YAML-Parse beider Backup-Workflows | ✅ (Schrittfolge geprüft) |
+| **Volle Suite unter CI-Bedingungen** (`GITHUB_ACTIONS=true`, `requirements-ci.txt` im venv) | ✅ **5030 Tests, OK** (15 Skips) |
+| Uhr-Probe (`selftest_clock.py --trap-discover scripts/tests --offset 97`) | ✅ 5030 Tests unter +97 Tagen grün |
+| KI-Probe `selftest_ki.py --trap-workflows` | ✅ 153 Selbsttests ohne Modell/Netz |
+
+### 5a. Nebenbefund aus der CI (gefunden, nicht gesucht)
+
+Der erste CI-Lauf dieser Abgabe war im Job „Code-Regression“ rot — **nicht**
+wegen des Backups, sondern wegen zweier Fehler in der Prüftechnik:
+
+1. Mein neuer Wizard-Vertrag lief unter `GITHUB_ACTIONS=true` in den CI-Riegel
+   des Wizards („In CI verweigert“) statt in den geprüften Befund. Er hätte
+   also lokal grün und in der CI rot gemeldet — ein Test, der die Umgebung
+   nicht kennt, ist kein Vertrag. **Heilung:** Befundpfad läuft ohne
+   CI-Marker, und der CI-Riegel ist jetzt selbst ein Vertrag
+   (`test_in_ci_wird_der_menschen_schritt_verweigert`): Die Einrichtung darf in
+   CI **nie** durchlaufen, weil die Runner-Rechte andere sind als am Rechner
+   des Inhabers.
+2. Zwei Sabotage-Tests von `actions_version_guard` schrieben ihr `::error::`
+   auf stderr. In GitHub Actions wird daraus eine rote Annotation
+   **„Actions-Pin-Drift – keine SHA erraten“**, die auf `.github` zeigt —
+   obwohl die Wache driftfrei ist (`drift: 0`). Wer den Job liest, sucht den
+   Fehler dann in den Actions-Pins statt in der Suite. **Heilung:** beide
+   Tests fangen stderr ab; die Suite gibt unter CI-Bedingungen **0**
+   `::error::`-Zeilen aus (gemessen).
 
 ## 6. Betriebsrisiko, das dieser Stand NICHT behebt — und was er stattdessen tut
 
