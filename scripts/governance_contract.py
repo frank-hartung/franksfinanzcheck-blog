@@ -427,6 +427,11 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # Die Wache verlangt Prüfer, Belegkette, Zahlenprotokoll, Termine
           # und bindet jede Freigabe per Hash an exakt eine Textfassung.
           "editorial_review_gate.py",
+          # Belegketten-Wache (24.10.2026, #826 · gehärtet 03.11.2026, #1024):
+          # Prüft die Erreichbarkeit und Normbeständigkeit aller YMYL-Quellen
+          # inkl. 3-Tupel-Vertrag mit `net_safety.sicherer_abruf` und
+          # zweistufigem Bundesrechts-Spiegel (C6).
+          "belegketten_wache.py",
           # Folge-Reparatur des Gate-Vorfalls (18.09.2026, Folge-Befund 5):
           # Die Frontmatter-Schlussgrenze war in 13 Dateien (9 live) an den
           # ersten Absatz geklebt (`---Text`). Hugo rendert das, aber

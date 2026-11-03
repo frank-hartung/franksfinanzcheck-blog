@@ -1009,6 +1009,70 @@ await run('F-09 Gegenprobe: sauberer Name bleibt lesbar',
   { workflowName: 'Layout-AI', branch: 'main', event: 'push', conclusion: 'failure', jobs: [] },
   true, ['**Workflow:** Layout-AI', '**Branch:** main'], null, ['Layout-AI·']);
 
+// 14. WF-0032 / #1026 (03.11.2026): Web-Vitals-Feldmessung (wöchentlich).
+//     · #1026-Reproduktion (Lauf 41456548199): roter Selbsttest → Klasse `selbsttest`
+//       inkl. Node-Selbsttest-Hinweis (`npm run test:webvitals`).
+//     · Echter CrUX-Befund (Exit 1) → `web-vitals-befund`, kein GROQ/GEMINI-Rat.
+//     · Störung / fehlende 28-Tage-CrUX-Daten (Exit 2) → `web-vitals-stoerung`
+//       mit klarer Trennung zwischen `keine_crux_daten` (C2) und PSI-Abrufstörung.
+//     · Offene #1026-Meldung mit `selbsttest` wird bei folgendem Exit-2-Lauf
+//       sauber auf `web-vitals-stoerung` nachgeführt.
+const WEB_VITALS = 'Web-Vitals-Feldmessung (wöchentlich)';
+await run('#1026-Reproduktion: Labor-/Feld-Selbsttest rot → Selbsttest-Rat mit npm run test:webvitals',
+  { workflowName: WEB_VITALS, branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'Felddaten (CrUX) + Labor (Lighthouse)', conclusion: 'failure',
+             html_url: 'https://x/jobs/125314557857',
+             steps: [{ name: 'Selbsttest der Labormessung (ohne Netz, ohne Pakete)', conclusion: 'failure' }] }] },
+  true,
+  ['Vorgang **WF-0032**', '<!-- alert-runbook: selbsttest -->',
+   'Code-Regression, kein Betriebsausfall', 'npm run test:webvitals'],
+  null, ['API-Key abgelaufen', 'GROQ/GEMINI']);
+
+await run('#1026: CrUX SCHLECHT (Exit 1) → web-vitals-befund statt allgemeinem API-Key-Rat',
+  { workflowName: WEB_VITALS, branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'Felddaten (CrUX) + Labor (Lighthouse)', conclusion: 'failure',
+             html_url: 'https://x/jobs/10261',
+             steps: [{ name: 'Urteil Felddaten – Befund echte Besucher (CrUX SCHLECHT)', conclusion: 'failure' }] }] },
+  true,
+  ['Vorgang **WF-0032**', '<!-- alert-runbook: web-vitals-befund -->',
+   'Echte Besucher erleben schlechte Core Web Vitals', 'lighthouse/assertions.json',
+   'docs/ANLEITUNG-WEB-VITALS.md'],
+  null, ['API-Key abgelaufen', 'Häufigste Ursachen']);
+
+await run('#1026: CrUX ungeprüft / PSI gestört (Exit 2) → web-vitals-stoerung (keine_crux_daten vs. PSI_API_KEY)',
+  { workflowName: WEB_VITALS, branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'Felddaten (CrUX) + Labor (Lighthouse)', conclusion: 'failure',
+             html_url: 'https://x/jobs/10262',
+             steps: [{ name: 'Urteil Felddaten – Störung oder ungeprüft (CrUX/PSI)', conclusion: 'failure' }] }] },
+  true,
+  ['Vorgang **WF-0032**', '<!-- alert-runbook: web-vitals-stoerung -->',
+   'keine_crux_daten', 'PSI_API_KEY', 'docs/ANLEITUNG-WEB-VITALS.md'],
+  null, ['API-Key abgelaufen', 'Häufigste Ursachen']);
+
+await run('#1026-Nachführung: offene Meldung wechselt von selbsttest auf web-vitals-stoerung',
+  { workflowName: WEB_VITALS, branch: 'main', event: 'schedule', conclusion: 'failure', runId: 41500000001,
+    jobs: [{ name: 'Felddaten (CrUX) + Labor (Lighthouse)', conclusion: 'failure',
+             html_url: 'https://x/jobs/10263',
+             steps: [{ name: 'Urteil Felddaten – Störung oder ungeprüft (CrUX/PSI)', conclusion: 'failure' }] }],
+    openIssues: [{ number: 1026, title: IDENTITIES[WEB_VITALS].titel,
+                   body: IDENTITIES[WEB_VITALS].marker + '\n<!-- alert-runbook: selbsttest -->\n'
+                     + '<!-- alert-jobs: ["Felddaten (CrUX) + Labor (Lighthouse)"] -->\n'
+                     + '- **Run:** [Details ansehen](https://x/runs/41456548199)',
+                   created_at: '2026-11-02T13:51:43Z' }] },
+  false, [],
+  { anzahl: 1, nummer: 1026,
+    imBody: ['<!-- alert-runbook: web-vitals-stoerung -->', 'keine_crux_daten',
+             '<!-- alert-jobs: ["Felddaten (CrUX) + Labor (Lighthouse)"] -->',
+             'https://x/runs/41500000001'],
+    nichtImBody: ['alert-runbook: selbsttest', 'API-Key abgelaufen'] });
+
+await run('#1026-Gegenprobe: gleichnamiger Schritt in fremdem Workflow bleibt allgemein',
+  { workflowName: 'Bot-Watchdog', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'anderer Job', conclusion: 'failure', html_url: 'https://x/jobs/10264',
+             steps: [{ name: 'Urteil Felddaten – Befund echte Besucher (CrUX SCHLECHT)', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: allgemein -->', 'Häufigste Ursachen'],
+  null, ['web-vitals-befund', 'web-vitals-stoerung']);
+
 console.log(failed === 0
   ? `\n✅ SIMULATION: alle ${count} Szenarien korrekt`
   : `\n❌ SIMULATION: ${failed} von ${count} Szenarien falsch`);

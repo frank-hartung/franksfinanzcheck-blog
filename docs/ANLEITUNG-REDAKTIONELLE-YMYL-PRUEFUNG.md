@@ -112,8 +112,19 @@ Aussage noch trägt; erst dann URL, Titel und Abrufdatum im Frontmatter
 korrigieren und neu versiegeln.
 
 Der werktägliche Workflow fährt dieselbe Wache und schließt das Arbeits-Ticket
-erst, wenn **beide** Prüfungen grün sind (Gate-Queue leer **und** keine tote
-Belegkette).
+erst, wenn **beide** Prüfungen grün sind (Gate-Queue leer **und** keine tote,
+umgeleitete oder unklare Belegkette).
+
+**Bundesrechts-Zitate (`gesetze-im-internet.de`, #826 / #1024):** Da
+`www.gesetze-im-internet.de` TCP-Verbindungen von Cloud-Runnern blockiert,
+prüft `scripts/belegketten_wache.py` bei blockiertem Direktabruf automatisch den
+täglich synchronisierten Bundesrechts-Spiegel (`Gesetze-fuer-KI/bundesrecht`)
+zweistufig über `raw.githubusercontent.com` und `api.github.com` (Raw-Media-Type
+mit `GH_TOKEN`-Kontingent): Existenz des Gesetzes, Quellbindung im YAML-Kopf und
+aktiver Status der zitierten Einzelnorm (keine `(weggefallen)`-Norm). Echte
+Programmierfehler (`ValueError`, `TypeError`) schlagen laut fehl, statt sich als
+scheinbarer Netzfehler (`unklar`) zu tarnen; siehe
+`WARTUNG-REDAKTION-YMYL-1024-DAUERHEILUNG-HIGHEND-2026-11-03.md`.
 
 ## Was die Freigabe automatisch bricht
 

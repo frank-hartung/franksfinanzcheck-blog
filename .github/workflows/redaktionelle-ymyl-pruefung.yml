@@ -1,12 +1,22 @@
 # Risikobasierte Redaktion: Bestand sichtbar halten, neue YMYL-Publikationen
 # blockiert zusätzlich das in publish_gate.py verdrahtete harte Gate.
 #
-# Prüfqueue #826 (24.10.2026): Das Gate prüft den TEXT, nicht das NETZ. Eine
-# zitierte Quelle kann verschwinden oder – schlimmer – unter derselben Adresse
-# durch einen anderen Artikel ersetzt werden; das Siegel bleibt dabei formal
-# gültig. Deshalb prüft der zweite Job zusätzlich die Belegketten (URLs) der
-# Hochrisiko-Artikel. Das Arbeits-Ticket wird erst geschlossen, wenn BEIDE
-# Prüfungen grün sind – sonst wäre „0 offene Freigaben“ eine halbe Wahrheit.
+# Prüfqueue #826 (24.10.2026 · gehärtet 03.11.2026, #1024):
+# Das Gate prüft den TEXT, nicht das NETZ. Eine zitierte Quelle kann
+# verschwinden oder – schlimmer – unter derselben Adresse durch einen anderen
+# Artikel ersetzt werden; das Siegel bleibt dabei formal gültig. Deshalb prüft
+# der zweite Job zusätzlich die Belegketten (URLs) der Hochrisiko-Artikel.
+# Das Arbeits-Ticket wird erst geschlossen, wenn BEIDE Prüfungen grün sind
+# (Gate-Queue leer UND Belegketten-Wache Exit 0).
+#
+# Härtung #1024:
+#  · `belegketten_wache.py --selftest` läuft explizit offline vor dem Live-Lauf
+#    (und ist in `governance_contract.py` C6 sowie `selftest_ki.py` verankert).
+#  · Kein `continue-on-error` auf dem Messschritt: Exit-Code wird deterministisch
+#    über `|| rc=$?` erfasst; Exit 0 = grün, Exit 1 = offener Beleg-Prüfauftrag
+#    im Ticket, Exit >= 2 = echter Werkzeugfehler (Lauf schlägt am Ende hart fehl).
+#  · `GH_TOKEN` speist den `api.github.com`-Zweitweg des Bundesrechts-Spiegels
+#    mit authentifiziertem Kontingent, falls `raw.githubusercontent.com` drosselt.
 name: Redaktionelle YMYL-Prüfung
 
 on:
@@ -30,6 +40,8 @@ jobs:
     steps:
       - name: Repository auschecken
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Python einrichten
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
@@ -42,6 +54,7 @@ jobs:
       - name: Regelwerk selbst prüfen
         run: |
           python3 scripts/editorial_review_gate.py --selftest
+          python3 scripts/belegketten_wache.py --selftest
           python3 -m unittest discover -s scripts/tests -p 'test_editorial_review_gate.py' -v
           python3 -m unittest discover -s scripts/tests -p 'test_ymyl_write_contract.py' -v
           python3 -m unittest discover -s scripts/tests -p 'test_ymyl_maintenance_writers.py' -v
@@ -52,7 +65,7 @@ jobs:
         run: |
           python3 scripts/editorial_review_gate.py --all --report --json > ymyl-review.json
           cat REDAKTIONELLE-PRUEFUNG-REPORT.md >> "$GITHUB_STEP_SUMMARY"
-          OPEN=$(python3 -c 'import json; d=json.load(open("data/editorial_review_queue.json")); print(d["open_live"] + d["open_drafts"])')
+          OPEN=$(python3 -c 'import json; d=json.load(open("data/editorial_review_queue.json", encoding="utf-8")); print(d["open_live"] + d["open_drafts"])')
           echo "open=$OPEN" >> "$GITHUB_OUTPUT"
 
       - name: Prüfbericht sichern
@@ -64,9 +77,9 @@ jobs:
             data/editorial_review_queue.json
             ymyl-review.json
 
-  # Belegketten-Wache (Prüfqueue #826). Sie schreibt nichts und entscheidet
-  # nichts: Sie meldet tote oder umgezogene Zitate. Netzfehler (Timeout, 5xx,
-  # 403, 429) gelten als „unklar“, nicht als tote Quelle. Für die automatische
+  # Belegketten-Wache (Prüfqueue #826 / #1024). Sie schreibt nichts und
+  # entscheidet nichts: Sie meldet tote oder umgezogene Zitate. Netzfehler
+  # gelten als „unklar“, nicht als tote Quelle. Für die automatische
   # Ticket-Erledigung müssen aber auch diese Prüfaufträge geklärt sein.
   belegketten:
     needs: pruefung
@@ -79,6 +92,8 @@ jobs:
     steps:
       - name: Repository auschecken
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Python einrichten
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
@@ -88,12 +103,20 @@ jobs:
       - name: Abhängigkeit installieren
         run: python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
 
+      - name: Selbsttest der Belegketten-Wache (ohne Netz)
+        run: python3 scripts/belegketten_wache.py --selftest
+
       - name: Belegketten der Hochrisiko-Artikel prüfen
         id: wache
-        continue-on-error: true
-        run: python3 scripts/belegketten_wache.py --nur-hochrisiko --report --strict --require-complete
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rc=0
+          python3 scripts/belegketten_wache.py --nur-hochrisiko --report --strict --require-complete || rc=$?
+          echo "exit=$rc" >> "$GITHUB_OUTPUT"
 
-      - name: Befund sichern (auch bei rotem Lauf)
+      - name: Befund sichern (auch bei offenem Prüfauftrag)
         if: always()
         run: |
           if [ -f BELEGKETTEN-WACHE-REPORT.md ]; then
@@ -108,6 +131,7 @@ jobs:
         with:
           name: belegketten-wache
           path: BELEGKETTEN-WACHE-REPORT.md
+          if-no-files-found: ignore
 
       - name: Redaktionellen Bericht aus dem vorherigen Job laden
         if: always() && needs.pruefung.result == 'success'
@@ -117,15 +141,14 @@ jobs:
           path: gate-bericht
 
       # Ein Arbeits-Ticket für beide Befunde. Fail-closed: ist die Gate-Zahl
-      # unbekannt (Job davor abgebrochen), gilt das Ticket als offen – es wird
-      # nie geschlossen, weil eine Zahl fehlt.
+      # unbekannt oder der Exit-Code der Wache ungleich 0, bleibt das Ticket offen.
       - name: Arbeits-Ticket pflegen
         if: always()
         env:
           GH_TOKEN: ${{ github.token }}
           GATE_RESULT: ${{ needs.pruefung.result }}
           GATE_OPEN: ${{ needs.pruefung.outputs.open }}
-          WACHE: ${{ steps.wache.outcome }}
+          WACHE_EXIT: ${{ steps.wache.outputs.exit }}
         run: |
           set -euo pipefail
           gh label create redaktionelle-pruefung --repo "$GITHUB_REPOSITORY" \
@@ -135,20 +158,27 @@ jobs:
             --label redaktionelle-pruefung --json number --jq '.[0].number // empty')
 
           TICKET_OFFEN=0
-          [ "${GATE_OPEN}" != "0" ] && TICKET_OFFEN=1
-          [ "${GATE_RESULT}" != "success" ] && TICKET_OFFEN=1
-          [ "${WACHE}" != "success" ] && TICKET_OFFEN=1
+          [ "${GATE_OPEN:-}" != "0" ] && TICKET_OFFEN=1
+          [ "${GATE_RESULT:-}" != "success" ] && TICKET_OFFEN=1
+          [ "${WACHE_EXIT:-}" != "0" ] && TICKET_OFFEN=1
 
           if [ "$TICKET_OFFEN" = "1" ]; then
             {
+              echo "> **Status der Prüfqueue:** Gate=\`${GATE_RESULT:-unbekannt}\` (offene Freigaben: **${GATE_OPEN:-?}**)" \
+                   "· Belegketten-Wache Exit=\`${WACHE_EXIT:-—}\`"
+              echo
               if [ -f gate-bericht/REDAKTIONELLE-PRUEFUNG-REPORT.md ]; then
                 cat gate-bericht/REDAKTIONELLE-PRUEFUNG-REPORT.md
               else
                 printf '# Redaktionelle YMYL-Prüfqueue\n\nGate-Bericht fehlt; keine automatische Erledigung.\n'
               fi
-              if [ "${WACHE}" != "success" ] && [ -f BELEGKETTEN-WACHE-REPORT.md ]; then
+              if [ "${WACHE_EXIT:-}" != "0" ]; then
                 printf '\n\n---\n\n'
-                cat BELEGKETTEN-WACHE-REPORT.md
+                if [ -f BELEGKETTEN-WACHE-REPORT.md ]; then
+                  cat BELEGKETTEN-WACHE-REPORT.md
+                else
+                  printf '# Belegketten-Wache\n\n🛑 Wache hat keinen Bericht erzeugt (Exit `%s`) – Werkzeugfehler im Laufprotokoll prüfen.\n' "${WACHE_EXIT:-—}"
+                fi
               fi
             } > ticket-body.md
             if [ -n "$ISSUE" ]; then
@@ -161,7 +191,7 @@ jobs:
                 --label redaktionelle-pruefung \
                 --body-file ticket-body.md
             fi
-            echo "Ticket offen: Gate=$GATE_OPEN, Wache=$WACHE"
+            echo "Ticket offen: Gate=$GATE_OPEN, WacheExit=${WACHE_EXIT:-—}"
           else
             gh issue list --repo "$GITHUB_REPOSITORY" --state open \
               --label redaktionelle-pruefung --json number --jq '.[].number' \
@@ -171,3 +201,19 @@ jobs:
                     --comment "Alle dokumentierten YMYL-Freigaben und Review-Termine sind grün, und alle zitierten Belegketten sind ohne offene Abrufbefunde erreichbar (keine tote, unklare oder umgeleitete Quelle)."
                 done
           fi
+
+      - name: Werkzeug-Integrität der Belegketten-Wache
+        if: always()
+        env:
+          WACHE_EXIT: ${{ steps.wache.outputs.exit }}
+        run: |
+          set -euo pipefail
+          case "${WACHE_EXIT:-}" in
+            0|1)
+              echo "Belegketten-Wache regulär beendet (Exit ${WACHE_EXIT})."
+              ;;
+            *)
+              echo "::error::Belegketten-Wache mit Werkzeugfehler abgebrochen (Exit '${WACHE_EXIT:-—}') – Code/Protokoll prüfen."
+              exit 1
+              ;;
+          esac

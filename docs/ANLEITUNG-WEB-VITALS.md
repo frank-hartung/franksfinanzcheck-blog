@@ -4,7 +4,7 @@
 und die Laborwerte der **ausgelieferten** Seite danebenlegen, statt sie mit
 einem Varianten-Build zu verwechseln.
 
-## Warum es diese Messung gibt (26.10.2026)
+## Warum es diese Messung gibt (26.10.2026 · gehärtet 03.11.2026, #1026)
 
 Das Haus hatte drei Messungen und keine davon sah Produktion:
 
@@ -25,23 +25,50 @@ Rollenverteilung:
   mit denselben Schwellen wie das Varianten-Gate und sagt, **welche** Grenze
   reißt.
 
-## Die Woche
+## Die Woche (`WF-0032`)
 
 Workflow: `.github/workflows/web-vitals-woche.yml` – montags 05:47 UTC
-(≈ 07:47 Berlin), nach dem GSC-Lauf, plus manuell auslösbar. Der Lauf ist
-read-only: Berichte gehen als Artefakt und in die Lauf-Zusammenfassung, nicht
-in den Bestand. Ein Wochenlauf, der Commits erzeugt, wäre selbst eine
-Änderungsquelle am Messgegenstand.
+(≈ 07:47 Berlin), nach dem GSC-Lauf, plus manuell auslösbar (`strategie`:
+`mobile` oder `desktop`). Der Lauf ist read-only: Berichte gehen als Artefakt
+(`web-vitals-woche`) und in die Lauf-Zusammenfassung, nicht in den Bestand. Ein
+Wochenlauf, der Commits erzeugt, wäre selbst eine Änderungsquelle am
+Messgegenstand.
 
-```
-Felddaten  →  Befund  ⇒ Lauf rot (Exit 1)        – echte Besucher betroffen
-           →  Störung ⇒ Lauf rot (Exit 2)        – ungeprüft ist nicht sauber
-Labor      →  Befund  ⇒ Warnung im Lauf, Bericht – Diagnose, kein Blocker
+```text
+Felddaten  →  Befund (Exit 1)   ⇒ Lauf rot (web-vitals-befund)   – echte Besucher betroffen
+           →  Störung (Exit 2)  ⇒ Lauf rot (web-vitals-stoerung) – ungeprüft / API gestört (C2)
+Labor      →  Befund / Störung  ⇒ Warnung im Lauf, Bericht       – Diagnose, kein Blocker
 ```
 
-Diese Trennung ist der Kern: Ein Laborlauf über CDN und Mobilfunk-Drosselung
-ist kein Freibrief und kein Deploy-Blocker. Verbindlich für die Wirklichkeit
-sind die Felddaten – sie sind der einzige Alarm, der hier zählt.
+Architektur-Garantien seit der Dauerheilung #1026
+(`WARTUNG-TECHNIK-WF-0032-1026-DAUERHEILUNG-HIGHEND-2026-11-03.md`):
+
+1. **Paketfreie Importierbarkeit:** `scripts/lighthouse_live.mjs` importiert am
+   Dateikopf ausschließlich Node-Bordmittel; `lighthouse`, `playwright-core`
+   und `e2e/browser.mjs` werden erst beim echten Browserlauf über
+   `ladeLaufzeit()` nachgeladen. Der Workflow beweist das vor `npm ci` mit
+   `test ! -d node_modules`.
+2. **Entkoppelte Pfade:** Feld-Selbsttest und Feldmessung laufen **vor** dem
+   Laborpfad. Ein Defekt am Diagnose-Werkzeug kann die verbindliche
+   CrUX-Messung niemals überspringen.
+3. **Deterministisches Exit-Capturing:** Beide Messschritte fangen Nicht-Null-
+   Exits explizit über `|| rc=$?` unter `bash -eo pipefail` ab (kein
+   `continue-on-error` mit stillem Abbruch vor `$GITHUB_OUTPUT`).
+
+## Offline-Selbsttests & Vertragstests (ohne Netz, ohne `node_modules`)
+
+```bash
+npm run test:webvitals
+npm run test:cwv:feld
+npm run test:cwv:labor
+node scripts/lighthouse_live.mjs --selftest
+python3 scripts/cwv_feld_wache.py --selftest
+```
+
+`scripts/tests/test_web_vitals_workflow.py` kopiert das Lighthouse-Werkzeug in
+einen nackten Temp-Ordner ohne `node_modules` und führt zusätzlich die echten
+Shell-Blöcke aus `.github/workflows/web-vitals-woche.yml` unter
+`bash -eo pipefail` aus.
 
 ## Felddaten messen
 
@@ -56,13 +83,15 @@ python3 scripts/cwv_feld_wache.py --selftest       # ohne Netz, ohne Schreiben
 ```
 
 Ziele stehen in `data/cwv/feld_ziele.json` – bewusst kurz: Felddaten entstehen
-nur dort, wo echte Besucher messbar sind. Eine Liste mit 60 URLs wäre eine
-Wunschliste, keine Messung. Aktuell: Startseite, Werkzeuge-Hub, Cockpit,
-Fixkosten-Scanner, 24-Monats-Effektivpreis.
+nur dort, wo echte Besucher messbar sind. Aktuell: Startseite, Werkzeuge-Hub,
+Cockpit, Fixkosten-Scanner, 24-Monats-Effektivpreis.
 
-**Schlüssel:** `PSI_API_KEY` (optional, als GitHub-Secret). Ohne Schlüssel
-antwortet die API gedrosselt, der Lauf bleibt möglich. Der Schlüssel wird nie
-ausgegeben, nie geloggt, nie in eine Datei geschrieben.
+**Schlüssel & Rate-Limit-Schutz:** `PSI_API_KEY` (optional, als GitHub-Secret).
+Ohne Schlüssel drosselt Google geteilte Runner-IPs streng (`HTTPError 429`);
+`cwv_feld_wache.py` fängt transiente Antworten (`408`/`429`/`5xx`, Zeitlimit)
+mit begrenztem Backoff inkl. `Retry-After` ab und taktet Live-Ziele schonend.
+Der Schlüssel wird in jeder Fehlermeldung und URL geschwärzt (`[GESCHWAERZT]`)
+und nie ausgegeben, geloggt oder gespeichert.
 
 ### Wie bewertet wird
 
@@ -75,16 +104,21 @@ Google liefert das Urteil gleich mit.
   gutem LCP und schlechtem INP ist nicht „gut".
 - **Keine Felddaten = UNGEPRÜFT**, niemals GRÜN. Eine neue Seite mit zu wenig
   Traffic wird nicht als gesund geführt.
-- **Keine einzige geprüfte Seite = STÖRUNG** (Exit 2). Dann stimmt etwas an der
-  Messung nicht (Domain, API, Quote) – nicht an der Seite.
-- Der Schlüssel fehlt in der Ausgabe, auch im JSON.
+- **Keine einzige geprüfte Seite = STÖRUNG** (Exit 2, Hausregel C2). `befund.json`
+  und Bericht nennen `stoerung_grund`:
+  - `keine_crux_daten`: PageSpeed Insights hat für alle Ziele geantwortet, im
+    28-Tage-CrUX-Fenster liegen aber noch keine Besucherdaten vor (kein
+    technischer Defekt, kein Code-Eingriff nötig).
+  - `teilabruf_fehlgeschlagen` / `abruf_fehlgeschlagen`: API-/Netzfehler oder
+    Rate-Limit (`HTTPError 429` → Secret `PSI_API_KEY` hinterlegen).
 
 Exit: `0` kein Feldbefund · `1` Befund (mindestens eine Seite `SCHLECHT`) ·
-`2` Störung (Netz, API, kein Ziel messbar).
+`2` Störung (Netz, API oder 0 Ziele mit CrUX-Daten).
 
 ## Laborwerte der ausgelieferten Seite
 
 ```bash
+node scripts/lighthouse_live.mjs --selftest           # offline & ohne node_modules
 node scripts/lighthouse_live.mjs                      # Ziele aus data/cwv/feld_ziele.json
 node scripts/lighthouse_live.mjs --url https://franksfinanzcheck.de/werkzeuge/
 node scripts/lighthouse_live.mjs --laeufe 3 --schreiben
@@ -93,34 +127,40 @@ node scripts/lighthouse_live.mjs --streng             # Befund ⇒ Exit 1 (nur w
 ```
 
 - Schwellen: **eine Wahrheit** aus `lighthouse/assertions.json`, erzeugt aus
-  `data/design/regelwerk.yaml`. Keine zweite Zahl.
+  `data/design/regelwerk.yaml`. Leere oder fehlende Schwellen brechen hart ab
+  (Scheingrün-Sperre).
 - Gerät: Mobile-Emulation (390 × 844, gedrosselt) – dieselbe Sicht wie die
   Mehrheit der Leser.
 - Browser: derselbe Resolver wie die E2E-Suite (`e2e/browser.mjs`), also das
-  gepinnte Chromium – kein zweiter Browserweg.
-- Aggregation: je Schwelle `median` / `pessimistic`, wie in der Assertion
-  hinterlegt; über mehrere Läufe wird genau diese Methode angewandt.
+  gepinnte Chromium – erst zur Messzeit dynamisch geladen.
+- Aggregation: je Schwelle `median` / `pessimistic` / `optimistic`, wie in der
+  Assertion hinterlegt.
 - Ausgabe: `data/cwv/labor/befund.json` + `.md` (`--schreiben`), Exit `0`
-  gemessen · `1` Befund (nur mit `--streng`) · `2` nicht messbar.
+  gemessen · `1` Befund (nur mit `--streng`) · `2` nicht messbar / falsche
+  Argumente.
 
 Ein Sonderfall ist im Skript festgehalten: Lighthouse 13 hat `dom-size` als
 `dom-size-insight` ausgeliefert. Der Alias steht an **einer** Stelle
 (`AUDIT_ALIAS`) – nicht in der Schwelle, nicht im Bericht.
 
-## Wenn ein Befund kommt
+## Wenn eine Meldung (`WF-0032`) kommt
 
-1. **Felddaten `SCHLECHT`** – zuerst das Labor derselben URL ansehen
-   (`lighthouse_live.mjs --url …`). Es nennt die gerissene Grenze; typische
-   Ursachen in diesem Blog: zu großes LCP-Bild, render-blockierendes CSS,
-   nachgeladenes JavaScript im Erstkontakt.
-2. **Nur Labor rot** – prüfen, ob der Varianten-Build dasselbe zeigt
-   (`design-varianten.yml`). Ist nur Produktion betroffen, liegt es an
-   Auslieferung/CDN (Cache-Header, Bildgrößen, Cloudflare-Optimierungen).
-3. **Störung (Exit 2)** – Messung reparieren, nicht die Seite. Ein
-   `UNGEPRÜFT` ist kein Blankoscheck.
-4. Nach der Heilung: Felddaten hinken bis zu **28 Tage** hinterher. Ein grüner
-   Wert am nächsten Tag beweist nichts; der Verlauf (`verlauf.jsonl`) zeigt
-   den Trend.
+Das zentrale Fehler-Alerting (`.github/workflows/alert-on-failure.yml`) trennt
+drei Ursachen:
+
+1. **Klasse `selbsttest`:** Code- oder Vertragsregression am Prüfwerkzeug.
+   Lokal mit `npm run test:webvitals` nachstellen und im Code beheben.
+2. **Klasse `web-vitals-befund` (Felddaten `SCHLECHT`, Exit 1):** Zuerst den
+   Laborbericht derselben URL im Artefakt `web-vitals-woche` prüfen – er nennt
+   die gerissene Grenze (LCP-Bild, render-blockierendes CSS, Hauptthread-JS).
+   Nach der Heilung hinkt CrUX gleitend bis zu **28 Tage** hinterher.
+3. **Klasse `web-vitals-stoerung` (Exit 2):** Annotation und Lauf-Zusammenfassung
+   prüfen:
+   - Steht dort `keine_crux_daten`, ist die API gesund, aber die Seite liegt im
+     28-Tage-Fenster noch unter Googles CrUX-Besucherschwelle (C2).
+   - Steht dort `HTTPError 429` / `abruf_fehlgeschlagen`, ein gültiges
+     `PSI_API_KEY`-Secret in den Repository-Einstellungen hinterlegen und den
+     Workflow manuell starten.
 
 ## Grenzen
 

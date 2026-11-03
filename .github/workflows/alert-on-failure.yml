@@ -511,6 +511,13 @@ jobs:
             const istLayoutAi = wfName === 'Layout-AI';
             const layoutBauFailed = istLayoutAi &&
               failedStepNames.some(s => String(s).includes('Website bauen'));
+            // WF-0032 / #1026 (03.11.2026): Web-Vitals-Feldmessung (wöchentlich).
+            // Der Kanal kennt keine GROQ-/GEMINI-Schlüssel. Nach Installation und
+            // Selbsttest bleiben zwei fachliche Rottöne: echter CrUX-Befund (Exit 1)
+            // vs. Störung / fehlende 28-Tage-CrUX-Daten (Exit 2, Hausregel C2).
+            const istWebVitals = wfName === 'Web-Vitals-Feldmessung (wöchentlich)';
+            const webVitalsBefundFailed = istWebVitals &&
+              failedStepNames.some(s => String(s).includes('Urteil Felddaten – Befund'));
             const codeqlGateFailed = isCodeql &&
               failedStepNames.some(s => String(s).includes('Sicherheits-Gate'));
             // WF-A535 #632 / Content-Engine v2: the final status step is a
@@ -663,6 +670,8 @@ jobs:
               // Code-Regression, unabhängig vom Kanal.
               : layoutBauFailed ? 'layout-bau'
               : istLayoutAi ? 'layout-audit'
+              : webVitalsBefundFailed ? 'web-vitals-befund'
+              : istWebVitals ? 'web-vitals-stoerung'
               : 'allgemein';
             const runbookMarker = '<!-- alert-runbook: ' + runbookKlasse + ' -->';
             const labelsOf = issue => (issue.labels || [])
@@ -811,6 +820,9 @@ jobs:
             // deshalb beide Läufe – ein Rat, der nur auf den halben Weg zeigt,
             // schickt den Betreiber nach dem Lesen wieder ins Suchen.
             const backupFrischLaeufe = repoUrl + '/actions/workflows/backup-frischwache.yml';
+            const webVitalsAnleitung = '[`docs/ANLEITUNG-WEB-VITALS.md`](' + repoUrl +
+              '/blob/' + encodeURI(defaultBranch) + '/docs/ANLEITUNG-WEB-VITALS.md)';
+            const webVitalsLaeufe = repoUrl + '/actions/workflows/web-vitals-woche.yml';
             const handlung = runbookKlasse === 'engine-fruehabbruch'
               ? [
                   '1. **Frühabbruch vor der Endabnahme:** Phase 0.5 ist der fehlgeschlagene Pflichtschritt. Falls „Do not report a quota deficit as success“ ebenfalls rot ist, ist es nur die Schlussklassifikation. Das belegt weder ein Tagesdefizit noch einen API-Key-Ausfall.',
@@ -973,10 +985,23 @@ jobs:
                             '2. **Nachfahren:** `LAYOUT-REPORT.md` in der Job-Zusammenfassung, Zahlen in `.cache/layout/dom-audit.json`. Jede Zeile nennt Seite und Metrik.',
                             '3. **Heilen oder begründen:** Inhalt/Struktur reparieren – oder, wenn eine Grenze wirklich zu eng ist, sie in `scripts/dom_audit.py` (eine Quelle) mit Messung anpassen. Runbook: `docs/LAYOUT-AUTOMATISIERUNG.md`. Der nächste grüne Lauf schließt die Meldung.'
                           ]
+                      : runbookKlasse === 'web-vitals-befund'
+                        ? [
+                            '1. **Einordnung: Echte Besucher erleben schlechte Core Web Vitals (CrUX „SLOW", Exit 1).** Dieser Kanal braucht weder GROQ- noch GEMINI-Schlüssel, und ein Neustart ändert das 28-Tage-Fenster von Google CrUX nicht.',
+                            '2. **Befund lesen:** Öffne die **Summary** des Laufs ([Läufe der Web-Vitals-Feldmessung](' + webVitalsLaeufe + ')) und das Artefakt `web-vitals-woche` (`data/cwv/feld/befund.md` + `data/cwv/labor/befund.md`). Der Feldbericht nennt Seite und Metrik (LCP / INP / CLS); der Laborbericht zeigt die konkreten Verursacher gegen `lighthouse/assertions.json`.',
+                            '3. **Heilen & Nachweis:** Engpass im Layout-/Asset-Baum beheben (statische Vorprüfung: `python3 scripts/cwv_guard.py`, Vertragstests: `npm run test:webvitals`). Da CrUX gleitend über 28 Tage misst, schließt sich diese Meldung automatisch, sobald der Wochenlauf wieder Werte innerhalb der Google-Schwelle sieht. Runbook: ' + webVitalsAnleitung + '.'
+                          ]
+                      : runbookKlasse === 'web-vitals-stoerung'
+                        ? [
+                            '1. **Einordnung: Feldmessung ohne verwertbares CrUX-Urteil (Exit 2) – kein nachgewiesener Leistungsbefund und kein GROQ-/GEMINI-Thema.** Die Annotation des roten Schritts und die Lauf-Zusammenfassung unterscheiden zwei Fälle:',
+                            '2. **Fall A – `keine_crux_daten` (PageSpeed Insights erreichbar, 0 Seiten mit CrUX-Daten):** Die öffentliche Seite hat im 28-Tage-Fenster noch nicht genug Besucher für Googles CrUX-Mindestschwelle. Gemäß Hausregel (C2) gilt „ungeprüft" nicht als grün – es liegt aber kein technischer Defekt vor; kein Code-Eingriff nötig.',
+                            '3. **Fall B – Abruf gestört (`HTTPError 429` / `403` / Zeitlimit in `feld-fehler.txt`):** Ohne optionales Repo-Secret `PSI_API_KEY` drosselt Google geteilte Runner-IPs streng (`429`), bei ungültigem Schlüssel antwortet die API mit `403`. Abhilfe: gültigen PageSpeed-Insights-Schlüssel als Secret `PSI_API_KEY` hinterlegen und den Lauf unter [Web-Vitals-Feldmessung](' + webVitalsLaeufe + ') per „Run workflow" wiederholen.',
+                            '4. **Werkzeug lokal ohne Netz prüfen:** `npm run test:webvitals`. Runbook: ' + webVitalsAnleitung + '. Sobald der Job auf `main` grün durchläuft, schließt sich diese Meldung automatisch.'
+                          ]
                       : runbookKlasse === 'selbsttest'
                         ? [
                             '1. **Einordnung: Code-Regression, kein Betriebsausfall.** Rot ist ein Selbsttest – die Wache hat ihr eigenes Prüfwerkzeug geprüft und für defekt befunden. Selbsttests laufen offline und mit Attrappen-Schlüsseln (KI-Probe, #138): Ein abgelaufener GROQ-/GEMINI-Schlüssel oder ein GitHub-Ausfall löst diesen Schritt nicht aus, und ein Neustart liefert dasselbe Rot.',
-                            '2. **Nachfahren:** `python3 scripts/selftest_runner.py` prüft alle Wachen wie das Qualitäts-Gate; die Zeile mit ❌ nennt Skript und gebrochenen Vertrag. Einzeln: `python3 scripts/<wache>.py --selftest`.',
+                            '2. **Nachfahren:** `python3 scripts/selftest_runner.py` prüft alle Wachen wie das Qualitäts-Gate; die Zeile mit ❌ nennt Skript und gebrochenen Vertrag. Einzeln: `python3 scripts/<wache>.py --selftest` bzw. `node scripts/<wache>.mjs --selftest` (für Web Vitals gesammelt: `npm run test:webvitals`).',
                             '3. **Ursache eingrenzen:** `git log -5 --format="%h %ad %s" --date=short -- scripts/<wache>.py`. Ist zugleich die Meldung „Qualitätsprüfung rot (Selbsttests, Vertrag oder Aufbau)“ offen, kam der Fehler mit einem Merge – der Qualitäts-Gate-Lauf jenes Commits zeigt dieselbe Zeile.',
                             '4. **Heilen:** den Code reparieren und erst mit grünen Checks mergen. Diese Meldung schließt sich beim nächsten grünen Lauf auf `main` selbst.'
                           ]

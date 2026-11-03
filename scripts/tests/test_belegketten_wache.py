@@ -1,19 +1,25 @@
-"""Prüfqueue #826: Belegketten-Wache und Faktenfrische-Schreibgrenze.
+"""Prüfqueue #826 & #1024: Belegketten-Wache, Workflow-Vertrag und Faktenfrische-Schreibgrenze.
 
-Beide Tests laufen ohne Netz: Die Wache bekommt einen injizierten Abruf,
-Faktenfrische arbeitet auf temporären Artikeln. Der Punkt ist nicht die
-Netzwerkfunktion, sondern die Entscheidung: Was gilt als Befund, und was darf
-ein Wartungslauf an einem versiegelten YMYL-Artikel ändern?
+Alle Tests laufen ohne Netz: Die Wache bekommt einen injizierten Abruf bzw.
+gepatchtes ``urllib.request.urlopen`` (damit der echte 3-Tupel-Vertrag mit
+``net_safety.sicherer_abruf`` geprüft wird!), und die Shell-Blöcke aus
+``.github/workflows/redaktionelle-ymyl-pruefung.yml`` werden unter
+``bash -eo pipefail`` ausgeführt.
 """
 import io
+import os
+import shutil
+import subprocess
 import sys
 import tempfile
+import textwrap
 import unittest
 from contextlib import redirect_stdout
 from pathlib import Path
 from unittest.mock import patch
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "scripts"))
 import belegketten_wache as wache
 import faktenfrische
 import yaml
@@ -103,7 +109,7 @@ class BelegkettenWacheTests(unittest.TestCase):
         self.assertEqual(["eins", "zwei"], [e["slug"] for e in ergebnis["befunde"]])
 
     def test_http_status_konsistent_mit_und_ohne_exception(self):
-        for code in (403, 429, 500, 501, 503, 507, 404, 410):
+        for code in (403, 408, 429, 500, 501, 503, 507, 404, 410):
             erwartet = wache.TOT if code in (404, 410) else wache.UNKLAR
             def fehler(url, timeout=10.0):
                 raise wache.urllib.error.HTTPError(url, code, "Fehler", None, None)
@@ -204,10 +210,74 @@ class BelegkettenWacheTests(unittest.TestCase):
         )
         self.assertEqual(wache.UNKLAR, erg_offline["status"])
 
-    def test_strict_nur_bei_toter_quelle(self):
-        def tot(url, timeout=10.0):
-            raise wache.urllib.error.HTTPError(url, 404, "Not Found", None, None)
+    def test_1024_echter_sicherer_abruf_3_tupel_vertrag_und_api_fallback(self):
+        """#1024: Prüft den echten Produktionspfad abruf_gii_spiegel_http -> net_safety.sicherer_abruf."""
+        bgb_md = (
+            "---\nquelle: https://www.gesetze-im-internet.de/bgb/\n---\n\n"
+            "###### § 502 Vorfälligkeitsentschädigung\n\n(1) Der Darlehensgeber ...\n"
+        ).encode("utf-8")
+        gesehene_anfragen: list[tuple[str, dict]] = []
 
+        def fake_urlopen(req, timeout=10.0):
+            ziel_url = req.full_url
+            kopf = {k.lower(): v for k, v in req.header_items()}
+            gesehene_anfragen.append((ziel_url, kopf))
+            if "gesetze-im-internet.de" in ziel_url:
+                raise wache.urllib.error.URLError("Runner TCP Timeout")
+            if "raw.githubusercontent.com" in ziel_url:
+                raise wache.urllib.error.HTTPError(ziel_url, 429, "Too Many Requests", None, None)
+            if "api.github.com/repos/Gesetze-fuer-KI/bundesrecht/contents/bg/bgb.md" in ziel_url:
+                return wache._OfflineAntwort(200, bgb_md, ziel_url)
+            raise wache.urllib.error.HTTPError(ziel_url, 404, "Not Found", None, None)
+
+        with patch.dict(os.environ, {"GH_TOKEN": "test-gh-token-1024"}, clear=False), \
+             patch("urllib.request.urlopen", side_effect=fake_urlopen):
+            erg = wache.pruefe_quelle("https://www.gesetze-im-internet.de/bgb/__502.html")
+
+        self.assertEqual(wache.OK, erg["status"], erg)
+        self.assertEqual(3, len(gesehene_anfragen))
+        # Token darf ausschließlich an api.github.com gesendet werden – nie an GII oder raw!
+        self.assertNotIn("authorization", gesehene_anfragen[0][1])
+        self.assertNotIn("authorization", gesehene_anfragen[1][1])
+        self.assertEqual("Bearer test-gh-token-1024", gesehene_anfragen[2][1].get("authorization"))
+        self.assertEqual("application/vnd.github.raw", gesehene_anfragen[2][1].get("accept"))
+
+    def test_1024_programmierfehler_wird_nicht_als_unklar_geschluckt(self):
+        """#1024: ValueError/TypeError muss krachen, statt sich als URLError zu tarnen."""
+        with self.assertRaises(ValueError):
+            wache.pruefe_quelle(
+                "https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+                abruf=lambda u, timeout=10.0: (_ for _ in ()).throw(wache.urllib.error.URLError("block")),
+                spiegel_abruf=lambda u, timeout=10.0: (_ for _ in ()).throw(ValueError("too many values")),
+            )
+        with self.assertRaises(TypeError):
+            wache.pruefe_quelle(
+                "https://www.verbraucherzentrale.de/wissen/a-1",
+                abruf=lambda u, timeout=10.0: (_ for _ in ()).throw(TypeError("falscher Typ")),
+            )
+
+    def test_abruf_http_wiederholt_transiente_stoerung_einmal_aber_nicht_gii_oder_404(self):
+        pausen: list[float] = []
+        with patch("net_safety.sicherer_abruf_status", side_effect=[
+            wache.urllib.error.URLError("kurzer Wackler"),
+            (200, "https://www.verbraucherzentrale.de/wissen/a-1"),
+        ]) as mock_status:
+            code, end_url = wache.abruf_http(
+                "https://www.verbraucherzentrale.de/wissen/a-1", schlaf=pausen.append
+            )
+        self.assertEqual(200, code)
+        self.assertEqual(2, mock_status.call_count)
+        self.assertEqual([1.5], pausen)
+
+        # GII-Direktabruf versucht es genau 1×, damit der Spiegel sofort übernimmt.
+        with patch("net_safety.sicherer_abruf_status",
+                   side_effect=wache.urllib.error.URLError("block")) as mock_gii:
+            with self.assertRaises(wache.urllib.error.URLError):
+                wache.abruf_http("https://www.gesetze-im-internet.de/bgb/__502.html",
+                                 schlaf=pausen.append)
+        self.assertEqual(1, mock_gii.call_count)
+
+    def test_strict_nur_bei_toter_quelle(self):
         original = wache.pruefe_alle
         wache.pruefe_alle = lambda **kwargs: {
             "geprueft": 1, "zaehler": {wache.OK: 0, wache.UMGELEITET: 0, wache.TOT: 1, wache.UNKLAR: 0},
@@ -222,6 +292,72 @@ class BelegkettenWacheTests(unittest.TestCase):
                 self.assertEqual(0, wache.main([]))
         finally:
             wache.pruefe_alle = original
+
+
+class WorkflowVertragTests(unittest.TestCase):
+    """Prüft die echten Shell-Blöcke aus redaktionelle-ymyl-pruefung.yml unter bash -eo pipefail."""
+
+    def test_arbeits_ticket_und_werkzeug_integritaet(self):
+        bash = shutil.which("bash")
+        if bash is None:
+            self.skipTest("bash fehlt")
+        daten = yaml.safe_load(
+            (ROOT / ".github" / "workflows" / "redaktionelle-ymyl-pruefung.yml").read_text(encoding="utf-8")
+        )
+        schritte = {s["name"]: s for s in daten["jobs"]["belegketten"]["steps"]}
+        self.assertNotIn("continue-on-error", schritte["Belegketten der Hochrisiko-Artikel prüfen"])
+        ticket_run = schritte["Arbeits-Ticket pflegen"]["run"]
+        integritaet_run = schritte["Werkzeug-Integrität der Belegketten-Wache"]["run"]
+
+        # 1. Alles grün (Gate=0, Wache=0) → schließt offenes Issue #1024!
+        with tempfile.TemporaryDirectory() as tmp:
+            basis = Path(tmp)
+            bin_dir = basis / "bin"
+            bin_dir.mkdir()
+            log_datei = basis / "gh.log"
+            gh_stub = bin_dir / "gh"
+            gh_stub.write_text(
+                textwrap.dedent(f"""\
+                    #!/usr/bin/env bash
+                    echo "$*" >> "{log_datei}"
+                    if [ "$1" = "issue" ] && [ "$2" = "list" ]; then
+                      echo "1024"
+                    fi
+                """),
+                encoding="utf-8",
+            )
+            gh_stub.chmod(0o755)
+            env = dict(
+                os.environ,
+                PATH=f"{bin_dir}:{os.environ.get('PATH', '')}",
+                GITHUB_REPOSITORY="owner/repo",
+                GH_TOKEN="x",
+                GATE_RESULT="success",
+                GATE_OPEN="0",
+                WACHE_EXIT="0",
+            )
+            p_close = subprocess.run([bash, "-eo", "pipefail", "-c", ticket_run],
+                                     cwd=basis, env=env, capture_output=True, text=True, timeout=10)
+            self.assertEqual(0, p_close.returncode, p_close.stdout + p_close.stderr)
+            self.assertIn("issue close 1024", log_datei.read_text(encoding="utf-8"))
+
+            p_int_ok = subprocess.run([bash, "-eo", "pipefail", "-c", integritaet_run],
+                                      cwd=basis, env=env, capture_output=True, text=True, timeout=10)
+            self.assertEqual(0, p_int_ok.returncode)
+
+            # 2. Werkzeugfehler (Wache=2) → Ticket bleibt offen UND Integritäts-Schritt wird rot!
+            log_datei.write_text("", encoding="utf-8")
+            env_crash = dict(env, WACHE_EXIT="2")
+            p_open = subprocess.run([bash, "-eo", "pipefail", "-c", ticket_run],
+                                    cwd=basis, env=env_crash, capture_output=True, text=True, timeout=10)
+            self.assertEqual(0, p_open.returncode, p_open.stdout + p_open.stderr)
+            self.assertIn("issue edit 1024", log_datei.read_text(encoding="utf-8"))
+            self.assertNotIn("issue close", log_datei.read_text(encoding="utf-8"))
+
+            p_int_err = subprocess.run([bash, "-eo", "pipefail", "-c", integritaet_run],
+                                       cwd=basis, env=env_crash, capture_output=True, text=True, timeout=10)
+            self.assertEqual(1, p_int_err.returncode)
+            self.assertIn("::error::", p_int_err.stdout)
 
 
 class FaktenfrischeSchreibgrenzeTests(unittest.TestCase):

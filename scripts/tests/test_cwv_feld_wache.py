@@ -1,16 +1,23 @@
 #!/usr/bin/env python3
 """Regressionstests der CWV-Feld-Wache (CrUX über PageSpeed Insights).
 
-Der Vertrag in vier Sätzen (26.10.2026):
+Der Vertrag in fünf Sätzen (26.10.2026 · gehärtet 03.11.2026, #1026):
   1. Die Bewertung kommt aus der API (`category`), nicht aus einer eigenen
      Schwelle. Wer hier Zahlen erfindet, hat zwei Wahrheiten.
   2. Das schlechteste Einzelurteil bestimmt das Gesamturteil einer Seite.
-  3. Ohne Felddaten steht UNGEPRÜFT – niemals GUT.
-  4. Ein Netzfehler ist Störung (Exit 2), kein Befund – und der Selbsttest
-     fasst niemals das Netz an.
+  3. Ohne Felddaten steht UNGEPRÜFT – niemals GUT; 0 geprüfte Seiten enden
+     mit Exit 2 und nennen ausdrücklich `keine_crux_daten` statt einer
+     vermeintlich kaputten API.
+  4. Ein Netzfehler ist Störung (Exit 2), kein Befund: transiente 429/5xx-
+     Antworten werden mit Backoff wiederholt, permanente Fehler (403/400)
+     sofort abgebrochen, und der Selbsttest fasst niemals das Netz an.
+  5. Der API-Schlüssel (`PSI_API_KEY`) erscheint niemals in Ausgaben,
+     auch dann nicht, wenn `HTTPError` die volle URL samt `&key=...` trägt.
 """
 from __future__ import annotations
 
+import email.message
+import io
 import json
 import sys
 import tempfile
@@ -40,6 +47,27 @@ def _antwort(lcp="FAST", inp="FAST", cls="FAST", seite=True) -> dict:
             "best-practices": {"score": 1.0}, "seo": {"score": 1.0}}},
         "analysisUTCTimestamp": "2026-10-26T05:00:00.000Z",
     }
+
+
+def _http_fehler(code: int, url: str = "https://x.de?key=geheim-123", retry_after: str | None = None):
+    hdrs = email.message.Message()
+    if retry_after is not None:
+        hdrs["Retry-After"] = retry_after
+    return urllib.error.HTTPError(url, code, f"HTTP {code}", hdrs, io.BytesIO(b""))
+
+
+class _AntwortStream:
+    def __init__(self, daten: dict):
+        self._bytes = json.dumps(daten).encode("utf-8")
+
+    def read(self) -> bytes:
+        return self._bytes
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        return False
 
 
 class BewertungTests(unittest.TestCase):
@@ -126,6 +154,39 @@ class UrlTests(unittest.TestCase):
         self.assertIn("category=seo", url)
 
 
+class NetzUndGeheimnisTests(unittest.TestCase):
+    def test_transientes_429_und_503_wird_mit_backoff_geheilt(self):
+        pausen: list[float] = []
+        folge = [
+            _http_fehler(429, retry_after="5"),
+            _http_fehler(503),
+            _AntwortStream(_antwort()),
+        ]
+        with patch("urllib.request.urlopen", side_effect=folge) as mock_open:
+            daten = wache.hole("https://x.de", versuche=3, basis_pause=2.0, schlaf=pausen.append)
+        self.assertEqual(mock_open.call_count, 3)
+        self.assertEqual(pausen, [5.0, 6.0])
+        self.assertIn("loadingExperience", daten)
+
+    def test_permanenter_403_bricht_sofort_ohne_wiederholung_ab(self):
+        pausen: list[float] = []
+        with patch("urllib.request.urlopen", side_effect=_http_fehler(403)) as mock_open:
+            with self.assertRaises(urllib.error.HTTPError):
+                wache.hole("https://x.de", versuche=3, basis_pause=2.0, schlaf=pausen.append)
+        self.assertEqual(mock_open.call_count, 1)
+        self.assertEqual(pausen, [])
+
+    def test_http_stoerung_nennt_statuscode_ohne_key_zu_verraten(self):
+        fehler = _http_fehler(429, url="https://googleapis.com/x?url=https%3A%2F%2Fa.de&key=geheim-xyz")
+        try:
+            text = wache.klassifiziere_stoerung(fehler, "geheim-xyz")
+        finally:
+            fehler.close()
+        self.assertIn("HTTPError 429", text)
+        self.assertIn("Rate-Limit", text)
+        self.assertNotIn("geheim-xyz", text)
+
+
 class LaufTests(unittest.TestCase):
     def _lauf(self, *args: str) -> tuple[int, str, str]:
         out, err = StringIO(), StringIO()
@@ -155,8 +216,13 @@ class LaufTests(unittest.TestCase):
             datei = Path(tmp) / "antwort.json"
             datei.write_text(json.dumps({"lighthouseResult": {"categories": {}}}), encoding="utf-8")
             code, out, _ = self._lauf("--fixture", str(datei), "--ziel", "/", "--json")
+            code_md, out_md, _ = self._lauf("--fixture", str(datei), "--ziel", "/", "--datum", "2026-10-26")
         self.assertEqual(code, 2, out)
-        self.assertIn("UNGEPRUEFT", out)
+        data = json.loads(out)
+        self.assertEqual(data["stoerung_grund"], "keine_crux_daten")
+        self.assertEqual(code_md, 2)
+        self.assertIn("UNGEPRÜFT", out_md)
+        self.assertIn("Einordnung der Störung:", out_md)
 
     def test_netzfehler_ist_stoerung_nicht_befund(self):
         with patch.object(wache, "hole", side_effect=urllib.error.URLError("kein Netz")):
@@ -164,12 +230,23 @@ class LaufTests(unittest.TestCase):
         self.assertEqual(code, 2)
         self.assertIn("Störung", err)
 
-    def test_der_schluessel_wird_nie_ausgegeben(self):
+    def test_der_schluessel_wird_nie_ausgegeben_auch_bei_http_fehler_mit_url(self):
+        fehler = _http_fehler(403, url="https://googleapis.com/p?url=https%3A%2F%2Fa.de&key=geheim-123")
+        try:
+            with patch.dict("os.environ", {"PSI_API_KEY": "geheim-123"}), \
+                 patch.object(wache, "hole", side_effect=fehler):
+                code, out, err = self._lauf("--ziel", "/", "--datum", "2026-10-26")
+        finally:
+            fehler.close()
+        self.assertEqual(code, 2)
+        self.assertIn("403", out + err)
+        self.assertNotIn("geheim-123", out + err)
+
         with patch.dict("os.environ", {"PSI_API_KEY": "geheim-123"}), \
              patch.object(wache, "hole", return_value=_antwort()):
-            code, out, err = self._lauf("--ziel", "/", "--datum", "2026-10-26")
-        self.assertEqual(code, 0)
-        self.assertNotIn("geheim-123", out + err)
+            code_ok, out_ok, err_ok = self._lauf("--ziel", "/", "--datum", "2026-10-26")
+        self.assertEqual(code_ok, 0)
+        self.assertNotIn("geheim-123", out_ok + err_ok)
 
 
 class SelbsttestTests(unittest.TestCase):

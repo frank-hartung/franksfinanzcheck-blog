@@ -1,9 +1,9 @@
 # ============================================================
 #  WEB VITALS – WOCHENMESSUNG DER AUSGELIEFERTEN SEITE
 #  ------------------------------------------------------------
-#  WARUM DIESER LAUF EXISTIERT (26.10.2026)
+#  WARUM DIESER LAUF EXISTIERT (26.10.2026 · gehärtet 03.11.2026, #1026)
 #
-#  Bis heute maß das Haus Core Web Vitals nur dort, wo niemand
+#  Bis hierher maß das Haus Core Web Vitals nur dort, wo niemand
 #  liest: `design-varianten.yml` prüft VARIANTEN-Builds unter
 #  `.cache/design-varianten/<id>/public`, `scripts/cwv_guard.py`
 #  prüft den statischen Baum. Die Seite, die ein Besucher über
@@ -15,14 +15,26 @@
 #      CrUX über PageSpeed Insights: LCP, INP, CLS echter Besucher.
 #      Die Bewertung kommt von der API (`category`), nicht aus einer
 #      eigenen Schwelle. Ein „schlecht" ist ein Befund und macht den
-#      Lauf rot – das ist der einzige Alarm, der hier zählt.
-#      Keine Felddaten heißt UNGEPRÜFT, niemals grün.
+#      Lauf rot – das ist der einzige Leistungsalarm, der hier zählt.
+#      Keine Felddaten heißt UNGEPRÜFT, niemals grün (Hausregel C2).
 #
 #   2. LABORWERTE (Diagnose) – `scripts/lighthouse_live.mjs` misst
 #      dieselben URLs mit den Schwellen aus `lighthouse/assertions.json`
 #      und nennt, WELCHE Grenze reißt. Ein Laborbefund macht den Lauf
 #      NICHT rot: Ein Lauf über CDN und Mobilfunk-Drosselung ist eine
 #      Diagnose, kein Freibrief und kein Deploy-Blocker.
+#
+#  HÄRTUNG #1026 (WF-0032):
+#   · Node 22 wird VOR jedem Node-Selbsttest eingerichtet.
+#   · Feld-Selbsttest + Feldmessung laufen VOR dem Laborpfad: Ein
+#     Defekt am Diagnose-Werkzeug darf die verbindliche Feldmessung
+#     niemals überspringen.
+#   · Der Labor-Selbsttest beweist VOR `npm ci` (mit `test ! -d node_modules`),
+#     dass `scripts/lighthouse_live.mjs` ohne Fremdpakete importierbar ist.
+#   · Messschritte fangen Nicht-Null-Exits deterministisch über `|| rc=$?`
+#     ab (kein `continue-on-error` + `bash -e`-Abbruch vor `$GITHUB_OUTPUT`).
+#   · Getrennte Urteils-Schritte für CrUX-Befund (Exit 1) und Störung/
+#     Ungeprüft (Exit 2), damit das zentrale Alerting ursachengerecht rät.
 #
 #  Der Lauf schreibt nichts in den Bestand (read-only): Berichte gehen
 #  als Artefakt und in die Lauf-Zusammenfassung. Ein Wochenlauf, der
@@ -39,6 +51,12 @@ on:
   schedule:
     - cron: "47 5 * * 1"     # montags 05:47 UTC
   workflow_dispatch:
+    inputs:
+      strategie:
+        description: "Geräte-Strategie für die Feldmessung (CrUX)"
+        type: choice
+        default: mobile
+        options: [mobile, desktop]
 
 permissions:
   contents: read
@@ -57,14 +75,23 @@ jobs:
       # möglich. Der Schlüssel wird nur als Umgebungsvariable gereicht und
       # vom Skript nie ausgegeben.
       PSI_API_KEY: ${{ secrets.PSI_API_KEY }}
+      FELD_STRATEGIE: ${{ inputs.strategie || 'mobile' }}
     steps:
       - name: Repository auschecken
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Python einrichten
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.12"
+
+      - name: Node einrichten
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
 
       # Manifest und Lockfile vor dem npm-Install prüfen: fehlende oder
       # widersprüchliche Pins dürfen nicht als Messfehler durchrutschen.
@@ -73,40 +100,61 @@ jobs:
           python3 scripts/manifest_guard.py --selftest
           python3 scripts/manifest_guard.py
 
-      # Die Wache beweist sich zuerst selbst: Ein Messwerkzeug, das nicht
-      # laufen kann, darf kein Urteil abgeben (Repo-Regel: ein Gate, das
-      # nicht läuft, ist keins).
-      - name: Selbsttests der Messungen (ohne Netz)
+      # ------------- 1. Felddaten: verbindlich (isoliert vor dem Laborpfad) -------------
+      - name: Selbsttest der Feldmessung (ohne Netz)
+        id: selbsttest_feld
         run: |
           python3 scripts/cwv_feld_wache.py --selftest
           python3 -m unittest scripts.tests.test_cwv_feld_wache
-          node --test scripts/tests/lighthouse_live.test.mjs
 
-      # ------------- 1. Felddaten: verbindlich -------------
       - name: Felddaten messen (CrUX über PageSpeed Insights)
         id: feld
-        continue-on-error: true
         run: |
-          set -uo pipefail
-          python3 scripts/cwv_feld_wache.py --schreiben > feld-bericht.md 2> feld-fehler.txt
-          echo "exit=$?" >> "$GITHUB_OUTPUT"
-          cat feld-bericht.md
-          cat feld-fehler.txt || true
+          set -euo pipefail
+          case "$FELD_STRATEGIE" in
+            mobile|desktop) ;;
+            *) echo "::error::Ungültige Strategie '$FELD_STRATEGIE'" && exit 2 ;;
+          esac
+          rc=0
+          python3 scripts/cwv_feld_wache.py --strategie "$FELD_STRATEGIE" --schreiben > feld-bericht.md 2> feld-fehler.txt || rc=$?
+          grund=$(python3 -c 'import json, pathlib; p = pathlib.Path("data/cwv/feld/befund.json"); print((json.loads(p.read_text(encoding="utf-8")).get("stoerung_grund") or "") if p.exists() else "")')
+          echo "exit=$rc" >> "$GITHUB_OUTPUT"
+          echo "grund=$grund" >> "$GITHUB_OUTPUT"
+          if [ -s feld-bericht.md ]; then
+            cat feld-bericht.md
+          fi
+          if [ -s feld-fehler.txt ]; then
+            cat feld-fehler.txt >&2
+          fi
 
       - name: Feldbericht in die Lauf-Zusammenfassung
         run: |
           {
             echo "## 📶 Felddaten (verbindlich)"
             echo
-            cat feld-bericht.md 2>/dev/null || echo "_Kein Bericht erzeugt._"
+            if [ -s feld-bericht.md ]; then
+              cat feld-bericht.md
+            else
+              echo "_Kein Bericht erzeugt._"
+            fi
+            if [ -s feld-fehler.txt ]; then
+              echo
+              echo "### Diagnosemeldungen der Feldmessung"
+              echo '```text'
+              cat feld-fehler.txt
+              echo '```'
+            fi
           } >> "$GITHUB_STEP_SUMMARY"
 
       # ------------- 2. Labor: Diagnose -------------
-      - name: Node einrichten
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version: 22
-          cache: npm
+      # Bewusst VOR `npm ci`: beweist in jedem Lauf mit `test ! -d node_modules`,
+      # dass `lighthouse_live.mjs` keine statischen Top-Level-Fremdimports trägt (#1026).
+      - name: Selbsttest der Labormessung (ohne Netz, ohne Pakete)
+        id: selbsttest_labor
+        run: |
+          test ! -d node_modules
+          node scripts/lighthouse_live.mjs --selftest
+          node --test scripts/tests/lighthouse_live.test.mjs
 
       - name: Abhängigkeiten installieren
         run: npm ci --ignore-scripts
@@ -116,12 +164,14 @@ jobs:
 
       - name: Laborwerte messen (Lighthouse, Schwellen aus dem Regelwerk)
         id: labor
-        continue-on-error: true
         run: |
-          set -uo pipefail
-          node scripts/lighthouse_live.mjs --laeufe 2 --schreiben > labor-bericht.md 2>&1
-          echo "exit=$?" >> "$GITHUB_OUTPUT"
-          cat labor-bericht.md
+          set -euo pipefail
+          rc=0
+          node scripts/lighthouse_live.mjs --laeufe 2 --schreiben > labor-bericht.md 2>&1 || rc=$?
+          echo "exit=$rc" >> "$GITHUB_OUTPUT"
+          if [ -s labor-bericht.md ]; then
+            cat labor-bericht.md
+          fi
 
       - name: Laborbericht in die Lauf-Zusammenfassung
         run: |
@@ -129,7 +179,11 @@ jobs:
             echo
             echo "## 🔬 Laborwerte (Diagnose, nicht verbindlich)"
             echo
-            tail -n 40 labor-bericht.md 2>/dev/null || echo "_Kein Bericht erzeugt._"
+            if [ -s labor-bericht.md ]; then
+              tail -n 60 labor-bericht.md
+            else
+              echo "_Kein Bericht erzeugt._"
+            fi
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Berichte als Artefakt sichern
@@ -144,50 +198,53 @@ jobs:
             data/cwv/labor/befund.json
             data/cwv/labor/befund.md
             feld-bericht.md
+            feld-fehler.txt
             labor-bericht.md
           retention-days: 30
           if-no-files-found: ignore
 
-      # Die Bewertung steht am Ende: Ein roter Lauf heißt „echte Besucher
-      # erleben schlechte Werte" (Exit 1) oder „die Messung selbst steht
-      # infrage" (Exit 2 – ungeprüft ist nicht sauber). Laborbefunde
-      # erscheinen als Warnung, nie als Fehler.
-      - name: Urteil (Felddaten entscheiden, Labor warnt)
+      # ------------- 3. Urteil (getrennt nach Diagnose / Befund / Störung) -------------
+      - name: Urteil Labor (Diagnose, nicht verbindlich)
         env:
           SCHRITT_FELD_EXIT: ${{ steps.feld.outputs.exit }}
           SCHRITT_LABOR_EXIT: ${{ steps.labor.outputs.exit }}
         run: |
-          set -uo pipefail
-          FELD="$SCHRITT_FELD_EXIT"
-          LABOR="$SCHRITT_LABOR_EXIT"
-
-          # Labor: Diagnose. Jede Abweichung wird als Warnung sichtbar, macht
-          # den Lauf aber nicht rot – ein Lauf über CDN ist kein Freibrief.
+          set -euo pipefail
+          LABOR="${SCHRITT_LABOR_EXIT:-}"
           if [ -z "$LABOR" ] || [ "$LABOR" = "2" ]; then
             echo "::warning::Laborlauf ohne verwertbares Ergebnis (Exit '${LABOR:-—}') – siehe labor-bericht.md"
           elif [ "$LABOR" = "1" ]; then
             echo "::warning::Laborlauf meldete einen Befund mit --streng – hier nicht erwartet, Bericht prüfen."
           elif grep -q "Gerissene Schwellen" data/cwv/labor/befund.md 2>/dev/null; then
-            echo "::warning::Laborwerte reißen Schwellen – Diagnose, kein Blocker (siehe Artefakt)."
+            echo "::warning::Laborwerte reißen Schwellen – Diagnose, kein Blocker (siehe Artefakt web-vitals-woche)."
+          else
+            echo "Laborwerte innerhalb der Schwellen (Diagnose)."
+          fi
+          if [ "${SCHRITT_FELD_EXIT:-}" = "0" ]; then
+            echo "Felddaten ohne Befund (Exit 0)."
           fi
 
-          # Felddaten: verbindlich UND fail-closed. Ein leerer Exit-Code heißt
-          # nicht „alles gut", sondern „die Messung hat kein Urteil abgegeben" –
-          # genau die Scheingrün-Klasse, wegen der dieses Repo C2 hat.
-          case "$FELD" in
-            0)
-              echo "Felddaten ohne Befund."
-              ;;
-            1)
-              echo "::error::Felddaten schlecht (CrUX) – echte Besucher erleben Werte außerhalb der Google-Schwelle."
-              exit 1
-              ;;
-            2)
-              echo "::error::Feldmessung nicht durchführbar – ungeprüft ist nicht sauber (Exit 2)."
-              exit 1
-              ;;
-            *)
-              echo "::error::Feldmessung hat kein Urteil abgegeben (Exit '${FELD:-—}') – fail-closed, siehe feld-fehler.txt."
-              exit 1
-              ;;
-          esac
+      - name: Urteil Felddaten – Befund echte Besucher (CrUX SCHLECHT)
+        if: ${{ steps.feld.outputs.exit == '1' }}
+        run: |
+          set -euo pipefail
+          echo "::error::Felddaten schlecht (CrUX) – echte Besucher erleben Werte außerhalb der Google-Schwelle (siehe Lauf-Zusammenfassung und Artefakt web-vitals-woche)."
+          exit 1
+
+      - name: Urteil Felddaten – Störung oder ungeprüft (CrUX/PSI)
+        if: ${{ steps.feld.outputs.exit != '0' && steps.feld.outputs.exit != '1' }}
+        env:
+          SCHRITT_FELD_EXIT: ${{ steps.feld.outputs.exit }}
+          SCHRITT_FELD_GRUND: ${{ steps.feld.outputs.grund }}
+        run: |
+          set -euo pipefail
+          FELD="${SCHRITT_FELD_EXIT:-}"
+          GRUND="${SCHRITT_FELD_GRUND:-}"
+          if [ "$FELD" = "2" ] && [ "$GRUND" = "keine_crux_daten" ]; then
+            echo "::error::Feldmessung ungeprüft (Exit 2, keine_crux_daten) – PageSpeed Insights hat für alle Ziele geantwortet, liefert im 28-Tage-CrUX-Fenster aber noch für keine Seite Besucherdaten (Hausregel C2: ungeprüft gilt nicht als grün)."
+          elif [ "$FELD" = "2" ]; then
+            echo "::error::Feldmessung gestört (Exit 2, Grund '${GRUND:-abruf_fehlgeschlagen}') – PageSpeed-Insights-Abruf unvollständig oder fehlgeschlagen (siehe feld-fehler.txt und Lauf-Zusammenfassung)."
+          else
+            echo "::error::Feldmessung hat kein Urteil abgegeben (Exit '${FELD:-—}') – fail-closed, siehe feld-fehler.txt."
+          fi
+          exit 1

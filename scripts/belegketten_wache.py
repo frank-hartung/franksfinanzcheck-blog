@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Belegketten-Wache: Prüft, ob die zitierten Quellen noch die zitierten sind.
 
-WARUM DIESE WACHE (Prüfqueue #826, 24.10.2026)
-----------------------------------------------
+WARUM DIESE WACHE (Prüfqueue #826, 24.10.2026 · gehärtet 03.11.2026, #1024)
+---------------------------------------------------------------------------
 Zwei reale Fälle aus der redaktionellen Prüfung dieses Tages:
 
 * Die Verbraucherzentrale hat ihre Seiten umgezogen. Drei der sechs in
@@ -14,27 +14,27 @@ Zwei reale Fälle aus der redaktionellen Prüfung dieses Tages:
   statt der zitierten 2026er-Werte). Die Belegkette war damit nicht „tot“,
   sondern schlimmer: sie widersprach dem Text, den sie belegen sollte.
 
-Beides sieht das Freigabe-Gate nicht. Es prüft den Text, nicht das Netz. Das
-``--seal``-Siegel bindet die Fassung, nicht die Quelle. Und ``faktenfrische``
-erhebt Recherche-Signale, prüft aber keine Zitate.
+HÄRTUNG #1024 (03.11.2026):
+* ``abruf_gii_spiegel_http()`` entpackt das vollständige 3-Tupel
+  ``(status, kopf, nutzlast)`` aus ``net_safety.sicherer_abruf()`` und hält
+  zusätzlich ``api.github.com/repos/Gesetze-fuer-KI/bundesrecht/contents/...``
+  (``Accept: application/vnd.github.raw``) als authentifizierbare Zweitquelle
+  bereit, falls ``raw.githubusercontent.com`` gedrosselt oder blockiert ist.
+* Programmierfehler (``ValueError``, ``TypeError``, ``AttributeError``) werden
+  in ``pruefe_quelle()`` und ``_pruefe_gii_spiegel()`` NICHT mehr als
+  scheinbarer Netzfehler (``unklar``) geschluckt, sondern schlagen laut fehl.
+* Transiente Abrufstörungen (Timeout, ``429``, ``5xx``) erhalten eine
+  einmalige Wiederholung mit kurzem Backoff.
 
-Was diese Wache deshalb tut: Sie liest die Belegketten (``quellen``) des
-Bestands, ruft jede URL genau einmal ab und meldet drei Zustände:
+Was diese Wache tut: Sie liest die Belegketten (``quellen``) des Bestands,
+ruft jede URL ab und meldet vier Zustände:
 
 ======  ===================================================================
-ok      HTTP 200 unter genau der zitierten Adresse
+ok      HTTP 200 unter genau der zitierten Adresse (bzw. bestätigte Norm)
 umgeleitet  HTTP 200, aber unter anderer Adresse – Inhalt kann abweichen
-tot     HTTP 4xx (außer 429) – die Belegkette trägt nichts mehr
+tot     HTTP 4xx (außer 403/408/429) – die Belegkette trägt nichts mehr
+unklar  Netzfehler (Timeout, DNS, 5xx, 403, 408, 429) – nicht prüfbar
 ======  ===================================================================
-
-Netzfehler (Timeout, DNS, 5xx, 403, 429) gelten als **unklar** und blockieren
-im Diagnosemodus nicht: Eine Wache, die bei jedem Wackler rot wird, wird abgeschaltet statt
-gelesen. Ein definitives 404 dagegen ist ein Befund. Für automatische
-Queue-Erledigung verlangt ``--require-complete`` zusätzlich einen Abruf ohne
-unklare oder umgeleitete Quellen. Lesefehler blockieren immer mit ``--strict``.
-
-Die Wache schreibt keinen Inhalt. Sie entscheidet nichts. Sie zeigt nur,
-wo eine Prüfung fällig ist – die Entscheidung bleibt redaktionell.
 
 AUFRUF
 ------
@@ -47,12 +47,17 @@ AUFRUF
 from __future__ import annotations
 
 import argparse
+import contextlib
 import datetime as dt
+import http.client
 import json
+import os
 import sys
+import time
 import urllib.error
 import urllib.request
 from pathlib import Path
+from typing import Callable
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -61,6 +66,7 @@ if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
 import editorial_review_gate as gate  # noqa: E402  (eine Regelquelle)
+from net_safety import UnsicheresZielFehler  # noqa: E402
 from url_host import ist_host_oder_subdomain  # noqa: E402  (Host-Wahrheit)
 
 REPORT = ROOT / "BELEGKETTEN-WACHE-REPORT.md"
@@ -72,9 +78,25 @@ OK = "ok"
 
 _GII_BASIS_HOST = "gesetze-im-internet.de"
 _GII_SPIEGEL_BASIS = "https://raw.githubusercontent.com/Gesetze-fuer-KI/bundesrecht/main"
+_GII_GITHUB_API_BASIS = "https://api.github.com/repos/Gesetze-fuer-KI/bundesrecht/contents"
 _GII_MAX_BYTES = 8 * 1024 * 1024
 _GII_SLUG_ZEICHEN = frozenset("abcdefghijklmnopqrstuvwxyz0123456789_-")
 _GII_NORM_ZEICHEN = frozenset("abcdefghijklmnopqrstuvwxyz0123456789")
+
+TRANSIENTE_HTTP_CODES = frozenset({408, 429, 500, 502, 503, 504})
+UNKLARE_HTTP_CODES = frozenset({403, 408, 429})
+MAX_RETRY_WARTEZEIT = 15.0
+
+# Ausschließlich echte Transport-/Zielausnahmen – NIEMALS ValueError/TypeError!
+# Ein kaputtes Tupel-Unpacking (#1024) muss sofort krachen statt als „URLError"
+# in der YMYL-Prüfqueue zu landen.
+NETZ_AUSNAHMEN = (
+    urllib.error.URLError,
+    TimeoutError,
+    OSError,
+    http.client.HTTPException,
+    UnsicheresZielFehler,
+)
 
 
 def _normalisiert(url: str) -> tuple[str, str, str]:
@@ -93,17 +115,7 @@ SPRACHSEGMENTE = {"de", "en", "at", "ch"}
 
 
 def _nur_sprachpfad(zitat: str, end_url: str) -> bool:
-    """Weiterleitung, die nur den Sprachpfad der GLEICHEN Seite ergänzt.
-
-    Befund 26.10.2026 (Prüfqueue #826): `https://kontenvergleich.bafin.de/`
-    antwortet mit 200 auf `…/de`. Die Wache meldete das als „anderer Endpunkt"
-    – zwei Artikel standen dadurch dauerhaft als Prüfauftrag in der YMYL-Queue,
-    obwohl unter dem Ziel dieselbe Seite in der deutschen Fassung liegt. Ein
-    Sprachpräfix ist aber ein Umzug des Inhaltsverzeichnisses, kein
-    Inhaltswechsel: Host und Restschicht müssen identisch sein, und der
-    zusätzliche Pfad darf ausschließlich aus genau einem Sprachsegment
-    bestehen. Alles andere bleibt `umgeleitet` (Prüfauftrag).
-    """
+    """Weiterleitung, die nur den Sprachpfad der GLEICHEN Seite ergänzt."""
     try:
         zitat_teile = urlparse(zitat)
         ziel_teile = urlparse(end_url)
@@ -126,48 +138,126 @@ def _nur_sprachpfad(zitat: str, end_url: str) -> bool:
             and ziel_segmente[1:] == zitat_segmente)
 
 
-def abruf_http(url: str, timeout: float = 10.0) -> tuple[int, str]:
-    """Ein GET mit sicherer Weiterleitungsverfolgung. Gibt (Status, End-URL) zurück."""
+def _retry_pause(exc: BaseException | None, versuch: int, basis_pause: float) -> float:
+    standard = min(MAX_RETRY_WARTEZEIT, basis_pause * (2 ** (versuch - 1)))
+    if isinstance(exc, urllib.error.HTTPError) and exc.headers is not None:
+        roh = str(exc.headers.get("Retry-After") or "").strip()
+        if roh.isdigit():
+            return min(MAX_RETRY_WARTEZEIT, max(standard, float(int(roh))))
+    return standard
+
+
+def abruf_http(
+    url: str,
+    timeout: float = 10.0,
+    *,
+    versuche: int = 2,
+    basis_pause: float = 1.5,
+    schlaf: Callable[[float], None] = time.sleep,
+) -> tuple[int, str]:
+    """GET mit sicherer Weiterleitungsverfolgung und einmaligem Transienten-Retry."""
     from net_safety import sicherer_abruf_status
 
-    return sicherer_abruf_status(
-        url,
-        headers={"User-Agent": USER_AGENT},
-        timeout=timeout,
-        erlaube_loopback=False,
-    )
+    # gesetze-im-internet.de blockt Runner-IPs auf TCP-Ebene; dort sofort in
+    # den Spiegel-Fallback wechseln statt Zeit mit Doppel-Timeouts zu verlieren.
+    anzahl_versuche = 1 if ist_host_oder_subdomain(url, _GII_BASIS_HOST) else max(1, versuche)
+    for versuch in range(1, anzahl_versuche + 1):
+        try:
+            status, end_url = sicherer_abruf_status(
+                url,
+                headers={"User-Agent": USER_AGENT},
+                timeout=timeout,
+                erlaube_loopback=False,
+            )
+            if status in TRANSIENTE_HTTP_CODES and versuch < anzahl_versuche:
+                schlaf(_retry_pause(None, versuch, basis_pause))
+                continue
+            return status, end_url
+        except urllib.error.HTTPError as exc:
+            with contextlib.suppress(Exception):
+                exc.close()
+            if int(exc.code) in TRANSIENTE_HTTP_CODES and versuch < anzahl_versuche:
+                schlaf(_retry_pause(exc, versuch, basis_pause))
+                continue
+            raise
+        except UnsicheresZielFehler:
+            raise
+        except NETZ_AUSNAHMEN as exc:
+            if versuch < anzahl_versuche:
+                schlaf(_retry_pause(exc, versuch, basis_pause))
+                continue
+            raise
+    raise RuntimeError("unerreichbar")
+
+
+def _github_spiegel_kandidaten(url: str) -> list[tuple[str, dict[str, str]]]:
+    """Primär raw.githubusercontent.com, sekundär api.github.com (raw media type)."""
+    basis_kopf = {"User-Agent": USER_AGENT}
+    kandidaten: list[tuple[str, dict[str, str]]] = [(url, basis_kopf)]
+    praefix = _GII_SPIEGEL_BASIS + "/"
+    if url.startswith(praefix):
+        rel_pfad = url[len(praefix):].lstrip("/")
+        if rel_pfad:
+            api_kopf = {
+                "User-Agent": USER_AGENT,
+                "Accept": "application/vnd.github.raw",
+                "X-GitHub-Api-Version": "2022-11-28",
+            }
+            token = (os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN") or "").strip()
+            if token:
+                api_kopf["Authorization"] = f"Bearer {token}"
+            kandidaten.append((f"{_GII_GITHUB_API_BASIS}/{rel_pfad}?ref=main", api_kopf))
+    return kandidaten
 
 
 def abruf_gii_spiegel_http(url: str, timeout: float = 10.0) -> tuple[int, str]:
     """Lädt den täglich synchronisierten GII-Bundesrecht-Spiegel über net_safety."""
     from net_safety import sicherer_abruf
 
-    try:
-        status, nutzlast = sicherer_abruf(
-            url,
-            headers={"User-Agent": USER_AGENT},
-            timeout=timeout,
-            max_bytes=_GII_MAX_BYTES,
-            erlaube_loopback=False,
-        )
-    except urllib.error.HTTPError as exc:
-        return int(exc.code), ""
-    return int(status), nutzlast.decode("utf-8", errors="replace")
+    letzter_fehler: BaseException | None = None
+    letzter_status = 503
+    for kandidat_url, kopf in _github_spiegel_kandidaten(url):
+        try:
+            status, _antwort_kopf, nutzlast = sicherer_abruf(
+                kandidat_url,
+                headers=kopf,
+                timeout=timeout,
+                max_bytes=_GII_MAX_BYTES,
+                erlaube_loopback=False,
+            )
+        except urllib.error.HTTPError as exc:
+            with contextlib.suppress(Exception):
+                exc.close()
+            code = int(exc.code)
+            if code in (404, 410):
+                return code, ""
+            letzter_status = code
+            letzter_fehler = None
+            continue
+        except ValueError as exc:
+            if "Groessenlimit" in str(exc):
+                letzter_fehler = urllib.error.URLError(str(exc))
+                continue
+            raise
+        except NETZ_AUSNAHMEN as exc:
+            letzter_fehler = exc
+            continue
+
+        code = int(status)
+        if 200 <= code < 300:
+            return code, nutzlast.decode("utf-8", errors="replace")
+        if code in (404, 410):
+            return code, ""
+        letzter_status = code
+        letzter_fehler = None
+
+    if letzter_fehler is not None:
+        raise letzter_fehler
+    return letzter_status, ""
 
 
 def _parse_gii_ziel(zitat: str) -> tuple[str, tuple[str, str] | None] | None:
-    """Zerlegt offizielle gesetze-im-internet.de-URLs in (Gesetzes-Slug, Einzelnorm).
-
-    Befund 30.10.2026 (Prüfqueue #826): `www.gesetze-im-internet.de` verwirft
-    TCP-Verbindungen von Azure-/GitHub-Actions-Runnern (`URLError` nach Timeout),
-    wodurch alle 4 Gesetz-Zitate im Hochrisiko-Bestand (`vvg_2008/__40.html`,
-    `bgb/__502.html`, `got_2022/`) dauerhaft `unklar` blieben und
-    `--require-complete` das Auto-Schließen blockierte.
-
-    Diese Zerlegung erlaubt ausschließlich kanonische GII-Pfade (Gesamtwerk,
-    `__<nr>.html`, `art_<nr>.html`, `anhang.html`, `anlage.html`). Unbekannte
-    Pfadformen liefern `None` und bleiben fail-closed `unklar`.
-    """
+    """Zerlegt offizielle gesetze-im-internet.de-URLs in (Gesetzes-Slug, Einzelnorm)."""
     if not ist_host_oder_subdomain(zitat, _GII_BASIS_HOST):
         return None
     try:
@@ -287,7 +377,9 @@ def _pruefe_gii_spiegel(
     spiegel_url = _gii_spiegel_url(slug)
     try:
         status, inhalt = spiegel_abruf(spiegel_url, timeout=timeout)
-    except Exception:  # noqa: BLE001 – auch Spiegel nicht erreichbar → bleibt unklar
+    except NETZ_AUSNAHMEN:
+        # Ausschließlich echte Transportausfälle bleiben unklar; Programmierfehler
+        # (wie das Tupel-Unpacking aus #1024) dürfen niemals geschluckt werden.
         return basis
     if status in (404, 410):
         return {
@@ -341,8 +433,15 @@ def pruefe_quelle(
     direkt_timeout: float | None = None,
 ) -> dict:
     """Ein Zitat prüfen. ``abruf`` und ``spiegel_abruf`` sind injizierbar."""
-    nutze_spiegel = spiegel_abruf or (abruf_gii_spiegel_http if abruf is None else None)
-    abruf = abruf or abruf_http
+    nutze_spiegel = spiegel_abruf if spiegel_abruf is not None else (
+        abruf_gii_spiegel_http if (abruf is None or ist_host_oder_subdomain(str(url or ""), _GII_BASIS_HOST)) else None
+    )
+    if abruf is not None and spiegel_abruf is None and not getattr(abruf, "_erlaube_live_spiegel", False):
+        # Wenn ein Test `abruf` injiziert, darf `pruefe_quelle` nicht heimlich
+        # ins echte Netz greifen (Offline-Vertrag). Für echte Läufe (`abruf is None`)
+        # ist `abruf_gii_spiegel_http` immer aktiv.
+        nutze_spiegel = None
+    eff_abruf = abruf or abruf_http
     zitat = str(url or "").strip()
     if not zitat.startswith("https://"):
         return {"status": TOT, "zitat": zitat, "end_url": "",
@@ -350,9 +449,11 @@ def pruefe_quelle(
     eff_timeout = timeout if direkt_timeout is None else direkt_timeout
     basis_unklar: dict | None = None
     try:
-        status, end_url = abruf(zitat, timeout=eff_timeout)
+        status, end_url = eff_abruf(zitat, timeout=eff_timeout)
     except urllib.error.HTTPError as exc:
-        if int(exc.code) in (403, 429) or int(exc.code) >= 500:
+        with contextlib.suppress(Exception):
+            exc.close()
+        if int(exc.code) in UNKLARE_HTTP_CODES or int(exc.code) >= 500:
             basis_unklar = {
                 "status": UNKLAR, "zitat": zitat, "end_url": "",
                 "befund": f"HTTP {exc.code} – nicht belastbar prüfbar",
@@ -360,12 +461,12 @@ def pruefe_quelle(
         else:
             return {"status": TOT, "zitat": zitat, "end_url": "",
                     "befund": f"HTTP {exc.code} – Beleg nicht mehr abrufbar"}
-    except Exception as exc:  # noqa: BLE001 – Netzfehler sind kein Befund
+    except NETZ_AUSNAHMEN as exc:
         basis_unklar = {
             "status": UNKLAR, "zitat": zitat, "end_url": "",
             "befund": f"nicht erreichbar ({type(exc).__name__})",
         }
-    if basis_unklar is None and (status in (403, 429) or status >= 500):
+    if basis_unklar is None and (status in UNKLARE_HTTP_CODES or status >= 500):
         basis_unklar = {
             "status": UNKLAR, "zitat": zitat, "end_url": end_url,
             "befund": f"HTTP {status} – nicht belastbar prüfbar",
@@ -502,8 +603,32 @@ def report_schreiben(ergebnis: dict) -> None:
     REPORT.write_text("\n".join(zeilen), encoding="utf-8")
 
 
+class _OfflineAntwort:
+    """Minimale HTTPResponse-Attrappe für die Offline-Prüfung von sicherer_abruf."""
+
+    def __init__(self, status: int, body: bytes, url: str) -> None:
+        self.status = status
+        self._body = body
+        self._url = url
+        self.headers = {"Content-Type": "text/markdown; charset=utf-8"}
+
+    def read(self, amt: int | None = None) -> bytes:
+        return self._body if amt is None else self._body[:amt]
+
+    def geturl(self) -> str:
+        return self._url
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        return False
+
+
 def selftest() -> list[str]:
-    """Offline: die vier Zustände und die Weiterleitungslogik."""
+    """Offline: die vier Zustände, Weiterleitungslogik und echter 3-Tupel-Spiegelpfad."""
+    from unittest.mock import patch as _patch
+
     fehler: list[str] = []
 
     def erwarte(name, bedingung):
@@ -563,14 +688,15 @@ def selftest() -> list[str]:
             pruefe_quelle("http://example.org/a", abruf=abruf_ok)["status"] == TOT)
     erwarte("leere URL ist tot", pruefe_quelle("", abruf=abruf_ok)["status"] == TOT)
 
-    # GII-Spiegel-Normprüfung (Befund #826, 30.10.2026)
+    # GII-Spiegel-Normprüfung (Befund #826, 30.10.2026 + #1024, 03.11.2026)
     vvg_md = (
         "---\n"
         "titel: Versicherungsvertragsgesetz\n"
         "quelle: https://www.gesetze-im-internet.de/vvg_2008/\n"
         "---\n\n"
-        "### § 40 Kündigung bei Prämienerhöhung\n\n(1) Erhöht der Versicherer ...\n\n"
-        "### § 41 (weggefallen)\n"
+        "##### § 40 Kündigung bei Prämienerhöhung\n\n(1) Erhöht der Versicherer ...\n\n"
+        "##### § 96 Kündigung nach Veräußerung\n\n(1) Wird die versicherte Sache ...\n\n"
+        "##### § 41 (weggefallen)\n"
     )
 
     def spiegel_vvg(url, timeout=10.0):
@@ -602,6 +728,39 @@ def selftest() -> list[str]:
     erwarte("GII + Spiegel offline bleibt fail-closed unklar",
             pruefe_quelle("https://www.gesetze-im-internet.de/vvg_2008/__40.html",
                           abruf=abruf_netz, spiegel_abruf=spiegel_offline)["status"] == UNKLAR)
+
+    # #1024-Regressionsbeweis 1: Echter Produktionspfad `abruf_gii_spiegel_http`
+    # gegen `net_safety.sicherer_abruf` (3-Tupel status, kopf, nutzlast) + Fallback
+    # von raw.githubusercontent.com auf api.github.com.
+    def fake_urlopen(req, timeout=10.0):
+        ziel_url = req.full_url
+        if "gesetze-im-internet.de" in ziel_url:
+            raise urllib.error.URLError("GII TCP blockiert")
+        if "raw.githubusercontent.com" in ziel_url:
+            raise urllib.error.URLError("CDN gedrosselt")
+        if "api.github.com/repos/Gesetze-fuer-KI/bundesrecht/contents/vv/vvg_2008.md" in ziel_url:
+            return _OfflineAntwort(200, vvg_md.encode("utf-8"), ziel_url)
+        raise urllib.error.HTTPError(ziel_url, 404, "Not Found", None, None)
+
+    with _patch("urllib.request.urlopen", side_effect=fake_urlopen):
+        echt_erg = pruefe_quelle("https://www.gesetze-im-internet.de/vvg_2008/__40.html")
+    erwarte("#1024: abruf_gii_spiegel_http entpackt 3-Tupel + api.github.com-Fallback",
+            echt_erg["status"] == OK)
+
+    # #1024-Regressionsbeweis 2: Ein ValueError im Code (z. B. kaputtes Unpacking)
+    # darf NIEMALS als scheinbarer Netzfehler (UNKLAR) geschluckt werden.
+    def kaputter_spiegel(url, timeout=10.0):
+        raise ValueError("too many values to unpack (expected 2)")
+
+    code_bug_gefangen = False
+    try:
+        pruefe_quelle("https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+                      abruf=abruf_netz, spiegel_abruf=kaputter_spiegel)
+    except ValueError:
+        code_bug_gefangen = True
+    erwarte("#1024: Programmierfehler (ValueError) schlägt laut fehl statt UNKLAR",
+            code_bug_gefangen)
+
     return fehler
 
 
@@ -628,7 +787,7 @@ def main(argv: list[str] | None = None) -> int:
             for eintrag in fehler:
                 print("  -", eintrag)
             return 2
-        print("✅ Belegketten-Wache: Selbsttest bestanden (ok, umgeleitet, tot, unklar).")
+        print("✅ Belegketten-Wache: Selbsttest bestanden (ok, umgeleitet, tot, unklar, 3-Tupel-Spiegel).")
         return 0
 
     ergebnis = pruefe_alle(nur_hochrisiko=args.nur_hochrisiko, timeout=args.timeout)

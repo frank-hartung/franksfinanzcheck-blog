@@ -35,6 +35,13 @@ on:
       # tests/test_gsc_artefakte.py prüft genau diese Dateien; ohne diesen
       # Eintrag liefe der Test bei genau den Änderungen nicht, für die er da ist.
       - 'data/gsc/**'
+      # WF-0032 / #1026 (03.11.2026): Zielliste, Lighthouse-SSOT, Browser-Helfer
+      # und npm-Manifeste werden von test_web_vitals_workflow.py geprüft.
+      - 'data/cwv/**'
+      - 'lighthouse/**'
+      - 'e2e/**'
+      - 'package.json'
+      - 'package-lock.json'
   workflow_dispatch: {}
 permissions:
   contents: read
@@ -119,6 +126,8 @@ jobs:
           python3 scripts/fm_boundary_guard.py --selftest
           python3 scripts/social_studio.py --selftest
           python3 scripts/fm_boundary_guard.py --check
+          node scripts/lighthouse_live.mjs --selftest
+          node --test scripts/tests/lighthouse_live.test.mjs
       # Zeitbomben-Schutz (Nebenbefund zu #614): Am 01.10.2026 wurde genau
       # diese Prüfung rot, ohne dass jemand Code angefasst hatte –
       # test_social_perf_feedback baute seine Fixtures von der echten Wanduhr

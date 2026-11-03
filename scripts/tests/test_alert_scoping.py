@@ -522,6 +522,15 @@ class TitelUndLabelVertrag(unittest.TestCase):
         self.assertLess(pos_gate, pos_close,
                         "die Job-Prüfung muss vor `gh issue close` fallen")
 
+    def test_web_vitals_verweise_und_klassen_existieren(self):
+        """Vertrag 11 (WF-0032 / #1026): Web-Vitals-Runbooks verweisen auf
+        existierende Dateien und führen getrennte Klassen für Befund vs. Störung."""
+        roh = _text()
+        self.assertIn("web-vitals-befund", roh)
+        self.assertIn("web-vitals-stoerung", roh)
+        self.assertTrue((REPO / "docs" / "ANLEITUNG-WEB-VITALS.md").is_file())
+        self.assertTrue((REPO / ".github" / "workflows" / "web-vitals-woche.yml").is_file())
+
 
 class VerhaltensSimulation(unittest.TestCase):
     """Vertrag 7 (Verhalten, nicht nur Text): Das alarm-Skript wird mit
@@ -620,6 +629,11 @@ class VerhaltensSimulation(unittest.TestCase):
                                          # ist eine eigene Aussage – eigener Rat
                                          # `backup-restore` statt „neu starten“.
                                          "Backup-Frischwache (operative RPO-Wache)",
+                                         # WF-0032/#1026 (03.11.2026): Web-Vitals-
+                                         # Feldmessung bekommt eigene Klassen
+                                         # (`web-vitals-befund`, `web-vitals-stoerung`)
+                                         # statt des allgemeinen GROQ/GEMINI-Rats.
+                                         "Web-Vitals-Feldmessung (wöchentlich)",
                                          boeser_name)}
             json.dump(identitaeten, idf, ensure_ascii=False)
             ident_pfad = idf.name

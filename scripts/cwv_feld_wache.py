@@ -3,7 +3,7 @@
 # ============================================================
 #  CWV-FELD-WACHE – die Zahlen, die echte Besucher erleben
 #  ------------------------------------------------------------
-#  WARUM ES DIESE WACHE GIBT (26.10.2026)
+#  WARUM ES DIESE WACHE GIBT (26.10.2026 · gehärtet 03.11.2026, #1026)
 #
 #  Das Haus misst Core Web Vitals bisher nur im Labor:
 #    · `scripts/cwv_guard.py`         – statischer Build (Bytes, Bilder, JS)
@@ -23,8 +23,12 @@
 #  2. Keine Felddaten heißt UNGEPRÜFT – niemals GRÜN. Eine neue Seite
 #     mit zu wenig Traffic hat keine CrUX-Daten; sie als „gut" zu
 #     führen wäre eine Lüge mit grünem Häkchen.
-#  3. Ein Netzfehler ist STÖRUNG (Exit 2), kein Befund. Ungeprüft ist
-#     nicht sauber (gleiche Regel wie `abhaengigkeits_wache.py --audit`).
+#  3. Ein Netzfehler oder 0 geprüfte Ziele ist STÖRUNG (Exit 2), kein
+#     Befund und niemals Grün. Transiente PSI-Störungen (HTTP 429/5xx,
+#     Zeitlimit) fängt `hole()` mit begrenztem Backoff ab; was danach
+#     offen bleibt, wird mit HTTP-Status (geheimnisfrei!) benannt, und
+#     der Bericht trennt ausdrücklich „API erreichbar, aber noch keine
+#     CrUX-28-Tage-Daten" von „API-/Netzstörung".
 #
 #  WAS SIE NICHT IST
 #  Kein Ersatz für `design-varianten.yml` (Labor-Gate vor dem Deploy)
@@ -40,8 +44,9 @@
 #    python3 scripts/cwv_feld_wache.py --fixture antwort.json --datum 2026-10-26
 #    python3 scripts/cwv_feld_wache.py --selftest      # ohne Netz, ohne Schreiben
 #
-#  Exit: 0 = kein Feldbefund (auch: keine Daten) · 1 = Befund (POOR)
-#        2 = Störung (Netz, API, kein Ziel messbar)
+#  Exit: 0 = mindestens ein Ziel mit CrUX-Daten, keins SCHLECHT
+#        1 = Befund (mindestens ein Ziel SCHLECHT)
+#        2 = Störung (Netz/API-Fehler oder alle Ziele ohne CrUX-Daten – C2)
 #
 #  API-Schlüssel: `PSI_API_KEY` (optional). Ohne Schlüssel antwortet
 #  die API stark gedrosselt; der Lauf bleibt möglich. Der Schlüssel
@@ -51,14 +56,20 @@
 from __future__ import annotations
 
 import argparse
+import contextlib
 import datetime
+import email.message
+import io
 import json
 import os
+import re
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
+from typing import Callable
 
 ROOT = Path(__file__).resolve().parent.parent
 ZIELE_DATEI = ROOT / "data" / "cwv" / "feld_ziele.json"
@@ -82,6 +93,30 @@ KERN_METRIKEN = (
 
 # Rangfolge für das Gesamturteil je Seite.
 RANG = {"GUT": 0, "VERBESSERUNGSWUERDIG": 1, "SCHLECHT": 2, "UNGEPRUEFT": 3}
+
+# Transiente HTTP-Statuscodes der PageSpeed-Insights-API, bei denen eine
+# begrenzte Wiederholung sinnvoll ist (insbesondere Rate-Limits ohne Key auf
+# geteilten CI-Runner-IPs). Permanente Client-Fehler (400/401/403/404) werden
+# nie wiederholt.
+TRANSIENTE_HTTP_CODES = frozenset({408, 429, 500, 502, 503, 504})
+MAX_RETRY_WARTEZEIT = 30.0
+STANDARD_ZIEL_PAUSE = 1.5
+
+HTTP_HINWEISE = {
+    400: "Ungültige Abfrage",
+    401: "API-Zugriff verweigert – PSI_API_KEY prüfen",
+    403: "API-Zugriff verweigert – PSI_API_KEY prüfen",
+    404: "API-Endpunkt nicht gefunden",
+    408: "Zeitlimit der PageSpeed-API",
+    429: "Rate-Limit – PSI_API_KEY setzen oder später wiederholen",
+    500: "PageSpeed-API vorübergehend gestört",
+    502: "PageSpeed-API vorübergehend gestört",
+    503: "PageSpeed-API vorübergehend gestört",
+    504: "PageSpeed-API-Zeitüberschreitung",
+}
+
+# Linearer Query-Parameter-Filter ohne Backtracking (ReDoS-fest).
+KEY_QUERY_MUSTER = re.compile(r"([?&]key=)[^&\s\"'>]+", re.IGNORECASE)
 
 
 # --------------------------------------------------------------------------
@@ -114,6 +149,48 @@ def psi_url(ziel: str, strategie: str) -> str:
         "category": ["performance", "accessibility", "best-practices", "seo"],
     }
     return API + "?" + urllib.parse.urlencode(params, doseq=True)
+
+
+# --------------------------------------------------------------------------
+#  Geheimnisschutz & Störungs-Klassifikation (rein, ohne Netz)
+# --------------------------------------------------------------------------
+
+def schwaerze_geheimnis(text: str, schluessel: str | None = None) -> str:
+    """Tilgt `key=...`-Parameter und den API-Schlüssel aus jedem Text."""
+    bereinigt = KEY_QUERY_MUSTER.sub(r"\1[GESCHWAERZT]", str(text or ""))
+    if schluessel:
+        bereinigt = bereinigt.replace(schluessel, "[GESCHWAERZT]")
+        codiert = urllib.parse.quote(schluessel)
+        if codiert:
+            bereinigt = bereinigt.replace(codiert, "[GESCHWAERZT]")
+    return bereinigt
+
+
+def klassifiziere_stoerung(exc: BaseException, schluessel: str | None = None) -> str:
+    """Formatiert Netz-/API-Ausnahmen mit HTTP-Status und garantiert ohne Key."""
+    if isinstance(exc, urllib.error.HTTPError):
+        hinweis = HTTP_HINWEISE.get(exc.code)
+        basis = f"HTTPError {exc.code}" + (f" ({hinweis})" if hinweis else "")
+        return schwaerze_geheimnis(basis, schluessel)
+    if isinstance(exc, TimeoutError):
+        return "TimeoutError (Zeitlimit der PageSpeed-API überschritten)"
+    if isinstance(exc, urllib.error.URLError):
+        grund = getattr(exc, "reason", None)
+        grund_name = grund.__class__.__name__ if isinstance(grund, BaseException) else ""
+        zusatz = f" ({grund_name})" if grund_name and grund_name != "URLError" else ""
+        return schwaerze_geheimnis(f"URLError{zusatz}", schluessel)
+    return schwaerze_geheimnis(exc.__class__.__name__, schluessel)
+
+
+def stoerung_ursache(punkte: list[dict], stoerungen: list[str]) -> str | None:
+    """Unterscheidet echten Abrufausfall von fehlenden CrUX-28-Tage-Daten."""
+    if not punkte:
+        return "abruf_fehlgeschlagen"
+    if stoerungen:
+        return "teilabruf_fehlgeschlagen"
+    if all(p.get("urteil") == "UNGEPRUEFT" for p in punkte):
+        return "keine_crux_daten"
+    return None
 
 
 # --------------------------------------------------------------------------
@@ -180,22 +257,55 @@ def gesamturteil(seiten: list[dict]) -> tuple[str, int]:
     if not seiten:
         return "STOERUNG", 0
     if not geprueft:
-        # Keine einzige Seite mit Felddaten: Das ist keine Gesundmeldung,
-        # die Messung selbst steht infrage (falsche Domain, API-Wechsel).
+        # Keine einzige Seite mit Felddaten: Ungeprüft gilt nie als Grün (C2).
         return "STOERUNG", 0
     schlechtestes = max((s["urteil"] for s in geprueft), key=lambda u: RANG.get(u, 3))
     return schlechtestes, len(geprueft)
 
 
 # --------------------------------------------------------------------------
-#  Netz
+#  Netz (mit begrenztem Backoff für transiente PSI-Störungen)
 # --------------------------------------------------------------------------
 
-def hole(url: str, zeitlimit: int = 60) -> dict:
-    """Eine PSI-Antwort. Netz-/HTTP-Fehler sind Störung, kein Befund."""
-    request = urllib.request.Request(url, headers={"User-Agent": "franksfinanzcheck-cwv-feld/1.0"})
-    with urllib.request.urlopen(request, timeout=zeitlimit) as antwort:  # noqa: S310 – feste API
-        return json.loads(antwort.read().decode("utf-8"))
+def _retry_wartezeit(exc: BaseException, versuch: int, basis_pause: float) -> float:
+    standard = min(MAX_RETRY_WARTEZEIT, basis_pause * (3 ** (versuch - 1)))
+    if isinstance(exc, urllib.error.HTTPError) and exc.headers is not None:
+        roh = str(exc.headers.get("Retry-After") or "").strip()
+        if roh.isdigit():
+            return min(MAX_RETRY_WARTEZEIT, max(standard, float(int(roh))))
+    return standard
+
+
+def hole(
+    url: str,
+    zeitlimit: int = 60,
+    *,
+    versuche: int = 3,
+    basis_pause: float = 2.0,
+    schlaf: Callable[[float], None] = time.sleep,
+) -> dict:
+    """Eine PSI-Antwort mit begrenzter Wiederholung bei 429/5xx/Netzstörung."""
+    anzahl_versuche = max(1, versuche)
+    for versuch in range(1, anzahl_versuche + 1):
+        request = urllib.request.Request(
+            url, headers={"User-Agent": "franksfinanzcheck-cwv-feld/1.0"}
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=zeitlimit) as antwort:  # noqa: S310 – feste API
+                return json.loads(antwort.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            with contextlib.suppress(Exception):
+                exc.close()
+            if exc.code in TRANSIENTE_HTTP_CODES and versuch < anzahl_versuche:
+                schlaf(_retry_wartezeit(exc, versuch, basis_pause))
+                continue
+            raise
+        except (urllib.error.URLError, TimeoutError, OSError) as exc:
+            if versuch < anzahl_versuche:
+                schlaf(_retry_wartezeit(exc, versuch, basis_pause))
+                continue
+            raise
+    raise RuntimeError("unerreichbar")
 
 
 def api_schluessel() -> str | None:
@@ -208,7 +318,13 @@ def api_schluessel() -> str | None:
 #  Bericht
 # --------------------------------------------------------------------------
 
-def bericht(punkte: list[dict], strategie: str, datum: str, urteil: str) -> str:
+def bericht(
+    punkte: list[dict],
+    strategie: str,
+    datum: str,
+    urteil: str,
+    stoerungen: list[str] | None = None,
+) -> str:
     zeilen = [
         "# Core Web Vitals – Felddaten",
         "",
@@ -243,22 +359,42 @@ def bericht(punkte: list[dict], strategie: str, datum: str, urteil: str) -> str:
     if offen:
         zeilen += ["", "**Ohne Felddaten (UNGEPRÜFT):** " + ", ".join(f"`{p}`" for p in offen),
                    "", "Zu wenig Traffic im 28-Tage-Fenster (CrUX) – nicht als grün gewertet."]
+    ursache = stoerung_ursache(punkte, stoerungen or [])
+    if urteil == "STOERUNG" and ursache == "keine_crux_daten":
+        zeilen += [
+            "",
+            "**Einordnung der Störung:** Die PageSpeed-Insights-API hat für alle "
+            "geprüften Ziele geantwortet, liefert im 28-Tage-Fenster von CrUX "
+            "aber noch für keine Seite Felddaten (Besucheraufkommen unter Googles "
+            "CrUX-Mindestschwelle). Gemäß Hausregel (C2) gilt „ungeprüft\" nicht "
+            "als grün (Exit 2) – das ist keine kaputte API und kein schlechter "
+            "Messwert.",
+        ]
     schlecht = [p["pfad"] for p in punkte if p["urteil"] == "SCHLECHT"]
     if schlecht:
         zeilen += ["", "**Befund (schlecht):** " + ", ".join(f"`{p}`" for p in schlecht)]
     return "\n".join(zeilen) + "\n"
 
 
-def schreibe(punkte: list[dict], strategie: str, datum: str, urteil: str) -> None:
+def schreibe(
+    punkte: list[dict],
+    strategie: str,
+    datum: str,
+    urteil: str,
+    stoerungen: list[str] | None = None,
+) -> None:
+    ursache = stoerung_ursache(punkte, stoerungen or [])
     for ziel in (BEFUND_JSON, BEFUND_MD, VERLAUF):
         ziel.parent.mkdir(parents=True, exist_ok=True)
     BEFUND_JSON.write_text(
         json.dumps({"datum": datum, "strategie": strategie, "urteil": urteil,
-                    "seiten": punkte}, ensure_ascii=False, indent=2) + "\n",
+                    "stoerung_grund": ursache, "seiten": punkte},
+                   ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8")
-    BEFUND_MD.write_text(bericht(punkte, strategie, datum, urteil), encoding="utf-8")
+    BEFUND_MD.write_text(bericht(punkte, strategie, datum, urteil, stoerungen), encoding="utf-8")
     with VERLAUF.open("a", encoding="utf-8") as f:
         f.write(json.dumps({"datum": datum, "strategie": strategie, "urteil": urteil,
+                            "stoerung_grund": ursache,
                             "seiten": {p["pfad"]: p["urteil"] for p in punkte}},
                            ensure_ascii=False, sort_keys=True) + "\n")
 
@@ -327,17 +463,37 @@ def selftest() -> int:
          "baue_url muss doppelte Schrägstriche vermeiden")
     muss("strategy=desktop" in psi_url("https://x.de/", "desktop"), "Strategie muss in der Abfrage stehen")
 
-    # 7. Bericht nennt UNGEPRÜFT statt „grün"
+    # 7. Bericht nennt UNGEPRÜFT und erklärt fehlende CrUX-Daten ohne Scheingrün
     text = bericht([{"pfad": "/", "urteil": "UNGEPRUEFT", "feld": {}, "labor_scores": {}}],
                    "mobile", "2026-10-26", "STOERUNG")
     muss("UNGEPRÜFT" in text, "Bericht muss UNGEPRÜFT ausweisen")
+    muss("Einordnung der Störung:" in text,
+         "Bericht muss fehlende CrUX-28-Tage-Daten von einer kaputten API trennen")
+    muss(stoerung_ursache([{"pfad": "/", "urteil": "UNGEPRUEFT"}], []) == "keine_crux_daten",
+         "stoerung_ursache muss keine_crux_daten erkennen")
+    muss(stoerung_ursache([], ["/: HTTPError 429"]) == "abruf_fehlgeschlagen",
+         "stoerung_ursache muss abruf_fehlgeschlagen erkennen")
+
+    # 8. Geheimnisschutz & HTTP-Klassifikation (HTTPError trägt die volle URL inkl. &key=...)
+    hdrs = email.message.Message()
+    hdrs["Retry-After"] = "7"
+    http_429 = urllib.error.HTTPError(
+        "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https%3A%2F%2Fx.de&key=geheim-999",
+        429, "Too Many Requests", hdrs, io.BytesIO(b""))
+    http_429.close()
+    diag = klassifiziere_stoerung(http_429, "geheim-999")
+    muss("429" in diag and "Rate-Limit" in diag, f"429 muss als Rate-Limit erkennbar sein: {diag}")
+    muss("geheim-999" not in diag, "API-Schlüssel darf nie in der Störungszeile stehen")
+    muss("geheim-999" not in schwaerze_geheimnis("Fehler bei ?url=x&key=geheim-999 im Lauf", "geheim-999"),
+         "schwaerze_geheimnis muss key-Parameter und Klartext-Key tilgen")
+    muss(_retry_wartezeit(http_429, 1, 2.0) == 7.0, "Retry-After-Header muss respektiert werden")
 
     if fehler:
         print("🛑 SELBSTTEST DER CWV-FELD-WACHE FEHLGESCHLAGEN:")
         for f in fehler:
             print("  ·", f)
         return 2
-    print("✅ CWV-Feld-Wache: Selbsttest grün (Abbildung, Aggregation, UNGEPRÜFT-Regel, URL-Bau, Bericht)")
+    print("✅ CWV-Feld-Wache: Selbsttest grün (Abbildung, Aggregation, UNGEPRÜFT-Regel, Geheimnisschutz, URL-Bau, Bericht)")
     return 0
 
 
@@ -345,12 +501,22 @@ def selftest() -> int:
 #  Hauptlauf
 # --------------------------------------------------------------------------
 
-def messe(ziele: list[dict], basis: str, strategie: str, schluessel: str | None,
-          fixture: Path | None = None) -> tuple[list[dict], list[str]]:
+def messe(
+    ziele: list[dict],
+    basis: str,
+    strategie: str,
+    schluessel: str | None,
+    fixture: Path | None = None,
+    *,
+    ziel_pause: float = 0.0,
+    schlaf: Callable[[float], None] = time.sleep,
+) -> tuple[list[dict], list[str]]:
     punkte: list[dict] = []
     stoerungen: list[str] = []
     schluessel_teil = f"&key={urllib.parse.quote(schluessel)}" if schluessel else ""
-    for ziel in ziele:
+    for idx, ziel in enumerate(ziele):
+        if idx > 0 and ziel_pause > 0 and not fixture:
+            schlaf(ziel_pause)
         pfad = str(ziel["pfad"])
         url = baue_url(basis, pfad)
         try:
@@ -360,7 +526,7 @@ def messe(ziele: list[dict], basis: str, strategie: str, schluessel: str | None,
                 antwort = hole(psi_url(url, strategie) + schluessel_teil)
         except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError,
                 json.JSONDecodeError) as exc:
-            stoerungen.append(f"{pfad}: {exc.__class__.__name__}")
+            stoerungen.append(f"{pfad}: {klassifiziere_stoerung(exc, schluessel)}")
             continue
         befund = bewerte_seite(antwort)
         befund["pfad"] = pfad
@@ -398,28 +564,37 @@ def main(argv: list[str] | None = None) -> int:
             print(f"🛑 Zielliste nicht lesbar: {exc}", file=sys.stderr)
             return 2
 
-    punkte, stoerungen = messe(ziele, args.basis, args.strategie, api_schluessel(),
-                              args.fixture)
+    schluessel = api_schluessel()
+    punkte, stoerungen = messe(
+        ziele,
+        args.basis,
+        args.strategie,
+        schluessel,
+        args.fixture,
+        ziel_pause=0.0 if args.fixture else STANDARD_ZIEL_PAUSE,
+    )
 
     if not punkte:
         print("🛑 Keine Seite messbar – das ist eine Störung, kein Befund.", file=sys.stderr)
         for s in stoerungen:
-            print("  ·", s, file=sys.stderr)
+            print("  ·", schwaerze_geheimnis(s, schluessel), file=sys.stderr)
         return 2
 
     urteil, anzahl = gesamturteil(punkte)
-    text = bericht(punkte, args.strategie, datum, urteil)
+    ursache = stoerung_ursache(punkte, stoerungen)
+    text = bericht(punkte, args.strategie, datum, urteil, stoerungen)
     if args.schreiben:
-        schreibe(punkte, args.strategie, datum, urteil)
+        schreibe(punkte, args.strategie, datum, urteil, stoerungen)
 
     if args.json:
-        print(json.dumps({"datum": datum, "strategie": args.strategie, "urteil": urteil,
-                          "geprueft": anzahl, "seiten": punkte, "stoerungen": stoerungen},
+        print(json.dumps({"datum": datum, "strategie": strategie_wert(args.strategie), "urteil": urteil,
+                          "stoerung_grund": ursache, "geprueft": anzahl, "seiten": punkte,
+                          "stoerungen": stoerungen},
                          ensure_ascii=False, indent=2))
     else:
         print(text, end="")
         for s in stoerungen:
-            print(f"⚠️  Störung: {s}")
+            print(f"⚠️  Störung: {schwaerze_geheimnis(s, schluessel)}")
 
     # Ein Befund ist ein Befund – auch wenn einzelne Seiten nicht messbar waren.
     if "SCHLECHT" in [p["urteil"] for p in punkte]:
@@ -427,6 +602,10 @@ def main(argv: list[str] | None = None) -> int:
     if urteil == "STOERUNG" or stoerungen:
         return 2
     return 0
+
+
+def strategie_wert(strategie: str) -> str:
+    return strategie
 
 
 if __name__ == "__main__":
