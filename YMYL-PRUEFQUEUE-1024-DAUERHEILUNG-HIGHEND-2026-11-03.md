@@ -233,14 +233,31 @@ Die neuen Wachen erkennen also genau den Fehler, der #1024 verursacht hat.
 
 `data/integrity_lock.json` ist im vorliegenden Stand **kein gültiges JSON**
 (ab Zeile 289 doppelte Schlüssel und fehlende Kommata – mehrere Fassungen
-wurden textuell zusammengesetzt). `skills_vertrag.py` meldet das als
-Warnung **K8**: „ein kaputtes Siegel meldet Scheinsicherheit, nie Sicherheit“.
+wurden textuell zusammengesetzt). Belege:
+
+- `git show b29c009:data/integrity_lock.json | python3 -m json.tool` →
+  `JSONDecodeError: Expecting ',' delimiter: line 289 column 7 (char 13638)`.
+  Die Beschädigung liegt also bereits im Ausgangsstand von `main`, **vor** diesem
+  Auftrag.
+- `python3 scripts/integrity_guard.py --check` → Exit 3,
+  „Siegel ZERSTÖRT (kein gültiges JSON) · Bruchstelle Byte 13638 · Verdacht:
+  abbruch".
+- `skills_vertrag.py` meldet Warnung **K8**: „ein kaputtes Siegel meldet
+  Scheinsicherheit, nie Sicherheit".
+- Der PR-Check **Integritäts-Lock (PR-Gate)** ist deshalb rot – ebenso auf
+  anderen, zeitgleich laufenden Arbeitszweigen (z. B. Run `41469445466` vom
+  02.11.2026). Keine der sieben hier geänderten Dateien steht im Lock; der
+  Befund ist zweigsunabhängig und hat keinen Einfluss auf die YMYL-Queue.
+
 Die Datei ist ein signiertes Maschinenartefakt und in `CLAUDE.md` als
 sicherheitsrelevant eingestuft; eine Reparatur verlangt eine bewusste
 Neu-Signatur durch den Inhaber
 (`python3 scripts/integrity_guard.py --repair-lock --dry-run` als
-Voransicht). Sie hat keinen Einfluss auf die YMYL-Queue und wurde daher
-weder korrigiert noch neu signiert. Empfehlung: eigenes Ticket mit Owner.
+Voransicht, danach `--repair-lock` bzw. `--set-current` als
+Betreiberentscheidung). Sie wurde hier weder korrigiert noch neu signiert;
+auch das beim lokalen Prüflauf kurzzeitig beschriebene
+`data/integrity_history.jsonl` wurde sofort auf den Ursprungsstand
+zurückgesetzt. Empfehlung: eigenes Ticket mit Owner.
 
 ---
 
