@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-03T11:22:59Z",
-  "modus": "kandidaten",
-  "commit": "2e31f3cfbae13097437b7f42ba9b595b7a1ed67f",
+  "generated_at": "2026-11-03T12:46:04Z",
+  "modus": "live",
+  "commit": "cf408b96ec489739cc5a76a91df98306bf07fc95",
   "kapazitaet": {
     "stichtag": "2026-11-03",
     "artikel": 112,
@@ -10,9 +10,9 @@
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
-      "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
-      "frist": "2026-11-06",
-      "restlaufzeit": 3
+      "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+      "frist": "2026-11-11",
+      "restlaufzeit": 8
     },
     "budget": 4,
     "laeufe_je_tag": 1.0,
@@ -57,9 +57,11 @@
         "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
         "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
         "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
-        "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust"
+        "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+        "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+        "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig"
       ],
-      "anzahl": 13
+      "anzahl": 15
     },
     {
       "check": "RD2-einzigartigkeit",
@@ -111,10 +113,10 @@
     }
   ],
   "befundlage": {
-    "offen": 73,
-    "seiten": 17,
-    "live_befunde": 53,
-    "live_seiten": 13,
+    "offen": 88,
+    "seiten": 20,
+    "live_befunde": 63,
+    "live_seiten": 15,
     "ueberholt": 0,
     "ohne_fassung": 20,
     "nicht_entscheidbar": 0,
@@ -134,7 +136,9 @@
       "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": 5,
       "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": 5,
       "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": 3,
-      "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": 3
+      "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": 3,
+      "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": 5,
+      "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": 5
     }
   },
   "artikel": {
@@ -230,7 +234,7 @@
       "checks": []
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
-      "sha256": "8043b551b685f4028aa8d3b9487b288823acafe46cd3f7491fdcdfe53a085980",
+      "sha256": "cdd6247d81ff0f255af950de6ddb205a878f10354529fe9fa806b61b5264ecc4",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -244,7 +248,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -267,7 +271,7 @@
       ]
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
-      "sha256": "35816d320e29b3d882cf1a12175ed01d5d0abe7bec2b200104fec53974754f48",
+      "sha256": "fe6423413dd31da8307a4662324974dcbce7ae4be77b9962fe8266ba37424864",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -281,7 +285,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -510,7 +514,7 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "9b2680fc6458e25053d8aba78065b7472841708103ecd7520361775084a3f322",
+      "sha256": "89a0c12e0a1c0d33d03894132b50be3f8002eec8b658e9e504bdb7775140caac",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -524,11 +528,11 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
-      "sha256": "94a8d421ecd497ce4a50f1654d9d784e0a563228d958509a1b53ab2304356b65",
+      "sha256": "1a98ae3235515164a38a1fe76259205b85dd5eca8544de7262fd44222fdfbf06",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -542,7 +546,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1329,22 +1333,29 @@
       "checks": []
     },
     "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": {
-      "sha256": "cfe1aeb5c080af9553d4c6d3e81c792eb31aecfc7d1f0367841e4037ed734613",
-      "urteil": "freigabe-reif",
+      "sha256": "49b54d66f508857d55f64dc0d8e1e031b7be319d015ca2b25bad4502f4d4df5d",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-06",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "naechste_pruefung": "2026-12-03",
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "7067eabb89a917ae67a4 (luecke): Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu unklaren Angeboten und Problemen mit Online-Buchungen.; af2ccb4222eeb195222f (praezision): Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht automatisch, ob das Auto zum individuellen Urlaub passt – ohne Messgröße bleibt die Aussage ungenau.; d9c8b522bf1dcaed0340 (luecke): Die Ve"
+        }
+      ]
     },
     "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": {
       "sha256": "6cecc13e3c4dd7d87ed089575c388361f7636bd867289bbb46c2828721a01da8",
@@ -1473,22 +1484,29 @@
       "checks": []
     },
     "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
-      "sha256": "54e71d129d6eeceb019b2f002f4d9cc9584571207e86b612370f23f676409037",
-      "urteil": "freigabe-reif",
+      "sha256": "ca21a250ae889d9194cf522a4f6840764c7f2caa3c077ca546eecf0018a9c3d6",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-06",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "naechste_pruefung": "2026-12-03",
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "34e4bb2acfa235699da5 (luecke): Der Artikel erwähnt keinen regulatorischen Rahmen (z. B. Bundesnetzagentur) obwohl diese Institution für Strom‑ und Gasmärkte zuständig ist.; 42b9d842341d892d42d0 (luecke): Angaben zu staatlichen Zuschüssen (bis zu 70 %) und deren Auswirkung auf den Eigenanteil fehlen eine Quellenangabe.; 866d8b711dc2de369444 (luecke): Hinweis, dass ein spezieller Stromtarif für Wärm"
+        }
+      ]
     },
     "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick": {
       "sha256": "ee71677addabd3c2bcea21decb8136b97eac9f509871266e8611f7d3f2ed14ef",
