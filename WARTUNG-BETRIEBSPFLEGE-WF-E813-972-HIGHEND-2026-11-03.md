@@ -98,3 +98,22 @@ vor; auch hier ersetzt das keinen erneuten Deploy-Lauf.
    #972. Details und Rechte: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`.
 
 Keine Zugangsdaten in Issues, Logs oder Chat veröffentlichen.
+
+## Nachtrag: Integration des neueren main-Stands
+
+Beim Öffnen des Pull Requests wurde der inzwischen fortgeschriebene Stand
+`1b50af25e` integriert. Die neueren redaktionellen Pin-Texte aus #1037 und
+alle dortigen Faktenfrische-Tests bleiben erhalten; zusätzlich schützt sie
+`pin_text_sync: false` vor dem hier behandelten Sync. Der ursprüngliche
+Abschnitt zur Wiederherstellung aus `69f08c40` beschreibt den ersten
+Arbeitsstand vor dieser Integration.
+
+Auch der inzwischen auf main vorliegende Lock war erneut ungültiges JSON
+(Bruchstelle Zeile 447). Bei der Zusammenführung wurde nicht versucht, zwei
+Siegel textuell zu vereinigen: Die belegte gültige Fassung dieser Reparatur
+wurde übernommen und der zwischenzeitlich committete FEST-Drift an
+`scripts/redaktions_standard.py` nach dem Merge über `--heal` mit Herkunft
+signiert. Das Integritäts-Gate ist erneut grün. Der gemeinsame lokale
+Qualitäts-/Faktenfrische-Testblock besteht jetzt 75 Tests mit einem Skip.
+Die vor der Integration dokumentierten älteren Messungen bleiben zeitlich
+gebunden; sie sind kein aktueller Live-Nachweis.
