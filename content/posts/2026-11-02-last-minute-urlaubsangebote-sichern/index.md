@@ -1,4 +1,5 @@
 ---
+lastmod: 2026-11-03
 title: "Last-Minute Urlaubsangebote sichern"
 description: "Last-Minute Urlaubsangebote sichern – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ."
 date: 2026-11-02T12:55:00Z
@@ -14,7 +15,7 @@ ki_redaktion_status: "review"
 redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
-  aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
+  aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt; am 03.11.2026 Abschnitt und Fehlertabelle eigenständig formuliert (Einzigartigkeits-Befund #1027 zum Urlaubskasse-Artikel); Fakten und Quellen unverändert; redaktionelle Freigabe weiterhin ausstehend"
 faktencheck: 2026-11-03
 pin_title: "Last-Minute Urlaubsangebote sichern"
 pin_description: "*Werbung | Last-Minute Urlaubsangebote sichern – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ. Mehr Spartipps auf FranksFinanzcheck! #last #minute #urlaub"
@@ -84,9 +85,9 @@ Falls dir ein unbekannter Posten auffällt, melde dich sofort beim Anbieter. Oft
 
 Ein letzter Tipp aus dem **Kurs halten**‑Schritt: Trage die tatsächlichen Kosten in deinen Fixkosten‑Kompass ein. So hast du beim nächsten Urlaub sofort einen realistischen Referenzwert und kannst noch gezielter nach **Reiseangebote günstig** suchen.
 
-## Häufige Fehler und wie du sie vermeidest
+## Drei teure Fallen bei Last-Minute-Buchen
 
-| Fehler                              | Warum er teuer wird                         | Wie du ihn vermeidest                              |
+| Typische Falle                       | Warum sie teuer wird                        | So vermeidest du sie                                |
 |-------------------------------------|--------------------------------------------|----------------------------------------------------|
 | Nur den Grundtarif schauen          | Zusatzgebühren bleiben unsichtbar           | Alle Kostenpositionen in eine Tabelle übernehmen  |
 | Keine Tankregelung prüfen           | Nachfüllpreis kann das Budget sprengen      | Voll‑zurückgeben oder Tank‑Option im Voraus kalkulieren |

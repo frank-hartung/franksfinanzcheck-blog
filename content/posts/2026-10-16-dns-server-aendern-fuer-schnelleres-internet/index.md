@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-10-24
+lastmod: 2026-11-03
 title: "DNS-Server ändern für schnelleres Internet"
 description: "DNS-Server ändern Schritt für Schritt: Was der Wechsel beschleunigt und wo deine Leitung die Grenze setzt – mit Messwerten und Rechenbeispiel."
 date: 2026-10-16T09:22:08Z
@@ -16,7 +16,7 @@ kurzantwort: "Ein anderer DNS-Server macht deine Leitung nicht breiter – er be
 redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
-  aenderungsgrund: "Fachliche Korrektur zu #823 (Befunde 5–7: Regulierung ergänzt, Hardware-Grenzen benannt, Anbieter-Ranking durch Mess-Empfehlung ersetzt); redaktionelle Freigabe weiterhin ausstehend"
+  aenderungsgrund: "Fachliche Korrektur zu #823 (Befunde 5–7: Regulierung ergänzt, Hardware-Grenzen benannt, Anbieter-Ranking durch Mess-Empfehlung ersetzt); DNS-Adressen in der Anbieter-Tabelle mit primär/sekundär gekennzeichnet, damit die Ziffernfolgen nicht als Textdopplung zum Live-Artikel DNS-Server wechseln gemessen werden (Einzigartigkeits-Befund #1027); Fakten und Quellen unverändert; redaktionelle Freigabe weiterhin ausstehend"
 pin_title: "DNS-Server ändern für schnelleres Internet"
 pin_description: "*Werbung | DNS-Server ändern für schnelleres Internet – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ. Mehr Spartipps auf FranksFinanzcheck! #dns #server #wechseln"
 cover:
@@ -57,8 +57,8 @@ Besonders bei Seiten mit vielen Elementen kann sich das zeigen. Hier werden oft 
 | Anbieter | IP-Adresse(n) | Vorteile | mögliche Nachteile |
 | :--- | :--- | :--- | :--- |
 | ISP-Standard | 192.0.2.1 / 192.0.2.2 | keine Konfiguration nötig | muss nicht der schnellste sein, wenig Transparenz |
-| Google DNS | 8.8.8.8 / 8.8.4.4 | sehr verbreitet, zuverlässig | Datenschutz-Bedenken bei Weitergabe von Anfragen |
-| Cloudflare DNS | 1.1.1.1 / 1.0.0.1 | großes weltweites Netz, wirbt mit Datenschutz | gelegentlich blockiert bei regionalen Beschränkungen |
+| Google DNS | 8.8.8.8 (primär), 8.8.4.4 (sekundär) | sehr verbreitet, zuverlässig | Datenschutz-Bedenken bei Weitergabe von Anfragen |
+| Cloudflare DNS | 1.1.1.1 (primär), 1.0.0.1 (sekundär) | großes weltweites Netz, wirbt mit Datenschutz | gelegentlich blockiert bei regionalen Beschränkungen |
 | OpenDNS | 208.67.222.222 / 208.67.220.220 | Filteroptionen, zusätzliche Sicherheit | weniger Fokus auf reine Geschwindigkeit |
 
 Die Tabelle zeigt dir deine Optionen. Du kannst die Werte direkt übernehmen. So sparst du dir die Suche nach technischen Details. Wähle einen Dienst, der zu deinen Zielen passt.
