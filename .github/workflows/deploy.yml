@@ -849,6 +849,12 @@ jobs:
       - name: KI-Kennzeichnung – Register durchsetzen (selbstheilend)
         run: python3 scripts/ki_kennzeichnung_gate.py --fix
 
+      - name: KI-Transparenz – Text, Bild und Provenienz testen
+        run: python3 -m unittest scripts.tests.test_ki_transparenz_render scripts.tests.test_ki_cover_provenienz scripts.tests.test_ki_cover_generator_schutz scripts.tests.test_ki_cover_render_audit -v
+
+      - name: KI-Cover – Herkunft und Originaldatei prüfen
+        run: python3 scripts/ki_cover_provenienz.py --gate
+
       # ================= QUOTE-NACHFÜLLUNG NACH GATE-VERLUST (#287) =========
       # Kernbefund Mo 14.09.2026: publish_gate verwarf den neuen Tages-Artikel
       # (FM-Korruption „---TITEL:“) und ließ nur 1 LIVE-Post stehen. Die
@@ -1034,6 +1040,11 @@ jobs:
         with:
           args: "--minify"
           label: "Rebuild nach Gate-Heilungen"
+
+      # Auch nach Refill und Heilungen prüfen: frühere Prüfung allein würde
+      # nachträglich geänderte Cover oder Dateien nicht erfassen.
+      - name: KI-Cover – finale Provenienzprüfung
+        run: python3 scripts/ki_cover_provenienz.py --gate
 
       # NACH ALLEN Content-Heilungen und dem letzten Rebuild: prüft genau
       # das auszuliefernde HTML, auch /posts/page/2/, Links und Live-Zähler.

@@ -35,6 +35,7 @@
 {{- $claims := $review.gepruefte_zahlen | default (slice) -}}
 {{- $quellen := .Params.quellen | default (slice) -}}
 <section class="ff-review-card" aria-labelledby="ff-review-title-{{ .File.UniqueID }}" data-review-status="freigegeben">
+  {{- if $ai }}<p class="ff-pruef__ki" data-ff-ki-label>Mit KI erstellt oder bearbeitet</p>{{ end }}
   <div class="ff-review-card__head">
     <span class="ff-review-card__seal" aria-hidden="true">
       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
@@ -109,7 +110,7 @@
     Verantwortlicher Autor: {{ $author }}
     {{- if $ai -}}
       <span class="ff-pruef__sep" aria-hidden="true">·</span>
-      <strong class="ff-pruef__ki" data-ff-ki-label>Mit KI-Unterstützung recherchiert</strong>
+      <strong class="ff-pruef__ki" data-ff-ki-label>Mit KI erstellt oder bearbeitet</strong>
     {{- end -}}
     {{- if gt (len (.Params.quellen | default (slice))) 0 -}}
       <span class="ff-pruef__sep" aria-hidden="true">·</span>

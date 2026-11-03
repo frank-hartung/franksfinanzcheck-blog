@@ -1,0 +1,1135 @@
+{
+  "stand_utc": "2026-11-03T09:53:58+00:00",
+  "verfahren": "Byte-/Pixelvergleich mit Pillow-Reproduktion anhand des Cover-Manifests; kein Herkunfts- oder KI-Beweis",
+  "referenzen": 113,
+  "dateien": 112,
+  "umgebung": {
+    "pillow": "13.0.0",
+    "generator_sha256": "1ccaa52b5cdd8337c9a8d4b371c31bb601f639ec87ae963d61548c1e0542ce07",
+    "schrift_sha256": "4b0a7ad3ee168e3abf0e024ffac9898bdc8eb1a0dd29705f9fb5f47efc99a990",
+    "manifest_sha256": "a4aa134c3ef1a61174cbaed5a18df876e9611854d917e5561f441c020dfa44fd"
+  },
+  "ergebnisse": [
+    {
+      "image": "images/covers/2026-08-10-dsl-wechselbonus-sichern.jpg",
+      "status": "byte_identisch",
+      "sha256": "38282442ab6d3c72c80e680fa082872f9921222f1415200f33bd9124cde93307",
+      "vergleich_sha256": "38282442ab6d3c72c80e680fa082872f9921222f1415200f33bd9124cde93307",
+      "content": [
+        "content/posts/2026-08-10-dsl-wechselbonus-sichern/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas.jpg",
+      "status": "abweichend",
+      "sha256": "78c78afd246a848acbdeaf62feaa5b6bac65e79ab2f906332e3102c3a869d3e8",
+      "vergleich_sha256": "b242e897e342e34b90ec8db6bd9399d15713e174d9aaa3b963353b1f479e24b7",
+      "content": [
+        "content/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.jpg",
+      "status": "byte_identisch",
+      "sha256": "f5255134695f7cd467fd3a88ec7b6fffdf2ad875366b98c40822bfbc967dabbd",
+      "vergleich_sha256": "f5255134695f7cd467fd3a88ec7b6fffdf2ad875366b98c40822bfbc967dabbd",
+      "content": [
+        "content/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden.jpg",
+      "status": "byte_identisch",
+      "sha256": "47f790c64a800c51a88e8bc18bc2fcd7f3202d85eedf79dacd429469cc690da9",
+      "vergleich_sha256": "47f790c64a800c51a88e8bc18bc2fcd7f3202d85eedf79dacd429469cc690da9",
+      "content": [
+        "content/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.jpg",
+      "status": "abweichend",
+      "sha256": "d55a46a06559333fe23ee628662788292093029077815fedabd2062702a6409a",
+      "vergleich_sha256": "d63a88806d31c39ff682802420dd457329d761bcc3bbc0d0c26a68db119ba885",
+      "content": [
+        "content/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.jpg",
+      "status": "byte_identisch",
+      "sha256": "ac0a8a439c02e41330edc931432ba77f687daa5997edb1c96728e86bb2d296ca",
+      "vergleich_sha256": "ac0a8a439c02e41330edc931432ba77f687daa5997edb1c96728e86bb2d296ca",
+      "content": [
+        "content/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel.jpg",
+      "status": "byte_identisch",
+      "sha256": "41bb6a9d2dad6e22bbf5257f07c982aecbb6e17e182243af1d0d7bf2f5e307c0",
+      "vergleich_sha256": "41bb6a9d2dad6e22bbf5257f07c982aecbb6e17e182243af1d0d7bf2f5e307c0",
+      "content": [
+        "content/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit.jpg",
+      "status": "byte_identisch",
+      "sha256": "e66864dadb04915a86976732e1bfd464c480d7dc81b9653bc932568c05d321f3",
+      "vergleich_sha256": "e66864dadb04915a86976732e1bfd464c480d7dc81b9653bc932568c05d321f3",
+      "content": [
+        "content/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.jpg",
+      "status": "byte_identisch",
+      "sha256": "56ec1d77f77d4d57d2ce005ab3821f5d71706a69a111dc4d72c1704b5d619a19",
+      "vergleich_sha256": "56ec1d77f77d4d57d2ce005ab3821f5d71706a69a111dc4d72c1704b5d619a19",
+      "content": [
+        "content/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan.jpg",
+      "status": "byte_identisch",
+      "sha256": "861fa8d8cf1f240c011003137468faec82e571df36832fdd425946980fc22b37",
+      "vergleich_sha256": "861fa8d8cf1f240c011003137468faec82e571df36832fdd425946980fc22b37",
+      "content": [
+        "content/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.jpg",
+      "status": "abweichend",
+      "sha256": "c23c271fbdde12275959d065200f0495e6f3ec9d853fdde957378ed22694b4de",
+      "vergleich_sha256": "cf09986588d149f36dc0c44a1351c8c06394bc4a8e8c730b54efdb3bbcb755d1",
+      "content": [
+        "content/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.jpg",
+      "status": "byte_identisch",
+      "sha256": "bfa266230ddf761fbc689455463c673275397dd009fe7cc04312bd12e0fff6c6",
+      "vergleich_sha256": "bfa266230ddf761fbc689455463c673275397dd009fe7cc04312bd12e0fff6c6",
+      "content": [
+        "content/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst.jpg",
+      "status": "byte_identisch",
+      "sha256": "a5816717414a5077072fa8888ddfe8ed88bcc77ac4cf66bf61036ffee97ac304",
+      "vergleich_sha256": "a5816717414a5077072fa8888ddfe8ed88bcc77ac4cf66bf61036ffee97ac304",
+      "content": [
+        "content/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.jpg",
+      "status": "byte_identisch",
+      "sha256": "21a5199c35c1e4335e78e6f23c127c9e30be3f6110efb40bc0009a7a098fef41",
+      "vergleich_sha256": "21a5199c35c1e4335e78e6f23c127c9e30be3f6110efb40bc0009a7a098fef41",
+      "content": [
+        "content/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.jpg",
+      "status": "byte_identisch",
+      "sha256": "0e8e1e414b60daf8d3662289ab8497e79e88e816470bc4e208d93323641c7bd5",
+      "vergleich_sha256": "0e8e1e414b60daf8d3662289ab8497e79e88e816470bc4e208d93323641c7bd5",
+      "content": [
+        "content/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause.jpg",
+      "status": "byte_identisch",
+      "sha256": "48fae7f04f8047959c913bf100f3a68c8d4a23f1b0b79ec7fe3f8aee4d0e74f9",
+      "vergleich_sha256": "48fae7f04f8047959c913bf100f3a68c8d4a23f1b0b79ec7fe3f8aee4d0e74f9",
+      "content": [
+        "content/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier.jpg",
+      "status": "byte_identisch",
+      "sha256": "30e99f37fb8e3f40b491f2ef7917a9e976a6ea1a42212a31f58d3395dba66719",
+      "vergleich_sha256": "30e99f37fb8e3f40b491f2ef7917a9e976a6ea1a42212a31f58d3395dba66719",
+      "content": [
+        "content/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.jpg",
+      "status": "byte_identisch",
+      "sha256": "2b7dda7f39ff564961815ad26023995d041418ef126e880c88d1613415e287c5",
+      "vergleich_sha256": "2b7dda7f39ff564961815ad26023995d041418ef126e880c88d1613415e287c5",
+      "content": [
+        "content/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps.jpg",
+      "status": "byte_identisch",
+      "sha256": "9ef9890f8ffb997fe01a49b0861a132017d361ff56e3d6b816fc74beca82132b",
+      "vergleich_sha256": "9ef9890f8ffb997fe01a49b0861a132017d361ff56e3d6b816fc74beca82132b",
+      "content": [
+        "content/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen.jpg",
+      "status": "abweichend",
+      "sha256": "f5e3a68ca8905451f3fb56c3041249a3134529a984953bf73cd39976743ee0d3",
+      "vergleich_sha256": "659a6abcc200ae9f1c8680c8d285724d88262e070f36bc6069799d84d4974108",
+      "content": [
+        "content/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet.jpg",
+      "status": "byte_identisch",
+      "sha256": "50ff70e4d2e06122ff39708bf8db012a1a0d8055e8b03398190f284f3e8d6006",
+      "vergleich_sha256": "50ff70e4d2e06122ff39708bf8db012a1a0d8055e8b03398190f284f3e8d6006",
+      "content": [
+        "content/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife.jpg",
+      "status": "byte_identisch",
+      "sha256": "bbfc7816730a802e30ea1150f7649021421d7afb294f8d44d8dff14d7dff25d9",
+      "vergleich_sha256": "bbfc7816730a802e30ea1150f7649021421d7afb294f8d44d8dff14d7dff25d9",
+      "content": [
+        "content/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen.jpg",
+      "status": "byte_identisch",
+      "sha256": "0e7fdf17130f31db3222b741f12cddd9d29e0c429a3e61eb858d582f2b6fb411",
+      "vergleich_sha256": "0e7fdf17130f31db3222b741f12cddd9d29e0c429a3e61eb858d582f2b6fb411",
+      "content": [
+        "content/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich.jpg",
+      "status": "byte_identisch",
+      "sha256": "106c4d4b227c864b56816546664b195a7bafebef0f54ce5abd865773de1fa9c1",
+      "vergleich_sha256": "106c4d4b227c864b56816546664b195a7bafebef0f54ce5abd865773de1fa9c1",
+      "content": [
+        "content/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn.jpg",
+      "status": "abweichend",
+      "sha256": "105f260596298480eb40f0b5e814d74ab407bd267bbcebf61c0735461b9b8f81",
+      "vergleich_sha256": "55575497fc67c32ec331abf20e2baf4f17c1df5d78d1c34957265f96978a27b6",
+      "content": [
+        "content/posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen.jpg",
+      "status": "byte_identisch",
+      "sha256": "b558aeb7708db2b76c5a4cd5baaee063866a34cd055c4c5209c78157ee34b532",
+      "vergleich_sha256": "b558aeb7708db2b76c5a4cd5baaee063866a34cd055c4c5209c78157ee34b532",
+      "content": [
+        "content/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt.jpg",
+      "status": "byte_identisch",
+      "sha256": "e9d2d59fcad3bc60cbf7700697900936df89ba6b444d062188a52cb40ebae159",
+      "vergleich_sha256": "e9d2d59fcad3bc60cbf7700697900936df89ba6b444d062188a52cb40ebae159",
+      "content": [
+        "content/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte.jpg",
+      "status": "byte_identisch",
+      "sha256": "397b4842aaebd41b8c5eacf8c544eb2af71408c695db94ccdb69beeda9bb094d",
+      "vergleich_sha256": "397b4842aaebd41b8c5eacf8c544eb2af71408c695db94ccdb69beeda9bb094d",
+      "content": [
+        "content/posts/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen.jpg",
+      "status": "byte_identisch",
+      "sha256": "c31bf7b0c919fc5d853d6ad0d0f2a8edae168f9e646018b7cef7d7c3eb38d513",
+      "vergleich_sha256": "c31bf7b0c919fc5d853d6ad0d0f2a8edae168f9e646018b7cef7d7c3eb38d513",
+      "content": [
+        "content/posts/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen.jpg",
+      "status": "byte_identisch",
+      "sha256": "dc88dea8dd3d7fd45f40709573ffdba29fd4469ad169ac295786b36f994e5511",
+      "vergleich_sha256": "dc88dea8dd3d7fd45f40709573ffdba29fd4469ad169ac295786b36f994e5511",
+      "content": [
+        "content/posts/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt.jpg",
+      "status": "byte_identisch",
+      "sha256": "d8b8d96d3fb348f04a9fbff4b90815c54c6c76111918868eb9e551c9599bab4a",
+      "vergleich_sha256": "d8b8d96d3fb348f04a9fbff4b90815c54c6c76111918868eb9e551c9599bab4a",
+      "content": [
+        "content/posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich.jpg",
+      "status": "abweichend",
+      "sha256": "3b5be4562a094aa473d56bf6dbd36907c5793f36d2a30c1bdba06aec12318600",
+      "vergleich_sha256": "6442b3429adf898ec22d9c799d825314805dd0dc8a9b39502197cc742688a5f8",
+      "content": [
+        "content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen.jpg",
+      "status": "byte_identisch",
+      "sha256": "583608d10f46f807dcf455b56422705a779e2f14dfd893e8263b6264d9c4aedd",
+      "vergleich_sha256": "583608d10f46f807dcf455b56422705a779e2f14dfd893e8263b6264d9c4aedd",
+      "content": [
+        "content/posts/2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum.jpg",
+      "status": "abweichend",
+      "sha256": "88ff7077f4afe1360dc2dec222dbc562d1d8676c051de256b4d54e688ae3caf1",
+      "vergleich_sha256": "62df2e50372156bbcd39a2f181802d7dc9b55f3a109804f6cf54a9ae88173ccc",
+      "content": [
+        "content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler.jpg",
+      "status": "byte_identisch",
+      "sha256": "644b662537a5bf913a5aacba56f5cf43a4ec0045c0f3f803e99127c8f02875ff",
+      "vergleich_sha256": "644b662537a5bf913a5aacba56f5cf43a4ec0045c0f3f803e99127c8f02875ff",
+      "content": [
+        "content/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort.jpg",
+      "status": "byte_identisch",
+      "sha256": "e76f9820e47f3234b8dd86b6667d693b7ee37ba169d3216b0eb311a7910142a0",
+      "vergleich_sha256": "e76f9820e47f3234b8dd86b6667d693b7ee37ba169d3216b0eb311a7910142a0",
+      "content": [
+        "content/posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster.jpg",
+      "status": "byte_identisch",
+      "sha256": "e905a66d5b43363ed3b5945a3273b23dfd1039c0dfa5740b2ee04488328b8412",
+      "vergleich_sha256": "e905a66d5b43363ed3b5945a3273b23dfd1039c0dfa5740b2ee04488328b8412",
+      "content": [
+        "content/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag.jpg",
+      "status": "byte_identisch",
+      "sha256": "eed6490a8567c5d63a78e5fe0f333c441635e33bf4ef2fd3b1386d250be6cd58",
+      "vergleich_sha256": "eed6490a8567c5d63a78e5fe0f333c441635e33bf4ef2fd3b1386d250be6cd58",
+      "content": [
+        "content/posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026.jpg",
+      "status": "byte_identisch",
+      "sha256": "53d3acd4a02b7a0c214620e765c4afd2b7e35915440d3818949f9225bd976a15",
+      "vergleich_sha256": "53d3acd4a02b7a0c214620e765c4afd2b7e35915440d3818949f9225bd976a15",
+      "content": [
+        "content/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer.jpg",
+      "status": "byte_identisch",
+      "sha256": "66877492a8f618fb4fcdb4f87de33fa2af2cb9c5e5a17c29c565c2c3794d0591",
+      "vergleich_sha256": "66877492a8f618fb4fcdb4f87de33fa2af2cb9c5e5a17c29c565c2c3794d0591",
+      "content": [
+        "content/posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser.jpg",
+      "status": "byte_identisch",
+      "sha256": "75b47b475205aeb3602c51c7cb5b244bea48700a3d2fc4a5a05a164cfc19d542",
+      "vergleich_sha256": "75b47b475205aeb3602c51c7cb5b244bea48700a3d2fc4a5a05a164cfc19d542",
+      "content": [
+        "content/posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert.jpg",
+      "status": "byte_identisch",
+      "sha256": "8ad2beac6721c8ee40cdda0bad3717f12408ac0cd22a7a2c62342cbd321be6e6",
+      "vergleich_sha256": "8ad2beac6721c8ee40cdda0bad3717f12408ac0cd22a7a2c62342cbd321be6e6",
+      "content": [
+        "content/posts/2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug.jpg",
+      "status": "abweichend",
+      "sha256": "46e0d3f11daa3641b24460dfa2f9b44c08e126981bfdab0a86e40f6f68ea9915",
+      "vergleich_sha256": "26a3c3b914baba21626891512bb4577deb0c77b19eeae31f67db84b4583ce02c",
+      "content": [
+        "content/posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor.jpg",
+      "status": "byte_identisch",
+      "sha256": "e7e00b70f890fbd80a36c3c6e35a95903ca77cb88dbfd86cc1c6f5f9040ebc9f",
+      "vergleich_sha256": "e7e00b70f890fbd80a36c3c6e35a95903ca77cb88dbfd86cc1c6f5f9040ebc9f",
+      "content": [
+        "content/posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro.jpg",
+      "status": "byte_identisch",
+      "sha256": "20dce61721fa8bd2ff612c238817ad1d1e1488a9c722df962f080ff306700f5b",
+      "vergleich_sha256": "20dce61721fa8bd2ff612c238817ad1d1e1488a9c722df962f080ff306700f5b",
+      "content": [
+        "content/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet.jpg",
+      "status": "byte_identisch",
+      "sha256": "e242cdbfa75e7d9ac57c2c4a0ae496f12bff2ae00d635157bafe01f38e2e6745",
+      "vergleich_sha256": "e242cdbfa75e7d9ac57c2c4a0ae496f12bff2ae00d635157bafe01f38e2e6745",
+      "content": [
+        "content/posts/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-21-ratenkredit-vergleich-zinsen-kosten-fallen.jpg",
+      "status": "byte_identisch",
+      "sha256": "e74950c20f6cf309129bffae99f119d234fad5e9428e6b6942d3a0a905d82673",
+      "vergleich_sha256": "e74950c20f6cf309129bffae99f119d234fad5e9428e6b6942d3a0a905d82673",
+      "content": [
+        "content/posts/2026-09-21-ratenkredit-vergleich-zinsen-kosten-fallen/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-09-21-tierkrankenversicherung-hund-katze-kosten.jpg",
+      "status": "abweichend",
+      "sha256": "0eda74c119e82a42bb109917c3b19c7c7890c70212ed2eb3c9f9c43586a508bd",
+      "vergleich_sha256": "9e5bd04a0ebee0b4521f0f0b45039845a7ee85cfdf0b7705b32474f408c6d3cd",
+      "content": [
+        "content/posts/2026-09-21-tierkrankenversicherung-hund-katze-kosten/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten.jpg",
+      "status": "byte_identisch",
+      "sha256": "a1ca95a36486772c0c8af073d84950b435a9f1d8fbbe1100a4951499ae713611",
+      "vergleich_sha256": "a1ca95a36486772c0c8af073d84950b435a9f1d8fbbe1100a4951499ae713611",
+      "content": [
+        "content/posts/2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich.jpg",
+      "status": "byte_identisch",
+      "sha256": "5f55de07800a2746bf2001989a6832522061407d38dbda0903abcb9d3512e359",
+      "vergleich_sha256": "5f55de07800a2746bf2001989a6832522061407d38dbda0903abcb9d3512e359",
+      "content": [
+        "content/posts/2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag.jpg",
+      "status": "byte_identisch",
+      "sha256": "bbc8a5df0bdb07fe090712044be2a5101e11f67d045b1bee0a2d7d344ca435a3",
+      "vergleich_sha256": "bbc8a5df0bdb07fe090712044be2a5101e11f67d045b1bee0a2d7d344ca435a3",
+      "content": [
+        "content/posts/2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist.jpg",
+      "status": "byte_identisch",
+      "sha256": "c304ea5f5d3ecc9db7189a158bd766b429965d0317253d09c846d53ed7b74f4d",
+      "vergleich_sha256": "c304ea5f5d3ecc9db7189a158bd766b429965d0317253d09c846d53ed7b74f4d",
+      "content": [
+        "content/posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert.jpg",
+      "status": "byte_identisch",
+      "sha256": "cbdda9e3879113f488b0a8fba7289b5905a7674ed35fed7a45300f3df7d2bbee",
+      "vergleich_sha256": "cbdda9e3879113f488b0a8fba7289b5905a7674ed35fed7a45300f3df7d2bbee",
+      "content": [
+        "content/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich.jpg",
+      "status": "abweichend",
+      "sha256": "a489b14838502998c7b34431ad6e10549f62ebac6177744d58311c95a222f4dd",
+      "vergleich_sha256": "37431c523382d53ed2c39122437d6d296a6dc437eacd10ea9fc49854de2aebda",
+      "content": [
+        "content/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden.jpg",
+      "status": "byte_identisch",
+      "sha256": "faa4eec372e8d3cda2b11da163e0371e409318864d4486e60fe16eaff9dec26f",
+      "vergleich_sha256": "faa4eec372e8d3cda2b11da163e0371e409318864d4486e60fe16eaff9dec26f",
+      "content": [
+        "content/posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert.jpg",
+      "status": "byte_identisch",
+      "sha256": "313f8d6e058fcea3e694379628c401a8921a9236d599c6eb3e2162a8dbd4c8ef",
+      "vergleich_sha256": "313f8d6e058fcea3e694379628c401a8921a9236d599c6eb3e2162a8dbd4c8ef",
+      "content": [
+        "content/posts/2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet.jpg",
+      "status": "byte_identisch",
+      "sha256": "2e6dcf7ff98a15075cde916291a477a72e18758022def8cc91e190fec95b81df",
+      "vergleich_sha256": "2e6dcf7ff98a15075cde916291a477a72e18758022def8cc91e190fec95b81df",
+      "content": [
+        "content/posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp.jpg",
+      "status": "byte_identisch",
+      "sha256": "fba69714f4ebee74a84db7f239500df8f9cf7c050d000efbf6dab033a5e901c4",
+      "vergleich_sha256": "fba69714f4ebee74a84db7f239500df8f9cf7c050d000efbf6dab033a5e901c4",
+      "content": [
+        "content/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig.jpg",
+      "status": "byte_identisch",
+      "sha256": "b58ae5fbf148049614935056435e77dbd9933c6e17d2e5404efe828a0852e9fd",
+      "vergleich_sha256": "b58ae5fbf148049614935056435e77dbd9933c6e17d2e5404efe828a0852e9fd",
+      "content": [
+        "content/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss.jpg",
+      "status": "byte_identisch",
+      "sha256": "5f1a2a2f95088985a8382240b59d16647762c072e13d9aa338d37732fc31344b",
+      "vergleich_sha256": "5f1a2a2f95088985a8382240b59d16647762c072e13d9aa338d37732fc31344b",
+      "content": [
+        "content/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage.jpg",
+      "status": "byte_identisch",
+      "sha256": "315614ae33406e50b6c3ddbf846efba970deef938ca61c9110eecc094895f740",
+      "vergleich_sha256": "315614ae33406e50b6c3ddbf846efba970deef938ca61c9110eecc094895f740",
+      "content": [
+        "content/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest.jpg",
+      "status": "byte_identisch",
+      "sha256": "809ef93a6b34d7c436ec3b954f38b387b5515cfd3ae3e719aac2e926861764e6",
+      "vergleich_sha256": "809ef93a6b34d7c436ec3b954f38b387b5515cfd3ae3e719aac2e926861764e6",
+      "content": [
+        "content/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-05-die-50-30-20-regel-einfach-erklaert.jpg",
+      "status": "byte_identisch",
+      "sha256": "6197f267e6b335313fe715ca3c09299a356724ce1a5da782e5d65ac03888dbaf",
+      "vergleich_sha256": "6197f267e6b335313fe715ca3c09299a356724ce1a5da782e5d65ac03888dbaf",
+      "content": [
+        "content/posts/2026-10-05-die-50-30-20-regel-einfach-erklaert/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen.jpg",
+      "status": "byte_identisch",
+      "sha256": "ee60c22b64f11371b0c61c326f107ec536ff54291f8a236f1d79385a77500823",
+      "vergleich_sha256": "ee60c22b64f11371b0c61c326f107ec536ff54291f8a236f1d79385a77500823",
+      "content": [
+        "content/posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-06-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck.jpg",
+      "status": "abweichend",
+      "sha256": "17525c840b21c2bf6e328cd9df08509b844298a3e2e6b55cfeec0061c155c160",
+      "vergleich_sha256": "52c85eabfccf30dbdba929f09b7f2b6a35e928ea5cf4bf5435f5d54d6fe25ae0",
+      "content": [
+        "content/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-06-energiekosten-senken-smarte-helfer-fuer-den-haushalt.jpg",
+      "status": "abweichend",
+      "sha256": "a29d43d0804fc54cce80e28c25c265c77ddc8129bd6d0686a24b816bc8ae1a19",
+      "vergleich_sha256": "2461d1f5c8df8b379fee7310c9efff98b8310d7eae8a5c584551c2edac8df4f8",
+      "content": [
+        "content/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-06-markt-update-was-sich-jetzt-fuer-dich-aendert.jpg",
+      "status": "byte_identisch",
+      "sha256": "f6f728e45c1a9582109efb2c4360794c7d5f3369dbb0f82c48b1a559c63262e6",
+      "vergleich_sha256": "f6f728e45c1a9582109efb2c4360794c7d5f3369dbb0f82c48b1a559c63262e6",
+      "content": [
+        "content/posts/2026-10-06-markt-update-was-sich-jetzt-fuer-dich-aendert/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit.jpg",
+      "status": "abweichend",
+      "sha256": "86a39fab923610a7a8e2f8ec89097bc6110959e3a61b6dba48debcb46899bbc2",
+      "vergleich_sha256": "a75aa4ee61308a6e40f080b41e31278c16ac44b66aed17de642378c457ad7868",
+      "content": [
+        "content/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust.jpg",
+      "status": "abweichend",
+      "sha256": "c3b39229a9eaaf73963cf5067a3f865c16c333ea30c94e16462bb459985de3b0",
+      "vergleich_sha256": "df162f361dd83d712624176f83b45771b58584fad10449d15c7ea90841df966d",
+      "content": [
+        "content/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet.jpg",
+      "status": "byte_identisch",
+      "sha256": "0fcfdb12844011bf34b1d4fb95b34ecc1003abdd781250f35c15b0ff3447e8e1",
+      "vergleich_sha256": "0fcfdb12844011bf34b1d4fb95b34ecc1003abdd781250f35c15b0ff3447e8e1",
+      "content": [
+        "content/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung.jpg",
+      "status": "byte_identisch",
+      "sha256": "0ee5cd5f81b7173cb8fda52b7b928966362299a0c15af98fea72c78c7580a1ee",
+      "vergleich_sha256": "0ee5cd5f81b7173cb8fda52b7b928966362299a0c15af98fea72c78c7580a1ee",
+      "content": [
+        "content/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-07-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle.jpg",
+      "status": "abweichend",
+      "sha256": "4259b0f33eb75666d84e14c575255e464c3ea76b2a7067bebb7ae7c51c7d7f1f",
+      "vergleich_sha256": "d085d04a62fdb6c40d260b53bf60304f39a2608f67673734ed9b3f5de46c1cef",
+      "content": [
+        "content/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich.jpg",
+      "status": "byte_identisch",
+      "sha256": "5b0a1c184ec7b07c75c08bb4f52b69c6bc62d24bc6ef52303f5a6ddca02efa33",
+      "vergleich_sha256": "5b0a1c184ec7b07c75c08bb4f52b69c6bc62d24bc6ef52303f5a6ddca02efa33",
+      "content": [
+        "content/posts/2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen.jpg",
+      "status": "byte_identisch",
+      "sha256": "9349a13a745c72a00b3b09ba96cc253c455ba4046f630e881c249844bd6b841a",
+      "vergleich_sha256": "9349a13a745c72a00b3b09ba96cc253c455ba4046f630e881c249844bd6b841a",
+      "content": [
+        "content/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-07-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle.jpg",
+      "status": "abweichend",
+      "sha256": "8c36a393cbfd24eb258290fd3919f860d15825b6204c7e703fcc5fbcdd825bb4",
+      "vergleich_sha256": "33d3e29792f17e2e36726140bca3944917293133bd38460ccbdb00968e2c5f71",
+      "content": [
+        "content/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-07-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig.jpg",
+      "status": "abweichend",
+      "sha256": "d369e4fa7d9622b85b3a010a514199be5c6753356ad5a9e0c0da4340d2ba0c84",
+      "vergleich_sha256": "49d9fabe60158796226c6c017d42ddef3fd1913cbaacef0f2e7c691b89ccab9c",
+      "content": [
+        "content/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken.jpg",
+      "status": "abweichend",
+      "sha256": "f5990cdfc8f3cc3a67c9df1b1ca2c0f1c899050726cfe227b96230dbe0f597d7",
+      "vergleich_sha256": "58207cff99fafc543eae1ce47ce711dc5cd54939935a08336e8dc191a732a19e",
+      "content": [
+        "content/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert.jpg",
+      "status": "byte_identisch",
+      "sha256": "d4d16565cfc90a4d006f483f0f9940f751f06d670ad09a84dd9f4fd77ca6e2e1",
+      "vergleich_sha256": "d4d16565cfc90a4d006f483f0f9940f751f06d670ad09a84dd9f4fd77ca6e2e1",
+      "content": [
+        "content/posts/2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit.jpg",
+      "status": "byte_identisch",
+      "sha256": "511ec5f34c9045872f7d1cff0485950fb48c44e929fb9d28648fef5f9852322b",
+      "vergleich_sha256": "511ec5f34c9045872f7d1cff0485950fb48c44e929fb9d28648fef5f9852322b",
+      "content": [
+        "content/posts/2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt.jpg",
+      "status": "byte_identisch",
+      "sha256": "a52f2868aec68d53837d0104aa7ef2b45ce37f521ccb1290559df7a3f2b1b809",
+      "vergleich_sha256": "a52f2868aec68d53837d0104aa7ef2b45ce37f521ccb1290559df7a3f2b1b809",
+      "content": [
+        "content/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten.jpg",
+      "status": "byte_identisch",
+      "sha256": "0b7edc17af9dc5cebbca2c3cd2c5dfde31d462382ca6da521d47da6567a01716",
+      "vergleich_sha256": "0b7edc17af9dc5cebbca2c3cd2c5dfde31d462382ca6da521d47da6567a01716",
+      "content": [
+        "content/posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken.jpg",
+      "status": "byte_identisch",
+      "sha256": "c0a20b2b77e066bf283c584d1cd710a72e652dca06a83a49191c74d9ee259e6d",
+      "vergleich_sha256": "c0a20b2b77e066bf283c584d1cd710a72e652dca06a83a49191c74d9ee259e6d",
+      "content": [
+        "content/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-12-stromfresser-im-haushalt-entlarven.jpg",
+      "status": "byte_identisch",
+      "sha256": "1a4bc00475d1c928708114ba907e2f64c5e28be11bf82c793f9fc43579c9f42a",
+      "vergleich_sha256": "1a4bc00475d1c928708114ba907e2f64c5e28be11bf82c793f9fc43579c9f42a",
+      "content": [
+        "content/posts/2026-10-12-stromfresser-im-haushalt-entlarven/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-10-12-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick.jpg",
+      "status": "byte_identisch",
+      "sha256": "99004fa3c1a989c88b02961fc3d71cf945b13989151a2edcfe9e8cf409e5130a",
+      "vergleich_sha256": "99004fa3c1a989c88b02961fc3d71cf945b13989151a2edcfe9e8cf409e5130a",
+      "content": [
+        "content/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-14-heizperiode-vorbereiten-im-spaetsommer.jpg",
+      "status": "abweichend",
+      "sha256": "7401ef0f934e484eeb835e77b195c54de10731c558e8ff82e05a29dae11b7950",
+      "vergleich_sha256": "001055e0a96b39dfffaf02187aabdcc2234fcf04a1cad7f1429d2de893acf40c",
+      "content": [
+        "content/posts/2026-10-14-heizperiode-vorbereiten-im-spaetsommer/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.jpg",
+      "status": "byte_identisch",
+      "sha256": "f011dc997de70441fe873af10be76aa916ddb7587ece738a81debe66d1f07fb2",
+      "vergleich_sha256": "f011dc997de70441fe873af10be76aa916ddb7587ece738a81debe66d1f07fb2",
+      "content": [
+        "content/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert.jpg",
+      "status": "abweichend",
+      "sha256": "01355a1aba0236db4c1c34cd8bf2f3619709f1fa599fbc738c9e6f5b03a01fe1",
+      "vergleich_sha256": "955a435250617f31246e4033d365ec760c61466c54f4283d4f74ccb8a6574872",
+      "content": [
+        "content/posts/2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-10-16-dns-server-aendern-fuer-schnelleres-internet.jpg",
+      "status": "byte_identisch",
+      "sha256": "22a4d7b027bd3a78c0c1a2e5d4d26baa2b50f4885626813aaf8abaed957142f0",
+      "vergleich_sha256": "22a4d7b027bd3a78c0c1a2e5d4d26baa2b50f4885626813aaf8abaed957142f0",
+      "content": [
+        "content/posts/2026-10-16-dns-server-aendern-fuer-schnelleres-internet/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-10-19-urlaubskasse-clever-aufbessern.jpg",
+      "status": "byte_identisch",
+      "sha256": "d13cd03d0a69fed74bf9801998931667220d5ea406ba3d35ad9ab0f1b65204bf",
+      "vergleich_sha256": "d13cd03d0a69fed74bf9801998931667220d5ea406ba3d35ad9ab0f1b65204bf",
+      "content": [
+        "content/posts/2026-10-19-urlaubskasse-clever-aufbessern/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-10-21-mietwagen-fallen-im-urlaub-vermeiden.jpg",
+      "status": "abweichend",
+      "sha256": "640d1cabd6d82a035c5bb2e27de2fb677ee1d848e91d82f02f9b584e2e9d5baf",
+      "vergleich_sha256": "b6cc35c60300c501f1051e91ac214575ad6ddb92963b4250fdd74a0f2f13d590",
+      "content": [
+        "content/posts/2026-10-21-mietwagen-fallen-im-urlaub-vermeiden/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen.jpg",
+      "status": "byte_identisch",
+      "sha256": "276bfa07d41be1be3d7cf35e5e36d12cc786d187142adadbede4c3ed09c4fb27",
+      "vergleich_sha256": "276bfa07d41be1be3d7cf35e5e36d12cc786d187142adadbede4c3ed09c4fb27",
+      "content": [
+        "content/posts/2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto.jpg",
+      "status": "byte_identisch",
+      "sha256": "4f2bf68e0a6ff6f73f6b1d030d6569ca32b2a3ea5e434d1a6599027c8f864320",
+      "vergleich_sha256": "4f2bf68e0a6ff6f73f6b1d030d6569ca32b2a3ea5e434d1a6599027c8f864320",
+      "content": [
+        "content/posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks.jpg",
+      "status": "byte_identisch",
+      "sha256": "eddcc3d520c45e5255f551d25c50553dec6d71d83a91b7ed382ffd18b765cb57",
+      "vergleich_sha256": "eddcc3d520c45e5255f551d25c50553dec6d71d83a91b7ed382ffd18b765cb57",
+      "content": [
+        "content/posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen.jpg",
+      "status": "byte_identisch",
+      "sha256": "e9b7e7d1d17a6133a0a8e36451e4152c9254bf22c3b8c518cd94fed05d86ecc8",
+      "vergleich_sha256": "e9b7e7d1d17a6133a0a8e36451e4152c9254bf22c3b8c518cd94fed05d86ecc8",
+      "content": [
+        "content/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu.jpg",
+      "status": "byte_identisch",
+      "sha256": "22cc730e649d43a009cc9214b230c3196cfd46d741912bedbf6fd2406c5ce2c2",
+      "vergleich_sha256": "22cc730e649d43a009cc9214b230c3196cfd46d741912bedbf6fd2406c5ce2c2",
+      "content": [
+        "content/posts/2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-10-26-flugvergleich-im-winter-so-findest-du-echte-billigfluege.jpg",
+      "status": "abweichend",
+      "sha256": "527c9c7b4c38a7c0370adc81ee1aa8e3c4ef1267b09ec4fb709d84af1603090f",
+      "vergleich_sha256": "fcae1e214eb81d248dde013904b86d6addcbfc09b50c982d1255a3726fa7ca6f",
+      "content": [
+        "content/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-26-gastarife-vergleichen-vor-dem-herbst.jpg",
+      "status": "abweichend",
+      "sha256": "06bebed0b97181a186ab1ca62825ad07628163e52ccd9174fd887ead0aa01bfc",
+      "vergleich_sha256": "e0cf40fabc26a584ee4a48fa286c52bb192a14a7d3cd0f4af2ae1c0bc3ad0f48",
+      "content": [
+        "content/posts/2026-10-26-gastarife-vergleichen-vor-dem-herbst/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht.jpg",
+      "status": "abweichend",
+      "sha256": "6b114e7b050d0967c2d9debb3abbc89f54767a19aea25fa036da2e2ae9341e9e",
+      "vergleich_sha256": "b0c12a2ee0216f7e6fb306d89df9a3c59280d33dd22a1ad3383f0927286772e8",
+      "content": [
+        "content/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/2026-10-28-dsl-und-internet-flat-guenstig-sichern.jpg",
+      "status": "abweichend",
+      "sha256": "f2a14d75f60218b60bfe6a445a158673501506825b3038dde2ff4e421927d57a",
+      "vergleich_sha256": "726385e6cbdaa83ae0c62895055c3b8513183e3bf014545b566e0a351265e2f4",
+      "content": [
+        "content/posts/2026-10-28-dsl-und-internet-flat-guenstig-sichern/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar.jpg",
+      "status": "abweichend",
+      "sha256": "b24d6533fa737c4c6532d5f183d510a99220d5334e7547f52dac1d0db98e1246",
+      "vergleich_sha256": "dd658a3ea4a53b09247aeaaf86d76e1d57c980a6c9776eb1e870532192b1257a",
+      "content": [
+        "content/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-10-30-energieeffiziente-geraete-so-sinken-deine-fixkosten.jpg",
+      "status": "abweichend",
+      "sha256": "6fe08c68ce6db555c842e7959f2395d9d60dd648cc60b7429068aa74457572d0",
+      "vergleich_sha256": "d48042b29bffedb1557c9717e48a8e9ba1aa4230e43af1f33c8b85e57d92e756",
+      "content": [
+        "content/posts/2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen.jpg",
+      "status": "abweichend",
+      "sha256": "fa67ab1b1d126c6451503817faa50d3a30a754c4040421743b77363dd33be78a",
+      "vergleich_sha256": "41c96daac8c9d9094fa73f5d391dd3198248019bcb9472cb8df6491678d40160",
+      "content": [
+        "content/posts/2026-11-01-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem.jpg",
+      "status": "abweichend",
+      "sha256": "73282c43e6512f6aa48954902582eb307bb8fce05275bc2b7c92b5db1484664a",
+      "vergleich_sha256": "dcad3a5f0ee912f205fba1575bcdaf4329523cb558976a339ca4f0d4855f6cac",
+      "content": [
+        "content/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden.jpg",
+      "status": "abweichend",
+      "sha256": "06d73739fc006d415919a382f2740213962733ce65cf21b959a7df3bb8bb2d21",
+      "vergleich_sha256": "88882dc0eb09ba04fd4a5477f35e3c19a0e48fea22de22e7ad86c7c8e558f34b",
+      "content": [
+        "content/posts/2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck.jpg",
+      "status": "abweichend",
+      "sha256": "a80bdca2d6160bfbc99af3a4edb8a88aea260e6a8b83e82c6bf41afd8deccb24",
+      "vergleich_sha256": "633c77b36ce4287e319b4a142c545f7fe44d0bb48221ed1b88db76aed7dda1c5",
+      "content": [
+        "content/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/index.md"
+      ],
+      "entwuerfe": 1
+    },
+    {
+      "image": "images/covers/brand-franksfinanzcheck.jpg",
+      "status": "abweichend",
+      "sha256": "0ba639e4c0b31da8798c9436d064aa461c3467b76325fad5311a18ecd1b40bf0",
+      "vergleich_sha256": "1bb78f35c1732c2b187cb04de566e3dc9dcc2ae82e78468e8ac42e1ba0ccd6dd",
+      "content": [
+        "content/newsletter/index.md",
+        "content/newsletter-checkliste/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/pillar-frugalismus.jpg",
+      "status": "byte_identisch",
+      "sha256": "d8013bfc6fde442b73e82783d54a8cd3b7e790d60b8b4178e6b7b79b33460094",
+      "vergleich_sha256": "d8013bfc6fde442b73e82783d54a8cd3b7e790d60b8b4178e6b7b79b33460094",
+      "content": [
+        "content/pillar/frugalismus/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/pillar-internet-dsl.jpg",
+      "status": "byte_identisch",
+      "sha256": "52bdeb96f2c7b9a624b93f9da542573ccad61586fe28e1cdb924fb63509a489e",
+      "vergleich_sha256": "52bdeb96f2c7b9a624b93f9da542573ccad61586fe28e1cdb924fb63509a489e",
+      "content": [
+        "content/pillar/internet-dsl/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/pillar-konto-karten.jpg",
+      "status": "byte_identisch",
+      "sha256": "a5fcb35dab9df65b63692ac76c6c6e48d53ba4ea146c8e76bdf658694048358b",
+      "vergleich_sha256": "a5fcb35dab9df65b63692ac76c6c6e48d53ba4ea146c8e76bdf658694048358b",
+      "content": [
+        "content/pillar/konto-karten/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/pillar-mietwagen.jpg",
+      "status": "byte_identisch",
+      "sha256": "1e436b739061147e64cf99da411cb32e89f0ffd95fc15e88dc4ef1218886c868",
+      "vergleich_sha256": "1e436b739061147e64cf99da411cb32e89f0ffd95fc15e88dc4ef1218886c868",
+      "content": [
+        "content/pillar/mietwagen/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/pillar-strom-sparen.jpg",
+      "status": "byte_identisch",
+      "sha256": "08944678bd92d6701e7cd27fd2cfb7bfd5868f34e0c2e46c68fa4bf98719a9c1",
+      "vergleich_sha256": "08944678bd92d6701e7cd27fd2cfb7bfd5868f34e0c2e46c68fa4bf98719a9c1",
+      "content": [
+        "content/pillar/strom-sparen/index.md"
+      ],
+      "entwuerfe": 0
+    },
+    {
+      "image": "images/covers/pillar-versicherungen.jpg",
+      "status": "byte_identisch",
+      "sha256": "a8fd1245de4b587ca73c1b6d00a005c07a1b051c1ac520d8a075efcce45e8474",
+      "vergleich_sha256": "a8fd1245de4b587ca73c1b6d00a005c07a1b051c1ac520d8a075efcce45e8474",
+      "content": [
+        "content/pillar/versicherungen/index.md"
+      ],
+      "entwuerfe": 0
+    }
+  ]
+}
