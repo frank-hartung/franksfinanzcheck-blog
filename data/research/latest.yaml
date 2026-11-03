@@ -1,5 +1,5 @@
-generated_at: '2026-11-02T11:40:22Z'
-day: '2026-11-02'
+generated_at: '2026-11-03T11:19:42Z'
+day: '2026-11-03'
 mode: deterministic
 teams:
   trending:
@@ -252,60 +252,62 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 'Balkon bepflanzen: So senkst du die Gemüsekosten'
+  - topic: 7 Gewohnheiten für finanzielle Freiheit
     pillar: frugalismus
     signal: niche_hook
-    source: 'topics:Balkon bepflanzen: So senkst du die Gemüsekosten'
+    source: topics:7 Gewohnheiten für finanzielle Freiheit
     score: 0.55
-    keywords:
-    - Balkon Gemüse
-    - Kräuter ziehen
-    - Gemüse selber ziehen
-  - topic: Günstige Reiseversicherungen für den Sommerurlaub finden
-    pillar: versicherungen
-    signal: niche_hook
-    source: topics:Günstige Reiseversicherungen für den Sommerurlaub finden
-    score: 0.55
-    keywords:
-    - Reiseversicherung
-    - Sommerurlaub
-    - Versicherungsvergleich
-  - topic: Reiseversicherungen im Test
-    pillar: versicherungen
-    signal: niche_hook
-    source: topics:Reiseversicherungen im Test
-    score: 0.55
-    keywords:
-    - Reise
-    - Versicherung
-    - Test
-  - topic: 'Stromanbieter wechseln: Tarife prüfen und Kosten senken'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Stromanbieter wechseln: Tarife prüfen und Kosten senken'
-    score: 0.55
-    keywords:
-    - Stromanbieter wechseln
-    - Stromvergleich
-    - Stromkosten senken
-  - topic: Stromspar-Apps im Test für den Haushalt
-    pillar: strom-sparen
-    signal: niche_hook
-    source: topics:Stromspar-Apps im Test für den Haushalt
-    score: 0.55
-    keywords:
-    - Stromspar-Apps
-    - Haushalt
-    - Test
-  - topic: Wie du beim Mietwagenkauf Geld sparen kannst
+    keywords: []
+  - topic: 'Billig fliegen im Winter: 10 Geheimtipps'
     pillar: mietwagen
     signal: niche_hook
-    source: topics:Wie du beim Mietwagenkauf Geld sparen kannst
+    source: 'topics:Billig fliegen im Winter: 10 Geheimtipps'
     score: 0.55
     keywords:
-    - Mietwagenkauf
-    - Geld sparen
-    - Tipps
+    - Flugvergleich
+    - Billigflüge
+    - Reisekosten sparen
+  - topic: Kreditkarten mit attraktiven Prämien und Leistungen
+    pillar: konto-karten
+    signal: niche_hook
+    source: topics:Kreditkarten mit attraktiven Prämien und Leistungen
+    score: 0.55
+    keywords:
+    - Kreditkarten
+    - Prämien
+    - Leistungen
+  - topic: 'Tagesgeld-Hopping 2026: Lohnt sich der Zins-Wechsel für Neukunden noch?'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Tagesgeld-Hopping 2026: Lohnt sich der Zins-Wechsel für Neukunden
+      noch?'
+    score: 0.55
+    keywords:
+    - Tagesgeld Neukundenzins
+    - Zinshopping Zinseszins
+    - Geld sicher anlegen 2026
+    - Tagesgeldkonto Zinsgarantie
+  - topic: Vergleich von Hausratversicherungen und wie du sparst
+    pillar: versicherungen
+    signal: niche_hook
+    source: topics:Vergleich von Hausratversicherungen und wie du sparst
+    score: 0.55
+    keywords:
+    - Hausratversicherung
+    - Vergleich
+    - sparen
+  - topic: 'Versteckte Fremdwährungsgebühren: Welche Reisekreditkarte 2026 wirklich
+      0 % verlangt'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Versteckte Fremdwährungsgebühren: Welche Reisekreditkarte 2026
+      wirklich 0 % verlangt'
+    score: 0.55
+    keywords:
+    - Kreditkarte ohne Fremdwährungsgebühr
+    - Reisekreditkarte Vergleich 2026
+    - Geld abheben im Ausland kostenlos
+    - Visa Mastercard ohne Gebühren
 live_web:
   enabled: false
   findings: []
