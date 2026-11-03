@@ -251,7 +251,8 @@ Wenn die 42 weg sind, ist F4 grün, das Scorecard-Ticket schließt sich selbst
    der 996-Rückfallschutz genau das verbietet. Das ist **redaktioneller Text**
    und ändert den Artikel-Hash (Release-Siegel) – deshalb hier nicht
    mitgeändert, sondern benannt. Der Test bleibt scharf; die Zeile wird
-   redaktionell ersetzt, dann neu versiegelt.
+   redaktionell ersetzt, dann neu versiegelt – eigener Vorgang:
+   **Issue #1036** (`qualitaet`).
 2. **`python3 scripts/release_scorecard.py --live --streng` lief hier nicht
    vollständig**, weil im Sandbox kein `hugo` und kein `public/` existiert
    (`M2-siegel-bindung`/`T7-render-beweis` brauchen den Build). Die
