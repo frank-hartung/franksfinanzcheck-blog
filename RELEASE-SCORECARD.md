@@ -1,6 +1,6 @@
 # Release-Scorecard – die Produktionswahrheit
 
-**Stand:** 2026-11-03 · **Modus:** kandidaten · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
+**Stand:** 2026-11-03 · **Modus:** live · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
 
 > Eine Zeile pro Artikel, acht Dimensionen, ein Wahrheitsort. Was hier rot ist, ist rot – nichts wird weggeklammert.
 
@@ -83,7 +83,7 @@
 | `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-03 | **blockiert** |
 | `2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-11-21 | **freigabe-reif** |
 | `2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-11-21 | **freigabe-reif** |
-| `2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-06 | **freigabe-reif** |
+| `2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-03 | **blockiert** |
 | `2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-21 | **freigabe-reif** |
 | `2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-23 | **freigabe-reif** |
 | `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-20 | **freigabe-reif** |
@@ -91,7 +91,7 @@
 | `2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-05 | **freigabe-reif** |
 | `2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-21 | **freigabe-reif** |
 | `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-20 | **freigabe-reif** |
-| `2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-06 | **freigabe-reif** |
+| `2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-03 | **blockiert** |
 | `2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-21 | **freigabe-reif** |
 | `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-20 | **freigabe-reif** |
 | `2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-20 | **freigabe-reif** |
@@ -106,7 +106,7 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 
 | Check | Dimension | Wirkung | Entscheidet | Artikel |
 |---|---|---|---|---|
-| **F4-fachbefund** | faktenalter | blockiert | Mensch (Herausgeber/Redaktion) | 13 |
+| **F4-fachbefund** | faktenalter | blockiert | Mensch (Herausgeber/Redaktion) | 15 |
 | **RD2-einzigartigkeit** | redundanz | blockiert | Mensch (Herausgeber/Redaktion) | 3 |
 | **RD1-duplikate** | redundanz | blockiert | Maschine (deterministisch) | 2 |
 | **T5-lesbarkeit** | technik | blockiert | Maschine (deterministisch) | 2 |
@@ -117,7 +117,7 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 
 ## Offene Fachbefunde (F4) – was die Redaktion entscheiden muss
 
-**73** offene Befunde auf **17** Seiten (live: 53 auf 13 Artikeln) · ältester **4 Tage** · Frist 14 Tage · über der Frist: **0**.
+**88** offene Befunde auf **20** Seiten (live: 63 auf 15 Artikeln) · ältester **4 Tage** · Frist 14 Tage · über der Frist: **0**.
 
 **Ein Prüfdatum schließt keinen Fachbefund.** F1 (Alter) und F4 (Inhalt) sind getrennte Verträge; die Maschine entscheidet nie fachlich. Die Arbeitsdatei mit jeder Befund-ID, dem Fassungsstand und dem fertigen Entscheidungsbefehl ist `BEFUND-AKTE.md` (`python3 scripts/faktenfrische_befund_akte.py --schreiben`).
 
@@ -139,12 +139,12 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 | Angebot | 4,00/Tag (Budget 4 × 1,00 Läufe/Tag) |
 | **Deckung** | **146 %** |
 | Rückstand abgebaut | **nicht abbaubar** im Horizont |
-| Nächste Frist | `2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen` am 2026-11-06 (in 3 Tagen) |
+| Nächste Frist | `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren` am 2026-11-11 (in 8 Tagen) |
 | Empfohlenes Budget | 4 je Lauf (Limit 10) |
 
 ✅ Deckung ausreichend: Der Takt kann den Bestand halten. Ein roter Faktenstand ist damit ein echter Inhaltsbefund (F4), kein Kadenz-Artefakt.
 
-## Blockierende Funde (13 Artikel)
+## Blockierende Funde (15 Artikel)
 
 ### `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas` (blockiert, Risikoklasse standard)
 
@@ -205,6 +205,14 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 
 - **F4-fachbefund** [faktenalter]: 089b89138417e63a3dcf (luecke): Es fehlt der für Campingbuchungen relevante Regulierungsrahmen (Unterscheidung Mietrecht bei Stellplätzen vs. Reiserecht), den die Fundstelle für den Bereich Reise nur allgemein andeutet.; 1158934e7a18c7b2099b (luecke): Die Preisangabe von 20 bis 45 € pro Nacht wird als realistischer Wert positioniert, ist jedoch nicht durch Marktdaten oder eine Referenzstelle in den Fundstellen belegt.; 3716cfd3ab5aec6d774b (praezision): Der Verweis auf die Verbraucherzentrale zur Prüfung von Buchungsangaben führt auf eine allgemeine Übersichtsseite ohne konkrete Checklisten für Camping-Angebote.
 
+### `2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen` (blockiert, Risikoklasse standard)
+
+- **F4-fachbefund** [faktenalter]: 7067eabb89a917ae67a4 (luecke): Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu unklaren Angeboten und Problemen mit Online-Buchungen.; af2ccb4222eeb195222f (praezision): Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht automatisch, ob das Auto zum individuellen Urlaub passt – ohne Messgröße bleibt die Aussage ungenau.; d9c8b522bf1dcaed0340 (luecke): Die Verbraucherzentrale beschreibt, dass sich eine Pauschalreise unter bestimmten Bedingungen auf eine andere Person übertragen lässt.; e2975509f3f130de0755 (luecke): Die Verbraucherzentrale empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im Blick zu behalten.; f1704e45e970a8f4b078 (luecke): Bei einer Pauschalreise gilt die Mitteilung als rechtzeitig, wenn sie dem Veranstalter spätestens sieben Tage vor Reisebeginn zugeht (§ 651e BGB).
+
+### `2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig` (blockiert, Risikoklasse standard)
+
+- **F4-fachbefund** [faktenalter]: 34e4bb2acfa235699da5 (luecke): Der Artikel erwähnt keinen regulatorischen Rahmen (z. B. Bundesnetzagentur) obwohl diese Institution für Strom‑ und Gasmärkte zuständig ist.; 42b9d842341d892d42d0 (luecke): Angaben zu staatlichen Zuschüssen (bis zu 70 %) und deren Auswirkung auf den Eigenanteil fehlen eine Quellenangabe.; 866d8b711dc2de369444 (luecke): Hinweis, dass ein spezieller Stromtarif für Wärmepumpen die Kosten senkt, wird nicht durch eine Quelle belegt.; bd4c46a336f33a639f05 (luecke): Preisannahmen für Strom (30 ¢/kWh), Gas (10 ¢/kWh) und CO₂‑Aufschlag (5 ¢/kWh) werden ohne belegbare Daten präsentiert.; e76768fdef3ef5afa026 (luecke): Die behauptete Amortisationsdauer von 10‑12 Jahren für eine Wärmepumpe basiert auf einer Modellrechnung ohne nachweisbare Quelle.
+
 ## Warnungen ohne Blockade (2 Artikel)
 
 - `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` – T1w-zeichenlaenge-optimum: Zeichenlänge ueber-optimum (18140 Zeichen, Optimum 12.000–18.000)
@@ -244,7 +252,7 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 | `2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten` | standard | nicht erforderlich | frisch geprüft vor 4 Tagen (Intervall 45 Tage) | 2026-12-14 |
 | `2026-11-01-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen` | standard | nicht erforderlich | frisch geprüft vor 4 Tagen (Intervall 30 Tage) | 2026-11-29 |
 | `2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck` | standard | nicht erforderlich | frisch geprüft vor 2 Tagen (Intervall 45 Tage) | 2026-12-16 |
-| `2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu` | standard | nicht erforderlich | frisch geprüft vor 27 Tagen (Intervall 30 Tage) | 2026-11-06 |
+| `2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu` | standard | nicht erforderlich | frisch geprüft vor 0 Tagen (Intervall 30 Tage) | 2026-12-03 |
 | `2026-11-02-last-minute-urlaubsangebote-sichern` | standard | nicht erforderlich | frisch geprüft vor 0 Tagen (Intervall 30 Tage) | 2026-12-03 |
 
 ## Ausnahmen (Falsch-Alarm-Protokoll)

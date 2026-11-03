@@ -1,0 +1,79 @@
+{
+  "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+  "titel": "Urlaub sparen: Budget, Buchung und Kosten im Blick",
+  "erzeugt": "2026-11-03 12:17 UTC",
+  "faellig": {
+    "faellig": false,
+    "prio": 9,
+    "klasse": "saisonal",
+    "grund": "frisch geprüft vor 27 Tagen (Intervall 30 Tage)",
+    "alter_tage": 27,
+    "intervall": 30,
+    "frist": "2026-11-06",
+    "restlaufzeit": 3
+  },
+  "geo": {
+    "punkte": 5,
+    "maximum": 6,
+    "prozent": 83,
+    "offen": [
+      "Mindestens eine Tabelle (extrahierbare Struktur)"
+    ],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": true,
+      "zahlen": true,
+      "tabelle": false,
+      "faktencheck": true
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite verbraucherzentrale.de",
+      "url": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "datum": "",
+      "quelle": "verbraucherzentrale.de",
+      "kanal": "web",
+      "auszug": "Title: Reise & Mobilität\n\nURL Source: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet\n\nMarkdown Content:\n[Direkt zum Inhalt](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet#main-content)\n\n*   [Preise, Tarife, Anbieterwechsel](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel) \n    *   [Strom sparen](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen) \n    *   [Heizen und Warmwasser](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser) \n    *   [Energetische Sanierung](https://www.verbraucherzentrale.de/wissen/energie/energetische-sanierung) \n    *   [Erneuerbare Energien](https://www.verbraucherzentrale.de/wissen/energie/erneuerbare-energien) \n    *   [Förderprogramme](https://www.verbraucherzentrale.de/wissen/energie/foerderprogramme) \n    *   [E-Mobilität](https://www.verbraucherzentrale.de/wissen/energie/emobilitaet) \n    *   [Probleme mit Verträgen und Rechnungen](https://www.verbraucherzentrale.de/wissen/energie/probleme-mit-vertraegen-und-rechnungen)\n\n*   [Reise](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet)\n\n## [Reise](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet)\n\n*   [Urlaub buchen](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen) \n    *   [Hotels und Ferienhäuser](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/hotels-und-ferienhaeuser) \n    *   [Unterwegs sein](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/unterwegs-sein) \n    *   [E-Mobilität](https://www.verbraucherzentrale.de/wissen/energie/emobilitaet)\n\n### [Reise-Spezial: Urlaub](https://www.verbraucherzentrale.de/reisespezial-tipps-fuer-urlauber)\n\nFlug- oder Reisedaten geändert? Rechte für Urlaub...\n\n### [Musterbriefe](https://www.verbraucherzen",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Verbraucherzentrale",
+      "rang": 2,
+      "zitierbar": false
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Die Verbraucherzentrale empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im Blick zu behalten.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu unklaren Angeboten und Problemen mit Online-Buchungen.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Verbraucherzentrale beschreibt, dass sich eine Pauschalreise unter bestimmten Bedingungen auf eine andere Person übertragen lässt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "luecke",
+      "text": "Bei einer Pauschalreise gilt die Mitteilung als rechtzeitig, wenn sie dem Veranstalter spätestens sieben Tage vor Reisebeginn zugeht (§ 651e BGB).",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "praezision",
+      "text": "Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht automatisch, ob das Auto zum individuellen Urlaub passt – ohne Messgröße bleibt die Aussage ungenau.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    }
+  ],
+  "fehler": [
+    "Verbraucherzentrale – Reise: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+  ],
+  "fassung_sha256": "d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06",
+  "text_sha256": null,
+  "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)"
+}

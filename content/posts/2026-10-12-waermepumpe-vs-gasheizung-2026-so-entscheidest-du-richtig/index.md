@@ -32,7 +32,7 @@ quellen:
     titel: "Bundesnetzagentur - Energie"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
-faktencheck: 2026-10-07
+faktencheck: 2026-11-03
 kurzantwort: "Eine moderne Wärmepumpe senkt die laufenden Heizkosten im Vergleich zu einer neuen Gasheizung oft deutlich, weil sie Umweltwärme nutzt und die steigende CO₂-Abgabe vermeidet. Die Beispielrechnung im Artikel zeigt, ab welchem Wärmebedarf und Förderanteil sich der höhere Kaufpreis für dein Haus rechnet."
 ---
 

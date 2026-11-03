@@ -2,9 +2,9 @@
   {
     "suchbegriff": "100 mbit internet monatlich kündbar",
     "clicks": 0,
-    "impressions": 13,
+    "impressions": 25,
     "ctr": 0.0,
-    "position": 50.31
+    "position": 50.0
   },
   {
     "suchbegriff": "250 mbit internet monatlich kündbar",
@@ -12,6 +12,13 @@
     "impressions": 3,
     "ctr": 0.0,
     "position": 60.67
+  },
+  {
+    "suchbegriff": "50 mbit internet monatlich kündbar",
+    "clicks": 0,
+    "impressions": 2,
+    "ctr": 0.0,
+    "position": 50.0
   },
   {
     "suchbegriff": "angebote zur kostenkontrolle",
@@ -30,9 +37,9 @@
   {
     "suchbegriff": "dauerhafte kostenkontrolle",
     "clicks": 0,
-    "impressions": 9,
+    "impressions": 10,
     "ctr": 0.0,
-    "position": 64.33
+    "position": 62.7
   },
   {
     "suchbegriff": "dsl mobilfunk",
@@ -44,9 +51,9 @@
   {
     "suchbegriff": "dsl und mobilfunk",
     "clicks": 0,
-    "impressions": 2,
+    "impressions": 3,
     "ctr": 0.0,
-    "position": 12.5
+    "position": 11.33
   },
   {
     "suchbegriff": "dsl volumentarif",
@@ -121,9 +128,16 @@
   {
     "suchbegriff": "frank dsl",
     "clicks": 0,
-    "impressions": 6,
+    "impressions": 9,
     "ctr": 0.0,
-    "position": 7.0
+    "position": 7.11
+  },
+  {
+    "suchbegriff": "haftpflichtversicherung rückwirkend",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 48.0
   },
   {
     "suchbegriff": "haushaltskosten reduzieren",
@@ -145,6 +159,13 @@
     "impressions": 1,
     "ctr": 0.0,
     "position": 73.0
+  },
+  {
+    "suchbegriff": "internet gebühren",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 86.0
   },
   {
     "suchbegriff": "internet kündigen",
@@ -170,9 +191,16 @@
   {
     "suchbegriff": "internetkosten",
     "clicks": 0,
+    "impressions": 3,
+    "ctr": 0.0,
+    "position": 49.33
+  },
+  {
+    "suchbegriff": "konto eröffnen kostenlos",
+    "clicks": 0,
     "impressions": 1,
     "ctr": 0.0,
-    "position": 25.0
+    "position": 67.0
   },
   {
     "suchbegriff": "konto umsonst",
@@ -266,6 +294,13 @@
     "position": 62.0
   },
   {
+    "suchbegriff": "ohne girokonto",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 84.0
+  },
+  {
     "suchbegriff": "referenzkonto",
     "clicks": 0,
     "impressions": 3,
@@ -287,11 +322,25 @@
     "position": 43.33
   },
   {
+    "suchbegriff": "taktung 60 1",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 65.0
+  },
+  {
     "suchbegriff": "tankkartenantrag ohne kaution",
     "clicks": 0,
     "impressions": 2,
     "ctr": 0.0,
     "position": 56.0
+  },
+  {
+    "suchbegriff": "wartungskosten reduzieren",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 14.0
   },
   {
     "suchbegriff": "wie kann ich die kosten für energieversorgung reduzieren?",

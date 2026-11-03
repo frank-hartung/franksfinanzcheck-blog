@@ -1,16 +1,16 @@
 {
-  "erzeugt": "2026-11-03 10:25 UTC",
+  "erzeugt": "2026-11-03 12:18 UTC",
   "uebersicht": {
     "gesamt": 112,
     "ratgeber": 6,
-    "faellig": 3,
-    "vorlauf": 4,
-    "bearbeitet": 4,
+    "faellig": 0,
+    "vorlauf": 3,
+    "bearbeitet": 3,
     "budget": 4,
     "budget_quelle": "Auto-Skalierung (Deckungsrechnung)",
     "geo_schnitt": 94,
-    "befunde": 73,
-    "befunde_im_lauf": 16,
+    "befunde": 88,
+    "befunde_im_lauf": 15,
     "fachbefunde": [
       {
         "typ": "praezision",
@@ -490,6 +490,106 @@
         "zuletzt_gesehen": "2026-11-03 10:25 UTC"
       },
       {
+        "typ": "luecke",
+        "text": "Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu unklaren Angeboten und Problemen mit Online-Buchungen.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "7067eabb89a917ae67a4",
+        "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+        "fassung_sha256": "d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht automatisch, ob das Auto zum individuellen Urlaub passt – ohne Messgröße bleibt die Aussage ungenau.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "af2ccb4222eeb195222f",
+        "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+        "fassung_sha256": "d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Verbraucherzentrale beschreibt, dass sich eine Pauschalreise unter bestimmten Bedingungen auf eine andere Person übertragen lässt.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "d9c8b522bf1dcaed0340",
+        "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+        "fassung_sha256": "d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Verbraucherzentrale empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im Blick zu behalten.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "e2975509f3f130de0755",
+        "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+        "fassung_sha256": "d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Bei einer Pauschalreise gilt die Mitteilung als rechtzeitig, wenn sie dem Veranstalter spätestens sieben Tage vor Reisebeginn zugeht (§ 651e BGB).",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "f1704e45e970a8f4b078",
+        "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+        "fassung_sha256": "d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der Artikel erwähnt keinen regulatorischen Rahmen (z. B. Bundesnetzagentur) obwohl diese Institution für Strom‑ und Gasmärkte zuständig ist.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "34e4bb2acfa235699da5",
+        "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+        "fassung_sha256": "af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Angaben zu staatlichen Zuschüssen (bis zu 70 %) und deren Auswirkung auf den Eigenanteil fehlen eine Quellenangabe.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "42b9d842341d892d42d0",
+        "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+        "fassung_sha256": "af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Hinweis, dass ein spezieller Stromtarif für Wärmepumpen die Kosten senkt, wird nicht durch eine Quelle belegt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "866d8b711dc2de369444",
+        "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+        "fassung_sha256": "af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Preisannahmen für Strom (30 ¢/kWh), Gas (10 ¢/kWh) und CO₂‑Aufschlag (5 ¢/kWh) werden ohne belegbare Daten präsentiert.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "bd4c46a336f33a639f05",
+        "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+        "fassung_sha256": "af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die behauptete Amortisationsdauer von 10‑12 Jahren für eine Wärmepumpe basiert auf einer Modellrechnung ohne nachweisbare Quelle.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "e76768fdef3ef5afa026",
+        "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+        "fassung_sha256": "af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+      },
+      {
         "id": "05be346e82c80b2a8664",
         "slug": "2026-10-28-dsl-und-internet-flat-guenstig-sichern",
         "fassung_sha256": "legacy-unbekannt",
@@ -583,6 +683,56 @@
         "beleg": "",
         "zuletzt_gesehen": "2026-10-31 10:34 UTC",
         "herkunft": "dossier-nachlese"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "0b564f460c41218244bd",
+        "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+        "fassung_sha256": "c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Aussage, dass durch frühzeitige Bestellung Kosten um 10 % bis 20 % im Herbst eingespart werden können, ist unbelegt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "3ad2eefed314eb172c26",
+        "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+        "fassung_sha256": "c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Modellrechnung verwendet einen Tiefpreis von 0,80 €/Liter, ohne dass diese Preisangabe belegt wird.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "43788c2cdcdfda52e753",
+        "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+        "fassung_sha256": "c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Es wird angegeben, dass typische Fehler beim Heizölkauf bis zu 15 % Mehrkosten verursachen können, jedoch fehlt ein Nachweis für diese Zahl.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "5eedec8afbdef6a4ca49",
+        "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+        "fassung_sha256": "c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Die Faustregel, dass man bestellen sollte, wenn Preise vier Wochen unter dem Schnitt der letzten 12 Monate liegen, wird ohne Messgrundlage oder Quelle genannt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "81881c5bc61824d25f5a",
+        "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+        "fassung_sha256": "c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
       },
       {
         "typ": "luecke",
@@ -680,12 +830,11 @@
       "Mindestens eine Tabelle (extrahierbare Struktur)": 12,
       "Kurzantwort-Box (direkte Antwort für AI Overviews)": 15,
       "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 3,
-      "Sichtbares Prüfdatum (`faktencheck:`)": 1,
       "FAQ-Abschnitt (FAQPage-Schema, Antwortmaschinen-Futter)": 3
     },
     "deckung_prozent": 146.3,
     "bedarf_je_woche": 19.1,
-    "abbau_tage": 0,
+    "abbau_tage": null,
     "nachhol_frist_tage": 7,
     "abbrueche": 0
   },
@@ -1168,6 +1317,106 @@
       "zuletzt_gesehen": "2026-11-03 10:25 UTC"
     },
     {
+      "typ": "luecke",
+      "text": "Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu unklaren Angeboten und Problemen mit Online-Buchungen.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "7067eabb89a917ae67a4",
+      "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+      "fassung_sha256": "d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+    },
+    {
+      "typ": "praezision",
+      "text": "Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht automatisch, ob das Auto zum individuellen Urlaub passt – ohne Messgröße bleibt die Aussage ungenau.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "af2ccb4222eeb195222f",
+      "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+      "fassung_sha256": "d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Verbraucherzentrale beschreibt, dass sich eine Pauschalreise unter bestimmten Bedingungen auf eine andere Person übertragen lässt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "d9c8b522bf1dcaed0340",
+      "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+      "fassung_sha256": "d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Verbraucherzentrale empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im Blick zu behalten.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "e2975509f3f130de0755",
+      "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+      "fassung_sha256": "d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Bei einer Pauschalreise gilt die Mitteilung als rechtzeitig, wenn sie dem Veranstalter spätestens sieben Tage vor Reisebeginn zugeht (§ 651e BGB).",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "f1704e45e970a8f4b078",
+      "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+      "fassung_sha256": "d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der Artikel erwähnt keinen regulatorischen Rahmen (z. B. Bundesnetzagentur) obwohl diese Institution für Strom‑ und Gasmärkte zuständig ist.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "34e4bb2acfa235699da5",
+      "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+      "fassung_sha256": "af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Angaben zu staatlichen Zuschüssen (bis zu 70 %) und deren Auswirkung auf den Eigenanteil fehlen eine Quellenangabe.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "42b9d842341d892d42d0",
+      "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+      "fassung_sha256": "af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Hinweis, dass ein spezieller Stromtarif für Wärmepumpen die Kosten senkt, wird nicht durch eine Quelle belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "866d8b711dc2de369444",
+      "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+      "fassung_sha256": "af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Preisannahmen für Strom (30 ¢/kWh), Gas (10 ¢/kWh) und CO₂‑Aufschlag (5 ¢/kWh) werden ohne belegbare Daten präsentiert.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "bd4c46a336f33a639f05",
+      "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+      "fassung_sha256": "af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die behauptete Amortisationsdauer von 10‑12 Jahren für eine Wärmepumpe basiert auf einer Modellrechnung ohne nachweisbare Quelle.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "e76768fdef3ef5afa026",
+      "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+      "fassung_sha256": "af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+    },
+    {
       "id": "05be346e82c80b2a8664",
       "slug": "2026-10-28-dsl-und-internet-flat-guenstig-sichern",
       "fassung_sha256": "legacy-unbekannt",
@@ -1264,6 +1513,56 @@
     },
     {
       "typ": "luecke",
+      "text": "Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "0b564f460c41218244bd",
+      "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "fassung_sha256": "c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Aussage, dass durch frühzeitige Bestellung Kosten um 10 % bis 20 % im Herbst eingespart werden können, ist unbelegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "3ad2eefed314eb172c26",
+      "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "fassung_sha256": "c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Modellrechnung verwendet einen Tiefpreis von 0,80 €/Liter, ohne dass diese Preisangabe belegt wird.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "43788c2cdcdfda52e753",
+      "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "fassung_sha256": "c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Es wird angegeben, dass typische Fehler beim Heizölkauf bis zu 15 % Mehrkosten verursachen können, jedoch fehlt ein Nachweis für diese Zahl.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "5eedec8afbdef6a4ca49",
+      "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "fassung_sha256": "c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Faustregel, dass man bestellen sollte, wenn Preise vier Wochen unter dem Schnitt der letzten 12 Monate liegen, wird ohne Messgrundlage oder Quelle genannt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "81881c5bc61824d25f5a",
+      "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "fassung_sha256": "c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+    },
+    {
+      "typ": "luecke",
       "text": "Die 50‑30‑20‑Regel für die Urlaubsbudget‑Aufteilung wird ohne Quellenangabe präsentiert.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
       "id": "0a2bec9dc02e16c057ee",
@@ -1356,11 +1655,11 @@
   "kapazitaet": {
     "stichtag": "2026-11-03",
     "artikel": 112,
-    "faellig": 3,
+    "faellig": 0,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
-      "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+      "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
       "frist": "2026-11-06",
       "restlaufzeit": 3
     },
@@ -1373,7 +1672,7 @@
     "horizont_tage": 120,
     "vorlauf_tage": 7,
     "nachhol_frist_tage": 7,
-    "abbau_tage": 0,
+    "abbau_tage": null,
     "verletzungen_alt": 0,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
@@ -1384,71 +1683,47 @@
     "rueckstand_abgebaut": true
   },
   "abbrueche": [],
-  "offen": [
+  "offen": [],
+  "laeufe": [
     {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
       "titel": "Urlaub sparen: Budget, Buchung und Kosten im Blick",
-      "grund": "frisch geprüft vor 27 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-06",
-      "geo": 83
-    },
-    {
-      "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
-      "titel": "Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig",
-      "grund": "frisch geprüft vor 27 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-06",
-      "geo": 100
-    },
-    {
-      "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "titel": "Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden",
-      "grund": "frisch geprüft vor 27 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-06",
-      "geo": 100
-    }
-  ],
-  "laeufe": [
-    {
-      "slug": "2026-11-02-last-minute-urlaubsangebote-sichern",
-      "titel": "Last-Minute Urlaubsangebote sichern",
-      "fassung_sha256": "6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2",
+      "fassung_sha256": "d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06",
+      "text_sha256": null,
       "bereich": "artikel",
-      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "grund": "frisch geprüft vor 27 Tagen (Intervall 30 Tage)",
       "treffer": 1,
       "quellen": 1,
       "befunde": [
         {
           "typ": "luecke",
-          "text": "Die Angabe, dass das Weglassen der Vollkasko‑Selbstbeteiligung die Kosten um 10 % bis 20 % senken kann, ist nicht mit einer Quelle belegt.",
+          "text": "Die Verbraucherzentrale empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im Blick zu behalten.",
           "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
         },
         {
           "typ": "luecke",
-          "text": "Die 50‑30‑20‑Regel für die Urlaubsbudget‑Aufteilung wird ohne Quellenangabe präsentiert.",
+          "text": "Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu unklaren Angeboten und Problemen mit Online-Buchungen.",
           "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
         },
         {
           "typ": "luecke",
-          "text": "Die Behauptung, dass Last‑Minute‑Deals wegen Restkapazitäten zu niedrigeren Preisen führen, fehlt eine fundierte Quelle.",
+          "text": "Die Verbraucherzentrale beschreibt, dass sich eine Pauschalreise unter bestimmten Bedingungen auf eine andere Person übertragen lässt.",
           "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
         },
         {
           "typ": "luecke",
-          "text": "Die Aussage, dass Stornogebühren häufig einem Tagespreis entsprechen, ist unbelegt.",
+          "text": "Bei einer Pauschalreise gilt die Mitteilung als rechtzeitig, wenn sie dem Veranstalter spätestens sieben Tage vor Reisebeginn zugeht (§ 651e BGB).",
           "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
         },
         {
           "typ": "praezision",
-          "text": "Die Empfehlung, ausschließlich CHECK24 für den Mietwagenvergleich zu nutzen, ist ein unqualifiziertes Superlativ ohne Messgrundlage.",
+          "text": "Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht automatisch, ob das Auto zum individuellen Urlaub passt – ohne Messgröße bleibt die Aussage ungenau.",
           "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
         }
       ],
-      "geo": 50,
+      "geo": 83,
       "fehler": [
-        "Verbraucherzentrale – Reise: Abruf fehlgeschlagen (The read operation timed out)"
+        "Verbraucherzentrale – Reise: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
       ],
       "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)",
       "aenderungen": [
@@ -1456,88 +1731,56 @@
       ]
     },
     {
-      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
-      "titel": "Gasabschlag berechnen: So planst du die Heizsaison richtig",
-      "fassung_sha256": "642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8",
+      "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+      "titel": "Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig",
+      "fassung_sha256": "af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96",
+      "text_sha256": null,
       "bereich": "artikel",
-      "grund": "30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "grund": "frisch geprüft vor 27 Tagen (Intervall 30 Tage)",
       "treffer": 1,
       "quellen": 1,
       "befunde": [
         {
           "typ": "luecke",
-          "text": "Die Aussage, dass die Grundversorgung fast immer der teuerste Tarif ist, wird nicht durch eine Quelle belegt.",
+          "text": "Angaben zu staatlichen Zuschüssen (bis zu 70 %) und deren Auswirkung auf den Eigenanteil fehlen eine Quellenangabe.",
           "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
           "typ": "luecke",
-          "text": "Die Angabe, dass ein Grad weniger Raumtemperatur rund 6 % Heizenergie einspart, fehlt eine Quellenangabe.",
+          "text": "Preisannahmen für Strom (30 ¢/kWh), Gas (10 ¢/kWh) und CO₂‑Aufschlag (5 ¢/kWh) werden ohne belegbare Daten präsentiert.",
           "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
           "typ": "luecke",
-          "text": "Die Behauptung, der Grundtarif der Stadtwerke sei ausschließlich eine Notversorgung und nie ein Bestpreis, ist unbelegt.",
+          "text": "Die behauptete Amortisationsdauer von 10‑12 Jahren für eine Wärmepumpe basiert auf einer Modellrechnung ohne nachweisbare Quelle.",
           "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
           "typ": "luecke",
-          "text": "Das Sonderkündigungsrecht bei Preiserhöhungen im Winter wird genannt, ohne regulatorische Grundlage zu nennen.",
+          "text": "Hinweis, dass ein spezieller Stromtarif für Wärmepumpen die Kosten senkt, wird nicht durch eine Quelle belegt.",
           "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
-          "typ": "praezision",
-          "text": "Die Angabe, dass Anbieter den Abschlag auf elf oder zwölf Raten verteilen, ist ohne Beleg ungenau, da die Ratenzahl vertraglich variieren kann.",
+          "typ": "luecke",
+          "text": "Der Artikel erwähnt keinen regulatorischen Rahmen (z. B. Bundesnetzagentur) obwohl diese Institution für Strom‑ und Gasmärkte zuständig ist.",
           "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         }
       ],
       "geo": 100,
       "fehler": [
         "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
-        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (The read operation timed out)"
+        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
       ],
-      "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)",
+      "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b)",
       "aenderungen": [
         "faktencheck: 2026-11-03"
       ]
     },
     {
-      "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
-      "titel": "Weihnachten Budget planen: Ohne Schulden durch die Feiertage",
-      "fassung_sha256": "7203c0f7cedd638a87bafcfcd5fc6e920ab79959793f832239386b0690ac776f",
-      "bereich": "artikel",
-      "grund": "30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-      "treffer": 1,
-      "quellen": 1,
-      "befunde": [
-        {
-          "typ": "luecke",
-          "text": "Die Modellrechnung für das Weihnachtsbudget (600 €) lässt die aktuelle Teuerungsrate unberücksichtigt. Laut Statistischen Bundesamt liegt die Inflationsrate im Oktober 2026 bei +2,8 %, was als Referenzwert für die Budgetplanung zum Vorjahr fehlt.",
-          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
-        },
-        {
-          "typ": "praezision",
-          "text": "Die Pauschale für 'Anreise und Mobilität' (10 % des Budgets) berücksichtigt nicht die überdurchschnittliche Preissteigerung bei Energie von +14,9 %, die Fahrtkosten im Vergleich zum Vorjahr massiv verteuern kann.",
-          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
-        },
-        {
-          "typ": "praezision",
-          "text": "Während der Artikel vor hohen Kosten für Festmenüs warnt, liegt die Preissteigerung bei Nahrungsmitteln laut Destatis im Oktober 2026 bei lediglich +0,4 % und damit deutlich unter der allgemeinen Inflation.",
-          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
-        }
-      ],
-      "geo": 100,
-      "fehler": [
-        "Statistisches Bundesamt – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
-      ],
-      "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)",
-      "aenderungen": [
-        "faktencheck: 2026-11-03"
-      ]
-    },
-    {
-      "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
-      "titel": "Campingurlaub planen: Budget für Platz und Fahrt",
-      "fassung_sha256": "4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7",
+      "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "titel": "Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden",
+      "fassung_sha256": "c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546",
+      "text_sha256": null,
       "bereich": "artikel",
       "grund": "frisch geprüft vor 27 Tagen (Intervall 30 Tage)",
       "treffer": 1,
@@ -1545,25 +1788,36 @@
       "befunde": [
         {
           "typ": "luecke",
-          "text": "Die Preisangabe von 20 bis 45 € pro Nacht wird als realistischer Wert positioniert, ist jedoch nicht durch Marktdaten oder eine Referenzstelle in den Fundstellen belegt.",
-          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+          "text": "Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
           "typ": "luecke",
-          "text": "Es fehlt der für Campingbuchungen relevante Regulierungsrahmen (Unterscheidung Mietrecht bei Stellplätzen vs. Reiserecht), den die Fundstelle für den Bereich Reise nur allgemein andeutet.",
-          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+          "text": "Es wird angegeben, dass typische Fehler beim Heizölkauf bis zu 15 % Mehrkosten verursachen können, jedoch fehlt ein Nachweis für diese Zahl.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Modellrechnung verwendet einen Tiefpreis von 0,80 €/Liter, ohne dass diese Preisangabe belegt wird.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Aussage, dass durch frühzeitige Bestellung Kosten um 10 % bis 20 % im Herbst eingespart werden können, ist unbelegt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
           "typ": "praezision",
-          "text": "Der Verweis auf die Verbraucherzentrale zur Prüfung von Buchungsangaben führt auf eine allgemeine Übersichtsseite ohne konkrete Checklisten für Camping-Angebote.",
-          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+          "text": "Die Faustregel, dass man bestellen sollte, wenn Preise vier Wochen unter dem Schnitt der letzten 12 Monate liegen, wird ohne Messgrundlage oder Quelle genannt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         }
       ],
-      "geo": 83,
+      "geo": 100,
       "fehler": [
-        "Verbraucherzentrale – Reise: Abruf fehlgeschlagen (The read operation timed out)"
+        "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
+        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
       ],
-      "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)",
+      "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b)",
       "aenderungen": [
         "faktencheck: 2026-11-03"
       ]

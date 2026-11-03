@@ -28,6 +28,10 @@ die Reparatur in fünf Richtungen fest:
   4. VORLAUF: Arbeit beginnt vor der roten Kante, nicht an ihr.
   5. Der REPO-ZUSTAND ist gedeckt – die Kadenz hält den Bestand, und die
      Scorecard nennt die Ursache statt nur das Symptom.
+  6. #1023: Das C45-Urteil prüft den PLAN, den der Lauf wirklich fährt
+     (bei Auto-Skalierung das empfohlene Budget), nicht den Sockel als
+     vermeintlichen Alltag. Reserve unter dem harten Limit ist Pflicht;
+     Dauer-Spitzenbetrieb und strukturelle Unterdeckung sind rot.
 
 Alle Proben laufen gegen eingefrorene Tage (Uhr-Zwang, `selftest_clock`):
 Ein Test, der die Wanduhr liest, ist eine Verabredung mit dem Kalender.
@@ -310,6 +314,69 @@ class EmpfehlungTest(unittest.TestCase):
         self.assertEqual((budget, info["quelle"]), (1, "--max"))
 
 
+class C45UrteilTest(unittest.TestCase):
+    """Das Urteil der Deckungswache ist rein und prüfbar (C45, #1023).
+
+    Der Vertrag darf nicht eine zweite, abweichende Schwelle erfinden.
+    Diese Probe hält die drei Zustände fest, die #1023 ausgelöst haben:
+    Plan mit Reserve (grün), Dauer-Spitzenbetrieb (rot) und strukturelle
+    Unterdeckung (rot).
+    """
+
+    def basis(self, **overrides):
+        werte = {
+            "seiten": 112, "bedarf": 2.73, "mindest": 110, "laeufe": 1.0,
+            "sockel": 4, "limit": 10, "budget": 4,
+            "kapazitaet": 4.0, "kapazitaet_spitze": 10.0,
+            "auto": True, "empfehlung_erreicht": True,
+            "plan_puenktlich": True, "plan_rueckstand_abgebaut": True,
+        }
+        werte.update(overrides)
+        return werte
+
+    def test_plan_mit_reserve_ist_gruen(self):
+        self.assertEqual(kap.c45_urteil(self.basis()), [])
+
+    def test_dauer_spitzenbetrieb_ist_rot(self):
+        funde = kap.c45_urteil(self.basis(budget=10, kapazitaet=10.0))
+        self.assertTrue(any("Dauer-Spitzenbetrieb" in f for f in funde))
+
+    def test_unterdeckung_ist_rot(self):
+        funde = kap.c45_urteil(self.basis(budget=3, kapazitaet=3.0))
+        self.assertTrue(any("unterdeckt" in f for f in funde))
+
+    def test_strukturelle_unterdeckung_ist_rot(self):
+        funde = kap.c45_urteil(self.basis(
+            budget=10, kapazitaet=10.0, empfehlung_erreicht=False))
+        self.assertTrue(any("strukturell" in f for f in funde))
+
+    def test_fester_sockel_ist_pruefbar(self):
+        # Ohne Auto-Skalierung ist der Sockel der Plan – hier mit Reserve.
+        self.assertEqual(kap.c45_urteil(self.basis(auto=False)), [])
+
+    def test_sockel_ueber_limit_ist_rot(self):
+        funde = kap.c45_urteil(self.basis(
+            sockel=11, limit=10, budget=11, kapazitaet=11.0,
+            kapazitaet_spitze=10.0))
+        self.assertTrue(any("Ungültiger Korridor" in f for f in funde))
+
+    def test_fristbruch_ist_rot(self):
+        funde = kap.c45_urteil(self.basis(plan_puenktlich=False))
+        self.assertTrue(any("Frist" in f for f in funde))
+
+    def test_zu_kleines_limit_ist_rot(self):
+        funde = kap.c45_urteil(self.basis(
+            bedarf=20.0, budget=10, kapazitaet=10.0, kapazitaet_spitze=10.0))
+        self.assertTrue(any("strukturell" in f for f in funde))
+
+    def test_deckung_liefert_das_urteil(self):
+        import governance_contract as gc
+        zahlen, fehler = gc._c45_deckung()
+        self.assertIsNone(fehler, fehler)
+        self.assertIn("urteil", zahlen)
+        self.assertEqual(zahlen["urteil"], [])
+
+
 class RepoZustandTest(unittest.TestCase):
     """Der ausgelieferte Zustand selbst muss gedeckt sein – sonst ist #912 zurück."""
 
@@ -329,24 +396,37 @@ class RepoZustandTest(unittest.TestCase):
         self.assertTrue(budget["auto_skalierung"],
                         "Ein festes Budget unter wachsendem Bestand war #912")
 
-    def test_kadenz_deckt_den_bestand_statisch(self):
+    def test_kadenz_deckt_den_bestand(self):
         laeufe, hinweise = kap.laeufe_aus_workflow()
         self.assertIsNotNone(laeufe, f"Laufplan nicht lesbar: {hinweise}")
         bedarf = kap.bedarf_je_tag(self.artikel, self.cfg)
         vorgaben = kap.budget_vorgaben(self.cfg)
         mindest = int(kap.planung(self.cfg)["min_deckung_prozent"])
-        # Der Alltag (Sockel), nicht die Spitze (hartes Limit), muss den
-        # Bedarf decken – sonst ist die Kadenz nur rechnerisch grün.
-        kapazitaet = kap.kapazitaet_je_tag(int(vorgaben["max_artikel_pro_lauf"]),
-                                           laeufe)
+        sockel = int(vorgaben["max_artikel_pro_lauf"])
+        limit = int(vorgaben["hartes_limit_pro_lauf"])
+        auto = bool(vorgaben.get("auto_skalierung"))
+        # Der Plan, den der Lauf wirklich fährt: bei Auto-Skalierung das
+        # empfohlene Budget (Sockel als Untergrenze), sonst der Sockel.
+        empfehlung = kap.empfohlenes_budget(self.artikel, self.cfg, laeufe,
+                                            PROBETAG)
+        budget = max(sockel, int(empfehlung["budget"])) if auto else sockel
+        kapazitaet = kap.kapazitaet_je_tag(budget, laeufe)
         self.assertGreater(
             kapazitaet, bedarf * mindest / 100.0,
             f"Kadenz unterdeckt: {kapazitaet:.2f}/Tag gegen {bedarf:.2f}/Tag "
             f"Bedarf ({mindest} % verlangt) – #912 kommt zurück")
-        spitze = kap.kapazitaet_je_tag(int(vorgaben["hartes_limit_pro_lauf"]),
-                                       laeufe)
+        # Reserve: Der Plan darf das harte Limit nicht vollständig
+        # verbrauchen – sonst ist die Kadenz nur im Dauer-Spitzenbetrieb
+        # grün (#1023).
+        self.assertLess(budget, limit,
+                        "Der Plan verbraucht das harte Limit vollständig – "
+                        "Dauer-Spitzenbetrieb statt Reserve (#1023)")
+        self.assertTrue(empfehlung["erreicht"],
+                        "Auch das harte Limit baut den Rückstand nicht "
+                        "fristgerecht ab (#912)")
+        spitze = kap.kapazitaet_je_tag(limit, laeufe)
         self.assertGreaterEqual(spitze, kapazitaet,
-                                "hartes Limit muss über dem Sockel liegen")
+                                "hartes Limit muss über dem Plan liegen")
 
     def test_empfehlung_ist_im_korridor(self):
         laeufe, _ = kap.laeufe_aus_workflow()

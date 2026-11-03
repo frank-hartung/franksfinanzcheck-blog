@@ -1,6 +1,91 @@
 {
-  "generated": "2026-10-27",
-  "count": 0,
+  "generated": "2026-11-03",
+  "count": 2,
   "kopplungs_warnungen": [],
-  "queue": []
+  "queue": [
+    {
+      "id": "bdew-haushaltsstrompreis",
+      "name": "BDEW-Strompreisanalyse: Haushaltsstrompreis",
+      "einheit": "ct/kWh",
+      "ist_wert": "37,0",
+      "stand": "2026-09-28",
+      "rhythmus_tage": 30,
+      "alter_tage": 36,
+      "ymyl": true,
+      "quelle": "BDEW-Strompreisanalyse (Herbst 2026)",
+      "quelle_url": "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/",
+      "signale": [],
+      "artikel": [
+        {
+          "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+          "titel": "Energiediebe stoppen: So kannst du Stromfresser finden",
+          "lastmod": "2026-09-28"
+        },
+        {
+          "slug": "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt",
+          "titel": "Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt",
+          "lastmod": "2026-10-13"
+        },
+        {
+          "slug": "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser",
+          "titel": "Standby Kosten reduzieren: So entlarvst du Stromfresser",
+          "lastmod": "2026-09-28"
+        },
+        {
+          "slug": "pillar/strom-sparen",
+          "titel": "Strom & Gas sparen: Ratgeber für niedrige Energiekosten",
+          "lastmod": "2026-10-28"
+        }
+      ],
+      "prioritaet": "P2",
+      "status": "FÄLLIG (Prüfintervall überschritten)"
+    },
+    {
+      "id": "bdew-gaspreis-efh",
+      "name": "BDEW-Gaspreisanalyse: Gaspreis Einfamilienhaus",
+      "einheit": "ct/kWh",
+      "ist_wert": "11,93",
+      "stand": "2026-09-28",
+      "rhythmus_tage": 30,
+      "alter_tage": 36,
+      "ymyl": true,
+      "quelle": "BDEW-Gaspreisanalyse (August 2026)",
+      "quelle_url": "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/",
+      "signale": [],
+      "artikel": [
+        {
+          "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+          "titel": "Sicher heizen: Was sie abdeckt und wie lange sie läuft",
+          "lastmod": "2026-11-03"
+        },
+        {
+          "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+          "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
+          "lastmod": "2026-11-03"
+        },
+        {
+          "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+          "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
+          "lastmod": "2026-11-03"
+        },
+        {
+          "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+          "titel": "Preisgarantie Gas: Was bei Preiserhöhung hilft",
+          "lastmod": "2026-11-03"
+        },
+        {
+          "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+          "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
+          "lastmod": "2026-09-28"
+        },
+        {
+          "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+          "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
+          "lastmod": "2026-10-10"
+        }
+      ],
+      "prioritaet": "P2",
+      "status": "FÄLLIG (Prüfintervall überschritten)"
+    }
+  ]
 }

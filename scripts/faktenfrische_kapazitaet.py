@@ -447,6 +447,105 @@ def empfohlenes_budget(artikel: list[dict], cfg: dict, laeufe: float,
 
 
 # ============================================================
+#  C45-Urteil: Plan, Reserve und Dauer-Spitze getrennt (#1023)
+# ============================================================
+C45_SSOT_PFAD = "data/agent_reach/faktenfrische.yaml"
+
+
+def c45_urteil(zahlen: dict, ssot_pfad: str = C45_SSOT_PFAD) -> list[str]:
+    """Das Urteil der Deckungswache – rein, ohne Dateizugriff.
+
+    `zahlen` sind die Messwerte aus `_c45_deckung` (Governance-Vertrag)
+    oder aus dem Hauptlauf. Diese Funktion ist die EINE Urteilsstelle:
+    Der Vertrag darf nicht eine zweite, abweichende Schwelle erfinden
+    (C19, Lektion #521). Sie prüft den Plan, den der Lauf wirklich
+    fährt – nicht den Sockel als vermeintlichen Alltag.
+
+    Der Sockel ist die Untergrenze, das harte Limit die Obergrenze.
+    Bei `auto_skalierung` ist das empfohlene Budget der Plan; es muss
+    den Bedarf decken und unter dem Limit bleiben (Reserve). Ohne
+    Auto-Skalierung ist der Sockel der Plan. Eine Kadenz, die nur mit
+    dauerhaft ausgereiztem Limit aufgeht, ist ein Dauer-Stau.
+    """
+    seiten = int(zahlen["seiten"])
+    bedarf = float(zahlen["bedarf"])
+    mindest = int(zahlen["mindest"])
+    laeufe = float(zahlen["laeufe"])
+    sockel = int(zahlen["sockel"])
+    limit = int(zahlen["limit"])
+    budget = int(zahlen["budget"])
+    kapazitaet = float(zahlen["kapazitaet"])
+    kapazitaet_spitze = float(zahlen["kapazitaet_spitze"])
+    auto = bool(zahlen.get("auto"))
+    erreicht = bool(zahlen.get("empfehlung_erreicht", True))
+    puenktlich = bool(zahlen.get("plan_puenktlich", True))
+    rueckstand = bool(zahlen.get("plan_rueckstand_abgebaut", True))
+    noetig = bedarf * mindest / 100.0
+    funde: list[str] = []
+
+    if sockel > limit:
+        funde.append(
+            f"Ungültiger Korridor: Sockel {sockel} > hartes Limit {limit} – "
+            f"{ssot_pfad} muss einen Sockel unter dem Limit nennen (#912).")
+    if kapazitaet_spitze + 1e-9 < noetig:
+        funde.append(
+            f"Kadenz strukturell unterdeckt: {seiten} Seiten brauchen "
+            f"{bedarf:.2f} Prüfungen/Tag ({noetig:.2f} bei {mindest} % "
+            f"Mindestdeckung); selbst das harte Limit von {limit} je Lauf "
+            f"liefert nur {kapazitaet_spitze:.2f}/Tag. Takt, Limit oder "
+            f"Intervall in {ssot_pfad} entscheiden (#912).")
+        return funde
+    if auto:
+        if not erreicht:
+            funde.append(
+                f"Kadenz strukturell unterdeckt: {seiten} Seiten brauchen "
+                f"{bedarf:.2f} Prüfungen/Tag ({noetig:.2f} bei {mindest} % "
+                f"Mindestdeckung); auch das harte Limit von {limit} je Lauf "
+                f"({kapazitaet_spitze:.2f}/Tag) baut den Rückstand nicht "
+                f"fristgerecht ab. Takt, Limit oder Intervall in "
+                f"{ssot_pfad} entscheiden (#912).")
+        elif budget >= limit:
+            funde.append(
+                f"Frischhalte-Kadenz nur im Dauer-Spitzenbetrieb: {seiten} "
+                f"Seiten brauchen {bedarf:.2f} Prüfungen/Tag ({noetig:.2f} "
+                f"bei {mindest} % Mindestdeckung); der Plan verbraucht das "
+                f"harte Limit von {limit} je Lauf "
+                f"({kapazitaet_spitze:.2f}/Tag) vollständig. Ohne Reserve "
+                f"ist das ein Dauer-Stau. Limit oder Intervall in "
+                f"{ssot_pfad} entscheiden (#912).")
+        elif kapazitaet + 1e-9 < noetig:
+            funde.append(
+                f"Frischhalte-Kadenz unterdeckt: {seiten} Seiten brauchen "
+                f"{bedarf:.2f} Prüfungen/Tag ({noetig:.2f} bei {mindest} % "
+                f"Mindestdeckung), der Lauf liefert {kapazitaet:.2f}/Tag "
+                f"({budget} je Lauf × {laeufe:.2f} Läufe/Tag). Takt, Limit "
+                f"oder Intervall in {ssot_pfad} entscheiden (#912).")
+    else:
+        if kapazitaet + 1e-9 < noetig:
+            funde.append(
+                f"Frischhalte-Kadenz unterdeckt: {seiten} Seiten brauchen "
+                f"{bedarf:.2f} Prüfungen/Tag ({noetig:.2f} bei {mindest} % "
+                f"Mindestdeckung), der Sockel liefert {kapazitaet:.2f}/Tag "
+                f"({budget} je Lauf × {laeufe:.2f} Läufe/Tag); selbst mit "
+                f"dem harten Limit wären es {kapazitaet_spitze:.2f}/Tag. "
+                f"Takt, Limit oder Intervall in {ssot_pfad} entscheiden "
+                f"(#912).")
+        elif budget >= limit:
+            funde.append(
+                f"Frischhalte-Kadenz nur im Dauer-Spitzenbetrieb: {seiten} "
+                f"Seiten brauchen {bedarf:.2f} Prüfungen/Tag ({noetig:.2f} "
+                f"bei {mindest} % Mindestdeckung); der Sockel verbraucht "
+                f"das harte Limit von {limit} je Lauf vollständig. "
+                f"Limit oder Intervall in {ssot_pfad} entscheiden (#912).")
+    if not puenktlich or not rueckstand:
+        funde.append(
+            f"Der Plan reißt eine Frist oder baut den Rückstand nicht "
+            f"fristgerecht ab ({budget} je Lauf × {laeufe:.2f} Läufe/Tag). "
+            f"Die Deckungsrechnung nennt die Ursache (#912).")
+    return funde
+
+
+# ============================================================
 #  Texte
 # ============================================================
 def _zahl(wert: float, stellen: int = 2) -> str:
@@ -631,6 +730,33 @@ def selftest() -> int:
     zeilen = "\n".join(diagnose_zeilen(p_schwach, markdown=False))
     pruefe("ST11a", "Deckung 43 %" in zeilen, True)
     pruefe("ST11b", p_schwach["rueckstand_abgebaut"], False)
+
+    # ST12 – C45-Urteil: Plan, Reserve und Dauer-Spitze getrennt (#1023)
+    basis = {
+        "seiten": 112, "bedarf": 2.73, "mindest": 110, "laeufe": 1.0,
+        "sockel": 4, "limit": 10, "budget": 4,
+        "kapazitaet": 4.0, "kapazitaet_spitze": 10.0,
+        "auto": True, "empfehlung_erreicht": True,
+        "plan_puenktlich": True, "plan_rueckstand_abgebaut": True,
+    }
+    pruefe("ST12a", c45_urteil(basis), [])
+    pruefe("ST12b", any("Dauer-Spitzenbetrieb" in f
+                        for f in c45_urteil(dict(basis, budget=10,
+                                                 kapazitaet=10.0))), True)
+    pruefe("ST12c", any("unterdeckt" in f
+                        for f in c45_urteil(dict(basis, budget=3,
+                                                 kapazitaet=3.0))), True)
+    pruefe("ST12d", any("strukturell" in f
+                        for f in c45_urteil(dict(basis, budget=10,
+                                                 kapazitaet=10.0,
+                                                 empfehlung_erreicht=False))), True)
+    pruefe("ST12e", c45_urteil(dict(basis, auto=False)), [])
+    pruefe("ST12f", any("Ungültiger Korridor" in f
+                        for f in c45_urteil(dict(basis, sockel=11, limit=10,
+                                                 budget=11, kapazitaet=11.0,
+                                                 kapazitaet_spitze=10.0))), True)
+    pruefe("ST12g", any("Frist" in f
+                        for f in c45_urteil(dict(basis, plan_puenktlich=False))), True)
 
     if fehler:
         print("❌ Selbsttest Faktenfrische-Kapazität rot:")
