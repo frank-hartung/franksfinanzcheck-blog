@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-03
 title: "Sicher heizen: Was sie abdeckt und wie lange sie läuft"
-description: "Gaspreisgarantie verständlich erklärt: Welche Preisbestandteile geschützt sind, wann sich der Aufpreis lohnen kann und wie du Klausel und Gesamtpreis prüfst."
+description: "Gaspreisgarantie verständlich erklärt: Welche Teile geschützt sind, wann sich der Aufpreis lohnt und wie du Klausel und Gesamtpreis prüfst."
 date: 2026-08-10T09:29:05Z
 draft: false
 tags: ["Heizkosten senken", "Gastarif wechseln"]

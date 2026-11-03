@@ -115,7 +115,7 @@ vorbereiten“ gewählt. **Zu entscheiden ist je Befund an der Fassung,
 an der er gesehen wurde** (Queue-Hash) – nicht an der heutigen Datei.
 Deshalb stehen hier die Queue-Hashes; `--fassung` (heutige Datei)
 läge daneben falsch. Zur Einordnung die heutigen Datei-Hashes (neues
-Hash-Material inkl. Pins): 10.08. `a95ff888…c6dd`, 12.08. `76f69a8b…c3a3`,
+Hash-Material inkl. Pins): 10.08. `a5a72b18…27d8d3`, 12.08. `76f69a8b…c3a3`,
 14.08. `cc4616f2…7f31`, 24.08. `5cfa88ca…53f`.
 
 Nach eigener Sichtung der korrigierten Artikel diesen Block – mit

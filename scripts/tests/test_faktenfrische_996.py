@@ -206,7 +206,7 @@ class Systemik996(unittest.TestCase):
                 # läuft ehrlich über lastmod.
                 self.assertEqual(str(fm['faktencheck']), '2026-11-01')
                 self.assertGreaterEqual(str(fm['lastmod']), '2026-11-03')
-                self.assertTrue(70 <= len(fm['description']) <= 165,
+                self.assertTrue(70 <= len(fm["description"]) <= 155,
                                 fm['description'])
                 self.assertFalse(fm['draft'])
 
