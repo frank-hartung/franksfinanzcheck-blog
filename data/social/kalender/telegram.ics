@@ -6,24 +6,9 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekas
- se-fuellen:nutzen:2026-11-03@franksfinanzcheck.de
-DTSTAMP:20261103T125208Z
-DTSTART:20261103T170000Z
-DTEND:20261103T171500Z
-SUMMARY:Telegram (Kanal): Strategisch sparen: So kannst du deine Reise
- kasse füllen (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sp
- aren-so-kannst-du-deine-reisekasse-fuellen/
-URL:https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-s
- o-kannst-du-deine-reisekasse-fuellen/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
 UID:telegram:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstiger
  en-konto:nutzen:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261103T125208Z
+DTSTAMP:20261103T201009Z
 DTSTART:20261108T060000Z
 DTEND:20261108T061500Z
 SUMMARY:Telegram (Kanal): Bankgebühren senken: 7 Schritte zum günstige
@@ -38,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartr
  icks:nutzen:2026-11-14@franksfinanzcheck.de
-DTSTAMP:20261103T125208Z
+DTSTAMP:20261103T201009Z
 DTSTART:20261114T060000Z
 DTEND:20261114T061500Z
 SUMMARY:Telegram (Kanal): Energieeffizienz im Haushalt: 5 schnelle Spa
@@ -53,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-
  monatlichen:nutzen:2026-11-15@franksfinanzcheck.de
-DTSTAMP:20261103T125208Z
+DTSTAMP:20261103T201009Z
 DTSTART:20261115T060000Z
 DTEND:20261115T061500Z
 SUMMARY:Telegram (Kanal): ETF-Sparplan starten: Deine Schritt-für-Schr

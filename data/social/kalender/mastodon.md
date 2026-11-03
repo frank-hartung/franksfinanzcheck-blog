@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 03.11.2026 13:52 (Europe/Berlin)  
+> Automatisch aktualisiert: 03.11.2026 21:10 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Di, 03. November 2026
-- **11:30** ⏳ Energiediebe stoppen: So kannst du Stromfresser finden — _frage_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/
 ### Mi, 04. November 2026
 - **07:30** ⏳ Haushaltsbuch führen: App, Excel oder Stift im Vergleich — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/
@@ -39,6 +36,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 03.11.2026 21:09 · Energiediebe stoppen: So kannst du Stromfresser finden → https://mastodon.social/@FranksFinanzcheck/117554322337329380
 - ✅ 03.11.2026 13:52 · Privathaftpflicht: Warum so wichtig und was sie kostet → https://mastodon.social/@FranksFinanzcheck/117552600058173229
 - ✅ 03.11.2026 00:08 · DSL-Vergleich: So findest du den günstigsten Internettarif → https://mastodon.social/@FranksFinanzcheck/117549362262666799
 - ✅ 02.11.2026 14:38 · Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 → https://mastodon.social/@FranksFinanzcheck/117547119746092264
@@ -48,7 +46,6 @@
 - ✅ 29.10.2026 19:59 · Strategisch sparen: So kannst du deine Reisekasse füllen → https://mastodon.social/@FranksFinanzcheck/117525734870640551
 - ✅ 29.10.2026 12:35 · DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis → https://mastodon.social/@FranksFinanzcheck/117523988347549679
 - ✅ 28.10.2026 19:55 · Gasrechnung senken: Fehler im Spätsommer vermeiden → https://mastodon.social/@FranksFinanzcheck/117520055691320012
-- ✅ 28.10.2026 12:25 · ETF-Sparplan starten: Dein Schritt-für-Schritt-Anleitung → https://mastodon.social/@FranksFinanzcheck/117518286645334223
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

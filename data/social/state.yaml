@@ -1312,6 +1312,25 @@ history:
     \ ⚖️  \n#Privathaftpflicht #Versicherung"
   ref: '117552600058173229'
   ai: true
+- posted_at: '2026-11-03T21:09:57.967633+01:00'
+  channel: mastodon
+  slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+  title: 'Energiediebe stoppen: So kannst du Stromfresser finden'
+  angle: frage
+  url: https://mastodon.social/@FranksFinanzcheck/117554322337329380
+  ok: true
+  text: 'Energiediebe stoppen?
+
+
+    Stromfresser findest du am zuverlässigsten mit einem Energiekostenmessgerät.
+
+
+    https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+
+    #Stromsparen #Energiekosten #StromkostenSenken #EnergiediebeStoppen'
+  ref: '117554322337329380'
+  ai: false
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1337,4 +1356,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-11-03T13:52:08.206173+01:00'
+updated_at: '2026-11-03T21:10:08.228062+01:00'
