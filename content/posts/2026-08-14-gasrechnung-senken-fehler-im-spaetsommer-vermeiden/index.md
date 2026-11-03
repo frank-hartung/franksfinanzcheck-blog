@@ -17,7 +17,7 @@ kurzantwort: "Die teuersten Spätsommer-Fehler sind ein ungeprüfter Tarif, ein 
 social_posted: true
 keywords: ["Gasrechnung senken", "Heizkosten senken", "Gastarif wechseln", "Heizung entlüften", "Gasvergleich", "Gaspreisgarantie", "Gas spare"]
 pin_title: "Gastarife vergleichen: Jetzt vor der Heizperiode wechseln"
-pin_description: "*Werbung | Gasrechnung senken: Fünf teure Fehler vor der Heizperiode: So prüfst du Gasrechnung, Abschlag, Tarif und Heizung, ohne Einsparungen doppelt zu zählen. Mehr Spartipps auf FranksFinanzcheck! #gasrechnung #senken #heizkosten"
+pin_description: "*Werbung | Der Spätsommer ist die beste Zeit für den Gaswechsel – bevor die Heizperiode die Preise hochtreibt. Vergleiche jetzt Gastarife mit Preisgarantie und Wechselboni. 5 Minuten Aufwand, mehrere hundert Euro Ersparnis möglich. Jetzt Angebote sichern!"
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
   - titel: "Arten der Energiebelieferung"
