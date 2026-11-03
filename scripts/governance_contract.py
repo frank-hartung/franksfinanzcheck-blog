@@ -70,6 +70,14 @@ ohne Netzwerk, ohne API, determinisch. Läuft lokal, im Premium-Governance-Lauf
                      Release-Scorecard war deshalb jeden Tag rot, und Ticket
                      #912 war nicht schließbar. Reicht die Kapazität nicht,
                      wird der BAU rot, bevor der Bestand rot wird (#912)
+  C46 Fachbefund-Schließweg – jeder offene Fachbefund ist entscheidbar:
+                     Befund und Entscheidung hängen am TEXT (ohne Quellen),
+                     nicht an der Prüffassung – sonst macht die eigene
+                     Quellenpflege oder die Heilung des Textes den Befund
+                     unschließbar (21 von 57 am 03.11.2026). Entscheidung per
+                     Befehl mit Person und Begründung, Arbeitsliste
+                     BEFUND-AKTE.md mit Frist, und ein Scorecard-Ticket, das
+                     die Kadenz nur nennt, wenn F1 wirklich blockiert (#912)
   C18 Pflicht-Check     – der Anzeigename des PR-Gates (`Integritäts-Siegel`) ist
                      der Vertrag mit dem Branch-Schutz: Konstante = Workflow =
                      Ruleset. Kein `paths`-Filter, kein `if:` am Job, kein
@@ -176,6 +184,15 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # irgendwann niemand aus (C6).
           "faktenfrische_kapazitaet.py",
           "faktenfrische_befund_ledger.py",
+          # Schließweg der offenen Fachbefunde (03.11.2026, #912): Die
+          # Kadenz war geheilt, die Scorecard blieb rot – F4 blockierte
+          # zehn Artikel, und die Befunde waren an eine Fassung gebunden,
+          # die es nach der Heilung nicht mehr gab. Ohne diesen Schließweg
+          # ist jeder Alarm ein Dauerläufer (C14). Beide Wachen gehören
+          # ins vertragliche Minimum, sonst führt sie irgendwann niemand
+          # aus (C6).
+          "faktenfrische_befund_akte.py",
+          "scorecard_ticket.py",
           # Themennachschub-Wache (25.10.2026, WF-D4E0 / #821): Sie ist die
           # einzige Stelle, die den Vorlauf der AUTO-Bahn in Produktionstagen
           # meldet. Zwischen dem 19.10. und dem 25.10. fiel der Reserve-Vorrat
@@ -2247,6 +2264,8 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c43_geparktes_ziel_ist_kein_pin_ziel(script_texts, wflows, root=root)
     checks += c44_themen_nachschub(script_texts, wflows, root=root)
     checks += c45_frischhalte_deckung(script_texts, wflows, root=root)
+    checks += c46_befund_hat_schliessweg(script_texts, wflows, root=root,
+                                         python_bin=python_bin, quick=quick)
     checks += c47_grammatik_kongruenz(script_texts, wflows, root=root)
     return checks
 
@@ -3829,6 +3848,206 @@ def c45_frischhalte_deckung(script_texts, wflows, root=BLOG_DIR):
         if not os.path.isfile(os.path.join(root, "scripts", "tests", name)):
             out.append(("C45", f"scripts/tests/{name} fehlt – die Deckungs-"
                                "Zusage wäre ungetestet (#912)."))
+    return out
+
+
+# --- C46: Jeder offene Fachbefund ist entscheidbar (#912, 03.11.2026) --------
+#
+# BEFUND. Nach der Kadenz-Heilung (C45) blieb die Release-Scorecard rot:
+# „Bestand blockiert“, Dimension `faktenalter`. Am 02.11.2026 war F1 aber
+# grün (0 überfällig, 146 % Deckung); rot war F4 – 57 offene Fachbefunde auf
+# 13 Seiten, davon 42 auf zehn Live-Artikeln. Drei Fehler hielten das Ticket
+# offen, und alle drei waren Bedienfehler des Meldesystems, keine Inhaltsfrage:
+#
+#   a) DIE BINDUNG WAR EINE SPERRE. Befund und Entscheidung hingen am
+#      Prüf-Hash INKLUSIVE Quellen. Der Lauf schreibt die Quellen selbst und
+#      jede Textheilung ändert den Text – danach passte keine Entscheidung
+#      mehr zum Ledger. 21 der 57 Befunde standen am 03.11. an einem älteren
+#      Text, 20 ohne Hash (`legacy-unbekannt`): unschließbar, per Konstruktion.
+#   b) ES GAB KEINEN BEFEHL. Die Anleitung verlangte Handarbeit an einer
+#      YAML-Datei samt SHA-256. Ein Schließweg, den niemand gehen kann, ist
+#      kein Schließweg.
+#   c) DAS TICKET LOG. Bei jedem `faktenalter`-Fund behauptete der
+#      Workflow-Heredoc „Kadenz, kein Inhaltsbefund“ und „danach schließt
+#      sich dieses Ticket selbst“. Beides war am 02.11. nachweislich falsch.
+#
+# WAS C46 VERLANGT (Mechanik, keine Zustandszahl – ein Gate, das rot bleibt,
+# solange Menschen nicht entschieden haben, wäre der nächste Dauerläufer):
+#   a) Zwei Hashes: `pruef_hash` (inkl. Quellen, für die KI-Antwort) und
+#      `text_hash` (Aussageflächen, für die Entscheidung). Quellenpflege
+#      öffnet keine Entscheidung, eine Textänderung schon.
+#   b) Eine Entscheidung nennt `befund_fassung` UND `geprueft_fassung` –
+#      Zuordnung und tatsächlich gelesener Text. Auch Altbestand ohne Hash
+#      ist damit am heutigen Text entscheidbar.
+#   c) Ein Befehl statt Handarbeit: `--entscheiden` mit Person, Begründung
+#      und atomarem Schreiben; die Akte (`BEFUND-AKTE.md`) ist die
+#      Arbeitsliste, die Fristen stehen in der SSOT.
+#   d) Das Scorecard-Ticket ist eine getestete Funktion des Siegels: Es
+#      nennt je Check Besitz und Schließweg; die Kadenz-Behauptung erscheint
+#      nur, wenn F1 wirklich blockiert.
+#   e) Ein Vertrag ohne Test ist Prosa.
+C46_LEDGER = "faktenfrische_befund_ledger.py"
+C46_AKTE = "faktenfrische_befund_akte.py"
+C46_TICKET = "scorecard_ticket.py"
+C46_WORKFLOW = "faktenfrische.yml"
+C46_SCORECARD_WORKFLOW = "release-scorecard.yml"
+C46_SSOT = C45_SSOT
+C46_LEDGER_MARKER = ("def text_hash(", "def befunde_mit_status(",
+                     "def entscheidung_anfuegen(", "befund_fassung",
+                     "geprueft_fassung", "def wache(", "--entscheiden")
+C46_AKTE_MARKER = ("def akte_bauen(", "BEFUND-AKTE.md", "frist_tage",
+                   "eskalation_tage", "def wache(")
+C46_TICKET_MARKER = ("def ticket_body(", "F4-fachbefund", "BEFUND-AKTE.md",
+                     "wache-id: release-scorecard")
+# Die Behauptung, die am 02.11.2026 nachweislich falsch war. Sie darf im
+# Ticket-Generator nicht zurückkehren – auch nicht umformuliert im Workflow.
+C46_FALSCHE_URSACHE = "ausschließlich die Faktenfrische"
+C46_TESTS = ("test_faktenfrische_befund_akte.py", "test_scorecard_ticket.py")
+
+
+def c46_befund_hat_schliessweg(script_texts, wflows, root=BLOG_DIR,
+                               python_bin=None, quick=False):
+    """Jeder offene Fachbefund ist entscheidbar – und das Ticket sagt es."""
+    out = []
+    # a) Ledger: zwei Hashes und ein Befehl.
+    ledger_text = (script_texts or {}).get(C46_LEDGER, "")
+    if not ledger_text.strip():
+        out.append(("C46", f"scripts/{C46_LEDGER} fehlt – ohne entscheidbaren "
+                           "Befund bleibt F4 für immer rot (#912)."))
+    else:
+        for marker in C46_LEDGER_MARKER:
+            if marker not in ledger_text:
+                out.append(("C46", f"scripts/{C46_LEDGER}: `{marker}` fehlt – "
+                                   "Fassungsbindung oder Entscheidungsweg wäre "
+                                   "unvollständig (#912)."))
+    if C46_LEDGER not in GUARDS:
+        out.append(("C46", f"scripts/{C46_LEDGER} steht nicht im vertraglichen "
+                           "Minimum (C6) – sein Selbsttest liefe nie."))
+    # b) Akte: die Arbeitsliste mit Frist.
+    akte_text = (script_texts or {}).get(C46_AKTE, "")
+    if not akte_text.strip():
+        out.append(("C46", f"scripts/{C46_AKTE} fehlt – ohne Arbeitsliste ist "
+                           "der Schließweg eine Zumutung statt einer Anleitung."))
+    else:
+        for marker in C46_AKTE_MARKER:
+            if marker not in akte_text:
+                out.append(("C46", f"scripts/{C46_AKTE}: `{marker}` fehlt – "
+                                   "Arbeitsliste, Frist oder Wache wären "
+                                   "unvollständig (#912)."))
+    for name in (C46_LEDGER, C46_AKTE, C46_TICKET):
+        if name not in GUARDS:
+            out.append(("C46", f"scripts/{name} steht nicht im vertraglichen "
+                               "Minimum (C6) – sein Selbsttest liefe nie."))
+
+    # c) Die SSOT nennt die Fristen (menschlich kuratiert).
+    try:
+        import yaml                          # noqa: PLC0415
+        with open(os.path.join(root, C46_SSOT), encoding="utf-8") as fh:
+            ssot = yaml.safe_load(fh) or {}
+        block = ssot.get("befunde") if isinstance(ssot, dict) else None
+        block = block if isinstance(block, dict) else {}
+        for feld in ("frist_tage", "eskalation_tage"):
+            wert = block.get(feld)
+            if not isinstance(wert, int) or wert <= 0:
+                out.append(("C46", f"{C46_SSOT}: `befunde.{feld}` fehlt oder ist "
+                                   "keine positive Zahl – ohne Frist ist "
+                                   "„irgendwann“ der Plan (#912)."))
+    except Exception as exc:  # noqa: BLE001
+        out.append(("C46", f"{C46_SSOT} nicht lesbar: {exc}"))
+
+    # d) Der Fahrer: Akte schreiben, Wache fahren, Akte committen.
+    wf = ""
+    for pfad, inhalt in (wflows or {}).items():
+        if os.path.basename(str(pfad)) == C46_WORKFLOW:
+            wf = inhalt or ""
+    if not wf:
+        wf = _read(os.path.join(root, ".github", "workflows", C46_WORKFLOW))
+    if not wf:
+        out.append(("C46", f".github/workflows/{C46_WORKFLOW} fehlt – ohne "
+                           "Fahrer entsteht keine Akte."))
+    else:
+        if f"{C46_AKTE} --schreiben" not in wf:
+            out.append(("C46", f".github/workflows/{C46_WORKFLOW} schreibt die "
+                               "Befundakte nicht (`--schreiben`) – dann arbeitet "
+                               "die Redaktion auf einem alten Stand (#912)."))
+        if f"{C46_AKTE} --wache" not in wf:
+            out.append(("C46", f".github/workflows/{C46_WORKFLOW} fährt die "
+                               "Schließweg-Wache nicht (`--wache`) – ein "
+                               "unentscheidbarer Befund bliebe unbemerkt (#912)."))
+        if "BEFUND-AKTE.md" not in wf:
+            out.append(("C46", f".github/workflows/{C46_WORKFLOW} committet "
+                               "`BEFUND-AKTE.md` nicht – der Schließweg wäre "
+                               "außerhalb des Repos unsichtbar (#912)."))
+        if "gh issue close" not in wf:
+            out.append(("C46", f".github/workflows/{C46_WORKFLOW} schließt das "
+                               "Befund-Ticket nie – ein Alarm ohne Schließpfad "
+                               "ist ein Dauerläufer (C14)."))
+
+    # e) Das Ticket ist eine getestete Funktion – und nennt die echte Ursache.
+    ticket_text = (script_texts or {}).get(C46_TICKET, "")
+    if not ticket_text.strip():
+        out.append(("C46", f"scripts/{C46_TICKET} fehlt – das Ticket würde "
+                           "wieder im Workflow zusammengereimt."))
+    else:
+        for marker in C46_TICKET_MARKER:
+            if marker not in ticket_text:
+                out.append(("C46", f"scripts/{C46_TICKET}: `{marker}` fehlt – "
+                                   "Ursache, Schließweg oder Ticket-Marker "
+                                   "wären nicht garantiert (#912)."))
+        if C46_FALSCHE_URSACHE in ticket_text:
+            out.append(("C46", f"scripts/{C46_TICKET} behauptet „{C46_FALSCHE_URSACHE}“ "
+                               "– am 02.11.2026 war F1 grün und F4 die Ursache "
+                               "(#912)."))
+    scorecard_wf = ""
+    for pfad, inhalt in (wflows or {}).items():
+        if os.path.basename(str(pfad)) == C46_SCORECARD_WORKFLOW:
+            scorecard_wf = inhalt or ""
+    if not scorecard_wf:
+        out.append(("C46", f".github/workflows/{C46_SCORECARD_WORKFLOW} nicht "
+                           "lesbar – das Ticket ist nicht prüfbar."))
+    else:
+        if C46_TICKET not in scorecard_wf:
+            out.append(("C46", f".github/workflows/{C46_SCORECARD_WORKFLOW} nutzt "
+                               f"`{C46_TICKET}` nicht – die Ticket-Ursache wäre "
+                               "wieder handgeschrieben (#912)."))
+        if C46_FALSCHE_URSACHE in scorecard_wf:
+            out.append(("C46", f".github/workflows/{C46_SCORECARD_WORKFLOW} trägt "
+                               f"noch „{C46_FALSCHE_URSACHE}“ – die falsche "
+                               "Ursache aus dem Ticket (#912)."))
+
+    # f) Die Scorecard rechnet die Ursache (Check + Befundlage), statt sie zu raten.
+    scorecard = (script_texts or {}).get("release_scorecard.py", "")
+    for marker in ("def ursachen_ermitteln(", "def befundlage_ermitteln(",
+                   '"ursachen": ergebnis', '"befundlage": ergebnis'):
+        if marker not in scorecard:
+            out.append(("C46", f"scripts/release_scorecard.py: `{marker}` fehlt – "
+                               "dann kennt das Siegel die Ursache nicht (#912)."))
+
+    # g) Ein Vertrag ohne Test ist Prosa.
+    for name in C46_TESTS:
+        if not os.path.isfile(os.path.join(root, "scripts", "tests", name)):
+            out.append(("C46", f"scripts/tests/{name} fehlt – der Schließweg "
+                               "wäre ungetestet (#912)."))
+
+    # h) Der scharfe Teil: Der Bestand hat wirklich keinen unentscheidbaren
+    #    Befund. Prüft den Schließweg, nicht die Arbeitsgeschwindigkeit –
+    #    offene Befunde bleiben offen (und blockieren weiter), das ist korrekt.
+    if quick:
+        return out
+    bin_ = python_bin or sys.executable or "python3"
+    try:
+        lauf = subprocess.run(
+            [bin_, os.path.join(root, "scripts", C46_AKTE), "--wache"],
+            cwd=root, capture_output=True, text=True, timeout=120)
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        out.append(("C46", f"Befundakte-Wache nicht ausführbar "
+                           f"({exc.__class__.__name__}) – fail-closed."))
+        return out
+    if lauf.returncode != 0:
+        zeilen = ((lauf.stdout or "") + (lauf.stderr or "")).strip().splitlines()
+        out.append(("C46", "Befundakte-Wache ROT: "
+                           + (zeilen[-1][:200] if zeilen
+                              else f"Exit {lauf.returncode}")))
     return out
 
 
@@ -6046,6 +6265,23 @@ RULE_TEXT = {
            "darum fuer jeden Schritt mit Report einen benannten Erzeuger, dessen "
            "Skript noch existiert; Schritte ohne Report sind namentlich "
            "genannte Ausnahmen (kein stiller Sammelplatz fuer Tote Schritte).",
+    "C45": "Frischhalte-Deckung: Der Bestand braucht nach den SSOT-Intervallen "
+           "eine feste Zahl Faktenprüfungen je Tag (Σ 1/Intervall, gelesen aus "
+           "faktenfrische.faelligkeit); der Takt liefert Budget × echte "
+           "Läufe/Tag (geparst aus dem cron, nicht abgetippt). Am 29.10.2026 "
+           "standen 2,58 gegen 0,86 – 33 %. Darum war die Release-Scorecard "
+           "jeden Tag rot, und Ticket #912 war nicht schließbar. Ist der Bau "
+           "unterdeckt, wird er rot, BEVOR der Bestand rot wird.",
+    "C46": "Jeder offene Fachbefund ist entscheidbar: Befund und Entscheidung "
+           "hängen am TEXT-Hash (ohne Quellen), die KI-Prüfung weiterhin an "
+           "der vollständigen Prüffassung. Eine Entscheidung nennt "
+           "befund_fassung UND geprueft_fassung – damit bleibt ein Befund "
+           "auch nach einer Textheilung schließbar (21 von 57 waren es am "
+           "03.11.2026 nicht). `--entscheiden` schreibt die Entscheidung, "
+           "BEFUND-AKTE.md ist die Arbeitsliste mit Frist und Fassungsstand, "
+           "und das Scorecard-Ticket ist eine getestete Funktion des Siegels: "
+           "Es nennt die Kadenz nur, wenn F1 wirklich blockiert – nicht bei "
+           "F4. Sonst ist der Alarm ein Dauerläufer (C14).",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
@@ -6113,6 +6349,10 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
                 "Menge, P14 heilt über die SSOT, die Zielwache hat einen Fahrer)",
          "C44": "Der Vorrat endet nicht, er läuft aus (Vorlauf in Tagen, "
                 "Bahn-scharfe Diagnose, Füllwort-Grenze)",
+         "C45": "Frischhalte-Deckung (Bedarf aus der einen Fälligkeitsregel, "
+                "Angebot aus dem echten cron, Bau rot vor Bestand)",
+         "C46": "Jeder offene Fachbefund ist entscheidbar (zwei Hashes, ein "
+                "Befehl, eine Akte, ein Ticket mit echter Ursache)",
          "C47": "Grammatik ist Morphologie, nicht Meinung (LT5/LT6 gegen das "
                 "Genus-Lexikon, Titel nur mit Beweis, Cover rendert danach)"}
 

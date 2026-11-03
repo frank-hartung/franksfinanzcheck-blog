@@ -220,3 +220,17 @@ melden:
   # Ab so vielen offenen fachlichen Befunden meldet der Workflow.
   issue_ab_befunden: 3
   label: "faktenfrische"
+
+# --- Offene Fachbefunde (F4) – Frist und Eskalation (#912, 03.11.2026) -----
+# F4 blockiert die Veröffentlichung, bis ein Mensch den Befund entschieden
+# hat. Ohne Frist ist „irgendwann“ der Plan – dann bleibt die Scorecard
+# dauerhaft rot, obwohl die Maschine korrekt misst. Die Frist macht daraus
+# einen Termin; überschrittene Befunde stehen oben in BEFUND-AKTE.md und
+# werden im Scorecard-Ticket als Eskalation an den Herausgeber genannt.
+# Sie ist KEINE Absenkung der Schwelle: Ein Befund blockiert weiter, bis er
+# entschieden ist – die Frist ändert nur, wer wann davon erfährt.
+befunde:
+  # Reguläre Bearbeitungsfrist ab dem letzten Nachweis des Befunds.
+  frist_tage: 14
+  # Danach eskaliert das Ticket an den Herausgeber (fachliche Entscheidung).
+  eskalation_tage: 21

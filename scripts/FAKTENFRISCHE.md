@@ -34,9 +34,35 @@ RSS- und Web-Abrufe sind zeitlich und auf 2 MiB pro Antwort begrenzt. Ein
 seit dem Einlesen geänderter Artikel wird nicht überschrieben. Vor dem
 Schreiben führt `--apply` den Selbsttest aus.
 
+## Offene Fachbefunde (F4): Arbeitsliste statt Handarbeit (#912)
+
+Ein Befund verschwindet nicht durch Zeit. Er wird an genau **einem**
+dokumentierten menschlichen Entscheid geschlossen, gebunden an den
+**Text-Hash** (ohne Quellen) – nicht an die Prüffassung. Damit bleibt ein
+Befund auch dann schließbar, wenn der Text zu seiner Heilung geändert wurde
+oder der Lauf die Belegkette erneuert hat (bis 02.11.2026 war genau das
+nicht möglich: 21 von 57 Befunden standen an einer überholten Fassung,
+20 weitere ohne Hash).
+
+```sh
+python3 scripts/faktenfrische_befund_akte.py --schreiben   # BEFUND-AKTE.md + Zustand
+python3 scripts/faktenfrische_befund_akte.py --wache       # Exit 1 ohne Schließweg
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden <ID> \
+  --von "Name" --begruendung "was geprüft/geändert wurde" [--beleg URL]
+python3 scripts/faktenfrische_befund_ledger.py --wache     # dito, Ledger-scharf
+```
+
+`BEFUND-AKTE.md` ist die Sicht für Menschen (ID, Typ, Alter, Fassungsstand,
+Beanstandung, Beleg, fertiger Befehl), `data/faktenfrische_befunde_state.json`
+das Siegel (Zahlen für Ticket und Scorecard), `data/faktenfrische_entscheidungen.yaml`
+die Schließakte. Frist und Eskalation stehen in `befunde.*` der SSOT. Die
+Akte entscheidet nichts; ohne Person und Begründung (≥ 20 Zeichen) schreibt
+der Befehl nichts. Governance: C46.
+
 ```sh
 python3 scripts/faktenfrische.py --selftest
 python3 -m unittest scripts.tests.test_faktenfrische_robustheit
+python3 -m unittest scripts.tests.test_faktenfrische_befund_akte
 python3 scripts/faktenfrische.py --offline --max 3
 ```
 

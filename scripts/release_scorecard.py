@@ -956,19 +956,100 @@ def report_schreiben(ergebnis: dict, ssot: dict, abgelaufene: list[dict],
         z(f"| `{slug}` | " + " | ".join(normal + zelle) + f" | **{art['urteil']}** |")
     z("")
 
-    # Faktenfrische-Deckung: die URSACHE vor dem Symptom (#912).
+    # ------------------------------------------------------------------
+    #  Ursache statt Symptom (#912, Nachlauf 03.11.2026)
+    #
+    #  Bis hierher leitete der Bericht aus der Dimension `faktenalter` ab,
+    #  es gehe um die Kadenz. Am 02.11.2026 war die Kadenz grün (0
+    #  überfällig, 146 % Deckung) und F4 blockierte trotzdem zehn Artikel.
+    #  Ein Bericht, der die falsche Ursache nennt, ist keine Wahrheit.
+    #  Deshalb: erst die Checks (was?), dann die Fachbefund-Lage (warum?),
+    #  erst danach die Deckungsrechnung (nur wenn sie ursächlich ist).
+    # ------------------------------------------------------------------
     kap = ergebnis.get("kapazitaet") or {}
-    faktenfunde = [b for a in ergebnis["artikel"].values() for b in a["befunde"]
-                   if b["dimension"] in ("faktenalter", "revision")
-                   and b["wirkung"] == "blockiert"]
-    if kap or faktenfunde:
-        z("## Faktenfrische-Deckung (Ursache der Faktenalter-Funde)"
-          if faktenfunde else
-          "## Faktenfrische-Deckung (die Kadenz hält den Bestand)")
+    ursachen = ergebnis.get("ursachen") or []
+    befundlage = ergebnis.get("befundlage") or {}
+    fakten_checks = {u["check"] for u in ursachen
+                     if u["dimension"] in ("faktenalter", "revision")}
+    f4_rot = "F4-fachbefund" in fakten_checks
+    f1_rot = "F1-faktenfrische" in fakten_checks
+    if ursachen:
+        z("## Was blockiert – nach Prüfung, nicht nach Dimension")
         z("")
-        z("_Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil "
-          "der Bestand mehr Prüfungen braucht, als der Takt liefert. Diese "
-          "Rechnung ist die Ursache – die Artikelzeilen oben sind das Symptom._")
+        z("_Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. "
+          "Besitz und Entscheidung stehen in `data/release_scorecard.yaml`._")
+        z("")
+        z("| Check | Dimension | Wirkung | Entscheidet | Artikel |")
+        z("|---|---|---|---|---|")
+        for u in ursachen:
+            z(f"| **{u['check']}** | {u['dimension']} | {u['wirkung']} | "
+              f"{'Mensch (Herausgeber/Redaktion)' if u['entscheidung'] == 'human' else 'Maschine (deterministisch)'} | "
+              f"{u['anzahl']} |")
+        z("")
+        for u in ursachen:
+            if u["entscheidung"] != "human":
+                continue
+            z(f"- **{u['check']}** – Schließweg: {u['quelle'] or 'siehe SSOT'} "
+              f"· betroffen: " + ", ".join(f"`{s}`" for s in u["artikel"][:6])
+              + (" …" if len(u["artikel"]) > 6 else ""))
+        z("")
+
+    if f4_rot:
+        z("## Offene Fachbefunde (F4) – was die Redaktion entscheiden muss")
+        z("")
+        if befundlage.get("nicht_beweisbar"):
+            z(f"❔ **nicht beweisbar** – {befundlage['nicht_beweisbar']}")
+        else:
+            z(f"**{befundlage.get('offen')}** offene Befunde auf "
+              f"**{befundlage.get('seiten')}** Seiten "
+              f"(live: {befundlage.get('live_befunde')} auf "
+              f"{befundlage.get('live_seiten')} Artikeln) · ältester "
+              f"**{_de_zahl(befundlage.get('aeltester_tage'), 0)} Tage** · "
+              f"Frist {befundlage.get('frist_tage')} Tage · "
+              f"über der Frist: **{befundlage.get('ueber_frist')}**.")
+            z("")
+            z("**Ein Prüfdatum schließt keinen Fachbefund.** F1 (Alter) und F4 "
+              "(Inhalt) sind getrennte Verträge; die Maschine entscheidet nie "
+              "fachlich. Die Arbeitsdatei mit jeder Befund-ID, dem Fassungsstand "
+              "und dem fertigen Entscheidungsbefehl ist `BEFUND-AKTE.md` "
+              "(`python3 scripts/faktenfrische_befund_akte.py --schreiben`).")
+            z("")
+            z("```bash")
+            z("python3 scripts/faktenfrische_befund_ledger.py --entscheiden <ID> "
+              "--von \"<Name>\" --begruendung \"<was geprüft/geändert wurde>\"")
+            z("```")
+            z("")
+            if befundlage.get("ueberholt"):
+                z(f"⚠️ **{befundlage['ueberholt']} Befunde** wurden an einem "
+                  "älteren Text erhoben; der Text wurde seither geändert. "
+                  "Entschieden wird der HEUTIGE Text – genau das macht "
+                  "`--entscheiden` fassungsgebunden.")
+                z("")
+            if befundlage.get("nicht_entscheidbar"):
+                z(f"❌ **{befundlage['nicht_entscheidbar']} Befunde** sind nicht "
+                  "entscheidbar (Seite fehlt) – das ist ein Strukturfehler, "
+                  "kein Redaktionsrückstand.")
+                z("")
+            if befundlage.get("ueber_frist"):
+                z(f"🔴 **Eskalation:** {befundlage['ueber_frist']} Befunde sind "
+                  f"älter als {befundlage.get('frist_tage')} Tage. Fachliche "
+                  "Entscheidung: Herausgeber.")
+                z("")
+            if f1_rot:
+                z("_Zusätzlich ist F1 (Faktenalter) blockiert – siehe Deckung "
+                  "unten. Beide Ursachen sind getrennt zu behandeln._")
+                z("")
+            else:
+                z("✅ **F1 (Faktenalter) ist nicht die Ursache:** Die Deckung "
+                  "trägt den Bestand; rot ist der Inhalt, nicht der Takt.")
+                z("")
+
+    if kap:
+        z("## Faktenfrische-Deckung (der Takt gegen den Bestand)")
+        z("")
+        z("_Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, "
+          "weil der Bestand mehr Prüfungen braucht, als der Takt liefert. "
+          "Diese Rechnung ist die Ursache der F1-Funde – nicht der F4-Funde._")
         z("")
         if kap.get("nicht_beweisbar"):
             z(f"❔ **nicht beweisbar** – {kap['nicht_beweisbar']}")
@@ -1006,8 +1087,8 @@ def report_schreiben(ergebnis: dict, ssot: dict, abgelaufene: list[dict],
                   "würden ihre Frist reißen – Takt oder Budget erhöhen.")
             else:
                 z("✅ Deckung ausreichend: Der Takt kann den Bestand halten. "
-                  "Ein roter Faktenstand ist damit ein echter Inhaltsbefund, "
-                  "kein Kadenz-Artefakt.")
+                  "Ein roter Faktenstand ist damit ein echter Inhaltsbefund "
+                  "(F4), kein Kadenz-Artefakt.")
         z("")
 
     # Blockierte Artikel im Detail
@@ -1086,6 +1167,89 @@ def report_schreiben(ergebnis: dict, ssot: dict, abgelaufene: list[dict],
     text = "\n".join(zeilen)
     pfad.write_text(text, encoding="utf-8")
     return text
+
+
+# ============================================================
+#  Ursachen: WAS blockiert – nicht nur WELCHE Dimension (#912)
+# ============================================================
+def ursachen_ermitteln(artikel: dict, register: dict) -> list[dict]:
+    """Blockierende Funde nach CHECK gruppiert – die Antwort auf „warum rot?“.
+
+    BEFUND (03.11.2026): Das Ticket leitete aus der DIMENSION `faktenalter`
+    ab, es sei „ausschließlich die Faktenfrische – ein Kadenz-Befund, kein
+    Inhaltsbefund“. Am 02.11. blockierte aber F4 (offener Fachbefund) zehn
+    Artikel, während F1 (Alter) grün war: 0 überfällig, 146 % Deckung. Eine
+    Ursache, die nur die Dimension kennt, liegt in drei von vier Fällen
+    falsch. Diese Funktion zählt je Check und nennt Besitz und Schließweg
+    aus der SSOT – sie erfindet keine zweite Messregel (C19).
+    """
+    gruppen: dict[str, dict] = {}
+    for slug, art in artikel.items():
+        if art.get("urteil") not in ("blockiert", "nicht beweisbar"):
+            continue
+        for befund in art.get("befunde") or []:
+            if befund.get("werkzeugfehler") or befund.get("ausnahme"):
+                continue
+            cid = str(befund.get("check") or "?")
+            gruppe = gruppen.setdefault(cid, {
+                "check": cid,
+                "dimension": befund.get("dimension") or "?",
+                "wirkung": befund.get("wirkung") or "blockiert",
+                "artikel": set(),
+            })
+            gruppe["artikel"].add(slug)
+    ergebnis = []
+    for cid, gruppe in gruppen.items():
+        check = register.get(cid) or {}
+        ergebnis.append({
+            "check": cid,
+            "dimension": gruppe["dimension"],
+            "wirkung": gruppe["wirkung"],
+            "entscheidung": check.get("entscheidung") or "human",
+            "quelle": check.get("quelle") or "",
+            "artikel": sorted(gruppe["artikel"]),
+            "anzahl": len(gruppe["artikel"]),
+        })
+    ergebnis.sort(key=lambda g: (-g["anzahl"], g["check"]))
+    return ergebnis
+
+
+def befundlage_ermitteln(heute: dt.date, live_slugs: list[str]) -> dict:
+    """Wie viele offene Fachbefunde (F4) gibt es, wie alt sind sie? (#912)
+
+    Dieselbe Regel wie das Publish-Gate (`faktenfrische_befund_ledger`); die
+    Scorecard zählt hier nur. Ist das Ledger nicht lesbar, steht das als
+    „nicht beweisbar“ im Siegel – nie als Null.
+    """
+    try:
+        ledger = _importiere_gate_module("faktenfrische_befund_ledger")
+        ff = _importiere_gate_module("faktenfrische")
+        cfg = ff.lade_config()
+        block = cfg.get("befunde") if isinstance(cfg, dict) else None
+        block = block if isinstance(block, dict) else {}
+        frist = int(block.get("frist_tage") or 14)
+        befunde = ledger.befunde_mit_status(stichtag=heute)
+    except Exception as exc:  # noqa: BLE001 – fail-closed
+        return {"nicht_beweisbar": f"Fachbefund-Ledger nicht lesbar: {exc}"}
+    live = set(live_slugs)
+    offen_live = [b for b in befunde if b["slug"] in live]
+    aelter = [b for b in befunde if b.get("alter_tage") is not None
+              and b["alter_tage"] > frist]
+    return {
+        "offen": len(befunde),
+        "seiten": len({b["slug"] for b in befunde}),
+        "live_befunde": len(offen_live),
+        "live_seiten": len({b["slug"] for b in offen_live}),
+        "ueberholt": sum(1 for b in befunde if b["fassung_status"] == "ueberholt"),
+        "ohne_fassung": sum(1 for b in befunde if b["fassung_status"] == "ohne-fassung"),
+        "nicht_entscheidbar": sum(1 for b in befunde if not b.get("entscheidbar")),
+        "aeltester_tage": max((b.get("alter_tage") or 0) for b in befunde)
+                          if befunde else None,
+        "frist_tage": frist,
+        "ueber_frist": len(aelter),
+        "je_slug": {slug: sum(1 for b in offen_live if b["slug"] == slug)
+                    for slug in sorted({b["slug"] for b in offen_live})},
+    }
 
 
 # ============================================================
@@ -1176,6 +1340,11 @@ def durchfuehren(modus: str, heute: dt.date, slugs_live: list[str],
         "artikel": artikel,
         "entwuerfe": entwuerfe,
         "kapazitaet": kapazitaet_ermitteln(heute),
+        # Die Ursache gehört zum Urteil (#912): Checks statt Dimensionen,
+        # offene Fachbefunde mit Alter und Frist. Ticket und Bericht lesen
+        # ausschließlich das – keine zweite Zählregel.
+        "ursachen": ursachen_ermitteln(artikel, register),
+        "befundlage": befundlage_ermitteln(heute, slugs_live),
         "dimensionen_gesamt": dimensionen_gesamt,
         "kandidaten": kandidaten,
         "tool_fehler": tool_fehler,
@@ -1209,6 +1378,10 @@ def zustand_schreiben(ergebnis: dict) -> dict:
         # Die Ursache gehört ins Siegel: Ein Ticket, das nur das Symptom
         # nennt („Faktenalter blockiert“), lässt sich nicht schließen (#912).
         "kapazitaet": ergebnis.get("kapazitaet"),
+        # WAS blockiert (je Check) und WARUM (offene Fachbefunde mit Frist).
+        # Das Ticket liest diese Felder, statt die Ursache zu raten (#912).
+        "ursachen": ergebnis.get("ursachen") or [],
+        "befundlage": ergebnis.get("befundlage") or {},
         "artikel": {
             slug: {
                 "sha256": art["sha256"],
@@ -1217,6 +1390,13 @@ def zustand_schreiben(ergebnis: dict) -> dict:
                 "dimensionen": art["dimensionen"],
                 "naechste_pruefung": art["naechste_pruefung"],
                 "siegel_drift": art["siegel_drift"],
+                "checks": [
+                    {"check": b["check"], "dimension": b["dimension"],
+                     "wirkung": b["wirkung"],
+                     "detail": str(b.get("detail") or "")[:400]}
+                    for b in art.get("befunde") or []
+                    if not b.get("werkzeugfehler") and not b.get("ausnahme")
+                ],
             } for slug, art in sorted(ergebnis["artikel"].items())
         },
     }
