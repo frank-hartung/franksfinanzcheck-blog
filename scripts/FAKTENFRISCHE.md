@@ -79,6 +79,18 @@ Beispiel #911 (30.10.2026): zehn Befunde in zwei Artikeln, Register
 `scripts/tests/test_faktenfrische_911.py`, Aufruf
 `npm run test:faktenfrische:911`.
 
+Beispiel #996 (03.11.2026): 16 Befunde in vier Gasartikeln, Register
+`data/faktenfrische_befunde_996.yaml`, Regression
+`scripts/tests/test_faktenfrische_996.py`, Aufruf
+`npm run test:faktenfrische:996`. Die Heilung fand zwei Rückfälle auf den
+Werbeflächen (`pin_description`), die auf `main` eine rote Regression
+hinterließen. Seitdem gilt: Pin-/Social-Texte sind Aussageflächen – die
+Fachprüfung erhält sie (`PIN-TITEL`/`PIN-BESCHREIBUNG`), Regel 11 des
+SYSTEM_PROMPT prüft sie mit, und `pruef_hash` bindet sie in die Fassung
+ein. Eine redaktionelle Heilung ist keine Ledger-Signatur: Die Befunde
+bleiben offen, bis der Inhaber sie fassungsgebunden entscheidet
+(`data/faktenfrische_entscheidungen.yaml`).
+
 ## KI-Routing
 
 Die Reihenfolge stammt zur Laufzeit aus `routing.faktenpruefung` in
