@@ -45,6 +45,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as _dt
+import io
 import json
 import os
 import subprocess
@@ -53,6 +54,7 @@ import tempfile
 import urllib.error
 import urllib.parse
 import urllib.request
+from contextlib import redirect_stderr, redirect_stdout
 
 API = "https://api.cloudflare.com/client/v4"
 PFLICHT_PRAEFIXE = ("abo:", "token:", "nachweis:")
@@ -438,18 +440,27 @@ def selbsttest() -> int:
 
         # ---- F-E4: Leerstand wird live belegt (Namespace-Titel), nicht
         # behauptet – und ohne lesbaren Namespace fail-closed abgebrochen.
+        # 03.11.2026 (#923): Die `::warning::`-Meldung des belegten Leerstands
+        # gehört in ECHTE Läufe – der Selbsttest fängt sie ein, sonst erzeugt
+        # jede Ausführung eine falsche Annotation im Actions-Lauf (belegt an
+        # Lauf 41533983322). Eingefangen wird ausdrücklich MIT Gegenprobe:
+        # Die Meldung muss weiterhin ausgegeben werden, nur eben nicht hier.
         original = kv_schluessel
         try:
             globals()["kv_schluessel"] = lambda t, k, n: []
-            belegt = exportieren({"CF_API_TOKEN": "tok", "CF_ACCOUNT_ID": "acc", "KV_NAMESPACE_ID": "ns"})
-            assert belegt.get("leer_bestaetigt") is True and belegt["kv"]["titel"] == "ABO", belegt
-            assert pruefen(belegt) == []
-            schalter["ns_unlesbar"] = True
-            try:
-                exportieren({"CF_API_TOKEN": "tok", "CF_ACCOUNT_ID": "acc", "KV_NAMESPACE_ID": "ns"})
-                raise AssertionError("F-E4: nicht lesbarer Namespace darf nicht als leer gelten")
-            except RuntimeError as e:
-                assert "nicht lesbar" in str(e), str(e)
+            errpuffer = io.StringIO()
+            with redirect_stderr(errpuffer):
+                belegt = exportieren({"CF_API_TOKEN": "tok", "CF_ACCOUNT_ID": "acc", "KV_NAMESPACE_ID": "ns"})
+                assert belegt.get("leer_bestaetigt") is True and belegt["kv"]["titel"] == "ABO", belegt
+                assert pruefen(belegt) == []
+                schalter["ns_unlesbar"] = True
+                try:
+                    exportieren({"CF_API_TOKEN": "tok", "CF_ACCOUNT_ID": "acc", "KV_NAMESPACE_ID": "ns"})
+                    raise AssertionError("F-E4: nicht lesbarer Namespace darf nicht als leer gelten")
+                except RuntimeError as e:
+                    assert "nicht lesbar" in str(e), str(e)
+            assert "::warning::" in errpuffer.getvalue() and "belegt leer" in errpuffer.getvalue(), \
+                "F-E4: der belegte Leerstand muss im echten Lauf eine Workflow-Warnung bleiben"
         finally:
             globals()["kv_schluessel"] = original
             schalter["ns_unlesbar"] = False
@@ -484,8 +495,18 @@ def selbsttest() -> int:
                        "kv": {"namespace": "ns", "anzahl": 5,
                               "werte": {"abo:a@x.de": json.dumps({"status": "active"})},
                               "ablauf": {}}}
-            aus = main(["--out", ziel], _export=lambda _env: fehlend)
+            # 03.11.2026 (#923): `::error::Probe: …` ist für den echten Lauf
+            # gedacht. Uneingefangen wurde aus dem Selbsttest eine echte
+            # failure-Annotation („Probe: Anzahl 5 != 1 Werte“, Lauf
+            # 41533983322) – mitten in einem erfolgreichen Schritt.
+            outpuffer, errpuffer = io.StringIO(), io.StringIO()
+            with redirect_stdout(outpuffer), redirect_stderr(errpuffer):
+                aus = main(["--out", ziel], _export=lambda _env: fehlend)
             assert aus == 1, f"F-E6: unvollständiger Export war grün ({aus})"
+            assert "::error::Probe:" in outpuffer.getvalue(), \
+                "F-E6: der Probe-Befund muss im echten Lauf eine Annotation bleiben"
+            assert "NICHTS" in errpuffer.getvalue() or "nichts abgelegt" in errpuffer.getvalue(), \
+                "F-E6: der Abbruch bleibt ausdrücklich benannt (kein stilles Rot)"
 
         # ---- F-E7: Eine Störung der Cloudflare-API wird als Satz gemeldet,
         # nicht als Traceback (im Actions-Log ist der Stack keine Abhilfe).
@@ -502,7 +523,14 @@ def selbsttest() -> int:
                     os.environ.clear()
                     os.environ.update({"CF_API_TOKEN": "tok", "CF_ACCOUNT_ID": "acc",
                                        "KV_NAMESPACE_ID": "ns"})
-                    rc = main(["--out", ziel])
+                    # 03.11.2026 (#923): Die Störungsmeldung ist eine
+                    # Workflow-Annotation – im Selbsttest wird sie eingefangen,
+                    # nicht ins Log entlassen (sonst „failure“ im grünen Lauf).
+                    errpuffer = io.StringIO()
+                    with redirect_stderr(errpuffer):
+                        rc = main(["--out", ziel])
+                    assert "::error::KV-Export abgebrochen:" in errpuffer.getvalue(), \
+                        "F-E7: die Störungsmeldung muss im echten Lauf eine Annotation bleiben"
                 finally:
                     os.environ.clear()
                     os.environ.update(vorher)
@@ -516,7 +544,9 @@ def selbsttest() -> int:
         HTTP = echt
     print("✅ kv_backup-Selbsttest: Export, Paginierung, D1, Probe, Bulk-Format, fail-closed "
           "sowie die #923-Fälle (D1-Störung ≠ leere Tabelle, Leerstand nur mit Beleg, "
-          "Ablaufverlust beim Rückspielen, Probe-Befund beendet den Export rot).")
+          "Ablaufverlust beim Rückspielen, Probe-Befund beendet den Export rot). "
+          "Seit 03.11.2026 entlässt der Selbsttest keine ::error::/::warning::-Befehle mehr "
+          "in das echte Lauf-Log (F-E4/F-E6/F-E7 fangen sie ein UND prüfen ihr Vorhandensein).")
     return 0
 
 

@@ -1035,9 +1035,21 @@ class FrischwacheEinrichtungVertrag(unittest.TestCase):
     „Einrichtung als Kontext (kein Block, nur Einordnung)“ endete fest mit
     `exit 0` – zehn Läufe lang. Eine Wache, die den Ausfall, den sie überwacht,
     als Erfolg ausgibt, ist schlimmer als keine.
+
+    Nachtrag 03.11.2026 (gleiche Familie, gespiegelte Richtung): Die geheilte
+    Blockade prüfte Variablen, die der Job nie erhielt – „rot über Werten,
+    die nicht da sein konnten“. Belegt an Lauf 41533983322: E4
+    (CLOUDFLARE_ACCOUNT_ID) meldete „fehlt“, obwohl das Secret existiert.
+    Nach einer vollständigen Einrichtung wäre die Wache für immer rot
+    geblieben – Dauer-Alarm lehrt den Betreiber, Rot zu ignorieren.
     """
 
     WF = REPO / ".github" / "workflows" / "backup-frischwache.yml"
+
+    def _frisch_job(self) -> dict:
+        if yaml is None:
+            raise unittest.SkipTest("PyYAML lokal nicht installiert (CI installiert es)")
+        return yaml.safe_load(self.WF.read_text(encoding="utf-8"))["jobs"]["frischwache"]
 
     def test_einrichtung_blockiert_die_frischwache(self):
         text = self.WF.read_text(encoding="utf-8")
@@ -1060,6 +1072,74 @@ class FrischwacheEinrichtungVertrag(unittest.TestCase):
         sim = (REPO / "scripts" / "tests" / "sim" / "alert_scoping_sim.mjs").read_text(encoding="utf-8")
         self.assertIn("#923: Frischwache rot in", sim)
         self.assertIn("#923-Gegenprobe: Frischwache rot beim Messen", sim)
+
+    def test_frischwache_gibt_dem_pruefer_seine_eingaben(self):
+        """#923 (03.11.2026): Der Prüfer las E1–E7 aus Namen, die der Job nie setzte.
+
+        Beleg: Lauf 41533983322 meldete E4 „fehlt“, obwohl CLOUDFLARE_ACCOUNT_ID
+        existiert (der Job bildete es nicht in `CF_ACCOUNT_ID` ab). Ohne den
+        Spiegel bliebe die Wache nach der Inhaber-Einrichtung dauerhaft rot –
+        derselbe Defekt wie das feste `exit 0`, nur in der anderen Richtung.
+        """
+        job = self._frisch_job()
+        erwartet = {
+            "ZIEL_REPO": "${{ vars.BACKUP_REPO }}",
+            "ZIEL_TOKEN": "${{ secrets.BACKUP_REPO_TOKEN }}",
+            "PASSWORT": "${{ secrets.BACKUP_PASSPHRASE }}",
+            "CF_API_TOKEN": "${{ secrets.CF_KV_BACKUP_TOKEN }}",
+            "CF_ACCOUNT_ID": "${{ secrets.CLOUDFLARE_ACCOUNT_ID }}",
+            "KV_NAMESPACE_ID": "${{ vars.KV_NAMESPACE_ID_ABO }}",
+            "D1_DATABASE_ID": "${{ vars.D1_DATABASE_ID }}",
+        }
+        self.assertEqual({name: job.get("env", {}).get(name) for name in erwartet}, erwartet,
+                         "die Frischwache muss dem Prüfer dieselben Eingaben geben wie der KV-Job")
+        # Deckung mit dem Stand, den der KV-Job vertraglich hat:
+        # dieselben Sieben, gleiche Quellen (kein zweiter Wahrheitsort).
+        offsite = _workflow()["jobs"]["kv-backup"]
+        for name, quelle in erwartet.items():
+            self.assertEqual(offsite["env"].get(name), quelle,
+                             f"{name}: Frischwache und KV-Job müssen deckungsgleich sein")
+
+    def test_e8_prueft_mit_lauf_token_und_lese_recht(self):
+        """E8 liest die Environment-Regeln des QUELL-Repos – das darf und kann
+        der fein eingeschränkte Backup-Token nicht (nur Ziel-Repo). Deshalb
+        läuft der Schritt mit dem Lauf-Token, und der Job hat actions: read
+        (gleiche Begründung wie der KV-Job von backup-offsite.yml)."""
+        job = self._frisch_job()
+        self.assertEqual(job.get("permissions"), {"contents": "read", "actions": "read"})
+        treffer = [s for s in job["steps"] if "Voraussetzungen prüfen" in s.get("name", "")]
+        self.assertEqual(len(treffer), 1)
+        self.assertEqual(treffer[0].get("env", {}).get("GH_TOKEN"), "${{ github.token }}",
+                         "E8 in der Frischwache braucht das Lauf-Token, nicht den Ziel-Token")
+        # Die Messung danach darf weiterhin NUR das Ziel-Token sehen:
+        messung = [s for s in job["steps"] if "Frische messen" in s.get("name", "")]
+        self.assertEqual(len(messung), 1)
+        self.assertNotIn("github.token", str(messung[0].get("env", {})),
+                         "die Frische-Messung bleibt beim fein eingeschränkten Ziel-Token")
+
+    def test_selbsttests_lecken_keine_workflow_befehle(self):
+        """Eine Simulation darf keine echten Annotationen erzeugen.
+
+        Belegt an Lauf 41533983322 (02.11.2026, Frischwache): Aus dem
+        Selbsttest von kv_backup.py standen `::error::Probe: Anzahl 5 != 1
+        Werte`, `::error::KV-Export abgebrochen: …TLS…` und eine
+        `::warning::` über einen leeren Namespace „ABO“ als echte
+        failure/warning-Annotationen im Lauf – mitten im erfolgreichen
+        Selbsttest-Schritt. Wer das liest, sucht einen Fehler, der keiner
+        ist (derselbe Defekt wie §5a des Berichts vom 02.11.2026 in der
+        CI-Suite, hier in den Skript-Selbsttests).
+        """
+        for skript in ("kv_backup.py", "backup_einrichtung.py", "backup_freshness_guard.py"):
+            with self.subTest(skript=skript):
+                lauf = subprocess.run(
+                    [sys.executable, str(SCRIPTS / skript), "--selftest"],
+                    capture_output=True, text=True, timeout=300)
+                self.assertEqual(lauf.returncode, 0,
+                                 f"{skript}: Selbsttest rot\n{lauf.stdout[-800:]}")
+                for zeile in (lauf.stdout + "\n" + lauf.stderr).splitlines():
+                    self.assertFalse(
+                        zeile.lstrip().startswith(("::error::", "::warning::")),
+                        f"{skript}: der Selbsttest erzeugt eine echte Workflow-Annotation: {zeile[:120]}")
 
 
 class WizardScheinGruenVertrag(unittest.TestCase):
