@@ -17,7 +17,8 @@ kurzantwort: "Eine Gaspreisgarantie schützt nur die Teile des Preises, die im V
 social_posted: true
 keywords: ["Sicher heizen", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich"]
 pin_title: "Sicher heizen: Gaspreisgarantie gegen den Preisschock"
-pin_description: "*Werbung | Eine Gaspreisgarantie nimmt dir den Winter-Schock: faire Tarife, klare Laufzeit, kein Zittern vor der Abschlagsrechnung. So schützt du dein Haushaltsbudget und sparst bis zu 650 Euro bei den Heizkosten. Jetzt die Checkliste lesen."
+pin_description: "*Werbung | Vergleiche Gaspreisgarantien nach Preis, Laufzeit und geschützten Bestandteilen. Eine Garantie schützt nicht vor höherem Verbrauch. Jetzt die Checkliste lesen."
+pin_text_sync: false
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
   - titel: "So finden Sie den passenden Strom- oder Gastarif"

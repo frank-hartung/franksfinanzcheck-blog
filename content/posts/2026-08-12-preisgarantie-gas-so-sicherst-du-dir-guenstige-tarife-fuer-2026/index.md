@@ -17,7 +17,8 @@ kurzantwort: "Für einen belastbaren Gasvergleich brauchst du Postleitzahl und e
 social_posted: true
 keywords: ["Preisgarantie Gas 2026", "Gastarife mit Preisgarantie", "Gaspreise absichern", "Gasanbieter Festpreis", "Heizkosten 2026 senken", "Preisgarantie Gas"]
 pin_title: Gaspreise steigen? Jetzt Tarif mit Preisgarantie sichern
-pin_description: "*Werbung | Vor der Heizsaison ziehen viele Anbieter die Preise an – mit einer Preisgarantie von 12 bis 24 Monaten bist du dagegen gefeit: Jetzt Gastarife mit fester Preisbindung vergleichen und teure Preissprünge einfach aussitzen. 5 Minuten Aufwand, ein Jahr Ruhe. Jetzt sichern!"
+pin_description: "*Werbung | Vergleiche Gastarife mit Preisgarantie und prüfe Preis, Laufzeit und Ausnahmen. Eine Garantie gilt nur für die vertraglich geschützten Bestandteile."
+pin_text_sync: false
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
   - titel: "Preise und Abschläge"

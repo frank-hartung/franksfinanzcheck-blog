@@ -27,7 +27,10 @@ deterministische Text (kein Zwangspaarung).
 Eigenschaften:
   - deterministisch + idempotent (zweiter Lauf = keine Änderungen)
   - Sabotage-Schutz: Selbsttest vor jeder Schreibaktion
-  - DRAFTs werden mitgesetzt (sind beim Publizieren sofort pin-fertig)
+  - Drafts bleiben unverändert; `pin_text_sync: false` schützt redaktionell
+    geprüfte Pin-Felder vor allen automatischen Änderungen dieses Syncs.
+  - Bekannte Rückfälle aus #996 im Plan stoppen den Sync vor jeder Änderung;
+    dies ist ein enger Rückfallschutz, kein allgemeiner Faktencheck.
 
 Aufruf:
   python3 scripts/pinterest_pin_text_sync.py             # Dry-Run (Report)
@@ -44,6 +47,7 @@ import os
 import re
 import sys
 import unicodedata
+from pathlib import Path
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
@@ -124,6 +128,16 @@ def fm_set(content: str, key: str, value: str) -> str:
 
 
 # ---------------------------------------------------------------- Validierung
+# Konkrete, in #996 entfernte Formulierungen. Bewusst kein allgemeiner
+# Faktencheck: Redaktion und Quellenprüfung bleiben erforderlich.
+F996_RUECKFALL = re.compile(r"(?:beste\s+zeit|besseren\s+preise|spart\s+dir\s+hunderte\s+euro)", re.IGNORECASE)
+
+
+def plan_rueckfaelle(pins: list) -> list:
+    return [str(p.get("tag", "?")) for p in pins
+            if F996_RUECKFALL.search(str(p.get("beschreibung", "")))]
+
+
 def pin_title_valid(t: str) -> bool:
     """Pin-TITEL: & ist erlaubt (API-Titel; nur Button-Beschreibungen
     müssen &-frei sein – die sanitized clean_pin_description)."""
@@ -193,7 +207,7 @@ def load_board_pillar_map() -> dict:
     """Pinwand → Pillar aus data/pinterest_boards.yaml (Single Source of Truth)."""
     path = os.path.join(BLOG_DIR, "data", "pinterest_boards.yaml")
     try:
-        cfg = yaml.safe_load(open(path, encoding="utf-8")) or {}
+        cfg = yaml.safe_load(Path(path).read_text(encoding="utf-8")) or {}
     except Exception:
         return {}
     m = {}
@@ -244,7 +258,7 @@ def score(post: dict, pin: dict, board_pillar: dict | None = None) -> float:
 # ---------------------------------------------------------------- Laden
 def load_pins() -> list:
     try:
-        plan = yaml.safe_load(open(PLAN_FILE, encoding="utf-8")) or {}
+        plan = yaml.safe_load(Path(PLAN_FILE).read_text(encoding="utf-8")) or {}
     except Exception:
         return []
     return [p for p in plan.get("pins", []) if p.get("titel")]
@@ -253,7 +267,7 @@ def load_pins() -> list:
 def load_posts() -> list:
     posts = []
     for path in list_post_paths():
-        content = open(path, encoding="utf-8").read()
+        content = Path(path).read_text(encoding="utf-8")
         # NUR aus dem Frontmatter-Block lesen (Body kann ähnliche Zeilen
         # enthalten, z. B. in Tabellen oder Trennlinien-Kontexten)
         _fm_block = split_fm(content)[0]
@@ -276,6 +290,9 @@ def load_posts() -> list:
             "pin_title": fm("pin_title"), "pin_description": fm("pin_description"),
             "pinwand": fm("pinwand"), "pillar": fm("pillar"),
             "affiliate": affiliate,
+            # Explizites redaktionelles Opt-out, nur im Frontmatter gültig.
+            "sync_geschuetzt": bool(re.search(
+                r"^pin_text_sync\s*:\s*false\s*(?:#.*)?$", _fm_block, re.M | re.I)),
             "draft": re.search(r"^draft:\s*true", content, re.M) is not None,
         })
     return posts
@@ -284,7 +301,7 @@ def load_posts() -> list:
 # ---------------------------------------------------------------- Selbsttest
 _SYNC_SOURCE = ""
 try:
-    _SYNC_SOURCE = open(os.path.abspath(__file__), encoding="utf-8").read()
+    _SYNC_SOURCE = Path(__file__).read_text(encoding="utf-8")
 except OSError:      # pragma: no cover – Datei immer vorhanden
     _SYNC_SOURCE = ""
 
@@ -325,6 +342,10 @@ def _selftest() -> list[str]:
                   + "#zählerstand #gas")
     if pin_desc_valid(roh_umlaut):
         fehler.append("pin_desc_valid akzeptiert einen Umlaut-Hashtag (#729)")
+    if not plan_rueckfaelle([{"tag": 5, "beschreibung": "Die BESTE Zeit"}]):
+        fehler.append("#996-Rückfallsperre erkennt den Plantext nicht")
+    if plan_rueckfaelle([{"tag": 1, "beschreibung": "Tarife sachlich vergleichen"}]):
+        fehler.append("#996-Rückfallsperre sperrt neutralen Text")
     # Scoring: gleiche Themen müssen > MIN scoren
     p = {"titel": "Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe",
          "keywords": "stromfresser finden, strom sparen tipps",
@@ -364,10 +385,15 @@ def main() -> int:
         return 2
 
     pins = load_pins()
-    posts = load_posts()
     if not pins:
         print("⚠ data/pinterest_plan.yaml fehlt/leer – Sync übersprungen.")
         return 0
+    rueckfaelle = plan_rueckfaelle(pins)
+    if rueckfaelle:
+        print("🛑 #996: bekannte unzulässige Formulierung im Pinterest-Plan "
+              f"(Tag: {', '.join(rueckfaelle)}). Keine Artikel geschrieben.")
+        return 1
+    posts = load_posts()
 
     changed, rows, issues = 0, [], []
     board_pillar = load_board_pillar_map()
@@ -416,8 +442,16 @@ def main() -> int:
     for d, group in list(dup_map.items()):
         if len(group) <= 1:
             continue
-        # Behalte ersten, heile rest
-        for g in group[1:]:
+        # Redaktionell geschützte Texte nie überschreiben. Ist genau einer
+        # geschützt, behalte diesen und heile nur die anderen Duplikate.
+        geschuetzt = [g for g in group if g.get("sync_geschuetzt")]
+        if len(geschuetzt) > 1:
+            issues.append("Geschützte Pin-Beschreibungen sind doppelt: " +
+                          ", ".join(g["slug"] for g in geschuetzt))
+        behalten = geschuetzt[0] if geschuetzt else group[0]
+        for g in group:
+            if g is behalten or g.get("sync_geschuetzt"):
+                continue
             # Generiere Fallback aus Titel/Description/Keywords
             fallback = clean_pin_description(
                 f"{g.get('title','')} {g.get('description','')}".strip()[:400],
@@ -433,7 +467,7 @@ def main() -> int:
                 )
             if DO_APPLY:
                 new_c = fm_set(g["content"], "pin_description", fallback)
-                open(g["path"], "w", encoding="utf-8").write(new_c)
+                Path(g["path"]).write_text(new_c, encoding="utf-8")
                 g["content"] = new_c
                 g["pin_description"] = fallback
             dup_fixed += 1
@@ -447,6 +481,10 @@ def main() -> int:
             belegt.setdefault(d, post["slug"])
 
     for j, post in enumerate(posts):
+        if post.get("sync_geschuetzt"):
+            rows.append({"slug": post["slug"], "pin": "-", "score": 0.0,
+                         "match": "redaktionell geschützt", "changed": False})
+            continue
         if post["draft"]:
             rows.append({"slug": post["slug"], "pin": "-", "score": 0.0,
                          "match": "keine (Draft – beim Publizieren automatisch)",
@@ -521,7 +559,7 @@ def main() -> int:
         if do_w:
             content = fm_set(content, "pinwand", new_pinwand)
         if DO_APPLY:
-            open(post["path"], "w", encoding="utf-8").write(content)
+            Path(post["path"]).write_text(content, encoding="utf-8")
         if do_d:
             belegt.pop((post.get("pin_description") or "").strip(), None)
             belegt[new_desc.strip()] = post["slug"]
@@ -554,7 +592,7 @@ def main() -> int:
     if issues:
         lines += ["", "## ⚠️ Probleme", ""] + [f"- {i}" for i in issues]
     lines += ["", "---", "", "_Erzeugt von `scripts/pinterest_pin_text_sync.py`._", ""]
-    open(REPORT, "w", encoding="utf-8").write("\n".join(lines))
+    Path(REPORT).write_text("\n".join(lines), encoding="utf-8")
 
     print(f"Pin-Text-Sync: {len(posts)} Artikel, {changed} mit Premium-Texten "
           f"({'geschrieben' if DO_APPLY else 'Dry-Run'}), {len(issues)} Probleme")

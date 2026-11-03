@@ -80,5 +80,64 @@ class GasBefunde996(unittest.TestCase):
         self.assertIn('188,75', body)
 
 
+class PinterestRueckfallschutz996(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        import sys
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        import pinterest_pin_text_sync
+        cls.sync = pinterest_pin_text_sync
+
+    def test_sync_selbsttest(self):
+        self.assertEqual([], self.sync._selftest())
+
+    def test_plan_und_redaktionelle_sperre(self):
+        pins = self.sync.load_pins()
+        self.assertTrue(pins)
+        self.assertEqual([], self.sync.plan_rueckfaelle(pins))
+        posts = {p['slug']: p for p in self.sync.load_posts()}
+        for slug in SLUGS:
+            with self.subTest(slug=slug):
+                self.assertTrue(posts[slug]['sync_geschuetzt'])
+                self.assertTrue(article(slug)[0]['pin_description'].startswith('*Werbung |'))
+
+    def test_schlechte_planquelle_stoppt_vor_jeder_schreibaktion(self):
+        from unittest.mock import patch
+        with patch.object(self.sync, 'load_pins', return_value=[
+                {'tag': 5, 'titel': 'Gas', 'beschreibung': 'Die BESTE\nZeit'}]), \
+             patch.object(self.sync, 'load_posts') as laden:
+            self.assertEqual(1, self.sync.main())
+            laden.assert_not_called()
+
+    def test_geschuetzte_felder_bleiben_bei_sync_und_duplikat_unveraendert(self):
+        import tempfile
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            original = '---\ntitle: Gas\npin_description: "*Werbung | redaktionell geprüft"\npin_text_sync: false\n---\nText'
+            paths = [root / 'geschuetzt.md', root / 'zweiter.md']
+            for path in paths:
+                path.write_text(original, encoding='utf-8')
+            base = {'content': original, 'title': 'Gas', 'description': 'Ein sachlicher langer Text über Gastarife',
+                    'tags': [], 'keywords': [], 'pin_title': '', 'pinwand': '', 'pillar': '',
+                    'affiliate': False, 'draft': False, 'pin_description': '*Werbung | redaktionell geprüft'}
+            posts = [dict(base, slug='geschuetzt', path=str(paths[0]), sync_geschuetzt=True),
+                     dict(base, slug='zweiter', path=str(paths[1]), sync_geschuetzt=False)]
+            pins = [{'tag': 1, 'titel': 'Gas vergleichen', 'beschreibung':
+                     '*Werbung | Ein ausreichend langer Text zum Vergleich von Gastarifen.', 'pinwand': 'Gas'}]
+            with patch.object(self.sync, '_selftest', return_value=[]), \
+                 patch.object(self.sync, 'load_pins', return_value=pins), \
+                 patch.object(self.sync, 'load_posts', return_value=posts), \
+                 patch.object(self.sync, 'load_board_pillar_map', return_value={}), \
+                 patch.object(self.sync, 'match_score', side_effect=lambda post, *_: 2 if post['slug'] == 'geschuetzt' else 0), \
+                 patch.object(self.sync, 'score', return_value=1.5), \
+                 patch.object(self.sync, 'DO_APPLY', True), \
+                 patch.object(self.sync, 'REPORT', str(root / 'report.md')), \
+                 patch('audit_log.log_event'):
+                self.assertEqual(0, self.sync.main())
+            self.assertEqual(original, paths[0].read_text(encoding='utf-8'))
+            self.assertNotEqual(original, paths[1].read_text(encoding='utf-8'))
+
+
 if __name__ == '__main__':
     unittest.main()
