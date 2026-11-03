@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-02 11:55:18 UTC",
+ "generated_at": "2026-11-03 11:31:30 UTC",
  "verdict_changed": true,
  "state_schema_version": 2,
  "exit_code": 0,
- "checked": 76,
+ "checked": 74,
  "healed": [],
  "healed_count": 0,
  "content_problems": [],
