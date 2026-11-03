@@ -3711,7 +3711,7 @@ C45_SSOT = os.path.join("data", "agent_reach", "faktenfrische.yaml")
 C45_WORKFLOW = "faktenfrische.yml"
 C45_TESTS = ("test_faktenfrische_kapazitaet.py", "test_faktenfrische_befund_ledger.py")
 C45_MARKER = ("faelligkeit", "--selftest", "laeufe_aus_workflow",
-              "empfohlenes_budget", "nachhol_frist_tage")
+              "empfohlenes_budget", "nachhol_frist_tage", "c45_urteil")
 
 
 def _c45_deckung(root=BLOG_DIR):
@@ -3739,16 +3739,30 @@ def _c45_deckung(root=BLOG_DIR):
     limit = int(vorgaben["hartes_limit_pro_lauf"])
     sockel = int(vorgaben["max_artikel_pro_lauf"])
     deckung = int(kap.planung(cfg)["min_deckung_prozent"])
-    # Zwei Zahlen, weil eine lügen würde: Der Sockel ist das, was der
-    # Alltag ohne Sonderfall liefert; das harte Limit ist nur die
-    # Spitze. Eine Kadenz, die erst mit dauerhaft ausgereiztem Limit
-    # rechnerisch aufgeht, ist keine Deckung, sondern ein Dauer-Stau.
-    return {"kapazitaet": kap.kapazitaet_je_tag(sockel, laeufe),
-            "kapazitaet_spitze": kap.kapazitaet_je_tag(limit, laeufe),
-            "budget": sockel, "limit": limit,
-            "bedarf": bedarf, "mindest": deckung,
-            "laeufe": laeufe, "seiten": len(artikel),
-            "auto": bool(vorgaben.get("auto_skalierung"))}, None
+    auto = bool(vorgaben.get("auto_skalierung"))
+    stichtag = ff.heute()
+    empfehlung = kap.empfohlenes_budget(artikel, cfg, laeufe, stichtag)
+    # Der Plan, den der Lauf wirklich fährt: bei Auto-Skalierung das
+    # empfohlene Budget (Sockel als Untergrenze), sonst der Sockel.
+    budget = max(sockel, int(empfehlung["budget"])) if auto else sockel
+    plan = kap.plan(artikel, cfg, budget, laeufe, stichtag)
+    # Zwei Zahlen, weil eine lügen würde: Der Sockel ist die Untergrenze,
+    # das harte Limit die Obergrenze. Bei Auto-Skalierung ist das
+    # empfohlene Budget der Plan; es muss den Bedarf decken und unter dem
+    # Limit bleiben (Reserve). Ohne Auto-Skalierung ist der Sockel der
+    # Plan. Eine Kadenz, die nur mit dauerhaft ausgereiztem Limit
+    # aufgeht, ist ein Dauer-Stau.
+    zahlen = {"kapazitaet": kap.kapazitaet_je_tag(budget, laeufe),
+              "kapazitaet_spitze": kap.kapazitaet_je_tag(limit, laeufe),
+              "budget": budget, "sockel": sockel, "limit": limit,
+              "bedarf": bedarf, "mindest": deckung,
+              "laeufe": laeufe, "seiten": len(artikel),
+              "auto": auto,
+              "empfehlung_erreicht": bool(empfehlung["erreicht"]),
+              "plan_puenktlich": bool(plan["puenktlich"]),
+              "plan_rueckstand_abgebaut": bool(plan["rueckstand_abgebaut"])}
+    zahlen["urteil"] = kap.c45_urteil(zahlen, ssot_pfad=C45_SSOT)
+    return zahlen, None
 
 
 def c45_frischhalte_deckung(script_texts, wflows, root=BLOG_DIR):
@@ -3819,22 +3833,12 @@ def c45_frischhalte_deckung(script_texts, wflows, root=BLOG_DIR):
             if fehler:
                 out.append(("C45", f"Deckung nicht beweisbar: {fehler}"))
             else:
-                noetig = zahlen["bedarf"] * zahlen["mindest"] / 100.0
-                if zahlen["kapazitaet"] + 1e-9 < noetig:
-                    out.append((
-                        "C45",
-                        "Frischhalte-Kadenz unterdeckt: "
-                        f"{zahlen['seiten']} Seiten brauchen "
-                        f"{zahlen['bedarf']:.2f} Prüfungen/Tag ({noetig:.2f} "
-                        f"bei {zahlen['mindest']} % Mindestdeckung), der "
-                        f"Alltag liefert {zahlen['kapazitaet']:.2f}/Tag "
-                        f"({zahlen['budget']} je Lauf × "
-                        f"{zahlen['laeufe']:.2f} Läufe/Tag); selbst mit dem "
-                        f"harten Limit wären es nur "
-                        f"{zahlen['kapazitaet_spitze']:.2f}/Tag – eine "
-                        "Kadenz, die nur im Dauer-Spitzenbetrieb aufgeht, "
-                        "baut keinen Rückstand ab. Takt, Limit oder "
-                        f"Intervall in {C45_SSOT} entscheiden (#912)."))
+                # Das Urteil fällt die EINE Urteilsstelle im Modul
+                # (`faktenfrische_kapazitaet.c45_urteil`) – nicht der
+                # Vertrag. Sonst gäbe es zwei Schwellen für dieselbe
+                # Aussage (C19, Lektion #521).
+                for fund in zahlen["urteil"]:
+                    out.append(("C45", fund))
     # d) Die Scorecard nennt die Ursache, nicht nur das Symptom.
     scorecard = (script_texts or {}).get("release_scorecard.py", "")
     if scorecard and C45_WACHE.replace(".py", "") not in scorecard:
