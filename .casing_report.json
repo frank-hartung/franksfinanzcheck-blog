@@ -1,9 +1,9 @@
 {
- "stand": "2026-11-02T13:51:11Z",
+ "stand": "2026-11-03T13:00:18Z",
  "modus": "fix · Bestand · +Pinterest-Plan",
  "dateien": 1,
  "gepruefte_dateien": 117,
- "woerter": 214877,
+ "woerter": 216068,
  "erkannte_befunde": 1,
  "befunde": 1,
  "hart": 0,
@@ -14,7 +14,7 @@
    "pfad": "content/posts/2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu/index.md",
    "erkannte_befunde": 1,
    "befunde": 1,
-   "woerter": 2128
+   "woerter": 2184
   }
  ]
 }

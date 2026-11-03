@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – X (Twitter)
 
-> Automatisch aktualisiert: 03.11.2026 00:08 (Europe/Berlin)  
+> Automatisch aktualisiert: 03.11.2026 13:52 (Europe/Berlin)  
 > Profil: https://x.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `x.ics`
 
@@ -13,17 +13,13 @@
 ## Kommende Beiträge
 
 ### Di, 03. November 2026
-- **08:45** ⏳ Stromkosten senken: Clevere Haushaltsgeräte im Überblick — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/
-- **13:15** ⏳ Bankgebühren senken: 7 Schritte zum günstigeren Konto — _nutzen_ · Launch  
+- **19:15** ⏳ Bankgebühren senken: 7 Schritte zum günstigeren Konto — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/
-- **19:15** ⏳ Energieeffizienz im Haushalt: 5 schnelle Spartricks — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/
 ### Mi, 04. November 2026
-- **08:45** ⏳ ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung — _nutzen_ · Launch  
+- **08:45** ⏳ Energieeffizienz im Haushalt: 5 schnelle Spartricks — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/
+- **13:15** ⏳ ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/
-- **13:15** ⏳ Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/
 - **19:15** ⏳ Strategisch sparen: So kannst du deine Reisekasse füllen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/
 ### Do, 05. November 2026

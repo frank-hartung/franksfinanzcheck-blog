@@ -1299,6 +1299,19 @@ history:
     und Wechselprämien.'
   ref: '117549362262666799'
   ai: false
+- posted_at: '2026-11-03T13:52:03.657355+01:00'
+  channel: mastodon
+  slug: 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
+  title: 'Privathaftpflicht: Warum so wichtig und was sie kostet'
+  angle: zitat
+  url: https://mastodon.social/@FranksFinanzcheck/117552600058173229
+  ok: true
+  text: "„Privathaftpflicht bewahrt dich vor existenzbedrohenden Forderungen.“  \n\
+    Personenschäden können im Ernstfall Forderungen von sechs‑ bis siebenstelliger\
+    \ Höhe auslösen.  \nhttps://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot\
+    \ ⚖️  \n#Privathaftpflicht #Versicherung"
+  ref: '117552600058173229'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1324,4 +1337,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-11-03T00:08:43.347624+01:00'
+updated_at: '2026-11-03T13:52:08.206173+01:00'
