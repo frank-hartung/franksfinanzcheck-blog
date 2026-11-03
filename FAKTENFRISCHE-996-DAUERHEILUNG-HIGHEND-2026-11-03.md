@@ -259,3 +259,19 @@ Der PR-Lauf meldete drei rote Checks. Aufgeklärt und getrennt:
 Die Siegel-Heilung liegt als eigener Commit im PR, damit Herkunft und
 Verantwortung getrennt lesbar bleiben: Sie heilt das Gate, ändert aber
 keine der 16 #996-Entscheidungen.
+
+## 10. Nachtrag 03.11.2026: Regressions-Gate (5.053 Tests) – drei Altlasten geheilt
+
+Die Publication-Reliability-Suite meldete 3 Fehlschläge in 5.053 Tests –
+alle lokal reproduziert, alle drei **nicht** aus diesem PR, aber sie
+blockierten sein Gate und sind deshalb an der Ursache geheilt statt
+wegmoderiert:
+
+| # | Fehlschlag | Ursache | Heilung |
+|---|---|---|---|
+| 1 | `test_wachen_vertrag` (PyYAML-Grundlage) | `scripts/redaktions_standard.py` definierte `_messgrundlage_fehlt()` **doppelt**: Die bool-Fassung (aus #1021) überschattete die Listen-Fassung; `for f in fehlend` lief über `True` → `TypeError`, Exit 1 statt fail-closed Exit 2. | Auf die eine Listen-Implementierung der Schwester `publikations_vertrag.py` vereinheitlicht (Markierung „Prüfgrundlage fehlt“); `find_spec` fängt jetzt auch eine als Ausnahme gemeldete Sperre. 29/29 Tests grün. Datei ist Siegel-Kern → im selben PR neu signiert (Heal). |
+| 2 | `test_versicherungs_cluster_verlinkung` (W11) | Der Versicherungs-Pillar verlinkte zwei Entwürfe (Wohngebäude 18.08., Kfz 26.08.) – tote Linkziele. | Beide Links entlinkt (Text bleibt, mit „Ratgeber in Vorbereitung“); Live-Artikel bleiben verlinkt. Sobald die Entwürfe live gehen, gehören die Links zurück (Test erzwingt beides). |
+| 3 | `test_lcp_image_optimizer` | `data/lcp_images.json` war gegen den Bestand veraltet (76 statt 74 Seiten, Altlast aus Listen-Preloads). | Mit dem Generator selbst regeneriert (`--fix`, 0 Probleme); der Test vergleicht Manifest ↔ Quelle jetzt wieder gleich. |
+
+Damit ist der Stand: Faktenfrische-Suite, Siegel-Gate, Artefakt-Wächter,
+Snippet-Gate und Regression zeigen auf denselben geheilten Baum.

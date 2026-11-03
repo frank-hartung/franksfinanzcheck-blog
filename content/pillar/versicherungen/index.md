@@ -75,7 +75,7 @@ Für Haus- und Wohnungseigentümer ist die Wohngebäudeversicherung die wichtigs
 
 Die wichtigsten Standards, die Elementarschaden-Erweiterung und die Klauseln, die im Schadenfall zählen, stehen direkt darunter.
 
-Für Eigentümer vertieft der [Wohngebäudeversicherungs-Vergleich](../../posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/) die Tarifwahl. Wer Gebäude, Hausrat und Naturgefahren zusammen denken will, findet im [Vorsorge-Update für dein Haus](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) den Überblick.
+Für Eigentümer vertieft ein eigener Wohngebäudeversicherungs-Vergleich die Tarifwahl (Ratgeber in Vorbereitung). Wer Gebäude, Hausrat und Naturgefahren zusammen denken will, findet im [Vorsorge-Update für dein Haus](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) den Überblick.
 
 ### Wichtige Klauseln für deinen Hausrat- & Gebäudeschutz:
 * **Verzicht auf Einrede der groben Fahrlässigkeit:** Dein Versicherer zahlt auch dann, wenn eine brennende Kerze kurz unbeaufsichtigt blieb oder ein gekipptes Fenster bei Starkregen offen stand.
@@ -104,7 +104,7 @@ Jedes Jahr im Herbst werben Kfz-Versicherer mit neuen Konditionen. Da sich Typkl
 * **Werkstattbindung prüfen:** Wenn du die Reparatur in einer Partnerwerkstatt der Versicherung durchführen lässt, sparst du rund 10 bis 20&nbsp;% der Kaskobeiträge.
 * **Selbstbeteiligung clever wählen:** Eine Selbstbeteiligung von 150&nbsp;€ bei Teilkasko und 300&nbsp;€ bei Vollkasko bietet das beste Preis-Leistungs-Verhältnis.
 
-Wie du den Wechsel durchrechnest, welche Kündigungsfrist gilt und wo die bis zu 800&nbsp;€ Ersparnis herkommen, steht im Ratgeber [Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/).
+Wie du den Wechsel durchrechnest und welche Kündigungsfrist gilt, zeigt ein eigener Kfz-Versicherungs-Vergleich (Ratgeber in Vorbereitung).
 
 👉 **Kfz-Versicherung vergleichen und Jahresprämie senken:** [**→ Jetzt Kfz-Versicherung vergleichen**](/go/kfz-versicherung/)
 
