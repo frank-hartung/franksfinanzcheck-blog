@@ -4,11 +4,11 @@
  "seiten": [
   {
    "grund": "verlinkt",
-   "impressionen": 63,
+   "impressionen": 86,
    "inlinks": 17,
    "lastmod_tage": null,
    "outlinks": 2,
-   "position": 37.71,
+   "position": 39.36,
    "score": 11.0,
    "url": "/pillar/internet-dsl/"
   },
@@ -24,13 +24,23 @@
   },
   {
    "grund": "verlinkt",
-   "impressionen": 21,
+   "impressionen": 23,
    "inlinks": 7,
    "lastmod_tage": null,
    "outlinks": 11,
-   "position": 46.52,
-   "score": 8.0,
+   "position": 45.17,
+   "score": 8.67,
    "url": "/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/"
+  },
+  {
+   "grund": "verlinkt",
+   "impressionen": 18,
+   "inlinks": 11,
+   "lastmod_tage": null,
+   "outlinks": 3,
+   "position": 51.0,
+   "score": 7.0,
+   "url": "/pillar/konto-karten/"
   },
   {
    "grund": "verlinkt",
@@ -51,16 +61,6 @@
    "position": 10.0,
    "score": 5.67,
    "url": "/datenschutz/"
-  },
-  {
-   "grund": "verlinkt",
-   "impressionen": 14,
-   "inlinks": 11,
-   "lastmod_tage": null,
-   "outlinks": 3,
-   "position": 49.86,
-   "score": 5.67,
-   "url": "/pillar/konto-karten/"
   },
   {
    "grund": "verlinkt",
@@ -124,23 +124,23 @@
   },
   {
    "grund": "verlinkt",
-   "impressionen": 7,
-   "inlinks": 9,
+   "impressionen": 8,
+   "inlinks": 7,
    "lastmod_tage": null,
-   "outlinks": 5,
-   "position": 17.0,
-   "score": 4.63,
+   "outlinks": 3,
+   "position": 20.88,
+   "score": 4.58,
    "url": "/pillar/versicherungen/"
   },
   {
    "grund": "verlinkt",
-   "impressionen": 4,
-   "inlinks": 3,
+   "impressionen": 2,
+   "inlinks": 2,
    "lastmod_tage": null,
-   "outlinks": 7,
-   "position": 7.25,
-   "score": 4.61,
-   "url": "/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/"
+   "outlinks": 8,
+   "position": 2.0,
+   "score": 4.47,
+   "url": "/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/"
   },
   {
    "grund": "nur ein Inlink",
@@ -173,14 +173,14 @@
    "url": "/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/"
   },
   {
-   "grund": "nur ein Inlink",
-   "impressionen": 0,
-   "inlinks": 1,
+   "grund": "verlinkt",
+   "impressionen": 3,
+   "inlinks": 3,
    "lastmod_tage": null,
-   "outlinks": 3,
-   "position": null,
-   "score": 4.0,
-   "url": "/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/"
+   "outlinks": 7,
+   "position": 8.33,
+   "score": 4.17,
+   "url": "/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/"
   },
   {
    "grund": "nur ein Inlink",
@@ -201,16 +201,6 @@
    "position": 7.0,
    "score": 3.97,
    "url": "/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/"
-  },
-  {
-   "grund": "verlinkt",
-   "impressionen": 1,
-   "inlinks": 9,
-   "lastmod_tage": null,
-   "outlinks": 7,
-   "position": 4.0,
-   "score": 3.93,
-   "url": "/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/"
   },
   {
    "grund": "verlinkt",
@@ -274,12 +264,12 @@
   },
   {
    "grund": "verlinkt",
-   "impressionen": 2,
+   "impressionen": 3,
    "inlinks": 16,
    "lastmod_tage": null,
    "outlinks": 5,
-   "position": 29.5,
-   "score": 1.72,
+   "position": 29.67,
+   "score": 2.03,
    "url": "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/"
   },
   {
@@ -345,7 +335,7 @@
   {
    "grund": "verlinkt",
    "impressionen": 0,
-   "inlinks": 3,
+   "inlinks": 2,
    "lastmod_tage": null,
    "outlinks": 3,
    "position": null,
@@ -365,7 +355,17 @@
   {
    "grund": "verlinkt",
    "impressionen": 0,
-   "inlinks": 3,
+   "inlinks": 9,
+   "lastmod_tage": null,
+   "outlinks": 7,
+   "position": null,
+   "score": 1.0,
+   "url": "/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/"
+  },
+  {
+   "grund": "verlinkt",
+   "impressionen": 0,
+   "inlinks": 2,
    "lastmod_tage": null,
    "outlinks": 6,
    "position": null,
@@ -375,7 +375,7 @@
   {
    "grund": "verlinkt",
    "impressionen": 0,
-   "inlinks": 3,
+   "inlinks": 2,
    "lastmod_tage": null,
    "outlinks": 5,
    "position": null,
@@ -421,16 +421,6 @@
    "position": null,
    "score": 1.0,
    "url": "/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/"
-  },
-  {
-   "grund": "verlinkt",
-   "impressionen": 0,
-   "inlinks": 2,
-   "lastmod_tage": null,
-   "outlinks": 3,
-   "position": null,
-   "score": 1.0,
-   "url": "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/"
   },
   {
    "grund": "verlinkt",
@@ -787,7 +777,7 @@
    "impressionen": 0,
    "inlinks": 20,
    "lastmod_tage": null,
-   "outlinks": 8,
+   "outlinks": 7,
    "position": null,
    "score": 1.0,
    "url": "/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/"
@@ -795,7 +785,7 @@
   {
    "grund": "verlinkt",
    "impressionen": 0,
-   "inlinks": 26,
+   "inlinks": 25,
    "lastmod_tage": null,
    "outlinks": 6,
    "position": null,
@@ -861,16 +851,6 @@
    "position": null,
    "score": 1.0,
    "url": "/posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/"
-  },
-  {
-   "grund": "verlinkt",
-   "impressionen": 0,
-   "inlinks": 2,
-   "lastmod_tage": null,
-   "outlinks": 8,
-   "position": null,
-   "score": 1.0,
-   "url": "/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/"
   },
   {
    "grund": "verlinkt",
@@ -1073,14 +1053,14 @@
    "url": "/werkzeuge/tarifwechsel-entscheidungsbaum/"
   }
  ],
- "stand": "2026-11-02",
+ "stand": "2026-11-03",
  "welle1": [
   "/pillar/internet-dsl/",
   "/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/",
   "/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/",
+  "/pillar/konto-karten/",
   "/impressum/",
   "/datenschutz/",
-  "/pillar/konto-karten/",
   "/pillar/",
   "/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/",
   "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
@@ -1088,14 +1068,13 @@
   "/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/",
   "/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/",
   "/pillar/versicherungen/",
-  "/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/",
+  "/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/",
   "/posts/",
   "/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/",
   "/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/",
-  "/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/",
+  "/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/",
   "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/",
   "/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
-  "/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/",
   "/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/",
   "/",
   "/ueber/",
@@ -1111,6 +1090,7 @@
   "/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/",
   "/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/",
   "/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/",
+  "/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/",
   "/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/",
   "/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/",
   "/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/",
@@ -1120,9 +1100,9 @@
   "https://franksfinanzcheck.de/pillar/internet-dsl/",
   "https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/",
   "https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/",
+  "https://franksfinanzcheck.de/pillar/konto-karten/",
   "https://franksfinanzcheck.de/impressum/",
   "https://franksfinanzcheck.de/datenschutz/",
-  "https://franksfinanzcheck.de/pillar/konto-karten/",
   "https://franksfinanzcheck.de/pillar/",
   "https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/",
   "https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
@@ -1130,14 +1110,13 @@
   "https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/",
   "https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/",
   "https://franksfinanzcheck.de/pillar/versicherungen/",
-  "https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/",
+  "https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/",
   "https://franksfinanzcheck.de/posts/",
   "https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/",
   "https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/",
-  "https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/",
+  "https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/",
   "https://franksfinanzcheck.de/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/",
   "https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
-  "https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/",
   "https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/",
   "https://franksfinanzcheck.de/",
   "https://franksfinanzcheck.de/ueber/",
@@ -1153,6 +1132,7 @@
   "https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/",
   "https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/",
   "https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/",
+  "https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/",
   "https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/",
   "https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/",
   "https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/",
@@ -1161,7 +1141,6 @@
  "welle2": [
   "/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/",
   "/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/",
-  "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/",
   "/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/",
   "/posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/",
   "/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/",
@@ -1205,7 +1184,6 @@
   "/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/",
   "/posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/",
   "/posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/",
-  "/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/",
   "/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/",
   "/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/",
   "/aenderungsprotokoll/",
