@@ -245,3 +245,17 @@ dieser Heilung und bleiben offen.
 - `scripts/faktenfrische_befund_ledger.py` (`pruef_hash` inkl. Werbeflächen)
 - `scripts/FAKTENFRISCHE.md`, `package.json` (`test:faktenfrische:996`)
 - diese Datei (Heilungs- und Signaturakte)
+
+## 9. Nachtrag 03.11.2026: Drei rote PR-Checks – zwei geheilt, einer Altlast
+
+Der PR-Lauf meldete drei rote Checks. Aufgeklärt und getrennt:
+
+| Check | Ursache | Heilung |
+|---|---|---|
+| Snippet-Gate (Playwright) | **Dieser PR:** Die neue Description des 10.08. hatte 157 Zeichen / 991 px (SSOT `serp_limits.py`: 155 / 985). | Auf 139 Zeichen / 868 px gekürzt; Test-Korridor von 70–165 auf die SSOT 70–155 nachgezogen. Alle vier Descriptions messen jetzt befundfrei. |
+| Integritäts-Siegel | **Altlast auf `main`, nicht dieser PR:** `data/integrity_lock.json` ist seit `c2c83bfce` (02.11.2026) zerstörtes JSON (ineinander geschobene Signaturen); letzte gültige Fassung `8af76b55` (01.11.2026). Kein Faktenfrische-File ist Kern des Locks. | Belegter Reparaturpfad des Guards selbst: `--repair-lock` stellte das Siegel aus der Git-Historie wieder her (55 Dateien); der Restdrift waren exakt die vier in PR #1021 (`cf1b80786`) committeten Vertragsdateien – `--heal` hat nur diesen belegten, committeten Drift der Klasse FEST neu signiert. Gate lokal grün: „55 Kerndateien entsprechen exakt dem signierten Stand“. Herkunft steht in Lock-Audit und `integrity_history.jsonl`. |
+| Governance-Vertrag C1–C18 (Qualitäts-Gate) | **Altlast:** Derselbe Schritt ist auf `main` (Run 41599569588, SHA e984f26) vor diesem PR rot; lokal ist `--quick` grün (43 Regeln). | Kein Eingriff ohne Log-Beweis (CI-Logs waren nicht abrufbar, EOF – der aus #984 bekannte Blob-Befund). Ehrlich als offene Altlast benannt, nicht wegretuschiert. |
+
+Die Siegel-Heilung liegt als eigener Commit im PR, damit Herkunft und
+Verantwortung getrennt lesbar bleiben: Sie heilt das Gate, ändert aber
+keine der 16 #996-Entscheidungen.
