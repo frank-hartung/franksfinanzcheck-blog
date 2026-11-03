@@ -58,8 +58,8 @@ Am 27.10.2026 war genau das der Fall:
 | Kennzahl | vor der Reparatur | nach der Reparatur |
 |---|---|---|
 | Bedarf | 2,58 Prüfungen/Tag (≈ 18/Woche) | unverändert |
-| Takt | 2 Läufe/Woche × 3 = 0,86/Tag | 1 Lauf/Tag × 3 (elastisch bis 10) |
-| Deckung | **33 %** | 155 % beim aktuellen Empfehlungsbudget 4 |
+| Takt | 2 Läufe/Woche × 3 = 0,86/Tag | 1 Lauf/Tag × 4 (Sockel; elastisch bis 10) |
+| Deckung | **33 %** | 146 % beim aktuellen Bestand (112 Seiten, 03.11.2026) |
 | Rückstand | +12 Seiten/Woche, nie abbaubar | im Kalenderplan in 3 Tagen abgebaut |
 
 Die Intervalle wurden **nicht** angefasst. Weniger messen wäre keine Heilung.
@@ -77,11 +77,12 @@ Es wird mehr geliefert:
 Die Rechnung selbst steht in `scripts/faktenfrische_kapazitaet.py`; sie liest
 ausschließlich die eine Fälligkeitsregel (`faktenfrische.faelligkeit`) und den
 echten cron der Workflow-Datei. Wer den Plan verschiebt, verschiebt die
-Rechnung mit. Governance **C45** prüft statisch, dass
-`max_artikel_pro_lauf` (Sockel) × Läufe/Tag den Bedarf mit
-`min_deckung_prozent` (110 %) deckt. Das harte Limit ist nur die Spitze und
-zählt nicht als Plan. Reicht die Kapazität nicht, wird der **Bau** rot, bevor
-der Bestand rot wird.
+Rechnung mit. Governance **C45** prüft den Plan, den der Lauf wirklich fährt:
+Bei `auto_skalierung: true` ist das das **empfohlene Budget** (Sockel als
+Untergrenze, hartes Limit als Obergrenze). Der Plan muss den Bedarf mit
+`min_deckung_prozent` (110 %) decken und **unter** dem harten Limit bleiben –
+sonst ist es ein Dauer-Spitzenbetrieb. Reicht die Kapazität nicht, wird der
+**Bau** rot, bevor der Bestand rot wird.
 
 ```bash
 python3 scripts/faktenfrische_kapazitaet.py            # Bedarf, Angebot, Abbauplan
@@ -99,10 +100,15 @@ nächste Frist; auch diese Folgetermine werden geprüft. Verspätung wird vor
 der Arbeit des Tages gemessen, nicht erst danach weggeschrieben.
 
 Die Wache und der Scorecard-Bericht prüfen bei `auto_skalierung: true` das
-**empfohlene Budget**, das der Lauf auch verwendet. Der Sockel 3 bleibt als
-statische Untergrenze sichtbar; aktuell ergibt die Kalendersimulation 4.
-Das ist ein Plan, kein Nachweis erfolgreich ausgeführter CI-Läufe. Ausfälle
-und nicht bestandene Prüfungen bleiben eigene, sichtbare Befunde.
+**empfohlene Budget**, das der Lauf auch verwendet. Der Sockel (4, Stand
+03.11.2026) bleibt als Untergrenze sichtbar; das harte Limit (10) ist die
+Obergrenze. Die Kalendersimulation bestimmt das Budget; die Reserve zwischen
+Plan und Limit ist die Pufferfläche für Nachfrage-Spitzen. Wächst der Bestand,
+wächst das empfohlene Budget mit – bis zum harten Limit. Wird das Limit
+erreicht, wird C45 rot; dann müssen Takt, Limit oder Intervall entschieden
+werden. Das ist der Schließpfad, kein Dauerzustand. Das ist ein Plan, kein
+Nachweis erfolgreich ausgeführter CI-Läufe. Ausfälle und nicht bestandene
+Prüfungen bleiben eigene, sichtbare Befunde.
 
 ## Prüfdatum ist keine inhaltliche Freigabe (#912)
 
