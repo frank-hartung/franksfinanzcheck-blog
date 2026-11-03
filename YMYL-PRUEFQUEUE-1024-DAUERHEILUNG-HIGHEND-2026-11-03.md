@@ -286,3 +286,45 @@ der Artikelaussage. Fällt er aus oder ändert seine Struktur, bleibt die Wache
 `unklar` (bzw. meldet bei fehlender Datei `tot` mit ausdrücklichem
 Verifizierungsauftrag) – in beiden Fällen entscheidet die Redaktion, nie die
 Automatik.
+
+---
+
+## 9. Nachtrag: CI-Befunde des PR #1035 (03.11.2026)
+
+Der PR [#1035](https://github.com/frank-hartung/franksfinanzcheck-blog/pull/1035)
+zeigt drei rote Checks. Sie sind **nicht** durch diesen Auftrag entstanden; das
+wurde gegen den unveränderten Ausgangsstand `b29c009` nachgemessen.
+
+| Check | Zustand | Ursache |
+|---|---|---|
+| `YMYL-Siegelprüfung`, `syntax`, `Regelwerk, Register & Produktionswache`, `ReDoS`, `URL-Wache`, `Klartext`, `CodeQL (js/py)`, `Quellseite`, `Abhängigkeiten`, `Playwright` | **grün** | – |
+| `Integritäts-Siegel` (Integritäts-Lock PR-Gate) | rot | zerstörtes `data/integrity_lock.json` (§7) |
+| `gate` (Qualitäts-Gate, Schritt „Governance-Vertrag C1–C18") | rot | derselbe Lock: `test_fremdmessung_sperre.EchterBestand.test_die_zwei_gesiegelten_kommentar_altlasten_sind_bekannt_und_gesiegelt` wirft `JSONDecodeError` (Zeile 289). `governance_contract.py --quick` selbst ist grün (43 Regeln). |
+| `regression` (Publication reliability, „Code-Regression" + „Uhr-Probe") | rot | 13 Vorbefunde in fremden Modulen, siehe unten |
+
+**Vergleichsmessung:** `git archive b29c009` wurde in ein separates Verzeichnis
+entpackt und dort dieselben Testmodule ausgeführt – ohne eine einzige Datei
+dieses Auftrags. Ergebnis: `test_integrity_guard` 59 Tests (5 Fehler, 1 Error),
+die übrigen sechs betroffenen Module 110 Tests (5 Fehler, 3 Errors). Die
+Fehlerliste deckt sich mit dem aktuellen Stand:
+
+- `test_integrity_guard` / `test_skills_vertrag` / `test_fremdmessung_sperre` → kaputtes Siegel,
+- `test_faktenfrische_996` → zwei offene Gas-Befunde (eigenes Ticket #996),
+- `test_lcp_image_optimizer` → eingechecktes Manifest weicht ab,
+- `test_versicherungs_cluster_verlinkung` → Pillar verlinkt zwei Entwürfe,
+- `test_wachen_vertrag` → PyYAML-Probe in `redaktions_standard.py`.
+
+Die vollständige Suite auf dem Arbeitsstand lief mit **5.053 Tests** (9
+Fehler, 4 Errors, 29 übersprungen); kein einziger Befund nennt
+`belegketten_wache.py`, `test_belegketten_wache.py`, `package.json`, den
+YMYL-Workflow oder die geänderten Dokumente. Die von uns geänderte Testdatei
+bleibt auch unter einer um 97 Tage vorgestellten Uhr grün:
+`selftest_clock.py --trap-modul scripts.tests.test_belegketten_wache --offset 97`
+→ 23 Tests, OK.
+
+**Einordnung:** Diese Checks sind bereits vor dem Auftrag rot und betreffen
+andere Gewerke. Sie wurden weder abgeschwächt noch „weggeheilt"; der PR
+kommentiert sie ausdrücklich. Für `data/integrity_lock.json` und die übrigen
+Bestandsbefunde braucht es eigene Tickets mit Owner und – beim Siegel – eine
+bewusste Neu-Signatur. Die YMYL-Dauerheilung selbst ist in allen für sie
+zuständigen Checks grün.
