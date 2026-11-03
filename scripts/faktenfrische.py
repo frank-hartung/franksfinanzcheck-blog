@@ -668,6 +668,7 @@ def dossier_schreiben(art: dict, dossier: dict, geo: dict, faellig: dict,
                        "faellig": faellig, "geo": geo, "treffer": dossier["treffer"],
                        "befunde": befunde, "fehler": dossier["fehler"],
                        "fassung_sha256": ledger.pruef_hash(art),
+                       "text_sha256": ledger.text_hash(art),
                        "fachpruefung": fachpruefung},
                       fh, ensure_ascii=False, indent=2, default=str)
     return basis + ".md"
@@ -1312,6 +1313,10 @@ def lauf_eintrag(art: dict, fassung: dict, dossier: dict, quellen: list[dict],
     return {
         "slug": fassung["slug"], "titel": fassung["titel"],
         "fassung_sha256": ledger.pruef_hash(fassung),
+        # Entscheidungsbindung (#912): der Hash der Aussageflächen OHNE
+        # Quellen. Die Belegkette schreibt dieser Lauf selbst; ein Befund
+        # darf nicht dadurch unschließbar werden, dass sie aufgefrischt wird.
+        "text_sha256": ledger.text_hash(fassung),
         "bereich": art.get("bereich", "artikel"),
         "grund": str(faellig.get("grund") or "unbekannt"),
         "treffer": len(dossier.get("treffer") or []),
@@ -1635,6 +1640,7 @@ def main() -> int:
             ledger_vorher,
             [{**b, "id": ledger.befund_id(l["slug"], b), "slug": l["slug"],
               "fassung_sha256": l["fassung_sha256"],
+              "text_sha256": l.get("text_sha256", ""),
               "zuletzt_gesehen": jetzt_utc()}
              for l in laeufe for b in l["befunde"]])
         offene_fachbefunde = ledger.offene_eintraege(

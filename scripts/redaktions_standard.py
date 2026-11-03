@@ -2274,6 +2274,14 @@ def _messgrundlage_fehlt() -> list[str]:
     vom 01.11.2026 fälschlich als kaputte Wache protokolliert.
     Beide Lagen bleiben Exit 2 (keine Messung ist kein Grün, C33) – aber die
     Diagnose trennt fehlende Prüfgrundlage scharf von einem Defekt der Wache.
+
+    REPARATUR 03.11.2026 (#912-Nachlauf): Die Funktion stand hier ZWEIMAL –
+    einmal mit `list[str]` (Diagnose, neue Fassung) und einmal mit `bool`
+    (Gegenprobe). In Python gewinnt die letzte Definition, also lief der
+    Selbsttest in `for f in fehlend` über einen bool und starb mit TypeError
+    (Exit 1) statt fail-closed mit Exit 2 zu melden. Genau davor schützt
+    `test_fehlende_bibliothek_wird_als_grundlage_gemeldet_nicht_als_defekt`.
+    Jetzt gibt es EINE Definition; die Wahrheitsfrage ist `bool(fehlend)`.
     """
     fehlend: list[str] = []
     try:

@@ -113,95 +113,14 @@ jobs:
           NUM="$(FID="$FID" gh issue list --label "$LABEL" --state open --json number,body \
                  --jq '[.[] | select(.body // "" | contains(env.FID)) | .number] | first // ""')"
 
-          BODY="$(python3 - <<'PY'
-          import json, os
-          state = json.load(open(os.environ["STATE"], encoding="utf-8"))
-          artikel = state.get("artikel") or {}
-          rot = {s: a for s, a in artikel.items() if a.get("urteil") in ("blockiert", "nicht beweisbar")}
-          warn = sum(1 for a in artikel.values() if a.get("urteil") == "warnung")
-          frei = sum(1 for a in artikel.values() if a.get("urteil") == "freigabe-reif")
-          modus = "grün" if os.environ.get("ERGEBNIS") == "success" else "rot"
-          lines = [
-              f"## Release-Scorecard: Bestand {modus}",
-              "",
-              f"**{frei}/{len(artikel)}** Live-Artikel freigabe-reif · "
-              f"**{len(rot)}** blockiert/nicht beweisbar · **{warn}** mit Warnungen.",
-              "",
-          ]
-          if rot:
-              lines += ["| Artikel | Urteil | Risikoklasse | nicht bestandene Dimension |", "|---|---|---|---|"]
-              for slug, a in sorted(rot.items()):
-                  schlecht = ", ".join(d for d, s in sorted((a.get("dimensionen") or {}).items())
-                                       if s in ("blockiert", "nicht beweisbar")) or "–"
-                  lines.append(f"| `{slug}` | {a['urteil']} | {a.get('risikoklasse')} | {schlecht} |")
-
-              # ----------------------------------------------------------
-              # URSACHE statt Symptom (#912, 29.10.2026): Ein Ticket, das
-              # „Faktenalter blockiert“ meldet und dazu nichts weiter, ist
-              # nicht schließbar. Die Scorecard rechnet die Deckung selbst
-              # (scripts/faktenfrische_kapazitaet.py) und schreibt sie ins
-              # Siegel – hier wird sie nur gelesen, nicht neu gerechnet.
-              # ----------------------------------------------------------
-              kap = state.get("kapazitaet") or {}
-              fakten_rot = [s for s, a in rot.items()
-                            if set((a.get("dimensionen") or {}).keys())
-                            & {"faktenalter", "revision"}
-                            and any((a.get("dimensionen") or {}).get(d)
-                                    in ("blockiert", "nicht beweisbar")
-                                    for d in ("faktenalter", "revision"))]
-              if kap.get("nicht_beweisbar"):
-                  lines += ["", f"❔ **Ursache nicht beweisbar:** {kap['nicht_beweisbar']}"]
-              elif kap:
-                  def de(wert, stellen=2):
-                      try:
-                          return (f"{float(wert):.{stellen}f}").replace(".", ",")
-                      except (TypeError, ValueError):
-                          return "–"
-                  lines += [
-                      "",
-                      "### Warum? Deckung der Faktenfrische",
-                      "",
-                      f"- Bedarf: **{de(kap.get('bedarf_je_woche', 0), 1)}** Prüfungen/Woche "
-                      f"({de(kap.get('bedarf_je_tag', 0))}/Tag) · Angebot: "
-                      f"**{de(kap.get('kapazitaet_je_tag', 0))}**/Tag "
-                      f"(Budget {kap.get('budget')} × {de(kap.get('laeufe_je_tag'))} Läufe/Tag) "
-                      f"· Deckung **{de(kap.get('deckung_prozent'), 0)} %**",
-                      f"- Fällig heute: **{kap.get('faellig')}** · überfällig: "
-                      f"**{kap.get('ueberfaellig')}**",
-                  ]
-                  if kap.get("abbau_tage") is not None:
-                      lines.append(f"- Rückstand abgebaut in **{kap['abbau_tage']} Tagen** "
-                                   f"(Frist {kap.get('nachhol_frist_tage')} Tage) – "
-                                   "danach schließt sich dieses Ticket selbst.")
-                  elif kap.get("faellig"):
-                      lines.append("- ❌ **Rückstand nicht fristgerecht abbaubar** – Kadenz "
-                                   "oder Intervall in `data/agent_reach/faktenfrische.yaml` "
-                                   "entscheiden (Herausgeber).")
-                  if kap.get("empfehlung_erreicht") is False:
-                      lines.append("- ❌ Strukturell unterdeckt: selbst das harte Limit "
-                                   f"({kap.get('hartes_limit')} je Lauf) reicht nicht.")
-                  if fakten_rot:
-                      wort = "Artikel"   # Singular und Plural sind hier gleich
-                      lines += ["", f"Betroffen ist ausschließlich die Faktenfrische "
-                                    f"(**{len(fakten_rot)}** {wort}) – ein Kadenz-Befund, "
-                                    "kein Inhaltsbefund. Regel: `scripts/"
-                                    "faktenfrische_kapazitaet.py`, Governance C45."]
-
-              lines += [
-                  "",
-                  "**Wer entscheidet was:** Besitz je Check steht in "
-                  "`data/release_scorecard.yaml` (`entscheidung: auto|human`), "
-                  "Eskalationsmatrix im Runbook. Fachliche Konflikte entscheidet "
-                  "der Herausgeber – die Maschine nie.",
-                  "",
-                  "Details: `RELEASE-SCORECARD.md` im Repo (Schritt-Log und Artefakt).",
-              ]
-          else:
-              lines.append("Alle Live-Artikel frei von blockierenden Funden. "
-                           "Details: `RELEASE-SCORECARD.md`.")
-          print(chr(10).join(lines))
-          PY
-          )"
+          # Der Ticket-Text ist eine reine Funktion des Siegels
+          # (scripts/scorecard_ticket.py). Bis 03.11.2026 stand hier ein
+          # Heredoc, der bei jedem faktenalter-Fund „Kadenz, kein
+          # Inhaltsbefund“ behauptete – am 02.11. war F1 grün und F4 die
+          # Ursache. Ein Ticket, das die Messung falsch deutet, ist kein
+          # Schließpfad (#912). Der Marker bleibt im Skript (C4).
+          BODY="$(python3 scripts/scorecard_ticket.py --state "$STATE" \
+                    --ergebnis "$ERGEBNIS")"
 
           if [ "$ERGEBNIS" = "success" ]; then
             if [ -n "$NUM" ]; then
@@ -220,9 +139,7 @@ jobs:
               gh issue create --title "Release-Scorecard: Produktionswahrheit rot (Bestand blockiert)" \
                 --label "$LABEL" --body "$BODY
 
-          Lauf: $RUN_URL
-
-          <!-- $FID -->" >/dev/null
+          Lauf: $RUN_URL" >/dev/null
               echo "Ticket erstellt."
             else
               gh issue comment "$NUM" --body "**$(date -u '+%Y-%m-%d %H:%M') UTC** – weiterhin rot.
