@@ -337,6 +337,82 @@ def run_selftest() -> list:
     # Kandidaten-Collector (#714): dieselbe Messung, die das Publish-Gate
     # liest – wenn sie hier nicht findet, darf kein Gate ihr vertrauen.
     fehler.extend(_collector_selftest())
+    # V4-Messung (#1027): dieselbe Größe, aber an einer GEPLANTEN Änderung.
+    # Sie entscheidet, ob ein Schreiber überhaupt schreiben darf – also muss
+    # sie sich selbst beweisen, bevor jemand auf sie hört.
+    fehler.extend(_aenderung_selftest())
+    return fehler
+
+
+def _aenderung_selftest() -> list:
+    """Sabotage-Proben der V4-Messung (geplante Änderung gegen den Bestand)."""
+    fehler = []
+    fremd = ("Lies die Laufzeit in deinem Vertrag bevor du ein neues Angebot "
+             "annimmst denn die erste feste Laufzeit darf höchstens vierundzwanzig "
+             "Monate dauern und danach kannst du jederzeit mit einer Frist von "
+             "einem Monat kündigen wenn der Vertrag still weiterläuft.")
+    eigen = ("Ein Router steht selten am besten Platz; wer ihn vom Boden auf das "
+             "Regal hebt, gewinnt oft mehr als ein neuer Tarif verspricht. Miss das "
+             "WLAN in jedem Zimmer, bevor du den Vertrag anfasst.")
+    bestand = {
+        "/k/posts/2026-10-01-fremd/index.md": {
+            "slug": "2026-10-01-fremd", "title": "Fremder Ratgeber",
+            "body": fremd, "live": True, "grund": "",
+            "date": "2026-10-01T08:00:00Z"},
+        "/k/posts/2026-10-02-eigen/index.md": {
+            "slug": "2026-10-02-eigen", "title": "Eigener Ratgeber",
+            "body": eigen, "live": True, "grund": "",
+            "date": "2026-10-02T08:00:00Z"},
+    }
+    uebernommen = ("---\ntitle: \"X\"\ndraft: false\n---\n\n" + fremd +
+                    "\nEin eigener Satz mit ganz eigenen Worten.\n")
+    alt_eigen = ("---\ntitle: \"X\"\ndraft: false\n---\n\n"
+                 "Ein eigener Satz mit ganz eigenen Worten.\n")
+
+    # Fall 1: Die geplante Fassung übernimmt eine fremde Passage → Befund.
+    b1 = aenderung_befunde("2026-11-01-probe", uebernommen, alt_eigen,
+                            bestand=bestand)
+    if not b1:
+        fehler.append("  V4: eine übernommene Fremdpassage wird nicht als "
+                      "Dublette erkannt (das ist genau die Lücke aus #1027)")
+    elif "2026-10-01-fremd" not in b1[0]:
+        fehler.append("  V4: der Befund nennt den Gegenartikel nicht")
+
+    # Fall 2: Ein eigener Text bleibt ohne Befund (kein Scheinrot).
+    eigen3 = ("Ein Konto meldet sich selten von selbst, dann aber mit einer "
+              "Zahl, die niemand erwartet hat. Wer den Posten am selben Tag "
+              "prueft, verhindert die naechste Diskussion am Telefon.")
+    b2 = aenderung_befunde("2026-11-01-probe",
+                            "---\ntitle: \"X\"\ndraft: false\n---\n\n" + eigen3 + "\n",
+                            alt_eigen, bestand=bestand)
+    if b2:
+        fehler.append(f"  V4: ein eigenständiger Text erhält einen Befund: {b2[:1]}")
+
+    # Fall 3: Altlast – dieselbe Fassung alt wie neu ist kein Verstoß.
+    b3 = aenderung_befunde("2026-11-01-probe", uebernommen, uebernommen,
+                            bestand=bestand)
+    if b3:
+        fehler.append("  V4: eine unveränderte Altlast wird als Verstoß gemeldet "
+                      "– wer eine Dublette abbaut, würde bestraft")
+
+    # Fall 4: Der eigene Artikel ist keine Gegenseite.
+    b4 = aenderung_befunde("2026-10-01-fremd", uebernommen, alt_eigen,
+                            bestand=bestand)
+    if b4:
+        fehler.append("  V4: der geänderte Artikel wird mit sich selbst "
+                      "verglichen (er ist keine Gegenseite)")
+
+    # Fall 5: Ein Entwurf im Bestand ist eine Gegenseite – er kann später
+    # live gehen und mit dem geänderten Artikel kollidieren.
+    entwurf_bestand = dict(bestand)
+    entwurf_bestand["/k/posts/2026-10-03-entwurf/index.md"] = {
+        "slug": "2026-10-03-entwurf", "title": "Entwurf", "body": fremd,
+        "live": False, "grund": "Draft", "date": "2026-10-03T08:00:00Z"}
+    b5 = aenderung_befunde("2026-11-01-probe", uebernommen, alt_eigen,
+                            bestand=entwurf_bestand)
+    if not b5:
+        fehler.append("  V4: ein Entwurf im Bestand wird nicht als Gegenseite "
+                      "gerechnet – die Dublette käme erst im Publish-Gate heraus")
     return fehler
 
 
@@ -485,6 +561,86 @@ def lade_bestand(paths=None, now=None) -> dict:
 def _slug_tag(slug: str) -> str:
     m = re.match(r"(20\d\d-\d\d-\d\d)", slug or "")
     return m.group(1) if m else ""
+
+
+# ============================================================
+#  V4 – DIE GEPLANTE ÄNDERUNG (kandidatunabhängig), #1027
+# ============================================================
+#  WARUM DIESE FUNKTION GIBT ES
+#  ----------------------------
+#  Das Publish-Gate (U1/U2) misst KANDIDATEN – also Texte, die ein Lauf
+#  gerade live schalten würde. Eine redaktionelle Änderung an einem
+#  BEREITS LIVE geschalteten Artikel lief daran vorbei: Sie war kein
+#  Kandidat, also wurde sie nie gemessen. Am 02.11.2026 (#1017) stand
+#  daraufhin derselbe BNetzA-Absatz in drei live Gas-Artikeln – 16
+#  gleiche Sieben-Wort-Phrasen zwischen zwei Artikeln (Issue #1027).
+#  Der Befund kam erst NACH dem Deploy, aus dem Tagesaudit.
+#
+#  Diese Funktion misst dieselbe Größe an einer GEPLANTEN Änderung:
+#  alt gegen neu, gegen den ganzen Bestand. Sie ist die Messung, die
+#  der Publikations-Vertrag (scripts/publikations_vertrag.py, V4) vor
+#  dem Schreiben abruft – eine Änderung, die eine Dublette erzeugt,
+#  wird gar nicht erst geschrieben.
+#
+#  BEWUSST: kein zweiter Maßstab. Dieselben Bausteine wie das Audit
+#  (clean_body + ngrams + KRITISCH_AB) – eine Messregel, ein Schwellwert.
+#  Kein Allowlist-Sonderweg für Rechtsprosa: die Formulierung muss
+#  sich unterscheiden, nicht die Messung.
+# ============================================================
+def aenderung_befunde(slug: str, neu_rohtext: str, alt_rohtext: str = "",
+                      bestand: dict | None = None, n: int = None,
+                      max_sim: int = None) -> list[str]:
+    """Befunde einer GEPLANTEN Textänderung gegen den Bestand (leer = sauber).
+
+    slug        Slug des zu ändernden Artikels (er selbst ist keine
+                Gegenseite – die neue Fassung wird nicht mit der alten
+                Fassung desselben Artikels verglichen).
+    neu_rohtext Rohtext (Frontmatter + Body) der geplanten neuen Fassung.
+    alt_rohtext Rohtext der bisherigen Fassung (leer = unbekannt).
+    bestand     Ergebnis von lade_bestand(); None = aus content/posts lesen.
+                Die Bodies dort sind BEREITS bereinigt (clean_body).
+
+    Befund, wenn die geplante Fassung eine kritische Überlappung
+    ERZEUGT (neu >= KRITISCH_AB und bisher < KRITISCH_AB) oder eine
+    bestehende VERSTÄRKT (neu > bisher). Vorhandene Altlasten werden
+    dem Schreiber nicht angelastet: Wer eine Dublette abbaut, wird nicht
+    bestraft – wer sie vergrößert, schon.
+
+    Gegenseite ist jeder ANDERE Artikel im Bestand, live wie Entwurf:
+    Ein Entwurf kann später live gehen und mit dem geänderten Artikel
+    kollidieren – das darf nicht erst im Publish-Gate auffallen.
+    """
+    n = PHRASE_LEN if n is None else n
+    max_sim = MAX_SIMILAR if max_sim is None else max_sim
+    bestand = lade_bestand() if bestand is None else bestand
+    if not bestand:
+        raise ValueError("Bestand ist leer – die Einzigartigkeit ist nicht "
+                         "messbar (fail-closed)")
+    neu_grams = ngrams(clean_body(neu_rohtext or ""), n)
+    alt_grams = ngrams(clean_body(alt_rohtext or ""), n)
+    befunde: list[str] = []
+    for pfad, info in sorted(bestand.items()):
+        other = info.get("slug") or _slug(pfad)
+        if other == slug:
+            continue  # der eigene Artikel ist keine Gegenseite
+        grams_other = ngrams(info.get("body", ""), n)
+        neu_ov = len(neu_grams & grams_other)
+        alt_ov = len(alt_grams & grams_other)
+        if neu_ov <= max_sim:
+            continue
+        if neu_ov < KRITISCH_AB:
+            continue  # unter der Schwelle ist es normal und kein Duplicate
+        if alt_ov >= KRITISCH_AB and neu_ov <= alt_ov:
+            continue  # bestehende Dublette: nicht verschärft → kein Vorwurf
+        beispiel = sorted(neu_grams & grams_other)[0]
+        art = ("erzeugt" if alt_ov < KRITISCH_AB else "verstärkt")
+        befunde.append(
+            f"U1-PHRASEN: {neu_ov} gleiche {n}-Wort-Phrasen mit {other} "
+            f"(z. B. „{beispiel}“) – ab {KRITISCH_AB} ist es Dopplung; die "
+            f"geplante Änderung {art} diese Überlappung (bisher {alt_ov}); "
+            f"Passage umschreiben")
+    return befunde
+
 
 
 def kandidaten_befunde(candidates, bestand=None, n: int = None,

@@ -1685,6 +1685,42 @@ def c22_publikations_vertrag(script_texts, root=BLOG_DIR):
         out.append(("C22", "scripts/publikations_vertrag.py: kein V3-Fall – „nicht "
                            "gemessen“ könnte als „freigegeben“ durchgehen (fail-open)."))
 
+    # c2) V4 – Einzigartigkeit der GEPLANTEN Änderung (#1027). Das Publish-Gate
+    #     misst nur Kandidaten; eine Änderung an einem live geschalteten
+    #     Artikel lief daran vorbei und brachte am 02.11.2026 denselben
+    #     BNetzA-Absatz in drei live Gas-Artikeln (16 gleiche 7-Wort-Phrasen).
+    #     Die Messung muss die GETEILTE sein (check_uniqueness), sonst gäbe es
+    #     eine zweite Wahrheit – und eine zweite Schwelle.
+    if "V4" not in vertrag:
+        out.append(("C22", "scripts/publikations_vertrag.py: kein V4-Fall – eine "
+                           "geplante Änderung könnte eine Textdopplung erzeugen, "
+                           "ohne dass jemand misst (#1027)."))
+    if "check_uniqueness" not in vertrag:
+        out.append(("C22", "scripts/publikations_vertrag.py: prüft die "
+                           "Einzigartigkeit nicht gegen die geteilte Messung "
+                           "`check_uniqueness` – Schreiber und Audit hätten je "
+                           "eine eigene Wahrheit (#1027)."))
+    if "aenderung_befunde" not in vertrag:
+        out.append(("C22", "scripts/publikations_vertrag.py: ruft die geplante "
+                           "Messung `check_uniqueness.aenderung_befunde` nicht "
+                           "auf – die V4-Zeile wäre eine Behauptung ohne Messung."))
+    if re.search(r"(?m)^\s*KRITISCH_AB\s*=", vertrag):
+        out.append(("C22", "scripts/publikations_vertrag.py: definiert `KRITISCH_AB` "
+                           "selbst – die Schwelle gehört in check_uniqueness (SSOT)."))
+    cu = script_texts.get("check_uniqueness.py", "")
+    if not cu:
+        out.append(("C22", "scripts/check_uniqueness.py nicht lesbar – die "
+                           "Einzigartigkeits-Messung des Vertrags ist nicht prüfbar."))
+    else:
+        if "def aenderung_befunde(" not in cu:
+            out.append(("C22", "scripts/check_uniqueness.py: `aenderung_befunde` "
+                               "fehlt – die geplante Änderung hätte keine "
+                               "Messung (V4 wäre tot)."))
+        if "KRITISCH_AB" not in cu:
+            out.append(("C22", "scripts/check_uniqueness.py: `KRITISCH_AB` fehlt – "
+                               "die geteilte Schwelle der Einzigartigkeit ist "
+                               "nicht mehr auffindbar."))
+
     # d) Die Gate-Seite bleibt die eine Quelle der harten Regeln.
     if not re.search(r"(?m)^HARTE_REGELN\s*=", pg):
         out.append(("C22", "scripts/publish_gate.py: `HARTE_REGELN` steht nicht auf "
@@ -6537,7 +6573,7 @@ def _selftest():
     # --- C22: Publikations-Vertrag der Schreib-Seite (WF-54C4/#607, 07.10.2026)
     echte = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
              for name in ("publikations_vertrag.py", "redaktions_standard.py",
-                          "publish_gate.py")}
+                          "publish_gate.py", "check_uniqueness.py")}
     if c22_publikations_vertrag(echte):
         failures.append(f"C22: der echte Zustand wird beanstandet: "
                         f"{c22_publikations_vertrag(echte)}")
@@ -6570,6 +6606,29 @@ def _selftest():
     if not [f for f in c22_publikations_vertrag(echte, root=os.path.join(BLOG_DIR, "nix"))
             if "wf54c4" in f[1]]:
         failures.append("C22: fehlende Vorfall-Fixtures bleiben unentdeckt.")
+    # (f) V4 abgeschaltet (#1027): Die Einzigartigkeits-Messung der geplanten
+    #     Änderung entfernt – die Lücke, die drei live Gas-Artikeln denselben
+    #     BNetzA-Absatz eingeschleppt hat, wäre wieder offen.
+    ohne_v4 = dict(echte, **{"publikations_vertrag.py":
+                             echte["publikations_vertrag.py"].replace(
+                                 "aenderung_befunde", "abgeschaltete_messung")})
+    if not [f for f in c22_publikations_vertrag(ohne_v4) if "aenderung_befunde" in f[1]]:
+        failures.append("C22: abgeschaltete V4-Einzigartigkeitsmessung bleibt "
+                        "unentdeckt (#1027).")
+    # (g) Zweite Schwelle im Vertrag: KRITISCH_AB lokal kopiert statt importiert.
+    eigene_schwelle = dict(echte, **{"publikations_vertrag.py":
+                                     "KRITISCH_AB = 5\n" + echte["publikations_vertrag.py"]})
+    if not [f for f in c22_publikations_vertrag(eigene_schwelle) if "KRITISCH_AB" in f[1]]:
+        failures.append("C22: kopierte Einzigartigkeits-Schwelle bleibt unentdeckt "
+                        "(zweite Wahrheit).")
+    # (h) Die geteilte Messung fehlt: `check_uniqueness.aenderung_befunde`
+    #     gelöscht – V4 wäre eine Zusage ohne Werkzeug.
+    ohne_messung = dict(echte, **{"check_uniqueness.py":
+                                  echte["check_uniqueness.py"].replace(
+                                      "def aenderung_befunde(", "def entfernt(")})
+    if not [f for f in c22_publikations_vertrag(ohne_messung) if "aenderung_befunde" in f[1]]:
+        failures.append("C22: fehlende geteilte Einzigartigkeitsmessung bleibt "
+                        "unentdeckt (#1027).")
     blind = {RELEASE_ENGINE: "print('hallo')"}
     if not [f for f in c19_release_ssot(blind) if "Collector" in f[1] or "DRY_RUN" in f[1]]:
         failures.append("C19: eine Engine ohne Publish-Gate-Collectoren und ohne "

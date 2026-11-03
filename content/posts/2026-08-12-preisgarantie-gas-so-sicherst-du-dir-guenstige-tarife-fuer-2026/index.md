@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-11-02
+lastmod: 2026-11-03
 title: "Preisgarantie Gas: So sicherst du günstige Tarife"
 description: "Gastarife mit Preisgarantie richtig vergleichen: Filter, Gesamtpreis, Bonus, Laufzeit und Garantieumfang in einer Schritt-für-Schritt-Anleitung."
 date: 2026-08-12T08:35:12Z
@@ -33,7 +33,7 @@ quellen:
 faktencheck: 2026-11-01
 ---
 
-Ein Tarifportal findet in Sekunden hunderte Gastarife. Danach kommt die echte Arbeit: Filter zurücksetzen, Bonus ausblenden und schauen, ob Preisgarantie und Laufzeit überhaupt zueinander passen.
+Ein Tarifportal findet in Sekunden hunderte Gastarife. Danach kommt die echte Arbeit: Filter zurücksetzen, Bonus ausblenden und schauen, ob Preisgarantie und Laufzeit zueinander passen.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -50,7 +50,7 @@ Lege die letzte Gasrechnung neben den Vertrag. Notiere den Verbrauch in kWh, den
 
 Sieh dir erst den Preis ohne Bonus an. Prüfe danach die Frist zum Kündigen und die Laufzeit. Lies auch nach, was der Preis-Schutz abdeckt. Ein gutes Angebot bleibt klar, wenn du den Bonus weglässt. Es passt zu deinem Verbrauch und lässt dir genug Zeit für den nächsten Check.
 
-Mach ein Foto vom Zählerstand, wenn du wechselst. Speichere das Angebot und die Bestätigung. Dann kannst du später Preis, Start und Abschlag leicht prüfen. Das spart Rückfragen, falls ein Wert nicht zu deinen Unterlagen passt.
+Mach ein Foto vom Zählerstand, wenn du wechselst. Speichere das Angebot und die Bestätigung. Dann kannst du später Preis, Start und Abschlag leicht prüfen. Das spart Rückfragen, falls ein Wert nicht zu deinen Papieren passt.
 
 ## Das Wichtigste in Kürze
 
@@ -72,7 +72,7 @@ Du brauchst:
 - Zählernummer oder Marktlokations-ID für den späteren Abschluss,
 - nächstmöglichen Kündigungstermin.
 
-Dein Abschlag gehört nicht ins Verbrauchsfeld. Er ist nur eine Vorauszahlung. Nutzt du aus Versehen 18.000 Eurocent statt 18.000 kWh, oder nur eine grobe Schätzung, dann vergleicht das Portal am falschen Bedarf.
+Dein Abschlag gehört nicht ins Verbrauchsfeld. Er ist nur eine Vorauszahlung. Nimmst du aus Versehen 18.000 Eurocent statt 18.000 kWh oder nur eine grobe Schätzung, vergleicht das Portal am falschen Bedarf.
 
 ## Minute 2: Gesamtpreis des alten Tarifs rechnen
 
@@ -83,7 +83,7 @@ Dein Abschlag gehört nicht ins Verbrauchsfeld. Er ist nur eine Vorauszahlung. N
 - Grundpreis = 180 €
 - angenommene Jahreskosten = **2.304 €**
 
-Im Beispiel ist das die Vergleichsbasis. Nutze für deine Rechnung deine eigenen Werte; ein Bonus aus einem früheren Jahr zählt nicht mehr.
+Im Beispiel ist das die Vergleichsbasis. Nutze für deine Rechnung deine eigenen Werte. Ein Bonus aus einem früheren Jahr zählt nicht mehr..
 
 ## Minute 3: Portalfilter neutral einstellen
 
@@ -99,7 +99,7 @@ Warum? Vergleichsportale verdienen an vermittelten Abschlüssen. Das macht sie n
 
 ## Minute 4: Laufzeit und Kündigung prüfen
 
-Rund zwölf Monate Laufzeit können ein Mittelweg sein. Feste Preise gibt es nur für die Bestandteile und den Zeitraum, die Garantie abdeckt.
+Rund zwölf Monate Laufzeit können ein Mittelweg sein. Feste Preise gibt es nur für die Teile und den Zeitraum, die Garantie abdeckt.
 
 Prüfe:
 
@@ -112,12 +112,12 @@ Zeitlich sollte die Garantie nicht deutlich vor der festen Bindung enden. Sonst 
 
 ## Minute 5: Garantieumfang lesen
 
-Eine enge Garantie lässt oft Steuern, Abgaben, Umlagen oder Netz-Kosten außen vor. Eine breite Garantie schützt mehr Bestandteile. Vergleiche ihren Gesamtpreis mit anderen Angeboten; ein Aufpreis ist nicht zwingend.
+Eine enge Garantie lässt oft Steuern, Abgaben, Umlagen oder Netz-Kosten außen vor. Eine breite Garantie schützt mehr Teile. Vergleiche ihren Gesamtpreis mit anderen Angeboten; ein Aufpreis ist nicht zwingend.
 
 Markiere in den Tarifbedingungen:
 
-1. Garantierte Bestandteile,
-2. ausgenommene Bestandteile,
+1. Garantierte Teile,
+2. ausgenommene Teile,
 3. Beginn und Ende der Garantie,
 4. Geltung für Arbeits- und Grundpreis.
 
@@ -173,17 +173,17 @@ Hohe Empfehlungsquoten können nützlich sein. Sie sollten aber keine harte Vora
 - Lieferbeginn,
 - Laufzeit und Kündigung.
 
-Mach vor dem Abschluss Screenshots oder speichere die Unterlagen. Abweichungen klärst du vorher, nicht nach der ersten Rechnung.
+Mach vor dem Abschluss Screenshots oder speichere die Papiere. Abweichungen klärst du vorher, nicht nach der ersten Rechnung.
 
 ## Minute 10: Den Wechsel sauber beauftragen
 
-Für den Abschluss brauchst du meist Zählernummer oder Marktlokations-ID, bisherigen Lieferanten und Kundennummer. Beim regulären Wechsel übernimmt der neue Anbieter häufig die Kündigung und den Datenaustausch.
+Für den Abschluss brauchst du meist Zählernummer oder Marktlokations-ID, bisherigen Lieferanten und Kundennummer. Beim normalen Wechsel übernimmt der neue Anbieter oft die Kündigung und den Datenaustausch.
 
-Ausnahmen: Bei sehr knapper Frist, bei Sonderkündigung wegen Preiserhöhung oder bei Umzug kümmerst du dich besser selbst um die Kündigung.
+Ausnahmen: Bei sehr knapper Frist, bei einer Sonderkündigung wegen Preiserhöhung oder bei Umzug kümmerst du dich besser selbst um die Kündigung.
 
-Notiere den Zählerstand zum Wechseltermin und gib ihn wie verlangt durch. Leitung und Zähler bleiben gleich. Nach der [Bundesnetzagentur zu Vertragsarten](https://www.bundesnetzagentur.de/DE/Vportal/Energie/Vertragsarten/start.html) kommt bei weiterem Verbrauch je nach Fall Grund- oder Ersatzversorgung in Betracht; die Preise können abweichen.
+Notiere den Zählerstand zum Wechseltermin und gib ihn wie verlangt durch. Leitung und Zähler bleiben gleich. Nach der [Bundesnetzagentur zu Vertragsarten](https://www.bundesnetzagentur.de/DE/Vportal/Energie/Vertragsarten/start.html) bleibt die Versorgung beim Wechsel über das Netz gesichert. Kommt der neue Lieferant zu spät, greift je nach Fall die Grund- oder Ersatzversorgung; ihre Preise können abweichen.
 
-Bei Preisänderungen müssen Lieferanten Haushaltskunden grundsätzlich mindestens einen Monat vorher verständlich über Grund, Voraussetzungen und Umfang sowie das Sonderkündigungsrecht informieren; in der Grundversorgung gelten zusätzliche Pflichten. Verbraucher können grundsätzlich zum Zeitpunkt der Änderung kündigen, mit Ausnahmen etwa bei vereinbarter separierter Klausel für bestimmte hoheitliche Änderungen oder reiner Umsatzsteuerweitergabe. Details erklärt die [Bundesnetzagentur zu Preisen und Abschlägen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html).
+Kommt ein Preisschreiben, prüfst du vier Punkte: Ab wann gilt der neue Preis, warum er steigt, welche Teile betroffen sind und wie lange deine Kündigungsfrist läuft. Lieferanten müssen Haushaltskunden mindestens einen Monat vorher verständlich informieren; in der Grundversorgung gelten weitere Pflichten. Steigt der Preis einseitig, hast du ein Sonderkündigungsrecht: Du kannst zum Zeitpunkt der Änderung kündigen. Ausgenommen ist das, wenn dein Vertrag eine separierte Anpassungsklausel für hoheitlich bedingte Änderungen enthält oder wenn lediglich eine Umsatzsteueränderung weitergegeben wird. Details erklärt die [Bundesnetzagentur zu Preisen und Abschlägen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html).
 
 ## Wie du die mögliche Ersparnis berechnest?
 
@@ -191,7 +191,7 @@ Bei Preisänderungen müssen Lieferanten Haushaltskunden grundsätzlich mindeste
 
 Bei 20.000 kWh bedeuten schon 1,5 Cent weniger Arbeitspreis 300 € pro Jahr; das ist eine Modellannahme. Grundpreis und Bonus können die Differenz verändern.
 
-Ob ein Wechsel tatsächlich spart, hängt von deinem bisherigen Vertrag, dem Angebot und deinem Verbrauch ab. Vergleiche die Jahreskosten einschließlich Grundpreis und prüfe Bonusbedingungen getrennt.
+Ob ein Wechsel tatsächlich spart, hängt von deinem bisherigen Vertrag, dem Angebot und deinem Verbrauch ab. Vergleiche die Jahreskosten mit Grundpreis und prüfe die Bonusbedingungen getrennt.
 
 ## Wann 24 Monate trotzdem passen können?
 
@@ -202,11 +202,11 @@ Eine längere Laufzeit kann sinnvoll sein, wenn:
 - dein Verbrauch stabil ist,
 - dir Planungssicherheit wichtiger als jährliche Flexibilität ist.
 
-Rechne den Sicherheitsaufschlag. Kostet der 24-Monats-Tarif 0,7 Cent mehr, sind das bei 20.000 kWh **140 € pro Jahr**. Diesen Betrag zahlst du für zusätzliche Ruhe – falls alle anderen Bedingungen vergleichbar sind.
+Rechne den Sicherheitsaufschlag. Kostet der 24-Monats-Tarif 0,7 Cent mehr, sind das bei 20.000 kWh **140 € pro Jahr**. Diesen Betrag zahlst du für mehr Ruhe – falls alle anderen Bedingungen vergleichbar sind.
 
 ## Der Check nach dem Abschluss
 
-Kontrolliere die Vertragsbestätigung:
+Prüfe die Bestätigung:
 
 - Stimmen Preise und Bonus?
 - Ist der Lieferbeginn korrekt?
@@ -214,21 +214,21 @@ Kontrolliere die Vertragsbestätigung:
 - Ist der Abschlag plausibel?
 - Wurde der alte Vertrag beendet?
 
-Setze zwei Kalendertermine: acht Wochen vor Ende der Garantie und acht Wochen vor dem frühesten Kündigungstermin. Je nach Vertrag kann ein anderer Vorlauf nötig sein; die Erinnerung ist nur dein Prüfzeitpunkt.
+Setze zwei Termine: acht Wochen vor Ende der Garantie und acht Wochen vor dem frühesten Kündigungstermin. Je nach Vertrag kann ein anderer Vorlauf nötig sein; die Erinnerung ist nur dein Prüfzeitpunkt.
 
 > 💡 **Schnell-Tipp von FranksFinanzcheck:** Starte den Vergleich erst, wenn der Jahresverbrauch vor dir liegt: [**Gastarife vergleichen**](/go/gas/). Der Link ist Werbung; für dich entstehen keine Mehrkosten.
 
-Rechnen lohnt vorher: Der 24-Monats-Effektivpreis rechnet Grundpreis, Arbeitspreis, Bonus und Garantiezeit zu einem monatlichen Durchschnitt zusammen – das ist die Zahl, mit der du Angebote belastbar vergleichst.
+Rechnen lohnt vorher: Der 24-Monats-Effektivpreis rechnet Grundpreis, Arbeitspreis, Bonus und Garantiezeit zu einem monatlichen Durchschnitt zusammen. Das ist die Zahl, mit der du Angebote belastbar vergleichst.
 
 {{< werkzeug id="effektivpreis-24" >}}
 
 ## Nach dem Klick: Bestätigung und Widerruf prüfen
 
-Der Abschluss ist nicht das Ende des Vergleichs. Lies die Vertragsbestätigung am selben Tag. Stimmen Tarifname, Preis, Bonus, Lieferbeginn und Garantie nicht mit deinem gespeicherten Angebot überein, frage sofort nach.
+Der Abschluss ist nicht das Ende des Vergleichs. Lies die Bestätigung am selben Tag. Stimmen Tarifname, Preis, Bonus, Lieferbeginn und Garantie nicht mit deinem gespeicherten Angebot überein, frage sofort nach.
 
-Bei online oder telefonisch geschlossenen Verträgen besteht für Verbraucher in der Regel ein 14-tägiges Widerrufsrecht. Frist und Belehrung stehen in den Unterlagen. Widerruf und Kündigung sind nicht dasselbe: Der Widerruf löst den neuen Vertrag, die Kündigung beendet einen bestehenden Vertrag nach dessen Regeln.
+Bei online oder telefonisch geschlossenen Verträgen gilt für Verbraucher in der Regel ein 14-tägiges Widerrufsrecht. Frist und Belehrung stehen in den Papieren. Widerruf und Kündigung sind nicht dasselbe: Der Widerruf löst den neuen Vertrag, die Kündigung beendet einen laufenden Vertrag nach dessen Regeln.
 
-Kontrolliere außerdem den Abschlag. Er sollte sich aus Verbrauch und Jahreskosten nachvollziehen lassen. Ein extrem niedriger Abschlag ist kein Rabatt. Bitte um Korrektur, bevor sich eine große Nachzahlung aufbaut.
+Prüfe außerdem den Abschlag. Er sollte sich aus Verbrauch und Jahreskosten nachvollziehen lassen. Ein extrem niedriger Abschlag ist kein Rabatt. Bitte um Korrektur, bevor sich eine große Nachzahlung aufbaut.
 
 ### Zählerstand zum Wechsel
 
@@ -253,18 +253,18 @@ Nach der Portalsuche bleiben höchstens drei Kandidaten übrig. Übertrage sie i
 | Jahrespreis ohne Bonus |  |  |  |
 | sicherer Bonus im ersten Jahr |  |  |  |
 | Preisgarantie von/bis |  |  |  |
-| ausgeschlossene Bestandteile |  |  |  |
+| ausgeschlossene Teile |  |  |  |
 | Mindestlaufzeit |  |  |  |
 | [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) |  |  |  |
 | Vorkasse oder Paket |  |  |  |
 
-Streiche jedes Angebot mit Vorkasse, unklarer Garantie oder einem Preis, der nur durch einen schwer verständlichen Bonus gewinnt. Prüfe bei den übrigen Kandidaten auch, ob der Anbieter den Abschlag monatlich erhebt und ob eine Paketmenge enthalten ist.
+Streiche jedes Angebot mit Vorkasse, unklarer Garantie oder einem Preis, der nur durch einen schwer verständlichen Bonus gewinnt. Prüfe bei den übrigen Kandidaten auch, ob der Anbieter den Abschlag monatlich erhebt und eine Paketmenge enthält.
 
 Falls zwei Tarife fast gleich teuer sind, gewinnt nicht automatisch der mit dem größten Bonus. Bevorzuge die klarere Klausel, den besseren Preis ohne Bonus und die passendere [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/). Bei den übrigen Tarifen entscheidest du nach Gesamtpreis und gewünschter Sicherheit.
 
 Halte auch den Abrufzeitpunkt und deine Postleitzahl fest. So bleibt später klar, für welchen Ort und welchen Verbrauch das Angebot galt. Energiepreise können sich zwischen Suche und Abschluss ändern.
 
-Kontrolliere deshalb unmittelbar vor dem Absenden noch einmal Arbeits- und Grundpreis. Weicht die Vertragsbestätigung später ab, hast du mit Tabelle und Screenshot eine klare Grundlage für Rückfrage oder Widerruf.
+Prüfe deshalb unmittelbar vor dem Absenden noch einmal Arbeits- und Grundpreis. Weicht die Bestätigung später ab, hast du mit Tabelle und Screenshot eine klare Grundlage für Rückfrage oder Widerruf.
 
 Bewahre die Tabelle mindestens bis zur ersten Rechnung auf. Dann kannst du Preis, Bonus und Abschlag mit dem ursprünglichen Angebot abgleichen.
 
@@ -288,7 +288,7 @@ Für viele Haushalte etwa zwölf Monate. Längere Laufzeiten können bei fairem 
 Nein. Prüfe Preis ohne Bonus, Garantie, Laufzeit, Zahlungsweise und Anbieter direkt.
 
 **Übernimmt der neue Anbieter immer die Kündigung?**
-Beim regulären Wechsel häufig. Bei Sonderkündigung, Umzug oder knapper Frist solltest du selbst handeln.
+Beim regulären Wechsel häufig. Bei einer Sonderkündigung, bei Umzug oder knapper Frist solltest du selbst handeln.
 
 **Kann beim Wechsel die Gasversorgung ausfallen?**
 Der Wechsel ist ein kaufmännischer Prozess. Die Versorgung bleibt über Netz sowie notfalls Grund- oder Ersatzversorgung gesichert.
