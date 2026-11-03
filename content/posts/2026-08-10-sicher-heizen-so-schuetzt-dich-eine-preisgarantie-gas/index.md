@@ -1,7 +1,7 @@
 ---
-lastmod: 2026-11-02
+lastmod: 2026-11-03
 title: "Sicher heizen: Was sie abdeckt und wie lange sie läuft"
-description: "Sicher heizen: Gaspreisgarantie verständlich erklärt: Welche Preisbestandteile geschützt sind, wann Planungssicherheit den Aufpreis wert ist und welche."
+description: "Gaspreisgarantie verständlich erklärt: Welche Teile geschützt sind, wann sich der Aufpreis lohnt und wie du Klausel und Gesamtpreis prüfst."
 date: 2026-08-10T09:29:05Z
 draft: false
 tags: ["Heizkosten senken", "Gastarif wechseln"]
@@ -17,9 +17,12 @@ kurzantwort: "Eine Gaspreisgarantie schützt nur die Teile des Preises, die im V
 social_posted: true
 keywords: ["Sicher heizen", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich"]
 pin_title: "Sicher heizen: Gaspreisgarantie gegen den Preisschock"
-pin_description: "*Werbung | Eine Gaspreisgarantie nimmt dir den Winter-Schock: faire Tarife, klare Laufzeit, kein Zittern vor der Abschlagsrechnung. So schützt du dein Haushaltsbudget und sparst bis zu 650 Euro bei den Heizkosten. Jetzt die Checkliste lesen."
+pin_description: "*Werbung | Eine Gaspreisgarantie schützt nur die Preisbestandteile, die im Vertrag stehen – und nur für die vereinbarte Zeit. So prüfst du Umfang, Laufzeit und Gesamtpreis, bevor du wechselst. Jetzt die Checkliste lesen."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
+  - titel: "Preise und Abschläge"
+    url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html"
+    herausgeber: "Bundesnetzagentur"
   - titel: "So finden Sie den passenden Strom- oder Gastarif"
     url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-finden-sie-den-passenden-strom-oder-gastarif-6436"
     herausgeber: "Verbraucherzentrale"
@@ -148,7 +151,7 @@ Die Tabelle zeigt, warum die Stellen hinter dem Komma zählen. Für deinen Vergl
 
 ## Bonus und Garantie getrennt rechnen
 
-Ein Bonus für Neukunden drückt den Preis im ersten Jahr stark. An der Qualität der Garantie ändert er nichts.
+Ein Bonus für Neukunden senkt die Rechnung im ersten Jahr nur, wenn Höhe und Bedingungen erfüllt sind. An der Qualität der Garantie ändert er nichts.
 
 Rechne zur Kontrolle immer zwei Szenarien:
 
