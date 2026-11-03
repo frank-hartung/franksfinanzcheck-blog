@@ -62,7 +62,43 @@ in `hugo.toml`), und der Worker antwortet (Newsletter-Lauf vom 13.10.2026:
 (Art. 7 Abs. 1 DSGVO), der ohne diese Einrichtung **nur** in Cloudflare
 liegt. Deshalb jetzt einrichten, vor den ersten Anmeldungen.
 
-### Live-Status 02.11.2026 – WF-9E5A #923 (aktuell)
+### Live-Status 03.11.2026 – WF-9E5A #923 (aktuell)
+
+Gegen die echte GitHub-API geprüft am 03.11.2026 (Vormittag UTC):
+
+| Prüfung | Ergebnis |
+|---|---|
+| Offsite-Lauf `41428440948` (02.11., 10:23 UTC) | unverändert **failure** im Schritt „Voraussetzungen prüfen (fail-closed)“ – gewollt, Einrichtung fehlt |
+| Erwarteter Lauf 03.11., 03:00 UTC | zum Prüfzeitpunkt **noch nicht eingetroffen** – dasselbe belegte Scheduler-Bild wie 22.10.–02.11. (Verspätungen bis ~7 h), RPO-Toleranz 52 h deckt es |
+| Frischwache `41533983322` (02.11., 22:04 UTC) | **failure** mit Runbook `backup-einrichtung` – das fail-closed-Verhalten vom 02.11. greift im Live-Betrieb |
+| Alarme | `#923` (Offsite) und `#1030` (Frischwache) offen, jüngster Lauf jeweils nachgeführt, Rat korrekt |
+| Environment `backup` / Ziel-Repo | unverändert ohne Schutzregeln / **404** – Inhaber-Einrichtung weiterhin der Blocker |
+
+Zwei Befunde **code-seitig dauerhaft geheilt** (Einzelheiten und Belege in
+`WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-11-03.md`, Verträge in
+`scripts/tests/test_backup_einrichtung.py`, Klasse `FrischwacheEinrichtungVertrag`):
+
+1. **Die Frischwache prüfte Namen, die sie nie erhielt** (Spiegel fehlte):
+   E4 meldete live „fehlt“, obwohl `CLOUDFLARE_ACCOUNT_ID` eingerichtet ist.
+   Nach einer abgeschlossenen Einrichtung wären E1–E7 dort **für immer rot**
+   geblieben – Dauer-Fehlalarm. Der Job erhält jetzt denselben
+   Umgebungs-Spiegel wie der KV-Job (E1–E7), und E8 läuft mit dem Lauf-Token
+   (`actions: read`), weil der fein eingeschränkte Ziel-Token die Regeln des
+   Quell-Repos definitionsgemäß nicht lesen darf.
+2. **Selbsttests erzeugten echte Fehler-Annotationen:** `kv_backup.py
+   --selftest` entließ drei `::error::`/`::warning::`-Zeilen simulierter
+   Ausfälle in echte Läufe (im roten UND im grünen Lauf sichtbar). Die
+   Simulation fängt sie jetzt ein **und** beweist zugleich, dass die Meldungen
+   im echten Lauf weiterhin ausgegeben werden.
+
+Nach dem Abschluss der Inhaber-Einrichtung (unten, Schritte 1–8) gilt
+unverändert als Abnahme: ein grüner `KV-/D1-Backup`-Job auf `main`, ein
+privates Entwurfs-Release `kv-backup-*` mit Größen-/Draft-Nachweis und ein
+bestandener Restore-Drill – ergänzt seit dem 03.11. um die reflexive Probe:
+**die Frischwache muss danach ebenfalls grün werden** (Job „Backup-Frische
+pruefen“), sonst läge ein viertes Problem vor.
+
+### Live-Status 02.11.2026 – WF-9E5A #923 (Archiv)
 
 Gegen die echte GitHub-API geprüft am 02.11.2026, 09:20 UTC:
 
