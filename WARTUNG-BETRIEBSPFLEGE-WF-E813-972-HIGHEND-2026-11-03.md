@@ -117,3 +117,18 @@ signiert. Das Integritäts-Gate ist erneut grün. Der gemeinsame lokale
 Qualitäts-/Faktenfrische-Testblock besteht jetzt 75 Tests mit einem Skip.
 Die vor der Integration dokumentierten älteren Messungen bleiben zeitlich
 gebunden; sie sind kein aktueller Live-Nachweis.
+
+## Nachtrag: erneuter main-Abgleich vor Merge
+
+Der spätere main-Stand `bde5a7506` brachte die alten Pin-Werbeaussagen durch
+einen automatischen Gesundheitslauf erneut zurück; die Konfliktauflösung
+behält die redaktionellen Texte und die Sync-Sperre bei. Das neue main-Siegel
+ist zwar JSON-gültig und enthält dieselbe Datei-Map, scheitert aber am
+Herkunftsvertrag `test_akte_bleibt_gebunden_und_bennbar`: Sein letzter
+`set-current`-Eintrag nennt für die gezeichneten Dateien keine Herkünfte.
+Deshalb bleibt die zuvor geprüfte verkettete PR-Siegelfassung erhalten; der
+separate History-Eintrag des main-Laufs bleibt in `integrity_history.jsonl`.
+Nach Zusammenführung: Integritäts-Gate grün, 59 Integritäts- und 16
+Faktenfrische-Tests grün. Die beiden fehlgeschlagenen Schritte des früheren
+GitHub-Regressionstests sind damit nicht als aufgeklärt nachgewiesen; ihre
+Logs waren hier nicht abrufbar. Ein neuer CI-Lauf ist erforderlich.
