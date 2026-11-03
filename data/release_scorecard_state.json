@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "generated_at": "2026-11-02T14:13:47Z",
+  "generated_at": "2026-11-03T11:22:59Z",
   "modus": "kandidaten",
-  "commit": "69f08c40c654e63eda3d8030eec790ee85fdbaf1",
+  "commit": "2e31f3cfbae13097437b7f42ba9b595b7a1ed67f",
   "kapazitaet": {
-    "stichtag": "2026-11-02",
+    "stichtag": "2026-11-03",
     "artikel": 112,
-    "faellig": 1,
+    "faellig": 0,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
-      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
-      "frist": "2026-11-03",
-      "restlaufzeit": 1
+      "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+      "frist": "2026-11-06",
+      "restlaufzeit": 3
     },
     "budget": 4,
     "laeufe_je_tag": 1.0,
@@ -23,7 +23,7 @@
     "horizont_tage": 120,
     "vorlauf_tage": 7,
     "nachhol_frist_tage": 7,
-    "abbau_tage": 0,
+    "abbau_tage": null,
     "verletzungen_alt": 0,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
@@ -36,6 +36,106 @@
     "empfohlenes_budget": 4,
     "empfehlung_erreicht": true,
     "hartes_limit": 10
+  },
+  "ursachen": [
+    {
+      "check": "F4-fachbefund",
+      "dimension": "faktenalter",
+      "wirkung": "blockiert",
+      "entscheidung": "human",
+      "quelle": "scripts/faktenfrische_befund_ledger.py (via publish_gate.fakten_befund_failures)",
+      "artikel": [
+        "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+        "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+        "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+        "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
+        "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+        "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
+        "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+        "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+        "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
+        "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust"
+      ],
+      "anzahl": 13
+    },
+    {
+      "check": "RD2-einzigartigkeit",
+      "dimension": "redundanz",
+      "wirkung": "blockiert",
+      "entscheidung": "human",
+      "quelle": "scripts/check_uniqueness.py U1–U2 (via publish_gate.uniqueness_failures)",
+      "artikel": [
+        "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+        "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen"
+      ],
+      "anzahl": 3
+    },
+    {
+      "check": "RD1-duplikate",
+      "dimension": "redundanz",
+      "wirkung": "blockiert",
+      "entscheidung": "auto",
+      "quelle": "scripts/duplikat_guard.py D1–D6 (via publish_gate.duplicate_failures)",
+      "artikel": [
+        "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+        "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen"
+      ],
+      "anzahl": 2
+    },
+    {
+      "check": "T5-lesbarkeit",
+      "dimension": "technik",
+      "wirkung": "blockiert",
+      "entscheidung": "auto",
+      "quelle": "scripts/readability_check.py (via publish_gate.readability_failures)",
+      "artikel": [
+        "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen"
+      ],
+      "anzahl": 2
+    },
+    {
+      "check": "T1w-zeichenlaenge-optimum",
+      "dimension": "technik",
+      "wirkung": "warnung",
+      "entscheidung": "auto",
+      "quelle": "scripts/check_length.py (Status unter-/ueber-optimum)",
+      "artikel": [
+        "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub"
+      ],
+      "anzahl": 1
+    }
+  ],
+  "befundlage": {
+    "offen": 73,
+    "seiten": 17,
+    "live_befunde": 53,
+    "live_seiten": 13,
+    "ueberholt": 0,
+    "ohne_fassung": 20,
+    "nicht_entscheidbar": 0,
+    "aeltester_tage": 4,
+    "frist_tage": 14,
+    "ueber_frist": 0,
+    "je_slug": {
+      "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": 3,
+      "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": 3,
+      "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": 5,
+      "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": 5,
+      "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": 5,
+      "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": 5,
+      "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": 3,
+      "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": 3,
+      "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": 5,
+      "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": 5,
+      "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": 5,
+      "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": 3,
+      "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": 3
+    }
   },
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
@@ -53,10 +153,11 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": {
-      "sha256": "1ff0b2bba616b6160a2415405d96e0bf962297f9494f9b7e721c0d0aab446c18",
+      "sha256": "b5f125d25978f06fb3580a1287987405c8589801e26dc1703ee30180b43c49a1",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -70,7 +171,27 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "124ff2c3cd3917c274aa (praezision): Die Bewerbung des Vergleichsportals mit dem Superlativ 'Die besten Tarife' erfolgt ohne messbare Daten oder Auswahlkriterien in der Recherchegrundlage.; 7bdec96c0329769bebe6 (luecke): Die im Artikel als Fakten genannten Gaspreise für Oktober 2026 (11 bis 13 Cent/kWh) sind nicht durch die Fundstelle belegt, die lediglich eine allgemeine Themenübersicht darstellt.;"
+        },
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D4-X: Fast-Duplikat über Artikel (Ratio 0.86, content/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/index.md ≈ content/posts/2026-08-24-preisgarantie-gas-so-schu"
+        },
+        {
+          "check": "RD2-einzigartigkeit",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "U1-PHRASEN: 5 gleiche 7-Wort-Phrasen mit 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026 (z. B. „bei weiterem verbrauch je nach fall grund“) – ab 5 ist es Dopplung, Passage umschreiben; U1-PHRASEN: 16 gleiche 7-Wort-Phrasen mit 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen (z. B. „aenderung kuendigen der vertrag endet am vortag“) – ab 5 ist es Doppl"
+        }
+      ]
     },
     "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
       "sha256": "518d46f3fe8729a56931239e8ae505b0442caeb73638d4ff8adcb43906890a06",
@@ -87,7 +208,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-14",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": {
       "sha256": "58f8c1be70bd6e74a39afbeba7a3e53bb2a4e3dd3887388d989fa6a64a8a006f",
@@ -104,10 +226,11 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
-      "sha256": "367c9e3b2e9db26b714d8a73d6fddad68b7814feaf8b4f271b816b9dda9bf8ec",
+      "sha256": "8043b551b685f4028aa8d3b9487b288823acafe46cd3f7491fdcdfe53a085980",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -121,10 +244,30 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "30caa57be394afb62947 (luecke): Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg.; 32a3ea879f2cf126b3a7 (luecke): Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist.; c583efe1ce02df3ca2d7 (luecke):"
+        },
+        {
+          "check": "RD2-einzigartigkeit",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "U1-PHRASEN: 5 gleiche 7-Wort-Phrasen mit 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas (z. B. „bei weiterem verbrauch je nach fall grund“) – ab 5 ist es Dopplung, Passage umschreiben"
+        },
+        {
+          "check": "T5-lesbarkeit",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Flesch 57.8 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)"
+        }
+      ]
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
-      "sha256": "b7c87348608f9f730d73b454fd13336cbd4c4e8f150ba9bc263a9a056522f4cf",
+      "sha256": "35816d320e29b3d882cf1a12175ed01d5d0abe7bec2b200104fec53974754f48",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -138,7 +281,15 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "437b809ffbf41e5af434 (luecke): Keine Quelle für die Aussage, dass das Gesetz bei einem Tarifwechsel die Grundversorgung garantiert – regulatorischer Rahmen fehlt.; 9fbacd9942c2dfa1447f (luecke): Keine Quelle für die Behauptung, dass ein Grad weniger Raumtemperatur rund 6 % Energie einspart – Prozent‑Angabe fehlt.; da30cbb5fbc8c801daf0 (luecke): Keine Quelle für die Angabe, dass durch Optimierungsm"
+        }
+      ]
     },
     "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
       "sha256": "6c052908dea1d6d0acc229e09929d492706834b4d587f164e3bd1ebe991e87df",
@@ -155,7 +306,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": {
       "sha256": "fc37c1e187f391087a2cc08299029b5f0cc13bbd176b17b86ad8828925ddd3ea",
@@ -172,7 +324,15 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-29",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "47f855cb4f0fe1e5c65f (luecke): Angaben zu möglichen Einsparungen beim Kfz‑Versicherungswechsel (150 €‑400 € bzw. 180 €‑350 €) sind ohne Quellenangabe; keine der genannten Zahlen findet sich in den bereitgestellten Statistiken.; 6b0aa3429d97e8c74ed8 (luecke): Die Behauptung, technische Maßnahmen beim Heizen senken den Energieverbrauch um 8 %‑12 %, wird nicht belegt; die bereitgestellten Daten entha"
+        }
+      ]
     },
     "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
       "sha256": "ab4422309dab513182f7ee4a40e80f7ee3300888132cdb62b552bf12d5ca3ea7",
@@ -189,7 +349,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan": {
       "sha256": "3a9dc5b8c929a30c6fef03ce48a8ba4297229766ed7815181f29bbf8dc4065c7",
@@ -206,7 +367,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
       "sha256": "d1caf8530c3a997dde39acc4210f458610ad7180e1c7a1b57e4279e8044debab",
@@ -223,7 +385,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
       "sha256": "3572ba22f4f8761a1da485017114c803f9d6e21dc59165b5a83d83416381bd79",
@@ -240,24 +403,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-14",
-      "siegel_drift": "unverändert"
-    },
-    "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": {
-      "sha256": "280d4bda6a4a1496ff4df1e3beca2e029d3f163f0f7e46c11aca1fb457108765",
-      "urteil": "freigabe-reif",
-      "risikoklasse": "hoch",
-      "dimensionen": {
-        "technik": "bestanden",
-        "quellen": "bestanden",
-        "faktenalter": "bestanden",
-        "affiliate": "bestanden",
-        "redundanz": "bestanden",
-        "ymyl": "bestanden",
-        "freigabe": "bestanden",
-        "revision": "bestanden"
-      },
-      "naechste_pruefung": "2026-11-19",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
       "sha256": "1d49ca08e222704e74b5c5df91aa62ae29772a6cca6ac382c5c3a28c7da8960f",
@@ -274,7 +421,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": {
       "sha256": "12aba1ea379fb836d69979df5e3478de401374f64df873356979a980787e5911",
@@ -291,7 +439,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-12",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
       "sha256": "4b99ee8fcda7ceed0d815637531daebbdf6b65b49cbbc32a9fbcda08d5b12963",
@@ -308,7 +457,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
       "sha256": "a33528864f37ac50eea237d872150b8b9a001d29f1a4463e9319e7079e9e34e6",
@@ -325,7 +475,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
       "sha256": "ef1e94a62986aec0b1068fcb8a076a247157c3c60bb992a05b98b6996fc98d1b",
@@ -342,7 +493,21 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-29",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "0051151e6c46f4c2bdb3 (luecke): Der Artikel nennt eine Kautionshöhe von 900 € bis 2.500 €, ohne dass die Verbraucherzentrale diese Spanne angibt.; 0790f52160dfaa819917 (luecke): Die angegebene Ersparnis von 145 € bei einer einwöchigen Anmietung ist nicht durch Zahlen der Verbraucherzentrale gedeckt.; 53c3fde8e986e6560890 (luecke): Die Behauptung, dass Flughafen‑Mietstationen 15 %‑25 % teurer sind, "
+        },
+        {
+          "check": "T1w-zeichenlaenge-optimum",
+          "dimension": "technik",
+          "wirkung": "warnung",
+          "detail": "Zeichenlänge ueber-optimum (18242 Zeichen, Optimum 12.000–18.000)"
+        }
+      ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
       "sha256": "9b2680fc6458e25053d8aba78065b7472841708103ecd7520361775084a3f322",
@@ -359,10 +524,11 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
-      "sha256": "6ad5c5814b790efedd9e44fb53ddb9d3f4002b680ad4a53e8d40257e87ed5faf",
+      "sha256": "94a8d421ecd497ce4a50f1654d9d784e0a563228d958509a1b53ab2304356b65",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -376,7 +542,33 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "252413dcc16cea146beb (luecke): Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher angekündigt werden muss, ohne dafür eine Quelle anzugeben.; 48a0a962046c8315270e (praezision): Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf den Anbieter überträgt und dafür ein höherer Startpreis üblich ist, fehlt eine konkrete Quelle und bleibt vage.; 9326152f4d788cff56bd ("
+        },
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D4-X: Fast-Duplikat über Artikel (Ratio 0.86, content/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/index.md ≈ content/posts/2026-08-24-preisgarantie-gas-so-schu"
+        },
+        {
+          "check": "RD2-einzigartigkeit",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "U1-PHRASEN: 16 gleiche 7-Wort-Phrasen mit 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas (z. B. „aenderung kuendigen der vertrag endet am vortag“) – ab 5 ist es Dopplung, Passage umschreiben"
+        },
+        {
+          "check": "T5-lesbarkeit",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Flesch 56.9 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)"
+        }
+      ]
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
       "sha256": "2ecbcc39d5fc6e6dced5bbad70c2f71fe1993ae248e789220f995b01a264caad",
@@ -393,7 +585,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-12",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": {
       "sha256": "bc4f2e0255ced0eb210792bf8c7ef939a0211a6ca56942bbfe8eb2859e12096a",
@@ -410,24 +603,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
-    },
-    "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen": {
-      "sha256": "efdefc29509ebb6ed09337d78f16024186dd8084202a6d6f78d77f7cdc9525ac",
-      "urteil": "freigabe-reif",
-      "risikoklasse": "hoch",
-      "dimensionen": {
-        "technik": "bestanden",
-        "quellen": "bestanden",
-        "faktenalter": "bestanden",
-        "affiliate": "bestanden",
-        "redundanz": "bestanden",
-        "ymyl": "bestanden",
-        "freigabe": "bestanden",
-        "revision": "bestanden"
-      },
-      "naechste_pruefung": "2026-12-14",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
       "sha256": "6b42ef045826777b03e0f60f495b0d5f6cc15259157a13dc60dbe6c2f18f7e58",
@@ -444,7 +621,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": {
       "sha256": "823589e2d13d4dc1ae0479e2c89393ea29cbe11844938e1c44f0a6aa1f69052a",
@@ -461,7 +639,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-12",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen": {
       "sha256": "5d82e9843028f9023a6afe6da6edc13a2333b19843acb6cffb7dc801903702e4",
@@ -478,7 +657,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt": {
       "sha256": "b58c9fc9e48a8cc03ad3890c6913409d4e6ee2fd86a713b2f0061ffdf4ad7f36",
@@ -495,7 +675,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte": {
       "sha256": "687da4d4172f2f6eaf47a7a09e6e25c4dd6743015a29f738a3861d6ef135b006",
@@ -512,7 +693,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen": {
       "sha256": "37e9348f0843447b56d35854645d6a167e0d55b64511607329e31be910012aef",
@@ -529,7 +711,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-26",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": {
       "sha256": "1eeba08cf27253aaf85daad4c156296f8854d4c66d97ae0d91be205db9fdc968",
@@ -546,7 +729,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": {
       "sha256": "2e3ca085ada3cb53d47297726da70911e8b5fec2887d30cbe2c969fb580b2b75",
@@ -563,7 +747,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-12",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
       "sha256": "fba89b980163c21c661a42304e6dc4c39865b88cf0f241f7c1aaf033771c946f",
@@ -580,7 +765,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen": {
       "sha256": "a109714d2f35666edf017101048c7c9965e7dd05ffd3041c2347f92787b26a7b",
@@ -597,7 +783,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": {
       "sha256": "ad0b88c8f680959a8c539e0e415b3f1d6acca5056306ea1eb7f07b34d77991fc",
@@ -614,7 +801,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": {
       "sha256": "0ba31f7ba290b65e1ee2170447b6c33cbb8a768f0fab5473a5639ee3f1e3066b",
@@ -631,7 +819,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": {
       "sha256": "17374cba99477b1d151ce9cebf6a499681bb8f6a29931d318a519fd1541f9270",
@@ -648,7 +837,15 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-02",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "3f0a88ede9d44ee910cb (luecke): Es fehlt der Hinweis auf das offizielle Beschwerdeportal der Bundesnetzagentur, über das Verbraucher Probleme mit Anbietern direkt melden können.; 51e259fd2d8582e774f7 (luecke): Der Ratgeber versäumt es, bei der Tarifprüfung auf die behördlichen Schlichtungsverfahren hinzuweisen, die Verbrauchern bei Streitigkeiten mit Energieversorgern zur Verfügung stehen.; 55f8eee"
+        }
+      ]
     },
     "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster": {
       "sha256": "e849bee63507955ebabed76762840e08d8f4d3eb1e3eb2a166cae91a9e8de39b",
@@ -665,7 +862,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": {
       "sha256": "2f694ee9abcd26095b7c273383fdcc9172b09b0eef7c1d09103296f7bf0855a5",
@@ -682,7 +880,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
       "sha256": "ce7c53d8154304107dc634317aa2df068b2b77e5d56d46c3a24f0e092dbc3616",
@@ -699,7 +898,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
       "sha256": "e4c69f4d11c55700f5765ead33b0174bf76f19f3e30ffcee169b43d7250c617e",
@@ -716,7 +916,15 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-02",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "045ff990e44a7035e9a0 (luecke): Es fehlt der Hinweis auf die behördliche Anlaufstelle für Anfragen und Beschwerden im Bereich Energie, die über die rein zivilrechtliche Meldung beim Vermieter hinausgeht.; 8919c2d1145af782d17a (luecke): Der Ratgeber empfiehlt Tarifvergleiche und Mängelmeldungen, lässt aber den für den Energiemarkt relevanten Regulierungsrahmen für den Verbraucherschutz (Schlichtungs"
+        }
+      ]
     },
     "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": {
       "sha256": "77281a07f9bb48bf2a55836387a216fc25cbb20ab1e8b4ed0aeca9a952cf29c2",
@@ -733,7 +941,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-12",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug": {
       "sha256": "3be09f107135ebe58c6993b73898e5d34609f5d43836eb84d926b3c5c172d448",
@@ -750,7 +959,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
       "sha256": "d5ee61582c01c2f579514d059861fc8b574ac5e2307f7cd7b10a112f3cbbd37a",
@@ -767,7 +977,15 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-02",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "0aa915539d57841e5014 (luecke): Die Aussage, dass die Verbraucherzentrale empfiehlt, Boni im ersten Vergleich auszublenden, fehlt eine Quellenangabe.; 5e1be48085014a836807 (luecke): Der angegebene BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird nicht belegt.; 6fdf31c3b68b6122bd0d (praezision): Die pauschale Formulierung, dass bei zentraler Heizung der Vermieter oder die Eigentümergemeinsch"
+        }
+      ]
     },
     "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": {
       "sha256": "025510b0f4f7d9db5b112b53bbe533e269b8a4323b48edd16113fcc425a2215b",
@@ -784,7 +1002,15 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-02",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "334751e6f61ad0033fe4 (luecke): Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quellenangabe.; 36759a5efe5e8e5163d0 (luecke): Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird ohne Quelle angegeben.; 942922d1afd7844618e9 (luecke): Die Rechnung „1 Cent pro kWh bei 18.00"
+        }
+      ]
     },
     "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet": {
       "sha256": "bd25240483bcd9c81b195d124cddfc72a518bf4917688e53c4ffd22a17504681",
@@ -801,7 +1027,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist": {
       "sha256": "2a97306cd52bac6894b5cf04ad53a05ac215da0887b3fe6c6373d6c904b16314",
@@ -818,7 +1045,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert": {
       "sha256": "dfa1cd30e0e455df97c31fda4139fd81e9b716a2f3a80f517a29b6b40f15a18c",
@@ -835,7 +1063,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
       "sha256": "4d7dfcee7f02a17df3ec727b15d8954e6a1b850e50c8447fcfe8bc9e82a68bf8",
@@ -852,7 +1081,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
       "sha256": "f0b6e417c73d0ce8e7af05c313ea8e86340a899de3ac8c360ca3efca0575ea56",
@@ -869,7 +1099,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet": {
       "sha256": "ce56fe906faa42acd16e6cf8040d109e96a0b6d1662bb1a929e90fa2bbfed2c6",
@@ -886,7 +1117,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
       "sha256": "bbd7ed777f9380772a3004e80a4f2459f7aa31dca6d1ed2485adae45cab7140e",
@@ -903,24 +1135,40 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-13",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": [
+        {
+          "check": "T1w-zeichenlaenge-optimum",
+          "dimension": "technik",
+          "wirkung": "warnung",
+          "detail": "Zeichenlänge ueber-optimum (18140 Zeichen, Optimum 12.000–18.000)"
+        }
+      ]
     },
     "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
-      "sha256": "210313b43d55ddbb5b7bb253229dd544051dc44cdf315763dbf60c05145aa1f9",
-      "urteil": "freigabe-reif",
+      "sha256": "f5a94619035ef990f36f9ee1df717d8453b312f1b44bfb3e51f3f44ba41f1ff5",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-03",
-      "siegel_drift": "unverändert"
+      "naechste_pruefung": "2026-12-03",
+      "siegel_drift": "unverändert",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "04e40219cb4ff593b415 (praezision): Die Angabe, dass Anbieter den Abschlag auf elf oder zwölf Raten verteilen, ist ohne Beleg ungenau, da die Ratenzahl vertraglich variieren kann.; 2d01dc2629ad9c81f569 (luecke): Die Aussage, dass die Grundversorgung fast immer der teuerste Tarif ist, wird nicht durch eine Quelle belegt.; 3fd64026f55df4965cc9 (luecke): Die Angabe, dass ein Grad weniger Raumtemperatu"
+        }
+      ]
     },
     "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {
       "sha256": "37cdf95a3a7862519c1511624462984abd96e7d5c272063cea6c96bce35ebab6",
@@ -937,24 +1185,33 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-18",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": {
-      "sha256": "d9c890b4f45f78e43d86781294bf9a9713d1727b4b0b65a9c2ca10bf2faba6d7",
-      "urteil": "freigabe-reif",
+      "sha256": "e247d98f9cc10f163fac90c95a1e050bc99682378e76fad71f655d89f0aaae1b",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-03",
-      "siegel_drift": "unverändert"
+      "naechste_pruefung": "2026-12-03",
+      "siegel_drift": "unverändert",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "58f03a64adaaf8125959 (praezision): Während der Artikel vor hohen Kosten für Festmenüs warnt, liegt die Preissteigerung bei Nahrungsmitteln laut Destatis im Oktober 2026 bei lediglich +0,4 % und damit deutlich unter der allgemeinen Inflation.; a7f5f01ef15a38839a0d (praezision): Die Pauschale für 'Anreise und Mobilität' (10 % des Budgets) berücksichtigt nicht die überdurchschnittliche Preissteigerun"
+        }
+      ]
     },
     "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest": {
       "sha256": "b086f138bd70a28f325e3271a73e4fee062f98beaa94bbc64ae127138bb1f6fd",
@@ -971,7 +1228,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-19",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen": {
       "sha256": "3f59055e99eda77cc605ed716d138714557f496366b4ac815574677ffcf57b3d",
@@ -988,7 +1246,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": {
       "sha256": "a30ebd4e12ddf0909d283a07798eaaadcc1223ad6a9e53352fa181ea660286e5",
@@ -1005,24 +1264,33 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
-      "sha256": "3608d4e91a696cdceff233597b963147de040395b2d3fd5879a78605210e5860",
-      "urteil": "freigabe-reif",
+      "sha256": "4601faa4749766b3d41d9520a3a09123146c15537c7b26b4c948a240dc36c87e",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-06",
-      "siegel_drift": "unverändert"
+      "naechste_pruefung": "2026-12-03",
+      "siegel_drift": "unverändert",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "089b89138417e63a3dcf (luecke): Es fehlt der für Campingbuchungen relevante Regulierungsrahmen (Unterscheidung Mietrecht bei Stellplätzen vs. Reiserecht), den die Fundstelle für den Bereich Reise nur allgemein andeutet.; 1158934e7a18c7b2099b (luecke): Die Preisangabe von 20 bis 45 € pro Nacht wird als realistischer Wert positioniert, ist jedoch nicht durch Marktdaten oder eine Referenzstelle in den"
+        }
+      ]
     },
     "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
       "sha256": "098672533c8845ccea0f99df60928598d679c2b7c3047fec20ad887c04190ae9",
@@ -1039,7 +1307,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": {
       "sha256": "2c024ec6c15b726ab376f37ecdf5e00bb69ee414a89d750cbf2ab59fdff2ff8a",
@@ -1056,7 +1325,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": {
       "sha256": "cfe1aeb5c080af9553d4c6d3e81c792eb31aecfc7d1f0367841e4037ed734613",
@@ -1073,7 +1343,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-06",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": {
       "sha256": "6cecc13e3c4dd7d87ed089575c388361f7636bd867289bbb46c2828721a01da8",
@@ -1090,7 +1361,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck": {
       "sha256": "7ea2469ba8b0419eebccb17e97210ac6947cbf9f6bbb8848dcef5d26c1da1c7f",
@@ -1107,7 +1379,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-23",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": {
       "sha256": "1ba25b59f9f4ec9eb57af7f7f1ed08533f8fb575787bcf9e5e829c5012357def",
@@ -1124,7 +1397,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle": {
       "sha256": "44c00b10819c9ce1c309f6df2fdde3de49c45e4ad059f3fb56bc61c4cbe6205d",
@@ -1141,7 +1415,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-07",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt": {
       "sha256": "899e7c63fc94f4cd2c351b0c3af3bbd41f245f234a59d097baa76cf42eb424ec",
@@ -1158,7 +1433,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-05",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
       "sha256": "5bdfc3ec90e9d1d1214ada206a25e06b57461f027b5c620c117aab0629d8de86",
@@ -1175,7 +1451,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
       "sha256": "39e973d8bf8064c55451d6b681f32d2a69bfc0e5e4969c2349932d56f459696f",
@@ -1192,7 +1469,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
       "sha256": "54e71d129d6eeceb019b2f002f4d9cc9584571207e86b612370f23f676409037",
@@ -1209,7 +1487,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-06",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick": {
       "sha256": "ee71677addabd3c2bcea21decb8136b97eac9f509871266e8611f7d3f2ed14ef",
@@ -1226,7 +1505,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto": {
       "sha256": "f196b69ce1c8698a7213e8b6cf36396b036987721a2922dccf05606b610c3c99",
@@ -1243,7 +1523,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks": {
       "sha256": "691568c6b33b7d6988347495947ce7887a770f3422b1d94b8742932aa3aa4b2a",
@@ -1260,7 +1541,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen": {
       "sha256": "54d016b5d252915b27b717f0355410b8ad59809a78a616f686f6e6bb93a27575",
@@ -1277,7 +1559,15 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": [
+        {
+          "check": "T1w-zeichenlaenge-optimum",
+          "dimension": "technik",
+          "wirkung": "warnung",
+          "detail": "Zeichenlänge unter-optimum (10306 Zeichen, Optimum 12.000–18.000)"
+        }
+      ]
     },
     "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
       "sha256": "97d67cf5324effe797d7232a8acd50cd53e347bd00bda049e3fb620f06aa11a3",
@@ -1294,7 +1584,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-14",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht": {
       "sha256": "eda71f46069de2d4641d5015bb971baa3430e51880d30d35fbd5f7c8e433d07d",
@@ -1311,7 +1602,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-11",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege": {
       "sha256": "20e96b9dd489b5e1b1a912b88d042f58c825997d56c5eae477f6a68ac6532882",
@@ -1328,7 +1620,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-25",
-      "siegel_drift": "unverändert"
+      "siegel_drift": "unverändert",
+      "checks": []
     }
   }
 }

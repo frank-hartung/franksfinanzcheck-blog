@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-11-02
+lastmod: 2026-11-03
 title: "Gasrechnung senken: Fehler im Spätsommer vermeiden"
 description: "Gasrechnung senken: Fünf teure Fehler vor der Heizperiode: So prüfst du Gasrechnung, Abschlag, Tarif und Heizung, ohne Einsparungen doppelt zu zählen."
 date: 2026-08-14T08:35:12Z
@@ -17,7 +17,7 @@ kurzantwort: "Die teuersten Spätsommer-Fehler sind ein ungeprüfter Tarif, ein 
 social_posted: true
 keywords: ["Gasrechnung senken", "Heizkosten senken", "Gastarif wechseln", "Heizung entlüften", "Gasvergleich", "Gaspreisgarantie", "Gas spare"]
 pin_title: "Gastarife vergleichen: Jetzt vor der Heizperiode wechseln"
-pin_description: "*Werbung | Prüfe vor der Heizperiode deinen Verbrauch und vergleiche Gastarife. Ob ein Wechsel spart, hängt von deinem Vertrag und den verfügbaren Angeboten ab."
+pin_description: "*Werbung | Gasrechnung vor der Heizperiode prüfen: Tarif, Abschlag, Zählerstand und Heizungs-Check getrennt ansehen, statt Einsparungen doppelt zu zählen. Jetzt die fünf Fehler vermeiden."
 pin_text_sync: false
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:

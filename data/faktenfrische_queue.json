@@ -1,15 +1,15 @@
 {
-  "erzeugt": "2026-11-02 12:50 UTC",
+  "erzeugt": "2026-11-03 10:25 UTC",
   "uebersicht": {
-    "gesamt": 111,
+    "gesamt": 112,
     "ratgeber": 6,
-    "faellig": 4,
-    "vorlauf": 6,
+    "faellig": 3,
+    "vorlauf": 4,
     "bearbeitet": 4,
     "budget": 4,
     "budget_quelle": "Auto-Skalierung (Deckungsrechnung)",
     "geo_schnitt": 94,
-    "befunde": 57,
+    "befunde": 73,
     "befunde_im_lauf": 16,
     "fachbefunde": [
       {
@@ -391,6 +391,105 @@
         "zuletzt_gesehen": "2026-11-02 12:50 UTC"
       },
       {
+        "typ": "praezision",
+        "text": "Die Angabe, dass Anbieter den Abschlag auf elf oder zwölf Raten verteilen, ist ohne Beleg ungenau, da die Ratenzahl vertraglich variieren kann.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "04e40219cb4ff593b415",
+        "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+        "fassung_sha256": "642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8",
+        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Aussage, dass die Grundversorgung fast immer der teuerste Tarif ist, wird nicht durch eine Quelle belegt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "2d01dc2629ad9c81f569",
+        "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+        "fassung_sha256": "642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8",
+        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Angabe, dass ein Grad weniger Raumtemperatur rund 6 % Heizenergie einspart, fehlt eine Quellenangabe.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "3fd64026f55df4965cc9",
+        "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+        "fassung_sha256": "642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8",
+        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Das Sonderkündigungsrecht bei Preiserhöhungen im Winter wird genannt, ohne regulatorische Grundlage zu nennen.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "799c93c89a10fc3cf267",
+        "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+        "fassung_sha256": "642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8",
+        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Behauptung, der Grundtarif der Stadtwerke sei ausschließlich eine Notversorgung und nie ein Bestpreis, ist unbelegt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "cd81b3d9001b04c0a4e1",
+        "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+        "fassung_sha256": "642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8",
+        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Während der Artikel vor hohen Kosten für Festmenüs warnt, liegt die Preissteigerung bei Nahrungsmitteln laut Destatis im Oktober 2026 bei lediglich +0,4 % und damit deutlich unter der allgemeinen Inflation.",
+        "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+        "id": "58f03a64adaaf8125959",
+        "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
+        "fassung_sha256": "7203c0f7cedd638a87bafcfcd5fc6e920ab79959793f832239386b0690ac776f",
+        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Die Pauschale für 'Anreise und Mobilität' (10 % des Budgets) berücksichtigt nicht die überdurchschnittliche Preissteigerung bei Energie von +14,9 %, die Fahrtkosten im Vergleich zum Vorjahr massiv verteuern kann.",
+        "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+        "id": "a7f5f01ef15a38839a0d",
+        "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
+        "fassung_sha256": "7203c0f7cedd638a87bafcfcd5fc6e920ab79959793f832239386b0690ac776f",
+        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Modellrechnung für das Weihnachtsbudget (600 €) lässt die aktuelle Teuerungsrate unberücksichtigt. Laut Statistischen Bundesamt liegt die Inflationsrate im Oktober 2026 bei +2,8 %, was als Referenzwert für die Budgetplanung zum Vorjahr fehlt.",
+        "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+        "id": "bcc2bdf06220d5097133",
+        "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
+        "fassung_sha256": "7203c0f7cedd638a87bafcfcd5fc6e920ab79959793f832239386b0690ac776f",
+        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Es fehlt der für Campingbuchungen relevante Regulierungsrahmen (Unterscheidung Mietrecht bei Stellplätzen vs. Reiserecht), den die Fundstelle für den Bereich Reise nur allgemein andeutet.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "089b89138417e63a3dcf",
+        "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+        "fassung_sha256": "4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7",
+        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Preisangabe von 20 bis 45 € pro Nacht wird als realistischer Wert positioniert, ist jedoch nicht durch Marktdaten oder eine Referenzstelle in den Fundstellen belegt.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "1158934e7a18c7b2099b",
+        "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+        "fassung_sha256": "4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7",
+        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Der Verweis auf die Verbraucherzentrale zur Prüfung von Buchungsangaben führt auf eine allgemeine Übersichtsseite ohne konkrete Checklisten für Camping-Angebote.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "3716cfd3ab5aec6d774b",
+        "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+        "fassung_sha256": "4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7",
+        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+      },
+      {
         "id": "05be346e82c80b2a8664",
         "slug": "2026-10-28-dsl-und-internet-flat-guenstig-sichern",
         "fassung_sha256": "legacy-unbekannt",
@@ -486,6 +585,51 @@
         "herkunft": "dossier-nachlese"
       },
       {
+        "typ": "luecke",
+        "text": "Die 50‑30‑20‑Regel für die Urlaubsbudget‑Aufteilung wird ohne Quellenangabe präsentiert.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "0a2bec9dc02e16c057ee",
+        "slug": "2026-11-02-last-minute-urlaubsangebote-sichern",
+        "fassung_sha256": "6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2",
+        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Angabe, dass das Weglassen der Vollkasko‑Selbstbeteiligung die Kosten um 10 % bis 20 % senken kann, ist nicht mit einer Quelle belegt.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "274c32d1a16e9dffcf1a",
+        "slug": "2026-11-02-last-minute-urlaubsangebote-sichern",
+        "fassung_sha256": "6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2",
+        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Aussage, dass Stornogebühren häufig einem Tagespreis entsprechen, ist unbelegt.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "5c572a933edece129bba",
+        "slug": "2026-11-02-last-minute-urlaubsangebote-sichern",
+        "fassung_sha256": "6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2",
+        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Behauptung, dass Last‑Minute‑Deals wegen Restkapazitäten zu niedrigeren Preisen führen, fehlt eine fundierte Quelle.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "9d9d4afc8d6c421a0d14",
+        "slug": "2026-11-02-last-minute-urlaubsangebote-sichern",
+        "fassung_sha256": "6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2",
+        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Die Empfehlung, ausschließlich CHECK24 für den Mietwagenvergleich zu nutzen, ist ein unqualifiziertes Superlativ ohne Messgrundlage.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "fb50388539a0e8b4461c",
+        "slug": "2026-11-02-last-minute-urlaubsangebote-sichern",
+        "fassung_sha256": "6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2",
+        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+      },
+      {
         "id": "360dbd44c71db04f43e0",
         "slug": "versicherungen",
         "fassung_sha256": "legacy-unbekannt",
@@ -534,12 +678,13 @@
     "geo_luecken": {
       "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 9,
       "Mindestens eine Tabelle (extrahierbare Struktur)": 12,
-      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 14,
-      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 2,
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 15,
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 3,
+      "Sichtbares Prüfdatum (`faktencheck:`)": 1,
       "FAQ-Abschnitt (FAQPage-Schema, Antwortmaschinen-Futter)": 3
     },
-    "deckung_prozent": 148.1,
-    "bedarf_je_woche": 18.9,
+    "deckung_prozent": 146.3,
+    "bedarf_je_woche": 19.1,
     "abbau_tage": 0,
     "nachhol_frist_tage": 7,
     "abbrueche": 0
@@ -924,6 +1069,105 @@
       "zuletzt_gesehen": "2026-11-02 12:50 UTC"
     },
     {
+      "typ": "praezision",
+      "text": "Die Angabe, dass Anbieter den Abschlag auf elf oder zwölf Raten verteilen, ist ohne Beleg ungenau, da die Ratenzahl vertraglich variieren kann.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "04e40219cb4ff593b415",
+      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+      "fassung_sha256": "642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8",
+      "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Aussage, dass die Grundversorgung fast immer der teuerste Tarif ist, wird nicht durch eine Quelle belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "2d01dc2629ad9c81f569",
+      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+      "fassung_sha256": "642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8",
+      "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Angabe, dass ein Grad weniger Raumtemperatur rund 6 % Heizenergie einspart, fehlt eine Quellenangabe.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "3fd64026f55df4965cc9",
+      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+      "fassung_sha256": "642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8",
+      "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Das Sonderkündigungsrecht bei Preiserhöhungen im Winter wird genannt, ohne regulatorische Grundlage zu nennen.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "799c93c89a10fc3cf267",
+      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+      "fassung_sha256": "642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8",
+      "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Behauptung, der Grundtarif der Stadtwerke sei ausschließlich eine Notversorgung und nie ein Bestpreis, ist unbelegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "cd81b3d9001b04c0a4e1",
+      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+      "fassung_sha256": "642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8",
+      "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+    },
+    {
+      "typ": "praezision",
+      "text": "Während der Artikel vor hohen Kosten für Festmenüs warnt, liegt die Preissteigerung bei Nahrungsmitteln laut Destatis im Oktober 2026 bei lediglich +0,4 % und damit deutlich unter der allgemeinen Inflation.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "id": "58f03a64adaaf8125959",
+      "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
+      "fassung_sha256": "7203c0f7cedd638a87bafcfcd5fc6e920ab79959793f832239386b0690ac776f",
+      "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Pauschale für 'Anreise und Mobilität' (10 % des Budgets) berücksichtigt nicht die überdurchschnittliche Preissteigerung bei Energie von +14,9 %, die Fahrtkosten im Vergleich zum Vorjahr massiv verteuern kann.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "id": "a7f5f01ef15a38839a0d",
+      "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
+      "fassung_sha256": "7203c0f7cedd638a87bafcfcd5fc6e920ab79959793f832239386b0690ac776f",
+      "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Modellrechnung für das Weihnachtsbudget (600 €) lässt die aktuelle Teuerungsrate unberücksichtigt. Laut Statistischen Bundesamt liegt die Inflationsrate im Oktober 2026 bei +2,8 %, was als Referenzwert für die Budgetplanung zum Vorjahr fehlt.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "id": "bcc2bdf06220d5097133",
+      "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
+      "fassung_sha256": "7203c0f7cedd638a87bafcfcd5fc6e920ab79959793f832239386b0690ac776f",
+      "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Es fehlt der für Campingbuchungen relevante Regulierungsrahmen (Unterscheidung Mietrecht bei Stellplätzen vs. Reiserecht), den die Fundstelle für den Bereich Reise nur allgemein andeutet.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "089b89138417e63a3dcf",
+      "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+      "fassung_sha256": "4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7",
+      "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Preisangabe von 20 bis 45 € pro Nacht wird als realistischer Wert positioniert, ist jedoch nicht durch Marktdaten oder eine Referenzstelle in den Fundstellen belegt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "1158934e7a18c7b2099b",
+      "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+      "fassung_sha256": "4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7",
+      "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+    },
+    {
+      "typ": "praezision",
+      "text": "Der Verweis auf die Verbraucherzentrale zur Prüfung von Buchungsangaben führt auf eine allgemeine Übersichtsseite ohne konkrete Checklisten für Camping-Angebote.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "3716cfd3ab5aec6d774b",
+      "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+      "fassung_sha256": "4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7",
+      "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+    },
+    {
       "id": "05be346e82c80b2a8664",
       "slug": "2026-10-28-dsl-und-internet-flat-guenstig-sichern",
       "fassung_sha256": "legacy-unbekannt",
@@ -1019,6 +1263,51 @@
       "herkunft": "dossier-nachlese"
     },
     {
+      "typ": "luecke",
+      "text": "Die 50‑30‑20‑Regel für die Urlaubsbudget‑Aufteilung wird ohne Quellenangabe präsentiert.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "0a2bec9dc02e16c057ee",
+      "slug": "2026-11-02-last-minute-urlaubsangebote-sichern",
+      "fassung_sha256": "6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2",
+      "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Angabe, dass das Weglassen der Vollkasko‑Selbstbeteiligung die Kosten um 10 % bis 20 % senken kann, ist nicht mit einer Quelle belegt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "274c32d1a16e9dffcf1a",
+      "slug": "2026-11-02-last-minute-urlaubsangebote-sichern",
+      "fassung_sha256": "6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2",
+      "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Aussage, dass Stornogebühren häufig einem Tagespreis entsprechen, ist unbelegt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "5c572a933edece129bba",
+      "slug": "2026-11-02-last-minute-urlaubsangebote-sichern",
+      "fassung_sha256": "6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2",
+      "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Behauptung, dass Last‑Minute‑Deals wegen Restkapazitäten zu niedrigeren Preisen führen, fehlt eine fundierte Quelle.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "9d9d4afc8d6c421a0d14",
+      "slug": "2026-11-02-last-minute-urlaubsangebote-sichern",
+      "fassung_sha256": "6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2",
+      "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Empfehlung, ausschließlich CHECK24 für den Mietwagenvergleich zu nutzen, ist ein unqualifiziertes Superlativ ohne Messgrundlage.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "fb50388539a0e8b4461c",
+      "slug": "2026-11-02-last-minute-urlaubsangebote-sichern",
+      "fassung_sha256": "6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2",
+      "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+    },
+    {
       "id": "360dbd44c71db04f43e0",
       "slug": "versicherungen",
       "fassung_sha256": "legacy-unbekannt",
@@ -1065,98 +1354,41 @@
     }
   ],
   "kapazitaet": {
-    "stichtag": "2026-11-02",
-    "artikel": 111,
-    "faellig": 4,
-    "ueberfaellig": 4,
-    "ueberfaellig_max_tage": 5,
+    "stichtag": "2026-11-03",
+    "artikel": 112,
+    "faellig": 3,
+    "ueberfaellig": 0,
+    "ueberfaellig_max_tage": 0,
     "naechste_frist": {
-      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
-      "frist": "2026-11-03",
-      "restlaufzeit": 1
+      "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+      "frist": "2026-11-06",
+      "restlaufzeit": 3
     },
     "budget": 4,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 4.0,
-    "bedarf_je_tag": 2.7,
-    "bedarf_je_woche": 18.9,
-    "deckung_prozent": 148.1,
+    "bedarf_je_tag": 2.733,
+    "bedarf_je_woche": 19.1,
+    "deckung_prozent": 146.3,
     "horizont_tage": 120,
     "vorlauf_tage": 7,
     "nachhol_frist_tage": 7,
     "abbau_tage": 0,
-    "verletzungen_alt": 4,
+    "verletzungen_alt": 0,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
-    "verletzungen": [
-      {
-        "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
-        "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 5,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      },
-      {
-        "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
-        "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 5,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      },
-      {
-        "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
-        "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 5,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      },
-      {
-        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-        "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
-        "frist": "2026-10-28",
-        "tage_zu_spaet": 5,
-        "vorher_faellig": true,
-        "folgeprüfung": false
-      }
-    ],
-    "offen_im_horizont": 111,
+    "verletzungen": [],
+    "offen_im_horizont": 112,
     "puenktlich": true,
     "rueckstand_abgebaut": true
   },
   "abbrueche": [],
   "offen": [
     {
-      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
-      "titel": "Gasabschlag berechnen: So planst du die Heizsaison richtig",
-      "grund": "frisch geprüft vor 29 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-03",
-      "geo": 100
-    },
-    {
-      "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
-      "titel": "Weihnachten Budget planen: Ohne Schulden durch die Feiertage",
-      "grund": "frisch geprüft vor 29 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-03",
-      "geo": 100
-    },
-    {
-      "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
-      "titel": "Campingurlaub planen: Budget für Platz und Fahrt",
-      "grund": "frisch geprüft vor 26 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-06",
-      "geo": 83
-    },
-    {
       "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
       "titel": "Urlaub sparen: Budget, Buchung und Kosten im Blick",
-      "grund": "frisch geprüft vor 26 Tagen (Intervall 30 Tage)",
+      "grund": "frisch geprüft vor 27 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-06",
       "geo": 83
@@ -1164,7 +1396,7 @@
     {
       "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
       "titel": "Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig",
-      "grund": "frisch geprüft vor 26 Tagen (Intervall 30 Tage)",
+      "grund": "frisch geprüft vor 27 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-06",
       "geo": 100
@@ -1172,7 +1404,7 @@
     {
       "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "titel": "Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden",
-      "grund": "frisch geprüft vor 26 Tagen (Intervall 30 Tage)",
+      "grund": "frisch geprüft vor 27 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-06",
       "geo": 100
@@ -1180,163 +1412,160 @@
   ],
   "laeufe": [
     {
-      "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
-      "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
-      "fassung_sha256": "7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648",
+      "slug": "2026-11-02-last-minute-urlaubsangebote-sichern",
+      "titel": "Last-Minute Urlaubsangebote sichern",
+      "fassung_sha256": "6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2",
       "bereich": "artikel",
-      "grund": "35 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 1,
       "quellen": 1,
       "befunde": [
         {
           "typ": "luecke",
-          "text": "Der Ratgeber versäumt es, bei der Tarifprüfung auf die behördlichen Schlichtungsverfahren hinzuweisen, die Verbrauchern bei Streitigkeiten mit Energieversorgern zur Verfügung stehen.",
-          "beleg": ""
+          "text": "Die Angabe, dass das Weglassen der Vollkasko‑Selbstbeteiligung die Kosten um 10 % bis 20 % senken kann, ist nicht mit einer Quelle belegt.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
         },
         {
           "typ": "luecke",
-          "text": "Es fehlt der Hinweis auf das offizielle Beschwerdeportal der Bundesnetzagentur, über das Verbraucher Probleme mit Anbietern direkt melden können.",
-          "beleg": ""
+          "text": "Die 50‑30‑20‑Regel für die Urlaubsbudget‑Aufteilung wird ohne Quellenangabe präsentiert.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
         },
         {
           "typ": "luecke",
-          "text": "Der Artikel erwähnt keine behördlichen Informationsquellen wie das Verbraucher-Radar, das Transparenz über den Energiemarkt und Verbraucherschutzthemen bietet.",
-          "beleg": ""
+          "text": "Die Behauptung, dass Last‑Minute‑Deals wegen Restkapazitäten zu niedrigeren Preisen führen, fehlt eine fundierte Quelle.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Aussage, dass Stornogebühren häufig einem Tagespreis entsprechen, ist unbelegt.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+        },
+        {
+          "typ": "praezision",
+          "text": "Die Empfehlung, ausschließlich CHECK24 für den Mietwagenvergleich zu nutzen, ist ein unqualifiziertes Superlativ ohne Messgrundlage.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+        }
+      ],
+      "geo": 50,
+      "fehler": [
+        "Verbraucherzentrale – Reise: Abruf fehlgeschlagen (The read operation timed out)"
+      ],
+      "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)",
+      "aenderungen": [
+        "faktencheck: 2026-11-03"
+      ]
+    },
+    {
+      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+      "titel": "Gasabschlag berechnen: So planst du die Heizsaison richtig",
+      "fassung_sha256": "642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8",
+      "bereich": "artikel",
+      "grund": "30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [
+        {
+          "typ": "luecke",
+          "text": "Die Aussage, dass die Grundversorgung fast immer der teuerste Tarif ist, wird nicht durch eine Quelle belegt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Angabe, dass ein Grad weniger Raumtemperatur rund 6 % Heizenergie einspart, fehlt eine Quellenangabe.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Behauptung, der Grundtarif der Stadtwerke sei ausschließlich eine Notversorgung und nie ein Bestpreis, ist unbelegt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Das Sonderkündigungsrecht bei Preiserhöhungen im Winter wird genannt, ohne regulatorische Grundlage zu nennen.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "praezision",
+          "text": "Die Angabe, dass Anbieter den Abschlag auf elf oder zwölf Raten verteilen, ist ohne Beleg ungenau, da die Ratenzahl vertraglich variieren kann.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         }
       ],
       "geo": 100,
       "fehler": [
         "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
-        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (The read operation timed out)"
       ],
-      "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)",
+      "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)",
       "aenderungen": [
-        "faktencheck: 2026-11-02"
+        "faktencheck: 2026-11-03"
       ]
     },
     {
-      "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
-      "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
-      "fassung_sha256": "9bf7efbf6eb1d4a2fa70aaa34f3caf1a938955b3986bd93ebdad278ca2f11d21",
+      "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
+      "titel": "Weihnachten Budget planen: Ohne Schulden durch die Feiertage",
+      "fassung_sha256": "7203c0f7cedd638a87bafcfcd5fc6e920ab79959793f832239386b0690ac776f",
       "bereich": "artikel",
-      "grund": "35 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+      "grund": "30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
       "treffer": 1,
       "quellen": 1,
       "befunde": [
         {
           "typ": "luecke",
-          "text": "Der Ratgeber empfiehlt Tarifvergleiche und Mängelmeldungen, lässt aber den für den Energiemarkt relevanten Regulierungsrahmen für den Verbraucherschutz (Schlichtungsverfahren) unerwähnt.",
-          "beleg": ""
-        },
-        {
-          "typ": "luecke",
-          "text": "Es fehlt der Hinweis auf die behördliche Anlaufstelle für Anfragen und Beschwerden im Bereich Energie, die über die rein zivilrechtliche Meldung beim Vermieter hinausgeht.",
-          "beleg": ""
+          "text": "Die Modellrechnung für das Weihnachtsbudget (600 €) lässt die aktuelle Teuerungsrate unberücksichtigt. Laut Statistischen Bundesamt liegt die Inflationsrate im Oktober 2026 bei +2,8 %, was als Referenzwert für die Budgetplanung zum Vorjahr fehlt.",
+          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
         },
         {
           "typ": "praezision",
-          "text": "Die Markttransparenz und der Verbraucherschutz im Energiesektor werden durch das 'Verbraucher-Radar' der Bundesnetzagentur statistisch erfasst; dieser Kontext fehlt bei der Einordnung von Marktdaten.",
-          "beleg": ""
+          "text": "Die Pauschale für 'Anreise und Mobilität' (10 % des Budgets) berücksichtigt nicht die überdurchschnittliche Preissteigerung bei Energie von +14,9 %, die Fahrtkosten im Vergleich zum Vorjahr massiv verteuern kann.",
+          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+        },
+        {
+          "typ": "praezision",
+          "text": "Während der Artikel vor hohen Kosten für Festmenüs warnt, liegt die Preissteigerung bei Nahrungsmitteln laut Destatis im Oktober 2026 bei lediglich +0,4 % und damit deutlich unter der allgemeinen Inflation.",
+          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+        }
+      ],
+      "geo": 100,
+      "fehler": [
+        "Statistisches Bundesamt – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+      ],
+      "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)",
+      "aenderungen": [
+        "faktencheck: 2026-11-03"
+      ]
+    },
+    {
+      "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+      "titel": "Campingurlaub planen: Budget für Platz und Fahrt",
+      "fassung_sha256": "4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7",
+      "bereich": "artikel",
+      "grund": "frisch geprüft vor 27 Tagen (Intervall 30 Tage)",
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [
+        {
+          "typ": "luecke",
+          "text": "Die Preisangabe von 20 bis 45 € pro Nacht wird als realistischer Wert positioniert, ist jedoch nicht durch Marktdaten oder eine Referenzstelle in den Fundstellen belegt.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+        },
+        {
+          "typ": "luecke",
+          "text": "Es fehlt der für Campingbuchungen relevante Regulierungsrahmen (Unterscheidung Mietrecht bei Stellplätzen vs. Reiserecht), den die Fundstelle für den Bereich Reise nur allgemein andeutet.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+        },
+        {
+          "typ": "praezision",
+          "text": "Der Verweis auf die Verbraucherzentrale zur Prüfung von Buchungsangaben führt auf eine allgemeine Übersichtsseite ohne konkrete Checklisten für Camping-Angebote.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
         }
       ],
       "geo": 83,
       "fehler": [
-        "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
-        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+        "Verbraucherzentrale – Reise: Abruf fehlgeschlagen (The read operation timed out)"
       ],
       "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)",
       "aenderungen": [
-        "faktencheck: 2026-11-02"
-      ]
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
-      "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
-      "fassung_sha256": "ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c",
-      "bereich": "artikel",
-      "grund": "35 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-      "treffer": 1,
-      "quellen": 1,
-      "befunde": [
-        {
-          "typ": "luecke",
-          "text": "Der Artikel behauptet, dass laut Bundesnetzagentur Preisänderungen klar angekündigt und begründet sein müssen, liefert jedoch keinen Beleg dafür.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Es wird angegeben, dass bei einer Preisänderung in der Regel ein Sonderkündigungsrecht besteht, ohne dafür eine Quelle zu nennen.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Der angegebene BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird nicht belegt.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Die Aussage, dass die Verbraucherzentrale empfiehlt, Boni im ersten Vergleich auszublenden, fehlt eine Quellenangabe.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "praezision",
-          "text": "Die pauschale Formulierung, dass bei zentraler Heizung der Vermieter oder die Eigentümergemeinschaft den Anbieter wählt, ist zu ungenau und nicht belegt.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        }
-      ],
-      "geo": 100,
-      "fehler": [
-        "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
-        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
-      ],
-      "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)",
-      "aenderungen": [
-        "faktencheck: 2026-11-02"
-      ]
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-      "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
-      "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
-      "bereich": "artikel",
-      "grund": "35 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-      "treffer": 1,
-      "quellen": 1,
-      "befunde": [
-        {
-          "typ": "luecke",
-          "text": "Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne Quellenangabe genannt.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quellenangabe.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt rund 180 € im Jahr“ wird nicht belegt.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird ohne Quelle angegeben.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "praezision",
-          "text": "Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“ ist ein Superlativ ohne messbare Daten oder Vergleichskriterien.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        }
-      ],
-      "geo": 100,
-      "fehler": [
-        "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (<urlopen error [Errno 111] Connection refused>)",
-        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
-      ],
-      "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)",
-      "aenderungen": [
-        "faktencheck: 2026-11-02"
+        "faktencheck: 2026-11-03"
       ]
     }
   ]

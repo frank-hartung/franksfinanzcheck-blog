@@ -1,5 +1,5 @@
-generated_at: '2026-10-04T10:04:57Z'
-day: '2026-10-04'
+generated_at: '2026-11-03T11:19:42Z'
+day: '2026-11-03'
 mode: deterministic
 teams:
   trending:
@@ -28,13 +28,13 @@ teams:
     pillar: versicherungen
     signal: trending
     source: aktuelle_entwicklungen:versicherung-beitragsanpassung-jahresende
-    score: 0.65
+    score: 0.7
   - topic: Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste
       Ergebnis nimmt, lässt oft bares Geld liegen.
     pillar: versicherungen
     signal: trending
     source: aktuelle_entwicklungen:versicherung-vergleichsportale-nicht-vollstaendig
-    score: 0.65
+    score: 0.7
   - topic: Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
       sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
       inzwischen öfter als nur beim Kontowechsel.
@@ -83,58 +83,72 @@ teams:
     signal: news
     source: aktuelle_entwicklungen:energie-variable-vs-fest
     score: 0.85
+  - topic: Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende –
+      ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
+      statt sie automatisch zu verlängern.
+    pillar: versicherungen
+    signal: news
+    source: aktuelle_entwicklungen:versicherung-beitragsanpassung-jahresende
+    score: 0.8
+  - topic: Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste
+      Ergebnis nimmt, lässt oft bares Geld liegen.
+    pillar: versicherungen
+    signal: news
+    source: aktuelle_entwicklungen:versicherung-vergleichsportale-nicht-vollstaendig
+    score: 0.8
   evergreen:
-  - topic: 5 einfache Schritte zum Aufbau eines Notgroschens
+  - topic: 'Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung'
     pillar: frugalismus
     signal: evergreen
-    source: topics:5 einfache Schritte zum Aufbau eines Notgroschens
+    source: 'topics:Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung'
     score: 0.85
     keywords: []
-  - topic: 'Stromanbieter-Insolvenz: Was du jetzt wissen musst'
+  - topic: Heizperiode vorbereiten im Spätsommer
     pillar: strom-sparen
     signal: evergreen
-    source: 'topics:Stromanbieter-Insolvenz: Was du jetzt wissen musst'
+    source: topics:Heizperiode vorbereiten im Spätsommer
     score: 0.85
     keywords:
-    - Stromanbieter Pleite
-    - Grundversorgung Strom
-    - Anbieterinsolvenz
-  - topic: Die besten Tarife für ein günstiges Handy-Abonnement
+    - Gasrechnung senken
+    - Heizkosten sparen
+    - Herbst Vorbereitung
+    - Heizung prüfen
+  - topic: Die besten DSL-Tarife für Zuhause und unterwegs
     pillar: internet-dsl
     signal: evergreen
-    source: topics:Die besten Tarife für ein günstiges Handy-Abonnement
+    source: topics:Die besten DSL-Tarife für Zuhause und unterwegs
     score: 0.85
     keywords:
-    - günstiges Handy-Abonnement
-    - Tarifvergleich
-    - Mobilfunk
-  - topic: Versteckte Kosten im Mietwagenvertrag entschlüsseln
+    - DSL-Tarife
+    - Zuhause
+    - unterwegs
+  - topic: Mietwagen-Tarife im Vergleich für den Urlaub
     pillar: mietwagen
     signal: evergreen
-    source: topics:Versteckte Kosten im Mietwagenvertrag entschlüsseln
+    source: topics:Mietwagen-Tarife im Vergleich für den Urlaub
     score: 0.85
     keywords:
-    - Mietwagenvertrag
-    - versteckte Kosten
-    - Urlaubskasse
-  - topic: 10 Tipps für günstige Reisekreditkarten
+    - Mietwagen
+    - Tarife
+    - Vergleich
+  - topic: Kontoeröffnung mit günstigen Gebühren
     pillar: konto-karten
     signal: evergreen
-    source: topics:10 Tipps für günstige Reisekreditkarten
+    source: topics:Kontoeröffnung mit günstigen Gebühren
     score: 0.85
     keywords:
-    - Reisekreditkarten
-    - günstige Karten
-    - Reisekosten sparen
-  - topic: 'Hund & Katze: Lohnt sich eine Tierversicherung?'
+    - Kontoeröffnung
+    - Günstige Gebühren
+    - Kontenvergleich
+  - topic: 'Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
     pillar: versicherungen
     signal: evergreen
-    source: 'topics:Hund & Katze: Lohnt sich eine Tierversicherung?'
+    source: 'topics:Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
     score: 0.85
     keywords:
-    - Tierversicherung
-    - Hundeversicherung
-    - Katzenversicherung
+    - Versicherungen prüfen Jahresende
+    - Policen kündigen Dezember
+    - überversichert was kündigen
   pain_points:
   - topic: Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft merken
       Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
@@ -197,16 +211,6 @@ teams:
     source: pain_points:hausrat-unterschaetzt
     score: 0.7
   viral_outliers:
-  - topic: 'Dein Haus sicher schützen: Das Vorsorge-Update 2026'
-    pillar: versicherungen
-    signal: viral_outlier
-    source: pinterest_plan
-    score: 0.85
-  - topic: 'Privathaftpflicht: Warum sie unverzichtbar ist'
-    pillar: versicherungen
-    signal: viral_outlier
-    source: pinterest_plan
-    score: 0.84
   - topic: 'Preisgarantie Gas: So schützt du dich vor Preissprüngen'
     pillar: strom-sparen
     signal: viral_outlier
@@ -227,72 +231,83 @@ teams:
     signal: viral_outlier
     source: pinterest_plan
     score: 0.81
-  - topic: 'Wohngebäudeversicherung: Worauf du wirklich achten musst'
-    pillar: versicherungen
-    signal: viral_outlier
-    source: pinterest_plan
-    score: 0.81
   - topic: 'Haushaltsbuch führen: App, Excel oder Papier?'
     pillar: konto-karten
     signal: viral_outlier
     source: pinterest_plan
     score: 0.81
-  niche_hooks:
-  - topic: DSL- und Internet-Flat günstig sichern
-    pillar: internet-dsl
-    signal: niche_hook
-    source: topics:DSL- und Internet-Flat günstig sichern
-    score: 0.55
-    keywords:
-    - DSL Vergleich
-    - Internetvertrag wechseln
-    - Günstiges Internet
-    - Wechselbonus
-  - topic: Energieeffiziente Geräte für dein Zuhause
+  - topic: 'Sicher heizen: Gaspreisgarantie gegen den Preisschock'
     pillar: strom-sparen
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.79
+  - topic: 'Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht'
+    pillar: frugalismus
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.78
+  - topic: 'Spätsommer-Schnäppchen: Mietwagen jetzt günstig buchen'
+    pillar: mietwagen
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.77
+  niche_hooks:
+  - topic: 7 Gewohnheiten für finanzielle Freiheit
+    pillar: frugalismus
     signal: niche_hook
-    source: topics:Energieeffiziente Geräte für dein Zuhause
+    source: topics:7 Gewohnheiten für finanzielle Freiheit
+    score: 0.55
+    keywords: []
+  - topic: 'Billig fliegen im Winter: 10 Geheimtipps'
+    pillar: mietwagen
+    signal: niche_hook
+    source: 'topics:Billig fliegen im Winter: 10 Geheimtipps'
     score: 0.55
     keywords:
-    - Energieeffiziente
-    - Geräte
-    - Zuhause
-  - topic: 'Internettarif kündigen: Fristen und Fallstricke im Überblick'
-    pillar: internet-dsl
-    signal: niche_hook
-    source: 'topics:Internettarif kündigen: Fristen und Fallstricke im Überblick'
-    score: 0.55
-    keywords:
-    - Internetvertrag kündigen
-    - Kündigungsfrist DSL
-    - Vertragsfalle Internet
-  - topic: 'Kreditkarten mit Bonusprogramm: Welche sind die besten?'
+    - Flugvergleich
+    - Billigflüge
+    - Reisekosten sparen
+  - topic: Kreditkarten mit attraktiven Prämien und Leistungen
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Kreditkarten mit Bonusprogramm: Welche sind die besten?'
+    source: topics:Kreditkarten mit attraktiven Prämien und Leistungen
     score: 0.55
     keywords:
     - Kreditkarten
-    - Bonusprogramm
-    - Kreditkartenvergleich
-  - topic: 'Strompreis-Anpassung: Wie du dich vor hohen Kosten schützt'
-    pillar: strom-sparen
+    - Prämien
+    - Leistungen
+  - topic: 'Tagesgeld-Hopping 2026: Lohnt sich der Zins-Wechsel für Neukunden noch?'
+    pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Strompreis-Anpassung: Wie du dich vor hohen Kosten schützt'
+    source: 'topics:Tagesgeld-Hopping 2026: Lohnt sich der Zins-Wechsel für Neukunden
+      noch?'
     score: 0.55
     keywords:
-    - Strompreis
-    - Anpassung
-    - schützen
-  - topic: 'Zahnzusatzversicherung: Lohnt sich der Abschluss?'
+    - Tagesgeld Neukundenzins
+    - Zinshopping Zinseszins
+    - Geld sicher anlegen 2026
+    - Tagesgeldkonto Zinsgarantie
+  - topic: Vergleich von Hausratversicherungen und wie du sparst
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Zahnzusatzversicherung: Lohnt sich der Abschluss?'
+    source: topics:Vergleich von Hausratversicherungen und wie du sparst
     score: 0.55
     keywords:
-    - Zahnzusatzversicherung
-    - Zahnarztkosten sparen
-    - Zahnersatz versichern
+    - Hausratversicherung
+    - Vergleich
+    - sparen
+  - topic: 'Versteckte Fremdwährungsgebühren: Welche Reisekreditkarte 2026 wirklich
+      0 % verlangt'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Versteckte Fremdwährungsgebühren: Welche Reisekreditkarte 2026
+      wirklich 0 % verlangt'
+    score: 0.55
+    keywords:
+    - Kreditkarte ohne Fremdwährungsgebühr
+    - Reisekreditkarte Vergleich 2026
+    - Geld abheben im Ausland kostenlos
+    - Visa Mastercard ohne Gebühren
 live_web:
   enabled: false
   findings: []

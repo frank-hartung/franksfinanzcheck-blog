@@ -2274,41 +2274,28 @@ def _messgrundlage_fehlt() -> list[str]:
     vom 01.11.2026 fälschlich als kaputte Wache protokolliert.
     Beide Lagen bleiben Exit 2 (keine Messung ist kein Grün, C33) – aber die
     Diagnose trennt fehlende Prüfgrundlage scharf von einem Defekt der Wache.
+
+    REPARATUR 03.11.2026 (#912-Nachlauf): Die Funktion stand hier ZWEIMAL –
+    einmal mit `list[str]` (Diagnose, neue Fassung) und einmal mit `bool`
+    (Gegenprobe). In Python gewinnt die letzte Definition, also lief der
+    Selbsttest in `for f in fehlend` über einen bool und starb mit TypeError
+    (Exit 1) statt fail-closed mit Exit 2 zu melden. Genau davor schützt
+    `test_fehlende_bibliothek_wird_als_grundlage_gemeldet_nicht_als_defekt`.
+    Jetzt gibt es EINE Definition; die Wahrheitsfrage ist `bool(fehlend)`.
     """
     fehlend: list[str] = []
-    if importlib.util.find_spec("yaml") is None:
+    try:
+        yaml_fehlt = importlib.util.find_spec("yaml") is None
+    except (ImportError, AttributeError, ValueError):
+        # Eine gesperrte Import-Maschinerie (Test-Treiber ohne PyYAML) meldet
+        # das Fehlen als Ausnahme statt als None – beides heißt: fehlt.
+        yaml_fehlt = True
+    if yaml_fehlt:
         fehlend.append(
             "PyYAML fehlt (python3 -m pip install --require-hashes -r requirements-ci.txt) "
             "– YMYL-Schreibprüfung läuft ohne Bibliothek bewusst fail-closed."
         )
     return fehlend
-# Die Haus-Markierung aller Stellen, an denen ein Skript eine fehlende
-# Bibliothek meldet (hier: `editorial_review_gate.ParseError`). Kein
-# Freifahrtschein – nur die präzisere Ansprache im Selbsttest.
-GRUND_MARKIERUNG = "PyYAML fehlt"
-
-
-def _messgrundlage_fehlt() -> bool:
-    """Fragt die Grundlage, nicht die Fälle: blockiert eine fehlende Bibliothek
-    den Messpfad des Selbsttests?
-
-    Am 01.11.2026 hat ein roter Selbsttest einen Agenten einen Umweg von zwei
-    Stunden und einen falschen Satz in einen Bericht gekostet („die Wache ist
-    erweislich kaputt"). Kaputt war nichts: Der Interpreter hatte PyYAML nicht,
-    der Publikations-Vertrag meldet ohne ihn fail-closed, und der Gegenprobe-Fall
-    „gute Änderung bleibt still" kann ohne Messung nicht still bleiben. Wer das
-    nicht unterscheidet, meldet entweder eine Defekt-Story oder – schlimmer – grün.
-    """
-    try:
-        # Zwei verschiedene Körper – bei bytegleichen Texten short-courced der
-        # Vertrag (nichts geändert, nichts zu messen) und die Frage nach der
-        # Grundlage würde „grundlos grün" beantworten.
-        gruende = _vertrag_gruende({"slug": "probe", "fm": 'title: "X"',
-                                    "body": "Kurzer Satz hier."},
-                                   "Kurzer Satz steht hier. Noch ein kurzer Satz folgt.")
-    except Exception:  # noqa: BLE001 – die Frage ist die Grundlage, nicht der Fall
-        return True
-    return any(GRUND_MARKIERUNG in g for g in gruende)
 
 
 def selftest():

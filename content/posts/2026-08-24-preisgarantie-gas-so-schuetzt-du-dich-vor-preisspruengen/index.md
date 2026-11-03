@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-11-02
+lastmod: 2026-11-03
 title: "Preisgarantie Gas: Was bei Preiserhöhung hilft"
 description: "Preisgarantie Gas: Steigt der Preis trotz Garantie? So prüfst du die Klausel, rechnest Marktrisiken ein und nutzt Widerspruch oder Sonderkündigung."
 date: 2026-08-24T08:35:12Z
@@ -17,10 +17,13 @@ kurzantwort: "Eine Gaspreisgarantie dämpft Preissprünge nur bei den vertraglic
 social_posted: true
 keywords: ["Preisgarantie Gas", "Gaspreissprünge", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich", "Gaspreisgarantie", "Preiserhöhung"]
 pin_title: "Preisgarantie Gas: So schützt du dich vor Preissprüngen"
-pin_description: "*Werbung | Vergleiche Gastarife und prüfe Preisgarantie, Bonusbedingungen und Laufzeit. Ob sich ein Wechsel lohnt, hängt vom konkreten Angebot ab."
+pin_description: "*Werbung | Preisgarantie beim Gas richtig prüfen: Klausel, Änderungsgrund und Sonderkündigungsrecht Schritt für Schritt abgleichen, bevor du reagierst. Jetzt die Anleitung lesen."
 pin_text_sync: false
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
+  - titel: "Preise und Abschläge"
+    url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html"
+    herausgeber: "Bundesnetzagentur"
   - titel: "Informationen zu Strom- und Gaspreisen für Haushaltskunden"
     url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/Preise-table.html"
     herausgeber: "Bundesnetzagentur"

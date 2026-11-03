@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-11-02 11:55:18 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-11-03 11:31:30 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 76 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
+**Geprüfte Live-Artikel:** 74 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -24,7 +24,6 @@
 | 2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan | 0 → 1 ✅ | /go/allgemein/ |
 | 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren | 2 → 3 ✅ | /go/girokonto/ |
 | 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet | 3 → 3 ✅ | /go/haftpflicht/ |
-| 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst | 3 → 3 ✅ | /go/wohngebaeudeversicherung/ |
 | 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet | 3 → 3 ✅ | /go/dsl/ |
 | 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden | 2 → 3 ✅ | /go/strom/ |
 | 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause | 3 → 3 ✅ | /go/dsl/ |
@@ -34,7 +33,6 @@
 | 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen | 2 → 3 ✅ | /go/gas/ |
 | 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet | 0 → 1 ✅ | /go/dsl/ |
 | 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife | 2 → 3 ✅ | /go/dsl/, /go/handytarife/ |
-| 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen | 2 → 3 ✅ | /go/kfz-versicherung/ |
 | 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich | 2 → 3 ✅ | /go/tagesgeld/ |
 | 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn | 0 → 1 ✅ | /go/gas/ |
 | 2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen | 0 → 1 ✅ | /go/girokonto/ |

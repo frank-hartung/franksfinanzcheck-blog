@@ -146,6 +146,22 @@ jobs:
           python3 scripts/faktenfrische_befund_ledger.py --nachlese --apply \
             | tee -a "$GITHUB_STEP_SUMMARY"
 
+      # ------------------------------------------------------------
+      # BEFUND-AKTE (#912): Die offenen Fachbefunde (F4) sind der Grund,
+      # warum die Release-Scorecard nach der Kadenz-Heilung weiter rot
+      # war. Bis hierher gab es dafür nur den Satz „Befund redaktionell
+      # schließen" und Handarbeit an einer YAML-Datei samt SHA-256.
+      # Die Akte ist die Arbeitsliste: jede ID, jede Beanstandung, der
+      # Fassungsstand und der fertige Entscheidungsbefehl.
+      # ------------------------------------------------------------
+      - name: Befundakte schreiben (Arbeitsliste der Redaktion)
+        id: akte
+        if: always()
+        continue-on-error: true
+        run: |
+          python3 scripts/faktenfrische_befund_akte.py --schreiben \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+
       - name: Belege & Dossiers committen
         env:
           GIT_USER: Faktenfrische-Bot
@@ -168,6 +184,8 @@ jobs:
               data/research/artikel \
               data/faktenfrische_queue.json \
               data/faktenfrische_history.jsonl \
+              data/faktenfrische_befunde_state.json \
+              BEFUND-AKTE.md \
               FAKTENFRISCHE-REPORT.md
           else
             echo "Keine Änderungen."
@@ -196,44 +214,75 @@ jobs:
             FAKTENFRISCHE-REPORT.md
             faktenfrische-lauf.log
             data/faktenfrische_queue.json
+            data/faktenfrische_befunde_state.json
+            BEFUND-AKTE.md
             data/research/artikel/*.md
           if-no-files-found: ignore
 
-      - name: Fachliche Befunde melden (nur Menschen entscheiden über Text)
+      # ------------------------------------------------------------
+      # Befundakte-Wache (#912): Ein Befund, den niemand entscheiden kann,
+      # ist ein Strukturfehler – kein Redaktionsrückstand. Sie prüft den
+      # Schließweg, nicht die Arbeitsgeschwindigkeit der Menschen.
+      # ------------------------------------------------------------
+      - name: Befundakte-Wache (jeder Befund hat einen Schließweg?)
+        id: aktenwache
+        if: always()
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python3 scripts/faktenfrische_befund_akte.py --wache \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+
+      # ------------------------------------------------------------
+      # Offene Fachbefunde melden (#912, Nachlauf 03.11.2026)
+      #
+      # Vorher: Ein neues Ticket mit dem Tagesdatum im Titel, sobald die
+      # LAUF-Befunde die Schwelle rissen – ohne Bezug zu den offenen
+      # Befunden, ohne Entscheidungsweg und ohne Schließpfad. Ein offenes
+      # Ticket blieb damit für immer offen (C14). Jetzt: GENAU EIN Ticket,
+      # gespeist aus der Befundakte, aktualisiert statt dupliziert und
+      # geschlossen, sobald kein Befund mehr offen ist. Die Entscheidungen
+      # selbst stehen im Repo (`data/faktenfrische_entscheidungen.yaml`),
+      # damit sie den Push überleben und im Diff prüfbar sind.
+      # ------------------------------------------------------------
+      - name: Offene Fachbefunde melden (eine Akte, ein Ticket, ein Schließpfad)
+        if: always()
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           # Governance C12: Label VOR der Issue-Erzeugung anlegen (HTTP 422).
           gh label create faktenfrische --repo "$GITHUB_REPOSITORY" \
             --color "1d76db" \
-            --description "Faktenfrische: fachliche Befunde aus der Recherche" --force || true
-          ANZAHL=$(python3 -c "import json;d=json.load(open('data/faktenfrische_queue.json'));print(sum(len(l['befunde']) for l in d['laeufe']))" 2>/dev/null || echo 0)
+            --description "Faktenfrische: offene Fachbefunde (F4) – Redaktionsakte" --force || true
+          OFFEN=$(python3 -c "import json;print(json.load(open('data/faktenfrische_befunde_state.json')).get('offen',0))" 2>/dev/null || echo 0)
           SCHWELLE=$(python3 -c "import yaml;print((yaml.safe_load(open('data/agent_reach/faktenfrische.yaml')).get('melden') or {}).get('issue_ab_befunden',3))" 2>/dev/null || echo 3)
-          if [ "$ANZAHL" -ge "$SCHWELLE" ]; then
-            TITEL="Faktenfrische: $ANZAHL fachliche Befunde ($(date +%F))"
-            if ! gh issue list --repo "$GITHUB_REPOSITORY" --state open \
-                 --search "in:title \"Faktenfrische:\"" | grep -q .; then
+          NUM=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
+                  --label faktenfrische --limit 1 --json number --jq 'first | .number // ""')
+          if [ "$OFFEN" -ge "$SCHWELLE" ] || { [ "$OFFEN" -gt 0 ] && [ -n "$NUM" ]; }; then
+            TITEL="Offene Fachbefunde (F4) – Redaktionsakte"
+            if [ -z "$NUM" ]; then
               gh issue create --repo "$GITHUB_REPOSITORY" \
                 --title "$TITEL" --label faktenfrische \
-                --body-file FAKTENFRISCHE-REPORT.md
+                --body-file BEFUND-AKTE.md
+              echo "Ticket erstellt ($OFFEN offene Befunde)."
             else
-              echo "Offenes Faktenfrische-Ticket existiert – kein Duplikat."
+              gh issue edit "$NUM" --title "$TITEL" --body-file BEFUND-AKTE.md
+              echo "Ticket #$NUM aktualisiert ($OFFEN offene Befunde)."
             fi
           else
-            echo "$ANZAHL Befunde (< $SCHWELLE) – kein Ticket."
+            if [ -n "$NUM" ]; then
+              gh issue comment "$NUM" --body "Alle offenen Fachbefunde sind dokumentiert entschieden – die Redaktionsakte ist leer. Schließpfad: \`data/faktenfrische_entscheidungen.yaml\`."
+              gh issue close "$NUM" --reason completed \
+                --comment "Geschlossen: keine offenen Fachbefunde (F4) mehr."
+              echo "Ticket #$NUM geschlossen."
+            else
+              echo "$OFFEN offene Befunde (< $SCHWELLE) – kein Ticket."
+            fi
           fi
 
-      # Nach allen Schreib- und Meldeschritten: Eine Unterdeckung ist ein
-      # eigener, lauter Befund – kein stiller Ausfall eines Schritts.
-      - name: Unterdeckung melden (letzter Schritt = roter Job)
-        if: steps.deckung.outcome == 'failure'
-        run: |
-          echo "::error::Faktenfrische unterdeckt – der Rückstand ist nicht fristgerecht abbaubar (#912). Details im Schritt davor, im Report und in RELEASE-SCORECARD.md."
-          exit 1
-
-      # Die Meldung nennt ab jetzt die ECHTE Ursache (#984). Vorher stand im
-      # Ticket nur der Name dieses Schritts; wer das Log nicht laden konnte,
-      # musste raten. Der Exit-Code des Laufs ist eine Klasse, keine Meinung:
+      # Die Meldung nennt die ECHTE Ursache (#984). Vorher stand im Ticket
+      # nur der Name dieses Schritts; wer das Log nicht laden konnte, musste
+      # raten. Der Exit-Code des Laufs ist eine Klasse, keine Meinung:
       #   2 Beweisstand/Konfiguration · 3 keine Quelle · 4 Prüfung unvollständig
       #   5 Seite abgebrochen (Beweise gesichert)
       - name: Unvollständige Recherche melden (mit Ursache)
@@ -270,4 +319,22 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
           echo "::error::Faktenfrische nicht abgeschlossen (Exit ${rc}). ${grund}"
+          exit 1
+
+      # Nach allen Schreib- und Meldeschritten: Eine Unterdeckung oder ein
+      # Befund ohne Schließweg ist ein eigener, lauter Befund – kein stiller
+      # Ausfall eines Schritts. Der Job bleibt rot, die Artefakte sind längst
+      # gesichert.
+      - name: Unterdeckung oder Befund ohne Schließweg melden (roter Job)
+        if: steps.deckung.outcome == 'failure' || steps.aktenwache.outcome == 'failure'
+        env:
+          DECKUNG: ${{ steps.deckung.outcome }}
+          AKTE: ${{ steps.aktenwache.outcome }}
+        run: |
+          if [ "$DECKUNG" = "failure" ]; then
+            echo "::error::Faktenfrische unterdeckt – der Rückstand ist nicht fristgerecht abbaubar (#912). Details im Schritt davor, im Report und in RELEASE-SCORECARD.md."
+          fi
+          if [ "$AKTE" = "failure" ]; then
+            echo "::error::Mindestens ein offener Fachbefund hat keinen Schließweg (Seite/Ledger) – BEFUND-AKTE.md und der Schritt davor nennen den Fund (#912)."
+          fi
           exit 1

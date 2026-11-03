@@ -368,3 +368,131 @@ class QuellvertragTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class UrsachenTests(unittest.TestCase):
+    """#912: Das Siegel nennt die Ursache nach PRÜFUNG, nicht nach Dimension.
+
+    Am 02.11.2026 blockierte F4 zehn Artikel, während F1 grün war. Eine
+    Scorecard, die nur die Dimension `faktenalter` kennt, liegt deshalb in
+    drei von vier Fällen falsch – und das Ticket wird unschließbar.
+    """
+
+    def _artikel(self, befund):
+        return {"urteil": "blockiert", "risikoklasse": "standard",
+                "dimensionen": {"faktenalter": "blockiert"},
+                "befunde": [befund]}
+
+    def test_gruppiert_nach_check_und_nennt_besitz(self):
+        register = rs.check_register(rs.ssot_laden())
+        artikel = {
+            "a": self._artikel({"check": "F4-fachbefund",
+                                "dimension": "faktenalter",
+                                "wirkung": "blockiert", "detail": "x"}),
+            "b": self._artikel({"check": "F4-fachbefund",
+                                "dimension": "faktenalter",
+                                "wirkung": "blockiert", "detail": "y"}),
+            "c": self._artikel({"check": "F1-faktenfrische",
+                                "dimension": "faktenalter",
+                                "wirkung": "blockiert", "detail": "z"}),
+        }
+        ursachen = rs.ursachen_ermitteln(artikel, register)
+        self.assertEqual([u["check"] for u in ursachen],
+                         ["F4-fachbefund", "F1-faktenfrische"])
+        f4 = ursachen[0]
+        self.assertEqual(f4["anzahl"], 2)
+        self.assertEqual(f4["artikel"], ["a", "b"])
+        self.assertEqual(f4["entscheidung"], "human")
+        self.assertTrue(f4["quelle"])
+
+    def test_ausnahmen_und_werkzeugfehler_sind_keine_ursache(self):
+        artikel = {"a": {"urteil": "blockiert", "risikoklasse": "standard",
+                         "dimensionen": {},
+                         "befunde": [
+                             {"check": "F1-faktenfrische",
+                              "dimension": "faktenalter", "wirkung": "blockiert",
+                              "detail": "x", "ausnahme": True},
+                             {"check": "T2-seo-audit", "dimension": "technik",
+                              "wirkung": "blockiert", "detail": "y",
+                              "werkzeugfehler": True}]}}
+        self.assertEqual(rs.ursachen_ermitteln(artikel, {}), [])
+
+    def test_befundlage_zaehlt_die_offenen_fachbefunde(self):
+        import faktenfrische_befund_ledger as ledger
+        lage = rs.befundlage_ermitteln(dt.date(2026, 11, 3), [])
+        self.assertNotIn("nicht_beweisbar", lage)
+        self.assertEqual(lage["offen"], len(ledger.befunde_mit_status(
+            stichtag=dt.date(2026, 11, 3))))
+        self.assertEqual(lage["nicht_entscheidbar"], 0)
+        self.assertGreater(lage["frist_tage"], 0)
+
+    def test_siegel_traegt_ursache_und_befundlage(self):
+        quelle = Path(rs.__file__).read_text(encoding="utf-8")
+        self.assertIn('"ursachen": ergebnis', quelle)
+        self.assertIn('"befundlage": ergebnis', quelle)
+        self.assertIn('"checks": [', quelle)
+
+
+class ReportUrsachenTests(unittest.TestCase):
+    """#912: Der Bericht nennt die Ursache, die er gemessen hat."""
+
+    def _ergebnis(self, ursachen, befundlage):
+        art = {"slug": "a", "risikoklasse": "standard",
+               "dimensionen": {d: ("blockiert" if d == "faktenalter" else "bestanden")
+                               for d in rs.DIMENSIONS_FOLGE},
+               "anzeige": {"ymyl": "geprüft", "freigabe": "nicht erforderlich",
+                           "revision": "2026-12-01"},
+               "befunde": [{"check": "F4-fachbefund", "dimension": "faktenalter",
+                            "wirkung": "blockiert", "detail": "Superlativ"}],
+               "urteil": "blockiert", "naechste_pruefung": "2026-12-01",
+               "ueberfaellig": False, "sha256": "x", "siegel_drift": "unverändert"}
+        return {"heute": dt.date(2026, 11, 3), "modus": "live",
+                "artikel": {"a": art}, "entwuerfe": [],
+                "kapazitaet": {"artikel": 112, "faellig": 3, "ueberfaellig": 0,
+                               "bedarf_je_tag": 2.73, "bedarf_je_woche": 19.1,
+                               "kapazitaet_je_tag": 4.0, "budget": 4,
+                               "laeufe_je_tag": 1.0, "deckung_prozent": 146,
+                               "abbau_tage": 0, "nachhol_frist_tage": 7,
+                               "empfohlenes_budget": 4, "hartes_limit": 10,
+                               "empfehlung_erreicht": True},
+                "ursachen": ursachen, "befundlage": befundlage,
+                "dimensionen_gesamt": {d: "blockiert" for d in rs.DIMENSIONS_FOLGE},
+                "kandidaten": [], "tool_fehler": {}, "abgelaufene_ausnahmen": [],
+                "aktive_ausnahmen": 0, "commit": "x", "ssot": rs.ssot_laden()}
+
+    F4 = {"check": "F4-fachbefund", "dimension": "faktenalter",
+          "wirkung": "blockiert", "entscheidung": "human",
+          "quelle": "scripts/faktenfrische_befund_ledger.py",
+          "artikel": ["a"], "anzahl": 1}
+    LAGE = {"offen": 57, "seiten": 13, "live_befunde": 42, "live_seiten": 10,
+            "ueberholt": 21, "ohne_fassung": 20, "nicht_entscheidbar": 0,
+            "aeltester_tage": 4, "frist_tage": 14, "ueber_frist": 0}
+
+    def _report(self, ursachen, lage):
+        with tempfile.TemporaryDirectory() as tmp:
+            return rs.report_schreiben(self._ergebnis(ursachen, lage),
+                                       rs.ssot_laden(), [],
+                                       Path(tmp) / "REPORT.md")
+
+    def test_f4_ist_die_ursache_und_nicht_die_kadenz(self):
+        text = self._report([self.F4], self.LAGE)
+        self.assertIn("Offene Fachbefunde (F4)", text)
+        self.assertIn("57** offene Befunde", text)
+        self.assertIn("BEFUND-AKTE.md", text)
+        self.assertIn("F1 (Faktenalter) ist nicht die Ursache", text)
+        self.assertNotIn("Ursache der Faktenalter-Funde", text)
+        self.assertNotIn("Kadenz-Befund, kein Inhaltsbefund", text)
+
+    def test_f1_als_zusaetzliche_ursache_wird_getrennt_genannt(self):
+        f1 = {"check": "F1-faktenfrische", "dimension": "faktenalter",
+              "wirkung": "blockiert", "entscheidung": "auto",
+              "quelle": "scripts/faktenfrische.py", "artikel": ["a"], "anzahl": 1}
+        text = self._report([self.F4, f1], self.LAGE)
+        self.assertIn("Offene Fachbefunde (F4)", text)
+        self.assertIn("Zusätzlich ist F1 (Faktenalter) blockiert", text)
+
+    def test_ueberholte_fassung_wird_erklaert(self):
+        lage = dict(self.LAGE, ueber_frist=2)
+        text = self._report([self.F4], lage)
+        self.assertIn("an einem älteren Text erhoben", text)
+        self.assertIn("Eskalation", text)

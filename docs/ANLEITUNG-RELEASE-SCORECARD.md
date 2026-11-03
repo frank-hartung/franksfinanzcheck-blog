@@ -210,6 +210,36 @@ menschliche, fassungsgebundene Entscheidung. Ein neues `faktencheck` allein
 schließt diesen Befund nicht. Schließpfad:
 `docs/ANLEITUNG-FAKTENFRISCHE.md`, Abschnitt „Befund redaktionell schließen“.
 
+### F4: die Ursache, die sich nicht selbst schließt (Nachzug 03.11.2026)
+
+Am 02.11.2026 war die Kadenz geheilt – **0 überfällig, 146 % Deckung** – und
+der Bestand trotzdem rot: **F4** blockierte zehn Artikel mit 42 offenen
+Fachbefunden. Das Ticket behauptete weiter „ausschließlich die Faktenfrische,
+ein Kadenz-Befund, kein Inhaltsbefund“ und „danach schließt sich dieses Ticket
+selbst“. Beides war falsch, und beides machte das Ticket unschließbar.
+
+Drei Änderungen:
+
+1. **Das Siegel nennt die Ursache nach Prüfung.** `durchfuehren()` schreibt
+   `ursachen` (je Check: Dimension, Wirkung, `entscheidung`, betroffene
+   Artikel) und `befundlage` (offene Fachbefunde: Anzahl, Alter, Frist,
+   überholte Fassungen, nicht entscheidbare). Beides wird aus denselben
+   Collectoren gezählt, die auch blockieren – keine zweite Messregel (C19).
+2. **Der Bericht trennt die Verträge.** Abschnitt „Was blockiert – nach
+   Prüfung, nicht nach Dimension“, danach „Offene Fachbefunde (F4)“ und
+   „Faktenfrische-Deckung“. Die Kadenz-Erzählung erscheint nur noch, wenn F1
+   tatsächlich blockiert.
+3. **Das Ticket ist eine getestete Funktion des Siegels.**
+   `scripts/scorecard_ticket.py` erzeugt den Text; `release-scorecard.yml`
+   enthält keinen Heredoc mehr. Es nennt je Check, wer entscheidet, wie viele
+   Artikel betroffen sind, wie alt die Befunde sind, wo die Arbeitsdatei
+   (`BEFUND-AKTE.md`) liegt und welcher Befehl schließt. „Kein
+   Inhaltsbefund“ und „schließt sich selbst“ sind nur noch zulässig, wenn die
+   Messung sie deckt (C46, `scripts/tests/test_scorecard_ticket.py`).
+
+Merksatz: **F1 misst den Takt, F4 den Inhalt.** Ausreichende Kapazität ist
+kein Inhaltsbeweis, und ein Fachbefund ist kein Kadenz-Artefakt.
+
 **Takt:**
 
 | Takt | Wo | Wirkung |

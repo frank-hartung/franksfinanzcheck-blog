@@ -200,3 +200,39 @@ Schließpfad, den C14 in derselben Datei verbietet.
   `python3 scripts/faktenfrische_kapazitaet.py --wache` ·
   `npm run test:faktenfrische` (33 Unit-Tests + 36 Selbsttest-Fälle).
   Vorgang: `RELEASE-SCORECARD-912-DAUERHEILUNG-PREMIUM-2026-10-29.md`.
+
+#### Der zweite Dauer-Alarm: F4 schließt sich nicht selbst (#912, 03.11.2026)
+
+Nach der Kadenz-Heilung war die Rechnung grün (**0 überfällig, 146 %
+Deckung**) und der Bestand weiter rot: **F4-fachbefund** blockierte 10 von 68
+live-Artikeln mit 42 offenen Fachbefunden. Das Ticket behauptete trotzdem
+„ausschließlich die Faktenfrische … kein Inhaltsbefund“ und „danach schließt
+sich dieses Ticket selbst“. Genau das war die Falle: Ein Fachbefund braucht
+einen Menschen, ein Prüfdatum schließt ihn nie.
+
+- **Der Alarm nennt seine Ursache nach Prüfung:** Das Siegel trägt
+  `ursachen` (je Check: Dimension, Wirkung, `entscheidung`, Artikel) und
+  `befundlage` (offen, Seiten, Alter, Frist, überholte Fassungen). Der Report
+  trennt „Was blockiert“, „Offene Fachbefunde (F4)“ und
+  „Faktenfrische-Deckung“; die Kadenz-Erzählung erscheint nur, wenn **F1**
+  wirklich blockiert.
+- **Der Schließweg ist ein Befehl, kein YAML-Handwerk:**
+  `BEFUND-AKTE.md` (`faktenfrische_befund_akte.py --schreiben`) ist die
+  Arbeitsliste mit ID, Fassungsstand und fertigem Befehl;
+  `faktenfrische_befund_ledger.py --entscheiden <ID> --von "<Name>"
+  --begruendung "<≥20 Zeichen>"` schreibt die Entscheidung mit Person,
+  Zeitpunkt und beiden Hashes. Ohne Person/Begründung schreibt er nichts.
+- **Zwei Hashes, ein Zweck:** `pruef_hash` bindet die KI-Antwort an die volle
+  Prüffassung (inkl. Quellen), `text_hash` den Befund an die Aussageflächen.
+  Quellenpflege öffnet keine Entscheidung mehr; eine Textheilung öffnet sie
+  bewusst. Zuvor waren 21 von 57 Befunden an einem überholten Text und 20
+  ohne Fassung – unschließbar per Konstruktion.
+- **Das Ticket ist eine getestete Funktion des Siegels:**
+  `scripts/scorecard_ticket.py` (einzige Textquelle, C46) nennt je Check
+  Besitz, betroffene Artikel, Befundalter, Frist, Arbeitsdatei und Befehl –
+  und verschweigt „kein Inhaltsbefund“ nur dann nicht, wenn die Messung es
+  deckt.
+- Bedienung/Test: `npm run faktenfrische:akte` · `npm run faktenfrische:befunde` ·
+  `npm run test:faktenfrische` (inkl. `test_faktenfrische_befund_akte`,
+  `test_scorecard_ticket`) · Governance **C46**.
+  Vorgang: `RELEASE-SCORECARD-912-FACHBEFUND-SCHLIESSWEG-2026-11-03.md`.

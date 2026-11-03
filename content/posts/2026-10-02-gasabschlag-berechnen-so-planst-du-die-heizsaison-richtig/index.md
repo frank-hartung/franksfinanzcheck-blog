@@ -5,7 +5,7 @@ lastmod: 2026-10-10
 date: 2026-10-02T21:37:08Z
 draft: false
 reserve_published: 2026-10-02
-faktencheck: 2026-10-04
+faktencheck: 2026-11-03
 tags: ["Gasrechnung prüfen", "Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"

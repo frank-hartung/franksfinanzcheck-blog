@@ -15,6 +15,7 @@ redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
+faktencheck: 2026-11-03
 ---
 
 Du hast spontan das Fernweh gepackt, das Flugticket steht, das Hotel ist noch frei – jetzt fehlt nur noch der Mietwagen. Gerade bei **Last Minute Urlaub** ist das Timing entscheidend: Wer zu spät bucht, zahlt oft mehr, wer früh genug zuschlägt, kann ein echtes **Sommerurlaub Schnäppchen** ergattern. In diesem Ratgeber zeige ich dir, wie du beim Mietwagen die versteckten Kosten erkennst, die besten Konditionen rechnest und mit dem 4‑K‑Prüfpfad von Franks Fixkosten‑Kompass deine Entscheidung absicherst.

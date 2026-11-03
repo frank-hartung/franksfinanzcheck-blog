@@ -35,7 +35,7 @@ quellen:
     url: "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
     herausgeber: "Verbraucherzentrale"
     datum: "2026-10-07"
-faktencheck: "2026-10-07"
+faktencheck: 2026-11-03
 kurzantwort: "Ein gutes Campingbudget erfasst mehr als den Stellplatz. Plane Anfahrt, mögliche Zusatzgebühren, Ausrüstung, Essen und einen Puffer getrennt. Vergleiche den Gesamtpreis mit deinen Bedürfnissen, nicht nur den Preis pro Nacht."
 ---
 

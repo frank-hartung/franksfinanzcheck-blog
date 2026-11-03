@@ -118,38 +118,87 @@ unabhängige Verträge:
 Befunde liegen dauerhaft unter `fachbefunde` in
 `data/faktenfrische_queue.json`. Ein späterer Lauf kann sie ergänzen, aber
 nicht durch eine leere Antwort löschen. Die Queue wird atomar ersetzt.
-Alt-Befunde aus `laeufe[].befunde` werden beim Lesen migriert. Fehlt dabei die
-frühere Fassungsbindung, bleiben sie als `legacy-unbekannt` offen, bis eine
-Neuprüfung eine echte Fassung zuordnet und die Redaktion entscheidet.
+Alt-Befunde aus `laeufe[].befunde` werden beim Lesen migriert; fehlt die
+frühere Fassungsbindung, heißen sie `legacy-unbekannt` – sie bleiben offen,
+sind aber am heutigen Text entscheidbar (siehe unten).
 
-Die Fachprüfung erhält den **vollständigen Text** und die mitgeprüften
-Aussageflächen im Frontmatter. Sie muss deren SHA-256 zurückgeben; eine
-Antwort zu einer anderen Fassung wird verworfen. Der Hash umfasst Titel,
-Beschreibung, Kurzantwort, Quellen und Text, nicht technische Datumsfelder.
-Bei offenen Befunden wird keine neue Quellenkette neben den unentschiedenen
-Text geschrieben.
+### Zwei Hashes: warum eine Heilung den Befund nicht mehr sperrt (03.11.2026)
 
-### Befund redaktionell schließen
+Bis zum 02.11.2026 hing **alles** an `pruef_hash`: Titel, Beschreibung,
+Kurzantwort, **Quellen** und Text. Das hatte zwei Folgen, die zusammen den
+Bestand dauerhaft rot hielten (Ticket #912):
 
-1. Text und Belege prüfen, Mängel korrigieren oder den Befund fachlich begründet
-   zurückweisen. Keine automatische Textumschrift und keine Schein-Freigabe.
-2. Die endgültige Fassung hashen:
+1. Die Maschine schreibt `quellen` selbst. Jede Quellenpflege änderte damit
+   die „Fassung“ – und machte eine bereits dokumentierte Entscheidung
+   ungültig. Der Schließpfad wurde durch die eigene Arbeit gelöscht.
+2. Wurde ein Text zur Heilung eines Befunds geändert (genau der Zweck des
+   Befunds!), passte der alte Hash nicht mehr. Eine Entscheidung über den
+   neuen Text konnte den alten Befund **nie** schließen. Am 03.11.2026 standen
+   so 21 von 57 Befunden an einem überholten Text, 20 weitere ohne Hash –
+   unschließbar, per Konstruktion.
+
+Seit dem 03.11.2026 gilt:
+
+| Hash | Umfasst | Zweck |
+|---|---|---|
+| `pruef_hash` | Titel, Beschreibung, Kurzantwort, **Quellen**, Text | bindet die KI-Antwort an die vollständige Prüffassung |
+| `text_hash` | Titel, Beschreibung, Kurzantwort, Text (ohne Quellen) | bindet den Befund und die menschliche Entscheidung an die Aussageflächen |
+
+Eine Entscheidung nennt **beides**: `befund_fassung` (welcher Ledger-Eintrag
+gemeint ist) und `geprueft_fassung` (welcher Text tatsächlich gelesen wurde).
+Quellenpflege öffnet keine Entscheidung; eine Textänderung öffnet sie – dann
+muss der Mensch die neue Aussage erneut anschauen. Die Maschine entscheidet
+weiterhin nie fachlich.
+
+### Befund redaktionell schließen (der Schließpfad)
+
+Die Arbeitsliste ist **`BEFUND-AKTE.md`** – erzeugt aus Ledger und
+Entscheidungen, mit Befund-ID, Typ, Alter, Fassungsstand, Beanstandung,
+Beleg und dem fertigen Befehl. Sie wird vom Bestands-Takt täglich
+aktualisiert und als GitHub-Ticket gespiegelt.
+
+1. **Text und Beleg prüfen.** Mangel korrigieren (Zahl belegen oder entfernen,
+   Aussage präzisieren) oder den Befund fachlich begründet zurückweisen.
+   Keine automatische Textumschrift und keine Schein-Freigabe.
+2. **Entscheidung dokumentieren** – eine Zeile, fassungsgebunden:
 
    ```bash
    python3 scripts/faktenfrische_befund_ledger.py \
-     --fassung content/posts/<slug>/index.md
-   python3 scripts/faktenfrische_befund_ledger.py   # offene Befund-IDs
+     --entscheiden <BEFUND-ID> --von "Frank Hartung" \
+     --begruendung "BDEW-Preis entfernt, 6-%-Wert an der Quelle verlinkt"
    ```
 
-3. Einen Eintrag in `data/faktenfrische_entscheidungen.yaml` ergänzen:
-   `slug`, `befund_id`, `fassung_sha256`, `entschieden_von`, `begruendung`.
-   Die Entscheidung gilt nur für genau diese Fassung. Ungültige Signaturen,
-   Duplikate und beschädigte Register sind Werkzeugfehler, niemals Grün.
-4. Publish-Gate/Scorecard erneut messen. Erst wenn auch alle anderen Checks
-   grün sind, darf der zugehörige Vorgang über den PR-Schließpfad enden.
+   Der Befehl prüft: der Befund ist offen, die ID ist eindeutig, die Seite
+   ist lesbar, Person und Begründung (≥ 20 Zeichen) sind vorhanden. Er
+   schreibt `data/faktenfrische_entscheidungen.yaml` atomar (Kommentarkopf
+   bleibt), bindet an den heutigen `text_hash` und kontrolliert danach
+   selbst, dass der Befund wirklich geschlossen ist. Ohne Person und
+   Begründung schreibt er **nichts**.
+
+   Übersicht und Stand:
+
+   ```bash
+   python3 scripts/faktenfrische_befund_akte.py --schreiben   # Akte + Zustand
+   python3 scripts/faktenfrische_befund_ledger.py --wache     # Exit 1 ohne Schließweg
+   python3 scripts/faktenfrische_befund_ledger.py --json      # offene Befunde
+   ```
+
+3. **Neu messen:** Die Akte neu erzeugen (`--schreiben`), dann
+   Publish-Gate/Scorecard (`scripts/release_scorecard.py --live --streng`).
+   Erst wenn alle anderen Checks grün sind, endet der Vorgang.
+
+**Frist und Eskalation:** `befunde.frist_tage` (Standard 14) und
+`befunde.eskalation_tage` (Standard 21) in `data/agent_reach/faktenfrische.yaml`.
+Überschrittene Befunde stehen oben in der Akte und im Scorecard-Ticket als
+Eskalation an den Herausgeber. Die Frist senkt keine Schwelle: Ein Befund
+blockiert weiter, bis er entschieden ist – sie bestimmt nur, wer wann davon
+erfährt.
 
 Ein neues Prüfdatum allein schließt F4 nicht. Ebenso darf ein Mensch die
 Entscheidung nicht stellvertretend durch eine Maschine erfinden lassen.
+`data/faktenfrische_befunde_state.json` ist das Siegel der Akte (Zahlen für
+Ticket und Bericht), `BEFUND-AKTE.md` die Sicht für Menschen – beide aus
+derselben Regel.
 
 ## Was die Maschine schreiben darf – und was nicht
 
