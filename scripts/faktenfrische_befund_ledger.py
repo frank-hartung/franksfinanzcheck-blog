@@ -123,6 +123,27 @@ def text_hash(art: dict) -> str:
         "kurzantwort": fm.get("kurzantwort", ""),
         "body": art.get("body", ""),
     }
+def pruef_hash(art: dict) -> str:
+    """Fassungs-Hash über Text UND die mitgeprüften Aussageflächen.
+
+    Seit #996 (03.11.2026) gehören auch `pin_title` und `pin_description`
+    zum Hash: Die Werbeflächen hatten Superlative und Sparversprechen
+    zurückgebracht, ohne dass sich die Fassung änderte – eine
+    fassungsgebundene Entscheidung hätte den Rückfall nicht gesehen.
+    Ältere Dossier- und Queue-Hashes bleiben gespeicherte Historie; der
+    nächste Lauf bindet die Fassung mit dem erweiterten Material neu.
+    """
+    fm = yaml.safe_load(art.get("fm", "")) or {}
+    if not isinstance(fm, dict):
+        raise LedgerFehler("Frontmatter ist kein Mapping")
+    material = {}
+    material["title"] = fm.get("title", "")
+    material["description"] = fm.get("description", "")
+    material["kurzantwort"] = fm.get("kurzantwort", "")
+    material["pin_title"] = fm.get("pin_title", "")
+    material["pin_description"] = fm.get("pin_description", "")
+    material["quellen"] = fm.get("quellen") or []
+    material["body"] = art.get("body", "")
     payload = json.dumps(material, ensure_ascii=False, sort_keys=True,
                          separators=(",", ":"), default=str)
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()

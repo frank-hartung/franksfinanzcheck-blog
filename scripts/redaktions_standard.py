@@ -2284,7 +2284,13 @@ def _messgrundlage_fehlt() -> list[str]:
     Jetzt gibt es EINE Definition; die Wahrheitsfrage ist `bool(fehlend)`.
     """
     fehlend: list[str] = []
-    if importlib.util.find_spec("yaml") is None:
+    try:
+        yaml_fehlt = importlib.util.find_spec("yaml") is None
+    except (ImportError, AttributeError, ValueError):
+        # Eine gesperrte Import-Maschinerie (Test-Treiber ohne PyYAML) meldet
+        # das Fehlen als Ausnahme statt als None – beides heißt: fehlt.
+        yaml_fehlt = True
+    if yaml_fehlt:
         fehlend.append(
             "PyYAML fehlt (python3 -m pip install --require-hashes -r requirements-ci.txt) "
             "– YMYL-Schreibprüfung läuft ohne Bibliothek bewusst fail-closed."

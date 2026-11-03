@@ -1,0 +1,363 @@
+# ============================================================
+#  BEFUND-REGISTER FAKTENFRISCHE #996
+#  Lauf: 01.11.2026, 11:29 UTC · Redaktionelle Heilung: 02.11.2026 (PR #1017)
+#  Dauerheilung / Rückfallbeseitigung: 03.11.2026
+#
+#  Dieses Register ist die redaktionelle Schließakte zu den 16
+#  fachlichen Befunden aus Issue #996. Es ersetzt keine Fachprüfung,
+#  kein Prüfsiegel und keine menschliche Ledger-Entscheidung:
+#  Die 16 Befunde bleiben in data/faktenfrische_queue.json offen,
+#  bis der Inhaber sie in data/faktenfrische_entscheidungen.yaml
+#  fassungsgebunden entscheidet. Die unterschriftsreife Akte steht in
+#  FAKTENFRISCHE-996-DAUERHEILUNG-HIGHEND-2026-11-03.md.
+#
+#  Vertrag:
+#    * `ledger_id` ist die Befund-ID aus der Queue; `ledger_fassung_sha256`
+#      ist die Fassung, an der der Befund gesehen wurde (Queue-Stand
+#      02.11.2026). Eine Entscheidung muss genau diese Fassung binden.
+#    * `beleg_url` ist entweder null (nur bei `belegtyp: streichung`
+#      zulässig) oder eine URL aus der Allowlist in
+#      data/agent_reach/faktenfrische.yaml, die zusätzlich in `quellen`
+#      des jeweiligen Artikels steht.
+#    * `anker` sind Bedeutungs-Invarianten, keine Zitate. Die Regression
+#      scripts/tests/test_faktenfrische_996.py prüft sie normalisiert
+#      (Kleinschreibung, Leerzeichen) gegen den Artikeltext.
+#    * `verboten_behauptend` darf behauptend nie zurückkehren – auch
+#      nicht auf den Werbeflächen (pin_title/pin_description). Genau dort
+#      waren am 03.11.2026 zwei Rückfälle offen (Regression auf main rot).
+#    * Änderungen an Artikel oder Register, die einen Anker entfernen,
+#      machen die Regression rot.
+# ============================================================
+
+stand: 2026-11-03
+issue: 996
+lauf: "2026-11-01 11:29 UTC"
+recherche:
+  methode: "Nur lesende Abfrage der drei Belegseiten am 03.11.2026. Keine Übernahme neuer Marktzahlen ohne Fundstelle. Der Maschinen-Stempel faktencheck bleibt beim Laufdatum 2026-11-01."
+  abrufe:
+    - url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html"
+      titel: "Preise und Abschläge"
+      herausgeber: "Bundesnetzagentur"
+      abgerufen: 2026-11-03
+      verwendet_fuer: ["Monatsfrist für Haushaltskunden", "Grund/Voraussetzungen/Umfang der Änderung", "Sonderkündigungsrecht, Vertrag endet am Vortag", "Ausnahme separierte Preisanpassungsklausel", "kein Sonderkündigungsrecht bei reiner Umsatzsteuer-Weitergabe (Erhöhung und Senkung)", "strengere Anforderungen in der Grundversorgung", "keine staatliche Genehmigung der Preise"]
+    - url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/Vertragsarten/start.html"
+      titel: "Arten der Energiebelieferung"
+      herausgeber: "Bundesnetzagentur"
+      abgerufen: 2026-11-03
+      verwendet_fuer: ["Grundversorgung nach eigener Kündigung / Vertragsende", "Ersatzversorgung bei kurzer Wechselverzögerung", "Ersatzversorgung bei Insolvenz, drei Monate ohne Grundversorgungs-Anspruch"]
+    - url: "https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892"
+      titel: "Heizung: 10 einfache Tipps zum Heizkosten sparen"
+      herausgeber: "Verbraucherzentrale"
+      abgerufen: 2026-11-03
+      verwendet_fuer: ["ein Grad weniger Raumtemperatur reduziert den Verbrauch um 6 Prozent", "richtig eingestellte Heizungsanlage: 10 bis 15 Prozent Energie einsparen", "Raumtemperaturen und Mindesttemperatur gegen Schimmel"]
+
+artikel:
+  - slug: "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas"
+    titel: "Sicher heizen: Was sie abdeckt und wie lange sie läuft"
+    befunde: 3
+  - slug: "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026"
+    titel: "Preisgarantie Gas: So sicherst du günstige Tarife"
+    befunde: 3
+  - slug: "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden"
+    titel: "Gasrechnung senken: Fehler im Spätsommer vermeiden"
+    befunde: 5
+  - slug: "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen"
+    titel: "Preisgarantie Gas: Was bei Preiserhöhung hilft"
+    befunde: 5
+
+befunde:
+  - id: "996-N01"
+    ledger_id: "7bdec96c0329769bebe6"
+    ledger_fassung_sha256: "98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b"
+    artikel: "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas"
+    typ: "luecke"
+    befund: "Die im Artikel als Fakten genannten Gaspreise für Oktober 2026 (11 bis 13 Cent/kWh) sind nicht durch die Fundstelle belegt, die lediglich eine allgemeine Themenübersicht darstellt."
+    entscheidung: "Die unbelegte aktuelle Preisspanne ist ersatzlos gestrichen. Das Tarifbeispiel bleibt als ausdrücklich fiktive Rechnung mit angenommenen 18.000 kWh erhalten; der Vergleich läuft über aktuelle Angebote am Wohnort und den eigenen Verbrauch."
+    status: "behoben"
+    ledger_signatur: "ausstehend"
+    belegtyp: "streichung"
+    beleg_url: null
+    anker:
+      - "Für deinen Vergleich zählen aktuelle Angebote am Wohnort und dein Verbrauch, nicht ein pauschaler Marktpreis"
+      - "keine Marktpreise"
+    verboten_behauptend:
+      - "11 bis 13 Cent"
+      - "11–13 Cent"
+    rest_risiko: "Künftige belegte Marktpreise brauchen Fundstelle, Datum und gemeinsamen Artikel-/Test-Entscheid."
+
+  - id: "996-N02"
+    ledger_id: "a56734aa032e0ed9e0c4"
+    ledger_fassung_sha256: "98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b"
+    artikel: "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas"
+    typ: "luecke"
+    befund: "Der für den Verbraucherschutz zentrale Regulierungsrahmen (Sonderkündigungsrecht, Informationspflichten der Versorger) wird in der Fundstelle nicht inhaltlich bestätigt."
+    entscheidung: "Monatsfrist, Informationspflichten (Grund, Voraussetzungen, Umfang, Sonderkündigungsrecht), Grundversorgungs-Zusatzpflichten und die Ausnahmen (separierte Klausel, reine Umsatzsteuer-Weitergabe) stehen mit konkretem BNetzA-Beleg am Text."
+    status: "behoben"
+    ledger_signatur: "ausstehend"
+    belegtyp: "praezisiert"
+    beleg_url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html"
+    anker:
+      - "müssen Haushaltskunden grundsätzlich mindestens einen Monat vorher klar über Grund, Voraussetzungen und Umfang der Änderung sowie ihr Sonderkündigungsrecht informiert werden"
+      - "der Vertrag endet am Vortag"
+      - "Umsatzsteuer"
+    verboten_behauptend:
+      - "jederzeit fristlos kündigen"
+    rest_risiko: "Die konkrete Klausel und das Änderungsschreiben entscheiden im Einzelfall; keine Rechtsberatung."
+
+  - id: "996-N03"
+    ledger_id: "124ff2c3cd3917c274aa"
+    ledger_fassung_sha256: "98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b"
+    artikel: "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas"
+    typ: "praezision"
+    befund: "Die Bewerbung des Vergleichsportals mit dem Superlativ 'Die besten Tarife' erfolgt ohne messbare Daten oder Auswahlkriterien in der Recherchegrundlage."
+    entscheidung: "Der Superlativ ist durch die neutrale Partnerbeschreibung ersetzt. Am 03.11.2026 zusätzlich geheilt: Das Pin-Versprechen 'sparst bis zu 650 Euro' und der Bonus-Satz 'drückt den Preis im ersten Jahr stark' (Klasse #911-B2) sind entfernt bzw. an Höhe und Bedingungen gebunden."
+    status: "behoben"
+    ledger_signatur: "ausstehend"
+    belegtyp: "streichung"
+    beleg_url: null
+    anker:
+      - "Tarife kannst du über unseren Partner-Vergleich prüfen"
+      - "senkt die Rechnung im ersten Jahr nur, wenn Höhe und Bedingungen erfüllt sind"
+    verboten_behauptend:
+      - "die besten Tarife"
+      - "sparst bis zu 650 Euro"
+      - "drückt den Preis im ersten Jahr stark"
+    rest_risiko: "Werbeflächen bleiben Aussageflächen; neue Pin-Texte durchlaufen dieselbe Regression."
+
+  - id: "996-N04"
+    ledger_id: "c583efe1ce02df3ca2d7"
+    ledger_fassung_sha256: "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af"
+    artikel: "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026"
+    typ: "luecke"
+    befund: "Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur für Januar 2026 (360 €) wird durch die allgemeine Übersichtsseite der Behörde nicht gestützt."
+    entscheidung: "Die unbelegte Behörden-Ersparnis ist ersatzlos gestrichen. Ersparnis entsteht im Artikel nur noch als eigene Rechnung aus Gesamtpreis, Bonus und Folgejahr."
+    status: "behoben"
+    ledger_signatur: "ausstehend"
+    belegtyp: "streichung"
+    beleg_url: null
+    anker:
+      - "Sortiere nach Gesamtpreis, nicht Beliebtheit oder Empfehlung"
+    verboten_behauptend:
+      - "360 €"
+      - "360 Euro"
+    rest_risiko: "Eine Ersparnis ist immer eine Differenz zweier konkreter Angebote, nie ein Behördenwert."
+
+  - id: "996-N05"
+    ledger_id: "30caa57be394afb62947"
+    ledger_fassung_sha256: "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af"
+    artikel: "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026"
+    typ: "luecke"
+    befund: "Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg."
+    entscheidung: "Der unbelegte Durchschnittspreis ist entfernt. Der Arbeitspreis im Beispiel ist als Modellwert gekennzeichnet und wird nachgerechnet."
+    status: "behoben"
+    ledger_signatur: "ausstehend"
+    belegtyp: "streichung"
+    beleg_url: null
+    anker:
+      - "als Modellwert"
+    verboten_behauptend:
+      - "11,93"
+      - "11.93"
+    rest_risiko: "Ein späterer Durchschnittspreis braucht die wörtliche Fundstelle im Dossier und in quellen."
+
+  - id: "996-N06"
+    ledger_id: "32a3ea879f2cf126b3a7"
+    ledger_fassung_sha256: "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af"
+    artikel: "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026"
+    typ: "luecke"
+    befund: "Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist."
+    entscheidung: "Pflichten bei Preisänderung (Monatsfrist, Grund/Voraussetzungen/Umfang, Sonderkündigung, Ausnahmen, Grundversorgungs-Zusatzpflichten) stehen mit konkretem BNetzA-Beleg im Artikel."
+    status: "behoben"
+    ledger_signatur: "ausstehend"
+    belegtyp: "praezisiert"
+    beleg_url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html"
+    anker:
+      - "müssen Lieferanten Haushaltskunden grundsätzlich mindestens einen Monat vorher"
+      - "Sonderkündigungsrecht"
+    verboten_behauptend:
+      - "ohne jede Ankündigung"
+    rest_risiko: "Pflichten gelten für Haushaltskunden; andere Kundengruppen können abweichen."
+
+  - id: "996-N07"
+    ledger_id: "db8a69f08dc0020adebd"
+    ledger_fassung_sha256: "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316"
+    artikel: "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden"
+    typ: "luecke"
+    befund: "Keine Quelle für die Aussage, dass im Oktober 2026 bessere Gaspreise gelten – Preis-Trend-Behauptung fehlt."
+    entscheidung: "Die saisonale Preisprognose ist gestrichen; der Text sagt ausdrücklich, dass sich ein später günstigeres Angebot nicht vorhersagen lässt. Am 03.11.2026 zusätzlich geheilt: Der Pin-Text 'beste Zeit für den Gaswechsel … mehrere hundert Euro Ersparnis' ist durch eine neutrale Prüf-Beschreibung ersetzt."
+    status: "behoben"
+    ledger_signatur: "ausstehend"
+    belegtyp: "streichung"
+    beleg_url: null
+    anker:
+      - "Ob ein späteres Angebot günstiger ist, lässt sich nicht vorhersagen"
+    verboten_behauptend:
+      - "beste Zeit für den Gaswechsel"
+      - "bessere Gaspreise"
+      - "mehrere hundert Euro Ersparnis"
+    rest_risiko: "Saisonale Wechsel-Empfehlungen bleiben ohne Datenbasis verboten (Prompt-Regel 11c)."
+
+  - id: "996-N08"
+    ledger_id: "e834f4702e87194affe7"
+    ledger_fassung_sha256: "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316"
+    artikel: "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden"
+    typ: "luecke"
+    befund: "Keine Quelle für die Angabe, dass ein Einfamilienhaus typischerweise 18.000 kWh/Jahr verbraucht – Verbrauchszahl ist unbelegt."
+    entscheidung: "18.000 kWh ist ausdrücklich eine angenommene Rechengröße einer als fiktiv gekennzeichneten Beispielrechnung; maßgeblich ist der persönliche Rechnungswert."
+    status: "behoben"
+    ledger_signatur: "ausstehend"
+    belegtyp: "streichung"
+    beleg_url: null
+    anker:
+      - "angenommenen 18.000 kWh"
+      - "Fiktive Beispielrechnung"
+    verboten_behauptend:
+      - "typischerweise 18.000"
+      - "typische Einfamilienhaus"
+    rest_risiko: "Der Modellwert darf nie als Markt- oder Verbrauchsstatistik zitiert werden."
+
+  - id: "996-N09"
+    ledger_id: "9fbacd9942c2dfa1447f"
+    ledger_fassung_sha256: "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316"
+    artikel: "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden"
+    typ: "luecke"
+    befund: "Keine Quelle für die Behauptung, dass ein Grad weniger Raumtemperatur rund 6 % Energie einspart – Prozent-Angabe fehlt."
+    entscheidung: "Der Faustwert steht mit Verbraucherzentrale-Link am Satz, als Richtwert mit Gebäude-/Verhaltensvorbehalt und Schimmel-Warnung."
+    status: "behoben"
+    ledger_signatur: "ausstehend"
+    belegtyp: "belegt"
+    beleg_url: "https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892"
+    anker:
+      - "nennt rund 6 % weniger Heizenergie je Grad niedrigerer Raumtemperatur als Faustwert"
+    verboten_behauptend:
+      - "garantiert 6 %"
+    rest_risiko: "Richtwert je Grad; nicht linear auf mehrere Grad oder die Gesamtrechnung hochrechnen."
+
+  - id: "996-N10"
+    ledger_id: "da30cbb5fbc8c801daf0"
+    ledger_fassung_sha256: "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316"
+    artikel: "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden"
+    typ: "luecke"
+    befund: "Keine Quelle für die Angabe, dass durch Optimierungsmaßnahmen 10-15 % Einsparungen realistisch sind – Prozent-Wert unbelegt."
+    entscheidung: "Die pauschale Gaskosten-Senkung ist gestrichen. Der belegte Wert gilt nur für eine richtig eingestellte Heizungsanlage (Energie, nicht Gesamtrechnung); Effekte sind nicht addierbar."
+    status: "behoben"
+    ledger_signatur: "ausstehend"
+    belegtyp: "praezisiert"
+    beleg_url: "https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892"
+    anker:
+      - "für eine richtig eingestellte Heizungsanlage ein mögliches Einsparpotenzial von 10 bis 15 % Energie"
+      - "nicht pauschal deine gesamte Gasrechnung"
+    verboten_behauptend:
+      - "Gaskosten um 10 bis 15 %"
+      - "Gasrechnung um 10 bis 15 %"
+    rest_risiko: "Ausgangszustand der Anlage entscheidet; Fachbetrieb bleibt die sichere Route."
+
+  - id: "996-N11"
+    ledger_id: "437b809ffbf41e5af434"
+    ledger_fassung_sha256: "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316"
+    artikel: "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden"
+    typ: "luecke"
+    befund: "Keine Quelle für die Aussage, dass das Gesetz bei einem Tarifwechsel die Grundversorgung garantiert – regulatorischer Rahmen fehlt."
+    entscheidung: "Keine pauschale Garantie mehr: Grund- oder Ersatzversorgung werden fallbezogen unterschieden (eigene Kündigung/Vertragsende vs. kurze Wechselverzögerung), mit konkretem BNetzA-Beleg und Preisvorbehalt."
+    status: "behoben"
+    ledger_signatur: "ausstehend"
+    belegtyp: "praezisiert"
+    beleg_url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/Vertragsarten/start.html"
+    anker:
+      - "Grund- oder Ersatzversorgung"
+      - "Bei einer kurzen Wechselverzögerung ist es laut"
+      - "Ersatzversorgung"
+    verboten_behauptend:
+      - "garantiert die Grundversorgung"
+    rest_risiko: "Die Zuordnung ist fallabhängig (vereinfachte Behördendarstellung); Zwischenversorgung kann teurer sein."
+
+  - id: "996-N12"
+    ledger_id: "252413dcc16cea146beb"
+    ledger_fassung_sha256: "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51"
+    artikel: "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen"
+    typ: "luecke"
+    befund: "Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher angekündigt werden muss, ohne dafür eine Quelle anzugeben."
+    entscheidung: "Monatsfrist und Informationspflichten für Haushaltskunden stehen mit konkretem BNetzA-Beleg am Text, inklusive Grundversorgungs-Zusatzpflichten."
+    status: "behoben"
+    ledger_signatur: "ausstehend"
+    belegtyp: "belegt"
+    beleg_url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html"
+    anker:
+      - "mindestens einen Monat vor einer Preisänderung"
+      - "In der Grundversorgung gelten zusätzliche Informationspflichten"
+    verboten_behauptend:
+      - "meist einen Monat vorher"
+    rest_risiko: "Frist gilt für Haushaltskunden; sonstige Letztverbraucher haben zwei Wochen (Behördenseite)."
+
+  - id: "996-N13"
+    ledger_id: "ab4d084fd367c8e4d518"
+    ledger_fassung_sha256: "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51"
+    artikel: "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen"
+    typ: "luecke"
+    befund: "Der angegebene durchschnittliche Gaspreis von 11,93 Cent/kWh für 2026 (laut BDEW) wird nicht durch eine Quelle belegt."
+    entscheidung: "Der unbelegte Durchschnittspreis ist entfernt. Alle Preisdifferenzen sind gekennzeichnete Modellrechnungen und werden nachgerechnet."
+    status: "behoben"
+    ledger_signatur: "ausstehend"
+    belegtyp: "streichung"
+    beleg_url: null
+    anker:
+      - "das ist ein Modellwert"
+    verboten_behauptend:
+      - "11,93"
+      - "11.93"
+    rest_risiko: "Referenzpreise nur mit wörtlicher Fundstelle (Prompt-Regel 11b)."
+
+  - id: "996-N14"
+    ledger_id: "d215addd22dea72c44df"
+    ledger_fassung_sha256: "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51"
+    artikel: "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen"
+    typ: "luecke"
+    befund: "Die Angabe, dass die Verbraucherzentrale etwa 6 % weniger Heizenergie pro Grad niedrigerer Raumtemperatur nennt, fehlt eine Quellenangabe."
+    entscheidung: "Der Faustwert ist direkt mit der Verbraucherzentrale verlinkt und als gebäudeabhängiger Richtwert eingeordnet."
+    status: "behoben"
+    ledger_signatur: "ausstehend"
+    belegtyp: "belegt"
+    beleg_url: "https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892"
+    anker:
+      - "nennt etwa 6 % weniger Heizenergie pro Grad niedrigere Raumtemperatur als Faustwert"
+    verboten_behauptend:
+      - "garantiert 6 %"
+    rest_risiko: "Wie N09: Richtwert, keine lineare Hochrechnung."
+
+  - id: "996-N15"
+    ledger_id: "9326152f4d788cff56bd"
+    ledger_fassung_sha256: "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51"
+    artikel: "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen"
+    typ: "praezision"
+    befund: "Die Aussage, dass man 'in der Regel' zum Zeitpunkt der Preisänderung Sonderkündigungsrecht hat, ist unpräzise und wird nicht durch eine konkrete Regelung belegt."
+    entscheidung: "Konkretisiert: Kündigung zum Zeitpunkt der Änderung, Vertrag endet am Vortag, Zugang vor dem Stichtag; Ausnahmen (separierte Klausel, reine Umsatzsteuer-Weitergabe) sind benannt und mit der BNetzA-Seite belegt."
+    status: "behoben"
+    ledger_signatur: "ausstehend"
+    belegtyp: "praezisiert"
+    beleg_url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html"
+    anker:
+      - "der Vertrag endet am Vortag"
+      - "Ausnahmen gelten unter anderem bei einer vereinbarten separierten Preisanpassungsklausel"
+    verboten_behauptend:
+      - "in der Regel sonderkündigen"
+    rest_risiko: "Schreiben und Klausel des Einzelfalls prüfen; bei Streit Beratung/Schlichtung."
+
+  - id: "996-N16"
+    ledger_id: "48a0a962046c8315270e"
+    ledger_fassung_sha256: "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51"
+    artikel: "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen"
+    typ: "praezision"
+    befund: "Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf den Anbieter überträgt und dafür ein höherer Startpreis üblich ist, fehlt eine konkrete Quelle und bleibt vage."
+    entscheidung: "Keine 'übliche' Aufpreis-Behauptung mehr: Der Aufpreis ist eine nachzurechnende Differenz konkreter Tarife (Modell: 2 ct/kWh × 20.000 kWh = 400 €/Jahr); die Garantie schützt nur vertraglich genannte Bestandteile. Am 03.11.2026 zusätzlich geheilt: Der Pin-Text 'beste Zeit für den Gaswechsel … Preise anziehen' ist ersetzt."
+    status: "behoben"
+    ledger_signatur: "ausstehend"
+    belegtyp: "streichung"
+    beleg_url: null
+    anker:
+      - "Eine längere Garantie ist nicht automatisch sicherer"
+      - "kostet die Absicherung bei 20.000 kWh 400 € jährlich"
+    verboten_behauptend:
+      - "höherer Startpreis üblich"
+      - "Aufpreis ist üblich"
+      - "beste Zeit für den Gaswechsel"
+    rest_risiko: "Ob ein Aufpreis marktüblich ist, wäre eine Marktaussage und bräuchte Daten – sie wird nicht mehr getroffen."

@@ -734,7 +734,30 @@ sind praezision. (e) Aufsicht ist keine Preisgenehmigung: „reguliert“ oder \
 „überwacht“ nicht mit „genehmigt“ verwechseln und nicht „nicht jeden Preis“ \
 schreiben, wenn es keine staatliche Genehmigung gibt. (f) Behördenfristen \
 (Preisänderung, Wechsel) mit Zielgruppe, Stichtag und der Abgrenzung \
-zwischen technischem Prozess und Vertragskündigung nennen."""
+zwischen technischem Prozess und Vertragskündigung nennen.
+11. Befund-Klassen aus #996 (01.11.2026) ausdrücklich mitprüfen: \
+(a) Eine allgemeine Themen- oder Übersichtsseite belegt keine konkreten \
+Preise, Prozentwerte oder Fristen; ein Beleg muss die Aussage selbst tragen \
+(z. B. Preisänderungen auf der Seite zu Preisen und Abschlägen, nicht auf \
+einer Fachthemen-Übersicht) – sonst luecke, aber kein Gegenbeweis. \
+(b) Durchschnitts- und Referenzwerte mit Absender („laut BDEW“, „laut \
+Bundesnetzagentur“, „laut Verbraucherzentrale“) ohne wörtliche Fundstelle \
+sind luecke – auch dann, wenn sie nur als Rechenbasis dienen. \
+(c) Saisonale Preisprognosen und Wechselzeit-Versprechen („im Oktober \
+bessere Preise“, „beste Zeit für den Wechsel“, „Preise ziehen an“) ohne \
+Daten sind luecke oder praezision. (d) Verbrauchswerte (z. B. 18.000 kWh) \
+sind nur als ausdrücklich gekennzeichnete Rechenannahme zulässig, nie als \
+typischer Verbrauch ohne Quelle. (e) Heiz-Faustwerte brauchen die Quelle \
+am Satz und ihren Geltungsbereich: Eine richtig eingestellte Anlage ist \
+nicht die gesamte Gasrechnung; Faustwerte weder addieren noch \
+vervielfachen. (f) Grund- und Ersatzversorgung sind fallbezogen zu \
+unterscheiden (Wechselverzögerung, Vertragsende, Insolvenz); eine \
+pauschale Versorgungs-Garantie beim Wechsel ist praezision. \
+(g) Eine Preisgarantie schützt nur die vertraglich genannten \
+Bestandteile; ein Aufpreis ist eine zu rechnende Größe und ohne Beleg \
+nicht „üblich“. (h) Werbeflächen (pin_title, pin_description und \
+Social-Texte) sind Aussageflächen wie der Text: Superlative, Preis-Trends \
+und Euro-Sparversprechen dort sind zu prüfen wie im Artikel."""
 
 
 def lade_provider_order(pfad: str = TRANSPORT_PFAD) -> tuple[str, ...]:
@@ -788,7 +811,9 @@ def claude_fachpruefung(art: dict, dossier: dict, cfg: dict,
     user = (
         f"ARTIKEL: {art['titel']}\n"
         f"BESCHREIBUNG: {art['beschreibung']}\n"
-        f"KURZANTWORT: {art.get('kurzantwort') or '–'}\n\n"
+        f"KURZANTWORT: {art.get('kurzantwort') or '–'}\n"
+        f"PIN-TITEL: {fm_wert(art.get('fm', ''), 'pin_title') or '–'}\n"
+        f"PIN-BESCHREIBUNG: {fm_wert(art.get('fm', ''), 'pin_description') or '–'}\n\n"
         f"PRUEF_HASH: {pruef_hash}\n"
         f"ARTIKELTEXT (vollständig):\n{art['body']}\n\n"
         f"FRISCHE FUNDSTELLEN:\n{fund_text}\n\n"

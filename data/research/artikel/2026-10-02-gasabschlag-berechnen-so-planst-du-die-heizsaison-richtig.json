@@ -1,0 +1,77 @@
+{
+  "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+  "titel": "Gasabschlag berechnen: So planst du die Heizsaison richtig",
+  "erzeugt": "2026-11-03 10:24 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 1,
+    "klasse": "saisonal",
+    "grund": "30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
+    "alter_tage": 30,
+    "intervall": 30,
+    "frist": "2026-11-03",
+    "restlaufzeit": 0
+  },
+  "geo": {
+    "punkte": 6,
+    "maximum": 6,
+    "prozent": 100,
+    "offen": [],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": true,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": true
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesnetzagentur.de",
+      "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "datum": "",
+      "quelle": "bundesnetzagentur.de",
+      "kanal": "web",
+      "auszug": "Title: Bundesnetzagentur - Energie\n\n*   [_Energie_](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html)\n    *   [Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html)\n\n*   [Digitales und Telekommunikation](https://www.bundesnetzagentur.de/DE/Vportal/TK/start.html)\n    *   [Energie](https://www.bundesnetzagentur.de/DE/Vportal/Energie/start.html)\n    *   [Post](https://www.bundesnetzagentur.de/DE/Vportal/Post/start.html)\n    *   [Anfragen und Beschwerden](https://www.bundesnetzagentur.de/DE/Vportal/AnfragenBeschwerden/start.html)\n    *   [Schlichtung](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/start.html)\n    *   [Verbraucherschutz in Zahlen](https://www.bundesnetzagentur.de/DE/Vportal/Verbraucher-Radar/start.html)\n\n*   [Energie (Internationales)](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/start.html)\n\n*   [ACER](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/ACER/start.html)\n            *   [CEER](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/CEER/start.html)\n            *   [PCI](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/PCI/start.html)\n\n1.   [Homepage](https://www.bundesnetzagentur.de/DE/Home/home_node.html \"Zur Startseite\")\n2.   [Fachthemen](https://www.bundesnetzagentur.de/DE/Themen/start.html \"Themen\")\n3.   [UntermenuOeffnen](javascript:void(0))**Energie**[Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html \"Telekommunikation\")[Digitales](https://www.bundesnetzagentur.de/DE/Fachthemen/Digitales/start.html \"Alle Fachthemen rund um Digitales\")[Post](htt",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Bundesnetzagentur",
+      "rang": 1,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Die Aussage, dass die Grundversorgung fast immer der teuerste Tarif ist, wird nicht durch eine Quelle belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Angabe, dass ein Grad weniger Raumtemperatur rund 6 % Heizenergie einspart, fehlt eine Quellenangabe.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Behauptung, der Grundtarif der Stadtwerke sei ausschließlich eine Notversorgung und nie ein Bestpreis, ist unbelegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Das Sonderkündigungsrecht bei Preiserhöhungen im Winter wird genannt, ohne regulatorische Grundlage zu nennen.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Angabe, dass Anbieter den Abschlag auf elf oder zwölf Raten verteilen, ist ohne Beleg ungenau, da die Ratenzahl vertraglich variieren kann.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    }
+  ],
+  "fehler": [
+    "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
+    "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (The read operation timed out)"
+  ],
+  "fassung_sha256": "642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8",
+  "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)"
+}
