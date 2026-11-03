@@ -33,7 +33,7 @@ quellen:
     titel: "Referenzseite bundesnetzagentur.de"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
-faktencheck: 2026-10-07
+faktencheck: 2026-11-03
 ---
 
 Du willst im Modellfall **300 € (Beispielrechnung)** sparen und den richtigen Moment für den Kauf von Öl treffen? Dann beobachte die **Heizöl Preise** genau und bestelle am Tiefpunkt. So senkst du deine Kosten für das Heizen deutlich, ohne auf Komfort in deinem Heim zu verzichten.

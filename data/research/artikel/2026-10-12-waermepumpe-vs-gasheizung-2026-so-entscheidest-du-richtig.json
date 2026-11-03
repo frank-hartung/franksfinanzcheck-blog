@@ -1,0 +1,78 @@
+{
+  "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+  "titel": "Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig",
+  "erzeugt": "2026-11-03 12:17 UTC",
+  "faellig": {
+    "faellig": false,
+    "prio": 9,
+    "klasse": "saisonal",
+    "grund": "frisch geprüft vor 27 Tagen (Intervall 30 Tage)",
+    "alter_tage": 27,
+    "intervall": 30,
+    "frist": "2026-11-06",
+    "restlaufzeit": 3
+  },
+  "geo": {
+    "punkte": 6,
+    "maximum": 6,
+    "prozent": 100,
+    "offen": [],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": true,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": true
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesnetzagentur.de",
+      "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "datum": "",
+      "quelle": "bundesnetzagentur.de",
+      "kanal": "web",
+      "auszug": "Title: Bundesnetzagentur - Energie\n\n*   [_Energie_](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html)\n    *   [Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html)\n\n*   [Digitales und Telekommunikation](https://www.bundesnetzagentur.de/DE/Vportal/TK/start.html)\n    *   [Energie](https://www.bundesnetzagentur.de/DE/Vportal/Energie/start.html)\n    *   [Post](https://www.bundesnetzagentur.de/DE/Vportal/Post/start.html)\n    *   [Anfragen und Beschwerden](https://www.bundesnetzagentur.de/DE/Vportal/AnfragenBeschwerden/start.html)\n    *   [Schlichtung](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/start.html)\n    *   [Verbraucherschutz in Zahlen](https://www.bundesnetzagentur.de/DE/Vportal/Verbraucher-Radar/start.html)\n\n*   [Energie (Internationales)](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/start.html)\n\n*   [ACER](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/ACER/start.html)\n            *   [CEER](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/CEER/start.html)\n            *   [PCI](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/PCI/start.html)\n\n1.   [Homepage](https://www.bundesnetzagentur.de/DE/Home/home_node.html \"Zur Startseite\")\n2.   [Fachthemen](https://www.bundesnetzagentur.de/DE/Themen/start.html \"Themen\")\n3.   [UntermenuOeffnen](javascript:void(0))**Energie**[Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html \"Telekommunikation\")[Digitales](https://www.bundesnetzagentur.de/DE/Fachthemen/Digitales/start.html \"Alle Fachthemen rund um Digitales\")[Post](htt",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Bundesnetzagentur",
+      "rang": 1,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Angaben zu staatlichen Zuschüssen (bis zu 70 %) und deren Auswirkung auf den Eigenanteil fehlen eine Quellenangabe.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Preisannahmen für Strom (30 ¢/kWh), Gas (10 ¢/kWh) und CO₂‑Aufschlag (5 ¢/kWh) werden ohne belegbare Daten präsentiert.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die behauptete Amortisationsdauer von 10‑12 Jahren für eine Wärmepumpe basiert auf einer Modellrechnung ohne nachweisbare Quelle.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Hinweis, dass ein spezieller Stromtarif für Wärmepumpen die Kosten senkt, wird nicht durch eine Quelle belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der Artikel erwähnt keinen regulatorischen Rahmen (z. B. Bundesnetzagentur) obwohl diese Institution für Strom‑ und Gasmärkte zuständig ist.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    }
+  ],
+  "fehler": [
+    "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
+    "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+  ],
+  "fassung_sha256": "af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96",
+  "text_sha256": null,
+  "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b)"
+}

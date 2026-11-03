@@ -45,7 +45,7 @@ quellen:
     url: "https://www.gesetze-im-internet.de/bgb/__651e.html"
     herausgeber: "Bundesministerium der Justiz"
     datum: "2026-10-07"
-faktencheck: "2026-10-07"
+faktencheck: 2026-11-03
 kurzantwort: "Setze zuerst einen Gesamtbetrag für die Reise fest. Rechne Anfahrt, Unterkunft, Essen, Versicherungen und Ausgaben vor Ort zusammen. Vergleiche Angebote nach den Leistungen und Bedingungen, die du wirklich brauchst."
 ---
 
