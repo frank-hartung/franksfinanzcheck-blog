@@ -106,14 +106,47 @@ python3 scripts/belegketten_wache.py --nur-hochrisiko --report
 Zustände: `ok` (HTTP 200 unter genau der zitierten Adresse), `umgeleitet`
 (200, aber andere Adresse – Inhalt gegen das Zitat prüfen), `tot`
 (definitives 4xx) und `unklar` (Netzfehler, 5xx, 403, 429). `unklar` blockiert
-nicht, `tot` schon. Bei `tot` oder `umgeleitet` gilt: **nicht** einfach die URL
-austauschen, sondern die neue Seite abrufen und prüfen, ob sie die zitierte
-Aussage noch trägt; erst dann URL, Titel und Abrufdatum im Frontmatter
-korrigieren und neu versiegeln.
+im Diagnosemodus nicht, `tot` schon. Bei `tot` oder `umgeleitet` gilt:
+**nicht** einfach die URL austauschen, sondern die neue Seite abrufen und
+prüfen, ob sie die zitierte Aussage noch trägt; erst dann URL, Titel und
+Abrufdatum im Frontmatter korrigieren und neu versiegeln.
 
-Der werktägliche Workflow fährt dieselbe Wache und schließt das Arbeits-Ticket
-erst, wenn **beide** Prüfungen grün sind (Gate-Queue leer **und** keine tote
-Belegkette).
+Der werktägliche Workflow fährt dieselbe Wache mit `--strict
+--require-complete` und schließt das Arbeits-Ticket erst, wenn **beide**
+Prüfungen grün sind: Gate-Queue leer **und** kein einziger Abrufbefund – also
+weder eine tote noch eine unklare oder umgeleitete Quelle.
+
+## Wenn `gesetze-im-internet.de` den Runner blockiert (seit 30.10.2026, repariert 03.11.2026, #1024)
+
+GitHub-Actions-Runner werden von `www.gesetze-im-internet.de` häufig mit einem
+TCP-Timeout abgewiesen. Ein Netzfehler ist **kein** Beleg dafür, dass eine Norm
+verschwunden ist; er darf aber auch nicht als `ok` durchgehen. Für kanonische
+GII-Adressen prüft die Wache deshalb ersatzweise den täglich synchronisierten
+Bundesrechts-Spiegel `Gesetze-fuer-KI/bundesrecht`:
+
+1. Der Direktabruf läuft immer zuerst. Nur bei `unklar` (nie bei einem direkten
+   404) greift der Ersatzweg.
+2. Der YAML-Kopf der Spiegeldatei muss exakt
+   `quelle: https://www.gesetze-im-internet.de/<slug>/` ausweisen; die Norm
+   muss als aktive Überschrift vorhanden sein. Fehlt sie oder ist sie
+   `(weggefallen)`, ist der Beleg `tot`.
+3. Ist auch der Spiegel nicht auswertbar, bleibt der Befund fail-closed
+   `unklar` – mit sichtbarem Grund im Bericht. Die Queue bleibt dann offen.
+
+**Grenze der Aussage:** Ein `ok` über den Spiegel bestätigt ausschließlich den
+Normbestand. Es ist keine Inhaltsprüfung des Artikels, kein Abruf der amtlichen
+Seite und keine fachliche Freigabe. Der Bericht führt jede Ersatzprüfung mit
+Artikel, Quellen-ID, zitierter Adresse und geprüfter Spiegeldatei einzeln auf;
+die Zusammenfassung zählt sie getrennt.
+
+**Transportvertrag (#1024):** `net_safety.sicherer_abruf_status` liefert zwei
+Werte (Status, End-URL), `net_safety.sicherer_abruf` drei (Status, Köpfe,
+Bytes). Der Spiegel-Adapter hatte bis zum 03.11.2026 nur zwei entpackt; jeder
+Ersatzabruf endete deshalb in einem geschluckten `ValueError` und die fünf
+GII-Zitate blieben dauerhaft `unklar`. Der Vertrag ist heute Teil des
+`--selftest` und der Unit-Tests: Ein Test injiziert 2-Tupel für die Logik,
+weitere Tests fahren den **echten** Adapter gegen ein 3-Tupel. Wer den
+Transport ändert, sieht es sofort rot.
 
 ## Was die Freigabe automatisch bricht
 
@@ -193,10 +226,18 @@ python3 scripts/editorial_review_gate.py --published --strict
 # Belegketten-Wache (nur lesend; Exit 1 nur bei definitiv toter Quelle)
 python3 scripts/belegketten_wache.py --nur-hochrisiko --report --strict
 python3 scripts/belegketten_wache.py --selftest
+
+# Beide Hälften der Queue lokal prüfen (Gate + Wache inkl. Transportvertrag)
+npm run test:redaktion:ymyl
+
+# Scharfer Lauf, wie ihn der Workflow für die Ticket-Erledigung verlangt
+python3 scripts/belegketten_wache.py --nur-hochrisiko --report --strict --require-complete
 ```
 
 Der werktägliche Workflow `.github/workflows/redaktionelle-ymyl-pruefung.yml`
-pflegt genau ein GitHub-Arbeitsticket statt Einzelwarnungen zu streuen. Neue
+pflegt genau ein GitHub-Arbeitsticket statt Einzelwarnungen zu streuen. Er
+prüft vor der Messung das Regelwerk beider Hälften und schließt das Ticket
+nur, wenn Gate-Zahl **und** Wachen-Ergebnis grün sind. Neue
 Publikationskandidaten werden unabhängig davon im `publish_gate.py` sofort
 fail-closed gehalten; Hochrisiko-Entwürfe werden nicht gelöscht, sondern als
 manueller Review-Hold erhalten.

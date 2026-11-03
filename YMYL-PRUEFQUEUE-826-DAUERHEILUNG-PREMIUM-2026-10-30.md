@@ -1,5 +1,15 @@
 # Dauerhafte Behebung der Redaktionellen YMYL-Prüfqueue (#826)
 
+> **Nachtrag 03.11.2026 (Prüfqueue #1024, Korrektur eines Sachverhalts):** Die
+> unten in Säule 1 beschriebene Spiegelprüfung war bis zum 03.11.2026 **nicht
+> wirksam**. `abruf_gii_spiegel_http` entpackte das 3-Tupel von
+> `net_safety.sicherer_abruf` als 2-Tupel; jeder Ersatzabruf endete in einem
+> still geschluckten `ValueError`, die fünf GII-Zitate blieben `unklar`. Die
+> damaligen Logiktests injizierten 2-Tupel und konnten den Transportfehler
+> nicht sehen. Der Befund, die Reparatur und der neue Transportvertrag stehen
+> in `YMYL-PRUEFQUEUE-1024-DAUERHEILUNG-HIGHEND-2026-11-03.md`. Alle übrigen
+> Aussagen dieses Berichts beschreiben unverändert den Stand vom 30.10.2026.
+
 **Stand:** 2026-10-30 · **Status:** `10 / 10 Hochrisiko-Artikel freigegeben & versiegelt` · `open_live = 0` · `open_drafts = 0`
 
 ---

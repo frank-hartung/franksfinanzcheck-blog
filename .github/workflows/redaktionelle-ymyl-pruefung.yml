@@ -42,6 +42,10 @@ jobs:
       - name: Regelwerk selbst prüfen
         run: |
           python3 scripts/editorial_review_gate.py --selftest
+          # #1024: Der Selbsttest der Wache prüft auch den echten
+          # net_safety-Transport (3-Tupel). Ohne ihn war die Ersatzprüfung
+          # vier Tage lang tot, während alle Logiktests grün waren.
+          python3 scripts/belegketten_wache.py --selftest
           python3 -m unittest discover -s scripts/tests -p 'test_editorial_review_gate.py' -v
           python3 -m unittest discover -s scripts/tests -p 'test_ymyl_write_contract.py' -v
           python3 -m unittest discover -s scripts/tests -p 'test_ymyl_maintenance_writers.py' -v
@@ -168,6 +172,6 @@ jobs:
               | while read -r issue; do
                   [ -z "$issue" ] && continue
                   gh issue close "$issue" --repo "$GITHUB_REPOSITORY" \
-                    --comment "Alle dokumentierten YMYL-Freigaben und Review-Termine sind grün, und alle zitierten Belegketten sind ohne offene Abrufbefunde erreichbar (keine tote, unklare oder umgeleitete Quelle)."
+                    --comment "Alle dokumentierten YMYL-Freigaben und Review-Termine sind grün; für alle zitierten Belegketten gibt es einen belastbaren Abrufbefund (direkt oder, bei blockiertem Direktabruf, über den täglichen Bundesrechts-Spiegel bestätigt): keine tote, unklare oder umgeleitete Quelle. Der Wachenbericht nennt jede Ersatzprüfung einzeln."
                 done
           fi

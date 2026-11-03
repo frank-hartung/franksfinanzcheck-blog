@@ -16,6 +16,7 @@ from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import belegketten_wache as wache
 import faktenfrische
+import net_safety
 import yaml
 
 ARTIKEL = """---
@@ -222,6 +223,179 @@ class BelegkettenWacheTests(unittest.TestCase):
                 self.assertEqual(0, wache.main([]))
         finally:
             wache.pruefe_alle = original
+
+
+class Transportvertrag1024Tests(unittest.TestCase):
+    """#1024: Der ECHTE Spiegel-Adapter gegen den ECHTEN net_safety-Transport.
+
+    Die bestehenden Tests injizieren ``spiegel_abruf`` als 2-Tupel. Damit
+    prüfen sie die Normlogik, aber nicht die Verbindung dorthin. Genau in
+    dieser Lücke stand vier Tage lang ein ``ValueError: too many values to
+    unpack``: grüne Tests, rotes Ticket. Diese Klasse schließt die Lücke,
+    vollständig offline (kein Host wird wirklich aufgerufen).
+    """
+
+    # Kopf und Überschriftenebenen entsprechen den echten Spiegeldateien
+    # (vvg_2008.md: ``#####``, bgb.md: ``######``, Stand 03.11.2026).
+    VVG_MD = (
+        "---\n"
+        "abkuerzung: VVG\n"
+        "titel: Gesetz über den Versicherungsvertrag\n"
+        "quelle: https://www.gesetze-im-internet.de/vvg_2008/\n"
+        "builddate: '20260630215604'\n"
+        "---\n\n"
+        "# Gesetz über den Versicherungsvertrag (VVG)\n\n"
+        "##### § 40 Kündigung bei Prämienerhöhung\n\n(1) Text.\n\n"
+        "##### § 96 Kündigung nach Veräußerung\n\n(1) Text.\n\n"
+        "##### § 41 (weggefallen)\n"
+    )
+    BGB_MD = (
+        "---\n"
+        "quelle: https://www.gesetze-im-internet.de/bgb/\n"
+        "---\n\n"
+        "##### § 501 Vorzeitige Rückzahlung\n\n"
+        "###### § 502 Vorfälligkeitsentschädigung\n\n(1) Text.\n"
+    )
+    GII_40 = "https://www.gesetze-im-internet.de/vvg_2008/__40.html"
+    GII_502 = "https://www.gesetze-im-internet.de/bgb/__502.html"
+
+    def _transport(self, text):
+        return 200, {"Content-Type": "text/markdown; charset=utf-8"}, text.encode("utf-8")
+
+    @staticmethod
+    def _blockiert(url, timeout=10.0):
+        raise wache.urllib.error.URLError("timed out (GII-Runner-Filter)")
+
+    def test_net_safety_sicherer_abruf_liefert_drei_werte(self):
+        """Gegenprobe: der Transport, den der Adapter zu entpacken hat."""
+        class Antwort:
+            status = 200
+            headers = {"Content-Type": "text/markdown"}
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                return False
+
+            def read(self, anzahl):
+                return b"norm"
+
+            def geturl(self):
+                return "https://raw.githubusercontent.com/beispiel.md"
+
+        with patch.object(net_safety.urllib.request, "urlopen", return_value=Antwort()):
+            ergebnis = net_safety.sicherer_abruf(
+                "https://raw.githubusercontent.com/beispiel.md")
+        self.assertEqual(3, len(ergebnis), ergebnis)
+        self.assertEqual(b"norm", ergebnis[2])
+
+    def test_adapter_entpackt_dreiteiligen_transport(self):
+        """Der Regressionstest für #1024: 2er-Unpack würde hier werfen."""
+        with patch.object(net_safety, "sicherer_abruf",
+                          return_value=self._transport(self.VVG_MD)) as transport:
+            status, text = wache.abruf_gii_spiegel_http(
+                wache._gii_spiegel_url("vvg_2008"))
+        self.assertEqual(200, status)
+        self.assertIn("§ 40", text)
+        self.assertTrue(transport.called)
+
+    def test_echter_adapter_heilt_runner_blockade_mit_herkunft(self):
+        with patch.object(net_safety, "sicherer_abruf",
+                          return_value=self._transport(self.VVG_MD)):
+            erg = wache.pruefe_quelle(
+                self.GII_40, abruf=self._blockiert,
+                spiegel_abruf=wache.abruf_gii_spiegel_http)
+        self.assertEqual(wache.OK, erg["status"], erg)
+        self.assertEqual(wache.PFAD_SPIEGEL, erg["pruefpfad"])
+        self.assertTrue(erg["spiegel_url"].endswith("/vv/vvg_2008.md"), erg)
+        self.assertIn("Bundesrechts-Spiegel", erg["hinweis"])
+
+    def test_bgb_heading_level_und_einzelnormschaerfe(self):
+        def transport(url, **kwargs):
+            return self._transport(self.BGB_MD)
+
+        with patch.object(net_safety, "sicherer_abruf", side_effect=transport):
+            ok = wache.pruefe_quelle(
+                self.GII_502, abruf=self._blockiert,
+                spiegel_abruf=wache.abruf_gii_spiegel_http)
+            fehlt = wache.pruefe_quelle(
+                "https://www.gesetze-im-internet.de/bgb/__503.html",
+                abruf=self._blockiert,
+                spiegel_abruf=wache.abruf_gii_spiegel_http)
+        self.assertEqual(wache.OK, ok["status"], ok)
+        self.assertEqual(wache.TOT, fehlt["status"], fehlt)
+        self.assertIn("vor jeder Textänderung", fehlt["hinweis"])
+
+    def test_transportausfall_bleibt_fail_closed_und_begruendet(self):
+        with patch.object(net_safety, "sicherer_abruf",
+                          side_effect=wache.urllib.error.URLError("offline")):
+            erg = wache.pruefe_quelle(
+                self.GII_40, abruf=self._blockiert,
+                spiegel_abruf=wache.abruf_gii_spiegel_http)
+        self.assertEqual(wache.UNKLAR, erg["status"], erg)
+        self.assertEqual(wache.PFAD_UNKLAR, erg["pruefpfad"])
+        self.assertIn("Spiegel", erg["hinweis"])
+
+    def test_direktes_404_wird_nicht_ueberstimmt(self):
+        def tot(url, timeout=10.0):
+            raise wache.urllib.error.HTTPError(url, 404, "Not Found", None, None)
+
+        with patch.object(net_safety, "sicherer_abruf",
+                          return_value=self._transport(self.VVG_MD)):
+            erg = wache.pruefe_quelle(
+                self.GII_40, abruf=tot,
+                spiegel_abruf=wache.abruf_gii_spiegel_http)
+        self.assertEqual(wache.TOT, erg["status"], erg)
+        self.assertNotEqual(wache.PFAD_SPIEGEL, erg["pruefpfad"])
+
+    def test_produktionsweg_ist_gruen_und_zaehlt_ersatzpruefungen(self):
+        """Ohne Injektion: echter Direkt- UND echter Spiegel-Adapter, offline."""
+        artikel = [
+            {"slug": slug, "risk": "hoch", "approved": True,
+             "quellen": [{"id": "Q3", "titel": "§ 40 VVG", "url": self.GII_40}]}
+            for slug in ("kfz", "versicherungsupdate")
+        ]
+        with patch.object(wache, "belegketten", return_value=artikel), patch.object(
+                wache, "abruf_http", side_effect=self._blockiert), patch.object(
+                net_safety, "sicherer_abruf",
+                return_value=self._transport(self.VVG_MD)):
+            ergebnis = wache.pruefe_alle(nur_hochrisiko=True)
+            with redirect_stdout(io.StringIO()):
+                code = wache.main(["--nur-hochrisiko", "--strict", "--require-complete"])
+        self.assertEqual(2, ergebnis["geprueft"])
+        self.assertEqual(2, ergebnis["zaehler"][wache.OK])
+        self.assertEqual([], ergebnis["befunde"])
+        self.assertEqual([], ergebnis["blockierend"])
+        self.assertEqual(2, len(ergebnis["spiegel_bestaetigt"]))
+        self.assertEqual(
+            ["kfz", "versicherungsupdate"],
+            [e["slug"] for e in ergebnis["spiegel_bestaetigt"]])
+        self.assertEqual(0, code)
+
+    def test_report_nennt_ersatzpruefung_statt_falschem_freispruch(self):
+        erg = {
+            "geprueft": 1,
+            "zaehler": {wache.OK: 1, wache.TOT: 0, wache.UNKLAR: 0, wache.UMGELEITET: 0},
+            "befunde": [], "blockierend": [],
+            "spiegel_bestaetigt": [{
+                "slug": "kfz", "id": "Q3", "zitat": self.GII_40,
+                "spiegel_url": wache._gii_spiegel_url("vvg_2008"),
+                "hinweis": "aktiver Normbestand über täglichen Bundesrechts-Spiegel bestätigt",
+            }],
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            ziel = Path(tmp) / "BELEGKETTEN-WACHE-REPORT.md"
+            with patch.object(wache, "REPORT", ziel):
+                wache.report_schreiben(erg)
+            text = ziel.read_text(encoding="utf-8")
+        self.assertIn("Über Bundesrechts-Spiegel bestätigt: **1**", text)
+        self.assertIn("Unverändert direkt erreichbar: **0**", text)
+        self.assertIn("## Ersatzprüfung über den Bundesrechts-Spiegel", text)
+        self.assertIn("/vv/vvg_2008.md", text)
+        self.assertIn("keine fachliche Freigabe", text)
+        self.assertNotIn("alle Belegketten unverändert erreichbar", text)
+        self.assertNotIn("Unverändert erreichbar: **1**", text)
 
 
 class FaktenfrischeSchreibgrenzeTests(unittest.TestCase):
