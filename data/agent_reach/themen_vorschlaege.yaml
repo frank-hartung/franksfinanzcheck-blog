@@ -9,6 +9,13 @@
 # ============================================================
 version: 1
 vorschlaege:
+- titel: Bundesnetzagentur fördert den Bau elf neuer Gaskraftwerke
+  url: https://www.tagesschau.de/wirtschaft/energie/bundesnetzagentur-gaskraftwerke-100.html
+  quelle: Tagesschau Wirtschaft (RSS)
+  erfasst: '2026-11-03T17:30:15'
+  brief: ''
+  status: offen
+  notiz: RSS-Trigger des Schaltwerks – Quellenprüfung erforderlich.
 - titel: STROMKOSTEN SENKEN LEICHT GEMACHT
   url: https://www.youtube.com/watch?v=AV6klzZwCeo
   quelle: YouTube
@@ -282,4 +289,4 @@ vorschlaege:
   brief: 2026-09-28-internet-recherche.json
   status: offen
   notiz: Automatisch erfasst aus 2026-09-28-internet-recherche.json – Quellenprüfung erforderlich.
-zuletzt_ergaenzt: '2026-11-02T19:13:37'
+zuletzt_ergaenzt: '2026-11-03T17:30:15'
