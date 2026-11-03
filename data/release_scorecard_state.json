@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "generated_at": "2026-11-02T14:13:47Z",
+  "generated_at": "2026-11-03T10:28:55Z",
   "modus": "kandidaten",
-  "commit": "69f08c40c654e63eda3d8030eec790ee85fdbaf1",
+  "commit": "a44a124694f667da6617e6d6379719d66677ed2d",
   "kapazitaet": {
-    "stichtag": "2026-11-02",
+    "stichtag": "2026-11-03",
     "artikel": 112,
-    "faellig": 1,
+    "faellig": 0,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
-      "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
-      "frist": "2026-11-03",
-      "restlaufzeit": 1
+      "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+      "frist": "2026-11-06",
+      "restlaufzeit": 3
     },
     "budget": 4,
     "laeufe_je_tag": 1.0,
@@ -23,7 +23,7 @@
     "horizont_tage": 120,
     "vorlauf_tage": 7,
     "nachhol_frist_tage": 7,
-    "abbau_tage": 0,
+    "abbau_tage": null,
     "verletzungen_alt": 0,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
@@ -56,7 +56,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": {
-      "sha256": "1ff0b2bba616b6160a2415405d96e0bf962297f9494f9b7e721c0d0aab446c18",
+      "sha256": "b5f125d25978f06fb3580a1287987405c8589801e26dc1703ee30180b43c49a1",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -107,7 +107,7 @@
       "siegel_drift": "unverändert"
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
-      "sha256": "367c9e3b2e9db26b714d8a73d6fddad68b7814feaf8b4f271b816b9dda9bf8ec",
+      "sha256": "8043b551b685f4028aa8d3b9487b288823acafe46cd3f7491fdcdfe53a085980",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -124,7 +124,7 @@
       "siegel_drift": "geändert – neu geprüft"
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
-      "sha256": "b7c87348608f9f730d73b454fd13336cbd4c4e8f150ba9bc263a9a056522f4cf",
+      "sha256": "35816d320e29b3d882cf1a12175ed01d5d0abe7bec2b200104fec53974754f48",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -242,23 +242,6 @@
       "naechste_pruefung": "2026-12-14",
       "siegel_drift": "unverändert"
     },
-    "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": {
-      "sha256": "280d4bda6a4a1496ff4df1e3beca2e029d3f163f0f7e46c11aca1fb457108765",
-      "urteil": "freigabe-reif",
-      "risikoklasse": "hoch",
-      "dimensionen": {
-        "technik": "bestanden",
-        "quellen": "bestanden",
-        "faktenalter": "bestanden",
-        "affiliate": "bestanden",
-        "redundanz": "bestanden",
-        "ymyl": "bestanden",
-        "freigabe": "bestanden",
-        "revision": "bestanden"
-      },
-      "naechste_pruefung": "2026-11-19",
-      "siegel_drift": "unverändert"
-    },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
       "sha256": "1d49ca08e222704e74b5c5df91aa62ae29772a6cca6ac382c5c3a28c7da8960f",
       "urteil": "freigabe-reif",
@@ -359,10 +342,10 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "geändert – neu geprüft"
+      "siegel_drift": "unverändert"
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
-      "sha256": "6ad5c5814b790efedd9e44fb53ddb9d3f4002b680ad4a53e8d40257e87ed5faf",
+      "sha256": "94a8d421ecd497ce4a50f1654d9d784e0a563228d958509a1b53ab2304356b65",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -410,23 +393,6 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert"
-    },
-    "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen": {
-      "sha256": "efdefc29509ebb6ed09337d78f16024186dd8084202a6d6f78d77f7cdc9525ac",
-      "urteil": "freigabe-reif",
-      "risikoklasse": "hoch",
-      "dimensionen": {
-        "technik": "bestanden",
-        "quellen": "bestanden",
-        "faktenalter": "bestanden",
-        "affiliate": "bestanden",
-        "redundanz": "bestanden",
-        "ymyl": "bestanden",
-        "freigabe": "bestanden",
-        "revision": "bestanden"
-      },
-      "naechste_pruefung": "2026-12-14",
       "siegel_drift": "unverändert"
     },
     "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
@@ -906,21 +872,21 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
-      "sha256": "210313b43d55ddbb5b7bb253229dd544051dc44cdf315763dbf60c05145aa1f9",
-      "urteil": "freigabe-reif",
+      "sha256": "f5a94619035ef990f36f9ee1df717d8453b312f1b44bfb3e51f3f44ba41f1ff5",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-03",
-      "siegel_drift": "unverändert"
+      "naechste_pruefung": "2026-12-03",
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {
       "sha256": "37cdf95a3a7862519c1511624462984abd96e7d5c272063cea6c96bce35ebab6",
@@ -940,21 +906,21 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": {
-      "sha256": "d9c890b4f45f78e43d86781294bf9a9713d1727b4b0b65a9c2ca10bf2faba6d7",
-      "urteil": "freigabe-reif",
+      "sha256": "e247d98f9cc10f163fac90c95a1e050bc99682378e76fad71f655d89f0aaae1b",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-03",
-      "siegel_drift": "unverändert"
+      "naechste_pruefung": "2026-12-03",
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest": {
       "sha256": "b086f138bd70a28f325e3271a73e4fee062f98beaa94bbc64ae127138bb1f6fd",
@@ -1008,21 +974,21 @@
       "siegel_drift": "unverändert"
     },
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
-      "sha256": "3608d4e91a696cdceff233597b963147de040395b2d3fd5879a78605210e5860",
-      "urteil": "freigabe-reif",
+      "sha256": "4601faa4749766b3d41d9520a3a09123146c15537c7b26b4c948a240dc36c87e",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-06",
-      "siegel_drift": "unverändert"
+      "naechste_pruefung": "2026-12-03",
+      "siegel_drift": "geändert – neu geprüft"
     },
     "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
       "sha256": "098672533c8845ccea0f99df60928598d679c2b7c3047fec20ad887c04190ae9",
