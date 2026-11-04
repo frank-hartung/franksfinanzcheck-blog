@@ -88,8 +88,8 @@ Prüfung erfinden. Deepfake- und Textpflichten nicht verwechseln.
 
 ## 4. Live-Abnahme nach Integration
 
-1. Integritäts-Lock mit vollständiger Historie durch den Betreiber prüfen und
-   nötige Freigabe der geschützten Generatoränderung dokumentieren. Erfolgreiches
+1. Integritäts-Lock und dokumentierte Betreiberfreigabe prüfen; bei späteren
+   Kernänderungen ist eine erneute bewusste Freigabe erforderlich. Erfolgreiches
    offizielles Pages-Deployment und ausgelieferte Revision prüfen; ein grüner
    lokaler Build oder `gh-pages` allein genügt nicht.
 2. Eine bekannte KI-Textseite mit und eine ohne redaktionelle Freigabe im

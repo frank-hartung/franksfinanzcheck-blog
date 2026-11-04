@@ -11,22 +11,32 @@ fachanwaltliche Prüfung empfohlen (siehe Abschnitt „Nächste Schritte“).
 
 ---
 
+## Nachtrag 2026-11-04 · Betreiberfreigabe des Integritäts-Locks (#1056)
+
+Nach ausdrücklicher Betreiberentscheidung wurden die drei im folgenden
+Nachtrag genannten Kernänderungen mit `--set-current` neu signiert. Die
+Herkunft ist in `data/integrity_lock.json` und `data/integrity_history.jsonl`
+festgehalten; das lokale Integritäts-Gate war danach grün. Dies ersetzt weder
+die noch ausstehenden Anbieter- und Bildherkunftsnachweise noch die
+Live-Abnahme nach einem offiziellen Deployment.
+
+---
+
 ## Nachtrag 2026-11-04 · Stand des Integritäts-Locks und CI (#1051)
 
 Im aktuellen Ausgangsstand `038b04f` ist das Integritäts-Siegel nach
 `--repair-lock --dry-run` gültig und verkettet; der historische Befund vom
 03.11. bleibt als damalige Beobachtung bestehen. Das Gate meldet die drei
 hier geänderten geschützten Dateien (`head.html`, `cover.html`,
-`generate_covers.py`) als nicht signiert. Eine bewusste Freigabe und
-Neu-Signatur durch den Betreiber bleibt erforderlich; ein grünes Siegel wird
-nicht vorgetäuscht. Die Deployment-Schritte sind im Blustradius-Register erfasst.
+`generate_covers.py`) als nicht signiert. Zu diesem Zeitpunkt standen Betreiberfreigabe und Neu-Signatur noch aus;
+siehe den späteren Nachtrag darüber. Die Deployment-Schritte sind im Blustradius-Register erfasst.
 Der neue Bestandsschutz läuft auch im PR-Test bei Änderungen an Originalbildern.
 
 Aktuelle lokale Probe mit Pillow 13.0.0: 114 Referenzen auf 113 Dateien,
 80 byteidentisch und 33 abweichend; keine als KI deklariert. Weder die
 Bytegleichheit noch eine Abweichung beweist die tatsächliche Herkunft. Der
 Hugo-Produktionsbuild und 29 gezielte Tests waren erfolgreich; der
-Integritäts-Test bleibt wegen der unsignierten Kernänderungen rot. Eine
+Integritäts-Test war zu diesem Zeitpunkt wegen der unsignierten Kernänderungen rot. Eine
 Live-Abnahme und Anbieterbestätigungen liegen nicht vor.
 
 ---
