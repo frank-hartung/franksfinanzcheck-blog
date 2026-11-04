@@ -16,7 +16,11 @@ fachanwaltliche Prüfung empfohlen (siehe Abschnitt „Nächste Schritte“).
 Nach ausdrücklicher Betreiberentscheidung wurden die drei im folgenden
 Nachtrag genannten Kernänderungen mit `--set-current` neu signiert. Die
 Herkunft ist in `data/integrity_lock.json` und `data/integrity_history.jsonl`
-festgehalten; das lokale Integritäts-Gate war danach grün. Dies ersetzt weder
+festgehalten; das lokale Integritäts-Gate war danach grün. Bei der späteren
+Integration des fortgeschriebenen `main` wurde dessen gültiges Siegel als
+Grundlage genommen und ausschließlich dieselben drei freigegebenen Dateien
+erneut signiert; die vorherige Signatur bleibt in der Git-Historie erhalten.
+Dies ersetzt weder
 die noch ausstehenden Anbieter- und Bildherkunftsnachweise noch die
 Live-Abnahme nach einem offiziellen Deployment.
 

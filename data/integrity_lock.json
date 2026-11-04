@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-11-04T10:42:10.654768+00:00",
-  "head": "6c7daa18e",
+  "signed_at": "2026-11-04T11:27:16.758691+00:00",
+  "head": "734f3a9e8",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -60,27 +60,8 @@
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
   "files_sha256": "5c7f33cb3835c76d870f4ec97895db7eeb5503712a62c9d8406dfd7a04c905b5",
-  "audit_start_sha256": "60386f7c569f95cb375abfb79daf04cb4e724f9980c07b51617dc69a09cb72ca",
+  "audit_start_sha256": "63997d28ec060e34a137a126ef686508f4056d72bdec92a3b0e3aa92b461a900",
   "audit": [
-    {
-      "date": "2026-11-01",
-      "art": "heal",
-      "head": "292a0ae",
-      "geaendert": [
-        "scripts/redaktions_standard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/redaktions_standard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [],
-          "commits_art": "seit-signatur"
-        }
-      ],
-      "files_sha256": "96a8896c41b0ed46cbc92fd1bf3669eec75e2a8cd4ced71a45cfdd55ab2e45cf",
-      "prev_sha256": null
-    },
     {
       "date": "2026-11-01",
       "art": "heal",
@@ -128,7 +109,7 @@
         }
       ],
       "files_sha256": "2b075b079c386c809a49383b548469a4ca8d12ba53139d3ff23b3ec28d6efa64",
-      "prev_sha256": "60386f7c569f95cb375abfb79daf04cb4e724f9980c07b51617dc69a09cb72ca"
+      "prev_sha256": null
     },
     {
       "date": "2026-11-01",
@@ -453,7 +434,15 @@
     {
       "date": "2026-11-04",
       "art": "set-current",
-      "head": "6c7daa18e",
+      "head": "038b04fee",
+      "geaendert": [],
+      "files_sha256": "9abb7c9dc116226414fa81dabd11801d3c8a11b2c492029273e869af4abc274a",
+      "prev_sha256": "ffea1e1d04b08872decbac0fac60cfac326638a6ebe11aecae4c4649f6673964"
+    },
+    {
+      "date": "2026-11-04",
+      "art": "set-current",
+      "head": "734f3a9e8",
       "geaendert": [
         "layouts/_partials/cover.html",
         "layouts/_partials/head.html",
@@ -469,14 +458,9 @@
               "sha": "6c7daa18e",
               "datum": "2026-11-04",
               "betreff": "fix: KI-Transparenz und Cover-Provenienz absichern"
-            },
-            {
-              "sha": "038b04fee",
-              "datum": "2026-11-04",
-              "betreff": "chore(schaltwerk): Automationslauf 2026-11-04 09:48"
             }
           ],
-          "commits_art": "letzte-commits"
+          "commits_art": "seit-signatur"
         },
         {
           "pfad": "layouts/_partials/cover.html",
@@ -487,14 +471,9 @@
               "sha": "6c7daa18e",
               "datum": "2026-11-04",
               "betreff": "fix: KI-Transparenz und Cover-Provenienz absichern"
-            },
-            {
-              "sha": "038b04fee",
-              "datum": "2026-11-04",
-              "betreff": "chore(schaltwerk): Automationslauf 2026-11-04 09:48"
             }
           ],
-          "commits_art": "letzte-commits"
+          "commits_art": "seit-signatur"
         },
         {
           "pfad": "scripts/generate_covers.py",
@@ -505,17 +484,12 @@
               "sha": "6c7daa18e",
               "datum": "2026-11-04",
               "betreff": "fix: KI-Transparenz und Cover-Provenienz absichern"
-            },
-            {
-              "sha": "038b04fee",
-              "datum": "2026-11-04",
-              "betreff": "chore(schaltwerk): Automationslauf 2026-11-04 09:48"
             }
           ],
-          "commits_art": "letzte-commits"
+          "commits_art": "seit-signatur"
         }
       ],
-      "prev_sha256": "ffea1e1d04b08872decbac0fac60cfac326638a6ebe11aecae4c4649f6673964",
+      "prev_sha256": "f9061a288212228b1b38f8faf98f3ed244d418caebbafd8baed412539a2f8101",
       "files_sha256": "5c7f33cb3835c76d870f4ec97895db7eeb5503712a62c9d8406dfd7a04c905b5"
     }
   ]

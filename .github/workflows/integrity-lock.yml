@@ -104,6 +104,19 @@ jobs:
       - name: Kern-Beweis des Guards (schreibt nie)
         run: python3 scripts/integrity_guard.py --selftest
 
+      # WARUM DIE REGRESSIONSTESTS HIER STEHEN (04.11.2026, WF-829B / #1039)
+      # Das Gate oben prüft DEN LOCK. Es prüft nicht, ob der PRÜFER noch weiß,
+      # was ein Zusammenschnitt ist – `--selftest` tut das für den Kern, aber
+      # die Verträge zu Klassifikation, Signatur-Regel, Akte und Reparatur
+      # lagen ausschließlich in `scripts/tests/test_integrity_guard.py`, und
+      # die lief in KEINEM Workflow. Ein Vertrag ohne Lauf ist Prosa.
+      # Am 02.11.2026 kam ein Siegel mit drei übereinanderliegenden Fassungen
+      # in `main`; nur ein fehlendes Komma machte es auffällig. Ohne diesen
+      # Schritt bleibt die Frage „merkt der Prüfer das noch?" eine Behauptung.
+      # 66 Tests, offline, ohne Netzzugriff, ohne Schreibzugriff auf den Baum.
+      - name: Siegel-Verträge (Regressionstests des Prüfers selbst)
+        run: python3 -m unittest scripts.tests.test_integrity_guard
+
       # Dauerhafte Antwort auf #571 und #1014: Dependabot hebt Action-Pins an,
       # trifft aber nicht immer jede Fundstelle. Seit der SHA-Pflicht prüft
       # diese Wache EINEN SHA + Version je Anbieter-Repo (inkl. Unteraktionen

@@ -564,6 +564,132 @@ class SiegelZustandTests(Fixture):
                          "die Diagnose reist mit – kein stilles „leeres Siegel\"")
 
 
+class ParsebarerZusammenschnittTests(Fixture):
+    """WF-829B / #1039 – der Vorfall vom 02.11.2026: es PARST, und trügt doch.
+
+    In `main` stand ein Siegel, in dem drei Fassungen zeilenweise
+    übereinanderlagen (`"signed_at"` und `"head"` je dreimal, `"files"` je
+    zweimal). Nur weil zwischen zwei Zeilen ein Komma fehlte, war die Datei
+    unparsebar und fiel auf. **Ohne** dieses eine Komma wäre sie gültiges JSON
+    gewesen: `json.loads()` nimmt still den LETZTEN Wert, und der Zustand
+    hätte „ok" gelautet – mit einer Map der 19:13-Fassung und einer
+    `signed_at` der 13:23-Fassung. Kette und Map-Prüfsumme hätten das nicht
+    bemerkt, weil sie beides aus den geparsten Daten bilden.
+
+    Diese Klasse hält den Unterschied fest, den der Vorfall gezeigt hat:
+    Ein Siegel ist nicht dann gesund, wenn es PARST, sondern wenn EINE
+    Fassung dasteht.
+    """
+
+    def _kopf_verdoppeln(self, text: str) -> str:
+        """Zweite Kopfzeile davor – parsbares JSON, zwei Generationen."""
+        marke = '{\n  "schema": 2,\n'
+        self.assertTrue(text.startswith(marke), "Signatur-Form geändert")
+        return text.replace(
+            marke,
+            '{\n  "schema": 2,\n'
+            '  "signed_at": "2026-11-01T14:32:11.060118+00:00",\n'
+            '  "head": "887248e",\n'
+            '  "schema": 2,\n', 1)
+
+    def test_doppelte_schluessel_werden_gefunden(self):
+        self.signieren()
+        text = self._kopf_verdoppeln(
+            self.lock_pfad.read_text(encoding="utf-8"))
+        self.assertEqual(sorted(ig._doppelte_schluessel(text)),
+                         ["head", "schema", "signed_at"],
+                         "jeder doppelt stehende Schlüssel wird benannt – "
+                         "auch der Steuerkopf (`schema`), denn auch er sagt "
+                         "dann zwei Wahrheiten")
+
+    def test_parsebarer_zusammenschnitt_ist_nicht_gesund(self):
+        self.signieren()
+        text = self._kopf_verdoppeln(
+            self.lock_pfad.read_text(encoding="utf-8"))
+        self.lock_pfad.write_text(text, encoding="utf-8")
+        json.loads(text)                       # die Datei PARST – das ist der Punkt
+        befund = ig.lock_zustand(self.lock_pfad)
+        self.assertEqual(befund["zustand"], ig.ZUSTAND_BESCHAEDIGT,
+                         "ein parsebarer Zusammenschnitt darf nie „ok“ heißen")
+        self.assertEqual(befund["verdacht"], "zusammenschnitt")
+        self.assertTrue(any("mehrfach" in d for d in befund["detail"]),
+                        "der Befund muss die doppelten Schlüssel benennen")
+
+    def test_gate_ist_rot_und_nennt_die_reparatur(self):
+        self.signieren()
+        _commit(self.root, "chore(integrity): gesundes Siegel committet")
+        self.lock_pfad.write_text(
+            self._kopf_verdoppeln(self.lock_pfad.read_text(encoding="utf-8")),
+            encoding="utf-8")
+        puffer = io.StringIO()
+        with contextlib.redirect_stdout(puffer):
+            self.assertEqual(ig.gate(self.root), 3)
+        text = puffer.getvalue()
+        self.assertIn("ZERSTÖRT", text)
+        self.assertIn("--repair-lock", text)
+        self.assertIn("KEINEN Zeitpunkt", text)
+
+    def test_signieren_verweigert_den_zusammenschnitt(self):
+        """`--heal`/`--set-current` dürfen den Fehler nicht adeln."""
+        self.signieren()
+        _commit(self.root, "chore(integrity): gesundes Siegel committet")
+        zusammengesetzt = self._kopf_verdoppeln(
+            self.lock_pfad.read_text(encoding="utf-8"))
+        self.lock_pfad.write_text(zusammengesetzt, encoding="utf-8")
+        puffer = io.StringIO()
+        with contextlib.redirect_stdout(puffer):
+            rc = ig.heilen(self.root, dry_run=True)
+        self.assertEqual(puffer.getvalue()[:0], "")
+        self.assertEqual(self.lock_pfad.read_text(encoding="utf-8"),
+                         zusammengesetzt,
+                         "ein Probelauf schreibt nicht (C15) und signiert "
+                         "einen Zusammenschnitt nicht")
+
+    def test_reparatur_stellt_eine_fassung_wieder_her(self):
+        self.signieren()
+        _commit(self.root, "chore(integrity): gesundes Siegel committet")
+        gesund = json.loads(self.lock_pfad.read_text(encoding="utf-8"))
+        self.lock_pfad.write_text(
+            self._kopf_verdoppeln(self.lock_pfad.read_text(encoding="utf-8")),
+            encoding="utf-8")
+        with contextlib.redirect_stdout(io.StringIO()):
+            self.assertIn(ig.lock_reparatur(self.root), (0, 1))
+        repariert = json.loads(self.lock_pfad.read_text(encoding="utf-8"))
+        self.assertEqual(ig.lock_zustand(self.lock_pfad)["zustand"], ig.ZUSTAND_OK)
+        self.assertEqual(ig._doppelte_schluessel(
+            self.lock_pfad.read_text(encoding="utf-8")), [],
+            "nach der Reparatur steht genau EINE Fassung da")
+        self.assertEqual(repariert["files"], gesund["files"],
+                         "die reparierte Map ist die belegte Map")
+        self.assertEqual(ig.load_lock(self.lock_pfad)["audit"][-1]["art"],
+                         "repair")
+
+
+class EichprobeTests(unittest.TestCase):
+    """Die Probe, mit der das Gate sich vor dem Urteil selbst eicht (#1039)."""
+
+    def test_probe_ist_parsebar_und_wird_erkannt(self):
+        befund = ig.zusammenschnitt_probe()
+        self.assertTrue(befund["probe_parst"],
+                        "die Probe muss PARSEBAR sein – sonst prüft sie nicht "
+                        "die Lücke, sondern die Syntax")
+        self.assertEqual(befund["zustand"], ig.ZUSTAND_BESCHAEDIGT)
+        self.assertEqual(befund["verdacht"], "zusammenschnitt")
+
+    def test_gate_verweigert_bei_nicht_eichfaehigem_messgeraet(self):
+        """Sabotage: die Doppelte-Schlüssel-Prüfung fällt aus → Gate rot."""
+        echt = ig._doppelte_schluessel
+        ig._doppelte_schluessel = lambda _text: []
+        try:
+            puffer = io.StringIO()
+            with contextlib.redirect_stdout(puffer):
+                self.assertEqual(ig.gate(ig.ROOT), 3,
+                                 "ohne Eichprobe gibt das Gate eine Freigabe")
+        finally:
+            ig._doppelte_schluessel = echt
+        self.assertIn("NICHT EICHFÄHIG", puffer.getvalue())
+
+
 class ReparaturTests(Fixture):
     """Ein beschädigtes Siegel wird BELEGT geheilt – oder gar nicht.
 
