@@ -6,7 +6,7 @@ draft: true
 tags: ["Mietwagen und Wohnmobil"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
-keywords: ["Mietwagen buchen", "Günstige Mietwagen", "Mietwagen Vergleich"]
+keywords: ["Mietwagen buchen", "Günstige Mietwagen", "Mietwagen Vergleich", "Günstigen Mietwagen für den Urlaub buchen", "Mietwagen Kaution", "Autovermietung Tipps"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
@@ -15,6 +15,12 @@ redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
+pin_title: "Günstigen Mietwagen für den Urlaub buchen"
+pin_description: "*Werbung | Günstigen Mietwagen für den Urlaub buchen – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und… Mehr Spartipps auf FranksFinanzcheck! #mietwagen #buchen #guenstige"
+cover:
+  image: "images/covers/2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen.jpg"
+  alt: "Günstigen Mietwagen für den Urlaub buchen"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Du planst den Sommerurlaub und brauchst ein flexibles Fortbewegungsmittel für die Strandregion.  

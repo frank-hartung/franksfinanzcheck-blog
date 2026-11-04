@@ -15,9 +15,9 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Die teuersten Spätsommer-Fehler sind ein ungeprüfter Tarif, ein unrealistischer Abschlag, fehlende Zählerstände, ein aufgeschobener Heizungs-Check und pauschale Technik-Einstellungen. Prüfe Arbeitspreis, Grundpreis und Vorjahresverbrauch getrennt. Entlüfte nur bei Bedarf; wiederkehrender Druckverlust, Störungen und Arbeiten am Wärmeerzeuger gehören zum Fachbetrieb."
 social_posted: true
-keywords: ["Gasrechnung senken", "Heizkosten senken", "Gastarif wechseln", "Heizung entlüften", "Gasvergleich", "Gaspreisgarantie", "Gas spare", "Heizkosten sparen", "Gasanbieter"]
+keywords: ["Gasrechnung senken", "Heizkosten senken", "Gastarif wechseln", "Heizung entlüften", "Gasvergleich", "Gaspreisgarantie", "Gas spare", "Heizkosten sparen"]
 pin_title: "Gastarife vergleichen: Jetzt vor der Heizperiode wechseln"
-pin_description: "*Werbung | Gasrechnung vor der Heizperiode prüfen: Tarif, Abschlag, Zählerstand und Heizungs-Check getrennt ansehen, statt Einsparungen doppelt zu zählen. Jetzt die fünf Fehler vermeiden."
+pin_description: "*Werbung | Gasrechnung senken: Fünf teure Fehler vor der Heizperiode: So prüfst du Gasrechnung, Abschlag, Tarif und Heizung, ohne Einsparungen doppelt zu zählen. Mehr Spartipps auf FranksFinanzcheck! #gasrechnung #senken #heizkosten"
 pin_text_sync: false
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
