@@ -1,0 +1,35 @@
+name: Bestands-Regressionswache
+
+# Bot-Commits mit GITHUB_TOKEN lösen keine PR-Prüfung aus. Dieser unabhängige
+# Zeitlauf prüft daher auch Änderungen, die direkt auf main gelandet sind.
+# Er verändert weder Inhalte noch Freigaben; fachliche Aussagen bleiben Sache
+# der Redaktion. Das LCP-Manifest wird im Deploy bereits neu erzeugt.
+on:
+  schedule:
+    - cron: '17 5 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bestand-regression-wache
+  cancel-in-progress: false
+
+jobs:
+  regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - name: Abhängigkeiten aus geprüftem Lock installieren
+        run: python3 -m pip install -q --require-hashes -r requirements-ci.txt
+      - name: Live-Links, LCP-Manifest und Gas-Rückfallschutz prüfen
+        run: >-
+          python3 -m unittest -v
+          scripts.tests.test_versicherungs_cluster_verlinkung
+          scripts.tests.test_lcp_image_optimizer
+          scripts.tests.test_faktenfrische_996
