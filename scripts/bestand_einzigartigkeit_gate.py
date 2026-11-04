@@ -102,6 +102,7 @@ def aenderungen(base: str) -> list[str]:
     haben keine Vorfassung und damit keine Altlast, die sie verletzen
     könnten – ihr Einzigartigkeitsurteil spricht das Publish-Gate.
     """
+    _basis_pruefen(base)
     out = _git(["diff", "--name-only", "-z", "--diff-filter=M", "--no-renames",
                 base, "--", "content/posts"])
     pfade = [p for p in out.split("\0") if p]
@@ -111,6 +112,29 @@ def aenderungen(base: str) -> list[str]:
         if len(teile) == 4 and teile[:2] == POSTS_PREFIX and teile[-1] == "index.md":
             erlaubt.append(name)
     return sorted(erlaubt)
+
+
+def _basis_pruefen(base: str) -> None:
+    """Klartext, wenn die Basis lokal fehlt – statt eines nackten git-Fehlers.
+
+    Im CI ist das der Regelfall bei einem seichten Checkout: `git diff <sha>`
+    scheitert mit Exit 128, das Tor meldet „nicht messbar". Die richtige
+    Antwort ist nicht, die Messung zu lockern, sondern die Basis zu holen –
+    der Workflow läuft mit `fetch-depth: 0` und lädt notfalls nach. Diese
+    Meldung sagt das, damit niemand das Tor abschaltet statt den Checkout
+    zu reparieren (Lehre #1027).
+    """
+    if not base or base.startswith("-"):
+        raise ValueError(f"unbrauchbare Basis {base!r} – fail-closed")
+    try:
+        _git(["cat-file", "-e", f"{base}^{{commit}}"])
+    except subprocess.CalledProcessError:
+        raise ValueError(
+            f"Basis {base} liegt nicht im lokalen Objektspeicher – die "
+            f"Einzigartigkeit ist so nicht messbar. Abhilfe: "
+            f"`git fetch --no-tags --deepen=200 origin` (oder "
+            f"`fetch-depth: 0` beim Checkout). Die Prüfung bleibt stehen, "
+            f"sie wird nur mit History versorgt.") from None
 
 
 def _fassung(base: str, pfad: str) -> str | None:

@@ -51,8 +51,17 @@ jobs:
     env:
       REPORT_PRODUCTION: ${{ (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') }}
     steps:
+      # Vollständige Historie: Das Einzigartigkeits-Tor (#1027) vergleicht den
+      # Diff gegen `pull_request.base.sha`. Der Standard-Checkout ist seicht
+      # (depth 1) – die Basis-SHA fehlt dann im lokalen Objektspeicher, das Tor
+      # kann nicht messen und stoppt fail-closed (Exit 2). Ein Tor, das nur
+      # wegen fehlender History blockiert, wird nach zwei Wochen abgeschaltet;
+      # also liefern wir die History mit, statt die Prüfung zu lockern.
       - name: Repository auschecken
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
 
       # ------------------------------------------------------------
       #  GOVERNANCE-VERTRAG + SELBSTTESTS (seit 07.09.2026, Befund #206)
@@ -208,7 +217,30 @@ jobs:
         run: |
           python3 scripts/bestand_einzigartigkeit_gate.py --selftest
           python3 -m unittest scripts.tests.test_bestand_einzigartigkeit_gate
-          python3 scripts/bestand_einzigartigkeit_gate.py --base "$EINZIGARTIGKEIT_BASE"
+          # Die Basis muss im Objektspeicher liegen – sonst kann das Tor nicht
+          # messen und stoppt fail-closed (Exit 2, so am 04.11.2026 geschehen).
+          # `fetch-depth: 0` oben deckt PRs ab; bei Push-Events kann
+          # `github.event.before` trotzdem fehlen oder der Null-SHA sein (erste
+          # Push-Serie eines neuen Branches). Dann holen wir die Basis gezielt
+          # nach, statt die Messung aufzugeben: für einen Vergleich genügt der
+          # Baum des Basis-Commits, also `--depth=1` auf genau diese SHA.
+          base="$EINZIGARTIGKEIT_BASE"
+          case "$base" in
+            ""|0000000000000000000000000000000000000000) base="HEAD~1" ;;
+          esac
+          if ! git cat-file -e "${base}^{commit}" 2>/dev/null; then
+            echo "Basis $base fehlt lokal – wird gezielt nachgeladen (kein Freispruch)."
+            git fetch --no-tags --depth=1 origin "$base" ||
+              git fetch --no-tags --deepen=200 origin
+          fi
+          # Letzte Kontrolle vor der Messung: entweder die Basis ist da, oder
+          # der Schritt scheitert hier mit einer klaren Meldung – nicht das Tor
+          # mit einem nackten git-Fehler.
+          git cat-file -e "${base}^{commit}" || {
+            echo "::error::Basis $base ist auch nach dem Nachladen nicht vorhanden – die Einzigartigkeit ist nicht messbar (fail-closed)."
+            exit 2
+          }
+          python3 scripts/bestand_einzigartigkeit_gate.py --base "$base"
 
       - name: Interne Links prüfen
         id: links

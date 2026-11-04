@@ -254,5 +254,55 @@ class VerdrahtungTests(unittest.TestCase):
         self.assertEqual(gate.selftest(), 0)
 
 
+class CheckoutTests(unittest.TestCase):
+    """Das Tor braucht die Basis im Objektspeicher – sonst Exit 2.
+
+    Am 04.11.2026 lief der Schritt im ersten CI-Versuch auf die Nase: der
+    Standard-Checkout ist seicht (depth 1), `pull_request.base.sha` fehlte
+    lokal, das Tor stoppte korrekt fail-closed – und der PR stand rot da.
+    Die Lehre ist nicht „Tor lockern", sondern „History mitliefern". Diese
+    Tests pinnen die Verdrahtung, damit der Fehler nicht zurückkommt, ohne
+    dass ihn jemand bemerkt.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        cls.wf = (ROOT / ".github/workflows/link-check.yml").read_text(encoding="utf-8")
+
+    def test_checkout_holt_die_vollstaendige_historie(self):
+        self.assertIn("fetch-depth: 0", self.wf,
+                      "seichter Checkout: die Diff-Basis fehlt, das Tor kann "
+                      "nicht messen und blockiert jeden PR (fail-closed)")
+
+    def test_schritt_laedt_die_basis_nach(self):
+        self.assertIn("git fetch", self.wf,
+                      "kein Nachladen der Basis – ein Push-Event ohne "
+                      "`before`-SHA bliebe unmessbar")
+        self.assertIn("git cat-file -e", self.wf,
+                      "keine Kontrolle vor der Messung: der Schritt scheiterte "
+                      "sonst mit einem nackten git-Fehler statt mit Klartext")
+
+
+class BasisMeldungTests(unittest.TestCase):
+    """Fehlt die Basis, sagt das Tor was zu tun ist – und gibt nicht frei."""
+
+    def test_fehlende_basis_ist_klartext_und_fail_closed(self):
+        with self.assertRaises(ValueError) as ctx:
+            gate.pruefe_diff("0000000000000000000000000000000000000000",
+                             bestand=_bestand())
+        text = str(ctx.exception)
+        self.assertIn("nicht im lokalen Objektspeicher", text)
+        self.assertIn("git fetch", text)     # die Abhilfe steht in der Meldung
+
+    def test_leere_basis_gibt_nicht_frei(self):
+        with self.assertRaises(ValueError):
+            gate.pruefe_diff("", bestand=_bestand())
+
+    def test_option_als_basis_gibt_nicht_frei(self):
+        """`--base=--output=x` darf kein git-Argument werden."""
+        with self.assertRaises(ValueError):
+            gate.pruefe_diff("--output=/tmp/x", bestand=_bestand())
+
+
 if __name__ == "__main__":
     unittest.main()
