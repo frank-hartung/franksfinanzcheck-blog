@@ -6,6 +6,8 @@ on:
       # (u. a. Affiliate-Intent). Content-only-Korrekturen müssen sie deshalb
       # genauso auslösen wie Änderungen am Detektor selbst (#493).
       - 'content/**'
+      # Originalbilder und ihre Provenienz sind Teil des Publikationsvertrags.
+      - 'static/**'
       - 'layouts/**'
       - 'assets/**'
       - 'themes/**'
@@ -68,6 +70,9 @@ jobs:
         uses: ./.github/actions/hugo-build
         with:
           args: --minify --destination public --cleanDestinationDir
+      - name: KI-Cover – Provenienz des PR-Bestands
+        if: ${{ !cancelled() }}
+        run: python3 scripts/ki_cover_provenienz.py --gate
       # Harte, verständliche Vorprüfung für die Actions-Kontrollfläche. Das
       # Unit-Test-Netz darunter enthält zusätzlich Sabotageproben des Audits.
       - name: Workflow-Permissions und Betriebsverträge prüfen

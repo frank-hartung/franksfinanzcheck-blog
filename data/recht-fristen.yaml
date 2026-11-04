@@ -57,23 +57,23 @@ fristen:
     titel: "KI-VO: maschinenlesbare KI-Kennzeichnung für Bestandssysteme (Frist 02.12.2026)"
     kategorie: "KI-Verordnung"
     beschreibung: >
-      Seit 02.08.2026 gelten die Transparenzpflichten nach Art. 50
-      EU-KI-VO; für Systeme, die schon vorher im Einsatz waren, gilt
-      für die MASCHINENLESBARE Kennzeichnung synthetischer Inhalte eine
-      Nachfrist bis 02.12.2026. Der Blog erzeugt Artikel/Grafiken
-      KI-gestützt → bewerten, ob über den Impressum-Hinweis (vorhanden
-      seit 30.08.2026) hinaus ein maschinenlesbares Signal nötig/sinnvoll
-      ist (z. B. Meta-Angabe im Artikel-Template oder Kennzeichnung im
-      Footer). Kein Chatbot im Einsatz → Art. 50 Abs. 1 nicht einschlägig.
+      Art. 50 Abs. 2 betrifft die maschinenlesbare Markierung durch Anbieter
+      generativer KI-Systeme. Die Nachfrist bis 02.12.2026 gilt nur für
+      Systeme, die vor dem 02.08.2026 in Verkehr gebracht wurden. Davon
+      getrennt sind die bereits anwendbaren Betreiberpflichten für Deepfakes
+      und bestimmte Texte nach Art. 50 Abs. 4. Rollen und Anbieter je System,
+      Bildherkunft und Nachweise prüfen; HTML-Hinweise ersetzen weder die
+      Markierung des Anbieters noch einen sichtbaren Deepfake-Hinweis.
+      Ergebnisse und offene Punkte stehen im RECHT-UPDATE-REPORT.md.
     faellig_am: "2026-12-02"
     einmalig: true
     erinnerung_ab_tage: 30
     eskalation_nach_tagen: [0, 14, 30]
     checkliste:
-      - "Rechtslage-Stand prüfen (e-recht24.de News / IT-Recht-Kanzlei): Kennzeichnungspflicht für redaktionell geprüfte Ratgeber-Texte aktuell?"
-      - "Entscheiden: reicht der Impressum-Hinweis (Status quo) oder Artikel-/Footer-Kennzeichnung ergänzen?"
-      - "Falls ja: Hinweis-Partial/Shortcode im Theme ergänzen und auf KI-generierte Bilder (Covers) anwenden"
-      - "Ergebnis im RECHT-UPDATE-REPORT.md festhalten (auch wenn: keine Änderung nötig)"
+      - "Eingesetzte Systeme und Anbieter inventarisieren, Rolle und Inverkehrbringen klären; Anbieter zur Art.-50-Abs.-2-Markierung und Erkennung befragen"
+      - "Bei jedem Bild Herkunft und Deepfake-Risiko prüfen; belegte KI-Cover mit cover.ai_generated markieren, bei Deepfakes alle Ausspielwege sichtbar kennzeichnen"
+      - "Artikelhinweise und tatsächliche menschliche Prüfung samt redaktioneller Verantwortung kontrollieren; unklare Herkunft im Register klären"
+      - "Ergebnis und offene Nachweise im RECHT-UPDATE-REPORT.md dokumentieren; vor Abschluss Betreiberfreigabe und Live-Prüfung durchführen"
 
   # ------------------------------------------------------------
   # 3) EU-US Data Privacy Framework: Zertifizierung prüfen

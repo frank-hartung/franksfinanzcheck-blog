@@ -97,7 +97,7 @@
 {{- $lcpWidths := slice "360" "480" "620" "720" -}}
 {{- if eq .Kind "page" -}}
   {{- $coverHidden := or (.Param "cover.hiddenInSingle") (.Param "cover.hidden") -}}
-  {{- if and .Params.cover.image (not $coverHidden) (ne .Params.cover.preload false) -}}
+  {{- if and .Params.cover.image (not $coverHidden) (ne .Params.cover.preload false) (ne .Params.cover.ai_generated true) -}}
     {{- $lcpCover = .Params.cover.image -}}
   {{- end -}}
 {{- end -}}

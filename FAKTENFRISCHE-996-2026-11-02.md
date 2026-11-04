@@ -64,3 +64,20 @@ daher bis zu einem passenden erneuten Prüf-/Ledgerstand und einer manuellen,
 fassungsgebundenen Entscheidung offen. Keine Freigabe oder Schließung wurde
 vorgegeben. Die übrigen älteren Befunde im Issue sind nicht Gegenstand dieser
 16er-Bearbeitung und bleiben ebenfalls offen.
+
+## Nachtrag 03.11.2026 – Pin-Sync-Rückfall
+
+Im Checkout waren die zwei Pin-Beschreibungen der Artikel 14.08. und 24.08.
+und ihre Einträge im Pinterest-Plan erneut mit unbelegten saisonalen Preis-
+und Ersparnisversprechen belegt. Auch zwei weitere Pins zum Artikel vom 14.08.
+trugen unbelegte Zahlen bzw. pauschale Sparversprechen. Frontmatter und alle
+vier Planeinträge wurden neutralisiert; der bestehende Rückfallschutz prüft
+jetzt zusätzlich die Planquelle, aus der der tägliche Sync schreibt. Die
+lokale Testsuite ist grün; das ist keine Bestätigung eines neuen Deployments.
+
+## Einordnung 04.11.2026
+
+Bei der Übernahme von #1051 wurden die inzwischen auf dem Ausgangsstand
+redaktionell überarbeiteten Texte und die Synchronisationssperre beibehalten.
+Die Planeinträge dürfen deshalb vom Frontmatter abweichen; der Test prüft
+Sperre und unzulässige Aussagen statt Textidentität.

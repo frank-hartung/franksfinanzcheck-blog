@@ -661,7 +661,7 @@ def pillar_paths():
     return out
 
 
-def ensure_pillar_covers(force=False, only=None):
+def ensure_pillar_covers(force=False, only=None, protected=None):
     """Erzeugt für jeden Pillar ein 2:3-Branding-Cover + alle Varianten und
     trägt das Cover-Frontmatter ein. Returns (covers, frontmatter, variants)."""
     os.makedirs(OUT_DIR, exist_ok=True)
@@ -690,6 +690,9 @@ def ensure_pillar_covers(force=False, only=None):
         drift = (manifest.get(slug, {}).get("design") != design
                  or manifest.get(slug, {}).get("title") != title)
         out_path = os.path.join(OUT_DIR, f"{slug}.jpg")
+        if protected and os.path.realpath(out_path) in protected:
+            print(f"  ⚠ KI-Original geschützt, Pillar-Cover nicht neu gerendert: {out_path}")
+            continue
         if force or not os.path.exists(out_path) or drift:
             make_cover(title, slug, out_path, force=force or drift,
                        badge=badge, savings=savings)
@@ -711,7 +714,7 @@ BRAND_COVER_TITLE = "FranksFinanzcheck \u2013 Geld sparen leicht gemacht"
 BRAND_COVER_BADGE = "FRUGALISMUS \u00b7 TARIFE \u00b7 VERSICHERUNGEN"
 
 
-def ensure_brand_cover(force=False):
+def ensure_brand_cover(force=False, protected=None):
     """Startseiten-Cover = og:image der Home-URL (Premium-Audit 11.09.2026).
 
     Die Startseite war die meistgeteilte URL der Site (Pinterest-Profil,
@@ -722,6 +725,9 @@ def ensure_brand_cover(force=False):
     """
     out_path = os.path.join(OUT_DIR, f"{BRAND_COVER_SLUG}.jpg")
     made = 0
+    if protected and os.path.realpath(out_path) in protected:
+        print(f"  ⚠ KI-Original geschützt: {out_path}")
+        return 0, 0
     if force or not os.path.exists(out_path):
         make_cover(BRAND_COVER_TITLE, BRAND_COVER_SLUG, out_path,
                    force=force or not os.path.exists(out_path),
@@ -737,6 +743,8 @@ def ensure_brand_cover(force=False):
 
 
 def main():
+    from ki_cover_provenienz import protected_paths
+    protected = {str(p) for p in protected_paths()}
     force = "--force" in sys.argv  # alle Covers neu generieren (neue Umbruch-Regel)
     nur_pillars = "--pillars" in sys.argv      # nur die 6 Ratgeber (Premium-Parität)
     nur_posts = "--posts-only" in sys.argv     # altes Verhalten (kompatibel)
@@ -780,6 +788,9 @@ def main():
         design_drift = (_entry.get("design") != design
                         or _entry.get("title") != title)
         out_path = os.path.join(OUT_DIR, f"{slug}.jpg")
+        if os.path.realpath(out_path) in protected:
+            print(f"  ⚠ KI-Original geschützt, Cover nicht neu gerendert: {out_path}")
+            continue
         if force or only_slug or not os.path.exists(out_path) or design_drift:
             make_cover(title, slug, out_path,
                        force=force or bool(only_slug) or design_drift,
@@ -803,12 +814,12 @@ def main():
     # Ein gezielter Artikel-Lauf darf nicht nebenbei das globale Brand-Cover
     # neu rendern. Das machte `check_covers --fix` unnötig nicht-idempotent.
     if not nur_pillars and (not only_slug or only_slug == BRAND_COVER_SLUG):
-        bc, bv = ensure_brand_cover(force=force)
+        bc, bv = ensure_brand_cover(force=force, protected=protected)
         covers += bc
         variants += bv
     pc = pf = pv = 0
     if not nur_posts:
-        pc, pf, pv = ensure_pillar_covers(force=force or bool(only_slug), only=only_slug)
+        pc, pf, pv = ensure_pillar_covers(force=force or bool(only_slug), only=only_slug, protected=protected)
         covers += pc
         frontmatter += pf
         variants += pv
