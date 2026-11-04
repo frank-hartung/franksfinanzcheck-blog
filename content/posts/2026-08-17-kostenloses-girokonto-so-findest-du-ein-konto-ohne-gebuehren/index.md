@@ -34,7 +34,7 @@ quellen:
     url: "https://www.bafin.de/DE/Verbraucher/Bank/Girokonto/girokonto_node.html"
     herausgeber: "BaFin"
     datum: "2025-11-08"
-faktencheck: "2026-09-27"
+faktencheck: 2026-11-04
 ---
 
 Du suchst ein kostenloses Girokonto? Dann bist du hier richtig. Millionen Menschen schenken ihrer Bank bis heute Geld.
