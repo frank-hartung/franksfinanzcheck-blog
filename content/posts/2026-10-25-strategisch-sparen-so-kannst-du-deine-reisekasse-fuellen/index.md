@@ -51,6 +51,9 @@ Du brauchst keinen neuen Vertrag und kein Bonusprogramm zum Start. Prüfe zuerst
 ## Wie viel musst du für deine Reise sparen?
 
 
+Darum geht es hier konkret: Reisekasse füllen.
+
+
 Darum geht es hier konkret: [Reisekasse](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/) füllen.
 
 Lege Ziel und Zeitraum fest. Setze eine Obergrenze. Hole Angebote ein und zähle alles zusammen: Gepäck, Transfer, Parken, Gebühren, Puffer. Wer nur Flug und Hotel rechnet, plant halb.

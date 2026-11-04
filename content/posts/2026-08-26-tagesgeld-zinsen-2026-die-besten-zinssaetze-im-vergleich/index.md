@@ -37,7 +37,7 @@ quellen:
 faktencheck: "2026-10-13"
 ---
 
- Das Girokonto zahlt dir weiter 0,0 %; das ist ein Modellwert.
+Tagesgeldkonto im Check: Das Girokonto zahlt dir weiter 0,0 %; das ist ein Modellwert.
 
 Viele Banken geben dir heute **ca. 1,7 % bis 3,2 %**; das ist ein Beispielwert. Dein Geld bleibt dabei täglich verfügbar. Für den **[Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)** gibt es keinen besseren Platz.
 

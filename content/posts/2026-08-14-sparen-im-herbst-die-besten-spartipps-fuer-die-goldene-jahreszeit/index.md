@@ -29,7 +29,7 @@ quellen:
 faktencheck: 2026-10-30
 ---
 
-Wenn die Tage kürzer werden, beginnt eine gute Zeit für den Kosten-Check. Die Blätter färben sich bunt.
+Sparen im Herbst im Check: Wenn die Tage kürzer werden, beginnt eine gute Zeit für den Kosten-Check. Die Blätter färben sich bunt.
 
 Und du kannst die [Weichen fürs neue Jahr](../../posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/) stellen. Der Wechsel der Kfz‑Versicherung läuft zum **30. November**.
 
