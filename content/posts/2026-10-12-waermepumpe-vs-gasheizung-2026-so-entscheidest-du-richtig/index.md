@@ -3,6 +3,7 @@ title: "Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig"
 description: Wärmepumpe oder Gasheizung? Welche Anlage 2026 deine Heizkosten senken kann – klarer Heizung-Vergleich. So sparst du jeden Monat.
 
 date: 2026-10-23T01:33:21Z
+lastmod: 2026-11-04
 draft: false
 reserve_published: 2026-10-23
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
@@ -201,7 +202,7 @@ Für unsere Modellrechnung setzen wir folgende Annahmen für ein Einfamilienhaus
 - Gasheizung in dieser Beispielrechnung: 15.000 kWh × 0,10 € = 1.500 € pro Jahr.
 
 **Ergebnis der Modellrechnung:**
-Die Wärmepumpe spart dir in dieser Beispielrechnung 375 € pro Jahr an reinen Heizkosten.
+Die Wärmepumpe spart dir in dieser Beispielrechnung 375 € pro Jahr an reinen Heizkosten. Ob ein spezieller Wärmepumpen-Stromtarif für dich günstiger ist, zeigt nur der Vergleich mit deinem Vertrag; Marktpreise und Wechselregeln bündelt die [Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html).
 Nimmst du in einer erweiterten Modellrechnung steigende CO₂-Preise hinzu, wächst der Vorteil schnell auf über 500 € im Jahr.
 Mit passender Förderung rechnet sich der Vergleich **Wärmepumpe vs. Gasheizung** in dieser Beispielrechnung für 2026 oft nach 10 bis 12 Jahren.
 
@@ -231,7 +232,7 @@ Die Wärmepumpe ist für sanierte Häuser und Neubauten meist die wirtschaftlich
 Du machst dich unabhängiger von Gaspreisen und sicherst dir hohe Zuschüsse.
 Eine neue Gasheizung bleibt vor allem eine Übergangslösung, wenn ein Umbau aktuell nicht darstellbar ist.
 
-**Faustregel:** Liegen deine Heizkosten in deiner eigenen Beispielrechnung über 1.300 € im Jahr und ist dein Haus ordentlich gedämmt, spielt eine geförderte Wärmepumpe den Mehrpreis meist innerhalb eines Jahrzehnts wieder ein.
+**Faustregel:** Liegen deine Heizkosten in deiner eigenen Beispielrechnung über 1.300 € im Jahr und ist dein Haus ordentlich gedämmt, kann eine geförderte Wärmepumpe den Mehrpreis innerhalb eines Jahrzehnts wieder einspielen – in dieser Beispielrechnung, nicht als Zusage für dein Haus.
 
 Nutze vor der Entscheidung immer mehrere Angebote von Fachbetrieben.
 Wenn du Anlage und Tarif klug abstimmst, senkst du deine Wohnkosten auf Dauer.
@@ -251,7 +252,7 @@ Ein Fachmann prüft vorab, ob deine Vorlauftemperatur im Winter niedrig genug bl
 Oft reicht schon der Tausch weniger Heizflächen aus.
 
 ### Welche Förderungen stehen zur Verfügung?
-Über die staatliche Förderung sind je nach Bonus und Einkommen in der Beispielrechnung Zuschüsse von 30 % bis 70 % möglich.
+Über die Bundesförderung für effiziente Gebäude sind je nach Bonus und Einkommen Zuschüsse von 30 % bis 70 % möglich; Programme und Sätze stehen bei [KfW](https://www.kfw.de/) und [BAFA](https://www.bafa.de/). In der Beispielrechnung unten rechnen wir mit diesen Sätzen als Annahme.
 Stelle den Antrag immer vor dem Start der Arbeiten über einen Fachbetrieb oder Berater.
 So sicherst du dir den Zuschuss rechtzeitig für dein Projekt.
 

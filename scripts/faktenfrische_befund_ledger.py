@@ -123,6 +123,11 @@ def text_hash(art: dict) -> str:
         "kurzantwort": fm.get("kurzantwort", ""),
         "body": art.get("body", ""),
     }
+    payload = json.dumps(material, ensure_ascii=False, sort_keys=True,
+                         separators=(",", ":"), default=str)
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
 def pruef_hash(art: dict) -> str:
     """Fassungs-Hash über Text UND die mitgeprüften Aussageflächen.
 

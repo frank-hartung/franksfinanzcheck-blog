@@ -51,8 +51,8 @@ kennzahlen:
   - id: bdew-haushaltsstrompreis
     name: "BDEW-Strompreisanalyse: Haushaltsstrompreis"
     einheit: "ct/kWh"
-    ist_wert: "37,0"
-    stand: 2026-09-28   # geprüft: Analyse "Herbst 2026" (Seite v. 21.08.) bestätigt 37,0 ct/kWh
+    ist_wert: "37,3"
+    stand: 2026-11-04   # geprüft: Analyse "Herbst 2026" (Seite v. 28.10.2026) bestätigt 37,3 ct/kWh (Jahresverlauf bis Oktober 2026)
     quelle:
       name: "BDEW-Strompreisanalyse (Herbst 2026)"
       url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
@@ -69,10 +69,10 @@ kennzahlen:
   - id: bdew-gaspreis-efh
     name: "BDEW-Gaspreisanalyse: Gaspreis Einfamilienhaus"
     einheit: "ct/kWh"
-    ist_wert: "11,93"
-    stand: 2026-09-28   # geprüft: Analyse "August 2026" (Seite v. 24.08.) bestätigt 11,93 ct/kWh
+    ist_wert: "12,23"
+    stand: 2026-11-04   # geprüft: Analyse "Herbst 2026" (Seite v. 28.10.2026) bestätigt 12,23 ct/kWh (Neukunden Einfamilienhaus, Jahresverlauf bis Oktober 2026)
     quelle:
-      name: "BDEW-Gaspreisanalyse (August 2026)"
+      name: "BDEW-Gaspreisanalyse (Herbst 2026)"
       url: "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/"
     rhythmus_tage: 30
     toleranz: null

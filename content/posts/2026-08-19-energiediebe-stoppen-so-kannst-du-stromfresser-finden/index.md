@@ -2,7 +2,7 @@
 title: "Energiediebe stoppen: So kannst du Stromfresser finden"
 description: "Energiediebe stoppen: Stromfresser finden statt raten. Mit Messplan, Kostenformel und Amortisationscheck senkst du unnötigen Verbrauch gezielt."
 date: 2026-08-19T08:35:12Z
-lastmod: 2026-09-28
+lastmod: 2026-11-04
 draft: false
 tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
@@ -20,7 +20,7 @@ pin_title: "Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe"
 pin_description: "*Werbung | Welche Geräte treiben deine Stromrechnung wirklich in die Höhe? Wir zeigen die 5 größten Stromfresser – inklusive Euro-Beträgen pro Jahr und Sofort-Tipps gegen Standby-Kosten. Jetzt checken und bis zu 300 € im Jahr sparen."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
-  - titel: "BDEW-Strompreisanalyse Herbst 2026: 37,0 ct/kWh im Durchschnitt"
+  - titel: "BDEW-Strompreisanalyse Herbst 2026: 37,3 ct/kWh im Durchschnitt"
     url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
     herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
     datum: "2026-08-21"

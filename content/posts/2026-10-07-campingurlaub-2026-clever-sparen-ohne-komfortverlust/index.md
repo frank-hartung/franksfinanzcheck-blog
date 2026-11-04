@@ -1,4 +1,5 @@
 ---
+lastmod: 2026-11-04
 title: "Campingurlaub planen: Budget für Platz und Fahrt"
 description: "Campingurlaub planen: Mit einem Budget für Platz, Anfahrt, Ausrüstung und Alltag erkennst du Zusatzkosten früh und wählst passend."
 date: 2026-10-09T14:01:19Z
@@ -48,10 +49,6 @@ Camping wirkt oft preiswert, solange du nur den Platz ansiehst. Zur Reise gehör
 - Vergleiche den Gesamtpreis statt nur die Übernachtung.
 - Prüfe Gebühren, Regeln und Ausstattung vor der Buchung.
 - Leihe oder nutze Ausrüstung weiter, bevor du neu kaufst.
-
-![Merkkarte: Kernaussagen zu Campingurlaub planen: Budget für Platz und Fahrt](abbildung-merkkarte. svg)
-
-*Abbildung: Merkkarte zu „Campingurlaub planen: Budget für Platz und Fahrt“ (eigene Darstellung aus diesem Beitrag).*
 
 ![Merkkarte: Kernaussagen zu Campingurlaub planen: Budget für Platz und Fahrt](abbildung-merkkarte.svg)
 
@@ -132,10 +129,6 @@ Vermeide doppelte Dinge, die du am Platz nicht nutzt. Wenn du mit Kindern oder e
 
 So kaufst du unterwegs weniger aus Zeitdruck.
 
-![Gliederung des Beitrags: Campingurlaub planen: Budget für Platz und Fahrt](abbildung-ablauf. svg)
-
-*Abbildung: Gliederung zu „Campingurlaub planen: Budget für Platz und Fahrt“ – 5 Stationen von „Welche Kosten gehören in ein Campingbudget?“ bis „Welche Ausrüstung brauchst du wirklich?“ (eigene Darstellung).*
-
 ![Gliederung des Beitrags: Campingurlaub planen: Budget für Platz und Fahrt](abbildung-ablauf.svg)
 
 *Abbildung: Gliederung zu „Campingurlaub planen: Budget für Platz und Fahrt“ – 5 Stationen von „Welche Kosten gehören in ein Campingbudget?“ bis „Welche Ausrüstung brauchst du wirklich?“ (eigene Darstellung).*
@@ -161,6 +154,8 @@ Vergleiche den Campingplatz mit anderen Unterkunftsarten nur, wenn sie für dich
 Wenn du einen Mietwagen brauchst, prüfe Abholort, Tankregel und Versicherung. Der Preis auf der ersten Seite ist nicht immer der Endbetrag. Lies die Bedingungen und speichere das Angebot. Der Partnerlink am Ende dieses Artikels führt zu einem Mietwagenangebot, nicht zu einem Campingplatzvergleich.
 
 Die Verbraucherzentrale weist bei Reisebuchungen auf klare Angebotsangaben und seriöse Anbieter hin. Nutze ihre [Informationen zum Urlaub buchen](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen), wenn du einzelne Leistungen online buchst. Bei Fragen zu Storno oder Zahlung gelten die Bedingungen des jeweiligen Vertrags.
+
+Wichtig für deine Rechte: Ein Stellplatz ist in der Regel ein Miet- oder Dienstvertrag mit dem Platzbetreiber, keine Pauschalreise. Der Schutz des Pauschalreiserechts greift deshalb nicht automatisch; was bei Storno, Mängeln oder Anzahlung gilt, steht in deinem Vertrag und in den Bedingungen des Platzes. Prüfe diese Punkte vor der Anzahlung und hebe die Buchungsbestätigung auf.
 
 ## So gehst du bei der Planung vor
 
@@ -204,7 +199,7 @@ Lies die Bewertungen der letzten Wochen. Achte auf Hinweise zu Zufahrt, Nachbarn
 
 ### Was kostet eine Nacht realistisch?
 
-Plane für Stellplatz und zwei Personen meist 20 bis 45 €; das ist ein Modellwert. Strom, Dusche und Kurtaxe kommen oft dazu. Schreibe alles in deine Liste. So bleibt dein Budget ehrlich.
+Plane für Stellplatz und zwei Personen mit einem Betrag aus deiner eigenen Recherche am Wunschplatz; eine Spanne von 20 bis 45 € dient hier nur als Rechenwert für Beispiele, nicht als Marktpreis. Strom, Dusche und Kurtaxe kommen oft dazu. Schreibe alles in deine Liste. So bleibt dein Budget ehrlich.
 
 ### Wie halte ich Lebensmittel frisch?
 
@@ -212,11 +207,11 @@ Kühle nur, was du wirklich brauchst. Ein guter Kühler hält mehrere Tage. Kauf
 
 ### Wie plane ich den Einkauf vor der Abreise?
 
-Mach eine Liste für die ersten drei Tage; das ist ein Modellwert. Alles Frische kaufst du unterwegs. Trockenes wie Reis, Nudeln und Kaffee kommt von zu Hause. Das spart Platz und Geld.
+Mach eine Liste für die ersten drei Tage. Alles Frische kaufst du unterwegs. Trockenes wie Reis, Nudeln und Kaffee kommt von zu Hause. Das spart Platz und Geld.
 
 ### Lohnt sich die längere Anreisezeit?
 
-Plane Pausen alle zwei Stunden ein; das ist ein Beispielwert. Das kostet Zeit, spart aber Nerven. Ein warmer Kaffee am Rastplatz ist günstiger als eine Panne mit Bergung.
+Plane Pausen alle zwei Stunden ein. Das kostet Zeit, spart aber Nerven. Ein warmer Kaffee am Rastplatz ist günstiger als eine Panne mit Bergung.
 
 ### Was hilft gegen Regen auf der Tour?
 
