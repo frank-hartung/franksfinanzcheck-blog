@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-04T01:31:07Z",
+  "generated_at": "2026-11-04T09:26:08Z",
   "modus": "kandidaten",
-  "commit": "ed55f4afb5a807c528840a74e6f3ea839a7516e1",
+  "commit": "5b302292f425adcbe0fc846152206fd1766bcd68",
   "kapazitaet": {
     "stichtag": "2026-11-04",
     "artikel": 112,
@@ -425,7 +425,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-19",
-      "siegel_drift": "neu versiegelt",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
@@ -643,7 +643,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-14",
-      "siegel_drift": "neu versiegelt",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
