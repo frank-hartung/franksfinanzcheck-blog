@@ -1,10 +1,10 @@
 {
   "version": 1,
-  "generated_at": "2026-11-03T21:13:07Z",
+  "generated_at": "2026-11-04T01:31:07Z",
   "modus": "kandidaten",
-  "commit": "ddd653236b4b5885597446a4b266eb3ff675ddec",
+  "commit": "ed55f4afb5a807c528840a74e6f3ea839a7516e1",
   "kapazitaet": {
-    "stichtag": "2026-11-03",
+    "stichtag": "2026-11-04",
     "artikel": 112,
     "faellig": 0,
     "ueberfaellig": 0,
@@ -12,7 +12,7 @@
     "naechste_frist": {
       "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
       "frist": "2026-11-11",
-      "restlaufzeit": 8
+      "restlaufzeit": 7
     },
     "budget": 4,
     "laeufe_je_tag": 1.0,
@@ -120,7 +120,7 @@
     "ueberholt": 0,
     "ohne_fassung": 20,
     "nicht_entscheidbar": 0,
-    "aeltester_tage": 4,
+    "aeltester_tage": 5,
     "frist_tage": 14,
     "ueber_frist": 0,
     "je_slug": {
@@ -410,6 +410,24 @@
       "siegel_drift": "unverändert",
       "checks": []
     },
+    "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": {
+      "sha256": "b5684802e1b6ff7b089c68650a6fce7edbba09573e13adefd516ad449e566ea9",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "hoch",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "bestanden",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-19",
+      "siegel_drift": "neu versiegelt",
+      "checks": []
+    },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
       "sha256": "1d49ca08e222704e74b5c5df91aa62ae29772a6cca6ac382c5c3a28c7da8960f",
       "urteil": "freigabe-reif",
@@ -608,6 +626,24 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
+      "checks": []
+    },
+    "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen": {
+      "sha256": "57b0abe868cb95e28c91f7e900c382ba8e67439c831ec181e5dd05d1eeba1d20",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "hoch",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "bestanden",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-12-14",
+      "siegel_drift": "neu versiegelt",
       "checks": []
     },
     "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
