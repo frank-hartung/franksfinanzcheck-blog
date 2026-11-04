@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-11-04T10:49:08.301748+00:00",
-  "head": "56a26c0fa",
+  "signed_at": "2026-11-04T11:14:08.728921+00:00",
+  "head": "7d6446d56",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -60,27 +60,8 @@
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
   "files_sha256": "31f4a853e14e47df5130e20566686c33cd355a4d55809e005b2d10ad686e8444",
-  "audit_start_sha256": "60386f7c569f95cb375abfb79daf04cb4e724f9980c07b51617dc69a09cb72ca",
+  "audit_start_sha256": "63997d28ec060e34a137a126ef686508f4056d72bdec92a3b0e3aa92b461a900",
   "audit": [
-    {
-      "date": "2026-11-01",
-      "art": "heal",
-      "head": "292a0ae",
-      "geaendert": [
-        "scripts/redaktions_standard.py"
-      ],
-      "herkunft": [
-        {
-          "pfad": "scripts/redaktions_standard.py",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [],
-          "commits_art": "seit-signatur"
-        }
-      ],
-      "files_sha256": "96a8896c41b0ed46cbc92fd1bf3669eec75e2a8cd4ced71a45cfdd55ab2e45cf",
-      "prev_sha256": null
-    },
     {
       "date": "2026-11-01",
       "art": "heal",
@@ -128,7 +109,7 @@
         }
       ],
       "files_sha256": "2b075b079c386c809a49383b548469a4ca8d12ba53139d3ff23b3ec28d6efa64",
-      "prev_sha256": "60386f7c569f95cb375abfb79daf04cb4e724f9980c07b51617dc69a09cb72ca"
+      "prev_sha256": null
     },
     {
       "date": "2026-11-01",
@@ -452,8 +433,16 @@
     },
     {
       "date": "2026-11-04",
+      "art": "set-current",
+      "head": "038b04fee",
+      "geaendert": [],
+      "files_sha256": "9abb7c9dc116226414fa81dabd11801d3c8a11b2c492029273e869af4abc274a",
+      "prev_sha256": "ffea1e1d04b08872decbac0fac60cfac326638a6ebe11aecae4c4649f6673964"
+    },
+    {
+      "date": "2026-11-04",
       "art": "heal",
-      "head": "56a26c0fa",
+      "head": "7d6446d56",
       "geaendert": [
         "scripts/publikations_vertrag.py"
       ],
@@ -467,17 +456,12 @@
               "sha": "ccf5d593f",
               "datum": "2026-11-03",
               "betreff": "fix(einzigartigkeit): Bestandsüberlappungen #1027 auflösen und V4 verankern"
-            },
-            {
-              "sha": "038b04fee",
-              "datum": "2026-11-04",
-              "betreff": "chore(schaltwerk): Automationslauf 2026-11-04 09:48"
             }
           ],
-          "commits_art": "letzte-commits"
+          "commits_art": "seit-signatur"
         }
       ],
-      "prev_sha256": "ffea1e1d04b08872decbac0fac60cfac326638a6ebe11aecae4c4649f6673964",
+      "prev_sha256": "f9061a288212228b1b38f8faf98f3ed244d418caebbafd8baed412539a2f8101",
       "files_sha256": "31f4a853e14e47df5130e20566686c33cd355a4d55809e005b2d10ad686e8444"
     }
   ]
