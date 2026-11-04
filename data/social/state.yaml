@@ -1343,6 +1343,19 @@ history:
     #Frugalismus #Geldsparen #HaushaltsbuchFuehren #BudgetPlanen'
   ref: '117558312939140189'
   ai: true
+- posted_at: '2026-11-04T21:27:27.477405+01:00'
+  channel: mastodon
+  slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
+  title: 'Mietwagen ohne Kautionsfallen: So sparst du im Urlaub'
+  angle: zahl
+  url: https://mastodon.social/@FranksFinanzcheck/117560053046296367
+  ok: true
+  text: '🚗 Spare Kautionskosten beim Mietwagen – reduziere das Risiko auf null. Buche
+    ein Angebot mit Vollkasko ohne Selbstbeteiligung, das die Kaution deutlich senkt.
+    https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+    #Mietwagen #Reise #KFZVersicherung #GuenstigeMietwagen'
+  ref: '117560053046296367'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1368,4 +1381,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-11-04T14:04:59.846726+01:00'
+updated_at: '2026-11-04T21:27:31.855194+01:00'
