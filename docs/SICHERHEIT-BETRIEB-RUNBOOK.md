@@ -1010,7 +1010,7 @@ dessen eigene Messung Nein sagt. Ausgeführt heißt hier: `python3
 scripts/selftest_runner.py` über den ganzen Bestand (261 Wachen, davon eine
 einzige rot – `cover_render_check.py`, Grund: pillow fehlte, nach
 `pip install -r requirements-ci.txt` grün), `integrity_guard.py --selftest`
-(9 Fälle) und `redaktions_standard.py --selftest` (48 Fälle). Die Regel bleibt,
+(11 Fälle, seit 04.11.2026 inkl. des parsebaren Zusammenschnitts) und `redaktions_standard.py --selftest` (48 Fälle). Die Regel bleibt,
 ihre Anwendung am 01.11.2026 war lehrreicher als gedacht: siehe G2.
 
 **Schritt 1 · Klasse.** In `scripts/integrity_guard.py` den Block `FEST` um die

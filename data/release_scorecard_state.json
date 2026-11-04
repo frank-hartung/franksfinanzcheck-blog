@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-04T12:57:56Z",
-  "modus": "live",
-  "commit": "4149a12182f998a8c7088c455ec940637911c5b7",
+  "generated_at": "2026-11-04T15:08:24Z",
+  "modus": "kandidaten",
+  "commit": "932f24b496cb6c0d31326a93757627e976f3332d",
   "kapazitaet": {
     "stichtag": "2026-11-04",
     "artikel": 113,
@@ -397,7 +397,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -512,7 +512,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -568,7 +568,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -798,7 +798,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",

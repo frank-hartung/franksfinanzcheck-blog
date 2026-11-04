@@ -39,6 +39,7 @@ Ein Test, der die Wanduhr liest, ist eine Verabredung mit dem Kalender.
 from __future__ import annotations
 
 import datetime as dt
+import os
 import sys
 import unittest
 from pathlib import Path
@@ -407,7 +408,12 @@ class C45UrteilTest(unittest.TestCase):
         zahlen, fehler = gc._c45_deckung()
         self.assertIsNone(fehler, fehler)
         self.assertIn("urteil", zahlen)
-        self.assertEqual(zahlen["urteil"], [])
+        # Unter Kunstzeit ist der unveränderte Bestand zwangsläufig veraltet.
+        # Die Rechnung muss das echte Urteil weitergeben, aber nicht grün sein.
+        self.assertEqual(zahlen["urteil"],
+                         kap.c45_urteil(zahlen, ssot_pfad=gc.C45_SSOT))
+        if not os.environ.get("FFC_FREMD_UHR"):
+            self.assertEqual(zahlen["urteil"], [])
 
 
 class RepoZustandTest(unittest.TestCase):

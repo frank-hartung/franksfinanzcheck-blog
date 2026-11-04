@@ -329,6 +329,25 @@ schritte:
       selbst (ai_generated: true). Rot nur, wenn die Heilung scheitert –
       dann ginge ein Bot-Artikel ohne Pflichtlabel live.
 
+  - name: KI-Transparenz – Text, Bild und Provenienz testen
+    klasse: gate-selbsttest
+    schuetzt: KI-Cover – Herkunft und Originaldatei prüfen
+    grund: >-
+      Ohne funktionierende Render- und Provenienztests wäre die Schutzkette
+      ungeprüft. Hugo muss vorhanden sein; übersprungene Renderproben genügen nicht.
+
+  - name: KI-Cover – Herkunft und Originaldatei prüfen
+    klasse: inhalt
+    grund: >-
+      Deklarierte KI-Originale benötigen einen fassungsgebundenen Nachweis;
+      unbekannte Herkunft bleibt offen und wird nicht als geprüft ausgegeben.
+
+  - name: KI-Cover – finale Provenienzprüfung
+    klasse: inhalt
+    grund: >-
+      Nach nachträglichen Inhaltsheilungen muss der finale Bestand erneut
+      geprüft werden, bevor er veröffentlicht wird.
+
   - name: Quote-Nachfüllung nach Gate-Verlust (Re-Queue + Reserve → Min)
     klasse: werkzeug
     id: quote_refill

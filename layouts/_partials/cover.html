@@ -78,6 +78,12 @@
         <a href="{{ $imgdl }}" target="_blank" rel="noopener noreferrer">
     {{- end }}
 
+    {{- /* KI-Cover: Original unverändert ausliefern. Neukodierte Varianten
+           könnten Provenienz-Metadaten verlieren oder veralten. */}}
+    {{- $aiImage := eq .Params.cover.ai_generated true -}}
+    {{- if $aiImage }}
+    <img loading="{{ $loading }}"{{ with $fetchPriority }} fetchpriority="{{ . }}"{{ end }} decoding="async" data-ff-fcp-image="{{ $fcpImageRole }}"{{ if $isLcpCandidate }} data-ff-lcp="candidate"{{ end }} src="{{ $imgFallback }}" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
+    {{- else }}
     {{- /* <picture> mit Format-Kaskade: AVIF → WebP → JPEG (Fallback).
            Browser wählt das kleinste unterstützte Format; das srcset
            liefert zusätzlich die passende Größe (360/480/620/720px). */}}
@@ -106,16 +112,20 @@
         <img loading="{{ $loading }}"{{ with $fetchPriority }} fetchpriority="{{ . }}"{{ end }} decoding="async" data-ff-fcp-image="{{ $fcpImageRole }}"{{ if $isLcpCandidate }} data-ff-lcp="candidate"{{ end }} src="{{ $imgdl }}"{{ with $imgSrcset }} srcset="{{ . }}"{{ end }} sizes="{{ $imgSizes }}" onerror="this.onerror=null;this.src='{{ $imgFallback }}'" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
     {{- end }}
     </picture>
+    {{- end }}
 
     {{- if $addLink }}
         </a>
     {{- end -}}
 
-    {{- /*  Display Caption  */}}
-    {{- if $.IsSingle }}
-        {{ with .Params.cover.caption -}}
-            <figcaption>{{ . | markdownify }}</figcaption>
-        {{- end }}
+    {{- /* Die Bildherkunft ist unabhängig von ai_generated (Artikeltext).
+           Nur eine ausdrücklich bestätigte Bildherkunft löst den Hinweis aus;
+           weder Text-Flag noch unbekannte Herkunft beweisen KI-Bildgenerierung. */}}
+    {{- if or $aiImage (and $.IsSingle .Params.cover.caption) }}
+        <figcaption>
+            {{- if and $.IsSingle .Params.cover.caption }}{{ .Params.cover.caption | markdownify }}{{ end -}}
+            {{- if $aiImage }}{{ if and $.IsSingle .Params.cover.caption }} · {{ end }}<span data-ff-ki-image-label>Bild mit KI erstellt oder bearbeitet</span>{{ end -}}
+        </figcaption>
     {{- end }}
 </figure>
 {{- end }}{{/* End image */}}
