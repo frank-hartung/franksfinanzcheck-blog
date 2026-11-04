@@ -133,7 +133,7 @@ Vergiss niemals die wichtigen Fristen für die Absage. Notiere dir das Datum fü
 
 ### Wie hoch ist die übliche Kaution?
 
-Die Höhe der Kaution hängt vom Wert des Autos ab. Oft liegt sie zwischen 500 und 2.000 €. Die Firma blockt diesen Betrag auf deiner Kreditkarte. Nach der Rückgabe ohne Schäden wird das Geld wieder frei. Das dauert je nach Bank ein paar Tage.
+Die Höhe der Kaution hängt vom Wert des Autos ab. Oft liegt sie zwischen 500 € und 2.000 €. Die Firma blockt diesen Betrag auf deiner Kreditkarte. Nach der Rückgabe ohne Schäden wird das Geld wieder frei. Das dauert je nach Bank ein paar Tage.
 
 ### Was bedeutet „Voll‑zu‑Voll“?
 

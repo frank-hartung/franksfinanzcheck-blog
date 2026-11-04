@@ -62,17 +62,17 @@ Hier sind die wichtigsten Punkte im Detail erklärt:
 
 ## Rechenbeispiel: Wie viel du sparen kannst
 
-Ein Rechenbeispiel macht den Vorteil deutlich. Viele Menschen unterschätzen die kleinen Kosten. Doch über das Jahr kommt eine große Summe zusammen. Nehmen wir einen Nutzer mit einem alten Konto. Er zahlt jeden Monat fünf Euro für die Führung. Das klingt erst einmal nach wenig Geld. Doch auf das Jahr gerechnet sind das bereits 60 Euro. Das ist Geld, das einfach so verschwindet.
+Ein Rechenbeispiel macht den Vorteil deutlich. Viele Menschen unterschätzen die kleinen Kosten. Doch über das Jahr kommt eine große Summe zusammen. Nehmen wir einen Nutzer mit einem alten Konto. Er zahlt jeden Monat fünf Euro für die Führung. Das klingt erst einmal nach wenig Geld. Doch auf das Jahr gerechnet sind das bereits 60 €. Das ist Geld, das einfach so verschwindet.
 
 Dazu kommen oft Kosten für das Bargeld. Unser Beispiel-Nutzer hebt fünfmal im Jahr falsch ab. Er nutzt Automaten, die nicht zu seiner Bank gehören. Jede dieser Abhebungen kostet ihn zwei Euro extra. Das sind weitere zehn Euro an Kosten im Jahr. Er möchte zudem seine Auszüge auf Papier haben. Zweimal im Jahr nutzt er diesen Dienst am Automaten. Die Bank berechnet dafür jeweils einen Euro. Das sind zwei Euro zusätzlich für den Druck.
 
 > **Rechenbeispiel:**
-> Monatsgebühr: 5 € × 12 = 60 €
-> Geldautomaten: 2 € × 5 = 10 €
-> Papierauszüge: 1 € × 2 = 2 €
-> **Gesamtkosten pro Jahr:** 60 € + 10 € + 2 € = 72 €
+> Monatsgebühr: 5 € × 12 = 60 €
+> Geldautomaten: 2 € × 5 = 10 €
+> Papierauszüge: 1 € × 2 = 2 €
+> **Gesamtkosten pro Jahr:** 60 € + 10 € + 2 € = 72 €
 
-Rechnen wir alles zusammen. 60 Euro plus 10 Euro plus 2 Euro ergeben 72 Euro. Das ist viel Geld für einfache Dienste. Wenn du zu einem kostenlosen Konto wechselst, sparst du diesen Betrag. Ein gutes Konto verzichtet auf all diese Kosten. Du behältst die 72 Euro einfach in deiner Tasche. Das ist ein schöner Betrag für ein Abendessen oder ein Hobby.
+Rechnen wir alles zusammen. 60 € plus 10 € plus 2 € ergeben 72 €. Das ist viel Geld für einfache Dienste. Wenn du zu einem kostenlosen Konto wechselst, sparst du diesen Betrag. Ein gutes Konto verzichtet auf all diese Kosten. Du behältst die 72 € einfach in deiner Tasche. Das ist ein schöner Betrag für ein Abendessen oder ein Hobby.
 
 Daraus ergibt sich eine einfache **Faustregel**: Ein kostenloses Girokonto spart dir oft ein Drittel deiner Kosten. Das gilt besonders, wenn du auch die Extra-Gebühren meidest. Wer klug wechselt, hat am Ende mehr vom Gehalt. Die genaue Ersparnis hängt natürlich von dir ab. Nutzt du viele Dienste, sparst du beim Wechsel noch mehr. Prüfe deine alten Kontoauszüge nach diesen versteckten Kosten.
 

@@ -245,22 +245,32 @@ Er kann die Beschläge professionell einstellen.
 
 ## Häufige Fragen
 
-### Wie merke ich, dass meine Fenster undicht sind? Halte eine brennende Kerze oder ein Feuerzeug an den Rahmen.
+### Wie merke ich, dass meine Fenster undicht sind?
+
+Halte eine brennende Kerze oder ein Feuerzeug an den Rahmen.
 Flackert die Flamme, dringt Luft ein. Kondenswasser am unteren Rand der Scheibe weist ebenfalls auf schlechte Isolierung hin.
 Ein einfacher Papiertest zwischen Rahmen und Flügel zeigt, ob der Anpressdruck ausreicht.
 
-### Welches Dichtungsband ist das beste für alte Holzfenster? Gummidichtungen aus EPDM sind für Holzrahmen ideal.
+### Welches Dichtungsband ist das beste für alte Holzfenster?
+
+Gummidichtungen aus EPDM sind für Holzrahmen ideal.
 Du bist flexibel und gleitest Unebenheiten im Holz gut aus. Achte auf das Profil – das P‑Typ oder die D‑Variante passen meist am besten zu breiteren Fugen alter Holzkonstruktionen.
 
-### Darf ich als Mieter die Fenster selbst abdichten? Ja, das Anbringen von selbstklebenden Dichtungsstreifen ist erlaubt.
+### Darf ich als Mieter die Fenster selbst abdichten?
+
+Ja, das Anbringen von selbstklebenden Dichtungsstreifen ist erlaubt.
 Es handelt sich um eine reversible Maßnahme. Entferne die Streifen beim Auszug rückstandslos.
 Bei baulichen Mängeln wie verzogenen Rahmen musst du den Vermieter informieren.
 
-### Wie lange halten neue Fensterdichtungen? Hochwertige EPDM‑Dichtungen halten oft 8 bis 10 Jahre; das ist ein Beispielwert.
+### Wie lange halten neue Fensterdichtungen?
+
+Hochwertige EPDM‑Dichtungen halten oft 8 bis 10 Jahre; das ist ein Beispielwert.
 Günstiger Schaumstoff gibt meist schon nach 1 bis 2 Jahren nach. Die Lebensdauer hängt von der Pflege ab.
 Wische die Dichtungen einmal im Jahr mit einem feuchten Tuch ab.
 
-### Hilft Abdichten auch gegen Lärm von draußen? Ja, ein dichter Rahmen hält nicht nur Luft, sondern auch Schallwellen zurück.
+### Hilft Abdichten auch gegen Lärm von draußen?
+
+Ja, ein dichter Rahmen hält nicht nur Luft, sondern auch Schallwellen zurück.
 Wenn du die Lücken schließt, wird es in deiner Wohnung spürbar ruhiger. Besonders bei Fenstern an Hauptstraßen ist der Effekt oft verblüffend.
 Eine gute Dichtung verbessert somit auch den Schlaf.
 

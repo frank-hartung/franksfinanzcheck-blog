@@ -129,7 +129,7 @@ Dokumentiere deinen Fall: Vertrag, Mitteilung, Kontoauszüge und Briefe. Notiere
 
 ## Verbrauch senken: ein Grad, sechs Prozent
 
-Die Verbraucherzentrale nennt einen Richtwert: Ein Grad weniger Raumtemperatur senkt den Verbrauch um etwa sechs Prozent ([Heizung: 10 Tipps, Q3](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892)). Das ist keine Garantie für deine Wohnung. Gebäude, Heizung und Nutzung wirken mit.
+Die Verbraucherzentrale nennt einen Richtwert: Ein Grad weniger Raumtemperatur senkt den Verbrauch um etwa sechs Prozent ([Heizung: zehn Tipps, Q3](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892)). Das ist keine Garantie für deine Wohnung. Gebäude, Heizung und Nutzung wirken mit.
 
 Ein Rechenbeispiel mit Modellwerten: Bei 12.000 kWh wären sechs Prozent 720 kWh. Bei angenommenen 0,08 € je kWh entspricht das 57,60 €. Die Rechnung gilt nur, wenn der gesamte Verbrauch auf die Heizung entfällt. Warmwasser und andere Anteile können hinzukommen oder fehlen.
 

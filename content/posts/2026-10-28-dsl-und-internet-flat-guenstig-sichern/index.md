@@ -42,14 +42,14 @@ Deine Internetrechnung drückt jeden Monat auf dein Budget. Das WLAN zu Hause is
 
 Verschaffe dir zuerst einen Überblick über deine Finanzen. Schreibe jede monatliche Belastung für Internet und Telefonie auf, am besten im Fixkosten-Cockpit oder in einer einfachen Tabelle. Nur wer seine Zahlen kennt, trifft kluge Entscheidungen – Zusatzoptionen und Router-Miete werden oft vergessen. Diese Beträge läppern sich über das Jahr zu einer großen Summe.
 
-Zur Einordnung deiner Ausgaben hilft dir die 50-30-20-Regel; das ist ein Haushaltsmodell, keine Vorgabe aus Recht oder Statistik. Es teilt dein Nettoeinkommen in drei Blöcke: 50 % für feste Kosten wie Miete, Strom und Internet, 30 % für Wünsche und Freizeit, 20 % zum Sparen oder Tilgen von Schulden. Ob diese Aufteilung zu dir passt, hängt von Miete und Lebenssituation ab – in teuren Städten sind 50 % für Fixkosten oft nicht zu halten. Nutze die Regel deshalb als Prüfmaßstab, nicht als Gesetz.
+Zur Einordnung deiner Ausgaben hilft dir die 50–30–20-Regel; das ist ein Haushaltsmodell, keine Vorgabe aus Recht oder Statistik. Es teilt dein Nettoeinkommen in drei Blöcke: 50 % für feste Kosten wie Miete, Strom und Internet, 30 % für Wünsche und Freizeit, 20 % zum Sparen oder Tilgen von Schulden. Ob diese Aufteilung zu dir passt, hängt von Miete und Lebenssituation ab – in teuren Städten sind 50 % für Fixkosten oft nicht zu halten. Nutze die Regel deshalb als Prüfmaßstab, nicht als Gesetz.
 
 Wie du deine Fixkosten ordnest, zeigt der Beitrag zu den [Fixkosten im ersten eigenen Haushalt](../../posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/).
 
 Ermittle nun den Anteil deiner Internetkosten an den Fixkosten. Nimm deine Rechnung zur Hand und schaue dir die Posten an. Vergleiche den Betrag mit deinen festen Ausgaben. Eine Faustregel sagt: Das Netz sollte nicht mehr als zehn Prozent deiner Fixkosten kosten. Liegt dein Wert darüber? Dann lohnt ein genauer Blick auf den Vertrag.
 
 > **Beispielrechnung:**
-> Dein Nettoeinkommen liegt bei 2.500 €. Deine festen Ausgaben betragen insgesamt 1.250 €. Davon entsprechen 10 % einem Betrag von 125 €. Eine DSL-Rechnung von 30 € liegt bei einem Anteil von 2,4 %. Das ist finanziell völlig unproblematisch und passt gut ins Budget. Eine Rechnung von 60 € bedeutet dagegen schon einen Anteil von 4,8 %. In diesem Fall lohnt sich ein Wechsel zu einem günstigeren Anbieter fast immer. Du sparst so jeden Monat bares Geld ohne Verzicht auf Qualität.
+> Dein Nettoeinkommen liegt bei 2.500 €. Deine festen Ausgaben betragen insgesamt 1.250 €. Davon entsprechen 10 % einem Betrag von 125 €. Eine DSL-Rechnung von 30 € liegt bei einem Anteil von 2,4 %. Das ist finanziell völlig unproblematisch und passt gut ins Budget. Eine Rechnung von 60 € bedeutet dagegen schon einen Anteil von 4,8 %. In diesem Fall lohnt sich ein Wechsel zu einem günstigeren Anbieter fast immer. Du sparst so jeden Monat bares Geld ohne Verzicht auf Qualität.
 
 ## Konditionen prüfen – nicht nur den Grundpreis
 
@@ -85,11 +85,11 @@ Viele Anbieter locken neue Kunden mit einem Wechselbonus. Wie hoch er ausfällt,
 Sei bei solchen Angeboten vorsichtig und prüfe die Kombination genau. Oft ist ein hoher Bonus an eine sehr lange Laufzeit oder eine höhere Grundgebühr gebunden. Rechne deshalb immer die gesamten Kosten über zwei Jahre aus. Lass dich nicht von einer hohen Einmalzahlung blenden, wenn der Monatspreis zu hoch ist.
 
 > **Beispielrechnung:**
-> Ein neuer Tarif kostet 20 € Grundpreis bei 12 Monaten Laufzeit. Du erhältst 50 € Wechselbonus nach drei Monaten Laufzeit.
-> Die Kosten für 12 Monate berechnen sich so: (20 € × 12) − 50 € = 190 €.
-> Dein alter Tarif kostet 30 € Grundpreis bei 24 Monaten Laufzeit ohne jeden Bonus.
-> Die Kosten für 12 Monate betragen hier: 30 € × 12 = 360 €.
-> Ein Wechsel spart dir in diesem Beispiel satte 170 € im ersten Jahr. Aber prüfe vorher genau, ob die kurze Laufzeit wirklich zu deinem persönlichen Bedarf passt.
+> Ein neuer Tarif kostet 20 € Grundpreis bei 12 Monaten Laufzeit. Du erhältst 50 € Wechselbonus nach drei Monaten Laufzeit.
+> Die Kosten für 12 Monate berechnen sich so: (20 € × 12) − 50 € = 190 €.
+> Dein alter Tarif kostet 30 € Grundpreis bei 24 Monaten Laufzeit ohne jeden Bonus.
+> Die Kosten für 12 Monate betragen hier: 30 € × 12 = 360 €.
+> Ein Wechsel spart dir in diesem Beispiel satte 170 € im ersten Jahr. Aber prüfe vorher genau, ob die kurze Laufzeit wirklich zu deinem persönlichen Bedarf passt.
 
 Setze dir eine Erinnerung im Handy, sechs Wochen vor Ablauf der Frist. So hast du genug Zeit für einen entspannten Vergleich. Du planst den Wechsel dann ohne Zeitdruck. Ein überstürzter Wechsel führt oft zum falschen Tarif.
 

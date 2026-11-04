@@ -173,7 +173,7 @@ Ja, das lohnt sich oft sehr schnell. Als Orientierung gilt: Die Ersparnis sollte
 
 ### Was kostet ein Smart‑Plug und lohnt er sich?
 
-Ein guter Stecker kostet zwischen 20 und 30 €. Die Ersparnis beginnt in der ersten Minute. Sobald du Geräte im Stand-by trennst, sinkt die Last. Nach etwa einem Jahr hat sich der Kauf meist amortisiert. Zudem bieten diese Stecker viel Komfort durch Zeitpläne und Apps.
+Ein guter Stecker kostet zwischen 20 € und 30 €. Die Ersparnis beginnt in der ersten Minute. Sobald du Geräte im Stand-by trennst, sinkt die Last. Nach etwa einem Jahr hat sich der Kauf meist amortisiert. Zudem bieten diese Stecker viel Komfort durch Zeitpläne und Apps.
 
 ### Wie kann ich Kosten senken, ohne alles zu trennen?
 
