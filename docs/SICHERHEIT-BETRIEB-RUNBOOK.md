@@ -1075,6 +1075,55 @@ versiegelten Quelltext-Wachen (`scripts/*.py` in `KRITISCH | FEST`, darunter
 wieder vergessen werden, prüft `scripts/wachen_vertrag.py` die Deckungsgleichheit
 zwischen `integrity_guard.py` und `.gitattributes` dauerhaft als harte Klasse
 `W5-MERGE-BINARY` (aktiv in C39 bei jedem Push und Pull Request).
+### G3b · Der Zusammenschnitt, der PARST (04.11.2026, WF-829B / #1039)
+
+**Der Vorfall.** In `main` stand seit dem 02.11.2026 ein Siegel, das so beginnt:
+
+```json
+{"schema": 2,
+ "signed_at": "2026-11-02T13:23:38.630367+00:00", "head": "26eedfa",
+ "signed_at": "2026-11-01T14:32:11.060118+00:00", "head": "887248e",
+ "files": { … },
+ "signed_at": "2026-11-01T19:13:31.294398+00:00", "head": "4366b11",
+ "files": { … }
+```
+
+Drei Fassungen, zeilenweise übereinandergelegt – ein Text-Merge in einer
+Maschinendatei. Aufgefallen ist das nur, weil zwischen zwei Blöcken **ein Komma
+fehlte**: Die Datei war dadurch unparsebar, und `--gate` meldete „Siegel
+ZERSTÖRT". Mit diesem einen Komma wäre sie **gültiges JSON** gewesen, `json
+.loads()` hätte still die letzte Fassung genommen, und der Zustand hätte „ok"
+gelautet – mit der Datei-Map der 19:13-Fassung und der `signed_at` der
+13:23-Fassung. Kette und Map-Prüfsumme hätten das nicht bemerkt: Beide bilden
+sich aus den **geparsten** Daten, also aus genau der Mischung.
+
+**Was dagegen jetzt steht – vier Schichten, jede einzeln beweisbar:**
+
+| Schicht | Datei | Was sie tut |
+|---|---|---|
+| Erkennung im Prüfer | `scripts/integrity_guard.py` (`_doppelte_schluessel`) | Liest die BYTES und fragt, ob ein Objektschlüssel mehrfach vorkommt. Befund vor jeder Map-/Kettenfrage: `beschaedigt` / Verdacht `zusammenschnitt`, mit Namen der doppelten Schlüssel. |
+| Eichprobe vor jedem Urteil | `scripts/integrity_guard.py` (`zusammenschnitt_probe`, `_messfaehigkeit_pruefen`) | Baut den Vorfall **ohne Dateizugriff** und verlangt das beschädigte Urteil. Meldet die Messung „ok", ist das Gate rot (Exit 3, „Messgerät nicht eichfähig") – ein Prüfer, der seinen Vorfall nicht mehr sieht, gibt keine Freigabe. Gilt für `--gate` **und** den Standardlauf. |
+| Commit-Sperre | `.githooks/pre-commit` | Prüft den **gestageten** Lock (nicht den Arbeitsbaum) auf doppelte Schlüssel und Gesundheit – in einem Wegwerf-Verzeichnis, offline, unter einer Sekunde. Der Fehler entsteht damit dort, wo er entsteht, nicht erst im PR-Gate Tage später. |
+| Verträge im PR-Gate | `.github/workflows/integrity-lock.yml` → `python3 -m unittest scripts.tests.test_integrity_guard` | 66 Regressionstests. `test_integrity_guard.py` lief zuvor in **keinem** Workflow – ein Vertrag ohne Lauf ist Prosa. Neu: `ParsebarerZusammenschnittTests` (7 Fälle) und `EichprobeTests` (2). |
+
+**Nachweis am echten Artefakt (04.11.2026, beide Fassungen des Prüfers):**
+Derselbe parsebare Zusammenschnitt ergab mit dem Stand von `main` **`ok`** und
+mit dem gehärteten Stand **`beschaedigt` / `zusammenschnitt`**. Die Probe ist
+damit keine Beschreibung, sondern ein Unterschied, den man messen kann.
+
+**Reparatur bleibt belegt.** `python3 scripts/integrity_guard.py --repair-lock`
+nimmt den committeten Stand, sonst die jüngste gültige Fassung der Historie,
+sonst die Bergung – und zeichnet **keine** Datei neu. Nach der Reparatur steht
+genau **eine** Fassung da (`_doppelte_schluessel` → leer), die Map ist die
+belegte Map, die Akte sagt `art: repair` mit Quelle und Bruchstelle.
+
+**Was ausdrücklich offen bleibt.** `merge=binary` für den Lock stand seit #346
+in `.gitattributes` – der Vorfall ist trotzdem entstanden. Die Datei kam über
+einen Weg nach `main`, den ein Text-Merge nicht erklärt (kein
+Konfliktmarker, keine Merge-Beteiligung an dieser Datei im Commit). Was
+**nicht** offen bleibt, ist die Frage, ob es jemand merkt: Ab jetzt merkt es
+der Commit, der Prüfer und das Gate – jede der drei Stellen mit eigenem Beweis.
+
 ### G4 · Was die Zeichnung im Betrieb ändert – und was offen bleibt
 
 **Für den Alltag ändert sich nichts Neues.** Die beiden Dateien stehen in FEST,
