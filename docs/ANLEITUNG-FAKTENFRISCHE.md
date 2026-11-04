@@ -58,7 +58,7 @@ Am 27.10.2026 war genau das der Fall:
 | Kennzahl | vor der Reparatur | nach der Reparatur |
 |---|---|---|
 | Bedarf | 2,58 Prüfungen/Tag (≈ 18/Woche) | unverändert |
-| Takt | 2 Läufe/Woche × 3 = 0,86/Tag | 1 Lauf/Tag × 4 (Sockel; elastisch bis 10) |
+| Takt | 2 Läufe/Woche × 3 = 0,86/Tag | 1 Lauf/Tag × 4 (Sockel; seit 04.11.2026 elastisch bis 16) |
 | Deckung | **33 %** | 146 % beim aktuellen Bestand (112 Seiten, 03.11.2026) |
 | Rückstand | +12 Seiten/Woche, nie abbaubar | im Kalenderplan in 3 Tagen abgebaut |
 
@@ -101,14 +101,22 @@ der Arbeit des Tages gemessen, nicht erst danach weggeschrieben.
 
 Die Wache und der Scorecard-Bericht prüfen bei `auto_skalierung: true` das
 **empfohlene Budget**, das der Lauf auch verwendet. Der Sockel (4, Stand
-03.11.2026) bleibt als Untergrenze sichtbar; das harte Limit (10) ist die
-Obergrenze. Die Kalendersimulation bestimmt das Budget; die Reserve zwischen
-Plan und Limit ist die Pufferfläche für Nachfrage-Spitzen. Wächst der Bestand,
-wächst das empfohlene Budget mit – bis zum harten Limit. Wird das Limit
-erreicht, wird C45 rot; dann müssen Takt, Limit oder Intervall entschieden
-werden. Das ist der Schließpfad, kein Dauerzustand. Das ist ein Plan, kein
-Nachweis erfolgreich ausgeführter CI-Läufe. Ausfälle und nicht bestandene
-Prüfungen bleiben eigene, sichtbare Befunde.
+03.11.2026) bleibt als Untergrenze sichtbar; das harte Limit (16 seit
+04.11.2026) ist die Obergrenze. Die Kalendersimulation bestimmt das Budget;
+die Reserve zwischen Plan und Limit ist die Pufferfläche für
+Nachfrage-Spitzen. Wächst der Bestand, wächst das empfohlene Budget mit – bis
+zum harten Limit. Wird das Limit erreicht, wird C45 rot; dann müssen Takt,
+Limit oder Intervall entschieden werden. Das ist der Schließpfad, kein
+Dauerzustand. Das ist ein Plan, kein Nachweis erfolgreich ausgeführter
+CI-Läufe. Ausfälle und nicht bestandene Prüfungen bleiben eigene, sichtbare
+Befunde.
+
+Die Uhrprobe am 04.11.2026 (+97 Tage) bündelte alle 112 Prüftermine in einem
+Vollrückstand. Limit 10 konnte diesen nicht binnen der unveränderten
+7-Tage-Nachholfrist abbauen. Die Kalenderrechnung benötigt dafür 14 Prüfungen
+je Lauf; das Limit 16 lässt zwei Plätze Reserve. Bei etwa 30 Sekunden je Seite
+sind das rund acht Minuten innerhalb des unveränderten 25-Minuten-Timeouts.
+Eine feste Regression am 09.02.2027 prüft Abbaufrist, Folgefristen und Reserve.
 
 ## Prüfdatum ist keine inhaltliche Freigabe (#912)
 
