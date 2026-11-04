@@ -161,6 +161,15 @@ Scorecard frischen Bot-Schaden (SEO-Heiler/Textbatterie vom 04.11.):
   (Kopplungs-Warnung), nicht der Fiktivwert. Derselbe Test akzeptiert
   jetzt das Hausstil-NBSP vor „€“ (U3), ohne die Behauptung zu lockern.
 
+**Zweiter Rückfall abgewehrt:** Der Retrofit-Lauf `39734de`
+(„Capital/WiWo/ZEIT-Standard“) hatte die geheilten Aussagen auf
+`main` erneut mit unbelegten Zahlen versehen und mechanisch
+„; das ist ein Modellwert“ angehängt (bis hin zur falschen
+Sperrnummer „116“ als „Modellwert“). Beim Rebase wurden alle acht
+Konfliktdateien zugunsten der geheilten Fassungen aufgelöst und der
+Bestand per Musterprüfung verifiziert: kein Rückfall-Muster
+(11,93 · 116 · 12–20 % · Spannen ohne Beleg) ist zurückgekehrt.
+
 ## 10 · Nachweis (lokal, 04.11.2026)
 
 - `release_scorecard.py --live --streng`: **72/76, 0 blockiert, Exit 0**

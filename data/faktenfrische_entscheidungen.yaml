@@ -127,7 +127,7 @@ entscheidungen:
 - slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
   befund_id: 124ff2c3cd3917c274aa
   befund_fassung: 98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b
-  geprueft_fassung: c8643113a04ba3a6ee79876d222eb87a2ff36014ee7b5826d4b772d97667af9a
+  geprueft_fassung: 62c6cd41a8758c7ba2c79e3b2391bf6bff6ef15964c94b77e1f916336620773e
   typ: praezision
   beanstandung: Die Bewerbung des Vergleichsportals mit dem Superlativ 'Die besten Tarife' erfolgt ohne messbare Daten oder Auswahlkriterien in der Recherchegrundlage.
   beleg: ''
@@ -139,7 +139,7 @@ entscheidungen:
 - slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
   befund_id: 7bdec96c0329769bebe6
   befund_fassung: 98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b
-  geprueft_fassung: c8643113a04ba3a6ee79876d222eb87a2ff36014ee7b5826d4b772d97667af9a
+  geprueft_fassung: 62c6cd41a8758c7ba2c79e3b2391bf6bff6ef15964c94b77e1f916336620773e
   typ: luecke
   beanstandung: Die im Artikel als Fakten genannten Gaspreise für Oktober 2026 (11 bis 13 Cent/kWh) sind nicht durch die Fundstelle belegt, die lediglich eine allgemeine Themenübersicht darstellt.
   beleg: ''
@@ -151,7 +151,7 @@ entscheidungen:
 - slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
   befund_id: a56734aa032e0ed9e0c4
   befund_fassung: 98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b
-  geprueft_fassung: c8643113a04ba3a6ee79876d222eb87a2ff36014ee7b5826d4b772d97667af9a
+  geprueft_fassung: 62c6cd41a8758c7ba2c79e3b2391bf6bff6ef15964c94b77e1f916336620773e
   typ: luecke
   beanstandung: Der für den Verbraucherschutz zentrale Regulierungsrahmen (Sonderkündigungsrecht, Informationspflichten der Versorger) wird in der Fundstelle nicht inhaltlich bestätigt.
   beleg: ''
@@ -199,7 +199,7 @@ entscheidungen:
 - slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
   befund_id: 437b809ffbf41e5af434
   befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
-  geprueft_fassung: 4be187926008fe049d5b83e807fd80c7b81ee77592fa79bc286fa5edba9ec3f7
+  geprueft_fassung: 2c8bb988de5e5275d98544b15f6a016dd57d09f1285476b366cdf229f6f658e7
   typ: luecke
   beanstandung: Keine Quelle für die Aussage, dass das Gesetz bei einem Tarifwechsel die Grundversorgung garantiert – regulatorischer Rahmen fehlt.
   beleg: ''
@@ -211,7 +211,7 @@ entscheidungen:
 - slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
   befund_id: 9fbacd9942c2dfa1447f
   befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
-  geprueft_fassung: 4be187926008fe049d5b83e807fd80c7b81ee77592fa79bc286fa5edba9ec3f7
+  geprueft_fassung: 2c8bb988de5e5275d98544b15f6a016dd57d09f1285476b366cdf229f6f658e7
   typ: luecke
   beanstandung: Keine Quelle für die Behauptung, dass ein Grad weniger Raumtemperatur rund 6 % Energie einspart – Prozent‑Angabe fehlt.
   beleg: ''
@@ -223,7 +223,7 @@ entscheidungen:
 - slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
   befund_id: da30cbb5fbc8c801daf0
   befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
-  geprueft_fassung: 4be187926008fe049d5b83e807fd80c7b81ee77592fa79bc286fa5edba9ec3f7
+  geprueft_fassung: 2c8bb988de5e5275d98544b15f6a016dd57d09f1285476b366cdf229f6f658e7
   typ: luecke
   beanstandung: Keine Quelle für die Angabe, dass durch Optimierungsmaßnahmen 10‑15 % Einsparungen realistisch sind – Prozent‑Wert unbelegt.
   beleg: ''
@@ -235,7 +235,7 @@ entscheidungen:
 - slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
   befund_id: db8a69f08dc0020adebd
   befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
-  geprueft_fassung: 4be187926008fe049d5b83e807fd80c7b81ee77592fa79bc286fa5edba9ec3f7
+  geprueft_fassung: 2c8bb988de5e5275d98544b15f6a016dd57d09f1285476b366cdf229f6f658e7
   typ: luecke
   beanstandung: Keine Quelle für die Aussage, dass im Oktober 2026 bessere Gaspreise gelten – Preis‑Trend‑Behauptung fehlt.
   beleg: ''
@@ -247,7 +247,7 @@ entscheidungen:
 - slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
   befund_id: e834f4702e87194affe7
   befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
-  geprueft_fassung: 4be187926008fe049d5b83e807fd80c7b81ee77592fa79bc286fa5edba9ec3f7
+  geprueft_fassung: 2c8bb988de5e5275d98544b15f6a016dd57d09f1285476b366cdf229f6f658e7
   typ: luecke
   beanstandung: Keine Quelle für die Angabe, dass ein Einfamilienhaus typischerweise 18.000 kWh/Jahr verbraucht – Verbrauchszahl ist unbelegt.
   beleg: ''
@@ -319,7 +319,7 @@ entscheidungen:
 - slug: 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort
   befund_id: 3f0a88ede9d44ee910cb
   befund_fassung: 7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648
-  geprueft_fassung: 394697179e5a68e9378d4ff5644f010918a9562a5fdd6b766bd2fc98d17a4fe3
+  geprueft_fassung: 05589f81ec3f44b37ac454fff366ae71c56b05d33e27f440fd3def26cf5595d3
   typ: luecke
   beanstandung: Es fehlt der Hinweis auf das offizielle Beschwerdeportal der Bundesnetzagentur, über das Verbraucher Probleme mit Anbietern direkt melden können.
   beleg: ''
@@ -330,7 +330,7 @@ entscheidungen:
 - slug: 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort
   befund_id: 51e259fd2d8582e774f7
   befund_fassung: 7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648
-  geprueft_fassung: 394697179e5a68e9378d4ff5644f010918a9562a5fdd6b766bd2fc98d17a4fe3
+  geprueft_fassung: 05589f81ec3f44b37ac454fff366ae71c56b05d33e27f440fd3def26cf5595d3
   typ: luecke
   beanstandung: Der Ratgeber versäumt es, bei der Tarifprüfung auf die behördlichen Schlichtungsverfahren hinzuweisen, die Verbrauchern bei Streitigkeiten mit Energieversorgern zur Verfügung stehen.
   beleg: ''
@@ -341,7 +341,7 @@ entscheidungen:
 - slug: 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort
   befund_id: 55f8eeedc587cf0895ee
   befund_fassung: 7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648
-  geprueft_fassung: 394697179e5a68e9378d4ff5644f010918a9562a5fdd6b766bd2fc98d17a4fe3
+  geprueft_fassung: 05589f81ec3f44b37ac454fff366ae71c56b05d33e27f440fd3def26cf5595d3
   typ: luecke
   beanstandung: Der Artikel erwähnt keine behördlichen Informationsquellen wie das Verbraucher-Radar, das Transparenz über den Energiemarkt und Verbraucherschutzthemen bietet.
   beleg: ''
@@ -352,7 +352,7 @@ entscheidungen:
 - slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
   befund_id: 045ff990e44a7035e9a0
   befund_fassung: 9bf7efbf6eb1d4a2fa70aaa34f3caf1a938955b3986bd93ebdad278ca2f11d21
-  geprueft_fassung: fe0f9844e76ca83cab97e2e240d43970d9908d44ac6d9ffefc80705f5540f781
+  geprueft_fassung: 6b555fc607d67d841f386ba4e32d300ff2260284f195f8fcb0d5d7f3350d4fed
   typ: luecke
   beanstandung: Es fehlt der Hinweis auf die behördliche Anlaufstelle für Anfragen und Beschwerden im Bereich Energie, die über die rein zivilrechtliche Meldung beim Vermieter hinausgeht.
   beleg: ''
@@ -363,7 +363,7 @@ entscheidungen:
 - slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
   befund_id: 8919c2d1145af782d17a
   befund_fassung: 9bf7efbf6eb1d4a2fa70aaa34f3caf1a938955b3986bd93ebdad278ca2f11d21
-  geprueft_fassung: fe0f9844e76ca83cab97e2e240d43970d9908d44ac6d9ffefc80705f5540f781
+  geprueft_fassung: 6b555fc607d67d841f386ba4e32d300ff2260284f195f8fcb0d5d7f3350d4fed
   typ: luecke
   beanstandung: Der Ratgeber empfiehlt Tarifvergleiche und Mängelmeldungen, lässt aber den für den Energiemarkt relevanten Regulierungsrahmen für den Verbraucherschutz (Schlichtungsverfahren) unerwähnt.
   beleg: ''
@@ -374,7 +374,7 @@ entscheidungen:
 - slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
   befund_id: c39938841291b1e9e140
   befund_fassung: 9bf7efbf6eb1d4a2fa70aaa34f3caf1a938955b3986bd93ebdad278ca2f11d21
-  geprueft_fassung: fe0f9844e76ca83cab97e2e240d43970d9908d44ac6d9ffefc80705f5540f781
+  geprueft_fassung: 6b555fc607d67d841f386ba4e32d300ff2260284f195f8fcb0d5d7f3350d4fed
   typ: praezision
   beanstandung: Die Markttransparenz und der Verbraucherschutz im Energiesektor werden durch das 'Verbraucher-Radar' der Bundesnetzagentur statistisch erfasst; dieser Kontext fehlt bei der Einordnung von
     Marktdaten.
@@ -446,7 +446,7 @@ entscheidungen:
 - slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
   befund_id: 334751e6f61ad0033fe4
   befund_fassung: 3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a
-  geprueft_fassung: 4083bbf6ed9131ecc2ddd3e801cbd1108bd04d056cd85a90a4d5bc47f4f11a0b
+  geprueft_fassung: f25e4371dda7c430c3ba9ba6552e1f618da3e222231d79c6f92e2e5fb128955a
   typ: luecke
   beanstandung: Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quellenangabe.
   beleg: ''
@@ -458,7 +458,7 @@ entscheidungen:
 - slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
   befund_id: 36759a5efe5e8e5163d0
   befund_fassung: 3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a
-  geprueft_fassung: 4083bbf6ed9131ecc2ddd3e801cbd1108bd04d056cd85a90a4d5bc47f4f11a0b
+  geprueft_fassung: f25e4371dda7c430c3ba9ba6552e1f618da3e222231d79c6f92e2e5fb128955a
   typ: luecke
   beanstandung: Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird ohne Quelle angegeben.
   beleg: ''
@@ -470,7 +470,7 @@ entscheidungen:
 - slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
   befund_id: 942922d1afd7844618e9
   befund_fassung: 3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a
-  geprueft_fassung: 4083bbf6ed9131ecc2ddd3e801cbd1108bd04d056cd85a90a4d5bc47f4f11a0b
+  geprueft_fassung: f25e4371dda7c430c3ba9ba6552e1f618da3e222231d79c6f92e2e5fb128955a
   typ: luecke
   beanstandung: Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt rund 180 € im Jahr“ wird nicht belegt.
   beleg: ''
@@ -482,7 +482,7 @@ entscheidungen:
 - slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
   befund_id: d41f0d5ce8798df0211b
   befund_fassung: 3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a
-  geprueft_fassung: 4083bbf6ed9131ecc2ddd3e801cbd1108bd04d056cd85a90a4d5bc47f4f11a0b
+  geprueft_fassung: f25e4371dda7c430c3ba9ba6552e1f618da3e222231d79c6f92e2e5fb128955a
   typ: praezision
   beanstandung: Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“ ist ein Superlativ ohne messbare Daten oder Vergleichskriterien.
   beleg: ''
@@ -494,7 +494,7 @@ entscheidungen:
 - slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
   befund_id: e139d0769faadd04392a
   befund_fassung: 3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a
-  geprueft_fassung: 4083bbf6ed9131ecc2ddd3e801cbd1108bd04d056cd85a90a4d5bc47f4f11a0b
+  geprueft_fassung: f25e4371dda7c430c3ba9ba6552e1f618da3e222231d79c6f92e2e5fb128955a
   typ: luecke
   beanstandung: Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne Quellenangabe genannt.
   beleg: ''
@@ -506,7 +506,7 @@ entscheidungen:
 - slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
   befund_id: 04e40219cb4ff593b415
   befund_fassung: 642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8
-  geprueft_fassung: be8ce0fd758c3d3485321f5f7a1d453859e758d6beb4a677faa7d50fd0fe1f36
+  geprueft_fassung: 9a11783d70e3a308e78233faaae8a87aac71f3bacb7212309e6a83cf8782b7f4
   typ: praezision
   beanstandung: Die Angabe, dass Anbieter den Abschlag auf elf oder zwölf Raten verteilen, ist ohne Beleg ungenau, da die Ratenzahl vertraglich variieren kann.
   beleg: ''
@@ -517,7 +517,7 @@ entscheidungen:
 - slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
   befund_id: 2d01dc2629ad9c81f569
   befund_fassung: 642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8
-  geprueft_fassung: be8ce0fd758c3d3485321f5f7a1d453859e758d6beb4a677faa7d50fd0fe1f36
+  geprueft_fassung: 9a11783d70e3a308e78233faaae8a87aac71f3bacb7212309e6a83cf8782b7f4
   typ: luecke
   beanstandung: Die Aussage, dass die Grundversorgung fast immer der teuerste Tarif ist, wird nicht durch eine Quelle belegt.
   beleg: ''
@@ -528,7 +528,7 @@ entscheidungen:
 - slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
   befund_id: 3fd64026f55df4965cc9
   befund_fassung: 642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8
-  geprueft_fassung: be8ce0fd758c3d3485321f5f7a1d453859e758d6beb4a677faa7d50fd0fe1f36
+  geprueft_fassung: 9a11783d70e3a308e78233faaae8a87aac71f3bacb7212309e6a83cf8782b7f4
   typ: luecke
   beanstandung: Die Angabe, dass ein Grad weniger Raumtemperatur rund 6 % Heizenergie einspart, fehlt eine Quellenangabe.
   beleg: ''
@@ -539,7 +539,7 @@ entscheidungen:
 - slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
   befund_id: 799c93c89a10fc3cf267
   befund_fassung: 642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8
-  geprueft_fassung: be8ce0fd758c3d3485321f5f7a1d453859e758d6beb4a677faa7d50fd0fe1f36
+  geprueft_fassung: 9a11783d70e3a308e78233faaae8a87aac71f3bacb7212309e6a83cf8782b7f4
   typ: luecke
   beanstandung: Das Sonderkündigungsrecht bei Preiserhöhungen im Winter wird genannt, ohne regulatorische Grundlage zu nennen.
   beleg: ''
@@ -550,7 +550,7 @@ entscheidungen:
 - slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
   befund_id: cd81b3d9001b04c0a4e1
   befund_fassung: 642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8
-  geprueft_fassung: be8ce0fd758c3d3485321f5f7a1d453859e758d6beb4a677faa7d50fd0fe1f36
+  geprueft_fassung: 9a11783d70e3a308e78233faaae8a87aac71f3bacb7212309e6a83cf8782b7f4
   typ: luecke
   beanstandung: Die Behauptung, der Grundtarif der Stadtwerke sei ausschließlich eine Notversorgung und nie ein Bestpreis, ist unbelegt.
   beleg: ''
@@ -561,7 +561,7 @@ entscheidungen:
 - slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
   befund_id: 58f03a64adaaf8125959
   befund_fassung: 7203c0f7cedd638a87bafcfcd5fc6e920ab79959793f832239386b0690ac776f
-  geprueft_fassung: 671fe35f6b112fa80428bb0277110a92ff345666ecd4d1b15422376688ca6c5f
+  geprueft_fassung: 6c3f7310efa402d0023bf19076d03c95039d1e6cfecd26726b8928a40d43c577
   typ: praezision
   beanstandung: Während der Artikel vor hohen Kosten für Festmenüs warnt, liegt die Preissteigerung bei Nahrungsmitteln laut Destatis im Oktober 2026 bei lediglich +0,4 % und damit deutlich unter der allgemeinen
     Inflation.
@@ -573,7 +573,7 @@ entscheidungen:
 - slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
   befund_id: a7f5f01ef15a38839a0d
   befund_fassung: 7203c0f7cedd638a87bafcfcd5fc6e920ab79959793f832239386b0690ac776f
-  geprueft_fassung: 671fe35f6b112fa80428bb0277110a92ff345666ecd4d1b15422376688ca6c5f
+  geprueft_fassung: 6c3f7310efa402d0023bf19076d03c95039d1e6cfecd26726b8928a40d43c577
   typ: praezision
   beanstandung: Die Pauschale für 'Anreise und Mobilität' (10 % des Budgets) berücksichtigt nicht die überdurchschnittliche Preissteigerung bei Energie von +14,9 %, die Fahrtkosten im Vergleich zum Vorjahr
     massiv verteuern kann.
@@ -585,7 +585,7 @@ entscheidungen:
 - slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
   befund_id: bcc2bdf06220d5097133
   befund_fassung: 7203c0f7cedd638a87bafcfcd5fc6e920ab79959793f832239386b0690ac776f
-  geprueft_fassung: 671fe35f6b112fa80428bb0277110a92ff345666ecd4d1b15422376688ca6c5f
+  geprueft_fassung: 6c3f7310efa402d0023bf19076d03c95039d1e6cfecd26726b8928a40d43c577
   typ: luecke
   beanstandung: Die Modellrechnung für das Weihnachtsbudget (600 €) lässt die aktuelle Teuerungsrate unberücksichtigt. Laut Statistischen Bundesamt liegt die Inflationsrate im Oktober 2026 bei +2,8 %, was
     als Referenzwert für die Budgetplanung zum Vorjahr fehlt.
@@ -740,7 +740,7 @@ entscheidungen:
 - slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
   befund_id: 1dbeb2f8c51e78d11d49
   befund_fassung: ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4
-  geprueft_fassung: 34b3559a05d5c4f916cd6a1bf7595558f63bf703caa59d4c7bb786434cb9b56a
+  geprueft_fassung: ee80b1c41c43ad1ca41cfbc4c049935f1cd2e8e26e5e063cf9c4300337e1df87
   typ: luecke
   beanstandung: Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 € an reinen Gebühren kosten, ist unbelegt.
   beleg: ''
@@ -752,7 +752,7 @@ entscheidungen:
 - slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
   befund_id: 33e736ac6afe996b491a
   befund_fassung: ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4
-  geprueft_fassung: 34b3559a05d5c4f916cd6a1bf7595558f63bf703caa59d4c7bb786434cb9b56a
+  geprueft_fassung: ee80b1c41c43ad1ca41cfbc4c049935f1cd2e8e26e5e063cf9c4300337e1df87
   typ: luecke
   beanstandung: Behauptung, dass Echtzeit‑Überweisungen bei kostenlosen Konten generell gebührenfrei sind, fehlt jede Quelle.
   beleg: ''
@@ -764,7 +764,7 @@ entscheidungen:
 - slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
   befund_id: 96b7b7768d402884810c
   befund_fassung: ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4
-  geprueft_fassung: 34b3559a05d5c4f916cd6a1bf7595558f63bf703caa59d4c7bb786434cb9b56a
+  geprueft_fassung: ee80b1c41c43ad1ca41cfbc4c049935f1cd2e8e26e5e063cf9c4300337e1df87
   typ: luecke
   beanstandung: Aussage, dass Einlagen bis 100.000 € durch die deutsche Einlagensicherung geschützt sind, wird nicht belegt.
   beleg: ''
@@ -776,7 +776,7 @@ entscheidungen:
 - slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
   befund_id: a25bb6bbcb25ba8b0e22
   befund_fassung: ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4
-  geprueft_fassung: 34b3559a05d5c4f916cd6a1bf7595558f63bf703caa59d4c7bb786434cb9b56a
+  geprueft_fassung: ee80b1c41c43ad1ca41cfbc4c049935f1cd2e8e26e5e063cf9c4300337e1df87
   typ: luecke
   beanstandung: Angabe von Dispozinsen von 8 % bis 11 % ohne Quellenangabe.
   beleg: ''
@@ -788,7 +788,7 @@ entscheidungen:
 - slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
   befund_id: f94f8ba1e4342e67e45a
   befund_fassung: ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4
-  geprueft_fassung: 34b3559a05d5c4f916cd6a1bf7595558f63bf703caa59d4c7bb786434cb9b56a
+  geprueft_fassung: ee80b1c41c43ad1ca41cfbc4c049935f1cd2e8e26e5e063cf9c4300337e1df87
   typ: luecke
   beanstandung: Angabe, dass ein Kontowechsel 120 € bis 180 € im Jahr spart, fehlt jede Quelle.
   beleg: ''
@@ -800,7 +800,7 @@ entscheidungen:
 - slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
   befund_id: 4afb8daed73677ee6224
   befund_fassung: cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b
-  geprueft_fassung: 6bd19725bfd38c9a393574c0a1eaad0f4df1af9b1fdc321619d05f94d846c356
+  geprueft_fassung: 64b0b6a3e1fcc7c896291a8df01b19f12dcd6577c7d369f94b21cef8c29f2d2f
   typ: luecke
   beanstandung: Angabe, dass 58 % der Nutzer ihr Haushaltsbuch digital führen, beruft sich angeblich auf Statista 2025, jedoch wird keine Quelle genannt.
   beleg: ''
@@ -811,7 +811,7 @@ entscheidungen:
 - slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
   befund_id: 9eb9a90899cc8ca66020
   befund_fassung: cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b
-  geprueft_fassung: 6bd19725bfd38c9a393574c0a1eaad0f4df1af9b1fdc321619d05f94d846c356
+  geprueft_fassung: 64b0b6a3e1fcc7c896291a8df01b19f12dcd6577c7d369f94b21cef8c29f2d2f
   typ: luecke
   beanstandung: Sparpotenzial‑Beispiele (z. B. DSL‑Tarifwechsel von 44 € auf 24 €) enthalten konkrete Zahlen ohne Quellenangabe.
   beleg: ''
@@ -822,7 +822,7 @@ entscheidungen:
 - slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
   befund_id: b4bd085bc84a6131b644
   befund_fassung: cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b
-  geprueft_fassung: 6bd19725bfd38c9a393574c0a1eaad0f4df1af9b1fdc321619d05f94d846c356
+  geprueft_fassung: 64b0b6a3e1fcc7c896291a8df01b19f12dcd6577c7d369f94b21cef8c29f2d2f
   typ: luecke
   beanstandung: Behauptung, dass 60 % der Haushalte in Deutschland ihr Geld nicht nachverfolgen, wird mit einer Auswertung der Stiftung Warentest angegeben, jedoch fehlt ein entsprechender Nachweis.
   beleg: ''
@@ -833,7 +833,7 @@ entscheidungen:
 - slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
   befund_id: baed76dc211bd15dd46f
   befund_fassung: cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b
-  geprueft_fassung: 6bd19725bfd38c9a393574c0a1eaad0f4df1af9b1fdc321619d05f94d846c356
+  geprueft_fassung: 64b0b6a3e1fcc7c896291a8df01b19f12dcd6577c7d369f94b21cef8c29f2d2f
   typ: praezision
   beanstandung: Versprechen, dass ein Haushaltsbuch „schnell“ zeigt, welche Posten sich lohnen, ist nicht quantifiziert und fehlt an konkreten Evidenzangaben.
   beleg: ''
@@ -844,7 +844,7 @@ entscheidungen:
 - slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
   befund_id: d7c3cfb422310cf26ca6
   befund_fassung: cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b
-  geprueft_fassung: 6bd19725bfd38c9a393574c0a1eaad0f4df1af9b1fdc321619d05f94d846c356
+  geprueft_fassung: 64b0b6a3e1fcc7c896291a8df01b19f12dcd6577c7d369f94b21cef8c29f2d2f
   typ: praezision
   beanstandung: Die Aussage, dass die 50‑30‑20‑Regel für ein Nettoeinkommen von 2.500 € realistisch sei, wird ohne Hinweis auf regionale Unterschiede oder empirische Daten präsentiert.
   beleg: ''

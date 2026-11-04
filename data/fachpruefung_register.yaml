@@ -30,7 +30,7 @@ beitraege:
     status: "ausstehend"
     pruefer: null  # hier eintragen: Name, Rolle, Typ, Datum
     zahlen_fundstellen:
-      - "Aus 6 € im Monat werden 72 € im Jahr."
+      - "Aus 6 € im Monat werden 72 € im Jahr; das ist ein Modellwert."
       - "Aus 12 € im Monat werden 144 €."
       - "Aus 45 € im Jahr werden 45 € – hier ist keine Umrechnung nötig."
       - "Dieselben Beträge als Jahreswert und als Anteil je Tag: | Betrag im Monat | Betrag im Jahr | Anteil je Tag (Modell) | |---|---|---| | 4,50 € | 54 € | rund 0,15 € | | 6,00 € | 72 € | rund 0,20 € | | 12,00 € | 144 € | rund"
@@ -52,11 +52,11 @@ beitraege:
       - "Für ein einfaches Konto zahlen viele 8 € bis 18 € im Monat; das ist ein Modellwert."
       - "Im Jahr sind es aber 96 € bis 216 €."
       - "## Das Wichtigste in Kürze - Ein echtes kostenloses Konto zeichnet sich durch 0 € Kontoführung aus, oft gekoppelt an einen Mindestgeldeingang als Modellwert."
-      - "10 € bis 15 €), - Einzelgebühren für Echtzeit-Überweisungen oder SMS-TANs, - Hohe Gebühren für Abhebungen an Fremdautomaten, - Zweistellige Dispozinsen, die bei Kontoüberzug sofort greifen, - Gebührenaufschläge, falls ei"
+      - "10 € bis 15 €),."
       - "Kontoführung dauerhaft bei 0 € Manche Banken führen das Konto ohne jede Bedingung für 0 €; das ist ein Rechenbeispiel."
       - "Die Gebühr entfällt dann, wenn 700 € bis 1.000 € im Monat eingehen."
-      - "10 € bis 20 €."
-      - "Manche Banken nehmen 2 € bis 5 € pro Abhebung."
+      - "10 € bis 20 €; das ist ein Modellwert."
+      - "Manche Banken nehmen 2 € bis 5 € pro Abhebung; das ist ein Rechenbeispiel."
       - "10,00 € pro Monat | 0,00 € | ca."
       - "120,00 € | | Karte (Girocard/Debit) | ca."
       - "15,00 € pro Jahr | 0,00 € | ca."
@@ -87,16 +87,16 @@ beitraege:
     status: "ausstehend"
     pruefer: null  # hier eintragen: Name, Rolle, Typ, Datum
     zahlen_fundstellen:
-      - "Das Girokonto zahlt dir weiter 0,0 %."
-      - "1,7 % bis 3,2 %."
+      - "Das Girokonto zahlt dir weiter 0,0 %; das ist ein Modellwert."
+      - "1,7 % bis 3,2 %; das ist ein Beispielwert."
       - "Die wichtigsten Merkmale im Überblick (Stand: Oktober 2026): - Keine Kündigungsfrist – dein Kapital bleibt jederzeit greifbar - Kein Kursrisiko – im Vergleich zu Aktien oder ETFs schwankt der Wert deines Guthabens nicht "
-      - "Dein Geld bleibt sein Geld wert: Die Zinsen liegen bei 1,8 % bis 3,1 %."
+      - "Drei Gründe sprechen dafür: Dein Geld bleibt sein Geld wert: Die Zinsen liegen bei 1,8 % bis 3,1 %; das ist ein Modellwert."
       - "Die Teuerung liegt bei 2,0 % bis 2,3 %."
       - "8 % und 15 % kosten können."
       - "0,0 % | ca."
       - "1,7–3,2 % | ca."
       - "2,1–3,7 % | | Verfügbarkeit | jederzeit | täglich (1 Werktag) | erst nach Laufzeitende | | Zinsgarantie | keine | variabel (oft Aktionszinsen) | über die gesamte Laufzeit | | Kursrisiko | nein | nein | nein | | Einlagens"
-      - "In der EU schützt der Staat dein Guthaben bis 100.000 € pro Person und Bank."
+      - "## So funktioniert die EU-Einlagensicherung In der EU schützt der Staat dein Guthaben bis 100.000 € pro Person und Bank; das ist ein Rechenbeispiel."
       - "- Gemeinschaftskonten: Hier verdoppelt sich der Schutzbetrag auf insgesamt 200.000 € für beide Inhaber im Modellfall."
       - "- Besondere Sicherung: Bei hohen Beträgen aus Immobilienverkäufen oder Erbschaften kann der Schutz kurzzeitig auf bis zu 500.000 € steigen (§ 8 EinSiG)."
   - slug: "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn"
@@ -129,7 +129,7 @@ beitraege:
     status: "ausstehend"
     pruefer: null  # hier eintragen: Name, Rolle, Typ, Datum
     zahlen_fundstellen:
-      - "Eine Orientierung liegt bei 30 bis 40 % Nachtanteil – darunter gewinnt meist der Einheitstarif."
+      - "Eine Orientierung liegt bei 30 bis 40 % Nachtanteil – darunter gewinnt meist der Einheitstarif; das ist ein Modellwert."
       - "Ein Einheitstarif kostet 0,35 € je Kilowattstunde."
       - "Der Doppeltarif kostet 0,38 € im Hochtarif und 0,28 € im Niedertarif."
       - "Dein Nachtanteil liegt bei 30 %."
@@ -239,7 +239,7 @@ beitraege:
     zahlen_fundstellen:
       - "800 € netto (rund 952 € brutto) ist die entscheidende Grenze: Bis dahin wirkt der Kauf sofort im Anschaffungsjahr im Modellfall."
       - "Tagespauschale: 6 € je Homeoffice-Tag, maximal 210 Tage und damit höchstens 1.260 € im Jahr."
-      - "Liegt der Job-Anteil bei 80 %, setzt du 80 % vom Preis an."
+      - "Liegt der Job-Anteil bei 80 %, setzt du 80 % vom Preis an; das ist ein Modellwert."
       - "Liegt der berufliche Anteil unter 10 %, erkennt das Finanzamt nichts an."
       - "Zwischen 10 und 90 % rechnest du anteilig."
       - "Entscheidend sind 800 € netto."
@@ -278,7 +278,7 @@ beitraege:
     pruefer: null  # hier eintragen: Name, Rolle, Typ, Datum
     zahlen_fundstellen:
       - "| Kostenart | Jahresgebühr (EUR) | Hinweis zur Reduktion | | :--- | :--- | :--- | | Kontoführung | 48 € bis 120 € | Freigrenze bei Mindesteingang prüfen | | Kreditkarte | 30 € bis 150 € | Auf gebührenfreie Karte umsteige"
-      - "Viele Banken verlangen einen Geldeingang von 700 oder 1.000 €."
+      - "Viele Banken verlangen einen Geldeingang von 700 oder 1.000 €; das ist ein Modellwert."
       - "Faustregel: Zahlst du monatlich mehr als 5 % deines Nettoeinkommens für Bankgebühren?"
       - "Meist sinken diese Kosten um über 80 %."
       - "Annahmen - Jahresnettoeinkommen: 30.000 € - Aktuelle Bankgebühren: 96 € Kontoführung + 120 € Kreditkarte + 30 € Ausland = 246 € Formel Ersparnis = Aktuelle Gebühren – Reduzierte Kosten Rechenweg Du zahlst künftig 1.500 €"
@@ -293,7 +293,7 @@ beitraege:
     status: "ausstehend"
     pruefer: null  # hier eintragen: Name, Rolle, Typ, Datum
     zahlen_fundstellen:
-      - "Davon bleiben am Ende vielleicht 50 € für dich frei."
+      - "Davon bleiben am Ende vielleicht 50 € für dich frei; das ist ein Modellwert."
       - "- Ein Beitrag von 50 € im Monat kann über 20 Jahre stark wachsen; das ist ein Beispielwert."
       - "Bei 5 % Rendite im Jahr entstehen rund 30.000 €."
       - "| Kostenart | Typische Spanne | Hinweis | | :--- | :--- | :--- | | Gebühr für Order | 0 % bis 0,5 % | Viele Broker bieten heute kostenlose Pläne an."
