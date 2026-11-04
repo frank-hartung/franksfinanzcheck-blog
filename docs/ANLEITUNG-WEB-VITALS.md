@@ -82,6 +82,30 @@ Google liefert das Urteil gleich mit.
 Exit: `0` kein Feldbefund · `1` Befund (mindestens eine Seite `SCHLECHT`) ·
 `2` Störung (Netz, API, kein Ziel messbar).
 
+### Wenn die Feldmessung selbst rot ist
+
+Ein roter Wochenlauf ist zuerst eine Frage: **Seite schlecht oder Messung
+kaputt?** Die Antwort steht im Artefakt `web-vitals-woche`
+(`feld-bericht.md` und `feld-fehler.txt`).
+
+| Exit | Bedeutung | Richtiger nächster Schritt |
+|---|---|---|
+| `1` | CrUX-Urteil `SCHLECHT` | Labor derselben URL ansehen, Ursache an der Seite beheben |
+| `2` | Störung: API, Netz, kein Ziel messbar | Messweg reparieren – **nicht** die Seite |
+| leer | Schritt hat kein Urteil abgegeben | fail-closed: Bericht und Job-Protokoll prüfen |
+
+Seit 04.11.2026 (#1026) gilt das auch für den Rand:
+
+- **Transiente Antworten** (408/425/429/5xx) werden bis zu dreimal
+  wiederholt, ein `Retry-After` bis 30 s respektiert. Ein Wackler ist keine
+  Störung, ein Dauerausfall bleibt einer.
+- **Der Schlüssel wird geschwärzt.** Jeder Text, der das Haus verlässt
+  (Bericht, JSON, `stderr`), läuft durch `schwaerze()` – auch fremde
+  Ausnahmetexte, die URLs mitschleppen. `PSI_API_KEY` taucht in keinem
+  Artefakt auf.
+- **Eine Störung wird benannt**: Pfad, Fehlerklasse und geschwärzter Grund.
+  Eine leere Störungsliste ist eine Aussage, kein Zufall.
+
 ## Laborwerte der ausgelieferten Seite
 
 ```bash
@@ -90,7 +114,34 @@ node scripts/lighthouse_live.mjs --url https://franksfinanzcheck.de/werkzeuge/
 node scripts/lighthouse_live.mjs --laeufe 3 --schreiben
 node scripts/lighthouse_live.mjs --json               # Maschinenausgabe
 node scripts/lighthouse_live.mjs --streng             # Befund ⇒ Exit 1 (nur wenn bewusst gewollt)
+node scripts/lighthouse_live.mjs --selftest           # offline, ohne node_modules
 ```
+
+### Warum `--selftest` vor `npm ci` läuft (und laufen muss)
+
+Bis zum 04.11.2026 importierte das Skript `lighthouse` und `playwright-core`
+**am Modulkopf**. Der Wochenlauf prüfte es aber vor `npm ci` – und Node bricht
+einen Import mit fehlendem Paket ab, *bevor* eine Zeile Prüflogik läuft:
+`ERR_MODULE_NOT_FOUND`. Der rote Lauf 41456548199 war genau das: eine
+unverbindliche Diagnose, die die verbindliche Feldmessung mit ins Rot nahm,
+mit einer Fehlermeldung, die nach kaputtem Selbsttest klang.
+
+Die Heilung ist Struktur, nicht Disziplin:
+
+- Der **Modulkopf** braucht ausschließlich Node-Bordmittel (`node:fs`,
+  `node:net`, `node:path`, `node:url`). Ein Regressionstest
+  (`scripts/tests/lighthouse_live.test.mjs`) verbietet jedes Fremdpaket dort –
+  ein künftiger statischer Import macht `npm run test:webvitals` rot.
+- **Laufzeitpakete** lädt `ladeLaufzeit()` erst beim echten Lauf. Fehlt
+  etwas, sagt die Meldung was fehlt und wie es entsteht
+  (`npm ci --ignore-scripts`), statt eines nackten Stacktrace.
+- **`--json` schreibt ausschließlich JSON auf `stdout`**; Fortschritt und
+  Warnungen gehen immer nach `stderr`. Sonst scheitert jeder Aufrufer am
+  ersten `JSON.parse`, und niemand kann sagen, woran es lag.
+- **Exit-Codes werden erfasst, nicht verschluckt.** Im Workflow steht kein
+  `continue-on-error` mehr über einem Schritt, dessen Exit gebraucht wird:
+  `rc=0; … || rc=$?` und dann `$GITHUB_OUTPUT`. „Kein Urteil“ ist ein
+  eigener Zustand und wird als solcher fail-closed behandelt.
 
 - Schwellen: **eine Wahrheit** aus `lighthouse/assertions.json`, erzeugt aus
   `data/design/regelwerk.yaml`. Keine zweite Zahl.

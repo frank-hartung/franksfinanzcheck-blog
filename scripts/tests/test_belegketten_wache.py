@@ -151,9 +151,10 @@ class BelegkettenWacheTests(unittest.TestCase):
         def runner_timeout(url, timeout=10.0):
             raise wache.urllib.error.URLError("timed out")
 
-        def spiegel(url, timeout=10.0):
+        def spiegel(slug, timeout=10.0):
+            """Spiegel-Abruf im Vertrag der Abrufschicht: (slug, timeout) -> (status, text)."""
             for suffix, inhalt in spiegel_dateien.items():
-                if url.endswith(suffix):
+                if suffix.endswith(f"/{slug}.md"):
                     return 200, inhalt
             return 404, ""
 
@@ -200,7 +201,7 @@ class BelegkettenWacheTests(unittest.TestCase):
         erg_offline = wache.pruefe_quelle(
             "https://www.gesetze-im-internet.de/vvg_2008/__40.html",
             abruf=runner_timeout,
-            spiegel_abruf=lambda u, timeout=10.0: (_ for _ in ()).throw(OSError("offline")),
+            spiegel_abruf=lambda slug, timeout=10.0: (_ for _ in ()).throw(OSError("offline")),
         )
         self.assertEqual(wache.UNKLAR, erg_offline["status"])
 
@@ -222,6 +223,234 @@ class BelegkettenWacheTests(unittest.TestCase):
                 self.assertEqual(0, wache.main([]))
         finally:
             wache.pruefe_alle = original
+
+
+class BelegkettenSpiegelTests(unittest.TestCase):
+    """#1024 (04.11.2026): Der Messweg für Bundesrecht – dauerhaft geheilt.
+
+    Der Vorfall war kein Netzproblem, sondern ein VERTRAGSBRUCH im Code:
+    `sicherer_abruf()` liefert ein 3-Tupel, entpackt wurde ein 2-Tupel, und
+    `except Exception:` verkaufte den `ValueError` als „Quelle unklar“.
+    Vier gültige Gesetzeszitate standen dadurch dauerhaft als unprüfbar in
+    der YMYL-Queue. Diese Klasse hält den Vertrag an allen vier Flanken fest.
+    """
+
+    VVG = (
+        "---\n"
+        "titel: Versicherungsvertragsgesetz\n"
+        "quelle: https://www.gesetze-im-internet.de/vvg_2008/\n"
+        "---\n\n"
+        "### § 40 Kündigung bei Prämienerhöhung\n\n(1) Text.\n"
+    )
+
+    def test_sicherer_abruf_3_tupel_wird_korrekt_entpackt(self):
+        """Der Kern von #1024: `(status, kopf, roh)` – nicht `(status, roh)`."""
+        import net_safety
+
+        gesehen = {}
+
+        def attrappe(url, *, headers=None, timeout=20.0, max_bytes=0,
+                     erlaube_loopback=False):
+            gesehen["url"] = url
+            gesehen["headers"] = headers or {}
+            return 200, {"content-type": "text/markdown"}, self.VVG.encode("utf-8")
+
+        with patch.object(net_safety, "sicherer_abruf", attrappe):
+            status, inhalt = wache._spiegel_abruf(
+                wache._gii_spiegel_url("vvg_2008"), timeout=5.0)
+
+        self.assertEqual(200, status)
+        # _spiegel_abruf gibt den ROHEN Inhalt zurück (Dekodieren ist Sache
+        # der Abrufschicht) – die Prüfung ist deshalb auf Bytes formuliert.
+        self.assertIn(b"quelle: https://www.gesetze-im-internet.de/vvg_2008/", inhalt)
+        self.assertIn("vv/vvg_2008.md", gesehen["url"])
+        self.assertIn("FranksFinanzcheck", gesehen["headers"].get("User-Agent", ""))
+
+    def test_api_abruf_fragt_rohen_inhalt_und_version_an(self):
+        import net_safety
+
+        kopf = {}
+
+        def attrappe(url, *, headers=None, timeout=20.0, max_bytes=0,
+                     erlaube_loopback=False):
+            kopf.update(headers or {})
+            return 200, {}, self.VVG.encode("utf-8")
+
+        with patch.object(net_safety, "sicherer_abruf", attrappe):
+            wache._spiegel_abruf(wache._gii_spiegel_api_url("bgb"), timeout=5.0)
+
+        self.assertEqual("application/vnd.github.raw", kopf.get("Accept"))
+        self.assertEqual("2022-11-28", kopf.get("X-GitHub-Api-Version"))
+
+    def test_token_geht_nur_an_die_api_und_nie_in_die_ausgabe(self):
+        """`GH_TOKEN` ist ein Kontingent-Schlüssel, kein Quellenparameter."""
+        import net_safety
+
+        koepfe = []
+
+        def attrappe(url, *, headers=None, timeout=20.0, max_bytes=0,
+                     erlaube_loopback=False):
+            koepfe.append((url, dict(headers or {})))
+            return 200, {}, self.VVG.encode("utf-8")
+
+        with patch.dict("os.environ", {"GH_TOKEN": "ghs_geheim_123"}), \
+             patch.object(net_safety, "sicherer_abruf", attrappe):
+            wache._spiegel_abruf(wache._gii_spiegel_url("vvg_2008"), timeout=5.0)
+            wache._spiegel_abruf(wache._gii_spiegel_api_url("vvg_2008"), timeout=5.0)
+
+        raw_url, raw_kopf = koepfe[0]
+        api_url, api_kopf = koepfe[1]
+        from url_host import ist_host_oder_subdomain
+
+        self.assertTrue(ist_host_oder_subdomain(raw_url, "raw.githubusercontent.com"))
+        self.assertNotIn("Authorization", raw_kopf, "Token darf nicht an raw gehen")
+        self.assertTrue(ist_host_oder_subdomain(api_url, "api.github.com"))
+        self.assertEqual("Bearer ghs_geheim_123", api_kopf.get("Authorization"))
+
+    def test_spiegel_rueckfall_auf_die_api_bei_kontingentfehler(self):
+        aufrufe = []
+        from url_host import ist_host_oder_subdomain
+
+        def abruf(url, timeout=10.0):
+            aufrufe.append(url)
+            # Host-Wahrheit statt Textsuche (Code-Scanning-Alert #83): Die
+            # Zeichenkette „raw.githubusercontent.com“ darf an beliebiger
+            # Stelle einer URL stehen und wäre keine Prüfung.
+            if ist_host_oder_subdomain(url, "raw.githubusercontent.com"):
+                raise wache.urllib.error.HTTPError(url, 429, "rate limited", None, None)
+            return 200, self.VVG.encode("utf-8")
+
+        status, inhalt = wache.abruf_gii_spiegel("vvg_2008", abruf=abruf)
+        self.assertEqual(200, status)
+        self.assertIn("gesetze-im-internet.de/vvg_2008/", inhalt)
+        self.assertEqual(2, len(aufrufe), "genau ein Raw-Versuch, dann die API")
+        self.assertTrue(ist_host_oder_subdomain(aufrufe[-1], "api.github.com"))
+        self.assertIn("/vv/vvg_2008.md", aufrufe[-1])
+        self.assertIn("ref=main", aufrufe[-1])
+
+    def test_404_des_spiegels_ist_endgueltig_und_wird_nicht_wiederholt(self):
+        aufrufe = []
+
+        def abruf(url, timeout=10.0):
+            aufrufe.append(url)
+            raise wache.urllib.error.HTTPError(url, 404, "Not Found", None, None)
+
+        status, _ = wache.abruf_gii_spiegel("aufgehoben_1999", abruf=abruf)
+        self.assertEqual(404, status)
+        self.assertEqual(1, len(aufrufe), "ein 404 darf nicht wiederholt werden")
+
+    def test_403_wird_nicht_wiederholt_wohl_aber_503(self):
+        zaehler = {"n": 0}
+
+        def dauerhaft_403(url, timeout=10.0):
+            zaehler["n"] += 1
+            raise wache.urllib.error.HTTPError(url, 403, "Forbidden", None, None)
+
+        status, _ = wache.abruf_gii_spiegel_http("https://x/y.md", 1.0,
+                                                abruf=dauerhaft_403, versuche=3)
+        self.assertEqual((403, 1), (status, zaehler["n"]))
+
+        zaehler["n"] = 0
+
+        def einmal_503(url, timeout=10.0):
+            zaehler["n"] += 1
+            if zaehler["n"] == 1:
+                raise wache.urllib.error.HTTPError(url, 503, "Service Unavailable", None, None)
+            return 200, b"---"
+
+        status, roh = wache.abruf_gii_spiegel_http("https://x/y.md", 1.0,
+                                                  abruf=einmal_503, versuche=3)
+        self.assertEqual((200, 2), (status, zaehler["n"]))
+        self.assertEqual(b"---", roh)
+
+    def test_programmierfehler_ist_kein_quellenbefund(self):
+        """#1024: Ein ValueError aus dem Tupel-Entpacken darf nicht „unklar“ werden."""
+        def typfehler_direkt(url, timeout=10.0):
+            raise ValueError("too many values to unpack (expected 2)")
+
+        with self.assertRaises(ValueError):
+            wache.pruefe_quelle("https://www.verbraucherzentrale.de/wissen/a-1",
+                                abruf=typfehler_direkt)
+
+        def typfehler_spiegel(slug, timeout=10.0):
+            raise AttributeError("'NoneType' object has no attribute 'decode'")
+
+        def netzfehler(url, timeout=10.0):
+            raise wache.urllib.error.URLError("timed out")
+
+        with self.assertRaises(AttributeError):
+            wache.pruefe_quelle("https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+                                abruf=netzfehler, spiegel_abruf=typfehler_spiegel)
+
+    def test_netzfehlerliste_ist_abgeschlossen_und_breit_genug(self):
+        import http.client
+        import ssl
+
+        for klasse in (wache.urllib.error.URLError, wache.urllib.error.HTTPError,
+                       http.client.HTTPException, TimeoutError, ConnectionResetError,
+                       ssl.SSLError):
+            with self.subTest(klasse=klasse.__name__):
+                self.assertTrue(issubclass(klasse, wache.NETZ_AUSNAHMEN))
+        # Ein Programmierfehler gehört ausdrücklich NICHT dazu.
+        for klasse in (ValueError, TypeError, AttributeError, KeyError, NameError):
+            with self.subTest(klasse=klasse.__name__):
+                self.assertFalse(issubclass(klasse, wache.NETZ_AUSNAHMEN))
+
+    def test_ablageordnung_des_spiegels_ist_eine_stelle(self):
+        self.assertEqual("vv", wache._gii_shard("vvg_2008"))
+        self.assertEqual("bg", wache._gii_shard("bgb"))
+        self.assertEqual("go", wache._gii_shard("got_2022"))
+        self.assertEqual("es", wache._gii_shard("estg"))
+        self.assertEqual("0-9", wache._gii_shard("1wofg"))
+        self.assertTrue(wache._gii_spiegel_url("bgb").endswith("/bg/bgb.md"))
+
+    def test_echter_spiegelfall_aus_dem_vorfall_1024(self):
+        """Alle vier Zitate aus #1024 müssen über den Spiegel belegbar sein."""
+        dateien = {
+            "vvg_2008": self.VVG,
+            "bgb": ("---\nquelle: https://www.gesetze-im-internet.de/bgb/\n---\n\n"
+                    "###### § 502 Vorfälligkeitsentschädigung\n"),
+            "got_2022": ("---\nquelle: https://www.gesetze-im-internet.de/got_2022/\n---\n\n"
+                         "# Gebührenordnung für Tierärztinnen und Tierärzte (GOT)\n"),
+        }
+
+        def spiegel(slug, timeout=10.0):
+            return (200, dateien[slug]) if slug in dateien else (404, "")
+
+        def netzfehler(url, timeout=10.0):
+            raise wache.urllib.error.URLError("<urlopen error [SSL: KRB5_S_TKT_EXPIRED]>")
+
+        for zitat in ("https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+                      "https://www.gesetze-im-internet.de/bgb/__502.html",
+                      "https://www.gesetze-im-internet.de/got_2022/"):
+            with self.subTest(zitat=zitat):
+                ergebnis = wache.pruefe_quelle(zitat, abruf=netzfehler, spiegel_abruf=spiegel)
+                self.assertEqual(wache.OK, ergebnis["status"], ergebnis)
+                self.assertIn("Bundesrechts-Spiegel", ergebnis["hinweis"])
+
+    def test_probe_bundesrecht_ist_ein_live_nachweis_und_kein_gate(self):
+        """`--probe-bundesrecht` meldet Erfolg/Misserfolg, ohne das Gate zu ändern."""
+        def spiegel(slug, timeout=10.0):
+            return (200, self.VVG) if slug == "vvg_2008" else (404, "")
+
+        original = wache.abruf_gii_spiegel
+        wache.abruf_gii_spiegel = lambda slug, timeout=15.0, **_: spiegel(slug)
+        try:
+            ausgabe = io.StringIO()
+            with redirect_stdout(ausgabe):
+                code_ok = wache.probe_bundesrecht(
+                    ["https://www.gesetze-im-internet.de/vvg_2008/__40.html"])
+                self.assertEqual(0, code_ok, ausgabe.getvalue())
+                self.assertIn("aktiv", ausgabe.getvalue())
+
+            ausgabe = io.StringIO()
+            with redirect_stdout(ausgabe):
+                code_fehler = wache.probe_bundesrecht(
+                    ["https://www.gesetze-im-internet.de/bgb/__502.html"])
+            self.assertEqual(1, code_fehler)
+            self.assertIn("404", ausgabe.getvalue())
+        finally:
+            wache.abruf_gii_spiegel = original
 
 
 class FaktenfrischeSchreibgrenzeTests(unittest.TestCase):
