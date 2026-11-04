@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-10-14
+lastmod: 2026-11-04
 title: "DNS-Server wechseln: Datenschutz, Filter und Einrichtung"
 description: "DNS-Server wechseln: So vergleichst du Resolver, aktivierst DoH/DoT und richtest sie sicher ein. Bandbreite und WLAN werden nicht schneller."
 date: 2026-08-26T06:00:00Z
@@ -59,10 +59,6 @@ Wenn du den DNS-Server wechselst, änderst du den Server, der deine Namensanfrag
 - DNS-Server übersetzen Domainnamen in IP-Adressen. Sie beeinflussen nicht die Bandbreite des Anschlusses.
 - Öffentliche DNS-Server können Anfragen verschlüsseln (DoH/DoT). Sie schützen aber nicht vor allen Netzwerkdaten.
 - Filterfunktionen der Anbieter unterscheiden sich. Sie blockieren bekannte schädliche Domains. Sie ersetzen keinen Virenschutz.
-
-![Merkkarte: Kernaussagen zu DNS-Server wechseln: Datenschutz, Filter und Einrichtung](abbildung-merkkarte. svg)
-
-*Abbildung: Merkkarte zu „DNS-Server wechseln: Datenschutz, Filter und Einrichtung“ (eigene Darstellung aus diesem Beitrag).*
 
 ![Merkkarte: Kernaussagen zu DNS-Server wechseln: Datenschutz, Filter und Einrichtung](abbildung-merkkarte.svg)
 
@@ -173,10 +169,6 @@ Ist ein DNS-Server 5 Millisekunden schneller? Dann merkst du das im Alltag nicht
 Wechseln ist leicht. Das Risiko ist niedrig. Der Nutzen ist oft spürbar. Die Einrichtung kostet Minuten. Die Wirkung hält Jahre.
 
 Du brauchst kein teures Abo. Du brauchst keine neue Hardware. Du brauchst keine Fachkenntnisse. Alles, was du brauchst, ist auf deinem Rechner schon da.
-
-![Gliederung des Beitrags: DNS-Server wechseln: Datenschutz, Filter und Einrichtung](abbildung-ablauf. svg)
-
-*Abbildung: Gliederung zu „DNS-Server wechseln: Datenschutz, Filter und Einrichtung“ – 5 Stationen von „Was macht ein DNS-Server?“ bis „Was du nach dem Wechsel testen solltest“ (eigene Darstellung).*
 
 ## Das ändert sich für dich
 

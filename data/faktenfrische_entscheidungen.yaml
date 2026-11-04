@@ -127,7 +127,7 @@ entscheidungen:
 - slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
   befund_id: 124ff2c3cd3917c274aa
   befund_fassung: 98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b
-  geprueft_fassung: 4634c53ded47024f7fe8368a013438694e1e91b36b51d0a27255e627d6c61095
+  geprueft_fassung: c8643113a04ba3a6ee79876d222eb87a2ff36014ee7b5826d4b772d97667af9a
   typ: praezision
   beanstandung: Die Bewerbung des Vergleichsportals mit dem Superlativ 'Die besten Tarife' erfolgt ohne messbare Daten oder Auswahlkriterien in der Recherchegrundlage.
   beleg: ''
@@ -139,7 +139,7 @@ entscheidungen:
 - slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
   befund_id: 7bdec96c0329769bebe6
   befund_fassung: 98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b
-  geprueft_fassung: 4634c53ded47024f7fe8368a013438694e1e91b36b51d0a27255e627d6c61095
+  geprueft_fassung: c8643113a04ba3a6ee79876d222eb87a2ff36014ee7b5826d4b772d97667af9a
   typ: luecke
   beanstandung: Die im Artikel als Fakten genannten Gaspreise für Oktober 2026 (11 bis 13 Cent/kWh) sind nicht durch die Fundstelle belegt, die lediglich eine allgemeine Themenübersicht darstellt.
   beleg: ''
@@ -151,7 +151,7 @@ entscheidungen:
 - slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
   befund_id: a56734aa032e0ed9e0c4
   befund_fassung: 98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b
-  geprueft_fassung: 4634c53ded47024f7fe8368a013438694e1e91b36b51d0a27255e627d6c61095
+  geprueft_fassung: c8643113a04ba3a6ee79876d222eb87a2ff36014ee7b5826d4b772d97667af9a
   typ: luecke
   beanstandung: Der für den Verbraucherschutz zentrale Regulierungsrahmen (Sonderkündigungsrecht, Informationspflichten der Versorger) wird in der Fundstelle nicht inhaltlich bestätigt.
   beleg: ''
@@ -163,7 +163,7 @@ entscheidungen:
 - slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
   befund_id: 30caa57be394afb62947
   befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
-  geprueft_fassung: 34fe4f8d97ab92287c0941c6248e86caac5339f5bae38b18307f0140f55634ae
+  geprueft_fassung: 42fe8dbb5cad5530f5a773e7ac956aeec9ce60d4ac016c314791b3175630fa4b
   typ: luecke
   beanstandung: Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg.
   beleg: ''
@@ -175,7 +175,7 @@ entscheidungen:
 - slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
   befund_id: 32a3ea879f2cf126b3a7
   befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
-  geprueft_fassung: 34fe4f8d97ab92287c0941c6248e86caac5339f5bae38b18307f0140f55634ae
+  geprueft_fassung: 42fe8dbb5cad5530f5a773e7ac956aeec9ce60d4ac016c314791b3175630fa4b
   typ: luecke
   beanstandung: Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist.
   beleg: ''
@@ -187,7 +187,7 @@ entscheidungen:
 - slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
   befund_id: c583efe1ce02df3ca2d7
   befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
-  geprueft_fassung: 34fe4f8d97ab92287c0941c6248e86caac5339f5bae38b18307f0140f55634ae
+  geprueft_fassung: 42fe8dbb5cad5530f5a773e7ac956aeec9ce60d4ac016c314791b3175630fa4b
   typ: luecke
   beanstandung: Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur für Januar 2026 (360 €) wird durch die allgemeine Übersichtsseite der Behörde nicht gestützt.
   beleg: ''
@@ -199,7 +199,7 @@ entscheidungen:
 - slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
   befund_id: 437b809ffbf41e5af434
   befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
-  geprueft_fassung: 367adf1a69ae5d7ef6a7f212e2fa0dd43739c13a0fb076e854dfc9b9d29828cb
+  geprueft_fassung: bd8a57c1e129bcdf5257f141e4cb4a898423b0052d33929ed7da92788715523d
   typ: luecke
   beanstandung: Keine Quelle für die Aussage, dass das Gesetz bei einem Tarifwechsel die Grundversorgung garantiert – regulatorischer Rahmen fehlt.
   beleg: ''
@@ -211,7 +211,7 @@ entscheidungen:
 - slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
   befund_id: 9fbacd9942c2dfa1447f
   befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
-  geprueft_fassung: 367adf1a69ae5d7ef6a7f212e2fa0dd43739c13a0fb076e854dfc9b9d29828cb
+  geprueft_fassung: bd8a57c1e129bcdf5257f141e4cb4a898423b0052d33929ed7da92788715523d
   typ: luecke
   beanstandung: Keine Quelle für die Behauptung, dass ein Grad weniger Raumtemperatur rund 6 % Energie einspart – Prozent‑Angabe fehlt.
   beleg: ''
@@ -223,7 +223,7 @@ entscheidungen:
 - slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
   befund_id: da30cbb5fbc8c801daf0
   befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
-  geprueft_fassung: 367adf1a69ae5d7ef6a7f212e2fa0dd43739c13a0fb076e854dfc9b9d29828cb
+  geprueft_fassung: bd8a57c1e129bcdf5257f141e4cb4a898423b0052d33929ed7da92788715523d
   typ: luecke
   beanstandung: Keine Quelle für die Angabe, dass durch Optimierungsmaßnahmen 10‑15 % Einsparungen realistisch sind – Prozent‑Wert unbelegt.
   beleg: ''
@@ -235,7 +235,7 @@ entscheidungen:
 - slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
   befund_id: db8a69f08dc0020adebd
   befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
-  geprueft_fassung: 367adf1a69ae5d7ef6a7f212e2fa0dd43739c13a0fb076e854dfc9b9d29828cb
+  geprueft_fassung: bd8a57c1e129bcdf5257f141e4cb4a898423b0052d33929ed7da92788715523d
   typ: luecke
   beanstandung: Keine Quelle für die Aussage, dass im Oktober 2026 bessere Gaspreise gelten – Preis‑Trend‑Behauptung fehlt.
   beleg: ''
@@ -247,7 +247,7 @@ entscheidungen:
 - slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
   befund_id: e834f4702e87194affe7
   befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
-  geprueft_fassung: 367adf1a69ae5d7ef6a7f212e2fa0dd43739c13a0fb076e854dfc9b9d29828cb
+  geprueft_fassung: bd8a57c1e129bcdf5257f141e4cb4a898423b0052d33929ed7da92788715523d
   typ: luecke
   beanstandung: Keine Quelle für die Angabe, dass ein Einfamilienhaus typischerweise 18.000 kWh/Jahr verbraucht – Verbrauchszahl ist unbelegt.
   beleg: ''
@@ -259,7 +259,7 @@ entscheidungen:
 - slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
   befund_id: 252413dcc16cea146beb
   befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
-  geprueft_fassung: c45ad866652c2eede02db130111a4d86ae922d23e185dda82dbaf56b0dbb93ff
+  geprueft_fassung: 7b33855c9cf6cba7be6f1d9314ba75af40a5a74a8a9cd4d6ffbe539e78d12571
   typ: luecke
   beanstandung: Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher angekündigt werden muss, ohne dafür eine Quelle anzugeben.
   beleg: ''
@@ -271,7 +271,7 @@ entscheidungen:
 - slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
   befund_id: 48a0a962046c8315270e
   befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
-  geprueft_fassung: c45ad866652c2eede02db130111a4d86ae922d23e185dda82dbaf56b0dbb93ff
+  geprueft_fassung: 7b33855c9cf6cba7be6f1d9314ba75af40a5a74a8a9cd4d6ffbe539e78d12571
   typ: praezision
   beanstandung: Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf den Anbieter überträgt und dafür ein höherer Startpreis üblich ist, fehlt eine konkrete Quelle und bleibt vage.
   beleg: ''
@@ -283,7 +283,7 @@ entscheidungen:
 - slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
   befund_id: 9326152f4d788cff56bd
   befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
-  geprueft_fassung: c45ad866652c2eede02db130111a4d86ae922d23e185dda82dbaf56b0dbb93ff
+  geprueft_fassung: 7b33855c9cf6cba7be6f1d9314ba75af40a5a74a8a9cd4d6ffbe539e78d12571
   typ: praezision
   beanstandung: Die Aussage, dass man „in der Regel“ zum Zeitpunkt der Preisänderung Sonderkündigungsrecht hat, ist unpräzise und wird nicht durch eine konkrete Regelung belegt.
   beleg: ''
@@ -295,7 +295,7 @@ entscheidungen:
 - slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
   befund_id: ab4d084fd367c8e4d518
   befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
-  geprueft_fassung: c45ad866652c2eede02db130111a4d86ae922d23e185dda82dbaf56b0dbb93ff
+  geprueft_fassung: 7b33855c9cf6cba7be6f1d9314ba75af40a5a74a8a9cd4d6ffbe539e78d12571
   typ: luecke
   beanstandung: Der angegebene durchschnittliche Gaspreis von 11,93 Cent/kWh für 2026 (laut BDEW) wird nicht durch eine Quelle belegt.
   beleg: ''
@@ -307,7 +307,7 @@ entscheidungen:
 - slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
   befund_id: d215addd22dea72c44df
   befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
-  geprueft_fassung: c45ad866652c2eede02db130111a4d86ae922d23e185dda82dbaf56b0dbb93ff
+  geprueft_fassung: 7b33855c9cf6cba7be6f1d9314ba75af40a5a74a8a9cd4d6ffbe539e78d12571
   typ: luecke
   beanstandung: Die Angabe, dass die Verbraucherzentrale etwa 6 % weniger Heizenergie pro Grad niedrigerer Raumtemperatur nennt, fehlt eine Quellenangabe.
   beleg: ''
@@ -352,7 +352,7 @@ entscheidungen:
 - slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
   befund_id: 045ff990e44a7035e9a0
   befund_fassung: 9bf7efbf6eb1d4a2fa70aaa34f3caf1a938955b3986bd93ebdad278ca2f11d21
-  geprueft_fassung: 2894010830f880aa5e16edc4befeb8b4e6f1a2cf1c82e0322859c1c0599221ae
+  geprueft_fassung: fe0f9844e76ca83cab97e2e240d43970d9908d44ac6d9ffefc80705f5540f781
   typ: luecke
   beanstandung: Es fehlt der Hinweis auf die behördliche Anlaufstelle für Anfragen und Beschwerden im Bereich Energie, die über die rein zivilrechtliche Meldung beim Vermieter hinausgeht.
   beleg: ''
@@ -363,7 +363,7 @@ entscheidungen:
 - slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
   befund_id: 8919c2d1145af782d17a
   befund_fassung: 9bf7efbf6eb1d4a2fa70aaa34f3caf1a938955b3986bd93ebdad278ca2f11d21
-  geprueft_fassung: 2894010830f880aa5e16edc4befeb8b4e6f1a2cf1c82e0322859c1c0599221ae
+  geprueft_fassung: fe0f9844e76ca83cab97e2e240d43970d9908d44ac6d9ffefc80705f5540f781
   typ: luecke
   beanstandung: Der Ratgeber empfiehlt Tarifvergleiche und Mängelmeldungen, lässt aber den für den Energiemarkt relevanten Regulierungsrahmen für den Verbraucherschutz (Schlichtungsverfahren) unerwähnt.
   beleg: ''
@@ -374,7 +374,7 @@ entscheidungen:
 - slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
   befund_id: c39938841291b1e9e140
   befund_fassung: 9bf7efbf6eb1d4a2fa70aaa34f3caf1a938955b3986bd93ebdad278ca2f11d21
-  geprueft_fassung: 2894010830f880aa5e16edc4befeb8b4e6f1a2cf1c82e0322859c1c0599221ae
+  geprueft_fassung: fe0f9844e76ca83cab97e2e240d43970d9908d44ac6d9ffefc80705f5540f781
   typ: praezision
   beanstandung: Die Markttransparenz und der Verbraucherschutz im Energiesektor werden durch das 'Verbraucher-Radar' der Bundesnetzagentur statistisch erfasst; dieser Kontext fehlt bei der Einordnung von
     Marktdaten.
@@ -386,7 +386,7 @@ entscheidungen:
 - slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
   befund_id: 0aa915539d57841e5014
   befund_fassung: ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c
-  geprueft_fassung: 123b7f5fbca065b87c48bb6b050a9b8d083aa8958c84afa0b3f955ca1c29073b
+  geprueft_fassung: c163b3a7e5e2278a90e85d5245097b15bfc8c0155026d71f1eb25abedb9f6f05
   typ: luecke
   beanstandung: Die Aussage, dass die Verbraucherzentrale empfiehlt, Boni im ersten Vergleich auszublenden, fehlt eine Quellenangabe.
   beleg: ''
@@ -398,7 +398,7 @@ entscheidungen:
 - slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
   befund_id: 5e1be48085014a836807
   befund_fassung: ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c
-  geprueft_fassung: 123b7f5fbca065b87c48bb6b050a9b8d083aa8958c84afa0b3f955ca1c29073b
+  geprueft_fassung: c163b3a7e5e2278a90e85d5245097b15bfc8c0155026d71f1eb25abedb9f6f05
   typ: luecke
   beanstandung: Der angegebene BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird nicht belegt.
   beleg: ''
@@ -410,7 +410,7 @@ entscheidungen:
 - slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
   befund_id: 6fdf31c3b68b6122bd0d
   befund_fassung: ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c
-  geprueft_fassung: 123b7f5fbca065b87c48bb6b050a9b8d083aa8958c84afa0b3f955ca1c29073b
+  geprueft_fassung: c163b3a7e5e2278a90e85d5245097b15bfc8c0155026d71f1eb25abedb9f6f05
   typ: praezision
   beanstandung: Die pauschale Formulierung, dass bei zentraler Heizung der Vermieter oder die Eigentümergemeinschaft den Anbieter wählt, ist zu ungenau und nicht belegt.
   beleg: ''
@@ -422,7 +422,7 @@ entscheidungen:
 - slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
   befund_id: c27c182c615bd7ca3b78
   befund_fassung: ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c
-  geprueft_fassung: 123b7f5fbca065b87c48bb6b050a9b8d083aa8958c84afa0b3f955ca1c29073b
+  geprueft_fassung: c163b3a7e5e2278a90e85d5245097b15bfc8c0155026d71f1eb25abedb9f6f05
   typ: luecke
   beanstandung: Der Artikel behauptet, dass laut Bundesnetzagentur Preisänderungen klar angekündigt und begründet sein müssen, liefert jedoch keinen Beleg dafür.
   beleg: ''
@@ -434,7 +434,7 @@ entscheidungen:
 - slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
   befund_id: e1e40e9bbbdd109df86e
   befund_fassung: ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c
-  geprueft_fassung: 123b7f5fbca065b87c48bb6b050a9b8d083aa8958c84afa0b3f955ca1c29073b
+  geprueft_fassung: c163b3a7e5e2278a90e85d5245097b15bfc8c0155026d71f1eb25abedb9f6f05
   typ: luecke
   beanstandung: Es wird angegeben, dass bei einer Preisänderung in der Regel ein Sonderkündigungsrecht besteht, ohne dafür eine Quelle zu nennen.
   beleg: ''
@@ -685,7 +685,7 @@ entscheidungen:
 - slug: 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig
   befund_id: 34e4bb2acfa235699da5
   befund_fassung: af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96
-  geprueft_fassung: 4c35ae8886523ef1f2f9e396d05404a2dd95693094654c2c23aa6425fdb1c06d
+  geprueft_fassung: a66296006c46fe193c168ec5a973b37bfc193e9c39959d5bea8d0cf9855c58ac
   typ: luecke
   beanstandung: Der Artikel erwähnt keinen regulatorischen Rahmen (z. B. Bundesnetzagentur) obwohl diese Institution für Strom‑ und Gasmärkte zuständig ist.
   beleg: ''
@@ -696,7 +696,7 @@ entscheidungen:
 - slug: 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig
   befund_id: 42b9d842341d892d42d0
   befund_fassung: af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96
-  geprueft_fassung: 4c35ae8886523ef1f2f9e396d05404a2dd95693094654c2c23aa6425fdb1c06d
+  geprueft_fassung: a66296006c46fe193c168ec5a973b37bfc193e9c39959d5bea8d0cf9855c58ac
   typ: luecke
   beanstandung: Angaben zu staatlichen Zuschüssen (bis zu 70 %) und deren Auswirkung auf den Eigenanteil fehlen eine Quellenangabe.
   beleg: ''
@@ -707,7 +707,7 @@ entscheidungen:
 - slug: 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig
   befund_id: 866d8b711dc2de369444
   befund_fassung: af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96
-  geprueft_fassung: 4c35ae8886523ef1f2f9e396d05404a2dd95693094654c2c23aa6425fdb1c06d
+  geprueft_fassung: a66296006c46fe193c168ec5a973b37bfc193e9c39959d5bea8d0cf9855c58ac
   typ: luecke
   beanstandung: Hinweis, dass ein spezieller Stromtarif für Wärmepumpen die Kosten senkt, wird nicht durch eine Quelle belegt.
   beleg: ''
@@ -718,7 +718,7 @@ entscheidungen:
 - slug: 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig
   befund_id: bd4c46a336f33a639f05
   befund_fassung: af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96
-  geprueft_fassung: 4c35ae8886523ef1f2f9e396d05404a2dd95693094654c2c23aa6425fdb1c06d
+  geprueft_fassung: a66296006c46fe193c168ec5a973b37bfc193e9c39959d5bea8d0cf9855c58ac
   typ: luecke
   beanstandung: Preisannahmen für Strom (30 ¢/kWh), Gas (10 ¢/kWh) und CO₂‑Aufschlag (5 ¢/kWh) werden ohne belegbare Daten präsentiert.
   beleg: ''
@@ -729,7 +729,7 @@ entscheidungen:
 - slug: 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig
   befund_id: e76768fdef3ef5afa026
   befund_fassung: af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96
-  geprueft_fassung: 4c35ae8886523ef1f2f9e396d05404a2dd95693094654c2c23aa6425fdb1c06d
+  geprueft_fassung: a66296006c46fe193c168ec5a973b37bfc193e9c39959d5bea8d0cf9855c58ac
   typ: luecke
   beanstandung: Die behauptete Amortisationsdauer von 10‑12 Jahren für eine Wärmepumpe basiert auf einer Modellrechnung ohne nachweisbare Quelle.
   beleg: ''
@@ -891,7 +891,7 @@ entscheidungen:
 - slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
   befund_id: 16b3b8584ff802803aa9
   befund_fassung: 6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5
-  geprueft_fassung: 94f08f62e84c8d92c2549a4229d42a749b374fd4e81fb2cc0d298e31d743f5cc
+  geprueft_fassung: 3542dedd52220209f49b8549d8278f5e4b249601b1e352acd2557bd65a6e0313
   typ: luecke
   beanstandung: Angaben zum Fremdwährungsentgelt von „fast zwei Prozent“ bei Zahlungen in fremder Währung fehlen jede belegbare Referenz.
   beleg: ''
@@ -903,7 +903,7 @@ entscheidungen:
 - slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
   befund_id: 7ff042b6fe804cdf101b
   befund_fassung: 6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5
-  geprueft_fassung: 94f08f62e84c8d92c2549a4229d42a749b374fd4e81fb2cc0d298e31d743f5cc
+  geprueft_fassung: 3542dedd52220209f49b8549d8278f5e4b249601b1e352acd2557bd65a6e0313
   typ: praezision
   beanstandung: Formulierungen wie „einige Anbieter ohne Auslandsgebühr gehören zu den besten Karten für Reisen“ sind pauschal und ohne messbare Daten unpräzise.
   beleg: ''
@@ -915,7 +915,7 @@ entscheidungen:
 - slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
   befund_id: bec83c4b814183fa1086
   befund_fassung: 6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5
-  geprueft_fassung: 94f08f62e84c8d92c2549a4229d42a749b374fd4e81fb2cc0d298e31d743f5cc
+  geprueft_fassung: 3542dedd52220209f49b8549d8278f5e4b249601b1e352acd2557bd65a6e0313
   typ: luecke
   beanstandung: Die Aussage, dass die kostenlose Sperr‑Notrufnummer 116 für alle Karten in Deutschland gilt, wird nicht durch eine Quelle gestützt.
   beleg: ''
@@ -927,7 +927,7 @@ entscheidungen:
 - slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
   befund_id: f9aff86b6eba71b153a6
   befund_fassung: 6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5
-  geprueft_fassung: 94f08f62e84c8d92c2549a4229d42a749b374fd4e81fb2cc0d298e31d743f5cc
+  geprueft_fassung: 3542dedd52220209f49b8549d8278f5e4b249601b1e352acd2557bd65a6e0313
   typ: luecke
   beanstandung: Die Angabe, dass Sollzinsen bei Teilzahlung zwischen 12 % und 20 % liegen, ist nicht mit einer Quelle belegt.
   beleg: ''
@@ -939,7 +939,7 @@ entscheidungen:
 - slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
   befund_id: fed9215b770ea4879eda
   befund_fassung: 6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5
-  geprueft_fassung: 94f08f62e84c8d92c2549a4229d42a749b374fd4e81fb2cc0d298e31d743f5cc
+  geprueft_fassung: 3542dedd52220209f49b8549d8278f5e4b249601b1e352acd2557bd65a6e0313
   typ: luecke
   beanstandung: Die Behauptung, dass eine gute Kreditkarte im Jahr nichts kostet (keine Jahres‑ und keine Fremdwährungsgebühr), wird ohne jegliche Quelle angegeben.
   beleg: ''

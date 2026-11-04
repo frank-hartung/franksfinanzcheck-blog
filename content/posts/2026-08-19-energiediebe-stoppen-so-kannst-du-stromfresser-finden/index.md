@@ -67,10 +67,6 @@ So [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetz
 
 Beginne deshalb mit Kühlschrank, Gefriergerät und [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/). Danach folgen Büro und Unterhaltung. Diese Reihenfolge spart Aufwand. Sie macht deine nächste Maßnahme sichtbar.
 
-![Merkkarte: Kernaussagen zu Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-merkkarte. svg)
-
-*Abbildung: Merkkarte zu „Energiediebe stoppen: So kannst du Stromfresser finden“ (eigene Darstellung aus diesem Beitrag).*
-
 ## Ein Messplan für den ersten Abend
 
 Such dir nur ein Gerät aus. Stecke das Messgerät ein. Schreib Uhrzeit und Zählerstand auf. Lass das Gerät normal laufen, so wie immer. Bei einem Kühlschrank wartest du mindestens einen Tag. So siehst du nicht nur einen kurzen Startwert, sondern den echten Bedarf.
@@ -175,10 +171,6 @@ Eco-Programme dauern oft länger, brauchen aber weniger Strom. Maschinen laufen 
 ### 3. Ersetzen
 
 Ein Ersatz lohnt sich, wenn der Jahresverbrauch hoch ist, die Nutzung real bleibt und sich der Kauf in klarer Zeit rechnet. Vergleiche immer Preis, Reparatur-Chance und zu erwartende Lebensdauer.
-
-![Gliederung des Beitrags: Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-ablauf. svg)
-
-*Abbildung: Gliederung zu „Energiediebe stoppen: So kannst du Stromfresser finden“ – 5 Stationen von „Dein Schnellstart – Energiediebe stoppen“ bis „Die Kostenformel, die du wirklich brauchst“ (eigene Darstellung).*
 
 ## Eine Messwoche ohne Zettelchaos
 

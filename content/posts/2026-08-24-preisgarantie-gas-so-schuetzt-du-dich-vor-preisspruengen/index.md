@@ -53,10 +53,6 @@ Wichtig wird es erst, wenn dein Anbieter den Preis wirklich ändert oder deine G
 💡 **Schnell-Tipp von FranksFinanzcheck:** Tarife kannst du über unseren Partner-Vergleich prüfen: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-![Merkkarte: Kernaussagen zu Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-merkkarte. svg)
-
-*Abbildung: Merkkarte zu „Gaspreisgarantie: Was bei Preiserhöhung hilft“ (eigene Darstellung aus diesem Beitrag).*
-
 ![Merkkarte: Kernaussagen zu Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-merkkarte.svg)
 
 *Abbildung: Merkkarte zu „Preisgarantie Gas: Was bei Preiserhöhung hilft“ (eigene Darstellung aus diesem Beitrag).*
@@ -161,10 +157,6 @@ Steigt der Arbeitspreis von 10,5 auf 12,0 Cent, beträgt der Unterschied 1,5 Cen
 Bei 18.000 kWh wären das für ein volles Jahr **270 €**; das ist ein Rechenbeispiel. Gilt der neue Preis nur für einen Teil des Abrechnungsjahres, musst du den Verbrauch zeitanteilig aufteilen. Gasverbrauch fällt nicht gleichmäßig an; der Winter wiegt stärker.
 
 Notiere deshalb zum Datum der Änderung den Zählerstand und übermittle ihn nach Vorgabe. So wird die Abgrenzung nachvollziehbarer.
-
-![Gliederung des Beitrags: Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-ablauf. svg)
-
-*Abbildung: Gliederung zu „Gaspreisgarantie: Was bei Preiserhöhung hilft“ – 5 Stationen von „Wenn ein neuer Preis im Brief steht“ bis „Preisänderung erhalten: diese fünf Punkte markieren“ (eigene Darstellung).*
 
 ## Wechsel ohne Versorgungslücke
 

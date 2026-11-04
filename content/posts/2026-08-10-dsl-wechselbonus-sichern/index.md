@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-10-13
+lastmod: 2026-11-04
 title: "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag"
 description: "So sicherst du den DSL-Wechselbonus: Rechne Startguthaben und Effektivpreis richtig, damit dein neuer Tarif wirklich günstig ist."
 date: 2026-08-10T10:20:09Z
@@ -42,10 +42,6 @@ DSL-Wechselbonus sichern im Check: Viele Haushalte zahlen für ihr Internet noch
 Ein Problem bleibt aber: Ein hoher Bonus auf dem Werbebanner sieht toll aus. Das macht den Tarif aber noch lange nicht zum Schnäppchen. Erst wenn du Bonus, Grundgebühr, Anschlusskosten und Laufzeit genau zusammenrechnest, siehst du die Wahrheit: Sparst du wirklich – oder zahlst du nur eine hübsch verpackte Startprämie selbst?
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
-
-![Merkkarte: Kernaussagen zu DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-merkkarte. svg)
-
-*Abbildung: Merkkarte zu „DSL-Wechselbonus sichern: So sparst du beim Internetvertrag“ (eigene Darstellung aus diesem Beitrag).*
 
 ![Merkkarte: Kernaussagen zu DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-merkkarte.svg)
 
@@ -151,7 +147,7 @@ Ein Wechsel lohnt sich im Oktober 2026 besonders oft, wenn:
 - dein aktueller Anbieter keine Treue-Rabatte gewährt,
 - die Verbindungsqualität nicht mehr deinen Anforderungen entspricht.
 
-Ein Wechsel senkt oft nicht nur den Preis. Er bringt dir bei gleichen Kosten oft auch mehr Tempo. Mehr dazu hier: [So findest du den richtigen DSL-Tarif für dein Zuhause](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/).
+Ein Wechsel senkt oft nicht nur den Preis. Oft bringt er dir bei gleichen Kosten auch mehr Tempo. Wie du den Tarif findest, der zu deinem Zuhause passt, steht in unserem Ratgeber: [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/).
 
 ## Wann ein hoher Bonus trotzdem die falsche Wahl ist
 
@@ -171,10 +167,6 @@ Ein Vorlauf von **ca. 3 bis 4 Monaten** ist ideal, um:. Das ist ein Modellwert.
 - sicherzustellen, dass es keine Versorgungslücke beim Internetzugang gibt.
 
 Viele der besten Cashback-Aktionen laufen zudem nur kurze Zeit. Wer früh startet, kann gezielt zuschlagen.
-
-![Gliederung des Beitrags: DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-ablauf. svg)
-
-*Abbildung: Gliederung zu „DSL-Wechselbonus sichern: So sparst du beim Internetvertrag“ – 5 Stationen von „Was ein DSL-Wechselbonus überhaupt ist?“ bis „Wann sich ein Anbieterwechsel besonders lohnt“ (eigene Darstellung).*
 
 ![Gliederung des Beitrags: DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-ablauf.svg)
 
@@ -197,7 +189,7 @@ Nach zwei Jahren hast du viel Geld bezahlt. Das Gerät gehört dir trotzdem nich
 - technischer Support und Vor-Ort-Austausch bei Defekt Priorität haben,
 - du dich nicht selbst um Updates und Konfiguration kümmern willst.
 
-### Kauf ist oft sinnvoll, wenn …
+### Ein Kauf rechnet sich für dich, wenn …
 
 - Du eine langfristige Ersparnis anstrebst,
 - du bereits einen leistungsstarken Router besitzt,
@@ -256,7 +248,7 @@ Das ist eine Ersparnis von **18 € im Monat** als Modellannahme. Auf zwei Jahr
 
 Diese Summe entlastet dein Budget spürbar – und du brauchst dafür nur wenige Klicks.
 
-## Was du vor dem Abschluss noch kurz prüfen solltest
+## Letzter Check vor deiner Unterschrift
 
 Geh vor dem letzten Klick diese Liste durch:
 

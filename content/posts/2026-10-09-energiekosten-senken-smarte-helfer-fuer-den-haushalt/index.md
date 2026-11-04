@@ -3,6 +3,7 @@ title: "Energiekosten senken: Smarte Helfer für den Haushalt"
 description: "Smart-Home zur Energiekostensenkung: Welche Geräte Frank nutzt und wie der 4K-Prüfpfad hilft. So sparst du jeden Monat bares Geld."
 
 date: 2026-10-16T18:36:02Z
+lastmod: 2026-11-04
 draft: false
 reserve_published: 2026-10-16
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
@@ -54,10 +55,6 @@ Welche Geräte sparen im Alltag wirklich messbar Strom? Ab wann rechnen sich die
 
 💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Stromtarife vergleichen**](/go/strom/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
-
-![Merkkarte: Kernaussagen zu Energiekosten senken: Smarte Helfer für den Haushalt](abbildung-merkkarte. svg)
-
-*Abbildung: Merkkarte zu „Energiekosten senken: Smarte Helfer für den Haushalt“ (eigene Darstellung aus diesem Beitrag).*
 
 ![Merkkarte: Kernaussagen zu Energiekosten senken: Smarte Helfer für den Haushalt](abbildung-merkkarte.svg)
 
@@ -136,10 +133,6 @@ Vermeide den Effekt des Over-Engineerings. Wer jedes kleinste Nachtlicht smart m
 Ein weiteres Risiko ist mangelnde Kompatibilität. Produkte von fünf Herstellern benötigen oft fünf verschiedene Apps. Das macht die Bedienung im Alltag zu umständlich. Setze lieber auf Standards wie Matter für eine zukunftssichere Lösung.
 
 Vernachlässige niemals die Sicherheit deiner Geräte. Billigprodukte ohne Updates sind oft ein Einfallstor für Hacker. Investiere in etablierte Marken mit langfristigem Support für ihre Hardware.
-
-![Gliederung des Beitrags: Energiekosten senken: Smarte Helfer für den Haushalt](abbildung-ablauf. svg)
-
-*Abbildung: Gliederung zu „Energiekosten senken: Smarte Helfer für den Haushalt“ – 5 Stationen von „Warum steigen die Energiekosten trotz Sparbemühungen oft weiter?“ bis „Schritt-für-Schritt: So rüstest du deinen Haushalt auf“ (eigene Darstellung).*
 
 ![Gliederung des Beitrags: Energiekosten senken: Smarte Helfer für den Haushalt](abbildung-ablauf.svg)
 

@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-10-13
+lastmod: 2026-11-04
 title: "DSL-Tarif prüfen: Effektivpreis statt Lockpreis"
 description: "Internet & DSL-Update: Prüfe Bedarf, Effektivpreis und Wechseloptionen, bevor du für zu viel Leistung oder einen alten Vertrag zahlst."
 date: 2026-10-07T01:34:23Z
@@ -268,7 +268,7 @@ Das vielleicht wichtigste Ergebnis dieses Updates lautet: **Ein guter Internetve
 
 Wenn du mehr dazu suchst, helfen dir diese beiden Ratgeber besonders:
 
-- [So findest du den richtigen DSL‑Tarif für dein Zuhause](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/)
+- [So findest du den richtigen DSL‑Tarif für dein Zuhause](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/)
 - [Internet & DSL wechseln: Praxis‑Tipps für den Anbieterwechsel](../../posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/)
 
 ## Welche eine Frage vor mehr Mbit oft reicht

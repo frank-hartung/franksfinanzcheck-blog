@@ -137,7 +137,26 @@ Report, später Rebase gefahrlos). Kein Schutz abgeschaltet.
 versiegelte Workflow-/Lock-Dateien) – nur seine Content-Dateien wurden
 übernommen und geprüft. Die Uhr-Probe auf `main` ist grün (5180 Tests).
 
-## 9 · Nachweis (lokal, 04.11.2026)
+## 9 · Nachtrag: Bot-Schaden auf `main` gleich mitgeheilt
+
+Beim Rebase auf das weitergewanderte `main` zeigten Regression und
+Scorecard frischen Bot-Schaden (SEO-Heiler/Textbatterie vom 04.11.):
+
+- **19 Dateien** trugen doppelte Bildblöcke mit defekter Referenz
+  `abbildung-merkkarte. svg` (Leerzeichen) – entfernt, die korrekten
+  Blöcke bleiben.
+- **7 Dateien** verlinkten auf Slugs mit Leerzeichen
+  (`…-zu Hause/…` statt `…-zuhause/…`) – URLs repariert.
+- **Neues kritisches Einzigartigkeits-Paar** (DSL-Wechselbonus ↔
+  DSL-Praxis-Tipps, 8 geteilte Phrasen aus identischen Bot-Sätzen und
+  -Überschriften): im Wechselbonus-Artikel eigen formuliert,
+  defekte Link-URL dabei repariert → wieder 0 kritisch.
+- **Doppelte Formel-Sätze** („Darum geht es hier konkret …“ ×2,
+  „Genau das ist der Hebel …“ ×2) im Gewohnheiten-Artikel entfernt.
+- Entscheidungen, Fachprüfungs-Register, Akte und Scorecard danach
+  auf dem endgültigen Textstand neu gebunden bzw. erzeugt.
+
+## 10 · Nachweis (lokal, 04.11.2026)
 
 - `release_scorecard.py --live --streng`: **72/76, 0 blockiert, Exit 0**
 - `faktenfrische_befund_ledger.py --wache`: grün, jeder offene Befund
