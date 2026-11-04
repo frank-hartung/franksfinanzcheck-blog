@@ -106,47 +106,14 @@ python3 scripts/belegketten_wache.py --nur-hochrisiko --report
 Zustände: `ok` (HTTP 200 unter genau der zitierten Adresse), `umgeleitet`
 (200, aber andere Adresse – Inhalt gegen das Zitat prüfen), `tot`
 (definitives 4xx) und `unklar` (Netzfehler, 5xx, 403, 429). `unklar` blockiert
-im Diagnosemodus nicht, `tot` schon. Bei `tot` oder `umgeleitet` gilt:
-**nicht** einfach die URL austauschen, sondern die neue Seite abrufen und
-prüfen, ob sie die zitierte Aussage noch trägt; erst dann URL, Titel und
-Abrufdatum im Frontmatter korrigieren und neu versiegeln.
+nicht, `tot` schon. Bei `tot` oder `umgeleitet` gilt: **nicht** einfach die URL
+austauschen, sondern die neue Seite abrufen und prüfen, ob sie die zitierte
+Aussage noch trägt; erst dann URL, Titel und Abrufdatum im Frontmatter
+korrigieren und neu versiegeln.
 
-Der werktägliche Workflow fährt dieselbe Wache mit `--strict
---require-complete` und schließt das Arbeits-Ticket erst, wenn **beide**
-Prüfungen grün sind: Gate-Queue leer **und** kein einziger Abrufbefund – also
-weder eine tote noch eine unklare oder umgeleitete Quelle.
-
-## Wenn `gesetze-im-internet.de` den Runner blockiert (seit 30.10.2026, repariert 03.11.2026, #1024)
-
-GitHub-Actions-Runner werden von `www.gesetze-im-internet.de` häufig mit einem
-TCP-Timeout abgewiesen. Ein Netzfehler ist **kein** Beleg dafür, dass eine Norm
-verschwunden ist; er darf aber auch nicht als `ok` durchgehen. Für kanonische
-GII-Adressen prüft die Wache deshalb ersatzweise den täglich synchronisierten
-Bundesrechts-Spiegel `Gesetze-fuer-KI/bundesrecht`:
-
-1. Der Direktabruf läuft immer zuerst. Nur bei `unklar` (nie bei einem direkten
-   404) greift der Ersatzweg.
-2. Der YAML-Kopf der Spiegeldatei muss exakt
-   `quelle: https://www.gesetze-im-internet.de/<slug>/` ausweisen; die Norm
-   muss als aktive Überschrift vorhanden sein. Fehlt sie oder ist sie
-   `(weggefallen)`, ist der Beleg `tot`.
-3. Ist auch der Spiegel nicht auswertbar, bleibt der Befund fail-closed
-   `unklar` – mit sichtbarem Grund im Bericht. Die Queue bleibt dann offen.
-
-**Grenze der Aussage:** Ein `ok` über den Spiegel bestätigt ausschließlich den
-Normbestand. Es ist keine Inhaltsprüfung des Artikels, kein Abruf der amtlichen
-Seite und keine fachliche Freigabe. Der Bericht führt jede Ersatzprüfung mit
-Artikel, Quellen-ID, zitierter Adresse und geprüfter Spiegeldatei einzeln auf;
-die Zusammenfassung zählt sie getrennt.
-
-**Transportvertrag (#1024):** `net_safety.sicherer_abruf_status` liefert zwei
-Werte (Status, End-URL), `net_safety.sicherer_abruf` drei (Status, Köpfe,
-Bytes). Der Spiegel-Adapter hatte bis zum 03.11.2026 nur zwei entpackt; jeder
-Ersatzabruf endete deshalb in einem geschluckten `ValueError` und die fünf
-GII-Zitate blieben dauerhaft `unklar`. Der Vertrag ist heute Teil des
-`--selftest` und der Unit-Tests: Ein Test injiziert 2-Tupel für die Logik,
-weitere Tests fahren den **echten** Adapter gegen ein 3-Tupel. Wer den
-Transport ändert, sieht es sofort rot.
+Der werktägliche Workflow fährt dieselbe Wache und schließt das Arbeits-Ticket
+erst, wenn **beide** Prüfungen grün sind (Gate-Queue leer **und** keine tote
+Belegkette).
 
 ## Was die Freigabe automatisch bricht
 
@@ -226,18 +193,68 @@ python3 scripts/editorial_review_gate.py --published --strict
 # Belegketten-Wache (nur lesend; Exit 1 nur bei definitiv toter Quelle)
 python3 scripts/belegketten_wache.py --nur-hochrisiko --report --strict
 python3 scripts/belegketten_wache.py --selftest
-
-# Beide Hälften der Queue lokal prüfen (Gate + Wache inkl. Transportvertrag)
-npm run test:redaktion:ymyl
-
-# Scharfer Lauf, wie ihn der Workflow für die Ticket-Erledigung verlangt
-python3 scripts/belegketten_wache.py --nur-hochrisiko --report --strict --require-complete
 ```
 
+## Exit 1 oder Exit 2 – der Unterschied ist der ganze Punkt (04.11.2026, #1024)
+
+Die Wache meldet zwei grundverschiedene Dinge, und sie wurden bis zum 3.11.
+verwechselt:
+
+| Exit | Aussage | Wer ist zuständig |
+|---|---|---|
+| `0` | alle Quellen belegt | – |
+| `1` | ein Befund: Quelle tot, umgeleitet oder (mit `--require-complete`) unklar | Redaktion |
+| `2` | **Werkzeugfehler**: Tippfehler, Typ-, Attribut- oder Vertragsfehler im Code | Technik |
+
+Was passiert war: `sicherer_abruf()` liefert `(status, kopf, roh)` – ein
+3-Tupel. Die Funktion `abruf_gii_spiegel_http()` entpackte es als 2-Tupel und
+bekam `ValueError: too many values to unpack (expected 2)`. Ein
+`except Exception:` machte daraus „Quelle unklar“. Ergebnis: alle vier
+Bundesrechts-Zitate der Hochrisiko-Artikel standen dauerhaft als unprüfbar in
+der Queue, `--require-complete` blockierte das Schließen des Tickets – und die
+Fehlermeldung behauptete, das Netz sei schuld.
+
+Heute gilt:
+
+- **Netzfehler sind eine abgeschlossene Liste** (`NETZ_AUSNAHMEN` in
+  `scripts/belegketten_wache.py`). Nur sie dürfen einen Abruf „unklar“ machen.
+  Alles andere schlägt mit Exit 2 durch.
+- **Der Messweg ist dokumentiert**: `gesetze-im-internet.de` weist die
+  Runner-Netze ab, der tägliche Bundesrecht-Spiegel
+  `Gesetze-fuer-KI/bundesrecht` übernimmt dieselben amtlichen Texte. Die
+  Ablageordnung (`vvg_2008` → `vv/`, `bgb` → `bg/`) steht in **einer**
+  Funktion, nicht als stilles Wissen im Code.
+- **Zweistufiger Abruf:** `raw.githubusercontent.com` zuerst,
+  `api.github.com` (mit `Accept: application/vnd.github.raw`) als Rückfall –
+  der zweite Weg liefert auch `bg/bgb.md` (1,7 MB) vollständig und nimmt den
+  `GH_TOKEN` für das Kontingent an. Der Token geht **nur** an `api.github.com`.
+- **Der Messweg wird live bewiesen**, nicht geglaubt:
+
+```bash
+python3 scripts/belegketten_wache.py --probe-bundesrecht
+```
+
+  Die Probe ruft die vier echten Zitate aus #1024 über den Spiegel ab und
+  meldet je Zitat Status und Normbestand. Sie ist **kein Gate** (sie braucht
+  Netz und ist damit nicht reproduzierbar); der YMYL-Workflow fährt sie als
+  eigenen, unverbindlichen Schritt und schreibt den Befund in die
+  Lauf-Zusammenfassung.
+
+Ein dauerhaft roter Probebefund heißt: der Ausweichweg trägt nicht mehr –
+dann ist das ein Betriebssignal und **kein** Grund, ein Quellen-Urteil zu
+fällen. Der Selbsttest der Wache steht deshalb im vertraglichen Minimum
+(`GUARDS` in `scripts/governance_contract.py`, Regel C6) und läuft im
+Wochenlauf vor jeder Messung.
+
+Jeder Ersatzbefund trägt zusätzlich `pruefpfad` und `spiegel_url`; ein
+fail-closed `unklar` nennt im `hinweis` auch die aufgetretene Netzfehlerklasse.
+Programmierfehler werden davon ausdrücklich nicht abgefangen. Der Markdown-
+und JSON-Bericht trennt **direkt erreichbare** Quellen von **über den Spiegel
+bestätigten Normen** (`spiegel_bestaetigt`). Letzteres belegt nur den aktiven
+Normbestand, weder die Aussage des Artikels noch eine redaktionelle Freigabe.
+
 Der werktägliche Workflow `.github/workflows/redaktionelle-ymyl-pruefung.yml`
-pflegt genau ein GitHub-Arbeitsticket statt Einzelwarnungen zu streuen. Er
-prüft vor der Messung das Regelwerk beider Hälften und schließt das Ticket
-nur, wenn Gate-Zahl **und** Wachen-Ergebnis grün sind. Neue
+pflegt genau ein GitHub-Arbeitsticket statt Einzelwarnungen zu streuen. Neue
 Publikationskandidaten werden unabhängig davon im `publish_gate.py` sofort
 fail-closed gehalten; Hochrisiko-Entwürfe werden nicht gelöscht, sondern als
 manueller Review-Hold erhalten.

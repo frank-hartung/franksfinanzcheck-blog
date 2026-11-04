@@ -1,1 +1,14 @@
-{}
+{
+  "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": {
+    "datei_sha256": "48f0721c9872533a8f7a49d5b17b6a968a6caa4d535d642d5f64767a07629eaf",
+    "first": "2026-11-04T11:40:57Z",
+    "grund": "Faktenfrische nicht bestanden: 0b564f460c41218244bd (luecke): Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.; 3ad2eefed314eb172c26 (luecke): Die Aussag",
+    "hits": 1,
+    "laeufe": [
+      "run:41819864260"
+    ],
+    "last": "2026-11-04T11:40:57Z",
+    "lauf": "run:41819864260",
+    "signatur": "faktenfrische nicht bestanden: <n>b<n>f<n>c<n>bd (luecke): der artikel behauptet, dass heizöl‑preise ihr tief meist in den monaten januar und februar erreichen, ohne dafür eine quelle anzugeben.; <n>a"
+  }
+}

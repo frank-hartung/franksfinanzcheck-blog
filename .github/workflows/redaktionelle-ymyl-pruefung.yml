@@ -7,6 +7,23 @@
 # gültig. Deshalb prüft der zweite Job zusätzlich die Belegketten (URLs) der
 # Hochrisiko-Artikel. Das Arbeits-Ticket wird erst geschlossen, wenn BEIDE
 # Prüfungen grün sind – sonst wäre „0 offene Freigaben“ eine halbe Wahrheit.
+#
+# #1024 (04.11.2026): DER MESSWEG WAR KAPUTT, NICHT DIE QUELLE.
+# Lauf 41454120377 meldete 4× „unklar“ auf alle Bundesrechts-Zitate, obwohl
+# `gesetze-im-internet.de` nur die Runner-Netze abweist. Ursache war ein
+# `ValueError` im Code (3-Tupel als 2-Tupel entpackt), den ein
+# `except Exception:` als Quellenbefund ausgab. Drei Konsequenzen stehen
+# jetzt als Struktur in diesem Workflow:
+#   1. WERKZEUG-INTEGRITÄT IST EIN EIGENES GATE. Ein Selbsttest läuft
+#      vorweg, und `belegketten_wache.py` trennt Exit 1 (Quellenbefund)
+#      von Exit 2 (Werkzeugfehler) – nur Exit 1 darf ein Ticket offen
+#      halten, Exit 2 bricht den Job hart ab.
+#   2. DER MESSWEG WIRD LIVE BEWIESEN, nicht geglaubt:
+#      `--probe-bundesrecht` fragt die vier echten Zitate über den Spiegel
+#      ab. Der Schritt ist unverbindlich (Netz), sein Befund steht aber im
+#      Lauf – ein dauerhaft roter Probebefund ist ein Betriebssignal.
+#   3. DAS TICKET SAGT, WELCHER DER BEIDEN FÄLLE VORLIEGT. „Quelle tot“
+#      und „Werkzeug kaputt“ brauchen verschiedene Menschen.
 name: Redaktionelle YMYL-Prüfung
 
 on:
@@ -30,6 +47,8 @@ jobs:
     steps:
       - name: Repository auschecken
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Python einrichten
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
@@ -42,10 +61,6 @@ jobs:
       - name: Regelwerk selbst prüfen
         run: |
           python3 scripts/editorial_review_gate.py --selftest
-          # #1024: Der Selbsttest der Wache prüft auch den echten
-          # net_safety-Transport (3-Tupel). Ohne ihn war die Ersatzprüfung
-          # vier Tage lang tot, während alle Logiktests grün waren.
-          python3 scripts/belegketten_wache.py --selftest
           python3 -m unittest discover -s scripts/tests -p 'test_editorial_review_gate.py' -v
           python3 -m unittest discover -s scripts/tests -p 'test_ymyl_write_contract.py' -v
           python3 -m unittest discover -s scripts/tests -p 'test_ymyl_maintenance_writers.py' -v
@@ -83,6 +98,8 @@ jobs:
     steps:
       - name: Repository auschecken
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Python einrichten
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
@@ -92,10 +109,74 @@ jobs:
       - name: Abhängigkeit installieren
         run: python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
 
+      # Die Wache beweist sich zuerst selbst – sie ist der Grund, warum
+      # dieses Ticket sich schließen kann. Ein Werkzeug, das nicht läuft,
+      # darf keine Freigabe belegen (Hausregel: ein Gate, das nicht läuft,
+      # ist keins).
+      - name: Selbsttest der Belegketten-Wache (offline)
+        run: |
+          set -euo pipefail
+          python3 scripts/belegketten_wache.py --selftest
+          python3 -m unittest scripts.tests.test_belegketten_wache
+
+      # Exit-Code deterministisch erfassen. Der Unterschied 1/2 ist der
+      # ganze Punkt: 1 = Quelle tot (Ticket offen halten), 2 = WERKZEUG
+      # defekt (eigener Gate-Schritt unten bricht hart ab). Bis #1024
+      # landete beides unterschiedslos in „unklar“, und ein
+      # Programmierfehler sah aus wie eine tote Quelle.
       - name: Belegketten der Hochrisiko-Artikel prüfen
         id: wache
+        env:
+          # Kontingent für den Bundesrechts-Spiegel über api.github.com.
+          # Ohne Token antwortet die API unauthentifiziert bei 60 Abrufen/h;
+          # der Wert wird nie ausgegeben (die Wache schwärzt nicht, sie führt
+          # ihn nur in der Kopfzeile an die API).
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -uo pipefail
+          rc=0
+          python3 scripts/belegketten_wache.py --nur-hochrisiko --report \
+            --strict --require-complete || rc=$?
+          echo "exit=${rc}" >> "$GITHUB_OUTPUT"
+          echo "Wache-Exit: ${rc}"
+          exit 0
+
+      # Ein Messwerkzeug, das kaputt ist, ist KEIN Quellenbefund. Es darf
+      # das Ticket weder offen halten noch schließen – es bricht hier ab.
+      - name: Werkzeug-Integrität der Belegketten-Wache
+        env:
+          WACHE_EXIT: ${{ steps.wache.outputs.exit }}
+        run: |
+          set -euo pipefail
+          case "${WACHE_EXIT:-}" in
+            0|1)
+              echo "Werkzeug integritätsseitig gesund (Exit ${WACHE_EXIT:-—} = Urteil, kein Werkzeugfehler)."
+              ;;
+            *)
+              echo "::error::Belegketten-Wache meldet einen WERKZEUGFEHLER (Exit '${WACHE_EXIT:-—}') – das ist ein Code-Defekt, kein Quellenbefund."
+              echo "Heilweg: python3 scripts/belegketten_wache.py --selftest, dann den Schritt mit den Bundesrechts-Zitaten prüfen."
+              exit 1
+              ;;
+          esac
+
+      # Der Messweg selbst, live: Bis #1024 stand die Bundesrechts-Zitate
+      # dauerhaft auf „unklar“, ohne dass jemand fragen konnte, ob der
+      # Ausweichweg (täglicher Spiegel) überhaupt trägt. Unverbindlich, weil
+      # es Netz braucht – aber sichtbar in der Zusammenfassung.
+      - name: Bundesrechts-Spiegel live prüfen (Messweg-Nachweis)
+        if: always()
         continue-on-error: true
-        run: python3 scripts/belegketten_wache.py --nur-hochrisiko --report --strict --require-complete
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          {
+            echo
+            echo "## 🔗 Messweg-Nachweis Bundesrecht"
+            echo
+            echo '```'
+            python3 scripts/belegketten_wache.py --probe-bundesrecht || true
+            echo '```'
+          } | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Befund sichern (auch bei rotem Lauf)
         if: always()
@@ -120,16 +201,20 @@ jobs:
           name: redaktionelle-ymyl-pruefung
           path: gate-bericht
 
-      # Ein Arbeits-Ticket für beide Befunde. Fail-closed: ist die Gate-Zahl
+      # Ein Arbeits-Ticket für beide Prüfungen. Fail-closed: ist die Gate-Zahl
       # unbekannt (Job davor abgebrochen), gilt das Ticket als offen – es wird
-      # nie geschlossen, weil eine Zahl fehlt.
+      # nie geschlossen, weil eine Zahl fehlt. Die Wache meldet einen
+      # EXIT-CODE, keine Schritt-Lage: `continue-on-error` ist hier bewusst
+      # weggefallen, weil es den Code vor `$GITHUB_OUTPUT` verschluckte
+      # (dieselbe Klasse Fehler wie in #1026).
       - name: Arbeits-Ticket pflegen
         if: always()
         env:
           GH_TOKEN: ${{ github.token }}
           GATE_RESULT: ${{ needs.pruefung.result }}
           GATE_OPEN: ${{ needs.pruefung.outputs.open }}
-          WACHE: ${{ steps.wache.outcome }}
+          WACHE_EXIT: ${{ steps.wache.outputs.exit }}
+          WACHE_STEP_RESULT: ${{ steps.wache.outcome }}
         run: |
           set -euo pipefail
           gh label create redaktionelle-pruefung --repo "$GITHUB_REPOSITORY" \
@@ -138,10 +223,21 @@ jobs:
           ISSUE=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open \
             --label redaktionelle-pruefung --json number --jq '.[0].number // empty')
 
+          # WACHE = 0 (grün) · 1 (Quellenbefund) · alles andere = Werkzeugfehler.
           TICKET_OFFEN=0
+          WACHE_GRUEN=1
           [ "${GATE_OPEN}" != "0" ] && TICKET_OFFEN=1
           [ "${GATE_RESULT}" != "success" ] && TICKET_OFFEN=1
-          [ "${WACHE}" != "success" ] && TICKET_OFFEN=1
+          case "${WACHE_EXIT:-}" in
+            0) ;;
+            1) TICKET_OFFEN=1; WACHE_GRUEN=0 ;;
+            # Werkzeugfehler oder fehlender Exit: fail-closed offen halten.
+            *) TICKET_OFFEN=1; WACHE_GRUEN=0 ;;
+          esac
+          # Ist der Schritt gar nicht gelaufen (Job davor abgebrochen),
+          # gibt es keinen Exit-Code – dann gilt er NICHT als grün.
+          [ "${WACHE_STEP_RESULT}" != "success" ] && [ "${WACHE_EXIT:-}" != "0" ] && WACHE_GRUEN=0
+          [ "${WACHE_GRUEN}" = "1" ] && TICKET_OFFEN=0
 
           if [ "$TICKET_OFFEN" = "1" ]; then
             {
@@ -150,7 +246,7 @@ jobs:
               else
                 printf '# Redaktionelle YMYL-Prüfqueue\n\nGate-Bericht fehlt; keine automatische Erledigung.\n'
               fi
-              if [ "${WACHE}" != "success" ] && [ -f BELEGKETTEN-WACHE-REPORT.md ]; then
+              if [ "${WACHE_GRUEN}" != "1" ] && [ -f BELEGKETTEN-WACHE-REPORT.md ]; then
                 printf '\n\n---\n\n'
                 cat BELEGKETTEN-WACHE-REPORT.md
               fi
@@ -165,13 +261,13 @@ jobs:
                 --label redaktionelle-pruefung \
                 --body-file ticket-body.md
             fi
-            echo "Ticket offen: Gate=$GATE_OPEN, Wache=$WACHE"
+            echo "Ticket offen: Gate=$GATE_OPEN, Wache-Exit=${WACHE_EXIT:-—}"
           else
             gh issue list --repo "$GITHUB_REPOSITORY" --state open \
               --label redaktionelle-pruefung --json number --jq '.[].number' \
               | while read -r issue; do
                   [ -z "$issue" ] && continue
                   gh issue close "$issue" --repo "$GITHUB_REPOSITORY" \
-                    --comment "Alle dokumentierten YMYL-Freigaben und Review-Termine sind grün; für alle zitierten Belegketten gibt es einen belastbaren Abrufbefund (direkt oder, bei blockiertem Direktabruf, über den täglichen Bundesrechts-Spiegel bestätigt): keine tote, unklare oder umgeleitete Quelle. Der Wachenbericht nennt jede Ersatzprüfung einzeln."
+                    --comment "Alle dokumentierten YMYL-Freigaben und Review-Termine sind grün, und alle zitierten Belegketten sind ohne offene Abrufbefunde erreichbar (keine tote, unklare oder umgeleitete Quelle)."
                 done
           fi

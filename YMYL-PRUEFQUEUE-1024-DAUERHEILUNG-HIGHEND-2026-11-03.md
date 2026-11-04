@@ -16,6 +16,17 @@
 > Bericht verankert. **Keine** fachliche Freigabe wurde neu erfunden, **kein**
 > Gate abgeschwächt, **kein** Ticket von Hand geschlossen.
 
+> **Integrations-Nachtrag vom 04.11.2026:** Während der CI von PR #1057 wurde
+> die parallel entstandene Heilung aus PR #1055 auf `main` übernommen. Der
+> Endstand verwendet deren zweistufigen Raw/API-Abruf, Transienten-Retry,
+> Token-Isolierung, abgeschlossene Netzfehlerliste und Workflow-Härtung. Dieser
+> Bericht dokumentiert weiterhin den ursprünglich untersuchten Defekt und die
+> Messung; die Zahlen in Abschnitt 5 beziehen sich auf den Stand vor dieser
+> Integration. Im Endstand bleiben davon die Diagnosefelder, die getrennte
+> Berichtszählung und die Vollsuite-/Uhrproben-Heilung erhalten. Aktuell
+> nachgewiesen: 30 Belegketten-Tests, 54 Belegketten-/Workflow-Verbundtests und
+> erneut 34/34 Hochrisiko-Quellen mit fünf echten Spiegelbestätigungen.
+
 ---
 
 ## 1. Ausgangslage: Was das Ticket wirklich meldet

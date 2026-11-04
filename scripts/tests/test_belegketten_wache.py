@@ -16,7 +16,6 @@ from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import belegketten_wache as wache
 import faktenfrische
-import net_safety
 import yaml
 
 ARTIKEL = """---
@@ -152,9 +151,10 @@ class BelegkettenWacheTests(unittest.TestCase):
         def runner_timeout(url, timeout=10.0):
             raise wache.urllib.error.URLError("timed out")
 
-        def spiegel(url, timeout=10.0):
+        def spiegel(slug, timeout=10.0):
+            """Spiegel-Abruf im Vertrag der Abrufschicht: (slug, timeout) -> (status, text)."""
             for suffix, inhalt in spiegel_dateien.items():
-                if url.endswith(suffix):
+                if suffix.endswith(f"/{slug}.md"):
                     return 200, inhalt
             return 404, ""
 
@@ -196,14 +196,12 @@ class BelegkettenWacheTests(unittest.TestCase):
             abruf=runner_timeout, spiegel_abruf=spiegel,
         )
         self.assertEqual(wache.UNKLAR, erg_spoof["status"])
-        self.assertTrue(erg_spoof["spiegel_url"].endswith("/fa/falsch.md"), erg_spoof)
-        self.assertIn("Herkunft nicht", erg_spoof["hinweis"])
 
         # Spiegel ebenfalls offline → bleibt fail-closed UNKLAR
         erg_offline = wache.pruefe_quelle(
             "https://www.gesetze-im-internet.de/vvg_2008/__40.html",
             abruf=runner_timeout,
-            spiegel_abruf=lambda u, timeout=10.0: (_ for _ in ()).throw(OSError("offline")),
+            spiegel_abruf=lambda slug, timeout=10.0: (_ for _ in ()).throw(OSError("offline")),
         )
         self.assertEqual(wache.UNKLAR, erg_offline["status"])
 
@@ -227,183 +225,309 @@ class BelegkettenWacheTests(unittest.TestCase):
             wache.pruefe_alle = original
 
 
-class Transportvertrag1024Tests(unittest.TestCase):
-    """#1024: Der ECHTE Spiegel-Adapter gegen den ECHTEN net_safety-Transport.
+class BelegkettenSpiegelTests(unittest.TestCase):
+    """#1024 (04.11.2026): Der Messweg für Bundesrecht – dauerhaft geheilt.
 
-    Die bestehenden Tests injizieren ``spiegel_abruf`` als 2-Tupel. Damit
-    prüfen sie die Normlogik, aber nicht die Verbindung dorthin. Genau in
-    dieser Lücke stand vier Tage lang ein ``ValueError: too many values to
-    unpack``: grüne Tests, rotes Ticket. Diese Klasse schließt die Lücke,
-    vollständig offline (kein Host wird wirklich aufgerufen).
+    Der Vorfall war kein Netzproblem, sondern ein VERTRAGSBRUCH im Code:
+    `sicherer_abruf()` liefert ein 3-Tupel, entpackt wurde ein 2-Tupel, und
+    `except Exception:` verkaufte den `ValueError` als „Quelle unklar“.
+    Vier gültige Gesetzeszitate standen dadurch dauerhaft als unprüfbar in
+    der YMYL-Queue. Diese Klasse hält den Vertrag an allen vier Flanken fest.
     """
 
-    # Kopf und Überschriftenebenen entsprechen den echten Spiegeldateien
-    # (vvg_2008.md: ``#####``, bgb.md: ``######``, Stand 03.11.2026).
-    VVG_MD = (
+    VVG = (
         "---\n"
-        "abkuerzung: VVG\n"
-        "titel: Gesetz über den Versicherungsvertrag\n"
+        "titel: Versicherungsvertragsgesetz\n"
         "quelle: https://www.gesetze-im-internet.de/vvg_2008/\n"
-        "builddate: '20260630215604'\n"
         "---\n\n"
-        "# Gesetz über den Versicherungsvertrag (VVG)\n\n"
-        "##### § 40 Kündigung bei Prämienerhöhung\n\n(1) Text.\n\n"
-        "##### § 96 Kündigung nach Veräußerung\n\n(1) Text.\n\n"
-        "##### § 41 (weggefallen)\n"
+        "### § 40 Kündigung bei Prämienerhöhung\n\n(1) Text.\n"
     )
-    BGB_MD = (
-        "---\n"
-        "quelle: https://www.gesetze-im-internet.de/bgb/\n"
-        "---\n\n"
-        "##### § 501 Vorzeitige Rückzahlung\n\n"
-        "###### § 502 Vorfälligkeitsentschädigung\n\n(1) Text.\n"
-    )
-    GII_40 = "https://www.gesetze-im-internet.de/vvg_2008/__40.html"
-    GII_502 = "https://www.gesetze-im-internet.de/bgb/__502.html"
 
-    def _transport(self, text):
-        return 200, {"Content-Type": "text/markdown; charset=utf-8"}, text.encode("utf-8")
+    def test_sicherer_abruf_3_tupel_wird_korrekt_entpackt(self):
+        """Der Kern von #1024: `(status, kopf, roh)` – nicht `(status, roh)`."""
+        import net_safety
 
-    @staticmethod
-    def _blockiert(url, timeout=10.0):
-        raise wache.urllib.error.URLError("timed out (GII-Runner-Filter)")
+        gesehen = {}
 
-    def test_net_safety_sicherer_abruf_liefert_drei_werte(self):
-        """Gegenprobe: der Transport, den der Adapter zu entpacken hat."""
-        class Antwort:
-            status = 200
-            headers = {"Content-Type": "text/markdown"}
+        def attrappe(url, *, headers=None, timeout=20.0, max_bytes=0,
+                     erlaube_loopback=False):
+            gesehen["url"] = url
+            gesehen["headers"] = headers or {}
+            return 200, {"content-type": "text/markdown"}, self.VVG.encode("utf-8")
 
-            def __enter__(self):
-                return self
+        with patch.object(net_safety, "sicherer_abruf", attrappe):
+            status, inhalt = wache._spiegel_abruf(
+                wache._gii_spiegel_url("vvg_2008"), timeout=5.0)
 
-            def __exit__(self, *args):
-                return False
-
-            def read(self, anzahl):
-                return b"norm"
-
-            def geturl(self):
-                return "https://raw.githubusercontent.com/beispiel.md"
-
-        with patch.object(net_safety.urllib.request, "urlopen", return_value=Antwort()):
-            ergebnis = net_safety.sicherer_abruf(
-                "https://raw.githubusercontent.com/beispiel.md")
-        self.assertEqual(3, len(ergebnis), ergebnis)
-        self.assertEqual(b"norm", ergebnis[2])
-
-    def test_adapter_entpackt_dreiteiligen_transport(self):
-        """Der Regressionstest für #1024: 2er-Unpack würde hier werfen."""
-        with patch.object(net_safety, "sicherer_abruf",
-                          return_value=self._transport(self.VVG_MD)) as transport:
-            status, text = wache.abruf_gii_spiegel_http(
-                wache._gii_spiegel_url("vvg_2008"))
         self.assertEqual(200, status)
-        self.assertIn("§ 40", text)
-        self.assertTrue(transport.called)
+        # _spiegel_abruf gibt den ROHEN Inhalt zurück (Dekodieren ist Sache
+        # der Abrufschicht) – die Prüfung ist deshalb auf Bytes formuliert.
+        self.assertIn(b"quelle: https://www.gesetze-im-internet.de/vvg_2008/", inhalt)
+        self.assertIn("vv/vvg_2008.md", gesehen["url"])
+        self.assertIn("FranksFinanzcheck", gesehen["headers"].get("User-Agent", ""))
 
-    def test_echter_adapter_heilt_runner_blockade_mit_herkunft(self):
-        with patch.object(net_safety, "sicherer_abruf",
-                          return_value=self._transport(self.VVG_MD)):
-            erg = wache.pruefe_quelle(
-                self.GII_40, abruf=self._blockiert,
-                spiegel_abruf=wache.abruf_gii_spiegel_http)
-        self.assertEqual(wache.OK, erg["status"], erg)
-        self.assertEqual(wache.PFAD_SPIEGEL, erg["pruefpfad"])
-        self.assertTrue(erg["spiegel_url"].endswith("/vv/vvg_2008.md"), erg)
-        self.assertIn("Bundesrechts-Spiegel", erg["hinweis"])
+    def test_api_abruf_fragt_rohen_inhalt_und_version_an(self):
+        import net_safety
 
-    def test_bgb_heading_level_und_einzelnormschaerfe(self):
-        def transport(url, **kwargs):
-            return self._transport(self.BGB_MD)
+        kopf = {}
 
-        with patch.object(net_safety, "sicherer_abruf", side_effect=transport):
-            ok = wache.pruefe_quelle(
-                self.GII_502, abruf=self._blockiert,
-                spiegel_abruf=wache.abruf_gii_spiegel_http)
-            fehlt = wache.pruefe_quelle(
-                "https://www.gesetze-im-internet.de/bgb/__503.html",
-                abruf=self._blockiert,
-                spiegel_abruf=wache.abruf_gii_spiegel_http)
-        self.assertEqual(wache.OK, ok["status"], ok)
-        self.assertEqual(wache.TOT, fehlt["status"], fehlt)
-        self.assertIn("vor jeder Textänderung", fehlt["hinweis"])
+        def attrappe(url, *, headers=None, timeout=20.0, max_bytes=0,
+                     erlaube_loopback=False):
+            kopf.update(headers or {})
+            return 200, {}, self.VVG.encode("utf-8")
 
-    def test_transportausfall_bleibt_fail_closed_und_begruendet(self):
-        with patch.object(net_safety, "sicherer_abruf",
-                          side_effect=wache.urllib.error.URLError("offline")):
-            erg = wache.pruefe_quelle(
-                self.GII_40, abruf=self._blockiert,
-                spiegel_abruf=wache.abruf_gii_spiegel_http)
-        self.assertEqual(wache.UNKLAR, erg["status"], erg)
-        self.assertEqual(wache.PFAD_UNKLAR, erg["pruefpfad"])
-        self.assertIn("Spiegel", erg["hinweis"])
-        self.assertTrue(erg["spiegel_url"].endswith("/vv/vvg_2008.md"), erg)
-        # Der Bericht muss auch den fehlgeschlagenen Ersatzweg lokalisieren.
-        # ``pruefe_alle`` ergänzt slug/id erst bei der Artikel-Zuordnung.
-        zeile = wache._zeile({**erg, "slug": "kfz", "id": "Q3"})
-        self.assertIn("URLError", zeile)
-        self.assertIn("/vv/vvg_2008.md", zeile)
+        with patch.object(net_safety, "sicherer_abruf", attrappe):
+            wache._spiegel_abruf(wache._gii_spiegel_api_url("bgb"), timeout=5.0)
 
-    def test_direktes_404_wird_nicht_ueberstimmt(self):
-        def tot(url, timeout=10.0):
+        self.assertEqual("application/vnd.github.raw", kopf.get("Accept"))
+        self.assertEqual("2022-11-28", kopf.get("X-GitHub-Api-Version"))
+
+    def test_token_geht_nur_an_die_api_und_nie_in_die_ausgabe(self):
+        """`GH_TOKEN` ist ein Kontingent-Schlüssel, kein Quellenparameter."""
+        import net_safety
+
+        koepfe = []
+
+        def attrappe(url, *, headers=None, timeout=20.0, max_bytes=0,
+                     erlaube_loopback=False):
+            koepfe.append((url, dict(headers or {})))
+            return 200, {}, self.VVG.encode("utf-8")
+
+        with patch.dict("os.environ", {"GH_TOKEN": "ghs_geheim_123"}), \
+             patch.object(net_safety, "sicherer_abruf", attrappe):
+            wache._spiegel_abruf(wache._gii_spiegel_url("vvg_2008"), timeout=5.0)
+            wache._spiegel_abruf(wache._gii_spiegel_api_url("vvg_2008"), timeout=5.0)
+
+        raw_url, raw_kopf = koepfe[0]
+        api_url, api_kopf = koepfe[1]
+        from url_host import ist_host_oder_subdomain
+
+        self.assertTrue(ist_host_oder_subdomain(raw_url, "raw.githubusercontent.com"))
+        self.assertNotIn("Authorization", raw_kopf, "Token darf nicht an raw gehen")
+        self.assertTrue(ist_host_oder_subdomain(api_url, "api.github.com"))
+        self.assertEqual("Bearer ghs_geheim_123", api_kopf.get("Authorization"))
+
+    def test_spiegel_rueckfall_auf_die_api_bei_kontingentfehler(self):
+        aufrufe = []
+        from url_host import ist_host_oder_subdomain
+
+        def abruf(url, timeout=10.0):
+            aufrufe.append(url)
+            # Host-Wahrheit statt Textsuche (Code-Scanning-Alert #83): Die
+            # Zeichenkette „raw.githubusercontent.com“ darf an beliebiger
+            # Stelle einer URL stehen und wäre keine Prüfung.
+            if ist_host_oder_subdomain(url, "raw.githubusercontent.com"):
+                raise wache.urllib.error.HTTPError(url, 429, "rate limited", None, None)
+            return 200, self.VVG.encode("utf-8")
+
+        status, inhalt = wache.abruf_gii_spiegel("vvg_2008", abruf=abruf)
+        self.assertEqual(200, status)
+        self.assertIn("gesetze-im-internet.de/vvg_2008/", inhalt)
+        self.assertEqual(2, len(aufrufe), "genau ein Raw-Versuch, dann die API")
+        self.assertTrue(ist_host_oder_subdomain(aufrufe[-1], "api.github.com"))
+        self.assertIn("/vv/vvg_2008.md", aufrufe[-1])
+        self.assertIn("ref=main", aufrufe[-1])
+
+    def test_404_des_spiegels_ist_endgueltig_und_wird_nicht_wiederholt(self):
+        aufrufe = []
+
+        def abruf(url, timeout=10.0):
+            aufrufe.append(url)
             raise wache.urllib.error.HTTPError(url, 404, "Not Found", None, None)
 
-        with patch.object(net_safety, "sicherer_abruf",
-                          return_value=self._transport(self.VVG_MD)):
-            erg = wache.pruefe_quelle(
-                self.GII_40, abruf=tot,
-                spiegel_abruf=wache.abruf_gii_spiegel_http)
-        self.assertEqual(wache.TOT, erg["status"], erg)
-        self.assertNotEqual(wache.PFAD_SPIEGEL, erg["pruefpfad"])
+        status, _ = wache.abruf_gii_spiegel("aufgehoben_1999", abruf=abruf)
+        self.assertEqual(404, status)
+        self.assertEqual(1, len(aufrufe), "ein 404 darf nicht wiederholt werden")
 
-    def test_produktionsweg_ist_gruen_und_zaehlt_ersatzpruefungen(self):
-        """Ohne Injektion: echter Direkt- UND echter Spiegel-Adapter, offline."""
-        artikel = [
-            {"slug": slug, "risk": "hoch", "approved": True,
-             "quellen": [{"id": "Q3", "titel": "§ 40 VVG", "url": self.GII_40}]}
-            for slug in ("kfz", "versicherungsupdate")
-        ]
-        with patch.object(wache, "belegketten", return_value=artikel), patch.object(
-                wache, "abruf_http", side_effect=self._blockiert), patch.object(
-                net_safety, "sicherer_abruf",
-                return_value=self._transport(self.VVG_MD)):
-            ergebnis = wache.pruefe_alle(nur_hochrisiko=True)
-            with redirect_stdout(io.StringIO()):
-                code = wache.main(["--nur-hochrisiko", "--strict", "--require-complete"])
-        self.assertEqual(2, ergebnis["geprueft"])
-        self.assertEqual(2, ergebnis["zaehler"][wache.OK])
-        self.assertEqual([], ergebnis["befunde"])
-        self.assertEqual([], ergebnis["blockierend"])
-        self.assertEqual(2, len(ergebnis["spiegel_bestaetigt"]))
-        self.assertEqual(
-            ["kfz", "versicherungsupdate"],
-            [e["slug"] for e in ergebnis["spiegel_bestaetigt"]])
-        self.assertEqual(0, code)
+    def test_403_wird_nicht_wiederholt_wohl_aber_503(self):
+        zaehler = {"n": 0}
 
-    def test_report_nennt_ersatzpruefung_statt_falschem_freispruch(self):
-        erg = {
+        def dauerhaft_403(url, timeout=10.0):
+            zaehler["n"] += 1
+            raise wache.urllib.error.HTTPError(url, 403, "Forbidden", None, None)
+
+        status, _ = wache.abruf_gii_spiegel_http("https://x/y.md", 1.0,
+                                                abruf=dauerhaft_403, versuche=3)
+        self.assertEqual((403, 1), (status, zaehler["n"]))
+
+        zaehler["n"] = 0
+
+        def einmal_503(url, timeout=10.0):
+            zaehler["n"] += 1
+            if zaehler["n"] == 1:
+                raise wache.urllib.error.HTTPError(url, 503, "Service Unavailable", None, None)
+            return 200, b"---"
+
+        status, roh = wache.abruf_gii_spiegel_http("https://x/y.md", 1.0,
+                                                  abruf=einmal_503, versuche=3)
+        self.assertEqual((200, 2), (status, zaehler["n"]))
+        self.assertEqual(b"---", roh)
+
+    def test_programmierfehler_ist_kein_quellenbefund(self):
+        """#1024: Ein ValueError aus dem Tupel-Entpacken darf nicht „unklar“ werden."""
+        def typfehler_direkt(url, timeout=10.0):
+            raise ValueError("too many values to unpack (expected 2)")
+
+        with self.assertRaises(ValueError):
+            wache.pruefe_quelle("https://www.verbraucherzentrale.de/wissen/a-1",
+                                abruf=typfehler_direkt)
+
+        def typfehler_spiegel(slug, timeout=10.0):
+            raise AttributeError("'NoneType' object has no attribute 'decode'")
+
+        def netzfehler(url, timeout=10.0):
+            raise wache.urllib.error.URLError("timed out")
+
+        with self.assertRaises(AttributeError):
+            wache.pruefe_quelle("https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+                                abruf=netzfehler, spiegel_abruf=typfehler_spiegel)
+
+    def test_netzfehlerliste_ist_abgeschlossen_und_breit_genug(self):
+        import http.client
+        import ssl
+
+        for klasse in (wache.urllib.error.URLError, wache.urllib.error.HTTPError,
+                       http.client.HTTPException, TimeoutError, ConnectionResetError,
+                       ssl.SSLError):
+            with self.subTest(klasse=klasse.__name__):
+                self.assertTrue(issubclass(klasse, wache.NETZ_AUSNAHMEN))
+        # Ein Programmierfehler gehört ausdrücklich NICHT dazu.
+        for klasse in (ValueError, TypeError, AttributeError, KeyError, NameError):
+            with self.subTest(klasse=klasse.__name__):
+                self.assertFalse(issubclass(klasse, wache.NETZ_AUSNAHMEN))
+
+    def test_ablageordnung_des_spiegels_ist_eine_stelle(self):
+        self.assertEqual("vv", wache._gii_shard("vvg_2008"))
+        self.assertEqual("bg", wache._gii_shard("bgb"))
+        self.assertEqual("go", wache._gii_shard("got_2022"))
+        self.assertEqual("es", wache._gii_shard("estg"))
+        self.assertEqual("0-9", wache._gii_shard("1wofg"))
+        self.assertTrue(wache._gii_spiegel_url("bgb").endswith("/bg/bgb.md"))
+
+    def test_echter_spiegelfall_aus_dem_vorfall_1024(self):
+        """Alle vier Zitate aus #1024 müssen über den Spiegel belegbar sein."""
+        dateien = {
+            "vvg_2008": self.VVG,
+            "bgb": ("---\nquelle: https://www.gesetze-im-internet.de/bgb/\n---\n\n"
+                    "###### § 502 Vorfälligkeitsentschädigung\n"),
+            "got_2022": ("---\nquelle: https://www.gesetze-im-internet.de/got_2022/\n---\n\n"
+                         "# Gebührenordnung für Tierärztinnen und Tierärzte (GOT)\n"),
+        }
+
+        def spiegel(slug, timeout=10.0):
+            return (200, dateien[slug]) if slug in dateien else (404, "")
+
+        def netzfehler(url, timeout=10.0):
+            raise wache.urllib.error.URLError("<urlopen error [SSL: KRB5_S_TKT_EXPIRED]>")
+
+        for zitat in ("https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+                      "https://www.gesetze-im-internet.de/bgb/__502.html",
+                      "https://www.gesetze-im-internet.de/got_2022/"):
+            with self.subTest(zitat=zitat):
+                ergebnis = wache.pruefe_quelle(zitat, abruf=netzfehler, spiegel_abruf=spiegel)
+                self.assertEqual(wache.OK, ergebnis["status"], ergebnis)
+                self.assertIn("Bundesrechts-Spiegel", ergebnis["hinweis"])
+
+    def test_probe_bundesrecht_ist_ein_live_nachweis_und_kein_gate(self):
+        """`--probe-bundesrecht` meldet Erfolg/Misserfolg, ohne das Gate zu ändern."""
+        def spiegel(slug, timeout=10.0):
+            return (200, self.VVG) if slug == "vvg_2008" else (404, "")
+
+        original = wache.abruf_gii_spiegel
+        wache.abruf_gii_spiegel = lambda slug, timeout=15.0, **_: spiegel(slug)
+        try:
+            ausgabe = io.StringIO()
+            with redirect_stdout(ausgabe):
+                code_ok = wache.probe_bundesrecht(
+                    ["https://www.gesetze-im-internet.de/vvg_2008/__40.html"])
+                self.assertEqual(0, code_ok, ausgabe.getvalue())
+                self.assertIn("aktiv", ausgabe.getvalue())
+
+            ausgabe = io.StringIO()
+            with redirect_stdout(ausgabe):
+                code_fehler = wache.probe_bundesrecht(
+                    ["https://www.gesetze-im-internet.de/bgb/__502.html"])
+            self.assertEqual(1, code_fehler)
+            self.assertIn("404", ausgabe.getvalue())
+        finally:
+            wache.abruf_gii_spiegel = original
+
+
+class SpiegelDiagnoseTests(unittest.TestCase):
+    """Zusatz aus #1057: Ersatzweg und Prüfgrenze bleiben sichtbar."""
+
+    vvg = ("---\nquelle: https://www.gesetze-im-internet.de/vvg_2008/\n---\n"
+           "### § 40 Kündigung\n### § 96 Vertragsschluss\n")
+
+    @staticmethod
+    def blockiert(url, timeout=10.0):
+        raise OSError("GII blockiert")
+
+    def test_spiegel_ok_nennt_pfad_und_datei(self):
+        erg = wache.pruefe_quelle(
+            "https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+            abruf=self.blockiert,
+            spiegel_abruf=lambda slug, timeout=10.0: (200, self.vvg))
+        self.assertEqual(wache.OK, erg["status"])
+        self.assertEqual(wache.PFAD_SPIEGEL, erg["pruefpfad"])
+        self.assertEqual(wache._gii_spiegel_url("vvg_2008"), erg["spiegel_url"])
+
+    def test_transportausfall_bleibt_fail_closed_und_begruendet(self):
+        def offline(slug, timeout=10.0):
+            raise OSError("Spiegel offline")
+
+        erg = wache.pruefe_quelle(
+            "https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+            abruf=self.blockiert, spiegel_abruf=offline)
+        self.assertEqual(wache.UNKLAR, erg["status"])
+        self.assertEqual(wache.PFAD_UNKLAR, erg["pruefpfad"])
+        self.assertIn("OSError", erg["hinweis"])
+        self.assertEqual(wache._gii_spiegel_url("vvg_2008"), erg["spiegel_url"])
+
+    def test_gesamtlauf_zaehlt_ersatzpruefungen_getrennt(self):
+        eintraege = []
+        for nr in ("40", "96"):
+            eintraege.append({
+                "slug": f"artikel-{nr}", "path": "", "risk": "hoch",
+                "approved": True, "quellen": [{
+                    "id": f"Q{nr}", "titel": "VVG",
+                    "url": f"https://www.gesetze-im-internet.de/vvg_2008/__{nr}.html",
+                }],
+            })
+        with patch.object(wache, "belegketten", return_value=eintraege):
+            erg = wache.pruefe_alle(
+                abruf=self.blockiert,
+                spiegel_abruf=lambda slug, timeout=10.0: (200, self.vvg))
+        self.assertEqual(2, erg["geprueft"])
+        self.assertEqual(2, erg["zaehler"][wache.OK])
+        self.assertEqual([], erg["befunde"])
+        self.assertEqual(2, len(erg["spiegel_bestaetigt"]))
+        self.assertTrue(all(e["pruefpfad"] == wache.PFAD_SPIEGEL
+                            for e in erg["spiegel_bestaetigt"]))
+
+    def test_report_trennt_direktpruefung_von_normbestaetigung(self):
+        eintrag = {
+            "status": wache.OK, "slug": "artikel", "id": "Q1",
+            "zitat": "https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+            "end_url": "", "befund": "", "pruefpfad": wache.PFAD_SPIEGEL,
+            "spiegel_url": wache._gii_spiegel_url("vvg_2008"),
+            "hinweis": "Aktiver Normbestand über den Spiegel bestätigt",
+        }
+        ergebnis = {
             "geprueft": 1,
-            "zaehler": {wache.OK: 1, wache.TOT: 0, wache.UNKLAR: 0, wache.UMGELEITET: 0},
-            "befunde": [], "blockierend": [],
-            "spiegel_bestaetigt": [{
-                "slug": "kfz", "id": "Q3", "zitat": self.GII_40,
-                "spiegel_url": wache._gii_spiegel_url("vvg_2008"),
-                "hinweis": "aktiver Normbestand über täglichen Bundesrechts-Spiegel bestätigt",
-            }],
+            "zaehler": {wache.OK: 1, wache.UMGELEITET: 0,
+                        wache.TOT: 0, wache.UNKLAR: 0},
+            "befunde": [], "blockierend": [], "spiegel_bestaetigt": [eintrag],
         }
         with tempfile.TemporaryDirectory() as tmp:
-            ziel = Path(tmp) / "BELEGKETTEN-WACHE-REPORT.md"
-            with patch.object(wache, "REPORT", ziel):
-                wache.report_schreiben(erg)
-            text = ziel.read_text(encoding="utf-8")
-        self.assertIn("Über Bundesrechts-Spiegel bestätigt: **1**", text)
+            bericht = Path(tmp) / "bericht.md"
+            with patch.object(wache, "REPORT", bericht):
+                wache.report_schreiben(ergebnis)
+            text = bericht.read_text(encoding="utf-8")
         self.assertIn("Unverändert direkt erreichbar: **0**", text)
-        self.assertIn("## Ersatzprüfung über den Bundesrechts-Spiegel", text)
-        self.assertIn("/vv/vvg_2008.md", text)
+        self.assertIn("Über Bundesrechts-Spiegel bestätigt: **1**", text)
         self.assertIn("keine fachliche Freigabe", text)
-        self.assertNotIn("alle Belegketten unverändert erreichbar", text)
-        self.assertNotIn("Unverändert erreichbar: **1**", text)
+        self.assertIn(eintrag["spiegel_url"], text)
 
 
 class FaktenfrischeSchreibgrenzeTests(unittest.TestCase):

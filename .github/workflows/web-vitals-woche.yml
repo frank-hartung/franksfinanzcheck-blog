@@ -32,6 +32,28 @@
 #  (05:17) und vor dem Arbeitstag. Felddaten hinken bis zu 28 Tage
 #  hinterher; wöchentlich zu messen heißt, den Trend zu sehen, nicht
 #  jeden Tag einen anderen Zufallswert.
+#
+#  WARUM HIER NICHTS MEHR AM SELBSTTEST STERBEN KANN (04.11.2026, #1026)
+#  ---------------------------------------------------------------
+#  Lauf 41456548199 starb im Schritt „Selbsttests der Messungen (ohne Netz)“
+#  mit `ERR_MODULE_NOT_FOUND`: `scripts/lighthouse_live.mjs` importierte
+#  `lighthouse` und `playwright-core` am Modulkopf und wurde VOR `npm ci`
+#  geladen. Eine unverbindliche Labordiagnose nahm damit die verbindliche
+#  Feldmessung mit ins Rot, und die Meldung sprach von einem kaputten
+#  Selbsttest, obwohl der Selbsttest nie eine Zeile Logik erreicht hatte.
+#
+#  Drei Regeln folgen daraus – und sie stehen hier als Struktur, nicht als
+#  Absichtserklärung:
+#    1. VOR jedem Node-Aufruf steht `actions/setup-node`. Ohne Node gibt es
+#       keinen Selbsttest; ohne Selbsttest keine Messung.
+#    2. Der Selbsttest läuft VOR `npm ci` und darf deshalb nichts aus
+#       `node_modules` brauchen (der Modulkopf führt dafür ein eigener
+#       Regressionstest, `scripts/tests/lighthouse_live.test.mjs`).
+#    3. Ein Exit-Code wird ERFASST (`rc=0; … || rc=$?`) und in
+#       `$GITHUB_OUTPUT` geschrieben – niemals über `continue-on-error`
+#       verloren. Und das Labor bleibt, was es ist: Diagnose. Sein Rot
+#       erscheint als Warnung, das Urteil am Ende entscheidet die
+#       Feldmessung.
 # ============================================================
 name: Web-Vitals-Feldmessung (wöchentlich)
 
@@ -60,11 +82,22 @@ jobs:
     steps:
       - name: Repository auschecken
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Python einrichten
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.12"
+
+      # VOR jedem Node-Aufruf. Der Selbsttest unten läuft ohne node_modules –
+      # aber nicht ohne Node. Ohne diesen Schritt wäre die Fehlermeldung
+      # „node: command not found“, und niemand käme auf den Code als Ursache.
+      - name: Node einrichten
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
 
       # Manifest und Lockfile vor dem npm-Install prüfen: fehlende oder
       # widersprüchliche Pins dürfen nicht als Messfehler durchrutschen.
@@ -75,61 +108,94 @@ jobs:
 
       # Die Wache beweist sich zuerst selbst: Ein Messwerkzeug, das nicht
       # laufen kann, darf kein Urteil abgeben (Repo-Regel: ein Gate, das
-      # nicht läuft, ist keins).
-      - name: Selbsttests der Messungen (ohne Netz)
+      # nicht läuft, ist keins). Beide Selbsttests sind OFFLINE und
+      # PAKETFREI – sie laufen absichtlich VOR `npm ci`. Genau daran starb
+      # Lauf 41456548199 (#1026), deshalb ist die Reihenfolge Vertrag.
+      - name: Selbsttests der Messungen (ohne Netz, ohne node_modules)
         run: |
+          set -euo pipefail
+          # Beweis der Paketfreiheit: Fehlt node_modules JETZT, ist der
+          # Selbsttest ein echter Offline-Beweis. Liegt es (Cache-Artefakt),
+          # ist die Aussage schwächer – das wird gesagt, nicht verschwiegen.
+          if [ -d node_modules ]; then
+            echo "::warning::node_modules liegt bereits vor – der Offline-Beweis ist eingeschränkt."
+          else
+            echo "node_modules fehlt (erwartet): Der Selbsttest beweist die Paketfreiheit."
+          fi
           python3 scripts/cwv_feld_wache.py --selftest
           python3 -m unittest scripts.tests.test_cwv_feld_wache
+          node scripts/lighthouse_live.mjs --selftest
           node --test scripts/tests/lighthouse_live.test.mjs
 
       # ------------- 1. Felddaten: verbindlich -------------
+      # Exit-Code DETERMINISTISCH erfassen: `continue-on-error` würde ihn vor
+      # `$GITHUB_OUTPUT` verschlucken (und unter `bash -e` nie ankommen).
       - name: Felddaten messen (CrUX über PageSpeed Insights)
         id: feld
-        continue-on-error: true
         run: |
           set -uo pipefail
-          python3 scripts/cwv_feld_wache.py --schreiben > feld-bericht.md 2> feld-fehler.txt
-          echo "exit=$?" >> "$GITHUB_OUTPUT"
+          rc=0
+          python3 scripts/cwv_feld_wache.py --schreiben > feld-bericht.md 2> feld-fehler.txt || rc=$?
+          echo "exit=${rc}" >> "$GITHUB_OUTPUT"
           cat feld-bericht.md
           cat feld-fehler.txt || true
+          exit 0
 
       - name: Feldbericht in die Lauf-Zusammenfassung
+        if: always()
         run: |
           {
             echo "## 📶 Felddaten (verbindlich)"
             echo
             cat feld-bericht.md 2>/dev/null || echo "_Kein Bericht erzeugt._"
+            if [ -s feld-fehler.txt ]; then
+              echo
+              echo "### Störungen"
+              echo '```'
+              cat feld-fehler.txt
+              echo '```'
+            fi
           } >> "$GITHUB_STEP_SUMMARY"
 
       # ------------- 2. Labor: Diagnose -------------
-      - name: Node einrichten
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version: 22
-          cache: npm
-
       - name: Abhängigkeiten installieren
         run: npm ci --ignore-scripts
 
       - name: Chromium vorbereiten (gepinnt, verifiziert)
         run: npm run browser:setup
 
+      # Auch hier: Exit-Code erfassen statt verschlucken, Bericht sichern,
+      # den Schritt selbst aber nicht rot werden lassen – das Labor ist
+      # Diagnose. Ein Befund wird als Warnung sichtbar, kein Blocker.
       - name: Laborwerte messen (Lighthouse, Schwellen aus dem Regelwerk)
         id: labor
-        continue-on-error: true
         run: |
           set -uo pipefail
-          node scripts/lighthouse_live.mjs --laeufe 2 --schreiben > labor-bericht.md 2>&1
-          echo "exit=$?" >> "$GITHUB_OUTPUT"
+          rc=0
+          node scripts/lighthouse_live.mjs --laeufe 2 --schreiben \
+            > labor-bericht.md 2> labor-fehler.txt || rc=$?
+          echo "exit=${rc}" >> "$GITHUB_OUTPUT"
+          echo "--- stdout ---"
           cat labor-bericht.md
+          echo "--- stderr ---"
+          cat labor-fehler.txt || true
+          exit 0
 
       - name: Laborbericht in die Lauf-Zusammenfassung
+        if: always()
         run: |
           {
             echo
             echo "## 🔬 Laborwerte (Diagnose, nicht verbindlich)"
             echo
             tail -n 40 labor-bericht.md 2>/dev/null || echo "_Kein Bericht erzeugt._"
+            if [ -s labor-fehler.txt ]; then
+              echo
+              echo "### Werkzeugmeldungen"
+              echo '```'
+              tail -n 20 labor-fehler.txt
+              echo '```'
+            fi
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Berichte als Artefakt sichern
@@ -144,7 +210,9 @@ jobs:
             data/cwv/labor/befund.json
             data/cwv/labor/befund.md
             feld-bericht.md
+            feld-fehler.txt
             labor-bericht.md
+            labor-fehler.txt
           retention-days: 30
           if-no-files-found: ignore
 
@@ -158,17 +226,19 @@ jobs:
           SCHRITT_LABOR_EXIT: ${{ steps.labor.outputs.exit }}
         run: |
           set -uo pipefail
-          FELD="$SCHRITT_FELD_EXIT"
-          LABOR="$SCHRITT_LABOR_EXIT"
+          FELD="${SCHRITT_FELD_EXIT:-}"
+          LABOR="${SCHRITT_LABOR_EXIT:-}"
 
           # Labor: Diagnose. Jede Abweichung wird als Warnung sichtbar, macht
           # den Lauf aber nicht rot – ein Lauf über CDN ist kein Freibrief.
           if [ -z "$LABOR" ] || [ "$LABOR" = "2" ]; then
-            echo "::warning::Laborlauf ohne verwertbares Ergebnis (Exit '${LABOR:-—}') – siehe labor-bericht.md"
+            echo "::warning::Laborlauf ohne verwertbares Ergebnis (Exit '${LABOR:-—}') – siehe labor-fehler.txt"
           elif [ "$LABOR" = "1" ]; then
             echo "::warning::Laborlauf meldete einen Befund mit --streng – hier nicht erwartet, Bericht prüfen."
           elif grep -q "Gerissene Schwellen" data/cwv/labor/befund.md 2>/dev/null; then
             echo "::warning::Laborwerte reißen Schwellen – Diagnose, kein Blocker (siehe Artefakt)."
+          else
+            echo "Laborlauf ohne Befund."
           fi
 
           # Felddaten: verbindlich UND fail-closed. Ein leerer Exit-Code heißt

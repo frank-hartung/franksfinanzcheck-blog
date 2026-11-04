@@ -1,5 +1,5 @@
-generated_at: '2026-11-03T11:19:42Z'
-day: '2026-11-03'
+generated_at: '2026-11-04T11:33:49Z'
+day: '2026-11-04'
 mode: deterministic
 teams:
   trending:
@@ -252,62 +252,60 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 7 Gewohnheiten für finanzielle Freiheit
-    pillar: frugalismus
+  - topic: '5G-Router als DSL-Ersatz: Für wen sich der Wechsel lohnt'
+    pillar: internet-dsl
     signal: niche_hook
-    source: topics:7 Gewohnheiten für finanzielle Freiheit
-    score: 0.55
-    keywords: []
-  - topic: 'Billig fliegen im Winter: 10 Geheimtipps'
-    pillar: mietwagen
-    signal: niche_hook
-    source: 'topics:Billig fliegen im Winter: 10 Geheimtipps'
+    source: 'topics:5G-Router als DSL-Ersatz: Für wen sich der Wechsel lohnt'
     score: 0.55
     keywords:
-    - Flugvergleich
-    - Billigflüge
-    - Reisekosten sparen
-  - topic: Kreditkarten mit attraktiven Prämien und Leistungen
-    pillar: konto-karten
+    - 5G Router
+    - DSL Alternative
+    - Mobilfunk statt DSL
+  - topic: 'Gäste-WLAN einrichten: So trennst du Besuch vom eigenen Netz'
+    pillar: internet-dsl
     signal: niche_hook
-    source: topics:Kreditkarten mit attraktiven Prämien und Leistungen
+    source: 'topics:Gäste-WLAN einrichten: So trennst du Besuch vom eigenen Netz'
     score: 0.55
     keywords:
-    - Kreditkarten
-    - Prämien
-    - Leistungen
-  - topic: 'Tagesgeld-Hopping 2026: Lohnt sich der Zins-Wechsel für Neukunden noch?'
-    pillar: konto-karten
+    - Gäste WLAN
+    - WLAN Sicherheit
+    - Router einrichten
+  - topic: 'Homeoffice: So planst du die Leitung für zwei Arbeitsplätze'
+    pillar: internet-dsl
     signal: niche_hook
-    source: 'topics:Tagesgeld-Hopping 2026: Lohnt sich der Zins-Wechsel für Neukunden
-      noch?'
+    source: 'topics:Homeoffice: So planst du die Leitung für zwei Arbeitsplätze'
     score: 0.55
     keywords:
-    - Tagesgeld Neukundenzins
-    - Zinshopping Zinseszins
-    - Geld sicher anlegen 2026
-    - Tagesgeldkonto Zinsgarantie
-  - topic: Vergleich von Hausratversicherungen und wie du sparst
+    - Homeoffice Internet
+    - Bandbreite Arbeitsplatz
+    - Leitung teilen
+  - topic: 'Risikolebensversicherung für Familien: Die richtige Summe finden'
     pillar: versicherungen
     signal: niche_hook
-    source: topics:Vergleich von Hausratversicherungen und wie du sparst
+    source: 'topics:Risikolebensversicherung für Familien: Die richtige Summe finden'
     score: 0.55
     keywords:
-    - Hausratversicherung
-    - Vergleich
-    - sparen
-  - topic: 'Versteckte Fremdwährungsgebühren: Welche Reisekreditkarte 2026 wirklich
-      0 % verlangt'
+    - Risikolebensversicherung
+    - Versicherungssumme berechnen
+    - Familie absichern
+  - topic: 'Seniorenkonto: Worauf es bei Kontoführung und Zugang ankommt'
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Versteckte Fremdwährungsgebühren: Welche Reisekreditkarte 2026
-      wirklich 0 % verlangt'
+    source: 'topics:Seniorenkonto: Worauf es bei Kontoführung und Zugang ankommt'
     score: 0.55
     keywords:
-    - Kreditkarte ohne Fremdwährungsgebühr
-    - Reisekreditkarte Vergleich 2026
-    - Geld abheben im Ausland kostenlos
-    - Visa Mastercard ohne Gebühren
+    - Seniorenkonto
+    - Kontoführung Alter
+    - Bankzugang einfach
+  - topic: 'Sparziel sichtbar machen: So bleiben deine Vorsätze im Alltag'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Sparziel sichtbar machen: So bleiben deine Vorsätze im Alltag'
+    score: 0.55
+    keywords:
+    - Sparziel
+    - Vorsätze durchhalten
+    - Motivation sparen
 live_web:
   enabled: false
   findings: []

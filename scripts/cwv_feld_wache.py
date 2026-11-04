@@ -43,6 +43,21 @@
 #  Exit: 0 = kein Feldbefund (auch: keine Daten) · 1 = Befund (POOR)
 #        2 = Störung (Netz, API, kein Ziel messbar)
 #
+#  DREI HÄRTUNGEN AUS DEM WOCHENLAUF 41456548199 (04.11.2026, #1026)
+#  ---------------------------------------------------------------
+#  1. GEHEIMNIS-SCHWÄRZUNG. Der PSI-Schlüssel steht als `&key=…` in der
+#     Anfrage-URL und damit potenziell in jeder Fehlermeldung, die eine
+#     URL nennt. `schwaerze()` entfernt ihn aus JEDEM Text, der das Haus
+#     verlässt (Bericht, JSON, stderr) – auch aus fremden Ausnahmetexten,
+#     deren Form wir nicht kontrollieren.
+#  2. TRANSIENTEN-RETRY. 408/425/429 und 5xx sind Aussagen über den
+#     Messweg, nicht über die Seite. Sie werden begrenzt wiederholt, ein
+#     `Retry-After` (bis 30 s) respektiert. Erst danach ist es eine
+#     STÖRUNG – und die bleibt STÖRUNG, nie ein grünes Häkchen (Hausregel C2).
+#  3. FEHLSCHLÄGE WERDEN BENANNT, NICHT VERSCHLUCKT. Jede Störung trägt
+#     Pfad, Klasse und geschwärzten Grund; eine leere Störungsliste ist
+#     eine Aussage, kein Zufall.
+#
 #  API-Schlüssel: `PSI_API_KEY` (optional). Ohne Schlüssel antwortet
 #  die API stark gedrosselt; der Lauf bleibt möglich. Der Schlüssel
 #  wird NIE ausgegeben, geloggt oder in eine Datei geschrieben.
@@ -54,7 +69,9 @@ import argparse
 import datetime
 import json
 import os
+import re
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -67,6 +84,12 @@ BEFUND_MD = ROOT / "data" / "cwv" / "feld" / "befund.md"
 VERLAUF = ROOT / "data" / "cwv" / "feld" / "verlauf.jsonl"
 
 API = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed"
+
+# Transiente Antworten: Aussage über den Messweg, nicht über die Seite.
+TRANSIENT_STATUS = frozenset({408, 425, 429, 500, 502, 503, 504})
+VERSUCHE = 3
+PAUSE_SEKUNDEN = 2.0
+RETRY_AFTER_MAX = 30.0
 
 # Google-Referenz (Web Vitals, Stand der API-Antwort): Die Bewertung
 # kommt als `category` je Metrik zurück – FAST / AVERAGE / SLOW. Diese
@@ -188,14 +211,67 @@ def gesamturteil(seiten: list[dict]) -> tuple[str, int]:
 
 
 # --------------------------------------------------------------------------
+#  Geheimnis-Schwärzung (eine Stelle – jeder Ausgabeweg geht hier durch)
+# --------------------------------------------------------------------------
+_SCHLUESSEL_MUSTER = re.compile(r"([?&](?:key|api_key|apikey)=)[^&\s'\"<>]+", re.I)
+
+
+def schwaerze(text: object) -> str:
+    """Entfernt API-Schlüssel aus beliebigem Text.
+
+    Der Schlüssel reist als Query-Parameter (`…&key=AIza…`). Er darf weder
+    im Bericht noch im JSON noch in einer Fehlerzeile auftauchen – und weil
+    fremde Ausnahmetexte URLs mitschleppen können, wird jeder Text durch
+    diese eine Funktion geführt, nicht nur die, die wir selbst schreiben.
+    """
+    return _SCHLUESSEL_MUSTER.sub(r"\1***", str(text))
+
+
+# --------------------------------------------------------------------------
 #  Netz
 # --------------------------------------------------------------------------
 
-def hole(url: str, zeitlimit: int = 60) -> dict:
-    """Eine PSI-Antwort. Netz-/HTTP-Fehler sind Störung, kein Befund."""
-    request = urllib.request.Request(url, headers={"User-Agent": "franksfinanzcheck-cwv-feld/1.0"})
-    with urllib.request.urlopen(request, timeout=zeitlimit) as antwort:  # noqa: S310 – feste API
-        return json.loads(antwort.read().decode("utf-8"))
+def _wartezeit(antwort_kopf, versuch: int) -> float:
+    """Wartezeit vor dem nächsten Versuch: `Retry-After`, sonst Backoff."""
+    roh = ""
+    try:
+        roh = (antwort_kopf or {}).get("Retry-After", "") or ""
+    except AttributeError:
+        roh = ""
+    try:
+        return min(max(float(str(roh).strip()), 0.0), RETRY_AFTER_MAX)
+    except (TypeError, ValueError):
+        return PAUSE_SEKUNDEN * (2 ** versuch)
+
+
+def hole(url: str, zeitlimit: int = 60, *, versuche: int = VERSUCHE,
+         pause=time.sleep) -> dict:
+    """Eine PSI-Antwort. Netz-/HTTP-Fehler sind Störung, kein Befund.
+
+    Transiente Antworten (408/425/429/5xx) werden begrenzt wiederholt; ein
+    `Retry-After` bis 30 s wird respektiert. Nach dem letzten Versuch wird
+    die Ausnahme ERHOBEN – der Aufrufer macht daraus eine Störung. Die
+    Meldung ist geschwärzt, damit der Schlüssel nicht im Log landet.
+    """
+    request = urllib.request.Request(
+        url, headers={"User-Agent": "franksfinanzcheck-cwv-feld/1.0"})
+    gesamt = max(1, versuche)
+    letzter_fehler: Exception | None = None
+    for versuch in range(gesamt):
+        try:
+            with urllib.request.urlopen(request, timeout=zeitlimit) as antwort:  # noqa: S310 – feste API
+                return json.loads(antwort.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            letzter_fehler = exc
+            if int(exc.code) not in TRANSIENT_STATUS or versuch + 1 >= gesamt:
+                raise
+            pause(_wartezeit(getattr(exc, "headers", None), versuch))
+        except (urllib.error.URLError, TimeoutError, ConnectionError, OSError) as exc:
+            letzter_fehler = exc
+            if versuch + 1 >= gesamt:
+                raise
+            pause(PAUSE_SEKUNDEN * (2 ** versuch))
+    raise letzter_fehler if letzter_fehler else RuntimeError("Abruf ohne Ergebnis")
 
 
 def api_schluessel() -> str | None:
@@ -332,12 +408,79 @@ def selftest() -> int:
                    "mobile", "2026-10-26", "STOERUNG")
     muss("UNGEPRÜFT" in text, "Bericht muss UNGEPRÜFT ausweisen")
 
+    # 8. Geheimnis-Schwärzung (#1026): der Schlüssel darf NIRGENDS stehen.
+    geheim = "AIzaSyD-geheim-1234567890"
+    roh = f"https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=x&key={geheim}"
+    muss(geheim not in schwaerze(roh), "Schlüssel überlebt die Schwärzung")
+    muss("key=***" in schwaerze(roh), "geschwärzter Platzhalter fehlt")
+    muss(geheim not in schwaerze(f"Fehler bei {roh}: HTTP 429"),
+         "Schlüssel überlebt die Schwärzung in fremdem Text")
+    muss(schwaerze("ohne Schlüssel") == "ohne Schlüssel",
+         "Schwärzung verändert Text ohne Schlüssel")
+
+    # 9. Transiente Antworten werden begrenzt wiederholt, 404 nicht.
+    import io as _io
+    import urllib.error as _ue
+
+    def _http(code, kopf=None):
+        fehler_obj = _ue.HTTPError("https://x", code, "Fehler", kopf or {}, _io.BytesIO(b""))
+
+        def hole_attrappe(url, zeitlimit=60, versuche=VERSUCHE, pause=lambda s: None):
+            raise fehler_obj
+        return hole_attrappe
+
+    # hole() mit injizierter Pause prüfen (kein echter Wartetakt im Selbsttest)
+    zaehler = {"n": 0}
+
+    class _Antwort:
+        def __init__(self, nutzlast): self._roh = nutzlast
+        def read(self): return self._roh
+        def __enter__(self): return self
+        def __exit__(self, *a): return False
+
+    pausen: list[float] = []
+
+    def urlopen_wackelig(request, timeout=0):
+        zaehler["n"] += 1
+        if zaehler["n"] < 3:
+            raise _ue.HTTPError(request.full_url, 503, "Service Unavailable", {}, None)
+        return _Antwort(b'{"ok": true}')
+
+    original_urlopen = urllib.request.urlopen
+    urllib.request.urlopen = urlopen_wackelig
+    try:
+        antwort = hole("https://x/api?key=geheim", versuche=3, pause=pausen.append)
+    finally:
+        urllib.request.urlopen = original_urlopen
+    muss(antwort == {"ok": True}, f"Retry lieferte keine Antwort: {antwort!r}")
+    muss(zaehler["n"] == 3, f"Retry-Zahl falsch: {zaehler['n']}")
+    muss(len(pausen) == 2 and all(p >= 0 for p in pausen), f"Backoff fehlt: {pausen}")
+
+    # Ein 404 ist endgültig: genau EIN Versuch, dann Ausnahme.
+    zaehler["n"] = 0
+
+    def urlopen_404(request, timeout=0):
+        zaehler["n"] += 1
+        raise _ue.HTTPError(request.full_url, 404, "Not Found", {}, None)
+
+    urllib.request.urlopen = urlopen_404
+    try:
+        try:
+            hole("https://x/api?key=geheim", versuche=3, pause=lambda s: None)
+            fehler.append("404 wurde nicht erhoben")
+        except _ue.HTTPError as ausnahme:
+            muss(ausnahme.code == 404, "404 kam nicht durch")
+    finally:
+        urllib.request.urlopen = original_urlopen
+    muss(zaehler["n"] == 1, f"404 wurde {zaehler['n']}× versucht (muss 1 sein)")
+
     if fehler:
         print("🛑 SELBSTTEST DER CWV-FELD-WACHE FEHLGESCHLAGEN:")
         for f in fehler:
             print("  ·", f)
         return 2
-    print("✅ CWV-Feld-Wache: Selbsttest grün (Abbildung, Aggregation, UNGEPRÜFT-Regel, URL-Bau, Bericht)")
+    print("✅ CWV-Feld-Wache: Selbsttest grün (Abbildung, Aggregation, UNGEPRÜFT-Regel, "
+          "URL-Bau, Bericht, Schwärzung, Retry)")
     return 0
 
 
@@ -360,7 +503,9 @@ def messe(ziele: list[dict], basis: str, strategie: str, schluessel: str | None,
                 antwort = hole(psi_url(url, strategie) + schluessel_teil)
         except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError,
                 json.JSONDecodeError) as exc:
-            stoerungen.append(f"{pfad}: {exc.__class__.__name__}")
+            grund = schwaerze(str(exc)).strip()
+            stoerungen.append(f"{pfad}: {exc.__class__.__name__}"
+                              + (f" – {grund}" if grund else ""))
             continue
         befund = bewerte_seite(antwort)
         befund["pfad"] = pfad
