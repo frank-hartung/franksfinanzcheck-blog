@@ -529,7 +529,17 @@ class AnkerDisziplinTestCase(unittest.TestCase):
         # dem Standard „python3“ lief die Wirkungsprobe unter einem Python
         # ohne PyYAML und meldete fail-closed einen Vertragsbruch, obwohl der
         # Baum in Ordnung war (C25/C38, E-21).
-        self.assertEqual(gc.run_all(python_bin=sys.executable, quick=True), [])
+        funde = gc.run_all(python_bin=sys.executable, quick=True)
+        if os.environ.get("FFC_FREMD_UHR"):
+            # Ein eingefrorener Live-Bestand ist 97 Tage später naturgemäß
+            # überfällig. C45 muss das reale Urteil trotzdem unverfälscht
+            # melden; Strukturfehler oder andere Befunde bleiben rot.
+            zahlen, fehler = gc._c45_deckung()
+            self.assertIsNone(fehler, fehler)
+            self.assertEqual([text for code, text in funde if code == "C45"],
+                             zahlen["urteil"])
+            funde = [(code, text) for code, text in funde if code != "C45"]
+        self.assertEqual(funde, [])
 
     def test_scorecard_anker_trifft_den_schritt_nicht_den_kommentar(self) -> None:
         with open(os.path.join(BLOG_DIR, ".github", "workflows", "deploy.yml"),

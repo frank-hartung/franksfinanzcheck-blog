@@ -36,30 +36,78 @@ unklare oder umgeleitete Quellen. Lesefehler blockieren immer mit ``--strict``.
 Die Wache schreibt keinen Inhalt. Sie entscheidet nichts. Sie zeigt nur,
 wo eine Prüfung fällig ist – die Entscheidung bleibt redaktionell.
 
+WARUM DER AMTLICHE TEXT NICHT DIREKT GELESEN WIRD (04.11.2026, #1024)
+--------------------------------------------------------------------
+`www.gesetze-im-internet.de` verwirft TCP-Verbindungen aus den Netzen der
+CI-Runner (`URLError` nach SSL-EOF, nicht nach Inhalt). Für den Beleg ist
+das kein Urteil über die Quelle, sondern über den Messweg. Der tägliche
+Bundesrecht-Spiegel `Gesetze-fuer-KI/bundesrecht` übernimmt dieselben
+amtlichen Texte jede Nacht; gemessen wird deshalb am SPIEGEL, wenn der
+Direktabruf nicht belastbar ist.
+
+Drei Fehler in dieser Ausweichmessung sind am 03.11.2026 aufgefallen und
+hier dauerhaft geheilt:
+
+1. `sicherer_abruf()` liefert ein **3-Tupel** `(status, kopf, roh)`. Die
+   Abruffunktion entpackte es als 2-Tupel – `ValueError: too many values
+   to unpack (expected 2)` –, und ein `except Exception:` tarnte diesen
+   PROGRAMMIERFEHLER als „unklar“. Vier gültige Bundesrechts-Zitate
+   standen dadurch dauerhaft als unprüfbar in der YMYL-Queue (#1024).
+2. Der Spiegelschlüssel wurde aus den ersten zwei Zeichen des Slugs
+   gebildet (`vv/vvg_2008.md`, `bg/bgb.md`, `go/got_2022.md`). Das ist
+   die Ablageordnung des Spiegels, aber nirgends festgeschrieben; sie
+   stand als stilles Wissen im Code. Fällt eine Datei aus der Ordnung,
+   meldet die Wache fälschlich „Gesetz aufgehoben“.
+3. `except Exception:` deckte auch Tippfehler, Attribut- und Typfehler zu.
+   Ein Werkzeug, das seinen eigenen Defekt als Quelleigenschaft ausgibt,
+   ist schlimmer als kein Werkzeug.
+
+Deshalb gilt jetzt: Netzfehler sind eine **abgeschlossene Liste**
+(`NETZ_AUSNAHMEN`); alles andere schlägt mit Exit 2 durch. Der Spiegel
+wird über die GitHub-API adressiert (`Accept: application/vnd.github.raw`),
+weil dieser Weg auch Dateien über 1 MB liefert (`bg/bgb.md` hat 1,7 MB)
+und weil er den `GH_TOKEN` für das Kontingent zulässt – ohne ihn
+antwortet die API unauthentifiziert bei 60 Abrufen pro Stunde.
+
 AUFRUF
 ------
   python3 scripts/belegketten_wache.py                       # Bestand
   python3 scripts/belegketten_wache.py --nur-hochrisiko      # YMYL
   python3 scripts/belegketten_wache.py --nur-hochrisiko --strict --report
-  python3 scripts/belegketten_wache.py --json
+  python3 scripts/belegketten_wache.py --nur-hochrisiko --require-complete --json
+  python3 scripts/belegketten_wache.py --probe-bundesrecht   # Messweg beweisen
   python3 scripts/belegketten_wache.py --selftest            # offline
+
+EXIT
+----
+  0 = keine blockierende Quelle · 1 = Befund (`--strict`/`--require-complete`)
+  2 = WERKZEUGFEHLER (Programmierfehler, Netzklasse außerhalb der Liste).
+  Der Unterschied ist der ganze Punkt: Ein Befund ist eine Aussage über
+  die Quelle, Exit 2 eine Aussage über dieses Skript.
 """
 from __future__ import annotations
 
 import argparse
 import datetime as dt
+import http.client
 import json
+import os
+import re
+import socket
+import ssl
 import sys
+import time
 import urllib.error
 import urllib.request
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import quote, urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = ROOT / "scripts"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
+import yaml  # noqa: E402  (Frontmatter-Fehler sind ein DATENbefund)
 import editorial_review_gate as gate  # noqa: E402  (eine Regelquelle)
 from url_host import ist_host_oder_subdomain  # noqa: E402  (Host-Wahrheit)
 
@@ -70,11 +118,47 @@ UMGELEITET = "umgeleitet"
 UNKLAR = "unklar"
 OK = "ok"
 
+# Herkunft eines Ergebnisses: Ein Spiegel-ok ist keine Direktprüfung und keine
+# fachliche Freigabe. Der maschinenlesbare Pfad hält Bericht und Diagnose dicht.
+PFAD_SPIEGEL = "bundesrechts-spiegel"
+PFAD_UNKLAR = "unklar"
+
 _GII_BASIS_HOST = "gesetze-im-internet.de"
 _GII_SPIEGEL_BASIS = "https://raw.githubusercontent.com/Gesetze-fuer-KI/bundesrecht/main"
+# Die API-Adresse ist der Rückfallweg für Dateien über 1 MB (raw.githubusercontent
+# begrenzt nicht, die API schon – aber nur sie liefert bei großen Dateien den
+# vollständigen Inhalt mit `Accept: application/vnd.github.raw`, und nur sie
+# nimmt den Token für das Kontingent an).
+_GII_SPIEGEL_API = "https://api.github.com/repos/Gesetze-fuer-KI/bundesrecht/contents"
 _GII_MAX_BYTES = 8 * 1024 * 1024
+# Ablageordnung des Spiegels: die ersten ZWEI Zeichen der GII-Kennung.
+# `vvg_2008` → `vv/`, `bgb` → `bg/` (Artikel „bg/bgb.md“ der Spiegel-README),
+# `got_2022` → `go/`, `estg` → `es/`. Für Kennungen, die mit einer Ziffer
+# beginnen, gibt es den Sammelordner `0-9`.
+_GII_SHARD_LAENGE = 2
 _GII_SLUG_ZEICHEN = frozenset("abcdefghijklmnopqrstuvwxyz0123456789_-")
 _GII_NORM_ZEICHEN = frozenset("abcdefghijklmnopqrstuvwxyz0123456789")
+
+# Netzfehler, die eine AUSSAGE ÜBER DEN MESSWEG sind – nicht über die Quelle.
+# Nur diese Klassen dürfen einen Abruf „unklar“ machen. Ein Tippfehler, ein
+# Attributfehler oder ein falsch entpacktes Tupel gehört NICHT hierher: Er ist
+# ein Defekt dieses Skripts und muss mit Exit 2 durchschlagen (#1024).
+NETZ_AUSNAHMEN = (
+    urllib.error.URLError,
+    urllib.error.HTTPError,
+    http.client.HTTPException,
+    socket.timeout,
+    TimeoutError,
+    ConnectionError,
+    ssl.SSLError,
+    OSError,
+)
+
+# Wiederholungen bei transienten PSI-/Netz-Antworten. Zwei Versuche mit
+# kurzer Pause: ein Wackler ist kein Befund, ein Dauerausfall bleibt einer.
+_GII_VERSUCHE = 2
+_GII_PAUSE_SEKUNDEN = 1.5
+_GII_TRANSIENT_STATUS = frozenset({408, 425, 429, 500, 502, 503, 504})
 
 
 def _normalisiert(url: str) -> tuple[str, str, str]:
@@ -138,21 +222,196 @@ def abruf_http(url: str, timeout: float = 10.0) -> tuple[int, str]:
     )
 
 
-def abruf_gii_spiegel_http(url: str, timeout: float = 10.0) -> tuple[int, str]:
-    """Lädt den täglich synchronisierten GII-Bundesrecht-Spiegel über net_safety."""
+def _github_kopf(*, roh: bool) -> dict[str, str]:
+    """Kopfzeilen für GitHub.
+
+    `GH_TOKEN` geht AUSSCHLIESSLICH an `api.github.com`. Ein Bearer-Token an
+    `raw.githubusercontent.com` wäre ein Geheimnis auf einem Weg, der es
+    nicht braucht – und der Rohweg kennt kein Kontingent, das es lohnt.
+    """
+    kopf = {
+        "User-Agent": USER_AGENT,
+        "Accept": "application/vnd.github.raw" if roh else "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+    }
+    return kopf
+
+
+def _github_token() -> str:
+    """Kontingent-Schlüssel für `api.github.com` – wird nie ausgegeben."""
+    return (os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN") or "").strip()
+
+
+def _spiegel_abruf(url: str, *, timeout: float) -> tuple[int, bytes]:
+    """Ein Abruf des Spiegels über `net_safety` – mit dem 3-Tupel-Vertrag.
+
+    DER FEHLER VON #1024: `sicherer_abruf()` gibt `(status, kopf, roh)` zurück.
+    Wer es als 2-Tupel entpackt, bekommt einen `ValueError` – und ein
+    `except Exception:` machte daraus „Quelle unklar“. Hier wird der Vertrag
+    deshalb EINMAL an genau einer Stelle ausgepackt, benannt und geprüft.
+    """
     from net_safety import sicherer_abruf
 
+    ist_api = _normalisiert(url)[0] == _normalisiert(_GII_SPIEGEL_API)[0]
+    kopf = _github_kopf(roh=ist_api)
+    token = _github_token()
+    if ist_api and token:
+        kopf["Authorization"] = f"Bearer {token}"
+    status, _antwort_kopf, roh = sicherer_abruf(
+        url,
+        headers=kopf,
+        timeout=timeout,
+        max_bytes=_GII_MAX_BYTES,
+        erlaube_loopback=False,
+    )
+    return int(status), bytes(roh or b"")
+
+
+def abruf_gii_spiegel_http(url: str, timeout: float = 10.0,
+                           *, abruf=None, versuche: int = _GII_VERSUCHE) -> tuple[int, bytes]:
+    """Lädt eine Datei des täglichen Bundesrecht-Spiegels: (Status, Rohbytes).
+
+    Wiederholt wird AUSSCHLIESSLICH, was transient ist (408/425/429/5xx und
+    reine Netzabbrüche). Ein 403 oder 404 wiederholt sich nicht – ein
+    Wiederholen würde nur das Kontingent des Spiegels verbrauchen und die
+    Laufzeit verlängern, ohne eine andere Antwort zu bekommen. Danach wird
+    der Status GEMELDET, nicht geschluckt: Was daraus folgt, entscheidet
+    `pruefe_quelle`.
+    """
+    abruf = abruf or _spiegel_abruf
+    letzter_status = 0
+    gesamt = max(1, versuche)
+    for versuch in range(gesamt):
+        wiederholen = versuch + 1 < gesamt
+        try:
+            status, roh = abruf(url, timeout=timeout)
+        except urllib.error.HTTPError as exc:
+            letzter_status = int(exc.code)
+            if letzter_status in _GII_TRANSIENT_STATUS and wiederholen:
+                time.sleep(_GII_PAUSE_SEKUNDEN)
+                continue
+            return letzter_status, b""
+        except NETZ_AUSNAHMEN:
+            if wiederholen:
+                time.sleep(_GII_PAUSE_SEKUNDEN)
+                continue
+            raise
+        letzter_status = int(status)
+        if letzter_status not in _GII_TRANSIENT_STATUS:
+            return letzter_status, roh
+        if wiederholen:
+            time.sleep(_GII_PAUSE_SEKUNDEN)
+    return letzter_status, b""
+
+
+def _gii_shard(slug: str) -> str:
+    """Ablageordner des Spiegels für eine GII-Kennung (eine Stelle, ein Grund)."""
+    return ("0-9" if slug[0].isdigit()
+            else slug[:_GII_SHARD_LAENGE].replace("-", "_"))
+
+
+def _gii_spiegel_url(slug: str) -> str:
+    """Primärweg: Raw-Adresse im täglichen Bundesrecht-Spiegel."""
+    return f"{_GII_SPIEGEL_BASIS}/{_gii_shard(slug)}/{quote(slug, safe='')}.md"
+
+
+def _gii_spiegel_api_url(slug: str) -> str:
+    """Rückfallweg über die GitHub-API (Dateien > 1 MB, Kontingent mit Token)."""
+    return (f"{_GII_SPIEGEL_API}/{_gii_shard(slug)}/{quote(slug, safe='')}.md"
+            "?ref=main")
+
+
+def _spiegel_primaer(slug: str, *, timeout: float, abruf) -> tuple[int, bytes]:
+    """Raw-Abruf – GENAU EIN Versuch.
+
+    Der Rückfall auf `api.github.com` ist der zweite Versuch; ein eigener
+    Retry davor würde dasselbe Kontingent zweimal belasten und den Lauf
+    verlängern, ohne eine andere Antwort zu bekommen.
+    """
     try:
-        status, nutzlast = sicherer_abruf(
-            url,
-            headers={"User-Agent": USER_AGENT},
-            timeout=timeout,
-            max_bytes=_GII_MAX_BYTES,
-            erlaube_loopback=False,
-        )
+        return abruf_gii_spiegel_http(_gii_spiegel_url(slug), timeout,
+                                      abruf=abruf, versuche=1)
     except urllib.error.HTTPError as exc:
-        return int(exc.code), ""
-    return int(status), nutzlast.decode("utf-8", errors="replace")
+        return int(exc.code), b""
+    except NETZ_AUSNAHMEN:
+        return 0, b""
+
+
+def abruf_gii_spiegel(slug: str, timeout: float = 10.0, *,
+                      abruf=None) -> tuple[int, str]:
+    """Zweistufiger Abruf; gibt (Status, TEXT) zurück (UTF-8, verlustarm)."""
+    """Zweistufiger Spiegelabruf: Raw zuerst, `api.github.com` als Rückfall.
+
+    Beide Wege liefern denselben Dateiinhalt; der zweite existiert, weil
+    `raw.githubusercontent.com` bei großen Dateien und ohne Token unzuverlässig
+    ist (Kontingent, Rate-Limit). Scheitern beide, bleibt der Status des
+    PRIMÄRWEGS stehen – er beschreibt, was der Messweg gesagt hat.
+    """
+    abruf = abruf or _spiegel_abruf
+    status, roh = _spiegel_primaer(slug, timeout=timeout, abruf=abruf)
+    if 200 <= status < 300 and roh:
+        return status, _dekodiere(roh)
+    if status in (404, 410):
+        # Endgültige Auskunft des Spiegels – kein zweiter Weg nötig.
+        return status, ""
+    api_status, api_roh = 0, b""
+    try:
+        api_status, api_roh = abruf_gii_spiegel_http(
+            _gii_spiegel_api_url(slug), timeout, abruf=abruf)
+    except urllib.error.HTTPError as exc:
+        api_status = int(exc.code)
+    except NETZ_AUSNAHMEN:
+        api_status = 0
+    if 200 <= api_status < 300 and api_roh:
+        return api_status, _dekodiere(api_roh)
+    return status or api_status, ""
+
+
+def _dekodiere(roh: bytes | str) -> str:
+    """Ein Abrufergebnis als Text. Bytes und Text sind beide zulässig,
+    weil Tests Attrappen in der jeweils bequemeren Form stellen dürfen."""
+    return roh.decode("utf-8", errors="replace") if isinstance(roh, bytes) else str(roh)
+
+
+def probe_bundesrecht(urls: list[str] | None = None, *, timeout: float = 15.0) -> int:
+    """Live-Nachweis des Messwegs für die Bundesrechts-Zitate (`--probe-bundesrecht`).
+
+    Diese Probe ist KEIN Gate (sie braucht Netz und ist damit nicht
+    reproduzierbar); sie beantwortet im Betrieb die eine Frage, die kein
+    Selbsttest beantworten kann: Kommt der amtliche Text über den Spiegel
+    wirklich an? Aufruf im YMYL-Workflow als eigener Schritt mit
+    `continue-on-error: true` – ein Netzausfall darf die Silbe nicht rot machen.
+    """
+    geprueft = urls or [
+        "https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+        "https://www.gesetze-im-internet.de/vvg_2008/__96.html",
+        "https://www.gesetze-im-internet.de/bgb/__502.html",
+        "https://www.gesetze-im-internet.de/got_2022/",
+    ]
+    fehler = 0
+    for url in geprueft:
+        zerlegt = _parse_gii_ziel(url)
+        if zerlegt is None:
+            print(f"❔ {url} – keine kanonische GII-Adresse (nichts zu prüfen)")
+            continue
+        slug, einzelnorm = zerlegt
+        status, inhalt = abruf_gii_spiegel(slug, timeout)
+        quelle_ok = _spiegel_bestaetigt_quelle(inhalt, slug) if status == 200 else False
+        norm_ok = True
+        bezeichnung = ""
+        if quelle_ok and einzelnorm is not None:
+            gefunden, aktiv = _spiegel_pruefe_einzelnorm(inhalt, einzelnorm)
+            norm_ok = gefunden and aktiv
+            bezeichnung = f"{einzelnorm[0]} {einzelnorm[1]}".strip()
+        if not quelle_ok or not norm_ok:
+            fehler += 1
+            print(f"🛑 {url} → {slug}: HTTP {status}, Quelle bestätigt="
+                  f"{quelle_ok}, Norm {bezeichnung or '–'} aktiv={norm_ok}")
+            continue
+        print(f"✅ {url} → {slug}"
+              + (f" · {bezeichnung} aktiv" if bezeichnung else " · Gesamtwerk bestätigt"))
+    print(f"Bundesrechts-Messweg: {len(geprueft) - fehler}/{len(geprueft)} Zitate belegt.")
+    return 0 if fehler == 0 else 1
 
 
 def _parse_gii_ziel(zitat: str) -> tuple[str, tuple[str, str] | None] | None:
@@ -276,54 +535,92 @@ def _spiegel_pruefe_einzelnorm(
     return gefunden, aktiv
 
 
+def _unklar_mit_grund(
+    basis: dict, grund: str, *, spiegel_url: str | None = None
+) -> dict:
+    """Fail-closed-Ausgang mit sichtbarer Fehlerklasse und Ersatzadresse.
+
+    Programmierfehler werden weiterhin nicht abgefangen. Diese Diagnose gilt
+    ausschließlich den aufgezählten Netzfehlern und nicht belastbaren
+    Spiegelantworten; sie verwandelt keinen Werkzeugfehler in `unklar`.
+    """
+    kopie = dict(basis)
+    kopie["hinweis"] = grund
+    kopie["pruefpfad"] = PFAD_UNKLAR
+    if spiegel_url is not None:
+        kopie["spiegel_url"] = spiegel_url
+    return kopie
+
+
+def _spiegel_tot(zitat: str, spiegel_url: str, befund: str) -> dict:
+    """Harter Normbefund mit nachvollziehbarer Belegstelle und Prüfgrenze."""
+    return {
+        "status": TOT,
+        "zitat": zitat,
+        "end_url": "",
+        "befund": befund,
+        "hinweis": (
+            "Befund stützt sich auf den Bundesrechts-Spiegel, nicht auf die "
+            "amtliche Seite – vor jeder Textänderung redaktionell gegen die "
+            "Primärquelle verifizieren"
+        ),
+        "spiegel_url": spiegel_url,
+        "pruefpfad": PFAD_SPIEGEL,
+    }
+
+
 def _pruefe_gii_spiegel(
     zitat: str, basis: dict, *, spiegel_abruf, timeout: float
 ) -> dict:
-    """Fail-closed Normprüfung über den täglichen GII-Spiegel bei Runner-Blockade."""
+    """Fail-closed Normprüfung über den täglichen GII-Spiegel bei Runner-Blockade.
+
+    `spiegel_abruf` bekommt den SLUG (nicht die fertige URL): Der Abrufweg ist
+    Sache der Abrufschicht (Raw → API-Rückfall), die Wache entscheidet nur
+    über das Ergebnis. Netzfehler sind eine abgeschlossene Liste; alles
+    andere schlägt durch (Programmierfehler ≠ Quellenbefund, #1024).
+    """
     zerlegt = _parse_gii_ziel(zitat)
     if zerlegt is None:
         return basis
     slug, einzelnorm = zerlegt
     spiegel_url = _gii_spiegel_url(slug)
     try:
-        status, inhalt = spiegel_abruf(spiegel_url, timeout=timeout)
-    except Exception:  # noqa: BLE001 – auch Spiegel nicht erreichbar → bleibt unklar
-        return basis
+        status, inhalt = spiegel_abruf(slug, timeout=timeout)
+    except NETZ_AUSNAHMEN as exc:
+        return _unklar_mit_grund(
+            basis,
+            f"Direktabruf blockiert und Bundesrechts-Spiegel nicht erreichbar "
+            f"({type(exc).__name__}) – fail-closed unklar",
+            spiegel_url=spiegel_url,
+        )
     if status in (404, 410):
-        return {
-            "status": TOT,
-            "zitat": zitat,
-            "end_url": "",
-            "befund": (
-                f"Gesetz/Verordnung '{slug}' im aktuellen Bundesrechtsbestand "
-                f"nicht mehr vorhanden (Spiegel HTTP {status})"
-            ),
-        }
+        return _spiegel_tot(
+            zitat, spiegel_url,
+            f"Gesetz/Verordnung '{slug}' im aktuellen Bundesrechtsbestand "
+            f"nicht mehr vorhanden (Spiegel HTTP {status})",
+        )
     if not (200 <= status < 300) or not _spiegel_bestaetigt_quelle(inhalt, slug):
-        return basis
+        return _unklar_mit_grund(
+            basis,
+            f"Spiegelantwort nicht belastbar (HTTP {status} oder Herkunft nicht "
+            "bestätigt) – fail-closed unklar",
+            spiegel_url=spiegel_url,
+        )
     if einzelnorm is not None:
         gefunden, aktiv = _spiegel_pruefe_einzelnorm(inhalt, einzelnorm)
         bezeichnung = f"{einzelnorm[0]} {einzelnorm[1]}".strip()
         if not gefunden:
-            return {
-                "status": TOT,
-                "zitat": zitat,
-                "end_url": "",
-                "befund": (
-                    f"Einzelnorm {bezeichnung} in '{slug}' nicht vorhanden – "
-                    "Beleg trägt nicht mehr"
-                ),
-            }
+            return _spiegel_tot(
+                zitat, spiegel_url,
+                f"Einzelnorm {bezeichnung} in '{slug}' nicht vorhanden – "
+                "Beleg trägt nicht mehr",
+            )
         if not aktiv:
-            return {
-                "status": TOT,
-                "zitat": zitat,
-                "end_url": "",
-                "befund": (
-                    f"Einzelnorm {bezeichnung} in '{slug}' ist weggefallen – "
-                    "Beleg trägt nicht mehr"
-                ),
-            }
+            return _spiegel_tot(
+                zitat, spiegel_url,
+                f"Einzelnorm {bezeichnung} in '{slug}' ist weggefallen – "
+                "Beleg trägt nicht mehr",
+            )
     return {
         "status": OK,
         "zitat": zitat,
@@ -333,6 +630,8 @@ def _pruefe_gii_spiegel(
             "Direktabruf durch GII-Runner-Filter blockiert; "
             "aktiver Normbestand über täglichen Bundesrechts-Spiegel bestätigt"
         ),
+        "spiegel_url": spiegel_url,
+        "pruefpfad": PFAD_SPIEGEL,
     }
 
 
@@ -341,7 +640,7 @@ def pruefe_quelle(
     direkt_timeout: float | None = None,
 ) -> dict:
     """Ein Zitat prüfen. ``abruf`` und ``spiegel_abruf`` sind injizierbar."""
-    nutze_spiegel = spiegel_abruf or (abruf_gii_spiegel_http if abruf is None else None)
+    nutze_spiegel = spiegel_abruf or (abruf_gii_spiegel if abruf is None else None)
     abruf = abruf or abruf_http
     zitat = str(url or "").strip()
     if not zitat.startswith("https://"):
@@ -360,7 +659,10 @@ def pruefe_quelle(
         else:
             return {"status": TOT, "zitat": zitat, "end_url": "",
                     "befund": f"HTTP {exc.code} – Beleg nicht mehr abrufbar"}
-    except Exception as exc:  # noqa: BLE001 – Netzfehler sind kein Befund
+    except NETZ_AUSNAHMEN as exc:
+        # Abgeschlossene Liste: Netzfehler sind ein Befund über den Messweg.
+        # Ein NameError/ValueError/TypeError gehört hier NICHT hin – er wäre
+        # der Defekt dieses Skripts und muss mit Exit 2 durchschlagen (#1024).
         basis_unklar = {
             "status": UNKLAR, "zitat": zitat, "end_url": "",
             "befund": f"nicht erreichbar ({type(exc).__name__})",
@@ -394,7 +696,11 @@ def belegketten(*, nur_hochrisiko: bool = False) -> list[dict]:
     for pfad in gate.all_post_paths():
         try:
             fm, _, _ = gate.load_article(pfad)
-        except Exception:  # noqa: BLE001 – unlesbare Datei eigenständig melden
+        except (OSError, ValueError, yaml.YAMLError, KeyError, TypeError):
+            # Bewusst aufgezählt statt `except Exception`: Nur eine
+            # unlesbare DATEI darf zu einem Befund werden. Ein DEFEKT in
+            # `load_article` (Attribut-, Namensfehler) ist ein Werkzeug-
+            # fehler und muss mit Exit 2 durchschlagen (#1024).
             eintraege.append({
                 "slug": pfad.parent.name, "path": str(pfad.relative_to(ROOT)),
                 "risk": "unbekannt", "approved": False, "quellen": [],
@@ -442,9 +748,9 @@ def pruefe_alle(*, nur_hochrisiko: bool = False, abruf=None,
                     url, abruf=abruf, spiegel_abruf=spiegel_abruf,
                     timeout=timeout, direkt_timeout=d_timeout,
                 )
-                if ist_gii and (
-                    res["status"] == UNKLAR or "GII-Runner-Filter" in str(res.get("hinweis") or "")
-                ):
+                # Wahrheit ist der Prüfpfad, nicht ein zufälliger Hinweistext.
+                if ist_gii and (res["status"] == UNKLAR
+                                or res.get("pruefpfad") == PFAD_SPIEGEL):
                     gii_direkt_blockiert = True
                 cache[url] = res
             # Kopie: Zuordnung eines Artikels darf andere nicht überschreiben.
@@ -463,19 +769,37 @@ def pruefe_alle(*, nur_hochrisiko: bool = False, abruf=None,
         "geprueft": len(ergebnisse), "zaehler": zaehler,
         "befunde": [e for e in ergebnisse if e["status"] != OK],
         "blockierend": blockierend,
+        "spiegel_bestaetigt": [
+            e for e in ergebnisse
+            if e["status"] == OK and e.get("pruefpfad") == PFAD_SPIEGEL
+        ],
     }
 
 
 def _zeile(eintrag: dict) -> str:
     symbol = {OK: "✅", UMGELEITET: "⚠️ ", TOT: "🛑", UNKLAR: "❔"}[eintrag["status"]]
-    return (f"  {symbol} {eintrag['slug']} · {eintrag['id']} · "
-            f"{eintrag['befund']}\n     {eintrag['zitat']}"
-            + (f"\n     → {eintrag['end_url']}" if eintrag.get("end_url")
-               and eintrag["status"] == UMGELEITET else ""))
+    text = (f"  {symbol} {eintrag['slug']} · {eintrag['id']} · "
+            f"{eintrag.get('befund', '')}\n     {eintrag['zitat']}")
+    if eintrag.get("end_url") and eintrag["status"] == UMGELEITET:
+        text += f"\n     → {eintrag['end_url']}"
+    if eintrag.get("spiegel_url"):
+        text += f"\n     → Spiegeldatei: {eintrag['spiegel_url']}"
+    if eintrag.get("hinweis"):
+        text += f"\n     ↳ {eintrag['hinweis']}"
+    return text
+
+
+def _zeile_spiegel(eintrag: dict) -> str:
+    """Sichtbare Ersatzprüfung: wer, welches Zitat, welche Datei, welcher Grund."""
+    return (f"  ✅ {eintrag['slug']} · {eintrag['id']} · {eintrag['zitat']}\n"
+            f"     → {eintrag.get('spiegel_url', '(Spiegeldatei unbekannt)')}\n"
+            f"     ↳ {eintrag.get('hinweis', '')}")
 
 
 def report_schreiben(ergebnis: dict) -> None:
     zaehler = ergebnis["zaehler"]
+    # Auch ältere Ergebnis-Dicts (Tests, eingefrorene Aufrufer) bleiben lesbar.
+    spiegel = ergebnis.get("spiegel_bestaetigt") or []
     zeilen = [
         "# Belegketten-Wache",
         "",
@@ -487,7 +811,10 @@ def report_schreiben(ergebnis: dict) -> None:
         "> kein Freispruch: unter derselben Adresse kann ein anderer Text stehen.",
         "",
         f"- Geprüfte Quellen: **{ergebnis['geprueft']}**",
-        f"- Unverändert erreichbar: **{zaehler[OK]}**",
+        f"- Ohne offenen Befund (`ok`): **{zaehler[OK]}**",
+        # Ehrliche Aufteilung: Ein Spiegel-ok ist kein Direktabruf.
+        f"- Unverändert direkt erreichbar: **{zaehler[OK] - len(spiegel)}**",
+        f"- Über Bundesrechts-Spiegel bestätigt: **{len(spiegel)}**",
         f"- Umgeleitet (Inhalt prüfen): **{zaehler[UMGELEITET]}**",
         f"- Nicht mehr abrufbar: **{zaehler[TOT]}**",
         f"- Nicht prüfbar (Netz/Timeout): **{zaehler[UNKLAR]}**",
@@ -498,7 +825,20 @@ def report_schreiben(ergebnis: dict) -> None:
         for eintrag in ergebnis["befunde"]:
             zeilen += [_zeile(eintrag), ""]
     else:
-        zeilen += ["## Befunde", "", "Keine Befunde – alle Belegketten unverändert erreichbar.", ""]
+        zeilen += ["## Befunde", "", "Keine offenen Abrufbefunde.", ""]
+    zeilen += [
+        "## Ersatzprüfung über den Bundesrechts-Spiegel",
+        "",
+        "> Ein solches `ok` bestätigt nur, dass die zitierte Norm im täglichen",
+        "> Bundesrechtsbestand vorhanden und aktiv ist. Es prüft weder den",
+        "> Artikeltext noch die Aussage und ist keine fachliche Freigabe.",
+        "",
+    ]
+    if spiegel:
+        for eintrag in spiegel:
+            zeilen += [_zeile_spiegel(eintrag), ""]
+    else:
+        zeilen += ["Kein Zitat musste über den Spiegel bestätigt werden.", ""]
     REPORT.write_text("\n".join(zeilen), encoding="utf-8")
 
 
@@ -573,17 +913,22 @@ def selftest() -> list[str]:
         "### § 41 (weggefallen)\n"
     )
 
-    def spiegel_vvg(url, timeout=10.0):
-        if url.endswith("/vv/vvg_2008.md"):
+    def spiegel_vvg(slug, timeout=10.0):
+        """Spiegel-Abruf im neuen Vertrag: (slug, timeout) -> (status, text)."""
+        if slug == "vvg_2008":
             return 200, vvg_md
         return 404, ""
 
-    def spiegel_offline(url, timeout=10.0):
+    def spiegel_offline(slug, timeout=10.0):
         raise urllib.error.URLError("offline")
 
-    erwarte("GII aktive Einzelnorm trotz Runner-Block ok",
-            pruefe_quelle("https://www.gesetze-im-internet.de/vvg_2008/__40.html",
-                          abruf=abruf_netz, spiegel_abruf=spiegel_vvg)["status"] == OK)
+    erg_norm = pruefe_quelle(
+        "https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+        abruf=abruf_netz, spiegel_abruf=spiegel_vvg)
+    erwarte("GII aktive Einzelnorm trotz Runner-Block ok", erg_norm["status"] == OK)
+    erwarte("Ersatzprüfung nennt Pfad und Spiegeldatei",
+            erg_norm.get("pruefpfad") == PFAD_SPIEGEL
+            and erg_norm.get("spiegel_url") == _gii_spiegel_url("vvg_2008"))
     erwarte("GII Gesamtwerk trotz Runner-Block ok",
             pruefe_quelle("https://www.gesetze-im-internet.de/vvg_2008/",
                           abruf=abruf_netz, spiegel_abruf=spiegel_vvg)["status"] == OK)
@@ -599,9 +944,131 @@ def selftest() -> list[str]:
     erwarte("GII direktes 404 wird niemals durch Spiegel überstimmt",
             pruefe_quelle("https://www.gesetze-im-internet.de/vvg_2008/__40.html",
                           abruf=abruf_404, spiegel_abruf=spiegel_vvg)["status"] == TOT)
+    erg_offline = pruefe_quelle(
+        "https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+        abruf=abruf_netz, spiegel_abruf=spiegel_offline)
     erwarte("GII + Spiegel offline bleibt fail-closed unklar",
-            pruefe_quelle("https://www.gesetze-im-internet.de/vvg_2008/__40.html",
-                          abruf=abruf_netz, spiegel_abruf=spiegel_offline)["status"] == UNKLAR)
+            erg_offline["status"] == UNKLAR)
+    erwarte("unklar nennt Fehlerklasse und versuchte Spiegeldatei",
+            "URLError" in str(erg_offline.get("hinweis") or "")
+            and erg_offline.get("spiegel_url") == _gii_spiegel_url("vvg_2008"))
+
+    # ----- Fehlerklassen (04.11.2026, #1024) -------------------------------
+    # Der Defekt war ein ValueError aus einem falsch entpackten Tupel, den ein
+    # `except Exception:` als „unklar“ tarnte. Ein PROGRAMMIERFEHLER darf
+    # niemals als Quellenbefund erscheinen – er muss durchschlagen.
+    def abruf_typfehler(url, timeout=10.0):
+        raise ValueError("too many values to unpack (expected 2)")
+
+    try:
+        pruefe_quelle("https://www.verbraucherzentrale.de/wissen/alt-13888",
+                      abruf=abruf_typfehler)
+    except ValueError:
+        pass
+    else:
+        fehler.append("Programmierfehler wurde als Quellenbefund getarnt")
+
+    def spiegel_typfehler(slug, timeout=10.0):
+        raise AttributeError("'NoneType' object has no attribute 'decode'")
+
+    try:
+        pruefe_quelle("https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+                      abruf=abruf_netz, spiegel_abruf=spiegel_typfehler)
+    except AttributeError:
+        pass
+    else:
+        fehler.append("Programmierfehler im Spiegelabruf wurde getarnt")
+
+    # ----- Netzfehlerliste ist abgeschlossen ------------------------------
+    for klasse in (urllib.error.URLError, urllib.error.HTTPError,
+                   TimeoutError, ConnectionResetError, ssl.SSLError):
+        erwarte(f"{klasse.__name__} gehört zu NETZ_AUSNAHMEN",
+                issubclass(klasse, NETZ_AUSNAHMEN))
+
+    # ----- Ablageordnung des Spiegels (eine Stelle, ein Grund) ------------
+    erwarte("vvg_2008 liegt in vv/", _gii_shard("vvg_2008") == "vv")
+    erwarte("bgb liegt in bg/", _gii_shard("bgb") == "bg")
+    erwarte("got_2022 liegt in go/", _gii_shard("got_2022") == "go")
+    erwarte("estg liegt in es/", _gii_shard("estg") == "es")
+    erwarte("Ziffernkennung liegt in 0-9", _gii_shard("1wofg") == "0-9")
+    erwarte("Spiegel-URL trägt Ordner und Datei",
+            _gii_spiegel_url("vvg_2008").endswith("/vv/vvg_2008.md"))
+    erwarte("API-URL pinnt die Fassung",
+            _gii_spiegel_api_url("bgb").endswith("/bg/bgb.md?ref=main"))
+    erwarte("API-Abruf fragt rohen Inhalt an", "vnd.github.raw" in _github_kopf(roh=True)["Accept"])
+    erwarte("Raw-Abruf fragt keine API-Version an",
+            "X-GitHub-Api-Version" in _github_kopf(roh=False))
+
+    # ----- Der 3-Tupel-Vertrag von sicherer_abruf (#1024) ----------------
+    # Der Spiegelabruf MUSS das Tupel korrekt zerlegen. Geprüft wird gegen
+    # eine Attrappe mit dem echten Rückgabevertrag, damit ein künftiger
+    # Fehler in `_spiegel_abruf` hier auffällt und nicht als „unklar“ endet.
+    import net_safety as _ns
+    original = _ns.sicherer_abruf
+
+    def attrappe_3_tupel(url, *, headers=None, timeout=20.0, max_bytes=0,
+                         erlaube_loopback=False):
+        return 200, {"content-type": "text/markdown"}, vvg_md.encode("utf-8")
+
+    _ns.sicherer_abruf = attrappe_3_tupel
+    try:
+        status, inhalt = _spiegel_abruf(_gii_spiegel_url("vvg_2008"), timeout=1.0)
+        erwarte("3-Tupel von sicherer_abruf wird entpackt", status == 200)
+        erwarte("Inhalt kommt als Rohbytes an",
+                b"quelle: https://www.gesetze-im-internet.de/vvg_2008/" in inhalt)
+    finally:
+        _ns.sicherer_abruf = original
+
+    # ----- Zweistufiger Abruf: Raw vor API, 404 endgültig ----------------
+    aufrufe = []
+
+    def zweistufig_erfolg(url, timeout=10.0):
+        aufrufe.append(url)
+        return 200, "---\nquelle: https://www.gesetze-im-internet.de/vvg_2008/\n---\n### § 40 Test\n"
+
+    erwarte("Raw-Abruf genügt, wenn er trägt",
+            abruf_gii_spiegel("vvg_2008", abruf=zweistufig_erfolg)[0] == 200
+            and len(aufrufe) == 1)
+    erwarte("ERSTER Weg ist raw.githubusercontent.com",
+            _normalisiert(aufrufe[0])[0] == "raw.githubusercontent.com")
+
+    aufrufe.clear()
+
+    def zweistufig_fallback(url, timeout=10.0):
+        aufrufe.append(url)
+        if _normalisiert(url)[0] == "raw.githubusercontent.com":
+            raise urllib.error.HTTPError(url, 429, "rate limited", None, None)
+        return 200, "---\nquelle: https://www.gesetze-im-internet.de/bgb/\n---\n"
+
+    status, _ = abruf_gii_spiegel("bgb", abruf=zweistufig_fallback)
+    erwarte("429 auf dem Raw-Weg führt zum API-Rückfall",
+            status == 200 and len(aufrufe) >= 2
+            and _normalisiert(aufrufe[-1])[0] == "api.github.com")
+    erwarte("Rückfall adressiert dieselbe Datei",
+            "/bg/bgb.md" in aufrufe[-1] and "ref=main" in aufrufe[-1])
+
+    aufrufe.clear()
+
+    def zweistufig_404(url, timeout=10.0):
+        aufrufe.append(url)
+        raise urllib.error.HTTPError(url, 404, "Not Found", None, None)
+
+    erwarte("404 auf dem Raw-Weg ist endgültig (kein Rückfall)",
+            abruf_gii_spiegel("altgesetz", abruf=zweistufig_404)[0] == 404
+            and len(aufrufe) == 1)
+
+    # ----- Retry bei transienten Antworten --------------------------------
+    versuche = {"n": 0}
+
+    def wackelig(url, timeout=10.0):
+        versuche["n"] += 1
+        if versuche["n"] == 1:
+            raise urllib.error.HTTPError(url, 503, "Service Unavailable", None, None)
+        return 200, "---\nquelle: https://www.gesetze-im-internet.de/vvg_2008/\n---\n"
+
+    status, _ = abruf_gii_spiegel_http(_gii_spiegel_url("vvg_2008"), 1.0,
+                                      abruf=wackelig, versuche=2)
+    erwarte("ein 503 wird einmal wiederholt", status == 200 and versuche["n"] == 2)
     return fehler
 
 
@@ -618,8 +1085,13 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--report", action="store_true",
                         help="BELEGKETTEN-WACHE-REPORT.md schreiben")
     parser.add_argument("--timeout", type=float, default=10.0)
+    parser.add_argument("--probe-bundesrecht", action="store_true",
+                        help="Live-Nachweis des Messwegs für die Bundesrechts-Zitate")
     parser.add_argument("--selftest", action="store_true")
     args = parser.parse_args(argv)
+
+    if args.probe_bundesrecht:
+        return probe_bundesrecht(timeout=max(args.timeout, 15.0))
 
     if args.selftest:
         fehler = selftest()
@@ -640,7 +1112,8 @@ def main(argv: list[str] | None = None) -> int:
         z = ergebnis["zaehler"]
         print(f"Belegketten-Wache: {ergebnis['geprueft']} Quellen · "
               f"{z[OK]} ok · {z[UMGELEITET]} umgeleitet · "
-              f"{z[TOT]} tot · {z[UNKLAR]} unklar")
+              f"{z[TOT]} tot · {z[UNKLAR]} unklar · "
+              f"{len(ergebnis.get('spiegel_bestaetigt') or [])} über Spiegel bestätigt")
         for eintrag in ergebnis["befunde"]:
             print(_zeile(eintrag))
     return 1 if ((args.strict and ergebnis["blockierend"])

@@ -1,41 +1,41 @@
 {
   "version": 1,
-  "generated_at": "2026-11-04T10:51:45Z",
+  "generated_at": "2026-11-04T13:59:55Z",
   "modus": "kandidaten",
-  "commit": "038b04fee30efc4f53112c0c31c6167acdbf63ab",
+  "commit": "59c328d9a4a6d8c48f3170e0da596acc5c2fe7af",
   "kapazitaet": {
     "stichtag": "2026-11-04",
-    "artikel": 112,
-    "faellig": 0,
+    "artikel": 113,
+    "faellig": 1,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
-      "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+      "slug": "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
       "frist": "2026-11-11",
       "restlaufzeit": 7
     },
     "budget": 4,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 4.0,
-    "bedarf_je_tag": 2.733,
-    "bedarf_je_woche": 19.1,
-    "deckung_prozent": 146.3,
+    "bedarf_je_tag": 2.767,
+    "bedarf_je_woche": 19.4,
+    "deckung_prozent": 144.6,
     "horizont_tage": 120,
     "vorlauf_tage": 7,
     "nachhol_frist_tage": 7,
-    "abbau_tage": null,
+    "abbau_tage": 0,
     "verletzungen_alt": 0,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
     "verletzungen": [],
-    "offen_im_horizont": 112,
+    "offen_im_horizont": 113,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
     "sockel": 4,
     "empfohlenes_budget": 4,
     "empfehlung_erreicht": true,
-    "hartes_limit": 10
+    "hartes_limit": 16
   },
   "ursachen": [
     {
@@ -49,8 +49,12 @@
         "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
         "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
         "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+        "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+        "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
         "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
+        "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
         "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
         "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
         "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
         "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
@@ -61,7 +65,7 @@
         "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
         "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig"
       ],
-      "anzahl": 15
+      "anzahl": 19
     },
     {
       "check": "RD2-einzigartigkeit",
@@ -113,10 +117,10 @@
     }
   ],
   "befundlage": {
-    "offen": 88,
-    "seiten": 20,
-    "live_befunde": 63,
-    "live_seiten": 15,
+    "offen": 106,
+    "seiten": 24,
+    "live_befunde": 81,
+    "live_seiten": 19,
     "ueberholt": 0,
     "ohne_fassung": 20,
     "nicht_entscheidbar": 0,
@@ -128,8 +132,12 @@
       "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": 3,
       "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": 5,
       "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": 5,
+      "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": 5,
+      "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": 5,
       "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": 5,
+      "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": 3,
       "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": 5,
+      "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": 5,
       "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": 3,
       "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": 3,
       "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": 5,
@@ -375,22 +383,29 @@
       "checks": []
     },
     "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
-      "sha256": "d1caf8530c3a997dde39acc4210f458610ad7180e1c7a1b57e4279e8044debab",
-      "urteil": "freigabe-reif",
+      "sha256": "0c9dc4fdd80f106eae9ba7c14be2f513cb45b87130ef85f8b4e9f83117450e04",
+      "urteil": "blockiert",
       "risikoklasse": "erhoeht",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-11",
+      "naechste_pruefung": "2026-12-19",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "1dbeb2f8c51e78d11d49 (luecke): Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 € an reinen Gebühren kosten, ist unbelegt.; 33e736ac6afe996b491a (luecke): Behauptung, dass Echtzeit‑Überweisungen bei kostenlosen Konten generell gebührenfrei sind, fehlt jede Quelle.; 96b7b7768d402884810c (luecke): Aussage, dass Einlagen bis 100.000 € durch die deutsche Einlagensicherung geschützt sind"
+        }
+      ]
     },
     "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
       "sha256": "3572ba22f4f8761a1da485017114c803f9d6e21dc59165b5a83d83416381bd79",
@@ -483,22 +498,29 @@
       "checks": []
     },
     "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
-      "sha256": "a33528864f37ac50eea237d872150b8b9a001d29f1a4463e9319e7079e9e34e6",
-      "urteil": "freigabe-reif",
+      "sha256": "128458b21649044bc49eab0ab79a618e5c36c1a97b6656173a225ec8bb4c32ca",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-11",
+      "naechste_pruefung": "2026-12-19",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "4afb8daed73677ee6224 (luecke): Angabe, dass 58 % der Nutzer ihr Haushaltsbuch digital führen, beruft sich angeblich auf Statista 2025, jedoch wird keine Quelle genannt.; 9eb9a90899cc8ca66020 (luecke): Sparpotenzial‑Beispiele (z. B. DSL‑Tarifwechsel von 44 € auf 24 €) enthalten konkrete Zahlen ohne Quellenangabe.; b4bd085bc84a6131b644 (luecke): Behauptung, dass 60 % der Haushalte in Deutschland ihr"
+        }
+      ]
     },
     "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
       "sha256": "ef1e94a62986aec0b1068fcb8a076a247157c3c60bb992a05b98b6996fc98d1b",
@@ -532,22 +554,29 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "9b2680fc6458e25053d8aba78065b7472841708103ecd7520361775084a3f322",
-      "urteil": "freigabe-reif",
+      "sha256": "e983e2972f7ca871afb0cf69294d1b0bea35d1f164b04b6f67727dccf76ef705",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-11",
+      "naechste_pruefung": "2026-12-19",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "3fe383f6d452737f66f2 (praezision): Die im Teaser und Text genannten monatlichen Ersparnisse von 350 € bis 600 € werden als Marktfakten ohne Quellenbeleg oder methodische Herleitung (z. B. Referenzhaushalt des Statistischen Bundesamtes) angeführt.; 7bba759bbb4ca14c7f35 (luecke): Der Ratgeber empfiehlt Tarifwechsel bei Energie zur Kostensenkung, verschweigt aber den aktuellen Markttrend massiv steig"
+        }
+      ]
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "1e85a143e23262ce5ce66dac419624611c393fd5830d30ae607d56a28b133a23",
@@ -755,22 +784,29 @@
       "checks": []
     },
     "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": {
-      "sha256": "1eeba08cf27253aaf85daad4c156296f8854d4c66d97ae0d91be205db9fdc968",
-      "urteil": "freigabe-reif",
+      "sha256": "9b46139c418955c5f015d6ea4e89ced11868911b31061389479be8ed52352d3b",
+      "urteil": "blockiert",
       "risikoklasse": "erhoeht",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-11",
+      "naechste_pruefung": "2026-12-19",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "16b3b8584ff802803aa9 (luecke): Angaben zum Fremdwährungsentgelt von „fast zwei Prozent“ bei Zahlungen in fremder Währung fehlen jede belegbare Referenz.; 7ff042b6fe804cdf101b (praezision): Formulierungen wie „einige Anbieter ohne Auslandsgebühr gehören zu den besten Karten für Reisen“ sind pauschal und ohne messbare Daten unpräzise.; bec83c4b814183fa1086 (luecke): Die Aussage, dass die kostenlose "
+        }
+      ]
     },
     "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": {
       "sha256": "2e3ca085ada3cb53d47297726da70911e8b5fec2887d30cbe2c969fb580b2b75",

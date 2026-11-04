@@ -1331,6 +1331,18 @@ history:
     #Stromsparen #Energiekosten #StromkostenSenken #EnergiediebeStoppen'
   ref: '117554322337329380'
   ai: false
+- posted_at: '2026-11-04T14:04:54.518172+01:00'
+  channel: mastodon
+  slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
+  title: 'Haushaltsbuch führen: App, Excel oder Stift im Vergleich'
+  angle: zahl
+  url: https://mastodon.social/@FranksFinanzcheck/117558312939140189
+  ok: true
+  text: 'Spare Zeit und behalte deine Finanzen im Blick. Eine kostenlose Banking‑App
+    sortiert Ausgaben automatisch – am praktischsten für die meisten. https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+    #Frugalismus #Geldsparen #HaushaltsbuchFuehren #BudgetPlanen'
+  ref: '117558312939140189'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1356,4 +1368,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-11-03T21:10:08.228062+01:00'
+updated_at: '2026-11-04T14:04:59.846726+01:00'

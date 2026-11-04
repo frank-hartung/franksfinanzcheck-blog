@@ -1,6 +1,6 @@
 # 🎬 Veröffentlichungskalender – Reels · Shorts · Video
 
-> Automatisch aktualisiert: 03.11.2026 21:10 (Europe/Berlin)  
+> Automatisch aktualisiert: 04.11.2026 14:05 (Europe/Berlin)  
 > Aktive Ziel-Plattformen: YouTube Shorts, Instagram Reels  
 > Zum Abonnieren: `video.ics`
 
@@ -22,7 +22,7 @@
 
 ## Zuletzt produziert
 
-- ✅  · Kfz versicherung vergleich bis zu 800 euro sparen
+- ✅  · Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen
 - ✅  · Preiswert surfen: DSL, Kabel oder Glasfaser im Vergleich
 
 ---

@@ -43,6 +43,19 @@ class GasBefunde996(unittest.TestCase):
                 with self.subTest(slug=slug, pattern=pattern):
                     self.assertNotRegex(surface, pattern)
 
+    def test_pinterest_plan_schreibt_keine_alten_versprechen_zurueck(self):
+        """Der tägliche Pin-Sync liest den Plan, nicht nur das Frontmatter."""
+        plan = yaml.safe_load((ROOT / 'data' / 'pinterest_plan.yaml').read_text(encoding='utf-8'))['pins']
+        for slug in (SLUGS[2], SLUGS[3]):
+            matching = [p for p in plan if f'/posts/{slug}/' in str(p.get('url', ''))]
+            self.assertTrue(matching, slug)
+            fm, _ = article(slug)
+            # Redaktionell gesperrte Texte müssen nicht identisch zum Plan sein.
+            self.assertIs(fm.get('pin_text_sync'), False)
+            for pin in matching:
+                self.assertNotRegex(pin['beschreibung'].lower(),
+                                    r'beste zeit|preise (?:anzieht|hochtreibt)|hundert euro|5 minuten|über 1\.000|ganzen winter gespart')
+
     def test_regulierungsrahmen_am_text_verlinkt(self):
         for slug in (SLUGS[0], SLUGS[1], SLUGS[3]):
             _, body = article(slug)

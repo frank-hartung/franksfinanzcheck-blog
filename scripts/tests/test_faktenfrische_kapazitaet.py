@@ -39,6 +39,7 @@ Ein Test, der die Wanduhr liest, ist eine Verabredung mit dem Kalender.
 from __future__ import annotations
 
 import datetime as dt
+import os
 import sys
 import unittest
 from pathlib import Path
@@ -374,7 +375,12 @@ class C45UrteilTest(unittest.TestCase):
         zahlen, fehler = gc._c45_deckung()
         self.assertIsNone(fehler, fehler)
         self.assertIn("urteil", zahlen)
-        self.assertEqual(zahlen["urteil"], [])
+        # Unter Kunstzeit ist der unveränderte Bestand zwangsläufig veraltet.
+        # Die Rechnung muss das echte Urteil weitergeben, aber nicht grün sein.
+        self.assertEqual(zahlen["urteil"],
+                         kap.c45_urteil(zahlen, ssot_pfad=gc.C45_SSOT))
+        if not os.environ.get("FFC_FREMD_UHR"):
+            self.assertEqual(zahlen["urteil"], [])
 
 
 class RepoZustandTest(unittest.TestCase):
@@ -427,6 +433,31 @@ class RepoZustandTest(unittest.TestCase):
         spitze = kap.kapazitaet_je_tag(limit, laeufe)
         self.assertGreaterEqual(spitze, kapazitaet,
                                 "hartes Limit muss über dem Plan liegen")
+
+    def test_vollrueckstand_nach_97_tagen_behaelt_reserve(self):
+        """Die reale +97-Tage-Falle vom 04.11.2026 bleibt geschlossen."""
+        stichtag = dt.date(2027, 2, 9)  # 04.11.2026 + 97 Tage
+        laeufe, hinweise = kap.laeufe_aus_workflow()
+        self.assertIsNotNone(laeufe, f"Laufplan nicht lesbar: {hinweise}")
+        horizont = int(kap.planung(self.cfg)["horizont_tage"])
+        lauftage = kap.lauftage_aus_workflow(stichtag, horizont)
+        self.assertIsNotNone(lauftage, "Der echte Laufkalender fehlt")
+        emp = kap.empfohlenes_budget(self.artikel, self.cfg, laeufe, stichtag,
+                                     lauftage=lauftage)
+        plan = emp["plan"]
+        self.assertTrue(emp["erreicht"],
+                        "Das harte Limit baut den Vollrückstand nicht fristgerecht ab")
+        self.assertTrue(plan["puenktlich"], "Neue oder Folgefrist gerissen")
+        self.assertTrue(plan["rueckstand_abgebaut"],
+                        "Der Alt-Rückstand bleibt über die Nachholfrist")
+        self.assertLessEqual(plan["abbau_tage"],
+                             int(kap.planung(self.cfg)["nachhol_frist_tage"]))
+        self.assertLess(emp["budget"], emp["limit"],
+                        "Der Vollrückstand verbraucht die gesamte Reserve")
+        bedarf = kap.bedarf_je_tag(self.artikel, self.cfg, stichtag)
+        mindest = int(kap.planung(self.cfg)["min_deckung_prozent"])
+        self.assertGreater(kap.kapazitaet_je_tag(emp["budget"], laeufe),
+                           bedarf * mindest / 100.0)
 
     def test_empfehlung_ist_im_korridor(self):
         laeufe, _ = kap.laeufe_aus_workflow()

@@ -223,6 +223,72 @@ jobs:
             scripts/git_sync.sh --push-only
           fi
 
+      # PILLAR-WIEDERVORLAGE (Vorgang WF-0032, 04.11.2026)
+      # ---------------------------------------------------------------
+      # Am 04.11.2026 um 01:25 UTC gingen Wohngebäude- und Kfz-Vergleich
+      # live (`draft: false`). Der Versicherungs-Pillar verlinkte sie nicht
+      # und sagte weiter „(Ratgeber in Vorbereitung)“ – auf einer
+      # Live-Money-Seite, während der Ratgeber längst ausgeliefert wurde.
+      #
+      # Die Wiedervorlage dafür GAB es: test_versicherungs_cluster_verlinkung
+      # in publication-reliability-tests.yml. Der Workflow startet aber NUR
+      # bei `pull_request`; der Artikel kam über einen Automatik-Commit auf
+      # main. Die Wache war nicht kaputt – sie war am falschen Ort. Diese
+      # Stufe steht deshalb HIER, im täglichen Lauf auf main, dort wo die
+      # Automatik schreibt.
+      #
+      # Exit-Vertrag (drei Zustände, fail-closed wie #1024):
+      #   0 = sauber · 1 = Bestandsbefund (Wiedervorlage fällig) ·
+      #   alles andere = Werkzeugfehler → hartes Rot, NIEMALS grün.
+      - name: Pillar-Wiedervorlage – Selbsttest (Wache muss lauffähig sein)
+        run: python3 scripts/pillar_wiedervorlage.py --selftest
+
+      - name: Pillar-Wiedervorlage – sind Live-Artikel in ihren Pillars verlinkt?
+        id: pillar
+        run: |
+          set +e
+          python3 scripts/pillar_wiedervorlage.py --check | tee /tmp/pillar_wiedervorlage.txt
+          code=${PIPESTATUS[0]}
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0   # Die Bewertung passiert unten, sichtbar und benannt.
+
+      - name: Pillar-Wiedervorlage – Vertrag verletzt (Bestandsbefund)
+        if: steps.pillar.outputs.exit_code == '1'
+        run: |
+          {
+            echo "## 🛑 Pillar-Wiedervorlage fällig"
+            echo ""
+            echo "Ein Artikel ist live, aber seine Pillar-Seite behauptet das Gegenteil"
+            echo "(oder verlinkt einen Entwurf). Das ist keine Kleinigkeit: Auf einer"
+            echo "Money-Seite steht dann „Ratgeber in Vorbereitung“ über einem"
+            echo "ausgelieferten Ratgeber."
+            echo ""
+            echo "**Heilung:** Link in den zugehörigen Abschnitt setzen, Platzhalter"
+            echo "entfernen – den Abschnitt nie löschen. Vertrag:"
+            echo "\`data/pillar_pflichtlinks.yaml\`."
+            echo ""
+            echo '```'
+            cat /tmp/pillar_wiedervorlage.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit 1
+
+      - name: Pillar-Wiedervorlage – Werkzeugfehler (kein Bestandsbefund)
+        if: steps.pillar.outputs.exit_code != '0' && steps.pillar.outputs.exit_code != '1'
+        # Der Exit-Code kommt über `env:`, nicht als `${ { … } }` im Skript:
+        # Eine Interpolation in `run:` ist ein Template-Injection-Pfad
+        # (unabhaengiger_tiefencheck, Workflow-Härtung). Der Wert ist hier
+        # zwar ein Exit-Code – aber die Regel gilt für den Weg, nicht für
+        # die Herkunft des Werts.
+        env:
+          WACHE_EXIT: ${{ steps.pillar.outputs.exit_code }}
+        run: |
+          echo "🛑 Die Pillar-Wiedervorlage konnte nicht urteilen (Exit ${WACHE_EXIT})."
+          echo "   Das ist ein Defekt im Werkzeug oder im Vertrag – nicht im Bestand."
+          echo "   Ein fehlendes Urteil ist kein grünes Urteil."
+          cat /tmp/pillar_wiedervorlage.txt || true
+          exit 2
+
       # FEHLTAG-WACHE (Dauerheilung #725, 13.10.2026): Als LETZTER Schritt –
       # nach Commit und Push, damit alle Heilungen oben gesichert sind –
       # prüft `--check` den Kalender. Ein Mindestziel-Fehltag (Mo/Mi/Fr mit

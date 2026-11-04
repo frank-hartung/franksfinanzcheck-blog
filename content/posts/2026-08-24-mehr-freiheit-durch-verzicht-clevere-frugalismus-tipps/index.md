@@ -34,7 +34,7 @@ quellen:
     url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
     herausgeber: "Statistisches Bundesamt"
     datum: "2026-08-14"
-faktencheck: "2026-09-27"
+faktencheck: 2026-11-04
 ---
 
 Bedeutet Sparen für dich grauen Alltag? Schlechte Laune und Verzicht? Dann verwechselst du Knausrigkeit mit [Frugalismus](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/).

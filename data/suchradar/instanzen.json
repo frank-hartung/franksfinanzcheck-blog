@@ -7,11 +7,11 @@
   "letzte_dauer_ms": 57373.4
  },
  "https://opnxng.com": {
-  "erfolge": 17,
+  "erfolge": 18,
   "fehler": 0,
-  "letzte_antwort": "2026-11-02T15:52:49.774173+02:00",
+  "letzte_antwort": "2026-11-04T15:17:49.756001+02:00",
   "letzter_fehler": "",
-  "letzte_dauer_ms": 2745.3
+  "letzte_dauer_ms": 14406.2
  },
  "https://priv.au": {
   "erfolge": 1,
