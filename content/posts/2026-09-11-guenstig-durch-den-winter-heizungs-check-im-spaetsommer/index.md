@@ -154,7 +154,7 @@ Passe die Zeiten in [kleinen Schritten](../../posts/2026-09-07-frugalismus-tipps
 
 Beide Werte zeigen, wie warm das Heizwasser bei einer bestimmten Außentemperatur wird. Zu hohe Werte verschwenden Energie, zu niedrige Werte lassen Räume kalt.
 
-Es gibt keine feste Regel wie „55 °C für jedes gedämmte Haus“. Heizflächen, Dämmung und Wärmeerzeuger spielen eine Rolle. Ändere nur in kleinen Schritten nach Anleitung – oder lass die Einstellung vom Fachbetrieb machen.
+Es gibt keine feste Regel wie „55 °C für jedes gedämmte Haus“. Heizflächen, Dämmung und Wärmeerzeuger spielen eine Rolle. Ändere nur in [kleinen Schritten](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/) nach Anleitung – oder lass die Einstellung vom Fachbetrieb machen.
 
 ## Schritt 7: Rohrdämmung und Pumpe ansehen
 

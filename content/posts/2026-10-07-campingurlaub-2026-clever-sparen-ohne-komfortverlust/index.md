@@ -130,7 +130,7 @@ So kaufst du unterwegs weniger aus Zeitdruck.
 
 ![Gliederung des Beitrags: Campingurlaub planen: Budget für Platz und Fahrt](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „Campingurlaub planen: Budget für Platz und Fahrt“ – 5 Stationen von „Welche Kosten gehören in ein Campingbudget?“ bis „Welche Ausrüstung brauchst du wirklich?“ (eigene Darstellung).*
+*Abbildung: Gliederung zu „Campingurlaub planen: Budget für Platz und Fahrt“ – 5 Stationen von „Welche Kosten gehören in ein Campingbudget?“ bis „Welche Ausrüstung [brauchst du wirklich](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/)?“ (eigene Darstellung).*
 
 ## Wie planst du Fahrt und Essen ohne Schönrechnen?
 

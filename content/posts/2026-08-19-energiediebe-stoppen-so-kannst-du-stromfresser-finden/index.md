@@ -96,7 +96,7 @@ Beginne nicht beim Handy-Ladegerät. Prüfe zuerst Geräte mit viel Leistung, la
 | Bereich | Typische Kandidaten | Warum zuerst prüfen? |
 |---|---|---|
 | Kühlen und Gefrieren | Kühlschrank, Gefriertruhe, Zweitgerät | laufen das ganze Jahr |
-| Warmwasser | Boiler, Untertischspeicher, Durchlauferhitzer | hohe Leistung und regelmäßige Nutzung |
+| [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) | Boiler, Untertischspeicher, Durchlauferhitzer | hohe Leistung und regelmäßige Nutzung |
 | Waschen und Trocknen | Trockner, Waschmaschine, Spülmaschine | Heizvorgänge brauchen viel Strom |
 | Unterhaltung und Büro | Konsole, PC, Drucker, TV-Ecke | oft versteckte Bereitschaftsmodi |
 | Keller und Haustechnik | alte Heizungspumpe, Entfeuchter, Ladegeräte | leicht vergessen, teils Dauerbetrieb |

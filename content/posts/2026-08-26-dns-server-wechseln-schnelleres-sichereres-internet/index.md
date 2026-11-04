@@ -128,7 +128,7 @@ Auf dem iPhone lässt sich DNS für ein einzelnes WLAN setzen: **Einstellungen �
 
 ## Was du nach dem Wechsel testen solltest
 
-Prüfe anschließend mehrere Websites und Apps. Teste Onlinebanking, VPN, Videokonferenzen, Smart-Home-Geräte und gegebenenfalls Jugendschutzfilter. Wenn eine Anwendung nicht mehr funktioniert, stelle die vorher notierten Einstellungen wieder her. Bei einer FRITZ!Box kannst du die DNS-Adressen des Internetanbieters erneut automatisch beziehen lassen.
+Prüfe anschließend mehrere Websites und Apps. Teste Onlinebanking, VPN, Videokonferenzen, [Smart-Home-Geräte](../../posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/) und gegebenenfalls Jugendschutzfilter. Wenn eine Anwendung nicht mehr funktioniert, stelle die vorher notierten Einstellungen wieder her. Bei einer FRITZ!Box kannst du die DNS-Adressen des Internetanbieters erneut automatisch beziehen lassen.
 
 Mische nicht unüberlegt DNS-Server mit unterschiedlichen Filtern als primäre und alternative Adresse. Je nach Gerät kann die zweite Adresse ebenfalls verwendet werden. Dadurch können Ergebnisse und Schutzregeln wechseln. In einem Firmen-VPN oder bei lokalen Diensten kann ein vorgegebener DNS-Server nötig sein.
 
@@ -202,7 +202,7 @@ Viel Spaß beim Testen.
 **Wird mein Internet durch einen anderen DNS-Server schneller?**
 Nicht zwingend. Ein DNS-Server kann die DNS-Abfrage beschleunigen oder verlangsamen. Er erhöht aber nicht die Bandbreite und verbessert kein Funkloch. Vergleiche mehrere Tage unter denselben Bedingungen.
 
-**Kann mein Internetanbieter meine DNS-Anfragen danach noch sehen?**
+**Kann mein [Internetanbieter](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) meine DNS-Anfragen danach noch sehen?**
 Bei klassischem, unverschlüsseltem DNS kann ein Netzwerkbetreiber die Anfragen weiterhin mitlesen. Mit DoH oder DoT wird die Verbindung zum DNS-Server verschlüsselt. Der gewählte DNS-Server verarbeitet die Anfrage trotzdem. Weitere Verbindungsdaten bleiben sichtbar.
 
 **Welcher DNS-Anbieter ist der beste?**

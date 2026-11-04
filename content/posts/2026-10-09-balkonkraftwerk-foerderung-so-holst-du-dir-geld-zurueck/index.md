@@ -152,7 +152,7 @@ Prüfe auch den Schatten im Jahresverlauf. Im Sommer steht die Sonne höher, im 
 
 Wenn die Leistung dauerhaft einbricht, hilft der Blick in die Anleitung. Ein Gespräch mit dem Hersteller klärt den Rest. Dokumentiere Auffälligkeiten mit Datum, damit du sie später belegen kannst.
 
-Schließlich lohnt der Blick in die eigene Versicherung. Frag nach, ob deine Haftpflicht- oder Hausratversicherung die Anlage abdeckt. Lass dir die Antwort schriftlich geben, bevor du dich darauf verlässt.
+Schließlich lohnt der Blick in die eigene Versicherung. Frag nach, ob deine Haftpflicht- oder [Hausratversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) die Anlage abdeckt. Lass dir die Antwort schriftlich geben, bevor du dich darauf verlässt.
 
 ## Der 4K-Prüfpfad für dein Balkonkraftwerk
 

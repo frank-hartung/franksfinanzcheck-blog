@@ -43,7 +43,7 @@ Für viele ist die Kreditkarte eine unsichtbare Gebührenquelle im Modellfall. Z
 
 **Transparenz:** dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Dieser Ratgeber zeigt, worauf es beim Kreditkarten-Vergleich 2026 ankommt: Kosten, Sicherheit und versteckte Klauseln. Am Ende bekommst du eine Checkliste für deinen Alltag.
+Dieser Ratgeber zeigt, worauf es beim Kreditkarten-[Vergleich 2026](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/) ankommt: Kosten, Sicherheit und versteckte Klauseln. Am Ende bekommst du eine Checkliste für deinen Alltag.
 
 
 
@@ -76,7 +76,7 @@ Reist du oft, prüfe vorher: Kostet die Karte im Ausland extra als Beispielwert?
 
 ## Die Kostenfalle Fremdwährung: So vermeidest du sie
 
-Die teuerste versteckte Gebühr ist das Fremdwährungsentgelt als Modellwert. Viele Banken verlangen beim Zahlen in Dollar oder Franken fast zwei Prozent Aufschlag. Bei 2.000 € Urlaubsbudget sind das rund 40 €.
+Die teuerste versteckte Gebühr ist das Fremdwährungsentgelt als Modellwert. Viele Banken verlangen beim Zahlen in Dollar oder Franken fast zwei Prozent Aufschlag. Bei 2.000 € [Urlaubsbudget](../../posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/) sind das rund 40 €.
 
 Dazu kommt die Dynamic Currency Conversion (DCC). Händler oder Automaten schlagen dir vor, gleich in Euro abzurechnen.
 

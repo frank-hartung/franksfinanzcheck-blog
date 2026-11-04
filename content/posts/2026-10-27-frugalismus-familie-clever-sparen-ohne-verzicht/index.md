@@ -42,7 +42,7 @@ Reicht das Geld diesen Monat?
 Oft fressen ungeplante Ausgaben für die Kinder das mühsam Ersparte auf.
 Doch das muss nicht sein.
 Ein bewusster Lebensstil hilft dir dabei, den finanziellen Druck zu senken.
-Diesen Weg nennen Experten oft **Frugalismus Familie**.
+Diesen Weg nennen Experten oft **[Frugalismus](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) Familie**.
 
 Dabei geht es nicht um Geiz.
 Es geht um die kluge Verteilung deiner Mittel – wie lässt sich ein bewusster **Verzicht** mit den Bedürfnissen von Kindern vereinbaren?
@@ -248,14 +248,14 @@ Nutze diese Liste, um sofort erste Änderungen umzusetzen.
 Du musst nicht alles sofort machen.
 Pick dir zwei oder drei Punkte heraus, die für euch am einfachsten sind.
 
-* [ ] **Abos kündigen:** Welche Streaming-Dienste nutzt ihr wirklich?
+* [ ] **[Abos kündigen](../../posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/):** Welche Streaming-Dienste nutzt ihr wirklich?
 * [ ] **Vorratskammer checken:** Koche erst das, was noch im Schrank steht.
 * [ ] **Leitungswasser trinken:** Spart Geld und das Schleppen von Kisten.
 * [ ] **Fahrrad statt Auto:** Für kurze Wege ist das Rad oft schneller und kostenlos.
-* [ ] **Energie sparen:** Stoßlüften statt Kippfenster und Lichter konsequent ausschalten.
+* [ ] **[Energie sparen](../../posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/):** Stoßlüften statt Kippfenster und Lichter konsequent ausschalten.
 * [ ] **Tauschen statt Kaufen:** Nutze Tauschbörsen für Spielzeug in der Nachbarschaft.
 
-Diese kleinen Maßnahmen wirken zusammen wie ein Schutzschild für dein Konto.
+Diese kleinen Maßnahmen wirken zusammen wie ein [Schutzschild](../../posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/) für dein Konto.
 Du sorgst dafür, dass am Monatsende mehr übrig bleibt.
 Dieses Geld ist deine Reserve für schwierige Zeiten.
 

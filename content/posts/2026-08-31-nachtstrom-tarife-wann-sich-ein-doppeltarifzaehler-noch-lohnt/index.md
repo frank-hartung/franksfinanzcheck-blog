@@ -179,7 +179,7 @@ Ein Doppeltarif ist nur ein Hebel unter mehreren. Bevor du dich für ein Zählwe
 
 **Erstens den Verbrauch selbst.** Jede Kilowattstunde, die du nicht verbrauchst, braucht keinen günstigen Zeitpunkt. Standby-Kosten, alte Kühlgeräte und unnötige Heizwärme sind dort die größeren Beträge.
 
-**Zweitens den Arbeitspreis.** Ein Wechsel in einen günstigeren Tarif bringt häufig mehr als die Aufteilung in zwei Zeitfenster.
+**Zweitens den Arbeitspreis.** Ein Wechsel in einen [günstigeren](../../posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/) Tarif bringt häufig mehr als die Aufteilung in zwei Zeitfenster.
 
 **Drittens den Grundpreis.** Er ist der stille Bestandteil jeder Rechnung und fällt zwölfmal im Jahr an, ohne dass du ihn beeinflussen kannst.
 

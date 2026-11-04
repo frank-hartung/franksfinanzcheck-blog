@@ -84,7 +84,7 @@ Die folgende Tabelle zeigt eine Modellrechnung mit klaren Annahmen für den dire
 | Summe nach 10 Jahren (Beispielrechnung) | 31.300 € | 26.500 € |
 | Summe nach 20 Jahren (Beispielrechnung) | 42.500 € | 41.500 € |
 
-Bei einer Annahme von 30 ¢/kWh Strom holt die Wärmepumpe den Vorsprung Schritt für Schritt auf.
+Bei einer Annahme von 30 ¢/kWh Strom holt die Wärmepumpe den Vorsprung [Schritt für Schritt](../../posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/) auf.
 Steigt der Gaspreis stärker als der Strompreis, verkürzt sich die Zeit bis zum Gleichstand.
 Die Rechnung bleibt stabil, weil die Wärme aus der Luft nichts kostet.
 Ein genauer Heizung Vergleich zeigt dir, wie viel du bei deinem Haus sparst.
@@ -197,7 +197,7 @@ Für unsere Modellrechnung setzen wir folgende Annahmen für ein Einfamilienhaus
 
 **Rechnung im Modell:**
 - Wärmepumpe in der Beispielrechnung: 15.000 kWh / 4,0 = 3.750 kWh Strombedarf.
-- Stromkosten in dieser Beispielrechnung: 3.750 kWh × 0,30 € = 1.125 € pro Jahr.
+- [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/) in dieser Beispielrechnung: 3.750 kWh × 0,30 € = 1.125 € pro Jahr.
 - Gasheizung in dieser Beispielrechnung: 15.000 kWh × 0,10 € = 1.500 € pro Jahr.
 
 **Ergebnis der Modellrechnung:**
