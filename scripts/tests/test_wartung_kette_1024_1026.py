@@ -26,6 +26,7 @@ Die Tests laufen offline und brauchen nur PyYAML.
 """
 from __future__ import annotations
 
+import ast
 import sys
 import unittest
 from pathlib import Path
@@ -326,6 +327,73 @@ class ZusammenspielTests(unittest.TestCase):
                 namen = {getattr(t, "id", getattr(t, "attr", "")) for t in typen}
             with self.subTest(zeile=knoten.lineno):
                 self.assertNotIn("Exception", namen, f"`except Exception` in Zeile {knoten.lineno}")
+
+    # ------------------------------------------------------------------
+    #  DIE WIEDERVORLAGE, DIE NICHT FEUERN KONNTE (Nebenbefund 04.11.2026)
+    # ------------------------------------------------------------------
+    #  Beim Verifizieren dieser Heilung fiel auf, dass der Regression-Job
+    #  rot war – aber nicht wegen #1024/#1026: Zwei Artikel des
+    #  Versicherungs-Clusters waren am 04.11. live gegangen, der Pillar
+    #  verlinkte sie nicht. Die Wiedervorlage dafür existierte
+    #  (test_versicherungs_cluster_verlinkung.py) und war korrekt rot.
+    #
+    #  Niemand sah es, weil sie AUSSCHLIESSLICH in
+    #  publication-reliability-tests.yml läuft – und dieser Workflow
+    #  startet nur bei `pull_request`. Der Artikel kam über einen
+    #  Automatik-Commit auf main. Dieselbe Fehlerklasse wie #1024: Die
+    #  Logik war richtig, der RAHMEN war falsch.
+    #
+    #  Diese Tests halten fest, dass eine Wiedervorlage dort läuft, wo die
+    #  Automatik schreibt. Wer sie wieder nur an PRs hängt, macht den
+    #  nächsten Vorfall unsichtbar.
+
+    def test_pillar_wache_laeuft_daily_auf_main(self):
+        """Die Pillar-Wiedervorlage muss im TÄGLICHEN Lauf stehen."""
+        täglich = (ROOT / ".github" / "workflows" / "blog-health-daily.yml").read_text(encoding="utf-8")
+        self.assertIn("scripts/pillar_wiedervorlage.py", täglich,
+                      "Die Pillar-Wiedervorlage läuft nicht täglich – "
+                      "Automatik-Commits auf main umgehen jeden PR-Trigger")
+        self.assertIn("schedule:", täglich,
+                      "blog-health-daily.yml hat keinen Zeitplan mehr")
+        for schritt in ("--selftest", "--check"):
+            self.assertIn(schritt, täglich,
+                          f"Der tägliche Lauf kennt {schritt} nicht")
+
+    def test_pillar_wache_urteilt_dreistufig(self):
+        """0 sauber · 1 Bestandsbefund · sonst Werkzeugfehler (nie grün)."""
+        täglich = (ROOT / ".github" / "workflows" / "blog-health-daily.yml").read_text(encoding="utf-8")
+        self.assertIn("exit_code == '1'", täglich,
+                      "Bestandsbefund muss als eigener Schritt sichtbar sein")
+        self.assertIn("exit_code != '0' && steps.pillar.outputs.exit_code != '1'", täglich,
+                      "Ein Werkzeugfehler muss hart rot werden (fail-closed)")
+        self.assertIn("GITHUB_STEP_SUMMARY", täglich,
+                      "Der Befund muss in der Lauf-Zusammenfassung stehen, "
+                      "nicht nur im Log")
+
+    def test_pillar_vertrag_ist_im_guards_register(self):
+        """Ein Selbsttest, den niemand verlangt, wird irgendwann nicht gefahren."""
+        governance = (ROOT / "scripts" / "governance_contract.py").read_text(encoding="utf-8")
+        self.assertIn('"pillar_wiedervorlage.py"', governance,
+                      "pillar_wiedervorlage.py fehlt in GUARDS (C6)")
+
+    def test_pillar_wache_haengt_nicht_am_netz(self):
+        """Urteil über Dateien – kein Netz, keine Abhängigkeit.
+
+        Ein „Import fehlt“ ist die Ursache von #1026. Diese Wache darf
+        denselben Fehler nicht wiederholen.
+        """
+        quelle = (ROOT / "scripts" / "pillar_wiedervorlage.py").read_text(encoding="utf-8")
+        baum = ast.parse(quelle)
+        module = {knoten.names[0].name.split(".")[0]
+                  for knoten in ast.walk(baum)
+                  if isinstance(knoten, ast.Import)}
+        module |= {knoten.module.split(".")[0]
+                   for knoten in ast.walk(baum)
+                   if isinstance(knoten, ast.ImportFrom) and knoten.module}
+        erlaubt = {"argparse", "json", "re", "sys", "dataclasses", "pathlib",
+                   "__future__"}
+        self.assertTrue(module <= erlaubt,
+                        f"unerwartete Importe (Netz/Abhängigkeit?): {sorted(module - erlaubt)}")
 
     def test_belegketten_selbsttest_laeuft_ohne_netz(self):
         import subprocess
