@@ -453,6 +453,83 @@ class BelegkettenSpiegelTests(unittest.TestCase):
             wache.abruf_gii_spiegel = original
 
 
+class SpiegelDiagnoseTests(unittest.TestCase):
+    """Zusatz aus #1057: Ersatzweg und Prüfgrenze bleiben sichtbar."""
+
+    vvg = ("---\nquelle: https://www.gesetze-im-internet.de/vvg_2008/\n---\n"
+           "### § 40 Kündigung\n### § 96 Vertragsschluss\n")
+
+    @staticmethod
+    def blockiert(url, timeout=10.0):
+        raise OSError("GII blockiert")
+
+    def test_spiegel_ok_nennt_pfad_und_datei(self):
+        erg = wache.pruefe_quelle(
+            "https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+            abruf=self.blockiert,
+            spiegel_abruf=lambda slug, timeout=10.0: (200, self.vvg))
+        self.assertEqual(wache.OK, erg["status"])
+        self.assertEqual(wache.PFAD_SPIEGEL, erg["pruefpfad"])
+        self.assertEqual(wache._gii_spiegel_url("vvg_2008"), erg["spiegel_url"])
+
+    def test_transportausfall_bleibt_fail_closed_und_begruendet(self):
+        def offline(slug, timeout=10.0):
+            raise OSError("Spiegel offline")
+
+        erg = wache.pruefe_quelle(
+            "https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+            abruf=self.blockiert, spiegel_abruf=offline)
+        self.assertEqual(wache.UNKLAR, erg["status"])
+        self.assertEqual(wache.PFAD_UNKLAR, erg["pruefpfad"])
+        self.assertIn("OSError", erg["hinweis"])
+        self.assertEqual(wache._gii_spiegel_url("vvg_2008"), erg["spiegel_url"])
+
+    def test_gesamtlauf_zaehlt_ersatzpruefungen_getrennt(self):
+        eintraege = []
+        for nr in ("40", "96"):
+            eintraege.append({
+                "slug": f"artikel-{nr}", "path": "", "risk": "hoch",
+                "approved": True, "quellen": [{
+                    "id": f"Q{nr}", "titel": "VVG",
+                    "url": f"https://www.gesetze-im-internet.de/vvg_2008/__{nr}.html",
+                }],
+            })
+        with patch.object(wache, "belegketten", return_value=eintraege):
+            erg = wache.pruefe_alle(
+                abruf=self.blockiert,
+                spiegel_abruf=lambda slug, timeout=10.0: (200, self.vvg))
+        self.assertEqual(2, erg["geprueft"])
+        self.assertEqual(2, erg["zaehler"][wache.OK])
+        self.assertEqual([], erg["befunde"])
+        self.assertEqual(2, len(erg["spiegel_bestaetigt"]))
+        self.assertTrue(all(e["pruefpfad"] == wache.PFAD_SPIEGEL
+                            for e in erg["spiegel_bestaetigt"]))
+
+    def test_report_trennt_direktpruefung_von_normbestaetigung(self):
+        eintrag = {
+            "status": wache.OK, "slug": "artikel", "id": "Q1",
+            "zitat": "https://www.gesetze-im-internet.de/vvg_2008/__40.html",
+            "end_url": "", "befund": "", "pruefpfad": wache.PFAD_SPIEGEL,
+            "spiegel_url": wache._gii_spiegel_url("vvg_2008"),
+            "hinweis": "Aktiver Normbestand über den Spiegel bestätigt",
+        }
+        ergebnis = {
+            "geprueft": 1,
+            "zaehler": {wache.OK: 1, wache.UMGELEITET: 0,
+                        wache.TOT: 0, wache.UNKLAR: 0},
+            "befunde": [], "blockierend": [], "spiegel_bestaetigt": [eintrag],
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            bericht = Path(tmp) / "bericht.md"
+            with patch.object(wache, "REPORT", bericht):
+                wache.report_schreiben(ergebnis)
+            text = bericht.read_text(encoding="utf-8")
+        self.assertIn("Unverändert direkt erreichbar: **0**", text)
+        self.assertIn("Über Bundesrechts-Spiegel bestätigt: **1**", text)
+        self.assertIn("keine fachliche Freigabe", text)
+        self.assertIn(eintrag["spiegel_url"], text)
+
+
 class FaktenfrischeSchreibgrenzeTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()

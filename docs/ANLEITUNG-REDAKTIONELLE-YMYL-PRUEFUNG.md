@@ -246,6 +246,13 @@ fällen. Der Selbsttest der Wache steht deshalb im vertraglichen Minimum
 (`GUARDS` in `scripts/governance_contract.py`, Regel C6) und läuft im
 Wochenlauf vor jeder Messung.
 
+Jeder Ersatzbefund trägt zusätzlich `pruefpfad` und `spiegel_url`; ein
+fail-closed `unklar` nennt im `hinweis` auch die aufgetretene Netzfehlerklasse.
+Programmierfehler werden davon ausdrücklich nicht abgefangen. Der Markdown-
+und JSON-Bericht trennt **direkt erreichbare** Quellen von **über den Spiegel
+bestätigten Normen** (`spiegel_bestaetigt`). Letzteres belegt nur den aktiven
+Normbestand, weder die Aussage des Artikels noch eine redaktionelle Freigabe.
+
 Der werktägliche Workflow `.github/workflows/redaktionelle-ymyl-pruefung.yml`
 pflegt genau ein GitHub-Arbeitsticket statt Einzelwarnungen zu streuen. Neue
 Publikationskandidaten werden unabhängig davon im `publish_gate.py` sofort
