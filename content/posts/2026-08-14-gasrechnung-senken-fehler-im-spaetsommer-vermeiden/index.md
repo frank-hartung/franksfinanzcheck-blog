@@ -98,12 +98,12 @@ Fiktive Beispielrechnung, keine Marktpreisangabe:
 | Wert | Modellannahme |
 |---|---:|
 | Jahresverbrauch | 18.000 kWh |
-| Arbeitspreis | ca. 12,00 ct/kWh |
+| Arbeitspreis | ca. 11,50 ct/kWh |
 | Grundpreis | ca. 195,00 € pro Jahr |
-| **voraussichtliche Jahreskosten** | **ca. 2.355,00 €** |
-| **rechnerischer Monatsabschlag** | **ca. 196,25 €** |
+| **voraussichtliche Jahreskosten** | **ca. 2.265,00 €** |
+| **rechnerischer Monatsabschlag** | **ca. 188,75 €** |
 
-Steht dein Abschlag hier nur bei 150 €, fehlen am Ende über 550 €; das ist ein Beispielwert. Rechne einen Bonus erst mit, wenn du die Bedingungen sicher erfüllst.
+Steht dein Abschlag hier nur bei 150 €, fehlen am Ende über 460 €; das ist ein Beispielwert. Rechne einen Bonus erst mit, wenn du die Bedingungen sicher erfüllst.
 
 ### Besser so
 

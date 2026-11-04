@@ -85,7 +85,9 @@ class GasBefunde996(unittest.TestCase):
         self.assertEqual(Decimal('18000') * Decimal('.004'), Decimal('72'))
         self.assertEqual(Decimal('18000') * Decimal('.008'), Decimal('144'))
         _, body = article(SLUGS[0])
-        self.assertIn('72 bis 144 €', body)
+        # NBSP vor € ist Hausstil (unit_guard U3) – typografisches
+        # Leerzeichen darf die Behauptung nicht unsichtbar machen.
+        self.assertIn('72 bis 144 €', body.replace('\xa0', ' '))
         self.assertEqual(Decimal('18000') * Decimal('.115') + 195, Decimal('2265'))
         self.assertEqual(Decimal('2265') / 12, Decimal('188.75'))
         _, body = article(SLUGS[2])

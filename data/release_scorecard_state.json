@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-11-04T16:44:23Z",
+  "generated_at": "2026-11-04T17:10:08Z",
   "modus": "live",
   "commit": null,
   "kapazitaet": {
@@ -143,7 +143,7 @@
       "checks": []
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
-      "sha256": "0ae1334c6a024a3c8d97c5f3375bc81c2f61e3fa70652b6f656f4c46af193a34",
+      "sha256": "6df9c3465102df315c1723e94df469fc8a628806aecff41b713caeb0e30ecb6f",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -157,7 +157,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
@@ -1096,7 +1096,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {

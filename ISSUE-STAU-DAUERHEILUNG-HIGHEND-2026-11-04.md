@@ -155,6 +155,11 @@ Scorecard frischen Bot-Schaden (SEO-Heiler/Textbatterie vom 04.11.):
   „Genau das ist der Hebel …“ ×2) im Gewohnheiten-Artikel entfernt.
 - Entscheidungen, Fachprüfungs-Register, Akte und Scorecard danach
   auf dem endgültigen Textstand neu gebunden bzw. erzeugt.
+- Die fiktive Beispielrechnung im Gas-Fehler-Artikel (11,50 ct/kWh →
+  2.265 €) ist ein bewusster Vertrags-Pin von `test_faktenfrische_996`
+  und bleibt unverändert; geheilt wurde dort der Artikel-Stand
+  (Kopplungs-Warnung), nicht der Fiktivwert. Derselbe Test akzeptiert
+  jetzt das Hausstil-NBSP vor „€“ (U3), ohne die Behauptung zu lockern.
 
 ## 10 · Nachweis (lokal, 04.11.2026)
 
