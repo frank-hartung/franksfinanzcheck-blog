@@ -14,7 +14,7 @@ ki_redaktion_status: "review"
 redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
-  aenderungsgrund: "Fachliche Schließung der Faktenfrische-Befunde #964: Laufzeit/Kündigung nach § 56 TKG und BNetzA belegt, 50-30-20-Regel und Bandbreitenbedarf als Modell gekennzeichnet, unbelegte Bonusspanne entfernt, irrelevante Quelle ersetzt"
+  aenderungsgrund: "Fachliche Schließung der Faktenfrische-Befunde #964: Laufzeit/Kündigung nach § 56 TKG und BNetzA belegt, 50-30-20-Regel und Bandbreitenbedarf als Modell gekennzeichnet, unbelegte Bonusspanne entfernt, irrelevante Quelle ersetzt; am 03.11.2026 Frist-Erinnerung eigenständig formuliert (Einzigartigkeits-Befund #1027); Fakten und Quellen unverändert; redaktionelle Freigabe weiterhin ausstehend"
 pin_title: "DSL- und Internet-Flat günstig sichern"
 pin_description: "*Werbung | DSL- und Internet-Flat günstig sichern: Kosten prüfen, Tarifdetails vergleichen, Kündigungsfenster nutzen und Wechsel ohne Ausfall planen. Mehr Spartipps auf FranksFinanzcheck! #dsl #vergleich #internetvertrag"
 cover:
@@ -30,7 +30,7 @@ quellen:
     titel: "Vertrag: Rechte bei Laufzeit, Vertragsänderung und Kündigung"
     url: "https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Vertrag/start.html"
     herausgeber: "Bundesnetzagentur"
-lastmod: 2026-11-01
+lastmod: 2026-11-04
 faktencheck: 2026-10-30
 ---
 
@@ -91,7 +91,7 @@ Sei bei solchen Angeboten vorsichtig und prüfe die Kombination genau. Oft ist e
 > Die Kosten für 12 Monate betragen hier: 30 € × 12 = 360 €.
 > Ein Wechsel spart dir in diesem Beispiel satte 170 € im ersten Jahr. Aber prüfe vorher genau, ob die kurze Laufzeit wirklich zu deinem persönlichen Bedarf passt.
 
-Setze dir eine Erinnerung im Handy, sechs Wochen vor Ablauf der Frist. So hast du genug Zeit für einen entspannten Vergleich. Du planst den Wechsel dann ohne Zeitdruck. Ein überstürzter Wechsel führt oft zum falschen Tarif.
+Trag dir das Fristende in den Kalender ein – sechs Wochen vorher. So bleibt Zeit für einen ruhigen Vergleich. Unter Druck wählst du oft den teureren Tarif.
 
 ## Wechsel ohne Ausfall – so planst du es
 

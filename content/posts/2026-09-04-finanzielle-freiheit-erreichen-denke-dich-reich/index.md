@@ -3,6 +3,7 @@ title: "Finanzielle Freiheit erreichen: Denke dich reich – Geld"
 description: "Finanzielle Freiheit erreichen: Wo die Denkfehler sitzen, wie du deine Sparroutine automatisierst und was 300 € im Monat über 20 Jahre wirklich bringen."
 kurzantwort: "Finanzielle Freiheit entsteht meist nicht durch ein höheres Einkommen, sondern durch klare Gewohnheiten: Ausgaben steuern, Sparraten automatisieren und früh breit gestreut investieren. Schon 300 € monatlich können bei 7 % Rendite in 20 Jahren auf rund 156.000 € anwachsen."
 date: 2026-09-16T08:58:26Z
+lastmod: 2026-11-04
 draft: false
 tags: ["Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
@@ -55,10 +56,6 @@ Willst du echte **[finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-du
 ---
 
 💡 **Schnell-Tipp von FranksFinanzcheck:** Aktuelle Zinsen auf ein kostenloses Tagesgeldkonto gibt es bei der C24 Bank (CHECK24-Tochter): [**Tagesgeldkonto der C24 Bank eröffnen**](/go/tagesgeld/)
-
-![Merkkarte: Kernaussagen zu Finanzielle Freiheit erreichen: Denke dich reich – Geld](abbildung-merkkarte. svg)
-
-*Abbildung: Merkkarte zu „Finanzielle Freiheit erreichen: Denke dich reich – Geld“ (eigene Darstellung aus diesem Beitrag).*
 
 ![Merkkarte: Kernaussagen zu Finanzielle Freiheit erreichen: Denke dich reich – Geld](abbildung-merkkarte.svg)
 
@@ -188,10 +185,6 @@ Lies Bücher und seriöse Quellen. Wer mehr weiß, bleibt ruhig. Kontinuität sc
 5. **Dauerauftrag für Sparplan einrichten** (ETF, Indexfonds).
 6. **Finanz‑App installieren** und Kategorien anpassen.
 7. **Monatliche Review** (15 Minuten): Soll‑Ist‑Vergleich, Anpassungen.
-
-![Gliederung des Beitrags: Finanzielle Freiheit erreichen: Denke dich reich – Geld](abbildung-ablauf. svg)
-
-*Abbildung: Gliederung zu „Finanzielle Freiheit erreichen: Denke dich reich – Geld“ – 5 Stationen von „Warum scheitern die meisten daran, finanzielle Freiheit erreichen zu wollen?“ bis „So gehst du vor: Deine ersten Schritte“ (eigene Darstellung).*
 
 ![Gliederung des Beitrags: Finanzielle Freiheit erreichen: Denke dich reich – Geld](abbildung-ablauf.svg)
 

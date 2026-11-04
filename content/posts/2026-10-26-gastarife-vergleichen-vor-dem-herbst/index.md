@@ -1,7 +1,7 @@
 ---
 title: "Gastarife vergleichen: Kosten, Fristen und Verbrauch prüfen"
 description: "Gastarife fundiert vergleichen: Gesamtkosten und Vertragsbedingungen prüfen, Preisänderungen einordnen und den Gasverbrauch realistisch berechnen."
-lastmod: 2026-10-30
+lastmod: 2026-11-04
 date: 2026-10-26T10:36:12Z
 draft: true
 tags: ["Heizkosten senken", "Gastarif wechseln"]
@@ -15,7 +15,7 @@ ki_redaktion_status: "review"
 redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
-  aenderungsgrund: "Fachliche Überarbeitung nach den Faktenfrische-Befunden (#911); Abgleich der Regeln mit der Bundesnetzagentur und der Verbraucherzentrale am 30.10.2026; am 01.11.2026 zwei Absätze eigenständig formuliert (Duplikat-Befund D3-X/D4-X gegenüber dem Stromanbieter-Artikel), Fakten und Quellen unverändert; redaktionelle Schlussprüfung ausstehend"
+  aenderungsgrund: "Fachliche Überarbeitung nach den Faktenfrische-Befunden (#911); Abgleich der Regeln mit der Bundesnetzagentur und der Verbraucherzentrale am 30.10.2026; am 01.11.2026 zwei Absätze eigenständig formuliert (Duplikat-Befund D3-X/D4-X gegenüber dem Stromanbieter-Artikel); am 03.11.2026 sieben Passagen (Prüfvermerk, Preisänderung, Modellrechnung, Grundpreis, Angebotssicherung, Checkliste, Bonus) eigenständig formuliert, damit keine Textdopplung zum Stromanbieter-Artikel entsteht (Einzigartigkeits-Befund #1027); Fakten und Quellen unverändert; redaktionelle Schlussprüfung ausstehend"
 kurzantwort: "Vergleiche Gastarife mit deinem echten Jahresverbrauch und den vollständigen Kosten aus Arbeitspreis und Grundpreis, mit und ohne Bonus. Prüfe Laufzeit, Kündigungsfrist und den genauen Umfang einer Preisgarantie im Vertrag; eine einheitliche Standarddauer gibt es nicht. Die Bundesnetzagentur genehmigt keine Endkundenpreise, setzt aber die Regeln für Wechsel und Preisänderungen. Ein Grad weniger Raumtemperatur senkt den Verbrauch nach Angaben der Verbraucherzentrale um etwa sechs Prozent."
 pin_title: "Gastarife vergleichen: Kosten und Fristen prüfen"
 pin_description: "*Werbung | Gastarife fundiert vergleichen: Gesamtkosten und Vertragsbedingungen prüfen, Preisänderungen einordnen und den Gasverbrauch realistisch berechnen. Mehr Spartipps auf FranksFinanzcheck! #gasvergleich #gaskosten #sparen"
@@ -39,7 +39,7 @@ quellen:
 faktencheck: 2026-10-29
 ---
 
-**Fachlich überarbeitet am 30.10.2026.** Für diesen Ratgeber wurden die Regeln zu Wechsel, neuen Preisen und Heizverhalten mit den Veröffentlichungen der Bundesnetzagentur und der Verbraucherzentrale abgeglichen. Dein Vertrag kann im Einzelfall abweichen.
+**Fachlich überarbeitet am 30.10.2026.** Die Angaben zu Lieferantenwechsel, Preisänderungen und sparsamem Heizen wurden für diesen Beitrag mit den Veröffentlichungen der Bundesnetzagentur und der Verbraucherzentrale abgeglichen. Abweichende Klauseln in deinem Vertrag bleiben davon unberührt.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Wenn du über einen solchen Link abschließt, erhalten wir möglicherweise eine Provision. Für dich entstehen dadurch keine zusätzlichen Kosten.
 
@@ -109,7 +109,7 @@ Steuern, Abgaben, Umlagen und Netzentgelte können außerhalb der Garantie liege
 
 Ein neuer Gaspreis kündigt sich schriftlich an: Der Lieferant muss dich als Haushaltskunde mindestens einen Monat vor dem Inkrafttreten anschreiben und darlegen, was sich warum und in welchem Umfang ändert (Q1). An diese Mitteilung ist in der Regel ein Sonderkündigungsrecht geknüpft – du kannst dann sofort kündigen, ohne die sonst übliche Frist einzuhalten.
 
-Die Kündigung muss vor dem Tag beim Anbieter ankommen, ab dem der neue Preis gilt. Der Vertrag endet am Vortag. Eine Ausnahme gilt bei einer getrennten Anpassungsklausel, wenn nur hoheitlich bedingte Kosten weitergegeben werden. Wird eine Änderung der Umsatzsteuer eins zu eins weitergegeben, hast du kein Sonderrecht, weder bei einer Erhöhung noch bei einer Senkung.
+Deine Kündigung muss bis zu dem Tag beim Lieferanten eingegangen sein, an dem der höhere Preis greift. Dein Vertrag endet dadurch einen Tag vor dem Wirksamwerden. Zwei Ausnahmen bleiben: eine getrennte Anpassungsklausel für hoheitlich bedingte Kosten und eine eins zu eins weitergegebene Umsatzsteuer. In beiden Fällen gibt es kein Sonderrecht – weder bei einer Erhöhung noch bei einer Senkung.
 
 Bei einer zweifelhaften Erhöhung kannst du widersprechen. Nenne den Grund, etwa eine laufende Zusage oder eine zu kurze Frist. Wenn der Anbieter nicht reagiert, hilft das Beschwerde- und Schlichtungsverfahren der Behörde.
 
@@ -139,21 +139,21 @@ Für die Grundeinstellung gelten ungefähre Werte: Stufe 3 entspricht etwa 20 Gr
 
 ## Abschlag, Bonus und Portal
 
-Prüfe bei einem Bonus, ob er einmalig oder laufend gezahlt wird. Lies die Regeln und rechne die Kosten zusätzlich ohne ihn. Nur so siehst du, ob der Tarif auch im Folgejahr zu deinem Budget passt.
+Prüfe bei einem Bonus, ob er einmalig oder laufend gezahlt wird. Lies die Regeln und rechne die Kosten ohne ihn. Nur so siehst du, ob der Tarif auch im Folgejahr zu deinem Budget passt.
 
-Ein niedriger Arbeitspreis kann durch einen hohen Grundpreis aufgezehrt werden. Eine kurze Bindung erhöht das Risiko späterer Änderungen.
+Ein niedriger Arbeitspreis nützt wenig, wenn der Grundpreis hoch ist. Dann frisst die Grundgebühr den Vorteil wieder. Eine kurze Bindung erhöht zudem das Risiko späterer Änderungen.
 
 Ein Portal zeigt eine Auswahl, nicht den gesamten Markt. Anbieter, Filter und Sortierung unterscheiden sich. Verlass dich nicht auf ein pauschales Versprechen, dass dort alle Tarife oder alle Bedingungen erscheinen. Prüfe die Unterlagen beim Anbieter, bevor du abschließt.
 
 Mit Vorauszahlung verbundene Tarife lohnen einen besonders genauen Blick in die Bedingungen. Die Bundesnetzagentur weist darauf hin, dass Vorabzahlungen in der Insolvenz eines Lieferanten verloren sein können (Q1). Deine Gasversorgung steht danach trotzdem still – sie springt auf die Ersatzversorgung um. Das bereits gezahlte Geld zurückzuholen, ist dagegen mühsam und oft vergebens.
 
-Für den Vergleich brauchst du Postleitzahl und Verbrauch. Notiere den Preis mit und ohne Bonus. Speichere das Angebot. So kannst du später nachvollziehen, auf welcher Grundlage du unterschrieben hast.
+Für den Vergleich brauchst du Postleitzahl und Verbrauch. Halte zwei Preise fest: den mit Bonus und den ohne. Bewahre das Angebot auf. So kannst du später nachvollziehen, auf welcher Grundlage du unterschrieben hast.
 
 ## Checkliste für den Gastarifvergleich
 
 - Stammt der Verbrauch aus der letzten Abrechnung?
 - Sind Arbeitspreis und Grundpreis in einer Rechnung enthalten?
-- Hast du den Preis zusätzlich ohne Bonus gerechnet?
+- Rechnest du beide Preise – mit und ohne Bonus – durch?
 - Welche Preisteile umfasst die Garantie und wann endet sie?
 - Welche Frist gilt für eine Kündigung?
 - Hast du die Mitteilung auf Sonderrecht und Termin geprüft?

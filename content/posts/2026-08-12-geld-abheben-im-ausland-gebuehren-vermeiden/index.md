@@ -2,7 +2,7 @@
 title: "Geld abheben im Ausland: Wo die Gebühren wirklich entstehen"
 description: "Geld abheben im Ausland: die zwei Gebühren am Automaten, die Abrechnung in Euro und wie du deine Karte schon vor der Reise prüfst."
 date: 2026-08-12T06:10:00Z
-lastmod: 2026-10-13
+lastmod: 2026-11-04
 draft: false
 tags: ["Girokonto", "Kreditkarte und Kredit"]
 categories: ["Ratgeber"]
@@ -51,10 +51,6 @@ Sie passt oft nicht zum abgehobenen Betrag. Genau an dieser Stelle entsteht der 
 Beim Geldabheben im Ausland treffen zwei getrennte Abrechnungswelten aufeinander. Der Betreiber des Automaten verlangt sein eigenes Entgelt. Deine Bank berechnet, was sie für die Nutzung deiner Karte außerhalb des Euro-Raums vorsieht.
 
 Wer diese zwei Posten auseinanderhält, kann schon vor der Reise entscheiden, mit welcher Karte er unterwegs ist. Geld abheben im Ausland ist eine Rechnung mit zwei Zeilen: der Automat und deine Bank. Wer beide kennt, gibt weniger Geld aus. Und er ärgert sich später seltener.
-
-![Merkkarte: Kernaussagen zu Geld abheben im Ausland: Wo die Gebühren wirklich entstehen](abbildung-merkkarte. svg)
-
-*Abbildung: Merkkarte zu „Geld abheben im Ausland: Wo die Gebühren wirklich entstehen“ (eigene Darstellung aus diesem Beitrag).*
 
 ![Merkkarte: Kernaussagen zu Geld abheben im Ausland: Wo die Gebühren wirklich entstehen](abbildung-merkkarte.svg)
 
@@ -141,10 +137,6 @@ Die drei Gebührenarten, die dir am Automaten begegnen, auf einen Blick:
 3. **Heb in einem Zug den Bedarf mehrerer Tage ab.** Jeder Vorgang kostet erneut.
 4. **Nutze Automaten von Banken, nicht von Aufstellern in Touristenzonen.** Das ist keine Garantie, aber ein guter Anfang.
 5. **Prüfe den Beleg, bevor du ihn wegwirfst.** Betrag in Landeswährung, angezeigter Kurs und Entgelt stehen darauf.
-
-![Gliederung des Beitrags: Geld abheben im Ausland: Wo die Gebühren wirklich entstehen](abbildung-ablauf. svg)
-
-*Abbildung: Gliederung zu „Geld abheben im Ausland: Wo die Gebühren wirklich entstehen“ – 5 Stationen von „Kurz gefasst“ bis „Modellrechnung: Vier Abhebungen im Urlaub“ (eigene Darstellung).*
 
 ![Gliederung des Beitrags: Geld abheben im Ausland: Wo die Gebühren wirklich entstehen](abbildung-ablauf.svg)
 

@@ -1,7 +1,7 @@
 ---
 title: "Last Minute Urlaub: So findest du echte Reiseschnäppchen"
 description: "Last Minute Urlaub: Vergleiche Gesamtpreis und Bedingungen, bleib bei Ziel und Termin flexibel. Rabatte sind möglich, aber nicht planbar."
-lastmod: 2026-10-14
+lastmod: 2026-11-04
 date: 2026-09-30T10:11:05Z
 draft: false
 reserve_published: 2026-09-30
@@ -40,10 +40,6 @@ quellen:
     herausgeber: "Bundesministerium der Justiz"
 faktencheck: 2026-10-14
 ---
-
-![Merkkarte: Kernaussagen zu Last Minute Urlaub: So findest du echte Reiseschnäppchen](abbildung-merkkarte. svg)
-
-*Abbildung: Merkkarte zu „Last Minute Urlaub: So findest du echte Reiseschnäppchen“ (eigene Darstellung aus diesem Beitrag).*
 
 ![Merkkarte: Kernaussagen zu Last Minute Urlaub: So findest du echte Reiseschnäppchen](abbildung-merkkarte.svg)
 
@@ -173,10 +169,6 @@ Auf dieser Annahme wäre Angebot B um 40 € günstiger. Das gilt nur, wenn Rei
 - [ ] Mietwagen-Kaution und Kreditkartenlimit abgeglichen, falls relevant
 - [ ] Versicherungsschutz und Ausschlüsse anhand der Vertragsbedingungen geprüft
 - [ ] Buchungsbestätigung und Kontaktdaten gespeichert
-
-![Gliederung des Beitrags: Last Minute Urlaub: So findest du echte Reiseschnäppchen](abbildung-ablauf. svg)
-
-*Abbildung: Gliederung zu „Last Minute Urlaub: So findest du echte Reiseschnäppchen“ – 5 Stationen von „Last-Minute-Urlaub: So ordnest du mögliche Preisvorteile ein“ bis „Typische Fehler, die das Urlaubsbudget belasten“ (eigene Darstellung).*
 
 ## Kurzer Merksatz vor der Reise
 

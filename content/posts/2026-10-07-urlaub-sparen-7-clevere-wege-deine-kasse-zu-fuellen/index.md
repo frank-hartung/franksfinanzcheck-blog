@@ -2,6 +2,7 @@
 title: "Urlaub sparen: Budget, Buchung und Kosten im Blick"
 description: "Urlaub sparen: Plane Reisekasse, Buchung, Storno, Mietwagen und Ausgaben vor Ort mit einem klaren Budget statt mit pauschalen Sparversprechen."
 date: 2026-10-16T04:36:29Z
+lastmod: 2026-11-04
 draft: false
 reserve_published: 2026-10-16
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Inhalt, veraltete Kreditkartenangaben und Metadaten redaktionell neu geprüft"
@@ -65,7 +66,9 @@ Beginne mit dem Betrag, den du für die Reise einsetzen kannst, ohne Miete oder 
 
 Teile das Budget in gut erkennbare Gruppen: Anfahrt, Unterkunft, Essen, Aktivitäten, Versicherung und freie Reserve. Du musst nicht jeden Betrag gleich genau kennen. Markiere, welche Preise bereits feststehen und welche nur Schätzungen sind. So siehst du, wo noch eine Information fehlt.
 
-Die Verbraucherzentrale empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im Blick zu behalten. Ihre [Hinweise zum Sparen mit kleinem Budget](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/effektiv-sparen-auch-mit-kleinem-budget-87610) bieten einen guten Einstieg. Passe die Idee an deine Einnahmen und festen Kosten an.
+Die Verbraucherzentrale empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im Blick zu behalten.
+
+Ein Preisvergleich zeigt dir Angebote nebeneinander – ob Fahrzeuggröße, Kofferraum und Kindersitze zu deinem Urlaub passen, prüfst du an deiner eigenen Packliste. Die Verbraucherzentrale sammelt [Hinweise zu Reisebuchungen und Problemen mit Online-Buchungen](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen), wenn ein Angebot unklar wirkt. Ihre [Hinweise zum Sparen mit kleinem Budget](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/effektiv-sparen-auch-mit-kleinem-budget-87610) bieten einen guten Einstieg. Passe die Idee an deine Einnahmen und festen Kosten an.
 
 ## Wie baust du die Reisekasse ohne Druck auf?
 

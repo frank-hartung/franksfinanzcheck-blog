@@ -2,6 +2,7 @@
 title: "Frugalismus Familie: Clever sparen ohne Verzicht"
 description: Wie gelingt Frugalismus Familie im Alltag? Vermeide teure Fehler beim Sparen mit Kindern und optimiere dein Familienbudget mit FranksFinanzcheck.
 date: 2026-10-30T01:04:22Z
+lastmod: 2026-11-04
 draft: false
 reserve_published: 2026-10-30
 tags: ["Frugalismus", "Geld sparen im Alltag"]
@@ -255,7 +256,7 @@ Pick dir zwei oder drei Punkte heraus, die für euch am einfachsten sind.
 * [ ] **[Energie sparen](../../posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/):** Stoßlüften statt Kippfenster und Lichter konsequent ausschalten.
 * [ ] **Tauschen statt Kaufen:** Nutze Tauschbörsen für Spielzeug in der Nachbarschaft.
 
-Diese kleinen Maßnahmen wirken zusammen wie ein [Schutzschild](../../posts/2026-10-09-vpn-zu Hause-schutzschild-oder-unnoetige-fixkosten-falle/) für dein Konto.
+Diese kleinen Maßnahmen wirken zusammen wie ein [Schutzschild](../../posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/) für dein Konto.
 Du sorgst dafür, dass am Monatsende mehr übrig bleibt.
 Dieses Geld ist deine Reserve für schwierige Zeiten.
 

@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-10-28
+lastmod: 2026-11-04
 title: "Strom & Gas sparen: Ratgeber für niedrige Energiekosten"
 description: "Strom-, Gas- und Heizkosten senken: Stromfresser enttarnen, Preisgarantien nutzen, Anbieter wechseln und dynamische Tarife einordnen – mit Rechnern."
 date: 2026-08-08
@@ -15,11 +15,11 @@ cover:
   caption: "Kompletter Ratgeber von FranksFinanzcheck"
   preload: false   # Bild liefert og:image, nicht den LCP
 quellen:
-  - titel: "BDEW-Strompreisanalyse: Haushaltsstrompreis 2026 bei 37,0 ct/kWh"
+  - titel: "BDEW-Strompreisanalyse: Haushaltsstrompreis 2026 bei 37,3 ct/kWh"
     url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
     herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
     datum: "2026-09-28"
-  - titel: "BDEW-Gaspreisanalyse: Erdgaspreise für Haushalte bei 11,93 ct/kWh"
+  - titel: "BDEW-Gaspreisanalyse: Erdgaspreise für Haushalte (Neukunden Einfamilienhaus) bei 12,23 ct/kWh"
     url: "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/"
     herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
     datum: "2026-09-28"
@@ -53,17 +53,17 @@ Um eine fundierte Entscheidung zu treffen, benötigst du verlässliche Markt-Ben
 <div class="ff-radar-card">
   <div class="ff-radar-card__head">
     <h3 class="ff-radar-card__title"><span>📊</span> Energie-Marktradar &amp; Benchmarks Q4 2026</h3>
-    <span class="ff-radar-card__meta">Quellenstand: 28.09.2026 · BDEW; bundesweite Orientierungswerte, kein persönliches Angebot</span>
+    <span class="ff-radar-card__meta">Quellenstand: 04.11.2026 · BDEW; bundesweite Orientierungswerte, kein persönliches Angebot</span>
   </div>
   <div class="ff-radar-grid">
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">Strompreis Bundesdurchschnitt</div>
-      <div class="ff-radar-kpi__value">37,0 ct/kWh</div>
+      <div class="ff-radar-kpi__value">37,3 ct/kWh</div>
       <div class="ff-radar-kpi__source">Haushaltsstrom inkl. aller Abgaben &amp; Netzentgelte</div>
     </div>
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">Gaspreis Bundesdurchschnitt</div>
-      <div class="ff-radar-kpi__value">11,93 ct/kWh</div>
+      <div class="ff-radar-kpi__value">12,23 ct/kWh</div>
       <div class="ff-radar-kpi__source">Einfamilienhaus / Mehrpersonen-Haushalt</div>
     </div>
     <div class="ff-radar-kpi">

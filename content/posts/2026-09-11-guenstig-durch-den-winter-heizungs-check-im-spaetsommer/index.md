@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-09-28
+lastmod: 2026-11-04
 title: "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck"
 description: "Heizungs-Check vor der Saison: Prüfe Heizkörper, Thermostate, Anlagendruck und Regelung – mit klarer Grenze zwischen Selbstcheck und Fachbetrieb."
 date: 2026-09-11T08:45:00Z
@@ -185,6 +185,8 @@ Beim hydraulischen Abgleich findet ein Fachbetrieb die passende Wassermenge für
 | 5 Minuten | Mängel gesammelt an Vermieter oder Verwaltung melden |
 
 Mieter mit eigenem Gasvertrag prüfen zusätzlich den Tarif. Bei Zentralheizung liegt die Lieferantenauswahl meist beim Vermieter oder der Gemeinschaft.
+
+Bleibt eine Rechnung oder ein Mangel strittig, endet dein Weg nicht beim Vermieter oder Anbieter. Der Verbraucherservice der Bundesnetzagentur nimmt Anfragen und Beschwerden zum Energiemarkt entgegen; bei Streit mit dem Versorger schlichtet die [Schlichtungsstelle Energie](https://www.schlichtungsstelle-energie.de/) kostenfrei. Aktuelle Marktdaten der Behörde findest du auf [SMARD](https://www.smard.de/).
 
 ## 60-Minuten-Plan für Eigentümer
 

@@ -131,6 +131,13 @@ jobs:
 
       - name: Report committen + pushen
         if: always()
+        # Dauerheilung #1063 (04.11.2026): Der Report-Push scheiterte im
+        # belebtesten Bot-Fenster des Tages (fünf Bots committen parallel
+        # auf main) nach den drei Standard-Rebase-Runden von git_sync.
+        # Mehr Runden für genau diesen Schritt – der Inhalt ist ein
+        # generierter Report, ein späterer Rebase ist hier gefahrlos.
+        env:
+          GIT_SYNC_TRIES: "6"
         run: |
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"

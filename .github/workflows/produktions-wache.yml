@@ -155,33 +155,18 @@ jobs:
           mode = os.environ.get("MODE", "")
           conclusion = os.environ.get("ENGINE_CONCLUSION", "")
 
-          # Bewertung
-          level, meldung = "OK", ""
-          if is_pub and count_today == 0:
-              if conclusion == "failure":
-                  level = "P1"
-                  meldung = (f"Heute ({names[today.weekday()]}, {today.isoformat()}) ist ein "
-                             f"Publikationstag – der Engine-Lauf ist FEHLGESCHLAGEN und es "
-                             f"sind 0 Artikel erschienen (Ziel: {minimum}).")
-              elif mode == "workflow_run" and not after_last_slot:
-                  level = "WARTEND"
-                  meldung = (f"Publikationstag, bisher 0 Artikel – Fallback-Slots "
-                             f"(14:10 / 17:40 UTC) laufen noch. Kein Alarm.")
-              else:
-                  level = "P1"
-                  meldung = (f"Heute ({names[today.weekday()]}, {today.isoformat()}) ist ein "
-                             f"Publikationstag – alle Slots vorbei, **0 Artikel** erschienen "
-                             f"(Ziel: {minimum}).")
-          elif count_last == 0:
-              level = "P1"
-              meldung = (f"Am letzten Publikationstag ({names[last_pub.weekday()]}, "
-                         f"{last_pub.isoformat()}) sind **0 Artikel** erschienen (Ziel: {minimum}).")
-          elif count_last < minimum:
-              level = "P2"
-              meldung = (f"Am letzten Publikationstag ({last_pub.isoformat()}) nur "
-                         f"{count_last}/{minimum} Artikel – unter Mindestziel.")
-          else:
-              meldung = f"Letzter Publikationstag ({last_pub.isoformat()}): {count_last} Artikel – Ziel erfüllt."
+          # Bewertung – reine Funktion in scripts/produktions_wache.py
+          # (dort per --selftest beweispflichtig). Dauerheilung #1054:
+          # Ein verzögerter Plan-Lauf (Cron 20:00 UTC, gelaufen 00:32 UTC
+          # des Folgetags) darf den neuen Tag nicht als „alle Slots
+          # vorbei“ bewerten – WARTEND gilt deshalb in jedem Modus,
+          # solange der letzte Slot (17:40 UTC + Puffer) noch läuft.
+          import produktions_wache as pw
+          level, meldung = pw.bewertung(
+              heute=today, jetzt_utc=now_utc, ist_pubtag=is_pub,
+              anzahl_heute=count_today, anzahl_letzter=count_last,
+              letzter_pubtag=last_pub, minimum=minimum, modus=mode,
+              engine_conclusion=conclusion)
 
           if queue_n or hold_posts:
                 teile = []

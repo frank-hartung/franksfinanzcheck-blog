@@ -2,6 +2,7 @@
 title: "Weihnachten Budget planen: Ohne Schulden durch die Feiertage"
 description: "Weihnachten Budget planen ohne Stress: Mit dem 6-Topf-Modell, einer Modellrechnung und sieben Sparhebeln kommst du schuldenfrei durch die Feiertage."
 date: 2026-10-02T19:45:00Z
+lastmod: 2026-11-04
 draft: false
 reserve_published: 2026-10-02
 faktencheck: 2026-11-03
@@ -101,7 +102,7 @@ Auch das Wichteln im Verein gehört dazu. Oder die Feier mit den Kollegen im Adv
 
 ## Welche Modellrechnung zeigt dir die passende Wochenrate?
 
-Rechnen wir ein Beispiel mit 600 € durch. So verteilt sich die Summe auf die sechs Töpfe:
+Zur Einordnung der Preise: Die Inflation lag im Oktober 2026 bei +2,8 %, Nahrungsmittel verteuerten sich mit +0,4 % deutlich schwächer, Energie dagegen mit +14,9 % stark ([Destatis – Verbraucherpreisindex](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html)). Plane deshalb nicht mit einem pauschalen Teuerungsaufschlag, sondern mit deinen Preisen aus dem Vorjahr. Rechnen wir ein Beispiel mit 600 € durch – eine Modellrechnung mit frei gewählten Töpfen: So verteilt sich die Summe auf die sechs Töpfe:
 
 | Budgettopf | Betrag | Anteil |
 |------------|--------|--------|
@@ -114,7 +115,7 @@ Rechnen wir ein Beispiel mit 600 € durch. So verteilt sich die Summe auf die 
 
 Startest du Mitte Oktober, bleiben rund zehn Wochen bis Heiligabend. **Rechenweg Budget:** 600 € geteilt durch 10 Wochen sind 60 € pro Woche.
 
-Lieber im Monats-Takt? Dann legst du zweimal 260 € und einmal 80 € zur Seite. Beide Wege führen zur gleichen Summe, ohne dein Konto zu sprengen.
+Lieber im Monats-Takt? Dann legst du zweimal 260 € und einmal 80 € zur Seite. Beide Wege führen zur gleichen Summe, ohne dein Konto zu sprengen. Die Anreise-Pauschale in dieser Modellrechnung ist nur ein Platzhalter; weil Energie zuletzt überdurchschnittlich teurer wurde, prüfe deine Fahrtkosten am echten Preis statt an der Pauschale.
 
 Ist dein Einkommen kleiner, halbiere die Beträge. Das Prinzip bleibt gleich. Es zählt die Rate pro Woche, nicht die Wunschliste.
 

@@ -2,7 +2,7 @@
 title: "Energiediebe stoppen: So kannst du Stromfresser finden"
 description: "Energiediebe stoppen: Stromfresser finden statt raten. Mit Messplan, Kostenformel und Amortisationscheck senkst du unnötigen Verbrauch gezielt."
 date: 2026-08-19T08:35:12Z
-lastmod: 2026-09-28
+lastmod: 2026-11-04
 draft: false
 tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
@@ -20,7 +20,7 @@ pin_title: "Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe"
 pin_description: "*Werbung | Welche Geräte treiben deine Stromrechnung wirklich in die Höhe? Wir zeigen die 5 größten Stromfresser – inklusive Euro-Beträgen pro Jahr und Sofort-Tipps gegen Standby-Kosten. Jetzt checken und bis zu 300 € im Jahr sparen."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
-  - titel: "BDEW-Strompreisanalyse Herbst 2026: 37,0 ct/kWh im Durchschnitt"
+  - titel: "BDEW-Strompreisanalyse Herbst 2026: 37,3 ct/kWh im Durchschnitt"
     url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
     herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
     datum: "2026-08-21"
@@ -66,10 +66,6 @@ Schreibe das Ergebnis in eine Liste. Ein Foto vom Display hilft. Markiere auffä
 So [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du voreilige Käufe. Du erkennst auch kleine Verbraucher. Kleine Werte summieren sich. Große Dauerlasten bleiben wichtiger.
 
 Beginne deshalb mit Kühlschrank, Gefriergerät und [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/). Danach folgen Büro und Unterhaltung. Diese Reihenfolge spart Aufwand. Sie macht deine nächste Maßnahme sichtbar.
-
-![Merkkarte: Kernaussagen zu Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-merkkarte. svg)
-
-*Abbildung: Merkkarte zu „Energiediebe stoppen: So kannst du Stromfresser finden“ (eigene Darstellung aus diesem Beitrag).*
 
 ## Ein Messplan für den ersten Abend
 
@@ -175,10 +171,6 @@ Eco-Programme dauern oft länger, brauchen aber weniger Strom. Maschinen laufen 
 ### 3. Ersetzen
 
 Ein Ersatz lohnt sich, wenn der Jahresverbrauch hoch ist, die Nutzung real bleibt und sich der Kauf in klarer Zeit rechnet. Vergleiche immer Preis, Reparatur-Chance und zu erwartende Lebensdauer.
-
-![Gliederung des Beitrags: Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-ablauf. svg)
-
-*Abbildung: Gliederung zu „Energiediebe stoppen: So kannst du Stromfresser finden“ – 5 Stationen von „Dein Schnellstart – Energiediebe stoppen“ bis „Die Kostenformel, die du wirklich brauchst“ (eigene Darstellung).*
 
 ## Eine Messwoche ohne Zettelchaos
 

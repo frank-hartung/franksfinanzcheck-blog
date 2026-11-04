@@ -1,7 +1,7 @@
 ---
 title: "Gasabschlag berechnen: So planst du die Heizsaison richtig"
 description: "Gasabschlag berechnen und Heizkosten im Griff behalten: Mit Formel, Modellrechnung und fünf Sparhebeln startest du entspannt in die Heizsaison."
-lastmod: 2026-10-10
+lastmod: 2026-11-04
 date: 2026-10-02T21:37:08Z
 draft: false
 reserve_published: 2026-10-02
@@ -51,7 +51,7 @@ Der Briefkasten liefert es jeden Herbst: die Preisanpassung deines Gasanbieters.
 **Das Wichtigste in Kürze**
 * Der Abschlag ist eine Vorauszahlung auf die Jahresrechnung, kein Festpreis.
 * **Formel:** Jahresverbrauch × Arbeitspreis + 12 × Grundpreis, geteilt durch 12 Monate im Modellfall.
-* Grundversorgung ist fast immer der teuerste Tarif – prüfen lohnt sich.
+* Grundversorgung ist oft teurer als selbst gewählte Tarife – prüfen lohnt sich.
 * **[Nachzahlung vermeiden](../../posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/):** Zählerstand regelmäßig ablesen und Abschlag anpassen lassen.
 * Ein Grad weniger Raumtemperatur spart nach Einschätzung der Verbraucherzentralen rund 6 % Heizenergie.
 
@@ -59,12 +59,12 @@ Der Briefkasten liefert es jeden Herbst: die Preisanpassung deines Gasanbieters.
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Gastarife vergleichen**](/go/gas/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Tarife findest du über unseren Partner-Vergleich: [**Jetzt Gastarife vergleichen**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Wie setzt sich dein Gasabschlag zusammen?
 
-Dein Gasabschlag ist eine monatliche Anzahlung auf das voraussichtliche Jahresergebnis. Der Anbieter schätzt deinen Verbrauch, rechnet ihn mit deinem Tarif hoch und verteilt die Summe auf elf oder zwölf Raten. Abgerechnet wird einmal im Jahr anhand des echten Zählerstands.
+Dein Gasabschlag ist eine monatliche Anzahlung auf das voraussichtliche Jahresergebnis. Der Anbieter schätzt deinen Verbrauch, rechnet ihn mit deinem Tarif hoch und verteilt die Summe auf die im Vertrag vereinbarte Zahl von Raten (häufig elf oder zwölf). Abgerechnet wird einmal im Jahr anhand des echten Zählerstands.
 
 Zwei Preisbestandteile steuern die Höhe. Der **Arbeitspreis** gilt pro verbrauchter Kilowattstunde. Der **Grundpreis** fällt jeden Monat an, unabhängig vom Verbrauch. Hinzu kommen Steuern, Abgaben und Netzentgelte, die in den Preisen bereits enthalten sind.
 
@@ -104,7 +104,7 @@ Der Heizbeginn verschiebt den Zähler in den Schnellgang. Wer seine Zahlen jetzt
 
 ## Was tun bei einer Preiserhöhung mitten im Winter?
 
-Kündigt dein Anbieter höhere Preise an, greift dein Sonderkündigungsrecht. Du musst die teuren neuen Konditionen nicht bis zum Vertragsende erdulden. Wichtig ist, zügig zu handeln, denn die Frist für die Kündigung ist kurz.
+Kündigt dein Anbieter einseitig höhere Preise an, kannst du grundsätzlich zum Zeitpunkt der Änderung kündigen; Weg und Ausnahmen beschreibt die [Bundesnetzagentur zur Kündigung](https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Kuendigung/start.html). Du musst die teuren neuen Konditionen nicht bis zum Vertragsende erdulden. Wichtig ist, zügig zu handeln, denn die Frist für die Kündigung ist kurz.
 
 Prüfe zuerst, ob die Erhöhung formal korrekt ankam und ab wann sie gilt. Rechne dann deinen Abschlag mit dem neuen Arbeitspreis nach, damit du die echte Mehrbelastung kennst. Erst danach entscheidest du, ob ein Wechsel den Aufwand wirklich lohnt.
 
@@ -129,7 +129,7 @@ Der Tarif ist nur ein Stellrad. Diese fünf Hebel wirken schon in der laufenden 
 
  **Raumtemperatur um einen Grad senken:** Nach Einschätzung der Verbraucherzentralen spart jedes Grad weniger rund 6 % Heizenergie; das ist ein Modellwert. Von 23 auf 21 Grad sind das bis zu 160 € im Jahr.
 2. **Abschlag an den echten Verbrauch anpassen:** Melde deinem Anbieter den aktuellen Zählerstand. Er muss einen nachweislich zu hohen oder zu niedrigen Abschlag korrigieren.
-3. **Aus der Grundversorgung wechseln:** Der Grundtarif der Stadtwerke ist die Notversorgung, nicht der Bestpreis. Ein Wechsel ist jederzeit mit kurzer Frist möglich.
+3. **Aus der Grundversorgung wechseln:** Der Grundtarif sichert deine Versorgung auch ohne eigenen Vertrag; ob er preislich mithält, zeigt nur der Vergleich mit selbst gewählten Tarifen. Ein Wechsel ist jederzeit mit kurzer Frist möglich.
 4. **Stoßlüften statt Dauerlüften:** Fünf bis zehn Minuten weit geöffnete Fenster tauschen die Luft komplett, ohne die Wände auszukühlen. Gekippte Fenster heizen für die Straße.
 5. **Heizkörper freihalten und entlüften:** Möbel vor dem Heizkörper schlucken die Wärme. Gluckernde Heizkörper verteilen sie ungleichmäßig.
 
@@ -170,7 +170,7 @@ Du kannst beim Anbieter eine Anpassung beantragen, wenn der Abschlag vom realen 
 Die Nachzahlung ist fällig, sobald die Jahresrechnung zugestellt ist. Wer eine größere Summe erwartet, sollte ab sofort monatlich Geld dafür zurücklegen. Alternativ kannst du den Abschlag freiwillig erhöhen lassen und verteilst die Last auf das Jahr.
 
 ### Warum ist die Grundversorgung so teuer?
-Die Grundversorgung ist der Notfalltarif deiner Stadtwerke und sichert die Versorgung ohne Vertragswahl ab. Dafür kalkulieren die Anbieter hohe Sicherheitszuschläge ein. Ein Wechsel in einen aktiv gewählten Tarif ist meist schon nach wenigen Monaten spürbar günstiger.
+Die Grundversorgung sichert deine Versorgung auch ohne Vertragswahl ab. Ihre Preise liegen häufig über denen selbst gewählter Tarife. Ein Wechsel in einen aktiv gewählten Tarif ist meist schon nach wenigen Monaten spürbar günstiger.
 
 ### Wie oft sollte ich den Zählerstand ablesen?
 Einmal im Monat reicht völlig aus. Notiere Wert und Datum in einer Tabelle oder fotografiere den Zähler. So erkennst du Entwicklungen früh und hast bei der Jahresrechnung eigene Belege in der Hand.

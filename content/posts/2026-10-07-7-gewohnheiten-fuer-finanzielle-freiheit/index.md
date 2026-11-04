@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-10-14
+lastmod: 2026-11-04
 title: "7 Gewohnheiten für finanzielle Freiheit: Welche Routinen"
 description: "Finanzielle Freiheit beginnt im Alltag: Sieben klare Gewohnheiten helfen dir, Einnahmen, Fixkosten, Rücklagen und Ziele ohne leere Versprechen zu ordnen."
 date: 2026-10-09T02:12:31Z
@@ -53,9 +53,6 @@ Dann kannst du entscheiden, was bleiben soll und was sich ändern darf.
 - Rücklagen, Verträge und Ziele brauchen unterschiedliche Regeln.
 
 ## Was bedeutet finanzielle Freiheit im Alltag?
-
-
-Darum geht es hier konkret: sieben Gewohnheiten für finanzielle Freiheit.
 
 
 Darum geht es hier konkret: sieben Gewohnheiten für finanzielle Freiheit.
@@ -197,9 +194,6 @@ Finanzielle Freiheit entsteht selten plötzlich. Sie wächst, wenn du deine Ents
 
 Genau das ist der Hebel: sieben Gewohnheiten für finanzielle Freiheit.
 
-
-Genau das ist der Hebel: sieben Gewohnheiten für finanzielle Freiheit.
-
 ## Häufige Fragen
 
 ### Muss ich viel verdienen, um mehr Freiheit zu gewinnen?
@@ -221,7 +215,7 @@ Kopple die Gewohnheit an etwas Festes. Etwa den Kontoblick an den Montagskaffee.
 
 ### Was mache ich in einem teuren Monat?
 
- Fünf Euro statt fünfzig zählen; das ist ein Modellwert. Es geht um das Muster, nicht um die Summe.
+Halte die Routine, auch wenn die Beträge sinken. Fünf Euro statt fünfzig zählen. Es geht um das Muster, nicht um die Summe.
 
 ### Soll ich das Geld sofort aufteilen?
 

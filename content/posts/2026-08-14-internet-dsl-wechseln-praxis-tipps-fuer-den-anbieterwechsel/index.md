@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-10-13
+lastmod: 2026-11-04
 title: "DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis"
 description: "So kannst du DSL wechseln, ohne Stress: Rechne den Effektivpreis, vermeide Ausfallzeiten und prüfe Bonus, Router und Laufzeit vor dem Anbieterwechsel."
 date: 2026-08-14T08:35:12Z
@@ -95,7 +95,7 @@ Entscheidend ist nicht die größte Zahl im Werbebanner, sondern was gleichzeiti
 - Cloud-Backups
 - mehrere Geräte parallel
 
-Wenn du mehr dazu wissen willst, hilft dir auch dieser Artikel: [So findest du den richtigen DSL-Tarif für dein Zuhause](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/).
+Wenn du mehr dazu wissen willst, hilft dir auch dieser Artikel: [So findest du den richtigen DSL-Tarif für dein Zuhause](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/).
 
 ## DSL, Kabel oder Glasfaser – was passt zu dir?
 

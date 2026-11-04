@@ -2,7 +2,7 @@
 title: "Notgroschen: Die Wahrheit über das finanzielle Polster"
 description: "Wie viel Notgroschen brauchst du wirklich? So berechnest du dein finanzielles Polster, baust es planbar auf und parkst es sicher auf Tagesgeld."
 date: 2026-09-09T08:16:43Z
-lastmod: 2026-10-13
+lastmod: 2026-11-04
 draft: false
 tags: ["Notgroschen", "Tagesgeld und Zinsen"]
 categories: ["Ratgeber"]
@@ -54,10 +54,6 @@ Die bekannte Regel „drei Monatsgehälter" klingt einfach, trifft aber oft dane
 
 💡 **Schnell-Tipp von FranksFinanzcheck:** Sichere deine Notfallreserve getrennt vom Girokonto: [**Jetzt C24 Bank Tagesgeld ansehen**](/go/tagesgeld/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
-
-![Merkkarte: Kernaussagen zu Notgroschen: Die Wahrheit über das finanzielle Polster](abbildung-merkkarte. svg)
-
-*Abbildung: Merkkarte zu „Notgroschen: Die Wahrheit über das finanzielle Polster“ (eigene Darstellung aus diesem Beitrag).*
 
 ![Merkkarte: Kernaussagen zu Notgroschen: Die Wahrheit über das finanzielle Polster](abbildung-merkkarte.svg)
 
@@ -143,10 +139,6 @@ Die 50–30–20-Regel ist dafür ein praxistauglicher Start:
 * **20 % für Sparen:** Erst den [Notgroschen aufbauen](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/), danach investieren.
 
 Wenn deine Fixkosten deutlich über 50 % liegen, solltest du zuerst die großen Hebel prüfen. Ein günstigerer Stromtarif, ein besserer Handyvertrag oder eine sauberere Versicherungsstruktur können sofort Geld freimachen. Genau dieser freie Betrag finanziert später deinen Notgroschen.
-
-![Gliederung des Beitrags: Notgroschen: Die Wahrheit über das finanzielle Polster](abbildung-ablauf. svg)
-
-*Abbildung: Gliederung zu „Notgroschen: Die Wahrheit über das finanzielle Polster“ – 5 Stationen von „Warum die klassische Drei-Monats-Regel oft zu grob ist“ bis „Ein Rechenbeispiel für 2026“ (eigene Darstellung).*
 
 ![Gliederung des Beitrags: Notgroschen: Die Wahrheit über das finanzielle Polster](abbildung-ablauf.svg)
 

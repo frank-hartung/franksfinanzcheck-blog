@@ -2,7 +2,7 @@
 title: "Umzug mit Internet: Anschluss und Rufnummer mitnehmen"
 description: "Umzug mit Internet: Prüfe Verfügbarkeit, Fristen und Rufnummernmitnahme früh. So planst du den Wechsel und verringerst das Risiko einer Anschlusslücke."
 date: 2026-09-04T06:10:00Z
-lastmod: 2026-10-13
+lastmod: 2026-11-04
 draft: false
 tags: ["Internet und Mobilfunk", "DSL-Vergleich"]
 categories: ["Ratgeber"]
@@ -210,7 +210,7 @@ Ein Neuvertrag ist häufig günstiger, weil Neukundenkonditionen gelten. Rechne 
 
  Sechs bis acht Wochen Vorlauf geben dir Wahlmöglichkeiten bei Terminen; das ist eine Modellannahme.
 
-**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Tarif prüfen](../../posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/) · [VPN Zuhause](../../posts/2026-10-09-vpn-zu Hause-schutzschild-oder-unnoetige-fixkosten-falle/)
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Tarif prüfen](../../posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/) · [VPN Zuhause](../../posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/)
 **Lesetipp:** [DSL-Anbieter wechseln: Warum Treue dich bares Geld kostet](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/)
 
 ---

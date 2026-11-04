@@ -2,7 +2,7 @@
 title: "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung"
 description: "Gasrechnung senken: Der 60-Minuten-Check vor der Heizperiode. Gastarif rechnen, Zählerstand sichern und Heizkörper prüfen – Schritt für Schritt."
 date: 2026-09-25T12:15:40Z
-lastmod: 2026-09-28
+lastmod: 2026-11-04
 draft: false
 reserve_published: 2026-09-25
 tags: ["Gasrechnung prüfen", "Heizkosten senken"]
@@ -42,13 +42,13 @@ Willst du deine [Gasrechnung senken](../../posts/2026-08-14-gasrechnung-senken-f
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Dieser Ablauf ist bewusst knapp gehalten im Modellfall. Nach 60 Minuten hast du keine perfekt eingestellte Heizung, aber eine klare Prioritätenliste. Bei 18.000 kWh Jahresverbrauch macht schon 1 Cent pro kWh rund 180 € im Jahr aus. Deshalb prüfst du Tarif und Verbrauch getrennt, statt nur auf die Abschlagsrate zu schauen.
+Dieser Ablauf ist bewusst knapp gehalten im Modellfall. Nach 60 Minuten hast du keine perfekt eingestellte Heizung, aber eine klare Prioritätenliste. Bei 18.000 kWh Jahresverbrauch macht schon 1 Cent pro kWh rechnerisch rund 180 € im Jahr aus. Deshalb prüfst du Tarif und Verbrauch getrennt, statt nur auf die Abschlagsrate zu schauen.
 
 
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Tarife findest du über unseren Partner-Vergleich: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Das Wichtigste in Kürze – Gasrechnung senken
@@ -183,7 +183,7 @@ Mehr als drei Sofortaufgaben brauchst du nicht. Der Rest bekommt einen Termin.
 
 ## Wie du den Tarif fair vergleichst?
 
-Der BDEW nennt für 2026 einen Durchschnitt von 11,93 Cent pro Kilowattstunde bei Einfamilienhäusern; das ist ein Rechenbeispiel. Nimm das nur als grobe Orientierung. Postleitzahl, Jahresmenge und Vertragsbedingungen entscheiden, was am Ende wirklich auf deiner Rechnung steht.
+Die [BDEW-Gaspreisanalyse Herbst 2026](https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/) nennt für Neukunden in Einfamilienhäusern einen Durchschnitt von 12,23 Cent pro Kilowattstunde. Nimm das nur als grobe Orientierung. Postleitzahl, Jahresmenge und Vertragsbedingungen entscheiden, was am Ende wirklich auf deiner Rechnung steht.
 
 Die Verbraucherzentrale empfiehlt unter anderem:
 
@@ -197,7 +197,7 @@ Rechne das erste und zweite Jahr getrennt. Ein günstiges Bonusjahr kann danach 
 
 ## Was ein Wechsel realistisch bringen kann
 
-Die Bundesnetzagentur rechnete für Januar 2026 bei 20.000 kWh vor: Ein Gaslieferantenwechsel spart im Schnitt etwa 360 €; das ist ein Rechenbeispiel. Das ist nur ein Durchschnitt, kein persönliches Versprechen.
+Rechenbeispiel ohne Marktversprechen: Liegen zwischen altem und neuem Tarif 1,8 Cent pro kWh, sind das bei 20.000 kWh rechnerisch 360 € im Jahr. Das ist nur ein Durchschnitt, kein persönliches Versprechen.
 
 Deine Ersparnis berechnest du so:
 
@@ -207,7 +207,7 @@ Beispiel: Kostet der alte Vertrag 2.400 € und ein vergleichbarer neuer 2.050�
 
 ## Verbrauchssparen ohne Doppelzählung
 
-Pro Grad weniger Raumtemperatur sinkt der Heizbedarf laut Faustregel der Verbraucherzentrale um etwa 6 %. Auch andere Maßnahmen wirken: besser lüften, freie Heizkörper, angepasste Zeiten.
+Pro Grad weniger Raumtemperatur sinkt der Heizbedarf nach der Faustregel der [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892) um etwa 6 %. Auch andere Maßnahmen wirken: besser lüften, freie Heizkörper, angepasste Zeiten.
 
 Addiere diese Prozentwerte aber nicht einfach. Sie wirken oft auf denselben unnötigen Verbrauch. Beobachte stattdessen den Zähler über mehrere vergleichbare Wochen.
 

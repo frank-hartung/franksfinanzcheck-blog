@@ -337,6 +337,33 @@ def run_selftest() -> list:
     # Kandidaten-Collector (#714): dieselbe Messung, die das Publish-Gate
     # liest – wenn sie hier nicht findet, darf kein Gate ihr vertrauen.
     fehler.extend(_collector_selftest())
+    # Änderungs-Messung V4 (#1027): Wer eine Passage aus einem anderen
+    # Artikel in einen bestehenden kopiert, muss VOR dem Schreiben fallen –
+    # nicht erst im Tagesaudit nach dem Deploy (Vorfall 69f08c40).
+    passage = ("Bei einer einseitigen Preisänderung können Verbraucher "
+               "grundsätzlich ohne Frist zum Zeitpunkt der Änderung "
+               "kündigen; der Vertrag endet am Vortag der Änderung.")
+    eigen_alt = ("Der eigene Text spricht über Heizkörper, Thermostate "
+                 "und den Blick auf die letzte Jahresrechnung des Hauses.")
+    bestand_v4 = {
+        "a": {"slug": "2026-01-01-fremd", "body": clean_body(passage),
+              "live": True},
+        "b": {"slug": "2026-01-02-eigen", "body": clean_body(eigen_alt),
+              "live": True},
+    }
+    kopie = eigen_alt + " " + passage
+    if not aenderung_befunde("2026-01-02-eigen", eigen_alt, kopie,
+                             bestand=bestand_v4):
+        fehler.append("  V4: kopierte Fremdpassage in einer Änderung wird "
+                      "nicht erkannt (#1027-Rückfallschutz fehlt)")
+    if aenderung_befunde("2026-01-02-eigen", eigen_alt, eigen_alt,
+                         bestand=bestand_v4):
+        fehler.append("  V4: unveränderter Text gilt als neue Überlappung "
+                      "(Altlast wird dem Schreiber angelastet)")
+    if aenderung_befunde("2026-01-02-eigen", kopie, kopie,
+                         bestand=bestand_v4):
+        fehler.append("  V4: bereits bestehende Überlappung wird als neu "
+                      "erzeugt gemeldet (keine Differenz-Messung)")
     return fehler
 
 
@@ -549,6 +576,43 @@ def kandidaten_befunde(candidates, bestand=None, n: int = None,
                 else:
                     merke(cand, text.format(anderer=other))
     return funde
+
+
+def aenderung_befunde(slug: str, alt_rohtext: str, neu_rohtext: str,
+                      bestand: dict | None = None, n: int = None) -> list[str]:
+    """V4-Messung einer GEPLANTEN Änderung gegen den Bestand (#1027).
+
+    Dieselbe Messung wie Audit und Collector (`clean_body` + `ngrams` +
+    `KRITISCH_AB`, keine zweite Schwelle): Verglichen wird die Differenz
+    alt → neu je Gegenartikel (live UND Entwurf, ohne den eigenen Slug).
+    Ein Verstoß entsteht nur, wenn die Änderung eine Überlappung ab
+    `KRITISCH_AB` geteilten Phrasen ERZEUGT oder VERSTÄRKT – Altlasten
+    werden dem Schreiber nicht angelastet. So kann kein Schreiber und
+    keine Handänderung mehr unbemerkt denselben Absatz in mehrere
+    Artikel kopieren (Vorfall 69f08c40, #1027); gemessen wird vor dem
+    Schreiben, nicht erst im Tagesaudit nach dem Deploy.
+    """
+    n = PHRASE_LEN if n is None else n
+    bestand = lade_bestand() if bestand is None else bestand
+    alt_grams = ngrams(clean_body(alt_rohtext), n)
+    neu_grams = ngrams(clean_body(neu_rohtext), n)
+    befunde: list[str] = []
+    for info in bestand.values():
+        anderer = info.get("slug", "")
+        if not anderer or anderer == slug:
+            continue
+        fremd = ngrams(info.get("body", ""), n)
+        alt_n = len(alt_grams & fremd)
+        neu_n = len(neu_grams & fremd)
+        if neu_n >= KRITISCH_AB and neu_n > alt_n:
+            beispiel = sorted(neu_grams & fremd)[0]
+            befunde.append(
+                f"V4 Einzigartigkeit: die Änderung erzeugt/verstärkt eine "
+                f"Überlappung mit {anderer} ({alt_n} → {neu_n} gleiche "
+                f"{n}-Wort-Phrasen, z. B. „{beispiel}“) – ab {KRITISCH_AB} "
+                f"ist es Dopplung (Audit-Messung, #1027), Passage "
+                f"eigenständig formulieren")
+    return befunde
 
 
 def _collector_selftest() -> list:
