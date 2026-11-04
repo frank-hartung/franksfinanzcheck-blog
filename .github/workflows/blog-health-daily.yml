@@ -275,8 +275,15 @@ jobs:
 
       - name: Pillar-Wiedervorlage – Werkzeugfehler (kein Bestandsbefund)
         if: steps.pillar.outputs.exit_code != '0' && steps.pillar.outputs.exit_code != '1'
+        # Der Exit-Code kommt über `env:`, nicht als `${ { … } }` im Skript:
+        # Eine Interpolation in `run:` ist ein Template-Injection-Pfad
+        # (unabhaengiger_tiefencheck, Workflow-Härtung). Der Wert ist hier
+        # zwar ein Exit-Code – aber die Regel gilt für den Weg, nicht für
+        # die Herkunft des Werts.
+        env:
+          WACHE_EXIT: ${{ steps.pillar.outputs.exit_code }}
         run: |
-          echo "🛑 Die Pillar-Wiedervorlage konnte nicht urteilen (Exit ${{ steps.pillar.outputs.exit_code }})."
+          echo "🛑 Die Pillar-Wiedervorlage konnte nicht urteilen (Exit ${WACHE_EXIT})."
           echo "   Das ist ein Defekt im Werkzeug oder im Vertrag – nicht im Bestand."
           echo "   Ein fehlendes Urteil ist kein grünes Urteil."
           cat /tmp/pillar_wiedervorlage.txt || true
