@@ -631,6 +631,15 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # eigenen Schwelle und führt fehlende Felddaten als UNGEPRÜFT, nie
           # als GRÜN. Ihr Selbsttest ist die Bedingung dafür, dass C6 sie fährt.
           "cwv_feld_wache.py",
+          # Belegketten-Wache (04.11.2026, #1024): Sie entscheidet, ob ein
+          # Hochrisiko-Artikel seine Freigabe behalten darf – und fiel dabei
+          # selbst um: ein 3-Tupel wurde als 2-Tupel entpackt, `except
+          # Exception:` verkaufte den Programmierfehler als „Quelle unklar“.
+          # Vier gültige Bundesrechts-Zitate standen dauerhaft als unprüfbar
+          # in der YMYL-Queue, und der Fehler war unsichtbar, weil niemand
+          # den Selbsttest dieser Wache fuhr. Ab jetzt steht er im
+          # vertraglichen Minimum (C6) – ein Rat ohne Lauf ist Prosa.
+          "belegketten_wache.py",
           # MCP-Wache (26.10.2026): `.mcp.json` gibt KI-Agenten Werkzeuge in
           # diesem Repo – ein npm-Paket ohne Pin, eine Netzbefugnis ohne Grenze
           # und ein Dateizugriff ohne Not. Die Wache hält Pinning (M3), die
