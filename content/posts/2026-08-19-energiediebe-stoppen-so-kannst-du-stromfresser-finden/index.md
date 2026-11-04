@@ -63,7 +63,7 @@ So [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetz
 
 Beginne deshalb mit Kühlschrank, Gefriergerät und [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/). Danach folgen Büro und Unterhaltung. Diese Reihenfolge spart Aufwand. Sie macht deine nächste Maßnahme sichtbar.
 
-![Merkkarte: Kernaussagen zu Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-merkkarte.svg)
+![Merkkarte: Kernaussagen zu Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-merkkarte. svg)
 
 *Abbildung: Merkkarte zu „Energiediebe stoppen: So kannst du Stromfresser finden“ (eigene Darstellung aus diesem Beitrag).*
 
@@ -126,9 +126,9 @@ Dein Messgerät zeigt entweder direkt kWh oder eine Leistung in Watt.
 **Bei konstanter Dauerlast:**
 > Jahresverbrauch = Watt × 24 × 365 ÷ 1.000
 
-**Beispiel:** Eine Gerätegruppe zieht unnötig 18 Watt; das ist ein Modellwert. Umgerechnet sind das **157,7 kWh im Jahr**. Bei 0,37 € pro kWh kostet sie rund **58 € jährlich**.
+**Beispiel:** Eine Gerätegruppe zieht unnötig 18 Watt; das ist ein Modellwert. Umgerechnet sind das **157,7 kWh im Jahr**. Bei 0,37 € pro kWh kostet sie rund **58 € jährlich**.
 
-Zum Einordnen reicht ein Vergleich: 1 Watt Dauerlast kostet bei 0,37 € pro kWh etwa 3 € im Jahr. 10 Watt rund 32 €; das ist ein Rechenbeispiel. Miss aber nicht erst jeden Stecker einzeln. Prüfe zuerst die großen Gruppen. So wird aus „zieht bestimmt viel" eine echte Zahl.
+Zum Einordnen reicht ein Vergleich: 1 Watt Dauerlast kostet bei 0,37 € pro kWh etwa 3 € im Jahr. 10 Watt rund 32 €; das ist ein Rechenbeispiel. Miss aber nicht erst jeden Stecker einzeln. Prüfe zuerst die großen Gruppen. So wird aus „zieht bestimmt viel" eine echte Zahl.
 
 ## Kühlgeräte: erst messen, dann über Ersatz reden
 
@@ -148,8 +148,8 @@ Ein zu großes neues Gerät kann trotz guter Klasse mehr Strom brauchen als ein 
 Dein altes Gerät verbraucht gemessen 310 kWh im Jahr; das ist eine Modellannahme. Das passende Neugerät ist mit 140 kWh angegeben.
 
 - Differenz: **170 kWh** (im Modellfall)
-- Ersparnis bei 0,37 €/kWh: **62,90 € pro Jahr**
-- Kaufpreis: **650 €**
+- Ersparnis bei 0,37 €/kWh: **62,90 € pro Jahr**
+- Kaufpreis: **650 €**
 - Einfache Amortisationszeit: **rund 10,3 Jahre**
 
 Daraus folgt aber noch kein klares Ja. Geht das alte Gerät ohnehin bald kaputt, sieht die Rechnung anders aus. Läuft es gut, ist Weiternutzen oft die klügere Wahl.
@@ -168,7 +168,7 @@ Eco-Programme dauern oft länger, brauchen aber weniger Strom. Maschinen laufen 
 
 Ein Ersatz lohnt sich, wenn der Jahresverbrauch hoch ist, die Nutzung real bleibt und sich der Kauf in klarer Zeit rechnet. Vergleiche immer Preis, Reparatur-Chance und zu erwartende Lebensdauer.
 
-![Gliederung des Beitrags: Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-ablauf.svg)
+![Gliederung des Beitrags: Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-ablauf. svg)
 
 *Abbildung: Gliederung zu „Energiediebe stoppen: So kannst du Stromfresser finden“ – 5 Stationen von „Dein Schnellstart – Energiediebe stoppen“ bis „Die Kostenformel, die du wirklich brauchst“ (eigene Darstellung).*
 
@@ -190,7 +190,7 @@ Beim Zählertest schaltest du nicht blind Kühlgerät, Heizung oder Sicherheitsk
 
 **Zu kurz messen:** Fünf Minuten sagen bei Kühlgerät und Waschprogramm fast nichts aus.
 
-**Anschaffungskosten vergessen:** 60 € Stromersparnis machen einen 900-Euro-Kauf nicht sofort wirtschaftlich.
+**Anschaffungskosten vergessen:** 60 € Stromersparnis machen einen 900-Euro-Kauf nicht sofort wirtschaftlich.
 
 **Standby und Betrieb vermischen:** Für die richtige Maßnahme musst du wissen, in welchem Zustand der Verbrauch entsteht.
 

@@ -51,7 +51,7 @@ Wichtig wird es erst, wenn dein Anbieter den Preis wirklich ändert oder deine G
 💡 **Schnell-Tipp von FranksFinanzcheck:** Tarife kannst du über unseren Partner-Vergleich prüfen: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-![Merkkarte: Kernaussagen zu Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-merkkarte.svg)
+![Merkkarte: Kernaussagen zu Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-merkkarte. svg)
 
 *Abbildung: Merkkarte zu „Preisgarantie Gas: Was bei Preiserhöhung hilft“ (eigene Darstellung aus diesem Beitrag).*
 
@@ -68,7 +68,7 @@ Mach ein Foto vom Zähler, bevor ein neuer Preis gilt. Speichere Brief, Vertrag 
 - Börsenpreis und Haushaltsgaspreis sind nicht dasselbe.
 - Eine Garantie schützt nur die ausdrücklich erfassten Preisbestandteile.
 - Lies bei einer Erhöhung Änderungsgrund, neuen Preis und Wirksamkeitsdatum.
-- Bei einer einseitigen Preisänderung kannst du grundsätzlich zum Zeitpunkt der Änderung sonderkündigen; Ausnahmen sind möglich.
+- Bei einer einseitigen Preisänderung kannst du grundsätzlich zum Zeitpunkt der Änderung Sonderkündigen; Ausnahmen sind möglich.
 - Bestimmte hoheitliche Anpassungen oder Umsatzsteueränderungen können anders behandelt werden.
 - Kündige bei knapper Sonderfrist selbst und nachweisbar.
 - Schließe keinen teuren Tarif nur aus Angst vor einer Schlagzeile ab.
@@ -96,15 +96,15 @@ Die Einkaufskosten sind laut Verbraucherzentrale meist in der Garantie enthalten
 
 ## Drei Szenarien statt einer Prognose
 
-Angenommen, dein Verbrauch liegt bei 20.000 kWh. Tarif A kostet 10,8 Cent pro kWh und hat eine enge Garantie. Tarif B kostet 11,3 Cent und schützt mehr Bestandteile. Beide haben vereinfacht 180 € Grundpreis.
+Angenommen, dein Verbrauch liegt bei 20.000 kWh. Tarif A kostet 10,8 Cent pro kWh und hat eine enge Garantie. Tarif B kostet 11,3 Cent und schützt mehr Bestandteile. Beide haben vereinfacht 180 € Grundpreis.
 
 | Szenario | Tarif A | Tarif B |
 |---|---|---|
-| keine Änderung | 2.340 € | 2.440 € |
-| A steigt nach 6 Monaten für 60 % des Verbrauchs um 1,5 ct | 2.520 € | 2.440 € |
-| A sinkt nicht, Marktangebote werden 1 ct günstiger | 2.340 € bis Wechsel | 2.440 € gebunden |
+| keine Änderung | 2.340 € | 2.440 € |
+| A steigt nach 6 Monaten für 60 % des Verbrauchs um 1,5 ct | 2.520 € | 2.440 € |
+| A sinkt nicht, Marktangebote werden 1 ct günstiger | 2.340 € bis Wechsel | 2.440 € gebunden |
 
-Die zweite Zeile rechnet mit 12.000 kWh × 1,5 Cent = 180 € Mehrkosten; das ist ein Modellwert. Tarif B kostet anfangs 100 € mehr. In diesem Fall wäre er aber 80 € günstiger.
+Die zweite Zeile rechnet mit 12.000 kWh × 1,5 Cent = 180 € Mehrkosten; das ist ein Modellwert. Tarif B kostet anfangs 100 € mehr. In diesem Fall wäre er aber 80 € günstiger.
 
 Das ist keine Vorhersage. Es zeigt nur den Preis für die Sicherheit. Eine Garantie kauft dir Planung – keine sichere Ersparnis.
 
@@ -144,11 +144,11 @@ Kündige selbst, schriftlich, und verlange eine Bestätigung. Beim normalen Wech
 
 Steigt der Arbeitspreis von 10,5 auf 12,0 Cent, beträgt der Unterschied 1,5 Cent pro kWh im Rechenfall.
 
-Bei 18.000 kWh wären das für ein volles Jahr **270 €**; das ist ein Rechenbeispiel. Gilt der neue Preis nur für einen Teil des Abrechnungsjahres, musst du den Verbrauch zeitanteilig aufteilen. Gasverbrauch fällt nicht gleichmäßig an; der Winter wiegt stärker.
+Bei 18.000 kWh wären das für ein volles Jahr **270 €**; das ist ein Rechenbeispiel. Gilt der neue Preis nur für einen Teil des Abrechnungsjahres, musst du den Verbrauch zeitanteilig aufteilen. Gasverbrauch fällt nicht gleichmäßig an; der Winter wiegt stärker.
 
 Notiere deshalb zum Änderungsdatum den Zählerstand und übermittle ihn nach Vorgabe. So wird die Abgrenzung nachvollziehbarer.
 
-![Gliederung des Beitrags: Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-ablauf.svg)
+![Gliederung des Beitrags: Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-ablauf. svg)
 
 *Abbildung: Gliederung zu „Preisgarantie Gas: Was bei Preiserhöhung hilft“ – 5 Stationen von „Wenn ein neuer Preis im Brief steht“ bis „Preisänderung erhalten: diese fünf Punkte markieren“ (eigene Darstellung).*
 
@@ -178,13 +178,13 @@ Prüfe beim neuen Tarif:
 - Zahlungsweise,
 - Preis im Folgejahr.
 
-Eine längere Garantie ist nicht automatisch sicherer. Wenn du dafür schon am Start 2 Cent pro kWh mehr zahlst, kostet die Absicherung bei 20.000 kWh 400 € jährlich.
+Eine längere Garantie ist nicht automatisch sicherer. Wenn du dafür schon am Start 2 Cent pro kWh mehr zahlst, kostet die Absicherung bei 20.000 kWh 400 € jährlich.
 
 ## Verbrauch ist dein zweites Sicherheitsnetz
 
 Garantierte Preise schützen nicht vor einem kalten Winter oder höherer Raumtemperatur. Senkst du den Verbrauch, reduziert sich auch dein Risiko bei jeder künftigen Preisänderung.
 
-Prüfe deshalb Raumtemperaturen, Lüftung, freie Heizkörper und Anlagenzustand. Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892) nennt etwa 6 % weniger Heizenergie pro Grad niedrigere Raumtemperatur als Faustwert. Wie viel du sparst, hängt von Gebäude und Ausgangswert ab.
+Prüfe deshalb Raumtemperaturen, Lüftung, freie Heizkörper und Anlagenzustand. Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892) nennt etwa 6 % weniger Heizenergie pro Grad niedrigere Raumtemperatur als Faustwert. Wie viel du sparst, hängt von Gebäude und Ausgangswert ab.
 
 > 💡 **Schnell-Tipp von FranksFinanzcheck:** Rechne den neuen Jahrespreis mit deinem echten Verbrauch und vergleiche erst dann: [**Gastarife prüfen**](/go/gas/). Der Link ist Werbung; für dich entstehen keine Mehrkosten.
 

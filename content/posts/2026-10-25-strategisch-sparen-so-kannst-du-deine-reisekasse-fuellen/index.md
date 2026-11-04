@@ -55,23 +55,19 @@ Darum geht es hier konkret: [Reisekasse](../../posts/2026-10-07-urlaub-sparen-7-
 
 Lege Ziel und Zeitraum fest. Setze eine Obergrenze. Hole Angebote ein und zähle alles zusammen: Gepäck, Transfer, Parken, Gebühren, Puffer. Wer nur Flug und Hotel rechnet, plant halb.
 
-**Modellrechnung:** Die Reise soll 1.800 € kosten.  
-**Modellrechnung:** Davon sind bereits 600 € gespart.  
-**Modellrechnung:** Es verbleiben zehn Monate bis zur Zahlung.  
-**Modellrechnung:** Damit fehlen noch 1.200 €, das entspricht 120 € pro Monat. Zinsen und neue Preise sind nicht berücksichtigt. Diese Zahlen sind frei gewählt und gelten nicht für jede Familie.
+**Modellrechnung:** Die Reise soll 1.800 € kosten. **Modellrechnung:** Davon sind bereits 600 € gespart.
+**Modellrechnung:** Es verbleiben zehn Monate bis zur Zahlung. **Modellrechnung:** Damit fehlen noch 1.200 €, das entspricht 120 € pro Monat. Zinsen und neue Preise sind nicht berücksichtigt. Diese Zahlen sind frei gewählt und gelten nicht für jede Familie.
 
-**Rechenbeispiel:** Das Reiseziel kostet 600 €.  
-**Rechenbeispiel:** Davon sind bereits 150 € vorhanden.  
-**Rechenbeispiel:** Es bleiben vier Monate bis zur Zahlung.  
-**Rechenbeispiel:** Dann fehlen noch 450 €, das entspricht 112,50 € pro Monat. Beide Beispiele beruhen auf frei gewählten Annahmen, keine Marktpreise.
+**Rechenbeispiel:** Das Reiseziel kostet 600 €. **Rechenbeispiel:** Davon sind bereits 150 € vorhanden.
+**Rechenbeispiel:** Es bleiben vier Monate bis zur Zahlung. **Rechenbeispiel:** Dann fehlen noch 450 €, das entspricht 112,50 € pro Monat. Beide Beispiele beruhen auf frei gewählten Annahmen, keine Marktpreise.
 
 **Modellrechnung:** Reichen 120 € nicht, ändere den Plan; das ist ein Modellwert. Nimm ein günstigeres Ziel, einen späteren Termin oder ein kleineres Programm. Ein Kredit ist kein Ersatz für einen tragfähigen Sparplan.
 
 ## Der 4K-Prüfpfad für dein Urlaubsbudget
 
-1. **Kosten sehen:** Lies Kontoauszüge und Verträge. Denk an Beiträge, die nur einmal im Jahr laufen. **Annahme:** Drei Monate reichen zum Prüfen nicht.  
-2. **Konditionen rechnen:** Vergleiche den Gesamtpreis und die Leistung. Ein günstigerer Vertrag hilft nur, wenn er zu dir passt und keine versteckten Kosten mitbringt.  
-3. **Kündigungsfenster sichern:** Schreib die echten Fristen aus deinen Papieren auf. Laufen Verträge einfach weiter? Rechne das erst nach, statt es zu unterstellen.  
+1. **Kosten sehen:** Lies Kontoauszüge und Verträge. Denk an Beiträge, die nur einmal im Jahr laufen. **Annahme:** Drei Monate reichen zum Prüfen nicht.
+2. **Konditionen rechnen:** Vergleiche den Gesamtpreis und die Leistung. Ein günstigerer Vertrag hilft nur, wenn er zu dir passt und keine versteckten Kosten mitbringt.
+3. **Kündigungsfenster sichern:** Schreib die echten Fristen aus deinen Papieren auf. Laufen Verträge einfach weiter? Rechne das erst nach, statt es zu unterstellen.
 4. **Kurs halten:** Zahl das Reale auf dein Reisekonto. Plane **nicht** mit Vorteilen, die noch gar **nicht** feststehen.
 
 Ein [Dauerauftrag](../../posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/) trennt den Urlaub vom Alltagsbudget. Setze ihn auf einen Tag nach den festen Zahlungen. Optional ist ein eigenes Unterkonto. Prüfe dort die Gebühren und den Zugang zum Geld.
@@ -146,27 +142,27 @@ Nach der Reise gilt dasselbe wie davor: Belege kommen an den festen Ort aus dem 
 
 Am ersten Tag jedes Monats stellst du vier kurze Fragen. Schreib die Antworten in ein Heft oder eine Tabelle.
 
-1. Was liegt auf dem Reisekonto? Notiere den Stand am selben Tag.  
-2. Welcher Extra‑Posten ist durchgerutscht? Es war eine Karte, ein Abo, ein Spontankauf.  
-3. Fehlt eine Rate? Dann droht nichts, aber der Plan muss sich ändern: kleineres Ziel oder späterer Termin.  
+1. Was liegt auf dem Reisekonto? Notiere den Stand am selben Tag.
+2. Welcher Extra‑Posten ist durchgerutscht? Es war eine Karte, ein Abo, ein Spontankauf.
+3. Fehlt eine Rate? Dann droht nichts, aber der Plan muss sich ändern: kleineres Ziel oder späterer Termin.
 4. Welche Jahreszahlung steht an? Abo, Steuer, Versicherung – vorher eingeplant, nie überrascht.
 
 **Annahme:** Nach drei Monaten folgt der Zwischencheck. Läuft das Projekt, lass alles stehen. Wenn nicht, ändere den Plan. Schönreden hilft niemandem.
 
 ## Checkliste vor dem Buchen
 
-- [ ] Das Budget und die Zahlungstermine stehen fest.  
-- [ ] Nötige Ausgaben und Rücklage sind nicht verplant.  
-- [ ] Die Rate passt ins Monat, ohne Dispo.  
-- [ ] Tarifvorteile beruhen auf Gesamtpreisen und gleicher Leistung.  
-- [ ] Boni ohne Auszahlung sind nicht eingeplant.  
+- [ ] Das Budget und die Zahlungstermine stehen fest.
+- [ ] Nötige Ausgaben und Rücklage sind nicht verplant.
+- [ ] Die Rate passt ins Monat, ohne Dispo.
+- [ ] Tarifvorteile beruhen auf Gesamtpreisen und gleicher Leistung.
+- [ ] Boni ohne Auszahlung sind nicht eingeplant.
 - [ ] Storno, Zahlung und Mietregeln sind gelesen.
 
 ## Passende Beiträge zum Weiterlesen
 
-- [Last‑Minute‑Urlaub: So schnappst du dir das Schnäppchen](../../posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/)  
-- [Mietwagen buchen ohne Kaution: Fallen im Urlaub](../../posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/)  
-- [Sparen im Herbst: Die besten Spartipps](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/)  
+- [Last‑Minute‑Urlaub: So schnappst du dir das Schnäppchen](../../posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/)
+- [Mietwagen buchen ohne Kaution: Fallen im Urlaub](../../posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/)
+- [Sparen im Herbst: Die besten Spartipps](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/)
 - [Mehr Freiheit durch Verzicht: Frugalismus‑Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)
 
 Genau das ist der Hebel: Reisekasse füllen.

@@ -58,7 +58,7 @@ Notiere dazu das Datum, bis zu dem dein Schutz gilt. Vergleiche ein Änderungssc
 
 Schätze danach deinen Verbrauch im Jahr. Hole dir mit dieser Zahl mindestens zwei Angebote. Lass den Bonus für Neukunden dabei erst einmal weg.
 
-Bei angenommenen 18.000 kWh im Jahr ergeben 0,4 bis 0,8 Cent Unterschied je kWh rechnerisch 72 bis 144 € im Jahr. Nutze für deinen Vergleich den eigenen Jahresverbrauch. Ein fairer Preis im zweiten Jahr ist mehr wert als ein hoher Rabatt am Anfang.
+Bei angenommenen 18.000 kWh im Jahr ergeben 0,4 bis 0,8 Cent Unterschied je kWh rechnerisch 72 bis 144 € im Jahr. Nutze für deinen Vergleich den eigenen Jahresverbrauch. Ein fairer Preis im zweiten Jahr ist mehr wert als ein hoher Rabatt am Anfang.
 
 Setze dir zwei Erinnerungen im Handy. Die erste acht Wochen vor dem Ende deines Preisschutzes. Die zweite zwei Wochen vor dem Ende deiner [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/).
 

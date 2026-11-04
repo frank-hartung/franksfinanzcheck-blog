@@ -45,7 +45,7 @@ Ein strukturierter Check zeigt dir, welche Kosten unvermeidbar sind. Du erkennst
 
 **Das Wichtigste in Kürze**
 
-- Ein jährlicher Check deckt versteckte Fixkosten auf. Die Beispielrechnung unten kommt auf 1.332 € im Jahr.
+- Ein jährlicher Check deckt versteckte Fixkosten auf. Die Beispielrechnung unten kommt auf 1.332 € im Jahr.
 - Sichtbare Ausgaben helfen dir beim Priorisieren und Eliminieren unnötiger Abos.
 - Rechne Vertragskosten immer auf die volle Laufzeit um. Nicht nur auf den Monatspreis.
 - Neue Gesetze erleichtern dir die Kündigung nach der Mindestlaufzeit erheblich.
@@ -102,13 +102,13 @@ Rechne in diesem Beispiel immer mit der ganzen Laufzeit. Zähle alle Gebühren u
 
 ### Beispiel: Internet-Tarif-Falle
 
-**Anbieter A:** 12 Monate zu 19,99 €, danach 49,99 €, plus 60 € Anschluss und 5 € Router-Miete.
-Der Effektivpreis beträgt (12 × 19,99 + 12 × 49,99 + 60 + 120) / 24 = **42,50 € pro Monat.**
+**Anbieter A:** 12 Monate zu 19,99 €, danach 49,99 €, plus 60 € Anschluss und 5 € Router-Miete.
+Der Effektivpreis beträgt (12 × 19,99 + 12 × 49,99 + 60 + 120) / 24 = **42,50 € pro Monat.**
 
-**Anbieter B:** Dauerhaft 34,99 €, keine Anschlussgebühr, Router inklusive.
-Effektivpreis: **34,99 € pro Monat.**
+**Anbieter B:** Dauerhaft 34,99 €, keine Anschlussgebühr, Router inklusive.
+Effektivpreis: **34,99 € pro Monat.**
 
-Anbieter A wirkt günstig. Kosten dich aber 180 € mehr. Dein Weg zu echten Ersparnissen führt zwingend über den Taschenrechner. Vergleiche immer die Gesamtkosten der Laufzeit.
+Anbieter A wirkt günstig. Kosten dich aber 180 € mehr. Dein Weg zu echten Ersparnissen führt zwingend über den Taschenrechner. Vergleiche immer die Gesamtkosten der Laufzeit.
 
 **Faustregel:** Rechne bei jedem Vertrag den Effektivpreis über die volle Mindestlaufzeit. Weicht er deutlich vom beworbenen Monatspreis ab, ist das Lockangebot keine Ersparnis.
 
@@ -155,15 +155,15 @@ Viele Menschen scheitern trotz Sparwillen an den gleichen Mustern. Hier siehst d
 Die Rechnung zeigt, wie Sparen wirkt. Wir nutzen Werte für einen normalen Haushalt.
 
 **Szenario A (ohne Optimierung):**
-Strom 85 €, Handy 45 €, Internet 40 €, Versicherungen 25 €, Streaming 60 €.
-Gesamt: 255 €/Monat.
+Strom 85 €, Handy 45 €, Internet 40 €, Versicherungen 25 €, Streaming 60 €.
+Gesamt: 255 €/Monat.
 
 **Szenario B (mit Optimierung):**
-Strom 62 € (−23 €), Handy 15 € (−30 €), Internet 28 € (−12 €), Versicherungen 14 € (−11 €), Streaming 25 € (−35 €).
-Gesamt: 144 €/Monat.
+Strom 62 € (−23 €), Handy 15 € (−30 €), Internet 28 € (−12 €), Versicherungen 14 € (−11 €), Streaming 25 € (−35 €).
+Gesamt: 144 €/Monat.
 
 **Ergebnis:**
-Du sparst monatlich **111 €**. Auf das Jahr gerechnet ergibt das **1.332 € netto mehr** auf deinem Konto. Deine Ersparnis hängt von deinen Verträgen ab. Es kommt darauf an, wie du sie nutzt.
+Du sparst monatlich **111 €**. Auf das Jahr gerechnet ergibt das **1.332 € netto mehr** auf deinem Konto. Deine Ersparnis hängt von deinen Verträgen ab. Es kommt darauf an, wie du sie nutzt.
 
 ## So gehst du vor: Dein 4-K-Prüfpfad in fünf Schritten
 

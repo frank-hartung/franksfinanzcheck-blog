@@ -47,12 +47,12 @@ Du sparst Geld und steigerst dein Wohlbefinden.
 Dieser Ratgeber führt dich systematisch zum dichten Fenster.  
 
 **Das Wichtigste in Kürze**  
-* **Lecks finden:** Ein einfacher Kerzentest oder ein Blatt Papier entlarven undichte Stellen am Rahmen.  
-* **Materialwahl:** Selbstklebende Gummidichtungen (EPDM) halten länger als einfacher Schaumstoff.  
-* **Mechanik prüfen:** Oft reicht das Justieren der Fensterflügel aus, um den Anpressdruck zu erhöhen.  
-* **Kostenkontrolle:** Kleine Maßnahmen verhindern, dass teure Heizenergie ungenutzt nach draußen verpufft.  
+* **Lecks finden:** Ein einfacher Kerzentest oder ein Blatt Papier entlarven undichte Stellen am Rahmen.
+* **Materialwahl:** Selbstklebende Gummidichtungen (EPDM) halten länger als einfacher Schaumstoff.
+* **Mechanik prüfen:** Oft reicht das Justieren der Fensterflügel aus, um den Anpressdruck zu erhöhen.
+* **Kostenkontrolle:** Kleine Maßnahmen verhindern, dass teure Heizenergie ungenutzt nach draußen verpufft.
 
----  
+---
 
 💡 **Schnell‑Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner‑Vergleich: [**Stromanbieter vergleichen & wechseln**](/go/strom/)  
 _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_  
@@ -102,7 +102,7 @@ Führe den Test bei windigem Wetter durch.
 Markiere die Stellen mit einem Bleistift.  
 So weißt du später genau, wo du kleben musst.  
 
-**Faustregel:** Wenn du das Pfeifen des Windes hörst, ist die Fuge bereits so groß, dass einfacher Schaumstoff oft nicht mehr ausreicht.  
+**Faustregel:** Wenn du das Pfeifen des Windes hörst, ist die Fuge bereits so groß, dass einfacher Schaumstoff oft nicht mehr ausreicht.
 
 ## Welche Materialien helfen wirklich?
 
@@ -130,12 +130,12 @@ Bereite den Untergrund gründlich vor.
 Auf Staub oder Fett hält kein Klebestreifen dauerhaft.  
 Sauberkeit sorgt für guten Halt.  
 
-**So gehst du vor:**  
-1. **Alte Reste entfernen:** Kratze alte Schaumstoffreste oder Klebespuren komplett ab. Nutze dafür einen Spachtel.  
-2. **Reinigen:** Wische den Rahmen mit Spiritus oder Glasreiniger ab. Die Fläche muss absolut fettfrei sein.  
-3. **Messen:** Bestimme die Länge der Fensterseiten genau. Schneide die Dichtungsstreifen auf Maß zu.  
-4. **Kleben:** Ziehe die Schutzfolie nach und nach ab. Drücke die Dichtung fest in den Falz des Rahmens.  
-5. **Prüfen:** Schließe das Fenster. Es sollte nun etwas strammer zugehen, aber nicht klemmen.  
+**So gehst du vor:**
+1. **Alte Reste entfernen:** Kratze alte Schaumstoffreste oder Klebespuren komplett ab. Nutze dafür einen Spachtel.
+2. **Reinigen:** Wische den Rahmen mit Spiritus oder Glasreiniger ab. Die Fläche muss absolut fettfrei sein.
+3. **Messen:** Bestimme die Länge der Fensterseiten genau. Schneide die Dichtungsstreifen auf Maß zu.
+4. **Kleben:** Ziehe die Schutzfolie nach und nach ab. Drücke die Dichtung fest in den Falz des Rahmens.
+5. **Prüfen:** Schließe das Fenster. Es sollte nun etwas strammer zugehen, aber nicht klemmen.
 
 Achte beim Kleben darauf, die Dichtung nicht zu dehnen.  
 Sonst zieht sie sich später wieder zusammen und erzeugt neue Lücken.  
@@ -189,11 +189,11 @@ Investiere lieber in vernünftiges Material zum **Abdichten**.
 
 Um den Effekt zu verstehen, betrachten wir ein durchschnittliches Zimmer in einem älteren Haus.  
 
-**Annahmen für das Modell:**  
-* Fenster: 2 Stück.  
-* Gesamtlänge der Fensterfugen: 8 Meter.  
-* Fugenbreite: 1 Millimeter.  
-* Heizperiode mit normalem Winddruck.  
+**Annahmen für das Modell:**
+* Fenster: 2 Stück.
+* Gesamtlänge der Fensterfugen: 8 Meter.
+* Fugenbreite: 1 Millimeter.
+* Heizperiode mit normalem Winddruck.
 
 Durch eine Fuge von einem Millimeter Breite entweicht bei leichtem Wind pro Stunde eine beachtliche Menge warmer Luft.  
 Die offene Fläche von 8 Meter × 1 Millimeter entspricht 80 Quadratzentimetern – etwa der Größe eines Kartenspiels.  
@@ -241,43 +241,32 @@ Ein flatterndes Feuerzeug vor dem geschlossenen Fenster ist ein guter Beweis.
 Frage im Zweifel einen Fachmann für Fensterbau.  
 Er kann die Beschläge professionell einstellen.  
 
-**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/)  
-**Lesetipp:** [Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden](../../posts/2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu/)  
+**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) **Lesetipp:** [Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden](../../posts/2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu/)
 
 ## Häufige Fragen
 
-### Wie merke ich, dass meine Fenster undicht sind?  
-Halte eine brennende Kerze oder ein Feuerzeug an den Rahmen.  
-Flackert die Flamme, dringt Luft ein.  
-Kondenswasser am unteren Rand der Scheibe weist ebenfalls auf schlechte Isolierung hin.  
-Ein einfacher Papiertest zwischen Rahmen und Flügel zeigt, ob der Anpressdruck ausreicht.  
+### Wie merke ich, dass meine Fenster undicht sind? Halte eine brennende Kerze oder ein Feuerzeug an den Rahmen.
+Flackert die Flamme, dringt Luft ein. Kondenswasser am unteren Rand der Scheibe weist ebenfalls auf schlechte Isolierung hin.
+Ein einfacher Papiertest zwischen Rahmen und Flügel zeigt, ob der Anpressdruck ausreicht.
 
-### Welches Dichtungsband ist das beste für alte Holzfenster?  
-Gummidichtungen aus EPDM sind für Holzrahmen ideal.  
-Du bist flexibel und gleitest Unebenheiten im Holz gut aus.  
-Achte auf das Profil – das P‑Typ oder die D‑Variante passen meist am besten zu breiteren Fugen alter Holzkonstruktionen.  
+### Welches Dichtungsband ist das beste für alte Holzfenster? Gummidichtungen aus EPDM sind für Holzrahmen ideal.
+Du bist flexibel und gleitest Unebenheiten im Holz gut aus. Achte auf das Profil – das P‑Typ oder die D‑Variante passen meist am besten zu breiteren Fugen alter Holzkonstruktionen.
 
-### Darf ich als Mieter die Fenster selbst abdichten?  
-Ja, das Anbringen von selbstklebenden Dichtungsstreifen ist erlaubt.  
-Es handelt sich um eine reversible Maßnahme.  
-Entferne die Streifen beim Auszug rückstandslos.  
-Bei baulichen Mängeln wie verzogenen Rahmen musst du den Vermieter informieren.  
+### Darf ich als Mieter die Fenster selbst abdichten? Ja, das Anbringen von selbstklebenden Dichtungsstreifen ist erlaubt.
+Es handelt sich um eine reversible Maßnahme. Entferne die Streifen beim Auszug rückstandslos.
+Bei baulichen Mängeln wie verzogenen Rahmen musst du den Vermieter informieren.
 
-### Wie lange halten neue Fensterdichtungen?  
-Hochwertige EPDM‑Dichtungen halten oft 8 bis 10 Jahre; das ist ein Beispielwert.  
-Günstiger Schaumstoff gibt meist schon nach 1 bis 2 Jahren nach.  
-Die Lebensdauer hängt von der Pflege ab.  
-Wische die Dichtungen einmal im Jahr mit einem feuchten Tuch ab.  
+### Wie lange halten neue Fensterdichtungen? Hochwertige EPDM‑Dichtungen halten oft 8 bis 10 Jahre; das ist ein Beispielwert.
+Günstiger Schaumstoff gibt meist schon nach 1 bis 2 Jahren nach. Die Lebensdauer hängt von der Pflege ab.
+Wische die Dichtungen einmal im Jahr mit einem feuchten Tuch ab.
 
-### Hilft Abdichten auch gegen Lärm von draußen?  
-Ja, ein dichter Rahmen hält nicht nur Luft, sondern auch Schallwellen zurück.  
-Wenn du die Lücken schließt, wird es in deiner Wohnung spürbar ruhiger.  
-Besonders bei Fenstern an Hauptstraßen ist der Effekt oft verblüffend.  
-Eine gute Dichtung verbessert somit auch den Schlaf.  
+### Hilft Abdichten auch gegen Lärm von draußen? Ja, ein dichter Rahmen hält nicht nur Luft, sondern auch Schallwellen zurück.
+Wenn du die Lücken schließt, wird es in deiner Wohnung spürbar ruhiger. Besonders bei Fenstern an Hauptstraßen ist der Effekt oft verblüffend.
+Eine gute Dichtung verbessert somit auch den Schlaf.
 
----  
+---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Stromtarife vergleichen**](/go/strom/)  
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Stromtarife vergleichen**](/go/strom/)
 
 *Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
 

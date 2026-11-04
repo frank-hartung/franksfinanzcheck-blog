@@ -64,7 +64,7 @@ Du musst nicht alles an einem Tag lösen. Ein Foto, drei Zahlen und ein kurzer B
 
 ## Das Wichtigste in Kürze
 
-Ein Check vor der Heizperiode lohnt sich, weil kleine Preisunterschiede bei hohem Verbrauch wirken: Bei 18.000 kWh sind 1 Cent pro kWh bereits 180 € im Jahr.
+Ein Check vor der Heizperiode lohnt sich, weil kleine Preisunterschiede bei hohem Verbrauch wirken: Bei 18.000 kWh sind 1 Cent pro kWh bereits 180 € im Jahr.
 
 1. Prüfe Zeitraum, Zählerstände, Verbrauch, Preise und Abschläge getrennt.
 2. Eine Abschlagssenkung spart nichts; sie kann eine Nachzahlung vergrößern.
@@ -120,17 +120,17 @@ Bei einem normalen Gastarif lautet die Grundformel:
 | Position | Rechnung |
 |---|---|
 | Verbrauch | 15.000 kWh |
-| Arbeitspreis | 10,8 ct/kWh = 1.620 € |
-| Grundpreis | 168 € |
-| **Jahreskosten** | **1.788 €** |
-| gezahlte Abschläge | 1.620 € |
-| **mögliche Nachzahlung** | **168 €** |
+| Arbeitspreis | 10,8 ct/kWh = 1.620 € |
+| Grundpreis | 168 € |
+| **Jahreskosten** | **1.788 €** |
+| gezahlte Abschläge | 1.620 € |
+| **mögliche Nachzahlung** | **168 €** |
 
 Der Tarif kann völlig richtig sein – und trotzdem kommt eine Nachzahlung, wenn die Abschläge zu niedrig waren.
 
 ## Verbrauch und Preis getrennt vergleichen
 
-Vergleiche nie nur „dieses Jahr 300 € mehr". Stelle zwei Fragen:
+Vergleiche nie nur „dieses Jahr 300 € mehr". Stelle zwei Fragen:
 
 1. Wie viele kWh habe ich mehr oder weniger verbraucht?
 2. Wie hat sich der Preis je kWh verändert?

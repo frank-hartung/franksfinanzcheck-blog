@@ -80,9 +80,9 @@ Dein Abschlag gehört nicht ins Verbrauchsfeld. Er ist nur eine Vorauszahlung. N
 > Jahresverbrauch × Arbeitspreis + Grundpreis
 
 **Beispiel:**
-- 18.000 kWh × 0,118 €/kWh = 2.124 € (als Modellwert)
-- Grundpreis = 180 €
-- angenommene Jahreskosten = **2.304 €**
+- 18.000 kWh × 0,118 €/kWh = 2.124 € (als Modellwert)
+- Grundpreis = 180 €
+- angenommene Jahreskosten = **2.304 €**
 
 Im Beispiel ist das die Vergleichsbasis. Nutze für deine Rechnung deine eigenen Werte; ein Bonus aus einem früheren Jahr zählt nicht mehr.
 
@@ -138,12 +138,12 @@ Rechne zwei Preise:
 
 | Tarif | Kosten ohne Bonus | Bonus | Jahr 1 | Jahr 2* |
 |---|---|---|---|---|
-| A | 2.100 € | 250 € | 1.850 € | 2.100 € |
-| B | 1.940 € | 50 € | 1.890 € | 1.940 € |
+| A | 2.100 € | 250 € | 1.850 € | 2.100 € |
+| B | 1.940 € | 50 € | 1.890 € | 1.940 € |
 
 \*unter der vereinfachenden Annahme unveränderter Preise.
 
-Tarif A gewinnt im ersten Jahr knapp. Tarif B ist ohne Bonus 160 € günstiger. Wer nicht sicher jährlich neu vergleicht, sollte das ernst nehmen.
+Tarif A gewinnt im ersten Jahr knapp. Tarif B ist ohne Bonus 160 € günstiger. Wer nicht sicher jährlich neu vergleicht, sollte das ernst nehmen.
 
 ## Minute 7: Zahlungsmodell und Paketmengen
 
@@ -190,7 +190,7 @@ Bei Preisänderungen müssen Lieferanten Haushaltskunden grundsätzlich mindeste
 
 > Alter Jahrespreis – neuer Jahrespreis = rechnerischer Vorteil
 
-Bei 20.000 kWh bedeuten schon 1,5 Cent weniger Arbeitspreis 300 € pro Jahr; das ist eine Modellannahme. Grundpreis und Bonus können die Differenz verändern.
+Bei 20.000 kWh bedeuten schon 1,5 Cent weniger Arbeitspreis 300 € pro Jahr; das ist eine Modellannahme. Grundpreis und Bonus können die Differenz verändern.
 
 Ob ein Wechsel tatsächlich spart, hängt von deinem bisherigen Vertrag, dem Angebot und deinem Verbrauch ab. Vergleiche die Jahreskosten einschließlich Grundpreis und prüfe Bonusbedingungen getrennt.
 
@@ -203,7 +203,7 @@ Eine längere Laufzeit kann sinnvoll sein, wenn:
 - dein Verbrauch stabil ist,
 - dir Planungssicherheit wichtiger als jährliche Flexibilität ist.
 
-Rechne den Sicherheitsaufschlag. Kostet der 24-Monats-Tarif 0,7 Cent mehr, sind das bei 20.000 kWh **140 € pro Jahr**. Diesen Betrag zahlst du für zusätzliche Ruhe – falls alle anderen Bedingungen vergleichbar sind.
+Rechne den Sicherheitsaufschlag. Kostet der 24-Monats-Tarif 0,7 Cent mehr, sind das bei 20.000 kWh **140 € pro Jahr**. Diesen Betrag zahlst du für zusätzliche Ruhe – falls alle anderen Bedingungen vergleichbar sind.
 
 ## Der Check nach dem Abschluss
 

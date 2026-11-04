@@ -60,7 +60,7 @@ Wenn du den DNS-Server wechselst, änderst du den Server, der deine Namensanfrag
 - Öffentliche DNS-Server können Anfragen verschlüsseln (DoH/DoT). Sie schützen aber nicht vor allen Netzwerkdaten.
 - Filterfunktionen der Anbieter unterscheiden sich. Sie blockieren bekannte schädliche Domains. Sie ersetzen keinen Virenschutz.
 
-![Merkkarte: Kernaussagen zu DNS-Server wechseln: Datenschutz, Filter und Einrichtung](abbildung-merkkarte.svg)
+![Merkkarte: Kernaussagen zu DNS-Server wechseln: Datenschutz, Filter und Einrichtung](abbildung-merkkarte. svg)
 
 *Abbildung: Merkkarte zu „DNS-Server wechseln: Datenschutz, Filter und Einrichtung“ (eigene Darstellung aus diesem Beitrag).*
 
@@ -166,7 +166,7 @@ Wechseln ist leicht. Das Risiko ist niedrig. Der Nutzen ist oft spürbar. Die Ei
 
 Du brauchst kein teures Abo. Du brauchst keine neue Hardware. Du brauchst keine Fachkenntnisse. Alles, was du brauchst, ist auf deinem Rechner schon da.
 
-![Gliederung des Beitrags: DNS-Server wechseln: Datenschutz, Filter und Einrichtung](abbildung-ablauf.svg)
+![Gliederung des Beitrags: DNS-Server wechseln: Datenschutz, Filter und Einrichtung](abbildung-ablauf. svg)
 
 *Abbildung: Gliederung zu „DNS-Server wechseln: Datenschutz, Filter und Einrichtung“ – 5 Stationen von „Was macht ein DNS-Server?“ bis „Was du nach dem Wechsel testen solltest“ (eigene Darstellung).*
 

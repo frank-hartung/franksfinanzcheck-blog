@@ -48,15 +48,14 @@ Wenn du jede Position notierst, kannst du im nächsten Schritt die Gesamtkosten 
 
 Jetzt geht es ans Rechnen. Nimm dir ein Blatt oder dein Excel‑Sheet und trage die einzelnen Posten ein. Ein typisches Rechenbeispiel für einen fünftägigen Mietwagen sieht so aus:
 
-**Rechenbeispiel:**  
-Annahme: Grundtarif 30 € pro Tag, Kaution 500 €, Vollkasko‑Selbstbeteiligung 0 € (inklusive), Tankregelung „voll zurückgeben“, kein Zusatzfahrer, Navigationsgerät 5 € pro Tag.  
+**Rechenbeispiel:** Annahme: Grundtarif 30 € pro Tag, Kaution 500 €, Vollkasko‑Selbstbeteiligung 0 € (inklusive), Tankregelung „voll zurückgeben“, kein Zusatzfahrer, Navigationsgerät 5 € pro Tag.
 
-- Grundtarif: 5 × 30 € = 150 €  
-- Kaution: 500 € (wird zurückerstattet)  
-- Tankregelung: 0 € (voll zurückgeben)  
-- Navigationsgerät: 5 × 5 € = 25 €  
+- Grundtarif: 5 × 30 € = 150 €
+- Kaution: 500 € (wird zurückerstattet)
+- Tankregelung: 0 € (voll zurückgeben)
+- Navigationsgerät: 5 × 5 € = 25 €
 
-**Gesamtkosten ohne Kaution:** 150 € + 25 € = 175 €  
+**Gesamtkosten ohne Kaution:** 150 € + 25 € = 175 €
 
 Die Kaution ist kein Kostenfaktor, solange du das Fahrzeug unbeschädigt zurückgibst. Beachte, dass manche Anbieter die Vollkasko‑Selbstbeteiligung mit einem Aufpreis versehen. Wenn du diese weglässt, kann das die Rechnung um 10 % bis 20 % reduzieren – das ist eine gängige Faustregel für Versicherungs‑Aufschläge.
 
@@ -95,6 +94,11 @@ Ein letzter Tipp aus dem **Kurs halten**‑Schritt: Trage die tatsächlichen Kos
 | Kündigungsfrist ignorieren          | Unfreiwillige Stornogebühren                | Termin im Kalender markieren, rechtzeitig prüfen  |
 
 Der größte Hebel liegt also in der vollständigen Transparenz: Wenn du jede Position erkennst und prüfst, entfallen Überraschungen und du behältst die Kontrolle über dein Budget.
+
+
+
+**Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/)
+**Lesetipp:** [Flugvergleich im Winter: So findest du echte Billigflüge](../../posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/)
 
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 

@@ -51,7 +51,7 @@ Das meiste Geld bleibt aus einem Grund liegen: Viele werfen **Preis, Verbrauch u
 💡 **Schnell-Tipp von FranksFinanzcheck:** Tarife kannst du über unseren Partner-Vergleich prüfen: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-![Merkkarte: Kernaussagen zu Gasrechnung senken: Fehler im Spätsommer vermeiden](abbildung-merkkarte.svg)
+![Merkkarte: Kernaussagen zu Gasrechnung senken: Fehler im Spätsommer vermeiden](abbildung-merkkarte. svg)
 
 *Abbildung: Merkkarte zu „Gasrechnung senken: Fehler im Spätsommer vermeiden“ (eigene Darstellung aus diesem Beitrag).*
 
@@ -76,7 +76,7 @@ Beides hält die Wärme fest und kostet dich Geld. Riechst du Gas oder zeigt das
 
 ## Das Wichtigste in Kürze
 
-Ein Check vor dem Winter kann Sparmöglichkeiten zeigen. Bei angenommenen 18.000 kWh im Jahr ergibt ein Cent Unterschied je kWh rechnerisch 180 € im Jahr. Dein tatsächlicher Verbrauch steht auf der Rechnung.
+Ein Check vor dem Winter kann Sparmöglichkeiten zeigen. Bei angenommenen 18.000 kWh im Jahr ergibt ein Cent Unterschied je kWh rechnerisch 180 € im Jahr. Dein tatsächlicher Verbrauch steht auf der Rechnung.
 
 - Ein niedriger Abschlag ist keine Ersparnis, sondern lediglich eine Vorauszahlung auf die Endabrechnung.
 - Vergleiche Gastarife immer auf Basis deines realen Jahresverbrauchs und des effektiven Gesamtpreises.
@@ -173,13 +173,13 @@ Vorsicht gilt beim Nachfüllen von Wasser. Viele neue Geräte brauchen aufbereit
 
 ## Was Verbrauchsmaßnahmen realistisch bringen?
 
-Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892) nennt rund 6 % weniger Heizenergie je Grad niedrigerer Raumtemperatur als Faustwert. Das Ergebnis hängt vom Gebäude und Heizverhalten ab; Räume dürfen nicht so weit auskühlen, dass Feuchte- oder Schimmelschäden entstehen.
+Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892) nennt rund 6 % weniger Heizenergie je Grad niedrigerer Raumtemperatur als Faustwert. Das Ergebnis hängt vom Gebäude und Heizverhalten ab; Räume dürfen nicht so weit auskühlen, dass Feuchte- oder Schimmelschäden entstehen.
 
-Bei angenommenen 2.000 € verbrauchsabhängigen Heizkosten wären 6 % rechnerisch 120 €; feste Grundkosten bleiben unverändert. Das ist keine garantierte Ersparnis. Auch kurzes Lüften mit weit offenem Fenster hilft. Nachts die Rollläden zu schließen, bringt ebenfalls etwas.
+Bei angenommenen 2.000 € verbrauchsabhängigen Heizkosten wären 6 % rechnerisch 120 €; feste Grundkosten bleiben unverändert. Das ist keine garantierte Ersparnis. Auch kurzes Lüften mit weit offenem Fenster hilft. Nachts die Rollläden zu schließen, bringt ebenfalls etwas.
 
 Eines noch: Du darfst die Effekte nicht einfach addieren. Lies den Zähler jeden Monat ab. So siehst du schwarz auf weiß, was deine Schritte wirklich bringen.
 
-![Gliederung des Beitrags: Gasrechnung senken: Fehler im Spätsommer vermeiden](abbildung-ablauf.svg)
+![Gliederung des Beitrags: Gasrechnung senken: Fehler im Spätsommer vermeiden](abbildung-ablauf. svg)
 
 *Abbildung: Gliederung zu „Gasrechnung senken: Fehler im Spätsommer vermeiden“ – 5 Stationen von „Starte mit einem kleinen Check“ bis „Fehler 4: Den Heizungs-Check bis zum ersten Frost verschieben“ (eigene Darstellung).*
 
@@ -248,7 +248,7 @@ Lies den Zähler nach zwei Wochen Heizbetrieb erneut ab. So siehst du Fehler fr�
 
 Echtes Sparen braucht beides: einen guten Tarif und einen klugen Verbrauch. Wer nur auf den Preis schaut und dabei Wärme verschenkt, zahlt am Ende trotzdem zu viel.
 
-Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892) nennt für eine richtig eingestellte Heizungsanlage ein mögliches Einsparpotenzial von 10 bis 15 % Energie. Das betrifft die Anlageneinstellung, nicht pauschal deine gesamte Gasrechnung; Ausgangszustand und Gebäude entscheiden. Lass Einstellungen bei Unsicherheit von einem Fachbetrieb prüfen. Die Effekte verschiedener Maßnahmen sind nicht einfach addierbar.
+Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892) nennt für eine richtig eingestellte Heizungsanlage ein mögliches Einsparpotenzial von 10 bis 15 % Energie. Das betrifft die Anlageneinstellung, nicht pauschal deine gesamte Gasrechnung; Ausgangszustand und Gebäude entscheiden. Lass Einstellungen bei Unsicherheit von einem Fachbetrieb prüfen. Die Effekte verschiedener Maßnahmen sind nicht einfach Addierbar.
 
 **Faustregel:** Prüfe vor dem Vergleich den Arbeitspreis pro Kilowattstunde und den Jahresverbrauch der letzten Abrechnung – der Bonus allein sagt nichts über die Ersparnis.
 
@@ -274,7 +274,7 @@ Vergleiche, wenn deine Preisgarantie endet. Oder wenn eine Erhöhung ins Haus st
 Nein, das musst du nicht. Entlüfte nur, wenn es gluckert oder der Heizkörper ungleich warm wird. Zu häufiges Entlüften senkt den Druck ohne Grund.
 
 ### Wie viel spart ein Grad weniger?
-Die Verbraucherzentrale nennt rund 6 % weniger Heizenergie pro Grad als Faustwert. Das tatsächliche Ergebnis hängt von Haus, Heizverhalten und Preis ab.
+Die Verbraucherzentrale nennt rund 6 % weniger Heizenergie pro Grad als Faustwert. Das tatsächliche Ergebnis hängt von Haus, Heizverhalten und Preis ab.
 
 ### Darf ich den Gasanbieter auch im Winter wechseln?
 Ja. Du darfst jederzeit wechseln, wenn du die Frist einhältst. Oder wenn du ein Sonderkündigungsrecht hast. Dein Gas fließt dabei ohne Lücke weiter.

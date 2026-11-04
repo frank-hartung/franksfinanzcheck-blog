@@ -42,7 +42,7 @@ Deine Internetrechnung drückt jeden Monat auf dein Budget. Das WLAN zu Hause is
 
 Verschaffe dir zuerst einen Überblick über deine Finanzen. Schreibe jede monatliche Belastung für Internet und Telefonie auf, am besten im Fixkosten-Cockpit oder in einer einfachen Tabelle. Nur wer seine Zahlen kennt, trifft kluge Entscheidungen – Zusatzoptionen und Router-Miete werden oft vergessen. Diese Beträge läppern sich über das Jahr zu einer großen Summe.
 
-Zur Einordnung deiner Ausgaben hilft dir die 50-30-20-Regel; das ist ein Haushaltsmodell, keine Vorgabe aus Recht oder Statistik. Es teilt dein Nettoeinkommen in drei Blöcke: 50 % für feste Kosten wie Miete, Strom und Internet, 30 % für Wünsche und Freizeit, 20 % zum Sparen oder Tilgen von Schulden. Ob diese Aufteilung zu dir passt, hängt von Miete und Lebenssituation ab – in teuren Städten sind 50 % für Fixkosten oft nicht zu halten. Nutze die Regel deshalb als Prüfmaßstab, nicht als Gesetz.
+Zur Einordnung deiner Ausgaben hilft dir die 50-30-20-Regel; das ist ein Haushaltsmodell, keine Vorgabe aus Recht oder Statistik. Es teilt dein Nettoeinkommen in drei Blöcke: 50 % für feste Kosten wie Miete, Strom und Internet, 30 % für Wünsche und Freizeit, 20 % zum Sparen oder Tilgen von Schulden. Ob diese Aufteilung zu dir passt, hängt von Miete und Lebenssituation ab – in teuren Städten sind 50 % für Fixkosten oft nicht zu halten. Nutze die Regel deshalb als Prüfmaßstab, nicht als Gesetz.
 
 Wie du deine Fixkosten ordnest, zeigt der Beitrag zu den [Fixkosten im ersten eigenen Haushalt](../../posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/).
 

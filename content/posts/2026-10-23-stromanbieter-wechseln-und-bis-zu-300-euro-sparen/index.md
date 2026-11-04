@@ -89,16 +89,16 @@ Gib Postleitzahl und Jahresverbrauch genau ein. Notiere den Preis mit und ohne B
 
 ### Beispielrechnung: zwei Tarife mit frei gewählten Annahmen
 
-Die folgenden Preise sind frei gewählt. Sie zeigen nur den Rechenweg und sind keine Marktdaten. Angenommen werden 3.200 kWh im Jahr, 0,32 € je kWh und 10 € Grundpreis im Monat für den alten Tarif. Der neue Tarif liegt bei 0,28 € je kWh und 8 € Grundpreis; Boni bleiben außen vor.
+Die folgenden Preise sind frei gewählt. Sie zeigen nur den Rechenweg und sind keine Marktdaten. Angenommen werden 3.200 kWh im Jahr, 0,32 € je kWh und 10 € Grundpreis im Monat für den alten Tarif. Der neue Tarif liegt bei 0,28 € je kWh und 8 € Grundpreis; Boni bleiben außen vor.
 
 | Rechnung | Alter Tarif | Neuer Tarif |
 | :--- | ---: | ---: |
-| Kosten für Verbrauch | 3.200 × 0,32 € = 1.024 € | 3.200 × 0,28 € = 896 € |
-| Grundpreis pro Jahr | 12 × 10 € = 120 € | 12 × 8 € = 96 € |
-| Kosten im Jahr | 1.024 € + 120 € = 1.144 € | 896 € + 96 € = 992 € |
-| Ersparnis im Modell | – | 1.144 € − 992 € = 152 € |
+| Kosten für Verbrauch | 3.200 × 0,32 € = 1.024 € | 3.200 × 0,28 € = 896 € |
+| Grundpreis pro Jahr | 12 × 10 € = 120 € | 12 × 8 € = 96 € |
+| Kosten im Jahr | 1.024 € + 120 € = 1.144 € | 896 € + 96 € = 992 € |
+| Ersparnis im Modell | – | 1.144 € − 992 € = 152 € |
 
-Im Modell sinken die Kosten um 152 € im Jahr. Setze für deinen Vergleich die Werte aus deiner Abrechnung und deinem Angebot ein. Prüfe zusätzlich alle Boni und Fristen. Eine Ersparnis aus einer Beispielrechnung ist keine Zusage für deinen Vertrag.
+Im Modell sinken die Kosten um 152 € im Jahr. Setze für deinen Vergleich die Werte aus deiner Abrechnung und deinem Angebot ein. Prüfe zusätzlich alle Boni und Fristen. Eine Ersparnis aus einer Beispielrechnung ist keine Zusage für deinen Vertrag.
 
 ## Preisänderung: ein Monat Vorlauf und ein Sonderrecht
 

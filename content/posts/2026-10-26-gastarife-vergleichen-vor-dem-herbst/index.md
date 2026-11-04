@@ -65,13 +65,13 @@ Der Abschlag ist eine Vorauszahlung. Eine niedrige Rate spart für sich genommen
 
 ### Modellrechnung: Jahreskosten aus zwei Preisteilen
 
-Dies ist eine frei gewählte Modellrechnung, keine Marktpreisangabe. Angenommen werden 12.000 kWh im Jahr, 0,08 € je kWh und 10 € Grundpreis im Monat. Boni und weitere Preisteile bleiben außen vor.
+Dies ist eine frei gewählte Modellrechnung, keine Marktpreisangabe. Angenommen werden 12.000 kWh im Jahr, 0,08 € je kWh und 10 € Grundpreis im Monat. Boni und weitere Preisteile bleiben außen vor.
 
 | Rechenschritt | Rechnung | Ergebnis |
 | :--- | :--- | ---: |
-| Kosten für Verbrauch | 12.000 kWh × 0,08 € | 960 € |
-| Grundpreis | 12 × 10 € | 120 € |
-| Kosten im Modell | 960 € + 120 € | 1.080 € |
+| Kosten für Verbrauch | 12.000 kWh × 0,08 € | 960 € |
+| Grundpreis | 12 × 10 € | 120 € |
+| Kosten im Modell | 960 € + 120 € | 1.080 € |
 
 Setze für deinen Tarif die Werte aus Abrechnung und Vertrag ein. Deine Rechnung kann abweichen, zum Beispiel wegen Verbrauch, Preisteilen und Bedingungen. Die Modellwerte sind keine aktuellen Marktpreise.
 
@@ -131,7 +131,7 @@ Dokumentiere deinen Fall: Vertrag, Mitteilung, Kontoauszüge und Briefe. Notiere
 
 Die Verbraucherzentrale nennt einen Richtwert: Ein Grad weniger Raumtemperatur senkt den Verbrauch um etwa sechs Prozent ([Heizung: 10 Tipps, Q3](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892)). Das ist keine Garantie für deine Wohnung. Gebäude, Heizung und Nutzung wirken mit.
 
-Ein Rechenbeispiel mit Modellwerten: Bei 12.000 kWh wären sechs Prozent 720 kWh. Bei angenommenen 0,08 € je kWh entspricht das 57,60 €. Die Rechnung gilt nur, wenn der gesamte Verbrauch auf die Heizung entfällt. Warmwasser und andere Anteile können hinzukommen oder fehlen.
+Ein Rechenbeispiel mit Modellwerten: Bei 12.000 kWh wären sechs Prozent 720 kWh. Bei angenommenen 0,08 € je kWh entspricht das 57,60 €. Die Rechnung gilt nur, wenn der gesamte Verbrauch auf die Heizung entfällt. Warmwasser und andere Anteile können hinzukommen oder fehlen.
 
 Wichtig ist die Grenze der Rechnung. Zwei Grad weniger bedeuten nicht automatisch zwölf Prozent. Der Richtwert lässt sich nicht beliebig vervielfachen. Die tatsächliche Einsparung hängt auch davon ab, wie lange du wie stark heizt.
 
