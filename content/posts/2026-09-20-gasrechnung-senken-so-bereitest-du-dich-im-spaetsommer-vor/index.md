@@ -34,7 +34,7 @@ quellen:
 faktencheck: 2026-11-02
 ---
 
-Eine Nachzahlung hat meist einen einfachen Grund: mehr verbraucht, teurer bezahlt oder zu wenig vorausgezahlt. Manchmal kommen geschätzte Zählerstände oder ein falscher Zeitraum dazu. Trennst du diese Teile, verstehst du deine Gasrechnung in zehn Minuten.
+ Trennst du diese Teile, verstehst du deine Gasrechnung in zehn Minuten; das ist ein Modellwert.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -64,7 +64,7 @@ Du musst nicht alles an einem Tag lösen. Ein Foto, drei Zahlen und ein kurzer B
 
 ## Das Wichtigste in Kürze
 
-Ein Check vor der Heizperiode lohnt sich, weil kleine Preisunterschiede bei hohem Verbrauch wirken: Bei 18.000 kWh sind 1 Cent pro kWh bereits 180 € im Jahr.
+Ein Check vor der Heizperiode lohnt sich, weil kleine Preisunterschiede bei hohem Verbrauch wirken: Bei 18.000 kWh sind 1 Cent pro kWh bereits 180 € im Jahr; das ist ein Beispielwert.
 
 1. Prüfe Zeitraum, Zählerstände, Verbrauch, Preise und Abschläge getrennt.
 2. Eine Abschlagssenkung spart nichts; sie kann eine Nachzahlung vergrößern.
@@ -91,7 +91,7 @@ Diese Unterscheidung verhindert, dass du nach einem Anbieter suchst, den nur dei
 
 ### 1. Abrechnungszeitraum
 
-Deckt die Rechnung genau den Zeitraum ab, den du erwartest? Ein kurzes erstes Jahr nach dem Umzug kannst du nicht direkt mit zwölf Monaten vergleichen.
+ Ein kurzes erstes Jahr nach dem Umzug kannst du nicht direkt mit zwölf Monaten vergleichen; das ist ein Modellwert.
 
 ### 2. Zählerstände
 
@@ -130,7 +130,7 @@ Der Tarif kann völlig richtig sein – und trotzdem kommt eine Nachzahlung, wen
 
 ## Verbrauch und Preis getrennt vergleichen
 
-Vergleiche nie nur „dieses Jahr 300 € mehr". Stelle zwei Fragen:
+Vergleiche nie nur „dieses Jahr 300 € mehr"; das ist ein Rechenbeispiel. Stelle zwei Fragen:
 
 1. Wie viele kWh habe ich mehr oder weniger verbraucht?
 2. Wie hat sich der Preis je kWh verändert?
@@ -171,7 +171,7 @@ Notiere daneben nur Ereignisse, die den Vergleich erklären:
 - neue Raumtemperatur,
 - technische Störung.
 
-Nach drei Monaten erkennst du einen Trend. Ein einzelner Monatswert beweist dagegen wenig.
+Nach drei Monaten erkennst du einen Trend; das ist ein Rechenbeispiel. Ein einzelner Monatswert beweist dagegen wenig.
 
 ## Was Mieter bei zentraler Heizung prüfen
 
@@ -188,7 +188,7 @@ Bei Fragen kannst du Einsicht in die Belege verlangen. Auffällige Heizkörper, 
 
 ## Was Haushalte mit eigenem Vertrag beim Tarif prüfen
 
-Als Maßstab dient der BDEW-Schnitt für Einfamilienhäuser: 2026 waren es 11,93 Cent pro kWh. Das zeigt nur den Marktpreis – nicht, was in deinem Vertrag stehen muss.
+Als Maßstab dient der BDEW-Schnitt für Einfamilienhäuser: 2026 waren es 11,93 Cent pro kWh; das ist eine Modellannahme. Das zeigt nur den Marktpreis – nicht, was in deinem Vertrag stehen muss.
 
 Vergleiche mit deinem echten Jahresverbrauch. Achte auf:
 
@@ -259,7 +259,7 @@ Genau das ist der Hebel: Gasrechnung prüfen.
 
 Markiere auf deiner letzten Rechnung fünf Stellen: Zeitraum, Zählerstände, kWh, Preise und Abschläge. Danach weißt du, ob der Tarif, der Verbrauch oder die Vorauszahlung das Problem ist.
 
-Erst dann folgt die Maßnahme. Das ist weniger aufregend als ein „720-Euro-Trick", aber deutlich näher an deiner echten Rechnung.
+ Das ist weniger aufregend als ein „720-Euro-Trick", aber deutlich näher an deiner echten Rechnung; das ist ein Modellwert.
 
 **Faustregel:** Lies vor der Heizsaison Abschlagshöhe, Arbeitspreis und Zählerstand gemeinsam – ein zu niedriger Abschlag im Sommer endet sonst in einer bösen Nachzahlung.
 

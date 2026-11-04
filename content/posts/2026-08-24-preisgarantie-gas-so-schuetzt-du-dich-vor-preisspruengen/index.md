@@ -40,7 +40,7 @@ quellen:
 faktencheck: 2026-11-01
 ---
 
-Eine [Preisgarantie beim Gas](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/) klingt beruhigend. Springt der Börsenpreis, warnt schnell eine Schlagzeile. Sollst du jetzt sofort einen Vertrag für zwei Jahre unterschreiben? Bleib ruhig. Der Preis an der Börse wirkt nicht eins zu eins und nicht sofort auf deinen Tarif als Kunde.
+ Sollst du jetzt sofort einen Vertrag für zwei Jahre unterschreiben; das ist ein Modellwert? Bleib ruhig. Der Preis an der Börse wirkt nicht eins zu eins und nicht sofort auf deinen Tarif als Kunde.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -77,7 +77,7 @@ Mach ein Foto vom Zähler, bevor ein neuer Preis gilt. Speichere Brief, Vertrag 
 - Kündige bei knapper Sonderfrist selbst und nachweisbar.
 - Schließe keinen teuren Tarif nur aus Angst vor einer Schlagzeile ab.
 
-## Warum ein Börsensprung nicht morgen auf deiner Rechnung steht
+## Warum ein Börsensprung nicht morgen auf deiner Rechnung steht?
 
 Versorger kaufen Gas zu verschiedenen Zeiten und über verschiedene Verträge ein. Dazu kommen Netz-Kosten, Vertrieb, Steuern, Abgaben und Umlagen. Dein Gaspreis ist also kein Live-Ticker vom Großhandel.
 
@@ -186,7 +186,7 @@ Prüfe beim neuen Tarif:
 - Zahlungsweise,
 - Preis im Folgejahr.
 
-Eine längere Garantie ist nicht automatisch sicherer. Wenn du dafür schon am Start 2 Cent pro kWh mehr zahlst, kostet die Absicherung bei 20.000 kWh 400 € jährlich.
+ Wenn du dafür schon am Start 2 Cent pro kWh mehr zahlst, kostet die Absicherung bei 20.000 kWh 400 € jährlich; das ist ein Beispielwert.
 
 ## Verbrauch ist dein zweites Sicherheitsnetz
 
@@ -211,7 +211,7 @@ Erhöhung widerspricht der Garantie, Schreiben ist intransparent oder neuer Jahr
 
 Auch Schweigen ist ein Anlass zum Prüfen. Läuft die Garantie aus, kann der Vertrag zunächst zum bisherigen Preis weitergehen. Dein Schutz gegen spätere Änderungen ist dann aber weg.
 
-Rechne vier bis acht Wochen vorher den aktuellen Jahrespreis und vergleiche ihn mit neuen Angeboten. Kündige nicht vorschnell, wenn der Bestandsvertrag weiter günstig ist. Notiere stattdessen, wie flexibel du nach der Mindestlaufzeit wechseln kannst.
+Rechne vier bis acht Wochen vorher den aktuellen Jahrespreis und vergleiche ihn mit neuen Angeboten; das ist ein Modellwert. Kündige nicht vorschnell, wenn der Bestandsvertrag weiter günstig ist. Notiere stattdessen, wie flexibel du nach der Mindestlaufzeit wechseln kannst.
 
 Es gibt drei mögliche Entscheidungen:
 
@@ -267,7 +267,7 @@ Haushaltskunden müssen grundsätzlich mindestens einen Monat vor der Preisände
 **Bleibt mein Abschlag trotz Garantie gleich?**
 Nicht zwingend. Verbrauchsprognose oder ausgenommene Preisbestandteile können den Abschlag verändern. Verlange eine nachvollziehbare Berechnung.
 
-**Sollte ich wegen steigender Börsenpreise sofort 24 Monate abschließen?**
+**Sollte ich wegen steigender Börsenpreise sofort 24 Monate abschließen?**. Das ist ein Rechenbeispiel.
 Nein. Vergleiche zuerst aktuellen Gesamtpreis, Garantieumfang und Aufpreis für die längere Bindung.
 
 **Was mache ich bei einer unklaren oder möglicherweise unzulässigen Erhöhung?**

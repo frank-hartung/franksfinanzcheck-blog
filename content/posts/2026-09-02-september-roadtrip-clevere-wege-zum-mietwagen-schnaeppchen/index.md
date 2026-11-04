@@ -84,7 +84,7 @@ Wie groß der Unterschied ausfällt, zeigt ein Rechenbeispiel. Wir nehmen eine W
 | September (Nebensaison) | 210,00 € | 120,00 € | 330,00 € |
 | **Ersparnis** | **240,00 €** | **30,00 €** | **270,00 €** |
 
-Das richtige Zeitfenster halbiert die Kosten fast. Die 270 € steckst du besser in gutes Essen oder in zwei Tage mehr Urlaub.
+ Die 270 € steckst du besser in gutes Essen oder in zwei Tage mehr Urlaub; das ist ein Modellwert.
 
 ## Die Tankregelung: Fair geht vor
 

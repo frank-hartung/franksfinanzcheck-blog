@@ -50,7 +50,7 @@ Wenn du sauber rechnest, sparst du über 24 Monate oft **280 € bis 380 €**
 
 ## Das Wichtigste in Kürze
 
-1. Ein Wechsel lohnt sich oft schon, wenn du noch in einem alten Tarif mit **40 € bis 50 € pro Monat** festhängst.
+ Ein Wechsel lohnt sich oft schon, wenn du noch in einem alten Tarif mit **40 € bis 50 € pro Monat** festhängst; das ist ein Modellwert.
 2. Wichtigster Wert ist der **Effektivpreis über 24 Monate**.
 3. Bonus, Anschlusskosten und Routermiete gehören immer in dieselbe Rechnung.
 4. Kündige möglichst nicht blind selbst, wenn der neue Anbieter den Wechsel übernehmen kann.
@@ -61,7 +61,7 @@ Wenn du sauber rechnest, sparst du über 24 Monate oft **280 € bis 380 €**
 
 Der Telekommunikationsmarkt belohnt selten Treue. Neukunden bekommen Rabatte, Startguthaben und reduzierte Grundgebühren. Bestandskunden zahlen dagegen oft Jahr für Jahr den höheren Regelpreis.
 
-Genau deshalb ist ein **DSL Tarifvergleich** alle ein bis zwei Jahre sinnvoll. Nicht aus Spieltrieb, sondern aus reiner Haushaltslogik.
+Genau deshalb ist ein **DSL Tarifvergleich** alle ein bis zwei Jahre sinnvoll; das ist ein Beispielwert. Nicht aus Spieltrieb, sondern aus reiner Haushaltslogik.
 
 ### Typische Vorteile eines Wechsels
 
@@ -301,7 +301,7 @@ Nein. Kabel kann sehr attraktiv sein, ist aber je nach Gebiet unterschiedlich st
 Ja, vor allem wegen Stabilität und Zukunftssicherheit. Sie ist aber nicht automatisch für jeden Haushalt wirtschaftlich die beste Wahl.
 
 ### Soll ich den Router mieten oder kaufen?
-Das hängt vom Angebot ab. Rechne die Miete immer über 24 Monate. Dann wird oft schnell klar, was sinnvoller ist.
+ Rechne die Miete immer über 24 Monate; das ist ein Modellwert. Dann wird oft schnell klar, was sinnvoller ist.
 
 ### Muss ich Angst vor Internetausfall beim Wechsel haben?
 Mit etwas Vorbereitung meist nicht. Gerade mit frühem Start, geordnetem Ablauf und Hotspot-Backup bleibt das Risiko überschaubar.

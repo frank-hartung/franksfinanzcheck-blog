@@ -170,7 +170,7 @@ Hier kannst du direkt prüfen, ob dein Tarif noch zeitgemäß ist:
 
 Ein Wechsel dauert oft nur wenige Minuten. Ob er deine Fixkosten stark senkt?
 
-Das hängt von deinem Tarif und deinem Verbrauch ab. Die Rechnung zeigt: Ein Sparpotenzial von grob mehreren hundert Euro pro Jahr ist in vielen Haushalten möglich. Das ist aber keine Garantie. Technik plus Tarifprüfung ist die effektivste Strategie für dich.
+ Die Rechnung zeigt: Ein Sparpotenzial von grob mehreren hundert Euro pro Jahr ist in vielen Haushalten möglich; das ist ein Modellwert. Das ist aber keine Garantie. Technik plus Tarifprüfung ist die effektivste Strategie für dich.
 
 ## Welche Fehler kosten dich Geld?
 
@@ -207,7 +207,7 @@ Bleib dran und rechne nach. Handle nur, wenn die Zahlen für dich sprechen. Das 
 ## Häufige Fragen
 
 ### Verbrauchen Smart-Home-Geräte nicht selbst zu viel Strom?
-Moderne Komponenten wie Thermostate verbrauchen meist nur sehr wenig Energie. Eine Bridge benötigt erfahrungsgemäß etwa 2 bis 5 Watt dauerhaft – eine Spanne der Rechnung. Das sind bei üblichem Strompreis grob 10 bis 15 € im Jahr. Die Ersparnis bei der Heizung kompensiert diese Kosten in der Regel um ein Vielfaches.
+ Eine Bridge benötigt erfahrungsgemäß etwa 2 bis 5 Watt dauerhaft – eine Spanne der Rechnung; das ist ein Beispielwert. Das sind bei üblichem Strompreis grob 10 bis 15 € im Jahr. Die Ersparnis bei der Heizung kompensiert diese Kosten in der Regel um ein Vielfaches.
 
 ### Kann ich smarte Thermostate auch in einer Mietwohnung nutzen?
 Das ist in den meisten Fällen problemlos möglich. Du schraubst die alten Thermostate ab und setzt die neuen auf. Bewahre die alten Regler unbedingt auf. Beim Auszug montierst du sie einfach wieder zurück.

@@ -91,11 +91,11 @@ Der erste Schritt kostet keine Wartezeit. Er spart oft den Anruf. Gehe die vier 
 
 Die Meldung entscheidet über den weiteren Verlauf. Sie muss drei Dinge leisten: den Ausfall beschreiben, ihn zeitlich einordnen und einen Vorgang erzeugen.
 
-**Erstens: schriftlich melden.** Nutze das Kontaktformular oder die Adresse aus den Vertragsunterlagen. Ein Anruf ist schnell, hinterlässt aber keine Spur. Meldest du telefonisch, schreibe danach eine kurze E-Mail mit dem Inhalt: „Ich habe am heutigen Tag um 18:40 Uhr eine Störung gemeldet, Vorgangsnummer 0815, Ergebnis: keine Besserung."
+**Erstens: schriftlich melden.** Nutze das Kontaktformular oder die Adresse aus den Vertragsunterlagen. Ein Anruf ist schnell, hinterlässt aber keine Spur. Meldest du telefonisch, schreibe danach eine kurze E-Mail mit dem Inhalt: „Ich habe am heutigen Tag um 18:40 Uhr eine Störung gemeldet, Vorgangsnummer 0815, Ergebnis: keine Besserung.". Das ist ein Modellwert.
 
 **Zweitens: alles notieren.** Datum, Uhrzeit, Symptom, Dauer der Warteschleife, Name des Mitarbeiters, Vorgangsnummer. Ein Zettel oder eine Notiz auf dem Handy reicht. Diese Liste ist später mehr wert als jede Erinnerung.
 
-**Drittens: Messwerte sichern.** Führe einen Speedtest am Kabel durch und speichere das Ergebnis als Bild. Wiederhole den Test an zwei Tagen. So hast du eine Reihe und keinen Einzelwert.
+ Wiederhole den Test an zwei Tagen; das ist ein Beispielwert. So hast du eine Reihe und keinen Einzelwert.
 
 Für den schriftlichen Weg hat sich eine kurze Struktur bewährt. Sie passt in jedes Formular und in jede E-Mail.
 

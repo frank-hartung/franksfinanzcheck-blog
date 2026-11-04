@@ -41,7 +41,7 @@ Du suchst ein kostenloses Girokonto? Dann bist du hier richtig. Millionen Mensch
 
 Für ein einfaches Konto zahlen viele 8 € bis 18 € im Monat; das ist ein Modellwert. Das klingt nach wenig. Im Jahr sind es aber 96 € bis 216 €.
 
-Auf zehn Jahre gerechnet kommt ein vierstelliger Betrag zusammen. Und das nur dafür, dass die Bank dein Geld verwaltet (Stand: Oktober 2026).
+Auf zehn Jahre gerechnet kommt ein vierstelliger Betrag zusammen; das ist ein Modellwert. Und das nur dafür, dass die Bank dein Geld verwaltet (Stand: Oktober 2026).
 
 Dabei ist der Markt heute besser denn je. Ein gutes Konto bringt dir eine starke App, Geld in Sekunden und oft sogar Zinsen. Eine Gebühr im Monat zahlst du dafür nicht.
 
@@ -75,7 +75,7 @@ Die Gebühr im Monat ist nur die Spitze. Dahinter stecken viele kleine Posten. S
 Typische Kostenfaktoren sind heutzutage:
 
 - Monatliche Grundgebühren für die Kontoverwaltung,
-- Jährliche Kosten für die Girocard (oft ca. 10 € bis 15 €),
+- Jährliche Kosten für die Girocard (oft ca. 10 € bis 15 €),. Das ist ein Beispielwert.
 - Einzelgebühren für Echtzeit-Überweisungen oder SMS-TANs,
 - Hohe Gebühren für Abhebungen an Fremdautomaten,
 - Zweistellige Dispozinsen, die bei Kontoüberzug sofort greifen,
@@ -98,7 +98,7 @@ Für Angestellte ist das kein Problem. Wer studiert oder frei arbeitet, hat oft 
 Im Jahr 2026 setzen die meisten Banken auf folgende Kombination:
 
 - **Debitkarte (Visa oder Mastercard):** Diese ist in der Regel kostenlos enthalten und deckt Online-Shopping sowie weltweites Bezahlen ab.
-- **Girocard (ehemals EC-Karte):** Viele Banken verlangen hierfür mittlerweile eine separate Jahresgebühr von ca. 10 € bis 20 €.
+- **Girocard (ehemals EC-Karte):** Viele Banken verlangen hierfür mittlerweile eine separate Jahresgebühr von ca. 10 € bis 20 €; das ist ein Modellwert.
 
 Prüfe, ob du die Girocard brauchst. Im Supermarkt und in großen Läden reicht die Debitkarte. Nur in kleinen Betrieben und auf manchen Ämtern geht es ohne sie nicht.
 
@@ -110,7 +110,7 @@ Viele zahlen heute mit dem Handy. Bargeld bleibt trotzdem wichtig. Gute Anbieter
 - Gebührenfreies Abheben im Einzelhandel (z. B. bei Supermärkten),
 - Transparente Regeln für die Nutzung im Ausland.
 
-Hebst du oft Geld ab, sieh genau hin. Manche Banken nehmen 2 € bis 5 € pro Abhebung. Damit ist deine Ersparnis schnell weg.
+ Manche Banken nehmen 2 € bis 5 € pro Abhebung; das ist ein Rechenbeispiel. Damit ist deine Ersparnis schnell weg.
 
 ### 4. Dispozins nicht ignorieren
 
@@ -163,7 +163,7 @@ Der Unterschied der Karten zählt heute mehr als früher. Viele Banken geben die
 - Einigen lokalen Bürgerämtern,
 - Parkautomaten älterer Bauart.
 
-Die meisten kommen heute ohne Girocard aus. Nimmt dein Stammladen aber nur sie an, plane 1 € bis 2 € im Monat ein.
+ Nimmt dein Stammladen aber nur sie an, plane 1 € bis 2 € im Monat ein; das ist ein Rechenbeispiel.
 
 ## Kontowechsel: Viel einfacher als sein Ruf
 
@@ -179,7 +179,7 @@ Der typische Ablauf ist heute kinderleicht:
 
 ### Mein Praxistipp zum Umzug
 
-Lass dein altes Konto noch zwei bis drei Monate offen. So siehst du, ob auch der Beitrag für die Versicherung sauber umzieht. Erst danach kündigst du.
+Lass dein altes Konto noch zwei bis drei Monate offen; das ist eine Modellannahme. So siehst du, ob auch der Beitrag für die Versicherung sauber umzieht. Erst danach kündigst du.
 
 ![Gliederung des Beitrags: Kostenloses Girokonto: Ein Konto ohne Gebühren finden](abbildung-ablauf. svg)
 
@@ -250,7 +250,7 @@ Zahlst du heute mehr als 10 € im Monat, lohnt sich der Wechsel; das ist ein R
 ## Häufige Fragen (FAQ)
 
 ### Ist ein kostenloses Girokonto wirklich dauerhaft kostenlos?
-Das hängt vom Anbieter ab. Viele Banken verlangen einen Mindesteingang, oft rund 700 € im Monat. Andere sind ohne Bedingung gratis, nehmen aber Geld für die Karte.
+ Viele Banken verlangen einen Mindesteingang, oft rund 700 € im Monat; das ist ein Modellwert. Andere sind ohne Bedingung gratis, nehmen aber Geld für die Karte.
 
 ### Brauche ich heute noch eine Girocard?
 Meist reicht die Debitkarte. Kaufst du oft in kleinen Läden ein oder zahlst du auf dem Amt, prüfe die Girocard als Zusatz.
@@ -268,7 +268,7 @@ Das hängt von der Karte und vom Netz ab. Viele Konten erlauben gratis Abheben a
 Der Wechselservice erkennt die meisten Lastschriften von allein. Sag deinem Arbeitgeber und deinem Vermieter trotzdem selbst Bescheid.
 
 ### Lohnt sich der Wechsel nur wegen 5 € im Monat?
-Ja. Aus 5 € im Monat werden 60 € im Jahr. Der Wechsel kostet dich kaum Zeit und senkt deine festen Kosten dauerhaft.### Was kostet ein Kontowechsel?
+ Aus 5 € im Monat werden 60 € im Jahr; das ist ein Beispielwert. Der Wechsel kostet dich kaum Zeit und senkt deine festen Kosten dauerhaft.### Was kostet ein Kontowechsel?
 Der Wechsel selbst ist meistens gratis. Die neue Bank zieht viele Lastschriften selbst um. Prüfe nur die Schlussabrechnung deiner alten Bank.
 
 ### Funktioniert ein Gemeinschaftskonto ohne Aufpreis?

@@ -60,7 +60,7 @@ Schätze danach deinen Verbrauch im Jahr. Hole dir mit dieser Zahl mindestens zw
 
 Bei angenommenen 18.000 kWh im Jahr ergeben 0,4 bis 0,8 Cent Unterschied je kWh rechnerisch 72 bis 144 € im Jahr. Nutze für deinen Vergleich den eigenen Jahresverbrauch. Ein fairer Preis im zweiten Jahr ist mehr wert als ein hoher Rabatt am Anfang.
 
-Setze dir zwei Erinnerungen im Handy. Die erste acht Wochen vor dem Ende deines Preisschutzes. Die zweite zwei Wochen vor dem Ende deiner [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/).
+ Die erste acht Wochen vor dem Ende deines Preisschutzes; das ist ein Modellwert. Die zweite zwei Wochen vor dem Ende deiner [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/).
 
 So bleibst du vorne und gerätst nicht in Eile. Prüfe zuletzt, ob dein Anbieter deine Adresse und E-Mail kennt. Wichtige Briefe landen sonst im Spam oder bei der alten Wohnung.
 
@@ -72,7 +72,7 @@ Lege alle Unterlagen an einem Ort ab. Im Ernstfall hast du jede Frist dann sofor
 - Die reinen Beschaffungskosten sind meist geschützt; Steuern, Umlagen oder Netzentgelte können je nach Vertrag ausgenommen sein.
 - Idealerweise deckt die Garantie die gesamte Mindestvertragslaufzeit ab.
 - Vergleiche Tarife immer auf Basis des Gesamtpreises ohne Boni, um die langfristigen Kosten zu sehen.
-- Eine sehr lange Garantie (z. B. 24 Monate) ist nur dann ein Vorteil, wenn der Einstiegspreis nicht massiv über dem Marktdurchschnitt liegt.
+- Eine sehr lange Garantie (z. B. 24 Monate) ist nur dann ein Vorteil, wenn der Einstiegspreis nicht massiv über dem Marktdurchschnitt liegt; das ist ein Beispielwert.
 - Der garantierte Preis pro kWh schützt dich niemals vor den Kosten eines übermäßig hohen Verbrauchs.
 - Bei einseitigen Preisänderungen besteht grundsätzlich ein Sonderkündigungsrecht; Ausnahmen siehe unten.
 
@@ -100,9 +100,9 @@ Es ist wichtig, zwischen drei Zeitpunkten zu unterscheiden, da diese oft voneina
 2. Der tatsächliche Lieferbeginn (oft Wochen oder Monate später)
 3. Das Ende der Mindestlaufzeit sowie das Ende der Preisgarantie
 
-Eine Garantie über 12 Monate nützt wenig, wenn sie am Tag der Unterschrift startet. Kommt das Gas erst drei Monate später, sind drei Monate Schutz schon weg. Achte deshalb darauf: Der Schutz beginnt mit dem ersten Tag der Lieferung.
+Eine Garantie über 12 Monate nützt wenig, wenn sie am Tag der Unterschrift startet; das ist ein Modellwert. Kommt das Gas erst drei Monate später, sind drei Monate Schutz schon weg. Achte deshalb darauf: Der Schutz beginnt mit dem ersten Tag der Lieferung.
 
-Die Garantie sollte zudem möglichst die ganze erste Laufzeit abdecken. Bist du 12 Monate gebunden, aber nur 6 Monate geschützt, kann der Preis vor Ende der Bindung steigen. Ein Sonderkündigungsrecht kann trotzdem bestehen.
+ Bist du 12 Monate gebunden, aber nur 6 Monate geschützt, kann der Preis vor Ende der Bindung steigen; das ist ein Rechenbeispiel. Ein Sonderkündigungsrecht kann trotzdem bestehen.
 
 ## Wann Planungssicherheit sinnvoll sein kann
 
@@ -112,7 +112,7 @@ Eine Preisgarantie ist im aktuellen Marktumfeld besonders ratsam, wenn:
 - der Jahrespreis mit aktuellen Angeboten an deinem Wohnort konkurrenzfähig ist,
 - du keine Zeit hast, monatlich die Energiemärkte zu sondieren,
 - die Klausel den überwiegenden Teil des Endpreises absichert,
-- die Laufzeit für dich überschaubar bleibt (z. B. 12 Monate).
+- die Laufzeit für dich überschaubar bleibt (z. B. 12 Monate); das ist ein Rechenbeispiel.
 
 Sie ist weniger empfehlenswert, wenn:
 
@@ -160,7 +160,7 @@ Rechne zur Kontrolle immer zwei Szenarien:
 
 > Kosten Folgejahre = (Arbeitspreis x Verbrauch) + Grundpreis
 
-Erst die zweite Rechnung zeigt die Wahrheit. Entweder der Tarif ist auch ohne Bonus gut. Oder du musst nach 12 Monaten wieder wechseln.
+ Oder du musst nach 12 Monaten wieder wechseln; das ist eine Modellannahme.
 
 ## Acht Klauseln für den Vertragscheck
 
@@ -220,7 +220,7 @@ Geht ein Anbieter pleite, bleibt dein Haus warm. Bei fortgesetztem Verbrauch kan
 Wähle deshalb nur Tarife mit monatlichem Abschlag. Finger weg von Vorkasse.
 
 Zum Ende einer Preisgarantie solltest du:
-1. **Ca. 2 Monate vorher den Markt prüfen:** Wie haben sich die Preise entwickelt?
+ **Ca. 2 Monate vorher den Markt prüfen:** Wie haben sich die Preise entwickelt; das ist ein Modellwert?
 2. **Den neuen Preisvorschlag kritisch prüfen:** Automatische Verlängerungen erfolgen oft zu deutlich schlechteren Konditionen.
 3. **Fristen wahren:** Kündige rechtzeitig, wenn der neue Preis nicht mehr marktgerecht ist.
 
@@ -236,7 +236,7 @@ Der passende Tarif hängt von dir ab. Diese drei Fragen helfen dir weiter:
 | Bin ich bereit, jährlich 15 Minuten in einen Vergleich zu investieren? | Du bist ein aktiver Wechsler | 12 Monate Laufzeit sind ideal |
 | Steht eine energetische Sanierung bevor? | Dein Verbrauch wird stark sinken | Achte auf kurze Kündigungsfristen |
 
-Vergleiche immer den Preis im Jahr ohne Bonus. Setze dir dabei eine klare Grenze. Ein Beispiel: „Für den Schutz zahle ich 50 bis 100 € im Jahr mehr, aber keinen Cent darüber.“
+Vergleiche immer den Preis im Jahr ohne Bonus. Setze dir dabei eine klare Grenze. Ein Beispiel: „Für den Schutz zahle ich 50 bis 100 € im Jahr mehr, aber keinen Cent darüber.“. Das ist ein Beispielwert.
 
 **Faustregel:** Eine Preisgarantie schützt dich nur dann vor Überraschungen, wenn sie Arbeitspreis, Grundpreis und Laufzeit lückenlos abdeckt – vergleiche auch das Kleingedruckte zu Preisanpassungen.
 
@@ -257,7 +257,7 @@ Nein, meist nicht. Die Garantie gilt für den Preis je kWh. Dein Verbrauch und P
 Der Umfang hängt von der Klausel ab. Vergleiche den Gesamtpreis und entscheide, welcher Schutz zu dir passt.
 
 ### Sind 12 oder 24 Monate sinnvoller?
-Das hängt davon ab, was du erwartest. Mit 12 Monaten bleibst du beweglich und kannst auf fallende Preise reagieren. Mit 24 Monaten hast du länger Ruhe, sitzt aber fest, wenn der Markt billiger wird.
+ Mit 12 Monaten bleibst du beweglich und kannst auf fallende Preise reagieren; das ist ein Modellwert. Mit 24 Monaten hast du länger Ruhe, sitzt aber fest, wenn der Markt billiger wird.
 
 ### Was ist bei einer Preiserhöhung zu tun?
 Lies die Begründung genau. Steigt der reine Energiepreis trotz Garantie, lege Widerspruch ein. Prüfe bei einer zulässigen Erhöhung neue Angebote und ob ein Sonderkündigungsrecht besteht; bei reiner Umsatzsteuerweitergabe besteht keines.

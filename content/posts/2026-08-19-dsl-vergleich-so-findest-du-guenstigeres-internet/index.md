@@ -62,9 +62,9 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Wie berechnest du den echten Effektivpreis?
 
-Verlasse dich nicht auf die plakative Grundgebühr der ersten Monate. Addiere stattdessen alle Kostenfaktoren über die vollen 24 Monate:
+Verlasse dich nicht auf die plakative Grundgebühr der ersten Monate. Addiere stattdessen alle Kostenfaktoren über die vollen 24 Monate:. Das ist ein Modellwert.
 
-* **Grundgebühr der Einstiegsphase:** Oft stark rabattierte Monate (ca. 1 bis 10 oder 12 Monate).
+* **Grundgebühr der Einstiegsphase:** Oft stark rabattierte Monate (ca. 1 bis 10 oder 12 Monate); das ist ein Beispielwert.
 * **Reguläre Grundgebühr der Folgemonate:** Der Standardpreis, der bis zum Ende des 24. Monats anfällt.
 * **Einmalige Bereitstellung & Anschluss:** In der Regel verlangen Anbieter hier zwischen ca. 45 € und 80 €, wobei dieser Betrag bei Neukunden-Aktionen oft entfällt.
 * **Versandkosten für Hardware:** Meistens fallen ca. 10 € bis 15 € für den versicherten Versand des Routers an.
@@ -74,7 +74,7 @@ Teile die Gesamtsumme nach Abzug aller Boni durch 24. Nur dieser Wert zeigt dir,
 
 ## Welche Kostenfallen lauern im Kleingedruckten?
 
-1. **Massive Preissprünge:** Fast alle großen Provider erhöhen nach ca. 6 bis 12 Monaten die monatliche Gebühr drastisch. Wer nicht spätestens im 20. Monat den nächsten Wechsel plant, zahlt im Anschluss drauf.
+ **Massive Preissprünge:** Fast alle großen Provider erhöhen nach ca. 6 bis 12 Monaten die monatliche Gebühr drastisch; das ist ein Modellwert. Wer nicht spätestens im 20. Monat den nächsten Wechsel plant, zahlt im Anschluss drauf.
 2. **Die Router-Mietfalle:** Mietgeräte kosten in der Regel zwischen ca. 5 € und 9 € pro Monat (das summiert sich auf ca. 120 € bis 210 € in zwei Jahren). Ein eigener Kauf-Router rechnet sich oft schon nach 18 bis 24 Monaten.
 3. **Anschlussgebühren:** Für die Aktivierung der Leitung werden oft rund 70 € fällig. Achte auf Tarife, die diese Gebühr im Rahmen von Aktionswochen „erstatten“ oder gar nicht erst erheben.
 4. **Zusatz-Abos als „Gratis-Beigabe“:** Optionen wie Sicherheitspakete oder TV-Apps sind oft drei Monate kostenlos und werden danach automatisch kostenpflichtig, wenn keine rechtzeitige Kündigung erfolgt.
@@ -110,31 +110,31 @@ Möchtest du noch mehr Details? Dann wirf einen Blick in die Guides zu DSL-Gutsc
 
 ## Der 24-Monats-Taschenrechner, den Vergleichsportale nicht zeigen
 
-Schauen wir uns ein realistisches Beispiel aus dem Oktober 2026 an: Ein Provider wirbt mit ca. 24,99 € für das erste Jahr.
+Schauen wir uns ein realistisches Beispiel aus dem Oktober 2026 an: Ein Provider wirbt mit ca. 24,99 € für das erste Jahr; das ist ein Rechenbeispiel.
 
 {{< chart dataset="dsl_effektivpreis_modell" >}}
 
 Nach 12 Monaten springt der Preis auf rund 49,99 €; das ist ein Modellwert. Die Hardware-Miete liegt bei ca. 6 € pro Monat. Die Anschlussgebühr beträgt einmalig ca. 69,95 €, während ein Wechselbonus von 120 € lockt. Die ehrliche Rechnung sieht so aus:
 
-- 12 Monate à ca. 24,99 € = 299,88 €
+- 12 Monate à ca. 24,99 € = 299,88 €. Das ist ein Rechenbeispiel.
 - 12 Monate à ca. 49,99 € = 599,88 €
 - Router-Miete (24 Mo.) = ca. 144,00 €
 - Bereitstellung = ca. 69,95 €
 - Abzüglich Bonus = -120,00 €
 
-**Gesamtkosten: 993,71 € / 24 = ca. 41,40 € effektiver Monatspreis.** Der beworbene Einstiegspreis von 24,99 € liegt also rund 40 % unter der Realität. Wer nur auf den Bannerpreis schaut, vergleicht Äpfel mit Birnen.
+**Gesamtkosten: 993,71 € / 24 = ca. 41,40 € effektiver Monatspreis.** Der beworbene Einstiegspreis von 24,99 € liegt also rund 40 % unter der Realität; das ist eine Modellannahme. Wer nur auf den Bannerpreis schaut, vergleicht Äpfel mit Birnen.
 
-Ein Bestandskunden-Tarif ohne Rabatt kostet oft ca. 45 € plus Hardware. Ein Wechsel auf einen optimierten Tarif für effektiv ca. 33 € spart dir somit ca. **288 €** über die [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/).
+Ein Bestandskunden-Tarif ohne Rabatt kostet oft ca. 45 € plus Hardware; das ist ein Modellwert. Ein Wechsel auf einen optimierten Tarif für effektiv ca. 33 € spart dir somit ca. **288 €** über die [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/).
 
 ## Vier Fallen, die im Kleingedruckten sitzen
 
 **Hardware-Bindung.** Besonders bei neuen Glasfaser-Anschlüssen versuchen Anbieter oft, die eigene Hardware vorzuschreiben. Das erschwert die Nutzung vorhandener, hochwertiger Router und kann zusätzliche Stromkosten verursachen.
 
-**Daten-Drosselung.** Im Festnetzbereich 2026 zwar selten, aber bei speziellen "Discount-Tarifen" oder Hybrid-Lösungen (5G-Backup) kann es ab ca. 300–500 GB Volumen zu Drosselungen kommen. Das ist für Power-User eine echte Hürde.
+**Daten-Drosselung.** Im Festnetzbereich 2026 zwar selten, aber bei speziellen "Discount-Tarifen" oder Hybrid-Lösungen (5G-Backup) kann es ab ca. 300–500 GB Volumen zu Drosselungen kommen; das ist ein Beispielwert. Das ist für Power-User eine echte Hürde.
 
-**Boni-Bedingungen.** Manche Cashbacks werden nur ausgezahlt, wenn man nach 6 Monaten eine aktive Bestätigung an den Vermittler schickt oder Werbezustimmungen erteilt. Lies hier genau nach, damit der Bonus nicht verfällt.
+**Boni-Bedingungen.** Manche Cashbacks werden nur ausgezahlt, wenn man nach 6 Monaten eine aktive Bestätigung an den Vermittler schickt oder Werbezustimmungen erteilt; das ist ein Modellwert. Lies hier genau nach, damit der Bonus nicht verfällt.
 
-**Stille Vertragsverlängerungen.** Zwar ist nach 24 Monaten eine monatliche Kündigung gesetzlich Standard, aber Provider bieten oft „Tarif-Optimierungen“ an, die eine neue 24-monatige Bindung auslösen. Prüfe solche Angebote kritisch auf ihre Flexibilität.
+**Stille Vertragsverlängerungen.** Zwar ist nach 24 Monaten eine monatliche Kündigung gesetzlich Standard, aber Provider bieten oft „Tarif-Optimierungen“ an, die eine neue 24-monatige Bindung auslösen; das ist ein Rechenbeispiel. Prüfe solche Angebote kritisch auf ihre Flexibilität.
 
 ![Gliederung des Beitrags: DSL-Vergleich: So findest du den günstigsten Internettarif](abbildung-ablauf. svg)
 
@@ -147,7 +147,7 @@ Ein Bestandskunden-Tarif ohne Rabatt kostet oft ca. 45 € plus Hardware. Ein W
 ## So vergleichst du in 20 Minuten sauber
 
 1. Nutze immer die genaue Adresse, da die Verfügbarkeit von Hausnummer zu Hausnummer variieren kann.
-2. Filter klug setzen: Für Homeoffice im Jahr 2026 sollte der Upload bei mindestens ca. 15–20 % der Download-Rate liegen.
+ Filter klug setzen: Für Homeoffice im Jahr 2026 sollte der Upload bei mindestens ca. 15–20 % der Download-Rate liegen; das ist ein Rechenbeispiel.
 3. Kosten akribisch erfassen: Notiere Grundgebühr Phase 1 & 2, Boni und Versandkosten.
 4. Berechne den Effektivpreis (Gesamtsumme durch 24).
 5. Achte auf die Hardware-Optionen: Kannst du deinen alten Router Weiternutzen?
@@ -155,9 +155,9 @@ Ein Bestandskunden-Tarif ohne Rabatt kostet oft ca. 45 € plus Hardware. Ein W
 
 ## Welches Profil braucht welche Geschwindigkeit?
 
-**Single-Haushalt mit Homeoffice.** In der Regel reichen ca. 50 Mbit/s völlig aus. Wichtig ist hier ein stabiler Upload von rund 10 Mbit/s für ruckelfreie Videotelefonie in HD.
+**Single-Haushalt mit Homeoffice.** In der Regel reichen ca. 50 Mbit/s völlig aus; das ist eine Modellannahme. Wichtig ist hier ein stabiler Upload von rund 10 Mbit/s für ruckelfreie Videotelefonie in HD.
 
-**Haushalt mit zwei Personen.** Hier sind ca. 100 Mbit/s bis 250 Mbit/s ratsam, besonders wenn beide gleichzeitig in Calls sind oder einer streamt, während der andere arbeitet.
+**Haushalt mit zwei Personen.** Hier sind ca. 100 Mbit/s bis 250 Mbit/s ratsam, besonders wenn beide gleichzeitig in Calls sind oder einer streamt, während der andere arbeitet; das ist ein Modellwert.
 
 **Familien & Gamer-WGs.** Ab 250 Mbit/s fängt der Komfort an; das ist ein Modellwert. Große Spiele-Updates (oft über 100 GB) sind damit in akzeptabler Zeit geladen. Ein niedriger Ping (unter ca. 15–20 ms) ist hier wichtiger als reiner Download-Speed.
 
@@ -170,20 +170,20 @@ Glasfaser bietet oft die besten Latenzwerte, was besonders bei Online-Anwendunge
 Diese Frage entscheidet oft über die Wirtschaftlichkeit eines Tarifs. Miete wirkt bequem, ist aber meist teurer.
 
 Ein Beispiel (Stand: Oktober 2026):
-- Monatliche Miete: **ca. 6,50 €**
+- Monatliche Miete: **ca. 6,50 €**. Das ist ein Beispielwert.
 - Kosten nach 24 Monaten: **ca. 156 €**
 
-Ein moderner Mittelklasse-Router kostet im Handel oft zwischen ca. 130 € und 180 €. Nach zwei Jahren gehört das Gerät dir und du kannst es im neuen Vertrag weiterverwenden oder verkaufen. Mieten lohnt sich meist nur, wenn man modernste High-End-Technik inklusive Vor-Ort-Service wünscht.
+Ein moderner Mittelklasse-Router kostet im Handel oft zwischen ca. 130 € und 180 €; das ist ein Modellwert. Nach zwei Jahren gehört das Gerät dir und du kannst es im neuen Vertrag weiterverwenden oder verkaufen. Mieten lohnt sich meist nur, wenn man modernste High-End-Technik inklusive Vor-Ort-Service wünscht.
 
 ## Wann du bewusst den kleineren Tarif wählen solltest
 
 Mehr Speed ist nicht immer besser, wenn er ungenutzt bleibt. Ein kleinerer Tarif ist sinnvoll, wenn:
 
 - Dein Hauptfokus auf Surfen und gelegentlichem Streaming liegt.
-- Dein WLAN-Router ohnehin nicht mehr als ca. 100 Mbit/s stabil verteilen kann.
+- Dein WLAN-Router ohnehin nicht mehr als ca. 100 Mbit/s stabil verteilen kann; das ist ein Rechenbeispiel.
 - Du deine monatlichen Fixkosten konsequent minimieren willst.
 
-Die Ersparnis zwischen einem 250er und einem 100er Tarif liegt oft bei ca. 10 € pro Monat. Über zwei Jahre sind das rund **240 €**, die du ohne spürbaren Leistungsverlust sparst, wenn dein Bedarf gedeckt ist. Ein präziser [DSL-Vergleich](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/) hilft dir, genau dieses Sparpotenzial zu finden.
+Die Ersparnis zwischen einem 250er und einem 100er Tarif liegt oft bei ca. 10 € pro Monat; das ist ein Rechenbeispiel. Über zwei Jahre sind das rund **240 €**, die du ohne spürbaren Leistungsverlust sparst, wenn dein Bedarf gedeckt ist. Ein präziser [DSL-Vergleich](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/) hilft dir, genau dieses Sparpotenzial zu finden.
 
 ## Fazit: Durch regelmäßigen Vergleich hunderte Euro sparen
 
@@ -196,13 +196,13 @@ Der beste Tarif ist derjenige, der genau deinen Bedarf deckt, ohne für ungenutz
 ## Häufige Fragen
 
 ### Wie oft sollte ich einen DSL-Vergleich durchführen?
-Es empfiehlt sich, alle 24 Monate einen Vergleich zu machen. Beginne damit am besten rund drei bis vier Monate vor Ablauf deiner Mindestlaufzeit, um nahtlos zu einem neuen Neukunden-Angebot zu wechseln.
+Es empfiehlt sich, alle 24 Monate einen Vergleich zu machen; das ist eine Modellannahme. Beginne damit am besten rund drei bis vier Monate vor Ablauf deiner Mindestlaufzeit, um nahtlos zu einem neuen Neukunden-Angebot zu wechseln.
 
 ### Kann ich meinen DSL-Vertrag auch monatlich kündigen?
-Nachdem die anfängliche Mindestlaufzeit von meist 24 Monaten abgelaufen ist, kannst du laut TKG jederzeit mit einer Frist von einem Monat kündigen. Viele neue Tarife bieten auch von Beginn an monatliche Kündbarkeit an, sind dann aber oft teurer.
+Nachdem die anfängliche Mindestlaufzeit von meist 24 Monaten abgelaufen ist, kannst du laut TKG jederzeit mit einer Frist von einem Monat kündigen; das ist ein Modellwert. Viele neue Tarife bieten auch von Beginn an monatliche Kündbarkeit an, sind dann aber oft teurer.
 
 ### Welche Bandbreite brauche ich für Homeoffice?
-Für reibungslose Videocalls und den Zugriff auf Cloud-Systeme sind ca. 50 bis 100 Mbit/s im Download für die meisten Haushalte absolut ausreichend. Achte auf einen stabilen Upload von mindestens ca. 10 Mbit/s.
+Für reibungslose Videocalls und den Zugriff auf Cloud-Systeme sind ca. 50 bis 100 Mbit/s im Download für die meisten Haushalte absolut ausreichend; das ist ein Beispielwert. Achte auf einen stabilen Upload von mindestens ca. 10 Mbit/s.
 
 ### Was passiert mit meiner Festnetznummer beim Wechsel?
 Deine bestehende Rufnummer kannst du in der Regel problemlos und kostenfrei zum neuen Anbieter mitnehmen. Dieser Prozess wird als Rufnummernportierung bezeichnet und meist direkt vom neuen Provider koordiniert.

@@ -85,7 +85,7 @@ Der Einstieg in ein hochwertiges 2er-Mesh-Set kostet im Handel zwischen 80 € 
 
 ## 5 Sofort-Tipps zur Optimierung deines Heimnetzwerks
 
-1. **Router erhöht und zentral aufstellen:** Platziere den Router in mindestens 1 Meter Höhe auf einem Regal oder Sideboard in einem zentralen Flur, um Hindernisse am Boden zu vermeiden.
+ **Router erhöht und zentral aufstellen:** Platziere den Router in mindestens 1 Meter Höhe auf einem Regal oder Sideboard in einem zentralen Flur, um Hindernisse am Boden zu vermeiden; das ist ein Modellwert.
 2. **2,4-GHz- und 5-GHz-Netz trennen:** Gib beiden Frequenzbändern in den Router-Einstellungen unterschiedliche Namen (SSIDs). Verbinde bandbreitenintensive Endgeräte wie Laptops und Smart-TVs mit dem schnellen 5-GHz-Band, während Smart-Home-Komponenten das weitreichende 2,4-GHz-Band nutzen.
 3. **Funkkanal automatisch optimieren:** Moderne Router bieten eine automatische Kanalwahl, die regelmäßig prüft, welcher Frequenzbereich in der Nachbarschaft am geringsten ausgelastet ist.
 4. **Antennen präzise ausrichten:** Besitzt dein Router externe Stabantennen, richte eine Antenne senkrecht nach oben und eine zweite im 45-Grad-Winkel aus, um sowohl horizontale als auch vertikale Funkwellen optimal abzustrahlen.
@@ -118,7 +118,7 @@ Mietest du den Router für 5 bis 8 € und hast trotzdem Funklöcher? Dann zahl
 
 ## Typische WLAN-Fehler, die Speed fressen
 
-**Router im Technikschrank.** Holz, Metall und Kartons dämpfen 5 GHz stark. Stelle den Router frei und erhöht auf. Am besten zentral in der Wohnung. Das holt oft 30 bis 50 % Reichweite zurück.
+ Das holt oft 30 bis 50 % Reichweite zurück; das ist ein Beispielwert.
 
 **2,4 GHz und 5 GHz unter demselben Namen.** Alte Geräte bleiben am langsamen Band. So ziehen sie das ganze Netz nach unten. Vergib getrennte Namen, zum Beispiel „Zuhause“ und „Zuhause-5G“. Dann hast du die Kontrolle.
 
@@ -130,7 +130,7 @@ Mietest du den Router für 5 bis 8 € und hast trotzdem Funklöcher? Dann zahl
 
 ## Schritt-für-Schritt: vom Funkloch zum nutzbaren Homeoffice
 
-1. **Messen, nicht schätzen.** Speedtest per Kabel am Router, dann per WLAN am Schreibtisch, im Schlafzimmer, auf der Terrasse. Notiere Download, Upload, Ping. Alles unter 30 % der Vertragswerte ist ein Funk- oder Leitungsproblem – beides musst du trennen.
+ Alles unter 30 % der Vertragswerte ist ein Funk- oder Leitungsproblem – beides musst du trennen; das ist ein Modellwert.
 2. **Kabel-Referenz.** Liegt der LAN-Test klar unter dem Vertrag, ist es der Anschluss (Provider anrufen, Entstörungsnummer, 14-Tage-Protokoll). Liegt LAN gut und WLAN schlecht, arbeitest du am Funk.
 3. **Position.** Router auf Augenhöhe, weg von Mikrowelle, DECT-Basis und Bluetooth-Lautsprechern. Antennen senkrecht.
 4. **Kanal und Band.** 5 GHz für Arbeitsgeräte, 2,4 GHz für Smarthome. DFS-Kanäle meiden, wenn die FRITZ!Box ständig neu startet (Radar-Erkennung).
@@ -152,7 +152,7 @@ Mesh-Systeme (WLAN 6/6E) nutzen eine gemeinsame SSID. Sie reichen dich an den st
 
 Dein Handy bleibt am schwachen Knoten hängen. Powerline hängt an der Hausverkabelung.
 
-LED-Netzteile und FI-Schalter drücken den Durchsatz oft auf 20 bis 40 Mbit/s. Das gilt selbst bei „1.200 Mbit“ auf der Packung. Kaufe darum mit Rückgaberecht. Teste 48 Stunden genau im Funkloch.
+LED-Netzteile und FI-Schalter drücken den Durchsatz oft auf 20 bis 40 Mbit/s. Das gilt selbst bei „1.200 Mbit“ auf der Packung; das ist ein Rechenbeispiel. Kaufe darum mit Rückgaberecht. Teste 48 Stunden genau im Funkloch.
 
 Hast du Glasfaser mit 300 Mbit/s oder mehr im Rechenfall? Dann binde den zweiten Knoten per LAN-Kabel an. So bleibt das Funkband den Geräten. Im Homeoffice kommt an, wofür du zahlst.
 
@@ -209,7 +209,7 @@ Die neuen Standards bedienen viele Geräte gleichzeitig. Smartphones, TVs und Ta
 Abends schalten die Nachbarn ihre Router ein. Auch Streaming-Geräte laufen dann. Die Funkkanäle sind schlicht überlastet.
 
 ### Kann ein alter Router schnelle Internetanschlüsse ausbremsen?
-Ja. Fehlt dem Router ein Gigabit-LAN-Port, bremst er. 100 bis 250 Mbit/s kommen dann nicht an. Der Router wird zum Flaschenhals.
+ 100 bis 250 Mbit/s kommen dann nicht an; das ist ein Rechenbeispiel. Der Router wird zum Flaschenhals.
 
 ---
 

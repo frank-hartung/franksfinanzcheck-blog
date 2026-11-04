@@ -98,7 +98,7 @@ Leg Anleitung, letzte Wartungsrechnung und Verbrauchsdaten bereit. Notiere auße
 - bekannte Problemräume,
 - Datum der letzten Wartung.
 
-Das dauert zehn Minuten und verhindert blindes Drehen. Bei einer Mietwohnung reicht es oft, Probleme sauber aufzuschreiben und weiterzugeben.
+Das dauert zehn Minuten und verhindert blindes Drehen; das ist ein Modellwert. Bei einer Mietwohnung reicht es oft, Probleme sauber aufzuschreiben und weiterzugeben.
 
 ## Schritt 1: Probelauf mit allen Räumen
 
@@ -146,7 +146,7 @@ Als Mieter greifst du hier normalerweise nicht selbst ein. Melde einen auffälli
 
 ## Schritt 6: Heizzeiten und Regelung prüfen
 
-Vergleiche die programmierten Zeiten mit deinem Alltag. Läuft die Heizung morgens zwei Stunden, bevor jemand aufsteht? Bleibt sie warm, obwohl tagsüber niemand zu Hause ist?
+ Läuft die Heizung morgens zwei Stunden, bevor jemand aufsteht; das ist ein Beispielwert? Bleibt sie warm, obwohl tagsüber niemand zu Hause ist?
 
 Passe die Zeiten in [kleinen Schritten](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/) an. Notiere vorher den alten Zustand. Nach ein paar Tagen prüfst du Komfort und Verbrauch.
 

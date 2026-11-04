@@ -172,7 +172,7 @@ Vorsicht gilt beim Nachfüllen von Wasser. Viele neue Geräte brauchen aufbereit
 1. Aktuelle Einstellungen dokumentieren (Foto der Anzeige).
 2. Die offizielle Bedienungsanleitung zurate ziehen.
 3. Änderungen nur in kleinen Schritten vornehmen.
-4. Die Auswirkung über 2–3 Tage beobachten.
+ Die Auswirkung über 2–3 Tage beobachten; das ist ein Modellwert.
 5. Bei Unsicherheit die Einstellungen auf den Ursprungswert zurücksetzen.
 
 ## Was Verbrauchsmaßnahmen realistisch bringen?
@@ -252,7 +252,7 @@ Gehe [Schritt für Schritt](../../posts/2026-10-12-dein-weg-zu-geringeren-monats
 
 Welcher Schritt hat gewirkt? Das lässt sich dann nicht mehr sagen. Ein Schritt nach dem anderen bringt dir mehr.
 
-Lies den Zähler nach zwei Wochen Heizbetrieb erneut ab. So siehst du Fehler früh. Und zwar bevor die teuren Monate Januar und Februar kommen.
+Lies den Zähler nach zwei Wochen Heizbetrieb erneut ab; das ist ein Beispielwert. So siehst du Fehler früh. Und zwar bevor die teuren Monate Januar und Februar kommen.
 
 Echtes Sparen braucht beides: einen guten Tarif und einen klugen Verbrauch. Wer nur auf den Preis schaut und dabei Wärme verschenkt, zahlt am Ende trotzdem zu viel.
 
@@ -276,13 +276,13 @@ Mit diesen zwei Zahlen siehst du in wenigen Minuten, ob dein Tarif noch mithalte
 Nein. Ein kleiner Abschlag schont nur den Monat. Die Gesamtkosten ergeben sich aus Verbrauch und Tarif. Zu niedrige Abschläge enden in einer hohen Nachzahlung.
 
 ### Wann sollte ich den Gastarif vergleichen?
-Vergleiche, wenn deine Preisgarantie endet. Oder wenn eine Erhöhung ins Haus steht. Auch nach 12 Monaten ohne Blick auf den Markt lohnt es sich. Der Oktober ist dafür ein guter Monat.
+ Auch nach 12 Monaten ohne Blick auf den Markt lohnt es sich; das ist ein Modellwert. Der Oktober ist dafür ein guter Monat.
 
 ### Muss ich Heizkörper jedes Jahr entlüften?
 Nein, das musst du nicht. Entlüfte nur, wenn es gluckert oder der Heizkörper ungleich warm wird. Zu häufiges Entlüften senkt den Druck ohne Grund.
 
 ### Wie viel spart ein Grad weniger?
-Die Verbraucherzentrale nennt rund 6 % weniger Heizenergie pro Grad als Faustwert. Das tatsächliche Ergebnis hängt von Haus, Heizverhalten und Preis ab.
+Die Verbraucherzentrale nennt rund 6 % weniger Heizenergie pro Grad als Faustwert; das ist ein Rechenbeispiel. Das tatsächliche Ergebnis hängt von Haus, Heizverhalten und Preis ab.
 
 ### Darf ich den Gasanbieter auch im Winter wechseln?
 Ja. Du darfst jederzeit wechseln, wenn du die Frist einhältst. Oder wenn du ein Sonderkündigungsrecht hast. Dein Gas fließt dabei ohne Lücke weiter.

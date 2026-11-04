@@ -57,7 +57,7 @@ Ob das stimmt, entscheidet nicht die Idee, sondern eine einzige Zahl: der Anteil
 
 1. Ein Doppeltarifzähler hat zwei Zählwerke: **Hochtarif (HT)** für die teuren Zeiten und **Niedertarif (NT)** für die günstigen.
 2. Der Vorteil wirkt nur über den **Nachtanteil** deines Verbrauchs, nicht über die Höhe des Rabatts allein.
-3. Eine Orientierung liegt bei **30 bis 40 %** Nachtanteil – darunter gewinnt meist der Einheitstarif.
+ Eine Orientierung liegt bei **30 bis 40 %** Nachtanteil – darunter gewinnt meist der Einheitstarif; das ist ein Modellwert.
 4. Prüfe zusätzlich den Grundpreis: Ein höherer Grundpreis frisst einen Teil des Vorteils auf.
 5. Wie Preise und Tarifbestandteile geregelt sind, beschreibt die [Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html); die Kostenstruktur im Markt analysiert die [BDEW-Strompreisanalyse](https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/).
 
@@ -143,13 +143,13 @@ Ein Doppeltarif verändert nicht nur den Preis, sondern auch das Bild auf der Ab
 
 Vergleiche die beiden Zeilen mit dem Vorjahr. Steigt der Hochtarifanteil und sinkt der Niedertarifanteil, hat sich dein Verhalten verschoben. Vielleicht läuft die Waschmaschine jetzt früher, oder ein neues Gerät verbraucht tagsüber Strom. Diese Verschiebung ist in der Summe oft unsichtbar, in den zwei Zeilen aber klar.
 
-Notiere dir zusätzlich den Anteil in Prozent. Wenn du diesen Wert über zwei Jahre verfolgst, kennst du deinen Nachtanteil, ohne eine Woche lang Buch zu führen.
+ Wenn du diesen Wert über zwei Jahre verfolgst, kennst du deinen Nachtanteil, ohne eine Woche lang Buch zu führen; das ist ein Beispielwert.
 
 ## Das 7-Tage-Protokoll
 
 Die einzige Zahl, die du wirklich brauchst, ist dein Nachtanteil. Ermitteln lässt er sich in einer Woche.
 
-Notiere sieben Tage lang, wann deine großen Verbraucher laufen: Waschmaschine, Trockner, Geschirrspüler, Ladegeräte, Elektroheizung, falls vorhanden. Notiere dazu die Uhrzeit und die übliche Laufzeit. Ein Blatt mit drei Spalten reicht.
+Notiere sieben Tage lang, wann deine großen Verbraucher laufen: Waschmaschine, Trockner, Geschirrspüler, Ladegeräte, Elektroheizung, falls vorhanden; das ist ein Modellwert. Notiere dazu die Uhrzeit und die übliche Laufzeit. Ein Blatt mit drei Spalten reicht.
 
 Danach vergleichst du deine Liste mit den Zeitfenstern deines Tarifs. Steht der größte Teil deiner Läufe außerhalb des günstigen Fensters, hast du zwei Möglichkeiten: das Verhalten ändern oder den Tarif prüfen. Beides ist legitim. Nur eines davon passt zu deinem Alltag.
 
@@ -163,7 +163,7 @@ Für den Wechsel gilt eine einfache Reihenfolge. Erst den Tarif klären, dann de
 
 Klär deshalb vorab drei Fragen mit dem Versorger: Welche Zeitfenster gelten, welche Preise gelten in beiden Fenstern, und was passiert mit dem Grundpreis? Lass dir die Antwort schriftlich geben. Ein Telefonat ist der schlechteste Ort für solche Zusagen.
 
-Kläre zusätzlich, ob für den Zählerwechsel eine Gebühr anfällt. Solche Beträge gehören in die Rechnung: Ein einmaliger Betrag von 50 € frisst den rechnerischen Vorteil von 37,50 € im ersten Jahr komplett auf.
+ Solche Beträge gehören in die Rechnung: Ein einmaliger Betrag von 50 € frisst den rechnerischen Vorteil von 37,50 € im ersten Jahr komplett auf; das ist ein Rechenbeispiel.
 
 ## Sperrzeiten und Komfort
 

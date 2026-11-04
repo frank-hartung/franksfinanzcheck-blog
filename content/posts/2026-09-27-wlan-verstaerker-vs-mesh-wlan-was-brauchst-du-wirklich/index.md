@@ -119,7 +119,7 @@ Ein Mesh‑System besteht aus mehreren Stationen (meist zwei oder drei), die zus
 
 ## Die entscheidende Frage vor jedem Kauf
 
-Halte kurz inne und stelle fest, **welches** Problem du überhaupt hast. Dafür brauchst du nur dein Handy oder einen Laptop und zehn Minuten.
+ Dafür brauchst du nur dein Handy oder einen Laptop und zehn Minuten; das ist ein Modellwert.
 
 ### Schritt 1: Direkt am Router messen
 

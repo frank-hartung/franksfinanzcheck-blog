@@ -253,7 +253,7 @@ Wenn du mit anderen zusammenwohnst, verteile Aufgaben eindeutig. „Wir lesen de
 
 Bearbeite zuerst die Sicherheit, dann Fristen, danach Geld und Komfort. Ein Gasgeruch duldet keinen Preisvergleich. Eine Kündigungsfrist kann schon morgen ablaufen. Der staubige Heizkörper wartet dagegen locker bis zum Wochenende.
 
-Für Geldthemen hilft eine einfache Regel: Beginne mit dem Punkt, der laut deiner Rechnung den größten Unterschied im Jahr macht. Ein Tarifabstand von 300 € ist dringlicher als eine Thermostateinstellung für fünf Euro. Bei Technik zählt aber nicht nur die Eurozahl. Ein kleines Leck oder ein Fehlercode braucht auch bei unklarer Ersparnis eine fachliche Prüfung.
+ Ein Tarifabstand von 300 € ist dringlicher als eine Thermostateinstellung für fünf Euro; das ist ein Modellwert. Bei Technik zählt aber nicht nur die Eurozahl. Ein kleines Leck oder ein Fehlercode braucht auch bei unklarer Ersparnis eine fachliche Prüfung.
 
 Streiche erledigte Punkte und übertrage offene Aufgaben mit neuem Datum. So bleibt das Ergebnisblatt kurz. Nach dem Winter vergleichst du es mit Rechnung und Zählerreihe. Dann siehst du, welche Entscheidung Wirkung hatte und welche nur gut klang.
 
@@ -266,7 +266,7 @@ Der Check wirkt besser, wenn du ihn nicht jedes Jahr neu erfinden musst. Verteil
 - **Januar:** Zwischenstand beim Verbrauch ziehen und Abschlag plausibilisieren.
 - **acht Wochen vor Vertragsende:** Markt vergleichen und Kündigungsfrist prüfen als Beispielwert.
 
-Jeder Termin dauert höchstens 15 Minuten. Hinterlege beim Kalendereintrag ein Foto der letzten Checkliste oder den Ordner mit den Vertragsdaten. Dann beginnt die nächste Runde nicht wieder mit der Suche nach der Rechnung.
+Jeder Termin dauert höchstens 15 Minuten; das ist ein Beispielwert. Hinterlege beim Kalendereintrag ein Foto der letzten Checkliste oder den Ordner mit den Vertragsdaten. Dann beginnt die nächste Runde nicht wieder mit der Suche nach der Rechnung.
 
 Ein fester Rhythmus verhindert auch falsche Reaktionen. Der hohe Januarverbrauch ist bei Frost normal und kein Grund, sofort an fünf Einstellungen zu drehen. Ein steigender Preis trotz stabilem Verbrauch weist dagegen eher zum Vertrag.
 

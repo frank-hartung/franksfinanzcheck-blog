@@ -136,7 +136,7 @@ Ein Abschlag von 130 € macht den Tarif nicht günstiger; das ist ein Modellwe
 
 ## Was mehrere Maßnahmen zusammen bringen können?
 
-Prozentwerte lassen sich nicht einfach addieren. Senkst du die Temperatur und lüftest zugleich besser, sparst du nicht automatisch 6 plus 5 %. Beide Maßnahmen wirken oft auf denselben unnötigen Verbrauch.
+ Senkst du die Temperatur und lüftest zugleich besser, sparst du nicht automatisch 6 plus 5 %; das ist ein Modellwert. Beide Maßnahmen wirken oft auf denselben unnötigen Verbrauch.
 
 Seriöser ist ein Vorher-nachher-Vergleich:
 
@@ -225,7 +225,7 @@ Temperatur, Lüften und freie Heizkörper sind der Hebel, mit dem du deine Heizk
 
 ## Fazit: Heute anfangen, nächsten Monat prüfen
 
-Senk heute in einem überheizten Raum die Zieltemperatur um einen Grad. Stell den Heizkörper frei und notiere den Zählerstand. In vier Wochen prüfst du, ob Verbrauch und Komfort passen.
+ In vier Wochen prüfst du, ob Verbrauch und Komfort passen; das ist ein Beispielwert.
 
 So wird aus einem Spartipp ein messbares System. Tarif und Technik kommen danach – nicht statt der Verbrauchskontrolle.
 
@@ -234,7 +234,7 @@ So wird aus einem Spartipp ein messbares System. Tarif und Technik kommen danach
 ## Häufige Fragen
 
 ### Spart ein Grad weniger immer 6 %?
-Nein. Die 6 % sind ein grober Richtwert. Gebäude, Wetter, Ausgangstemperatur und Nutzungsverhalten beeinflussen das Ergebnis.
+ Die 6 % sind ein grober Richtwert; das ist ein Modellwert. Gebäude, Wetter, Ausgangstemperatur und Nutzungsverhalten beeinflussen das Ergebnis.
 
 ### Wird es auf Stufe 5 schneller warm?
 Nein. Ein Thermostat begrenzt die Zieltemperatur. Stufe 5 lässt länger heizen, beschleunigt die Anlage aber nicht automatisch.

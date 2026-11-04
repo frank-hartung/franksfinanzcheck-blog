@@ -51,7 +51,7 @@ Denn kleine Beträge haben eine unangenehme Eigenschaft: Sie fallen im Alltag ka
 
 1. Frugalismus heißt nicht Geiz, sondern **bewusste Prioritäten**.
 2. Die größten Hebel liegen oft bei **Fixkosten, Gewohnheiten und Impulskäufen**.
-3. Schon **20 € bis 50 € pro Monat** aus Kleinstbeträgen summieren sich auf mehrere hundert Euro im Jahr.
+ Schon **20 € bis 50 € pro Monat** aus Kleinstbeträgen summieren sich auf mehrere hundert Euro im Jahr; das ist ein Modellwert.
 4. Ein **Haushaltsbuch** oder eine einfache Ausgabenliste ist die Grundlage für echte Veränderungen.
 5. Wer Ersparnisse sofort sichert, macht aus guten Vorsätzen echte Ergebnisse.
 
@@ -89,7 +89,7 @@ Genau deshalb funktioniert Frugalismus so gut: Er setzt nicht erst bei der ganz 
 
 Ohne Überblick ist Sparen oft nur ein Bauchgefühl. Ein **Haushaltsbuch führen** klingt trocken, ist aber einer der wirksamsten Schritte überhaupt.
 
-Du musst dafür kein Excel-Monster bauen. Es reicht, wenn du zwei oder drei Monate sauber mitschreibst:
+Du musst dafür kein Excel-Monster bauen. Es reicht, wenn du zwei oder drei Monate sauber mitschreibst:. Das ist ein Beispielwert.
 
 - Miete und Nebenkosten
 - Strom, Gas, Internet, Handy
@@ -100,7 +100,7 @@ Du musst dafür kein Excel-Monster bauen. Es reicht, wenn du zwei oder drei Mona
 
 ### Warum das so stark wirkt
 
-Viele Menschen wissen grob, wofür sie Geld ausgeben. Genaue Zahlen verändern aber die Perspektive. Erst wenn du schwarz auf weiß siehst, dass du **79 €** für Streaming, Apps und digitale Kleindienste zahlst, entsteht echter Handlungsdruck.
+ Erst wenn du schwarz auf weiß siehst, dass du **79 €** für Streaming, Apps und digitale Kleindienste zahlst, entsteht echter Handlungsdruck; das ist ein Modellwert.
 
 **Praxis-Tipp:** Fang nicht mit Perfektion an. Eine simple Notiz-App, eine Tabelle oder ein Zettel reichen völlig. Wichtig ist die Ehrlichkeit, nicht das Tool.
 

@@ -41,7 +41,7 @@ faktencheck: "2026-09-27"
 
 Im Kern geht es darum, Geld nicht automatisch auszugeben, nur weil es gerade bequem ist. Du senkst teure Routinen, streichst Ballast und gibst bewusster für das aus, was dir wirklich wichtig ist. Das ist kein Verzichtsprojekt. Das ist saubere Prioritätensetzung.
 
-Wer damit anfängt, muss nicht sofort alles umkrempeln. Schon ein oder zwei gute Gewohnheiten schaffen oft **50 € bis 200 € mehr Spielraum im Monat**. Genau darum geht es in diesen **5 einfachen Frugalismus-Tricks für den Alltag**.
+ Schon ein oder zwei gute Gewohnheiten schaffen oft **50 € bis 200 € mehr Spielraum im Monat**; das ist ein Modellwert. Genau darum geht es in diesen **5 einfachen Frugalismus-Tricks für den Alltag**.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 

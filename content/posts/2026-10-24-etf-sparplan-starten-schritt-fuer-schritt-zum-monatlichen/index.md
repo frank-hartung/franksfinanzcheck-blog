@@ -35,7 +35,7 @@ quellen:
 faktencheck: 2026-10-07
 ---
 
-Jeden Monat kommt dein Gehalt auf das Konto. Davon bleiben am Ende vielleicht 50 € für dich frei. Du willst dieses Geld nicht einfach nur auf dem Sparbuch parken. Dein Ziel ist es, das Kapital langfristig und sicher zu vermehren.
+ Davon bleiben am Ende vielleicht 50 € für dich frei; das ist ein Modellwert. Du willst dieses Geld nicht einfach nur auf dem Sparbuch parken. Dein Ziel ist es, das Kapital langfristig und sicher zu vermehren.
 
 Du hast sicher schon von einem ETF-Sparplan gehört. Aber welche Schritte sind für den Start wirklich nötig?
 
@@ -81,7 +81,7 @@ Bei einem günstigen Anbieter liegen deine Kosten unter 0,2 % des Kapitals; das
 
 ## So wählst du den passenden ETF
 
-Zuerst entscheidest du dich für einen breiten Markt. Ein Index wie der MSCI World enthält über 1.500 Firmen aus der ganzen Welt.
+ Ein Index wie der MSCI World enthält über 1.500 Firmen aus der ganzen Welt; das ist ein Beispielwert.
 
 Auch der Euro-Stoxx-50 mit den größten Firmen der Eurozone ist eine Option. Prüfe danach immer die TER des Fonds. Ein niedriger Wert erhöht deine Rendite über die lange Laufzeit.
 

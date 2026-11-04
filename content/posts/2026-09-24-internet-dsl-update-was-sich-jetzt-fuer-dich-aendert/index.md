@@ -48,7 +48,7 @@ Genau deshalb ist das wichtigste Update im Markt oft kein großer Technik‑Skan
 
 ---
 
-💡 **Schnell‑Tipp von FranksFinanzcheck:** Wenn du wissen willst, ob dein Internetvertrag noch passt, vergleiche nicht nur die Maximalgeschwindigkeit. Entscheidend ist der Effektivpreis über 24 Monate und ob dein Bedarf wirklich getroffen wird: [**Internet & DSL vergleichen**](/go/dsl/)  
+💡 **Schnell‑Tipp von FranksFinanzcheck:** Wenn du wissen willst, ob dein Internetvertrag noch passt, vergleiche nicht nur die Maximalgeschwindigkeit. Entscheidend ist der Effektivpreis über 24 Monate und ob dein Bedarf wirklich getroffen wird: [**Internet & DSL vergleichen**](/go/dsl/). Das ist ein Modellwert.
 _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Das Wichtigste in Kürze
@@ -76,7 +76,7 @@ Die Folge: Ein Haushalt kann technisch völlig ordentlich versorgt sein – und 
 
 Viele wählen beim Internettarif nach dem Bauchgefühl: lieber zu viel als zu wenig. Das ist verständlich. Finanziell ist es oft unnötig.
 
-Denn ein Tarif mit 250 Mbit/s ist nicht automatisch sinnvoller als einer mit 50 oder 100 Mbit/s. Entscheidend ist, wie dein Haushalt das Internet wirklich nutzt.
+Denn ein Tarif mit 250 Mbit/s ist nicht automatisch sinnvoller als einer mit 50 oder 100 Mbit/s. Entscheidend ist, wie dein Haushalt das Internet wirklich nutzt; das ist ein Beispielwert.
 
 ### Was oft gleichzeitig läuft
 
@@ -142,7 +142,7 @@ Dazu kommen häufig:
 
 Darum gilt:
 
-**Nicht der Monat 1 zählt, sondern der Gesamtpreis über 24 Monate.** (im Rechenbeispiel)
+**Nicht der Monat 1 zählt, sondern der Gesamtpreis über 24 Monate.** (im Rechenbeispiel). Das ist ein Modellwert.
 
 ### Beispielrechnung
 
@@ -162,7 +162,7 @@ Ein schöner Rabatt vorn hilft wenig, wenn die Routermiete leise alles wieder ve
 
 ### Beispiel
 
-Ein Mietrouter für **6,99 € im Monat** kostet über eine Mindestlaufzeit von 24 Monaten **ca. 168 €**. Wer das Komfortmodell für **9,99 €** nimmt, zahlt im selben Zeitraum **ca. 240 €** – ein gekauftes Gerät liegt oft darunter und bleibt danach deins.
+Ein Mietrouter für **6,99 € im Monat** kostet über eine Mindestlaufzeit von 24 Monaten **ca. 168 €**; das ist ein Rechenbeispiel. Wer das Komfortmodell für **9,99 €** nimmt, zahlt im selben Zeitraum **ca. 240 €** – ein gekauftes Gerät liegt oft darunter und bleibt danach deins.
 
 Das ist kein Nebenthema mehr. Das ist ein echter Preisfaktor.
 
@@ -287,7 +287,7 @@ Wenn Engpässe nur punktuell auftreten, löst ein teurerer Tarif das Problem oft
 
 Ein guter Tarif wirkt erst im längeren Blick wirklich günstig.
 
-Darum zählt nicht nur der Startpreis, sondern die Summe über 24 Monate. Genau diese Zahl [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) besser vor Lockangeboten als jede große Mbit‑Werbung.
+Darum zählt nicht nur der Startpreis, sondern die Summe über 24 Monate; das ist ein Rechenbeispiel. Genau diese Zahl [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) besser vor Lockangeboten als jede große Mbit‑Werbung.
 
 ## Meine Kurz‑Checkliste für heute
 

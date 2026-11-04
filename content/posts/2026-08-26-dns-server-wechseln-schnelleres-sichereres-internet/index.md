@@ -88,7 +88,7 @@ Die folgenden IPv4-Adressen stammen aus den aktuellen Anbieterunterlagen. Nutze 
 
 ### Cloudflare 1.1.1.1
 
-Der Standardresolver löst Anfragen ohne Inhaltsfilter. Für IPv6 nennt Cloudflare `2606:4700:4700:1111` und `2606:4700:4700:1001`. Die Varianten `1.1.1.2` und `1.0.0.2` filtern bekannte Malware- und Phishing-Domains. `1.1.1.3` und `1.0.0.3` ergänzen einen Filter für Erwachseneninhalte.
+ Für IPv6 nennt Cloudflare `2606:4700:4700:1111` und `2606:4700:4700:1001`; das ist ein Modellwert. Die Varianten `1.1.1.2` und `1.0.0.2` filtern bekannte Malware- und Phishing-Domains. `1.1.1.3` und `1.0.0.3` ergänzen einen Filter für Erwachseneninhalte.
 
 Wenn dein Gerät IPv6 nutzt, trage auch bei DNSv6 die passende Filtervariante ein. Sonst können Anfragen über eine ungefilterte Adresse laufen. Diese Filter sind keine vollständige Sicherheitssoftware. Sie können erwünschte Domains blockieren. [Adressen und Filtervarianten](https://developers.cloudflare.com/1.1.1.1/ip-addresses/)
 
@@ -96,13 +96,13 @@ Cloudflare verschlüsselt Anfragen über DoH oder DoT. Laut eigener Datenschutzb
 
 ### Google Public DNS
 
-Die IPv6-Adressen lauten `2001:4860:4860:8888` und `2001:4860:4860:8844`. Googles [Einrichtungsanleitung](https://developers.google.com/speed/public-dns/docs/using) erklärt die Konfiguration auf Routern und Endgeräten.
+Die IPv6-Adressen lauten `2001:4860:4860:8888` und `2001:4860:4860:8844`; das ist ein Beispielwert. Googles [Einrichtungsanleitung](https://developers.google.com/speed/public-dns/docs/using) erklärt die Konfiguration auf Routern und Endgeräten.
 
 Googles Datenschutzseite beschreibt temporäre Protokolle mit IP-Adresse und DNS-Anfrage. Diese werden nach kurzer Zeit gelöscht. Für Sicherheitsfälle kann eine längere Speicherung nötig sein. Dauerhafte, stichprobenbasierte Protokolle ohne Geräte-IP enthalten abgefragte Domains und grobe Standortangaben. Google erklärt, Daten nicht für personalisierte Werbung zu verwenden. Prüfe die [aktuelle Datenschutzbeschreibung](https://developers.google.com/speed/public-dns/privacy), wenn diese Bedingungen wichtig sind.
 
 ### Quad9
 
-Die IPv6-Adressen des Secure-Dienstes sind `2620:fe:fe` und `2620:fe:9`. Quad9 blockiert DNS-Anfragen an bekannte schädliche Domains. Der Anbieter erklärt, keine personenbezogenen Nutzerdaten zu sammeln. Die [Dienstvarianten](https://docs.quad9.net/services/) und [Datenschutzhinweise](https://quad9.net/service/privacy/) findest du bei Quad9. Ein DNS-Filter ersetzt weder Updates noch Virenschutz.
+Die IPv6-Adressen des Secure-Dienstes sind `2620:fe:fe` und `2620:fe:9`; das ist ein Modellwert. Quad9 blockiert DNS-Anfragen an bekannte schädliche Domains. Der Anbieter erklärt, keine personenbezogenen Nutzerdaten zu sammeln. Die [Dienstvarianten](https://docs.quad9.net/services/) und [Datenschutzhinweise](https://quad9.net/service/privacy/) findest du bei Quad9. Ein DNS-Filter ersetzt weder Updates noch Virenschutz.
 
 ## DNS-Wechsel ist nicht automatisch Verschlüsselung
 
