@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-04T18:16:32Z",
+  "generated_at": "2026-11-04T20:58:22Z",
   "modus": "kandidaten",
-  "commit": "230bf94461f562f7384164eb50cfdcb9680645ce",
+  "commit": "36428cb4a8f730f1ffeb9faae01637e678434331",
   "kapazitaet": {
     "stichtag": "2026-11-04",
     "artikel": 113,
@@ -166,7 +166,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -227,7 +227,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-29",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -384,7 +384,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
@@ -535,7 +535,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": {
@@ -1136,7 +1136,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
@@ -1449,7 +1449,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-14",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht": {
