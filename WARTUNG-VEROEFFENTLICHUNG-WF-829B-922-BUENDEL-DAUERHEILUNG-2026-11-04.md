@@ -173,6 +173,34 @@ die heute noch frisch sind. (Budget 4 × 1,00 Läufe/Tag)
 und mit Sockel 12 ist es still. Die Wache schlägt also an der Ursache an und
 verstummt, wenn die Ursache weg ist — nicht, weil sie abgeschaltet wurde.
 
+### 4.1 Nebenbefund: der Job `regression` flaked (nicht durch diese Änderung)
+
+Beim Abschluss wurde ein zweiter, unabhängiger Befund sichtbar — er ist für
+jede künftige Wartung wichtig:
+
+| Beobachtung | Messung |
+|---|---|
+| Derselbe Code, zwei Läufe | `0e9e88d3d` **success** · `67eaf5f2c` **failure** (nur Protokollzeile Unterschied) |
+| Fehlgeschlagener Schritt | **10** „Code-Regression – Suite und Selbsttests“; Schritt **11** „Uhr-Probe“ war in **beiden** Läufen **grün** |
+| Wiederholung desselben Jobs (`gh run rerun --failed`) | **success** — Schritt 10 *und* 11 grün |
+
+Der Job ist also **flaky**, nicht deterministisch kaputt. Zwei Konsequenzen:
+
+1. **Ein roter `regression`-Lauf ist kein Beweis gegen den Code.** Vor jeder
+   Ursachensuche erst wiederholen — sonst jagt man einen Fehler, den es nicht
+   gibt. Genau das ist am 04.11. zweimal passiert (einmal wurde sogar ein
+   fehlendes PyYAML im lokalen Prüfstand als Repo-Fehler gedeutet).
+2. **Die Uhr-Probe ist davon nicht betroffen** — sie war unter dem neuen
+   Code in beiden Läufen grün. Der Bündel-Fix wirkt in der CI, nicht nur
+   lokal.
+
+Die Ursache des Flakes ist mit den verfügbaren Mitteln **nicht** belegbar:
+Die Job-Logs sind über die API nicht abrufbar (`actions/jobs/<id>/logs` →
+`EOF`), und die Annotationen nennen nur „exit code 1“. Ihn zu heilen wäre
+Raten; ihn zu benennen ist Pflicht. Das gehört als eigenes Ticket in die
+Wartung (Kandidat: Netz-/API-Zugriffe in `scripts/tests` unter paralleler
+CI-Last).
+
 ---
 
 ## 5. Grenzen dieser Heilung (bewusst benannt)
@@ -190,6 +218,8 @@ verstummt, wenn die Ursache weg ist — nicht, weil sie abgeschaltet wurde.
    Ursache mit einem anderen Schließpfad und wird hier nicht mit einem
    größeren Limit zugedeckt.
 4. **Kein Auth-Fix.** Befund F ist ein Rechtebefund (HTTP 403), kein Code.
+5. **Der Flake in Schritt 10 ist nicht geheilt** (Abschnitt 4.1) — nur
+   benannt. Ohne abrufbares Log wäre jede „Heilung“ geraten.
 
 ---
 
