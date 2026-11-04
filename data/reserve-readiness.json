@@ -1,15 +1,15 @@
 {
   "target": 6,
-  "ready": 5,
+  "ready": 6,
   "pool_size": 7,
-  "generated_at": "2026-11-02T18:42:47Z",
+  "generated_at": "2026-11-04T11:40:57Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
       "ready": true,
       "sha256": "cb3bf3d7be2180edff5fcefa860e8623f50fa8a4c2727513861e1fe7ba87cd18",
       "flesch": 66.7,
-      "measured_at": "2026-11-02T11:36:55Z",
+      "measured_at": "2026-11-04T11:34:11Z",
       "score": 0.984,
       "parts": {
         "spelling": 0.92,
@@ -26,7 +26,7 @@
       "ready": true,
       "sha256": "026a4df794c249f5d138d8530485aac93a4e2f09abc336b0d00cf67c72704604",
       "flesch": 61.6,
-      "measured_at": "2026-11-02T11:37:49Z",
+      "measured_at": "2026-11-04T11:35:19Z",
       "score": 0.952,
       "parts": {
         "spelling": 0.94,
@@ -43,7 +43,7 @@
       "ready": true,
       "sha256": "ad0969c0a822afc57b2282b2d9f66fb4d39733404375d046a7826bfd20ceda8e",
       "flesch": 67.1,
-      "measured_at": "2026-11-02T11:38:42Z",
+      "measured_at": "2026-11-04T11:36:26Z",
       "score": 0.986,
       "parts": {
         "spelling": 1.0,
@@ -60,7 +60,7 @@
       "ready": true,
       "sha256": "fdfc2fd2dff9a1fe1417f996c5c3a30747b18a4a72397ad82c4306632a2fe1fc",
       "flesch": 67.3,
-      "measured_at": "2026-11-02T11:39:36Z",
+      "measured_at": "2026-11-04T11:37:34Z",
       "score": 0.962,
       "parts": {
         "spelling": 0.88,
@@ -74,16 +74,10 @@
     },
     {
       "slug": "2026-11-01-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-      "ready": false,
-      "sha256": "c75abe8518e9520387de143166fa75adba289e398287ea2bc1827fc6b5a778ba",
-      "flesch": 65.6,
-      "measured_at": "2026-11-02T18:41:38Z",
-      "reason": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: ide",
-      "details": [
-        "🛑 2026-11-01-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
-        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…hinweis dieser artikel dient ausschließlich der allgemeinen information und stellt…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…keine anlage rechts oder steuerberatung dar prüfe konditionen und bedingungen…“ – doppelte Passage, manuell reparieren",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
+      "ready": true,
+      "sha256": "23517e6e259b6abd902502dcc7cb07a35d3762baa2ec43f4a622e4c6dbf9731d",
+      "flesch": 66.6,
+      "measured_at": "2026-11-04T11:38:41Z",
       "score": 0.942,
       "parts": {
         "spelling": 0.92,
@@ -100,7 +94,7 @@
       "ready": true,
       "sha256": "722e590d7e31e5406851c4b421c5c3130c816ef23b6f3986fb2f25c102db8f7b",
       "flesch": 72.0,
-      "measured_at": "2026-11-02T11:41:25Z",
+      "measured_at": "2026-11-04T11:39:51Z",
       "score": 0.93,
       "parts": {
         "spelling": 0.9,
@@ -115,13 +109,13 @@
     {
       "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ready": false,
-      "sha256": "2e3fb324d16c7de532cc9b46b072b6efde9d46cbd760e02dfd0541b81e18ec6a",
-      "flesch": 71.5,
-      "measured_at": "2026-11-02T18:42:47Z",
-      "reason": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…wichtiger hinweis dieser artikel dient ausschließlich der allgemeinen information und…“ – doppelte Passage, manuell reparieren; R15-PHRASEN",
+      "sha256": "48f0721c9872533a8f7a49d5b17b6a968a6caa4d535d642d5f64767a07629eaf",
+      "flesch": 72.6,
+      "measured_at": "2026-11-04T11:40:57Z",
+      "reason": "Faktenfrische nicht bestanden: 0b564f460c41218244bd (luecke): Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.; 3ad2eefed314eb172c26 (luecke): Die Aussag",
       "details": [
-        "🛑 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
-        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…wichtiger hinweis dieser artikel dient ausschließlich der allgemeinen information und…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…stellt keine anlage rechts oder steuerberatung dar prüfe konditionen und…“ – doppelte Passage, manuell reparieren",
+        "🛑 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "Faktenfrische nicht bestanden: 0b564f460c41218244bd (luecke): Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.; 3ad2eefed314eb172c26 (luecke): Die Aussage, dass durch frühzeitige Bestellung Kosten um 10 % bis 20 % im Herbst eingespart werden können, ist unbelegt.; 43788c2cdcdfda52e753 (luecke): Die Modellrechnung verwendet einen Tiefpreis von 0,80 €/Liter, ohne dass diese Preisangabe belegt wird.; 5eedec8afbdef6a4ca49 (luecke): Es wird angegeben, dass typische Fehler beim Heizölkauf bis zu 15 % Mehrkosten verursachen können, jedoch fehlt ein Nachweis für diese Zahl.; 81881c5bc61824d25f5a (praezision): Die Faustregel, dass man bestellen sollte, wenn Preise vier Wochen unter dem Schnitt der letzten 12 Monate liegen, wird ohne Messgrundlage oder Quelle genannt.",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
       ],
       "score": 0.996,
@@ -137,16 +131,8 @@
     }
   ],
   "measurement": {
-    "kind": "partial",
-    "run_id": "41502682081",
+    "kind": "full",
+    "run_id": "41819864260",
     "run_attempt": "1"
-  },
-  "recert": {
-    "at": "2026-11-02T18:42:47Z",
-    "renewed": [
-      "2026-11-01-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-      "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu"
-    ],
-    "tool": "scripts/reserve_recert.py"
   }
 }
