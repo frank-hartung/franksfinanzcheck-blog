@@ -55,6 +55,10 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 *Abbildung: Merkkarte zu „Gasrechnung senken: Fehler im Spätsommer vermeiden“ (eigene Darstellung aus diesem Beitrag).*
 
+![Merkkarte: Kernaussagen zu Gasrechnung senken: Fehler im Spätsommer vermeiden](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte zu „Gasrechnung senken: Fehler im Spätsommer vermeiden“ (eigene Darstellung aus diesem Beitrag).*
+
 ## Starte mit einem kleinen Check
 
 
@@ -180,6 +184,10 @@ Bei angenommenen 2.000 € verbrauchsabhängigen Heizkosten wären 6 % rechner
 Eines noch: Du darfst die Effekte nicht einfach addieren. Lies den Zähler jeden Monat ab. So siehst du schwarz auf weiß, was deine Schritte wirklich bringen.
 
 ![Gliederung des Beitrags: Gasrechnung senken: Fehler im Spätsommer vermeiden](abbildung-ablauf. svg)
+
+*Abbildung: Gliederung zu „Gasrechnung senken: Fehler im Spätsommer vermeiden“ – 5 Stationen von „Starte mit einem kleinen Check“ bis „Fehler 4: Den Heizungs-Check bis zum ersten Frost verschieben“ (eigene Darstellung).*
+
+![Gliederung des Beitrags: Gasrechnung senken: Fehler im Spätsommer vermeiden](abbildung-ablauf.svg)
 
 *Abbildung: Gliederung zu „Gasrechnung senken: Fehler im Spätsommer vermeiden“ – 5 Stationen von „Starte mit einem kleinen Check“ bis „Fehler 4: Den Heizungs-Check bis zum ersten Frost verschieben“ (eigene Darstellung).*
 

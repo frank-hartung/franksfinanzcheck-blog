@@ -45,6 +45,10 @@ faktencheck: 2026-10-14
 
 *Abbildung: Merkkarte zu „Last Minute Urlaub: So findest du echte Reiseschnäppchen“ (eigene Darstellung aus diesem Beitrag).*
 
+![Merkkarte: Kernaussagen zu Last Minute Urlaub: So findest du echte Reiseschnäppchen](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte zu „Last Minute Urlaub: So findest du echte Reiseschnäppchen“ (eigene Darstellung aus diesem Beitrag).*
+
 ## Last-Minute-Urlaub: So ordnest du mögliche Preisvorteile ein
 
 Kurzfristige Angebote können günstiger sein. Doch ein Preisvorteil ist nicht planbar. Eine 2026 von WELT zitierte Verbraucherexpertin hält die mögliche Ersparnis für schwer vorhersehbar. Nachlässe von bis zu 50 % seien Einzelfälle. Sie sind keine verlässliche Erwartung ([Einordnung zu Last-Minute-Angeboten](https://www.welt.de/reise/article6a327762e495aff7b58467a5/last-minute-urlaub-winken-wirklich-die-besten-schnaeppchen-wenn-man-auf-den-letzten-druecker-bucht.html)).
@@ -154,6 +158,10 @@ Vergleiche nur Angebote mit ähnlichen Leistungen. Prüfe bei Mietwagen Kaution,
 Die folgenden Zahlen sind frei gewählte Rechenannahmen und keine aktuellen Marktpreise. Angebot A kostet 500 € für Flug und Unterkunft, dazu kommen 60 € für Gepäck und 40 € für Transfers: zusammen 600 €. Angebot B kostet 540 € und enthält das Gepäck. Der Transfer kostet 20 €: zusammen 560 €.
 
 Auf dieser Annahme wäre Angebot B um 40 € günstiger. Das gilt nur, wenn Reisedauer, Unterkunft, Verpflegung und Stornobedingungen ebenfalls vergleichbar sind. Ein niedrigerer Einstiegspreis allein reicht nicht für die Entscheidung.
+
+![Gliederung des Beitrags: Last Minute Urlaub: So findest du echte Reiseschnäppchen](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung zu „Last Minute Urlaub: So findest du echte Reiseschnäppchen“ – 5 Stationen von „Last-Minute-Urlaub: So ordnest du mögliche Preisvorteile ein“ bis „Typische Fehler, die das Urlaubsbudget belasten“ (eigene Darstellung).*
 
 ## Checkliste vor der Buchung
 

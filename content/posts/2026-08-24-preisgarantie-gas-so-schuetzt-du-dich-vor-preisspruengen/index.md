@@ -55,6 +55,10 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 *Abbildung: Merkkarte zu „Preisgarantie Gas: Was bei Preiserhöhung hilft“ (eigene Darstellung aus diesem Beitrag).*
 
+![Merkkarte: Kernaussagen zu Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte zu „Preisgarantie Gas: Was bei Preiserhöhung hilft“ (eigene Darstellung aus diesem Beitrag).*
+
 ## Wenn ein neuer Preis im Brief steht
 
 Leg das Schreiben neben deinen Vertrag. Markiere den alten und den neuen Preis je kWh. Markiere auch den Tag, an dem der neue Preis gelten soll. Suche danach die Stelle zum Preis-Schutz. So erkennst du, ob der Grund im Brief zu dem Schutz im Vertrag passt.
@@ -139,6 +143,10 @@ Rechne den neuen Jahrespreis aus und vergleiche ihn. Wenn ein Sonderkündigungsr
 ### Wenn die Frist knapp ist
 
 Kündige selbst, schriftlich, und verlange eine Bestätigung. Beim normalen Wechsel kann der neue Anbieter die Kündigung für dich übernehmen. Bei einer Sonderkündigung rät die Bundesnetzagentur: Handle selbst.
+
+![Gliederung des Beitrags: Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung zu „Preisgarantie Gas: Was bei Preiserhöhung hilft“ – 5 Stationen von „Wenn ein neuer Preis im Brief steht“ bis „Preisänderung erhalten: diese fünf Punkte markieren“ (eigene Darstellung).*
 
 ## Jahrespreis nach einer Erhöhung rechnen
 

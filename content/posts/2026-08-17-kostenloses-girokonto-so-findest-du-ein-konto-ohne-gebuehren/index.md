@@ -56,6 +56,10 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 *Abbildung: Merkkarte zu „Kostenloses Girokonto: Ein Konto ohne Gebühren finden“ (eigene Darstellung aus diesem Beitrag).*
 
+![Merkkarte: Kernaussagen zu Kostenloses Girokonto: Ein Konto ohne Gebühren finden](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte zu „Kostenloses Girokonto: Ein Konto ohne Gebühren finden“ (eigene Darstellung aus diesem Beitrag).*
+
 ## Das Wichtigste in Kürze
 
 - Ein echtes kostenloses Konto zeichnet sich durch 0 € Kontoführung aus, oft gekoppelt an einen Mindestgeldeingang als Modellwert.
@@ -178,6 +182,10 @@ Der typische Ablauf ist heute kinderleicht:
 Lass dein altes Konto noch zwei bis drei Monate offen. So siehst du, ob auch der Beitrag für die Versicherung sauber umzieht. Erst danach kündigst du.
 
 ![Gliederung des Beitrags: Kostenloses Girokonto: Ein Konto ohne Gebühren finden](abbildung-ablauf. svg)
+
+*Abbildung: Gliederung zu „Kostenloses Girokonto: Ein Konto ohne Gebühren finden“ – 5 Stationen von „Was ein Girokonto wirklich teuer macht“ bis „Girocard oder Debitkarte – was brauchst du wirklich?“ (eigene Darstellung).*
+
+![Gliederung des Beitrags: Kostenloses Girokonto: Ein Konto ohne Gebühren finden](abbildung-ablauf.svg)
 
 *Abbildung: Gliederung zu „Kostenloses Girokonto: Ein Konto ohne Gebühren finden“ – 5 Stationen von „Was ein Girokonto wirklich teuer macht“ bis „Girocard oder Debitkarte – was brauchst du wirklich?“ (eigene Darstellung).*
 

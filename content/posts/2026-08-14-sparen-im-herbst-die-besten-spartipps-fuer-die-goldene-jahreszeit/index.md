@@ -54,6 +54,10 @@ _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über eine
 
 *Abbildung: Merkkarte zu „Sparen im Herbst: Spartipps für die goldene Jahreszeit“ (eigene Darstellung aus diesem Beitrag).*
 
+![Merkkarte: Kernaussagen zu Sparen im Herbst: Spartipps für die goldene Jahreszeit](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte zu „Sparen im Herbst: Spartipps für die goldene Jahreszeit“ (eigene Darstellung aus diesem Beitrag).*
+
 ## Welche Sparhebel lohnen sich im Herbst besonders?
 
 ### 1. Kfz‑Versicherungswechsel zum Stichtag 30. November
@@ -257,6 +261,10 @@ Wenn der Herbst so läuft, startest du mit Puffer ins neue Jahr. Du zahlst keine
 <!-- premium-length-2026-b -->
 
 ![Gliederung des Beitrags: Sparen im Herbst: Spartipps für die goldene Jahreszeit](abbildung-ablauf. svg)
+
+*Abbildung: Gliederung zu „Sparen im Herbst: Spartipps für die goldene Jahreszeit“ – 5 Stationen von „Welche Sparhebel lohnen sich im Herbst besonders?“ bis „Weihnachtskonto im September“ (eigene Darstellung).*
+
+![Gliederung des Beitrags: Sparen im Herbst: Spartipps für die goldene Jahreszeit](abbildung-ablauf.svg)
 
 *Abbildung: Gliederung zu „Sparen im Herbst: Spartipps für die goldene Jahreszeit“ – 5 Stationen von „Welche Sparhebel lohnen sich im Herbst besonders?“ bis „Weihnachtskonto im September“ (eigene Darstellung).*
 

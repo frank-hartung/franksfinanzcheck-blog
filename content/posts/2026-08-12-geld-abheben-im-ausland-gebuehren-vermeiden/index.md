@@ -56,6 +56,10 @@ Wer diese zwei Posten auseinanderhält, kann schon vor der Reise entscheiden, mi
 
 *Abbildung: Merkkarte zu „Geld abheben im Ausland: Wo die Gebühren wirklich entstehen“ (eigene Darstellung aus diesem Beitrag).*
 
+![Merkkarte: Kernaussagen zu Geld abheben im Ausland: Wo die Gebühren wirklich entstehen](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte zu „Geld abheben im Ausland: Wo die Gebühren wirklich entstehen“ (eigene Darstellung aus diesem Beitrag).*
+
 ## Kurz gefasst
 
 * **Zwei Stellen rechnen ab:** Der Betreiber vor Ort und deine Bank zu Hause.
@@ -139,6 +143,10 @@ Die drei Gebührenarten, die dir am Automaten begegnen, auf einen Blick:
 5. **Prüfe den Beleg, bevor du ihn wegwirfst.** Betrag in Landeswährung, angezeigter Kurs und Entgelt stehen darauf.
 
 ![Gliederung des Beitrags: Geld abheben im Ausland: Wo die Gebühren wirklich entstehen](abbildung-ablauf. svg)
+
+*Abbildung: Gliederung zu „Geld abheben im Ausland: Wo die Gebühren wirklich entstehen“ – 5 Stationen von „Kurz gefasst“ bis „Modellrechnung: Vier Abhebungen im Urlaub“ (eigene Darstellung).*
+
+![Gliederung des Beitrags: Geld abheben im Ausland: Wo die Gebühren wirklich entstehen](abbildung-ablauf.svg)
 
 *Abbildung: Gliederung zu „Geld abheben im Ausland: Wo die Gebühren wirklich entstehen“ – 5 Stationen von „Kurz gefasst“ bis „Modellrechnung: Vier Abhebungen im Urlaub“ (eigene Darstellung).*
 

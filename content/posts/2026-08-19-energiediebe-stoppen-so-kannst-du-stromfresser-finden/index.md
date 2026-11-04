@@ -41,6 +41,10 @@ Du willst Energiediebe stoppen? Die Stromrechnung steigt. Muss da gleich der alt
 
 Darum gilt bei Stromfressern eine einfache Regel: **erst messen, dann rechnen, dann entscheiden**. So sparst du mehr als mit einem Kauf aus schlechtem Gewissen.
 
+![Merkkarte: Kernaussagen zu Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte zu „Energiediebe stoppen: So kannst du Stromfresser finden“ (eigene Darstellung aus diesem Beitrag).*
+
 ## Dein Schnellstart – Energiediebe stoppen
 
 Beginne mit einem Gerät. Wähle einen typischen Tag. Lies den Zähler ab. Miss den Verbrauch.
@@ -153,6 +157,10 @@ Dein altes Gerät verbraucht gemessen 310 kWh im Jahr; das ist eine Modellannahm
 - Einfache Amortisationszeit: **rund 10,3 Jahre**
 
 Daraus folgt aber noch kein klares Ja. Geht das alte Gerät ohnehin bald kaputt, sieht die Rechnung anders aus. Läuft es gut, ist Weiternutzen oft die klügere Wahl.
+
+![Gliederung des Beitrags: Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung zu „Energiediebe stoppen: So kannst du Stromfresser finden“ – 5 Stationen von „Dein Schnellstart – Energiediebe stoppen“ bis „Die Kostenformel, die du wirklich brauchst“ (eigene Darstellung).*
 
 ## Was du nach der Messung mit dem Ergebnis machst
 

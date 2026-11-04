@@ -50,6 +50,10 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 *Abbildung: Merkkarte zu „50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken“ (eigene Darstellung aus diesem Beitrag).*
 
+![Merkkarte: Kernaussagen zu 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte zu „50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken“ (eigene Darstellung aus diesem Beitrag).*
+
 ## Das Wichtigste in Kürze
 
 1. Die 50–30–20-Regel teilt dein **Nettoeinkommen** in drei Bereiche.
@@ -220,6 +224,10 @@ Mehr Netto heißt nicht automatisch [mehr Freiheit](../../posts/2026-08-24-mehr-
 ![Gliederung des Beitrags: 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](abbildung-ablauf. svg)
 
 *Abbildung: Gliederung zu „50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken“ – 5 Stationen von „Was bedeutet die 50-30-20-Regel konkret?“ bis „Der größte Hebel liegt oft bei den 50 %“ (eigene Darstellung).*
+
+![Gliederung des Beitrags: 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung zu „50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken“ – 5 Stationen von „Was bedeutet die 50-30-20-Regel konkret?“ bis „Der größte Hebel liegt oft bei den 50 %“ (eigene Darstellung).*
 
 ## Was tun, wenn 50-30-20 gerade nicht passt?
 
