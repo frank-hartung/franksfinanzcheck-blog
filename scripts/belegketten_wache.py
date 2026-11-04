@@ -33,6 +33,23 @@ gelesen. Ein definitives 404 dagegen ist ein Befund. Für automatische
 Queue-Erledigung verlangt ``--require-complete`` zusätzlich einen Abruf ohne
 unklare oder umgeleitete Quellen. Lesefehler blockieren immer mit ``--strict``.
 
+TRANSPORTVERTRAG (Prüfqueue #1024, 03.11.2026)
+----------------------------------------------
+Der Direktabruf nutzt ``net_safety.sicherer_abruf_status`` (**2** Werte:
+Status, End-URL), der Ersatzweg über den Bundesrechts-Spiegel nutzt
+``net_safety.sicherer_abruf`` (**3** Werte: Status, Köpfe, Bytes). Bis zum
+03.11.2026 entpackte der Spiegel-Adapter nur zwei Werte. Jeder Ersatzabruf
+warf deshalb ``ValueError: too many values to unpack``; die Wache schluckte
+ihn als „unklar“ und meldete die GII-Zitate Tag für Tag erneut. Der Vertrag
+steht jetzt im Selbsttest und in ``scripts/tests/test_belegketten_wache.py``:
+Ein injizierter 2-Tupel-Ersatz prüft die Logik, ein Test mit dem **echten**
+Adapter prüft den Transport. Beides ist nötig – die Logik war nie kaputt.
+
+Jeder Ersatzbefund ist im Bericht sichtbar (``pruefpfad``, geprüfte
+Spiegeldatei, Grund). Ein ``ok`` über den Spiegel bedeutet ausschließlich:
+die zitierte Norm existiert im täglichen Bundesrechtsbestand. Es ist **keine**
+Inhaltsprüfung des Artikels und keine neue fachliche Freigabe.
+
 Die Wache schreibt keinen Inhalt. Sie entscheidet nichts. Sie zeigt nur,
 wo eine Prüfung fällig ist – die Entscheidung bleibt redaktionell.
 
@@ -70,6 +87,12 @@ UMGELEITET = "umgeleitet"
 UNKLAR = "unklar"
 OK = "ok"
 
+# Herkunft eines Ergebnisses. ``pruefpfad`` ist die maschinenlesbare Wahrheit;
+# ``hinweis`` ist der Satz für Menschen. Beides darf nie widersprüchlich sein.
+PFAD_DIREKT = "direkt"
+PFAD_SPIEGEL = "bundesrechts-spiegel"
+PFAD_UNKLAR = "unklar"
+
 _GII_BASIS_HOST = "gesetze-im-internet.de"
 _GII_SPIEGEL_BASIS = "https://raw.githubusercontent.com/Gesetze-fuer-KI/bundesrecht/main"
 _GII_MAX_BYTES = 8 * 1024 * 1024
@@ -96,7 +119,7 @@ def _nur_sprachpfad(zitat: str, end_url: str) -> bool:
     """Weiterleitung, die nur den Sprachpfad der GLEICHEN Seite ergänzt.
 
     Befund 26.10.2026 (Prüfqueue #826): `https://kontenvergleich.bafin.de/`
-    antwortet mit 200 auf `…/de`. Die Wache meldete das als „anderer Endpunkt"
+    antwortet mit 200 auf `…/de`. Die Wache meldete das als „anderer Endpunkt“
     – zwei Artikel standen dadurch dauerhaft als Prüfauftrag in der YMYL-Queue,
     obwohl unter dem Ziel dieselbe Seite in der deutschen Fassung liegt. Ein
     Sprachpräfix ist aber ein Umzug des Inhaltsverzeichnisses, kein
@@ -139,11 +162,19 @@ def abruf_http(url: str, timeout: float = 10.0) -> tuple[int, str]:
 
 
 def abruf_gii_spiegel_http(url: str, timeout: float = 10.0) -> tuple[int, str]:
-    """Lädt den täglich synchronisierten GII-Bundesrecht-Spiegel über net_safety."""
+    """Lädt den täglich synchronisierten GII-Bundesrecht-Spiegel über net_safety.
+
+    Prüfqueue #1024: ``sicherer_abruf`` liefert **drei** Werte
+    ``(status, antwort_koepfe, bytes)`` – nicht zwei wie
+    ``sicherer_abruf_status``. Der frühere 2er-Unpack warf bei jedem Abruf
+    ``ValueError``, den ``_pruefe_gii_spiegel`` als „unklar“ verschluckte.
+    Damit war der gesamte Ersatzweg seit dem 30.10.2026 wirkungslos, obwohl
+    alle Logiktests mit injizierten 2-Tupeln grün waren.
+    """
     from net_safety import sicherer_abruf
 
     try:
-        status, nutzlast = sicherer_abruf(
+        status, _koepfe, nutzlast = sicherer_abruf(
             url,
             headers={"User-Agent": USER_AGENT},
             timeout=timeout,
@@ -276,54 +307,89 @@ def _spiegel_pruefe_einzelnorm(
     return gefunden, aktiv
 
 
+def _unklar_mit_grund(
+    basis: dict, grund: str, *, spiegel_url: str | None = None
+) -> dict:
+    """Kopie eines unklaren Befunds MIT sichtbarem Grund (D23, #1024).
+
+    Ein still geschluckter Transportfehler lässt die Redaktion im Unklaren
+    darüber, ob die Primärquelle oder der Ersatzweg ausgefallen ist. Deshalb
+    trägt auch der fail-closed-Ausgang den Grund und den Prüfpfad. War bereits
+    eine Spiegeldatei adressiert, bleibt deren URL selbst beim Fehler sichtbar.
+    """
+    kopie = dict(basis)
+    kopie["hinweis"] = grund
+    kopie["pruefpfad"] = PFAD_UNKLAR
+    if spiegel_url is not None:
+        kopie["spiegel_url"] = spiegel_url
+    return kopie
+
+
+def _spiegel_tot(zitat: str, spiegel_url: str, befund: str) -> dict:
+    """Harter Normbefund mit der geprüften Spiegeladresse als Belegstelle."""
+    return {
+        "status": TOT,
+        "zitat": zitat,
+        "end_url": "",
+        "befund": befund,
+        "hinweis": (
+            "Befund stützt sich auf den Bundesrechts-Spiegel, nicht auf die "
+            "amtliche Seite – vor jeder Textänderung redaktionell gegen die "
+            "Primärquelle verifizieren"
+        ),
+        "spiegel_url": spiegel_url,
+        "pruefpfad": PFAD_SPIEGEL,
+    }
+
+
 def _pruefe_gii_spiegel(
     zitat: str, basis: dict, *, spiegel_abruf, timeout: float
 ) -> dict:
     """Fail-closed Normprüfung über den täglichen GII-Spiegel bei Runner-Blockade."""
     zerlegt = _parse_gii_ziel(zitat)
     if zerlegt is None:
-        return basis
+        return _unklar_mit_grund(
+            basis, "keine kanonische GII-Adresse – Spiegelprüfung nicht anwendbar"
+        )
     slug, einzelnorm = zerlegt
     spiegel_url = _gii_spiegel_url(slug)
     try:
         status, inhalt = spiegel_abruf(spiegel_url, timeout=timeout)
-    except Exception:  # noqa: BLE001 – auch Spiegel nicht erreichbar → bleibt unklar
-        return basis
+    except Exception as exc:  # noqa: BLE001 – auch der Ersatzweg darf nie „ok“ erfinden
+        return _unklar_mit_grund(
+            basis,
+            f"Direktabruf blockiert und Bundesrechts-Spiegel nicht auswertbar "
+            f"({type(exc).__name__}) – fail-closed unklar",
+            spiegel_url=spiegel_url,
+        )
     if status in (404, 410):
-        return {
-            "status": TOT,
-            "zitat": zitat,
-            "end_url": "",
-            "befund": (
-                f"Gesetz/Verordnung '{slug}' im aktuellen Bundesrechtsbestand "
-                f"nicht mehr vorhanden (Spiegel HTTP {status})"
-            ),
-        }
+        return _spiegel_tot(
+            zitat, spiegel_url,
+            f"Gesetz/Verordnung '{slug}' im aktuellen Bundesrechtsbestand "
+            f"nicht mehr vorhanden (Spiegel HTTP {status})",
+        )
     if not (200 <= status < 300) or not _spiegel_bestaetigt_quelle(inhalt, slug):
-        return basis
+        return _unklar_mit_grund(
+            basis,
+            f"Spiegelantwort nicht belastbar (HTTP {status} oder Herkunft nicht "
+            "bestätigt) – fail-closed unklar",
+            spiegel_url=spiegel_url,
+        )
     if einzelnorm is not None:
         gefunden, aktiv = _spiegel_pruefe_einzelnorm(inhalt, einzelnorm)
         bezeichnung = f"{einzelnorm[0]} {einzelnorm[1]}".strip()
         if not gefunden:
-            return {
-                "status": TOT,
-                "zitat": zitat,
-                "end_url": "",
-                "befund": (
-                    f"Einzelnorm {bezeichnung} in '{slug}' nicht vorhanden – "
-                    "Beleg trägt nicht mehr"
-                ),
-            }
+            return _spiegel_tot(
+                zitat, spiegel_url,
+                f"Einzelnorm {bezeichnung} in '{slug}' nicht vorhanden – "
+                "Beleg trägt nicht mehr",
+            )
         if not aktiv:
-            return {
-                "status": TOT,
-                "zitat": zitat,
-                "end_url": "",
-                "befund": (
-                    f"Einzelnorm {bezeichnung} in '{slug}' ist weggefallen – "
-                    "Beleg trägt nicht mehr"
-                ),
-            }
+            return _spiegel_tot(
+                zitat, spiegel_url,
+                f"Einzelnorm {bezeichnung} in '{slug}' ist weggefallen – "
+                "Beleg trägt nicht mehr",
+            )
     return {
         "status": OK,
         "zitat": zitat,
@@ -333,6 +399,8 @@ def _pruefe_gii_spiegel(
             "Direktabruf durch GII-Runner-Filter blockiert; "
             "aktiver Normbestand über täglichen Bundesrechts-Spiegel bestätigt"
         ),
+        "spiegel_url": spiegel_url,
+        "pruefpfad": PFAD_SPIEGEL,
     }
 
 
@@ -340,13 +408,22 @@ def pruefe_quelle(
     url: str, *, abruf=None, spiegel_abruf=None, timeout: float = 10.0,
     direkt_timeout: float | None = None,
 ) -> dict:
-    """Ein Zitat prüfen. ``abruf`` und ``spiegel_abruf`` sind injizierbar."""
+    """Ein Zitat prüfen. ``abruf`` und ``spiegel_abruf`` sind injizierbar.
+
+    Injektionsregel (#1024): Wer nur ``abruf`` injiziert, schaltet den
+    Ersatzweg bewusst ab – Offline-Tests dürfen nie ins Netz. Die Produktion
+    ruft ohne Injektion auf; dort läuft der echte Spiegel-Adapter. Wer den
+    echten Adapter prüfen will, injiziert ihn ausdrücklich als
+    ``spiegel_abruf`` (siehe Transportvertrag im Selbsttest und in den
+    Unit-Tests).
+    """
     nutze_spiegel = spiegel_abruf or (abruf_gii_spiegel_http if abruf is None else None)
     abruf = abruf or abruf_http
     zitat = str(url or "").strip()
     if not zitat.startswith("https://"):
         return {"status": TOT, "zitat": zitat, "end_url": "",
-                "befund": "keine HTTPS-Quelle – als Beleg unzulässig"}
+                "befund": "keine HTTPS-Quelle – als Beleg unzulässig",
+                "pruefpfad": PFAD_DIREKT}
     eff_timeout = timeout if direkt_timeout is None else direkt_timeout
     basis_unklar: dict | None = None
     try:
@@ -359,7 +436,8 @@ def pruefe_quelle(
             }
         else:
             return {"status": TOT, "zitat": zitat, "end_url": "",
-                    "befund": f"HTTP {exc.code} – Beleg nicht mehr abrufbar"}
+                    "befund": f"HTTP {exc.code} – Beleg nicht mehr abrufbar",
+                    "pruefpfad": PFAD_DIREKT}
     except Exception as exc:  # noqa: BLE001 – Netzfehler sind kein Befund
         basis_unklar = {
             "status": UNKLAR, "zitat": zitat, "end_url": "",
@@ -375,17 +453,23 @@ def pruefe_quelle(
             return _pruefe_gii_spiegel(
                 zitat, basis_unklar, spiegel_abruf=nutze_spiegel, timeout=timeout,
             )
-        return basis_unklar
+        return _unklar_mit_grund(
+            basis_unklar, "Direktabruf nicht belastbar; kein Ersatzweg verfügbar"
+        )
     if status >= 400:
         return {"status": TOT, "zitat": zitat, "end_url": end_url,
-                "befund": f"HTTP {status} – Beleg nicht mehr abrufbar"}
+                "befund": f"HTTP {status} – Beleg nicht mehr abrufbar",
+                "pruefpfad": PFAD_DIREKT}
     if _normalisiert(end_url) != _normalisiert(zitat):
         if _nur_sprachpfad(zitat, end_url):
             return {"status": OK, "zitat": zitat, "end_url": end_url,
-                    "hinweis": "Sprachpfad kanonisiert (gleicher Host, gleiche Seite)"}
+                    "hinweis": "Sprachpfad kanonisiert (gleicher Host, gleiche Seite)",
+                    "pruefpfad": PFAD_DIREKT}
         return {"status": UMGELEITET, "zitat": zitat, "end_url": end_url,
-                "befund": "anderer Endpunkt als zitiert – Aussage gegen die neue Fassung prüfen"}
-    return {"status": OK, "zitat": zitat, "end_url": end_url, "befund": ""}
+                "befund": "anderer Endpunkt als zitiert – Aussage gegen die neue Fassung prüfen",
+                "pruefpfad": PFAD_DIREKT}
+    return {"status": OK, "zitat": zitat, "end_url": end_url, "befund": "",
+            "pruefpfad": PFAD_DIREKT}
 
 
 def belegketten(*, nur_hochrisiko: bool = False) -> list[dict]:
@@ -431,7 +515,7 @@ def pruefe_alle(*, nur_hochrisiko: bool = False, abruf=None,
                 "status": TOT, "slug": artikel["slug"], "risk": artikel["risk"],
                 "approved": False, "id": "Frontmatter", "titel": "",
                 "zitat": artikel["path"], "end_url": "",
-                "befund": artikel["lesefehler"],
+                "befund": artikel["lesefehler"], "pruefpfad": PFAD_UNKLAR,
             })
         for quelle in artikel["quellen"]:
             url = quelle["url"]
@@ -442,9 +526,9 @@ def pruefe_alle(*, nur_hochrisiko: bool = False, abruf=None,
                     url, abruf=abruf, spiegel_abruf=spiegel_abruf,
                     timeout=timeout, direkt_timeout=d_timeout,
                 )
-                if ist_gii and (
-                    res["status"] == UNKLAR or "GII-Runner-Filter" in str(res.get("hinweis") or "")
-                ):
+                # Wahrheit ist der Prüfpfad, nicht ein Hinweistext (#1024).
+                if ist_gii and (res["status"] == UNKLAR
+                                or res.get("pruefpfad") == PFAD_SPIEGEL):
                     gii_direkt_blockiert = True
                 cache[url] = res
             # Kopie: Zuordnung eines Artikels darf andere nicht überschreiben.
@@ -463,19 +547,37 @@ def pruefe_alle(*, nur_hochrisiko: bool = False, abruf=None,
         "geprueft": len(ergebnisse), "zaehler": zaehler,
         "befunde": [e for e in ergebnisse if e["status"] != OK],
         "blockierend": blockierend,
+        "spiegel_bestaetigt": [
+            e for e in ergebnisse
+            if e["status"] == OK and e.get("pruefpfad") == PFAD_SPIEGEL
+        ],
     }
 
 
 def _zeile(eintrag: dict) -> str:
     symbol = {OK: "✅", UMGELEITET: "⚠️ ", TOT: "🛑", UNKLAR: "❔"}[eintrag["status"]]
-    return (f"  {symbol} {eintrag['slug']} · {eintrag['id']} · "
-            f"{eintrag['befund']}\n     {eintrag['zitat']}"
-            + (f"\n     → {eintrag['end_url']}" if eintrag.get("end_url")
-               and eintrag["status"] == UMGELEITET else ""))
+    text = (f"  {symbol} {eintrag['slug']} · {eintrag['id']} · "
+            f"{eintrag.get('befund', '')}\n     {eintrag['zitat']}")
+    if eintrag.get("end_url") and eintrag["status"] == UMGELEITET:
+        text += f"\n     → {eintrag['end_url']}"
+    if eintrag.get("spiegel_url"):
+        text += f"\n     → Spiegeldatei: {eintrag['spiegel_url']}"
+    if eintrag.get("hinweis"):
+        text += f"\n     ↳ {eintrag['hinweis']}"
+    return text
+
+
+def _zeile_spiegel(eintrag: dict) -> str:
+    """Sichtbare Ersatzprüfung: wer, welches Zitat, welche Datei, welcher Grund."""
+    return (f"  ✅ {eintrag['slug']} · {eintrag['id']} · {eintrag['zitat']}\n"
+            f"     → {eintrag.get('spiegel_url', '(Spiegeldatei unbekannt)')}\n"
+            f"     ↳ {eintrag.get('hinweis', '')}")
 
 
 def report_schreiben(ergebnis: dict) -> None:
     zaehler = ergebnis["zaehler"]
+    # Auch ältere Ergebnis-Dicts (Tests, eingefrorene Aufrufer) bleiben lesbar.
+    spiegel = ergebnis.get("spiegel_bestaetigt") or []
     zeilen = [
         "# Belegketten-Wache",
         "",
@@ -487,7 +589,11 @@ def report_schreiben(ergebnis: dict) -> None:
         "> kein Freispruch: unter derselben Adresse kann ein anderer Text stehen.",
         "",
         f"- Geprüfte Quellen: **{ergebnis['geprueft']}**",
-        f"- Unverändert erreichbar: **{zaehler[OK]}**",
+        f"- Ohne offenen Befund (`ok`): **{zaehler[OK]}**",
+        # Ehrliche Aufteilung (#1024): Ein Spiegel-ok ist kein Direktabruf.
+        # „34 unverändert erreichbar“ wäre bei 5 Ersatzprüfungen falsch.
+        f"- Unverändert direkt erreichbar: **{zaehler[OK] - len(spiegel)}**",
+        f"- Über Bundesrechts-Spiegel bestätigt: **{len(spiegel)}**",
         f"- Umgeleitet (Inhalt prüfen): **{zaehler[UMGELEITET]}**",
         f"- Nicht mehr abrufbar: **{zaehler[TOT]}**",
         f"- Nicht prüfbar (Netz/Timeout): **{zaehler[UNKLAR]}**",
@@ -498,12 +604,25 @@ def report_schreiben(ergebnis: dict) -> None:
         for eintrag in ergebnis["befunde"]:
             zeilen += [_zeile(eintrag), ""]
     else:
-        zeilen += ["## Befunde", "", "Keine Befunde – alle Belegketten unverändert erreichbar.", ""]
+        zeilen += ["## Befunde", "", "Keine offenen Abrufbefunde.", ""]
+    zeilen += [
+        "## Ersatzprüfung über den Bundesrechts-Spiegel",
+        "",
+        "> Ein solches `ok` bestätigt nur, dass die zitierte Norm im täglichen",
+        "> Bundesrechtsbestand vorhanden und aktiv ist. Es prüft weder den",
+        "> Artikeltext noch die Aussage und ist keine fachliche Freigabe.",
+        "",
+    ]
+    if spiegel:
+        for eintrag in spiegel:
+            zeilen += [_zeile_spiegel(eintrag), ""]
+    else:
+        zeilen += ["Kein Zitat musste über den Spiegel bestätigt werden.", ""]
     REPORT.write_text("\n".join(zeilen), encoding="utf-8")
 
 
 def selftest() -> list[str]:
-    """Offline: die vier Zustände und die Weiterleitungslogik."""
+    """Offline: vier Zustände, Weiterleitungslogik, Normprüfung UND Transport."""
     fehler: list[str] = []
 
     def erwarte(name, bedingung):
@@ -602,6 +721,50 @@ def selftest() -> list[str]:
     erwarte("GII + Spiegel offline bleibt fail-closed unklar",
             pruefe_quelle("https://www.gesetze-im-internet.de/vvg_2008/__40.html",
                           abruf=abruf_netz, spiegel_abruf=spiegel_offline)["status"] == UNKLAR)
+
+    # Transportvertrag (#1024, 03.11.2026): der ECHTE Adapter gegen den
+    # ECHTEN Rückgabewert von net_safety.sicherer_abruf (3-Tupel). Die Tests
+    # oben injizieren bewusst 2-Tupel und konnten deshalb den 2er-Unpack im
+    # Adapter vier Tage lang nicht sehen. Ohne diesen Fall ist ein grüner
+    # Selbsttest kein Beweis für einen funktionierenden Ersatzweg.
+    import net_safety
+
+    gii_zitat = "https://www.gesetze-im-internet.de/vvg_2008/__40.html"
+    spiegel_url = _gii_spiegel_url("vvg_2008")
+    original = net_safety.sicherer_abruf
+
+    def transport_ok(url, **kwargs):
+        return 200, {"Content-Type": "text/markdown; charset=utf-8"}, vvg_md.encode("utf-8")
+
+    def transport_offline(url, **kwargs):
+        raise urllib.error.URLError("Spiegel offline")
+
+    try:
+        net_safety.sicherer_abruf = transport_ok
+        try:
+            code, text = abruf_gii_spiegel_http(spiegel_url)
+            erwarte("Adapter entpackt das 3-Tupel von net_safety",
+                    code == 200 and "§ 40" in text)
+        except Exception as exc:  # noqa: BLE001 – genau dieser Fehler war #1024
+            erwarte(f"Adapter entpackt das 3-Tupel von net_safety "
+                    f"({type(exc).__name__}: {exc})", False)
+        erg = pruefe_quelle(gii_zitat, abruf=abruf_netz,
+                            spiegel_abruf=abruf_gii_spiegel_http)
+        erwarte("echter Adapter heilt die Runner-Blockade", erg["status"] == OK)
+        erwarte("Ersatzprüfung nennt Pfad und Spiegeldatei",
+                erg.get("pruefpfad") == PFAD_SPIEGEL
+                and erg.get("spiegel_url") == spiegel_url)
+
+        net_safety.sicherer_abruf = transport_offline
+        offline = pruefe_quelle(gii_zitat, abruf=abruf_netz,
+                                spiegel_abruf=abruf_gii_spiegel_http)
+        erwarte("echter Adapter bleibt bei Spiegelausfall fail-closed",
+                offline["status"] == UNKLAR)
+        erwarte("unklar nennt Grund und versuchte Spiegeldatei",
+                "Spiegel" in str(offline.get("hinweis") or "")
+                and offline.get("spiegel_url") == spiegel_url)
+    finally:
+        net_safety.sicherer_abruf = original
     return fehler
 
 
@@ -628,7 +791,8 @@ def main(argv: list[str] | None = None) -> int:
             for eintrag in fehler:
                 print("  -", eintrag)
             return 2
-        print("✅ Belegketten-Wache: Selbsttest bestanden (ok, umgeleitet, tot, unklar).")
+        print("✅ Belegketten-Wache: Selbsttest bestanden "
+              "(ok, umgeleitet, tot, unklar, Normprüfung, Transportvertrag).")
         return 0
 
     ergebnis = pruefe_alle(nur_hochrisiko=args.nur_hochrisiko, timeout=args.timeout)
@@ -640,7 +804,8 @@ def main(argv: list[str] | None = None) -> int:
         z = ergebnis["zaehler"]
         print(f"Belegketten-Wache: {ergebnis['geprueft']} Quellen · "
               f"{z[OK]} ok · {z[UMGELEITET]} umgeleitet · "
-              f"{z[TOT]} tot · {z[UNKLAR]} unklar")
+              f"{z[TOT]} tot · {z[UNKLAR]} unklar · "
+              f"{len(ergebnis.get('spiegel_bestaetigt') or [])} über Spiegel bestätigt")
         for eintrag in ergebnis["befunde"]:
             print(_zeile(eintrag))
     return 1 if ((args.strict and ergebnis["blockierend"])
