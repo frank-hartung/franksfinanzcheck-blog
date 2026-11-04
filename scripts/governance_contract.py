@@ -3769,6 +3769,20 @@ def _c45_deckung(root=BLOG_DIR):
     # Limit bleiben (Reserve). Ohne Auto-Skalierung ist der Sockel der
     # Plan. Eine Kadenz, die nur mit dauerhaft ausgereiztem Limit
     # aufgeht, ist ein Dauer-Stau.
+    #
+    # ZWEITER STICHTAG (04.11.2026, #1039): „heute“ ist der ruhigste Tag,
+    # nicht der härteste. Die Prüftermine sind Bündel – 113 Seiten auf 34
+    # Fristtage; 29 davon mit demselben `faktencheck`. Eine Wache, die nur
+    # den Stichtag misst, sieht Reserve, wo eine Woche später keine ist
+    # (am 04.11. grün, ab 20.11. rot). Deshalb wird zusätzlich der Tag mit
+    # der größten offenen Last geprüft – mit DEMSELBEN Urteil, ohne neue
+    # Schwelle. Wer den Befund schließen will, ändert den Vertrag
+    # (`data/agent_reach/faktenfrische.yaml`), nicht die Wache.
+    spitze = kap.spitzenlast_stichtag(artikel, cfg, budget, laeufe, stichtag)
+    # Auch OHNE Befund wird die Messung belegt: „nicht gemessen“ darf nie
+    # wie „grün“ aussehen (dieselbe Klasse wie C33). Die Zahl nennt, wie
+    # viele Bündeltage geprüft wurden.
+    spitze_geprueft = len(kap.spitzenlast_stichtage(artikel, cfg, stichtag))
     zahlen = {"kapazitaet": kap.kapazitaet_je_tag(budget, laeufe),
               "kapazitaet_spitze": kap.kapazitaet_je_tag(limit, laeufe),
               "budget": budget, "sockel": sockel, "limit": limit,
@@ -3778,6 +3792,12 @@ def _c45_deckung(root=BLOG_DIR):
               "empfehlung_erreicht": bool(empfehlung["erreicht"]),
               "plan_puenktlich": bool(plan["puenktlich"]),
               "plan_rueckstand_abgebaut": bool(plan["rueckstand_abgebaut"])}
+    zahlen["spitze_geprueft"] = spitze_geprueft
+    if spitze is not None:
+        zahlen["spitze_stichtag"] = spitze["stichtag"].isoformat()
+        zahlen["spitze_offen"] = spitze["offen"]
+        zahlen["spitze_puenktlich"] = bool(spitze["puenktlich"])
+        zahlen["spitze_frisch"] = int(spitze["frisch"])
     zahlen["urteil"] = kap.c45_urteil(zahlen, ssot_pfad=C45_SSOT)
     return zahlen, None
 

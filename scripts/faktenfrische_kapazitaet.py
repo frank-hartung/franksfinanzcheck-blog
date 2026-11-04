@@ -452,6 +452,93 @@ def empfohlenes_budget(artikel: list[dict], cfg: dict, laeufe: float,
 C45_SSOT_PFAD = "data/agent_reach/faktenfrische.yaml"
 
 
+def spitzenlast_stichtage(artikel: list[dict], cfg: dict,
+                          stichtag: dt.date,
+                          horizont_tage: int | None = None) -> list[dt.date]:
+    """Die Tage im Horizont, an denen Prüftermine BÜNDELN (#1039).
+
+    WARUM ES DIESE FUNKTION GIBT (04.11.2026)
+    -----------------------------------------
+    Am 04.11.2026 war die Deckungswache grün – geprüft am Stichtag „heute“.
+    Drei Wochen später kippten 23 Seiten mit demselben Prüfdatum gemeinsam
+    in die Überfälligkeit, und derselbe Lauf meldete „Frist gerissen“. Die
+    Wache hatte also den ruhigsten Tag des Jahres gemessen und daraus einen
+    Dauerbefund abgeleitet.
+
+    Das ist keine Messung, sondern ein Blick aus dem Fenster. Die Fristen
+    sind BÜNDEL: 113 Seiten verteilen sich auf nur 34 Fristtage, weil die
+    Prüfungen in Schüben laufen (29 Seiten mit `faktencheck: 2026-10-13`).
+    Ein Stichtag, der zufällig zwischen zwei Schüben liegt, sieht Reserve,
+    wo eine Woche später keine ist – der Fehler findet sich erst, wenn der
+    Kalender ihn schreibt.
+
+    Rückgabe: der Stichtag selbst plus jeder Tag, an dem SEIN Bindungsbild
+    wechselt – also jede Frist im Horizont und jeder Vorlauf-Beginn
+    (`frist − vorlauf_tage`). Nur an diesen Tagen kann sich das Urteil
+    drehen; alle anderen Tage sind Wiederholungen. Bewusst KEIN Tag, an
+    dem längst alles überfällig ist: Dort misst man den Rückstand, nicht
+    die Kadenz, und jeder Bestand wäre „rot“ (das wäre eine Schwelle
+    durch die Hintertür, und die gehört in die SSOT, nicht in die Wache).
+    """
+    p = planung(cfg)
+    horizont = max(0, int(horizont_tage if horizont_tage is not None else p["horizont_tage"]))
+    vorlauf = int(p["vorlauf_tage"])
+    ende = stichtag + dt.timedelta(days=horizont)
+    tage: set[dt.date] = {stichtag}
+    for art in artikel:
+        frist = ff.faelligkeit(art, cfg, stichtag).get("frist")
+        if frist is None:
+            continue
+        if stichtag <= frist <= ende:
+            tage.add(frist)
+        beginn = frist - dt.timedelta(days=vorlauf)
+        if stichtag <= beginn <= ende:
+            tage.add(beginn)
+    return sorted(tage)
+
+
+def spitzenlast_stichtag(artikel: list[dict], cfg: dict, budget: int,
+                         laeufe: float, stichtag: dt.date,
+                         horizont_tage: int | None = None) -> dict | None:
+    """Der Bündeltag im Horizont, an dem eine HEUTE frische Seite zu spät käme.
+
+    Gemessen wird mit DERSELBEN Planrechnung wie am Stichtag – keine zweite
+    Schwelle, keine neue Formel. Nur der Beweis ist neu:
+
+    Eine Seite, die am Stichtag NOCH NICHT überfällig ist, wird an jedem
+    späteren Bündeltag erneut geprüft. Ist sie dort überfällig, hat der
+    Kalender sie überholt, nicht der Rückstand: Der Lauf war zu klein, um
+    seinen eigenen Zulauf zu bedienen. Genau das ist am 04.11.2026
+    passiert – die Wache war grün, und drei Wochen später standen 23
+    Seiten mit demselben Prüfdatum gemeinsam zu spät.
+
+    Bewusst NICHT gemessen wird der Tag, an dem längst alles überfällig
+    ist: Dort prüft man den Alt-Rückstand (dafür gibt es
+    `rueckstand_abgebaut` am Stichtag), nicht die Kadenz. Würde die Wache
+    dort anschlagen, wäre jeder Bestand „rot“ – eine Schwelle durch die
+    Hintertür, und die gehört in die SSOT, nicht in die Wache.
+    """
+    kandidaten = spitzenlast_stichtage(artikel, cfg, stichtag, horizont_tage)
+    schlechtester: dict | None = None
+    for tag in kandidaten:
+        if tag <= stichtag:
+            continue
+        frisch = [art for art in artikel
+                  if not (ff.faelligkeit(art, cfg, tag) or {}).get("faellig")]
+        if not frisch:
+            continue
+        p = plan(frisch, cfg, budget, laeufe, tag, horizont_tage)
+        if p["puenktlich"]:
+            continue
+        offen = p["verletzungen_neu"] + p["verletzungen_folge"]
+        kennzahl = (offen, len(frisch))
+        if schlechtester is None or kennzahl > schlechtester["rang"]:
+            schlechtester = {"rang": kennzahl, "stichtag": tag,
+                             "offen": offen, "frisch": len(frisch),
+                             "puenktlich": False}
+    return schlechtester
+
+
 def c45_urteil(zahlen: dict, ssot_pfad: str = C45_SSOT_PFAD) -> list[str]:
     """Das Urteil der Deckungswache – rein, ohne Dateizugriff.
 
@@ -542,6 +629,19 @@ def c45_urteil(zahlen: dict, ssot_pfad: str = C45_SSOT_PFAD) -> list[str]:
             f"Der Plan reißt eine Frist oder baut den Rückstand nicht "
             f"fristgerecht ab ({budget} je Lauf × {laeufe:.2f} Läufe/Tag). "
             f"Die Deckungsrechnung nennt die Ursache (#912).")
+    # Der Spitzentag (04.11.2026, #1039). Dieselbe Aussage, derselbe Plan –
+    # nur an dem Tag gemessen, an dem eine heute frische Seite zu spät käme.
+    # Ohne diese Zeile ist die Wache am ruhigen Tag grün und am Bündeltag
+    # rot, ohne dass sich Code oder Vertrag geändert hätten.
+    if zahlen.get("spitze_stichtag") and not zahlen.get("spitze_puenktlich", True):
+        funde.append(
+            f"Spitzenlast reißt die Frist: am {zahlen['spitze_stichtag']} "
+            f"kämen {int(zahlen.get('spitze_offen', 0))} Seiten zu spät, die "
+            f"heute noch frisch sind. Das Budget von {budget} je Lauf × "
+            f"{laeufe:.2f} Läufe/Tag bedient den Zulauf nicht – die Bündelung "
+            f"der Prüftermine (`faktencheck` in den Seiten), der Takt oder das "
+            f"Limit in {ssot_pfad} entscheidet. Nur den Stichtag zu messen "
+            f"heißt, den ruhigsten Tag des Jahres zu prüfen (#1039).")
     return funde
 
 

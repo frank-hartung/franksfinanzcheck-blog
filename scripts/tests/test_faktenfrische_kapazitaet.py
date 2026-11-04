@@ -369,6 +369,39 @@ class C45UrteilTest(unittest.TestCase):
             bedarf=20.0, budget=10, kapazitaet=10.0, kapazitaet_spitze=10.0))
         self.assertTrue(any("strukturell" in f for f in funde))
 
+    def test_spitzenlast_ist_rot(self):
+        # 04.11.2026 (#1039): Der Stichtag war grün, drei Wochen später
+        # standen 23 Seiten mit demselben Prüfdatum gemeinsam zu spät.
+        funde = kap.c45_urteil(self.basis(
+            spitze_stichtag="2026-11-26", spitze_offen=37,
+            spitze_puenktlich=False))
+        self.assertTrue(any("Spitzenlast" in f for f in funde))
+
+    def test_spitzenlast_ohne_befund_bleibt_gruen(self):
+        # Gegenprobe: Ein Bündeltag, den der Plan trägt, ist kein Befund.
+        # Ohne diese Probe würde „Spitzenlast“ bei jeder Zeile anschlagen.
+        self.assertEqual(kap.c45_urteil(self.basis(
+            spitze_stichtag="2026-11-26", spitze_offen=0,
+            spitze_puenktlich=True)), [])
+
+    def test_spitzenlast_ohne_messung_ist_kein_freibrief(self):
+        # Fehlt die Messung ganz (alter Aufrufer), darf das Urteil nicht
+        # stillschweigend „grün“ bedeuten – es prüft dann nur den Stichtag.
+        # Das ist Absicht: die Messung selbst ist die Pflicht (s. u.).
+        self.assertEqual(kap.c45_urteil(self.basis()), [])
+
+    def test_jeder_stichtag_wird_gebunden_geprueft(self):
+        # Der Vertrag muss den Bündeltag MITMESSEN, nicht nur den Stichtag.
+        import governance_contract as gc
+        zahlen, fehler = gc._c45_deckung()
+        self.assertIsNone(fehler, fehler)
+        # Ohne Befund fehlt `spitze_stichtag` – aber nie der Beleg, DASS
+        # gemessen wurde. Sonst wäre „nicht geprüft“ von „grün“ nicht zu
+        # unterscheiden (C33).
+        self.assertIn("spitze_geprueft", zahlen)
+        self.assertGreater(int(zahlen["spitze_geprueft"]), 0,
+                           "kein einziger Bündeltag geprüft – die Messung fehlt")
+
     def test_deckung_liefert_das_urteil(self):
         import governance_contract as gc
         zahlen, fehler = gc._c45_deckung()

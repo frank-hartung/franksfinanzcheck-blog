@@ -48,7 +48,17 @@ budget:
   # EIN Schlüssel, EIN Wert (A5/C32): Am 03.11.2026 stand die Zeile doppelt
   # in der Datei (Rest eines Heil-Laufs, #1021). PyYAML nimmt still den
   # letzten Wert – der Artefakt-Wächter hat den Doppel-Schlüssel gefunden.
-  max_artikel_pro_lauf: 4       # Rotation statt Rundumschlag (Sockel; ab 112 Seiten 4/Tag für ≥110 % Deckung, C45)
+  # 04.11.2026 (#1039): 4 -> 12. Nicht wegen des Durchschnitts, sondern
+  # wegen der BÜNDEL: 113 Seiten liegen auf nur 34 Fristtagen, 29 davon mit
+  # demselben `faktencheck`. Mit 4 je Lauf trug das Budget diese Schübe an
+  # 3 von 53 geprüften Wochentagen nicht – eine heute frische Seite wäre
+  # am 26.11., 02.12. oder 06.01. zu spät geprüft worden, ohne dass Code
+  # oder Vertrag sich geändert hätten. Mit 12 sind es 0 von 53.
+  # Gemessen, nicht geschätzt: scripts/faktenfrische_kapazitaet.py
+  # (spitzenlast_stichtag) und der Nachtrag im Bericht vom 04.11.2026.
+  # Limit 16 und die Nachholfrist bleiben unverändert; offen bleibt die
+  # Rückstands-Klasse (siehe Bericht), die kein Sockel heilt.
+  max_artikel_pro_lauf: 12      # Rotation statt Rundumschlag (Sockel; trägt die Prüf-Bündel, C45)
   # 04.11.2026: Die +97-Tage-Uhrprobe legte alle 112 Prüftermine in denselben
   # Vollrückstand. Limit 10 konnte ihn nicht binnen sieben Tagen abbauen.
   # Die Kalenderrechnung wählt jetzt 14; Limit 16 lässt zwei Plätze Reserve.
