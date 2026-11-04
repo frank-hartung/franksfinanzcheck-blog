@@ -576,6 +576,48 @@ def _kette_pruefen(daten: dict, files: dict) -> list:
     return fehler
 
 
+def _doppelte_schluessel(text: str) -> list:
+    """Doppelte Objektschlüssel im Siegel – der REST einer zweiten Fassung.
+
+    WARUM DAS EINE EIGENE PRÜFUNG BRAUCHT (04.11.2026, WF-829B / #1039):
+    Am 02.11.2026 entstand in `main` ein Siegel, das so beginnt:
+
+        {"schema": 2,
+         "signed_at": "...13:23:38...", "head": "26eedfa",
+         "signed_at": "...14:32:11...", "head": "887248e",
+         "files": {...  "signed_at": "...19:13:31...", "head": "4366b11",
+         "files": {...}
+
+    Drei Fassungen, zeilenweise übereinandergelegt (`merge=binary` verhindert
+    das seit #346 – dieser Commit kam daran vorbei bzw. davor). Weil ein
+    fehlendes Komma dazwischen lag, war das Ergebnis zufällig UNPARSEBAR und
+    fiel auf. **Ohne** dieses eine fehlende Komma wäre es gültiges JSON
+    gewesen: `json.loads()` nimmt still den LETZTEN Wert – das Siegel hätte
+    eine Map der 19:13-Fassung mit einer `signed_at` der 13:23-Fassung
+    verbunden, und der Zustand wäre „ok" gewesen. Ein solches Siegel ist
+    keine Messung, sondern eine Chimäre: Es stimmt für keinen Zeitpunkt.
+
+    Die Prüfung ist bewusst unabhängig von der Kette: Sie liest die BYTES und
+    fragt, ob ein Schlüssel in einem Objekt mehrfach vorkommt. Sie greift
+    damit auch dann, wenn Kette und Map-Prüfsumme zufällig zusammenpassen.
+    """
+    doppelt: list = []
+
+    def waechter(paare):
+        gesehen: set = set()
+        for schluessel, _ in paare:
+            if schluessel in gesehen and str(schluessel) not in doppelt:
+                doppelt.append(str(schluessel))
+            gesehen.add(schluessel)
+        return dict(paare)
+
+    try:
+        json.loads(text, object_pairs_hook=waechter)
+    except ValueError:
+        return []          # nicht parsebar: das ist Sache der Syntax-Prüfung
+    return doppelt
+
+
 def _zustand_aus_bytes(roh: bytes) -> tuple:
     """(Daten|None, Zustand) – die Wahrheit über das Siegel, aus Bytes."""
     gross = len(roh)
@@ -609,6 +651,28 @@ def _zustand_aus_bytes(roh: bytes) -> tuple:
                       "verdacht": "unbekannt",
                       "detail": [f"JSON ist kein Objekt, sondern "
                                  f"{type(daten).__name__}"]}
+    # Ein PARSEBARER Zusammenschnitt: doppelte Schlüssel sind der Rest einer
+    # zweiten Fassung, den `json.loads()` still wegwirft (siehe
+    # `_doppelte_schluessel` für den Vorfall vom 02.11.2026). Fail-closed,
+    # BEVOR Map oder Kette überhaupt gefragt werden – ein solches Siegel
+    # stimmt für keinen Zeitpunkt und darf keine Kerndatei freisprechen.
+    doppelt = _doppelte_schluessel(text)
+    if doppelt:
+        return daten, {
+            "zustand": ZUSTAND_BESCHAEDIGT, "groesse": gross, "offset": None,
+            "verdacht": "zusammenschnitt",
+            "detail": [
+                f"{len(doppelt)} Objektschlüssel stehen mehrfach im Siegel "
+                f"({', '.join(f'`{d}`' for d in doppelt[:5])}"
+                f"{' …' if len(doppelt) > 5 else ''}) – zwei Fassungen wurden "
+                f"übereinandergelegt, `json.loads()` nimmt still den letzten "
+                f"Wert.",
+                "Ein solches Siegel ist für KEINEN Zeitpunkt eine Messung: "
+                "Map und Akte können aus verschiedenen Generationen stammen, "
+                "auch wenn Kette und Prüfsumme zufällig passen.",
+                "Reparatur: `--repair-lock` (belegte Quelle aus Git oder "
+                "Bergung) – keine Handarbeit an der Datei.",
+            ]}
     files = daten.get("files")
     if not isinstance(files, dict) or not files:
         return daten, {"zustand": ZUSTAND_FREMD, "groesse": gross, "offset": None,
@@ -638,6 +702,46 @@ def _zustand_aus_bytes(roh: bytes) -> tuple:
                    "verdacht": "unbekannt" if not fehler else "zusammenschnitt",
                    "detail": fehler or ["Kette, Map-Prüfsumme und Generation "
                                         "sind in Ordnung"]}
+
+
+def zusammenschnitt_probe() -> dict:
+    """Der Vorfall vom 02.11.2026 als lebende Probe – ohne den Baum zu lesen.
+
+    Baut aus einem ERFUNDENEN, regelkonformen Siegel zwei Fassungen
+    übereinander (Kopf der älteren + Rumpf der jüngeren, mit Komma, also
+    PARSEBAR) und gibt den Zustand zurück, den das Siegel dann haben MUSS:
+    `ZUSTAND_BESCHAEDIGT` mit Verdacht `zusammenschnitt`.
+
+    Warum das hier und nicht nur im Selbsttest: Der Paß-Punkt ist eine
+    Eigenschaft der MESSUNG, nicht des Vorfalls. Wer sie versehentlich
+    entfernt, soll es sofort sehen – in der CI wie im Vor-Ort-Lauf. Der
+    Aufruf liest keine Datei und schreibt keine (C15).
+    """
+    files = {"scripts/beispiel.py": "a" * 64}
+    karte = files_sha(files)
+    alt = {"schema": SCHEMA, "signed_at": "2026-11-01T14:32:11.060118+00:00",
+           "head": "887248e", "files": files, MAP_FELD: karte,
+           START_FELD: None, "audit": []}
+    neu = {"schema": SCHEMA, "signed_at": "2026-11-02T13:23:38.630367+00:00",
+           "head": "26eedfa", "files": files, MAP_FELD: karte,
+           START_FELD: None, "audit": []}
+    # Zeilenweise übereinander, wie Git es bei einem Text-Merge täte: der
+    # Kopf der älteren Fassung, dahinter der Rumpf der jüngeren – MIT Komma,
+    # damit die Datei parsebar ist (`json.loads` nimmt still den letzten Wert).
+    kopf_alt = json.dumps(alt, indent=2).splitlines()[:4]   # {, schema, signed_at, head
+    rumpf_neu = json.dumps(neu, indent=2).splitlines()
+    gemischt = "\n".join(kopf_alt + rumpf_neu[3:] + [""])
+    _, befund = _zustand_aus_bytes(gemischt.encode("utf-8"))
+    befund["probe_parst"] = _parsebar(gemischt)
+    return befund
+
+
+def _parsebar(text: str) -> bool:
+    try:
+        json.loads(text)
+        return True
+    except ValueError:
+        return False
 
 
 def lock_zustand(lock_pfad: Path = None) -> dict:
@@ -1344,6 +1448,9 @@ SELFTEST = [
     "siegel_zusammenschnitt_erkannt",
     "reparatur_belegt_beendet",
     "abbruch_laesst_alten_stand",
+    # 04.11.2026 (WF-829B / #1039): Der Zusammenschnitt, der PARST.
+    "parsebarer_zusammenschnitt_erkannt",
+    "signatur_mit_doppeltem_schluessel_abgelehnt",
 ]
 
 
@@ -1584,6 +1691,22 @@ def _selftest_kern() -> list[str]:
             if (tmp / "data" / "integrity_lock.json.tmp").exists():
                 fehler.append("Temp-Rest nach Abbruch (Fall10c)")
 
+            # 10d. DER ZUSAMMENSCHNITT, DER PARST (04.11.2026, WF-829B #1039).
+            # Der echte Vorfall vom 02.11.2026: drei Fassungen zeilenweise
+            # übereinander. Nur weil EIN Komma fehlte, war die Datei zufällig
+            # unparsebar. Hier wird das Komma wieder eingesetzt – die Datei ist
+            # dann gültiges JSON und muss trotzdem beschädigt heißen.
+            mix_befund = zusammenschnitt_probe()
+            if mix_befund["zustand"] != ZUSTAND_BESCHAEDIGT:
+                fehler.append("PARSEBARER Zusammenschnitt gilt als gesund "
+                              f"({mix_befund['zustand']}, Fall10d)")
+            if mix_befund.get("verdacht") != "zusammenschnitt":
+                fehler.append("parsebarer Zusammenschnitt nennt den Verdacht "
+                              f"nicht ({mix_befund.get('verdacht')!r}, Fall10d2)")
+            if not any("mehrfach" in d for d in mix_befund.get("detail", [])):
+                fehler.append("parsebarer Zusammenschnitt nennt die doppelten "
+                              "Schlüssel nicht (Fall10d3)")
+
             # 11. KONFLIKTMARKER: Git-Merge-Konfliktmarker im Siegel werden
             # erkannt (Bruchverdacht: konfliktmarker) und von lock_reparatur geheilt.
             pfad.write_text("<<<<<<< HEAD\n{\"schema\": 2}\n=======\n{\"schema\": 2}\n>>>>>>> branch\n",
@@ -1621,6 +1744,33 @@ def selftest() -> int:
 # ------------------------------------------------------------
 # Modi
 # ------------------------------------------------------------
+def _messfaehigkeit_pruefen() -> bool:
+    """Beweist VOR dem Urteil, dass diese Messung den Vorfall noch sieht.
+
+    WARUM DAS VOR JEDEM GATE LAUFEN MUSS (04.11.2026, WF-829B / #1039):
+    Der Selbsttest des Guards ist grün, wenn er den Zusammenschnitt erkennt –
+    aber er prüft DEN CODE, der ihn gerade ausführt. Läuft die CI mit einer
+    älteren Fassung, meldet sie „ok" und niemand sieht den Unterschied. Diese
+    Probe ist die Brücke zwischen Code und Lauf: Sie baut den Vorfall ohne
+    Dateizugriff und verlangt das beschädigte Urteil. Ein Messgerät, das seinen
+    eigenen Eichtest nicht besteht, gibt keine Freigabe (Exit 3, fail-closed).
+    """
+    probe = zusammenschnitt_probe()
+    if probe["probe_parst"] and probe["zustand"] == ZUSTAND_BESCHAEDIGT \
+            and probe.get("verdacht") == "zusammenschnitt":
+        return True
+    print("🛑 MESSGERÄT NICHT EICHFÄHIG – das Gate gibt keine Freigabe.")
+    print(f"   Probe (parsebarer Zusammenschnitt) ergab: "
+          f"parsebar={probe['probe_parst']} · Zustand={probe['zustand']} · "
+          f"Verdacht={probe.get('verdacht')}")
+    print("   Erwartet: parsebar=True · Zustand=beschaedigt · "
+          "Verdacht=zusammenschnitt")
+    print("   Das ist ein Defekt des PRÜFERS, nicht des Baums. Reparatur: "
+          "`python3 scripts/integrity_guard.py --selftest` und "
+          "`python3 -m unittest scripts.tests.test_integrity_guard`.")
+    return False
+
+
 def gate(root: Path = ROOT) -> int:
     """PR-/CI-Gate: fail-closed, mit Herkunft und Reparaturzeile.
 
@@ -1628,6 +1778,8 @@ def gate(root: Path = ROOT) -> int:
     beschädigtes oder zusammengesetztes Siegel ist ein eigener Befund (mit
     Bruchstelle und Reparaturzeile), kein „Drift in sechs Dateien".
     """
+    if not _messfaehigkeit_pruefen():
+        return 3
     befund = lock_zustand(root / "data" / "integrity_lock.json")
     if befund["zustand"] not in GESUND:
         print("🛑 INTEGRITÄTS-GATE ROT – das Siegel selbst ist nicht gesund "
@@ -1887,6 +2039,11 @@ def main():
     if DRIFT_AUDIT:
         sys.exit(drift_audit(ROOT))
 
+    # Auch der Standard-Lauf (ohne --gate) eicht sich vorher selbst: Der
+    # Zustand „ok" ist ein Urteil, und ein Urteil ohne geprüftes Messgerät
+    # ist eine Behauptung (#1039).
+    if not _messfaehigkeit_pruefen():
+        sys.exit(3)
     befund = lock_zustand(LOCK)
     lock = load_lock(LOCK)
     crit_bad, fest_bad = verify_files(ROOT, lock.get("files", {}))

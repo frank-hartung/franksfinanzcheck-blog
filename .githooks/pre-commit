@@ -27,6 +27,80 @@
 set -euo pipefail
 
 WURZEL="$(git rev-parse --show-toplevel)"
+
+# ============================================================
+#  TEIL 2 (04.11.2026, WF-829B / #1039): DAS SIEGEL WIRD HIER GEPRÜFT
+#  ------------------------------------------------------------
+#  Zwei Fehlerklassen, ein Ort: Am 02.11.2026 kam ein Siegel nach `main`,
+#  in dem drei Fassungen zeilenweise übereinanderlagen – `"signed_at"` und
+#  `"head"` je dreimal, `"files"` je zweimal. Gefunden hat es erst ein
+#  PR-Gate, Tage später; die Läufe davor waren grün, weil ein fehlendes
+#  Komma NICHT jede Fassung erwischte. Am selben Tag hinterließ ein Merge
+#  bei `skills_vertrag.py` doppelte Funktionsdefinitionen und ein kaputtes
+#  `scripts/safe_xml.py`-Modul. Beides ist die Klasse „Maschinen-Artefakt
+#  oder Regelkern wird mit Text-Merge behandelt".
+#
+#  Geprüft wird der GESTAGETE Stand, nicht der Arbeitsbaum – dieselbe Regel
+#  wie oben, und in einem Wegwerf-Verzeichnis (der Baum bleibt unberührt, C15).
+#  Gefragt wird genau das, was am 02.11. gefehlt hat:
+#    · steht im Siegel ein Schlüssel MEHRFACH (Zusammenschnitt zweier
+#      Fassungen)? – `integrity_guard._doppelte_schluessel`,
+#    · ist das Siegel gesund (JSON, Kette, Map-Prüfsumme)? – derselbe
+#      Prüfer, den das PR-Gate benutzt; keine zweite Wahrheit.
+#  Rot heißt rot: kein Override über die Umgebung, nur `--no-verify` (dann
+#  hält das PR-Gate). Offline, ohne Token, unter einer Sekunde.
+# ============================================================
+SIEGEL_BETROFFEN=0
+if printf '%s\n' "$(git diff --cached --name-only --diff-filter=ACMR || true)" \
+    | grep -qE '^(data/integrity_lock\.json|data/integrity_history\.jsonl)$'; then
+  SIEGEL_BETROFFEN=1
+fi
+
+if [ "$SIEGEL_BETROFFEN" -eq 1 ]; then
+  if ! command -v python3 >/dev/null 2>&1; then
+    echo "🛑 Siegel-Sperre: python3 fehlt – der gestagete Stand ist ungeprüft."
+    exit 1
+  fi
+  cd "$WURZEL"
+  # Der gestagete Stand ist die Wahrheit des Commits. Geprüft wird er in
+  # einem Wegwerf-Baum: der Arbeitsbaum wird dabei NICHT angefasst (C15).
+  PRUEFSTAND_SIEGEL="$(mktemp -d -t siegel-XXXXXX)"
+  # EIN Trap für beide Prüfstände: der zweite `trap` weiter unten würde den
+  # ersten sonst ERSETZEN – und dieser Ordner bliebe liegen (Lehre aus C15:
+  # ein Prüf-Aufruf hinterlässt nichts).
+  trap 'rm -rf "$PRUEFSTAND_SIEGEL" "${PRUEFSTAND:-}"' EXIT
+  git show :data/integrity_lock.json > "$PRUEFSTAND_SIEGEL/lock.json" 2>/dev/null || : > "$PRUEFSTAND_SIEGEL/lock.json"
+  if ! python3 - "$PRUEFSTAND_SIEGEL/lock.json" <<'PY'
+import sys
+from pathlib import Path
+
+sys.path.insert(0, "scripts")
+import integrity_guard as ig  # noqa: E402
+
+text = Path(sys.argv[1]).read_text(encoding="utf-8")
+doppelt = ig._doppelte_schluessel(text)
+if doppelt:
+    print("🛑 Siegel-Sperre: doppelte Objektschlüssel im gestageten Siegel: "
+          + ", ".join(doppelt))
+    print("   Das ist ein Zusammenschnitt zweier Fassungen – `json.loads()` "
+          "nimmt still den letzten Wert.")
+    print("   Reparatur: python3 scripts/integrity_guard.py --repair-lock")
+    sys.exit(1)
+_, befund = ig._zustand_aus_bytes(text.encode("utf-8"))
+if befund["zustand"] not in ig.GESUND:
+    print("🛑 Siegel-Sperre: " + ig.ZUSTAND_KLARTEXT.get(befund["zustand"],
+                                                         befund["zustand"]))
+    for zeile in ig.lock_zustand_text(befund, praefix="   "):
+        print(zeile)
+    print("   Reparatur: python3 scripts/integrity_guard.py --repair-lock")
+    sys.exit(1)
+print("✅ Siegel-Sperre: gestageter Lock ist gesund und aus EINER Fassung.")
+PY
+  then
+    exit 1
+  fi
+fi
+
 WACHE="scripts/brand_surface_guard.py"
 
 GESTAGET="$(git diff --cached --name-only --diff-filter=ACMR || true)"
@@ -53,7 +127,7 @@ if ! python3 "$WACHE" --selftest >/dev/null; then
 fi
 
 PRUEFSTAND="$(mktemp -d -t markenflaeche-XXXXXX)"
-trap 'rm -rf "$PRUEFSTAND"' EXIT
+# Kein zweiter `trap`: der oben räumt BEIDE Prüfstände (Siegel + Markenfläche).
 
 if printf '%s\n' "$GESTAGET" | grep -qxF "README.md"; then
   # Der gestagete Inhalt ist die Wahrheit des Commits – nicht die Datei auf Platte.
