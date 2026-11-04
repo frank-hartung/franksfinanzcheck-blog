@@ -28,7 +28,7 @@ Der erste Schritt besteht darin, deine Mobilitätsbedürfnisse klar zu definiere
 Erstelle eine Liste mit geplanten Kilometern, gewünschten Fahrzeugklassen und eventuellen Zusatzleistungen.  
 So kannst du später gezielt prüfen, welche Angebote wirklich zu deinem Budget passen.  
 
-Im nächsten Schritt prüfst du, ob du über eine Kreditkarte verfügst, die die übliche Kautionssperre akzeptiert.  
+Im nächsten Schritt prüfst du, ob du über eine Kreditkarte verfügst, die übliche Kautionssperre akzeptiert.  
 Viele Anbieter blockieren einen Betrag von mehreren hundert Euro, der nach Rückgabe zurückfließt.  
 Eine fehlende Kreditkarte kann zusätzliche Kosten in Form von Barkautionen verursachen.  
 
