@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-03 11:31:31 UTC",
+ "generated_at": "2026-11-04 11:47:19 UTC",
  "exit_code": 0,
  "modus": "FIX",
  "checked_articles": 113,
- "checked_links": 267,
+ "checked_links": 265,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -141,17 +141,6 @@
   },
   {
    "code": "IW2",
-   "slug": "2026-11-01-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-   "line": 260,
-   "route": "allgemein",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
    "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
    "line": 23,
    "route": "allgemein",
@@ -176,17 +165,6 @@
    "code": "IW2",
    "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
    "line": 145,
-   "route": "allgemein",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
-   "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-   "line": 152,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
