@@ -2,7 +2,7 @@
   "target": 6,
   "ready": 5,
   "pool_size": 7,
-  "generated_at": "2026-11-04T11:40:57Z",
+  "generated_at": "2026-11-04T14:32:26Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
@@ -75,9 +75,25 @@
     {
       "slug": "2026-11-01-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
       "ready": false,
-      "sha256": "23517e6e259b6abd902502dcc7cb07a35d3762baa2ec43f4a622e4c6dbf9731d",
-      "measured_at": "2026-11-04T11:38:41Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
+      "sha256": "3f7519933c3609e89e11d36ce561120d659bcc97ae670220c8b7b673069f76db",
+      "flesch": 65.6,
+      "measured_at": "2026-11-04T14:31:26Z",
+      "reason": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: ide",
+      "details": [
+        "🛑 2026-11-01-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
+        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…hinweis dieser artikel dient ausschließlich der allgemeinen information und stellt…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…keine anlage rechts oder steuerberatung dar prüfe konditionen und bedingungen…“ – doppelte Passage, manuell reparieren",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 0.942,
+      "parts": {
+        "spelling": 0.92,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.6799999999999999,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
     },
     {
       "slug": "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck",
@@ -99,13 +115,14 @@
     {
       "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ready": false,
-      "sha256": "48f0721c9872533a8f7a49d5b17b6a968a6caa4d535d642d5f64767a07629eaf",
-      "flesch": 72.6,
-      "measured_at": "2026-11-04T11:40:57Z",
+      "sha256": "d5c01c0091b989b4f30d57c9a8088fee7dae0ed78b540d25af4d97b63d099bfe",
+      "flesch": 71.5,
+      "measured_at": "2026-11-04T14:32:26Z",
       "reason": "Faktenfrische nicht bestanden: 0b564f460c41218244bd (luecke): Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.; 3ad2eefed314eb172c26 (luecke): Die Aussag",
       "details": [
         "🛑 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
         "Faktenfrische nicht bestanden: 0b564f460c41218244bd (luecke): Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.; 3ad2eefed314eb172c26 (luecke): Die Aussage, dass durch frühzeitige Bestellung Kosten um 10 % bis 20 % im Herbst eingespart werden können, ist unbelegt.; 43788c2cdcdfda52e753 (luecke): Die Modellrechnung verwendet einen Tiefpreis von 0,80 €/Liter, ohne dass diese Preisangabe belegt wird.; 5eedec8afbdef6a4ca49 (luecke): Es wird angegeben, dass typische Fehler beim Heizölkauf bis zu 15 % Mehrkosten verursachen können, jedoch fehlt ein Nachweis für diese Zahl.; 81881c5bc61824d25f5a (praezision): Die Faustregel, dass man bestellen sollte, wenn Preise vier Wochen unter dem Schnitt der letzten 12 Monate liegen, wird ohne Messgrundlage oder Quelle genannt.",
+        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…wichtiger hinweis dieser artikel dient ausschließlich der allgemeinen information und…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…stellt keine anlage rechts oder steuerberatung dar prüfe konditionen und…“ – doppelte Passage, manuell reparieren",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
       ],
       "score": 0.996,
@@ -121,8 +138,16 @@
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "41819864260",
+    "kind": "partial",
+    "run_id": "41847777347",
     "run_attempt": "1"
+  },
+  "recert": {
+    "at": "2026-11-04T14:32:26Z",
+    "renewed": [
+      "2026-11-01-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
+      "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu"
+    ],
+    "tool": "scripts/reserve_recert.py"
   }
 }
