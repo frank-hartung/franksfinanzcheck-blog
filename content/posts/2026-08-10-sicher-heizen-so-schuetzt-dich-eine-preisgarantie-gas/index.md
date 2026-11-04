@@ -179,9 +179,9 @@ Im Zweifel gilt: Ein klarer Tarif ohne Sonderregeln macht weniger Ärger.
 
 Erhöht dein Anbieter den Preis, prüfe zuerst den Grund. Steigen Steuern oder kommt eine neue Umlage, ist das oft erlaubt. Dann muss es aber genau so im Vertrag stehen.
 
-Steigt der Preis für einen geschützten Bestandteil, prüfe einen Widerspruch und hole bei Bedarf Rat. Die [Bundesnetzagentur zu Preisänderungen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html) verlangt, dass Haushaltskunden mindestens einen Monat vorher verständlich erfahren, aus welchem Grund sich der Preis wie verändert. Ihr Sonderkündigungsrecht muss dabei ebenfalls genannt werden; für die Grundversorgung gelten zusätzliche Informationspflichten.
+Steigt der Preis für einen geschützten Bestandteil, prüfe einen Widerspruch und hole bei Bedarf Rat. Steigt der Preis für einen geschützten Bestandteil, prüfe einen Widerspruch und hole bei Bedarf Rat. Nach der [Bundesnetzagentur zu Preisänderungen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html) müssen Haushaltskunden grundsätzlich mindestens einen Monat vorher klar über Grund, Voraussetzungen und Umfang der Änderung sowie ihr Sonderkündigungsrecht informiert werden; in der Grundversorgung gelten zusätzliche Informationspflichten.
 
-Einseitige Änderungen sind besonders geregelt: Wer zum Zeitpunkt der Änderung kündigt, braucht keine Frist abzuwarten. Sein Vertrag endet dann am Vortag. Zwei Ausnahmen bleiben: eine vereinbarte separierte Klausel für bestimmte hoheitliche Änderungen und die reine Weitergabe einer Umsatzsteueränderung. Sieh deshalb den Wortlaut deiner Klausel und dein Schreiben an.
+Einseitige Änderungen sind besonders geregelt: Wer zum Zeitpunkt der Änderung kündigt, braucht keine Frist abzuwarten; der Vertrag endet am Vortag. Zwei Ausnahmen bleiben: eine vereinbarte separierte Klausel für bestimmte hoheitliche Änderungen und die reine Weitergabe einer Umsatzsteueränderung. Sieh deshalb den Wortlaut deiner Klausel und dein Schreiben an.
 
 Gehe strukturiert vor:
 1. Prüfe die schriftliche Ankündigung gegen deine Vertragsunterlagen.

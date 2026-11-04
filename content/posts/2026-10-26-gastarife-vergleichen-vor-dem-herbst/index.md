@@ -109,7 +109,7 @@ Steuern, Abgaben, Umlagen und Netzentgelte können außerhalb der Garantie liege
 
 Ein neuer Gaspreis kündigt sich schriftlich an: Der Lieferant muss dich als Haushaltskunde mindestens einen Monat vor dem Inkrafttreten anschreiben und darlegen, was sich warum und in welchem Umfang ändert (Q1). An diese Mitteilung ist in der Regel ein Sonderkündigungsrecht geknüpft – du kannst dann sofort kündigen, ohne die sonst übliche Frist einzuhalten.
 
-Bis zu dem Tag, an dem der höhere Preis greift, muss deine Kündigung beim Lieferanten eingegangen sein. Endet dein Vertrag dadurch einen Tag vor dem Wirksamwerden? Ja. Zwei Ausnahmen bleiben: eine getrennte Anpassungsklausel für hoheitlich bedingte Kosten und eine eins zu eins weitergegebene Umsatzsteuer. In beiden Fällen gibt es kein Sonderrecht – weder bei einer Erhöhung noch bei einer Senkung.
+Deine Kündigung muss bis zu dem Tag beim Lieferanten eingegangen sein, an dem der höhere Preis greift. Dein Vertrag endet dadurch einen Tag vor dem Wirksamwerden. Zwei Ausnahmen bleiben: eine getrennte Anpassungsklausel für hoheitlich bedingte Kosten und eine eins zu eins weitergegebene Umsatzsteuer. In beiden Fällen gibt es kein Sonderrecht – weder bei einer Erhöhung noch bei einer Senkung.
 
 Bei einer zweifelhaften Erhöhung kannst du widersprechen. Nenne den Grund, etwa eine laufende Zusage oder eine zu kurze Frist. Wenn der Anbieter nicht reagiert, hilft das Beschwerde- und Schlichtungsverfahren der Behörde.
 

@@ -126,9 +126,9 @@ Vergleiche dann die Änderung mit deiner Garantie. Steigt ein geschützter Teil 
 
 ## Was die Bundesnetzagentur zu Preisänderungen sagt
 
-Die [Bundesnetzagentur zu Preisen und Abschlägen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html) verlangt, dass Lieferanten Haushaltskunden mindestens einen Monat vorab über Grund, Voraussetzungen und Umfang einer Preisänderung aufklären. Ihr Sonderrecht muss dabei ebenfalls vorkommen. In der Grundversorgung gibt es weitere Informationspflichten.
+Nach der [Bundesnetzagentur zu Preisen und Abschlägen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html) gilt: Haushaltskunden müssen mindestens einen Monat vor einer Preisänderung erfahren, was teurer wird und warum. Das Sonderkündigungsrecht muss dort genannt werden. In der Grundversorgung gelten zusätzliche Informationspflichten. Der Brief muss beides enthalten.
 
-Kündigst du bei einer einseitigen Änderung zum Zeitpunkt der Änderung, endet dein Vertrag am Vortag. Eine Frist musst du dafür nicht warten. Anders liegt der Fall bei einer vereinbarten separierten Preisanpassungsklausel für bestimmte hoheitliche Änderungen und bei der reinen Weitergabe einer Umsatzsteueränderung. Beides prüfst du am Schreiben und an deiner Klausel.
+Kündigst du zum Zeitpunkt der Änderung, endet dein Vertrag am Vortag – eine Frist musst du nicht abwarten. Ausnahmen gelten unter anderem bei einer vereinbarten separierten Preisanpassungsklausel für bestimmte hoheitliche Änderungen und bei der reinen Weitergabe einer Umsatzsteueränderung. Beides prüfst du am Schreiben und an deiner Klausel.
 
 Darum lautet die sichere Regel: **Nicht nur die Überschrift lesen. Änderungsgrund und Vertragsklausel entscheiden.**
 
@@ -140,11 +140,11 @@ Schreib dem Anbieter, auf welche Klausel du dich beziehst. Widersprich nachweisb
 
 ### Wenn die Erhöhung zulässig erscheint
 
-Rechne den neuen Jahrespreis aus und vergleiche ihn. Wenn ein Sonderrecht besteht, kannst du es nutzen, musst es aber nicht. Trotz Erhöhung kann dein alter Vertrag günstiger sein als ein neues Angebot.
+Rechne den neuen Jahrespreis aus und vergleiche ihn. Wenn ein Sonderkündigungsrecht besteht, kannst du es nutzen, musst es aber nicht. Trotz Erhöhung kann dein alter Vertrag günstiger sein als ein neues Angebot.
 
 ### Wenn die Frist knapp ist
 
-Kündige selbst, schriftlich, und verlange eine Bestätigung. Beim normalen Wechsel kann der neue Anbieter die Kündigung für dich übernehmen. Bei diesem Sonderrecht rät die Bundesnetzagentur: Handle selbst.
+Kündige selbst, schriftlich, und verlange eine Bestätigung. Beim normalen Wechsel kann der neue Anbieter die Kündigung für dich übernehmen. Bei einer Sonderkündigung wegen der Erhöhung rät die Bundesnetzagentur: Handle selbst.
 
 ## Jahrespreis nach einer Erhöhung rechnen
 
@@ -152,7 +152,7 @@ Steigt der Arbeitspreis von 10,5 auf 12,0 Cent, beträgt der Unterschied 1,5 Cen
 
 Bei 18.000 kWh wären das für ein volles Jahr **270 €**; das ist ein Rechenbeispiel. Gilt der neue Preis nur für einen Teil des Abrechnungsjahres, musst du den Verbrauch zeitanteilig aufteilen. Gasverbrauch fällt nicht gleichmäßig an; der Winter wiegt stärker.
 
-Notiere deshalb zum Startdatum den Zählerstand und übermittle ihn nach Vorgabe. So wird die Abgrenzung nachvollziehbarer.
+Notiere deshalb zum Datum der Änderung den Zählerstand und übermittle ihn nach Vorgabe. So wird die Abgrenzung nachvollziehbarer.
 
 ![Gliederung des Beitrags: Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-ablauf.svg)
 
@@ -203,7 +203,7 @@ Preis bleibt konkurrenzfähig, Garantie greift, Vertrag ist verständlich.
 Erhöhung betrifft einen ausgenommenen Teil oder die Garantie läuft bald aus. Marktvergleich und Frist notieren.
 
 **Rot: handeln**
-Erhöhung widerspricht der Garantie, Schreiben ist intransparent oder neuer Jahrespreis liegt klar über vergleichbaren Angeboten. Widerspruch, Beratung oder Sonderrecht prüfen.
+Erhöhung widerspricht der Garantie, Schreiben ist intransparent oder neuer Jahrespreis liegt klar über vergleichbaren Angeboten. Widerspruch, Beratung oder Kündigung prüfen.
 
 ## Wenn die Garantie ausläuft, ohne dass der Preis steigt
 
@@ -269,7 +269,7 @@ Nicht zwingend. Verbrauchsprognose oder ausgenommene Preisbestandteile können d
 Nein. Vergleiche zuerst aktuellen Gesamtpreis, Garantieumfang und Aufpreis für die längere Bindung.
 
 **Was mache ich bei einer unklaren oder möglicherweise unzulässigen Erhöhung?**
-Widersprich nachweisbar, prüfe dein Sonderrecht und hol Hilfe bei der Verbraucherzentrale oder Schlichtungsstelle Energie.
+Widersprich nachweisbar, prüfe dein Sonderkündigungsrecht und hol Hilfe bei der Verbraucherzentrale oder Schlichtungsstelle Energie.
 
 ---
 

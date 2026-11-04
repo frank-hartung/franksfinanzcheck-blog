@@ -84,7 +84,7 @@ Dein Abschlag gehört nicht ins Verbrauchsfeld. Er ist nur eine Vorauszahlung. N
 - Grundpreis = 180 €
 - angenommene Jahreskosten = **2.304 €**
 
-Im Beispiel ist das die Vergleichsbasis. Nutze für deine Rechnung deine eigenen Werte. Ein Bonus aus einem früheren Jahr zählt nicht mehr..
+Im Beispiel ist das die Vergleichsbasis. Nutze für deine Rechnung deine eigenen Werte. Ein Bonus aus einem früheren Jahr zählt nicht mehr.
 
 ## Minute 3: Portalfilter neutral einstellen
 
@@ -184,7 +184,7 @@ Ausnahmen: Bei sehr knapper Frist, bei einer Sonderkündigung wegen Preiserhöhu
 
 Notiere den Zählerstand zum Wechseltermin und gib ihn wie verlangt durch. Leitung und Zähler bleiben gleich. Nach der [Bundesnetzagentur zu Vertragsarten](https://www.bundesnetzagentur.de/DE/Vportal/Energie/Vertragsarten/start.html) bleibt die Versorgung beim Wechsel über das Netz gesichert. Kommt der neue Lieferant zu spät, greift je nach Fall die Grund- oder Ersatzversorgung; ihre Preise können abweichen.
 
-Kommt ein Preisschreiben, prüfst du vier Punkte: Ab wann gilt der neue Preis, warum er steigt, welche Teile betroffen sind und wie lange deine Kündigungsfrist läuft. Lieferanten müssen Haushaltskunden mindestens einen Monat vorher verständlich informieren; in der Grundversorgung gelten weitere Pflichten. Steigt der Preis einseitig, hast du ein Sonderkündigungsrecht: Du kannst zum Zeitpunkt der Änderung kündigen. Ausgenommen ist das, wenn dein Vertrag eine separierte Anpassungsklausel für hoheitlich bedingte Änderungen enthält oder wenn lediglich eine Umsatzsteueränderung weitergegeben wird. Details erklärt die [Bundesnetzagentur zu Preisen und Abschlägen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html).
+Kommt ein Preisschreiben, prüfst du vier Punkte: Ab wann gilt der neue Preis, warum er steigt, welche Teile betroffen sind und wie lange deine Kündigungsfrist läuft. Bei einer Preisänderung müssen Lieferanten Haushaltskunden grundsätzlich mindestens einen Monat vorher verständlich informieren; in der Grundversorgung gelten weitere Pflichten. Steigt der Preis einseitig, hast du ein Sonderkündigungsrecht: Du kannst zum Zeitpunkt der Änderung kündigen. Ausgenommen ist das, wenn dein Vertrag eine separierte Anpassungsklausel für hoheitlich bedingte Änderungen enthält oder wenn lediglich eine Umsatzsteueränderung weitergegeben wird. Details erklärt die [Bundesnetzagentur zu Preisen und Abschlägen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html).
 
 ## Wie du die mögliche Ersparnis berechnest?
 
@@ -259,7 +259,7 @@ Nach der Portalsuche bleiben höchstens drei Kandidaten übrig. Übertrage sie i
 | [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) |  |  |  |
 | Vorkasse oder Paket |  |  |  |
 
-Streiche jedes Angebot mit Vorkasse, unklarer Garantie oder einem Preis, der nur durch einen schwer verständlichen Bonus gewinnt. Prüfe bei den übrigen Kandidaten auch, ob der Anbieter den Abschlag monatlich erhebt und eine Paketmenge enthält.
+Streiche jedes Angebot mit Vorkasse, unklarer Garantie oder einem Preis, der nur durch einen schwer verständlichen Bonus gewinnt. Prüfe bei den übrigen Kandidaten auch, ob der Anbieter den Abschlag monatlich erhebt und ob eine Paketmenge enthalten ist.
 
 Falls zwei Tarife fast gleich teuer sind, gewinnt nicht automatisch der mit dem größten Bonus. Bevorzuge die klarere Klausel, den besseren Preis ohne Bonus und die passendere [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/). Bei den übrigen Tarifen entscheidest du nach Gesamtpreis und gewünschter Sicherheit.
 
