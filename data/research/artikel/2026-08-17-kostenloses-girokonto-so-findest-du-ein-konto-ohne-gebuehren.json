@@ -1,0 +1,77 @@
+{
+  "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+  "titel": "Kostenloses Girokonto: Ein Konto ohne Gebühren finden",
+  "erzeugt": "2026-11-04 12:28 UTC",
+  "faellig": {
+    "faellig": false,
+    "prio": 9,
+    "klasse": "YMYL",
+    "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
+    "alter_tage": 38,
+    "intervall": 45,
+    "frist": "2026-11-11",
+    "restlaufzeit": 7
+  },
+  "geo": {
+    "punkte": 6,
+    "maximum": 6,
+    "prozent": 100,
+    "offen": [],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": true,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": true
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesbank.de",
+      "url": "https://www.bundesbank.de/de/presse/pressenotizen",
+      "datum": "",
+      "quelle": "bundesbank.de",
+      "kanal": "web",
+      "auszug": "Title: Suche\n\nURL Source: https://www.bundesbank.de/de/presse/pressenotizen\n\nFinal URL: https://www.bundesbank.de/de/presse/pressemitteilungen\n\nMarkdown Content:\n*   [Hauptnavigation](https://www.bundesbank.de/de/presse/pressemitteilungen#main-navigation \" Sprung zur Hauptnavigation\")\n*   [Suche](https://www.bundesbank.de/de/presse/pressemitteilungen#header-search \"Sprung zur Suche\")\n*   [Inhaltsbereich](https://www.bundesbank.de/de/presse/pressemitteilungen#main-content \"Sprung zum Inhaltsbereich\")\n\n# Service Navigation\n\n*   [Kontakt](https://www.bundesbank.de/de/startseite/kontakt \"Kontakt\")\n*   [Glossar](https://www.bundesbank.de/de/startseite/glossar \"Glossar\")\n*   [Gebärdensprache](https://www.bundesbank.de/de/startseite/gebaerdensprache \"Gebärdensprache\")\n*   [Leichte Sprache](https://publikationen.bundesbank.de/publikationen-de/die-bundes-bank-in-leichter-sprache)\n*   [EN](https://www.bundesbank.de/en)\n\nSuche\n*   Suche\n*   Bankleitzahlen\n\n*   [Anmelden](https://www.bundesbank.de/de/startseite/anmelden \"Anmelden\")\n\n# Logo\n\n[![Image 1: Deutsche Bundesbank](https://www.bundesbank.de/resource/crblob/722082/6a4e8cec477af9daea8b48e194795928/472B63F073F071307366337C94F8C870/logo-data.svg)](https://www.bundesbank.de/de \"Deutsche Bundesbank\")\n\n## Hauptnavigation\n\n Navigation anzeigen  Suche anzeigen \n*   [en](https://www.bundesbank.de/en \"Englisch\")\n\nSuchen\n\n*   Bundesbank \n\n![Image 2: Ein Wald mit Birkenbäumen von unten fotografiert ©smallredgirl / Fotolia](https://www.bundesbank.de/resource/image/805446/ratio16x9/200/112/3fccbccc44a034100aa1efb86d9cb250/596993BD12C7EECAB46FFEC124C39005/AD5D49A215827A28B0A618B149FFEC04/baum-gruen.jpg)© smallredgirl / Fotolia   Green Finance   Der Klimawandel stellt auch den Finanzsektor vor große Herausforderungen.Die Bundesbank unterstü",
+      "score": 0,
+      "belegfaehig": true,
+      "herausgeber": "Deutsche Bundesbank",
+      "rang": 1,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Angabe, dass ein Kontowechsel 120 € bis 180 € im Jahr spart, fehlt jede Quelle.",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 € an reinen Gebühren kosten, ist unbelegt.",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Angabe von Dispozinsen von 8 % bis 11 % ohne Quellenangabe.",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Aussage, dass Einlagen bis 100.000 € durch die deutsche Einlagensicherung geschützt sind, wird nicht belegt.",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Behauptung, dass Echtzeit‑Überweisungen bei kostenlosen Konten generell gebührenfrei sind, fehlt jede Quelle.",
+      "beleg": ""
+    }
+  ],
+  "fehler": [
+    "Deutsche Bundesbank – Pressenotizen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+  ],
+  "fassung_sha256": "ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4",
+  "text_sha256": null,
+  "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)"
+}

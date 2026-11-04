@@ -172,13 +172,130 @@ class LaufTests(unittest.TestCase):
         self.assertNotIn("geheim-123", out + err)
 
 
+class HaertungTests(unittest.TestCase):
+    """#1026 (04.11.2026): Drei Härtungen aus dem roten Wochenlauf 41456548199.
+
+    Der Lauf war nicht wegen schlechter Werte rot, sondern weil das
+    Messwerkzeug seine eigene Störung nicht ehrlich melden konnte:
+    Fortschritt im Datenstrom, Schlüssel in Fehlertexten, kein Retry bei
+    transienten Antworten. Diese Klasse hält jeden der drei Wege fest.
+    """
+
+    def _antwort(self, nutzlast: bytes):
+        class _Kontext:
+            def __enter__(self_inner):
+                return self_inner
+
+            def __exit__(self_inner, *args):
+                return False
+
+            def read(self_inner):
+                return nutzlast
+
+        return _Kontext()
+
+    def test_schluessel_wird_geschwaerzt(self):
+        geheim = "AIzaSyD-geheim-1234567890"
+        text = f"https://x/pagespeedonline/v5/runPagespeed?url=y&key={geheim}"
+        geschwaerzt = wache.schwaerze(text)
+        self.assertNotIn(geheim, geschwaerzt)
+        self.assertIn("key=***", geschwaerzt)
+
+    def test_schwaerzung_faengt_auch_fremde_fehlermeldungen(self):
+        geheim = "AIzaSyD-geheim-1234567890"
+        fremd = (f"<urlopen error> HTTP Error 429: Too Many Requests "
+                 f"(url={wache.API}?key={geheim}&url=x)")
+        self.assertNotIn(geheim, wache.schwaerze(fremd))
+
+    def test_schwaerzung_laesst_text_ohne_schluessel_unberuehrt(self):
+        for text in ("", "kein Schlüssel", "https://x/?key=", "https://x/?urllist=a"):
+            with self.subTest(text=text):
+                self.assertEqual(text, wache.schwaerze(text))
+
+    def test_transiente_antwort_wird_wiederholt(self):
+        zaehler = {"n": 0}
+        pausen = []
+
+        def urlopen(request, timeout=0):
+            zaehler["n"] += 1
+            if zaehler["n"] < 3:
+                raise urllib.error.HTTPError(request.full_url, 503, "weg", {}, None)
+            return self._antwort(b'{"ok": true}')
+
+        with patch.object(wache.urllib.request, "urlopen", urlopen):
+            ergebnis = wache.hole("https://x/api", versuche=3, pause=pausen.append)
+        self.assertEqual({"ok": True}, ergebnis)
+        self.assertEqual(3, zaehler["n"])
+        self.assertEqual(2, len(pausen))
+
+    def test_404_wird_nicht_wiederholt(self):
+        zaehler = {"n": 0}
+
+        def urlopen(request, timeout=0):
+            zaehler["n"] += 1
+            raise urllib.error.HTTPError(request.full_url, 404, "weg", {}, None)
+
+        with patch.object(wache.urllib.request, "urlopen", urlopen):
+            with self.assertRaises(urllib.error.HTTPError):
+                wache.hole("https://x/api", versuche=3, pause=lambda s: None)
+        self.assertEqual(1, zaehler["n"])
+
+    def test_retry_after_wird_respektiert_und_gedeckelt(self):
+        self.assertEqual(7.0, wache._wartezeit({"Retry-After": "7"}, 0))
+        self.assertEqual(wache.RETRY_AFTER_MAX,
+                         wache._wartezeit({"Retry-After": "9999"}, 0))
+        # Unlesbarer Wert → exponentielles Backoff statt Absturz.
+        self.assertEqual(wache.PAUSE_SEKUNDEN, wache._wartezeit({"Retry-After": "später"}, 0))
+        self.assertEqual(wache.PAUSE_SEKUNDEN * 2, wache._wartezeit(None, 1))
+
+    def test_nach_letztem_versuch_wird_die_stoerung_gemeldet(self):
+        def urlopen(request, timeout=0):
+            raise urllib.error.HTTPError(request.full_url, 503, "weg", {}, None)
+
+        with patch.object(wache.urllib.request, "urlopen", urlopen):
+            with self.assertRaises(urllib.error.HTTPError):
+                wache.hole("https://x/api", versuche=2, pause=lambda s: None)
+
+    def test_stoerung_nennt_pfad_klasse_und_geschwaerzten_grund(self):
+        geheim = "AIzaSyD-geheim-1234567890"
+
+        def hole(url, zeitlimit=60, versuche=wache.VERSUCHE, pause=lambda s: None):
+            raise urllib.error.HTTPError(url, 429, "Too Many Requests", {}, None)
+
+        with patch.object(wache, "hole", hole), \
+             patch.dict("os.environ", {"PSI_API_KEY": geheim}):
+            punkte, stoerungen = wache.messe(
+                [{"pfad": "/", "name": "/"}], "https://a.de", "mobile", geheim)
+        self.assertEqual([], punkte)
+        self.assertEqual(1, len(stoerungen))
+        self.assertIn("/", stoerungen[0])
+        self.assertIn("HTTPError", stoerungen[0])
+        self.assertNotIn(geheim, stoerungen[0])
+
+
 class SelbsttestTests(unittest.TestCase):
     def test_selbsttest_ist_gruen(self):
         self.assertEqual(wache.selftest(), 0)
 
     def test_selbsttest_beruehrt_das_netz_nicht(self):
-        with patch.object(wache, "hole", side_effect=AssertionError("Netz im Selbsttest")):
+        """Die Netzgrenze ist `urlopen`, nicht `hole`.
+
+        Bis 04.11.2026 bewachte dieser Test `hole` – ein Stellvertreter.
+        Seit der Selbsttest den RETRY-Weg prüft (und dafür `urlopen`
+        kontrolliert ersetzt), ist `urlopen` die ehrliche Grenze: Sie schlägt
+        bei jedem echten Verbindungsversuch an, egal über welchen Umweg.
+        """
+        aufrufe = []
+
+        def tripwire(*args, **kwargs):
+            aufrufe.append(args)
+            raise AssertionError("Netz im Selbsttest")
+
+        with patch.object(wache.urllib.request, "urlopen", tripwire):
             self.assertEqual(wache.selftest(), 0)
+        # Der Selbsttest darf `urlopen` einsetzen (Retry-Probe) – aber nur
+        # mit seiner eigenen Attrappe, die er selbst wieder zurückgibt.
+        self.assertEqual([], aufrufe, "Selbsttest hat eine echte Verbindung geöffnet")
 
 
 if __name__ == "__main__":

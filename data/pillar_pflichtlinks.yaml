@@ -1,0 +1,39 @@
+# ============================================================
+#  PFLICHT-LINKS DER PILLAR-SEITEN (Vertrag, nicht Bestand)
+#
+#  Warum diese Datei existiert (04.11.2026, Vorgang WF-0032)
+#  -------------------------------------------------------
+#  Am 04.11.2026 gingen zwei Artikel des Versicherungs-Clusters live
+#  (Wohngebäude-Vergleich, Kfz-Vergleich). Der Versicherungs-Pillar
+#  verlinkte sie nicht – er sagte weiter „(Ratgeber in Vorbereitung)“.
+#  Eine Wiedervorlage gab es (test_versicherungs_cluster_verlinkung.py),
+#  aber sie lief nur bei Pull Requests. Der Artikel kam über einen
+#  Automatik-Commit auf main, ohne PR. Niemand sah es.
+#
+#  Der Test führt die vier Artikel aus GSC-OPTIMIERUNGSPLAN-2026-10-27
+#  (Abschnitt 14.2) in einer Liste – aus gutem Grund: Ein Pillar ist eine
+#  kuratierte Seite, keine vollständige Liste seiner 76 Live-Artikel.
+#  „Jeder Live-Artikel muss im Pillar stehen“ wäre keine Regel, sondern
+#  Rauschen – und Rauschen wird abgeschaltet, nicht geheilt.
+#
+#  Diese Datei macht den kuratierten Anspruch EXPLIZIT und prüfbar:
+#  Ein Artikel, der hier steht, MUSS im genannten Pillar verlinkt sein,
+#  sobald er live ist. Wer den Anspruch aufgibt, streicht ihn hier –
+#  sichtbar, mit Begründung, in einem Commit.
+#
+#  Prüfung: scripts/pillar_wiedervorlage.py --check
+#           (täglich auf main über blog-health-daily.yml)
+# ============================================================
+
+vertrag:
+  # Der Anlass-Fall. Quelle: GSC-OPTIMIERUNGSPLAN-2026-10-27.md, 14.2/14.4.
+  versicherungen:
+    begruendung: >
+      Vier Artikel des Versicherungs-Clusters wurden am 27.10.2026 entlinkt,
+      weil die Ziele Entwürfe waren (Befund W11). Ab ihrer Veröffentlichung
+      gehören sie zurück – sie sind der Grund, warum der Pillar existiert.
+    artikel:
+      - 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
+      - 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
+      - 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
+      - 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen

@@ -1,16 +1,16 @@
 {
-  "erzeugt": "2026-11-03 12:18 UTC",
+  "erzeugt": "2026-11-04 12:30 UTC",
   "uebersicht": {
     "gesamt": 112,
     "ratgeber": 6,
     "faellig": 0,
-    "vorlauf": 3,
-    "bearbeitet": 3,
+    "vorlauf": 10,
+    "bearbeitet": 4,
     "budget": 4,
     "budget_quelle": "Auto-Skalierung (Deckungsrechnung)",
     "geo_schnitt": 94,
-    "befunde": 88,
-    "befunde_im_lauf": 15,
+    "befunde": 106,
+    "befunde_im_lauf": 18,
     "fachbefunde": [
       {
         "typ": "praezision",
@@ -157,6 +157,106 @@
         "zuletzt_gesehen": "2026-10-30 11:01 UTC"
       },
       {
+        "typ": "luecke",
+        "text": "Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 € an reinen Gebühren kosten, ist unbelegt.",
+        "beleg": "",
+        "id": "1dbeb2f8c51e78d11d49",
+        "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+        "fassung_sha256": "ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Behauptung, dass Echtzeit‑Überweisungen bei kostenlosen Konten generell gebührenfrei sind, fehlt jede Quelle.",
+        "beleg": "",
+        "id": "33e736ac6afe996b491a",
+        "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+        "fassung_sha256": "ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Aussage, dass Einlagen bis 100.000 € durch die deutsche Einlagensicherung geschützt sind, wird nicht belegt.",
+        "beleg": "",
+        "id": "96b7b7768d402884810c",
+        "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+        "fassung_sha256": "ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Angabe von Dispozinsen von 8 % bis 11 % ohne Quellenangabe.",
+        "beleg": "",
+        "id": "a25bb6bbcb25ba8b0e22",
+        "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+        "fassung_sha256": "ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Angabe, dass ein Kontowechsel 120 € bis 180 € im Jahr spart, fehlt jede Quelle.",
+        "beleg": "",
+        "id": "f94f8ba1e4342e67e45a",
+        "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+        "fassung_sha256": "ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Angabe, dass 58 % der Nutzer ihr Haushaltsbuch digital führen, beruft sich angeblich auf Statista 2025, jedoch wird keine Quelle genannt.",
+        "beleg": "",
+        "id": "4afb8daed73677ee6224",
+        "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
+        "fassung_sha256": "cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Sparpotenzial‑Beispiele (z. B. DSL‑Tarifwechsel von 44 € auf 24 €) enthalten konkrete Zahlen ohne Quellenangabe.",
+        "beleg": "",
+        "id": "9eb9a90899cc8ca66020",
+        "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
+        "fassung_sha256": "cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Behauptung, dass 60 % der Haushalte in Deutschland ihr Geld nicht nachverfolgen, wird mit einer Auswertung der Stiftung Warentest angegeben, jedoch fehlt ein entsprechender Nachweis.",
+        "beleg": "",
+        "id": "b4bd085bc84a6131b644",
+        "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
+        "fassung_sha256": "cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Versprechen, dass ein Haushaltsbuch „schnell“ zeigt, welche Posten sich lohnen, ist nicht quantifiziert und fehlt an konkreten Evidenzangaben.",
+        "beleg": "",
+        "id": "baed76dc211bd15dd46f",
+        "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
+        "fassung_sha256": "cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Die Aussage, dass die 50‑30‑20‑Regel für ein Nettoeinkommen von 2.500 € realistisch sei, wird ohne Hinweis auf regionale Unterschiede oder empirische Daten präsentiert.",
+        "beleg": "",
+        "id": "d7c3cfb422310cf26ca6",
+        "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
+        "fassung_sha256": "cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+      },
+      {
         "id": "0051151e6c46f4c2bdb3",
         "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
         "fassung_sha256": "legacy-unbekannt",
@@ -202,6 +302,36 @@
         "zuletzt_gesehen": "2026-10-30 11:01 UTC"
       },
       {
+        "typ": "praezision",
+        "text": "Die im Teaser und Text genannten monatlichen Ersparnisse von 350 € bis 600 € werden als Marktfakten ohne Quellenbeleg oder methodische Herleitung (z. B. Referenzhaushalt des Statistischen Bundesamtes) angeführt.",
+        "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+        "id": "3fe383f6d452737f66f2",
+        "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
+        "fassung_sha256": "e08b6e61e4a9499d725785fb800202179452b36ea7e69b11f6f2f96544f6bce6",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der Ratgeber empfiehlt Tarifwechsel bei Energie zur Kostensenkung, verschweigt aber den aktuellen Markttrend massiv steigender Energiepreise (+14,9 %), was die Kalkulation der 50-Prozent-Fixkostenquote gefährdet.",
+        "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+        "id": "7bba759bbb4ca14c7f35",
+        "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
+        "fassung_sha256": "e08b6e61e4a9499d725785fb800202179452b36ea7e69b11f6f2f96544f6bce6",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+      },
+      {
+        "typ": "veraltet",
+        "text": "Die Einschätzung zur Inflation ist unpräzise: Die aktuelle Inflationsrate liegt laut Destatis bei +2,8 % (Oktober 2026), wodurch die genannten Tagesgeldzinsen von 0,5 % bis 1,5 % den Wertverlust deutlich weniger ausgleichen als suggeriert.",
+        "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+        "id": "e8e32a383b6f803cc8d4",
+        "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
+        "fassung_sha256": "e08b6e61e4a9499d725785fb800202179452b36ea7e69b11f6f2f96544f6bce6",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+      },
+      {
         "typ": "luecke",
         "text": "Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher angekündigt werden muss, ohne dafür eine Quelle anzugeben.",
         "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
@@ -245,6 +375,56 @@
         "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
         "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
         "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Angaben zum Fremdwährungsentgelt von „fast zwei Prozent“ bei Zahlungen in fremder Währung fehlen jede belegbare Referenz.",
+        "beleg": "",
+        "id": "16b3b8584ff802803aa9",
+        "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
+        "fassung_sha256": "6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Formulierungen wie „einige Anbieter ohne Auslandsgebühr gehören zu den besten Karten für Reisen“ sind pauschal und ohne messbare Daten unpräzise.",
+        "beleg": "",
+        "id": "7ff042b6fe804cdf101b",
+        "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
+        "fassung_sha256": "6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Aussage, dass die kostenlose Sperr‑Notrufnummer 116 für alle Karten in Deutschland gilt, wird nicht durch eine Quelle gestützt.",
+        "beleg": "",
+        "id": "bec83c4b814183fa1086",
+        "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
+        "fassung_sha256": "6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Angabe, dass Sollzinsen bei Teilzahlung zwischen 12 % und 20 % liegen, ist nicht mit einer Quelle belegt.",
+        "beleg": "",
+        "id": "f9aff86b6eba71b153a6",
+        "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
+        "fassung_sha256": "6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Behauptung, dass eine gute Kreditkarte im Jahr nichts kostet (keine Jahres‑ und keine Fremdwährungsgebühr), wird ohne jegliche Quelle angegeben.",
+        "beleg": "",
+        "id": "fed9215b770ea4879eda",
+        "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
+        "fassung_sha256": "6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5",
+        "text_sha256": null,
+        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
       },
       {
         "typ": "luecke",
@@ -984,6 +1164,106 @@
       "zuletzt_gesehen": "2026-10-30 11:01 UTC"
     },
     {
+      "typ": "luecke",
+      "text": "Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 € an reinen Gebühren kosten, ist unbelegt.",
+      "beleg": "",
+      "id": "1dbeb2f8c51e78d11d49",
+      "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+      "fassung_sha256": "ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Behauptung, dass Echtzeit‑Überweisungen bei kostenlosen Konten generell gebührenfrei sind, fehlt jede Quelle.",
+      "beleg": "",
+      "id": "33e736ac6afe996b491a",
+      "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+      "fassung_sha256": "ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Aussage, dass Einlagen bis 100.000 € durch die deutsche Einlagensicherung geschützt sind, wird nicht belegt.",
+      "beleg": "",
+      "id": "96b7b7768d402884810c",
+      "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+      "fassung_sha256": "ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Angabe von Dispozinsen von 8 % bis 11 % ohne Quellenangabe.",
+      "beleg": "",
+      "id": "a25bb6bbcb25ba8b0e22",
+      "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+      "fassung_sha256": "ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Angabe, dass ein Kontowechsel 120 € bis 180 € im Jahr spart, fehlt jede Quelle.",
+      "beleg": "",
+      "id": "f94f8ba1e4342e67e45a",
+      "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+      "fassung_sha256": "ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Angabe, dass 58 % der Nutzer ihr Haushaltsbuch digital führen, beruft sich angeblich auf Statista 2025, jedoch wird keine Quelle genannt.",
+      "beleg": "",
+      "id": "4afb8daed73677ee6224",
+      "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
+      "fassung_sha256": "cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Sparpotenzial‑Beispiele (z. B. DSL‑Tarifwechsel von 44 € auf 24 €) enthalten konkrete Zahlen ohne Quellenangabe.",
+      "beleg": "",
+      "id": "9eb9a90899cc8ca66020",
+      "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
+      "fassung_sha256": "cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Behauptung, dass 60 % der Haushalte in Deutschland ihr Geld nicht nachverfolgen, wird mit einer Auswertung der Stiftung Warentest angegeben, jedoch fehlt ein entsprechender Nachweis.",
+      "beleg": "",
+      "id": "b4bd085bc84a6131b644",
+      "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
+      "fassung_sha256": "cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+    },
+    {
+      "typ": "praezision",
+      "text": "Versprechen, dass ein Haushaltsbuch „schnell“ zeigt, welche Posten sich lohnen, ist nicht quantifiziert und fehlt an konkreten Evidenzangaben.",
+      "beleg": "",
+      "id": "baed76dc211bd15dd46f",
+      "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
+      "fassung_sha256": "cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Aussage, dass die 50‑30‑20‑Regel für ein Nettoeinkommen von 2.500 € realistisch sei, wird ohne Hinweis auf regionale Unterschiede oder empirische Daten präsentiert.",
+      "beleg": "",
+      "id": "d7c3cfb422310cf26ca6",
+      "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
+      "fassung_sha256": "cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+    },
+    {
       "id": "0051151e6c46f4c2bdb3",
       "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
       "fassung_sha256": "legacy-unbekannt",
@@ -1029,6 +1309,36 @@
       "zuletzt_gesehen": "2026-10-30 11:01 UTC"
     },
     {
+      "typ": "praezision",
+      "text": "Die im Teaser und Text genannten monatlichen Ersparnisse von 350 € bis 600 € werden als Marktfakten ohne Quellenbeleg oder methodische Herleitung (z. B. Referenzhaushalt des Statistischen Bundesamtes) angeführt.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "id": "3fe383f6d452737f66f2",
+      "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
+      "fassung_sha256": "e08b6e61e4a9499d725785fb800202179452b36ea7e69b11f6f2f96544f6bce6",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der Ratgeber empfiehlt Tarifwechsel bei Energie zur Kostensenkung, verschweigt aber den aktuellen Markttrend massiv steigender Energiepreise (+14,9 %), was die Kalkulation der 50-Prozent-Fixkostenquote gefährdet.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "id": "7bba759bbb4ca14c7f35",
+      "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
+      "fassung_sha256": "e08b6e61e4a9499d725785fb800202179452b36ea7e69b11f6f2f96544f6bce6",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+    },
+    {
+      "typ": "veraltet",
+      "text": "Die Einschätzung zur Inflation ist unpräzise: Die aktuelle Inflationsrate liegt laut Destatis bei +2,8 % (Oktober 2026), wodurch die genannten Tagesgeldzinsen von 0,5 % bis 1,5 % den Wertverlust deutlich weniger ausgleichen als suggeriert.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "id": "e8e32a383b6f803cc8d4",
+      "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
+      "fassung_sha256": "e08b6e61e4a9499d725785fb800202179452b36ea7e69b11f6f2f96544f6bce6",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+    },
+    {
       "typ": "luecke",
       "text": "Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher angekündigt werden muss, ohne dafür eine Quelle anzugeben.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
@@ -1072,6 +1382,56 @@
       "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
       "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
       "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Angaben zum Fremdwährungsentgelt von „fast zwei Prozent“ bei Zahlungen in fremder Währung fehlen jede belegbare Referenz.",
+      "beleg": "",
+      "id": "16b3b8584ff802803aa9",
+      "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
+      "fassung_sha256": "6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+    },
+    {
+      "typ": "praezision",
+      "text": "Formulierungen wie „einige Anbieter ohne Auslandsgebühr gehören zu den besten Karten für Reisen“ sind pauschal und ohne messbare Daten unpräzise.",
+      "beleg": "",
+      "id": "7ff042b6fe804cdf101b",
+      "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
+      "fassung_sha256": "6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Aussage, dass die kostenlose Sperr‑Notrufnummer 116 für alle Karten in Deutschland gilt, wird nicht durch eine Quelle gestützt.",
+      "beleg": "",
+      "id": "bec83c4b814183fa1086",
+      "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
+      "fassung_sha256": "6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Angabe, dass Sollzinsen bei Teilzahlung zwischen 12 % und 20 % liegen, ist nicht mit einer Quelle belegt.",
+      "beleg": "",
+      "id": "f9aff86b6eba71b153a6",
+      "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
+      "fassung_sha256": "6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Behauptung, dass eine gute Kreditkarte im Jahr nichts kostet (keine Jahres‑ und keine Fremdwährungsgebühr), wird ohne jegliche Quelle angegeben.",
+      "beleg": "",
+      "id": "fed9215b770ea4879eda",
+      "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
+      "fassung_sha256": "6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5",
+      "text_sha256": null,
+      "zuletzt_gesehen": "2026-11-04 12:30 UTC"
     },
     {
       "typ": "luecke",
@@ -1653,15 +2013,15 @@
     }
   ],
   "kapazitaet": {
-    "stichtag": "2026-11-03",
+    "stichtag": "2026-11-04",
     "artikel": 112,
     "faellig": 0,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
-      "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
-      "frist": "2026-11-06",
-      "restlaufzeit": 3
+      "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+      "frist": "2026-11-11",
+      "restlaufzeit": 7
     },
     "budget": 4,
     "laeufe_je_tag": 1.0,
@@ -1683,143 +2043,225 @@
     "rueckstand_abgebaut": true
   },
   "abbrueche": [],
-  "offen": [],
+  "offen": [
+    {
+      "slug": "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
+      "titel": "Finanzielle Freiheit erreichen: Denke dich reich – Geld",
+      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-11",
+      "geo": 100
+    },
+    {
+      "slug": "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
+      "titel": "Frugalismus für Einsteiger: Mit kleinen Schritten sparen",
+      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-11",
+      "geo": 100
+    },
+    {
+      "slug": "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
+      "titel": "Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick",
+      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-11",
+      "geo": 100
+    },
+    {
+      "slug": "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
+      "titel": "5 einfache Frugalismus-Tricks für den Alltag: Geld sparen",
+      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-11",
+      "geo": 100
+    },
+    {
+      "slug": "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
+      "titel": "50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken",
+      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-11",
+      "geo": 100
+    },
+    {
+      "slug": "2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag",
+      "titel": "5 einfache Frugalismus-Tricks für den Alltag",
+      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-11",
+      "geo": 100
+    }
+  ],
   "laeufe": [
     {
-      "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
-      "titel": "Urlaub sparen: Budget, Buchung und Kosten im Blick",
-      "fassung_sha256": "d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06",
+      "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+      "titel": "Kostenloses Girokonto: Ein Konto ohne Gebühren finden",
+      "fassung_sha256": "ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4",
       "text_sha256": null,
       "bereich": "artikel",
-      "grund": "frisch geprüft vor 27 Tagen (Intervall 30 Tage)",
+      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
       "treffer": 1,
       "quellen": 1,
       "befunde": [
         {
           "typ": "luecke",
-          "text": "Die Verbraucherzentrale empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im Blick zu behalten.",
-          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+          "text": "Angabe, dass ein Kontowechsel 120 € bis 180 € im Jahr spart, fehlt jede Quelle.",
+          "beleg": ""
         },
         {
           "typ": "luecke",
-          "text": "Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu unklaren Angeboten und Problemen mit Online-Buchungen.",
-          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+          "text": "Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 € an reinen Gebühren kosten, ist unbelegt.",
+          "beleg": ""
         },
         {
           "typ": "luecke",
-          "text": "Die Verbraucherzentrale beschreibt, dass sich eine Pauschalreise unter bestimmten Bedingungen auf eine andere Person übertragen lässt.",
-          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+          "text": "Angabe von Dispozinsen von 8 % bis 11 % ohne Quellenangabe.",
+          "beleg": ""
         },
         {
           "typ": "luecke",
-          "text": "Bei einer Pauschalreise gilt die Mitteilung als rechtzeitig, wenn sie dem Veranstalter spätestens sieben Tage vor Reisebeginn zugeht (§ 651e BGB).",
-          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+          "text": "Aussage, dass Einlagen bis 100.000 € durch die deutsche Einlagensicherung geschützt sind, wird nicht belegt.",
+          "beleg": ""
         },
         {
-          "typ": "praezision",
-          "text": "Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht automatisch, ob das Auto zum individuellen Urlaub passt – ohne Messgröße bleibt die Aussage ungenau.",
-          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+          "typ": "luecke",
+          "text": "Behauptung, dass Echtzeit‑Überweisungen bei kostenlosen Konten generell gebührenfrei sind, fehlt jede Quelle.",
+          "beleg": ""
         }
       ],
-      "geo": 83,
+      "geo": 100,
       "fehler": [
-        "Verbraucherzentrale – Reise: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+        "Deutsche Bundesbank – Pressenotizen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
       ],
       "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)",
       "aenderungen": [
-        "faktencheck: 2026-11-03"
+        "faktencheck: 2026-11-04"
       ]
     },
     {
-      "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
-      "titel": "Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig",
-      "fassung_sha256": "af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96",
+      "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
+      "titel": "Haushaltsbuch führen: App, Excel oder Stift im Vergleich",
+      "fassung_sha256": "cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b",
       "text_sha256": null,
       "bereich": "artikel",
-      "grund": "frisch geprüft vor 27 Tagen (Intervall 30 Tage)",
+      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
       "treffer": 1,
       "quellen": 1,
       "befunde": [
         {
           "typ": "luecke",
-          "text": "Angaben zu staatlichen Zuschüssen (bis zu 70 %) und deren Auswirkung auf den Eigenanteil fehlen eine Quellenangabe.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+          "text": "Behauptung, dass 60 % der Haushalte in Deutschland ihr Geld nicht nachverfolgen, wird mit einer Auswertung der Stiftung Warentest angegeben, jedoch fehlt ein entsprechender Nachweis.",
+          "beleg": ""
         },
         {
           "typ": "luecke",
-          "text": "Preisannahmen für Strom (30 ¢/kWh), Gas (10 ¢/kWh) und CO₂‑Aufschlag (5 ¢/kWh) werden ohne belegbare Daten präsentiert.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+          "text": "Angabe, dass 58 % der Nutzer ihr Haushaltsbuch digital führen, beruft sich angeblich auf Statista 2025, jedoch wird keine Quelle genannt.",
+          "beleg": ""
         },
         {
           "typ": "luecke",
-          "text": "Die behauptete Amortisationsdauer von 10‑12 Jahren für eine Wärmepumpe basiert auf einer Modellrechnung ohne nachweisbare Quelle.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Hinweis, dass ein spezieller Stromtarif für Wärmepumpen die Kosten senkt, wird nicht durch eine Quelle belegt.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Der Artikel erwähnt keinen regulatorischen Rahmen (z. B. Bundesnetzagentur) obwohl diese Institution für Strom‑ und Gasmärkte zuständig ist.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        }
-      ],
-      "geo": 100,
-      "fehler": [
-        "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
-        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
-      ],
-      "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b)",
-      "aenderungen": [
-        "faktencheck: 2026-11-03"
-      ]
-    },
-    {
-      "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "titel": "Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden",
-      "fassung_sha256": "c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546",
-      "text_sha256": null,
-      "bereich": "artikel",
-      "grund": "frisch geprüft vor 27 Tagen (Intervall 30 Tage)",
-      "treffer": 1,
-      "quellen": 1,
-      "befunde": [
-        {
-          "typ": "luecke",
-          "text": "Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Es wird angegeben, dass typische Fehler beim Heizölkauf bis zu 15 % Mehrkosten verursachen können, jedoch fehlt ein Nachweis für diese Zahl.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Die Modellrechnung verwendet einen Tiefpreis von 0,80 €/Liter, ohne dass diese Preisangabe belegt wird.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-        },
-        {
-          "typ": "luecke",
-          "text": "Die Aussage, dass durch frühzeitige Bestellung Kosten um 10 % bis 20 % im Herbst eingespart werden können, ist unbelegt.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+          "text": "Sparpotenzial‑Beispiele (z. B. DSL‑Tarifwechsel von 44 € auf 24 €) enthalten konkrete Zahlen ohne Quellenangabe.",
+          "beleg": ""
         },
         {
           "typ": "praezision",
-          "text": "Die Faustregel, dass man bestellen sollte, wenn Preise vier Wochen unter dem Schnitt der letzten 12 Monate liegen, wird ohne Messgrundlage oder Quelle genannt.",
-          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+          "text": "Die Aussage, dass die 50‑30‑20‑Regel für ein Nettoeinkommen von 2.500 € realistisch sei, wird ohne Hinweis auf regionale Unterschiede oder empirische Daten präsentiert.",
+          "beleg": ""
+        },
+        {
+          "typ": "praezision",
+          "text": "Versprechen, dass ein Haushaltsbuch „schnell“ zeigt, welche Posten sich lohnen, ist nicht quantifiziert und fehlt an konkreten Evidenzangaben.",
+          "beleg": ""
         }
       ],
       "geo": 100,
       "fehler": [
-        "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
-        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+        "Deutsche Bundesbank – Pressenotizen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
       ],
       "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b)",
       "aenderungen": [
-        "faktencheck: 2026-11-03"
+        "faktencheck: 2026-11-04"
+      ]
+    },
+    {
+      "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
+      "titel": "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht",
+      "fassung_sha256": "e08b6e61e4a9499d725785fb800202179452b36ea7e69b11f6f2f96544f6bce6",
+      "text_sha256": null,
+      "bereich": "artikel",
+      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [
+        {
+          "typ": "veraltet",
+          "text": "Die Einschätzung zur Inflation ist unpräzise: Die aktuelle Inflationsrate liegt laut Destatis bei +2,8 % (Oktober 2026), wodurch die genannten Tagesgeldzinsen von 0,5 % bis 1,5 % den Wertverlust deutlich weniger ausgleichen als suggeriert.",
+          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Der Ratgeber empfiehlt Tarifwechsel bei Energie zur Kostensenkung, verschweigt aber den aktuellen Markttrend massiv steigender Energiepreise (+14,9 %), was die Kalkulation der 50-Prozent-Fixkostenquote gefährdet.",
+          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+        },
+        {
+          "typ": "praezision",
+          "text": "Die im Teaser und Text genannten monatlichen Ersparnisse von 350 € bis 600 € werden als Marktfakten ohne Quellenbeleg oder methodische Herleitung (z. B. Referenzhaushalt des Statistischen Bundesamtes) angeführt.",
+          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+        }
+      ],
+      "geo": 100,
+      "fehler": [
+        "Statistisches Bundesamt – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+      ],
+      "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)",
+      "aenderungen": [
+        "faktencheck: 2026-11-04"
+      ]
+    },
+    {
+      "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
+      "titel": "Kreditkarte vergleichen: Kostenlos und sicher zahlen",
+      "fassung_sha256": "6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5",
+      "text_sha256": null,
+      "bereich": "artikel",
+      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [
+        {
+          "typ": "luecke",
+          "text": "Die Behauptung, dass eine gute Kreditkarte im Jahr nichts kostet (keine Jahres‑ und keine Fremdwährungsgebühr), wird ohne jegliche Quelle angegeben.",
+          "beleg": ""
+        },
+        {
+          "typ": "luecke",
+          "text": "Angaben zum Fremdwährungsentgelt von „fast zwei Prozent“ bei Zahlungen in fremder Währung fehlen jede belegbare Referenz.",
+          "beleg": ""
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Angabe, dass Sollzinsen bei Teilzahlung zwischen 12 % und 20 % liegen, ist nicht mit einer Quelle belegt.",
+          "beleg": ""
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Aussage, dass die kostenlose Sperr‑Notrufnummer 116 für alle Karten in Deutschland gilt, wird nicht durch eine Quelle gestützt.",
+          "beleg": ""
+        },
+        {
+          "typ": "praezision",
+          "text": "Formulierungen wie „einige Anbieter ohne Auslandsgebühr gehören zu den besten Karten für Reisen“ sind pauschal und ohne messbare Daten unpräzise.",
+          "beleg": ""
+        }
+      ],
+      "geo": 100,
+      "fehler": [
+        "Deutsche Bundesbank – Pressenotizen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+      ],
+      "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)",
+      "aenderungen": [
+        "faktencheck: 2026-11-04"
       ]
     }
   ]

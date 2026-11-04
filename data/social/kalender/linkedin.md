@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – LinkedIn
 
-> Automatisch aktualisiert: 03.11.2026 21:10 (Europe/Berlin)  
+> Automatisch aktualisiert: 04.11.2026 14:05 (Europe/Berlin)  
 > Profil: https://www.linkedin.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `linkedin.ics`
 
@@ -12,34 +12,34 @@
 
 ## Kommende Beiträge
 
-### Mi, 04. November 2026
+### Do, 05. November 2026
 - **07:45** ⏳ Bankgebühren senken: 7 Schritte zum günstigeren Konto — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/
-### Do, 05. November 2026
+### Fr, 06. November 2026
 - **07:45** ⏳ Energieeffizienz im Haushalt: 5 schnelle Spartricks — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/
-### Fr, 06. November 2026
+### Mo, 09. November 2026
 - **07:45** ⏳ ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/
-### Mo, 09. November 2026
+### Di, 10. November 2026
 - **07:45** ⏳ Strategisch sparen: So kannst du deine Reisekasse füllen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/
-### Di, 10. November 2026
+### Mi, 11. November 2026
 - **07:45** ⏳ Frugalismus Familie: Clever sparen ohne Verzicht — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/
-### Mi, 11. November 2026
+### Do, 12. November 2026
 - **07:45** ⏳ Flugvergleich im Winter: So findest du echte Billigflüge — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/
-### Do, 12. November 2026
+### Fr, 13. November 2026
 - **07:45** ⏳ Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/
-### Fr, 13. November 2026
+### Mo, 16. November 2026
 - **07:45** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
-### Mo, 16. November 2026
+### Di, 17. November 2026
 - **07:45** ⏳ Privathaftpflicht: Warum so wichtig und was sie kostet — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/
-### Di, 17. November 2026
+### Mi, 18. November 2026
 - **07:45** ⏳ Sicher heizen: Was sie abdeckt und wie lange sie läuft — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/
 

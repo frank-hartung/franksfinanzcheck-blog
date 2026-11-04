@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 03.11.2026 21:10 (Europe/Berlin)  
+> Automatisch aktualisiert: 04.11.2026 14:05 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -13,8 +13,6 @@
 ## Kommende Beiträge
 
 ### Mi, 04. November 2026
-- **07:30** ⏳ Haushaltsbuch führen: App, Excel oder Stift im Vergleich — _zahl_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/
 - **11:30** ⏳ Mietwagen ohne Kautionsfallen: So sparst du im Urlaub — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/
 ### Sa, 07. November 2026
@@ -25,9 +23,14 @@
 ### Mo, 09. November 2026
 - **07:30** ⏳ DNS-Server wechseln: Datenschutz, Filter und Einrichtung — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/
+- **11:30** ⏳ Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/
 ### Mi, 11. November 2026
 - **07:30** ⏳ WLAN verbessern: So bringst du stabilen Speed in jede Ecke — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/
+### Sa, 14. November 2026
+- **17:30** ⏳ Wohngebäudeversicherung Vergleich: Worauf du achten musst — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/
 ### Mo, 16. November 2026
 - **07:30** ⏳ Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 € — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/
@@ -36,6 +39,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 04.11.2026 14:04 · Haushaltsbuch führen: App, Excel oder Stift im Vergleich → https://mastodon.social/@FranksFinanzcheck/117558312939140189
 - ✅ 03.11.2026 21:09 · Energiediebe stoppen: So kannst du Stromfresser finden → https://mastodon.social/@FranksFinanzcheck/117554322337329380
 - ✅ 03.11.2026 13:52 · Privathaftpflicht: Warum so wichtig und was sie kostet → https://mastodon.social/@FranksFinanzcheck/117552600058173229
 - ✅ 03.11.2026 00:08 · DSL-Vergleich: So findest du den günstigsten Internettarif → https://mastodon.social/@FranksFinanzcheck/117549362262666799
@@ -45,7 +49,6 @@
 - ✅ 30.10.2026 19:40 · Frugalismus Familie: Clever sparen ohne Verzicht → https://mastodon.social/@FranksFinanzcheck/117531321037727209
 - ✅ 29.10.2026 19:59 · Strategisch sparen: So kannst du deine Reisekasse füllen → https://mastodon.social/@FranksFinanzcheck/117525734870640551
 - ✅ 29.10.2026 12:35 · DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis → https://mastodon.social/@FranksFinanzcheck/117523988347549679
-- ✅ 28.10.2026 19:55 · Gasrechnung senken: Fehler im Spätsommer vermeiden → https://mastodon.social/@FranksFinanzcheck/117520055691320012
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

@@ -34,7 +34,7 @@ quellen:
     url: "https://www.bafin.de/DE/Verbraucher/Bank/Girokonto/girokonto_node.html"
     herausgeber: "BaFin"
     datum: "2025-11-08"
-faktencheck: "2026-09-27"
+faktencheck: 2026-11-04
 ---
 
 Vor der Buchung zeigt die Hotel-Webseite drei Zahlungsoptionen. Kreditkarte, Lastschrift, Überweisung. Wer mit Kreditkarte bucht, bekommt oft den besten Preis und zahlt nichts im Voraus. Doch welche Karte steckt in deinem Portemonnaie?

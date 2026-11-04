@@ -34,7 +34,7 @@ quellen:
     url: "https://www.bafin.de/DE/Verbraucher/Bank/Girokonto/girokonto_node.html"
     herausgeber: "BaFin"
     datum: "2025-11-08"
-faktencheck: "2026-09-27"
+faktencheck: 2026-11-04
 ---
 
 Am Monatsende ist das Konto leer im Modellfall. Du weißt nicht, wohin das Geld geflossen ist? So geht es rund **60 % der Haushalte** in Deutschland. Das zeigt eine Auswertung der Stiftung Warentest.
