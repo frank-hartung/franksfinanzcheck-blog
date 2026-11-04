@@ -71,7 +71,10 @@ def main():
         f"| Artikel geprüft | {len(results)} |",
         f"| Ø Qualitätsscore | **{avg_score:.0f}/100** |",
         f"| Ø Titel-Länge | {avg_tl:.0f} Zeichen (optimal 50–60) |",
-        f"| Ø Description-Länge | {avg_dl:.0f} Zeichen (optimal 120–160) |",
+        # Fenster aus der SSOT (über meta_optimizer) – #1064: hier stand
+        # 120–160 und lehrte ein Maß, das die Metadaten-Wache verwirft.
+        f"| Ø Description-Länge | {avg_dl:.0f} Zeichen "
+        f"(optimal {mo.DESC_OPT_MIN}–{mo.DESC_OPT_MAX}) |",
         f"| Artikel mit Problemen | **{len(critical)}** |",
         "",
         "## Status",

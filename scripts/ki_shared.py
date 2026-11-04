@@ -43,6 +43,7 @@ import yaml  # noqa: E402
 import editorial_review_gate as erg  # noqa: E402  – Risiko-SSOT + Prüfgerüst
 import engine_capacity as ec  # noqa: E402  – Bahn-SSOT (AUTO/FACHFREIGABE)
 import post_utils  # noqa: E402
+import serp_limits  # noqa: E402  – Snippet-SSOT (keine zweite Zahl, D18)
 from generate_drafts import slugify, yaml_str  # noqa: E402
 
 CONFIG_FILE = os.path.join(BLOG_DIR, "data", "ki_redaktion.yaml")
@@ -425,6 +426,12 @@ def build_frontmatter(*, title, description, tags, pillar=None,
     keywords = [k for k in (keywords or []) if k][:8]
     fachfreigabe_pruefen(title=title, keywords=keywords, pillar=pillar,
                          beauftragt=fachfreigabe)
+    # Letzte Writer-Grenze (Defense in Depth, #1064): Die Description wird
+    # hier NOCH EINMAL gegen das Snippet-Fenster der SSOT gestellt – wie die
+    # Tags gegen das Register. Ein Aufrufer, der eine rohe Description
+    # übergibt (ki_redaktion, künftige Rollen), kann das Fenster nicht mehr
+    # reißen; gemessen und gekürzt wird nur in serp_limits.
+    description = clip_text(description)
     review_block = pruefgeruest(title, keywords, pillar)
     date = datetime.datetime.now(datetime.timezone.utc)
     date_str = date.strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -454,9 +461,33 @@ def build_frontmatter(*, title, description, tags, pillar=None,
     return fm
 
 
-def clip_text(text: str, max_len: int = 158) -> str:
-    """Schneidet Text an einer Wortgrenze ab (nie mitten im Wort)."""
-    text = text.strip()
+def clip_text(text: str, max_len: int | None = None) -> str:
+    """Kürzt Text – standardmäßig auf das Snippet-Fenster der SSOT.
+
+    DAUERHEILUNG 04.11.2026 (#1064, Klasse WF-7B6B/#925): Der Standard war
+    ein EIGENES Limit – 158 Zeichen, ohne Breitenmaß. Am 04.11.2026 schrieb
+    die Engine damit die Description „Günstigen Mietwagen für den Urlaub
+    buchen – der große Ratgeber …“ (157 Zeichen, 1007 px): innerhalb des
+    158er-Maßes, außerhalb des Marktes (155 Zeichen / 985 px). Die
+    Metadaten-Wache war zu Recht rot, der Deploy-Heiler musste 25 Minuten
+    später nachbessern. Das ist exakt die Schreiber-Klasse, die #925 am
+    29.10. für keyword_optimizer/meta_optimizer geschlossen hat – dieser
+    Helfer war nie gebunden.
+
+    Seitdem gilt auch hier D18: Grenzen, Breitenmaß UND der Schnitt stehen
+    in `serp_limits.auf_snippet_kuerzen`; diese Funktion reicht nur durch.
+    Kann die SSOT nicht ehrlich kürzen (unmessbare Zeichen, kein Präfix im
+    Fenster), geht der Text UNVERÄNDERT zurück – die Wache meldet den
+    Befund, statt dass der Schreiber eine neue Grenze erfindet.
+
+    `max_len` bleibt für Text AUSSERHALB des Snippets (z. B. Pin-Zeilen):
+    explizites Maß, Wortgrenze, kein Breitenanspruch. Kein Aufrufer darf
+    damit eine zweite Description-Grenze führen.
+    """
+    text = (text or "").strip()
+    if max_len is None:
+        gekuerzt = serp_limits.auf_snippet_kuerzen(text)
+        return gekuerzt if gekuerzt is not None else text
     if len(text) <= max_len:
         return text
     cut = text[:max_len]

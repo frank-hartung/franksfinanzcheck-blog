@@ -43,6 +43,7 @@ sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 import ki_shared as ks  # noqa: E402
 import post_utils  # noqa: E402
+import serp_limits  # noqa: E402  – Snippet-SSOT (keine zweite Zahl, D18)
 from post_utils import safe_title_cut  # noqa: E402
 
 try:
@@ -56,7 +57,14 @@ except Exception:  # noqa: BLE001
 
 REPORT_FILE = os.path.join(BLOG_DIR, "KI-SEO-REPORT.md")
 SERP_TITLE_MIN, SERP_TITLE_MAX = 30, 60
-META_MIN, META_MAX = 120, 160
+# DAUERHEILUNG 04.11.2026 (#1064): Hier stand ein eigenes 160er-Limit – ein
+# ZWEITER Maßstab neben serp_limits (100–155 Zeichen UND ≤ 985 px). Jasper bewertete damit
+# Descriptions als „gut", die die Metadaten-Wache zu Recht verwirft, und der
+# KI-Vorschlagsprompt lehrte das falsche Fenster gleich mit. Seitdem liest
+# auch diese Messstelle die Grenzen aus der SSOT (D18); 120 bleibt die
+# CTR-Untergrenze (DESC_OPT_MIN_ZEICHEN), keine eigene Obergrenze.
+META_MIN = serp_limits.DESC_OPT_MIN_ZEICHEN
+META_MAX = serp_limits.DESC_MAX_ZEICHEN
 
 
 # ---------------------------------------------------------------- Analyse
@@ -131,7 +139,8 @@ def analyze(path: str) -> dict:
 
     # 3. Meta-Description-Länge
     ok = META_MIN <= len(desc) <= META_MAX
-    checks.append(("Meta-Description 120–160", ok, f"{len(desc)} Zeichen"))
+    checks.append((f"Meta-Description {META_MIN}–{META_MAX}", ok,
+                   f"{len(desc)} Zeichen"))
     score += 10 if ok else (5 if 80 <= len(desc) <= 190 else 0)
 
     # 4. Meta-Description mit Nutzen/CTA
@@ -268,8 +277,9 @@ def ai_variants(res: dict) -> list:
     prompt = (
         f"Artikel: {res['title']}\nThema/Keyword: {res['main_kw']}\n"
         "Liefere als deutscher SEO-Profi genau 3 Alternative SERP-Titel "
-        "(je 30–60 Zeichen, Keyword vorn, keine Clickbait-Lügen) und "
-        "2 alternative Meta-Descriptions (je 120–160 Zeichen, mit "
+        f"(je {SERP_TITLE_MIN}–{SERP_TITLE_MAX} Zeichen, Keyword vorn, keine "
+        "Clickbait-Lügen) und "
+        f"2 alternative Meta-Descriptions (je {META_MIN}–{META_MAX} Zeichen, mit "
         "Nutzenversprechen). Format: je eine Zeile, Titel mit 'T1:', "
         "'T2:', 'T3:', Descriptions mit 'D1:', 'D2:'. Nichts weiter."
     )
