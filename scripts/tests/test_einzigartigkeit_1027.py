@@ -223,8 +223,12 @@ class GovernanceC22Tests(unittest.TestCase):
         cls.echte = {
             name: gc._read(os.path.join(gc.BLOG_DIR, "scripts", name))
             for name in ("publikations_vertrag.py", "redaktions_standard.py",
-                         "publish_gate.py", "check_uniqueness.py")
+                         "publish_gate.py", "check_uniqueness.py",
+                         "bestand_einzigartigkeit_gate.py")
         }
+        # C22 prüft seit dem Diff-Tor auch dessen Verdrahtung im Qualitäts-Gate.
+        cls.echte["workflows/link-check.yml"] = gc._read(os.path.join(
+            gc.BLOG_DIR, ".github", "workflows", "link-check.yml"))
 
     def test_echter_zustand_ist_still(self):
         self.assertEqual(gc.c22_publikations_vertrag(self.echte), [])

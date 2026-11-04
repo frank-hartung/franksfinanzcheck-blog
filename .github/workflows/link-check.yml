@@ -177,6 +177,39 @@ jobs:
           python3 scripts/newsletter_digest.py --check
           python3 scripts/newsletter_qa.py --build --days 1
 
+      # ------------------------------------------------------------
+      #  EINZIGARTIGKEIT DES DIFFS (Meldung #1027, 04.11.2026)
+      #
+      #  Zwei Heilungen, zwei offene Wege – beide sind jetzt zu:
+      #    · #714/#766 heilten den BESTAND.
+      #    · #1027 heilte den Bestand UND fügte V4 in den
+      #      Publikations-Vertrag ein. V4 wirkt aber nur bei den Schreibern,
+      #      die ihn aufrufen (`redaktions_standard`, `extend_articles`,
+      #      `profi_polish`, `lesbarkeit_heiler`). Daneben schreiben
+      #      `satz_heiler`, `politur_heiler`, `endredaktion`, `update_articles`,
+      #      `faktenfrische` u. a. direkt in `content/posts/**`. Und der Fall,
+      #      der #1027 ausgelöst hat, war gar kein Schreiber: Commit 69f08c40
+      #      (#1017) hat den BNetzA-Absatz von HAND in drei Live-Artikel
+      #      gesetzt. Das Tagesaudit fand es zwei Tage später – nach dem
+      #      Deploy und als Issue #1027.
+      #
+      #  Dieses Gate misst JEDEN geänderten Artikel gegen den Bestand – egal
+      #  wer ihn geschrieben hat – mit DERSELBEN Messung wie das Audit
+      #  (`clean_body` + 7-Gramme + importierte `KRITISCH_AB`). Es meldet nur,
+      #  was der Diff NEU erzeugt oder VERSTÄRKT; Altlasten und Abbau bleiben
+      #  still (wer eine Dublette abbaut, wird nicht bestraft).
+      #
+      #  Ohne --base wäre der Schritt wirkungslos: der Vergleich läuft gegen
+      #  den PR-Baseline-SHA bzw. (auf main) gegen den vorherigen Commit.
+      # ------------------------------------------------------------
+      - name: Einzigartigkeit des Diffs (keine NEUE Textdopplung, #1027)
+        env:
+          EINZIGARTIGKEIT_BASE: ${{ github.event.pull_request.base.sha || github.event.before || 'HEAD~1' }}
+        run: |
+          python3 scripts/bestand_einzigartigkeit_gate.py --selftest
+          python3 -m unittest scripts.tests.test_bestand_einzigartigkeit_gate
+          python3 scripts/bestand_einzigartigkeit_gate.py --base "$EINZIGARTIGKEIT_BASE"
+
       - name: Interne Links prüfen
         id: links
         continue-on-error: true

@@ -223,6 +223,14 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # waechst: eine Wache, die niemand verlangt, fuehrt irgendwann
           # niemand aus (C6).
           "bewegungs_wache.py",
+          # Bestands-Einzigartigkeit des Diffs (04.11.2026, #1027): Die ersten
+          # beiden Heilungen deckten nur den BESTAND und die Schreiber ab, die
+          # den Publikations-Vertrag aufrufen. Der Fall, der #1027 ausgelöst
+          # hat, war gar kein Schreiber – Commit 69f08c40 setzte den Absatz von
+          # Hand in drei Live-Artikel, und das Tagesaudit merkte es zwei Tage
+          # später. Dieses Tor misst jeden GEÄNDERTEN Artikel. Eine Wache, die
+          # niemand verlangt, führt irgendwann niemand aus (C6).
+          "bestand_einzigartigkeit_gate.py",
           # Lesbarkeits-Heiler (07.10.2026, WACHE-609): Er ist der Heiler
           # der zweiten Haelfte des Lesbarkeits-Tors (Flesch >= 60 als
           # Publish-Kriterium, #585) und beweist seine Wirkung als
@@ -1738,6 +1746,42 @@ def c22_publikations_vertrag(script_texts, root=BLOG_DIR):
                                "die geteilte Schwelle der Einzigartigkeit ist "
                                "nicht mehr auffindbar."))
 
+    # c3) Die ZWEITE Hälfte von #1027: der Vertrag nützt nur dem Schreiber,
+    #     der ihn aufruft. Commit 69f08c40 (#1017) hat den BNetzA-Absatz von
+    #     HAND in drei Live-Artikel gesetzt – kein Schreiber, kein Vertrag.
+    #     `bestand_einzigartigkeit_gate.py` misst deshalb JEDEN geänderten
+    #     Artikel gegen den Bestand. Dieses Tor braucht drei Dinge, sonst ist
+    #     es Prosa: die geteilte Messung, einen Aufrufer in CI, und einen
+    #     Selbsttest im vertraglichen Minimum (C6).
+    bgate = script_texts.get("bestand_einzigartigkeit_gate.py", "")
+    if not bgate:
+        out.append(("C22", "scripts/bestand_einzigartigkeit_gate.py fehlt oder ist "
+                           "nicht lesbar – Änderungen an Live-Artikeln, die kein "
+                           "Schreiber verfasst hat, würden nicht gemessen (#1027)."))
+    else:
+        if "bestand_einzigartigkeit_gate.py" not in GUARDS:
+            out.append(("C22", "scripts/bestand_einzigartigkeit_gate.py steht nicht in "
+                               "GUARDS – sein Selbsttest liefe nicht in C6, und eine "
+                               "Wache, die niemand verlangt, läuft irgendwann "
+                               "niemand mehr (#1027)."))
+        if "import check_uniqueness" not in bgate:
+            out.append(("C22", "scripts/bestand_einzigartigkeit_gate.py benutzt nicht die "
+                               "geteilte Messung `check_uniqueness` – Gate und Audit "
+                               "hätten je eine eigene Wahrheit (#1027)."))
+        if re.search(r"(?m)^\s*KRITISCH_AB\s*=", bgate):
+            out.append(("C22", "scripts/bestand_einzigartigkeit_gate.py definiert "
+                               "`KRITISCH_AB` selbst – die Schwelle gehört in "
+                               "check_uniqueness (SSOT)."))
+        if "def selftest(" not in bgate:
+            out.append(("C22", "scripts/bestand_einzigartigkeit_gate.py: kein "
+                               "`selftest(` – das Tor blockiert, ohne sich selbst "
+                               "beweisen zu können."))
+    wf = script_texts.get("workflows/link-check.yml", "")
+    if wf and "bestand_einzigartigkeit_gate.py" not in wf:
+        out.append(("C22", ".github/workflows/link-check.yml ruft "
+                           "`bestand_einzigartigkeit_gate.py` nicht auf – das Tor "
+                           "würde nie messen (#1027)."))
+
     # d) Die Gate-Seite bleibt die eine Quelle der harten Regeln.
     if not re.search(r"(?m)^HARTE_REGELN\s*=", pg):
         out.append(("C22", "scripts/publish_gate.py: `HARTE_REGELN` steht nicht auf "
@@ -2249,6 +2293,12 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     script_texts = {}
     for path in sorted(glob.glob(os.path.join(root, "scripts", "*.py"))):
         script_texts[os.path.basename(path)] = _read(path)
+    # C22 braucht einen Workflow, um die Verdrahtung des Diff-Tors zu prüfen
+    # (#1027): eine Wache, die niemand aufruft, ist ein Protokoll. Der
+    # Schlüssel trägt den Pfad, damit er nicht mit einem Skript kollidiert.
+    link_check = os.path.join(root, ".github", "workflows", "link-check.yml")
+    if os.path.exists(link_check):
+        script_texts["workflows/link-check.yml"] = _read(link_check)
     checks += c10_token_broker(script_texts)
     checks += c11_token_lifecycle(wflows, root=root)
     checks += c12_label_guarantee(wflows)
@@ -6817,7 +6867,10 @@ def _selftest():
     # --- C22: Publikations-Vertrag der Schreib-Seite (WF-54C4/#607, 07.10.2026)
     echte = {name: _read(os.path.join(BLOG_DIR, "scripts", name))
              for name in ("publikations_vertrag.py", "redaktions_standard.py",
-                          "publish_gate.py", "check_uniqueness.py")}
+                          "publish_gate.py", "check_uniqueness.py",
+                          "bestand_einzigartigkeit_gate.py")}
+    echte["workflows/link-check.yml"] = _read(
+        os.path.join(BLOG_DIR, ".github", "workflows", "link-check.yml"))
     if c22_publikations_vertrag(echte):
         failures.append(f"C22: der echte Zustand wird beanstandet: "
                         f"{c22_publikations_vertrag(echte)}")
@@ -6873,6 +6926,25 @@ def _selftest():
     if not [f for f in c22_publikations_vertrag(ohne_messung) if "aenderung_befunde" in f[1]]:
         failures.append("C22: fehlende geteilte Einzigartigkeitsmessung bleibt "
                         "unentdeckt (#1027).")
+    # (i) Das Diff-Tor ist abgeschaltet: kein Aufruf im Qualitäts-Gate – genau
+    #     die Lage, die #1027 möglich machte (niemand maß die Handänderung).
+    ohne_tor_aufruf = dict(echte, **{"workflows/link-check.yml":
+                                     echte["workflows/link-check.yml"].replace(
+                                         "bestand_einzigartigkeit_gate.py", "abgeschaltet")})
+    if not [f for f in c22_publikations_vertrag(ohne_tor_aufruf) if "link-check" in f[1]]:
+        failures.append("C22: nicht verdrahtetes Diff-Tor bleibt unentdeckt (#1027).")
+    # (j) Das Diff-Tor kopiert die Schwelle, statt sie zu importieren.
+    tor_eigene_schwelle = dict(echte, **{"bestand_einzigartigkeit_gate.py":
+                                         "KRITISCH_AB = 5\n" +
+                                         echte["bestand_einzigartigkeit_gate.py"]})
+    if not [f for f in c22_publikations_vertrag(tor_eigene_schwelle) if "KRITISCH_AB" in f[1]]:
+        failures.append("C22: kopierte Schwelle im Diff-Tor bleibt unentdeckt.")
+    # (k) Das Diff-Tor verliert seine Selbstprüfung.
+    ohne_tor_selbsttest = dict(echte, **{"bestand_einzigartigkeit_gate.py":
+                                         echte["bestand_einzigartigkeit_gate.py"].replace(
+                                             "def selftest(", "def kein_selbsttest(")})
+    if not [f for f in c22_publikations_vertrag(ohne_tor_selbsttest) if "selftest" in f[1]]:
+        failures.append("C22: fehlender Selbsttest des Diff-Tors bleibt unentdeckt.")
     blind = {RELEASE_ENGINE: "print('hallo')"}
     if not [f for f in c19_release_ssot(blind) if "Collector" in f[1] or "DRY_RUN" in f[1]]:
         failures.append("C19: eine Engine ohne Publish-Gate-Collectoren und ohne "
