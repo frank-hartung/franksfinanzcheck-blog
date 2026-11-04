@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-11-03
+lastmod: 2026-11-04
 title: "Gasrechnung senken: Fehler im Spätsommer vermeiden"
 description: "Gasrechnung senken: Fünf teure Fehler vor der Heizperiode: So prüfst du Gasrechnung, Abschlag, Tarif und Heizung, ohne Einsparungen doppelt zu zählen."
 date: 2026-08-14T08:35:12Z
@@ -102,12 +102,12 @@ Fiktive Beispielrechnung, keine Marktpreisangabe:
 | Wert | Modellannahme |
 |---|---:|
 | Jahresverbrauch | 18.000 kWh |
-| Arbeitspreis | ca. 11,50 ct/kWh |
+| Arbeitspreis | ca. 12,00 ct/kWh |
 | Grundpreis | ca. 195,00 € pro Jahr |
-| **voraussichtliche Jahreskosten** | **ca. 2.265,00 €** |
-| **rechnerischer Monatsabschlag** | **ca. 188,75 €** |
+| **voraussichtliche Jahreskosten** | **ca. 2.355,00 €** |
+| **rechnerischer Monatsabschlag** | **ca. 196,25 €** |
 
-Steht dein Abschlag hier nur bei 150 €, fehlen am Ende über 460 €; das ist ein Beispielwert. Rechne einen Bonus erst mit, wenn du die Bedingungen sicher erfüllst.
+Steht dein Abschlag hier nur bei 150 €, fehlen am Ende über 550 €; das ist ein Beispielwert. Rechne einen Bonus erst mit, wenn du die Bedingungen sicher erfüllst.
 
 ### Besser so
 

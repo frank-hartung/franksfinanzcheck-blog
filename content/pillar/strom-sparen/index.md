@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-10-28
+lastmod: 2026-11-04
 title: "Strom & Gas sparen: Ratgeber für niedrige Energiekosten"
 description: "Strom-, Gas- und Heizkosten senken: Stromfresser enttarnen, Preisgarantien nutzen, Anbieter wechseln und dynamische Tarife einordnen – mit Rechnern."
 date: 2026-08-08

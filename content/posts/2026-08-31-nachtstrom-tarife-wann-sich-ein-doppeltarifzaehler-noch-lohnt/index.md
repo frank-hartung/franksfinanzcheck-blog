@@ -1,7 +1,7 @@
 ---
 title: "Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt"
 description: "Nachtstrom-Tarife können günstiger sein, müssen es aber nicht. So rechnest du Hoch- und Niedertarif, den Nachtanteil und den Vergleich zum Einheitstarif."
-lastmod: 2026-10-13
+lastmod: 2026-11-04
 date: 2026-08-31T06:10:00Z
 draft: false
 faktencheck: 2026-10-13
@@ -32,7 +32,7 @@ quellen:
     herausgeber: "Bundesnetzagentur"
     datum: "2026-08-31"
   - id: "Q2"
-    titel: "BDEW – Strompreisanalyse"
+    titel: "BDEW – Strompreisanalyse (Herbst 2026)"
     url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
     herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
     datum: "2026-08-31"

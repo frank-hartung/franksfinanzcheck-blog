@@ -35,6 +35,10 @@ Validierung der kaputten Datei. Genau die „unschließbar“-Klasse, die
 - 81 dokumentierte Entscheidungen im Ledger
   (`data/faktenfrische_entscheidungen.yaml`, je Artikel begründet),
   Akte neu geschrieben: **25 offene Befunde auf 5 Seiten, 0 live**.
+- Nachzug-Kette mitgezogen: Merkkarten-SVGs der geänderten Artikel
+  regeneriert, Fachprüfungs-Register neu geschrieben, Kennzahlen-
+  Kopplung (Nachtstrom, Pillar `strom-sparen`, Gas-Fehler-Artikel)
+  auf den Herbst-2026-Stand geprüft und nachgezogen.
 
 **Rückfallschutz:** `scripts/tests/test_faktenfrische_text_hash.py` –
 echter SHA-256, Quellen-Stabilität, Text-Sensitivität und der komplette
