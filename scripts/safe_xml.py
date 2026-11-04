@@ -16,7 +16,11 @@ hingegen deterministisch und ohne Fremdpaket:
 
 AUFRUF
 ------
-    python3 scripts/safe_xml.py --selftest
+    python3 scripts/safe_xml.py          # führt den Selbsttest aus, Exit 0/2
+
+    Die Datei wertet KEIN Argument aus – sie startet immer den Selbsttest.
+    Der Vertrag dazu liegt in
+    `python3 -m unittest scripts.tests.test_unabhaengiger_tiefencheck`.
 """
 from __future__ import annotations
 
