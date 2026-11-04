@@ -4,11 +4,11 @@
  "seiten": [
   {
    "grund": "verlinkt",
-   "impressionen": 86,
+   "impressionen": 97,
    "inlinks": 17,
    "lastmod_tage": null,
    "outlinks": 2,
-   "position": 39.36,
+   "position": 40.48,
    "score": 11.0,
    "url": "/pillar/internet-dsl/"
   },
@@ -24,22 +24,22 @@
   },
   {
    "grund": "verlinkt",
-   "impressionen": 23,
+   "impressionen": 24,
    "inlinks": 7,
    "lastmod_tage": null,
    "outlinks": 11,
-   "position": 45.17,
-   "score": 8.67,
+   "position": 45.92,
+   "score": 9.0,
    "url": "/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/"
   },
   {
    "grund": "verlinkt",
-   "impressionen": 18,
+   "impressionen": 19,
    "inlinks": 11,
    "lastmod_tage": null,
    "outlinks": 3,
-   "position": 51.0,
-   "score": 7.0,
+   "position": 53.58,
+   "score": 7.33,
    "url": "/pillar/konto-karten/"
   },
   {
@@ -124,12 +124,12 @@
   },
   {
    "grund": "verlinkt",
-   "impressionen": 8,
-   "inlinks": 7,
+   "impressionen": 9,
+   "inlinks": 9,
    "lastmod_tage": null,
-   "outlinks": 3,
-   "position": 20.88,
-   "score": 4.58,
+   "outlinks": 5,
+   "position": 24.67,
+   "score": 4.53,
    "url": "/pillar/versicherungen/"
   },
   {
@@ -164,6 +164,16 @@
   },
   {
    "grund": "verlinkt",
+   "impressionen": 3,
+   "inlinks": 4,
+   "lastmod_tage": null,
+   "outlinks": 9,
+   "position": 7.67,
+   "score": 4.23,
+   "url": "/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/"
+  },
+  {
+   "grund": "verlinkt",
    "impressionen": 2,
    "inlinks": 3,
    "lastmod_tage": null,
@@ -187,20 +197,20 @@
    "impressionen": 0,
    "inlinks": 1,
    "lastmod_tage": null,
+   "outlinks": 3,
+   "position": null,
+   "score": 4.0,
+   "url": "/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/"
+  },
+  {
+   "grund": "nur ein Inlink",
+   "impressionen": 0,
+   "inlinks": 1,
+   "lastmod_tage": null,
    "outlinks": 5,
    "position": null,
    "score": 4.0,
    "url": "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/"
-  },
-  {
-   "grund": "verlinkt",
-   "impressionen": 2,
-   "inlinks": 4,
-   "lastmod_tage": null,
-   "outlinks": 9,
-   "position": 7.0,
-   "score": 3.97,
-   "url": "/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/"
   },
   {
    "grund": "verlinkt",
@@ -264,12 +274,12 @@
   },
   {
    "grund": "verlinkt",
-   "impressionen": 3,
+   "impressionen": 4,
    "inlinks": 16,
    "lastmod_tage": null,
    "outlinks": 5,
-   "position": 29.67,
-   "score": 2.03,
+   "position": 32.0,
+   "score": 2.33,
    "url": "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/"
   },
   {
@@ -335,7 +345,7 @@
   {
    "grund": "verlinkt",
    "impressionen": 0,
-   "inlinks": 2,
+   "inlinks": 3,
    "lastmod_tage": null,
    "outlinks": 3,
    "position": null,
@@ -365,7 +375,7 @@
   {
    "grund": "verlinkt",
    "impressionen": 0,
-   "inlinks": 2,
+   "inlinks": 3,
    "lastmod_tage": null,
    "outlinks": 6,
    "position": null,
@@ -375,7 +385,7 @@
   {
    "grund": "verlinkt",
    "impressionen": 0,
-   "inlinks": 2,
+   "inlinks": 3,
    "lastmod_tage": null,
    "outlinks": 5,
    "position": null,
@@ -421,6 +431,16 @@
    "position": null,
    "score": 1.0,
    "url": "/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/"
+  },
+  {
+   "grund": "verlinkt",
+   "impressionen": 0,
+   "inlinks": 2,
+   "lastmod_tage": null,
+   "outlinks": 3,
+   "position": null,
+   "score": 1.0,
+   "url": "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/"
   },
   {
    "grund": "verlinkt",
@@ -777,7 +797,7 @@
    "impressionen": 0,
    "inlinks": 20,
    "lastmod_tage": null,
-   "outlinks": 7,
+   "outlinks": 8,
    "position": null,
    "score": 1.0,
    "url": "/posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/"
@@ -785,7 +805,7 @@
   {
    "grund": "verlinkt",
    "impressionen": 0,
-   "inlinks": 25,
+   "inlinks": 26,
    "lastmod_tage": null,
    "outlinks": 6,
    "position": null,
@@ -1053,7 +1073,7 @@
    "url": "/werkzeuge/tarifwechsel-entscheidungsbaum/"
   }
  ],
- "stand": "2026-11-03",
+ "stand": "2026-11-04",
  "welle1": [
   "/pillar/internet-dsl/",
   "/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/",
@@ -1071,10 +1091,11 @@
   "/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/",
   "/posts/",
   "/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/",
+  "/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
   "/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/",
   "/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/",
+  "/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/",
   "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/",
-  "/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
   "/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/",
   "/",
   "/ueber/",
@@ -1093,8 +1114,7 @@
   "/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/",
   "/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/",
   "/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/",
-  "/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/",
-  "/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/"
+  "/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/"
  ],
  "welle1_absolut": [
   "https://franksfinanzcheck.de/pillar/internet-dsl/",
@@ -1113,10 +1133,11 @@
   "https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/",
   "https://franksfinanzcheck.de/posts/",
   "https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/",
+  "https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
   "https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/",
   "https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/",
+  "https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/",
   "https://franksfinanzcheck.de/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/",
-  "https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
   "https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/",
   "https://franksfinanzcheck.de/",
   "https://franksfinanzcheck.de/ueber/",
@@ -1135,12 +1156,13 @@
   "https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/",
   "https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/",
   "https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/",
-  "https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/",
-  "https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/"
+  "https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/"
  ],
  "welle2": [
+  "/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/",
   "/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/",
   "/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/",
+  "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/",
   "/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/",
   "/posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/",
   "/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/",
