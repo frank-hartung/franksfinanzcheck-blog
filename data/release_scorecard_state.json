@@ -1,16 +1,16 @@
 {
   "version": 1,
-  "generated_at": "2026-11-05T12:39:33Z",
-  "modus": "kandidaten",
-  "commit": "b36bdde451cbb3bd1796a45be9ada69c42c6b1c7",
+  "generated_at": "2026-11-05T13:08:13Z",
+  "modus": "live",
+  "commit": "0f8d32597a9571f22925a49d589def8fc8e5cd67",
   "kapazitaet": {
     "stichtag": "2026-11-05",
     "artikel": 114,
-    "faellig": 2,
+    "faellig": 0,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
-      "slug": "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
+      "slug": "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
       "frist": "2026-11-11",
       "restlaufzeit": 6
     },
@@ -23,7 +23,7 @@
     "horizont_tage": 120,
     "vorlauf_tage": 7,
     "nachhol_frist_tage": 7,
-    "abbau_tage": 0,
+    "abbau_tage": null,
     "verletzungen_alt": 0,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
@@ -46,9 +46,11 @@
       "quelle": "scripts/faktenfrische_befund_ledger.py (via publish_gate.fakten_befund_failures)",
       "artikel": [
         "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
-        "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit"
+        "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+        "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
+        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum"
       ],
-      "anzahl": 2
+      "anzahl": 4
     },
     {
       "check": "T1w-zeichenlaenge-optimum",
@@ -63,10 +65,10 @@
     }
   ],
   "befundlage": {
-    "offen": 33,
-    "seiten": 7,
-    "live_befunde": 8,
-    "live_seiten": 2,
+    "offen": 47,
+    "seiten": 11,
+    "live_befunde": 13,
+    "live_seiten": 4,
     "ueberholt": 13,
     "ohne_fassung": 15,
     "nicht_entscheidbar": 5,
@@ -75,7 +77,9 @@
     "ueber_frist": 0,
     "je_slug": {
       "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": 3,
-      "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": 5
+      "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": 5,
+      "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": 2,
+      "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": 3
     }
   },
   "artikel": {
@@ -445,7 +449,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
@@ -665,22 +669,29 @@
       "checks": []
     },
     "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
-      "sha256": "ae2333ba77f3070e82dd8bf7f501fadc479731ca25aa5ce7c479246554850f23",
-      "urteil": "freigabe-reif",
+      "sha256": "04844c0c078bb54edb791911401e5d44d5161ae3cf0d8340caa14e31624901b0",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "naechste_pruefung": "2026-12-20",
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "20c08cb650ef6e24af64 (luecke): Der Ratgeber vernachlässigt bei der Kalkulation der Sparfähigkeit die massive Preissteigerung bei Energie (+14,9 %), die das Budget für monatliche Sparraten erheblich belastet.; 6aafb23c0c6dbb06ce3b (veraltet): Die im Rechenbeispiel zur Realrendite genutzte Inflationsrate von 2 % ist veraltet; die vorläufige Rate für Oktober 2026 beträgt laut Statistischem Bundesamt "
+        }
+      ]
     },
     "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen": {
       "sha256": "4726400fec2bdfdc74c650b016633052b08e8721ad014bec4f748faa70e394b0",
@@ -701,22 +712,29 @@
       "checks": []
     },
     "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": {
-      "sha256": "dc5a6867793650cc75a623a71e856625540fc62d13b17321ddec32e2dd2ca091",
-      "urteil": "freigabe-reif",
+      "sha256": "9f6340e6c7a5ec59d1db2aec4dd6c8587f678b9f129d848960413238224215d9",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "naechste_pruefung": "2026-12-20",
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "24f05ddc03ffdd50118f (praezision): Die Kalkulation der Fixkostenersparnis bei Energie (Strom/Gas) ist unpräzise, da sie den aktuellen Preisanstieg von +14,9 % bei Energieprodukten nicht einbezieht.; 4816322f061dfdc03bcd (luecke): Bei den Einsparpotenzialen für Lebensmittel fehlt der Bezug zur aktuellen Preissteigerung von +0,4 % bei Nahrungsmitteln.; 7017065ee7c74c7ae452 (veraltet): Der Artikel nu"
+        }
+      ]
     },
     "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": {
       "sha256": "ae4e49707910715d0e98779f61e2a66c841db9907c846defd391a3157c2bae41",
