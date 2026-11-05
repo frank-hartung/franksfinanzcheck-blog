@@ -43,7 +43,7 @@ Wer seine [Heizkosten senken](../../posts/2026-10-12-waermepumpe-vs-gasheizung-2
 Hier erfährst du alles über die Zyklen am Markt. Wir zeigen dir, wie du den Markt für Öl liest und zum besten Kurs zuschlägst. So behältst du die volle Kontrolle über deine Ausgaben.
 
 **Das Wichtigste in Kürze**  
-- Die **Heizöl Preise** erreichen ihr Tief meist in den Monaten Januar und Februar.
+- Die **Heizöl Preise** schwanken saisonal; ein garantierter Tiefpunkt in einem bestimmten Monat (z. B. Januar oder Februar) existiert nicht – eine kurzfristige Marktbeobachtung ersetzt keine Preisprognose.
 - Wer frühzeitig sein Öl bestellt, schützt sich vor hohen Kosten am Ende vom Jahr.
 - Die Entwicklung vom Preis lässt sich mit einem einfachen Pfad aus vier Schritten prüfen.
 - Typische Fehler beim Kauf kosten dich oft bis zu 15 % (Beispielrechnung) mehr an Kosten für die Wärme als Beispielwert.
@@ -132,9 +132,7 @@ Ein Kauf im Januar spart dir 300 € (Beispielrechnung) gegenüber einem Kauf i
 
 ## Faustregel für den optimalen Kaufzeitpunkt
 
-Als Faustregel gilt für alle Besitzer einer Heizung mit Öl: Bestelle dein Öl immer dann, wenn die Preise für mindestens vier Wochen unter dem Schnitt der letzten 12 Monate liegen. Meistens öffnet sich dieses günstige Fenster für den Kauf zwischen dem Anfang vom Januar und der Mitte vom Februar.
-
-In dieser Zeit ist die erste Kälte vom Winter oft schon vorüber und die Händler wollen ihre Bestände für das Frühjahr räumen. Wer in dieser Phase zuschlägt, macht in den meisten Jahren einen sehr guten Schnitt. Notiere dir diesen Zeitraum fest in deinem Kalender für das nächste Jahr. So verpasst du nie wieder den Moment, in dem das Öl am günstigsten ist.
+Als Orientierung ohne Marktbeleg: Preise, die mindestens vier Wochen unter dem Schnitt der letzten 12 Monate liegen, können ein günstiges Kaufzeitfenster signalieren – das ist keine Vorhersage künftiger Preise, und ein garantierter Tiefpunkt (z. B. im Januar oder Februar) existiert nicht.
 
 **Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) **Lesetipp:** [Gasabschlag berechnen: So planst du die Heizsaison richtig](../../posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/)
 

@@ -147,7 +147,13 @@ Die Zinsen von rund 84.000 € übersteigen deine eigene Einzahlung von 72
 
 Die 72er‑Regel rechnest du im Kopf. Teile 72 durch deinen Zinssatz.
 
-Das Ergebnis zeigt, wann sich dein Geld verdoppelt. Bei 6 % sind das rund 12 Jahre. So planst du deine Ziele besser.
+Das Ergebnis zeigt, wann sich dein Geld verdoppelt. Bei 6 % sind das rund 12 Jahre. So planst du deine Ziele besser.
+
+### Energiepreise in der Kalkulation nicht vergessen
+
+Die Sparfähigkeit eines Haushalts bemisst sich nicht am Gehalt allein, sondern an den Fixkosten, die übrig bleiben. Energie ist dabei ein wesentlicher Posten: Energieprodukte kosteten laut Statistischem Bundesamt (Verbraucherpreisindex) im Oktober 2026 vorläufig 2,8 % mehr als ein Jahr zuvor; Energie insgesamt verteuerte sich um +14,9 % gegenüber dem Vorjahresmonat. Wer die monatliche Sparrate kalkuliert, sollte aktuelle Energiepreise einpreisen – sonst ist die geplante Rate zu hoch angesetzt und das Budget für den Vermögensaufbau schmilzt schneller als gedacht.
+
+[Quelle: Statistisches Bundesamt, Verbraucherpreisindex und Inflationsrate in Deutschland, https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html]
 
 ### Was passiert bei anderen Szenarien?
 
@@ -158,9 +164,9 @@ Das Ergebnis zeigt, wann sich dein Geld verdoppelt. Bei 6 % sind das rund 12
 | 8 % | 176.000 € | 9 |
 | 10 % | 224.000 € | 7,2 |
 
- Bei einer durchschnittlichen Inflationsrate von ca. 2 % verliert das Geld jedes Jahr etwa 2 % seiner Kaufkraft; das ist ein Beispielwert.
+ Bei der vorläufigen Inflationsrate für Oktober 2026 von 2,8 % (Statistisches Bundesamt, Verbraucherpreisindex) verliert das Geld jedes Jahr knapp 3 % seiner Kaufkraft; das ist ein Beispielwert.
 
- Bei 7 % nominal und 2 % Inflation bleibt eine reale Rendite von etwa 5 %; das ist ein Modellwert. Das reale Endkapital nach 20 Jahren beträgt dann etwa 124.000 €, immer noch ein beachtlicher Vermögenszuwachs.
+ Bei 7 % nominal und 2,8 % Inflation bleibt eine reale Rendite von etwa 4,2 %; das ist ein Modellwert. Das reale Endkapital nach 20 Jahren beträgt dann etwa 113.000 €, immer noch ein beachtlicher Vermögenszuwachs.
 
 > 💶 **Spar‑Tipp zwischendurch:** Faire Konditionen gibt es online in wenigen Minuten: [**C24 Bank Tagesgeld-Zinsen ansehen**](/go/tagesgeld/)
 

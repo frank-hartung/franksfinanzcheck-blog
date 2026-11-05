@@ -43,7 +43,7 @@ Flexibilität bei den Daten erhöht deine Verhandlungsposition und ermöglicht P
 Ein kurzer Blick in den eigenen Kalender verhindert teure Umbuchungsgebühren.  
 
 ## Preisvergleich – wo du wirklich sparst Ein gründlicher Vergleich ist das Herzstück jeder günstigen Buchung.
-CHECK24 bietet einen übersichtlichen Vergleich aller großen Anbieter und filtert nach Preis, Fahrzeugtyp und Zusatzleistungen.  
+Vergleichsportale wie CHECK24 bieten einen übersichtlichen Vergleich vieler Anbieter und filtern nach Preis, Fahrzeugtyp und Zusatzleistungen.  
 Nutze die Filterfunktion, um nur Angebote mit inkludierter Vollkasko und unbegrenzter Kilometerzahl anzuzeigen.  
 
 | Kostenposition | Typisch enthalten | Typisch extra |
@@ -58,9 +58,19 @@ Die Tabelle verdeutlicht, welche Posten häufig im Basispreis enthalten sind und
 Achte darauf, dass die Vergleichsplattform die Gesamtkosten inklusive Steuern anzeigt.  
 Nur so vermeidest du unangenehme Überraschungen beim Vertragsabschluss.  
 
-Ein weiterer Trick besteht darin, dieselbe Buchungsanfrage über mehrere Geräte zu senden.  
-Manche Anbieter passen die Preise dynamisch an das Endgerät an.  
-Wenn du ein Tablet nutzt, kann sich der Tagessatz leicht reduzieren.  
+Ein weiterer Trick besteht darin, dieselbe Buchungsanfrage über mehrere Geräte zu senden.
+Manche Anbieter passen die Preise dynamisch an das Endgerät an.
+Wenn du ein Tablet nutzt, kann sich der Tagessatz leicht reduzieren. (Dieses dynamische Preisverhalten ist eine häufig gemachte Beobachterannahme, keine gesicherte Marktprognose.)
+
+## Der 4K-Prüfpfad bei der Mietwagenbuchung
+
+Franks Fixkosten-Kompass gliedert die Entscheidung in vier Schritte:
+
+1. **Kosten sehen** – Notiere alle Kostenpositionen: Grundmiete, Vollkasko, Selbstbeteiligung, Zusatzfahrer, Navigationssystem, Kindersitz, Tankregelung und die Kaution. Vergleiche immer die Gesamtsumme inklusive Steuern.
+2. **Konditionen rechnen** – Prüfe Tankregelung („voll zurückgeben“ spart Nachzahlungen), Kilometerpauschale oder -paket, Stornobedingungen und die Bedingungen der Vollkasko.
+3. **Kündigungsfenster sichern** – Notiere dir das kostenfreie Stornierungsfenster (z. B. 24 Stunden vor Abholung) und prüfe, ob Gebühren bei Änderungen anfallen.
+4. **Kurs halten** – Buche nur, wenn die Gesamtkosten deinem Budget entsprechen; speichere die Buchungsbestätigung und prüfe die Endabrechnung nach der Rückgabe.
+
 
 ## Versteckte Kosten im Kleingedruckten Die meisten Mietverträge enthalten Klauseln zu Zusatzkilometern, Tankregelungen und Selbstbeteiligungen.
 Eine typische Falle ist die „Voll‑tanken‑bei‑Rückgabe“-Regel, die häufig zu überhöhten Aufpreisforderungen führt.  
@@ -76,8 +86,8 @@ Ein genauer Blick auf die Kilometerpauschale lohnt sich besonders bei langen Str
 Wenn du die Pauschale durch ein unbegrenztes Kilometerpaket ersetzt, kann sich die Rechnung deutlich verbessern.  
 
 ## Timing und Buchungsstrategie Der ideale Buchungszeitpunkt liegt in der Regel mehrere Wochen vor dem gewünschten Anreisetag.
-Studien aus der Praxis zeigen, dass die Preise in den letzten drei Buchungswochen häufig ansteigen.  
-Setze dir einen Erinnerungszeitpunkt im Kalender, um rechtzeitig zu vergleichen.  
+Marktbeobachter beschreiben, dass die Preise in den letzten drei Buchungswochen häufig ansteigen können – das ist eine Einschätzung, keine garantierte Marktprognose.
+Setze dir einen Erinnerungszeitpunkt im Kalender, um rechtzeitig zu vergleichen.
 
 Ein weiterer Hebel ist das Buchen außerhalb der Hauptreisezeiten.  
 Wenn du flexibel bist, wähle einen Abholort in einer kleineren Stadt, wo die Nachfrage geringer ist.  
@@ -123,7 +133,7 @@ Ein Rückgabeort außerhalb des Abholorts kann günstiger sein, jedoch können R
 
 ### Wie lange im Voraus sollte ich den Mietwagen buchen?
 
-Idealerweise 3‑4 Wochen vorher, um von niedrigeren Frühbucher‑Tarifen zu profitieren und Preissteigerungen zu umgehen.
+Als Orientierung lohnt sich eine Buchung etwa 3‑4 Wochen vor dem Anreisetag, um niedrigere Frühbucher-Tarife zu prüfen – das ist keine Marktgarantie, die Preise können auch außerhalb dieses Fensters niedriger sein.
 
 Jetzt bist du bereit, deinen Mietwagen clever zu buchen und versteckte Kosten zu vermeiden. Setze dir den nächsten Schritt: Öffne CHECK24, gib deine Reisedaten ein und erstelle eine Kostenübersicht nach dem 4K‑Prüfpfad.
 Vergleiche die Gesamtkosten, prüfe die Vertragsbedingungen und buche das Angebot, das am besten zu deinem Budget passt.

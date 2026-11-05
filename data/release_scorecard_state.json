@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-05T17:29:37Z",
-  "modus": "kandidaten",
-  "commit": "58235096ca6728652c26aac085104a2a414c9251",
+  "generated_at": "2026-11-05T16:40:07Z",
+  "modus": "live",
+  "commit": null,
   "kapazitaet": {
     "stichtag": "2026-11-05",
     "artikel": 114,
@@ -37,16 +37,152 @@
     "empfehlung_erreicht": true,
     "hartes_limit": 16
   },
-  "ursachen": [],
+  "ursachen": [
+    {
+      "check": "T7-render-beweis",
+      "dimension": "technik",
+      "wirkung": "blockiert",
+      "entscheidung": "auto",
+      "quelle": "Hugo-Build + public/posts/<slug>/index.html",
+      "artikel": [
+        "2026-08-10-dsl-wechselbonus-sichern",
+        "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+        "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026",
+        "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden",
+        "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+        "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel",
+        "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+        "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
+        "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan",
+        "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+        "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet",
+        "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst",
+        "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
+        "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+        "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
+        "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
+        "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
+        "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
+        "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet",
+        "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife",
+        "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen",
+        "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich",
+        "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
+        "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen",
+        "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt",
+        "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte",
+        "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen",
+        "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
+        "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt",
+        "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
+        "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen",
+        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
+        "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
+        "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+        "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster",
+        "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
+        "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
+        "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
+        "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser",
+        "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug",
+        "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+        "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet",
+        "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist",
+        "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert",
+        "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich",
+        "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden",
+        "2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet",
+        "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
+        "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
+        "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss",
+        "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
+        "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest",
+        "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen",
+        "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit",
+        "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+        "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet",
+        "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung",
+        "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+        "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken",
+        "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck",
+        "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt",
+        "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle",
+        "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
+        "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle",
+        "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
+        "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
+        "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
+        "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto",
+        "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks",
+        "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen",
+        "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
+        "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht",
+        "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege"
+      ],
+      "anzahl": 76
+    },
+    {
+      "check": "T1w-zeichenlaenge-optimum",
+      "dimension": "technik",
+      "wirkung": "warnung",
+      "entscheidung": "auto",
+      "quelle": "scripts/check_length.py (Status unter-/ueber-optimum)",
+      "artikel": [
+        "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+        "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
+        "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
+        "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen"
+      ],
+      "anzahl": 4
+    },
+    {
+      "check": "RD1-duplikate",
+      "dimension": "redundanz",
+      "wirkung": "blockiert",
+      "entscheidung": "auto",
+      "quelle": "scripts/duplikat_guard.py D1–D6 (via publish_gate.duplicate_failures)",
+      "artikel": [
+        "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
+        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum"
+      ],
+      "anzahl": 2
+    },
+    {
+      "check": "RD2-einzigartigkeit",
+      "dimension": "redundanz",
+      "wirkung": "blockiert",
+      "entscheidung": "human",
+      "quelle": "scripts/check_uniqueness.py U1–U2 (via publish_gate.uniqueness_failures)",
+      "artikel": [
+        "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
+        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum"
+      ],
+      "anzahl": 2
+    },
+    {
+      "check": "T6-textverstaendnis",
+      "dimension": "technik",
+      "wirkung": "blockiert",
+      "entscheidung": "auto",
+      "quelle": "scripts/textverstaendnis_guard.py (via publish_gate.textverstaendnis_failures)",
+      "artikel": [
+        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum"
+      ],
+      "anzahl": 1
+    }
+  ],
   "befundlage": {
-    "offen": 34,
-    "seiten": 7,
+    "offen": 0,
+    "seiten": 0,
     "live_befunde": 0,
     "live_seiten": 0,
-    "ueberholt": 10,
-    "ohne_fassung": 10,
-    "nicht_entscheidbar": 5,
-    "aeltester_tage": 6,
+    "ueberholt": 0,
+    "ohne_fassung": 0,
+    "nicht_entscheidbar": 0,
+    "aeltester_tage": null,
     "frist_tage": 14,
     "ueber_frist": 0,
     "je_slug": {}
@@ -54,13 +190,13 @@
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "0a9c47ec2d3105d826f129e1c3311c1bc97cb74290597d4d6df9314ff4947049",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -68,17 +204,24 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": {
       "sha256": "cf87821bde5269a7c421643a000365a69ec7602969f5d6dfd2106dedf7150b85",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -86,17 +229,24 @@
       },
       "naechste_pruefung": "2026-12-01",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
       "sha256": "518d46f3fe8729a56931239e8ae505b0442caeb73638d4ff8adcb43906890a06",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "hoch",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "bestanden",
@@ -104,17 +254,24 @@
       },
       "naechste_pruefung": "2026-12-14",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": {
       "sha256": "a531c29ac51e5870bd9bb922ab9796c3fc018ea4849935ade62fbedad94d2567",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -122,17 +279,24 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
       "sha256": "3107f6b83b463b32049d54725985e2ed377c5fd1200f9616cc512ed90b3a9651",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -140,17 +304,24 @@
       },
       "naechste_pruefung": "2026-12-01",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
       "sha256": "e5758a1ef8cf43568b644ee914b40dc9f47fca22a3ebd057364973355056d327",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -158,17 +329,24 @@
       },
       "naechste_pruefung": "2026-12-01",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
       "sha256": "26c8114cffa436520fb85104b756b645691ddf862361891624e31f41dd013f40",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -176,17 +354,24 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": {
       "sha256": "a748bd5f0ef151781047e43351d468a80827deea74bfb425b253167554370293",
-      "urteil": "warnung",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -200,18 +385,24 @@
           "dimension": "technik",
           "wirkung": "warnung",
           "detail": "Zeichenlänge ueber-optimum (18299 Zeichen, Optimum 12.000–18.000)"
+        },
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
         }
       ]
     },
     "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
       "sha256": "bea92c04ac5699dd84e5135b5083876aeeb1c0a243c29934219d9b52a9842fee",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -219,17 +410,24 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan": {
       "sha256": "1d1a232974ccb814184d5e04c26702977fbeedced7aff6b2cdc17facf64a0353",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -237,17 +435,24 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
       "sha256": "5bdab9f74c81e86216dad103c688365e6a1accdd7975ad832434980064e9ef18",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "erhoeht",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -255,17 +460,24 @@
       },
       "naechste_pruefung": "2026-12-19",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
       "sha256": "3572ba22f4f8761a1da485017114c803f9d6e21dc59165b5a83d83416381bd79",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "hoch",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "bestanden",
@@ -273,17 +485,24 @@
       },
       "naechste_pruefung": "2026-12-14",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": {
       "sha256": "b5684802e1b6ff7b089c68650a6fce7edbba09573e13adefd516ad449e566ea9",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "hoch",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "bestanden",
@@ -291,17 +510,24 @@
       },
       "naechste_pruefung": "2026-11-19",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
       "sha256": "d96c005e8d13d9142b7cafe5ff24ba3295f3e11cac0166090bdf41afa1b66999",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -309,17 +535,24 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": {
       "sha256": "575b50151900b56fa5dfc231ca215fdd17d3a5ac9a57db4e3ce3bff9128277ce",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -327,17 +560,24 @@
       },
       "naechste_pruefung": "2026-11-12",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
       "sha256": "54d443304c106c37fd2b895ee84d492207b7cc244e79188f3dad0ad3b8d60749",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -345,17 +585,24 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
       "sha256": "aba22011758336811f9497dabb94968611cb44d9af805241b9479e4d9e2914cc",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -363,17 +610,24 @@
       },
       "naechste_pruefung": "2026-12-19",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
       "sha256": "53c38cd31bb602cdb0e04c1a49eae6e5465b10ef352002af240aa35cebba2680",
-      "urteil": "warnung",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -387,18 +641,24 @@
           "dimension": "technik",
           "wirkung": "warnung",
           "detail": "Zeichenlänge ueber-optimum (18296 Zeichen, Optimum 12.000–18.000)"
+        },
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
         }
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
       "sha256": "f541df65178959971f2cdf66376ff0a8dea187b089f62a428200315a339a7889",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -406,17 +666,24 @@
       },
       "naechste_pruefung": "2026-12-19",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
       "sha256": "cb616b99ed56ef1142754c90e2b5b9e257da05cfb9a7a0b2d306e975a736a49b",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -424,17 +691,24 @@
       },
       "naechste_pruefung": "2026-12-01",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
       "sha256": "29f76bf8d7a6de5622e928d33a2d046ecf0fb72c97e2e18276b038535bc2ddd5",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -442,17 +716,24 @@
       },
       "naechste_pruefung": "2027-01-12",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": {
       "sha256": "702f93d731cbe2387bec397b6b5fde6cf485fc530578f1439f3deb8a6057fe7c",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -460,17 +741,24 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen": {
       "sha256": "57b0abe868cb95e28c91f7e900c382ba8e67439c831ec181e5dd05d1eeba1d20",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "hoch",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "bestanden",
@@ -478,17 +766,24 @@
       },
       "naechste_pruefung": "2026-12-14",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
       "sha256": "42f35a75ee456f29f235e45201b4794bfb2c77307787a4bccb726cde19871e6c",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "erhoeht",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -496,17 +791,24 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": {
       "sha256": "8b8fefd42ef463801cd6d333864a55678de46b4eb7227019f343dac9f0fd3e8d",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -514,17 +816,24 @@
       },
       "naechste_pruefung": "2026-11-12",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen": {
       "sha256": "5d82e9843028f9023a6afe6da6edc13a2333b19843acb6cffb7dc801903702e4",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -532,17 +841,24 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt": {
       "sha256": "3801f6775c1ad6a60e7cbadaf6760e51fd97dbcd92ac1a58b864e6bb8463ab1b",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -550,17 +866,24 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte": {
       "sha256": "f06381152632a5960bbfaf5371320725019c619ee8ee00da7d70cbced5a090d4",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -568,17 +891,24 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen": {
       "sha256": "b291fe9f934bc1feaf283800a96e560b0f2c0abcbf0169c33808fcb43ac9bf9c",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -586,17 +916,24 @@
       },
       "naechste_pruefung": "2026-12-26",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": {
       "sha256": "43ec7efe20912ee8bd77c60439c94884df852fac7d70ec326a809e9b470a579d",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "erhoeht",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -604,17 +941,24 @@
       },
       "naechste_pruefung": "2026-12-19",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": {
       "sha256": "2e3ca085ada3cb53d47297726da70911e8b5fec2887d30cbe2c969fb580b2b75",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -622,35 +966,61 @@
       },
       "naechste_pruefung": "2027-01-12",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
-      "sha256": "04844c0c078bb54edb791911401e5d44d5161ae3cf0d8340caa14e31624901b0",
-      "urteil": "freigabe-reif",
+      "sha256": "71ebfc49f849da523ebb6a88bf951f330afef86306dc2eef2271bccedf3a00cf",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "affiliate": "nicht beweisbar",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-20",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D3-X: Absatz wortgleich in 2 Artikeln (content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-; D4-X: Fast-Duplikat über Artikel (Ratio 1.00, content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit"
+        },
+        {
+          "check": "RD2-einzigartigkeit",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "U1-PHRASEN: 6 gleiche 7-Wort-Phrasen mit 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum (z. B. „energieprodukte kosteten laut statistischem bundesamt verbraucherpreisindex im“) – ab 5 ist es Dopplung, Passage umschreiben"
+        },
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen": {
       "sha256": "4726400fec2bdfdc74c650b016633052b08e8721ad014bec4f748faa70e394b0",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -658,35 +1028,67 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": {
-      "sha256": "9f6340e6c7a5ec59d1db2aec4dd6c8587f678b9f129d848960413238224215d9",
-      "urteil": "freigabe-reif",
+      "sha256": "5ddca8327462adc182f9573d4d1a6bde3a143ab02d54ec4e8a440eb949ee85c5",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "affiliate": "nicht beweisbar",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-20",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D1-EXAKT: Absatz doppelt (Z.7919 ≈ Z.6060): [Quelle: Statistisches Bundesamt, Verbraucherpreisindex und Inflationsrate in Deutschland, https://w…; D3-X: Absatz wortgleich in 2 Artikeln (content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-; D4-X: Fast-Duplikat über Artikel (Ratio 1.00, content/posts/2026-"
+        },
+        {
+          "check": "RD2-einzigartigkeit",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "U1-PHRASEN: 6 gleiche 7-Wort-Phrasen mit 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich (z. B. „energieprodukte kosteten laut statistischem bundesamt verbraucherpreisindex im“) – ab 5 ist es Dopplung, Passage umschreiben"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…quelle statistisches bundesamt verbraucherpreisindex und inflationsrate in deutschland https www…“ – doppelte Passage, manuell reparieren"
+        },
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": {
       "sha256": "ae4e49707910715d0e98779f61e2a66c841db9907c846defd391a3157c2bae41",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -694,17 +1096,24 @@
       },
       "naechste_pruefung": "2026-11-11",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": {
       "sha256": "473ce99e987356bf821f7d2df88fd6acff4566a058cd49f20eb33feb68a26549",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -712,17 +1121,24 @@
       },
       "naechste_pruefung": "2026-12-02",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster": {
       "sha256": "90602a84d3d745cf3c508171ca9b7bc5605ae6e5942e61e576c8aeb8799ae1ac",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -730,17 +1146,24 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": {
       "sha256": "87268d553c1ab1b3403b6dcf84c29ba698f93a45c1fd7e394dae24a825ce14ec",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -748,17 +1171,24 @@
       },
       "naechste_pruefung": "2026-11-11",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
       "sha256": "920561a8833136d255928ace41444b2bf62ceb17358379771bc7aeb73ed7e173",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -766,17 +1196,24 @@
       },
       "naechste_pruefung": "2026-11-11",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
       "sha256": "2bfda68f5b26d04504e0b84957b4e0445043a40000ea7fb2d971c686dc12d69b",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -784,17 +1221,24 @@
       },
       "naechste_pruefung": "2026-12-02",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": {
       "sha256": "1e1ed28e6666c2a3f229bc975cdfbaa2a01003bd065799a5a25e32f76973cbfb",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -802,17 +1246,24 @@
       },
       "naechste_pruefung": "2026-11-12",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug": {
       "sha256": "48109232d0a7645c661ffe92783e3526498fd0b800053965baf4055ad8b76e50",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -820,17 +1271,24 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
       "sha256": "145cf059e2253e0ecb1b18b277ecdc9569cced1ba4e38f0ab7062c87bd737d01",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -838,17 +1296,24 @@
       },
       "naechste_pruefung": "2026-12-02",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": {
       "sha256": "ff017f509737b38d63c6cdd1b8ba328b412c453ef97e79fbd33803e6f9dc17c0",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -856,17 +1321,24 @@
       },
       "naechste_pruefung": "2026-12-02",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet": {
       "sha256": "55c6ae78e73840f0a010518469eb6e0740fa7fb1fc727c8af7f768a636d4b3dd",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -874,17 +1346,24 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist": {
       "sha256": "2a97306cd52bac6894b5cf04ad53a05ac215da0887b3fe6c6373d6c904b16314",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -892,17 +1371,24 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert": {
       "sha256": "d9131d00aaf25f441b4c601d7c0b0f304db6e16877780558bbef9196bb6e18bb",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -910,17 +1396,24 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
       "sha256": "b5aa8342e8a8e6fe57594a9dbaea52ba605d36942e065fad1034442f685aeacc",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -928,17 +1421,24 @@
       },
       "naechste_pruefung": "2027-01-11",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
       "sha256": "b0da0ee7a42fd9fb67ddd8d438ce56a048a2a83aaa78571a7d87687c76a46fd1",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -946,17 +1446,24 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet": {
       "sha256": "9acc95a44ea32d73cda2c8ecd15d47d2cfa0061f987c1f27d4e19d78a3abe79a",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -964,17 +1471,24 @@
       },
       "naechste_pruefung": "2027-01-11",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
       "sha256": "e71287424898dc523872ead82e0776b40df267cf15f8969957808fa18c7bf9ce",
-      "urteil": "warnung",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -988,18 +1502,24 @@
           "dimension": "technik",
           "wirkung": "warnung",
           "detail": "Zeichenlänge ueber-optimum (18112 Zeichen, Optimum 12.000–18.000)"
+        },
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
         }
       ]
     },
     "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
       "sha256": "0bb339ebf97b5578eade49d589f61feb7483d6e647d21c3649b7876ebb350495",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1007,17 +1527,24 @@
       },
       "naechste_pruefung": "2026-12-03",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {
       "sha256": "21aa7763ea2ac72595d54ddef70be9a548c7b77bdbbd0daf83314fd57ceb61d5",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1025,17 +1552,24 @@
       },
       "naechste_pruefung": "2026-11-18",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": {
       "sha256": "ccce34ee53a9a58439d7c44671a72c965fa1b4cdbacc5e21129c2c58f0ebeaff",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1043,17 +1577,24 @@
       },
       "naechste_pruefung": "2026-12-03",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest": {
       "sha256": "803dbb47352bf7693121f850a3508706fedcfbb4853dc3192d773736d2f17419",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "erhoeht",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1061,17 +1602,24 @@
       },
       "naechste_pruefung": "2026-11-19",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen": {
       "sha256": "4b67a71a916d0d547daadd89a41dee1cb10808023d2ee3a8a2c5451d9289fb68",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1079,17 +1627,24 @@
       },
       "naechste_pruefung": "2026-11-27",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": {
       "sha256": "87f289f6060465bc02642b354a6489bdbc7ec16eefa6d5a8ed9531e98b74dca3",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1097,17 +1652,24 @@
       },
       "naechste_pruefung": "2026-11-21",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
       "sha256": "01dc9c8557046b8cdf28a6a133897a910436eb0184e5696c0e5a5b2abe0c8022",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1115,17 +1677,24 @@
       },
       "naechste_pruefung": "2026-12-03",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
       "sha256": "43507adc459faf75e39df17d5b5baf96842eeae6f42bb3d8f495d0e2b4973bec",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "erhoeht",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1133,17 +1702,24 @@
       },
       "naechste_pruefung": "2026-11-21",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": {
       "sha256": "2c024ec6c15b726ab376f37ecdf5e00bb69ee414a89d750cbf2ab59fdff2ff8a",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "erhoeht",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1151,17 +1727,24 @@
       },
       "naechste_pruefung": "2026-11-21",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": {
       "sha256": "b090bb7870bfe29a1f903a7b6051dc3ae0e87df670b28ba2824beee66c08da67",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1169,17 +1752,24 @@
       },
       "naechste_pruefung": "2026-12-03",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": {
       "sha256": "34e8cd1620fa2c5c61d1a36f8089cfabadaf1e96232419bcc0b5cf7478a4ad59",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1187,17 +1777,24 @@
       },
       "naechste_pruefung": "2026-11-21",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck": {
       "sha256": "7fc685b7028540d26591b9eb6cdb5abcf6ef8e430368925b11ccf0021539942e",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1205,17 +1802,24 @@
       },
       "naechste_pruefung": "2026-11-23",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": {
       "sha256": "0b2e1d31f8305bc57439234c7df39a45419dd52d3690207995aae44e02ba6bc7",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1223,17 +1827,24 @@
       },
       "naechste_pruefung": "2026-11-20",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle": {
       "sha256": "44c00b10819c9ce1c309f6df2fdde3de49c45e4ad059f3fb56bc61c4cbe6205d",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1241,17 +1852,24 @@
       },
       "naechste_pruefung": "2027-01-07",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt": {
       "sha256": "6453284b0791fb522b361028ceef8b7ec2510b0ca1bc72431ac7e4ff4564e0f8",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1259,17 +1877,24 @@
       },
       "naechste_pruefung": "2027-01-05",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
       "sha256": "5bdfc3ec90e9d1d1214ada206a25e06b57461f027b5c620c117aab0629d8de86",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1277,17 +1902,24 @@
       },
       "naechste_pruefung": "2026-11-21",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
       "sha256": "39e973d8bf8064c55451d6b681f32d2a69bfc0e5e4969c2349932d56f459696f",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1295,17 +1927,24 @@
       },
       "naechste_pruefung": "2026-11-20",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
       "sha256": "4cc79aa22f6f581cd1c3bd00c44937bac40b93f04481a375a5e6bf70c56dda6c",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1313,17 +1952,24 @@
       },
       "naechste_pruefung": "2026-12-03",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick": {
       "sha256": "ee71677addabd3c2bcea21decb8136b97eac9f509871266e8611f7d3f2ed14ef",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1331,17 +1977,24 @@
       },
       "naechste_pruefung": "2026-11-21",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto": {
       "sha256": "509f5a8268ed8268310de6c4be68a51087a9e85d9a68a0f10a3f9b7525ad6520",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1349,17 +2002,24 @@
       },
       "naechste_pruefung": "2026-11-20",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks": {
       "sha256": "691568c6b33b7d6988347495947ce7887a770f3422b1d94b8742932aa3aa4b2a",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1367,17 +2027,24 @@
       },
       "naechste_pruefung": "2026-11-20",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen": {
       "sha256": "c2c4a236a74d8290e3bf765550a989e1f8396dc4e622ef7182dc6d1c76912575",
-      "urteil": "warnung",
+      "urteil": "blockiert",
       "risikoklasse": "erhoeht",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1391,18 +2058,24 @@
           "dimension": "technik",
           "wirkung": "warnung",
           "detail": "Zeichenlänge unter-optimum (10258 Zeichen, Optimum 12.000–18.000)"
+        },
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
         }
       ]
     },
     "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
       "sha256": "6a5d5b3009564e5b2bbd51919ed6c7f5a9bcc690390739ab2a98ad9383153744",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1410,17 +2083,24 @@
       },
       "naechste_pruefung": "2026-11-14",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht": {
       "sha256": "3b4894d8698bb9e18aaccd90ea10b68129a2fdb8a50ae7cfc7807b1ce56f7516",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1428,17 +2108,24 @@
       },
       "naechste_pruefung": "2026-12-11",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     },
     "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege": {
       "sha256": "20e96b9dd489b5e1b1a912b88d042f58c825997d56c5eae477f6a68ac6532882",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
-        "affiliate": "bestanden",
+        "affiliate": "nicht beweisbar",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
@@ -1446,7 +2133,14 @@
       },
       "naechste_pruefung": "2026-11-25",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "T7-render-beweis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden"
+        }
+      ]
     }
   }
 }

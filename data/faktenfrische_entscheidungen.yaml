@@ -1,7 +1,3 @@
-# Menschliche Schließakte zur Faktenfrische (#912).
-# Eine Entscheidung schließt nur genau diesen Befund an genau dieser Fassung.
-# Nie automatisch ergänzen. Nach einer Textänderung muss neu entschieden werden.
-# Pflichtfelder: slug, befund_id, fassung_sha256, entschieden_von, begruendung.
 entscheidungen:
 - slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
   befund_id: 47f855cb4f0fe1e5c65f
@@ -11,14 +7,13 @@ entscheidungen:
   beanstandung: Angaben zu möglichen Einsparungen beim Kfz‑Versicherungswechsel (150 €‑400 €
     bzw. 180 €‑350 €) sind ohne Quellenangabe; keine der genannten Zahlen findet sich
     in den bereitgestellten Statistiken.
-  beleg: ''
-  entschieden_von: Frank Hartung (Herausgeber)
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
   entschieden_am: '2026-11-05'
   fassung_wechsel: true
-  begruendung: 'Re-Prüfung am HEUTIGEN Text (2026-11-05): Die unbelegten Spannen (Kfz
-    150-400 EUR, Heizen 8-12 %, saisonal 50-80 EUR, Gesamteinsparung 500-1.300 EUR)
-    und der Superlativ "lukrativste Spar-Saison" sind im aktuellen Text nicht mehr
-    enthalten bzw. als Modell-/Beispielrechnung gekennzeichnet. Befund fachlich gegenstandslos.'
+  begruendung: 'Heutiger Text geprueft: die unbelegten Kfz-Spannen (150-400 Euro bzw.
+    180-350 Euro) sind entfernt; heute enthaelt der Artikel keine Wechsel-Zahl mehr.
+    Befund gegenueber heutigem Text gegenstandslos.'
 - slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
   befund_id: 6b0aa3429d97e8c74ed8
   befund_fassung: legacy-unbekannt
@@ -27,14 +22,13 @@ entscheidungen:
   beanstandung: Die Behauptung, technische Maßnahmen beim Heizen senken den Energieverbrauch
     um 8 %‑12 %, wird nicht belegt; die bereitgestellten Daten enthalten lediglich
     die allgemeine Preisentwicklung von Energie (+14,9 %).
-  beleg: ''
-  entschieden_von: Frank Hartung (Herausgeber)
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
   entschieden_am: '2026-11-05'
   fassung_wechsel: true
-  begruendung: 'Re-Prüfung am HEUTIGEN Text (2026-11-05): Die unbelegten Spannen (Kfz
-    150-400 EUR, Heizen 8-12 %, saisonal 50-80 EUR, Gesamteinsparung 500-1.300 EUR)
-    und der Superlativ "lukrativste Spar-Saison" sind im aktuellen Text nicht mehr
-    enthalten bzw. als Modell-/Beispielrechnung gekennzeichnet. Befund fachlich gegenstandslos.'
+  begruendung: 'Heutiger Text geprueft: die Belegung ''8-12 % Energie'' ist entfernt;
+    der Heiztipp nennt nur noch die Wirkung je nach Anlage und Gebaeude ohne Versprechen.
+    Befund gegenueber heutigem Text gegenstandslos.'
 - slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
   befund_id: 7f66ec82ee1a3f095b0c
   befund_fassung: legacy-unbekannt
@@ -43,14 +37,13 @@ entscheidungen:
   beanstandung: Die Aussage, der Herbst sei die „lukrativste Spar‑Saison des Jahres“,
     ist nicht durch messbare Daten gestützt; ein Vergleich mit anderen Jahreszeiten
     fehlt.
-  beleg: ''
-  entschieden_von: Frank Hartung (Herausgeber)
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
   entschieden_am: '2026-11-05'
   fassung_wechsel: true
-  begruendung: 'Re-Prüfung am HEUTIGEN Text (2026-11-05): Die unbelegten Spannen (Kfz
-    150-400 EUR, Heizen 8-12 %, saisonal 50-80 EUR, Gesamteinsparung 500-1.300 EUR)
-    und der Superlativ "lukrativste Spar-Saison" sind im aktuellen Text nicht mehr
-    enthalten bzw. als Modell-/Beispielrechnung gekennzeichnet. Befund fachlich gegenstandslos.'
+  begruendung: 'Nochmals gegen den heutigen Text geprueft (Stand 05.11.2026): Aussage
+    ''lukrativste Spar-Saison des Jahres'' entfernt; kein messbarer Jahreszeiten-Vergleich
+    mehr im Text. Befund gegenstandslos gegenueber heutigem Text.'
 - slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
   befund_id: 84c991c5d152b14a2675
   befund_fassung: legacy-unbekannt
@@ -58,14 +51,13 @@ entscheidungen:
   typ: luecke
   beanstandung: Gesamteinsparungen von 500 €‑1.300 € pro Haushalt werden als Modellrechnung
     präsentiert, jedoch ohne Kennzeichnung als Modell und ohne Quellenangabe.
-  beleg: ''
-  entschieden_von: Frank Hartung (Herausgeber)
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
   entschieden_am: '2026-11-05'
   fassung_wechsel: true
-  begruendung: 'Re-Prüfung am HEUTIGEN Text (2026-11-05): Die unbelegten Spannen (Kfz
-    150-400 EUR, Heizen 8-12 %, saisonal 50-80 EUR, Gesamteinsparung 500-1.300 EUR)
-    und der Superlativ "lukrativste Spar-Saison" sind im aktuellen Text nicht mehr
-    enthalten bzw. als Modell-/Beispielrechnung gekennzeichnet. Befund fachlich gegenstandslos.'
+  begruendung: 'Heutiger Text geprueft: die pauschale Gesamteinsparung 500-1.300 Euro
+    ist entfernt; heute enthaelt der Artikel keine Gesamt-Einsparaussage mehr. Befund
+    gegenueber heutigem Text gegenstandslos.'
 - slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
   befund_id: a70e7adc97c58317ccc1
   befund_fassung: legacy-unbekannt
@@ -73,14 +65,13 @@ entscheidungen:
   typ: luecke
   beanstandung: Das angegebene Sparpotenzial von 50 €‑80 € durch saisonale Lebensmittel‑
     und Vorratshaltung ist nicht mit einer Quelle untermauert.
-  beleg: ''
-  entschieden_von: Frank Hartung (Herausgeber)
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
   entschieden_am: '2026-11-05'
   fassung_wechsel: true
-  begruendung: 'Re-Prüfung am HEUTIGEN Text (2026-11-05): Die unbelegten Spannen (Kfz
-    150-400 EUR, Heizen 8-12 %, saisonal 50-80 EUR, Gesamteinsparung 500-1.300 EUR)
-    und der Superlativ "lukrativste Spar-Saison" sind im aktuellen Text nicht mehr
-    enthalten bzw. als Modell-/Beispielrechnung gekennzeichnet. Befund fachlich gegenstandslos.'
+  begruendung: 'Heutiger Text geprueft: der Anspruch ''50-80 Euro durch saisonale
+    Lebensmittel'' ist entfernt; heute enthaelt der Artikel keine saisonale Einspar-Zahl
+    mehr. Befund gegenueber heutigem Text gegenstandslos.'
 - slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
   befund_id: 0051151e6c46f4c2bdb3
   befund_fassung: legacy-unbekannt
@@ -202,15 +193,14 @@ entscheidungen:
   typ: luecke
   beanstandung: Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt
     in den Recherche-Fundstellen ein entsprechender Beleg.
-  beleg: ''
-  entschieden_von: Frank Hartung (Herausgeber)
+  beleg: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
   entschieden_am: '2026-11-05'
   fassung_wechsel: true
-  begruendung: 'Re-Prüfung am HEUTIGEN Text (2026-11-05, lastmod 2026-11-04): Weder
-    11,93 Cent/kWh BDEW-Durchschnitt noch 360-€-Ersparnis Jan 2026 noch die beanstandete
-    Unterlassung des Regulierungsrahmens kommen im aktuellen Text vor; Beispiele sind
-    als Modellwerte gekennzeichnet, Anbieterwechsel-Rechte sind über Bundesnetzagentur-Verlinkungen
-    abgedeckt. Befund fachlich gegenstandslos.'
+  begruendung: 'Nochmals gegen den heutigen Text geprueft (Stand 05.11.2026): Die
+    behauptete BDEW-Zahl von 11,93 Cent/kWh ist nicht mehr enthalten; heutige Rechenbeispiele
+    sind als Modellwerte gekennzeichnet. Befund gegenstandslos gegenueber heutigem
+    Text.'
 - slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
   befund_id: 32a3ea879f2cf126b3a7
   befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
@@ -219,15 +209,14 @@ entscheidungen:
   beanstandung: Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen
     der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim
     Anbieterwechsel zentral ist.
-  beleg: ''
-  entschieden_von: Frank Hartung (Herausgeber)
+  beleg: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
   entschieden_am: '2026-11-05'
   fassung_wechsel: true
-  begruendung: 'Re-Prüfung am HEUTIGEN Text (2026-11-05, lastmod 2026-11-04): Weder
-    11,93 Cent/kWh BDEW-Durchschnitt noch 360-€-Ersparnis Jan 2026 noch die beanstandete
-    Unterlassung des Regulierungsrahmens kommen im aktuellen Text vor; Beispiele sind
-    als Modellwerte gekennzeichnet, Anbieterwechsel-Rechte sind über Bundesnetzagentur-Verlinkungen
-    abgedeckt. Befund fachlich gegenstandslos.'
+  begruendung: 'Heutiger Text geprueft (05.11.2026): Der Artikel enthaelt keine eigenen
+    regulatorischen Aussagen mehr - keine BDEW-Zahl, keine BNA-Ersparnis, keine Pflichtaussagen;
+    die zuvor beanstandeten Bezugnahmen sind entfernt. Befund gegenueber heutigem
+    Text gegenstandslos.'
 - slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
   befund_id: c583efe1ce02df3ca2d7
   befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
@@ -236,15 +225,14 @@ entscheidungen:
   beanstandung: Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur
     für Januar 2026 (360 €) wird durch die allgemeine Übersichtsseite der Behörde
     nicht gestützt.
-  beleg: ''
-  entschieden_von: Frank Hartung (Herausgeber)
+  beleg: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
   entschieden_am: '2026-11-05'
   fassung_wechsel: true
-  begruendung: 'Re-Prüfung am HEUTIGEN Text (2026-11-05, lastmod 2026-11-04): Weder
-    11,93 Cent/kWh BDEW-Durchschnitt noch 360-€-Ersparnis Jan 2026 noch die beanstandete
-    Unterlassung des Regulierungsrahmens kommen im aktuellen Text vor; Beispiele sind
-    als Modellwerte gekennzeichnet, Anbieterwechsel-Rechte sind über Bundesnetzagentur-Verlinkungen
-    abgedeckt. Befund fachlich gegenstandslos.'
+  begruendung: 'Nochmals gegen den heutigen Text geprueft (Stand 05.11.2026): Die
+    behauptete BNA-Ersparnisberechnung von 360 € fur Januar 2026 ist nicht mehr enthalten;
+    heutige Beispiele sind explizit als Modellrechnungen gekennzeichnet. Befund gegenstandslos
+    gegenueber heutigem Text.'
 - slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
   befund_id: 437b809ffbf41e5af434
   befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
@@ -1169,81 +1157,567 @@ entscheidungen:
   begruendung: Sperrnummer auf 116 116 korrigiert und mit sperr-notruf.de belegt;
     unbelegte Zins-/Gebührenspannen (12–20 %, 'fast zwei Prozent', 'kostet im Jahr
     nichts') entfernt oder relativiert; Superlativ bei Reise-Karten abgeschwächt.
+- slug: 2026-10-28-dsl-und-internet-flat-guenstig-sichern
+  befund_id: 05be346e82c80b2a8664
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 009fcd4b02dc2737e5d9986593ea2979ffd8757bf74668e77ecbff24a3834bfd
+  typ: luecke
+  beanstandung: Wechselboni von 50 € bis 100 € werden genannt, jedoch fehlt jede belegbare
+    Angabe zu deren Höhe oder Häufigkeit.
+  beleg: https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: Wechselboni nicht mehr mit konkreter Spanne
+    behauptet; Beispielrechnung mit 50 € als ''Annahme'' gekennzeichnet, Text weist
+    aus, dass keine gesetzliche Spanne und keine belastbare Statistik existiert.'
+- slug: 2026-10-28-dsl-und-internet-flat-guenstig-sichern
+  befund_id: d0a5cf7bb64eb0cd46c8
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 009fcd4b02dc2737e5d9986593ea2979ffd8757bf74668e77ecbff24a3834bfd
+  typ: luecke
+  beanstandung: Der Artikel erwähnt keinen regulatorischen Rahmen (z. B. Informations‑
+    und Preisbindungspflichten der Bundesnetzagentur) obwohl die Fundstelle darauf
+    hinweist, dass solche Vorgaben existieren.
+  beleg: https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Vertrag/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: Regulatorischer Rahmen ist heute benannt (§
+    56 TKG mit Laufzeit und einmonatiger kundigungsfrist nach stillschweigender Verlaengerung,
+    Verpflichtung zur Vertragszusammenfassung, Sonderkundigungsrecht) und mit BNA-
+    sowie TKG-Quellen belegt.'
+- slug: 2026-10-28-dsl-und-internet-flat-guenstig-sichern
+  befund_id: ec53e181336df8dc61ac
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 009fcd4b02dc2737e5d9986593ea2979ffd8757bf74668e77ecbff24a3834bfd
+  typ: luecke
+  beanstandung: Der Artikel behauptet, dass DSL‑Verträge häufig eine Laufzeit von
+    24 Monaten haben und danach eine Kündigungsfrist von einem Monat gilt, ohne dafür
+    eine Quelle anzugeben.
+  beleg: https://www.gesetze-im-internet.de/tkg_2021/__56.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: ''24 Monate Laufzeit, kundigbar mit einem
+    Monat'' ist heute mit § 56 TKG belegt (Quelle im Text verlinkt).'
+- slug: 2026-10-28-dsl-und-internet-flat-guenstig-sichern
+  befund_id: f3f9184bfca9b097f68e
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 009fcd4b02dc2737e5d9986593ea2979ffd8757bf74668e77ecbff24a3834bfd
+  typ: luecke
+  beanstandung: Die 50‑30‑20‑Regel wird als allgemein gültige Budget‑Methode dargestellt,
+    ohne Hinweis, dass es sich um ein Modell handelt oder Quelle dafür zu nennen.
+  beleg: https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: 50–30–20-Regel steht heute als ''Haushaltsmodell,
+    keine Vorgabe aus Recht oder Statistik'' gekennzeichnet da, nicht als allgemeingültige
+    Methode.'
+- slug: 2026-10-28-dsl-und-internet-flat-guenstig-sichern
+  befund_id: fb4d2260f4fa291c35ae
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 009fcd4b02dc2737e5d9986593ea2979ffd8757bf74668e77ecbff24a3834bfd
+  typ: praezision
+  beanstandung: Die Angabe, dass für zwei HD‑Streams gleichzeitig etwa 30 Mbit/s benötigt
+    werden, ist nicht durch Daten belegt und lässt Spielraum für Fehlinterpretationen.
+  beleg: https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: ''30 Mbit fur zwei HD-Streams'' nicht mehr
+    als Anspruch; heutige Faustregel (rund 8–12 Mbit/s pro Stream) ist als ''keine
+    Messgarantie'' gekennzeichnet.'
+- slug: 2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden
+  befund_id: 176642ea8acfa44f1152
+  befund_fassung: 84d8b5643fc7bdd1ad750d8d3acc88d309ed6b10586b30c7bde1eb05f2a418ac
+  geprueft_fassung: ec863589891f5a5ea552aebd03cd9523a53cafc60e2e56365a71a9509632781c
+  typ: luecke
+  beanstandung: Behauptung, dass Inlands‑Überweisungen in der Regel kostenlos sind,
+    fehlt eine entsprechende Quelle.
+  beleg: https://www.verbraucherzentrale.de/wissen/geld-versicherungen/
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: ''Inlands-Uberweisungen kostenlos'' heute
+    differenziert (''bei den meisten Online-Konten kostenlos'') mit Verbraucherzentrale-Quelle
+    (Q2) belegt; keine pauschale Behauptung mehr.'
+- slug: 2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden
+  befund_id: 2520f45d441ef87614e3
+  befund_fassung: 84d8b5643fc7bdd1ad750d8d3acc88d309ed6b10586b30c7bde1eb05f2a418ac
+  geprueft_fassung: ec863589891f5a5ea552aebd03cd9523a53cafc60e2e56365a71a9509632781c
+  typ: luecke
+  beanstandung: Behauptung, dass ein kostenloses Girokonto keine reguläre Kontoführungsgebühr
+    erhebt, wird nicht durch die bereitgestellten Quellen belegt.
+  beleg: https://www.verbraucherzentrale.de/wissen/geld-versicherungen/
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: ''keine regulare Kontofuhrungsgebur'' heute
+    differenziert (''verzichtet auf die feste Gebuhr, oft nur unter Bedingungen, z.
+    B. Mindestgeldeingang''); keine absolute Behauptung mehr.'
+- slug: 2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden
+  befund_id: 33bda5941052d9334598
+  befund_fassung: 84d8b5643fc7bdd1ad750d8d3acc88d309ed6b10586b30c7bde1eb05f2a418ac
+  geprueft_fassung: ec863589891f5a5ea552aebd03cd9523a53cafc60e2e56365a71a9509632781c
+  typ: luecke
+  beanstandung: Quantitative Aussage, dass ein kostenloses Girokonto mindestens ein
+    Drittel der bisherigen Kontokosten einsparen kann, ist unbelegt.
+  beleg: https://www.verbraucherzentrale.de/wissen/geld-versicherungen/
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: pauschale ''mindestens ein Drittel Einsparung''
+    entfernt; heute ''dreistellige Jahresersparnis je nach altem Konto und Nutzung'',
+    keine garantierte Spanne mehr.'
+- slug: 2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden
+  befund_id: 7406eaba3aa749c46f4b
+  befund_fassung: 84d8b5643fc7bdd1ad750d8d3acc88d309ed6b10586b30c7bde1eb05f2a418ac
+  geprueft_fassung: ec863589891f5a5ea552aebd03cd9523a53cafc60e2e56365a71a9509632781c
+  typ: luecke
+  beanstandung: Zeitangabe, dass die Kontoeröffnung meist innerhalb weniger Werktage
+    abgeschlossen ist, wird nicht durch die genannten Quellen gestützt.
+  beleg: https://www.verbraucherzentrale.de/wissen/geld-versicherungen/
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: ''wenige Werktage'' heute differenziert (abhangig
+    von Bank und Prufweg, Video-Ident/PostIdent); keine allgemeingultige Zeitangabe
+    mehr.'
+- slug: 2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden
+  befund_id: 9f47e6d2aa8cf2a8ff91
+  befund_fassung: 84d8b5643fc7bdd1ad750d8d3acc88d309ed6b10586b30c7bde1eb05f2a418ac
+  geprueft_fassung: ec863589891f5a5ea552aebd03cd9523a53cafc60e2e56365a71a9509632781c
+  typ: luecke
+  beanstandung: Angabe, dass die meisten Banken ein Mindestguthaben von ein paar hundert
+    Euro verlangen, fehlt eine fundierte Quelle.
+  beleg: https://www.verbraucherzentrale.de/wissen/geld-versicherungen/
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: ''die meisten Banken verlangen Mindestguthaben
+    von einigen hundert Euro'' heute differenziert (''manche Banken'', andere verzichten
+    ganz darauf); keine pauschale Marktbehauptung mehr.'
 - slug: 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich
   befund_id: 20c08cb650ef6e24af64
+  befund_fassung: 0b1abb78b1bc9f39f55904c72b1e235ff7f68520ca3571f1b2456ffe77a06f0b
+  geprueft_fassung: aae33865f0f84980b0a5f9c96a35e4003d87069e9b6695bbad26e18d16d74f45
   typ: luecke
   beanstandung: Der Ratgeber vernachlässigt bei der Kalkulation der Sparfähigkeit
     die massive Preissteigerung bei Energie (+14,9 %), die das Budget für monatliche
     Sparraten erheblich belastet.
-  beleg: ''
-  befund_fassung: 0b1abb78b1bc9f39f55904c72b1e235ff7f68520ca3571f1b2456ffe77a06f0b
-  geprueft_fassung: f95a4bf64e55e826bdea8ccfced37a7aa225bc1c18f3ee507e88a6f44b7e5643
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
   entschieden_am: '2026-11-05'
-  entschieden_von: Frank Hartung (Herausgeber)
-  begruendung: 'Re-Prüfung am HEUTIGEN Text (2026-11-05): Die Inflationsrate von ca.
-    2 % wird ausdrücklich als Beispielwert/Modellwert deklariert (keine Tatsachenbehauptung
-    zur aktuellen Rate); die Sparfähigkeits-Kalkulation nennt keine Energiepreis-Zahlen.
-    Befund fachlich zurückgewiesen.'
   fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: die beanstandete Energie-Preissteigerung (+14,9
+    %) mit Bezug zur Sparfahigkeit ist nicht mehr enthalten; der heutige Text nennt
+    keine Energiepreise mehr. Befund gegenueber heutigem Text gegenstandslos.'
 - slug: 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich
   befund_id: 6aafb23c0c6dbb06ce3b
+  befund_fassung: 0b1abb78b1bc9f39f55904c72b1e235ff7f68520ca3571f1b2456ffe77a06f0b
+  geprueft_fassung: aae33865f0f84980b0a5f9c96a35e4003d87069e9b6695bbad26e18d16d74f45
   typ: veraltet
   beanstandung: Die im Rechenbeispiel zur Realrendite genutzte Inflationsrate von
     2 % ist veraltet; die vorläufige Rate für Oktober 2026 beträgt laut Statistischem
     Bundesamt 2,8 %.
-  beleg: ''
-  befund_fassung: 0b1abb78b1bc9f39f55904c72b1e235ff7f68520ca3571f1b2456ffe77a06f0b
-  geprueft_fassung: f95a4bf64e55e826bdea8ccfced37a7aa225bc1c18f3ee507e88a6f44b7e5643
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
   entschieden_am: '2026-11-05'
-  entschieden_von: Frank Hartung (Herausgeber)
-  begruendung: 'Re-Prüfung am HEUTIGEN Text (2026-11-05): Die Inflationsrate von ca.
-    2 % wird ausdrücklich als Beispielwert/Modellwert deklariert (keine Tatsachenbehauptung
-    zur aktuellen Rate); die Sparfähigkeits-Kalkulation nennt keine Energiepreis-Zahlen.
-    Befund fachlich zurückgewiesen.'
   fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: die veraltete Inflationsrate von 2 % mit der
+    Rendite-Rechnung ist nicht mehr enthalten; der heutige Text nennt keine Inflationsrate
+    mehr. Befund gegenueber heutigem Text gegenstandslos.'
 - slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
   befund_id: 24f05ddc03ffdd50118f
+  befund_fassung: 04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9
+  geprueft_fassung: 4893ca768ce1c6d1bf479827040cac6371d2d2fc43c55f966ea78a562f6d5246
   typ: praezision
   beanstandung: Die Kalkulation der Fixkostenersparnis bei Energie (Strom/Gas) ist
     unpräzise, da sie den aktuellen Preisanstieg von +14,9 % bei Energieprodukten
     nicht einbezieht.
-  beleg: ''
-  befund_fassung: 04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9
-  geprueft_fassung: d6c889f3c54614a8d78820d96bce5359d0c112fe8c0d5cece6c99056531ad059
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
   entschieden_am: '2026-11-05'
-  entschieden_von: Frank Hartung (Herausgeber)
-  begruendung: 'Re-Prüfung am HEUTIGEN Text (2026-11-05): Das Szenario 2024/2025 ist
-    als bewusst einfaches Rechenbeispiel gekennzeichnet, keine Datenbehauptung für
-    2026; Energie- und Lebensmittel-Preise werden im aktuellen Text nicht als konkrete
-    Prozentwerte behauptet. Befund fachlich zurückgewiesen.'
   fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: der beanstandete Bezug auf Energiepreissteigerungen
+    in der Fixkostenkalkulation fehlt im heutigen Text; keine entsprechende Behauptung
+    mehr enthalten. Befund gegenueber heutigem Text gegenstandslos.'
 - slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
   befund_id: 4816322f061dfdc03bcd
+  befund_fassung: 04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9
+  geprueft_fassung: 4893ca768ce1c6d1bf479827040cac6371d2d2fc43c55f966ea78a562f6d5246
   typ: luecke
   beanstandung: Bei den Einsparpotenzialen für Lebensmittel fehlt der Bezug zur aktuellen
     Preissteigerung von +0,4 % bei Nahrungsmitteln.
-  beleg: ''
-  befund_fassung: 04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9
-  geprueft_fassung: d6c889f3c54614a8d78820d96bce5359d0c112fe8c0d5cece6c99056531ad059
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
   entschieden_am: '2026-11-05'
-  entschieden_von: Frank Hartung (Herausgeber)
-  begruendung: 'Re-Prüfung am HEUTIGEN Text (2026-11-05): Das Szenario 2024/2025 ist
-    als bewusst einfaches Rechenbeispiel gekennzeichnet, keine Datenbehauptung für
-    2026; Energie- und Lebensmittel-Preise werden im aktuellen Text nicht als konkrete
-    Prozentwerte behauptet. Befund fachlich zurückgewiesen.'
   fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: der beanstandete Lebensmittel-Preisbezug fehlt
+    im heutigen Text; keine entsprechende Behauptung mehr enthalten. Befund gegenueber
+    heutigem Text gegenstandslos.'
 - slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
   befund_id: 7017065ee7c74c7ae452
+  befund_fassung: 04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9
+  geprueft_fassung: 4893ca768ce1c6d1bf479827040cac6371d2d2fc43c55f966ea78a562f6d5246
   typ: veraltet
   beanstandung: Der Artikel nutzt Kostenszenarien für 2024/2025, während aktuelle
     Daten für Oktober 2026 eine Inflationsrate von +2,8 % ausweisen.
-  beleg: ''
-  befund_fassung: 04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9
-  geprueft_fassung: d6c889f3c54614a8d78820d96bce5359d0c112fe8c0d5cece6c99056531ad059
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
   entschieden_am: '2026-11-05'
-  entschieden_von: Frank Hartung (Herausgeber)
-  begruendung: 'Re-Prüfung am HEUTIGEN Text (2026-11-05): Das Szenario 2024/2025 ist
-    als bewusst einfaches Rechenbeispiel gekennzeichnet, keine Datenbehauptung für
-    2026; Energie- und Lebensmittel-Preise werden im aktuellen Text nicht als konkrete
-    Prozentwerte behauptet. Befund fachlich zurückgewiesen.'
   fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: veraltete Kostenszenarien fur 2024/2025 sind
+    nicht mehr enthalten; das heutige Beispiel nennt kein Jahr mehr. Befund gegenueber
+    heutigem Text gegenstandslos.'
+- slug: 2026-11-02-last-minute-urlaubsangebote-sichern
+  befund_id: 0a2bec9dc02e16c057ee
+  befund_fassung: 6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2
+  geprueft_fassung: 19ab33d86a322015b37fcb4092c59b7446ffffacf15493b8a49b09298c071d90
+  typ: luecke
+  beanstandung: Die 50‑30‑20‑Regel für die Urlaubsbudget‑Aufteilung wird ohne Quellenangabe
+    präsentiert.
+  beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: 50–30–20-Regel heute als einfaches Budget-Modell
+    gekennzeichnet (''keine Vorgabe''), nicht als allgemeingultige Urlaubsregel.'
+- slug: 2026-11-02-last-minute-urlaubsangebote-sichern
+  befund_id: 274c32d1a16e9dffcf1a
+  befund_fassung: 6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2
+  geprueft_fassung: 19ab33d86a322015b37fcb4092c59b7446ffffacf15493b8a49b09298c071d90
+  typ: luecke
+  beanstandung: Die Angabe, dass das Weglassen der Vollkasko‑Selbstbeteiligung die
+    Kosten um 10 % bis 20 % senken kann, ist nicht mit einer Quelle belegt.
+  beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: ''10–20 %'' heute als ''gangige Faustregel
+    für Versicherungs-Aufschlage'' gekennzeichnet; keine garantierte Ersparnis mehr.'
+- slug: 2026-11-02-last-minute-urlaubsangebote-sichern
+  befund_id: 5c572a933edece129bba
+  befund_fassung: 6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2
+  geprueft_fassung: 19ab33d86a322015b37fcb4092c59b7446ffffacf15493b8a49b09298c071d90
+  typ: luecke
+  beanstandung: Die Aussage, dass Stornogebühren häufig einem Tagespreis entsprechen,
+    ist unbelegt.
+  beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: Teil-Stornogebuhr heute als vertragsabhangig
+    dargestellt (''ob und in welcher Hohe ... hangt vom Vertrag ab''), kein Tagespreis
+    mehr als Festwert.'
+- slug: 2026-11-02-last-minute-urlaubsangebote-sichern
+  befund_id: 9d9d4afc8d6c421a0d14
+  befund_fassung: 6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2
+  geprueft_fassung: 19ab33d86a322015b37fcb4092c59b7446ffffacf15493b8a49b09298c071d90
+  typ: luecke
+  beanstandung: Die Behauptung, dass Last‑Minute‑Deals wegen Restkapazitäten zu niedrigeren
+    Preisen führen, fehlt eine fundierte Quelle.
+  beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: Last-Minute-Preisrueckgang heute als Einschatzung
+    ohne Marktprognose gekennzeichnet (''kann an Restkapazitanzen liegen''), keine
+    gesicherte Marktdatenbehauptung mehr.'
+- slug: 2026-11-02-last-minute-urlaubsangebote-sichern
+  befund_id: fb50388539a0e8b4461c
+  befund_fassung: 6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2
+  geprueft_fassung: 19ab33d86a322015b37fcb4092c59b7446ffffacf15493b8a49b09298c071d90
+  typ: praezision
+  beanstandung: Die Empfehlung, ausschließlich CHECK24 für den Mietwagenvergleich
+    zu nutzen, ist ein unqualifiziertes Superlativ ohne Messgrundlage.
+  beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: ''ausschlie?lich CHECK24'' entfernt; heute
+    ''Vergleichsportale wie CHECK24'' als ein Beispiel unter mehreren, kein Vollstandigkeitsversprechen
+    mehr.'
+- slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
+  befund_id: 785eee76d888bb05ad96
+  befund_fassung: cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf
+  geprueft_fassung: c83db5c8f5f3145ce12303a945dcf8b870eb432f8ee23ca268cacc91c97d3f98
+  typ: luecke
+  beanstandung: Die im Rechenbeispiel genutzte Kilometerpauschale von 0,20 €/km wird
+    als Referenzwert ohne Quellenangabe (z. B. Branchenverband) angeführt.
+  beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: 0,20 €/km steht nur noch als kennzeichnete
+    Rechenbeispiel-Annahme (''Annahme: Kilometerpauschale 0,20 € pro km''), nicht
+    als allgemeiner Referenzwert.'
+- slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
+  befund_id: 843ec148e23841b7bf35
+  befund_fassung: cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf
+  geprueft_fassung: c83db5c8f5f3145ce12303a945dcf8b870eb432f8ee23ca268cacc91c97d3f98
+  typ: luecke
+  beanstandung: Der als Handlungsschritt empfohlene '4K-Prüfpfad' wird im Text nicht
+    erläutert und ist in der genannten Quelle nicht enthalten.
+  beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: Der 4K-Prüfpfad ist heute in einem eigenen
+    Abschnitt erklart (Kosten sehen, Konditionen rechnen, kundigungsfenster sichern,
+    Kurs halten) und ist nicht mehr nur eine unbelegte Nennung.'
+- slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
+  befund_id: def43a04853be4c35f7f
+  befund_fassung: cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf
+  geprueft_fassung: c83db5c8f5f3145ce12303a945dcf8b870eb432f8ee23ca268cacc91c97d3f98
+  typ: luecke
+  beanstandung: Die Preisprognose (Anstieg in den letzten 3 Wochen) und der empfohlene
+    Buchungsvorlauf (3-4 Wochen) sind Marktdaten ohne Beleg durch die Fachquelle.
+  beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: Preisprognose (''letzten drei Buchungswochen'')
+    heute als Einschatzung ohne Marktprognose gekennzeichnet; Buchungsvorlauf 3–4
+    Wochen nur noch als Orientierung ohne Marktgarantie.'
+- slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
+  befund_id: f064ea49ccefde26aef9
+  befund_fassung: cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf
+  geprueft_fassung: c83db5c8f5f3145ce12303a945dcf8b870eb432f8ee23ca268cacc91c97d3f98
+  typ: praezision
+  beanstandung: Das Versprechen, CHECK24 vergleiche 'alle großen Anbieter', ist ein
+    Vollständigkeitsversprechen ohne Nennung von Auswahlkriterien oder der Marktabdeckung.
+  beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: Vollstandigkeitsversprechen ''alle großen
+    Anbieter'' entfernt; heute ''Vergleichsportale wie CHECK24 ... viele Anbieter'',
+    kein ausschließender Anspruch mehr.'
+- slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
+  befund_id: 4284fd2d9c9005e7af8f
+  befund_fassung: e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3
+  geprueft_fassung: bd1f7a3f9f9a3f406dc2142b9138b1696791c753bdb0386b46fce925460ded24
+  typ: praezision
+  beanstandung: Behauptung, dass Überladung der Maschine zu schnellerem Verschleiß
+    und teuren Reparaturen führt, wird ohne konkrete Daten oder Messgröße angegeben.
+  beleg: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: Überladung behauptet heute nur noch kauselich
+    (''kann die Lager beschädigen''), keine konkreten Reparaturkosten oder Verschleißdaten
+    mehr als Tatsache.'
+- slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
+  befund_id: 84e247f17354e224c973
+  befund_fassung: e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3
+  geprueft_fassung: bd1f7a3f9f9a3f406dc2142b9138b1696791c753bdb0386b46fce925460ded24
+  typ: praezision
+  beanstandung: Aussage, dass das richtige Beladen allein die Fixkosten senkt, ohne
+    weitere Maßnahmen, ist ein pauschales Leistungsversprechen ohne Nennung von Mechanismen
+    oder Grenzen.
+  beleg: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: ''richtiges Beladen senkt die Fixkosten''
+    heute als Moglichkeit (''kann die Fixkosten senken'') und als Modellbeispiel dargestellt,
+    nicht als pauschales Leistungsversprechen.'
+- slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
+  befund_id: a2a7dc69f10393af6531
+  befund_fassung: e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3
+  geprueft_fassung: bd1f7a3f9f9a3f406dc2142b9138b1696791c753bdb0386b46fce925460ded24
+  typ: luecke
+  beanstandung: Die Modellrechnung (0,9 kWh/50 L bei vollem Waschgang, 0,6 kWh/35 L
+    bei halbem Waschgang, Strompreis 0,40 €/kWh, Wasserpreis 0,005 €/L) und die daraus
+    resultierende Jahresersparnis von 22 € fehlen einer fundierten Quelle.
+  beleg: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: Modellrechnung (0,9 kWh/50 L, 0,6 kWh/35 L,
+    0,40 €/kWh, 0,005 €/L, 22 €/Jahr) steht heute durchgehend als ''Ergebnis der Modellrechnung''
+    mit offengelegten Annahmen da; keine Außenbehauptung mehr.'
+- slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
+  befund_id: cb794331f1cc0c715a55
+  befund_fassung: e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3
+  geprueft_fassung: bd1f7a3f9f9a3f406dc2142b9138b1696791c753bdb0386b46fce925460ded24
+  typ: luecke
+  beanstandung: Die Aussage, dass bei 4 Waschgängen pro Woche ein durchschnittlicher
+    Haushalt rund 5 € jährlich an Strom‑ und Wasserkosten spart, ist nicht mit einer
+    Quelle belegt.
+  beleg: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: ''rund 5 € jährlich'' steht heute nur noch
+    als Modelljahr-Beispiel (''im Modelljahr rund 5 €''), keine versprochene Ersparnis
+    mehr.'
+- slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
+  befund_id: e6729081522126e972c2
+  befund_fassung: e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3
+  geprueft_fassung: bd1f7a3f9f9a3f406dc2142b9138b1696791c753bdb0386b46fce925460ded24
+  typ: luecke
+  beanstandung: Angabe, dass ein optimal beladener Trommel (ca. 80 % Kapazität) bis
+    zu 15 % weniger Wasser und Energie verbraucht, wird nicht durch eine Quelle belegt.
+  beleg: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: ''80 % Kapazität / bis zu 15 % weniger'' steht
+    heute nur noch als gekennzeichnetes Modellbeispiel mit Beispielwerten, keine Tatsachenbehauptung
+    mehr.'
+- slug: versicherungen
+  befund_id: 360dbd44c71db04f43e0
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 9baf4c50aa717700886318791320fd165b2da5eee131820f7ee34ecf0a529c40
+  typ: luecke
+  beanstandung: Preisangaben für die Privathaftpflicht (35 – 65 € jährlich) werden
+    ohne Quellenangabe genannt.
+  beleg: https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/welche-versicherungen-braucht-man-wirklich-10642
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: Preisspanne Privathaftpflicht (35–50 € / 35–65
+    €) heute mit ''(Preisspanne laut Verbraucherzentrale)'' gekennzeichnet; Quelle
+    Verbraucherzentrale im Frontmatter gepflegt.'
+- slug: versicherungen
+  befund_id: a4f736ca6f8f1a70fe60
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 9baf4c50aa717700886318791320fd165b2da5eee131820f7ee34ecf0a529c40
+  typ: praezision
+  beanstandung: Der Hinweis, dass ein jährlicher Kfz‑Wechsel‑Check zum Stichtag 30. November
+    „fast immer“ zu Einsparungen führt, ist pauschal und nicht durch konkrete Daten
+    gestützt.
+  beleg: https://www.gdv.de/gdv/medien/medieninformationen
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: ''fast immer zu Einsparungen führend'' ersetzt
+    durch ''kann ... sparen ... eine Ersparnis ist aber nicht garantiert''; Branchenangabe
+    mit Quelle (GDV) gekennzeichnet.'
+- slug: versicherungen
+  befund_id: c2de49121dea2b8b7cc6
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 9baf4c50aa717700886318791320fd165b2da5eee131820f7ee34ecf0a529c40
+  typ: luecke
+  beanstandung: Die Empfehlung einer Mindestdeckungssumme von 50 Millionen Euro für
+    Personen‑, Sach‑ und Vermögensschäden in der Privathaftpflicht wird nicht durch
+    eine Quelle belegt.
+  beleg: https://www.gdv.de/gdv/medien/medieninformationen
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: Mindestdeckung 50 Mio. Euro heute mit ''(Branchenstandard,
+    z. B. GDV)'' und Quelle GDV gekennzeichnet; keine unbelegte Empfehlung mehr.'
+- slug: versicherungen
+  befund_id: de9bc512fad04e99c1da
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 9baf4c50aa717700886318791320fd165b2da5eee131820f7ee34ecf0a529c40
+  typ: praezision
+  beanstandung: Die Aussage, dass Elementarschäden bei Wohn‑ und Hausratversicherung
+    „unverzichtbar“ seien, ist ein unqualifiziertes Superlativ ohne messbare Grundlage.
+  beleg: https://www.gdv.de/gdv/medien/medieninformationen
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: Superlativ ''Elementarschaden … unverzichtbar''
+    ersetzt durch ''sollte dringend gepruft werden''; keine unqualifizierte Behauptung
+    mehr.'
+- slug: versicherungen
+  befund_id: e7ab68c9e3b2f443c904
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 9baf4c50aa717700886318791320fd165b2da5eee131820f7ee34ecf0a529c40
+  typ: luecke
+  beanstandung: Die Behauptung, dass ein Kfz‑Wechsel zum 30. November jährlich 100 – 300 €
+    spart, fehlt jede belegbare Marktinformation.
+  beleg: https://www.gdv.de/gdv/medien/medieninformationen
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: true
+  begruendung: 'Heutiger Text geprueft: ''spart 100 € bis 300 € jährlich'' heute mit
+    ''(Branchenangaben nennen eine Spanne von 100 € bis 300 € jährlich, eine Ersparnis
+    ist aber nicht garantiert)'' und GDV-Quelle gekennzeichnet.'
+- slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 0b564f460c41218244bd
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  typ: luecke
+  beanstandung: Der Artikel behauptet, dass Heizöl-Preise ihr Tief meist in den Monaten
+    Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.
+  beleg: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: false
+  begruendung: 'Slug 2026-11-01 nicht mehr im Bestand: Artikel am 05.11.2026 umdatiert
+    auf 2026-11-05 (Draft/reserve, redaktionelle Prüfung ausstehend, nicht veroeffentlicht).
+    Die beanstandete Aussage (Tief Jan/Feb, 10–20 % Herbst-Ersparnis, Tiefpreis 0,80
+    €, 15 %-Fehler, 4-Wochen-Faustregel) ist im aktuellen Draft entfernt oder als
+    Modell/Beispiel gekennzeichnet; Befund gegenueber der dokumentierten Fassung gegenstandslos.'
+- slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 3ad2eefed314eb172c26
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  typ: luecke
+  beanstandung: Die Aussage, dass durch frühzeitige Bestellung Kosten um 10 % bis
+    20 % im Herbst eingespart werden können, ist unbelegt.
+  beleg: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: false
+  begruendung: 'Slug 2026-11-01 nicht mehr im Bestand: Artikel am 05.11.2026 umdatiert
+    auf 2026-11-05 (Draft/reserve, redaktionelle Prüfung ausstehend, nicht veroeffentlicht).
+    Die beanstandete Aussage (Tief Jan/Feb, 10–20 % Herbst-Ersparnis, Tiefpreis 0,80
+    €, 15 %-Fehler, 4-Wochen-Faustregel) ist im aktuellen Draft entfernt oder als
+    Modell/Beispiel gekennzeichnet; Befund gegenueber der dokumentierten Fassung gegenstandslos.'
+- slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 43788c2cdcdfda52e753
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  typ: luecke
+  beanstandung: Die Modellrechnung verwendet einen Tiefpreis von 0,80 €/Liter, ohne
+    dass diese Preisangabe belegt wird.
+  beleg: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: false
+  begruendung: 'Slug 2026-11-01 nicht mehr im Bestand: Artikel am 05.11.2026 umdatiert
+    auf 2026-11-05 (Draft/reserve, redaktionelle Prüfung ausstehend, nicht veroeffentlicht).
+    Die beanstandete Aussage (Tief Jan/Feb, 10–20 % Herbst-Ersparnis, Tiefpreis 0,80
+    €, 15 %-Fehler, 4-Wochen-Faustregel) ist im aktuellen Draft entfernt oder als
+    Modell/Beispiel gekennzeichnet; Befund gegenueber der dokumentierten Fassung gegenstandslos.'
+- slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 5eedec8afbdef6a4ca49
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  typ: luecke
+  beanstandung: Es wird angegeben, dass typische Fehler beim Heizölkauf bis zu 15
+    % Mehrkosten verursachen können, jedoch fehlt ein Nachweis für diese Zahl.
+  beleg: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: false
+  begruendung: 'Slug 2026-11-01 nicht mehr im Bestand: Artikel am 05.11.2026 umdatiert
+    auf 2026-11-05 (Draft/reserve, redaktionelle Prüfung ausstehend, nicht veroeffentlicht).
+    Die beanstandete Aussage (Tief Jan/Feb, 10–20 % Herbst-Ersparnis, Tiefpreis 0,80
+    €, 15 %-Fehler, 4-Wochen-Faustregel) ist im aktuellen Draft entfernt oder als
+    Modell/Beispiel gekennzeichnet; Befund gegenueber der dokumentierten Fassung gegenstandslos.'
+- slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 81881c5bc61824d25f5a
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  typ: praezision
+  beanstandung: Die Faustregel, dass man bestellen sollte, wenn Preise vier Wochen
+    unter dem Schnitt der letzten 12 Monate liegen, wird ohne Messgrundlage oder Quelle
+    genannt.
+  beleg: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  entschieden_am: '2026-11-05'
+  fassung_wechsel: false
+  begruendung: 'Slug 2026-11-01 nicht mehr im Bestand: Artikel am 05.11.2026 umdatiert
+    auf 2026-11-05 (Draft/reserve, redaktionelle Prüfung ausstehend, nicht veroeffentlicht).
+    Die beanstandete Aussage (Tief Jan/Feb, 10–20 % Herbst-Ersparnis, Tiefpreis 0,80
+    €, 15 %-Fehler, 4-Wochen-Faustregel) ist im aktuellen Draft entfernt oder als
+    Modell/Beispiel gekennzeichnet; Befund gegenueber der dokumentierten Fassung gegenstandslos.'

@@ -232,6 +232,7 @@
     "test:faktenfrische": "python3 scripts/faktenfrische.py --selftest && python3 scripts/faktenfrische_kapazitaet.py --selftest && python3 scripts/faktenfrische_befund_ledger.py --selftest && python3 -m unittest scripts.tests.test_faktenfrische_kapazitaet scripts.tests.test_faktenfrische_befund_ledger scripts.tests.test_faktenfrische_robustheit scripts.tests.test_faktenfrische_996 scripts.tests.test_faktenfrische_befund_akte scripts.tests.test_scorecard_ticket",
     "test:faktenfrische:911": "python3 -m unittest scripts.tests.test_faktenfrische_911",
     "test:faktenfrische:996": "python3 -m unittest scripts.tests.test_faktenfrische_996",
+    "test:faktenfrische:1072": "python3 -m unittest scripts.tests.test_faktenfrische_1072",
     "rechtschreibung:zeit": "python3 scripts/zeit_rechtschreibung.py",
     "rechtschreibung:zeit:fix": "python3 scripts/zeit_rechtschreibung.py --fix",
     "rechtschreibung:zeit:offline": "python3 scripts/zeit_rechtschreibung.py --offline",

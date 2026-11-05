@@ -30,6 +30,10 @@ quellen:
     titel: "Vertrag: Rechte bei Laufzeit, Vertragsänderung und Kündigung"
     url: "https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Vertrag/start.html"
     herausgeber: "Bundesnetzagentur"
+  - id: "Q3"
+    titel: "Referenzseite Bundesnetzagentur – Telekommunikation"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    herausgeber: "Bundesnetzagentur"
 lastmod: 2026-11-04
 faktencheck: 2026-10-30
 ---

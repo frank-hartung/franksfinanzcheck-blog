@@ -24,7 +24,7 @@ cover:
   image: "images/covers/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang.jpg"
   alt: "Waschmaschine beladen: Weniger Kosten bei jedem Waschgang"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Ein optimal beladener Trommel (ca. 80 % Kapazität) verbraucht bis zu 15 % weniger Wasser und Energie pro Waschgang – das entspricht etwa 0,5 kWh und 5 Liter Wasser. Bei einem durchschnittlichen Haushalt mit 4 Waschgängen pro Woche spart das rund 5 € jährlich an Strom‑ und Wasserkosten. So senkst du deine Fixkosten, ohne die Waschergebnisse zu beeinträchtigen."
+kurzantwort: "Ein optimal beladener Trommel (ca. 80 % Kapazität) verbraucht im Modellbeispiel bis zu 15 % weniger Wasser und Energie pro Waschgang – das entspricht etwa 0,5 kWh und 5 Liter Wasser (Beispielwerte). Bei einem durchschnittlichen Haushalt mit 4 Waschgängen pro Woche sind das im Modelljahr rund 5 € an Strom‑ und Wasserkosten. Richtiges Beladen kann die Fixkosten senken, ohne die Waschergebnisse zu beeinträchtigen."
 faktencheck: 2026-11-05
 ---
 
@@ -45,7 +45,7 @@ Dabei nutzen wir den 4K-Prüfpfad von FranksFinanzcheck für deine Kostenkontrol
 **Das Wichtigste in Kürze**
 - **Optimale Füllmenge:** Eine Faustbreite Platz über der Wäsche sorgt für die beste Reinigungsleistung und spart Energie.
 - **Kostenfaktor:** Ein voll genutzter Waschgang ist in der Modellrechnung deutlich günstiger als zwei halbe Ladungen.
-- **Verschleißschutz:** Überladung schadet den Lagern der Maschine und führt zu teuren Reparaturen.
+- **Verschleißschutz:** Überladung kann die Lager der Maschine beschädigen und teure Reparaturen nach sich ziehen (je nach Gerät und Häufigkeit).
 - **Fixkosten-Check:** Wer beim Waschen spart, sollte auch seinen Stromtarif prüfen, um das volle Sparpotenzial zu nutzen.
 
 
@@ -110,7 +110,7 @@ Wenn du die Wäsche mit Kraft in die Maschine drückst, ist sie überladen.
 Das belastet die Aufhängung der Trommel massiv.
 
 Die Stoßdämpfer verschleißen schneller.
-Ein Lagerschaden bedeutet oft das wirtschaftliche Aus für das Gerät.
+Ein Lagerschaden kann das wirtschaftliche Aus für das Gerät bedeuten.
 Das ist ein massiver Verstoß gegen das Ziel, die Fixkosten niedrig zu halten.
 Eine neue **Waschmaschine** kostet deutlich mehr als die Ersparnis durch ein paar vollgequetschte Ladungen.
 

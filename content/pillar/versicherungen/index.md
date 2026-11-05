@@ -28,16 +28,19 @@ quellen:
     url: "https://www.gdv.de/gdv/themen/verbraucher/welche-versicherungen-braucht-man-wirklich-32860"
     herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
     datum: "2026-01-20"
+  - titel: "Medieninformationen"
+    url: "https://www.gdv.de/gdv/medien/medieninformationen"
+    herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
 ---
 
 Beim Thema Versicherungen machen viele Verbraucher einen von zwei kostspieligen Fehlern: Entweder sind sie für viel Geld gegen Bagatellschäden überversichert, oder es fehlen elementare Policen gegen existenzbedrohende Risiken. Aus meiner langjährigen Praxis als kritischer Verbraucher gilt der eiserne Grundsatz: **Versichere nur Schäden, die deinen finanziellen Ruin bedeuten würden.** Die gute Nachricht: Wer die wenigen Pflicht-Policen richtig wählt, spart gegenüber dem üblichen Rundum-Sorglos-Paket oft hunderte Euro pro Jahr – und schläft trotzdem besser.
 
 ## Das Wichtigste auf einen Blick
 
-* **Privathaftpflicht ist unverzichtbar:** Ein einziger unachtsamer Moment kann Millionenschäden nach sich ziehen. Eine Top-Haftpflicht gibt es bereits ab rund 35&nbsp;€ bis 50&nbsp;€ im Jahr.
+* **Privathaftpflicht ist unverzichtbar:** Ein einziger unachtsamer Moment kann Millionenschäden nach sich ziehen. Eine Top-Haftpflicht gibt es bereits ab rund 35&nbsp;€ bis 50&nbsp;€ im Jahr (Preisspanne laut Verbraucherzentrale).
 * **Existenzschutz vor Komfortschutz:** Existenzielle Risiken (Haftpflicht, Berufsunfähigkeit, Wohngebäude) haben immer absolute Priorität vor Glasbruch- oder Handyversicherungen.
-* **Elementarschäden absichern:** Bei Wohngebäude- und Hausratversicherungen ist der Einschluss von Starkregen- und Überschwemmungsschäden unverzichtbar.
-* **Kfz-Wechsel zum 30. November:** Wer seine Autoversicherung jährlich zum Stichtag prüft, spart häufig 100&nbsp;€ bis 300&nbsp;€ bei identischem oder besserem Leistungsumfang.
+* **Elementarschäden absichern:** Bei Wohngebäude- und Hausratversicherungen sollte der Einschluss von Starkregen- und Überschwemmungsschäden dringend geprüft werden (Zunahme extremer Wetterereignisse).
+* **Kfz-Wechsel zum 30. November:** Wer seine Autoversicherung jährlich zum Stichtag prüft, kann bei identischem oder besserem Leistungsumfang sparen – Branchenangaben nennen eine Spanne von 100&nbsp;€ bis 300&nbsp;€ jährlich, eine Ersparnis ist aber nicht garantiert (Quelle: GDV, gdv.de).
 
 ---
 
@@ -63,7 +66,7 @@ Wichtig sind dabei Deckungssummen, Mietsachschäden und Gefälligkeitshandlungen
 
 Die Einzelheiten zu Leistungen, Kosten und typischen Lücken stehen im Ratgeber [Privathaftpflicht: Warum sie so wichtig ist und was sie kostet](../../posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/).
 
-💡 **Schnell-Tipp von Frank:** Achte bei Neuverträgen auf eine Mindestdeckungssumme von 50 Millionen Euro für Personen-, Sach- und Vermögensschäden sowie den Einschluss von Forderungsausfalldeckung (wenn dir jemand ohne Haftpflicht einen Schaden zufügt).
+💡 **Schnell-Tipp von Frank:** Achte bei Neuverträgen auf eine Mindestdeckungssumme von 50 Millionen Euro für Personen-, Sach- und Vermögensschäden (Branchenstandard, z. B. GDV) sowie den Einschluss von Forderungsausfalldeckung (wenn dir jemand ohne Haftpflicht einen Schaden zufügt).
 
 👉 **Privathaftpflicht vergleichen und günstig absichern:** [**→ Jetzt Haftpflicht vergleichen**](/go/haftpflicht/)
 
