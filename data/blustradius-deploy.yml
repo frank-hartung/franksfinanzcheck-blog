@@ -253,6 +253,30 @@ schritte:
     klasse: inhalt
     grund: Gebaute Seiten mit kaputter Überschriftenstruktur gehen nicht live.
 
+  - name: KI-Provenienz – Selbsttest
+    klasse: gate-selbsttest
+    schuetzt: KI-Provenienz – maschinenlesbare Kennzeichnung im Build
+    grund: Ohne lauffähige Wache bliebe die maschinenlesbare KI-Kennzeichnung ungeprüft.
+
+  - name: KI-Provenienz – maschinenlesbare Kennzeichnung im Build
+    klasse: inhalt
+    grund: >
+      Fehlende oder widersprüchliche maschinenlesbare KI-Kennzeichnung ist ein
+      Kennzeichnungsbefund (Art. 50 KI-VO, Frist 02.12.2026) – die Seite darf
+      so nicht live gehen.
+
+  - name: KI-Bild-Markierung – Selbsttest
+    klasse: gate-selbsttest
+    schuetzt: KI-Bild-Markierung – IPTC-Feld in deklarierten KI-Covern
+    grund: Ein Markierungsschreiber, der seinen Rundlauf nicht beweist, darf keine Bilddatei anfassen.
+
+  - name: KI-Bild-Markierung – IPTC-Feld in deklarierten KI-Covern
+    klasse: inhalt
+    grund: >
+      Ein ausdrücklich als KI deklariertes Cover ohne maschinenlesbares Feld in
+      der ausgelieferten Datei ist ein Kennzeichnungsbefund; dasselbe gilt für
+      eine fehlende oder unbelegte Erzeugungsart.
+
   - name: Index-Hygiene-Selbsttest (Wache muss lauffähig sein)
     klasse: gate-selbsttest
     schuetzt: Index-Hygiene-Gate (Crawl-Fläche gegen Budget)

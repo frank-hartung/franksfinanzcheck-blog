@@ -11,6 +11,144 @@ fachanwaltliche Prüfung empfohlen (siehe Abschnitt „Nächste Schritte“).
 
 ---
 
+## Nachtrag 2026-11-05 · Maschinenlesbare KI-Kennzeichnung umgesetzt (#1028)
+
+**Frist-ID:** `ki-vo-kennzeichnung-bestand` (Frist 02.12.2026) ·
+**Status: maschinenlesbare Betreiberebene gebaut und gated; Anbieter-Nachweise
+und Live-Abnahme weiter offen. Frist bleibt offen.**
+Selbsteinschätzung des Betreibers, keine Rechtsberatung.
+
+### Rechtslage am 05.11.2026 (neu geprüft, Stand gegenüber 03.11. erweitert)
+
+Der Eintrag vom 03.11.2026 stützte sich auf die FAQ der Kommission. Seither
+liegen die Durchführungsinstrumente final vor; sie ändern die Rollenteilung
+nicht, benennen aber erstmals konkret, was „maschinenlesbar" heißen soll:
+
+| Datum | Instrument | Was daraus folgt |
+|---|---|---|
+| 10.06.2026 | Verhaltenskodex zur Transparenz KI-generierter Inhalte (Art. 50 Abs. 7) | Abschnitt 1 = Anbieter (Markierung), Abschnitt 2 = Betreiber (Kennzeichnung). Geschichteter Ansatz: **digital signierte, zeitgestempelte Metadaten** plus **unwahrnehmbares Wasserzeichen**, optional Fingerabdruck/Register. Bei Freitext gilt die Wasserzeichenmaßnahme oberhalb von 200 Tokens. Beitritt freiwillig und je Abschnitt. |
+| 08./09.07.2026 | Angemessenheitsbewertung von Kommission und KI-Ausschuss | Der Kodex gilt als geeigneter Nachweisweg für die von ihm adressierten Pflichten – er ersetzt die Verordnung nicht. |
+| 20.07.2026 | Leitlinien der Kommission zu Art. 50, C(2026) 5054 final | Auslegungshilfe, u. a. zu Deepfakes und redaktioneller Kontrolle; enthält auch ein freiwilliges EU-Kennzeichnungssymbol. |
+| 27.08.2026 | Verordnung (EU) 2026/1744 („Digital Omnibus") in Kraft | Verschiebt die Hochrisiko-Pflichten, **nicht** Art. 50. Einzige Erleichterung: Art. 50 Abs. 2 erst bis **02.12.2026** für Systeme, die vor dem 02.08.2026 in Verkehr gebracht wurden (Art. 113 n. F.). |
+| 29.07.2026 | KI-MIG (Gesetz zur Durchführung der VO (EU) 2024/1689) in Kraft | **Bundesnetzagentur** ist zentrale Marktüberwachungsbehörde; Verstöße gegen Art. 50 sind nach Art. 99 Abs. 4 bußgeldbewehrt (bis 15 Mio. € oder 3 %, für KMU der niedrigere Betrag). |
+
+Quellen: [Kommission: Verhaltenskodex](https://digital-strategy.ec.europa.eu/en/news/commission-publishes-code-practice-marking-and-labelling-ai-generated-content),
+[EU-Kommission: FAQ zu Art. 50](https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act),
+[eRecht24](https://www.e-recht24.de/ki/13539-deepfakes.html),
+[IT-Recht Kanzlei](https://www.it-recht-kanzlei.de/ki-bilder-online-shop-kennzeichnungspflicht.html).
+Zur Technik: IPTC-NewsCodes-Vokabular
+[`digitalsourcetype`](http://cv.iptc.org/newscodes/digitalsourcetype/) (die
+Werte `trainedAlgorithmicMedia` und `compositeWithTrainedAlgorithmicMedia`,
+die C2PA in `c2pa.actions` übernimmt),
+[IANA-Link-Relationen](https://www.iana.org/assignments/link-relations/link-relations.xhtml)
+(geprüft: `describedby` und `c2pa-manifest` sind registriert),
+[schema.org #3391](https://github.com/schemaorg/schemaorg/issues/3391)
+(Stand 05.11.2026: **keine** fertige AI-Eigenschaft im Vokabular, daher
+`creditText` statt einer erfundenen Eigenschaft) und
+[WICG-Vorschlag #261](https://github.com/WICG/proposals/issues/261)
+(HTML-Meta-Tag für KI-Inhalte ist Vorschlag, nicht Norm – `ai-generated`
+deshalb als Betreiberangabe, nicht als Standard deklariert).
+Recherchestand 05.11.2026; keine der Quellen ist eine Auskunft an diesen
+Betreiber. Im Einzelfall bleibt fachanwaltliche Prüfung vorbehalten.
+
+**Rollenklärung (unverändert, jetzt mit Belegkette):** Dieser Blog ist
+**Betreiber** (er setzt fremde Modelle ein), nicht Anbieter. Die
+maschinenlesbare Markierung der Ausgabe schuldet der Anbieter des jeweiligen
+Systems – für Bestandssysteme bis 02.12.2026. Was der Betreiber schuldet, ist
+die wahrnehmbare Offenlegung (Art. 50 Abs. 4/5) und – wenn er Inhalte unter
+eigenem Namen weitergibt – der Nachweis, dass er die Anbieter-Markierung nicht
+entfernt. Ein eigenes Meta-Tag ist deshalb keine Erfüllung von Abs. 2; es ist
+eine **zusätzliche, maschinenlesbare Betreiberangabe**.
+
+### Was gebaut wurde (maschinenlesbare Betreiberebene, vier Kanäle)
+
+Vor diesem Nachtrag gab es genau einen maschinenlesbaren Haken: das lokale
+`data-ff-ki-label` im sichtbaren Hinweistext – ein Selektor für eigene Tests,
+für Dritte wertlos. Neu:
+
+| Kanal | Wo | Was |
+|---|---|---|
+| Dokument-Meta | `layouts/_partials/ki_provenienz.html`, eingebunden in `head.html` | `<meta name="ai-generated" content="true">`, `<meta name="ai-generated-scope" content="text,image,audio">`, `<link rel="describedby" href="…/impressum/#ki-hinweis">` (bei IANA registrierte Relation) |
+| Strukturierte Daten | `layouts/_partials/schema_article.html` | `creditText` am `Article`-Knoten, rollengetrennt: Text (Autor/Freigabe), Bild, Tonspur |
+| DOM am Bild | `layouts/_partials/cover.html` | `data-ai-generated="true"` und `data-digital-source-type` im IPTC-Vokabular, nur bei belegter Erzeugungsart |
+| Bilddatei selbst | `scripts/ki_bild_markierung.py` | IPTC `DigitalSourceType` als XMP-Paket im JPEG-APP1-Segment, **ohne Neukodierung**; optional `dcterms:provenance` auf ein C2PA-Manifest |
+
+Bewusste Grenzen der Umsetzung:
+
+- **`ai_generated: false` erzeugt kein Signal.** Die Abwesenheit ist keine
+  Behauptung „rein menschlich"; das Register weist selbst ungeklärte
+  `menschlich`-Einträge aus. Eine unbelegte Positivaussage wäre schlechter als
+  keine Angabe.
+- **Bild und Ton sind getrennt.** Die Tonspur (TTS) ist immer synthetisch und
+  wird auf jeder Seite mit Lesehilfe ausgewiesen; das Cover nur bei belegter
+  Bildherkunft. Text-, Bild- und Tonflag bleiben unabhängig.
+- **Kein erfundener IPTC-Wert.** Ohne `cover.ki_pruefung.digital_source_type`
+  (`trainedAlgorithmicMedia` oder `compositeWithTrainedAlgorithmicMedia`) wird
+  weder geschrieben noch im DOM behauptet.
+- **Fremde Metadaten werden nicht still überschrieben.** Enthält eine Datei
+  bereits abweichendes XMP, blockiert das Werkzeug und verlangt eine bewusste
+  Entscheidung (`--force`) – im Sinne des Kodex, vorhandene Markierungen zu
+  erhalten.
+- **Kein HTTP-Header.** GitHub Pages setzt keine Header, und eine globale
+  Transform Rule wäre für 12 von 108 Artikeln ohne KI-Text eine falsche
+  Aussage. Bewusst nicht gebaut.
+- **Kein C2PA-Signaturdienst.** Signieren braucht Betreiber-Schlüssel und
+  `c2patool`; das gehört nicht unbeaufsichtigt in den Deploy. Vorgesehen ist
+  der Verweis auf ein externes Manifest (`c2pa_manifest_url`).
+
+### Dauerhaft gesichert
+
+`scripts/ki_provenienz_gate.py` (Regeln M1–M4) läuft im Deploy **nach** dem
+Build: M1 prüft das Meta-Signal in jeder gebauten Seite gegen das
+Frontmatter, M2 den Vorlagenvertrag (Einbindung, `creditText`,
+`data-digital-source-type`, Impressum-Anker), M3 die Bilddatei, M4 die
+Kanaltreue (maschinenlesbares Signal nur zusammen mit dem sichtbaren Hinweis).
+`scripts/ki_bild_markierung.py --gate` meldet deklarierte KI-Cover ohne
+IPTC-Feld. Beide sind im Blustradius-Register als `inhalt` eingetragen und
+dürfen blockieren; die Selbsttests sind als `gate-selbsttest` registriert.
+NPM-Zugänge: `ki:provenienz[:gate]`, `ki:bild[:gate|:markieren]`, `test:ki`.
+
+### Prüfergebnisse dieser Änderung (lokal, Hugo 0.169.0, Pillow 13.0.0)
+
+- `scripts/ki_provenienz_gate.py --gate`: **76 gebaute Artikelseiten geprüft,
+  0 Funde** (96 von 108 Artikeln tragen `ai_generated: true`, 12 nicht;
+  32 Entwürfe sind nicht gebaut).
+- `scripts/schema_seo_gate.py --gate`: 408 gebaute Seiten, 82 Money-Pages,
+  **0 harte Funde** – `creditText` bricht das Schema nicht.
+- `scripts/ki_bild_markierung.py --selftest` und
+  `scripts/tests/test_ki_bild_markierung.py`: echter Rundlauf an einem JPEG –
+  Feld lesbar, **Pixel-SHA-256 vor und nach der Markierung identisch**,
+  Segmentkette führt weiter auf den Start of Scan, idempotent, PNG abgelehnt.
+  Gegenprobe am realen Blog-Cover: Pixel-SHA `97d0d7be7af7f62d…` unverändert,
+  Datei +909 Bytes, unabhängiger Leser (Pillow/defusedxml) erkennt
+  `DigitalSourceType`.
+- `scripts/tests/test_ki_provenienz_render.py`: 6 Render-Fälle mit echten
+  Vorlagen grün; `python3 -m unittest` über die KI- und Schema-/DOM-/Editorial-
+  Tests: 23 + 136 Tests grün.
+- **0 Cover sind derzeit als KI deklariert.** Die Bildebene ist damit
+  Infrastruktur für den ersten belegten Fall, kein Vollzug am Bestand.
+
+### Offen vor Fristabschluss (unverändert zum 03.11.)
+
+1. Anbieter-Inventar und schriftliche Auskunft je Anbieter zur
+   Art.-50-Abs.-2-Markierung (Vorlage: `docs/KI-TRANSPARENZ-ABNAHME.md`).
+2. Bildherkunft und Deepfake-Prüfung je tatsächlich verwendetem Bild und
+   Ausspielweg; erst danach `cover.ai_generated` und IPTC-Wert setzen.
+3. Register `data/ki_kennzeichnung.yaml`: ungeklärte `menschlich`-Einträge
+   gegen die veröffentlichte Fassung prüfen.
+4. Live-Abnahme nach erfolgreichem offiziellen Deployment (Runbook
+   `docs/KI-TRANSPARENZ-ABNAHME.md`, Abschnitt 4) und Betreiberfreigabe.
+   Erst danach den Workflow mit `erledigt=ki-vo-kennzeichnung-bestand`
+   ausführen. Issue #1028 und Frist bleiben bis dahin offen.
+
+**Neu offener Punkt:** Die Ausspielwege OG-Bild, Pinterest-Pin und
+RSS/Feeds tragen die neuen Angaben nicht. Für Text ist das unschädlich
+(keine Deepfake-Pflicht ohne öffentliches Interesse), für ein künftig
+deklariertes KI-Cover müssten OG-/Pinterest-Dateien gesondert markiert oder
+die Ausspielung unterbunden werden.
+
+---
+
 ## Nachtrag 2026-11-04 · Betreiberfreigabe des Integritäts-Locks (#1056)
 
 Nach ausdrücklicher Betreiberentscheidung wurden die drei im folgenden

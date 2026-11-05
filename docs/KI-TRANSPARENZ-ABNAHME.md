@@ -59,7 +59,29 @@ cover:
     quelle: "<konkreter überprüfbarer Herkunftsnachweis>"
     geprueft_am: 2026-11-03
     deepfake: false
+    # IPTC Digital Source Type – nur einer dieser beiden Werte, nur belegt:
+    #   trainedAlgorithmicMedia              = vollständig generativ erzeugt
+    #   compositeWithTrainedAlgorithmicMedia = aufgenommenes Bild, generativ bearbeitet
+    digital_source_type: trainedAlgorithmicMedia
+    werkzeug: "<Produkt und Modell, falls bekannt>"
+    c2pa_manifest_url: "<optional: URL eines signierten C2PA-Manifests>"
 ```
+
+**Reihenfolge ist Pflicht:** erst markieren, dann hashen. Der Befehl
+
+```
+python3 scripts/ki_bild_markierung.py --write
+```
+
+schreibt `digital_source_type` als XMP-Paket in die JPEG-Datei, ohne die
+Bilddaten neu zu kodieren (Pixel bleiben byteweise erhalten, die Datei wird
+größer). Danach muss `sha256` neu berechnet und im Frontmatter eingetragen
+werden, sonst meldet `ki_cover_provenienz.py --gate` zu Recht eine Abweichung.
+`python3 scripts/ki_bild_markierung.py --gate` prüft, ob jedes deklarierte
+KI-Cover das Feld wirklich trägt. Enthält eine Datei bereits abweichendes XMP,
+blockiert das Werkzeug: fremde Herkunftsnachweise werden nicht still
+überschrieben (das verlangt auch der Verhaltenskodex vom 10.06.2026). Eine
+bewusste Entscheidung braucht `--force`.
 
 `deepfake: false` darf nur nach echter Prüfung gesetzt werden. Bei Deepfake
 blockiert das Gate absichtlich: Sichtbarkeit auf allen beabsichtigten
@@ -86,6 +108,32 @@ Automatische Tests oder eine bloße Status-Zeile reichen nicht. Bei fehlendem
 Nachweis Herkunft klären und ggf. sachgerecht kennzeichnen; keine menschliche
 Prüfung erfinden. Deepfake- und Textpflichten nicht verwechseln.
 
+## 3b. Maschinenlesbare Betreiberebene (#1028)
+
+Art. 50 Abs. 2 KI-VO ist eine Anbieterpflicht; für vor dem 02.08.2026 in
+Verkehr gebrachte Systeme läuft die Nachfrist bis 02.12.2026. Der
+Verhaltenskodex der Kommission vom 10.06.2026 nennt dafür signierte
+Metadaten, Wasserzeichen und optional Fingerabdrücke. Was der **Betreiber**
+selbst maschinenlesbar machen kann, liegt auf vier Kanälen – alle aus
+demselben Frontmatter, keiner mit eigener Pflege:
+
+| Kanal | Fundstelle | Prüfen mit |
+|---|---|---|
+| `<meta name="ai-generated">`, `ai-generated-scope`, `rel="describedby"` | `layouts/_partials/ki_provenienz.html` | `python3 scripts/ki_provenienz_gate.py --gate` (M1) |
+| schema.org `creditText` | `layouts/_partials/schema_article.html` | derselbe Befehl (M2) + `scripts/schema_seo_gate.py` |
+| `data-ai-generated`, `data-digital-source-type` am `<img>` | `layouts/_partials/cover.html` | derselbe Befehl (M2) |
+| IPTC `DigitalSourceType` in der Bilddatei | `scripts/ki_bild_markierung.py` | `python3 scripts/ki_bild_markierung.py --gate` (M3) |
+
+Regel M4 stellt sicher, dass das maschinenlesbare Signal nie ohne den
+sichtbaren Hinweis am Artikel erscheint und umgekehrt. Ein halber Kanal stoppt
+den Deploy.
+
+**Was diese Ebene nicht ist:** kein Herkunftsbeweis, kein Wasserzeichen, keine
+C2PA-Signatur und keine Erfüllung der Anbieterpflicht. `ai_generated: false`
+erzeugt bewusst kein Signal – die Abwesenheit einer Angabe ist keine
+Behauptung „rein menschlich". Der IPTC-Wert wird nur bei belegter
+Erzeugungsart geschrieben; erfunden wird nichts.
+
 ## 4. Live-Abnahme nach Integration
 
 1. Integritäts-Lock und dokumentierte Betreiberfreigabe prüfen; bei späteren
@@ -96,12 +144,20 @@ Prüfung erfinden. Deepfake- und Textpflichten nicht verwechseln.
    Browser samt Screenreader/ohne JavaScript prüfen: deutlicher Hinweis am
    Artikelanfang; keine falsche Freigabe. Eine nicht gekennzeichnete Seite
    gegen das tatsächliche Register und ihre Herkunft prüfen.
-3. Für jedes tatsächlich deklarierte KI-Cover Einzelansicht, Listenansicht,
+3. Maschinenlesbare Ebene an der **live ausgelieferten** Fassung prüfen, nicht
+   am lokalen Build: Seitenquelltext einer KI-Seite auf
+   `<meta name="ai-generated" content="true">`, `ai-generated-scope` und
+   `rel="describedby"` (Zielanker `/impressum/#ki-hinweis` muss erreichbar
+   sein); `creditText` im JSON-LD über den Rich-Result-Test oder
+   `curl … | grep creditText`; bei deklariertem KI-Cover die Quelldatei
+   herunterladen und mit einem Metadaten-Leser auf `DigitalSourceType` prüfen.
+   Eine Seite ohne `ai_generated: true` darf das Signal **nicht** tragen.
+4. Für jedes tatsächlich deklarierte KI-Cover Einzelansicht, Listenansicht,
    Quelldatei und alle relevanten Social-/OG-Ausgaben prüfen. Original und
    live ausgelieferte Datei byteweise vergleichen; getrennt Signatur bzw.
    Wasserzeichen mit geeignetem Werkzeug prüfen. Keine Prüfung behaupten,
    wenn kein passendes KI-Cover vorliegt.
-4. Ergebnis mit URLs, Zeit, Revision, Testdaten, Tool und offenen Abweichungen
+5. Ergebnis mit URLs, Zeit, Revision, Testdaten, Tool und offenen Abweichungen
    dokumentieren. Erst nach Betreiberfreigabe, Nachweisen und ggf. juristischer
    Prüfung den Workflow „Fristen-Check (Recht)“ mit
    `erledigt=ki-vo-kennzeichnung-bestand` ausführen.

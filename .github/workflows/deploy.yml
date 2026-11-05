@@ -725,6 +725,31 @@ jobs:
           fi
           exit "$wache_status"
 
+      # ========= MASCHINENLESBARE KI-KENNZEICHNUNG (#1028, 05.11.2026) =========
+      # Art. 50 KI-VO, Frist 02.12.2026. Die maschinenlesbare Ebene bestand
+      # bis hierher aus `data-ff-ki-label`, einem Selektor für eigene Tests.
+      # Jetzt trägt jede Seite mit ai_generated: true <meta name="ai-generated">
+      # plus scope und rel="describedby", das Article-Schema ein creditText
+      # und jedes ausdrücklich deklarierte KI-Cover das IPTC-Feld
+      # DigitalSourceType IN der Bilddatei.
+      # Diese Wache läuft NACH dem Build: M1/M4 prüfen die ausgelieferte
+      # Wahrheit (nicht die Absicht der Vorlage), M2 den Vorlagenvertrag,
+      # M3 die Bilddatei. Ein halber Kanal – Signal ohne sichtbaren Hinweis
+      # oder umgekehrt – stoppt den Deploy.
+      # Grenze: ein grünes Gate ist weder ein Herkunftsbeweis noch die
+      # Anbieter-Markierung nach Art. 50 Abs. 2 (docs/KI-TRANSPARENZ-ABNAHME.md).
+      - name: KI-Provenienz – Selbsttest
+        run: python3 scripts/ki_provenienz_gate.py --selftest
+
+      - name: KI-Provenienz – maschinenlesbare Kennzeichnung im Build
+        run: python3 scripts/ki_provenienz_gate.py --gate
+
+      - name: KI-Bild-Markierung – Selbsttest
+        run: python3 scripts/ki_bild_markierung.py --selftest
+
+      - name: KI-Bild-Markierung – IPTC-Feld in deklarierten KI-Covern
+        run: python3 scripts/ki_bild_markierung.py --gate
+
       # ================= INDEX-HYGIENE (Crawl-Fläche, 29.09.2026) =================
       # Die bestehenden Wachen prüfen jede Seite EINZELN und korrekt
       # (schema_seo_gate S6: „Archive tragen noindex" war die ganze Zeit grün).
@@ -852,7 +877,7 @@ jobs:
       - name: KI-Transparenz – Text, Bild und Provenienz testen
         run: |
           command -v hugo
-          python3 -m unittest scripts.tests.test_ki_transparenz_render scripts.tests.test_ki_cover_provenienz scripts.tests.test_ki_cover_generator_schutz scripts.tests.test_ki_cover_render_audit -v
+          python3 -m unittest scripts.tests.test_ki_transparenz_render scripts.tests.test_ki_cover_provenienz scripts.tests.test_ki_cover_generator_schutz scripts.tests.test_ki_cover_render_audit scripts.tests.test_ki_provenienz_render scripts.tests.test_ki_bild_markierung -v
 
       - name: KI-Cover – Herkunft und Originaldatei prüfen
         run: python3 scripts/ki_cover_provenienz.py --gate
