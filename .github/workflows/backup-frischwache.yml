@@ -161,8 +161,8 @@ jobs:
               echo "- RPO-Soll: 24 h (Toleranz 52 h) · RTO: unter 60 Min."
               echo "- Erwartete Releases: backup-* + kv-backup-* (Entwuerfe, privat)"
             } >> "$GITHUB_STEP_SUMMARY"
-            echo "::warning::Backup-Frische nicht pruefbar – BACKUP_REPO oder BACKUP_REPO_TOKEN fehlt (E1/E2 offen)."
-            exit 0
+            echo "::error::Backup-Frische nicht pruefbar – BACKUP_REPO oder BACKUP_REPO_TOKEN fehlt (E1/E2 offen)."
+            exit 1
           fi
           set +e
           python3 scripts/backup_freshness_guard.py --repo "$BACKUP_REPO" --json > /tmp/frische.json 2>&1

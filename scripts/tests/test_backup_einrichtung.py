@@ -29,6 +29,8 @@ import ast
 import datetime as dt
 import importlib.util
 import io
+import os
+import tempfile
 import re
 import subprocess
 import sys
@@ -1060,6 +1062,21 @@ class FrischwacheEinrichtungVertrag(unittest.TestCase):
         self.assertRegex(text, r"backup_einrichtung\.py --pruefen\n\s+code=\$\?")
         self.assertIn('exit 1', text)
         self.assertNotIn("|| true", text.split("Voraussetzungen prüfen (fail-closed")[1][:800])
+
+    def test_messung_ohne_ziel_oder_token_bleibt_rot(self):
+        """Auch die zweite Schranke darf fehlende Eingaben nie als Erfolg melden."""
+        schritt = next(s for s in self._frisch_job()["steps"]
+                       if "Frische messen" in s.get("name", ""))
+        for repo, token in (("", "token"), ("owner/repo", ""), ("", "")):
+            with self.subTest(repo=bool(repo), token=bool(token)), tempfile.TemporaryDirectory() as tmp:
+                summary = Path(tmp) / "summary"
+                env = {**os.environ, "BACKUP_REPO": repo, "GH_TOKEN": token,
+                       "GITHUB_STEP_SUMMARY": str(summary)}
+                lauf = subprocess.run(["bash", "-c", schritt["run"]], cwd=REPO,
+                                      env=env, capture_output=True, text=True)
+                self.assertNotEqual(lauf.returncode, 0, lauf.stdout + lauf.stderr)
+                self.assertIn("::error::", lauf.stdout)
+                self.assertIn("BACKUP_REPO oder BACKUP_REPO_TOKEN fehlt", summary.read_text())
 
     def test_schrittname_wird_vom_alerting_erkannt(self):
         alarm = (REPO / ".github" / "workflows" / "alert-on-failure.yml").read_text(encoding="utf-8")
