@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 04.11.2026 21:27 (Europe/Berlin)  
+> Automatisch aktualisiert: 05.11.2026 14:18 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -33,6 +33,9 @@
   https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/
 - **11:30** ⏳ September-Roadtrip: Clevere Wege zum Mietwagen-Schnäppchen — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen/
+### Do, 19. November 2026
+- **07:30** ⏳ Kreditkarte vergleichen: Kostenlos und sicher zahlen — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen/
 
 ## Zuletzt veröffentlicht
 
