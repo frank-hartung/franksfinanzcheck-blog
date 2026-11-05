@@ -1,15 +1,15 @@
 {
   "target": 6,
-  "ready": 5,
-  "pool_size": 7,
-  "generated_at": "2026-11-04T20:51:41Z",
+  "ready": 6,
+  "pool_size": 8,
+  "generated_at": "2026-11-05T11:35:58Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
       "ready": true,
       "sha256": "cb3bf3d7be2180edff5fcefa860e8623f50fa8a4c2727513861e1fe7ba87cd18",
       "flesch": 66.7,
-      "measured_at": "2026-11-04T11:34:11Z",
+      "measured_at": "2026-11-05T11:27:39Z",
       "score": 0.984,
       "parts": {
         "spelling": 0.92,
@@ -26,7 +26,7 @@
       "ready": true,
       "sha256": "026a4df794c249f5d138d8530485aac93a4e2f09abc336b0d00cf67c72704604",
       "flesch": 61.6,
-      "measured_at": "2026-11-04T11:35:19Z",
+      "measured_at": "2026-11-05T11:28:50Z",
       "score": 0.952,
       "parts": {
         "spelling": 0.94,
@@ -43,7 +43,7 @@
       "ready": true,
       "sha256": "ad0969c0a822afc57b2282b2d9f66fb4d39733404375d046a7826bfd20ceda8e",
       "flesch": 67.1,
-      "measured_at": "2026-11-04T11:36:26Z",
+      "measured_at": "2026-11-05T11:30:00Z",
       "score": 0.986,
       "parts": {
         "spelling": 1.0,
@@ -60,7 +60,7 @@
       "ready": true,
       "sha256": "fdfc2fd2dff9a1fe1417f996c5c3a30747b18a4a72397ad82c4306632a2fe1fc",
       "flesch": 67.3,
-      "measured_at": "2026-11-04T11:37:34Z",
+      "measured_at": "2026-11-05T11:31:11Z",
       "score": 0.962,
       "parts": {
         "spelling": 0.88,
@@ -73,16 +73,33 @@
       }
     },
     {
-      "slug": "2026-11-01-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
+      "slug": "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck",
+      "ready": true,
+      "sha256": "722e590d7e31e5406851c4b421c5c3130c816ef23b6f3986fb2f25c102db8f7b",
+      "flesch": 72.0,
+      "measured_at": "2026-11-05T11:32:24Z",
+      "score": 0.93,
+      "parts": {
+        "spelling": 0.9,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 0.92,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.9
+      }
+    },
+    {
+      "slug": "2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
       "ready": false,
-      "sha256": "cbdd720813d87d83504da657a06f4bfbce1d728fd701bb9900b20c6e58b17350",
-      "flesch": 65.9,
-      "measured_at": "2026-11-04T20:51:41Z",
+      "sha256": "1a4aceefab9b49f76d53b9d24bc15c02baa1d0238fc70167976a2f97b46037e4",
+      "flesch": 66.1,
+      "measured_at": "2026-11-05T11:33:34Z",
       "reason": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: ide",
       "details": [
-        "🛑 2026-11-01-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
+        "🛑 2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…hinweis dieser artikel dient ausschließlich der allgemeinen information und stellt…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…keine anlage rechts oder steuerberatung dar prüfe konditionen und bedingungen…“ – doppelte Passage, manuell reparieren",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
       "score": 0.972,
       "parts": {
@@ -96,38 +113,14 @@
       }
     },
     {
-      "slug": "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck",
+      "slug": "2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ready": true,
-      "sha256": "722e590d7e31e5406851c4b421c5c3130c816ef23b6f3986fb2f25c102db8f7b",
-      "flesch": 72.0,
-      "measured_at": "2026-11-04T11:39:51Z",
-      "score": 0.93,
+      "sha256": "1ffe933826249f173fb20d370eb5acfbb9ecdf35760bd47201a8543990c1759c",
+      "flesch": 72.9,
+      "measured_at": "2026-11-05T11:34:44Z",
+      "score": 1.0,
       "parts": {
-        "spelling": 0.9,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 0.92,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.9
-      }
-    },
-    {
-      "slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "ready": false,
-      "sha256": "d5c01c0091b989b4f30d57c9a8088fee7dae0ed78b540d25af4d97b63d099bfe",
-      "flesch": 71.5,
-      "measured_at": "2026-11-04T14:32:26Z",
-      "reason": "Faktenfrische nicht bestanden: 0b564f460c41218244bd (luecke): Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.; 3ad2eefed314eb172c26 (luecke): Die Aussag",
-      "details": [
-        "🛑 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
-        "Faktenfrische nicht bestanden: 0b564f460c41218244bd (luecke): Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.; 3ad2eefed314eb172c26 (luecke): Die Aussage, dass durch frühzeitige Bestellung Kosten um 10 % bis 20 % im Herbst eingespart werden können, ist unbelegt.; 43788c2cdcdfda52e753 (luecke): Die Modellrechnung verwendet einen Tiefpreis von 0,80 €/Liter, ohne dass diese Preisangabe belegt wird.; 5eedec8afbdef6a4ca49 (luecke): Es wird angegeben, dass typische Fehler beim Heizölkauf bis zu 15 % Mehrkosten verursachen können, jedoch fehlt ein Nachweis für diese Zahl.; 81881c5bc61824d25f5a (praezision): Die Faustregel, dass man bestellen sollte, wenn Preise vier Wochen unter dem Schnitt der letzten 12 Monate liegen, wird ohne Messgrundlage oder Quelle genannt.",
-        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…wichtiger hinweis dieser artikel dient ausschließlich der allgemeinen information und…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…stellt keine anlage rechts oder steuerberatung dar prüfe konditionen und…“ – doppelte Passage, manuell reparieren",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
-      "score": 0.996,
-      "parts": {
-        "spelling": 0.98,
+        "spelling": 1.0,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
@@ -135,18 +128,34 @@
         "affiliate": 1.0,
         "readability": 1.0
       }
+    },
+    {
+      "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
+      "ready": false,
+      "sha256": "e231f1cb71f19d0ceb7bcd00d646f3d49fab899671e63be20d938fb918af6f22",
+      "flesch": 61.7,
+      "measured_at": "2026-11-05T11:35:58Z",
+      "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+      "details": [
+        "🛑 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 0.928,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.88,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.9
+      }
     }
   ],
   "measurement": {
-    "kind": "partial",
-    "run_id": "41909996584",
+    "kind": "full",
+    "run_id": "42017624914",
     "run_attempt": "1"
-  },
-  "recert": {
-    "at": "2026-11-04T20:51:41Z",
-    "renewed": [
-      "2026-11-01-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen"
-    ],
-    "tool": "scripts/reserve_recert.py"
   }
 }

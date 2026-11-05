@@ -1,14 +1,26 @@
 {
-  "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": {
-    "datei_sha256": "48f0721c9872533a8f7a49d5b17b6a968a6caa4d535d642d5f64767a07629eaf",
-    "first": "2026-11-04T11:40:57Z",
-    "grund": "Faktenfrische nicht bestanden: 0b564f460c41218244bd (luecke): Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.; 3ad2eefed314eb172c26 (luecke): Die Aussag",
+  "2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen": {
+    "datei_sha256": "1a4aceefab9b49f76d53b9d24bc15c02baa1d0238fc70167976a2f97b46037e4",
+    "first": "2026-11-05T11:35:58Z",
+    "grund": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: ide",
     "hits": 1,
     "laeufe": [
-      "run:41819864260"
+      "run:42017624914"
     ],
-    "last": "2026-11-04T11:40:57Z",
-    "lauf": "run:41819864260",
-    "signatur": "faktenfrische nicht bestanden: <n>b<n>f<n>c<n>bd (luecke): der artikel behauptet, dass heizöl‑preise ihr tief meist in den monaten januar und februar erreichen, ohne dafür eine quelle anzugeben.; <n>a"
+    "last": "2026-11-05T11:35:58Z",
+    "lauf": "run:42017624914",
+    "signatur": "textverständnis-gate nicht bestanden: r<n>-phrasen-doppel: identische <n>-wort-sequenz im fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check<n> prüfen wichtiger…“ – doppelte passage, "
+  },
+  "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang": {
+    "datei_sha256": "e231f1cb71f19d0ceb7bcd00d646f3d49fab899671e63be20d938fb918af6f22",
+    "first": "2026-11-05T11:35:58Z",
+    "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+    "hits": 1,
+    "laeufe": [
+      "run:42017624914"
+    ],
+    "last": "2026-11-05T11:35:58Z",
+    "lauf": "run:42017624914",
+    "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
   }
 }
