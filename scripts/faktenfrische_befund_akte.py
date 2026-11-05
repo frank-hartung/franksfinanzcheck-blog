@@ -133,8 +133,10 @@ def zustand_bauen(befunde: list[dict], live: dict[str, dict], *,
         "je_seite": {slug: sum(1 for b in befunde if b["slug"] == slug)
                      for slug in sorted({b["slug"] for b in befunde})},
         "befunde": [{k: b.get(k) for k in
-                     ("slug", "id", "typ", "text", "beleg", "alter_tage",
-                      "fassung_status", "entscheidbar", "nicht_entscheidbar_grund")}
+                     ("slug", "ursprungs_slug", "id", "typ", "text", "beleg",
+                      "alter_tage", "fassung_status", "entscheidbar",
+                      "nicht_entscheidbar_grund")
+                     if k != "ursprungs_slug" or b.get(k)}
                     for b in befunde],
     }
 
@@ -239,6 +241,14 @@ def akte_bauen(befunde: list[dict], live: dict[str, dict], zustand: dict) -> str
         add(f"Datei: `content/posts/{slug}/index.md`" if slug in live
             else f"Seite: `{slug}`")
         add("")
+        herkunft = sorted({b["ursprungs_slug"] for b in eintraege
+                           if b.get("ursprungs_slug")})
+        if herkunft:
+            add("Herkunft nach Datums-Lift: " + ", ".join(
+                f"`{alt}` → `{slug}`" for alt in herkunft) +
+                ". Befund-ID und Fassungsanker bleiben unverändert; das Re-Dating "
+                "ist keine fachliche Entscheidung.")
+            add("")
         add("| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |")
         add("|---|---|---|---|---|---|")
         for b in eintraege:
