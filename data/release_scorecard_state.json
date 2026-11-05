@@ -1,10 +1,10 @@
 {
   "version": 1,
-  "generated_at": "2026-11-04T23:49:43Z",
+  "generated_at": "2026-11-05T00:21:57Z",
   "modus": "kandidaten",
-  "commit": "b428030e6a8ab3a47143defb095f814b3a1b7b2d",
+  "commit": "7e4251a2f751f5e79637a5616a261e8cba35af69",
   "kapazitaet": {
-    "stichtag": "2026-11-04",
+    "stichtag": "2026-11-05",
     "artikel": 113,
     "faellig": 1,
     "ueberfaellig": 0,
@@ -12,7 +12,7 @@
     "naechste_frist": {
       "slug": "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
       "frist": "2026-11-11",
-      "restlaufzeit": 7
+      "restlaufzeit": 6
     },
     "budget": 4,
     "laeufe_je_tag": 1.0,
@@ -70,7 +70,7 @@
     "ueberholt": 18,
     "ohne_fassung": 15,
     "nicht_entscheidbar": 0,
-    "aeltester_tage": 5,
+    "aeltester_tage": 6,
     "frist_tage": 14,
     "ueber_frist": 0,
     "je_slug": {
