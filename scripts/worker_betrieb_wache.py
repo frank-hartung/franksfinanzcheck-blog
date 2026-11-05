@@ -73,6 +73,20 @@ PAUSEN = (2.0, 8.0, 30.0)
 MAX_ANTWORT = 1_000_000
 WORKER_HOST = "abos.franksfinanzcheck.de"
 
+# WF-E813 / #972 (05.11.2026): Der Rat „Worker deployen“ war unvollständig.
+# Der Deploy hängt VOR Wrangler am Environment `cloudflare-produktion`; seit
+# dem 25.10.2026 ist es ungesichert (keine Protection Rules, Admin-Bypass an).
+# Die Wache misst die Policy nicht – sie nennt deshalb die Vorbedingung, kein
+# angebliches Messergebnis. Ein Rat ohne diesen Schritt schickt den Menschen
+# in einen Lauf, der fail-closed abbricht.
+UMGEBUNG_VORBEDINGUNG = (
+    "Vor dem Deploy steht die Environment-Policy: `cloudflare-produktion` "
+    "braucht Required Reviewer, exakt `main` und Admin-Bypass aus – read-only "
+    "`python3 scripts/worker_environment_guard.py --check` bzw. "
+    "`npm run worker:environment` (Exit 0). Ohne Policy bleibt der Deploy "
+    "fail-closed gesperrt (Runbook A1b/A4)."
+)
+
 
 class MessStoerung(RuntimeError):
     def __init__(self, meldung: str, *, wiederholbar: bool = False):
@@ -203,7 +217,7 @@ def diagnose_unvollstaendiges_bild(
                 "auf `main` ausführen, nicht den Leseschlüssel auf Verdacht ändern. "
                 "Der Deploy übernimmt eine fehlende KV-ID lesend aus der bestehenden "
                 "ABO-Bindung; keinen neuen Namespace ohne Migrationsplan anlegen "
-                "(docs/SICHERHEIT-BETRIEB-RUNBOOK.md, D2)."
+                "(docs/SICHERHEIT-BETRIEB-RUNBOOK.md, D2). " + UMGEBUNG_VORBEDINGUNG
             ]
         return []
 
@@ -211,7 +225,8 @@ def diagnose_unvollstaendiges_bild(
         return [
             f"Deploy-Diagnose: Build-Stempel in `/healthz` weicht vom Repo-Soll "
             f"`{soll}` ab – veralteter Worker-Deploy. Workflow „Cloudflare-Worker "
-            "deployen“ für `newsletter-worker` auf `main` ausführen (Runbook D2)."
+            "deployen“ für `newsletter-worker` auf `main` ausführen (Runbook D2). "
+            + UMGEBUNG_VORBEDINGUNG
         ]
 
     if soll and bau == soll:

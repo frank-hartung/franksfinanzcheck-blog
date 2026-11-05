@@ -362,6 +362,28 @@ class ProdScopingAlarm(unittest.TestCase):
         self.assertIn("npm run worker:environment", code)
         self.assertIn("npm run edge:freigabe", code)
 
+    def test_972_rat_zeigt_nicht_auf_eine_gekappte_annotation(self):
+        # Der Rat behauptet: „Die Header-Annotation nennt die Diagnose".
+        # Am 05.11.2026 (Lauf 42044923993) war genau das falsch: Zehn
+        # fehlende Kopfzeilen füllten das Fehler-Budget des Schritts, die
+        # elfte Zeile mit Diagnose und nächstem Schritt verschwand. Der
+        # Dreiklang JSON-Diagnose → begrenzter Meldeplan → Auswerte-Schritt
+        # muss deshalb zusammenstehen bleiben.
+        code = _kommentarfrei(_text())
+        self.assertIn("Die Header-Annotation nennt die Diagnose", code)
+        messung = (REPO / "scripts" / "blog_header_gate.py").read_text(encoding="utf-8")
+        melder = (REPO / "scripts" / "sicherheits_nachweis.py").read_text(encoding="utf-8")
+        budget = (REPO / "scripts" / "github_kommando.py").read_text(encoding="utf-8")
+        workflow = (REPO / ".github" / "workflows" /
+                    "sicherheits-wache.yml").read_text(encoding="utf-8")
+        self.assertIn('daten["diagnose"]', messung)
+        self.assertIn("annotationsplan(", melder)
+        self.assertIn("annotationszeilen(", melder)
+        self.assertIn("ANNOTATIONEN_PRO_SCHRITT = 10", budget)
+        self.assertIn("MELDE_BUDGET_ROT", budget)
+        self.assertIn("MELDE_BUDGET_ROT", melder)
+        self.assertIn("--auswerten header", workflow)
+
     def test_972_abhaengigkeits_audit_hat_eigenen_rat(self):
         # WF-E813 / #972 (01.11.2026): Im Lauf 41199051921 waren der
         # Abhängigkeits-Job (sieben HIGH-Funde an pypdf==6.21.2) UND die

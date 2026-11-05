@@ -211,6 +211,36 @@ class RepoUndLiveVertrag(unittest.TestCase):
         self.assertIn("Zugangs-Diagnose", bericht)
         self.assertIn("NEWSLETTER_WORKER_EXPORT_KEY", bericht)
 
+    def test_972_deploy_rat_nennt_die_environment_vorbedingung(self):
+        # Der Rat „Zuerst deployen“ war unvollständig: Der Deploy scheitert
+        # seit 25.10.2026 VOR Wrangler am ungesicherten Environment. Die Wache
+        # misst die Policy nicht, nennt aber die Vorbedingung – bei beiden
+        # Deploy-Diagnosen, nicht bei der reinen Zugangs-Diagnose.
+        soll = "ff-newsletter-2026-10-24"
+        for stand in ({"ok": True, "ts": GUT["ts"]},
+                      {"ok": True, "ts": GUT["ts"], "bau": "veralteter-stempel"}):
+            with self.subTest(stand=stand):
+                diagnose = gate.diagnose_unvollstaendiges_bild(stand, repo_build=soll)
+                self.assertTrue(diagnose)
+                text = diagnose[0]
+                self.assertIn("Environment-Policy", text)
+                self.assertIn("cloudflare-produktion", text)
+                self.assertIn("worker_environment_guard.py --check", text)
+                self.assertIn("npm run worker:environment", text)
+                self.assertIn("fail-closed", text)
+        zugang = gate.diagnose_unvollstaendiges_bild({"ok": True, "bau": soll}, repo_build=soll)
+        self.assertIn("Zugangs-Diagnose", zugang[0])
+        self.assertNotIn("worker_environment_guard.py --check", zugang[0],
+                         "Ein falscher Leseschlüssel ist kein Environment-Befund")
+        # Dreiklang: Rat im Issue, Runbook und Annotation nennen denselben
+        # read-only Prüfer. Drift an einer Stelle fällt hier auf.
+        wurzel = Path(__file__).resolve().parents[2]
+        for pfad in (".github/workflows/alert-on-failure.yml",
+                     "docs/SICHERHEIT-BETRIEB-RUNBOOK.md"):
+            with self.subTest(pfad=pfad):
+                self.assertIn("worker_environment_guard.py --check",
+                              (wurzel / pfad).read_text(encoding="utf-8"))
+
     def test_815_fehlender_build_stempel_in_wrangler_faellt_offline_auf(self):
         repo = {**gate.repo_stand(), "build": ""}
         with patch.object(gate, "repo_stand", return_value=repo):

@@ -199,5 +199,88 @@ class BetriebsBeweisTest(unittest.TestCase):
                             for z in kommandos), kommandos)
 
 
+class AnnotationsBudgetTest(unittest.TestCase):
+    """WF-E813 / #972 (05.11.2026): Zehn Fehlerzeilen je Schritt, dann Schweigen.
+
+    Im Live-Lauf `42044923993` standen zehn fehlende Kopfzeilen als
+    `::error::`-Zeilen. Die elfte Zeile – Proxy-Diagnose und nächster Schritt –
+    war im Check-Run nicht mehr vorhanden. Der Melder muss die Grenze selbst
+    kennen: Pflichtzeilen zuerst, Verlust benennen, nie still kappen.
+    """
+
+    def test_zehn_befunde_ohne_pflichtzeilen_bleiben_vollstaendig(self):
+        texte = [f"Befund {i}" for i in range(10)]
+        self.assertEqual(gk.annotationsplan(texte, sammelzeile="{anzahl} weitere"), texte)
+
+    def test_elfter_befund_wird_als_verlust_benannt(self):
+        texte = [f"Befund {i}" for i in range(11)]
+        plan = gk.annotationsplan(texte, sammelzeile="{anzahl} weitere")
+        self.assertEqual(len(plan), 10)
+        # Neun sichtbare Befunde + eine Zeile, die beide entfallenen benennt.
+        self.assertIn("2 weitere", plan[-1])
+        self.assertNotIn("Befund 9", plan)
+        self.assertNotIn("Befund 10", plan)
+
+    def test_diagnose_und_naechster_schritt_ueberleben_immer(self):
+        texte = [f"Header {i} fehlt" for i in range(12)]
+        plan = gk.annotationsplan(
+            texte, kopf=("Diagnose: Proxy aktiv", "Nächster Schritt: Regel A1"),
+            sammelzeile="{anzahl} weitere Befunde")
+        self.assertEqual(len(plan), 10)
+        self.assertEqual(plan[0], "Diagnose: Proxy aktiv")
+        self.assertEqual(plan[1], "Nächster Schritt: Regel A1")
+        self.assertEqual(len([z for z in plan if z.startswith("Header ")]), 7)
+        self.assertIn("5 weitere", plan[-1], plan[-1])
+
+    def test_fuer_jede_befundzahl_gilt_das_budget(self):
+        for anzahl in range(0, 41):
+            with self.subTest(anzahl=anzahl):
+                plan = gk.annotationsplan(
+                    [f"B {i}" for i in range(anzahl)], kopf=("D", "S"),
+                    sammelzeile="{anzahl} weitere")
+                self.assertLessEqual(len(plan), gk.ANNOTATIONEN_PRO_SCHRITT)
+                self.assertEqual(plan[:2], ["D", "S"])
+
+    def test_ohne_sammelzeile_darf_nichts_still_entfallen(self):
+        with self.assertRaises(ValueError):
+            gk.annotationsplan([f"B {i}" for i in range(11)], kopf=("D",))
+
+    def test_leere_sammelzeile_und_zu_grosses_budget_werden_abgelehnt(self):
+        with self.assertRaises(ValueError):
+            gk.annotationsplan(["B"], sammelzeile="   ")
+        with self.assertRaises(ValueError):
+            gk.annotationsplan(["B"], sammelzeile="{anzahl} weitere", budget=11)
+        with self.assertRaises(ValueError):
+            gk.annotationsplan(["B"], sammelzeile="{anzahl} weitere", budget=0)
+        with self.assertRaises(ValueError):
+            gk.annotationsplan(["B"], kopf=["D"] * 10, sammelzeile="{anzahl} weitere")
+
+    def test_leere_texte_und_falsche_platzhalter_fallen_auf(self):
+        self.assertEqual(gk.annotationsplan(["", "  ", "B"], sammelzeile="x"), ["B"])
+        with self.assertRaises(ValueError):
+            gk.annotationsplan([f"B {i}" for i in range(11)], sammelzeile="{unbekannt} weitere")
+
+    def test_rot_endender_schritt_laesst_dem_runner_die_zehnte_zeile(self):
+        # In drei Live-Läufen (41470449168, 41844410291, 42044923993) hatte
+        # der F-01-Schritt zehn eigene Fehlerzeilen und KEINE Runner-Zeile;
+        # die beiden anderen roten Schritte hatten sie. Wer rot endet, darf
+        # also nur neun eigene Zeilen senden.
+        self.assertEqual(gk.MELDE_BUDGET_ROT, 9)
+        self.assertEqual(gk.RESERVE_LAUF_FEHLER, 1)
+        plan = gk.annotationsplan([f"B {i}" for i in range(12)],
+                                  kopf=("Diagnose", "Schritt"),
+                                  sammelzeile="{anzahl} weitere",
+                                  budget=gk.MELDE_BUDGET_ROT)
+        self.assertEqual(len(plan), 9)
+        self.assertEqual(len(plan) + gk.RESERVE_LAUF_FEHLER,
+                         gk.ANNOTATIONEN_PRO_SCHRITT)
+
+    def test_plan_sendet_keine_eigenen_kommandos(self):
+        self.assertEqual(gk.ANNOTATIONEN_PRO_SCHRITT, 10)
+        self.assertEqual(gk.ANNOTATIONEN_PRO_JOB, 50)
+        self.assertEqual(ausgabe(gk.annotationsplan, ["B"])[1], "",
+                         "Der Plan rechnet nur; das Senden bleibt annotation().")
+
+
 if __name__ == "__main__":
     unittest.main()
