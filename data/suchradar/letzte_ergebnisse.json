@@ -1,5 +1,5 @@
 {
- "zeitstempel": "2026-11-04T15:26:13.938613+02:00",
+ "zeitstempel": "2026-11-05T15:41:29.581276+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 25,
  "zaehlung": {
@@ -125,16 +125,6 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Tarife vergleichen",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
    "anfrage": "Tarifvergleich",
    "eigener_rang": 0,
    "vorher": 0,
@@ -246,6 +236,16 @@
   },
   {
    "anfrage": "Umzug Checkliste",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Umzug sparen",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
