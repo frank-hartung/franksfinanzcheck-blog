@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-04
 title: "Wohngebäudeversicherung Vergleich: Worauf du achten musst"
-description: "Wohngebäudeversicherung Vergleich: So vergleichst du richtig – Elementarschaden, grobe Fahrlässigkeit, Neuwert und Selbstbeteiligung"
+description: "Wohngebäudeversicherung Vergleich: So vergleichst du richtig – Elementarschaden, grobe Fahrlässigkeit, Neuwert und Selbstbeteiligung."
 date: 2026-11-04T01:25:00Z
 draft: false
 tags: ["Wohngebäudeversicherung", "Hausratversicherung"]
@@ -39,14 +39,14 @@ faktencheck: "2026-10-30"
 redaktionelle_pruefung:
   risikoklasse: "hoch"
   status: "freigegeben"
-  inhalt_sha256: "3d15a0a3c9904002c08218c771558c56bc0ff5df3efd4ccf869977f997bf6fcc"
+  inhalt_sha256: "210c16a84fefe83872ae42db27541fd2d6c626076caf18257262b8d1a0a95c1d"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
     rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale, GDV); Elementar- und Unterversicherungs-Aussagen belegt, Modellrechnungen nachgerechnet"
     typ: "redaktion-mit-externer-belegkette"
   pruefdatum: "2026-10-05"
   naechste_pruefung: "2026-11-19"
-  aenderungsgrund: "Haus-Stil-Module für die Veröffentlichung ergänzt (27.10.2026): zwei Überschriften als Frage formuliert bzw. Kürze-Box auf den Standardtitel gebracht, eine Faustregel aus dem SSOT-Pool ergänzt. Keine inhaltlichen Aussagen, Zahlen, Rechenwege oder Quellen geändert; Aussagen- und Zahlenprotokoll gelten unverändert. Siegel neu gesetzt."
+  aenderungsgrund: "Meta-Qualitäts-Gate #1069 (05.11.2026): fehlendes Satzende am Ende der Description ergänzt (ein Punkt, 133 Zeichen / 857 px – im Snippet-Fenster der SSOT). Keine inhaltlichen Aussagen, Zahlen, Rechenwege oder Quellen geändert; Aussagen- und Zahlenprotokoll der Prüfung vom 05.10.2026 gelten unverändert. Auf Auftrag des Herausgebers neu versiegelt."
   gepruefte_aussagen:
     - textanker: "Genau dafür braucht es meist den Baustein **Elementarschutz**"
       pruefung: "Bestätigt: Starkregen, Rückstau und Überschwemmung sind in Standardtarifen nicht automatisch enthalten und benötigen den Elementar-Baustein (Verbraucherzentrale, GDV)"
