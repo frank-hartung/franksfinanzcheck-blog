@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-05T16:29:44Z",
-  "modus": "live",
-  "commit": null,
+  "generated_at": "2026-11-05T16:55:09Z",
+  "modus": "kandidaten",
+  "commit": "0920358fc619f5c973ae666f50eb09102ddc8e8c",
   "kapazitaet": {
     "stichtag": "2026-11-05",
     "artikel": 114,
