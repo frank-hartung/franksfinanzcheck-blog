@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Reddit
 
-> Automatisch aktualisiert: 05.11.2026 14:18 (Europe/Berlin)  
+> Automatisch aktualisiert: 05.11.2026 21:43 (Europe/Berlin)  
 > Profil: https://www.reddit.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `reddit.ics`
 
@@ -12,9 +12,7 @@
 
 ## Kommende Beiträge
 
-### Do, 05. November 2026
-- **14:15** ⚪ Frugalismus Familie: Clever sparen ohne Verzicht — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/
+_Aktuell nichts eingeplant – der Autopilot füllt den Plan beim nächsten Lauf._
 
 ## Zuletzt veröffentlicht
 

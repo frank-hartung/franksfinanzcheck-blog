@@ -5,18 +5,4 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Reddit
 X-WR-TIMEZONE:Europe/Berlin
-BEGIN:VEVENT
-UID:reddit:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht:
- nutzen:2026-11-05@franksfinanzcheck.de
-DTSTAMP:20261105T131829Z
-DTSTART:20261105T131500Z
-DTEND:20261105T133000Z
-SUMMARY:Reddit: Frugalismus Familie: Clever sparen ohne Verzicht (nutzen)
-DESCRIPTION:Status: Standby (Zugang fehlt)\nWinkel: nutzen\nKanal: Red
- dit\nArtikel: https://franksfinanzcheck.de/posts/2026-10-27-frugalism
- us-familie-clever-sparen-ohne-verzicht/
-URL:https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-familie-
- clever-sparen-ohne-verzicht/
-STATUS:TENTATIVE
-END:VEVENT
 END:VCALENDAR
