@@ -59,10 +59,41 @@ die Schließakte. Frist und Eskalation stehen in `befunde.*` der SSOT. Die
 Akte entscheidet nichts; ohne Person und Begründung (≥ 20 Zeichen) schreibt
 der Befehl nichts. Governance: C46.
 
+### Datums-Lift und Befundidentität (#1073)
+
+Der Reserve-Finisher darf einen Entwurf auf das aktuelle Datum heben. Der
+Ordner-Slug ändert sich dabei, die Identität bereits erhobener Fachbefunde
+nicht. `reserve_finisher.lift_to_today()` trägt den bisherigen Slug deshalb
+idempotent in `faktenfrische_aliases` am aktuellen Artikel ein und bewahrt
+frühere Einträge. Beispiel:
+
+```yaml
+faktenfrische_aliases:
+  - "2026-11-01-thema"
+  - "2026-11-03-thema"
+```
+
+Das ist **interne Herkunft**, keine öffentliche Weiterleitung und kein
+Ersatz für `data/weiterleitungen.yaml`. Das Ledger löst die Kette auf den
+aktuellen Slug auf, lässt Befund-ID, Beanstandung und beide Fassungs-Hashes
+unverändert und zeigt `ursprungs_slug` in Akte und Zustand. Alte menschliche
+Entscheidungen bleiben auffindbar; eine spätere Textänderung öffnet sie wie
+bisher erneut. `publish_gate.fakten_befund_failures()` blockiert dadurch den
+aktuellen Kandidaten-Slug weiterhin. Ein Re-Dating schließt nichts.
+
+Alias und Artikel stehen im selben Finisher-Snapshot: Das katastrophale
+Rollback stellt beide gemeinsam wieder her. Bei einer anderen manuellen
+Ordner-Umbenennung muss die Redaktion den alten Slug ebenfalls in dieses Feld
+aufnehmen. Fehlt die Herkunft oder wurde die Seite wirklich gelöscht, bleibt
+die Schließweg-Wache absichtlich rot. Ungültige Listen, Selbstreferenzen,
+Schleifen, Kollisionen mit einem aktuellen Slug und ein Alias mit zwei
+Zielartikeln sind Werkzeugfehler – niemals ein stiller Abschluss.
+
 ```sh
 python3 scripts/faktenfrische.py --selftest
 python3 -m unittest scripts.tests.test_faktenfrische_robustheit
 python3 -m unittest scripts.tests.test_faktenfrische_befund_akte
+python3 -m unittest scripts.tests.test_faktenfrische_slug_identitaet
 python3 scripts/faktenfrische.py --offline --max 3
 ```
 
