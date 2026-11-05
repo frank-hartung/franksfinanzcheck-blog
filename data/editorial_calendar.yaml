@@ -1,5 +1,5 @@
-generated_at: '2026-11-04T11:33:50Z'
-start_date: '2026-11-05'
+generated_at: '2026-11-05T11:29:40Z'
+start_date: '2026-11-06'
 cadence: Mo/Mi/Fr · 2–3 Artikel/Tag (DAUERVORGABE)
 slots:
 - date: '2026-11-06'
@@ -97,89 +97,6 @@ slots:
 - date: '2026-11-16'
   weekday: Mon
   slot: 5
-  topic: Günstige Kredite für deine Finanzierung finden
-  pillar: konto-karten
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
-    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.
-
-    - [evergreen] Kontoeröffnung mit günstigen Gebühren
-
-    - [trending] Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
-    sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
-    inzwischen öfter als nur beim Kontowechsel.
-
-    - [niche_hook] Sparziel sichtbar machen: So bleiben deine Vorsätze im Alltag'
-- date: '2026-11-18'
-  weekday: Wed
-  slot: 6
-  topic: 'Wasserkosten senken: Wo im Haushalt das meiste verloren geht'
-  pillar: strom-sparen
-  source: topics
-  campaign: winter-energie-2026-27
-  cta: Jetzt Strom- & Gaspreise vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [evergreen] Heizperiode vorbereiten im Spätsommer
-
-    - [news] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu
-    an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.
-
-    - [viral_outlier] Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe
-
-    - [trending] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise
-    neu an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.'
-- date: '2026-11-20'
-  weekday: Fri
-  slot: 7
-  topic: 'Kleidung secondhand: Woran du gute Stücke erkennst'
-  pillar: frugalismus
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [evergreen] Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung
-
-    - [viral_outlier] Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht
-
-    - [pain_point] Frugalismus wird oft als reiner Verzicht missverstanden – dabei
-    geht es um bewussten Konsum, nicht um Askese.
-
-    - [trending] Ein jährlicher Vertrags-Check – Strom, Versicherung, Konto, Internet
-    an einem Nachmittag – deckt erfahrungsgemäß mehr Sparpotenzial auf als einzelne
-    spontane Wechsel übers Jahr verteilt.'
-- date: '2026-11-23'
-  weekday: Mon
-  slot: 8
-  topic: 5 einfache Schritte zum Aufbau eines Notgroschens
-  pillar: frugalismus
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [evergreen] Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung
-
-    - [viral_outlier] Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht
-
-    - [pain_point] Frugalismus wird oft als reiner Verzicht missverstanden – dabei
-    geht es um bewussten Konsum, nicht um Askese.
-
-    - [news] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
-    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
-    statt sie automatisch zu verlängern.'
-- date: '2026-11-25'
-  weekday: Wed
-  slot: 9
   topic: 5 Fehler beim Mietwagen-Buchen und wie du sie vermeidest
   pillar: mietwagen
   source: topics
@@ -198,6 +115,88 @@ slots:
     - [trending] Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
     sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
     inzwischen öfter als nur beim Kontowechsel.'
+- date: '2026-11-18'
+  weekday: Wed
+  slot: 6
+  topic: 'Elementarschadenversicherung: Warum sie zunehmend wichtiger wird'
+  pillar: versicherungen
+  source: topics
+  campaign: kfz-wechselsaison-2027
+  cta: Jetzt Kfz-Versicherung vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [news] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
+    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
+    statt sie automatisch zu verlängern.
+
+    - [trending] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
+    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
+    statt sie automatisch zu verlängern.
+
+    - [pain_point] Policen werden automatisch verlängert und Jahr für Jahr teurer
+    – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel.
+
+    - [evergreen] Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
+- date: '2026-11-20'
+  weekday: Fri
+  slot: 7
+  topic: 'Internetflat mit hoher Geschwindigkeit: Welche Anbieter bieten was?'
+  pillar: internet-dsl
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [viral_outlier] Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen
+
+    - [pain_point] Funklöcher in Wohnung oder Homeoffice nerven täglich – oft liegt
+    es nicht am Anbieter, sondern an Router und WLAN-Aufbau.
+
+    - [evergreen] Die besten DSL-Tarife für Zuhause und unterwegs
+
+    - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
+    Rechnung bleibt hoch, der Speed trotzdem mau.'
+- date: '2026-11-23'
+  weekday: Mon
+  slot: 8
+  topic: 'Sparziel sichtbar machen: So bleiben deine Vorsätze im Alltag'
+  pillar: konto-karten
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
+    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.
+
+    - [evergreen] Kontoeröffnung mit günstigen Gebühren
+
+    - [viral_outlier] Haushaltsbuch führen: App, Excel oder Papier?
+
+    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
+    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.'
+- date: '2026-11-25'
+  weekday: Wed
+  slot: 9
+  topic: 'Essensplan für die Woche: Weniger Spontankäufe, weniger Reste'
+  pillar: frugalismus
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [niche_hook] Weihnachtsbudget planen: Ohne Schulden durch die Feiertage
+
+    - [evergreen] Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung
+
+    - [viral_outlier] Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht
+
+    - [pain_point] Frugalismus wird oft als reiner Verzicht missverstanden – dabei
+    geht es um bewussten Konsum, nicht um Askese.'
 - date: '2026-11-27'
   weekday: Fri
   slot: 10
@@ -221,44 +220,40 @@ slots:
 - date: '2026-11-30'
   weekday: Mon
   slot: 11
-  topic: Kreditkarten mit attraktiven Prämien und Leistungen
-  pillar: konto-karten
+  topic: Internet-Tarife im Vergleich
+  pillar: internet-dsl
   source: topics
   campaign: null
   cta: Jetzt bei CHECK24 vergleichen
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
-    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.
+    - [trending] Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als
+    sie im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
+    als der reine Anbieterwechsel.
 
-    - [trending] Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der
-    genaue Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen
-    Monaten wieder fallen.
+    - [niche_hook] Günstige Internet-Tarife für Zuhause finden
 
-    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
-    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.
+    - [evergreen] Die besten DSL-Tarife für Zuhause und unterwegs
 
-    - [evergreen] Kontoeröffnung mit günstigen Gebühren'
+    - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
+    Rechnung bleibt hoch, der Speed trotzdem mau.'
 - date: '2026-12-02'
   weekday: Wed
   slot: 12
-  topic: 'Kaffeemaschine: Kapseln, Pulver oder Vollautomat im Vergleich'
-  pillar: strom-sparen
+  topic: Preiswerter DSL-Anschluss für Zuhause
+  pillar: internet-dsl
   source: topics
-  campaign: winter-energie-2026-27
-  cta: Jetzt Strom- & Gaspreise vergleichen
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
-    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
+    - [evergreen] Die besten DSL-Tarife für Zuhause und unterwegs
 
-    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
-    höher aus als erwartet – der Schock kommt mit der Heizperiode.
+    - [niche_hook] Günstige Internet-Tarife für Zuhause finden
 
-    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
-    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
+    - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
+    Rechnung bleibt hoch, der Speed trotzdem mau.
 
-    - [news] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu
-    an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.'
+    - [viral_outlier] Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen'

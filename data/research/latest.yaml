@@ -1,5 +1,5 @@
-generated_at: '2026-11-04T11:33:49Z'
-day: '2026-11-04'
+generated_at: '2026-11-05T11:29:40Z'
+day: '2026-11-05'
 mode: deterministic
 teams:
   trending:
@@ -252,60 +252,65 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: '5G-Router als DSL-Ersatz: Für wen sich der Wechsel lohnt'
+  - topic: Die besten Tarife für ein günstiges Handy-Abonnement
     pillar: internet-dsl
     signal: niche_hook
-    source: 'topics:5G-Router als DSL-Ersatz: Für wen sich der Wechsel lohnt'
+    source: topics:Die besten Tarife für ein günstiges Handy-Abonnement
     score: 0.55
     keywords:
-    - 5G Router
-    - DSL Alternative
-    - Mobilfunk statt DSL
-  - topic: 'Gäste-WLAN einrichten: So trennst du Besuch vom eigenen Netz'
-    pillar: internet-dsl
-    signal: niche_hook
-    source: 'topics:Gäste-WLAN einrichten: So trennst du Besuch vom eigenen Netz'
-    score: 0.55
-    keywords:
-    - Gäste WLAN
-    - WLAN Sicherheit
-    - Router einrichten
-  - topic: 'Homeoffice: So planst du die Leitung für zwei Arbeitsplätze'
-    pillar: internet-dsl
-    signal: niche_hook
-    source: 'topics:Homeoffice: So planst du die Leitung für zwei Arbeitsplätze'
-    score: 0.55
-    keywords:
-    - Homeoffice Internet
-    - Bandbreite Arbeitsplatz
-    - Leitung teilen
-  - topic: 'Risikolebensversicherung für Familien: Die richtige Summe finden'
-    pillar: versicherungen
-    signal: niche_hook
-    source: 'topics:Risikolebensversicherung für Familien: Die richtige Summe finden'
-    score: 0.55
-    keywords:
-    - Risikolebensversicherung
-    - Versicherungssumme berechnen
-    - Familie absichern
-  - topic: 'Seniorenkonto: Worauf es bei Kontoführung und Zugang ankommt'
+    - günstiges Handy-Abonnement
+    - Tarifvergleich
+    - Mobilfunk
+  - topic: 'Dispozinsen legal vermeiden: Die 3 besten Girokonten für den Kontowechsel'
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Seniorenkonto: Worauf es bei Kontoführung und Zugang ankommt'
+    source: 'topics:Dispozinsen legal vermeiden: Die 3 besten Girokonten für den Kontowechsel'
     score: 0.55
     keywords:
-    - Seniorenkonto
-    - Kontoführung Alter
-    - Bankzugang einfach
-  - topic: 'Sparziel sichtbar machen: So bleiben deine Vorsätze im Alltag'
+    - Girokonto Dispozins Vergleich
+    - Kontoführungsgebühren zurückfordern
+    - Kontowechsel Prämie
+    - Bestes Girokonto 2026
+  - topic: Günstige Internet-Tarife für Zuhause finden
+    pillar: internet-dsl
+    signal: niche_hook
+    source: topics:Günstige Internet-Tarife für Zuhause finden
+    score: 0.55
+    keywords:
+    - Internet-Tarife
+    - Zuhause
+    - Günstig
+  - topic: 'Heizsaison 2026/27: Warum der Gasanbieter-Wechsel im Oktober am lukrativsten
+      ist'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Heizsaison 2026/27: Warum der Gasanbieter-Wechsel im Oktober am
+      lukrativsten ist'
+    score: 0.55
+    keywords:
+    - Heizperiode Beginn
+    - Gastarife vergleichen Oktober
+    - Neukundenbonus Gas
+    - Heizkosten senken Winter
+  - topic: Kreditkarten mit guten Leistungen
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Sparziel sichtbar machen: So bleiben deine Vorsätze im Alltag'
+    source: topics:Kreditkarten mit guten Leistungen
     score: 0.55
     keywords:
-    - Sparziel
-    - Vorsätze durchhalten
-    - Motivation sparen
+    - Kreditkarte
+    - Leistungen
+    - Vorteile
+  - topic: 'Weihnachtsbudget planen: Ohne Schulden durch die Feiertage'
+    pillar: frugalismus
+    signal: niche_hook
+    source: 'topics:Weihnachtsbudget planen: Ohne Schulden durch die Feiertage'
+    score: 0.55
+    keywords:
+    - Weihnachten Budget planen
+    - Weihnachten sparen
+    - Geschenkebudget
+    - Weihnachten ohne Schulden
 live_web:
   enabled: false
   findings: []
