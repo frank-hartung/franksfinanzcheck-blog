@@ -1,4 +1,21 @@
-# Nur tatsächlich veröffentlichte, nachprüfbare Belege eintragen.
-# `kind`: editorial_link | media_mention | interview | cooperation
-# Eigene Social-Posts, Verzeichnisse und Affiliate-Platzierungen zählen nicht.
+# Evidenzregister für externe Autorität – jede Zeile ist ein prüfbarer Beleg.
+#
+# Schema (Wache: scripts/authority_engine.py, Runbook: docs/AUTORITAET-DISTRIBUTION-RUNBOOK.md):
+#   id         eindeutig, stabil (z. B. medium-slug-2026-10)
+#   kind       editorial_link | media_mention | interview | cooperation
+#   title      Titel des Beitrags/Formats (Pflicht)
+#   publisher  Herausgeber/Medium (Pflicht – ohne Absender kein Beleg)
+#   url        öffentliche https-URL des externen Belegs (Pflicht)
+#   published  Veröffentlichungsdatum YYYY-MM-DD (Pflicht)
+#   target     optionale eigene Zielseite (muss auf franksfinanzcheck.de zeigen)
+#   rel        z. B. editorial (optional)
+#
+# Abgewiesen werden: eigene Domain (franksfinanzcheck.de), Tracking-Parameter
+# (utm_*, gclid, fbclid, mc_cid …), fehlender Herausgeber/Titel, ungültige Daten
+# und dieselbe URL als zweiter Beleg.
+#
+# Zählt NICHT: eigene Social-Posts, Verzeichnisse, Presseportale ohne redaktionelle
+# Auswahl, gekaufte Links, Linktausch, Affiliate-Platzierungen.
+# Unbekannt bleibt unbekannt: Ein leeres Register heißt „kein Beleg eingetragen“ –
+# der Radar behauptet dann weder Wirkung noch Reichweite.
 evidence: []

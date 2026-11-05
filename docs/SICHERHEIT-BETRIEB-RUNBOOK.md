@@ -137,7 +137,10 @@ jeder Schritt den nächsten belegt:
    Nur der vollständige erfolgreiche Live-Job schließt #972. Die Warnung
    „Produktions-Environment“ bleibt danach als #922-Nachweis bestehen, bis
    der Bypass-Schalter im Dashboard steht; sie ist keine Live-Sicherheits-
-   Abweichung, sondern die Vorbedingung für den nächsten Deploy.
+   Abweichung, sondern die Vorbedingung für den nächsten Deploy. Seit dem
+   05.11.2026 stehen Diagnose und nächster Schritt als erste Annotationen
+   des Auswerte-Schritts (F5) – ein roter Lauf ist damit ohne Log-Download
+   und ohne Artefakt lesbar.
 
 ---
 
@@ -932,6 +935,63 @@ Melder selbst ist. Zwei Titel, zwei Räte, ein Werkzeug.
 **Die Reihenfolge der Reparatur, wenn beides rot ist:** erst den Kanal heilen
 (F3: eine Fassung, `node --check`), dann den Deploy-Zugang (A4/D2). Solange der
 Melder tot ist, ist jede andere Meldung nur zufällig zu sehen – auch diese.
+
+### F5 · Zehn Zeilen pro Schritt: der Rat darf nicht die elfte sein
+(WF-E813 / #972, 05.11.2026)
+
+**Gemessen, nicht vermutet:** Im Live-Lauf
+[42044923993](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/42044923993)
+trug der Schritt „Sicherheits-Header auswerten (F-01)“ genau zehn
+`failure`-Annotationen – fünf fehlende Pflicht-Header auf `/` und fünf auf
+`/methodik/`. Die elfte Zeile mit der Proxy-Diagnose und dem nächsten Schritt
+fehlte im Check-Run. Sie war gesendet worden: `sicherheits_nachweis.py`
+schrieb sie nach die Befundliste. GitHub zeigt aber höchstens **zehn
+Annotationen je Ebene und Schritt** (50 je Job) und behält die ersten zehn;
+alles danach verfällt ohne Hinweis. Ausgerechnet die Meldung #972 verwies mit
+„Die Header-Annotation nennt die Diagnose“ auf genau diese unsichtbare Zeile.
+Ein Alarm, der auf eine Nachricht zeigt, die es nicht gibt, ist schlimmer als
+ein Alarm ohne Rat: Er schickt den Menschen ins Log, wo der Rat nicht steht.
+
+Dieselbe Zahl erklärt einen zweiten, bisher unbenannten Verlust: In den Läufen
+`41470449168`, `41844410291` und `42044923993` hatten drei Schritte Exit 1,
+aber nur **zwei** Runner-Zeilen „Process completed with exit code 1.“. Dem
+F-01-Schritt mit seinen zehn eigenen Fehlerzeilen fehlte die seine. Der
+Runner meldet also im selben Budget – wer zehn eigene Zeilen sendet, nimmt
+dem Runner die letzte. Für rot endende Melder bleiben deshalb **neun** Zeilen
+(`MELDE_BUDGET_ROT`), die zehnte ist reserviert.
+
+**Die Heilung hat drei Teile, alle mit Gegenprobe:**
+
+| Teil | Wo | Wirkung |
+|---|---|---|
+| `annotationsplan()` | `scripts/github_kommando.py` | Ein gemeinsamer, rein rechnender Meldeplan: Pflichtzeilen zuerst, Einzelbefunde danach, eine Sammelzeile mit der Anzahl der entfallenen Zeilen. Nie mehr als das Budget; für rot endende Schritte neun Zeilen plus Runner-Reserve. Ohne Sammelzeile darf nichts still entfallen (`ValueError`). |
+| `diagnose` im Mess-JSON | `scripts/blog_header_gate.py` | Die Proxy-Lage stand bisher nur im Markdown-Bericht. Der Auswerte-Schritt liest JSON; jetzt trägt ein belegter BEFUND die Diagnose als eigenes Feld. STOERUNG und OK erfinden keine. |
+| Priorität im Auswerte-Schritt | `scripts/sicherheits_nachweis.py` | Diagnose und nächster Schritt stehen vor den Einzelbefunden; die vollständige Liste bleibt unverändert in der Lauf-Zusammenfassung und im Artefakt `sicherheits-live-nachweis`. Gekappt wird die Fassade, nie der Nachweis. |
+
+`scripts/layout_annotations.py` hatte dieselbe Lücke auf andere Art: zehn
+Befunde **plus** ein „+N weitere“-Hinweis ergaben elf Zeilen, von denen
+ausgerechnet der Hinweis verfiel. Es nutzt jetzt denselben Meldeplan – mit
+zehn Zeilen, denn dieser Schritt endet auch mit Fehlerbefunden auf Exit 0 und
+bekommt keine Runner-Zeile. Damit gilt die Plattformgrenze im Repository an
+einer Stelle, nicht in mehreren Köpfen.
+
+**Nachfahren ohne Netz** (Nachbau des Laufs mit einer Antwort ohne
+Sicherheits-Header, aber mit `cf-ray`):
+
+```bash
+python3 -m unittest scripts.tests.test_sicherheits_nachweis scripts.tests.test_github_kommando scripts.tests.test_blog_header_gate scripts.tests.test_layout_annotations
+python3 scripts/sicherheits_nachweis.py --selftest
+```
+
+Die Regression `test_zehn_f01_befunde_verdraengen_diagnose_und_schritt_nicht`
+baut genau zehn Funde und prüft die **gesendeten** `::error::`-Zeilen, nicht
+nur den Bericht. Die Gegenproben decken 0–40 Befunde, fehlende Sammelzeile,
+leere Pflichtzeilen und falsche Platzhalter ab.
+
+**Grenze:** Das ändert keinen einzigen Header und keinen Worker-Deploy. Es
+macht den täglichen Befund lesbar; die beiden Inhaber-Aufgaben aus A1 und
+A1b bleiben davon unberührt. #972 bleibt offen, bis der vollständige
+Live-Nachweis vorliegt.
 
 ---
 

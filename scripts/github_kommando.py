@@ -72,6 +72,20 @@ BENUTZUNG
 
 `annotation()` gibt zurück, ob ein Workflow-Kommando gesendet wurde. Der
 Rückgabewert ist die einzige ehrliche Auskunft darüber – nicht das Log.
+
+DAS ZEHN-ZEILEN-LIMIT (WF-E813 / #972, 05.11.2026)
+--------------------------------------------------
+GitHub zeigt pro Schritt höchstens **10 Annotationen je Ebene** (und 50 je
+Job); alles danach wird ohne jeden Hinweis verworfen – die ersten zehn
+überleben. Im Live-Lauf `42044923993` standen bei F-01 genau zehn fehlende
+Kopfzeilen als `::error::`-Zeilen. Die elfte Zeile trug die Proxy-Diagnose
+und den nächsten Schritt. Sie fehlte im Check-Run, obwohl der Auswerte-Schritt
+sie gesendet hatte und die Meldung #972 ausdrücklich auf „die Header-
+Annotation“ verwies. Ein Rat, der auf eine unsichtbare Zeile zeigt, ist
+keiner. `annotationsplan()` ist der gemeinsame, rein rechnende Weg: Pflicht-
+zeilen zuerst, Befunde danach, eine Sammelzeile für den Rest, nie mehr als
+zehn. Die vollständige Liste bleibt ohnehin in der Lauf-Zusammenfassung und
+im Artefakt – gekappt wird nur die Fassade, nicht der Nachweis.
 """
 from __future__ import annotations
 
@@ -80,6 +94,20 @@ import sys
 from typing import Mapping
 
 EBENEN = ("error", "warning", "notice")
+
+# Plattformgrenze, nicht Hausregel: 10 je Ebene und Schritt, 50 je Job.
+# Quelle: GitHub-Workflow-Kommandos; gemessen in Lauf 42044923993 (05.11.2026),
+# wo die 11. Fehler-Annotation eines Schritts verschwand.
+ANNOTATIONEN_PRO_SCHRITT = 10
+ANNOTATIONEN_PRO_JOB = 50
+# Ein Schritt, der mit Exit 1 endet, bekommt vom Runner eine EIGENE
+# Fehler-Annotation („Process completed with exit code 1."). Sie zählt in
+# dasselbe Budget: In den Läufen 41470449168, 41844410291 und 42044923993
+# hatte der F-01-Schritt je zehn eigene Fehlerzeilen und KEINE Runner-Zeile,
+# während die beiden anderen roten Schritte sie trugen. Für rot endende
+# Melder bleiben deshalb neun Zeilen – die zehnte gehört dem Runner.
+RESERVE_LAUF_FEHLER = 1
+MELDE_BUDGET_ROT = ANNOTATIONEN_PRO_SCHRITT - RESERVE_LAUF_FEHLER
 
 # Runner, die dieses Repo benutzt. Wer hier steht, färbt keinen Lauf.
 TEST_RUNNER = ("unittest", "pytest")
@@ -118,6 +146,49 @@ def kommando(ebene: str, text: object, *, datei: object | None = None,
         eigenschaften.append(f"title={_eigenschaft(titel)}")
     kopf = "::" + ebene + ((" " + ",".join(eigenschaften)) if eigenschaften else "") + "::"
     return kopf + _prozent(text)
+
+
+def annotationsplan(befunde, *, kopf=(), sammelzeile=None,
+                    budget: int = ANNOTATIONEN_PRO_SCHRITT) -> list[str]:
+    """Plant Annotationen innerhalb der Plattformgrenze – rein rechnend.
+
+    ``kopf`` sind Pflichtzeilen (Diagnose, nächster Schritt). Sie stehen vorn
+    und überleben immer. ``befunde`` sind die einzeln sichtbaren Abweichungen.
+    Müssen welche entfallen, benennt ``sammelzeile`` ihre Anzahl; der Platz
+    dafür wird vorher reserviert. ``sammelzeile`` darf ``{anzahl}`` enthalten.
+
+    Ohne Sammelzeile darf nichts entfallen: stilles Verwerfen ist genau der
+    Fehler, den diese Funktion verhindert – dann wird ``ValueError`` gemeldet.
+    Die Rückgabe sind unkodierte Texte; das Senden bleibt `annotation()`.
+    """
+    if not isinstance(budget, int) or isinstance(budget, bool) or budget < 1:
+        raise ValueError("Budget muss eine positive ganze Zahl sein.")
+    if sammelzeile is not None and not str(sammelzeile).strip():
+        raise ValueError("Eine leere Sammelzeile würde den Verlust erneut verschweigen.")
+    if budget > ANNOTATIONEN_PRO_SCHRITT:
+        raise ValueError("Mehr als zehn Annotationen je Ebene und Schritt zeigt GitHub nicht.")
+    pflicht = [str(text) for text in kopf if str(text).strip()]
+    liste = [str(text) for text in befunde if str(text).strip()]
+    if len(pflicht) >= budget:
+        raise ValueError("Pflichtzeilen allein füllen das Budget bereits aus.")
+    platz = budget - len(pflicht)
+    sichtbar = liste[:platz]
+    rest = len(liste) - len(sichtbar)
+    if not rest:
+        # Kein Verlust: Die Reserve wird nur belegt, wenn sie gebraucht wird.
+        # Zehn Befunde ohne Pflichtzeilen bleiben dann vollständig sichtbar.
+        return pflicht + sichtbar
+    if sammelzeile is None:
+        raise ValueError("Befunde würden ohne Sammelzeile still entfallen.")
+    # Erst jetzt den Platz für die Sammelzeile abziehen; die Zahl steigt um
+    # genau die Zeilen, die dadurch zusätzlich entfallen.
+    sichtbar = sichtbar[:-1] if sichtbar else []
+    rest = len(liste) - len(sichtbar)
+    try:
+        hinweis = str(sammelzeile).format(anzahl=rest)
+    except (KeyError, IndexError, ValueError) as fehler:
+        raise ValueError("Sammelzeile muss {anzahl} oder keinen Platzhalter enthalten.") from fehler
+    return pflicht + sichtbar + [hinweis]
 
 
 def aktiv(umgebung: Mapping[str, str] | None = None,
