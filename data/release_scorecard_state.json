@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-05T13:39:52Z",
+  "generated_at": "2026-11-05T15:35:50Z",
   "modus": "kandidaten",
-  "commit": "c5ea497030107244560c0f6382905f36f1318c9b",
+  "commit": "4c700fb01c308104c1563242f4adaa4d001e491d",
   "kapazitaet": {
     "stichtag": "2026-11-05",
     "artikel": 114,
@@ -98,7 +98,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": {
@@ -388,7 +388,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
@@ -406,7 +406,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
@@ -449,7 +449,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
