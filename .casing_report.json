@@ -1,31 +1,31 @@
 {
- "stand": "2026-11-04T16:09:00Z",
+ "stand": "2026-11-05T13:29:46Z",
  "modus": "fix · Bestand · +Pinterest-Plan",
  "dateien": 3,
- "gepruefte_dateien": 118,
- "woerter": 218573,
- "erkannte_befunde": 16,
- "befunde": 16,
+ "gepruefte_dateien": 119,
+ "woerter": 219540,
+ "erkannte_befunde": 7,
+ "befunde": 5,
  "hart": 0,
- "gefixt": 0,
+ "gefixt": 2,
  "geparkt": [],
  "dateien_liste": [
   {
-   "pfad": "content/posts/2026-11-01-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/index.md",
-   "erkannte_befunde": 5,
-   "befunde": 5,
-   "woerter": 1714
+   "pfad": "content/posts/2026-08-10-dsl-wechselbonus-sichern/index.md",
+   "erkannte_befunde": 1,
+   "befunde": 0,
+   "woerter": 2122
   },
   {
-   "pfad": "content/posts/2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu/index.md",
+   "pfad": "content/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/index.md",
    "erkannte_befunde": 1,
-   "befunde": 1,
-   "woerter": 2184
+   "befunde": 0,
+   "woerter": 1944
   },
   {
    "pfad": "content/posts/2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen/index.md",
-   "erkannte_befunde": 10,
-   "befunde": 10,
+   "erkannte_befunde": 5,
+   "befunde": 5,
    "woerter": 890
   }
  ]
