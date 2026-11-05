@@ -18,8 +18,10 @@ from blog_header_gate import ZIELE
 
 try:  # direkter Aufruf: scripts/ liegt auf dem Modulpfad
     from github_kommando import annotation as annotation
+    from github_kommando import annotationsplan, MELDE_BUDGET_ROT
 except ImportError:  # Import als Paket (Tests: from scripts import ...)
     from scripts.github_kommando import annotation as annotation
+    from scripts.github_kommando import annotationsplan, MELDE_BUDGET_ROT
 
 LIVE_JOB = "Live-Messung (täglich und auf Zuruf)"
 HEADER_MESSUNG = "Sicherheits-Header der echten Seite messen (F-01)"
@@ -68,6 +70,12 @@ def pruefe_messung(daten: dict, quelle: str, code: str) -> None:
     if not isinstance(blocker, list) or not all(
             isinstance(wert, str) and wert.strip() for wert in blocker):
         raise NachweisFehler("Abschlussblocker haben ein ungültiges Format.")
+    # Optionale, messungsbelegte Diagnose (F-01: Proxy-Lage). Sie ist die
+    # Pflichtzeile der Annotation – ein leeres Feld bedeutet „nicht belegt",
+    # nie ein Freibrief, sie zu erfinden. Alte Artefakte bleiben lesbar.
+    diagnose = daten.get("diagnose", "")
+    if not isinstance(diagnose, str) or (diagnose and not diagnose.strip()):
+        raise NachweisFehler("Diagnosefeld hat ein ungültiges Format.")
     if not isinstance(daten.get("bericht"), str) or not daten["bericht"].strip():
         raise NachweisFehler("Lesbarer Messbericht fehlt.")
     if not isinstance(daten.get("naechster_schritt"), str):
@@ -99,6 +107,41 @@ def zusammenfassung(text: str) -> None:
             ausgabe.write(text + "\n\n")
 
 
+def annotationszeilen(name: str, klasse: str, daten: dict) -> list[str]:
+    """Sendeliste innerhalb der Zehn-Zeilen-Grenze je Ebene und Schritt.
+
+    WF-E813 / #972 (05.11.2026): Im Live-Lauf `42044923993` standen bei F-01
+    zehn fehlende Kopfzeilen als Fehler-Annotationen. Die elfte Zeile – die
+    Proxy-Diagnose und der nächste Schritt – wurde von GitHub still verworfen,
+    obwohl die Meldung #972 genau auf sie verwies. In denselben drei Läufen
+    fehlte außerdem die Runner-Zeile „Process completed with exit code 1.“
+    dieses Schritts: Auch sie zählt in das Zehner-Budget. Deshalb bleiben
+    neun eigene Zeilen; Diagnose und Handlungsempfehlung stehen VOR den
+    Einzelbefunden, und die Anzahl der nur in Zusammenfassung/Artefakt
+    sichtbaren Zeilen wird ausdrücklich genannt. Gekappt wird die Fassade,
+    nie der Nachweis.
+    """
+    kopf = f"{name} {klasse}: "
+    pflicht = []
+    diagnose = (daten.get("diagnose") or "").strip()
+    if diagnose:
+        pflicht.append(kopf + "Diagnose: " + diagnose)
+    schritt = daten["naechster_schritt"]
+    if schritt:
+        pflicht.append(kopf + schritt)
+    liste = daten["fehlend"] if klasse == "BEFUND" else daten["stoerung"]
+    befunde = [kopf + grund for grund in liste]
+    sammel = (f"{kopf}{{anzahl}} weitere einzeln belegte Abweichungen – "
+              "vollständig in der Lauf-Zusammenfassung und im Artefakt "
+              "`sicherheits-live-nachweis`; aus dem Nachweis fällt nichts, "
+              "nur aus der zehnzeiligen Fassade.")
+    # Neun eigene Zeilen: die zehnte gehört der Runner-Annotation, die ein
+    # rot endender Schritt automatisch erzeugt. Sonst verschwindet genau sie
+    # (belegt in drei Live-Läufen, siehe github_kommando.RESERVE_LAUF_FEHLER).
+    return annotationsplan(befunde, kopf=pflicht, sammelzeile=sammel,
+                           budget=MELDE_BUDGET_ROT)
+
+
 def auswerten(quelle: str, code: str, datenpfad: str, berichtpfad: str) -> int:
     name = "F-01" if quelle == "header" else "Worker"
     try:
@@ -124,12 +167,10 @@ def auswerten(quelle: str, code: str, datenpfad: str, berichtpfad: str) -> int:
         else:
             annotation("notice", f"{name} grün: vollständig gemessen, Details siehe Zusammenfassung.")
         return 0
-    # Jede Abweichung ist über die Checks-API sichtbar, auch ohne Log-Download.
-    liste = daten["fehlend"] if klasse == "BEFUND" else daten["stoerung"]
-    for grund in liste:
-        annotation("error", f"{name} {klasse}: {grund}")
-    if daten["naechster_schritt"]:
-        annotation("error", f"{name} {klasse}: {daten['naechster_schritt']}")
+    # Jede Abweichung ist über die Checks-API sichtbar, auch ohne Log-Download –
+    # aber nur innerhalb der Zehn-Zeilen-Grenze und mit gesicherter Diagnose.
+    for zeile in annotationszeilen(name, klasse, daten):
+        annotation("error", zeile)
     return 1
 
 
@@ -211,7 +252,17 @@ def selftest() -> int:
         except NachweisFehler:
             continue
         raise AssertionError(f"Ungültiger Messnachweis akzeptiert: {aenderung}")
-    print("✅ SELBSTTEST OK — Live-Abschluss, übersprungene Schritte und widersprüchliche Messnachweise erkannt.")
+    # #972 (05.11.2026): Zwölf Befunde dürfen Diagnose und nächsten Schritt
+    # nicht aus der zehnzeiligen Fassade drängen.
+    viele = {**daten, "exit": 1, "klasse": "BEFUND",
+             "fehlend": [f"Befund {i}" for i in range(12)],
+             "diagnose": "Proxy aktiv", "naechster_schritt": "Regel A1 prüfen"}
+    zeilen = annotationszeilen("F-01", "BEFUND", viele)
+    assert len(zeilen) <= MELDE_BUDGET_ROT, "Neun eigene Zeilen, die zehnte gehört dem Runner"
+    assert any("Proxy aktiv" in z for z in zeilen[:2]), "Diagnose muss überleben"
+    assert any("Regel A1 prüfen" in z for z in zeilen[:2]), "Nächster Schritt muss überleben"
+    assert any("weitere" in z for z in zeilen), "Der Verlust muss benannt sein"
+    print("✅ SELBSTTEST OK — Live-Abschluss, übersprungene Schritte, widersprüchliche Messnachweise und die Zehn-Zeilen-Grenze erkannt.")
     return 0
 
 

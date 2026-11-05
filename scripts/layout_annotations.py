@@ -31,9 +31,17 @@ import json
 import os
 import sys
 
+try:  # direkter Aufruf aus dem Workflow: scripts/ liegt auf dem Modulpfad
+    from github_kommando import ANNOTATIONEN_PRO_SCHRITT, annotationsplan
+except ImportError:  # Import als Paket (Tests: from scripts import ...)
+    from scripts.github_kommando import ANNOTATIONEN_PRO_SCHRITT, annotationsplan
+
 DEFAULT_DOM = os.path.join(".cache", "layout", "dom-audit.json")
 DEFAULT_BROWSER = "/tmp/browser-audit.json"
-MAX_ANNOTATIONS = 10
+# Plattformgrenze je Ebene und Schritt. Früher standen hier 10 Befunde PLUS
+# ein Rest-Hinweis – also 11 Zeilen, von denen GitHub die wichtigste (den
+# Hinweis) still verwarf. `annotationsplan()` reserviert den Platz dafür.
+MAX_ANNOTATIONS = ANNOTATIONEN_PRO_SCHRITT
 
 
 def escape(text: str) -> str:
@@ -127,16 +135,17 @@ def report(dom: dict, browser: dict, max_annotations: int = MAX_ANNOTATIONS,
     errors += b_errors
     warnings += b_warnings
 
-    for message in errors[:max_annotations]:
-        emit("error", "Layout-Audit: " + message, out)
-    if len(errors) > max_annotations:
-        emit("error", f"Layout-Audit: +{len(errors) - max_annotations} weitere "
-                      "kritische Befunde (siehe LAYOUT-REPORT.md)", out)
-    for message in warnings[:max_annotations]:
-        emit("warning", "Layout-Audit (Frühwarnung): " + message, out)
-    if len(warnings) > max_annotations:
-        emit("warning", f"Layout-Audit: +{len(warnings) - max_annotations} weitere "
-                        "Frühwarnungen (siehe LAYOUT-REPORT.md)", out)
+    budget = min(max_annotations, ANNOTATIONEN_PRO_SCHRITT)
+    for message in annotationsplan(
+            ["Layout-Audit: " + text for text in errors],
+            sammelzeile="Layout-Audit: +{anzahl} weitere kritische Befunde "
+                        "(siehe LAYOUT-REPORT.md)", budget=budget):
+        emit("error", message, out)
+    for message in annotationsplan(
+            ["Layout-Audit (Frühwarnung): " + text for text in warnings],
+            sammelzeile="Layout-Audit: +{anzahl} weitere Frühwarnungen "
+                        "(siehe LAYOUT-REPORT.md)", budget=budget):
+        emit("warning", message, out)
     emit("notice", summary_notice(dom, browser), out)
 
     if errors:
