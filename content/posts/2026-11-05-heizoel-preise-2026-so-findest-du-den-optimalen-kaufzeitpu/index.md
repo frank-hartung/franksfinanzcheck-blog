@@ -4,6 +4,8 @@ description: Heizöl Preise schwanken stark. Erfahre, wann du Heizöl bestellen 
 date: 2026-11-05T11:21:46Z
 draft: true
 reserve: true
+faktenfrische_aliases:
+  - "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu"
 lastmod: 2026-11-05
 redaktionelle_pruefung:
   risikoklasse: "erhoeht"
