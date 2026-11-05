@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-05T13:08:13Z",
-  "modus": "live",
-  "commit": "0f8d32597a9571f22925a49d589def8fc8e5cd67",
+  "generated_at": "2026-11-05T15:35:50Z",
+  "modus": "kandidaten",
+  "commit": "4c700fb01c308104c1563242f4adaa4d001e491d",
   "kapazitaet": {
     "stichtag": "2026-11-05",
     "artikel": 114,
@@ -84,7 +84,7 @@
   },
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
-      "sha256": "fed1914c68dba5964105724e6c74567c9a1bb0598368d19a1c70124932e8bc86",
+      "sha256": "0a9c47ec2d3105d826f129e1c3311c1bc97cb74290597d4d6df9314ff4947049",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -374,7 +374,7 @@
       "checks": []
     },
     "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
-      "sha256": "a3398e2ccc529356600b623e91a80272e104604caf48d19d84156164bf93bfd6",
+      "sha256": "54d443304c106c37fd2b895ee84d492207b7cc244e79188f3dad0ad3b8d60749",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -392,7 +392,7 @@
       "checks": []
     },
     "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
-      "sha256": "f7f1b65d5949702b7c570dffc44062c9ee8d9fcf124802d7dd221d29517f8942",
+      "sha256": "aba22011758336811f9497dabb94968611cb44d9af805241b9479e4d9e2914cc",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -435,7 +435,7 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "dbbf33ed3fd409fa432695800675c561162e7e1312cb11b27ae7ccf0134b2e92",
+      "sha256": "f541df65178959971f2cdf66376ff0a8dea187b089f62a428200315a339a7889",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -683,7 +683,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-20",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -726,7 +726,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-20",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",

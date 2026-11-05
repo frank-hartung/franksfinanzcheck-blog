@@ -1,4 +1,4 @@
-# Authority-Radar – 2026-10-05
+# Authority-Radar – 2026-11-05
 
 > Belegt externe Autorität, Distribution und Audience-Kennzahlen. Unbekannt bleibt unbekannt: `null` ist niemals `0`.
 
@@ -6,8 +6,8 @@
 
 ## Handlungsqueue
 
-- **P2:** Für 2026-10 fehlt der aggregierte GSC-Import (inklusive Markensuche).
-- **P2:** Für 2026-10 fehlen Newsletter-, Retention- und Conversion-Aggregate.
+- **P2:** Für 2026-11 fehlt der aggregierte GSC-Import (inklusive Markensuche).
+- **P2:** Für 2026-11 fehlen Newsletter-, Retention- und Conversion-Aggregate.
 
 ## Belegte externe Signale
 

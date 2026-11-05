@@ -1,0 +1,80 @@
+{
+  "frage": "Welche gesetzlichen Kündigungsfristen gelten aktuell für Verbraucherverträge in Deutschland?",
+  "zeitpunkt": "2026-11-05T13:29:09Z",
+  "abrufdatum": "2026-11-05",
+  "begriffe": [
+    "gesetzlichen",
+    "kündigungsfristen",
+    "gelten",
+    "verbraucherverträge"
+  ],
+  "suche": {
+    "anbieter": "searxng",
+    "versuche": [
+      {
+        "anbieter": "searxng",
+        "ergebnis": "treffer",
+        "hinweis": "12 Ergebnisse"
+      }
+    ],
+    "anzahl": 12
+  },
+  "belege": [],
+  "verworfen": [
+    {
+      "url": "https://www.schuldnerberatung.de/verbrauchervertrag/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.anwalt.org/kuendigung/kuendigungsfristen/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.bundesverbraucherhilfe.de/ratgeber/laufzeitvertraege-kuendigen-kuendigungsbutton/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.ihk.de/hagen/recht/rechtsthemen/gesetz-fuer-verbrauchervertraege-5562054",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://easyrechtssicher.de/blog/gesetz-fuer-faire-verbrauchervertraege",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.rain-brandt.de/%F0%9F%93%85-kuendigungsfrist-nur-noch-1-monat-was-verbraucher-jetzt-zu-abovertraegen-wissen-muessen/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.bmjv.de/SharedDocs/Meldungen/DE/2022/0228_faire_Verbrauchervertraege.html",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.ihk-muenchen.de/ratgeber/recht/vertragsrecht/vertragskuendigung/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://smartvertragscheck.de/ratgeber/kuendigungsfristen",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://deutschland-vorlagen.de/ratgeber/kuendigungsfristen-uebersicht/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.swr.de/leben/verbraucher/ard-marktcheck/abo-verbraucher-vertrag-kuendigen-frist-form-handy-strom-gas-100.html",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.verbraucherzentrale.de/wissen/vertraege-reklamation/kundenrechte/gesetz-fuer-fairere-vertraege-mehr-schutz-bei-kosten-und-laufzeiten-55274",
+      "grund": "keine Passage mit Bezug zur Frage"
+    }
+  ],
+  "antwort": {
+    "weg": "extraktiv",
+    "text": "",
+    "aussagen": [],
+    "hinweis": "Keine belegfähige Fundstelle."
+  },
+  "browser_beweis": []
+}

@@ -1,0 +1,163 @@
+{
+  "frage": "Was ist die aktuelle Rechtslage zu Kontoführungsgebühren und Zustimmungsfiktion bei Banken?",
+  "zeitpunkt": "2026-11-05T13:29:16Z",
+  "abrufdatum": "2026-11-05",
+  "begriffe": [
+    "aktuelle",
+    "rechtslage",
+    "kontoführungsgebühren",
+    "zustimmungsfiktion",
+    "banken"
+  ],
+  "suche": {
+    "anbieter": "searxng",
+    "versuche": [
+      {
+        "anbieter": "searxng",
+        "ergebnis": "treffer",
+        "hinweis": "12 Ergebnisse"
+      }
+    ],
+    "anzahl": 12
+  },
+  "belege": [
+    {
+      "url": "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/bgh-konkretisiert-erstattungsansprueche-bei-girokonten-60926",
+      "titel": "BGH konkretisiert Erstattungsansprüche bei Girokonten | ...",
+      "domain": "verbraucherzentrale.de",
+      "herausgeber": "Verbraucherzentrale",
+      "rang": 2,
+      "leseweg": "jina",
+      "abgerufen_am": "2026-11-05",
+      "passagen": [
+        {
+          "satz": "Im April 2021 [urteilte der BGH zugunsten des Verbraucherzentrale Bundesverbandes (vzbv)](https://www.verbraucherzentrale.de/aktuelle-meldungen/geld-versicherungen/bghurteil-postbank-kann-zustimmung-nicht-uneingeschraenkt-einholen-59807 \"Zum Artikel über das BGH-Urteil zu den Bankklauseln\") und erklärte die Klausel in den AGB der Postbank für unwirksam.",
+          "punkte": 19,
+          "deckung": 1
+        },
+        {
+          "satz": "Juni 2025 Viele Banken haben in den letzten Jahren auf Basis einer unwirksamen AGB-Klausel Gebühren erhoben oder ihre Kontomodelle geändert.",
+          "punkte": 14,
+          "deckung": 1
+        },
+        {
+          "satz": "März 2024 in einer Musterfeststellungsklage die einseitigen Gebührenerhöhungen der Berliner Sparkasse für unwirksam. ## Musterfeststellungsklage gegen die Berliner Sparkasse und die Sparkasse KölnBonn Der Verbraucherzentrale Bundesverband hat gegen die obengenannten Banken Musterfeststellungsklage eingereicht, da diese sich bislang weigern, unrechtmäßig erhobene Gebühren zurückzuzahlen.",
+          "punkte": 14,
+          "deckung": 1
+        },
+        {
+          "satz": "Dies war aber bis etwa 2021 das gängige Verfahren bei Banken und Sparkassen. **Für einen Erstattungsanspruch dürfen Sie einer Preiserhöhung also nicht aktiv zugestimmt haben.** ## Was ist bei der Verjährung zu beachten?",
+          "punkte": 14,
+          "deckung": 1
+        }
+      ],
+      "browser_belegt": true
+    }
+  ],
+  "verworfen": [
+    {
+      "url": "https://www.vzhh.de/themen/finanzen/konto-karte/muss-ich-den-bedingungen-preisen-meiner-bank-zustimmen",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.fachanwalt.de/ratgeber/bgh-erklaert-automatische-zustimmung-zu-kontofuehrungsentgelten-fuer-unwirksam",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://jurawelt.com/kontofuehrungsgebuehren-zurueckfordern-bgh-staerkt-verbraucherrechte/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.bankrecht-ratgeber.de/bankrecht/girokonto/unzulaessige-kontofuehrungsgebuehren-rueckerstattung-2026",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.finanzwende.de/verbraucherberatung/geldanlage-nachhaltigkeit/bankgebuehren-aerger-statt-geld-zurueck",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.lto.de/recht/nachrichten/n/xizr13923-bgh-banken-kontogebuehren-rueckzahlung",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.vergleich.de/kontofuehrungsgebuehren.html",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.umsgeld.de/ratgeber/kontogebuehren-zurueckfordern-2026/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://rechtsanwaltkaufmann.de/bank-und-kapitalmarktrecht/bankgebuehren-zurueckfordern",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.bundesgerichtshof.de/SharedDocs/Pressemitteilungen/DE/2025/2025102.html",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.tagesschau.de/wirtschaft/verbraucher/bgh-urteil-kontofuehrungsgebuehren-100.html",
+      "grund": "keine Passage mit Bezug zur Frage"
+    }
+  ],
+  "antwort": {
+    "weg": "groq",
+    "text": "Der Bundesgerichtshof hat im April 2021 entschieden, dass Klauseln, die Banken eine pauschale Zustimmung des Kunden zu Kontoführungsgebühren einräumen, unwirksam sind [1]. Banken dürfen demnach nicht einfach davon ausgehen, dass der Kunde einer Gebührenerhöhung stillschweigend zugestimmt hat; eine aktive Zustimmung ist erforderlich [1]. Auf Basis der Entscheidung haben zahlreiche Institute bereits Gebühren erhoben oder Kontomodelle geändert, obwohl die entsprechenden AGB‑Klauseln rechtswidrig waren [1]. In einer Musterfeststellungsklage gegen die Berliner Sparkasse und die Sparkasse Köln‑Bonn wird zudem gefordert, bereits gezahlte, unrechtmäßig erhobene Gebühren zurückzuerstatten [1]. Für einen Erstattungsanspruch genügt es, dass du einer Preiserhöhung nicht aktiv zugestimmt hast [1].",
+    "hinweis": "Freier Groq-Zugang, streng an die Belege gebunden.",
+    "beleglage": {
+      "weg": "extraktiv",
+      "text": "- Im April 2021 [urteilte der BGH zugunsten des Verbraucherzentrale Bundesverbandes (vzbv)](https://www.verbraucherzentrale.de/aktuelle-meldungen/geld-versicherungen/bghurteil-postbank-kann-zustimmung-nicht-uneingeschraenkt-einholen-59807 \"Zum Artikel über das BGH-Urteil zu den Bankklauseln\") und erklärte die Klausel in den AGB der Postbank für unwirksam. [1]\n- Juni 2025 Viele Banken haben in den letzten Jahren auf Basis einer unwirksamen AGB-Klausel Gebühren erhoben oder ihre Kontomodelle geändert. [1]\n- März 2024 in einer Musterfeststellungsklage die einseitigen Gebührenerhöhungen der Berliner Sparkasse für unwirksam. ## Musterfeststellungsklage gegen die Berliner Sparkasse und die Sparkasse KölnBonn Der Verbraucherzentrale Bundesverband hat gegen die obengenannten Banken Musterfeststellungsklage eingereicht, da diese sich bislang weigern, unrechtmäßig erhobene Gebühren zurückzuzahlen. [1]\n- Dies war aber bis etwa 2021 das gängige Verfahren bei Banken und Sparkassen. **Für einen Erstattungsanspruch dürfen Sie einer Preiserhöhung also nicht aktiv zugestimmt haben.** ## Was ist bei der Verjährung zu beachten? [1]",
+      "aussagen": [
+        {
+          "satz": "Im April 2021 [urteilte der BGH zugunsten des Verbraucherzentrale Bundesverbandes (vzbv)](https://www.verbraucherzentrale.de/aktuelle-meldungen/geld-versicherungen/bghurteil-postbank-kann-zustimmung-nicht-uneingeschraenkt-einholen-59807 \"Zum Artikel über das BGH-Urteil zu den Bankklauseln\") und erklärte die Klausel in den AGB der Postbank für unwirksam.",
+          "beleg": 1,
+          "punkte": 19
+        },
+        {
+          "satz": "Juni 2025 Viele Banken haben in den letzten Jahren auf Basis einer unwirksamen AGB-Klausel Gebühren erhoben oder ihre Kontomodelle geändert.",
+          "beleg": 1,
+          "punkte": 14
+        },
+        {
+          "satz": "März 2024 in einer Musterfeststellungsklage die einseitigen Gebührenerhöhungen der Berliner Sparkasse für unwirksam. ## Musterfeststellungsklage gegen die Berliner Sparkasse und die Sparkasse KölnBonn Der Verbraucherzentrale Bundesverband hat gegen die obengenannten Banken Musterfeststellungsklage eingereicht, da diese sich bislang weigern, unrechtmäßig erhobene Gebühren zurückzuzahlen.",
+          "beleg": 1,
+          "punkte": 14
+        },
+        {
+          "satz": "Dies war aber bis etwa 2021 das gängige Verfahren bei Banken und Sparkassen. **Für einen Erstattungsanspruch dürfen Sie einer Preiserhöhung also nicht aktiv zugestimmt haben.** ## Was ist bei der Verjährung zu beachten?",
+          "beleg": 1,
+          "punkte": 14
+        }
+      ],
+      "hinweis": "Wörtliche Passagen, nach Relevanz geordnet. Keine Umformulierung."
+    }
+  },
+  "browser_beweis": [
+    {
+      "url": "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/bgh-konkretisiert-erstattungsansprueche-bei-girokonten-60926",
+      "endstand_url": "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/bgh-konkretisiert-erstattungsansprueche-bei-girokonten-60926",
+      "status": 200,
+      "titel": "BGH konkretisiert Erstattungsansprüche bei Girokonten | Verbraucherzentrale.de",
+      "text_laenge": 29964,
+      "auszug": "Direkt zum Inhalt Suche Menü Beratung Beschwerde einreichen Bildung Klagen Politik Shop Finanzen Digitales Lebensmittel Umwelt Gesundheit Energie Reise Verträge BGH konkretisiert Erstattungsansprüche bei Girokonten Stand: 10. Juni 2025 Viele Banken haben in den letzten Jahren auf Basis einer unwirksamen AGB-Klausel Gebühren erhoben oder ihre Kontomodelle geändert. Mit Urteilen vom 19. November 2024 und 03. Juni 2025 hat der Bundesgerichtshof zur Höhe der Erstattungsansprüche und den Verjährungsfristen entschieden. Welche Chancen auf eine Rückerstattung Sie haben, lesen Sie hier. Drucken Teilen",
+      "treffer": [
+        {
+          "begriff": "aktuelle",
+          "gefunden": true
+        },
+        {
+          "begriff": "rechtslage",
+          "gefunden": false
+        },
+        {
+          "begriff": "kontoführungsgebühren",
+          "gefunden": true
+        }
+      ],
+      "belegt": true,
+      "konsolenfehler": [],
+      "gemessen_am": "2026-11-05T13:29:52.788Z",
+      "zustand": "bereit"
+    }
+  ]
+}

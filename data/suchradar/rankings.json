@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-04T15:26:13.938613+02:00",
+ "stand": "2026-11-05T15:41:29.581276+02:00",
  "rankings": [
   {
    "anfrage": "DSL Anbieter Vergleich",
@@ -83,16 +83,6 @@
   },
   {
    "anfrage": "Stromanbieter wechseln",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Tarife vergleichen",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -213,6 +203,16 @@
   },
   {
    "anfrage": "Umzug Checkliste",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Umzug sparen",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
