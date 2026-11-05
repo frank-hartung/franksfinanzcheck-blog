@@ -263,6 +263,69 @@ class EditorialReviewGateTests(unittest.TestCase):
     def test_selbsttest_ist_gruen(self):
         self.assertEqual(gate.selftest(), [])
 
+    # --- #1069 (Dauerheilung 05.11.2026): Siegel bindet die Meta-Qualität ---
+    # Ab dem Siegel ist die Fassung für die Meta-Heiler gesperrt. Eine hier
+    # versiegelte Meta-Befund-Description würde das Wochen-Gate dauerhaft rot
+    # machen. Das Siegel verweigert sie deshalb – gemessen mit den vorhandenen
+    # Messstellen (meta_optimizer.desc_has_sentence_end + serp_limits).
+
+    def _write_article(self, tmp, fm, body):
+        path = Path(tmp) / "index.md"
+        raw = "---\n" + gate._yaml_module().safe_dump(fm, allow_unicode=True, sort_keys=False) + "---\n" + body
+        path.write_text(raw, encoding="utf-8")
+        return path, raw
+
+    def test_siegel_verweigert_description_ohne_satzende(self):
+        body = self.body()
+        fm = self.frontmatter(body)
+        fm["description"] = "Kriterien für ein Immobiliendarlehen ohne Schlusspunkt"
+        with tempfile.TemporaryDirectory() as tmp:
+            path, raw = self._write_article(tmp, fm, body)
+            history = Path(tmp) / "history.jsonl"
+            with patch.object(gate, "HISTORY", history):
+                with self.assertRaisesRegex(gate.ParseError, "Meta-Qualitäts-Gate"):
+                    gate.seal(path, today=self.TODAY)
+            self.assertEqual(path.read_text(encoding="utf-8"), raw)
+            self.assertFalse(history.exists())
+
+    def test_siegel_verweigert_description_ausserhalb_snippet_fenster(self):
+        body = self.body()
+        fm = self.frontmatter(body)
+        fm["description"] = "W " * 120 + "Ende."  # > 155 Zeichen und > 985 px
+        with tempfile.TemporaryDirectory() as tmp:
+            path, raw = self._write_article(tmp, fm, body)
+            with patch.object(gate, "HISTORY", Path(tmp) / "history.jsonl"):
+                with self.assertRaisesRegex(gate.ParseError, "Meta-Qualitäts-Gate"):
+                    gate.seal(path, today=self.TODAY)
+            self.assertEqual(path.read_text(encoding="utf-8"), raw)
+
+    def test_siegel_akzeptiert_meta_sauberere_description(self):
+        body = self.body()
+        fm = self.frontmatter(body)  # Description mit Satzende, im Fenster
+        with tempfile.TemporaryDirectory() as tmp:
+            path, _ = self._write_article(tmp, fm, body)
+            history = Path(tmp) / "history.jsonl"
+            with patch.object(gate, "HISTORY", history):
+                result = gate.seal(path, today=self.TODAY)
+            self.assertTrue(result["approved"])
+            sealed_fm, sealed_body, _ = gate.load_article(path)
+            self.assertEqual(sealed_fm["redaktionelle_pruefung"]["inhalt_sha256"],
+                             gate.content_fingerprint(sealed_fm, sealed_body))
+            self.assertEqual(len(history.read_text(encoding="utf-8").splitlines()), 1)
+
+    def test_versiegelte_fassungen_sind_meta_sauber(self):
+        # Bestands-Invariante: Jede versiegelte Fassung muss die Description-Regel
+        # des Meta-Gates bestehen. Hätte dieser Test am 30.10. existiert, wäre die
+        # Neusiegelung der punktlosen Description (#1069) im PR aufgefallen.
+        for path in gate.all_post_paths():
+            fm, _, _ = gate.load_article(path)
+            review = fm.get("redaktionelle_pruefung") or {}
+            sealed = bool(review.get("inhalt_sha256")) or str(review.get("status") or "").strip().lower() in gate.APPROVED_STATUSES
+            if not sealed:
+                continue
+            with self.subTest(slug=path.parent.name):
+                self.assertEqual(gate.meta_befunde_description(fm), [])
+
 
 if __name__ == "__main__":
     unittest.main()
