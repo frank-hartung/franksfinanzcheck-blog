@@ -22,6 +22,15 @@ cover:
   alt: "Kostenloses Girokonto ohne Gebühren finden"
   caption: "Tipp von FranksFinanzcheck"
 faktencheck: 2026-10-31
+quellen:
+  - id: "Q1"
+    titel: "Girokonten und Kontoführung – Verbraucherinformationen"
+    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/"
+    herausgeber: "Verbraucherzentrale"
+  - id: "Q2"
+    titel: "Referenzseite destatis.de"
+    url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
 ---
 
 Kostet dein Girokonto jedes Jahr mehr Geld? Nutzt du die teuren Extras deiner Bank kaum? Viele Menschen haben das Gefühl, zu viel für ihr Konto zu zahlen. Du hast vielleicht schon von einem kostenlosen Girokonto gehört. Doch oft herrscht Unsicherheit bei diesem Thema. Worauf musst du beim Wechsel wirklich achten? In diesem Ratgeber erfährst du, wie du die Gebühren senkst. Ich zeige dir die wichtigsten Punkte für einen Girokonto Vergleich. Wir schauen uns auch die Stolperfallen genau an. Am Ende kennst du deinen Weg zum neuen Konto. Du findest so ein Konto, das wirklich nichts kostet.
@@ -32,7 +41,7 @@ Kostet dein Girokonto jedes Jahr mehr Geld? Nutzt du die teuren Extras deiner Ba
 
 Ein kostenloses Girokonto verzichtet auf die feste Gebühr im Monat. Das gilt aber oft nur unter bestimmten Bedingungen. Du musst diese Regeln genau kennen. Oft verlangt die Bank einen festen Eingang an Geld. Das kann dein Lohn oder deine Rente sein. Manche Banken wollen auch einen Mindestumsatz sehen. Andere bieten das Konto nur für die digitale Nutzung gratis an. Wer alles online erledigt, zahlt dann keine Grundgebühr.
 
-Viele Banken setzen eine Grenze für den Geldeingang fest. Oft liegt diese Schwelle bei ein paar hundert Euro. Erreichst du diesen Betrag in einem Monat nicht? Dann bucht die Bank eine Gebühr ab. Das ist eine häufige Falle für Kunden. Du solltest diese Schwelle also sicher erreichen können. Prüfe vor dem Wechsel deine monatlichen Eingänge genau. Nur so bleibt das Konto für dich dauerhaft kostenfrei.
+Viele Banken setzen eine Grenze für den Geldeingang fest. Manche Banken verlangen einige hundert Euro Geldeingang im Monat, andere kommen mit weniger aus oder verzichten ganz darauf. Erreichst du die für dein Konto geltende Schwelle in einem Monat nicht, kann die Bank eine Gebühr buchen. Das ist eine häufige Falle für Kunden. Du solltest die für dein Angebot geltende Schwelle also sicher erreichen können. Prüfe vor dem Wechsel deine monatlichen Eingänge genau. Nur so bleibt das Konto für dich dauerhaft kostenfrei.
 
 Ein weiterer Punkt sind die Kosten für den Service. Das Grundkonto ist zwar kostenlos. Doch für manche Dienste fallen trotzdem Gebühren an. Das betrifft oft Auszüge aus dem Drucker. Auch Überweisungen in andere Währungen kosten meist extra. Wer oft Bargeld an fremden Automaten holt, zahlt ebenfalls drauf. Diese Kosten können den Vorteil schnell auffressen. Schau deshalb nicht nur auf die Grundgebühr. Das gesamte Paket muss zu deinem Alltag passen.
 
@@ -74,7 +83,7 @@ Dazu kommen oft Kosten für das Bargeld. Unser Beispiel-Nutzer hebt fünfmal im 
 
 Rechnen wir alles zusammen. 60 € plus 10 € plus 2 € ergeben 72 €. Das ist viel Geld für einfache Dienste. Wenn du zu einem kostenlosen Konto wechselst, sparst du diesen Betrag. Ein gutes Konto verzichtet auf all diese Kosten. Du behältst die 72 € einfach in deiner Tasche. Das ist ein schöner Betrag für ein Abendessen oder ein Hobby.
 
-Daraus ergibt sich eine einfache **Faustregel**: Ein kostenloses Girokonto spart dir oft ein Drittel deiner Kosten. Das gilt besonders, wenn du auch die Extra-Gebühren meidest. Wer klug wechselt, hat am Ende mehr vom Gehalt. Die genaue Ersparnis hängt natürlich von dir ab. Nutzt du viele Dienste, sparst du beim Wechsel noch mehr. Prüfe deine alten Kontoauszüge nach diesen versteckten Kosten.
+Daraus ergibt sich eine einfache **Faustregel**: Ein kostenloses Girokonto kann je nach altem Konto und Nutzung eine dreistellige Jahresersparnis bringen. Das gilt besonders, wenn du auch die Extra-Gebühren meidest. Wer klug wechselt, hat am Ende mehr vom Gehalt. Die genaue Ersparnis hängt von deinem alten Konto und deiner Nutzung ab. Nutzt du viele kostenpflichtige Dienste, sparst du beim Wechsel noch mehr. Prüfe deine alten Kontoauszüge nach diesen versteckten Kosten.
 
 ## Wie du den Wechsel praktisch angehst
 
@@ -114,13 +123,13 @@ Vermeide diese Fehler von Anfang an. Dann wird dein Wechsel zu einem vollen Erfo
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 
 ### Wie lange dauert es, ein neues Girokonto zu eröffnen?
-Die Eröffnung geht heute sehr schnell. Meist dauert es nur wenige Werktage. Das gilt besonders, wenn du alle Daten digital sendest. Die Bank prüft deine Identität oft per Video. Das spart den Weg zur Post. Danach schickt dir die Bank die Karten zu. Auch die PIN-Briefe kommen per Post an. Nach etwa einer Woche ist das Konto voll nutzbar. Manche Banken bieten sofort eine digitale Karte an. Damit zahlst du direkt mit dem Handy.
+Die Eröffnung geht heute meist schnell. Wie viele Werktage die Bank für die Prüfung und die Zusendung der Karten benötigt, hängt von der Bank und dem Prüfweg ab (Video-Ident oder Postident). Bei vollständig digitaler Abwicklung geht es oft besonders schnell. Die Bank prüft deine Identität oft per Video. Das spart den Weg zur Post. Danach schickt dir die Bank die Karten zu. Auch die PIN-Briefe kommen per Post an. Nach etwa einer Woche ist das Konto voll nutzbar. Manche Banken bieten sofort eine digitale Karte an. Damit zahlst du direkt mit dem Handy.
 
 ### Muss ich ein bestimmtes Mindesteinkommen haben?
-Nicht jedes kostenlose Konto will ein hohes Gehalt sehen. Es gibt viele Angebote ohne diese Hürde. Manche Banken wollen nur einen regelmäßigen Eingang sehen. Die Höhe spielt dann keine große Rolle. Andere Banken verzichten komplett auf solche Regeln. Diese Konten sind oft für jeden Kunden gratis. Schau dir die Details im Vergleich genau an. So findest du ein Konto, das zu deinem Einkommen passt.
+Nicht jedes kostenlose Konto will ein hohes Gehalt sehen. Es gibt viele Angebote ohne diese Hürde. Manche Banken wollen nur einen regelmäßigen Geldeingang sehen, dessen Höhe oft keine große Rolle spielt. Andere Banken verzichten komplett auf solche Regeln. Schau dir die Details im Vergleich genau an. So findest du ein Konto, das zu deiner Situation passt.
 
 ### Fallen bei kostenlosen Konten trotzdem Gebühren für Überweisungen an?
-Normale Überweisungen im Inland sind fast immer kostenlos. Das gilt für alle modernen Online-Konten. Du zahlst nichts für das Senden von Geld per App. Anders sieht es bei speziellen Wünschen aus. Eine Eilüberweisung kostet oft einen Aufpreis. Auch Geld in Länder außerhalb von Europa ist teuer. Wer nur Miete und Rechnungen zahlt, hat keine Kosten. Die Banken verdienen ihr Geld eher mit Krediten oder Dispozinsen.
+Normale Überweisungen im Inland sind bei den meisten Online-Konten kostenlos (Verbraucherzentrale, verbraucherzentrale.de). Du zahlst nichts für das Senden von Geld per App. Anders sieht es bei speziellen Wünschen aus. Eine Eilüberweisung kostet oft einen Aufpreis. Auch Geld in Länder außerhalb von Europa ist teuer. Wer nur Miete und Rechnungen zahlt, hat keine Kosten. Die Banken verdienen ihr Geld eher mit Krediten oder Dispozinsen.
 
 ### Wie kann ich sicher sein, dass das neue Konto wirklich kostenfrei bleibt?
 Die Bank kann ihre Preise jederzeit ändern. Sie muss dich aber vorher darüber informieren. Meist bekommst du eine Nachricht in dein Postfach. Prüfe diese Nachrichten der Bank immer sofort. Ein kurzer Blick auf CHECK24 hilft dir beim Vergleich. So siehst du, ob dein Konto noch oben in der Liste steht. Wenn die Bank die Gebühren erhöht, kannst du meist sofort kündigen. Bleib einfach wachsam bei deinen Finanzen.

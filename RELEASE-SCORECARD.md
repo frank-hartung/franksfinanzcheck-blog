@@ -1,6 +1,6 @@
 # Release-Scorecard – die Produktionswahrheit
 
-**Stand:** 2026-11-05 · **Modus:** kandidaten · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
+**Stand:** 2026-11-05 · **Modus:** live · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
 
 > Eine Zeile pro Artikel, acht Dimensionen, ein Wahrheitsort. Was hier rot ist, ist rot – nichts wird weggeklammert.
 
@@ -19,88 +19,88 @@
 
 | Technik | Quellen | Faktenalter | Affiliate-Integrität | Redundanz | YMYL-Risiko | menschliche Freigabe | nächste Überprüfung |
 |---|---|---|---|---|---|---|---|
-| ⚠️ warnung | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | ✅ bestanden | ➖ nicht erforderlich | ✅ bestanden |
+| ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ❌ blockiert | ✅ bestanden | ➖ nicht erforderlich | ✅ bestanden |
 
 ## Live-Bestand (Artikel für Artikel)
 
 | Artikel | Technik | Quellen | Faktenalter | Affiliate-Integrität | Redundanz | YMYL-Risiko | menschliche Freigabe | nächste Überprüfung | Urteil |
 |---|---|---|---|---|---|---|---|---|---|
-| `2026-08-10-dsl-wechselbonus-sichern` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-01 | **freigabe-reif** |
-| `2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (hoch, freigegeben) | vorhanden | 2026-12-14 | **freigabe-reif** |
-| `2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-01 | **blockiert** |
-| `2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-01 | **freigabe-reif** |
-| `2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` | ⚠️ warnung | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-29 | **blockiert** |
-| `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-12-19 | **freigabe-reif** |
-| `2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (hoch, freigegeben) | vorhanden | 2026-12-14 | **freigabe-reif** |
-| `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (hoch, freigegeben) | vorhanden | 2026-11-19 | **freigabe-reif** |
-| `2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-12 | **freigabe-reif** |
-| `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-19 | **freigabe-reif** |
-| `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-29 | **warnung** |
-| `2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-19 | **freigabe-reif** |
-| `2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-01 | **freigabe-reif** |
-| `2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-12 | **freigabe-reif** |
-| `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (hoch, freigegeben) | vorhanden | 2026-12-14 | **freigabe-reif** |
-| `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-12 | **freigabe-reif** |
-| `2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-26 | **freigabe-reif** |
-| `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-12-19 | **freigabe-reif** |
-| `2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-12 | **freigabe-reif** |
-| `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-20 | **blockiert** |
-| `2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-20 | **blockiert** |
-| `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-11 | **freigabe-reif** |
-| `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-02 | **freigabe-reif** |
-| `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-11 | **freigabe-reif** |
-| `2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-11 | **freigabe-reif** |
-| `2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-02 | **freigabe-reif** |
-| `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-12 | **freigabe-reif** |
-| `2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-02 | **freigabe-reif** |
-| `2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-02 | **freigabe-reif** |
-| `2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-11 | **freigabe-reif** |
-| `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-11 | **freigabe-reif** |
-| `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-13 | **warnung** |
-| `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-03 | **freigabe-reif** |
-| `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-18 | **freigabe-reif** |
-| `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-03 | **freigabe-reif** |
-| `2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-11-19 | **freigabe-reif** |
-| `2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
-| `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-21 | **freigabe-reif** |
-| `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-03 | **freigabe-reif** |
-| `2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-11-21 | **freigabe-reif** |
-| `2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-11-21 | **freigabe-reif** |
-| `2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-03 | **freigabe-reif** |
-| `2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-21 | **freigabe-reif** |
-| `2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-23 | **freigabe-reif** |
-| `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-20 | **freigabe-reif** |
-| `2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-07 | **freigabe-reif** |
-| `2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-05 | **freigabe-reif** |
-| `2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-21 | **freigabe-reif** |
-| `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-20 | **freigabe-reif** |
-| `2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-03 | **freigabe-reif** |
-| `2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-21 | **freigabe-reif** |
-| `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-20 | **freigabe-reif** |
-| `2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-20 | **freigabe-reif** |
-| `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen` | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-11-21 | **warnung** |
-| `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-14 | **freigabe-reif** |
-| `2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-11 | **freigabe-reif** |
-| `2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-25 | **freigabe-reif** |
+| `2026-08-10-dsl-wechselbonus-sichern` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **blockiert** |
+| `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-01 | **blockiert** |
+| `2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (hoch, freigegeben) | vorhanden | 2026-12-14 | **blockiert** |
+| `2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **blockiert** |
+| `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-01 | **blockiert** |
+| `2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-01 | **blockiert** |
+| `2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **blockiert** |
+| `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-29 | **blockiert** |
+| `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **blockiert** |
+| `2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **blockiert** |
+| `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-12-19 | **blockiert** |
+| `2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (hoch, freigegeben) | vorhanden | 2026-12-14 | **blockiert** |
+| `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (hoch, freigegeben) | vorhanden | 2026-11-19 | **blockiert** |
+| `2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **blockiert** |
+| `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-12 | **blockiert** |
+| `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **blockiert** |
+| `2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-19 | **blockiert** |
+| `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-29 | **blockiert** |
+| `2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-19 | **blockiert** |
+| `2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-01 | **blockiert** |
+| `2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-12 | **blockiert** |
+| `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **blockiert** |
+| `2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (hoch, freigegeben) | vorhanden | 2026-12-14 | **blockiert** |
+| `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-11-27 | **blockiert** |
+| `2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-12 | **blockiert** |
+| `2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **blockiert** |
+| `2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **blockiert** |
+| `2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **blockiert** |
+| `2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-26 | **blockiert** |
+| `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-12-19 | **blockiert** |
+| `2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-12 | **blockiert** |
+| `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ❌ blockiert | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-20 | **blockiert** |
+| `2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **blockiert** |
+| `2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ❌ blockiert | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-20 | **blockiert** |
+| `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-11 | **blockiert** |
+| `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-02 | **blockiert** |
+| `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **blockiert** |
+| `2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-11 | **blockiert** |
+| `2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-11 | **blockiert** |
+| `2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-02 | **blockiert** |
+| `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-12 | **blockiert** |
+| `2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **blockiert** |
+| `2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-02 | **blockiert** |
+| `2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-02 | **blockiert** |
+| `2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **blockiert** |
+| `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **blockiert** |
+| `2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **blockiert** |
+| `2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-11 | **blockiert** |
+| `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **blockiert** |
+| `2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-11 | **blockiert** |
+| `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-13 | **blockiert** |
+| `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-03 | **blockiert** |
+| `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-18 | **blockiert** |
+| `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-03 | **blockiert** |
+| `2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-11-19 | **blockiert** |
+| `2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-27 | **blockiert** |
+| `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-21 | **blockiert** |
+| `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-03 | **blockiert** |
+| `2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-11-21 | **blockiert** |
+| `2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-11-21 | **blockiert** |
+| `2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-03 | **blockiert** |
+| `2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-21 | **blockiert** |
+| `2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-23 | **blockiert** |
+| `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-20 | **blockiert** |
+| `2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-07 | **blockiert** |
+| `2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-05 | **blockiert** |
+| `2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-21 | **blockiert** |
+| `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-20 | **blockiert** |
+| `2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-03 | **blockiert** |
+| `2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-21 | **blockiert** |
+| `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-20 | **blockiert** |
+| `2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-20 | **blockiert** |
+| `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-11-21 | **blockiert** |
+| `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-14 | **blockiert** |
+| `2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-11 | **blockiert** |
+| `2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege` | ❌ blockiert | ✅ bestanden | ✅ bestanden | ❔ nicht beweisbar | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-11-25 | **blockiert** |
 
 ## Was blockiert – nach Prüfung, nicht nach Dimension
 
@@ -108,26 +108,13 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 
 | Check | Dimension | Wirkung | Entscheidet | Artikel |
 |---|---|---|---|---|
-| **F4-fachbefund** | faktenalter | blockiert | Mensch (Herausgeber/Redaktion) | 4 |
-| **T1w-zeichenlaenge-optimum** | technik | warnung | Maschine (deterministisch) | 1 |
+| **T7-render-beweis** | technik | blockiert | Maschine (deterministisch) | 76 |
+| **T1w-zeichenlaenge-optimum** | technik | warnung | Maschine (deterministisch) | 4 |
+| **RD1-duplikate** | redundanz | blockiert | Maschine (deterministisch) | 2 |
+| **RD2-einzigartigkeit** | redundanz | blockiert | Mensch (Herausgeber/Redaktion) | 2 |
+| **T6-textverstaendnis** | technik | blockiert | Maschine (deterministisch) | 1 |
 
-- **F4-fachbefund** – Schließweg: scripts/faktenfrische_befund_ledger.py (via publish_gate.fakten_befund_failures) · betroffen: `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026`, `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit`, `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich`, `2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum`
-
-## Offene Fachbefunde (F4) – was die Redaktion entscheiden muss
-
-**47** offene Befunde auf **11** Seiten (live: 13 auf 4 Artikeln) · ältester **6 Tage** · Frist 14 Tage · über der Frist: **0**.
-
-**Ein Prüfdatum schließt keinen Fachbefund.** F1 (Alter) und F4 (Inhalt) sind getrennte Verträge; die Maschine entscheidet nie fachlich. Die Arbeitsdatei mit jeder Befund-ID, dem Fassungsstand und dem fertigen Entscheidungsbefehl ist `BEFUND-AKTE.md` (`python3 scripts/faktenfrische_befund_akte.py --schreiben`).
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden <ID> --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-⚠️ **13 Befunde** wurden an einem älteren Text erhoben; der Text wurde seither geändert. Entschieden wird der HEUTIGE Text – genau das macht `--entscheiden` fassungsgebunden.
-
-❌ **5 Befunde** sind nicht entscheidbar (Seite fehlt) – das ist ein Strukturfehler, kein Redaktionsrückstand.
-
-✅ **F1 (Faktenalter) ist nicht die Ursache:** Die Deckung trägt den Bestand; rot ist der Inhalt, nicht der Takt.
+- **RD2-einzigartigkeit** – Schließweg: scripts/check_uniqueness.py U1–U2 (via publish_gate.uniqueness_failures) · betroffen: `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich`, `2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum`
 
 ## Faktenfrische-Deckung (der Takt gegen den Bestand)
 
@@ -146,29 +133,472 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 
 ✅ Deckung ausreichend: Der Takt kann den Bestand halten. Ein roter Faktenstand ist damit ein echter Inhaltsbefund (F4), kein Kadenz-Artefakt.
 
-## Blockierende Funde (4 Artikel)
+## Blockierende Funde (76 Artikel)
+
+### `2026-08-10-dsl-wechselbonus-sichern` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026` (blockiert, Risikoklasse hoch)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
 
 ### `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026` (blockiert, Risikoklasse standard)
 
-- **F4-fachbefund** [faktenalter]: 30caa57be394afb62947 (luecke): Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg.; 32a3ea879f2cf126b3a7 (luecke): Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist.; c583efe1ce02df3ca2d7 (luecke): Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur für Januar 2026 (360 €) wird durch die allgemeine Übersichtsseite der Behörde nicht gestützt.
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
 
 ### `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` (blockiert, Risikoklasse standard)
 
-- **F4-fachbefund** [faktenalter]: 47f855cb4f0fe1e5c65f (luecke): Angaben zu möglichen Einsparungen beim Kfz‑Versicherungswechsel (150 €‑400 € bzw. 180 €‑350 €) sind ohne Quellenangabe; keine der genannten Zahlen findet sich in den bereitgestellten Statistiken.; 6b0aa3429d97e8c74ed8 (luecke): Die Behauptung, technische Maßnahmen beim Heizen senken den Energieverbrauch um 8 %‑12 %, wird nicht belegt; die bereitgestellten Daten enthalten lediglich die allgemeine Preisentwicklung von Energie (+14,9 %).; 7f66ec82ee1a3f095b0c (praezision): Die Aussage, der Herbst sei die „lukrativste Spar‑Saison des Jahres“, ist nicht durch messbare Daten gestützt; ein Vergleich mit anderen Jahreszeiten fehlt.; 84c991c5d152b14a2675 (luecke): Gesamteinsparungen von 500 €‑1.300 € pro Haushalt werden als Modellrechnung präsentiert, jedoch ohne Kennzeichnung als Modell und ohne Quellenangabe.; a70e7adc97c58317ccc1 (luecke): Das angegebene Sparpotenzial von 50 €‑80 € durch saisonale Lebensmittel‑ und Vorratshaltung ist nicht mit einer Quelle untermauert.
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren` (blockiert, Risikoklasse erhoeht)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet` (blockiert, Risikoklasse hoch)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst` (blockiert, Risikoklasse hoch)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-26-handytarif-vergleichen-2026-guenstige-tarife` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen` (blockiert, Risikoklasse hoch)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich` (blockiert, Risikoklasse erhoeht)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen` (blockiert, Risikoklasse erhoeht)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
 
 ### `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` (blockiert, Risikoklasse standard)
 
-- **F4-fachbefund** [faktenalter]: 20c08cb650ef6e24af64 (luecke): Der Ratgeber vernachlässigt bei der Kalkulation der Sparfähigkeit die massive Preissteigerung bei Energie (+14,9 %), die das Budget für monatliche Sparraten erheblich belastet.; 6aafb23c0c6dbb06ce3b (veraltet): Die im Rechenbeispiel zur Realrendite genutzte Inflationsrate von 2 % ist veraltet; die vorläufige Rate für Oktober 2026 beträgt laut Statistischem Bundesamt 2,8 %.
+- **RD1-duplikate** [redundanz]: D3-X: Absatz wortgleich in 2 Artikeln (content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-; D4-X: Fast-Duplikat über Artikel (Ratio 1.00, content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit
+- **RD2-einzigartigkeit** [redundanz]: U1-PHRASEN: 6 gleiche 7-Wort-Phrasen mit 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum (z. B. „energieprodukte kosteten laut statistischem bundesamt verbraucherpreisindex im“) – ab 5 ist es Dopplung, Passage umschreiben
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
 
 ### `2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum` (blockiert, Risikoklasse standard)
 
-- **F4-fachbefund** [faktenalter]: 24f05ddc03ffdd50118f (praezision): Die Kalkulation der Fixkostenersparnis bei Energie (Strom/Gas) ist unpräzise, da sie den aktuellen Preisanstieg von +14,9 % bei Energieprodukten nicht einbezieht.; 4816322f061dfdc03bcd (luecke): Bei den Einsparpotenzialen für Lebensmittel fehlt der Bezug zur aktuellen Preissteigerung von +0,4 % bei Nahrungsmitteln.; 7017065ee7c74c7ae452 (veraltet): Der Artikel nutzt Kostenszenarien für 2024/2025, während aktuelle Daten für Oktober 2026 eine Inflationsrate von +2,8 % ausweisen.
+- **RD1-duplikate** [redundanz]: D1-EXAKT: Absatz doppelt (Z.7919 ≈ Z.6060): [Quelle: Statistisches Bundesamt, Verbraucherpreisindex und Inflationsrate in Deutschland, https://w…; D3-X: Absatz wortgleich in 2 Artikeln (content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-; D4-X: Fast-Duplikat über Artikel (Ratio 1.00, content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit
+- **RD2-einzigartigkeit** [redundanz]: U1-PHRASEN: 6 gleiche 7-Wort-Phrasen mit 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich (z. B. „energieprodukte kosteten laut statistischem bundesamt verbraucherpreisindex im“) – ab 5 ist es Dopplung, Passage umschreiben
+- **T6-textverstaendnis** [technik]: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…quelle statistisches bundesamt verbraucherpreisindex und inflationsrate in deutschland https www…“ – doppelte Passage, manuell reparieren
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
 
-## Warnungen ohne Blockade (3 Artikel)
+### `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler` (blockiert, Risikoklasse standard)
 
-- `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` – T1w-zeichenlaenge-optimum: Zeichenlänge ueber-optimum (18296 Zeichen, Optimum 12.000–18.000)
-- `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` – T1w-zeichenlaenge-optimum: Zeichenlänge ueber-optimum (18112 Zeichen, Optimum 12.000–18.000)
-- `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (10258 Zeichen, Optimum 12.000–18.000)
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest` (blockiert, Risikoklasse erhoeht)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet` (blockiert, Risikoklasse erhoeht)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung` (blockiert, Risikoklasse erhoeht)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen` (blockiert, Risikoklasse erhoeht)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+### `2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege` (blockiert, Risikoklasse standard)
+
+- **T7-render-beweis** [technik]: Artikel fehlt im Build (public/posts/<slug>/index.html) – Beweisbasis aller Render-Checks nicht vorhanden
+- ❔ **A1-link-integritaet** [affiliate]: nicht beweisbar – Affiliate-Integrität NICHT beweisbar (Werkzeugfehler – fail-closed, kein Kandidat geht ungeprüft live): Render-Beweis nicht möglich: public/ fehlt (--no-build)
+- ❔ **A3-offenlegung** [affiliate]: nicht beweisbar – Offenlegung NICHT beweisbar: offenlegung_gate.py lieferte kein Ergebnis (fail-closed – kein Kandidat geht ungeprüft live)
+
+## Warnungen ohne Blockade (0 Artikel)
+
+Keine.
 
 ## Entwürfe – was vor dem Livegang noch offen ist
 

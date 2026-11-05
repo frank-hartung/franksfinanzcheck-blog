@@ -62,17 +62,17 @@ Die Kaution ist kein Kostenfaktor, solange du das Fahrzeug unbeschädigt zurück
 
 ## Buchungszeitpunkt nutzen – Last Minute Vorteile und Fallen
 
-Ein Last‑Minute‑Deal kann verlockend sein, weil die Preise scheinbar fallen. Das liegt häufig an Restkapazitäten, die Anbieter schnell füllen wollen. Doch die günstigen Tarife kommen oft mit strengeren Bedingungen: höhere Kaution, eingeschränkte Versicherungsoptionen oder weniger freie Fahrzeugklassen.  
+Ein Last‑Minute‑Deal kann verlockend sein, weil die Preise scheinbar fallen. Das kann an Restkapazitäten liegen, die Anbieter schnell füllen wollen – das ist eine Einschätzung, keine garantierte Marktprognose. Doch die günstigen Tarife kommen oft mit strengeren Bedingungen: höhere Kaution, eingeschränkte Versicherungsoptionen oder weniger freie Fahrzeugklassen.  
 
 Der clevere Ansatz ist, die Angebote über ein Vergleichsportal wie **CHECK24** zu sichten und dann die Konditionen im Detail zu prüfen. Achte dabei besonders auf das Kleingedruckte: Manche Rabatte gelten nur für bestimmte Abholorte, andere verlangen eine Vorauszahlung, die nicht erstattungsfähig ist.  
 
-Ein weiterer Trick: Nutze die **50‑30‑20‑Regel** für deine Urlaubsplanung. 50 % des Budgets gehen für Grundkosten (Flug, Hotel, Mietwagen), 30 % für Aktivitäten und Verpflegung, 20 % für Puffer und unerwartete Ausgaben. So bleibt genug Spielraum, um eventuelle Zusatzgebühren zu decken, ohne das Gesamtbudget zu sprengen.
+Ein weiterer Trick: Nutze die **50‑30‑20‑Regel** für deine Urlaubsplanung als einfaches Budget‑Modell (keine Vorgabe): 50 % des Budgets gehen für Grundkosten (Flug, Hotel, Mietwagen), 30 % für Aktivitäten und Verpflegung, 20 % für Puffer und unerwartete Ausgaben. So bleibt genug Spielraum, um eventuelle Zusatzgebühren zu decken, ohne das Gesamtbudget zu sprengen.
 
 ## Vertrag und Kündigungsfenster – flexibel bleiben
 
 Selbst bei einem Last‑Minute‑Deal solltest du das Kündigungsfenster im Auge behalten. Viele Mietwagenverträge erlauben eine kostenfreie Stornierung bis zu 24 Stunden vor Abholung, manche jedoch nicht. Prüfe das Datum im Vertrag und setze dir eine Erinnerung im Kalender.  
 
-Falls du das Fahrzeug vorzeitig zurückgeben musst, kann das zu einer Teil‑Stornogebühr führen. Die Höhe variiert, liegt aber häufig bei einem Tagespreis. Mit dem **4‑K‑Prüfpfad** von Franks Fixkosten‑Kompass kannst du diesen Schritt systematisch festhalten: Notiere das Kündigungsfenster, berechne mögliche Stornokosten und entscheide, ob du das Risiko eingehst.  
+Falls du das Fahrzeug vorzeitig zurückgeben musst, kann das zu einer Teil‑Stornogebühr führen. Ob und in welcher Höhe eine solche Gebühr anfällt, hängt vom Vertrag ab. Mit dem **4‑K‑Prüfpfad** von Franks Fixkosten‑Kompass kannst du diesen Schritt systematisch festhalten: Notiere das Kündigungsfenster, berechne mögliche Stornokosten und entscheide, ob du das Risiko eingehst.  
 
 Ein weiterer Punkt ist die Möglichkeit, das Fahrzeug zu einem günstigeren Tarif zu upgraden, falls ein besseres Angebot erscheint. Das ist nur sinnvoll, wenn die Differenz die zusätzlichen Kosten (z. B. neue Kaution) nicht übersteigt. Hier hilft die **Konditionen‑Rechnen**‑Phase, die du bereits im vorherigen Kapitel durchgeführt hast.
 
