@@ -1,5 +1,14 @@
 # Externe Autorität & Distribution – verbindlicher Betriebsvertrag
 # Zahlen bleiben null, bis ein belegter Import vorliegt. Keine Hochrechnungen.
+#
+# Messvertrag (seit 05.11.2026, #1076):
+#   Jede Kennzahl hat GENAU EINE Quelle mit einem Modus. Der Radar fordert nur,
+#   was auch erhebbar ist:
+#     automatisch   – wird aus dem Repo abgeleitet (GSC-Tages-Ledger)
+#     manuell       – monatlicher Export, fällig am manual_due_day des Folgemonats
+#     nicht_messbar – bewusst keine Messung (Grund + Entscheidungsdatum Pflicht)
+#     nicht_aktiv   – Kanal ist nicht in Betrieb (Grund + Entscheidungsdatum Pflicht)
+#   Eine Quelle ohne Beleg bleibt `—` im Report. `null` ist niemals `0`.
 meta:
   owner: Frank Hartung
   started: 2026-10-02
@@ -50,10 +59,46 @@ assets:
       - "Wie stark Verbrauchsannahmen den oft zitierten Durchschnitt verzerren"
 
 measurement:
+  # Der Radar läuft am 5. und berichtet den letzten abgeschlossenen Monat.
+  # reporting_lag_days 4 = der Vormonat ist erst ab dem 5. final messbar.
+  reporting_lag_days: 4
+  manual_due_day: 5
+  gsc_max_age_days: 5
+  sources:
+    - id: gsc
+      label: "Google Search Console"
+      mode: automatisch
+      kpi: [gsc_clicks, gsc_impressions, gsc_brand_clicks]
+      kpi_optional: [gsc_brand_clicks]
+      quelle: data/gsc/tagesdaten.jsonl
+      hinweis: >-
+        Monatswerte werden aus dem Tages-Ledger abgeleitet (ein Tageslauf, eine Wahrheit).
+        Marken-Klicks sind dort nicht enthalten – sie brauchen einen CSV-Export mit
+        Suchbegriffen; rollierend zeigt der Radar die Markensichtbarkeit der Top-Suchanfragen.
+    - id: newsletter
+      label: "Newsletter (Worker/Resend)"
+      mode: manuell
+      kpi: [newsletter_subscribers, newsletter_click_rate]
+      hinweis: >-
+        Monatlicher Export aus dem Newsletter-Studio bzw. Resend (Aggregat, keine Adressen).
+        Vorlage: python3 scripts/authority_engine.py --template --period YYYY-MM
+    - id: retention
+      label: "Wiederkehrende Leser"
+      mode: nicht_messbar
+      kpi: [returning_reader_rate]
+      grund: "Es läuft bewusst kein Besucherzähler und kein Cookie-Tracking; eine Returning-Rate wäre geraten."
+      entschieden: 2026-09-24
+    - id: conversion
+      label: "Conversion/Provision"
+      mode: nicht_aktiv
+      kpi: [conversions, conversion_rate]
+      grund: "Der Klickzähler ist nicht deployt (data/klickmessung.yaml: aktiv=false) und es liegt keine Provisions-Tabelle vor."
+      entschieden: 2026-10-14
   periods:
     - period: 2026-10
-      status: awaiting_import
-      updated: 2026-10-02
+      status: offen
+      updated: 2026-11-05
+      quelle: "GSC aus data/gsc/tagesdaten.jsonl abgeleitet; Audience-Aggregate noch nicht exportiert."
       # null bedeutet: noch nicht belegt. Null ist nicht 0.
       editorial_links: null
       media_mentions: null
