@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-05T16:21:57Z",
-  "modus": "kandidaten",
-  "commit": "e33d47d6abacc6326a4154890c09e590346fef59",
+  "generated_at": "2026-11-05T16:29:44Z",
+  "modus": "live",
+  "commit": null,
   "kapazitaet": {
     "stichtag": "2026-11-05",
     "artikel": 114,
@@ -37,50 +37,19 @@
     "empfehlung_erreicht": true,
     "hartes_limit": 16
   },
-  "ursachen": [
-    {
-      "check": "F4-fachbefund",
-      "dimension": "faktenalter",
-      "wirkung": "blockiert",
-      "entscheidung": "human",
-      "quelle": "scripts/faktenfrische_befund_ledger.py (via publish_gate.fakten_befund_failures)",
-      "artikel": [
-        "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
-        "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
-        "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
-        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum"
-      ],
-      "anzahl": 4
-    },
-    {
-      "check": "T1w-zeichenlaenge-optimum",
-      "dimension": "technik",
-      "wirkung": "warnung",
-      "entscheidung": "auto",
-      "quelle": "scripts/check_length.py (Status unter-/ueber-optimum)",
-      "artikel": [
-        "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit"
-      ],
-      "anzahl": 1
-    }
-  ],
+  "ursachen": [],
   "befundlage": {
-    "offen": 47,
-    "seiten": 11,
-    "live_befunde": 13,
-    "live_seiten": 4,
-    "ueberholt": 13,
-    "ohne_fassung": 15,
+    "offen": 34,
+    "seiten": 7,
+    "live_befunde": 0,
+    "live_seiten": 0,
+    "ueberholt": 10,
+    "ohne_fassung": 10,
     "nicht_entscheidbar": 5,
     "aeltester_tage": 6,
     "frist_tage": 14,
     "ueber_frist": 0,
-    "je_slug": {
-      "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": 3,
-      "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": 5,
-      "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": 2,
-      "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": 3
-    }
+    "je_slug": {}
   },
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
@@ -157,12 +126,12 @@
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
       "sha256": "3107f6b83b463b32049d54725985e2ed377c5fd1200f9616cc512ed90b3a9651",
-      "urteil": "blockiert",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "blockiert",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -171,14 +140,7 @@
       },
       "naechste_pruefung": "2026-12-01",
       "siegel_drift": "unverändert",
-      "checks": [
-        {
-          "check": "F4-fachbefund",
-          "dimension": "faktenalter",
-          "wirkung": "blockiert",
-          "detail": "30caa57be394afb62947 (luecke): Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg.; 32a3ea879f2cf126b3a7 (luecke): Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist.; c583efe1ce02df3ca2d7 (luecke):"
-        }
-      ]
+      "checks": []
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
       "sha256": "e5758a1ef8cf43568b644ee914b40dc9f47fca22a3ebd057364973355056d327",
@@ -218,12 +180,12 @@
     },
     "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": {
       "sha256": "a748bd5f0ef151781047e43351d468a80827deea74bfb425b253167554370293",
-      "urteil": "blockiert",
+      "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "warnung",
         "quellen": "bestanden",
-        "faktenalter": "blockiert",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -233,12 +195,6 @@
       "naechste_pruefung": "2026-11-29",
       "siegel_drift": "unverändert",
       "checks": [
-        {
-          "check": "F4-fachbefund",
-          "dimension": "faktenalter",
-          "wirkung": "blockiert",
-          "detail": "47f855cb4f0fe1e5c65f (luecke): Angaben zu möglichen Einsparungen beim Kfz‑Versicherungswechsel (150 €‑400 € bzw. 180 €‑350 €) sind ohne Quellenangabe; keine der genannten Zahlen findet sich in den bereitgestellten Statistiken.; 6b0aa3429d97e8c74ed8 (luecke): Die Behauptung, technische Maßnahmen beim Heizen senken den Energieverbrauch um 8 %‑12 %, wird nicht belegt; die bereitgestellten Daten entha"
-        },
         {
           "check": "T1w-zeichenlaenge-optimum",
           "dimension": "technik",
@@ -670,12 +626,12 @@
     },
     "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
       "sha256": "04844c0c078bb54edb791911401e5d44d5161ae3cf0d8340caa14e31624901b0",
-      "urteil": "blockiert",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "blockiert",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -684,14 +640,7 @@
       },
       "naechste_pruefung": "2026-12-20",
       "siegel_drift": "unverändert",
-      "checks": [
-        {
-          "check": "F4-fachbefund",
-          "dimension": "faktenalter",
-          "wirkung": "blockiert",
-          "detail": "20c08cb650ef6e24af64 (luecke): Der Ratgeber vernachlässigt bei der Kalkulation der Sparfähigkeit die massive Preissteigerung bei Energie (+14,9 %), die das Budget für monatliche Sparraten erheblich belastet.; 6aafb23c0c6dbb06ce3b (veraltet): Die im Rechenbeispiel zur Realrendite genutzte Inflationsrate von 2 % ist veraltet; die vorläufige Rate für Oktober 2026 beträgt laut Statistischem Bundesamt "
-        }
-      ]
+      "checks": []
     },
     "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen": {
       "sha256": "4726400fec2bdfdc74c650b016633052b08e8721ad014bec4f748faa70e394b0",
@@ -713,12 +662,12 @@
     },
     "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": {
       "sha256": "9f6340e6c7a5ec59d1db2aec4dd6c8587f678b9f129d848960413238224215d9",
-      "urteil": "blockiert",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "blockiert",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -727,14 +676,7 @@
       },
       "naechste_pruefung": "2026-12-20",
       "siegel_drift": "unverändert",
-      "checks": [
-        {
-          "check": "F4-fachbefund",
-          "dimension": "faktenalter",
-          "wirkung": "blockiert",
-          "detail": "24f05ddc03ffdd50118f (praezision): Die Kalkulation der Fixkostenersparnis bei Energie (Strom/Gas) ist unpräzise, da sie den aktuellen Preisanstieg von +14,9 % bei Energieprodukten nicht einbezieht.; 4816322f061dfdc03bcd (luecke): Bei den Einsparpotenzialen für Lebensmittel fehlt der Bezug zur aktuellen Preissteigerung von +0,4 % bei Nahrungsmitteln.; 7017065ee7c74c7ae452 (veraltet): Der Artikel nu"
-        }
-      ]
+      "checks": []
     },
     "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": {
       "sha256": "ae4e49707910715d0e98779f61e2a66c841db9907c846defd391a3157c2bae41",
