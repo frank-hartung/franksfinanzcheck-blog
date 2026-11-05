@@ -165,7 +165,7 @@ Es geht darum, die Technik für sich arbeiten zu lassen. Ein modernes Gerät nim
 
 
 **Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/)
-**Lesetipp:** [Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden](../../posts/2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu/)
+**Lesetipp:** Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden
 
 ## Häufige Fragen
 
