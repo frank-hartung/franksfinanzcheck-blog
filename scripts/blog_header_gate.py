@@ -631,6 +631,13 @@ def netz_pruefen(*, holen=kopfzeilen_holen, pausen=PAUSEN, schlaf=time.sleep,
                                  or k in PROXY_SPUREN or k == "server"}}
                   for m in messungen],
     }
+    # WF-E813 / #972 (05.11.2026): Die Diagnose stand bisher NUR im
+    # Markdown-Bericht. Der Auswerte-Schritt sendet aber Annotationen aus dem
+    # JSON – und verlor sie bei zehn Einzelbefunden an GitHubs Zehn-Zeilen-
+    # Grenze. Als eigenes, messungsbelegtes Feld überlebt sie garantiert.
+    # Nur BEFUND hat eine belegte Proxy-Aussage; STOERUNG/OK erfinden keine.
+    if klasse == KLASSE_BEFUND:
+        daten["diagnose"] = _proxy_satz(proxy)
     return code, "\n".join(zeilen), daten
 
 

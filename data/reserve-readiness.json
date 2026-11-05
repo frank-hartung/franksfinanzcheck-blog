@@ -1,8 +1,8 @@
 {
   "target": 6,
-  "ready": 4,
+  "ready": 7,
   "pool_size": 8,
-  "generated_at": "2026-11-05T11:35:58Z",
+  "generated_at": "2026-11-05T16:43:16Z",
   "candidates": [
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
@@ -57,10 +57,20 @@
     },
     {
       "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
-      "ready": false,
-      "sha256": "fdfc2fd2dff9a1fe1417f996c5c3a30747b18a4a72397ad82c4306632a2fe1fc",
-      "measured_at": "2026-11-05T11:31:11Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
+      "ready": true,
+      "sha256": "a9ca42a6a43af5b859bdc5e4460e06fbc7e9e4919345f89d062863cf07ba8456",
+      "flesch": 67.3,
+      "measured_at": "2026-11-05T16:40:27Z",
+      "score": 0.962,
+      "parts": {
+        "spelling": 0.88,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.96,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
     },
     {
       "slug": "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck",
@@ -81,16 +91,10 @@
     },
     {
       "slug": "2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-      "ready": false,
-      "sha256": "1a4aceefab9b49f76d53b9d24bc15c02baa1d0238fc70167976a2f97b46037e4",
-      "flesch": 66.1,
-      "measured_at": "2026-11-05T11:33:34Z",
-      "reason": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: ide",
-      "details": [
-        "🛑 2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…hinweis dieser artikel dient ausschließlich der allgemeinen information und stellt…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…keine anlage rechts oder steuerberatung dar prüfe konditionen und bedingungen…“ – doppelte Passage, manuell reparieren",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
+      "ready": true,
+      "sha256": "b76723ef4191794792ecc5b6db8badc0f8249e8ccc89f4d645722b97dcb4d364",
+      "flesch": 67.1,
+      "measured_at": "2026-11-05T16:41:24Z",
       "score": 0.972,
       "parts": {
         "spelling": 0.92,
@@ -104,21 +108,31 @@
     },
     {
       "slug": "2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "ready": false,
-      "sha256": "1ffe933826249f173fb20d370eb5acfbb9ecdf35760bd47201a8543990c1759c",
-      "measured_at": "2026-11-05T11:34:44Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
+      "ready": true,
+      "sha256": "8317469967f72c2cb1171409bd5ae8003ab9ae8c6ed361ae852e55058aa15e26",
+      "flesch": 71.6,
+      "measured_at": "2026-11-05T16:42:19Z",
+      "score": 1.0,
+      "parts": {
+        "spelling": 1.0,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
     },
     {
       "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
       "ready": false,
-      "sha256": "e231f1cb71f19d0ceb7bcd00d646f3d49fab899671e63be20d938fb918af6f22",
+      "sha256": "c22e6f22adcd3e24879dd1f43766d9a171c0b901762b4e71cf8e3e8d1340207e",
       "flesch": 61.7,
-      "measured_at": "2026-11-05T11:35:58Z",
-      "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+      "measured_at": "2026-11-05T16:43:16Z",
+      "reason": "Faktenfrische nicht bestanden: 4284fd2d9c9005e7af8f (praezision): Behauptung, dass Überladung der Maschine zu schnellerem Verschleiß und teuren Reparaturen führt, wird ohne konkrete Daten oder Messgröße angegeben.; 84e247f17354e224c973 (pra",
       "details": [
         "🛑 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
-        "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+        "Faktenfrische nicht bestanden: 4284fd2d9c9005e7af8f (praezision): Behauptung, dass Überladung der Maschine zu schnellerem Verschleiß und teuren Reparaturen führt, wird ohne konkrete Daten oder Messgröße angegeben.; 84e247f17354e224c973 (praezision): Aussage, dass das richtige Beladen allein die Fixkosten senkt, ohne weitere Maßnahmen, ist ein pauschales Leistungsversprechen ohne Nennung von Mechanismen oder Grenzen.; a2a7dc69f10393af6531 (luecke): Die Modellrechnung (0,9 kWh/50 L bei vollem Waschgang, 0,6 kWh/35 L bei halbem Waschgang, Strompreis 0,40 €/kWh, Wasserpreis 0,005 €/L) und die daraus resultierende Jahresersparnis von 22 € fehlen einer fundierten Quelle.; cb794331f1cc0c715a55 (luecke): Die Aussage, dass bei 4 Waschgängen pro Woche ein durchschnittlicher Haushalt rund 5 € jährlich an Strom‑ und Wasserkosten spart, ist nicht mit einer Quelle belegt.; e6729081522126e972c2 (luecke): Angabe, dass ein optimal beladener Trommel (ca. 80 % Kapazität) bis zu 15 % weniger Wasser und Energie verbraucht, wird nicht durch eine Quelle belegt.",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
       ],
       "score": 0.928,
@@ -134,8 +148,18 @@
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "42017624914",
+    "kind": "partial",
+    "run_id": "42066546614",
     "run_attempt": "1"
+  },
+  "recert": {
+    "at": "2026-11-05T16:43:16Z",
+    "renewed": [
+      "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
+      "2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
+      "2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang"
+    ],
+    "tool": "scripts/reserve_recert.py"
   }
 }

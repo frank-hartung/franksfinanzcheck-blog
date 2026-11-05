@@ -97,12 +97,35 @@ class UebersetzerTests(unittest.TestCase):
         self.assertEqual(1, counts["warnings"])
 
     def test_wird_gedeckelt_und_sagt_es(self):
+        # WF-E813 / #972 (05.11.2026): Früher waren es 10 Befunde PLUS ein
+        # Rest-Hinweis = 11 Fehlerzeilen. GitHub zeigt aber nur zehn je Ebene
+        # und Schritt – ausgerechnet der Hinweis auf den Verlust verschwand.
+        # Jetzt: 9 Befunde + 1 Hinweis, und der Hinweis zählt alle 4 Entfallenen.
         dom = dom_fixture(critical=[(f"/page-{i}/", ["zu viele Kinder"])
                                     for i in range(13)])
         counts, text = self.run_report(dom, browser_fixture(), max_annotations=10)
         self.assertEqual(13, counts["errors"])
-        self.assertEqual(10, text.count("::error::") - 1)  # 10 Befunde + 1 Rest-Hinweis
-        self.assertIn("+3 weitere kritische Befunde", text)
+        zeilen = [z for z in text.splitlines() if z.startswith("::error::")]
+        self.assertEqual(10, len(zeilen))
+        self.assertEqual(9, len([z for z in zeilen if "weitere" not in z]))
+        self.assertIn("+4 weitere kritische Befunde", text)
+
+    def test_genau_zehn_befunde_brauchen_keinen_resthinweis(self):
+        dom = dom_fixture(critical=[(f"/page-{i}/", ["zu viele Kinder"])
+                                    for i in range(10)])
+        counts, text = self.run_report(dom, browser_fixture())
+        self.assertEqual(10, counts["errors"])
+        self.assertEqual(10, text.count("::error::"))
+        self.assertNotIn("weitere kritische Befunde", text)
+
+    def test_fruehwarnungen_werden_mit_gezaehltem_rest_gedeckelt(self):
+        dom = dom_fixture(warnings=[(f"/page-{i}/", ["Kinder: 55 > 54"])
+                                    for i in range(13)])
+        counts, text = self.run_report(dom, browser_fixture())
+        self.assertEqual(13, counts["warnings"])
+        zeilen = [z for z in text.splitlines() if z.startswith("::warning::")]
+        self.assertEqual(10, len(zeilen))
+        self.assertIn("+4 weitere Frühwarnungen", text)
 
     def test_steuerzeichen_werden_escaped(self):
         dom = dom_fixture(critical=[("/a/", ["Zeile1\nZeile2 100% verbraucht"])])

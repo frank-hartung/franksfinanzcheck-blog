@@ -649,6 +649,37 @@ def _set_review_hash(raw: str, digest: str) -> str:
     return "".join(lines)
 
 
+def meta_befunde_description(fm: dict) -> list[str]:
+    """Description gegen das Meta-Qualitäts-Gate messen – mit seinen Messstellen.
+
+    #1069 (Dauerheilung 05.11.2026): Ab dem Siegel ist die Fassung für die
+    Meta-Heiler gesperrt (`automatic_write_protected`). Eine Description, die
+    hier mit Befund versiegelt wird, meldet das Wochen-Gate deshalb für immer
+    und legt jede Woche ein Issue nach – heilbar ist sie nur noch über eine
+    neue redaktionelle Freigabe. Genau so entstand #1069: Die SEO-Runde vom
+    26.10. schrieb eine Description ohne Satzende, die Neusiegelung vom 27.10.
+    band sie fest, und der Punkt-Fix vom 28.10. wurde vom YMYL-Restore vom
+    29.10. zu Recht zurückgerollt.
+
+    Gemessen wird mit DEMSELBEN Messer wie im Publish-Score (`quality_score`):
+    Satzende (`meta_optimizer.desc_has_sentence_end`, der dokumentierte Spiegel
+    des Meta-Gates) UND Snippet-Fenster der SSOT (`serp_limits`, Obergrenzen –
+    die Untergrenze ist Meldebestand der Wache, kein Publish-Hindernis). Keine
+    zweite Grenze, keine Kopie des Zeichensatzes. Die Importe bleiben lokal:
+    Das Gate ist Modullast vieler Wachen und soll keinen SEO-Schreiber samt
+    KI-Transportmodul im Importgraphen jeder Wache haben.
+    """
+    import serp_limits
+    from meta_optimizer import desc_has_sentence_end
+
+    description = str(fm.get("description") or "").strip()
+    befunde: list[str] = []
+    if not desc_has_sentence_end(description):
+        befunde.append("Description ohne Satzende (Punkt/!/?/… fehlt)")
+    befunde.extend(detail for _, detail in serp_limits.befunde(description, min_zeichen=0))
+    return befunde
+
+
 def seal(path: Path | str, *, today: dt.date | None = None) -> dict:
     """Versiegelt nur eine vollständig ausgefüllte Freigabe; kein Auto-Approve."""
     path = Path(path)
@@ -658,6 +689,13 @@ def seal(path: Path | str, *, today: dt.date | None = None) -> dict:
     if blockers:
         details = "; ".join(f"{f['code']} {f['detail']}" for f in blockers)
         raise ParseError(f"Freigabe unvollständig; Siegel verweigert: {details}")
+    meta = meta_befunde_description(fm)
+    if meta:
+        raise ParseError(
+            "Siegel verweigert: Description verletzt das Meta-Qualitäts-Gate ("
+            + "; ".join(meta)
+            + "). Erst die Meta-Qualität herstellen, dann neu siegeln – eine "
+            "versiegelte Fassung darf die Meta-Automatik nicht heilen (#1069).")
     digest = content_fingerprint(fm, body)
     new_raw = _set_review_hash(raw, digest)
     path.write_text(new_raw, encoding="utf-8")
@@ -861,6 +899,31 @@ def selftest() -> list[str]:
     fm_space_anchor["redaktionelle_pruefung"]["inhalt_sha256"] = content_fingerprint(fm_space_anchor, body_nbsp)
     ok_anchor = validate_article(fm_space_anchor, body_nbsp, today=today)
     expect("Anker mit Space matcht Body mit NBSP", not any(f["code"] == "E13" for f in ok_anchor["findings"]))
+
+    # #1069 (Dauerheilung 05.11.2026): Das Siegel darf keine Fassung festziehen,
+    # deren Description das Meta-Qualitäts-Gate verletzt – ab dem Siegel ist die
+    # Meta-Automatik gesperrt und der Befund würde jede Woche ein Issue erzeugen.
+    import tempfile
+    expect("Meta-Messer erkennt fehlendes Satzende",
+           bool(meta_befunde_description({"description": "Ein sachlicher Kredit-Ratgeber"})))
+    expect("Meta-Messer erkennt zu langes Snippet",
+           bool(meta_befunde_description({"description": "W " * 120 + "Ende."})))
+    expect("Meta-Messer lässt saubere Description durch",
+           not meta_befunde_description({"description": "Ein sachlicher Kredit-Ratgeber."}))
+    with tempfile.TemporaryDirectory() as tmp:
+        meta_fm = copy.deepcopy(fm)
+        meta_fm["description"] = "Ein sachlicher Kredit-Ratgeber ohne Schlusspunkt"
+        meta_path = Path(tmp) / "index.md"
+        meta_raw = ("---\n" + _yaml_module().safe_dump(meta_fm, allow_unicode=True, sort_keys=False)
+                    + "---\n" + body)
+        meta_path.write_text(meta_raw, encoding="utf-8")
+        try:
+            seal(meta_path, today=today)
+            expect("Siegel verweigert Description ohne Satzende", False)
+        except ParseError as exc:
+            expect("Siegel verweigert Description ohne Satzende", "Meta-Qualitäts-Gate" in str(exc))
+        expect("verweigertes Siegel lässt die Datei unverändert",
+               meta_path.read_text(encoding="utf-8") == meta_raw)
 
     return errors
 

@@ -303,6 +303,26 @@ class ProxyDiagnose(unittest.TestCase):
         self.assertIn("FF Sicherheits-Header", daten["naechster_schritt"])
         self.assertNotIn("Proxied", daten["naechster_schritt"])
 
+    def test_972_befund_traegt_die_diagnose_im_json_nicht_nur_im_markdown(self):
+        # Lauf 42044923993: zehn fehlende Kopfzeilen füllten das Fehler-Budget
+        # des Auswerte-Schritts; die elfte Zeile mit der Diagnose verschwand.
+        # Der Auswerte-Schritt liest aber JSON, nicht Markdown. Ohne eigenes
+        # Feld kann er die Diagnose gar nicht senden.
+        (code, bericht, daten), _ = _messen([(200, {**PROXY})], ziele=[gate.ZIELE[0]])
+        self.assertEqual(code, gate.EXIT_BEFUND)
+        self.assertEqual(daten["proxy"], gate.PROXY_AKTIV)
+        self.assertEqual(daten["diagnose"], gate._proxy_satz(gate.PROXY_AKTIV))
+        self.assertIn("**Diagnose:**", bericht)
+        self.assertIn(daten["diagnose"], bericht)
+
+    def test_972_gruen_und_stoerung_erfinden_keine_diagnose(self):
+        (code, _, daten), _ = _messen([(200, {**PROXY, **GUT})], ziele=[gate.ZIELE[0]])
+        self.assertEqual(code, gate.EXIT_OK)
+        self.assertNotIn("diagnose", daten)
+        (code, _, daten), _ = _messen([ABBRUCH], ziele=[gate.ZIELE[0]])
+        self.assertEqual(code, gate.EXIT_STOERUNG)
+        self.assertNotIn("diagnose", daten)
+
     def test_815_proxy_aktiv_erinnert_an_offenen_datenschutz_b7(self):
         (code, bericht, daten), _ = _messen(
             [(200, {**PROXY, **GUT})], ziele=[gate.ZIELE[0]])

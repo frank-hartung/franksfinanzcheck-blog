@@ -356,5 +356,97 @@ class EchteResolveShell(unittest.TestCase):
         self.assertNotIn("actions/runs", calls)
 
 
+class AnnotationsVertrag972(unittest.TestCase):
+    """Lauf 42044923993 (05.11.2026) als Regression, ohne Netz nachgebaut.
+
+    Zehn fehlende Pflicht-Header auf zwei Zielen füllten das Fehler-Budget des
+    Auswerte-Schritts genau aus. Die elfte Zeile mit der Proxy-Diagnose und
+    dem nächsten Schritt war im Check-Run nicht mehr da – obwohl die Meldung
+    #972 ausdrücklich auf „die Header-Annotation“ verwies. Geprüft wird hier
+    die gesendete Fassade, nicht nur der Bericht im Artefakt.
+    """
+
+    def _f01_befund_mit_zehn_fehlern(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            wurzel = Path(tmp)
+            datenschutz = wurzel / "content" / "datenschutz" / "index.md"
+            datenschutz.parent.mkdir(parents=True)
+            datenschutz.write_text("Cloudflare-Proxy und Zugriffsdaten sind beschrieben.",
+                                   encoding="utf-8")
+            with patch.object(header, "WURZEL", wurzel):
+                code, bericht, daten = header.netz_pruefen(
+                    holen=lambda *_: (200, {"cf-ray": "9a1b2c3d4e5f6a7b-FRA"}),
+                    pausen=(), schlaf=lambda _: None)
+        self.assertEqual(code, 1)
+        self.assertEqual(len(daten["fehlend"]), 10)
+        daten["bericht"] = bericht
+        return daten
+
+    def _auswerten(self, quelle, daten):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "messung.json").write_text(json.dumps(daten), encoding="utf-8")
+            (root / "messung.md").write_text(daten["bericht"], encoding="utf-8")
+            puffer = io.StringIO()
+            with patch.dict(os.environ, {"GITHUB_STEP_SUMMARY": str(root / "summary"),
+                                         "GITHUB_KOMMANDOS": "an"}), \
+                    contextlib.redirect_stdout(puffer):
+                code = nachweis.auswerten(quelle, str(daten["exit"]),
+                                          str(root / "messung.json"),
+                                          str(root / "messung.md"))
+            zeilen = [z for z in puffer.getvalue().splitlines() if z.startswith("::error::")]
+            return code, zeilen, (root / "summary").read_text(encoding="utf-8")
+
+    def test_zehn_f01_befunde_verdraengen_diagnose_und_schritt_nicht(self):
+        daten = self._f01_befund_mit_zehn_fehlern()
+        code, zeilen, summary = self._auswerten("header", daten)
+        self.assertEqual(code, 1)
+        self.assertLessEqual(len(zeilen), nachweis.MELDE_BUDGET_ROT,
+                             "Neun eigene Fehlerzeilen, die zehnte gehört dem Runner")
+        self.assertEqual(len(zeilen) + 1, 10)
+        self.assertIn(daten["diagnose"], zeilen[0], "Die Diagnose muss die erste Zeile sein")
+        self.assertIn("Diagnose:", zeilen[0])
+        self.assertIn("FF Sicherheits-Header", zeilen[1], "Der nächste Schritt muss überleben")
+        self.assertTrue(any("weitere" in z for z in zeilen), "Der Verlust muss benannt sein")
+        # Gekappt wird nur die Fassade: alle zehn Funde bleiben im Nachweis.
+        for befund in daten["fehlend"]:
+            self.assertIn(befund, summary)
+        self.assertIn("**Diagnose:**", summary)
+
+    def test_die_aussage_der_meldung_972_ist_jetzt_durch_die_annotation_gedeckt(self):
+        meldung = (ROOT / ".github" / "workflows" / "alert-on-failure.yml").read_text(
+            encoding="utf-8")
+        self.assertIn("Die Header-Annotation nennt die Diagnose", meldung)
+        daten = self._f01_befund_mit_zehn_fehlern()
+        _, zeilen, _ = self._auswerten("header", daten)
+        self.assertTrue(any("Proxy ist" in z for z in zeilen),
+                        "Der Rat in #972 zeigt auf eine Zeile, die es geben muss")
+        self.assertTrue(any("FF Sicherheits-Header" in z for z in zeilen))
+
+    def test_worker_stoerung_behaelt_alle_zeilen_und_braucht_keine_sammelzeile(self):
+        daten = {"exit": 2, "klasse": "STOERUNG", "gemessen": 0, "fehlend": [],
+                 "warnungen": [], "stoerung": ["Schema unvollständig", "Deploy veraltet",
+                                               "Leseschlüssel prüfen"],
+                 "bericht": "Messbericht", "naechster_schritt": "Runbook D2 lesen"}
+        code, zeilen, _ = self._auswerten("worker", daten)
+        self.assertEqual(code, 1)
+        self.assertEqual(len(zeilen), 4)
+        self.assertIn("Runbook D2 lesen", zeilen[0])
+        self.assertFalse(any("weitere" in z for z in zeilen))
+
+    def test_ungueltige_diagnose_ist_wache_fehler_kein_freibrief(self):
+        kopf, _ = gute_messungen()
+        for diagnose in ({"proxy": "aktiv"}, "   ", 7, ["aktiv"]):
+            with self.subTest(diagnose=diagnose):
+                with self.assertRaises(nachweis.NachweisFehler):
+                    nachweis.pruefe_messung({**kopf, "diagnose": diagnose}, "header", "0")
+
+    def test_gruene_messung_erfindet_keine_diagnose(self):
+        kopf, _ = gute_messungen()
+        self.assertNotIn("diagnose", kopf, "Nur ein belegter BEFUND trägt eine Diagnose")
+        _, zeilen, _ = self._auswerten("header", kopf)
+        self.assertFalse(any(z.startswith("::error::") for z in zeilen))
+
+
 if __name__ == "__main__":
     unittest.main()
