@@ -389,8 +389,12 @@ def selbsttest() -> int:
             else:
                 fehler.append("PNG wurde statt Ablehnung geschrieben")
 
-        # Vokabular und Paketform ohne Bilddatei prüfen
-        if "cv.iptc.org" not in paket_bauen("trainedAlgorithmicMedia"):
+        # Vokabular und Paketform ohne Bilddatei prüfen. Die Host-Erkennung
+        # läuft über scripts/url_host.py (`nennt_host`) – eine nackte
+        # Teilzeichenketten-Prüfung gegen eine URL ist laut URL-Wache
+        # (Alert #83) verboten, auch in einem Selbsttest.
+        from url_host import nennt_host  # noqa: PLC0415  (verzögert wie provenienz())
+        if not nennt_host(paket_bauen("trainedAlgorithmicMedia"), "cv.iptc.org"):
             fehler.append("IPTC-Vokabular-URI fehlt im Paket")
         if "&" in paket_bauen("trainedAlgorithmicMedia", hinweis="A & B") and "&amp;" not in paket_bauen("trainedAlgorithmicMedia", hinweis="A & B"):
             fehler.append("Hinweistext nicht XML-escapt")
