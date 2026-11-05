@@ -1,6 +1,6 @@
 {
   "target": 6,
-  "ready": 7,
+  "ready": 6,
   "pool_size": 8,
   "generated_at": "2026-11-05T16:43:16Z",
   "candidates": [
@@ -108,20 +108,10 @@
     },
     {
       "slug": "2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "ready": true,
+      "ready": false,
       "sha256": "8317469967f72c2cb1171409bd5ae8003ab9ae8c6ed361ae852e55058aa15e26",
-      "flesch": 71.6,
       "measured_at": "2026-11-05T16:42:19Z",
-      "score": 1.0,
-      "parts": {
-        "spelling": 1.0,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
