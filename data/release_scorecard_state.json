@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-05T18:13:34Z",
+  "generated_at": "2026-11-05T22:06:12Z",
   "modus": "kandidaten",
-  "commit": "82ef30f3554edf397f63755b81a19eaf2f56946e",
+  "commit": "95277782fc6c2bdeb5e70104c20e1d4f07a38a42",
   "kapazitaet": {
     "stichtag": "2026-11-05",
     "artikel": 114,
@@ -175,7 +175,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
@@ -326,7 +326,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
