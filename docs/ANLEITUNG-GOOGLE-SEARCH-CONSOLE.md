@@ -203,6 +203,43 @@ Fakten/Quellen aktualisieren, intern passend verlinken – und erst danach Title
 überarbeiten. Eine niedrige CTR kann an Suchintention, SERP-Features oder
 Position liegen, nicht pauschal an „schlechten Titeln".
 
+### 6.1 Auswertung: `gsc_leistung.py` (seit 05.11.2026, #1065)
+
+Diese Reihenfolge stand seit dem 27.10.2026 als Prosa im Runbook – erzeugt hat
+sie niemand. `scripts/gsc_leistung.py` liest dieselben vier Dateien, die der
+Import schreibt, offline und deterministisch, und beantwortet neun Fragen
+(L1–L9):
+
+| Regel | Frage |
+|---|---|
+| L1 | Steht der Import? (Stand älter als 2 Tage) |
+| L2 | Deckt der Ledger das Fenster des Kopfs? |
+| L3 | Wie entwickeln sich Impressionen, Klicks, CTR (7/28/90 Tage)? |
+| L4 | Welche Inhaltsseiten liegen in Schlagdistanz (Impressionen, 0 Klicks, Position ≤ 20)? |
+| L5 | Welche Inhaltsseiten hatten keine einzige Impression? |
+| L6 | Welche Suchbegriffe tragen Nachfrage ohne Wirkung? |
+| L7 | Welche Seite steht auf Position ≤ 10 und bekommt trotzdem keinen Klick? |
+| L8 | Trifft die eingefrorene Top-20-Auswahl noch die aktuelle Reichweite? |
+| L9 | Widersprechen sich zwei gültige Dateien rechnerisch? |
+
+```bash
+npm run gsc:leistung          # rechnen + Artefakte schreiben
+npm run gsc:leistung:md       # Bericht für die Lauf-Zusammenfassung
+npm run gsc:leistung:issue    # Issue-Text auf stdout
+python3 scripts/gsc_leistung.py --check    # Tor: Exit 1 bei hartem Befund
+python3 scripts/gsc_leistung.py --selftest # eingefrorene Fälle, offline
+```
+
+**Zwei Schweregrade, zwei Konsequenzen.** *Hart* heißt: der Lauf steht (L1) oder
+zwei gültige Dateien widersprechen sich rechnerisch (L9) – ein Defekt des
+Imports, und nur dann fährt das Tor rot. *Hinweis* ist eine redaktionelle
+Aussage: „276 Impressionen und null Klicks“ ist eine Tatsache, kein Defekt. Ein
+Dauer-Rot würde die nächste echte Meldung bedeuten wie die vorherigen.
+
+**Was die Auswertung nicht tut:** Sie ruft keine Suchmaschine auf, schreibt
+keinen Text und wählt die Top-20-Auswahl nicht neu. Jede Aufgabe landet in
+`data/gsc/leistung/warteschlange.json` mit Eigentümer „Mensch (Redaktion)“.
+
 ## 7. Was täglich automatisch läuft
 
 `.github/workflows/gsc-import.yml`, 05:17 UTC (≈ 07:17 Berlin):
@@ -218,6 +255,10 @@ Position liegen, nicht pauschal an „schlechten Titeln".
    `--altlasten`) – jeder Schritt endet mit einer Warnung, nie mit Abbruch
 6. Indexierung anfragen (`gsc_indexierung.py --live`), in der Reihenfolge der
    Welle 1 aus `prioritaet.json` (max. 40 statt stumpf 200 nach `lastmod`)
+6a. Leistung auswerten (`gsc_leistung.py --selftest`, `--check` als Tor,
+   `--schreiben --md` in die Zusammenfassung). Der Daten-PR trägt die
+   Auswertung danach mit – die Fragen des Issues sind beantwortet, bevor sie
+   gestellt werden.
 7. IndexNow-Ping (`submit_indexnow.py --live --kein-llms`)
 8. Artefakte als Download (`gsc-abdeckung`), Zustand direkt auf main sichern,
    Leistungsdaten als PR
@@ -516,6 +557,9 @@ npm run gsc:bestand:live        # … laut ausgelieferter Sitemap
 npm run gsc:plan                # welche Seiten wären heute fällig?
 npm run gsc:indexieren          # Indexierung anfragen
 npm run gsc:daten               # Leistungsdaten holen
+npm run gsc:leistung           # Leistungsdaten auswerten (L1–L9) + Artefakte
+npm run gsc:leistung:md        # … als Markdown
+npm run gsc:leistung:issue     # … als Issue-Text
 npm run gsc:abdeckung           # Abdeckungsbericht gegenrechnen
 npm run gsc:abdeckung:gate      # … als Tor (Exit 1 bei Rückschritt)
 npm run gsc:abdeckung:md        # … als Markdown
@@ -532,5 +576,5 @@ npm run gsc:fristen:wache       # dasselbe als Wache (Exit 1 bei Frist ohne Bele
 npm run gsc:ursachen            # Sprung mit Git-Beleg erklären (M7)
 npm run gsc:setup               # sieht das Dienstkonto die Property?
 npm run indexnow                # IndexNow-Ping
-npm run test:gsc                # 7 Selbsttests + 165 Regressionstests
+npm run test:gsc                # 8 Selbsttests + 221 Regressionstests
 ```

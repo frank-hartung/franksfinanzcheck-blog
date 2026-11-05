@@ -209,6 +209,43 @@ python3 scripts/gsc_import.py --selftest
 Prüft: echte RS256-Signatur mit `openssl` (Gegenprobe mit `openssl dgst -verify`), Paginierung, Merge
 der Tage, Geheimnisschutz in `meta.json`, Status „nicht konfiguriert“.
 
+## Leistungsdaten auswerten: `gsc_leistung.py` (05.11.2026, #1065)
+
+Der Import sammelt die Zahlen; dieses Werkzeug liest sie. Es läuft **offline und
+deterministisch** – es fragt Google kein zweites Mal, sondern rechnet mit dem,
+was in `data/gsc/` liegt. Neun Regeln (L1–L9), zwei Schweregrade:
+
+| Schwere | Bedeutung | Konsequenz |
+|---|---|---|
+| `hart` | Der Import steht (L1) oder zwei gültige Dateien widersprechen sich **rechnerisch** (L9: `klicks_zeitraum`, CTR je Eintrag, Position außerhalb 1–100) | `--check` endet mit Exit 1 |
+| `hinweis` | Redaktionelle Aussage (L3–L8) oder eine Mess-Abweichung zwischen Seiten-Liste und Tages-Ledger | steht im Bericht, das Tor bleibt grün |
+
+```bash
+python3 scripts/gsc_leistung.py --check      # Tor
+python3 scripts/gsc_leistung.py --schreiben  # Artefakte nach data/gsc/leistung/
+python3 scripts/gsc_leistung.py --md         # Bericht für die Lauf-Zusammenfassung
+python3 scripts/gsc_leistung.py --issue      # Issue-Text
+python3 scripts/gsc_leistung.py --selftest   # eingefrorene Fälle, offline
+```
+
+**Warum die Mess-Abweichung nur ein Hinweis ist:** Google aggregiert je Dimension
+und anonymisiert einzelne Suchbegriffe – die Summe der Seiten-Liste und die Summe
+des Tages-Ledgers sind deshalb *nie* exakt gleich (am 05.11.2026: 350 zu 276
+Impressionen im selben Fenster). Welche der beiden Messungen recht hat, kann nur
+die Search Console sagen. Jenseits von 25 % Abweichung steht sie trotzdem im
+Bericht, damit ein verschobenes Fenster oder ein alter Listenstand auffällt –
+aber sie macht den Lauf nicht rot, weil das Repo die Frage nicht entscheiden
+kann.
+
+**Die eingefrorene Top-20-Auswahl (L8):** `data/top20_abbildungen.yaml` wurde am
+19.10.2026 nach genau diesen Impressionen gewählt. Der Import schreibt die Quelle
+täglich neu, die Auswahl selbst steht. Trifft sie weniger als die Hälfte der
+aktuellen Reichweite, meldet L8 das als Wiedervorlage – es wählt **nicht** neu,
+denn ein tägliches Neuwählen würde 20 Artikel jeden Tag anfassen. Erneuern ist
+ein menschlicher Schritt: `python3 scripts/abbildungen_ableiten.py` → `--check`.
+
+Vollständige Einordnung: `ANLEITUNG-GOOGLE-SEARCH-CONSOLE.md` §6.1.
+
 ## Wenn ein Artefakt kaputt ist: die Wache und ihr Heilweg (24.10.2026)
 
 Am 21.10.2026 hat Git drei Dateien aus `data/gsc/` **als Text** zusammengeführt.

@@ -491,6 +491,37 @@ jobs:
           python3 scripts/gsc_artefakte_guard.py --check
           python3 scripts/gsc_artefakte_guard.py --md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
 
+      # ------------------------------------------------------------
+      #  LEISTUNG AUSWERTEN (Vorgang #1065, 05.11.2026)
+      #
+      #  Bis hierher sammelte der Lauf die Zahlen und stellte drei Fragen
+      #  an einen Menschen („Was zu prüfen ist“). Genau diese Fragen
+      #  beantwortet `gsc_leistung.py` aus denselben vier Dateien –
+      #  offline, deterministisch, ohne Google ein zweites Mal zu fragen:
+      #  steht der Import (L1), stimmen Kopf und Ledger (L2/L9), welche
+      #  Seiten liegen in Schlagdistanz (L4), welche sind unsichtbar (L5),
+      #  welche Begriffe tragen Nachfrage ohne Wirkung (L6).
+      #
+      #  Zwei Schritte, zwei Aufgaben:
+      #    --check      Tor. Hart heißt: der Lauf steht oder zwei gültige
+      #                 Dateien widersprechen sich rechnerisch. Das ist ein
+      #                 Defekt des Imports, nicht der Messung.
+      #    --schreiben  Artefakte nach data/gsc/leistung/ – sie reisen mit
+      #                 dem Daten-PR und beantworten die Fragen, bevor sie
+      #                 gestellt werden.
+      #
+      #  Weiche Befunde (Hinweis) sind redaktionelle Signale und machen den
+      #  Lauf NICHT rot: „276 Impressionen, null Klicks" ist eine Tatsache,
+      #  kein Defekt. Ein Dauer-Rot würde die nächste echte Meldung bedecken
+      #  wie die vorherigen.
+      # ------------------------------------------------------------
+      - name: Leistung auswerten (L1–L9) und Tor fahren
+        run: |
+          set -uo pipefail
+          python3 scripts/gsc_leistung.py --selftest
+          python3 scripts/gsc_leistung.py --check
+          python3 scripts/gsc_leistung.py --schreiben --md >> "$GITHUB_STEP_SUMMARY"
+
       - name: Indexierungs-Zustand direkt sichern (Kontingent-Gedächtnis)
         continue-on-error: true
         run: |
@@ -537,31 +568,48 @@ jobs:
           # der dokumentierte Weg dafür; ohne ihn würde der Kern nach main
           # pushen – also genau an den Ort, den dieser Schritt vermeidet.
           BRANCH="$BRANCH" scripts/git_sync.sh "chore(gsc): Leistungsdaten $(date -u +%F)" data/gsc/
+          # Der PR trägt die Auswertung gleich mit (#1065, 05.11.2026): Die
+          # drei Fragen unter „Was zu prüfen ist" standen tagelang in jedem
+          # Issue, ohne dass ein Skript sie beantwortet hätte. Jetzt erzeugt
+          # `gsc_leistung.py --issue` dieselben Antworten aus denselben vier
+          # Dateien – der Mensch liest eine Einordnung statt einer Bitte um
+          # Einordnung. Fällt das Werkzeug aus, bleibt der alte Text stehen:
+          # ein PR ohne Auswertung ist besser als ein PR, den ein defekter
+          # Erzeuger blockiert (D9: kein Report-Schritt ohne lebenden Erzeuger).
+          AUSWERTUNG="$(python3 scripts/gsc_leistung.py --issue 2>/dev/null || true)"
+          if [ -z "$AUSWERTUNG" ]; then
+            AUSWERTUNG="Auswertung diesmal nicht verfügbar: \`python3 scripts/gsc_leistung.py --issue\` von Hand fahren."
+          fi
           gh pr create --base main --head "$BRANCH" \
             --title "GSC-Leistungsdaten $(date -u +%F)" \
-            --body "$(cat <<'TEXT'
+            --body "$(cat <<TEXT
           Automatischer Import der Search-Console-Leistungsdaten (nur lesend).
 
           **Was drin ist**
 
-          - `data/gsc/tagesdaten.jsonl` – Klicks, Impressionen, CTR, Position je Tag.
+          - \`data/gsc/tagesdaten.jsonl\` – Klicks, Impressionen, CTR, Position je Tag.
             Wächst dauerhaft: Google hält nur 16 Monate, das Repo behält alles.
-          - `data/gsc/top_seiten_28t.json`, `data/gsc/top_suchbegriffe_28t.json` – Top 500 der letzten 28 Tage.
-          - `data/gsc/meta.json` – Stand, Zeitraum, Status.
+          - \`data/gsc/top_seiten_28t.json\`, \`data/gsc/top_suchbegriffe_28t.json\` – Top 500 der letzten 28 Tage.
+          - \`data/gsc/meta.json\` – Stand, Zeitraum, Status.
+          - \`data/gsc/leistung/\` – Auswertung derselben Zahlen (Befund, Warteschlange, Verlauf).
 
           **Was zu prüfen ist**
 
-          1. Status in `meta.json`: `ok`, `nicht_konfiguriert` oder `fehler`.
+          1. Status in \`meta.json\`: \`ok\`, \`nicht_konfiguriert\` oder \`fehler\`.
           2. In der Lauf-Zusammenfassung: Steht bei den Indexierungs-Anfragen ein
-             Abdeckungszustand wie `Crawled - currently not indexed`? Dann hat
+             Abdeckungszustand wie \`Crawled - currently not indexed\`? Dann hat
              Google die Seite gesehen und sich dagegen entschieden – das ist ein
              redaktionelles Signal (Inhalt, interne Verlinkung, Duplikat), kein
              technisches.
-          3. Steht dort `keine_berechtigung`? Dann braucht das Dienstkonto in der
+          3. Steht dort \`keine_berechtigung\`? Dann braucht das Dienstkonto in der
              Search Console die Stufe „Vollständig“ (Owner); „Eingeschränkt“
              reicht nur für diesen Lese-Import.
 
+          **Auswertung der Leistungsdaten** (\`scripts/gsc_leistung.py\`, offline)
+
+          $AUSWERTUNG
+
           Keine Personenbezüge, keine Schlüssel, keine Tokens in diesem PR.
-          Runbook: `docs/ANLEITUNG-GSC-API-ZUGRIFF.md`
+          Runbook: \`docs/ANLEITUNG-GSC-API-ZUGRIFF.md\`
           TEXT
           )" || gh pr view "$BRANCH" --json url -q .url

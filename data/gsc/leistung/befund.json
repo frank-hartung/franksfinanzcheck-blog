@@ -1,0 +1,753 @@
+{
+  "schema": 1,
+  "stand": "2026-11-05T17:36:52Z",
+  "heute": "2026-11-05",
+  "import": {
+    "lesbar": true,
+    "stand": "2026-11-05T13:10:23Z",
+    "alter_tage": 0,
+    "status": "ok"
+  },
+  "trend": {
+    "fenster_7": {
+      "von": "2026-10-27",
+      "bis": "2026-11-02",
+      "messtage": 7,
+      "impressionen": 144,
+      "klicks": 0,
+      "ctr": 0.0,
+      "tage_mit_impression": 7
+    },
+    "fenster_28": {
+      "von": "2026-10-06",
+      "bis": "2026-11-02",
+      "messtage": 28,
+      "impressionen": 276,
+      "klicks": 0,
+      "ctr": 0.0,
+      "tage_mit_impression": 25
+    },
+    "fenster_90": {
+      "von": "2026-09-20",
+      "bis": "2026-11-02",
+      "messtage": 44,
+      "impressionen": 311,
+      "klicks": 0,
+      "ctr": 0.0,
+      "tage_mit_impression": 38
+    },
+    "richtung": {
+      "impressionen_vorher": 35,
+      "klicks_vorher": 0,
+      "impressionen_delta": 241,
+      "klicks_delta": 0
+    },
+    "messtage_gesamt": 44,
+    "messtage_mit_impression": 38,
+    "bester_tag": {
+      "datum": "2026-10-31",
+      "impressionen": 33,
+      "klicks": 0
+    },
+    "erster_tag": "2026-09-20",
+    "letzter_tag": "2026-11-02"
+  },
+  "seiten_mit_impression": 35,
+  "schlagdistanz": [
+    {
+      "url": "https://franksfinanzcheck.de/impressum/",
+      "pfad": "/impressum/",
+      "klasse": "recht",
+      "titel": "Impressum",
+      "impressionen": 20,
+      "position": 11.15,
+      "beleg": "20 Impressionen, 0 Klicks, Position 11.15"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/datenschutz/",
+      "pfad": "/datenschutz/",
+      "klasse": "recht",
+      "titel": "Datenschutzerklärung",
+      "impressionen": 14,
+      "position": 10.0,
+      "beleg": "14 Impressionen, 0 Klicks, Position 10.00"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/pillar/",
+      "pfad": "/pillar/",
+      "klasse": "hub",
+      "titel": "Franks Fixkosten-Kompass: Die 3 Kernbereiche & Sparthemen im Überblick",
+      "impressionen": 10,
+      "position": 5.0,
+      "beleg": "10 Impressionen, 0 Klicks, Position 5.00"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/",
+      "pfad": "/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/",
+      "klasse": "beitrag",
+      "titel": "VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?",
+      "impressionen": 7,
+      "position": 10.0,
+      "beleg": "7 Impressionen, 0 Klicks, Position 10.00"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/",
+      "pfad": "/",
+      "klasse": "hub",
+      "titel": "",
+      "impressionen": 6,
+      "position": 1.5,
+      "beleg": "6 Impressionen, 0 Klicks, Position 1.50"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/ueber/",
+      "pfad": "/ueber/",
+      "klasse": "recht",
+      "titel": "Über mich und diesen Blog",
+      "impressionen": 6,
+      "position": 2.33,
+      "beleg": "6 Impressionen, 0 Klicks, Position 2.33"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
+      "pfad": "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
+      "klasse": "beitrag",
+      "titel": "Haushaltsbuch führen: App, Excel oder Stift im Vergleich",
+      "impressionen": 6,
+      "position": 7.17,
+      "beleg": "6 Impressionen, 0 Klicks, Position 7.17"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/",
+      "pfad": "/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/",
+      "klasse": "beitrag",
+      "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
+      "impressionen": 6,
+      "position": 8.67,
+      "beleg": "6 Impressionen, 0 Klicks, Position 8.67"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/posts/",
+      "pfad": "/posts/",
+      "klasse": "hub",
+      "titel": "Alle Ratgeber für dein Fixkosten-Cockpit",
+      "impressionen": 5,
+      "position": 4.0,
+      "beleg": "5 Impressionen, 0 Klicks, Position 4.00"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/",
+      "pfad": "/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/",
+      "klasse": "beitrag",
+      "titel": "Preisgarantie Gas: Was bei Preiserhöhung hilft",
+      "impressionen": 5,
+      "position": 9.4,
+      "beleg": "5 Impressionen, 0 Klicks, Position 9.40"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/",
+      "pfad": "/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/",
+      "klasse": "beitrag",
+      "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
+      "impressionen": 4,
+      "position": 4.5,
+      "beleg": "4 Impressionen, 0 Klicks, Position 4.50"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/",
+      "pfad": "/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/",
+      "klasse": "beitrag",
+      "titel": "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht",
+      "impressionen": 4,
+      "position": 6.5,
+      "beleg": "4 Impressionen, 0 Klicks, Position 6.50"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/",
+      "pfad": "/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/",
+      "klasse": "beitrag",
+      "titel": "ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung",
+      "impressionen": 3,
+      "position": 3.0,
+      "beleg": "3 Impressionen, 0 Klicks, Position 3.00"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/posts/2026-08-07-frugalismus-fuer-den-erfolg/",
+      "pfad": "/posts/2026-08-07-frugalismus-fuer-den-erfolg/",
+      "klasse": "beitrag",
+      "titel": "",
+      "impressionen": 3,
+      "position": 7.33,
+      "beleg": "3 Impressionen, 0 Klicks, Position 7.33"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
+      "pfad": "/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
+      "klasse": "beitrag",
+      "titel": "DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis",
+      "impressionen": 3,
+      "position": 7.67,
+      "beleg": "3 Impressionen, 0 Klicks, Position 7.67"
+    }
+  ],
+  "ctr_ausfall": [
+    {
+      "url": "https://franksfinanzcheck.de/datenschutz/",
+      "pfad": "/datenschutz/",
+      "klasse": "recht",
+      "impressionen": 14,
+      "position": 10.0,
+      "beleg": "14 Impressionen auf Position 10.00, 0 Klicks"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/pillar/",
+      "pfad": "/pillar/",
+      "klasse": "hub",
+      "impressionen": 10,
+      "position": 5.0,
+      "beleg": "10 Impressionen auf Position 5.00, 0 Klicks"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/",
+      "pfad": "/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/",
+      "klasse": "beitrag",
+      "impressionen": 7,
+      "position": 10.0,
+      "beleg": "7 Impressionen auf Position 10.00, 0 Klicks"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/",
+      "pfad": "/",
+      "klasse": "hub",
+      "impressionen": 6,
+      "position": 1.5,
+      "beleg": "6 Impressionen auf Position 1.50, 0 Klicks"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/ueber/",
+      "pfad": "/ueber/",
+      "klasse": "recht",
+      "impressionen": 6,
+      "position": 2.33,
+      "beleg": "6 Impressionen auf Position 2.33, 0 Klicks"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
+      "pfad": "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
+      "klasse": "beitrag",
+      "impressionen": 6,
+      "position": 7.17,
+      "beleg": "6 Impressionen auf Position 7.17, 0 Klicks"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/",
+      "pfad": "/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/",
+      "klasse": "beitrag",
+      "impressionen": 6,
+      "position": 8.67,
+      "beleg": "6 Impressionen auf Position 8.67, 0 Klicks"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/posts/",
+      "pfad": "/posts/",
+      "klasse": "hub",
+      "impressionen": 5,
+      "position": 4.0,
+      "beleg": "5 Impressionen auf Position 4.00, 0 Klicks"
+    },
+    {
+      "url": "https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/",
+      "pfad": "/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/",
+      "klasse": "beitrag",
+      "impressionen": 5,
+      "position": 9.4,
+      "beleg": "5 Impressionen auf Position 9.40, 0 Klicks"
+    }
+  ],
+  "unsichtbare": {
+    "inhaltsseiten_gesamt": 92,
+    "mit_impression": 21,
+    "ohne_impression": 71,
+    "quote_mit_impression": 0.2283,
+    "neueste_ohne_impression": [
+      "/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/",
+      "/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/",
+      "/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/",
+      "/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/",
+      "/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/",
+      "/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/",
+      "/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/",
+      "/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/",
+      "/posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/",
+      "/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/"
+    ]
+  },
+  "nachfrage": {
+    "begriffe_gesamt": 53,
+    "baender": {
+      "1-10": [
+        {
+          "suchbegriff": "frank dsl",
+          "impressionen": 11,
+          "klicks": 0,
+          "position": 7.27
+        },
+        {
+          "suchbegriff": "wie kann ich kosten durch energieoptimierung senken?",
+          "impressionen": 3,
+          "klicks": 0,
+          "position": 5.67
+        },
+        {
+          "suchbegriff": "energiespar produkte",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 7.0
+        },
+        {
+          "suchbegriff": "ich suche ein gerät, das mir hilft, die gesamtbetriebskosten jahr für jahr zu senken.",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 4.0
+        },
+        {
+          "suchbegriff": "wie kann ich die kosten für energieversorgung reduzieren?",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 8.0
+        }
+      ],
+      "11-20": [
+        {
+          "suchbegriff": "dsl mobilfunk",
+          "impressionen": 6,
+          "klicks": 0,
+          "position": 17.17
+        },
+        {
+          "suchbegriff": "dsl und mobilfunk",
+          "impressionen": 3,
+          "klicks": 0,
+          "position": 11.33
+        },
+        {
+          "suchbegriff": "wartungskosten reduzieren",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 14.0
+        },
+        {
+          "suchbegriff": "wie senke ich meine stromkosten ohne auf komfort zu verzichten?",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 11.0
+        }
+      ],
+      "21-50": [
+        {
+          "suchbegriff": "100 mbit internet monatlich kündbar",
+          "impressionen": 31,
+          "klicks": 0,
+          "position": 49.61
+        },
+        {
+          "suchbegriff": "energiekosten senken",
+          "impressionen": 22,
+          "klicks": 0,
+          "position": 39.41
+        },
+        {
+          "suchbegriff": "energieeinsparung",
+          "impressionen": 8,
+          "klicks": 0,
+          "position": 25.62
+        },
+        {
+          "suchbegriff": "50 mbit internet monatlich kündbar",
+          "impressionen": 5,
+          "klicks": 0,
+          "position": 47.0
+        },
+        {
+          "suchbegriff": "energiespar lösungen",
+          "impressionen": 4,
+          "klicks": 0,
+          "position": 22.0
+        },
+        {
+          "suchbegriff": "dsl volumentarif",
+          "impressionen": 3,
+          "klicks": 0,
+          "position": 39.67
+        },
+        {
+          "suchbegriff": "energiesparmaßnahme",
+          "impressionen": 3,
+          "klicks": 0,
+          "position": 43.33
+        },
+        {
+          "suchbegriff": "stromeinsparung",
+          "impressionen": 3,
+          "klicks": 0,
+          "position": 43.33
+        },
+        {
+          "suchbegriff": "energiekosten reduzieren",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 24.0
+        },
+        {
+          "suchbegriff": "energiekostenanalyse",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 34.0
+        },
+        {
+          "suchbegriff": "haushaltskosten reduzieren",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 45.0
+        },
+        {
+          "suchbegriff": "kosten für vpn tunnel im ausland",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 22.0
+        },
+        {
+          "suchbegriff": "kostenkontrolle reduzierung",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 34.0
+        },
+        {
+          "suchbegriff": "leistungspreis senken",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 22.0
+        },
+        {
+          "suchbegriff": "mobilfunk und dsl vertrag",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 23.0
+        }
+      ],
+      "51-100": [
+        {
+          "suchbegriff": "dauerhafte kostenkontrolle",
+          "impressionen": 11,
+          "klicks": 0,
+          "position": 62.73
+        },
+        {
+          "suchbegriff": "internetkosten",
+          "impressionen": 9,
+          "klicks": 0,
+          "position": 56.67
+        },
+        {
+          "suchbegriff": "internet monatlich kündbar",
+          "impressionen": 5,
+          "klicks": 0,
+          "position": 68.6
+        },
+        {
+          "suchbegriff": "monatlich kündbares internet",
+          "impressionen": 4,
+          "klicks": 0,
+          "position": 79.0
+        },
+        {
+          "suchbegriff": "250 mbit internet monatlich kündbar",
+          "impressionen": 3,
+          "klicks": 0,
+          "position": 60.67
+        },
+        {
+          "suchbegriff": "haftpflichtversicherung rückwirkend",
+          "impressionen": 3,
+          "klicks": 0,
+          "position": 51.33
+        },
+        {
+          "suchbegriff": "mobile dsl-flatrate",
+          "impressionen": 3,
+          "klicks": 0,
+          "position": 63.33
+        },
+        {
+          "suchbegriff": "referenzkonto",
+          "impressionen": 3,
+          "klicks": 0,
+          "position": 95.67
+        },
+        {
+          "suchbegriff": "wlan monatlich kündbar",
+          "impressionen": 3,
+          "klicks": 0,
+          "position": 53.0
+        },
+        {
+          "suchbegriff": "energiebesparing",
+          "impressionen": 2,
+          "klicks": 0,
+          "position": 87.0
+        },
+        {
+          "suchbegriff": "ohne girokonto",
+          "impressionen": 2,
+          "klicks": 0,
+          "position": 92.0
+        },
+        {
+          "suchbegriff": "strategien zur kostenkontrolle",
+          "impressionen": 2,
+          "klicks": 0,
+          "position": 55.0
+        },
+        {
+          "suchbegriff": "taktung 60 1",
+          "impressionen": 2,
+          "klicks": 0,
+          "position": 65.0
+        },
+        {
+          "suchbegriff": "tankkartenantrag ohne kaution",
+          "impressionen": 2,
+          "klicks": 0,
+          "position": 56.0
+        },
+        {
+          "suchbegriff": "angebote zur kostenkontrolle",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 67.0
+        },
+        {
+          "suchbegriff": "banken mit kostenfreiem girokonto",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 54.0
+        },
+        {
+          "suchbegriff": "fixkosten senken",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 96.0
+        },
+        {
+          "suchbegriff": "internet dsl monatlich kündbar",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 73.0
+        },
+        {
+          "suchbegriff": "internet gebühren",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 86.0
+        },
+        {
+          "suchbegriff": "internet kündigen",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 92.0
+        },
+        {
+          "suchbegriff": "internetanbieter monatlich kündbar",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 70.0
+        },
+        {
+          "suchbegriff": "konto eröffnen kostenlos",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 67.0
+        },
+        {
+          "suchbegriff": "konto umsonst",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 76.0
+        },
+        {
+          "suchbegriff": "kostenersparnis",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 73.0
+        },
+        {
+          "suchbegriff": "kostenlose bankkonto",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 71.0
+        },
+        {
+          "suchbegriff": "kostenloses girokonto bremen",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 92.0
+        },
+        {
+          "suchbegriff": "kreditkarte mit girokonto kostenlos",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 86.0
+        },
+        {
+          "suchbegriff": "kühlgeräte strom sparen",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 58.0
+        },
+        {
+          "suchbegriff": "monatlich kündbar dsl",
+          "impressionen": 1,
+          "klicks": 0,
+          "position": 77.0
+        }
+      ],
+      ">100": []
+    },
+    "nachfrage_ohne_wirkung": [
+      {
+        "suchbegriff": "100 mbit internet monatlich kündbar",
+        "impressionen": 31,
+        "klicks": 0,
+        "position": 49.61
+      },
+      {
+        "suchbegriff": "energiekosten senken",
+        "impressionen": 22,
+        "klicks": 0,
+        "position": 39.41
+      },
+      {
+        "suchbegriff": "energieeinsparung",
+        "impressionen": 8,
+        "klicks": 0,
+        "position": 25.62
+      },
+      {
+        "suchbegriff": "50 mbit internet monatlich kündbar",
+        "impressionen": 5,
+        "klicks": 0,
+        "position": 47.0
+      },
+      {
+        "suchbegriff": "dauerhafte kostenkontrolle",
+        "impressionen": 11,
+        "klicks": 0,
+        "position": 62.73
+      },
+      {
+        "suchbegriff": "internetkosten",
+        "impressionen": 9,
+        "klicks": 0,
+        "position": 56.67
+      },
+      {
+        "suchbegriff": "internet monatlich kündbar",
+        "impressionen": 5,
+        "klicks": 0,
+        "position": 68.6
+      }
+    ]
+  },
+  "top20_drift": {
+    "vorhanden": true,
+    "stand": "2026-10-19",
+    "auswahl": 20,
+    "noch_mit_impression": 6,
+    "quote": 0.3,
+    "abgewaehlt": [
+      "/posts/2026-08-10-dsl-wechselbonus-sichern/",
+      "/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/",
+      "/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/",
+      "/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/",
+      "/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/",
+      "/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/",
+      "/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/",
+      "/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/",
+      "/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/",
+      "/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/",
+      "/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/",
+      "/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/",
+      "/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/",
+      "/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/"
+    ],
+    "neu_in_reichweite": [
+      "/posts/",
+      "/posts/2026-08-07-frugalismus-fuer-den-erfolg/",
+      "/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/",
+      "/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
+      "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
+      "/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/",
+      "/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/",
+      "/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
+      "/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/",
+      "/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/",
+      "/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/",
+      "/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/",
+      "/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/",
+      "/posts/elementarschadenversicherung-hochwasser-starkregen/",
+      "/posts/kuehlschrank-strom-sparen-einstellung/"
+    ]
+  },
+  "funde": [
+    {
+      "regel": "L9",
+      "schwere": "hinweis",
+      "text": "Zwei Messungen desselben Fensters weichen ab.",
+      "beleg": "top_seiten_28t.json summiert 350 Impressionen, der Tages-Ledger im selben Fenster 2026-10-06…2026-11-02 hat 276",
+      "naechster_schritt": "In der Search Console „Leistung → Seiten“ gegen „Leistung → Täglich“ im selben Fenster vergleichen – Google aggregiert je Dimension."
+    },
+    {
+      "regel": "L3",
+      "schwere": "hinweis",
+      "text": "276 Impressionen und null Klicks in 28 Tagen.",
+      "beleg": "Fenster 2026-10-06…2026-11-02: CTR 0,00 %",
+      "naechster_schritt": "Reihenfolge beachten: erst Index (L5), dann Inhalt (L4/L6), dann Snippet."
+    },
+    {
+      "regel": "L4",
+      "schwere": "hinweis",
+      "text": "9 Inhaltsseite(n) in Schlagdistanz: Impressionen, null Klicks, Position ≤ 20.",
+      "beleg": "/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/ (7 Impressionen, 0 Klicks, Position 10.00); /posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/ (6 Impressionen, 0 Klicks, Position 7.17); /posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/ (6 Impressionen, 0 Klicks, Position 8.67); /posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/ (5 Impressionen, 0 Klicks, Position 9.40); /posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/ (4 Impressionen, 0 Klicks, Position 4.50); /posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/ (4 Impressionen, 0 Klicks, Position 6.50)",
+      "naechster_schritt": "Dokumentierte Reihenfolge: Suchintention prüfen, Fakten/Quellen aktualisieren, intern verlinken – erst dann Title/Description."
+    },
+    {
+      "regel": "L7",
+      "schwere": "hinweis",
+      "text": "9 Seite(n) auf Position ≤ 10 mit null Klicks.",
+      "beleg": "/datenschutz/ (14 Impressionen auf Position 10.00, 0 Klicks); /pillar/ (10 Impressionen auf Position 5.00, 0 Klicks); /posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/ (7 Impressionen auf Position 10.00, 0 Klicks); / (6 Impressionen auf Position 1.50, 0 Klicks); /ueber/ (6 Impressionen auf Position 2.33, 0 Klicks); /posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/ (6 Impressionen auf Position 7.17, 0 Klicks)",
+      "naechster_schritt": "Title und Description gegen die Suchintention lesen; Snippet-Grenzen: `scripts/serp_limits.py`."
+    },
+    {
+      "regel": "L5",
+      "schwere": "hinweis",
+      "text": "Nur 21 von 92 Inhaltsseiten hatten im Fenster eine Impression (23 %).",
+      "beleg": "top_seiten_28t.json: 35 Einträge",
+      "naechster_schritt": "Index-Arbeit hat Vorrang: `npm run gsc:abdeckung` und `npm run gsc:triage`."
+    },
+    {
+      "regel": "L6",
+      "schwere": "hinweis",
+      "text": "7 Suchbegriff(e) mit Nachfrage (≥ 5 Impressionen) jenseits von Position 20 – dort ist kein Klick realistisch.",
+      "beleg": "„100 mbit internet monatlich kündbar“ (31, Position 49,61); „energiekosten senken“ (22, Position 39,41); „energieeinsparung“ (8, Position 25,62); „50 mbit internet monatlich kündbar“ (5, Position 47,00); „dauerhafte kostenkontrolle“ (11, Position 62,73)",
+      "naechster_schritt": "Inhalt vertiefen (Abschnitte, Belege, interne Links) – nicht den Title."
+    },
+    {
+      "regel": "L8",
+      "schwere": "hinweis",
+      "text": "Die Top-20-Auswahl (Stand 2026-10-19) trifft nur noch 30 % der aktuellen Reichweite.",
+      "beleg": "data/top20_abbildungen.yaml: 6 von 20",
+      "naechster_schritt": "Auswahl erneuern (`python3 scripts/abbildungen_ableiten.py`) und `--check` fahren – dann erst die Abbildungen."
+    }
+  ],
+  "hart": []
+}

@@ -1,0 +1,168 @@
+{
+  "schema": 1,
+  "stand": "2026-11-05T17:36:52Z",
+  "aufgaben": [
+    {
+      "prio": "P1",
+      "titel": "Index-Arbeit: Abdeckungsbefund und Triage gegen den Bestand rechnen",
+      "url": "",
+      "beleg": "21 von 92 Inhaltsseiten mit Impression, 71 ohne",
+      "naechster_schritt": "`npm run gsc:abdeckung` → `npm run gsc:triage` → Entscheidungen festhalten (`--entscheiden`)",
+      "regel": "L5",
+      "eigentuemer": "Mensch (Redaktion)"
+    },
+    {
+      "prio": "P1",
+      "titel": "Inhalt und Snippet prüfen: /posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/",
+      "url": "https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/",
+      "beleg": "7 Impressionen auf Position 10.00, 0 Klicks",
+      "naechster_schritt": "Suchintention prüfen, Fakten/Quellen aktualisieren, intern verlinken – erst dann Title/Description",
+      "regel": "L7",
+      "eigentuemer": "Mensch (Redaktion)"
+    },
+    {
+      "prio": "P1",
+      "titel": "Inhalt und Snippet prüfen: /posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
+      "url": "https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
+      "beleg": "6 Impressionen auf Position 7.17, 0 Klicks",
+      "naechster_schritt": "Suchintention prüfen, Fakten/Quellen aktualisieren, intern verlinken – erst dann Title/Description",
+      "regel": "L7",
+      "eigentuemer": "Mensch (Redaktion)"
+    },
+    {
+      "prio": "P1",
+      "titel": "Inhalt und Snippet prüfen: /posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/",
+      "url": "https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/",
+      "beleg": "6 Impressionen auf Position 8.67, 0 Klicks",
+      "naechster_schritt": "Suchintention prüfen, Fakten/Quellen aktualisieren, intern verlinken – erst dann Title/Description",
+      "regel": "L7",
+      "eigentuemer": "Mensch (Redaktion)"
+    },
+    {
+      "prio": "P1",
+      "titel": "Inhalt und Snippet prüfen: /posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/",
+      "url": "https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/",
+      "beleg": "5 Impressionen auf Position 9.40, 0 Klicks",
+      "naechster_schritt": "Suchintention prüfen, Fakten/Quellen aktualisieren, intern verlinken – erst dann Title/Description",
+      "regel": "L7",
+      "eigentuemer": "Mensch (Redaktion)"
+    },
+    {
+      "prio": "P2",
+      "titel": "Inhalt und Snippet prüfen: /posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/",
+      "url": "https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/",
+      "beleg": "4 Impressionen, 0 Klicks, Position 4.50",
+      "naechster_schritt": "Suchintention prüfen, Fakten/Quellen aktualisieren, intern verlinken – erst dann Title/Description",
+      "regel": "L4",
+      "eigentuemer": "Mensch (Redaktion)"
+    },
+    {
+      "prio": "P2",
+      "titel": "Inhalt und Snippet prüfen: /posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/",
+      "url": "https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/",
+      "beleg": "4 Impressionen, 0 Klicks, Position 6.50",
+      "naechster_schritt": "Suchintention prüfen, Fakten/Quellen aktualisieren, intern verlinken – erst dann Title/Description",
+      "regel": "L4",
+      "eigentuemer": "Mensch (Redaktion)"
+    },
+    {
+      "prio": "P2",
+      "titel": "Inhalt und Snippet prüfen: /posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/",
+      "url": "https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/",
+      "beleg": "3 Impressionen, 0 Klicks, Position 3.00",
+      "naechster_schritt": "Suchintention prüfen, Fakten/Quellen aktualisieren, intern verlinken – erst dann Title/Description",
+      "regel": "L4",
+      "eigentuemer": "Mensch (Redaktion)"
+    },
+    {
+      "prio": "P2",
+      "titel": "Inhalt und Snippet prüfen: /posts/2026-08-07-frugalismus-fuer-den-erfolg/",
+      "url": "https://franksfinanzcheck.de/posts/2026-08-07-frugalismus-fuer-den-erfolg/",
+      "beleg": "3 Impressionen, 0 Klicks, Position 7.33",
+      "naechster_schritt": "Suchintention prüfen, Fakten/Quellen aktualisieren, intern verlinken – erst dann Title/Description",
+      "regel": "L4",
+      "eigentuemer": "Mensch (Redaktion)"
+    },
+    {
+      "prio": "P2",
+      "titel": "Inhalt und Snippet prüfen: /posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
+      "url": "https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
+      "beleg": "3 Impressionen, 0 Klicks, Position 7.67",
+      "naechster_schritt": "Suchintention prüfen, Fakten/Quellen aktualisieren, intern verlinken – erst dann Title/Description",
+      "regel": "L4",
+      "eigentuemer": "Mensch (Redaktion)"
+    },
+    {
+      "prio": "P2",
+      "titel": "Nachfrage bedienen: „100 mbit internet monatlich kündbar“",
+      "url": "",
+      "beleg": "31 Impressionen, Position 49,61",
+      "naechster_schritt": "Thema im passenden Beitrag vertiefen (Abschnitt, Belege, interne Links)",
+      "regel": "L6",
+      "eigentuemer": "Mensch (Redaktion)"
+    },
+    {
+      "prio": "P2",
+      "titel": "Nachfrage bedienen: „energiekosten senken“",
+      "url": "",
+      "beleg": "22 Impressionen, Position 39,41",
+      "naechster_schritt": "Thema im passenden Beitrag vertiefen (Abschnitt, Belege, interne Links)",
+      "regel": "L6",
+      "eigentuemer": "Mensch (Redaktion)"
+    },
+    {
+      "prio": "P2",
+      "titel": "Nachfrage bedienen: „energieeinsparung“",
+      "url": "",
+      "beleg": "8 Impressionen, Position 25,62",
+      "naechster_schritt": "Thema im passenden Beitrag vertiefen (Abschnitt, Belege, interne Links)",
+      "regel": "L6",
+      "eigentuemer": "Mensch (Redaktion)"
+    },
+    {
+      "prio": "P2",
+      "titel": "Nachfrage bedienen: „50 mbit internet monatlich kündbar“",
+      "url": "",
+      "beleg": "5 Impressionen, Position 47,00",
+      "naechster_schritt": "Thema im passenden Beitrag vertiefen (Abschnitt, Belege, interne Links)",
+      "regel": "L6",
+      "eigentuemer": "Mensch (Redaktion)"
+    },
+    {
+      "prio": "P2",
+      "titel": "Nachfrage bedienen: „dauerhafte kostenkontrolle“",
+      "url": "",
+      "beleg": "11 Impressionen, Position 62,73",
+      "naechster_schritt": "Thema im passenden Beitrag vertiefen (Abschnitt, Belege, interne Links)",
+      "regel": "L6",
+      "eigentuemer": "Mensch (Redaktion)"
+    },
+    {
+      "prio": "P2",
+      "titel": "Nachfrage bedienen: „internetkosten“",
+      "url": "",
+      "beleg": "9 Impressionen, Position 56,67",
+      "naechster_schritt": "Thema im passenden Beitrag vertiefen (Abschnitt, Belege, interne Links)",
+      "regel": "L6",
+      "eigentuemer": "Mensch (Redaktion)"
+    },
+    {
+      "prio": "P2",
+      "titel": "Nachfrage bedienen: „internet monatlich kündbar“",
+      "url": "",
+      "beleg": "5 Impressionen, Position 68,60",
+      "naechster_schritt": "Thema im passenden Beitrag vertiefen (Abschnitt, Belege, interne Links)",
+      "regel": "L6",
+      "eigentuemer": "Mensch (Redaktion)"
+    },
+    {
+      "prio": "P3",
+      "titel": "Top-20-Auswahl der Abbildungen erneuern",
+      "url": "",
+      "beleg": "data/top20_abbildungen.yaml Stand 2026-10-19: 6 von 20 noch in Reichweite",
+      "naechster_schritt": "`python3 scripts/abbildungen_ableiten.py` → `--check`",
+      "regel": "L8",
+      "eigentuemer": "Mensch (Redaktion)"
+    }
+  ]
+}
