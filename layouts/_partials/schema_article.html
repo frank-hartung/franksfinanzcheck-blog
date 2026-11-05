@@ -177,4 +177,38 @@
   {{- $out = merge $out (dict "sdDatePublished" (printf "%v" .)) -}}
 {{- end -}}
 
+{{- /* ---------- KI-Herkunft → schema.org/creditText (#1028) ----------
+     `creditText` ist die schema.org-Eigenschaft für einen maschinenlesbaren
+     Quellen-/Dankvermerk am Werk. Sie trägt dieselbe Aussage wie der
+     sichtbare Hinweis in ff_pruefzeile.html und die Meta-Angaben aus
+     ki_provenienz.html – ein Sachverhalt, drei Kanäle, keine zweite Wahrheit.
+     Getrennte Rollen bleiben getrennt: Text (ai_generated), Bild
+     (cover.ai_generated) und Ton (TTS-Tonspur) werden nur genannt, wenn sie
+     zutreffen. `ai_generated: false` erzeugt keine Aussage (keine unbelegte
+     Behauptung „rein menschlich"). */ -}}
+{{- $credit := slice -}}
+{{- $kiAutor := .Params.author | default site.Params.author | default "Frank Hartung" -}}
+{{- $kiFreigabe := "" -}}
+{{- with .Params.redaktionelle_pruefung -}}
+  {{- if and (or (eq (.status | default "" | lower) "freigegeben") (eq (.status | default "" | lower) "approved")) .pruefer.name -}}
+    {{- $kiFreigabe = .pruefer.name -}}
+  {{- end -}}
+{{- end -}}
+{{- if eq .Params.ai_generated true -}}
+  {{- if $kiFreigabe -}}
+    {{- $credit = $credit | append (printf "Mit KI erstellt oder bearbeitet. Redaktionelle Verantwortung: %s; fachlich geprüft und freigegeben von %s." $kiAutor $kiFreigabe) -}}
+  {{- else -}}
+    {{- $credit = $credit | append (printf "Mit KI erstellt oder bearbeitet. Redaktionelle Verantwortung: %s." $kiAutor) -}}
+  {{- end -}}
+{{- end -}}
+{{- if eq .Params.cover.ai_generated true -}}
+  {{- $credit = $credit | append "Cover mit KI erstellt oder bearbeitet." -}}
+{{- end -}}
+{{- if and (or (eq .Section "posts") (eq .Type "posts") (eq .Section "pillar") (eq .Type "pillar") (eq .Section "ratgeber") (eq .Type "ratgeber")) (ne .Params.hideReaderToolbar true) -}}
+  {{- $credit = $credit | append "Tonspur maschinell erzeugt (Text-zu-Sprache)." -}}
+{{- end -}}
+{{- if gt (len $credit) 0 -}}
+  {{- $out = merge $out (dict "creditText" (delimit $credit " ")) -}}
+{{- end -}}
+
 <script type="application/ld+json">{{ $out | jsonify | safeJS }}</script>

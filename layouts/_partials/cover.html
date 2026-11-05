@@ -81,8 +81,17 @@
     {{- /* KI-Cover: Original unverändert ausliefern. Neukodierte Varianten
            könnten Provenienz-Metadaten verlieren oder veralten. */}}
     {{- $aiImage := eq .Params.cover.ai_generated true -}}
+    {{- /* Maschinenlesbare Herkunftsangabe am Bild (#1028): `data-digital-source-type`
+           nutzt das IPTC-Vokabular (http://cv.iptc.org/newscodes/digitalsourcetype/…),
+           das C2PA in `c2pa.actions` übernimmt und das Meta, Apple, Google und
+           Pinterest auswerten. Es wird nur ausgegeben, wenn die Art der
+           Erzeugung ausdrücklich belegt ist – kein geratenes „trained…".
+           Dieselbe Angabe steht als XMP-Feld IN der Datei
+           (scripts/ki_bild_markierung.py, Wache --gate). */}}
+    {{- $quelleTyp := "" -}}
+    {{- with .Params.cover.ki_pruefung }}{{ $quelleTyp = .digital_source_type | default "" }}{{ end -}}
     {{- if $aiImage }}
-    <img loading="{{ $loading }}"{{ with $fetchPriority }} fetchpriority="{{ . }}"{{ end }} decoding="async" data-ff-fcp-image="{{ $fcpImageRole }}"{{ if $isLcpCandidate }} data-ff-lcp="candidate"{{ end }} src="{{ $imgFallback }}" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
+    <img loading="{{ $loading }}"{{ with $fetchPriority }} fetchpriority="{{ . }}"{{ end }} decoding="async" data-ff-fcp-image="{{ $fcpImageRole }}"{{ if $isLcpCandidate }} data-ff-lcp="candidate"{{ end }}{{ if $aiImage }} data-ai-generated="true"{{ with $quelleTyp }} data-digital-source-type="{{ . }}"{{ end }}{{ end }} src="{{ $imgFallback }}" width="{{ $imgWidth }}" height="{{ $imgHeight }}" alt="{{ $alt }}">
     {{- else }}
     {{- /* <picture> mit Format-Kaskade: AVIF → WebP → JPEG (Fallback).
            Browser wählt das kleinste unterstützte Format; das srcset

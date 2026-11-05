@@ -51,6 +51,11 @@
     {{- with site.Params.description }}{{ . }}{{- end }}{{- end }}{{- end -}}">
 <meta name="author" content="{{ (partial "author.html" . ) }}">
 <link rel="canonical" href="{{ if and .Params.canonicalURL (not $pager) }}{{ trim .Params.canonicalURL " " }}{{ else }}{{ $seo.url }}{{ end }}">
+{{- /* Maschinenlesbare KI-Herkunft (#1028, Art. 50 KI-VO): eigene Angaben des
+       Betreibers neben der sichtbaren Kennzeichnung. Logik und rechtliche
+       Grenze stehen in ki_provenienz.html; die Wache scripts/ki_provenienz_gate.py
+       prüft Einbindung und Ausgabe gegen den Bestand. */ -}}
+{{- partial "ki_provenienz.html" . -}}
 {{- if site.Params.analytics.google.SiteVerificationTag }}
 <meta name="google-site-verification" content="{{ site.Params.analytics.google.SiteVerificationTag }}">
 {{- end }}

@@ -51,11 +51,13 @@ Alle Affiliate-Links sind als Werbung gekennzeichnet. Die redaktionellen Inhalte
 
 ---
 
-## Hinweis zu KI-unterstützten Inhalten
+## Hinweis zu KI-unterstützten Inhalten {#ki-hinweis}
 
 Dieser Blog nutzt generative KI zur Unterstützung bei Artikeln und teilweise bei Grafiken. Cover werden auch mit einem regelbasierten Grafikprogramm erzeugt; ihre Herkunft ist nicht pauschal aus der des Artikels abzuleiten. Einen Teil der Artikel entwirft ein automatisiertes System. Diese Artikel werden nach automatischen Qualitätsprüfungen veröffentlicht, ohne dass jeder Text vorher einzeln von einem Menschen geprüft wird, und sind am Artikelanfang als **„Mit KI erstellt oder bearbeitet“** gekennzeichnet. Artikel mit dem Hinweis „Redaktionell geprüft von …“ hat ein Mensch vor der Veröffentlichung fachlich geprüft und freigegeben. Verantwortlich für alle Inhalte ist der Betreiber. Fehler bitte an die oben genannte E-Mail-Adresse melden – wir korrigieren umgehend.
 
 Die Kennzeichnung erfolgt im Sinne der EU-KI-Verordnung (Verordnung (EU) 2024/1689, Art. 50). Auf dieser Website selbst kommt keine KI zum Einsatz, die direkt mit Besuchern interagiert (insbesondere kein Chatbot).
+
+Zusätzlich zum sichtbaren Hinweis trägt jede betroffene Seite maschinenlesbare Herkunftsangaben: die Meta-Angaben `ai-generated` und `ai-generated-scope` (betroffene Modalitäten Text, Bild, Ton) im Dokumentkopf, die Quellenangabe `creditText` im schema.org-Markup und – nur bei ausdrücklich als KI-Bild deklarierten Covern – das IPTC-Feld `DigitalSourceType` in der Bilddatei selbst. Diese Angaben sind Erklärungen des Betreibers: Sie ersetzen weder die maschinenlesbare Markierung durch den Anbieter des jeweiligen KI-Systems (Art. 50 Abs. 2 KI-VO) noch sind sie ein Herkunftsbeweis.
 
 ---
 

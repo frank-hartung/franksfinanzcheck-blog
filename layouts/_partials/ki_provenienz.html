@@ -1,0 +1,63 @@
+{{- /* ============================================================
+     KI-PROVENIENZ – maschinenlesbare Herkunftskennzeichnung
+     ------------------------------------------------------------
+     Issue #1028 · Frist `ki-vo-kennzeichnung-bestand` (02.12.2026)
+     Vertrag: layouts/_partials/ki_provenienz.html
+     Wache:   scripts/ki_provenienz_gate.py  (Regeln M1–M4)
+     Doku:    docs/KI-TRANSPARENZ-ABNAHME.md · RECHT-UPDATE-REPORT.md
+
+     WARUM ES DIESE DATEI GIBT
+     Bis zum 05.11.2026 gab es genau einen maschinenlesbaren Haken: das
+     lokale `data-ff-ki-label` im sichtbaren Hinweistext
+     (ff_pruefzeile.html). Das ist ein Selektor für eigene Tests, keine
+     Kennzeichnung, die irgendein Dritter auswerten kann. Art. 50 Abs. 2
+     KI-VO verlangt maschinenlesbare Markierung – und der Verhaltenskodex
+     der Kommission vom 10.06.2026 nennt dafür signierte Metadaten,
+     Wasserzeichen und optional Fingerabdrücke. Diese Partial liefert die
+     Ebene, die ein VERLAG selbst steuern kann: dokumentierte,
+     maschinenlesbare Herkunftsangaben auf vier Kanälen.
+
+     RECHTLICHE GRENZE (bitte nicht wegdiskutieren)
+     · Art. 50 Abs. 2 ist eine PFLICHT DES ANBIETERS des generativen
+       Systems (Groq, NVIDIA, Cloudflare, Google, TTS-Anbieter). Für vor
+       dem 02.08.2026 in Verkehr gebrachte Systeme läuft die Nachfrist bis
+       02.12.2026 (Art. 113 i. d. F. der Verordnung (EU) 2026/1744).
+     · Diese Meta-Angaben sind eine ANGABE DES BETREIBERS. Sie ersetzen
+       weder die Anbieter-Markierung der Ausgabedatei noch ein Wasserzeichen
+       und beweisen keine Herkunft. Sie machen die eigene, sichtbare
+       Kennzeichnung für Maschinen auffindbar und auswertbar.
+     · `ai_generated: false` erzeugt BEWUSST keine Ausgabe: Die Abwesenheit
+       eines Signals ist keine Behauptung „rein menschlich“. Das Register
+       data/ki_kennzeichnung.yaml weist selbst ungeklärte `menschlich`-
+       Einträge aus; eine unbelegte Positiv-Aussage wäre schlechter als
+       keine Angabe.
+
+     KANÄLE
+     1. <meta name="ai-generated">          – Primärsignal je Dokument
+     2. <meta name="ai-generated-scope">    – Modalitäten (text/image/audio)
+     3. <link rel="describedby">            – IANA-Relation auf den
+                                              menschenlesbaren Hinweis
+     4. schema.org `creditText`             – in schema_article.html
+     Bild und Ton sind getrennt deklariert: `cover.ai_generated` (Bild) und
+     die TTS-Tonspur (Ton) haben nichts mit dem Text-Flag zu tun.
+     ============================================================ */ -}}
+{{- if .IsPage -}}
+{{- $ai := eq .Params.ai_generated true -}}
+{{- $bild := eq .Params.cover.ai_generated true -}}
+{{- /* Tonspur: Die Lesehilfe „Vorlesen“ spielt eine serverseitig erzeugte
+       TTS-Tonspur (scripts/ff_voice_audio.py) bzw. die lokale Sprach-Engine
+       aus – beides synthetische Sprache. Dieselbe Bedingung wie
+       ff_voice_toolbar.html, damit Kennzeichnung und Ausspielung nie
+       auseinanderlaufen. */ -}}
+{{- $lesehilfe := and (or (eq .Section "posts") (eq .Type "posts") (eq .Section "pillar") (eq .Type "pillar") (eq .Section "ratgeber") (eq .Type "ratgeber")) (ne .Params.hideReaderToolbar true) -}}
+{{- if or $ai $bild $lesehilfe -}}
+{{- $bereiche := slice -}}
+{{- if $ai }}{{ $bereiche = $bereiche | append "text" }}{{ end -}}
+{{- if $bild }}{{ $bereiche = $bereiche | append "image" }}{{ end -}}
+{{- if $lesehilfe }}{{ $bereiche = $bereiche | append "audio" }}{{ end -}}
+{{- if $ai }}
+<meta name="ai-generated" content="true">{{ end }}
+<meta name="ai-generated-scope" content="{{ delimit $bereiche "," }}">
+<link rel="describedby" href="{{ "impressum/#ki-hinweis" | absURL }}" title="Hinweis zu KI-unterstützten Inhalten">
+{{- end -}}
+{{- end -}}
