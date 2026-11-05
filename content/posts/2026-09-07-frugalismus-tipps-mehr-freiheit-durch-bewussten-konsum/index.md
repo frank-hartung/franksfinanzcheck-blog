@@ -38,7 +38,7 @@ quellen:
     url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
     herausgeber: "Statistisches Bundesamt"
     datum: "2026-08-14"
-faktencheck: "2026-09-27"
+faktencheck: 2026-11-05
 ---
 
 Ein Coffee-to-go hier, ein spontaner Lieferdienst dort, dazu zwei Streaming-Abos, die kaum noch jemand nutzt. Nichts davon wirkt für sich dramatisch. Zusammen wird daraus aber oft genau der Betrag, der am Monatsende auf dem Konto fehlt.

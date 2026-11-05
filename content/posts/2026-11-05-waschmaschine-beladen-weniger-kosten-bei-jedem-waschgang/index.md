@@ -25,6 +25,7 @@ cover:
   alt: "Waschmaschine beladen: Weniger Kosten bei jedem Waschgang"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Ein optimal beladener Trommel (ca. 80 % Kapazität) verbraucht bis zu 15 % weniger Wasser und Energie pro Waschgang – das entspricht etwa 0,5 kWh und 5 Liter Wasser. Bei einem durchschnittlichen Haushalt mit 4 Waschgängen pro Woche spart das rund 5 € jährlich an Strom‑ und Wasserkosten. So senkst du deine Fixkosten, ohne die Waschergebnisse zu beeinträchtigen."
+faktencheck: 2026-11-05
 ---
 
 Du drückst den Startknopf deiner Waschmaschine und löst damit sofort einen Finanzprozess aus.

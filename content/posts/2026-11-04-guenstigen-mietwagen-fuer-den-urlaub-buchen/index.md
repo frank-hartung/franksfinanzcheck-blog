@@ -21,6 +21,7 @@ cover:
   image: "images/covers/2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen.jpg"
   alt: "Günstigen Mietwagen für den Urlaub buchen"
   caption: "Tipp von FranksFinanzcheck"
+faktencheck: 2026-11-05
 ---
 
 Du planst den Sommerurlaub und brauchst ein flexibles Fortbewegungsmittel für die Strandregion.  

@@ -1,44 +1,17 @@
 {
-  "erzeugt": "2026-11-04 12:30 UTC",
+  "erzeugt": "2026-11-05 12:43 UTC",
   "uebersicht": {
-    "gesamt": 112,
+    "gesamt": 114,
     "ratgeber": 6,
-    "faellig": 0,
-    "vorlauf": 10,
+    "faellig": 2,
+    "vorlauf": 11,
     "bearbeitet": 4,
     "budget": 4,
     "budget_quelle": "Auto-Skalierung (Deckungsrechnung)",
-    "geo_schnitt": 94,
-    "befunde": 106,
-    "befunde_im_lauf": 18,
+    "geo_schnitt": 93,
+    "befunde": 47,
+    "befunde_im_lauf": 14,
     "fachbefunde": [
-      {
-        "typ": "praezision",
-        "text": "Die Bewerbung des Vergleichsportals mit dem Superlativ 'Die besten Tarife' erfolgt ohne messbare Daten oder Auswahlkriterien in der Recherchegrundlage.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "124ff2c3cd3917c274aa",
-        "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
-        "fassung_sha256": "98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b",
-        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die im Artikel als Fakten genannten Gaspreise für Oktober 2026 (11 bis 13 Cent/kWh) sind nicht durch die Fundstelle belegt, die lediglich eine allgemeine Themenübersicht darstellt.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "7bdec96c0329769bebe6",
-        "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
-        "fassung_sha256": "98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b",
-        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Der für den Verbraucherschutz zentrale Regulierungsrahmen (Sonderkündigungsrecht, Informationspflichten der Versorger) wird in der Fundstelle nicht inhaltlich bestätigt.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "a56734aa032e0ed9e0c4",
-        "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
-        "fassung_sha256": "98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b",
-        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
-      },
       {
         "typ": "luecke",
         "text": "Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg.",
@@ -64,51 +37,6 @@
         "id": "c583efe1ce02df3ca2d7",
         "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
         "fassung_sha256": "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af",
-        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Keine Quelle für die Aussage, dass das Gesetz bei einem Tarifwechsel die Grundversorgung garantiert – regulatorischer Rahmen fehlt.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "437b809ffbf41e5af434",
-        "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
-        "fassung_sha256": "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316",
-        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Keine Quelle für die Behauptung, dass ein Grad weniger Raumtemperatur rund 6 % Energie einspart – Prozent‑Angabe fehlt.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "9fbacd9942c2dfa1447f",
-        "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
-        "fassung_sha256": "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316",
-        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Keine Quelle für die Angabe, dass durch Optimierungsmaßnahmen 10‑15 % Einsparungen realistisch sind – Prozent‑Wert unbelegt.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "da30cbb5fbc8c801daf0",
-        "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
-        "fassung_sha256": "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316",
-        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Keine Quelle für die Aussage, dass im Oktober 2026 bessere Gaspreise gelten – Preis‑Trend‑Behauptung fehlt.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "db8a69f08dc0020adebd",
-        "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
-        "fassung_sha256": "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316",
-        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Keine Quelle für die Angabe, dass ein Einfamilienhaus typischerweise 18.000 kWh/Jahr verbraucht – Verbrauchszahl ist unbelegt.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "e834f4702e87194affe7",
-        "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
-        "fassung_sha256": "8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316",
         "zuletzt_gesehen": "2026-11-01 11:29 UTC"
       },
       {
@@ -158,616 +86,53 @@
       },
       {
         "typ": "luecke",
-        "text": "Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 € an reinen Gebühren kosten, ist unbelegt.",
-        "beleg": "",
-        "id": "1dbeb2f8c51e78d11d49",
-        "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
-        "fassung_sha256": "ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Behauptung, dass Echtzeit‑Überweisungen bei kostenlosen Konten generell gebührenfrei sind, fehlt jede Quelle.",
-        "beleg": "",
-        "id": "33e736ac6afe996b491a",
-        "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
-        "fassung_sha256": "ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Aussage, dass Einlagen bis 100.000 € durch die deutsche Einlagensicherung geschützt sind, wird nicht belegt.",
-        "beleg": "",
-        "id": "96b7b7768d402884810c",
-        "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
-        "fassung_sha256": "ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Angabe von Dispozinsen von 8 % bis 11 % ohne Quellenangabe.",
-        "beleg": "",
-        "id": "a25bb6bbcb25ba8b0e22",
-        "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
-        "fassung_sha256": "ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Angabe, dass ein Kontowechsel 120 € bis 180 € im Jahr spart, fehlt jede Quelle.",
-        "beleg": "",
-        "id": "f94f8ba1e4342e67e45a",
-        "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
-        "fassung_sha256": "ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Angabe, dass 58 % der Nutzer ihr Haushaltsbuch digital führen, beruft sich angeblich auf Statista 2025, jedoch wird keine Quelle genannt.",
-        "beleg": "",
-        "id": "4afb8daed73677ee6224",
-        "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
-        "fassung_sha256": "cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Sparpotenzial‑Beispiele (z. B. DSL‑Tarifwechsel von 44 € auf 24 €) enthalten konkrete Zahlen ohne Quellenangabe.",
-        "beleg": "",
-        "id": "9eb9a90899cc8ca66020",
-        "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
-        "fassung_sha256": "cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Behauptung, dass 60 % der Haushalte in Deutschland ihr Geld nicht nachverfolgen, wird mit einer Auswertung der Stiftung Warentest angegeben, jedoch fehlt ein entsprechender Nachweis.",
-        "beleg": "",
-        "id": "b4bd085bc84a6131b644",
-        "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
-        "fassung_sha256": "cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
-      },
-      {
-        "typ": "praezision",
-        "text": "Versprechen, dass ein Haushaltsbuch „schnell“ zeigt, welche Posten sich lohnen, ist nicht quantifiziert und fehlt an konkreten Evidenzangaben.",
-        "beleg": "",
-        "id": "baed76dc211bd15dd46f",
-        "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
-        "fassung_sha256": "cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
-      },
-      {
-        "typ": "praezision",
-        "text": "Die Aussage, dass die 50‑30‑20‑Regel für ein Nettoeinkommen von 2.500 € realistisch sei, wird ohne Hinweis auf regionale Unterschiede oder empirische Daten präsentiert.",
-        "beleg": "",
-        "id": "d7c3cfb422310cf26ca6",
-        "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
-        "fassung_sha256": "cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
-      },
-      {
-        "id": "0051151e6c46f4c2bdb3",
-        "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
-        "fassung_sha256": "legacy-unbekannt",
-        "typ": "luecke",
-        "text": "Der Artikel nennt eine Kautionshöhe von 900 € bis 2.500 €, ohne dass die Verbraucherzentrale diese Spanne angibt.",
-        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-        "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-      },
-      {
-        "id": "0790f52160dfaa819917",
-        "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
-        "fassung_sha256": "legacy-unbekannt",
-        "typ": "luecke",
-        "text": "Die angegebene Ersparnis von 145 € bei einer einwöchigen Anmietung ist nicht durch Zahlen der Verbraucherzentrale gedeckt.",
-        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-        "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-      },
-      {
-        "id": "53c3fde8e986e6560890",
-        "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
-        "fassung_sha256": "legacy-unbekannt",
-        "typ": "luecke",
-        "text": "Die Behauptung, dass Flughafen‑Mietstationen 15 %‑25 % teurer sind, wird von der Verbraucherzentrale nicht bestätigt.",
-        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-        "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-      },
-      {
-        "id": "89adecebaae75c147402",
-        "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
-        "fassung_sha256": "legacy-unbekannt",
-        "typ": "luecke",
-        "text": "Die Aussage, dass eine „Zero‑Excess“-Option die Kaution komplett auf 0 € senkt und dafür 5 €‑12 € pro Tag kostet, wird von der Verbraucherzentrale nicht belegt.",
-        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-        "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-      },
-      {
-        "id": "a1a269b73a1b9c2dfc88",
-        "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
-        "fassung_sha256": "legacy-unbekannt",
-        "typ": "luecke",
-        "text": "Der Hinweis, dass eine Vollkasko ohne Selbstbeteiligung nur 3 €‑8 € pro Tag mehr kostet, fehlt in den Angaben der Verbraucherzentrale.",
-        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-        "zuletzt_gesehen": "2026-10-30 11:01 UTC"
-      },
-      {
-        "typ": "praezision",
-        "text": "Die im Teaser und Text genannten monatlichen Ersparnisse von 350 € bis 600 € werden als Marktfakten ohne Quellenbeleg oder methodische Herleitung (z. B. Referenzhaushalt des Statistischen Bundesamtes) angeführt.",
+        "text": "Der Ratgeber vernachlässigt bei der Kalkulation der Sparfähigkeit die massive Preissteigerung bei Energie (+14,9 %), die das Budget für monatliche Sparraten erheblich belastet.",
         "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-        "id": "3fe383f6d452737f66f2",
-        "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
-        "fassung_sha256": "e08b6e61e4a9499d725785fb800202179452b36ea7e69b11f6f2f96544f6bce6",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Der Ratgeber empfiehlt Tarifwechsel bei Energie zur Kostensenkung, verschweigt aber den aktuellen Markttrend massiv steigender Energiepreise (+14,9 %), was die Kalkulation der 50-Prozent-Fixkostenquote gefährdet.",
-        "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-        "id": "7bba759bbb4ca14c7f35",
-        "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
-        "fassung_sha256": "e08b6e61e4a9499d725785fb800202179452b36ea7e69b11f6f2f96544f6bce6",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+        "id": "20c08cb650ef6e24af64",
+        "slug": "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
+        "fassung_sha256": "0b1abb78b1bc9f39f55904c72b1e235ff7f68520ca3571f1b2456ffe77a06f0b",
+        "text_sha256": "f95a4bf64e55e826bdea8ccfced37a7aa225bc1c18f3ee507e88a6f44b7e5643",
+        "zuletzt_gesehen": "2026-11-05 12:43 UTC"
       },
       {
         "typ": "veraltet",
-        "text": "Die Einschätzung zur Inflation ist unpräzise: Die aktuelle Inflationsrate liegt laut Destatis bei +2,8 % (Oktober 2026), wodurch die genannten Tagesgeldzinsen von 0,5 % bis 1,5 % den Wertverlust deutlich weniger ausgleichen als suggeriert.",
+        "text": "Die im Rechenbeispiel zur Realrendite genutzte Inflationsrate von 2 % ist veraltet; die vorläufige Rate für Oktober 2026 beträgt laut Statistischem Bundesamt 2,8 %.",
         "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-        "id": "e8e32a383b6f803cc8d4",
-        "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
-        "fassung_sha256": "e08b6e61e4a9499d725785fb800202179452b36ea7e69b11f6f2f96544f6bce6",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher angekündigt werden muss, ohne dafür eine Quelle anzugeben.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "252413dcc16cea146beb",
-        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
-        "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
-        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+        "id": "6aafb23c0c6dbb06ce3b",
+        "slug": "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
+        "fassung_sha256": "0b1abb78b1bc9f39f55904c72b1e235ff7f68520ca3571f1b2456ffe77a06f0b",
+        "text_sha256": "f95a4bf64e55e826bdea8ccfced37a7aa225bc1c18f3ee507e88a6f44b7e5643",
+        "zuletzt_gesehen": "2026-11-05 12:43 UTC"
       },
       {
         "typ": "praezision",
-        "text": "Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf den Anbieter überträgt und dafür ein höherer Startpreis üblich ist, fehlt eine konkrete Quelle und bleibt vage.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "48a0a962046c8315270e",
-        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
-        "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
-        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
-      },
-      {
-        "typ": "praezision",
-        "text": "Die Aussage, dass man „in der Regel“ zum Zeitpunkt der Preisänderung Sonderkündigungsrecht hat, ist unpräzise und wird nicht durch eine konkrete Regelung belegt.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "9326152f4d788cff56bd",
-        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
-        "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
-        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Der angegebene durchschnittliche Gaspreis von 11,93 Cent/kWh für 2026 (laut BDEW) wird nicht durch eine Quelle belegt.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "ab4d084fd367c8e4d518",
-        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
-        "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
-        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die Angabe, dass die Verbraucherzentrale etwa 6 % weniger Heizenergie pro Grad niedrigerer Raumtemperatur nennt, fehlt eine Quellenangabe.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "d215addd22dea72c44df",
-        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
-        "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
-        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Angaben zum Fremdwährungsentgelt von „fast zwei Prozent“ bei Zahlungen in fremder Währung fehlen jede belegbare Referenz.",
-        "beleg": "",
-        "id": "16b3b8584ff802803aa9",
-        "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
-        "fassung_sha256": "6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
-      },
-      {
-        "typ": "praezision",
-        "text": "Formulierungen wie „einige Anbieter ohne Auslandsgebühr gehören zu den besten Karten für Reisen“ sind pauschal und ohne messbare Daten unpräzise.",
-        "beleg": "",
-        "id": "7ff042b6fe804cdf101b",
-        "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
-        "fassung_sha256": "6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die Aussage, dass die kostenlose Sperr‑Notrufnummer 116 für alle Karten in Deutschland gilt, wird nicht durch eine Quelle gestützt.",
-        "beleg": "",
-        "id": "bec83c4b814183fa1086",
-        "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
-        "fassung_sha256": "6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die Angabe, dass Sollzinsen bei Teilzahlung zwischen 12 % und 20 % liegen, ist nicht mit einer Quelle belegt.",
-        "beleg": "",
-        "id": "f9aff86b6eba71b153a6",
-        "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
-        "fassung_sha256": "6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die Behauptung, dass eine gute Kreditkarte im Jahr nichts kostet (keine Jahres‑ und keine Fremdwährungsgebühr), wird ohne jegliche Quelle angegeben.",
-        "beleg": "",
-        "id": "fed9215b770ea4879eda",
-        "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
-        "fassung_sha256": "6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-04 12:30 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Es fehlt der Hinweis auf das offizielle Beschwerdeportal der Bundesnetzagentur, über das Verbraucher Probleme mit Anbietern direkt melden können.",
-        "beleg": "",
-        "id": "3f0a88ede9d44ee910cb",
-        "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
-        "fassung_sha256": "7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Der Ratgeber versäumt es, bei der Tarifprüfung auf die behördlichen Schlichtungsverfahren hinzuweisen, die Verbrauchern bei Streitigkeiten mit Energieversorgern zur Verfügung stehen.",
-        "beleg": "",
-        "id": "51e259fd2d8582e774f7",
-        "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
-        "fassung_sha256": "7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Der Artikel erwähnt keine behördlichen Informationsquellen wie das Verbraucher-Radar, das Transparenz über den Energiemarkt und Verbraucherschutzthemen bietet.",
-        "beleg": "",
-        "id": "55f8eeedc587cf0895ee",
-        "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
-        "fassung_sha256": "7df1dd47844d19487f3999d1e84ff9f24f935485f0590819a647a7c17bdd9648",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Es fehlt der Hinweis auf die behördliche Anlaufstelle für Anfragen und Beschwerden im Bereich Energie, die über die rein zivilrechtliche Meldung beim Vermieter hinausgeht.",
-        "beleg": "",
-        "id": "045ff990e44a7035e9a0",
-        "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
-        "fassung_sha256": "9bf7efbf6eb1d4a2fa70aaa34f3caf1a938955b3986bd93ebdad278ca2f11d21",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Der Ratgeber empfiehlt Tarifvergleiche und Mängelmeldungen, lässt aber den für den Energiemarkt relevanten Regulierungsrahmen für den Verbraucherschutz (Schlichtungsverfahren) unerwähnt.",
-        "beleg": "",
-        "id": "8919c2d1145af782d17a",
-        "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
-        "fassung_sha256": "9bf7efbf6eb1d4a2fa70aaa34f3caf1a938955b3986bd93ebdad278ca2f11d21",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
-      },
-      {
-        "typ": "praezision",
-        "text": "Die Markttransparenz und der Verbraucherschutz im Energiesektor werden durch das 'Verbraucher-Radar' der Bundesnetzagentur statistisch erfasst; dieser Kontext fehlt bei der Einordnung von Marktdaten.",
-        "beleg": "",
-        "id": "c39938841291b1e9e140",
-        "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
-        "fassung_sha256": "9bf7efbf6eb1d4a2fa70aaa34f3caf1a938955b3986bd93ebdad278ca2f11d21",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die Aussage, dass die Verbraucherzentrale empfiehlt, Boni im ersten Vergleich auszublenden, fehlt eine Quellenangabe.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "0aa915539d57841e5014",
-        "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
-        "fassung_sha256": "ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Der angegebene BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird nicht belegt.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "5e1be48085014a836807",
-        "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
-        "fassung_sha256": "ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
-      },
-      {
-        "typ": "praezision",
-        "text": "Die pauschale Formulierung, dass bei zentraler Heizung der Vermieter oder die Eigentümergemeinschaft den Anbieter wählt, ist zu ungenau und nicht belegt.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "6fdf31c3b68b6122bd0d",
-        "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
-        "fassung_sha256": "ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Der Artikel behauptet, dass laut Bundesnetzagentur Preisänderungen klar angekündigt und begründet sein müssen, liefert jedoch keinen Beleg dafür.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "c27c182c615bd7ca3b78",
-        "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
-        "fassung_sha256": "ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Es wird angegeben, dass bei einer Preisänderung in der Regel ein Sonderkündigungsrecht besteht, ohne dafür eine Quelle zu nennen.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "e1e40e9bbbdd109df86e",
-        "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
-        "fassung_sha256": "ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quellenangabe.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "334751e6f61ad0033fe4",
-        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird ohne Quelle angegeben.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "36759a5efe5e8e5163d0",
-        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt rund 180 € im Jahr“ wird nicht belegt.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "942922d1afd7844618e9",
-        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
-      },
-      {
-        "typ": "praezision",
-        "text": "Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“ ist ein Superlativ ohne messbare Daten oder Vergleichskriterien.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "d41f0d5ce8798df0211b",
-        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne Quellenangabe genannt.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "e139d0769faadd04392a",
-        "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-        "fassung_sha256": "3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a",
-        "zuletzt_gesehen": "2026-11-02 12:50 UTC"
-      },
-      {
-        "typ": "praezision",
-        "text": "Die Angabe, dass Anbieter den Abschlag auf elf oder zwölf Raten verteilen, ist ohne Beleg ungenau, da die Ratenzahl vertraglich variieren kann.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "04e40219cb4ff593b415",
-        "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
-        "fassung_sha256": "642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8",
-        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die Aussage, dass die Grundversorgung fast immer der teuerste Tarif ist, wird nicht durch eine Quelle belegt.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "2d01dc2629ad9c81f569",
-        "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
-        "fassung_sha256": "642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8",
-        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die Angabe, dass ein Grad weniger Raumtemperatur rund 6 % Heizenergie einspart, fehlt eine Quellenangabe.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "3fd64026f55df4965cc9",
-        "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
-        "fassung_sha256": "642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8",
-        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Das Sonderkündigungsrecht bei Preiserhöhungen im Winter wird genannt, ohne regulatorische Grundlage zu nennen.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "799c93c89a10fc3cf267",
-        "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
-        "fassung_sha256": "642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8",
-        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die Behauptung, der Grundtarif der Stadtwerke sei ausschließlich eine Notversorgung und nie ein Bestpreis, ist unbelegt.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "cd81b3d9001b04c0a4e1",
-        "slug": "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig",
-        "fassung_sha256": "642b9c10402cf78f89248e84ec2316b63ac7518839287516788f1425cdda3ba8",
-        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
-      },
-      {
-        "typ": "praezision",
-        "text": "Während der Artikel vor hohen Kosten für Festmenüs warnt, liegt die Preissteigerung bei Nahrungsmitteln laut Destatis im Oktober 2026 bei lediglich +0,4 % und damit deutlich unter der allgemeinen Inflation.",
+        "text": "Die Kalkulation der Fixkostenersparnis bei Energie (Strom/Gas) ist unpräzise, da sie den aktuellen Preisanstieg von +14,9 % bei Energieprodukten nicht einbezieht.",
         "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-        "id": "58f03a64adaaf8125959",
-        "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
-        "fassung_sha256": "7203c0f7cedd638a87bafcfcd5fc6e920ab79959793f832239386b0690ac776f",
-        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+        "id": "24f05ddc03ffdd50118f",
+        "slug": "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
+        "fassung_sha256": "04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9",
+        "text_sha256": "d6c889f3c54614a8d78820d96bce5359d0c112fe8c0d5cece6c99056531ad059",
+        "zuletzt_gesehen": "2026-11-05 12:43 UTC"
       },
       {
-        "typ": "praezision",
-        "text": "Die Pauschale für 'Anreise und Mobilität' (10 % des Budgets) berücksichtigt nicht die überdurchschnittliche Preissteigerung bei Energie von +14,9 %, die Fahrtkosten im Vergleich zum Vorjahr massiv verteuern kann.",
+        "typ": "luecke",
+        "text": "Bei den Einsparpotenzialen für Lebensmittel fehlt der Bezug zur aktuellen Preissteigerung von +0,4 % bei Nahrungsmitteln.",
         "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-        "id": "a7f5f01ef15a38839a0d",
-        "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
-        "fassung_sha256": "7203c0f7cedd638a87bafcfcd5fc6e920ab79959793f832239386b0690ac776f",
-        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+        "id": "4816322f061dfdc03bcd",
+        "slug": "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
+        "fassung_sha256": "04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9",
+        "text_sha256": "d6c889f3c54614a8d78820d96bce5359d0c112fe8c0d5cece6c99056531ad059",
+        "zuletzt_gesehen": "2026-11-05 12:43 UTC"
       },
       {
-        "typ": "luecke",
-        "text": "Die Modellrechnung für das Weihnachtsbudget (600 €) lässt die aktuelle Teuerungsrate unberücksichtigt. Laut Statistischen Bundesamt liegt die Inflationsrate im Oktober 2026 bei +2,8 %, was als Referenzwert für die Budgetplanung zum Vorjahr fehlt.",
+        "typ": "veraltet",
+        "text": "Der Artikel nutzt Kostenszenarien für 2024/2025, während aktuelle Daten für Oktober 2026 eine Inflationsrate von +2,8 % ausweisen.",
         "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-        "id": "bcc2bdf06220d5097133",
-        "slug": "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
-        "fassung_sha256": "7203c0f7cedd638a87bafcfcd5fc6e920ab79959793f832239386b0690ac776f",
-        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Es fehlt der für Campingbuchungen relevante Regulierungsrahmen (Unterscheidung Mietrecht bei Stellplätzen vs. Reiserecht), den die Fundstelle für den Bereich Reise nur allgemein andeutet.",
-        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-        "id": "089b89138417e63a3dcf",
-        "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
-        "fassung_sha256": "4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7",
-        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die Preisangabe von 20 bis 45 € pro Nacht wird als realistischer Wert positioniert, ist jedoch nicht durch Marktdaten oder eine Referenzstelle in den Fundstellen belegt.",
-        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-        "id": "1158934e7a18c7b2099b",
-        "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
-        "fassung_sha256": "4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7",
-        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
-      },
-      {
-        "typ": "praezision",
-        "text": "Der Verweis auf die Verbraucherzentrale zur Prüfung von Buchungsangaben führt auf eine allgemeine Übersichtsseite ohne konkrete Checklisten für Camping-Angebote.",
-        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-        "id": "3716cfd3ab5aec6d774b",
-        "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
-        "fassung_sha256": "4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7",
-        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu unklaren Angeboten und Problemen mit Online-Buchungen.",
-        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-        "id": "7067eabb89a917ae67a4",
-        "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
-        "fassung_sha256": "d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
-      },
-      {
-        "typ": "praezision",
-        "text": "Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht automatisch, ob das Auto zum individuellen Urlaub passt – ohne Messgröße bleibt die Aussage ungenau.",
-        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-        "id": "af2ccb4222eeb195222f",
-        "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
-        "fassung_sha256": "d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die Verbraucherzentrale beschreibt, dass sich eine Pauschalreise unter bestimmten Bedingungen auf eine andere Person übertragen lässt.",
-        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-        "id": "d9c8b522bf1dcaed0340",
-        "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
-        "fassung_sha256": "d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die Verbraucherzentrale empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im Blick zu behalten.",
-        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-        "id": "e2975509f3f130de0755",
-        "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
-        "fassung_sha256": "d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Bei einer Pauschalreise gilt die Mitteilung als rechtzeitig, wenn sie dem Veranstalter spätestens sieben Tage vor Reisebeginn zugeht (§ 651e BGB).",
-        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-        "id": "f1704e45e970a8f4b078",
-        "slug": "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
-        "fassung_sha256": "d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Der Artikel erwähnt keinen regulatorischen Rahmen (z. B. Bundesnetzagentur) obwohl diese Institution für Strom‑ und Gasmärkte zuständig ist.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "34e4bb2acfa235699da5",
-        "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
-        "fassung_sha256": "af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Angaben zu staatlichen Zuschüssen (bis zu 70 %) und deren Auswirkung auf den Eigenanteil fehlen eine Quellenangabe.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "42b9d842341d892d42d0",
-        "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
-        "fassung_sha256": "af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Hinweis, dass ein spezieller Stromtarif für Wärmepumpen die Kosten senkt, wird nicht durch eine Quelle belegt.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "866d8b711dc2de369444",
-        "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
-        "fassung_sha256": "af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Preisannahmen für Strom (30 ¢/kWh), Gas (10 ¢/kWh) und CO₂‑Aufschlag (5 ¢/kWh) werden ohne belegbare Daten präsentiert.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "bd4c46a336f33a639f05",
-        "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
-        "fassung_sha256": "af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die behauptete Amortisationsdauer von 10‑12 Jahren für eine Wärmepumpe basiert auf einer Modellrechnung ohne nachweisbare Quelle.",
-        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-        "id": "e76768fdef3ef5afa026",
-        "slug": "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig",
-        "fassung_sha256": "af00202f561292004861d80328de482ecf932eed02e7957e3d5db851bfea0f96",
-        "text_sha256": null,
-        "zuletzt_gesehen": "2026-11-03 12:18 UTC"
+        "id": "7017065ee7c74c7ae452",
+        "slug": "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
+        "fassung_sha256": "04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9",
+        "text_sha256": "d6c889f3c54614a8d78820d96bce5359d0c112fe8c0d5cece6c99056531ad059",
+        "zuletzt_gesehen": "2026-11-05 12:43 UTC"
       },
       {
         "id": "05be346e82c80b2a8664",
@@ -960,6 +325,96 @@
         "zuletzt_gesehen": "2026-11-03 10:25 UTC"
       },
       {
+        "typ": "luecke",
+        "text": "Die im Rechenbeispiel genutzte Kilometerpauschale von 0,20 €/km wird als Referenzwert ohne Quellenangabe (z. B. Branchenverband) angeführt.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "785eee76d888bb05ad96",
+        "slug": "2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen",
+        "fassung_sha256": "cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf",
+        "text_sha256": "b98958e1b370a3969466a836448cdbdf83564433fa848756398106473272bd2e",
+        "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der als Handlungsschritt empfohlene '4K-Prüfpfad' wird im Text nicht erläutert und ist in der genannten Quelle nicht enthalten.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "843ec148e23841b7bf35",
+        "slug": "2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen",
+        "fassung_sha256": "cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf",
+        "text_sha256": "b98958e1b370a3969466a836448cdbdf83564433fa848756398106473272bd2e",
+        "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Preisprognose (Anstieg in den letzten 3 Wochen) und der empfohlene Buchungsvorlauf (3-4 Wochen) sind Marktdaten ohne Beleg durch die Fachquelle.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "def43a04853be4c35f7f",
+        "slug": "2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen",
+        "fassung_sha256": "cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf",
+        "text_sha256": "b98958e1b370a3969466a836448cdbdf83564433fa848756398106473272bd2e",
+        "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Das Versprechen, CHECK24 vergleiche 'alle großen Anbieter', ist ein Vollständigkeitsversprechen ohne Nennung von Auswahlkriterien oder der Marktabdeckung.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "f064ea49ccefde26aef9",
+        "slug": "2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen",
+        "fassung_sha256": "cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf",
+        "text_sha256": "b98958e1b370a3969466a836448cdbdf83564433fa848756398106473272bd2e",
+        "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Behauptung, dass Überladung der Maschine zu schnellerem Verschleiß und teuren Reparaturen führt, wird ohne konkrete Daten oder Messgröße angegeben.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "4284fd2d9c9005e7af8f",
+        "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
+        "fassung_sha256": "e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3",
+        "text_sha256": "a628d11ece7bcd2f4fa4d8d30cc0bece6925bb09d11425604a7563544a21e7e2",
+        "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Aussage, dass das richtige Beladen allein die Fixkosten senkt, ohne weitere Maßnahmen, ist ein pauschales Leistungsversprechen ohne Nennung von Mechanismen oder Grenzen.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "84e247f17354e224c973",
+        "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
+        "fassung_sha256": "e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3",
+        "text_sha256": "a628d11ece7bcd2f4fa4d8d30cc0bece6925bb09d11425604a7563544a21e7e2",
+        "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Modellrechnung (0,9 kWh/50 L bei vollem Waschgang, 0,6 kWh/35 L bei halbem Waschgang, Strompreis 0,40 €/kWh, Wasserpreis 0,005 €/L) und die daraus resultierende Jahresersparnis von 22 € fehlen einer fundierten Quelle.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "a2a7dc69f10393af6531",
+        "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
+        "fassung_sha256": "e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3",
+        "text_sha256": "a628d11ece7bcd2f4fa4d8d30cc0bece6925bb09d11425604a7563544a21e7e2",
+        "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Aussage, dass bei 4 Waschgängen pro Woche ein durchschnittlicher Haushalt rund 5 € jährlich an Strom‑ und Wasserkosten spart, ist nicht mit einer Quelle belegt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "cb794331f1cc0c715a55",
+        "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
+        "fassung_sha256": "e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3",
+        "text_sha256": "a628d11ece7bcd2f4fa4d8d30cc0bece6925bb09d11425604a7563544a21e7e2",
+        "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Angabe, dass ein optimal beladener Trommel (ca. 80 % Kapazität) bis zu 15 % weniger Wasser und Energie verbraucht, wird nicht durch eine Quelle belegt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "e6729081522126e972c2",
+        "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
+        "fassung_sha256": "e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3",
+        "text_sha256": "a628d11ece7bcd2f4fa4d8d30cc0bece6925bb09d11425604a7563544a21e7e2",
+        "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+      },
+      {
         "id": "360dbd44c71db04f43e0",
         "slug": "versicherungen",
         "fassung_sha256": "legacy-unbekannt",
@@ -1008,13 +463,14 @@
     "geo_luecken": {
       "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 9,
       "Mindestens eine Tabelle (extrahierbare Struktur)": 12,
-      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 15,
-      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 3,
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)": 16,
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 5,
+      "Sichtbares Prüfdatum (`faktencheck:`)": 2,
       "FAQ-Abschnitt (FAQPage-Schema, Antwortmaschinen-Futter)": 3
     },
-    "deckung_prozent": 146.3,
-    "bedarf_je_woche": 19.1,
-    "abbau_tage": null,
+    "deckung_prozent": 143.4,
+    "bedarf_je_woche": 19.5,
+    "abbau_tage": 0,
     "nachhol_frist_tage": 7,
     "abbrueche": 0
   },
@@ -1432,6 +888,56 @@
       "fassung_sha256": "6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5",
       "text_sha256": null,
       "zuletzt_gesehen": "2026-11-04 12:30 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der Ratgeber vernachlässigt bei der Kalkulation der Sparfähigkeit die massive Preissteigerung bei Energie (+14,9 %), die das Budget für monatliche Sparraten erheblich belastet.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "id": "20c08cb650ef6e24af64",
+      "slug": "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
+      "fassung_sha256": "0b1abb78b1bc9f39f55904c72b1e235ff7f68520ca3571f1b2456ffe77a06f0b",
+      "text_sha256": "f95a4bf64e55e826bdea8ccfced37a7aa225bc1c18f3ee507e88a6f44b7e5643",
+      "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+    },
+    {
+      "typ": "veraltet",
+      "text": "Die im Rechenbeispiel zur Realrendite genutzte Inflationsrate von 2 % ist veraltet; die vorläufige Rate für Oktober 2026 beträgt laut Statistischem Bundesamt 2,8 %.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "id": "6aafb23c0c6dbb06ce3b",
+      "slug": "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
+      "fassung_sha256": "0b1abb78b1bc9f39f55904c72b1e235ff7f68520ca3571f1b2456ffe77a06f0b",
+      "text_sha256": "f95a4bf64e55e826bdea8ccfced37a7aa225bc1c18f3ee507e88a6f44b7e5643",
+      "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Kalkulation der Fixkostenersparnis bei Energie (Strom/Gas) ist unpräzise, da sie den aktuellen Preisanstieg von +14,9 % bei Energieprodukten nicht einbezieht.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "id": "24f05ddc03ffdd50118f",
+      "slug": "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
+      "fassung_sha256": "04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9",
+      "text_sha256": "d6c889f3c54614a8d78820d96bce5359d0c112fe8c0d5cece6c99056531ad059",
+      "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Bei den Einsparpotenzialen für Lebensmittel fehlt der Bezug zur aktuellen Preissteigerung von +0,4 % bei Nahrungsmitteln.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "id": "4816322f061dfdc03bcd",
+      "slug": "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
+      "fassung_sha256": "04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9",
+      "text_sha256": "d6c889f3c54614a8d78820d96bce5359d0c112fe8c0d5cece6c99056531ad059",
+      "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+    },
+    {
+      "typ": "veraltet",
+      "text": "Der Artikel nutzt Kostenszenarien für 2024/2025, während aktuelle Daten für Oktober 2026 eine Inflationsrate von +2,8 % ausweisen.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "id": "7017065ee7c74c7ae452",
+      "slug": "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
+      "fassung_sha256": "04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9",
+      "text_sha256": "d6c889f3c54614a8d78820d96bce5359d0c112fe8c0d5cece6c99056531ad059",
+      "zuletzt_gesehen": "2026-11-05 12:43 UTC"
     },
     {
       "typ": "luecke",
@@ -1967,6 +1473,96 @@
       "zuletzt_gesehen": "2026-11-03 10:25 UTC"
     },
     {
+      "typ": "luecke",
+      "text": "Die im Rechenbeispiel genutzte Kilometerpauschale von 0,20 €/km wird als Referenzwert ohne Quellenangabe (z. B. Branchenverband) angeführt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "785eee76d888bb05ad96",
+      "slug": "2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen",
+      "fassung_sha256": "cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf",
+      "text_sha256": "b98958e1b370a3969466a836448cdbdf83564433fa848756398106473272bd2e",
+      "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der als Handlungsschritt empfohlene '4K-Prüfpfad' wird im Text nicht erläutert und ist in der genannten Quelle nicht enthalten.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "843ec148e23841b7bf35",
+      "slug": "2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen",
+      "fassung_sha256": "cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf",
+      "text_sha256": "b98958e1b370a3969466a836448cdbdf83564433fa848756398106473272bd2e",
+      "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Preisprognose (Anstieg in den letzten 3 Wochen) und der empfohlene Buchungsvorlauf (3-4 Wochen) sind Marktdaten ohne Beleg durch die Fachquelle.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "def43a04853be4c35f7f",
+      "slug": "2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen",
+      "fassung_sha256": "cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf",
+      "text_sha256": "b98958e1b370a3969466a836448cdbdf83564433fa848756398106473272bd2e",
+      "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+    },
+    {
+      "typ": "praezision",
+      "text": "Das Versprechen, CHECK24 vergleiche 'alle großen Anbieter', ist ein Vollständigkeitsversprechen ohne Nennung von Auswahlkriterien oder der Marktabdeckung.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "f064ea49ccefde26aef9",
+      "slug": "2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen",
+      "fassung_sha256": "cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf",
+      "text_sha256": "b98958e1b370a3969466a836448cdbdf83564433fa848756398106473272bd2e",
+      "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+    },
+    {
+      "typ": "praezision",
+      "text": "Behauptung, dass Überladung der Maschine zu schnellerem Verschleiß und teuren Reparaturen führt, wird ohne konkrete Daten oder Messgröße angegeben.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "4284fd2d9c9005e7af8f",
+      "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
+      "fassung_sha256": "e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3",
+      "text_sha256": "a628d11ece7bcd2f4fa4d8d30cc0bece6925bb09d11425604a7563544a21e7e2",
+      "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+    },
+    {
+      "typ": "praezision",
+      "text": "Aussage, dass das richtige Beladen allein die Fixkosten senkt, ohne weitere Maßnahmen, ist ein pauschales Leistungsversprechen ohne Nennung von Mechanismen oder Grenzen.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "84e247f17354e224c973",
+      "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
+      "fassung_sha256": "e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3",
+      "text_sha256": "a628d11ece7bcd2f4fa4d8d30cc0bece6925bb09d11425604a7563544a21e7e2",
+      "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Modellrechnung (0,9 kWh/50 L bei vollem Waschgang, 0,6 kWh/35 L bei halbem Waschgang, Strompreis 0,40 €/kWh, Wasserpreis 0,005 €/L) und die daraus resultierende Jahresersparnis von 22 € fehlen einer fundierten Quelle.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "a2a7dc69f10393af6531",
+      "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
+      "fassung_sha256": "e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3",
+      "text_sha256": "a628d11ece7bcd2f4fa4d8d30cc0bece6925bb09d11425604a7563544a21e7e2",
+      "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Aussage, dass bei 4 Waschgängen pro Woche ein durchschnittlicher Haushalt rund 5 € jährlich an Strom‑ und Wasserkosten spart, ist nicht mit einer Quelle belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "cb794331f1cc0c715a55",
+      "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
+      "fassung_sha256": "e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3",
+      "text_sha256": "a628d11ece7bcd2f4fa4d8d30cc0bece6925bb09d11425604a7563544a21e7e2",
+      "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Angabe, dass ein optimal beladener Trommel (ca. 80 % Kapazität) bis zu 15 % weniger Wasser und Energie verbraucht, wird nicht durch eine Quelle belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "e6729081522126e972c2",
+      "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
+      "fassung_sha256": "e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3",
+      "text_sha256": "a628d11ece7bcd2f4fa4d8d30cc0bece6925bb09d11425604a7563544a21e7e2",
+      "zuletzt_gesehen": "2026-11-05 12:43 UTC"
+    },
+    {
       "id": "360dbd44c71db04f43e0",
       "slug": "versicherungen",
       "fassung_sha256": "legacy-unbekannt",
@@ -2013,57 +1609,41 @@
     }
   ],
   "kapazitaet": {
-    "stichtag": "2026-11-04",
-    "artikel": 112,
-    "faellig": 0,
+    "stichtag": "2026-11-05",
+    "artikel": 114,
+    "faellig": 2,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
-      "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+      "slug": "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
       "frist": "2026-11-11",
-      "restlaufzeit": 7
+      "restlaufzeit": 6
     },
     "budget": 4,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 4.0,
-    "bedarf_je_tag": 2.733,
-    "bedarf_je_woche": 19.1,
-    "deckung_prozent": 146.3,
+    "bedarf_je_tag": 2.789,
+    "bedarf_je_woche": 19.5,
+    "deckung_prozent": 143.4,
     "horizont_tage": 120,
     "vorlauf_tage": 7,
     "nachhol_frist_tage": 7,
-    "abbau_tage": null,
+    "abbau_tage": 0,
     "verletzungen_alt": 0,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
     "verletzungen": [],
-    "offen_im_horizont": 112,
+    "offen_im_horizont": 114,
     "puenktlich": true,
     "rueckstand_abgebaut": true
   },
   "abbrueche": [],
   "offen": [
     {
-      "slug": "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
-      "titel": "Finanzielle Freiheit erreichen: Denke dich reich – Geld",
-      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
-      "faellig": false,
-      "frist": "2026-11-11",
-      "geo": 100
-    },
-    {
-      "slug": "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
-      "titel": "Frugalismus für Einsteiger: Mit kleinen Schritten sparen",
-      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
-      "faellig": false,
-      "frist": "2026-11-11",
-      "geo": 100
-    },
-    {
       "slug": "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
       "titel": "Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick",
-      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
+      "grund": "frisch geprüft vor 39 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-11",
       "geo": 100
@@ -2071,7 +1651,7 @@
     {
       "slug": "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
       "titel": "5 einfache Frugalismus-Tricks für den Alltag: Geld sparen",
-      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
+      "grund": "frisch geprüft vor 39 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-11",
       "geo": 100
@@ -2079,7 +1659,7 @@
     {
       "slug": "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
       "titel": "50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken",
-      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
+      "grund": "frisch geprüft vor 39 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-11",
       "geo": 100
@@ -2087,126 +1667,157 @@
     {
       "slug": "2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag",
       "titel": "5 einfache Frugalismus-Tricks für den Alltag",
-      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
+      "grund": "frisch geprüft vor 39 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-11",
+      "geo": 100
+    },
+    {
+      "slug": "strom-sparen",
+      "titel": "Strom & Gas sparen: Ratgeber für niedrige Energiekosten",
+      "grund": "frisch geprüft vor 23 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-12",
+      "geo": 50
+    },
+    {
+      "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+      "titel": "Energiediebe stoppen: So kannst du Stromfresser finden",
+      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-12",
+      "geo": 100
+    },
+    {
+      "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
+      "titel": "Warmwasser sparen: Die Rechnung hinter – Warmwasserkosten",
+      "grund": "frisch geprüft vor 23 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-12",
+      "geo": 100
+    },
+    {
+      "slug": "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser",
+      "titel": "Standby Kosten reduzieren: So entlarvst du Stromfresser",
+      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-12",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert",
+      "titel": "Energiepreise 2026: Strom- und Gasvertrag prüfen",
+      "grund": "frisch geprüft vor 23 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-12",
       "geo": 100
     }
   ],
   "laeufe": [
     {
-      "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
-      "titel": "Kostenloses Girokonto: Ein Konto ohne Gebühren finden",
-      "fassung_sha256": "ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4",
-      "text_sha256": null,
+      "slug": "2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen",
+      "titel": "Günstigen Mietwagen für den Urlaub buchen",
+      "fassung_sha256": "cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf",
+      "text_sha256": "b98958e1b370a3969466a836448cdbdf83564433fa848756398106473272bd2e",
       "bereich": "artikel",
-      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 1,
       "quellen": 1,
       "befunde": [
         {
           "typ": "luecke",
-          "text": "Angabe, dass ein Kontowechsel 120 € bis 180 € im Jahr spart, fehlt jede Quelle.",
-          "beleg": ""
+          "text": "Die Preisprognose (Anstieg in den letzten 3 Wochen) und der empfohlene Buchungsvorlauf (3-4 Wochen) sind Marktdaten ohne Beleg durch die Fachquelle.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+        },
+        {
+          "typ": "praezision",
+          "text": "Das Versprechen, CHECK24 vergleiche 'alle großen Anbieter', ist ein Vollständigkeitsversprechen ohne Nennung von Auswahlkriterien oder der Marktabdeckung.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
         },
         {
           "typ": "luecke",
-          "text": "Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 € an reinen Gebühren kosten, ist unbelegt.",
-          "beleg": ""
+          "text": "Die im Rechenbeispiel genutzte Kilometerpauschale von 0,20 €/km wird als Referenzwert ohne Quellenangabe (z. B. Branchenverband) angeführt.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
         },
         {
           "typ": "luecke",
-          "text": "Angabe von Dispozinsen von 8 % bis 11 % ohne Quellenangabe.",
-          "beleg": ""
-        },
-        {
-          "typ": "luecke",
-          "text": "Aussage, dass Einlagen bis 100.000 € durch die deutsche Einlagensicherung geschützt sind, wird nicht belegt.",
-          "beleg": ""
-        },
-        {
-          "typ": "luecke",
-          "text": "Behauptung, dass Echtzeit‑Überweisungen bei kostenlosen Konten generell gebührenfrei sind, fehlt jede Quelle.",
-          "beleg": ""
+          "text": "Der als Handlungsschritt empfohlene '4K-Prüfpfad' wird im Text nicht erläutert und ist in der genannten Quelle nicht enthalten.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
         }
       ],
-      "geo": 100,
+      "geo": 50,
       "fehler": [
-        "Deutsche Bundesbank – Pressenotizen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+        "Verbraucherzentrale – Reise: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+      ],
+      "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)",
+      "aenderungen": [
+        "faktencheck: 2026-11-05"
+      ]
+    },
+    {
+      "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
+      "titel": "Waschmaschine beladen: Weniger Kosten bei jedem Waschgang",
+      "fassung_sha256": "e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3",
+      "text_sha256": "a628d11ece7bcd2f4fa4d8d30cc0bece6925bb09d11425604a7563544a21e7e2",
+      "bereich": "artikel",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
+      "treffer": 1,
+      "quellen": 1,
+      "befunde": [
+        {
+          "typ": "luecke",
+          "text": "Angabe, dass ein optimal beladener Trommel (ca. 80 % Kapazität) bis zu 15 % weniger Wasser und Energie verbraucht, wird nicht durch eine Quelle belegt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Modellrechnung (0,9 kWh/50 L bei vollem Waschgang, 0,6 kWh/35 L bei halbem Waschgang, Strompreis 0,40 €/kWh, Wasserpreis 0,005 €/L) und die daraus resultierende Jahresersparnis von 22 € fehlen einer fundierten Quelle.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Aussage, dass bei 4 Waschgängen pro Woche ein durchschnittlicher Haushalt rund 5 € jährlich an Strom‑ und Wasserkosten spart, ist nicht mit einer Quelle belegt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "praezision",
+          "text": "Behauptung, dass Überladung der Maschine zu schnellerem Verschleiß und teuren Reparaturen führt, wird ohne konkrete Daten oder Messgröße angegeben.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "praezision",
+          "text": "Aussage, dass das richtige Beladen allein die Fixkosten senkt, ohne weitere Maßnahmen, ist ein pauschales Leistungsversprechen ohne Nennung von Mechanismen oder Grenzen.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        }
+      ],
+      "geo": 67,
+      "fehler": [
+        "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
+        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
       ],
       "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)",
       "aenderungen": [
-        "faktencheck: 2026-11-04"
+        "faktencheck: 2026-11-05"
       ]
     },
     {
-      "slug": "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
-      "titel": "Haushaltsbuch führen: App, Excel oder Stift im Vergleich",
-      "fassung_sha256": "cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b",
-      "text_sha256": null,
+      "slug": "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
+      "titel": "Finanzielle Freiheit erreichen: Denke dich reich – Geld",
+      "fassung_sha256": "0b1abb78b1bc9f39f55904c72b1e235ff7f68520ca3571f1b2456ffe77a06f0b",
+      "text_sha256": "f95a4bf64e55e826bdea8ccfced37a7aa225bc1c18f3ee507e88a6f44b7e5643",
       "bereich": "artikel",
-      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
-      "treffer": 1,
-      "quellen": 1,
-      "befunde": [
-        {
-          "typ": "luecke",
-          "text": "Behauptung, dass 60 % der Haushalte in Deutschland ihr Geld nicht nachverfolgen, wird mit einer Auswertung der Stiftung Warentest angegeben, jedoch fehlt ein entsprechender Nachweis.",
-          "beleg": ""
-        },
-        {
-          "typ": "luecke",
-          "text": "Angabe, dass 58 % der Nutzer ihr Haushaltsbuch digital führen, beruft sich angeblich auf Statista 2025, jedoch wird keine Quelle genannt.",
-          "beleg": ""
-        },
-        {
-          "typ": "luecke",
-          "text": "Sparpotenzial‑Beispiele (z. B. DSL‑Tarifwechsel von 44 € auf 24 €) enthalten konkrete Zahlen ohne Quellenangabe.",
-          "beleg": ""
-        },
-        {
-          "typ": "praezision",
-          "text": "Die Aussage, dass die 50‑30‑20‑Regel für ein Nettoeinkommen von 2.500 € realistisch sei, wird ohne Hinweis auf regionale Unterschiede oder empirische Daten präsentiert.",
-          "beleg": ""
-        },
-        {
-          "typ": "praezision",
-          "text": "Versprechen, dass ein Haushaltsbuch „schnell“ zeigt, welche Posten sich lohnen, ist nicht quantifiziert und fehlt an konkreten Evidenzangaben.",
-          "beleg": ""
-        }
-      ],
-      "geo": 100,
-      "fehler": [
-        "Deutsche Bundesbank – Pressenotizen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
-      ],
-      "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b)",
-      "aenderungen": [
-        "faktencheck: 2026-11-04"
-      ]
-    },
-    {
-      "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
-      "titel": "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht",
-      "fassung_sha256": "e08b6e61e4a9499d725785fb800202179452b36ea7e69b11f6f2f96544f6bce6",
-      "text_sha256": null,
-      "bereich": "artikel",
-      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
+      "grund": "frisch geprüft vor 39 Tagen (Intervall 45 Tage)",
       "treffer": 1,
       "quellen": 1,
       "befunde": [
         {
           "typ": "veraltet",
-          "text": "Die Einschätzung zur Inflation ist unpräzise: Die aktuelle Inflationsrate liegt laut Destatis bei +2,8 % (Oktober 2026), wodurch die genannten Tagesgeldzinsen von 0,5 % bis 1,5 % den Wertverlust deutlich weniger ausgleichen als suggeriert.",
+          "text": "Die im Rechenbeispiel zur Realrendite genutzte Inflationsrate von 2 % ist veraltet; die vorläufige Rate für Oktober 2026 beträgt laut Statistischem Bundesamt 2,8 %.",
           "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
         },
         {
           "typ": "luecke",
-          "text": "Der Ratgeber empfiehlt Tarifwechsel bei Energie zur Kostensenkung, verschweigt aber den aktuellen Markttrend massiv steigender Energiepreise (+14,9 %), was die Kalkulation der 50-Prozent-Fixkostenquote gefährdet.",
-          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
-        },
-        {
-          "typ": "praezision",
-          "text": "Die im Teaser und Text genannten monatlichen Ersparnisse von 350 € bis 600 € werden als Marktfakten ohne Quellenbeleg oder methodische Herleitung (z. B. Referenzhaushalt des Statistischen Bundesamtes) angeführt.",
+          "text": "Der Ratgeber vernachlässigt bei der Kalkulation der Sparfähigkeit die massive Preissteigerung bei Energie (+14,9 %), die das Budget für monatliche Sparraten erheblich belastet.",
           "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
         }
       ],
@@ -2216,52 +1827,42 @@
       ],
       "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)",
       "aenderungen": [
-        "faktencheck: 2026-11-04"
+        "faktencheck: 2026-11-05"
       ]
     },
     {
-      "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
-      "titel": "Kreditkarte vergleichen: Kostenlos und sicher zahlen",
-      "fassung_sha256": "6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5",
-      "text_sha256": null,
+      "slug": "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
+      "titel": "Frugalismus für Einsteiger: Mit kleinen Schritten sparen",
+      "fassung_sha256": "04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9",
+      "text_sha256": "d6c889f3c54614a8d78820d96bce5359d0c112fe8c0d5cece6c99056531ad059",
       "bereich": "artikel",
-      "grund": "frisch geprüft vor 38 Tagen (Intervall 45 Tage)",
+      "grund": "frisch geprüft vor 39 Tagen (Intervall 45 Tage)",
       "treffer": 1,
       "quellen": 1,
       "befunde": [
         {
-          "typ": "luecke",
-          "text": "Die Behauptung, dass eine gute Kreditkarte im Jahr nichts kostet (keine Jahres‑ und keine Fremdwährungsgebühr), wird ohne jegliche Quelle angegeben.",
-          "beleg": ""
-        },
-        {
-          "typ": "luecke",
-          "text": "Angaben zum Fremdwährungsentgelt von „fast zwei Prozent“ bei Zahlungen in fremder Währung fehlen jede belegbare Referenz.",
-          "beleg": ""
-        },
-        {
-          "typ": "luecke",
-          "text": "Die Angabe, dass Sollzinsen bei Teilzahlung zwischen 12 % und 20 % liegen, ist nicht mit einer Quelle belegt.",
-          "beleg": ""
-        },
-        {
-          "typ": "luecke",
-          "text": "Die Aussage, dass die kostenlose Sperr‑Notrufnummer 116 für alle Karten in Deutschland gilt, wird nicht durch eine Quelle gestützt.",
-          "beleg": ""
+          "typ": "veraltet",
+          "text": "Der Artikel nutzt Kostenszenarien für 2024/2025, während aktuelle Daten für Oktober 2026 eine Inflationsrate von +2,8 % ausweisen.",
+          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
         },
         {
           "typ": "praezision",
-          "text": "Formulierungen wie „einige Anbieter ohne Auslandsgebühr gehören zu den besten Karten für Reisen“ sind pauschal und ohne messbare Daten unpräzise.",
-          "beleg": ""
+          "text": "Die Kalkulation der Fixkostenersparnis bei Energie (Strom/Gas) ist unpräzise, da sie den aktuellen Preisanstieg von +14,9 % bei Energieprodukten nicht einbezieht.",
+          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Bei den Einsparpotenzialen für Lebensmittel fehlt der Bezug zur aktuellen Preissteigerung von +0,4 % bei Nahrungsmitteln.",
+          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
         }
       ],
       "geo": 100,
       "fehler": [
-        "Deutsche Bundesbank – Pressenotizen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+        "Statistisches Bundesamt – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
       ],
-      "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)",
+      "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)",
       "aenderungen": [
-        "faktencheck: 2026-11-04"
+        "faktencheck: 2026-11-05"
       ]
     }
   ]
