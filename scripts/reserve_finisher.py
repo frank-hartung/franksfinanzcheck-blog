@@ -145,12 +145,61 @@ def _canonical_cta_hygiene(index: Path) -> int:
     return cta.hygiene_file(index)
 
 
+def mit_faktenfrische_alias(text: str, alter_slug: str) -> str:
+    """Alten Ordner-Slug idempotent als interne Befund-Herkunft eintragen.
+
+    Das Frontmatter gehört zum selben Datei-Snapshot wie der Artikel. Bei einem
+    katastrophalen Finisher-Abbruch rollt `restore_snapshots()` daher auch den
+    Alias zurück. Der Artikelkörper und alle übrigen Metadaten bleiben exakt
+    unangetastet; insbesondere ist das keine öffentliche Weiterleitung.
+    """
+    if not re.fullmatch(r"[a-z0-9][a-z0-9-]*", alter_slug):
+        raise ValueError(f"Ungültiger Faktenfrische-Alias: {alter_slug!r}")
+    zeilen = text.splitlines(keepends=True)
+    if not zeilen or zeilen[0].strip() != "---":
+        raise ValueError("Artikel ohne Frontmatter kann keinen Alias erhalten")
+    try:
+        ende = next(i for i in range(1, len(zeilen))
+                    if zeilen[i].strip() == "---")
+    except StopIteration as exc:
+        raise ValueError("Unvollständiges Frontmatter") from exc
+    eintrag = f'  - {json.dumps(alter_slug, ensure_ascii=False)}\n'
+    for i in range(1, ende):
+        if not zeilen[i].startswith("faktenfrische_aliases:"):
+            continue
+        wert = zeilen[i].split(":", 1)[1].strip()
+        if wert not in ("", "[]"):
+            raise ValueError("faktenfrische_aliases muss eine Blockliste sein")
+        blockende = i + 1
+        while blockende < ende and (not zeilen[blockende].strip() or
+                                    zeilen[blockende][0].isspace()):
+            zeile = zeilen[blockende].strip()
+            if zeile.startswith("-"):
+                roh = zeile[1:].strip()
+                try:
+                    vorhanden = json.loads(roh) if roh[:1] in ('"', "'") else roh
+                except json.JSONDecodeError as exc:
+                    raise ValueError("Ungültiger Faktenfrische-Alias") from exc
+                if vorhanden == alter_slug:
+                    return text
+            elif zeile and not zeile.startswith("#"):
+                raise ValueError("Ungültige Zeile in faktenfrische_aliases")
+            blockende += 1
+        if wert == "[]":
+            zeilen[i] = "faktenfrische_aliases:\n"
+        zeilen.insert(blockende, eintrag)
+        return "".join(zeilen)
+    zeilen.insert(ende, "faktenfrische_aliases:\n" + eintrag)
+    return "".join(zeilen)
+
+
 def lift_to_today(index: Path) -> Path:
     """Hebt einen Pool-Kandidaten auf das heutige Datum (Präfix + date).
 
-    Nur für Entwürfe ohne Außenverweise gefahrlos (Reserve-Pool-Garantie:
-    keine cadence_*-Felder, nie veröffentlicht, nie verlinkt).
-    Rückgabe: neuer Pfad.
+    Externe Links bleiben durch die Reserve-Pool-Garantie unberührt. Interne
+    Faktenbefunde sind dagegen historisch an den alten Slug gebunden: Seit
+    #1073 wandert dieser als `faktenfrische_aliases` im selben Datei-Snapshot
+    mit. Rückgabe: neuer Pfad.
     """
     slug = index.parent.name
     today = today_prefix()
@@ -178,6 +227,10 @@ def lift_to_today(index: Path) -> Path:
     text = re.sub(r"(?m)^date:\s*.*$", f"date: {now_utc_iso()}",
                   text, count=1)
     text = sync_lastmod_to_date(text)
+    # WF-8F6F / #1073: Der Befund-Slug ist historische Identität, kein URL-
+    # Schmuck. Alias und Inhalt werden gemeinsam geschrieben; das vorhandene
+    # Datei-Rollback entfernt beides bei einem katastrophalen Abbruch wieder.
+    text = mit_faktenfrische_alias(text, slug)
     new_index.write_text(text, encoding="utf-8")
     return new_index
 
@@ -1043,6 +1096,16 @@ def selftest() -> int:
         lm_ok = lm_probe.replace("lastmod: 2026-09-25", "lastmod: 2026-09-27")
         if sync_lastmod_to_date(lm_ok) != lm_ok:
             fehler.append("neueres lastmod darf nicht zurückdatiert werden")
+        # WF-8F6F / #1073: Re-Dating darf offene Fachbefunde nicht verwaisten.
+        alias_probe = mit_faktenfrische_alias(lm_probe, "2026-09-01-reserve-a")
+        if 'faktenfrische_aliases:\n  - "2026-09-01-reserve-a"' not in alias_probe:
+            fehler.append("Reserve-Lift trägt den alten Befund-Slug nicht mit")
+        if mit_faktenfrische_alias(alias_probe, "2026-09-01-reserve-a") != alias_probe:
+            fehler.append("Faktenfrische-Alias ist nicht idempotent")
+        alias_kette = mit_faktenfrische_alias(alias_probe, "2026-09-26-reserve-a")
+        if alias_kette.count("faktenfrische_aliases:") != 1 or \
+                '  - "2026-09-26-reserve-a"' not in alias_kette:
+            fehler.append("Faktenfrische-Aliaskette verwirft frühere Herkunft")
         # CTA-Hygiene (Reserve #4): „Ddiebesten“-Korruption muss deterministisch
         # zurück auf die kanonische Form, sonst kostet sie den Spelling-Score.
         bad = idx.parent / "bad.md"

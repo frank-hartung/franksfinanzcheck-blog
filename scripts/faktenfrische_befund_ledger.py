@@ -160,19 +160,87 @@ def befund_id(slug: str, befund: dict) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()[:20]
 
 
-def fassungen_aus_bestand() -> dict[str, dict]:
-    """slug → {"text": Text-Hash, "pruef": Prüffassungs-Hash} für JEDE Seite.
+def canonical_slug(slug: str, aliases: dict[str, str]) -> str:
+    """Aktuellen Slug einer Alias-Kette liefern – fail-closed bei Schleifen.
 
-    Blogartikel UND Ratgeberseiten: ein Befund kann auf beiden liegen.
-    Ein Importfehler ist ein Werkzeugfehler – nie ein stilles „keine Seiten“.
+    Ein Datums-Lift ändert den Ordner, aber nicht die Identität eines bereits
+    erhobenen Befunds. Die Kette bleibt absichtlich klein und explizit: Jeder
+    Sprung stammt aus `faktenfrische_aliases` am aktuellen Artikel. Fehlerhafte
+    Metadaten werden nie als „Seite gelöscht, alles erledigt“ gelesen.
     """
+    aktuell = str(slug)
+    gesehen: set[str] = set()
+    while aktuell in aliases:
+        if aktuell in gesehen:
+            raise LedgerFehler(f"Schleife in faktenfrische_aliases bei `{slug}`")
+        gesehen.add(aktuell)
+        ziel = aliases[aktuell]
+        if not isinstance(ziel, str) or not ziel.strip() or ziel != ziel.strip():
+            raise LedgerFehler(f"Ungültiges Slug-Alias-Ziel bei `{aktuell}`")
+        if ziel == aktuell:
+            raise LedgerFehler(f"Selbstreferenz in faktenfrische_aliases bei `{aktuell}`")
+        aktuell = ziel
+    return aktuell
+
+
+def _alle_artikel_fuer_identitaet() -> list[dict]:
+    """Bestand genau einmal lesen (Importfehler bleibt Werkzeugfehler)."""
     try:
         import faktenfrische as ff  # noqa: PLC0415 – Zyklus: ff importiert uns
-        seiten = ff.alle_artikel("alle")
+        return ff.alle_artikel("alle")
     except Exception as exc:  # noqa: BLE001 – fail-closed
         raise LedgerFehler(f"Bestand nicht lesbar: {exc}") from exc
-    return {str(a["slug"]): {"text": text_hash(a), "pruef": pruef_hash(a)}
-            for a in seiten if a.get("slug")}
+
+
+def bestand_identitaeten() -> tuple[dict[str, dict], dict[str, str]]:
+    """(Fassungen, Alias-Karte) aus demselben Bestands-Schnappschuss.
+
+    `faktenfrische_aliases` ist interne Herkunftsmetadaten, keine öffentliche
+    Weiterleitung. Sie steht am aktuellen Artikel und überlebt dadurch auch ein
+    Rollback des Reserve-Finishers. Kollisionen mit einem anderen lebenden Slug
+    sind ein Werkzeugfehler: Eine Mehrdeutigkeit darf niemals einen Fachbefund
+    auf den falschen Artikel projizieren.
+    """
+    seiten = _alle_artikel_fuer_identitaet()
+    fassungen: dict[str, dict] = {}
+    aliases: dict[str, str] = {}
+    canonische_slugs = {str(a["slug"]) for a in seiten if a.get("slug")}
+    for art in seiten:
+        if not art.get("slug"):
+            continue
+        slug = str(art["slug"])
+        fassungen[slug] = {"text": text_hash(art), "pruef": pruef_hash(art)}
+        roh = _frontmatter(art).get("faktenfrische_aliases") or []
+        if not isinstance(roh, list):
+            raise LedgerFehler(f"{slug}: faktenfrische_aliases muss eine Liste sein")
+        for alias in roh:
+            if not isinstance(alias, str) or not alias.strip() or alias != alias.strip():
+                raise LedgerFehler(f"{slug}: ungültiger Eintrag in faktenfrische_aliases")
+            if alias == slug:
+                raise LedgerFehler(f"{slug}: Selbstreferenz in faktenfrische_aliases")
+            if alias in canonische_slugs:
+                raise LedgerFehler(
+                    f"{slug}: Alias `{alias}` kollidiert mit einem aktuellen Artikel")
+            bisher = aliases.get(alias)
+            if bisher is not None and bisher != slug:
+                raise LedgerFehler(
+                    f"Alias `{alias}` zeigt auf zwei Artikel (`{bisher}`, `{slug}`)")
+            aliases[alias] = slug
+    # Alle Ketten einmal validieren, auch wenn gerade kein offener Befund auf
+    # ihnen liegt. So bleibt ein beschädigter Herkunftspfad nicht unsichtbar.
+    for alias in aliases:
+        canonical_slug(alias, aliases)
+    return fassungen, aliases
+
+
+def fassungen_aus_bestand() -> dict[str, dict]:
+    """slug → {"text": Text-Hash, "pruef": Prüffassungs-Hash} für JEDE Seite."""
+    return bestand_identitaeten()[0]
+
+
+def slug_aliases_aus_bestand() -> dict[str, str]:
+    """Alter Befund-Slug → aktueller Artikel-Slug (Herkunft, kein Redirect)."""
+    return bestand_identitaeten()[1]
 
 
 def _normalisiere_fassungen(fassungen) -> dict[str, dict]:
@@ -323,14 +391,29 @@ def _entscheidung_schliesst(decision: dict | None, entry: dict,
 
 
 def offene_eintraege(entries: list[dict], decisions: dict,
-                     fassungen: dict | None = None) -> list[dict]:
+                     fassungen: dict | None = None,
+                     aliases: dict[str, str] | None = None) -> list[dict]:
     if fassungen is None:
-        fassungen = fassungen_aus_bestand()
+        fassungen, geladene_aliases = bestand_identitaeten()
+        if aliases is None:
+            aliases = geladene_aliases
     fassungen = _normalisiere_fassungen(fassungen)
+    aliases = aliases or {}
     result = []
-    for entry in entries:
-        decision = decisions.get((entry["slug"], entry["id"]))
-        if _entscheidung_schliesst(decision, entry, fassungen):
+    for roh in entries:
+        ursprung = roh["slug"]
+        aktuell = canonical_slug(ursprung, aliases)
+        entry = (dict(roh) if aktuell == ursprung else
+                 dict(roh, slug=aktuell, ursprungs_slug=ursprung))
+        # Historische Entscheidungen bleiben unter ihrem alten Slug lesbar.
+        # Neue Entscheidungen stehen am aktuellen Artikel. Die Befund-ID und
+        # beide Fassungs-Hashes bleiben unverändert – ein Re-Dating ist weder
+        # ein neuer Befund noch ein automatischer Abschluss.
+        kandidaten = [decisions.get((ursprung, entry["id"]))]
+        if aktuell != ursprung:
+            kandidaten.append(decisions.get((aktuell, entry["id"])))
+        if any(_entscheidung_schliesst(d, entry, fassungen)
+               for d in kandidaten if d):
             continue
         result.append(entry)
     return result
@@ -338,9 +421,11 @@ def offene_eintraege(entries: list[dict], decisions: dict,
 
 def offene_befunde(queue_path: Path = QUEUE,
                    decisions_path: Path = ENTSCHEIDUNGEN,
-                   fassungen: dict | None = None) -> list[dict]:
+                   fassungen: dict | None = None,
+                   aliases: dict[str, str] | None = None) -> list[dict]:
     return offene_eintraege(zusammenfuehren(_json_object(queue_path), []),
-                            entscheidungen_laden(decisions_path), fassungen)
+                            entscheidungen_laden(decisions_path), fassungen,
+                            aliases)
 
 
 # ----------------------------------------------------------------------
@@ -357,15 +442,18 @@ def fassung_status(entry: dict, fassungen: dict, stichtag: dt.date) -> dict:
     """Wo steht dieser Befund gegenüber dem heutigen Text?"""
     stored = {str(entry.get("fassung_sha256") or ""),
               str(entry.get("text_sha256") or "")}
-    if not any(HASH_RE.fullmatch(w) for w in stored):
-        return {"status": "ohne-fassung",
-                "hinweis": "Kein gültiger Fassungs-Hash (Altbestand) – die "
-                           "Entscheidung bindet an den heutigen Text."}
     aktuell = fassungen.get(str(entry.get("slug")))
     if not aktuell:
         return {"status": "seite-fehlt",
                 "hinweis": "Seite ist im Bestand nicht lesbar – Entscheidung "
                            "würde eine gelöschte Seite bestätigen."}
+    # Auch ein Alt-Befund ohne Hash braucht eine reale Seite als Schließweg.
+    # Sonst ließe sich ein unlösbarer Fund durch Löschen des Fassungsankers
+    # als angebliche Legacy-Erledigung verschwinden lassen.
+    if not any(HASH_RE.fullmatch(w) for w in stored):
+        return {"status": "ohne-fassung",
+                "hinweis": "Kein gültiger Fassungs-Hash (Altbestand) – die "
+                           "Entscheidung bindet an den heutigen Text."}
     if aktuell.get("text") in stored or aktuell.get("pruef") in stored:
         return {"status": "aktuell",
                 "hinweis": "Der Text ist seit dem Befund unverändert."}
@@ -381,14 +469,17 @@ def fassung_status(entry: dict, fassungen: dict, stichtag: dt.date) -> dict:
 def befunde_mit_status(queue_path: Path = QUEUE,
                        decisions_path: Path = ENTSCHEIDUNGEN,
                        fassungen: dict | None = None,
-                       stichtag: dt.date | None = None) -> list[dict]:
+                       stichtag: dt.date | None = None,
+                       aliases: dict[str, str] | None = None) -> list[dict]:
     """Offene Befunde, angereichert um Fassungsstand, Alter und Entscheidbarkeit."""
     stichtag = stichtag or dt.date.today()
     if fassungen is None:
-        fassungen = fassungen_aus_bestand()
+        fassungen, geladene_aliases = bestand_identitaeten()
+        if aliases is None:
+            aliases = geladene_aliases
     fassungen = _normalisiere_fassungen(fassungen)
     result = []
-    for entry in offene_befunde(queue_path, decisions_path, fassungen):
+    for entry in offene_befunde(queue_path, decisions_path, fassungen, aliases):
         stand = fassung_status(entry, fassungen, stichtag)
         gesehen = _datum(entry.get("zuletzt_gesehen", ""))
         alter = (stichtag - gesehen).days if gesehen else None
@@ -549,7 +640,8 @@ def entscheidung_anfuegen(befund_id_: str, von: str, begruendung: str,
                           queue_path: Path = QUEUE,
                           decisions_path: Path = ENTSCHEIDUNGEN,
                           fassungen: dict | None = None,
-                          heute: dt.date | None = None) -> dict:
+                          heute: dt.date | None = None,
+                          aliases: dict[str, str] | None = None) -> dict:
     """Eine menschliche Entscheidung dokumentieren, fassungsgebunden.
 
     Es gibt hier keinen Automatik-Pfad: Ohne Namen und Begründung schreibt
@@ -566,9 +658,11 @@ def entscheidung_anfuegen(befund_id_: str, von: str, begruendung: str,
                            "Zeichen (was wurde geprüft, geändert oder verworfen?)")
     heute = heute or dt.date.today()
     if fassungen is None:
-        fassungen = fassungen_aus_bestand()
+        fassungen, geladene_aliases = bestand_identitaeten()
+        if aliases is None:
+            aliases = geladene_aliases
     fassungen = _normalisiere_fassungen(fassungen)
-    offen = offene_befunde(queue_path, decisions_path, fassungen)
+    offen = offene_befunde(queue_path, decisions_path, fassungen, aliases)
     treffer = [e for e in offen if e["id"] == befund_id_]
     if not treffer:
         raise LedgerFehler(f"Kein offener Befund mit der ID `{befund_id_}` "
@@ -586,6 +680,7 @@ def entscheidung_anfuegen(befund_id_: str, von: str, begruendung: str,
         raise LedgerFehler("Für diesen Befund existiert bereits eine Entscheidung")
     decision = {
         "slug": entry["slug"],
+        "befund_ursprung_slug": entry.get("ursprungs_slug", entry["slug"]),
         "befund_id": befund_id_,
         "befund_fassung": entry.get("fassung_sha256") or LEGACY,
         "geprueft_fassung": aktuell,
@@ -606,7 +701,7 @@ def entscheidung_anfuegen(befund_id_: str, von: str, begruendung: str,
     _yaml_schreiben(decisions_path, daten)
     # Selbstkontrolle: Was wir geschrieben haben, muss den Befund schließen.
     if any(e["id"] == befund_id_ for e in
-           offene_befunde(queue_path, decisions_path, fassungen)):
+           offene_befunde(queue_path, decisions_path, fassungen, aliases)):
         raise LedgerFehler("Entscheidung geschrieben, aber der Befund bleibt "
                            "offen – Fassungsbindung prüfen")
     return decision
@@ -616,10 +711,12 @@ def entscheidung_anfuegen(befund_id_: str, von: str, begruendung: str,
 # Wache: jeder offene Befund ist entscheidbar
 # ----------------------------------------------------------------------
 def wache(*, queue_path: Path = QUEUE, decisions_path: Path = ENTSCHEIDUNGEN,
-          fassungen: dict | None = None, stichtag: dt.date | None = None) -> dict:
+          fassungen: dict | None = None, stichtag: dt.date | None = None,
+          aliases: dict[str, str] | None = None) -> dict:
     """Strukturprüfung: kein Befund darf ohne Schließweg im Ledger liegen."""
     stichtag = stichtag or dt.date.today()
-    befunde = befunde_mit_status(queue_path, decisions_path, fassungen, stichtag)
+    befunde = befunde_mit_status(queue_path, decisions_path, fassungen, stichtag,
+                                 aliases)
     nicht_entscheidbar = [e for e in befunde if not e["entscheidbar"]]
     ohne_begruendung = [e for e in befunde if not str(e.get("text") or "").strip()]
     return {
@@ -745,9 +842,37 @@ def selftest() -> int:
         assert len(zusammenfuehren(_json_object(leer), [])) == 1
         assert nachlese_anwenden(dossier_dir, leer)["fehlend"] == []
 
+    # WF-8F6F / #1073: Re-Dating ist keine Löschung und keine Entscheidung.
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        queue_path = tmp / "queue.json"
+        decisions = tmp / "decisions.yaml"
+        alt_hash = body_hash("alter Befundtext")
+        eintrag = {"id": befund_id("alt", finding), "slug": "alt",
+                   "fassung_sha256": alt_hash, "text_sha256": alt_hash,
+                   **finding, "beleg": "", "zuletzt_gesehen": "2026-11-03 12:18 UTC"}
+        queue_path.write_text(json.dumps({"fachbefunde": [eintrag]}), encoding="utf-8")
+        fassungen = {"neu": {"text": alt_hash, "pruef": alt_hash}}
+        assert canonical_slug("alt", {"alt": "neu"}) == "neu"
+        offen = befunde_mit_status(queue_path, decisions, fassungen,
+                                   dt.date(2026, 11, 5), aliases={"alt": "neu"})
+        assert len(offen) == 1 and offen[0]["slug"] == "neu"
+        assert offen[0]["ursprungs_slug"] == "alt" and offen[0]["entscheidbar"]
+        assert wache(queue_path=queue_path, decisions_path=decisions,
+                     fassungen=fassungen, aliases={"alt": "neu"})["gruen"]
+        assert offene_befunde(queue_path, decisions, {})[0]["slug"] == "alt"
+        assert fassung_status(eintrag, {}, dt.date(2026, 11, 5))["status"] == "seite-fehlt"
+        try:
+            canonical_slug("alt", {"alt": "mitte", "mitte": "alt"})
+        except LedgerFehler:
+            pass
+        else:
+            raise AssertionError("Alias-Schleife wurde nicht fail-closed erkannt")
+
     print("✅ Faktenfrische-Befundledger: zwei Hashes, fassungsgebundene "
           "Entscheidung, Textänderung bleibt schließbar, Quellenpflege öffnet "
-          "nicht, Altbestand entscheidbar, Nachlese, fail-closed.")
+          "nicht, Altbestand entscheidbar, Re-Dating-Aliasse (#1073), Nachlese, "
+          "fail-closed.")
     return 0
 
 
