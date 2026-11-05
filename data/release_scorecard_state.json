@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-05T11:52:04Z",
+  "generated_at": "2026-11-05T12:39:33Z",
   "modus": "kandidaten",
-  "commit": "3af0047e244eb78192b50b3540c00ff0f71d473e",
+  "commit": "b36bdde451cbb3bd1796a45be9ada69c42c6b1c7",
   "kapazitaet": {
     "stichtag": "2026-11-05",
     "artikel": 114,
@@ -431,7 +431,7 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "f541df65178959971f2cdf66376ff0a8dea187b089f62a428200315a339a7889",
+      "sha256": "dbbf33ed3fd409fa432695800675c561162e7e1312cb11b27ae7ccf0134b2e92",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -445,7 +445,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
