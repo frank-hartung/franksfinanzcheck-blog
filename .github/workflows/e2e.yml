@@ -255,6 +255,15 @@ jobs:
       - name: Python-Abhängigkeiten installieren (Pillow für generate_covers)
         run: python3 -m pip install -q --require-hashes -r requirements-ci.txt
 
+      # C34-Entscheidung (06.11., bewusst NICHT im PR entschieden):
+      # Die Metadaten-Wache bleibt hart. Ein Befund hier heißt nicht
+      # „Skip/Ignore", sondern: beim Fluss nach main entschied deploy.yml
+      # C34-toleriert (Meldebestand für die Redaktion; Deploy läuft,
+      # Siegel färbt rot). Dieser PR lässt das Gate bewusst scharf – ein
+      # PR, der M4 erzeugt/verstärkt, soll es melden. Ein M4, das von
+      # main selbst (Bot-Heilung 0b55fca, 06.11. 14:59: Kurzantwort
+      # entfällt am frischen Live-Artikel) kommt, ist nichts, was dieser
+      # PR repariert; es steht den Redaktionsentscheidungen offen.
       - name: Metadaten-Wache – Quelle (Titel, Description, Belege)
         run: python3 scripts/metadaten_wache.py
 
