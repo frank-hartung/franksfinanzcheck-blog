@@ -39,6 +39,11 @@
 #  4. Ein Rückstand hat eine Frist (`planung.nachhol_frist_tage`).
 #     Ist er darin nicht abbaubar, wird der Lauf rot – das ist ein
 #     Alarm MIT Schließpfad (C14), kein Dauerzustand.
+#  5. Der BÜNDELTAG wird mitgemessen (04.11.2026, #1039): „heute“ ist
+#     der ruhigste Tag des Jahres. Seitdem prüft dieselbe Wache den
+#     Spitzentag im Horizont (`spitzenlast_stichtag`) – mit derselben
+#     Planrechnung. „Nicht gemessen“ steht nie wie „grün“ aus
+#     (`spitze_geprueft` in jeder Ausgabe, C33).
 #
 #  WAS HIER NICHT PASSIERT
 #  -----------------------
@@ -54,13 +59,15 @@
 #    python3 scripts/faktenfrische_kapazitaet.py --json     # maschinell
 #    python3 scripts/faktenfrische_kapazitaet.py --wache    # Exit 1, wenn
 #                                        der Rückstand nicht fristgerecht
-#                                        abbaubar ist (Workflow-Schritt)
+#                                        abbaubar ist ODER der Spitzentag
+#                                        reißt (Workflow-Schritt)
 #    python3 scripts/faktenfrische_kapazitaet.py --budget-empfehlung
 #                                        # nur die Zahl für --max
 #    python3 scripts/faktenfrische_kapazitaet.py --selftest # Sabotage-Proben
 #
 #  EXIT: 0 = Plan gedeckt · 1 = Rückstand nicht fristgerecht abbaubar
-#        (nur mit --wache) · 2 = Werkzeugfehler (fail-closed)
+#        oder Spitzentag reißt die Frist (nur mit --wache) ·
+#        2 = Werkzeugfehler (fail-closed)
 # ============================================================
 from __future__ import annotations
 
@@ -447,6 +454,139 @@ def empfohlenes_budget(artikel: list[dict], cfg: dict, laeufe: float,
 
 
 # ============================================================
+#  Spitzenlast: der Bündeltag wird mitgemessen (#1039)
+# ============================================================
+def spitzenlast_stichtage(artikel: list[dict], cfg: dict,
+                          stichtag: dt.date,
+                          horizont_tage: int | None = None) -> list[dt.date]:
+    """Die Tage im Horizont, an denen Prüftermine BÜNDELN (#1039).
+
+    WARUM ES DIESE FUNKTION GIBT (04.11.2026, dauerhaft 06.11.2026)
+    --------------------------------------------------------------
+    Am 04.11.2026 war die Deckungswache grün – geprüft am Stichtag „heute“.
+    Drei Wochen später kippten 23 Seiten mit demselben Prüfdatum gemeinsam
+    in die Überfälligkeit, und derselbe Lauf meldete „Frist gerissen“. Die
+    Wache hatte also den ruhigsten Tag des Jahres gemessen und daraus einen
+    Dauerbefund abgeleitet.
+
+    Das ist keine Messung, sondern ein Blick aus dem Fenster. Die Fristen
+    sind BÜNDEL (am 06.11.2026: 115 Seiten auf 35 Fristtage, davon 23 am
+    27.11.2026). Ein Stichtag, der zufällig zwischen zwei Schüben liegt,
+    sieht Reserve, wo eine Woche später keine ist – der Fehler findet sich
+    erst, wenn der Kalender ihn schreibt.
+
+    Rückgabe: der Stichtag selbst plus jeder Tag, an dem SEIN Bindungsbild
+    wechselt – also jede Frist im Horizont und jeder Vorlauf-Beginn
+    (`frist − vorlauf_tage`). Nur an diesen Tagen kann sich das Urteil
+    drehen; alle anderen Tage sind Wiederholungen. Bewusst KEIN Tag, an
+    dem längst alles überfällig ist: Dort misst man den Rückstand, nicht
+    die Kadenz, und jeder Bestand wäre „rot“ (das wäre eine Schwelle
+    durch die Hintertür, und die gehört in die SSOT, nicht in die Wache).
+    """
+    p = planung(cfg)
+    horizont = max(0, int(horizont_tage if horizont_tage is not None else p["horizont_tage"]))
+    vorlauf = int(p["vorlauf_tage"])
+    ende = stichtag + dt.timedelta(days=horizont)
+    tage: set[dt.date] = {stichtag}
+    for art in artikel:
+        frist = ff.faelligkeit(art, cfg, stichtag).get("frist")
+        if frist is None:
+            continue
+        if stichtag <= frist <= ende:
+            tage.add(frist)
+        beginn = frist - dt.timedelta(days=vorlauf)
+        if stichtag <= beginn <= ende:
+            tage.add(beginn)
+    return sorted(tage)
+
+
+def spitzenlast_stichtag(artikel: list[dict], cfg: dict, budget: int,
+                         laeufe: float, stichtag: dt.date,
+                         horizont_tage: int | None = None) -> dict | None:
+    """Der Bündeltag im Horizont, an dem eine HEUTE frische Seite zu spät käme.
+
+    Gemessen wird mit DERSELBEN Planrechnung wie am Stichtag – keine zweite
+    Schwelle, keine neue Formel. Nur der Beweis ist neu:
+
+    Eine Seite, die am Stichtag NOCH NICHT überfällig ist, wird an jedem
+    späteren Bündeltag erneut geprüft. Ist sie dort überfällig, hat der
+    Kalender sie überholt, nicht der Rückstand: Der Lauf war zu klein, um
+    seinen eigenen Zulauf zu bedienen. Genau das war am 04.11.2026 der
+    Befund – die Wache war grün, und drei Wochen später standen 23 Seiten
+    mit demselben Prüfdatum gemeinsam zu spät.
+
+    Bewusst NICHT gemessen wird der Tag, an dem längst alles überfällig
+    ist: Dort prüft man den Alt-Rückstand (dafür gibt es
+    `rueckstand_abgebaut` am Stichtag), nicht die Kadenz. Würde die Wache
+    dort anschlagen, wäre jeder Bestand „rot“ – eine Schwelle durch die
+    Hintertür, und die gehört in die SSOT, nicht in die Wache.
+
+    Bei einem Nicht-Tages-Plan wird der echte Laufkalender je Bündeltag
+    aus dem Workflow gelesen (kein Wochenmittel als Tagesplan). Ist er
+    nicht beweisbar, wirft die Messung einen ValueError – der Aufrufer
+    muss fail-closed „nicht beweisbar“ melden, nicht raten.
+    """
+    p = planung(cfg)
+    horizont = int(horizont_tage if horizont_tage is not None else p["horizont_tage"])
+    kandidaten = spitzenlast_stichtage(artikel, cfg, stichtag, horizont)
+    schlechtester: dict | None = None
+    for tag in kandidaten:
+        if tag <= stichtag:
+            continue
+        frisch = [art for art in artikel
+                  if not (ff.faelligkeit(art, cfg, tag) or {}).get("faellig")]
+        if not frisch:
+            continue
+        if laeufe == 1.0:
+            lauftage = None   # plan() baut den täglichen Kalender deterministisch
+        else:
+            lauftage = lauftage_aus_workflow(tag, horizont)
+            if lauftage is None:
+                raise ValueError(
+                    f"Laufkalender ab {tag.isoformat()} nicht beweisbar – "
+                    "die Spitzenlast wäre geraten.")
+        plan_ergebnis = plan(frisch, cfg, budget, laeufe, tag, horizont,
+                             lauftage=lauftage)
+        if plan_ergebnis["puenktlich"]:
+            continue
+        offen = plan_ergebnis["verletzungen_neu"] + plan_ergebnis["verletzungen_folge"]
+        kennzahl = (offen, len(frisch))
+        if schlechtester is None or kennzahl > schlechtester["rang"]:
+            schlechtester = {"rang": kennzahl, "stichtag": tag,
+                             "offen": offen, "frisch": len(frisch),
+                             "puenktlich": False}
+    return schlechtester
+
+
+def spitze_zahlen(artikel: list[dict], cfg: dict, budget: int,
+                  laeufe: float, stichtag: dt.date,
+                  horizont_tage: int | None = None) -> dict:
+    """Die Spitzenlast-Messung als Zahlen-Block – die EINE Stelle dafür.
+
+    Wer die Deckung misst, fragt diese Funktion; kein Konsument rechnet die
+    Bündeltage ein zweites Mal selbst (C19, Lektion #521). `spitze_geprueft`
+    steht IMMER in den Zahlen – "nicht gemessen" darf nie wie "grün"
+    aussehen (C33). Erst bei einem Befund kommen die Befund-Felder dazu:
+
+      spitze_geprueft   Anzahl geprüfter Bündeltage im Horizont (immer)
+      spitze_stichtag   der schlechteste Bündeltag (nur bei Befund)
+      spitze_offen      Seiten, die dort zu spät kämen (nur bei Befund)
+      spitze_frisch     damals noch frische Seiten (nur bei Befund)
+      spitze_puenktlich False = Befund (nur bei Befund)
+    """
+    finde = spitzenlast_stichtag(artikel, cfg, budget, laeufe, stichtag,
+                                 horizont_tage)
+    zahlen = {"spitze_geprueft": len(
+        spitzenlast_stichtage(artikel, cfg, stichtag, horizont_tage))}
+    if finde is not None:
+        zahlen["spitze_stichtag"] = finde["stichtag"].isoformat()
+        zahlen["spitze_offen"] = int(finde["offen"])
+        zahlen["spitze_frisch"] = int(finde["frisch"])
+        zahlen["spitze_puenktlich"] = False
+    return zahlen
+
+
+# ============================================================
 #  C45-Urteil: Plan, Reserve und Dauer-Spitze getrennt (#1023)
 # ============================================================
 C45_SSOT_PFAD = "data/agent_reach/faktenfrische.yaml"
@@ -542,6 +682,19 @@ def c45_urteil(zahlen: dict, ssot_pfad: str = C45_SSOT_PFAD) -> list[str]:
             f"Der Plan reißt eine Frist oder baut den Rückstand nicht "
             f"fristgerecht ab ({budget} je Lauf × {laeufe:.2f} Läufe/Tag). "
             f"Die Deckungsrechnung nennt die Ursache (#912).")
+    # Der Spitzentag (04.11.2026, #1039). Dieselbe Aussage, derselbe Plan –
+    # nur an dem Tag gemessen, an dem eine heute frische Seite zu spät käme.
+    # Ohne diese Zeile ist die Wache am ruhigen Tag grün und am Bündeltag
+    # rot, ohne dass sich Code oder Vertrag geändert hätten.
+    if zahlen.get("spitze_stichtag") and not zahlen.get("spitze_puenktlich", True):
+        funde.append(
+            f"Spitzenlast reißt die Frist: am {zahlen['spitze_stichtag']} "
+            f"kämen {int(zahlen.get('spitze_offen', 0))} Seiten zu spät, die "
+            f"heute noch frisch sind. Das Budget von {budget} je Lauf × "
+            f"{laeufe:.2f} Läufe/Tag bedient den Zulauf nicht – die Bündelung "
+            f"der Prüftermine (`faktencheck` in den Seiten), der Takt oder das "
+            f"Limit in {ssot_pfad} entscheidet. Nur den Stichtag zu messen "
+            f"heißt, den ruhigsten Tag des Jahres zu prüfen (#1039).")
     return funde
 
 
@@ -584,6 +737,16 @@ def diagnose_zeilen(p: dict, markdown: bool = True) -> list[str]:
         n = p["naechste_frist"]
         zeilen.append(f"- Nächste Frist: `{n['slug']}` am {n['frist']} "
                       f"(in {n['restlaufzeit']} Tagen)")
+    if p.get("spitze_geprueft"):
+        if p.get("spitze_stichtag") and not p.get("spitze_puenktlich", True):
+            zeilen.append(
+                f"- ⚠️ Spitzentag: Am {p['spitze_stichtag']} kämen "
+                f"{int(p.get('spitze_offen', 0))} von {int(p.get('spitze_frisch', 0))} "
+                f"heute noch frischen Seiten zu spät – das Budget von "
+                f"{p['budget']} je Lauf bedient den Zulauf nicht (#1039)")
+        else:
+            zeilen.append(f"- Spitzentag mitgemessen: {p['spitze_geprueft']} "
+                          "Bündeltage im Horizont – kein Befund")
     if p["verletzungen_neu"]:
         seiten = "Seite" if p["verletzungen_neu"] == 1 else "Seiten"
         zeilen.append(f"- ⚠️ {p['verletzungen_neu']} {seiten} mit ZUKÜNFTIGER "
@@ -758,6 +921,33 @@ def selftest() -> int:
     pruefe("ST12g", any("Frist" in f
                         for f in c45_urteil(dict(basis, plan_puenktlich=False))), True)
 
+    # ST13 – Der Bündeltag wird mitgemessen (#1039) -----------------------
+    stau = _probe_ueberfaellig(0) + [{
+        "slug": f"bundel-{i:03d}", "titel": "Heizung Winter saisonal",
+        "beschreibung": "", "keywords": ["Heizung"], "pillar": "energie",
+        "faktencheck": PROBETAG - dt.timedelta(days=20)}   # 10 Seiten, Frist gleich
+        for i in range(10)]
+    kandidaten = spitzenlast_stichtage(stau, cfg, PROBETAG)
+    pruefe("ST13a", [d.isoformat() for d in kandidaten],
+           [PROBETAG.isoformat(), (PROBETAG + dt.timedelta(days=3)).isoformat(),
+            (PROBETAG + dt.timedelta(days=10)).isoformat()])
+    finde = spitzenlast_stichtag(stau, cfg, 1, 1.0, PROBETAG)
+    pruefe("ST13b", (finde["stichtag"].isoformat(), finde["offen"],
+                     finde["frisch"]),
+           ((PROBETAG + dt.timedelta(days=3)).isoformat(), 2, 10))
+    pruefe("ST13c", spitzenlast_stichtag(stau, cfg, 4, 1.0, PROBETAG), None)
+    # "Nicht gemessen" darf nie wie "grün" aussehen (C33):
+    # spitze_geprueft steht immer in den Zahlen.
+    zahlen_gruen = spitze_zahlen(stau, cfg, 4, 1.0, PROBETAG)
+    pruefe("ST13d", ("spitze_geprueft" in zahlen_gruen,
+                     "spitze_stichtag" in zahlen_gruen), (True, False))
+    zahlen_rot = spitze_zahlen(stau, cfg, 1, 1.0, PROBETAG)
+    pruefe("ST13e", (zahlen_rot["spitze_puenktlich"],
+                     zahlen_rot["spitze_stichtag"], zahlen_rot["spitze_offen"]),
+           (False, (PROBETAG + dt.timedelta(days=3)).isoformat(), 2))
+    pruefe("ST13f", any("Spitzenlast" in f for f in c45_urteil(
+        dict(basis, **zahlen_rot))), True)
+
     if fehler:
         print("❌ Selbsttest Faktenfrische-Kapazität rot:")
         for f in fehler:
@@ -847,6 +1037,14 @@ def main() -> int:
     ergebnis["hartes_limit"] = emp["limit"]
     ergebnis["sockel"] = emp["sockel"]
     ergebnis["plan_hinweise"] = hinweise
+    try:
+        # Der Spitzentag wird IMMER gemessen und IMMER berichtet (#1039).
+        # "Nicht gemessen" darf nie wie "grün" aussehen (C33).
+        ergebnis.update(spitze_zahlen(artikel, cfg, budget, laeufe,
+                                      stichtag, horizont))
+    except ValueError as exc:
+        print(f"🛑 Spitzenlast nicht beweisbar: {exc}", file=sys.stderr)
+        return 2
 
     if args.json:
         print(json.dumps(ergebnis, ensure_ascii=False, indent=2))
@@ -869,6 +1067,13 @@ def main() -> int:
         if not aktueller["puenktlich"] or not aktueller["rueckstand_abgebaut"]:
             print("::error::Der laufende Plan reißt eine Frist oder baut den Rückstand "
                   "nicht rechtzeitig ab – Kapazität erhöhen (#912).")
+            return 1
+        if ergebnis.get("spitze_stichtag") and not ergebnis.get("spitze_puenktlich", True):
+            print(f"::error::Spitzentag reißt die Frist: am {ergebnis['spitze_stichtag']} "
+                  f"kämen {int(ergebnis.get('spitze_offen', 0))} von "
+                  f"{int(ergebnis.get('spitze_frisch', 0))} heute noch frischen Seiten "
+                  f"zu spät – Bündelung der Prüftermine, Takt oder Limit in "
+                  f"data/agent_reach/faktenfrische.yaml entscheiden (#1039).")
             return 1
     return 0
 

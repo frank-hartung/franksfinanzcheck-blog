@@ -58,8 +58,8 @@ Am 27.10.2026 war genau das der Fall:
 | Kennzahl | vor der Reparatur | nach der Reparatur |
 |---|---|---|
 | Bedarf | 2,58 Prüfungen/Tag (≈ 18/Woche) | unverändert |
-| Takt | 2 Läufe/Woche × 3 = 0,86/Tag | 1 Lauf/Tag × 4 (Sockel; seit 04.11.2026 elastisch bis 16) |
-| Deckung | **33 %** | 146 % beim aktuellen Bestand (112 Seiten, 03.11.2026) |
+| Takt | 2 Läufe/Woche × 3 = 0,86/Tag | 1 Lauf/Tag × 12 (Sockel; seit 04.11.2026 elastisch bis 16) |
+| Deckung | **33 %** | 146 % beim Bestand vom 03.11.2026 (112 Seiten) · **425 %** beim Bestand vom 06.11.2026 (115 Seiten) – seit dem 04.11.2026 wird zusätzlich der Spitzentag mitgemessen |
 | Rückstand | +12 Seiten/Woche, nie abbaubar | im Kalenderplan in 3 Tagen abgebaut |
 
 Die Intervalle wurden **nicht** angefasst. Weniger messen wäre keine Heilung.
@@ -90,6 +90,65 @@ python3 scripts/faktenfrische_kapazitaet.py --wache    # Exit 1, wenn nicht abba
 python3 scripts/faktenfrische_kapazitaet.py --json     # maschinenlesbar
 ```
 
+### Nachzug 06.11.2026: der Spitzentag wird mitgemessen (#1039)
+
+Die Wache prüfte bis hierher **eine** Frage: „Was ist heute zu tun?“ Das ist
+der ruhigste Tag des Jahres, nicht der härteste – die Prüftermine sind
+**Bündel**. Am 04.11.2026 verteilten sich 113 Seiten auf nur **34
+Fristtage**, 29 davon mit demselben `faktencheck: 2026-10-13`; dieselbe
+Wache war grün – und ab dem **20.11.2026** hätte derselbe Bestand ohne
+eine einzige Code-Änderung rot gemeldet (49 rote Kalendertage im
+Folgejahr – Messung vom 04.11.2026, dokumentiert im Bericht
+`WARTUNG-VEROEFFENTLICHUNG-WF-829B-922-BUENDEL-DAUERHEILUNG-2026-11-04.md`).
+Am 06.11.2026 heißt der härteste Tag **2026-11-26**: Mit Sockel 4 kämen
+**38 von 83** heute frischen Seiten zu spät.
+
+Seit dem 04.11. misst C45 deshalb **zwei** Tage mit derselben Planrechnung:
+
+1. den **Stichtag** (Deckung, Rückstand, Reserve), und
+2. den **Spitzentag** (`spitzenlast_stichtag`): den Bündeltag im Horizont,
+   an dem eine **heute noch frische** Seite zu spät geprüft würde.
+   Bewusst NICHT der Tag, an dem längst alles überfällig ist – dort misst
+   man den Rückstand (dafür gibt es `rueckstand_abgebaut`), nicht die
+   Kadenz. Ohne diese Trennung wäre jeder Bestand „rot“ – eine Schwelle
+   durch die Hintertür.
+
+**Gemessen, nicht geschätzt** (06.11.2026, 115 Seiten, 35 Fristtage,
+23 am 27.11.2026):
+
+| Sockel (`max_artikel_pro_lauf`) | Bündel-Befund (Kalender-Sweep 06.11.2026) |
+|---|---|
+| 4 (bis 05.11.2026) | 5 von 52 Starttagen rot (voller Kalender 365 Tage: 36) · am 26.11. kämen 38 Seiten zu spät |
+| 12 (seit 06.11.2026) | **0 von 52** (365 Tage: 0) |
+
+Deshalb der Sockel **4 → 12**. Limit (16) und Nachholfrist (7) bleiben
+unverändert; Intervalle wurden nicht angefasst – weniger messen wäre
+keine Heilung.
+
+**Selbstheilung, nicht nur Messung (06.11.2026).** Der rote Lauf ist
+jetzt ein geschlossener Kreislauf statt eines Dauer-Alarms ohne
+Schließpfad (C14): `--wache` misst beide Tage (Exit 1 bei Spitzentag-
+Befund; die `::error::`-Zeile nennt den Bündeltag und die Zahlen). Der
+Lauf `faktenfrische.yml` führt danach **genau ein** Ticket (Label
+`faktenfrische-deckung`): erstellt oder aktualisiert statt dupliziert,
+mit den Zahlen der Messung und drei Schließpfaden (Bündelung entzerren /
+Takt enger stellen / Korridor in der SSOT anpassen) – die Entscheidung
+treffen Takt, Sockel, Limit und Intervall in
+`data/agent_reach/faktenfrische.yaml` durch den Herausgeber, nie die
+Maschine. Und das Ticket **schließt sich selbst**, sobald die Messung
+wieder grün ist. Werkzeuge: `scripts/faktenfrische_deckung_ticket.py`
+(`--apply`), Vertrag C45 (`spitzenlast_stichtag` und `spitze_geprueft`
+sind Pflichtmarker), Tests `scripts/tests/test_faktenfrische_deckung_ticket.py`
+sowie der Kalender-Sweep `BuenndelWacheSweepTest` (52 Montage des
+Folgejahrs gegen den ausgelieferten Bestand).
+
+**Offen bleibt eine andere Klasse:** Baut sich ein Alt-Rückstand von
+über 100 Seiten auf (am 31.12.2026 der Fall), reicht auch das Limit 16
+nicht, ihn binnen sieben Tagen abzubauen – dann meldet die Wache
+`erreicht: False`. Das heilt kein Sockel; es ist die Rückstands-Klasse
+(#912) und gehört als eigene Entscheidung (Takt, Limit oder Intervall)
+behandelt.
+
 ### Nachzug 30.10.2026: Kalender statt Wochenmittel (#912)
 
 Ein Wochendurchschnitt kann keine tägliche Frist beweisen. Die Simulation läuft
@@ -100,8 +159,8 @@ nächste Frist; auch diese Folgetermine werden geprüft. Verspätung wird vor
 der Arbeit des Tages gemessen, nicht erst danach weggeschrieben.
 
 Die Wache und der Scorecard-Bericht prüfen bei `auto_skalierung: true` das
-**empfohlene Budget**, das der Lauf auch verwendet. Der Sockel (4, Stand
-03.11.2026) bleibt als Untergrenze sichtbar; das harte Limit (16 seit
+**empfohlene Budget**, das der Lauf auch verwendet. Der Sockel (12, Stand
+06.11.2026) bleibt als Untergrenze sichtbar; das harte Limit (16 seit
 04.11.2026) ist die Obergrenze. Die Kalendersimulation bestimmt das Budget;
 die Reserve zwischen Plan und Limit ist die Pufferfläche für
 Nachfrage-Spitzen. Wächst der Bestand, wächst das empfohlene Budget mit – bis
