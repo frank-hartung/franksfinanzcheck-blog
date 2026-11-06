@@ -32,6 +32,10 @@ die Reparatur in fünf Richtungen fest:
      (bei Auto-Skalierung das empfohlene Budget), nicht den Sockel als
      vermeintlichen Alltag. Reserve unter dem harten Limit ist Pflicht;
      Dauer-Spitzenbetrieb und strukturelle Unterdeckung sind rot.
+  7. #1039: „Heute“ ist der ruhigste Tag, nicht der härteste – die
+     Prüftermine sind BÜNDEL. Diese Datei hält die Spitzentag-Messung
+     (`spitzenlast_stichtag`), ihre drei Zustände und den
+     Kalender-Sweep des ausgelieferten Korridors (52 Montage) fest.
 
 Alle Proben laufen gegen eingefrorene Tage (Uhr-Zwang, `selftest_clock`):
 Ein Test, der die Wanduhr liest, ist eine Verabredung mit dem Kalender.
@@ -485,6 +489,130 @@ class RepoZustandTest(unittest.TestCase):
         for eigen in ("alter >=", "timedelta(days=30)", "timedelta(days=45)"):
             self.assertNotIn(eigen, quelle,
                              f"`{eigen}` riecht nach zweiter Intervallrechnung")
+
+
+class SpitzentagTest(unittest.TestCase):
+    """Der Bündeltag wird mitgemessen – mit derselben Planrechnung (#1039).
+
+    Befund vom 04.11.2026: Die Wache war am ruhigen Stichtag grün; drei
+    Wochen später kippten 23 Seiten mit demselben Prüfdatum gemeinsam in
+    die Überfälligkeit. Der Sockel 4 trug diese Schübe nicht (am
+    26.11. und 02.12. wären 38 Seiten zu spät). Diese Tests halten die
+    Heilung fest – in beide Richtungen: Befund wird rot, Fehlalarm bleibt
+    grün, und „nicht gemessen“ steht nie wie „grün“ aus (C33).
+    """
+
+    def _builtin(self):
+        stichtag = PROBETAG
+        basis = stichtag - dt.timedelta(days=20)
+        stau = [{"slug": f"bundel-{i:03d}", "titel": "Heizung Winter saisonal",
+                 "beschreibung": "", "keywords": ["Heizung"],
+                 "pillar": "energie", "faktencheck": basis}
+                for i in range(10)]
+        return stau, cfg_probe(budget=1, limit=10)
+
+    def test_stichtage_nennt_beginn_und_frist(self):
+        stau, cfg = self._builtin()
+        kandidaten = kap.spitzenlast_stichtage(stau, cfg, PROBETAG)
+        self.assertEqual([d.isoformat() for d in kandidaten],
+                         ["2026-10-29", "2026-11-01", "2026-11-08"])
+
+    def test_zu_kleines_budget_wird_am_buendeltag_rot(self):
+        stau, cfg = self._builtin()
+        finde = kap.spitzenlast_stichtag(stau, cfg, 1, 1.0, PROBETAG)
+        self.assertIsNotNone(finde)
+        self.assertEqual((finde["stichtag"].isoformat(), finde["offen"],
+                          finde["frisch"]), ("2026-11-01", 2, 10))
+
+    def test_genuegend_grosses_budget_bleibt_gruen(self):
+        stau, cfg = self._builtin()
+        self.assertIsNone(kap.spitzenlast_stichtag(stau, cfg, 4, 1.0, PROBETAG))
+
+    def test_spitze_zahlen_steht_immer_in_den_zahlen(self):
+        stau, cfg = self._builtin()
+        gruen = kap.spitze_zahlen(stau, cfg, 4, 1.0, PROBETAG)
+        self.assertEqual(set(gruen), {"spitze_geprueft"})
+        self.assertGreater(gruen["spitze_geprueft"], 0)
+        rot = kap.spitze_zahlen(stau, cfg, 1, 1.0, PROBETAG)
+        self.assertEqual(rot["spitze_puenktlich"], False)
+        self.assertEqual(rot["spitze_stichtag"], "2026-11-01")
+
+    def test_spitzenlast_ist_rot(self):
+        # 04.11.2026 (#1039): Der Stichtag war grün, drei Wochen später
+        # standen 23 Seiten mit demselben Prüfdatum gemeinsam zu spät.
+        funde = kap.c45_urteil(C45UrteilTest().basis(
+            spitze_stichtag="2026-11-26", spitze_offen=37,
+            spitze_puenktlich=False))
+        self.assertTrue(any("Spitzenlast" in f for f in funde))
+
+    def test_spitzenlast_ohne_befund_bleibt_gruen(self):
+        # Gegenprobe: Ein Bündeltag, den der Plan trägt, ist kein Befund.
+        # Ohne diese Probe würde „Spitzenlast“ bei jeder Zeile anschlagen.
+        self.assertEqual(kap.c45_urteil(C45UrteilTest().basis(
+            spitze_stichtag="2026-11-26", spitze_offen=0,
+            spitze_puenktlich=True)), [])
+
+    def test_spitzenlast_ohne_messung_ist_kein_freibrief(self):
+        # Fehlt die Messung ganz (alter Aufrufer), darf das Urteil nicht
+        # stillschweigend „grün“ bedeuten – es prüft dann nur den Stichtag.
+        # Das ist Absicht: die Messung selbst ist die Pflicht (s. u.).
+        self.assertEqual(kap.c45_urteil(C45UrteilTest().basis()), [])
+
+    def test_jeder_stichtag_wird_gebunden_geprueft(self):
+        # Der Vertrag muss den Bündeltag MITMESSEN, nicht nur den Stichtag.
+        import governance_contract as gc
+        zahlen, fehler = gc._c45_deckung()
+        self.assertIsNone(fehler, fehler)
+        # Ohne Befund fehlt `spitze_stichtag` – aber nie der Beleg, DASS
+        # gemessen wurde. Sonst wäre „nicht geprüft“ von „grün“ nicht zu
+        # unterscheiden (C33).
+        self.assertIn("spitze_geprueft", zahlen)
+        self.assertGreater(int(zahlen["spitze_geprueft"]), 0,
+                           "kein einziger Bündeltag geprüft – die Messung fehlt")
+        self.assertEqual(
+            zahlen["urteil"],
+            kap.c45_urteil(zahlen, ssot_pfad=gc.C45_SSOT),
+            "Der Vertrag urteilt – die eine Stelle, nicht eine zweite Schwelle")
+
+
+class BuenndelWacheSweepTest(unittest.TestCase):
+    """Der ausgelieferte Korridor trägt den Bestand auch am Bündeltag.
+
+    Dauerhafte Absicherung gegen die Rückkehr von #1039: Nicht nur der
+    heutige Stichtag, sondern jeder Montag im Folgejahr wird mit derselben
+    Spitzentag-Messung geprüft. Schlägt der Test rot, ist der Sockel
+    (`budget.max_artikel_pro_lauf` in `data/agent_reach/faktenfrische.yaml`)
+    dem Bestandswachstum hinterher – eine Entscheidung, kein Schweigen.
+    Unter der Fremd-Uhr (FFC_FREMD_UHR, +97 Tage) liegt der gesamte Bestand
+    überfällig, es gibt keine frischen Seiten – der Test bleibt grün.
+    """
+
+    MONATAGE = 52
+
+    def test_kein_montag_im_folgejahr_reisst_die_frist(self):
+        cfg = ff.lade_config()
+        artikel = ff.alle_artikel("alle")
+        laeufe, hinweise = kap.laeufe_aus_workflow()
+        self.assertIsNotNone(laeufe, f"Laufplan nicht lesbar: {hinweise}")
+        sockel = int(kap.budget_vorgaben(cfg)["max_artikel_pro_lauf"])
+        limit = int(kap.budget_vorgaben(cfg)["hartes_limit_pro_lauf"])
+        stichtag = ff.heute()
+        erster_montag = stichtag + dt.timedelta(days=(7 - stichtag.weekday()) % 7)
+        befunde = []
+        for i in range(self.MONATAGE):
+            tag = erster_montag + dt.timedelta(weeks=i)
+            finde = kap.spitzenlast_stichtag(artikel, cfg, sockel, laeufe, tag)
+            if finde is not None:
+                befunde.append((tag.isoformat(), finde["stichtag"].isoformat(),
+                                finde["offen"], finde["frisch"]))
+        self.assertEqual(
+            befunde, [],
+            "Der Sockel trägt den Bündeltag nicht – #1039 ist zurück. "
+            f"{len(befunde)} von {self.MONATAGE} Montagen reißen die Frist; "
+            f"schlimmster: {max(befunde, key=lambda b: b[2]) if befunde else '–'}. "
+            f"Sockel ({sockel}) dem Bestandswachstum anpassen (Limit {limit}) "
+            "oder die Bündelung entzerren – Entscheidung des Herausgebers "
+            "in data/agent_reach/faktenfrische.yaml.")
 
 
 if __name__ == "__main__":

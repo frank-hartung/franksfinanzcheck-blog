@@ -1075,6 +1075,19 @@ def report_schreiben(ergebnis: dict, ssot: dict, abgelaufene: list[dict],
                   f"(in {n['restlaufzeit']} Tagen) |")
             z(f"| Empfohlenes Budget | {kap.get('empfohlenes_budget')} je Lauf "
               f"(Limit {kap.get('hartes_limit')}) |")
+            # #1039: Der Spitzentag gehört in denselben Bericht – die Zahl
+            # kommt aus derselben Messung wie das C45-Urteil (C19), nie aus
+            # einer zweiten Rechnung.
+            if kap.get("spitze_geprueft") is not None:
+                spitze_tag = kap.get("spitze_stichtag")
+                if spitze_tag and not kap.get("spitze_puenktlich", True):
+                    z(f"| **Spitzentag (#1039)** | ❌ Am {spitze_tag} kämen "
+                      f"**{kap.get('spitze_offen')}** von {kap.get('spitze_frisch')} "
+                      f"heute frischen Seiten zu spät ({kap.get('spitze_geprueft')} "
+                      "Bündeltage geprüft) |")
+                else:
+                    z(f"| Spitzentag (#1039) | ✅ mitgemessen "
+                      f"({kap.get('spitze_geprueft')} Bündeltage, kein Befund) |")
             z("")
             if not kap.get("empfehlung_erreicht"):
                 z("❌ **Strukturell unterdeckt:** Auch das harte Limit baut den "
@@ -1298,6 +1311,13 @@ def kapazitaet_ermitteln(heute: dt.date) -> dict:
         plan["empfohlenes_budget"] = int(empfehlung["budget"])
         plan["empfehlung_erreicht"] = bool(empfehlung["erreicht"])
         plan["hartes_limit"] = int(empfehlung["limit"])
+        try:
+            # #1039: Der Spitzentag gehört in dieselbe Messung wie der
+            # Stichtag – eine Rechnung, zwei Tage, keine zweite Wahrheit.
+            plan.update(kap.spitze_zahlen(artikel, cfg, plan_budget, laeufe,
+                                          heute, horizont))
+        except ValueError as exc:
+            return {"nicht_beweisbar": f"Spitzenlast nicht beweisbar: {exc}"}
         return plan
     except Exception as exc:  # noqa: BLE001 – nicht beweisbar, nie grün
         return {"nicht_beweisbar": f"Deckungsrechnung nicht ausführbar: {exc}"}

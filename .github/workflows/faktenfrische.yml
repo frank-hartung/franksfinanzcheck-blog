@@ -40,6 +40,16 @@
 #    · dieser Workflow – Protokoll sichern, Nachlese fahren (auch nach
 #      einem Abbruch), Ursache in Klartext melden.
 #
+#  WARUM DER SPITZENTAG MITGEMESSEN WIRD (#1039, 04.11.2026)
+#  ---------------------------------------------------------
+#  Die Deckungswache prüfte bis zum 04.11.2026 nur den Stichtag „heute“ –
+#  den ruhigsten Tag des Jahres, nicht den härtesten. Die Prüftermine
+#  sind BÜNDEL (115 Seiten auf 35 Fristtage, 23 davon am 27.11.2026).
+#  Die Wache war grün, und ab dem 20.11. hätte derselbe Bestand ohne
+#  jede Code-Änderung rot gemeldet. Seitdem misst `--wache` zwei Tage
+#  mit derselben Planrechnung; das Ticket mit Label
+#  `faktenfrische-deckung` ist der Schließpfad des roten Laufs.
+#
 #  Der Lauf schreibt NUR Frontmatter (`quellen`, `faktencheck`)
 #  und Dossiers unter data/research/artikel/. Artikeltexte
 #  ändert er nie – fachliche Befunde gehen als Issue an einen
@@ -192,18 +202,44 @@ jobs:
           fi
 
       # ------------------------------------------------------------
-      # Deckungs-Nachweis (Reparatur #912): Der Lauf ist erst fertig,
-      # wenn der Rückstand FRISTGERECHT abbaubar ist. Das ist der
-      # Schließpfad des Alarms – grün, sobald der Plan konvergiert.
-      # Dieselbe Rechnung wie im Report (eine Regel, C19).
+      # Deckungs-Nachweis (Reparatur #912; Spitzentag seit #1039): Der
+      # Lauf ist erst fertig, wenn der Rückstand FRISTGERECHT abbaubar
+      # ist UND der Spitzentag ohne Befund bleibt – dieselbe Rechnung,
+      # dieselbe Planrichtung (eine Regel, C19). Seit dem 04.11.2026
+      # misst der Nachweis beide Tage.
       # ------------------------------------------------------------
-      - name: Deckungs-Nachweis (Rückstand fristgerecht abbaubar?)
+      - name: Deckungs-Nachweis (Rückstand fristgerecht abbaubar? Spitzentag ohne Befund?)
         id: deckung
         if: always()
         continue-on-error: true
         run: |
           set -o pipefail
           python3 scripts/faktenfrische_kapazitaet.py --wache | tee -a "$GITHUB_STEP_SUMMARY"
+
+      # ------------------------------------------------------------
+      # DECKUNGS-TICKET (#1039, Dauerheilung 06.11.2026): Der rote
+      # Deckungs-Nachweis war bis hierher ein Dauer-Alarm ohne Auftrag
+      # und ohne Schließpfad – niemand wurde beauftragt, niemand konnte
+      # schließen (C14). Jetzt führt GENAU EIN Ticket (Label
+      # `faktenfrische-deckung`), gespeist aus derselben Messung wie
+      # `--wache`, aktualisiert statt dupliziert, geschlossen
+      # selbsttätig, sobald die Messung grün ist. Die Maschine
+      # entscheidet nichts: Takt (cron), Sockel, Limit und Intervall
+      # bleiben Entscheidungen des Herausgebers (SSOT) – der Text nennt
+      # nur die Schließpfade mit Zahlen.
+      # `continue-on-error`: Der rote Job bleibt das Tor; dieses
+      # Ticket ist der Schließpfad, kein zweites Tor.
+      # ------------------------------------------------------------
+      - name: Deckungs-Ticket melden (ein Ticket, ein Schließpfad)
+        id: deckticket
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RUN_URL="https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          python3 scripts/faktenfrische_deckung_ticket.py --apply --run-url "$RUN_URL" \
+            | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Report als Artefakt sichern
         if: always()
@@ -324,7 +360,8 @@ jobs:
       # Nach allen Schreib- und Meldeschritten: Eine Unterdeckung oder ein
       # Befund ohne Schließweg ist ein eigener, lauter Befund – kein stiller
       # Ausfall eines Schritts. Der Job bleibt rot, die Artefakte sind längst
-      # gesichert.
+      # gesichert. Der Schließpfad des Deckungs-Befunds steht im Ticket mit
+      # Label `faktenfrische-deckung` (Schritt „Deckungs-Ticket melden“).
       - name: Unterdeckung oder Befund ohne Schließweg melden (roter Job)
         if: steps.deckung.outcome == 'failure' || steps.aktenwache.outcome == 'failure'
         env:
@@ -332,7 +369,7 @@ jobs:
           AKTE: ${{ steps.aktenwache.outcome }}
         run: |
           if [ "$DECKUNG" = "failure" ]; then
-            echo "::error::Faktenfrische unterdeckt – der Rückstand ist nicht fristgerecht abbaubar (#912). Details im Schritt davor, im Report und in RELEASE-SCORECARD.md."
+            echo "::error::Faktenfrische unterdeckt – der Rückstand ist nicht fristgerecht abbaubar oder der Spitzentag reißt (#912, #1039). Schließpfad: Issue mit Label 'faktenfrische-deckung' (Deckungs-Ticket, ein Ticket ein Pfad), Details im Schritt davor, im Report und in RELEASE-SCORECARD.md."
           fi
           if [ "$AKTE" = "failure" ]; then
             echo "::error::Mindestens ein offener Fachbefund hat keinen Schließweg (Seite/Ledger) – BEFUND-AKTE.md und der Schritt davor nennen den Fund (#912)."
