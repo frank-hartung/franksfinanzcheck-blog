@@ -1,10 +1,10 @@
 {
   "version": 1,
-  "generated_at": "2026-11-05T22:06:12Z",
+  "generated_at": "2026-11-06T02:39:38Z",
   "modus": "kandidaten",
-  "commit": "95277782fc6c2bdeb5e70104c20e1d4f07a38a42",
+  "commit": "f13ca9a0a64df7138fe46f93d338c61be494cfd7",
   "kapazitaet": {
-    "stichtag": "2026-11-05",
+    "stichtag": "2026-11-06",
     "artikel": 114,
     "faellig": 0,
     "ueberfaellig": 0,
@@ -12,7 +12,7 @@
     "naechste_frist": {
       "slug": "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
       "frist": "2026-11-11",
-      "restlaufzeit": 6
+      "restlaufzeit": 5
     },
     "budget": 4,
     "laeufe_je_tag": 1.0,
@@ -1329,6 +1329,24 @@
       "siegel_drift": "unverändert",
       "checks": []
     },
+    "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten": {
+      "sha256": "5ebbd8307d43a390c0b4c16d99975f9d4b3f759118a8329db00aa16efab54b7c",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-20",
+      "siegel_drift": "neu versiegelt",
+      "checks": []
+    },
     "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
       "sha256": "5bdfc3ec90e9d1d1214ada206a25e06b57461f027b5c620c117aab0629d8de86",
       "urteil": "freigabe-reif",
@@ -1514,6 +1532,24 @@
       },
       "naechste_pruefung": "2026-11-25",
       "siegel_drift": "unverändert",
+      "checks": []
+    },
+    "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": {
+      "sha256": "549fdf9aa108cc50a4aba945d01d3b680c40fb6dc29f6909e8092e9b4e20dc3c",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-12-12",
+      "siegel_drift": "neu versiegelt",
       "checks": []
     }
   }
