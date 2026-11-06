@@ -58,7 +58,7 @@ Am 27.10.2026 war genau das der Fall:
 | Kennzahl | vor der Reparatur | nach der Reparatur |
 |---|---|---|
 | Bedarf | 2,58 Prüfungen/Tag (≈ 18/Woche) | unverändert |
-| Takt | 2 Läufe/Woche × 3 = 0,86/Tag | 1 Lauf/Tag × 12 (Sockel; seit 04.11.2026 elastisch bis 16) |
+| Takt | 2 Läufe/Woche × 3 = 0,86/Tag | 1 Lauf/Tag × 4 (Sockel seit 06.11.2026, vorher 12; elastisch bis 16) |
 | Deckung | **33 %** | 146 % beim Bestand vom 03.11.2026 (112 Seiten) · **425 %** beim Bestand vom 06.11.2026 (115 Seiten) – seit dem 04.11.2026 wird zusätzlich der Spitzentag mitgemessen |
 | Rückstand | +12 Seiten/Woche, nie abbaubar | im Kalenderplan in 3 Tagen abgebaut |
 
@@ -126,11 +126,10 @@ Seit dem 04.11. misst C45 deshalb **zwei** Tage mit derselben Planrechnung:
 | 4 | **0 von 52** – Bündel-Boden |
 | 12 (seit 06.11.2026) | 0 von 52 |
 
-Der Sockel 12 bleibt, aber seine Begründung ist seit #1107 eine andere: die
-**Ausfall-Reserve**. Eine Woche ohne Lauf braucht je nach Startzeitpunkt Budget
-4 bis 7 (Probe vom 06.11.2026). Limit (16) und Nachholfrist (7) bleiben
-unverändert. Ob der Sockel auf 4 gesenkt oder bei 12 bleibt, ist eine
-Entscheidung des Herausgebers, keine der Wache.
+**Entscheidung des Herausgebers (06.11.2026): Sockel 12 → 4.** Der Sockel ist die
+Untergrenze; die Automatik hebt das Budget bis zum Limit an, sobald der Rückstand
+es verlangt. Die Ausfalltoleranz trägt der **Vorlauf** (`planung.vorlauf_tage`:
+7 → 14), nicht der Sockel. Limit (16) und Nachholfrist (7) bleiben unverändert.
 
 **Selbstheilung, nicht nur Messung (06.11.2026).** Der rote Lauf ist
 jetzt ein geschlossener Kreislauf statt eines Dauer-Alarms ohne
@@ -168,20 +167,25 @@ Rückstand von über 100 Seiten auf, den kein Limit abbaut“ war ein Messfehler
 desselben Typs (eingefrorener Stand). Auf der Trajektorie ab heute ist der
 31.12.2026 ohne Befund.
 
-**Die echte offene Grenze ist ein langer Ausfall des Bots**, nicht das
-Limit. Gemessen (Ausfall-Probe, 06.11.2026, Start an Tag 3/10/20):
+**Ausfalltoleranz (Entscheidung 06.11.2026: 7 Tage, Hebel Vorlauf).** Gemessen
+mit der echten Automatik: an jedem Lauftag wird das Budget aus
+`empfohlenes_budget` gewählt, 7-Tage-Ausfall, 46 Starttage (0–45). Ein Ausfall
+erzwingt keinen vorherigen Aufbau, weil die Automatik nur den heutigen Rückstand
+sieht und keinen künftigen Ausfall.
 
-| Ausfall | Minimales Budget ohne Fristverletzung | Verletzungen bei Budget 16 |
+| Konfiguration | Starttage mit Fristverletzung | Max. Verletzungen je Start |
 |---|---|---|
-| 3 Tage | 4–5 | 0 |
-| 7 Tage | 4–7 | 0 |
-| 10 Tage | keines (bis Budget 60) | 2 (Limit 24: 2) |
-| 14 Tage | keines | 37 (Limit 24: 33) |
+| Sockel 12, Vorlauf 7 (bis 06.11.2026) | 3 (Tag 0, 14, 15) | 11 |
+| Sockel 4, Vorlauf 7 | 35 von 46 | 27 |
+| **Sockel 4, Vorlauf 14 (heute)** | 3 (Tag 0, 1, 2) | 6 |
+| Sockel 4, Vorlauf 21 | 3 (Tag 0, 1, 2) | 6 |
 
-Die Grenze setzt der Vorlauf von 7 Tagen: Fristen, die innerhalb des Ausfalls
-liegen, können nicht vorgearbeitet werden. Ein höheres Limit verschiebt sie
-nicht. Ein Hebel dafür wäre der Vorlauf, nicht das Limit – das ist eine eigene
-Entscheidung des Herausgebers.
+Tag 0 ist mit jedem Limit inhärent (5 Verletzungen auch bei Limit 16). Der Vorlauf
+allein reicht nicht für Tag 1 und 2 (4 bzw. 1 Verletzung): Dort hilft nur der Sockel
+(Sockel 8 mit Vorlauf 14 hält Tag 1–3 ohne Verletzung). Das ist eine offene
+Stellschraube für den Herausgeber, kein Fehler der Messung. Der Test
+`AusfallToleranzTest` hält die Zusage fest (Starttage 3, 10, 20 ohne Verletzung)
+und die Gegenprobe (Vorlauf 7 reißt ab Tag 10).
 
 ### Nachzug 30.10.2026: Kalender statt Wochenmittel (#912)
 
@@ -193,7 +197,7 @@ nächste Frist; auch diese Folgetermine werden geprüft. Verspätung wird vor
 der Arbeit des Tages gemessen, nicht erst danach weggeschrieben.
 
 Die Wache und der Scorecard-Bericht prüfen bei `auto_skalierung: true` das
-**empfohlene Budget**, das der Lauf auch verwendet. Der Sockel (12, Stand
+**empfohlene Budget**, das der Lauf auch verwendet. Der Sockel (4, Stand
 06.11.2026) bleibt als Untergrenze sichtbar; das harte Limit (16 seit
 04.11.2026) ist die Obergrenze. Die Kalendersimulation bestimmt das Budget;
 die Reserve zwischen Plan und Limit ist die Pufferfläche für

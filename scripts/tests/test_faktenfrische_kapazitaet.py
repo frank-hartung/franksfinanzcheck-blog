@@ -740,5 +740,69 @@ class ProjektionTrajektorieTest(unittest.TestCase):
                          "Tage 3 und 4 mit je zwei Plätzen: vier Seiten sind geprüft")
 
 
+
+class AusfallToleranzTest(unittest.TestCase):
+    """Die Ausfalltoleranz von 7 Tagen trägt der Vorlauf (#1107, 06.11.2026).
+
+    Entscheidung des Herausgebers: Sockel 4, Ausfalltoleranz 7 Tage, der Hebel
+    ist der Vorlauf. Gemessen mit der ECHTEN Automatik (`empfohlenes_budget`
+    an jedem Lauftag), nicht mit einem festen Budget: Die Automatik sieht nur
+    den heutigen Rückstand, keinen künftigen Ausfall. Deshalb muss der Vorlauf
+    die Reserve tragen, die der Sockel bei 4 nicht mehr trägt.
+
+    Verletzung = zwischen zwei Prüfterminen liegt mehr als das Intervall und
+    die Frist liegt im Beobachtungsfenster. Starttage 1 und 2 sind bewusst NICHT
+    Teil dieses Tests: Dort verursacht ein Ausfall 1–4 Verletzungen, und Tag 0
+    ist mit jedem Limit inhärent (5). Das steht in der SSOT.
+    """
+
+    AUSFALL = 7
+
+    def _verletzungen(self, cfg: dict, start: int, extra: int = 60) -> int:
+        artikel = ff.alle_artikel("alle")
+        heute = ff.heute()
+        state = [dict(a) for a in artikel]
+        intervall = {a["slug"]: int(ff.faelligkeit(a, cfg, heute)["intervall"])
+                     for a in state}
+        checks = {a["slug"]: [a["faktencheck"]] for a in state}
+        ende = start + self.AUSFALL + extra
+        for off in range(ende + 1):
+            tag = heute + dt.timedelta(days=off)
+            if start <= off < start + self.AUSFALL:
+                continue   # Ausfall: kein Lauf
+            budget = kap.empfohlenes_budget(state, cfg, 1.0, tag)["budget"]
+            lauf = kap.simuliere(kap.eintraege_bauen(state, cfg, tag), budget,
+                                 tag, 0, {tag})
+            for a in state:
+                if a["slug"] in lauf["letzte_pruefung"]:
+                    a["faktencheck"] = tag
+                    checks[a["slug"]].append(tag)
+        fenster_ende = heute + dt.timedelta(days=ende)
+        verletzt = 0
+        for slug, reihe in checks.items():
+            i = intervall[slug]
+            reihe = [x for x in reihe if x is not None]
+            for a, b in zip(reihe, reihe[1:]):
+                if (b - a).days > i and a + dt.timedelta(days=i) < fenster_ende:
+                    verletzt += 1
+        return verletzt
+
+    def test_sieben_tage_ausfall_ist_mit_sockel_4_und_vorlauf_14_tragbar(self):
+        cfg = ff.lade_config()
+        self.assertEqual(int(cfg["budget"]["max_artikel_pro_lauf"]), 4,
+                         "Herausgeber-Entscheidung: Sockel 4")
+        self.assertEqual(int(cfg["planung"]["vorlauf_tage"]), 14,
+                         "Der Vorlauf trägt die 7-Tage-Toleranz")
+        for start in (3, 10, 20):
+            self.assertEqual(self._verletzungen(cfg, start), 0,
+                             f"7-Tage-Ausfall ab Tag {start} reißt Fristen")
+
+    def test_gegenprobe_ohne_vorlauf_reisst_die_frist(self):
+        # Ohne den Vorlauf 14 (Stand 7) reißt ein Ausfall ab Tag 10 Fristen.
+        # Sonst prüfte der Test nichts.
+        cfg = ff.lade_config()
+        cfg["planung"]["vorlauf_tage"] = 7
+        self.assertGreater(self._verletzungen(cfg, 10), 0)
+
 if __name__ == "__main__":
     unittest.main()
