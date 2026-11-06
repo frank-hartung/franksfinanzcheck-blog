@@ -32,7 +32,7 @@ quellen:
     url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
     herausgeber: "Statistisches Bundesamt"
     datum: "2026-08-14"
-faktencheck: "2026-09-27"
+faktencheck: 2026-11-06
 ---
 
 Viele glauben, sie müssten mehr verdienen, um endlich Geld übrig zu haben. In der Praxis fehlt aber oft nicht nur Einkommen. Es fehlt vor allem Struktur. Das Gehalt kommt, Rechnungen gehen ab, zwischendurch kaufst, bestellst und buchst du – und am Monatsende ist wieder unklar, wo das Geld geblieben ist.
