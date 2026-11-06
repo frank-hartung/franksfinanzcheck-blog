@@ -116,6 +116,13 @@ Ausführung über den bestehenden Workflow (nutzt `MASTODON_ACCESS_TOKEN`, Scope
 
 **Nach dem Live-Lauf prüfen (30 Minuten später):** Bio-Zeile sichtbar? Felder verifiziert (grüner Haken = nur Link-Kontrolle)? Mobilansicht/Banner-Zuschnitt? `rel="me"` im `<head>` unverändert?
 
+**Durchgeführter Rollout & Nachweis (06.11.2026):**
+
+- Dry-Run: `Actions → Mastodon-Profil-Sync` run `42214662111` – alle Steps grün.
+- Live: run `42214731405` – alle Steps grün, inkl. `Mastodon-Profil aktualisieren` (PATCH) und `Profil-Report als Artefakt sichern`.
+- Öffentlicher Gegencheck auf `https://mastodon.social/@FranksFinanzcheck` (06.11.2026): Bio mit der Zeile „Neue Ratgeber: Mo/Mi/Fr – 2–3 pro Publikationstag.“ sichtbar, 4 Profilfelder gesetzt, Banner/Avatar unverändert, Bot-Kennzeichnung („Automated“) erhalten, 104 Posts.
+- Hinweis: Job-Logs und das Report-Artefakt konnten aus dieser Sandbox nicht geladen werden (Netzwerk-Restriktion); der Nachweis erfolgte über den öffentlichen Profil-Endpunkt. Der Artefakt-Download bleibt via `gh run download 42214731405 --name mastodon-profile-report-42214731405` möglich.
+
 ---
 
 ## 5 · Grenzen & Ehrlichkeit
