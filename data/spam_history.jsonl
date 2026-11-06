@@ -25887,3 +25887,5 @@
 {"ts": "2026-11-06T14:18:25Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 9}
 {"ts": "2026-11-06T14:56:40Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
 {"ts": "2026-11-06T14:56:40Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 9}
+{"ts": "2026-11-06T15:40:11Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
+{"ts": "2026-11-06T15:40:11Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 9}
