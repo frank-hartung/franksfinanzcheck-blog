@@ -420,3 +420,4 @@
 {"date": "2026-11-04", "kritisch": 1, "fest": 2, "modus": "set-current", "geaendert": ["layouts/_partials/cover.html", "layouts/_partials/head.html", "scripts/generate_covers.py"]}
 {"date": "2026-11-05", "kritisch": 1, "fest": 1, "modus": "verify"}
 {"date": "2026-11-05", "kritisch": 1, "fest": 1, "modus": "set-current", "geaendert": ["layouts/_partials/cover.html", "layouts/_partials/head.html"]}
+{"date": "2026-11-06", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/publikations_vertrag.py"]}
