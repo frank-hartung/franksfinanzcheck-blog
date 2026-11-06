@@ -2,7 +2,7 @@
 title: "Großeinkauf und Vorrat: Wann Bevorraten sich rechnet"
 description: "Großeinkauf planen: Großeinkauf lohnt nicht automatisch. Wie du Grundpreise vergleichst, Schwund einrechnest und einen Vorrat aufbaust, der nicht im Müll."
 date: 2026-09-30T06:10:00Z
-lastmod: 2026-10-13
+lastmod: 2026-11-06
 draft: false
 tags: ["Geld sparen im Alltag", "Haushaltsbuch führen"]
 categories: ["Ratgeber"]
@@ -64,7 +64,7 @@ Ein Großeinkauf senkt die Kosten, wenn drei Bedingungen zusammenkommen.
 
 **Der Grundpreis sinkt deutlich.** Ein Unterschied von wenigen Cent je Einheit trägt kaum. Interessant wird es, wenn derselbe Artikel in der größeren Einheit klar günstiger ist.
 
-**Der Artikel ist haltbar.** Nudeln, Reis, Konserven, Kaffee und Tiefkühlware können Monate liegen. Frische Milchprodukte und Salat nicht.
+**Der Artikel ist haltbar.** Nudeln, Konserven, Kaffee und Tiefkühlware können Monate liegen. Frische Milchprodukte und Salat nicht.
 
 **Der Verbrauch ist berechenbar.** Wenn in deinem Haushalt pro Woche dieselbe Menge verbraucht wird, lässt sich die Reichweite ausrechnen. Bei unregelmäßigem Verbrauch ist jede Größenordnung Glückssache.
 
@@ -104,7 +104,7 @@ Die Wirkung des Schwunds auf den Preis je genutzter Einheit, gerechnet mit den A
 
 Für die Praxis hilft eine grobe Ordnung. Sie ersetzt keine Prüfung des Einzelfalls, sortiert aber die Erwartung.
 
-**Trockenware.** Nudeln, Reis, Mehl, Zucker und Hülsenfrüchte halten lange, wenn sie trocken und verschlossen liegen. Mehl und Getreide sind anfällig für Vorratsschädlinge, deshalb kleinere Mengen.
+**Trockenware.** Nudeln, Mehl, Zucker und Hülsenfrüchte halten lange, wenn sie trocken und verschlossen liegen. Mehl und Getreide sind anfällig für Vorratsschädlinge, deshalb kleinere Mengen.
 
 **Konserven und Gläser.** Sie halten über Monate und vertragen Wärme besser als Frischware. Achte auf Dellen und Beulen, die ein Zeichen für Beschädigung sein können.
 
