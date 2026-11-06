@@ -32,7 +32,7 @@ quellen:
     url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
     herausgeber: "Statistisches Bundesamt"
     datum: "2026-08-14"
-faktencheck: "2026-09-27"
+faktencheck: 2026-11-06
 ---
 
 Frugalismus klingt für viele nach Verzicht, Selbstkasteiung und dauerhaftem „Nein“. Genau deshalb schrecken viele davor zurück.
