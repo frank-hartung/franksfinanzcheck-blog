@@ -1,0 +1,90 @@
+# Befundakte nachziehen (Dauerheilung 06.11.2026, Vorgang #912-Klasse)
+# ====================================================================
+# WARUM DIESER LAUF EXISTIERT
+# ----------------------------
+# Am 06.11.2026 stand auf `main` eine BEFUND-AKTE mit „11 offene Befunde“,
+# obwohl der Generator auf demselben Baum 19 meldete (8 davon „überholt“:
+# die beiden Preisgarantie-Gas-Artikel wurden außerhalb der
+# Faktenfrische-eigenen Pfadliste editiert – Fassungs-Hashes kippten, kein
+# einziger Befund wurde entschieden). Der Tageslauf war längst durch; die
+# committe Akte blieb bis zum nachträglichen Nachzug veraltet liegen – und
+# `test_akte_im_repo_ist_auf_dem_stand_der_queue` war auf main rot, ohne
+# dass es jemand bemerkt hatte (Altlast).
+#
+# Der Tageslauf (faktenfrische.yml) erzeugt die Akte bei jedem Lauf, der
+# Commit feuert dort aber nur, wenn die Pfadliste getroffen wird – externe
+# Inhalts-Edits zwischen zwei Läufen erreichten sie nie. Dieser Lauf
+# schließt die Lücke: Er läuft bei JEDER Änderung an den kritischen Pfaden
+# auf `main`, erzeugt Akte und Zustand neu und committet NUR bei echter
+# Änderung (`[skip ci]`, letzte Fassung gewinnt). Kein Diff → kein Commit.
+#
+# Eigenschaften (bewusst):
+#   · idempotent – derselbe Baum erzeugt denselben Stand;
+#   · fail-closed sichtbar – ein roter Lauf heißt „Akte konnte nicht
+#     nachziehen“, nie „es ist alles gut“ (C33);
+#   · kein Selbst-Trigger (die eigenen Commits berühren nur Akte/Stand und
+#     stehen nicht unter `paths:`).
+name: Befundakte nachziehen
+
+on:
+  push:
+    branches: [main]
+    paths:
+      # Inhalts-Edits kippen Fassungen – die Akte muss sofort folgen.
+      - "content/posts/**"
+      # Neue Entscheidungen schließen Befunde.
+      - "data/faktenfrische_entscheidungen.yaml"
+      - "data/faktenfrische_queue.json"
+      # Generator + Logik der Akte selbst.
+      - "scripts/faktenfrische_befund_akte.py"
+      - "scripts/faktenfrische_befund_ledger.py"
+      - ".github/workflows/befund-akte-nachziehen.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  # Nie zwei Selbstheilungs-Läufe gleichzeitig – der letzte gewinnt.
+  group: befund-akte-nachziehen
+  cancel-in-progress: true
+
+jobs:
+  nachziehen:
+    name: Akte & Stand neu erzeugt, nur bei Änderung committet
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+
+      # Die Wache liest YAML – `setup-python` bringt PyYAML nicht mit
+      # (Hausregel seit #661: sonst meldet ein Gate heil, ohne je gelesen zu haben).
+      - name: Messwerkzeug vervollständigen (PyYAML)
+        run: python3 -m pip install -q --disable-pip-version-check --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
+
+      - name: Akte neu erzeugen und bei Änderung committen
+        env:
+          GIT_USER: Faktenfrische-Akte-Bot
+          GIT_MAIL: faktenfrische-bot@users.noreply.github.com
+        run: |
+          python3 scripts/faktenfrische_befund_akte.py --schreiben \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          if git diff --quiet -- BEFUND-AKTE.md data/faktenfrische_befunde_state.json; then
+            echo "Akte ist auf dem Stand der Warteschlange."
+          elif git diff -I'^[[:space:]]*"erzeugt":' --quiet \
+                     -- BEFUND-AKTE.md data/faktenfrische_befunde_state.json; then
+            # Gleicher Stand außer Erzeugungszeitpunkt (läuft bei JEDEM
+            # Lauf – sonst committete der Bot die Uhr statt des Befunds).
+            git checkout -- BEFUND-AKTE.md data/faktenfrische_befunde_state.json
+            echo "Nur Erzeugungszeitpunkt – kein Commit."
+          else
+            bash scripts/git_sync.sh \
+              "chore(faktenfrische): Akte und Stand nachgezogen [skip ci]" \
+              BEFUND-AKTE.md \
+              data/faktenfrische_befunde_state.json
+          fi

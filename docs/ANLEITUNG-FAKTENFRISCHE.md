@@ -142,6 +142,20 @@ sind Pflichtmarker), Tests `scripts/tests/test_faktenfrische_deckung_ticket.py`
 sowie der Kalender-Sweep `BuenndelWacheSweepTest` (52 Montage des
 Folgejahrs gegen den ausgelieferten Bestand).
 
+**Selbstheilung der Arbeitsliste (06.11.2026, `befund-akte-nachziehen.yml`).**
+Die committed BEFUND-AKTE ist die einzige Arbeitsliste der Redaktion – sie
+darf deshalb nicht hinter den Bestand zurückfallen. Am 06.11.2026 stand auf
+`main` 11 Befunde committed vs. 19 erzeugt, weil Inhalts-Edits außerhalb der
+Faktenfrische-Pfadliste Fassungen kippten und niemand nachzog. Seitdem zieht
+ein eigener Lauf (`Befundakte nachziehen`, push auf `content/posts/**`, die
+Queue, die Entscheidungen und den Generator selbst) die Akte automatisch
+nach und committet **nur bei echter Änderung** (`git diff -I'^\s*"erzeugt":'`
+schließt den Zeitstempel aus; `[skip ci]`). Der Tageslauf schreibt sie
+weiterhin bei jedem Lauf; der Push-Lauf schließt die Lücke zwischen zwei
+Läufen. Beobachtung: der Lauf committet nur `BEFUND-AKTE.md` und
+`data/faktenfrische_befunde_state.json` und heilt sich nicht selbst an, eine
+Schleife entsteht nicht.
+
 **Offen bleibt eine andere Klasse:** Baut sich ein Alt-Rückstand von
 über 100 Seiten auf (am 31.12.2026 der Fall), reicht auch das Limit 16
 nicht, ihn binnen sieben Tagen abzubauen – dann meldet die Wache
