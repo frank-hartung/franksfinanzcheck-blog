@@ -46,7 +46,7 @@ Hier schauen wir uns an, wie du Transparenz in deine Stromrechnung bringst. Wir 
 - Ein Wechsel ist jederzeit unter Einhaltung der Kündigungsfrist möglich und dauert technisch nur wenige Minuten.
 - Echte Ökotarife erkennst du an Siegeln wie „Grüner Strom“ oder „ok-power“.
 - In einer Modellrechnung (Annahme: 3.500 kWh Jahresverbrauch) führt eine Senkung des Arbeitspreises um 10 Cent pro kWh zu einer Ersparnis von 350 € im Jahr (Rechnung: 3.500 x 0,10 = 350).
-- Der Wechselprozess ist gesetzlich abgesichert, sodass eine lückenlose Versorgung garantiert ist.
+- Der Wechselprozess ist gesetzlich abgesichert, sodass eine lückenlose Versorgung jederzeit gesichert bleibt.
 
 ## Wie funktioniert der Strommarkt im Jahr 2026?
 

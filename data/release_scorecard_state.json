@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-06T11:50:19Z",
-  "modus": "kandidaten",
-  "commit": "06aa216e79e605ad95f04832094ec387a74420ba",
+  "generated_at": "2026-11-06T11:59:02Z",
+  "modus": "live",
+  "commit": null,
   "kapazitaet": {
     "stichtag": "2026-11-06",
     "artikel": 114,
@@ -37,43 +37,7 @@
     "empfehlung_erreicht": true,
     "hartes_limit": 16
   },
-  "ursachen": [
-    {
-      "check": "RD1-duplikate",
-      "dimension": "redundanz",
-      "wirkung": "blockiert",
-      "entscheidung": "auto",
-      "quelle": "scripts/duplikat_guard.py D1–D6 (via publish_gate.duplicate_failures)",
-      "artikel": [
-        "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
-        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum"
-      ],
-      "anzahl": 2
-    },
-    {
-      "check": "RD2-einzigartigkeit",
-      "dimension": "redundanz",
-      "wirkung": "blockiert",
-      "entscheidung": "human",
-      "quelle": "scripts/check_uniqueness.py U1–U2 (via publish_gate.uniqueness_failures)",
-      "artikel": [
-        "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
-        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum"
-      ],
-      "anzahl": 2
-    },
-    {
-      "check": "T6-textverstaendnis",
-      "dimension": "technik",
-      "wirkung": "blockiert",
-      "entscheidung": "auto",
-      "quelle": "scripts/textverstaendnis_guard.py (via publish_gate.textverstaendnis_failures)",
-      "artikel": [
-        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum"
-      ],
-      "anzahl": 1
-    }
-  ],
+  "ursachen": [],
   "befundlage": {
     "offen": 0,
     "seiten": 0,
@@ -662,34 +626,21 @@
     },
     "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
       "sha256": "71ebfc49f849da523ebb6a88bf951f330afef86306dc2eef2271bccedf3a00cf",
-      "urteil": "blockiert",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-20",
       "siegel_drift": "unverändert",
-      "checks": [
-        {
-          "check": "RD1-duplikate",
-          "dimension": "redundanz",
-          "wirkung": "blockiert",
-          "detail": "D3-X: Absatz wortgleich in 2 Artikeln (content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-; D4-X: Fast-Duplikat über Artikel (Ratio 1.00, content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit"
-        },
-        {
-          "check": "RD2-einzigartigkeit",
-          "dimension": "redundanz",
-          "wirkung": "blockiert",
-          "detail": "U1-PHRASEN: 6 gleiche 7-Wort-Phrasen mit 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum (z. B. „energieprodukte kosteten laut statistischem bundesamt verbraucherpreisindex im“) – ab 5 ist es Dopplung, Passage umschreiben"
-        }
-      ]
+      "checks": []
     },
     "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen": {
       "sha256": "4726400fec2bdfdc74c650b016633052b08e8721ad014bec4f748faa70e394b0",
@@ -710,41 +661,22 @@
       "checks": []
     },
     "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": {
-      "sha256": "5ddca8327462adc182f9573d4d1a6bde3a143ab02d54ec4e8a440eb949ee85c5",
-      "urteil": "blockiert",
+      "sha256": "4fb146d60b3f44759f61da13d569f130b71840870dff3f6eadf19adaa688fdc9",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "blockiert",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-20",
       "siegel_drift": "unverändert",
-      "checks": [
-        {
-          "check": "RD1-duplikate",
-          "dimension": "redundanz",
-          "wirkung": "blockiert",
-          "detail": "D1-EXAKT: Absatz doppelt (Z.7919 ≈ Z.6060): [Quelle: Statistisches Bundesamt, Verbraucherpreisindex und Inflationsrate in Deutschland, https://w…; D3-X: Absatz wortgleich in 2 Artikeln (content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-; D4-X: Fast-Duplikat über Artikel (Ratio 1.00, content/posts/2026-"
-        },
-        {
-          "check": "RD2-einzigartigkeit",
-          "dimension": "redundanz",
-          "wirkung": "blockiert",
-          "detail": "U1-PHRASEN: 6 gleiche 7-Wort-Phrasen mit 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich (z. B. „energieprodukte kosteten laut statistischem bundesamt verbraucherpreisindex im“) – ab 5 ist es Dopplung, Passage umschreiben"
-        },
-        {
-          "check": "T6-textverstaendnis",
-          "dimension": "technik",
-          "wirkung": "blockiert",
-          "detail": "R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…quelle statistisches bundesamt verbraucherpreisindex und inflationsrate in deutschland https www…“ – doppelte Passage, manuell reparieren"
-        }
-      ]
+      "checks": []
     },
     "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": {
       "sha256": "ae4e49707910715d0e98779f61e2a66c841db9907c846defd391a3157c2bae41",
@@ -1330,7 +1262,7 @@
       "checks": []
     },
     "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten": {
-      "sha256": "5ebbd8307d43a390c0b4c16d99975f9d4b3f759118a8329db00aa16efab54b7c",
+      "sha256": "4f08f73eba45b5c90d4fd964dc618b1a716241c31265d6cbf8d972bb8b881b7c",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1535,7 +1467,7 @@
       "checks": []
     },
     "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": {
-      "sha256": "549fdf9aa108cc50a4aba945d01d3b680c40fb6dc29f6909e8092e9b4e20dc3c",
+      "sha256": "a15c4d5844f232efbc6bb03598cfe831448537222f744bb8e8a7803f4fd18063",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {

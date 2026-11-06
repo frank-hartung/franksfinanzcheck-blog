@@ -147,6 +147,19 @@
 #    Ohne python3 wird nur gewarnt: die Notbremse darf die Automatisierung
 #    nicht an einem fehlenden Werkzeug aufhalten (der Push-Lauf prüft ohnehin).
 #
+#  NOTBREMSE #1073+ (06.11.2026) – kein Commit/Push mit unaufgelösten
+#  Merge-Konfliktmarkern, in JEDEM Dateityp:
+#    Am 05.11.2026 landete ein unaufgelöst aufgelöster Merge in
+#    BEFUND-AKTE.md und data/faktenfrische_befunde_state.json auf main
+#    (PR #1088) – Syntax für .py prüfte die Notbremse oben, der
+#    Artefakt-Wächter prüft data/** (JSON/JSONL/YAML) und Frontmatter,
+#    der Deploy-Schritt content/layouts/static/hugo.toml; die Repo-Wurzel
+#    und Markdown waren ungeschirmt. Jetzt prüft
+#    `scripts/konfliktmarker_wache.py` den gestageten Stand bzw. den
+#    zu pushenden Diff (Block-Automat statt Zeilenmuster, Haus-Docstrings
+#    mit Sieben-Gleichheitszeichen-Überschriften bleiben sauber).
+#    Ohne python3 oder ohne origin/$BRANCH wird gewarnt; sonst hart.
+#
 #  Umgebung:
 #    BRANCH       Zielbranch (Default: GITHUB_HEAD_REF/REF_NAME, sonst main)
 #    GIT_USER     Committer-Name                (Default: Automation-Bot)
@@ -1100,6 +1113,48 @@ except SyntaxError as exc:
 }
 
 # ========================================================================
+#  NOTBREMSE #1073+ (06.11.2026) – KONFLIKTMARKER: Kein Commit/Push mit
+#  unaufgelöstem Merge, in JEDEM Dateityp.
+#  Am 05.11.2026 landete ein unaufgelöst aufgelöster Merge in
+#  BEFUND-AKTE.md und data/faktenfrische_befunde_state.json auf main
+#  (PR #1088) – die Syntax-Notbremse (#864) sieht nur .py, der
+#  Artefakt-Wächter nur data/** (JSON/JSONL/YAML) und Frontmatter, der
+#  Deploy-Schritt nur content/layouts/static/hugo.toml. Der Block-Automat
+#  (scripts/konfliktmarker_wache.py) prüft den GESTAGETEN Stand bzw. den
+#  zu pushenden Diff über alle Dateitypen und meldet Datei und Zeile.
+#  $1 = staged | push
+# ========================================================================
+konfliktmarker_notbremse() {
+  local modus="$1"
+  if ! command -v python3 >/dev/null 2>&1; then
+    echo "::warning::git_sync.sh: python3 fehlt – Konfliktmarker-Notbremse übersprungen."
+    return 0
+  fi
+  if [ ! -f scripts/konfliktmarker_wache.py ]; then
+    echo "::warning::git_sync.sh: scripts/konfliktmarker_wache.py fehlt – Konfliktmarker-Notbremse übersprungen."
+    return 0
+  fi
+  case "$modus" in
+    staged)
+      python3 scripts/konfliktmarker_wache.py --staged
+      ;;
+    push)
+      # Ist origin/$BRANCH lokal nicht auflösbar, kann der Diff nicht
+      # bestimmt werden – wie der Kurzschluss im Push-Pfad: warnen statt
+      # die Automatisierung an einem nicht erreichbaren Ref einfrieren.
+      if ! git rev-parse --verify -q "origin/$BRANCH" >/dev/null 2>&1; then
+        echo "::warning::git_sync.sh: origin/$BRANCH nicht auflösbar – Konfliktmarker-Push-Prüfung übersprungen."
+        return 0
+      fi
+      python3 scripts/konfliktmarker_wache.py --range "origin/$BRANCH...HEAD"
+      ;;
+    *)
+      return 0
+      ;;
+  esac
+}
+
+# ========================================================================
 #  ABGELEITETE BILDZEILEN NACHZIEHEN (Dauerheilung 30.10.2026)
 #
 #    Die Bildzeile der Top-20-Abbildungen ist ABGELEITET: aus Titel,
@@ -1202,6 +1257,7 @@ if [ "$PUSH_ONLY" = "1" ]; then
     fi
   fi
   syntax_notbremse push || exit 1        # #864: kein Push mit kaputtem Skript
+  konfliktmarker_notbremse push || exit 1  # #1073+: kein Push mit Merge-Markern
   sync_und_push    || exit 1
   echo "git_sync.sh: Push erfolgreich."
   sync_ok
@@ -1252,6 +1308,14 @@ fi
 if ! syntax_notbremse staged; then
   git reset -q || true
   echo "::error::git_sync.sh: Commit abgebrochen (Syntax-Notbremse). Keine Änderung gepusht."
+  exit 1
+fi
+
+# #1073+: Kein Commit, der einen unaufgelösten Merge auf main schiebt –
+# in JEDEM Dateityp (der Befund vom 05.11.2026, PR #1088).
+if ! konfliktmarker_notbremse staged; then
+  git reset -q || true
+  echo "::error::git_sync.sh: Commit abgebrochen (Konfliktmarker-Notbremse). Keine Änderung gepusht."
   exit 1
 fi
 

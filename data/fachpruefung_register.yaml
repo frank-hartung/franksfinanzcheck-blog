@@ -87,7 +87,7 @@ beitraege:
     status: "ausstehend"
     pruefer: null  # hier eintragen: Name, Rolle, Typ, Datum
     zahlen_fundstellen:
-      - "Das Girokonto zahlt dir weiter 0,0 %; das ist ein Modellwert."
+      - "Tagesgeldkonto im Check: Das Girokonto zahlt dir weiter 0,0 %; das ist ein Modellwert."
       - "1,7 % bis 3,2 %; das ist ein Beispielwert."
       - "Die wichtigsten Merkmale im Überblick (Stand: Oktober 2026): - Keine Kündigungsfrist – dein Kapital bleibt jederzeit greifbar - Kein Kursrisiko – im Vergleich zu Aktien oder ETFs schwankt der Wert deines Guthabens nicht "
       - "Drei Gründe sprechen dafür: Dein Geld bleibt sein Geld wert: Die Zinsen liegen bei 1,8 % bis 3,1 %; das ist ein Modellwert."
