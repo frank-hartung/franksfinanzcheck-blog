@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-06T02:39:38Z",
+  "generated_at": "2026-11-06T11:04:43Z",
   "modus": "kandidaten",
-  "commit": "f13ca9a0a64df7138fe46f93d338c61be494cfd7",
+  "commit": "e90775aa43ea74af8dbf67324e23a3804e4f59bf",
   "kapazitaet": {
     "stichtag": "2026-11-06",
     "artikel": 114,
@@ -1344,7 +1344,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "neu versiegelt",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
@@ -1549,7 +1549,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-12",
-      "siegel_drift": "neu versiegelt",
+      "siegel_drift": "unverändert",
       "checks": []
     }
   }
