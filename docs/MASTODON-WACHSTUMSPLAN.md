@@ -1,6 +1,6 @@
 # Mastodon: Profil & organisches Wachstum für FranksFinanzcheck
 
-**Stand: 10.10.2026 · Budget: 0 € Werbeausgaben · Umsetzung: Frank Hartung**
+**Stand: 10.10.2026 (Revision 06.11.2026: Profil vollständig an die Mo/Mi/Fr-Veröffentlichungsroutine angepasst) · Budget: 0 € Werbeausgaben · Umsetzung: Frank Hartung**
 
 ## 1. Status – vorbereitet ist nicht live
 
@@ -10,7 +10,7 @@ Die Änderungen liegen im Repository. Das Live-Profil wurde in dieser Sitzung **
 
 Befund aus vorhandenen Daten:
 
-- Der bisherige Profil-Sync setzte „1.800 € sparen“, „25+ Guides“ und einen festen Veröffentlichungsrhythmus. Diese Claims sind für ein dauerhaftes Profil ungeeignet: Sparsumme unbelegt, Zähler/Zeiten veralten.
+- Der bisherige Profil-Sync setzte „1.800 € sparen“, „25+ Guides“ und einen festen Veröffentlichungsrhythmus. Sparsumme und Zähler sind für ein dauerhaftes Profil ungeeignet: Sparsumme unbelegt, Zähler veralten. Die **Publikationsroutine Mo/Mi/Fr** ist dagegen eine **Dauervorgabe** (docs/CADENCE-REPORT.md Regel 2: nur montags, mittwochs und freitags – 2–3 Artikel pro Publikationstag, fix) – sie wird seit 06.11.2026 wieder ausdrücklich im Profil geführt.
 - `data/social/performance.yaml` vom 10.10.2026 enthält elf gemessene Beiträge mit jeweils Engagement-Score 0. Das ist **kein Nachweis für null Impressionen** und keine aktuelle Live-Prüfung.
 - Der Bericht `SOCIAL-PERF-FEEDBACK-PREMIUM-2026-10-03.md` nennt null Follower am 03.10.; daraus darf keine heutige Followerzahl abgeleitet werden.
 - Die Website hat schon `rel="me"` im Head und im Footer. Das wird nicht als neue Verbesserung verkauft. Die Über-Seite erhält zusätzlich einen direkten Austausch-Link.
@@ -26,17 +26,21 @@ Befund aus vorhandenen Daten:
 
 Persönlicher Absender plus wiedererkennbare Marke, ohne unbewiesenes Sparversprechen.
 
-### Bio – 470 Zeichen, ohne Codeblock-Markierung kopieren
+### Bio – 498 Zeichen, ohne Codeblock-Markierung kopieren
 
 > Ich bin Frank Hartung. Ich helfe dir, Fixkosten nachvollziehbar zu prüfen – mit Rechnungen und Checklisten statt Wechsel-Druck.
 >
 > Strom & Gas · Internet · Versicherungen · Konto · Budget · Mobilität
 >
+> Neue Ratgeber: Mo/Mi/Fr – 2–3 pro Publikationstag.
+>
 > Mein 4K-Kompass: Kosten sehen, Konditionen rechnen, Kündigungsfenster sichern, Kurs halten.
 >
-> KI-unterstützte Ratgeber. Der Blog enthält Affiliate-Links (Werbung). Keine individuelle Finanzberatung.
+> KI-unterstützte Ratgeber · Affiliate-Links (Werbung) · Keine individuelle Finanzberatung.
 >
-> Welche Fixkosten möchtest du als Nächstes prüfen? #Fixkosten #GeldSparen
+> Welche Fixkosten prüfst du als Nächstes? #Fixkosten #GeldSparen
+
+Die Zeile „Neue Ratgeber: Mo/Mi/Fr – 2–3 pro Publikationstag“ ist die **Dauervorgabe** der Publikationsroutine (montags, mittwochs, freitags – 2–3 Artikel pro Publikationstag, `docs/CADENCE-REPORT.md` Regel 2). Sie ist eine stabile, überprüfbare Angabe – kein Sparversprechen, kein Reichweitenziel und kein Uhrzeitversprechen.
 
 ### Vier Profilfelder
 
@@ -119,7 +123,8 @@ https://franksfinanzcheck.de/transparenz/
 
 Für die ersten 30 Tage als **Test**, nicht als Plattformgesetz:
 
-- Drei redaktionell ausgewählte eigene Beiträge pro Woche, davon mindestens zwei mit vollständigem Mini-Nutzen direkt im Text. Ein hilfreicher Beitrag darf ohne Link auskommen.
+- Drei redaktionell ausgewählte eigene Beiträge pro Woche – jeweils an den Blog-Publikationstagen **Mo/Mi/Fr**, davon mindestens zwei mit vollständigem Mini-Nutzen direkt im Text. Ein hilfreicher Beitrag darf ohne Link auskommen.
+- Seit 06.11.2026 plant auch der Social-Autopilot **nur Mo/Mi/Fr** für Mastodon (`data/social/channels.yaml`: `cadence.days: [0, 2, 4]` – Umstellung von täglich auf die Dauervorgabe). Manuell geplante Beiträge vor dem Stichtag, die auf Sa/Do fielen, wurden transparent auf „zurückgestellt“ gesetzt und werden im nächsten Plan-Roll auf einen Publikationstag eingeplant.
 - Blog-Autopilot und manuelle Posts gemeinsam zählen. Bestehendes Limit: maximal zwei automatische Mastodon-Posts/Tag; manuelle Editor-Posts werden vom Autopilot nicht mitgezählt. Nicht zwei automatische Linkposts plus einen manuellen Beitrag stapeln. An einem manuellen Veröffentlichungstag den automatischen Kanal bei Bedarf pausieren; Plan nicht zusätzlich mit Backfills auffüllen.
 - Bestehende Recycling-Sperre nicht für Reichweite umgehen. Kein identisches Wiederholen oder Löschen/Neuversenden für einen vermeintlichen Feed-Vorteil.
 - Pro Beitrag zwei bis drei passende CamelCase-Hashtags als Starttest, keine Trendlisten. Beispiele nach Thema: `#StromSparen`, `#EnergieSparen`, `#Internet`, `#Haushaltsbudget`, `#Fixkosten`. Erst im Hashtag-Feed ansehen, ob aktuelle deutschsprachige Gespräche passen. Es gibt hier keine Live-Bestätigung der Größe dieser Communities.
@@ -267,3 +272,25 @@ Optionaler Linktest zum Cockpit: `https://franksfinanzcheck.de/cockpit/?utm_sour
 - Rückkanal aus vorhandenem Cache neu berechnet: elf gemessene Beiträge, alle Gewichte und Cooldown-Faktoren 1.0, `has_signal: false`, keine Top-/Flop-Liste. Historie protokolliert ausdrücklich keinen Sieger. Keine neuen Mastodon-Kennzahlen abgerufen.
 - `git diff --check`: bestanden.
 - Vorhandene `ResourceWarning`-Hinweise im Kalender-Selbsttest (nicht geschlossene YAML-Dateien) bleiben außerhalb dieser Änderung. Kein vollständiger Hugo-/Browser-Build: Hugo ist in dieser Arbeitsumgebung nicht installiert.
+
+---
+
+## Nachtrag 06.11.2026 – Profil vollständig auf die Mo/Mi/Fr-Publikationsroutine ausgerichtet
+
+Auftrag Frank (Prompt vom 06.11.2026): Das Mastodon-Profil vollständig an die Veröffentlichungsroutine Montag/Mittwoch/Freitag anpassen – Highend-Level einer Profi-Agentur. Umgesetzt ohne Live-Zugriffe (kein Abruf, kein Versand); Live-Übernahme manuell über *Actions → Mastodon-Profil-Sync* (erst `dry_run=true`, dann `false`).
+
+**Was sich geändert hat**
+
+- **Bio (498/500):** neue Zeile „Neue Ratgeber: Mo/Mi/Fr – 2–3 pro Publikationstag.“ – die Dauervorgabe aus `docs/CADENCE-REPORT.md` Regel 2, kein Reichweiten- oder Uhrzeitversprechen. KI-/Affiliate-Transparenz gestrafft („·“-Trennung), Frage-Aufruf behalten. Anzeigename unverändert („Frank | FranksFinanzcheck“).
+- **Profil-Sync** (`scripts/mastodon_profile_sync.py`): Bio-Text, Kopfkommentar und Report-Baustein („Veröffentlichungsroutine“-Zeile + Einordnung) aktualisiert; Qualitäts-Check „Publikationsroutine Mo/Mi/Fr (Dauervorgabe)“ ergänzt.
+- **Autopilot-Taktung** (`data/social/channels.yaml`): `cadence.days: [0, 2, 4]` (vorher täglich). Uhrzeiten (07:30/11:30/17:30/20:00) und `max_per_day: 2` bewusst unverändert – die Routine betrifft die Publikationstage, nicht die Uhrzeit.
+- **Plan** (`data/social/schedule.yaml`): vier bereits geplante Mastodon-Beiträge auf Nicht-Publikationstagen (2 × Sa 07.11., Sa 14.11., Do 19.11.) transparent auf `status: blocked` gestellt (Grund vermerkt). Sie werden beim nächsten Plan-Roll automatisch auf einen Mo/Mi/Fr-Slot eingeplant (ihr Slug ist nicht mehr belegt).
+- **Kalender** (`data/social/kalender/`, `static/kalender/`): mit `python3 scripts/social_calendar.py --build` neu erzeugt; „Sendetage: Mo, Mi, Fr“ ist jetzt die sichtbare Kanal-Kriterien-Zeile.
+- **Tests** (`scripts/tests/test_mastodon_profile_sync.py`): „Mo/Mi/Fr“ ist kein verbotener, sondern ein geforderter Bestandteil der Bio; neuer Wächter-Test `test_bio_nennt_publikationsroutine_als_dauervorgabe` (Mo/Mi/Fr + Publikationstag gefordert, MESZ/Uhr verboten, ≤500 Zeichen).
+
+**Agentur-Einordnung**
+
+- Ein Profil, das die Publikationsroutine nennt, setzt eine Erwartung, die der Redaktionskalender tatsächlich einlöst (DAUERVORGABE, technisch erzwungen durch `cadence_guard.py` und das Deploy-Gate). Das ist belastbarer als jeder Reichweiten-Claim.
+- Uhrzeiten bleiben bewusst weich (Wachstumsplan testet 07:30–20:00 abwechselnd); „MESZ“ oder feste Uhrzeiten im Profil würden bei Zeitumstellung und Slot-Vergleichen veralten.
+- Off-Day-Reste im Plan sind kein Datenverlust: `blocked` ist der vorgesehene Rückstellstatus des Autopiloten; die betroffenen Artikel kehren in den Mo/Mi/Fr-Plan zurück.
+- Der Abschlussbericht liegt im Repo: `MASTODON-PROFIL-HIGHEND-2026-11-06.md`.
