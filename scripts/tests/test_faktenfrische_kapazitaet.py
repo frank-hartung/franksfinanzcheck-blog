@@ -758,9 +758,19 @@ class AusfallToleranzTest(unittest.TestCase):
 
     AUSFALL = 7
 
+    @staticmethod
+    def _stand_tag(artikel: list[dict]) -> dt.date:
+        """Der Stand des Bestands: der letzte Prüftag, nie die Wanduhr.
+
+        Die Uhr-Probe (`--offset 97`) stellt die Uhr vor. Ein Test, der `heute`
+        aus der Uhr liest, fällt dann auf einen überfälligen Bestand herein.
+        Der letzte Prüftag ist der Stand, auf dem der Bot tatsächlich aufsetzt.
+        """
+        return max(a["faktencheck"] for a in artikel if a.get("faktencheck"))
+
     def _verletzungen(self, cfg: dict, start: int, extra: int = 60) -> int:
         artikel = ff.alle_artikel("alle")
-        heute = ff.heute()
+        heute = self._stand_tag(artikel)
         state = [dict(a) for a in artikel]
         intervall = {a["slug"]: int(ff.faelligkeit(a, cfg, heute)["intervall"])
                      for a in state}
