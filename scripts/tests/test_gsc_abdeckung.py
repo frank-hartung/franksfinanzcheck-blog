@@ -984,3 +984,292 @@ class TitelUeberschneidung(unittest.TestCase):
         self.assertIsNotNone(treffer)
         self.assertEqual(treffer["cluster"], "K3-frugalismus")
         self.assertIsNone(g.cluster_fuer_pillar("gibt-es-nicht"))
+
+
+class SelbstheilungVerwaisterSeiten(unittest.TestCase):
+    """#1097 (06.11.2026): Ein Kriterium, das sich täglich neu rot misst.
+
+    DER BEFUND
+    ----------
+    Am 06.11.2026 um 02:30/02:31 UTC stellte die Reserve-Automatik zwei
+    Artikel live (`2026-10-12-energieausweis…`, `2026-10-28-oekostrom…`).
+    Kein einziger Live-Artikel verlinkte sie. Der GSC-Tageslauf um 12:55 UTC
+    maß deshalb „Seiten ohne redaktionellen Inlink: 2“ – die Abnahme des
+    Moduls kippte von ✅ auf 🛑 – und schrieb wie an jedem Tag nur einen
+    Auftrag. Ausgeführt hat ihn niemand: `--apply` war ein Handbefehl.
+
+    Diese Tests frieren die Heilung ein: Auswahl, Sperren, Ort, Beleg und
+    Nachmessung. Sie laufen ausschließlich in einem temporären Repo – die
+    Hausregel C15 („kein Selbsttest schreibt in den echten Bestand“) gilt
+    auch für den Heiler, inklusive `data/verlinkung_history.jsonl`.
+    """
+
+    def setUp(self) -> None:
+        self._tmp = tempfile.TemporaryDirectory()
+        self.tmp = Path(self._tmp.name)
+        self.repo = self._kleines_repo()
+
+    def tearDown(self) -> None:
+        self._tmp.cleanup()
+
+    # ------------------------------------------------------------------ Fixture
+    def _kleines_repo(self, *, siegel: str = "", lesetipp: bool = False,
+                      korridor: int = 1) -> Path:
+        """Ein Repo mit genau einer Insel.
+
+        `quelle` verlinkt `insel` NICHT und hat eine „Weiterlesen“-Zeile.
+        `insel` verlinkt `quelle` – damit hat nur `insel` 0 Inlinks.
+        """
+        repo = self.tmp / "repo"
+
+        def post(slug: str, fm: str, body: str) -> None:
+            p = repo / "content" / "posts" / slug
+            p.mkdir(parents=True, exist_ok=True)
+            (p / "index.md").write_text(f"---\n{fm}---\n\n{body}\n", encoding="utf-8")
+
+        (repo / "content").mkdir(parents=True, exist_ok=True)
+        (repo / "content" / "_index.md").write_text("---\ntitle: Start\n---\n",
+                                                    encoding="utf-8")
+        (repo / "content" / "pillar").mkdir(parents=True, exist_ok=True)
+        (repo / "content" / "pillar" / "strom").mkdir(parents=True, exist_ok=True)
+        (repo / "content" / "pillar" / "strom" / "index.md").write_text(
+            "---\ntitle: Ratgeber Strom\ndraft: false\n---\n\nHub.\n\n"
+            "**Weiterlesen:** [Start](/)\n", encoding="utf-8")
+
+        weiter = ["[Ratgeber Strom](../../pillar/strom/)"]
+        weiter += ["[Thema %d](../../posts/insel/)" % i for i in range(korridor - 1)]
+        zeile = " · ".join(weiter)
+        if lesetipp:
+            # Beide Formen kommen im Bestand vor: Lesetipp in derselben Zeile
+            # (`2026-09-30-last-minute-…`) und als eigene Zeile
+            # (`2026-08-31-nachtstrom-…`).
+            lese = "[Zählerstand ablesen](../../posts/tipp/)"
+            zeile += (" **Lesetipp:** " + lese if lesetipp == "inline"
+                      else "\n**Lesetipp:** " + lese)
+        post("quelle",
+             'title: "Quelle: Worauf es ankommt"\ndate: 2026-10-01\ndraft: false\n'
+             'pillar: "strom-sparen"\n' + siegel,
+             f"Text. \n\n**Weiterlesen:** {zeile}")
+        post("tipp", 'title: "Tipp"\ndate: 2026-09-28\ndraft: false\n',
+             "Text.\n\n**Weiterlesen:** [Start](/)" )
+        post("insel",
+             'title: "Insel: Was du wissen musst"\ndate: 2026-10-28\ndraft: false\n'
+             'pillar: "strom-sparen"\n',
+             "Text mit [Quelle](../../posts/quelle/).\n\n**Weiterlesen:** [Start](/)")
+        return repo
+
+    def _wahrheit(self) -> dict:
+        return g.repo_wahrheit(self.repo)
+
+    # ------------------------------------------------------------------ Tests
+    def _quelle_text(self, repo: Path | None = None) -> str:
+        return ((repo or self.repo) / "content" / "posts" / "quelle" /
+                "index.md").read_text(encoding="utf-8")
+
+    def _weiterlesen(self, repo: Path | None = None) -> str:
+        return [z for z in self._quelle_text(repo).splitlines()
+                if z.startswith("**Weiterlesen:**")][0]
+
+    def test_insel_wird_geheilt_und_nachgemessen(self) -> None:
+        wh = self._wahrheit()
+        vorher = g.redaktionelle_links(self.repo)
+        self.assertIn("/posts/insel/", vorher["ohne_ein"])
+        bericht = g.verlinkung_heilen(wh, vorher, root=self.repo)
+        self.assertIn("/posts/insel/", bericht["vorher_ohne_inlink"])
+        self.assertTrue(any(p["ziel"] == "/posts/insel/" and p["quelle"] == "/posts/quelle/"
+                            for p in bericht["eingefuegt"]), bericht["eingefuegt"])
+        self.assertNotIn("/posts/insel/", bericht["nachher_ohne_inlink"])
+        self.assertEqual(bericht["status"], "geheilt")
+        # Der Link steht in der Weiterlesen-Zeile der Quelle …
+        self.assertIn("[Insel](../../posts/insel/)", self._weiterlesen())
+
+    def test_heilung_aendert_nur_die_weiterlesen_zeile(self) -> None:
+        vorher = self._quelle_text().splitlines()
+        g.verlinkung_heilen(self._wahrheit(), root=self.repo)
+        nachher = self._quelle_text().splitlines()
+        self.assertEqual(len(vorher), len(nachher))
+        geaendert = [i for i, (a, b) in enumerate(zip(vorher, nachher)) if a != b]
+        self.assertEqual(len(geaendert), 1)
+        self.assertTrue(nachher[geaendert[0]].startswith("**Weiterlesen:**"))
+
+    def test_heilung_konvergiert_ohne_doppelte_links(self) -> None:
+        """Ziel sind 2 Inlinks je Inhaltsseite – erreicht wird es in Runden.
+
+        Wichtig ist nicht „ein Lauf genügt“, sondern: kein Link wird zweimal
+        gesetzt, und nach wenigen Runden ist der Befund leer. (Der Tageslauf
+        läuft täglich – die Konvergenz über Läufe ist der Normalfall.)
+        """
+        gesetzt: set[tuple[str, str]] = set()
+        for _ in range(4):
+            bericht = g.verlinkung_heilen(g.repo_wahrheit(self.repo), root=self.repo)
+            for posten in bericht["eingefuegt"]:
+                paar = (posten["quelle"], posten["ziel"])
+                self.assertNotIn(paar, gesetzt, f"Link doppelt gesetzt: {paar}")
+                gesetzt.add(paar)
+            if not bericht["eingefuegt"]:
+                break
+        self.assertTrue(gesetzt)
+        endstand = g.verlinkung_heilen(g.repo_wahrheit(self.repo), root=self.repo,
+                                       schreiben=False)
+        self.assertEqual(endstand["vorher_ohne_inlink"], [])
+
+    def test_trockenlauf_schreibt_nichts(self) -> None:
+        vorher = self._quelle_text()
+        bericht = g.verlinkung_heilen(self._wahrheit(), root=self.repo, schreiben=False)
+        self.assertFalse(bericht["geschrieben"])
+        self.assertTrue(bericht["eingefuegt"])
+        self.assertEqual(self._quelle_text(), vorher)
+        self.assertFalse((self.repo / "data" / "verlinkung_history.jsonl").exists())
+        # Der Trockenlauf sagt trotzdem die Wahrheit über den Ist-Zustand.
+        self.assertIn("/posts/insel/", bericht["vorher_ohne_inlink"])
+        self.assertEqual(bericht["status"], "geplant")
+
+    def test_ymyl_siegel_sperrt_die_quelle(self) -> None:
+        """Ein versiegelter Artikel wird NIE automatisch verändert (E17)."""
+        repo = self._kleines_repo(
+            siegel='redaktionelle_pruefung:\n  risikoklasse: "hoch"\n'
+                   '  status: "ausstehend"\n  inhalt_sha256: "' + "a" * 64 + '\"\n')
+        bericht = g.verlinkung_heilen(g.repo_wahrheit(repo), root=repo)
+        self.assertFalse([p for p in bericht["eingefuegt"]
+                          if p["quelle"] == "/posts/quelle/"],
+                         "Versiegelte Quelle wurde verändert")
+        self.assertTrue(any(p["quelle"] == "/posts/quelle/" and "Siegel" in p["meldung"]
+                            for p in bericht["verweigert"]), bericht["verweigert"])
+        self.assertNotIn("insel", self._quelle_text(repo))
+
+    def test_freigabe_ohne_hash_sperrt_ebenfalls(self) -> None:
+        repo = self._kleines_repo(
+            siegel='redaktionelle_pruefung:\n  risikoklasse: "hoch"\n'
+                   '  status: "freigegeben"\n')
+        bericht = g.verlinkung_heilen(g.repo_wahrheit(repo), root=repo)
+        self.assertFalse([p for p in bericht["eingefuegt"]
+                          if p["quelle"] == "/posts/quelle/"])
+        self.assertTrue(any(p["quelle"] == "/posts/quelle/"
+                            and "freigegeben" in p["meldung"]
+                            for p in bericht["verweigert"]), bericht["verweigert"])
+
+    def test_lesetipp_in_derselben_zeile_bleibt_hinten(self) -> None:
+        """Der neue Link gehört zur Weiterlesen-Liste, nicht in den Lesetipp."""
+        repo = self._kleines_repo(lesetipp="inline")
+        g.verlinkung_heilen(g.repo_wahrheit(repo), root=repo)
+        zeile = self._weiterlesen(repo)
+        self.assertIn("[Insel]", zeile)
+        self.assertLess(zeile.index("[Insel]"), zeile.index("**Lesetipp:**"))
+
+    def test_lesetipp_als_eigene_zeile_bleibt_unberuehrt(self) -> None:
+        repo = self._kleines_repo(lesetipp="eigene-zeile")
+        g.verlinkung_heilen(g.repo_wahrheit(repo), root=repo)
+        zeilen = self._quelle_text(repo).splitlines()
+        weiter = [z for z in zeilen if z.startswith("**Weiterlesen:**")][0]
+        lesetipp = [z for z in zeilen if z.startswith("**Lesetipp:**")][0]
+        self.assertIn("[Insel]", weiter)
+        self.assertNotIn("[Insel]", lesetipp)
+
+    def test_max_begrenzt_die_eingriffe(self) -> None:
+        bericht = g.verlinkung_heilen(self._wahrheit(), root=self.repo, max_n=0)
+        self.assertEqual(bericht["eingefuegt"], [])
+        self.assertIn("/posts/insel/", bericht["offen"])
+        self.assertEqual(bericht["status"], "offen")
+
+    def test_jeder_eingriff_steht_im_beleg(self) -> None:
+        g.verlinkung_heilen(self._wahrheit(), root=self.repo)
+        beleg = self.repo / "data" / "verlinkung_history.jsonl"
+        self.assertTrue(beleg.exists())
+        zeilen = [json.loads(z) for z in beleg.read_text(encoding="utf-8").splitlines() if z]
+        self.assertTrue(any(z["ziel"] == "/posts/insel/" and z["quelle"] == "/posts/quelle/"
+                            for z in zeilen), zeilen)
+        for z in zeilen:
+            self.assertIn("ts", z)
+
+    def test_beleg_waechst_append_only(self) -> None:
+        beleg = self.repo / "data" / "verlinkung_history.jsonl"
+        g.verlinkung_heilen(self._wahrheit(), root=self.repo)
+        vorher = beleg.read_text(encoding="utf-8")
+        g.verlinkung_heilen(g.repo_wahrheit(self.repo), root=self.repo)
+        nachher = beleg.read_text(encoding="utf-8")
+        self.assertTrue(nachher.startswith(vorher), "Beleg wurde umgeschrieben")
+        self.assertGreaterEqual(len(nachher.splitlines()), len(vorher.splitlines()))
+
+
+class PruefprotokollLesen(unittest.TestCase):
+    """YMYL-Sperre ohne YAML-Abhängigkeit, zeilenweise und linear."""
+
+    def test_status_und_siegel(self) -> None:
+        fm = ('title: X\nredaktionelle_pruefung:\n  risikoklasse: "hoch"\n'
+              '  status: "Freigegeben"\n  inhalt_sha256: "abc"\nother: 1\n')
+        self.assertEqual(g.pruefprotokoll(fm), ("freigegeben", True))
+
+    def test_ohne_block_kein_siegel(self) -> None:
+        self.assertEqual(g.pruefprotokoll("title: X\ninhalt_sha256: nur-text\n"),
+                         ("", False))
+
+    def test_leerer_hash_ist_kein_siegel(self) -> None:
+        fm = 'redaktionelle_pruefung:\n  status: ausstehend\n  inhalt_sha256: ""\n'
+        self.assertEqual(g.pruefprotokoll(fm), ("ausstehend", False))
+
+    def test_lange_eingabe_bleibt_linear(self) -> None:
+        fm = "redaktionelle_pruefung:\n" + "  x: y\n" * 40000
+        start = time.perf_counter()
+        self.assertEqual(g.pruefprotokoll(fm), ("", False))
+        self.assertLess(time.perf_counter() - start, 1.0)
+
+
+class BestandOhneInseln(unittest.TestCase):
+    """Die Wache über den ECHTEN Bestand – fail-closed, aber nicht blind.
+
+    Ein Kriterium, das nur im Bericht steht, ist ein Wunsch. Diese Prüfung
+    macht aus „keine Inhaltsseite ohne redaktionellen Inlink“ eine Bedingung:
+    Wer eine Seite live stellt, ohne sie zu verlinken, sieht sie hier rot.
+
+    Geheilt wird nicht im Test (Tests schreiben nicht, C15), sondern durch
+    `python3 scripts/gsc_abdeckung.py --verlinkung --heilen` – im Tageslauf
+    automatisch, vor der Messung.
+    """
+
+    def test_keine_inhaltsseite_ohne_redaktionellen_inlink(self) -> None:
+        vl = g.redaktionelle_links()
+        ohne = sorted(u for u in vl["ohne_ein"] if g._inhaltsseite(u))
+        self.assertEqual(ohne, [],
+                         "Inhaltsseiten ohne redaktionellen Inlink – heilen mit "
+                         "`--verlinkung --heilen` (oder redaktionell entscheiden): "
+                         + ", ".join(ohne))
+
+    def test_jede_inhaltsseite_hat_einen_ausgehenden_link(self) -> None:
+        vl = g.redaktionelle_links()
+        ohne = sorted(u for u in vl["ohne_aus"] if g._inhaltsseite(u))
+        self.assertEqual(ohne, [],
+                         "Inhaltsseiten ohne ausgehenden redaktionellen Link: "
+                         + ", ".join(ohne))
+
+
+class SchreibenOhneDatenverlust(unittest.TestCase):
+    """Der Heiler darf nichts kaputt machen, was er nicht lesen kann (C15-Nähe).
+
+    Ein `errors="replace"` beim Lesen und ein volles Zurückschreiben ist ein
+    Datenverlust mit gutem Gewissen: Jedes ungültige Byte würde still durch
+    U+FFFD ersetzt. Deshalb: streng lesen, atomar schreiben.
+    """
+
+    def setUp(self) -> None:
+        self._tmp = tempfile.TemporaryDirectory()
+        self.tmp = Path(self._tmp.name)
+
+    def tearDown(self) -> None:
+        self._tmp.cleanup()
+
+    def test_nicht_utf8_wird_nicht_ueberschrieben(self) -> None:
+        datei = self.tmp / "index.md"
+        roh = b"---\ntitle: X\n---\n\n**Weiterlesen:** Alt\n\xff\xfe kaputt\n"
+        datei.write_bytes(roh)
+        ok, meldung = g.link_einfuegen(datei, "/posts/ziel/", "Ziel")
+        self.assertFalse(ok)
+        self.assertIn("UTF-8", meldung)
+        self.assertEqual(datei.read_bytes(), roh)
+
+    def test_schreiben_laesst_keine_temporaerdatei_zurueck(self) -> None:
+        datei = self.tmp / "index.md"
+        datei.write_text("---\ntitle: X\n---\n\n**Weiterlesen:** [Start](/)\n",
+                         encoding="utf-8")
+        ok, _ = g.link_einfuegen(datei, "/posts/ziel/", "Ziel")
+        self.assertTrue(ok)
+        self.assertEqual(sorted(p.name for p in self.tmp.iterdir()), ["index.md"])

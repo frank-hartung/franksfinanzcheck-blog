@@ -46,6 +46,18 @@ Dieses Modul schließt die Lücke auf drei Ebenen:
      Aufwand, erwartete Wirkung, Beleg, Eigentümer: Mensch oder Automat). Kein
      Vorschlag ohne Zahl, keine Zahl ohne Quelle.
 
+  4. SELBSTHEILEN (`--verlinkung --heilen`, seit 06.11.2026, #1097)
+     Ein Kriterium, das jeden Tag neu rot werden kann, ist keine Wache, sondern
+     eine Warteschlange. Am 06.11.2026 veröffentlichte die Reserve-Automatik um
+     02:30 Uhr zwei Artikel, die kein einziger Live-Artikel verlinkte; der
+     Tageslauf um 12:55 Uhr maß „Seiten ohne redaktionellen Inlink: 2“ – und
+     schrieb wie jeden Tag nur einen Auftrag, den niemand ausführte. Deshalb
+     heilt `--heilen` den Befund selbst: Es prüft die Sperren (YMYL-Siegel,
+     Goldkorridor, Entwürfe), fügt die vom Auftrag gewählten Links in die
+     „Weiterlesen“-Zeile ein, belegt jeden Eingriff in
+     `data/verlinkung_history.jsonl` und MISST danach nach. Bleibt ein Befund
+     offen, sagt es das mit Exit 1; es heilt nicht auf Verdacht.
+
 WAS DAS MODUL AUSDRÜCKLICH NICHT TUT
   * Es erfindet keine URL. Fehlt die Detail-Liste, steht das als offene
     Beweisfrage im Befund – nicht als geschätzte Zahl in der Tabelle.
@@ -70,7 +82,11 @@ AUFRUF
     # 4) Aus einer 404-Detail-Liste Weiterleitungs-Vorschläge ableiten
     python3 scripts/gsc_abdeckung.py --vorschlaege details/"Nicht gefunden (404).csv"
 
-    python3 scripts/gsc_abdeckung.py --selftest         # 97 Fälle, offline
+    # 5) Verwaiste Seiten heilen (Auftrag berechnen, prüfen, schreiben, nachmessen)
+    python3 scripts/gsc_abdeckung.py --verlinkung --heilen --max 10
+    python3 scripts/gsc_abdeckung.py --verlinkung --wache    # nur prüfen (Exit 1 bei Befund)
+
+    python3 scripts/gsc_abdeckung.py --selftest         # 111 Fälle, offline
 
 WO DIE EXPORTE HERKOMMEN
     Search Console → Indexierung → Seiten → oben rechts „Exportieren“.
@@ -86,7 +102,8 @@ ARTEFAKTE
     data/gsc/abdeckung/befund.json      Ergebnis der Gegenrechnung (maschinenlesbar)
     data/gsc/abdeckung/befund.md        derselbe Befund als Bericht
 
-EXIT: 0 = grün · 1 = Befund (Gate rot oder Export widersprüchlich) · 2 = Werkzeugfehler
+EXIT: 0 = grün · 1 = Befund (Gate rot, Export widersprüchlich oder Heilung
+      unvollständig) · 2 = Werkzeugfehler
 """
 from __future__ import annotations
 
@@ -2840,7 +2857,13 @@ def verlinkungs_auftrag(wahrheit: dict, verlinkung: dict, grenze: int = 2,
                     continue
             if belegt.get(quelle, 0) >= max_je_quelle:
                 continue
-            if ziel in (info.get("quellen") or []):
+            # „Verlinkt diese Quelle das Ziel schon?“ – gefragt wird nach den
+            # INLINKS des Ziels. Bis 06.11.2026 stand hier `ziel in
+            # info["quellen"]`: Das prüfte die Gegenrichtung („verlinkt das
+            # Ziel die Quelle?“) und warf damit jede Quelle weg, die das Ziel
+            # selbst verlinkt – also genau die thematisch nächsten Nachbarn.
+            # Gefunden bei der Selbstheilung von #1097.
+            if quelle in (seiten.get(ziel, {}).get("quellen") or []):
                 continue
             if quelle in (wahrheit["noindex"] + ["/404/"]):
                 continue
@@ -2892,7 +2915,85 @@ def anker_kurz(titel: str, grenze: int = 6) -> str:
     return text or (titel or "").strip()
 
 
-def link_einfuegen(pfad: Path, ziel_url: str, anker: str) -> tuple[bool, str]:
+# --------------------------------------------------------------------------
+#  Selbstheilung verwaister Seiten (06.11.2026, #1097)
+# --------------------------------------------------------------------------
+# Ein Artikel ohne einen einzigen redaktionellen Inlink ist für einen Crawler
+# nur über Sitemap und Template-Blöcke erreichbar – „verwaist“. Die Abnahme
+# dieses Moduls verlangt seit dem 26.10.2026 „keine Inhaltsseite ohne
+# redaktionellen Inlink“. Am 06.11.2026 stand die Zeile trotzdem auf 🛑:
+# Die Reserve-Automatik hatte um 02:30 Uhr zwei Artikel live gestellt, der
+# Tageslauf maß um 12:55 Uhr zwei Inseln – und schrieb, wie an jedem Tag,
+# nur einen Auftrag (`verlinkungsauftrag.json`), den ein Mensch ausführen
+# sollte. Ein Kriterium, das sich täglich neu rot misst und dessen Heilung
+# niemand anstößt, ist keine Wache, sondern eine Warteschlange.
+#
+# Deshalb heilt dieser Abschnitt den Befund selbst. Drei Sperren bleiben hart:
+#   1. YMYL: Ein Artikel mit `inhalt_sha256` oder freigegebenem Prüfprotokoll
+#      wird NIE automatisch verändert – sonst entwertet die Heilung ein Siegel
+#      (editorial_review_gate.py, Regel E17).
+#   2. Goldkorridor: höchstens 9 interne Post-Links je Artikel, gezählt wie
+#      `link_density_guard.py` zählt (sonst Link-Spam).
+#   3. Ort: ausschließlich die kuratierte „Weiterlesen“-Zeile. Fehlt sie,
+#      entscheidet die Redaktion – es wird nichts erfunden.
+YMYL_FREIGABE = ("freigegeben", "approved")
+# Marker, hinter denen die „Weiterlesen“-Zeile einen zweiten, eigenen Block
+# beginnt. Ein neuer Link gehört davor, nicht hinter den Lesetipp.
+LESETIPP_MARKER = ("**Lesetipp:**", "**Mehr zum Thema:**", "**Mehr dazu:**")
+# So viele Links darf ein Lauf höchstens einfügen. Bewusst kleiner als das
+# Tageskontingent der API: Ein Lauf, der 50 Artikel gleichzeitig umschreibt,
+# ist kein Heiler, sondern ein Umbau – und im Diff nicht mehr prüfbar.
+HEILUNG_MAX = 10
+RE_WEITERLESEN = re.compile(r"^\*\*Weiterlesen:\*\*.*$", re.M)
+
+
+def pruefprotokoll(fm: str) -> tuple[str, bool]:
+    """Liest `redaktionelle_pruefung` zeilenweise (kein mehrzeiliges Regex).
+
+    Rückgabe: (status, hat_siegel). Ein mehrzeiliges Muster über ein ganzes
+    Frontmatter wäre genau die Klasse, die als `py/redos` gemeldet wird –
+    deshalb Zeile für Zeile mit klarem Geltungsbereich (Einrückung).
+    """
+    status = ""
+    siegel = False
+    im_block = False
+    for zeile in fm.splitlines():
+        if not zeile.strip():
+            continue
+        if not zeile.startswith((" ", "\t")):
+            im_block = zeile.split(":", 1)[0].strip() == "redaktionelle_pruefung"
+            continue
+        if not im_block:
+            continue
+        schluessel, _, wert = zeile.strip().partition(":")
+        schluessel = schluessel.strip()
+        if schluessel == "status":
+            status = wert.strip().strip('"').strip("'").lower()
+        elif schluessel == "inhalt_sha256" and wert.strip().strip('"').strip("'"):
+            siegel = True
+    return status, siegel
+
+
+def schreibgeschuetzt(pfad: Path) -> tuple[bool, str]:
+    """Darf dieser Artikel automatisch verändert werden? (fail-closed)
+
+    Dieselbe Regel wie `editorial_review_gate.automatic_write_protected`:
+    Ein Siegel (`inhalt_sha256`) bindet die Freigabe an die Fassung; ein
+    Status „freigegeben/approved“ schützt den Text auch ohne Hash. Wer ihn
+    hier ignorierte, würde beim nächsten PR die Siegelwache rot machen –
+    und die Heilung wäre der Defekt.
+    """
+    fm = _frontmatter(pfad)
+    status, siegel = pruefprotokoll(fm)
+    if siegel:
+        return True, "YMYL-Siegel (inhalt_sha256) – Fassung ist gebunden"
+    if status in YMYL_FREIGABE:
+        return True, f"redaktionell freigegeben (status: {status})"
+    return False, ""
+
+
+def link_einfuegen(pfad: Path, ziel_url: str, anker: str,
+                   schreiben: bool = True) -> tuple[bool, str]:
     """Hängt einen redaktionellen Link an die „Weiterlesen“-Zeile.
 
     Warum genau dort: Jeder Artikel dieses Blogs endet mit einer kuratierten
@@ -2900,21 +3001,143 @@ def link_einfuegen(pfad: Path, ziel_url: str, anker: str) -> tuple[bool, str]:
     sichtbar und – anders als ein Satz mitten im Fließtext – keine
     redaktionelle Aussage, die eine Maschine nicht treffen darf. Fehlt die
     Zeile, wird NICHTS eingefügt (dann entscheidet die Redaktion).
+
+    Seit 06.11.2026 gilt zusätzlich: Ein gesperrter Artikel (YMYL-Siegel oder
+    Freigabe) wird nicht angefasst, und ein vorhandener `**Lesetipp:**`-Block
+    bleibt hinten – der neue Link gehört zur Weiterlesen-Liste, nicht in den
+    Lesetipp.
     """
-    inhalt = pfad.read_text(encoding="utf-8", errors="replace")
+    try:
+        # Streng lesen, nicht „reparieren“: Ein Artikel, den wir nicht
+        # verlustfrei gelesen haben, wird auch nicht geschrieben. Ein
+        # `errors="replace"` würde beim Zurückschreiben jedes falsche Byte
+        # durch U+FFFD ersetzen – ein Datenverlust mit gutem Gewissen.
+        inhalt = pfad.read_text(encoding="utf-8")
+    except UnicodeDecodeError:
+        return False, "Datei ist nicht UTF-8 – wird nicht verändert"
+    except OSError as fehler:
+        return False, f"nicht lesbar ({type(fehler).__name__})"
+    gesperrt, grund = schreibgeschuetzt(pfad)
+    if gesperrt:
+        return False, f"gesperrt: {grund}"
     if ziel_url in inhalt:
         return False, "Ziel steht bereits im Artikel"
-    treffer = re.search(r"^\*\*Weiterlesen:\*\*.*$", inhalt, re.M)
+    treffer = RE_WEITERLESEN.search(inhalt)
     if not treffer:
         return False, "keine „Weiterlesen“-Zeile"
     # Relative Form wie im Bestand: aus /posts/<slug>/ zwei Ebenen hoch.
     rest = ziel_url.lstrip("/").rstrip("/")
-    neu = treffer.group(0).rstrip() + f" · [{anker}]({'../../' + rest}/)"
-    ersetzt = inhalt[:treffer.start()] + neu + inhalt[treffer.end():]
-    if ersetzt.count("[") <= inhalt.count("["):
-        return False, "Änderung hätte nichts hinzugefügt"
-    pfad.write_text(ersetzt, encoding="utf-8")
+    einfg = f"[{anker}]({'../../' + rest}/)"
+    zeile = treffer.group(0).rstrip()
+    stelle = len(zeile)
+    for marker in LESETIPP_MARKER:
+        pos = zeile.find(marker)
+        if 0 < pos < stelle:
+            stelle = pos
+    if stelle < len(zeile):
+        kopf = zeile[:stelle].rstrip()
+        if kopf.endswith("·"):
+            kopf = kopf[:-1].rstrip()
+        neue_zeile = f"{kopf} · {einfg} " + zeile[stelle:]
+    else:
+        neue_zeile = f"{zeile} · {einfg}"
+    ersetzt = inhalt[:treffer.start()] + neue_zeile + inhalt[treffer.end():]
+    if ersetzt.count("[") != inhalt.count("[") + 1:
+        return False, "Änderung hätte nicht genau einen Link hinzugefügt"
+    if not schreiben:
+        return True, "würde eingefügt (Trockenlauf)"
+    # Atomar schreiben: erst daneben, dann ersetzen. Bricht der Lauf mitten
+    # im Schreiben ab, bleibt der Artikel vollständig – nie halb.
+    zwischen = pfad.with_name(pfad.name + ".heilung-tmp")
+    zwischen.write_text(ersetzt, encoding="utf-8")
+    zwischen.replace(pfad)
     return True, "eingefügt"
+
+
+def _inhaltsseite(url: str) -> bool:
+    """Zählt wie `kennzahlen()['ohne_inlink']`: Inhaltsseiten ohne Hubs."""
+    return url.startswith(("/posts/", "/pillar/")) and url not in HUBS
+
+
+def verlinkung_heilen(wahrheit: dict, verlinkung: dict | None = None,
+                      max_n: int = HEILUNG_MAX, root: Path = ROOT,
+                      schreiben: bool = True) -> dict:
+    """Heilt Inhaltsseiten ohne redaktionellen Inlink – belegt und nachgemessen.
+
+    1. MESSEN: Welche Inhaltsseiten haben 0 Inlinks, wie viele Links fehlen?
+    2. AUFTRAG: `verlinkungs_auftrag()` wählt je Ziel die inhaltlich nächste
+       Quelle mit freier Korridor-Kapazität (kein Zufall, keine Blackbox).
+    3. PRÜFEN: YMYL-Sperre, Quelle existiert, Quelle ist live, Korridor frei.
+    4. SCHREIBEN: ausschließlich in die „Weiterlesen“-Zeile; jeder Eingriff
+       landet in `data/verlinkung_history.jsonl` (append-only).
+    5. NACHMESSEN: Der Befund wird neu erhoben. `offen` ist die Wahrheit
+       dieses Laufs – nicht die Zahl der eingefügten Links.
+
+    `schreiben=False` ist der Trockenlauf: gleiche Prüfungen, gleiche Auswahl,
+    keine Dateiänderung. Rückgabe ist maschinenlesbar (für Workflow-Summary
+    und `verlinkungsheilung.json`).
+    """
+    verlinkung = verlinkung or redaktionelle_links(root)
+    vorher = sorted(u for u in verlinkung["ohne_ein"] if _inhaltsseite(u))
+    auftrag = verlinkungs_auftrag(wahrheit, verlinkung, root=root)
+    titel = _titel_karte(root)
+    eingefuegt: list[dict] = []
+    verweigert: list[dict] = []
+    for posten in auftrag[:max(0, int(max_n))]:
+        pfad = _datei_zu_url(posten["quelle"], root)
+        if not pfad or not pfad.exists():
+            verweigert.append({**posten, "meldung": "Quelldatei nicht gefunden"})
+            continue
+        gesperrt, grund = schreibgeschuetzt(pfad)
+        if gesperrt:
+            verweigert.append({**posten, "meldung": f"gesperrt: {grund}"})
+            continue
+        if post_links_gezaehlt(pfad.read_text(encoding="utf-8", errors="replace")) > 9:
+            verweigert.append({**posten, "meldung": "Goldkorridor (9) erreicht"})
+            continue
+        ok, meldung = link_einfuegen(
+            pfad, posten["ziel"], anker_kurz(titel.get(posten["ziel"], "Weiterlesen")),
+            schreiben=schreiben)
+        if ok:
+            eingefuegt.append({**posten, "meldung": meldung})
+        else:
+            verweigert.append({**posten, "meldung": meldung})
+    if eingefuegt and schreiben:
+        _historie_schreiben([(p, p.get("meldung", "")) for p in eingefuegt], root=root)
+        # Echte Nachmessung: der Befund dieses Laufs ist die Messung, nicht
+        # die Zahl der Einfügungen.
+        nachher = sorted(u for u in redaktionelle_links(root)["ohne_ein"]
+                         if _inhaltsseite(u))
+    elif eingefuegt:
+        # Trockenlauf: dieselbe Rechnung ohne Dateiänderung.
+        nachher = sorted(set(vorher) - {p["ziel"] for p in eingefuegt})
+    else:
+        nachher = vorher
+    if not vorher:
+        status = "sauber"
+    elif not eingefuegt:
+        status = "offen"
+    elif not schreiben:
+        # Trockenlauf: Es gibt einen Plan, aber keine Änderung. Ob er reicht,
+        # sagt `offen` – nicht der Status.
+        status = "geplant"
+    elif nachher:
+        status = "teilweise"
+    else:
+        status = "geheilt"
+    return {
+        "stand": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "max": max_n,
+        "geschrieben": bool(schreiben),
+        "vorher_ohne_inlink": vorher,
+        "auftrag": len(auftrag),
+        "eingefuegt": eingefuegt,
+        "verweigert": verweigert,
+        "nachher_ohne_inlink": nachher,
+        "geheilt": sorted(set(vorher) - set(nachher)),
+        "offen": nachher,
+        "status": status,
+    }
 
 
 def tote_ziele(root: Path = ROOT) -> list[dict]:
@@ -2993,11 +3216,16 @@ def _datei_zu_url(url: str, root: Path = ROOT) -> Path | None:
     return None
 
 
-def _historie_schreiben(getan: list[tuple[dict, str]]) -> None:
-    """Beleg je eingefügtem Link – append-only, damit ein Lauf nachvollziehbar bleibt."""
+def _historie_schreiben(getan: list[tuple[dict, str]], root: Path = ROOT) -> None:
+    """Beleg je eingefügtem Link – append-only, damit ein Lauf nachvollziehbar bleibt.
+
+    `root` ist kein Beiwerk: Der Selbsttest schreibt in ein temporäres Repo
+    (Hausregel C15 – kein Test darf den echten Verlauf fortschreiben).
+    """
     if not getan:
         return
-    ziel = ROOT / "data" / "verlinkung_history.jsonl"
+    ziel = Path(root) / "data" / "verlinkung_history.jsonl"
+    ziel.parent.mkdir(parents=True, exist_ok=True)
     jetzt = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     with ziel.open("a", encoding="utf-8") as fh:
         for posten, _meldung in getan:
@@ -3076,7 +3304,7 @@ def abnahme(a: dict) -> list[dict]:
         eintrag("Seiten ohne redaktionellen Inlink", "30 Tage",
                 "offen" if (k.get("ohne_inlink") or 0) else "erfuellt",
                 f"{k.get('ohne_inlink')} Seiten",
-                "Verlinkungsauftrag (`--verlinkung --apply`)"),
+                "Selbstheilung (`--verlinkung --heilen`), sonst Redaktion"),
     ]
     return ergebnis
 
@@ -3657,7 +3885,7 @@ def als_markdown(a: dict) -> str:
             anzahl = len(a["verlinkungsauftrag"])
             z.append(f"- Verlinkungsauftrag: {anzahl} "
                      f"{'Quelle-Ziel-Paar' if anzahl == 1 else 'Quelle-Ziel-Paare'} "
-                     "(`--verlinkung --apply`).")
+                     "(`--verlinkung --heilen`; der Tageslauf führt das aus).")
         z.append("")
     if a.get("tote_ziele"):
         z.append("### Links ins Leere")
@@ -3884,7 +4112,7 @@ def _mini_repo(wurzel: Path) -> Path:
 
 
 def selbsttest() -> int:
-    """97 Fälle, alle offline. Geprüft wird die Klasse, nicht der Einzelfall."""
+    """111 Fälle, alle offline. Geprüft wird die Klasse, nicht der Einzelfall."""
     ok = 0
     fehler: list[str] = []
 
@@ -4347,6 +4575,80 @@ def selbsttest() -> int:
         pruefe("K65 gebrochener Vertrag macht das Tor rot",
                g6["status"] == "rot" and any(f["regel"] == "G6" for f in g6["funde"]))
 
+        # --- Selbstheilung verwaister Seiten (#1097, 06.11.2026) -----------
+        # Ein Kriterium, das sich täglich neu rot misst, braucht einen Weg,
+        # der es ohne Menschen wieder schließt. Geprüft werden die Sperren,
+        # der Ort (Weiterlesen-Zeile), der Beleg und die Nachmessung.
+        pruefe("K86 YMYL-Siegel wird erkannt",
+               pruefprotokoll('redaktionelle_pruefung:\n  status: "freigegeben"\n'
+                              '  inhalt_sha256: "abc"\n') == ("freigegeben", True))
+        pruefe("K86b leerer Hash ist kein Siegel",
+               pruefprotokoll('redaktionelle_pruefung:\n  inhalt_sha256: ""\n')
+               == ("", False))
+        pruefe("K86c Siegel außerhalb des Blocks zählt nicht",
+               pruefprotokoll('title: X\ninhalt_sha256: "abc"\n') == ("", False))
+
+        heil = tmp / "heilung"
+        for ordner, fm, body in (
+            ("content/posts/quelle",
+             'title: "Quelle: Worauf es ankommt"\ndate: 2026-10-01\ndraft: false\n',
+             "Text.\n\n**Weiterlesen:** [Start](/)\n"
+             "**Lesetipp:** [Tipp](../../posts/tipp/)"),
+            ("content/posts/insel",
+             'title: "Insel: Was du wissen musst"\ndate: 2026-10-28\ndraft: false\n',
+             "Text mit [Quelle](../../posts/quelle/)."),
+            ("content/posts/tipp",
+             'title: "Tipp"\ndate: 2026-09-28\ndraft: false\n',
+             "Text ohne eigene Weiterlesen-Zeile."),
+        ):
+            ziel = heil / ordner
+            ziel.mkdir(parents=True, exist_ok=True)
+            (ziel / "index.md").write_text(f"---\n{fm}---\n\n{body}\n", encoding="utf-8")
+        (heil / "content" / "_index.md").write_text("---\ntitle: Start\n---\n",
+                                                    encoding="utf-8")
+        heil_wh = repo_wahrheit(heil)
+        insel_datei = heil / "content" / "posts" / "insel" / "index.md"
+        quelle_datei = heil / "content" / "posts" / "quelle" / "index.md"
+        vorher_text = quelle_datei.read_text(encoding="utf-8")
+        trocken = verlinkung_heilen(heil_wh, root=heil, schreiben=False)
+        pruefe("K87 Trockenlauf ändert keine Datei und schreibt keinen Beleg",
+               quelle_datei.read_text(encoding="utf-8") == vorher_text
+               and not (heil / "data" / "verlinkung_history.jsonl").exists())
+        pruefe("K87b Trockenlauf nennt trotzdem den Ist-Zustand",
+               "/posts/insel/" in trocken["vorher_ohne_inlink"]
+               and trocken["status"] in {"geplant", "offen"})
+        echt = verlinkung_heilen(repo_wahrheit(heil), root=heil)
+        quelle_text = quelle_datei.read_text(encoding="utf-8")
+        pruefe("K88 Heiler setzt den Link in die Weiterlesen-Zeile",
+               any(p["ziel"] == "/posts/insel/" and p["quelle"] == "/posts/quelle/"
+                   for p in echt["eingefuegt"])
+               and "[Insel](../../posts/insel/)" in quelle_text)
+        pruefe("K88b der Lesetipp bleibt hinten",
+               quelle_text.index("[Insel]") < quelle_text.index("**Lesetipp:**"))
+        pruefe("K88c Nachmessung belegt die Wirkung",
+               "/posts/insel/" not in echt["nachher_ohne_inlink"])
+        pruefe("K89 jeder Eingriff steht im Beleg",
+               '"ziel": "/posts/insel/"' in
+               (heil / "data" / "verlinkung_history.jsonl").read_text(encoding="utf-8"))
+        gesperrt = heil / "content" / "posts" / "gesperrt"
+        gesperrt.mkdir(parents=True, exist_ok=True)
+        (gesperrt / "index.md").write_text(
+            "---\ntitle: \"Gesperrt\"\ndate: 2026-10-02\ndraft: false\n"
+            'redaktionelle_pruefung:\n  status: "freigegeben"\n---\n\n'
+            "Text.\n\n**Weiterlesen:** [Start](/)\n", encoding="utf-8")
+        gesperrt_vorher = (gesperrt / "index.md").read_text(encoding="utf-8")
+        verlinkung_heilen(repo_wahrheit(heil), root=heil)
+        pruefe("K90 freigegebene Quelle bleibt unangetastet",
+               (gesperrt / "index.md").read_text(encoding="utf-8") == gesperrt_vorher)
+        pruefe("K91 Insel bleibt geheilt (keine Doppel-Links)",
+               "/posts/insel/" not in
+               verlinkung_heilen(repo_wahrheit(heil), root=heil,
+                                 schreiben=False)["vorher_ohne_inlink"]
+               and quelle_datei.read_text(encoding="utf-8").count(
+                   "../../posts/insel/") == 1)
+        pruefe("K92 keine Weiterlesen-Zeile heißt: keine Erfindung",
+               link_einfuegen(insel_datei, "/posts/tipp/", "Tipp")[0] is False)
+
     if fehler:
         print(f"🛑 GSC-ABDECKUNG SELBSTTEST: {len(fehler)} von {ok + len(fehler)} Fällen rot")
         for name in fehler:
@@ -4387,11 +4689,15 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--prioritaet", action="store_true",
                    help="Anfrage-Wellen und Verlinkungsauftrag zeigen")
     p.add_argument("--verlinkung", action="store_true",
-                   help="Verlinkungsauftrag zeigen (mit --apply einfügen)")
+                   help="Verlinkungsauftrag zeigen (mit --heilen ausführen)")
+    p.add_argument("--heilen", action="store_true",
+                   help="verwaiste Seiten selbst heilen: Auftrag prüfen, Link in die "
+                        "„Weiterlesen“-Zeile schreiben, danach nachmessen (Exit 1, "
+                        "wenn ein Befund offen bleibt)")
     p.add_argument("--apply", action="store_true",
-                   help="Verlinkungsauftrag in die „Weiterlesen“-Zeilen schreiben")
-    p.add_argument("--max", type=int, default=10, metavar="N",
-                   help="höchstens N Links je Lauf einfügen (Standard 10)")
+                   help="Altweg zu --heilen (schreibt ebenfalls, mit denselben Sperren)")
+    p.add_argument("--max", type=int, default=HEILUNG_MAX, metavar="N",
+                   help=f"höchstens N Links je Lauf einfügen (Standard {HEILUNG_MAX})")
     p.add_argument("--kpi", action="store_true", help="Wochenkennzahlen zeigen")
     p.add_argument("--abnahme", action="store_true", help="Abnahmekriterien prüfen")
     p.add_argument("--fristen", action="store_true",
@@ -4399,7 +4705,9 @@ def main(argv: list[str] | None = None) -> int:
                         "dazu die Indexquote als eine Zahl")
     p.add_argument("--wache", action="store_true",
                    help="mit --fristen: Exit 1, wenn eine Frist ohne Beleg abläuft "
-                        "oder die Beobachtung veraltet ist")
+                        "oder die Beobachtung veraltet ist; mit --verlinkung: "
+                        "Trockenlauf der Selbstheilung (schreibt nichts, Exit 1 "
+                        "bei offenem Befund)")
     p.add_argument("--ursachen", action="store_true",
                    help="Sprünge im Bericht einordnen – mit Git-Beleg, wo möglich")
     p.add_argument("--ohne-git", action="store_true",
@@ -4619,31 +4927,54 @@ def main(argv: list[str] | None = None) -> int:
             if args.prioritaet or args.verlinkung:
                 vl = redaktionelle_links()
                 if args.verlinkung:
+                    # Drei Modi, ein Kern:
+                    #   --heilen  Auftrag berechnen, prüfen, schreiben, nachmessen
+                    #   --apply   dasselbe (Altweg; die Prüfungen gelten jetzt auch hier)
+                    #   --wache   derselbe Lauf als Trockenlauf: Exit 1, wenn offen
+                    if args.heilen or args.apply or args.wache:
+                        bericht = verlinkung_heilen(
+                            wahrheit, vl, max_n=args.max, schreiben=not args.wache)
+                        _json_schreiben(ABDECKUNG / "verlinkungsheilung.json", bericht)
+                        if args.json:
+                            print(json.dumps(bericht, ensure_ascii=False, indent=2))
+                        else:
+                            print("\nSelbstheilung verwaister Seiten")
+                            print(f"  vorher ohne Inlink:  {len(bericht['vorher_ohne_inlink'])}"
+                                  + (" " + ", ".join(bericht["vorher_ohne_inlink"][:6])
+                                     if bericht["vorher_ohne_inlink"] else ""))
+                            print(f"  Auftrag:             {bericht['auftrag']} Paare "
+                                  f"(Grenze {bericht['max']})")
+                            print(f"  eingefügt:           {len(bericht['eingefuegt'])}"
+                                  + (" (Trockenlauf – nichts geschrieben)"
+                                     if not bericht["geschrieben"] else ""))
+                            for posten in bericht["eingefuegt"]:
+                                print(f"    ✅ {posten['quelle']} → {posten['ziel']}")
+                            for posten in bericht["verweigert"][:8]:
+                                print(f"    ℹ️  {posten['quelle']}: {posten['meldung']}")
+                            print(f"  nachher ohne Inlink: {len(bericht['nachher_ohne_inlink'])}"
+                                  + (" " + ", ".join(bericht["nachher_ohne_inlink"][:6])
+                                     if bericht["nachher_ohne_inlink"] else ""))
+                        # Zwei verschiedene Fragen, zwei verschiedene Exits:
+                        #   --wache  „Ist der Befund JETZT da?“      → vorher
+                        #   --heilen „Ist er danach noch da?“       → offen
+                        if args.wache and bericht["vorher_ohne_inlink"]:
+                            print("🛑 Befund offen – Inhaltsseiten ohne redaktionellen "
+                                  "Inlink: " + ", ".join(bericht["vorher_ohne_inlink"]),
+                                  file=sys.stderr)
+                            return 1
+                        if bericht["offen"]:
+                            print("🛑 Heilung unvollständig – offen: "
+                                  + ", ".join(bericht["offen"]), file=sys.stderr)
+                            return 1
+                        if not args.json:
+                            print("✅ Keine Inhaltsseite ohne redaktionellen Inlink.")
+                        return 0
                     auftrag = verlinkungs_auftrag(wahrheit, vl)
-                    if args.apply:
-                        titel = _titel_karte()
-                        getan, fehl = [], []
-                        for posten in auftrag[:args.max]:
-                            pfad = _datei_zu_url(posten["quelle"])
-                            if not pfad or not pfad.exists():
-                                fehl.append((posten, "Quelldatei nicht gefunden"))
-                                continue
-                            ok, meldung = link_einfuegen(
-                                pfad, posten["ziel"],
-                                anker_kurz(titel.get(posten["ziel"], "Weiterlesen")))
-                            (getan if ok else fehl).append((posten, meldung))
-                        _historie_schreiben(getan)
-                        print(f"Verlinkung: {len(getan)} eingefügt, {len(fehl)} nicht möglich")
-                        for posten, meldung in getan:
-                            print(f"  ✅ {posten['quelle']} → {posten['ziel']}")
-                        for posten, meldung in fehl[:8]:
-                            print(f"  ℹ️  {posten['quelle']}: {meldung}")
-                    else:
-                        _json_schreiben(ABDECKUNG / "verlinkungsauftrag.json", auftrag)
-                        print(f"\nVerlinkungsauftrag: {len(auftrag)} Paare "
-                              f"(mit `--apply --max N` schreiben)")
-                        for posten in auftrag[:15]:
-                            print(f"  {posten['quelle'][:56]:<56} → {posten['ziel'][:56]}")
+                    _json_schreiben(ABDECKUNG / "verlinkungsauftrag.json", auftrag)
+                    print(f"\nVerlinkungsauftrag: {len(auftrag)} Paare "
+                          f"(mit `--verlinkung --heilen --max N` ausführen)")
+                    for posten in auftrag[:15]:
+                        print(f"  {posten['quelle'][:56]:<56} → {posten['ziel'][:56]}")
                 if args.prioritaet:
                     p2 = prioritaet(wahrheit, vl)
                     _json_schreiben(ABDECKUNG / "prioritaet.json", p2)

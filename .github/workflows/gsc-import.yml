@@ -160,6 +160,61 @@ jobs:
           label: "Build für die GSC-Abdeckung"
           weiter-bei-fehler: "true"
 
+      # ------------------------------------------------------------
+      #  SELBSTHEILUNG VOR DER MESSUNG (06.11.2026, #1097)
+      #
+      #  Am 06.11.2026 stand die Abnahme auf 🛑 „Seiten ohne
+      #  redaktionellen Inlink: 2“: Die Reserve-Automatik hatte um 02:30
+      #  Uhr zwei Artikel live gestellt, die kein Live-Artikel verlinkte.
+      #  Der Lauf davor hatte den Auftrag zwar berechnet – ausgeführt hat
+      #  ihn niemand, weil `--verlinkung --apply` ein Handbefehl war.
+      #
+      #  Die Heilung läuft deshalb VOR dem Befund, nicht danach: Der
+      #  Bericht dieses Laufs misst den geheilten Zustand. Sie ist
+      #  begrenzt (--max 10), belegt (data/verlinkung_history.jsonl),
+      #  prüft vor jedem Eingriff die Sperren (YMYL-Siegel, Goldkorridor,
+      #  Entwürfe) und misst danach nach. Ein Rest-Befund macht den Lauf
+      #  NICHT rot – der Datenimport hat Vorrang –, steht aber als
+      #  Warnung in der Zusammenfassung.
+      # ------------------------------------------------------------
+      - name: Selbstheilung – verwaiste Seiten verlinken
+        id: heilung
+        env:
+          INDEX_GATE_BASE: public
+        run: |
+          set -uo pipefail
+          python3 scripts/gsc_abdeckung.py --verlinkung --heilen --max 10 \
+            > heilung.log 2>&1
+          rc=$?
+          tail -n 20 heilung.log || true
+          python3 - <<'PY' || true
+          import json, os
+          try:
+              d = json.load(open("data/gsc/abdeckung/verlinkungsheilung.json",
+                                 encoding="utf-8"))
+          except Exception as exc:
+              print(f"Heilungsbericht nicht lesbar: {exc}")
+              raise SystemExit(0)
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
+              f.write("### 🩹 Selbstheilung – redaktionelle Verlinkung\n\n")
+              f.write(f"Vorher ohne Inlink: **{len(d.get('vorher_ohne_inlink') or [])}** · "
+                      f"eingefügt: **{len(d.get('eingefuegt') or [])}** · "
+                      f"danach ohne Inlink: **{len(d.get('nachher_ohne_inlink') or [])}** · "
+                      f"Status: `{d.get('status')}`\n\n")
+              for p in d.get("eingefuegt") or []:
+                  f.write(f"- ✅ `{p['quelle']}` → `{p['ziel']}`\n")
+              for p in (d.get("verweigert") or [])[:8]:
+                  f.write(f"- ℹ️ `{p['quelle']}`: {p['meldung']}\n")
+              if d.get("offen"):
+                  f.write("\n> 🛑 **Offen:** " + ", ".join(
+                      f"`{u}`" for u in d["offen"][:8])
+                      + " – kein heilbarer Kandidat im Bestand; entscheidet die Redaktion.\n")
+          PY
+          if [ "$rc" -ne 0 ]; then
+            echo "::warning title=Verlinkung::Selbstheilung konnte den Befund nicht vollständig schließen – Details in der Lauf-Zusammenfassung (die Daten des Laufs gehen trotzdem als PR raus)."
+          fi
+          exit 0
+
       - name: Abdeckung prüfen (Befund + Tor)
         id: abdeckung
         env:
@@ -280,6 +335,7 @@ jobs:
             data/gsc/abdeckung/vertrag.json
             data/gsc/abdeckung/prioritaet.json
             data/gsc/abdeckung/verlinkungsauftrag.json
+            data/gsc/abdeckung/verlinkungsheilung.json
             data/gsc/abdeckung/triage.md
             data/gsc/abdeckung/redaktions_queue.md
             data/gsc/abdeckung/ursachen.json
@@ -522,8 +578,14 @@ jobs:
           # `git status --porcelain` sieht neue UND geänderte Dateien; ein
           # reines `git diff` würde den Erstlauf (data/gsc/ ist noch leer)
           # still überspringen – genau dann gäbe es nie einen ersten PR.
-          if [ -z "$(git status --porcelain -- data/gsc/)" ]; then
-            echo "Keine Leistungsdaten geändert – kein PR."
+          # Seit #1097 gehören die selbst geheilten Verlinkungen dazu: Ohne
+          # `content/` im Pfadsatz bliebe die Heilung im Runner liegen und
+          # der nächste Lauf würde denselben Befund erneut melden.
+          PFADE="data/gsc/"
+          [ -e content ] && PFADE="$PFADE content"
+          [ -e data/verlinkung_history.jsonl ] && PFADE="$PFADE data/verlinkung_history.jsonl"
+          if [ -z "$(git status --porcelain -- $PFADE)" ]; then
+            echo "Keine Leistungsdaten und keine Verlinkung geändert – kein PR."
             exit 0
           fi
           TAG="$(date -u +%Y%m%d)"
@@ -536,7 +598,7 @@ jobs:
           # die remote noch nicht existiert (#329). Der BRANCH-Override ist
           # der dokumentierte Weg dafür; ohne ihn würde der Kern nach main
           # pushen – also genau an den Ort, den dieser Schritt vermeidet.
-          BRANCH="$BRANCH" scripts/git_sync.sh "chore(gsc): Leistungsdaten $(date -u +%F)" data/gsc/
+          BRANCH="$BRANCH" scripts/git_sync.sh "chore(gsc): Leistungsdaten $(date -u +%F)" $PFADE
           gh pr create --base main --head "$BRANCH" \
             --title "GSC-Leistungsdaten $(date -u +%F)" \
             --body "$(cat <<'TEXT'
@@ -548,6 +610,17 @@ jobs:
             Wächst dauerhaft: Google hält nur 16 Monate, das Repo behält alles.
           - `data/gsc/top_seiten_28t.json`, `data/gsc/top_suchbegriffe_28t.json` – Top 500 der letzten 28 Tage.
           - `data/gsc/meta.json` – Stand, Zeitraum, Status.
+          - `data/gsc/abdeckung/verlinkungsheilung.json` – was die
+            Selbstheilung in diesem Lauf geprüft, getan und nachgemessen hat.
+
+          **Selbstheilung (`--verlinkung --heilen`)**
+
+          Steht `content/` im Diff, hat der Lauf verwaiste Seiten geheilt:
+          Artikel ohne einen einzigen redaktionellen Inlink bekommen einen
+          Link in ihrer Quelle (nur die „Weiterlesen“-Zeile, höchstens 9 Links
+          je Artikel, nie in YMYL-freigegebene oder -versiegelte Fassungen).
+          Jeder Eingriff steht belegbar in `data/verlinkung_history.jsonl`;
+          der Bericht nennt vorher/nachher. Ohne Befund bleibt `content/` leer.
 
           **Was zu prüfen ist**
 
