@@ -112,7 +112,10 @@ jobs:
       # dieselbe Klasse wie eine Wachen-Liste, die nicht mehr stimmt.
       # 19.09.2026: C17 (Pinterest-Duplikate) und C18 (Pflicht-Check-Vertrag:
       # der Check-Name des PR-Gates ist der Vertrag mit dem Ruleset) dazu.
-      - name: Governance-Vertrag C1–C18 (Reihenfolge, Issue-Policy, Nachweise, Token-Lebenszyklus, Pflicht-Check)
+      # 06.11.2026 (#1060): C48 (Bestands-Einzigartigkeit: Diff-Tor vor der
+      # Linkprüfung + Schwert-Import + Selbsttest) dazu – Namens-Nachzug
+      # konsequent: der Schritt hieß zuletzt noch „C1–C18“.
+      - name: Governance-Vertrag C1–C48 (Reihenfolge, Issue-Policy, Nachweise, Token-Lebenszyklus, Pflicht-Check, Diff-Tor)
         run: |
           python3 scripts/governance_contract.py --quick
           python3 -m unittest \
@@ -198,9 +201,11 @@ jobs:
       #  Basis: pull_request→PR-Basis (base.sha) · Push→event.before · Rest→HEAD~1
       # ------------------------------------------------------------
       - name: Bestands-Einzigartigkeit (Diff-Tor, nur Neu-Erzeugtes)
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
         run: |
           set -o pipefail
-          BASE='${{ github.event.pull_request.base.sha || github.event.before || '' }}'
+          BASE="$BASE_SHA"
           if [ -z "$BASE" ]; then BASE="HEAD~1"; fi
           python3 scripts/bestand_einzigartigkeit_gate.py --basis "$BASE" | tee uniqdiff.log
 

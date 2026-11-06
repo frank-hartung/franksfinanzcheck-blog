@@ -8555,7 +8555,7 @@ def _selftest():
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C47 mit Kunstbefunden: Fehler "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C48 mit Kunstbefunden: Fehler "
           "erkannt, gutes Setup bleibt still; Haus-Nummern C24/C31 gehören "
           "anderen Verträgen).")
     return 0
