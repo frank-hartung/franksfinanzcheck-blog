@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-06T16:19:53Z",
+  "generated_at": "2026-11-06T17:17:21Z",
   "modus": "kandidaten",
-  "commit": "17da9f078d1d7318de213c886851a0d39836c35b",
+  "commit": "acb79ba66c232c9322cf8ea175fcded8e26bb79e",
   "kapazitaet": {
     "stichtag": "2026-11-06",
     "artikel": 115,
@@ -50,17 +50,18 @@
         "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
         "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
         "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
-        "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026"
+        "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
+        "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust"
       ],
-      "anzahl": 5
+      "anzahl": 6
     }
   ],
   "befundlage": {
-    "offen": 19,
-    "seiten": 6,
-    "live_befunde": 16,
-    "live_seiten": 5,
-    "ueberholt": 8,
+    "offen": 22,
+    "seiten": 7,
+    "live_befunde": 19,
+    "live_seiten": 6,
+    "ueberholt": 11,
     "ohne_fassung": 0,
     "nicht_entscheidbar": 0,
     "aeltester_tage": 5,
@@ -71,7 +72,8 @@
       "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": 5,
       "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": 3,
       "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": 3,
-      "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": 2
+      "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": 2,
+      "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": 3
     }
   },
   "artikel": {
@@ -1007,7 +1009,7 @@
       "checks": []
     },
     "2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet": {
-      "sha256": "9acc95a44ea32d73cda2c8ecd15d47d2cfa0061f987c1f27d4e19d78a3abe79a",
+      "sha256": "3adca5301b04d91f65bff76e074e070b60621a5be9e1dc89207b90c2c902b4ac",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1021,7 +1023,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
@@ -1158,13 +1160,13 @@
       "checks": []
     },
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
-      "sha256": "01dc9c8557046b8cdf28a6a133897a910436eb0184e5696c0e5a5b2abe0c8022",
-      "urteil": "freigabe-reif",
+      "sha256": "f655cf76dafeeb85586170a7ced6f3f15da60f3265449b41ebadde0786246e26",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1172,8 +1174,15 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-03",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "089b89138417e63a3dcf (luecke): Es fehlt der für Campingbuchungen relevante Regulierungsrahmen (Unterscheidung Mietrecht bei Stellplätzen vs. Reiserecht), den die Fundstelle für den Bereich Reise nur allgemein andeutet.; 1158934e7a18c7b2099b (luecke): Die Preisangabe von 20 bis 45 € pro Nacht wird als realistischer Wert positioniert, ist jedoch nicht durch Marktdaten oder eine Referenzstelle in den"
+        }
+      ]
     },
     "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
       "sha256": "43507adc459faf75e39df17d5b5baf96842eeae6f42bb3d8f495d0e2b4973bec",
@@ -1539,7 +1548,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-12",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     }
   }
