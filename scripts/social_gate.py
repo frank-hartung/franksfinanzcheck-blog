@@ -81,6 +81,7 @@ SCRIPTS_DIR = os.path.join(BLOG_DIR, "scripts")
 if SCRIPTS_DIR not in sys.path:
     sys.path.insert(0, SCRIPTS_DIR)
 
+import social_claims as claims  # noqa: E402  – EINE Sperrliste für Gate und Texter
 import social_copywriter as copy  # noqa: E402
 import tag_casing  # noqa: E402  – EIN Wortschatz-Kanon für Kürzel und Marken
 
@@ -351,10 +352,16 @@ def check(pkg: dict, channel_cfg: dict, meta: dict,
         violations.append("L2 dieser Kanal erlaubt keine Links im Text")
 
     # -- L3 Recht & Versprechen --------------------------------------------
-    for term in (gate_cfg.get("blocked_terms") or []):
+    # EINE QUELLE (06.11.2026): Die Sperrliste kommt aus `social_claims`, und
+    # der Texter HEILT damit, statt nur abzulehnen. Vorher las das Gate die
+    # YAML selbst – der Texter kannte die Liste nicht und übernahm Sätze wie
+    # „… eine lückenlose Versorgung garantiert ist" ungeprüft; jeder Winkel
+    # war dann unsendbar (Kanal still, #716-Klasse, eine Ebene tiefer).
+    sperren = claims.sperrlisten(meta, channel_cfg)
+    for term in sperren.begriffe:
         if term.lower() in full.lower():
             violations.append(f"L3 unzulässiges Versprechen: „{term}“")
-    for phrase in (gate_cfg.get("forbidden_phrases") or []):
+    for phrase in sperren.phrasen:
         if phrase.lower() in full.lower():
             violations.append(f"L3 Phrase gesperrt: „{phrase}“")
 

@@ -4,6 +4,15 @@ name: Bestands-Regressionswache
 # Zeitlauf prüft daher auch Änderungen, die direkt auf main gelandet sind.
 # Er verändert weder Inhalte noch Freigaben; fachliche Aussagen bleiben Sache
 # der Redaktion. Das LCP-Manifest wird im Deploy bereits neu erzeugt.
+#
+# NACHLAUF-WACHE (06.11.2026, #1097-Familie): Der Zeitlauf prüft jetzt auch
+# die vier Dinge, an denen die Automatik vorbeigeschrieben hat, ohne dass es
+# jemand merkte – fehlende Pflichtfelder (Metadaten M4), veraltetes
+# Fachprüfungs-Register, veraltete Befund-Akte und einen Kanal, der für einen
+# Artikel in keinem Winkel sendbar ist (#716). Bei einem NEUEN Befund öffnet
+# `scripts/veroeffentlichungs_wache.py --issue` genau ein Issue (Dedupe über
+# den Fingerabdruck im Titel) – kein täglicher Alarm, kein stiller Lauf.
+# Die Wache blockiert nichts: sie meldet, sie entscheidet nicht (C34).
 on:
   schedule:
     - cron: '17 5 * * *'
@@ -11,6 +20,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 concurrency:
   group: bestand-regression-wache
@@ -33,3 +43,29 @@ jobs:
           scripts.tests.test_versicherungs_cluster_verlinkung
           scripts.tests.test_lcp_image_optimizer
           scripts.tests.test_faktenfrische_996
+
+      # NACHLAUF-WACHE: Was die Automatik nach main geschrieben hat, prüft
+      # niemand sonst. `--issue` öffnet nur bei einem NEUEN Befund ein Issue
+      # (Label `nachlauf-wache`, Fingerabdruck im Titel = Dedupe).
+      # Exit 2 (Werkzeugfehler) ist ein Umgebungsbefund und wird als Warnung
+      # gemeldet, damit ein fehlendes Paket nicht wie ein Textbefund aussieht.
+      - name: Nachlauf-Wache – Metadaten, Register, Befund-Akte, Kanaltreue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -uo pipefail
+          python3 scripts/veroeffentlichungs_wache.py --selftest
+          # Label idempotent anlegen (gh label create --force überschreibt).
+          gh label create nachlauf-wache --force \
+            --description "Nachlauf-Wache: Befund auf main nach Automatik-Commit" \
+            --color FBCA04 >/dev/null 2>&1 || true
+          rc=0
+          python3 scripts/veroeffentlichungs_wache.py --wache --issue || rc=$?
+          if [ "$rc" -eq 1 ]; then
+            echo "::warning::Nachlauf-Wache: Befund(e) auf main – Issue geöffnet oder bereits offen (siehe Lauf-Zusammenfassung)."
+            exit 0
+          fi
+          if [ "$rc" -eq 2 ]; then
+            echo "::warning::Nachlauf-Wache: Werkzeugfehler – Wache konnte einen Bereich nicht prüfen (kein Inhaltsbefund)."
+            exit 0
+          fi

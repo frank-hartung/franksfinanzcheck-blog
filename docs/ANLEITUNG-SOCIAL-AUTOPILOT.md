@@ -231,6 +231,80 @@ Zwei Feinheiten, die seit der Dauerheilung #716 (12.10.2026) gelten:
 Cockpit-Abschnitt **„Gate-Quarantäne & Vorprüfung"** zeigt beide Listen. Ein
 Kanal, der nichts Sendbares hat, ist damit nie wieder still – er ist sichtbar.
 
+### L3 heilt jetzt, statt nur abzulehnen (06.11.2026, #1097-Familie)
+
+Am 06.11.2026 stand der Ökostrom-Artikel in **jedem** Winkel auf Reddit auf
+„unsendbar". Der Grund war kein Reddit-Thema, sondern ein Satz aus dem Artikel
+selbst: „… sodass eine lückenlose Versorgung **garantiert** ist". L3 hat ihn
+korrekt abgelehnt – nur hatte der Texter den Satz vorher ungeprüft übernommen.
+Weil jeder Winkel dieselbe Aufzählung zieht, fiel der Kanal still aus. Genau
+das, was #716 verhindern sollte, eine Ebene tiefer.
+
+Seither gilt: **eine Sperrliste, zwei Nutzer.**
+
+| Baustein | Aufgabe |
+|---|---|
+| `data/social/channels.yaml` → `gate.blocked_terms` / `gate.forbidden_phrases` | die einzige Quelle der Sperre |
+| `scripts/social_claims.py` | liest sie (`sperrlisten()`) und **heilt** damit |
+| `scripts/social_gate.py` (L3) | liest sie über denselben Aufruf und prüft weiter fail-closed |
+
+Geheilt wird in zwei Stufen, und zwar **vor** dem Bauen:
+
+1. **Quelle reinigen** – Sätze mit unzulässigem Versprechen kommen nicht in die
+   Copy (Satz-Ebene, nie Wort für Wort: „Diese Anlage ist risikofrei" wortweise
+   zu ersetzen zerlegt die deutsche Grammatik).
+2. **Notfall glätten** – bleibt nur der Titel, greift eine kuratierte Tabelle
+   mit erhaltener Flexion („garantiert" → „gesichert", „risikofreie" →
+   „risikoarme"). Was danach noch sperrt, wird **nicht** verwendet.
+
+Was geheilt wurde, steht im Paket unter `heilungen` – der Beitrag schweigt
+nicht über seine eigene Reparatur. Ein Kanal-Zusatz in der Kanal-Definition
+darf die Haus-Sperre **erweitern, nie abschalten**.
+
+---
+
+## 6a · Nachlauf-Wache: was die Automatik an den Wachen vorbeischreibt
+
+**Der Befund, der alles ausgelöst hat:** Bot-Commits mit `GITHUB_TOKEN` lösen
+keine Pull-Request-Prüfung aus. Die Reserve-Automatik veröffentlichte am
+06.11.2026 um 02:30 Uhr zwei Artikel; einer davon ging ohne `kurzantwort` live
+(Metadaten-Wache M4). Aufgefallen ist es erst Tage später, als ein fremder
+Pull Request die E2E-Suite über den ganzen Baum laufen ließ.
+
+`python3 scripts/veroeffentlichungs_wache.py --wache` prüft deshalb **nach**
+der Veröffentlichung fünf Dinge:
+
+| Bereich | Frage | Werkzeug |
+|---|---|---|
+| `frontmatter` | Steht ein Schlüssel doppelt (bricht den Hugo-Bau) oder ein Block unlesbar? | `frontmatter_wache.py` |
+| `metadaten` | Sind Titel, Description, Kurzantwort und Belege vollständig? | `metadaten_wache.py` |
+| `register` | Passt das Fachprüfungs-Register zum Bestand? | `fachpruefung_register.py --check` |
+| `akte` | Zeigen BEFUND-AKTE.md und Ledger denselben Stand? | `faktenfrische_befund_akte.py` |
+| `winkel` | Hat jeder aktive Kanal je Artikel einen sendbaren Winkel? | `social_copywriter` + `social_gate` |
+
+Drei Eigenschaften, die den Unterschied machen:
+
+- **Dedupe.** Ein Befund erzeugt genau *ein* Issue (Label `nachlauf-wache`,
+  Fingerabdruck im Titel). Ein neuer Befund ist ein neues Issue – derselbe
+  Befund nervt nicht 14 Nächte lang.
+- **Werkzeug ≠ Inhalt.** Eine fehlende Bibliothek ist ein Werkzeugfehler
+  (Exit 2) und wird getrennt gemeldet; sie diskreditiert die Inhaltsbefunde
+  nicht.
+- **Kein Stopp.** Die Wache steht nicht im Deploy-Pfad. Ein fehlendes
+  Pflichtfeld darf keinen Artikel offline nehmen (C34) – es braucht einen
+  Besitzer, keinen Stillstand.
+
+Verdrahtet an zwei Stellen: direkt nach der Veröffentlichung in
+`content-reserve.yml` (was dieser Lauf geschrieben hat, wird noch im selben
+Lauf geprüft) und täglich in `bestand-regression-wache.yml` (der unabhängige
+Zeitlauf, der genau dafür existiert).
+
+```bash
+python3 scripts/veroeffentlichungs_wache.py --wache          # prüfen
+python3 scripts/veroeffentlichungs_wache.py --wache --json   # maschinenlesbar
+python3 scripts/veroeffentlichungs_wache.py --wache --issue  # Issue bei NEUEM Befund
+```
+
 ---
 
 ## 7 · Steuern, Testen, Eingreifen

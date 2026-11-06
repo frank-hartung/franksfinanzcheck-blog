@@ -30,6 +30,8 @@ import re
 import sys
 from datetime import datetime, timezone
 
+import social_claims as claims  # EINE Sperrliste für Gate und Texter (Heilung)
+
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCRIPTS_DIR = os.path.join(BLOG_DIR, "scripts")
 if SCRIPTS_DIR not in sys.path:
@@ -608,10 +610,83 @@ def _emoji(channel_cfg: dict, allowed: list[str]) -> str:
 
 
 # ------------------------------------------------------------------ Komponist
+def _entschaerfen(pkg: dict, sperren, artikel: dict, meta: dict,
+                  url: str, tags_txt: str, link_pos: str) -> tuple[dict, list[str]]:
+    """Entfernt unzulässige Versprechen aus einem fertigen Beitragspaket.
+
+    Warum NACH dem Bauen und nicht nur in der Quelle: Jeder Baustein
+    (Winkel, Kanal, Kürzung) kann einen Satz erneut zusammensetzen. Und
+    warum überhaupt: Eine Sperre, die nur ablehnt, macht den Kanal still –
+    am 06.11.2026 war der Ökostrom-Artikel dadurch in JEDEM Winkel
+    unsendbar (#716-Klasse). Geheilt wird deshalb hier, geprüft wird
+    weiterhin im Gate (fail-closed, unabhängig).
+    """
+    geheilt: list[str] = []
+    for feld in ("text", "comment"):
+        wert = pkg.get(feld)
+        if isinstance(wert, str) and wert.strip():
+            neu, weg = claims.haerten(wert, sperren)
+            geheilt += weg
+            pkg[feld] = neu
+    if pkg.get("thread"):
+        teile = []
+        for teil in pkg["thread"]:
+            neu, weg = claims.haerten(str(teil), sperren)
+            geheilt += weg
+            if neu.strip():
+                teile.append(neu)
+        pkg["thread"] = teile
+    if not (pkg.get("text") or "").strip():
+        pkg["text"] = _notfall_text(artikel, url, link_pos)
+    pkg["text"] = _auf_minimum(pkg["text"], artikel, meta, url, tags_txt, link_pos)
+    return pkg, geheilt
+
+
+def _notfall_text(artikel: dict, url: str, link_pos: str) -> str:
+    """Sendbarer Mindestbeitrag, wenn jeder Quellsatz gesperrt war.
+
+    Der Titel bleibt (er ist die Identität des Beitrags, nicht die
+    Behauptung), dazu die Kernaussage – beide sind bereits geheilt.
+    """
+    teile = [str(artikel.get("title") or "").strip(),
+             str(artikel.get("kurzantwort") or artikel.get("description") or "").strip()]
+    text = "\n\n".join(t for t in teile if t)
+    if url and link_pos != "none":
+        text = f"{text}\n\n{url}".strip()
+    return text
+
+
+def _auf_minimum(text: str, artikel: dict, meta: dict, url: str,
+                 tags_txt: str, link_pos: str) -> str:
+    """Füllt einen zu kurzen Beitrag mit einem sauberen Satz auf.
+
+    Das Gate verlangt `gate.min_chars`. Nach der Heilung kann ein Beitrag
+    darunter fallen – dann fehlt Inhalt, nicht Sendbarkeit: die Kernaussage
+    (oder die neutrale Frage des Hauses) füllt auf, nie ein Füllwort.
+    """
+    minimum = int(((meta or {}).get("gate") or {}).get("min_chars") or 0)
+    if not minimum or len((text or "").strip()) >= minimum:
+        return text
+    for kandidat in (artikel.get("kurzantwort"), artikel.get("description"),
+                     artikel.get("hook"), GENERIC_QUESTION):
+        satz = str(kandidat or "").strip()
+        if not satz or satz in (text or ""):
+            continue
+        text = f"{text}\n\n{satz}".strip()
+        if len(text) >= minimum:
+            break
+    return text
+
+
 def compose(article: dict, channel_id: str, channel_cfg: dict, angle: str,
             meta: dict, use_llm: bool = True) -> dict:
     """Baut die kanalnative Fassung. Ergebnis ist IMMER gültig."""
     kind = (channel_cfg or {}).get("kind") or "microblog"
+    sperren = claims.sperrlisten(meta, channel_cfg)
+    # Quelle zuerst: Ein Satz, der ein unzulässiges Versprechen trägt, kommt
+    # gar nicht in die Copy. Das spart dem Gate die Ablehnung und dem Kanal
+    # den Ausfall.
+    article, quelle_geheilt = claims.material_saeubern(article, sperren)
     url = build_url(article, channel_id, meta)
     tags = pick_hashtags(article, channel_cfg)
     tags_txt = tag_string(tags)
@@ -627,6 +702,12 @@ def compose(article: dict, channel_id: str, channel_cfg: dict, angle: str,
     }
     builder = builders.get(kind, _compose_microblog)
     pkg = builder(article, channel_cfg, angle, url, tags, tags_txt, link_pos)
+
+    # Versprechen heilen, BEVOR gekürzt wird: sonst schneidet `_fit_limit`
+    # in einen Satz hinein, den wir gleich entfernen – und die Längenrechnung
+    # stimmt nicht mehr.
+    pkg, paket_geheilt = _entschaerfen(pkg, sperren, article, meta, url,
+                                       tags_txt, link_pos)
 
     # Sicherheitsnetz: kein Beitrag verlässt dieses Modul über dem Limit.
     pkg["text"] = _fit_limit(pkg.get("text") or "", url, tags_txt, channel_cfg)
@@ -654,11 +735,23 @@ def compose(article: dict, channel_id: str, channel_cfg: dict, angle: str,
         "headline": pkg.get("headline") or _headline(article, channel_cfg),
     })
 
+    # Belege: Was hier geheilt wurde, ist nachvollziehbar (und die
+    # Nachtschicht sieht, warum ein Satz fehlt).
+    pkg["heilungen"] = quelle_geheilt + paket_geheilt
+
     if use_llm:
         polished = polish(pkg, channel_cfg, meta)
         if polished:
-            pkg["text"] = polished
-            pkg["ai_polished"] = True
+            # Auch die Politur kann ein Versprechen zurückbringen. Wenn die
+            # Heilung sie dann leerräumt, gilt die unpolierte Fassung: die
+            # ist geprüft und sendbar (kein Rückfall in Unsauberes).
+            sicher, weg = claims.haerten(polished, sperren)
+            if sicher.strip():
+                pkg["text"] = sicher
+                pkg["ai_polished"] = True
+                pkg["heilungen"] += weg
+            else:
+                pkg["ai_polished"] = False
         else:
             pkg["ai_polished"] = False
     return pkg

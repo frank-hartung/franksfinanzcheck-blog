@@ -643,6 +643,40 @@ jobs:
           python3 scripts/draft_triage.py --check-decisions \
             || echo "::warning::Reife Entwürfe verfallen oder Quellen sind defekt – Liste in der Lauf-Zusammenfassung"
 
+      # ================= NACHLAUF-WACHE (#1097-Familie, 06.11.2026) =========
+      # DIESER Lauf hat den Befund erzeugt, um den es geht: Am 06.11.2026
+      # veröffentlichte er zwei Artikel, von denen einer ohne `kurzantwort`
+      # live ging. Geprüft wurde er nirgends – ein Bot-Commit mit
+      # GITHUB_TOKEN löst keine PR-Prüfung aus, und die Wachen, die den
+      # Mangel sehen (Metadaten, Register, Kanaltreue), laufen woanders.
+      #
+      # Deshalb steht diese Wache hier, am Ende der Kette und VOR dem
+      # Sichern: Was dieser Lauf gerade geschrieben hat, wird noch im selben
+      # Lauf gegen die Wachen gelegt. Ein NEUER Befund öffnet genau ein
+      # Issue (Dedupe über den Fingerabdruck im Titel), damit der nächste
+      # Nachtlauf nicht 14 Tage lang dasselbe meldet.
+      #
+      # Sie blockiert nichts (C34): Ein fehlendes Pflichtfeld darf keinen
+      # Artikel offline nehmen – es braucht einen Besitzer, keinen Stopp.
+      - name: Nachlauf-Wache – was dieser Lauf geschrieben hat, gegen die Wachen legen
+        timeout-minutes: 8
+        if: ${{ !cancelled() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -uo pipefail
+          python3 scripts/veroeffentlichungs_wache.py --selftest
+          gh label create nachlauf-wache --force \
+            --description "Nachlauf-Wache: Befund auf main nach Automatik-Commit" \
+            --color FBCA04 >/dev/null 2>&1 || true
+          rc=0
+          python3 scripts/veroeffentlichungs_wache.py --wache --issue || rc=$?
+          case "$rc" in
+            1) echo "::warning::Nachlauf-Wache: Befund(e) aus diesem Lauf – Issue geöffnet oder bereits offen." ;;
+            2) echo "::warning::Nachlauf-Wache: Werkzeugfehler – ein Bereich war nicht prüfbar (kein Inhaltsbefund)." ;;
+          esac
+          exit 0
+
       # ================= ARTEFAKT-WACHE (#653) =================
       # Ein Merge kann zwei Stände desselben Maschinen-Artefakts
       # verschmelzen: `data/reserve-readiness.json` stand am 08.10.2026 als
