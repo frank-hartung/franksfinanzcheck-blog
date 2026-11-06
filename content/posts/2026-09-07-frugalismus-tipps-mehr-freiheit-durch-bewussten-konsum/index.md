@@ -191,8 +191,6 @@ Schon daraus entstehen schnell **30 € bis 60 € pro Woche**. Selbst wenn du n
 
 **Hinweis zum Stand der Preise:** Nahrungsmittel lagen laut Statistischem Bundesamt (Verbraucherpreisindex) im Oktober 2026 mit +0,4 % über dem Vorjahresmonat. Die Beispiele sind Orientierungswerte, keine Versprechen – deine Ersparnis hängt von den tatsächlichen Preisen im Einkauf ab.
 
-[Quelle: Statistisches Bundesamt, Verbraucherpreisindex und Inflationsrate in Deutschland, https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html]
-
 ## Frugalismus-Tipp 5: Ersparnisse sofort sichern
 
 Das ist der Punkt, an dem viele gute Vorsätze scheitern. Sie sparen tatsächlich, aber das Geld bleibt auf dem Hauptkonto – und verschwindet im Alltag wieder.
