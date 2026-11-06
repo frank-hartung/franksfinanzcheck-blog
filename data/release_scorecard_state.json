@@ -1,35 +1,35 @@
 {
   "version": 1,
-  "generated_at": "2026-11-06T11:59:02Z",
+  "generated_at": "2026-11-06T12:42:50Z",
   "modus": "live",
   "commit": null,
   "kapazitaet": {
     "stichtag": "2026-11-06",
-    "artikel": 114,
-    "faellig": 0,
+    "artikel": 115,
+    "faellig": 1,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
-      "slug": "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
-      "frist": "2026-11-11",
-      "restlaufzeit": 5
+      "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+      "frist": "2026-11-12",
+      "restlaufzeit": 6
     },
     "budget": 4,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 4.0,
-    "bedarf_je_tag": 2.789,
-    "bedarf_je_woche": 19.5,
-    "deckung_prozent": 143.4,
+    "bedarf_je_tag": 2.822,
+    "bedarf_je_woche": 19.8,
+    "deckung_prozent": 141.7,
     "horizont_tage": 120,
     "vorlauf_tage": 7,
     "nachhol_frist_tage": 7,
-    "abbau_tage": null,
+    "abbau_tage": 0,
     "verletzungen_alt": 0,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
     "verletzungen": [],
-    "offen_im_horizont": 114,
+    "offen_im_horizont": 115,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
     "sockel": 4,
@@ -37,19 +37,37 @@
     "empfehlung_erreicht": true,
     "hartes_limit": 16
   },
-  "ursachen": [],
+  "ursachen": [
+    {
+      "check": "F4-fachbefund",
+      "dimension": "faktenalter",
+      "wirkung": "blockiert",
+      "entscheidung": "human",
+      "quelle": "scripts/faktenfrische_befund_ledger.py (via publish_gate.fakten_befund_failures)",
+      "artikel": [
+        "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
+        "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
+        "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026"
+      ],
+      "anzahl": 3
+    }
+  ],
   "befundlage": {
-    "offen": 0,
-    "seiten": 0,
-    "live_befunde": 0,
-    "live_seiten": 0,
+    "offen": 11,
+    "seiten": 4,
+    "live_befunde": 8,
+    "live_seiten": 3,
     "ueberholt": 0,
     "ohne_fassung": 0,
     "nicht_entscheidbar": 0,
-    "aeltester_tage": null,
+    "aeltester_tage": 0,
     "frist_tage": 14,
     "ueber_frist": 0,
-    "je_slug": {}
+    "je_slug": {
+      "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": 3,
+      "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": 3,
+      "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": 2
+    }
   },
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
@@ -391,7 +409,7 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "f541df65178959971f2cdf66376ff0a8dea187b089f62a428200315a339a7889",
+      "sha256": "dbbf33ed3fd409fa432695800675c561162e7e1312cb11b27ae7ccf0134b2e92",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -405,7 +423,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
@@ -679,22 +697,29 @@
       "checks": []
     },
     "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": {
-      "sha256": "ae4e49707910715d0e98779f61e2a66c841db9907c846defd391a3157c2bae41",
-      "urteil": "freigabe-reif",
+      "sha256": "17c41212d78f97218bafd134a7fad88df91259602b0406d0bf89c0d4f4fb5180",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "naechste_pruefung": "2026-12-21",
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "1e06a96f6f71e104ce0b (praezision): Während Meal Prep als großer Sparhebel betont wird, zeigt die Marktlage für Nahrungsmittel eine moderate Teuerung von nur 0,4 %, was die Priorisierung der Sparbemühungen relativiert.; 81c6a707139046b83ccd (luecke): Der Ratgeber empfiehlt die Revision von Fixkosten, lässt aber die drastische Preissteigerung bei Energie von +14,9 % unerwähnt, die ein wesentlicher T"
+        }
+      ]
     },
     "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": {
       "sha256": "473ce99e987356bf821f7d2df88fd6acff4566a058cd49f20eb33feb68a26549",
@@ -733,40 +758,54 @@
       "checks": []
     },
     "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": {
-      "sha256": "87268d553c1ab1b3403b6dcf84c29ba698f93a45c1fd7e394dae24a825ce14ec",
-      "urteil": "freigabe-reif",
+      "sha256": "11b78c692b8071a59833622542d078d982366c0e2edceb1036cff079541562b1",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "naechste_pruefung": "2026-12-21",
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "5a1bf10697f58e5fe14a (luecke): Der Ratgeber nennt Sparbeispiele für Heizkosten, lässt aber die aktuelle Preissteigerung bei Energie von +14,9 % (Stand Oktober 2026) unerwähnt, die den finanziellen Druck auf Haushalte massiv erhöht.; e48f9237cff6397c49a6 (praezision): Die in Aussicht gestellten Ersparnisse von bis zu 200 € werden nicht ins Verhältnis zur aktuellen Inflationsrate von +2,8 % gesetzt,"
+        }
+      ]
     },
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
-      "sha256": "920561a8833136d255928ace41444b2bf62ceb17358379771bc7aeb73ed7e173",
-      "urteil": "freigabe-reif",
+      "sha256": "10f32bb7ea95a1766e975c3e37da6408c959e580a940bf687033466e1536e9f7",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-11",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "naechste_pruefung": "2026-12-21",
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "6cb2229c5eb83b02da23 (veraltet): Die Kalkulation der Fixkosten (Energie 140 €) und die Empfehlung zur Senkung der Kosten ignorieren den aktuellen Markttrend massiv steigender Energiepreise (+14,9 %), was die 50-Prozent-Quote für notwendige Ausgaben gefährdet.; f00055a1cb65ee22165f (luecke): Der Ratgeber verspricht eine 'planbare' Budgetierung, lässt aber die aktuelle Inflationsrate von 2,8 % unerw"
+        }
+      ]
     },
     "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
       "sha256": "2bfda68f5b26d04504e0b84957b4e0445043a40000ea7fb2d971c686dc12d69b",
