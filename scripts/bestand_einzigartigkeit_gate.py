@@ -40,8 +40,12 @@
 #    Leerer Bestand oder unauflösbare Git-Basis → Exit 2 (Werkzeugfehler),
 #    niemals ein leeres grünes Ergebnis.
 #
-#  KEIN AUTO-HEILER
-#    Das Tor meldet und blockiert. Es formuliert nichts um.
+#  KEIN AUTO-HEILER FÜR PROSA
+#    Das Tor meldet und blockiert. Es formuliert NICHTS um.
+#    Ausnahme (06.11.2026, ausdrücklicher Auftrag): `--heilen` entfernt eine
+#    Passage, die beweisbar WÖRTLICH aus einem anderen Artikel stammt und in
+#    diesem Diff NEU hinzukam – das ist keine Formulierung, das ist das
+#    Zurücknehmen einer Kopie. Live-Artikel nur mit `--auch-live`.
 #
 #  NUTZUNG
 #    python3 scripts/bestand_einzigartigkeit_gate.py --basis HEAD~1
@@ -169,6 +173,158 @@ def befunde(changed: list[str], basis: str,
     return [paare[k] for k in sorted(paare)]
 
 
+# ============================================================
+#  SELBSTHEILUNG – aber nur die KOPIE, niemals die Prosa
+# ============================================================
+#  Das Tor meldete bisher nur („KEIN AUTO-HEILER“). Für alles, was ein
+#  Mensch oder ein Schreiber zu FORMULIEREN hat, bleibt das richtig: ein
+#  Richter, der Prosa umschreibt, ist ein Autor. Es gibt aber genau eine
+#  Klasse, die keine Formulierung braucht, weil sie beweisbar kein eigener
+#  Text ist: eine Passage, die wörtlich aus einem ANDEREN Artikel stammt und
+#  in diesem Diff NEU hinzukam. Sie zu entfernen stellt den vorherigen Stand
+#  wieder her – es wird nichts erfunden, nichts umgeschrieben, nichts
+#  gekürzt, was vorher schon da war.
+#
+#  Deshalb heilt `heilen()` ausschließlich:
+#    1. Blöcke, die der Diff HINZUGEFÜGT hat (nicht der Bestand),
+#    2. von denen mindestens KOPIE_MIN_WOERTER Wörter wörtlich in einem
+#       FREM DEN Artikel des Bestands stehen (beweisbar fremd),
+#    3. und niemals in live geschalteten Artikeln ohne ausdrücklichen Auftrag
+#       (`--auch-live`) – Publikumsänderungen sind ein Betreiber-Entscheid.
+#  Alles andere bleibt Befund und geht an die Redaktion.
+
+KOPIE_MIN_WOERTER = 25   # kürzere Blöcke: gemeinsame Wendung, keine Kopie
+
+
+def _bloecke(text: str) -> list[str]:
+    """Absätze eines Artikels (Leerzeilen-getrennt), in Reihenfolge."""
+    return [b for b in text.split("\n\n")]
+
+
+def hinzugefuegte_bloecke(alt_text: str, neu_text: str) -> list[str]:
+    """Die Absätze, die NEU sind (in der Basis nicht vorhanden).
+
+    Bewusst auf Absatzebene und über Textgleichheit, nicht über Indizes:
+    eine Zeilennummer verschiebt sich, sobald irgendwo oben etwas
+    hinzukommt – dann würde Bestandstext als „hinzugefügt“ gelten und die
+    Heilung echten Inhalt löschen.
+    """
+    alt = {b.strip() for b in _bloecke(alt_text or "")}
+    return [b for b in _bloecke(neu_text or "") if b.strip() and b.strip() not in alt]
+
+
+def kopie_treffer(block: str, fremdtexte) -> tuple[str, int] | None:
+    """(slug, wörter) wenn der Block wörtlich in einem fremden Artikel steht.
+
+    Verglichen wird über `cu.norm` (dieselbe Normalisierung wie die Messung:
+    Groß-/Kleinschreibung, Umlaute), in Fenstern von KOPIE_MIN_WOERTER
+    Wörtern. `fremdtexte` ist eine Folge von (slug, body) mit `clean_body`,
+    also ROH wie im Bestand – normalisiert wird hier.
+
+    Beide Seiten MÜSSEN normalisiert werden: Am 06.11.2026 suchte diese
+    Funktion „garantie kann sich lohnen“ in einem Text, der „Eine Garantie
+    kann sich lohnen“ enthält. Die Folge war eine Heilung, die nie etwas
+    fand und still „nichts zu tun“ meldete – die gefährlichste Form von
+    grün.
+    """
+    woerter = cu.norm(block).split()
+    if len(woerter) < KOPIE_MIN_WOERTER:
+        return None
+    ziel = {" ".join(woerter[i:i + KOPIE_MIN_WOERTER])
+            for i in range(len(woerter) - KOPIE_MIN_WOERTER + 1)}
+    bester: tuple[str, int] | None = None
+    for slug, fremd in fremdtexte:
+        if not fremd:
+            continue
+        fw = cu.norm(fremd).split()
+        if len(fw) < KOPIE_MIN_WOERTER:
+            continue
+        fremd_set = {" ".join(fw[i:i + KOPIE_MIN_WOERTER])
+                     for i in range(len(fw) - KOPIE_MIN_WOERTER + 1)}
+        gemeinsame = ziel & fremd_set
+        if gemeinsame and (bester is None or len(woerter) > bester[1]):
+            bester = (slug, len(woerter))
+    return bester
+
+
+def heilbare_kopien(rel: str, basis: str, bestand: dict,
+                    root: str = BLOG_DIR) -> list[dict]:
+    """Die Blöcke dieses Artikels, die beweisbar fremde Kopien sind."""
+    slug = _slug_aus_relpath(rel)
+    alt_text = git_text_at(basis, rel, root=root) or ""
+    try:
+        with open(os.path.join(root, rel), encoding="utf-8") as fh:
+            neu_text = fh.read()
+    except OSError:
+        return []
+    fremd = [(i.get("slug", ""), i.get("body", ""))
+             for i in bestand.values() if i.get("slug") and i.get("slug") != slug]
+    treffer = []
+    for block in hinzugefuegte_bloecke(alt_text, neu_text):
+        fund = kopie_treffer(block, fremd)
+        if fund:
+            treffer.append({"slug": slug, "pfad": rel, "block": block,
+                            "von": fund[0], "woerter": fund[1]})
+    return treffer
+
+
+def _entferne_bloecke(text: str, bloecke) -> str:
+    """Die gegebenen Absätze aus dem Rohtext entfernen (exakt, in Reihenfolge)."""
+    weg = {b.strip() for b in bloecke if b.strip()}
+    behalten, uebersprungen = [], 0
+    for block in _bloecke(text):
+        if block.strip() in weg and uebersprungen < len(weg):
+            uebersprungen += 1
+            continue
+        behalten.append(block)
+    return "\n\n".join(behalten)
+
+
+def heilen(basis: str, auch_live: bool = False, bestand: dict | None = None,
+           schreiben: bool = True, root: str = BLOG_DIR) -> dict:
+    """Entfernt beweisbar hinzugefügte Kopien – und sonst nichts.
+
+    Rückgabe: {"geheilt": [...], "uebersprungen": [...], "offen": [...]}
+      geheilt      – Datei wurde (falls `schreiben`) bereinigt
+      uebersprungen – Kopie erkannt, aber live und ohne --auch-live
+      offen        – Befund ohne heilbare Kopie (echte Formulierungsarbeit)
+    """
+    changed = changed_post_paths(basis, root=root)
+    if bestand is None:
+        bestand = (cu.lade_bestand() if os.path.realpath(root) == os.path.realpath(BLOG_DIR)
+                   else _lade_bestand_aus_root(root))
+    ergebnis = {"geheilt": [], "uebersprungen": [], "offen": []}
+    heilbare_slugs: set[str] = set()   # einmal rechnen, nicht dreimal
+    for rel in changed:
+        slug = _slug_aus_relpath(rel)
+        live = bool(next((i.get("live") for i in bestand.values()
+                          if i.get("slug") == slug), False))
+        kopien = heilbare_kopien(rel, basis, bestand, root=root)
+        if kopien:
+            heilbare_slugs.add(slug)
+        if kopien and live and not auch_live:
+            ergebnis["uebersprungen"].append(
+                {"slug": slug, "bloecke": len(kopien),
+                 "grund": "live geschaltet – nur mit --auch-live"})
+            continue
+        if not kopien:
+            continue
+        pfad = os.path.join(root, rel)
+        with open(pfad, encoding="utf-8") as fh:
+            text = fh.read()
+        if schreiben:
+            with open(pfad, "w", encoding="utf-8") as fh:
+                fh.write(_entferne_bloecke(text, [k["block"] for k in kopien]))
+        ergebnis["geheilt"].append(
+            {"slug": slug, "bloecke": len(kopien), "live": live,
+             "von": sorted({k["von"] for k in kopien})})
+    # Was der Befund zusätzlich meldet, ist Redaktionsarbeit – nie heilbar.
+    for eintrag in befunde(changed, basis, bestand=bestand, root=root):
+        if eintrag.get("geaendert") not in heilbare_slugs:
+            ergebnis["offen"].append(eintrag)
+    return ergebnis
+
+
 def _block(eintrag: dict) -> str:
     a, b = sorted((eintrag["geaendert"], eintrag["anderer"]))
     return (f"  🚨 NEU: {a} ↔ {b} – {eintrag['neu_n']} gleiche "
@@ -248,6 +404,51 @@ def selftest() -> int:
     finally:
         cu.KRITISCH_AB = echtes_min
 
+    # ------------------------------------------------------------------
+    # 8) SELBSTHEILUNG (06.11.2026, Auftrag „automatische Selbstheilung“):
+    #    Sie darf NUR beweisbare Kopien entfernen – und das nachweisbar.
+    # ------------------------------------------------------------------
+    lang = ("Bei einer einseitigen Preisaenderung koennen Verbraucher "
+            "grundsaetzlich ohne Frist zum Zeitpunkt der Aenderung kuendigen, "
+            "der Vertrag endet am Vortag der Aenderung und die Abschlaege "
+            "werden ab diesem Zeitpunkt neu berechnet.")
+    fremd = [("2026-10-07-dsl", cu.clean_body(lang))]
+    # (a) Eine wörtlich übernommene Passage gilt als Kopie …
+    if kopie_treffer(lang, fremd) is None:
+        fehler.append("Heilung: eine wörtlich kopierte Passage gilt nicht "
+                      "als Kopie – die Selbstheilung würde #1027 nicht "
+                      "erkennen")
+    # (b) … eigener Text, kurze Wendungen und Bestandstext NICHT.
+    if kopie_treffer(eigen, fremd) is not None:
+        fehler.append("Heilung: eigener Text gilt als Kopie – die Heilung "
+                      "würde echten Inhalt löschen (Freibrief)")
+    if kopie_treffer("Die Bundesnetzagentur hat im Oktober Zahlen "
+                     "veröffentlicht.", fremd) is not None:
+        fehler.append("Heilung: eine kurze gemeinsame Wendung gilt als "
+                      "Kopie – löschbar wäre jeder Halbsatz")
+    # (c) Nur HINZUGEFÜGTES ist heilbar: unveränderter Text nie.
+    if hinzugefuegte_bloecke(lang, lang):
+        fehler.append("Heilung: unveränderter Bestandstext gilt als "
+                      "hinzugefügt – die Heilung würde Bestand löschen")
+    if len(hinzugefuegte_bloecke(eigen, eigen + "\n\n" + lang)) != 1:
+        fehler.append("Heilung: der hinzugefügte Block wird nicht erkannt")
+    # (d) Entfernen trifft genau den Block und lässt alles andere stehen.
+    rest = _entferne_bloecke(eigen + "\n\n" + lang, [lang])
+    if lang in rest or eigen not in rest:
+        fehler.append("Heilung: _entferne_bloecke trifft nicht genau den "
+                      "kopierten Block")
+    # (e) FAIL-CLOSED: Ohne lesbare Basis heilt NICHTS (sonst würde der
+    #     gesamte Artikel als „hinzugefügt“ gelten und gelöscht).
+    if hinzugefuegte_bloecke("", lang) != [lang]:
+        fehler.append("Heilung: ohne Basis ist nicht alles hinzugefügt – "
+                      "die Annahme des Fail-CLOSED-Pfads stimmt nicht")
+    # (f) Die Schwelle für „Kopie“ ist importiert/abgeleitet, keine zweite
+    #     Zahl: Sie muss über der Phrasenlänge der Messung liegen.
+    if KOPIE_MIN_WOERTER <= PHRASE_LEN:
+        fehler.append("Heilung: KOPIE_MIN_WOERTER liegt nicht über der "
+                      "Phrasenlänge – dann wäre eine geteilte Wendung schon "
+                      "eine „Kopie“")
+
     if fehler:
         print("🛑 BESTANDS-EINZIGARTIGKEITS-DIFF-TOR – SELFTEST FEHLGESCHLAGEN "
               "(Exit 2):")
@@ -256,6 +457,7 @@ def selftest() -> int:
         return 2
     print("✅ BESTANDS-EINZIGARTIGKEITS-DIFF-TOR-SELFTEST bestanden: Erzeugung, "
           "Verstärkung, Altlast-Versicherung, leerer Bestand (fail-closed), "
+          "Selbstheilung nur beweisbarer Kopien, "
           "SSOT-Schwertfunktion – #1060.")
     return 0
 
@@ -271,12 +473,44 @@ def main(argv: list[str] | None = None) -> int:
                         help="Arbeitsbaum mit content/posts (Standard: Repo-Root)")
     parser.add_argument("--selftest", action="store_true",
                         help="Sabotage-Proben statt Bestand (C6/C48)")
+    parser.add_argument("--heilen", action="store_true",
+                        help="beweisbar HINZUGEFÜGTE Kopien entfernen (nie Prosa)")
+    parser.add_argument("--auch-live", action="store_true",
+                        help="mit --heilen auch live geschaltete Artikel (Auftrag nötig)")
     args = parser.parse_args(argv)
 
     if args.selftest:
         return selftest()
     if not args.basis:
         parser.error("--basis fehlt (oder --selftest verwenden)")
+    if args.auch_live and not args.heilen:
+        parser.error("--auch-live wirkt nur mit --heilen")
+
+    if args.heilen:
+        try:
+            ergebnis = heilen(args.basis, auch_live=args.auch_live, root=args.root)
+        except GateFehler as exc:
+            print(f"🛑 BESTANDS-EINZIGARTIGKEITS-DIFF-TOR – WERKZEUGFEHLER: {exc}")
+            return 2
+        for e in ergebnis["geheilt"]:
+            herkunft = ", ".join(e["von"]) if e["von"] else "fremder Artikel"
+            print(f"🧹 GEHEILT: {e['slug']} – {e['bloecke']} hinzugefügte "
+                  f"Kopie(n) aus {herkunft} entfernt"
+                  f"{' (LIVE-Artikel, ausdrücklicher Auftrag)' if e['live'] else ''}")
+        for e in ergebnis["uebersprungen"]:
+            print(f"⏸️ ÜBERSPRUNGEN: {e['slug']} – {e['grund']} "
+                  f"({e['bloecke']} Kopie(n) bleiben stehen)")
+        for e in ergebnis["offen"]:
+            print(_block(e))
+        if ergebnis["offen"]:
+            print("   Diese Befunde sind Formulierungsarbeit und werden NICHT "
+                  "automatisch umgeschrieben (ein Richter, der Prosa "
+                  "umschreibt, ist ein Autor).")
+            return 1
+        if ergebnis["geheilt"] or ergebnis["uebersprungen"]:
+            return 0
+        print(f"✅ Diff-Tor: nichts zu heilen gegen {args.basis[:12]}.")
+        return 0
 
     try:
         changed = changed_post_paths(args.basis, root=args.root)
