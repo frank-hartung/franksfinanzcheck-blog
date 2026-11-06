@@ -1,7 +1,10 @@
 # Faktenfrische #1039 – Bündel-Blindfleck heilt dauerhaft, mit Selbstheilung 2026-11-06
 
-**Stand:** 6. November 2026 · **Lauf:** Vorgang auf `arena/dd833f9a-franksfinanzcheck-blog`
-(Basis `main` @ `1e3a9311`) · **Ersatz für:** PR #1067 (unmergebar, siehe unten)
+**Stand:** 6. November 2026, nach Einholung von `main` (Merge `1bec17d85`,
+`main` @ `112905a23`: #1100 Fachbefund-Folgeentscheidungen, #1073
+Konfliktmarker-Wache; Abschnitt 8) · **Lauf:** Vorgang auf
+`arena/dd833f9a-franksfinanzcheck-blog` · **Ersatz für:** PR #1067
+(unmergebar, siehe unten)
 
 > Auftrag (wörtlich): „fix(faktenfrische): #1039 Bündel-Blindfleck heilen – Spitzentag
 > mitmessen, Sockel 4 → 12 – #1067 Bitte dauerhaft auf Highend-Level einer Profi-Agentur
@@ -152,18 +155,22 @@ Höhenuhr: grün.
 | `faktenfrische_deckung_ticket.py --selftest` | ✅ 26 Fälle grün |
 | `python -m unittest scripts.tests.test_faktenfrische_kapazitaet` | ✅ 52 Tests OK |
 | `python -m unittest scripts.tests.test_faktenfrische_deckung_ticket` | ✅ 14 Tests OK |
-| `python -m unittest discover -s scripts/tests` | **5334 Tests** – 4 Fehler, **alle 4 identisch auf `main`** (Worktree-Baseline reproduziert), **0 neu**; 2 weitere `main`-Altlasten (Akte, Register) in diesem Vorgang geheilt |
+| `python -m unittest discover -s scripts/tests` | **5338 Tests** – 3 Fehler, alle identisch auf `main` (Worktree-Baseline), **0 neu**; 2 weitere Altlasten-Klasse hier geheilt, 1 (Affiliate-Deep-Link) hat `main` selbst geheilt |
 | `governance_contract.py --quick` | ✅ 45/45 Regeln in beide Richtungen bestätigt |
 | `integrity_guard.py --gate` | ✅ grün – 55 Kerndateien entsprechen exakt dem signierten Stand (HEAD `1e3a9311`); keine Siegel-Datei berührt |
 | Uhr-Probe Offset 0/30/97/180/365 (neue Module) | ✅ grün |
 | `faktenfrische_befund_akte.py --wache` (nach Nachzug) | ✅ jeder offene Befund hat Schließweg |
 | `fachpruefung_register.py --check` (nach Nachzug) | ✅ aktuell |
 
-**Die 4 Altlasten (identisch rot auf `main`, rote Linie: redaktionelle Entscheidung – hier offen benannt statt zugedeckt):**
+**Die 3 verbleibenden Altlasten (nach dem `main`-Merge, identisch rot auf `main` – redaktionelle Entscheidungen, hier offen benannt statt zugedeckt):**
 
-1. `test_affiliate_link_check … IntentBeforePillarTests.test_all_live_posts_and_pillars_pass_without_errors` – Artikel `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten` verlangt den Stromtarif-Vergleich-Deep-Link (`a.check24.net/…pid=80968…`), der fehlt. Affiliate-Integrität: Eigentümer der Wache.
-2. `test_einzigartigkeit_bestand.BestandSweepTest.test_kein_kritisches_live_paar_im_bestand` – 6 geteilte Phrasen `2026-09-04-finanzielle-freiheit-…` ↔ `2026-09-07-frugalismus-tipps-…`. Redaktionelle Einzigartigkeits-Entscheidung, keine Maschinenarbeit.
-3. `test_social_autopilot.TestKanaltreue716 …(kanal='reddit')` und 4. `test_social_instagram_winkel … TestWinkelRedundanzImBestand (kanal='reddit')` – Artikel `2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar` hat auf Reddit keinen sendbaren Winkel / nur einen. Redaktionelle Winkel-Entscheidung.
+1. `test_einzigartigkeit_bestand.BestandSweepTest.test_kein_kritisches_live_paar_im_bestand` – 6 geteilte Phrasen `2026-09-04-finanzielle-freiheit-…` ↔ `2026-09-07-frugalismus-tipps-…`. Redaktionelle Einzigartigkeits-Entscheidung, keine Maschinenarbeit.
+2. `test_social_autopilot.TestKanaltreue716 …(kanal='reddit')` und 3. `test_social_instagram_winkel … TestWinkelRedundanzImBestand (kanal='reddit')` – Artikel `2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar` hat auf Reddit keinen sendbaren Winkel / nur einen. Redaktionelle Winkel-Entscheidung.
+
+**`main` hat eine vierte Altlast selbst geheilt:** den Affiliate-Deep-Link im
+Artikel `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten`
+(PR #1100, `112905a23`) – `test_affiliate_link_check …
+test_all_live_posts_and_pillars_pass_without_errors` ist nach dem Merge grün.
 
 **Zwei weitere `main`-Altlasten (Listen/Register-Drift) wurden in diesem
 Vorgang geheilt** (eigener Commit, maschinell erzeugt, kein Urteil):
@@ -233,5 +240,28 @@ python3 scripts/faktenfrische_deckung_ticket.py             # Dry-Run des Ticket
 python3 -m unittest discover -s scripts/tests               # Bestandssonnenschein + Altlasten
 python3 scripts/governance_contract.py --quick               # 45/45
 ```
+
+## 8. Nachtrag nach `main`-Merge (06.11.2026, nachmittags)
+
+Während des Vorgangs lief `main` weiter (`1e3a9311` → `112905a23`: #1100
+Fachbefund-Folgeentscheidungen, #1073 Konfliktmarker-Wache, Scorecard-Deploy
+`6a6912cb0`, Veröffentlichungsgates `112905a23`). Der PR war dadurch
+vorübergehend **unmergebar** – derselbe Befund wie bei #1067 – und sein
+CI-Signal blieb aus. Vorgehen: `git merge origin/main`; einziger Konflikt in
+`data/faktenfrische_befunde_state.json` (zwei Erzeugungsspuren, identischer
+semantischer Inhalt) – aufgelöst durch **Regenerieren** mit dem Generator
+(`faktenfrische_befund_akte.py --schreiben`); `governance_contract.py`
+auto-merged (C45-Ergänzungen hier, GUARDS-Ergänzung aus #1100 – koexistieren
+wie beabsichtigt). Nach dem Merge:
+
+- Volle Suite: **5338 Tests**, 3 Fehler – ausschließlich die oben genannten
+  redaktionellen Altlasten; **0 neu**; Governance Quick-Check 45/45;
+  `test_faktenfrische_kapazitaet`, `test_faktenfrische_deckung_ticket`,
+  `test_faktenfrische_befund_akte`, `test_inhalts_register`,
+  `test_konfliktmarker_wache` / `test_folgeentscheidung_kette` /
+  `test_git_sync` alle grün.
+- `gate` (Qualitäts-Gate: Build + interne Links) **grün** – Hugo baut.
+- Lehre, festgeschraubt: Unmergebar heißt kein CI. Die Heilung dieser
+  Klasse verlangt den Merge, nicht das Warten.
 
 **Vorgang:** #1039 · **Ersetzt:** #1067 · **Offen (unverändert):** #912, #922
