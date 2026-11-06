@@ -4375,6 +4375,57 @@ def c48_diff_tor_bestands_einzigartigkeit(script_texts, wflows, root=BLOG_DIR,
                            "V4-Messung `aenderung_befunde` nicht aus – der "
                            "Schreiber-Weg bleibt ungemessen (#1027, Ebene 3)."))
 
+    # e) Selbstheilung (06.11.2026, Auftrag „automatische Selbstheilung"):
+    #    Sie ist die EINE Ausnahme vom Grundsatz „kein Auto-Heiler für
+    #    Prosa“ und deshalb selbst vertraglich zu halten – vier Zusagen,
+    #    jede einzeln prüfbar. Ohne diesen Block könnte jemand die
+    #    Heilung entfernen (dann fehlt der Auftrag) oder sie so umbauen,
+    #    dass sie Prosa anfasst (dann fehlt die Grenze).
+    # Die Flagge muss REGISTRIERT sein, nicht bloß erwähnt. Ein Kommentar
+    # („nur mit --auch-live“) ist keine Verdrahtung – dieselbe Lehre wie
+    # bei `verdrahtet()` im Selftest-Runner: Am 06.11.2026 bestand eine
+    # Prüfung, weil ein YAML-KOMMENTAR den Namen nannte. Wer die
+    # `add_argument`-Zeile löscht und den Kommentar stehen lässt, hätte
+    # sonst weiter Grün.
+    if '"--heilen"' not in gate:
+        out.append(("C48", f"scripts/{C48_GATE}: `--heilen` ist nicht als "
+                           "Option registriert – die beweisbare Kopie bliebe "
+                           "stehen, obwohl sie nachweislich kein eigener Text "
+                           "ist (eine Erwähnung im Kommentar zählt nicht)."))
+    else:
+        if '"--auch-live"' not in gate:
+            out.append(("C48", f"scripts/{C48_GATE}: `--auch-live` ist nicht "
+                               "als Option registriert – ohne diese Sperre "
+                               "würde die Heilung live geschaltete Artikel "
+                               "ohne Auftrag ändern."))
+        if "KOPIE_MIN_WOERTER" not in gate:
+            out.append(("C48", f"scripts/{C48_GATE}: `KOPIE_MIN_WOERTER` "
+                               "fehlt – ohne Mindestlänge wäre jede geteilte "
+                               "Wendung löschbar."))
+        # Die Grenze selbst: Heilung darf niemals PROSA umschreiben. Sie
+        # entfernt nur Blöcke; ein Formulierungs-Aufruf wäre der Bruch.
+        #
+        # Geprüft wird CODE, nicht Text: „ein Richter, der Prosa umschreibt,
+        # ist ein Autor“ steht als BEGRÜNDUNG im Modul, und die Meldung
+        # „Passage eigenständig formulieren“ ist die Anweisung AN die
+        # Redaktion. Eine Wache, die ihren eigenen Kommentar als Verstoß
+        # liest, meldet rot, wo alles richtig ist – am 06.11.2026 genau so
+        # passiert. Deshalb: Kommentare und String-Literale fliegen raus,
+        # dann wird im Rest (also in echtem Code) gesucht.
+        ohne_texte = re.sub(r"#[^\n]*", "", gate)
+        ohne_texte = re.sub(r'""".*?"""', "", ohne_texte, flags=re.S)
+        ohne_texte = re.sub(r'"[^"\n]*"|\'[^\'\n]*\'', "", ohne_texte)
+        for verboten, was in (("formuliere", "Formulierung"),
+                              ("umschreib", "Umschreiben"),
+                              ("rewrite", "Rewrite")):
+            if verboten in ohne_texte.lower():
+                out.append(("C48", f"scripts/{C48_GATE}: enthält im CODE "
+                                   f"`{verboten}` – {was} gehört nicht in "
+                                   "eine Heilung, die nur beweisbare Kopien "
+                                   "entfernt (ein Richter, der Prosa "
+                                   "umschreibt, ist ein Autor)."))
+                break
+
     return out
 
 
@@ -8546,6 +8597,71 @@ def _selftest():
                           .replace("grammar_check.py --selftest", "grammar_check.py --start")},
             root=BLOG_DIR) if "Selbsttest" in f[1]]:
         failures.append("C47: ein Tageslauf ohne Selbsttest bleibt unentdeckt.")
+
+    # --- C48: Das Diff-Tor UND seine Selbstheilung (06.11.2026, #1060) ----
+    # Fünf Sabotagen am echten Modul. Ohne diese Proben ist C48 eine
+    # Momentaufnahme: Am 06.11.2026 stand die Regel im Vertrag, aber nichts
+    # bewies, dass sie bei einer kaputten Heilung überhaupt rot werden KANN.
+    c48_gate_text = _read(os.path.join(BLOG_DIR, "scripts",
+                                       "bestand_einzigartigkeit_gate.py"))
+    c48_wflow = {"link-check.yml": _read(os.path.join(
+        BLOG_DIR, ".github", "workflows", "link-check.yml"))}
+    if not c48_gate_text:
+        failures.append("C48: der Selbsttest kann das Tor nicht lesen.")
+    else:
+        # C48 prüft AUCH den Publikations-Vertrag (V4-Weg) – die echte
+        # Menge muss mit, sonst meldet die Probe „V4 fehlt" und belegt
+        # nichts über die Sabotage, die sie prüfen will.
+        c48_gut = {"bestand_einzigartigkeit_gate.py": c48_gate_text,
+                   "publikations_vertrag.py": _read(os.path.join(
+                       BLOG_DIR, "scripts", "publikations_vertrag.py"))}
+
+        def _c48_grund(texts=None, flows=None):
+            return [f for f in c48_diff_tor_bestands_einzigartigkeit(
+                texts or c48_gut, flows or c48_wflow, root=BLOG_DIR)]
+
+        if _c48_grund():
+            failures.append("C48: der echte Zustand wird beanstandet: "
+                            f"{_c48_grund()[0][1][:90]}")
+        # (a) Die Schwelle wird kopiert statt importiert.
+        if not [f for f in _c48_grund({"bestand_einzigartigkeit_gate.py":
+                c48_gate_text.replace("KRITISCH_AB = cu.KRITISCH_AB",
+                                      "KRITISCH_AB = 5")})
+                if "KRITISCH_AB" in f[1]]:
+            failures.append("C48: eine kopierte Schwelle bleibt unentdeckt.")
+        # (b) Der Workflow ruft das Tor nicht mehr auf.
+        if not [f for f in _c48_grund(flows={"link-check.yml":
+                c48_wflow["link-check.yml"].replace(
+                    "bestand_einzigartigkeit_gate.py", "irgendwas.py")})
+                if "Diff-Tor" in f[1] or "Schritt" in f[1]]:
+            failures.append("C48: ein Workflow ohne Tor-Aufruf bleibt "
+                            "unentdeckt.")
+        # (c) Die Selbstheilung verliert ihre Live-Sperre – dann würde sie
+        #     Publikumsartikel ohne Auftrag ändern.
+        if not [f for f in _c48_grund({"bestand_einzigartigkeit_gate.py":
+                c48_gate_text.replace('parser.add_argument("--auch-live"',
+                                      'parser.add_argument("--still"')})
+                if "auch-live" in f[1]]:
+            failures.append("C48: eine Heilung ohne --auch-live-Sperre bleibt "
+                            "unentdeckt (Live-Artikel wären ohne Auftrag "
+                            "änderbar).")
+        # (d) Die Heilung fängt an, Prosa umzuschreiben – der Bruch der
+        #     einen Grenze, die sie nie überschreiten darf.
+        if not [f for f in _c48_grund({"bestand_einzigartigkeit_gate.py":
+                c48_gate_text.replace(
+                    "def _entferne_bloecke(text: str, bloecke) -> str:",
+                    "def _entferne_bloecke(text: str, bloecke) -> str:\n"
+                    "    text = umschreibe_prosa(text)")})
+                if "umschreib" in f[1].lower()]:
+            failures.append("C48: eine Heilung, die Prosa umschreibt, bleibt "
+                            "unentdeckt – genau die Grenze, die sie zieht.")
+        # (e) Die Mindestlänge fällt – dann wäre jede geteilte Wendung
+        #     löschbar und die Heilung ein Freibrief.
+        if not [f for f in _c48_grund({"bestand_einzigartigkeit_gate.py":
+                c48_gate_text.replace("KOPIE_MIN_WOERTER", "MIN_W")})
+                if "KOPIE_MIN" in f[1]]:
+            failures.append("C48: eine Heilung ohne Mindestlänge bleibt "
+                            "unentdeckt.")
 
     # Die EINZIGE Urteilsstelle des Selbsttests (Dauerheilung #806): erst
     # hier wird über alle Kunstbefunde entschieden – die Abschnitte sammeln,

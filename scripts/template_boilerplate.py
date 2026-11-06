@@ -37,8 +37,25 @@ import re
 
 # Die Fazit-Schmiede erzeugt "## Fazit: <Titel>" + S1/S2/S3-Satzblock und
 # "## Häufige Fragen" + FAQ_POOL. Beide Blöcke sind Template, kein Fließtext.
+#
+# H3-GRENZE IM FAZIT (#1027-Nachbesserung, 06.11.2026)
+# Der Block endete bisher nur an der nächsten H2 und lief sonst bis zum
+# Dateiende. Ein H3-Unterkapitel unter dem Fazit ist aber EIGENER Inhalt:
+# In content/posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-…/
+# standen 311 Zeichen Fließtext unter „### Diese Anschaffungen führen
+# regelmäßig zu Rückfragen“ und waren für das Audit unsichtbar – eine
+# Überlappung dort hätte niemand gemeldet. Das ist genau die Fehlerklasse
+# von #1027 (Text vorhanden, Messung blind), nur eine Ebene tiefer.
+#
+# Für FAQ gilt das AUSDRÜCKLICH NICHT: 99 von 109 Artikeln stellen dort eine
+# Frage je H3 – die H3-Unterkapitel SIND der FAQ-Block. Eine H3-Grenze würde
+# dort den halben Template-Block als Inhalt messen und die Altlasten von
+# 109 Artikeln auf einmal als „neu“ melden.
+#
+# Umsetzung ohne ReDoS-Kante: `#{2,3}` in einem Lookahead, kein zusätzliches
+# `.*?` über denselben Text – die Laufzeit bleibt linear wie zuvor.
 FAZIT_SECTION_RE = re.compile(
-    r"(?m)^[ \t]*##\s+Fazit\b.*?(?=^[ \t]*##\s|\Z)", re.S)
+    r"(?m)^[ \t]*##\s+Fazit\b.*?(?=^[ \t]*#{2,3}\s|\Z)", re.S)
 FAQ_SECTION_RE = re.compile(
     r"(?m)^[ \t]*##\s+(?:Häufige Fragen|Häufig gestellte Fragen|FAQ)\b"
     r".*?(?=^[ \t]*##\s|\Z)", re.S)
@@ -264,9 +281,15 @@ def strip_house_formulas(text: str) -> str:
 def strip_generated_conclusions(text: str) -> str:
     """Entfernt die deterministischen Fazit-/FAQ-Blöcke der Fazit-Schmiede.
 
-    Rückgabe: Text, in dem der Abschnitt von „## Fazit“ bis zur nächsten
-    H2-Überschrift sowie der Abschnitt „## Häufige Fragen“ bis zum nächsten
-    H2/Dokumentende durch Leerraum ersetzt ist. Nur echter Fließtext bleibt.
+    Rückgabe: Text, in dem der Abschnitt von „## Fazit“ bis zur nächsten H2-
+    ODER H3-Überschrift sowie der Abschnitt „## Häufige Fragen“ bis zum
+    nächsten H2/Dokumentende durch Leerraum ersetzt ist. Nur echter Fließtext
+    bleibt.
+
+    Die H3-Grenze im Fazit ist kein Geschmack: Ohne sie verschwand echter
+    Fließtext aus der Messung (311 Zeichen in 2026-10-05-bueroausstattung-…,
+    Fund vom 06.11.2026). Im FAQ bleibt die H3 dagegen Teil des Blocks –
+    dort ist sie die Fragenstruktur, nicht ein neues Kapitel.
     """
     text = FAZIT_SECTION_RE.sub(" ", text)
     text = FAQ_SECTION_RE.sub(" ", text)
@@ -317,6 +340,35 @@ def run_selftest() -> list:
         fehler.append("Fall 2: Fazit-Abschnitt wurde nicht entfernt")
     if "Fließtext vorher" not in stripped2:
         fehler.append("Fall 2: Fließtext vor dem Fazit fehlt")
+
+    # Fall 2b (Fund 06.11.2026, #1027-Nachbesserung): Ein H3-Unterkapitel
+    # unter „## Fazit“ ist EIGENER Inhalt und darf nicht mitverschwinden.
+    # Bis zu diesem Fix lief der Fazit-Block bis zum nächsten H2 – in
+    # 2026-10-05-bueroausstattung-… waren 311 Zeichen Fließtext unsichtbar.
+    doc_h3 = ("Fließtext vorher.\n\n## Fazit\nEin Schlusssatz.\n\n"
+              "### Diese Anschaffungen führen zu Rückfragen\n"
+              "Ein Gaming-Stuhl ohne Arbeitsbezug ist regelmäßig strittig.\n")
+    h3_rest = strip_generated_conclusions(doc_h3)
+    if "Gaming-Stuhl" not in h3_rest:
+        fehler.append("Fall 2b: H3-Unterkapitel unter dem Fazit wurde "
+                      "mitentfernt – echter Fließtext verschwindet aus der "
+                      "Messung (blindes Audit)")
+    if "Schlusssatz" in h3_rest:
+        fehler.append("Fall 2b: der Fazit-Block selbst blieb stehen")
+
+    # Fall 2c (Gegenprobe): Im FAQ ist die H3 die Fragenstruktur und gehört
+    # zum Block – sie darf NICHT als Grenze wirken (99 von 109 Artikeln
+    # stellen dort eine Frage je H3; sonst würden die Template-Fragen
+    # schlagartig als „Inhalt“ gemessen).
+    doc_faq_h3 = ("Text davor.\n\n## Häufige Fragen\n### Frage eins?\nAntwort.\n"
+                  "### Frage zwei?\nNoch eine Antwort.\n\n## Nächstes Kapitel\n"
+                  "Eigener Text danach.\n")
+    faq_rest = strip_generated_conclusions(doc_faq_h3)
+    if "Frage eins" in faq_rest or "Noch eine Antwort" in faq_rest:
+        fehler.append("Fall 2c: FAQ-H3-Blöcke wurden nicht entfernt – das "
+                      "FAQ würde wieder als Inhalt gemessen")
+    if "Eigener Text danach" not in faq_rest:
+        fehler.append("Fall 2c: Text nach dem FAQ wurde mitentfernt")
 
     # Fall 3: Idempotenz – zweiter Lauf ändert nichts mehr.
     if strip_generated_conclusions(stripped) != stripped:
