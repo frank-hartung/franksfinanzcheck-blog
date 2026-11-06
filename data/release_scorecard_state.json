@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-06T17:17:21Z",
+  "generated_at": "2026-11-06T17:56:54Z",
   "modus": "kandidaten",
-  "commit": "acb79ba66c232c9322cf8ea175fcded8e26bb79e",
+  "commit": "d3f0b96bae4ce52128845ec5569b124cee17562a",
   "kapazitaet": {
     "stichtag": "2026-11-06",
     "artikel": 115,
@@ -1023,7 +1023,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
@@ -1174,7 +1174,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-03",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
