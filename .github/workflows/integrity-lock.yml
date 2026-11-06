@@ -186,6 +186,8 @@ jobs:
         run: |
           python3 scripts/artefakt_waechter.py --selftest
           python3 scripts/artefakt_waechter.py
+          python3 scripts/konfliktmarker_wache.py --selftest
+          python3 scripts/konfliktmarker_wache.py
           python3 scripts/artefakt_waechter.py --md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
 
       # BEDEUTUNG STATT NUR SYNTAX (24.10.2026, Blockade des GSC-Bestands)

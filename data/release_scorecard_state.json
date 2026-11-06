@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-06T12:55:50Z",
-  "modus": "live",
-  "commit": "6aef0964d5b68b7ef1ba112dc45857e4d03902d6",
+  "generated_at": "2026-11-06T13:46:48Z",
+  "modus": "kandidaten",
+  "commit": "c60923579cf981788398e7de540ccb98fbbea273",
   "kapazitaet": {
     "stichtag": "2026-11-06",
     "artikel": 115,
@@ -45,11 +45,12 @@
       "entscheidung": "human",
       "quelle": "scripts/faktenfrische_befund_ledger.py (via publish_gate.fakten_befund_failures)",
       "artikel": [
+        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
         "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
         "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
         "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026"
       ],
-      "anzahl": 3
+      "anzahl": 4
     },
     {
       "check": "RD1-duplikate",
@@ -74,31 +75,21 @@
         "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum"
       ],
       "anzahl": 2
-    },
-    {
-      "check": "T6-textverstaendnis",
-      "dimension": "technik",
-      "wirkung": "blockiert",
-      "entscheidung": "auto",
-      "quelle": "scripts/textverstaendnis_guard.py (via publish_gate.textverstaendnis_failures)",
-      "artikel": [
-        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum"
-      ],
-      "anzahl": 1
     }
   ],
   "befundlage": {
-    "offen": 11,
-    "seiten": 4,
-    "live_befunde": 8,
-    "live_seiten": 3,
-    "ueberholt": 0,
+    "offen": 14,
+    "seiten": 5,
+    "live_befunde": 11,
+    "live_seiten": 4,
+    "ueberholt": 3,
     "ohne_fassung": 0,
     "nicht_entscheidbar": 0,
-    "aeltester_tage": 0,
+    "aeltester_tage": 1,
     "frist_tage": 14,
     "ueber_frist": 0,
     "je_slug": {
+      "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": 3,
       "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": 3,
       "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": 3,
       "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": 2
@@ -444,7 +435,7 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "dbbf33ed3fd409fa432695800675c561162e7e1312cb11b27ae7ccf0134b2e92",
+      "sha256": "f541df65178959971f2cdf66376ff0a8dea187b089f62a428200315a339a7889",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -727,13 +718,13 @@
       "checks": []
     },
     "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": {
-      "sha256": "5ddca8327462adc182f9573d4d1a6bde3a143ab02d54ec4e8a440eb949ee85c5",
+      "sha256": "71a68f1868de96b4ac649d2da91a8523fde369af4dccee26d0f8153eaf94cad6",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "blockiert",
+        "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "blockiert",
         "ymyl": "bestanden",
@@ -741,25 +732,25 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-20",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "24f05ddc03ffdd50118f (praezision): Die Kalkulation der Fixkostenersparnis bei Energie (Strom/Gas) ist unpräzise, da sie den aktuellen Preisanstieg von +14,9 % bei Energieprodukten nicht einbezieht.; 4816322f061dfdc03bcd (luecke): Bei den Einsparpotenzialen für Lebensmittel fehlt der Bezug zur aktuellen Preissteigerung von +0,4 % bei Nahrungsmitteln.; 7017065ee7c74c7ae452 (veraltet): Der Artikel nu"
+        },
         {
           "check": "RD1-duplikate",
           "dimension": "redundanz",
           "wirkung": "blockiert",
-          "detail": "D1-EXAKT: Absatz doppelt (Z.7919 ≈ Z.6060): [Quelle: Statistisches Bundesamt, Verbraucherpreisindex und Inflationsrate in Deutschland, https://w…; D3-X: Absatz wortgleich in 2 Artikeln (content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-; D4-X: Fast-Duplikat über Artikel (Ratio 1.00, content/posts/2026-"
+          "detail": "D3-X: Absatz wortgleich in 2 Artikeln (content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-; D4-X: Fast-Duplikat über Artikel (Ratio 1.00, content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit"
         },
         {
           "check": "RD2-einzigartigkeit",
           "dimension": "redundanz",
           "wirkung": "blockiert",
           "detail": "U1-PHRASEN: 6 gleiche 7-Wort-Phrasen mit 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich (z. B. „energieprodukte kosteten laut statistischem bundesamt verbraucherpreisindex im“) – ab 5 ist es Dopplung, Passage umschreiben"
-        },
-        {
-          "check": "T6-textverstaendnis",
-          "dimension": "technik",
-          "wirkung": "blockiert",
-          "detail": "R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…quelle statistisches bundesamt verbraucherpreisindex und inflationsrate in deutschland https www…“ – doppelte Passage, manuell reparieren"
         }
       ]
     },
@@ -778,7 +769,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-21",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -839,7 +830,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-21",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -864,7 +855,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-21",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1368,7 +1359,7 @@
       "checks": []
     },
     "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten": {
-      "sha256": "5ebbd8307d43a390c0b4c16d99975f9d4b3f759118a8329db00aa16efab54b7c",
+      "sha256": "4f08f73eba45b5c90d4fd964dc618b1a716241c31265d6cbf8d972bb8b881b7c",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1382,7 +1373,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {

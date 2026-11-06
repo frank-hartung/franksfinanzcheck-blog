@@ -29,6 +29,41 @@ set -euo pipefail
 WURZEL="$(git rev-parse --show-toplevel)"
 
 # ============================================================
+#  TEIL 0 (06.11.2026, Vorgang WF-8F6F / #1073): KONFLIKTMARKER
+#  ------------------------------------------------------------
+#  Am 05.11.2026 kam ein unaufgelöst aufgelöster Merge nach `main`
+#  (PR #1088): `BEFUND-AKTE.md` und `data/faktenfrische_befunde_state.json`
+#  enthielten `<<<<<<< HEAD … ======= … >>>>>>> f77c0af`. Kein lokaler
+#  Haken und kein Commit-Pfad hatte es gesehen – der Artefakt-Wächter
+#  deckt nur data/** ab, der Deploy nur content/layouts/static/hugo.toml.
+#  Diese Sperre prüft den GESTAGETEN Stand aller Dateitypen mit dem
+#  Block-Automaten scripts/konfliktmarker_wache.py (Haus-Docstrings mit
+#  Sieben-Gleichheitszeichen-Überschriften sind kein Fund).
+#  Rot heißt rot; Notausgang wie überall: git commit --no-verify.
+# ============================================================
+cd "$WURZEL"
+if [ ! -f scripts/konfliktmarker_wache.py ]; then
+  if git cat-file -e HEAD:scripts/konfliktmarker_wache.py 2>/dev/null ||
+     git ls-files --error-unmatch scripts/konfliktmarker_wache.py >/dev/null 2>&1; then
+    echo "🛑 Konfliktmarker-Sperre: Wache fehlt – Commit gestoppt."
+    exit 1
+  fi
+  echo "::warning:: Konfliktmarker-Sperre im Minimal-Repository nicht installiert."
+
+else
+  if ! command -v python3 >/dev/null 2>&1; then
+    echo "🛑 Konfliktmarker-Sperre: python3 fehlt – der gestagete Stand ist ungeprüft."
+    exit 1
+  fi
+  if ! python3 scripts/konfliktmarker_wache.py --staged; then
+    echo "🛑 Konfliktmarker-Sperre: Unaufgelöster Merge gestaget – Commit gestoppt."
+    echo "   Heilung: Konfliktblock bewusst auflösen (eine Seite je Block);"
+    echo "   maschinengenerierte Dateien neu erzeugen"
+    echo "   (z. B. python3 scripts/faktenfrische_befund_akte.py --schreiben)."
+    exit 1
+  fi
+fi
+# ============================================================
 #  TEIL 2 (04.11.2026, WF-829B / #1039): DAS SIEGEL WIRD HIER GEPRÜFT
 #  ------------------------------------------------------------
 #  Zwei Fehlerklassen, ein Ort: Am 02.11.2026 kam ein Siegel nach `main`,

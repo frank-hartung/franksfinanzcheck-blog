@@ -672,7 +672,16 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # lautlos abgeschafft wird. K5 prüft außerdem jeden Befehl in einem
           # Runbook-Zaun gegen `package.json`: ein Schritt ohne Erzeuger ist
           # genau der Fehler, den #806 als „Datenlage offen“ meldet.
-          "skills_vertrag.py"]
+          "skills_vertrag.py",
+          # Konfliktmarker-Wache (06.11.2026, #1073): Am 05.11.2026 landete
+          # ein unaufgelöst aufgelöster Merge nach `main` (PR #1088) – die
+          # Syntax-Notbremse sieht nur .py, der Artefakt-Wächter nur
+          # data/** und Frontmatter. Diese Wache hält den Block-Automaten
+          # bereit (vollständig/diff3/verwaist/unbeendet, Haus-Docstrings
+          # sauber) und hängt am Commit- und Push-Pfad (git_sync.sh,
+          # pre-commit) sowie am Deploy (--all). Ohne Eintrag hier liefe ihr
+          # Selbsttest in keinem Gate (C6) – ein Vertrag ohne Lauf ist Prosa.
+          "konfliktmarker_wache.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.

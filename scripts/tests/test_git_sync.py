@@ -89,6 +89,9 @@ class GitSyncTestBase(unittest.TestCase):
         subprocess.run(["git", "clone", "-q", str(self.origin), str(seed)],
                        check=True, stderr=subprocess.DEVNULL)
         self._cfg(seed)
+        (seed / "scripts").mkdir()
+        shutil.copy2(REPO_ROOT / "scripts" / "konfliktmarker_wache.py",
+                     seed / "scripts" / "konfliktmarker_wache.py")
         self._commit(seed, "README.md", "# Start\n", "init")
         subprocess.run(["git", "-C", str(seed), "push", "-q", "origin", "main"], check=True)
 

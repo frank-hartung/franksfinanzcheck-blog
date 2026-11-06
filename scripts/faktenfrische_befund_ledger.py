@@ -34,6 +34,24 @@ Sie schließt genau diesen Befund an genau diesem Text. Ändert sich der Text
 später, öffnet der Befund erneut – der Mensch muss die neue Aussage erneut
 anschauen. Das bleibt die Regel: **die Maschine entscheidet nie fachlich.**
 
+FOLGEENTSCHEIDUNG (06.11.2026, Dauerheilung)
+--------------------------------------------
+Genau dieser Fall – Entscheidung, dann legitime redaktionelle Textänderung
+(Heilung eines Befunds, Umformulierung wegen Dublette #1027) – war früher
+unauflösbar: Der Befund öffnete sich erneut, aber `--entscheiden` weigerte
+sich mit „Für diesen Befund existiert bereits eine Entscheidung“, und der
+Loader warf bei einem zweiten Eintrag „Doppelte Entscheidung“. Eine
+Heilung hätte den Bestand also dauerhaft rot gehalten, und zwar ohne
+jede fachliche Ursache.
+
+Jetzt gilt: Die Datei ist ein Anfügeprotokoll. Eine weitere Entscheidung
+zum selben Befund ist zulässig und heißt FOLGEENTSCHEIDUNG – sie bindet an
+den HEUTIGEN Text und referenziert ihre Vorgänger-Fassung
+(`vorgaenger_geprueft_fassung`). Eine Entscheidung, die den heutigen Text
+noch abdeckt, wird weiterhin abgelehnt (Idempotenz: nichts doppelt
+schreiben). Die Maschine entscheidet auch hier nie – es prüft wieder ein
+Mensch, nur eben die aktuelle Aussage.
+
 NACHLESE (#984): Ein Lauf schreibt das Dossier vor seiner Bilanz. Bricht er
 danach ab, liegen seine Befunde nur im Dossier. `--nachlese` liest die
 Dossiers und ergänzt ausschließlich, was im Ledger fehlt – idempotent, ohne
@@ -327,6 +345,11 @@ def entscheidungen_laden(path: Path = ENTSCHEIDUNGEN) -> dict[tuple[str, str], d
     v1 (bis 02.11.2026): `fassung_sha256` – bindet an die Prüffassung.
     v2 (ab 03.11.2026): `befund_fassung` + `geprueft_fassung` – bindet an den
     Ledger-Eintrag UND an den tatsächlich gelesenen Text.
+
+    Folgeentscheidung (06.11.2026): Steht zu einem Schlüssel mehr als ein
+    Eintrag da, gewinnt der ZULETZT geschriebene (Anfügeprotokoll). Eine
+    frühere Entscheidung bleibt in der Datei lesbar und ist über
+    `vorgaenger_geprueft_fassung` verkettet.
     """
     if not path.exists():
         return {}
@@ -363,8 +386,17 @@ def entscheidungen_laden(path: Path = ENTSCHEIDUNGEN) -> dict[tuple[str, str], d
             befund_fassung = entry["fassung_sha256"]
             entry = dict(entry, geprueft_fassung=entry["fassung_sha256"])
         key = (entry["slug"], entry["befund_id"])
-        if key in result:
-            raise LedgerFehler(f"Doppelte Entscheidung: {key}")
+        # Folgeentscheidung (06.11.2026): dieselbe Datei ist ein
+        # Anfügeprotokoll. Steht ein Schlüssel mehrfach da, gewinnt der
+        # ZULETZT geschriebene Eintrag (die gültige Entscheidung am heutigen
+        # Text); die Vorgänger bleiben in der Datei als Kette lesbar.
+        vorher = result.get(key)
+        if vorher:
+            if (entry.get("folgeentscheidung") is not True or
+                    entry.get("vorgaenger_geprueft_fassung") != vorher["geprueft_fassung"]):
+                raise LedgerFehler(f"Ungültige Folgeentscheidung für {key}: Vorgänger fehlt oder stimmt nicht")
+        elif entry.get("folgeentscheidung") or entry.get("vorgaenger_geprueft_fassung"):
+            raise LedgerFehler(f"Folgeentscheidung ohne Vorgänger: {key}")
         result[key] = dict(entry, befund_fassung=befund_fassung)
     return result
 
@@ -676,8 +708,20 @@ def entscheidung_anfuegen(befund_id_: str, von: str, begruendung: str,
         raise LedgerFehler(f"{entry['slug']}: {stand['hinweis']}")
     aktuell = fassungen[entry["slug"]]["text"]
     decisions = entscheidungen_laden(decisions_path)
-    if (entry["slug"], befund_id_) in decisions:
-        raise LedgerFehler("Für diesen Befund existiert bereits eine Entscheidung")
+    alt = decisions.get((entry["slug"], befund_id_))
+    if alt:
+        if _entscheidung_schliesst(alt, entry, fassungen):
+            # Idempotenz: die vorhandene Entscheidung deckt den heutigen
+            # Text bereits ab – nichts doppelt zu schreiben.
+            raise LedgerFehler("Für diesen Befund existiert bereits eine "
+                               "Entscheidung (gebunden an den heutigen Text) – "
+                               "nichts zu tun")
+        # Folgeentscheidung: Der Text wurde nach der Entscheidung geändert –
+        # genau der dokumentierte Heilungspfad. Die neue Entscheidung bindet
+        # an den HEUTIGEN Text und verweist auf ihre Vorgänger.
+        vorgaenger = alt.get("geprueft_fassung") or ""
+    else:
+        vorgaenger = ""
     decision = {
         "slug": entry["slug"],
         "befund_ursprung_slug": entry.get("ursprungs_slug", entry["slug"]),
@@ -692,6 +736,11 @@ def entscheidung_anfuegen(befund_id_: str, von: str, begruendung: str,
         "fassung_wechsel": stand["status"] != "aktuell",
         "begruendung": begruendung,
     }
+    if vorgaenger:
+        # Folgeentscheidung: Kette statt Überschreiben – die Vorgänger-
+        # Entscheidung bleibt in der Datei stehen und ist hier referenziert.
+        decision["vorgaenger_geprueft_fassung"] = vorgaenger
+        decision["folgeentscheidung"] = True
     daten = {"entscheidungen": []}
     if decisions_path.exists():
         roh = yaml.safe_load(decisions_path.read_text(encoding="utf-8")) or {}
@@ -869,8 +918,94 @@ def selftest() -> int:
         else:
             raise AssertionError("Alias-Schleife wurde nicht fail-closed erkannt")
 
+    # (i) Folgeentscheidung: Nach einer Entscheidung am geheilten Text bleibt
+    #     der Befund an die GELESENE Aussage gebunden (v2-Regel) – ändert sich
+    #     der Text erneut, öffnet sich der Befund, und die Folgeentscheidung
+    #     schließt ihn wieder. Die Datei hält die Kette; die zuletzt
+    #     geschriebene Entscheidung gewinnt.
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        queue_path = tmp / "queue.json"
+        decisions = tmp / "decisions.yaml"
+        fassung_a = body_hash("Text A (Befundfassung)")
+        fassung_b = body_hash("Text B (Heilung)")
+        fassung_c = body_hash("Text C (erneute Änderung)")
+        eintrag = {"id": befund_id("seite", finding), "slug": "seite",
+                   "fassung_sha256": fassung_a, "text_sha256": fassung_a,
+                   **finding, "beleg": "",
+                   "zuletzt_gesehen": "2026-11-03 12:18 UTC"}
+        queue_path.write_text(json.dumps({"fachbefunde": [eintrag]}),
+                              encoding="utf-8")
+        fassungen_b = {"seite": {"text": fassung_b, "pruef": fassung_b}}
+        fassungen_c = {"seite": {"text": fassung_c, "pruef": fassung_c}}
+        # Heilungs-Pfad: Der Text hatte sich seit dem Befund geändert – die
+        # Entscheidung bindet an den tatsächlich gelesenen Text B.
+        entscheidung_anfuegen(eintrag["id"], "Redaktion",
+                              "Am geheilten Text B geprüft, erledigt",
+                              queue_path=queue_path, decisions_path=decisions,
+                              fassungen=fassungen_b, heute=dt.date(2026, 11, 3))
+        assert offene_befunde(queue_path, decisions, fassungen_b) == []
+        # Idempotenz: Solange die Entscheidung den gelesenen Text abdeckt,
+        # wird nichts doppelt geschrieben.
+        try:
+            entscheidung_anfuegen(eintrag["id"], "Redaktion",
+                                  "Doppelte Entscheidung darf nicht gehen",
+                                  queue_path=queue_path, decisions_path=decisions,
+                                  fassungen=fassungen_b, heute=dt.date(2026, 11, 4))
+        except LedgerFehler:
+            pass
+        else:
+            raise AssertionError("Doppelte Entscheidung am selben gelesenen Text akzeptiert")
+        # Erneute Textänderung → Befund öffnet → Folgeentscheidung zulässig.
+        assert len(offene_befunde(queue_path, decisions, fassungen_c)) == 1
+        entscheidung_anfuegen(eintrag["id"], "Redaktion",
+                              "Am Text C erneut geprüft, erledigt",
+                              queue_path=queue_path, decisions_path=decisions,
+                              fassungen=fassungen_c, heute=dt.date(2026, 11, 6))
+        assert offene_befunde(queue_path, decisions, fassungen_c) == []
+        daten = yaml.safe_load(decisions.read_text(encoding="utf-8"))
+        eintraege = daten["entscheidungen"]
+        assert len(eintraege) == 2, eintraege
+        assert eintraege[1].get("folgeentscheidung") is True
+        assert eintraege[1].get("vorgaenger_geprueft_fassung") == fassung_b
+        # Die Kette bleibt vollständig lesbar – nichts wird überschrieben.
+        assert {e["geprueft_fassung"] for e in eintraege} == {fassung_b, fassung_c}
+
+    # (j) Stabiler Pfad (unverändert): Eine Entscheidung am FEHLUNGSFREI
+    #     gelesenen Text öffnet sich bei späterer Maschinenpflege nicht –
+    #     die Maschine schließt nie einen Befund, aber sie öffnet ihn auch
+    #     nicht durch ihre eigene Routinearbeit.
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        queue_path = tmp / "queue.json"
+        decisions = tmp / "decisions.yaml"
+        fassung_a = body_hash("Text A (stabil)")
+        eintrag = {"id": befund_id("stabil", finding), "slug": "stabil",
+                   "fassung_sha256": fassung_a, "text_sha256": fassung_a,
+                   **finding, "beleg": "",
+                   "zuletzt_gesehen": "2026-11-03 12:18 UTC"}
+        queue_path.write_text(json.dumps({"fachbefunde": [eintrag]}),
+                              encoding="utf-8")
+        fassungen_a = {"stabil": {"text": fassung_a, "pruef": fassung_a}}
+        fassungen_mut = {"stabil": {"text": body_hash("Text A\n"), "pruef": body_hash("Text A\n")}}
+        entscheidung_anfuegen(eintrag["id"], "Redaktion",
+                              "Am unveränderten Text A geprüft, erledigt",
+                              queue_path=queue_path, decisions_path=decisions,
+                              fassungen=fassungen_a, heute=dt.date(2026, 11, 3))
+        assert offene_befunde(queue_path, decisions, fassungen_mut) == []
+        try:
+            entscheidung_anfuegen(eintrag["id"], "Redaktion",
+                                  "Folgeentscheidung am stabilen Pfad braucht es nicht",
+                                  queue_path=queue_path, decisions_path=decisions,
+                                  fassungen=fassungen_mut, heute=dt.date(2026, 11, 6))
+        except LedgerFehler:
+            pass
+        else:
+            raise AssertionError("Stabiler Pfad schreibt doppelte Entscheidung")
+
     print("✅ Faktenfrische-Befundledger: zwei Hashes, fassungsgebundene "
-          "Entscheidung, Textänderung bleibt schließbar, Quellenpflege öffnet "
+          "Entscheidung, Textänderung bleibt schließbar, Folgeentscheidung "
+          "mit Kette (#912), Quellenpflege öffnet "
           "nicht, Altbestand entscheidbar, Re-Dating-Aliasse (#1073), Nachlese, "
           "fail-closed.")
     return 0
