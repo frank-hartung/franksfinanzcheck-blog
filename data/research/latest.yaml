@@ -1,5 +1,5 @@
-generated_at: '2026-11-05T11:29:40Z'
-day: '2026-11-05'
+generated_at: '2026-11-06T11:28:54Z'
+day: '2026-11-06'
 mode: deterministic
 teams:
   trending:
@@ -252,65 +252,60 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: Die besten Tarife für ein günstiges Handy-Abonnement
-    pillar: internet-dsl
+  - topic: Die richtige Absicherung für dein Haus
+    pillar: versicherungen
     signal: niche_hook
-    source: topics:Die besten Tarife für ein günstiges Handy-Abonnement
+    source: topics:Die richtige Absicherung für dein Haus
     score: 0.55
     keywords:
-    - günstiges Handy-Abonnement
-    - Tarifvergleich
-    - Mobilfunk
-  - topic: 'Dispozinsen legal vermeiden: Die 3 besten Girokonten für den Kontowechsel'
-    pillar: konto-karten
-    signal: niche_hook
-    source: 'topics:Dispozinsen legal vermeiden: Die 3 besten Girokonten für den Kontowechsel'
-    score: 0.55
-    keywords:
-    - Girokonto Dispozins Vergleich
-    - Kontoführungsgebühren zurückfordern
-    - Kontowechsel Prämie
-    - Bestes Girokonto 2026
-  - topic: Günstige Internet-Tarife für Zuhause finden
-    pillar: internet-dsl
-    signal: niche_hook
-    source: topics:Günstige Internet-Tarife für Zuhause finden
-    score: 0.55
-    keywords:
-    - Internet-Tarife
-    - Zuhause
-    - Günstig
-  - topic: 'Heizsaison 2026/27: Warum der Gasanbieter-Wechsel im Oktober am lukrativsten
-      ist'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Heizsaison 2026/27: Warum der Gasanbieter-Wechsel im Oktober am
-      lukrativsten ist'
-    score: 0.55
-    keywords:
-    - Heizperiode Beginn
-    - Gastarife vergleichen Oktober
-    - Neukundenbonus Gas
-    - Heizkosten senken Winter
-  - topic: Kreditkarten mit guten Leistungen
-    pillar: konto-karten
-    signal: niche_hook
-    source: topics:Kreditkarten mit guten Leistungen
-    score: 0.55
-    keywords:
-    - Kreditkarte
-    - Leistungen
-    - Vorteile
-  - topic: 'Weihnachtsbudget planen: Ohne Schulden durch die Feiertage'
+    - Haus
+    - Versicherung
+    - Schutz
+  - topic: Haushaltskosten reduzieren mit einfachen Mitteln
     pillar: frugalismus
     signal: niche_hook
-    source: 'topics:Weihnachtsbudget planen: Ohne Schulden durch die Feiertage'
+    source: topics:Haushaltskosten reduzieren mit einfachen Mitteln
     score: 0.55
     keywords:
-    - Weihnachten Budget planen
-    - Weihnachten sparen
-    - Geschenkebudget
-    - Weihnachten ohne Schulden
+    - Haushaltskosten
+    - reduzieren
+    - Mitteln
+  - topic: 'Heizkostenabrechnung prüfen: So findest du Fehler in 10 Minuten'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Heizkostenabrechnung prüfen: So findest du Fehler in 10 Minuten'
+    score: 0.55
+    keywords:
+    - Heizkostenabrechnung prüfen
+    - Nebenkostenabrechnung Fehler
+    - Heizkosten zu hoch
+  - topic: Reise- und Unfallversicherungen im Vergleich
+    pillar: versicherungen
+    signal: niche_hook
+    source: topics:Reise- und Unfallversicherungen im Vergleich
+    score: 0.55
+    keywords:
+    - Reiseversicherung
+    - Unfallversicherung
+    - Vergleich
+  - topic: 'Reisekrankenversicherung: Wann sie sich wirklich lohnt'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Reisekrankenversicherung: Wann sie sich wirklich lohnt'
+    score: 0.55
+    keywords:
+    - Reisekrankenversicherung
+    - Auslandskrankenversicherung
+    - Reiseschutz
+  - topic: 'Schufa-Eintrag löschen lassen: So gehst du richtig vor'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Schufa-Eintrag löschen lassen: So gehst du richtig vor'
+    score: 0.55
+    keywords:
+    - Schufa Eintrag löschen
+    - Negativeintrag entfernen
+    - Bonität verbessern
 live_web:
   enabled: false
   findings: []
