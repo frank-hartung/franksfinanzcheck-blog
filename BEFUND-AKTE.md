@@ -2,13 +2,13 @@
 
 _Stand 2026-11-06 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**11 offene Befunde auf 4 Seiten · davon 3 Live-Seiten mit 8 Befunden · ältester 0 Tage · Frist 14 Tage.**
+**14 offene Befunde auf 5 Seiten · davon 4 Live-Seiten mit 11 Befunden · ältester 1 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 11 |
-| Seiten betroffen | 4 (davon live: 3) |
-| Text seit dem Befund geändert | 0 |
+| Offene Befunde | 14 |
+| Seiten betroffen | 5 (davon live: 4) |
+| Text seit dem Befund geändert | 3 |
 | Altbestand ohne Fassungs-Hash | 0 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
 | Über der Frist (14 Tage) | 0 |
@@ -32,9 +32,27 @@ _Stand 2026-11-06 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
+> **Wichtig – betrifft 3 von 14 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+
 ## Seiten
 
-### `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler` · **LIVE** · Risikoklasse standard · 3 Befund(e)
+### `2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
+
+Datei: `content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `24f05ddc03ffdd50118f` | praezision | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Kalkulation der Fixkostenersparnis bei Energie (Strom/Gas) ist unpräzise, da sie den aktuellen Preisanstieg von +14,9 % bei Energieprodukten nicht einbezieht. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `4816322f061dfdc03bcd` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Bei den Einsparpotenzialen für Lebensmittel fehlt der Bezug zur aktuellen Preissteigerung von +0,4 % bei Nahrungsmitteln. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `7017065ee7c74c7ae452` | veraltet | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Artikel nutzt Kostenszenarien für 2024/2025, während aktuelle Daten für Oktober 2026 eine Inflationsrate von +2,8 % ausweisen. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 24f05ddc03ffdd50118f --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4816322f061dfdc03bcd --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7017065ee7c74c7ae452 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
 
 Datei: `content/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/index.md`
 
@@ -50,7 +68,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 81c6a707139046b83cc
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8cc00288af8a1f2b02d8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag` · **LIVE** · Risikoklasse standard · 3 Befund(e)
+### `2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
 
 Datei: `content/posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/index.md`
 
@@ -66,7 +84,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden e48f9237cff6397c49a
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f6de6b078d49f9d42e0e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026` · **LIVE** · Risikoklasse standard · 2 Befund(e)
+### `2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026` · **LIVE** (blockiert) · Risikoklasse standard · 2 Befund(e)
 
 Datei: `content/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/index.md`
 
