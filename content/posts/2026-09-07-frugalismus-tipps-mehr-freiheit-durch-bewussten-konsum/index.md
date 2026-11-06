@@ -149,9 +149,9 @@ Typische Kandidaten sind:
 
 Das sind über **500 € im Jahr**, ohne dass du deine Lebensqualität sichtbar verschlechtert.
 
-**Hinweis zum Stand der Preise:** Energieprodukte kosteten laut Statistischem Bundesamt (Verbraucherpreisindex) im Oktober 2026 vorläufig +14,9 % mehr als ein Jahr zuvor. Die Tabelle ist ein Beispiel mit Annahmen; deine tatsächliche Ersparnis hängt von deinem Tarif, deinen Preisen und deinem Verbrauch ab und kann bei Energie höher ausfallen.
+**Hinweis zum Stand der Preise:** Laut vorläufigem Verbraucherpreisindex des Statistischen Bundesamts lagen die Energieprodukte im Oktober 2026 um +14,9 % über dem Vorjahreswert. Die Tabelle ist ein Beispiel mit Annahmen; deine tatsächliche Ersparnis hängt von deinem Tarif, deinen Preisen und deinem Verbrauch ab und kann bei Energie höher ausfallen.
 
-[Quelle: Statistisches Bundesamt, Verbraucherpreisindex und Inflationsrate in Deutschland, https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html]
+[Quelle: Statistisches Bundesamt – Verbraucherpreisindex im Oktober 2026, vorläufig: Energieprodukte mit einem Anstieg von 14,9 Prozent gegenüber dem Vorjahresmonat. Link: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html]
 
 Wenn du damit anfangen willst, helfen dir diese Artikel weiter:
 
@@ -189,7 +189,9 @@ Typische Kostentreiber:
 
 Schon daraus entstehen schnell **30 € bis 60 € pro Woche**. Selbst wenn du nur die Hälfte erreichst, ist das auf den Monat gerechnet deutlich.
 
-**Hinweis zum Stand der Preise:** Nahrungsmittel lagen laut Statistischem Bundesamt (Verbraucherpreisindex) im Oktober 2026 mit +0,4 % über dem Vorjahresmonat. Die Beispiele sind Orientierungswerte, keine Versprechen – deine Ersparnis hängt von den tatsächlichen Preisen im Einkauf ab.
+**Hinweis zum Stand der Preise:** Nach dem Indexstand des Statistischen Bundesamts lagen Nahrungsmittel im Oktober 2026 um +0,4 % über dem Niveau des Vorjahresmonats. Die Beispiele sind Orientierungswerte, keine Versprechen – deine Ersparnis hängt von den tatsächlichen Preisen im Einkauf ab.
+
+[Quelle wie oben: Statistisches Bundesamt, Vorläufiger Verbraucherpreisindex im Oktober 2026 – Posten Nahrungsmittel, +0,4 % gegenüber dem Vorjahresmonat.]
 
 ## Frugalismus-Tipp 5: Ersparnisse sofort sichern
 
