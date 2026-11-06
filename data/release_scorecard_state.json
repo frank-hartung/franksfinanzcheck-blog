@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-06T15:01:39Z",
+  "generated_at": "2026-11-06T15:46:17Z",
   "modus": "kandidaten",
-  "commit": "8eaef5c2b4da6066daffaab532c005de5ac3990a",
+  "commit": "30e401576f30a405620f3ce825e2fe6fd048cce6",
   "kapazitaet": {
     "stichtag": "2026-11-06",
     "artikel": 115,
@@ -14,12 +14,12 @@
       "frist": "2026-11-12",
       "restlaufzeit": 6
     },
-    "budget": 4,
+    "budget": 12,
     "laeufe_je_tag": 1.0,
-    "kapazitaet_je_tag": 4.0,
+    "kapazitaet_je_tag": 12.0,
     "bedarf_je_tag": 2.822,
     "bedarf_je_woche": 19.8,
-    "deckung_prozent": 141.7,
+    "deckung_prozent": 425.2,
     "horizont_tage": 120,
     "vorlauf_tage": 7,
     "nachhol_frist_tage": 7,
@@ -32,10 +32,11 @@
     "offen_im_horizont": 115,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
-    "sockel": 4,
-    "empfohlenes_budget": 4,
+    "sockel": 12,
+    "empfohlenes_budget": 12,
     "empfehlung_erreicht": true,
-    "hartes_limit": 16
+    "hartes_limit": 16,
+    "spitze_geprueft": 52
   },
   "ursachen": [
     {
@@ -711,7 +712,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-20",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": {
@@ -1524,7 +1525,7 @@
       "checks": []
     },
     "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": {
-      "sha256": "7534bc98104d490fde7b4681b1ced69a291fc6fb7c140abb7546da3191c31329",
+      "sha256": "a15c4d5844f232efbc6bb03598cfe831448537222f744bb8e8a7803f4fd18063",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
