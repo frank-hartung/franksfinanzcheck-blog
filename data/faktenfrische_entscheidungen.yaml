@@ -1721,3 +1721,116 @@ entscheidungen:
     Die beanstandete Aussage (Tief Jan/Feb, 10–20 % Herbst-Ersparnis, Tiefpreis 0,80
     €, 15 %-Fehler, 4-Wochen-Faustregel) ist im aktuellen Draft entfernt oder als
     Modell/Beispiel gekennzeichnet; Befund gegenueber der dokumentierten Fassung gegenstandslos.'
+- slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
+  befund_ursprung_slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
+  befund_id: 24f05ddc03ffdd50118f
+  befund_fassung: 04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9
+  geprueft_fassung: 27dcd1545644e95a03e8eaba43cb14c223a7811cdec7a7d4b2b63127cdee8827
+  typ: praezision
+  beanstandung: Die Kalkulation der Fixkostenersparnis bei Energie (Strom/Gas) ist
+    unpräzise, da sie den aktuellen Preisanstieg von +14,9 % bei Energieprodukten
+    nicht einbezieht.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 06.11.2026'
+  entschieden_am: '2026-11-06'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung nach Textänderung vom 06.11.2026 (nur Preis-/Quellenhinweis-Zeilen
+    umformuliert, 7-Wort-Dopplungen zum Live-Artikel finanzielle-freiheit beseitigt,
+    #1027); Zahlen und Belege unveraendert. Die beanstandete Fixkosten-Kalkulation
+    mit Energiepreisanstieg ist auch im heutigen Text nicht enthalten. Befund gegenueber
+    heutigem Text gegenstandslos.'
+  vorgaenger_geprueft_fassung: 4893ca768ce1c6d1bf479827040cac6371d2d2fc43c55f966ea78a562f6d5246
+  folgeentscheidung: true
+- slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
+  befund_ursprung_slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
+  befund_id: 4816322f061dfdc03bcd
+  befund_fassung: 04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9
+  geprueft_fassung: 27dcd1545644e95a03e8eaba43cb14c223a7811cdec7a7d4b2b63127cdee8827
+  typ: luecke
+  beanstandung: Bei den Einsparpotenzialen für Lebensmittel fehlt der Bezug zur aktuellen
+    Preissteigerung von +0,4 % bei Nahrungsmitteln.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 06.11.2026'
+  entschieden_am: '2026-11-06'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung nach Textänderung vom 06.11.2026 (nur Preis-/Quellenhinweis-Zeilen
+    umformuliert, Dopplungen beseitigt, #1027); der Nahrungsmittelpreisbezug +0,4
+    % (Oktober 2026) bleibt genannt. Die beanstandete Behauptung eines Lebensmittel-Einsparpotenzials
+    ohne Preisbezug ist auch heute nicht enthalten. Befund gegenueber heutigem Text
+    gegenstandslos.'
+  vorgaenger_geprueft_fassung: 4893ca768ce1c6d1bf479827040cac6371d2d2fc43c55f966ea78a562f6d5246
+  folgeentscheidung: true
+- slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
+  befund_ursprung_slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
+  befund_id: 7017065ee7c74c7ae452
+  befund_fassung: 04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9
+  geprueft_fassung: 27dcd1545644e95a03e8eaba43cb14c223a7811cdec7a7d4b2b63127cdee8827
+  typ: veraltet
+  beanstandung: Der Artikel nutzt Kostenszenarien für 2024/2025, während aktuelle
+    Daten für Oktober 2026 eine Inflationsrate von +2,8 % ausweisen.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 06.11.2026'
+  entschieden_am: '2026-11-06'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung nach Textänderung vom 06.11.2026 (nur Preis-/Quellenhinweis-Zeilen
+    umformuliert, Dopplungen beseitigt, #1027). Veraltete Kostenszenarien fuer 2024/2025
+    sind weiterhin nicht enthalten; das Beispiel nennt kein Jahr mehr. Befund gegenueber
+    heutigem Text gegenstandslos.'
+  vorgaenger_geprueft_fassung: 4893ca768ce1c6d1bf479827040cac6371d2d2fc43c55f966ea78a562f6d5246
+  folgeentscheidung: true
+- slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
+  befund_ursprung_slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
+  befund_id: 24f05ddc03ffdd50118f
+  befund_fassung: 04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9
+  geprueft_fassung: be2c33c144ef7862a025f6fa09504cb8a9a76a6a01d815d65f9f293c52ad6f7e
+  typ: praezision
+  beanstandung: Die Kalkulation der Fixkostenersparnis bei Energie (Strom/Gas) ist
+    unpräzise, da sie den aktuellen Preisanstieg von +14,9 % bei Energieprodukten
+    nicht einbezieht.
+  beleg: RD1/T6-Fix und Release-Scorecard --live --streng
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 06.11.2026'
+  entschieden_am: '2026-11-06'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung nach Textänderung vom 06.11.2026 (RD1/T6-Remediation
+    im strengen Release-Scorecard-Lauf #1070): Dublette der Statistisches-Bundesamt-Quellenangabe
+    entzerrt, Bezug ''Quelle wie oben'' verankert. Inhaltlicher Befund ist gegenüber
+    dem heutigen Text gegenstandslos (Energieargument mit Datumsstand Oktober 2026,
+    vorläufig).'
+  vorgaenger_geprueft_fassung: 27dcd1545644e95a03e8eaba43cb14c223a7811cdec7a7d4b2b63127cdee8827
+  folgeentscheidung: true
+- slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
+  befund_ursprung_slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
+  befund_id: 4816322f061dfdc03bcd
+  befund_fassung: 04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9
+  geprueft_fassung: be2c33c144ef7862a025f6fa09504cb8a9a76a6a01d815d65f9f293c52ad6f7e
+  typ: luecke
+  beanstandung: Bei den Einsparpotenzialen für Lebensmittel fehlt der Bezug zur aktuellen
+    Preissteigerung von +0,4 % bei Nahrungsmitteln.
+  beleg: RD1/T6-Fix und Release-Scorecard --live --streng
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 06.11.2026'
+  entschieden_am: '2026-11-06'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung nach Textänderung vom 06.11.2026 (RD1/T6-Remediation
+    im strengen Release-Scorecard-Lauf #1070): Dublette der Statistisches-Bundesamt-Quellenangabe
+    entzerrt, Bezug ''Quelle wie oben'' verankert. Inhaltlicher Befund ist gegenüber
+    dem heutigen Text gegenstandslos.'
+  vorgaenger_geprueft_fassung: 27dcd1545644e95a03e8eaba43cb14c223a7811cdec7a7d4b2b63127cdee8827
+  folgeentscheidung: true
+- slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
+  befund_ursprung_slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
+  befund_id: 7017065ee7c74c7ae452
+  befund_fassung: 04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9
+  geprueft_fassung: be2c33c144ef7862a025f6fa09504cb8a9a76a6a01d815d65f9f293c52ad6f7e
+  typ: veraltet
+  beanstandung: Der Artikel nutzt Kostenszenarien für 2024/2025, während aktuelle
+    Daten für Oktober 2026 eine Inflationsrate von +2,8 % ausweisen.
+  beleg: RD1/T6-Fix und Release-Scorecard --live --streng
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 06.11.2026'
+  entschieden_am: '2026-11-06'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung nach Textänderung vom 06.11.2026 (RD1/T6-Remediation
+    im strengen Release-Scorecard-Lauf #1070): Dublette der Statistisches-Bundesamt-Quellenangabe
+    entzerrt, Bezug ''Quelle wie oben'' verankert. Inhaltlicher Befund ist gegenüber
+    dem heutigen Text gegenstandslos.'
+  vorgaenger_geprueft_fassung: 27dcd1545644e95a03e8eaba43cb14c223a7811cdec7a7d4b2b63127cdee8827
+  folgeentscheidung: true

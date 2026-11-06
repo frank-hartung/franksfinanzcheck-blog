@@ -213,7 +213,7 @@ Solche Tarife arbeiten häufig mit eigenen Zählern und Zeitfenstern. Prüfe die
 
 Dann bleiben die Kilowattstunden im teuren Fenster. Bei einem niedrigen Nachtanteil zahlst du mit dem Doppeltarif mehr als mit dem Einheitstarif. In diesem Fall ist der Wechsel zurück der richtige Schritt.
 
-**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/)
+**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Ökostrom Anbieter wechseln](../../posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/)
 **Lesetipp:** [Zählerstand ablesen und melden: Schätzwerte vermeiden](../../posts/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden/)
 
 ---
