@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-11-04
+lastmod: 2026-11-06
 title: "Campingurlaub planen: Budget für Platz und Fahrt"
 description: "Campingurlaub planen: Mit einem Budget für Platz, Anfahrt, Ausrüstung und Alltag erkennst du Zusatzkosten früh und wählst passend."
 date: 2026-10-09T14:01:19Z
@@ -207,7 +207,7 @@ Kühle nur, was du wirklich brauchst. Ein guter Kühler hält mehrere Tage. Kauf
 
 ### Wie plane ich den Einkauf vor der Abreise?
 
-Mach eine Liste für die ersten drei Tage. Alles Frische kaufst du unterwegs. Trockenes wie Reis, Nudeln und Kaffee kommt von zu Hause. Das spart Platz und Geld.
+Mach eine Liste für die ersten drei Tage. Alles Frische kaufst du unterwegs. Trockenes wie Nudeln, Haferflocken und Kaffee kommt von zu Hause. Das spart Platz und Geld.
 
 ### Lohnt sich die längere Anreisezeit?
 
