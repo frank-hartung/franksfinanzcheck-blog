@@ -38,6 +38,8 @@ on:
       # Generator + Logik der Akte selbst.
       - "scripts/faktenfrische_befund_akte.py"
       - "scripts/faktenfrische_befund_ledger.py"
+      # Wird aufgerufen (git_sync.sh) – W1 des Trigger-Wache.
+      - "scripts/git_sync.sh"
       - ".github/workflows/befund-akte-nachziehen.yml"
   workflow_dispatch: {}
 
