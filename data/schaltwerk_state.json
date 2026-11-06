@@ -35,6 +35,7 @@
     "nacht-planung::planung:2026-11-03": "2026-11-03T09:31:51+01:00",
     "nacht-planung::planung:2026-11-04": "2026-11-04T10:48:18+01:00",
     "nacht-planung::planung:2026-11-05": "2026-11-05T07:34:10+01:00",
+    "nacht-planung::planung:2026-11-06": "2026-11-06T10:17:40+01:00",
     "reach-signale-kuratieren::signal:https://www.heise.de/news/Neues-iPad-mini-koennte-deutlich-teurer-werden-11483675.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag": "2026-10-12T21:17:05+02:00",
     "reach-signale-kuratieren::signal:https://www.spiegel.de/wirtschaft/erneuerbare-energien-solarstromproduktion-uebertrifft-bereits-vorjahreswert-a-b90835bc-a613-44e1-9186-851ac443b0f2#ref=rss": "2026-10-04T16:20:48+02:00",
     "reach-signale-kuratieren::signal:https://www.spiegel.de/wirtschaft/katherina-reiche-cdu-formuliert-erste-plaene-fuer-spritpreisdeckel-a-f41e4366-d70a-485a-959b-f5d16256e46a#ref=rss": "2026-11-02T19:13:37+01:00",
@@ -89,7 +90,7 @@
   },
   "letzter_lauf": {
     "kanal-konfig-drift": "2026-10-13T03:35:57+02:00",
-    "nacht-planung": "2026-11-05T07:34:10+01:00",
+    "nacht-planung": "2026-11-06T10:17:40+01:00",
     "reach-signale-kuratieren": "2026-11-02T19:13:37+01:00",
     "standby-erinnerung": "2026-10-04T23:53:19+02:00",
     "stiller-kanal": "2026-10-12T21:17:05+02:00",
@@ -133,7 +134,8 @@
     "slot:2026-11-02:03:40": "2026-11-02T08:37:08+01:00",
     "slot:2026-11-03:03:40": "2026-11-03T09:31:51+01:00",
     "slot:2026-11-04:03:40": "2026-11-04T10:48:18+01:00",
-    "slot:2026-11-05:03:40": "2026-11-05T07:34:10+01:00"
+    "slot:2026-11-05:03:40": "2026-11-05T07:34:10+01:00",
+    "slot:2026-11-06:03:40": "2026-11-06T10:17:40+01:00"
   },
   "version": 1,
   "zaehler": {
@@ -174,7 +176,8 @@
       "2026-11-02": 1,
       "2026-11-03": 1,
       "2026-11-04": 1,
-      "2026-11-05": 1
+      "2026-11-05": 1,
+      "2026-11-06": 1
     },
     "reach-signale-kuratieren": {
       "2026-10-04": 6,
