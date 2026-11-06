@@ -100,8 +100,11 @@ Wache war grün – und ab dem **20.11.2026** hätte derselbe Bestand ohne
 eine einzige Code-Änderung rot gemeldet (49 rote Kalendertage im
 Folgejahr – Messung vom 04.11.2026, dokumentiert im Bericht
 `WARTUNG-VEROEFFENTLICHUNG-WF-829B-922-BUENDEL-DAUERHEILUNG-2026-11-04.md`).
-Am 06.11.2026 heißt der härteste Tag **2026-11-26**: Mit Sockel 4 kämen
-**38 von 83** heute frischen Seiten zu spät.
+**Korrektur 06.11.2026 (#1107):** Die Zahl „38 von 83 am 26.11.“ und der
+Befund „Sockel 4 rot“ stammten aus einer Messung, die den Bot bis zum
+Bündeltag nichts prüfen ließ (eingefrorenes Prüfdatum). Die Projektion
+rechnet jetzt die Trajektorie ab heute – die Arbeit, die der Bot bis zum
+Stichtag wirklich leistet. Die Tabelle unten ist die korrigierte Messung.
 
 Seit dem 04.11. misst C45 deshalb **zwei** Tage mit derselben Planrechnung:
 
@@ -116,14 +119,18 @@ Seit dem 04.11. misst C45 deshalb **zwei** Tage mit derselben Planrechnung:
 **Gemessen, nicht geschätzt** (06.11.2026, 115 Seiten, 35 Fristtage,
 23 am 27.11.2026):
 
-| Sockel (`max_artikel_pro_lauf`) | Bündel-Befund (Kalender-Sweep 06.11.2026) |
+| Sockel (`max_artikel_pro_lauf`) | Bündel-Befund, Trajektorie ab heute (Kalender-Sweep, 52 Montage, #1107) |
 |---|---|
-| 4 (bis 05.11.2026) | 5 von 52 Starttagen rot (voller Kalender 365 Tage: 36) · am 26.11. kämen 38 Seiten zu spät |
-| 12 (seit 06.11.2026) | **0 von 52** (365 Tage: 0) |
+| 1 oder 2 | 52 von 52 rot |
+| 3 | 12 von 52 rot |
+| 4 | **0 von 52** – Bündel-Boden |
+| 12 (seit 06.11.2026) | 0 von 52 |
 
-Deshalb der Sockel **4 → 12**. Limit (16) und Nachholfrist (7) bleiben
-unverändert; Intervalle wurden nicht angefasst – weniger messen wäre
-keine Heilung.
+Der Sockel 12 bleibt, aber seine Begründung ist seit #1107 eine andere: die
+**Ausfall-Reserve**. Eine Woche ohne Lauf braucht je nach Startzeitpunkt Budget
+4 bis 7 (Probe vom 06.11.2026). Limit (16) und Nachholfrist (7) bleiben
+unverändert. Ob der Sockel auf 4 gesenkt oder bei 12 bleibt, ist eine
+Entscheidung des Herausgebers, keine der Wache.
 
 **Selbstheilung, nicht nur Messung (06.11.2026).** Der rote Lauf ist
 jetzt ein geschlossener Kreislauf statt eines Dauer-Alarms ohne
@@ -156,12 +163,25 @@ Läufen. Beobachtung: der Lauf committet nur `BEFUND-AKTE.md` und
 `data/faktenfrische_befunde_state.json` und heilt sich nicht selbst an, eine
 Schleife entsteht nicht.
 
-**Offen bleibt eine andere Klasse:** Baut sich ein Alt-Rückstand von
-über 100 Seiten auf (am 31.12.2026 der Fall), reicht auch das Limit 16
-nicht, ihn binnen sieben Tagen abzubauen – dann meldet die Wache
-`erreicht: False`. Das heilt kein Sockel; es ist die Rückstands-Klasse
-(#912) und gehört als eigene Entscheidung (Takt, Limit oder Intervall)
-behandelt.
+**Korrektur (#1107):** Die frühere Aussage „am 31.12.2026 baut sich ein
+Rückstand von über 100 Seiten auf, den kein Limit abbaut“ war ein Messfehler
+desselben Typs (eingefrorener Stand). Auf der Trajektorie ab heute ist der
+31.12.2026 ohne Befund.
+
+**Die echte offene Grenze ist ein langer Ausfall des Bots**, nicht das
+Limit. Gemessen (Ausfall-Probe, 06.11.2026, Start an Tag 3/10/20):
+
+| Ausfall | Minimales Budget ohne Fristverletzung | Verletzungen bei Budget 16 |
+|---|---|---|
+| 3 Tage | 4–5 | 0 |
+| 7 Tage | 4–7 | 0 |
+| 10 Tage | keines (bis Budget 60) | 2 (Limit 24: 2) |
+| 14 Tage | keines | 37 (Limit 24: 33) |
+
+Die Grenze setzt der Vorlauf von 7 Tagen: Fristen, die innerhalb des Ausfalls
+liegen, können nicht vorgearbeitet werden. Ein höheres Limit verschiebt sie
+nicht. Ein Hebel dafür wäre der Vorlauf, nicht das Limit – das ist eine eigene
+Entscheidung des Herausgebers.
 
 ### Nachzug 30.10.2026: Kalender statt Wochenmittel (#912)
 

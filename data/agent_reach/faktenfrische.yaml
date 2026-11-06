@@ -48,18 +48,21 @@ budget:
   max_artikel_pro_lauf: 12      # Rotation statt Rundumschlag (Sockel; trägt die Prüf-Bündel, C45)
   # 02.11.2026 (#912): 112 Seiten benötigen 3,01 Prüfungen/Tag bei
   # 110 % Mindestdeckung – Sockel 3 → 4. 04.11.2026 (#1039): 4 → 12.
-  # Nicht wegen des Durchschnitts, sondern wegen der BÜNDEL: 115 Seiten
-  # liegen auf nur 35 Fristtagen (Stand 06.11.2026), 23 davon am
-  # 27.11.2026. Mit 4 je Lauf war die Wache am ruhigen Stichtag grün,
-  # und ab dem 26.11. hätten 38 von 83 heute frischen Seiten ihre
-  # Frist gerissen – ohne dass Code oder Vertrag sich geändert hätten.
-  # Kalender-Sweep (06.11.2026): Sockel 4 → 5 von 52 Starttagen rot,
-  # Sockel 12 → 0 von 52 (voller Kalender 365 Tage: 36 rot → 0).
-  # Gemessen, nicht geschätzt: scripts/faktenfrische_kapazitaet.py
-  # (spitzenlast_stichtag, spitze_zahlen) und --json.
-  # Limit 16 und die Nachholfrist bleiben unverändert; offen bleibt die
-  # Rückstands-Klasse (31.12.2026), die kein Sockel heilt (Bericht
-  # vom 06.11.2026).
+  # KORREKTUR 06.11.2026 (#1107): Die Begründung „Bündel“ von #1039 war
+  # ein MESSFEHLER. Die Projektion rechnete ab dem eingefrorenen Prüfdatum
+  # von heute, als hätte der Bot bis zum Stichtag nichts geprüft. Die
+  # Zahlen „38 von 83 am 26.11.“ und „Sockel 4: 5 von 52 rot“ sind damit
+  # widerrufen. Gemessen als Trajektorie ab heute (dieselbe EDF-Auswahl wie
+  # der Bot): Sockel 4 → 0 von 52 Montage rot; Sockel 3 → 12 von 52;
+  # Sockel 2 und 1 → 52 von 52. Budget 4 ist also der Bündel-Boden.
+  # Der Sockel 12 bleibt ein Wert der Herausgeber-Entscheidung, aber mit
+  # anderer Begründung: AUSFALL-RESERVE. Eine Woche ohne Lauf braucht je
+  # nach Startzeitpunkt Budget 4 bis 7 (Probe 06.11.2026). Ab ca. zehn Tagen
+  # Ausfall hält KEIN Budget die Fristen, weil der Vorlauf 7 Tage beträgt –
+  # das Limit ist dort nicht der Engpass (Gegenprobe: 24 statt 16 bringt
+  # nichts). Gemessen: scripts/faktenfrische_kapazitaet.py (spitze_zahlen,
+  # plan mit basis) und --json.
+  # Limit 16 und die Nachholfrist bleiben unverändert.
   # 04.11.2026: Die +97-Tage-Uhrprobe legte alle 112 Prüftermine in denselben
   # Vollrückstand. Limit 10 konnte ihn nicht binnen sieben Tagen abbauen.
   # Die Kalenderrechnung wählt jetzt 14; Limit 16 lässt zwei Plätze Reserve.

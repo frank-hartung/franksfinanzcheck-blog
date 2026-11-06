@@ -36,6 +36,11 @@ die Reparatur in fünf Richtungen fest:
      Prüftermine sind BÜNDEL. Diese Datei hält die Spitzentag-Messung
      (`spitzenlast_stichtag`), ihre drei Zustände und den
      Kalender-Sweep des ausgelieferten Korridors (52 Montage) fest.
+  8. #1107: Die Projektion in die Zukunft rechnet den WEG des Bots, nicht
+     den eingefrorenen Stand von heute. Der eingefrorene Stand machte aus
+     einer Messung „rot am 26.11./31.12.“. Diese Datei hält beide Richtungen
+     fest: das Fehlbild bleibt rot, die Trajektorie wird grün, ein echter
+     Engpass bleibt rot (`ProjektionTrajektorieTest`).
 
 Alle Proben laufen gegen eingefrorene Tage (Uhr-Zwang, `selftest_clock`):
 Ein Test, der die Wanduhr liest, ist eine Verabredung mit dem Kalender.
@@ -601,7 +606,11 @@ class BuenndelWacheSweepTest(unittest.TestCase):
         befunde = []
         for i in range(self.MONATAGE):
             tag = erster_montag + dt.timedelta(weeks=i)
-            finde = kap.spitzenlast_stichtag(artikel, cfg, sockel, laeufe, tag)
+            # Ausgangspunkt ist HEUTE (#1107): Der Montag wird mit dem Stand
+            # gemessen, den der Bot bis dahin hinterlässt – nicht mit dem heute
+            # eingefrorenen Prüfdatum. Die eingefrorene Sicht war ein Fehlbild.
+            finde = kap.spitzenlast_stichtag(artikel, cfg, sockel, laeufe, tag,
+                                             basis=stichtag)
             if finde is not None:
                 befunde.append((tag.isoformat(), finde["stichtag"].isoformat(),
                                 finde["offen"], finde["frisch"]))
@@ -613,6 +622,122 @@ class BuenndelWacheSweepTest(unittest.TestCase):
             f"Sockel ({sockel}) dem Bestandswachstum anpassen (Limit {limit}) "
             "oder die Bündelung entzerren – Entscheidung des Herausgebers "
             "in data/agent_reach/faktenfrische.yaml.")
+
+    def test_der_sweep_hat_zaehne_ein_zu_kleines_budget_wird_rot(self):
+        # Gegenprobe (#1107): Der Sweep darf nicht blind werden, wenn die
+        # Trajektorie großzügiger rechnet. Budget 2 reißt an den ersten Montagen.
+        cfg = ff.lade_config()
+        artikel = ff.alle_artikel("alle")
+        laeufe, _ = kap.laeufe_aus_workflow()
+        stichtag = ff.heute()
+        erster_montag = stichtag + dt.timedelta(days=(7 - stichtag.weekday()) % 7)
+        rot = [kap.spitzenlast_stichtag(artikel, cfg, 2, laeufe,
+                                        erster_montag + dt.timedelta(weeks=i),
+                                        basis=stichtag)
+               for i in range(4)]
+        self.assertTrue(any(r is not None for r in rot),
+                        "Ein Budget von 2 je Lauf muss am Bündeltag reißen – "
+                        "sonst misst die Wache nichts mehr")
+
+
+class ProjektionTrajektorieTest(unittest.TestCase):
+    """Die Projektion in die Zukunft rechnet den Weg des Bots (#1107, 06.11.2026).
+
+    Befund: Die Wache rechnete einen Stichtag im Zukunft mit dem HEUTIGEN,
+    eingefrorenen Prüfdatum jeder Seite. Das unterstellt, der Bot prüfe in
+    der Zwischenzeit nichts. Am Bestand vom 06.11.2026 ergab das „rot am
+    26.11. und 31.12.“ (30 bzw. 104 überfällige Seiten) – die echte Trajektorie
+    (Budget 4 bis 16) hat an beiden Tagen 0 überfällige und 0 gerissene Fristen.
+
+    Diese Tests halten beide Richtungen fest: Die eingefrorene Projektion
+    bleibt als Fehlbild rot, die Trajektorie wird grün, wo der Bot trägt – und
+    ein echter Engpass bleibt rot (die Wache darf nicht blind werden).
+    """
+
+    def _bundel(self, n: int = 8) -> list[dict]:
+        """n saisonale Seiten (Intervall 30), alle mit Frist PROBETAG + 10.
+
+        Vorlaufbeginn ist PROBETAG + 3: Erst dann kann der Bot sie arbeiten.
+        """
+        letzte = PROBETAG - dt.timedelta(days=20)
+        return [{"slug": f"bundel-{i:03d}", "titel": "Heizung Winter saisonal",
+                 "beschreibung": "", "keywords": ["Heizung"], "pillar": "energie",
+                 "faktencheck": letzte}
+                for i in range(n)]
+
+    def test_eingefrorene_projektion_ist_kurz_vor_der_frist_rot(self):
+        # Das Fehlbild (wie am 26.11.): Der Tag liegt kurz vor der Frist, die
+        # Seiten gelten dort noch nicht als fällig („neu“), und der Stand von
+        # heute ist eingefroren – als hätte der Bot die Tage davor nichts geprüft.
+        # Am Fristtag selbst zählten sie als Rückstand; deshalb P+9 (#1107).
+        bundel = self._bundel(8)
+        cfg = cfg_probe(budget=2, limit=10)
+        tag = PROBETAG + dt.timedelta(days=9)
+        p = kap.plan(bundel, cfg, 2, 1.0, tag)   # ohne basis: eingefroren
+        self.assertFalse(p["puenktlich"],
+                         "Der Test verliert seinen Zweck, wenn das Fehlbild grün wird")
+        self.assertGreater(p["verletzungen_neu"], 0)
+
+    def test_trajektorie_am_buendeltag_ist_gruen(self):
+        # Dieselbe Seitenmenge, dieselbe Frist, derselbe Tag – aber der Bot hat
+        # ab dem Vorlaufbeginn (PROBETAG + 3) gearbeitet: 2 je Tag, 8 Seiten in
+        # vier Tagen. Der Stand am Tag ist daher ohne offene Frist.
+        bundel = self._bundel(8)
+        cfg = cfg_probe(budget=2, limit=10)
+        tag = PROBETAG + dt.timedelta(days=9)
+        p = kap.plan(bundel, cfg, 2, 1.0, tag, basis=PROBETAG)
+        self.assertTrue(p["puenktlich"], p["verletzungen"])
+        self.assertEqual(p["verletzungen_neu"], 0)
+        self.assertEqual(p["ueberfaellig"], 0)
+
+    def test_echter_engpass_bleibt_rot(self):
+        # Gegenprobe: 12 Seiten, Budget 1 – acht Plätze bis zur Frist reichen
+        # nicht. Die Trajektorie muss das sehen, sonst ist die Wache blind.
+        bundel = self._bundel(12)
+        cfg = cfg_probe(budget=1, limit=10)
+        p = kap.plan(bundel, cfg, 1, 1.0, PROBETAG, basis=PROBETAG)
+        self.assertFalse(p["puenktlich"])
+        self.assertGreater(p["verletzungen_neu"], 0)
+
+    def test_spitzentag_nutzt_den_stand_des_bots(self):
+        # Die Spitzentag-Messung bewertet den Bündeltag mit dem Stand, den der
+        # Bot dorthin hinterlässt – nicht mit dem eingefrorenen von heute.
+        bundel = self._bundel(8)
+        cfg = cfg_probe(budget=2, limit=10)
+        self.assertIsNone(kap.spitzenlast_stichtag(bundel, cfg, 2, 1.0, PROBETAG))
+        zahlen = kap.spitze_zahlen(bundel, cfg, 2, 1.0, PROBETAG)
+        self.assertNotIn("spitze_puenktlich", zahlen,
+                         "Ein Bündel, das der Bot trägt, ist kein Befund")
+        self.assertGreater(zahlen["spitze_geprueft"], 0)
+
+    def test_stand_am_heutigen_tag_ist_unveraendert(self):
+        bundel = self._bundel(8)
+        cfg = cfg_probe(budget=2, limit=10)
+        stande = kap.bestand_trajektorie(bundel, cfg, 2, 1.0, PROBETAG, {PROBETAG})
+        self.assertEqual(stande[PROBETAG], bundel)
+
+    def test_stand_an_einem_tag_haengt_nicht_vom_horizont_ab(self):
+        # Kausalität: Was der Bot bis zu einem Tag tut, hängt nicht davon ab,
+        # wie weit man danach rechnet. Sonst wäre die Trajektorie Zufall.
+        bundel = self._bundel(8)
+        cfg = cfg_probe(budget=2, limit=10)
+        ziel = PROBETAG + dt.timedelta(days=5)
+        kurz = kap.bestand_trajektorie(bundel, cfg, 2, 1.0, PROBETAG, {ziel})
+        lang = kap.bestand_trajektorie(bundel, cfg, 2, 1.0, PROBETAG,
+                                       {ziel, PROBETAG + dt.timedelta(days=60)})
+        self.assertEqual(kurz[ziel], lang[ziel])
+
+    def test_stand_am_tagesbeginn_zaehlt_jeden_tagesplatz_genau_einmal(self):
+        # Der Stand gilt ZU BEGINN des Tages: Tag 3 und Tag 4 sind mit je zwei
+        # Plätzen verarbeitet (vier Seiten), Tag 5 gehört dem Restart. Ein Stand
+        # nach der Verarbeitung würde Tag 5 doppelt zählen (#1107).
+        bundel = self._bundel(8)
+        cfg = cfg_probe(budget=2, limit=10)
+        ziel = PROBETAG + dt.timedelta(days=5)
+        stand = kap.bestand_trajektorie(bundel, cfg, 2, 1.0, PROBETAG, {ziel})[ziel]
+        geprueft = [a for a in stand if a["faktencheck"] > PROBETAG - dt.timedelta(days=20)]
+        self.assertEqual(len(geprueft), 4,
+                         "Tage 3 und 4 mit je zwei Plätzen: vier Seiten sind geprüft")
 
 
 if __name__ == "__main__":
