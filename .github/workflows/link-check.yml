@@ -52,7 +52,14 @@ jobs:
       REPORT_PRODUCTION: ${{ (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') }}
     steps:
       - name: Repository auschecken
+        # Volle Historie: DAS DIFF-TOR rechnete gegen die Git-Basis
+        # (pull_request.base.sha bzw. event.before). Bei depth 1 ist die
+        # Basis nicht auflösbar → das Tor fail-closes mit Exit 2 – korrekt,
+        # aber der Lauf wäre jedes Mal rot, ohne je gemessen zu haben.
+        # Gleiche Begründung wie beim Integritäts-Siegel.
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
 
       # ------------------------------------------------------------
       #  GOVERNANCE-VERTRAG + SELBSTTESTS (seit 07.09.2026, Befund #206)
