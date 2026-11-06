@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-06T14:24:00Z",
+  "generated_at": "2026-11-06T15:01:39Z",
   "modus": "kandidaten",
-  "commit": "112905a234e8e6f0689c316591258c0882549f6e",
+  "commit": "8eaef5c2b4da6066daffaab532c005de5ac3990a",
   "kapazitaet": {
     "stichtag": "2026-11-06",
     "artikel": 115,
@@ -47,44 +47,19 @@
       "artikel": [
         "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
         "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
-        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
         "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
         "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
         "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026"
       ],
-      "anzahl": 6
-    },
-    {
-      "check": "RD1-duplikate",
-      "dimension": "redundanz",
-      "wirkung": "blockiert",
-      "entscheidung": "auto",
-      "quelle": "scripts/duplikat_guard.py D1–D6 (via publish_gate.duplicate_failures)",
-      "artikel": [
-        "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
-        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum"
-      ],
-      "anzahl": 2
-    },
-    {
-      "check": "RD2-einzigartigkeit",
-      "dimension": "redundanz",
-      "wirkung": "blockiert",
-      "entscheidung": "human",
-      "quelle": "scripts/check_uniqueness.py U1–U2 (via publish_gate.uniqueness_failures)",
-      "artikel": [
-        "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
-        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum"
-      ],
-      "anzahl": 2
+      "anzahl": 5
     }
   ],
   "befundlage": {
-    "offen": 22,
-    "seiten": 7,
-    "live_befunde": 19,
-    "live_seiten": 6,
-    "ueberholt": 11,
+    "offen": 19,
+    "seiten": 6,
+    "live_befunde": 16,
+    "live_seiten": 5,
+    "ueberholt": 8,
     "ohne_fassung": 0,
     "nicht_entscheidbar": 0,
     "aeltester_tage": 5,
@@ -93,7 +68,6 @@
     "je_slug": {
       "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": 3,
       "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": 5,
-      "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": 3,
       "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": 3,
       "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": 3,
       "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": 2
@@ -187,7 +161,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -478,7 +452,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -611,7 +585,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte": {
@@ -688,34 +662,21 @@
     },
     "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
       "sha256": "71ebfc49f849da523ebb6a88bf951f330afef86306dc2eef2271bccedf3a00cf",
-      "urteil": "blockiert",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-20",
       "siegel_drift": "unverändert",
-      "checks": [
-        {
-          "check": "RD1-duplikate",
-          "dimension": "redundanz",
-          "wirkung": "blockiert",
-          "detail": "D3-X: Absatz wortgleich in 2 Artikeln (content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-; D4-X: Fast-Duplikat über Artikel (Ratio 1.00, content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit"
-        },
-        {
-          "check": "RD2-einzigartigkeit",
-          "dimension": "redundanz",
-          "wirkung": "blockiert",
-          "detail": "U1-PHRASEN: 6 gleiche 7-Wort-Phrasen mit 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum (z. B. „energieprodukte kosteten laut statistischem bundesamt verbraucherpreisindex im“) – ab 5 ist es Dopplung, Passage umschreiben"
-        }
-      ]
+      "checks": []
     },
     "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen": {
       "sha256": "4726400fec2bdfdc74c650b016633052b08e8721ad014bec4f748faa70e394b0",
@@ -736,41 +697,22 @@
       "checks": []
     },
     "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": {
-      "sha256": "71a68f1868de96b4ac649d2da91a8523fde369af4dccee26d0f8153eaf94cad6",
-      "urteil": "blockiert",
+      "sha256": "4fb146d60b3f44759f61da13d569f130b71840870dff3f6eadf19adaa688fdc9",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "blockiert",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "blockiert",
+        "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-20",
-      "siegel_drift": "unverändert",
-      "checks": [
-        {
-          "check": "F4-fachbefund",
-          "dimension": "faktenalter",
-          "wirkung": "blockiert",
-          "detail": "24f05ddc03ffdd50118f (praezision): Die Kalkulation der Fixkostenersparnis bei Energie (Strom/Gas) ist unpräzise, da sie den aktuellen Preisanstieg von +14,9 % bei Energieprodukten nicht einbezieht.; 4816322f061dfdc03bcd (luecke): Bei den Einsparpotenzialen für Lebensmittel fehlt der Bezug zur aktuellen Preissteigerung von +0,4 % bei Nahrungsmitteln.; 7017065ee7c74c7ae452 (veraltet): Der Artikel nu"
-        },
-        {
-          "check": "RD1-duplikate",
-          "dimension": "redundanz",
-          "wirkung": "blockiert",
-          "detail": "D3-X: Absatz wortgleich in 2 Artikeln (content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-; D4-X: Fast-Duplikat über Artikel (Ratio 1.00, content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit"
-        },
-        {
-          "check": "RD2-einzigartigkeit",
-          "dimension": "redundanz",
-          "wirkung": "blockiert",
-          "detail": "U1-PHRASEN: 6 gleiche 7-Wort-Phrasen mit 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich (z. B. „energieprodukte kosteten laut statistischem bundesamt verbraucherpreisindex im“) – ab 5 ist es Dopplung, Passage umschreiben"
-        }
-      ]
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": []
     },
     "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": {
       "sha256": "17c41212d78f97218bafd134a7fad88df91259602b0406d0bf89c0d4f4fb5180",
@@ -988,7 +930,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist": {
@@ -1582,7 +1524,7 @@
       "checks": []
     },
     "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": {
-      "sha256": "f4719802682ff28d38885321795cc2667a31ebd18f472e8634d9f05378ac2e3e",
+      "sha256": "7534bc98104d490fde7b4681b1ced69a291fc6fb7c140abb7546da3191c31329",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
