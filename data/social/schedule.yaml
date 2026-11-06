@@ -1,5 +1,5 @@
 version: 1
-generated_at: '2026-11-06T10:17:41.137311+01:00'
+generated_at: '2026-11-06T13:00:22.047502+01:00'
 horizon_days: 14
 timezone: Europe/Berlin
 items:
@@ -864,9 +864,9 @@ items:
   date: '2026-11-07'
   time: '11:30'
   scheduled_at: '2026-11-07T11:30:00+01:00'
-  status: planned
+  status: blocked
   attempts: 0
-  reason: ''
+  reason: 'Mo/Mi/Fr-Kadenz: Sendetermin Sa 07.11.2026 fiel auf keinen Publikationstag; seit Umstellung vom 06.11.2026 (nur Mo/Mi/Fr) stellt der Plan-Roll die Artikel automatisch auf den nächsten Publikationstag ein.'
 - id: instagram:2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten:zahl:2026-11-07
   channel: instagram
   slug: 2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten
@@ -936,9 +936,9 @@ items:
   date: '2026-11-07'
   time: '17:30'
   scheduled_at: '2026-11-07T17:30:00+01:00'
-  status: planned
+  status: blocked
   attempts: 0
-  reason: ''
+  reason: 'Mo/Mi/Fr-Kadenz: Sendetermin Sa 07.11.2026 fiel auf keinen Publikationstag; seit Umstellung vom 06.11.2026 (nur Mo/Mi/Fr) stellt der Plan-Roll die Artikel automatisch auf den nächsten Publikationstag ein.'
 - id: x:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026:thread:2026-11-07
   channel: x
   slug: 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
@@ -1944,9 +1944,9 @@ items:
   date: '2026-11-14'
   time: '17:30'
   scheduled_at: '2026-11-14T17:30:00+01:00'
-  status: planned
+  status: blocked
   attempts: 0
-  reason: ''
+  reason: 'Mo/Mi/Fr-Kadenz: Sendetermin Sa 14.11.2026 fiel auf keinen Publikationstag; seit Umstellung vom 06.11.2026 (nur Mo/Mi/Fr) stellt der Plan-Roll die Artikel automatisch auf den nächsten Publikationstag ein.'
 - id: x:2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn:mythos:2026-11-14
   channel: x
   slug: 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn
@@ -2544,9 +2544,9 @@ items:
   date: '2026-11-19'
   time: 07:30
   scheduled_at: '2026-11-19T07:30:00+01:00'
-  status: planned
+  status: blocked
   attempts: 0
-  reason: ''
+  reason: 'Mo/Mi/Fr-Kadenz: Sendetermin Do 19.11.2026 fiel auf keinen Publikationstag; seit Umstellung vom 06.11.2026 (nur Mo/Mi/Fr) stellt der Plan-Roll die Artikel automatisch auf den nächsten Publikationstag ein.'
 - id: linkedin:2026-08-10-dsl-wechselbonus-sichern:vergleich:2026-11-19
   channel: linkedin
   slug: 2026-08-10-dsl-wechselbonus-sichern

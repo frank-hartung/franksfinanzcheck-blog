@@ -143,7 +143,17 @@ channels:
       alt_required: true
       alt_max_chars: 1400
     cadence:
-      days: [0, 1, 2, 3, 4, 5, 6]
+      # UMSTELLUNG 2026-11-06 (Frank / Agentur): Mastodon streng auf die
+      # Blog-Publikationsroutine – nur Mo/Mi/Fr (DAUERVORGABE, siehe
+      # docs/CADENCE-REPORT.md Regel 2: 2–3 Artikel pro Publikationstag).
+      # Vorher war der Kanal auf täglich gestellt – ein Drift weg von der
+      # Redaktionsroutine. Die Uhrzeiten bleiben bewusst unverändert
+      # (07:30/11:30/17:30/20:00 Berlin; der Wachstumsplan testet 07:30–20:00
+      # abwechselnd). Die Veröffentlichungsroutine betrifft die Wochentage,
+      # nicht die Uhrzeit; der 14-Tage-Plan hält bereits Slots im
+      # 07:30/11:30-Raster. max. 2/Tag bleibt (siehe Wachstumsplan,
+      # „maximal zwei automatische Mastodon-Posts/Tag“).
+      days: [0, 2, 4]
       times: ["07:30", "11:30", "17:30", "20:00"]
       max_per_day: 2
       min_gap_min: 180

@@ -16,10 +16,23 @@ class TestProfile(unittest.TestCase):
 
     def test_positionierung_ohne_veraltete_claims(self):
         text = profile.DISPLAY_NAME + profile.NOTE
-        for claim in ('1.800', '25+', 'Mo/Mi/Fr', 'antworte persönlich'):
+        # Sparsumme/Zähler/Auto-Flirten bleiben verboten – die Publikationsroutine
+        # Mo/Mi/Fr ist seit 06.11.2026 EINER verbindlichen Dauervorgabe entnommen
+        # (docs/CADENCE-REPORT.md Regel 2) und daher AUSDRÜCKLICH erwünscht.
+        for claim in ('1.800', '25+', 'antworte persönlich'):
             self.assertNotIn(claim, text)
         self.assertIn('Affiliate', text)
         self.assertIn('4K-Kompass', text)
+        self.assertIn('Mo/Mi/Fr', text)
+
+    def test_bio_nennt_publikationsroutine_als_dauervorgabe(self):
+        # Die Bio muss die Mo/Mi/Fr-Veröffentlichungsroutine nennen (2–3 Artikel
+        # pro Publikationstag) – einmalig und ohne Uhrzeitversprechen.
+        self.assertIn('Mo/Mi/Fr', profile.NOTE)
+        self.assertIn('Publikationstag', profile.NOTE)
+        self.assertNotIn('MESZ', profile.NOTE)   # kein Uhrzeit-/Zeitversprechen
+        self.assertNotIn('Uhr', profile.NOTE)
+        self.assertLessEqual(len(profile.NOTE), 500)
 
     def test_dry_run_ohne_netz_oder_report(self):
         with patch.object(profile, 'DRY_RUN', True), \

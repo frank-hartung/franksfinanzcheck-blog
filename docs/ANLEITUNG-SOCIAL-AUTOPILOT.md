@@ -59,7 +59,7 @@ Alle Werte stehen in **`data/social/channels.yaml`** – der Single Source of Tr
 
 | Kanal | Zeichen | Hashtags | Emojis | Bild | Link | Taktung | Token läuft ab |
 |---|---:|---:|---:|---|---|---|---|
-| **Mastodon** | 500 | 2–4 | 2 | optional, Alt-Text | am Ende | 2/Tag | **nie** |
+| **Mastodon** | 500 | 2–4 | 2 | optional, Alt-Text | am Ende | **Mo/Mi/Fr, 2/Tag** | **nie** |
 | **Bluesky** | 300 | 1–2 | 1 | optional, Alt-Text | am Ende | 2/Tag | nie (App-Passwort) |
 | **LinkedIn** | 2.900 (optimal ≤ 1.800) | 3–5 | 0 | optional | **erster Kommentar** | 1/Tag, Mo–Fr | ~60 Tage |
 | **X (Twitter)** | 280 | 1–2 | 1 | optional | am Ende (zählt nur 23 Zeichen!) | 3/Tag | abhängig vom Tarif |

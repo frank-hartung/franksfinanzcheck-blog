@@ -6,29 +6,59 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Instagram
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:instagram:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzic
- ht:nutzen:2026-11-06@franksfinanzcheck.de
-DTSTAMP:20261105T204331Z
+UID:instagram:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-
+ update-2026:nutzen:2026-11-06@franksfinanzcheck.de
+DTSTAMP:20261106T120043Z
 DTSTART:20261106T104500Z
 DTEND:20261106T110000Z
-SUMMARY:Instagram: Frugalismus Familie: Clever sparen ohne Verzicht (n
- utzen)
+SUMMARY:Instagram: Dein Haus sicher schützen: Das neue Vorsorge-Update
+  2026 (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-familie-c
- lever-sparen-ohne-verzicht/
-URL:https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-familie-
- clever-sparen-ohne-verzicht/
+ : https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schu
+ etzen-das-neue-vorsorge-update-2026/
+URL:https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-sch
+ uetzen-das-neue-vorsorge-update-2026/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-10-12-energieausweis-was-das-dokument-fuer-deine-fi
+ xkosten:zahl:2026-11-07@franksfinanzcheck.de
+DTSTAMP:20261106T120043Z
+DTSTART:20261107T104500Z
+DTEND:20261107T110000Z
+SUMMARY:Instagram: Energieausweis: Was er für deine Fixkosten bedeutet
+  (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Instagram\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-10-12-energieausweis-was-das-
+ dokument-fuer-deine-fixkosten/
+URL:https://franksfinanzcheck.de/posts/2026-10-12-energieausweis-was-d
+ as-dokument-fuer-deine-fixkosten/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum
+ -monatlichen:takeaway:2026-11-08@franksfinanzcheck.de
+DTSTAMP:20261106T120043Z
+DTSTART:20261108T104500Z
+DTEND:20261108T110000Z
+SUMMARY:Instagram: ETF-Sparplan starten: Deine Schritt-für-Schritt-Anl
+ eitung (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Instagram\nArtik
+ el: https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starte
+ n-schritt-fuer-schritt-zum-monatlichen/
+URL:https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten
+ -schritt-fuer-schritt-zum-monatlichen/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-25-strategisch-sparen-so-kannst-du-deine-reiseka
- sse-fuellen:nutzen:2026-11-07@franksfinanzcheck.de
-DTSTAMP:20261105T204331Z
-DTSTART:20261107T104500Z
-DTEND:20261107T110000Z
+ sse-fuellen:mythos:2026-11-10@franksfinanzcheck.de
+DTSTAMP:20261106T120043Z
+DTSTART:20261110T104500Z
+DTEND:20261110T110000Z
 SUMMARY:Instagram: Strategisch sparen: So kannst du deine Reisekasse f
- üllen (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
+ üllen (mythos)
+DESCRIPTION:Status: geplant\nWinkel: mythos\nKanal: Instagram\nArtikel
  : https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-so
  -kannst-du-deine-reisekasse-fuellen/
 URL:https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-s
@@ -36,54 +66,24 @@ URL:https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-s
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstige
- ren-konto:nutzen:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261105T204331Z
-DTSTART:20261108T104500Z
-DTEND:20261108T110000Z
-SUMMARY:Instagram: Bankgebühren senken: 7 Schritte zum günstigeren Kon
- to (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken-
- 7-schritte-zum-guenstigeren-konto/
-URL:https://franksfinanzcheck.de/posts/2026-10-24-bankgebuehren-senken
- -7-schritte-zum-guenstigeren-konto/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:instagram:2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spart
- ricks:nutzen:2026-11-10@franksfinanzcheck.de
-DTSTAMP:20261105T204331Z
-DTSTART:20261110T104500Z
-DTEND:20261110T110000Z
-SUMMARY:Instagram: Energieeffizienz im Haushalt: 5 schnelle Spartricks
-  (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-10-24-energieeffizienz-im-h
- aushalt-5-schnelle-spartricks/
-URL:https://franksfinanzcheck.de/posts/2026-10-24-energieeffizienz-im-
- haushalt-5-schnelle-spartricks/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:instagram:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum
- -monatlichen:nutzen:2026-11-11@franksfinanzcheck.de
-DTSTAMP:20261105T204331Z
+UID:instagram:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzic
+ ht:zahl:2026-11-11@franksfinanzcheck.de
+DTSTAMP:20261106T120043Z
 DTSTART:20261111T104500Z
 DTEND:20261111T110000Z
-SUMMARY:Instagram: ETF-Sparplan starten: Deine Schritt-für-Schritt-Anl
- eitung (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-
- schritt-fuer-schritt-zum-monatlichen/
-URL:https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten
- -schritt-fuer-schritt-zum-monatlichen/
+SUMMARY:Instagram: Frugalismus Familie: Clever sparen ohne Verzicht (z
+ ahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Instagram\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-familie-cle
+ ver-sparen-ohne-verzicht/
+URL:https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-familie-
+ clever-sparen-ohne-verzicht/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-10-28-flugvergleich-im-winter-so-findest-du-echte-b
  illigfluege:nutzen:2026-11-12@franksfinanzcheck.de
-DTSTAMP:20261105T204331Z
+DTSTAMP:20261106T120043Z
 DTSTART:20261112T104500Z
 DTEND:20261112T110000Z
 SUMMARY:Instagram: Flugvergleich im Winter: So findest du echte Billig
@@ -96,44 +96,14 @@ URL:https://franksfinanzcheck.de/posts/2026-10-28-flugvergleich-im-win
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-
- update-2026:nutzen:2026-11-13@franksfinanzcheck.de
-DTSTAMP:20261105T204331Z
+UID:instagram:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-un
+ d-was-sie-kostet:mythos:2026-11-13@franksfinanzcheck.de
+DTSTAMP:20261106T120043Z
 DTSTART:20261113T104500Z
 DTEND:20261113T110000Z
-SUMMARY:Instagram: Dein Haus sicher schützen: Das neue Vorsorge-Update
-  2026 (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schu
- etzen-das-neue-vorsorge-update-2026/
-URL:https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-sch
- uetzen-das-neue-vorsorge-update-2026/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:instagram:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-14@fr
- anksfinanzcheck.de
-DTSTAMP:20261105T204331Z
-DTSTART:20261114T104500Z
-DTEND:20261114T110000Z
-SUMMARY:Instagram: DSL-Wechselbonus sichern: So sparst du beim Interne
- tvertrag (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sich
- ern/
-URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
- hern/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:instagram:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-un
- d-was-sie-kostet:nutzen:2026-11-15@franksfinanzcheck.de
-DTSTAMP:20261105T204331Z
-DTSTART:20261115T104500Z
-DTEND:20261115T110000Z
 SUMMARY:Instagram: Privathaftpflicht: Warum so wichtig und was sie kos
- tet (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
+ tet (mythos)
+DESCRIPTION:Status: geplant\nWinkel: mythos\nKanal: Instagram\nArtikel
  : https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-war
  um-sie-so-wichtig-ist-und-was-sie-kostet/
 URL:https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-wa
@@ -141,11 +111,71 @@ URL:https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-wa
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgara
- ntie-gas:nutzen:2026-11-17@franksfinanzcheck.de
-DTSTAMP:20261105T204331Z
+UID:instagram:2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-
+ bezahlbar:mythos:2026-11-14@franksfinanzcheck.de
+DTSTAMP:20261106T120043Z
+DTSTART:20261114T104500Z
+DTEND:20261114T110000Z
+SUMMARY:Instagram: Ökostrom Anbieter wechseln: Sicher\, grün und bezah
+ lbar (mythos)
+DESCRIPTION:Status: geplant\nWinkel: mythos\nKanal: Instagram\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-we
+ chseln-sicher-gruen-und-bezahlbar/
+URL:https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-w
+ echseln-sicher-gruen-und-bezahlbar/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-
+ achten-musst:takeaway:2026-11-15@franksfinanzcheck.de
+DTSTAMP:20261106T120043Z
+DTSTART:20261115T104500Z
+DTEND:20261115T110000Z
+SUMMARY:Instagram: Wohngebäudeversicherung Vergleich: Worauf du achten
+  musst (takeaway)
+DESCRIPTION:Status: geplant\nWinkel: takeaway\nKanal: Instagram\nArtik
+ el: https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversich
+ erung-vergleich-worauf-du-achten-musst/
+URL:https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversiche
+ rung-vergleich-worauf-du-achten-musst/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-08-10-dsl-wechselbonus-sichern:mythos:2026-11-17@fr
+ anksfinanzcheck.de
+DTSTAMP:20261106T120043Z
 DTSTART:20261117T104500Z
 DTEND:20261117T110000Z
+SUMMARY:Instagram: DSL-Wechselbonus sichern: So sparst du beim Interne
+ tvertrag (mythos)
+DESCRIPTION:Status: geplant\nWinkel: mythos\nKanal: Instagram\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sich
+ ern/
+URL:https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sic
+ hern/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sp
+ aren:zahl:2026-11-18@franksfinanzcheck.de
+DTSTAMP:20261106T120043Z
+DTSTART:20261118T104500Z
+DTEND:20261118T110000Z
+SUMMARY:Instagram: Kfz-Versicherung Vergleich 2026: Bis zu 800 € spare
+ n (zahl)
+DESCRIPTION:Status: geplant\nWinkel: zahl\nKanal: Instagram\nArtikel: 
+ https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergle
+ ich-bis-zu-800-euro-sparen/
+URL:https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-ver
+ gleich-bis-zu-800-euro-sparen/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgara
+ ntie-gas:nutzen:2026-11-19@franksfinanzcheck.de
+DTSTAMP:20261106T120043Z
+DTSTART:20261119T104500Z
+DTEND:20261119T110000Z
 SUMMARY:Instagram: Sicher heizen: Was sie abdeckt und wie lange sie lä
  uft (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -156,31 +186,16 @@ URL:https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-sch
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-
- achten-musst:nutzen:2026-11-18@franksfinanzcheck.de
-DTSTAMP:20261105T204331Z
-DTSTART:20261118T104500Z
-DTEND:20261118T110000Z
-SUMMARY:Instagram: Wohngebäudeversicherung Vergleich: Worauf du achten
-  musst (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicher
- ung-vergleich-worauf-du-achten-musst/
-URL:https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversiche
- rung-vergleich-worauf-du-achten-musst/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:instagram:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:n
- utzen:2026-11-19@franksfinanzcheck.de
-DTSTAMP:20261105T204331Z
-DTSTART:20261119T104500Z
-DTEND:20261119T110000Z
+UID:instagram:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:f
+ rage:2026-11-20@franksfinanzcheck.de
+DTSTAMP:20261106T120043Z
+DTSTART:20261120T104500Z
+DTEND:20261120T110000Z
 SUMMARY:Instagram: Geld abheben im Ausland: Wo die Gebühren wirklich e
- ntstehen (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausla
- nd-gebuehren-vermeiden/
+ ntstehen (frage)
+DESCRIPTION:Status: geplant\nWinkel: frage\nKanal: Instagram\nArtikel:
+  https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-auslan
+ d-gebuehren-vermeiden/
 URL:https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausl
  and-gebuehren-vermeiden/
 STATUS:TENTATIVE

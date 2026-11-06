@@ -5,7 +5,11 @@
 #  Setzt Anzeigename, Bio-Text, Profilfelder, Avatar und Header-Bild
 #  des Mastodon-Accounts @FranksFinanzcheck@mastodon.social so, dass
 #  sie zur tatsächlichen aktuellen Content-Ausrichtung des Blogs passen
-#  (Themen, Veröffentlichungsrhythmus, Branding/Logo).
+#  (Themen, Veröffentlichungsroutine Mo/Mi/Fr, Branding/Logo).
+#  Seit 2026-11-06 trägt die Bio die verbindliche Publikationsroutine
+#  (montags, mittwochs, freitags – 2–3 Artikel pro Publikationstag,
+#  siehe docs/CADENCE-REPORT.md Regel 2) explizit als Profilversprechen.
+#  Das ist eine Dauervorgabe, kein volatiles Zählerstand-Claim.
 #
 #  Kein Dauerlauf-Cronjob: Profil-/Branding-Texte sind redaktionelle
 #  Entscheidungen, keine messbare Kennzahl wie die Publikationscadence
@@ -40,16 +44,18 @@ MASTODON_TOKEN = (os.environ.get("MASTODON_ACCESS_TOKEN") or "").strip()
 MASTODON_INSTANCE = (os.environ.get("MASTODON_INSTANCE") or "https://mastodon.social").strip().rstrip("/")
 DRY_RUN = "--dry-run" in sys.argv
 
-# Zeitlose Positionierung statt unbelegter Sparsummen oder veralteter Zähler.
+# Zeitlose Positionierung statt unbelegter Sparsummen oder veralteter Zähler –
+# mit der EINEN verbindlichen Rhythmus-Angabe: der DAUERVORGABE-Publikationsroutine
+# Mo/Mi/Fr (docs/CADENCE-REPORT.md Regel 2). Stand 2026-11-06: 498/500 Zeichen.
 DISPLAY_NAME = "Frank | FranksFinanzcheck"
 NOTE = (
     "Ich bin Frank Hartung. Ich helfe dir, Fixkosten nachvollziehbar zu prüfen – "
     "mit Rechnungen und Checklisten statt Wechsel-Druck.\n\n"
     "Strom & Gas · Internet · Versicherungen · Konto · Budget · Mobilität\n\n"
+    "Neue Ratgeber: Mo/Mi/Fr – 2–3 pro Publikationstag.\n\n"
     "Mein 4K-Kompass: Kosten sehen, Konditionen rechnen, Kündigungsfenster sichern, Kurs halten.\n\n"
-    "KI-unterstützte Ratgeber. Der Blog enthält Affiliate-Links (Werbung). "
-    "Keine individuelle Finanzberatung.\n\n"
-    "Welche Fixkosten möchtest du als Nächstes prüfen? #Fixkosten #GeldSparen"
+    "KI-unterstützte Ratgeber · Affiliate-Links (Werbung) · Keine individuelle Finanzberatung.\n\n"
+    "Welche Fixkosten prüfst du als Nächstes? #Fixkosten #GeldSparen"
 )
 
 # Vier klare Einstiege: Produkt, Themen, Person, Finanzierung/Transparenz.
@@ -187,6 +193,7 @@ def main():
         print("  Qualitäts-Checks:")
         print(f"    - Affiliate-Transparenz: {'OK' if 'Affiliate' in NOTE else 'FEHLT'}")
         print(f"    - Eigener 4K-Kompass: {'OK' if '4K-Kompass' in NOTE else 'FEHLT'}")
+        print(f"    - Publikationsroutine Mo/Mi/Fr (Dauervorgabe): {'OK' if 'Mo/Mi/Fr' in NOTE else 'FEHLT'}")
         print("    - Keine pauschale Spargarantie, kein veralteter Artikelzähler")
         return
 
@@ -231,6 +238,7 @@ def main():
         f"> Zuletzt synchronisiert: {now}\n\n"
         f"- **Anzeigename:** {data.get('display_name')}\n"
         f"- **Bio (Premium):** {data.get('note', '')[:500]}\n"
+        f"- **Veröffentlichungsroutine:** montags, mittwochs und freitags – 2–3 Artikel pro Publikationstag (Dauervorgabe, `docs/CADENCE-REPORT.md` Regel 2)\n"
         f"- **Avatar:** {data.get('avatar')}\n"
         f"- **Header:** {data.get('header')}\n"
         f"- **Im Instanz-Verzeichnis (discoverable):** {data.get('discoverable')} – Reichweite\n"
@@ -242,7 +250,9 @@ def main():
         "## Einordnung\n\n"
         "Affiliate-Hinweis ersetzt nicht die Kennzeichnung konkreter Werbung. "
         "Profil-Verifizierung bestätigt die Link-Kontrolle, keine Finanzqualifikation. "
-        "Sichtbarkeitseinstellungen ermöglichen Auffindbarkeit, garantieren aber keine Reichweite.\n\n"
+        "Sichtbarkeitseinstellungen ermöglichen Auffindbarkeit, garantieren aber keine Reichweite. "
+        "Die Bio-Zeile „Neue Ratgeber: Mo/Mi/Fr …“ spiegelt die Dauervorgabe der "
+        "Publikationsroutine (2–3 Artikel pro Publikationstag) – kein Uhrzeit-Versprechen für Einzelbeiträge.\n\n"
         "Wachstumsplan und manuelle Freigabe: `docs/MASTODON-WACHSTUMSPLAN.md`.\n",
         encoding="utf-8",
     )

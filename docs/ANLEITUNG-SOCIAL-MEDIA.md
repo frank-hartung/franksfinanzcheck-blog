@@ -93,10 +93,19 @@ Wer über einen Toot stolpert, entscheidet dort in wenigen Sekunden, ob er folgt
 
 | Element | Inhalt | Warum |
 |---|---|---|
-| Bio (393/500 Z.) | Nutzen zuerst („1.000 €+ sparen“), dann 6 Ratgeber-Welten, Rhythmus Mo/Mi/Fr, KI-Transparenz, Frage-Aufruf | Mehrzeilig statt Textwand – Mastodon rendert Absätze |
+| Bio (498/500 Z.) | Nutzen zuerst, 6 Themenwelten, Publikationsroutine **Mo/Mi/Fr – 2–3 pro Publikationstag**, 4K-Kompass, KI-/Affiliate-Transparenz, Frage-Aufruf | Mehrzeilig statt Textwand – Mastodon rendert Absätze |
 | 4 Profilfelder | `Web:` · `Ratgeber:` · `Themen:` · `Pinterest:` | 4 ist das Maximum – jedes Feld muss arbeiten |
 | `discoverable` | `true` | Profil erscheint im Instanz-Verzeichnis |
 | `indexable` | `true` | Profil ist über die Fediverse-Suche auffindbar |
+
+**Veröffentlichungsroutine Mo/Mi/Fr (Stand 06.11.2026)**
+
+Profil und Versand folgen der Dauervorgabe des Blogs (`docs/CADENCE-REPORT.md` Regel 2: nur montags, mittwochs und freitags – 2–3 Artikel pro Publikationstag):
+
+- Die Bio nennt die Routine ausdrücklich: „Neue Ratgeber: Mo/Mi/Fr – 2–3 pro Publikationstag.“ – eine stabile, überprüfbare Angabe (kein Reichweiten- oder Uhrzeitversprechen).
+- Der Social-Autopilot plant Mastodon nur noch an diesen drei Tagen (`data/social/channels.yaml`: `cadence.days: [0, 2, 4]`; vorher täglich). Uhrzeiten (07:30/11:30/17:30/20:00) und `max_per_day: 2` bleiben unverändert.
+- Bereits geplante Off-Day-Posten (2 × Sa 07.11., Sa 14.11., Do 19.11.) wurden transparent auf `blocked` zurückgestellt; der nächste Plan-Roll plant die Artikel automatisch auf Publikationstage ein.
+- Die Veröffentlichungskalender (`data/social/kalender/mastodon.md`, `static/kalender/mastodon.ics`) wurden neu erzeugt und zeigen „Sendetage: Mo, Mi, Fr“.
 
 **Blog ↔ Profil-Verzahnung**
 
