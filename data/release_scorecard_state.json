@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-06T15:46:17Z",
+  "generated_at": "2026-11-06T16:19:53Z",
   "modus": "kandidaten",
-  "commit": "30e401576f30a405620f3ce825e2fe6fd048cce6",
+  "commit": "17da9f078d1d7318de213c886851a0d39836c35b",
   "kapazitaet": {
     "stichtag": "2026-11-06",
     "artikel": 115,
@@ -1525,7 +1525,7 @@
       "checks": []
     },
     "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": {
-      "sha256": "a15c4d5844f232efbc6bb03598cfe831448537222f744bb8e8a7803f4fd18063",
+      "sha256": "ffb5e72f471ab4da3a9321db95cd20c4bb134ac8d4c87a9e81c23d9283fe8c49",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
