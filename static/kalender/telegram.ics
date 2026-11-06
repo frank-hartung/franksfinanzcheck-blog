@@ -6,24 +6,9 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-10-28-flugvergleich-im-winter-so-findest-du-echte-bi
- lligfluege:nutzen:2026-11-06@franksfinanzcheck.de
-DTSTAMP:20261106T130152Z
-DTSTART:20261106T170000Z
-DTEND:20261106T171500Z
-SUMMARY:Telegram (Kanal): Flugvergleich im Winter: So findest du echte
-  Billigflüge (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-28-flugvergleich-
- im-winter-so-findest-du-echte-billigfluege/
-URL:https://franksfinanzcheck.de/posts/2026-10-28-flugvergleich-im-win
- ter-so-findest-du-echte-billigfluege/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
 UID:telegram:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und
  -was-sie-kostet:nutzen:2026-11-07@franksfinanzcheck.de
-DTSTAMP:20261106T130152Z
+DTSTAMP:20261106T195901Z
 DTSTART:20261107T060000Z
 DTEND:20261107T061500Z
 SUMMARY:Telegram (Kanal): Privathaftpflicht: Warum so wichtig und was 
@@ -36,24 +21,24 @@ URL:https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-wa
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:telegram:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-
- monatlichen:nutzen:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261106T130152Z
+UID:telegram:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzich
+ t:nutzen:2026-11-08@franksfinanzcheck.de
+DTSTAMP:20261106T195901Z
 DTSTART:20261108T060000Z
 DTEND:20261108T061500Z
-SUMMARY:Telegram (Kanal): ETF-Sparplan starten: Deine Schritt-für-Schr
- itt-Anleitung (nutzen)
+SUMMARY:Telegram (Kanal): Frugalismus Familie: Clever sparen ohne Verz
+ icht (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-s
- tarten-schritt-fuer-schritt-zum-monatlichen/
-URL:https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten
- -schritt-fuer-schritt-zum-monatlichen/
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-fa
+ milie-clever-sparen-ohne-verzicht/
+URL:https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-familie-
+ clever-sparen-ohne-verzicht/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekas
  se-fuellen:nutzen:2026-11-14@franksfinanzcheck.de
-DTSTAMP:20261106T130152Z
+DTSTAMP:20261106T195901Z
 DTSTART:20261114T060000Z
 DTEND:20261114T061500Z
 SUMMARY:Telegram (Kanal): Strategisch sparen: So kannst du deine Reise
@@ -66,18 +51,18 @@ URL:https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-s
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:telegram:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzich
- t:nutzen:2026-11-15@franksfinanzcheck.de
-DTSTAMP:20261106T130152Z
+UID:telegram:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-
+ monatlichen:nutzen:2026-11-15@franksfinanzcheck.de
+DTSTAMP:20261106T195901Z
 DTSTART:20261115T060000Z
 DTEND:20261115T061500Z
-SUMMARY:Telegram (Kanal): Frugalismus Familie: Clever sparen ohne Verz
- icht (nutzen)
+SUMMARY:Telegram (Kanal): ETF-Sparplan starten: Deine Schritt-für-Schr
+ itt-Anleitung (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-fa
- milie-clever-sparen-ohne-verzicht/
-URL:https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-familie-
- clever-sparen-ohne-verzicht/
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-s
+ tarten-schritt-fuer-schritt-zum-monatlichen/
+URL:https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten
+ -schritt-fuer-schritt-zum-monatlichen/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – LinkedIn
 
-> Automatisch aktualisiert: 06.11.2026 14:01 (Europe/Berlin)  
+> Automatisch aktualisiert: 06.11.2026 20:59 (Europe/Berlin)  
 > Profil: https://www.linkedin.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `linkedin.ics`
 

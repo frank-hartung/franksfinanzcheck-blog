@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 06.11.2026 14:01 (Europe/Berlin)  
+> Automatisch aktualisiert: 06.11.2026 20:59 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Fr, 06. November 2026
-- **17:30** ⏳ Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar — _zitat_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/
 ### Mo, 09. November 2026
 - **07:30** ⏳ Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/
@@ -42,6 +39,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 06.11.2026 20:58 · Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar → https://mastodon.social/@FranksFinanzcheck/117571265279215472
 - ✅ 06.11.2026 14:01 · Energieausweis: Was er für deine Fixkosten bedeutet → https://mastodon.social/@FranksFinanzcheck/117569625233274475
 - ✅ 04.11.2026 21:27 · Mietwagen ohne Kautionsfallen: So sparst du im Urlaub → https://mastodon.social/@FranksFinanzcheck/117560053046296367
 - ✅ 04.11.2026 14:04 · Haushaltsbuch führen: App, Excel oder Stift im Vergleich → https://mastodon.social/@FranksFinanzcheck/117558312939140189
@@ -51,7 +49,6 @@
 - ✅ 02.11.2026 14:38 · Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 → https://mastodon.social/@FranksFinanzcheck/117547119746092264
 - ✅ 31.10.2026 11:58 · Kostenloses Girokonto: Ein Konto ohne Gebühren finden → https://mastodon.social/@FranksFinanzcheck/117535167605047830
 - ✅ 31.10.2026 00:01 · Flugvergleich im Winter: So findest du echte Billigflüge → https://mastodon.social/@FranksFinanzcheck/117532348748029850
-- ✅ 30.10.2026 19:40 · Frugalismus Familie: Clever sparen ohne Verzicht → https://mastodon.social/@FranksFinanzcheck/117531321037727209
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
