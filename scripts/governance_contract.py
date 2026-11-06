@@ -193,6 +193,16 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # aus (C6).
           "faktenfrische_befund_akte.py",
           "scorecard_ticket.py",
+          # Deckungs-Ticket (06.11.2026, #1039): Seit die Wache den
+          # Spitzentag mitmisst, kann sie am Bündeltag rot sein. Der
+          # rote Job war bis hierher ein Dauer-Alarm ohne Auftrag und
+          # ohne Schließpfad – jetzt führt genau EIN Ticket
+          # (Label `faktenfrische-deckung`), aktualisiert statt
+          # dupliziert, geschlossen sobald die Messung grün ist. Der
+          # Selbsttest friert Urteil, Text und Schließpfad ein (C6/C14) –
+          # eine Wache, die niemand verlangt, führt irgendwann niemand
+          # aus.
+          "faktenfrische_deckung_ticket.py",
           # Themennachschub-Wache (25.10.2026, WF-D4E0 / #821): Sie ist die
           # einzige Stelle, die den Vorlauf der AUTO-Bahn in Produktionstagen
           # meldet. Zwischen dem 19.10. und dem 25.10. fiel der Reserve-Vorrat
@@ -3726,9 +3736,19 @@ def c44_themen_nachschub(script_texts, wflows, root=BLOG_DIR):
 C45_WACHE = "faktenfrische_kapazitaet.py"
 C45_SSOT = os.path.join("data", "agent_reach", "faktenfrische.yaml")
 C45_WORKFLOW = "faktenfrische.yml"
-C45_TESTS = ("test_faktenfrische_kapazitaet.py", "test_faktenfrische_befund_ledger.py")
+C45_TESTS = ("test_faktenfrische_kapazitaet.py", "test_faktenfrische_befund_ledger.py",
+             # Der Schließpfad des roten Deckungs-Laufs (06.11.2026, #1039):
+             # Seit der Spitzentag mitgemessen wird, kann die Wache am Bündeltag
+             # rot sein – ohne ein Ticket ist das ein Dauer-Alarm ohne
+             # Schließpfad (C14). Der Vertrag verlangt deshalb auch seinen
+             # Test; ohne Test ist die Selbstheilung Prosa.
+             "test_faktenfrische_deckung_ticket.py")
 C45_MARKER = ("faelligkeit", "--selftest", "laeufe_aus_workflow",
-              "empfohlenes_budget", "nachhol_frist_tage", "c45_urteil")
+              "empfohlenes_budget", "nachhol_frist_tage", "c45_urteil",
+              # #1039: Die Bündeltag-Messung ist seit dem 04.11.2026 Teil des
+              # vertraglichen Minimums. Ohne sie misst die Wache nur den
+              # ruhigsten Tag des Jahres.
+              "spitzenlast_stichtag", "spitze_geprueft")
 
 
 def _c45_deckung(root=BLOG_DIR):
@@ -3758,17 +3778,33 @@ def _c45_deckung(root=BLOG_DIR):
     deckung = int(kap.planung(cfg)["min_deckung_prozent"])
     auto = bool(vorgaben.get("auto_skalierung"))
     stichtag = ff.heute()
-    empfehlung = kap.empfohlenes_budget(artikel, cfg, laeufe, stichtag)
-    # Der Plan, den der Lauf wirklich fährt: bei Auto-Skalierung das
-    # empfohlene Budget (Sockel als Untergrenze), sonst der Sockel.
-    budget = max(sockel, int(empfehlung["budget"])) if auto else sockel
-    plan = kap.plan(artikel, cfg, budget, laeufe, stichtag)
+    try:
+        empfehlung = kap.empfohlenes_budget(artikel, cfg, laeufe, stichtag)
+        # Der Plan, den der Lauf wirklich fährt: bei Auto-Skalierung das
+        # empfohlene Budget (Sockel als Untergrenze), sonst der Sockel.
+        budget = max(sockel, int(empfehlung["budget"])) if auto else sockel
+        plan = kap.plan(artikel, cfg, budget, laeufe, stichtag)
+        spitze = kap.spitze_zahlen(artikel, cfg, budget, laeufe, stichtag)
+    except ValueError as exc:  # Laufkalender nicht beweisbar – fail-closed
+        return None, f"Deckungsrechnung nicht beweisbar: {exc}"
     # Zwei Zahlen, weil eine lügen würde: Der Sockel ist die Untergrenze,
     # das harte Limit die Obergrenze. Bei Auto-Skalierung ist das
     # empfohlene Budget der Plan; es muss den Bedarf decken und unter dem
     # Limit bleiben (Reserve). Ohne Auto-Skalierung ist der Sockel der
     # Plan. Eine Kadenz, die nur mit dauerhaft ausgereiztem Limit
     # aufgeht, ist ein Dauer-Stau.
+    #
+    # ZWEITER STICHTAG (04.11.2026, #1039): „heute“ ist der ruhigste Tag,
+    # nicht der härteste. Die Prüftermine sind Bündel – 115 Seiten auf 35
+    # Fristtage (06.11.2026); 23 davon am 27.11.2026. Eine Wache, die nur
+    # den Stichtag misst, sieht Reserve, wo eine Woche später keine ist
+    # (am 04.11. grün, ab 20.11. rot). Deshalb wird zusätzlich der Tag mit
+    # der größten offenen Last geprüft – mit DEMSELBEN Urteil, ohne neue
+    # Schwelle. Wer den Befund schließen will, ändert den Vertrag
+    # (`data/agent_reach/faktenfrische.yaml`), nicht die Wache.
+    # Auch OHNE Befund wird die Messung belegt: „nicht gemessen“ darf nie
+    # wie „grün“ aussehen (dieselbe Klasse wie C33) – `spitze_geprueft`
+    # steht immer in den Zahlen.
     zahlen = {"kapazitaet": kap.kapazitaet_je_tag(budget, laeufe),
               "kapazitaet_spitze": kap.kapazitaet_je_tag(limit, laeufe),
               "budget": budget, "sockel": sockel, "limit": limit,
@@ -3778,6 +3814,7 @@ def _c45_deckung(root=BLOG_DIR):
               "empfehlung_erreicht": bool(empfehlung["erreicht"]),
               "plan_puenktlich": bool(plan["puenktlich"]),
               "plan_rueckstand_abgebaut": bool(plan["rueckstand_abgebaut"])}
+    zahlen.update(spitze)
     zahlen["urteil"] = kap.c45_urteil(zahlen, ssot_pfad=C45_SSOT)
     return zahlen, None
 
