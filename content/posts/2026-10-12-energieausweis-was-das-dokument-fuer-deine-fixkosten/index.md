@@ -50,7 +50,7 @@ Ohne verlässliche Daten riskierst du hohe Strafen und verlierst das Vertrauen d
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Wohngebäudeversicherung vergleichen**](/go/wohngebaeudeversicherung/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Stromtarife vergleichen und sparen**](/go/strom/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Wenn du über einen Link kaufst, bekommen wir eine Provision. Für dich entstehen keine Kosten.)_
 
 ## Was ist der Energieausweis eigentlich?

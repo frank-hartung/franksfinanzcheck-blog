@@ -1356,6 +1356,19 @@ history:
     #Mietwagen #Reise #KFZVersicherung #GuenstigeMietwagen'
   ref: '117560053046296367'
   ai: true
+- posted_at: '2026-11-06T14:01:44.489394+01:00'
+  channel: mastodon
+  slug: 2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten
+  title: 'Energieausweis: Was er für deine Fixkosten bedeutet'
+  angle: zitat
+  url: https://mastodon.social/@FranksFinanzcheck/117569625233274475
+  ok: true
+  text: '🔍 Ein Energieausweis verhindert böse Überraschungen beim Verkauf oder der
+    Neuvermietung deiner Immobilie. Er ist gesetzlich vorgeschrieben – du entscheidest
+    zwischen einfachem Verbrauchs‑ oder detailliertem Bedarfsausweis. https://franksfinanzcheck.de/posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+    #Gasrechnung #Heizkosten #GastarifWechseln #StromkostenSenken'
+  ref: '117569625233274475'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1381,4 +1394,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-11-05T21:43:30.125992+01:00'
+updated_at: '2026-11-06T14:01:51.747917+01:00'

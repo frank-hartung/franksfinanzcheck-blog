@@ -1,8 +1,8 @@
 {
   "target": 6,
-  "ready": 6,
+  "ready": 5,
   "pool_size": 6,
-  "generated_at": "2026-11-06T11:28:05Z",
+  "generated_at": "2026-11-06T14:16:14Z",
   "candidates": [
     {
       "slug": "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem",
@@ -57,10 +57,16 @@
     },
     {
       "slug": "2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-      "ready": true,
-      "sha256": "b76723ef4191794792ecc5b6db8badc0f8249e8ccc89f4d645722b97dcb4d364",
-      "flesch": 67.1,
-      "measured_at": "2026-11-06T11:25:55Z",
+      "ready": false,
+      "sha256": "889161232b1b47285215bf72e73587d9489c83bc133b2bba15b077742539ecac",
+      "flesch": 66.1,
+      "measured_at": "2026-11-06T14:16:14Z",
+      "reason": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: ide",
+      "details": [
+        "🛑 2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
+        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…hinweis dieser artikel dient ausschließlich der allgemeinen information und stellt…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…keine anlage rechts oder steuerberatung dar prüfe konditionen und bedingungen…“ – doppelte Passage, manuell reparieren",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
       "score": 0.972,
       "parts": {
         "spelling": 0.92,
@@ -108,8 +114,15 @@
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "42208712400",
+    "kind": "partial",
+    "run_id": "42231878203",
     "run_attempt": "1"
+  },
+  "recert": {
+    "at": "2026-11-06T14:16:14Z",
+    "renewed": [
+      "2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen"
+    ],
+    "tool": "scripts/reserve_recert.py"
   }
 }
