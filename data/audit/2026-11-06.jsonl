@@ -1,0 +1,1 @@
+{"ts": "2026-11-06T02:36:55Z", "module": "release_isolation", "action": "lauf", "input": {"commit": "f13ca9a0a64df7138fe46f93d338c61be494cfd7"}, "output": {"runden": null, "isoliert": null, "nachgefuellt": 0, "exit": 0}, "status": "ok", "critical": false, "commit": null}

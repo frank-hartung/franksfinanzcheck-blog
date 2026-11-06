@@ -2,9 +2,9 @@
 title: "Energieausweis: Was er für deine Fixkosten bedeutet"
 description: "Energieausweis-Kosten und Pflicht: Was das Dokument kostet, wann du einen brauchst und wie die Energieeffizienzklasse die Haus-Kosten senkt."
 
-date: 2026-10-12T11:17:49Z
-draft: true
-reserve: true
+date: 2026-11-06T02:30:25Z
+draft: false
+reserve_published: 2026-11-06
 reserve_reaktiviert: "2026-10-07 – Rückholung (#614): Befund der Klasse „heilbar“ ist heilbar, Wirkungsnachweis lesbarkeit_heiler.py"
 
 tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromkosten senken"]
