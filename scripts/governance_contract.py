@@ -671,7 +671,15 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # sauber) und hängt am Commit- und Push-Pfad (git_sync.sh,
           # pre-commit) sowie am Deploy (--all). Ohne Eintrag hier liefe ihr
           # Selbsttest in keinem Gate (C6) – ein Vertrag ohne Lauf ist Prosa.
-          "konfliktmarker_wache.py"]
+          "konfliktmarker_wache.py",
+          # Bestands-Einzigartigkeits-Diff-Tor (06.11.2026, #1027/#1060):
+          # Der BNetzA-Absatz vom 02.11.2026 landete per Handänderung in
+          # drei LIVE Gas-Artikeln – am Kandidaten-Gate (das nur ein
+          # frisches Artefakt misst) vorbei. Das Tor misst den DIFF jeden
+          # Tools und Menschen gegen die Git-Basis und meldet nur NEU
+          # ERZEUGTE Überlappungen fail-closed (Exit 1), Altlasten nie.
+          # Ohne Eintrag hier liefe sein Selbsttest in keinem Gate (C6).
+          "bestand_einzigartigkeit_gate.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.
@@ -2293,6 +2301,8 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c46_befund_hat_schliessweg(script_texts, wflows, root=root,
                                          python_bin=python_bin, quick=quick)
     checks += c47_grammatik_kongruenz(script_texts, wflows, root=root)
+    checks += c48_diff_tor_bestands_einzigartigkeit(
+        script_texts, wflows, root=root, python_bin=python_bin, quick=quick)
     return checks
 
 
@@ -4203,6 +4213,131 @@ def c47_grammatik_kongruenz(script_texts, wflows, root=BLOG_DIR):
             out.append(("C47", "blog-health-daily.yml: `--fix-titel` läuft NACH "
                                "`check_covers.py --fix` – der Titel stünde dann "
                                "im Text, das Cover zeigte weiter den alten Satz."))
+    return out
+
+
+# --- C48: Bestands-Einzigartigkeits-Diff-Tor (06.11.2026, #1060/#1027) ---
+#
+# Auslöser: Derselbe Vorfall, die Ebene 4. Am 02.11.2026 landete der BNetzA-
+# Absatz vom 02.11.2026 (#1017, 69f08c40) per Handänderung in drei LIVE
+# Gas-Artikeln. Das Kandidaten-Gate misst nur, was frisch live gehen soll –
+# die geänderte Alt-Fassung lief daran vorbei, und das Tagesaudit meldete
+# zwei Tage später zwei kritische live↔live-Überlappungen (#1027).
+#
+# Der Vertrag in fünf Sätzen:
+#   a) Es gibt ein Diff-Tor (scripts/bestand_einzigartigkeit_gate.py), das
+#      geänderte Beiträge gegen die GIT-Basis misst – egal, welches Werkzeug
+#      oder welcher Mensch schreibt.
+#   b) Das Tor misst mit EINER Messung (`check_uniqueness`): `KRITISCH_AB`
+#      ist importiert (kein zweites lokales Literal), die V4-Entscheidung
+#      (`aenderung_befunde`) ist dieselbe wie im Publikations-Vertrag und
+#      im Tagesaudit – Altlasten werden weder angelastet noch dienen sie
+#      als Freispruch; nur NEU/VERSTÄRKT zählt.
+#   c) Der Selbsttest des Tors läuft im vertraglichen Minimum (C6/GUARDS)
+#      und grün – sonst ist alles darunter Prosa.
+#   d) Der Fahrer ist verdrahtet: link-check.yml ruft das Tor VOR der
+#      Linkprüfung, Basis = pull_request.base.sha || github.event.before
+#      || HEAD~1 (nicht geraten, nicht „davor war eh alles grün“).
+#   e) Der Publikations-Vertrag wertet V4 aus (fail-closed) – die
+#      Schreiber-Wege hingen sonst wieder am selben offenen Tor.
+#
+# Was hier bewacht wird, ist der WEG: ein verlorener Schwert-Import, ein
+# verschobener Workflow-Schritt oder ein gelöschter Vertrags-Aufruf fallen
+# als PR-Fund auf, nicht am Tag danach im Audit (#1027-Lektion).
+C48_GATE = "bestand_einzigartigkeit_gate.py"
+C48_SCHRITT = "Bestands-Einzigartigkeit (Diff-Tor"
+C48_BASIS_YML = ("pull_request.base.sha", "github.event.before", "HEAD~1")
+
+
+def c48_diff_tor_bestands_einzigartigkeit(script_texts, wflows, root=BLOG_DIR,
+                                          python_bin=None, quick=False):
+    """Das Diff-Tor misst jeden geschriebenen Diff gegen die Git-Basis."""
+    out = []
+    gate = (script_texts or {}).get(C48_GATE, "")
+    if not gate.strip():
+        return [("C48", f"scripts/{C48_GATE} fehlt – ein Diff, den niemand "
+                        "gegen den Bestand misst, ist die nächste 69f08c40-"
+                        "Klasse (#1027/#1060).")]
+
+    # a) Schwert-Import statt kopierter Schwelle / zweiter Wahrheit.
+    if ("import check_uniqueness" not in gate
+            and "from check_uniqueness import" not in gate):
+        out.append(("C48", f"scripts/{C48_GATE}: importiert `check_uniqueness` "
+                           "nicht – das Tor misst den Diff mit einer zweiten "
+                           "Wahrheit statt der Audit-Messung."))
+    if re.search(r"(?m)^\s*KRITISCH_AB\s*=\s*[0-9]+", gate):
+        out.append(("C48", f"scripts/{C48_GATE}: eine eigene KRITISCH_AB-Zahl "
+                           "kopiert – wer die SSOT hintergeht, verschiebt den "
+                           "Maßstab des Tagesaudits heimlich."))
+    if "KRITISCH_AB = cu.KRITISCH_AB" not in gate:
+        out.append(("C48", f"scripts/{C48_GATE}: `KRITISCH_AB = cu.KRITISCH_AB` "
+                           "fehlt – der erlaubte Re-Export pinnt die "
+                           "Schwell-Datei einmalig, statt sie neu zu definieren."))
+
+    # b) Beweisbarkeit: Selbsttest existiert UND läuft; GUARDS-Eintrag da.
+    if "def selftest(" not in gate or "--selftest" not in gate:
+        out.append(("C48", f"scripts/{C48_GATE}: keine `--selftest`-/"
+                           "def selftest()`-Sägeprobe – das Tor ist nicht "
+                           "beweispflichtig (C6)."))
+    if C48_GATE not in GUARDS:
+        out.append(("C48", f"scripts/{C48_GATE} steht nicht im vertraglichen "
+                           "Minimum (C6) – der Selbsttest liefe nie."))
+    if not quick:
+        py = python_bin or "python3"
+        try:
+            res = subprocess.run(
+                [py, os.path.join(root, "scripts", C48_GATE), "--selftest"],
+                cwd=root, capture_output=True, text=True, timeout=180)
+            if res.returncode != 0:
+                zeilen = (res.stdout + res.stderr).strip().splitlines()
+                out.append(("C48", f"scripts/{C48_GATE} --selftest rot (Exit "
+                                   f"{res.returncode}): {zeilen[-1] if zeilen else ''}"))
+        except Exception as exc:  # noqa: BLE001
+            out.append(("C48", f"scripts/{C48_GATE} --selftest nicht "
+                               f"ausführbar: {exc}"))
+
+    # c) Der Fahrer: Schritt vorhanden, Basis vertraglich, VOR der Linkprüfung.
+    linkcheck = ""
+    for pfad, text in (wflows or {}).items():
+        if os.path.basename(str(pfad)) == "link-check.yml":
+            linkcheck = text or ""
+    if not linkcheck:
+        linkcheck = _read(os.path.join(root, ".github", "workflows", "link-check.yml"))
+    if not linkcheck:
+        out.append(("C48", ".github/workflows/link-check.yml fehlt – das Diff-Tor "
+                           "hätte keinen Fahrer und verschwindet wieder."))
+    else:
+        blocks = step_blocks(linkcheck)
+        i_diff = next((i for i, (name, _b) in enumerate(blocks)
+                       if C48_SCHRITT in name), None)
+        i_links = next((i for i, (name, _b) in enumerate(blocks)
+                        if "Interne Links" in name), None)
+        if i_diff is None:
+            out.append(("C48", "link-check.yml: der Diff-Tor-Schritt fehlt – "
+                               "egal welches Werkzeug schreibt, der BNetzA-Klasse "
+                               "#1027 bleibt ungemessen."))
+        else:
+            body = blocks[i_diff][1]
+            for marker in C48_BASIS_YML:
+                if marker not in body:
+                    out.append(("C48", f"link-check.yml: der Diff-Tor-Schritt "
+                                       f"nennt `{marker}` nicht – die Basis wäre "
+                                       "geraten statt vertraglich."))
+            if C48_GATE not in body:
+                out.append(("C48", "link-check.yml: der Schritt ruft das Diff-Tor "
+                                   "nicht auf."))
+        if i_diff is not None and i_links is not None and i_diff > i_links:
+            out.append(("C48", "link-check.yml: das Diff-Tor läuft NACH der "
+                               "Linkprüfung – ein doppelt erzeugter Artikel wäre "
+                               "beim Build schon live-nah."))
+
+    # d) Der Schreiber-Weg: Publikations-Vertrag wertet V4 fail-closed aus.
+    vertrag = (script_texts or {}).get("publikations_vertrag.py", "")
+    if "aenderung_befunde" not in vertrag:
+        out.append(("C48", "scripts/publikations_vertrag.py wertet die "
+                           "V4-Messung `aenderung_befunde` nicht aus – der "
+                           "Schreiber-Weg bleibt ungemessen (#1027, Ebene 3)."))
+
     return out
 
 
@@ -6304,14 +6439,31 @@ RULE_TEXT = {
            "unterdeckt, wird er rot, BEVOR der Bestand rot wird.",
     "C46": "Jeder offene Fachbefund ist entscheidbar: Befund und Entscheidung "
            "hängen am TEXT-Hash (ohne Quellen), die KI-Prüfung weiterhin an "
-           "der vollständigen Prüffassung. Eine Entscheidung nennt "
-           "befund_fassung UND geprueft_fassung – damit bleibt ein Befund "
-           "auch nach einer Textheilung schließbar (21 von 57 waren es am "
-           "03.11.2026 nicht). `--entscheiden` schreibt die Entscheidung, "
-           "BEFUND-AKTE.md ist die Arbeitsliste mit Frist und Fassungsstand, "
-           "und das Scorecard-Ticket ist eine getestete Funktion des Siegels: "
-           "Es nennt die Kadenz nur, wenn F1 wirklich blockiert – nicht bei "
-           "F4. Sonst ist der Alarm ein Dauerläufer (C14).",
+            "der vollständigen Prüffassung. Eine Entscheidung nennt "
+            "befund_fassung UND geprueft_fassung – damit bleibt ein Befund "
+            "auch nach einer Textheilung schließbar (21 von 57 waren es am "
+            "03.11.2026 nicht). `--entscheiden` schreibt die Entscheidung, "
+            "BEFUND-AKTE.md ist die Arbeitsliste mit Frist und Fassungsstand, "
+            "und das Scorecard-Ticket ist eine getestete Funktion des Siegels: "
+            "Es nennt die Kadenz nur, wenn F1 wirklich blockiert – nicht bei "
+            "F4. Sonst ist der Alarm ein Dauerläufer (C14).",
+    "C48": "Der Diff wird gegen die Git-Basis gemessen, nicht der Mensch dagegen "
+           "angenommen (#1060/#1027): Am 02.11.2026 landete derselbe BNetzA-Absatz "
+           "vom 02.11.2026 (#1017) per Handänderung in drei LIVE Gas-Artikeln – "
+           "das Kandidaten-Publish-Gate (das nur frische Kandidaten misst) sah es "
+           "nie, und das Tagesaudit meldete am 03.11.2026 zwei kritische "
+           "live↔live-Überlappungen (16 bzw. 5 geteilte 7-Wort-Phrasen). "
+           "Das Diff-Tor (scripts/bestand_einzigartigkeit_gate.py) vergleicht "
+           "Arbeitsbaum mit Basis (pull_request.base.sha || github.event.before "
+           "|| HEAD~1) und meldet NUR NEU ERZEUGTE oder VERSTÄRKTE kritische "
+           "Überlappungen – Altlasten werden weder angelastet noch als Freispruch "
+           "gewertet. Eine Messung, keine zweite Wahrheit: clean_body, ngrams, "
+           "KRITISCH_AB (5) und aenderung_befunde kommen aus check_uniqueness "
+           "(C48 fahndet nach einem lokal kopierten Literal), der Publikations-"
+           "Vertrag wertet V4 fail-closed aus, und link-check.yml ruft das Tor "
+           "VOR der Linkprüfung auf. Paare sind kanonisch, der eigene Slug ist "
+           "nie Gegner, der leere Bestand ist ein Werkzeugfehler (fail-closed), "
+           "und es gibt bewusst keinen Auto-Heiler: gemeldet, nie geschrieben.",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
@@ -6383,8 +6535,11 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
                 "Angebot aus dem echten cron, Bau rot vor Bestand)",
          "C46": "Jeder offene Fachbefund ist entscheidbar (zwei Hashes, ein "
                 "Befehl, eine Akte, ein Ticket mit echter Ursache)",
-         "C47": "Grammatik ist Morphologie, nicht Meinung (LT5/LT6 gegen das "
-                "Genus-Lexikon, Titel nur mit Beweis, Cover rendert danach)"}
+          "C47": "Grammatik ist Morphologie, nicht Meinung (LT5/LT6 gegen das "
+                 "Genus-Lexikon, Titel nur mit Beweis, Cover rendert danach)",
+          "C48": "Diff-Tor Bestands-Einzigartigkeit (jedes Werkzeug, jeder Mensch: "
+                 "geänderte Posts gegen die Git-Basis, nur NEU/VERSTÄRKT zählt, "
+                 "Altlasten nie; link-check.yml, V4 im Publikations-Vertrag)"}
 
 
 def render_md(checks, ok_notes=()):

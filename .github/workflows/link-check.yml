@@ -177,6 +177,26 @@ jobs:
           python3 scripts/newsletter_digest.py --check
           python3 scripts/newsletter_qa.py --build --days 1
 
+      # ------------------------------------------------------------
+      #  BESTANDS-EINZIGARTIGKEITS-DIFF-TOR (06.11.2026, #1027/#1060)
+      #
+      #  WARUM dieser Schritt HIER und WARUM jetzt
+      #  Der BNetzA-Absatz vom 02.11.2026 (#1017) reiste als Handänderung
+      #  in drei LIVE Gas-Artikeln ein – am Einzigartigkeits-Publish-Gate
+      #  (das Kandidaten misst) vorbei, Tage später als Audit-Fund offenbart.
+      #  Vor der Linkprüfung (die den Build beweist) muss deshalb der DIFF
+      #  gemessen werden: Was ändert sich gegenüber der Basis, und ist davon
+      #  etwas NEU doppelt? Altlasten zählen dabei nicht (weder als Fund
+      #  noch als Freispruch) – wie die V4-Messung im Publikations-Vertrag.
+      #  Basis: pull_request→PR-Basis (base.sha) · Push→event.before · Rest→HEAD~1
+      # ------------------------------------------------------------
+      - name: Bestands-Einzigartigkeit (Diff-Tor, nur Neu-Erzeugtes)
+        run: |
+          set -o pipefail
+          BASE='${{ github.event.pull_request.base.sha || github.event.before || '' }}'
+          if [ -z "$BASE" ]; then BASE="HEAD~1"; fi
+          python3 scripts/bestand_einzigartigkeit_gate.py --basis "$BASE" | tee uniqdiff.log
+
       - name: Interne Links prüfen
         id: links
         continue-on-error: true

@@ -30,7 +30,7 @@
 #  Hier gilt die Umkehrung: Ein Schreiber ohne zugehöriges Tor ist ein
 #  Blocker-Produzent. Dieses Modul ist das fehlende Tor auf der SCHREIB-Seite.
 #
-#  DER VERTRAG (V1–V3)
+#  DER VERTRAG (V1–V4)
 #  -------------------
 #  Gemessen wird eine GEPLANTE Änderung – alt gegen neu –, bevor sie
 #  geschrieben wird. Beide Seiten werden über `readability_check.parse_article`
@@ -85,6 +85,7 @@ import post_utils  # noqa: E402  (Pfad-Injektion muss davor stehen)
 import readability_check  # noqa: E402
 import publish_gate  # noqa: E402
 import textverstaendnis_guard  # noqa: E402
+import check_uniqueness  # noqa: E402  DIE eine Einzigartigkeits-Messung (V4, #1027)
 
 SIM_DIR = os.path.join(BLOG_DIR, "scripts", "tests", "sim", "wf54c4")
 
@@ -115,11 +116,15 @@ def _harte_funde(rohtext: str, slug: str, term: dict) -> set[str]:
     return {regel for _, regel, _, _ in funde if regel in publish_gate.HARTE_REGELN}
 
 
-def pruefe(slug: str, alt_rohtext: str, neu_rohtext: str) -> list[str]:
+def pruefe(slug: str, alt_rohtext: str, neu_rohtext: str, *,
+           bestand: dict | None = None) -> list[str]:
     """Prüft eine geplante Textänderung gegen den Publikations-Vertrag.
 
     Rückgabe: Liste der Verstöße (leer = Vertrag erfüllt). Fail-closed:
     jeder Messfehler ist ein Verstoß, niemals ein Freispruch.
+
+    `bestand` ersetzt nur im Selbsttest den Gesamtbestand (für deterministische
+    Mini-Korpusse); Produktion liest den echten Bestand via Messfunktion.
     """
     import editorial_review_gate
     gruende: list[str] = editorial_review_gate.automatic_change_findings(
@@ -162,6 +167,19 @@ def pruefe(slug: str, alt_rohtext: str, neu_rohtext: str) -> list[str]:
     except Exception as exc:  # noqa: BLE001 – ohne Mess KEIN grünes Urteil
         gruende.append(
             f"V3 Messbarkeit: Textverständnis nicht auswertbar "
+            f"({exc.__class__.__name__}: {exc}) – fail-closed, die Änderung "
+            f"wird verworfen")
+
+    # ---------- V4: Einzigartigkeit (nur NEU/Verstärkt; alt & Entwurf zählen) ----------
+    # #1027: die GEPLANTE Änderung gegen den gesamten Bestand gemessen, bevor
+    # sie geschrieben wird. DIE eine Audit-Messung (`aenderung_befunde`) –
+    # keine zweite Schwelle, kein Auto-Heiler.
+    try:
+        gruende += check_uniqueness.aenderung_befunde(
+            slug, alt_rohtext, neu_rohtext, bestand=bestand)
+    except Exception as exc:  # noqa: BLE001 – ohne Mess KEIN grünes Urteil
+        gruende.append(
+            f"V3 Messbarkeit: Einzigartigkeit nicht auswertbar "
             f"({exc.__class__.__name__}: {exc}) – fail-closed, die Änderung "
             f"wird verworfen")
 
@@ -280,6 +298,38 @@ def selftest() -> int:
     except OSError as exc:
         fehler.append(f"Vorfall-Material (scripts/tests/sim/wf54c4) nicht lesbar: {exc}")
 
+    # 8) V4: Der ECHTE Auslöser, eingefroren – eine Änderung, die den
+    #    BNetzA-Absatz (#1027) in einen Bestandsartikel kopiert, wird verworfen.
+    doppelganger = ("Bei einer einseitigen Preisaenderung koennen Verbraucher "
+                    "grundsaetzlich ohne Frist zum Zeitpunkt der Aenderung "
+                    "kuendigen; der Vertrag endet am Vortag der Aenderung.")
+    v4_bestand = {"/v/frisch": {"slug": "2026-10-07-fremd",
+                                "body": check_uniqueness.clean_body(doppelganger),
+                                "live": True, "grund": "",
+                                "date": "2026-10-07T08:00:00Z"}}
+    v4_alt = gut_neu
+    v4_neu = gut_neu + "\n\n" + doppelganger
+    v4_gruende = pruefe("v4-kopie", v4_alt, v4_neu, bestand=v4_bestand)
+    if not any(g.startswith("V4") for g in v4_gruende):
+        fehler.append("V4: eingeführte Dopplung (#1027, 69f08c40-Klasse) wird nicht erkannt")
+    # 9) V4: Altlast bleibt still – der gleiche Text doppelt, vorher wie nachher.
+    v4_altlast = pruefe("v4-altlast", v4_neu, v4_neu, bestand=v4_bestand)
+    if any(g.startswith("V4") for g in v4_altlast):
+        fehler.append("V4: unveränderte Altlast wird dem Schreiber angelastet")
+    # 10) Fail-closed: lässt sich die Bestandsmessung nicht ausführen, ist der
+    #     Vertrag verletzt – niemals ein grünes Urteil.
+    echt_lade = check_uniqueness.lade_bestand
+    try:
+        def _boom():
+            raise RuntimeError("Bestand nicht ladbar (Sabotageprobe)")
+        check_uniqueness.lade_bestand = _boom
+        v4_closed = pruefe("v4-broken", gut_alt, gut_neu)  # bestand=None → Messfunktion greift
+        if not any(g.startswith("V3 Messbarkeit") and "Einzigartigkeit" in g
+                   for g in v4_closed):
+            fehler.append("V4: nicht messbarer Bestand gilt als freigegeben (fail-open)")
+    finally:
+        check_uniqueness.lade_bestand = echt_lade
+
     if fehler:
         print("🛑 PUBLIKATIONS-VERTRAG – SELFTEST FEHLGESCHLAGEN "
               "(Exit 2, die Wache selbst ist defekt):")
@@ -294,7 +344,9 @@ def selftest() -> int:
         return 2
     print("✅ PUBLIKATIONS-VERTRAG-SELFTEST bestanden: V1 (Flesch-Absturz unter die "
           "importierte Schwelle), V2 (neue harte Verständnis-Funde, Altlasten "
-          "verschont), V3 (fail-closed), reale Vorfallprobe WF-54C4.")
+          "verschont), V4 (geteilte BNetzA-Dopplung #1027, nur NEU/VERSTÄRKT, "
+          "Altlast still, fail-closed bei nicht ladbarem Bestand), V3 (fail-closed), "
+          "reale Vorfallprobe WF-54C4.")
     return 0
 
 

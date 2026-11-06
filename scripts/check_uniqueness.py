@@ -579,7 +579,8 @@ def kandidaten_befunde(candidates, bestand=None, n: int = None,
 
 
 def aenderung_befunde(slug: str, alt_rohtext: str, neu_rohtext: str,
-                      bestand: dict | None = None, n: int = None) -> list[str]:
+                      bestand: dict | None = None, n: int = None,
+                      strukturiert: bool = False) -> list:
     """V4-Messung einer GEPLANTEN Änderung gegen den Bestand (#1027).
 
     Dieselbe Messung wie Audit und Collector (`clean_body` + `ngrams` +
@@ -591,12 +592,16 @@ def aenderung_befunde(slug: str, alt_rohtext: str, neu_rohtext: str,
     keine Handänderung mehr unbemerkt denselben Absatz in mehrere
     Artikel kopieren (Vorfall 69f08c40, #1027); gemessen wird vor dem
     Schreiben, nicht erst im Tagesaudit nach dem Deploy.
+
+    `strukturiert=True` liefert Dataclasses-Anteile für das Diff-Tor
+    (`bestand_einzigartigkeit_gate.py`): (anderer, alt_n, neu_n, beispiel,
+    n) statt formatierter Texte – dieselbe Messung, keine zweite Wahrheit.
     """
     n = PHRASE_LEN if n is None else n
     bestand = lade_bestand() if bestand is None else bestand
     alt_grams = ngrams(clean_body(alt_rohtext), n)
     neu_grams = ngrams(clean_body(neu_rohtext), n)
-    befunde: list[str] = []
+    funde: list[dict] = []
     for info in bestand.values():
         anderer = info.get("slug", "")
         if not anderer or anderer == slug:
@@ -606,12 +611,19 @@ def aenderung_befunde(slug: str, alt_rohtext: str, neu_rohtext: str,
         neu_n = len(neu_grams & fremd)
         if neu_n >= KRITISCH_AB and neu_n > alt_n:
             beispiel = sorted(neu_grams & fremd)[0]
-            befunde.append(
-                f"V4 Einzigartigkeit: die Änderung erzeugt/verstärkt eine "
-                f"Überlappung mit {anderer} ({alt_n} → {neu_n} gleiche "
-                f"{n}-Wort-Phrasen, z. B. „{beispiel}“) – ab {KRITISCH_AB} "
-                f"ist es Dopplung (Audit-Messung, #1027), Passage "
-                f"eigenständig formulieren")
+            funde.append({"anderer": anderer, "slug": slug,
+                          "alt_n": alt_n, "neu_n": neu_n,
+                          "beispiel": beispiel, "n": n})
+    if strukturiert:
+        return funde
+    befunde: list[str] = []
+    for f in funde:
+        befunde.append(
+            f"V4 Einzigartigkeit: die Änderung erzeugt/verstärkt eine "
+            f"Überlappung mit {f['anderer']} ({f['alt_n']} → {f['neu_n']} gleiche "
+            f"{f['n']}-Wort-Phrasen, z. B. „{f['beispiel']}“) – ab {KRITISCH_AB} "
+            f"ist es Dopplung (Audit-Messung, #1027), Passage "
+            f"eigenständig formulieren")
     return befunde
 
 
@@ -709,6 +721,62 @@ def _collector_selftest() -> list:
     f6 = kandidaten_befunde(["2026-10-07-dsl"], bestand)
     if any("mit 2026-10-07-notgroschen (" in d for d in f6.get("2026-10-07-dsl", [])):
         fehler.append("  Collector: unverwandte Artikel werden als Paar gemeldet")
+    # ---------- V4-Einzigartigkeit #1027: die Änderungs-Messung wacht selbst ----------
+    # (die fünf Proben, die der #1060-Spec für diesen Detektor verlangt; der
+    # Mini-Korpus trägt die geteilte BNetzA-Passage des Vorfalls so, wie sie
+    # 69f08c40 am 02.11.2026 in drei Live-Artikeln gleichlautend landete)
+    BNETZA = ("Bei einer einseitigen Preisaenderung koennen Verbraucher "
+              "grundsaetzlich ohne Frist zum Zeitpunkt der Aenderung "
+              "kuendigen; der Vertrag endet am Vortag der Aenderung.")
+    BNETZA_KURZ = ("Bei einer einseitigen Preisaenderung koennen Verbraucher "
+                   "grundsaetzlich ohne Frist zum Zeitpunkt der Aenderung kuendigen.")
+    eigen = ("Ein Router steht selten am besten Platz; wer ihn auf das Regal "
+             "hebt, gewinnt oft mehr als ein neuer Tarif verspricht.")
+    v4_bestand = {
+        "/v/dsl":  {"slug": "2026-10-07-dsl",
+                    "body": clean_body(BNETZA), "live": True, "grund": "", "date": "2026-09-11T08:00:00Z"},
+        "/v/entwurf": {"slug": "2026-09-01-entwurf",
+                       "body": clean_body(BNETZA), "live": False, "grund": "draft:true", "date": "2026-09-01T08:00:00Z"},
+    }
+    # V4-1) Erzeugung wird erkannt (Live-Gegner) – der Auslöser aus #1027.
+    funde = aenderung_befunde("2026-10-07-eigen", eigen, eigen + " " + BNETZA,
+                              bestand=v4_bestand)
+    if not any("2026-10-07-dsl" in f for f in funde):
+        fehler.append("  Collector: V4-Erzeugung gegen Live-Artikel wird nicht "
+                      "erkannt (Vorfall 69f08c40 wäre durchgelaufen)")
+    # V4-2) Erzeugung gegen einen ENTWURF wird ebenfalls erkannt – die
+    #  Entwurfs-Vorabaufgabe vor der Veröffentlichung, nicht erst danach.
+    if not any("2026-09-01-entwurf" in f for f in funde):
+        fehler.append("  Collector: V4-Erzeugung gegen Entwurf wird nicht erkannt")
+    # V4-3) Altlast ist kein Verstoß: war die Dopplung vorher schon da und
+    #  bleibt sie, zählt das dem Schreiber nicht an – unveränderter Text
+    #  muss still bleiben.
+    funde = aenderung_befunde("2026-10-07-eigen",
+                              eigen + " " + BNETZA, eigen + " " + BNETZA,
+                              bestand=v4_bestand)
+    if funde:
+        fehler.append(f"  Collector: V4-Altlast wird dem Schreiber angelastet: {funde[:1]}")
+    # V4-4) Verstärkung wird erkannt: war die Passage schon teilweise da,
+    #  spielt ändernd die Vollfassung hinein – sonst landet der volle Block
+    #  doch noch im Artikel.
+    funde = aenderung_befunde("2026-10-07-eigen",
+                              eigen + " " + BNETZA_KURZ, eigen + " " + BNETZA,
+                              bestand=v4_bestand)
+    if not any("2026-10-07-dsl" in f for f in funde):
+        fehler.append("  Collector: V4-Verstärkung (Teil-Passage → Voll-Passage) "
+                      "wird nicht erkannt")
+    # V4-5) Unverwandter Text UND der eigene Slug bleiben still: kein Gegner "
+    #  ist sich selbst, kein Scheinrot für einen dazugesetzten eigenen Satz.
+    funde = aenderung_befunde(
+        "2026-10-07-eigen", eigen,
+        eigen + " Ein eigener zweiter Gedanke über Katzen, Hypotheken und den Herbst.",
+        bestand=v4_bestand)
+    if funde:
+        fehler.append(f"  Collector: V4 meldet Schein-Dopplung: {funde[:1]}")
+    funde = aenderung_befunde("2026-10-07-dsl", eigen, eigen + " " + BNETZA,
+                              bestand={"/v/dsl": v4_bestand["/v/dsl"]})
+    if funde:
+        fehler.append("  Collector: der eigene Slug zählt als Gegenartikel")
     return fehler
 
 
