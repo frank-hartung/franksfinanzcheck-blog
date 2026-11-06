@@ -147,6 +147,19 @@
 #    Ohne python3 wird nur gewarnt: die Notbremse darf die Automatisierung
 #    nicht an einem fehlenden Werkzeug aufhalten (der Push-Lauf prüft ohnehin).
 #
+#  NOTBREMSE #1073+ (06.11.2026) – kein Commit/Push mit unaufgelösten
+#  Merge-Konfliktmarkern, in JEDEM Dateityp:
+#    Am 05.11.2026 landete ein unaufgelöst aufgelöster Merge in
+#    BEFUND-AKTE.md und data/faktenfrische_befunde_state.json auf main
+#    (PR #1088) – Syntax für .py prüfte die Notbremse oben, der
+#    Artefakt-Wächter prüft data/** (JSON/JSONL/YAML) und Frontmatter,
+#    der Deploy-Schritt content/layouts/static/hugo.toml; die Repo-Wurzel
+#    und Markdown waren ungeschirmt. Jetzt prüft
+#    `scripts/konfliktmarker_wache.py` den gestageten Stand bzw. den
+#    zu pushenden Diff (Block-Automat statt Zeilenmuster, Haus-Docstrings
+#    mit Sieben-Gleichheitszeichen-Überschriften bleiben sauber).
+#    Ohne python3 oder ohne origin/$BRANCH wird gewarnt; sonst hart.
+#
 #  Umgebung:
 #    BRANCH       Zielbranch (Default: GITHUB_HEAD_REF/REF_NAME, sonst main)
 #    GIT_USER     Committer-Name                (Default: Automation-Bot)
@@ -887,6 +900,7 @@ sync_und_push() {
       # auflösbar (Exit 128: "You must fully qualify the ref").
       # refs/heads/$BRANCH ist deterministisch – erzeugt das Ref, falls es
       # (als gelöscht) nicht mehr existiert.
+      konfliktmarker_notbremse push || return 1
       if out=$(git push origin "HEAD:refs/heads/$BRANCH" 2>&1); then
         printf '%s\n' "$out" | sed 's/^/  push: /'
         return 0
@@ -922,6 +936,7 @@ sync_und_push() {
           # hier kann nur eine echte Branch anstehen.
           echo "  push: Rettungsanker – Ziel-Ref remote nicht vorhanden,"
           echo "        neu anlegen per vollqualifiziertem Refname (refs/heads/$BRANCH) …"
+          konfliktmarker_notbremse push || return 1
           if out=$(git push origin "HEAD:refs/heads/$BRANCH" 2>&1); then
             printf '%s\n' "$out" | sed 's/^/  push: /'
             echo "  push: Rettungsanker erfolgreich (Ziel-Ref neu angelegt)."
@@ -953,6 +968,7 @@ sync_und_push() {
           # VOLLQUALIFIZIERT (#329): ohne refs/heads/-Präfix scheitert der
           # Rettungsanker bei detached HEAD + fehlendem Remote-Ref mit
           # Exit 128 – das war genau der #329-Todespfad.
+          konfliktmarker_notbremse push || return 1
           if out=$(git push origin "HEAD:refs/heads/$BRANCH" 2>&1); then
             printf '%s\n' "$out" | sed 's/^/  push: /'
             echo "  push: Rettungsanker erfolgreich (origin war nicht weitergelaufen)."
@@ -1100,6 +1116,48 @@ except SyntaxError as exc:
 }
 
 # ========================================================================
+#  NOTBREMSE #1073+ (06.11.2026) – KONFLIKTMARKER: Kein Commit/Push mit
+#  unaufgelöstem Merge, in JEDEM Dateityp.
+#  Am 05.11.2026 landete ein unaufgelöst aufgelöster Merge in
+#  BEFUND-AKTE.md und data/faktenfrische_befunde_state.json auf main
+#  (PR #1088) – die Syntax-Notbremse (#864) sieht nur .py, der
+#  Artefakt-Wächter nur data/** (JSON/JSONL/YAML) und Frontmatter, der
+#  Deploy-Schritt nur content/layouts/static/hugo.toml. Der Block-Automat
+#  (scripts/konfliktmarker_wache.py) prüft den GESTAGETEN Stand bzw. den
+#  zu pushenden Diff über alle Dateitypen und meldet Datei und Zeile.
+#  $1 = staged | push
+# ========================================================================
+konfliktmarker_notbremse() {
+  local modus="$1"
+  if ! command -v python3 >/dev/null 2>&1; then
+    echo "::error::git_sync.sh: python3 fehlt – Konfliktmarker-Prüfung nicht möglich."
+    return 1
+  fi
+  if [ ! -f scripts/konfliktmarker_wache.py ]; then
+    echo "::error::git_sync.sh: Konfliktmarker-Wache fehlt – Prüfung nicht möglich."
+    return 1
+  fi
+  case "$modus" in
+    staged)
+      python3 scripts/konfliktmarker_wache.py --staged
+      ;;
+    push)
+      # Ohne Remote-Ref wird der vollständige HEAD geprüft, nicht der
+      # möglicherweise von ihm abweichende Arbeitsbaum.
+      if ! git rev-parse --verify -q "origin/$BRANCH" >/dev/null 2>&1; then
+        echo "::warning::git_sync.sh: origin/$BRANCH nicht auflösbar – gesamter Bestand wird geprüft."
+        python3 scripts/konfliktmarker_wache.py --head
+        return $?
+      fi
+      python3 scripts/konfliktmarker_wache.py --range "origin/$BRANCH...HEAD"
+      ;;
+    *)
+      return 0
+      ;;
+  esac
+}
+
+# ========================================================================
 #  ABGELEITETE BILDZEILEN NACHZIEHEN (Dauerheilung 30.10.2026)
 #
 #    Die Bildzeile der Top-20-Abbildungen ist ABGELEITET: aus Titel,
@@ -1202,6 +1260,7 @@ if [ "$PUSH_ONLY" = "1" ]; then
     fi
   fi
   syntax_notbremse push || exit 1        # #864: kein Push mit kaputtem Skript
+  konfliktmarker_notbremse push || exit 1  # #1073+: kein Push mit Merge-Markern
   sync_und_push    || exit 1
   echo "git_sync.sh: Push erfolgreich."
   sync_ok
@@ -1252,6 +1311,14 @@ fi
 if ! syntax_notbremse staged; then
   git reset -q || true
   echo "::error::git_sync.sh: Commit abgebrochen (Syntax-Notbremse). Keine Änderung gepusht."
+  exit 1
+fi
+
+# #1073+: Kein Commit, der einen unaufgelösten Merge auf main schiebt –
+# in JEDEM Dateityp (der Befund vom 05.11.2026, PR #1088).
+if ! konfliktmarker_notbremse staged; then
+  git reset -q || true
+  echo "::error::git_sync.sh: Commit abgebrochen (Konfliktmarker-Notbremse). Keine Änderung gepusht."
   exit 1
 fi
 
