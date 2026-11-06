@@ -37,3 +37,4 @@
 {"ts": "2026-11-02T11:42:26Z", "ready": 7, "target": 6, "pool": 7, "lauf": "41437248834", "versuch": "1", "klasse": "ok", "blocker": [], "themen": 6}
 {"ts": "2026-11-04T11:41:09Z", "ready": 6, "target": 6, "pool": 7, "lauf": "41819864260", "versuch": "1", "klasse": "ok", "blocker": ["2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu"], "themen": 5}
 {"ts": "2026-11-05T11:36:10Z", "ready": 6, "target": 6, "pool": 8, "lauf": "42017624914", "versuch": "1", "klasse": "ok", "blocker": ["2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen", "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang"], "themen": 5}
+{"ts": "2026-11-06T11:28:13Z", "ready": 6, "target": 6, "pool": 6, "lauf": "42208712400", "versuch": "1", "klasse": "ok", "blocker": [], "themen": 6}

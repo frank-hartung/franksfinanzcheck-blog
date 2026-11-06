@@ -1,29 +1,15 @@
 {
   "target": 6,
-  "ready": 4,
-  "pool_size": 8,
-  "generated_at": "2026-11-05T16:43:16Z",
+  "ready": 6,
+  "pool_size": 6,
+  "generated_at": "2026-11-06T11:28:05Z",
   "candidates": [
-    {
-      "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
-      "ready": false,
-      "sha256": "cb3bf3d7be2180edff5fcefa860e8623f50fa8a4c2727513861e1fe7ba87cd18",
-      "measured_at": "2026-11-05T11:27:39Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
-    },
-    {
-      "slug": "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar",
-      "ready": false,
-      "sha256": "026a4df794c249f5d138d8530485aac93a4e2f09abc336b0d00cf67c72704604",
-      "measured_at": "2026-11-05T11:28:50Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
-    },
     {
       "slug": "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem",
       "ready": true,
       "sha256": "ad0969c0a822afc57b2282b2d9f66fb4d39733404375d046a7826bfd20ceda8e",
       "flesch": 67.1,
-      "measured_at": "2026-11-05T11:30:00Z",
+      "measured_at": "2026-11-06T11:22:44Z",
       "score": 0.986,
       "parts": {
         "spelling": 1.0,
@@ -40,7 +26,7 @@
       "ready": true,
       "sha256": "a9ca42a6a43af5b859bdc5e4460e06fbc7e9e4919345f89d062863cf07ba8456",
       "flesch": 67.3,
-      "measured_at": "2026-11-05T16:40:27Z",
+      "measured_at": "2026-11-06T11:23:48Z",
       "score": 0.962,
       "parts": {
         "spelling": 0.88,
@@ -57,7 +43,7 @@
       "ready": true,
       "sha256": "722e590d7e31e5406851c4b421c5c3130c816ef23b6f3986fb2f25c102db8f7b",
       "flesch": 72.0,
-      "measured_at": "2026-11-05T11:32:24Z",
+      "measured_at": "2026-11-06T11:24:52Z",
       "score": 0.93,
       "parts": {
         "spelling": 0.9,
@@ -74,7 +60,7 @@
       "ready": true,
       "sha256": "b76723ef4191794792ecc5b6db8badc0f8249e8ccc89f4d645722b97dcb4d364",
       "flesch": 67.1,
-      "measured_at": "2026-11-05T16:41:24Z",
+      "measured_at": "2026-11-06T11:25:55Z",
       "score": 0.972,
       "parts": {
         "spelling": 0.92,
@@ -88,23 +74,27 @@
     },
     {
       "slug": "2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "ready": false,
-      "sha256": "8317469967f72c2cb1171409bd5ae8003ab9ae8c6ed361ae852e55058aa15e26",
-      "measured_at": "2026-11-05T16:42:19Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
+      "ready": true,
+      "sha256": "dbd4d9293d2dbfad330da6d9b281e58fc454bbdb533793ea1f371ded48734bdd",
+      "flesch": 70.8,
+      "measured_at": "2026-11-06T11:26:58Z",
+      "score": 0.996,
+      "parts": {
+        "spelling": 0.98,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
     },
     {
       "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
-      "ready": false,
-      "sha256": "c22e6f22adcd3e24879dd1f43766d9a171c0b901762b4e71cf8e3e8d1340207e",
+      "ready": true,
+      "sha256": "bacd1b5062e4111bdfa8badd784d1d919c9a052ccf69c6787db9b5e209dc4e73",
       "flesch": 61.7,
-      "measured_at": "2026-11-05T16:43:16Z",
-      "reason": "Faktenfrische nicht bestanden: 4284fd2d9c9005e7af8f (praezision): Behauptung, dass Überladung der Maschine zu schnellerem Verschleiß und teuren Reparaturen führt, wird ohne konkrete Daten oder Messgröße angegeben.; 84e247f17354e224c973 (pra",
-      "details": [
-        "🛑 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
-        "Faktenfrische nicht bestanden: 4284fd2d9c9005e7af8f (praezision): Behauptung, dass Überladung der Maschine zu schnellerem Verschleiß und teuren Reparaturen führt, wird ohne konkrete Daten oder Messgröße angegeben.; 84e247f17354e224c973 (praezision): Aussage, dass das richtige Beladen allein die Fixkosten senkt, ohne weitere Maßnahmen, ist ein pauschales Leistungsversprechen ohne Nennung von Mechanismen oder Grenzen.; a2a7dc69f10393af6531 (luecke): Die Modellrechnung (0,9 kWh/50 L bei vollem Waschgang, 0,6 kWh/35 L bei halbem Waschgang, Strompreis 0,40 €/kWh, Wasserpreis 0,005 €/L) und die daraus resultierende Jahresersparnis von 22 € fehlen einer fundierten Quelle.; cb794331f1cc0c715a55 (luecke): Die Aussage, dass bei 4 Waschgängen pro Woche ein durchschnittlicher Haushalt rund 5 € jährlich an Strom‑ und Wasserkosten spart, ist nicht mit einer Quelle belegt.; e6729081522126e972c2 (luecke): Angabe, dass ein optimal beladener Trommel (ca. 80 % Kapazität) bis zu 15 % weniger Wasser und Energie verbraucht, wird nicht durch eine Quelle belegt.",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
+      "measured_at": "2026-11-06T11:28:05Z",
       "score": 0.928,
       "parts": {
         "spelling": 0.8,
@@ -118,18 +108,8 @@
     }
   ],
   "measurement": {
-    "kind": "partial",
-    "run_id": "42066546614",
+    "kind": "full",
+    "run_id": "42208712400",
     "run_attempt": "1"
-  },
-  "recert": {
-    "at": "2026-11-05T16:43:16Z",
-    "renewed": [
-      "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
-      "2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-      "2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang"
-    ],
-    "tool": "scripts/reserve_recert.py"
   }
 }
