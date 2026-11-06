@@ -1,6 +1,6 @@
 # SUCHRADAR – Status
 
-> Stand: 2026-11-05 15:41:29 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
+> Stand: 2026-11-06 15:25:04 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
 > Schlüssellos · 0 € · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md`
 
 ## Lauf
@@ -12,7 +12,7 @@
 | Aus dem Zwischenspeicher | 0 |
 | Fehlgeschlagen | 2 |
 | Übersprungen (Budget) | 0 |
-| Treffer gesamt | 197 |
+| Treffer gesamt | 194 |
 | Davon organisch | 0 |
 | Eigene Treffer | 0 von 23 Anfragen |
 
@@ -22,7 +22,7 @@
 |---|---|
 | Anfragen mit echtem Suchindex | 0 von 23 |
 | Anfragen nur mit Wissens-Rückfall | 23 |
-| Organische Treffer | 0 von 197 |
+| Organische Treffer | 0 von 194 |
 | Rückfall-Anteil | 100 % |
 | Aussagekraft | keine |
 
@@ -46,8 +46,8 @@ _Keine Treffer ausgewertet._
 
 | Suchbegriff | Meldung |
 |---|---|
-| franksfinanzcheck.de | Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://priv.au: keine Treffer / https://opnxng.com: keine Treffer / h |
-| Gaskosten senken | Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://priv.au: keine Treffer / https://opnxng.com: keine Treffer / https |
+| franksfinanzcheck.de | Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://priv.au: keine Treffer / h |
+| Gaskosten senken | Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://priv.au: keine Treffer / https |
 
 ## Einordnung
 
