@@ -119,7 +119,25 @@ darf nicht älter sein als der jüngste Beleg.
 | `konfliktmarker_wache.py --all` | ✅ 6 174 Dateien, 0 Funde |
 | beide Workflows | ✅ YAML-valide |
 
-## 5 · Grenzen – und was bewusst nicht passiert ist
+## 5 · Der Befund kam zurück – und das ist der Beweis
+
+Während dieser Pull Request offen war, ist genau dasselbe noch einmal passiert:
+Der Automatik-Commit `0b55fca` („Kadenz-/Titel-/Cover-Heilungen vor
+Veröffentlichung") hat den Frontmatter-Block des Ökostrom-Artikels neu
+geschrieben und die `kurzantwort` dabei **entfernt**. Die Metadaten-Wache wurde
+im CI dieses PRs rot – mit demselben Befund, den ich Stunden vorher geheilt
+hatte.
+
+Das ist kein Ärgernis, sondern die Bestätigung der Diagnose: Solange der
+Automatik-Commit nicht selbst prüft, produziert jeder Nachtlauf dieselbe
+Befundklasse neu. Die Kurzantwort ist hier wiederhergestellt (Wortlaut aus dem
+letzten belegten Stand), und die Nachlauf-Wache hätte den Rückfall im ersten
+Lauf gemeldet.
+
+**Lehre:** Eine Heilung an der Quelle ist nur die halbe Dauerheilung. Die andere
+Hälfte ist die Wache am Ausgang – und zwar im **selben** Lauf.
+
+## 6 · Grenzen – und was bewusst nicht passiert ist
 
 - **Die Wache heilt nicht selbst.** Heilung braucht einen Besitzer: eine
   Redaktion oder einen benannten Heiler wie `--verlinkung --heilen`. Ein
