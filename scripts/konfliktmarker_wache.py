@@ -144,35 +144,30 @@ def _pruefe_dateien(paare: list[tuple[str, bytes]]) -> list[tuple[int, str]]:
 
 def _sammle(modus: str, range_spec: str | None,
             paths: list[str] | None) -> list[tuple[str, bytes]]:
+    if modus == "head":
+        namen = _namen_z(_git(["ls-tree", "-r", "--name-only", "-z", "HEAD"]))
+        return [(name, _git(["show", f"HEAD:{name}"])) for name in namen]
     if modus == "staged":
         namen = _namen_z(_git(["diff", "--cached", "--name-only",
-                               "--diff-filter=ACMR", "-z"]))
+                               "--diff-filter=ACMRT", "-z"]))
         paare = []
         for name in namen:
-            try:
-                paare.append((name, _git(["show", f":{name}"])))
-            except subprocess.CalledProcessError:
-                continue  # Nur im Index gelöscht o. ä.
+            paare.append((name, _git(["show", f":{name}"])))
         return paare
     if modus == "range":
         assert range_spec
-        namen = _namen_z(_git(["diff", "--name-only", "--no-renames",
+        namen = _namen_z(_git(["diff", "--name-only", "--no-renames", "--diff-filter=ACMRT", "-z",
                                range_spec, "--", ]))
         paare = []
         for name in namen:
-            try:
-                paare.append((name, _git(["show", f"HEAD:{name}"])))
-            except subprocess.CalledProcessError:
-                continue  # Im Range gelöschte Datei
+            paare.append((name, _git(["show", f"HEAD:{name}"])))
         return paare
     if modus == "paths":
         paare = []
         for name in paths or []:
             pfad = Path(name)
             if not pfad.is_file():
-                print(f"::warning::konfliktmarker_wache.py: '{name}' nicht "
-                      f"vorhanden – übersprungen.", file=sys.stderr)
-                continue
+                raise OSError(f"Datei nicht vorhanden: {name}")
             paare.append((name, pfad.read_bytes()))
         return paare
     # Standard: alle getrackten Dateien aus dem Arbeitsbaum.
@@ -180,10 +175,7 @@ def _sammle(modus: str, range_spec: str | None,
     paare = []
     for name in namen:
         pfad = ROOT / name
-        try:
-            paare.append((name, pfad.read_bytes()))
-        except OSError:
-            continue
+        paare.append((name, pfad.read_bytes()))
     return paare
 
 
@@ -251,11 +243,14 @@ def selftest() -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--staged", action="store_true",
+    gruppe = parser.add_mutually_exclusive_group()
+    gruppe.add_argument("--all", action="store_true", help="alle getrackten Dateien prüfen (Standard)")
+    gruppe.add_argument("--head", action="store_true", help="alle Dateien aus HEAD prüfen")
+    gruppe.add_argument("--staged", action="store_true",
                         help="den gestageten Stand (Index) prüfen")
-    parser.add_argument("--range", dest="range_spec", default=None,
+    gruppe.add_argument("--range", dest="range_spec", default=None,
                         help="nur die zwischen A...B geändert Dateien prüfen")
-    parser.add_argument("--paths", nargs="+", default=None,
+    gruppe.add_argument("--paths", nargs="+", default=None,
                         help="nur diese Dateien (Arbeitsbaum) prüfen")
     parser.add_argument("--selftest", action="store_true")
     args = parser.parse_args()
@@ -264,7 +259,9 @@ def main() -> int:
         return selftest()
 
     modus, range_spec = "all", None
-    if args.staged:
+    if args.head:
+        modus = "head"
+    elif args.staged:
         modus = "staged"
     elif args.range_spec:
         modus, range_spec = "range", args.range_spec
@@ -273,7 +270,7 @@ def main() -> int:
 
     try:
         paare = _sammle(modus, range_spec, args.paths)
-    except subprocess.CalledProcessError as exc:
+    except (subprocess.CalledProcessError, OSError) as exc:
         print(f"::error::konfliktmarker_wache.py: git-Aufruf fehlgeschlagen "
               f"({exc})\u2013 Abbruch (fail-closed).", file=sys.stderr)
         return 2

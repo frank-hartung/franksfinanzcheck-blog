@@ -43,11 +43,13 @@ WURZEL="$(git rev-parse --show-toplevel)"
 # ============================================================
 cd "$WURZEL"
 if [ ! -f scripts/konfliktmarker_wache.py ]; then
-  # Fremde/Minimal-Repos (z. B. Prüf-Fixtures) haben die Wache nicht.
-  # Kein Preis, kein Schutz – aber auch kein toter Haken: andere Gates
-  # (git_sync.sh, CI integrity-lock) greifen weiterhin. Hier im Repo fängt
-  # das Integrity-Gate einen gelöschten `konfliktmarker_wache.py` ab.
-  echo "::warning:: Konfliktmarker-Sperre übersprungen – scripts/konfliktmarker_wache.py fehlt."
+  if git cat-file -e HEAD:scripts/konfliktmarker_wache.py 2>/dev/null ||
+     git ls-files --error-unmatch scripts/konfliktmarker_wache.py >/dev/null 2>&1; then
+    echo "🛑 Konfliktmarker-Sperre: Wache fehlt – Commit gestoppt."
+    exit 1
+  fi
+  echo "::warning:: Konfliktmarker-Sperre im Minimal-Repository nicht installiert."
+
 else
   if ! command -v python3 >/dev/null 2>&1; then
     echo "🛑 Konfliktmarker-Sperre: python3 fehlt – der gestagete Stand ist ungeprüft."

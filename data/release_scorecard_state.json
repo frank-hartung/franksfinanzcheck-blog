@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-06T13:05:41Z",
-  "modus": "live",
-  "commit": null,
+  "generated_at": "2026-11-06T13:46:48Z",
+  "modus": "kandidaten",
+  "commit": "c60923579cf981788398e7de540ccb98fbbea273",
   "kapazitaet": {
     "stichtag": "2026-11-06",
     "artikel": 115,
@@ -45,25 +45,51 @@
       "entscheidung": "human",
       "quelle": "scripts/faktenfrische_befund_ledger.py (via publish_gate.fakten_befund_failures)",
       "artikel": [
+        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
         "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
         "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
         "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026"
       ],
-      "anzahl": 3
+      "anzahl": 4
+    },
+    {
+      "check": "RD1-duplikate",
+      "dimension": "redundanz",
+      "wirkung": "blockiert",
+      "entscheidung": "auto",
+      "quelle": "scripts/duplikat_guard.py D1–D6 (via publish_gate.duplicate_failures)",
+      "artikel": [
+        "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
+        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum"
+      ],
+      "anzahl": 2
+    },
+    {
+      "check": "RD2-einzigartigkeit",
+      "dimension": "redundanz",
+      "wirkung": "blockiert",
+      "entscheidung": "human",
+      "quelle": "scripts/check_uniqueness.py U1–U2 (via publish_gate.uniqueness_failures)",
+      "artikel": [
+        "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
+        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum"
+      ],
+      "anzahl": 2
     }
   ],
   "befundlage": {
-    "offen": 11,
-    "seiten": 4,
-    "live_befunde": 8,
-    "live_seiten": 3,
-    "ueberholt": 0,
+    "offen": 14,
+    "seiten": 5,
+    "live_befunde": 11,
+    "live_seiten": 4,
+    "ueberholt": 3,
     "ohne_fassung": 0,
     "nicht_entscheidbar": 0,
-    "aeltester_tage": 0,
+    "aeltester_tage": 1,
     "frist_tage": 14,
     "ueber_frist": 0,
     "je_slug": {
+      "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": 3,
       "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": 3,
       "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": 3,
       "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": 2
@@ -409,7 +435,7 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "dbbf33ed3fd409fa432695800675c561162e7e1312cb11b27ae7ccf0134b2e92",
+      "sha256": "f541df65178959971f2cdf66376ff0a8dea187b089f62a428200315a339a7889",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -423,7 +449,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
@@ -644,21 +670,34 @@
     },
     "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
       "sha256": "71ebfc49f849da523ebb6a88bf951f330afef86306dc2eef2271bccedf3a00cf",
-      "urteil": "freigabe-reif",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-20",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D3-X: Absatz wortgleich in 2 Artikeln (content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-; D4-X: Fast-Duplikat über Artikel (Ratio 1.00, content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit"
+        },
+        {
+          "check": "RD2-einzigartigkeit",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "U1-PHRASEN: 6 gleiche 7-Wort-Phrasen mit 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum (z. B. „energieprodukte kosteten laut statistischem bundesamt verbraucherpreisindex im“) – ab 5 ist es Dopplung, Passage umschreiben"
+        }
+      ]
     },
     "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen": {
       "sha256": "4726400fec2bdfdc74c650b016633052b08e8721ad014bec4f748faa70e394b0",
@@ -679,22 +718,41 @@
       "checks": []
     },
     "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": {
-      "sha256": "4fb146d60b3f44759f61da13d569f130b71840870dff3f6eadf19adaa688fdc9",
-      "urteil": "freigabe-reif",
+      "sha256": "71a68f1868de96b4ac649d2da91a8523fde369af4dccee26d0f8153eaf94cad6",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-20",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "24f05ddc03ffdd50118f (praezision): Die Kalkulation der Fixkostenersparnis bei Energie (Strom/Gas) ist unpräzise, da sie den aktuellen Preisanstieg von +14,9 % bei Energieprodukten nicht einbezieht.; 4816322f061dfdc03bcd (luecke): Bei den Einsparpotenzialen für Lebensmittel fehlt der Bezug zur aktuellen Preissteigerung von +0,4 % bei Nahrungsmitteln.; 7017065ee7c74c7ae452 (veraltet): Der Artikel nu"
+        },
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D3-X: Absatz wortgleich in 2 Artikeln (content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-; D4-X: Fast-Duplikat über Artikel (Ratio 1.00, content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md ≈ content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit"
+        },
+        {
+          "check": "RD2-einzigartigkeit",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "U1-PHRASEN: 6 gleiche 7-Wort-Phrasen mit 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich (z. B. „energieprodukte kosteten laut statistischem bundesamt verbraucherpreisindex im“) – ab 5 ist es Dopplung, Passage umschreiben"
+        }
+      ]
     },
     "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": {
       "sha256": "17c41212d78f97218bafd134a7fad88df91259602b0406d0bf89c0d4f4fb5180",
@@ -1315,7 +1373,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
@@ -1506,7 +1564,7 @@
       "checks": []
     },
     "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": {
-      "sha256": "a15c4d5844f232efbc6bb03598cfe831448537222f744bb8e8a7803f4fd18063",
+      "sha256": "549fdf9aa108cc50a4aba945d01d3b680c40fb6dc29f6909e8092e9b4e20dc3c",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {

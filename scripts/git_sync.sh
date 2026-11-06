@@ -900,6 +900,7 @@ sync_und_push() {
       # auflösbar (Exit 128: "You must fully qualify the ref").
       # refs/heads/$BRANCH ist deterministisch – erzeugt das Ref, falls es
       # (als gelöscht) nicht mehr existiert.
+      konfliktmarker_notbremse push || return 1
       if out=$(git push origin "HEAD:refs/heads/$BRANCH" 2>&1); then
         printf '%s\n' "$out" | sed 's/^/  push: /'
         return 0
@@ -935,6 +936,7 @@ sync_und_push() {
           # hier kann nur eine echte Branch anstehen.
           echo "  push: Rettungsanker – Ziel-Ref remote nicht vorhanden,"
           echo "        neu anlegen per vollqualifiziertem Refname (refs/heads/$BRANCH) …"
+          konfliktmarker_notbremse push || return 1
           if out=$(git push origin "HEAD:refs/heads/$BRANCH" 2>&1); then
             printf '%s\n' "$out" | sed 's/^/  push: /'
             echo "  push: Rettungsanker erfolgreich (Ziel-Ref neu angelegt)."
@@ -966,6 +968,7 @@ sync_und_push() {
           # VOLLQUALIFIZIERT (#329): ohne refs/heads/-Präfix scheitert der
           # Rettungsanker bei detached HEAD + fehlendem Remote-Ref mit
           # Exit 128 – das war genau der #329-Todespfad.
+          konfliktmarker_notbremse push || return 1
           if out=$(git push origin "HEAD:refs/heads/$BRANCH" 2>&1); then
             printf '%s\n' "$out" | sed 's/^/  push: /'
             echo "  push: Rettungsanker erfolgreich (origin war nicht weitergelaufen)."
@@ -1127,24 +1130,24 @@ except SyntaxError as exc:
 konfliktmarker_notbremse() {
   local modus="$1"
   if ! command -v python3 >/dev/null 2>&1; then
-    echo "::warning::git_sync.sh: python3 fehlt – Konfliktmarker-Notbremse übersprungen."
-    return 0
+    echo "::error::git_sync.sh: python3 fehlt – Konfliktmarker-Prüfung nicht möglich."
+    return 1
   fi
   if [ ! -f scripts/konfliktmarker_wache.py ]; then
-    echo "::warning::git_sync.sh: scripts/konfliktmarker_wache.py fehlt – Konfliktmarker-Notbremse übersprungen."
-    return 0
+    echo "::error::git_sync.sh: Konfliktmarker-Wache fehlt – Prüfung nicht möglich."
+    return 1
   fi
   case "$modus" in
     staged)
       python3 scripts/konfliktmarker_wache.py --staged
       ;;
     push)
-      # Ist origin/$BRANCH lokal nicht auflösbar, kann der Diff nicht
-      # bestimmt werden – wie der Kurzschluss im Push-Pfad: warnen statt
-      # die Automatisierung an einem nicht erreichbaren Ref einfrieren.
+      # Ohne Remote-Ref wird der vollständige HEAD geprüft, nicht der
+      # möglicherweise von ihm abweichende Arbeitsbaum.
       if ! git rev-parse --verify -q "origin/$BRANCH" >/dev/null 2>&1; then
-        echo "::warning::git_sync.sh: origin/$BRANCH nicht auflösbar – Konfliktmarker-Push-Prüfung übersprungen."
-        return 0
+        echo "::warning::git_sync.sh: origin/$BRANCH nicht auflösbar – gesamter Bestand wird geprüft."
+        python3 scripts/konfliktmarker_wache.py --head
+        return $?
       fi
       python3 scripts/konfliktmarker_wache.py --range "origin/$BRANCH...HEAD"
       ;;

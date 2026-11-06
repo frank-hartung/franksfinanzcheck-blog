@@ -390,6 +390,13 @@ def entscheidungen_laden(path: Path = ENTSCHEIDUNGEN) -> dict[tuple[str, str], d
         # Anfügeprotokoll. Steht ein Schlüssel mehrfach da, gewinnt der
         # ZULETZT geschriebene Eintrag (die gültige Entscheidung am heutigen
         # Text); die Vorgänger bleiben in der Datei als Kette lesbar.
+        vorher = result.get(key)
+        if vorher:
+            if (entry.get("folgeentscheidung") is not True or
+                    entry.get("vorgaenger_geprueft_fassung") != vorher["geprueft_fassung"]):
+                raise LedgerFehler(f"Ungültige Folgeentscheidung für {key}: Vorgänger fehlt oder stimmt nicht")
+        elif entry.get("folgeentscheidung") or entry.get("vorgaenger_geprueft_fassung"):
+            raise LedgerFehler(f"Folgeentscheidung ohne Vorgänger: {key}")
         result[key] = dict(entry, befund_fassung=befund_fassung)
     return result
 
