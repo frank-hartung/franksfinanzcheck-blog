@@ -265,3 +265,28 @@ wie beabsichtigt). Nach dem Merge:
   Klasse verlangt den Merge, nicht das Warten.
 
 **Vorgang:** #1039 · **Ersetzt:** #1067 · **Offen (unverändert):** #912, #922
+
+## 9. Nachtrag: #1103 gemergt, #1067 geschlossen, Akte-Selbstheilung (06.11.2026, abends)
+
+- **#1103 gemergt** (Squash `30e401576`, 06.11.2026 15:09 UTC; alle Checks
+  grün; Repo-Regel: keine Merge-Commits – Squash ist der Hauspfad).
+- **#1067 geschlossen** mit Verweis auf #1103 (Kommentar →
+  `issuecomment-6688218219`).
+- **Committe BEFUND-AKTE auf main = Generator-Wahrheit** (19 Befunde,
+  8 × überholt, 6 Seiten, 5 live) – einmalige Korrektur ist kein Dauerheilung.
+- **Automatische Selbstheilung der Akte-Klasse:** neuer Workflow
+  `befund-akte-nachziehen.yml` (push auf `content/posts/**`, Queue,
+  Entscheidungen, Generator; nur-echte-Änderung-Commit,
+  `[skip ci]`) – Details und Grenzen:
+  `BEFUND-AKTE-DAUERHEILUNG-HIGHEND-2026-11-06.md`. PR **#1108** (erstellt,
+  bewusst nicht gemerged).
+- **#922**: read-only nachgemessen (Required Reviewer fehlt ·
+  Administrator-Bypass aktiv/nicht belegbar · Branch-Policy fehlt;
+  CF_WORKERS_DEPLOY_TOKEN/CLOUDFLARE_ACCOUNT_ID nicht lesbar) – Kommentar
+  `issuecomment-6688237184`; Schritte bleiben Inhaber-Sache, nichts geändert.
+- **#1107** (⏰ Frist, Label `frist`, **Frist 20.11.2026**): Kadenz-Horizont
+  getrackt – projiziert Exit 1 am 26.11.2026 und `puenktlich=false` am Limit 16
+  am 31.12.2026 (104 überfällig); Entscheidung A/B/C beim Herausgeber.
+
+**Vorgang:** #1039 · **Nachzug:** siehe neuer Bericht · **Offen:** #922
+(Inhaber), #1107 (Frist-Entscheidung bis 20.11.2026)
