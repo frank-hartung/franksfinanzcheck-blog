@@ -203,13 +203,28 @@ class LiveBestandTests(unittest.TestCase):
     """Der heutige Bestand ist gelesen, nicht behauptet."""
 
     def test_akte_im_repo_ist_auf_dem_stand_der_queue(self):
-        """Eine veraltete Arbeitsliste führt zu Arbeit an falschen Texten."""
+        """Eine veraltete Arbeitsliste führt zu Arbeit an falschen Texten.
+
+        GEMESSEN AM EIGENEN STICHTAG (06.11.2026, #1097-Familie): Hier stand
+        ein festes Datum (TAG = 2026-11-03). Damit blieb die Prüfung grün,
+        während die Akte 11 Befunde auswies und der Ledger 19 kannte – ein
+        Falsch-Grün, das genau die Arbeit an falschen Texten erlaubt, die
+        der Test verhindern soll. Jetzt gilt: Die Akte belegt ihren eigenen
+        Stand, und sie darf nicht älter sein als der jüngste Befund.
+        """
         zustand = json.loads(
             (ROOT / "data" / "faktenfrische_befunde_state.json")
             .read_text(encoding="utf-8"))
-        befunde = ledger.befunde_mit_status(stichtag=TAG)
+        stichtag = dt.date.fromisoformat(str(zustand.get("stichtag") or TAG))
+        befunde = ledger.befunde_mit_status(stichtag=stichtag)
         self.assertEqual(zustand["offen"], len(befunde))
         self.assertEqual(zustand["nicht_entscheidbar"], 0)
+        # Frische: Der Stichtag der Akte liegt nicht vor dem jüngsten Beleg.
+        juengster = max((str(b.get("zuletzt_gesehen") or "")[:10] for b in befunde),
+                        default="")
+        if juengster:
+            self.assertLessEqual(juengster, stichtag.isoformat(),
+                                 "die Akte ist älter als der jüngste Befund")
         self.assertTrue((ROOT / "BEFUND-AKTE.md").exists())
         self.assertIn("--entscheiden", (ROOT / "BEFUND-AKTE.md").read_text(
             encoding="utf-8"))
