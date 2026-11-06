@@ -394,16 +394,13 @@ jobs:
         # PREM-AUDIT 26.08.2026: Das alte Muster (grep "<<" "<<" "<<")
         # behandelte die doppelten Anführungszeichen als DATEINAMEN →
         # Exit 2 (Datei fehlt), das in der if-Sicht "kein Fund" bedeutete:
-        # der Schutz war SILENT inaktiv. Jetzt: echtes Git-Marker-Pattern
-        # (<<<<<<</>>>>>>> mit Branch-Zeile), nur Textdateien, saubere
-        # Exit-Codes.
-        run: |
-          if grep -rnE '^(<{7,} |={7,}$|>{7,} )' content/ layouts/ static/ hugo.toml \
-              --include='*.md' --include='*.html' --include='*.toml' --include='*.yaml' --include='*.yml'; then
-            echo "FEHLER: Unaufgelöste Merge-Marker gefunden! Build abgebrochen."
-            exit 1
-          fi
-          echo "✅ Keine Merge-Marker."
+        # der Schutz war SILENT inaktiv. Jetzt: Block-Automat
+        # `scripts/konfliktmarker_wache.py --all` (06.11.2026, #1073) –
+        # echte Konfliktblöcke (<<<<<<< … ======= … >>>>>>>) über ALLE
+        # getrackten Textdateien statt drei Zeilenmustern über vier
+        # Verzeichnissen; haus-Docstrings mit Sieben-Gleichheitszeichen-
+        # Überschriften sind kein Fund. Fail-closed, saubere Exit-Codes.
+        run: python3 scripts/konfliktmarker_wache.py --all
 
       # WF-7B6B / #654 (08.10.2026): Ein Merge-Rest in package.json ließ jeden
       # Deploy zwischen 10:41 und 12:50 UTC im Schritt „Suchindex bauen“ sterben,
