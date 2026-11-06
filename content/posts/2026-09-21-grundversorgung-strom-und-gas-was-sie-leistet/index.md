@@ -203,7 +203,7 @@ Nein. Jeder Grundversorger kalkuliert seinen Tarif selbst und meldet ihn. Deshal
 
 Wenn ein Anschluss gesperrt wurde, fallen dafür Entgelte an, die im Preisblatt stehen. Diese Kosten begleichen zu müssen ist unangenehm, ändert aber nichts an deinem Recht, danach einen neuen Tarif zu wählen.
 
-**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/)
+**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Energieausweis](../../posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/)
 **Lesetipp:** [Gasrechnung senken: Spätsommer-Check für Tarif und Heizung](../../posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/)
 
 ---

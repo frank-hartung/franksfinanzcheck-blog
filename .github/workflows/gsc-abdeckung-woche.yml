@@ -63,6 +63,11 @@ jobs:
           python3 scripts/gsc_abdeckung.py --vertrag || true
           python3 scripts/gsc_abdeckung.py --prioritaet || true
           python3 scripts/gsc_abdeckung.py --altlasten || true
+          # Der Tageslauf heilt verwaiste Seiten selbst (#1097). Montags wird
+          # nur GEMESSEN, ob es geklappt hat – kein zweiter Schreiber auf
+          # `content/`. Exit 1 wird zur Warnung, nicht zum roten Bericht.
+          python3 scripts/gsc_abdeckung.py --verlinkung --wache \
+            || echo "::warning title=Verlinkung::Inhaltsseiten ohne redaktionellen Inlink gefunden – der Tageslauf heilt sie; bleibt der Befund, fehlt ein Kandidat im Bestand (Redaktion)."
           # Ohne Historie kein Beleg: der Klon ist flach. Der Belegweg steht
           # im Bericht (M7) und braucht `fetch --shallow-since`.
           python3 scripts/gsc_abdeckung.py --ursachen --ohne-git || true

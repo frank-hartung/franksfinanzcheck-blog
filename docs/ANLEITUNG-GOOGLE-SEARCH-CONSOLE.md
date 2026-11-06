@@ -472,6 +472,44 @@ redaktionelle Entscheidung, kein Artikel über dem Goldkorridor (9 interne
 Links, gezählt wie `link_density_guard.py` zählt). Jeder eingefügte Link steht
 in `data/verlinkung_history.jsonl` – append-only, mit Quelle, Ziel und Grund.
 
+### 10.2.1 Selbstheilung statt Warteschlange (seit 06.11.2026, #1097)
+
+Bis zum 06.11.2026 war `--verlinkung --apply` ein Handbefehl. Der Tageslauf
+schrieb jeden Tag einen Auftrag – und wenn niemand ihn ausführte, stand die
+Abnahme am nächsten Tag wieder auf 🛑. Genau das passierte, als die
+Reserve-Automatik um 02:30 Uhr zwei Artikel live stellte: Der Lauf um 12:55
+Uhr maß „Seiten ohne redaktionellen Inlink: 2“, obwohl dieselbe Messung am
+Vortag ✅ war.
+
+Der Tageslauf heilt den Befund jetzt **vor** der Messung:
+
+```bash
+python3 scripts/gsc_abdeckung.py --verlinkung --heilen --max 10   # schreiben + nachmessen
+python3 scripts/gsc_abdeckung.py --verlinkung --wache             # Trockenlauf, Exit 1 bei Befund
+```
+
+Drei Sperren gelten unverändert – die Heilung darf nie mehr Schaden anrichten
+als der Befund:
+
+1. **YMYL.** Ein Artikel mit `inhalt_sha256` oder dem Status
+   `freigegeben`/`approved` wird **nie** automatisch verändert. Eine
+   Textänderung würde die Freigabe entwerten (`editorial_review_gate.py`,
+   Regel E17). Ist die einzige passende Quelle gesperrt, bleibt der Befund
+   offen und die Redaktion entscheidet.
+2. **Goldkorridor.** Höchstens 9 interne Post-Links je Artikel, gezählt wie
+   `link_density_guard.py` zählt. Wer bei 9 steht, bekommt keinen Zuwachs.
+3. **Ort.** Nur die kuratierte „Weiterlesen“-Zeile, und dort vor einem
+   vorhandenen `**Lesetipp:**`. Fehlt die Zeile, wird nichts eingefügt.
+
+Jeder Eingriff steht in `data/verlinkung_history.jsonl` (append-only, mit
+Quelle, Ziel, Grund und Zeitstempel); der Lauf schreibt seinen Bericht nach
+`data/gsc/abdeckung/verlinkungsheilung.json` (vorher → eingefügt → nachher).
+Ein Rest-Befund macht den Datenlauf nicht rot, steht aber als Warnung in der
+Lauf-Zusammenfassung und als Exit 1 im Trockenlauf (`npm run gsc:verlinkung:wache`).
+
+Die Wochenrunde heilt bewusst **nicht** mit (kein zweiter Schreiber auf
+`content/`); sie misst montags nur, ob der Tageslauf es geschafft hat.
+
 ### 10.3 Der Sprung vom 17.10.2026 ist erklärt
 
 `npm run gsc:ursachen` liest die Git-Historie der sieben Tage vor einem Sprung
