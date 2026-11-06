@@ -30,7 +30,6 @@ quellen:
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
 faktencheck: 2026-10-28
-kurzantwort: "Ein Wechsel zu einem Ökostromtarif ist jederzeit unter Einhaltung der Kündigungsfrist möglich, dauert technisch nur wenige Minuten und lässt deine Versorgung lückenlos. Echte Ökotarife erkennst du an Siegeln wie „Grüner Strom“ oder „ok-power“ – nicht an grüner Werbung. In der Modellrechnung dieses Artikels spart ein um 10 Cent je kWh gesenkter Arbeitspreis bei 3.500 kWh Jahresverbrauch 350 € pro Jahr."
 ---
 
 Ökostrom Anbieter wechseln im Check: Du öffnest den Briefkasten und siehst das Logo deines Stromversorgers. Oft folgt darauf ein ungutes Gefühl im Bauch. Die Preise steigen und die Umweltbelastung durch Kohle oder Gas wiegt schwer. Viele Haushalte stellen sich die Frage, ob ein Wechsel zu einer ökologischen Alternative sinnvoll ist.

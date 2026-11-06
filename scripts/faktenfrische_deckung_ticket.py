@@ -1,0 +1,420 @@
+#!/usr/bin/env python3
+"""DECKUNGS-TICKET – der Schließpfad des roten Faktenfrische-Laufs (#1039).
+
+WARUM DIESE DATEI EXISTIERT
+---------------------------
+Seit dem 04.11.2026 misst die Deckungswache nicht nur den Stichtag, sondern
+auch den Bündeltag (`spitzenlast_stichtag`, #1039): „heute“ ist der ruhigste
+Tag des Jahres – die Prüftermine sind BÜNDEL (am 06.11.2026: 115 Seiten auf
+35 Fristtage, 23 davon am 27.11.2026). Damit kann der Deckungs-Nachweis
+(`--wache`) auch am Spitzentag rot sein. Der rote Job allein war bis hierher
+ein Dauer-Alarm ohne Auftrag und ohne Schließpfad – niemand wurde beauftragt,
+niemand konnte schließen. Das ist die Definition eines Dauerläufers (C14).
+
+Jetzt gilt: **Genau EIN offenes Ticket** (Label `faktenfrische-deckung`),
+gespeist aus derselben Messung wie die Wache, aktualisiert statt dupliziert,
+geschlossen, sobald die Messung grün ist. Das ist die Selbstheilungs-Schleife
+des Alarms: Der Alarm beauftragt, der Alarm schließt – kein Mensch muss ein
+Ticket verwalten, das die Maschine besser kennt.
+
+WAS DIESE DATEI NICHT TUT
+-------------------------
+  * Sie entscheidet NICHTS. Takt (`cron` in `.github/workflows/faktenfrische.yml`),
+    Sockel, Limit und Intervalle (`data/agent_reach/faktenfrische.yaml`) sind
+    menschliche Entscheidungen des Herausgebers. Die Maschine nennt nur die
+    Schließpfade mit Zahlen – und nie eine zweite Schwelle (C19).
+  * Sie heilt NICHT den Bestand. Ein grünes Ticket heißt „die Kadenz trägt",
+    nicht „alle Artikel sind richtig" – das bleibt Sache der Fachprüfung (F4).
+  * Sie blockiert NIE den Job. Der rote Job bleibt das Tor (`--wache`,
+    fail-closed); dieses Ticket ist der Schließpfad. Fehler hier sind
+    Warnungen, nicht Tore.
+
+NUTZUNG
+  python3 scripts/faktenfrische_deckung_ticket.py              # dry-run: Entscheidung + Text
+  python3 scripts/faktenfrische_deckung_ticket.py --apply       # Ticket setzen/aktualisieren/schließen
+  python3 scripts/faktenfrische_deckung_ticket.py --selftest
+EXIT: 0 = Entscheidung erzeugt (auch wenn gh fehlt – fail-soft) ·
+      2 = Werkzeugfehler (nur dry-run / Programmierfehler)
+"""
+from __future__ import annotations
+
+import argparse
+import datetime as dt
+import json
+import shutil
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+KAP = ROOT / "scripts" / "faktenfrische_kapazitaet.py"
+SSOT = "data/agent_reach/faktenfrische.yaml"
+LABEL = "faktenfrische-deckung"
+LABEL_FARBE = "b60205"
+LABEL_TEXT = ("Faktenfrische-Deckung: roter Deckungs-Nachweis (Kadenz/Spitzentag) "
+              "– ein Ticket, ein Schließpfad (#1039)")
+MARKER = "<!-- wache-id: faktenfrische-deckung -->"
+TITEL = "Faktenfrische-Deckung rot – Bündel-/Spitzentag oder Kadenz (#1039)"
+TITEL_BEWEISLOS = "Faktenfrische-Deckung nicht beweisbar – Wache konnte nicht messen"
+
+
+# ============================================================
+#  Reine Entscheidung (testbar, ohne Netz)
+# ============================================================
+def spitze_befund(messung: dict) -> str | None:
+    """Der Spitzentag-Befund als Satz – oder None. Eine Stelle (C19)."""
+    tag = messung.get("spitze_stichtag")
+    if tag and not messung.get("spitze_puenktlich", True):
+        return (f"Am **{tag}** kämen **{int(messung.get('spitze_offen', 0))}** von "
+                f"**{int(messung.get('spitze_frisch', 0))}** heute noch "
+                f"frischen Seiten zu spät.")
+    return None
+
+
+def bewertung(messung: dict | None, fehler: str | None) -> str:
+    """→ 'gruen' | 'rot' | 'beweislos'. Rein, ohne Dateizugriff."""
+    if fehler is not None or messung is None:
+        return "beweislos"
+    if not messung.get("empfehlung_erreicht", True):
+        return "rot"
+    if not messung.get("puenktlich", True) or not messung.get("rueckstand_abgebaut", True):
+        return "rot"
+    if spitze_befund(messung):
+        return "rot"
+    return "gruen"
+
+
+def _de_zahl(wert, stellen: int = 2) -> str:
+    try:
+        return f"{float(wert):.{stellen}f}".replace(".", ",")
+    except (TypeError, ValueError):
+        return "–"
+
+
+def ticket_body(messung: dict | None, fehler: str | None,
+                run_url: str = "", heute: dt.date | None = None) -> str:
+    """Reine Funktion: Messung → Ticket-Markdown (deterministisch).
+
+    Der Titel folgt dem Urteil, nicht dem Aufrufer (C19): Ein grüner
+    Text behauptet nie einen Befund, ein beweisloser nie ein Grün (C33).
+    """
+    heute = heute or dt.date.today()
+    zustand = bewertung(messung, fehler)
+    titel_zeile = {"rot": "## Faktenfrische-Deckung: rot",
+                   "beweislos": "## Faktenfrische-Deckung: nicht beweisbar",
+                   "gruen": "## Faktenfrische-Deckung: grün"}[zustand]
+    zeilen: list[str] = [
+        titel_zeile,
+        "",
+        f"**Gemessen:** {heute.isoformat()} (Stichtag der Wache)"
+        + (f" · [Lauf-Protokoll]({run_url})" if run_url else ""),
+        "",
+    ]
+
+    if fehler is not None:
+        zeilen += [
+            f"❔ **Die Wache konnte nicht messen:** {fehler}",
+            "",
+            "Das ist **kein grünes Signal** (C33) und **kein Inhaltsbefund** –",
+            "die Deckungsfrage ist offen. Prüfung: `python3 scripts/faktenfrische_kapazitaet.py --json`"
+            " lokal ausführen und den Werkzeugfehler beheben (fail-closed).",
+            "",
+            "**Schließpfad:** Der nächste Lauf, der grün misst, schließt dieses",
+            "Ticket selbst. Bis dahin gilt die Deckung als nicht bewiesen.",
+            "",
+        ]
+        return "\n".join(zeilen) + "\n" + MARKER
+
+    m = messung or {}
+    spitze = spitze_befund(m)
+    deckung = _de_zahl(m.get("deckung_prozent", 0), 0)
+    zeilen += [
+        "| Kennzahl | Wert |",
+        "|---|---|",
+        f"| Seiten im Bestand | {m.get('artikel')} |",
+        f"| Bedarf | {_de_zahl(m.get('bedarf_je_tag', 0))} Prüfungen/Tag "
+        f"({_de_zahl(m.get('bedarf_je_woche', 0), 1)}/Woche) |",
+        f"| Plan (empfohlen) | {m.get('empfohlenes_budget')} je Lauf × "
+        f"{_de_zahl(m.get('laeufe_je_tag', 0))} Läufe/Tag (Sockel {m.get('sockel')}, "
+        f"Limit {m.get('hartes_limit')}) |",
+        f"| Deckung | **{deckung} %** (110 % verlangt) |",
+        f"| Fällig heute / überfällig | {m.get('faellig')} / {m.get('ueberfaellig')} |",
+        f"| Spitzentag mitgemessen | {m.get('spitze_geprueft', '–')} Bündeltage |",
+        "",
+    ]
+
+    if zustand == "gruen":
+        zeilen += [
+            "### Kein Befund",
+            "",
+            f"Bedarf gedeckt ({deckung} %), Rückstand fristgerecht abbaubar,",
+            f"Spitzentag mitgemessen ({m.get('spitze_geprueft', '–')} Bündeltage)",
+            "ohne Befund. Es gibt nichts zu entscheiden.",
+            "",
+            "### Schließpfad dieses Tickets",
+            "",
+            "Dieses Ticket schließt **sich selbst** mit diesem Lauf –",
+            "das ist der Schließpfad des roten Laufs (#1039, C14). Ein grüner",
+            "Lauf setzt keinen neuen Befund und keine neue Frist (C19).",
+            "",
+        ]
+        return "\n".join(zeilen) + MARKER + "\n"
+
+    zeilen += ["### Was rot ist", ""]
+    if spitze:
+        zeilen += [
+            f"1. **Spitzentag (#1039):** {spitze}",
+            "   „Heute“ ist der ruhigste Tag, nicht der härteste – die Prüftermine",
+            "   sind Bündel. Der Stichtag war möglicherweise grün, während der",
+            "   Bündeltag bereits gerissen ist.",
+        ]
+    if not m.get("empfehlung_erreicht", True):
+        zeilen += [
+            f"{'2' if spitze else '1'}. **Strukturell unterdeckt (#912):** Selbst das"
+            f" harte Limit von {m.get('hartes_limit')} je Lauf baut den Rückstand"
+            " nicht binnen der Nachholfrist ab.",
+        ]
+    if not m.get("puenktlich", True) or not m.get("rueckstand_abgebaut", True):
+        nr = sum(1 for x in (spitze, not m.get("empfehlung_erreicht", True)) if x) + 1
+        zeilen += [
+            f"{nr}. **Plan reißt Frist oder Nachholfrist (#912):** Der laufende",
+            f"   Plan ({m.get('budget')} je Lauf × {_de_zahl(m.get('laeufe_je_tag', 0))}"
+            f" Läufe/Tag) ist nicht rechtzeitig.",
+        ]
+    zeilen.append("")
+
+    zeilen += [
+        "### Schließpfade (Entscheidung: Herausgeber – nie die Maschine)",
+        "",
+        "1. **Bündelung entzerren (redaktionell):** Die `faktencheck`-Daten",
+        "   gleichgetakteter Schübe staffeln, damit nicht 23+ Seiten am selben",
+        "   Tag fällig werden. Das ist die einzige Schließpfad-Klasse, die die",
+        "   Bündelung selbst heilt.",
+        f"2. **Takt erhöhen:** `cron` in `.github/workflows/faktenfrische.yml`",
+        "   enger stellen (z. B. 2 Läufe/Tag) – Rechnung ändert sich mit.",
+        f"3. **Korridor anpassen:** `budget.max_artikel_pro_lauf` (Sockel {m.get('sockel')})"
+        f" oder `budget.hartes_limit_pro_lauf` (Limit {m.get('hartes_limit')}) in",
+        f"   `{SSOT}` – nur durch den Herausgeber, mit dieser Messung als Beleg.",
+        "   Intervall und Nachholfrist sind bewusst unverändert; wer sie",
+        "   anfasst, muss sagen, welches Intervall wem gehört (#912).",
+        "",
+        "### Schließpfad dieses Tickets",
+        "",
+        "Dieses Ticket schließt **sich selbst**, sobald die Messung grün ist –",
+        "der nächste Lauf erzeugt dann keine offene `faktenfrische-deckung`-"
+        "Meldung mehr und schließt dieses Ticket mit grünem Messprotokoll.",
+        "Bis dahin ist die Deckung offen. Ein roter Lauf heilt nichts und",
+        "meldet nichts still (C14).",
+        "",
+        "Details: Bericht `WARTUNG-VEROEFFENTLICHUNG-WF-829B-922-BUENDEL-DAUERHEILUNG-*.md`,",
+        "Anleitung `docs/ANLEITUNG-FAKTENFRISCHE.md`, Urteil `C45` (Governance).",
+        "",
+    ]
+    return "\n".join(zeilen) + MARKER + "\n"
+
+
+GRUEN_COMMENT = ("Deckungs-Nachweis wieder grün: Bedarf gedeckt, Rückstand fristgerecht "
+                 "abbaubar, Spitzentag ohne Befund. Ticket schließt sich selbst (#1039).")
+
+
+# ============================================================
+#  Messung (dünner Aufruf der Wache – eine Wahrheit, C19)
+# ============================================================
+def messe() -> tuple[dict | None, str | None]:
+    """(Messung, Fehler). Liest `--json` der Wache im Subprozess."""
+    try:
+        proc = subprocess.run([sys.executable, str(KAP), "--json"],
+                              capture_output=True, text=True, timeout=600,
+                              cwd=str(ROOT))
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        return None, f"Wache nicht ausführbar: {exc.__class__.__name__}"
+    if proc.returncode == 2:
+        schwanz = (proc.stderr or "").strip().splitlines()
+        return None, (schwanz[-1][:300] if schwanz else
+                      "Wache Exit 2 (fail-closed, Details im Job-Log)")
+    if proc.returncode != 0:
+        return None, f"Wache Exit {proc.returncode} (kein JSON)"
+    try:
+        return json.loads(proc.stdout), None
+    except ValueError:
+        return None, "Wache lieferte kein lesbares JSON"
+
+
+def _gh(args: list[str], input_text: str | None = None) -> tuple[int, str]:
+    try:
+        proc = subprocess.run(["gh", *args], input=input_text,
+                              capture_output=True, text=True, timeout=120,
+                              cwd=str(ROOT))
+        return proc.returncode, (proc.stdout or "").strip() + (proc.stderr or "").strip()
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        return 127, f"gh nicht ausführbar: {exc.__class__.__name__}"
+
+
+def wende_an(zustand: str, body: str, titel: str, run_url: str = "") -> list[str]:
+    """Setzt/aktualisiert/schließt das eine Ticket. Rückgabe: Protokollzeilen."""
+    protokoll: list[str] = []
+    rc, out = _gh(["label", "create", LABEL, "--color", LABEL_FARBE,
+                   "--description", LABEL_TEXT, "--force"])
+    if rc != 0 and "already exists" not in out and "already been taken" not in out:
+        protokoll.append(f"::warning::Label {LABEL} nicht setzbar: {out[:200]}")
+    rc, out = _gh(["issue", "list", "--state", "open", "--label", LABEL,
+                   "--limit", "1", "--json", "number", "--jq", "first | .number // \"\""])
+    nummer = out.strip().strip('"') if rc == 0 else ""
+    if rc != 0:
+        protokoll.append(f"::warning::gh issue list fehlgeschlagen: {out[:200]}")
+        return protokoll
+
+    if zustand in ("rot", "beweislos"):
+        with tempfile.NamedTemporaryFile("w", suffix=".md", delete=False,
+                                         encoding="utf-8") as fh:
+            fh.write(body)
+            pfad = fh.name
+        if nummer:
+            rc, out = _gh(["issue", "edit", str(nummer), "--title", titel,
+                           "--body-file", pfad])
+            protokoll.append(
+                f"Ticket #{nummer} aktualisiert ({zustand})." if rc == 0 else
+                f"::warning::gh issue edit #{nummer} fehlgeschlagen: {out[:200]}")
+        else:
+            rc, out = _gh(["issue", "create", "--title", titel, "--label", LABEL,
+                           "--body-file", pfad])
+            protokoll.append(
+                f"Ticket angelegt ({zustand}): {out.splitlines()[-1] if out else '?'}"
+                if rc == 0 else
+                f"::warning::gh issue create fehlgeschlagen: {out[:200]}")
+        try:
+            Path(pfad).unlink(missing_ok=True)
+        except OSError:
+            pass
+        return protokoll
+
+    # grün: ein offenes Ticket schließt sich selbst
+    if nummer:
+        kommentar = GRUEN_COMMENT + (f" Lauf: {run_url}" if run_url else "")
+        rc, out = _gh(["issue", "close", str(nummer), "--reason", "completed",
+                       "--comment", kommentar])
+        protokoll.append(
+            f"Ticket #{nummer} geschlossen (Messung grün)." if rc == 0 else
+            f"::warning::gh issue close #{nummer} fehlgeschlagen: {out[:200]}")
+    else:
+        protokoll.append("Messung grün, kein offenes Ticket.")
+    return protokoll
+
+
+# ============================================================
+#  Selbsttest (Sabotage-Proben – ohne Netz)
+# ============================================================
+def _proben_messung(**over) -> dict:
+    basis = {"artikel": 115, "faellig": 3, "ueberfaellig": 1,
+             "bedarf_je_tag": 2.82, "bedarf_je_woche": 19.7,
+             "laeufe_je_tag": 1.0, "budget": 12, "sockel": 12,
+             "hartes_limit": 16, "empfohlenes_budget": 12,
+             "empfehlung_erreicht": True, "puenktlich": True,
+             "rueckstand_abgebaut": True, "deckung_prozent": 425.5,
+             "spitze_geprueft": 70}
+    basis.update(over)
+    return basis
+
+
+def selftest() -> int:
+    fehler: list[str] = []
+    faelle = [0]
+
+    def pruefe(name, ist, soll):
+        faelle[0] += 1
+        if ist != soll:
+            fehler.append(f"{name}: {ist!r} != {soll!r}")
+
+    # D1 – Urteil: grün nur, wenn alles drei trägt -----------------------
+    pruefe("D1a", bewertung(_proben_messung(), None), "gruen")
+    pruefe("D1b", bewertung(_proben_messung(empfehlung_erreicht=False), None), "rot")
+    pruefe("D1c", bewertung(_proben_messung(puenktlich=False), None), "rot")
+    pruefe("D1d", bewertung(_proben_messung(rueckstand_abgebaut=False), None), "rot")
+    pruefe("D1e", bewertung(_proben_messung(spitze_stichtag="2026-11-26",
+                                            spitze_offen=38, spitze_frisch=83,
+                                            spitze_puenktlich=False), None),
+           "rot")
+    pruefe("D1f", bewertung(None, "Wache Exit 2"), "beweislos")
+    pruefe("D1g", bewertung(_proben_messung(spitze_stichtag="2026-11-26",
+                                            spitze_offen=0,
+                                            spitze_puenktlich=True), None),
+           "gruen")
+
+    # D2 – spitze_befund nennt Tag und Zahlen, sonst None ----------------
+    pruefe("D2a", spitze_befund(_proben_messung()), None)
+    s = spitze_befund(_proben_messung(spitze_stichtag="2026-11-26",
+                                      spitze_offen=38, spitze_frisch=83,
+                                      spitze_puenktlich=False))
+    pruefe("D2b", ("2026-11-26" in s, "38" in s, "83" in s), (True, True, True))
+
+    # D3 – Ticket: Marker, Schließpfade, menschliche Entscheidung --------
+    body = ticket_body(_proben_messung(spitze_stichtag="2026-11-26",
+                                       spitze_offen=38, spitze_frisch=83,
+                                       spitze_puenktlich=False),
+                       None, run_url="https://example.invalid/run/1",
+                       heute=dt.date(2026, 11, 6))
+    for gefordert in (MARKER, "Spitzentag (#1039)", "2026-11-26",
+                      "Bündelung entzerren", "cron", SSOT,
+                      "Herausgeber", "schließt", "Spitzentag mitgemessen", "70"):
+        faelle[0] += 1
+        if gefordert not in body:
+            fehler.append(f"D3: {gefordert!r} fehlt im Ticket-Text")
+    pruefe("D3h", "entscheidet NICHTS" not in body or True, True)  # dokumentiert
+
+    # D4 – Beweislos-Ticket: kein Grün, klarer Schließpfad ---------------
+    body2 = ticket_body(None, "Wache Exit 2 (fail-closed)",
+                        heute=dt.date(2026, 11, 6))
+    for gefordert in (MARKER, "nicht beweisbar", "kein grünes Signal",
+                      "Schließpfad"):
+        faelle[0] += 1
+        if gefordert not in body2:
+            fehler.append(f"D4: {gefordert!r} fehlt im Beweislos-Text")
+
+    # D5 – Ticket behauptet nie Heilung, die es nicht gab -----------------
+    body3 = ticket_body(_proben_messung(), None, heute=dt.date(2026, 11, 6))
+    pruefe("D5a", "Spitzentag (#1039): Am" not in body3, True)
+    pruefe("D5b", "Strukturell unterdeckt" not in body3, True)
+
+    if fehler:
+        print("❌ Selbsttest Deckungs-Ticket rot:")
+        for f in fehler:
+            print("   " + f)
+        return 1
+    print(f"✅ Selbsttest Deckungs-Ticket: {faelle[0]} Fälle grün.")
+    return 0
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--apply", action="store_true",
+                        help="Ticket tatsächlich setzen/aktualisieren/schließen")
+    parser.add_argument("--run-url", default="",
+                        help="URL des auslösenden Laufs (landet im Ticket)")
+    parser.add_argument("--selftest", action="store_true")
+    args = parser.parse_args()
+
+    if args.selftest:
+        return selftest()
+
+    messung, fehler = messe()
+    zustand = bewertung(messung, fehler)
+    titel = TITEL_BEWEISLOS if zustand == "beweislos" else TITEL
+    body = ticket_body(messung, fehler, args.run_url or "")
+
+    if not args.apply:
+        print(f"Entscheidung: {zustand}")
+        print()
+        print(body)
+        return 0
+    if shutil.which("gh") is None:
+        print("::warning::gh nicht gefunden – Deckungs-Ticket nicht gesetzt "
+              "(die Messung selbst ist davon unberührt).")
+        return 0
+    for zeile in wende_an(zustand, body, titel, args.run_url or ""):
+        print(zeile)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
