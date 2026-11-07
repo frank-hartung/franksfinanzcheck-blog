@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-07T02:57:21Z",
+  "generated_at": "2026-11-07T09:57:02Z",
   "modus": "kandidaten",
-  "commit": "bf7fa1bb53dfef074ca5e4d61b0f4708b505adbf",
+  "commit": "560c88fe176a85da38e0cfe200c49d6d02541007",
   "kapazitaet": {
     "stichtag": "2026-11-07",
     "artikel": 115,
@@ -14,14 +14,14 @@
       "frist": "2026-11-12",
       "restlaufzeit": 5
     },
-    "budget": 12,
+    "budget": 4,
     "laeufe_je_tag": 1.0,
-    "kapazitaet_je_tag": 12.0,
+    "kapazitaet_je_tag": 4.0,
     "bedarf_je_tag": 2.822,
     "bedarf_je_woche": 19.8,
-    "deckung_prozent": 425.2,
+    "deckung_prozent": 141.7,
     "horizont_tage": 120,
-    "vorlauf_tage": 7,
+    "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
     "abbau_tage": 0,
     "verletzungen_alt": 0,
@@ -32,11 +32,11 @@
     "offen_im_horizont": 115,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
-    "sockel": 12,
-    "empfohlenes_budget": 12,
+    "sockel": 4,
+    "empfohlenes_budget": 4,
     "empfehlung_erreicht": true,
     "hartes_limit": 16,
-    "spitze_geprueft": 51
+    "spitze_geprueft": 55
   },
   "ursachen": [
     {
