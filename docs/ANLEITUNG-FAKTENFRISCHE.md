@@ -253,13 +253,55 @@ Seit dem 03.11.2026 gilt:
 | Hash | Umfasst | Zweck |
 |---|---|---|
 | `pruef_hash` | Titel, Beschreibung, Kurzantwort, **Quellen**, Text | bindet die KI-Antwort an die vollständige Prüffassung |
-| `text_hash` | Titel, Beschreibung, Kurzantwort, Text (ohne Quellen) | bindet den Befund und die menschliche Entscheidung an die Aussageflächen |
+| `text_hash` | Titel, Beschreibung, Kurzantwort, **Kerntext** (ohne Quellen, ohne abgeleitete Bildblöcke) | bindet den Befund und die menschliche Entscheidung an die Aussageflächen |
 
 Eine Entscheidung nennt **beides**: `befund_fassung` (welcher Ledger-Eintrag
 gemeint ist) und `geprueft_fassung` (welcher Text tatsächlich gelesen wurde).
 Quellenpflege öffnet keine Entscheidung; eine Textänderung öffnet sie – dann
 muss der Mensch die neue Aussage erneut anschauen. Die Maschine entscheidet
 weiterhin nie fachlich.
+
+### Nachzug 07.11.2026: abgeleitete Bildzeilen öffnen nicht mehr (#1098)
+
+`abbildungen_ableiten.py` erzeugt Bildzeile und Unterschrift (`*Abbildung: …*`)
+aus Titel, Kurzantwort und Zwischenüberschriften. Der Textpflege-Bot zieht
+diese Zeilen nach, wenn sich ein Text ändert. Genau das passierte am
+07.11.2026 in `d1e1c4a`: Zwei frisch entschiedene Befunde öffneten sich erneut,
+obwohl kein Mensch eine Aussage angefasst hatte – die Maschine öffnete durch
+ihre eigene Routinearbeit den Schließpfad.
+
+Seitdem hashen wir den **Kerntext**: Ein abgeleitetes Bild
+(`abbildung-merkkarte.svg`, `abbildung-ablauf.svg`) samt der direkt folgenden
+Unterschrift zählt nicht zur Aussagefläche. Das ist keine Lockerung –
+beide Zeilen tragen nichts, was nicht schon in Titel, Kurzantwort oder Body
+steht. Eine handgeschriebene `*Abbildung: …*`-Zeile bleibt Aussage, und jede
+echte Textänderung öffnet die Entscheidung weiter.
+
+Alt-Entscheidungen hängen am vollständigen Body (`text_hash_volltext`). Diese
+Bindung ist *strenger* als der Kern-Hash und trägt deshalb weiter. Damit sie
+auch einen künftigen Bot-Nachzug überlebt, übersetzt sie eine einmalige,
+beweisbare Hash-Normalisierung:
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --fassung-normalisierung          # Trockenlauf
+python3 scripts/faktenfrische_befund_ledger.py --fassung-normalisierung --apply  # schreiben
+```
+
+Kandidat ist nur, wessen Alt-Hash beim Migrieren **bytegleich** zum Bestand
+ist. Geschrieben wird eine reine Hash-Übersetzung unter
+`fassung_normalisierungen` – niemals eine fachliche Entscheidung. Ein
+erfundenes Ziel schließt nichts (die Wirkung tritt nur ein, wenn `nach` der
+heutige Kern-Hash ist), Formfehler sind Werkzeugfehler.
+
+### Maschinenstempel bleibt Maschinenstempel (#1098, 07.11.2026)
+
+`faktencheck` ist das Datum des **echten Laufs** – belegbar im Dossier
+(`data/research/artikel/<slug>.json`, Feld `erzeugt`). Eine redaktionelle
+Änderung läuft über `lastmod`, nie über `faktencheck`. Ein handgesetztes
+Prüfdatum täuscht eine Prüfung vor, die nicht stattgefunden hat; der
+Rückfallschutz `test_faktenfrische_996` hält das seit dem 03.11.2026 fest und
+stoppt damit das Deploy. Am 07.11.2026 waren sechs Artikel so gestempelt;
+die Stempel sind auf den Dossierlauf zurückgesetzt.
 
 ### Befund redaktionell schließen (der Schließpfad)
 

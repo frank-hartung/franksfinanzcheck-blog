@@ -283,8 +283,8 @@ befunde:
     belegtyp: "belegt"
     beleg_url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html"
     anker:
-      - "mindestens einen Monat vor einer Preisänderung"
-      - "In der Grundversorgung gelten zusätzliche Informationspflichten"
+      - "mindestens einen Monat vorher informieren"
+      - "Für die Grundversorgung gelten strengere Regeln nach § 5 StromGVV/GasGVV"
     verboten_behauptend:
       - "meist einen Monat vorher"
     rest_risiko: "Frist gilt für Haushaltskunden; sonstige Letztverbraucher haben zwei Wochen (Behördenseite)."

@@ -129,6 +129,77 @@ class LedgerTests(unittest.TestCase):
         self.queue.write_text(json.dumps({"fachbefunde": [changed]}))
         self.assertEqual(ledger.offene_befunde(self.queue, self.decisions), [changed])
 
+    def test_abgeleitete_bildzeile_oeffnet_keine_entscheidung(self):
+        """#1098: Der Textpflege-Bot darf den Schließpfad nicht wieder öffnen."""
+        fm = 'title: "Warmwasser"\nkurzantwort: "rund 16 Prozent"'
+        kern = "Warmwasser braucht rund 16 Prozent der Haushaltsenergie."
+        vorher = {"fm": fm, "body": kern + "\n\n"
+                  "![Merkkarte](abbildung-merkkarte.svg)\n\n"
+                  "*Abbildung: Merkkarte zu „Warmwasser“ (eigene Darstellung).*"}
+        nachher = {"fm": fm, "body": kern + "\n\n"
+                   "![Merkkarte](abbildung-merkkarte.svg)\n\n"
+                   "*Abbildung: Gliederung zu „Warmwasser“ – 5 Stationen.*"}
+        self.assertEqual(ledger.text_hash(vorher), ledger.text_hash(nachher))
+        self.assertNotEqual(ledger.text_hash_volltext(vorher),
+                            ledger.text_hash_volltext(nachher))
+        geaendert = {"fm": fm, "body": nachher["body"].replace("16", "22")}
+        self.assertNotEqual(ledger.text_hash(geaendert), ledger.text_hash(nachher))
+
+    def test_handgeschriebene_bildzeile_bleibt_aussage(self):
+        fm = 'title: "Messreihe"'
+        ohne = {"fm": fm, "body": "Eigene Messung."}
+        mit = {"fm": fm, "body": "Eigene Messung.\n\n"
+               "*Abbildung: eigene Messreihe 2026 mit 30 Prozent Abweichung.*"}
+        self.assertNotEqual(ledger.text_hash(ohne), ledger.text_hash(mit))
+
+    def test_hash_normalisierung_traegt_nur_beweisbare_altbindung(self):
+        fm = 'title: "Warmwasser"'
+        artikel_alt = {"fm": fm, "body": "Aussage.\n\n"
+                       "![Merkkarte](abbildung-merkkarte.svg)\n\n"
+                       "*Abbildung: Merkkarte zu „Warmwasser“.*"}
+        voll = ledger.text_hash_volltext(artikel_alt)
+        kern = ledger.text_hash(artikel_alt)
+        self.assertNotEqual(voll, kern)
+        entry = dict(self.entry, text_sha256=ledger.body_hash("Befund vorher"))
+        entry["fassung_sha256"] = entry["text_sha256"]
+        self.queue.write_text(json.dumps({"fachbefunde": [entry]}))
+        self.decisions.write_text(yaml.safe_dump({"entscheidungen": [{
+            "slug": "a", "befund_id": entry["id"],
+            "befund_fassung": entry["fassung_sha256"], "geprueft_fassung": voll,
+            "entschieden_von": "Redaktion", "entschieden_am": "2026-11-06",
+            "begruendung": "Vor der Umstellung am vollständigen Text geprüft",
+        }]}, allow_unicode=True))
+        fassungen = {"a": {"text": kern, "pruef": ledger.body_hash("pruef"),
+                           "text_volltext": voll}}
+        self.assertEqual(ledger.offene_befunde(self.queue, self.decisions, fassungen), [])
+        plan = ledger.fassung_normalisierung(decisions_path=self.decisions,
+                                            fassungen=fassungen)
+        self.assertEqual(len(plan["kandidaten"]), 1)
+        self.assertEqual(plan["geschrieben"], 0)
+        ergebnis = ledger.fassung_normalisierung(decisions_path=self.decisions,
+                                                fassungen=fassungen, apply=True)
+        self.assertEqual(ergebnis["geschrieben"], 1)
+        self.assertEqual(ledger.fassung_normalisierung(
+            decisions_path=self.decisions, fassungen=fassungen, apply=True)["geschrieben"], 0)
+        bot = {"a": {"text": kern, "pruef": ledger.body_hash("pruef2"),
+                     "text_volltext": ledger.body_hash("Bot hat nachgezogen")}}
+        self.assertEqual(ledger.offene_befunde(self.queue, self.decisions, bot), [])
+        echt = {"a": {"text": ledger.body_hash("andere Aussage"),
+                      "pruef": ledger.body_hash("pruef3"),
+                      "text_volltext": ledger.body_hash("andere Aussage voll")}}
+        self.assertEqual(len(ledger.offene_befunde(self.queue, self.decisions, echt)), 1)
+
+    def test_hash_normalisierung_ohne_entscheidung_ist_werkzeugfehler(self):
+        self.decisions.write_text(yaml.safe_dump({
+            "entscheidungen": [],
+            ledger.NORMALISIERUNGEN: [{
+                "slug": "a", "befund_id": self.entry["id"],
+                "von": "1" * 64, "nach": "2" * 64, "am": "2026-11-07",
+                "grund": ledger.NORMALISIERUNG_GRUND,
+            }]}, allow_unicode=True))
+        with self.assertRaises(ledger.LedgerFehler):
+            ledger.entscheidungen_laden(self.decisions)
+
     def test_legacy_migration_verliert_keinen_befund(self):
         old = {"erzeugt": "2026-10-27", "laeufe": [{"slug": "a", "befunde": [self.finding]}]}
         entries = ledger.eintraege_aus_queue(old)
