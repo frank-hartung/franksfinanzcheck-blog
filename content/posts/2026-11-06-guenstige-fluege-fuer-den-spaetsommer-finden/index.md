@@ -6,7 +6,7 @@ draft: true
 tags: ["Mietwagen und Wohnmobil", "Reisekosten sparen"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
-keywords: ["Flugtickets günstig", "Flugvergleich", "Reisebudget sparen"]
+keywords: ["Flugtickets günstig", "Flugvergleich", "Reisebudget sparen", "Günstige Flüge für den Spätsommer finden"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
@@ -15,6 +15,12 @@ redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
+pin_title: "Günstige Flüge für den Spätsommer finden"
+pin_description: "*Werbung | Günstige Flüge für den Spätsommer finden – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und… Mehr Spartipps auf FranksFinanzcheck! #flugtickets #guenstig #flugvergleich"
+cover:
+  image: "images/covers/2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden.jpg"
+  alt: "Günstige Flüge für den Spätsommer finden"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Sie wollen im September verreisen. Die freien Tage stehen vor der Tür. Das Budget für den Urlaub soll klein bleiben. Teure Tickets für den Flug schrecken oft ab. Doch ein paar einfache Kniffe senken den Preis. Sie wollen am Zielort mobil sein. Ein Mietwagen ist dann oft die beste Wahl. Dieser Ratgeber zeigt Ihnen den Weg. Sie finden günstige Flüge. Sie wählen das richtige Auto. Sie sparen durch kluge Planung viel Geld. So bleibt mehr Geld in der Reisekasse.
