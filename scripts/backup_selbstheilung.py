@@ -817,19 +817,51 @@ def _jobs_des_juengsten(repo: str, token: str, workflow: str) -> list:
             for j in antwort.get("jobs", [])]
 
 
+def _zeugt_lauf(lauf: dict) -> bool:
+    """Hat dieser Lauf überhaupt etwas gemessen?
+
+    07.11.2026 – Selbstfund nach dem ersten Live-Einsatz: Ein Lauf, dessen
+    JOB `skipped` ist (0 Schritte, z. B. weil `if: github.ref == main` auf
+    einem Branch zugeschlagen hat), ist KEIN Zeuge. Er hat nichts übersprungen,
+    er ist gar nicht gelaufen.
+    """
+    if str(lauf.get("conclusion")) == "skipped":
+        return False
+    return True
+
+
 def _schritte_des_juengsten(repo: str, token: str, workflow: str) -> list:
-    laeufe = _laeufe(repo, token, workflow)
-    if not laeufe:
-        return []
-    juengster = max(laeufe, key=lambda l: str(l.get("created_at", "")))
-    status, antwort, _m = HTTP("GET", f"{GH_API}/repos/{repo}/actions/runs/"
-                               f"{juengster.get('id')}/jobs", _gh_kopf(token))
-    if status != 200 or not isinstance(antwort, dict):
-        return []
-    schritte: list = []
-    for job in antwort.get("jobs", []):
-        schritte.extend(job.get("steps", []) or [])
-    return schritte
+    """Die Schritte des jüngsten Laufs, der tatsächlich gelaufen ist.
+
+    WARUM NICHT EINFACH „DER JÜNGSTE" (Selbstfund 07.11.2026):
+    Der Prüfer las den neuesten Lauf. Ein `workflow_dispatch` auf einem
+    Branch wird von `if: github.ref == 'refs/heads/main'` übersprungen – der
+    Lauf steht dann mit `skipped` und **null Schritten** in der Liste. Genau
+    das ist passiert: Die Messung, die den Befund „Nachweis wurde
+    übersprungen" (Klasse `scheinbeweis`) finden sollte, verschwand, weil ein
+    leerer Lauf sie überdeckte. Derselbe Fehler wie am selben Tag auf
+    Job-Ebene (der Gesamtlauf war rot, der sichernde Job grün) – nur eine
+    Ebene höher: **ein Lauf ohne Schritte ist kein Zeuge, er ist ein
+    Platzhalter.**
+
+    Deshalb wird jetzt der jüngste Lauf gesucht, der Schritte HAT. Kann keiner
+    gelesen werden, ist das kein „alles in Ordnung", sondern ein Befund:
+    Ein leerer Rückgabewert wird von `pruefe_scheinbeweis` als fehlender
+    Nachweis gewertet, nicht als Entlastung.
+    """
+    laeufe = [l for l in _laeufe(repo, token, workflow) if _zeugt_lauf(l)]
+    laeufe.sort(key=lambda l: str(l.get("created_at", "")), reverse=True)
+    for lauf in laeufe[:5]:
+        status, antwort, _m = HTTP("GET", f"{GH_API}/repos/{repo}/actions/runs/"
+                                   f"{lauf.get('id')}/jobs", _gh_kopf(token))
+        if status != 200 or not isinstance(antwort, dict):
+            continue
+        schritte: list = []
+        for job in antwort.get("jobs", []):
+            schritte.extend(job.get("steps", []) or [])
+        if schritte:                      # erst ein Lauf MIT Schritten zeugt
+            return schritte
+    return []
 
 
 def main(argv: list[str] | None = None) -> int:

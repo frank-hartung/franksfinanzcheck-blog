@@ -1455,6 +1455,58 @@ class SelbstheilungVertrag(unittest.TestCase):
                "conclusion": "success"}]
         self.assertEqual(bh.pruefe_leerlauf(kv, "", False, jetzt), [])
 
+    def test_geskippter_lauf_ist_kein_zeuge(self):
+        """Selbstfund 07.11.2026 (zweite Messhöhe, LIVE reproduziert).
+
+        Nach einem `workflow_dispatch` auf einem Branch steht in der
+        Läufe-Liste ein Lauf mit `conclusion: skipped` und **null Schritten**
+        (der Job-Guard `if: github.ref == 'refs/heads/main'` greift). Der
+        Prüfer las den JÜNGSTEN Lauf – also den leeren – und der Befund
+        „Rückweg-Nachweis wurde übersprungen" verschwand genau dann, wenn man
+        ihn brauchte: LIVE belegt an Lauf 42386235574 (0 Schritte), nachdem
+        der Befund Minuten vorher noch gemeldet wurde.
+
+        Die Regel: Ein Lauf ohne Schritte ist kein Zeuge, er ist ein
+        Platzhalter. Gemessen wird der jüngste Lauf, der Schritte HAT.
+        """
+        sys.path.insert(0, str(SCRIPTS))
+        import backup_selbstheilung as bh
+
+        leer = {"id": 2, "conclusion": "skipped", "created_at": "2026-11-07T15:24:31Z"}
+        echt = {"id": 1, "conclusion": "failure", "created_at": "2026-11-06T19:48:59Z"}
+        self.assertFalse(bh._zeugt_lauf(leer), "ein geskippter Lauf zeugt nicht")
+        self.assertTrue(bh._zeugt_lauf(echt))
+
+        # Der Prüfer muss den leeren Lauf ÜBERSPRINGEN und den echten lesen.
+        gelesen = []
+
+        def fake_http(methode, url, kopf):
+            gelesen.append(url)
+            if url.endswith("/runs?per_page=20"):
+                return 200, {"workflow_runs": [leer, echt]}, {}
+            if "/runs/2/jobs" in url:
+                return 200, {"jobs": [{"name": "x", "status": "completed",
+                                       "conclusion": "skipped", "steps": []}]}, {}
+            return 200, {"jobs": [{"name": "x", "status": "completed",
+                                   "conclusion": "failure", "steps": [
+                                       {"name": "Kurzpruefung Wiederherstellbarkeit "
+                                                "(strukturell, ohne Secrets)",
+                                        "conclusion": "skipped"}]}]}, {}
+
+        alt = bh.HTTP
+        bh.HTTP = fake_http
+        try:
+            schritte = bh._schritte_des_juengsten("a/b", "t", bh.FRISCHE_WORKFLOW)
+        finally:
+            bh.HTTP = alt
+
+        namen = [x["name"] for x in schritte]
+        self.assertTrue(namen, "der echte Lauf hätte Schritte liefern müssen")
+        self.assertIn("Kurzpruefung Wiederherstellbarkeit (strukturell, ohne Secrets)",
+                      " ".join(namen))
+        self.assertFalse(any("/runs/2/jobs" in u for u in gelesen),
+                         "der geskippte Lauf darf gar nicht erst befragt werden")
+
     def test_anleitung_nennt_selbstheilung_und_grenze(self):
         text = ANLEITUNG.read_text(encoding="utf-8")
         self.assertIn("Selbstheilung", text)
