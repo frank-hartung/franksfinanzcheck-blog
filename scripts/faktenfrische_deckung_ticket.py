@@ -29,6 +29,17 @@ WAS DIESE DATEI NICHT TUT
     fail-closed); dieses Ticket ist der Schließpfad. Fehler hier sind
     Warnungen, nicht Tore.
 
+SEIT 07.11.2026: DIE PROJEKTION STEHT IM TICKET (#1107)
+-------------------------------------------------------
+Der Befund von #1107 entstand aus einem Handlauf, der einen Zukunftstag mit
+dem eingefrorenen Prüfstand von heute maß („rot am 26.11./31.12.“). Die
+Messung rechnet den Zukunftstag jetzt als Weg des Bots (Trajektorie ab
+heute). Damit kein Leser raten muss, WELCHE Art Zahl er vor sich hat,
+übernimmt dieses Ticket Ausgangspunkt und Horizont aus derselben Messung:
+„Der Weg des Bots ist bis D frei“ oder „reißt zuerst am D2“. Beides stammt
+aus dem Lauf, der das Ticket schreibt – eine Momentaufnahme von Hand kann
+kein Ticket mehr füllen.
+
 NUTZUNG
   python3 scripts/faktenfrische_deckung_ticket.py              # dry-run: Entscheidung + Text
   python3 scripts/faktenfrische_deckung_ticket.py --apply       # Ticket setzen/aktualisieren/schließen
@@ -70,6 +81,41 @@ def spitze_befund(messung: dict) -> str | None:
                 f"**{int(messung.get('spitze_frisch', 0))}** heute noch "
                 f"frischen Seiten zu spät.")
     return None
+
+
+def horizont_befund(messung: dict) -> str:
+    """Der Weg des Bots als Satz – auch „nicht gemessen“ ist ein Satz (#1107).
+
+    Ohne diese Zeile trüge das Ticket nur „rot“, und der nächste Leser
+    müsste wieder einen Handlauf starten, um ein Datum zu bekommen. Genau
+    daraus entstand #1107.
+    """
+    kh = messung.get("kadenz_horizont") or {}
+    if not kh.get("geprueft"):
+        # „Nicht gemessen“ darf nie wie „grün“ aussehen (C33): Der fehlende
+        # Horizont wird benannt, nicht verschwiegen.
+        return ("Der Weg des Bots wurde in diesem Lauf **nicht gemessen** – "
+                "das ist kein grünes Signal (C33).")
+    if kh.get("weg_frei"):
+        return (f"Der Weg des Bots ist bis **{kh.get('bis')}** frei – kein "
+                f"Prüftermin reißt ({int(kh.get('tage') or 0)} Tage Horizont).")
+    return (f"Der Weg des Bots reißt zuerst am **{kh.get('erstverletzung')}** "
+            f"(`{kh.get('erstverletzung_seite')}`, Frist "
+            f"{kh.get('erstverletzung_frist')}) – {int(kh.get('verletzungen') or 0)} "
+            f"gerissene Termine auf {int(kh.get('seiten') or 0)} Seiten bis "
+            f"{kh.get('bis')}.")
+
+
+def projektion_zeile(messung: dict) -> str:
+    """Woher die Zahl kommt: Weg des Bots oder Nachweis des Stichtags (#1107)."""
+    p = messung.get("projektion") or {}
+    if p.get("trajektorie"):
+        return (f"Stichtag {p.get('stichtag')} ab **{p.get('ausgangspunkt')}** "
+                "gerechnet (Weg des Bots, nicht eingefroren)")
+    if p.get("stichtag"):
+        return (f"Stichtag {p.get('stichtag')} selbst (Nachweis, keine "
+                "Projektion in die Zukunft)")
+    return "–"
 
 
 def bewertung(messung: dict | None, fehler: str | None) -> str:
@@ -141,8 +187,12 @@ def ticket_body(messung: dict | None, fehler: str | None,
         f"| Deckung | **{deckung} %** (110 % verlangt) |",
         f"| Fällig heute / überfällig | {m.get('faellig')} / {m.get('ueberfaellig')} |",
         f"| Spitzentag mitgemessen | {m.get('spitze_geprueft', '–')} Bündeltage |",
+        f"| Projektion | {projektion_zeile(m)} |",
         "",
     ]
+    weg = horizont_befund(m)
+    if weg:
+        zeilen += [weg, ""]
 
     if zustand == "gruen":
         zeilen += [
@@ -162,6 +212,8 @@ def ticket_body(messung: dict | None, fehler: str | None,
         return "\n".join(zeilen) + MARKER + "\n"
 
     zeilen += ["### Was rot ist", ""]
+    if weg and not (m.get("kadenz_horizont") or {}).get("weg_frei", False):
+        zeilen += [f"**Kadenz-Horizont (#1107):** {weg}", ""]
     if spitze:
         zeilen += [
             f"1. **Spitzentag (#1039):** {spitze}",
@@ -312,7 +364,18 @@ def _proben_messung(**over) -> dict:
              "hartes_limit": 16, "empfohlenes_budget": 12,
              "empfehlung_erreicht": True, "puenktlich": True,
              "rueckstand_abgebaut": True, "deckung_prozent": 425.5,
-             "spitze_geprueft": 70}
+             "spitze_geprueft": 70,
+             # #1107: Jede Messung liefert Ausgangspunkt und Weg mit.
+             "projektion": {"stichtag": "2026-11-07",
+                            "ausgangspunkt": "2026-11-07",
+                            "trajektorie": False,
+                            "regel": "Zukunft ab Ausgangspunkt (#1107)."},
+             "kadenz_horizont": {"geprueft": True, "bis": "2027-03-07",
+                                 "tage": 120, "weg_frei": True,
+                                 "erstverletzung": None,
+                                 "erstverletzung_seite": None,
+                                 "erstverletzung_frist": None,
+                                 "verletzungen": 0, "seiten": 0}}
     basis.update(over)
     return basis
 
@@ -375,6 +438,39 @@ def selftest() -> int:
     body3 = ticket_body(_proben_messung(), None, heute=dt.date(2026, 11, 6))
     pruefe("D5a", "Spitzentag (#1039): Am" not in body3, True)
     pruefe("D5b", "Strukturell unterdeckt" not in body3, True)
+
+    # D6 – Der Weg des Bots steht im Ticket (#1107) -----------------------
+    weg_gruen = (f"Der Weg des Bots ist bis **2027-03-07** frei – kein "
+                 "Prüftermin reißt (120 Tage Horizont).")
+    pruefe("D6a", weg_gruen in body3, True)
+    projektion = _proben_messung(projektion={"stichtag": "2026-12-31",
+                                             "ausgangspunkt": "2026-11-07",
+                                             "trajektorie": True,
+                                             "regel": "x"})
+    body4 = ticket_body(projektion, None, heute=dt.date(2026, 11, 6))
+    pruefe("D6b", "ab **2026-11-07**" in body4, True)
+    pruefe("D6c", "eingefroren" in body4, True)
+    rot_horizont = _proben_messung(
+        puenktlich=False,
+        kadenz_horizont={"geprueft": True, "bis": "2027-03-07", "tage": 120,
+                         "weg_frei": False, "erstverletzung": "2026-11-27",
+                         "erstverletzung_seite": "bundel-001",
+                         "erstverletzung_frist": "2026-11-26",
+                         "verletzungen": 4, "seiten": 3})
+    body5 = ticket_body(rot_horizont, None, heute=dt.date(2026, 11, 6))
+    for gefordert in ("Kadenz-Horizont (#1107)", "2026-11-27", "bundel-001",
+                      "4 gerissene Termine auf 3 Seiten"):
+        faelle[0] += 1
+        if gefordert not in body5:
+            fehler.append(f"D6: {gefordert!r} fehlt im roten Horizont-Text")
+
+    # D7 – Ohne Messung kein Horizont, aber auch kein Grün (C33) ----------
+    ungemessen = horizont_befund({})
+    pruefe("D7a", "nicht gemessen" in ungemessen, True)
+    pruefe("D7b", "kein grünes Signal" in ungemessen, True)
+    pruefe("D7c", "nicht gemessen" in ticket_body(_proben_messung(
+        kadenz_horizont={"geprueft": False}), None,
+        heute=dt.date(2026, 11, 6)), True)
 
     if fehler:
         print("❌ Selbsttest Deckungs-Ticket rot:")

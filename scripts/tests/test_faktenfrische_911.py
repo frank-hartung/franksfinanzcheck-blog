@@ -40,6 +40,10 @@ import unittest
 import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from faktenfrische_gleis import (  # noqa: E402
+    arbeitsliste_traegt_befunde, offene_befunde)
 sys.path.insert(0, str(ROOT / 'scripts'))
 import faktenfrische  # noqa: E402
 
@@ -523,16 +527,12 @@ class Faktenfrische911MetaTests(unittest.TestCase):
                                  'Formelle Anrede im Du-Artikel.')
 
     def test_queue_und_register_halten_die_befunde_geschlossen(self):
-        try:
-            queue = json.loads((ROOT / 'data' / 'faktenfrische_queue.json')
-                               .read_text(encoding='utf-8'))
-        except FileNotFoundError:
-            self.skipTest('Queue-Datei nicht vorhanden')
-        kerne = {re.sub(r'^\d{4}-\d{2}-\d{2}-', '', s) for s in (STROM, GAS)}
-        for eintrag in queue.get('offen', []):
-            slug = eintrag.get('slug') or ''
-            kern = re.sub(r'^\d{4}-\d{2}-\d{2}-', '', slug)
-            self.assertNotIn(kern, kerne, f'Queue meldet offene Befunde für {slug}')
+        """Offene Befunde sind geschlossen; die Arbeitsliste darf die Seiten
+        führen (Turnus, Vorlauf), ein Befund darf dort nicht mitreisen."""
+        self.assertFalse(offene_befunde((STROM, GAS)),
+                         'Queue meldet offenen Befund für eine der zwei Seiten')
+        self.assertFalse(arbeitsliste_traegt_befunde((STROM, GAS)),
+                         'Queue-Eintrag transportiert einen Befund')
         # Der Register-Eintrag muss den Lauf und die Heilung datieren.
         reg = register()
         self.assertIn('2026-10-27', reg['lauf'])

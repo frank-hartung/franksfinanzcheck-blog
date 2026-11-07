@@ -3764,6 +3764,13 @@ def c44_themen_nachschub(script_texts, wflows, root=BLOG_DIR):
 #      statisch: hartes_limit_pro_lauf × Läufe/Tag ≥ Bedarf × Mindestdeckung.
 #      Reicht die Kapazität nicht, wird der BAU rot, BEVOR der Bestand rot
 #      wird – genau die Reihenfolge, die am 27.10. gefehlt hat.
+#   c2) Die PROJEKTION rechnet den Weg des Bots (#1107, 07.11.2026). Ein
+#      Stichtag in der Zukunft wird als Trajektorie ab heute gerechnet, nie
+#      mit dem eingefrorenen Prüfstand. Die drei Marker unten sind Pflicht:
+#      Ohne `bestand_trajektorie`, `projektions_ausgangspunkt` und
+#      `kadenz_horizont` wäre die Heilung löschbar, ohne dass ein Gate
+#      anschlägt – und der nächste Handlauf erzeugte wieder ein Ticket aus
+#      einer Momentaufnahme.
 #   d) Die Release-Scorecard nennt die Ursache, nicht nur das Symptom.
 #   e) Ein Vertrag ohne Test ist Prosa.
 C45_WACHE = "faktenfrische_kapazitaet.py"
@@ -3781,7 +3788,14 @@ C45_MARKER = ("faelligkeit", "--selftest", "laeufe_aus_workflow",
               # #1039: Die Bündeltag-Messung ist seit dem 04.11.2026 Teil des
               # vertraglichen Minimums. Ohne sie misst die Wache nur den
               # ruhigsten Tag des Jahres.
-              "spitzenlast_stichtag", "spitze_geprueft")
+              "spitzenlast_stichtag", "spitze_geprueft",
+              # #1107 (07.11.2026): Die Projektion in die Zukunft rechnet den
+              # WEG des Bots, nicht den eingefrorenen Prüfstand. Ohne diese
+              # drei Bausteine entsteht aus einer Momentaufnahme wieder ein
+              # Ticket mit Frist („rot am 26.11./31.12.“), das niemand
+              # nachrechnen kann.
+              "bestand_trajektorie", "projektions_ausgangspunkt",
+              "kadenz_horizont")
 
 
 def _c45_deckung(root=BLOG_DIR):
