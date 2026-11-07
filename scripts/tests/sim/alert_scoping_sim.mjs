@@ -551,6 +551,44 @@ await run('#923-Gegenprobe: Frischwache rot beim Messen -> RPO-Rat bleibt',
   true, ['<!-- alert-runbook: backup-frisch -->', 'Häufigste Ursachen'],
   null, ['<!-- alert-runbook: backup-einrichtung -->']);
 
+// 07.11.2026 (WF-9E5A / #923): DER GRÜNE LEERLAUF als roter Befund.
+//     Belegt am Lauf 42359904795: Der Job „backup" endet `success`, obwohl
+//     weder Ziel noch Passphrase gesetzt sind – die Annotationen sagen es
+//     selbst („Kein dauerhaftes Offsite-Ziel" / „Kein BACKUP_PASSPHRASE").
+//     Der neue Selbstheilungs-Schritt macht daraus einen roten Befund mit
+//     EIGENEM Rat: nicht „einrichten" (das kann vollständig sein und trotzdem
+//     nichts sichern, Stichwort Opt-in ohne Ziel) und nicht „neu starten"
+//     (der nächste Lauf wäre genauso leer).
+await run('#923: Selbstheilung rot in der Frischwache -> eigener Leerlauf-Rat',
+  { workflowName: 'Backup-Frischwache (operative RPO-Wache)', branch: 'main', event: 'schedule',
+    conclusion: 'failure',
+    jobs: [{ name: 'Backup-Frische pruefen (RPO 24 h / 52 h)', conclusion: 'failure',
+             html_url: 'https://x/jobs/9240',
+             steps: [{ name: 'Voraussetzungen prüfen (fail-closed – kein Schein-Grün)', conclusion: 'success' },
+                     { name: 'Selbstheilung (nur Beweisbares – Dispatch mit Lauf-Nachweis)',
+                       conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: backup-leerlauf -->',
+         'Ein Lauf ist grün – und trotzdem ist nichts gesichert',
+         'Schritte 2–4',
+         'ein Neustart ändert nichts',
+         'actions/workflows/backup-offsite.yml'],
+  null, ['<!-- alert-runbook: backup-frisch -->', 'Scheduler-Hänger ignoriert',
+         'Einrichtung unvollständig – ein Neustart hilft nicht', 'API-Key abgelaufen']);
+
+// Gegenprobe: reps-Rat. Ist die EINRICHTUNG offen, bleibt sie die erste
+// Antwort – der Leerlauf ist dann nur die Folge, nicht die Ursache.
+await run('#923-Gegenprobe: offene Einrichtung schlägt den Leerlauf-Rat',
+  { workflowName: 'Backup-Frischwache (operative RPO-Wache)', branch: 'main', event: 'schedule',
+    conclusion: 'failure',
+    jobs: [{ name: 'Backup-Frische pruefen (RPO 24 h / 52 h)', conclusion: 'failure',
+             html_url: 'https://x/jobs/9241',
+             steps: [{ name: 'Voraussetzungen prüfen (fail-closed – kein Schein-Grün)',
+                       conclusion: 'failure' },
+                     { name: 'Selbstheilung (nur Beweisbares – Dispatch mit Lauf-Nachweis)',
+                       conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: backup-einrichtung -->'],
+  null, ['<!-- alert-runbook: backup-leerlauf -->']);
+
 // Gegenprobe: derselbe Schrittname in einem fremden Workflow bleibt beim
 // allgemeinen Runbook – die Klasse haengt am Workflow, nicht am Wort.
 await run('#923-Gegenprobe: gleicher Schrittname in fremdem Workflow -> Standard-Rat',

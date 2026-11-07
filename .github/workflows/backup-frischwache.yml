@@ -54,6 +54,10 @@ on:
       # eine Änderung an restore_drill.sh den Lauf nicht auslösen – die
       # Prüfung liefe nie über den Code, den sie prüft.
       - "scripts/restore_drill.sh"
+      # #923 (07.11.2026): Die Selbstheilung ist ein Prüfer dieses Laufs –
+      # eine Änderung daran muss den Lauf auslösen, sonst urteilt er über
+      # Code, der nicht lief (dieselbe Regel wie oben, Trigger-Wache W1).
+      - "scripts/backup_selbstheilung.py"
       - "scripts/tests/test_backup_einrichtung.py"
       - ".github/workflows/backup-frischwache.yml"
       - ".github/workflows/backup-offsite.yml"
@@ -77,10 +81,12 @@ jobs:
     environment: backup
     permissions:
       contents: read
-      # Nur lesend: Die Einrichtungsprüfung (E8) liest die Schutzregeln des
-      # Environments „backup“ – der Endpunkt verlangt „actions: read“
-      # (gleiche Begründung wie im Job kv-backup von backup-offsite.yml).
-      actions: read
+      # Die Einrichtungsprüfung (E8) liest die Schutzregeln des Environments
+      # „backup“ (dafür `actions: read`), und die Selbstheilung startet bei
+      # Bedarf einen Lauf im EIGENEN Repository (dafür `actions: write`).
+      # Mehr Rechte braucht der Job nicht: keine Schreibzugriffe auf Inhalte,
+      # keine fremden Repositories, keine Backup-Zugänge für den Dispatch.
+      actions: write
     env:
       BACKUP_REPO: ${{ vars.BACKUP_REPO }}
       GH_TOKEN: ${{ secrets.BACKUP_REPO_TOKEN }}
@@ -113,6 +119,9 @@ jobs:
           python3 scripts/backup_freshness_guard.py --selftest
           python3 scripts/kv_backup.py --selftest
           python3 scripts/backup_einrichtung.py --selftest
+          # #923: Auch die Heilung beweist sich selbst, bevor sie urteilt.
+          python3 scripts/backup_selbstheilung.py --selftest
+          python3 scripts/backup_selbstheilung.py --vertrag
 
       # ================================================================
       #  EINRICHTUNG ALS BLOCK, NICHT ALS FUßNOTE (#923, 02.11.2026)
@@ -210,11 +219,38 @@ jobs:
       # aber Rueckweg nicht belegt“) und riet sonst zu einem Neustart, der an
       # einem Syntaxfehler nichts aendert.
       - name: Kurzpruefung Wiederherstellbarkeit (strukturell, ohne Secrets)
+        # #923 (07.11.2026) – EIN NACHWEIS, DER NUR NACH EINEM GRUENEN VORGÄNGER
+        # LÄUFT, IST KEIN NACHWEIS.
+        # ---------------------------------------------------------------
+        # BEFUND (live, sechs Läufe in Folge, zuletzt 42282938395): In jedem
+        # Lauf, in dem „Voraussetzungen prüfen“ rot war, stand dieser Schritt
+        # als `skipped` im Lauf. Das ist GitHubs Standardbedingung
+        # `success()` – der Rückweg-Nachweis hing damit am Ausgang einer
+        # FREMDEN Frage. Genau so verschwindet eine Prüfung: Sie ist nicht
+        # rot, sie ist nicht da, und niemand liest eine Lücke.
+        # Warum das nicht „egal“ ist: Der Nachweis ist der einzige
+        # automatisierte Beweis, dass ein Backup zurückzuspielen wäre. Fällt
+        # er in genau dem Zustand aus, in dem die Sicherung schon nicht läuft,
+        # gibt es über den Rückweg zwei Unbekannte statt einer.
+        # JETZT: Der Schritt läuft IMMER (solange der Job nicht abgebrochen
+        # ist) und ist ehrlich: Was strukturell prüfbar ist, wird geprüft
+        # (Syntax, Selbsttests, Schein-Grün-Gegenprobe). Was ohne eingerichtetes
+        # Ziel NICHT prüfbar ist, steht als Grund im Protokoll – der Schritt
+        # wird dadurch nicht rot (die Einrichtung ist bereits Rot-Grund im
+        # Schritt davor und trägt ihren eigenen Rat), aber er ist auch nicht
+        # mehr stillschweigend weg.
+        if: ${{ !cancelled() }}
         run: |
           set -euo pipefail
-          # Kein `if: always()`: Ein Nachweis, der nur nach einem roten
-          # Frische-Schritt laeuft, waere die Umkehrung von fail-closed. Er
-          # laeuft immer, solange der Job nicht abgebrochen ist.
+          # EHRLICHE ANSAGE ZUERST (#923, 07.11.2026): Ohne Ziel/Zugang/
+          # Passphrase gibt es keine Sicherung, deren Rückweg man prüfen
+          # könnte. Das wird GESAGT – nicht verschwiegen (vorher stand hier
+          # in sechs Läufen nur „skipped“), und es macht aus der Lücke keine
+          # zweite Rot-Stelle: Die Einrichtung selbst trägt ihren Rat im
+          # Schritt „Voraussetzungen prüfen“.
+          if [ -z "${ZIEL_REPO:-}" ] || [ -z "${ZIEL_TOKEN:-}" ] || [ -z "${PASSWORT:-}" ]; then
+            echo "::warning title=Wiederherstellbarkeit nicht belegbar::Ohne Ziel, Zugang und Passphrase existiert keine Sicherung, deren Rückweg prüfbar wäre. Geprüft wird deshalb nur die STRUKTUR (Syntax, Selbsttest, Schein-Grün-Gegenprobe). Einrichtungs-Rat: docs/ANLEITUNG-OFFSITE-BACKUP.md (Schritte 1–7)."
+          fi
           bash -n scripts/restore_drill.sh
           bash -n scripts/backup_einrichten_wizard.sh
           python3 scripts/kv_backup.py --selftest
@@ -236,4 +272,71 @@ jobs:
             echo "- Selbsttest `kv_backup.py`: ok"
             echo "- Ein Drill ohne geprueste Familie endet mit Exit 2 (kein Schein-Gruen)."
             echo "- Echte Probe gegen das private Ziel: \`npm run backup:probe\` (Anleitung, Abschnitt „Wiederherstellung“)."
+            if [ -n "${ZIEL_REPO:-}" ] && [ -n "${ZIEL_TOKEN:-}" ] && [ -n "${PASSWORT:-}" ]; then
+              echo "- Ziel, Zugang und Passphrase sind gesetzt: die echte Probe ist jetzt möglich."
+            else
+              echo "- **Nicht prüfbar (ehrlich benannt):** Ohne Ziel/Zugang/Passphrase gibt es"
+              echo "  keine Sicherung, deren Rückweg man prüfen könnte. Strukturell ist der"
+              echo "  Rückweg bewiesen – die Wiederherstellung selbst nicht. Grund und Weg:"
+              echo "  Schritt „Voraussetzungen prüfen“ bzw. docs/ANLEITUNG-OFFSITE-BACKUP.md."
+            fi
           } >> "$GITHUB_STEP_SUMMARY"
+
+      # ================================================================
+      #  SELBSTHEILUNG (07.11.2026, #923) – Aktion mit Beweis, nicht Zusage
+      #  ----------------------------------------------------------------
+      #  Bis hierher galt die Kette als „wartet auf den Inhaber“. Das ist
+      #  richtig für die Zugänge (E1–E8) – aber nicht für alles. Zwei
+      #  Befunde sind ohne jeden Zugang reparierbar bzw. sichtbar zu machen:
+      #    · Der nächtliche Lauf kommt verspätet oder gar nicht (belegt an
+      #      24 Läufen: Soll 03:00 UTC, Start 07:37–10:28 UTC). Die DATEI ist
+      #      in Ordnung, es fehlt der LAUF. Ein Dispatch holt ihn nach – und
+      #      beweist sich selbst: Ein „angenommen“ der API ist kein Beweis,
+      #      ein neuer Lauf in der Läufe-Liste ist einer.
+      #    · Ein grüner Repo-Job ohne Ziel und ohne Passphrase sichert nichts
+      #      (live belegt: Lauf 42359904795, Job „backup“ success mit den
+      #      Warnungen „Kein dauerhaftes Offsite-Ziel“ / „Kein
+      #      BACKUP_PASSPHRASE“). „Gelaufen“ ist wahr, „gesichert“ nicht.
+      #  Die Grenze ist im Skript festgeschrieben (H1–H3): Nur beweisbar
+      #  Kaputtes, nur ohne Zugang Reparierbares, immer mit Beweis. Was der
+      #  Inhaber tun muss, wird benannt – nicht erfunden.
+      # ================================================================
+      - name: Selbstheilung (nur Beweisbares – Dispatch mit Lauf-Nachweis)
+        # `!cancelled()`: Die Heilung ist eine eigene Aufgabe und darf nicht
+        # am Ausgang der Messung davor hängen (derselbe Grund wie oben).
+        if: ${{ !cancelled() }}
+        env:
+          # Nur der Lauf-Token: Er startet einen Lauf im EIGENEN Repo
+          # (actions: write). Die Backup-Zugänge selbst sind hier nicht nötig
+          # – die Heilung sieht von Ziel und Passphrase ausschließlich, OB sie
+          # gesetzt sind (sie liest keine Werte und gibt keine aus).
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          BACKUP_REPO: ${{ vars.BACKUP_REPO }}
+          BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+        run: |
+          set +e
+          python3 scripts/backup_selbstheilung.py --heilen
+          RC=$?
+          set -e
+          # 0 = nichts zu heilen (bzw. Heilung bewiesen)         → grün
+          # 1 = heilbar, aber Beweis ausgeblieben                → ROT (mit Beleg)
+          # 3 = nichts automatisch heilbar (Inhaber-Schritt)     → Hinweis;
+          #     ROT trägt bereits „Voraussetzungen prüfen“, ein zweites Rot
+          #     ohne eigenen Rat wäre nur Lärm.
+          # 4 = ein Lauf ist grün, gesichert wurde aber NICHTS  → eigener
+          #     Rat `backup-leerlauf` im Fehler-Alerting, eigene Klasse im
+          #     Vorgang. „Gelaufen" ist wahr, „gesichert" nicht – und genau
+          #     diese Verwechslung soll niemand mehr selbst erkennen müssen.
+          if [ "$RC" = "1" ]; then
+            echo "::error::Selbstheilung konnte den Befund nicht beweisen (Exit 1) – Details in der Job-Zusammenfassung."
+            exit 1
+          fi
+          if [ "$RC" = "4" ]; then
+            echo "::error title=Backup-Leerlauf::Ein Lauf ist grün, gesichert wurde aber nichts (kein dauerhaftes Ziel bzw. keine Passphrase). Das ist kein Erfolg: Es existiert nur eine 7-Tage-Kurzzeitkopie im selben Konto. Weg: docs/ANLEITUNG-OFFSITE-BACKUP.md, Schritte 1–7."
+            exit 1
+          fi
+          if [ "$RC" = "3" ]; then
+            echo "::notice::Kein automatisch heilbarer Befund – der Inhaber-Schritt ist unten benannt (docs/ANLEITUNG-OFFSITE-BACKUP.md)."
+          fi
+          exit 0
