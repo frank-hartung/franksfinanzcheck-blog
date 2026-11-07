@@ -424,6 +424,21 @@ class Faktenfrische763MetaTests(unittest.TestCase):
                 self.assertFalse(finds, f'Harte Textverständnis-Regeln: {finds}')
 
     def test_faktenfrische_queue_haelt_befunde_geschlossen(self):
+        """Der offene-Queue-Eintrag darf die zwei Slugs nicht mehr führen.
+        Ein neuer Lauf, der dieselben Fehler zurückmeldet, macht hier rot.
+
+        RICHTIGE QUELLE (07.11.2026, #1072-Nachlauf): Maßgeblich sind die
+        FACHLICHEN Befunde, nicht das Feld `offen`. `offen` ist der
+        Fälligkeits-/GEO-Report des Laufs (`faktenfrische.py`, Abschnitt
+        "queue schreiben": je Artikel Grund, Frist und GEO-Prozent) – ein
+        Artikel steht dort, sobald sein `faktencheck` fällig ist, auch ohne
+        jeden Fachbefund. Der Test verglich damit zwei verschiedene Dinge und
+        war auf main dauerhaft rot, sobald die Seiten wieder fällig wurden.
+        """
+        queue = json_load(ROOT / 'data' / 'faktenfrische_queue.json')
+        for eintrag in queue.get('fachbefunde', []):
+            self.assertNotIn(eintrag.get('slug'), (HEIZ, REISE),
+                             f'Queue meldet offene Fachbefunde für {eintrag.get("slug")}')
         """Kein OFFENER BEFUND darf die zwei Slugs wieder führen.
 
         07.11.2026 – Messhöhe korrigiert: Der Test las `queue['offen']` und
