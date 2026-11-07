@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:telegram:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und
  -was-sie-kostet:nutzen:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261107T180529Z
+DTSTAMP:20261107T224840Z
 DTSTART:20261108T060000Z
 DTEND:20261108T061500Z
 SUMMARY:Telegram (Kanal): Privathaftpflicht: Warum so wichtig und was 
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-
  monatlichen:nutzen:2026-11-14@franksfinanzcheck.de
-DTSTAMP:20261107T180529Z
+DTSTAMP:20261107T224840Z
 DTSTART:20261114T060000Z
 DTEND:20261114T061500Z
 SUMMARY:Telegram (Kanal): ETF-Sparplan starten: Deine Schritt-für-Schr
@@ -38,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekas
  se-fuellen:nutzen:2026-11-15@franksfinanzcheck.de
-DTSTAMP:20261107T180529Z
+DTSTAMP:20261107T224840Z
 DTSTART:20261115T060000Z
 DTEND:20261115T061500Z
 SUMMARY:Telegram (Kanal): Strategisch sparen: So kannst du deine Reise
@@ -53,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzich
  t:nutzen:2026-11-21@franksfinanzcheck.de
-DTSTAMP:20261107T180529Z
+DTSTAMP:20261107T224840Z
 DTSTART:20261121T060000Z
 DTEND:20261121T061500Z
 SUMMARY:Telegram (Kanal): Frugalismus Familie: Clever sparen ohne Verz
