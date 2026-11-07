@@ -1,10 +1,12 @@
 {
   "version": 1,
-  "generated_at": "2026-11-07T17:02:58Z",
+  "generated_at": "2026-11-07T17:08:08Z",
   "modus": "live",
-  "commit": "da23e7bbd8ac5bd51295c090a4fdac8423becfd4",
+  "commit": "b2e55d6bbd5c119cf6ba80c51c092d6115235df7",
   "kapazitaet": {
     "stichtag": "2026-11-07",
+    "basis": "2026-11-07",
+    "projiziert": false,
     "artikel": 115,
     "faellig": 0,
     "ueberfaellig": 0,
@@ -32,6 +34,18 @@
     "offen_im_horizont": 115,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
+    "kadenz_horizont": {
+      "geprueft": true,
+      "bis": "2027-03-07",
+      "tage": 120,
+      "weg_frei": true,
+      "erstverletzung": null,
+      "erstverletzung_seite": null,
+      "erstverletzung_frist": null,
+      "verletzungen": 0,
+      "seiten": 0,
+      "rueckstand_verletzungen": 0
+    },
     "sockel": 4,
     "empfohlenes_budget": 4,
     "empfehlung_erreicht": true,
