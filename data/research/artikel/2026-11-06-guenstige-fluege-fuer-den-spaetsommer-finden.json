@@ -1,0 +1,81 @@
+{
+  "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden",
+  "titel": "Günstige Flüge für den Spätsommer finden",
+  "erzeugt": "2026-11-07 11:17 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 0,
+    "klasse": "saisonal",
+    "grund": "Erstrecherche – noch nie faktengeprüft",
+    "alter_tage": null,
+    "intervall": 30,
+    "frist": null,
+    "restlaufzeit": null
+  },
+  "geo": {
+    "punkte": 3,
+    "maximum": 6,
+    "prozent": 50,
+    "offen": [
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)",
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
+      "Sichtbares Prüfdatum (`faktencheck:`)"
+    ],
+    "treffer": {
+      "kurzantwort": false,
+      "faq": true,
+      "quellen": false,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": false
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite verbraucherzentrale.de",
+      "url": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "datum": "",
+      "quelle": "verbraucherzentrale.de",
+      "kanal": "web",
+      "auszug": "Title: Reise & Mobilität\n\nURL Source: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet\n\nMarkdown Content:\n[Direkt zum Inhalt](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet#main-content)\n\n### [Beratung gesucht?](https://www.verbraucherzentrale.de/wissen/lebensmittel/ernaehrung-fuer-seniorinnen/ernaehrungsberatung-gesucht-so-finden-sie-qualifizierte-hilfe-17735)\n\nQualifizierte Ernährungsberatung richtig finden ...\n\n*   [Preise, Tarife, Anbieterwechsel](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel) \n    *   [Strom sparen](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen) \n    *   [Heizen und Warmwasser](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser) \n    *   [Energetische Sanierung](https://www.verbraucherzentrale.de/wissen/energie/energetische-sanierung) \n    *   [Erneuerbare Energien](https://www.verbraucherzentrale.de/wissen/energie/erneuerbare-energien) \n    *   [Förderprogramme](https://www.verbraucherzentrale.de/wissen/energie/foerderprogramme) \n    *   [E-Mobilität](https://www.verbraucherzentrale.de/wissen/energie/emobilitaet) \n    *   [Probleme mit Verträgen und Rechnungen](https://www.verbraucherzentrale.de/wissen/energie/probleme-mit-vertraegen-und-rechnungen)\n\n*   [Reise](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet)\n\n## [Reise](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet)\n\n*   [Urlaub buchen](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen) \n    *   [Hotels und Ferienhäuser](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/hotels-und-ferienhaeuser) \n    *   [Unterwegs sein](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/unterwegs-sein) \n    *   [E-Mobilität](https://www.verbraucherzentrale",
+      "score": 2,
+      "belegfaehig": true,
+      "herausgeber": "Verbraucherzentrale",
+      "rang": 2,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Der Artikel behauptet, dass im Spätsommer die Nachfrage nach Flügen sinkt und dadurch die Preise fallen, ohne dafür eine Quelle anzugeben.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "luecke",
+      "text": "Es wird angegeben, dass Flüge an Dienstagen und Mittwochen günstiger seien und an Freitagen bzw. Sonntagen teurer, ohne Beleg.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der Text nennt eine angeblich gängige Faustregel von 20 % Rabatt im Spätsommer (Beispiel 300 € → 240 €) ohne Quellenangabe.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Empfehlung, Flüge vier bis acht Wochen im Voraus zu buchen, weil die Preise dann am niedrigsten seien, wird nicht belegt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "luecke",
+      "text": "Behauptet wird, dass Kombi‑Deals für Flug + Mietwagen typischerweise 5–15 % Einsparungen bringen, ohne Nachweis.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    }
+  ],
+  "fehler": [
+    "Verbraucherzentrale – Reise: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+  ],
+  "fassung_sha256": "d3de9e74dca246d48198b40d035722f42ac0715d466ae188d423d77944bc4445",
+  "text_sha256": "34274949237e6edec222ede6b54ad01ed214f9b7f2d857b7f50c7fc5dc088969",
+  "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b)"
+}

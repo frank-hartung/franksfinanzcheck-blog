@@ -36,6 +36,11 @@ die Reparatur in fünf Richtungen fest:
      Prüftermine sind BÜNDEL. Diese Datei hält die Spitzentag-Messung
      (`spitzenlast_stichtag`), ihre drei Zustände und den
      Kalender-Sweep des ausgelieferten Korridors (52 Montage) fest.
+  8. #1107: Die Projektion in die Zukunft rechnet den WEG des Bots, nicht
+     den eingefrorenen Stand von heute. Der eingefrorene Stand machte aus
+     einer Messung „rot am 26.11./31.12.“. Diese Datei hält beide Richtungen
+     fest: das Fehlbild bleibt rot, die Trajektorie wird grün, ein echter
+     Engpass bleibt rot (`ProjektionTrajektorieTest`).
 
 Alle Proben laufen gegen eingefrorene Tage (Uhr-Zwang, `selftest_clock`):
 Ein Test, der die Wanduhr liest, ist eine Verabredung mit dem Kalender.
@@ -601,7 +606,11 @@ class BuenndelWacheSweepTest(unittest.TestCase):
         befunde = []
         for i in range(self.MONATAGE):
             tag = erster_montag + dt.timedelta(weeks=i)
-            finde = kap.spitzenlast_stichtag(artikel, cfg, sockel, laeufe, tag)
+            # Ausgangspunkt ist HEUTE (#1107): Der Montag wird mit dem Stand
+            # gemessen, den der Bot bis dahin hinterlässt – nicht mit dem heute
+            # eingefrorenen Prüfdatum. Die eingefrorene Sicht war ein Fehlbild.
+            finde = kap.spitzenlast_stichtag(artikel, cfg, sockel, laeufe, tag,
+                                             basis=stichtag)
             if finde is not None:
                 befunde.append((tag.isoformat(), finde["stichtag"].isoformat(),
                                 finde["offen"], finde["frisch"]))
@@ -614,6 +623,196 @@ class BuenndelWacheSweepTest(unittest.TestCase):
             "oder die Bündelung entzerren – Entscheidung des Herausgebers "
             "in data/agent_reach/faktenfrische.yaml.")
 
+    def test_der_sweep_hat_zaehne_ein_zu_kleines_budget_wird_rot(self):
+        # Gegenprobe (#1107): Der Sweep darf nicht blind werden, wenn die
+        # Trajektorie großzügiger rechnet. Budget 2 reißt an den ersten Montagen.
+        cfg = ff.lade_config()
+        artikel = ff.alle_artikel("alle")
+        laeufe, _ = kap.laeufe_aus_workflow()
+        stichtag = ff.heute()
+        erster_montag = stichtag + dt.timedelta(days=(7 - stichtag.weekday()) % 7)
+        rot = [kap.spitzenlast_stichtag(artikel, cfg, 2, laeufe,
+                                        erster_montag + dt.timedelta(weeks=i),
+                                        basis=stichtag)
+               for i in range(4)]
+        self.assertTrue(any(r is not None for r in rot),
+                        "Ein Budget von 2 je Lauf muss am Bündeltag reißen – "
+                        "sonst misst die Wache nichts mehr")
+
+
+class ProjektionTrajektorieTest(unittest.TestCase):
+    """Die Projektion in die Zukunft rechnet den Weg des Bots (#1107, 06.11.2026).
+
+    Befund: Die Wache rechnete einen Stichtag im Zukunft mit dem HEUTIGEN,
+    eingefrorenen Prüfdatum jeder Seite. Das unterstellt, der Bot prüfe in
+    der Zwischenzeit nichts. Am Bestand vom 06.11.2026 ergab das „rot am
+    26.11. und 31.12.“ (30 bzw. 104 überfällige Seiten) – die echte Trajektorie
+    (Budget 4 bis 16) hat an beiden Tagen 0 überfällige und 0 gerissene Fristen.
+
+    Diese Tests halten beide Richtungen fest: Die eingefrorene Projektion
+    bleibt als Fehlbild rot, die Trajektorie wird grün, wo der Bot trägt – und
+    ein echter Engpass bleibt rot (die Wache darf nicht blind werden).
+    """
+
+    def _bundel(self, n: int = 8) -> list[dict]:
+        """n saisonale Seiten (Intervall 30), alle mit Frist PROBETAG + 10.
+
+        Vorlaufbeginn ist PROBETAG + 3: Erst dann kann der Bot sie arbeiten.
+        """
+        letzte = PROBETAG - dt.timedelta(days=20)
+        return [{"slug": f"bundel-{i:03d}", "titel": "Heizung Winter saisonal",
+                 "beschreibung": "", "keywords": ["Heizung"], "pillar": "energie",
+                 "faktencheck": letzte}
+                for i in range(n)]
+
+    def test_eingefrorene_projektion_ist_kurz_vor_der_frist_rot(self):
+        # Das Fehlbild (wie am 26.11.): Der Tag liegt kurz vor der Frist, die
+        # Seiten gelten dort noch nicht als fällig („neu“), und der Stand von
+        # heute ist eingefroren – als hätte der Bot die Tage davor nichts geprüft.
+        # Am Fristtag selbst zählten sie als Rückstand; deshalb P+9 (#1107).
+        bundel = self._bundel(8)
+        cfg = cfg_probe(budget=2, limit=10)
+        tag = PROBETAG + dt.timedelta(days=9)
+        p = kap.plan(bundel, cfg, 2, 1.0, tag)   # ohne basis: eingefroren
+        self.assertFalse(p["puenktlich"],
+                         "Der Test verliert seinen Zweck, wenn das Fehlbild grün wird")
+        self.assertGreater(p["verletzungen_neu"], 0)
+
+    def test_trajektorie_am_buendeltag_ist_gruen(self):
+        # Dieselbe Seitenmenge, dieselbe Frist, derselbe Tag – aber der Bot hat
+        # ab dem Vorlaufbeginn (PROBETAG + 3) gearbeitet: 2 je Tag, 8 Seiten in
+        # vier Tagen. Der Stand am Tag ist daher ohne offene Frist.
+        bundel = self._bundel(8)
+        cfg = cfg_probe(budget=2, limit=10)
+        tag = PROBETAG + dt.timedelta(days=9)
+        p = kap.plan(bundel, cfg, 2, 1.0, tag, basis=PROBETAG)
+        self.assertTrue(p["puenktlich"], p["verletzungen"])
+        self.assertEqual(p["verletzungen_neu"], 0)
+        self.assertEqual(p["ueberfaellig"], 0)
+
+    def test_echter_engpass_bleibt_rot(self):
+        # Gegenprobe: 12 Seiten, Budget 1 – acht Plätze bis zur Frist reichen
+        # nicht. Die Trajektorie muss das sehen, sonst ist die Wache blind.
+        bundel = self._bundel(12)
+        cfg = cfg_probe(budget=1, limit=10)
+        p = kap.plan(bundel, cfg, 1, 1.0, PROBETAG, basis=PROBETAG)
+        self.assertFalse(p["puenktlich"])
+        self.assertGreater(p["verletzungen_neu"], 0)
+
+    def test_spitzentag_nutzt_den_stand_des_bots(self):
+        # Die Spitzentag-Messung bewertet den Bündeltag mit dem Stand, den der
+        # Bot dorthin hinterlässt – nicht mit dem eingefrorenen von heute.
+        bundel = self._bundel(8)
+        cfg = cfg_probe(budget=2, limit=10)
+        self.assertIsNone(kap.spitzenlast_stichtag(bundel, cfg, 2, 1.0, PROBETAG))
+        zahlen = kap.spitze_zahlen(bundel, cfg, 2, 1.0, PROBETAG)
+        self.assertNotIn("spitze_puenktlich", zahlen,
+                         "Ein Bündel, das der Bot trägt, ist kein Befund")
+        self.assertGreater(zahlen["spitze_geprueft"], 0)
+
+    def test_stand_am_heutigen_tag_ist_unveraendert(self):
+        bundel = self._bundel(8)
+        cfg = cfg_probe(budget=2, limit=10)
+        stande = kap.bestand_trajektorie(bundel, cfg, 2, 1.0, PROBETAG, {PROBETAG})
+        self.assertEqual(stande[PROBETAG], bundel)
+
+    def test_stand_an_einem_tag_haengt_nicht_vom_horizont_ab(self):
+        # Kausalität: Was der Bot bis zu einem Tag tut, hängt nicht davon ab,
+        # wie weit man danach rechnet. Sonst wäre die Trajektorie Zufall.
+        bundel = self._bundel(8)
+        cfg = cfg_probe(budget=2, limit=10)
+        ziel = PROBETAG + dt.timedelta(days=5)
+        kurz = kap.bestand_trajektorie(bundel, cfg, 2, 1.0, PROBETAG, {ziel})
+        lang = kap.bestand_trajektorie(bundel, cfg, 2, 1.0, PROBETAG,
+                                       {ziel, PROBETAG + dt.timedelta(days=60)})
+        self.assertEqual(kurz[ziel], lang[ziel])
+
+    def test_stand_am_tagesbeginn_zaehlt_jeden_tagesplatz_genau_einmal(self):
+        # Der Stand gilt ZU BEGINN des Tages: Tag 3 und Tag 4 sind mit je zwei
+        # Plätzen verarbeitet (vier Seiten), Tag 5 gehört dem Restart. Ein Stand
+        # nach der Verarbeitung würde Tag 5 doppelt zählen (#1107).
+        bundel = self._bundel(8)
+        cfg = cfg_probe(budget=2, limit=10)
+        ziel = PROBETAG + dt.timedelta(days=5)
+        stand = kap.bestand_trajektorie(bundel, cfg, 2, 1.0, PROBETAG, {ziel})[ziel]
+        geprueft = [a for a in stand if a["faktencheck"] > PROBETAG - dt.timedelta(days=20)]
+        self.assertEqual(len(geprueft), 4,
+                         "Tage 3 und 4 mit je zwei Plätzen: vier Seiten sind geprüft")
+
+
+
+class AusfallToleranzTest(unittest.TestCase):
+    """Die Ausfalltoleranz von 7 Tagen trägt der Vorlauf (#1107, 06.11.2026).
+
+    Entscheidung des Herausgebers: Sockel 4, Ausfalltoleranz 7 Tage, der Hebel
+    ist der Vorlauf. Gemessen mit der ECHTEN Automatik (`empfohlenes_budget`
+    an jedem Lauftag), nicht mit einem festen Budget: Die Automatik sieht nur
+    den heutigen Rückstand, keinen künftigen Ausfall. Deshalb muss der Vorlauf
+    die Reserve tragen, die der Sockel bei 4 nicht mehr trägt.
+
+    Verletzung = zwischen zwei Prüfterminen liegt mehr als das Intervall und
+    die Frist liegt im Beobachtungsfenster. Starttage 1 und 2 sind bewusst NICHT
+    Teil dieses Tests: Dort verursacht ein Ausfall 1–4 Verletzungen, und Tag 0
+    ist mit jedem Limit inhärent (5). Das steht in der SSOT.
+    """
+
+    AUSFALL = 7
+
+    @staticmethod
+    def _stand_tag(artikel: list[dict]) -> dt.date:
+        """Der Stand des Bestands: der letzte Prüftag, nie die Wanduhr.
+
+        Die Uhr-Probe (`--offset 97`) stellt die Uhr vor. Ein Test, der `heute`
+        aus der Uhr liest, fällt dann auf einen überfälligen Bestand herein.
+        Der letzte Prüftag ist der Stand, auf dem der Bot tatsächlich aufsetzt.
+        """
+        return max(a["faktencheck"] for a in artikel if a.get("faktencheck"))
+
+    def _verletzungen(self, cfg: dict, start: int, extra: int = 60) -> int:
+        artikel = ff.alle_artikel("alle")
+        heute = self._stand_tag(artikel)
+        state = [dict(a) for a in artikel]
+        intervall = {a["slug"]: int(ff.faelligkeit(a, cfg, heute)["intervall"])
+                     for a in state}
+        checks = {a["slug"]: [a["faktencheck"]] for a in state}
+        ende = start + self.AUSFALL + extra
+        for off in range(ende + 1):
+            tag = heute + dt.timedelta(days=off)
+            if start <= off < start + self.AUSFALL:
+                continue   # Ausfall: kein Lauf
+            budget = kap.empfohlenes_budget(state, cfg, 1.0, tag)["budget"]
+            lauf = kap.simuliere(kap.eintraege_bauen(state, cfg, tag), budget,
+                                 tag, 0, {tag})
+            for a in state:
+                if a["slug"] in lauf["letzte_pruefung"]:
+                    a["faktencheck"] = tag
+                    checks[a["slug"]].append(tag)
+        fenster_ende = heute + dt.timedelta(days=ende)
+        verletzt = 0
+        for slug, reihe in checks.items():
+            i = intervall[slug]
+            reihe = [x for x in reihe if x is not None]
+            for a, b in zip(reihe, reihe[1:]):
+                if (b - a).days > i and a + dt.timedelta(days=i) < fenster_ende:
+                    verletzt += 1
+        return verletzt
+
+    def test_sieben_tage_ausfall_ist_mit_sockel_4_und_vorlauf_14_tragbar(self):
+        cfg = ff.lade_config()
+        self.assertEqual(int(cfg["budget"]["max_artikel_pro_lauf"]), 4,
+                         "Herausgeber-Entscheidung: Sockel 4")
+        self.assertEqual(int(cfg["planung"]["vorlauf_tage"]), 14,
+                         "Der Vorlauf trägt die 7-Tage-Toleranz")
+        for start in (3, 10, 20):
+            self.assertEqual(self._verletzungen(cfg, start), 0,
+                             f"7-Tage-Ausfall ab Tag {start} reißt Fristen")
+
+    def test_gegenprobe_ohne_vorlauf_reisst_die_frist(self):
+        # Ohne den Vorlauf 14 (Stand 7) reißt ein Ausfall ab Tag 10 Fristen.
+        # Sonst prüfte der Test nichts.
+        cfg = ff.lade_config()
+        cfg["planung"]["vorlauf_tage"] = 7
+        self.assertGreater(self._verletzungen(cfg, 10), 0)
 
 if __name__ == "__main__":
     unittest.main()

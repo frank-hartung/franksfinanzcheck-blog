@@ -1,29 +1,29 @@
 {
   "version": 1,
-  "generated_at": "2026-11-07T14:43:09Z",
-  "modus": "live",
-  "commit": "42380e234481ef6f29591c5e6439bc5c0aa41bad",
+  "generated_at": "2026-11-07T13:41:29Z",
+  "modus": "kandidaten",
+  "commit": "688812d64956ec052e824188a16a7224fe3e0c62",
   "kapazitaet": {
     "stichtag": "2026-11-07",
     "artikel": 115,
-    "faellig": 1,
+    "faellig": 0,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
-      "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+      "slug": "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser",
       "frist": "2026-11-12",
       "restlaufzeit": 5
     },
-    "budget": 12,
+    "budget": 4,
     "laeufe_je_tag": 1.0,
-    "kapazitaet_je_tag": 12.0,
+    "kapazitaet_je_tag": 4.0,
     "bedarf_je_tag": 2.822,
     "bedarf_je_woche": 19.8,
-    "deckung_prozent": 425.2,
+    "deckung_prozent": 141.7,
     "horizont_tage": 120,
-    "vorlauf_tage": 7,
+    "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
-    "abbau_tage": 0,
+    "abbau_tage": null,
     "verletzungen_alt": 0,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
@@ -32,27 +32,54 @@
     "offen_im_horizont": 115,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
-    "sockel": 12,
-    "empfohlenes_budget": 12,
+    "sockel": 4,
+    "empfohlenes_budget": 4,
     "empfehlung_erreicht": true,
     "hartes_limit": 16,
-    "spitze_geprueft": 53
+    "spitze_geprueft": 56
   },
-  "ursachen": [],
+  "ursachen": [
+    {
+      "check": "F4-fachbefund",
+      "dimension": "faktenalter",
+      "wirkung": "blockiert",
+      "entscheidung": "human",
+      "quelle": "scripts/faktenfrische_befund_ledger.py (via publish_gate.fakten_befund_failures)",
+      "artikel": [
+        "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+        "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
+        "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
+        "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
+        "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
+        "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust"
+      ],
+      "anzahl": 8
+    }
+  ],
   "befundlage": {
-    "offen": 3,
-    "seiten": 1,
-    "live_befunde": 0,
-    "live_seiten": 0,
-    "ueberholt": 0,
+    "offen": 40,
+    "seiten": 11,
+    "live_befunde": 29,
+    "live_seiten": 8,
+    "ueberholt": 11,
     "ohne_fassung": 0,
     "nicht_entscheidbar": 0,
-    "aeltester_tage": 1,
+    "aeltester_tage": 6,
     "frist_tage": 14,
     "ueber_frist": 0,
-    "je_slug": {}
+    "je_slug": {
+      "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": 3,
+      "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": 5,
+      "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": 5,
+      "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": 5,
+      "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": 3,
+      "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": 3,
+      "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": 2,
+      "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": 3
+    }
   },
-  "tool_fehler": {},
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "0a9c47ec2d3105d826f129e1c3311c1bc97cb74290597d4d6df9314ff4947049",
@@ -127,22 +154,29 @@
       "checks": []
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
-      "sha256": "f0aa7d02ad06b49f3f84449faf700e7f8301400d9ffc81c9647aaf33e1327ba8",
-      "urteil": "freigabe-reif",
+      "sha256": "6f261f9c5a1058ccadb31734731d2c8e9f6ad109a1595d5313ca8e2e3825a634",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-12-07",
+      "naechste_pruefung": "2026-12-01",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "30caa57be394afb62947 (luecke): Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg.; 32a3ea879f2cf126b3a7 (luecke): Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist.; c583efe1ce02df3ca2d7 (luecke):"
+        }
+      ]
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
       "sha256": "e5758a1ef8cf43568b644ee914b40dc9f47fca22a3ebd057364973355056d327",
@@ -314,22 +348,29 @@
       "checks": []
     },
     "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": {
-      "sha256": "575b50151900b56fa5dfc231ca215fdd17d3a5ac9a57db4e3ce3bff9128277ce",
-      "urteil": "freigabe-reif",
+      "sha256": "91d7834a88be799b61d83377bd4a637f33e0c71631d93c770e58cc935ed93628",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-12",
+      "naechste_pruefung": "2026-12-22",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "43470330b3b48c9cee49 (luecke): Der Artikel empfiehlt, Kühl- und Gefriergeräte mindestens 24 Stunden, besser mehrere Tage zu messen, liefert jedoch keine Quelle für diese Messdauer.; 8ddc1025e45be176ad3a (luecke): Es wird kein regulatorischer Rahmen (z. B. Aufgaben der Bundesnetzagentur) genannt, obwohl das Thema Stromversorgung berührt wird; entsprechende Vorgaben fehlen im Text.; 95d6d2877620e5a0"
+        }
+      ]
     },
     "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
       "sha256": "54d443304c106c37fd2b895ee84d492207b7cc244e79188f3dad0ad3b8d60749",
@@ -411,22 +452,29 @@
       "checks": []
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
-      "sha256": "0407752a13c97bc888f02dc8ddf38b70b1750240ded836d67e9b2379391558ea",
-      "urteil": "freigabe-reif",
+      "sha256": "6a6efb05123c0bd5fadc34c40a1a31144518d230cfce196a4a91d4b24a57381d",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-12-07",
+      "naechste_pruefung": "2026-12-01",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "252413dcc16cea146beb (luecke): Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher angekündigt werden muss, ohne dafür eine Quelle anzugeben.; 48a0a962046c8315270e (praezision): Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf den Anbieter überträgt und dafür ein höherer Startpreis üblich ist, fehlt eine konkrete Quelle und bleibt vage.; 9326152f4d788cff56bd ("
+        }
+      ]
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
       "sha256": "29f76bf8d7a6de5622e928d33a2d046ecf0fb72c97e2e18276b038535bc2ddd5",
@@ -501,22 +549,29 @@
       "checks": []
     },
     "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": {
-      "sha256": "8b8fefd42ef463801cd6d333864a55678de46b4eb7227019f343dac9f0fd3e8d",
-      "urteil": "freigabe-reif",
+      "sha256": "217d615fff102329b31418ee77590042d95b3645ec53e6ac4a3ab91858ef3f7c",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-12",
+      "naechste_pruefung": "2026-12-07",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "278d89267d9122a1e9d8 (luecke): Angaben zu gesetzlichen Vorgaben für Warmwassertemperaturen zur Vermeidung von Legionellen werden nicht durch die bereitgestellten Quellen gestützt.; 450c3aa629342062825e (luecke): Die Aussage, dass Warmwasser der zweitgrößte Kostenposten im Haushalt ist, wird nicht durch eine der bereitgestellten Quellen belegt.; 7601167c9f3560093fb0 (luecke): Die Behauptung, dass W"
+        }
+      ]
     },
     "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen": {
       "sha256": "5d82e9843028f9023a6afe6da6edc13a2333b19843acb6cffb7dc801903702e4",
@@ -681,27 +736,27 @@
       "checks": []
     },
     "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": {
-      "sha256": "e4ca2c8f007dcc285a3ea76cdcc198a988baae63a9ade7128851d23e4bf60daf",
-      "urteil": "warnung",
+      "sha256": "17c41212d78f97218bafd134a7fad88df91259602b0406d0bf89c0d4f4fb5180",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-12-22",
+      "naechste_pruefung": "2026-12-21",
       "siegel_drift": "unverändert",
       "checks": [
         {
-          "check": "T1w-zeichenlaenge-optimum",
-          "dimension": "technik",
-          "wirkung": "warnung",
-          "detail": "Zeichenlänge ueber-optimum (18761 Zeichen, Optimum 12.000–18.000)"
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "1e06a96f6f71e104ce0b (praezision): Während Meal Prep als großer Sparhebel betont wird, zeigt die Marktlage für Nahrungsmittel eine moderate Teuerung von nur 0,4 %, was die Priorisierung der Sparbemühungen relativiert.; 81c6a707139046b83ccd (luecke): Der Ratgeber empfiehlt die Revision von Fixkosten, lässt aber die drastische Preissteigerung bei Energie von +14,9 % unerwähnt, die ein wesentlicher T"
         }
       ]
     },
@@ -742,40 +797,54 @@
       "checks": []
     },
     "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": {
-      "sha256": "00a068e3011f34587cbbaf93244cb5d0096a49f058a047661cf7be65b041ff7b",
-      "urteil": "freigabe-reif",
+      "sha256": "11b78c692b8071a59833622542d078d982366c0e2edceb1036cff079541562b1",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-12-22",
+      "naechste_pruefung": "2026-12-21",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "5a1bf10697f58e5fe14a (luecke): Der Ratgeber nennt Sparbeispiele für Heizkosten, lässt aber die aktuelle Preissteigerung bei Energie von +14,9 % (Stand Oktober 2026) unerwähnt, die den finanziellen Druck auf Haushalte massiv erhöht.; e48f9237cff6397c49a6 (praezision): Die in Aussicht gestellten Ersparnisse von bis zu 200 € werden nicht ins Verhältnis zur aktuellen Inflationsrate von +2,8 % gesetzt,"
+        }
+      ]
     },
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
-      "sha256": "50666487e2fe5393a03113fbba0841667184a6a92b8d8ec1d0a3fd218df59945",
-      "urteil": "freigabe-reif",
+      "sha256": "10f32bb7ea95a1766e975c3e37da6408c959e580a940bf687033466e1536e9f7",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-12-22",
+      "naechste_pruefung": "2026-12-21",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "6cb2229c5eb83b02da23 (veraltet): Die Kalkulation der Fixkosten (Energie 140 €) und die Empfehlung zur Senkung der Kosten ignorieren den aktuellen Markttrend massiv steigender Energiepreise (+14,9 %), was die 50-Prozent-Quote für notwendige Ausgaben gefährdet.; f00055a1cb65ee22165f (luecke): Der Ratgeber verspricht eine 'planbare' Budgetierung, lässt aber die aktuelle Inflationsrate von 2,8 % unerw"
+        }
+      ]
     },
     "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
       "sha256": "2bfda68f5b26d04504e0b84957b4e0445043a40000ea7fb2d971c686dc12d69b",
@@ -1109,22 +1178,29 @@
       "checks": []
     },
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
-      "sha256": "09ba82a0a79059bf3e77f7002bdb715e5811e216889b45463557c3fc7a0a1506",
-      "urteil": "freigabe-reif",
+      "sha256": "f655cf76dafeeb85586170a7ced6f3f15da60f3265449b41ebadde0786246e26",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-12-07",
+      "naechste_pruefung": "2026-12-03",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "089b89138417e63a3dcf (luecke): Es fehlt der für Campingbuchungen relevante Regulierungsrahmen (Unterscheidung Mietrecht bei Stellplätzen vs. Reiserecht), den die Fundstelle für den Bereich Reise nur allgemein andeutet.; 1158934e7a18c7b2099b (luecke): Die Preisangabe von 20 bis 45 € pro Nacht wird als realistischer Wert positioniert, ist jedoch nicht durch Marktdaten oder eine Referenzstelle in den"
+        }
+      ]
     },
     "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
       "sha256": "43507adc459faf75e39df17d5b5baf96842eeae6f42bb3d8f495d0e2b4973bec",
