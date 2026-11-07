@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-07T12:07:19Z",
+  "generated_at": "2026-11-07T13:04:47Z",
   "modus": "kandidaten",
-  "commit": "c4989e3e720c1dc0a336df29079bb437ca90446c",
+  "commit": "e103bc388d052407b0663cfa1b9bbd68e4020745",
   "kapazitaet": {
     "stichtag": "2026-11-07",
     "artikel": 115,
@@ -448,7 +448,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
