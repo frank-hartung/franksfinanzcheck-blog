@@ -328,6 +328,7 @@ def _laeufe_auswerten(laeufe: list[dict], jetzt: dt.datetime) -> dict:
 #  Heilung: messen → entscheiden → anstoßen → warten → erneut messen
 # =====================================================================
 def heile(umgebung: dict | None = None, *, jetzt: dt.datetime | None = None,
+          jetzt_neu: dt.datetime | None = None,
           http=None, anstossen: bool = True, warten_s: int = WARTEZEIT_S,
           takt_s: int = ABFRAGE_TAKT_S, schlaf=None,
           repo: str = "", quelle: str = "", workflow: str = WORKFLOW
@@ -345,6 +346,10 @@ def heile(umgebung: dict | None = None, *, jetzt: dt.datetime | None = None,
     http = http or HTTP
     schlaf = schlaf or SCHLAF
     jetzt = jetzt or dt.datetime.now(dt.timezone.utc)
+    # Zeitpunkt der ZWEITEN Messung ist ein eigener Parameter: Ein Selbsttest,
+    # der hier die echte Wanduhr liest, ist eine Zeitbombe (Lehre vom
+    # 18.09.2026, scripts/selftest_clock.py). Im Betrieb bleibt es „jetzt".
+    jetzt_neu = jetzt_neu or dt.datetime.now(dt.timezone.utc)
     repo = repo or _repo_bestimmen(umgebung=umgebung)
     quelle = quelle or _quelle_bestimmen(umgebung=umgebung)
 
@@ -422,7 +427,6 @@ def heile(umgebung: dict | None = None, *, jetzt: dt.datetime | None = None,
                                  "zu „Offsite-Backup“.")
 
     # ZWEITE Messung: Ein angestoßener Lauf ist kein Nachweis.
-    jetzt_neu = dt.datetime.now(dt.timezone.utc)
     zweite = pruefe_freshness(repo, token_lesen, jetzt_neu, http_get=_messfkt(http, token_lesen))
     return {**zweite, "heilung": {**heilung, "gemessen": bool(zweite.get("befunde"))}}
 
@@ -591,7 +595,7 @@ def selbsttest() -> int:
         return 500, None, "unerwartet"
 
     r = heile({"BACKUP_REPO": "a/b", "GITHUB_REPOSITORY": "a/b", "GH_TOKEN": "t",
-               "AKTION_TOKEN": "t2"}, jetzt=jetzt, http=welt_frisch, schlaf=lambda _s: None)
+               "AKTION_TOKEN": "t2"}, jetzt=jetzt, jetzt_neu=jetzt, http=welt_frisch, schlaf=lambda _s: None)
     if r["urteil"] != "ok" or r["heilung"]["aktion"] != "nichts":
         fehler.append(f"S10: frische Sicherung heilt nicht „nichts“: {r['heilung']}")
     if anstoesse:
@@ -627,7 +631,7 @@ def selbsttest() -> int:
                      "html_url": "https://x/runs/77"}, ""
 
     r = heile({"BACKUP_REPO": "a/b", "GITHUB_REPOSITORY": "a/b", "GH_TOKEN": "t",
-               "AKTION_TOKEN": "t2"}, jetzt=jetzt, http=welt_leer, schlaf=lambda _s: None)
+               "AKTION_TOKEN": "t2"}, jetzt=jetzt, jetzt_neu=jetzt, http=welt_leer, schlaf=lambda _s: None)
     if zustand["stoesse"] != 1:
         fehler.append(f"S11: erwartet genau 1 Anstoß, war {zustand['stoesse']}")
     if zustand["messen"] != 2:
@@ -658,7 +662,7 @@ def selbsttest() -> int:
                      "html_url": "https://x/runs/88"}, ""
 
     r = heile({"BACKUP_REPO": "a/b", "GITHUB_REPOSITORY": "a/b", "GH_TOKEN": "t",
-               "AKTION_TOKEN": "t2"}, jetzt=jetzt, http=welt_scheitert, schlaf=lambda _s: None)
+               "AKTION_TOKEN": "t2"}, jetzt=jetzt, jetzt_neu=jetzt, http=welt_scheitert, schlaf=lambda _s: None)
     if r["urteil"] != "fehler":
         fehler.append(f"S12: gescheiterter Lauf darf nicht grün werden: {r['urteil']}")
     if "failure" not in r["heilung"]["grund"]:
@@ -673,7 +677,7 @@ def selbsttest() -> int:
         return 403, {"message": "Resource not accessible by integration"}, ""
 
     r = heile({"BACKUP_REPO": "a/b", "GITHUB_REPOSITORY": "a/b", "GH_TOKEN": "t",
-               "AKTION_TOKEN": "t2"}, jetzt=jetzt, http=welt_403, schlaf=lambda _s: None)
+               "AKTION_TOKEN": "t2"}, jetzt=jetzt, jetzt_neu=jetzt, http=welt_403, schlaf=lambda _s: None)
     if r["urteil"] != "fehler" or "actions: write" not in r["heilung"]["grund"]:
         fehler.append(f"S13: 403 wird nicht als Rechtebefund erklärt: {r['heilung']}")
 
@@ -684,7 +688,7 @@ def selbsttest() -> int:
         return 500, None, "ServerError"
 
     r = heile({"BACKUP_REPO": "a/b", "GITHUB_REPOSITORY": "a/b", "GH_TOKEN": "t",
-               "AKTION_TOKEN": "t2"}, jetzt=jetzt, http=welt_ohne_historie,
+               "AKTION_TOKEN": "t2"}, jetzt=jetzt, jetzt_neu=jetzt, http=welt_ohne_historie,
               schlaf=lambda _s: None)
     if r["heilung"]["aktion"] != "aufgeben" or r["heilung"]["gestartet"]:
         fehler.append(f"S14: ohne Historie wurde angestoßen: {r['heilung']}")

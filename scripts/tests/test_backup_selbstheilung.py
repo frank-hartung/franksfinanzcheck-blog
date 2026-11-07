@@ -106,7 +106,10 @@ def heile(seite, **kwargs):
     umgebung = {"BACKUP_REPO": "frank-hartung/franksfinanzcheck-backup",
                 "GITHUB_REPOSITORY": "frank-hartung/franksfinanzcheck-blog",
                 "GH_TOKEN": "ziel-token", "AKTION_TOKEN": "lauf-token"}
-    return bs.heile(umgebung, jetzt=JETZT, http=seite, schlaf=lambda _s: None, **kwargs)
+    # Beide Messungen auf DEMSELBEN Testzeitpunkt: sonst hinge das Ergebnis an
+    # der Wanduhr des Testtages (scripts/selftest_clock.py, Lehre 18.09.2026).
+    return bs.heile(umgebung, jetzt=JETZT, jetzt_neu=JETZT, http=seite,
+                    schlaf=lambda _s: None, **kwargs)
 
 
 class Selbsttest(unittest.TestCase):
@@ -135,8 +138,10 @@ class Selbsttest(unittest.TestCase):
 
     def test_probe_ohne_netz_ist_rot_und_stoesst_nichts_an(self):
         """Ohne Ziel/Token/Historie darf die Probe nichts anstoßen – und nicht grün sein."""
-        r = bs.heile({}, jetzt=JETZT, http=lambda *a, **k: (_ for _ in ()).throw(
-            AssertionError("Netzaufruf ohne Eingaben")), schlaf=lambda _s: None)
+        r = bs.heile({}, jetzt=JETZT, jetzt_neu=JETZT,
+                     http=lambda *a, **k: (_ for _ in ()).throw(
+                         AssertionError("Netzaufruf ohne Eingaben")),
+                     schlaf=lambda _s: None)
         self.assertEqual(r["urteil"], "fehler")
         self.assertEqual(r["heilung"]["aktion"], "aufgeben")
         self.assertFalse(r["heilung"]["gestartet"])

@@ -261,6 +261,22 @@ Backup-Selbstheilung · frank-hartung/franksfinanzcheck-blog
 Exit 1
 ```
 
+**Uhrfest (Lehre vom 18.09.2026):** Der erste CI-Lauf des PR hat die neue
+Selbstheilung rot gemacht – zu Recht: `heile()` las den Zeitpunkt der
+**zweiten** Messung aus der echten Uhr. Unter der um 97 bzw. 1461 Tage
+vorgestellten Uhr des Qualitäts-Gates (`scripts/selftest_clock.py`) galten
+die Test-Fixtures dann als Jahre alt, und S11 meldete „nicht grün“. Genau
+so entstehen Zeitbomben – grün am Tag des Schreibens, rot an einem Feiertag
+drei Monate später. Geheilt: `heile()` hat jetzt einen eigenen Parameter
+`jetzt_neu`; Selbsttest und Unit-Tests stempeln beide Messungen auf
+denselben Testzeitpunkt. Nachweis:
+
+```text
+python3 scripts/selftest_clock.py --trap scripts/backup_selbstheilung.py --offset 97    → ✅
+python3 scripts/selftest_clock.py --trap scripts/backup_selbstheilung.py --offset 1461  → ✅
+python3 scripts/selftest_clock.py --trap-modul scripts.tests.test_backup_selbstheilung --offset 97 → ✅
+```
+
 Damit ist live belegt: (a) der Release-Leser versteht die echte API-Form, (b)
 die Lauf-Historie ist mit `actions: read` lesbar (die Entscheidung stützt sich
 nicht auf eine Attrappe), (c) ein echter Backup-Release **trägt Assets** – die
