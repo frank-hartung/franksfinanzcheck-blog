@@ -69,6 +69,8 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Viele Menschen glauben, ihnen fehle nur Willenskraft. Das ist ein Irrtum – und ein teurer dazu.
 
+**Hinweis zum Stand der Preise:** Im Oktober 2026 lagen die Verbraucherpreise um **+2,8 %** über dem Vorjahr, Energie um **+14,9 %** und Nahrungsmittel um **+0,4 %** ([Statistisches Bundesamt, Verbraucherpreisindex](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html)). Jede Sparsumme aus dem Vorjahr ist heute also weniger wert. Der Druck kommt meist über Energie und Fixkosten. Kaum über den Einkauf. Wer das nicht einpreist, plant mit alter Kaufkraft.
+
 Dein Gehirn ist auf sofortige Belohnung programmiert. Siehst du ein Produkt, schüttet dein Körper Dopamin aus, und dein rationales Denken tritt in den Hintergrund. Kluge **Frugalismus-Tipps** setzen genau hier an: Sie bauen eine kleine Barriere zwischen Kaufwunsch und Kasse. Es geht nicht darum, sich nie wieder etwas zu gönnen, sondern nur für Dinge zu bezahlen, die echten Nutzen stiften.
 
 Der zweite Hebel ist die sogenannte Lifestyle-Inflation. Mit steigendem Gehalt steigen die Ansprüche automatisch mit: das größere Auto, die teurere Wohnung, das neueste Smartphone. Wer hier nicht gegensteuert, bleibt im Hamsterrad – egal, wie viel er verdient. Die meisten Haushalte haben deshalb kein Einnahmen-, sondern ein Ausgabenproblem.
@@ -141,7 +143,9 @@ Meal Prepping heißt nicht, jeden Tag dasselbe zu essen. Du bereitest Grundzutat
 
 **Faustregel:** Ein selbst zubereitetes Mittagessen kostet in der Regel nur etwa ein Drittel der vergleichbaren Portion in einer Kantine oder beim Imbiss.
 
-Sparst du täglich 5 €, weil du dein Essen mitnimmst, sind das bei 220 Arbeitstagen rund 1.100 € im Jahr – allein durch eine veränderte Routine; das ist ein Modellwert. Das ist oft der Hebel mit der größten Wirkung auf dein verfügbares Einkommen.
+Sparst du täglich 5 €, weil du dein Essen mitnimmst, sind das bei 220 Arbeitstagen rund 1.100 € im Jahr – allein durch eine veränderte Routine; das ist ein Modellwert. Das ist oft der Hebel mit der größten Wirkung auf dein verfügbares Einkommen.
+
+**Einordnung der Größenordnung:** Lebensmittel waren im Oktober 2026 nur **+0,4 %** teurer als im Vorjahr, Energie dagegen **+14,9 %** ([Statistisches Bundesamt](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html)). Der Einkauf bleibt damit der ruhige Posten. Meal Prep hilft bei Routinen. Die härtere Last sitzt dieses Jahr bei Strom, Gas und Wärme. Die 1.100 € aus dem Beispiel treffen auf eine Rechnung, die schneller wächst.
 
 ## Typische Fehler, die dein Budget sprengen
 

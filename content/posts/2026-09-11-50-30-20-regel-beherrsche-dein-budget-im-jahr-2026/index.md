@@ -130,12 +130,14 @@ Das sind aufs Jahr gerechnet **6.720 €**. Selbst wenn du davon zuerst nur ein
 
 Damit die Regel nicht abstrakt bleibt, hier ein mögliches Beispiel für einen Ein-Personen-Haushalt oder ein kleines Paar-Budget.
 
-### 50 % Notwendiges = 1.400 €
-- Miete warm: 920 € (als Modellwert)
-- Strom und Gas: 140 €
-- Lebensmittel und Drogerie: 240 €
-- Internet und Mobilfunk: 45 €
-- Versicherungen: 55 €
+### 50 % Notwendiges = 1.400 €
+- Miete warm: 920 € (als Modellwert)
+- Strom und Gas: 140 €
+- Lebensmittel und Drogerie: 240 €
+- Internet und Mobilfunk: 45 €
+- Versicherungen: 55 €
+
+**Hinweis zum Stand der Preise:** Energie lag im Oktober 2026 um **+14,9 %** über dem Vorjahr, die Inflationsrate insgesamt bei **+2,8 %**, Nahrungsmittel bei **+0,4 %** ([Statistisches Bundesamt, Verbraucherpreisindex](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html)). Für die 50-Prozent-Quote heißt das: Der Posten Strom und Gas ist in diesem Beispiel der schnellste, der den Pflichtblock sprengt. Wenn deine Energiekosten stärker steigen als dein Einkommen, rechnet die Regel nicht mehr mit 50 % auf – dann ist nicht dein Budget falsch, sondern der Markt. Prüfe den Tarif, bevor du an anderen Stellen kürzt.
 
 ### 30 % Wünsche = 840 €
 - Freizeit und Essen gehen: 260 € (im Rechenfall)
@@ -164,7 +166,9 @@ Denn dort zahlst du jeden Monat automatisch.
 - Versicherungen aktualisieren
 - unnötige Abos kündigen
 
-Wenn du hier **50 € bis 150 € pro Monat** freischaufelst, wirkt die 50–30–20-Regel plötzlich viel realistischer als Modellannahme.
+Wenn du hier **50 € bis 150 € pro Monat** freischaufelst, wirkt die 50–30–20-Regel plötzlich viel realistischer als Modellannahme.
+
+Warum dieser Hebel gerade 2026 zählt: Bei einer Inflationsrate von **+2,8 %** (Oktober 2026) und **+14,9 %** bei Energie ([Statistisches Bundesamt](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html)) wächst der Pflichtblock von allein. Wer die Fixkosten senkt, hält die 50-Prozent-Quote – wer es nicht tut, muss die Differenz bei den Wünschen oder beim Sparen abziehen. Die 20 % sind deshalb kein Rest, sondern der Teil, den die Teuerung zuerst angreift.
 
 Passend dazu helfen dir auch diese Ratgeber:
 

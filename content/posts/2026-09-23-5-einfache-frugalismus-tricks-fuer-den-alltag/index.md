@@ -52,10 +52,12 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 - Frugalismus heißt **bewusster konsumieren**, nicht freudlos leben.
 - Die größten Hebel liegen oft bei wiederkehrenden Ausgaben.
-- Schon einfache Routinen sparen oft **300 € bis 1.000 € pro Jahr**.
+- Schon einfache Routinen sparen oft **300 € bis 1.000 € pro Jahr**; das ist ein Modellwert aus den Rechenbeispielen dieses Beitrags, kein erhobener Durchschnitt.
 - Wichtig ist, Geldströme sichtbar zu machen.
 - Gute Systeme schlagen spontane Motivation.
 - Kleine Ersparnisse wirken erst stark, wenn du sie **wiederholbar** machst.
+
+**Hinweis zum Stand der Preise:** Im Oktober 2026 lag die Teuerung bei **+2,8 %**, bei Energie bei **+14,9 %** und bei Nahrungsmitteln bei **+0,4 %** ([Statistisches Bundesamt](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html)). Die Sparbeträge hier sind Modellrechnungen. Sie sind nicht um die Inflation bereinigt. 1.000 € im Jahr halten damit die Kaufkraft eines Vorjahresbetrags. Die Preise laufen weiter.
 
 ## Trick 1: Mach dein Geld sichtbar
 
@@ -117,7 +119,9 @@ Angenommen, du reduzierst:
 - Versicherung: **9 € pro Monat**
 - Strom / Gas durch Tarif-Check: **15 € pro Monat**
 
-Dann sparst du zusammen **44 € pro Monat**. Das sind **528 € pro Jahr**. Und das fast ohne tägliche Willenskraft.
+Dann sparst du zusammen **44 € pro Monat**. Das sind **528 € pro Jahr**. Und das fast ohne tägliche Willenskraft.
+
+**Einordnung der 15 € beim Strom:** Energie war im Oktober 2026 **+14,9 %** teurer als im Vorjahr ([Statistisches Bundesamt](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html)). Ein Tarifwechsel wirkt also auf einen höheren Preis. Die 15 € sind ein Modellwert für einen bestimmten Verbrauch. Bei hohem Verbrauch fällt mehr heraus, bei niedrigem weniger.
 
 Genau deshalb ist Frugalismus nicht nur Konsumkontrolle, sondern vor allem kluges Systemdenken.
 

@@ -3980,7 +3980,16 @@ C46_SCORECARD_WORKFLOW = "release-scorecard.yml"
 C46_SSOT = C45_SSOT
 C46_LEDGER_MARKER = ("def text_hash(", "def befunde_mit_status(",
                      "def entscheidung_anfuegen(", "befund_fassung",
-                     "geprueft_fassung", "def wache(", "--entscheiden")
+                     "geprueft_fassung", "def wache(", "--entscheiden",
+                     # 07.11.2026 (#1072): Der Betrieb schreibt, der Mensch
+                     # entscheidet. Ohne diese Marker wäre die Heilung
+                     # unsichtbar – ein Refactoring könnte die
+                     # Betriebsflächen-Erkennung stillschweigend entfernen,
+                     # und der Defekt (jede CTA öffnet eine Entscheidung)
+                     # käme beim nächsten Marketer-Lauf zurück.
+                     "BETRIEBS_FLAECHEN", "def aussage_body(",
+                     "def betriebsflaeche(",
+                     "def bindung_auf_feine_projektion(")
 C46_AKTE_MARKER = ("def akte_bauen(", "BEFUND-AKTE.md", "frist_tage",
                    "eskalation_tage", "def wache(")
 C46_TICKET_MARKER = ("def ticket_body(", "F4-fachbefund", "BEFUND-AKTE.md",
