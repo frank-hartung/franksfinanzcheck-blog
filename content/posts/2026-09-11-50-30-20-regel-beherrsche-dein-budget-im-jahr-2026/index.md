@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-11-04
+lastmod: 2026-11-07
 title: "50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken"
 description: "Die 50-30-20-Regel bringt Ordnung in dein Budget. So teilst du dein Nettoeinkommen sinnvoll auf, senkst Fixkosten und sparst Monat für Monat planbar Geld."
 date: 2026-09-14T23:11:00Z
@@ -32,7 +32,11 @@ quellen:
     url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
     herausgeber: "Statistisches Bundesamt"
     datum: "2026-08-14"
-faktencheck: 2026-11-06
+  - titel: "Inflationsrate im Oktober 2026 voraussichtlich +2,8 % (PM Nr. 382)"
+    url: "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html"
+    herausgeber: "Statistisches Bundesamt"
+    datum: "2026-10-30"
+faktencheck: 2026-11-07
 ---
 
 Viele glauben, sie müssten mehr verdienen, um endlich Geld übrig zu haben. In der Praxis fehlt aber oft nicht nur Einkommen. Es fehlt vor allem Struktur. Das Gehalt kommt, Rechnungen gehen ab, zwischendurch kaufst, bestellst und buchst du – und am Monatsende ist wieder unklar, wo das Geld geblieben ist.
@@ -126,9 +130,17 @@ Die Zahl, die sofort hängen bleibt, ist meist die letzte: **560 € pro Monat*
 
 Das sind aufs Jahr gerechnet **6.720 €**. Selbst wenn du davon zuerst nur einen Teil schaffst, siehst du sofort, wie viel Kraft in einer sauberen Struktur steckt.
 
+## Preisänderungen im Budget berücksichtigen
+
+Ein Budget muss Bewegungen aushalten. Die Oktober-Schätzung von [Destatis](https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html) vom 30.10.2026 zeigt 2,8 Prozent Inflation. Für Energie weist sie 12,2 Prozent Zuwachs zum Vorjahr aus; der Septemberwert lag bei 14,9 Prozent.
+
+Nahrungsmittel standen bei plus 0,4 Prozent. Nutze diese Zahlen als Hinweis, nicht als pauschalen Aufschlag.
+
+Steigende Pflichtkosten können die 50-Prozent-Grenze sprengen. Dann brauchst du kürzere Wünsche, günstigere Verträge oder eine andere Zielquote. Passe die Sparrate an, bis Reserve und laufende Rechnungen wieder gedeckt sind.
+
 ## So könnte das im Alltag aussehen
 
-Damit die Regel nicht abstrakt bleibt, hier ein mögliches Beispiel für einen Ein-Personen-Haushalt oder ein kleines Paar-Budget.
+**Modellrechnung, keine Marktstudie:** Die folgenden Beträge sind frei gewählte Annahmen für einen Beispielhaushalt. Besonders die 140 € für Strom und Gas sind kein aktueller Durchschnittspreis. Ersetze jeden Posten durch deine eigenen Werte.
 
 ### 50 % Notwendiges = 1.400 €
 - Miete warm: 920 € (als Modellwert)
@@ -223,7 +235,7 @@ Mehr Netto heißt nicht automatisch [mehr Freiheit](../../posts/2026-08-24-mehr-
 
 ![Gliederung des Beitrags: 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken“ – 5 Stationen von „Was bedeutet die 50-30-20-Regel konkret?“ bis „Der größte Hebel liegt oft bei den 50 %“ (eigene Darstellung).*
+*Abbildung: Gliederung zu „50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken“ – 5 Stationen von „Was bedeutet die 50-30-20-Regel konkret?“ bis „So könnte das im Alltag aussehen“ (eigene Darstellung).*
 
 ## Was tun, wenn 50-30-20 gerade nicht passt?
 
@@ -303,7 +315,7 @@ Darum fühlt sich die 50–30–20-Regel so wirksam an: Sie verbindet Alltag und
 
 Die **50–30–20-Regel** ist keine Wunderformel. Aber sie ist eine der einfachsten Methoden, um aus diffusem Geldstress ein klares System zu machen. Du weißt, was du brauchst, was du genießen darfst und was in deine Zukunft fließt.
 
-Der eigentliche Gamechanger liegt oft nicht im Verzicht, sondern in besseren Fixkosten. Genau dort werden aus kleinen Entscheidungen schnell **50 €, 100 € oder 200 € pro Monat**. Und genau diese Summe entscheidet oft darüber, ob Sparen nur ein Vorsatz bleibt – oder endlich real wird.
+Der wichtigste Hebel liegt oft bei wiederkehrenden Kosten. Ob **50 €, 100 € oder 200 € pro Monat** möglich sind, zeigen nur deine echten Alt- und Neuverträge; diese Beträge sind Modellwerte. Und genau diese Summe entscheidet oft darüber, ob Sparen nur ein Vorsatz bleibt – oder endlich real wird.
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [Notgroschen: die Wahrheit über das finanzielle Polster](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) · [Frugalismus bewusst leben](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/)
 

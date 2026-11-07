@@ -403,6 +403,14 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # Slots per Dispatch nach und meldet das Defizit, wenn nichts mehr
           # nachholbar ist. Ihr --selftest stellt den Vorfall nach und
           # gehört ins vertragliche Minimum.
+          # Backup-Selbstheilung (WF-9E5A / #923, 07.11.2026): Die Heilung
+          # handelt im Betrieb – sie startet Läufe. Eine Wache mit Folgen
+          # gehört ins vertragliche Minimum (C6), sonst könnte ihr Selbsttest
+          # still verschwinden, während die Aktion bleibt. Ihr `--selftest`
+          # friert beide Richtungen ein: Dispatch MIT neuem Lauf (bewiesen)
+          # und Dispatch OHNE neuen Lauf (nicht bewiesen, also rot), dazu die
+          # Grenze heilbarer Klassen (genau `scheduler`).
+          "backup_selbstheilung.py",
           "slot_wache.py",
           # Zustellbarkeits-Wache (23.09.2026, Lauf #21): Der Versand war
           # dreifach verriegelt, die Kette davor ungeprüft. Ein Lauf meldete
@@ -497,6 +505,11 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # veröffentlichte Version. Ihr --selftest friert SSOT-Form,
           # Gate-Deckung, Ausnahmen-Protokoll und Siegel-Bindung ein.
           "release_scorecard.py",
+          # Bestands-Selbstheilung (#1098): getrennter Schreiber vor der
+          # Scorecard; nur deterministische Teilmenge, menschliche Befunde
+          # bleiben unangetastet. Bestätigung erst nach vollständigem Neubau
+          # und Nachmessung; neuer Blocker/Werkzeugfehler ⇒ Byte-Rollback.
+          "release_bestand_heiler.py",
           # Auslieferungs-Isolation (09.10.2026, Bot-Watchdog #676): Der
           # neueste Artikel lag veröffentlichungsreif im Repo und lieferte
           # HTTP 404, weil der Deploy 13× in Folge am Scorecard-Schritt
@@ -3759,6 +3772,13 @@ def c44_themen_nachschub(script_texts, wflows, root=BLOG_DIR):
 #      statisch: hartes_limit_pro_lauf × Läufe/Tag ≥ Bedarf × Mindestdeckung.
 #      Reicht die Kapazität nicht, wird der BAU rot, BEVOR der Bestand rot
 #      wird – genau die Reihenfolge, die am 27.10. gefehlt hat.
+#   c2) Die PROJEKTION rechnet den Weg des Bots (#1107, 07.11.2026). Ein
+#      Stichtag in der Zukunft wird als Trajektorie ab heute gerechnet, nie
+#      mit dem eingefrorenen Prüfstand. Die drei Marker unten sind Pflicht:
+#      Ohne `bestand_trajektorie`, `projektions_ausgangspunkt` und
+#      `kadenz_horizont` wäre die Heilung löschbar, ohne dass ein Gate
+#      anschlägt – und der nächste Handlauf erzeugte wieder ein Ticket aus
+#      einer Momentaufnahme.
 #   d) Die Release-Scorecard nennt die Ursache, nicht nur das Symptom.
 #   e) Ein Vertrag ohne Test ist Prosa.
 C45_WACHE = "faktenfrische_kapazitaet.py"
@@ -3776,7 +3796,14 @@ C45_MARKER = ("faelligkeit", "--selftest", "laeufe_aus_workflow",
               # #1039: Die Bündeltag-Messung ist seit dem 04.11.2026 Teil des
               # vertraglichen Minimums. Ohne sie misst die Wache nur den
               # ruhigsten Tag des Jahres.
-              "spitzenlast_stichtag", "spitze_geprueft")
+              "spitzenlast_stichtag", "spitze_geprueft",
+              # #1107 (07.11.2026): Die Projektion in die Zukunft rechnet den
+              # WEG des Bots, nicht den eingefrorenen Prüfstand. Ohne diese
+              # drei Bausteine entsteht aus einer Momentaufnahme wieder ein
+              # Ticket mit Frist („rot am 26.11./31.12.“), das niemand
+              # nachrechnen kann.
+              "bestand_trajektorie", "projektions_ausgangspunkt",
+              "kadenz_horizont")
 
 
 def _c45_deckung(root=BLOG_DIR):
