@@ -58,7 +58,7 @@ Am 27.10.2026 war genau das der Fall:
 | Kennzahl | vor der Reparatur | nach der Reparatur |
 |---|---|---|
 | Bedarf | 2,58 Prüfungen/Tag (≈ 18/Woche) | unverändert |
-| Takt | 2 Läufe/Woche × 3 = 0,86/Tag | 1 Lauf/Tag × 12 (Sockel; seit 04.11.2026 elastisch bis 16) |
+| Takt | 2 Läufe/Woche × 3 = 0,86/Tag | 1 Lauf/Tag × 4 (Sockel seit 06.11.2026, vorher 12; elastisch bis 16) |
 | Deckung | **33 %** | 146 % beim Bestand vom 03.11.2026 (112 Seiten) · **425 %** beim Bestand vom 06.11.2026 (115 Seiten) – seit dem 04.11.2026 wird zusätzlich der Spitzentag mitgemessen |
 | Rückstand | +12 Seiten/Woche, nie abbaubar | im Kalenderplan in 3 Tagen abgebaut |
 
@@ -88,6 +88,9 @@ sonst ist es ein Dauer-Spitzenbetrieb. Reicht die Kapazität nicht, wird der
 python3 scripts/faktenfrische_kapazitaet.py            # Bedarf, Angebot, Abbauplan
 python3 scripts/faktenfrische_kapazitaet.py --wache    # Exit 1, wenn nicht abbaubar
 python3 scripts/faktenfrische_kapazitaet.py --json     # maschinenlesbar
+python3 scripts/faktenfrische_kapazitaet.py --stichtag 2026-12-31 --json
+#   → Projektion: Stichtag 2026-12-31 ab heute gerechnet (Weg des Bots),
+#     nie mit dem eingefrorenen Prüfstand (#1107)
 ```
 
 ### Nachzug 06.11.2026: der Spitzentag wird mitgemessen (#1039)
@@ -100,8 +103,11 @@ Wache war grün – und ab dem **20.11.2026** hätte derselbe Bestand ohne
 eine einzige Code-Änderung rot gemeldet (49 rote Kalendertage im
 Folgejahr – Messung vom 04.11.2026, dokumentiert im Bericht
 `WARTUNG-VEROEFFENTLICHUNG-WF-829B-922-BUENDEL-DAUERHEILUNG-2026-11-04.md`).
-Am 06.11.2026 heißt der härteste Tag **2026-11-26**: Mit Sockel 4 kämen
-**38 von 83** heute frischen Seiten zu spät.
+**Korrektur 06.11.2026 (#1107):** Die Zahl „38 von 83 am 26.11.“ und der
+Befund „Sockel 4 rot“ stammten aus einer Messung, die den Bot bis zum
+Bündeltag nichts prüfen ließ (eingefrorenes Prüfdatum). Die Projektion
+rechnet jetzt die Trajektorie ab heute – die Arbeit, die der Bot bis zum
+Stichtag wirklich leistet. Die Tabelle unten ist die korrigierte Messung.
 
 Seit dem 04.11. misst C45 deshalb **zwei** Tage mit derselben Planrechnung:
 
@@ -116,14 +122,17 @@ Seit dem 04.11. misst C45 deshalb **zwei** Tage mit derselben Planrechnung:
 **Gemessen, nicht geschätzt** (06.11.2026, 115 Seiten, 35 Fristtage,
 23 am 27.11.2026):
 
-| Sockel (`max_artikel_pro_lauf`) | Bündel-Befund (Kalender-Sweep 06.11.2026) |
+| Sockel (`max_artikel_pro_lauf`) | Bündel-Befund, Trajektorie ab heute (Kalender-Sweep, 52 Montage, #1107) |
 |---|---|
-| 4 (bis 05.11.2026) | 5 von 52 Starttagen rot (voller Kalender 365 Tage: 36) · am 26.11. kämen 38 Seiten zu spät |
-| 12 (seit 06.11.2026) | **0 von 52** (365 Tage: 0) |
+| 1 oder 2 | 52 von 52 rot |
+| 3 | 12 von 52 rot |
+| 4 | **0 von 52** – Bündel-Boden |
+| 12 (seit 06.11.2026) | 0 von 52 |
 
-Deshalb der Sockel **4 → 12**. Limit (16) und Nachholfrist (7) bleiben
-unverändert; Intervalle wurden nicht angefasst – weniger messen wäre
-keine Heilung.
+**Entscheidung des Herausgebers (06.11.2026): Sockel 12 → 4.** Der Sockel ist die
+Untergrenze; die Automatik hebt das Budget bis zum Limit an, sobald der Rückstand
+es verlangt. Die Ausfalltoleranz trägt der **Vorlauf** (`planung.vorlauf_tage`:
+7 → 14), nicht der Sockel. Limit (16) und Nachholfrist (7) bleiben unverändert.
 
 **Selbstheilung, nicht nur Messung (06.11.2026).** Der rote Lauf ist
 jetzt ein geschlossener Kreislauf statt eines Dauer-Alarms ohne
@@ -142,6 +151,43 @@ sind Pflichtmarker), Tests `scripts/tests/test_faktenfrische_deckung_ticket.py`
 sowie der Kalender-Sweep `BuenndelWacheSweepTest` (52 Montage des
 Folgejahrs gegen den ausgelieferten Bestand).
 
+**Nachzug 07.11.2026: Die Projektion ist eine Dauerwache (#1107).** Die
+Korrektur vom 06.11. war richtig, aber noch umgehbar: `basis` war optional,
+und ein Handlauf konnte weiterhin einen Zukunftstag einfrieren. Jetzt gilt:
+
+1. **Eine Regel, ein Aufrufer.** `projektions_ausgangspunkt()` entscheidet:
+   Stichtag in der Zukunft → Ausgangspunkt **heute**; heute oder
+   Vergangenheit → der Stichtag selbst (Nachweis, kein Hellsehen). Die CLI
+   benutzt ausschließlich diese Funktion; `messe()` ist auch ohne Angabe von
+   sich aus sicher. Der eingefrorene Vergleich bleibt möglich, muss aber
+   `basis=stichtag` heißen; ein Ausgangspunkt **nach** dem Stichtag wirft
+   (fail-closed).
+2. **Jede Ausgabe nennt ihren Ausgangspunkt.** `basis`, `projektion`
+   (Stichtag, Ausgangspunkt, `trajektorie: true|false`) und
+   `kadenz_horizont` (erster Termin mit **zukünftiger** Frist, der reißt,
+   plus Horizont-Ende; der Alt-Rückstand bleibt beim Nachholfrist-Urteil)
+   stehen im JSON.
+3. **Das Ticket entsteht nur aus dem Lauf.** `faktenfrische_deckung_ticket.py`
+   trägt die Projektion aus derselben Messung: „Der Weg des Bots ist bis
+   **D** frei“ oder „reißt zuerst am **D2** (`seite`, Frist F)“. Eine
+   Momentaufnahme von Hand kann kein Ticket mehr füllen; der Alarm öffnet,
+   aktualisiert und schließt sich weiter selbst (C14).
+
+**Arbeitsliste ist kein Befund.** Wer wissen will, ob ein Befund offen ist,
+fragt das **Ledger** (`scripts/faktenfrische_befund_ledger.py`), nicht
+`data/faktenfrische_queue.json`: mit dem Vorlauf von 14 Tagen stehen Seiten
+dort turnusmäßig wieder, sobald ihre Frist näher rückt – mit dem Grund
+„frisch geprüft vor N Tagen“ und ohne einen offenen Befund. Genau diese
+Verwechslung machte am 07.11.2026 drei Aktentests (#763, #823, #911) rot,
+ohne dass ein Sachfehler zurückkam; sie prüfen jetzt über
+`scripts/tests/faktenfrische_gleis.py`.
+
+**Vertrag:** C45 verlangt die Marker `bestand_trajektorie`,
+`projektions_ausgangspunkt` und `kadenz_horizont` – wer die Heilung löscht,
+macht den Bau rot. **Tests:** `ProjektionsAusgangspunktTest`,
+`KadenzHorizontTest`, `MessungSelbstheilungTest` (CLI und Voreinstellung mit
+eingefrorener Uhr), `ProjektionTrajektorieTest` sowie ST14 im Selbsttest.
+
 **Selbstheilung der Arbeitsliste (06.11.2026, `befund-akte-nachziehen.yml`).**
 Die committed BEFUND-AKTE ist die einzige Arbeitsliste der Redaktion – sie
 darf deshalb nicht hinter den Bestand zurückfallen. Am 06.11.2026 stand auf
@@ -156,12 +202,30 @@ Läufen. Beobachtung: der Lauf committet nur `BEFUND-AKTE.md` und
 `data/faktenfrische_befunde_state.json` und heilt sich nicht selbst an, eine
 Schleife entsteht nicht.
 
-**Offen bleibt eine andere Klasse:** Baut sich ein Alt-Rückstand von
-über 100 Seiten auf (am 31.12.2026 der Fall), reicht auch das Limit 16
-nicht, ihn binnen sieben Tagen abzubauen – dann meldet die Wache
-`erreicht: False`. Das heilt kein Sockel; es ist die Rückstands-Klasse
-(#912) und gehört als eigene Entscheidung (Takt, Limit oder Intervall)
-behandelt.
+**Korrektur (#1107):** Die frühere Aussage „am 31.12.2026 baut sich ein
+Rückstand von über 100 Seiten auf, den kein Limit abbaut“ war ein Messfehler
+desselben Typs (eingefrorener Stand). Auf der Trajektorie ab heute ist der
+31.12.2026 ohne Befund.
+
+**Ausfalltoleranz (Entscheidung 06.11.2026: 7 Tage, Hebel Vorlauf).** Gemessen
+mit der echten Automatik: an jedem Lauftag wird das Budget aus
+`empfohlenes_budget` gewählt, 7-Tage-Ausfall, 46 Starttage (0–45). Ein Ausfall
+erzwingt keinen vorherigen Aufbau, weil die Automatik nur den heutigen Rückstand
+sieht und keinen künftigen Ausfall.
+
+| Konfiguration | Starttage mit Fristverletzung | Max. Verletzungen je Start |
+|---|---|---|
+| Sockel 12, Vorlauf 7 (bis 06.11.2026) | 3 (Tag 0, 14, 15) | 11 |
+| Sockel 4, Vorlauf 7 | 35 von 46 | 27 |
+| **Sockel 4, Vorlauf 14 (heute)** | 3 (Tag 0, 1, 2) | 6 |
+| Sockel 4, Vorlauf 21 | 3 (Tag 0, 1, 2) | 6 |
+
+Tag 0 ist mit jedem Limit inhärent (5 Verletzungen auch bei Limit 16). Der Vorlauf
+allein reicht nicht für Tag 1 und 2 (4 bzw. 1 Verletzung): Dort hilft nur der Sockel
+(Sockel 8 mit Vorlauf 14 hält Tag 1–3 ohne Verletzung). Das ist eine offene
+Stellschraube für den Herausgeber, kein Fehler der Messung. Der Test
+`AusfallToleranzTest` hält die Zusage fest (Starttage 3, 10, 20 ohne Verletzung)
+und die Gegenprobe (Vorlauf 7 reißt ab Tag 10).
 
 ### Nachzug 30.10.2026: Kalender statt Wochenmittel (#912)
 
@@ -173,7 +237,7 @@ nächste Frist; auch diese Folgetermine werden geprüft. Verspätung wird vor
 der Arbeit des Tages gemessen, nicht erst danach weggeschrieben.
 
 Die Wache und der Scorecard-Bericht prüfen bei `auto_skalierung: true` das
-**empfohlene Budget**, das der Lauf auch verwendet. Der Sockel (12, Stand
+**empfohlene Budget**, das der Lauf auch verwendet. Der Sockel (4, Stand
 06.11.2026) bleibt als Untergrenze sichtbar; das harte Limit (16 seit
 04.11.2026) ist die Obergrenze. Die Kalendersimulation bestimmt das Budget;
 die Reserve zwischen Plan und Limit ist die Pufferfläche für

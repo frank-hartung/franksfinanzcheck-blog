@@ -180,6 +180,11 @@ on:
       - "Shorts-Schmiede (Video & Reels)"   # AUDIT 30.09.: Video-Pipeline (Di/Sa) – still rot = Reichweitenkanal Videos verstummt
       - "Marken-Oberfläche (öffentliche Sichtbarkeit)"   # AUDIT 30.09.: Brand-Schutz öffentlicher Flächen – Stillstand wäre unsichtbar
       - "E2E-Tests (Playwright)"   # AUDIT 30.09.: dienstags auf main – Regressionen brauchen dasselbe Signal wie jedes Gate
+      # WF-829B / #922 (07.11.2026): Der Heil-Lauf ist die einzige Stelle, die
+      # das Produktions-Environment automatisch verschärft. Fällt er still aus,
+      # bleibt der Deploy fail-closed rot und NIEMAND merkt, dass die Reparatur
+      # selbst nicht mehr läuft. Genau dieser Kanal darf nicht blind sein.
+      - "Produktions-Schutz · Selbstheilung (WF-829B)"
     types:
       - completed
 

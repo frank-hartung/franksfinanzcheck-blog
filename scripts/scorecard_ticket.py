@@ -32,7 +32,9 @@ NUTZUNG
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -40,6 +42,7 @@ ROOT = Path(__file__).resolve().parents[1]
 STATE = ROOT / "data" / "release_scorecard_state.json"
 
 MARKER = "<!-- wache-id: release-scorecard -->"
+URSACHE_MARKER = "release-scorecard-ursache:"
 ENTSCHEIDEN = ("python3 scripts/faktenfrische_befund_ledger.py --entscheiden <ID> "
                "--von \"<Name>\" --begruendung \"<was geprüft/geändert wurde>\"")
 
@@ -63,7 +66,23 @@ def _schlechte_checks(art: dict) -> str:
     return ", ".join(f"`{c}`" for c in sorted(set(checks))) or "–"
 
 
-def ticket_body(state: dict, *, ergebnis: str = "failure", run_url: str = "") -> str:
+def ursachen_fingerabdruck(state: dict, ergebnis: str = "failure") -> str:
+    """Stabile Ursache für Kommentar-Deduplikation; Zeit/Run-URL zählen nicht."""
+    artikel = state.get("artikel") or {}
+    identitaet = {
+        "ergebnis": "success" if ergebnis == "success" else (
+            "nicht-beweisbar" if ergebnis not in ("success", "failure") or state.get("tool_fehler") else "failure"),
+        "artikel": {slug: sorted({str(c.get("check")) for c in (art.get("checks") or [])
+                                 if c.get("wirkung") == "blockiert"})
+                    for slug, art in sorted(artikel.items())
+                    if art.get("urteil") in ("blockiert", "nicht beweisbar")},
+        "werkzeugfehler": sorted((state.get("tool_fehler") or {}).keys()),
+    }
+    return hashlib.sha256(json.dumps(identitaet, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+
+
+def ticket_body(state: dict, *, ergebnis: str = "failure", run_url: str = "",
+                erwarteter_commit: str | None = None, frisch_ab: str | None = None) -> str:
     """Reine Funktion: Siegel → Ticket-Markdown (deterministisch, testbar)."""
     artikel = state.get("artikel") or {}
     rot = {s: a for s, a in artikel.items()
@@ -71,6 +90,28 @@ def ticket_body(state: dict, *, ergebnis: str = "failure", run_url: str = "") ->
     warn = sum(1 for a in artikel.values() if a.get("urteil") == "warnung")
     frei = sum(1 for a in artikel.values() if a.get("urteil") == "freigabe-reif")
     modus = "grün" if ergebnis == "success" else "rot"
+    # Ein übersprungener/abgebrochener Lauf ist KEIN Inhaltsbefund. Das
+    # letzte Siegel bleibt historische Evidenz, darf aber nicht als heutige
+    # Produktionswahrheit ausgegeben werden (#1098, Stale-State-Schutz).
+    veraltet = (erwarteter_commit is not None and state.get("commit") != erwarteter_commit)
+    if frisch_ab is not None:
+        zeitform = r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z"
+        veraltet = veraltet or not re.fullmatch(zeitform, str(state.get("generated_at", ""))) \
+                   or not re.fullmatch(zeitform, frisch_ab) or state.get("generated_at", "") < frisch_ab
+    if veraltet or ergebnis not in ("success", "failure") or state.get("tool_fehler"):
+        fehler = state.get("tool_fehler") or {}
+        zeilen = ["## Release-Scorecard: Messung nicht beweisbar", "",
+                  "Der Lauf wurde nicht vollständig abgeschlossen oder ein Messwerkzeug "
+                  "ist ausgefallen. Das ist ein Werkzeug-/Pipeline-Befund, kein Freispruch "
+                  "und kein neuer inhaltlicher Blocker.", ""]
+        if fehler:
+            zeilen += ["**Werkzeugfehler:**"] + [f"- `{k}`: {v}" for k, v in sorted(fehler.items())] + [""]
+        if veraltet:
+            zeilen += ["Das vorhandene Siegel gehört nicht zu diesem Lauf (Commit/Frische prüfen).", ""]
+        zeilen += [f"Letztes Siegel: `{state.get('generated_at', 'unbekannt')}` "
+                   "(historisch, nicht als aktuelle Messung zu lesen).",
+                   "Schließweg: fehlgeschlagenen Schritt reparieren und die Scorecard erneut laufen lassen."]
+        return "\n".join(zeilen)
     zeilen: list[str] = [
         f"## Release-Scorecard: Bestand {modus}",
         "",
@@ -199,10 +240,13 @@ def ticket_body(state: dict, *, ergebnis: str = "failure", run_url: str = "") ->
 
 
 def ticket(state_path: Path = STATE, ergebnis: str = "failure",
-           run_url: str = "") -> str:
+           run_url: str = "", erwarteter_commit: str | None = None,
+           frisch_ab: str | None = None) -> str:
     state = json.loads(Path(state_path).read_text(encoding="utf-8"))
-    body = ticket_body(state, ergebnis=ergebnis, run_url=run_url)
-    return body + "\n\n" + MARKER
+    body = ticket_body(state, ergebnis=ergebnis, run_url=run_url,
+                       erwarteter_commit=erwarteter_commit, frisch_ab=frisch_ab)
+    fp = ursachen_fingerabdruck(state, ergebnis)
+    return body + "\n\n" + MARKER + f"\n<!-- {URSACHE_MARKER} {fp} -->"
 
 
 def selftest() -> int:
@@ -276,12 +320,20 @@ def main() -> int:
     parser.add_argument("--ergebnis", default="failure",
                         choices=("success", "failure", "cancelled", "skipped"))
     parser.add_argument("--run-url", default="")
+    parser.add_argument("--erwarteter-commit")
+    parser.add_argument("--frisch-ab")
+    parser.add_argument("--ursache", action="store_true", help="nur Ursachen-Fingerabdruck ausgeben")
     parser.add_argument("--selftest", action="store_true")
     args = parser.parse_args()
     if args.selftest:
         return selftest()
     try:
-        print(ticket(Path(args.state), args.ergebnis, args.run_url))
+        if args.ursache:
+            state = json.loads(Path(args.state).read_text(encoding="utf-8"))
+            print(ursachen_fingerabdruck(state, args.ergebnis))
+        else:
+            print(ticket(Path(args.state), args.ergebnis, args.run_url,
+                         args.erwarteter_commit, args.frisch_ab))
     except (OSError, ValueError) as exc:
         print(f"❌ Ticket nicht erzeugbar: {exc}", file=sys.stderr)
         return 2

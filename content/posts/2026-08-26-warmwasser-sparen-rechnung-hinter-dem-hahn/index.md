@@ -40,7 +40,7 @@ quellen:
     url: "https://www.umweltbundesamt.de/themen/klima-energie/energiesparen/energiesparen-im-haushalt"
     herausgeber: "Umweltbundesamt"
     datum: "2026-08-26"
-faktencheck: 2026-10-13
+faktencheck: 2026-11-07
 kurzantwort: "Warmwasser entsteht entweder in der Heizungsanlage oder in einem elektrischen Gerät. In beiden Fällen zahlen drei Faktoren: die Temperatur, die Wassermenge und die Verluste auf dem Weg zum Hahn. Weil Warmwasser auf vielen Abrechnungen in einem eigenen Block steht, lässt sich der Anteil meist genau ablesen."
 ---
 

@@ -1,17 +1,189 @@
 {
-  "erzeugt": "2026-11-06 12:26 UTC",
+  "erzeugt": "2026-11-07 11:19 UTC",
   "uebersicht": {
-    "gesamt": 114,
+    "gesamt": 115,
     "ratgeber": 6,
-    "faellig": 0,
-    "vorlauf": 10,
+    "faellig": 1,
+    "vorlauf": 27,
     "bearbeitet": 4,
     "budget": 4,
     "budget_quelle": "Auto-Skalierung (Deckungsrechnung)",
-    "geo_schnitt": 94,
-    "befunde": 11,
-    "befunde_im_lauf": 11,
+    "geo_schnitt": 93,
+    "befunde": 40,
+    "befunde_im_lauf": 18,
     "fachbefunde": [
+      {
+        "typ": "luecke",
+        "text": "Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "30caa57be394afb62947",
+        "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "fassung_sha256": "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "32a3ea879f2cf126b3a7",
+        "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "fassung_sha256": "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur für Januar 2026 (360 €) wird durch die allgemeine Übersichtsseite der Behörde nicht gestützt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "c583efe1ce02df3ca2d7",
+        "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "fassung_sha256": "17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der Artikel empfiehlt, Kühl- und Gefriergeräte mindestens 24 Stunden, besser mehrere Tage zu messen, liefert jedoch keine Quelle für diese Messdauer.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "43470330b3b48c9cee49",
+        "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+        "fassung_sha256": "88f6ad30a8aefbea4932d1fc7823da0cf8e0ab7e76ba55ae6ce56b5a64a146d1",
+        "text_sha256": "f4fdbe37464394624cac3b22864924f221096b8c0ca15abb54fe542247672991",
+        "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Es wird kein regulatorischer Rahmen (z. B. Aufgaben der Bundesnetzagentur) genannt, obwohl das Thema Stromversorgung berührt wird; entsprechende Vorgaben fehlen im Text.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "8ddc1025e45be176ad3a",
+        "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+        "fassung_sha256": "88f6ad30a8aefbea4932d1fc7823da0cf8e0ab7e76ba55ae6ce56b5a64a146d1",
+        "text_sha256": "f4fdbe37464394624cac3b22864924f221096b8c0ca15abb54fe542247672991",
+        "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Aussage, dass Verbraucherzentralen oder Bibliotheken Messgeräte verleihen, wird ohne Beleg gemacht.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "95d6d2877620e5a056ce",
+        "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+        "fassung_sha256": "88f6ad30a8aefbea4932d1fc7823da0cf8e0ab7e76ba55ae6ce56b5a64a146d1",
+        "text_sha256": "f4fdbe37464394624cac3b22864924f221096b8c0ca15abb54fe542247672991",
+        "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Berechnung mit einem Arbeitspreis von 0,37 €/kWh wird angegeben, ohne dass ein aktueller Preis‑ oder Marktwert belegt wird.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "ab16029999747466a638",
+        "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+        "fassung_sha256": "88f6ad30a8aefbea4932d1fc7823da0cf8e0ab7e76ba55ae6ce56b5a64a146d1",
+        "text_sha256": "f4fdbe37464394624cac3b22864924f221096b8c0ca15abb54fe542247672991",
+        "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Das Amortisationsbeispiel (Kaufpreis 650 €, Amortisationszeit 10,3 Jahre) enthält keine Quelle für die zugrunde liegenden Annahmen oder Preise.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "b057dee3603e09f494b5",
+        "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+        "fassung_sha256": "88f6ad30a8aefbea4932d1fc7823da0cf8e0ab7e76ba55ae6ce56b5a64a146d1",
+        "text_sha256": "f4fdbe37464394624cac3b22864924f221096b8c0ca15abb54fe542247672991",
+        "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher angekündigt werden muss, ohne dafür eine Quelle anzugeben.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "252413dcc16cea146beb",
+        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf den Anbieter überträgt und dafür ein höherer Startpreis üblich ist, fehlt eine konkrete Quelle und bleibt vage.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "48a0a962046c8315270e",
+        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Die Aussage, dass man „in der Regel“ zum Zeitpunkt der Preisänderung Sonderkündigungsrecht hat, ist unpräzise und wird nicht durch eine konkrete Regelung belegt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "9326152f4d788cff56bd",
+        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der angegebene durchschnittliche Gaspreis von 11,93 Cent/kWh für 2026 (laut BDEW) wird nicht durch eine Quelle belegt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "ab4d084fd367c8e4d518",
+        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Angabe, dass die Verbraucherzentrale etwa 6 % weniger Heizenergie pro Grad niedrigerer Raumtemperatur nennt, fehlt eine Quellenangabe.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "d215addd22dea72c44df",
+        "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
+        "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Angaben zu gesetzlichen Vorgaben für Warmwassertemperaturen zur Vermeidung von Legionellen werden nicht durch die bereitgestellten Quellen gestützt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "278d89267d9122a1e9d8",
+        "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
+        "fassung_sha256": "69cbd8a400bf4785eb72ca73a7f9e235da4ce561e7f3c073e08b6de7b2f8cfd5",
+        "text_sha256": "25795ff24b53bab6aad9eb3744be66d257d3e3ac97e93b2da6a8a209ca7dea31",
+        "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Aussage, dass Warmwasser der zweitgrößte Kostenposten im Haushalt ist, wird nicht durch eine der bereitgestellten Quellen belegt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "450c3aa629342062825e",
+        "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
+        "fassung_sha256": "69cbd8a400bf4785eb72ca73a7f9e235da4ce561e7f3c073e08b6de7b2f8cfd5",
+        "text_sha256": "25795ff24b53bab6aad9eb3744be66d257d3e3ac97e93b2da6a8a209ca7dea31",
+        "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Behauptung, dass Warmwasser in der Heizkostenabrechnung üblicherweise als eigener Block ausgewiesen wird, fehlt eine Quellenangabe.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "7601167c9f3560093fb0",
+        "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
+        "fassung_sha256": "69cbd8a400bf4785eb72ca73a7f9e235da4ce561e7f3c073e08b6de7b2f8cfd5",
+        "text_sha256": "25795ff24b53bab6aad9eb3744be66d257d3e3ac97e93b2da6a8a209ca7dea31",
+        "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Verweise auf die Verbraucherzentrale (Tipps zum Heizkosten sparen, Heizung optimieren) können nicht mit den angegebenen Fundstellen belegt werden.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "7efbcd7a4275fe1577bb",
+        "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
+        "fassung_sha256": "69cbd8a400bf4785eb72ca73a7f9e235da4ce561e7f3c073e08b6de7b2f8cfd5",
+        "text_sha256": "25795ff24b53bab6aad9eb3744be66d257d3e3ac97e93b2da6a8a209ca7dea31",
+        "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der Preis von 0,30 € pro Kilowattstunde in der Modellrechnung ist nicht mit einer Quelle belegt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "971a719f94ca492f640e",
+        "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
+        "fassung_sha256": "69cbd8a400bf4785eb72ca73a7f9e235da4ce561e7f3c073e08b6de7b2f8cfd5",
+        "text_sha256": "25795ff24b53bab6aad9eb3744be66d257d3e3ac97e93b2da6a8a209ca7dea31",
+        "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+      },
       {
         "typ": "praezision",
         "text": "Während Meal Prep als großer Sparhebel betont wird, zeigt die Marktlage für Nahrungsmittel eine moderate Teuerung von nur 0,4 %, was die Priorisierung der Sparbemühungen relativiert.",
@@ -121,18 +293,126 @@
         "fassung_sha256": "b428abd37f3a9d17f09b12b480cdd42057d5cb7af27ae94d669734a01d0d414e",
         "text_sha256": "3aae1f34b856692d7453a0710d3bd84ff5b5625ca3c02a903748f56cdc310372",
         "zuletzt_gesehen": "2026-11-06 12:26 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Es fehlt der für Campingbuchungen relevante Regulierungsrahmen (Unterscheidung Mietrecht bei Stellplätzen vs. Reiserecht), den die Fundstelle für den Bereich Reise nur allgemein andeutet.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "089b89138417e63a3dcf",
+        "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+        "fassung_sha256": "4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7",
+        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Preisangabe von 20 bis 45 € pro Nacht wird als realistischer Wert positioniert, ist jedoch nicht durch Marktdaten oder eine Referenzstelle in den Fundstellen belegt.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "1158934e7a18c7b2099b",
+        "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+        "fassung_sha256": "4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7",
+        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+      },
+      {
+        "typ": "praezision",
+        "text": "Der Verweis auf die Verbraucherzentrale zur Prüfung von Buchungsangaben führt auf eine allgemeine Übersichtsseite ohne konkrete Checklisten für Camping-Angebote.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "3716cfd3ab5aec6d774b",
+        "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+        "fassung_sha256": "4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7",
+        "zuletzt_gesehen": "2026-11-03 10:25 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der Text nennt eine angeblich gängige Faustregel von 20 % Rabatt im Spätsommer (Beispiel 300 € → 240 €) ohne Quellenangabe.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "0e68294e193918d5b5b0",
+        "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden",
+        "fassung_sha256": "d3de9e74dca246d48198b40d035722f42ac0715d466ae188d423d77944bc4445",
+        "text_sha256": "34274949237e6edec222ede6b54ad01ed214f9b7f2d857b7f50c7fc5dc088969",
+        "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Es wird angegeben, dass Flüge an Dienstagen und Mittwochen günstiger seien und an Freitagen bzw. Sonntagen teurer, ohne Beleg.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "4d91ef71fa76febdb769",
+        "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden",
+        "fassung_sha256": "d3de9e74dca246d48198b40d035722f42ac0715d466ae188d423d77944bc4445",
+        "text_sha256": "34274949237e6edec222ede6b54ad01ed214f9b7f2d857b7f50c7fc5dc088969",
+        "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Empfehlung, Flüge vier bis acht Wochen im Voraus zu buchen, weil die Preise dann am niedrigsten seien, wird nicht belegt.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "5b427fb4f05b475d9a89",
+        "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden",
+        "fassung_sha256": "d3de9e74dca246d48198b40d035722f42ac0715d466ae188d423d77944bc4445",
+        "text_sha256": "34274949237e6edec222ede6b54ad01ed214f9b7f2d857b7f50c7fc5dc088969",
+        "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Der Artikel behauptet, dass im Spätsommer die Nachfrage nach Flügen sinkt und dadurch die Preise fallen, ohne dafür eine Quelle anzugeben.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "e933e34672f0b6464d1e",
+        "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden",
+        "fassung_sha256": "d3de9e74dca246d48198b40d035722f42ac0715d466ae188d423d77944bc4445",
+        "text_sha256": "34274949237e6edec222ede6b54ad01ed214f9b7f2d857b7f50c7fc5dc088969",
+        "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Behauptet wird, dass Kombi‑Deals für Flug + Mietwagen typischerweise 5–15 % Einsparungen bringen, ohne Nachweis.",
+        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+        "id": "eb6a47df5535fa267a82",
+        "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden",
+        "fassung_sha256": "d3de9e74dca246d48198b40d035722f42ac0715d466ae188d423d77944bc4445",
+        "text_sha256": "34274949237e6edec222ede6b54ad01ed214f9b7f2d857b7f50c7fc5dc088969",
+        "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die im Marktradar angegebenen Durchschnittspreise für Strom (37,3 ct/kWh) und Gas (12,23 ct/kWh) werden ohne Quellenangabe genannt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "0f248aaad2d2b8d87d0d",
+        "slug": "strom-sparen",
+        "fassung_sha256": "27ed2aeec0801dacd52877f9d71d8839ac1017ae7fb611fdb7111ab2d300c300",
+        "text_sha256": "79b333730beb3b876b39dc5caebe8a1e7cbd8e595c926abcab356c89a64649b8",
+        "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Aussage, dass bei Preiserhöhungen ein gesetzliches 14‑tägiges Sonderkündigungsrecht besteht, fehlt eine rechtliche Quellenangabe.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "3a69bd57886154a18b8e",
+        "slug": "strom-sparen",
+        "fassung_sha256": "27ed2aeec0801dacd52877f9d71d8839ac1017ae7fb611fdb7111ab2d300c300",
+        "text_sha256": "79b333730beb3b876b39dc5caebe8a1e7cbd8e595c926abcab356c89a64649b8",
+        "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+      },
+      {
+        "typ": "luecke",
+        "text": "Die Behauptung, dass ein Lieferantenwechsel und ein technischer Anschlusswechsel nicht dasselbe seien, wird nicht durch eine Quelle belegt.",
+        "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+        "id": "4f777954306ac7b21e03",
+        "slug": "strom-sparen",
+        "fassung_sha256": "27ed2aeec0801dacd52877f9d71d8839ac1017ae7fb611fdb7111ab2d300c300",
+        "text_sha256": "79b333730beb3b876b39dc5caebe8a1e7cbd8e595c926abcab356c89a64649b8",
+        "zuletzt_gesehen": "2026-11-07 11:19 UTC"
       }
     ],
     "geo_luecken": {
       "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)": 9,
       "Mindestens eine Tabelle (extrahierbare Struktur)": 12,
       "Kurzantwort-Box (direkte Antwort für AI Overviews)": 16,
-      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 4,
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)": 5,
+      "Sichtbares Prüfdatum (`faktencheck:`)": 1,
       "FAQ-Abschnitt (FAQPage-Schema, Antwortmaschinen-Futter)": 3
     },
-    "deckung_prozent": 143.4,
-    "bedarf_je_woche": 19.5,
-    "abbau_tage": null,
+    "deckung_prozent": 141.7,
+    "bedarf_je_woche": 19.8,
+    "abbau_tage": 0,
     "nachhol_frist_tage": 7,
     "abbrueche": 0
   },
@@ -333,6 +613,56 @@
     },
     {
       "typ": "luecke",
+      "text": "Der Artikel empfiehlt, Kühl- und Gefriergeräte mindestens 24 Stunden, besser mehrere Tage zu messen, liefert jedoch keine Quelle für diese Messdauer.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "43470330b3b48c9cee49",
+      "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+      "fassung_sha256": "88f6ad30a8aefbea4932d1fc7823da0cf8e0ab7e76ba55ae6ce56b5a64a146d1",
+      "text_sha256": "f4fdbe37464394624cac3b22864924f221096b8c0ca15abb54fe542247672991",
+      "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Es wird kein regulatorischer Rahmen (z. B. Aufgaben der Bundesnetzagentur) genannt, obwohl das Thema Stromversorgung berührt wird; entsprechende Vorgaben fehlen im Text.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "8ddc1025e45be176ad3a",
+      "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+      "fassung_sha256": "88f6ad30a8aefbea4932d1fc7823da0cf8e0ab7e76ba55ae6ce56b5a64a146d1",
+      "text_sha256": "f4fdbe37464394624cac3b22864924f221096b8c0ca15abb54fe542247672991",
+      "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Aussage, dass Verbraucherzentralen oder Bibliotheken Messgeräte verleihen, wird ohne Beleg gemacht.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "95d6d2877620e5a056ce",
+      "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+      "fassung_sha256": "88f6ad30a8aefbea4932d1fc7823da0cf8e0ab7e76ba55ae6ce56b5a64a146d1",
+      "text_sha256": "f4fdbe37464394624cac3b22864924f221096b8c0ca15abb54fe542247672991",
+      "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Berechnung mit einem Arbeitspreis von 0,37 €/kWh wird angegeben, ohne dass ein aktueller Preis‑ oder Marktwert belegt wird.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "ab16029999747466a638",
+      "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+      "fassung_sha256": "88f6ad30a8aefbea4932d1fc7823da0cf8e0ab7e76ba55ae6ce56b5a64a146d1",
+      "text_sha256": "f4fdbe37464394624cac3b22864924f221096b8c0ca15abb54fe542247672991",
+      "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Das Amortisationsbeispiel (Kaufpreis 650 €, Amortisationszeit 10,3 Jahre) enthält keine Quelle für die zugrunde liegenden Annahmen oder Preise.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "b057dee3603e09f494b5",
+      "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+      "fassung_sha256": "88f6ad30a8aefbea4932d1fc7823da0cf8e0ab7e76ba55ae6ce56b5a64a146d1",
+      "text_sha256": "f4fdbe37464394624cac3b22864924f221096b8c0ca15abb54fe542247672991",
+      "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+    },
+    {
+      "typ": "luecke",
       "text": "Angabe, dass 58 % der Nutzer ihr Haushaltsbuch digital führen, beruft sich angeblich auf Statista 2025, jedoch wird keine Quelle genannt.",
       "beleg": "",
       "id": "4afb8daed73677ee6224",
@@ -500,6 +830,56 @@
       "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
       "fassung_sha256": "d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51",
       "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Angaben zu gesetzlichen Vorgaben für Warmwassertemperaturen zur Vermeidung von Legionellen werden nicht durch die bereitgestellten Quellen gestützt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "278d89267d9122a1e9d8",
+      "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
+      "fassung_sha256": "69cbd8a400bf4785eb72ca73a7f9e235da4ce561e7f3c073e08b6de7b2f8cfd5",
+      "text_sha256": "25795ff24b53bab6aad9eb3744be66d257d3e3ac97e93b2da6a8a209ca7dea31",
+      "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Aussage, dass Warmwasser der zweitgrößte Kostenposten im Haushalt ist, wird nicht durch eine der bereitgestellten Quellen belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "450c3aa629342062825e",
+      "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
+      "fassung_sha256": "69cbd8a400bf4785eb72ca73a7f9e235da4ce561e7f3c073e08b6de7b2f8cfd5",
+      "text_sha256": "25795ff24b53bab6aad9eb3744be66d257d3e3ac97e93b2da6a8a209ca7dea31",
+      "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Behauptung, dass Warmwasser in der Heizkostenabrechnung üblicherweise als eigener Block ausgewiesen wird, fehlt eine Quellenangabe.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "7601167c9f3560093fb0",
+      "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
+      "fassung_sha256": "69cbd8a400bf4785eb72ca73a7f9e235da4ce561e7f3c073e08b6de7b2f8cfd5",
+      "text_sha256": "25795ff24b53bab6aad9eb3744be66d257d3e3ac97e93b2da6a8a209ca7dea31",
+      "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Verweise auf die Verbraucherzentrale (Tipps zum Heizkosten sparen, Heizung optimieren) können nicht mit den angegebenen Fundstellen belegt werden.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "7efbcd7a4275fe1577bb",
+      "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
+      "fassung_sha256": "69cbd8a400bf4785eb72ca73a7f9e235da4ce561e7f3c073e08b6de7b2f8cfd5",
+      "text_sha256": "25795ff24b53bab6aad9eb3744be66d257d3e3ac97e93b2da6a8a209ca7dea31",
+      "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der Preis von 0,30 € pro Kilowattstunde in der Modellrechnung ist nicht mit einer Quelle belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "971a719f94ca492f640e",
+      "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
+      "fassung_sha256": "69cbd8a400bf4785eb72ca73a7f9e235da4ce561e7f3c073e08b6de7b2f8cfd5",
+      "text_sha256": "25795ff24b53bab6aad9eb3744be66d257d3e3ac97e93b2da6a8a209ca7dea31",
+      "zuletzt_gesehen": "2026-11-07 11:19 UTC"
     },
     {
       "typ": "luecke",
@@ -1335,6 +1715,86 @@
       "zuletzt_gesehen": "2026-11-05 12:43 UTC"
     },
     {
+      "typ": "luecke",
+      "text": "Der Text nennt eine angeblich gängige Faustregel von 20 % Rabatt im Spätsommer (Beispiel 300 € → 240 €) ohne Quellenangabe.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "0e68294e193918d5b5b0",
+      "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden",
+      "fassung_sha256": "d3de9e74dca246d48198b40d035722f42ac0715d466ae188d423d77944bc4445",
+      "text_sha256": "34274949237e6edec222ede6b54ad01ed214f9b7f2d857b7f50c7fc5dc088969",
+      "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Es wird angegeben, dass Flüge an Dienstagen und Mittwochen günstiger seien und an Freitagen bzw. Sonntagen teurer, ohne Beleg.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "4d91ef71fa76febdb769",
+      "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden",
+      "fassung_sha256": "d3de9e74dca246d48198b40d035722f42ac0715d466ae188d423d77944bc4445",
+      "text_sha256": "34274949237e6edec222ede6b54ad01ed214f9b7f2d857b7f50c7fc5dc088969",
+      "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Empfehlung, Flüge vier bis acht Wochen im Voraus zu buchen, weil die Preise dann am niedrigsten seien, wird nicht belegt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "5b427fb4f05b475d9a89",
+      "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden",
+      "fassung_sha256": "d3de9e74dca246d48198b40d035722f42ac0715d466ae188d423d77944bc4445",
+      "text_sha256": "34274949237e6edec222ede6b54ad01ed214f9b7f2d857b7f50c7fc5dc088969",
+      "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der Artikel behauptet, dass im Spätsommer die Nachfrage nach Flügen sinkt und dadurch die Preise fallen, ohne dafür eine Quelle anzugeben.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "e933e34672f0b6464d1e",
+      "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden",
+      "fassung_sha256": "d3de9e74dca246d48198b40d035722f42ac0715d466ae188d423d77944bc4445",
+      "text_sha256": "34274949237e6edec222ede6b54ad01ed214f9b7f2d857b7f50c7fc5dc088969",
+      "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Behauptet wird, dass Kombi‑Deals für Flug + Mietwagen typischerweise 5–15 % Einsparungen bringen, ohne Nachweis.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "eb6a47df5535fa267a82",
+      "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden",
+      "fassung_sha256": "d3de9e74dca246d48198b40d035722f42ac0715d466ae188d423d77944bc4445",
+      "text_sha256": "34274949237e6edec222ede6b54ad01ed214f9b7f2d857b7f50c7fc5dc088969",
+      "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die im Marktradar angegebenen Durchschnittspreise für Strom (37,3 ct/kWh) und Gas (12,23 ct/kWh) werden ohne Quellenangabe genannt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "0f248aaad2d2b8d87d0d",
+      "slug": "strom-sparen",
+      "fassung_sha256": "27ed2aeec0801dacd52877f9d71d8839ac1017ae7fb611fdb7111ab2d300c300",
+      "text_sha256": "79b333730beb3b876b39dc5caebe8a1e7cbd8e595c926abcab356c89a64649b8",
+      "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Aussage, dass bei Preiserhöhungen ein gesetzliches 14‑tägiges Sonderkündigungsrecht besteht, fehlt eine rechtliche Quellenangabe.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "3a69bd57886154a18b8e",
+      "slug": "strom-sparen",
+      "fassung_sha256": "27ed2aeec0801dacd52877f9d71d8839ac1017ae7fb611fdb7111ab2d300c300",
+      "text_sha256": "79b333730beb3b876b39dc5caebe8a1e7cbd8e595c926abcab356c89a64649b8",
+      "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Behauptung, dass ein Lieferantenwechsel und ein technischer Anschlusswechsel nicht dasselbe seien, wird nicht durch eine Quelle belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "id": "4f777954306ac7b21e03",
+      "slug": "strom-sparen",
+      "fassung_sha256": "27ed2aeec0801dacd52877f9d71d8839ac1017ae7fb611fdb7111ab2d300c300",
+      "text_sha256": "79b333730beb3b876b39dc5caebe8a1e7cbd8e595c926abcab356c89a64649b8",
+      "zuletzt_gesehen": "2026-11-07 11:19 UTC"
+    },
+    {
       "id": "360dbd44c71db04f43e0",
       "slug": "versicherungen",
       "fassung_sha256": "legacy-unbekannt",
@@ -1381,65 +1841,41 @@
     }
   ],
   "kapazitaet": {
-    "stichtag": "2026-11-06",
-    "artikel": 114,
-    "faellig": 0,
+    "stichtag": "2026-11-07",
+    "artikel": 115,
+    "faellig": 1,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
-      "slug": "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
-      "frist": "2026-11-11",
+      "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+      "frist": "2026-11-12",
       "restlaufzeit": 5
     },
     "budget": 4,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 4.0,
-    "bedarf_je_tag": 2.789,
-    "bedarf_je_woche": 19.5,
-    "deckung_prozent": 143.4,
+    "bedarf_je_tag": 2.822,
+    "bedarf_je_woche": 19.8,
+    "deckung_prozent": 141.7,
     "horizont_tage": 120,
-    "vorlauf_tage": 7,
+    "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
-    "abbau_tage": null,
+    "abbau_tage": 0,
     "verletzungen_alt": 0,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
     "verletzungen": [],
-    "offen_im_horizont": 114,
+    "offen_im_horizont": 115,
     "puenktlich": true,
     "rueckstand_abgebaut": true
   },
   "abbrueche": [],
   "offen": [
     {
-      "slug": "strom-sparen",
-      "titel": "Strom & Gas sparen: Ratgeber für niedrige Energiekosten",
-      "grund": "frisch geprüft vor 24 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-12",
-      "geo": 50
-    },
-    {
-      "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
-      "titel": "Energiediebe stoppen: So kannst du Stromfresser finden",
-      "grund": "frisch geprüft vor 39 Tagen (Intervall 45 Tage)",
-      "faellig": false,
-      "frist": "2026-11-12",
-      "geo": 100
-    },
-    {
-      "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
-      "titel": "Warmwasser sparen: Die Rechnung hinter – Warmwasserkosten",
-      "grund": "frisch geprüft vor 24 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-12",
-      "geo": 100
-    },
-    {
       "slug": "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser",
       "titel": "Standby Kosten reduzieren: So entlarvst du Stromfresser",
-      "grund": "frisch geprüft vor 39 Tagen (Intervall 45 Tage)",
+      "grund": "frisch geprüft vor 40 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-12",
       "geo": 100
@@ -1447,7 +1883,7 @@
     {
       "slug": "2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert",
       "titel": "Energiepreise 2026: Strom- und Gasvertrag prüfen",
-      "grund": "frisch geprüft vor 24 Tagen (Intervall 30 Tage)",
+      "grund": "frisch geprüft vor 25 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-12",
       "geo": 100
@@ -1455,146 +1891,352 @@
     {
       "slug": "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
       "titel": "Last Minute Urlaub: So findest du echte Reiseschnäppchen",
-      "grund": "frisch geprüft vor 23 Tagen (Intervall 30 Tage)",
+      "grund": "frisch geprüft vor 24 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-13",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-14-heizperiode-vorbereiten-im-spaetsommer",
+      "titel": "Heizperiode vorbereiten im Spätsommer",
+      "grund": "frisch geprüft vor 23 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-14",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
+      "titel": "Strategisch sparen: So kannst du deine Reisekasse füllen",
+      "grund": "frisch geprüft vor 23 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-14",
+      "geo": 100
+    },
+    {
+      "slug": "frugalismus",
+      "titel": "Haushaltsbudget & Frugalismus: Ratgeber für Notgroschen",
+      "grund": "frisch geprüft vor 36 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-16",
+      "geo": 67
+    },
+    {
+      "slug": "2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert",
+      "titel": "Girocard, Debitkarte oder Maestro: Welche Karte passt?",
+      "grund": "frisch geprüft vor 36 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-16",
+      "geo": 83
+    },
+    {
+      "slug": "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss",
+      "titel": "Preiswert surfen: DSL, Kabel oder Glasfaser im Vergleich",
+      "grund": "frisch geprüft vor 34 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-18",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest",
+      "titel": "Büroausstattung steuerlich clever absetzen: So geht's",
+      "grund": "frisch geprüft vor 33 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-19",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
+      "titel": "Herbst-Check: Strom, Versicherung, Konto und Internet",
+      "grund": "frisch geprüft vor 18 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-19",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-19-urlaubskasse-clever-aufbessern",
+      "titel": "Urlaubskasse clever aufbessern",
+      "grund": "frisch geprüft vor 18 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-19",
+      "geo": 83
+    },
+    {
+      "slug": "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt",
+      "titel": "Energiekosten senken: Smarte Helfer für den Haushalt",
+      "grund": "frisch geprüft vor 32 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-20",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
+      "titel": "Energieausweis: Was er für deine Fixkosten bedeutet",
+      "grund": "frisch geprüft vor 32 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-20",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
+      "titel": "Kleine Energiespar‑Tricks: Deine Kosten sofort senken",
+      "grund": "frisch geprüft vor 32 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-20",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto",
+      "titel": "Bankgebühren senken: 7 Schritte zum günstigeren Konto",
+      "grund": "frisch geprüft vor 32 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-20",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks",
+      "titel": "Energieeffizienz im Haushalt: 5 schnelle Spartricks",
+      "grund": "frisch geprüft vor 32 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-20",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit",
+      "titel": "7 Gewohnheiten für finanzielle Freiheit: Welche Routinen",
+      "grund": "frisch geprüft vor 31 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-21",
+      "geo": 67
+    },
+    {
+      "slug": "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet",
+      "titel": "Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel rechnet",
+      "grund": "frisch geprüft vor 31 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-21",
+      "geo": 83
+    },
+    {
+      "slug": "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung",
+      "titel": "Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer",
+      "grund": "frisch geprüft vor 31 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-21",
+      "geo": 83
+    },
+    {
+      "slug": "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken",
+      "titel": "Smart Home: So prüfst du echte Stromersparnis – Smarte",
+      "grund": "frisch geprüft vor 31 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-21",
+      "geo": 67
+    },
+    {
+      "slug": "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle",
+      "titel": "Haushaltskosten reduzieren: So gewinnst du die Kontrolle",
+      "grund": "frisch geprüft vor 31 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-21",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-21-mietwagen-fallen-im-urlaub-vermeiden",
+      "titel": "Mietwagen-Fallen im Urlaub vermeiden",
+      "grund": "frisch geprüft vor 16 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-21",
+      "geo": 83
+    },
+    {
+      "slug": "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
+      "titel": "Stromkosten senken: Clevere Haushaltsgeräte im Überblick",
+      "grund": "frisch geprüft vor 31 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-21",
+      "geo": 100
+    },
+    {
+      "slug": "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen",
+      "titel": "ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung",
+      "grund": "frisch geprüft vor 31 Tagen (Intervall 45 Tage)",
+      "faellig": false,
+      "frist": "2026-11-21",
       "geo": 100
     }
   ],
   "laeufe": [
     {
-      "slug": "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
-      "titel": "Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick",
-      "fassung_sha256": "795c7b990680201f40a39431e82decc20b19b5551b2fa662f66f4bb2b4c80776",
-      "text_sha256": "9aa5276c3dfeb1e97e830c11f2808b5c39c477b0ff89bbd727023ffd4728abbe",
+      "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden",
+      "titel": "Günstige Flüge für den Spätsommer finden",
+      "fassung_sha256": "d3de9e74dca246d48198b40d035722f42ac0715d466ae188d423d77944bc4445",
+      "text_sha256": "34274949237e6edec222ede6b54ad01ed214f9b7f2d857b7f50c7fc5dc088969",
       "bereich": "artikel",
-      "grund": "frisch geprüft vor 40 Tagen (Intervall 45 Tage)",
+      "grund": "Erstrecherche – noch nie faktengeprüft",
       "treffer": 1,
       "quellen": 1,
       "befunde": [
         {
-          "typ": "veraltet",
-          "text": "Die Budget-Tipps berücksichtigen nicht die aktuelle Inflationsrate von 2,8 % (Stand Oktober 2026), was die Kaufkraft-Annahmen im Haushaltsbuch beeinflusst.",
-          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+          "typ": "luecke",
+          "text": "Der Artikel behauptet, dass im Spätsommer die Nachfrage nach Flügen sinkt und dadurch die Preise fallen, ohne dafür eine Quelle anzugeben.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
         },
         {
           "typ": "luecke",
-          "text": "Der Ratgeber empfiehlt die Revision von Fixkosten, lässt aber die drastische Preissteigerung bei Energie von +14,9 % unerwähnt, die ein wesentlicher Treiber der Haushaltsausgaben ist.",
-          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+          "text": "Es wird angegeben, dass Flüge an Dienstagen und Mittwochen günstiger seien und an Freitagen bzw. Sonntagen teurer, ohne Beleg.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
         },
         {
-          "typ": "praezision",
-          "text": "Während Meal Prep als großer Sparhebel betont wird, zeigt die Marktlage für Nahrungsmittel eine moderate Teuerung von nur 0,4 %, was die Priorisierung der Sparbemühungen relativiert.",
-          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+          "typ": "luecke",
+          "text": "Der Text nennt eine angeblich gängige Faustregel von 20 % Rabatt im Spätsommer (Beispiel 300 € → 240 €) ohne Quellenangabe.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Empfehlung, Flüge vier bis acht Wochen im Voraus zu buchen, weil die Preise dann am niedrigsten seien, wird nicht belegt.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+        },
+        {
+          "typ": "luecke",
+          "text": "Behauptet wird, dass Kombi‑Deals für Flug + Mietwagen typischerweise 5–15 % Einsparungen bringen, ohne Nachweis.",
+          "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
         }
       ],
-      "geo": 100,
+      "geo": 50,
       "fehler": [
-        "Statistisches Bundesamt – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+        "Verbraucherzentrale – Reise: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
       ],
-      "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)",
+      "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b)",
       "aenderungen": [
-        "faktencheck: 2026-11-06"
+        "faktencheck: 2026-11-07"
       ]
     },
     {
-      "slug": "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
-      "titel": "5 einfache Frugalismus-Tricks für den Alltag: Geld sparen",
-      "fassung_sha256": "07a463b531e0c47a7c04e0e9b0d2e462b1dfebd5333e8fc771aa9d09d50573ed",
-      "text_sha256": "75804f7482d9ebd92918219a44d7328fdfb630d53ba6148be4281081bfa90bb5",
-      "bereich": "artikel",
-      "grund": "frisch geprüft vor 40 Tagen (Intervall 45 Tage)",
+      "slug": "strom-sparen",
+      "titel": "Strom & Gas sparen: Ratgeber für niedrige Energiekosten",
+      "fassung_sha256": "27ed2aeec0801dacd52877f9d71d8839ac1017ae7fb611fdb7111ab2d300c300",
+      "text_sha256": "79b333730beb3b876b39dc5caebe8a1e7cbd8e595c926abcab356c89a64649b8",
+      "bereich": "ratgeber",
+      "grund": "frisch geprüft vor 25 Tagen (Intervall 30 Tage)",
       "treffer": 1,
       "quellen": 1,
       "befunde": [
         {
           "typ": "luecke",
-          "text": "Der Ratgeber nennt Sparbeispiele für Heizkosten, lässt aber die aktuelle Preissteigerung bei Energie von +14,9 % (Stand Oktober 2026) unerwähnt, die den finanziellen Druck auf Haushalte massiv erhöht.",
-          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+          "text": "Die im Marktradar angegebenen Durchschnittspreise für Strom (37,3 ct/kWh) und Gas (12,23 ct/kWh) werden ohne Quellenangabe genannt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
-          "typ": "praezision",
-          "text": "Die in Aussicht gestellten Ersparnisse von bis zu 200 € werden nicht ins Verhältnis zur aktuellen Inflationsrate von +2,8 % gesetzt, welche die reale Kaufkraft des gesparten Geldes mindert.",
-          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+          "typ": "luecke",
+          "text": "Die Aussage, dass bei Preiserhöhungen ein gesetzliches 14‑tägiges Sonderkündigungsrecht besteht, fehlt eine rechtliche Quellenangabe.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
-          "typ": "praezision",
-          "text": "Beim Fokus auf Lebensmittelplanung fehlt der Hinweis auf die vergleichsweise moderate Preissteigerung von +0,4 % bei Nahrungsmitteln, was diesen Hebel gegenüber den stark steigenden Energiekosten relativiert.",
-          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+          "typ": "luecke",
+          "text": "Die Behauptung, dass ein Lieferantenwechsel und ein technischer Anschlusswechsel nicht dasselbe seien, wird nicht durch eine Quelle belegt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         }
       ],
-      "geo": 100,
+      "geo": 50,
       "fehler": [
-        "Statistisches Bundesamt – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+        "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
+        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
       ],
-      "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)",
+      "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b)",
       "aenderungen": [
-        "faktencheck: 2026-11-06"
+        "faktencheck: 2026-11-07"
       ]
     },
     {
-      "slug": "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
-      "titel": "50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken",
-      "fassung_sha256": "63dc456fea78500599e8bfc7e74fb116592ff435a305f9839c5b48691618ae65",
-      "text_sha256": "0e742e051fcf8d5c9e66b1599c685a6171505c18f239c8b9e9c53f33b83f57f4",
+      "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+      "titel": "Energiediebe stoppen: So kannst du Stromfresser finden",
+      "fassung_sha256": "88f6ad30a8aefbea4932d1fc7823da0cf8e0ab7e76ba55ae6ce56b5a64a146d1",
+      "text_sha256": "f4fdbe37464394624cac3b22864924f221096b8c0ca15abb54fe542247672991",
       "bereich": "artikel",
       "grund": "frisch geprüft vor 40 Tagen (Intervall 45 Tage)",
       "treffer": 1,
       "quellen": 1,
       "befunde": [
         {
-          "typ": "veraltet",
-          "text": "Die Kalkulation der Fixkosten (Energie 140 €) und die Empfehlung zur Senkung der Kosten ignorieren den aktuellen Markttrend massiv steigender Energiepreise (+14,9 %), was die 50-Prozent-Quote für notwendige Ausgaben gefährdet.",
-          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+          "typ": "luecke",
+          "text": "Der Artikel empfiehlt, Kühl- und Gefriergeräte mindestens 24 Stunden, besser mehrere Tage zu messen, liefert jedoch keine Quelle für diese Messdauer.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
           "typ": "luecke",
-          "text": "Der Ratgeber verspricht eine 'planbare' Budgetierung, lässt aber die aktuelle Inflationsrate von 2,8 % unerwähnt, die insbesondere den Block der notwendigen Ausgaben (Nahrungsmittel +0,4 %) dynamisch belastet.",
-          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+          "text": "Die Berechnung mit einem Arbeitspreis von 0,37 €/kWh wird angegeben, ohne dass ein aktueller Preis‑ oder Marktwert belegt wird.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Das Amortisationsbeispiel (Kaufpreis 650 €, Amortisationszeit 10,3 Jahre) enthält keine Quelle für die zugrunde liegenden Annahmen oder Preise.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Es wird kein regulatorischer Rahmen (z. B. Aufgaben der Bundesnetzagentur) genannt, obwohl das Thema Stromversorgung berührt wird; entsprechende Vorgaben fehlen im Text.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Die Aussage, dass Verbraucherzentralen oder Bibliotheken Messgeräte verleihen, wird ohne Beleg gemacht.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         }
       ],
       "geo": 100,
       "fehler": [
-        "Statistisches Bundesamt – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+        "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
+        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
       ],
-      "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)",
+      "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b)",
       "aenderungen": [
-        "faktencheck: 2026-11-06"
+        "faktencheck: 2026-11-07"
       ]
     },
     {
-      "slug": "2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag",
-      "titel": "5 einfache Frugalismus-Tricks für den Alltag",
-      "fassung_sha256": "b428abd37f3a9d17f09b12b480cdd42057d5cb7af27ae94d669734a01d0d414e",
-      "text_sha256": "3aae1f34b856692d7453a0710d3bd84ff5b5625ca3c02a903748f56cdc310372",
+      "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
+      "titel": "Warmwasser sparen: Die Rechnung hinter – Warmwasserkosten",
+      "fassung_sha256": "69cbd8a400bf4785eb72ca73a7f9e235da4ce561e7f3c073e08b6de7b2f8cfd5",
+      "text_sha256": "25795ff24b53bab6aad9eb3744be66d257d3e3ac97e93b2da6a8a209ca7dea31",
       "bereich": "artikel",
-      "grund": "frisch geprüft vor 40 Tagen (Intervall 45 Tage)",
+      "grund": "frisch geprüft vor 25 Tagen (Intervall 30 Tage)",
       "treffer": 1,
       "quellen": 1,
       "befunde": [
         {
           "typ": "luecke",
-          "text": "Die kalkulierte Ersparnis bei Energiekosten (15 €/Monat) berücksichtigt nicht den aktuellen Markttrend massiv steigender Preise (+14,9 % bei Energie).",
-          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+          "text": "Die Aussage, dass Warmwasser der zweitgrößte Kostenposten im Haushalt ist, wird nicht durch eine der bereitgestellten Quellen belegt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
           "typ": "luecke",
-          "text": "Die pauschalen Jahressparwerte von 300 € bis 1.000 € werden in Marktfakten-Positur ohne Nennung einer Referenzquelle oder eines Absenders (z. B. Destatis) aufgeführt.",
-          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+          "text": "Die Behauptung, dass Warmwasser in der Heizkostenabrechnung üblicherweise als eigener Block ausgewiesen wird, fehlt eine Quellenangabe.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         },
         {
-          "typ": "praezision",
-          "text": "Die Sparversprechen im Bereich Lebensmittel vernachlässigen die Inflationsrate bei Nahrungsmitteln (+0,4 %), was Modellrechnungen ohne Inflationsbereinigung ungenau macht.",
-          "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+          "typ": "luecke",
+          "text": "Verweise auf die Verbraucherzentrale (Tipps zum Heizkosten sparen, Heizung optimieren) können nicht mit den angegebenen Fundstellen belegt werden.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Angaben zu gesetzlichen Vorgaben für Warmwassertemperaturen zur Vermeidung von Legionellen werden nicht durch die bereitgestellten Quellen gestützt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+        },
+        {
+          "typ": "luecke",
+          "text": "Der Preis von 0,30 € pro Kilowattstunde in der Modellrechnung ist nicht mit einer Quelle belegt.",
+          "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
         }
       ],
       "geo": 100,
       "fehler": [
-        "Statistisches Bundesamt – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+        "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (<urlopen error timed out>)",
+        "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
       ],
-      "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)",
+      "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)",
       "aenderungen": [
-        "faktencheck: 2026-11-06"
+        "faktencheck: 2026-11-07"
       ]
     }
   ]

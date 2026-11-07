@@ -31,7 +31,7 @@ quellen:
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
     datum: "2026-09-28"
-faktencheck: "2026-10-13"
+faktencheck: 2026-11-07
 ---
 
 Strom- und Gasrechnungen setzen sich aus Verbrauch, Arbeitspreis, Grundpreis und Vertragsbedingungen zusammen. Ob ein Wechsel Geld spart, lässt sich deshalb nicht pauschal versprechen: Entscheidend sind dein tatsächlicher Jahresverbrauch, dein Wohnort, das konkrete Angebot und mögliche Wechselkosten oder Bonusbedingungen. Dieser Ratgeber führt dich durch den 4K-Prüfpfad, die kostenlosen Rechner und ausdrücklich gekennzeichnete Modellrechnungen. Reale Haushalts-Fallstudien veröffentlichen wir erst, wenn die Belege vollständig dokumentiert und geprüft sind.
