@@ -121,7 +121,7 @@ Angenommen, du reduzierst:
 
 Dann sparst du zusammen **44 € pro Monat**. Das sind **528 € pro Jahr**. Und das fast ohne tägliche Willenskraft.
 
-**Einordnung der 15 € beim Strom:** Energie war im Oktober 2026 **+14,9 %** teurer als im Vorjahr ([Statistisches Bundesamt](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html)). Ein Tarifwechsel wirkt also auf einen höheren Preis. Die 15 € sind ein Modellwert für einen bestimmten Verbrauch. Bei hohem Verbrauch fällt mehr heraus, bei niedrigem weniger.
+**Was hinter den 15 € beim Strom steckt:** Der Tarifcheck zahlt sich vor allem aus, weil das Preisniveau selbst gestiegen ist – der Statistischen Bundesamt-Index für Energie lag im Oktober 2026 um **14,9 %** über dem Vorjahreswert ([Statistisches Bundesamt](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html)). Die 15 € sind ein Modellwert für einen bestimmten Verbrauch. Wer wenig Strom braucht, holt weniger heraus. Wer viel braucht, mehr.
 
 Genau deshalb ist Frugalismus nicht nur Konsumkontrolle, sondern vor allem kluges Systemdenken.
 

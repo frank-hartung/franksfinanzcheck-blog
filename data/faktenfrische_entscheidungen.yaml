@@ -2720,3 +2720,62 @@ entscheidungen:
   ursprungs_geprueft_fassung: 4167c18f81d56013206be07c123292705524abd264e4ed9a8e988e4af3af9a91
   projektion: betrieb-v2
   umgebunden_am: '2026-11-07'
+- slug: 2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_ursprung_slug: 2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_id: 82cc87314e0d4fcb21e9
+  befund_fassung: b428abd37f3a9d17f09b12b480cdd42057d5cb7af27ae94d669734a01d0d414e
+  geprueft_fassung: 16af0cf1acee1fa767689c22d83308ca22df9a33eada1641ce75706b1b13e2cb
+  typ: luecke
+  beanstandung: Die kalkulierte Ersparnis bei Energiekosten (15 €/Monat) berücksichtigt
+    nicht den aktuellen Markttrend massiv steigender Preise (+14,9 % bei Energie).
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 07.11.2026'
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text erneut geprüft (Folgeentscheidung nach redaktioneller
+    Umformulierung): Der Markttrend ist jetzt im selben Absatz belegt – der Energie-Index
+    des Statistischen Bundesamts lag im Oktober 2026 um 14,9 % über dem Vorjahreswert,
+    mit Quellenlink im selben Satz. Die 15 € sind ausdrücklich als Modellwert für
+    einen bestimmten Verbrauch gekennzeichnet, mit dem Hinweis, dass der Ertrag mit
+    dem Verbrauch schwankt. Eine ungedeckte Marktbehauptung steht nicht mehr im Text.'
+  vorgaenger_geprueft_fassung: cb5fd9779ae0f95d7258a3635f307d01d33dac670303c6fec734ec64721fd162
+  folgeentscheidung: true
+- slug: 2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_ursprung_slug: 2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_id: bd5ee70c85ec7db78f26
+  befund_fassung: b428abd37f3a9d17f09b12b480cdd42057d5cb7af27ae94d669734a01d0d414e
+  geprueft_fassung: 16af0cf1acee1fa767689c22d83308ca22df9a33eada1641ce75706b1b13e2cb
+  typ: luecke
+  beanstandung: Die pauschalen Jahressparwerte von 300 € bis 1.000 € werden in Marktfakten-Positur
+    ohne Nennung einer Referenzquelle oder eines Absenders (z. B. Destatis) aufgeführt.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 07.11.2026'
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text erneut geprüft: Die Jahresspanne 300 € bis 1.000
+    € ist im Block ''Hinweis zum Stand der Preise'' ausdrücklich als Modellrechnung
+    eingeordnet, samt Inflationsstand (Okt. 2026: +2,8 %) und dem Hinweis, dass die
+    Beträge nicht inflationsbereinigt sind. Damit ist die Spanne keine Marktbehauptung
+    mehr, sondern eine kenntlich gemachte Annahme.'
+  vorgaenger_geprueft_fassung: cb5fd9779ae0f95d7258a3635f307d01d33dac670303c6fec734ec64721fd162
+  folgeentscheidung: true
+- slug: 2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_ursprung_slug: 2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_id: f83f21c1f2e2012f672e
+  befund_fassung: b428abd37f3a9d17f09b12b480cdd42057d5cb7af27ae94d669734a01d0d414e
+  geprueft_fassung: 16af0cf1acee1fa767689c22d83308ca22df9a33eada1641ce75706b1b13e2cb
+  typ: praezision
+  beanstandung: Die Sparversprechen im Bereich Lebensmittel vernachlässigen die Inflationsrate
+    bei Nahrungsmitteln (+0,4 %), was Modellrechnungen ohne Inflationsbereinigung
+    ungenau macht.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 07.11.2026'
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text erneut geprüft: Der Nahrungsmittel-Index ist im selben
+    Preisstand-Block ausgewiesen (+0,4 % im Oktober 2026) und verlinkt. Die Sparbeträge
+    sind als Modellwerte gekennzeichnet, nicht als Marktversprechen. Die Beanstandung,
+    die Inflationsrate bei Lebensmitteln werde vernachlässigt, trifft den heutigen
+    Text nicht mehr.'
+  vorgaenger_geprueft_fassung: cb5fd9779ae0f95d7258a3635f307d01d33dac670303c6fec734ec64721fd162
+  folgeentscheidung: true
