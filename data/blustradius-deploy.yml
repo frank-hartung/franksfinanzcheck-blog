@@ -253,6 +253,16 @@ schritte:
     klasse: inhalt
     grund: Gebaute Seiten mit kaputter Überschriftenstruktur gehen nicht live.
 
+  - name: KI-Provenienz – Selbstheilung (Anker + Feed-Spiegelung, VOR dem Build)
+    klasse: inhalt
+    grund: >
+      Dieser Schritt schreibt an kennzeichnungspflichtige Quellen: den Anker
+      {#ki-hinweis} im Impressum (Ziel jedes rel="describedby" und jedes
+      ffki:describedby im Feed) und die Bytgleichheit der beiden RSS-Vorlagen.
+      Scheitert er, fehlt der maschinenlesbaren KI-Kennzeichnung das Ziel –
+      ein Kennzeichnungsbefund (Art. 50 KI-VO, Frist 02.12.2026), kein
+      Technikfehler. Er darf blockieren.
+
   - name: KI-Provenienz – Selbsttest
     klasse: gate-selbsttest
     schuetzt: KI-Provenienz – maschinenlesbare Kennzeichnung im Build

@@ -61,13 +61,49 @@
   <div class="ff-voice-bar" id="ff-voice-bar" role="region" aria-label="Lesehilfen: Vorlesen und Kurzfassung" data-page-lang="{{ $pageLang }}">
     <span class="ff-voice-bar__label" aria-hidden="true">Lesen &amp; Verstehen</span>
 
-    <button type="button" class="ff-voice-btn ff-voice-btn--primary" id="ff-voice-play" aria-pressed="false" aria-label="Artikel vorlesen">
+    {{- /* ============================================================
+        KI-KENNZEICHNUNG DER TONSPUR (#1028, 07.11.2026)
+        ------------------------------------------------------------
+        Befund: Der Dokumentkopf deklariert die Tonspur seit dem
+        05.11.2026 maschinenlesbar (`<meta name="ai-generated-scope"
+        content="…audio">` aus ki_provenienz.html) – sichtbar stand
+        auf keiner der 84 Seiten mit Lesehilfe ein Wort dazu. Der
+        Knopf hieß „Vorlesen", die Laufzeit-`aria-label` nannte einen
+        Stimmanbieter, und ein Leser ohne Screenreader erfuhr nie,
+        dass die Stimme synthetisch ist. Genau dieses Auseinanderlaufen von
+        Maschinen- und Menschenebene verbietet Regel M4 des
+        Provenienz-Gates („Kanaltreue"); die Regel war nur blind,
+        weil sie ausschließlich den Text-Hinweis in posts/ verglich.
+
+        Umsetzung, bewusst layoutneutral:
+        · Das Siegel `.ff-voice-btn__ki` liegt ABSOLUT positioniert am
+          Vorlese-Knopf. Es ändert an keiner Viewportbreite auch nur
+          einen Pixel Fluss-Höhe – der Slot (.ff-voice-slot) reserviert
+          seine Höhe dauerhaft, und diese Reserve darf nicht kippen
+          (CLS-Kernwert, Vertrag in ff-voice.css Abschnitt 1).
+        · `aria-hidden="true"`: Der sichtbare Text wird nicht doppelt
+          vorgelesen, weil derselbe Sachverhalt im barrierefreien Namen
+          (I18N `playAria`/`playAriaNeutral` in ff-voice.js) und in der
+          Beschreibung unten steht. WCAG 2.5.3 bleibt erfüllt: Der
+          sichtbare Knopftext „Vorlesen" steckt weiterhin im Namen.
+        · `aria-describedby` überlebt die Laufzeit: ff-voice.js schreibt
+          die `aria-label` bei jedem Zustandswechsel neu (Zeile ~4261),
+          die Beschreibung fasst es nicht an. Deshalb hängt der
+          vollständige Satz hier und nicht nur im Namen.
+        · Der Satz nennt BEIDE Tonpfade (Studiotonspur und Geräte-Engine)
+          – beide sind synthetisch, keiner wird verschwiegen oder
+          schöngeredet. `data-ff-ki-voice-label` ist der Prüfanker für
+          scripts/ki_provenienz_gate.py (Regel M4, Modalität audio).
+        ============================================================ */ -}}
+    <button type="button" class="ff-voice-btn ff-voice-btn--primary" id="ff-voice-play" aria-pressed="false" aria-label="{{ if eq $pageLang "en" }}Listen to article – machine-generated voice{{ else }}Artikel vorlesen – maschinell erzeugte Stimme{{ end }}" aria-describedby="ff-voice-ki-hinweis">
       <span class="ff-voice-btn__icon" aria-hidden="true">
         <svg class="ff-voice-ico ff-voice-ico--play" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.54.84l10.3-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14Z"/></svg>
         <svg class="ff-voice-ico ff-voice-ico--pause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><rect x="7" y="5" width="3.6" height="14" rx="1.2"/><rect x="13.4" y="5" width="3.6" height="14" rx="1.2"/></svg>
       </span>
       <span class="ff-voice-btn__text" id="ff-voice-play-label">Vorlesen</span>
+      <span class="ff-voice-btn__ki" data-ff-ki-voice-label aria-hidden="true">{{ if eq $pageLang "en" }}AI voice{{ else }}KI-Stimme{{ end }}</span>
     </button>
+    <span class="sr-only" id="ff-voice-ki-hinweis">{{ if eq $pageLang "en" }}The read-aloud voice is machine-generated (text to speech): either the pre-recorded studio track or your device's own speech engine. Details in the notice on AI-assisted content in the imprint.{{ else }}Die Vorlesestimme ist maschinell erzeugt (Text-to-Speech): entweder die vorab vertonte Studiotonspur oder die Sprach-Engine deines Geräts. Einzelheiten stehen im Hinweis zu KI-gestützten Inhalten im Impressum.{{ end }}</span>
 
     <div class="ff-voice-bar__nav" role="group" aria-label="Abschnittsnavigation beim Vorlesen">
       <button type="button" class="ff-voice-btn ff-voice-btn--icon" id="ff-voice-prev" aria-label="Vorheriger Abschnitt">

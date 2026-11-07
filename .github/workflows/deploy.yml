@@ -660,6 +660,25 @@ jobs:
       - name: Taxonomie-Gate (Tags kanonisieren – selbstheilend, VOR dem Build)
         run: python3 scripts/tag_governance.py --apply
 
+      # ============ KI-PROVENIENZ: SELBSTHEILUNG VOR DEM BUILD (#1028) ============
+      # Art. 50 Abs. 2 KI-VO, Frist 02.12.2026. Zwei Quellen-Drifts machen die
+      # Kennzeichnung wirkungslos, obwohl jede Vorlage korrekt aussieht:
+      #   1) Der Anker {#ki-hinweis} im Impressum fehlt → jedes
+      #      rel="describedby" und jedes ffki:describedby im Feed läuft ins
+      #      Leere. Die Heilung setzt den Anker an der vorhandenen Überschrift
+      #      wieder an (bytetreu, geprüft am 07.11.2026).
+      #   2) layouts/rss.xml und layouts/_default/rss.xml driften auseinander →
+      #      ob der Feed den Herkunfts-Kanal trägt, hinge an der Hugo-Version
+      #      (0.164.0 nimmt _default). Die Heilung gleicht bytgleich an, aber
+      #      NUR wenn eindeutig ist, welche Fassung den Kanal trägt. Tragen
+      #      beide unterschiedliche Fassungen, ist das eine Entscheidung und
+      #      bleibt ein Fund (keine Erfindung).
+      # `--source-only`, weil der Build hier noch nicht existiert: Ein Heillauf,
+      # der mangels Bauprodukt „kein Bauprodukt" meldet, würde jeden Deploy
+      # stoppen. Die ausgelieferte Wahrheit prüfen M1/M4/M5 NACH dem Build.
+      - name: KI-Provenienz – Selbstheilung (Anker + Feed-Spiegelung, VOR dem Build)
+        run: python3 scripts/ki_provenienz_gate.py --heilen --source-only
+
       # ---------------------------------------------------------------
       # WEITERLEITUNGEN – Quellvertrag (19.10.2026, fail-closed)
       # Prüft data/weiterleitungen.yaml gegen data/url_entfallen.yaml und
@@ -722,17 +741,36 @@ jobs:
           fi
           exit "$wache_status"
 
-      # ========= MASCHINENLESBARE KI-KENNZEICHNUNG (#1028, 05.11.2026) =========
-      # Art. 50 KI-VO, Frist 02.12.2026. Die maschinenlesbare Ebene bestand
-      # bis hierher aus `data-ff-ki-label`, einem Selektor für eigene Tests.
-      # Jetzt trägt jede Seite mit ai_generated: true <meta name="ai-generated">
-      # plus scope und rel="describedby", das Article-Schema ein creditText
-      # und jedes ausdrücklich deklarierte KI-Cover das IPTC-Feld
-      # DigitalSourceType IN der Bilddatei.
-      # Diese Wache läuft NACH dem Build: M1/M4 prüfen die ausgelieferte
-      # Wahrheit (nicht die Absicht der Vorlage), M2 den Vorlagenvertrag,
-      # M3 die Bilddatei. Ein halber Kanal – Signal ohne sichtbaren Hinweis
-      # oder umgekehrt – stoppt den Deploy.
+      # ===== MASCHINENLESBARE KI-KENNZEICHNUNG (#1028, Stand 07.11.2026) =====
+      # Art. 50 Abs. 2 KI-VO, Frist 02.12.2026 für Bestandssysteme.
+      # Gemessen wird die AUSGELIEFERTE Wahrheit, nicht die Absicht einer
+      # Vorlage – und zwar auf jedem Kanal, den die Seite tatsächlich bespielt:
+      #   M1  ganzer Baum: 109 gebaute reguläre Seiten in 19 Abschnitten
+      #       (nicht mehr nur content/posts). Meta name="ai-generated" ⇔
+      #       Frontmatter, scope, rel="describedby", creditText im Article-
+      #       Schema, data-ai-generated/data-digital-source-type am <img>.
+      #   M2  Vorlagenvertrag: die Kanäle entstehen aus EINER Quelle
+      #       (_partials/_funcs/ki_modalitaeten.html). Jede Bedingung, die ein
+      #       zweites Mal abgetippt wird, driftet – gemessen am 07.11.2026 lag
+      #       dieselbe Audio-Bedingung dreimal im Bestand.
+      #   M3  IPTC DigitalSourceType IN der Bilddatei (ki_bild_markierung).
+      #   M4  Kanaltreue JE MODALITÄT in beide Richtungen. Befund: 84 Seiten
+      #       spielen eine synthetische Stimme, aber 66 zeigten nur einen
+      #       Hinweis auf den TEXT und 18 gar keinen – ein Signal ohne
+      #       sichtbaren Hinweis ist ein halber Kanal.
+      #   M5  Feed: public/index.xml trägt auf Kanal- und Item-Ebene dieselbe
+      #       Angabe wie die Seite. Befund: 50 Items, 45 mit ai_generated,
+      #       null Herkunftsangabe – und Pinterest publiziert aus genau diesem
+      #       Feed automatisch weiter.
+      #   M6  Bild-Ableitungen: Der Optimizer kennt deklarierte KI-Originale
+      #       (cover.ai_generated) und leitet nichts Unmarkiertes davon ab.
+      #   M7  RSS-Spiegelung bytgleich (siehe Heilschritt VOR dem Build).
+      # Ein halber Kanal stoppt den Deploy. Ausgefallene Messung ist kein Grün
+      # (C33): Fehlt PyYAML oder ki_bild_markierung, ist der Exit 2 und der
+      # Befund läuft über scripts/werkzeugbefund.py (C38), nicht als Traceback.
+      # Dauerhaft bleibt es nur durch die Wache:
+      # .github/workflows/ki-provenienz-wache.yml heilt und führt das Alter
+      # ungeklärter `menschlich`-Einträge gegen die Frist.
       # Grenze: ein grünes Gate ist weder ein Herkunftsbeweis noch die
       # Anbieter-Markierung nach Art. 50 Abs. 2 (docs/KI-TRANSPARENZ-ABNAHME.md).
       - name: KI-Provenienz – Selbsttest

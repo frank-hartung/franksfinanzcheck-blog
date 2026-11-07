@@ -165,8 +165,16 @@
   var I18N = {
     de: {
       play: 'Vorlesen', pause: 'Pausieren', resume: 'Weiterlesen', stop: 'Beenden',
-      playAria: 'Artikel vorlesen (männliche ElevenLabs-Premium-Stimme, DE & EN)',
-      playAriaNeutral: 'Artikel vorlesen (Stimme deines Geräts)',
+      // KI-Kennzeichnung (#1028, 07.11.2026): Die Engine schreibt die
+      // aria-label des Vorlese-Knopfs bei JEDEM Zustandswechsel neu
+      // (siehe syncLabels/uniformLabels unten). Eine Angabe, die nur im
+      // serverseitigen Markup steht, wäre damit nach dem ersten Klick weg.
+      // Deshalb trägt der barrierefreie Name die Herkunft der Stimme selbst
+      // – für beide Tonpfade (Studiotonspur UND Geräte-Engine, beide
+      // synthetisch). Der vollständige Satz steht zusätzlich in
+      // aria-describedby (#ff-voice-ki-hinweis), den die Engine nie anfasst.
+      playAria: 'Artikel vorlesen – maschinell erzeugte Stimme (männliche ElevenLabs-Premium-Stimme, DE & EN)',
+      playAriaNeutral: 'Artikel vorlesen – maschinell erzeugte Stimme (Stimme deines Geräts)',
       pauseAria: 'Vorlesen pausieren', resumeAria: 'Vorlesen fortsetzen', stopAria: 'Vorlesen beenden',
       summaryBtn: 'Kurzfassung', summaryAria: 'Kurzfassung des Artikels anzeigen',
       unsupported: 'Vorlesen wird von diesem Browser nicht unterstützt.',
@@ -233,8 +241,10 @@
     },
     en: {
       play: 'Listen', pause: 'Pause', resume: 'Resume', stop: 'Stop',
-      playAria: 'Listen to article (male ElevenLabs premium voice, DE & EN)',
-      playAriaNeutral: 'Listen to article (your device voice)',
+      // #1028: mirror of the German strings – the machine-generated voice is
+      // disclosed in the accessible name, not only in the server markup.
+      playAria: 'Listen to article – machine-generated voice (male ElevenLabs premium voice, DE & EN)',
+      playAriaNeutral: 'Listen to article – machine-generated voice (your device voice)',
       pauseAria: 'Pause listening', resumeAria: 'Resume listening', stopAria: 'Stop listening',
       summaryBtn: 'Summary', summaryAria: 'Show article summary',
       unsupported: 'Listening is not supported by this browser.',

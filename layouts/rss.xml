@@ -15,6 +15,13 @@
       - ABSPiegelung: layouts/rss.xml und layouts/_default/rss.xml müssen
         IDENTISCH bleiben (je nach Hugo-Version wird das eine oder andere
         Layout bevorzugt – 0.164.0 nimmt _default, empirisch verifiziert).
+        Bytgleichheit ist keine Absicht mehr, sondern eine Regel:
+        scripts/ki_provenienz_gate.py M7 prüft sie bei jedem Build.
+      - KI-HERKUNFT (#1028, 07.11.2026): Jedes Item trägt dieselbe
+        Herkunftsangabe wie der Dokumentkopf der Seite – IANA-Relation
+        `describedby`, Betreiberangabe im Namensraum `ffki:` und, bei
+        belegter Bild-Erzeugungsart, `media:credit` im IPTC-Schema.
+        Quelle der Wahrheit ist _funcs/ki_modalitaeten.html. Wache: M5.
 */ -}}
 {{- $pages := where site.RegularPages "Section" "posts" -}}
 {{- $pages = where $pages "Params.hiddenInRss" "!=" true -}}
@@ -26,7 +33,8 @@
 <rss version="2.0"
   xmlns:atom="http://www.w3.org/2005/Atom"
   xmlns:content="http://purl.org/rss/1.0/modules/content/"
-  xmlns:media="http://search.yahoo.com/mrss/">
+  xmlns:media="http://search.yahoo.com/mrss/"
+  xmlns:ffki="https://franksfinanzcheck.de/ns/ki-provenance/1.0/">
   <channel>
     <title>{{ printf "%s" (site.Title) | html }}</title>
     <link>{{ printf "%s" (site.BaseURL) | html }}</link>
@@ -48,6 +56,39 @@
     {{- with .OutputFormats.Get "RSS" }}
     {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
     {{- end }}
+    {{- /* ============================================================
+           KI-HERKUNFT IM FEED (#1028, 07.11.2026)
+           ------------------------------------------------------------
+           Befund: Dieser Feed ist die QUELLE des Pinterest-Auto-Publish.
+           Er verteilte 50 Artikel weiter, von denen 66 im Dokumentkopf
+           `ai_generated: true` tragen – ohne eine einzige Angabe zur
+           Herkunft. Was die Seite maschinenlesbar kennzeichnet, ging auf
+           dem Verbreitungsweg verloren. Art. 50 KI-VO ist zwar eine
+           Anbieterpflicht, der Verhaltenskodex der Kommission vom
+           10.06.2026 verlangt von nachgelagerten Akteuren aber
+           ausdrücklich, Kennzeichnungen NICHT zu entfernen. Ein Feed, der
+           die Angabe der eigenen Seite verschluckt, entfernt sie.
+
+           Drei Angaben, alle aus _funcs/ki_modalitaeten.html (dieselbe
+           Funktion, aus der auch der Dokumentkopf lebt – kein zweiter
+           Pflegeort):
+             1. atom:link rel="describedby"  → IANA-registrierte Relation
+                auf den menschenlesbaren Hinweis im Impressum. Versteht
+                jeder Atom/RSS-Auswerter, keine Eigenbau-Vokabel.
+             2. ffki:ai-generated / ffki:ai-generated-scope → die
+                Betreiberangabe im selben Vokabular wie <meta name=…> im
+                HTML-Kopf. Namensraum ist dokumentiert
+                (docs/KI-TRANSPARENZ-ABNAHME.md §3b).
+             3. media:credit mit IPTC-Schema am Bild – NUR wenn die
+                Erzeugungsart belegt ist (digital_source_type). Erfunden
+                wird nichts; ohne Beleg steht dort nichts.
+
+           Escaping-Disziplin wie im Rest der Datei: `printf "%s"` vor
+           `| html`, genau einmal escaped (PREM-Audit 26.08.2026).
+           Wache: scripts/ki_provenienz_gate.py Regel M5 (jedes Item gegen
+           das Frontmatter) + Regel M7 (beide RSS-Vorlagen bytgleich).
+           ============================================================ */ -}}
+    <atom:link rel="describedby" href="{{ "impressum/#ki-hinweis" | absURL }}" title="Hinweis zu KI-unterstützten Inhalten" />
     {{- range $pages }}
     <item>
       <title>{{ printf "%s" (.Title | plainify) | html }}</title>
@@ -59,10 +100,26 @@
       <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
       <guid isPermaLink="true">{{ printf "%s" (.Permalink) | html }}</guid>
       <description>{{ $desc := or (.Params.pin_description) (.Description) }}{{ if $desc }}{{ printf "%s" $desc | html }}{{ else }}{{ printf "%s" (.Summary | plainify) | html }}{{ end }}</description>
-      {{- with .Params.cover.image }}
+      {{- $bereiche := partial "_funcs/ki_modalitaeten.html" . -}}
+      {{- if $bereiche }}
+      <atom:link rel="describedby" href="{{ "impressum/#ki-hinweis" | absURL }}" title="Hinweis zu KI-unterstützten Inhalten" />
+      {{- if in $bereiche "text" }}
+      <ffki:ai-generated>true</ffki:ai-generated>
+      {{- end }}
+      <ffki:ai-generated-scope>{{ delimit $bereiche "," | html }}</ffki:ai-generated-scope>
+      {{- end }}
+      {{- $coverBild := .Params.cover.image -}}
+      {{- /* IPTC-Erzeugungsart nur aus dem belegten Frontmatter-Feld. */ -}}
+      {{- $quelleTyp := "" -}}
+      {{- with .Params.cover.ki_pruefung }}{{ $quelleTyp = .digital_source_type | default "" }}{{ end -}}
+      {{- with $coverBild }}
       {{- $img := . | absURL }}
       <enclosure url="{{ printf "%s" $img | html }}" type="image/jpeg" />
+      {{- if $quelleTyp }}
+      <media:content url="{{ printf "%s" $img | html }}" medium="image" type="image/jpeg"><media:credit role="digitalsourcetype" scheme="http://cv.iptc.org/newscodes/digitalsourcetype/">{{ printf "%s" $quelleTyp | html }}</media:credit></media:content>
+      {{- else }}
       <media:content url="{{ printf "%s" $img | html }}" medium="image" type="image/jpeg" />
+      {{- end }}
       <media:thumbnail url="{{ printf "%s" $img | html }}" />
       {{- end }}
     </item>
