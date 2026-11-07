@@ -41,16 +41,26 @@ die Reparatur in fünf Richtungen fest:
      einer Messung „rot am 26.11./31.12.“. Diese Datei hält beide Richtungen
      fest: das Fehlbild bleibt rot, die Trajektorie wird grün, ein echter
      Engpass bleibt rot (`ProjektionTrajektorieTest`).
+  9. #1107, Selbstheilung: Die Regel „Zukunft ab heute“ steht in
+     `projektions_ausgangspunkt`; die CLI (`main`) benutzt sie – geprüft
+     durch den Einstiegspunkt, nicht nur durch `plan`. Das Urteil nennt
+     zusätzlich den ersten Tag, an dem etwas reißt (`kadenz_horizont`),
+     damit ein Ticket ein Datum aus dem heutigen Lauf trägt statt einer
+     Momentaufnahme (`KadenzHorizontTest`, `MessungSelbstheilungTest`).
 
 Alle Proben laufen gegen eingefrorene Tage (Uhr-Zwang, `selftest_clock`):
 Ein Test, der die Wanduhr liest, ist eine Verabredung mit dem Kalender.
 """
 from __future__ import annotations
 
+import contextlib
 import datetime as dt
+import io
+import json
 import os
 import sys
 import unittest
+import unittest.mock as mock
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -71,6 +81,19 @@ def cfg_probe(budget: int = 3, limit: int = 10) -> dict:
         "planung": {"vorlauf_tage": 7, "nachhol_frist_tage": 7,
                     "horizont_tage": 120, "min_deckung_prozent": 110},
     }
+
+
+def kap_probe_bundel(n: int = 8) -> list[dict]:
+    """n saisonale Seiten (Intervall 30) mit derselben Frist PROBETAG + 10.
+
+    Vorlaufbeginn ist PROBETAG + 3: Erst dann kann der Bot sie arbeiten –
+    genau das macht den Unterschied zwischen Weg und eingefrorenem Stand.
+    """
+    letzte = PROBETAG - dt.timedelta(days=20)
+    return [{"slug": f"bundel-{i:03d}", "titel": "Heizung Winter saisonal",
+             "beschreibung": "", "keywords": ["Heizung"], "pillar": "energie",
+             "faktencheck": letzte}
+            for i in range(n)]
 
 
 def ueberfaellig(n: int, start: int = 0) -> list[dict]:
@@ -654,16 +677,10 @@ class ProjektionTrajektorieTest(unittest.TestCase):
     ein echter Engpass bleibt rot (die Wache darf nicht blind werden).
     """
 
-    def _bundel(self, n: int = 8) -> list[dict]:
-        """n saisonale Seiten (Intervall 30), alle mit Frist PROBETAG + 10.
-
-        Vorlaufbeginn ist PROBETAG + 3: Erst dann kann der Bot sie arbeiten.
-        """
-        letzte = PROBETAG - dt.timedelta(days=20)
-        return [{"slug": f"bundel-{i:03d}", "titel": "Heizung Winter saisonal",
-                 "beschreibung": "", "keywords": ["Heizung"], "pillar": "energie",
-                 "faktencheck": letzte}
-                for i in range(n)]
+    @staticmethod
+    def _bundel(n: int = 8) -> list[dict]:
+        """n saisonale Seiten mit derselben Frist PROBETAG + 10 (siehe Helfer)."""
+        return kap_probe_bundel(n)
 
     def test_eingefrorene_projektion_ist_kurz_vor_der_frist_rot(self):
         # Das Fehlbild (wie am 26.11.): Der Tag liegt kurz vor der Frist, die
@@ -673,7 +690,10 @@ class ProjektionTrajektorieTest(unittest.TestCase):
         bundel = self._bundel(8)
         cfg = cfg_probe(budget=2, limit=10)
         tag = PROBETAG + dt.timedelta(days=9)
-        p = kap.plan(bundel, cfg, 2, 1.0, tag)   # ohne basis: eingefroren
+        # `plan` ohne basis misst den Stand des Stichtags (historischer
+        # Vergleich). Die Messung, aus der ein Ticket entsteht (`messe`),
+        # friert von sich aus NICHT ein – siehe MessungSelbstheilungTest.
+        p = kap.plan(bundel, cfg, 2, 1.0, tag)
         self.assertFalse(p["puenktlich"],
                          "Der Test verliert seinen Zweck, wenn das Fehlbild grün wird")
         self.assertGreater(p["verletzungen_neu"], 0)
@@ -739,6 +759,184 @@ class ProjektionTrajektorieTest(unittest.TestCase):
         self.assertEqual(len(geprueft), 4,
                          "Tage 3 und 4 mit je zwei Plätzen: vier Seiten sind geprüft")
 
+
+
+class ProjektionsAusgangspunktTest(unittest.TestCase):
+    """Die Regel „Zukunft ab heute“ steht an EINER Stelle (#1107).
+
+    Sie ist die Selbstheilung des Messfehlers: Kein Aufrufer muss (oder kann)
+    entscheiden, ob ein Zukunftstag eingefroren oder als Weg gerechnet wird –
+    `projektions_ausgangspunkt` entscheidet es, und `plan` weist einen
+    Ausgangspunkt NACH dem Stichtag fail-closed ab.
+    """
+
+    def test_zukunft_setzt_heute_auf(self):
+        self.assertEqual(
+            kap.projektions_ausgangspunkt(PROBETAG + dt.timedelta(days=20),
+                                          PROBETAG), PROBETAG,
+            "Ein Zukunftstag muss ab heute gerechnet werden, sonst ist es #1107")
+
+    def test_heute_und_vergangenheit_bleiben_nachweis(self):
+        self.assertEqual(kap.projektions_ausgangspunkt(PROBETAG, PROBETAG),
+                         PROBETAG)
+        self.assertEqual(
+            kap.projektions_ausgangspunkt(PROBETAG - dt.timedelta(days=20),
+                                          PROBETAG),
+            PROBETAG - dt.timedelta(days=20),
+            "Ein vergangener Stichtag ist ein Nachweis jenes Tages – kein Weg")
+
+    def test_ausgangspunkt_nach_dem_stichtag_wirft(self):
+        nachher = PROBETAG + dt.timedelta(days=1)
+        with self.assertRaises(ValueError):
+            kap.plan(ueberfaellig(1), cfg_probe(), 1, 1.0, PROBETAG, basis=nachher)
+        with self.assertRaises(ValueError):
+            kap.spitzenlast_stichtag(ueberfaellig(1), cfg_probe(), 1, 1.0,
+                                     PROBETAG, basis=nachher)
+
+    def test_eingefrorener_vergleich_bleibt_ausdruecklich_moeglich(self):
+        # Der historische Vergleich („was hätte der Stand von heute gesagt?“)
+        # ist kein Unfall, sondern ein benannter Parameter – und er MUSS sich
+        # vom Weg unterscheiden, sonst wäre die Heilung nicht messbar.
+        bundel = kap_probe_bundel(8)
+        cfg = cfg_probe(budget=2, limit=10)
+        tag = PROBETAG + dt.timedelta(days=9)
+        eingefroren = kap.plan(bundel, cfg, 2, 1.0, tag, basis=tag)
+        weg = kap.plan(bundel, cfg, 2, 1.0, tag, basis=PROBETAG)
+        self.assertFalse(eingefroren["puenktlich"])
+        self.assertTrue(weg["puenktlich"])
+        self.assertFalse(eingefroren["projiziert"])
+        self.assertTrue(weg["projiziert"])
+        self.assertEqual(weg["basis"], PROBETAG.isoformat())
+
+
+class KadenzHorizontTest(unittest.TestCase):
+    """Der Weg des Bots wird als DATUM berichtet – nicht nur als Urteil (#1107).
+
+    „Rot“ ohne Tag ist eine Meinung. `kadenz_horizont` nennt den ersten Tag,
+    an dem ein Prüftermin reißt, und den Horizont, bis zu dem gemessen wurde.
+    Dieselbe Simulation, die das Urteil fällt, liefert das Datum (C19).
+    """
+
+    def test_plan_nennt_den_ersten_gerissenen_tag(self):
+        bundel = kap_probe_bundel(12)
+        cfg = cfg_probe(budget=1, limit=10)
+        p = kap.plan(bundel, cfg, 1, 1.0, PROBETAG, basis=PROBETAG)
+        kh = p["kadenz_horizont"]
+        self.assertTrue(kh["geprueft"])
+        self.assertFalse(kh["weg_frei"])
+        self.assertFalse(p["puenktlich"])
+        # Nur Termine mit ZUKÜNFTIGER Frist sind der „Weg“ – der Alt-Rückstand
+        # wird über `rueckstand_abgebaut` beurteilt, nicht doppelt gezählt.
+        self.assertEqual(kh["verletzungen"],
+                         p["verletzungen_neu"] + p["verletzungen_folge"])
+        self.assertEqual(kh["rueckstand_verletzungen"], p["verletzungen_alt"])
+        # Der Tag, an dem die Verletzung sichtbar wird, liegt nie VOR der Frist.
+        self.assertGreaterEqual(dt.date.fromisoformat(kh["erstverletzung"]),
+                                dt.date.fromisoformat(kh["erstverletzung_frist"]))
+        self.assertTrue(kh["erstverletzung_seite"].startswith("bundel-"))
+
+    def test_alt_rueckstand_ist_kein_weg_befund(self):
+        # Eine heute überfällige Seite ist ein Rückstand (Nachholfrist), kein
+        # gerissener Zukunftstermin. Sonst stünde in jedem Ticket mit einer
+        # Altlast „der Weg reißt heute“ (#1107).
+        alt = ueberfaellig(2)
+        cfg = cfg_probe(budget=4, limit=10)
+        p = kap.plan(alt, cfg, 4, 1.0, PROBETAG, basis=PROBETAG)
+        self.assertGreater(p["verletzungen_alt"], 0)
+        self.assertTrue(p["kadenz_horizont"]["weg_frei"])
+        self.assertIsNone(p["kadenz_horizont"]["erstverletzung"])
+        self.assertGreater(p["kadenz_horizont"]["rueckstand_verletzungen"], 0)
+
+    def test_weg_frei_nennt_den_horizont(self):
+        bundel = kap_probe_bundel(8)
+        cfg = cfg_probe(budget=2, limit=10)
+        p = kap.plan(bundel, cfg, 2, 1.0, PROBETAG, basis=PROBETAG)
+        kh = p["kadenz_horizont"]
+        self.assertTrue(kh["weg_frei"])
+        self.assertIsNone(kh["erstverletzung"])
+        self.assertEqual(kh["verletzungen"], 0)
+        self.assertEqual(dt.date.fromisoformat(kh["bis"]),
+                         PROBETAG + dt.timedelta(days=p["horizont_tage"]))
+
+    def test_messung_nennt_ihren_ausgangspunkt(self):
+        bundel = kap_probe_bundel(8)
+        cfg = cfg_probe(budget=2, limit=10)
+        tag = PROBETAG + dt.timedelta(days=9)
+        m = kap.messe(bundel, cfg, 1.0, tag,
+                      basis=kap.projektions_ausgangspunkt(tag, PROBETAG))
+        self.assertEqual(m["projektion"]["stichtag"], tag.isoformat())
+        self.assertEqual(m["projektion"]["ausgangspunkt"], PROBETAG.isoformat())
+        self.assertTrue(m["projektion"]["trajektorie"])
+        self.assertIn("kadenz_horizont", m)
+        self.assertTrue(m["kadenz_horizont"]["geprueft"])
+
+
+class MessungSelbstheilungTest(unittest.TestCase):
+    """Die Messung, aus der die Wache und das Ticket entstehen, rechnet den Weg.
+
+    Das ist der Unterschied zwischen „Code korrigiert“ und „Selbstheilung“:
+    Der tägliche Lauf – nicht ein Handbefehl – benutzt die Regel. Der
+    Integrationstest fährt deshalb `main()` mit eingefrorener Uhr, statt
+    nur `plan()` zu prüfen.
+    """
+
+    def test_messe_am_zukunftstag_nutzt_die_trajektorie(self):
+        bundel = kap_probe_bundel(8)
+        cfg = cfg_probe(budget=2, limit=10)
+        tag = PROBETAG + dt.timedelta(days=9)
+        # Gleiches Budget in beiden Richtungen: Der Unterschied darf allein
+        # aus dem Ausgangspunkt kommen, nicht aus der Auto-Skalierung.
+        weg = kap.messe(bundel, cfg, 1.0, tag, basis=PROBETAG, budget=2)
+        eingefroren = kap.messe(bundel, cfg, 1.0, tag, basis=tag, budget=2)
+        self.assertTrue(weg["puenktlich"], weg["verletzungen"])
+        self.assertFalse(eingefroren["puenktlich"],
+                         "Die Gegenprobe muss rot bleiben, sonst prüft der Test nichts")
+        self.assertTrue(weg["projektion"]["trajektorie"])
+        self.assertFalse(eingefroren["projektion"]["trajektorie"])
+
+    def test_messe_ohne_basis_ist_von_sich_aus_sicher(self):
+        # Der Aufrufer muss die Regel nicht kennen: Ohne `basis` rechnet die
+        # Messung einen Zukunftstag ab heute (#1107). Nur der ausdrückliche
+        # historische Vergleich (`basis=stichtag`) friert ein.
+        bundel = kap_probe_bundel(8)
+        cfg = cfg_probe(budget=2, limit=10)
+        tag = PROBETAG + dt.timedelta(days=9)
+        with mock.patch.object(ff, "heute", return_value=PROBETAG):
+            m = kap.messe(bundel, cfg, 1.0, tag, budget=2)
+        self.assertEqual(m["projektion"]["ausgangspunkt"], PROBETAG.isoformat())
+        self.assertTrue(m["projektion"]["trajektorie"])
+        self.assertTrue(m["puenktlich"], m["verletzungen"])
+
+    def test_cli_rechnet_einen_zukunftstag_ab_heute(self):
+        # integrationstest durch den echten Einstiegspunkt (#1107).
+        tag = PROBETAG + dt.timedelta(days=20)
+        puffer = io.StringIO()
+        with mock.patch.object(ff, "heute", return_value=PROBETAG), \
+                mock.patch.object(sys, "argv", [
+                    "faktenfrische_kapazitaet.py", "--stichtag", tag.isoformat(),
+                    "--laeufe", "1", "--json"]), \
+                contextlib.redirect_stdout(puffer):
+            rc = kap.main()
+        self.assertEqual(rc, 0, puffer.getvalue()[:400])
+        daten = json.loads(puffer.getvalue())
+        self.assertEqual(daten["projektion"]["ausgangspunkt"], PROBETAG.isoformat(),
+                         "Die CLI darf einen Zukunftstag nicht einfrieren (#1107)")
+        self.assertTrue(daten["projektion"]["trajektorie"])
+        self.assertEqual(daten["projektion"]["stichtag"], tag.isoformat())
+        self.assertEqual(daten["basis"], PROBETAG.isoformat())
+        self.assertTrue(daten["kadenz_horizont"]["geprueft"])
+
+    def test_cli_an_heute_bleibt_ein_nachweis(self):
+        puffer = io.StringIO()
+        with mock.patch.object(ff, "heute", return_value=PROBETAG), \
+                mock.patch.object(sys, "argv", [
+                    "faktenfrische_kapazitaet.py", "--laeufe", "1", "--json"]), \
+                contextlib.redirect_stdout(puffer):
+            rc = kap.main()
+        self.assertEqual(rc, 0, puffer.getvalue()[:400])
+        daten = json.loads(puffer.getvalue())
+        self.assertFalse(daten["projektion"]["trajektorie"])
+        self.assertEqual(daten["projektion"]["ausgangspunkt"], PROBETAG.isoformat())
 
 
 class AusfallToleranzTest(unittest.TestCase):
@@ -813,6 +1011,7 @@ class AusfallToleranzTest(unittest.TestCase):
         cfg = ff.lade_config()
         cfg["planung"]["vorlauf_tage"] = 7
         self.assertGreater(self._verletzungen(cfg, 10), 0)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -88,6 +88,9 @@ sonst ist es ein Dauer-Spitzenbetrieb. Reicht die Kapazität nicht, wird der
 python3 scripts/faktenfrische_kapazitaet.py            # Bedarf, Angebot, Abbauplan
 python3 scripts/faktenfrische_kapazitaet.py --wache    # Exit 1, wenn nicht abbaubar
 python3 scripts/faktenfrische_kapazitaet.py --json     # maschinenlesbar
+python3 scripts/faktenfrische_kapazitaet.py --stichtag 2026-12-31 --json
+#   → Projektion: Stichtag 2026-12-31 ab heute gerechnet (Weg des Bots),
+#     nie mit dem eingefrorenen Prüfstand (#1107)
 ```
 
 ### Nachzug 06.11.2026: der Spitzentag wird mitgemessen (#1039)
@@ -147,6 +150,43 @@ wieder grün ist. Werkzeuge: `scripts/faktenfrische_deckung_ticket.py`
 sind Pflichtmarker), Tests `scripts/tests/test_faktenfrische_deckung_ticket.py`
 sowie der Kalender-Sweep `BuenndelWacheSweepTest` (52 Montage des
 Folgejahrs gegen den ausgelieferten Bestand).
+
+**Nachzug 07.11.2026: Die Projektion ist eine Dauerwache (#1107).** Die
+Korrektur vom 06.11. war richtig, aber noch umgehbar: `basis` war optional,
+und ein Handlauf konnte weiterhin einen Zukunftstag einfrieren. Jetzt gilt:
+
+1. **Eine Regel, ein Aufrufer.** `projektions_ausgangspunkt()` entscheidet:
+   Stichtag in der Zukunft → Ausgangspunkt **heute**; heute oder
+   Vergangenheit → der Stichtag selbst (Nachweis, kein Hellsehen). Die CLI
+   benutzt ausschließlich diese Funktion; `messe()` ist auch ohne Angabe von
+   sich aus sicher. Der eingefrorene Vergleich bleibt möglich, muss aber
+   `basis=stichtag` heißen; ein Ausgangspunkt **nach** dem Stichtag wirft
+   (fail-closed).
+2. **Jede Ausgabe nennt ihren Ausgangspunkt.** `basis`, `projektion`
+   (Stichtag, Ausgangspunkt, `trajektorie: true|false`) und
+   `kadenz_horizont` (erster Termin mit **zukünftiger** Frist, der reißt,
+   plus Horizont-Ende; der Alt-Rückstand bleibt beim Nachholfrist-Urteil)
+   stehen im JSON.
+3. **Das Ticket entsteht nur aus dem Lauf.** `faktenfrische_deckung_ticket.py`
+   trägt die Projektion aus derselben Messung: „Der Weg des Bots ist bis
+   **D** frei“ oder „reißt zuerst am **D2** (`seite`, Frist F)“. Eine
+   Momentaufnahme von Hand kann kein Ticket mehr füllen; der Alarm öffnet,
+   aktualisiert und schließt sich weiter selbst (C14).
+
+**Arbeitsliste ist kein Befund.** Wer wissen will, ob ein Befund offen ist,
+fragt das **Ledger** (`scripts/faktenfrische_befund_ledger.py`), nicht
+`data/faktenfrische_queue.json`: mit dem Vorlauf von 14 Tagen stehen Seiten
+dort turnusmäßig wieder, sobald ihre Frist näher rückt – mit dem Grund
+„frisch geprüft vor N Tagen“ und ohne einen offenen Befund. Genau diese
+Verwechslung machte am 07.11.2026 drei Aktentests (#763, #823, #911) rot,
+ohne dass ein Sachfehler zurückkam; sie prüfen jetzt über
+`scripts/tests/faktenfrische_gleis.py`.
+
+**Vertrag:** C45 verlangt die Marker `bestand_trajektorie`,
+`projektions_ausgangspunkt` und `kadenz_horizont` – wer die Heilung löscht,
+macht den Bau rot. **Tests:** `ProjektionsAusgangspunktTest`,
+`KadenzHorizontTest`, `MessungSelbstheilungTest` (CLI und Voreinstellung mit
+eingefrorener Uhr), `ProjektionTrajektorieTest` sowie ST14 im Selbsttest.
 
 **Selbstheilung der Arbeitsliste (06.11.2026, `befund-akte-nachziehen.yml`).**
 Die committed BEFUND-AKTE ist die einzige Arbeitsliste der Redaktion – sie
