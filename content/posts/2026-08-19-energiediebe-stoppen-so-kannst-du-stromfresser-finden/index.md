@@ -32,7 +32,7 @@ quellen:
     url: "https://www.umweltbundesamt.de/umwelttipps-fuer-den-alltag/elektrogeraete/kuehlschrank"
     herausgeber: "Umweltbundesamt"
     datum: "2025-05-28"
-faktencheck: 2026-09-28
+faktencheck: 2026-11-07
 ---
 
 Du willst Energiediebe stoppen? Die Stromrechnung steigt. Muss da gleich der alte Kühlschrank raus? Nicht so schnell. Alte Geräte sind nicht immer die größten Stromfresser. Oft steckt der teure Kandidat ganz woanders: im Keller, beim [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) oder in der Spielekonsole, die rund um die Uhr im Standby läuft.
