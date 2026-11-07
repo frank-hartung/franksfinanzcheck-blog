@@ -496,3 +496,19 @@ class ReportUrsachenTests(unittest.TestCase):
         text = self._report([self.F4], lage)
         self.assertIn("an einem älteren Text erhoben", text)
         self.assertIn("Eskalation", text)
+
+
+class ToolFehlerSiegelTest(unittest.TestCase):
+    """#1098: Ausgefallene Collectoren dürfen nicht als grüne Null verschwinden."""
+
+    def test_zustand_persistiert_werkzeugfehler(self):
+        import json
+        from unittest import mock
+        ergebnis = {"modus": "live", "commit": "abc", "artikel": {}, "kandidaten": [],
+                    "tool_fehler": {"sammlung": "Collector ausgefallen"}}
+        with tempfile.TemporaryDirectory() as tmp, \
+             mock.patch.object(rs, "STATE_PATH", Path(tmp) / "state.json"), \
+             mock.patch.object(rs, "HISTORY_PATH", Path(tmp) / "history.jsonl"):
+            rs.zustand_schreiben(ergebnis)
+            state = json.loads((Path(tmp) / "state.json").read_text())
+        self.assertEqual(state["tool_fehler"], ergebnis["tool_fehler"])

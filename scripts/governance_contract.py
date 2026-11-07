@@ -497,6 +497,11 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # veröffentlichte Version. Ihr --selftest friert SSOT-Form,
           # Gate-Deckung, Ausnahmen-Protokoll und Siegel-Bindung ein.
           "release_scorecard.py",
+          # Bestands-Selbstheilung (#1098): getrennter Schreiber vor der
+          # Scorecard; nur deterministische Teilmenge, menschliche Befunde
+          # bleiben unangetastet. Bestätigung erst nach vollständigem Neubau
+          # und Nachmessung; neuer Blocker/Werkzeugfehler ⇒ Byte-Rollback.
+          "release_bestand_heiler.py",
           # Auslieferungs-Isolation (09.10.2026, Bot-Watchdog #676): Der
           # neueste Artikel lag veröffentlichungsreif im Repo und lieferte
           # HTTP 404, weil der Deploy 13× in Folge am Scorecard-Schritt

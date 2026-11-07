@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-07T02:57:21Z",
-  "modus": "kandidaten",
-  "commit": "bf7fa1bb53dfef074ca5e4d61b0f4708b505adbf",
+  "generated_at": "2026-11-07T10:47:09Z",
+  "modus": "live",
+  "commit": "4d60e220101b54aaa3df54d4afb220672212d711",
   "kapazitaet": {
     "stichtag": "2026-11-07",
     "artikel": 115,
@@ -76,6 +76,7 @@
       "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": 3
     }
   },
+  "tool_fehler": {},
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
       "sha256": "0a9c47ec2d3105d826f129e1c3311c1bc97cb74290597d4d6df9314ff4947049",
