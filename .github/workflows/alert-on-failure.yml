@@ -827,7 +827,7 @@ jobs:
                 ? [
                     '1. **Einrichtung unvollständig – ein Neustart hilft nicht.** „Voraussetzungen prüfen“ ist absichtlich rot (fail-closed): Mindestens ein Zugang oder Ziel der Sicherung fehlt, ist falsch oder abgelaufen. Bis das erledigt ist, werden Abonnenten und Einwilligungsnachweise NICHT gesichert.',
                     '2. Den **jüngsten** Lauf öffnen ([Läufe von „Offsite-Backup“](' + backupLaeufe + '), oberster Eintrag) → **Summary**: Die Checkliste E1–E8 nennt jeden offenen Punkt mit dem Link, unter dem er erledigt wird. Schritt für Schritt: ' + backupAnleitung + '.',
-                    '3. Danach Actions → „Offsite-Backup“ → „Run workflow“ (Branch `main`). Der erste grüne Lauf dort schließt diese Meldung automatisch. Derselbe Befund erscheint seit dem 02.11.2026 auch in der [„Backup-Frischwache“](' + backupFrischLaeufe + '): Sie meldet nicht mehr grün, solange nichts gesichert wird.'
+                    '3. Danach **musst du nichts mehr anstoßen** (seit 07.11.2026): Der nächste Lauf der [„Backup-Frischwache“](' + backupFrischLaeufe + ') sieht, dass noch keine Sicherung existiert, stößt „Offsite-Backup“ selbst an und misst erneut – grün wird er erst mit frischem Release. Wer nicht bis 13:00 UTC warten will: Actions → „Offsite-Backup“ → „Run workflow“ (Branch `main`). Der erste grüne Lauf schließt diese Meldung automatisch.'
                   ]
                 : runbookKlasse === 'backup-frist'
                 ? [
@@ -851,9 +851,9 @@ jobs:
                   ]
                 : runbookKlasse === 'backup-frisch'
                 ? [
-                    '1. **Operative RPO-Wache rot:** Die Konfiguration (E1–E8) kann grün sein, aber die Sicherung hat seit >52 h kein frisches Release erzeugt. RPO von 24 h ist verletzt – kein Scheduler-Problem ignorieren.',
-                    '2. In der Job-Zusammenfassung des Laufs „Backup-Frischwache“ steht, welche Familie fehlt oder wie alt sie ist (`backup-*` / `kv-backup-*`). Läuft „Offsite-Backup“ noch täglich 03:00 UTC? Scheduler-Verspätungen bis 12:03 MESZ sind belegt – ab 13:00 UTC muss dennoch ein Release da sein.',
-                    '3. Häufigste Ursachen: Scheduler-Hänger (Actions → „Offsite-Backup“ → jüngster Lauf fehlt → `Run workflow` auf `main`), still widerrufenes Token ohne Ablaufdatum (E2/E5 prüfen), Branch-Regel am Environment `backup` blockiert `main`. Details: ' + backupAnleitung + ', Abschnitte „Fehlerbilder“ und „Betriebszusagen (SLA·RPO·RTO)“. ' + backupLaeufe + ' liefert die Gegenseite.',
+                    '1. **Die Wache hat bereits gehandelt (seit 07.11.2026):** Ist das Tagesfenster verpasst (über 26 h ohne frisches Release), stößt sie „Offsite-Backup“ selbst an – genau einmal, höchstens dreimal je 24 h –, wartet begrenzt und **misst erneut**. Rot heißt deshalb: Auch nach dem eigenen Anstoß liegt kein frisches Release vor. Das ist keine Scheduler-Verspätung mehr, sondern eine Störung; ein weiterer Neustart wiederholte sie nur.',
+                    '2. In der Job-Zusammenfassung des Laufs „Backup-Frischwache“ steht, welche Familie fehlt oder wie alt sie ist (`backup-*` / `kv-backup-*`) – und was die Selbstheilung entschieden hat: „warten“ (Sicherung läuft schon), „aufgeben“ (Budget erschöpft oder Lauf-Historie nicht lesbar), „Anstoß abgelehnt“ (Recht fehlt) oder der Link auf den angestoßenen Lauf.',
+                    '3. Häufigste Ursachen: der angestoßene Lauf ist rot (die Ursache steht dann in der Meldung zu „Offsite-Backup“ – dort weiterarbeiten), dem Lauf-Token fehlt `actions: write` (Job-Rechte in `backup-frischwache.yml`), ein still widerrufenes Token ohne Ablaufdatum (E2/E5 prüfen), oder die Branch-Regel am Environment `backup` blockiert `main`. Details: ' + backupAnleitung + ', Abschnitte „Selbstheilung“, „Fehlerbilder“ und „Betriebszusagen (SLA·RPO·RTO)“. ' + backupLaeufe + ' liefert die Gegenseite.',
                     '4. Nach der Korrektur liefert der nächste grüne Lauf von „Backup-Frischwache“ den Beweis – er schließt diese Meldung automatisch. Gelb (>36 h) ist nur Frühwarnung, noch kein Ausfall.'
                   ]
                 : runbookKlasse === 'installation'

@@ -1,8 +1,9 @@
 # Anleitung: Offsite-Backup einrichten, prüfen, wiederherstellen
 
-> Vorgang WF-9E5A · Meldung #923 · Stand 01.11.2026 (Highend-Dauerheilung)
+> Vorgang WF-9E5A · Meldung #923 · Stand 07.11.2026 (Selbstheilung, WF-3150 / #1030)
 > Workflows `.github/workflows/backup-offsite.yml` + `backup-frischwache.yml` · Prüfer `scripts/backup_einrichtung.py` ·
-> Frische-Wache `scripts/backup_freshness_guard.py` · Probe `scripts/restore_drill.sh` · Export `scripts/kv_backup.py` ·
+> Frische-Wache `scripts/backup_freshness_guard.py` · **Selbstheilung `scripts/backup_selbstheilung.py`** ·
+> Probe `scripts/restore_drill.sh` · Export `scripts/kv_backup.py` ·
 > Einrichtungs-Wizard `scripts/backup_einrichten_wizard.sh`
 
 ## Kurz: Was ist zu tun?
@@ -45,9 +46,13 @@ Einrichtung bleibt eine Inhaber-Aufgabe am eigenen Rechner. Beide Wege
 enden an derselben Stelle: Der erste grüne Lauf schließt die offene
 WF-9E5A-Meldung automatisch.
 
-Danach: Actions → „Offsite-Backup“ → „Run workflow“ (Branch `main`). Grün
-heißt gesichert. Die offene Meldung schließt sich beim ersten grünen Lauf
-von selbst.
+Danach **ist kein Handbefehl mehr nötig** (seit 07.11.2026, WF-3150 / #1030):
+Der nächste Lauf der Frischwache (täglich 13:00 UTC) sieht, dass noch keine
+Sicherung existiert, stößt „Offsite-Backup“ selbst an und misst danach
+erneut – grün wird er erst mit frischem Release (Abschnitt „Selbstheilung“).
+Wer nicht bis 13:00 UTC warten will: Actions → „Offsite-Backup“ →
+„Run workflow“ (Branch `main`). Die offene Meldung schließt sich beim ersten
+grünen Lauf von selbst.
 
 **Zusätzliche Laufzeit-Schranke:** Beide Backup-Jobs und die Frische-Wache
 haben zusätzlich eine explizite Job-Bedingung auf
@@ -62,7 +67,31 @@ in `hugo.toml`), und der Worker antwortet (Newsletter-Lauf vom 13.10.2026:
 (Art. 7 Abs. 1 DSGVO), der ohne diese Einrichtung **nur** in Cloudflare
 liegt. Deshalb jetzt einrichten, vor den ersten Anmeldungen.
 
-### Live-Status 03.11.2026 – WF-9E5A #923 (aktuell)
+### Live-Status 07.11.2026 – WF-3150 / #1030 (aktuell)
+
+Gegen die echte GitHub-API geprüft am 07.11.2026 (Vormittag UTC):
+
+| Prüfung | Ergebnis |
+|---|---|
+| Frischwache `42282938395` (06.11., 20:48 UTC) | **failure** im Schritt „Voraussetzungen prüfen“ – gewollt (fail-closed), Einrichtung fehlt weiter |
+| Offsite-Lauf `42359904795` (07.11., 09:31 UTC) | **failure**, derselbe Schritt – 12 Läufe in Folge (22.10.–07.11.) mit identischer Ursache |
+| Environment `backup` | `protection_rules: []`, `deployment_branch_policy: null` → **E8 offen** (Annotation im Lauf) |
+| Repository `frank-hartung/franksfinanzcheck-backup` | **404** – existiert nicht (E1/E2) |
+| Variablen/Secrets (Agenten-Token) | `403 Resource not accessible by integration` – nichts erfunden, nichts gesetzt |
+| Lauf-Annotationen der Frischwache | E1, E2, E3, E5, E6 fehlen · E4 vorhanden · E8 Hinweis · **kein** Fehlalarm über nicht gesetzte Namen |
+
+**Die Lage ist unverändert die eines Einrichtungsbefunds, nicht eines Code-
+fehlers** – und genau deshalb war die bisherige Wache zu wenig: Sie konnte
+den Ausfall nur MELDEN. Seit dem 07.11.2026 heilt der Lauf den operativen
+Teil selbst (nächster Abschnitt). Was der Code **nicht** kann und nicht
+können soll: ein privates Repository anlegen, Secrets erzeugen oder ein
+Environment absichern – das ist und bleibt eine Inhaber-Aufgabe
+(`403 Resource not accessible by integration` ist die Grenze, nicht ein Bug).
+
+Einzelheiten, Messungen und Verträge:
+`WARTUNG-BACKUP-WF-3150-1030-SELBSTHEILUNG-HIGHEND-2026-11-07.md`.
+
+### Live-Status 03.11.2026 – WF-9E5A #923 (Archiv)
 
 Gegen die echte GitHub-API geprüft am 03.11.2026 (Vormittag UTC):
 
@@ -182,13 +211,13 @@ Marken-Oberflächen-Wache vom 20.09.2026:
 
 | Zusage | Wert | Beleg |
 |---|---|---|
-| **RPO** (max. Datenverlust) | 24 h + Scheduler-Toleranz (52 h) | Täglich 03:00 UTC; GitHub-Scheduler belegt 09:53–12:03 MESZ; **automatisierte** Frischwache `backup-frischwache.yml` (13:00 UTC) rot ab 52 h, gelb ab 36 h |
+| **RPO** (max. Datenverlust) | 24 h + Scheduler-Toleranz (52 h) | Täglich 03:00 UTC; GitHub-Scheduler belegt 09:53–12:03 MESZ; **automatisierte** Frischwache `backup-frischwache.yml` (13:00 UTC) rot ab 52 h, gelb ab 36 h. Seit 07.11.2026 **heilt sie selbst**: ab 26 h stößt sie die Sicherung an (Budget 3/24 h) und misst erneut |
 | **RTO** (Wiederherstellung) | < 30 Min. für KV, < 60 Min. für Repo | Probe `restore_drill.sh` in < 5 Min.; Ernstfall-Anleitung unten mit `gh release download` + `openssl` + `wrangler kv bulk put --remote` |
 | **Aufbewahrung** | Repo 14, KV 35 Releases (Entwürfe) | `backup-offsite.yml` KEEP=14 / 35; älteste darüber automatische Löschung |
 | **Verschlüsselung** | AES-256-CBC/PBKDF2, Bundle 200k, KV 600k | Workflow + Prüfer `backup_einrichtung.py` E3 (≥ 20 Zeichen, empfohlen 32+) |
 | **Prüfung** | 8 Live-Punkte E1–E8 je Lauf, 3 Frist-Stufen, 18 Fallgruppen Selbsttest | `backup_einrichtung.py --selftest`, `test_backup_einrichtung` (47 Tests, inkl. Wizard- und Rückweg-Vertrag) |
 | **Ablauf-Warnung** | 30 Tage gelb, 14 Tage rot (nach Sicherung) | `BACKUP_FRIST_TAGE` → letzter Schritt `Fristwarnung` + Alerting `backup-frist` |
-| **Operative Wache** | Täglich 13:00 UTC, beide Familien `backup-*` + `kv-backup-*` | `backup_freshness_guard.py` (13 Fälle, inkl. Eingabe-Auflösung) + Workflow `backup-frischwache.yml` → Alerting `backup-frisch` |
+| **Operative Wache** | Täglich 13:00 UTC, beide Familien `backup-*` + `kv-backup-*`, inkl. Inhalts-Nachweis (Assets) | `backup_freshness_guard.py` (15 Fälle) + `backup_selbstheilung.py` (18 Fälle, Selbstheilung mit Budget) + Workflow `backup-frischwache.yml` → Alerting `backup-frisch` |
 
 **Was gesichert wird – vollständig:**
 
@@ -222,7 +251,7 @@ Marken-Oberflächen-Wache vom 20.09.2026:
 ```bash
 # Lokal oder in CI (braucht Lese-Token auf Backup-Repo):
 python3 scripts/backup_freshness_guard.py --repo frank-hartung/franksfinanzcheck-backup
-python3 scripts/backup_freshness_guard.py --selftest   # 12 Fälle offline
+python3 scripts/backup_freshness_guard.py --selftest   # 15 Fälle offline (inkl. Hülle ohne Inhalt)
 npm run backup:frische   # Kurzform
 ```
 
@@ -236,6 +265,48 @@ Die Frische-Wache ergänzt E1–E8: Sie misst, ob die Sicherung *jüngst* wirkli
 lief (täglich erwartet, 52 h Toleranz). Ein grünes `backup_einrichtung` ohne
 frisches Backup ist eine Konfigurations-, aber keine Betriebsgarantie – deshalb
 laufen beide Wachen unabhängig.
+
+### Selbstheilung – die Wache stößt die Sicherung selbst an (seit 07.11.2026)
+
+Eine Wache, die nur meldet, ist eine Warteschlange. Die Frischwache schließt
+den Kreis jetzt selbst:
+
+1. **Messen** (`backup_freshness_guard.py`): beide Release-Familien, Entwürfe
+   eingeschlossen. Ein Release **ohne Datei** (0 Assets) gilt nicht mehr als
+   Sicherung – eine Hülle ist keine Sicherung.
+2. **Entscheiden** (`backup_selbstheilung.py`, reine Funktion): Es wird nur
+   angestoßen, wenn das **Tagesfenster verpasst** ist (`> 26 h`), und nur dann,
+   wenn keine Sicherung läuft (kein `queued`/`in_progress`), der Mindestabstand
+   von 15 Minuten zum letzten Lauf eingehalten ist, das Budget von **3
+   Anstößen je 24 h** nicht erschöpft ist und die Lauf-Historie **lesbar** war.
+   Ist die Historie nicht lesbar, wird **nicht** angestoßen (ein blinder
+   Anstoß könnte doppelt sichern).
+3. **Anstoßen**: genau ein `workflow_dispatch` von `backup-offsite.yml` auf
+   `main` – der geprüfte Weg, keine zweite Sicherungslogik.
+4. **Erneut messen**: Grün gibt es nur mit frischem Release. Ein angestoßener
+   Lauf ist kein Nachweis; ein gescheiterter Lauf bleibt rot, mit Link.
+
+| Grenze | Wert | Warum |
+|---|---|---|
+| Heilung ab | **26 h** | Täglicher Lauf 03:00 UTC, Messung 13:00 UTC: gesund ≤ 17 h (10 h + belegte Scheduler-Verspätung), ausgefallen ≥ 34 h. 26 h heilt den Ausfall **am selben Tag** statt erst bei der 52-h-Meldung |
+| Meldung (gelb/rot) | **36 h / 52 h** | unverändert die SLA-Grenzen aus der Tabelle oben |
+| Mindestabstand | **15 Min.** | kein zweiter Anstoß, während der letzte Lauf noch frisch ist |
+| Budget | **3 Anstöße / 24 h** | kein Dauerfeuer bei einem echten Fehler; danach bleibt es Rot **mit Grund** |
+| Rechte | `actions: write` (Lauf-Token) | nur für `POST …/dispatches`; GitHub kennt kein feineres Recht. Messung und Selbsttests laufen ohne |
+
+**Lokal (ändert nichts, wenn `--probe`):**
+
+```bash
+python3 scripts/backup_selbstheilung.py --probe        # messen + entscheiden, kein Anstoß
+python3 scripts/backup_selbstheilung.py --heilen       # mit Anstoß (braucht actions: write)
+python3 scripts/backup_selbstheilung.py --selftest     # 18 Fallgruppen, offline
+npm run backup:selbstheilung                           # Kurzform der Probe
+```
+
+**Was die Selbstheilung ausdrücklich NICHT tut:** Sie legt kein Repository an,
+erzeugt keine Secrets, ändert keine Environment-Regel und schaltet keinen
+Schutz ab. Fehlt die Einrichtung (E1–E8), bleibt der Lauf rot im Schritt
+„Voraussetzungen prüfen“ – mit Einrichtungs-Rat, nicht mit Frische-Rat.
 
 ## Einrichtung Schritt für Schritt
 
