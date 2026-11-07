@@ -39,7 +39,7 @@ name: Release-Scorecard (Produktionswahrheit)
 
 on:
   schedule:
-    - cron: "7 5 * * *"    # täglich 07:07 MESZ – nach den Nacht-Gates, vor blog-health-daily
+    - cron: "7 5 * * *"    # 05:07 UTC (07:07 MESZ / 06:07 MEZ) – nach den Nacht-Gates
   workflow_dispatch: {}
 
 permissions:
@@ -64,6 +64,10 @@ jobs:
       - name: Repository auschecken
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
+      - name: Laufbeginn festhalten (Stale-State-Schutz)
+        id: laufbeginn
+        run: echo "zeit=$(date -u '+%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_OUTPUT"
+
       - name: Hugo installieren (Extended, verifiziert, mehrquellig)
         uses: ./.github/actions/install-hugo
         with:
@@ -77,6 +81,11 @@ jobs:
       - name: Scorecard-Selbsttest
         run: python3 scripts/release_scorecard.py --selftest
 
+      - name: Bestands-Selbstheilung – Vertrag und Regression (#1098)
+        run: |
+          python3 scripts/release_bestand_heiler.py --selftest
+          python3 -m unittest scripts.tests.test_release_bestand_heiler
+
       # Render-Beweise (Affiliate-Integrität, Offenlegung, SEO-Audit,
       # Seiten-Existenz) brauchen den Build. Ohne ihn wäre die Scorecard
       # ehrlich „nicht beweisbar“ – wir bauen also lieber.
@@ -86,6 +95,23 @@ jobs:
           args: "--minify --destination public"
           label: "Scorecard-Beweisbasis"
 
+      # #1098: Heilung ist ein eigener SCHREIBSCHRITT vor der Messung.
+      # Die Scorecard bleibt Beweislauf (C15). Erst deterministische Heiler,
+      # dann neuer Build, dann dieselbe harte Scorecard. Ein Versuch wird
+      # nur bestätigt, wenn kein neuer Blocker entsteht und ein Ziel-Check
+      # verschwindet; sonst stellt der Bestätiger die Original-Bytes wieder
+      # her. F4/YMYL/Freigaben bleiben ausdrücklich unberührt.
+      - name: Bestands-Selbstheilung versuchen (begrenzt, mit Rollback)
+        id: heilung
+        run: python3 scripts/release_bestand_heiler.py --apply
+
+      - name: Geheilte Beweisbasis neu bauen
+        if: steps.heilung.outputs.geaendert == 'true'
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify --destination public --cleanDestinationDir"
+          label: "Scorecard nach Bestands-Selbstheilung"
+
       # Messung: --streng macht Bestands-Rot zum Exit 1 (Issue-Entscheidung).
       # Werkzeugfehler bleiben Exit 2 (fail-closed). Weiterlaufen mit
       # continue-on-error, damit Report, Siegel und Ticket IMMER geschrieben
@@ -93,18 +119,65 @@ jobs:
       - name: Release-Scorecard über den Live-Bestand
         id: scorecard
         continue-on-error: true
-        run: python3 scripts/release_scorecard.py --live --streng
+        run: python3 scripts/release_scorecard.py --live --streng --commit-sha "$(git rev-parse HEAD)"
+
+      - name: Heilung gegen die vollständige Nachmessung bestätigen
+        id: bestaetigung
+        if: always() && steps.heilung.outputs.geaendert == 'true'
+        continue-on-error: true
+        run: python3 scripts/release_bestand_heiler.py --bestaetigen
+
+      - name: Bei Abbruch oder verworfener Messung Original wiederherstellen
+        id: rollback
+        # Auch ein harter Prozessabbruch vor dem GitHub-Output muss den
+        # Cleanup erreichen. Das Journal ist die Wahrheit, nicht der Output.
+        if: always() && steps.heilung.outcome != 'skipped'
+        run: |
+          STATUS="$(python3 scripts/release_bestand_heiler.py --journal-status)"
+          if [ "$STATUS" = "schreiben" ] || [ "$STATUS" = "geschrieben" ]; then
+            python3 scripts/release_bestand_heiler.py --zurueckrollen
+            if ! git diff --quiet -- content/posts; then
+              echo "::error::Original-Wiederherstellung nicht vollständig – kein Content-Commit."
+              exit 1
+            fi
+            echo "zurueckgerollt=true" >> "$GITHUB_OUTPUT"
+          else
+            # Bestätigte Heilung ist kein Cleanup-Fall. Ihr Diff ist der
+            # bewiesene Nutzdeltasatz und darf nicht als Fehler gelten.
+            echo "zurueckgerollt=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Zurückgerollten Bestand erneut beweisen
+        if: always() && (steps.bestaetigung.outputs.zurueckgerollt == 'true' || steps.rollback.outputs.zurueckgerollt == 'true')
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify --destination public --cleanDestinationDir"
+          label: "Scorecard nach Rollback"
+
+      - name: Scorecard nach Rollback erneut messen
+        id: scorecard_rollback
+        if: always() && (steps.bestaetigung.outputs.zurueckgerollt == 'true' || steps.rollback.outputs.zurueckgerollt == 'true')
+        continue-on-error: true
+        run: python3 scripts/release_scorecard.py --live --streng --commit-sha "$(git rev-parse HEAD)"
 
       # ------------------------------------------------------------ ---
       # Issue-Politik (C4): genau ein Ticket, update statt neu, Grün
       # schließt. Label vorher anlegen (C12, HTTP-422-Falle #209).
       # ----------------------------------------------------------------
       - name: Scorecard-Ticket pflegen (ein Ticket, mit Schließpfad)
+        id: ticket
         if: always()
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
-          ERGEBNIS: ${{ steps.scorecard.outcome }}
+          # Ein gescheiterter Heilungs-/Bestätigungs-/Cleanup-Schritt ist
+          # niemals ein grüner Inhaltsbefund – auch nicht, wenn eine frühere
+          # Messung zufällig success war. 'skipped' erzeugt im Ticket-Generator
+          # ausdrücklich „Messung nicht beweisbar“ statt Stale-State-Rot.
+          ERGEBNIS: ${{ (steps.heilung.outcome != 'success' || steps.bestaetigung.outcome == 'failure' || steps.rollback.outcome == 'failure') && 'skipped' || ((steps.bestaetigung.outputs.zurueckgerollt == 'true' || steps.rollback.outputs.zurueckgerollt == 'true') && steps.scorecard_rollback.outcome || steps.scorecard.outcome) }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          BASIS_COMMIT: ${{ github.sha }}
+          LAUFBEGINN: ${{ steps.laufbeginn.outputs.zeit }}
         run: |
           set -euo pipefail
           gh label create "$LABEL" --color "b60205" \
@@ -120,7 +193,9 @@ jobs:
           # Ursache. Ein Ticket, das die Messung falsch deutet, ist kein
           # Schließpfad (#912). Der Marker bleibt im Skript (C4).
           BODY="$(python3 scripts/scorecard_ticket.py --state "$STATE" \
-                    --ergebnis "$ERGEBNIS")"
+                    --ergebnis "$ERGEBNIS" --erwarteter-commit "$BASIS_COMMIT" \
+                    --frisch-ab "$LAUFBEGINN")"
+          URSACHE="$(python3 scripts/scorecard_ticket.py --state "$STATE" --ergebnis "$ERGEBNIS" --ursache)"
 
           if [ "$ERGEBNIS" = "success" ]; then
             if [ -n "$NUM" ]; then
@@ -142,12 +217,21 @@ jobs:
           Lauf: $RUN_URL" >/dev/null
               echo "Ticket erstellt."
             else
-              gh issue comment "$NUM" --body "**$(date -u '+%Y-%m-%d %H:%M') UTC** – weiterhin rot.
-
-          $BODY
+              # #1098: Der Ticket-Kopf ist die heutige Wahrheit, nicht die
+              # vom Eröffnungstag. Ursache/Scope/Frist werden aktualisiert;
+              # der Lauf bleibt als Kommentar nachvollziehbar.
+              ALT="$(gh issue view "$NUM" --json body --jq '.body // ""')"
+              gh issue edit "$NUM" --body "$BODY
 
           Lauf: $RUN_URL" >/dev/null
-              echo "Ticket #$NUM kommentiert."
+              # Chronischer Befund: Kopf immer frisch, Kommentar nur bei
+              # Ursachenwechsel (C14: kein täglicher Kommentar-Lärm).
+              if ! printf '%s' "$ALT" | grep -Fq "release-scorecard-ursache: $URSACHE"; then
+                gh issue comment "$NUM" --body "**$(date -u '+%Y-%m-%d %H:%M') UTC** – Ursache/Prüfstand geändert; der Ticket-Kopf nennt die aktuelle Nachmessung.
+
+          Lauf: $RUN_URL" >/dev/null
+              fi
+              echo "Ticket #$NUM aktualisiert."
             fi
           fi
 
@@ -159,18 +243,34 @@ jobs:
       # Deploy-Gate) – dieser Commit löst keinen Folge-Deploy aus.
       # ------------------------------------------------------------
       - name: Scorecard-Artefakte committen (immer)
+        id: commit
         if: always()
+        continue-on-error: true
+        env:
+          BESTAETIGT: ${{ steps.bestaetigung.outcome }}
+          HEILUNG: ${{ steps.heilung.outcome }}
+          ROLLBACK: ${{ steps.rollback.outcome }}
         run: |
           set -Eeuo pipefail
           git config user.name "Release-Scorecard-Bot"
           git config user.email "release-scorecard-bot@users.noreply.github.com"
           git add -- "$REPORT" data/release_scorecard_state.json data/release_scorecard_history.jsonl
+          # Content nur nach bestätigter Nachmessung committen. Ein bloßer
+          # Heilungsversuch oder Rollback darf keine Textänderung nach main bringen.
+          if [ "${BESTAETIGT:-}" = "success" ] && [ "${HEILUNG:-}" = "success" ] && [ "${ROLLBACK:-}" != "failure" ]; then
+            git add -- content/posts
+          fi
+          if [ -f RELEASE-BESTAND-HEILUNG.md ]; then
+            git add -- RELEASE-BESTAND-HEILUNG.md data/release_bestand_heilung_state.json data/audit
+          fi
           if git diff --cached --quiet; then
             echo "Scorecard unverändert."
             exit 0
           fi
           git commit -m "chore(scorecard): Release-Scorecard aktualisiert + Live-Bestand versiegelt [skip ci]"
-          scripts/git_sync.sh --push-only || echo "::warning::Push fehlgeschlagen – Report im Artefakt gesichert."
+          # Verlust einer bestätigten Heilung ist kein Warnfall. Der rote
+          # Schritt löst den Fehlerkanal aus; Artefakte bleiben erhalten.
+          scripts/git_sync.sh --push-only
 
       - name: Report als Artefakt
         if: always()
@@ -180,11 +280,13 @@ jobs:
           path: |
             RELEASE-SCORECARD.md
             data/release_scorecard_state.json
+            RELEASE-BESTAND-HEILUNG.md
+            data/release_bestand_heilung_state.json
           retention-days: 30
 
       # Roter Lauf = roter Job (nachdem Report und Ticket gesichert sind).
       - name: Lauf-Ergebnis durchreichen
-        if: steps.scorecard.outcome == 'failure'
+        if: steps.scorecard.outcome == 'failure' || steps.scorecard_rollback.outcome == 'failure' || steps.heilung.outcome == 'failure' || steps.bestaetigung.outcome == 'failure' || steps.rollback.outcome == 'failure' || steps.ticket.outcome == 'failure' || steps.commit.outcome == 'failure'
         run: |
           echo "::error::Release-Scorecard rot – Details im Ticket, in RELEASE-SCORECARD.md und im Schritt-Log."
           exit 1

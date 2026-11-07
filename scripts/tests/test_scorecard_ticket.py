@@ -14,6 +14,7 @@ Artikel. Diese Tests frieren ein:
 
 Lauf: python3 -m unittest scripts.tests.test_scorecard_ticket
 """
+import copy
 import json
 import sys
 import unittest
@@ -147,6 +148,47 @@ class WorkflowVertragTests(unittest.TestCase):
         self.assertIn("faktenfrische_befund_akte.py --wache", text)
         self.assertIn("BEFUND-AKTE.md", text)
         self.assertIn("gh issue close", text)
+
+
+
+class StaleStateSchutzTests(unittest.TestCase):
+    """#1098: Pipeline-Ausfall ist kein inhaltlicher Bestandbefund."""
+
+    def test_uebersprungene_messung_liest_altes_siegel_nicht_als_rot(self):
+        state = {"generated_at": "2026-01-01T00:00:00Z", "artikel": {
+            "a": {"urteil": "blockiert", "checks": [{"check": "T6", "wirkung": "blockiert"}]}}}
+        body = ticket.ticket_body(state, ergebnis="skipped")
+        self.assertIn("Messung nicht beweisbar", body)
+        self.assertIn("historisch", body)
+        self.assertNotIn("| `a` |", body)
+
+    def test_fremder_oder_alter_commit_ist_kein_aktueller_befund(self):
+        state = {"commit": "alt", "generated_at": "2026-11-07T10:00:00Z",
+                 "artikel": {"a": {"urteil": "blockiert", "checks": []}}}
+        body = ticket.ticket_body(state, erwarteter_commit="neu",
+                                  frisch_ab="2026-11-07T09:00:00Z")
+        self.assertIn("Messung nicht beweisbar", body)
+        self.assertIn("gehört nicht zu diesem Lauf", body)
+        body2 = ticket.ticket_body(state, erwarteter_commit="alt",
+                                   frisch_ab="2026-11-07T11:00:00Z")
+        self.assertIn("Messung nicht beweisbar", body2)
+
+    def test_ursachen_fingerabdruck_ist_zeitunabhaengig_und_aenderungssensitiv(self):
+        a = {"generated_at": "gestern", "artikel": {
+            "x": {"urteil": "blockiert", "checks": [{"check": "F4-fachbefund", "wirkung": "blockiert"}]}}}
+        b = copy.deepcopy(a); b["generated_at"] = "heute"
+        self.assertEqual(ticket.ursachen_fingerabdruck(a), ticket.ursachen_fingerabdruck(b))
+        b["artikel"]["x"]["checks"][0]["check"] = "T6-textverstaendnis"
+        self.assertNotEqual(ticket.ursachen_fingerabdruck(a), ticket.ursachen_fingerabdruck(b))
+        self.assertNotEqual(ticket.ursachen_fingerabdruck(a, "failure"),
+                            ticket.ursachen_fingerabdruck(a, "skipped"))
+
+    def test_werkzeugfehler_im_siegel_bleibt_sichtbar(self):
+        state = {"artikel": {}, "tool_fehler": {"sammlung": "ausgefallen"}}
+        body = ticket.ticket_body(state, ergebnis="failure")
+        self.assertIn("Messung nicht beweisbar", body)
+        self.assertIn("sammlung", body)
+        self.assertIn("ausgefallen", body)
 
 
 if __name__ == "__main__":
