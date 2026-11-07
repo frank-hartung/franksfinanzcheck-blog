@@ -297,5 +297,66 @@ Inhaber-Einrichtung aus.
 | GitHub-API-Störung bei der Historie | kein Anstoß | fail-closed (kein blinder Anstoß), Lauf rot mit Grund |
 | Selbstheilung als „Reparatur“ missverstanden | sie kann keine Secrets erzeugen | Grenze im Code, im Bericht und in der Anleitung ausdrücklich benannt |
 
+---
+
+## 10 · Fremdbefund: `regression` ist auf `main` rot — nicht die Wache
+
+Der PR #1115 war am 07.11. ab 13:05 UTC **nicht** vollständig grün. Rot waren
+genau zwei Schritte des `regression`-Jobs (Run
+[42374748169](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/42374748169),
+Job 128409942661): „Code-Regression – Suite und Selbsttests“ und „Uhr-Probe“.
+Alles, was diese Änderung anfasst (`gate`, CodeQL, Playwright, Workflow-Gate),
+war grün.
+
+**Nachweis, dass es nicht an dieser Änderung liegt:**
+
+| Probe | Ergebnis |
+|---|---|
+| Volle Suite auf dem Zweigstand `eb1427c` (Basis `4d60e22`) | `Ran 5453 tests … OK (skipped=22)` |
+| Volle Suite auf `main` `688812d` (eigener Worktree, `/tmp/mainwt`) | 2 × `FAIL` |
+| Die beiden Module isoliert auf `main` `e103bc3` — dem Stand, gegen den CI gemerged hat | `FAILED (failures=2)` |
+| Dieselben zwei Module auf `eb1427c` | `OK` |
+
+Die beiden roten Tests:
+
+- `test_faktenfrische_763.Faktenfrische763MetaTests.test_faktenfrische_queue_haelt_befunde_geschlossen`
+- `test_faktenfrische_823.Faktenfrische823MetaTests.test_faktenfrische_queue_haelt_befunde_geschlossen`
+
+Beide lesen `data/faktenfrische_queue.json` und verbieten, dass die dort
+`offen` geführten Einträge die bereits geschlossenen Slugs
+`2026-10-14-heizperiode-…` und `2026-10-15-saison-update-…` enthalten.
+
+**Ursache:** Die Datei hat sich auf `main` zwischen `4d60e22` und `e103bc3` um
+748 Zeilen verändert (Writer-Commit `eb1c25c`, „chore(scorecard): …
+Live-Bestand versiegelt“). `offen` führt seither **24** Einträge, darunter die
+beiden Artikel mit `faellig: false` und dem Grund „frisch geprüft vor 23 Tagen
+(Intervall 30 Tage)“ — also Artikel, die die Queue selbst als *nicht fällig*
+führt. Ein Eintrag, der „offen“ heißt und gleichzeitig „frisch geprüft,
+Frist 2026-11-14“ sagt, ist ein Widerspruch in derselben Zeile.
+
+Damit stehen zwei Lesarten offen, und **beide gehören der Sitzung, die die
+Queue schreibt** — nicht dieser hier:
+
+1. **Writer zu weit:** `offen` sollte nur fällige/befundbehaftete Artikel
+   führen; dann muss die Erzeugung filtern.
+2. **Wächter zu streng:** `offen` meint inzwischen „alle Artikel mit Vorlauf“;
+   dann muss der Test auf `faellig` oder auf vorhandene Befunde einschränken.
+
+Diese Sitzung hat die Queue **nicht** angefasst. Ein Eintrag aus `offen` zu
+löschen, nur damit `regression` grün wird, wäre genau das Schein-Grün, das
+diese Akte an anderer Stelle ausschließt — und `data/` ist versionierter
+Beweisbestand (history_guard H6), kein Kosmetikfeld.
+
+**Gegenprobe gegen „nur mein Zweig“:** Der zeitgleiche Lauf der fremden
+Sitzung `arena/923586ec-…` (Run 42374807863) ist mit demselben Job rot — die
+Wache ist nicht zweigspezifisch. Und der `regression`-Job dieses Zweigs war um
+10:06 UTC (Run 42362500106, `7d0a712`) noch grün: rot wurde er, als `main`
+weiterlief, nicht als dieser Zweig sich änderte.
+
+**Folge für #1030:** Keine. Die Frischwache, ihre Selbstheilung, die
+Vertragstests und das Workflow-Gate sind unabhängig von diesem Befund grün;
+die Backend-Lücke E1–E8 bleibt der einzige offene Punkt. PR #1115 kann erst
+grün werden, wenn `main` Queue und Wächter wieder in Übereinstimmung bringt.
+
 — *Ende der Akte. Nichts an dieser Änderung schaltet einen Schutz ab; nichts
 davon behauptet eine Sicherung, die nicht existiert.*
