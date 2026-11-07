@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-07T11:41:59Z",
-  "modus": "live",
-  "commit": "4e613017fc1cb7d7e8c86114e4ab2d9f4211984a",
+  "generated_at": "2026-11-07T12:07:19Z",
+  "modus": "kandidaten",
+  "commit": "c4989e3e720c1dc0a336df29079bb437ca90446c",
   "kapazitaet": {
     "stichtag": "2026-11-07",
     "artikel": 115,
@@ -362,7 +362,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-22",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -434,7 +434,7 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "dbbf33ed3fd409fa432695800675c561162e7e1312cb11b27ae7ccf0134b2e92",
+      "sha256": "f541df65178959971f2cdf66376ff0a8dea187b089f62a428200315a339a7889",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -448,7 +448,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
@@ -563,7 +563,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-07",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
