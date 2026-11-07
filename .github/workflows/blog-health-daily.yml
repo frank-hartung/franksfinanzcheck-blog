@@ -150,6 +150,17 @@ jobs:
       # aber NICHT verschluckt, sondern direkt unterhalb als ein kanonisches
       # Issue mit vollem Beleg synchronisiert. Exit >= 2 bedeutet dagegen:
       # Selbsttest/Sabotage-Schutz defekt -> hart stoppen, nichts committen.
+      # STRUKTUR-SELBSTHEILUNG (#1099): Generator-Geruest (generische
+      # Fehler-Ueberschrift + Fehler-Tabellenkopf) kann allein die Audit-
+      # Schwelle reissen. Der Heiler ersetzt NUR diese registrierten
+      # Strukturzeilen deterministisch aus einem audit-sicheren Pool -
+      # echte Prosa-Dopplung heilt er nie, Live nur im Audit-Issue-Pfad
+      # von Hand mit --auch-live. Reihenfolge: erst heilen, dann misst
+      # das Audit darunter den geheilten Bestand und der Issue-Lifecycle
+      # schliesst #1099 beim naechsten sauberen Lauf von selbst.
+      - run: python3 scripts/einzigartigkeit_struktur_heiler.py --selftest
+      - run: python3 scripts/einzigartigkeit_struktur_heiler.py --fix || echo "⚠ Struktur-Heiler – Restfunde im Log (echte Dopplung gehoert in die Redaktion)"
+
       - name: Einzigartigkeits-Audit (Bestand, täglich)
         id: uniqueness
         continue-on-error: true

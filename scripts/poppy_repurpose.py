@@ -105,7 +105,7 @@ STRUKTUR (exakt so, mit ## -Überschriften):
 - Einstieg (1 Absatz: konkrete Alltagssituation oder Leitfrage, ohne Überschrift)
 - 4 bis 6 thematische Kapitel mit ## -Überschriften, darin mind. 1 Markdown-Tabelle \
 und mind. 1 hervorgehobenes Rechenbeispiel (> **Rechenbeispiel:** …)
-- Kapitel „Häufige Fehler und wie du sie vermeidest“
+- Kapitel „Häufige Fehler … und wie du sie vermeidest“ – die Überschrift MUSS das Thema nennen, niemals generisch allein; auch der Tabellenkopf ist themenspezifisch zu formulieren (nicht „Fehler | Warum er teuer wird | Wie du ihn vermeidest“) – das generische Gerüst erzeugt sonst Einzigartigkeits-Befunde (#1099)
 - Kapitel „FAQ – die wichtigsten Fragen kurz beantwortet“ mit 5 Fragen (### )
 - Schlussabsatz mit konkretem nächsten Schritt (keine Überschrift)
 
@@ -172,9 +172,9 @@ gekennzeichneten Annahmen.)
 |---|---|---|
 | TODO | TODO | TODO |
 
-## Häufige Fehler und wie du sie vermeidest
+## Häufige Fehler rund um das Thema – und wie du sie vermeidest
 
-TODO(KI-REDAKTION: drei typische Fehler aus der Quelle ableiten.)
+TODO(KI-REDAKTION: drei typische Fehler aus der Quelle ableiten; Überschrift und Tabellenkopf vor dem Speichern themenspezifisch ersetzen – niemals das generische Gerüst stehen lassen, #1099.)
 
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 

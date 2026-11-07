@@ -71,11 +71,11 @@ Der Rückflug ist ein weiterer Hebel für den Preis. Viele Menschen wollen am So
 
 Achten Sie auch auf die Uhrzeit beim Fliegen. Flüge am frühen Morgen sind oft sehr günstig. Auch späte Flüge in der Nacht kosten weniger Geld. Die meisten Reisenden wollen zu bequemen Zeiten starten. Wenn Sie hier flexibel sind, winkt ein großer Preisvorteil. Nehmen Sie den ersten Flug um sechs Uhr morgens. So haben Sie auch mehr vom ersten Urlaubstag.
 
-## Häufige Fehler und wie du sie vermeidest
+## Diese Fehler kosten dich unnötig Geld – so vermeidest du sie
 
 Viele Urlauber machen bei der Buchung die gleichen Fehler. Diese Fehler kosten unnötig viel Geld. Hier ist eine Übersicht der häufigsten Stolperfallen.
 
-| Fehler | Warum er teuer wird | Wie du ihn vermeidest |
+| Stolperfalle | Was sie dich kostet | So gehst du ihr aus dem Weg |
 |--------|---------------------|-----------------------|
 | Nur Basispreis sehen | Extras bleiben unsichtbar | Gesamtpreis mit Gebühren prüfen |
 | Keine Alerts nutzen | Schnäppchen werden verpasst | Alerts bei CHECK24 aktivieren |
