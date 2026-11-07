@@ -2,7 +2,7 @@
 title: "Energiediebe stoppen: So kannst du Stromfresser finden"
 description: "Energiediebe stoppen: Stromfresser finden statt raten. Mit Messplan, Kostenformel und Amortisationscheck senkst du unnötigen Verbrauch gezielt."
 date: 2026-08-19T08:35:12Z
-lastmod: 2026-11-04
+lastmod: 2026-11-07
 draft: false
 tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
@@ -13,17 +13,17 @@ cover:
   image: "images/covers/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.jpg"
   alt: "Energiediebe stoppen: So kannst du Stromfresser finden"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Stromfresser findest du am zuverlässigsten mit einem Energiekostenmessgerät. Miss Kühlgeräte mindestens 24 Stunden und Geräte mit wechselnden Programmen über mehrere vollständige Nutzungen. Rechne dann Jahresverbrauch mal persönlichem Strompreis. Erst wenn die jährliche Ersparnis den Kaufpreis in sinnvoller Zeit ausgleicht, lohnt ein Austausch."
+kurzantwort: "Stromfresser findest du am zuverlässigsten mit einem Energiekostenmessgerät. Miss Kühlgeräte sieben Tage lang und Geräte mit wechselnden Programmen über mehrere vollständige Nutzungen. Rechne dann Jahresverbrauch mal persönlichem Strompreis. Erst wenn die jährliche Ersparnis den Kaufpreis in sinnvoller Zeit ausgleicht, lohnt ein Austausch."
 social_posted: true
 keywords: ["Energiediebe stoppen", "Stromfresser finden", "Strom sparen Haushalt", "Standby Stromfresser", "Stromkosten senken"]
 pin_title: "Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe"
-pin_description: "*Werbung | Welche Geräte treiben deine Stromrechnung wirklich in die Höhe? Wir zeigen die 5 größten Stromfresser – inklusive Euro-Beträgen pro Jahr und Sofort-Tipps gegen Standby-Kosten. Jetzt checken und bis zu 300 € im Jahr sparen."
+pin_description: "*Werbung | Welche Geräte treiben deine Stromrechnung wirklich in die Höhe? Wir zeigen die 5 größten Stromfresser – inklusive Euro-Beträgen pro Jahr und Sofort-Tipps gegen Standby-Kosten. Jetzt messen statt schätzen und nur tauschen, was sich wirklich rechnet."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
-  - titel: "BDEW-Strompreisanalyse Herbst 2026: 37,3 ct/kWh im Durchschnitt"
+  - titel: "BDEW-Strompreisanalyse Herbst 2026: 37,3 ct/kWh für Haushalte"
     url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
     herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
-    datum: "2026-08-21"
+    datum: "2026-10-28"
   - titel: "Strom sparen im Haushalt: Einfache Tipps"
     url: "https://www.verbraucherzentrale.de/wissen/energie/strom-sparen/strom-sparen-im-haushalt-einfache-tipps-10734"
     herausgeber: "Verbraucherzentrale"
@@ -32,6 +32,14 @@ quellen:
     url: "https://www.umweltbundesamt.de/umwelttipps-fuer-den-alltag/elektrogeraete/kuehlschrank"
     herausgeber: "Umweltbundesamt"
     datum: "2025-05-28"
+  - titel: "So finden Sie den passenden Kühlschrank"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/strom-sparen/so-finden-sie-den-passenden-kuehlschrank-10573"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-09-21"
+  - titel: "Messstellenbetrieb: Rechte der Anschlussnehmer und Anschlussnutzer"
+    url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/Metering/artikel.html"
+    herausgeber: "Bundesnetzagentur"
+    datum: "2026-11-07"
 faktencheck: 2026-11-07
 ---
 
@@ -69,7 +77,7 @@ Beginne deshalb mit Kühlschrank, Gefriergerät und [Warmwasser](../../posts/202
 
 ## Ein Messplan für den ersten Abend
 
-Such dir nur ein Gerät aus. Stecke das Messgerät ein. Schreib Uhrzeit und Zählerstand auf. Lass das Gerät normal laufen, so wie immer. Bei einem Kühlschrank wartest du mindestens einen Tag. So siehst du nicht nur einen kurzen Startwert, sondern den echten Bedarf.
+Such dir nur ein Gerät aus. Stecke das Messgerät ein. Schreib Uhrzeit und Zählerstand auf. Lass das Gerät normal laufen, so wie immer. Bei einem Kühlschrank misst du eine volle Woche. So siehst du nicht nur einen kurzen Startwert, sondern den echten Bedarf.
 
 Rechne die kWh mit deinem Preis je kWh. Vergleiche den Betrag mit dem Preis für ein neues Gerät. Ein altes Gerät muss nicht gleich raus. Erst der Unterschied pro Jahr zeigt dir, ob sich ein Kauf bald lohnt. Das [schützt dich](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) vor einem teuren Kauf aus dem Bauch heraus.
 
@@ -78,7 +86,7 @@ Mach danach mit dem größten Dauerläufer weiter. Das kann ein Kühlschrank sei
 ## Das Wichtigste in Kürze
 
 - Nutze deinen **eigenen Arbeitspreis** aus dem Stromvertrag. Nicht irgendeinen Werbewert.
-- Miss Kühl- und Gefriergeräte mindestens **24 Stunden**, besser mehrere Tage; das ist ein Modellwert.
+- Miss Kühl- und Gefriergeräte **sieben Tage** und rechne auf das Jahr hoch. Diese Messdauer empfiehlt die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen/so-finden-sie-den-passenden-kuehlschrank-10573).
 - Rechne Dauerlast so: **Watt × Stunden ÷ 1.000 = kWh**.
 - Teile Geräte danach in drei Gruppen: **abschalten, anders nutzen, ersetzen**.
 - Vergleiche bei einem Neukauf den konkreten Verbrauch in kWh. Nicht nur die Effizienzklasse.
@@ -105,11 +113,13 @@ Die TV-LED ist selten dramatisch. Eine ungeregelte alte Pumpe oder ein elektrisc
 
 ## So misst du sauber statt nur kurz draufzuschauen
 
-Ein Strommessgerät kommt zwischen Steckdose und Gerätestecker. Viele Verbraucherzentralen und Büchereien leihen solche Geräte aus. Für fest verbaute Geräte brauchst du einen Fachbetrieb oder die Daten vom Zähler.
+Ein Strommessgerät kommt zwischen Steckdose und Gerätestecker. Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen/so-finden-sie-den-passenden-kuehlschrank-10573) weist darauf hin, dass du solche Geräte in ihren Beratungsstellen ausleihen kannst. Verfügbarkeit und Pfand regelt jede Stelle selbst, also frag vorher nach.
+
+Für fest verbaute Geräte brauchst du einen Fachbetrieb. Dein Haushaltszähler erfasst nur die Summe aller Geräte, nicht den einzelnen Verbrauch. Zuständig für Einbau, Betrieb und Prüfung dieses Zählers ist der Messstellenbetreiber. Die [Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Vportal/Energie/Metering/artikel.html) erklärt dazu die Rechte der Anschlussnutzer: Bei Zweifeln an der messtechnischen Richtigkeit kannst du eine Befundprüfung des Zählers beantragen.
 
 ### Die passende Messdauer
 
-- **Kühl- und Gefriergerät:** mindestens 24 Stunden, besser 72 Stunden; das ist ein Beispielwert. So erfasst du Kühl- und Abtauzyklen.
+- **Kühl- und Gefriergerät:** sieben vollständige Tage, dann auf ein Jahr hochrechnen. So empfiehlt es die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen/so-finden-sie-den-passenden-kuehlschrank-10573), weil sich Kühl- und Abtauzyklen erst über eine Woche ausmitteln.
 - **Waschmaschine, Spülmaschine, Trockner:** drei bis fünf vollständige, typische Programme messen.
 - **TV, PC und Konsole:** Betrieb und Bereitschaft getrennt erfassen.
 - **[Dauerverbraucher](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/):** aktuelle Leistung notieren und auf die tatsächliche Laufzeit hochrechnen.
@@ -126,7 +136,7 @@ Dein Messgerät zeigt entweder direkt kWh oder eine Leistung in Watt.
 **Bei konstanter Dauerlast:**
 > Jahresverbrauch = Watt × 24 × 365 ÷ 1.000
 
-**Beispiel:** Eine Gerätegruppe zieht unnötig 18 Watt; das ist ein Modellwert. Umgerechnet sind das **157,7 kWh im Jahr**. Bei 0,37 € pro kWh kostet sie rund **58 € jährlich**.
+**Beispiel:** Eine Gerätegruppe zieht unnötig 18 Watt; das ist ein Modellwert. Umgerechnet sind das **157,7 kWh im Jahr**. Der [BDEW](https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/) nennt für Haushalte im Oktober 2026 einen Durchschnittspreis von 37,3 Cent je kWh. Mit diesen 0,37 € pro kWh kostet die Gruppe rund **58 € jährlich**. Dein eigener Arbeitspreis steht im Vertrag und kann deutlich abweichen.
 
 Zum Einordnen reicht ein Vergleich: 1 Watt Dauerlast kostet bei 0,37 € pro kWh etwa 3 € im Jahr; das ist ein Modellwert. 10 Watt rund 32 €; das ist ein Rechenbeispiel. Miss aber nicht erst jeden Stecker einzeln. Prüfe zuerst die großen Gruppen. So wird aus „zieht bestimmt viel" eine echte Zahl.
 
@@ -145,11 +155,11 @@ Ein zu großes neues Gerät kann trotz guter Klasse mehr Strom brauchen als ein 
 
 ### Beispiel für die Amortisation
 
-Dein altes Gerät verbraucht gemessen 310 kWh im Jahr; das ist eine Modellannahme. Das passende Neugerät ist mit 140 kWh angegeben.
+**Rechenbeispiel mit frei gewählten Werten, keine Marktangaben:** Angenommen, dein altes Gerät verbraucht 310 kWh im Jahr und ein passendes Neugerät ist mit 140 kWh angegeben. Ersetze beide Werte durch deine Messung und das EU-Energielabel des Wunschgeräts.
 
 - Differenz: **170 kWh** (im Modellfall)
 - Ersparnis bei 0,37 €/kWh: **62,90 € pro Jahr**
-- Kaufpreis: **650 €**
+- Angenommener Kaufpreis: **650 €** (frei gewählt, kein Marktpreis)
 - Einfache Amortisationszeit: **rund 10,3 Jahre**
 
 Daraus folgt aber noch kein klares Ja. Geht das alte Gerät ohnehin bald kaputt, sieht die Rechnung anders aus. Läuft es gut, ist Weiternutzen oft die klügere Wahl.
@@ -177,10 +187,11 @@ Ein Ersatz lohnt sich, wenn der Jahresverbrauch hoch ist, die Nutzung real bleib
 | Tag | Aufgabe | Ergebnis |
 |---|---|---|
 | Montag | Grundlast am Zähler prüfen | nächtlichen Sockel erkennen |
-| Dienstag bis Donnerstag | Kühlgerät messen | kWh pro 24 Stunden |
-| Freitag | TV- und Bürogruppe messen | Betrieb und Bereitschaft trennen |
-| Samstag | Wasch-, Spül- oder Trockenprogramm messen | kWh je Durchlauf |
-| Sonntag | Jahreskosten und Maßnahmen notieren | abschalten, nutzen oder ersetzen |
+| Dienstag | Kühlgerät anschließen, Datum und Startwert notieren | Messung läuft sieben Tage |
+| Mittwoch | TV- und Bürogruppe messen | Betrieb und Bereitschaft trennen |
+| Donnerstag | Wasch-, Spül- oder Trockenprogramm messen | kWh je Durchlauf |
+| Freitag bis Montag | Kühlgerät ungestört weitermessen lassen | Zwischenwerte notieren |
+| Dienstag darauf | Kühlgerät ablesen, auf ein Jahr hochrechnen | abschalten, nutzen oder ersetzen |
 
 Beim Zählertest schaltest du nicht blind Kühlgerät, Heizung oder Sicherheitskomponenten ab. Notiere stattdessen den Stand vor und nach einer typischen Nacht und prüfe, welche notwendigen [Dauerverbraucher](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/) weiterlaufen.
 
@@ -251,7 +262,7 @@ Speichere Messwert, Datum und Strompreis gemeinsam. Sonst vergleichst du später
 
 Stromfresser findest du nicht am Alter oder an einer warmen Oberfläche, sondern mit einer Messung. Starte bei Dauerläufern und Geräten, die Wärme erzeugen. Rechne anschließend mit deinem persönlichen Strompreis.
 
-Heute reicht ein erster Handgriff: Leih oder kauf ein Messgerät und häng es für 24 Stunden an das verdächtigste Kühlgerät; das ist ein Rechenbeispiel. Danach hast du eine Zahl statt eines Verdachts.
+Heute reicht ein erster Handgriff: Leih oder kauf ein Messgerät und lass es eine Woche am verdächtigsten Kühlgerät laufen. Danach hast du eine Zahl statt eines Verdachts.
 
 **Faustregel:** Miss den Verbrauch verdächtiger Geräte einzeln mit einem Messgerät – nur was dauerhaft und unnötig läuft, kostet dich wirklich Geld.
 
@@ -260,7 +271,7 @@ Heute reicht ein erster Handgriff: Leih oder kauf ein Messgerät und häng es f�
 ## Häufige Fragen
 
 **Wie lange muss ich ein Gerät messen?**
- Kühl- und Gefriergeräte solltest du mindestens 24 Stunden, besser mehrere Tage messen; das ist ein Rechenbeispiel. Programme misst du vollständig und mehrfach.
+Für Kühl- und Gefriergeräte empfiehlt die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen/so-finden-sie-den-passenden-kuehlschrank-10573) sieben Tage Messung mit anschließender Hochrechnung auf ein Jahr. Programme misst du vollständig und mehrfach.
 
 **Ab welchem Verbrauch lohnt ein Austausch?**
 Dafür gibt es keine feste kWh-Grenze. Rechne die Differenz zu einem passenden Neugerät in Euro um und teile den Kaufpreis durch die jährliche Ersparnis.

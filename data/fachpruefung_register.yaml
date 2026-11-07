@@ -106,7 +106,10 @@ beitraege:
     status: "ausstehend"
     pruefer: null  # hier eintragen: Name, Rolle, Typ, Datum
     zahlen_fundstellen:
-      - "Der Euro-Wert ist eine Beispielrechnung mit 0,30 € je Kilowattstunde und kein Marktpreis: | Variante im Modell | Dusche je Person | Wasserbedarf im Jahr | Energiebedarf | Kosten im Modell | |---|---|---|---|---| | Ausgan"
+      - "Über das Jahr kommt viel zusammen: [co2online](https://www.co2online.de/energie-sparen/) beziffert die Wassererwärmung auf rund 16 Prozent des gesamten Haushalts-Energieverbrauchs, die Raumwärme auf rund zwei Drittel."
+      - "Die Euro-Werte rechnen mit frei gewählten 0,30 € je Kilowattstunde – kein Marktpreis, sondern eine Rechenannahme."
+      - "Setze deshalb deinen eigenen Tarif ein: | Variante im Modell | Dusche je Person | Wasserbedarf im Jahr | Energiebedarf | Kosten im Modell | |---|---|---|---|---| | Ausgangslage | 6 Minuten | rund 70 Kubikmeter | rund 2.8"
+      - "Als Faustgröße für den Energieverbrauch nennt [co2online](https://www.co2online.de/energie-sparen/) rund 16 Prozent Warmwasseranteil im Haushalt."
   - slug: "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen"
     titel: "Lastschrift und Dauerauftrag: Was du prüfen solltest"
     pillar: "konto-karten"
