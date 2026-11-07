@@ -29,6 +29,10 @@ import unittest
 import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from faktenfrische_gleis import (  # noqa: E402
+    arbeitsliste_traegt_befunde, offene_befunde)
 sys.path.insert(0, str(ROOT / 'scripts'))
 import faktenfrische  # noqa: E402
 
@@ -420,12 +424,39 @@ class Faktenfrische763MetaTests(unittest.TestCase):
                 self.assertFalse(finds, f'Harte Textverständnis-Regeln: {finds}')
 
     def test_faktenfrische_queue_haelt_befunde_geschlossen(self):
-        """Der offene-Queue-Eintrag darf die zwei Slugs nicht mehr führen.
-        Ein neuer Lauf, der dieselben Fehler zurückmeldet, macht hier rot."""
-        queue = json_load(ROOT / 'data' / 'faktenfrische_queue.json')
-        for eintrag in queue.get('offen', []):
-            self.assertNotIn(eintrag.get('slug'), (HEIZ, REISE),
-                             f'Queue meldet offene Befunde für {eintrag.get("slug")}')
+        """Kein OFFENER BEFUND darf die zwei Slugs wieder führen.
+
+        07.11.2026 – Messhöhe korrigiert: Der Test las `queue['offen']` und
+        hielt das für die Befundliste. Das Feld ist aber der ARBEITSVORRAT
+        (Seiten, die noch nicht dran waren, mit Frist). Folge in beide
+        Richtungen: Er wurde rot, als die Heizperiode am 07.11. turnusgemäß
+        wieder in den Vorrat rutschte („frisch geprüft vor 23 Tagen“) – ein
+        Fehlalarm ohne Sachfehler – und er wäre grün geblieben, wenn ein
+        echter Befund zurückgekehrt wäre. Gemessen wird jetzt dort, wo
+        Befunde stehen: im Ledger (`fachbefunde`).
+        """
+        import faktenfrische_befund_ledger as ledger
+        kerne = {kern_von(s) for s in (HEIZ, REISE)}
+        for eintrag in ledger.offene_befunde(ROOT / 'data' / 'faktenfrische_queue.json'):
+            kern = kern_von(eintrag.get('slug') or '')
+            self.assertNotIn(kern, kerne,
+                             f'Offener Befund zurückgekehrt für {eintrag.get("slug")}: '
+                             f'{eintrag.get("typ")} – {eintrag.get("text")}')
+        """Ein neuer Lauf darf dieselben BEFUNDE nicht zurückmelden.
+
+        Die frühere Fassung prüfte, ob der Slug überhaupt in der Arbeitsliste
+        steht – und verwechselte damit den **Vorlauf** mit einem **Befund**.
+        Am 07.11.2026 wurde sie zur Zeitbombe: die Seiten haben Frist
+        14.11.2026, sind also mit 14 Tagen Vorlauf turnusmäßig wieder in
+        `offen` („frisch geprüft vor 23 Tagen“), ohne offenen Befund. Geprüft
+        wird deshalb das Befund-Ledger (`faktenfrische_gleis`): ein Lauf, der
+        die Fehler erneut meldet, schreibt sie in `fachbefunde` und macht
+        diese Prüfung weiter rot.
+        """
+        self.assertFalse(offene_befunde((HEIZ, REISE)),
+                         'Queue meldet offenen Befund für eine der zwei Seiten')
+        self.assertFalse(arbeitsliste_traegt_befunde((HEIZ, REISE)),
+                         'Queue-Eintrag transportiert einen Befund')
 
     def test_systemprompt_trennt_modell_tatsache_und_werbung(self):
         prompt = faktenfrische.SYSTEM_PROMPT
@@ -433,6 +464,11 @@ class Faktenfrische763MetaTests(unittest.TestCase):
                      'Fehlende Erwähnung ist kein Gegenbeweis',
                      'keine behördliche Empfehlung', 'Quellen-Publikationsdatum'):
             self.assertIn(rule, prompt)
+
+
+def kern_von(slug):
+    """Slug ohne Datumspräfix – die Kadenz datiert Entwürfe um."""
+    return re.sub(r'^\d{4}-\d{2}-\d{2}-', '', slug or '')
 
 
 def json_load(path):

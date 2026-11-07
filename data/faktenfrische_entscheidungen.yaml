@@ -1834,3 +1834,338 @@ entscheidungen:
     dem heutigen Text gegenstandslos.'
   vorgaenger_geprueft_fassung: 27dcd1545644e95a03e8eaba43cb14c223a7811cdec7a7d4b2b63127cdee8827
   folgeentscheidung: true
+- slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_ursprung_slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_id: 30caa57be394afb62947
+  befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
+  geprueft_fassung: e899c20e8c81144116a4953e2439f23500dab8212fb3ed8281c7e18f0e5936ec
+  typ: luecke
+  beanstandung: Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt
+    in den Recherche-Fundstellen ein entsprechender Beleg.
+  beleg: https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session
+    bestätigt. Die unbelegte 11,93-ct-Aussage ist entfernt. Die neue Fassung nennt
+    die belegten BDEW-Neukundenmittelwerte 12,23/11,67 ct/kWh mit Quelle und Abgrenzung
+    zum eigenen Tarif.
+  vorgaenger_geprueft_fassung: b94188b3f0aa97192cf0c59e9012b4f07616f623a739ddb12799e90bc3c628fc
+  folgeentscheidung: true
+- slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_ursprung_slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_id: 32a3ea879f2cf126b3a7
+  befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
+  geprueft_fassung: e899c20e8c81144116a4953e2439f23500dab8212fb3ed8281c7e18f0e5936ec
+  typ: luecke
+  beanstandung: Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen
+    der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim
+    Anbieterwechsel zentral ist.
+  beleg: https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: 'Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session
+    bestätigt. Der Regulierungsrahmen ist im Abschnitt zum Preisschreiben konkretisiert:
+    Informationsfrist, Änderungsgrund, Garantieumfang und Sonderkündigung werden anhand
+    der Bundesnetzagentur erklärt.'
+  vorgaenger_geprueft_fassung: b94188b3f0aa97192cf0c59e9012b4f07616f623a739ddb12799e90bc3c628fc
+  folgeentscheidung: true
+- slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_ursprung_slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_id: c583efe1ce02df3ca2d7
+  befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
+  geprueft_fassung: e899c20e8c81144116a4953e2439f23500dab8212fb3ed8281c7e18f0e5936ec
+  typ: luecke
+  beanstandung: Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur
+    für Januar 2026 (360 €) wird durch die allgemeine Übersichtsseite der Behörde
+    nicht gestützt.
+  beleg: https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session
+    bestätigt. Die unbelegte 360-€-Ersparnis ist entfernt. Die neue Fassung rechnet
+    nur mit dem eigenen Angebot und nennt keine Behörden-Ersparnis.
+  vorgaenger_geprueft_fassung: b94188b3f0aa97192cf0c59e9012b4f07616f623a739ddb12799e90bc3c628fc
+  folgeentscheidung: true
+- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_id: 252413dcc16cea146beb
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+  geprueft_fassung: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
+  typ: luecke
+  beanstandung: Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher
+    angekündigt werden muss, ohne dafür eine Quelle anzugeben.
+  beleg: https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session
+    bestätigt. Die Ein-Monats-Frist ist quellengebunden und auf Haushaltskunden außerhalb
+    der Grundversorgung präzisiert; für die Grundversorgung wird auf die strengeren
+    Regeln verwiesen.
+  vorgaenger_geprueft_fassung: 7b33855c9cf6cba7be6f1d9314ba75af40a5a74a8a9cd4d6ffbe539e78d12571
+  folgeentscheidung: true
+- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_id: 48a0a962046c8315270e
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+  geprueft_fassung: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
+  typ: praezision
+  beanstandung: Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf
+    den Anbieter überträgt und dafür ein höherer Startpreis üblich ist, fehlt eine
+    konkrete Quelle und bleibt vage.
+  beleg: https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session
+    bestätigt. Die vage Risiko-Transfer-Aussage ist durch den konkreten Vergleich
+    der vertraglich geschützten Preisbestandteile ersetzt; ein höherer Startpreis
+    wird nicht mehr als üblich unterstellt.
+  vorgaenger_geprueft_fassung: 7b33855c9cf6cba7be6f1d9314ba75af40a5a74a8a9cd4d6ffbe539e78d12571
+  folgeentscheidung: true
+- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_id: 9326152f4d788cff56bd
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+  geprueft_fassung: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
+  typ: praezision
+  beanstandung: Die Aussage, dass man „in der Regel“ zum Zeitpunkt der Preisänderung
+    Sonderkündigungsrecht hat, ist unpräzise und wird nicht durch eine konkrete Regelung
+    belegt.
+  beleg: https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session
+    bestätigt. Das Sonderkündigungsrecht ist mit Zeitpunkt, Zugang vor Wirksamwerden
+    und den Ausnahmen separierte Klausel/Umsatzsteuer präzisiert und an die Bundesnetzagentur
+    gebunden.
+  vorgaenger_geprueft_fassung: 7b33855c9cf6cba7be6f1d9314ba75af40a5a74a8a9cd4d6ffbe539e78d12571
+  folgeentscheidung: true
+- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_id: ab4d084fd367c8e4d518
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+  geprueft_fassung: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
+  typ: luecke
+  beanstandung: Der angegebene durchschnittliche Gaspreis von 11,93 Cent/kWh für 2026
+    (laut BDEW) wird nicht durch eine Quelle belegt.
+  beleg: https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session
+    bestätigt. Die unbelegte 11,93-ct-Aussage ist entfernt. Die neue Fassung nutzt
+    eigene Vertragswerte und Modellrechnungen statt eines unbelegten Durchschnittspreises.
+  vorgaenger_geprueft_fassung: 7b33855c9cf6cba7be6f1d9314ba75af40a5a74a8a9cd4d6ffbe539e78d12571
+  folgeentscheidung: true
+- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_id: d215addd22dea72c44df
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+  geprueft_fassung: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
+  typ: luecke
+  beanstandung: Die Angabe, dass die Verbraucherzentrale etwa 6 % weniger Heizenergie
+    pro Grad niedrigerer Raumtemperatur nennt, fehlt eine Quellenangabe.
+  beleg: https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session
+    bestätigt. Der 6-%-Richtwert ist direkt mit der Verbraucherzentrale verlinkt;
+    die neue Fassung ergänzt die Schimmelgrenze und trennt Verbrauchseffekt von Geldersparnis.
+  vorgaenger_geprueft_fassung: 7b33855c9cf6cba7be6f1d9314ba75af40a5a74a8a9cd4d6ffbe539e78d12571
+  folgeentscheidung: true
+- slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
+  befund_ursprung_slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
+  befund_id: 089b89138417e63a3dcf
+  befund_fassung: 4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7
+  geprueft_fassung: b2693d4ac268b6500f367a8f752410fc3a7a7ca0cec7481069f01a1c1c472717
+  typ: luecke
+  beanstandung: Es fehlt der für Campingbuchungen relevante Regulierungsrahmen (Unterscheidung
+    Mietrecht bei Stellplätzen vs. Reiserecht), den die Fundstelle für den Bereich
+    Reise nur allgemein andeutet.
+  beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen/onlinereisebueros-so-vermeiden-sie-probleme-bei-der-urlaubsbuchung-11306
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session
+    bestätigt. Die pauschale Mietrechtszuordnung ist entfernt. Die neue Fassung unterscheidet
+    nach konkret gebuchten Leistungen, Vertragspartner und Veranstalter/Vermittler-Rolle
+    und verweist auf den VZ-Ratgeber.
+  vorgaenger_geprueft_fassung: c1031348c0bc901cabd62afb88cca65bee618bbc231fc1e758d105d8d334ae74
+  folgeentscheidung: true
+- slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
+  befund_ursprung_slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
+  befund_id: 1158934e7a18c7b2099b
+  befund_fassung: 4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7
+  geprueft_fassung: b2693d4ac268b6500f367a8f752410fc3a7a7ca0cec7481069f01a1c1c472717
+  typ: luecke
+  beanstandung: Die Preisangabe von 20 bis 45 € pro Nacht wird als realistischer Wert
+    positioniert, ist jedoch nicht durch Marktdaten oder eine Referenzstelle in den
+    Fundstellen belegt.
+  beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen/onlinereisebueros-so-vermeiden-sie-probleme-bei-der-urlaubsbuchung-11306
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session
+    bestätigt. Die unbelegte Spanne 20–45 € ist entfernt. Die neue Fassung verlangt
+    ein konkretes Angebot am Wunschplatz inklusive Pflichtgebühren als Planungsgrundlage.
+  vorgaenger_geprueft_fassung: c1031348c0bc901cabd62afb88cca65bee618bbc231fc1e758d105d8d334ae74
+  folgeentscheidung: true
+- slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
+  befund_ursprung_slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
+  befund_id: 3716cfd3ab5aec6d774b
+  befund_fassung: 4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7
+  geprueft_fassung: b2693d4ac268b6500f367a8f752410fc3a7a7ca0cec7481069f01a1c1c472717
+  typ: praezision
+  beanstandung: Der Verweis auf die Verbraucherzentrale zur Prüfung von Buchungsangaben
+    führt auf eine allgemeine Übersichtsseite ohne konkrete Checklisten für Camping-Angebote.
+  beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen/onlinereisebueros-so-vermeiden-sie-probleme-bei-der-urlaubsbuchung-11306
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session
+    bestätigt. Der allgemeine VZ-Übersichtslink ist durch den konkreten Ratgeber Online-Reisebüros
+    ersetzt und um einen Buchungscheck für Leistungsangaben, Anbieter, Endpreis und
+    Storno ergänzt.
+  vorgaenger_geprueft_fassung: c1031348c0bc901cabd62afb88cca65bee618bbc231fc1e758d105d8d334ae74
+  folgeentscheidung: true
+- slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
+  befund_ursprung_slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
+  befund_id: 1e06a96f6f71e104ce0b
+  befund_fassung: 795c7b990680201f40a39431e82decc20b19b5551b2fa662f66f4bb2b4c80776
+  geprueft_fassung: 30c5d5824140945b95e845db27e7470b93db82ea7959bd92f90f1dce552f4bf6
+  typ: praezision
+  beanstandung: Während Meal Prep als großer Sparhebel betont wird, zeigt die Marktlage
+    für Nahrungsmittel eine moderate Teuerung von nur 0,4 %, was die Priorisierung
+    der Sparbemühungen relativiert.
+  beleg: https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: 'Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session
+    bestätigt. Die Meal-Prep-Priorisierung ist relativiert: Der moderate Nahrungsmittelwert
+    +0,4 % wird genannt, und die Sparwirkung wird an die eigenen Auswärts-Essgewohnheiten
+    gebunden. Unbelegte 20-%-/Drittel-Aussagen sind entfernt.'
+- slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
+  befund_ursprung_slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
+  befund_id: 81c6a707139046b83ccd
+  befund_fassung: 795c7b990680201f40a39431e82decc20b19b5551b2fa662f66f4bb2b4c80776
+  geprueft_fassung: 30c5d5824140945b95e845db27e7470b93db82ea7959bd92f90f1dce552f4bf6
+  typ: luecke
+  beanstandung: Der Ratgeber empfiehlt die Revision von Fixkosten, lässt aber die
+    drastische Preissteigerung bei Energie von +14,9 % unerwähnt, die ein wesentlicher
+    Treiber der Haushaltsausgaben ist.
+  beleg: https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: 'Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session
+    bestätigt. Die Energiepreisentwicklung ist mit Destatis-Quelle ergänzt: Oktober
+    vorläufig +12,2 %, September +14,9 %. Die Fixkostenprüfung bleibt, wird aber an
+    den eigenen Rechnungen ausgerichtet.'
+- slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
+  befund_ursprung_slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
+  befund_id: 8cc00288af8a1f2b02d8
+  befund_fassung: 795c7b990680201f40a39431e82decc20b19b5551b2fa662f66f4bb2b4c80776
+  geprueft_fassung: 30c5d5824140945b95e845db27e7470b93db82ea7959bd92f90f1dce552f4bf6
+  typ: veraltet
+  beanstandung: Die Budget-Tipps berücksichtigen nicht die aktuelle Inflationsrate
+    von 2,8 % (Stand Oktober 2026), was die Kaufkraft-Annahmen im Haushaltsbuch beeinflusst.
+  beleg: https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session
+    bestätigt. Die vorläufige Oktober-Inflation von 2,8 % ist mit Destatis-PM ergänzt;
+    das Haushaltsbuch wird auf eigene Vormonatsausgaben und tatsächliche Preisänderungen
+    verpflichtet.
+- slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_ursprung_slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_id: 5a1bf10697f58e5fe14a
+  befund_fassung: 07a463b531e0c47a7c04e0e9b0d2e462b1dfebd5333e8fc771aa9d09d50573ed
+  geprueft_fassung: db4e9f96cbbb640aaddc961bb840e3a36ca3188abc497d59789044563e779f65
+  typ: luecke
+  beanstandung: Der Ratgeber nennt Sparbeispiele für Heizkosten, lässt aber die aktuelle
+    Preissteigerung bei Energie von +14,9 % (Stand Oktober 2026) unerwähnt, die den
+    finanziellen Druck auf Haushalte massiv erhöht.
+  beleg: https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session
+    bestätigt. Die Energiepreisentwicklung ist mit Destatis-Quelle ergänzt und korrekt
+    zwischen September +14,9 % und Oktober vorläufig +12,2 % unterschieden. Heizbeispiele
+    bleiben als Modellrechnung markiert.
+- slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_ursprung_slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_id: e48f9237cff6397c49a6
+  befund_fassung: 07a463b531e0c47a7c04e0e9b0d2e462b1dfebd5333e8fc771aa9d09d50573ed
+  geprueft_fassung: db4e9f96cbbb640aaddc961bb840e3a36ca3188abc497d59789044563e779f65
+  typ: praezision
+  beanstandung: Die in Aussicht gestellten Ersparnisse von bis zu 200 € werden nicht
+    ins Verhältnis zur aktuellen Inflationsrate von +2,8 % gesetzt, welche die reale
+    Kaufkraft des gesparten Geldes mindert.
+  beleg: https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session
+    bestätigt. Die 50–200-€-Aussage ist in Kurzantwort und Text als Modellwert markiert
+    und ausdrücklich nicht als Inflationsausgleich oder zugesagte Ersparnis formuliert;
+    die Oktober-Inflation 2,8 % ist belegt.
+- slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_ursprung_slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_id: f6de6b078d49f9d42e0e
+  befund_fassung: 07a463b531e0c47a7c04e0e9b0d2e462b1dfebd5333e8fc771aa9d09d50573ed
+  geprueft_fassung: db4e9f96cbbb640aaddc961bb840e3a36ca3188abc497d59789044563e779f65
+  typ: praezision
+  beanstandung: Beim Fokus auf Lebensmittelplanung fehlt der Hinweis auf die vergleichsweise
+    moderate Preissteigerung von +0,4 % bei Nahrungsmitteln, was diesen Hebel gegenüber
+    den stark steigenden Energiekosten relativiert.
+  beleg: https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session
+    bestätigt. Der Nahrungsmittelwert +0,4 % ist mit Destatis-Quelle ergänzt und gegen
+    den Energie-Teilindex abgegrenzt. Die Lebensmittelplanung wird nicht mehr aus
+    einer unbelegten Marktbehauptung priorisiert.
+- slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
+  befund_ursprung_slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
+  befund_id: 6cb2229c5eb83b02da23
+  befund_fassung: 63dc456fea78500599e8bfc7e74fb116592ff435a305f9839c5b48691618ae65
+  geprueft_fassung: a628247a97b7075b144bba5ac67889b3906a6c749d71336b7c77d70b02b621e5
+  typ: veraltet
+  beanstandung: Die Kalkulation der Fixkosten (Energie 140 €) und die Empfehlung zur
+    Senkung der Kosten ignorieren den aktuellen Markttrend massiv steigender Energiepreise
+    (+14,9 %), was die 50-Prozent-Quote für notwendige Ausgaben gefährdet.
+  beleg: https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session
+    bestätigt. Die 140-€-Energieannahme ist ausdrücklich als frei gewählter Modellwert
+    markiert. Die neue Fassung ergänzt die Destatis-Preisentwicklung und erklärt,
+    wann die 50-Prozent-Quote angepasst werden muss.
+- slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
+  befund_ursprung_slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
+  befund_id: f00055a1cb65ee22165f
+  befund_fassung: 63dc456fea78500599e8bfc7e74fb116592ff435a305f9839c5b48691618ae65
+  geprueft_fassung: a628247a97b7075b144bba5ac67889b3906a6c749d71336b7c77d70b02b621e5
+  typ: luecke
+  beanstandung: Der Ratgeber verspricht eine 'planbare' Budgetierung, lässt aber die
+    aktuelle Inflationsrate von 2,8 % unerwähnt, die insbesondere den Block der notwendigen
+    Ausgaben (Nahrungsmittel +0,4 %) dynamisch belastet.
+  beleg: https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
+  entschieden_am: '2026-11-07'
+  fassung_wechsel: true
+  begruendung: 'Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session
+    bestätigt. Planbarkeit ist von Unveränderlichkeit abgegrenzt: Oktober-Inflation
+    2,8 %, Energie +12,2 % und Nahrungsmittel +0,4 % sind mit Destatis-PM belegt;
+    Budget und Sparrate werden an echte Rechnungen gekoppelt.'

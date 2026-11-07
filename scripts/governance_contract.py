@@ -403,6 +403,14 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # Slots per Dispatch nach und meldet das Defizit, wenn nichts mehr
           # nachholbar ist. Ihr --selftest stellt den Vorfall nach und
           # gehört ins vertragliche Minimum.
+          # Backup-Selbstheilung (WF-9E5A / #923, 07.11.2026): Die Heilung
+          # handelt im Betrieb – sie startet Läufe. Eine Wache mit Folgen
+          # gehört ins vertragliche Minimum (C6), sonst könnte ihr Selbsttest
+          # still verschwinden, während die Aktion bleibt. Ihr `--selftest`
+          # friert beide Richtungen ein: Dispatch MIT neuem Lauf (bewiesen)
+          # und Dispatch OHNE neuen Lauf (nicht bewiesen, also rot), dazu die
+          # Grenze heilbarer Klassen (genau `scheduler`).
+          "backup_selbstheilung.py",
           "slot_wache.py",
           # Zustellbarkeits-Wache (23.09.2026, Lauf #21): Der Versand war
           # dreifach verriegelt, die Kette davor ungeprüft. Ein Lauf meldete
@@ -497,6 +505,11 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # veröffentlichte Version. Ihr --selftest friert SSOT-Form,
           # Gate-Deckung, Ausnahmen-Protokoll und Siegel-Bindung ein.
           "release_scorecard.py",
+          # Bestands-Selbstheilung (#1098): getrennter Schreiber vor der
+          # Scorecard; nur deterministische Teilmenge, menschliche Befunde
+          # bleiben unangetastet. Bestätigung erst nach vollständigem Neubau
+          # und Nachmessung; neuer Blocker/Werkzeugfehler ⇒ Byte-Rollback.
+          "release_bestand_heiler.py",
           # Auslieferungs-Isolation (09.10.2026, Bot-Watchdog #676): Der
           # neueste Artikel lag veröffentlichungsreif im Repo und lieferte
           # HTTP 404, weil der Deploy 13× in Folge am Scorecard-Schritt
@@ -689,7 +702,14 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # Tools und Menschen gegen die Git-Basis und meldet nur NEU
           # ERZEUGTE Überlappungen fail-closed (Exit 1), Altlasten nie.
           # Ohne Eintrag hier liefe sein Selbsttest in keinem Gate (C6).
-          "bestand_einzigartigkeit_gate.py"]
+          "bestand_einzigartigkeit_gate.py",
+          # Pflichtfeld-Verlust-Wache (06.11.2026, #1110): Der Content-Bot-
+          # Heilcommit (`0b55fca`) ließ die `kurzantwort` fallen und der Artikel
+          # ging ohne sie live. Diese Wache holt verlorene M4-Pflichtfelder
+          # bytegenau aus HEAD zurück, BEVOR der Bot committed. Ohne Eintrag
+          # hier liefe ihr Selbsttest in keinem Gate (C6) – und eine Wache,
+          # die niemand verlangt, führt irgendwann niemand aus.
+          "pflichtfeld_verlust_wache.py"]
 
 # Skripte, die mit der Pinterest-API sprechen, müssen ihren Token vom Broker
 # holen. Ausnahmen: der Broker selbst und die Krypto-/OAuth-Schicht darunter.
@@ -2313,6 +2333,8 @@ def run_all(python_bin="python3", quick=False, root=BLOG_DIR):
     checks += c47_grammatik_kongruenz(script_texts, wflows, root=root)
     checks += c48_diff_tor_bestands_einzigartigkeit(
         script_texts, wflows, root=root, python_bin=python_bin, quick=quick)
+    checks += c49_pflichtfeld_verlust_wache(
+        script_texts, wflows, root=root, python_bin=python_bin, quick=quick)
     return checks
 
 
@@ -3750,6 +3772,13 @@ def c44_themen_nachschub(script_texts, wflows, root=BLOG_DIR):
 #      statisch: hartes_limit_pro_lauf × Läufe/Tag ≥ Bedarf × Mindestdeckung.
 #      Reicht die Kapazität nicht, wird der BAU rot, BEVOR der Bestand rot
 #      wird – genau die Reihenfolge, die am 27.10. gefehlt hat.
+#   c2) Die PROJEKTION rechnet den Weg des Bots (#1107, 07.11.2026). Ein
+#      Stichtag in der Zukunft wird als Trajektorie ab heute gerechnet, nie
+#      mit dem eingefrorenen Prüfstand. Die drei Marker unten sind Pflicht:
+#      Ohne `bestand_trajektorie`, `projektions_ausgangspunkt` und
+#      `kadenz_horizont` wäre die Heilung löschbar, ohne dass ein Gate
+#      anschlägt – und der nächste Handlauf erzeugte wieder ein Ticket aus
+#      einer Momentaufnahme.
 #   d) Die Release-Scorecard nennt die Ursache, nicht nur das Symptom.
 #   e) Ein Vertrag ohne Test ist Prosa.
 C45_WACHE = "faktenfrische_kapazitaet.py"
@@ -3767,7 +3796,14 @@ C45_MARKER = ("faelligkeit", "--selftest", "laeufe_aus_workflow",
               # #1039: Die Bündeltag-Messung ist seit dem 04.11.2026 Teil des
               # vertraglichen Minimums. Ohne sie misst die Wache nur den
               # ruhigsten Tag des Jahres.
-              "spitzenlast_stichtag", "spitze_geprueft")
+              "spitzenlast_stichtag", "spitze_geprueft",
+              # #1107 (07.11.2026): Die Projektion in die Zukunft rechnet den
+              # WEG des Bots, nicht den eingefrorenen Prüfstand. Ohne diese
+              # drei Bausteine entsteht aus einer Momentaufnahme wieder ein
+              # Ticket mit Frist („rot am 26.11./31.12.“), das niemand
+              # nachrechnen kann.
+              "bestand_trajektorie", "projektions_ausgangspunkt",
+              "kadenz_horizont")
 
 
 def _c45_deckung(root=BLOG_DIR):
@@ -6045,6 +6081,114 @@ def c32_doppelte_schluessel(script_texts, wflows, root=BLOG_DIR, python_bin=None
     return out
 
 
+# --- C49: Pflichtfeld-Verlust-Wache (06.11.2026, #1110) ---------------------
+#
+# Auslöser: Der Gate-Heilungs-Commit des Deploy-Laufs (Content-Bot, `0b55fca`)
+# schrieb den Frontmatter-Block des Ökostrom-Artikels neu und ließ die
+# `kurzantwort` fallen – der Artikel ging ohne Kurzantwort live (M4). Die
+# Nachlauf-Wache meldet die Klasse erst NACH der Veröffentlichung und steht
+# nicht im Deploy-Pfad; zwischen Schreibverlust und Meldung liegt die
+# Auslieferung. C32 bewacht den DOPPELTEN Schlüssel, nicht den VERLORENEN.
+#
+# Der Vertrag in vier Sätzen:
+#   a) Eine Wahrheit: die Wache importiert die Metadaten-Wache (M4) und
+#      post_utils (Naht) – die Pflichtliste ist keine zweite Wahrheit, und
+#      geheilt wird aus `git show HEAD:` (zitieren, nicht erfinden).
+#   b) Beweisbarkeit: `--selftest` existiert und steht im Minimum (C6/GUARDS).
+#   c) Der Fahrer ist verdrahtet: deploy.yml ruft `--fix` VOR dem Diff-Tor
+#      („Gate-Heilungsdiff merken“) und VOR dem Content-Bot-Commit („Gate-
+#      Heilungen committen“) – sonst schreibt der Bot den Verlust fest (#1110).
+#   d) Lebende Wirkung: der Selbsttest der Wache ist JETZT grün.
+C49_WACHE = "pflichtfeld_verlust_wache.py"
+C49_FIX = "scripts/pflichtfeld_verlust_wache.py --fix"
+C49_SELFTEST = "scripts/pflichtfeld_verlust_wache.py --selftest"
+C49_DIFF_SCHRITT = "Gate-Heilungsdiff merken"
+C49_COMMIT_SCHRITT = "Gate-Heilungen committen"
+
+
+def c49_pflichtfeld_verlust_wache(script_texts, wflows, root=BLOG_DIR,
+                                  python_bin=None, quick=False):
+    """Kein Automatik-Commit verliert ein M4-Pflichtfeld (#1110)."""
+    out = []
+    wache = (script_texts or {}).get(C49_WACHE, "")
+    if not wache.strip():
+        return [("C49", f"scripts/{C49_WACHE} fehlt – ohne die Wache schreibt der "
+                        "Content-Bot-Heilcommit einen verlorenen Pflichtfeld-Block "
+                        "fest, statt ihn aus HEAD zurückzuholen (#1110).")]
+    deploy = ""
+    for pfad, text in (wflows or {}).items():
+        if os.path.basename(str(pfad)) == "deploy.yml":
+            deploy = text or ""
+
+    # a) Eine Wahrheit: M4 entscheidet, was Pflicht ist; HEAD ist die Quelle.
+    if "import metadaten_wache" not in wache:
+        out.append(("C49", f"scripts/{C49_WACHE}: importiert die Metadaten-Wache "
+                           "(M4) nicht – die Pflichtliste wäre eine zweite Wahrheit."))
+    if "import post_utils" not in wache:
+        out.append(("C49", f"scripts/{C49_WACHE}: importiert post_utils nicht – "
+                           "die Naht würde nachgebaut statt zitiert."))
+    if "HEAD:" not in wache or "git" not in wache:
+        out.append(("C49", f"scripts/{C49_WACHE}: holt nicht aus `git show HEAD:` "
+                           "zurück – Heilung ohne Quelle wäre Erfinden."))
+    if "def _run_selftest(" not in wache or "--selftest" not in wache:
+        out.append(("C49", f"scripts/{C49_WACHE}: kein `--selftest` – die Wache "
+                           "ist nicht beweisbar (C6)."))
+    if "def _grundlage(" not in wache:
+        out.append(("C49", f"scripts/{C49_WACHE}: keine Grundlagenprobe – ohne "
+                           "PyYAML oder Git-HEAD sähe jede Datei verlustfrei aus "
+                           "und die Wache wäre grün aus Unwissen (C2/C33)."))
+    if C49_WACHE not in GUARDS:
+        out.append(("C49", f"scripts/{C49_WACHE} steht nicht im vertraglichen "
+                           "Minimum (C6) – der Selbsttest liefe nie."))
+
+    # b) Verdrahtung: heilen VOR dem Diff-Tor und VOR dem Content-Bot-Commit.
+    if not deploy:
+        out.append(("C49", "deploy.yml nicht lesbar – die Reihenfolge (Heilen vor "
+                           "dem Commit) ist nicht prüfbar (#1110)."))
+    else:
+        if C49_FIX not in deploy:
+            out.append(("C49", "deploy.yml ruft `pflichtfeld_verlust_wache.py "
+                               "--fix` nicht – der Content-Bot schreibt den "
+                               "Verlust fest (#1110)."))
+        if C49_SELFTEST not in deploy:
+            out.append(("C49", "deploy.yml prüft die Wache nicht selbst – eine "
+                               "tote Wache vor dem Commit fällt niemandem auf (#1110)."))
+        # Anker ist die SCHRITT-ERKLÄRUNG, nicht das Wort im Fließtext: ein
+        # Kommentar darf die Reihenfolge nennen, ohne sie zu verschieben.
+        def _schritt_pos(name):
+            treffer = re.search(r"(?m)^\s*-\s+name:\s*[\"']?" + re.escape(name),
+                                deploy)
+            return treffer.start() if treffer else -1
+
+        idx_fix = deploy.find(C49_FIX)
+        idx_diff = _schritt_pos(C49_DIFF_SCHRITT)
+        idx_commit = _schritt_pos(C49_COMMIT_SCHRITT)
+        if idx_fix != -1 and idx_diff != -1 and idx_fix > idx_diff:
+            out.append(("C49", "deploy.yml heilt Pflichtfeld-Verlust erst NACH dem "
+                               "Diff-Tor – der Verlust wäre schon im Commit (#1110)."))
+        if idx_fix != -1 and idx_commit != -1 and idx_fix > idx_commit:
+            out.append(("C49", "deploy.yml heilt Pflichtfeld-Verlust erst NACH dem "
+                               "Content-Bot-Commit – genau die Reihenfolge von "
+                               "0b55fca (#1110)."))
+
+    # c) Lebende Wirkung: der Selbsttest muss JETZT grün sein.
+    if not quick:
+        py = python_bin or sys.executable or "python3"
+        try:
+            res = subprocess.run(
+                [py, os.path.join(root, "scripts", C49_WACHE), "--selftest"],
+                cwd=root, capture_output=True, text=True, timeout=180)
+            if res.returncode != 0:
+                zeilen = ((res.stdout or "") + (res.stderr or "")).strip().splitlines()
+                out.append(("C49", f"scripts/{C49_WACHE} --selftest rot (Exit "
+                                   f"{res.returncode}): "
+                                   f"{zeilen[-1][:160] if zeilen else ''}"))
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            out.append(("C49", f"scripts/{C49_WACHE} --selftest nicht "
+                               f"ausführbar: {exc.__class__.__name__}"))
+    return out
+
+
 RULE_TEXT = {
     "C32": "Doppelte Mapping-Schluessel sind eine Bau-Ursache: go-yaml bricht "
            "bei einem wiederholten Schluessel HART ab (`mapping key \"…\" "
@@ -6552,6 +6696,21 @@ RULE_TEXT = {
            "VOR der Linkprüfung auf. Paare sind kanonisch, der eigene Slug ist "
            "nie Gegner, der leere Bestand ist ein Werkzeugfehler (fail-closed), "
            "und es gibt bewusst keinen Auto-Heiler: gemeldet, nie geschrieben.",
+    "C49": "Kein Automatik-Commit verliert ein M4-Pflichtfeld (#1110): Am "
+           "06.11.2026 schrieb der Gate-Heilungs-Commit des Deploy-Laufs "
+           "(Content-Bot, 0b55fca) den Frontmatter-Block des Ökostrom-Artikels "
+           "neu und ließ die kurzantwort fallen – der Artikel ging ohne "
+           "Kurzantwort live (M4). Die Nachlauf-Wache meldet die Klasse erst "
+           "NACH der Veröffentlichung und steht nicht im Deploy-Pfad. Die "
+           "Pflichtfeld-Verlust-Wache (scripts/pflichtfeld_verlust_wache.py) "
+           "schließt sie an der Quelle: Sie importiert die Metadaten-Wache (M4, "
+           "keine zweite Pflichtliste) und post_utils (eine Naht), vergleicht "
+           "Arbeitsbaum mit git show HEAD: und holt jedes verlorene Pflichtfeld "
+           "BYTEGENAU aus HEAD zurück (zitieren, nicht erfinden; Body bleibt "
+           "gleich). deploy.yml ruft sie als letzten Schreiber VOR dem Diff-Tor "
+           "und VOR dem Content-Bot-Commit; was auch HEAD nicht trug, bleibt "
+           "Redaktion/Texter und wird über werkzeugbefund ans Siegel gemeldet "
+           "(C34: kein Befund friert die Live-Site ein).",
 }
 
 LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
@@ -6627,7 +6786,10 @@ LABEL = {"C1": "Reihenfolge", "C2": "Bau-Grundlage", "C3": "Messkette",
                  "Genus-Lexikon, Titel nur mit Beweis, Cover rendert danach)",
           "C48": "Diff-Tor Bestands-Einzigartigkeit (jedes Werkzeug, jeder Mensch: "
                  "geänderte Posts gegen die Git-Basis, nur NEU/VERSTÄRKT zählt, "
-                 "Altlasten nie; link-check.yml, V4 im Publikations-Vertrag)"}
+                 "Altlasten nie; link-check.yml, V4 im Publikations-Vertrag)",
+          "C49": "Pflichtfeld-Verlust (kein Automatik-Commit verliert ein M4-"
+                 "Pflichtfeld: bytegenau aus HEAD zurück, letzter Schreiber vor "
+                 "Diff-Tor und Content-Bot-Commit; #1110)"}
 
 
 def render_md(checks, ok_notes=()):
@@ -8663,6 +8825,64 @@ def _selftest():
             failures.append("C48: eine Heilung ohne Mindestlänge bleibt "
                             "unentdeckt.")
 
+    # --- C49: Die Pflichtfeld-Verlust-Wache UND ihre Verdrahtung (#1110) ----
+    # Ohne diese Proben ist C49 eine Momentaufnahme: Die Regel behauptet, ein
+    # verlorener Pflichtfeld-Block werde VOR dem Content-Bot-Commit geheilt –
+    # nichts bewiese, dass sie bei entfernter Verdrahtung rot werden KANN.
+    c49_text = _read(os.path.join(BLOG_DIR, "scripts", C49_WACHE))
+    c49_deploy = _read(os.path.join(BLOG_DIR, ".github", "workflows", "deploy.yml"))
+    if not c49_text or not c49_deploy:
+        failures.append("C49: der Selbsttest kann Wache oder deploy.yml nicht lesen.")
+    else:
+        c49_gut = {C49_WACHE: c49_text}
+        c49_flow = {"deploy.yml": c49_deploy}
+
+        def _c49_grund(texts=None, flows=None):
+            return [f for f in c49_pflichtfeld_verlust_wache(
+                texts if texts is not None else c49_gut,
+                flows if flows is not None else c49_flow,
+                root=BLOG_DIR, quick=True)]
+
+        if _c49_grund():
+            failures.append("C49: der echte Zustand wird beanstandet: "
+                            f"{_c49_grund()[0][1][:90]}")
+        # (a) Die Wache fehlt ganz.
+        if not [f for f in _c49_grund(texts={}) if "fehlt" in f[1]]:
+            failures.append("C49: eine fehlende Wache bleibt unentdeckt.")
+        # (b) Die Pflichtliste wird zur zweiten Wahrheit (M4-Import fällt).
+        if not [f for f in _c49_grund(texts={C49_WACHE: c49_text.replace(
+                "import metadaten_wache", "import eigene_liste")})
+                if "zweite Wahrheit" in f[1]]:
+            failures.append("C49: eine kopierte Pflichtliste bleibt unentdeckt.")
+        # (c) Die Quelle der Heilung fällt weg – dann würde erfunden.
+        if not [f for f in _c49_grund(texts={C49_WACHE: c49_text.replace(
+                "HEAD:", "IRGENDWO:")}) if "Erfinden" in f[1]]:
+            failures.append("C49: eine Heilung ohne HEAD-Quelle bleibt unentdeckt.")
+        # (d) Der Deploy ruft die Heilung nicht mehr auf.
+        if not [f for f in _c49_grund(flows={"deploy.yml": c49_deploy.replace(
+                C49_FIX, "scripts/irgendwas.py --fix")})
+                if "--fix` nicht" in f[1]]:
+            failures.append("C49: ein Deploy ohne Heilaufruf bleibt unentdeckt.")
+        # (e) Die Heilung wandert HINTER den Content-Bot-Commit – genau die
+        #     Reihenfolge, die 0b55fca erzeugt hat.
+        umgestellt = (c49_deploy.replace(C49_FIX, "scripts/irgendwas.py --fix")
+                    + f"\n      - name: Spaet\n        run: python3 {C49_FIX}\n")
+        if not [f for f in _c49_grund(flows={"deploy.yml": umgestellt})
+                if "NACH dem" in f[1]]:
+            failures.append("C49: eine Heilung nach dem Bot-Commit bleibt "
+                            "unentdeckt (Reihenfolge von 0b55fca).")
+        # (f) Die Wache verliert ihren Selbsttest – nicht mehr beweisbar (C6).
+        if not [f for f in _c49_grund(texts={C49_WACHE: c49_text.replace(
+                "def _run_selftest(", "def ohne_beweis(")})
+                if "nicht beweisbar" in f[1]]:
+            failures.append("C49: eine Wache ohne Selbsttest bleibt unentdeckt.")
+        # (g) Die Grundlagenprobe fällt – dann wäre ein Messausfall grün.
+        if not [f for f in _c49_grund(texts={C49_WACHE: c49_text.replace(
+                "def _grundlage(", "def ohne_grundlage(")})
+                if "Unwissen" in f[1]]:
+            failures.append("C49: eine Wache ohne Grundlagenprobe bleibt "
+                            "unentdeckt (Messausfall sähe wie Grün aus).")
+
     # Die EINZIGE Urteilsstelle des Selbsttests (Dauerheilung #806): erst
     # hier wird über alle Kunstbefunde entschieden – die Abschnitte sammeln,
     # dieser Abschluss urteilt.
@@ -8671,7 +8891,7 @@ def _selftest():
         for f in failures:
             print("   -", f)
         return 2
-    print("✅ KONTRAKT-SELFTEST bestanden (C1–C48 mit Kunstbefunden: Fehler "
+    print("✅ KONTRAKT-SELFTEST bestanden (C1–C49 mit Kunstbefunden: Fehler "
           "erkannt, gutes Setup bleibt still; Haus-Nummern C24/C31 gehören "
           "anderen Verträgen).")
     return 0

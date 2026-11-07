@@ -161,11 +161,56 @@ npm run release:bestand          # dito, aber Bestands-Rot = Exit 1 (Tageswache)
 npm run release:artikel -- <slug>  # Einzelnachweis für einen Artikel
 python3 scripts/release_scorecard.py --kandidaten   # Deploy-Modus (hart)
 python3 scripts/release_scorecard.py --json         # maschinenlesbar
-npm run test:release             # Selbsttest + 41 Unit-Tests
+npm run test:release             # Scorecard- + Heiler-Selbsttest + Regression
+npm run release:heilung:plan     # read-only: was darf die Maschine heilen?
 ```
 
 **Exit-Code-Vertrag:** `0` = freigabe-reif · `1` = blockierende Funde im
 Scope · `2` = Werkzeugfehler (fail-closed).
+
+### Automatische Bestands-Selbstheilung (#1098, 07.11.2026)
+
+Die Scorecard heilt sich weiterhin **nie selbst** (C15). Der tägliche Workflow
+ruft vorher einen eigenen, begrenzten Schreiber auf:
+`scripts/release_bestand_heiler.py`. Er benutzt ausschließlich die vorhandene
+Scorecard-Auswahl und die deterministischen Heiler für T5 (Lesbarkeit Stufe A),
+T6 (Politur/R5) und die formbewahrende Teilmenge artikelinterner RD1-Duplikate.
+Maximal acht Artikel je Lauf; kein KI-Call, kein endloser Retry.
+
+**Nicht automatisch:** F4-Fachbefunde, RD2-Cross-Artikel-Plagiate, Siegel,
+menschliche Freigaben, YMYL-/High-Risk-Texte und jeder Artikel, der zusätzlich
+einen Human-Blocker trägt. Diese landen mit Grund in
+`RELEASE-BESTAND-HEILUNG.md` und bleiben im Ticket sichtbar.
+
+Der Schreiblauf ist eine Transaktion: sauberer `content/posts`, SHA-256-CAS,
+Journal vor dem ersten Byte, atomarer Ersatz, deterministische Wiederholung.
+Danach baut die gemeinsame Hugo-Action neu und die vollständige Live-Scorecard
+misst erneut. `--bestaetigen` prüft Basis-Commit, Live-Menge, Nicht-Ziel-Hashes,
+Ziel-Hashes, verschwundene Ziel-Checks und die Abwesenheit neuer Blocker oder
+Werkzeugfehler. Scheitert ein Beweis, stellt `--zurueckrollen` die Original-
+Bytes aus dem Basis-Commit wieder her; fremde Änderungen werden nie
+überschrieben. Der Workflow baut und misst auch nach einem Rollback erneut.
+Content wird nur nach erfolgreicher Bestätigung committet.
+
+```bash
+# Manueller Schreiblauf (public/ muss frisch gebaut sein):
+python3 scripts/release_bestand_heiler.py --apply
+hugo --minify --destination public --cleanDestinationDir
+python3 scripts/release_scorecard.py --live --streng --commit-sha "$(git rev-parse HEAD)"
+python3 scripts/release_bestand_heiler.py --bestaetigen
+# Nach Abbruch:
+python3 scripts/release_bestand_heiler.py --zurueckrollen
+```
+
+Heiler-Exit: `0` = sicher abgeschlossen (menschlicher Rest erlaubt) ·
+`1` = Nachmessung hat den Versuch verworfen, Original wiederhergestellt ·
+`2` = Werkzeug-/Vertragsfehler. Planungs-/Auswahlmessungen schreiben kein
+Betriebsbuch (`repo_isolation.ledger_sandbox`). Werkzeugfehler der Scorecard
+stehen additiv im Siegel (`tool_fehler`); ein übersprungener Lauf erzeugt im
+Ticket „Messung nicht beweisbar“ statt alte Blocker als heutige Wahrheit.
+Der Ticket-Kopf wird bei Rot aktualisiert; Kommentare erscheinen nur bei
+Wechsel des Ursachen-Fingerabdrucks (Blocker-Menge/Werkzeugfehler), nicht
+bei jedem Tageslauf.
 
 ### Symptom oder Ursache? Die Deckungszeile (#912, 29.10.2026)
 

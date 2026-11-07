@@ -1,0 +1,189 @@
+# ============================================================
+#  PRODUKTIONS-SCHUTZ · AUTOMATISCHE SELBSTHEILUNG (WF-829B / #922)
+#  ------------------------------------------------------------
+#  DER BEFUND VOM 07.11.2026
+#  `worker_environment_einrichten.py --anwenden` gibt es seit dem 30.10.2026.
+#  Es kann den Required Reviewer und die Branch-Regel `main` per API setzen –
+#  aber KEIN automatischer Lauf hat es je aufgerufen. Die Tages-Wache rief nur
+#  `--pruefen --warnstufe` auf, der Handbefehl stand in `package.json`, und das
+#  Environment blieb seit dem 25.10.2026 ungesichert. Ein täglich neu
+#  gemeldeter Befund mit vorhandenem, aber nicht verdrahtetem Heilweg ist eine
+#  Warteschlange, keine Selbstheilung (dieselbe Klasse wie GSC #1097).
+#
+#  WAS DIESER LAUF ANDERS MACHT
+#    · Messen → NUR VERSCHÄRFEND schreiben → NACHMESSEN → Beleg. Ohne
+#      Nachmessung gilt nichts als geheilt; eine Verschlechterung bricht ab.
+#    · Vor jedem Urteil steht die Eichprobe: Der Vorfall wird im Speicher
+#      nachgebaut. Erkennt der Prüfer ihn nicht, gibt es Exit 3 und keinen
+#      Schreibzugriff (Lehre aus dem zerstörten Siegel vom 04.11.2026).
+#    · Append-only Belegkette mit verketteten SHA-256-Prüfsummen, je Lauf ein
+#      Eintrag mit Vorher/Nachher, Schritten, Klasse und Grund. Als Artefakt
+#      90 Tage aufbewahrt – kein Geheimnis, kein Fremdlink, kein Antworttext.
+#    · `--wache` prüft in JEDEM Lauf (auch auf PRs), dass dieser Heilschritt
+#      wirklich in einem `run:`-Block steht, dass Vertrag und Kette heil sind
+#      und dass der harte Stopp im Deploy-Pfad unangetastet ist. Wird die
+#      Verdrahtung entfernt, wird sie zum Befund, statt still zu verrotten.
+#
+#  AUSLÖSER – Heilung passiert, ohne dass jemand daran denkt:
+#    · täglich 05:48 UTC (vor der Sicherheits-Wache um 06:05),
+#    · unmittelbar NACH jedem Lauf von „Cloudflare-Worker deployen" auf main –
+#      auch und gerade nach einem roten, fail-closed abgebrochenen Deploy,
+#    · auf Zuruf (`workflow_dispatch`, `modus=pruefen` = rein lesend),
+#    · bei jeder Änderung an Heiler, Tests, Vertrag, Kette oder Workflow.
+#
+#  WAS DIESER LAUF AUSDRÜCKLICH NICHT TUT
+#    · Keine Deploy-Freigabe. Freigeben bleibt Menschenhandlung.
+#    · Kein `can_admins_bypass`: keine GitHub-API nimmt dieses Feld an. Der
+#      Schalter im Dashboard bleibt EINE einmalige Inhaberhandlung.
+#    · Keine Cloudflare-Secrets, kein Wrangler, kein Löschen, kein Lockern.
+#    · Kein Ersetzen des Gates: `worker_environment_guard.py --check` bleibt im
+#      Deploy-Pfad VOR jedem Secret-Zugriff (W5 der Verdrahtungs-Wache).
+#
+#  TOKEN: `UMGEBUNGS_ADMIN_TOKEN` (feingranular `Environments: read/write`)
+#  ist optional. Fehlt es, fällt der Lauf auf `github.token` zurück; die API
+#  antwortet dann 403, der Heiler meldet RECHT (Exit 1, Warnstufe) und behauptet
+#  keine Heilung. Ein fehlendes Recht wird nie als „übersprungen/grün" gebucht.
+# ============================================================
+name: Produktions-Schutz · Selbstheilung (WF-829B)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/produktions_schutz_selbstheilung.py"
+      - "scripts/tests/test_produktions_schutz_selbstheilung.py"
+      - "data/produktions_schutz_vertrag.json"
+      - "data/produktions_schutz_belege.jsonl"
+      - ".github/workflows/produktions-schutz-selbstheilung.yml"
+      - ".github/workflows/worker-deploy.yml"
+  pull_request:
+    paths:
+      - "scripts/produktions_schutz_selbstheilung.py"
+      - "scripts/tests/test_produktions_schutz_selbstheilung.py"
+      - "data/produktions_schutz_vertrag.json"
+      - "data/produktions_schutz_belege.jsonl"
+      - ".github/workflows/produktions-schutz-selbstheilung.yml"
+      - ".github/workflows/worker-deploy.yml"
+  schedule:
+    - cron: "48 5 * * *"   # täglich vor der Sicherheits-Wache (06:05 UTC)
+  workflow_dispatch:
+    inputs:
+      modus:
+        description: "Heilen (schreiben + nachmessen) oder nur lesend prüfen"
+        required: true
+        type: choice
+        options:
+          - heilen
+          - pruefen
+        default: heilen
+  workflow_run:
+    workflows:
+      - "Cloudflare-Worker deployen"
+    types: [completed]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: produktions-schutz-selbstheilung
+  cancel-in-progress: false
+
+jobs:
+  vertraege:
+    name: Verträge, Eichprobe und Verdrahtung (offline)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Heiler selbsttesten – Eichprobe und Sabotage
+        run: python3 scripts/produktions_schutz_selbstheilung.py --selftest
+
+      - name: Verdrahtungs-Wache – läuft der Heilweg wirklich?
+        run: python3 scripts/produktions_schutz_selbstheilung.py --wache
+
+      - name: Vertragstests der Selbstheilung
+        run: python3 -m unittest scripts.tests.test_produktions_schutz_selbstheilung -v
+
+  selbstheilung:
+    name: Produktions-Environment messen, heilen, nachmessen
+    needs: vertraege
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'schedule' ||
+       github.event_name == 'workflow_dispatch' ||
+       (github.event_name == 'workflow_run' && github.event.workflow_run.head_branch == 'main'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Belegkette in den Lauf übernehmen (Kette bleibt ganz)
+        run: |
+          set -euo pipefail
+          cp data/produktions_schutz_belege.jsonl "$RUNNER_TEMP/produktions_schutz_belege.jsonl"
+
+      - name: Zustand messen und automatisch heilen (neutraler Exit)
+        id: messung
+        env:
+          GITHUB_TOKEN: ${{ secrets.UMGEBUNGS_ADMIN_TOKEN || github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          MODUS: ${{ inputs.modus || 'heilen' }}
+        run: |
+          set -uo pipefail
+          code=0
+          if [ "$MODUS" = "pruefen" ]; then
+            python3 scripts/produktions_schutz_selbstheilung.py --pruefen \
+              --md "$GITHUB_STEP_SUMMARY" || code=$?
+          else
+            python3 scripts/produktions_schutz_selbstheilung.py --heilen \
+              --beleg "$RUNNER_TEMP/produktions_schutz_belege.jsonl" \
+              --md "$GITHUB_STEP_SUMMARY" || code=$?
+          fi
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+
+      - name: Ergebnis auswerten – grün, Warnstufe oder harter Stopp
+        if: ${{ !cancelled() && steps.messung.outcome != 'skipped' }}
+        env:
+          MESS_CODE: ${{ steps.messung.outputs.code }}
+        run: |
+          set -euo pipefail
+          case "$MESS_CODE" in
+            0)
+              echo "✅ Zielzustand mit Nachmessung belegt. Freigeben bleibt Menschenhandlung."
+              ;;
+            1)
+              # C14: Ein Zustand, den das Repository nicht herstellen kann
+              # (Rechtebefund, Dashboard-Schalter), ist eine offene Entscheidung
+              # mit Schließpfad – kein Dauer-Rot ohne Handlungsmöglichkeit.
+              echo "::warning title=Produktions-Schutz offen::Der Tageslauf hat alles verschärft, was die API zulässt. Für den Rest: Secret UMGEBUNGS_ADMIN_TOKEN mit Environments-Schreibrecht hinterlegen und den Administrator-Bypass im Dashboard einmalig ausschalten. Der Deploy bleibt bis dahin fail-closed gesperrt."
+              ;;
+            2)
+              echo "::error title=Produktions-Schutz nicht belegbar::Netz, API oder Belegkette sind ungeprüft. Ungeprüft gilt nicht als sauber."
+              exit 1
+              ;;
+            3)
+              echo "::error title=Messgerät nicht eichfähig::Die Eichprobe ist gescheitert – kein Urteil und kein Schreibzugriff."
+              exit 1
+              ;;
+            *)
+              echo "::error title=Produktions-Schutz::Werkzeugfehler (Exit $MESS_CODE)."
+              exit 1
+              ;;
+          esac
+
+      - name: Belegkette aufbewahren (ohne Secrets oder Antworttexte)
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: produktions-schutz-beleg
+          path: ${{ runner.temp }}/produktions_schutz_belege.jsonl
+          retention-days: 90
+          if-no-files-found: error
