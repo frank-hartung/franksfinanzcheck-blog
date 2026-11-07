@@ -1,14 +1,16 @@
 {
   "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
-  "titel": "Warmwasser sparen: Die Rechnung hinter dem Hahn",
-  "erzeugt": "2026-10-13 09:36 UTC",
+  "titel": "Warmwasser sparen: Die Rechnung hinter – Warmwasserkosten",
+  "erzeugt": "2026-11-07 11:19 UTC",
   "faellig": {
-    "faellig": true,
-    "prio": 1,
+    "faellig": false,
+    "prio": 9,
     "klasse": "saisonal",
-    "grund": "48 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-    "alter_tage": 48,
-    "intervall": 30
+    "grund": "frisch geprüft vor 25 Tagen (Intervall 30 Tage)",
+    "alter_tage": 25,
+    "intervall": 30,
+    "frist": "2026-11-12",
+    "restlaufzeit": 5
   },
   "geo": {
     "punkte": 6,
@@ -24,9 +26,53 @@
       "faktencheck": true
     }
   },
-  "treffer": [],
-  "befunde": [],
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesnetzagentur.de",
+      "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "datum": "",
+      "quelle": "bundesnetzagentur.de",
+      "kanal": "web",
+      "auszug": "Title: Bundesnetzagentur - Energie\n\n*   [_Energie_](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html)\n    *   [Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html)\n\n*   [Digitales und Telekommunikation](https://www.bundesnetzagentur.de/DE/Vportal/TK/start.html)\n    *   [Energie](https://www.bundesnetzagentur.de/DE/Vportal/Energie/start.html)\n    *   [Post](https://www.bundesnetzagentur.de/DE/Vportal/Post/start.html)\n    *   [Anfragen und Beschwerden](https://www.bundesnetzagentur.de/DE/Vportal/AnfragenBeschwerden/start.html)\n    *   [Schlichtung](https://www.bundesnetzagentur.de/DE/Vportal/Schlichtung/start.html)\n    *   [Verbraucherschutz in Zahlen](https://www.bundesnetzagentur.de/DE/Vportal/Verbraucher-Radar/start.html)\n\n*   [Energie (Internationales)](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/start.html)\n\n*   [ACER](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/ACER/start.html)\n            *   [CEER](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/CEER/start.html)\n            *   [PCI](https://www.bundesnetzagentur.de/DE/Allgemeines/DieBundesnetzagentur/Internationales/Energie/PCI/start.html)\n\n1.   [Homepage](https://www.bundesnetzagentur.de/DE/Home/home_node.html \"Zur Startseite\")\n2.   [Fachthemen](https://www.bundesnetzagentur.de/DE/Themen/start.html \"Themen\")\n3.   [UntermenuOeffnen](javascript:void(0))**Energie**[Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html \"Telekommunikation\")[Digitales](https://www.bundesnetzagentur.de/DE/Fachthemen/Digitales/start.html \"Alle Fachthemen rund um Digitales\")[Post](htt",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Bundesnetzagentur",
+      "rang": 1,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Die Aussage, dass Warmwasser der zweitgrößte Kostenposten im Haushalt ist, wird nicht durch eine der bereitgestellten Quellen belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Behauptung, dass Warmwasser in der Heizkostenabrechnung üblicherweise als eigener Block ausgewiesen wird, fehlt eine Quellenangabe.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Verweise auf die Verbraucherzentrale (Tipps zum Heizkosten sparen, Heizung optimieren) können nicht mit den angegebenen Fundstellen belegt werden.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Angaben zu gesetzlichen Vorgaben für Warmwassertemperaturen zur Vermeidung von Legionellen werden nicht durch die bereitgestellten Quellen gestützt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der Preis von 0,30 € pro Kilowattstunde in der Modellrechnung ist nicht mit einer Quelle belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    }
+  ],
   "fehler": [
-    "offline: keine Abrufe"
-  ]
+    "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (<urlopen error timed out>)",
+    "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+  ],
+  "fassung_sha256": "69cbd8a400bf4785eb72ca73a7f9e235da4ce561e7f3c073e08b6de7b2f8cfd5",
+  "text_sha256": "25795ff24b53bab6aad9eb3744be66d257d3e3ac97e93b2da6a8a209ca7dea31",
+  "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)"
 }

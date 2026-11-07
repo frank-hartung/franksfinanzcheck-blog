@@ -35,6 +35,10 @@ import unittest
 import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from faktenfrische_gleis import (  # noqa: E402
+    arbeitsliste_traegt_befunde, offene_befunde)
 sys.path.insert(0, str(ROOT / 'scripts'))
 import faktenfrische  # noqa: E402
 
@@ -501,6 +505,12 @@ class Faktenfrische823MetaTests(unittest.TestCase):
             self.assertNotIn(kern, kerne,
                              f'Offener Befund zurückgekehrt für {eintrag.get("slug")}: '
                              f'{eintrag.get("typ")} – {eintrag.get("text")}')
+        """Kein offener Befund für die zwei Seiten – die Arbeitsliste darf sie
+        führen (Frist 15.11.2026, Vorlauf 14 Tage), aber nicht als Befund."""
+        self.assertFalse(offene_befunde((SAISON, DNS)),
+                         'Queue meldet offenen Befund für eine der zwei Seiten')
+        self.assertFalse(arbeitsliste_traegt_befunde((SAISON, DNS)),
+                         'Queue-Eintrag transportiert einen Befund')
 
     def test_systemprompt_prueft_die_823_befundklassen(self):
         prompt = faktenfrische.SYSTEM_PROMPT.lower()

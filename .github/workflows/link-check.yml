@@ -115,7 +115,10 @@ jobs:
       # 06.11.2026 (#1060): C48 (Bestands-Einzigartigkeit: Diff-Tor vor der
       # Linkprüfung + Schwert-Import + Selbsttest) dazu – Namens-Nachzug
       # konsequent: der Schritt hieß zuletzt noch „C1–C18“.
-      - name: Governance-Vertrag C1–C48 (Reihenfolge, Issue-Policy, Nachweise, Token-Lebenszyklus, Pflicht-Check, Diff-Tor)
+      # 07.11.2026 (#1110): C49 (Pflichtfeld-Verlust: kein Automatik-Commit
+      # verliert ein M4-Pflichtfeld – bytegenau aus HEAD zurück, letzter
+      # Schreiber vor dem Content-Bot-Commit) dazu.
+      - name: Governance-Vertrag C1–C49 (Reihenfolge, Issue-Policy, Nachweise, Token-Lebenszyklus, Pflicht-Check, Diff-Tor, Pflichtfeld-Verlust)
         run: |
           python3 scripts/governance_contract.py --quick
           python3 -m unittest \

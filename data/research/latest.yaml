@@ -1,5 +1,5 @@
-generated_at: '2026-11-06T11:28:54Z'
-day: '2026-11-06'
+generated_at: '2026-11-07T10:40:30Z'
+day: '2026-11-07'
 mode: deterministic
 teams:
   trending:
@@ -252,60 +252,63 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: Die richtige Absicherung für dein Haus
-    pillar: versicherungen
-    signal: niche_hook
-    source: topics:Die richtige Absicherung für dein Haus
-    score: 0.55
-    keywords:
-    - Haus
-    - Versicherung
-    - Schutz
-  - topic: Haushaltskosten reduzieren mit einfachen Mitteln
-    pillar: frugalismus
-    signal: niche_hook
-    source: topics:Haushaltskosten reduzieren mit einfachen Mitteln
-    score: 0.55
-    keywords:
-    - Haushaltskosten
-    - reduzieren
-    - Mitteln
-  - topic: 'Heizkostenabrechnung prüfen: So findest du Fehler in 10 Minuten'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Heizkostenabrechnung prüfen: So findest du Fehler in 10 Minuten'
-    score: 0.55
-    keywords:
-    - Heizkostenabrechnung prüfen
-    - Nebenkostenabrechnung Fehler
-    - Heizkosten zu hoch
-  - topic: Reise- und Unfallversicherungen im Vergleich
-    pillar: versicherungen
-    signal: niche_hook
-    source: topics:Reise- und Unfallversicherungen im Vergleich
-    score: 0.55
-    keywords:
-    - Reiseversicherung
-    - Unfallversicherung
-    - Vergleich
-  - topic: 'Reisekrankenversicherung: Wann sie sich wirklich lohnt'
-    pillar: versicherungen
-    signal: niche_hook
-    source: 'topics:Reisekrankenversicherung: Wann sie sich wirklich lohnt'
-    score: 0.55
-    keywords:
-    - Reisekrankenversicherung
-    - Auslandskrankenversicherung
-    - Reiseschutz
-  - topic: 'Schufa-Eintrag löschen lassen: So gehst du richtig vor'
+  - topic: Die Vorteile von Prepaid-Karten für den Urlaub
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Schufa-Eintrag löschen lassen: So gehst du richtig vor'
+    source: topics:Die Vorteile von Prepaid-Karten für den Urlaub
     score: 0.55
     keywords:
-    - Schufa Eintrag löschen
-    - Negativeintrag entfernen
-    - Bonität verbessern
+    - Prepaid-Karten
+    - Urlaub
+    - Karten
+  - topic: Die besten Strategien für den Aufbau eines Notgroschens
+    pillar: frugalismus
+    signal: niche_hook
+    source: topics:Die besten Strategien für den Aufbau eines Notgroschens
+    score: 0.55
+    keywords:
+    - Notgroschen
+    - Aufbau
+    - Strategien
+  - topic: Stromkosten senken mit cleveren Haushaltsgeräten
+    pillar: strom-sparen
+    signal: niche_hook
+    source: topics:Stromkosten senken mit cleveren Haushaltsgeräten
+    score: 0.55
+    keywords:
+    - Stromkosten
+    - Haushaltsgeräte
+    - Energieeffizienz
+  - topic: 'WLAN-Repeater oder Powerline: Was durch Wände wirklich kommt'
+    pillar: internet-dsl
+    signal: niche_hook
+    source: 'topics:WLAN-Repeater oder Powerline: Was durch Wände wirklich kommt'
+    score: 0.55
+    keywords:
+    - WLAN Repeater
+    - Powerline Vergleich
+    - WLAN verstärken
+  - topic: 'Wechsel-Wahnsinn im November: Wie du deine alte Kfz-Versicherung richtig
+      kündigst'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Wechsel-Wahnsinn im November: Wie du deine alte Kfz-Versicherung
+      richtig kündigst'
+    score: 0.55
+    keywords:
+    - Kfz Versicherung kündigen Frist
+    - Wechselsaison November
+    - Sonderkündigungsrecht Autoversicherung
+    - Stichtag 30. November
+  - topic: 'Wäschetrockner: Wann die Wäscheleine wirklich günstiger ist'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Wäschetrockner: Wann die Wäscheleine wirklich günstiger ist'
+    score: 0.55
+    keywords:
+    - Wäschetrockner Kosten
+    - Wäsche aufhängen
+    - Trockner Stromverbrauch
 live_web:
   enabled: false
   findings: []

@@ -40,6 +40,10 @@ import unittest
 import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from faktenfrische_gleis import (  # noqa: E402
+    arbeitsliste_traegt_befunde, offene_befunde)
 sys.path.insert(0, str(ROOT / 'scripts'))
 import faktenfrische  # noqa: E402
 
@@ -539,6 +543,12 @@ class Faktenfrische911MetaTests(unittest.TestCase):
             self.assertNotIn(kern, kerne,
                              f'Offener Befund zurückgekehrt für {eintrag.get("slug")}: '
                              f'{eintrag.get("typ")} – {eintrag.get("text")}')
+        """Offene Befunde sind geschlossen; die Arbeitsliste darf die Seiten
+        führen (Turnus, Vorlauf), ein Befund darf dort nicht mitreisen."""
+        self.assertFalse(offene_befunde((STROM, GAS)),
+                         'Queue meldet offenen Befund für eine der zwei Seiten')
+        self.assertFalse(arbeitsliste_traegt_befunde((STROM, GAS)),
+                         'Queue-Eintrag transportiert einen Befund')
         # Der Register-Eintrag muss den Lauf und die Heilung datieren.
         reg = register()
         self.assertIn('2026-10-27', reg['lauf'])

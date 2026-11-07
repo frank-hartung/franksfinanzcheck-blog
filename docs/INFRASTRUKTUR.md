@@ -33,7 +33,7 @@ GitHub Repo frank-hartung/franksfinanzcheck-blog (main = Quelle)
 | **E-Mail** | **Cloudflare Email Routing** | Weiterleitung `kontakt@franksfinanzcheck.de` an persönliche Zieladresse (keine eigene Mailbox, keine MX-Konkurrenz zu Website) – Doku: [E-MAIL-WEITERLEITUNG-CLOUDFLARE.md](E-MAIL-WEITERLEITUNG-CLOUDFLARE.md) |
 | **Hosting** | **GitHub Pages** (Branch `gh-pages`) | Statische Auslieferung, global via Fastly |
 | Quellcode | GitHub Repo (`main`) | Build-Quelle, Automatisierung |
-| Backup | Privates GitHub-Repo, verschlüsselt (`backup-offsite.yml` + `backup-frischwache.yml`: Repo + Abonnenten-KV, nächtlich, SLA RPO 24h/52h, RTO <60 Min.) | Einrichtung, Prüfung (E1–E8), operative Frischwache (52 h/36 h), Wiederherstellung: [ANLEITUNG-OFFSITE-BACKUP.md](ANLEITUNG-OFFSITE-BACKUP.md) |
+| Backup | Privates GitHub-Repo, verschlüsselt (`backup-offsite.yml` + `backup-frischwache.yml`: Repo + Abonnenten-KV, nächtlich, SLA RPO 24h/52h, RTO <60 Min.) | Einrichtung, Prüfung (E1–E8), operative Frischwache (52 h/36 h) **mit Selbstheilung**, Wiederherstellung: [ANLEITUNG-OFFSITE-BACKUP.md](ANLEITUNG-OFFSITE-BACKUP.md) |
 
 ---
 
@@ -92,7 +92,11 @@ Ein Purge wäre nur nötig, wenn ohne SHA-Buster deployed würde (nie).
    AES-256 verschlüsselt, als Entwurfs-Releases in ein privates Repo (Audit
    M-11). SLA: RPO 24 h (52 h Toleranz), RTO < 60 Min. Konfigurationsprüfung
    E1–E8 + **automatisierte** operative Frischwache `backup-frischwache.yml`
-   (13:00 UTC, 52 h rot/36 h gelb, beide Familien) + beweisbare Wiederherstellung
+   (13:00 UTC, 52 h rot/36 h gelb, beide Familien) – seit 07.11.2026 **mit
+   Selbstheilung**: ab 26 h ohne frisches Release stößt sie den Sicherungslauf
+   selbst an (max. 3/24 h), wartet und misst erneut; grün nur mit frischem
+   Release. Ein Release ohne Inhalt (0 Assets) gilt nicht als Sicherung
+   (`backup_selbstheilung.py`) + beweisbare Wiederherstellung
    `restore_drill.sh` (Highend 24.10.2026). Das Blog-Repo selbst ist kein
    Offsite-Backup (gleiches Konto). Der frühere S3-Plan ist damit ersetzt.
    Zusätzlich verweigern alle drei Jobs die Ausführung auf einem anderen Ref
