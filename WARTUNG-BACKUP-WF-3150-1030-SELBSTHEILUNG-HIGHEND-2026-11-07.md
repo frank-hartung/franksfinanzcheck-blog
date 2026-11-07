@@ -353,6 +353,11 @@ Wache ist nicht zweigspezifisch. Und der `regression`-Job dieses Zweigs war um
 10:06 UTC (Run 42362500106, `7d0a712`) noch grün: rot wurde er, als `main`
 weiterlief, nicht als dieser Zweig sich änderte.
 
+Der Befund ist als eigenes Issue festgehalten:
+[#1126](https://github.com/frank-hartung/franksfinanzcheck-blog/issues/1126), damit
+er nicht in einem PR-Kommentar verschwindet; reproduziert sowohl auf `e103bc3`
+(Stand des roten Laufs) als auch auf `f0bff16` (Stand beim Schreiben).
+
 **Folge für #1030:** Keine. Die Frischwache, ihre Selbstheilung, die
 Vertragstests und das Workflow-Gate sind unabhängig von diesem Befund grün;
 die Backend-Lücke E1–E8 bleibt der einzige offene Punkt. PR #1115 kann erst
