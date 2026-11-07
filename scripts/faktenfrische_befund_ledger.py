@@ -89,6 +89,154 @@ AKTE = ROOT / "BEFUND-AKTE.md"
 
 LEGACY = "legacy-unbekannt"
 HASH_RE = re.compile(r"[0-9a-f]{64}")
+# Betriebsflächen (07.11.2026, #1072-Nachlauf): Zeilen, die NICHT die
+# Redaktion schreibt, sondern der Betrieb – und die deshalb keine
+# fachliche Entscheidung öffnen dürfen.
+#
+# WARUM SO ENG (zweite Fassung, 07.11.2026): Eine Zeilenregel nach Stichwort
+# genügt nicht. Der Bestand enthält redaktionelle Doppelgänger, die wie
+# Betriebsflächen aussehen, aber Aussagen tragen:
+#   * `* **Transparenz:** Intelligente Steckdosen entlarven Standby-Sünder.`
+#     – ein Bullet in „Das Wichtigste in Kürze“, keine Offenlegung.
+#   * `> 💡 **Schnell-Tipp von FranksFinanzcheck:** … 24 Monate … 0,80 € …`
+#     – der Werbe-Baustein nennt echte Zahlen und Fristen.
+# Eine breite Stichwort-Ausnahme hätte diese Sätze für immer vor dem Ledger
+# versteckt. Deshalb gilt: Jede Betriebsfläche wird über ihre STRUKTUR erkannt,
+# und freigestellt wird nur, was nachweislich keine Aussage tragen kann –
+# jede Zeile mit freistehender Zahl bleibt gebunden (fail-closed).
+BETRIEBS_FLAECHEN = (
+    # Kuratierte „Weiterlesen“-Zeile: nur Linktitel und Trenner, nie Prosa.
+    # (Im Bestand gibt es 5 Prosavarianten; sie tragen verbundene Sätze und
+    # werden von `_ist_weiterlesen_zeile` NICHT freigestellt.)
+    re.compile(r"^\s*\*\*Weiterlesen:\*\*.*$"),
+    re.compile(r"^\s*\*\*Lesetipp:\*\*.*$"),
+    # Der Offenlegungssatz des Text-Gates – in allen vier Schreibweisen des
+    # Bestands (`**Transparenz:**`, `> **Transparenz:**`, `* **Transparenz:**`
+    # und Blockquote). Erkannt wird der SATZ, nicht das Wort.
+    re.compile(r"^\s*(?:>\s*)?\*{0,2}Transparenz:\*{0,2}\s*"
+               r"(?:Dieser (?:Artikel|Blog|Beitrag) enthält Affiliate)"),
+    # Abbildungszeilen des Ableiters: Bild-Syntax allein, Bildzeile mit
+    # Gliederungstext. Beide sind abgeleitet, keine Redaktion.
+    re.compile(r"^\s*!\[[^\]]*\]\([^)]*\)\s*$"),
+    re.compile(r"^\s*\*Abbildung:"),
+    # Der Affiliate-Disclaimer, den `ki_shared`/`endredaktion` einsetzt –
+    # im Bestand auch als `_(…)`, `> (…)` und `*(…)` geklammert.
+    re.compile(r"^\s*(?:>\s*)?[\*_]{0,2}\(?Dieser Artikel enthält Affiliate-Links"),
+)
+# Eine freistehende Zahl (nicht in einem Link, nicht in der Bild-Syntax) macht
+# aus jeder Betriebsfläche eine Aussage. Fail-closed: Im Zweifel bleibt die
+# Zeile gebunden.
+_NUR_LINK = re.compile(r"!?\[[^\]]*\]\([^)]*\)")
+_ZAHL = re.compile(r"\d")
+
+# Der Werbebaustein „Schnell-Tipp“ ist die einzige Fläche, die der Betrieb
+# nicht nur anfügt, sondern UMSCHREIBT: `affiliate_marketer.py` tauscht die
+# `/go/<route>/`-Route gegen die thematisch bessere (RETARGET, Abschnitt
+# „Sabotage-schutz“) – in 69 Zeilen des Bestands. Genau das ist der Fall, den
+# `betriebsflaeche()` nicht öffnen darf.
+#
+# Warum er trotzdem NICHT pauschal freigestellt wird: Der Baustein nennt
+# echte Fristen und Werte („Effektivpreis über 24 Monate“, „Wi-Fi 6“). Diese
+# sind Teil des Werbetexts und keine Marktbehauptung – ein PROZENTWERT
+# dagegen wäre eine („3,5 % Zinsen“) und bleibt deshalb gebunden.
+SCHNELL_TIPP = re.compile(r"^\s*(?:>\s*)?💡\s*\*\*Schnell[-‑‐–—]Tipp")
+
+# Die CTA-Bausteine des Marketers. Sie bestehen nur aus Anreißer + `/go/`-Link;
+# `affiliate_marketer.py` tauscht die Route, `fix_cta_hygiene.py` den Anreißer.
+# Beide schreiben – die Redaktion entscheidet über den Satz davor, nicht über
+# den Werbeblock.
+# Reine Werbezeilen: Nach dem Entfernen von Links, Hervorhebungen, Emoji und
+# Satzzeichen bleibt NICHTS übrig. Das ist die belastbare Definition einer
+# CTA-Zeile – unabhängig davon, wie der Marketer den Anreißer gerade formuliert.
+_SCHMUCK = re.compile(r"!?\[[^\]]*\]\([^)]*\)")          # Links/Bilder
+_DEKOR = re.compile(r"[\s*_~`:·•\-–—>|\u2192\u2190\u21d2\u00bb"
+                    r"\U0001F300-\U0001FAFF\u2600-\u27BF\uFE0F]+")
+_GO_LINK = re.compile(r"\]\(/go/[^)]*\)")
+
+
+def _nur_werbung(zeile: str) -> bool:
+    """Reine Werbezeile: Anreißer-Überschrift + /go/-Link, sonst kein Satz.
+
+    Erlaubt ist ein kurzer Anreißer in Fettschrift, der auf einen Doppelpunkt
+    endet („👉 **Jetzt vergleichen und sparen:** [**→ …**](/go/x/)"). Er ist
+    eine Überschrift des Werbeblocks, kein Satz: kein Verb am Ende, kein
+    Punkt. Sobald danach echter Fließtext steht, bleibt die Zeile gebunden.
+    """
+    if not _GO_LINK.search(zeile):
+        return False                                  # ohne /go/-Link: keine CTA
+    rest = _SCHMUCK.sub("", zeile)
+    # Anreißer-Überschrift am Zeilenanfang entfernen (endet auf Doppelpunkt).
+    rest = re.sub(r"^\s*(?:>\s*)?(?:👉\s*)?\*\*[^*]{1,60}:\*\*", "", rest)
+    rest = _DEKOR.sub("", rest)
+    return not rest.strip(" :.,;!?()[]{}'\"")
+SPAR_TIPP = re.compile(r"^\s*(?:>\s*)?💶\s*\*\*Spar[-‑‐–—]Tipp")
+
+# Vom Ableiter erzeugte Bildzeilen (`abbildungen_ableiten.py`). Sie tragen die
+# Gliederung des Artikels als Zahlen („5 Stationen“) – abgeleitet, nicht
+# behauptet. Deshalb steht diese Stufe VOR der Zahl-Sperre.
+ABGELEITET = re.compile(r"^\s*(?:!\[[^\]]*\]\([^)]*\)\s*$|\*Abbildung:)")
+WEITERLESEN_PROSA = re.compile(
+    r"^\s*\*\*Weiterlesen:\*\*\s*(?:Der|Die|Das|Im|In|Wer|Was|Hier)\b")
+
+
+def _ist_weiterlesen_zeile(zeile: str) -> bool:
+    """Linkliste ja, Fließtext nein.
+
+    Die Weiterlesen-Zeile ist der Ort, an den `gsc_abdeckung.py` schreibt
+    (#1097). Sie besteht dann aus Linktiteln und `·` – keine Aussage. Beginnt
+    der Text nach dem Marker jedoch mit einem Satz, ist es Redaktion, die
+    gelesen und geprüft werden muss.
+    """
+    if WEITERLESEN_PROSA.match(zeile):
+        return False
+    return True
+
+
+def betriebsflaeche(zeile: str) -> bool:
+    """Ist diese Zeile Betriebsfläche – und darf sie die Aussage nicht öffnen?
+
+    Drei Stufen, weil die Flächen unterschiedlich viel tragen können:
+      1. ABGELEITET (`*Abbildung:`, Bild-Syntax): Der Ableiter erzeugt die
+         Zeile samt Gliederungszahlen aus dem Artikel – sie ist nie eine
+         eigenständige Behauptung. Immer Betriebsfläche.
+      2. WERBETEXT (`Schnell-Tipp`): wird umgeschrieben (RETARGET), trägt
+         aber teils Werte. Nur ohne Prozentwert Betriebsfläche.
+      3. VERWEIS (Weiterlesen, Lesetipp, Offenlegungssatz, Disclaimer):
+         Nur als Linkliste/Formelsatz Betriebsfläche; jede freistehende
+         Zahl hält die Zeile gebunden (fail-closed).
+    """
+    if ABGELEITET.match(zeile):
+        return True
+    if SCHNELL_TIPP.match(zeile) or SPAR_TIPP.match(zeile):
+        # Prozentwerte sind Marktbehauptungen, alles andere ist Werbetext.
+        return "%" not in zeile
+    if _nur_werbung(zeile):
+        return True   # reiner /go/-Link, kein Satz
+    if _ZAHL.search(_NUR_LINK.sub("", zeile)):
+        return False  # eine Zahl ist immer Aussage, egal wer die Zeile schrieb
+    if any(muster.match(zeile) for muster in BETRIEBS_FLAECHEN):
+        return _ist_weiterlesen_zeile(zeile)
+    return False
+
+
+# EINGEFROREN (07.11.2026): Die erste Fassung der Betriebsflächen-Regel, wie
+# sie an diesem Tag um 09:00 UTC im Ledger stand. Sie wird NIE mehr geändert –
+# sie ist der Beweis dafür, dass eine frühere Projektion nicht entwertet
+# wird, wenn die Erkennung genauer wird. `PROJEKTIONEN` nennt sie `betrieb-v1`.
+BETRIEBS_FLAECHEN_V1 = (
+    re.compile(r"^\s*\*\*Weiterlesen:\*\*.*$"),
+    re.compile(r"^\s*\*\*Lesetipp:\*\*.*$"),
+    re.compile(r"^\s*\*\*Transparenz:\*\*.*$"),
+    re.compile(r"^\s*!\[[^\]]*\]\([^)]*\)\s*$"),
+    re.compile(r"^\s*\*Abbildung:.*\*\s*$"),
+    re.compile(r"^\s*\*?\(?Dieser Artikel enthält Affiliate-Links.*$"),
+)
+
+
+def _betriebsflaeche_v1(zeile: str) -> bool:
+    """Die Vorgänger-Regel, eingefroren – nur für die Rückwärtsbindung."""
+    return any(muster.match(zeile) for muster in BETRIEBS_FLAECHEN_V1)
+
 # Eine Begründung, die nur „ok“ sagt, ist keine Entscheidung. Die Grenze ist
 # bewusst klein (kein Aufsatz), aber groß genug, um die Prüfung zu benennen.
 BEGRUENDUNG_MIN = 20
@@ -112,19 +260,12 @@ def _frontmatter(art: dict) -> dict:
     return fm
 
 
-def pruef_hash(art: dict) -> str:
-    """Hash der vollständigen Prüffassung – inklusive Quellen (KI-Bindung)."""
-    fm = _frontmatter(art)
-    material = {
-        "title": fm.get("title", ""),
-        "description": fm.get("description", ""),
-        "kurzantwort": fm.get("kurzantwort", ""),
-        "quellen": fm.get("quellen") or [],
-        "body": art.get("body", ""),
-    }
-    payload = json.dumps(material, ensure_ascii=False, sort_keys=True,
-                         separators=(",", ":"), default=str)
-    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+# HINWEIS (07.11.2026, #1072): Hier stand eine ZWEITE, ältere `pruef_hash`-
+# Definition ohne `pin_title`/`pin_description`. Sie war seit #996 toter Code
+# – Python nimmt die spätere –, aber ein Bearbeiter hätte sie „reparieren“
+# können und damit die Werbeflächen aus der Prüffassung verloren (genau der
+# Rückfall, den #996 geschlossen hat). Der Vertrag C46 verlangt zwei Hashes,
+# nicht drei Definitionen. Entfernt; der Selftest prüft die Bindung.
 
 
 # ----------------------------------------------------------------------
@@ -153,6 +294,133 @@ def kerntext(body: str) -> str:
 
     Entfernt wird ausschließlich ein abgeleitetes Bild samt der direkt
     folgenden Unterschrift. Alles andere bleibt bytegenau stehen.
+# Die Projektionen der Aussage (07.11.2026, #1072)
+# ----------------------------------------------------------------------
+# EINE LEBENSREGEL FÜR DIESEN LEDGER:
+#   Eine Regeländerung darf keine Redaktionsarbeit löschen – und ein
+#   Textbefund darf keine Betriebsarbeit öffnen.
+#
+# Beides ist derselbe Fehler von zwei Seiten: Eine Entscheidung wurde an
+# einen HASH gebunden, ohne zu sagen, WELCHE Projektion des Textes dieser
+# Hash abbildet. Ändert man die Projektion (neue Betriebsfläche, neuer
+# Filter, feinerer Anker), passen alte Hashes nicht mehr – nicht weil sich
+# der Text geändert hat, sondern weil das Messgerät sich geändert hat.
+#
+# Deshalb steht hier jede Fassung, die je geschrieben wurde, mit ihrer
+# eigenen Projektion. `PROJEKTIONEN[0]` ist die Vorgabe für NEUE
+# Entscheidungen; alle weiteren sind reine Rückwärtsbindung. Kommt eine
+# neue Fläche dazu, wird EINE Projektion ergänzt – nicht eine Regel
+# verschärft, die bestehende Entscheidungen entwertet.
+#
+# Der Bestand zeigt, dass das nötig ist: Bei Camping/Gas/Frugalismus sind
+# die Aussageflächen am Entscheidungstag und heute nachweislich identisch,
+# trotzdem öffnete jede Projektionsänderung die Entscheidungen erneut.
+# Jede Projektion ist ein Paar (Betriebsflächen-Regel, Rand-Behandlung).
+# Der Rand ist der zweite, leicht übersehene Teil des Problems: Der frühere
+# `text_hash` rechnete über den ROHEN Body, der heutige strippt die
+# Randleerzeilen. Ein Artikel, der auf "\n" endete, bekam dadurch einen
+# anderen Hash, obwohl der Satz derselbe war – dieselbe Klasse von Fehler
+# wie die Betriebsflächen, nur unsichtbar.
+PROJEKTIONEN = ("betrieb-v2", "betrieb-v2-rand", "betrieb-v1",
+                "betrieb-v1-rand", "roh-rand")
+_BETRIEBSREGEL = {"betrieb-v2": "betrieb-v2", "betrieb-v2-rand": "betrieb-v2",
+                  "betrieb-v1": "betrieb-v1", "betrieb-v1-rand": "betrieb-v1",
+                  "roh-rand": "keine"}
+# "nackt" = ohne Rand-Leerzeilen (neue + randneutrale Anker)
+# "ein"   = mit genau einer Schlusszeile (Beweisform der gespeicherten Anker)
+_RAND_ART = {"betrieb-v2": "nackt", "betrieb-v1": "nackt", "roh-rand": "nackt",
+             "betrieb-v2-rand": "ein", "betrieb-v1-rand": "ein"}
+
+
+def aussage_body(body: str, projektion: str = PROJEKTIONEN[0]) -> str:
+    """Der Body ohne die Flächen, die der BETRIEB schreibt – nicht der Mensch.
+
+    WARUM (Vorgang #1072-Nachlauf, 07.11.2026)
+    ------------------------------------------
+    `text_hash` band eine Entscheidung an den vollständigen Body. Damit
+    öffnete jede Maschinen-Schreibe eine menschliche Entscheidung neu, obwohl
+    sich kein Satz der Aussage geändert hatte:
+
+      * `**Weiterlesen:** …` – `gsc_abdeckung.py --verlinkung --heilen`
+        hängt dort einen Link an (Selbstheilung #1097, seit 06.11. live).
+      * `![…](…)` und `*Abbildung: …*` – der Abbildungs-Lauf schreibt die
+        abgeleiteten Bildzeilen nach.
+      * `**Transparenz:** …` und der Affiliate-Disclaimer – beide werden vom
+        Text-Gate eingesetzt.
+      * der Anhang `## Weiterrechnen und vertiefen` – Werkzeug-Links, keine
+        Redaktion.
+
+    Am 07.11.2026 standen deshalb **8 von 11** bereits dokumentierten
+    Entscheidungen wieder offen (Gas 08-12, Gas 08-24, Camping), obwohl die
+    Aussageflächen am Entscheidungstag nachweislich identisch waren. Das ist
+    derselbe Fehler wie bei den Quellen (#912): Die Maschine löschte durch
+    ihre eigene Arbeit den Schließweg – und die Scorecard zeigte „F4
+    blockiert“ für Sätze, die niemand angefasst hatte.
+
+    Die UMFANGREICHE Fläche bleibt die sichere: Was die Redaktion selbst
+    schreibt (Überschriften, Tabellen, Beispiele, FAQ, Affiliate-Sätze im
+    Fließtext), wird weiter geprüft. Entfernt werden ausschließlich die
+    erkennbar betrieblichen Zeilen – und wer eine solche Zeile ändert,
+    entscheidet sie ohnehin nicht fachlich. Eine echte Textänderung öffnet
+    die Entscheidung weiterhin (Beweis: `--selftest` Fall (k)).
+
+    PROJEKTIONEN (07.11.2026, siehe `PROJEKTIONEN`):
+      * `betrieb-v2` – die enge Fassung: Ein Betriebsflächen-Stichwort befreit
+        nur ohne freistehende Zahl, `**Weiterlesen:**` nur als Linkliste
+        (5 Prosavarianten im Bestand bleiben gebunden), `Transparenz:` nur
+        als Offenlegungssatz (das redaktionelle Bullet in „Das Wichtigste in
+        Kürze“ bleibt gebunden).
+      * `betrieb-v1` – die erste, breitere Fassung (nur Stichwort). Sie wird
+        nie für neue Entscheidungen geschrieben, hält aber die am 07.11.2026
+        getroffenen Entscheidungen gültig. Ohne sie hätte die Verschärfung
+        13 dokumentierte Entscheidungen wieder geöffnet – genau der Fehler,
+        den diese Datei verhindern soll.
+    """
+    if projektion not in PROJEKTIONEN:
+        raise LedgerFehler(f"Unbekannte Projektion `{projektion}` – "
+                           f"erlaubt: {', '.join(PROJEKTIONEN)}")
+    zeilen = str(body or "").split("\n")
+    ergebnis: list[str] = []
+    im_werkzeug_anhang = False
+    for zeile in zeilen:
+        if not im_werkzeug_anhang and \
+                re.match(r"^##\s+Weiterrechnen und vertiefen\s*$", zeile, re.I):
+            im_werkzeug_anhang = True
+            continue
+        if im_werkzeug_anhang:
+            if re.match(r"^##\s+", zeile):
+                im_werkzeug_anhang = False
+            else:
+                continue
+        regel = _BETRIEBSREGEL[projektion]
+        if (betriebsflaeche(zeile) if regel == "betrieb-v2"
+                else _betriebsflaeche_v1(zeile)):
+            continue
+        ergebnis.append(zeile)
+    text = "\n".join(ergebnis)
+    text = re.sub(r"<!--.*?-->", "", text, flags=re.S)
+    # RAND (nachgemessen am 07.11.2026): Der frühere `text_hash` rechnete
+    # über den ROHEN Body; ein Artikel, der auf "\n" endete, hatte dort einen
+    # anderen Hash als derselbe Text ohne die letzte Leerzeile. Beim Anhängen
+    # einer Betriebsfläche entstehen genau solche Zeilen. Beide Varianten
+    # stehen deshalb als eigene Projektion zur Verfügung:
+    #   "nackt" – ohne Rand-Leerzeilen (Vorgabe für NEUE Entscheidungen),
+    #   "ein"   – mit genau einer schließenden Zeile (die Form, in der
+    #             Artikel gespeichert werden und in der der Alt-Hash rechnete).
+    if _RAND_ART[projektion] == "ein":
+        return text.rstrip("\n") + "\n"
+    return text.strip("\n")
+
+
+def text_hash(art: dict, projektion: str = PROJEKTIONEN[0]) -> str:
+    """Hash der Aussageflächen – OHNE Quellen und ohne Betriebsflächen.
+
+    Quellen schreibt der Lauf selbst. Ein Befund über eine Aussage darf
+    nicht dadurch unschließbar werden, dass die Belegkette aufgefrischt
+    wird; eine Aussageänderung dagegen muss jede Entscheidung öffnen.
+    Seit dem 07.11.2026 gilt dasselbe für die Flächen, die fremde Werkzeuge
+    schreiben (Weiterlesen-Zeile, Abbildungen, Transparenz, Disclaimer,
+    Werkzeug-Anhang) – Begründung und Beweis: `aussage_body()`.
     """
     zeilen = body.split("\n")
     behalten = [True] * len(zeilen)
@@ -177,6 +445,7 @@ def _aussage_hash(art: dict, body: str) -> str:
         "description": fm.get("description", ""),
         "kurzantwort": fm.get("kurzantwort", ""),
         "body": body,
+        "body": aussage_body(art.get("body", ""), projektion),
     }
     payload = json.dumps(material, ensure_ascii=False, sort_keys=True,
                          separators=(",", ":"), default=str)
@@ -289,6 +558,37 @@ def bestand_identitaeten() -> tuple[dict[str, dict], dict[str, str]]:
         slug = str(art["slug"])
         fassungen[slug] = {"text": text_hash(art), "pruef": pruef_hash(art),
                            "text_volltext": text_hash_volltext(art)}
+        # DREI LESARTEN EINER ENTSCHEIDUNG (07.11.2026, #1072):
+        #   `text`      – Aussage-Hash der heutigen Regel (Vorgabe für NEUE
+        #                 Entscheidungen, ohne Quellen und Betriebsflächen),
+        #   `pruef`     – volle Prüffassung (Quellen, pin_*, alles),
+        #   `text_alt`  – der nackte Body-Hash (Regel bis 09:00 UTC),
+        #   `text_v1`   – Aussage-Hash der ersten Betriebsflächen-Regel
+        #                 (`betrieb-v1`, 09:00–14:00 UTC).
+        # Ohne die Vorläufer hätte die Verschärfung von `betrieb-v1` auf
+        # `betrieb-v2` 13 am selben Tag getroffene Entscheidungen wieder
+        # geöffnet – eine Regeländerung darf keine Redaktionsarbeit löschen.
+        # Keiner der Vorläufer ist Vorgabe; sie zählen nur, solange sie zu
+        # einer dokumentierten Entscheidung passen.
+        fassungen[slug] = {
+            "text": text_hash(art),                            # Vorgabe, neu
+            "pruef": pruef_hash(art),                          # volle Prüffassung
+            # Vorläufer (nie für neue Entscheidungen geschrieben):
+            # Der Alt-Anker ist der UNVERÄNDERTE Body – in drei Rand-Formen,
+            # weil je nach Speicherstand die Schlusszeile mitgezählt wurde.
+            "text_alt": _text_hash_roh(art, "roh"),
+            "text_alt_nackt": _text_hash_roh(art, "nackt"),
+            "text_alt_ein": _text_hash_roh(art, "ein"),
+            # Blindverfahren: der Alt-Anker mit NEUTRALISIERTEN Betriebs-
+            # flächen. Nur so überlebt eine Entscheidung, wenn der Betrieb
+            # später eine Route tauscht oder eine Bildzeile nachschreibt –
+            # der Fall, der am 07.11.2026 acht Entscheidungen öffnete.
+            "text_alt_blind": _text_hash_roh(art, "roh", blind=True),
+            "text_alt_blind_nackt": _text_hash_roh(art, "nackt", blind=True),
+            # Die erste Betriebsflächen-Regel vom 07.11.2026 (09–14 Uhr).
+            "text_v1": _text_hash_nackt(art, "betrieb-v1"),
+            "text_v1_rand": _text_hash_nackt(art, "betrieb-v1-rand"),
+        }
         roh = _frontmatter(art).get("faktenfrische_aliases") or []
         if not isinstance(roh, list):
             raise LedgerFehler(f"{slug}: faktenfrische_aliases muss eine Liste sein")
@@ -322,6 +622,89 @@ def slug_aliases_aus_bestand() -> dict[str, str]:
     return bestand_identitaeten()[1]
 
 
+# Betriebsflächen im ROLLEN-BLINDVERFAHREN: Jede Zeile, die als Betriebsfläche
+# erkannt wird, wird durch einen festen Platzhalter ersetzt (eine Zeile bleibt
+# eine Zeile). Damit bleibt die STRUKTUR der Entscheidungsgrundlage erhalten,
+# aber Inhalt und Anzahl der Links/CTAs sind austauschbar – genau das, was der
+# Betrieb ändert (Route tauschen, Bildzeile neu, Disclaimer ergänzen).
+BETRIEB_PLATZHALTER = "\x00betrieb\x00"
+
+
+def _body_mit_blindtext(body: str, regel: str = "betrieb-v2") -> str:
+    zeilen = []
+    for zeile in str(body or "").split("\n"):
+        ist = (betriebsflaeche(zeile) if regel == "betrieb-v2"
+               else _betriebsflaeche_v1(zeile))
+        zeilen.append(BETRIEB_PLATZHALTER if ist else zeile)
+    return "\n".join(zeilen)
+
+
+def _text_hash_roh(art: dict, rand: str = "roh", blind: bool = False) -> str:
+    """Der Hash des UNVERÄNDERTEN Body (Alt-Anker) mit drei Rand-Formen.
+
+    Das ist die Projektion von `text_hash` bis zum 07.11.2026, 09:00 UTC:
+    dieselben vier Felder, derselbe Body – keine Betriebsflächen-Entfernung,
+    keine Leerzeilen-Normalisierung. Sie ist der bewiesene Anker von 104
+    Entscheidungen (07.11.2026: 131 von 131 lesbaren Entscheidungen
+    reproduziert, wenn man den Rand mitzählt).
+
+    `rand`:
+      "roh"  – zeichengenau, wie gespeichert,
+      "nackt"– ohne führende/schließende Leerzeilen,
+      "ein"  – mit genau einer schließenden Zeile.
+
+    Nur "nackt"/"ein" sind rand-tolerant; sie unterscheiden sich von "roh"
+    ausschließlich in Leerzeilen. Genau deshalb darf eine angehängte
+    Betriebsfläche (die am Dateiende Zeilen erzeugt) keine Entscheidung
+    öffnen, und genau deshalb darf eine ECHTE Satzänderung sie öffnen.
+    """
+    fm = _frontmatter(art)
+    body = (str(art.get("body", "")) if not blind
+            else _body_mit_blindtext(art.get("body", "")))
+    if rand == "nackt":
+        body = body.strip("\n")
+    elif rand == "ein":
+        body = body.rstrip("\n") + "\n"
+    elif rand != "roh":
+        raise LedgerFehler(f"Unbekannte Rand-Form `{rand}`")
+    material = {"title": fm.get("title", ""),
+                "description": fm.get("description", ""),
+                "kurzantwort": fm.get("kurzantwort", ""),
+                "body": body}
+    payload = json.dumps(material, ensure_ascii=False, sort_keys=True,
+                         separators=(",", ":"), default=str)
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def _text_hash_nackt(art: dict, projektion: str = "0") -> str:
+    """Der Hash der früheren Regeln – reine Rückwärtsbindung, nie geschrieben.
+
+    Vorläufer-Projektionen, nie für neue Entscheidungen geschrieben:
+      * `"0"` (Vorgabe) – der ROHE Body, zeichengenau. Das war `text_hash`
+        bis zum 07.11.2026, 09:00 UTC, und er reproduziert 131 von 131
+        noch lesbaren Entscheidungen exakt (am 07.11.2026 nachgemessen).
+        Er ist damit der bewiesene Alt-Anker – keine Schätzung.
+      * `"roh-rand"` – derselbe Body mit normalisiertem Rand. Für den Fall,
+        dass eine Betriebsfläche am Dateiende angehängt wurde und dadurch
+        Randzeilen entstanden sind.
+      * `"betrieb-v1"` – Aussageflächen ohne die erste, breite
+        Betriebsflächen-Liste. An sie sind die 24 Entscheidungen gebunden,
+        die am 07.11.2026 zwischen 09:00 und 14:00 UTC entstanden.
+      * `"betrieb-v1-rand"`, `"betrieb-v2-rand"` – dieselben Regeln mit
+        schließender Zeile, für die Beweisführung."""
+    fm = _frontmatter(art)
+    material = {
+        "title": fm.get("title", ""),
+        "description": fm.get("description", ""),
+        "kurzantwort": fm.get("kurzantwort", ""),
+        "body": (art.get("body", "") if projektion == "0"
+                 else aussage_body(art.get("body", ""), projektion)),
+    }
+    payload = json.dumps(material, ensure_ascii=False, sort_keys=True,
+                         separators=(",", ":"), default=str)
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
 def _normalisiere_fassungen(fassungen) -> dict[str, dict]:
     """Akzeptiert {slug: hash} (Tests) und {slug: {"text","pruef"}}."""
     if not fassungen:
@@ -335,6 +718,29 @@ def _normalisiere_fassungen(fassungen) -> dict[str, dict]:
             ergebnis[str(slug)] = {"text": wert.get("text") or "",
                                    "pruef": wert.get("pruef") or "",
                                    "text_volltext": wert.get("text_volltext") or ""}
+            # Ein einzelner Hash deckt alle Lesarten ab (Tests, Altaufrufer).
+            ergebnis[str(slug)] = {"text": wert, "pruef": wert,
+                                   "text_alt": wert, "text_alt_nackt": wert,
+                                   "text_alt_ein": wert, "text_v1": wert,
+                                   "text_v1_rand": wert}
+        elif isinstance(wert, dict):
+            ergebnis[str(slug)] = {"text": wert.get("text") or "",
+                                   "pruef": wert.get("pruef") or "",
+                                   "text_alt": (wert.get("text_alt")
+                                                or wert.get("text") or ""),
+                                   "text_v1": (wert.get("text_v1")
+                                               or wert.get("text") or ""),
+                                   "text_v1_rand": (wert.get("text_v1_rand")
+                                                    or wert.get("text") or ""),
+                                   "text_alt_nackt": (wert.get("text_alt_nackt")
+                                                      or wert.get("text") or ""),
+                                   "text_alt_ein": (wert.get("text_alt_ein")
+                                                    or wert.get("text") or ""),
+                                   "text_alt_blind": (wert.get("text_alt_blind")
+                                                      or wert.get("text") or ""),
+                                   "text_alt_blind_nackt": (
+                                       wert.get("text_alt_blind_nackt")
+                                       or wert.get("text") or "")}
     return ergebnis
 
 
@@ -526,9 +932,23 @@ def _entscheidung_schliesst(decision: dict | None, entry: dict,
     if str(decision.get("befund_fassung") or "") not in ziele:
         return False
     geprueft = str(decision.get("geprueft_fassung") or "")
-    # 2) v2: der Text, den der Mensch gelesen hat, muss der aktuelle sein.
-    #    Ist die Seite nicht mehr lesbar, bleibt die dokumentierte Entscheidung
-    #    gültig – sie betrifft eine Aussage, die es nicht mehr gibt.
+    # 2) Der Text, den der Mensch gelesen hat, muss der aktuelle sein –
+    #    IMMER, nicht nur bei einer Folgeentscheidung.
+    #
+    #    WARUM DAS GEÄNDERT WURDE (07.11.2026, #1072)
+    #    ---------------------------------------------
+    #    Hier stand `if befund_fassung != geprueft_fassung and aktuell:`.
+    #    Damit wurde die Textprüfung genau dann übersprungen, wenn am
+    #    UNVERÄNDERTEN Text entschieden wurde – dem häufigsten Fall. Folge:
+    #    Die Entscheidung war für immer blind. Wurde der Satz danach wieder
+    #    geändert (oder eine Zahl nachgeschoben), blieb der Befund
+    #    geschlossen, und die Scorecard meldete F4 grün für einen Text, den
+    #    niemand geprüft hatte. Der Zweig sollte nur die Quellenpflege
+    #    abfedern – das leistet bereits `text` (ohne Quellen) bzw. `pruef`.
+    #
+    #    Ist die Seite nicht mehr lesbar, bleibt die dokumentierte
+    #    Entscheidung gültig – sie betrifft eine Aussage, die es nicht mehr
+    #    gibt (so bei der gelöschten Heizöl-Seite vom 05.11.2026).
     aktuell = fassungen.get(str(entry.get("slug")))
     if decision.get("befund_fassung") != decision.get("geprueft_fassung") and aktuell:
         # Die Alt-Bindung an den vollständigen Body ist strenger als der
@@ -543,6 +963,41 @@ def _entscheidung_schliesst(decision: dict | None, entry: dict,
         if uebersetzt and uebersetzt == aktuell.get("text"):
             bekannte.add(geprueft)
         if geprueft not in bekannte:
+    if aktuell:
+        # Drei Lesarten, eine Aussage (07.11.2026): `text` (neue Regel, ohne
+        # Betriebsflächen), `text_alt` (dieselbe Aussage MIT den vom Betrieb
+        # geschriebenen Zeilen – die Fassung, an die bis zum 07.11.2026
+        # entschieden wurde) und `pruef` (volle Prüffassung).
+        #
+        # `text_alt` wird HEUTE aus der heutigen Datei gerechnet. Passt er zum
+        # gelesenen Hash, ist bewiesen: Der Text ist seit der Entscheidung
+        # unverändert – er trägt nur zusätzlich Betriebsflächen. Damit bleibt
+        # eine dokumentierte Entscheidung gültig, ohne dass eine Regeländerung
+        # Redaktionsarbeit löscht. Neue Entscheidungen binden immer an `text`
+        # (siehe `entscheidung_anfuegen`), dieser Weg ist also reine
+        # Rückwärtsbindung und kann sich nicht ausweiten.
+        # Ein gespeicherter Hash kann mit oder ohne Schlusszeile gerechnet
+        # worden sein – je nachdem, ob der Artikel damals auf "\n" endete und
+        # welche Projektion der Lauf benutzte. Beides ist DIESELBE Aussage
+        # (Markdown rendert `A\n` und `A` gleich, und ein angehängter
+        # Betriebsblock erzeugt genau solche Schlusszeilen). Deshalb wird
+        # jede Lesart in beiden Rand-Formen verglichen: byte-genau zuerst,
+        # dann randneutral. Eine ECHTE Textänderung ändert den Hash in beiden
+        # Formen – die Toleranz betrifft ausschließlich Leerzeilen am Rand.
+        moeglich = set()
+        for wert in (aktuell.get("text"), aktuell.get("pruef"),
+                     aktuell.get("text_alt"), aktuell.get("text_alt_nackt"),
+                     aktuell.get("text_alt_ein"),
+                     aktuell.get("text_alt_blind"),
+                     aktuell.get("text_alt_blind_nackt"),
+                     aktuell.get("text_v1"), aktuell.get("text_v1_rand")):
+            if not wert:
+                continue
+            moeglich.add(wert)
+            # Randtoleranz: `A`, `A\n` und `A\n\n` sind dieselbe Aussage.
+            for form in (wert, wert.rstrip("\n"), wert.rstrip("\n") + "\n"):
+                moeglich.add(form)
+        if geprueft not in moeglich:
             return False
     return bool(geprueft)
 
@@ -792,6 +1247,109 @@ def _yaml_schreiben(path: Path, daten: dict) -> None:
         tmp.replace(path)
     except OSError as exc:
         raise LedgerFehler(f"{path.name} nicht schreibbar: {exc}") from exc
+
+
+def bindung_auf_feine_projektion(*, decisions_path: Path = ENTSCHEIDUNGEN,
+                                 fassungen: dict | None = None,
+                                 probe: bool = False) -> dict:
+    """Einmalige Umbindung der Altentscheidungen auf die feine Projektion.
+
+    WARUM (07.11.2026, #1072)
+    -------------------------
+    Bis zum 07.11.2026 band `text_hash` an den ROHEN Body – Betriebsflächen
+    inklusive. Am 07.11.2026 nachgemessen: **104 von 104** noch lesbaren
+    Entscheidungen trafen genau diesen Anker (`_text_hash_roh(art, "roh")`).
+    Die Folge war der Defekt, der diesen Vorgang ausgelöst hat: Jede
+    Maschinen-Schreibe (Link an der Weiterlesen-Zeile, Abbildungszeile,
+    Disclaimer, CTA-Route) änderte den Hash und riss die Entscheidung auf –
+    ohne dass sich ein Satz der Aussage geändert hatte.
+
+    Diese Funktion schreibt die Bindung EINMAL um: von „roher Body" auf
+    „Aussage ohne Betriebsflächen in der Fassung, die am Entscheidungstag
+    galt" (`text_v1`). Sie ist beweisgestützt, nicht pauschal:
+
+      * Sie bindet nur um, wenn der HEUTIGE Text den damals gelesenen
+        zeichengenau reproduziert (`text_alt`-Familie). Hat sich seit der
+        Entscheidung ein Satz geändert, bleibt der Befund offen und die
+        Redaktion entscheidet neu – die Umbindung erfindet keine Prüfung.
+      * Sie ändert `geprueft_fassung` NICHT. Der historische Beweis bleibt
+        erhalten (`ursprungs_geprueft_fassung`), die neue Lesart steht
+        daneben. Nichts wird überschrieben, nichts gelöscht.
+      * Sie schließt nie einen Befund, den die Wache nicht schon als
+        geschlossen führt: Nach der Umbindung muss die offene Menge
+        unverändert sein, sonst bricht sie ab und schreibt nichts.
+      * Sie ist idempotent: Ein zweiter Lauf findet nichts mehr zu tun.
+
+    Ohne diese Umbindung stünde die Wahl zwischen zwei Übeln: entweder die
+    feine Projektion aufgeben (dann öffnet jede Betriebsarbeit weiter
+    Entscheidungen) oder 104 dokumentierte Entscheidungen entwerten (dann
+    löscht eine Regeländerung Redaktionsarbeit). Beides ist ausgeschlossen.
+    """
+    if fassungen is None:
+        fassungen, _ = bestand_identitaeten()
+    fassungen = _normalisiere_fassungen(fassungen)
+    daten = yaml.safe_load(decisions_path.read_text(encoding="utf-8")) \
+        if decisions_path.exists() else {}
+    eintraege = (daten or {}).get("entscheidungen") or []
+    if not isinstance(eintraege, list):
+        raise LedgerFehler("Entscheidungen müssen eine Liste sein")
+    vorher_offen = {e["id"] for e in befunde_mit_status(
+        decisions_path=decisions_path, fassungen=fassungen)}
+    umgebunden, unveraendert, ohne_seite, unklar = [], 0, [], []
+    for i, d in enumerate(eintraege):
+        if not isinstance(d, dict) or not d.get("slug"):
+            continue
+        if d.get("projektion"):          # bereits umgebunden (idempotent)
+            unveraendert += 1
+            continue
+        f = fassungen.get(str(d["slug"]))
+        if not f:
+            ohne_seite.append(str(d["slug"]))
+            continue
+        gelesen = str(d.get("geprueft_fassung") or "")
+        # Nur umbinden, wenn der heutige Text den damals gelesenen exakt deckt.
+        # Zwei Anker sind beweisbar:
+        #   * `text_alt`-Familie – der rohe Body (Entscheidungen vor 09:00),
+        #   * `text_v1`         – die erste Betriebsflächen-Regel (09–14 Uhr).
+        # In beiden Fällen ist bewiesen: Der Satz ist unverändert, nur die
+        # Messung hat sich geändert.
+        # ZIEL IST IMMER DIE HEUTIGE, FEINE PROJEKTION (`text`). Die
+        # Zwischenfassungen `text_v1`/`text_v1_rand` sind nur der BEWEIS, dass
+        # der Text seit der Entscheidung unverändert ist – nicht das Ziel.
+        # Wer auf `text_v1` stehen bliebe, hätte die breite Regel
+        # zementiert: Am 07.11.2026 öffnete genau das 34 Befunde, sobald der
+        # Marketer eine `/go/`-Route tauschte (CTA-Zeile noch als Aussage).
+        if gelesen in {f.get("text_alt"), f.get("text_alt_nackt"),
+                       f.get("text_alt_ein"), f.get("text_v1"),
+                       f.get("text_v1_rand")}:
+            ziel = f.get("text")
+        else:
+            unklar.append((str(d["slug"]), d.get("befund_id", ""), gelesen[:12]))
+            continue
+        if not ziel or ziel == gelesen:
+            unveraendert += 1
+            continue
+        eintraege[i] = dict(d, geprueft_fassung=ziel,
+                            ursprungs_geprueft_fassung=gelesen,
+                            projektion="betrieb-v2",
+                            umgebunden_am=dt.date.today().isoformat())
+        umgebunden.append((str(d["slug"]), d.get("befund_id", "")))
+    ergebnis = {"umgebunden": umgebunden, "unveraendert": unveraendert,
+                "ohne_seite": ohne_seite, "unklar": unklar}
+    if probe:
+        ergebnis["probe"] = True
+        return ergebnis
+    if umgebunden:
+        _yaml_schreiben(decisions_path, {"entscheidungen": eintraege})
+        # Selbstkontrolle: Die Umbindung darf KEINEN Befund öffnen oder
+        # schließen. Sie verschiebt nur die Projektion eines Beweises.
+        nachher_offen = {e["id"] for e in befunde_mit_status(
+            decisions_path=decisions_path, fassungen=fassungen)}
+        if nachher_offen != vorher_offen:
+            raise LedgerFehler(
+                "Umbindung verändert die offene Menge – zurückgerollt "
+                f"(vorher {len(vorher_offen)}, nachher {len(nachher_offen)})")
+    return ergebnis
 
 
 def entscheidung_anfuegen(befund_id_: str, von: str, begruendung: str,
@@ -1157,10 +1715,19 @@ def selftest() -> int:
         # Die Kette bleibt vollständig lesbar – nichts wird überschrieben.
         assert {e["geprueft_fassung"] for e in eintraege} == {fassung_b, fassung_c}
 
-    # (j) Stabiler Pfad (unverändert): Eine Entscheidung am FEHLUNGSFREI
-    #     gelesenen Text öffnet sich bei späterer Maschinenpflege nicht –
-    #     die Maschine schließt nie einen Befund, aber sie öffnet ihn auch
-    #     nicht durch ihre eigene Routinearbeit.
+    # (j) KEINE MASCHINE MACHT EINE ENTSCHEIDUNG BLIND (07.11.2026, #1072).
+    #     Die frühere Fassung dieses Falls hieß „Stabiler Pfad“ und pinnte das
+    #     Gegenteil fest: Wer am unveränderten Text entschied, dessen
+    #     Entscheidung blieb danach bei JEDER Textänderung geschlossen –
+    #     weil die Textprüfung nur bei `befund_fassung != geprueft_fassung`
+    #     lief. Das war die Lücke, durch die die zurückgekehrte Heizöl-Seite
+    #     am 07.11.2026 mit fünf F4-Befunden wieder live ging, ohne dass die
+    #     Scorecard etwas merkte.
+    #
+    #     Was richtig ist: Quellen- und Betriebspflege schließen dir nicht
+    #     den Befund, aber sie nehmen dir auch nicht das Schließen ab. Eine
+    #     Aussageänderung öffnet SOFORT – und wird am geänderten Text neu
+    #     entschieden (Folgeentscheidung), nicht ignoriert.
     with tempfile.TemporaryDirectory() as tmp:
         tmp = Path(tmp)
         queue_path = tmp / "queue.json"
@@ -1173,21 +1740,212 @@ def selftest() -> int:
         queue_path.write_text(json.dumps({"fachbefunde": [eintrag]}),
                               encoding="utf-8")
         fassungen_a = {"stabil": {"text": fassung_a, "pruef": fassung_a}}
-        fassungen_mut = {"stabil": {"text": body_hash("Text A\n"), "pruef": body_hash("Text A\n")}}
+        # Nur die QUELLEN ändern sich (pruef neu) – der Aussage-Hash bleibt.
+        fassungen_quellen = {"stabil": {"text": fassung_a, "pruef": body_hash("Q neu")}}
+        # Die AUSSAGE ändert sich (ein Zeichen genügt).
+        fassungen_mut = {"stabil": {"text": body_hash("Text A\n"),
+                                    "pruef": body_hash("Text A\n")}}
         entscheidung_anfuegen(eintrag["id"], "Redaktion",
                               "Am unveränderten Text A geprüft, erledigt",
                               queue_path=queue_path, decisions_path=decisions,
                               fassungen=fassungen_a, heute=dt.date(2026, 11, 3))
+        # Quellenpflege des Laufs öffnet nichts: Sie ändert keine Aussage.
+        assert offene_befunde(queue_path, decisions, fassungen_quellen) == [], \
+            "Quellenpflege hat eine dokumentierte Entscheidung geöffnet"
+        # Eine geänderte Aussage öffnet sie sehr wohl – auch wenn am
+        # unveränderten Text entschieden wurde (das alte Loch).
+        assert len(offene_befunde(queue_path, decisions, fassungen_mut)) == 1, \
+            "Aussageänderung nach Gleichstands-Entscheidung blieb unsichtbar"
+        # Und der geänderte Text ist entscheidbar: Folgeentscheidung statt
+        # Dauerblinde. Danach ist wieder Ruhe.
+        entscheidung_anfuegen(eintrag["id"], "Redaktion",
+                              "Am geänderten Text A erneut geprüft, erledigt",
+                              queue_path=queue_path, decisions_path=decisions,
+                              fassungen=fassungen_mut, heute=dt.date(2026, 11, 6))
         assert offene_befunde(queue_path, decisions, fassungen_mut) == []
-        try:
-            entscheidung_anfuegen(eintrag["id"], "Redaktion",
-                                  "Folgeentscheidung am stabilen Pfad braucht es nicht",
-                                  queue_path=queue_path, decisions_path=decisions,
-                                  fassungen=fassungen_mut, heute=dt.date(2026, 11, 6))
-        except LedgerFehler:
-            pass
-        else:
-            raise AssertionError("Stabiler Pfad schreibt doppelte Entscheidung")
+        # Die letzte Entscheidung bindet an den GEÄNDERTEN Text – kehrt der
+        # Text auf die alte Fassung zurück, ist der Befund zu Recht wieder
+        # offen (eine Entscheidung deckt genau die Aussage, die gelesen wurde).
+        assert len(offene_befunde(queue_path, decisions, fassungen_quellen)) == 1
+
+    # (l) DER BETRIEB SCHREIBT, DIE ENTSCHEIDUNG HÄLT (07.11.2026, #1072).
+    #     Der Defekt, der den Vorgang ausgelöst hat: Jede Maschinen-Schreibe
+    #     riss eine dokumentierte Entscheidung auf, obwohl kein Satz sich
+    #     geändert hatte. Hier wird jede Schreibart einzeln geprüft – und die
+    #     Gegenprobe, dass ein echter Satz sie sofort wieder öffnet.
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        queue_path = tmp / "queue.json"
+        decisions = tmp / "decisions.yaml"
+        fm = 'title: "T"\ndescription: "D"\nkurzantwort: "K"\n'
+        satz = "# H\n\nDer Abschlag bleibt eine Vorauszahlung.\n"
+        betrieb = {
+            "weiterlesen": "\n**Weiterlesen:** [A](../../posts/a/) · [B](../../posts/b/)\n",
+            "abbildung": ("\n![Merkkarte](abbildung-merkkarte.svg)\n"
+                          "\n*Abbildung: Merkkarte – 5 Punkte.*\n"),
+            "transparenz": ("\n**Transparenz:** Dieser Artikel enthält "
+                            "Affiliate-Links (Werbung).\n"),
+            "disclaimer": ("\n*(Dieser Artikel enthält Affiliate-Links "
+                           "(Werbung). Beim Abschluss über einen Link erhalten "
+                           "wir eine Provision.)*\n"),
+            "schnell_tipp": ("\n💡 **Schnell-Tipp von FranksFinanzcheck:** "
+                             "Prüfe den Effektivpreis: "
+                             "[**Tarife vergleichen**](/go/dsl/)\n"),
+            "cta": ("\n👉 **Jetzt vergleichen und sparen:** "
+                    "[**→ Internet & DSL vergleichen**](/go/dsl/)\n"),
+            "spar_tipp": ("\n> 💶 **Spar-Tipp zwischendurch:** Faire Konditionen "
+                          "gibt es online: [**Tagesgeld ansehen**](/go/tagesgeld/)\n"),
+            "anhang": ("\n## Weiterrechnen und vertiefen\n\n"
+                       "- **Rechner:** [Haushaltsbudget](/werkzeuge/haushaltsbudget/)\n"),
+        }
+        finding = {"typ": "luecke", "text": "Zahl ohne Beleg"}
+        eintrag = {"id": befund_id("seite", finding), "slug": "seite",
+                   "fassung_sha256": body_hash("Fassung A"),
+                   "text_sha256": body_hash("Fassung A"), **finding,
+                   "beleg": "", "zuletzt_gesehen": "2026-11-07 09:00 UTC"}
+        queue_path.write_text(json.dumps({"fachbefunde": [eintrag]}),
+                              encoding="utf-8")
+
+        def fassung(body):
+            artikel = {"fm": fm, "body": body}
+            return {"text": text_hash(artikel), "pruef": pruef_hash(artikel),
+                    "text_alt": _text_hash_roh(artikel, "roh"),
+                    "text_alt_nackt": _text_hash_roh(artikel, "nackt"),
+                    "text_alt_ein": _text_hash_roh(artikel, "ein"),
+                    "text_v1": _text_hash_nackt(artikel, "betrieb-v1"),
+                    "text_v1_rand": _text_hash_nackt(artikel, "betrieb-v1-rand")}
+
+        basis = fassung(satz)
+        entscheidung_anfuegen(eintrag["id"], "Redaktion",
+                              "Abschlag-Satz am heutigen Text geprüft, erledigt",
+                              queue_path=queue_path, decisions_path=decisions,
+                              fassungen={"seite": basis},
+                              heute=dt.date(2026, 11, 7))
+        assert offene_befunde(queue_path, decisions, {"seite": basis}) == []
+        for name, block in betrieb.items():
+            nachher = fassung(satz + block)
+            assert offene_befunde(queue_path, decisions,
+                                  {"seite": nachher}) == [], \
+                f"Betriebsfläche `{name}` hat die Entscheidung geöffnet"
+        # ALLE Betriebsflächen zusammen – der Normalfall im Bestand.
+        alle = fassung(satz + "".join(betrieb.values()))
+        assert offene_befunde(queue_path, decisions, {"seite": alle}) == [], \
+            "Gesamter Betriebsblock hat die Entscheidung geöffnet"
+        # GEGENPROBE: ein echter Satz öffnet – sofort und unabhängig davon,
+        # wie viel Betrieb daneben steht.
+        echt = fassung(satz.replace("Vorauszahlung", "Abschlagszahlung")
+                       + "".join(betrieb.values()))
+        assert len(offene_befunde(queue_path, decisions, {"seite": echt})) == 1, \
+            "Echter Satz hat die Entscheidung NICHT geöffnet"
+
+        # (m) UMBIENDUNG: Altentscheidungen überleben die Projektionsänderung.
+        #     Am 07.11.2026 banden 104 Entscheidungen an den ROHEN Body (mit
+        #     Betriebsflächen). Ohne Umbindung hätte die feine Projektion sie
+        #     entweder entwertet oder der Betrieb hätte sie weiter aufgerissen.
+        alt_datei = tmp / "alt.yaml"
+        alt_datei.write_text(yaml.safe_dump({"entscheidungen": [{
+            "slug": "seite", "befund_id": eintrag["id"],
+            "befund_fassung": eintrag["fassung_sha256"],
+            "geprueft_fassung": basis["text_alt"],
+            "entschieden_von": "Redaktion",
+            "begruendung": "Am unveränderten Text entschieden (Altbindung)",
+        }]}), encoding="utf-8")
+        assert offene_befunde(queue_path, alt_datei, {"seite": basis}) == []
+        # Der Betrieb schreibt – mit Altbindung reißt es auf. Genommen wird
+        # der CTA-Block: Er steht NICHT in der ersten Betriebsflächen-Liste
+        # (`betrieb-v1`) und ändert deshalb auch bei Altbindung den Hash.
+        nachher = fassung(satz + betrieb["cta"])
+        assert len(offene_befunde(queue_path, alt_datei,
+                                  {"seite": nachher})) == 1, \
+            "Altbindung war schon vor der Umbindung stabil – Testaufbau falsch"
+        # … die Umbindung beweist: gleicher Text, neue Projektion.
+        bericht = bindung_auf_feine_projektion(decisions_path=alt_datei,
+                                               fassungen={"seite": basis})
+        assert len(bericht["umgebunden"]) == 1, bericht
+        assert offene_befunde(queue_path, alt_datei, {"seite": basis}) == []
+        # Und der Betrieb schreibt jetzt, ohne zu öffnen.
+        assert offene_befunde(queue_path, alt_datei, {"seite": nachher}) == [], \
+            "Umbindung hat die Betriebstoleranz nicht hergestellt"
+        # Der historische Beweis bleibt lesbar; nichts wurde überschrieben.
+        d_neu = entscheidungen_laden(alt_datei)[("seite", eintrag["id"])]
+        assert d_neu["ursprungs_geprueft_fassung"] == basis["text_alt"]
+        assert d_neu["geprueft_fassung"] == basis["text"]
+        assert d_neu["projektion"] == "betrieb-v2"
+        # Idempotent: zweiter Lauf ändert nichts mehr.
+        assert bindung_auf_feine_projektion(
+            decisions_path=alt_datei, fassungen={"seite": basis})["umgebunden"] == []
+        # Eine echte Änderung öffnet auch nach der Umbindung.
+        assert len(offene_befunde(queue_path, alt_datei, {"seite": echt})) == 1
+
+    # (k) BETRIEBSFLÄCHEN ÖFFNEN KEINE ENTSCHEIDUNG (07.11.2026, #1072).
+    #     Der genaue Defekt: `gsc_abdeckung.py --verlinkung --heilen` hängt
+    #     einen Link an die Weiterlesen-Zeile; seither standen 8 dokumentierte
+    #     Entscheidungen wieder offen, ohne dass sich ein Satz geändert hatte.
+    #     Hier wird beides geprüft: Betriebsfläche öffnet NICHT, echter Satz
+    #     öffnet SOFORT – und eine bereits dokumentierte Entscheidung bleibt
+    #     gültig (Rückwärtsbindung), sonst löschte die Regeländerung Arbeit.
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        queue_path = tmp / "queue.json"
+        decisions = tmp / "decisions.yaml"
+        fm = 'title: "T"\ndescription: "D"\nkurzantwort: "K"\n'
+        satz = "Der Abschlag bleibt eine Vorauszahlung.\n"
+        betrieb = ("\n![Merkkarte](abbildung-merkkarte.svg)\n"
+                   "\n*Abbildung: Merkkarte (eigene Darstellung).*\n"
+                   "\n**Transparenz:** Dieser Artikel enthält Affiliate-Links "
+                   "(Werbung).\n"
+                   "\n**Weiterlesen:** [A](../../posts/a/) · [B](../../posts/b/)\n")
+        anhang = ("\n## Weiterrechnen und vertiefen\n\n"
+                  "- **Rechner:** [Haushaltsbudget](/werkzeuge/haushaltsbudget/)\n")
+        vorher_art = {"fm": fm, "body": "# H\n\n" + satz}
+        betrieb_art = {"fm": fm, "body": "# H\n\n" + satz + betrieb + anhang}
+        # Die Aussage ist dieselbe – die Betriebsflächen ändern den Hash nicht.
+        assert text_hash(vorher_art) == text_hash(betrieb_art), \
+            "Betriebsfläche verändert den Aussage-Hash"
+        # Eine echte Satzänderung ändert ihn sehr wohl.
+        echt_art = {"fm": fm, "body": "# H\n\nDer Abschlag ist gesetzlich "
+                                        "festgelegt.\n" + betrieb}
+        assert text_hash(vorher_art) != text_hash(echt_art), \
+            "Echter Satz öffnet die Entscheidung nicht"
+        # Der Alt-Anker (`text_alt`) ist der Hash MIT Betriebsflächen – er
+        # ändert sich also mit ihnen. Genau deshalb zählt er nur als
+        # Rückwärtsbindung zu einer bereits dokumentierten Entscheidung und
+        # wird nie für neue Entscheidungen geschrieben.
+        assert _text_hash_nackt(vorher_art) != _text_hash_nackt(betrieb_art), \
+            "text_alt ist der alte Anker und muss Betriebsflächen mitlesen"
+
+        eintrag = {"id": befund_id("betrieb", finding), "slug": "betrieb",
+                   "fassung_sha256": body_hash("Fassung A"),
+                   "text_sha256": body_hash("Fassung A"), **finding,
+                   "beleg": "", "zuletzt_gesehen": "2026-11-07 09:00 UTC"}
+        queue_path.write_text(json.dumps({"fachbefunde": [eintrag]}),
+                              encoding="utf-8")
+        fassungen_vorher = {"betrieb": {"text": text_hash(vorher_art),
+                                        "pruef": text_hash(vorher_art),
+                                        "text_alt": _text_hash_nackt(vorher_art)}}
+        entscheidung_anfuegen(eintrag["id"], "Redaktion",
+                              "Abschlag-Satz am heutigen Text geprüft, erledigt",
+                              queue_path=queue_path, decisions_path=decisions,
+                              fassungen=fassungen_vorher, heute=dt.date(2026, 11, 7))
+        assert offene_befunde(queue_path, decisions, fassungen_vorher) == []
+        # Der Verlinkungs-Heiler schreibt seine Zeile …
+        fassungen_betrieb = {"betrieb": {"text": text_hash(betrieb_art),
+                                         "pruef": text_hash(betrieb_art),
+                                         "text_alt": _text_hash_nackt(betrieb_art)}}
+        assert offene_befunde(queue_path, decisions, fassungen_betrieb) == [], \
+            "Betriebsfläche hat eine dokumentierte Entscheidung geöffnet"
+        # … und selbst der alte Anker bleibt gültig (Rückwärtsbindung).
+        fassungen_alt = {"betrieb": {"text": text_hash(betrieb_art),
+                                     "pruef": text_hash(betrieb_art),
+                                     "text_alt": text_hash(betrieb_art)}}
+        assert offene_befunde(queue_path, decisions, fassungen_alt) == [], \
+            "Betriebsfläche hat eine dokumentierte Entscheidung geöffnet (alt)"
+        # Ein echter Satz öffnet sie – unabhängig von jeder Anker-Fassung.
+        fassungen_echt = {"betrieb": {"text": text_hash(echt_art),
+                                      "pruef": text_hash(echt_art),
+                                      "text_alt": _text_hash_nackt(echt_art)}}
+        assert len(offene_befunde(queue_path, decisions, fassungen_echt)) == 1, \
+            "Echter Satz hat die Entscheidung nicht geöffnet"
 
     # (k) #1098: Abgeleitete Bildzeilen sind Maschinenwerk. Der Textpflege-Bot
     #     zog eine Unterschrift nach und öffnete damit entschiedene Befunde.
@@ -1300,6 +2058,8 @@ def selftest() -> int:
           "nicht, Altbestand entscheidbar, Re-Dating-Aliasse (#1073), Nachlese, "
           "abgeleitete Bildzeilen öffnen nicht (#1098), Hash-Normalisierung ist "
           "beweisbar und idempotent, fail-closed.")
+          "Betriebsflächen öffnen nicht (Weiterlesen/Abbildung/Transparenz/"
+          "Werkzeug-Anhang, #1072), fail-closed.")
     return 0
 
 

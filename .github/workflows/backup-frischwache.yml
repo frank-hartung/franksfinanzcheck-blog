@@ -31,6 +31,30 @@
 #    Lokal:  npm run backup:frische
 #            python3 scripts/backup_freshness_guard.py --selftest
 #
+#  SELBSTHEILUNG (Vorgang WF-3150 / Meldung #1030, 07.11.2026):
+#    Bis hierher hat diese Wache GEMESSEN und GEMELDET – geheilt hat sie
+#    nicht. Fiel der nächtliche Lauf aus (Scheduler-Aussetzer, still
+#    widerrufenes Token, Environment-Regel nach einem Settings-Umbau),
+#    blieb es bei der Meldung; der eine wirksame Schritt („Run workflow“)
+#    war ein Handbefehl, den niemand kannte. Genau die Klasse, die am
+#    06.11.2026 die GSC-Verlinkung geheilt hat: Heilung vorhanden, aber
+#    nicht verdrahtet. Jetzt schließt der Lauf den Kreis selbst:
+#      1. „Frische messen“ misst und fällt KEIN Urteil mehr (nur bei
+#         fehlenden Eingaben rot – fail-closed bleibt).
+#      2. „Selbstheilung“ stößt `backup-offsite.yml` genau einmal an,
+#         wenn das Tagesfenster verpasst ist – nach fester Tabelle:
+#         kein Anstoß bei laufender Sicherung, keiner im Mindestabstand,
+#         höchstens drei Anstöße je 24 h, und nur mit lesbarer Historie
+#         (ein blinder Anstoß könnte doppelt sichern).
+#      3. „Urteil fällen“ entscheidet NACH der zweiten Messung. Grün
+#         gibt es nur mit frischem Release – ein angestoßener Lauf ist
+#         kein Nachweis (dieselbe Doktrin wie E1–E8).
+#    Rechte: Der Job braucht dafür `actions: write` – genau ein Aufruf
+#    (POST …/dispatches) in genau einem Schritt mit dem Lauf-Token. Die
+#    Messung selbst bleibt beim fein eingeschränkten Ziel-Token; die
+#    Endpunkt-Liste ist in scripts/backup_selbstheilung.py festgenagelt
+#    und vertraglich geprüft.
+#
 #  SLA-Bezug: docs/ANLEITUNG-OFFSITE-BACKUP.md (RPO 24 h / 52 h)
 #             docs/INFRASTRUKTUR.md Punkt 5
 # ============================================================
@@ -54,7 +78,15 @@ on:
       # eine Änderung an restore_drill.sh den Lauf nicht auslösen – die
       # Prüfung liefe nie über den Code, den sie prüft.
       - "scripts/restore_drill.sh"
+      # #923 (07.11.2026): Die Selbstheilung ist ein Prüfer dieses Laufs –
+      # eine Änderung daran muss den Lauf auslösen, sonst urteilt er über
+      # Code, der nicht lief (dieselbe Regel wie oben, Trigger-Wache W1).
+      # 07.11.2026 (#1030): Die Selbstheilung ist ein eigener Prüfer. Ohne
+      # diesen Pfad würde eine Änderung an ihr den Lauf nicht auslösen – sie
+      # liefe nie über den Code, den sie prüft (Trigger-Wache W1).
+      - "scripts/backup_selbstheilung.py"
       - "scripts/tests/test_backup_einrichtung.py"
+      - "scripts/tests/test_backup_selbstheilung.py"
       - ".github/workflows/backup-frischwache.yml"
       - ".github/workflows/backup-offsite.yml"
 
@@ -73,14 +105,27 @@ jobs:
     # still required and is checked by the setup contract.
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    # 07.11.2026 (#1030): 10 → 30 Minuten. Die Selbstheilung darf bis zu
+    # 15 Minuten auf den angestoßenen Lauf warten (WARTEZEIT_S) und danach
+    # erneut messen; mit dem alten Limit wäre der Job mitten in der Wartezeit
+    # abgeschnitten worden – und ein Timeout sieht aus wie ein Ausfall.
+    timeout-minutes: 30
     environment: backup
     permissions:
       contents: read
-      # Nur lesend: Die Einrichtungsprüfung (E8) liest die Schutzregeln des
-      # Environments „backup“ – der Endpunkt verlangt „actions: read“
-      # (gleiche Begründung wie im Job kv-backup von backup-offsite.yml).
-      actions: read
+      # Die Einrichtungsprüfung (E8) liest die Schutzregeln des Environments
+      # „backup“ (dafür `actions: read`), und die Selbstheilung startet bei
+      # Bedarf einen Lauf im EIGENEN Repository (dafür `actions: write`).
+      # Mehr Rechte braucht der Job nicht: keine Schreibzugriffe auf Inhalte,
+      # keine fremden Repositories, keine Backup-Zugänge für den Dispatch.
+      # E8 liest die Schutzregeln des Environments „backup“ (actions: read).
+      # `write` kommt seit dem 07.11.2026 hinzu und ist ausschließlich für die
+      # Selbstheilung nötig: GitHub kennt für `workflow_dispatch` kein
+      # feineres Recht. Es liegt in EINEM Schritt („Selbstheilung …") und
+      # betrifft EINEN Aufruf (dispatch von backup-offsite.yml). Die
+      # Selbsttests und die Messung laufen ohne dieses Recht; die
+      # Endpunkt-Liste ist vertraglich festgenagelt.
+      actions: write
     env:
       BACKUP_REPO: ${{ vars.BACKUP_REPO }}
       GH_TOKEN: ${{ secrets.BACKUP_REPO_TOKEN }}
@@ -113,6 +158,9 @@ jobs:
           python3 scripts/backup_freshness_guard.py --selftest
           python3 scripts/kv_backup.py --selftest
           python3 scripts/backup_einrichtung.py --selftest
+          # #923: Auch die Heilung beweist sich selbst, bevor sie urteilt.
+          python3 scripts/backup_selbstheilung.py --selftest
+          python3 scripts/backup_selbstheilung.py --vertrag
 
       # ================================================================
       #  EINRICHTUNG ALS BLOCK, NICHT ALS FUßNOTE (#923, 02.11.2026)
@@ -148,6 +196,7 @@ jobs:
           fi
 
       - name: Frische messen (beide Release-Familien, Entwuerfe eingeschlossen)
+        id: messung
         run: |
           set -euo pipefail
           if [ -z "${BACKUP_REPO:-}" ] || [ -z "${GH_TOKEN:-}" ]; then
@@ -164,10 +213,19 @@ jobs:
             echo "::error::Backup-Frische nicht pruefbar – BACKUP_REPO oder BACKUP_REPO_TOKEN fehlt (E1/E2 offen)."
             exit 1
           fi
+          # Getrennter Fehlerkanal: Bis zum 07.11.2026 lief `2>&1` in dieselbe
+          # Datei wie das JSON. Eine einzige Warnzeile auf stderr machte das
+          # Ergebnis unlesbar – und die alte Auswertung hätte das als „nicht
+          # warnung“ stillschweigend grün gewertet. Stderr bleibt jetzt sichtbar,
+          # das JSON bleibt rein.
           set +e
-          python3 scripts/backup_freshness_guard.py --repo "$BACKUP_REPO" --json > /tmp/frische.json 2>&1
+          python3 scripts/backup_freshness_guard.py --repo "$BACKUP_REPO" --json > /tmp/frische.json 2>/tmp/frische.err
           RC=$?
           set -e
+          if [ -s /tmp/frische.err ]; then
+            echo "Hinweise der Frische-Prüfung (stderr, nicht Teil der Messung):"
+            sed 's/^/  /' /tmp/frische.err
+          fi
           {
             echo "## Backup-Frischwache (RPO 24 h / Toleranz 52 h)"
             echo ""
@@ -190,18 +248,58 @@ jobs:
               print(p.read_text() if p.exists() else str(e))
           PYEOF
           } >> "$GITHUB_STEP_SUMMARY"
-          if [ $RC -eq 1 ]; then
-            echo "::error::Backup ueberfaellig oder unpruefbar (ueber 52 h oder fehlende Familie) – RPO verletzt. Details in Summary."
-            exit 1
-          elif [ $RC -eq 0 ]; then
-            if python3 -c "import json; d=json.loads(open('/tmp/frische.json').read()); exit(0 if d.get('urteil')=='warnung' else 1)" 2>/dev/null; then
-              echo "::warning::Backup-Fruehwarnung (ueber 36 h) – ein Tag ohne frisches Release. Noch kein Ausfall, aber beobachten."
-            fi
-            exit 0
-          else
-            echo "::error::Frische-Pruefung fehlgeschlagen (Exit $RC) – Hilfe: docs/ANLEITUNG-OFFSITE-BACKUP.md"
+          # Fail-closed in der Auswertung: Kein lesbares Urteil = kein Grün.
+          URTEIL=""
+          # Kein `|| true`: Die Zuweisung darf scheitern, sie darf nur nicht
+          # den Lauf grün machen. Bleibt sie leer, ist das Urteil unten rot.
+          if ! URTEIL="$(python3 -c "import json;d=json.load(open('/tmp/frische.json'));print(d.get('urteil','') if d.get('urteil') in ('ok','warnung','fehler') else '')" 2>/dev/null)"; then
+            URTEIL=""
+          fi
+          if [ -z "$URTEIL" ]; then
+            echo "::error::Die Frische-Pruefung lieferte kein lesbares Urteil (Exit $RC) – ohne Messung kein Gruen. Anleitung: docs/ANLEITUNG-OFFSITE-BACKUP.md"
             exit 1
           fi
+          echo "urteil=$URTEIL" >> "$GITHUB_OUTPUT"
+          echo "gemessen=true" >> "$GITHUB_OUTPUT"
+          echo "Gemessenes Urteil: $URTEIL (Exit $RC) – das Schlussurteil faellt nach der Selbstheilung."
+          exit 0
+
+      # ================================================================
+      #  SELBSTHEILUNG (WF-3150 / #1030, 07.11.2026)
+      #  ------------------------------------------------------------
+      #  Warum KEIN `if: failure()`: Die Messung ist kein Fehler mehr.
+      #  Warum die Bedingung aus den Ausgaben statt aus `always()`:
+      #  Ohne Messung (fehlende Eingaben, Einrichtung offen) gibt es
+      #  nichts zu heilen – der Lauf ist dort schon an der richtigen
+      #  Stelle rot.
+      #  Warum der Schritt nicht selbst rot wird: Ein nicht geheilter
+      #  Befund ist ein BEFUND, kein Werkzeugfehler. Rot macht ihn der
+      #  Schritt „Urteil fällen“ – mit genau einer roten Stelle und dem
+      #  Rat der Klasse `backup-frisch` (das Alerting erkennt die Klasse
+      #  am Workflow, nicht am Wort „Voraussetzungen“).
+      # ================================================================
+      - name: Selbstheilung – fehlende Sicherung anstoßen (fail-closed)
+        if: ${{ steps.messung.outputs.gemessen == 'true' && steps.messung.outputs.urteil != 'ok' }}
+        env:
+          # Nur dieser Schritt sieht das Recht, einen Lauf anzustoßen.
+          AKTION_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          # Exit 1 heißt „nicht geheilt“ – das ist ein zulässiges Ergebnis und
+          # wird vom Urteil-Schritt bewertet. Exit 2 heißt „die Heilung konnte
+          # nicht entscheiden“ – das ist ein Werkzeugfehler und bleibt rot.
+          set +e
+          python3 scripts/backup_selbstheilung.py --heilen --ausgabe /tmp/frische_final.json
+          RC=$?
+          set -e
+          if [ "$RC" -eq 2 ]; then
+            echo "::error::Die Selbstheilung konnte nicht entscheiden (Aufruf- oder Selbsttestfehler) – Anleitung: docs/ANLEITUNG-OFFSITE-BACKUP.md"
+            exit 1
+          fi
+          if [ ! -s /tmp/frische_final.json ]; then
+            echo "::warning::Die Selbstheilung hat kein Ergebnis hinterlassen – das Urteil stuetzt sich auf die erste Messung (fail-closed)."
+          fi
+          exit 0
 
       # WF-9E5A / #923 (01.11.2026): Diese Kurzpruefung ist der EINZIGE
       # automatische Nachweis, dass der Rueckweg noch funktioniert. Sie traegt
@@ -210,11 +308,38 @@ jobs:
       # aber Rueckweg nicht belegt“) und riet sonst zu einem Neustart, der an
       # einem Syntaxfehler nichts aendert.
       - name: Kurzpruefung Wiederherstellbarkeit (strukturell, ohne Secrets)
+        # #923 (07.11.2026) – EIN NACHWEIS, DER NUR NACH EINEM GRUENEN VORGÄNGER
+        # LÄUFT, IST KEIN NACHWEIS.
+        # ---------------------------------------------------------------
+        # BEFUND (live, sechs Läufe in Folge, zuletzt 42282938395): In jedem
+        # Lauf, in dem „Voraussetzungen prüfen“ rot war, stand dieser Schritt
+        # als `skipped` im Lauf. Das ist GitHubs Standardbedingung
+        # `success()` – der Rückweg-Nachweis hing damit am Ausgang einer
+        # FREMDEN Frage. Genau so verschwindet eine Prüfung: Sie ist nicht
+        # rot, sie ist nicht da, und niemand liest eine Lücke.
+        # Warum das nicht „egal“ ist: Der Nachweis ist der einzige
+        # automatisierte Beweis, dass ein Backup zurückzuspielen wäre. Fällt
+        # er in genau dem Zustand aus, in dem die Sicherung schon nicht läuft,
+        # gibt es über den Rückweg zwei Unbekannte statt einer.
+        # JETZT: Der Schritt läuft IMMER (solange der Job nicht abgebrochen
+        # ist) und ist ehrlich: Was strukturell prüfbar ist, wird geprüft
+        # (Syntax, Selbsttests, Schein-Grün-Gegenprobe). Was ohne eingerichtetes
+        # Ziel NICHT prüfbar ist, steht als Grund im Protokoll – der Schritt
+        # wird dadurch nicht rot (die Einrichtung ist bereits Rot-Grund im
+        # Schritt davor und trägt ihren eigenen Rat), aber er ist auch nicht
+        # mehr stillschweigend weg.
+        if: ${{ !cancelled() }}
         run: |
           set -euo pipefail
-          # Kein `if: always()`: Ein Nachweis, der nur nach einem roten
-          # Frische-Schritt laeuft, waere die Umkehrung von fail-closed. Er
-          # laeuft immer, solange der Job nicht abgebrochen ist.
+          # EHRLICHE ANSAGE ZUERST (#923, 07.11.2026): Ohne Ziel/Zugang/
+          # Passphrase gibt es keine Sicherung, deren Rückweg man prüfen
+          # könnte. Das wird GESAGT – nicht verschwiegen (vorher stand hier
+          # in sechs Läufen nur „skipped“), und es macht aus der Lücke keine
+          # zweite Rot-Stelle: Die Einrichtung selbst trägt ihren Rat im
+          # Schritt „Voraussetzungen prüfen“.
+          if [ -z "${ZIEL_REPO:-}" ] || [ -z "${ZIEL_TOKEN:-}" ] || [ -z "${PASSWORT:-}" ]; then
+            echo "::warning title=Wiederherstellbarkeit nicht belegbar::Ohne Ziel, Zugang und Passphrase existiert keine Sicherung, deren Rückweg prüfbar wäre. Geprüft wird deshalb nur die STRUKTUR (Syntax, Selbsttest, Schein-Grün-Gegenprobe). Einrichtungs-Rat: docs/ANLEITUNG-OFFSITE-BACKUP.md (Schritte 1–7)."
+          fi
           bash -n scripts/restore_drill.sh
           bash -n scripts/backup_einrichten_wizard.sh
           python3 scripts/kv_backup.py --selftest
@@ -236,4 +361,118 @@ jobs:
             echo "- Selbsttest `kv_backup.py`: ok"
             echo "- Ein Drill ohne geprueste Familie endet mit Exit 2 (kein Schein-Gruen)."
             echo "- Echte Probe gegen das private Ziel: \`npm run backup:probe\` (Anleitung, Abschnitt „Wiederherstellung“)."
+            if [ -n "${ZIEL_REPO:-}" ] && [ -n "${ZIEL_TOKEN:-}" ] && [ -n "${PASSWORT:-}" ]; then
+              echo "- Ziel, Zugang und Passphrase sind gesetzt: die echte Probe ist jetzt möglich."
+            else
+              echo "- **Nicht prüfbar (ehrlich benannt):** Ohne Ziel/Zugang/Passphrase gibt es"
+              echo "  keine Sicherung, deren Rückweg man prüfen könnte. Strukturell ist der"
+              echo "  Rückweg bewiesen – die Wiederherstellung selbst nicht. Grund und Weg:"
+              echo "  Schritt „Voraussetzungen prüfen“ bzw. docs/ANLEITUNG-OFFSITE-BACKUP.md."
+            fi
           } >> "$GITHUB_STEP_SUMMARY"
+
+      # ================================================================
+      #  SELBSTHEILUNG (07.11.2026, #923) – Aktion mit Beweis, nicht Zusage
+      #  ----------------------------------------------------------------
+      #  Bis hierher galt die Kette als „wartet auf den Inhaber“. Das ist
+      #  richtig für die Zugänge (E1–E8) – aber nicht für alles. Zwei
+      #  Befunde sind ohne jeden Zugang reparierbar bzw. sichtbar zu machen:
+      #    · Der nächtliche Lauf kommt verspätet oder gar nicht (belegt an
+      #      24 Läufen: Soll 03:00 UTC, Start 07:37–10:28 UTC). Die DATEI ist
+      #      in Ordnung, es fehlt der LAUF. Ein Dispatch holt ihn nach – und
+      #      beweist sich selbst: Ein „angenommen“ der API ist kein Beweis,
+      #      ein neuer Lauf in der Läufe-Liste ist einer.
+      #    · Ein grüner Repo-Job ohne Ziel und ohne Passphrase sichert nichts
+      #      (live belegt: Lauf 42359904795, Job „backup“ success mit den
+      #      Warnungen „Kein dauerhaftes Offsite-Ziel“ / „Kein
+      #      BACKUP_PASSPHRASE“). „Gelaufen“ ist wahr, „gesichert“ nicht.
+      #  Die Grenze ist im Skript festgeschrieben (H1–H3): Nur beweisbar
+      #  Kaputtes, nur ohne Zugang Reparierbares, immer mit Beweis. Was der
+      #  Inhaber tun muss, wird benannt – nicht erfunden.
+      # ================================================================
+      - name: Selbstheilung (nur Beweisbares – Dispatch mit Lauf-Nachweis)
+        # `!cancelled()`: Die Heilung ist eine eigene Aufgabe und darf nicht
+        # am Ausgang der Messung davor hängen (derselbe Grund wie oben).
+        if: ${{ !cancelled() }}
+        env:
+          # Nur der Lauf-Token: Er startet einen Lauf im EIGENEN Repo
+          # (actions: write). Die Backup-Zugänge selbst sind hier nicht nötig
+          # – die Heilung sieht von Ziel und Passphrase ausschließlich, OB sie
+          # gesetzt sind (sie liest keine Werte und gibt keine aus).
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          BACKUP_REPO: ${{ vars.BACKUP_REPO }}
+          BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+        run: |
+          set +e
+          python3 scripts/backup_selbstheilung.py --heilen
+          RC=$?
+          set -e
+          # 0 = nichts zu heilen (bzw. Heilung bewiesen)         → grün
+          # 1 = heilbar, aber Beweis ausgeblieben                → ROT (mit Beleg)
+          # 3 = nichts automatisch heilbar (Inhaber-Schritt)     → Hinweis;
+          #     ROT trägt bereits „Voraussetzungen prüfen“, ein zweites Rot
+          #     ohne eigenen Rat wäre nur Lärm.
+          # 4 = ein Lauf ist grün, gesichert wurde aber NICHTS  → eigener
+          #     Rat `backup-leerlauf` im Fehler-Alerting, eigene Klasse im
+          #     Vorgang. „Gelaufen" ist wahr, „gesichert" nicht – und genau
+          #     diese Verwechslung soll niemand mehr selbst erkennen müssen.
+          if [ "$RC" = "1" ]; then
+            echo "::error::Selbstheilung konnte den Befund nicht beweisen (Exit 1) – Details in der Job-Zusammenfassung."
+            exit 1
+          fi
+          if [ "$RC" = "4" ]; then
+            echo "::error title=Backup-Leerlauf::Ein Lauf ist grün, gesichert wurde aber nichts (kein dauerhaftes Ziel bzw. keine Passphrase). Das ist kein Erfolg: Es existiert nur eine 7-Tage-Kurzzeitkopie im selben Konto. Weg: docs/ANLEITUNG-OFFSITE-BACKUP.md, Schritte 1–7."
+            exit 1
+          fi
+          if [ "$RC" = "3" ]; then
+            echo "::notice::Kein automatisch heilbarer Befund – der Inhaber-Schritt ist unten benannt (docs/ANLEITUNG-OFFSITE-BACKUP.md)."
+          fi
+          exit 0
+      #  SCHLUSSURTEIL (WF-3150 / #1030, 07.11.2026)
+      #  ------------------------------------------------------------
+      #  Der einzige Schritt, der wegen der Frische rot werden darf – und
+      #  zwar NACH der Selbstheilung: Grün gibt es nur, wenn die zweite
+      #  Messung ein frisches Release sieht. Ein angestoßener Lauf, ein
+      #  „die Sicherung läuft schon“ oder ein lesbares Gefühl sind kein
+      #  Nachweis. Unlesbares Ergebnis = rot (kein Freibrief).
+      #  `always()`, damit ein Fehler in der Selbstheilung das Urteil
+      #  nicht verschluckt – der Schritt beweist nichts nach, er liest nur.
+      # ================================================================
+      - name: Urteil fällen (fail-closed – ohne Nachweis kein Grün)
+        if: ${{ always() && steps.messung.outputs.gemessen == 'true' }}
+        run: |
+          set -euo pipefail
+          ENDGUELTIG=/tmp/frische.json
+          if [ -s /tmp/frische_final.json ]; then ENDGUELTIG=/tmp/frische_final.json; fi
+          echo "Urteilsgrundlage: $ENDGUELTIG"
+          set +e
+          python3 - "$ENDGUELTIG" <<'PYEOF'
+          import json, sys
+          from pathlib import Path
+          pfad = Path(sys.argv[1])
+          try:
+              daten = json.loads(pfad.read_text(encoding="utf-8"))
+              urteil = daten.get("urteil")
+          except Exception as fehler:  # noqa: BLE001
+              print("::error title=Backup-Frischwache::Urteil nicht lesbar "
+                    f"({fehler}) – ohne Messung kein Gruen. Anleitung: docs/ANLEITUNG-OFFSITE-BACKUP.md")
+              sys.exit(1)
+          if urteil not in ("ok", "warnung", "fehler"):
+              print("::error title=Backup-Frischwache::Das Urteil fehlt oder ist unbekannt – "
+                    "ohne Messung kein Gruen. Anleitung: docs/ANLEITUNG-OFFSITE-BACKUP.md")
+              sys.exit(1)
+          if urteil == "fehler":
+              print("::error title=Backup-Frischwache::Backup ueberfaellig oder unpruefbar – RPO verletzt. "
+                    "Die Selbstheilung ist gelaufen (Entscheidung, Anstoss und zweite Messung stehen "
+                    "in der Summary). Bleibt es rot, ist es eine echte Stoerung. "
+                    "Anleitung: docs/ANLEITUNG-OFFSITE-BACKUP.md")
+              sys.exit(1)
+          if urteil == "warnung":
+              print("::warning title=Backup-Frischwache::Fruehwarnung (ueber 36 h) – noch kein Ausfall, "
+                    "aber beobachten. Die Selbstheilung hat nachgemessen.")
+          sys.exit(0)
+          PYEOF
+          RC=$?
+          set -e
+          exit "$RC"
