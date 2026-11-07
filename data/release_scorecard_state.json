@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-07T16:24:50Z",
+  "generated_at": "2026-11-07T17:02:58Z",
   "modus": "live",
-  "commit": "dc958a7df72da10531e0962600a7a734b64527b0",
+  "commit": "da23e7bbd8ac5bd51295c090a4fdac8423becfd4",
   "kapazitaet": {
     "stichtag": "2026-11-07",
     "artikel": 115,
@@ -141,7 +141,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
@@ -328,7 +328,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-22",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
@@ -425,7 +425,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
@@ -515,7 +515,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-07",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen": {
@@ -695,7 +695,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-21",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "T1w-zeichenlaenge-optimum",
@@ -756,7 +756,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-21",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
@@ -774,7 +774,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-21",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
@@ -1123,7 +1123,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-03",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
