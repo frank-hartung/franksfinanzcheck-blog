@@ -420,12 +420,28 @@ class Faktenfrische763MetaTests(unittest.TestCase):
                 self.assertFalse(finds, f'Harte Textverständnis-Regeln: {finds}')
 
     def test_faktenfrische_queue_haelt_befunde_geschlossen(self):
-        """Der offene-Queue-Eintrag darf die zwei Slugs nicht mehr führen.
-        Ein neuer Lauf, der dieselben Fehler zurückmeldet, macht hier rot."""
+        """Kein zurückgemeldeter Befund für die zwei Slugs.
+
+        NACHZUG #1098 (07.11.2026): `offen` in der Queue ist zweierlei –
+        Seiten mit unvollständiger Prüfung UND der reine Arbeitsvorrat,
+        der nicht mehr ins Budget passte (`unvollstaendig +
+        arbeitsvorrat[budget:]`, siehe Queue-Schreiber in faktenfrische.py).
+        Ein Eintrag mit `faellig: false` und Grund „frisch geprüft …“ ist
+        kein Befund, sondern ein unausgeführter Takt; der alte Filter
+        meldete ihn als Rückfall. Geprüft wird jetzt die Befundwahrheit
+        selbst (Ledger) plus jede echte Queue-Meldung – strenger als zuvor.
+        """
         queue = json_load(ROOT / 'data' / 'faktenfrische_queue.json')
         for eintrag in queue.get('offen', []):
+            if (not eintrag.get('faellig')
+                    and str(eintrag.get('grund', '')).startswith('frisch geprüft')):
+                continue   # Arbeitsvorrat, kein Befund
             self.assertNotIn(eintrag.get('slug'), (HEIZ, REISE),
                              f'Queue meldet offene Befunde für {eintrag.get("slug")}')
+        import faktenfrische_befund_ledger as ledger
+        offen = {e['slug'] for e in ledger.offene_befunde()}
+        self.assertFalse(offen & {HEIZ, REISE},
+                         f'Ledger führt offene Fachbefunde für {offen & {HEIZ, REISE}}')
 
     def test_systemprompt_trennt_modell_tatsache_und_werbung(self):
         prompt = faktenfrische.SYSTEM_PROMPT

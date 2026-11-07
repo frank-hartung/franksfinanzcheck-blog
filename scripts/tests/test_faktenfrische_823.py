@@ -483,8 +483,17 @@ class Faktenfrische823MetaTests(unittest.TestCase):
                                         'Unter MIN_LINKS: der Entwurf wäre link-unterversorgt.')
 
     def test_faktenfrische_queue_haelt_befunde_geschlossen(self):
-        """Die offene Queue darf die zwei Slugs nicht mehr führen. Ein neuer
-        Lauf, der dieselben Fehler zurückmeldet, macht hier rot."""
+        """Kein zurückgemeldeter Befund für die zwei Slugs.
+
+        NACHZUG #1098 (07.11.2026): `offen` in der Queue ist zweierlei –
+        Seiten mit unvollständiger Prüfung UND der reine Arbeitsvorrat,
+        der nicht mehr ins Budget passte (`unvollstaendig +
+        arbeitsvorrat[budget:]`, siehe Queue-Schreiber in faktenfrische.py).
+        Ein Eintrag mit `faellig: false` und Grund „frisch geprüft …“ ist
+        kein Befund, sondern ein unausgeführter Takt; der alte Filter
+        meldete ihn als Rückfall. Geprüft wird jetzt die Befundwahrheit
+        selbst (Ledger) plus jede echte Queue-Meldung – strenger als zuvor.
+        """
         try:
             queue = json.loads((ROOT / 'data' / 'faktenfrische_queue.json')
                                .read_text(encoding='utf-8'))
@@ -492,10 +501,18 @@ class Faktenfrische823MetaTests(unittest.TestCase):
             self.skipTest('Queue-Datei nicht vorhanden')
         kerne = {re.sub(r'^\d{4}-\d{2}-\d{2}-', '', s) for s in (SAISON, DNS)}
         for eintrag in queue.get('offen', []):
+            if (not eintrag.get('faellig')
+                    and str(eintrag.get('grund', '')).startswith('frisch geprüft')):
+                continue   # Arbeitsvorrat, kein Befund
             slug = eintrag.get('slug') or ''
             kern = re.sub(r'^\d{4}-\d{2}-\d{2}-', '', slug)
             self.assertNotIn(kern, kerne,
                              f'Queue meldet offene Befunde für {slug}')
+        import faktenfrische_befund_ledger as ledger
+        offen = {re.sub(r'^\d{4}-\d{2}-\d{2}-', '', e['slug'])
+                 for e in ledger.offene_befunde()}
+        self.assertFalse(offen & kerne,
+                         f'Ledger führt offene Fachbefunde für {offen & kerne}')
 
     def test_systemprompt_prueft_die_823_befundklassen(self):
         prompt = faktenfrische.SYSTEM_PROMPT.lower()
