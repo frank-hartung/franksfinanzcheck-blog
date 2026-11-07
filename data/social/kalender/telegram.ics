@@ -6,39 +6,24 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-u
- pdate-2026:nutzen:2026-11-07@franksfinanzcheck.de
-DTSTAMP:20261107T114949Z
-DTSTART:20261107T170000Z
-DTEND:20261107T171500Z
-SUMMARY:Telegram (Kanal): Dein Haus sicher schützen: Das neue Vorsorge
- -Update 2026 (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sich
- er-schuetzen-das-neue-vorsorge-update-2026/
-URL:https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-sch
- uetzen-das-neue-vorsorge-update-2026/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-10-12-energieausweis-was-das-dokument-fuer-deine-fix
- kosten:nutzen:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261107T114949Z
+UID:telegram:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und
+ -was-sie-kostet:nutzen:2026-11-08@franksfinanzcheck.de
+DTSTAMP:20261107T180529Z
 DTSTART:20261108T060000Z
 DTEND:20261108T061500Z
-SUMMARY:Telegram (Kanal): Energieausweis: Was er für deine Fixkosten b
- edeutet (nutzen)
+SUMMARY:Telegram (Kanal): Privathaftpflicht: Warum so wichtig und was 
+ sie kostet (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-12-energieausweis
- -was-das-dokument-fuer-deine-fixkosten/
-URL:https://franksfinanzcheck.de/posts/2026-10-12-energieausweis-was-d
- as-dokument-fuer-deine-fixkosten/
+ Artikel: https://franksfinanzcheck.de/posts/2026-08-17-privathaftpfli
+ cht-warum-sie-so-wichtig-ist-und-was-sie-kostet/
+URL:https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-wa
+ rum-sie-so-wichtig-ist-und-was-sie-kostet/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-
  monatlichen:nutzen:2026-11-14@franksfinanzcheck.de
-DTSTAMP:20261107T114949Z
+DTSTAMP:20261107T180529Z
 DTSTART:20261114T060000Z
 DTEND:20261114T061500Z
 SUMMARY:Telegram (Kanal): ETF-Sparplan starten: Deine Schritt-für-Schr
@@ -53,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekas
  se-fuellen:nutzen:2026-11-15@franksfinanzcheck.de
-DTSTAMP:20261107T114949Z
+DTSTAMP:20261107T180529Z
 DTSTART:20261115T060000Z
 DTEND:20261115T061500Z
 SUMMARY:Telegram (Kanal): Strategisch sparen: So kannst du deine Reise
@@ -68,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzich
  t:nutzen:2026-11-21@franksfinanzcheck.de
-DTSTAMP:20261107T114949Z
+DTSTAMP:20261107T180529Z
 DTSTART:20261121T060000Z
 DTEND:20261121T061500Z
 SUMMARY:Telegram (Kanal): Frugalismus Familie: Clever sparen ohne Verz

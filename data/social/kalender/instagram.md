@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Instagram
 
-> Automatisch aktualisiert: 07.11.2026 12:49 (Europe/Berlin)  
+> Automatisch aktualisiert: 07.11.2026 19:05 (Europe/Berlin)  
 > Profil: https://www.instagram.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `instagram.ics`
 
@@ -13,8 +13,8 @@
 ## Kommende Beiträge
 
 ### Sa, 07. November 2026
-- **18:45** ⏳ Flugvergleich im Winter: So findest du echte Billigflüge — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/
+- **18:45** ⚪ Strategisch sparen: So kannst du deine Reisekasse füllen — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/
 ### So, 08. November 2026
 - **11:45** ⏳ Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/
@@ -22,8 +22,8 @@
 - **11:45** ⏳ ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/
 ### Do, 12. November 2026
-- **11:45** ⏳ Strategisch sparen: So kannst du deine Reisekasse füllen — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/
+- **11:45** ⏳ Flugvergleich im Winter: So findest du echte Billigflüge — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/
 ### Fr, 13. November 2026
 - **11:45** ⏳ Frugalismus Familie: Clever sparen ohne Verzicht — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/
