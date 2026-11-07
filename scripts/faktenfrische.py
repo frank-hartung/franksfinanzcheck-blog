@@ -75,6 +75,7 @@ import os
 import re
 import subprocess
 import sys
+import tempfile
 import traceback
 import urllib.parse
 import urllib.request
@@ -1508,6 +1509,35 @@ def selftest() -> int:
             abbruch = "Abbruch"
         pruefe("ST8e", abbruch, "Abbruch")
 
+    # ST9 – ZWEI NAMEN, EINE WAHRHEIT (Dauerheilung 07.11.2026).
+    # Der Selbsttest prüft den Queue-Datensatz an der reinen Funktion: kein
+    # Netz, keine Uhr, keine Datei – ein Selbsttest, der `main()` ruft, hing
+    # am Recherche-Netz und wurde von der KI-Probe (#138) zu Recht erschlagen.
+    #
+    # Was hier festgehalten wird: `arbeitsvorrat` trägt FRISTEN und ist KEINE
+    # Befundliste; `fachbefunde` trägt Befunde mit id/typ/text/fassung. Wird
+    # wieder über `offen` gemessen, entstehen Fehlalarme (turnusgemäße
+    # Wiederaufnahme am 07.11.) und echte Rückfälle bleiben unsichtbar.
+    vorratsliste = [{"slug": "2026-10-14-heiz", "titel": "Heiz",
+                     "grund": "frisch geprüft vor 23 Tagen", "faellig": False,
+                     "frist": "2026-11-14", "geo": 100}]
+    befundliste = [{"id": "a" * 20, "slug": "2026-10-14-heiz", "typ": "luecke",
+                    "text": "Quelle fehlt", "fassung_sha256": "b" * 64}]
+    qd = queue_daten_bauen(uebersicht={"befunde": 1}, fachbefunde=befundliste,
+                           kapazitaet={}, abbrueche=[], arbeitsvorrat=vorratsliste,
+                           laeufe=[], erzeugt="2026-11-07 13:00 UTC")
+    pruefe("ST9a", "arbeitsvorrat" in qd, True)
+    pruefe("ST9b", qd["offen"], qd["arbeitsvorrat"])     # Alias, gleicher Inhalt
+    pruefe("ST9c", [e["slug"] for e in qd["arbeitsvorrat"]], ["2026-10-14-heiz"])
+    # Der Vorrat ist KEINE Befundliste: ihm fehlt die Befund-id.
+    pruefe("ST9d", any("id" in v for v in qd["arbeitsvorrat"]), False)
+    # Und der Befund ist im Befundfeld – nicht im Vorrat.
+    pruefe("ST9e", [b["id"] for b in qd["fachbefunde"]], ["a" * 20])
+    # Eine Seite darf gleichzeitig im Vorrat stehen UND einen offenen Befund
+    # haben – die beiden Felder widersprechen sich nicht, sie messen anderes.
+    pruefe("ST9f", qd["arbeitsvorrat"][0]["slug"],
+           qd["fachbefunde"][0]["slug"])
+
     if fehler:
         print("🛑 Selbsttest FAKTENFRISCHE rot:")
         for f in fehler:
@@ -1515,6 +1545,43 @@ def selftest() -> int:
         return 2
     print(f"✅ Selbsttest Faktenfrische: {gezaehlt}/{gezaehlt} Fälle grün.")
     return 0
+
+
+# ----------------------------------------------------------------------
+# Queue-Datensatz: EIN Datensatz, ZWEI Feldnamen
+# ----------------------------------------------------------------------
+
+def queue_daten_bauen(*, uebersicht, fachbefunde, kapazitaet, abbrueche,
+                      arbeitsvorrat, laeufe, erzeugt) -> dict:
+    """Der Queue-Datensatz – rein, ohne Datei, ohne Netz, ohne Uhr.
+
+    07.11.2026 (Dauerheilung): Dieses Feld hieß bis heute nur `offen`, und
+    drei Rückfall-Tests (#763, #823, #911) lasen daraus „offene Befunde“.
+    Es ist aber der ARBEITSVORRAT: Seiten, die noch nicht dran waren, mit
+    ihrer Frist. Beide Richtungen waren falsch –
+
+      * FEHLALARM: Am 07.11. rutschte die Heizperiode turnusgemäß wieder in
+        den Vorrat („frisch geprüft vor 23 Tagen“) → Test rot, Sachlage
+        unverändert. Genau dieser Fehlalarm hat den CI-Job
+        „Code-Regression“ und damit jeden PR blockiert.
+      * SCHEIN-SICHERHEIT: Ein echter zurückgekehrter Befund steht in
+        `fachbefunde`; über `offen` gemessen wäre er unsichtbar gewesen.
+
+    Deshalb heißt das Feld jetzt, was es ist: `arbeitsvorrat`. `offen`
+    bleibt als gleichlautender Alias stehen (Altleser brechen nicht), und
+    weil BEIDE aus derselben Liste stammen, kann nichts auseinanderlaufen.
+    Gemessen wird ein Befund dort, wo er steht: in `fachbefunde`.
+    """
+    return {
+        "erzeugt": erzeugt,
+        "uebersicht": uebersicht,
+        "fachbefunde": fachbefunde,
+        "kapazitaet": kapazitaet,
+        "abbrueche": abbrueche,
+        "arbeitsvorrat": arbeitsvorrat,
+        "offen": arbeitsvorrat,          # Alias für ältere Leser (gleicher Inhalt)
+        "laeufe": laeufe,
+    }
 
 
 # ----------------------------------------------------------------------
@@ -1675,20 +1742,23 @@ def main() -> int:
     report_schreiben(laeufe, uebersicht, trocken=not args.apply,
                      abbrueche=abbrueche)
 
+    # Arbeitsvorrat = Seiten, die noch nicht dran waren (mit Frist). Das ist
+    # KEINE Befundliste; die Begründung steht bei `queue_daten_bauen`.
+    arbeitsvorrat_eintraege = [
+        {"slug": a["slug"], "titel": a["titel"],
+         "grund": a["_faellig"]["grund"],
+         "faellig": bool(a["_faellig"]["faellig"]),
+         "frist": (a["_faellig"]["frist"].isoformat()
+                   if a["_faellig"].get("frist") else None),
+         "geo": a["_geo"]["prozent"]}
+        for a in unvollstaendig + arbeitsvorrat[budget:]]
+    queue_daten = queue_daten_bauen(
+        uebersicht=uebersicht, fachbefunde=fachbefunde, kapazitaet=kapazitaet,
+        abbrueche=abbrueche, arbeitsvorrat=arbeitsvorrat_eintraege,
+        laeufe=laeufe, erzeugt=jetzt_utc())
     queue_tmp = Path(str(QUEUE_PFAD) + ".tmp")
     with queue_tmp.open("w", encoding="utf-8") as fh:
-        json.dump({"erzeugt": jetzt_utc(), "uebersicht": uebersicht,
-                   "fachbefunde": fachbefunde,
-                   "kapazitaet": kapazitaet,
-                   "abbrueche": abbrueche,
-                   "offen": [{"slug": a["slug"], "titel": a["titel"],
-                              "grund": a["_faellig"]["grund"],
-                              "faellig": bool(a["_faellig"]["faellig"]),
-                              "frist": (a["_faellig"]["frist"].isoformat()
-                                        if a["_faellig"].get("frist") else None),
-                              "geo": a["_geo"]["prozent"]}
-                             for a in unvollstaendig + arbeitsvorrat[budget:]],
-                   "laeufe": laeufe}, fh, ensure_ascii=False, indent=2)
+        json.dump(queue_daten, fh, ensure_ascii=False, indent=2)
     queue_tmp.replace(QUEUE_PFAD)
 
     if laeufe:

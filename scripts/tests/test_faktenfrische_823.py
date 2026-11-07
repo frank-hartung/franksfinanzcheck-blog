@@ -483,19 +483,24 @@ class Faktenfrische823MetaTests(unittest.TestCase):
                                         'Unter MIN_LINKS: der Entwurf wäre link-unterversorgt.')
 
     def test_faktenfrische_queue_haelt_befunde_geschlossen(self):
-        """Die offene Queue darf die zwei Slugs nicht mehr führen. Ein neuer
-        Lauf, der dieselben Fehler zurückmeldet, macht hier rot."""
-        try:
-            queue = json.loads((ROOT / 'data' / 'faktenfrische_queue.json')
-                               .read_text(encoding='utf-8'))
-        except FileNotFoundError:
+        """Kein OFFENER BEFUND darf die zwei Slugs wieder führen.
+
+        07.11.2026 – Messhöhe korrigiert: gelesen wird das Ledger
+        (`fachbefunde`), nicht `queue['offen']`. Letzteres ist der
+        Arbeitsvorrat mit Fristen; aus ihm „offene Befunde“ zu lesen erzeugte
+        Fehlalarme bei turnusgemäßer Wiederaufnahme und hätte einen echten
+        Rückfall übersehen. Siehe #763-Modul, gleiche Korrektur.
+        """
+        import faktenfrische_befund_ledger as ledger
+        queue = ROOT / 'data' / 'faktenfrische_queue.json'
+        if not queue.exists():
             self.skipTest('Queue-Datei nicht vorhanden')
         kerne = {re.sub(r'^\d{4}-\d{2}-\d{2}-', '', s) for s in (SAISON, DNS)}
-        for eintrag in queue.get('offen', []):
-            slug = eintrag.get('slug') or ''
-            kern = re.sub(r'^\d{4}-\d{2}-\d{2}-', '', slug)
+        for eintrag in ledger.offene_befunde(queue):
+            kern = re.sub(r'^\d{4}-\d{2}-\d{2}-', '', eintrag.get('slug') or '')
             self.assertNotIn(kern, kerne,
-                             f'Queue meldet offene Befunde für {slug}')
+                             f'Offener Befund zurückgekehrt für {eintrag.get("slug")}: '
+                             f'{eintrag.get("typ")} – {eintrag.get("text")}')
 
     def test_systemprompt_prueft_die_823_befundklassen(self):
         prompt = faktenfrische.SYSTEM_PROMPT.lower()

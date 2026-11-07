@@ -528,11 +528,17 @@ class Faktenfrische911MetaTests(unittest.TestCase):
                                .read_text(encoding='utf-8'))
         except FileNotFoundError:
             self.skipTest('Queue-Datei nicht vorhanden')
+        # 07.11.2026 – Messhöhe korrigiert (wie #763/#823): offene BEFUNDE
+        # stehen im Ledger (`fachbefunde`), `queue['offen']` ist der
+        # Arbeitsvorrat mit Fristen. Aus dem Vorrat „Befunde“ zu lesen war in
+        # beide Richtungen falsch.
+        import faktenfrische_befund_ledger as ledger
         kerne = {re.sub(r'^\d{4}-\d{2}-\d{2}-', '', s) for s in (STROM, GAS)}
-        for eintrag in queue.get('offen', []):
-            slug = eintrag.get('slug') or ''
-            kern = re.sub(r'^\d{4}-\d{2}-\d{2}-', '', slug)
-            self.assertNotIn(kern, kerne, f'Queue meldet offene Befunde für {slug}')
+        for eintrag in ledger.offene_befunde(ROOT / 'data' / 'faktenfrische_queue.json'):
+            kern = re.sub(r'^\d{4}-\d{2}-\d{2}-', '', eintrag.get('slug') or '')
+            self.assertNotIn(kern, kerne,
+                             f'Offener Befund zurückgekehrt für {eintrag.get("slug")}: '
+                             f'{eintrag.get("typ")} – {eintrag.get("text")}')
         # Der Register-Eintrag muss den Lauf und die Heilung datieren.
         reg = register()
         self.assertIn('2026-10-27', reg['lauf'])
