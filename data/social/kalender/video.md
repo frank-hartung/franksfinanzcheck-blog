@@ -1,6 +1,6 @@
 # 🎬 Veröffentlichungskalender – Reels · Shorts · Video
 
-> Automatisch aktualisiert: 07.11.2026 12:48 (Europe/Berlin)  
+> Automatisch aktualisiert: 07.11.2026 12:49 (Europe/Berlin)  
 > Aktive Ziel-Plattformen: YouTube Shorts, Instagram Reels  
 > Zum Abonnieren: `video.ics`
 
@@ -22,6 +22,7 @@
 
 ## Zuletzt produziert
 
+- ✅  · Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar
 - ✅  · Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen
 - ✅  · Preiswert surfen: DSL, Kabel oder Glasfaser im Vergleich
 
