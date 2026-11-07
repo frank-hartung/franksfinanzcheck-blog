@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Reddit
 
-> Automatisch aktualisiert: 06.11.2026 20:59 (Europe/Berlin)  
+> Automatisch aktualisiert: 07.11.2026 12:49 (Europe/Berlin)  
 > Profil: https://www.reddit.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `reddit.ics`
 
@@ -12,7 +12,9 @@
 
 ## Kommende Beiträge
 
-_Aktuell nichts eingeplant – der Autopilot füllt den Plan beim nächsten Lauf._
+### Sa, 07. November 2026
+- **14:15** ⏳ Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/
 
 ## Zuletzt veröffentlicht
 

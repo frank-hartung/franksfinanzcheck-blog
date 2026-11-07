@@ -433,6 +433,91 @@ Deshalb gibt es zwei Griffe, die zusammengehören:
    belegbar – ungeprüft gilt nicht als sauber, C33). Junge Wartung unter der
    Schwelle bleibt still; sie ist normal und kein Befund.
 
+### A4b · Der Heilweg läuft jetzt selbst (WF-829B / #922, 07.11.2026)
+
+**Der eigentliche Befund war nicht das Environment, sondern die Verdrahtung.**
+`--anwenden` (siehe oben) existiert seit dem 30.10.2026, wurde aber von
+**keinem automatischen Lauf** aufgerufen. Die tägliche Sicherheits-Wache rief
+nur `--pruefen --warnstufe`: jeden Morgen derselbe Befund, jeden Tag keine
+Heilung. Ein gemeldeter Schaden mit vorhandenem, aber nicht verdrahtetem
+Heilpfad ist eine Warteschlange. Die Vorberichte vom 01./03./04.11.2026 haben
+den Zustand korrekt beschrieben und genau deshalb für „geheilt“ gehalten.
+
+**Seit dem 07.11. läuft `.github/workflows/produktions-schutz-selbstheilung.yml`:**
+
+| Wann | Warum |
+|---|---|
+| täglich 05:48 UTC | vor der Sicherheits-Wache (06:05 UTC) – Drift wird behoben, bevor sie gemeldet wird |
+| nach **jedem** Lauf von „Cloudflare-Worker deployen“ auf `main` | auch und gerade nach einem roten, fail-closed abgebrochenen Deploy: der Fehler löst seine Reparatur aus |
+| `workflow_dispatch` (`modus=heilen`/`pruefen`) | auf Zuruf, `pruefen` ist rein lesend |
+| Push/PR an Heiler, Tests, Vertrag, Kette, Workflow, Deploy-Pfad | eine Änderung am Heilwerkzeug löst seine Prüfung aus (Trigger-Wache W1/W3) |
+
+**Der Ablauf ist vierstufig und verlangt an jeder Stelle einen Beweis:**
+
+1. **Eichprobe** (`eichprobe()`): Der Vorfall wird im Speicher nachgebaut, ohne
+   Netz und ohne Datei. Erkennt der Prüfer „kein Reviewer, keine Branch-Regel,
+   Bypass an“ nicht mehr, gibt es **Exit 3** – kein Urteil, kein Schreibzugriff.
+   Dieselbe Lehre wie das zerstörte Integritäts-Siegel vom 04.11.2026.
+2. **Messen** über `worker_environment_einrichten.stand()` und `planen()`; die
+   Zieldefinition steht in `data/produktions_schutz_vertrag.json` und wird
+   strikt gegen die Konstanten des Einrichters und des Gates geprüft.
+3. **Nur verschärfend schreiben** über `einrichter.schreiben()` – genau zwei
+   erlaubte Wege (`PUT` Environment, `POST` Branch-Regel), kein `DELETE`, keine
+   Ersetzung bestehender Reviewer, nie `can_admins_bypass`.
+4. **Nachmessen**: ohne zweiten Stand gilt nichts als geheilt. Ein
+   schlechterer Stand nach dem Eingriff bricht mit Exit 2 ab; ein verbleibender
+   offener Rest bleibt `OFFEN` (Exit 1), auch wenn zwei Ziele geheilt wurden.
+
+**Beleg:** `data/produktions_schutz_belege.jsonl`, append-only, jede Zeile mit
+`seq`, `prev_sha256` und `sha256` über die vorangehende Zeile (deshalb
+`merge=binary` in `.gitattributes` – `merge=union` würde die Kette brechen).
+Der Lauf kopiert die Kette nach `$RUNNER_TEMP`, hängt seinen Beleg an und
+bewahrt sie 90 Tage als Artefakt `produktions-schutz-beleg` auf. Kein Token,
+kein Antworttext, kein Fremdlink.
+
+**Exit-Bedeutung im Lauf** (C34 – der Mess-Schritt bleibt neutral, die
+Auswertung entscheidet):
+
+| Exit | Klasse | Wirkung |
+|---|---|---|
+| 0 | `SICHER` / `GEHEILT` | grün; nur mit Nachmessung belegt |
+| 1 | `OFFEN` | `::warning` mit Schließpfad (Rechtebefund / Dashboard-Schalter) – kein Dauer-Rot ohne Handlungsmöglichkeit (C14) |
+| 2 | `NICHT_BELEGBAR` / `VERSCHLECHTERUNG` | rot: ungeprüft gilt nicht als sauber |
+| 3 | `MESSGERAET` | rot: kein Urteil, kein Schreiben |
+
+**Die Wache über der Wache:** `python3 scripts/produktions_schutz_selbstheilung.py
+--wache` läuft in jedem Lauf (auch auf PRs), offline. Sie prüft den Vertrag,
+die Kette, dass `--heilen` wirklich in einem `run:`-Block steht (ein Kommentar
+zählt nicht), dass der Live-Job auf `main` begrenzt ist, keine Fremd-Secrets
+und keine `pending_deployments` vorkommen – **und dass
+`worker_environment_guard.py --check` im Deploy-Pfad unangetastet ist**.
+Wird die Verdrahtung entfernt, wird sie zum Befund, statt still zu verrotten.
+
+```bash
+npm run test:worker:selbstheilung         # Selbsttest, Wache, 38 Vertragstests
+npm run worker:selbstheilung:pruefen      # rein lesend, keine Belegzeile
+npm run worker:selbstheilung:wache        # Verdrahtung und Kette prüfen
+npm run worker:selbstheilung              # heilen + Beleg (lokal, mit Token)
+```
+
+**Zwei Dinge bleiben Inhaber-Aufgaben – bewusst nicht automatisiert:**
+
+1. **Ein Token**: Secret `UMGEBUNGS_ADMIN_TOKEN` mit feingranularem Recht
+   `Environments: read/write` (klassisch `repo`/`administration`). Fehlt es,
+   fällt der Lauf auf `github.token` zurück; die API antwortet **403**, der
+   Heiler meldet `RECHT` und behauptet keine Heilung. Am 07.11.2026 um 09:55 UTC
+   ist genau das gemessen und als erster Beleg (`seq: 1`) festgehalten.
+2. **Ein Schalter im Dashboard**: *Allow administrators to bypass configured
+   protection rules* **aus**. Keine GitHub-API nimmt `can_admins_bypass` an
+   (REST `additionalProperties: false`, GraphQL kennt das Feld nicht). Danach
+   hält der Deploy wie gewollt bei *Review deployments* – freigeben bleibt
+   Menschenhandlung (siehe A4).
+
+**Was dieser Lauf ausdrücklich nicht tut:** keine Deploy-Freigabe, keine
+Cloudflare-Secrets, kein Wrangler, kein Lockern, kein Ersetzen des harten
+Stopps. Der harte Stopp steht weiter **vor** jedem Secret-Zugriff. Ein
+Werkzeug, das hier „repariert“, repariert das Falsche.
+
 ---
 
 ### A5 · Automatik-Kette auf dem eigenen Rechner (Finding F-04)
