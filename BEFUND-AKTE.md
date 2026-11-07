@@ -2,6 +2,12 @@
 
 _Stand 2026-11-07 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
+**11 offene Befunde auf 3 Seiten · davon 0 Live-Seiten mit 0 Befunden · ältester 1 Tage · Frist 14 Tage.**
+
+| Kennzahl | Wert |
+|---|---|
+| Offene Befunde | 11 |
+| Seiten betroffen | 3 (davon live: 0) |
 **18 offene Befunde auf 4 Seiten · davon 2 Live-Seiten mit 10 Befunden · ältester 0 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |

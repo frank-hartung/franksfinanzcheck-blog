@@ -38,7 +38,7 @@ quellen:
     url: "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/"
     herausgeber: "Bundesverband der Energie- und Wasserwirtschaft"
     datum: "2026-10-28"
-faktencheck: 2026-11-07
+faktencheck: 2026-11-01
 ---
 
 Ein Tarifportal findet in Sekunden hunderte Gastarife. Danach kommt die echte Arbeit: Filter zurücksetzen, Bonus ausblenden und schauen, ob Preisgarantie und Laufzeit zueinander passen.

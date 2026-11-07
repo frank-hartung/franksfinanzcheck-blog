@@ -40,7 +40,7 @@ quellen:
     url: "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen/onlinereisebueros-so-vermeiden-sie-probleme-bei-der-urlaubsbuchung-11306"
     herausgeber: "Verbraucherzentrale"
     datum: "2026-07-23"
-faktencheck: 2026-11-07
+faktencheck: 2026-11-03
 kurzantwort: "Ein gutes Campingbudget erfasst mehr als den Stellplatz. Plane Anfahrt, mögliche Zusatzgebühren, Ausrüstung, Essen und einen Puffer getrennt. Vergleiche den Gesamtpreis mit deinen Bedürfnissen, nicht nur den Preis pro Nacht."
 ---
 

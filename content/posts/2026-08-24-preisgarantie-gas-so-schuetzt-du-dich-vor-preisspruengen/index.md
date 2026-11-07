@@ -37,7 +37,7 @@ quellen:
   - titel: "Heizung: 10 einfache Tipps zum Heizkosten sparen"
     url: "https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892"
     herausgeber: "Verbraucherzentrale"
-faktencheck: 2026-11-07
+faktencheck: 2026-11-01
 ---
 
 Eine [Preisgarantie beim Gas](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/) klingt beruhigend. Springt der Börsenpreis, warnt schnell eine Schlagzeile.

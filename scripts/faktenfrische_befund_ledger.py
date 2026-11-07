@@ -269,6 +269,31 @@ def _frontmatter(art: dict) -> dict:
 
 
 # ----------------------------------------------------------------------
+# Abgeleitete Bildblöcke: Maschinenwerk, keine zweite Aussage (#1098)
+# ----------------------------------------------------------------------
+# `abbildungen_ableiten.py` schreibt Bildzeile und Unterschrift aus Titel,
+# Kurzantwort und Zwischenüberschriften. Der Textpflege-Bot zieht diese
+# Zeilen nach, wenn sich der Text ändert – und genau dieser Nachzug hat
+# entschiedene Befunde wieder geöffnet (Commit d1e1c4a, 07.11.2026): Die
+# Maschine öffnete durch ihre eigene Arbeit den Schließpfad, den ein Mensch
+# gerade geschlossen hatte. Deshalb zählt für die Fassungsbindung der
+# KERNTEXT. Das ist keine Lockerung: Bildzeile und Unterschrift tragen
+# nichts, was nicht schon in Titel, Kurzantwort oder Body steht – jede
+# echte Aussageänderung ändert den Kern und öffnet die Entscheidung weiter.
+ABGELEITETE_BILDER = ("abbildung-merkkarte.svg", "abbildung-ablauf.svg")
+ABGELEITETES_BILD_RE = re.compile(
+    r"^!\[[^\]]*\]\((?:" + "|".join(re.escape(n) for n in ABGELEITETE_BILDER) +
+    r")\)\s*$")
+# Nur die Unterschrift DIREKT hinter einem abgeleiteten Bild ist Maschinenwerk.
+# Eine handgeschriebene `*Abbildung: …*`-Zeile bleibt Teil der Aussage.
+ABGELEITETE_UNTERSCHRIFT_RE = re.compile(r"^\*Abbildung:[^\n]*\*\s*$")
+
+
+def kerntext(body: str) -> str:
+    """Body ohne die automatisch abgeleiteten Bildblöcke.
+
+    Entfernt wird ausschließlich ein abgeleitetes Bild samt der direkt
+    folgenden Unterschrift. Alles andere bleibt bytegenau stehen.
 # Die Projektionen der Aussage (07.11.2026, #1072)
 # ----------------------------------------------------------------------
 # EINE LEBENSREGEL FÜR DIESEN LEDGER:
@@ -397,16 +422,57 @@ def text_hash(art: dict, projektion: str = PROJEKTIONEN[0]) -> str:
     schreiben (Weiterlesen-Zeile, Abbildungen, Transparenz, Disclaimer,
     Werkzeug-Anhang) – Begründung und Beweis: `aussage_body()`.
     """
+    zeilen = body.split("\n")
+    behalten = [True] * len(zeilen)
+    for i, zeile in enumerate(zeilen):
+        if not ABGELEITETES_BILD_RE.match(zeile.strip()):
+            continue
+        behalten[i] = False
+        j = i + 1
+        while j < len(zeilen) and not zeilen[j].strip():
+            j += 1
+        if j < len(zeilen) and ABGELEITETE_UNTERSCHRIFT_RE.match(zeilen[j].strip()):
+            for k in range(i + 1, j + 1):
+                behalten[k] = False
+    kern = "\n".join(z for z, ok in zip(zeilen, behalten) if ok)
+    return re.sub(r"\n{3,}", "\n\n", kern).strip()
+
+
+def _aussage_hash(art: dict, body: str) -> str:
     fm = _frontmatter(art)
     material = {
         "title": fm.get("title", ""),
         "description": fm.get("description", ""),
         "kurzantwort": fm.get("kurzantwort", ""),
+        "body": body,
         "body": aussage_body(art.get("body", ""), projektion),
     }
     payload = json.dumps(material, ensure_ascii=False, sort_keys=True,
                          separators=(",", ":"), default=str)
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def text_hash(art: dict) -> str:
+    """Hash der Aussageflächen – OHNE Quellen und ohne abgeleitete Bildblöcke.
+
+    Quellen schreibt der Lauf selbst. Ein Befund über eine Aussage darf
+    nicht dadurch unschließbar werden, dass die Belegkette aufgefrischt
+    wird; eine Aussageänderung dagegen muss jede Entscheidung öffnen.
+    Seit #1098 gilt dasselbe für die Bildzeilen, die der Textpflege-Bot aus
+    dem geprüften Text ableitet.
+    """
+    return _aussage_hash(art, kerntext(art.get("body", "")))
+
+
+def text_hash_volltext(art: dict) -> str:
+    """Alt-Hash über den vollständigen Body (vor #1098).
+
+    Er bleibt lesbar, weil bestehende Entscheidungen an ihn gebunden sind.
+    Diese Bindung ist STRENGER als der Kern-Hash (bytegenauer Text), also
+    darf sie eine Entscheidung weiter tragen – und die einmalige
+    Normalisierung sie beweisbar auf den Kern-Hash übersetzen.
+    """
+    return _aussage_hash(art, art.get("body", ""))
 
 
 def pruef_hash(art: dict) -> str:
@@ -490,6 +556,8 @@ def bestand_identitaeten() -> tuple[dict[str, dict], dict[str, str]]:
         if not art.get("slug"):
             continue
         slug = str(art["slug"])
+        fassungen[slug] = {"text": text_hash(art), "pruef": pruef_hash(art),
+                           "text_volltext": text_hash_volltext(art)}
         # DREI LESARTEN EINER ENTSCHEIDUNG (07.11.2026, #1072):
         #   `text`      – Aussage-Hash der heutigen Regel (Vorgabe für NEUE
         #                 Entscheidungen, ohne Quellen und Betriebsflächen),
@@ -644,6 +712,12 @@ def _normalisiere_fassungen(fassungen) -> dict[str, dict]:
     ergebnis = {}
     for slug, wert in dict(fassungen).items():
         if isinstance(wert, str):
+            ergebnis[str(slug)] = {"text": wert, "pruef": wert,
+                                   "text_volltext": wert}
+        elif isinstance(wert, dict):
+            ergebnis[str(slug)] = {"text": wert.get("text") or "",
+                                   "pruef": wert.get("pruef") or "",
+                                   "text_volltext": wert.get("text_volltext") or ""}
             # Ein einzelner Hash deckt alle Lesarten ab (Tests, Altaufrufer).
             ergebnis[str(slug)] = {"text": wert, "pruef": wert,
                                    "text_alt": wert, "text_alt_nackt": wert,
@@ -793,7 +867,58 @@ def entscheidungen_laden(path: Path = ENTSCHEIDUNGEN) -> dict[tuple[str, str], d
         elif entry.get("folgeentscheidung") or entry.get("vorgaenger_geprueft_fassung"):
             raise LedgerFehler(f"Folgeentscheidung ohne Vorgänger: {key}")
         result[key] = dict(entry, befund_fassung=befund_fassung)
+    for schluessel, eintrag in _normalisierungen(data, result).items():
+        result[schluessel] = dict(
+            result[schluessel],
+            geprueft_fassung_normalisiert=eintrag["nach"])
     return result
+
+
+NORMALISIERUNGEN = "fassung_normalisierungen"
+NORMALISIERUNG_GRUND = (
+    "Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der "
+    "Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen "
+    "keine eigene Aussage.")
+
+
+def _normalisierungen(data: dict, decisions: dict) -> dict[tuple[str, str], dict]:
+    """Einmalige Hash-Übersetzung – Beweis, keine fachliche Entscheidung.
+
+    Sie sagt ausschließlich: `von` (Alt-Hash über den vollständigen Body)
+    und `nach` (Kern-Hash) bezeichneten zum Migrationszeitpunkt denselben
+    Text. Geschrieben wird das nur, wenn der Alt-Hash bytegleich zum
+    Bestand war (`fassung_normalisierung`). Der Loader prüft die Form und
+    die Zuordnung; die Wirkung tritt nur ein, wenn `nach` der HEUTIGE
+    Kern-Hash ist. Ein beschädigter Eintrag ist ein Werkzeugfehler.
+    """
+    roh = data.get(NORMALISIERUNGEN) or []
+    if not isinstance(roh, list):
+        raise LedgerFehler(f"`{NORMALISIERUNGEN}` muss eine Liste sein")
+    gesehen: dict[tuple[str, str], dict] = {}
+    for eintrag in roh:
+        if not isinstance(eintrag, dict) or not all(
+                isinstance(eintrag.get(k), str) and eintrag[k].strip()
+                for k in ("slug", "befund_id", "von", "nach", "am", "grund")):
+            raise LedgerFehler("Hash-Normalisierung braucht Slug, Befund, von, "
+                               "nach, Datum und Grund")
+        if not all(HASH_RE.fullmatch(eintrag[k]) for k in ("von", "nach")):
+            raise LedgerFehler("Hash-Normalisierung braucht echte SHA-256")
+        if eintrag["von"] == eintrag["nach"]:
+            raise LedgerFehler("Hash-Normalisierung ohne Änderung ist sinnlos")
+        if len(eintrag["grund"].strip()) < BEGRUENDUNG_MIN:
+            raise LedgerFehler("Hash-Normalisierung braucht einen tragfähigen Grund")
+        if _datum(eintrag["am"]) is None:
+            raise LedgerFehler("Hash-Normalisierung braucht ein echtes Datum")
+        key = (eintrag["slug"], eintrag["befund_id"])
+        entscheidung = decisions.get(key)
+        if not entscheidung:
+            raise LedgerFehler(f"Hash-Normalisierung ohne Entscheidung: {key}")
+        if entscheidung.get("geprueft_fassung") != eintrag["von"]:
+            raise LedgerFehler(f"Hash-Normalisierung passt nicht zur Entscheidung: {key}")
+        if key in gesehen:
+            raise LedgerFehler(f"Doppelte Hash-Normalisierung: {key}")
+        gesehen[key] = eintrag
+    return gesehen
 
 
 def _entscheidung_schliesst(decision: dict | None, entry: dict,
@@ -825,6 +950,19 @@ def _entscheidung_schliesst(decision: dict | None, entry: dict,
     #    Entscheidung gültig – sie betrifft eine Aussage, die es nicht mehr
     #    gibt (so bei der gelöschten Heizöl-Seite vom 05.11.2026).
     aktuell = fassungen.get(str(entry.get("slug")))
+    if decision.get("befund_fassung") != decision.get("geprueft_fassung") and aktuell:
+        # Die Alt-Bindung an den vollständigen Body ist strenger als der
+        # Kern-Hash: Sie beweist bytegleichen Text und trägt deshalb weiter.
+        bekannte = {aktuell.get("text"), aktuell.get("pruef")}
+        if aktuell.get("text_volltext"):
+            bekannte.add(aktuell["text_volltext"])
+        # Einmalige Normalisierung (#1098): nur wenn der Alt-Hash beim
+        # Migrieren bytegleich zum heutigen Text war UND das Ziel der
+        # heutige Kern-Hash ist. Beides prüft der Loader bzw. die Migration.
+        uebersetzt = str(decision.get("geprueft_fassung_normalisiert") or "")
+        if uebersetzt and uebersetzt == aktuell.get("text"):
+            bekannte.add(geprueft)
+        if geprueft not in bekannte:
     if aktuell:
         # Drei Lesarten, eine Aussage (07.11.2026): `text` (neue Regel, ohne
         # Betriebsflächen), `text_alt` (dieselbe Aussage MIT den vom Betrieb
@@ -928,7 +1066,9 @@ def fassung_status(entry: dict, fassungen: dict, stichtag: dt.date) -> dict:
         return {"status": "ohne-fassung",
                 "hinweis": "Kein gültiger Fassungs-Hash (Altbestand) – die "
                            "Entscheidung bindet an den heutigen Text."}
-    if aktuell.get("text") in stored or aktuell.get("pruef") in stored:
+    if (aktuell.get("text") in stored or aktuell.get("pruef") in stored
+            or (aktuell.get("text_volltext") and
+                aktuell["text_volltext"] in stored)):
         return {"status": "aktuell",
                 "hinweis": "Der Text ist seit dem Befund unverändert."}
     alt = next((w for w in stored if HASH_RE.fullmatch(w)), "")
@@ -1291,6 +1431,8 @@ def entscheidung_anfuegen(befund_id_: str, von: str, begruendung: str,
         roh = yaml.safe_load(decisions_path.read_text(encoding="utf-8")) or {}
         if isinstance(roh, dict) and isinstance(roh.get("entscheidungen"), list):
             daten["entscheidungen"] = roh["entscheidungen"]
+        if isinstance(roh, dict) and roh.get(NORMALISIERUNGEN):
+            daten[NORMALISIERUNGEN] = roh[NORMALISIERUNGEN]
     daten["entscheidungen"].append(decision)
     _yaml_schreiben(decisions_path, daten)
     # Selbstkontrolle: Was wir geschrieben haben, muss den Befund schließen.
@@ -1299,6 +1441,63 @@ def entscheidung_anfuegen(befund_id_: str, von: str, begruendung: str,
         raise LedgerFehler("Entscheidung geschrieben, aber der Befund bleibt "
                            "offen – Fassungsbindung prüfen")
     return decision
+
+
+def fassung_normalisierung(*, decisions_path: Path = ENTSCHEIDUNGEN,
+                           fassungen: dict | None = None,
+                           apply: bool = False,
+                           heute: dt.date | None = None) -> dict:
+    """Alt-Entscheidungen beweisbar auf den Kern-Hash übersetzen (#1098).
+
+    Kandidat ist nur, wer ALLE drei Bedingungen erfüllt:
+      1. Die Entscheidung ist an den vollständigen Body gebunden.
+      2. Dieser Alt-Hash ist heute noch bytegleich zum Bestand – der
+         geprüfte Text liegt also unverändert vor.
+      3. Kern-Hash und Alt-Hash unterscheiden sich (sonst nichts zu tun).
+
+    Geschrieben wird eine reine Hash-Übersetzung, NIE eine Entscheidung.
+    Ohne `apply` ist der Lauf ein Trockenlauf.
+    """
+    heute = heute or dt.date.today()
+    if fassungen is None:
+        fassungen = fassungen_aus_bestand()
+    fassungen = _normalisiere_fassungen(fassungen)
+    decisions = entscheidungen_laden(decisions_path)
+    roh = {}
+    if decisions_path.exists():
+        roh = yaml.safe_load(decisions_path.read_text(encoding="utf-8")) or {}
+    vorhanden = {(str(e.get("slug")), str(e.get("befund_id"))): e
+                 for e in (roh.get(NORMALISIERUNGEN) or [])
+                 if isinstance(e, dict)}
+    kandidaten = []
+    for (slug, befund), entscheidung in decisions.items():
+        aktuell = fassungen.get(slug)
+        if not aktuell:
+            continue
+        geprueft = str(entscheidung.get("geprueft_fassung") or "")
+        voll, kern = aktuell.get("text_volltext"), aktuell.get("text")
+        if not voll or not kern or voll == kern:
+            continue
+        if geprueft != voll or (slug, befund) in vorhanden:
+            continue
+        kandidaten.append({
+            "slug": slug, "befund_id": befund, "von": voll, "nach": kern,
+            "am": heute.isoformat(), "grund": NORMALISIERUNG_GRUND,
+        })
+    if apply and kandidaten:
+        daten = {"entscheidungen": roh.get("entscheidungen") or []}
+        daten[NORMALISIERUNGEN] = list(roh.get(NORMALISIERUNGEN) or []) + kandidaten
+        _yaml_schreiben(decisions_path, daten)
+        # Selbstkontrolle: die Datei muss ladbar bleiben und die übersetzten
+        # Entscheidungen müssen den heutigen Kern tragen.
+        danach = entscheidungen_laden(decisions_path)
+        for eintrag in kandidaten:
+            key = (eintrag["slug"], eintrag["befund_id"])
+            if danach[key].get("geprueft_fassung_normalisiert") != eintrag["nach"]:
+                raise LedgerFehler(f"Normalisierung nicht wirksam: {key}")
+    return {"kandidaten": kandidaten,
+            "geschrieben": len(kandidaten) if apply else 0,
+            "vorhanden": len(vorhanden), "apply": apply}
 
 
 # ----------------------------------------------------------------------
@@ -1748,10 +1947,117 @@ def selftest() -> int:
         assert len(offene_befunde(queue_path, decisions, fassungen_echt)) == 1, \
             "Echter Satz hat die Entscheidung nicht geöffnet"
 
+    # (k) #1098: Abgeleitete Bildzeilen sind Maschinenwerk. Der Textpflege-Bot
+    #     zog eine Unterschrift nach und öffnete damit entschiedene Befunde.
+    #     Der Kern-Hash darf darauf nicht reagieren – auf echte Aussagen schon.
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        queue_path = tmp / "queue.json"
+        decisions = tmp / "decisions.yaml"
+        fm = 'title: "Warmwasser"\ndescription: "Anteil"\nkurzantwort: "16 Prozent"'
+        kern = ("Intro mit einer echten Aussage.\n\n"
+                "## Abschnitt\n\nZweiter Absatz: Warmwasser braucht 16 Prozent.")
+        block_alt = ('![Merkkarte: Kernaussagen](abbildung-merkkarte.svg)\n\n'
+                     '*Abbildung: Merkkarte zu „Warmwasser“ (eigene Darstellung '
+                     'aus diesem Beitrag).*')
+        block_neu = ('![Merkkarte: Kernaussagen](abbildung-merkkarte.svg)\n\n'
+                     '*Abbildung: Gliederung zu „Warmwasser“ – 5 Stationen von '
+                     '„Abschnitt“ bis „Fazit“ (eigene Darstellung).*')
+        art_alt = {"fm": fm, "body": kern + "\n\n" + block_alt}
+        art_neu = {"fm": fm, "body": kern + "\n\n" + block_neu}
+        assert text_hash(art_alt) == text_hash(art_neu), "Bildzeile öffnet die Fassung"
+        assert text_hash_volltext(art_alt) != text_hash_volltext(art_neu)
+        # Echte Aussageänderung öffnet weiter – auch bei gleichem Bildblock.
+        art_geaendert = {"fm": fm, "body": kern.replace("16", "18") + "\n\n" + block_neu}
+        assert text_hash(art_geaendert) != text_hash(art_neu)
+        # Eine handgeschriebene Abbildungszeile bleibt Aussage.
+        hand = {"fm": fm, "body": kern + "\n\n*Abbildung: eigene Messreihe 2026.*"}
+        assert text_hash(hand) != text_hash({"fm": fm, "body": kern})
+        # Die Bildzeile selbst (Alt-Text) ist ebenfalls abgeleitet.
+        assert kerntext(block_neu) == ""
+        assert "echten Aussage" in kerntext(art_neu["body"])
+        assert "16 Prozent" in kerntext(art_neu["body"])
+
+        fassung_kern = text_hash(art_neu)
+        fassung_voll = text_hash_volltext(art_neu)
+        # Der Befund stammt aus der Fassung VOR der Heilung – wie im echten
+        # Lauf: geprüft wird die geheilte Aussage von heute.
+        fassung_befund = body_hash("Befundfassung vor der Heilung")
+        eintrag = {"id": befund_id("bild", finding), "slug": "bild",
+                   "fassung_sha256": fassung_befund, "text_sha256": fassung_befund,
+                   **finding, "beleg": "", "zuletzt_gesehen": "2026-11-07 12:00 UTC"}
+        queue_path.write_text(json.dumps({"fachbefunde": [eintrag]}), encoding="utf-8")
+        fassungen = {"bild": {"text": fassung_kern, "pruef": body_hash("pruef"),
+                              "text_volltext": fassung_voll}}
+        entscheidung_anfuegen(eintrag["id"], "Redaktion",
+                              "Am Kerntext geprüft und erledigt",
+                              queue_path=queue_path, decisions_path=decisions,
+                              fassungen=fassungen, heute=dt.date(2026, 11, 7))
+        # Bot zieht die Unterschrift nach: Volltext-Hash ändert sich, Kern nicht.
+        bot = {"bild": {"text": fassung_kern, "pruef": body_hash("pruef2"),
+                        "text_volltext": text_hash_volltext(art_alt)}}
+        assert offene_befunde(queue_path, decisions, bot) == [], "Bot öffnet Befund"
+        # Echte Änderung öffnet.
+        echt = {"bild": {"text": text_hash(art_geaendert), "pruef": body_hash("pruef3"),
+                         "text_volltext": text_hash_volltext(art_geaendert)}}
+        assert len(offene_befunde(queue_path, decisions, echt)) == 1
+
+        # Alt-Entscheidung (an den Volltext gebunden) trägt weiter und lässt
+        # sich beweisbar auf den Kern übersetzen – nie ohne Bytegleichheit.
+        alt_dec = tmp / "altbindung.yaml"
+        alt_dec.write_text(yaml.safe_dump({"entscheidungen": [{
+            "slug": "bild", "befund_id": eintrag["id"],
+            "befund_fassung": fassung_befund, "geprueft_fassung": fassung_voll,
+            "entschieden_von": "Redaktion", "entschieden_am": "2026-11-06",
+            "begruendung": "Vor der Umstellung am vollständigen Text geprüft",
+        }]}, allow_unicode=True, sort_keys=False), encoding="utf-8")
+        assert offene_befunde(queue_path, alt_dec, fassungen) == []
+        trocken = fassung_normalisierung(decisions_path=alt_dec, fassungen=fassungen,
+                                        heute=dt.date(2026, 11, 7))
+        assert len(trocken["kandidaten"]) == 1 and trocken["geschrieben"] == 0
+        assert fassung_normalisierung(decisions_path=alt_dec, fassungen=fassungen,
+                                     apply=True, heute=dt.date(2026, 11, 7))["geschrieben"] == 1
+        assert fassung_normalisierung(decisions_path=alt_dec, fassungen=fassungen,
+                                     apply=True)["geschrieben"] == 0, "nicht idempotent"
+        # Nach der Übersetzung trägt die Entscheidung auch einen Bot-Nachzug.
+        assert offene_befunde(queue_path, alt_dec, bot) == []
+        # …aber keine echte Textänderung.
+        assert len(offene_befunde(queue_path, alt_dec, echt)) == 1
+        # Ohne Bytegleichheit wird nichts übersetzt.
+        fremd = tmp / "fremd.yaml"
+        fremd.write_text(alt_dec.read_text(encoding="utf-8").split("fassung_normalisierungen")[0],
+                         encoding="utf-8")
+        assert fassung_normalisierung(decisions_path=fremd, fassungen=bot,
+                                     apply=True)["geschrieben"] == 0
+        # Ein erfundenes Ziel schliesst nichts: die Wirkung tritt nur ein,
+        # wenn `nach` der HEUTIGE Kern-Hash ist (fail-closed).
+        roh = yaml.safe_load(alt_dec.read_text(encoding="utf-8"))
+        roh[NORMALISIERUNGEN][0]["nach"] = "0" * 64
+        fremd.write_text(yaml.safe_dump(roh, allow_unicode=True), encoding="utf-8")
+        # `bot` = der Bot hat die Unterschrift nachgezogen: Die Alt-Bindung
+        # an den Volltext trägt nicht mehr, allein die Übersetzung könnte
+        # tragen – mit erfundenem Ziel trägt sie nichts.
+        assert len(offene_befunde(queue_path, fremd, bot)) == 1, \
+            "Erfundene Übersetzung hat einen Befund geschlossen"
+        # Formfehler und fehlende Zuordnung sind Werkzeugfehler.
+        for mutation in ({"nach": "kein-hash"}, {"befund_id": "gibt-es-nicht"},
+                         {"grund": "ok"}, {"von": ""}):
+            kaputt = yaml.safe_load(alt_dec.read_text(encoding="utf-8"))
+            kaputt[NORMALISIERUNGEN][0].update(mutation)
+            fremd.write_text(yaml.safe_dump(kaputt, allow_unicode=True), encoding="utf-8")
+            try:
+                entscheidungen_laden(fremd)
+            except LedgerFehler:
+                pass
+            else:
+                raise AssertionError(f"Kaputte Übersetzung akzeptiert: {mutation}")
+
     print("✅ Faktenfrische-Befundledger: zwei Hashes, fassungsgebundene "
           "Entscheidung, Textänderung bleibt schließbar, Folgeentscheidung "
           "mit Kette (#912), Quellenpflege öffnet "
           "nicht, Altbestand entscheidbar, Re-Dating-Aliasse (#1073), Nachlese, "
+          "abgeleitete Bildzeilen öffnen nicht (#1098), Hash-Normalisierung ist "
+          "beweisbar und idempotent, fail-closed.")
           "Betriebsflächen öffnen nicht (Weiterlesen/Abbildung/Transparenz/"
           "Werkzeug-Anhang, #1072), fail-closed.")
     return 0
@@ -1775,6 +2081,9 @@ if __name__ == "__main__":
                         help="mit --nachlese: fehlende Befunde ins Ledger ergänzen")
     parser.add_argument("--wache", action="store_true",
                         help="Exit 1, wenn ein offener Befund keinen Schließweg hat")
+    parser.add_argument("--fassung-normalisierung", action="store_true",
+                        help="Alt-Entscheidungen auf den Kern-Hash übersetzen "
+                             "(#1098, ohne --apply nur Trockenlauf)")
     parser.add_argument("--json", action="store_true", help="maschinenlesbar")
     args = parser.parse_args()
     try:
@@ -1818,6 +2127,16 @@ if __name__ == "__main__":
             print(f"✅ {decision['slug']} · {decision['befund_id']} entschieden "
                   f"von {decision['entschieden_von']} "
                   f"({'Fassung hatte sich geändert' if decision['fassung_wechsel'] else 'Text unverändert'}).")
+            raise SystemExit(0)
+        if args.fassung_normalisierung:
+            ergebnis = fassung_normalisierung(apply=args.apply)
+            print(f"Hash-Normalisierung: {len(ergebnis['kandidaten'])} Kandidat(en), "
+                  f"{ergebnis['geschrieben']} geschrieben, "
+                  f"{ergebnis['vorhanden']} bereits vorhanden "
+                  f"({'Apply' if ergebnis['apply'] else 'Trockenlauf'}).")
+            for eintrag in ergebnis["kandidaten"]:
+                print(f"  - {eintrag['slug']} · {eintrag['befund_id']}: "
+                      f"{eintrag['von'][:12]}… → {eintrag['nach'][:12]}…")
             raise SystemExit(0)
         if args.wache:
             stand = wache()

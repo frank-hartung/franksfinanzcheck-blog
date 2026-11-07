@@ -42,7 +42,7 @@ quellen:
     url: "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html"
     herausgeber: "Statistisches Bundesamt"
     datum: "2026-10-30"
-faktencheck: 2026-11-07
+faktencheck: 2026-11-06
 ---
 
 [Frugalismus](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) Im Alltag scheitert selten am guten Vorsatz. Meist scheitert er an kleinen Fehlkäufen, unklaren Routinen und dem Gefühl, Sparen müsse sofort weh tun.
