@@ -1,10 +1,10 @@
 {
   "version": 1,
-  "generated_at": "2026-11-06T23:54:27Z",
+  "generated_at": "2026-11-07T02:57:21Z",
   "modus": "kandidaten",
-  "commit": "f6b24ff9edaa8fcb67feda2a852908c097be62c4",
+  "commit": "bf7fa1bb53dfef074ca5e4d61b0f4708b505adbf",
   "kapazitaet": {
-    "stichtag": "2026-11-06",
+    "stichtag": "2026-11-07",
     "artikel": 115,
     "faellig": 1,
     "ueberfaellig": 0,
@@ -12,7 +12,7 @@
     "naechste_frist": {
       "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
       "frist": "2026-11-12",
-      "restlaufzeit": 6
+      "restlaufzeit": 5
     },
     "budget": 12,
     "laeufe_je_tag": 1.0,
@@ -36,7 +36,7 @@
     "empfohlenes_budget": 12,
     "empfehlung_erreicht": true,
     "hartes_limit": 16,
-    "spitze_geprueft": 52
+    "spitze_geprueft": 51
   },
   "ursachen": [
     {
@@ -64,7 +64,7 @@
     "ueberholt": 11,
     "ohne_fassung": 0,
     "nicht_entscheidbar": 0,
-    "aeltester_tage": 5,
+    "aeltester_tage": 6,
     "frist_tage": 14,
     "ueber_frist": 0,
     "je_slug": {
