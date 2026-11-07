@@ -4,17 +4,17 @@
   {
    "grund": "gleicher Pillar",
    "inlinks_jetzt": 1,
-   "meldung": "würde eingefügt (Trockenlauf)",
+   "meldung": "eingefügt",
    "quelle": "/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/",
    "ziel": "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/"
   }
  ],
  "geheilt": [],
- "geschrieben": false,
+ "geschrieben": true,
  "max": 10,
  "nachher_ohne_inlink": [],
  "offen": [],
- "stand": "2026-11-06T13:41:52Z",
+ "stand": "2026-11-07T11:42:47Z",
  "status": "sauber",
  "verweigert": [],
  "vorher_ohne_inlink": []

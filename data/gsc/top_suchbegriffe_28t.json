@@ -2,9 +2,9 @@
   {
     "suchbegriff": "100 mbit internet monatlich kündbar",
     "clicks": 0,
-    "impressions": 42,
+    "impressions": 50,
     "ctr": 0.0,
-    "position": 47.48
+    "position": 47.24
   },
   {
     "suchbegriff": "250 mbit internet monatlich kündbar",
@@ -56,11 +56,25 @@
     "position": 18.0
   },
   {
+    "suchbegriff": "dsl ohne vertragslaufzeit oder mit 24 monaten – was lohnt sich mehr?",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 19.0
+  },
+  {
     "suchbegriff": "dsl und mobilfunk",
     "clicks": 0,
     "impressions": 3,
     "ctr": 0.0,
     "position": 11.33
+  },
+  {
+    "suchbegriff": "dsl vergleich monatlich kündbar",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 67.0
   },
   {
     "suchbegriff": "dsl volumentarif",
@@ -135,9 +149,9 @@
   {
     "suchbegriff": "frank dsl",
     "clicks": 0,
-    "impressions": 12,
+    "impressions": 13,
     "ctr": 0.0,
-    "position": 7.25
+    "position": 7.31
   },
   {
     "suchbegriff": "haftpflichtversicherung rückwirkend",
@@ -257,6 +271,13 @@
     "impressions": 1,
     "ctr": 0.0,
     "position": 92.0
+  },
+  {
+    "suchbegriff": "kostenloses sparkonto",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 81.0
   },
   {
     "suchbegriff": "kreditkarte mit girokonto kostenlos",
