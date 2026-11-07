@@ -551,6 +551,40 @@ await run('#923-Gegenprobe: Frischwache rot beim Messen -> RPO-Rat bleibt',
   true, ['<!-- alert-runbook: backup-frisch -->', 'Häufigste Ursachen'],
   null, ['<!-- alert-runbook: backup-einrichtung -->']);
 
+// 07.11.2026 (WF-3150 / #1030): Die Messung urteilt nicht mehr selbst. Rot
+//     wird der Schluss-Schritt NACH der Selbstheilung. Der Rat muss sagen,
+//     dass die Wache schon gehandelt hat (Anstoß, zweite Messung) – der alte
+//     Rat „Scheduler-Hänger, Run workflow“ wäre eine Aufforderung, genau das
+//     zu tun, was der Lauf bereits getan hat.
+await run('#1030: Frischwache rot im Schlussurteil -> RPO-Rat MIT Selbstheilung',
+  { workflowName: 'Backup-Frischwache (operative RPO-Wache)', branch: 'main', event: 'schedule',
+    conclusion: 'failure',
+    jobs: [{ name: 'Backup-Frische pruefen (RPO 24 h / 52 h)', conclusion: 'failure',
+             html_url: 'https://x/jobs/1030a',
+             steps: [{ name: 'Selbstheilung – fehlende Sicherung anstoßen (fail-closed)',
+                       conclusion: 'success' },
+                     { name: 'Urteil fällen (fail-closed – ohne Nachweis kein Grün)',
+                       conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: backup-frisch -->', 'Häufigste Ursachen',
+         'bereits gehandelt', 'misst erneut', 'Selbstheilung',
+         'actions/workflows/backup-offsite.yml', 'docs/ANLEITUNG-OFFSITE-BACKUP.md'],
+  null, ['<!-- alert-runbook: backup-einrichtung -->', '<!-- alert-runbook: backup-restore -->',
+         'API-Key abgelaufen', 'GROQ', 'Einrichtung unvollständig']);
+
+// Gegenprobe: Auch ein Werkzeugfehler IN der Selbstheilung bleibt beim
+//     Frische-Rat – nicht beim Einrichtungs- oder Rückweg-Rat.
+await run('#1030-Gegenprobe: Selbstheilung stuerzt ab -> Frische-Rat, kein Einrichtungs-Rat',
+  { workflowName: 'Backup-Frischwache (operative RPO-Wache)', branch: 'main', event: 'schedule',
+    conclusion: 'failure',
+    jobs: [{ name: 'Backup-Frische pruefen (RPO 24 h / 52 h)', conclusion: 'failure',
+             html_url: 'https://x/jobs/1030b',
+             steps: [{ name: 'Frische messen (beide Release-Familien, Entwuerfe eingeschlossen)',
+                       conclusion: 'success' },
+                     { name: 'Selbstheilung – fehlende Sicherung anstoßen (fail-closed)',
+                       conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: backup-frisch -->', 'Häufigste Ursachen', 'bereits gehandelt'],
+  null, ['<!-- alert-runbook: backup-einrichtung -->', '<!-- alert-runbook: backup-restore -->']);
+
 // Gegenprobe: derselbe Schrittname in einem fremden Workflow bleibt beim
 // allgemeinen Runbook – die Klasse haengt am Workflow, nicht am Wort.
 await run('#923-Gegenprobe: gleicher Schrittname in fremdem Workflow -> Standard-Rat',

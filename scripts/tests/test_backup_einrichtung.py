@@ -1120,10 +1120,19 @@ class FrischwacheEinrichtungVertrag(unittest.TestCase):
     def test_e8_prueft_mit_lauf_token_und_lese_recht(self):
         """E8 liest die Environment-Regeln des QUELL-Repos – das darf und kann
         der fein eingeschränkte Backup-Token nicht (nur Ziel-Repo). Deshalb
-        läuft der Schritt mit dem Lauf-Token, und der Job hat actions: read
-        (gleiche Begründung wie der KV-Job von backup-offsite.yml)."""
+        läuft der Schritt mit dem Lauf-Token, und der Job hat actions-Rechte
+        (gleiche Begründung wie der KV-Job von backup-offsite.yml).
+
+        Nachtrag 07.11.2026 (WF-3150 / #1030): `read` wurde zu `write`. Grund
+        ist ausschließlich die Selbstheilung (POST …/dispatches); GitHub kennt
+        für `workflow_dispatch` kein feineres Recht. Die Erweiterung ist
+        eingegrenzt: ein Schritt („Selbstheilung …“), ein Aufruf, ein
+        Workflow – und die Endpunkt-Liste in `backup_selbstheilung.py` ist
+        vertraglich festgenagelt (test_backup_selbstheilung.EndpunktVertrag).
+        """
         job = self._frisch_job()
-        self.assertEqual(job.get("permissions"), {"contents": "read", "actions": "read"})
+        self.assertEqual(job.get("permissions"), {"contents": "read", "actions": "write"},
+                         "actions: write ist NUR für den Dispatch der Selbstheilung da")
         treffer = [s for s in job["steps"] if "Voraussetzungen prüfen" in s.get("name", "")]
         self.assertEqual(len(treffer), 1)
         self.assertEqual(treffer[0].get("env", {}).get("GH_TOKEN"), "${{ github.token }}",
@@ -1146,7 +1155,8 @@ class FrischwacheEinrichtungVertrag(unittest.TestCase):
         ist (derselbe Defekt wie §5a des Berichts vom 02.11.2026 in der
         CI-Suite, hier in den Skript-Selbsttests).
         """
-        for skript in ("kv_backup.py", "backup_einrichtung.py", "backup_freshness_guard.py"):
+        for skript in ("kv_backup.py", "backup_einrichtung.py", "backup_freshness_guard.py",
+                       "backup_selbstheilung.py"):
             with self.subTest(skript=skript):
                 lauf = subprocess.run(
                     [sys.executable, str(SCRIPTS / skript), "--selftest"],
