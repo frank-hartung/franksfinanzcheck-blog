@@ -1,0 +1,172 @@
+# KI-Provenienz-Wache (#1028, Dauerheilung 07.11.2026)
+# =====================================================
+# WARUM DIESER LAUF EXISTIERT
+# ---------------------------
+# Art. 50 Abs. 2 KI-VO verlangt für Bestandssysteme bis 02.12.2026 eine
+# maschinenlesbare Kennzeichnung KI-erzeugter Inhalte. Am 05.11.2026 wurde
+# dafür ein Gate eingebaut, das 78 Seiten aus `content/posts` prüfte und
+# grün war. Gemessen am 07.11.2026 am gebauten Baum lagen daneben:
+#
+#   · 109 reguläre Seiten werden ausgeliefert, geprüft wurden 78. Sechs
+#     Ratgeber-Säulen (`pillar/`) tragen eine synthetische Stimme und waren
+#     von keiner Regel erfasst.
+#   · 84 Seiten spielen eine Stimme ab, aber nur 66 zeigten einen Hinweis –
+#     und der sprach vom TEXT. 18 Seiten hatten sichtbar gar nichts.
+#   · `public/index.xml` lieferte 50 Items, 45 davon mit `ai_generated`,
+#     und keine einzige Herkunftsangabe. Aus genau diesem Feed publiziert
+#     Pinterest automatisch weiter.
+#   · Fiel PyYAML aus, starb das Gate mit Traceback und Exit 1 – also mit
+#     dem Code für „Inhaltsbefund". Eine ausgefallene Messung sah aus wie
+#     ein roter Inhalt, nicht wie ein kaputtes Werkzeug (C33/C38).
+#
+# Ein Gate, das nur bei jedem Deploy misst, hält den Stand nicht: Zwischen
+# zwei Deploys driftet die Quelle (Impressum-Anker gelöscht, eine der beiden
+# RSS-Vorlagen editiert, ein Ableitungsbild ohne Markierung erzeugt), und
+# niemand führt mit, WIE LANGE eine ungeklärte Angabe schon offen ist.
+#
+# Dieser Lauf schließt beides:
+#   1) HEILEN, was mechanisch heilbar ist – Anker {#ki-hinweis} an der
+#      vorhandenen Überschrift, Bytgleichheit der RSS-Spiegelung, Entfernen
+#      unmarkierter Ableitungen eines deklarierten KI-Originals. Jede
+#      Heilung schreibt eine Belegzeile nach data/ki_provenienz_history.jsonl.
+#   2) ESCALIEREN, was nur ein Mensch entscheiden kann – ob bei einem
+#      `menschlich`-Eintrag im Register tatsächlich ein Mensch die
+#      redaktionelle Verantwortung übernommen hat. Die Wache führt das
+#      Erst-Datum jedes ungeklärten Eintrags und nennt den Abstand zur Frist.
+#      Erfinden tut sie nichts: Eine Angabe ohne Beleg wird nie zu einer
+#      Angabe mit Beleg geheilt.
+#
+# Eigenschaften (bewusst):
+#   · idempotent – zweiter Lauf ohne Eingriff schreibt nichts (geprüft
+#     07.11.2026: `state_geaendert: nein`, 0 Eingriffe);
+#   · committet nie die Uhr – der Dauerzustand enthält nur Fakten, die sich
+#     mit dem Bestand ändern. Abgeleitete Zahlen (Alter in Tagen, Tage bis
+#     zur Frist) werden zur Laufzeit gerechnet und nur berichtet;
+#   · fail-closed sichtbar – ein Fund, den die Heilung nicht lösen kann,
+#     macht den Lauf ROT, nachdem die Heilung committet ist. Reihenfolge:
+#     erst persistieren, dann durchreichen. `exit 0` trotz Fund wäre C33;
+#   · kein Selbst-Trigger – die eigenen Commits tragen `[skip ci]`
+#     (derselbe Mechanismus wie befund-akte-nachziehen.yml), und die
+#     Concurrency-Gruppe bricht einen überholten Lauf ab.
+name: KI-Provenienz-Wache
+
+on:
+  push:
+    branches: [main]
+    paths:
+      # Frontmatter (`ai_generated`, `cover.*`) und der Impressum-Anker.
+      - "content/**"
+      # Vorlagen, die die Kanäle erzeugen – inkl. beider RSS-Fassungen.
+      - "layouts/**"
+      # Register der Erzeugungsart + Herkunfts-Nachweise je Artikel.
+      - "data/ki_kennzeichnung.yaml"
+      # Sichtbare Stimme: die Aria-Texte offenbaren die maschinelle Tonspur.
+      - "static/premium/ff-voice.js"
+      # Messwerkzeuge selbst.
+      - "scripts/ki_provenienz.py"
+      - "scripts/ki_provenienz_gate.py"
+      - "scripts/ki_bild_markierung.py"
+      - "scripts/image_optimizer.py"
+      # Wird aufgerufen (git_sync.sh) – W1 der Trigger-Wache.
+      - "scripts/git_sync.sh"
+      - ".github/workflows/ki-provenienz-wache.yml"
+  # Täglich: Ohne Push gibt es sonst keinen Lauf, der das Alter ungeklärter
+  # `menschlich`-Einträge gegen die Frist 02.12.2026 führt.
+  schedule:
+    - cron: "22 4 * * *"    # täglich 06:22 MESZ – freier Slot (entzerrt)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  # Nie zwei Selbstheilungs-Läufe gleichzeitig – der letzte gewinnt.
+  group: ki-provenienz-wache
+  cancel-in-progress: true
+
+jobs:
+  wache:
+    name: Heilen, messen, Alter gegen die Frist führen
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+
+      # Die Wache liest YAML – `setup-python` bringt PyYAML nicht mit
+      # (Hausregel seit #661: sonst meldet ein Gate heil, ohne je gelesen zu
+      # haben). Fehlt es trotzdem, ist der Exit 2 und der Befund läuft über
+      # scripts/werkzeugbefund.py – nicht als Traceback.
+      - name: Messwerkzeug vervollständigen (PyYAML)
+        run: python3 -m pip install -q --disable-pip-version-check --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
+
+      # M1/M4/M5 prüfen die AUSGELIEFERTE Wahrheit in public/, nicht die
+      # Absicht einer Vorlage. Ohne Build wäre die Hälfte der Regeln blind.
+      - name: Hugo installieren (Extended, verifiziert, mehrquellig)
+        uses: ./.github/actions/install-hugo
+        with:
+          version: "0.168.0"
+
+      - name: Build (Prüfgrundlage für M1/M4/M5)
+        uses: ./.github/actions/hugo-build
+        with:
+          args: "--minify"
+          label: "Prüf-Build (KI-Provenienz-Wache)"
+
+      - name: KI-Provenienz – Selbsttest (Wache muss lauffähig sein)
+        run: python3 scripts/ki_provenienz_gate.py --selftest
+
+      # Exit-Code wird aufgehoben, nicht verschluckt: Die Heilung muss
+      # committet sein, BEVOR der Lauf rot wird – sonst repariert die Wache
+      # jedes Mal neu und der Bestand bleibt trotzdem kaputt.
+      - name: Wache (heilen, nachmessen, Alter führen)
+        id: wache
+        run: |
+          set +e
+          python3 scripts/ki_provenienz_gate.py --wache > /tmp/ki_wache.txt 2>&1
+          code=$?
+          set -e
+          cat /tmp/ki_wache.txt
+          cat /tmp/ki_wache.txt >> "$GITHUB_STEP_SUMMARY"
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+
+      - name: Geheiltes committen (nur bei echter Änderung)
+        env:
+          GIT_USER: KI-Provenienz-Bot
+          GIT_MAIL: ki-provenienz-bot@users.noreply.github.com
+        run: |
+          PFADE="content/impressum/index.md layouts/rss.xml layouts/_default/rss.xml static data/ki_provenienz_state.json data/ki_provenienz_history.jsonl"
+          if [ -z "$(git status --porcelain -- $PFADE)" ]; then
+            echo "Kein Eingriff: Quelle, Spiegelung, Ableitungen und Zustand sind unverändert."
+          else
+            git status --porcelain -- $PFADE
+            # shellcheck disable=SC2086  # Pfadliste ist bewusst Wort-getrennt
+            bash scripts/git_sync.sh \
+              "fix(ki-provenienz): Selbstheilung + Zustand der Wache [skip ci]" \
+              $PFADE
+          fi
+
+      # Ausgefallene Messung ist kein Grün (C33): Ein Werkzeugbefund gehört
+      # in die Zusammenfassung, auch wenn der Lauf selbst grün wäre.
+      - name: Werkzeugbefunde sichtbar machen
+        if: always()
+        run: |
+          DATEI="${RUNNER_TEMP:-/tmp}/werkzeugbefunde.txt"
+          if [ -s "$DATEI" ]; then
+            echo "## ⚠️ Ausgefallene Messung (C38)" >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            tr '\037' '|' < "$DATEI" >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            cat "$DATEI"
+          fi
+
+      - name: Befund durchreichen (rot bleibt rot)
+        if: always()
+        run: |
+          code="${{ steps.wache.outputs.code }}"
+          # Leer heißt: die Wache ist gar nicht gelaufen. Auch das ist rot.
+          exit "${code:-1}"

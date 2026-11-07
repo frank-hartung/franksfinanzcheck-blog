@@ -53,6 +53,7 @@ import re
 import sys
 import unicodedata
 from html.parser import HTMLParser
+from pathlib import Path
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PUBLIC_DIR = os.path.join(BLOG_DIR, "public")
@@ -314,7 +315,99 @@ def audit_css(page_htmls=(), public_dir=None):
     return issues
 
 
-def audit_contrast():
+# ---------------------------------------------------------------------------
+#  Kontrast des KI-Siegels – aus der CSS-Quelle gelesen, nicht abgeschrieben
+# ---------------------------------------------------------------------------
+#  `.ff-voice-btn__ki` ist die SICHTBARE Rechtsangabe zur synthetischen Stimme
+#  (Art. 50 Abs. 2 KI-VO, #1028): Sie sagt dem Menschen, dass die Tonspur
+#  maschinell erzeugt ist, während `meta name="ai-generated"` dasselbe der
+#  Maschine sagt. Fällt der Kontrast unter 4.5:1, ist die Angabe für
+#  sehbehinderte Leser praktisch weg – die Kennzeichnung wäre formal da und
+#  faktisch unlesbar.
+#
+#  Die Farben stehen hier bewusst NICHT als Zahlenpaar. Eine Abschrift driftet:
+#  Ändert jemand `--ffv-yellow-soft` in ff-voice.css, müsste er daran denken,
+#  die Zahl HIER nachzuziehen – genau dieses Auseinanderlaufen ist die
+#  Fehlerklasse, gegen die die Wachen dieses Repos gebaut sind. Deshalb wird
+#  aufgelöst, was im CSS steht. Fehlt die Regel, eine Variable oder ist ein
+#  Wert nicht hexadezimal auflösbar (z. B. rgba mit Alpha), ist das ein
+#  Befund und kein stiller Sprung (C33: ausgefallene Messung ist kein Grün).
+KI_SIEGEL_CSS = "assets/css/extended/ff-voice.css"
+_CSS_BLOCK = re.compile(r"([^{}]+)\{([^{}]*)\}")
+_CSS_WERT = re.compile(r"(?<![-\w])([-\w]+)\s*:\s*([^;]+);")
+_CSS_VAR = re.compile(r"^var\(\s*(--[-\w]+)\s*\)$")
+
+
+def _ki_siegel_farben(root=None):
+    """(hell, dunkel) je als (vordergrund, hintergrund) – oder (None, grund).
+
+    Liest `.ff-voice-btn__ki` und die Dunkel-Variante aus ff-voice.css und löst
+    `var(--…)` gegen die Variablen desselben Blocks auf.
+    """
+    basis = Path(root) if root else Path(__file__).resolve().parents[1]
+    datei = basis / KI_SIEGEL_CSS
+    if not datei.is_file():
+        return None, f"{KI_SIEGEL_CSS} fehlt"
+    try:
+        css = datei.read_text(encoding="utf-8", errors="ignore")
+    except OSError as exc:
+        return None, f"{KI_SIEGEL_CSS} nicht lesbar: {exc}"
+
+    # `@media (forced-colors: active)` setzt Canvas/CanvasText: Dort liefert das
+    # Betriebssystem die Farben, es gibt also kein messbares Paar – und wer den
+    # Block mitliest, überschreibt die echten Werte mit Systemplatzhaltern
+    # (gefunden am 07.11.2026: color=CanvasText, background=Canvas).
+    css = re.sub(r"@media[^{]*forced-colors[^{]*\{(?:[^{}]*\{[^{}]*\})*[^{}]*\}",
+                 "", css)
+
+    # Variablen je Themen-Kontext, Dunkel überschreibt Hell. Die Token stehen
+    # auf `.ff-voice-slot, .ff-voice-dialog` – nicht auf `:root`, also wird der
+    # Selektor nicht weiter eingeschränkt als auf das Thema.
+    variablen = {"hell": {}, "dunkel": {}}
+    regeln = {"hell": {}, "dunkel": {}}
+    for selektor, körper in _CSS_BLOCK.findall(css):
+        sel = " ".join(selektor.split())
+        dunkel = 'data-theme="dark"' in sel or "data-theme='dark'" in sel
+        kontext = "dunkel" if dunkel else "hell"
+        werte = {k: v.strip() for k, v in _CSS_WERT.findall(körper)}
+        variablen[kontext].update(
+            {k: v for k, v in werte.items() if k.startswith("--")})
+        # Nur die Regel des Siegels selbst. Die Dunkel-Variante steht als
+        # `:root[data-theme="dark"] .ff-voice-btn__ki`, also zählt das Ende des
+        # Selektors. Blöcke ohne Farb-Angabe (z. B. `:focus-visible … {
+        # box-shadow: none }`) tragen nichts bei und dürfen nichts überschreiben.
+        if sel.endswith(".ff-voice-btn__ki") and (
+                "color" in werte or "background" in werte
+                or "background-color" in werte):
+            regeln[kontext].update(werte)
+
+    def auflösen(wert, kontext):
+        m = _CSS_VAR.match(wert or "")
+        kandidat = m.group(1) if m else wert
+        if m:
+            for quelle in (("dunkel", "hell") if kontext == "dunkel"
+                           else ("hell", "dunkel")):
+                if kandidat in variablen[quelle]:
+                    kandidat = variablen[quelle][kandidat]
+                    break
+        return kandidat or ""
+
+    paare = {}
+    for kontext in ("hell", "dunkel"):
+        regel = regeln[kontext]
+        if not regel:
+            return None, f".ff-voice-btn__ki hat keine Regel fuer {kontext}"
+        fg = auflösen(regel.get("color"), kontext)
+        bg = auflösen(regel.get("background") or regel.get("background-color"), kontext)
+        if not re.fullmatch(r"#[0-9a-fA-F]{6}", fg) or \
+                not re.fullmatch(r"#[0-9a-fA-F]{6}", bg):
+            return None, (f"Farben des KI-Siegels ({kontext}) sind nicht als "
+                          f"Vollton auflösbar: color={fg!r}, background={bg!r}")
+        paare[kontext] = (fg, bg)
+    return paare, ""
+
+
+def audit_contrast(root=None):
     """Prüft die wichtigsten Farbkombinationen gegen WCAG AA."""
     checks = [
         ("Text auf Weiß", "#0E5A43", "#FFFFFF", "normal"),   # grüner Text
@@ -331,6 +424,21 @@ def audit_contrast():
         ok = ratio >= min_ratio
         results.append({"paar": name, "verhältnis": round(ratio, 2),
                         "ok": ok, "mindest": min_ratio})
+
+    # KI-Siegel der Lesehilfe: aus dem CSS aufgelöst, in beiden Themen.
+    # 9,6 px bei Gewicht 700 ist KEIN großer Text – es gilt 4.5:1.
+    paare, grund = _ki_siegel_farben(root)
+    if paare is None:
+        results.append({"paar": "KI-Siegel der Lesehilfe (nicht messbar)",
+                        "verhältnis": 0.0, "ok": False, "mindest": 4.5,
+                        "grund": grund})
+    else:
+        for kontext, label in (("hell", "hell"), ("dunkel", "dunkel")):
+            fg, bg = paare[kontext]
+            ratio = contrast(hex_rgb(fg), hex_rgb(bg))
+            results.append({"paar": f"KI-Siegel der Lesehilfe ({label})",
+                            "verhältnis": round(ratio, 2), "ok": ratio >= 4.5,
+                            "mindest": 4.5, "grund": f"{fg} auf {bg}"})
     return results
 
 
@@ -433,7 +541,11 @@ def main(argv=None):
 
     print("\n=== Kontrast (WCAG AA) ===")
     for c in contrast_results:
-        print(f"  {'✅' if c['ok'] else '❌'} {c['paar']}: {c['verhältnis']}:1 (min. {c['mindest']}:1)")
+        # Der Grund gehört in die Zeile: Ein „nicht messbar" ohne Ursache ist
+        # nicht behebbar, und ein Messwert ohne Herkunft ist nicht nachvollziehbar.
+        hinweis = f" – {c['grund']}" if c.get("grund") else ""
+        print(f"  {'✅' if c['ok'] else '❌'} {c['paar']}: {c['verhältnis']}:1 "
+              f"(min. {c['mindest']}:1){hinweis}")
 
     print(f"\nErgebnis: {total_issues} Probleme, {contrast_fail} Kontrast-Fehler")
     if not ok:
