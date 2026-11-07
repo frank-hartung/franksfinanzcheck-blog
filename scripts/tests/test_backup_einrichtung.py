@@ -1131,6 +1131,15 @@ class FrischwacheEinrichtungVertrag(unittest.TestCase):
         vertraglich festgenagelt (test_backup_selbstheilung.EndpunktVertrag).
         """
         job = self._frisch_job()
+        rechte = job.get("permissions") or {}
+        self.assertEqual(rechte.get("contents"), "read")
+        # 07.11.2026 (#923, Selbstheilung): `write` ist jetzt erlaubt – aber
+        # NUR auf `actions`, und nur zum Starten eines Laufs im EIGENEN Repo.
+        # Alles andere bleibt lesend; die Gegenprobe steht unten.
+        self.assertIn(rechte.get("actions"), ("read", "write"),
+                      "der Job braucht actions-Recht für E8 (lesen) bzw. Dispatch (starten)")
+        self.assertEqual(set(rechte), {"contents", "actions"},
+                         "kein weiteres Recht – insbesondere kein contents: write")
         self.assertEqual(job.get("permissions"), {"contents": "read", "actions": "write"},
                          "actions: write ist NUR für den Dispatch der Selbstheilung da")
         treffer = [s for s in job["steps"] if "Voraussetzungen prüfen" in s.get("name", "")]
@@ -1284,6 +1293,241 @@ class NamensVertrag(unittest.TestCase):
         sensibel = sorted(n for n in namen if modul.codeql_klassifikation(n))
         self.assertEqual(sensibel, [], f"CodeQL stuft diese Namen als sensibel ein: {sensibel}")
         self.assertGreater(len(namen), 50, "Namenssammlung blind")
+
+
+class LeerlaufAlarmVertrag(unittest.TestCase):
+    """#923 (07.11.2026): „Grün, aber nichts gesichert" bekommt einen eigenen Rat.
+
+    Belegt am Lauf 42359904795: Der Job „backup" endet `success` mit den
+    Annotationen „Kein dauerhaftes Offsite-Ziel" und „Kein
+    BACKUP_PASSPHRASE". Bis heute stand diese Wahrheit NUR im Lauf-Log –
+    kein Alarm, keine Klasse, kein Rat. Ein Grün, das eine Lücke verdeckt,
+    ist gefährlicher als ein Rot, das man sieht.
+    """
+
+    ALARM = REPO / ".github" / "workflows" / "alert-on-failure.yml"
+
+    def test_eigene_klasse_und_eigener_rat(self):
+        text = self.ALARM.read_text(encoding="utf-8")
+        self.assertIn("const backupLeerlauf", text)
+        self.assertIn("'backup-leerlauf'", text)
+        self.assertIn("runbookKlasse === 'backup-leerlauf'", text)
+        # Der Rat muss vor dem allgemeinen Backup-Rat stehen, sonst verschluckt
+        # „Datei-Befunde unten" die einzige zutreffende Aussage.
+        m = re.search(r"const runbookKlasse = (.*?);", text, re.S)
+        klassen = re.findall(r"'(backup[a-z-]*)'", m.group(1))
+        self.assertIn("backup-leerlauf", klassen)
+        self.assertLess(klassen.index("backup-leerlauf"), klassen.index("backup"),
+                        "Leerlauf-Rat muss vor dem allgemeinen Backup-Rat stehen")
+        self.assertLess(klassen.index("backup-einrichtung"), klassen.index("backup-leerlauf"),
+                        "offene Einrichtung bleibt die erste Antwort")
+
+    def test_verhalten_positiv_und_gegenprobe(self):
+        sim = (REPO / "scripts" / "tests" / "sim" / "alert_scoping_sim.mjs").read_text(encoding="utf-8")
+        self.assertIn("#923: Selbstheilung rot in der Frischwache", sim)
+        self.assertIn("backup-leerlauf", sim)
+        self.assertIn("#923-Gegenprobe: offene Einrichtung schlägt den Leerlauf-Rat", sim)
+
+
+class SelbstheilungVertrag(unittest.TestCase):
+    """#923 (07.11.2026): Selbstheilung ist eine Aktion mit Beweis – keine Zusage.
+
+    Der Vorgang ist seit dem 28.10.2026 täglich rot, weil die Zugänge fehlen
+    (Inhaber-Sache). Daraus folgt NICHT, dass alles warten muss: Zwei Befunde
+    sind ohne jeden Zugang reparierbar bzw. sichtbar zu machen, und beide waren
+    am 07.11.2026 live belegt.
+
+      · H-SCHEDULER – der nächtliche Lauf kommt verspätet (Soll 03:00 UTC,
+        belegt 07:37–10:28 UTC an 24 Läufen). Die Datei ist in Ordnung, es
+        fehlt der Lauf → Dispatch, und der Beweis ist ein NEUER Lauf, nicht
+        das „angenommen“ der API (HTTP 204).
+      · H-LEERLAUF – der Repo-Job meldet `success`, obwohl weder Ziel noch
+        Passphrase gesetzt sind (Lauf 42359904795, Annotationen „Kein
+        dauerhaftes Offsite-Ziel“ / „Kein BACKUP_PASSPHRASE“). „Gelaufen“ ist
+        wahr, „gesichert“ nicht.
+      · H-SCHEINBEWEIS – der Rückweg-Nachweis stand in sechs Läufen als
+        `skipped` im Lauf (zuletzt 42282938395), weil GitHubs Standard-
+        Bedingung `success()` ihn hinter einem roten Vorgänger abschaltete.
+
+    Die Grenze ist der eigentliche Vertrag: NICHTS aus E1–E8 wird „geheilt“.
+    """
+
+    SKRIPT = SCRIPTS / "backup_selbstheilung.py"
+    WF = REPO / ".github" / "workflows" / "backup-frischwache.yml"
+
+    def _selbsttest(self):
+        lauf = subprocess.run([sys.executable, str(self.SKRIPT), "--selftest"],
+                              capture_output=True, text=True, timeout=120)
+        self.assertEqual(lauf.returncode, 0, lauf.stdout[-1200:] + lauf.stderr[-600:])
+        return lauf
+
+    def test_selbsttest_und_vertrag_gruen(self):
+        lauf = self._selbsttest()
+        # Ein Selbsttest darf keine echten Workflow-Befehle in den Lauf streuen
+        # (Lehre aus #923/03.11.).
+        for zeile in (lauf.stdout + "\n" + lauf.stderr).splitlines():
+            self.assertFalse(zeile.lstrip().startswith(("::error::", "::warning::")),
+                             f"Selbsttest leckt eine Annotation: {zeile[:120]}")
+        vertrag = subprocess.run([sys.executable, str(self.SKRIPT), "--vertrag"],
+                                 capture_output=True, text=True, timeout=120)
+        self.assertEqual(vertrag.returncode, 0, vertrag.stdout + vertrag.stderr)
+
+    def test_heilung_laeuft_im_workflow_und_wird_geprueft(self):
+        text = self.WF.read_text(encoding="utf-8")
+        self.assertIn("backup_selbstheilung.py --heilen", text,
+                      "die Heilung ist im Workflow nicht verdrahtet")
+        self.assertIn("backup_selbstheilung.py --selftest", text,
+                      "eine Heilung ohne eigenen Selbsttest ist Prosa")
+        self.assertIn('- "scripts/backup_selbstheilung.py"', text.split("paths:")[1][:1400],
+                      "Trigger-Wache W1: der Pfad muss den Lauf auslösen")
+        # Ein Beweis, der still grün wird, wenn er scheitert, ist keiner.
+        block = text.split("Selbstheilung (nur Beweisbares", 1)[1].split("- name:", 1)[0]
+        self.assertIn('if [ "$RC" = "1" ]', block)
+        self.assertIn("exit 1", block)
+        # Ein grüner Lauf, der nichts sichert, ist der schwerere Befund als
+        # „bitte einrichten“ – er behauptet bereits Erfolg. Deshalb eigener
+        # Exit-Code (4), eigener Rat, rot.
+        self.assertIn('if [ "$RC" = "4" ]', block)
+        self.assertIn("Backup-Leerlauf", block)
+
+    def test_rueckweg_nachweis_wird_nicht_mehr_stillschweigend_uebersprungen(self):
+        """Der Befund vom 07.11.: `skipped` statt „nicht belegt“."""
+        if yaml is None:
+            raise unittest.SkipTest("PyYAML lokal nicht installiert (CI installiert es)")
+        schritte = _frischwache_workflow()["jobs"]["frischwache"]["steps"]
+        treffer = [s for s in schritte if "Wiederherstellbarkeit" in s.get("name", "")]
+        self.assertEqual(len(treffer), 1)
+        bedingung = str(treffer[0].get("if", ""))
+        self.assertIn("cancelled()", bedingung,
+                      "der Rückweg-Nachweis muss auch nach einem roten Vorgänger laufen")
+        # Gegenprobe gegen die Rückkehr der alten Fassung: Die Standard-
+        # Bedingung `success()` darf dort nicht (mehr) greifen.
+        self.assertNotIn("success()", bedingung)
+        self.assertIn("Nicht prüfbar (ehrlich benannt)", treffer[0]["run"],
+                      "was ohne Einrichtung nicht prüfbar ist, muss im Protokoll stehen")
+
+    def test_kein_secret_zugriff_fuer_die_heilung(self):
+        """Der Dispatch braucht `actions: write` im EIGENEN Repo – nicht mehr.
+
+        Die Versuchung wäre, der Heilung die Backup-Zugänge zu geben, damit sie
+        „auch die Einrichtung prüfen“ kann. Genau das darf nicht passieren: Ein
+        Werkzeug, das Zugänge bekommt, um einen Lauf zu starten, ist ein
+        Zugangs-Leck mit gutem Namen.
+        """
+        if yaml is None:
+            raise unittest.SkipTest("PyYAML lokal nicht installiert (CI installiert es)")
+        schritte = _frischwache_workflow()["jobs"]["frischwache"]["steps"]
+        heilung = next(s for s in schritte if "Selbstheilung (nur Beweisbares" in s.get("name", ""))
+        env = heilung.get("env", {})
+        self.assertEqual(env.get("GH_TOKEN"), "${{ github.token }}",
+                         "die Heilung nutzt ausschließlich den Lauf-Token")
+        for verboten in ("ZIEL_TOKEN", "BACKUP_REPO_TOKEN", "CF_API_TOKEN", "CF_KV_BACKUP_TOKEN"):
+            self.assertNotIn(verboten, env, f"{verboten} gehört nicht in die Heilung")
+
+    def test_heilbare_klassen_sind_ausdruecklich_begrenzt(self):
+        """H2: Was heilbar ist, ist eine kurze, benannte Liste – kein Freibrief."""
+        sys.path.insert(0, str(SCRIPTS))
+        import backup_selbstheilung as bh
+        heilbar = {k for k, v in bh.KLASSEN.items() if v["heilbar"]}
+        self.assertEqual(heilbar, {"scheduler"},
+                         "automatisch heilbar ist NUR der nicht gestartete Lauf")
+        # Und die Inhaber-Klassen tragen ihren Grund (kein stilles Weglassen).
+        for klasse in ("leerlauf", "scheinbeweis", "einrichtung"):
+            self.assertIn(klasse, bh.KLASSEN)
+            self.assertFalse(bh.KLASSEN[klasse]["heilbar"])
+            self.assertTrue(bh.KLASSEN[klasse]["grund"].strip())
+
+    def test_einrichtung_wird_nie_erfunden(self):
+        """Gegenprobe: Die Heilung darf E1–E8 nicht selbst „erledigen“."""
+        text = self.SKRIPT.read_text(encoding="utf-8")
+        for verboten in ("gh secret set", "gh variable set", "environments/backup\"",
+                         "--input -"):
+            self.assertNotIn(verboten, text,
+                             f"die Heilung darf keine Zugänge anlegen ({verboten})")
+
+    def test_leerlauf_wird_auf_job_ebene_gemessen(self):
+        """Selbstfund 07.11.2026: Die erste Fassung maß die falsche Höhe.
+
+        Am Lauf 42359904795 ist der GESAMTLAUF `failure` (KV-Job rot), der Job
+        „backup" darin aber `success`. Eine Messung auf Lauf-Ebene hätte den
+        Befund „grün, aber nichts gesichert" ausgerechnet an dem Tag
+        verschluckt, an dem er zutraf. Der Vertrag hält beide Richtungen fest.
+        """
+        sys.path.insert(0, str(SCRIPTS))
+        import backup_selbstheilung as bh
+        jetzt = dt.datetime(2026, 11, 7, 12, 0, tzinfo=dt.timezone.utc)
+        gruen = [{"name": "backup", "conclusion": "success"}]
+        self.assertEqual(len(bh.pruefe_leerlauf(gruen, "", False, jetzt)), 1,
+                         "grüner backup-Job ohne Ziel/Passphrase MUSS gemeldet werden")
+        # Gegenprobe: mit Ziel und Passphrase ist derselbe Job kein Befund.
+        self.assertEqual(bh.pruefe_leerlauf(gruen, "a/b", True, jetzt), [])
+        # Gegenprobe: der KV-Job ist nicht der Zeuge (er legt nie ein Artefakt an).
+        kv = [{"name": "KV-/D1-Backup (Abonnenten + Einwilligungsnachweise)",
+               "conclusion": "success"}]
+        self.assertEqual(bh.pruefe_leerlauf(kv, "", False, jetzt), [])
+
+    def test_geskippter_lauf_ist_kein_zeuge(self):
+        """Selbstfund 07.11.2026 (zweite Messhöhe, LIVE reproduziert).
+
+        Nach einem `workflow_dispatch` auf einem Branch steht in der
+        Läufe-Liste ein Lauf mit `conclusion: skipped` und **null Schritten**
+        (der Job-Guard `if: github.ref == 'refs/heads/main'` greift). Der
+        Prüfer las den JÜNGSTEN Lauf – also den leeren – und der Befund
+        „Rückweg-Nachweis wurde übersprungen" verschwand genau dann, wenn man
+        ihn brauchte: LIVE belegt an Lauf 42386235574 (0 Schritte), nachdem
+        der Befund Minuten vorher noch gemeldet wurde.
+
+        Die Regel: Ein Lauf ohne Schritte ist kein Zeuge, er ist ein
+        Platzhalter. Gemessen wird der jüngste Lauf, der Schritte HAT.
+        """
+        sys.path.insert(0, str(SCRIPTS))
+        import backup_selbstheilung as bh
+
+        leer = {"id": 2, "conclusion": "skipped", "created_at": "2026-11-07T15:24:31Z"}
+        echt = {"id": 1, "conclusion": "failure", "created_at": "2026-11-06T19:48:59Z"}
+        self.assertFalse(bh._zeugt_lauf(leer), "ein geskippter Lauf zeugt nicht")
+        self.assertTrue(bh._zeugt_lauf(echt))
+
+        # Der Prüfer muss den leeren Lauf ÜBERSPRINGEN und den echten lesen.
+        gelesen = []
+
+        def fake_http(methode, url, kopf):
+            gelesen.append(url)
+            if url.endswith("/runs?per_page=20"):
+                return 200, {"workflow_runs": [leer, echt]}, {}
+            if "/runs/2/jobs" in url:
+                return 200, {"jobs": [{"name": "x", "status": "completed",
+                                       "conclusion": "skipped", "steps": []}]}, {}
+            return 200, {"jobs": [{"name": "x", "status": "completed",
+                                   "conclusion": "failure", "steps": [
+                                       {"name": "Kurzpruefung Wiederherstellbarkeit "
+                                                "(strukturell, ohne Secrets)",
+                                        "conclusion": "skipped"}]}]}, {}
+
+        alt = bh.HTTP
+        bh.HTTP = fake_http
+        try:
+            schritte = bh._schritte_des_juengsten("a/b", "t", bh.FRISCHE_WORKFLOW)
+        finally:
+            bh.HTTP = alt
+
+        namen = [x["name"] for x in schritte]
+        self.assertTrue(namen, "der echte Lauf hätte Schritte liefern müssen")
+        self.assertIn("Kurzpruefung Wiederherstellbarkeit (strukturell, ohne Secrets)",
+                      " ".join(namen))
+        self.assertFalse(any("/runs/2/jobs" in u for u in gelesen),
+                         "der geskippte Lauf darf gar nicht erst befragt werden")
+
+    def test_anleitung_nennt_selbstheilung_und_grenze(self):
+        text = ANLEITUNG.read_text(encoding="utf-8")
+        self.assertIn("Selbstheilung", text)
+        self.assertIn("backup_selbstheilung.py", text)
+        self.assertIn("NICHT geheilt", text,
+                      "die Grenze muss dokumentiert sein (was der Inhaber bleibt)")
+        # Der Leerlauf ist die heimtückischste Klasse – er sieht grün aus.
+        self.assertIn("leerlauf", text)
+        self.assertIn("backup-leerlauf", text,
+                      "der eigene Alerting-Rat muss in der Anleitung stehen")
 
 
 if __name__ == "__main__":

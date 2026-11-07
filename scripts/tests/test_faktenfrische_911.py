@@ -527,6 +527,22 @@ class Faktenfrische911MetaTests(unittest.TestCase):
                                  'Formelle Anrede im Du-Artikel.')
 
     def test_queue_und_register_halten_die_befunde_geschlossen(self):
+        try:
+            queue = json.loads((ROOT / 'data' / 'faktenfrische_queue.json')
+                               .read_text(encoding='utf-8'))
+        except FileNotFoundError:
+            self.skipTest('Queue-Datei nicht vorhanden')
+        # 07.11.2026 – Messhöhe korrigiert (wie #763/#823): offene BEFUNDE
+        # stehen im Ledger (`fachbefunde`), `queue['offen']` ist der
+        # Arbeitsvorrat mit Fristen. Aus dem Vorrat „Befunde“ zu lesen war in
+        # beide Richtungen falsch.
+        import faktenfrische_befund_ledger as ledger
+        kerne = {re.sub(r'^\d{4}-\d{2}-\d{2}-', '', s) for s in (STROM, GAS)}
+        for eintrag in ledger.offene_befunde(ROOT / 'data' / 'faktenfrische_queue.json'):
+            kern = re.sub(r'^\d{4}-\d{2}-\d{2}-', '', eintrag.get('slug') or '')
+            self.assertNotIn(kern, kerne,
+                             f'Offener Befund zurückgekehrt für {eintrag.get("slug")}: '
+                             f'{eintrag.get("typ")} – {eintrag.get("text")}')
         """Offene Befunde sind geschlossen; die Arbeitsliste darf die Seiten
         führen (Turnus, Vorlauf), ein Befund darf dort nicht mitreisen."""
         self.assertFalse(offene_befunde((STROM, GAS)),

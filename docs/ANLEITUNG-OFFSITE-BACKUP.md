@@ -67,6 +67,35 @@ in `hugo.toml`), und der Worker antwortet (Newsletter-Lauf vom 13.10.2026:
 (Art. 7 Abs. 1 DSGVO), der ohne diese Einrichtung **nur** in Cloudflare
 liegt. Deshalb jetzt einrichten, vor den ersten Anmeldungen.
 
+### Live-Status 07.11.2026 – WF-9E5A #923 (aktuell)
+
+Gegen die echte GitHub-API geprüft am 07.11.2026, 10:00–11:00 UTC:
+
+| Prüfung | Ergebnis |
+|---|---|
+| Offsite-Lauf `42359904795` (07.11., 09:28 UTC) | Job `KV-/D1-Backup` **failure** in „Voraussetzungen prüfen“ – gewollt, Einrichtung fehlt. Job `backup` **success** – aber siehe nächste Zeile: |
+| Annotations des grünen Jobs | „Kein dauerhaftes Offsite-Ziel gesetzt“ und „Kein BACKUP_PASSPHRASE“ – der grüne Job hat **nichts gesichert** |
+| Einrichtungsprüfung (live) | E1, E2, E3, E4, E5, E6 offen; E7 optional; E8 offen (`protection_rules: []`) |
+| 24 Läufe 15.10.–07.11. | **alle** `failure`, Startzeiten 07:37–10:28 UTC (Soll 03:00) |
+| Frischwache `42282938395` (06.11., 19:48 UTC) | **failure**; der Rückweg-Nachweis stand als `skipped` im Lauf (sechs Läufe in Folge) |
+| Schreib-Endpunkte (Variablen, Secrets, Environment) | weiterhin `403 Resource not accessible by integration` – nichts erfunden, nichts gesetzt |
+| Ziel-Repository `frank-hartung/franksfinanzcheck-backup` | **404** – existiert nicht |
+
+**Drei Befunde code-seitig dauerhaft geheilt** (Einzelheiten und Belege in
+`WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-11-07.md`):
+
+1. **Der grüne Leerlauf** – ein Job meldet Erfolg, ohne etwas zu sichern.
+   Jetzt eigen gemessen (`backup_selbstheilung.py`, Klasse `leerlauf`, Exit 4)
+   und mit eigenem Rat im Fehler-Alerting (`backup-leerlauf`).
+2. **Der übersprungene Nachweis** – der Rückweg-Nachweis stand in sechs
+   Läufen als `skipped`; ein Nachweis hinter einem roten Vorgänger ist keiner.
+   Er läuft jetzt mit `!cancelled()` und benennt, was ohne Einrichtung nicht
+   prüfbar ist.
+3. **Der fehlende Lauf** – Verspätungen von 4½ bis 7½ Stunden sind belegt.
+   Die Selbstheilung holt den Lauf per Dispatch nach und **beweist** ihn über
+   die Läufe-Liste (ein „angenommen“ der API zählt nicht).
+
+Die Inhaber-Einrichtung (E1–E8) bleibt der einzige funktionale Blocker.
 ### Live-Status 07.11.2026 – WF-3150 / #1030 (aktuell)
 
 Gegen die echte GitHub-API geprüft am 07.11.2026 (Vormittag UTC):
@@ -471,6 +500,53 @@ Diese Fehler treten in den Schritten nach der Prüfung auf:
 - **Repo-Job: „nicht nachweislich privat (Antwort: UNBEKANNT, API: …)“:**
   „Not Found“ heißt, das Repo fehlt oder der Token sieht es nicht.
   „Bad credentials“ heißt, der Token ist ungültig oder abgelaufen.
+
+## Selbstheilung – was das System selbst repariert (und was NICHT)
+
+Seit 07.11.2026 (Vorgang WF-9E5A / #923) enthält die tägliche Frischwache
+einen Schritt **„Selbstheilung (nur Beweisbares – Dispatch mit Lauf-Nachweis)“**
+(`scripts/backup_selbstheilung.py`). Er ist bewusst eng: Er repariert, was
+**beweisbar kaputt** ist und **ohne jeden Zugang** repariert werden kann –
+alles andere benennt er, statt es zu erfinden.
+
+| Klasse | Was gemessen wird | Heilung |
+|---|---|---|
+| `scheduler` | Der nächtliche Lauf (Soll 03:00 UTC, Kulanz 4 h) fehlt – belegt sind Startzeiten von 07:37 bis 10:28 UTC | **Ja:** `workflow_dispatch` – und der Beweis ist ein **neuer Lauf** in der Läufe-Liste. Ein „angenommen“ der API (HTTP 204) zählt nicht. |
+| `leerlauf` | Ein **Job** meldet Erfolg, obwohl weder `BACKUP_REPO` noch `BACKUP_PASSPHRASE` gesetzt sind – dann entsteht nur eine 7-Tage-Kurzzeitkopie im selben Konto | Nein – der Weg steht in den Schritten 2–4 |
+| `scheinbeweis` | Ein Nachweis-Schritt steht als `skipped` im Lauf (GitHubs Standardbedingung `success()` schaltet ihn hinter einem roten Vorgänger ab) | Nein – das ist ein Code-Vertrag (der Rückweg-Nachweis läuft jetzt mit `!cancelled()`) |
+| `einrichtung` | E1–E8 offen | **Nein** – Inhaber-Sache |
+
+### Die Grenze: Was ausdrücklich NICHT geheilt wird
+
+**E1–E8 werden nie automatisch „erledigt".** Ziel-Repository, Token,
+Passphrase, Cloudflare-Konto, KV-Namespace und Environment-Schutz sind
+Zugänge und Entscheidungen des Inhabers. Ein Agent kann sie nicht herstellen –
+und ein erfundener oder stillschweigend „gesetzter" Wert wäre schlimmer als
+der offene Befund, weil er eine Sicherung vortäuscht, die es nicht gibt.
+Deshalb gilt unverändert: `npm run backup:einrichten` (E8 zuerst, dann
+E1–E7).
+
+Daraus folgt die ehrliche Lesart der Job-Zusammenfassung:
+
+- **`scheduler` geheilt** heißt: Der Lauf ist nachgeholt **und** ein neuer
+  Lauf ist sichtbar. Er kann inhaltlich trotzdem rot sein (Einrichtung fehlt) –
+  dann ist die Ursache E1–E8, nicht der Scheduler.
+- **`leerlauf` gemeldet** heißt: Der Job ist grün und **trotzdem ist nichts
+  gesichert**. Gemessen wird auf JOB-Ebene, nicht am Gesamtlauf: Am 07.11. war
+  der Lauf rot (KV-Job) und der sichernde Job grün – eine Messung auf
+  Lauf-Ebene hätte den Befund genau an dem Tag verschluckt, an dem er zutraf. Das ist der wichtigere der beiden Zustände.
+- **Exit 3** („nichts automatisch heilbar") ist kein Fehler des Systems,
+  sondern die Ansage: Hier ist ein Mensch dran.
+- **Exit 4** heißt: Ein Job meldet Erfolg, **gesichert wurde aber nichts**
+  (Leerlauf). Das Fehler-Alerting führt dafür die eigene Klasse
+  `backup-leerlauf` mit eigenem Rat – nicht „neu starten" (der nächste Lauf
+  wäre genauso leer) und nicht „einrichten" (die Einrichtung kann vollständig
+  sein und trotzdem nichts sichern).
+
+Eine Heilung, die über diese Grenze hinausgeht, ist ein Fehler – der Vertrag
+`SelbstheilungVertrag` in `scripts/tests/test_backup_einrichtung.py` prüft in
+beide Richtungen (heilbare Klassen genau `scheduler`, keine Secret-Zugriffe,
+kein `gh secret set`/`gh variable set`, Grenze in dieser Datei).
 
 ## Zugänge erneuern
 

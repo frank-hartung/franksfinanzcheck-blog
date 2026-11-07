@@ -403,6 +403,14 @@ GUARDS = [# ReDoS-Rückfallsperre (26.10.2026, Code-Scanning-Alert Nr. 87):
           # Slots per Dispatch nach und meldet das Defizit, wenn nichts mehr
           # nachholbar ist. Ihr --selftest stellt den Vorfall nach und
           # gehört ins vertragliche Minimum.
+          # Backup-Selbstheilung (WF-9E5A / #923, 07.11.2026): Die Heilung
+          # handelt im Betrieb – sie startet Läufe. Eine Wache mit Folgen
+          # gehört ins vertragliche Minimum (C6), sonst könnte ihr Selbsttest
+          # still verschwinden, während die Aktion bleibt. Ihr `--selftest`
+          # friert beide Richtungen ein: Dispatch MIT neuem Lauf (bewiesen)
+          # und Dispatch OHNE neuen Lauf (nicht bewiesen, also rot), dazu die
+          # Grenze heilbarer Klassen (genau `scheduler`).
+          "backup_selbstheilung.py",
           "slot_wache.py",
           # Zustellbarkeits-Wache (23.09.2026, Lauf #21): Der Versand war
           # dreifach verriegelt, die Kette davor ungeprüft. Ein Lauf meldete

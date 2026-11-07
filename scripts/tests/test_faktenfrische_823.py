@@ -487,6 +487,24 @@ class Faktenfrische823MetaTests(unittest.TestCase):
                                         'Unter MIN_LINKS: der Entwurf wäre link-unterversorgt.')
 
     def test_faktenfrische_queue_haelt_befunde_geschlossen(self):
+        """Kein OFFENER BEFUND darf die zwei Slugs wieder führen.
+
+        07.11.2026 – Messhöhe korrigiert: gelesen wird das Ledger
+        (`fachbefunde`), nicht `queue['offen']`. Letzteres ist der
+        Arbeitsvorrat mit Fristen; aus ihm „offene Befunde“ zu lesen erzeugte
+        Fehlalarme bei turnusgemäßer Wiederaufnahme und hätte einen echten
+        Rückfall übersehen. Siehe #763-Modul, gleiche Korrektur.
+        """
+        import faktenfrische_befund_ledger as ledger
+        queue = ROOT / 'data' / 'faktenfrische_queue.json'
+        if not queue.exists():
+            self.skipTest('Queue-Datei nicht vorhanden')
+        kerne = {re.sub(r'^\d{4}-\d{2}-\d{2}-', '', s) for s in (SAISON, DNS)}
+        for eintrag in ledger.offene_befunde(queue):
+            kern = re.sub(r'^\d{4}-\d{2}-\d{2}-', '', eintrag.get('slug') or '')
+            self.assertNotIn(kern, kerne,
+                             f'Offener Befund zurückgekehrt für {eintrag.get("slug")}: '
+                             f'{eintrag.get("typ")} – {eintrag.get("text")}')
         """Kein offener Befund für die zwei Seiten – die Arbeitsliste darf sie
         führen (Frist 15.11.2026, Vorlauf 14 Tage), aber nicht als Befund."""
         self.assertFalse(offene_befunde((SAISON, DNS)),

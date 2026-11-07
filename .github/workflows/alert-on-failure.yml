@@ -571,6 +571,20 @@ jobs:
             // „Einrichtung unvollständig", nicht „Scheduler-Hänger").
             const backupFrischEinrichtung = isBackupFrisch &&
               failedStepNames.some(s => String(s).includes('Voraussetzungen prüfen'));
+            // 07.11.2026 (WF-9E5A / #923): DER GRÜNE LEERLAUF.
+            // ------------------------------------------------------
+            // BEFUND: Der Repo-Job meldet `success`, obwohl weder
+            // BACKUP_REPO noch BACKUP_PASSPHRASE gesetzt sind (Lauf
+            // 42359904795: Job „backup" success mit den Annotationen „Kein
+            // dauerhaftes Offsite-Ziel" und „Kein BACKUP_PASSPHRASE"). Dann
+            // entsteht ausschließlich eine 7-Tage-Kurzzeitkopie im SELBEN
+            // Konto – kein Offsite-Schutz. „Gelaufen" ist wahr, „gesichert"
+            // nicht. Dieses Grün ist gefährlicher als jedes Rot im Backup:
+            // Rot sieht man, Grün glaubt man. Seit 07.11. misst
+            // `scripts/backup_selbstheilung.py` diesen Zustand (Klasse
+            // `leerlauf`, Exit 4) und meldet ihn über einen eigenen Schritt.
+            const backupLeerlauf = (isBackup || isBackupFrisch) && !backupEinrichtung &&
+              failedStepNames.some(s => String(s).includes('Selbstheilung'));
             // ================================================================
             //  WF-53E2 / #780 (16.10.2026): EIN ROTER SELBSTTEST IST EINE
             //  CODE-REGRESSION – KEIN SCHLÜSSEL, KEIN AUSFALL, KEIN NEUSTART
@@ -625,6 +639,11 @@ jobs:
               // der einzige automatisierte Rückweg-Nachweis, und der allgemeine
               // Frische-Rat („Scheduler-Hänger, Token“) träfe hier nie zu.
               : backupRestore ? 'backup-restore'
+              // 07.11.2026 (#923): Eigener Name – der Rat lautet „es wurde
+              // nichts gesichert", nicht „neu starten" und nicht „einrichten".
+              // Steht VOR dem allgemeinen Backup-Rat, sonst verschluckt
+              // „Datei-Befunde unten" die einzige zutreffende Aussage.
+              : backupLeerlauf ? 'backup-leerlauf'
               : isBackup ? 'backup'
               : backupFrisch ? 'backup-frisch'
               : installFailed ? 'installation'
@@ -845,6 +864,12 @@ jobs:
                     '1. **Die Sicherung ist gelaufen – ihr Rückweg ist aber nicht belegt.** Rot ist die Kurzprüfung der Wiederherstellung: Syntax von `scripts/restore_drill.sh` bzw. `scripts/backup_einrichten_wizard.sh` oder der Selbsttest von `scripts/kv_backup.py`. Solange der Rückweg nicht geprüft ist, gilt ein Backup nicht als Sicherung – ein Neustart ändert daran nichts.',
                     '2. Lokal nachstellen und reparieren: `npm run test:backup` (Selbsttests + Verträge) und `bash -n scripts/restore_drill.sh`. Danach die echte Probe gegen das private Ziel: `npm run backup:probe` – sie entschlüsselt Bundle und KV-Export und prüft Struktur, Rechtsseiten und Abonnenten-Daten. Ein Lauf ohne geprüfte Familie endet mit Exit 2 statt mit „bestanden“.',
                     '3. Der nächste grüne Lauf von „Backup-Frischwache“ (täglich 13:00 UTC, auch per „Run workflow“) schließt diese Meldung automatisch. Runbook und Ernstfall-Anleitung: ' + backupAnleitung + ', Abschnitt „Wiederherstellung“. Läufe: ' + repoUrl + '/actions/workflows/backup-frischwache.yml'
+                  ]
+                : runbookKlasse === 'backup-leerlauf'
+                ? [
+                    '1. **Ein Lauf ist grün – und trotzdem ist nichts gesichert.** Ohne dauerhaftes Ziel (`BACKUP_REPO`) bzw. ohne Passphrase (`BACKUP_PASSPHRASE`) legt der Repo-Job ausschließlich eine 7-Tage-Kurzzeitkopie im **selben** Konto ab. Bei Kontoverlust oder Repo-Löschung ist sie mit weg – das ist kein Offsite-Backup, sondern ein grünes Häkchen über einer Lücke.',
+                    '2. Der jüngste grüne Lauf nennt in seinen Annotationen, was fehlt („Kein dauerhaftes Offsite-Ziel" / „Kein BACKUP_PASSPHRASE"). Das ist eine Einrichtungsaufgabe, kein Ausfall – ein Neustart ändert nichts und erzeugt nur einen weiteren grünen Leerlauf: ' + backupAnleitung + ', Schritte 2–4.',
+                    '3. Sobald Ziel, Passphrase und Zugang stehen, ist der grüne Lauf auch ein Beweis: Er prüft Entwurf, Asset-Größen und Privatheit des Ziels nach. Der nächste grüne Lauf schließt diese Meldung automatisch. Läufe: ' + backupLaeufe
                   ]
                 : runbookKlasse === 'backup'
                 ? [

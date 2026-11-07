@@ -129,6 +129,8 @@
     "edge:b7:apply": "python3 scripts/cloudflare_edge_freigabe.py --selftest && python3 scripts/cloudflare_edge_freigabe.py --b7-apply",
     "test:backup": "python3 scripts/kv_backup.py --selftest && python3 scripts/backup_einrichtung.py --selftest && python3 scripts/backup_freshness_guard.py --selftest && python3 scripts/backup_selbstheilung.py --selftest && python3 -m unittest scripts.tests.test_backup_einrichtung scripts.tests.test_backup_selbstheilung",
     "backup:frische": "python3 scripts/backup_freshness_guard.py --repo ${BACKUP_REPO:-frank-hartung/franksfinanzcheck-backup}",
+    "backup:heilung": "python3 scripts/backup_selbstheilung.py --plan",
+    "backup:heilung:anwenden": "python3 scripts/backup_selbstheilung.py --heilen",
     "backup:selbstheilung": "python3 scripts/backup_selbstheilung.py --probe",
     "backup:heilen": "python3 scripts/backup_selbstheilung.py --heilen",
     "backup:probe": "bash scripts/restore_drill.sh --repo ${BACKUP_REPO:-frank-hartung/franksfinanzcheck-backup}",

@@ -424,6 +424,24 @@ class Faktenfrische763MetaTests(unittest.TestCase):
                 self.assertFalse(finds, f'Harte Textverständnis-Regeln: {finds}')
 
     def test_faktenfrische_queue_haelt_befunde_geschlossen(self):
+        """Kein OFFENER BEFUND darf die zwei Slugs wieder führen.
+
+        07.11.2026 – Messhöhe korrigiert: Der Test las `queue['offen']` und
+        hielt das für die Befundliste. Das Feld ist aber der ARBEITSVORRAT
+        (Seiten, die noch nicht dran waren, mit Frist). Folge in beide
+        Richtungen: Er wurde rot, als die Heizperiode am 07.11. turnusgemäß
+        wieder in den Vorrat rutschte („frisch geprüft vor 23 Tagen“) – ein
+        Fehlalarm ohne Sachfehler – und er wäre grün geblieben, wenn ein
+        echter Befund zurückgekehrt wäre. Gemessen wird jetzt dort, wo
+        Befunde stehen: im Ledger (`fachbefunde`).
+        """
+        import faktenfrische_befund_ledger as ledger
+        kerne = {kern_von(s) for s in (HEIZ, REISE)}
+        for eintrag in ledger.offene_befunde(ROOT / 'data' / 'faktenfrische_queue.json'):
+            kern = kern_von(eintrag.get('slug') or '')
+            self.assertNotIn(kern, kerne,
+                             f'Offener Befund zurückgekehrt für {eintrag.get("slug")}: '
+                             f'{eintrag.get("typ")} – {eintrag.get("text")}')
         """Ein neuer Lauf darf dieselben BEFUNDE nicht zurückmelden.
 
         Die frühere Fassung prüfte, ob der Slug überhaupt in der Arbeitsliste
@@ -446,6 +464,11 @@ class Faktenfrische763MetaTests(unittest.TestCase):
                      'Fehlende Erwähnung ist kein Gegenbeweis',
                      'keine behördliche Empfehlung', 'Quellen-Publikationsdatum'):
             self.assertIn(rule, prompt)
+
+
+def kern_von(slug):
+    """Slug ohne Datumspräfix – die Kadenz datiert Entwürfe um."""
+    return re.sub(r'^\d{4}-\d{2}-\d{2}-', '', slug or '')
 
 
 def json_load(path):
