@@ -1,6 +1,6 @@
 {
-  "erzeugt": "2026-11-06T17:11:12Z",
-  "stichtag": "2026-11-06",
+  "erzeugt": "2026-11-07T10:02:27Z",
+  "stichtag": "2026-11-07",
   "offen": 22,
   "seiten": 7,
   "live_seiten": 6,
@@ -9,7 +9,7 @@
   "ohne_fassung": 0,
   "seite_fehlt": 0,
   "nicht_entscheidbar": 0,
-  "aeltester_tage": 5,
+  "aeltester_tage": 6,
   "frist_tage": 14,
   "eskalation_tage": 21,
   "ueber_frist": 0,
@@ -30,7 +30,7 @@
       "typ": "luecke",
       "text": "Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -41,7 +41,7 @@
       "typ": "luecke",
       "text": "Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -52,7 +52,7 @@
       "typ": "luecke",
       "text": "Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur für Januar 2026 (360 €) wird durch die allgemeine Übersichtsseite der Behörde nicht gestützt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -63,7 +63,7 @@
       "typ": "luecke",
       "text": "Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher angekündigt werden muss, ohne dafür eine Quelle anzugeben.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -74,7 +74,7 @@
       "typ": "praezision",
       "text": "Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf den Anbieter überträgt und dafür ein höherer Startpreis üblich ist, fehlt eine konkrete Quelle und bleibt vage.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -85,7 +85,7 @@
       "typ": "praezision",
       "text": "Die Aussage, dass man „in der Regel“ zum Zeitpunkt der Preisänderung Sonderkündigungsrecht hat, ist unpräzise und wird nicht durch eine konkrete Regelung belegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -96,7 +96,7 @@
       "typ": "luecke",
       "text": "Der angegebene durchschnittliche Gaspreis von 11,93 Cent/kWh für 2026 (laut BDEW) wird nicht durch eine Quelle belegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -107,7 +107,7 @@
       "typ": "luecke",
       "text": "Die Angabe, dass die Verbraucherzentrale etwa 6 % weniger Heizenergie pro Grad niedrigerer Raumtemperatur nennt, fehlt eine Quellenangabe.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -118,7 +118,7 @@
       "typ": "luecke",
       "text": "Es fehlt der für Campingbuchungen relevante Regulierungsrahmen (Unterscheidung Mietrecht bei Stellplätzen vs. Reiserecht), den die Fundstelle für den Bereich Reise nur allgemein andeutet.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 3,
+      "alter_tage": 4,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -129,7 +129,7 @@
       "typ": "luecke",
       "text": "Die Preisangabe von 20 bis 45 € pro Nacht wird als realistischer Wert positioniert, ist jedoch nicht durch Marktdaten oder eine Referenzstelle in den Fundstellen belegt.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 3,
+      "alter_tage": 4,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -140,7 +140,7 @@
       "typ": "praezision",
       "text": "Der Verweis auf die Verbraucherzentrale zur Prüfung von Buchungsangaben führt auf eine allgemeine Übersichtsseite ohne konkrete Checklisten für Camping-Angebote.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 3,
+      "alter_tage": 4,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -151,7 +151,7 @@
       "typ": "praezision",
       "text": "Während Meal Prep als großer Sparhebel betont wird, zeigt die Marktlage für Nahrungsmittel eine moderate Teuerung von nur 0,4 %, was die Priorisierung der Sparbemühungen relativiert.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -162,7 +162,7 @@
       "typ": "luecke",
       "text": "Der Ratgeber empfiehlt die Revision von Fixkosten, lässt aber die drastische Preissteigerung bei Energie von +14,9 % unerwähnt, die ein wesentlicher Treiber der Haushaltsausgaben ist.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -173,7 +173,7 @@
       "typ": "veraltet",
       "text": "Die Budget-Tipps berücksichtigen nicht die aktuelle Inflationsrate von 2,8 % (Stand Oktober 2026), was die Kaufkraft-Annahmen im Haushaltsbuch beeinflusst.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -184,7 +184,7 @@
       "typ": "luecke",
       "text": "Der Ratgeber nennt Sparbeispiele für Heizkosten, lässt aber die aktuelle Preissteigerung bei Energie von +14,9 % (Stand Oktober 2026) unerwähnt, die den finanziellen Druck auf Haushalte massiv erhöht.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -195,7 +195,7 @@
       "typ": "praezision",
       "text": "Die in Aussicht gestellten Ersparnisse von bis zu 200 € werden nicht ins Verhältnis zur aktuellen Inflationsrate von +2,8 % gesetzt, welche die reale Kaufkraft des gesparten Geldes mindert.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -206,7 +206,7 @@
       "typ": "praezision",
       "text": "Beim Fokus auf Lebensmittelplanung fehlt der Hinweis auf die vergleichsweise moderate Preissteigerung von +0,4 % bei Nahrungsmitteln, was diesen Hebel gegenüber den stark steigenden Energiekosten relativiert.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -217,7 +217,7 @@
       "typ": "veraltet",
       "text": "Die Kalkulation der Fixkosten (Energie 140 €) und die Empfehlung zur Senkung der Kosten ignorieren den aktuellen Markttrend massiv steigender Energiepreise (+14,9 %), was die 50-Prozent-Quote für notwendige Ausgaben gefährdet.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -228,7 +228,7 @@
       "typ": "luecke",
       "text": "Der Ratgeber verspricht eine 'planbare' Budgetierung, lässt aber die aktuelle Inflationsrate von 2,8 % unerwähnt, die insbesondere den Block der notwendigen Ausgaben (Nahrungsmittel +0,4 %) dynamisch belastet.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -239,7 +239,7 @@
       "typ": "luecke",
       "text": "Die kalkulierte Ersparnis bei Energiekosten (15 €/Monat) berücksichtigt nicht den aktuellen Markttrend massiv steigender Preise (+14,9 % bei Energie).",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -250,7 +250,7 @@
       "typ": "luecke",
       "text": "Die pauschalen Jahressparwerte von 300 € bis 1.000 € werden in Marktfakten-Positur ohne Nennung einer Referenzquelle oder eines Absenders (z. B. Destatis) aufgeführt.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -261,7 +261,7 @@
       "typ": "praezision",
       "text": "Die Sparversprechen im Bereich Lebensmittel vernachlässigen die Inflationsrate bei Nahrungsmitteln (+0,4 %), was Modellrechnungen ohne Inflationsbereinigung ungenau macht.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
