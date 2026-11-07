@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "environment": "cloudflare-produktion",
+  "zweig": "main",
+  "reviewer_login": "frank-hartung",
+  "ziele": ["reviewer", "bypass", "branch"],
+  "dashboard_ziele": ["bypass"],
+  "nur_verschaerfen": true,
+  "ledger": "data/produktions_schutz_belege.jsonl",
+  "begruendung": "WF-829B / #922: Der Deploy bleibt fail-closed gesperrt, bis das Produktions-Environment einen Required Reviewer, exakt den Branch main und keinen Administrator-Bypass hat. Der automatische Lauf stellt her, was die GitHub-API zulaesst; der Bypass-Schalter bleibt eine einmalige Inhaberhandlung im Dashboard. Der Vertrag wird nie gelockert: nur_verschaerfen ist dauerhaft true, die Ziele kommen aus worker_environment_einrichten.py und worker_environment_guard.py."
+}
