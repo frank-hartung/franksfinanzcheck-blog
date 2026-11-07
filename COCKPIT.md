@@ -1,6 +1,6 @@
 # 🚦 COCKPIT – franksfinanzcheck.de
 
-**Stand:** 2026-11-06 00:57 UTC · generiert von `scripts/cockpit.py`
+**Stand:** 2026-11-07 00:03 UTC · generiert von `scripts/cockpit.py`
 
 > Eine Seite statt 70+ Status-Dateien. Jeder Bereich bekommt eine Ampel und einen Satz Begründung. Wer tiefer graben will, findet die Quelle unter jedem Bereich – diese Datei archiviert nichts, sie verweist nur.
 
@@ -8,7 +8,7 @@
 
 | Bereich | Ampel | Kurzbefund |
 |---|---|---|
-| Content-Pipeline | 🟡 | 1 Prüfpunkt(e) auffällig (lesbarkeit) |
+| Content-Pipeline | 🟡 | 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 5/6 bereit – Nachschub nötig |
 | SEO & Technik | 🟡 | 1 Prüfpunkt(e) auffällig (cwv) |
 | Affiliate & Umsatz | 🟢 | in Ordnung (2 Kennzahl(en) noch ohne Datenlage) |
 | Secrets & Zugänge | 🔴 | 1 Zugang/Zugänge abgelehnt: PINTEREST_ACCESS_TOKEN – Re-Auth nötig |
@@ -20,9 +20,9 @@
 ## Details
 
 ### Content-Pipeline — 🟡 GELB
-- 1 Prüfpunkt(e) auffällig (lesbarkeit)
+- 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 5/6 bereit – Nachschub nötig
 - lesbarkeit: 2026-10-26-gastarife-vergleichen-vor-dem-herbst/index.md (Entwurf) – Flesch 51.5 < Publish-Schwelle 60
-- Artikel-Reserve 6/6 bereit
+- Artikel-Reserve knapp: 5/6 bereit – Nachschub nötig
 
 Quellen: `data/governance_status.json`, `data/reserve-readiness.json`, `PRODUKTIONS-STATUS.md`
 
@@ -48,13 +48,13 @@ Quellen: `data/governance_status.json`, `data/secrets_state.json`, `docs/PINTERE
 ### Social-Automation — 🟢 GRÜN
 - 1/10 Kanäle live (Mastodon)
 - 9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md
-- letzter erfolgreicher Post vor 1.2 Tag(en)
+- letzter erfolgreicher Post vor 0.2 Tag(en)
 
 Quellen: `data/social/state.yaml`, `data/social/channels.yaml`, `SOCIAL-PERF-REPORT.md`, `docs/RUNBUCH-SOCIAL-SECRETS.md`
 
 ### Newsletter — 🔴 ROT
 - noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)
-- 5 Artikel in der Warteschlange, ältester 86 Tag(e) alt
+- 5 Artikel in der Warteschlange, ältester 87 Tag(e) alt
 
 Quellen: `data/newsletter_journal.jsonl`, `data/newsletter_state.json`, `data/newsletter_kadenz.json`
 
