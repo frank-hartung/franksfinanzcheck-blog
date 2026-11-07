@@ -2,6 +2,13 @@
 
 _Stand 2026-11-07 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
+**18 offene Befunde auf 4 Seiten · davon 2 Live-Seiten mit 10 Befunden · ältester 0 Tage · Frist 14 Tage.**
+
+| Kennzahl | Wert |
+|---|---|
+| Offene Befunde | 18 |
+| Seiten betroffen | 4 (davon live: 2) |
+| Text seit dem Befund geändert | 0 |
 **26 offene Befunde auf 7 Seiten · davon 4 Live-Seiten mit 15 Befunden · ältester 4 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
@@ -31,6 +38,8 @@ _Stand 2026-11-07 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
    ```
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
+
+## Seiten
 
 > **Wichtig – betrifft 5 von 26 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 

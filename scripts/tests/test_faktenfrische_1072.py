@@ -205,7 +205,22 @@ class Faktenfrische1072RegisterTests(unittest.TestCase):
             with self.subTest(befund=b['id']):
                 self.assertIn(b['id'], heute, f'Befund {b["id"]} nicht im Ledger vom 05.11.')
                 e = heute[b['id']]
-                self.assertEqual(e['geprueft_fassung'], b['geprueft_fassung'])
+                # PROJEKTIONSBEWUSST (07.11.2026, #1072-Nachlauf):
+                # Der Register-Eintrag hält die Fassung fest, die am 05.11.
+                # geprüft wurde. Am 07.11. wurden die Entscheidungen einmalig
+                # auf die feinere Aussage-Projektion umgebunden, weil der
+                # frühere `text_hash` Betriebsflächen mitzählte und dadurch
+                # jede Maschinen-Schreibe (Weiterlesen-Link, Abbildungszeile,
+                # Disclaimer, /go/-Route) eine dokumentierte Entscheidung
+                # wieder aufriss. Die Umbindung überschreibt den Beweis
+                # nicht: `ursprungs_geprueft_fassung` hält den Wert, den der
+                # Mensch tatsächlich gelesen hat. Beide müssen übereinstimmen –
+                # sonst wäre es keine Umbindung, sondern eine Behauptung.
+                gebunden = {e.get('geprueft_fassung'),
+                            e.get('ursprungs_geprueft_fassung')}
+                self.assertIn(b['geprueft_fassung'], gebunden,
+                              f'Befund {b["id"]}: weder aktuelle noch '
+                              f'ursprüngliche Bindung passt zum Register')
                 self.assertGreaterEqual(len(e['begruendung']), 20,
                                         f'Begründung zu kurz für {b["id"]}')
 
