@@ -173,6 +173,15 @@ und ein Handlauf konnte weiterhin einen Zukunftstag einfrieren. Jetzt gilt:
    Momentaufnahme von Hand kann kein Ticket mehr füllen; der Alarm öffnet,
    aktualisiert und schließt sich weiter selbst (C14).
 
+**Arbeitsliste ist kein Befund.** Wer wissen will, ob ein Befund offen ist,
+fragt das **Ledger** (`scripts/faktenfrische_befund_ledger.py`), nicht
+`data/faktenfrische_queue.json`: mit dem Vorlauf von 14 Tagen stehen Seiten
+dort turnusmäßig wieder, sobald ihre Frist näher rückt – mit dem Grund
+„frisch geprüft vor N Tagen“ und ohne einen offenen Befund. Genau diese
+Verwechslung machte am 07.11.2026 drei Aktentests (#763, #823, #911) rot,
+ohne dass ein Sachfehler zurückkam; sie prüfen jetzt über
+`scripts/tests/faktenfrische_gleis.py`.
+
 **Vertrag:** C45 verlangt die Marker `bestand_trajektorie`,
 `projektions_ausgangspunkt` und `kadenz_horizont` – wer die Heilung löscht,
 macht den Bau rot. **Tests:** `ProjektionsAusgangspunktTest`,

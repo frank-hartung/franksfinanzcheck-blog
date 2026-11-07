@@ -117,6 +117,8 @@ stehen in `data/agent_reach/faktenfrische.yaml` und gehören dem Herausgeber.
 | `scripts/governance_contract.py` | C45-Marker für Trajektorie, Ausgangspunkt und Horizont |
 | `scripts/tests/test_faktenfrische_kapazitaet.py` | `ProjektionsAusgangspunktTest`, `KadenzHorizontTest`, `MessungSelbstheilungTest`; `AusfallToleranzTest` aus #1113 bleibt bestehen |
 | `docs/ANLEITUNG-FAKTENFRISCHE.md` | Nachzug 07.11.2026 (Regel, Ausgabe, Ticket, Vertrag) und Nutzungsbeispiel für `--stichtag` |
+| `scripts/tests/faktenfrische_gleis.py` | gemeinsame Regel der Befund-Akten: Arbeitsliste ist kein Befund (Abschnitt 7) |
+| `scripts/tests/test_faktenfrische_{763,823,911}.py` | prüfen offene Befunde über das Ledger statt „steht nicht in der Queue“ |
 | `KADENZ-HORIZONT-1107-DAUERHEILUNG-HIGHEND-2026-11-07.md` | dieser Bericht |
 
 **Unverändert:** `data/agent_reach/faktenfrische.yaml` (Sockel 4, Vorlauf 14,
@@ -133,18 +135,49 @@ oder weniger; die Korridor-Entscheidung aus #1113 bleibt unangetastet.
 | `faktenfrische_kapazitaet.py --selftest` | ✅ **57** Fälle |
 | `faktenfrische_deckung_ticket.py --selftest` | ✅ **36** Fälle |
 | `python -m unittest scripts.tests.test_faktenfrische_kapazitaet` | ✅ **74** Tests |
+| `python -m unittest discover -s scripts/tests` | ✅ **5474** Tests (22 skipped) |
+| `selftest_clock.py --offset 97` (Uhr-Probe) | ✅ grün unter fremdem Kalender |
 | Faktenfrische-/Scorecard-Suiten (Ledger, Robustheit, 996, Akte, Slug, Ticket) | ✅ **95** Tests |
 | `--wache` (heute) | ✅ Exit 0 · Deckung 141,7 % · Weg frei bis 2027-03-07 |
 | `--stichtag 2026-11-26` / `2026-12-31` | ✅ Exit 0 · `projektion.basis = 2026-11-07`, 0 überfällig |
 | eingefrorene Gegenprobe (`basis=stichtag`) | ✅ 27 bzw. 105 überfällig – das Fehlbild bleibt reproduzierbar |
-| `governance_contract.py --quick` | ✅ erfüllt (46 Regeln) |
-| `skript_syntax_wache.py` | ✅ 669 Dateien |
-| `wachen_vertrag.py` | ✅ 385 Skripte, 0 Funde |
+| `governance_contract.py --quick` | ✅ erfüllt (47 Regeln) |
+| `skript_syntax_wache.py` | ✅ 670 Dateien |
+| `wachen_vertrag.py` | ✅ 387 Skripte, 0 Funde |
 | `integrity_guard.py --gate` | ✅ 55 Kerndateien |
 
 ---
 
-## 7 · Nicht getan – bewusst
+## 7 · Nebenbefund 07.11.2026: drei Zeitbomben derselben Klasse
+
+Der erste volle Suite-Lauf auf diesem Branch wurde rot – nicht wegen der
+Projektion, sondern weil drei Aktentests (#763, #823, #911) **dieselbe
+Verwechslung** eingebaut hatten, die #1107 ausgelöst hat: Sie prüften, ob
+ihre Seiten noch in `data/faktenfrische_queue.json` stehen, und nannten das
+„kein offener Befund“. Die Queue ist aber eine **Arbeitsliste**. Mit dem
+Vorlauf von 14 Tagen kehren Seiten turnusmäßig zurück – „frisch geprüft vor
+23 Tagen“, Frist 14.11., ohne einen einzigen offenen Befund. Am 07.11.2026
+wurden zwei der drei Prüfungen rot, ohne dass ein Sachfehler zurückkam; die
+dritte wäre am nächsten Fristtag gefolgt.
+
+Geheilt wurde nicht der Testtext, sondern die Frage: `faktenfrische_gleis.py`
+fragt das **Befund-Ledger** (`faktenfrische_befund_ledger.offene_befunde`) –
+dieselbe Quelle, aus der Redaktion und Ticket arbeiten. Ein Eintrag in der
+Arbeitsliste bleibt erlaubt, solange er keinen Befund mitschleppt. Bewusst
+**kein** Wortlaut-Muster („frisch geprüft“) als Ersatz: das wäre die nächste
+Zeitbombe, sobald die Seite fällig wird.
+
+Nebenbefund im Nebenbefund: `scripts/governance_contract.py` aus #1113/#1119
+war beim Zusammenführen verloren gegangen – die Pflichtfeld-Verlust-Wache
+(#1110) fehlte in der Wächterliste. Der Vertrag steht jetzt wieder auf dem
+Stand von `main` (47 Regeln) **plus** den drei C45-Markern.
+
+**Verifikation dafür:** volle Suite **5474 Tests grün**, Uhr-Probe (+97 Tage)
+grün, alle Selbsttests der CI-Kette grün.
+
+---
+
+## 8 · Nicht getan – bewusst
 
 - **Keine Korridor-Änderung.** Sockel 4 / Vorlauf 14 sind der gemergte Stand
   aus #1113; dieser Branch entscheidet nichts nach.
