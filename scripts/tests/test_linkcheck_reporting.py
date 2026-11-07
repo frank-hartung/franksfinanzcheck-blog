@@ -48,7 +48,7 @@ class ReportingScopeTests(unittest.TestCase):
     def test_pr_bleibt_ein_harter_check(self):
         self.assertIn("pull_request", WORKFLOW.read_text(encoding="utf-8"))
         for name in ("Governance-Selbsttests (alle Wachen – entdeckt, uhrfest, schreibfrei)",
-                     "Governance-Vertrag C1–C48 (Reihenfolge, Issue-Policy, Nachweise, Token-Lebenszyklus, Pflicht-Check, Diff-Tor)",
+                     "Governance-Vertrag C1–C49 (Reihenfolge, Issue-Policy, Nachweise, Token-Lebenszyklus, Pflicht-Check, Diff-Tor, Pflichtfeld-Verlust)",
                      "Seite bauen", "Gate-Status (rot bei kaputten Links oder Schema-Funden)"):
             with self.subTest(name=name):
                 self.assertNotIn("REPORT_PRODUCTION", self.steps[name].get("if", ""))
