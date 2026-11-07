@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-07T00:03:39Z",
+  "generated": "2026-11-07T23:36:05Z",
   "overall": "rot",
   "buckets": {
     "Content-Pipeline": {
@@ -56,7 +56,7 @@
       "lines": [
         "1/10 Kanäle live (Mastodon)",
         "9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md",
-        "letzter erfolgreicher Post vor 0.2 Tag(en)"
+        "letzter erfolgreicher Post vor 1.2 Tag(en)"
       ],
       "sources": [
         "data/social/state.yaml",
