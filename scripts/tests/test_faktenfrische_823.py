@@ -491,11 +491,14 @@ class Faktenfrische823MetaTests(unittest.TestCase):
         except FileNotFoundError:
             self.skipTest('Queue-Datei nicht vorhanden')
         kerne = {re.sub(r'^\d{4}-\d{2}-\d{2}-', '', s) for s in (SAISON, DNS)}
-        for eintrag in queue.get('offen', []):
+        # Siehe test_faktenfrische_763: `offen` ist der Fälligkeits-/GEO-
+        # Report, nicht die Liste der Fachbefunde. Ein fälliger Artikel ist
+        # kein offener Befund (F4 ≠ F1, #1072).
+        for eintrag in queue.get('fachbefunde', []):
             slug = eintrag.get('slug') or ''
             kern = re.sub(r'^\d{4}-\d{2}-\d{2}-', '', slug)
             self.assertNotIn(kern, kerne,
-                             f'Queue meldet offene Befunde für {slug}')
+                             f'Queue meldet offene Fachbefunde für {slug}')
 
     def test_systemprompt_prueft_die_823_befundklassen(self):
         prompt = faktenfrische.SYSTEM_PROMPT.lower()
