@@ -1,6 +1,7 @@
 # Wartung · Veröffentlichung · Vorgang WF-829B (#922) — automatische Selbstheilung, 07.11.2026
 
 **Vorgang:** WF-829B · **Issue:** [#922](https://github.com/frank-hartung/franksfinanzcheck-blog/issues/922) (weiterhin **OFFEN**)
+**Pull Request:** [#1118](https://github.com/frank-hartung/franksfinanzcheck-blog/pull/1118) · Branch `arena/0ec4adf8-franksfinanzcheck-blog` → `main` · **nicht gemergt**
 **Auftrag:** „Bitte dauerhaft auf Highend-Level einer Profi-Agentur beheben mit automatischer Selbstheilung."
 **Stand der Messungen:** 07.11.2026, 09:50–10:05 UTC · alle Werte am echten Baum, am echten Environment und am echten Artefakt gemessen
 **Vorberichte:** `…-2026-10-29.md` · `…-2026-10-30.md` · `…-2026-11-01.md` · `…-2026-11-03.md` · `…-SIEGEL-DAUERHEILUNG-2026-11-04.md`
@@ -192,6 +193,8 @@ npm run worker:selbstheilung:pruefen      # rein lesend
 | `package.json` | 4 neue Skripte; `--selftest`, `--wache` und 38 Tests in `test:sicherheit` |
 | `docs/SICHERHEIT-BETRIEB-RUNBOOK.md` | § A4b: Auslöser, vier Stufen, Exit-Tabelle, Beleg, Wache, Grenzen, Inhaber-Schritte |
 | `WARTUNG-…-2026-11-07.md` | dieser Bericht |
+
+**PR-Checks (07.11.2026, 10:10 UTC):** Der neue Job „Verträge, Eichprobe und Verdrahtung (offline)" ist **pass** (7 s), ebenso „Integritäts-Siegel", „Quellseite", „Regelwerk, Register & Produktionswache", „syntax", „Abhängigkeiten", „CodeQL (javascript)", ReDoS-/URL-/Klartext-Wachen und „YMYL-Siegelprüfung". Der Live-Heiljob ist auf PRs planmäßig `skipping` (nur `main`, Termin oder Ereignis). Langläufer (Playwright, `gate`, `regression`, CodeQL python) waren beim letzten Abruf noch `pending`.
 
 **Nicht angefasst:** `worker_environment_guard.py`, `worker_environment_einrichten.py`, `worker-deploy.yml`, `data/integrity_lock.json`, alle 55 signierten Kerndateien. Der harte Stopp steht unverändert vor jedem Secret-Zugriff.
 
