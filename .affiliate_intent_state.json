@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-07 10:50:07 UTC",
+ "generated_at": "2026-11-08 11:02:07 UTC",
  "exit_code": 0,
  "modus": "FIX",
  "checked_articles": 116,
- "checked_links": 271,
+ "checked_links": 270,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -154,17 +154,6 @@
    "code": "IW2",
    "slug": "2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
    "line": 184,
-   "route": "allgemein",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
-   "slug": "2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-   "line": 197,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
