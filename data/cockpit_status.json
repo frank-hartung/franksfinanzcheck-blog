@@ -1,13 +1,13 @@
 {
-  "generated": "2026-11-07T23:36:05Z",
+  "generated": "2026-11-08T23:38:00Z",
   "overall": "rot",
   "buckets": {
     "Content-Pipeline": {
       "level": "gelb",
       "lines": [
-        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 5/6 bereit – Nachschub nötig",
+        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve ungeprüft: 🛑 Zertifikat ist veraltet (57.4 h > 36 h) – kein Nachweis für den aktuellen Pool. Ursache: reserve_readiness.py lief nicht (API-/Hugo-Fehler?) oder der Push ging verloren.",
         "lesbarkeit: 2026-10-26-gastarife-vergleichen-vor-dem-herbst/index.md (Entwurf) – Flesch 51.5 < Publish-Schwelle 60",
-        "Artikel-Reserve knapp: 5/6 bereit – Nachschub nötig"
+        "Artikel-Reserve ungeprüft: 🛑 Zertifikat ist veraltet (57.4 h > 36 h) – kein Nachweis für den aktuellen Pool. Ursache: reserve_readiness.py lief nicht (API-/Hugo-Fehler?) oder der Push ging verloren."
       ],
       "sources": [
         "data/governance_status.json",
@@ -56,7 +56,7 @@
       "lines": [
         "1/10 Kanäle live (Mastodon)",
         "9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md",
-        "letzter erfolgreicher Post vor 1.2 Tag(en)"
+        "letzter erfolgreicher Post vor 0.0 Tag(en)"
       ],
       "sources": [
         "data/social/state.yaml",
@@ -69,7 +69,7 @@
       "level": "rot",
       "lines": [
         "noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)",
-        "5 Artikel in der Warteschlange, ältester 87 Tag(e) alt"
+        "5 Artikel in der Warteschlange, ältester 88 Tag(e) alt"
       ],
       "sources": [
         "data/newsletter_journal.jsonl",
