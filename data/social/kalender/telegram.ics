@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:telegram:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzich
  t:nutzen:2026-11-14@franksfinanzcheck.de
-DTSTAMP:20261108T182421Z
+DTSTAMP:20261108T225709Z
 DTSTART:20261114T060000Z
 DTEND:20261114T061500Z
 SUMMARY:Telegram (Kanal): Frugalismus Familie: Clever sparen ohne Verz
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-28-flugvergleich-im-winter-so-findest-du-echte-bi
  lligfluege:nutzen:2026-11-15@franksfinanzcheck.de
-DTSTAMP:20261108T182421Z
+DTSTAMP:20261108T225709Z
 DTSTART:20261115T060000Z
 DTEND:20261115T061500Z
 SUMMARY:Telegram (Kanal): Flugvergleich im Winter: So findest du echte
@@ -38,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-u
  pdate-2026:nutzen:2026-11-21@franksfinanzcheck.de
-DTSTAMP:20261108T182421Z
+DTSTAMP:20261108T225709Z
 DTSTART:20261121T060000Z
 DTEND:20261121T061500Z
 SUMMARY:Telegram (Kanal): Dein Haus sicher schützen: Das neue Vorsorge
@@ -53,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-12-energieausweis-was-das-dokument-fuer-deine-fix
  kosten:nutzen:2026-11-22@franksfinanzcheck.de
-DTSTAMP:20261108T182421Z
+DTSTAMP:20261108T225709Z
 DTSTART:20261122T060000Z
 DTEND:20261122T061500Z
 SUMMARY:Telegram (Kanal): Energieausweis: Was er für deine Fixkosten b

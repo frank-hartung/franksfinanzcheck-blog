@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 08.11.2026 19:24 (Europe/Berlin)  
+> Automatisch aktualisiert: 08.11.2026 23:57 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -13,17 +13,14 @@
 ## Kommende Beiträge
 
 ### Mo, 09. November 2026
-- **07:30** ⏳ Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht — _zahl_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/
+- **07:30** ⏳ DNS-Server wechseln: Datenschutz, Filter und Einrichtung — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/
 - **11:30** ⏳ Preisgarantie Gas: Was bei Preiserhöhung hilft — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/
 ### Mi, 11. November 2026
-- **07:30** ⏳ DNS-Server wechseln: Datenschutz, Filter und Einrichtung — _zahl_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/
-- **11:30** ⏳ Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen — _zahl_ · Evergreen  
+- **07:30** ⏳ Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/
-### Fr, 13. November 2026
-- **07:30** ⏳ WLAN verbessern: So bringst du stabilen Speed in jede Ecke — _zahl_ · Evergreen  
+- **11:30** ⏳ WLAN verbessern: So bringst du stabilen Speed in jede Ecke — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/
 ### Mo, 16. November 2026
 - **07:30** ⏳ Wohngebäudeversicherung Vergleich: Worauf du achten musst — _zahl_ · Evergreen  
@@ -39,6 +36,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 08.11.2026 23:26 · Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht → https://mastodon.social/@FranksFinanzcheck/117583170393481412
 - ✅ 06.11.2026 20:58 · Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar → https://mastodon.social/@FranksFinanzcheck/117571265279215472
 - ✅ 06.11.2026 14:01 · Energieausweis: Was er für deine Fixkosten bedeutet → https://mastodon.social/@FranksFinanzcheck/117569625233274475
 - ✅ 04.11.2026 21:27 · Mietwagen ohne Kautionsfallen: So sparst du im Urlaub → https://mastodon.social/@FranksFinanzcheck/117560053046296367
@@ -48,7 +46,6 @@
 - ✅ 03.11.2026 00:08 · DSL-Vergleich: So findest du den günstigsten Internettarif → https://mastodon.social/@FranksFinanzcheck/117549362262666799
 - ✅ 02.11.2026 14:38 · Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 → https://mastodon.social/@FranksFinanzcheck/117547119746092264
 - ✅ 31.10.2026 11:58 · Kostenloses Girokonto: Ein Konto ohne Gebühren finden → https://mastodon.social/@FranksFinanzcheck/117535167605047830
-- ✅ 31.10.2026 00:01 · Flugvergleich im Winter: So findest du echte Billigflüge → https://mastodon.social/@FranksFinanzcheck/117532348748029850
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

@@ -1,5 +1,5 @@
 version: 1
-generated_at: '2026-11-08T23:26:30.151578+01:00'
+generated_at: '2026-11-08T23:57:07.776479+01:00'
 horizon_days: 14
 timezone: Europe/Berlin
 items:
@@ -668,6 +668,18 @@ items:
   attempts: 1
   reason: ''
   recovered_at: '2026-11-08T23:26:30.151578+01:00'
+- id: mastodon:2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet:zahl:2026-11-09
+  channel: mastodon
+  slug: 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet
+  angle: zahl
+  kind: evergreen
+  pillar: internet-dsl
+  date: '2026-11-09'
+  time: 07:30
+  scheduled_at: '2026-11-09T07:30:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
 - id: linkedin:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht:nutzen:2026-11-09
   channel: linkedin
   slug: 2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht
@@ -944,12 +956,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: mastodon:2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet:zahl:2026-11-11
+- id: mastodon:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen:zahl:2026-11-11
   channel: mastodon
-  slug: 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet
+  slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
   angle: zahl
   kind: evergreen
-  pillar: internet-dsl
+  pillar: versicherungen
   date: '2026-11-11'
   time: 07:30
   scheduled_at: '2026-11-11T07:30:00+01:00'
@@ -1016,12 +1028,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: mastodon:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen:zahl:2026-11-11
+- id: mastodon:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke:zahl:2026-11-11
   channel: mastodon
-  slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
+  slug: 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke
   angle: zahl
   kind: evergreen
-  pillar: versicherungen
+  pillar: internet-dsl
   date: '2026-11-11'
   time: '11:30'
   scheduled_at: '2026-11-11T11:30:00+01:00'
@@ -1232,18 +1244,6 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: mastodon:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke:zahl:2026-11-13
-  channel: mastodon
-  slug: 2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke
-  angle: zahl
-  kind: evergreen
-  pillar: internet-dsl
-  date: '2026-11-13'
-  time: 07:30
-  scheduled_at: '2026-11-13T07:30:00+01:00'
-  status: planned
-  attempts: 0
-  reason: ''
 - id: linkedin:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet:nutzen:2026-11-13
   channel: linkedin
   slug: 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
@@ -1301,6 +1301,18 @@ items:
   date: '2026-11-13'
   time: 09:45
   scheduled_at: '2026-11-13T09:45:00+01:00'
+  status: planned
+  attempts: 0
+  reason: ''
+- id: pinterest:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026:nutzen:2026-11-13
+  channel: pinterest
+  slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  angle: nutzen
+  kind: launch
+  pillar: strom-sparen
+  date: '2026-11-13'
+  time: '10:15'
+  scheduled_at: '2026-11-13T10:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
@@ -1436,12 +1448,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: pinterest:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:nutzen:2026-11-14
+- id: pinterest:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:nutzen:2026-11-14
   channel: pinterest
-  slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
+  slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
   angle: nutzen
   kind: launch
-  pillar: strom-sparen
+  pillar: internet-dsl
   date: '2026-11-14'
   time: '10:15'
   scheduled_at: '2026-11-14T10:15:00+01:00'
@@ -1594,12 +1606,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: pinterest:2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan:nutzen:2026-11-15
+- id: pinterest:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:nutzen:2026-11-15
   channel: pinterest
-  slug: 2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan
+  slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
   angle: nutzen
   kind: launch
-  pillar: frugalismus
+  pillar: strom-sparen
   date: '2026-11-15'
   time: '10:15'
   scheduled_at: '2026-11-15T10:15:00+01:00'
@@ -1882,12 +1894,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: pinterest:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026:nutzen:2026-11-17
+- id: pinterest:2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan:nutzen:2026-11-17
   channel: pinterest
-  slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  slug: 2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan
   angle: nutzen
   kind: launch
-  pillar: strom-sparen
+  pillar: frugalismus
   date: '2026-11-17'
   time: '10:15'
   scheduled_at: '2026-11-17T10:15:00+01:00'
@@ -2184,12 +2196,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: pinterest:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:nutzen:2026-11-19
+- id: pinterest:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden:nutzen:2026-11-19
   channel: pinterest
-  slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
+  slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
   angle: nutzen
   kind: launch
-  pillar: internet-dsl
+  pillar: strom-sparen
   date: '2026-11-19'
   time: '10:15'
   scheduled_at: '2026-11-19T10:15:00+01:00'
@@ -2472,12 +2484,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: pinterest:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden:nutzen:2026-11-21
+- id: pinterest:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:nutzen:2026-11-21
   channel: pinterest
-  slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
   angle: nutzen
   kind: launch
-  pillar: strom-sparen
+  pillar: konto-karten
   date: '2026-11-21'
   time: '10:15'
   scheduled_at: '2026-11-21T10:15:00+01:00'
@@ -2616,12 +2628,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: pinterest:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:nutzen:2026-11-22
+- id: pinterest:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:nutzen:2026-11-22
   channel: pinterest
-  slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
   angle: nutzen
   kind: launch
-  pillar: konto-karten
+  pillar: internet-dsl
   date: '2026-11-22'
   time: '10:15'
   scheduled_at: '2026-11-22T10:15:00+01:00'
