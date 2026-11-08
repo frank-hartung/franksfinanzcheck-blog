@@ -21,7 +21,14 @@ import unittest
 ROOT = Path(__file__).resolve().parents[2]
 HUGO = os.environ.get("HUGO_BIN", "hugo")
 
-TEILVORLAGEN = ("ki_provenienz.html", "schema_article.html", "article_dates.html", "cover.html")
+# Die Fixtures bauen mit den ECHTEN Vorlagen. Wird eine Vorlage in einen
+# Helfer ausgelagert (07.11.2026: `_funcs/ki_modalitaeten.html`, Single Source
+# of Truth für Text/Bild/Ton), muss der Helfer mit – sonst ist der Fehler kein
+# Render-Befund, sondern ein fehlender Baustein im Prüfstand. Genau das war der
+# rote Deploy vom 08.11.2026 (#1129): `partial "_funcs/ki_modalitaeten.html"
+# not found`, und der Lauf stand VOR der Veröffentlichung.
+TEILVORLAGEN = ("ki_provenienz.html", "schema_article.html", "article_dates.html",
+                "cover.html", "_funcs/ki_modalitaeten.html")
 
 
 def jsonld(html: str) -> dict:

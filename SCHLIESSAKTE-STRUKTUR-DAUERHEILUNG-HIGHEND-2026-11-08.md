@@ -274,3 +274,38 @@ weil niemand die Aufrufer mehr ausführt, bis der Scheduler es tut. Was das
 verhindert, ist nicht mehr Sorgfalt, sondern ein **Selbsttest des Werkzeugs im
 Workflow** (`--selftest`, `--vertrag`) *vor* der Heilung – und ein Vertrag, der
 die Zahl der Schreiber prüft. Beides steht jetzt im Lauf.
+
+## 5. Der rote Deploy (#1129) – ein Prüfstand ohne einen Baustein
+
+Der Deploy auf `main` war seit `d0828dc` rot: Schritt „KI-Transparenz – Text,
+Bild und Provenienz testen“, Job `Auslieferungs-Siegel` als Folge. Die Logs
+sind aus der Sandbox nicht abrufbar (results-receiver gesperrt) – also wurde
+der Befund **nachgebaut** statt geraten: Hugo 0.168.0 extended aus dem
+PyPI-Paket `hugo` installiert (dieselbe Zweitquelle, die
+`.github/actions/install-hugo` benutzt), echter Build, dann derselbe Befehl wie
+im Workflow.
+
+**Ergebnis (rot, reproduziert):**
+
+```
+ERROR error building site: render: … partial "_funcs/ki_modalitaeten.html" not found
+```
+
+`test_ki_provenienz_render` baut ein Mini-Site mit den **echten** Vorlagen –
+aber seine Liste `TEILVORLAGEN` nannte nur vier. Der Umbau vom 07.11.2026 hatte
+die Modalitäten-Logik in den Helfer `_funcs/ki_modalitaeten.html` ausgelagert
+(Single Source of Truth für Text/Bild/Ton, Verbraucher: `ki_provenienz.html`
+und der Feed). Der Prüfstand kannte den Helfer nicht – und weil Hugo fehlte,
+war der Test **lokal übersprungen** (`skipUnless(hugo)`) und fiel erst im
+Deploy auf. Ein übersprungener Test ist kein grüner.
+
+**Heilung:** Der Helfer steht jetzt in der Liste (mit Begründung im Test).
+Anschließend lief die Suite zum ersten Mal hier **vollständig mit Hugo**:
+`Ran 5676 tests … OK (skipped=6)` – inklusive der Render-Verträge, die ohne
+Hugo nie gelaufen waren.
+
+**Nebenbefund, mitbehoben:** Die Notbremse des `regression`-Jobs stand bei 30
+Minuten, während zwei volle Suiten allein 2 × 14m29s brauchen (gemessen). Lauf
+`42504141712` wurde bei 30m0s als `cancelled` abgeschnitten – ein Gate, das
+durch Rechenzeit rot wird, misst nicht den Code. Grenze jetzt 45 Minuten, mit
+Messung und Begründung im Workflow.

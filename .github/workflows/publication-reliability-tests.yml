@@ -46,15 +46,17 @@ permissions:
 jobs:
   regression:
     runs-on: ubuntu-24.04
-    # 01.11.2026: 20 -> 30 Minuten. Die Suite läuft in diesem Job zweimal
+    # 08.11.2026: 30 -> 45 Minuten. Die Suite läuft in diesem Job ZWEIMAL
     # (Code-Regression und Uhr-Probe an fremden Kalendertagen). Am aufgenommenen
-    # Stand brauchten die beiden Schritte 8m33s und 8m28s; zusammen mit Build,
-    # Reserve-Snapshot und KI-Probe lag der Lauf über 20 Minuten und die
-    # KI-Probe wurde mitten im Schritt abgeschnitten (Lauf 41335261721,
-    # Schritt 11 "cancelled"). Die Grenze ist eine Notbremse gegen Hänger, keine
-    # Messung – die Prüfungen selbst bleiben unverändert. Wer sie wieder senkt,
-    # muss die Schrittdauern im letzten grünen Lauf nachweisen.
-    timeout-minutes: 30
+    # Stand brauchten die beiden Schritte 8m33s und 8m28s; seitdem ist die Suite
+    # um rund 230 Tests gewachsen und braucht lokal gemessen 14m29s je Lauf
+    # (5676 Tests, echter Hugo-Build, Hugo 0.168.0). Zwei solche Läufe plus
+    # Build, Reserve-Snapshot und KI-Probe sprengen 30 Minuten allein durch
+    # Rechenzeit – Lauf 42504141712 wurde bei 30m0s abgeschnitten, obwohl der
+    # Code-Regression-Schritt durch war. Die Grenze ist eine Notbremse gegen
+    # Hänger, keine Messung; die Prüfungen selbst bleiben unverändert. Wer sie
+    # wieder senkt, muss die Schrittdauern im letzten grünen Lauf nachweisen.
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
