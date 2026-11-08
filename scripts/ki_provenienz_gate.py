@@ -310,11 +310,11 @@ def regel_m5(bau: Path, root: Path):
         if bau.is_dir():
             funde.append(_fund("M5", f"kein Feed unter {pfad} – Verbreitungsweg nicht "
                                      "prüfbar"))
-        return funde, 0
+        return funde, 0, []
     try:
         items = kp.feed_items(pfad)
     except kp.WerkzeugFehler as exc:
-        return [_fund("M5", str(exc))], 0
+        return [_fund("M5", str(exc))], 0, []
 
     if items and not kp.feed_kanal_angabe(pfad):
         funde.append(_fund("M5", "der Feed trägt auf Kanal-Ebene kein "
@@ -322,10 +322,17 @@ def regel_m5(bau: Path, root: Path):
 
     seiten_by_slug = {s.slug: s for s in kp.seiten(root) if not s.entwurf}
     geprueft = 0
+    ohne_seite: list[str] = []
     for item in items:
         seite = seiten_by_slug.get(item["slug"])
         if seite is None:
-            continue                      # Item ohne Artikel im Bestand (z. B. Alias)
+            # Kein stilles Überspringen: Ein Feed-Item, das keine Seite im
+            # Bestand hat, ist eine Lücke in der Messung (M5 wäre für dieses
+            # Item blind). Es wird GEZÄHLT und benannt, nicht verschluckt –
+            # Befund vom 08.11.2026: In CI waren 49 von 50 Items gemappt, und
+            # niemand konnte sehen, welches fehlte.
+            ohne_seite.append(item["slug"])
+            continue
         geprueft += 1
         gebaut = bau / seite.basis / "index.html" if seite.basis else bau / "index.html"
         erwartet: tuple[str, ...] = ()
@@ -350,7 +357,7 @@ def regel_m5(bau: Path, root: Path):
         if seite.quellentyp and not item["media_credit"]:
             funde.append(_fund("M5", f"{item['slug']}: IPTC-Erzeugungsart belegt, aber "
                                      "das Feed-Item trägt kein media:credit"))
-    return funde, geprueft
+    return funde, geprueft, ohne_seite
 
 
 def regel_m6(root: Path):
@@ -437,8 +444,9 @@ def pruefen(root: Path = ROOT, bau: Path | None = None, *, nur_quelle: bool = Fa
     funde += regel_m2(root)
     m3, m3_blind = regel_m3(root, werkzeug_blind=bool(fehlende))
     funde += m3
+    feed_ohne_seite: list[str] = []
     if not nur_quelle:
-        m5, feed_items = regel_m5(bau, root)
+        m5, feed_items, feed_ohne_seite = regel_m5(bau, root)
         funde += m5
     funde += regel_m6(root)
     funde += regel_m7(root)
@@ -448,6 +456,7 @@ def pruefen(root: Path = ROOT, bau: Path | None = None, *, nur_quelle: bool = Fa
         "seiten_live": live,
         "seiten_geprueft": geprueft,
         "feed_items_geprueft": feed_items,
+        "feed_items_ohne_seite": feed_ohne_seite,
         "abschnitte": sorted({s.abschnitt for s in kp.seiten(root)}),
         "ki_originale": len(kp.ki_originale(root)),
         "ungeklaert": len(kp.ungeklaert(root)),
@@ -732,6 +741,8 @@ def selbsttest() -> int:
             fehler.append("nur ein Abschnitt gedeckt – pillar/ wäre wieder blind")
         if kenn["feed_items_geprueft"] != 2:
             fehler.append(f"{kenn['feed_items_geprueft']} Feed-Items geprüft statt 2")
+        if kenn["feed_items_ohne_seite"]:
+            fehler.append(f"Feed-Items ohne Seite: {kenn['feed_items_ohne_seite']}")
 
         # 3) Deckung: pillar-Seite mit falschem scope fällt auf
         datei = bau / "pillar" / "thema" / "index.html"

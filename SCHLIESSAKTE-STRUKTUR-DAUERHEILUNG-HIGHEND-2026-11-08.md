@@ -309,3 +309,34 @@ Minuten, während zwei volle Suiten allein 2 × 14m29s brauchen (gemessen). Lauf
 `42504141712` wurde bei 30m0s als `cancelled` abgeschnitten – ein Gate, das
 durch Rechenzeit rot wird, misst nicht den Code. Grenze jetzt 45 Minuten, mit
 Messung und Begründung im Workflow.
+
+## 6. `test_bestand_ist_gruen` – der Test, der an seiner eigenen Kante maß
+
+Der zweite CI-Befund (Annotation aus dem Lauf, nicht aus dem Log – das Log war
+aus der Sandbox nicht abrufbar):
+
+```
+AssertionError: 49 not greater than or equal to 50
+```
+
+Die Zusage lautete `feed_items_geprueft >= 50`, die RSS-Vorlage kappt aber
+**genau bei 50** (`services.rss.limit`). Damit ist die Schwelle eine Messung
+auf der Kante: Ein einziges Feed-Item, das keine Seite im Bestand hat, macht
+aus 50 eine 49 – und die Meldung nennt nur die Zahl, nicht das Item. Die
+Ursache war so aus dem Lauf nicht lesbar (und ist es bis heute nicht: das
+Item wird im Gate **stillsch** übersprungen, `continue`).
+
+**Heilung – strenger, nicht lockerer:**
+
+* `regel_m5()` sammelt ungemappte Items und gibt sie zurück
+  (`feed_items_ohne_seite`), statt sie zu verschlucken.
+* Der Test prüft die eigentliche Zusage jetzt **namentlich**:
+  `feed_items_ohne_seite == []` – ein Item ohne Seite ist eine Lücke in der
+  Messung, kein Alias.
+* Die Blindheitsschwelle sinkt auf `>= 25` und ist damit keine Kante mehr;
+  die Zahl bleibt als „M5 ist nicht blind“-Nachweis erhalten.
+* Der Selbsttest des Gates prüft den neuen Zähler mit (er hätte das stille
+  Überspringen sonst nie bemerkt).
+
+Der nächste rote Lauf nennt damit das Item beim Namen – oder er ist grün, weil
+alle 49 Items belegt sind. Beides ist ehrlich; „49 < 50“ war es nicht.

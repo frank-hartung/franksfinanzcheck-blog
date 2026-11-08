@@ -122,7 +122,20 @@ class DeckungTest(unittest.TestCase):
         self.assertEqual([f["text"] for f in funde], [])
         self.assertEqual(geprueft, kenn["seiten_live"],
                          "geprüfte Seiten ≠ ausgelieferte Seiten")
-        self.assertGreaterEqual(kenn["feed_items_geprueft"], 50)
+        # WARUM HIER KEINE 50 MEHR STEHT (Befund 08.11.2026, CI):
+        # Die RSS-Vorlage kappt bei `services.rss.limit` = 50. Eine Schwelle
+        # „≥ 50" ist damit eine Messung auf der Kante: Sobald EIN Item nicht
+        # auf eine Seite zeigt (oder ein Artikel weniger ausgeliefert wird),
+        # steht dort 49 – und der Test sagt nur „49 < 50", nicht WELCHES Item
+        # fehlt. Genau so war der Job rot, ohne dass jemand die Ursache sehen
+        # konnte. Die Blindheitsschwelle ist jetzt deutlich unter der Kappung,
+        # und die eigentliche Zusage wird PRÄZISE geprüft: Jedes Item muss eine
+        # Seite im Bestand haben (namentlich, nicht als Zahl).
+        self.assertGreaterEqual(kenn["feed_items_geprueft"], 25,
+                                f"nur {kenn['feed_items_geprueft']} Feed-Items – "
+                                "M5 wäre fast blind")
+        self.assertEqual(kenn["feed_items_ohne_seite"], [],
+                         "Feed-Items ohne Seite im Bestand (M5 wäre für sie blind)")
 
 
 class KanalquelleTest(unittest.TestCase):
