@@ -1,5 +1,5 @@
 version: 1
-generated_at: '2026-11-08T12:59:28.322978+01:00'
+generated_at: '2026-11-08T19:24:18.582431+01:00'
 horizon_days: 14
 timezone: Europe/Berlin
 items:
@@ -655,90 +655,6 @@ items:
   reason: 'Mo/Mi/Fr-Kadenz: Sendetermin Sa 07.11.2026 fiel auf keinen Publikationstag;
     seit Umstellung vom 06.11.2026 (nur Mo/Mi/Fr) stellt der Plan-Roll die Artikel
     automatisch auf den nächsten Publikationstag ein.'
-- id: x:2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen:nutzen:2026-11-08
-  channel: x
-  slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
-  angle: nutzen
-  kind: launch
-  pillar: mietwagen
-  date: '2026-11-08'
-  time: '13:15'
-  scheduled_at: '2026-11-08T13:15:00+01:00'
-  status: planned
-  attempts: 0
-  reason: ''
-- id: reddit:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet:nutzen:2026-11-08
-  channel: reddit
-  slug: 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
-  angle: nutzen
-  kind: launch
-  pillar: versicherungen
-  date: '2026-11-08'
-  time: '14:15'
-  scheduled_at: '2026-11-08T14:15:00+01:00'
-  status: planned
-  attempts: 0
-  reason: ''
-- id: facebook:2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege:nutzen:2026-11-08
-  channel: facebook
-  slug: 2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege
-  angle: nutzen
-  kind: launch
-  pillar: mietwagen
-  date: '2026-11-08'
-  time: '15:15'
-  scheduled_at: '2026-11-08T15:15:00+01:00'
-  status: planned
-  attempts: 0
-  reason: ''
-- id: threads:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht:nutzen:2026-11-08
-  channel: threads
-  slug: 2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht
-  angle: nutzen
-  kind: launch
-  pillar: frugalismus
-  date: '2026-11-08'
-  time: '16:15'
-  scheduled_at: '2026-11-08T16:15:00+01:00'
-  status: planned
-  attempts: 0
-  reason: ''
-- id: telegram:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet:nutzen:2026-11-08
-  channel: telegram
-  slug: 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
-  angle: nutzen
-  kind: launch
-  pillar: versicherungen
-  date: '2026-11-08'
-  time: '18:00'
-  scheduled_at: '2026-11-08T18:00:00+01:00'
-  status: planned
-  attempts: 0
-  reason: ''
-- id: bluesky:2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen:nutzen:2026-11-08
-  channel: bluesky
-  slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
-  angle: nutzen
-  kind: launch
-  pillar: mietwagen
-  date: '2026-11-08'
-  time: '18:15'
-  scheduled_at: '2026-11-08T18:15:00+01:00'
-  status: planned
-  attempts: 0
-  reason: ''
-- id: instagram:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026:nutzen:2026-11-08
-  channel: instagram
-  slug: 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
-  angle: nutzen
-  kind: launch
-  pillar: versicherungen
-  date: '2026-11-08'
-  time: '18:45'
-  scheduled_at: '2026-11-08T18:45:00+01:00'
-  status: planned
-  attempts: 0
-  reason: ''
 - id: x:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht:nutzen:2026-11-08
   channel: x
   slug: 2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht
@@ -748,27 +664,27 @@ items:
   date: '2026-11-08'
   time: '19:15'
   scheduled_at: '2026-11-08T19:15:00+01:00'
-  status: planned
+  status: standby
   attempts: 0
-  reason: ''
-- id: facebook:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026:nutzen:2026-11-08
+  reason: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET fehlen
+- id: facebook:2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege:nutzen:2026-11-08
   channel: facebook
-  slug: 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
+  slug: 2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege
   angle: nutzen
   kind: launch
-  pillar: versicherungen
+  pillar: mietwagen
   date: '2026-11-08'
   time: '19:45'
   scheduled_at: '2026-11-08T19:45:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege:nutzen:2026-11-08
+- id: threads:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht:nutzen:2026-11-08
   channel: threads
-  slug: 2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege
+  slug: 2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht
   angle: nutzen
   kind: launch
-  pillar: mietwagen
+  pillar: frugalismus
   date: '2026-11-08'
   time: '20:30'
   scheduled_at: '2026-11-08T20:30:00+01:00'
@@ -799,12 +715,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: linkedin:2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen:nutzen:2026-11-09
+- id: linkedin:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht:nutzen:2026-11-09
   channel: linkedin
-  slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  slug: 2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht
   angle: nutzen
   kind: launch
-  pillar: mietwagen
+  pillar: frugalismus
   date: '2026-11-09'
   time: 07:45
   scheduled_at: '2026-11-09T07:45:00+01:00'
@@ -847,12 +763,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht:nutzen:2026-11-09
+- id: facebook:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet:nutzen:2026-11-09
   channel: facebook
-  slug: 2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht
+  slug: 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
   angle: nutzen
   kind: launch
-  pillar: frugalismus
+  pillar: versicherungen
   date: '2026-11-09'
   time: 09:45
   scheduled_at: '2026-11-09T09:45:00+01:00'
@@ -895,24 +811,24 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet:nutzen:2026-11-09
+- id: facebook:2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar:nutzen:2026-11-09
   channel: facebook
-  slug: 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
+  slug: 2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar
   angle: nutzen
   kind: launch
-  pillar: versicherungen
+  pillar: strom-sparen
   date: '2026-11-09'
   time: '15:15'
   scheduled_at: '2026-11-09T15:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen:nutzen:2026-11-09
+- id: threads:2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten:nutzen:2026-11-09
   channel: threads
-  slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  slug: 2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten
   angle: nutzen
   kind: launch
-  pillar: mietwagen
+  pillar: strom-sparen
   date: '2026-11-09'
   time: '16:15'
   scheduled_at: '2026-11-09T16:15:00+01:00'
@@ -931,12 +847,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: linkedin:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht:nutzen:2026-11-10
+- id: linkedin:2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege:nutzen:2026-11-10
   channel: linkedin
-  slug: 2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht
+  slug: 2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege
   angle: nutzen
   kind: launch
-  pillar: frugalismus
+  pillar: mietwagen
   date: '2026-11-10'
   time: 07:45
   scheduled_at: '2026-11-10T07:45:00+01:00'
@@ -967,24 +883,24 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet:nutzen:2026-11-10
+- id: threads:2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege:nutzen:2026-11-10
   channel: threads
-  slug: 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
+  slug: 2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege
   angle: nutzen
   kind: launch
-  pillar: versicherungen
+  pillar: mietwagen
   date: '2026-11-10'
   time: 09:15
   scheduled_at: '2026-11-10T09:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen:nutzen:2026-11-10
+- id: facebook:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht:nutzen:2026-11-10
   channel: facebook
-  slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  slug: 2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht
   angle: nutzen
   kind: launch
-  pillar: mietwagen
+  pillar: frugalismus
   date: '2026-11-10'
   time: 09:45
   scheduled_at: '2026-11-10T09:45:00+01:00'
@@ -1003,12 +919,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen:nutzen:2026-11-10
+- id: instagram:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht:nutzen:2026-11-10
   channel: instagram
-  slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  slug: 2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht
   angle: nutzen
   kind: launch
-  pillar: mietwagen
+  pillar: frugalismus
   date: '2026-11-10'
   time: '11:45'
   scheduled_at: '2026-11-10T11:45:00+01:00'
@@ -1039,9 +955,9 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst:nutzen:2026-11-10
+- id: facebook:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026:nutzen:2026-11-10
   channel: facebook
-  slug: 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
+  slug: 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
   angle: nutzen
   kind: launch
   pillar: versicherungen
@@ -1051,12 +967,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten:nutzen:2026-11-10
+- id: threads:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet:nutzen:2026-11-10
   channel: threads
-  slug: 2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten
+  slug: 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
   angle: nutzen
   kind: launch
-  pillar: strom-sparen
+  pillar: versicherungen
   date: '2026-11-10'
   time: '16:15'
   scheduled_at: '2026-11-10T16:15:00+01:00'
@@ -1087,12 +1003,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: linkedin:2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege:nutzen:2026-11-11
+- id: linkedin:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026:nutzen:2026-11-11
   channel: linkedin
-  slug: 2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege
+  slug: 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
   angle: nutzen
   kind: launch
-  pillar: mietwagen
+  pillar: versicherungen
   date: '2026-11-11'
   time: 07:45
   scheduled_at: '2026-11-11T07:45:00+01:00'
@@ -1123,12 +1039,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst:nutzen:2026-11-11
+- id: threads:2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar:nutzen:2026-11-11
   channel: threads
-  slug: 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
+  slug: 2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar
   angle: nutzen
   kind: launch
-  pillar: versicherungen
+  pillar: strom-sparen
   date: '2026-11-11'
   time: 09:15
   scheduled_at: '2026-11-11T09:15:00+01:00'
@@ -1183,24 +1099,24 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-11
+- id: facebook:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst:nutzen:2026-11-11
   channel: facebook
-  slug: 2026-08-10-dsl-wechselbonus-sichern
+  slug: 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
   angle: nutzen
   kind: launch
-  pillar: internet-dsl
+  pillar: versicherungen
   date: '2026-11-11'
   time: '15:15'
   scheduled_at: '2026-11-11T15:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar:nutzen:2026-11-11
+- id: threads:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst:nutzen:2026-11-11
   channel: threads
-  slug: 2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar
+  slug: 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
   angle: nutzen
   kind: launch
-  pillar: strom-sparen
+  pillar: versicherungen
   date: '2026-11-11'
   time: '16:15'
   scheduled_at: '2026-11-11T16:15:00+01:00'
@@ -1219,12 +1135,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: linkedin:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026:nutzen:2026-11-12
+- id: linkedin:2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten:nutzen:2026-11-12
   channel: linkedin
-  slug: 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
+  slug: 2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten
   angle: nutzen
   kind: launch
-  pillar: versicherungen
+  pillar: strom-sparen
   date: '2026-11-12'
   time: 07:45
   scheduled_at: '2026-11-12T07:45:00+01:00'
@@ -1255,24 +1171,24 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen:nutzen:2026-11-12
+- id: threads:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-12
   channel: threads
-  slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
+  slug: 2026-08-10-dsl-wechselbonus-sichern
   angle: nutzen
   kind: launch
-  pillar: versicherungen
+  pillar: internet-dsl
   date: '2026-11-12'
   time: 09:15
   scheduled_at: '2026-11-12T09:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen:nutzen:2026-11-12
+- id: facebook:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:nutzen:2026-11-12
   channel: facebook
-  slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
+  slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
   angle: nutzen
   kind: launch
-  pillar: versicherungen
+  pillar: strom-sparen
   date: '2026-11-12'
   time: 09:45
   scheduled_at: '2026-11-12T09:45:00+01:00'
@@ -1291,12 +1207,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht:nutzen:2026-11-12
+- id: instagram:2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege:nutzen:2026-11-12
   channel: instagram
-  slug: 2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht
+  slug: 2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege
   angle: nutzen
   kind: launch
-  pillar: frugalismus
+  pillar: mietwagen
   date: '2026-11-12'
   time: '11:45'
   scheduled_at: '2026-11-12T11:45:00+01:00'
@@ -1327,24 +1243,24 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar:nutzen:2026-11-12
+- id: facebook:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen:nutzen:2026-11-12
   channel: facebook
-  slug: 2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar
+  slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
   angle: nutzen
   kind: launch
-  pillar: strom-sparen
+  pillar: versicherungen
   date: '2026-11-12'
   time: '15:15'
   scheduled_at: '2026-11-12T15:15:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: threads:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-12
+- id: threads:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen:nutzen:2026-11-12
   channel: threads
-  slug: 2026-08-10-dsl-wechselbonus-sichern
+  slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
   angle: nutzen
   kind: launch
-  pillar: internet-dsl
+  pillar: versicherungen
   date: '2026-11-12'
   time: '16:15'
   scheduled_at: '2026-11-12T16:15:00+01:00'
@@ -1375,12 +1291,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: linkedin:2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten:nutzen:2026-11-13
+- id: linkedin:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet:nutzen:2026-11-13
   channel: linkedin
-  slug: 2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten
+  slug: 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
   angle: nutzen
   kind: launch
-  pillar: strom-sparen
+  pillar: versicherungen
   date: '2026-11-13'
   time: 07:45
   scheduled_at: '2026-11-13T07:45:00+01:00'
@@ -1423,24 +1339,24 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nutzen:2026-11-13
+- id: facebook:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-13
   channel: facebook
-  slug: 2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden
+  slug: 2026-08-10-dsl-wechselbonus-sichern
   angle: nutzen
   kind: launch
-  pillar: konto-karten
+  pillar: internet-dsl
   date: '2026-11-13'
   time: 09:45
   scheduled_at: '2026-11-13T09:45:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege:nutzen:2026-11-13
+- id: instagram:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026:nutzen:2026-11-13
   channel: instagram
-  slug: 2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege
+  slug: 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
   angle: nutzen
   kind: launch
-  pillar: mietwagen
+  pillar: versicherungen
   date: '2026-11-13'
   time: '11:45'
   scheduled_at: '2026-11-13T11:45:00+01:00'
@@ -1471,12 +1387,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026:nutzen:2026-11-13
+- id: facebook:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nutzen:2026-11-13
   channel: facebook
-  slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  slug: 2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden
   angle: nutzen
   kind: launch
-  pillar: strom-sparen
+  pillar: konto-karten
   date: '2026-11-13'
   time: '15:15'
   scheduled_at: '2026-11-13T15:15:00+01:00'
@@ -1507,12 +1423,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: telegram:2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen:nutzen:2026-11-14
+- id: telegram:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht:nutzen:2026-11-14
   channel: telegram
-  slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  slug: 2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht
   angle: nutzen
   kind: launch
-  pillar: mietwagen
+  pillar: frugalismus
   date: '2026-11-14'
   time: 07:00
   scheduled_at: '2026-11-14T07:00:00+01:00'
@@ -1555,12 +1471,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:nutzen:2026-11-14
+- id: facebook:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden:nutzen:2026-11-14
   channel: facebook
-  slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
+  slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
   angle: nutzen
   kind: launch
-  pillar: internet-dsl
+  pillar: strom-sparen
   date: '2026-11-14'
   time: 09:45
   scheduled_at: '2026-11-14T09:45:00+01:00'
@@ -1579,12 +1495,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet:nutzen:2026-11-14
+- id: instagram:2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten:nutzen:2026-11-14
   channel: instagram
-  slug: 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
+  slug: 2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten
   angle: nutzen
   kind: launch
-  pillar: versicherungen
+  pillar: strom-sparen
   date: '2026-11-14'
   time: '11:45'
   scheduled_at: '2026-11-14T11:45:00+01:00'
@@ -1615,12 +1531,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:nutzen:2026-11-14
+- id: facebook:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel:nutzen:2026-11-14
   channel: facebook
-  slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
+  slug: 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
   angle: nutzen
   kind: launch
-  pillar: strom-sparen
+  pillar: internet-dsl
   date: '2026-11-14'
   time: '15:15'
   scheduled_at: '2026-11-14T15:15:00+01:00'
@@ -1665,12 +1581,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: telegram:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht:nutzen:2026-11-15
+- id: telegram:2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege:nutzen:2026-11-15
   channel: telegram
-  slug: 2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht
+  slug: 2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege
   angle: nutzen
   kind: launch
-  pillar: frugalismus
+  pillar: mietwagen
   date: '2026-11-15'
   time: 07:00
   scheduled_at: '2026-11-15T07:00:00+01:00'
@@ -1713,12 +1629,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan:nutzen:2026-11-15
+- id: facebook:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026:nutzen:2026-11-15
   channel: facebook
-  slug: 2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan
+  slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
   angle: nutzen
   kind: launch
-  pillar: frugalismus
+  pillar: strom-sparen
   date: '2026-11-15'
   time: 09:45
   scheduled_at: '2026-11-15T09:45:00+01:00'
@@ -1737,12 +1653,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten:nutzen:2026-11-15
+- id: instagram:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet:nutzen:2026-11-15
   channel: instagram
-  slug: 2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten
+  slug: 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
   angle: nutzen
   kind: launch
-  pillar: strom-sparen
+  pillar: versicherungen
   date: '2026-11-15'
   time: '11:45'
   scheduled_at: '2026-11-15T11:45:00+01:00'
@@ -1773,12 +1689,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:nutzen:2026-11-15
+- id: facebook:2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan:nutzen:2026-11-15
   channel: facebook
-  slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  slug: 2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan
   angle: nutzen
   kind: launch
-  pillar: konto-karten
+  pillar: frugalismus
   date: '2026-11-15'
   time: '15:15'
   scheduled_at: '2026-11-15T15:15:00+01:00'
@@ -1821,12 +1737,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: linkedin:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet:nutzen:2026-11-16
+- id: linkedin:2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar:nutzen:2026-11-16
   channel: linkedin
-  slug: 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
+  slug: 2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar
   angle: nutzen
   kind: launch
-  pillar: versicherungen
+  pillar: strom-sparen
   date: '2026-11-16'
   time: 07:45
   scheduled_at: '2026-11-16T07:45:00+01:00'
@@ -1869,12 +1785,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden:nutzen:2026-11-16
+- id: facebook:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:nutzen:2026-11-16
   channel: facebook
-  slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
   angle: nutzen
   kind: launch
-  pillar: strom-sparen
+  pillar: internet-dsl
   date: '2026-11-16'
   time: 09:45
   scheduled_at: '2026-11-16T09:45:00+01:00'
@@ -1917,12 +1833,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet:nutzen:2026-11-16
+- id: facebook:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden:nutzen:2026-11-16
   channel: facebook
-  slug: 2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet
+  slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
   angle: nutzen
   kind: launch
-  pillar: internet-dsl
+  pillar: strom-sparen
   date: '2026-11-16'
   time: '15:15'
   scheduled_at: '2026-11-16T15:15:00+01:00'
@@ -1953,12 +1869,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: linkedin:2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar:nutzen:2026-11-17
+- id: linkedin:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst:nutzen:2026-11-17
   channel: linkedin
-  slug: 2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar
+  slug: 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
   angle: nutzen
   kind: launch
-  pillar: strom-sparen
+  pillar: versicherungen
   date: '2026-11-17'
   time: 07:45
   scheduled_at: '2026-11-17T07:45:00+01:00'
@@ -2001,9 +1917,9 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:nutzen:2026-11-17
+- id: facebook:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren:nutzen:2026-11-17
   channel: facebook
-  slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
+  slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
   angle: nutzen
   kind: launch
   pillar: konto-karten
@@ -2025,12 +1941,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst:nutzen:2026-11-17
+- id: instagram:2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar:nutzen:2026-11-17
   channel: instagram
-  slug: 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
+  slug: 2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar
   angle: nutzen
   kind: launch
-  pillar: versicherungen
+  pillar: strom-sparen
   date: '2026-11-17'
   time: '11:45'
   scheduled_at: '2026-11-17T11:45:00+01:00'
@@ -2109,12 +2025,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: linkedin:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst:nutzen:2026-11-18
+- id: linkedin:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-18
   channel: linkedin
-  slug: 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
+  slug: 2026-08-10-dsl-wechselbonus-sichern
   angle: nutzen
   kind: launch
-  pillar: versicherungen
+  pillar: internet-dsl
   date: '2026-11-18'
   time: 07:45
   scheduled_at: '2026-11-18T07:45:00+01:00'
@@ -2157,24 +2073,24 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: facebook:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden:nutzen:2026-11-18
+- id: facebook:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:nutzen:2026-11-18
   channel: facebook
-  slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+  slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
   angle: nutzen
   kind: launch
-  pillar: strom-sparen
+  pillar: konto-karten
   date: '2026-11-18'
   time: 09:45
   scheduled_at: '2026-11-18T09:45:00+01:00'
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar:nutzen:2026-11-18
+- id: instagram:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst:nutzen:2026-11-18
   channel: instagram
-  slug: 2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar
+  slug: 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
   angle: nutzen
   kind: launch
-  pillar: strom-sparen
+  pillar: versicherungen
   date: '2026-11-18'
   time: '11:45'
   scheduled_at: '2026-11-18T11:45:00+01:00'
@@ -2255,12 +2171,12 @@ items:
   reason: 'Mo/Mi/Fr-Kadenz: Sendetermin Do 19.11.2026 fiel auf keinen Publikationstag;
     seit Umstellung vom 06.11.2026 (nur Mo/Mi/Fr) stellt der Plan-Roll die Artikel
     automatisch auf den nächsten Publikationstag ein.'
-- id: linkedin:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-19
+- id: linkedin:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen:nutzen:2026-11-19
   channel: linkedin
-  slug: 2026-08-10-dsl-wechselbonus-sichern
+  slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
   angle: nutzen
   kind: launch
-  pillar: internet-dsl
+  pillar: versicherungen
   date: '2026-11-19'
   time: 07:45
   scheduled_at: '2026-11-19T07:45:00+01:00'
@@ -2327,12 +2243,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen:nutzen:2026-11-19
+- id: instagram:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-19
   channel: instagram
-  slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
+  slug: 2026-08-10-dsl-wechselbonus-sichern
   angle: nutzen
   kind: launch
-  pillar: versicherungen
+  pillar: internet-dsl
   date: '2026-11-19'
   time: '11:45'
   scheduled_at: '2026-11-19T11:45:00+01:00'
@@ -2411,12 +2327,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: linkedin:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen:nutzen:2026-11-20
+- id: linkedin:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas:nutzen:2026-11-20
   channel: linkedin
-  slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
+  slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
   angle: nutzen
   kind: launch
-  pillar: versicherungen
+  pillar: strom-sparen
   date: '2026-11-20'
   time: 07:45
   scheduled_at: '2026-11-20T07:45:00+01:00'
@@ -2471,12 +2387,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: instagram:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-20
+- id: instagram:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen:nutzen:2026-11-20
   channel: instagram
-  slug: 2026-08-10-dsl-wechselbonus-sichern
+  slug: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
   angle: nutzen
   kind: launch
-  pillar: internet-dsl
+  pillar: versicherungen
   date: '2026-11-20'
   time: '11:45'
   scheduled_at: '2026-11-20T11:45:00+01:00'
@@ -2543,12 +2459,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: telegram:2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege:nutzen:2026-11-21
+- id: telegram:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026:nutzen:2026-11-21
   channel: telegram
-  slug: 2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege
+  slug: 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
   angle: nutzen
   kind: launch
-  pillar: mietwagen
+  pillar: versicherungen
   date: '2026-11-21'
   time: 07:00
   scheduled_at: '2026-11-21T07:00:00+01:00'
@@ -2687,12 +2603,12 @@ items:
   status: planned
   attempts: 0
   reason: ''
-- id: telegram:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026:nutzen:2026-11-22
+- id: telegram:2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten:nutzen:2026-11-22
   channel: telegram
-  slug: 2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026
+  slug: 2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten
   angle: nutzen
   kind: launch
-  pillar: versicherungen
+  pillar: strom-sparen
   date: '2026-11-22'
   time: 07:00
   scheduled_at: '2026-11-22T07:00:00+01:00'
