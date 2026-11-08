@@ -186,7 +186,22 @@ jobs:
       # vorgestellten Uhr: dieselben Tests, fremdes Datum, gleiches Ergebnis.
       - name: Uhr-Probe – die Suite muss an jedem Kalendertag grün sein
         if: ${{ !cancelled() }}   # Blustradius #676: Daten-Befund schaltet Code-Prüfung nicht aus
-        run: python3 scripts/selftest_clock.py --trap-discover scripts/tests --offset 97
+        run: |
+          # Dieselbe Diagnose wie in der Code-Regression: Der rote Test nennt
+          # seinen Namen (und seine Behauptung) als Annotation, unabhängig
+          # davon, ob jemand an das Log kommt.
+          set +e
+          set -o pipefail
+          python3 scripts/selftest_clock.py --trap-discover scripts/tests --offset 97 \
+            > /tmp/uhr.log 2>&1
+          UHR_RC=$?
+          set -e
+          tail -80 /tmp/uhr.log
+          if [ "$UHR_RC" != "0" ]; then
+            grep -E '^(FAIL|ERROR): ' /tmp/uhr.log | head -5 \
+              | sed -E 's/^[A-Z]+: ([^ (]+).*/::error title=Uhr-Probe::\1/' || true
+            exit "$UHR_RC"
+          fi
       # KI-PROBE (Dauerheilung Content-Engine v2 #138, 08.10.2026): Jeder
       # Selbsttest, den irgendein Workflow aufruft, läuft hier mit Attrappen-
       # Schlüsseln und gesperrtem Netz. Hier fehlen echte Schlüssel – in der
