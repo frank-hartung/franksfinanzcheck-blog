@@ -122,7 +122,22 @@ jobs:
       - name: Code-Regression – Suite und Selbsttests
         if: ${{ !cancelled() }}
         run: |
-          python3 -m unittest discover -s scripts/tests -v
+          # EIN ROTER TEST MUSS SEINEN NAMEN SAGEN (08.11.2026).
+          # „Process completed with exit code 1" ist keine Diagnose: Ohne den
+          # Testnamen beginnt jede Ferndiagnose mit Raten – und wer die Logs
+          # nicht abrufen kann (Sandbox, Aufbewahrungsfrist), kommt gar nicht
+          # an die Ursache. Jeder rote Test wird deshalb als Annotation an den
+          # Lauf gehängt (lesbar über die Check-Runs-API, unabhängig vom Log).
+          set +e
+          python3 -m unittest discover -s scripts/tests -v > /tmp/suite.log 2>&1
+          SUITE_RC=$?
+          set -e
+          tail -120 /tmp/suite.log
+          if [ "$SUITE_RC" != "0" ]; then
+            grep -E '^(FAIL|ERROR): ' /tmp/suite.log | head -10 \
+              | sed -E 's/^[A-Z]+: ([^ (]+).*/::error title=Code-Regression::\1/' || true
+            exit 1
+          fi
           python3 scripts/engine_generate.py --selftest
           python3 scripts/reserve_pool.py --selftest
           python3 scripts/cadence_guard.py --selftest
