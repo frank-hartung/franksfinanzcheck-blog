@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-08T11:06:46Z",
+  "generated_at": "2026-11-08T15:19:32Z",
   "modus": "kandidaten",
-  "commit": "5ed34e1ec7fd7b179844e57c455b4b2179bcefda",
+  "commit": "c3c167e3e65edd3d0a6f90999df7593e46f7762d",
   "kapazitaet": {
     "stichtag": "2026-11-08",
     "basis": "2026-11-08",
@@ -336,7 +336,7 @@
       "checks": []
     },
     "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": {
-      "sha256": "e75c068446d9cc948f437524328649a06f72348bdc3d4db9a8b27bf6d2da8270",
+      "sha256": "97aa34a02986635019a06addbc020f3fc295d6dcfd403d1d6eeccc2a6d9e26c8",
       "urteil": "nicht beweisbar",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -523,7 +523,7 @@
       "checks": []
     },
     "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": {
-      "sha256": "2184196cca57b8f86ad26509a9705dccf871cd2509ab694d17039a12cba3b8ff",
+      "sha256": "5aa8bd31e68a11ddab2a1c572db15bff3efdf50c86c7c2a0e8ced6518730688b",
       "urteil": "nicht beweisbar",
       "risikoklasse": "standard",
       "dimensionen": {

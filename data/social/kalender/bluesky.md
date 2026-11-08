@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Bluesky
 
-> Automatisch aktualisiert: 07.11.2026 23:48 (Europe/Berlin)  
+> Automatisch aktualisiert: 08.11.2026 12:59 (Europe/Berlin)  
 > Profil: https://bsky.app/profile/franksfinanzcheck.de  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `bluesky.ics`
 
@@ -13,9 +13,7 @@
 ## Kommende Beiträge
 
 ### So, 08. November 2026
-- **08:15** ⏳ ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/
-- **12:15** ⏳ Strategisch sparen: So kannst du deine Reisekasse füllen — _nutzen_ · Launch  
+- **18:15** ⏳ Strategisch sparen: So kannst du deine Reisekasse füllen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/
 ### Mo, 09. November 2026
 - **08:15** ⏳ Frugalismus Familie: Clever sparen ohne Verzicht — _nutzen_ · Launch  
@@ -82,6 +80,11 @@
   https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/
 - **12:15** ⏳ Lastschrift und Dauerauftrag: Was du prüfen solltest — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/
+### So, 22. November 2026
+- **08:15** ⏳ Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/
+- **12:15** ⏳ Störung beim Internetanbieter: So sicherst du deine Rechte — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte/
 
 ## Zuletzt veröffentlicht
 
