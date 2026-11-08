@@ -134,8 +134,24 @@ jobs:
           set -e
           tail -120 /tmp/suite.log
           if [ "$SUITE_RC" != "0" ]; then
-            grep -E '^(FAIL|ERROR): ' /tmp/suite.log | head -10 \
-              | sed -E 's/^[A-Z]+: ([^ (]+).*/::error title=Code-Regression::\1/' || true
+            # Name UND Behauptung: Der Name sagt, WER rot ist, der Rumpf sagt,
+            # WARUM. Ohne beides endet jede Ferndiagnose in „nochmal raten".
+            python3 - <<'PYANNO'
+          import re
+          import pathlib
+
+          def ent(text: str) -> str:
+              # GitHub-Annotation: %, Zeilenumbrüche und CR maskieren.
+              return (text.replace('%', '%25').replace('\r', '')
+                          .replace('\n', '%0A'))[:1500]
+
+          log = pathlib.Path('/tmp/suite.log').read_text(errors='ignore')
+          muster = re.compile(r'^(FAIL|ERROR): (\S+) \((.*?)\)\n-+\n(.*?)'
+                              r'(?=\n(?:={20,}|-{20,}|Ran \d+ tests))', re.S | re.M)
+          for art, name, ort, rumpf in list(muster.findall(log))[:10]:
+              print(f"::error title=Code-Regression::{ent(name)} ({ent(ort)})"
+                    f" %0A{ent(rumpf)}")
+          PYANNO
             exit 1
           fi
           python3 scripts/engine_generate.py --selftest
