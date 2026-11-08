@@ -9,7 +9,7 @@
   },
   {
    "kriterium": "Abdeckungsbefund nicht älter als 14 Tage",
-   "messung": "Stand 2026-10-19 (19 Tage alt)",
+   "messung": "Stand 2026-10-19 (20 Tage alt)",
    "naechster_schritt": "Export einlesen (`--import`)",
    "status": "offen",
    "ziel": "laufend"
@@ -279,7 +279,7 @@
   "delta_3_nicht_indexiert": 59,
   "delta_7_indexiert": -22,
   "delta_7_nicht_indexiert": 67,
-  "detail_alter_tage": 12,
+  "detail_alter_tage": 13,
   "detail_fehlend": [
    "Nicht gefunden (404).csv",
    "Gefunden – zurzeit nicht indexiert.csv",
@@ -291,7 +291,7 @@
   "detail_stand": "2026-10-26",
   "detail_urls": 4,
   "detail_vorhanden": 1,
-  "export_alter_tage": 19,
+  "export_alter_tage": 20,
   "gruende": {
    "crawled_not_indexed": 4,
    "discovered_not_indexed": 69,
@@ -359,7 +359,7 @@
    "delta_3_nicht_indexiert": 59,
    "delta_7_indexiert": -22,
    "delta_7_nicht_indexiert": 67,
-   "detail_alter_tage": 12,
+   "detail_alter_tage": 13,
    "detail_fehlend": [
     "Nicht gefunden (404).csv",
     "Gefunden – zurzeit nicht indexiert.csv",
@@ -371,7 +371,7 @@
    "detail_stand": "2026-10-26",
    "detail_urls": 4,
    "detail_vorhanden": 1,
-   "export_alter_tage": 19,
+   "export_alter_tage": 20,
    "gruende": {
     "crawled_not_indexed": 4,
     "discovered_not_indexed": 69,
@@ -449,13 +449,13 @@
   },
   {
    "aufwand": "S",
-   "beleg": "Stand 2026-10-19 · 19 Tage alt",
+   "beleg": "Stand 2026-10-19 · 20 Tage alt",
    "dringlichkeit": "P2",
    "id": "M10",
    "owner": "Mensch",
    "schritt": "Search Console → Indexierung → Seiten → Exportieren, dann `python3 scripts/gsc_abdeckung.py --import <verzeichnis> --audit --schreiben`.",
    "titel": "Neuen Abdeckungs-Export einlesen",
-   "wirkung": "Der Befund steht auf dem Stand von vor 19 Tagen. Zahlen, die älter als vier Wochen sind, taugen nicht als Entscheidungsgrundlage."
+   "wirkung": "Der Befund steht auf dem Stand von vor 20 Tagen. Zahlen, die älter als vier Wochen sind, taugen nicht als Entscheidungsgrundlage."
   },
   {
    "aufwand": "M",
@@ -534,11 +534,11 @@
   "seiten": [
    {
     "grund": "verlinkt",
-    "impressionen": 139,
+    "impressionen": 151,
     "inlinks": 17,
     "lastmod_tage": null,
     "outlinks": 2,
-    "position": 41.58,
+    "position": 42.22,
     "score": 11.0,
     "url": "/pillar/internet-dsl/"
    },
@@ -564,12 +564,12 @@
    },
    {
     "grund": "verlinkt",
-    "impressionen": 21,
+    "impressionen": 22,
     "inlinks": 11,
     "lastmod_tage": null,
     "outlinks": 3,
-    "position": 55.86,
-    "score": 8.0,
+    "position": 57.0,
+    "score": 8.33,
     "url": "/pillar/konto-karten/"
    },
    {
@@ -604,6 +604,26 @@
    },
    {
     "grund": "verlinkt",
+    "impressionen": 13,
+    "inlinks": 9,
+    "lastmod_tage": null,
+    "outlinks": 5,
+    "position": 23.08,
+    "score": 6.03,
+    "url": "/pillar/versicherungen/"
+   },
+   {
+    "grund": "verlinkt",
+    "impressionen": 8,
+    "inlinks": 6,
+    "lastmod_tage": null,
+    "outlinks": 7,
+    "position": 7.25,
+    "score": 5.94,
+    "url": "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/"
+   },
+   {
+    "grund": "verlinkt",
     "impressionen": 10,
     "inlinks": 2,
     "lastmod_tage": null,
@@ -611,26 +631,6 @@
     "position": 5.0,
     "score": 5.83,
     "url": "/pillar/"
-   },
-   {
-    "grund": "verlinkt",
-    "impressionen": 7,
-    "inlinks": 6,
-    "lastmod_tage": null,
-    "outlinks": 7,
-    "position": 6.86,
-    "score": 5.65,
-    "url": "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/"
-   },
-   {
-    "grund": "verlinkt",
-    "impressionen": 12,
-    "inlinks": 9,
-    "lastmod_tage": null,
-    "outlinks": 5,
-    "position": 24.58,
-    "score": 5.54,
-    "url": "/pillar/versicherungen/"
    },
    {
     "grund": "verlinkt",
@@ -764,6 +764,16 @@
    },
    {
     "grund": "verlinkt",
+    "impressionen": 6,
+    "inlinks": 16,
+    "lastmod_tage": null,
+    "outlinks": 5,
+    "position": 23.0,
+    "score": 3.7,
+    "url": "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/"
+   },
+   {
+    "grund": "verlinkt",
     "impressionen": 1,
     "inlinks": 7,
     "lastmod_tage": null,
@@ -791,16 +801,6 @@
     "position": 1.0,
     "score": 3.23,
     "url": "/werkzeuge/balkonkraftwerk-rechner/"
-   },
-   {
-    "grund": "verlinkt",
-    "impressionen": 5,
-    "inlinks": 16,
-    "lastmod_tage": null,
-    "outlinks": 5,
-    "position": 26.4,
-    "score": 3.03,
-    "url": "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/"
    },
    {
     "grund": "verlinkt",
@@ -1623,7 +1623,7 @@
     "url": "/werkzeuge/tarifwechsel-entscheidungsbaum/"
    }
   ],
-  "stand": "2026-11-07",
+  "stand": "2026-11-08",
   "welle1": [
    "/pillar/internet-dsl/",
    "/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/",
@@ -1632,9 +1632,9 @@
    "/impressum/",
    "/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/",
    "/datenschutz/",
-   "/pillar/",
-   "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
    "/pillar/versicherungen/",
+   "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
+   "/pillar/",
    "/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/",
    "/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/",
    "/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/",
@@ -1648,10 +1648,10 @@
    "/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/",
    "/ueber/",
    "/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/",
+   "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/",
    "/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
    "/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/",
    "/werkzeuge/balkonkraftwerk-rechner/",
-   "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/",
    "/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/",
    "/pillar/frugalismus/",
    "/pillar/mietwagen/",
@@ -1674,9 +1674,9 @@
    "https://franksfinanzcheck.de/impressum/",
    "https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/",
    "https://franksfinanzcheck.de/datenschutz/",
-   "https://franksfinanzcheck.de/pillar/",
-   "https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
    "https://franksfinanzcheck.de/pillar/versicherungen/",
+   "https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
+   "https://franksfinanzcheck.de/pillar/",
    "https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/",
    "https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/",
    "https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/",
@@ -1690,10 +1690,10 @@
    "https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/",
    "https://franksfinanzcheck.de/ueber/",
    "https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/",
+   "https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/",
    "https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
    "https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/",
    "https://franksfinanzcheck.de/werkzeuge/balkonkraftwerk-rechner/",
-   "https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/",
    "https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/",
    "https://franksfinanzcheck.de/pillar/frugalismus/",
    "https://franksfinanzcheck.de/pillar/mietwagen/",
@@ -1789,7 +1789,7 @@
   "repo": "content/ (Näherung, kein Build gemessen)"
  },
  "schema": 1,
- "stand": "2026-11-07T11:42:47Z",
+ "stand": "2026-11-08T11:55:01Z",
  "tote_ziele": [],
  "ursachen": [
   {
@@ -2023,7 +2023,7 @@
   {
    "regel": "W8",
    "schwere": "hinweis",
-   "text": "Der Abdeckungsbericht ist 19 Tage alt (Stand 2026-10-19). Die Search Console liefert ihn nur als CSV – ohne neuen Export misst dieser Befund die Vergangenheit."
+   "text": "Der Abdeckungsbericht ist 20 Tage alt (Stand 2026-10-19). Die Search Console liefert ihn nur als CSV – ohne neuen Export misst dieser Befund die Vergangenheit."
   }
  ]
 }
