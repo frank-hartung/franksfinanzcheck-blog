@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-08T12:23:12Z",
+  "generated_at": "2026-11-08T15:19:32Z",
   "modus": "kandidaten",
-  "commit": "41b2f00a3f5cf05db79dd14f3b1ff24a18ee8eef",
+  "commit": "c3c167e3e65edd3d0a6f90999df7593e46f7762d",
   "kapazitaet": {
     "stichtag": "2026-11-08",
     "basis": "2026-11-08",
@@ -350,7 +350,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-22",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
@@ -537,7 +537,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-07",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen": {
