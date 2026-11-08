@@ -1,6 +1,6 @@
 # Befund Abdeckung
 
-## Abdeckung (Search Console, Stand 2026-10-19, 18 Tage alt)
+## Abdeckung (Search Console, Stand 2026-10-19, 20 Tage alt)
 
 **Gesamtbild: 🟢 GRÜN** · Quelle: `google-search-console (Abdeckungsbericht, CSV-Export)` · Gegenprobe: `content/ (Näherung, kein Build gemessen)`
 
@@ -25,7 +25,7 @@
 ### Widersprüche
 
 - ℹ️ **W5** 117 Seiten sind im Index, indexierbar sind 109 – 8 Einträge sind Altlasten (entfernte, weitergeleitete oder abgeschaltete URLs). Sie kosten kein Crawl-Budget mehr, verzerren aber jede Quote.
-- ℹ️ **W8** Der Abdeckungsbericht ist 18 Tage alt (Stand 2026-10-19). Die Search Console liefert ihn nur als CSV – ohne neuen Export misst dieser Befund die Vergangenheit.
+- ℹ️ **W8** Der Abdeckungsbericht ist 20 Tage alt (Stand 2026-10-19). Die Search Console liefert ihn nur als CSV – ohne neuen Export misst dieser Befund die Vergangenheit.
 
 ### Vertrag: noindex-Bestand und Gateways — 🟢 in Ordnung
 
@@ -38,8 +38,7 @@
 
 ### Redaktionelle Verlinkung
 
-- 2 von 84 Inhaltsseiten ohne redaktionellen Inlink, 0 ohne ausgehenden Link, Median 6 ausgehende Links je Seite.
-- Verlinkungsauftrag: 5 Quelle-Ziel-Paare (`--verlinkung --apply`).
+- 0 von 84 Inhaltsseiten ohne redaktionellen Inlink, 0 ohne ausgehenden Link, Median 6 ausgehende Links je Seite.
 
 ### Anfrage-Wellen (M2)
 
@@ -47,16 +46,16 @@
 
 | Score | Seite | Impressionen | Inlinks | Grund |
 |---|---|---|---|---|
-| 11.0 | `/pillar/internet-dsl/` | 128 | 17 | verlinkt |
+| 11.0 | `/pillar/internet-dsl/` | 151 | 17 | verlinkt |
 | 11.0 | `/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/` | 59 | 2 | verlinkt |
 | 9.0 | `/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/` | 24 | 7 | verlinkt |
-| 7.67 | `/pillar/konto-karten/` | 20 | 11 | verlinkt |
+| 8.33 | `/pillar/konto-karten/` | 22 | 11 | verlinkt |
 | 7.55 | `/impressum/` | 20 | 7 | verlinkt |
-| 7.0 | `/posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/` | 0 | 0 | kein redaktioneller Inlink |
-| 7.0 | `/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/` | 0 | 0 | kein redaktioneller Inlink |
+| 6.44 | `/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/` | 9 | 4 | verlinkt |
+| 6.04 | `/datenschutz/` | 15 | 6 | verlinkt |
+| 6.03 | `/pillar/versicherungen/` | 13 | 9 | verlinkt |
+| 5.94 | `/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/` | 8 | 6 | verlinkt |
 | 5.83 | `/pillar/` | 10 | 2 | verlinkt |
-| 5.67 | `/datenschutz/` | 14 | 6 | verlinkt |
-| 5.54 | `/pillar/versicherungen/` | 12 | 9 | verlinkt |
 
 ### Sprünge im Verlauf
 
@@ -69,10 +68,10 @@
 | Kriterium | Ziel | Status | Messung |
 |---|---|---|---|
 | Gate grün (kein Rückschritt, kein Widerspruch) | sofort | ✅ | Gate: gruen |
-| Abdeckungsbefund nicht älter als 14 Tage | laufend | 🛑 | Stand 2026-10-19 (18 Tage alt) |
+| Abdeckungsbefund nicht älter als 14 Tage | laufend | 🛑 | Stand 2026-10-19 (20 Tage alt) |
 | 404er mit Nachfrage triagiert | sofort | 🛑 | 189 ohne Erklärung im Bestand |
 | Indexquote steigt | 14 Tage | ❔ | 26.8 % bei 1 Momentaufnahme(n) |
-| Seiten ohne redaktionellen Inlink | 30 Tage | 🛑 | 2 Seiten |
+| Seiten ohne redaktionellen Inlink | 30 Tage | ✅ | 0 Seiten |
 
 ### Maßnahmen (Auszug)
 
@@ -80,7 +79,7 @@
 |---|---|---|---|
 | M1 | P1 | 404-Detail-Liste einlesen und triagieren | Übersicht: 223 × 404 · erklärbar 34 · offen 189 |
 | M2 | P1 | Crawl-Nachfrage für gefundene, nicht abgerufene Seiten | 69 „Gefunden – zurzeit nicht indexiert“ bei 109 indexierbaren Seiten |
-| M10 | P2 | Neuen Abdeckungs-Export einlesen | Stand 2026-10-19 · 18 Tage alt |
+| M10 | P2 | Neuen Abdeckungs-Export einlesen | Stand 2026-10-19 · 20 Tage alt |
 | M3 | P2 | Redaktions-Queue für „gecrawlt, nicht indexiert“ | 4 × „Gecrawlt – zurzeit nicht indexiert“ |
 | M4 | P2 | Index-Altlasten benennen statt mitzählen | 117 indexiert bei 109 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (4 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (2 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (2 Impr.), /tags/ (1 Impr.), /tags/dns-server-%C3%A4ndern/ (1 Impr.) |
 | M7 | P2 | Sprung im Abdeckungsbericht erklären | Diagramm 2026-10-17: indexiert 138 → 117 |

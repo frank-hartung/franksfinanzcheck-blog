@@ -410,6 +410,25 @@ schritte:
       Preload-Policy und AVIF-Varianten gehören zum finalen Live-Bestand;
       fehlende Varianten sind ein Inhaltsbefund, kein Messwerkzeug-Ausfall.
 
+  - name: Pflichtfeld-Verlust – Selbsttest (Wache muss lauffähig sein)
+    klasse: gate-selbsttest
+    schuetzt: Pflichtfeld-Verlust-Wache – Quelle (aus HEAD, C34-toleriert)
+    grund: >-
+      Ein blind gewordener Rückholer wäre schlimmer als keiner: er würde
+      Pflichtfelder aus einer falschen Quelle einsetzen oder den Body
+      anfassen. Der Selbsttest beweist M4-Pflicht, Bytegleichheit des Bodys,
+      Idempotenz und dass nichts erfunden wird (#1110).
+
+  - name: Pflichtfeld-Verlust-Wache – Quelle (aus HEAD, C34-toleriert)
+    klasse: werkzeug
+    grund: >-
+      Verlustfreie Wiederherstellung aus HEAD, keine Inhaltsentscheid: Was
+      der letzte Commit an M4-Pflichtfeldern trug, wird zurückschrieben,
+      bevor der Content-Bot den Verlust festschreibt (#1110, 0b55fca). Die
+      Freigabe entscheidet das Publish-Gate. Ein Feld, das auch HEAD nicht
+      trug, bleibt Redaktion/Texter und geht als Werkzeugbefund ans Siegel –
+      C34 verbietet, die Live-Site daran einzufrieren.
+
   - name: Gate-Heilungsdiff merken (alle Gates, inkl. Publish-Gate)
     klasse: infra
     grund: Reine Zustandsfeststellung für den Commit-Schritt.

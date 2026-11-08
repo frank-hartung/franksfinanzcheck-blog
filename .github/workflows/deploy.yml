@@ -1068,6 +1068,34 @@ jobs:
       - name: LCP-Manifest aus finalem Live-Bestand erzeugen
         run: python3 scripts/lcp_image_optimizer.py --fix
 
+      # #1110 (06.11.2026): Der Gate-Heilungs-Commit dieses Laufs (Content-Bot,
+      # `0b55fca`) schrieb einen Frontmatter-Block neu und ließ die `kurzantwort`
+      # fallen – der Artikel ging ohne Kurzantwort live (M4). Die Nachlauf-Wache
+      # meldet die Klasse erst NACH der Veröffentlichung und steht nicht im
+      # Deploy-Pfad. Diese Wache schließt sie an der Quelle: Sie steht als
+      # LETZTER Schreiber vor „Gate-Heilungsdiff merken“ und holt jedes M4-
+      # Pflichtfeld, das HEAD trug und ein Schreiber fallen ließ, bytegenau aus
+      # HEAD zurück – bevor der Content-Bot den Verlust festschreibt. Welcher
+      # Schreiber verliert, ist gleichgültig (Klasse statt Einzeltäter).
+      # Selbsttest hart (kaputte Wache = kein Build); Heilung C34-toleriert.
+      - name: Pflichtfeld-Verlust – Selbsttest (Wache muss lauffähig sein)
+        run: python3 scripts/pflichtfeld_verlust_wache.py --selftest
+
+      - name: "Pflichtfeld-Verlust-Wache – Quelle (aus HEAD, C34-toleriert)"
+        run: |
+          set +e
+          python3 scripts/pflichtfeld_verlust_wache.py --fix
+          wache=$?
+          set -e
+          if [ "$wache" -eq 0 ]; then
+            echo "✅ Pflichtfeld-Verlust-Wache grün – kein M4-Pflichtfeld gegenüber HEAD verloren (oder aus HEAD zurückgeholt)."
+          else
+            echo "⚠ Pflichtfeld-Verlust-Wache – Restfunde (Exit $wache): rückholbare Felder aus HEAD geheilt; stand das Feld auch in HEAD nicht, bleibt es Redaktion/Texter (kein Erfinden)."
+            python3 scripts/werkzeugbefund.py --melden "pflichtfeld-verlust-wache" \
+              "Pflichtfeld-Verlust-Wache meldet Restfunde (Exit $wache) – verlorene M4-Pflichtfelder wurden aus HEAD zurückgeholt wo möglich; ein Feld, das auch HEAD nicht trug, bleibt Redaktion/Texter (#1110). C34: die Auslieferung läuft weiter, die Wache friert die Live-Site nicht ein; das Siegel färbt den Restbefund rot." \
+              || true
+          fi
+
       - name: Gate-Heilungsdiff merken (alle Gates, inkl. Publish-Gate)
         id: gate_diff
         run: |

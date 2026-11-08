@@ -1,8 +1,8 @@
 ---
 title: "Warmwasser sparen: Die Rechnung hinter – Warmwasserkosten"
-description: "Warmwasser ist der zweite große Posten im Haushalt und steht selten auf der Rechnung. So findest du deinen Verbrauch und drehst an den richtigen Stellen."
+description: "Warmwasser braucht rund 16 Prozent der Haushaltsenergie. So liest du deinen Anteil auf der Abrechnung ab und drehst an den richtigen Stellen."
 date: 2026-08-26T06:10:00Z
-lastmod: 2026-10-13
+lastmod: 2026-11-07
 draft: false
 tags: ["Heizkosten senken", "Gasrechnung prüfen"]
 categories: ["Ratgeber"]
@@ -10,14 +10,14 @@ pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Warmwasser sparen", "Warmwasserkosten senken", "Heizkostenabrechnung", "Duschkosten", "Warmwasser", "Frugalismus", "Geld sparen"]
 pin_title: "Warmwasser sparen: Die Rechnung hinter dem Hahn"
-pin_description: "*Werbung | Warmwasser ist der zweitgrößte Posten im Haushalt und steht selten auf der Rechnung. So findest du deinen Verbrauch und drehst an den richtigen Stellen. Mehr Spartipps auf FranksFinanzcheck! #warmwasser #heizkosten #sparen"
+pin_description: "*Werbung | Warmwasser braucht rund 16 Prozent der Haushaltsenergie. So liest du deinen Anteil auf der Abrechnung ab und drehst an den richtigen Stellen. Mehr Spartipps auf FranksFinanzcheck! #warmwasser #sparen #warmwasserkosten"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
 redaktionelle_pruefung:
   risikoklasse: "erhoeht"
   status: "ausstehend"
-  aenderungsgrund: "Erstentwurf zur Nachlieferung des Publikationstags 26.08.2026 – Verbrauchslogik belegt, Legionellenhinweis ohne Zahlenbehauptung"
+  aenderungsgrund: "F4-Nachbelegung: Anteil am Energieverbrauch, Kostentrennung nach HeizkostenV und Legionellen-Temperaturen mit Primärquellen belegt; Modellpreis als frei gewählte Annahme gekennzeichnet."
 
 inspiration: "Warmwasser: Der unterschätzte Posten auf der Heizkostenabrechnung"
 cover:
@@ -26,25 +26,45 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 quellen:
   - id: "Q1"
-    titel: "Verbraucherzentrale – Heizung: 10 einfache Tipps zum Heizkosten sparen"
-    url: "https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892"
+    titel: "Verbraucherzentrale – Warmwasser im Alltag sparen: So geht's"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/warmwasser-im-alltag-sparen-so-gehts-17752"
     herausgeber: "Verbraucherzentrale"
-    datum: "2026-08-26"
+    datum: "2026-11-07"
   - id: "Q2"
-    titel: "Verbraucherzentrale – Heizung optimieren und Heizkosten sparen"
-    url: "https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-optimieren-und-heizkosten-sparen-30096"
+    titel: "Verbraucherzentrale – Heizung optimieren und Heizkosten sparen – so geht's (Rohrdämmung)"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-optimieren-und-heizkosten-sparen-so-gehts-30096"
     herausgeber: "Verbraucherzentrale"
-    datum: "2026-08-26"
+    datum: "2026-10-08"
   - id: "Q3"
     titel: "Umweltbundesamt – Energiesparen im Haushalt"
     url: "https://www.umweltbundesamt.de/themen/klima-energie/energiesparen/energiesparen-im-haushalt"
     herausgeber: "Umweltbundesamt"
     datum: "2026-08-26"
-faktencheck: 2026-10-13
+  - id: "Q4"
+    titel: "Verbraucherzentrale – Kosten für Warmwasser senken"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/kosten-fuer-warmwasser-senken-das-koennen-sie-als-hausbesitzer-tun-17755"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-07-21"
+  - id: "Q5"
+    titel: "Heizkostenverordnung § 9 – verbundene Anlagen"
+    url: "https://www.gesetze-im-internet.de/heizkostenv/__9.html"
+    herausgeber: "Bundesministerium der Justiz / Gesetze im Internet"
+    datum: "2026-11-07"
+  - id: "Q6"
+    titel: "co2online – Energiesparen im Haushalt: Warmwasser rund 16 Prozent (Grafik Stand 10/2025)"
+    url: "https://www.co2online.de/energie-sparen/"
+    herausgeber: "co2online gemeinnützige Beratungsgesellschaft"
+    datum: "2026-11-07"
+  - id: "Q7"
+    titel: "BDEW-Strompreisanalyse Herbst 2026: 37,3 ct/kWh für Haushalte"
+    url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
+    herausgeber: "Bundesverband der Energie- und Wasserwirtschaft"
+    datum: "2026-10-28"
+faktencheck: 2026-11-07
 kurzantwort: "Warmwasser entsteht entweder in der Heizungsanlage oder in einem elektrischen Gerät. In beiden Fällen zahlen drei Faktoren: die Temperatur, die Wassermenge und die Verluste auf dem Weg zum Hahn. Weil Warmwasser auf vielen Abrechnungen in einem eigenen Block steht, lässt sich der Anteil meist genau ablesen."
 ---
 
-Duschen ist die alltäglichste Handlung im Haushalt und gleichzeitig eine der teuersten. Über das Jahr kommt so viel zusammen, dass Warmwasser in vielen Wohnungen hinter der Heizung den zweiten Platz belegt. Nur sieht man es nicht, weil nichts sichtbar verbrennt und nichts hörbar läuft.
+Duschen ist die alltäglichste Handlung im Haushalt und gleichzeitig eine der teuersten. Über das Jahr kommt viel zusammen: [co2online](https://www.co2online.de/energie-sparen/) beziffert die Wassererwärmung auf rund 16 Prozent des gesamten Haushalts-Energieverbrauchs, die Raumwärme auf rund zwei Drittel. Warmwasser ist damit – neben dem Haushaltsstrom – einer der beiden großen Blöcke hinter der Heizung. Das sind Durchschnittswerte; wie viel Euro daraus werden, hängt an deinem Tarif und deiner Nutzung. Nur sieht man es nicht, weil nichts sichtbar verbrennt und nichts hörbar läuft.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -62,15 +82,15 @@ Wichtig ist, dass du weißt, welcher Weg in deiner Wohnung gilt. Wer im Bad eine
 
 ## Warum die Abrechnung oft eine eigene Zeile braucht?
 
-Bei zentraler Versorgung wird Warmwasser üblicherweise mit Wärmemengenzählern oder über einen Brennstoffanteil gemessen. Daraus entsteht der Anteil am Gesamtverbrauch, der auf die Erwärmung des Wassers entfällt. Getrennt davon stehen die Heizkosten für die Räume.
+Bei zentraler Versorgung ist diese Trennung vorgeschrieben: [§ 9 Heizkostenverordnung](https://www.gesetze-im-internet.de/heizkostenv/__9.html) verlangt, die gemeinsam entstandenen Kosten einer verbundenen Anlage in einen Heiz- und einen Warmwasseranteil aufzuteilen. Die Warmwassermenge soll dafür mit einem Wärmezähler gemessen werden; Ersatzformeln sind nur bei unzumutbarem Aufwand zulässig. Verteilt werden beide Anteile getrennt – Wärme nach § 7, Warmwasser nach § 8.
 
-Diese Trennung hat einen praktischen Vorteil: Du kannst deinen Anteil ablesen und mit anderen Jahren vergleichen. Steigt der Wert deutlich, ohne dass sich dein Verhalten geändert hat, lohnt die Nachfrage bei der Verwaltung oder beim Vermieter. Die Verbraucherzentrale beschreibt in ihren [Tipps zum Heizkosten sparen](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892), an welchen Stellen Verbraucher selbst ansetzen können und welche Bereiche Sache der Anlagentechnik sind.
+Diese Trennung hat einen praktischen Vorteil: Du kannst deinen Anteil ablesen und mit anderen Jahren vergleichen. Steigt der Wert deutlich, ohne dass sich dein Verhalten geändert hat, lohnt die Nachfrage bei der Verwaltung oder beim Vermieter. Was du selbst steuern kannst und was Sache der Anlagentechnik bleibt, beschreibt die Verbraucherzentrale im Ratgeber [Kosten für Warmwasser senken](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/kosten-fuer-warmwasser-senken-das-koennen-sie-als-hausbesitzer-tun-17755).
 
 ## Die vier Stellschrauben
 
 Wer Warmwasser senken will, arbeitet an vier Schrauben. Alle vier sind mit Alltagshandlungen verbunden, keine braucht Handwerkszeug.
 
-**Temperatur.** Die Einstellung am Gerät oder am Speicher bestimmt, wie viel Energie hineingeht. Zu hoch eingestellt bedeutet dauerhaft mehr Wärmeverlust im Speicher. Die Verbraucherzentrale beschreibt in ihrem Ratgeber [Heizung optimieren](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-optimieren-und-heizkosten-sparen-30096), wie Temperatur, Regelung und Anlage zusammenspielen.
+**Temperatur.** Die Einstellung am Gerät oder am Speicher bestimmt, wie viel Energie hineingeht. Zu hoch eingestellt bedeutet dauerhaft mehr Wärmeverlust im Speicher. Wie stark ein Speicher Wärme an die Umgebung abgibt, hängt an seiner Temperatur und seiner Dämmung – das erklärt die Verbraucherzentrale unter [Kosten für Warmwasser senken](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/kosten-fuer-warmwasser-senken-das-koennen-sie-als-hausbesitzer-tun-17755). Welche Einstellungen an deiner Anlage zulässig sind, klärt der Fachbetrieb.
 
 **Menge.** Eine kürzere Duschzeit wirkt unmittelbar. Dasselbe gilt für den Wasserhahn beim Händewaschen und Rasieren.
 
@@ -94,7 +114,7 @@ Rechenweg für die Energie: 47 mal 40 ergibt rund 1.870 Kilowattstunden. Modellr
 
 Diese Rechnung zeigt die Reihenfolge. Die Duschzeit ist der größte einzelne Hebel, weil sie in die Menge wirkt. Danach folgen Temperatur und Verluste.
 
-Die beiden Varianten in der Übersicht. Der Euro-Wert ist eine Beispielrechnung mit 0,30 € je Kilowattstunde und kein Marktpreis:
+Die beiden Varianten in der Übersicht. Die Euro-Werte rechnen mit frei gewählten 0,30 € je Kilowattstunde – kein Marktpreis, sondern eine Rechenannahme. Zum Vergleich: Der [BDEW](https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/) nennt für Haushaltsstrom im Oktober 2026 durchschnittlich 37,3 Cent je kWh. Bei zentraler Heizung gilt ohnehin dein Gas- oder Wärmepreis, nicht der Strompreis. Setze deshalb deinen eigenen Tarif ein:
 
 | Variante im Modell | Dusche je Person | Wasserbedarf im Jahr | Energiebedarf | Kosten im Modell |
 |---|---|---|---|---|
@@ -104,7 +124,9 @@ Die beiden Varianten in der Übersicht. Der Euro-Wert ist eine Beispielrechnung 
 
 ## Was Legionellen mit der Temperatur machen?
 
-Die Temperatur am Warmwasserspeicher lässt sich nicht beliebig senken. In einer zentralen Anlage gelten Vorgaben, um das Wachstum von Legionellen zu begrenzen. Fachbetriebe empfehlen deshalb üblicherweise, den Speicher nicht in einen Bereich abzusenken, in dem sich Keime wohlfühlen.
+Die Temperatur am Warmwasserspeicher lässt sich nicht beliebig senken. Die Verbraucherzentrale nennt in ihrem Ratgeber [Kosten für Warmwasser senken](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/kosten-fuer-warmwasser-senken-das-koennen-sie-als-hausbesitzer-tun-17755) die maßgeblichen Werte: Im gesamten Warmwasser-Leitungssystem sollen mindestens 55 °C herrschen. Für größere Anlagen schreibt das die Trinkwasserverordnung vor.
+
+In Speichern mit mehr als 400 Litern muss das Wasser am Speicherausgang gemäß Trinkwasserverordnung immer mindestens 60 °C erreichen. Dasselbe gilt für Leitungen, in denen mehr als drei Liter warmes Wasser stehen. Prüfe die Einstellung deshalb alle drei Monate. Wer den Speicher weiter absenkt, spart Energie und riskiert damit die Trinkwasserhygiene.
 
 Für dich heißt das: Die Temperatur ist kein freier Regler. Frage bei einer Änderung die Fachfirma, die deine Anlage wartet. Wer in einem Mehrfamilienhaus wohnt, sollte diese Angelegenheit ohnehin der Verwaltung überlassen und stattdessen die Menge beeinflussen.
 
@@ -128,7 +150,7 @@ Diese Wartezeit ist kein Verlust im Sinne von Verschwendung. Sie ist ein Verlust
 
 Der Gegenwert, den du dafür erhältst, ist warmes Wasser. Der Gegenwert, den du verlierst, ist Zeit. Ob daraus ein messbarer Kostenanteil wird, hängt von zwei Dingen ab: davon, ob die Leitungen gedämmt sind, und davon, wie oft du Wasser anforderst.
 
-Prüfe den Weg selbst, bevor du jemanden beauftragst. Ist das Rohr zwischen Speicher und Hahn ungedämmt und warm, gibt es etwas zu verbessern. Bei einer zentralen Anlage in einem Mehrfamilienhaus gehört diese Frage an die Verwaltung.
+Prüfe den Weg selbst, bevor du jemanden beauftragst. Ist das Rohr zwischen Speicher und Hahn ungedämmt und warm, gibt es etwas zu verbessern. Die Verbraucherzentrale empfiehlt eine möglichst lückenlose [Dämmung der Heizungs- und Warmwasserleitungen](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-optimieren-und-heizkosten-sparen-so-gehts-30096); fehlende Stücke kannst du selbst ergänzen. Bei einer zentralen Anlage in einem Mehrfamilienhaus gehört diese Frage an die Verwaltung.
 
 ## Die Rolle des Durchflusses am Hahn
 
@@ -136,7 +158,7 @@ Eine oft übersehene Zahl ist die Durchflussmenge. Sie beschreibt, wie viel Wass
 
 Ein kleinerer Durchfluss wirkt direkt auf den Warmwasserverbrauch. Das ist kein Trick, sondern Physik: Weniger Wasser braucht weniger Energie zum Erwärmen. Der Komfortverlust ist häufig geringer als befürchtet, weil ein zu starker Strahl eher unangenehm ist als angenehm.
 
-Prüfe den Durchfluss auf einfache Weise. Stelle einen Eimer unter die Dusche und miss mit einer Uhr, wie viel Wasser in 30 Sekunden herauskommt. Diesen Wert verdoppelst du, um Liter pro Minute zu erhalten. Diese Zahl brauchst du für jede weitere Rechnung, weil sie den Verbrauch je Duschminute bestimmt.
+Prüfe den Durchfluss auf einfache Weise. Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/warmwasser-im-alltag-sparen-so-gehts-17752) empfiehlt dafür das Auslitern: Stelle einen Eimer unter die Dusche und stoppe die Zeit, bis er gefüllt ist. Zehn Liter in 50 Sekunden entsprechen zwölf Litern pro Minute. Nach derselben Rechnung ist ein Duschkopf mit weniger als neun Litern pro Minute sparsam. Diese Zahl brauchst du für jede weitere Rechnung, weil sie den Verbrauch je Duschminute bestimmt.
 
 Notiere auch, wie sich der Strahl anfühlt. Ein Duschkopf mit hohem Durchfluss und weichem Strahl ist unangenehm. Ein sparsamer Kopf mit guter Verteilung ist es nicht. Das ist der einzige Teil dieser Frage, der Geschmackssache ist.
 
@@ -176,7 +198,7 @@ Diese Gegenüberstellung dauert [fünf Minuten](../../posts/2026-09-20-finanziel
 
 ### Wie hoch ist der Warmwasseranteil an den Heizkosten?
 
-Das hängt von Haushalt, Anlage und Nutzung ab. Auf einer Heizkostenabrechnung steht der Anteil meist als eigener Wert. Dort liest du ihn genauer ab als über jede Faustformel.
+Das hängt von Haushalt, Anlage und Nutzung ab. Als Faustgröße für den Energieverbrauch nennt [co2online](https://www.co2online.de/energie-sparen/) rund 16 Prozent Warmwasseranteil im Haushalt. Deinen eigenen Kostenanteil liest du auf der Heizkostenabrechnung ab – dort steht er bei zentraler Versorgung als eigener Wert.
 
 ### Ist ein Durchlauferhitzer teurer als ein Speicher?
 

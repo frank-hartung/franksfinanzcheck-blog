@@ -22,7 +22,7 @@
 #    Betrieb:
 #      python3 scripts/backup_freshness_guard.py --repo frank-hartung/franksfinanzcheck-backup
 #      python3 scripts/backup_freshness_guard.py --repo … --json
-#      python3 scripts/backup_freshness_guard.py --selftest  (offline, 12 Fälle)
+#      python3 scripts/backup_freshness_guard.py --selftest  (offline, 15 Fälle)
 #
 #    Exit: 0 = frisch (grün/gelb) · 1 = überfällig oder unprüfbar (rot)
 #          2 = Aufruffehler / Selbsttest rot
@@ -148,6 +148,29 @@ def pruefe_freshness(repo: str, token: str, jetzt: dt.datetime | None = None,
                 "text": f"{tag}: Erstellungsdatum nicht lesbar ({created_raw!r}).",
             })
             continue
+        # HÜLLE IST KEINE SICHERUNG (WF-3150 / #1030, 07.11.2026):
+        # `backup-offsite.yml` legt den Entwurf an und lädt danach hoch; scheitert
+        # der Upload, wird der Teil-Release gelöscht. Bleibt er liegen (Löschung
+        # ebenfalls gescheitert, Abbruch dazwischen) oder legt jemand von Hand
+        # einen Release mit richtigem Tag an, war die Wache bisher GRÜN – über
+        # einem Release ohne eine einzige Datei. Ein Release ohne Assets ist
+        # beweisbar keine Sicherung; „frisch“ darf es nicht heißen.
+        assets = neueste.get("assets")
+        if not isinstance(assets, list):
+            befunde.append({
+                "praefix": praefix, "frisch": False, "alter_h": None, "tag": tag,
+                "stufe": "fehler",
+                "text": f"{tag}: Antwort ohne Asset-Liste – ob die Sicherung Inhalt hat, ist nicht belegt.",
+            })
+            continue
+        if not assets:
+            befunde.append({
+                "praefix": praefix, "frisch": False, "alter_h": None, "tag": tag,
+                "stufe": "fehler",
+                "text": (f"{tag}: Release ohne Inhalt (0 Assets) – eine Hülle ist keine Sicherung "
+                         "(Upload gescheitert oder Release von Hand angelegt)."),
+            })
+            continue
         alter_h = int((jetzt - created).total_seconds() // 3600)
         draft = neueste.get("draft")
         privat = "Entwurf" if draft else "Release"
@@ -223,8 +246,17 @@ def selbsttest() -> int:
     jetzt = dt.datetime(2026, 10, 15, 12, 0, tzinfo=dt.timezone.utc)
 
     def make_repo(releases):
+        # Jeder echte Release dieses Workflows trägt Assets (Bundle/ZIP bzw.
+        # KV-Export). Fehlt der Schlüssel in einem Fixture, ergänzt ihn der
+        # Test-Aufbau – die Hüllen-Regel wird in F13/F14 ausdrücklich geprüft.
+        vollstaendig = [
+            ({**r, "assets": [{"name": "backup.bundle", "size": 1234}]}
+             if "assets" not in r else r)
+            for r in releases
+        ]
+
         def fake(url):
-            return 200, releases, ""
+            return 200, vollstaendig, ""
         return fake
 
     # F1: Frische Backups (je 12h) → ok
@@ -356,14 +388,40 @@ def selbsttest() -> int:
     if token_bestimmen({"GITHUB_TOKEN": "lauf", "BACKUP_REPO_TOKEN": "ziel"}) != "ziel":
         fehler.append("F12: BACKUP_REPO_TOKEN muss dem allgemeinen Lauf-Token vorgehen")
 
+    # F13 (07.11.2026, WF-3150 / #1030): Hülle statt Sicherung. Ein Release mit
+    # richtigem Tag und frischem Datum, aber ohne eine einzige Datei, war für
+    # die Wache „frisch“ – ein Upload-Abbruch mit liegen gebliebenem Entwurf
+    # hätte den Ausfall verdeckt. Geprüft wird die reale API-Form (assets: []).
+    huelle = [
+        {"tag_name": "backup-20261015-0300", "created_at": "2026-10-15T00:00:00Z",
+         "draft": True, "assets": []},
+        {"tag_name": "kv-backup-20261015-0300", "created_at": "2026-10-15T00:00:00Z",
+         "draft": True, "assets": [{"name": "kv-export.json.enc", "size": 999}]},
+    ]
+    r = pruefe_freshness("a/b", "tok", jetzt, make_repo(huelle))
+    if r["urteil"] != "fehler" or "Hülle" not in r["befunde"][0]["text"]:
+        fehler.append(f"F13: Release ohne Assets gilt weiter als Sicherung: {r}")
+
+    # F14: Asset-Liste fehlt ganz (unvollständige/abweichende Antwort) – kein Grün.
+    ohne_liste = [
+        {"tag_name": "backup-20261015-0300", "created_at": "2026-10-15T00:00:00Z",
+         "draft": True, "assets": None},
+        {"tag_name": "kv-backup-20261015-0300", "created_at": "2026-10-15T00:00:00Z",
+         "draft": True, "assets": [{"name": "kv-export.json.enc", "size": 999}]},
+    ]
+    r = pruefe_freshness("a/b", "tok", jetzt, make_repo(ohne_liste))
+    if r["urteil"] != "fehler" or "Asset-Liste" not in r["befunde"][0]["text"]:
+        fehler.append(f"F14: fehlende Asset-Liste gilt als Sicherung: {r}")
+
     if fehler:
         for e in fehler:
             print(f"❌ {e}")
         print(f"🛑 backup_freshness_guard-Selbsttest: {len(fehler)} Abweichung(en).")
         return 1
-    print("✅ backup_freshness_guard-Selbsttest: 13 Fallgruppen – frisch, gelb, rot, Grenzen, "
-          "401/404/Netz, Eingaben, Datum, Entwürfe, mehrere Releases, leeres Repo und die "
-          "Eingabe-Auflösung, die am 01.11.2026 `--repo` verwarf (#923).")
+    print("✅ backup_freshness_guard-Selbsttest: 15 Fallgruppen – frisch, gelb, rot, Grenzen, "
+          "401/404/Netz, Eingaben, Datum, Entwürfe, mehrere Releases, leeres Repo, die "
+          "Eingabe-Auflösung, die am 01.11.2026 `--repo` verwarf (#923), und seit dem "
+          "07.11.2026 die Hülle ohne Inhalt (#1030).")
     return 0
 
 

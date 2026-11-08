@@ -1402,6 +1402,9 @@ def zustand_schreiben(ergebnis: dict) -> dict:
         # Das Ticket liest diese Felder, statt die Ursache zu raten (#912).
         "ursachen": ergebnis.get("ursachen") or [],
         "befundlage": ergebnis.get("befundlage") or {},
+        # Additiv für nachgeschaltete Heilungsbestätigung: eine ausgefallene
+        # Messung darf nie als grüne Null im Siegel verschwinden (#1098).
+        "tool_fehler": ergebnis.get("tool_fehler") or {},
         "artikel": {
             slug: {
                 "sha256": art["sha256"],

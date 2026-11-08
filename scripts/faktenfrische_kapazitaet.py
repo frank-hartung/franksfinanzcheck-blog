@@ -44,6 +44,23 @@
 #     Spitzentag im Horizont (`spitzenlast_stichtag`) – mit derselben
 #     Planrechnung. „Nicht gemessen“ steht nie wie „grün“ aus
 #     (`spitze_geprueft` in jeder Ausgabe, C33).
+#  6. Die PROJEKTION rechnet den Weg des Bots (07.11.2026, #1107). Ein
+#     Stichtag in der Zukunft wird nicht mit dem eingefrorenen Prüfdatum
+#     von heute gemessen – das unterstellte, der Bot prüfe bis dahin nichts,
+#     und erzeugte „rot am 26.11. und 31.12.“. `bestand_trajektorie`
+#     simuliert dieselbe EDF-Auswahl wie `faktenfrische.py` ab heute.
+#     Ein echter Engpass bleibt rot (Gegenprobe in den Tests).
+#  7. Die Regel „Zukunft ab heute“ steht an EINER Stelle
+#     (`projektions_ausgangspunkt`); die CLI benutzt sie, und jede Ausgabe
+#     nennt ihren Ausgangspunkt (`basis`, `projektion`). Es gibt keinen
+#     stillen Rückfall auf den eingefrorenen Stand: Der historische
+#     Vergleich muss als `basis=stichtag` benannt werden. Ein Ausgangspunkt
+#     NACH dem Stichtag wirft (fail-closed) – lieber keine Zahl als eine
+#     geratene (C33).
+#  8. Das Urteil nennt ein DATUM (`kadenz_horizont`): den ersten Tag im
+#     Horizont, an dem ein Prüftermin reißt, und den Tag, bis zu dem
+#     gemessen wurde. „Rot“ ohne Tag ist eine Meinung; das Ticket trägt
+#     seitdem ein Datum aus dem heutigen Lauf statt einer Momentaufnahme.
 #
 #  WAS HIER NICHT PASSIERT
 #  -----------------------
@@ -270,6 +287,69 @@ def kapazitaet_je_tag(budget: int, laeufe: float) -> float:
 
 
 # ============================================================
+#  Projektion: der WEG des Bots, nie der eingefrorene Stand (#1107)
+# ============================================================
+def projektions_ausgangspunkt(stichtag: dt.date,
+                              heute: dt.date | None = None) -> dt.date:
+    """Der Tag, an dem eine Messung aufsetzt – nie ein eingefrorener Zukunftstag.
+
+    WARUM DIESE FUNKTION EXISTIERT (07.11.2026, #1107)
+    --------------------------------------------------
+    Am 06.11.2026 meldete ein Handlauf „rot am 26.11. und 31.12.“. Die
+    Rechnung setzte an jedem Zukunftstag den HEUTIGEN Prüfstand des Bestands
+    voraus – als würde der Bot drei Wochen lang nichts tun. Aus dieser
+    Momentaufnahme wurde ein Ticket mit Frist (#1107), und der Befund war
+    falsch: Auf dem Weg, den der Bot ab heute tatsächlich geht, riss an
+    beiden Tagen keine Frist.
+
+    Die Regel ist deshalb EINE Zeile, die jeder Aufrufer benutzt:
+      * Stichtag in der Zukunft → Ausgangspunkt ist **heute** (Trajektorie).
+      * Stichtag heute oder Vergangenheit → Ausgangspunkt ist der Stichtag
+        (Nachweis eines Stands, kein Hellsehen).
+
+    Der eingefrorene Vergleich bleibt möglich, aber er muss ausdrücklich als
+    `basis=stichtag` benannt werden – es gibt keinen stillen Rückfall
+    (fail-closed, C33: „nicht gemessen“ sieht nie wie „gemessen“ aus).
+    """
+    heute = heute or ff.heute()
+    return heute if stichtag > heute else stichtag
+
+
+def kadenz_horizont(lauf: dict, stichtag: dt.date, horizont_tage: int) -> dict:
+    """Der Weg des Bots als DATUM: erster Tag, an dem ein Termin reißt (#1107).
+
+    `plan` simuliert den Horizont ohnehin; hier wird aus derselben Simulation
+    die einzige Zahl gezogen, die eine Projektion lesbar macht: **wann**
+    zuerst etwas reißt – nicht nur **dass** etwas reißt. So steht im Ticket
+    ein Datum, das aus dem heutigen Lauf stammt, statt einer Momentaufnahme,
+    die beim Schreiben schon veraltet ist.
+
+    Gezählt werden nur Termine, die der Bot ab heute NOCH prüfen müsste –
+    dieselbe Menge, die `puenktlich` urteilt. Der Alt-Rückstand
+    (`vorher_faellig`) ist kein Weg-Befund: Für ihn gibt es
+    `rueckstand_abgebaut` und die Nachholfrist. Wer beides vermischt, macht
+    aus „eine Seite ist schon überfällig“ ein „der Weg reißt heute“.
+    """
+    zukunft = [v for v in (lauf.get("verletzungen") or [])
+               if not v.get("vorher_faellig")]
+    erste = min(zukunft,
+                key=lambda v: (v.get("tag") or "", v.get("frist") or ""),
+                default=None)
+    return {
+        "geprueft": True,
+        "bis": (stichtag + dt.timedelta(days=max(0, int(horizont_tage)))).isoformat(),
+        "tage": max(0, int(horizont_tage)),
+        "weg_frei": erste is None,
+        "erstverletzung": erste.get("tag") if erste else None,
+        "erstverletzung_seite": erste.get("slug") if erste else None,
+        "erstverletzung_frist": erste.get("frist") if erste else None,
+        "verletzungen": len(zukunft),
+        "seiten": len({v.get("slug") for v in zukunft}),
+        "rueckstand_verletzungen": len(lauf.get("verletzungen") or []) - len(zukunft),
+    }
+
+
+# ============================================================
 #  Simulation (EDF – earliest deadline first)
 # ============================================================
 def eintraege_bauen(artikel: list[dict], cfg: dict, stichtag: dt.date) -> list[dict]:
@@ -305,12 +385,17 @@ def eintraege_bauen(artikel: list[dict], cfg: dict, stichtag: dt.date) -> list[d
 
 
 def simuliere(eintraege: list[dict], budget: int, stichtag: dt.date,
-              horizont_tage: int, lauftage: set[dt.date]) -> dict:
+              horizont_tage: int, lauftage: set[dt.date],
+              *, beobachte: set[dt.date] | None = None) -> dict:
     """EDF mit ganzzahligem Budget an ECHTEN Lauftagen, inklusive Folgeterminen.
 
     Nicht gearbeitete Plätze verfallen am Tagesende. Drei Plätze am Dienstag
     können keine Freitag-Frist retten. Ein erfolgreicher Check erzeugt den
     nächsten Termin ab dem tatsächlichen Prüftag, nicht ab dem Wunschtermin.
+
+    `letzte_pruefung` (slug → Prüftag) ist der Stand, den der Bot hinterlässt.
+    `beobachte` nimmt Tagesschnappschüsse dieses Stands zu BEGINN des Tages
+    (`snapshots`) – die Grundlage für `bestand_trajektorie` (#1107).
     """
     if budget < 1 or horizont_tage < 0:
         raise ValueError("Budget muss positiv, Horizont darf nicht negativ sein")
@@ -321,18 +406,30 @@ def simuliere(eintraege: list[dict], budget: int, stichtag: dt.date,
         status = {"prio": e["prio"], "frist": e["frist"]}
         offen[e["slug"]] = dict(e, runde=0, _vorlauf=e.get("_vorlauf", 7), _faellig=status)
     erledigt: dict[str, int] = {}
+    letzte_pruefung: dict[str, dt.date] = {}
+    snapshots: dict[dt.date, dict[str, dt.date]] = {}
     verletzt: list[dict] = []
     gemeldet: set[tuple[str, int]] = set()
     abbau_tag: int | None = None
     alt_rueckstand = {e["slug"] for e in eintraege if e["bereits_faellig"]}
     for offset in range(horizont_tage + 1):
         tag = stichtag + dt.timedelta(days=offset)
+        # Stand zu BEGINN des Tages (#1107): Ein Restart an diesem Tag verarbeitet
+        # den Tag selbst genau einmal. Ein Stand nach der Verarbeitung würde den
+        # Tagesplatz doppelt zählen.
+        if beobachte and tag in beobachte:
+            snapshots[tag] = dict(letzte_pruefung)
         def melde_verspaetungen():
             for e in offen.values():
                 key = (e["slug"], e["runde"])
                 if e["frist"] < tag and key not in gemeldet:
                     verletzt.append({"slug": e["slug"], "titel": e["titel"],
                                      "frist": e["frist"].isoformat(),
+                                     # Der Tag, an dem die Verletzung SICHTBAR
+                                     # wird (#1107). Ohne ihn ließe sich der
+                                     # „Weg des Bots“ nicht in einem Datum
+                                     # benennen – nur als Zählung.
+                                     "tag": tag.isoformat(),
                                      "tage_zu_spaet": (tag - e["frist"]).days,
                                      "vorher_faellig": e["slug"] in alt_rueckstand,
                                      "folgeprüfung": e["runde"] > 0})
@@ -347,6 +444,7 @@ def simuliere(eintraege: list[dict], budget: int, stichtag: dt.date,
             for e in bereit[:budget]:
                 slug = e["slug"]
                 erledigt.setdefault(slug, offset)
+                letzte_pruefung[slug] = tag
                 if e["intervall"] <= 0:
                     del offen[slug]
                     continue
@@ -363,15 +461,78 @@ def simuliere(eintraege: list[dict], budget: int, stichtag: dt.date,
             "abbau_tag": abbau_tag,
             "offen": [{"slug": e["slug"], "frist": e["frist"].isoformat()}
                       for e in sorted(offen.values(), key=lambda e: e["frist"])[:20]],
-            "offen_gesamt": len(offen)}
+            "offen_gesamt": len(offen),
+            "letzte_pruefung": letzte_pruefung,
+            "snapshots": snapshots}
+
+
+def _lauftage_ab(basis: dt.date, tage: int, laeufe: float) -> set[dt.date]:
+    """Echte Lauftage ab `basis` über `tage` Tage. Nicht beweisbar → ValueError."""
+    if laeufe == 1.0:
+        return {basis + dt.timedelta(days=i) for i in range(max(0, tage) + 1)}
+    lauftage = lauftage_aus_workflow(basis, tage)
+    if lauftage is None:
+        raise ValueError(f"Laufkalender ab {basis.isoformat()} nicht beweisbar – "
+                         "der Bestand an einem Zukunftstag wäre geraten.")
+    return lauftage
+
+
+def bestand_trajektorie(artikel: list[dict], cfg: dict, budget: int, laeufe: float,
+                        basis: dt.date, ziele: set[dt.date]) -> dict[dt.date, list[dict]]:
+    """Der Bestand an jedem Tag in `ziele`, so wie der Bot ihn ab `basis` hinterlässt.
+
+    WARUM (#1107, 06.11.2026): Die Projektion rechnete bisher einen Stichtag
+    in der Zukunft mit dem HEUTIGEN, eingefrorenen Prüfdatum jeder Seite – als hätte
+    der Bot die nächsten zwanzig Tage nichts geprüft. Daraus entstand „rot am
+    26.11. und 31.12.“: 30 Seiten wirkten überfällig, obwohl sie in der Zwischenzeit
+    längst fällig geworden und geprüft worden wären. Die Trajektorie ist dieselbe
+    EDF-Auswahl wie `faktenfrische.py` (C19: eine Regel, zwei Aufrufer). Sie simuliert
+    den Lauf von `basis` bis zum spätesten Ziel und gibt den Stand je Tag zurück.
+
+    Vergangene oder heutige Ziele liefern den Bestand unverändert.
+    """
+    stande: dict[dt.date, list[dict]] = {}
+    spaet = {z for z in ziele if z > basis}
+    for z in ziele:
+        if z <= basis:
+            stande[z] = [dict(a) for a in artikel]
+    if not spaet:
+        return stande
+    tage = (max(spaet) - basis).days
+    lauftage = _lauftage_ab(basis, tage, laeufe)
+    lauf = simuliere(eintraege_bauen(artikel, cfg, basis), budget, basis, tage,
+                     lauftage, beobachte=spaet)
+    for z in spaet:
+        letzte = lauf["snapshots"][z]
+        stande[z] = [dict(a, faktencheck=letzte[a["slug"]]) if a.get("slug") in letzte
+                     else dict(a) for a in artikel]
+    return stande
 
 
 def plan(artikel: list[dict], cfg: dict, budget: int, laeufe: float,
          stichtag: dt.date, horizont_tage: int | None = None,
-         *, lauftage: set[dt.date] | None = None) -> dict:
-    """Der komplette Deckungsnachweis für EINEN Tag und EIN Budget."""
+         *, lauftage: set[dt.date] | None = None,
+         basis: dt.date | None = None) -> dict:
+    """Der komplette Deckungsnachweis für EINEN Tag und EIN Budget.
+
+    `basis` (#1107): Liegt der Stichtag in der Zukunft, wird der Bestand am
+    Stichtag als Trajektorie ab `basis` (in der Regel heute) gerechnet – nie als
+    eingefrorener Stand. Die CLI bestimmt `basis` über
+    `projektions_ausgangspunkt()`; kein Aufrufer soll die Regel neu erfinden.
+    `basis=stichtag` ist der ausdrückliche historische Vergleich („was hätte
+    der eingefrorene Stand gesagt?“) – er bleibt möglich, aber er muss benannt
+    werden. Ohne `basis` gilt er.
+    """
+    if basis is not None and basis > stichtag:
+        raise ValueError("Ausgangspunkt der Projektion liegt nach dem Stichtag.")
+    if basis is not None and basis < stichtag:
+        artikel = bestand_trajektorie(artikel, cfg, budget, laeufe, basis,
+                                      {stichtag})[stichtag]
     p = planung(cfg)
-    horizont = int(horizont_tage or p["horizont_tage"])
+    horizont = int(horizont_tage if horizont_tage is not None
+                   else p["horizont_tage"])
+    if horizont < 0:
+        raise ValueError("Horizont darf nicht negativ sein")
     eintraege = eintraege_bauen(artikel, cfg, stichtag)
     kapazitaet = kapazitaet_je_tag(budget, laeufe)
     bedarf = bedarf_je_tag(artikel, cfg, stichtag)
@@ -396,6 +557,11 @@ def plan(artikel: list[dict], cfg: dict, budget: int, laeufe: float,
     deckung = (kapazitaet / bedarf * 100.0) if bedarf > 0 else 100.0
     return {
         "stichtag": stichtag.isoformat(),
+        # Der Ausgangspunkt steht in JEDER Ausgabe (#1107): Ein Leser soll
+        # sehen, ob die Zahl den Weg des Bots oder einen eingefrorenen Stand
+        # beschreibt. „Nicht benannt“ ist die Lücke, aus der #1107 entstand.
+        "basis": (basis or stichtag).isoformat(),
+        "projiziert": bool(basis is not None and basis < stichtag),
         "artikel": len(artikel),
         "faellig": len(faellig),
         "ueberfaellig": len(ueberfaellig),
@@ -425,12 +591,15 @@ def plan(artikel: list[dict], cfg: dict, budget: int, laeufe: float,
         "rueckstand_abgebaut": (not alt_verletzt) or (
             lauf["abbau_tag"] is not None
             and lauf["abbau_tag"] <= int(p["nachhol_frist_tage"])),
+        # Der Weg als Datum (#1107): „rot“ ohne Tag ist eine Meinung.
+        "kadenz_horizont": kadenz_horizont(lauf, stichtag, horizont),
     }
 
 
 def empfohlenes_budget(artikel: list[dict], cfg: dict, laeufe: float,
                        stichtag: dt.date, horizont_tage: int | None = None,
-                       *, lauftage: set[dt.date] | None = None) -> dict:
+                       *, lauftage: set[dt.date] | None = None,
+                       basis: dt.date | None = None) -> dict:
     """Kleinstes Budget, das Rückstand fristgerecht abbaut – ohne neue Frist.
 
     Gesucht ist die kleinste Zahl im Korridor
@@ -444,13 +613,15 @@ def empfohlenes_budget(artikel: list[dict], cfg: dict, laeufe: float,
     sockel = max(1, int(b["max_artikel_pro_lauf"]))
     limit = max(sockel, int(b["hartes_limit_pro_lauf"]))
     for budget in range(sockel, limit + 1):
-        p = plan(artikel, cfg, budget, laeufe, stichtag, horizont_tage, lauftage=lauftage)
+        p = plan(artikel, cfg, budget, laeufe, stichtag, horizont_tage,
+                 lauftage=lauftage, basis=basis)
         if p["puenktlich"] and p["rueckstand_abgebaut"]:
             return {"budget": budget, "erreicht": True, "limit": limit,
                     "sockel": sockel, "plan": p}
     return {"budget": limit, "erreicht": False, "limit": limit,
             "sockel": sockel,
-            "plan": plan(artikel, cfg, limit, laeufe, stichtag, horizont_tage, lauftage=lauftage)}
+            "plan": plan(artikel, cfg, limit, laeufe, stichtag, horizont_tage,
+                         lauftage=lauftage, basis=basis)}
 
 
 # ============================================================
@@ -502,7 +673,8 @@ def spitzenlast_stichtage(artikel: list[dict], cfg: dict,
 
 def spitzenlast_stichtag(artikel: list[dict], cfg: dict, budget: int,
                          laeufe: float, stichtag: dt.date,
-                         horizont_tage: int | None = None) -> dict | None:
+                         horizont_tage: int | None = None,
+                         *, basis: dt.date | None = None) -> dict | None:
     """Der Bündeltag im Horizont, an dem eine HEUTE frische Seite zu spät käme.
 
     Gemessen wird mit DERSELBEN Planrechnung wie am Stichtag – keine zweite
@@ -515,6 +687,10 @@ def spitzenlast_stichtag(artikel: list[dict], cfg: dict, budget: int,
     Befund – die Wache war grün, und drei Wochen später standen 23 Seiten
     mit demselben Prüfdatum gemeinsam zu spät.
 
+    Der Zustand AN dem Bündeltag ist die Trajektorie ab `basis` (#1107) –
+    nicht der eingefrorene Stand von heute. Wer die Arbeit zwischen heute und
+    dem Bündeltag wegdenkt, misst eine Seite, die der Bot längst geprüft hätte.
+
     Bewusst NICHT gemessen wird der Tag, an dem längst alles überfällig
     ist: Dort prüft man den Alt-Rückstand (dafür gibt es
     `rueckstand_abgebaut` am Stichtag), nicht die Kadenz. Würde die Wache
@@ -526,14 +702,41 @@ def spitzenlast_stichtag(artikel: list[dict], cfg: dict, budget: int,
     nicht beweisbar, wirft die Messung einen ValueError – der Aufrufer
     muss fail-closed „nicht beweisbar“ melden, nicht raten.
     """
+    return _spitze_auswertung(artikel, cfg, budget, laeufe, stichtag,
+                              horizont_tage, basis)[1]
+
+
+def _spitze_auswertung(artikel: list[dict], cfg: dict, budget: int,
+                       laeufe: float, stichtag: dt.date,
+                       horizont_tage: int | None,
+                       basis: dt.date | None) -> tuple[list[dt.date], dict | None]:
+    """(Kandidaten-Bündeltage, schlechtester Bündeltag oder None).
+
+    EINE Rechnung für Befund und Zahlen (C19): `spitze_zahlen` und
+    `spitzenlast_stichtag` lesen beide hieraus, damit „geprüft“ und „Befund“
+    nie aus zwei Läufen stammen.
+
+    Die Stände kommen aus EINER Trajektorie ab `basis` (Standard: stichtag).
+    Kandidaten sind Stichtag und jede Frist/Vorlaufbeginn im Horizont – sowohl
+    aus dem heutigen Stand als auch aus dem Stand am Horizontende, denn der Bot
+    erzeugt selbst neue Fristen (Prüfung + Intervall).
+    """
     p = planung(cfg)
-    horizont = int(horizont_tage if horizont_tage is not None else p["horizont_tage"])
-    kandidaten = spitzenlast_stichtage(artikel, cfg, stichtag, horizont)
+    horizont = max(0, int(horizont_tage if horizont_tage is not None
+                          else p["horizont_tage"]))
+    base = basis if basis is not None else stichtag
+    if base > stichtag:
+        raise ValueError("Ausgangspunkt der Projektion liegt nach dem Stichtag.")
+    ende = stichtag + dt.timedelta(days=horizont)
+    tage = {stichtag + dt.timedelta(days=i) for i in range(horizont + 1)}
+    stande = bestand_trajektorie(artikel, cfg, budget, laeufe, base, tage)
+    kandidaten = sorted(_bindungstage(stande[stichtag], cfg, stichtag, horizont)
+                        | _bindungstage(stande[ende], cfg, stichtag, horizont))
     schlechtester: dict | None = None
     for tag in kandidaten:
         if tag <= stichtag:
             continue
-        frisch = [art for art in artikel
+        frisch = [art for art in stande[tag]
                   if not (ff.faelligkeit(art, cfg, tag) or {}).get("faellig")]
         if not frisch:
             continue
@@ -555,12 +758,19 @@ def spitzenlast_stichtag(artikel: list[dict], cfg: dict, budget: int,
             schlechtester = {"rang": kennzahl, "stichtag": tag,
                              "offen": offen, "frisch": len(frisch),
                              "puenktlich": False}
-    return schlechtester
+    return kandidaten, schlechtester
+
+
+def _bindungstage(artikel: list[dict], cfg: dict, stichtag: dt.date,
+                  horizont: int) -> set[dt.date]:
+    """Die Bindungstage eines Standes (Stichtag, Fristen, Vorlaufbeginne)."""
+    return set(spitzenlast_stichtage(artikel, cfg, stichtag, horizont))
 
 
 def spitze_zahlen(artikel: list[dict], cfg: dict, budget: int,
                   laeufe: float, stichtag: dt.date,
-                  horizont_tage: int | None = None) -> dict:
+                  horizont_tage: int | None = None,
+                  *, basis: dt.date | None = None) -> dict:
     """Die Spitzenlast-Messung als Zahlen-Block – die EINE Stelle dafür.
 
     Wer die Deckung misst, fragt diese Funktion; kein Konsument rechnet die
@@ -574,10 +784,9 @@ def spitze_zahlen(artikel: list[dict], cfg: dict, budget: int,
       spitze_frisch     damals noch frische Seiten (nur bei Befund)
       spitze_puenktlich False = Befund (nur bei Befund)
     """
-    finde = spitzenlast_stichtag(artikel, cfg, budget, laeufe, stichtag,
-                                 horizont_tage)
-    zahlen = {"spitze_geprueft": len(
-        spitzenlast_stichtage(artikel, cfg, stichtag, horizont_tage))}
+    kandidaten, finde = _spitze_auswertung(artikel, cfg, budget, laeufe,
+                                           stichtag, horizont_tage, basis)
+    zahlen = {"spitze_geprueft": len(kandidaten)}
     if finde is not None:
         zahlen["spitze_stichtag"] = finde["stichtag"].isoformat()
         zahlen["spitze_offen"] = int(finde["offen"])
@@ -737,6 +946,22 @@ def diagnose_zeilen(p: dict, markdown: bool = True) -> list[str]:
         n = p["naechste_frist"]
         zeilen.append(f"- Nächste Frist: `{n['slug']}` am {n['frist']} "
                       f"(in {n['restlaufzeit']} Tagen)")
+    if p.get("projiziert"):
+        zeilen.append(f"- Projektion: Stichtag {p['stichtag']} ab {p['basis']} "
+                      "gerechnet – das ist der Weg des Bots, kein eingefrorener "
+                      "Stand (#1107)")
+    kh = p.get("kadenz_horizont") or {}
+    if kh.get("geprueft"):
+        if kh.get("weg_frei"):
+            zeilen.append(f"- Weg des Bots: kein Prüftermin reißt bis {kh['bis']} "
+                          f"({kh['tage']} Tage Horizont)")
+        else:
+            zeilen.append(
+                f"- ⚠️ Weg des Bots: erster gerissener Termin am "
+                f"{kh.get('erstverletzung')} (`{kh.get('erstverletzung_seite')}`, "
+                f"Frist {kh.get('erstverletzung_frist')}) – "
+                f"{kh.get('verletzungen')} gerissene Termine auf "
+                f"{kh.get('seiten')} Seiten bis {kh['bis']}")
     if p.get("spitze_geprueft"):
         if p.get("spitze_stichtag") and not p.get("spitze_puenktlich", True):
             zeilen.append(
@@ -948,6 +1173,40 @@ def selftest() -> int:
     pruefe("ST13f", any("Spitzenlast" in f for f in c45_urteil(
         dict(basis, **zahlen_rot))), True)
 
+    # ST14 – Die Projektion rechnet den WEG des Bots (#1107) --------------
+    # Das Fehlbild vom 06.11.2026: derselbe Zukunftstag, eingefroren gemessen,
+    # meldet „rot“; der Weg ab heute ist grün. Beide Richtungen bleiben prüfbar.
+    traegt = [{"slug": f"bundel-{i:03d}", "titel": "Heizung Winter saisonal",
+               "beschreibung": "", "keywords": ["Heizung"], "pillar": "energie",
+               "faktencheck": PROBETAG - dt.timedelta(days=20)}
+              for i in range(8)]
+    cfg_bundel = _cfg_probe(budget=2, limit=10)
+    ziel = PROBETAG + dt.timedelta(days=9)
+    eingefroren = plan(traegt, cfg_bundel, 2, 1.0, ziel, basis=ziel)
+    weg = plan(traegt, cfg_bundel, 2, 1.0, ziel, basis=PROBETAG)
+    pruefe("ST14a", eingefroren["puenktlich"], False)
+    pruefe("ST14b", weg["puenktlich"], True)
+    pruefe("ST14c", (weg["projiziert"], weg["basis"]),
+           (True, PROBETAG.isoformat()))
+    pruefe("ST14d", projektions_ausgangspunkt(ziel, PROBETAG), PROBETAG)
+    pruefe("ST14e", projektions_ausgangspunkt(PROBETAG - dt.timedelta(days=3),
+                                              PROBETAG),
+           PROBETAG - dt.timedelta(days=3))
+    pruefe("ST14f", (weg["kadenz_horizont"]["weg_frei"],
+                     weg["kadenz_horizont"]["erstverletzung"]), (True, None))
+    # „Rot“ ohne Tag ist eine Meinung: Ein zu kleines Budget MUSS ein Datum nennen.
+    eng = plan([dict(t, slug=f"eng-{i:02d}") for i, t in enumerate(traegt * 2)],
+               _cfg_probe(budget=1, limit=10), 1, 1.0, PROBETAG, basis=PROBETAG)
+    pruefe("ST14g", bool(eng["kadenz_horizont"]["erstverletzung"]), True)
+    # Fail-closed: Ein Ausgangspunkt NACH dem Stichtag ist keine Messung.
+    geworfen = False
+    try:
+        plan(traegt, cfg_bundel, 2, 1.0, PROBETAG,
+             basis=PROBETAG + dt.timedelta(days=1))
+    except ValueError:
+        geworfen = True
+    pruefe("ST14h", geworfen, True)
+
     if fehler:
         print("❌ Selbsttest Faktenfrische-Kapazität rot:")
         for f in fehler:
@@ -964,6 +1223,57 @@ def bestand(scope: str = "alle") -> list[dict]:
     return ff.alle_artikel(scope)
 
 
+def messe(artikel: list[dict], cfg: dict, laeufe: float, stichtag: dt.date,
+          *, basis: dt.date | None = None,
+          lauftage: set[dt.date] | None = None,
+          budget: int | None = None,
+          horizont_tage: int | None = None,
+          hinweise: list[str] | None = None) -> dict:
+    """Die EINE Messung für einen Stichtag – Text, JSON und Ticket lesen sie.
+
+    Ausgelagert aus `main` (#1107), damit die Projektion prüfbar ist, ohne
+    einen Subprozess zu starten: Ein Test mit eingefrorener Uhr kann hier
+    denselben Weg messen, den der Workflow geht – kein zweiter Maßstab (C19).
+
+    `basis` ist optional, aber der sichere Weg ist die Voreinstellung: Ohne
+    Angabe gilt `projektions_ausgangspunkt(stichtag)` – ein Zukunftstag wird
+    also ab heute gerechnet, ein vergangener bleibt ein Nachweis. Der
+    eingefrorene Vergleich muss ausdrücklich `basis=stichtag` heißen. Damit
+    kann kein Aufrufer diesen Messfehler versehentlich wiederholen.
+    """
+    basis = basis if basis is not None else projektions_ausgangspunkt(stichtag)
+    b = budget_vorgaben(cfg)
+    emp = empfohlenes_budget(artikel, cfg, laeufe, stichtag, horizont_tage,
+                             lauftage=lauftage, basis=basis)
+    # Die Wache prüft den Plan, den die Automatik wirklich fährt: bei
+    # Auto-Skalierung das empfohlene Budget, nicht nur den Sockel.
+    gewaehlt = int(budget if budget is not None
+                   else (emp["budget"] if b.get("auto_skalierung")
+                         else b["max_artikel_pro_lauf"]))
+    ergebnis = dict(plan(artikel, cfg, gewaehlt, laeufe, stichtag,
+                         horizont_tage, lauftage=lauftage, basis=basis))
+    ergebnis.update({
+        "empfohlenes_budget": emp["budget"],
+        "empfehlung_erreicht": emp["erreicht"],
+        "hartes_limit": emp["limit"],
+        "sockel": emp["sockel"],
+        "plan_hinweise": hinweise or [],
+    })
+    # Der Spitzentag wird IMMER gemessen und IMMER berichtet (#1039).
+    # "Nicht gemessen" darf nie wie "grün" aussehen (C33).
+    ergebnis.update(spitze_zahlen(artikel, cfg, gewaehlt, laeufe,
+                                  stichtag, horizont_tage, basis=basis))
+    ausgangspunkt = basis or stichtag
+    ergebnis["projektion"] = {
+        "stichtag": stichtag.isoformat(),
+        "ausgangspunkt": ausgangspunkt.isoformat(),
+        "trajektorie": ausgangspunkt < stichtag,
+        "regel": ("Zukunft wird ab dem Ausgangspunkt gerechnet – nie mit dem "
+                  "eingefrorenen Prüfstand (#1107)."),
+    }
+    return ergebnis
+
+
 def main() -> int:
     p = argparse.ArgumentParser(
         description="Faktenfrische-Deckung: Bedarf, Angebot, Abbauplan")
@@ -975,7 +1285,9 @@ def main() -> int:
     p.add_argument("--budget", type=int, help="Budget je Lauf überschreiben")
     p.add_argument("--laeufe", type=float, help="Läufe je Tag überschreiben")
     p.add_argument("--scope", choices=("alle", "posts", "pillar"), default="alle")
-    p.add_argument("--stichtag", help="Probetag (ISO) – nur für Nachweise")
+    p.add_argument("--stichtag",
+                   help="Probetag (ISO) – ein Tag in der Zukunft wird ab HEUTE "
+                        "als Weg gerechnet, nie eingefroren (#1107)")
     p.add_argument("--selftest", action="store_true")
     args = p.parse_args()
 
@@ -1018,32 +1330,27 @@ def main() -> int:
         print("🛑 Kein Bestand lesbar – Deckung nicht beweisbar", file=sys.stderr)
         return 2
 
-    b = budget_vorgaben(cfg)
-    budget = int(args.budget or b["max_artikel_pro_lauf"])
-    emp = empfohlenes_budget(artikel, cfg, laeufe, stichtag, lauftage=lauftage)
+    # Ausgangspunkt der Messung (#1107): Ein Stichtag in der Zukunft wird ab
+    # HEUTE als Trajektorie gerechnet – der Weg des Bots, nie sein
+    # eingefrorener Prüfstand. Ein vergangener Stichtag bleibt ein Nachweis
+    # jenes Tages. Die Regel steht in EINER Funktion, nicht in jedem Aufrufer.
+    basis = projektions_ausgangspunkt(stichtag)
 
     if args.budget_empfehlung:
-        print(emp["budget"])
+        try:
+            print(empfohlenes_budget(artikel, cfg, laeufe, stichtag,
+                                     lauftage=lauftage, basis=basis)["budget"])
+        except ValueError as exc:
+            print(f"🛑 Deckung nicht beweisbar: {exc}", file=sys.stderr)
+            return 2
         return 0
 
-    # Die Wache prüft den Plan, den die Automatik wirklich fährt:
-    # bei Auto-Skalierung das empfohlene Budget, nicht nur den Sockel.
-    if not args.budget and b.get("auto_skalierung"):
-        budget = int(emp["budget"])
-    aktueller = plan(artikel, cfg, budget, laeufe, stichtag, lauftage=lauftage)
-    ergebnis = dict(aktueller)
-    ergebnis["empfohlenes_budget"] = emp["budget"]
-    ergebnis["empfehlung_erreicht"] = emp["erreicht"]
-    ergebnis["hartes_limit"] = emp["limit"]
-    ergebnis["sockel"] = emp["sockel"]
-    ergebnis["plan_hinweise"] = hinweise
     try:
-        # Der Spitzentag wird IMMER gemessen und IMMER berichtet (#1039).
-        # "Nicht gemessen" darf nie wie "grün" aussehen (C33).
-        ergebnis.update(spitze_zahlen(artikel, cfg, budget, laeufe,
-                                      stichtag, horizont))
+        ergebnis = messe(artikel, cfg, laeufe, stichtag, basis=basis,
+                         lauftage=lauftage, budget=args.budget or None,
+                         hinweise=hinweise)
     except ValueError as exc:
-        print(f"🛑 Spitzenlast nicht beweisbar: {exc}", file=sys.stderr)
+        print(f"🛑 Deckung nicht beweisbar: {exc}", file=sys.stderr)
         return 2
 
     if args.json:
@@ -1051,20 +1358,20 @@ def main() -> int:
         return 0
 
     print(klartext(ergebnis, hinweise))
-    if emp["erreicht"] and emp["budget"] > budget:
-        print(f"\n→ Empfohlenes Budget für diesen Lauf: {emp['budget']} "
-              f"(Sockel {emp['sockel']}, Limit {emp['limit']})")
-    elif not emp["erreicht"]:
-        print(f"\n⚠️ Auch mit dem harten Limit von {emp['limit']} je Lauf ist der "
+    if ergebnis["empfehlung_erreicht"] and ergebnis["empfohlenes_budget"] > ergebnis["budget"]:
+        print(f"\n→ Empfohlenes Budget für diesen Lauf: {ergebnis['empfohlenes_budget']} "
+              f"(Sockel {ergebnis['sockel']}, Limit {ergebnis['hartes_limit']})")
+    elif not ergebnis["empfehlung_erreicht"]:
+        print(f"\n⚠️ Auch mit dem harten Limit von {ergebnis['hartes_limit']} je Lauf ist der "
               "Rückstand nicht fristgerecht abbaubar – Kadenz oder Intervall "
               "müssen entschieden werden (SSOT faktenfrische.yaml).")
 
     if args.wache:
-        if not emp["erreicht"]:
+        if not ergebnis["empfehlung_erreicht"]:
             print("::error::Faktenfrische strukturell unterdeckt – auch das harte "
                   "Limit baut den Rückstand nicht fristgerecht ab (#912).")
             return 1
-        if not aktueller["puenktlich"] or not aktueller["rueckstand_abgebaut"]:
+        if not ergebnis["puenktlich"] or not ergebnis["rueckstand_abgebaut"]:
             print("::error::Der laufende Plan reißt eine Frist oder baut den Rückstand "
                   "nicht rechtzeitig ab – Kapazität erhöhen (#912).")
             return 1

@@ -7,9 +7,9 @@ hugo v0.168.0-e27a6760c5547237f87d353aebe0580feadb20f4+extended linux/amd64 Buil
  Pages            │  119 
  Paginator pages  │   19 
  Non-page files   │   40 
- Static files     │ 2810 
+ Static files     │ 2825 
  Processed images │    0 
  Aliases          │    0 
  Cleaned          │    0 
 
-Total in 2039 ms
+Total in 1135 ms

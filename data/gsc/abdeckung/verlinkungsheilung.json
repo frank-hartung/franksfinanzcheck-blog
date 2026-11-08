@@ -1,20 +1,12 @@
 {
- "auftrag": 1,
- "eingefuegt": [
-  {
-   "grund": "gleicher Pillar",
-   "inlinks_jetzt": 1,
-   "meldung": "würde eingefügt (Trockenlauf)",
-   "quelle": "/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/",
-   "ziel": "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/"
-  }
- ],
+ "auftrag": 0,
+ "eingefuegt": [],
  "geheilt": [],
- "geschrieben": false,
+ "geschrieben": true,
  "max": 10,
  "nachher_ohne_inlink": [],
  "offen": [],
- "stand": "2026-11-06T13:41:52Z",
+ "stand": "2026-11-08T11:55:00Z",
  "status": "sauber",
  "verweigert": [],
  "vorher_ohne_inlink": []

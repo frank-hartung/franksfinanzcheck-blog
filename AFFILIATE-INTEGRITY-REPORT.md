@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-11-05 11:45:32 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-11-08 11:02:04 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 76 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
+**Geprüfte Live-Artikel:** 78 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -78,6 +78,7 @@
 | 2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt | 2 → 3 ✅ | /go/strom/ |
 | 2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle | 2 → 3 ✅ | /go/dsl/ |
 | 2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt | 3 → 3 ✅ | /go/strom/ |
+| 2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten | 3 → 3 ✅ | /go/strom/, /go/wohngebaeudeversicherung/ |
 | 2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle | 3 → 3 ✅ | /go/unfallversicherung/ |
 | 2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken | 3 → 3 ✅ | /go/strom/ |
 | 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig | 2 → 2 ✅ | /go/gas/ |
@@ -88,6 +89,7 @@
 | 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen | 1 → 2 ✅ | /go/mietwagen/ |
 | 2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht | 3 → 3 ✅ | /go/allgemein/ |
 | 2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege | 1 → 2 ✅ | /go/fluege/ |
+| 2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar | 2 → 3 ✅ | /go/strom/ |
 
 ## Hinweise (nicht blockierend)
 

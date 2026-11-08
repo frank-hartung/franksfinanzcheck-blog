@@ -551,6 +551,77 @@ await run('#923-Gegenprobe: Frischwache rot beim Messen -> RPO-Rat bleibt',
   true, ['<!-- alert-runbook: backup-frisch -->', 'Häufigste Ursachen'],
   null, ['<!-- alert-runbook: backup-einrichtung -->']);
 
+// 07.11.2026 (WF-9E5A / #923): DER GRÜNE LEERLAUF als roter Befund.
+//     Belegt am Lauf 42359904795: Der Job „backup" endet `success`, obwohl
+//     weder Ziel noch Passphrase gesetzt sind – die Annotationen sagen es
+//     selbst („Kein dauerhaftes Offsite-Ziel" / „Kein BACKUP_PASSPHRASE").
+//     Der neue Selbstheilungs-Schritt macht daraus einen roten Befund mit
+//     EIGENEM Rat: nicht „einrichten" (das kann vollständig sein und trotzdem
+//     nichts sichern, Stichwort Opt-in ohne Ziel) und nicht „neu starten"
+//     (der nächste Lauf wäre genauso leer).
+await run('#923: Selbstheilung rot in der Frischwache -> eigener Leerlauf-Rat',
+  { workflowName: 'Backup-Frischwache (operative RPO-Wache)', branch: 'main', event: 'schedule',
+    conclusion: 'failure',
+    jobs: [{ name: 'Backup-Frische pruefen (RPO 24 h / 52 h)', conclusion: 'failure',
+             html_url: 'https://x/jobs/9240',
+             steps: [{ name: 'Voraussetzungen prüfen (fail-closed – kein Schein-Grün)', conclusion: 'success' },
+                     { name: 'Selbstheilung (nur Beweisbares – Dispatch mit Lauf-Nachweis)',
+                       conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: backup-leerlauf -->',
+         'Ein Lauf ist grün – und trotzdem ist nichts gesichert',
+         'Schritte 2–4',
+         'ein Neustart ändert nichts',
+         'actions/workflows/backup-offsite.yml'],
+  null, ['<!-- alert-runbook: backup-frisch -->', 'Scheduler-Hänger ignoriert',
+         'Einrichtung unvollständig – ein Neustart hilft nicht', 'API-Key abgelaufen']);
+
+// Gegenprobe: reps-Rat. Ist die EINRICHTUNG offen, bleibt sie die erste
+// Antwort – der Leerlauf ist dann nur die Folge, nicht die Ursache.
+await run('#923-Gegenprobe: offene Einrichtung schlägt den Leerlauf-Rat',
+  { workflowName: 'Backup-Frischwache (operative RPO-Wache)', branch: 'main', event: 'schedule',
+    conclusion: 'failure',
+    jobs: [{ name: 'Backup-Frische pruefen (RPO 24 h / 52 h)', conclusion: 'failure',
+             html_url: 'https://x/jobs/9241',
+             steps: [{ name: 'Voraussetzungen prüfen (fail-closed – kein Schein-Grün)',
+                       conclusion: 'failure' },
+                     { name: 'Selbstheilung (nur Beweisbares – Dispatch mit Lauf-Nachweis)',
+                       conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: backup-einrichtung -->'],
+  null, ['<!-- alert-runbook: backup-leerlauf -->']);
+// 07.11.2026 (WF-3150 / #1030): Die Messung urteilt nicht mehr selbst. Rot
+//     wird der Schluss-Schritt NACH der Selbstheilung. Der Rat muss sagen,
+//     dass die Wache schon gehandelt hat (Anstoß, zweite Messung) – der alte
+//     Rat „Scheduler-Hänger, Run workflow“ wäre eine Aufforderung, genau das
+//     zu tun, was der Lauf bereits getan hat.
+await run('#1030: Frischwache rot im Schlussurteil -> RPO-Rat MIT Selbstheilung',
+  { workflowName: 'Backup-Frischwache (operative RPO-Wache)', branch: 'main', event: 'schedule',
+    conclusion: 'failure',
+    jobs: [{ name: 'Backup-Frische pruefen (RPO 24 h / 52 h)', conclusion: 'failure',
+             html_url: 'https://x/jobs/1030a',
+             steps: [{ name: 'Selbstheilung – fehlende Sicherung anstoßen (fail-closed)',
+                       conclusion: 'success' },
+                     { name: 'Urteil fällen (fail-closed – ohne Nachweis kein Grün)',
+                       conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: backup-frisch -->', 'Häufigste Ursachen',
+         'bereits gehandelt', 'misst erneut', 'Selbstheilung',
+         'actions/workflows/backup-offsite.yml', 'docs/ANLEITUNG-OFFSITE-BACKUP.md'],
+  null, ['<!-- alert-runbook: backup-einrichtung -->', '<!-- alert-runbook: backup-restore -->',
+         'API-Key abgelaufen', 'GROQ', 'Einrichtung unvollständig']);
+
+// Gegenprobe: Auch ein Werkzeugfehler IN der Selbstheilung bleibt beim
+//     Frische-Rat – nicht beim Einrichtungs- oder Rückweg-Rat.
+await run('#1030-Gegenprobe: Selbstheilung stuerzt ab -> Frische-Rat, kein Einrichtungs-Rat',
+  { workflowName: 'Backup-Frischwache (operative RPO-Wache)', branch: 'main', event: 'schedule',
+    conclusion: 'failure',
+    jobs: [{ name: 'Backup-Frische pruefen (RPO 24 h / 52 h)', conclusion: 'failure',
+             html_url: 'https://x/jobs/1030b',
+             steps: [{ name: 'Frische messen (beide Release-Familien, Entwuerfe eingeschlossen)',
+                       conclusion: 'success' },
+                     { name: 'Selbstheilung – fehlende Sicherung anstoßen (fail-closed)',
+                       conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: backup-frisch -->', 'Häufigste Ursachen', 'bereits gehandelt'],
+  null, ['<!-- alert-runbook: backup-einrichtung -->', '<!-- alert-runbook: backup-restore -->']);
+
 // Gegenprobe: derselbe Schrittname in einem fremden Workflow bleibt beim
 // allgemeinen Runbook – die Klasse haengt am Workflow, nicht am Wort.
 await run('#923-Gegenprobe: gleicher Schrittname in fremdem Workflow -> Standard-Rat',

@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 06.11.2026 20:59 (Europe/Berlin)  
+> Automatisch aktualisiert: 08.11.2026 12:59 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -12,18 +12,21 @@
 
 ## Kommende Beiträge
 
-### Sa, 07. November 2026
-- **07:00** ⏳ Privathaftpflicht: Warum so wichtig und was sie kostet — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/
 ### So, 08. November 2026
-- **07:00** ⏳ Frugalismus Familie: Clever sparen ohne Verzicht — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/
+- **18:00** ⏳ Privathaftpflicht: Warum so wichtig und was sie kostet — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/
 ### Sa, 14. November 2026
 - **07:00** ⏳ Strategisch sparen: So kannst du deine Reisekasse füllen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/
 ### So, 15. November 2026
-- **07:00** ⏳ ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/
+- **07:00** ⏳ Frugalismus Familie: Clever sparen ohne Verzicht — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/
+### Sa, 21. November 2026
+- **07:00** ⏳ Flugvergleich im Winter: So findest du echte Billigflüge — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/
+### So, 22. November 2026
+- **07:00** ⏳ Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/
 
 ## Zuletzt veröffentlicht
 

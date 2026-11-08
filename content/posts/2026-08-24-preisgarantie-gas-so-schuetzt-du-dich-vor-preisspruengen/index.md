@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-11-04
+lastmod: 2026-11-07
 title: "Preisgarantie Gas: Was bei Preiserhöhung hilft"
 description: "Preisgarantie Gas: Steigt der Preis trotz Garantie? So prüfst du die Klausel, rechnest Marktrisiken ein und nutzt Widerspruch oder Sonderkündigung."
 date: 2026-08-24T08:35:12Z
@@ -126,7 +126,9 @@ Vergleiche dann die Änderung mit deiner Garantie. Steigt ein geschützter Teil 
 
 ## Was die Bundesnetzagentur zu Preisänderungen sagt
 
-Nach der [Bundesnetzagentur zu Preisen und Abschlägen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html) gilt: Haushaltskunden müssen mindestens einen Monat vor einer Preisänderung erfahren, was teurer wird und warum. Das Sonderkündigungsrecht muss dort genannt werden. In der Grundversorgung gelten zusätzliche Informationspflichten. Der Brief muss beides enthalten.
+Die [Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html) nennt klare Pflichten. Außerhalb der Grundversorgung muss der Anbieter Haushaltskunden mindestens einen Monat vorher informieren. Er muss Anlass, Voraussetzungen und Umfang der Änderung nennen. Auch dein Sonderkündigungsrecht muss im Schreiben stehen.
+
+Für die Grundversorgung gelten strengere Regeln nach § 5 StromGVV/GasGVV. Prüfe zuerst deine Vertragsart.
 
 Kündigst du zum Zeitpunkt der Änderung, endet dein Vertrag am Vortag – eine Frist musst du nicht abwarten. Ausnahmen gelten unter anderem bei einer vereinbarten separierten Preisanpassungsklausel für bestimmte hoheitliche Änderungen und bei der reinen Weitergabe einer Umsatzsteueränderung. Beides prüfst du am Schreiben und an deiner Klausel.
 
@@ -190,7 +192,7 @@ Eine längere Garantie ist nicht automatisch sicherer. Wenn du dafür schon am S
 
 Garantierte Preise schützen nicht vor einem kalten Winter oder höherer Raumtemperatur. Senkst du den Verbrauch, sinkt auch dein Risiko bei jeder künftigen Änderung.
 
-Prüfe deshalb Raumtemperaturen, Lüftung, freie Heizkörper und Anlagenzustand. Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892) nennt etwa 6 % weniger Heizenergie pro Grad niedrigere Raumtemperatur als Faustwert. Wie viel du sparst, hängt von Gebäude und Ausgangswert ab.
+Prüfe deshalb Raumtemperaturen, Lüftung, freie Heizkörper und Anlagenzustand. Beachte dabei die Schimmelgrenze: Die Verbraucherzentrale empfiehlt, nicht unter 16 °C zu heizen. Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892) nennt etwa 6 % weniger Heizenergie pro Grad niedrigere Raumtemperatur als Faustwert. Wie viel du sparst, hängt von Gebäude und Ausgangswert ab.
 
 > 💡 **Schnell-Tipp von FranksFinanzcheck:** Rechne den neuen Jahrespreis mit deinem echten Verbrauch und vergleiche erst dann: [**Gastarife prüfen**](/go/gas/). Der Link ist Werbung; für dich entstehen keine Mehrkosten.
 

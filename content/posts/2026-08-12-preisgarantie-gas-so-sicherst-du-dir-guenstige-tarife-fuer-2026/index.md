@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-11-04
+lastmod: 2026-11-07
 title: "Preisgarantie Gas: So sicherst du günstige Tarife"
 description: "Gastarife mit Preisgarantie richtig vergleichen: Filter, Gesamtpreis, Bonus, Laufzeit und Garantieumfang in einer Schritt-für-Schritt-Anleitung."
 date: 2026-08-12T08:35:12Z
@@ -34,6 +34,10 @@ quellen:
   - titel: "Referenzseite Bundesnetzagentur – Energie"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
+  - titel: "BDEW-Gaspreisanalyse Herbst 2026"
+    url: "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/"
+    herausgeber: "Bundesverband der Energie- und Wasserwirtschaft"
+    datum: "2026-10-28"
 faktencheck: 2026-11-01
 ---
 
@@ -88,6 +92,8 @@ Dein Abschlag gehört nicht ins Verbrauchsfeld. Er ist nur eine Vorauszahlung. N
 - angenommene Jahreskosten = **2.304 €**
 
 Im Beispiel ist das die Vergleichsbasis. Nutze für deine Rechnung deine eigenen Werte. Ein Bonus aus einem früheren Jahr zählt nicht mehr.
+
+**Marktübersicht ist kein Tarifangebot:** Der [BDEW](https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/) nennt im Oktober 2026 für neue Verträge im laufenden Jahr zwei Mittelwerte: 12,23 Cent/kWh im Einfamilienhaus und 11,67 Cent/kWh im Mehrfamilienhaus. Dein Tarif kann davon abweichen. Rechne mit deinem eigenen Angebot.
 
 ## Minute 3: Portalfilter neutral einstellen
 

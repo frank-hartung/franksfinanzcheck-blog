@@ -2,6 +2,15 @@
 # Zeilen vereinigen, statt bei wöchentlichen SEO-/Health-Läufen zu kollidieren.
 *.jsonl merge=union
 
+# BELEGKETTE DER PRODUKTIONS-SELBSTHEILUNG IST EINE KETTE, KEIN TEXT
+# (WF-829B / #922, 07.11.2026): Jede Zeile trägt `prev_sha256` und `sha256`
+# über die vorangehende Zeile. Zwei Läufe, die dieselbe Kette fortschreiben,
+# dürfen NIEMALS zeilenweise vereinigt werden – `merge=union` ergäbe zwei
+# Zeilen mit derselben `seq` und eine gebrochene Kette, die der Heiler zu
+# Recht als „nicht belegbar" ablehnt (D7: eine ganze Messung, kein Text).
+# Stattdessen: sichtbarer Konflikt, EINE Fassung wählen, Kette neu prüfen.
+data/produktions_schutz_belege.jsonl merge=binary
+
 # Das Integritäts-Siegel ist ein MASCHINEN-Artefakt, kein Quelltext: Es wird
 # von scripts/integrity_guard.py geschrieben (SHA-256-Map + verkettete Akte)
 # und niemals von Hand zusammengesetzt. Git hat es am 21.09.2026 trotzdem wie
