@@ -503,11 +503,20 @@ Diese Fehler treten in den Schritten nach der Prüfung auf:
 
 ## Selbstheilung – was das System selbst repariert (und was NICHT)
 
-Seit 07.11.2026 (Vorgang WF-9E5A / #923) enthält die tägliche Frischwache
-einen Schritt **„Selbstheilung (nur Beweisbares – Dispatch mit Lauf-Nachweis)“**
-(`scripts/backup_selbstheilung.py`). Er ist bewusst eng: Er repariert, was
-**beweisbar kaputt** ist und **ohne jeden Zugang** repariert werden kann –
-alles andere benennt er, statt es zu erfinden.
+Seit 07.11.2026 (Vorgänge WF-9E5A / #923 und WF-3150 / #1030) enthält die
+tägliche Frischwache **zwei** Schritte mit klarer Rollentrennung
+(`scripts/backup_selbstheilung.py`):
+
+| Schritt | Recht | Aufgabe |
+|---|---|---|
+| „Selbstheilung – fehlende Sicherung anstoßen (fail-closed)“ | Lauf-Token (`actions: write`) | **der einzige** Schritt, der anstößt (`--heilen`): messen → entscheiden → genau ein Dispatch → begrenzt warten → **erneut messen** |
+| „Leerlauf prüfen – grüner Lauf ohne Sicherung (fail-closed)“ | Lauf-Token, **nur lesend** (`--leerlauf`) | misst auf **Job-Ebene** und am jüngsten Lauf **mit Schritten**, ob ein grüner Lauf tatsächlich gesichert hat |
+
+Beide sind bewusst eng: Sie reparieren, was **beweisbar kaputt** ist und **ohne
+jeden Zugang** repariert werden kann – alles andere benennen sie, statt es zu
+erfinden. Zwei Heilschritte gab es bis zum 08.11.2026 versehentlich (ein
+Merge-Rest aus beiden Vorgängen): Der zweite hätte im selben Lauf ein zweites
+Mal anstoßen können. Jetzt gibt es genau **einen** Schreiber.
 
 | Klasse | Was gemessen wird | Heilung |
 |---|---|---|

@@ -183,3 +183,94 @@ mit **zwei richtigen Ausnahmen**, und genau das war der Defekt:
    fehlende Felder; er schließt und öffnet keinen Befund fachlich.
 4. **Wer heilt, beweist:** Vorher/Nachher-Gleichheit aller Blöcke plus
    strenges Nachlesen – sonst Rollback auf die Original-Bytes.
+
+---
+
+# Nachtrag (zweiter Befund): die rote CI war ein kaputter Merge – nicht ein Testfehler
+
+Beim Warten auf den `regression`-Job des PR fiel auf: Der Job war **auch auf
+`main` rot**, und zwar nicht wegen der zwei bekannten #763/#823-Tests allein.
+Lokal (voller Lauf, `discover -s scripts/tests`, 5674 Tests) waren es
+**7 Failures und 3 Errors** – und alle zehn waren mit `git worktree` auf dem
+Basis-Commit `d0828dc` reproduzierbar. Sie stammten also nicht aus diesem PR.
+
+## 1. Die Ursache: ein Merge, der zwei Stände halb zusammengeführt hat
+
+Am 07.11.2026 liefen **zwei** Vorgänge parallel am selben Werkzeug:
+
+* `WF-3150 / #1030` – Selbstheilung: eigener Heilschritt, 18 Selbsttest-Gruppen
+  (`WARTUNG-BACKUP-WF-3150-1030-SELBSTHEILUNG-HIGHEND-2026-11-07.md`).
+* `WF-9E5A / #923` – Messhöhe: Klassen `scheduler`/`leerlauf`/`scheinbeweis`/
+  `einrichtung`, Job-Ebene, Zeugen-Filter, Exit 3/4, `--vertrag`, `--plan`
+  (`WARTUNG-BACKUP-WF-9E5A-HIGHEND-2026-11-07.md`).
+
+In `main` landeten **die Verbraucher des zweiten Vorgangs** (Workflow-Schritt,
+Alerting-Klasse `backup-leerlauf`, Simulationsszenarien, 11 Vertragstests) –
+**aber nicht das Modul**. `scripts/backup_selbstheilung.py` ist der Stand des
+ersten Vorgangs: kein `KLASSEN`, kein `pruefe_leerlauf`, kein `_zeugt_lauf`,
+kein `--vertrag`, kein Exit 3/4. Zusätzlich standen danach **zwei** Schritte im
+selben Job, die beide `--heilen` aufriefen.
+
+Das erklärt jeden einzelnen der zehn Fehlschläge:
+
+| Fehlschlag | Ursache |
+|---|---|
+| `AttributeError: KLASSEN` / `pruefe_leerlauf` | Modul ohne die 07.11-Funktionen |
+| `erwartet genau einen Schritt mit „Selbstheilung“` (2 ≠ 1) | zwei Heilschritte im Job |
+| `--vertrag` in `backup-frischwache.yml` | Flag existierte nicht → der tägliche Selbsttest-Schritt wäre rot geworden |
+| `#1030-Gegenprobe` in der Simulation | Alerting las **jedes** „Selbstheilung“ als Leerlauf |
+| `test_keine_github_expression_in_run_bloecken` | `${GITHUB-OUTPUT}` direkt im `run:` von `ki-provenienz-wache.yml` |
+
+Der `--vertrag`-Fall ist der ernsteste: Er wäre nicht im PR aufgefallen, sondern
+erst im **nächtlichen** Lauf – ein Selbsttest, der das Werkzeug prüft, das ihn
+nicht kennt.
+
+## 2. Was jetzt gilt (und was der Vertrag prüft)
+
+* **Ein Schreiber.** Genau ein Schritt ruft `--heilen` (Dispatch-Recht,
+  `AKTION_TOKEN`). Der zweite, gleichnamige Schritt ist jetzt eine **lesende**
+  Prüfung: `Leerlauf prüfen – grüner Lauf ohne Sicherung (fail-closed)` mit
+  `--leerlauf`. Zwei Heilschritte hätten im selben Lauf zweimal anstoßen können;
+  der Test hält die Zahl der Schreiber fest (`--heilen` genau einmal).
+* **Die Klasse hängt am Wortlaut, nicht an der Stimmung.** Das Alerting liest
+  `Leerlauf prüfen` → `backup-leerlauf`, `Selbstheilung` → `backup-frisch`.
+  Vorher verschluckte der Leerlauf-Rat jeden Werkzeugfehler der Heilung.
+* **Die Messhöhe ist Vertrag.** `_zeugt_lauf()` überspringt `skipped`-Läufe mit
+  0 Schritten (live belegt: Lauf 42386235574); `pruefe_leerlauf()` misst den Job
+  `backup`, **nie** den KV-Job; `pruefe_scheinbeweis()` macht aus einem
+  übersprungenen Rückweg-Nachweis einen Befund.
+* **Der Klassenvertrag ist ausführbar.** `--vertrag` gibt die vier Klassen aus
+  und endet rot, wenn mehr als `scheduler` heilbar wäre. `--plan`/`--leerlauf`
+  lesen nur; Exit 3 (Einrichtung, Vorrang) · 4 (Leerlauf) · 1 (Scheinbeweis) ·
+  2 (Werkzeugfehler) – dieselbe Sprache wie das Alerting.
+* **Kein neuer Endpunkt.** Der Jobs-Aufruf nutzt die von GitHub gelieferte
+  `jobs_url`; die Endpunkt-Liste bleibt bei drei Pfaden, `POST` nur auf
+  `/dispatches`.
+* **Kein Geheimnis in der Prüfung.** `pruefe_leerlauf()` bekommt nur
+  **Anwesenheit** (`ziel_gesetzt`, `pflicht_gesetzt`), nie Werte – die
+  Klartext-Wache (`FLUSS`) hat die erste Fassung sofort beanstandet, und sie
+  hatte recht.
+* **Die Simulation testet das, was läuft.** Die Attrappe für
+  `github.rest.actions.getWorkflowRun` fehlte; die Verhaltens-Probe landete
+  dadurch im Fehlerpfad (`fail-open`) statt in der Regel (Live-Nachladen des
+  Abschlusszustands, Phantom-Filter WF-A3AD/#604).
+
+## 3. Nachweise (lokal gefahren)
+
+| Prüfung | Ergebnis |
+|---|---|
+| `unittest discover -s scripts/tests` | **2** Fehlschläge (vorher 10) – beide **nicht** inhaltlich: der Feed-Test misst `public/` (lokal ohne Hugo-Build nicht beweisbar; in CI gebaut) |
+| `test_backup_einrichtung` + `test_backup_selbstheilung` | **109 Tests OK** (vorher 75 + 3 rote) |
+| `test_alert_scoping` (inkl. node-Simulation, 80 Szenarien) | **32 Tests OK** |
+| `backup_selbstheilung.py --selftest` / `--vertrag` | **21 Fallgruppen** / Vertrag eingehalten |
+| `clear_text_logging_guard.py` | **0 Befunde im Hauscode** |
+| `trigger_wache --check` · `workflow_vertrag_wache --gate` · `skript_syntax_wache --check` · `wachen_vertrag` · `workflow_js_wache --check` | alle grün (102 Workflows) |
+| `governance_contract.py --selftest` (C1–C49) | OK |
+
+## 4. Die Lehre
+
+Ein Merge, der **Aufrufer** übernimmt und **das Werkzeug** nicht, sieht grün aus,
+weil niemand die Aufrufer mehr ausführt, bis der Scheduler es tut. Was das
+verhindert, ist nicht mehr Sorgfalt, sondern ein **Selbsttest des Werkzeugs im
+Workflow** (`--selftest`, `--vertrag`) *vor* der Heilung – und ein Vertrag, der
+die Zahl der Schreiber prüft. Beides steht jetzt im Lauf.

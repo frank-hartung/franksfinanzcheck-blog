@@ -390,45 +390,59 @@ jobs:
       #  Kaputtes, nur ohne Zugang Reparierbares, immer mit Beweis. Was der
       #  Inhaber tun muss, wird benannt – nicht erfunden.
       # ================================================================
-      - name: Selbstheilung (nur Beweisbares – Dispatch mit Lauf-Nachweis)
-        # `!cancelled()`: Die Heilung ist eine eigene Aufgabe und darf nicht
-        # am Ausgang der Messung davor hängen (derselbe Grund wie oben).
+      # ================================================================
+      #  LEERLAUF-PRÜFUNG (WF-9E5A / #923, 07.11.2026) – LESEND
+      #  ------------------------------------------------------------
+      #  Ein grüner Lauf, der nichts sichert, ist der SCHWERERE Befund als
+      #  „bitte einrichten“: Er behauptet bereits Erfolg. Gemessen wird
+      #  deshalb auf JOB-Ebene (Job „backup“) und am jüngsten Lauf, der
+      #  SCHRITTE HAT – ein `skipped`-Lauf mit 0 Schritten (Job-Guard auf
+      #  fremdem Branch) ist kein Zeuge, sondern ein Platzhalter.
+      #
+      #  Warum dieser Schritt NICHT anstößt: Das Dispatch-Recht liegt genau
+      #  einmal, im Schritt „Selbstheilung – fehlende Sicherung anstoßen“
+      #  darüber. Zwei Schritte mit Recht wären zwei Wege zu einem Doppellauf.
+      #  Dieser Schritt liest nur (`--leerlauf`), startet nichts und ist damit
+      #  auch dann harmlos, wenn die Heilung gerade einen Lauf angestoßen hat.
+      #
+      #  Der Name ist Absicht: Das Fehler-Alerting erkennt die Klasse
+      #  `backup-leerlauf` am stabilen Wortteil „Leerlauf prüfen“ – nicht am
+      #  Wort „Selbstheilung“, das hier zwei verschiedene Ursachen deckte
+      #  (ein Werkzeugfehler der Heilung ist der Frische-Fall, kein Leerlauf).
+      # ================================================================
+      - name: Leerlauf prüfen – grüner Lauf ohne Sicherung (fail-closed)
         if: ${{ !cancelled() }}
         env:
-          # Nur der Lauf-Token: Er startet einen Lauf im EIGENEN Repo
-          # (actions: write). Die Backup-Zugänge selbst sind hier nicht nötig
-          # – die Heilung sieht von Ziel und Passphrase ausschließlich, OB sie
-          # gesetzt sind (sie liest keine Werte und gibt keine aus).
+          # Nur der Lauf-Token: Die Prüfung liest Läufe und Jobs des EIGENEN
+          # Repos. Ziel und Passphrase sieht sie ausschließlich als „gesetzt /
+          # nicht gesetzt“ – sie liest keine Werte und gibt keine aus.
           GH_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           BACKUP_REPO: ${{ vars.BACKUP_REPO }}
           BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
         run: |
           set +e
-          python3 scripts/backup_selbstheilung.py --heilen
+          python3 scripts/backup_selbstheilung.py --leerlauf
           RC=$?
           set -e
-          # 0 = nichts zu heilen (bzw. Heilung bewiesen)         → grün
-          # 1 = heilbar, aber Beweis ausgeblieben                → ROT (mit Beleg)
-          # 3 = nichts automatisch heilbar (Inhaber-Schritt)     → Hinweis;
-          #     ROT trägt bereits „Voraussetzungen prüfen“, ein zweites Rot
-          #     ohne eigenen Rat wäre nur Lärm.
-          # 4 = ein Lauf ist grün, gesichert wurde aber NICHTS  → eigener
-          #     Rat `backup-leerlauf` im Fehler-Alerting, eigene Klasse im
-          #     Vorgang. „Gelaufen" ist wahr, „gesichert" nicht – und genau
-          #     diese Verwechslung soll niemand mehr selbst erkennen müssen.
+          # 0 = kein Befund auf Job-Ebene                        → grün
+          # 1 = Rückweg-Nachweis fehlt/übersprungen              → ROT (mit Beleg)
+          # 2 = Prüfung nicht entscheidbar (API/Format)          → ROT (C33)
+          # 4 = ein Lauf ist grün, gesichert wurde aber NICHTS   → ROT, eigener Rat
           if [ "$RC" = "1" ]; then
-            echo "::error::Selbstheilung konnte den Befund nicht beweisen (Exit 1) – Details in der Job-Zusammenfassung."
+            echo "::error::Der Rückweg-Nachweis ist nicht belegt (Exit 1) – Details in der Job-Zusammenfassung."
+            exit 1
+          fi
+          if [ "$RC" = "2" ]; then
+            echo "::error::Die Leerlauf-Prüfung konnte nicht entscheiden (Exit 2) – Anleitung: docs/ANLEITUNG-OFFSITE-BACKUP.md"
             exit 1
           fi
           if [ "$RC" = "4" ]; then
             echo "::error title=Backup-Leerlauf::Ein Lauf ist grün, gesichert wurde aber nichts (kein dauerhaftes Ziel bzw. keine Passphrase). Das ist kein Erfolg: Es existiert nur eine 7-Tage-Kurzzeitkopie im selben Konto. Weg: docs/ANLEITUNG-OFFSITE-BACKUP.md, Schritte 1–7."
             exit 1
           fi
-          if [ "$RC" = "3" ]; then
-            echo "::notice::Kein automatisch heilbarer Befund – der Inhaber-Schritt ist unten benannt (docs/ANLEITUNG-OFFSITE-BACKUP.md)."
-          fi
           exit 0
+
       #  SCHLUSSURTEIL (WF-3150 / #1030, 07.11.2026)
       #  ------------------------------------------------------------
       #  Der einzige Schritt, der wegen der Frische rot werden darf – und

@@ -166,7 +166,11 @@ jobs:
 
       - name: Befund durchreichen (rot bleibt rot)
         if: always()
+        env:
+          # Über `env`, nicht per `${{ }}` im `run:`-Block: Eine direkte
+          # Interpolation macht den Schritt für Template-Injection offen
+          # (Wache `test_keine_github_expression_in_run_bloecken`, #1133).
+          WACHE_CODE: ${{ steps.wache.outputs.code }}
         run: |
-          code="${{ steps.wache.outputs.code }}"
           # Leer heißt: die Wache ist gar nicht gelaufen. Auch das ist rot.
-          exit "${code:-1}"
+          exit "${WACHE_CODE:-1}"

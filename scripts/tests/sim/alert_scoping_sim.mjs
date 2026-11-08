@@ -47,7 +47,7 @@ if (!scriptPath) {
 }
 const raw = fs.readFileSync(scriptPath, 'utf8');
 
-function makeCtx({ branch, event, conclusion, workflowName = 'Layout-AI', runId = 42, attempt = 1, jobs = null, jobsFail = false, updateFail = false, openIssues = [] }) {
+function makeCtx({ branch, event, conclusion, workflowName = 'Layout-AI', runId = 42, attempt = 1, jobs = null, jobsFail = false, updateFail = false, openIssues = [], freshRun = null, freshFail = false }) {
   const created = [];
   const updated = [];
   const github = {
@@ -60,7 +60,18 @@ function makeCtx({ branch, event, conclusion, workflowName = 'Layout-AI', runId 
       throw new Error('unexpected paginate ' + method);
     },
     rest: {
-      actions: { listJobsForWorkflowRun: 'LIST_JOBS' },
+      actions: {
+        listJobsForWorkflowRun: 'LIST_JOBS',
+        // Das Produktionsskript lädt den Abschlusszustand LIVE nach (Phantom-
+        // Filter WF-A3AD/#604). Fehlte die Attrappe, testete die Simulation
+        // einen Fehlerpfad statt der Regel: Sie lieferte den Webhook-Stand
+        // unverändert (fail-open) – und `freshRun`/`freshFail` machen die
+        // Abweichung überhaupt erst prüfbar.
+        getWorkflowRun: async (o) => {
+          if (freshFail) throw new Error('API down (getWorkflowRun)');
+          return { data: { ...context.payload.workflow_run, ...(freshRun || {}) } };
+        },
+      },
       issues: {
         listForRepo: 'LIST_ISSUES',
         createLabel: async () => { throw new Error('Label existiert bereits'); },
@@ -565,7 +576,7 @@ await run('#923: Selbstheilung rot in der Frischwache -> eigener Leerlauf-Rat',
     jobs: [{ name: 'Backup-Frische pruefen (RPO 24 h / 52 h)', conclusion: 'failure',
              html_url: 'https://x/jobs/9240',
              steps: [{ name: 'Voraussetzungen prüfen (fail-closed – kein Schein-Grün)', conclusion: 'success' },
-                     { name: 'Selbstheilung (nur Beweisbares – Dispatch mit Lauf-Nachweis)',
+                     { name: 'Leerlauf prüfen – grüner Lauf ohne Sicherung (fail-closed)',
                        conclusion: 'failure' }] }] },
   true, ['<!-- alert-runbook: backup-leerlauf -->',
          'Ein Lauf ist grün – und trotzdem ist nichts gesichert',
@@ -584,7 +595,7 @@ await run('#923-Gegenprobe: offene Einrichtung schlägt den Leerlauf-Rat',
              html_url: 'https://x/jobs/9241',
              steps: [{ name: 'Voraussetzungen prüfen (fail-closed – kein Schein-Grün)',
                        conclusion: 'failure' },
-                     { name: 'Selbstheilung (nur Beweisbares – Dispatch mit Lauf-Nachweis)',
+                     { name: 'Leerlauf prüfen – grüner Lauf ohne Sicherung (fail-closed)',
                        conclusion: 'failure' }] }] },
   true, ['<!-- alert-runbook: backup-einrichtung -->'],
   null, ['<!-- alert-runbook: backup-leerlauf -->']);

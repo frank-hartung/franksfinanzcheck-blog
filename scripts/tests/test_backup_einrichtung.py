@@ -1381,7 +1381,8 @@ class SelbstheilungVertrag(unittest.TestCase):
         self.assertIn('- "scripts/backup_selbstheilung.py"', text.split("paths:")[1][:1400],
                       "Trigger-Wache W1: der Pfad muss den Lauf auslösen")
         # Ein Beweis, der still grün wird, wenn er scheitert, ist keiner.
-        block = text.split("Selbstheilung (nur Beweisbares", 1)[1].split("- name:", 1)[0]
+        block = text.split("Leerlauf prüfen – grüner Lauf ohne Sicherung", 1)[1].split(
+            "- name:", 1)[0]
         self.assertIn('if [ "$RC" = "1" ]', block)
         self.assertIn("exit 1", block)
         # Ein grüner Lauf, der nichts sichert, ist der schwerere Befund als
@@ -1417,7 +1418,7 @@ class SelbstheilungVertrag(unittest.TestCase):
         if yaml is None:
             raise unittest.SkipTest("PyYAML lokal nicht installiert (CI installiert es)")
         schritte = _frischwache_workflow()["jobs"]["frischwache"]["steps"]
-        heilung = next(s for s in schritte if "Selbstheilung (nur Beweisbares" in s.get("name", ""))
+        heilung = next(s for s in schritte if "Leerlauf prüfen" in s.get("name", ""))
         env = heilung.get("env", {})
         self.assertEqual(env.get("GH_TOKEN"), "${{ github.token }}",
                          "die Heilung nutzt ausschließlich den Lauf-Token")
