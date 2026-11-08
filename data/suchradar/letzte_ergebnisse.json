@@ -1,5 +1,5 @@
 {
- "zeitstempel": "2026-11-07T14:05:52.813707+02:00",
+ "zeitstempel": "2026-11-08T14:23:07.231048+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 25,
  "zaehlung": {
@@ -27,11 +27,11 @@
  "fehler": [
   {
    "anfrage": "franksfinanzcheck.de",
-   "fehler": "Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: keine Treffer | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
+   "fehler": "Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer | https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   },
   {
    "anfrage": "Gaskosten senken",
-   "fehler": "Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: keine Treffer | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
+   "fehler": "Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer | https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   }
  ],
  "rang": [
@@ -117,16 +117,6 @@
   },
   {
    "anfrage": "Stromanbieter wechseln",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Taschengeld Kinder",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -256,6 +246,16 @@
    "sichtbar": false
   },
   {
+   "anfrage": "Unnötige Versicherungen kündigen",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
    "anfrage": "Versicherungen kündigen",
    "eigener_rang": 0,
    "vorher": 0,
@@ -349,7 +349,7 @@
     ]
    },
    {
-    "domaene": "accountable.de",
+    "domaene": "fonio.ai",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 9,
@@ -359,7 +359,7 @@
     ]
    },
    {
-    "domaene": "fonio.ai",
+    "domaene": "finanzenfroh.com",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 10,

@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-07T14:05:52.813707+02:00",
+ "stand": "2026-11-08T14:23:07.231048+02:00",
  "rankings": [
   {
    "anfrage": "DSL Anbieter Vergleich",
@@ -83,16 +83,6 @@
   },
   {
    "anfrage": "Stromanbieter wechseln",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Taschengeld Kinder",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -213,6 +203,16 @@
   },
   {
    "anfrage": "Unfallversicherung",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Unnötige Versicherungen kündigen",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,

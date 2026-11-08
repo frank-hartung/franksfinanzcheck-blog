@@ -1,6 +1,6 @@
 # SUCHRADAR – Status
 
-> Stand: 2026-11-07 14:05:52 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
+> Stand: 2026-11-08 14:23:07 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
 > Schlüssellos · 0 € · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md`
 
 ## Lauf
@@ -51,15 +51,15 @@ _Kein eigener Treffer in den gemessenen Anfragen._
 | mlp-financify.de | 1 | 0 | 6.0 | 6 |
 | meetadam.io | 1 | 0 | 7.0 | 7 |
 | vr.de | 1 | 0 | 8.0 | 8 |
-| accountable.de | 1 | 0 | 9.0 | 9 |
-| fonio.ai | 1 | 0 | 10.0 | 10 |
+| fonio.ai | 1 | 0 | 9.0 | 9 |
+| finanzenfroh.com | 1 | 0 | 10.0 | 10 |
 
 ## Störungen
 
 | Suchbegriff | Meldung |
 |---|---|
-| franksfinanzcheck.de | Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://opnxng.com: keine Treffer / |
-| Gaskosten senken | Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://opnxng.com: keine Treffer / htt |
+| franksfinanzcheck.de | Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Treffer / |
+| Gaskosten senken | Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://opnxng.com: keine Treffer / https://paulgo.io: keine Treffer / htt |
 
 ## Einordnung
 
