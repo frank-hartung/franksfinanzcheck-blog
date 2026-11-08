@@ -489,32 +489,32 @@ class Faktenfrische823MetaTests(unittest.TestCase):
     def test_faktenfrische_queue_haelt_befunde_geschlossen(self):
         """Kein OFFENER BEFUND darf die zwei Slugs wieder führen.
 
-        07.11.2026 – Messhöhe korrigiert: gelesen wird das Ledger
-        (`fachbefunde`), nicht `queue['offen']`. Letzteres ist der
-        Arbeitsvorrat mit Fristen; aus ihm „offene Befunde“ zu lesen erzeugte
-        Fehlalarme bei turnusgemäßer Wiederaufnahme und hätte einen echten
-        Rückfall übersehen. Siehe #763-Modul, gleiche Korrektur.
+        WARUM NUR DAS LEDGER GEMESSEN WIRD (07.11.2026, #1072; Nachzug
+        08.11.2026, #1126)
+        ------------------------------------------------
+        Frühere Fassungen lasen `queue['offen']` und hielten das für die
+        Befundliste. `offen` ist aber der ARBEITSVORRAT: Seiten, deren
+        Faktencheck fällig wird, stehen dort mit Grund und Frist – ohne jeden
+        Fachbefund. Der Test wurde damit rot, sobald eine Seite turnusgemäß
+        wieder in den Vorlauf rutschte (Fehlalarm), und er wäre grün
+        geblieben, wenn ein echter Befund zurückgekehrt wäre (blinde Stelle).
+        F4 (Fachbefund) ist nicht F1 (Faktencheck-Fälligkeit).
+
+        Gemessen wird deshalb dort, wo Befunde stehen: im Ledger
+        (`data/faktenfrische_queue.json` → `fachbefunde`, gelesen über
+        `faktenfrische_befund_ledger`). Die Arbeitsliste darf die Seiten
+        führen – sie darf nur keinen Befund transportieren.
         """
         import faktenfrische_befund_ledger as ledger
         queue = ROOT / 'data' / 'faktenfrische_queue.json'
         if not queue.exists():
             self.skipTest('Queue-Datei nicht vorhanden')
         kerne = {re.sub(r'^\d{4}-\d{2}-\d{2}-', '', s) for s in (SAISON, DNS)}
-        # Siehe test_faktenfrische_763: `offen` ist der Fälligkeits-/GEO-
-        # Report, nicht die Liste der Fachbefunde. Ein fälliger Artikel ist
-        # kein offener Befund (F4 ≠ F1, #1072).
-        for eintrag in queue.get('fachbefunde', []):
-            slug = eintrag.get('slug') or ''
-            kern = re.sub(r'^\d{4}-\d{2}-\d{2}-', '', slug)
-            self.assertNotIn(kern, kerne,
-                             f'Queue meldet offene Fachbefunde für {slug}')
         for eintrag in ledger.offene_befunde(queue):
             kern = re.sub(r'^\d{4}-\d{2}-\d{2}-', '', eintrag.get('slug') or '')
             self.assertNotIn(kern, kerne,
                              f'Offener Befund zurückgekehrt für {eintrag.get("slug")}: '
                              f'{eintrag.get("typ")} – {eintrag.get("text")}')
-        """Kein offener Befund für die zwei Seiten – die Arbeitsliste darf sie
-        führen (Frist 15.11.2026, Vorlauf 14 Tage), aber nicht als Befund."""
         self.assertFalse(offene_befunde((SAISON, DNS)),
                          'Queue meldet offenen Befund für eine der zwei Seiten')
         self.assertFalse(arbeitsliste_traegt_befunde((SAISON, DNS)),

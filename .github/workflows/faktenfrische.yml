@@ -153,6 +153,15 @@ jobs:
         if: always()
         continue-on-error: true
         run: |
+          # STRUKTUR ZUERST (08.11.2026, #1098): Ein doppelter Schlüssel in
+          # der Schließakte wird von YAML still überschrieben; danach ist kein
+          # Leser mehr in der Lage, die Entscheidungen zu prüfen. Der Heiler
+          # trennt die Blöcke idempotent und rollt bei Zweifel zurück, BEVOR
+          # die Nachlese schreibt.
+          python3 scripts/faktenfrische_befund_ledger.py --reparieren --apply \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          python3 scripts/faktenfrische_befund_ledger.py --struktur-pruefen \
+            | tee -a "$GITHUB_STEP_SUMMARY"
           python3 scripts/faktenfrische_befund_ledger.py --nachlese --apply \
             | tee -a "$GITHUB_STEP_SUMMARY"
 
@@ -195,6 +204,7 @@ jobs:
               data/faktenfrische_queue.json \
               data/faktenfrische_history.jsonl \
               data/faktenfrische_befunde_state.json \
+              data/faktenfrische_entscheidungen.yaml \
               BEFUND-AKTE.md \
               FAKTENFRISCHE-REPORT.md
           else

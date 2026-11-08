@@ -86,6 +86,28 @@ jobs:
           python3 scripts/release_bestand_heiler.py --selftest
           python3 -m unittest scripts.tests.test_release_bestand_heiler
 
+      # SCHLIESSAKTE STRUKTURELL HEILEN (08.11.2026, #1098-Nachlauf)
+      # -----------------------------------------------------------
+      # Ein Writer-Fehler hängte Folgeentscheidungen IN fremde
+      # Listeneinträge. YAML nimmt dann still den letzten Wert: Der Eintrag
+      # trug eine `geprueft_fassung` und einen `vorgaenger_geprueft_fassung`
+      # aus zwei VERSCHIEDENEN Ketten, und die Scorecard fiel als
+      # Werkzeugfehler aus („Vorgänger fehlt oder stimmt nicht") – obwohl
+      # jede Entscheidung belegt war. Der Heiler trennt die Blöcke, ergänzt
+      # nur die beim Anfügen verlorenen Felder (Slug, Befund-ID, Bindung),
+      # weist Unzuordenbares aus und rollt bei jedem Zweifel die
+      # Original-Bytes zurück. Danach gilt fail-closed: Ein doppelter
+      # Schlüssel ist rot, nicht „nichts gesehen".
+      - name: Schließakte strukturell heilen (Selbstheilung, fail-closed)
+        id: schliessakte
+        run: |
+          set -Eeuo pipefail
+          python3 scripts/faktenfrische_befund_ledger.py --selftest
+          python3 scripts/faktenfrische_befund_ledger.py --reparieren --apply \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          python3 scripts/faktenfrische_befund_ledger.py --struktur-pruefen \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+
       # Render-Beweise (Affiliate-Integrität, Offenlegung, SEO-Audit,
       # Seiten-Existenz) brauchen den Build. Ohne ihn wäre die Scorecard
       # ehrlich „nicht beweisbar“ – wir bauen also lieber.
@@ -255,6 +277,12 @@ jobs:
           git config user.name "Release-Scorecard-Bot"
           git config user.email "release-scorecard-bot@users.noreply.github.com"
           git add -- "$REPORT" data/release_scorecard_state.json data/release_scorecard_history.jsonl
+          # Die strukturelle Heilung der Schließakte (#1098) ist ein
+          # Beweisstand, kein Inhalt: Sie wird mitcommittet, damit der nächste
+          # Lauf nicht dieselbe Reparatur wiederholen muss.
+          if ! git diff --quiet -- data/faktenfrische_entscheidungen.yaml; then
+            git add -- data/faktenfrische_entscheidungen.yaml
+          fi
           # Content nur nach bestätigter Nachmessung committen. Ein bloßer
           # Heilungsversuch oder Rollback darf keine Textänderung nach main bringen.
           if [ "${BESTAETIGT:-}" = "success" ] && [ "${HEILUNG:-}" = "success" ] && [ "${ROLLBACK:-}" != "failure" ]; then

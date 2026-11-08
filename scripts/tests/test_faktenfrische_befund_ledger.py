@@ -130,15 +130,23 @@ class LedgerTests(unittest.TestCase):
         self.assertEqual(ledger.offene_befunde(self.queue, self.decisions), [changed])
 
     def test_abgeleitete_bildzeile_oeffnet_keine_entscheidung(self):
-        """#1098: Der Textpflege-Bot darf den Schließpfad nicht wieder öffnen."""
+        """Eine ABGELEITETE Bildzeile ist Text, aber keine Behauptung.
+
+        Der Ableiter schreibt seine Herkunft in die Zeile
+        („(eigene Darstellung …)"). Sie darf den Aussage-Hash nicht ändern –
+        sonst reißt jede Bildpflege eine dokumentierte Entscheidung auf (#1072)
+        –, muss im VOLLTEXT-Hash aber sichtbar bleiben.
+        """
         fm = 'title: "Warmwasser"\nkurzantwort: "rund 16 Prozent"'
         kern = "Warmwasser braucht rund 16 Prozent der Haushaltsenergie."
         vorher = {"fm": fm, "body": kern + "\n\n"
                   "![Merkkarte](abbildung-merkkarte.svg)\n\n"
-                  "*Abbildung: Merkkarte zu „Warmwasser“ (eigene Darstellung).*"}
+                  "*Abbildung: Merkkarte zu „Warmwasser“ "
+                  "(eigene Darstellung aus diesem Beitrag).*"}
         nachher = {"fm": fm, "body": kern + "\n\n"
                    "![Merkkarte](abbildung-merkkarte.svg)\n\n"
-                   "*Abbildung: Gliederung zu „Warmwasser“ – 5 Stationen.*"}
+                   "*Abbildung: Merkkarte zu „Warmwasser Warmwasserbereitung“ "
+                   "(eigene Darstellung aus diesem Beitrag).*"}
         self.assertEqual(ledger.text_hash(vorher), ledger.text_hash(nachher))
         self.assertNotEqual(ledger.text_hash_volltext(vorher),
                             ledger.text_hash_volltext(nachher))
@@ -146,59 +154,104 @@ class LedgerTests(unittest.TestCase):
         self.assertNotEqual(ledger.text_hash(geaendert), ledger.text_hash(nachher))
 
     def test_handgeschriebene_bildzeile_bleibt_aussage(self):
+        """Ohne Herkunftsvermerk ist eine Bildzeile Redaktion – samt Zahl.
+
+        Vor dem 08.11.2026 galt JEDE `*Abbildung:`-Zeile als abgeleitet. Eine
+        handgeschriebene Unterschrift mit Prozentwert fiel damit still aus dem
+        Aussage-Hash: Die Entscheidung wäre für immer blind gewesen.
+        """
         fm = 'title: "Messreihe"'
         ohne = {"fm": fm, "body": "Eigene Messung."}
         mit = {"fm": fm, "body": "Eigene Messung.\n\n"
                "*Abbildung: eigene Messreihe 2026 mit 30 Prozent Abweichung.*"}
         self.assertNotEqual(ledger.text_hash(ohne), ledger.text_hash(mit))
 
-    def test_hash_normalisierung_traegt_nur_beweisbare_altbindung(self):
-        fm = 'title: "Warmwasser"'
-        artikel_alt = {"fm": fm, "body": "Aussage.\n\n"
-                       "![Merkkarte](abbildung-merkkarte.svg)\n\n"
-                       "*Abbildung: Merkkarte zu „Warmwasser“.*"}
-        voll = ledger.text_hash_volltext(artikel_alt)
-        kern = ledger.text_hash(artikel_alt)
-        self.assertNotEqual(voll, kern)
-        entry = dict(self.entry, text_sha256=ledger.body_hash("Befund vorher"))
-        entry["fassung_sha256"] = entry["text_sha256"]
-        self.queue.write_text(json.dumps({"fachbefunde": [entry]}))
-        self.decisions.write_text(yaml.safe_dump({"entscheidungen": [{
-            "slug": "a", "befund_id": entry["id"],
-            "befund_fassung": entry["fassung_sha256"], "geprueft_fassung": voll,
-            "entschieden_von": "Redaktion", "entschieden_am": "2026-11-06",
-            "begruendung": "Vor der Umstellung am vollständigen Text geprüft",
-        }]}, allow_unicode=True))
-        fassungen = {"a": {"text": kern, "pruef": ledger.body_hash("pruef"),
-                           "text_volltext": voll}}
-        self.assertEqual(ledger.offene_befunde(self.queue, self.decisions, fassungen), [])
-        plan = ledger.fassung_normalisierung(decisions_path=self.decisions,
-                                            fassungen=fassungen)
-        self.assertEqual(len(plan["kandidaten"]), 1)
-        self.assertEqual(plan["geschrieben"], 0)
-        ergebnis = ledger.fassung_normalisierung(decisions_path=self.decisions,
-                                                fassungen=fassungen, apply=True)
-        self.assertEqual(ergebnis["geschrieben"], 1)
-        self.assertEqual(ledger.fassung_normalisierung(
-            decisions_path=self.decisions, fassungen=fassungen, apply=True)["geschrieben"], 0)
-        bot = {"a": {"text": kern, "pruef": ledger.body_hash("pruef2"),
-                     "text_volltext": ledger.body_hash("Bot hat nachgezogen")}}
-        self.assertEqual(ledger.offene_befunde(self.queue, self.decisions, bot), [])
-        echt = {"a": {"text": ledger.body_hash("andere Aussage"),
-                      "pruef": ledger.body_hash("pruef3"),
-                      "text_volltext": ledger.body_hash("andere Aussage voll")}}
-        self.assertEqual(len(ledger.offene_befunde(self.queue, self.decisions, echt)), 1)
+    def test_entscheidung_schliesst_nur_die_gelesene_fassung(self):
+        """Die Fassungsbindung ist streng: kein Freibrief für Alt-Hashes.
 
-    def test_hash_normalisierung_ohne_entscheidung_ist_werkzeugfehler(self):
-        self.decisions.write_text(yaml.safe_dump({
-            "entscheidungen": [],
-            ledger.NORMALISIERUNGEN: [{
-                "slug": "a", "befund_id": self.entry["id"],
-                "von": "1" * 64, "nach": "2" * 64, "am": "2026-11-07",
-                "grund": ledger.NORMALISIERUNG_GRUND,
-            }]}, allow_unicode=True))
-        with self.assertRaises(ledger.LedgerFehler):
+        Eine Entscheidung, die auf einen Volltext-Hash lautet, schließt den
+        Befund nur, wenn der heutige Text genau diese Fassung reproduziert.
+        Wird ein Satz geändert, ist der Befund wieder offen – auch dann, wenn
+        die Entscheidung am unveränderten Text getroffen wurde (die Regel aus
+        #1072: geprüft wird der Text, den der Mensch gelesen hat).
+        """
+        fm = 'title: "Warmwasser"'
+        artikel_heute = {"fm": fm, "body": "Der Abschlag bleibt eine Vorauszahlung.\n\n"
+                         "*Abbildung: Merkkarte zu „Warmwasser“ "
+                         "(eigene Darstellung aus diesem Beitrag).*"}
+        voll = ledger.text_hash_volltext(artikel_heute)
+        kern = ledger.text_hash(artikel_heute)
+        self.assertNotEqual(voll, kern)
+        entry = dict(self.entry)
+        entry["fassung_sha256"] = ledger.body_hash("Befund vorher")
+        entry["text_sha256"] = entry["fassung_sha256"]
+        self.queue.write_text(json.dumps({"fachbefunde": [entry]}))
+        basis = {"slug": "a", "befund_id": entry["id"],
+                 "befund_fassung": entry["fassung_sha256"],
+                 "entschieden_von": "Redaktion", "entschieden_am": "2026-11-08",
+                 "begruendung": "Am heutigen Text geprüft, Zahl entfernt"}
+        # Der Mensch hat den VOLLTEXT gelesen – heute ist der Text ohne
+        # Betriebsflächen maßgeblich: Der Befund bleibt offen, nicht still zu.
+        self.decisions.write_text(yaml.safe_dump({"entscheidungen": [
+            dict(basis, geprueft_fassung=voll)]}, allow_unicode=True))
+        fassungen = {"a": {"text": kern, "pruef": ledger.body_hash("pruef")}}
+        self.assertEqual(len(ledger.offene_befunde(
+            self.queue, self.decisions, fassungen)), 1)
+        # Dieselbe Entscheidung auf den heutigen Aussage-Hash schließt ihn.
+        self.decisions.write_text(yaml.safe_dump({"entscheidungen": [
+            dict(basis, geprueft_fassung=kern)]}, allow_unicode=True))
+        self.assertEqual(ledger.offene_befunde(
+            self.queue, self.decisions, fassungen), [])
+        # Und ein echter Satz öffnet sie sofort wieder.
+        geaendert = {"a": {"text": ledger.body_hash("geänderte Aussage"),
+                           "pruef": ledger.body_hash("pruef2")}}
+        self.assertEqual(len(ledger.offene_befunde(
+            self.queue, self.decisions, geaendert)), 1)
+
+    def test_doppelter_schluessel_ist_werkzeugfehler_und_heilbar(self):
+        """Ein Listeneintrag trägt GENAU EINE Entscheidung (#1098).
+
+        Der Writer-Fehler vom 08.11.2026 hängte Folgeentscheidungen in einen
+        fremden Eintrag. YAML nimmt dann still den letzten Wert – die Akte sah
+        wie ein Widerspruch aus, die Scorecard fiel als Werkzeugfehler aus.
+        Seither gilt: laut scheitern, beweisbar heilen, nichts verlieren.
+        """
+        hash_a, hash_b = ledger.body_hash("A"), ledger.body_hash("B")
+        kaputt = (
+            "entscheidungen:\n"
+            "- slug: a\n"
+            "  befund_id: %s\n"
+            "  befund_fassung: %s\n"
+            "  geprueft_fassung: %s\n"
+            "  typ: praezision\n"
+            "  beanstandung: Preis ohne Beleg\n"
+            "  entschieden_von: Redaktion\n"
+            "  entschieden_am: '2026-11-08'\n"
+            "  begruendung: Am heutigen Text geprueft, Preis entfernt\n"
+            "  geprueft_fassung: %s\n"
+            "  typ: praezision\n"
+            "  beanstandung: Preis ohne Beleg\n"
+            "  entschieden_von: Redaktion\n"
+            "  entschieden_am: '2026-11-08'\n"
+            "  begruendung: Zweite Pruefung nach redaktioneller Umformulierung\n"
+            "  vorgaenger_geprueft_fassung: %s\n"
+            "  folgeentscheidung: true\n"
+        ) % (self.entry["id"], hash_a, hash_a, hash_b, hash_a)
+        self.decisions.write_text(kaputt, encoding="utf-8")
+        with self.assertRaises(ledger.LedgerFehler) as ctx:
             ledger.entscheidungen_laden(self.decisions)
+        self.assertIn("Doppelter Schlüssel", str(ctx.exception))
+        self.assertFalse(ledger.struktur_pruefen(self.decisions)["ok"])
+        bericht = ledger.struktur_reparieren(
+            self.decisions, queue_path=self.queue, apply=True)
+        self.assertTrue(bericht["geschrieben"], bericht)
+        self.assertTrue(ledger.struktur_pruefen(self.decisions)["ok"])
+        geladen = ledger.entscheidungen_laden(self.decisions)
+        self.assertEqual(geladen[("a", self.entry["id"])]["geprueft_fassung"],
+                         hash_b)
+        self.assertEqual(
+            geladen[("a", self.entry["id"])]["vorgaenger_geprueft_fassung"],
+            hash_a)
 
     def test_legacy_migration_verliert_keinen_befund(self):
         old = {"erzeugt": "2026-10-27", "laeufe": [{"slug": "a", "befunde": [self.finding]}]}

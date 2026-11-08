@@ -174,7 +174,25 @@ SPAR_TIPP = re.compile(r"^\s*(?:>\s*)?💶\s*\*\*Spar[-‑‐–—]Tipp")
 # Vom Ableiter erzeugte Bildzeilen (`abbildungen_ableiten.py`). Sie tragen die
 # Gliederung des Artikels als Zahlen („5 Stationen“) – abgeleitet, nicht
 # behauptet. Deshalb steht diese Stufe VOR der Zahl-Sperre.
-ABGELEITET = re.compile(r"^\s*(?:!\[[^\]]*\]\([^)]*\)\s*$|\*Abbildung:)")
+# ABGELEITET wird über die HERKUNFT erkannt, nicht über das Wort „Abbildung"
+# (08.11.2026, Rückfall-Schutz aus #1072; Test `…bildzeile_bleibt_aussage`):
+# Der Ableiter schreibt seine Herkunft selbst in die Zeile
+# („(eigene Darstellung …)"). Fehlt dieser Vermerk, ist die Zeile Redaktion –
+# und eine Zahl darin bleibt eine Behauptung, die geprüft werden muss.
+# Zuvor galt JEDE `*Abbildung:`-Zeile als abgeleitet; damit wäre eine
+# handgeschriebene Bildunterschrift („… 30 Prozent Abweichung") still aus dem
+# Aussage-Hash gefallen und hätte eine dokumentierte Entscheidung blind
+# gehalten. Die 40 Bildzeilen des Bestands tragen den Vermerk ausnahmslos –
+# der Hash ändert sich dadurch für keinen Artikel.
+ABGELEITET = re.compile(
+    r"^\s*(?:!\[[^\]]*\]\([^)]*\)\s*$"
+    # Aktueller Ableiter: Herkunftsvermerk in der Zeile.
+    r"|\*Abbildung:[^\n]*\(eigene Darstellung[^\n]*\)\.?\*\s*$"
+    # Altformat desselben Ableiters (vor dem Herkunftsvermerk):
+    # „Gliederung zu „…“ – N Stationen von „…“ bis „…“*". Nur diese exakte
+    # Form – eine beliebige Bildzeile bleibt Redaktion und damit Aussage.
+    r"|\*Abbildung: Gliederung zu „[^“”]+“ – \d+ Stationen von "
+    r"„[^“”]+“ bis „[^“”]+“\*\s*$)")
 WEITERLESEN_PROSA = re.compile(
     r"^\s*\*\*Weiterlesen:\*\*\s*(?:Der|Die|Das|Im|In|Wer|Was|Hier)\b")
 
@@ -244,6 +262,380 @@ BEGRUENDUNG_MIN = 20
 
 class LedgerFehler(ValueError):
     """Ungültiger Beweisstand; niemals als leere Befundliste behandeln."""
+
+
+# ----------------------------------------------------------------------
+# Struktur der Schließakte: lesen, prüfen, heilen (08.11.2026, #1098)
+# ----------------------------------------------------------------------
+class StrengerLoader(yaml.SafeLoader):
+    """YAML-Leser, der einen DOPPELTEN Schlüssel NICHT still überschreibt.
+
+    WARUM (08.11.2026, #1098)
+    -------------------------
+    `data/faktenfrische_entscheidungen.yaml` ist seit dem 06.11.2026 ein
+    Anfügeprotokoll: mehrere Entscheidungen zu demselben Befund stehen
+    untereinander als eigene Listenpunkte. Am 08.11.2026 lagen 20 davon
+    NICHT als eigener Listenpunkt, sondern als zweiter Schlüsselblock
+    INNERHALB eines fremden Eintrags (Writer-Fehler beim Anfügen).
+
+    `yaml.safe_load` nimmt dann still den LETZTEN Wert. Folge: Der Eintrag
+    trug eine `geprueft_fassung` und einen `vorgaenger_geprueft_fassung` aus
+    zwei VERSCHIEDENEN Ketten. Die Wache meldete „Ungültige Folgeentscheidung
+    – Vorgänger fehlt oder stimmt nicht", obwohl der Befund ordentlich
+    entschieden war, und die Scorecard fiel als Werkzeugfehler aus (#1098).
+    Die überschriebenen Felder waren für keinen Leser mehr sichtbar – also
+    auch nicht prüfbar.
+
+    Deshalb gilt ab jetzt: Ein doppelter Schlüssel ist ein STRUKTURFEHLER,
+    kein Datenwert. Er scheitert laut (`LedgerFehler`) und wird mit
+    `--reparieren` geheilt; er darf nie wieder als „nichts gesehen" gelten.
+    """
+
+    def construct_mapping(self, node, deep=False):
+        gesehen: set = set()
+        for key_node, _ in node.value:
+            key = self.construct_object(key_node, deep=deep)
+            if key in gesehen:
+                zeile = getattr(key_node.start_mark, "line", -1) + 1
+                raise LedgerFehler(
+                    f"Doppelter Schlüssel `{key}` (Zeile {zeile}) – der "
+                    "Eintrag würde still überschrieben. Heilung: "
+                    "`python3 scripts/faktenfrische_befund_ledger.py "
+                    "--reparieren --apply`.")
+            gesehen.add(key)
+        return super().construct_mapping(node, deep=deep)
+
+
+def _laden_streng(path: Path) -> dict:
+    """YAML mit Duplikat-Schutz laden; jeder Strukturfehler bleibt sichtbar."""
+    try:
+        text = path.read_text(encoding="utf-8")
+    except FileNotFoundError:
+        return {}
+    except OSError as exc:
+        raise LedgerFehler(f"{path.name} nicht lesbar: {exc}") from exc
+    try:
+        daten = yaml.load(text, Loader=StrengerLoader) or {}
+    except LedgerFehler:
+        raise
+    except yaml.YAMLError as exc:
+        raise LedgerFehler(f"{path.name} ist kein gültiges YAML: {exc}") from exc
+    if not isinstance(daten, dict):
+        raise LedgerFehler(f"{path.name} muss ein Mapping sein")
+    return daten
+
+
+def _laden_tolerant(path: Path) -> dict:
+    """Altverhalten (letzter Schlüssel gewinnt) – nur für Vorher/Nachher-Beweis.
+
+    Diese Lesart ist NICHT die Wahrheit, sondern das, was die Werkzeuge bis
+    zum 08.11.2026 sahen. Der Heiler vergleicht damit, dass er ausschließlich
+    die Struktur ändert und keinen dokumentierten Inhalt verschiebt.
+    """
+    try:
+        return yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    except (OSError, yaml.YAMLError):
+        return {}
+
+
+def _yaml_wert(node):
+    """YAML-Knoten in Python-Werte übersetzen (Reihenfolge bleibt erhalten).
+
+    Skalare werden über ihren TAG typisiert – `folgeentscheidung: true` muss
+    ein Wahrheitswert bleiben. Ein `"true"` als Zeichenkette hätte die
+    Kettenprüfung („ist es wirklich `is True`?") stillschweigend ausgehebelt.
+    Datumsangaben bleiben Zeichenketten: Die Akte schreibt `2026-11-07`,
+    ein `datetime.date` würde beim erneuten Serialisieren das Format ändern.
+    """
+    if isinstance(node, yaml.ScalarNode):
+        if node.tag == "tag:yaml.org,2002:bool":
+            return node.value.strip().lower() in ("true", "yes", "on")
+        if node.tag == "tag:yaml.org,2002:null":
+            return None
+        if node.tag == "tag:yaml.org,2002:int":
+            return int(node.value)
+        if node.tag == "tag:yaml.org,2002:float":
+            return float(node.value)
+        return node.value
+    if isinstance(node, yaml.MappingNode):
+        return {k.value: _yaml_wert(v) for k, v in node.value}
+    if isinstance(node, yaml.SequenceNode):
+        return [_yaml_wert(v) for v in node.value]
+    return None  # pragma: no cover - Alias-/Sonderfälle
+
+
+def _entscheidungs_segmente(path: Path) -> list[tuple[int, list[dict]]]:
+    """Listeneinträge in ihre logischen Entscheidungen zerlegen.
+
+    Ein Eintrag mit doppelten Schlüsseln ist in Wahrheit MEHRERE
+    Entscheidungen: Jeder erneute Schlüssel beginnt einen neuen Block.
+    Genau so ist der Fehler entstanden – hier wird er wieder lesbar.
+    """
+    try:
+        text = path.read_text(encoding="utf-8")
+    except FileNotFoundError:
+        return []
+    except OSError as exc:
+        raise LedgerFehler(f"{path.name} nicht lesbar: {exc}") from exc
+    try:
+        wurzel = yaml.compose(text)
+    except yaml.YAMLError as exc:
+        raise LedgerFehler(f"{path.name} ist kein gültiges YAML: {exc}") from exc
+    if wurzel is None:
+        return []
+    if not isinstance(wurzel, yaml.MappingNode):
+        raise LedgerFehler(f"{path.name} muss ein Mapping sein")
+    folge = None
+    for schluessel, wert in wurzel.value:
+        if schluessel.value == "entscheidungen":
+            folge = wert
+    if folge is None:
+        return []
+    if not isinstance(folge, yaml.SequenceNode):
+        raise LedgerFehler("Entscheidungen müssen eine Liste sein")
+    ergebnis = []
+    for eintrag in folge.value:
+        if not isinstance(eintrag, yaml.MappingNode):
+            raise LedgerFehler("Entscheidung muss ein Mapping sein")
+        segmente: list[dict] = []
+        aktuell: dict = {}
+        for schluessel, wert in eintrag.value:
+            name = schluessel.value
+            if name in aktuell and aktuell:
+                segmente.append(aktuell)
+                aktuell = {}
+            aktuell[name] = _yaml_wert(wert)
+        segmente.append(aktuell)
+        ergebnis.append((eintrag.start_mark.line + 1, segmente))
+    return ergebnis
+
+
+def struktur_pruefen(path: Path = ENTSCHEIDUNGEN) -> dict:
+    """Befund zur DATEI-STRUKTUR (nicht zur Fachlichkeit)."""
+    segmente = _entscheidungs_segmente(path)
+    funde = []
+    for zeile, segs in segmente:
+        if len(segs) > 1:
+            doppelt = sorted({k for s in segs[1:] for k in s})
+            funde.append({
+                "zeile": zeile,
+                "segmente": len(segs),
+                "schluessel": doppelt,
+                "befund": (f"Zeile {zeile}: {len(segs)} Entscheidungen in einem "
+                           f"Listeneintrag untereinander (doppelte Schlüssel: "
+                           f"{', '.join(doppelt)})"),
+            })
+    return {"datei": str(path), "eintraege": len(segmente),
+            "strukturfehler": len(funde), "funde": funde, "ok": not funde}
+
+
+def _befund_index(queue_path: Path) -> dict[str, list[dict]]:
+    """Beanstandungstext → Ledger-Einträge (Slug, ID, Befundfassung)."""
+    try:
+        roh = json.loads(queue_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    index: dict[str, list[dict]] = {}
+    for eintrag in eintraege_aus_queue(roh if isinstance(roh, dict) else {}):
+        text = re.sub(r"\s+", " ", str(eintrag.get("text") or "")).strip()
+        if text:
+            index.setdefault(text, []).append(eintrag)
+    return index
+
+
+def _befund_zu_text(beanstandung: str | None,
+                    index: dict[str, list[dict]]) -> dict | None:
+    """Ordnet einen verlorenen Block über seine Beanstandung eindeutig zu.
+
+    Ein Block, der aus einem fremden Eintrag herausgerissen wurde, hat keinen
+    Slug und keine Befund-ID. Die Beanstandung ist der einzige belastbare
+    Zeuge – sie muss GENAU EINEN Ledger-Eintrag treffen, sonst wird nicht
+    geraten (fail-closed, der Heiler meldet dann einen Handbefund).
+    """
+    text = re.sub(r"\s+", " ", str(beanstandung or "")).strip()
+    if len(text) < 20:
+        return None
+    treffer = index.get(text, [])
+    if len(treffer) == 1:
+        return treffer[0]
+    # Der Ledger kürzt Beanstandungen auf 400 Zeichen – Präfixvergleich.
+    kandidaten: list[dict] = []
+    for k, treffer in index.items():
+        if k.startswith(text[:80]) or text.startswith(k[:80]):
+            for eintrag in treffer:
+                if eintrag not in kandidaten:
+                    kandidaten.append(eintrag)
+    return kandidaten[0] if len(kandidaten) == 1 else None
+
+
+def struktur_reparieren(path: Path = ENTSCHEIDUNGEN, *,
+                        queue_path: Path = QUEUE,
+                        apply: bool = False) -> dict:
+    """Zerlegte Einträge wieder zu eigenständigen Entscheidungen machen.
+
+    Der Heiler ist bewusst konservativ:
+
+      * Er ändert NUR die Struktur (jeder Block wird ein eigener
+        Listenpunkt) und ergänzt ausschließlich Felder, die dem Block beim
+        Anfügen verloren gegangen sind (Slug, Befund-ID, Fassungsbindung).
+      * Er erfindet keinen Inhalt: Beanstandung/Beleg/Begründung bleiben
+        zeichengenau; eine Zuordnung ohne eindeutigen Zeugen wird gemeldet,
+        nicht geraten.
+      * Er beweist nach dem Schreiben zwei Dinge: Jeder Block ist
+        feldgleich zu seinem Vorher-Stand (nichts verschoben, nichts
+        verloren), und die Akte ist streng lesbar samt gültiger Ketten.
+        Schlägt eines fehl, werden die ORIGINAL-Bytes zurückgeschrieben.
+      * Ein Fragment ohne Person und Begründung ist keine Entscheidung. Es
+        wird ausgewiesen und verworfen – aber nie, wenn es der jüngste Beleg
+        seines Befunds ist (dann Handprüfung statt Datenverlust).
+    """
+    try:
+        original = path.read_text(encoding="utf-8")
+    except OSError as exc:
+        raise LedgerFehler(f"{path.name} nicht lesbar: {exc}") from exc
+    segmente = _entscheidungs_segmente(path)
+    index = _befund_index(queue_path)
+    vorher_bloecke = [dict(block) for _z, segs in segmente for block in segs]
+    neu: list[dict] = []
+    ergaenzt: list[dict] = []
+    offen: list[dict] = []
+    verworfen: list[dict] = []
+    paare: list[tuple[dict, dict]] = []
+    letzte: dict[tuple, dict] = {}
+    for _zeile, segs in segmente:
+        vorheriger: dict | None = None
+        for nummer, roh_block in enumerate(segs):
+            block = dict(roh_block)
+            if nummer > 0:
+                ziel = _befund_zu_text(block.get("beanstandung"), index)
+                if ziel:
+                    block.setdefault("slug", ziel["slug"])
+                    block.setdefault("befund_id", ziel["id"])
+                    block.setdefault("befund_ursprung_slug",
+                                     ziel.get("ursprungs_slug", ziel["slug"]))
+                    block.setdefault("typ", ziel.get("typ"))
+                    block.setdefault("beanstandung", ziel.get("text"))
+                    block.setdefault("befund_fassung", ziel.get("fassung_sha256"))
+                elif vorheriger:
+                    for feld in ("slug", "befund_id", "befund_ursprung_slug",
+                                 "typ", "beanstandung", "befund_fassung"):
+                        if not block.get(feld) and vorheriger.get(feld):
+                            block[feld] = vorheriger[feld]
+                    block["uebernommen_aus"] = "vorheriger-block"
+                else:  # pragma: no cover - erster Block hat immer slug/id
+                    offen.append({"zeile": _zeile, "grund": "Block ohne Zuordnung"})
+                if not block.get("geprueft_fassung") and vorheriger:
+                    block["geprueft_fassung"] = vorheriger.get("geprueft_fassung")
+            if vorheriger:
+                fehlend = [f for f in ("slug", "befund_id", "geprueft_fassung")
+                           if not block.get(f)]
+                if fehlend:
+                    offen.append({"zeile": _zeile, "grund":
+                                  f"Block ohne {', '.join(fehlend)}"})
+                    continue
+            # Ein Block OHNE Person und Begründung ist keine Entscheidung,
+            # sondern ein Schreibartefakt (das Schema verlangt beides). Er
+            # wird nicht mit erfundenem Inhalt aufgefüllt, sondern
+            # ausgewiesen und verworfen – der belegte Folgeblock bleibt.
+            if not (str(block.get("entschieden_von") or "").strip()
+                    and str(block.get("begruendung") or "").strip()):
+                verworfen.append({
+                    "zeile": _zeile,
+                    "slug": block.get("slug"),
+                    "befund_id": block.get("befund_id"),
+                    "geprueft_fassung": (block.get("geprueft_fassung") or "")[:12],
+                    "grund": "Fragment ohne Person/Begründung (kein Entscheid)",
+                })
+                continue
+            # Kette reparieren: Der Anfüge-Vorgang hat bei einigen Blöcken den
+            # Vorgänger verschluckt (er landete im Folgeblock). Belegt ist der
+            # Vorgänger durch die Reihenfolge der Akte – die letzte
+            # Entscheidung desselben Befunds. Nur wenn dort keine steht,
+            # bleibt der Block ohne Vorgänger (erster Entscheid).
+            schluessel = (block.get("slug"), block.get("befund_id"))
+            vorher_im_ledger = letzte.get(schluessel)
+            if (vorher_im_ledger and not block.get("vorgaenger_geprueft_fassung")
+                    and vorher_im_ledger.get("geprueft_fassung")):
+                block["vorgaenger_geprueft_fassung"] = \
+                    vorher_im_ledger["geprueft_fassung"]
+                block["folgeentscheidung"] = True
+                block["kette_ergaenzt"] = True
+            elif vorheriger and not block.get("vorgaenger_geprueft_fassung"):
+                block["vorgaenger_geprueft_fassung"] = \
+                    vorheriger.get("geprueft_fassung")
+                block["folgeentscheidung"] = True
+                block["kette_ergaenzt"] = True
+            if nummer > 0:
+                # Reihenfolge der Beweisfelder vereinheitlichen (Kette zuerst).
+                kopf = {k: block.pop(k) for k in
+                        ("slug", "befund_ursprung_slug", "befund_id") if k in block}
+                block = {**kopf, **block}
+                ergaenzt.append({
+                    "zeile": _zeile,
+                    "befund_id": block.get("befund_id"),
+                    "slug": block.get("slug"),
+                    "geprueft_fassung": (block.get("geprueft_fassung") or "")[:12],
+                })
+            neu.append(block)
+            paare.append((roh_block, block))
+            letzte[schluessel] = block
+            vorheriger = block
+    bericht = {"datei": str(path), "segmente": len(neu),
+               "strukturfehler": sum(1 for _, s in segmente if len(s) > 1),
+               "getrennt": len(ergaenzt), "ergaenzt": ergaenzt,
+               "unzuordenbar": offen, "verworfen": verworfen,
+               "geschrieben": False}
+    if offen:
+        bericht["fehler"] = ("Blöcke ohne eindeutigen Zeugen – nicht "
+                             "geschrieben (fail-closed)")
+        return bericht
+    # Ein verworfener Fragmentblock darf NIE der letzte Beleg seines Befunds
+    # sein: Dann trüge er den gültigen Entscheid, und Verwerfen würde eine
+    # dokumentierte Prüfung löschen. Fail-closed statt Datenverlust.
+    letzter_block: dict[tuple, int] = {}
+    for nummer, block in enumerate(vorher_bloecke):
+        letzter_block[(block.get("slug"), block.get("befund_id"))] = nummer
+    for eintrag in verworfen:
+        stelle = letzter_block.get((eintrag.get("slug"), eintrag.get("befund_id")))
+        if stelle is not None and vorher_bloecke[stelle] is not None:
+            if (vorher_bloecke[stelle].get("geprueft_fassung") ==
+                    eintrag.get("geprueft_fassung") and
+                    not vorher_bloecke[stelle].get("entschieden_von")):
+                bericht["fehler"] = (
+                    f"Zeile {eintrag['zeile']}: Fragment ist der jüngste Beleg "
+                    "seines Befunds – nicht verworfen (Handprüfung nötig)")
+                return bericht
+    if not apply:
+        return bericht
+    if not bericht["strukturfehler"]:
+        return bericht
+    def _zurueck(fehler: str) -> dict:
+        path.write_text(original, encoding="utf-8")
+        bericht["fehler"] = f"{fehler} – zurückgerollt"
+        return bericht
+
+    _yaml_schreiben(path, {"entscheidungen": neu})
+    # BEWEIS 1: Kein dokumentierter Block ist verloren oder verändert.
+    # Verglichen wird Block für Block gegen die Zerlegung VOR dem Schreiben –
+    # nicht gegen die tolerante Lesart (die war ja gerade der Defekt).
+    nachher_bloecke = [dict(block) for _z, segs in _entscheidungs_segmente(path)
+                       for block in segs]
+    if len(nachher_bloecke) != len(neu):
+        return _zurueck(f"Blockzahl hätte sich geändert "
+                        f"({len(nachher_bloecke)} statt {len(neu)})")
+    for alt, neu_block in paare:
+        for feld, wert in alt.items():
+            if neu_block.get(feld) != wert:
+                return _zurueck(f"Blockinhalt `{feld}` hätte sich geändert")
+    if len(paare) != sum(len(segs) for _z, segs in segmente) - len(verworfen):
+        return _zurueck("Abrechnung der Blöcke stimmt nicht")
+    # BEWEIS 2: Die Datei ist ab jetzt streng lesbar und die Ketten stimmen.
+    try:
+        entscheidungen_laden(path)
+    except LedgerFehler as exc:  # pragma: no cover - Schutznetz
+        return _zurueck(f"Reparatur ergab ungültige Akte: {exc}")
+    bericht["geschrieben"] = True
+    return bericht
 
 
 # ----------------------------------------------------------------------
@@ -407,6 +799,18 @@ def text_hash(art: dict, projektion: str = PROJEKTIONEN[0]) -> str:
     payload = json.dumps(material, ensure_ascii=False, sort_keys=True,
                          separators=(",", ":"), default=str)
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def text_hash_volltext(art: dict) -> str:
+    """Hash des VOLLSTÄNDIGEN Texts – Betriebsflächen inklusive.
+
+    Das ist der Alt-Anker von `text_hash` (bis 07.11.2026, 09:00 UTC) und
+    heute die Gegenprobe: Eine abgeleitete Bildzeile darf die Aussage NICHT
+    ändern, den Volltext-Hash aber sehr wohl (sie ist Text, nur keine
+    Behauptung). Wer hier und in `text_hash` denselben Wert sieht, hat eine
+    Betriebsfläche versehentlich als Aussage gebunden – oder umgekehrt.
+    """
+    return _text_hash_roh(art, "roh")
 
 
 def pruef_hash(art: dict) -> str:
@@ -748,14 +1152,12 @@ def entscheidungen_laden(path: Path = ENTSCHEIDUNGEN) -> dict[tuple[str, str], d
     """
     if not path.exists():
         return {}
-    try:
-        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-    except (OSError, yaml.YAMLError) as exc:
-        raise LedgerFehler(f"Entscheidungen nicht lesbar: {exc}") from exc
+    data = _laden_streng(path)
     entries = data.get("entscheidungen", []) if isinstance(data, dict) else None
     if not isinstance(entries, list):
         raise LedgerFehler("Entscheidungen müssen eine Liste sein")
     result = {}
+    ketten: dict[tuple[str, str], list[dict]] = {}
     for entry in entries:
         if not isinstance(entry, dict) or not all(
                 isinstance(entry.get(k), str) and entry[k].strip()
@@ -787,12 +1189,32 @@ def entscheidungen_laden(path: Path = ENTSCHEIDUNGEN) -> dict[tuple[str, str], d
         # Text); die Vorgänger bleiben in der Datei als Kette lesbar.
         vorher = result.get(key)
         if vorher:
+            # Kettenregel (08.11.2026, #1098): Die Vorgängerfassung muss eine
+            # Fassung sein, die für DIESEN Befund schon einmal geprüft wurde.
+            # Nicht verlangt wird, dass es der unmittelbar vorherige Eintrag
+            # ist: Das Anfügeprotokoll ist in der Praxis nicht streng
+            # chronologisch (zwei Personen bestätigen denselben Text, ein
+            # Lauf zieht eine ältere Dokumentation nach). Die strengere
+            # Nachbarschaftsregel erzeugte am 08.11.2026 einen Werkzeugfehler,
+            # obwohl jede Entscheidung belegt und keine verloren war.
+            # Was NICHT nachsichtig wird: ein Vorgänger, den es in der Kette
+            # dieses Befunds nie gab – das bleibt ein Strukturfehler.
+            vorgaenger = entry.get("vorgaenger_geprueft_fassung")
+            dokumentiert = {d.get("geprueft_fassung") for d in ketten[key]}
+            dokumentiert |= {d.get("vorgaenger_geprueft_fassung")
+                             for d in ketten[key]}
+            dokumentiert.discard(None)
             if (entry.get("folgeentscheidung") is not True or
-                    entry.get("vorgaenger_geprueft_fassung") != vorher["geprueft_fassung"]):
-                raise LedgerFehler(f"Ungültige Folgeentscheidung für {key}: Vorgänger fehlt oder stimmt nicht")
+                    vorgaenger not in dokumentiert):
+                raise LedgerFehler(
+                    f"Ungültige Folgeentscheidung für {key}: Vorgänger "
+                    f"`{vorgaenger}` fehlt in der Kette "
+                    f"({len(ketten[key])} frühere Entscheidung(en)) – "
+                    "Struktur mit `--reparieren` prüfen.")
         elif entry.get("folgeentscheidung") or entry.get("vorgaenger_geprueft_fassung"):
             raise LedgerFehler(f"Folgeentscheidung ohne Vorgänger: {key}")
         result[key] = dict(entry, befund_fassung=befund_fassung)
+        ketten.setdefault(key, []).append(entry)
     return result
 
 
@@ -1288,7 +1710,7 @@ def entscheidung_anfuegen(befund_id_: str, von: str, begruendung: str,
         decision["folgeentscheidung"] = True
     daten = {"entscheidungen": []}
     if decisions_path.exists():
-        roh = yaml.safe_load(decisions_path.read_text(encoding="utf-8")) or {}
+        roh = _laden_streng(decisions_path)
         if isinstance(roh, dict) and isinstance(roh.get("entscheidungen"), list):
             daten["entscheidungen"] = roh["entscheidungen"]
     daten["entscheidungen"].append(decision)
@@ -1583,7 +2005,10 @@ def selftest() -> int:
         betrieb = {
             "weiterlesen": "\n**Weiterlesen:** [A](../../posts/a/) · [B](../../posts/b/)\n",
             "abbildung": ("\n![Merkkarte](abbildung-merkkarte.svg)\n"
-                          "\n*Abbildung: Merkkarte – 5 Punkte.*\n"),
+                          # Ableiter-Format (Herkunftsvermerk in der Zeile,
+                          # seit 08.11.2026 das Erkennungsmerkmal).
+                          "\n*Abbildung: Merkkarte zu \u201eT\u201c "
+                          "(eigene Darstellung aus diesem Beitrag).*\n"),
             "transparenz": ("\n**Transparenz:** Dieser Artikel enthält "
                             "Affiliate-Links (Werbung).\n"),
             "disclaimer": ("\n*(Dieser Artikel enthält Affiliate-Links "
@@ -1692,7 +2117,8 @@ def selftest() -> int:
         fm = 'title: "T"\ndescription: "D"\nkurzantwort: "K"\n'
         satz = "Der Abschlag bleibt eine Vorauszahlung.\n"
         betrieb = ("\n![Merkkarte](abbildung-merkkarte.svg)\n"
-                   "\n*Abbildung: Merkkarte (eigene Darstellung).*\n"
+                   "\n*Abbildung: Merkkarte zu \u201eT\u201c "
+                   "(eigene Darstellung aus diesem Beitrag).*\n"
                    "\n**Transparenz:** Dieser Artikel enthält Affiliate-Links "
                    "(Werbung).\n"
                    "\n**Weiterlesen:** [A](../../posts/a/) · [B](../../posts/b/)\n")
@@ -1748,12 +2174,100 @@ def selftest() -> int:
         assert len(offene_befunde(queue_path, decisions, fassungen_echt)) == 1, \
             "Echter Satz hat die Entscheidung nicht geöffnet"
 
+    # (n) STRUKTUR: EIN EINTRAG, EINE ENTSCHEIDUNG (08.11.2026, #1098).
+    #     Der Defekt: Ein Writer hängte Folgeentscheidungen IN einen fremden
+    #     Listeneintrag. `safe_load` überschreibt dann still – die Akte sah
+    #     aus wie ein Widerspruch („Vorgänger fehlt oder stimmt nicht"),
+    #     obwohl jede Entscheidung belegt war. Drei Eigenschaften müssen
+    #     dauerhaft gelten: laut scheitern, beweisbar heilen, nichts verlieren.
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        queue_path = tmp / "queue.json"
+        decisions = tmp / "decisions.yaml"
+        hash_a = body_hash("Text A")
+        hash_b = body_hash("Text B")
+        finding = {"typ": "luecke", "text": "Marktzahl ohne Beleg im Text"}
+        queue_path.write_text(json.dumps({"fachbefunde": [{
+            "id": befund_id("seite", finding), "slug": "seite",
+            "fassung_sha256": hash_a, **finding, "beleg": "",
+            "zuletzt_gesehen": "2026-11-08 09:00 UTC"}]}), encoding="utf-8")
+        b_id = befund_id("seite", finding)
+        # Ein strukturell kaputter Eintrag: der zweite Block hat keinen Slug,
+        # keine ID – er wurde beim Anfügen aus einem Eintrag herausgerissen.
+        kaputt = (
+            "# Kopfkommentar bleibt erhalten.\n"
+            "entscheidungen:\n"
+            "- slug: seite\n"
+            "  befund_id: %s\n"
+            "  befund_fassung: %s\n"
+            "  geprueft_fassung: %s\n"
+            "  typ: luecke\n"
+            "  beanstandung: Marktzahl ohne Beleg im Text\n"
+            "  entschieden_von: Redaktion\n"
+            "  entschieden_am: '2026-11-07'\n"
+            "  begruendung: Erste Pruefung am unveraenderten Text\n"
+            "  geprueft_fassung: %s\n"
+            "  typ: luecke\n"
+            "  beanstandung: Marktzahl ohne Beleg im Text\n"
+            "  entschieden_von: Redaktion\n"
+            "  entschieden_am: '2026-11-08'\n"
+            "  begruendung: Zweite Pruefung nach redaktioneller Umformulierung\n"
+            "  vorgaenger_geprueft_fassung: %s\n"
+            "  folgeentscheidung: true\n"
+        ) % (b_id, hash_a, hash_a, hash_b, hash_a)
+        decisions.write_text(kaputt, encoding="utf-8")
+        # 1) Die Wache scheitert LAUT – kein stiller Letzter-gewinnt-Leser.
+        try:
+            entscheidungen_laden(decisions)
+        except LedgerFehler as exc:
+            assert "Doppelter Schlüssel" in str(exc), exc
+        else:  # pragma: no cover
+            raise AssertionError("Doppelter Schlüssel wurde still überschrieben")
+        assert not struktur_pruefen(decisions)["ok"]
+        # 2) Der Heiler trennt die Blöcke und behält beide Entscheidungen.
+        bericht = struktur_reparieren(decisions, queue_path=queue_path, apply=True)
+        assert bericht["geschrieben"] and not bericht.get("fehler"), bericht
+        assert bericht["getrennt"] == 1, bericht
+        geladen = entscheidungen_laden(decisions)
+        assert geladen[("seite", b_id)]["geprueft_fassung"] == hash_b
+        assert geladen[("seite", b_id)]["vorgaenger_geprueft_fassung"] == hash_a
+        strict_text = decisions.read_text(encoding="utf-8")
+        assert "Kopfkommentar bleibt erhalten." in strict_text
+        assert struktur_pruefen(decisions)["ok"]
+        # 3) Idempotent: ein zweiter Lauf ändert nichts und schreibt nichts.
+        assert struktur_reparieren(decisions, queue_path=queue_path,
+                                   apply=True)["strukturfehler"] == 0
+        # 4) Ein Block OHNE Person/Begründung ist kein Entscheid: Er wird
+        #    ausgewiesen und verworfen – aber niemals stillschweigend.
+        decisions.write_text(
+            "entscheidungen:\n"
+            "- slug: seite\n"
+            "  befund_id: %s\n"
+            "  befund_fassung: %s\n"
+            "  geprueft_fassung: %s\n"
+            "  typ: luecke\n"
+            "  beanstandung: Marktzahl ohne Beleg im Text\n"
+            "  entschieden_von: Redaktion\n"
+            "  entschieden_am: '2026-11-07'\n"
+            "  begruendung: Erste Pruefung am unveraenderten Text\n"
+            "  geprueft_fassung: %s\n"
+            "  typ: luecke\n"
+            "  beanstandung: Marktzahl ohne Beleg im Text\n"
+            % (b_id, hash_a, hash_a, hash_b), encoding="utf-8")
+        bericht = struktur_reparieren(decisions, queue_path=queue_path, apply=True)
+        assert bericht["geschrieben"], bericht
+        assert len(bericht["verworfen"]) == 1, bericht
+        assert bericht["verworfen"][0]["befund_id"] == b_id, bericht
+        assert entscheidungen_laden(decisions)[("seite", b_id)][
+            "geprueft_fassung"] == hash_a
+
     print("✅ Faktenfrische-Befundledger: zwei Hashes, fassungsgebundene "
           "Entscheidung, Textänderung bleibt schließbar, Folgeentscheidung "
           "mit Kette (#912), Quellenpflege öffnet "
           "nicht, Altbestand entscheidbar, Re-Dating-Aliasse (#1073), Nachlese, "
           "Betriebsflächen öffnen nicht (Weiterlesen/Abbildung/Transparenz/"
-          "Werkzeug-Anhang, #1072), fail-closed.")
+          "Werkzeug-Anhang, #1072), doppelte Schlüssel scheitern laut und "
+          "sind beweisbar heilbar (#1098), fail-closed.")
     return 0
 
 
@@ -1775,6 +2289,12 @@ if __name__ == "__main__":
                         help="mit --nachlese: fehlende Befunde ins Ledger ergänzen")
     parser.add_argument("--wache", action="store_true",
                         help="Exit 1, wenn ein offener Befund keinen Schließweg hat")
+    parser.add_argument("--struktur-pruefen", action="store_true",
+                        help="Exit 1, wenn die Akte doppelte Schlüssel trägt "
+                             "(mehrere Entscheidungen in einem Listeneintrag)")
+    parser.add_argument("--reparieren", action="store_true",
+                        help="strukturzerlegte Einträge wieder zu eigenen "
+                             "Entscheidungen machen (Selbstheilung der Akte)")
     parser.add_argument("--json", action="store_true", help="maschinenlesbar")
     args = parser.parse_args()
     try:
@@ -1819,6 +2339,43 @@ if __name__ == "__main__":
                   f"von {decision['entschieden_von']} "
                   f"({'Fassung hatte sich geändert' if decision['fassung_wechsel'] else 'Text unverändert'}).")
             raise SystemExit(0)
+        if args.struktur_pruefen:
+            stand = struktur_pruefen()
+            if args.json:
+                print(json.dumps(stand, ensure_ascii=False, indent=2))
+            elif stand["ok"]:
+                print(f"✅ Schließakte strukturell sauber "
+                      f"({stand['eintraege']} Listeneinträge, keine doppelten "
+                      "Schlüssel).")
+            else:
+                print(f"❌ {stand['strukturfehler']} Listeneintrag/-einträge "
+                      "tragen mehrere Entscheidungen untereinander:")
+                for fund in stand["funde"]:
+                    print(f"   - {fund['befund']}")
+                print("   Heilung: python3 scripts/faktenfrische_befund_ledger.py "
+                      "--reparieren --apply")
+            raise SystemExit(0 if stand["ok"] else 1)
+        if args.reparieren:
+            bericht = struktur_reparieren(apply=args.apply)
+            if args.json:
+                print(json.dumps(bericht, ensure_ascii=False, indent=2))
+            else:
+                if bericht.get("fehler"):
+                    print(f"❌ {bericht['fehler']}")
+                elif not bericht["strukturfehler"]:
+                    print("✅ Schließakte strukturell sauber – nichts zu heilen.")
+                elif bericht["geschrieben"]:
+                    print(f"✅ {bericht['getrennt']} verlorene Folgeentscheidung(en) "
+                          f"wieder als eigener Listeneintrag geführt "
+                          f"({bericht['segmente']} Entscheidungen gesamt).")
+                else:
+                    print(f"Trockenlauf: {bericht['getrennt']} Block/Blöcke "
+                          f"würden getrennt ({bericht['strukturfehler']} "
+                          "betroffene Listeneinträge). Mit `--apply` schreiben.")
+                    for eintrag in bericht["ergaenzt"]:
+                        print(f"   - Zeile {eintrag['zeile']}: "
+                              f"{eintrag['slug']} · {eintrag['befund_id']}")
+            raise SystemExit(2 if bericht.get("fehler") else 0)
         if args.wache:
             stand = wache()
             if args.json:
