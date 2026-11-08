@@ -1,5 +1,5 @@
-generated_at: '2026-11-07T10:40:30Z'
-day: '2026-11-07'
+generated_at: '2026-11-08T10:45:31Z'
+day: '2026-11-08'
 mode: deterministic
 teams:
   trending:
@@ -252,63 +252,57 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: Die Vorteile von Prepaid-Karten für den Urlaub
-    pillar: konto-karten
-    signal: niche_hook
-    source: topics:Die Vorteile von Prepaid-Karten für den Urlaub
-    score: 0.55
-    keywords:
-    - Prepaid-Karten
-    - Urlaub
-    - Karten
-  - topic: Die besten Strategien für den Aufbau eines Notgroschens
+  - topic: 5 einfache Schritte zum Aufbau eines Notgroschens
     pillar: frugalismus
     signal: niche_hook
-    source: topics:Die besten Strategien für den Aufbau eines Notgroschens
+    source: topics:5 einfache Schritte zum Aufbau eines Notgroschens
     score: 0.55
-    keywords:
-    - Notgroschen
-    - Aufbau
-    - Strategien
-  - topic: Stromkosten senken mit cleveren Haushaltsgeräten
-    pillar: strom-sparen
-    signal: niche_hook
-    source: topics:Stromkosten senken mit cleveren Haushaltsgeräten
-    score: 0.55
-    keywords:
-    - Stromkosten
-    - Haushaltsgeräte
-    - Energieeffizienz
-  - topic: 'WLAN-Repeater oder Powerline: Was durch Wände wirklich kommt'
+    keywords: []
+  - topic: 'Handyvertrag wechseln: Wann sich der Wechselbonus wirklich lohnt'
     pillar: internet-dsl
     signal: niche_hook
-    source: 'topics:WLAN-Repeater oder Powerline: Was durch Wände wirklich kommt'
+    source: 'topics:Handyvertrag wechseln: Wann sich der Wechselbonus wirklich lohnt'
     score: 0.55
     keywords:
-    - WLAN Repeater
-    - Powerline Vergleich
-    - WLAN verstärken
-  - topic: 'Wechsel-Wahnsinn im November: Wie du deine alte Kfz-Versicherung richtig
-      kündigst'
+    - Handyvertrag wechseln Bonus
+    - Wechselbonus Handytarif
+    - Mobilfunk wechseln lohnt sich
+  - topic: Kreditkarten mit guten Leistungen
+    pillar: konto-karten
+    signal: niche_hook
+    source: topics:Kreditkarten mit guten Leistungen
+    score: 0.55
+    keywords:
+    - Kreditkarte
+    - Leistungen
+    - Vorteile
+  - topic: Mietwagen-Verträge vor dem Urlaub checken
+    pillar: mietwagen
+    signal: niche_hook
+    source: topics:Mietwagen-Verträge vor dem Urlaub checken
+    score: 0.55
+    keywords:
+    - Mietwagen
+    - Verträge
+    - Urlaub
+  - topic: 'Umzug: Diese Versicherungen und Verträge musst du ummelden'
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Wechsel-Wahnsinn im November: Wie du deine alte Kfz-Versicherung
-      richtig kündigst'
+    source: 'topics:Umzug: Diese Versicherungen und Verträge musst du ummelden'
     score: 0.55
     keywords:
-    - Kfz Versicherung kündigen Frist
-    - Wechselsaison November
-    - Sonderkündigungsrecht Autoversicherung
-    - Stichtag 30. November
-  - topic: 'Wäschetrockner: Wann die Wäscheleine wirklich günstiger ist'
-    pillar: strom-sparen
+    - Umzug Checkliste
+    - Verträge ummelden
+    - Umzug sparen
+  - topic: Wie du deine Bankgebühren um 50 % reduzieren kannst
+    pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Wäschetrockner: Wann die Wäscheleine wirklich günstiger ist'
+    source: topics:Wie du deine Bankgebühren um 50 % reduzieren kannst
     score: 0.55
     keywords:
-    - Wäschetrockner Kosten
-    - Wäsche aufhängen
-    - Trockner Stromverbrauch
+    - Bankgebühren sparen
+    - Konto-gebühren
+    - Gebühren-reduzierung
 live_web:
   enabled: false
   findings: []
