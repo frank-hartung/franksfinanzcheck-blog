@@ -135,7 +135,8 @@ class DeckungTest(unittest.TestCase):
                                 f"nur {kenn['feed_items_geprueft']} Feed-Items – "
                                 "M5 wäre fast blind")
         self.assertEqual(kenn["feed_items_ohne_seite"], [],
-                         "Feed-Items ohne Seite im Bestand (M5 wäre für sie blind)")
+                         "Feed-Items ohne Seite im Bestand (M5 wäre für sie blind) – "
+                         "Format: 'slug ← guid'")
 
 
 class KanalquelleTest(unittest.TestCase):

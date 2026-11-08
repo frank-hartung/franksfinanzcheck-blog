@@ -331,7 +331,10 @@ def regel_m5(bau: Path, root: Path):
             # Item blind). Es wird GEZÄHLT und benannt, nicht verschluckt –
             # Befund vom 08.11.2026: In CI waren 49 von 50 Items gemappt, und
             # niemand konnte sehen, welches fehlte.
-            ohne_seite.append(item["slug"])
+            # Mit Beleg: Slug UND die Quelle, aus der er stammt. Ein Befund,
+            # der nur den Slug nennt, ist bei abweichender URL nicht zu
+            # bestätigen (Befund 08.11.2026: 49/50, Item unbekannt).
+            ohne_seite.append(f"{item['slug']} ← {item['guid'] or 'ohne guid'}")
             continue
         geprueft += 1
         gebaut = bau / seite.basis / "index.html" if seite.basis else bau / "index.html"

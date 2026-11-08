@@ -119,6 +119,22 @@ jobs:
       # Auslieferung aller 75). Der Job bleibt über den Snapshot rot –
       # fail-closed im Sinne von #634 – aber er liefert wieder Signal.
       # `!cancelled()` ist das Haus-Muster, siehe Beweis-Ledger-Schritt unten.
+      # MESSUNG UND MESSOBJEKT MÜSSEN DERSELBE STAND SEIN (08.11.2026).
+      # Der Build oben entsteht in Schritt 6; zwischen ihm und der Suite
+      # arbeiten aber „KI-Cover-Provenienz“ und der Reserve-Snapshot an
+      # content/ und data/. Gemessen wurde danach ein `public/`, das älter war
+      # als der Bestand – im Lauf 42518243348 stand deshalb ein Entwurf im
+      # Feed, den die Suite (zu Recht) nicht als Seite kannte: 49 von 50
+      # Items belegt. Der Prüf-Build wird deshalb unmittelbar vor der Suite
+      # WIEDERHOLT: gleicher Stand, gleiche Wahrheit. Er ist billig (~3 s)
+      # und macht den Job reproduzierbar, statt ihn zu entschärfen.
+      - name: Prüf-Build vor der Suite (gleicher Stand wie die Messung)
+        if: ${{ !cancelled() }}
+        uses: ./.github/actions/hugo-build
+        with:
+          args: --minify --destination public --cleanDestinationDir
+          label: "Prüf-Build (Suite-Stand)"
+
       - name: Code-Regression – Suite und Selbsttests
         if: ${{ !cancelled() }}
         run: |
