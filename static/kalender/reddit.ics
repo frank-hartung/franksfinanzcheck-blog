@@ -5,4 +5,19 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Reddit
 X-WR-TIMEZONE:Europe/Berlin
+BEGIN:VEVENT
+UID:reddit:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-w
+ as-sie-kostet:nutzen:2026-11-08@franksfinanzcheck.de
+DTSTAMP:20261108T115930Z
+DTSTART:20261108T131500Z
+DTEND:20261108T133000Z
+SUMMARY:Reddit: Privathaftpflicht: Warum so wichtig und was sie kostet
+  (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Reddit\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-
+ sie-so-wichtig-ist-und-was-sie-kostet/
+URL:https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-wa
+ rum-sie-so-wichtig-ist-und-was-sie-kostet/
+STATUS:TENTATIVE
+END:VEVENT
 END:VCALENDAR

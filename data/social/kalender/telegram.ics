@@ -8,9 +8,9 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:telegram:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und
  -was-sie-kostet:nutzen:2026-11-08@franksfinanzcheck.de
-DTSTAMP:20261107T224840Z
-DTSTART:20261108T060000Z
-DTEND:20261108T061500Z
+DTSTAMP:20261108T115930Z
+DTSTART:20261108T170000Z
+DTEND:20261108T171500Z
 SUMMARY:Telegram (Kanal): Privathaftpflicht: Warum so wichtig und was 
  sie kostet (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
@@ -21,26 +21,11 @@ URL:https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-wa
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:telegram:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-
- monatlichen:nutzen:2026-11-14@franksfinanzcheck.de
-DTSTAMP:20261107T224840Z
+UID:telegram:2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekas
+ se-fuellen:nutzen:2026-11-14@franksfinanzcheck.de
+DTSTAMP:20261108T115930Z
 DTSTART:20261114T060000Z
 DTEND:20261114T061500Z
-SUMMARY:Telegram (Kanal): ETF-Sparplan starten: Deine Schritt-für-Schr
- itt-Anleitung (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-s
- tarten-schritt-fuer-schritt-zum-monatlichen/
-URL:https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten
- -schritt-fuer-schritt-zum-monatlichen/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekas
- se-fuellen:nutzen:2026-11-15@franksfinanzcheck.de
-DTSTAMP:20261107T224840Z
-DTSTART:20261115T060000Z
-DTEND:20261115T061500Z
 SUMMARY:Telegram (Kanal): Strategisch sparen: So kannst du deine Reise
  kasse füllen (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
@@ -52,10 +37,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzich
- t:nutzen:2026-11-21@franksfinanzcheck.de
-DTSTAMP:20261107T224840Z
-DTSTART:20261121T060000Z
-DTEND:20261121T061500Z
+ t:nutzen:2026-11-15@franksfinanzcheck.de
+DTSTAMP:20261108T115930Z
+DTSTART:20261115T060000Z
+DTEND:20261115T061500Z
 SUMMARY:Telegram (Kanal): Frugalismus Familie: Clever sparen ohne Verz
  icht (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
@@ -63,6 +48,36 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
  milie-clever-sparen-ohne-verzicht/
 URL:https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-familie-
  clever-sparen-ohne-verzicht/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-10-28-flugvergleich-im-winter-so-findest-du-echte-bi
+ lligfluege:nutzen:2026-11-21@franksfinanzcheck.de
+DTSTAMP:20261108T115930Z
+DTSTART:20261121T060000Z
+DTEND:20261121T061500Z
+SUMMARY:Telegram (Kanal): Flugvergleich im Winter: So findest du echte
+  Billigflüge (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-28-flugvergleich-
+ im-winter-so-findest-du-echte-billigfluege/
+URL:https://franksfinanzcheck.de/posts/2026-10-28-flugvergleich-im-win
+ ter-so-findest-du-echte-billigfluege/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-u
+ pdate-2026:nutzen:2026-11-22@franksfinanzcheck.de
+DTSTAMP:20261108T115930Z
+DTSTART:20261122T060000Z
+DTEND:20261122T061500Z
+SUMMARY:Telegram (Kanal): Dein Haus sicher schützen: Das neue Vorsorge
+ -Update 2026 (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sich
+ er-schuetzen-das-neue-vorsorge-update-2026/
+URL:https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-sch
+ uetzen-das-neue-vorsorge-update-2026/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR
