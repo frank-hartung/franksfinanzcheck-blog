@@ -10,7 +10,7 @@ pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Warmwasser sparen", "Warmwasserkosten senken", "Heizkostenabrechnung", "Duschkosten", "Warmwasser", "Frugalismus", "Geld sparen"]
 pin_title: "Warmwasser sparen: Die Rechnung hinter dem Hahn"
-pin_description: "*Werbung | Warmwasser braucht rund 16 Prozent der Haushaltsenergie. So findest du deinen Verbrauch und drehst an den richtigen Stellen. Mehr Spartipps auf FranksFinanzcheck! #warmwasser #heizkosten #sparen"
+pin_description: "*Werbung | Warmwasser braucht rund 16 Prozent der Haushaltsenergie. So liest du deinen Anteil auf der Abrechnung ab und drehst an den richtigen Stellen. Mehr Spartipps auf FranksFinanzcheck! #warmwasser #sparen #warmwasserkosten"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
