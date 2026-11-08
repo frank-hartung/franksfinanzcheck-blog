@@ -38,26 +38,20 @@
      3. <link rel="describedby">            – IANA-Relation auf den
                                               menschenlesbaren Hinweis
      4. schema.org `creditText`             – in schema_article.html
+     5. Feed-Kanal                          – in layouts/rss.xml (M5)
      Bild und Ton sind getrennt deklariert: `cover.ai_generated` (Bild) und
      die TTS-Tonspur (Ton) haben nichts mit dem Text-Flag zu tun.
+
+     SEIT 07.11.2026: Welche Modalitäten eine Seite deklariert, rechnet
+     _funcs/ki_modalitaeten.html – dieselbe Funktion, aus der auch der
+     Feed seine Angabe zieht. Keine Abschrift der Bedingung, kein zweiter
+     Pflegeort.
      ============================================================ */ -}}
-{{- if .IsPage -}}
-{{- $ai := eq .Params.ai_generated true -}}
-{{- $bild := eq .Params.cover.ai_generated true -}}
-{{- /* Tonspur: Die Lesehilfe „Vorlesen“ spielt eine serverseitig erzeugte
-       TTS-Tonspur (scripts/ff_voice_audio.py) bzw. die lokale Sprach-Engine
-       aus – beides synthetische Sprache. Dieselbe Bedingung wie
-       ff_voice_toolbar.html, damit Kennzeichnung und Ausspielung nie
-       auseinanderlaufen. */ -}}
-{{- $lesehilfe := and (or (eq .Section "posts") (eq .Type "posts") (eq .Section "pillar") (eq .Type "pillar") (eq .Section "ratgeber") (eq .Type "ratgeber")) (ne .Params.hideReaderToolbar true) -}}
-{{- if or $ai $bild $lesehilfe -}}
-{{- $bereiche := slice -}}
-{{- if $ai }}{{ $bereiche = $bereiche | append "text" }}{{ end -}}
-{{- if $bild }}{{ $bereiche = $bereiche | append "image" }}{{ end -}}
-{{- if $lesehilfe }}{{ $bereiche = $bereiche | append "audio" }}{{ end -}}
+{{- $bereiche := partial "_funcs/ki_modalitaeten.html" . -}}
+{{- if $bereiche -}}
+{{- $ai := in $bereiche "text" -}}
 {{- if $ai }}
 <meta name="ai-generated" content="true">{{ end }}
 <meta name="ai-generated-scope" content="{{ delimit $bereiche "," }}">
 <link rel="describedby" href="{{ "impressum/#ki-hinweis" | absURL }}" title="Hinweis zu KI-unterstützten Inhalten">
-{{- end -}}
 {{- end -}}

@@ -236,5 +236,69 @@ class LinkNameTests(unittest.TestCase):
         self.assertTrue(any("WCAG 2.5.3" in issue for issue in issues), issues)
 
 
+class KiSiegelKontrastTests(unittest.TestCase):
+    """Das KI-Siegel der Lesehilfe ist die sichtbare Rechtsangabe (#1028).
+
+    Sein Kontrast wird aus ff-voice.css aufgelöst, nicht abgeschrieben: Eine
+    Zahl in diesem Test wäre eine zweite Wahrheit, die bei einer Farbänderung
+    niemand nachzieht. Geprüft wird deshalb (a) dass die Auflösung am echten
+    Bestand beide Themen liefert und AA besteht, und (b) dass sie fehlschlägt,
+    wenn die Quelle keinen messbaren Vollton mehr hergibt.
+    """
+
+    def test_auflösung_liefert_beide_themen_und_besteht_aa(self):
+        paare, grund = audit._ki_siegel_farben(ROOT)
+        self.assertIsNone(grund or None, f"nicht auflösbar: {grund}")
+        self.assertIsNotNone(paare, grund)
+        self.assertEqual(set(paare), {"hell", "dunkel"})
+        for kontext, (fg, bg) in paare.items():
+            verhältnis = audit.contrast(audit.hex_rgb(fg), audit.hex_rgb(bg))
+            # .6rem bei Gewicht 700 ist kein großer Text – es gilt 4.5:1.
+            self.assertGreaterEqual(verhältnis, 4.5,
+                                    f"{kontext}: {fg} auf {bg} = {verhältnis:.2f}:1")
+
+    def test_ergebnis_steht_im_audit(self):
+        paare = {c["paar"]: c for c in audit.audit_contrast(ROOT)}
+        for erwartet in ("KI-Siegel der Lesehilfe (hell)",
+                         "KI-Siegel der Lesehilfe (dunkel)"):
+            self.assertIn(erwartet, paare, f"{erwartet} fehlt im Audit")
+            self.assertTrue(paare[erwartet]["ok"], paare[erwartet])
+
+    def test_systemfarben_des_forced_colors_blocks_werden_nicht_gemessen(self):
+        # `@media (forced-colors: active)` liefert Canvas/CanvasText – das
+        # Betriebssystem färbt, es gibt kein messbares Paar. Wer den Block
+        # mitliest, misst Systemplatzhalter statt der eigenen Farben.
+        with tempfile.TemporaryDirectory() as tmp:
+            css = Path(tmp) / "assets/css/extended/ff-voice.css"
+            css.parent.mkdir(parents=True)
+            css.write_text(
+                ".ff-voice-slot { --ffv-gelb: #FFF5CC; --ffv-text: #2E2E33; }\n"
+                ":root[data-theme=\"dark\"] .ff-voice-slot { --ffv-gelb: #0b1512; "
+                "--ffv-text: #FFCB45; }\n"
+                ".ff-voice-btn__ki { background: var(--ffv-gelb); "
+                "color: var(--ffv-text); }\n"
+                ":root[data-theme=\"dark\"] .ff-voice-btn__ki { "
+                "background: var(--ffv-gelb); color: var(--ffv-text); }\n"
+                "@media (forced-colors: active) {\n"
+                "  .ff-voice-btn__ki { background: Canvas; color: CanvasText; }\n"
+                "}\n", encoding="utf-8")
+            paare, grund = audit._ki_siegel_farben(Path(tmp))
+            self.assertIsNone(grund or None, f"unerwartet nicht messbar: {grund}")
+            self.assertEqual(paare["hell"], ("#2E2E33", "#FFF5CC"))
+            self.assertEqual(paare["dunkel"], ("#FFCB45", "#0b1512"))
+
+    def test_nicht_messbare_farbe_ist_ein_befund_kein_stiller_sprung(self):
+        # C33: Eine ausgefallene Messung darf nicht als Grün durchgehen.
+        with tempfile.TemporaryDirectory() as tmp:
+            css = Path(tmp) / "assets/css/extended/ff-voice.css"
+            css.parent.mkdir(parents=True)
+            css.write_text(".ff-voice-btn__ki { background: rgba(255,203,69,.16); "
+                           "color: var(--gibt-es-nicht); }\n", encoding="utf-8")
+            ergebnis = {c["paar"]: c for c in audit.audit_contrast(Path(tmp))}
+            self.assertIn("KI-Siegel der Lesehilfe (nicht messbar)", ergebnis)
+            self.assertFalse(ergebnis["KI-Siegel der Lesehilfe (nicht messbar)"]["ok"])
+            self.assertIn("grund", ergebnis["KI-Siegel der Lesehilfe (nicht messbar)"])
+
+
 if __name__ == "__main__":
     unittest.main()

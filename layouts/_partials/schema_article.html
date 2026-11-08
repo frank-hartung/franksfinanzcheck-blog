@@ -185,7 +185,12 @@
      Getrennte Rollen bleiben getrennt: Text (ai_generated), Bild
      (cover.ai_generated) und Ton (TTS-Tonspur) werden nur genannt, wenn sie
      zutreffen. `ai_generated: false` erzeugt keine Aussage (keine unbelegte
-     Behauptung „rein menschlich"). */ -}}
+     Behauptung „rein menschlich").
+
+     SEIT 07.11.2026: Welche Rollen zutreffen, rechnet dieselbe Funktion wie
+     im Dokumentkopf und im Feed (_funcs/ki_modalitaeten.html). Vorher stand
+     die Lesehilfe-Bedingung hier zum DRITTEN Mal – drei Abschriften einer
+     Bedingung sind drei Gelegenheiten, auseinanderzulaufen. */ -}}
 {{- $credit := slice -}}
 {{- $kiAutor := .Params.author | default site.Params.author | default "Frank Hartung" -}}
 {{- $kiFreigabe := "" -}}
@@ -194,17 +199,18 @@
     {{- $kiFreigabe = .pruefer.name -}}
   {{- end -}}
 {{- end -}}
-{{- if eq .Params.ai_generated true -}}
+{{- $bereiche := partial "_funcs/ki_modalitaeten.html" . -}}
+{{- if in $bereiche "text" -}}
   {{- if $kiFreigabe -}}
     {{- $credit = $credit | append (printf "Mit KI erstellt oder bearbeitet. Redaktionelle Verantwortung: %s; fachlich geprüft und freigegeben von %s." $kiAutor $kiFreigabe) -}}
   {{- else -}}
     {{- $credit = $credit | append (printf "Mit KI erstellt oder bearbeitet. Redaktionelle Verantwortung: %s." $kiAutor) -}}
   {{- end -}}
 {{- end -}}
-{{- if eq .Params.cover.ai_generated true -}}
+{{- if in $bereiche "image" -}}
   {{- $credit = $credit | append "Cover mit KI erstellt oder bearbeitet." -}}
 {{- end -}}
-{{- if and (or (eq .Section "posts") (eq .Type "posts") (eq .Section "pillar") (eq .Type "pillar") (eq .Section "ratgeber") (eq .Type "ratgeber")) (ne .Params.hideReaderToolbar true) -}}
+{{- if in $bereiche "audio" -}}
   {{- $credit = $credit | append "Tonspur maschinell erzeugt (Text-zu-Sprache)." -}}
 {{- end -}}
 {{- if gt (len $credit) 0 -}}

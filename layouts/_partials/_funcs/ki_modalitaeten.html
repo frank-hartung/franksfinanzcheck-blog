@@ -1,0 +1,58 @@
+{{- /* ============================================================
+     _funcs/ki_modalitaeten.html – WELCHE MODALITÄTEN DEKLARIERT
+     DIESE SEITE? (Single Source of Truth, #1028)
+     ------------------------------------------------------------
+     Aufruf:  {{ partial "_funcs/ki_modalitaeten.html" . }}   → slice
+     Verbraucher:
+       · layouts/_partials/ki_provenienz.html  (Meta-Signale im Kopf)
+       · layouts/rss.xml + layouts/_default/rss.xml (Feed-Kanal)
+     Wache:   scripts/ki_provenienz_gate.py (M1, M2, M4, M5)
+
+     WARUM ES DIESE FUNKTION GIBT (07.11.2026)
+     Bis hierher stand die Bedingung „welche Modalität ist deklariert"
+     EINMAL, in ki_provenienz.html. Der Feed brauchte dieselbe Antwort –
+     und eine dritte Abschrift derselben Bedingung in rss.xml wäre ein
+     zweiter Pflegeort gewesen: Ändert sich die Ausspielung der Lesehilfe,
+     läuft die Kennzeichnung im Feed still auseinander. Genau dieses
+     Auseinanderlaufen ist der Befund, den Regel M4 verhindern soll.
+     Deshalb: eine Funktion, zwei Verbraucher, keine Kopie.
+
+     RÜCKGABE
+       slice in fester Reihenfolge (text → image → audio), Menge aus
+       einem festen Vokabular:
+         "text"   – .Params.ai_generated ist ausdrücklich true
+         "image"  – .Params.cover.ai_generated ist ausdrücklich true
+         "audio"  – die Seite spielt die Lesehilfe aus (Vorlesen)
+       Leer = es wird KEIN Signal gesetzt. `ai_generated: false` erzeugt
+       bewusst keine Behauptung „rein menschlich" (siehe Vertrag in
+       ki_provenienz.html und data/ki_kennzeichnung.yaml).
+
+     „audio" ist ABSICHTLICH dieselbe Bedingung wie in
+     ff_voice_toolbar.html (Section/Type posts|pillar|ratgeber,
+     hideReaderToolbar != true, reguläre Seite). Beide Bedingungen sind
+     deckungsgleich: `.IsPage` ist in Hugo genau `.Kind == "page"`.
+     Gemessen am 07.11.2026: 84 gebaute Seiten mit Lesehilfe, 84 mit
+     deklariertem scope „audio" – kein Versatz.
+     ============================================================ */ -}}
+{{- $seite := . -}}
+{{- $bereiche := slice -}}
+{{- if $seite.IsPage -}}
+  {{- if eq $seite.Params.ai_generated true -}}
+    {{- $bereiche = $bereiche | append "text" -}}
+  {{- end -}}
+  {{- if eq $seite.Params.cover.ai_generated true -}}
+    {{- $bereiche = $bereiche | append "image" -}}
+  {{- end -}}
+  {{- $lesehilfe := and
+        (or (eq $seite.Section "posts") (eq $seite.Type "posts")
+            (eq $seite.Section "pillar") (eq $seite.Type "pillar")
+            (eq $seite.Section "ratgeber") (eq $seite.Type "ratgeber"))
+        (ne $seite.Params.hideReaderToolbar true) -}}
+  {{- if $lesehilfe -}}
+    {{- $bereiche = $bereiche | append "audio" -}}
+  {{- end -}}
+{{- end -}}
+{{- /* Genau EIN return auf oberster Ebene (Hausregel aus
+       _funcs/saison-kontext.html: ein vorzeitiger `return` mit Wert
+       bricht den Bau mit „return: want 0 got 1"). */ -}}
+{{- return $bereiche -}}

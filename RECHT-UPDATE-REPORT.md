@@ -11,6 +11,93 @@ fachanwaltliche Prüfung empfohlen (siehe Abschnitt „Nächste Schritte“).
 
 ---
 
+## Nachtrag 2026-11-07 · Kanaltreue, Verbreitungsweg und Dauerwache (#1028)
+
+**Frist-ID:** `ki-vo-kennzeichnung-bestand` (Frist 02.12.2026) ·
+**Status: Betreiberebene auf sieben Kanälen vollständig und dauerhaft gesichert;
+Anbieter-Nachweise, Bildherkunft und Live-Abnahme weiter offen. Frist bleibt
+offen.** Selbsteinschätzung des Betreibers, keine Rechtsberatung.
+**Akte:** `KI-VO-MASCHINENLESBAR-1028-KANALTREUE-DAUERWACHE-HIGHEND-2026-11-07.md`
+
+### Anlass
+
+Der Nachtrag vom 05.11.2026 meldete die maschinenlesbare Ebene als gebaut und
+gegate. Am 07.11.2026 wurde **derselbe Baum gemessen statt gelesen**: Das Gate
+war grün, der Bestand hatte trotzdem Lücken. Vier Befunde, alle am gebauten
+Produkt belegt:
+
+1. **Deckung.** Geprüft wurden 78 Seiten aus `content/posts`; ausgeliefert
+   werden **109** reguläre Seiten in **19** Abschnitten. Die sechs
+   Ratgeber-Säulen unter `pillar/` tragen eine synthetische Stimme und waren
+   von keiner Regel erfasst.
+2. **Kanaltreue.** Die Regel verglich das Signal gegen einen Textanker.
+   Gemessen: 84 Seiten spielen eine Stimme ab, 66 zeigten einen Hinweis auf den
+   **Text**, 18 zeigten sichtbar **nichts**. Ein halber Kanal war grün.
+3. **Verbreitungsweg.** `public/index.xml` lieferte 50 Items, 45 mit
+   `ai_generated: true`, **ohne** Herkunftsangabe – und aus diesem Feed
+   publiziert Pinterest automatisch weiter. Der Verhaltenskodex der Kommission
+   vom 10.06.2026 will gerade verhindern, dass Markierungen auf dem
+   Verbreitungsweg verloren gehen.
+4. **Robustheit.** Fiel PyYAML aus, starb das Gate mit Traceback und Exit 1
+   („Inhaltsbefund"). Ein kaputtes Messwerkzeug sah aus wie ein roter Artikel –
+   C33/C38 verletzt. Dazu: Der Bild-Optimizer kannte `cover.ai_generated` nicht
+   und hätte aus einem deklarierten KI-Original unmarkierte, öffentlich
+   erreichbare AVIF/WebP/JPEG-Geschwister erzeugt.
+
+Rechtlich ändert das die Rollenverteilung nicht: Art. 50 Abs. 2 bleibt eine
+**Anbieterpflicht** (Nachfrist bis 02.12.2026 für Systeme, die vor dem
+02.08.2026 in Verkehr gebracht wurden). Was der Betreiber kann, ist die eigene
+Erklärung maschinenlesbar zu machen und sie auf jedem Ausspielweg zu erhalten.
+Genau das war unvollständig.
+
+### Was jetzt gilt
+
+Sieben Kanäle aus **einer** Quelle (`layouts/_partials/_funcs/ki_modalitaeten.html`):
+Meta-Signale mit `scope` und `rel="describedby"`, schema.org `creditText`,
+Bildattribute am `<img>`, IPTC `DigitalSourceType` in der Bilddatei,
+**sichtbare Angabe zur Tonspur** je Modalität, **Feed-Kanal** auf Kanal- und
+Item-Ebene, und der Schutz vor unmarkierten Bild-Ableitungen.
+
+Regel M4 prüft Kanaltreue je Modalität **in beide Richtungen**; M1 prüft den
+ganzen gebauten Baum. Werkzeugausfall ist Exit **2** über
+`scripts/werkzeugbefund.py`, nicht Exit 1.
+
+**Automatische Selbstheilung** (`ki_provenienz_gate.py --heilen`, `--wache`)
+repariert nur, was mechanisch eindeutig ist – Impressum-Anker, Bytgleichheit
+der RSS-Spiegelung, Entfernung unmarkierter Ableitungen – und schreibt jede
+Heilung als Belegzeile nach `data/ki_provenienz_history.jsonl`. Was nur ein
+Mensch entscheiden kann (Bildherkunft, tatsächliche redaktionelle
+Verantwortung, Anbieteranfrage, widersprüchliche Vorlagenfassungen), wird
+**eskaliert, nicht erfunden**. Eine Angabe ohne Beleg wird nie zu einer Angabe
+mit Beleg geheilt.
+
+Die Wache läuft bei jeder Änderung an Kennzeichnungs-Pfaden und täglich
+(`.github/workflows/ki-provenienz-wache.yml`), im Deploy vor und nach dem
+Build. Sie führt das Erst-Datum jedes ungeklärten `menschlich`-Eintrags und
+nennt den Abstand zur Frist.
+
+### Messung am 07.11.2026
+
+`ki_provenienz_gate.py --gate`: **109/109** Seiten, 19 Abschnitte, **50**
+Feed-Items, **0 Funde**. Selbsttest 12 Szenarien grün. 31 neue Unit-Tests plus
+4 Kontrast-Tests (das Siegel wird aus `ff-voice.css` aufgelöst: **12.34:1**
+hell, **12.28:1** dunkel). A11y-Audit 0 Probleme. Vorlese-Suiten 118/118,
+265/265, 387/387. Spam-Wache F-OK. Bild-Optimizer 164 Quellen, 0 Probleme.
+Gegenproben belegen, dass das Gate anschlägt (Siegel entfernt → 85 Funde;
+Spiegel gebrochen → M7; Anker entfernt → M2; Werkzeug fehlt → Exit 2).
+
+### Offen vor Fristabschluss
+
+Die Punkte 1–4 des Nachtrags vom 05.11.2026 bleiben **unverändert offen**;
+kein Punkt davon ist technisch heilbar. Neu ist die Messbarkeit: Die Wache
+nennt die 12 ungeklärten `menschlich`-Einträge (14.08.–03.09.2026) jetzt mit
+Alter und Fristabstand, statt sie zu übersehen. Zusätzlich ist die Live-Abnahme
+(`docs/KI-TRANSPARENZ-ABNAHME.md` §4) um zwei Kanäle gewachsen: Tonspur (mit
+und ohne JavaScript, helles und dunkles Thema) und Feed (`/index.xml` auf
+Kanal- und Item-Ebene).
+
+---
+
 ## Nachtrag 2026-11-05 · Maschinenlesbare KI-Kennzeichnung umgesetzt (#1028)
 
 **Frist-ID:** `ki-vo-kennzeichnung-bestand` (Frist 02.12.2026) ·

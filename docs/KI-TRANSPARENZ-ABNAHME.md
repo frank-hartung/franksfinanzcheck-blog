@@ -113,26 +113,91 @@ Prüfung erfinden. Deepfake- und Textpflichten nicht verwechseln.
 Art. 50 Abs. 2 KI-VO ist eine Anbieterpflicht; für vor dem 02.08.2026 in
 Verkehr gebrachte Systeme läuft die Nachfrist bis 02.12.2026. Der
 Verhaltenskodex der Kommission vom 10.06.2026 nennt dafür signierte
-Metadaten, Wasserzeichen und optional Fingerabdrücke. Was der **Betreiber**
-selbst maschinenlesbar machen kann, liegt auf vier Kanälen – alle aus
-demselben Frontmatter, keiner mit eigener Pflege:
+Metadaten, Wasserzeichen und optional Fingerabdrücke. Er verpflichtet
+nachgelagerte Akteure außerdem, vorhandene Markierungen **nicht zu
+entfernen** – deshalb trägt auch der Feed die Angabe weiter (Kanal 6).
 
-| Kanal | Fundstelle | Prüfen mit |
-|---|---|---|
-| `<meta name="ai-generated">`, `ai-generated-scope`, `rel="describedby"` | `layouts/_partials/ki_provenienz.html` | `python3 scripts/ki_provenienz_gate.py --gate` (M1) |
-| schema.org `creditText` | `layouts/_partials/schema_article.html` | derselbe Befehl (M2) + `scripts/schema_seo_gate.py` |
-| `data-ai-generated`, `data-digital-source-type` am `<img>` | `layouts/_partials/cover.html` | derselbe Befehl (M2) |
-| IPTC `DigitalSourceType` in der Bilddatei | `scripts/ki_bild_markierung.py` | `python3 scripts/ki_bild_markierung.py --gate` (M3) |
+Was der **Betreiber** selbst maschinenlesbar machen kann, liegt auf sieben
+Kanälen. Alle entstehen aus derselben Quelle
+(`layouts/_partials/_funcs/ki_modalitaeten.html`), keiner hat eine eigene
+Pflegestelle:
 
-Regel M4 stellt sicher, dass das maschinenlesbare Signal nie ohne den
-sichtbaren Hinweis am Artikel erscheint und umgekehrt. Ein halber Kanal stoppt
-den Deploy.
+| # | Kanal | Fundstelle | Regel |
+|---|---|---|---|
+| 1 | `<meta name="ai-generated">`, `ai-generated-scope`, `rel="describedby"` → `/impressum/#ki-hinweis` | `layouts/_partials/ki_provenienz.html` | M1, M2 |
+| 2 | schema.org `creditText` im Article-JSON-LD | `layouts/_partials/schema_article.html` | M1, M2 |
+| 3 | `data-ai-generated`, `data-digital-source-type` am `<img>` | `layouts/_partials/cover.html` | M1, M2 |
+| 4 | IPTC `DigitalSourceType` **in der Bilddatei** (ohne Neukodierung) | `scripts/ki_bild_markierung.py` | M3 |
+| 5 | Sichtbare Angabe zur Tonspur: Chip `data-ff-ki-voice-label`, `aria-describedby`, SR-Satz, `aria-label` aus `I18N` | `ff_voice_toolbar.html`, `static/premium/ff-voice.js`, `assets/css/extended/ff-voice.css` | M2, M4 |
+| 6 | Feed: `xmlns:ffki`, `rel="describedby"` auf Kanal- **und** Item-Ebene, `ffki:ai-generated`, `ffki:ai-generated-scope`, `media:credit` | `layouts/rss.xml` + `layouts/_default/rss.xml` | M5, M7 |
+| 7 | Bild-Ableitungen: Der Optimizer leitet von deklarierten KI-Originalen nichts Unmarkiertes ab (AVIF/WebP/JPEG-Geschwister) | `scripts/image_optimizer.py` | M6 |
+
+**Regel M4** prüft Kanaltreue **je Modalität und in beide Richtungen**: Ein
+Signal ohne sichtbaren Hinweis ist ein halber Kanal, ein Hinweis ohne Signal
+genauso. Befund vom 07.11.2026: 84 Seiten spielten eine synthetische Stimme,
+aber 66 zeigten nur einen Hinweis auf den Text und 18 gar keinen.
+
+**Deckung:** M1 prüft den **ganzen gebauten Baum** – 109 reguläre Seiten in 19
+Abschnitten, nicht nur `content/posts` (78). Die sechs Ratgeber-Säulen unter
+`pillar/` waren der blinde Fleck: Sie tragen eine Tonspur und keine Regel
+erfasste sie.
+
+**Robustheit (C33/C38):** Fehlt ein Messwerkzeug (PyYAML, Pillow,
+`ki_bild_markierung.py`), ist der Exit-Code **2** (Werkzeugfehler) und der
+Befund läuft über `scripts/werkzeugbefund.py` – nicht 1 (Inhaltsfund) und
+nicht als Traceback. Eine ausgefallene Messung ist kein Grün.
+
+### Selbstheilung und Wache
+
+`scripts/ki_provenienz_gate.py` kennt vier Betriebsarten:
+
+| Aufruf | Wirkung |
+|---|---|
+| `--gate` | messen, Befunde melden, Exit 0/1/2 |
+| `--gate --source-only` | nur Regeln ohne Bauprodukt (M2/M3/M6/M7) – der Vor-Build-Schritt |
+| `--heilen [--source-only]` | reparieren, dann nachmessen, Belegzeile schreiben |
+| `--wache` | heilen + Alter ungeklärter Angaben gegen die Frist führen |
+| `--selftest` | 12 Szenarien an einer künstlichen Fassung, inkl. Sabotageproben |
+
+Geheilt wird nur, was **mechanisch eindeutig** ist: der Anker `{#ki-hinweis}`
+an der vorhandenen Überschrift (bytetreu, idempotent), die Bytgleichheit der
+beiden RSS-Vorlagen, das Entfernen unmarkierter Ableitungen eines deklarierten
+KI-Originals. Jede Heilung schreibt eine Belegzeile nach
+`data/ki_provenienz_history.jsonl`.
+
+**Eskaliert** wird, was nur ein Mensch entscheiden kann: ob bei einem
+`menschlich`-Eintrag im Register tatsächlich ein Mensch die redaktionelle
+Verantwortung übernommen hat, woher ein Bild stammt, ob der Anbieter
+nachgefragt wurde. Erfinden tut die Wache nichts – eine Angabe ohne Beleg wird
+nie zu einer Angabe mit Beleg. Tragen **beide** RSS-Vorlagen verschiedene
+Fassungen des Kanals, ist das eine Entscheidung und bleibt ein Fund.
+
+**Alter:** `data/ki_provenienz_state.json` führt das Erst-Datum jedes
+ungeklärten `menschlich`-Eintrags und nennt den Abstand zur Frist
+(02.12.2026). Gespeichert wird nur der Dauerzustand; abgeleitete Zahlen
+(Alter in Tagen, Restfrist) werden zur Laufzeit gerechnet. Sonst committet die
+Wache täglich die Uhr statt des Befunds (Lehre aus der Befundakte,
+06.11.2026).
+
+Verankert ist das an zwei Stellen:
+
+* `deploy.yml`: Selbstheilung **vor** dem Build (`--heilen --source-only`),
+  Selbsttest + `--gate` **nach** dem Build. Geheiltes läuft über den
+  bestehenden Gate-Heilungscommit.
+* `.github/workflows/ki-provenienz-wache.yml`: bei jeder Änderung an
+  Kennzeichnungs-Pfaden und täglich 06:22 MESZ. Reihenfolge im Lauf: erst
+  heilen und committen, **dann** rot werden – sonst repariert die Wache jedes
+  Mal neu und der Bestand bleibt trotzdem kaputt.
+
+Befehl für den Alltag: `npm run ki:provenienz:wache`.
 
 **Was diese Ebene nicht ist:** kein Herkunftsbeweis, kein Wasserzeichen, keine
 C2PA-Signatur und keine Erfüllung der Anbieterpflicht. `ai_generated: false`
 erzeugt bewusst kein Signal – die Abwesenheit einer Angabe ist keine
 Behauptung „rein menschlich". Der IPTC-Wert wird nur bei belegter
-Erzeugungsart geschrieben; erfunden wird nichts.
+Erzeugungsart geschrieben; erfunden wird nichts. Ein grünes Gate heißt:
+Die Betreiberebene ist vollständig und widerspruchsfrei ausgeliefert. Es heißt
+nicht: Die Herkunft ist bewiesen.
 
 ## 4. Live-Abnahme nach Integration
 
@@ -152,11 +217,31 @@ Erzeugungsart geschrieben; erfunden wird nichts.
    `curl … | grep creditText`; bei deklariertem KI-Cover die Quelldatei
    herunterladen und mit einem Metadaten-Leser auf `DigitalSourceType` prüfen.
    Eine Seite ohne `ai_generated: true` darf das Signal **nicht** tragen.
+
+   Seit dem 07.11.2026 gehören zwei Kanäle dazu, die vorher nicht ausgeliefert
+   wurden und deshalb live nachzuprüfen sind:
+
+   * **Tonspur:** Auf einer Seite mit Lesehilfe – auch auf einer Ratgeber-Säule
+     unter `/pillar/`, die bis zum 07.11.2026 von keiner Regel erfasst war –
+     muss das Siegel am Vorlese-Knopf sichtbar sein, der Screenreader den Satz
+     zur maschinell erzeugten Stimme vorlesen und das `aria-label` nach dem
+     Klick denselben Hinweis tragen. Mit und ohne JavaScript, im hellen und im
+     dunklen Thema; Kontrast mindestens 4.5:1, gemessen aus `ff-voice.css`
+     durch `scripts/a11y_audit.py` (nicht abgeschrieben, sondern aufgelöst).
+   * **Feed:** `curl -s https://franksfinanzcheck.de/index.xml` muss auf
+     Kanal- **und** Item-Ebene `rel="describedby"` zeigen sowie
+     `ffki:ai-generated` und `ffki:ai-generated-scope`; der `scope` eines Items
+     muss dem der Seite entsprechen. Aus diesem Feed publiziert Pinterest
+     automatisch weiter – fehlt die Angabe hier, geht sie auf dem
+     Verbreitungsweg verloren, obwohl die Seite selbst korrekt ist.
 4. Für jedes tatsächlich deklarierte KI-Cover Einzelansicht, Listenansicht,
    Quelldatei und alle relevanten Social-/OG-Ausgaben prüfen. Original und
    live ausgelieferte Datei byteweise vergleichen; getrennt Signatur bzw.
-   Wasserzeichen mit geeignetem Werkzeug prüfen. Keine Prüfung behaupten,
-   wenn kein passendes KI-Cover vorliegt.
+   Wasserzeichen mit geeignetem Werkzeug prüfen. **Ebenso die Ableitungen:**
+   Jedes öffentlich erreichbare AVIF/WebP/JPEG-Geschwisterbild eines
+   deklarierten KI-Originals muss die Markierung tragen oder darf gar nicht
+   erst erzeugt worden sein (Regel M6, `scripts/image_optimizer.py --check`).
+   Keine Prüfung behaupten, wenn kein passendes KI-Cover vorliegt.
 5. Ergebnis mit URLs, Zeit, Revision, Testdaten, Tool und offenen Abweichungen
    dokumentieren. Erst nach Betreiberfreigabe, Nachweisen und ggf. juristischer
    Prüfung den Workflow „Fristen-Check (Recht)“ mit

@@ -19,6 +19,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import sys
 from dataclasses import dataclass, asdict
 from pathlib import Path
 from typing import Iterable
@@ -91,6 +92,95 @@ def cover_sources() -> list[Path]:
     return out
 
 
+# --------------------------------------------------------------------------
+#  KI-ORIGINALE BLEIBEN UNANGETASTET (#1028, 07.11.2026)
+# --------------------------------------------------------------------------
+#  Befund: Dieser Optimizer kannte `cover.ai_generated` nicht. Für ein als
+#  KI deklariertes Cover hätte er JPEG/WebP/AVIF-Ableitungen in fünf Breiten
+#  erzeugt – alle öffentlich erreichbar unter /images/covers/, keine mit der
+#  IPTC-Markierung des Originals (die Ableitungen werden neu enkodiert, dabei
+#  fällt jedes XMP-Paket weg). cover.html liefert deklarierte Originale
+#  bewusst OHNE Umkodierung aus; die Ableitungen wären also weder verlinkt
+#  noch gekennzeichnet gewesen – genau die Klasse „Markierung auf dem
+#  Verbreitungsweg verloren", die der Verhaltenskodex der Kommission vom
+#  10.06.2026 ausschließen will.
+#
+#  Regel: Ein deklariertes Original wird hier nicht angefasst. Vorhandene
+#  Ableitungen meldet --check und entfernt scripts/ki_provenienz_gate.py
+#  --heilen mit Belegzeile (Regel M6).
+_KI_ORIGINAL_CACHE: frozenset[Path] | None = None
+KI_ORIGINAL_UEBERSPRUNGEN: list[str] = []
+
+
+def ki_originale(root: Path | None = None) -> frozenset[Path]:
+    """Pfade aller Cover, die `cover.ai_generated: true` tragen.
+
+    Quelle der Wahrheit ist scripts/ki_provenienz.py (dieselbe Datei, aus der
+    auch das Provenienz-Gate liest) – kein zweiter Pflegeort für dieselbe
+    Frage. Schlägt das Laden fehl, wird NICHT still weiteroptimiert: Ein
+    Optimizer, der die Kennzeichnungspflicht nicht kennt, erzeugt Beweismittel
+    gegen sich selbst. Fail-closed, wie beim Pillow-Import oben.
+    """
+    global _KI_ORIGINAL_CACHE
+    if _KI_ORIGINAL_CACHE is not None:
+        return _KI_ORIGINAL_CACHE
+    basis = Path(root) if root else BLOG_DIR
+    sys.path.insert(0, str(basis / "scripts"))
+    try:
+        import ki_provenienz  # noqa: PLC0415  (bewusst verzögert)
+    except ImportError as exc:
+        raise SystemExit(
+            "FEHLER: scripts/ki_provenienz.py nicht ladbar – der Bild-Optimizer "
+            "kann deklarierte KI-Originale nicht erkennen und läuft deshalb "
+            f"nicht an (fail-closed, Regel M6): {exc}") from exc
+    static = basis / "static"
+    raus = set()
+    for seite in ki_provenienz.seiten(basis):
+        if not seite.ki_bild:
+            continue
+        original = ki_provenienz.pfad_wert(seite.kopf, ("cover", "image")) or ""
+        if not original:
+            continue
+        pfad = (static / original.lstrip("/")).resolve()
+        raus.add(pfad)
+    _KI_ORIGINAL_CACHE = frozenset(raus)
+    return _KI_ORIGINAL_CACHE
+
+
+def ist_ki_original(source: Path) -> bool:
+    try:
+        return source.resolve() in ki_originale()
+    except OSError:
+        return False
+
+
+def ki_ableitungen(source: Path, *, vorhanden: bool = False) -> list[str]:
+    """Ableitungspfade einer Quelldatei, relativ zum Repo (Regel M6).
+
+    `vorhanden=True` liefert nur, was wirklich auf der Platte liegt – das ist
+    der Befund: eine öffentlich erreichbare, unmarkierte Kopie.
+    """
+    sys.path.insert(0, str(BLOG_DIR / "scripts"))
+    try:
+        import ki_provenienz  # noqa: PLC0415  (bewusst verzögert)
+    except ImportError:
+        return []
+    try:
+        relativ = source.resolve().relative_to((BLOG_DIR / "static").resolve())
+    except (ValueError, OSError):
+        return []
+    raus = []
+    for pfad in ki_provenienz.abgeleitete_pfade(str(relativ).replace(os.sep, "/")):
+        datei = BLOG_DIR / "static" / pfad
+        if not vorhanden or datei.is_file():
+            raus.append(str(Path("static") / pfad))
+    return raus
+
+
+def ki_ableitungen_vorhanden(source: Path) -> list[str]:
+    return ki_ableitungen(source, vorhanden=True)
+
+
 def resize_to_width(img: Image.Image, width: int) -> Image.Image:
     src_w, src_h = img.size
     if width >= src_w:
@@ -127,6 +217,15 @@ def optimize_cover_image(source: str | Path, image: Image.Image | None = None, f
         source = BLOG_DIR / source
     if not source.exists() and image is None:
         raise FileNotFoundError(source)
+
+    # KI-VO #1028: Ein als KI deklariertes Cover-Original (cover.ai_generated)
+    # wird NICHT umkodiert. Jede Ableitung verlöre das IPTC-XMP-Paket des
+    # Originals und wäre trotzdem öffentlich erreichbar – eine unmarkierte
+    # Kopie synthetischen Inhalts. cover.html liefert das Original ohnehin
+    # unverändert aus, die Ableitungen blieben also Waisendateien.
+    if ist_ki_original(source):
+        KI_ORIGINAL_UEBERSPRUNGEN.append(rel(source))
+        return []
 
     img = (image.copy() if image is not None else Image.open(source)).convert("RGB")
     src_w, src_h = img.size
@@ -218,6 +317,13 @@ def remove_misplaced_modern_files() -> list[str]:
 def check_sources(sources: Iterable[Path]) -> list[str]:
     problems: list[str] = []
     for source in sources:
+        # KI-Originale dürfen KEINE Ableitungen haben (siehe optimize_cover_image):
+        # „FEHLT" wäre hier ein falscher Befund, und eine vorhandene Ableitung
+        # ist der eigentliche Fund.
+        if ist_ki_original(source):
+            for ableitung in ki_ableitungen_vorhanden(source):
+                problems.append(f"KI_ABLEITUNG_UNMARKIERT: {ableitung}")
+            continue
         for path in expected_variants(source):
             if not path.exists():
                 problems.append(f"FEHLT: {rel(path)}")
@@ -232,6 +338,11 @@ def check_sources(sources: Iterable[Path]) -> list[str]:
 def build_manifest(sources: Iterable[Path]) -> dict:
     items: list[dict] = []
     for source in sources:
+        if ist_ki_original(source):
+            # Manifest sagt die Wahrheit: dieses Cover hat bewusst keine
+            # Ableitungen, weil es ein deklariertes KI-Original ist.
+            items.append({"path": rel(source), "kiOriginal": True, "variants": []})
+            continue
         img = Image.open(source)
         variants: list[Variant] = []
         for path in expected_variants(source):
@@ -295,7 +406,12 @@ def main() -> int:
             print(f"WARNUNG: FCP-Manifest konnte nicht aktualisiert werden: {exc}")
 
     problems = check_sources(sources)
-    report = {"sources": len(sources), "changed": len(changed), "removed": len(removed), "problems": problems, "manifest": rel(MANIFEST), "lcpManifest": lcp_manifest, "fcpManifest": "data/fcp_images.json"}
+    report = {"sources": len(sources), "changed": len(changed), "removed": len(removed), "problems": problems, "manifest": rel(MANIFEST), "lcpManifest": lcp_manifest, "fcpManifest": "data/fcp_images.json",
+              # KI-VO #1028: deklarierte Originale werden nicht umkodiert.
+              # Sichtbar im Report, damit niemand „0 Varianten" für einen
+              # Optimizer-Fehler hält.
+              "kiOriginale": len(ki_originale()),
+              "kiOriginaleUebersprungen": len(KI_ORIGINAL_UEBERSPRUNGEN)}
     if args.json:
         print(json.dumps(report, ensure_ascii=False, indent=2))
     else:

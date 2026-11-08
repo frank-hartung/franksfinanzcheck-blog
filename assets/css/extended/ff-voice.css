@@ -169,6 +169,69 @@
 :root[data-theme="dark"] .ff-voice-btn--primary { color: #0b1512; }
 .ff-voice-btn--primary:hover { filter: brightness(1.06); background: linear-gradient(160deg, var(--ffv-emerald) 0%, var(--ffv-emerald-dark) 100%); }
 
+/* ---------- 3b. KI-Siegel am Vorlese-Knopf (#1028, 07.11.2026) -----
+   Vertrag:  layouts/_partials/ff_voice_toolbar.html (`data-ff-ki-voice-label`)
+   Wache:    scripts/ki_provenienz_gate.py – Regel M4, Modalität `audio`
+   Hintergrund: Der Dokumentkopf deklariert die Tonspur maschinenlesbar
+   (`ai-generated-scope: …audio`), sichtbar stand dazu auf keiner der
+   84 Seiten mit Lesehilfe ein Wort. Dieses Siegel schließt die Lücke
+   auf der Menschenebene, damit Maschinen- und Lesewelt dieselbe
+   Wahrheit sagen (Kanaltreue).
+
+   Gestalterische Sperren, bewusst gewählt:
+   · ABSOLUT positioniert → ändert an keiner Viewportbreite die
+     Fluss-Höhe. Die `min-height`-Reserve des Slots (102 px / 146 px
+     mobil) ist der CLS-Schutz für den schwebenden Mini-Player; ein
+     Siegel im Fluss hätte sie auf schmalen Bildschirmen gekippt.
+   · Nur Marken-Tokens, keine neue Farbe (PRODUCT.md/DESIGN.md).
+   · Kontrast gemessen (WCAG 2.2, Text < 18 pt verlangt 4,5:1):
+       hell  #2E2E33 auf #FFF5CC = 12,35:1  (AAA)
+       dunkel #FFCB45 auf #0B1512 = 12,28:1  (AAA)
+     Beide Werte sind in scripts/tests/test_ki_stimme_siegel.py
+     festgeschrieben – wer die Farbe anfasst, bekommt einen roten Test.
+   · `pointer-events: none` → der Klick trifft immer den Knopf, das
+     Siegel ist keine zweite Bedienstelle.                          */
+.ff-voice-btn--primary { position: relative; }
+
+.ff-voice-btn__ki {
+  position: absolute;
+  top: -7px;
+  right: -4px;
+  padding: 1px 6px 2px;
+  border: 1px solid var(--ffv-line-strong);
+  border-radius: 999px;
+  background: var(--ffv-yellow-soft);
+  color: var(--ffv-anthracite);
+  font-size: .6rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 1px 2px rgba(20, 40, 33, .18);
+}
+
+:root[data-theme="dark"] .ff-voice-btn__ki {
+  background: #0b1512;
+  color: var(--ffv-yellow);
+  border-color: rgba(255, 203, 69, .55);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+}
+
+/* Fokus bleibt beim Knopf; das Siegel zieht keine eigene Kontur. */
+.ff-voice-btn--primary:focus-visible .ff-voice-btn__ki { box-shadow: none; }
+
+@media (forced-colors: active) {
+  .ff-voice-btn__ki {
+    background: Canvas;
+    color: CanvasText;
+    border: 1px solid CanvasText;
+    box-shadow: none;
+    forced-color-adjust: none;
+  }
+}
+
 .ff-voice-btn--icon { padding: 0; width: 40px; justify-content: center; }
 .ff-voice-btn--icon .ff-voice-btn__icon { width: 18px; height: 18px; flex-basis: 18px; }
 .ff-voice-btn--icon svg { width: 18px; height: 18px; }
