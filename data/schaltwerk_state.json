@@ -72,6 +72,7 @@
     "standby-erinnerung::standby:telegram": "2026-10-04T23:53:19+02:00",
     "standby-erinnerung::standby:threads": "2026-10-04T16:20:48+02:00",
     "stiller-kanal::stille:mastodon": "2026-10-12T21:17:05+02:00",
+    "stiller-kanal::stille:mastodon:2026-11-08": "2026-11-08T23:26:29+01:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/ausland/amerika/uruguay-erneuerbare-energie-klima-100.html": "2026-10-20T08:33:00+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/inland/bericht-aus-berlin-stromsteuer-100.html": "2026-10-26T12:30:43+01:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/arbeitsmarkt/ig-metall-tarifverhandlungen-104.html": "2026-10-07T09:10:22+02:00",
@@ -98,7 +99,7 @@
     "nacht-planung": "2026-11-08T06:52:34+01:00",
     "reach-signale-kuratieren": "2026-11-02T19:13:37+01:00",
     "standby-erinnerung": "2026-10-04T23:53:19+02:00",
-    "stiller-kanal": "2026-10-12T21:17:05+02:00",
+    "stiller-kanal": "2026-11-08T23:26:29+01:00",
     "verbraucher-nachrichten": "2026-11-08T19:28:44+01:00",
     "wochenbericht": "2026-11-08T19:28:44+01:00"
   },
@@ -202,7 +203,8 @@
       "2026-10-04": 8
     },
     "stiller-kanal": {
-      "2026-10-12": 1
+      "2026-10-12": 1,
+      "2026-11-08": 1
     },
     "verbraucher-nachrichten": {
       "2026-10-04": 3,
