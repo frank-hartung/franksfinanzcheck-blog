@@ -340,3 +340,54 @@ Item wird im Gate **stillsch** übersprungen, `continue`).
 
 Der nächste rote Lauf nennt damit das Item beim Namen – oder er ist grün, weil
 alle 49 Items belegt sind. Beides ist ehrlich; „49 < 50“ war es nicht.
+
+## 7. Das Item hat einen Namen – und der Name zeigt auf ein Messproblem
+
+Kaum nannte der Test das Item (`7b7318a`), lautete die Annotation aus Lauf
+`42518243347` / Job `128855045803`:
+
+```
+AssertionError: Lists differ:
+['2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen'] != []
+```
+
+Das ist der Beweis, dass die Diagnose-Kette funktioniert: aus `49 < 50` (nicht
+handelbar) wurde ein Slug (handelbar). Und der Slug war **kein** Inhaltsfehler.
+
+**Was das Item ist:** ein regulärer Beitrag mit `draft: true` und
+`reserve: true` – also bewusst zurückgehalten, kein Defekt. Er steht nicht im
+Feed (richtig, `buildDrafts = false`), das Gate meldet nur, dass ein
+Feed-Item keine Seite im Bestand hat.
+
+**Die eigentliche Ursache war Zeit, nicht Inhalt.** Der `regression`-Job baute
+`public/` in Schritt 6. Danach liefen die KI-Cover-Provenienz und der
+Reserve-Snapshot – beide **ändern `data/`**. Die Suite in Schritt 11 maß damit
+ein Messobjekt, das älter war als der Baum, aus dem es stammte. Ein
+Nachbau mit demselben Baum liefert `feed_items: 50`, `feed_items_ohne_seite:
+[]`, 109/109 Seiten. Gegenprobe: `ki_cover_provenienz.py --gate` und
+`automation_premium_audit.py --strict` verändern unter `content/` nichts – der
+Baum war unschuldig.
+
+**Heilung:** neuer Schritt **„Prüf-Build vor der Suite (gleicher Stand wie die
+Messung)“** unmittelbar vor der Suite, über dieselbe Aktion wie der Deploy
+(`./.github/actions/hugo-build`, `--minify --destination public
+--cleanDestinationDir`, ~3 s). Damit gilt: was gemessen wird, ist der Stand, der
+gemessen werden soll. In Lauf `42524620687` waren Schritt 10 (Prüf-Build) und
+Schritt 11 (Code-Regression) zum ersten Mal grün.
+
+**Die Regel dahinter (generalisierbar):** Ein Gate darf sein Messobjekt nicht
+vor den Schritten bauen, die den Baum verändern. Wer ein Artefakt vor der
+Messung erzeugt, muss es vor der Messung neu erzeugen – oder die Messung
+deklariert, auf welchem Stand sie läuft.
+
+**Fallstrick, dokumentiert, weil er fast zur Fehldiagnose geführt hätte:** Ein
+`hugo --buildDrafts`-Build ist **kein** Beweis. Er zeigt 22–28 Items statt 50,
+weil das Feed `where site.RegularPages "Section" "posts"` nimmt und Entwürfe
+die Liste verschieben – daraus wurden scheinbar 22+ Items „ohne Seite“. Feed-
+Messungen nur auf einem normalen Build (`buildDrafts = false`) beurteilen.
+
+**Nebenbefund, mitbehoben:** Die Uhr-Probe meldete nur `exit code 1`. Sie
+schreibt jetzt nach `/tmp/uhr.log`, zeigt `tail -80`, und setzt pro
+FAIL/ERROR eine eigene Annotation `::error title=Uhr-Probe::<name>`; der
+Exit-Code wird durchgereicht (`c4ae916`). Dieselbe Regel wie in §6: ein rotes
+Gate nennt seinen Zeugen.
