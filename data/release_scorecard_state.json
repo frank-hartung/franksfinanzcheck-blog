@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "generated_at": "2026-11-07T21:00:52Z",
+  "generated_at": "2026-11-08T00:47:36Z",
   "modus": "kandidaten",
-  "commit": "8b6ed35003301d86c81b70a016ddddc58a08869a",
+  "commit": "9a77b4537bfcddd92f77654018dd5310401eeb47",
   "kapazitaet": {
-    "stichtag": "2026-11-07",
-    "basis": "2026-11-07",
+    "stichtag": "2026-11-08",
+    "basis": "2026-11-08",
     "projiziert": false,
     "artikel": 115,
     "faellig": 0,
@@ -14,7 +14,7 @@
     "naechste_frist": {
       "slug": "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser",
       "frist": "2026-11-12",
-      "restlaufzeit": 5
+      "restlaufzeit": 4
     },
     "budget": 4,
     "laeufe_je_tag": 1.0,
@@ -36,7 +36,7 @@
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
       "geprueft": true,
-      "bis": "2027-03-07",
+      "bis": "2027-03-08",
       "tage": 120,
       "weg_frei": true,
       "erstverletzung": null,
@@ -50,7 +50,7 @@
     "empfohlenes_budget": 4,
     "empfehlung_erreicht": true,
     "hartes_limit": 16,
-    "spitze_geprueft": 56
+    "spitze_geprueft": 55
   },
   "ursachen": [
     {
@@ -717,7 +717,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-21",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "T1w-zeichenlaenge-optimum",
@@ -778,7 +778,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-21",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
@@ -796,7 +796,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-21",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
@@ -1145,7 +1145,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-03",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
