@@ -87,9 +87,11 @@
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/unternehmen/vw-tarifvertraege-sparkurs-100.html": "2026-10-04T16:20:48+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/verbraucher/energie-heizen-winter-100.html": "2026-10-17T13:08:39+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/verbraucher/inflationsrate-deutschland-oktober-100.html": "2026-10-30T20:18:32+01:00",
+    "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/verbraucher/klimaschaeden-versicherungen-100.html": "2026-11-08T19:28:44+01:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/verbraucher/spritpreise-tankrabatt-120.html": "2026-10-06T00:34:19+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wissen/klima/treibhausgase-so-hoch-wie-nie-100.html": "2026-10-27T15:22:48+01:00",
-    "wochenbericht::wochenbericht:2026-10-18": "2026-10-18T19:17:16+02:00"
+    "wochenbericht::wochenbericht:2026-10-18": "2026-10-18T19:17:16+02:00",
+    "wochenbericht::wochenbericht:2026-11-08": "2026-11-08T19:28:44+01:00"
   },
   "letzter_lauf": {
     "kanal-konfig-drift": "2026-11-06T17:55:19+01:00",
@@ -97,8 +99,8 @@
     "reach-signale-kuratieren": "2026-11-02T19:13:37+01:00",
     "standby-erinnerung": "2026-10-04T23:53:19+02:00",
     "stiller-kanal": "2026-10-12T21:17:05+02:00",
-    "verbraucher-nachrichten": "2026-11-04T18:57:22+01:00",
-    "wochenbericht": "2026-10-18T19:17:16+02:00"
+    "verbraucher-nachrichten": "2026-11-08T19:28:44+01:00",
+    "wochenbericht": "2026-11-08T19:28:44+01:00"
   },
   "marker": {
     "datei:data/social/channels.yaml": "aa842ff5f9594d2f"
@@ -140,7 +142,8 @@
     "slot:2026-11-05:03:40": "2026-11-05T07:34:10+01:00",
     "slot:2026-11-06:03:40": "2026-11-06T10:17:40+01:00",
     "slot:2026-11-07:03:40": "2026-11-07T09:40:57+01:00",
-    "slot:2026-11-08:03:40": "2026-11-08T06:52:34+01:00"
+    "slot:2026-11-08:03:40": "2026-11-08T06:52:34+01:00",
+    "slot:2026-11-08:19:00": "2026-11-08T19:28:44+01:00"
   },
   "version": 1,
   "zaehler": {
@@ -215,10 +218,12 @@
       "2026-11-01": 1,
       "2026-11-02": 1,
       "2026-11-03": 1,
-      "2026-11-04": 1
+      "2026-11-04": 1,
+      "2026-11-08": 1
     },
     "wochenbericht": {
-      "2026-10-18": 1
+      "2026-10-18": 1,
+      "2026-11-08": 1
     }
   }
 }

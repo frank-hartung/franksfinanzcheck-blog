@@ -9,6 +9,13 @@
 # ============================================================
 version: 1
 vorschlaege:
+- titel: Viele Gebäude weiterhin ohne Elementarschadenversicherung
+  url: https://www.tagesschau.de/wirtschaft/verbraucher/klimaschaeden-versicherungen-100.html
+  quelle: Tagesschau Wirtschaft (RSS)
+  erfasst: '2026-11-08T19:28:44'
+  brief: ''
+  status: offen
+  notiz: RSS-Trigger des Schaltwerks – Quellenprüfung erforderlich.
 - titel: Inflation im Euroraum steigt auf 4,0 Prozent
   url: https://www.tagesschau.de/wirtschaft/konjunktur/inflation-eurozone-oktober-102.html
   quelle: Tagesschau Wirtschaft (RSS)
@@ -296,4 +303,4 @@ vorschlaege:
   brief: 2026-09-28-internet-recherche.json
   status: offen
   notiz: Automatisch erfasst aus 2026-09-28-internet-recherche.json – Quellenprüfung erforderlich.
-zuletzt_ergaenzt: '2026-11-04T18:57:22'
+zuletzt_ergaenzt: '2026-11-08T19:28:44'
