@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "generated_at": "2026-11-09T12:34:07Z",
+  "generated_at": "2026-11-09T13:17:21Z",
   "modus": "kandidaten",
-  "commit": "90d85a10cef832c8f5dedb644188e0348adb663a",
+  "commit": "8142f43a20c4ac43cf2d9c9a53139e1c3a46dc5d",
   "kapazitaet": {
     "stichtag": "2026-11-09",
     "basis": "2026-11-09",
     "projiziert": false,
-    "artikel": 118,
-    "faellig": 3,
+    "artikel": 124,
+    "faellig": 5,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
@@ -19,19 +19,29 @@
     "budget": 4,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 4.0,
-    "bedarf_je_tag": 2.911,
-    "bedarf_je_woche": 20.4,
-    "deckung_prozent": 137.4,
+    "bedarf_je_tag": 3.033,
+    "bedarf_je_woche": 21.2,
+    "deckung_prozent": 131.9,
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
-    "abbau_tage": 0,
-    "verletzungen_alt": 0,
+    "abbau_tage": 1,
+    "verletzungen_alt": 1,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
-    "verletzungen": [],
-    "offen_im_horizont": 118,
+    "verletzungen": [
+      {
+        "slug": "2026-11-09-wlan-frust-loesen-so-findest-du-den-besten-router-standort",
+        "titel": "WLAN-Frust lösen: So findest du den besten Router Standort",
+        "frist": "2026-11-09",
+        "tag": "2026-11-10",
+        "tage_zu_spaet": 1,
+        "vorher_faellig": true,
+        "folgeprüfung": false
+      }
+    ],
+    "offen_im_horizont": 124,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
@@ -44,13 +54,13 @@
       "erstverletzung_frist": null,
       "verletzungen": 0,
       "seiten": 0,
-      "rueckstand_verletzungen": 0
+      "rueckstand_verletzungen": 1
     },
     "sockel": 4,
     "empfohlenes_budget": 4,
     "empfehlung_erreicht": true,
     "hartes_limit": 16,
-    "spitze_geprueft": 55
+    "spitze_geprueft": 59
   },
   "ursachen": [
     {
@@ -2057,7 +2067,7 @@
       "checks": []
     },
     "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang": {
-      "sha256": "d8b9ff169dfe1aa393c5d06c4ab17ed1b40285ac438844a44ebe0042b10eb741",
+      "sha256": "be9e1426b9a12d3109fa3f17d21f540306ee05531f7e0c46a122a131b4fd6b16",
       "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -2071,7 +2081,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-20",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "Q2-quellen-vorhanden",
