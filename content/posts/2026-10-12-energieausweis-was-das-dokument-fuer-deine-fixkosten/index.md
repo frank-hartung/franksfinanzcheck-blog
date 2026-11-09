@@ -155,7 +155,7 @@ Plane deine Umbauten rechtzeitig in deinen Finanzplan ein. Wenn die Heizung laut
 
 Sieh das Papier als Basis für deine [finanzielle](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) Planung. Nur wer seine Zahlen kennt, behält die volle Kontrolle. So hältst du deine Wohnkosten dauerhaft niedrig.
 
-**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) **Lesetipp:** [Gasabschlag berechnen: So planst du die Heizsaison richtig](../../posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/)
+**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) · [Waschmaschine beladen](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/) **Lesetipp:** [Gasabschlag berechnen: So planst du die Heizsaison richtig](../../posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/)
 
 ## Häufige Fragen
 

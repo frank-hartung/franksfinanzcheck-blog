@@ -220,7 +220,7 @@ Sie verkürzt die Wartezeit, kann aber selbst Energie verbrauchen. Ob sich das r
 
 Notiere Zeitraum, Wartezeit und betroffene Zapfstellen. Diese Notiz gehört zur Verwaltung oder zum Fachbetrieb. Ohne Beobachtung bleibt die Ursache unklar.
 
-**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Urlaub sparen](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/)
+**Weiterlesen:** [Ratgeber Strom & Gas sparen](../../pillar/strom-sparen/) · [Urlaub sparen](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/) · [Gaspreiserhöhung Sonderkündigungsrecht](../../posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/)
 **Lesetipp:** [Günstig durch den Winter: Heizungs-Check im Spätsommer](../../posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/)
 
 ---

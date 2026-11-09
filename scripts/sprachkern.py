@@ -248,13 +248,21 @@ POLITUR_RUINEN = [
     # Mit Meta-Description und Pin-Text wäre die Prompt-Ruine bis zu
     # Google und Pinterest durchgeschlagen.
     #
-    # Nur VERSALE ASCII-Marker am Zeilenanfang: „Beispiel:“, „Faustregel:“
-    # und „Tipp:“ bleiben unberührt – „TITLE:“ ist im deutschen Fließtext
-    # nie Inhalt.
+    # Nur VERSALE Marker am Zeilenanfang: „Beispiel:“, „Faustregel:“ und
+    # „Tipp:“ bleiben unberührt – „TITLE:“ ist im deutschen Fließtext nie
+    # Inhalt.
+    #
+    # 09.11.2026: Die DEUTSCHE Ausgabeform („TITEL: … \n ARTIKEL: …“) fehlte
+    # hier, obwohl `generate_drafts._MARKER_RX` sie längst kennt. Ein Artikel
+    # ging live, dessen Fließtext mit „TITEL: …“ begann und „ARTIKEL:“ als
+    # Zeile trug (gefunden von test_prompt_echo über den Gesamtbestand).
+    # Aufgefallen ist nur die zweite Zeile, weil R16 „TITEL“ nicht kannte –
+    # ein Kopf ohne „ARTIKEL:“ wäre durchgegangen. Die Liste ist jetzt
+    # deckungsgleich mit der des Parsers; der Test prüft beide Marker.
     ("R16-PROMPT-ECHO",
-     re.compile(r"(?m)^\s{0,3}(TITLE|DESCRIPTION|BODY|ARTIKEL|ARTICLE|"
-                r"KEYWORDS|META|METADESCRIPTION|SLUG|H1|OUTPUT|AUSGABE|"
-                r"ANTWORT|PROMPT|SYSTEM|ASSISTANT|USER|PILLAR)\s*:"),
+     re.compile(r"(?m)^\s{0,3}(TITLE|TITEL|DESCRIPTION|BESCHREIBUNG|BODY|"
+                r"ARTIKEL|ARTICLE|KEYWORDS|META|METADESCRIPTION|SLUG|H1|OUTPUT|"
+                r"AUSGABE|ANTWORT|PROMPT|SYSTEM|ASSISTANT|USER|PILLAR)\s*:"),
      "Prompt-/Ausgabeformat-Marker im Artikeltext"),
 ]
 

@@ -495,3 +495,73 @@ python3 scripts/workflow_vertrag_wache.py --gate        → ✅ 102 Workflows
 python3 scripts/hugo_build_vertrag.py --gate            → ✅
 unittest 10 Module (Register, Schwelle, Lesbarkeit, Scorecard) → Ran 200 tests … OK
 ```
+
+## 9. Zwei Befunde, die der PR sichtbar machte – und die älter waren als er
+
+Beim Öffnen des PR liefen zwei Gates rot, die **auf dem unberührten
+Ausgangsstand genauso rot sind** (nachgewiesen in einem Arbeitsbaum auf
+`c8cc152`):
+
+```
+FAIL: test_keine_inhaltsseite_ohne_redaktionellen_inlink
+  ['/posts/2026-10-30-gaspreiserhoehung-…/', '/posts/2026-11-05-waschmaschine-…/']
+
+FAIL: test_keine_falsch_positiven_im_bestand
+  content/posts/2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check/index.md:
+  R16 schlägt im Bestand an
+```
+
+### 9.1 Zwei verwaiste Seiten (kein redaktioneller Inlink)
+
+GSC-Abdeckung: zwei Live-Seiten ohne eingehenden redaktionellen Link. Für
+diese Klasse gibt es im Haus einen **deterministischen Heiler** – er wurde
+nicht erfunden, sondern benutzt:
+
+```
+python3 scripts/gsc_abdeckung.py --verlinkung            # 4 Paare, Trockenlauf
+python3 scripts/gsc_abdeckung.py --verlinkung --heilen   # 4 Links eingefügt
+  vorher ohne Inlink: 2 → nachher: 0
+```
+
+Der Heiler wählt Quelle und Ziel aus dem Bestand und setzt den Link im
+Fließtext. Kein Text umgeschrieben, keine Aussage verändert.
+
+### 9.2 Ein Artikel ging mit Prompt-Kopfzeilen live
+
+Der Body von `2026-11-09-wlan-verbessern-…` begann mit
+
+```
+TITEL: [WLAN verbessern](…): Mesh-System oder Repeater im Check?
+
+ARTIKEL:
+Du sitzt im Homeoffice …
+```
+
+Das ist die deutsche Ausgabeform des Prompts – sichtbar auf der Live-Seite.
+Gefunden hat es erst der Bestands-Test (R16 über alle Artikel), und auch der
+nur zur Hälfte: `R16-PROMPT-ECHO` kannte `ARTIKEL`, aber **nicht** `TITEL`.
+Ein Kopf ohne die zweite Zeile wäre durchgegangen.
+
+**Heilung:**
+* Inhalt: die beiden geleakten Kopfzeilen entfernt (der Fließtext beginnt
+  jetzt mit dem ersten echten Satz).
+* Wache: `sprachkern` R16 kennt jetzt `TITEL|BESCHREIBUNG` – **deckungsgleich
+  mit der Markerliste des Parsers** (`generate_drafts._MARKER_RX`). Zwei
+  Listen, zwei Wahrheiten waren die Ursache: der Parser hätte die Form
+  entfernt, die Wache sah sie nicht.
+* Tests: `test_r16_kennt_die_deutsche_ausgabeform` (TITEL, BESCHREIBUNG,
+  BODY … je Marker) und eine Gegenprobe, dass „Tipp:“/„Beispiel:“/„Fazit:“
+  weiter still bleiben.
+
+**Die Regel:** Eine Wache, die nur die halbe Form kennt, ist eine halbe Wache.
+
+### 9.3 Was hier bewusst NICHT gemacht wurde
+
+`metadaten_wache` meldet auf `main` zwei weitere Inhaltsbefunde (M4: der
+Waschmaschinen-Artikel führt quantitative Aussagen ohne `quellen`-Block;
+M2: eine zu kurze Description am Streaming-Artikel). Beides ist **redaktionell**
+und nicht heilbar: Quellen werden nicht erfunden, und eine Description wird
+nicht mit Behauptungen aufgefüllt. Die Wache nennt Datei und Feld – das ist
+der Auftrag an die Redaktion, kein Maschinenauftrag. Diese Befunde stehen
+nicht in diesem PR, weil sie im gemergten Stand von `main` entstehen und
+nicht in seinem Ausgangsstand.
