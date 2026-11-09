@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-09T13:54:58Z",
-  "modus": "live",
-  "commit": "79230897f3eb89a90e123b658f08fc4b10c16381",
+  "generated_at": "2026-11-09T14:05:54Z",
+  "modus": "kandidaten",
+  "commit": "809500b875c69751faab6892d61c160976e115d5",
   "kapazitaet": {
     "stichtag": "2026-11-09",
     "basis": "2026-11-09",
@@ -54,6 +54,36 @@
   },
   "ursachen": [
     {
+      "check": "F4-fachbefund",
+      "dimension": "faktenalter",
+      "wirkung": "blockiert",
+      "entscheidung": "human",
+      "quelle": "scripts/faktenfrische_befund_ledger.py (via publish_gate.fakten_befund_failures)",
+      "artikel": [
+        "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+        "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+        "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+        "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+        "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
+        "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
+        "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
+        "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
+        "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
+        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
+        "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
+        "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
+        "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
+        "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+        "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
+        "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+        "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen"
+      ],
+      "anzahl": 20
+    },
+    {
       "check": "T6-textverstaendnis",
       "dimension": "technik",
       "wirkung": "blockiert",
@@ -82,35 +112,6 @@
         "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt"
       ],
       "anzahl": 20
-    },
-    {
-      "check": "F4-fachbefund",
-      "dimension": "faktenalter",
-      "wirkung": "blockiert",
-      "entscheidung": "human",
-      "quelle": "scripts/faktenfrische_befund_ledger.py (via publish_gate.fakten_befund_failures)",
-      "artikel": [
-        "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
-        "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
-        "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
-        "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
-        "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
-        "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
-        "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
-        "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
-        "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
-        "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
-        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
-        "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
-        "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
-        "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
-        "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
-        "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-        "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
-        "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
-        "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen"
-      ],
-      "anzahl": 19
     },
     {
       "check": "RD1-duplikate",
@@ -165,25 +166,14 @@
         "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet"
       ],
       "anzahl": 1
-    },
-    {
-      "check": "T5-lesbarkeit",
-      "dimension": "technik",
-      "wirkung": "blockiert",
-      "entscheidung": "auto",
-      "quelle": "scripts/readability_check.py (via publish_gate.readability_failures)",
-      "artikel": [
-        "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen"
-      ],
-      "anzahl": 1
     }
   ],
   "befundlage": {
-    "offen": 117,
-    "seiten": 28,
-    "live_befunde": 77,
-    "live_seiten": 19,
-    "ueberholt": 92,
+    "offen": 122,
+    "seiten": 29,
+    "live_befunde": 82,
+    "live_seiten": 20,
+    "ueberholt": 97,
     "ohne_fassung": 15,
     "nicht_entscheidbar": 0,
     "aeltester_tage": 10,
@@ -198,6 +188,7 @@
       "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": 5,
       "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": 5,
       "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": 5,
+      "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": 5,
       "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": 5,
       "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": 2,
       "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": 3,
@@ -742,7 +733,7 @@
       "checks": []
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
-      "sha256": "54d367d61c2ac17f199994fb3f63bfa537068e9cb5e02926e7e38f2514ac4a91",
+      "sha256": "627d33dfb2d4df5aae625ac92ead3fe78436a90925c58164f340db7b8512616f",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -756,7 +747,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -768,13 +759,7 @@
           "check": "RD1-duplikate",
           "dimension": "redundanz",
           "wirkung": "blockiert",
-          "detail": "D1-EXAKT: Absatz doppelt (Z.7474 ≈ Z.7163): *Abbildung: Gliederung zu „Preisgarantie Gas: Was bei Preiserhöhung hilft“ – 5 Stationen von „Wenn e…"
-        },
-        {
-          "check": "T5-lesbarkeit",
-          "dimension": "technik",
-          "wirkung": "blockiert",
-          "detail": "Flesch 59.7 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)"
+          "detail": "D1-EXAKT: Absatz doppelt (Z.7473 ≈ Z.7162): *Abbildung: Gliederung zu „Preisgarantie Gas: Was bei Preiserhöhung hilft“ – 5 Stationen von „Wenn e…"
         },
         {
           "check": "T6-textverstaendnis",
@@ -883,13 +868,13 @@
       ]
     },
     "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": {
-      "sha256": "5aa8bd31e68a11ddab2a1c572db15bff3efdf50c86c7c2a0e8ced6518730688b",
-      "urteil": "freigabe-reif",
+      "sha256": "e30b40915c7209ad4b71c43f9940563d716b6ed4961e10111e6703cbfc992b48",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -897,8 +882,15 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-07",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "278d89267d9122a1e9d8 (luecke): Angaben zu gesetzlichen Vorgaben für Warmwassertemperaturen zur Vermeidung von Legionellen werden nicht durch die bereitgestellten Quellen gestützt.; 450c3aa629342062825e (luecke): Die Aussage, dass Warmwasser der zweitgrößte Kostenposten im Haushalt ist, wird nicht durch eine der bereitgestellten Quellen belegt.; 7601167c9f3560093fb0 (luecke): Die Behauptung, dass W"
+        }
+      ]
     },
     "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen": {
       "sha256": "5d82e9843028f9023a6afe6da6edc13a2333b19843acb6cffb7dc801903702e4",
@@ -1250,7 +1242,7 @@
       ]
     },
     "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
-      "sha256": "2e0d1a68a957554be4dda28b954a36e74249c0090ae472b922d04fb5d913dab8",
+      "sha256": "fb9edf8b0badd3d0b55d138b97b79ea27f5514750e2469528d3f1893a79c9a60",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1264,7 +1256,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-02",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": {
@@ -1713,7 +1705,7 @@
       ]
     },
     "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": {
-      "sha256": "34e8cd1620fa2c5c61d1a36f8089cfabadaf1e96232419bcc0b5cf7478a4ad59",
+      "sha256": "175067b0db95e40671680bcb2826f9a01b96b832b01467cb1759706ba48a7723",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1727,7 +1719,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck": {
@@ -1816,7 +1808,7 @@
       "checks": []
     },
     "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten": {
-      "sha256": "950e2546c4e2fb626d673dda2b0934d43d1caa4e2be8d86b00aa78a9922dcf78",
+      "sha256": "ec37a881835dfda3575f131a220de39cb9d1ea2f8537d85a0d907a41354449a9",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1830,7 +1822,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
