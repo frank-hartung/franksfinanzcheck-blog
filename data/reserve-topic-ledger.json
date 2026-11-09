@@ -257,6 +257,14 @@
     "infra_fehler": 0,
     "letzter_versuch": "2026-09-29"
   },
+  "Gas-Anbieter wechseln: So sparst du bis zu 680 Euro": {
+    "fehler": 0,
+    "grund": "produziert: gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-11-09",
+    "letzter_versuch": "2026-11-09",
+    "sperre_bis": "2027-05-08"
+  },
   "Gastarife vergleichen vor dem Herbst": {
     "fehler": 1,
     "grund": "3 Versuche ohne Erfolg [inhalt] (Profi-Gate: RS5: 14 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Ein Wechsel dauert in der Regel einige Wochen.; Keyword „gasvergleich“ fehlt im erste",
