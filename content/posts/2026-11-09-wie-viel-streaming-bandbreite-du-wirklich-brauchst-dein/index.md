@@ -1,5 +1,5 @@
 ---
-title: "Wie viel Streaming‑Bandbreite: Du wirklich brauchst – dein"
+title: "Wie viel Streaming‑Bandbreite: Du wirklich brauchst"
 description: "Streaming Bandbreite: Erhalte klare Antworten, wie viel…"
 date: 2026-11-09T12:41:53Z
 draft: true

@@ -120,7 +120,7 @@ Drehe den Zapfen vorsichtig. In einer Position drückt er den Flügel fester an 
 
 Prüfe auch die Scharniere. Wenn das Fenster schief hängt, nützt die beste Dichtung nichts. Eine kleine Schraube am Scharnier korrigiert oft die Höhe. Das Fenster sollte beim Schließen sanft in die Verriegelung gleiten.
 
-Eine gute Mechanik hilft dir, effektiv **[Heizkosten senken](../../posts/2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu/)** zu können.  
+Eine gute Mechanik hilft dir, effektiv **Heizkosten senken** zu können.  
 
 ## Typische Fehler beim Fensterabdichten
 
@@ -173,7 +173,7 @@ Das Abdichten mit Klebestreifen ist eine Schönheitsreparatur. Du kannst das sel
 
 Dokumentiere die Zugluft für den Vermieter. Ein flatterndes Feuerzeug vor dem geschlossenen Fenster ist ein guter Beweis. Frage im Zweifel einen Fachmann für Fensterbau. Er kann die Beschläge professionell einstellen.
 
-**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) **Lesetipp:** [Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden](../../posts/2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu/)
+**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) **Lesetipp:** Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden
 
 ## Häufige Fragen
 
