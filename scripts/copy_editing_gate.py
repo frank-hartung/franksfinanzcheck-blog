@@ -110,10 +110,24 @@ JSON_DEFAULT = ROOT / ".copy_editing_report.json"
 HISTORY = ROOT / "data" / "copy_editing_history.jsonl"
 
 # Schwellen (Highend-Profi-Agentur)
+# KEINE ZWEITE WAHRHEIT (09.11.2026): Die Flesch-Zahlen kommen aus der SSOT
+# `readability_check` – genau wie das Publish-Gate und die Scorecard. Vorher
+# stand hier ein eigener Boden (55), während das Tor 60 verlangte; ein Bericht,
+# der 55 als „Boden“ ausweist, macht das Leck wieder unsichtbar, das §8 der
+# Schließakte beschreibt. Der Fallback hält den Bericht lauffähig, wenn die
+# SSOT nicht importierbar ist – er ist nicht die Wahrheit.
+try:  # pragma: no cover – Normalfall ist der Import
+    from readability_check import (AVG_TARGET as _R_TARGET,
+                                   FLOOR_MIN as _R_FLOOR,
+                                   NEW_FLESCH_MIN as _R_NEU)
+    _F_NEN, _F_ZIEL, _F_BODEN = _R_NEU, _R_TARGET, _R_FLOOR
+except Exception:  # pragma: no cover
+    _F_NEN, _F_ZIEL, _F_BODEN = 60.0, 62.0, 60.0
+
 THRESHOLDS = {
-    "flesch_min_neu": 60.0,
-    "flesch_target_bestand": 62.0,
-    "flesch_floor": 55.0,
+    "flesch_min_neu": _F_NEN,
+    "flesch_target_bestand": _F_ZIEL,
+    "flesch_floor": _F_BODEN,
     "sent_max": 16,
     "long_word_max_pct": 15.0,
     "nested_max_pct": 10.0,

@@ -89,11 +89,11 @@ Versorger kaufen Gas zu verschiedenen Zeiten und über getrennte Verträge ein. 
 
 Auch ein fallender Börsenpreis kommt nicht immer sofort bei dir an. Genau deshalb vergleichst du deinen Tarif mit Angeboten von heute. Eine einzelne Tagesbewegung sagt nichts über das ganze Jahr.
 
-Für deine Entscheidung vergleiche aktuelle Angebote für deinen Wohnort und deinen Verbrauch mit dem Gesamtpreis deines Vertrags.
+Für deine Entscheidung vergleiche aktuelle Angebote für Wohnort und Verbrauch mit dem Gesamtpreis deines Vertrags.
 
 ## Wie eine Preisgarantie den Schock begrenzt
 
-Eine Garantie begrenzt dein Risiko steigender Preise bei den vertraglich geschützten Bestandteilen. Ob ein vergleichbarer Tarif dafür mehr kostet, zeigt erst der konkrete Vergleich; ein Aufpreis ist nicht zwingend.
+Eine Garantie begrenzt dein Risiko steigender Preise bei den vertraglich geschützten Bestandteilen. Ob ein vergleichbarer Tarif dafür mehr kostet, zeigt erst der konkrete Vergleich. Ein Aufpreis ist nicht zwingend.
 
 Typische Ausnahmen betreffen:
 
@@ -114,7 +114,7 @@ Angenommen, dein Verbrauch liegt bei 20.000 kWh. Tarif A kostet 10,8 Cent pro kW
 | A steigt nach 6 Monaten für 60 % des Verbrauchs um 1,5 ct | 2.520 € | 2.440 € |
 | A sinkt nicht, Marktangebote werden 1 ct günstiger | 2.340 € bis Wechsel | 2.440 € gebunden |
 
-Die zweite Zeile rechnet mit 12.000 kWh × 1,5 Cent = 180 € Mehrkosten; das ist ein Modellwert. Tarif B kostet anfangs 100 € mehr. In diesem Fall wäre er aber 80 € günstiger.
+Die zweite Zeile rechnet mit 12.000 kWh × 1,5 Cent = 180 € Mehrkosten. Das ist ein Modellwert. Tarif B kostet anfangs 100 € mehr. In diesem Fall wäre er aber 80 € günstiger.
 
 Das ist keine Vorhersage. Es zeigt nur den Preis für die Sicherheit. Eine Garantie kauft dir Planung – keine sichere Ersparnis.
 
@@ -134,7 +134,7 @@ Die [Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Vportal/Energie/Prei
 
 Für die Grundversorgung gelten strengere Regeln nach § 5 StromGVV/GasGVV. Prüfe zuerst deine Vertragsart.
 
-Kündigst du zum Zeitpunkt der Änderung, endet dein Vertrag am Vortag – eine Frist musst du nicht abwarten. Ausnahmen gelten unter anderem bei einer vereinbarten separierten Preisanpassungsklausel für bestimmte hoheitliche Änderungen und bei der reinen Weitergabe einer Umsatzsteueränderung. Beides prüfst du am Schreiben und an deiner Klausel.
+Kündigst du zum Zeitpunkt der Änderung, endet dein Vertrag am Vortag – eine Frist musst du nicht abwarten. Ausnahmen gelten unter anderem bei einer vereinbarten separierten Preisanpassungsklausel für bestimmte hoheitliche Änderungen. Ausgenommen ist auch die reine Weitergabe einer Umsatzsteueränderung. Beides prüfst du am Schreiben und an deiner Klausel.
 
 Darum lautet die sichere Regel: **Nicht nur die Überschrift lesen. Änderungsgrund und Vertragsklausel entscheiden.**
 
@@ -162,9 +162,11 @@ Kündige selbst, schriftlich, und verlange eine Bestätigung. Beim normalen Wech
 
 ## Jahrespreis nach einer Erhöhung rechnen
 
-Steigt der Arbeitspreis von 10,5 auf 12,0 Cent, beträgt der Unterschied 1,5 Cent pro kWh im Rechenfall.
+Der Arbeitspreis steigt von 10,5 auf 12,0 Cent. Der Unterschied beträgt 1,5 Cent pro kWh im Rechenfall.
 
-Bei 18.000 kWh wären das für ein volles Jahr **270 €**; das ist ein Rechenbeispiel. Gilt der neue Preis nur für einen Teil des Abrechnungsjahres, musst du den Verbrauch zeitanteilig aufteilen. Gasverbrauch fällt nicht gleichmäßig an; der Winter wiegt stärker.
+Bei 18.000 kWh wären das für ein volles Jahr **270 €**. Das ist ein Rechenbeispiel.
+
+Gilt der neue Preis nur für einen Teil des Abrechnungsjahres, musst du den Verbrauch zeitanteilig aufteilen. Gasverbrauch fällt nicht gleichmäßig an. Der Winter wiegt stärker.
 
 Notiere deshalb zum Datum der Änderung den Zählerstand und übermittle ihn nach Vorgabe. So wird die Abgrenzung nachvollziehbarer.
 
@@ -200,7 +202,9 @@ Eine längere Garantie ist nicht automatisch sicherer. Wenn du dafür schon am S
 
 Garantierte Preise schützen nicht vor einem kalten Winter oder höherer Raumtemperatur. Senkst du den Verbrauch, sinkt auch dein Risiko bei jeder künftigen Änderung.
 
-Prüfe deshalb Raumtemperaturen, Lüftung, freie Heizkörper und Anlagenzustand. Beachte dabei die Schimmelgrenze: Die Verbraucherzentrale empfiehlt, nicht unter 16 °C zu heizen. Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892) nennt etwa 6 % weniger Heizenergie pro Grad niedrigere Raumtemperatur als Faustwert. Wie viel du sparst, hängt von Gebäude und Ausgangswert ab.
+Prüfe deshalb Raumtemperaturen, Lüftung, freie Heizkörper und Anlagenzustand. Beachte dabei die Schimmelgrenze. Die Verbraucherzentrale empfiehlt, nicht unter 16 °C zu heizen.
+
+Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892) nennt etwa 6 % weniger Heizenergie pro Grad niedrigere Raumtemperatur als Faustwert. Wie viel du sparst, hängt von Gebäude und Ausgangswert ab.
 
 > 💡 **Schnell-Tipp von FranksFinanzcheck:** Rechne den neuen Jahrespreis mit deinem echten Verbrauch und vergleiche erst dann: [**Gastarife prüfen**](/go/gas/). Der Link ist Werbung; für dich entstehen keine Mehrkosten.
 
@@ -231,7 +235,7 @@ Rückholangebote sind nicht von selbst günstig. Rechne Arbeitspreis, Grundpreis
 
 Sende eine Kündigung erst, wenn du die Folgen kennst. Endet der Vertrag ohne neuen Lieferanten, fällst du in Grund- oder Ersatzversorgung. Die Versorgung bleibt zwar gesichert, der Preis kann aber höher sein.
 
-Bewahre ein abgelehntes Angebot nicht als ewigen Vergleich auf. Notiere das Datum, denn ein Marktpreis von heute ist in einigen Wochen nur noch ein historischer Wert.
+Bewahre ein abgelehntes Angebot nicht als ewigen Vergleich auf. Notiere das Datum. Ein Marktpreis von heute ist in einigen Wochen nur noch ein historischer Wert.
 
 Setze nach jeder Entscheidung einen neuen Termin. Garantie, Laufzeit und Bonus haben oft unterschiedliche Enddaten. Drei Erinnerungen sind hier sinnvoller als die Hoffnung, dass der Anbieter rechtzeitig an deinen Geldbeutel denkt.
 
@@ -252,7 +256,9 @@ Notiere in vier Zeilen:
 
 Passen Schutz und Grund nicht zusammen, hol dir fachliche Hilfe. Passen sie zusammen, rechnest du Marktangebote gegen den neuen Jahrespreis.
 
-Setze eine realistische Antwortfrist und bleib sachlich. Ein Widerspruch ersetzt keine Kündigung, und eine Kündigung löst nicht den Streit über bereits berechnete Preise. Behandle beides getrennt. So verlierst du weder die Wechselfrist noch den Überblick über deine Forderung.
+Setze eine realistische Antwortfrist und bleib sachlich. Ein Widerspruch ersetzt keine Kündigung. Eine Kündigung löst nicht den Streit über bereits berechnete Preise.
+
+Behandle beides getrennt. So verlierst du weder die Wechselfrist noch den Überblick über deine Forderung.
 
 Prüfe nach dem Wechsel auch die Schlussrechnung. Ein sauberer neuer Vertrag heilt keinen falschen Endstand beim alten Anbieter.
 
@@ -267,10 +273,10 @@ Wenn heute ein Preisschreiben im Postfach liegt, fotografiere zuerst den Zähler
 ## Häufige Fragen
 
 **Gilt das Sonderkündigungsrecht bei jeder Preiserhöhung?**
-Grundsätzlich ja: Kündige zum Zeitpunkt der Änderung; der Vertrag endet am Vortag. Ausnahmen gelten etwa bei einer vereinbarten separierten Klausel für bestimmte hoheitliche Anpassungen oder reiner Steuerweitergabe. Prüfe das konkrete Schreiben.
+Grundsätzlich ja: Kündige zum Zeitpunkt der Änderung. Der Vertrag endet am Vortag. Ausnahmen gelten etwa bei einer vereinbarten separierten Klausel für bestimmte hoheitliche Anpassungen. Auch die reine Steuerweitergabe kann ausgenommen sein. Prüfe das konkrete Schreiben.
 
 **Wie schnell muss der Anbieter informieren?**
-Haushaltskunden müssen grundsätzlich mindestens einen Monat vor der Änderung informiert werden. In der Grundversorgung gelten zusätzliche Pflichten; bei reiner Steuerweitergabe gelten Ausnahmen.
+Haushaltskunden müssen grundsätzlich mindestens einen Monat vor der Änderung informiert werden. In der Grundversorgung gelten zusätzliche Pflichten. Bei reiner Steuerweitergabe gibt es Ausnahmen.
 
 **Bleibt mein Abschlag trotz Garantie gleich?**
 Nicht zwingend. Verbrauchsprognose oder ausgenommene Preisbestandteile können den Abschlag verändern. Verlange eine nachvollziehbare Berechnung.

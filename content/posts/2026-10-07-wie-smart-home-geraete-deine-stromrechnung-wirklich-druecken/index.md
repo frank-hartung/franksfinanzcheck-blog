@@ -159,7 +159,7 @@ Schreibe die Annahmen auf. So erkennst du später, ob sich Nutzung oder Preis ge
 
 Ein hoher Strompreis und ein hoher Geräteverbrauch sind zwei verschiedene Fragen. Ein Smart-Home-System ändert nicht automatisch den Tarif. Wenn du auch Stromverträge prüfen willst, vergleiche die Bedingungen selbst. Der folgende Partnerlink führt zu Stromtarifen, nicht zu Smart-Home-Geräten.
 
-**Weiterlesen:** [Ratgeber Strom sparen](../../pillar/strom-sparen/) · [Stand-by-Kosten prüfen](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/) · [Stromfresser im Haushalt finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/)
+**Weiterlesen:** [Ratgeber Strom sparen](../../pillar/strom-sparen/) · [Stand-by-Kosten prüfen](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/) · [Stromfresser im Haushalt finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/) · [Gaspreiserhöhung Sonderkündigungsrecht](../../posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/)
 
 ## Häufige Fragen
 

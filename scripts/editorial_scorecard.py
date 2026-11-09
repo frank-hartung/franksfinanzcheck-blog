@@ -55,13 +55,16 @@ _CWV_REPORT = os.path.join(BLOG_DIR, "CWV-REPORT.md")
 # Die Scorecard zeigte früher „Ziel ≥ 70“: ein Mess-Artefakt aus der G2-Ära
 # (Lesbarkeit wurde aus einer nie existierenden Datei gelesen und per
 # `(v or 100) >= 70` grün gefärbt). Das Qualitäts-Regelwerk definiert als Ziel
-# Flesch-Amstad Ø ≥ 62 und als Bestands-Floor 55. Seit 07.09.2026 importiert
-# die Scorecard dieselben Konstanten wie das Gate – kein abweichendes Ziel mehr.
+# Flesch-Amstad Ø ≥ 62. Seit 07.09.2026 importiert die Scorecard dieselben
+# Konstanten wie das Gate – kein abweichendes Ziel mehr. Seit 09.11.2026 ist
+# der Bestands-Boden identisch mit der Publish-Schwelle (60): ein Boden unter
+# der Zusage, die der Bestand selbst trägt, war das Leck, durch das ein
+# Live-Artikel bei Flesch 59,7 wöchentlich „OK“ war.
 try:
     from readability_check import AVG_TARGET as R_TARGET
     from readability_check import FLOOR_MIN as R_FLOOR
 except Exception:  # pragma: no cover – Fallback hält die Scorecard lauffähig
-    R_TARGET, R_FLOOR = 62.0, 55.0
+    R_TARGET, R_FLOOR = 62.0, 60.0
 
 # Wie alt eine Messung sein darf, bevor sie als Blindflug gilt (Wochenrhythmus + Puffer).
 STALE_AFTER_DAYS = 9
@@ -487,7 +490,7 @@ def collect():
 def _readability_lamp(v):
     """Ampel für den Ø-Flesch-Wert (deutsche Amstad-Skala).
 
-    Schwellen = Regelwerk R6: 🟢 ab Ziel Ø ≥ 62, 🟡 ab Bestands-Floor 55,
+    Schwellen = Regelwerk R6: 🟢 ab Ziel Ø ≥ 62, 🟡 ab Bestands-Floor 60 (Publish-Schwelle),
     🔴 darunter. Unbekannt ist NICHT grün – eine fehlende Messung ist ein
     Befund, kein Erfolg (vorher färbte `(v or 100) >= 70` sowohl `None` als
     auch 0 grün; Ziel „70“ war Artefakt, nicht Regelwerk).

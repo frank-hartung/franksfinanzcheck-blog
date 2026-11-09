@@ -147,6 +147,33 @@ class WacheTests(unittest.TestCase):
         self.assertEqual(len(funde), 2, f"beide Felder melden: {funde}")
         self.assertTrue(all(f[1] == "R16-PROMPT-ECHO-META" for f in funde))
 
+    def test_r16_kennt_die_deutsche_ausgabeform(self):
+        """Der Vorfall vom 09.11.2026: „TITEL: … / ARTIKEL: …“ im Fließtext.
+
+        Ein Artikel ging live, dessen Body mit der deutschen Prompt-Kopfzeile
+        begann. R16 kannte „ARTIKEL“, aber nicht „TITEL“ – ein Kopf ohne
+        „ARTIKEL:“ wäre unbemerkt durchgelaufen. Die Wache muss die Form
+        kennen, die der Parser (`generate_drafts._MARKER_RX`) selbst
+        verwendet.
+        """
+        for kopf in ("TITEL", "BESCHREIBUNG", "TITLE", "ARTIKEL", "BODY"):
+            with self.subTest(kopf=kopf):
+                body = f"{kopf}: Ein Titel\n\nDer Artikel beginnt hier."
+                regeln = [r for r, _ in sk.politur_ruine_funde(body)]
+                self.assertIn("R16-PROMPT-ECHO", regeln,
+                              f"{kopf}: Prompt-Kopfzeile wurde nicht erkannt")
+                self.assertEqual(sk.prompt_echo_im_feld(f"{kopf}: Wert"), kopf + ":")
+
+    def test_deutsche_prosa_mit_doppelpunkt_bleibt_still(self):
+        """Gegenprobe: normale Überschriften mit Doppelpunkt sind kein Echo."""
+        for zeile in ("Tipp: Vergleiche drei Angebote.",
+                      "Beispiel: 2.500 € netto.",
+                      "Fazit: Der Wechsel lohnt sich."):
+            with self.subTest(zeile=zeile):
+                self.assertEqual(
+                    [r for r, _ in sk.politur_ruine_funde(zeile)], [],
+                    f"{zeile!r} wurde als Prompt-Echo gewertet")
+
     def test_keine_falsch_positiven_im_bestand(self):
         """Die Regel wurde gegen den gesamten Content geprüft."""
         root = SCRIPTS.parent
