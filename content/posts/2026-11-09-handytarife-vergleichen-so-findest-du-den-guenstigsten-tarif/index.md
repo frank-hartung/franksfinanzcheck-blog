@@ -19,6 +19,8 @@ redaktionelle_pruefung:
 
 Du hast gerade deine letzte Rechnung geöffnet und merkst, dass dein Handy‑Monatspreis jedes Jahr ein bisschen höher ist. Du willst wissen, ob du wirklich das beste Angebot hast oder ob ein Wechsel zu einem günstigeren Handytarif dir mehr Geld im Geldbeutel lässt. Dieser Ratgeber zeigt dir, wie du systematisch Handytarif vergleichen kannst, ohne in versteckte Kosten zu tappen und ohne teure Fachbegriffe.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 ## Überblick: Was du beim Handytarif vergleichen beachten musst  
 
 Ein klarer Überblick spart Zeit und verhindert Fehlentscheidungen. Zuerst prüfst du, welche Leistungen du tatsächlich nutzt. Dann schaust du, welche Kosten monatlich und jährlich anfallen. Abschließend vergleichst du die Vertragsbedingungen, um böse Überraschungen zu vermeiden.  

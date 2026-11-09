@@ -408,3 +408,7 @@
 {"ts": "2026-11-09T13:08:14Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 13}
 {"ts": "2026-11-09T13:10:07Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
 {"ts": "2026-11-09T13:10:07Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 13}
+{"ts": "2026-11-09T13:58:44Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif", "rules": ["B2", "B3", "B8"]}
+{"ts": "2026-11-09T13:58:45Z", "module": "spam_guard", "action": "feed-fix", "rules": ["F5"]}
+{"ts": "2026-11-09T13:58:45Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
+{"ts": "2026-11-09T13:58:45Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 15}
