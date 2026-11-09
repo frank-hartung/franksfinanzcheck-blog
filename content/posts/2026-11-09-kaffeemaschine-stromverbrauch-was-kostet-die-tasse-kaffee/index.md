@@ -61,7 +61,7 @@ Wer nur eine Tasse trinkt und die Maschine danach wieder ausschaltet, spart bare
 
 Es gibt große Unterschiede zwischen den Systemen. Eine einfache Filtermaschine heizt nur das Wasser auf, das sie gerade braucht.
 
-Ein Vollautomat führt oft Spülvorgänge beim Ein- und Ausschalten durch. Das kostet nicht nur Wasser, sondern auch Strom für die Pumpe und das Heizelement. Wenn du beim **Kaffee zu Hause** sparen willst, solltest du die Energieeffizienzklasse beim Kauf beachten. Oft amortisiert sich ein effizienteres Gerät durch die geringeren [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/) über die Lebensdauer.
+Ein Vollautomat führt oft Spülvorgänge beim Ein- und Ausschalten durch. Das kostet nicht nur Wasser, sondern auch Strom für die Pumpe und das Heizelement. Wenn du beim **Kaffee zu Hause** sparen willst, solltest du die Energieeffizienzklasse beim Kauf beachten. Oft amortisiert sich ein effizienteres Gerät durch die [geringeren](../../posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/) [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/) über die Lebensdauer.
 
 ## Welche Kapselmaschine Kosten fallen jährlich an?
 
@@ -139,7 +139,7 @@ Vernachlässigte Pflege ist ebenfalls teuer. Kalk im Heizelement wirkt wie eine 
 
 Die Maschine braucht dann länger zum Aufheizen und verbraucht mehr Strom. Im schlimmsten Fall geht das Gerät kaputt. Eine neue Anschaffung belastet das Budget dann außerplanmäßig. In meinem 4K-Prüfpfad ist das der Punkt "Kündigungsfenster sichern" im übertragenen Sinne: Sichere die Lebensdauer deiner Geräte durch regelmäßige Wartung.
 
-Auch der Kauf von Spezialreiniger beim Hersteller ist oft ein teurer Fehler. Viele Vollautomaten lassen sich mit günstigeren Alternativprodukten ebenso gut reinigen.
+Auch der Kauf von Spezialreiniger beim Hersteller ist oft ein teurer Fehler. Viele Vollautomaten lassen sich mit [günstigeren](../../posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/) Alternativprodukten ebenso gut reinigen.
 
 Hier lohnt sich ein Preisvergleich. Wer blind die teuren Tabs des Maschinenherstellers kauft, erhöht seine **Kapselmaschine Kosten** oder Vollautomaten‑Aufwendungen unnötig. Prüfe immer, ob es zertifizierte, aber günstigere Reinigungsmittel gibt, die den gleichen Zweck erfüllen.
 

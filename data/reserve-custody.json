@@ -130,7 +130,7 @@
   },
   "fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen": {
     "seit": "2026-10-30",
-    "slug": "2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
+    "slug": "2026-11-09-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
     "titel": "Fenster abdichten: So stoppst du Zugluft an alten Rahmen",
     "zuletzt_im_pool": "2026-11-09",
     "zustand": "pool"
@@ -269,6 +269,13 @@
     "zuletzt_im_pool": "2026-11-09",
     "zustand": "pool"
   },
+  "mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung": {
+    "seit": "2026-11-09",
+    "slug": "2026-11-09-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
+    "titel": "Mesh WLAN nachrüsten: Schluss mit Funklöchern in der Wohnung",
+    "zuletzt_im_pool": "2026-11-09",
+    "zustand": "pool"
+  },
   "oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": {
     "seit": "2026-10-28",
     "slug": "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar",
@@ -374,7 +381,7 @@
   "wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
     "seit": "2026-11-09",
     "slug": "2026-11-09-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein",
-    "titel": "Wie viel Streaming‑Bandbreite: Du wirklich brauchst – dein",
+    "titel": "Wie viel Streaming‑Bandbreite: Du wirklich brauchst",
     "zuletzt_im_pool": "2026-11-09",
     "zustand": "pool"
   },

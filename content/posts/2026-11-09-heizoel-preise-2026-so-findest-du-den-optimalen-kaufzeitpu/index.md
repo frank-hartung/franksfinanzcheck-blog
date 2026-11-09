@@ -117,7 +117,7 @@ Auch das Wetter hat einen Einfluss auf die Wege für den Transport. Wenn die Fl�
 
 **Rechenweg für den Vergleich** 1. Kauf zum tiefen Preis: 0,80 € (Beispielrechnung) × 1 000 Liter (Beispielrechnung) ergibt Kosten von 800 € (Beispielrechnung).
 2. Kauf zum hohen Preis: 1,10 € (Beispielrechnung) × 1 000 Liter (Rechenbeispiel) ergibt Kosten von 1 100 € (Berechnung).
-3. Die Differenz aus beiden Werten: 1 100 € (Beispielrechnung) minus 800 € (dieser Rechnung) ergibt eine Ersparnis von 300 € (nach dieser Rechnung).
+3. Die Differenz aus beiden Werten: 1 100 € (Beispielrechnung) minus 800 € (aus dieser Position) ergibt eine Ersparnis von 300 €.
 
 **Ergebnis der Rechnung**  
 Ein Kauf im Januar spart dir 300 € (Beispielrechnung) gegenüber einem Kauf im November. Das ist viel Geld, das du für andere Fixkosten oder für deine Freizeit nutzen kannst. Diese einfache Rechnung zeigt sehr deutlich, warum das Beobachten der **Heizöl Preise** für jeden Haushalt so wichtig ist. Wer blind kauft, verliert bares Geld.
@@ -134,7 +134,7 @@ Ein Kauf im Januar spart dir 300 € (Beispielrechnung) gegenüber einem Kauf i
 
 ## Faustregel für den optimalen Kaufzeitpunkt
 
-Als Orientierung ohne Marktbeleg: Preise, die mindestens vier Wochen unter dem Schnitt der letzten 12 Monate liegen, können ein günstiges Kaufzeitfenster signalieren – das ist keine Vorhersage künftiger Preise, und ein garantierter Tiefpunkt (z. B. im Januar oder Februar) existiert nicht.
+Als Orientierung ohne Marktbeleg: Preise, die mindestens vier Wochen unter dem Durchschnitt der letzten 12 Monate liegen, können ein günstiges Kaufzeitfenster signalisieren – das ist keine Vorhersage künftiger Kosten, und ein garantierter Tiefpunkt (z. B. im Januar oder Februar) existiert nicht.
 
 **Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) **Lesetipp:** [Gasabschlag berechnen: So planst du die Heizsaison richtig](../../posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/)
 

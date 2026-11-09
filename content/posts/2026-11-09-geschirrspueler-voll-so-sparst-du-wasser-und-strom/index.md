@@ -123,7 +123,7 @@ Die Maschine wird täglich im Intensiv-Modus gestartet, oft nur zu 80 % gefüll
 
 **Szenario B (Effizient):**
 Die Maschine wird immer voll beladen. Dadurch läuft sie nur 5-mal pro Woche (ca. 260-mal im Jahr) im Eco-Modus.
-* Stromkosten: 260 * 0,9 kWh * 0,40 € = 93,60 € pro Jahr (Modellrechnung).
+* [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/): 260 * 0,9 kWh * 0,40 € = 93,60 € pro Jahr (Modellrechnung).
 * Wasserkosten: 260 * 10 Liter * 0,005 € = 13,00 € pro Jahr (Modellrechnung).
 * Gesamtkosten Szenario B: 106,60 € pro Jahr (Modellrechnung).
 
@@ -135,7 +135,7 @@ In diesem Modellfall spart der Haushalt durch korrektes Beladen und die Wahl des
 Damit dein Geschirrspüler sparsam arbeitet, solltest du einer festen Routine folgen. Das verhindert Fehler und sorgt für konstante Ersparnisse.
 
 1. **Grobe Reste entfernen:** Kratze Speisereste mit einer Gabel ab. Nutze kein Wasser zum Vorspülen.
-2. **Unten beladen:** Platziere große Teller, Töpfe und Pfannen Die Öffnungen zeigen nach unten zum Sprüharm.
+2. **Unten beladen:** Platziere große Teller, Töpfe und Pfannen. Die Öffnungen zeigen zum Sprüharm hinab.
 3. **Oben beladen:** Gläser, Tassen und kleine Schalen kommen nach oben. Achte auf einen sicheren Stand, damit nichts umkippt.
 4. **Besteck einsortieren:** Wenn du einen Korb hast, lege die Utensilien mit dem Griff nach unten hinein (außer scharfe Messer). In einer Besteckschublade sortiere die Teile nach Typ.
 5. **Sprüharm-Check:** Drehe den unteren und oberen Sprühkopf einmal mit der Hand. Du darfst nirgends anstoßen.
@@ -157,7 +157,7 @@ Ein Tab ist für eine maximale Beladung und hartes Wasser konzipiert. Wenn dein 
 
 Mit Pulver kannst du die Menge genau an den Verschmutzungsgrad anpassen. Das spart Chemie und Kosten.
 
-Zudem benötigt jede Maschine Salz, um das Wasser zu enthärten. Das ist wichtig, damit die Heizstäbe nicht verkalken. Ein verkalkter Heizstab braucht mehr Energie, um das Wasser zu erwärmen. Das treibt die Stromkosten schleichend nach oben.
+Zudem benötigt jede Maschine Salz, um das Wasser zu enthärten. Das ist wichtig, damit die Heizstäbe nicht verkalken. Ein verkalkter Heizstab braucht mehr Energie, um das Wasser zu erwärmen. Das treibt die [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/) schleichend nach oben.
 
 Klarspüler sorgt dafür, dass das Wasser schneller vom Geschirr abläuft. Das ist besonders wichtig für die Trocknungsphase.
 
@@ -199,7 +199,7 @@ Das ist nur sinnvoll, wenn du einen speziellen Nachtstromtarif hast. Bei den mei
 ### Was tun, wenn das Geschirr trotz Reinigung dreckig bleibt?
 Prüfe zuerst, ob der Sprüharm frei drehen konnte und ob die Düsen sauber sind. Oft ist auch ein überfülltes Gerät die Ursache. Wenn Teller zu eng stehen, kommt das Wasser nicht überall hin. Ein verschmutztes Sieb im Boden der Maschine kann ebenfalls die Ursache sein, da dann **verunreinigtes** Wasser wieder über das Geschirr verteilt wird.
 
-Wer seine Gewohnheiten in der Küche anpasst, kann seine Fixkosten [ohne Verzicht](../../posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/) senken. Es geht nicht darum, weniger zu spülen, sondern die Spülweise zu Jede volle Ladung und jeder gewählte Eco-Modus ist ein kleiner Sieg für dein Budget. Behalte **deine** Kosten im Blick und prüfe regelmäßig, ob **die** Haushaltsgeräte noch effizient arbeiten. So hältst du den Kurs für deine Finanzen.
+**Wer seine Gewohnheiten in der Küche anpasst, kann die [Fixkosten senken](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/).** Es geht nicht darum, weniger zu spülen, sondern die Spülweise zu Jede volle Ladung und jeder gewählte Eco-Modus ist ein kleiner Sieg für dein Budget. Behalte **deine** [Kosten im Blick](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/) und prüfe regelmäßig, ob **die** [Haushaltsgeräte](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/) noch effizient arbeiten. So hältst du den Kurs für deine Finanzen.
 
 ---
 

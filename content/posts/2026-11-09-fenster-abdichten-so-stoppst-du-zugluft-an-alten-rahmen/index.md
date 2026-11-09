@@ -1,7 +1,7 @@
 ---
 title: "Fenster abdichten: So stoppst du Zugluft an alten Rahmen"
 description: "Fenster abdichten leicht gemacht: Mit diesen Tipps kannst du Zugluft stoppen und effektiv Heizkosten senken. Erfahre jetzt, worauf es ankommt."
-date: 2026-11-05T11:21:46Z
+date: 2026-11-09T19:04:07Z
 draft: true
 reserve: true
 tags: ["Heizkosten senken"]
@@ -31,6 +31,8 @@ quellen:
     herausgeber: "Bundesnetzagentur"
 faktencheck: 2026-10-30
 kurzantwort: "Setze selbstklebende Dichtungsleiste und Fugendichtstoff rund um den Rahmen ein, um Zugluft zu stoppen. Damit senkst du den Heizenergiebedarf um bis zu 15 % Quelle: Reinige zuerst die Anschlussflächen und bring das Band gleichmäßig auf die schließende Seite an."
+faktenfrische_aliases:
+  - "2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen"
 ---
 
 Draußen sinken die Temperaturen.  
@@ -46,8 +48,7 @@ Wer Fenster abdichten will, kann mit kleinen Investitionen schnell handeln.
 Du sparst Geld und steigerst dein Wohlbefinden.  
 Dieser Ratgeber führt dich systematisch zum dichten Fenster.  
 
-**Das Wichtigste in Kürze**  
-* **Lecks finden:** Ein einfacher Kerzentest oder ein Blatt Papier entlarven undichte Stellen am Rahmen.
+**Das Wichtigste in Kürze** * **Lecks finden:** Ein einfacher Kerzentest oder ein Blatt Papier entlarven undichte Stellen am Rahmen.
 * **Materialwahl:** Selbstklebende Gummidichtungen (EPDM) halten länger als einfacher Schaumstoff.
 * **Mechanik prüfen:** Oft reicht das Justieren der Fensterflügel aus, um den Anpressdruck zu erhöhen.
 * **Kostenkontrolle:** Kleine Maßnahmen verhindern, dass teure Heizenergie ungenutzt nach draußen verpufft.
@@ -120,7 +121,7 @@ Drehe den Zapfen vorsichtig. In einer Position drückt er den Flügel fester an 
 
 Prüfe auch die Scharniere. Wenn das Fenster schief hängt, nützt die beste Dichtung nichts. Eine kleine Schraube am Scharnier korrigiert oft die Höhe. Das Fenster sollte beim Schließen sanft in die Verriegelung gleiten.
 
-Eine gute Mechanik hilft dir, effektiv **Heizkosten senken** zu können.  
+Eine gute Mechanik hilft dir, effektiv **[Heizkosten senken](../../posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/)** zu können.  
 
 ## Typische Fehler beim Fensterabdichten
 
