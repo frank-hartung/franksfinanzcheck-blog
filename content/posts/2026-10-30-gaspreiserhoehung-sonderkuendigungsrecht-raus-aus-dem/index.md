@@ -1,9 +1,9 @@
 ---
 title: "Gaspreiserhöhung Sonderkündigungsrecht"
 description: Nutze dein Gaspreiserhöhung Sonderkündigungsrecht. Ich zeige dir, wie du die Grundversorgung Gas kündigen kannst und beim Gastarife vergleichen sparst.
-date: 2026-10-30T10:28:40Z
-draft: true
-reserve: true
+date: 2026-11-09T11:26:53Z
+draft: false
+reserve_published: 2026-11-09
 tags: ["Gastarif wechseln"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
