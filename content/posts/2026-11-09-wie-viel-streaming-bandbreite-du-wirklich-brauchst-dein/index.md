@@ -20,7 +20,12 @@ redaktionelle_pruefung:
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
 
 inspiration: "Streaming-Qualität: Wie viel Bandbreite du wirklich brauchst"
+cover:
+  image: "images/covers/2026-11-09-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein.jpg"
+  alt: "Wie viel Streaming‑Bandbreite: Du wirklich brauchst – dein"
+  caption: "Tipp von FranksFinanzcheck"
 ---
+
 Ein gemütlicher Abend: Du willst einen neuen Film in 4 K‑Qualität schauen, doch das Bild stottert. Das liegt meist an zu wenig Streaming‑Bandbreite. In diesem Beitrag erfährst du, welche Bandbreite dein Haushalt wirklich braucht und wie du unnötige Kosten vermeidest.  
 
 **Das Wichtigste in Kürze**  

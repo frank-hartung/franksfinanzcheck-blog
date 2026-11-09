@@ -8,7 +8,7 @@ tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromko
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Waschmaschine beladen", "Waschgang sparen", "Wasserverbrauch Haushalt", "Waschmaschine", "Waschgang"]
+keywords: ["Waschmaschine beladen", "Waschgang sparen", "Wasserverbrauch Haushalt", "Waschmaschine"]
 pin_title: "Waschmaschine beladen: Weniger Kosten bei jedem Waschgang"
 pin_description: "*Werbung | Richtiges Waschmaschine beladen senkt deine Fixkosten. Erfahre, wie du den Wasserverbrauch im Haushalt reduzierst und jeden Waschgang sparen kannst. Mehr Spartipps auf FranksFinanzcheck! #waschmaschine #beladen #waschgang"
 ai_generated: true
