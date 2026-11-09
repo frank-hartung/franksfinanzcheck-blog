@@ -173,7 +173,7 @@ Die passende Tarifart hängt von Vertrag, Zähler, Verbrauchsprofil und deiner B
         <td>Tarif und Kündigungsbedingungen anhand der aktuellen Unterlagen des Grundversorgers prüfen.</td>
         <td>Preis und Flexibilität hängen vom örtlichen Tarif und deiner Situation ab.</td>
         <td>Kann eine Übergangslösung sein; auch im Bestand sollte der konkrete Preis verglichen werden.</td>
-        <td>Weder automatisch günstig noch automatisch zu teuer – mit realem Verbrauch gegen Angebote rechnen.</td>
+        <td>Weder automatisch günstig noch automatisch zu teuer – mit realem Verbrauch gegen Angebote rechnen.</td>  
       </tr>
     </tbody>
   </table>
@@ -223,7 +223,7 @@ Nutze diese Checkliste für deine jährliche Bestandsaufnahme:
       <input type="checkbox" id="chk-en-5" class="ff-audit-item__checkbox">
       <label for="chk-en-5" class="ff-audit-item__content">
         <strong>5. Gasangebote anhand deines Vertrags prüfen</strong>
-        Vergleiche den Gesamtpreis mit deinem Jahresverbrauch und beachte Preisgarantie, Laufzeit, Kündigungsfristen und Bonusbedingungen – ein bestimmter Monat ist keine Spargarantie.
+        Vergleiche den Gesamtpreis mit deinem Jahresverbrauch und beachte Preisgarantie, Laufzeit, Kündigungsfristen und Bonusbedingungen – ein bestimmter Monat ist keine Spargarantie.  
       </label>
     </li>
     <li class="ff-audit-item">
@@ -289,8 +289,7 @@ Möchtest du deine laufenden Energiekosten dauerhaft ohne bürokratischen Aufwan
   <div class="ff-course-series-box__head">
     <span class="ff-course-series-box__badge">Kostenlose E-Mail-Serie</span>
     <h3 class="ff-course-series-box__title">Der 4-Tage Energie-Autopilot</h3>
-    <p class="ff-course-series-box__sub">In vier kompakten Lektionen zu dauerhaft niedrigen Nebenkosten – fundiert, werbefrei und sofort umsetzbar.</p>  
-  </div>
+    <p class="ff-course-series-box__sub">In vier kompakten Lektionen zu dauerhaft niedrigen Nebenkosten – fundiert, werbefrei und sofort umsetzbar.</p> </div>
   <div class="ff-course-syllabus">
     <div class="ff-course-day">
       <span class="ff-course-day__tag">Tag 1</span>

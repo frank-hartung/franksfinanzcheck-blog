@@ -37,6 +37,7 @@ faktencheck: 2026-10-07
 kurzantwort: "Ja, du kannst deine Haushaltskosten sofort senken, indem du den 4K‑Prüfpfad (Kategorien, Kosten, Konsum, Kontrollen) anwendest. Analysiere jede Ausgabe, streiche unwichtige Abos und wechsle zu günstigeren Anbietern. Die Beispielrechnung im Artikel zeigt, wie dabei vierstellige Beträge im Jahr zusammenkommen können. Der Schlüssel liegt in konsequenter Kontrolle und regelmäßiger Nachprüfung."
 ---
 
+
 Haushaltskosten im Check: Wusstest du, wie viel Geld Jahr für Jahr in veralteten Verträgen stecken bleibt, ohne dass du es merkst? Oft belasten nicht die großen Einmalkäufe dein Budget. Es ist die Summe kleiner, regelmäßiger Abbuchungen. Ein vergessener Streaming-Dienst oder ein teurer Stromtarif fressen dein Geld.
 
 Mit System schaffst du dir finanziellen Spielraum. Du gewinnst die Kontrolle über dein Konto zurück.
@@ -89,7 +90,7 @@ Einmaliges Sparen reicht für langfristigen Erfolg nicht aus. Die Fixkosten-Opti
 
 ## Warum scheitern viele Sparpläne im Alltag?
 
-Viele Menschen wollen [Geld sparen](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/), scheitern aber an der Umsetzung. Ein Hauptgrund ist die psychologische Hürde. Der Aufwand für einen Wechsel wird oft zu hoch eingeschätzt. Dabei bringt ein Nachmittag Arbeit eine Ersparnis für das ganze Jahr.
+Viele Menschen wollen Geld sparen, scheitern aber an der Umsetzung. Ein Hauptgrund ist die psychologische Hürde. Der Aufwand für einen Wechsel wird oft zu hoch eingeschätzt. Dabei bringt ein Nachmittag Arbeit eine Ersparnis für das ganze Jahr.
 
 Ein weiterer Fehler ist das Gießkannen-Prinzip. Man versucht an allen Ecken gleichzeitig zu sparen.
 

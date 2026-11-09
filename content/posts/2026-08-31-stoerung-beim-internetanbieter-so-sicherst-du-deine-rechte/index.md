@@ -49,6 +49,7 @@ quellen:
 kurzantwort: "Bei einer Störung meldest du den Ausfall beim Anbieter und lässt dir eine Vorgangsnummer geben. Bewahre Datum, Uhrzeit, Messwerte und jede Nachricht auf. Der Anbieter muss die Störung zeitnah beheben; bleibt der Anschluss länger tot, prüfe eine Gutschrift oder Entschädigung und wende dich an die Bundesnetzagentur, wenn die Reaktion ausbleibt."
 ---
 
+
 Eine Störung beim [Internetanbieter](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) beginnt harmlos: Ein Video ruckelt, eine Seite lädt nicht; das ist ein Modellwert. Zwanzig Minuten später steht fest: Der Anschluss ist tot. Dann beginnt der schwierige Teil. Viele Verbraucher geben auf, obwohl sie im Recht sind.
 
 Der Grund ist selten die Rechtslage. Er ist die Beweislage. Wer den Ausfall nicht ab der ersten Minute festhält, hat später eine Erinnerung und keine Unterlagen.
@@ -85,7 +86,7 @@ Der erste Schritt kostet keine Wartezeit. Er spart oft den Anruf. Gehe die vier 
 3. **Kabel prüfen.** Sitzt der Stecker richtig? Gibt es einen Knick, ein geknicktes Kabel oder eine lose Dose?
 4. **Anbieterstatus prüfen.** Viele Anbieter melden bekannte Störungen im Netz auf einer Statusseite oder in einer App. Steht dort eine Störung mit Zeitfenster, sparst du dir das Warten in der Hotline.
 
-Ändern diese vier Punkte nichts, liegt der Verdacht nahe: Dein Kabel ist nicht das Problem. Dann folgt der Anruf – und mit ihm die Dokumentation.
+Ändern diese vier Punkte nichts, liegt der Verdacht nahe: Dein Kabel ist nicht das Problem. Dann folgt der Anruf und mit ihm die Dokumentation.
 
 ## So meldest du richtig
 

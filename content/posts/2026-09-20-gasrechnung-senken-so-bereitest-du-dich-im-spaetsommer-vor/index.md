@@ -274,7 +274,7 @@ Der Versorger rechnet das Volumen mit Brennwert und Zustandszahl in Energie um. 
 Vergleiche ihn mit einem eigenen Foto. Bei deutlicher Abweichung solltest du dem Anbieter zeitnah den tatsächlichen Stand mitteilen und um Prüfung bitten.
 
 **Kann ich als Mieter den Gasanbieter wechseln?**
-Nur wenn du einen eigenen Gasliefervertrag hast. Bei einer Zentralheizung ohne eigenen Liefervertrag schließt in der Regel der Gebäudeeigentümer – also Vermieter oder Eigentümergemeinschaft – den Liefervertrag; du zahlst deinen Anteil über die Heizkostenabrechnung.
+Nur wenn du einen eigenen Gasliefervertrag hast. Bei einer Zentralheizung ohne eigenen Liefervertrag schließt in der Regel der Gebäudeeigentümer – also Vermieter oder Eigentümergemeinschaft – den Liefervertrag; du zahlst deinen Anteil über die [Heizkostenabrechnung](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/).
 
 **Wie vermeide ich eine Nachzahlung?**
 Rechne erwartete Jahreskosten realistisch und passe den Abschlag an. Eine hohe Rate vermeidet aber keine hohen Kosten; sie verteilt sie nur anders.

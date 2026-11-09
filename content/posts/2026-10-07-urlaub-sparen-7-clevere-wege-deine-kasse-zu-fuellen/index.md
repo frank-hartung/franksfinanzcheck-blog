@@ -62,7 +62,7 @@ Urlaub sparen heißt nicht, jede schöne Sache zu streichen. Es heißt, vor der 
 
 ## Wie setzt du ein realistisches Reisebudget?
 
-Beginne mit dem Betrag, den du für die Reise einsetzen kannst, ohne Miete oder wichtige Rechnungen zu gefährden. Trenne die Reisekasse von deinem Alltag. Wenn du noch nicht genug zurückgelegt hast, verschiebe die Reise oder wähle eine kleinere Variante. Ein Urlaub sollte nicht mit einem Kredit beginnen, den du nach der Rückkehr bereust.
+Beginne mit dem Betrag, den du für die Reise einsetzen kannst, ohne Miete oder wichtige Rechnungen zu gefährden. Trenne die [Reisekasse](../../posts/2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub/) von deinem Alltag. Wenn du noch nicht genug zurückgelegt hast, verschiebe die Reise oder wähle eine kleinere Variante. Ein Urlaub sollte nicht mit einem Kredit beginnen, den du nach der Rückkehr bereust.
 
 Teile das Budget in gut erkennbare Gruppen: Anfahrt, Unterkunft, Essen, Aktivitäten, Versicherung und freie Reserve. Du musst nicht jeden Betrag gleich genau kennen. Markiere, welche Preise bereits feststehen und welche nur Schätzungen sind. So siehst du, wo noch eine Information fehlt.
 

@@ -39,6 +39,7 @@ quellen:
 faktencheck: "2026-10-13"
 ---
 
+
 Finanzieller Puffer im Check: Die Waschmaschine stirbt am Monatsende. Das Auto muss in die Werkstatt. Oder dein Arbeitgeber zahlt später als gedacht. Genau für solche Momente brauchst du einen **finanziellen Puffer**.
 
  Bei 1.500 € Fixkosten sind das 4.500 € bis 9.000 €; das ist ein Modellwert. Das ist viel Geld, aber kein Fantasiewert.
@@ -73,7 +74,7 @@ Ein [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-fina
 
 ## Wie viel Notgroschen reicht wirklich?
 
-Die Standardantwort „drei Nettogehälter“ ist zu grob. Sinnvoller ist der Blick auf deine festen Monatskosten. Denn nicht dein Gehalt bestimmt den Bedarf, sondern das Geld, das jeden Monat sicher rausgeht.
+Die Standardantwort „drei Nettogehälter“ ist zu grob. Sinnvoller ist der Blick auf deine festen [Monatskosten](../../posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/). Denn nicht dein Gehalt bestimmt den Bedarf, sondern das Geld, das jeden Monat sicher rausgeht.
 
 Dazu zählen zum Beispiel:
 
@@ -132,7 +133,7 @@ Oder direkt hier: Trag deine notwendigen Monatsausgaben ein und der Rechner zeig
 
 Ein [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) muss vor allem eines können: **sofort verfügbar sein**. Hohe Rendite ist hier Nebensache. Wenn du das Geld erst kündigen oder verkaufen musst, ist es für den Notfall zu träge.
 
-Darum landet der Puffer in den meisten Fällen am besten auf einem separaten [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/). Das Geld ist nicht direkt im Girokonto sichtbar, aber meist binnen kurzer Zeit verfügbar. Genau das ist der Punkt.
+Darum landet der Puffer in den meisten Fällen am besten auf einem separaten Tagesgeldkonto. Das Geld ist nicht direkt im Girokonto sichtbar, aber meist binnen kurzer Zeit verfügbar. Genau das ist der Punkt.
 
 ### Kontotypen im Vergleich
 
@@ -161,7 +162,7 @@ Die größte Hürde ist selten die Mathematik. Es ist die Routine. Wer jeden Mon
 ### Schritt für Schritt
 
 1. **Ziel festlegen:** Zum Beispiel 6.000 € oder 8.000 €.
-2. **Konto trennen:** Eröffne ein eigenes [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) ohne [Kontoführungsgebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/).
+2. **Konto trennen:** Eröffne ein eigenes Tagesgeldkonto ohne [Kontoführungsgebühren](../../posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/).
 3. **Rate bestimmen:** Etwa 150 €, 300 € oder 500 € pro Monat.
 4. **Dauerauftrag setzen:** Am besten direkt nach dem Gehaltseingang.
 5. **Sonderzahlungen nutzen:** Steuererstattung, Bonus oder Geschenk-Geld teilweise zum Puffer schieben.

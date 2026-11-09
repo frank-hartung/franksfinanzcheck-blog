@@ -38,6 +38,7 @@ affiliate_exempt: true
 affiliate_exempt_reason: "Reiner DNS-Messtest ohne passendes Tarifangebot – ein Tarif-CTA wäre sachfremd."
 ---
 
+
 Ein DNS-Wechsel ist kein allgemeiner Internet-Turbo. Er ändert zunächst, welcher DNS-Server eine Domainanfrage beantwortet. Wenn du einen DNS-Server testen möchtest, kannst du einzelne Antwortzeiten vergleichen. Je nach Netz und Anbieter unterscheiden sich die Werte. Ein einzelner Messwert belegt keinen pauschalen Geschwindigkeitsgewinn. Er belegt auch keine kürzeren Ladezeiten für alle Websites.
 
 Dieser ergänzende Ratgeber zeigt, wie du einzelne DNS-Antworten vergleichst. Er zeigt, wie du die Ergebnisse richtig einordnest. Für den eigentlichen Wechsel, für Anbieterbedingungen und für Router-Einstellungen lies auch den [DNS-Server-Ratgeber](../../posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/). Tipps für besseres WLAN findest du im Beitrag [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/).
@@ -118,7 +119,7 @@ Wiederhole die Messung. Wechsle den Ort nicht. Wechsle die Uhrzeit nicht. Wechsl
 
 ### Wenn du danach wechseln möchtest
 
-Hast du einen DNS-Server gefunden, der bei dir stabil schnell antwortet? Dann kannst du ihn auf deinem Router oder Gerät eintragen. Die genaue Anleitung steht im [Hauptartikel zum DNS-Server-Wechsel](../../posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/). Denk auch an die Verschlüsselung. Denk auch an die Datenschutzbedingungen.
+Hast du einen DNS-Server gefunden, der bei dir stabil schnell antwortet? Dann kannst du ihn auf deinem Router oder Gerät eintragen. Die genaue Anleitung steht im Hauptartikel zum DNS-Server-Wechsel. Denk auch an die Verschlüsselung. Denk auch an die Datenschutzbedingungen.
 
 ## Praktisches Vorgehen in drei Schritten
 
@@ -134,7 +135,7 @@ Nutze die drei Befehle aus dem Abschnitt weiter oben. Lasse zwischen den Abfrage
 Wiederhole die Messung zu drei verschiedenen Zeitpunkten. Zum Beispiel morgens, mittags und abends. Ein einzelner Wert kann durch Cache oder Netzlast verzerrt sein. Der Mittelwert über den Tag ist viel aussagekräftiger.
 
 ### Wenn das Ergebnis klar ist
-Sollte ein DNS-Server bei dir über alle Messungen hinweg deutlich vorne liegen, kannst du über einen Wechsel nachdenken. Die Schritte für die Einrichtung auf Router, Windows, Mac oder Smartphone stehen im ausführlichen [DNS-Server-Ratgeber](../../posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/). Dort findest du auch die Hinweise zu Verschlüsselung und Datenschutz.
+Sollte ein DNS-Server bei dir über alle Messungen hinweg deutlich vorne liegen, kannst du über einen Wechsel nachdenken. Die Schritte für die Einrichtung auf Router, Windows, Mac oder Smartphone stehen im ausführlichen DNS-Server-Ratgeber. Dort findest du auch die Hinweise zu Verschlüsselung und Datenschutz.
 
 
 ### Schritt 4: Dokumentieren
@@ -144,7 +145,7 @@ Schreibe dir die Werte auf. Notiere auch den Wochentag und die Uhrzeit. Nur so k
 Dein Betriebssystem speichert Antworten zwischen. Das ist sinnvoll für den Alltag. Für den Messvergleich kann es aber verfälschen. Leere den lokalen DNS-Cache vor dem Test, wenn du sicher gehen willst. Ansonsten wiederhole die Abfrage einfach ein zweites Mal. Der zweite Wert ist oft der aussagekräftigere.
 
 ### Was du nicht erwarten solltest
-Ein Wechsel des DNS-Servers macht aus einer 16-Mbit-Leitung kein 100-Mbit-Netz; das ist ein Modellwert. Er verbessert nicht den WLAN-Empfang im hinteren Zimmer. Er ersetzt keinen [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/), wenn dein Anschluss grundsätzlich zu langsam ist. Er kann aber in manchen Fällen die Zeit bis zum ersten Laden einer Seite verkürzen.
+Ein Wechsel des DNS-Servers macht aus einer 16-Mbit-Leitung kein 100-Mbit-Netz; das ist ein Modellwert. Er verbessert nicht den [WLAN-Empfang](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) im hinteren Zimmer. Er ersetzt keinen [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/), wenn dein Anschluss grundsätzlich zu langsam ist. Er kann aber in manchen Fällen die Zeit bis zum ersten Laden einer Seite verkürzen.
 
 Das ist ein kleiner Effekt. Er ist manchmal spürbar. Er ist aber kein Wundermittel.
 
@@ -170,7 +171,7 @@ Nein. `Query time` ist ein Zeitwert, keine Datenschutzprüfung. Die gezeigten `d
 Das kann sich nach Standort, Netz, Domain und Zeitpunkt unterscheiden. Wiederhole einen methodisch gleichen Test und wähle nicht allein nach einem einzelnen Bestwert. Datenschutzbedingungen, Filter und Kompatibilität können wichtiger sein als wenige Millisekunden.
 
 ### Wo finde ich die Anleitung zum DNS-Wechsel?
-Die Schritt-für-Schritt-Anleitung für Anbieterwahl und Einstellungen auf Router und Endgeräten steht im [Ratgeber zum DNS-Server-Wechsel](../../posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/).
+Die Schritt-für-Schritt-Anleitung für Anbieterwahl und Einstellungen auf Router und Endgeräten steht im Ratgeber zum DNS-Server-Wechsel.
 
 **Weiterlesen:** [Internet & DSL – der Ratgeber](../../pillar/internet-dsl/)
 

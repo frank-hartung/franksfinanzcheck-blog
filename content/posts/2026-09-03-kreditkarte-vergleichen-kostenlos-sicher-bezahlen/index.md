@@ -76,7 +76,7 @@ Reist du oft, prüfe vorher: Kostet die Karte im Ausland extra als Beispielwert?
 
 ## Die Kostenfalle Fremdwährung: So vermeidest du sie
 
-Die teuerste versteckte Gebühr ist das Fremdwährungsentgelt als Modellwert. Viele Banken verlangen beim Zahlen in Dollar oder Franken ein Fremdwährungsentgelt. Wie hoch es ist, steht im Preisverzeichnis deiner Karte – rechne es für dein Reisebudget an einem Beispielbetrag durch.
+Die teuerste versteckte Gebühr ist das Fremdwährungsentgelt als Modellwert. Viele Banken verlangen beim Zahlen in Dollar oder Franken ein Fremdwährungsentgelt. Wie hoch es ist, steht im Preisverzeichnis deiner Karte – rechne es für dein [Reisebudget](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/) an einem Beispielbetrag durch.
 
 Dazu kommt die Dynamic Currency Conversion (DCC). Händler oder Automaten schlagen dir vor, gleich in Euro abzurechnen.
 

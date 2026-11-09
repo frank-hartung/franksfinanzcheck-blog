@@ -37,6 +37,7 @@ faktencheck: 2026-11-03
 kurzantwort: "Eine moderne Wärmepumpe senkt die laufenden Heizkosten im Vergleich zu einer neuen Gasheizung oft deutlich, weil sie Umweltwärme nutzt und die steigende CO₂-Abgabe vermeidet. Die Beispielrechnung im Artikel zeigt, ab welchem Wärmebedarf und Förderanteil sich der höhere Kaufpreis für dein Haus rechnet."
 ---
 
+
 Zahlst du im aktuellen Vergleich für 2026 laut unserer Beispielrechnung zu viel für deine Wärme?
 Wer heute die falsche Anlage wählt, verliert über die Jahre kleine Vermögen.
 Der Vergleich zeigt dir in vier Schritten die günstigste Lösung für dein Haus.

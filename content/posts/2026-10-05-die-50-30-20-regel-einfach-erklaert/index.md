@@ -93,8 +93,7 @@ Ein einfacher Weg, die Zuordnung zu prüfen, ist ein zweites Tabellenblatt:
 
 Liegen deine Wünsche schon bei 40 %? Dann suche nach Posten zum Kürzen. Oft hilft schon ein besserer Tarif. Ein Vergleich zeigt dir das in wenigen Minuten.  
 
-💶 **Spar‑Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Fixkosten auf CHECK24 prüfen**](/go/allgemein/)  
-Ein schneller Check kann sofort Einsparungen von mehreren Euro pro Monat zeigen.  
+💶 **Spar‑Tipp zwischendurch:** faire Konditionen gibt es online in Minuten: [**Fixkosten auf CHECK24 prüfen**](/go/allgemein/) Ein schneller Check kann sofort Einsparungen von mehreren Euro pro Monat zeigen.
 
 Um die Prozentwerte zu prüfen, rechne jeden Betrag durch dein Nettoeinkommen. Das Ergebnis gibt dir sofort, wo du über- oder unterbudgetiert bist. Diese Rechnung ist die Kern‑Faustregel für die Budget‑Kontrolle. Damit erkennst du sofort, wo du nachjustieren musst.  
 

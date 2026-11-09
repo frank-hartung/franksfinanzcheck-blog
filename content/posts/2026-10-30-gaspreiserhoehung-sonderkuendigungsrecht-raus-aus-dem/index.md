@@ -68,7 +68,7 @@ Die Energieversorger geben die vollen Kosten nun wieder an dich weiter.
 Besonders im Grundtarif spürst du das sofort. 
 Die Grundversorgung ist gesetzlich geregelt. 
 Jeder Haushalt bekommt dort Gas. 
-Das bietet Sicherheit – doch dieser Schutz kostet viel Geld. 
+Das bietet Sicherheit – doch dieser Schutz kostet viel Geld.  
 Die Versorger kalkulieren hier mit hohen Puffern. 
 Du musst jederzeit neue Kunden aufnehmen können. 
 Das macht den Einkauf für sie teurer. 

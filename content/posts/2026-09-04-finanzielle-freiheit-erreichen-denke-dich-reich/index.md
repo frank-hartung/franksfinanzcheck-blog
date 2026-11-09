@@ -39,6 +39,7 @@ quellen:
 faktencheck: 2026-11-05
 ---
 
+
 Du verdienst **ein Beispiel von 5.000 € netto** – und trotzdem bleibt nichts übrig im Modellfall? Der Kontostand hängt selten vom Gehalt ab. Deine Gedanken über Geld und Konsum entscheiden.
 
 Willst du echte **[finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)** erreichen? Dann löse zuerst die Ketten im Kopf. Wer nur Statussymbolen jagt, bleibt Sklave seiner Ausgaben.
@@ -57,9 +58,9 @@ Willst du echte **[finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-du
 
 💡 **Schnell-Tipp von FranksFinanzcheck:** Aktuelle Zinsen auf ein kostenloses Tagesgeldkonto gibt es bei der C24 Bank (CHECK24-Tochter): [**Tagesgeldkonto der C24 Bank eröffnen**](/go/tagesgeld/)
 
-![Merkkarte: Kernaussagen zu Finanzielle Freiheit erreichen: Denke dich reich – Geld](abbildung-merkkarte.svg)
+![Merkkarte: Kernaussagen zu Finanzielle Freiheit erreichen: Denke dich reich – Geld](abbildung-merkkarte. svg)
 
-*Abbildung: Merkkarte zu „Finanzielle Freiheit erreichen: Denke dich reich – Geld“ (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „[Finanzielle Freiheit](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/) erreichen: Denke dich reich – Geld“ (eigene Darstellung aus diesem Beitrag).*
 
 ## Warum scheitern die meisten daran, finanzielle Freiheit erreichen zu wollen?
 
@@ -147,11 +148,11 @@ Die Zinsen von rund 84.000 € übersteigen deine eigene Einzahlung von 72
 
 Die 72er‑Regel rechnest du im Kopf. Teile 72 durch deinen Zinssatz.
 
-Das Ergebnis zeigt, wann sich dein Geld verdoppelt. Bei 6 % sind das rund 12 Jahre. So planst du deine Ziele besser.
+Das Ergebnis zeigt, wann sich dein Geld verdoppelt. Bei 6 % sind das rund 12 Jahre. So planst du deine Ziele besser.
 
 ### Energiepreise in der Kalkulation nicht vergessen
 
-Die Sparfähigkeit eines Haushalts bemisst sich nicht am Gehalt allein, sondern an den Fixkosten, die übrig bleiben. Energie ist dabei ein wesentlicher Posten: Energieprodukte kosteten laut Statistischem Bundesamt (Verbraucherpreisindex) im Oktober 2026 vorläufig 2,8 % mehr als ein Jahr zuvor; Energie insgesamt verteuerte sich um +14,9 % gegenüber dem Vorjahresmonat. Wer die monatliche Sparrate kalkuliert, sollte aktuelle Energiepreise einpreisen – sonst ist die geplante Rate zu hoch angesetzt und das Budget für den Vermögensaufbau schmilzt schneller als gedacht.
+Die Sparfähigkeit eines Haushalts bemisst sich nicht am Gehalt allein, sondern an den Fixkosten, die übrig bleiben. Energie ist dabei ein wesentlicher Posten: Energieprodukte kosteten laut Statistischem Bundesamt (Verbraucherpreisindex) im Oktober 2026 vorläufig 2,8 % mehr als ein Jahr zuvor; Energie insgesamt verteuerte sich um +14,9 % gegenüber dem Vorjahresmonat. Wer die monatliche Sparrate kalkuliert, sollte aktuelle Energiepreise Einpreisen – sonst ist die geplante Rate zu hoch angesetzt und das Budget für den Vermögensaufbau schmilzt schneller als gedacht.
 
 [Quelle: Statistisches Bundesamt, Verbraucherpreisindex und Inflationsrate in Deutschland, https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html]
 
@@ -164,9 +165,9 @@ Die Sparfähigkeit eines Haushalts bemisst sich nicht am Gehalt allein, sondern 
 | 8 % | 176.000 € | 9 |
 | 10 % | 224.000 € | 7,2 |
 
- Bei der vorläufigen Inflationsrate für Oktober 2026 von 2,8 % (Statistisches Bundesamt, Verbraucherpreisindex) verliert das Geld jedes Jahr knapp 3 % seiner Kaufkraft; das ist ein Beispielwert.
+ Bei der vorläufigen Inflationsrate für Oktober 2026 von 2,8 % (Statistisches Bundesamt, Verbraucherpreisindex) verliert das Geld jedes Jahr knapp 3 % seiner Kaufkraft; das ist ein Beispielwert.
 
- Bei 7 % nominal und 2,8 % Inflation bleibt eine reale Rendite von etwa 4,2 %; das ist ein Modellwert. Das reale Endkapital nach 20 Jahren beträgt dann etwa 113.000 €, immer noch ein beachtlicher Vermögenszuwachs.
+ Bei 7 % nominal und 2,8 % Inflation bleibt eine reale Rendite von etwa 4,2 %; das ist ein Modellwert. Das reale Endkapital nach 20 Jahren beträgt dann etwa 113.000 €, immer noch ein beachtlicher Vermögenszuwachs.
 
 > 💶 **Spar‑Tipp zwischendurch:** Faire Konditionen gibt es online in wenigen Minuten: [**C24 Bank Tagesgeld-Zinsen ansehen**](/go/tagesgeld/)
 
@@ -192,7 +193,7 @@ Lies Bücher und seriöse Quellen. Wer mehr weiß, bleibt ruhig. Kontinuität sc
 6. **Finanz‑App installieren** und Kategorien anpassen.
 7. **Monatliche Review** (15 Minuten): Soll‑Ist‑Vergleich, Anpassungen.
 
-![Gliederung des Beitrags: Finanzielle Freiheit erreichen: Denke dich reich – Geld](abbildung-ablauf.svg)
+![Gliederung des Beitrags: Finanzielle Freiheit erreichen: Denke dich reich – Geld](abbildung-ablauf. svg)
 
 *Abbildung: Gliederung zu „Finanzielle Freiheit erreichen: Denke dich reich – Geld“ – 5 Stationen von „Warum scheitern die meisten daran, finanzielle Freiheit erreichen zu wollen?“ bis „So gehst du vor: Deine ersten Schritte“ (eigene Darstellung).*
 
@@ -256,7 +257,7 @@ Oft kaufen wir gegen ein Loch im Bauch. Wir beeindrucken Menschen, die wir nicht
 | **Vorteil** | Schnellere Sparroutinen, mehr Kapital für Investitionen | Mehr mentale Klarheit, weniger Ablenkung |
 | **Nachteil** | Gefahr von „zu billig“ – Qualität kann leiden | Keine direkte Geld‑Multiplikation, eher indirekt |
 
-Beide Wege unterstützen **[finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) erreichen**, wenn du sie gezielt kombinierst: Spare bewusst, investiere das Gesparte und lebe mit weniger Ballast.
+Beide Wege unterstützen **finanzielle Freiheit erreichen**, wenn du sie gezielt kombinierst: Spare bewusst, investiere das Gesparte und lebe mit weniger Ballast.
 
 ## Fazit: Finanzielle Freiheit – denk dich reich, handle bewusst
 

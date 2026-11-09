@@ -38,6 +38,7 @@ quellen:
 faktencheck: 2026-11-02
 ---
 
+
 Willst du deine [Gasrechnung senken](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/), solltest du im Spätsommer handeln. Eine Stunde im September erspart dir den hektischen Samstag im November. Nicht, weil jeder Check automatisch hunderte Euro bringt. Sondern weil du so früh siehst, ob Tarif, Abschlag, Heizkörper oder Fachbetrieb deine Aufmerksamkeit brauchen.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -69,7 +70,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 - Entlüftungsschlüssel nur bei typischen Luftproblemen,
 - Notiz mit vier Spalten: Rechnung, Zähler, Räume, Vertrag.
 
-Bei zentraler Heizung tritt die [Heizkostenabrechnung](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) an die Stelle eines eigenen Gasvertrags. Den Anbieter kannst du dann meist nicht selbst wechseln.
+Bei zentraler Heizung tritt die Heizkostenabrechnung an die Stelle eines eigenen Gasvertrags. Den Anbieter kannst du dann meist nicht selbst wechseln.
 
 ## Minute 0 bis 15: Rechnung und Vertrag
 
@@ -176,7 +177,7 @@ Schreibe jeden Fund in eine von drei Spalten.
 - Deutlich zu hoher Gesamtpreis,
 - Preisgarantie endet,
 - Bonusjahr läuft aus,
-- Laufzeit oder Kündigungsfrist beachten,
+- Laufzeit oder [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) beachten,
 - Abschlag passt nicht zu erwarteten Kosten.
 
 Mehr als drei Sofortaufgaben brauchst du nicht. Der Rest bekommt einen Termin.

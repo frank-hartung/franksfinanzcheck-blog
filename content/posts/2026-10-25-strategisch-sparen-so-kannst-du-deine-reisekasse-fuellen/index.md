@@ -11,7 +11,7 @@ pillar: "mietwagen"
 author: "Frank Hartung"
 keywords: ["Reisekasse füllen", "Urlaubsbudget", "Geld für Urlaub sparen", "Cashback Tipps", "Strategisch sparen", "Strategisch", "Reisekasse", "Frugalismus"]
 pinwand: Günstig reisen | Reisebudget & Mietwagen
-pin_title: "Mehr Geld für den Urlaub: So polsterst du deine Reisekasse auf"
+pin_title: "Strategisch sparen: So kannst du deine Reisekasse füllen"
 pin_description: "*Werbung | Der Traumurlaub scheitert am Budget? Mit diesen 7 Alltags-Tricks füllt sich deine Urlaubskasse fast von allein – vom Cashback-Konto über No-Spend-Tage bis zum cleveren Verkaufen. So sind bis zum Sommer 500 € mehr drin. Jetzt lesen!"
 ai_generated: true
 ai_provider: "Content-Engine v2"
@@ -36,6 +36,7 @@ lastmod: 2026-10-28
 kurzantwort: "Rechne die Sparrate so: Reisekosten minus bereits Erspartem, geteilt durch die Monate bis zur Zahlung. Cashback ist ein Extra, keine Grundlage. Modellrechnungen nennen ihre Annahmen."
 ---
 
+
 [Reisekasse](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/) Füllen im Check: **Eine volle Urlaubskasse beginnt mit einem klaren Ziel und einer festen Summe im Monat.** Plane Unterkunft, Anreise und Essen vor Ort nach echten Angeboten für dein Datum. Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts. Die verlinkte Übersicht belegt eine allgemeine Stabilisierung der Preise nicht.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Die Verbraucherzentrale empfiehlt damit weder das verlinkte Portal noch dessen Angebote.
@@ -51,10 +52,10 @@ Du brauchst keinen neuen Vertrag und kein Bonusprogramm zum Start. Prüfe zuerst
 ## Wie viel musst du für deine Reise sparen?
 
 
+Darum geht es hier konkret: [Reisekasse füllen](../../posts/2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub/).
+
+
 Darum geht es hier konkret: Reisekasse füllen.
-
-
-Darum geht es hier konkret: [Reisekasse](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/) füllen.
 
 Lege Ziel und Zeitraum fest. Setze eine Obergrenze. Hole Angebote ein und zähle alles zusammen: Gepäck, Transfer, Parken, Gebühren, Puffer. Wer nur Flug und Hotel rechnet, plant halb.
 

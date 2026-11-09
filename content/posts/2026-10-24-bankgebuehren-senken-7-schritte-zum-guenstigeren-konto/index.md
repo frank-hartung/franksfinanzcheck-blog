@@ -133,8 +133,7 @@ Stell dein Konto also auf den elektronischen Versand um. Das spart Geld und Papi
 
 ## Modellrechnung: Was sparst du konkret?
 
-**Annahmen**  
-- Jahresnettoeinkommen: 30.000 €
+**Annahmen** - Jahresnettoeinkommen: 30.000 €
 - Aktuelle Bankgebühren: 96 € Kontoführung + 120 € Kreditkarte + 30 € Ausland = 246 €
 
 **Formel**  

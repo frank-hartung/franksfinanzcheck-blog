@@ -44,6 +44,7 @@ quellen:
 kurzantwort: "Den besten DSL‑Anschluss findest du, indem du regelmäßig vergleichst und dann wechselst. Neukunden bekommen die besten Preise. Mit Prämien und Cashback sparst du oft über 300 Euro in zwei Jahren. Wichtig ist außerdem die richtige Geschwindigkeit: Zahle nur für das Tempo, das du wirklich brauchst."
 ---
 
+
 Du willst preiswert surfen? Dein Anschluss kostet viel, aber du nutzt das volle Tempo nie?
 
 Schuld ist selten der Anbieter. Schuld ist fast immer ein alter Vertrag.
@@ -197,8 +198,7 @@ So gehst du vor:
 Jahreskosten = (Grundpreis + Router‑Miete) × 12 + Einrichtungsgebühr  
 
 **Rechenweg**  
-(25 € + 5 €) × 12 = 360 €  
-360 € + 30 € = 390 €  
+(25 € + 5 €) × 12 = 360 € 360 € + 30 € = 390 €
 
 **Ergebnis**  
 Der DSL‑Anschluss kostet dich 390 € über die ersten 12 Monate, also rund 32,50 € pro Monat inkl. Einrichtungsgebühr.  

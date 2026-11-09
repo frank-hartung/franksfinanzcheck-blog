@@ -221,7 +221,7 @@ Nicht jeder Haushalt benötigt dieselbe Reserve. Die folgende Matrix ordnet die 
       <input type="checkbox" id="chk-fr-6" class="ff-audit-item__checkbox">
       <label for="chk-fr-6" class="ff-audit-item__content">
         <strong>6. 30-Tage-Regel für Spontankäufe aktivieren</strong>
-        Alle ungeplanten Konsumwünsche über 50 € auf eine Liste setzen und 30 Tage warten – 70 % erledigen sich von selbst.
+        Alle ungeplanten Konsumwünsche über 50 € auf eine Liste setzen und 30 Tage warten – 70 % erledigen sich von selbst.  
       </label>
     </li>
     <li class="ff-audit-item">
@@ -253,7 +253,7 @@ Nicht jeder Haushalt benötigt dieselbe Reserve. Die folgende Matrix ordnet die 
       <div class="ff-case-card__label">Ausgangslage (Vorher)</div>
       <div class="ff-case-card__value">Dispo: -2.400 €</div>
       <p class="ff-case-card__details">
-        Fixkosten: 2.750 € (67 % des Einkommens – viel zu hoch).<br>
+        Fixkosten: 2.750 € (67 % des Einkommens – viel zu hoch).<br>  
         Dispozins: 12,8 % = ca. 307 € jährlicher Zinsverlust.<br>
         Rücklagen: <strong>0 €</strong> · Ständiger finanzieller Druck.
       </p>
@@ -332,7 +332,7 @@ Möchtest du dein Haushaltsbudget dauerhaft auf Autopilot stellen? Die 4-teilige
   <div class="ff-course-syllabus">
     <div class="ff-course-day">
       <span class="ff-course-day__tag">Tag 1</span>
-      <h4 class="ff-course-day__title">Die 50–30–20-Formel</h4>
+      <h4 class="ff-course-day__title">Die 50–30–20-Formel</h4>  
       <p class="ff-course-day__desc">Wie du deine Fixkosten ohne schmerzhaften Verzicht auf unter 50 % deines Einkommens bringst.</p>
     </div>
     <div class="ff-course-day">

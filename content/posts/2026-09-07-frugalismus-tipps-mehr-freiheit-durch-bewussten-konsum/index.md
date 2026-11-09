@@ -147,9 +147,9 @@ Typische Kandidaten sind:
 | Streaming | 25 € | 12 € | 13 € |
 | **Summe** |  |  | **42,90 €** |
 
-Das sind über **500 € im Jahr**, ohne dass du deine Lebensqualität sichtbar verschlechtert.
+Das sind über **500 € im Jahr**, ohne dass du deine Lebensqualität sichtbar verschlechtert.
 
-**Hinweis zum Stand der Preise:** Laut vorläufigem Verbraucherpreisindex des Statistischen Bundesamts lagen die Energieprodukte im Oktober 2026 um +14,9 % über dem Vorjahreswert. Die Tabelle ist ein Beispiel mit Annahmen; deine tatsächliche Ersparnis hängt von deinem Tarif, deinen Preisen und deinem Verbrauch ab und kann bei Energie höher ausfallen.
+**Hinweis zum Stand der Preise:** Laut vorläufigem Verbraucherpreisindex des Statistischen Bundesamts lagen die Energieprodukte im Oktober 2026 um +14,9 % über dem Vorjahreswert. Die Tabelle ist ein Beispiel mit Annahmen; deine tatsächliche Ersparnis hängt von deinem Tarif, deinen Preisen und deinem Verbrauch ab und kann bei Energie höher ausfallen.
 
 [Quelle: Statistisches Bundesamt – Verbraucherpreisindex im Oktober 2026, vorläufig: Energieprodukte mit einem Anstieg von 14,9 Prozent gegenüber dem Vorjahresmonat. Link: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html]
 
@@ -187,11 +187,11 @@ Typische Kostentreiber:
 | Einkauf mit Liste | 10 € bis 20 € pro Woche |
 | weniger Wegwerfen | 5 € bis 10 € pro Woche |
 
-Schon daraus entstehen schnell **30 € bis 60 € pro Woche**. Selbst wenn du nur die Hälfte erreichst, ist das auf den Monat gerechnet deutlich.
+Schon daraus entstehen schnell **30 € bis 60 € pro Woche**. Selbst wenn du nur die Hälfte erreichst, ist das auf den Monat gerechnet deutlich.
 
-**Hinweis zum Stand der Preise:** Nach dem Indexstand des Statistischen Bundesamts lagen Nahrungsmittel im Oktober 2026 um +0,4 % über dem Niveau des Vorjahresmonats. Die Beispiele sind Orientierungswerte, keine Versprechen – deine Ersparnis hängt von den tatsächlichen Preisen im Einkauf ab.
+**Hinweis zum Stand der Preise:** Nach dem Indexstand des Statistischen Bundesamts lagen Nahrungsmittel im Oktober 2026 um +0,4 % über dem Niveau des Vorjahresmonats. Die Beispiele sind Orientierungswerte, keine Versprechen – deine Ersparnis hängt von den tatsächlichen Preisen im Einkauf ab.
 
-[Quelle wie oben: Statistisches Bundesamt, Vorläufiger Verbraucherpreisindex im Oktober 2026 – Posten Nahrungsmittel, +0,4 % gegenüber dem Vorjahresmonat.]
+[Quelle wie oben: Statistisches Bundesamt, Vorläufiger Verbraucherpreisindex im Oktober 2026 – Posten Nahrungsmittel, +0,4 % gegenüber dem Vorjahresmonat.]
 
 ## Frugalismus-Tipp 5: Ersparnisse sofort sichern
 
@@ -212,7 +212,7 @@ Wenn du durch Kündigungen und Vertragsoptimierung **45 € pro Monat** sparst,
 
 ## Ein Rechenbeispiel: Die Macht kleiner Beträge
 
-Nehmen wir ein bewusst vereinfachtes Beispielszenario zum Preisstand Oktober 2026 (Inflationsrate vorläufig 2,8 %, Statistisches Bundesamt, Verbraucherpreisindex). Du kaufst an 220 Arbeitstagen unterwegs Kaffee und Snack für zusammen rund **10 €**.
+Nehmen wir ein bewusst vereinfachtes Beispielszenario zum Preisstand Oktober 2026 (Inflationsrate vorläufig 2,8 %, Statistisches Bundesamt, Verbraucherpreisindex). Du kaufst an 220 Arbeitstagen unterwegs Kaffee und Snack für zusammen rund **10 €**.
 
 | Posten | Kosten pro Tag | Kosten pro Monat | Kosten pro Jahr |
 |---|---:|---:|---:|

@@ -37,13 +37,14 @@ quellen:
 faktencheck: "2026-10-13"
 ---
 
+
 DSL-Wechselbonus sichern im Check: Viele Haushalte zahlen für ihr Internet noch denselben Preis wie vor drei oder vier Jahren; das ist ein Modellwert. Glasfaser und schnelle Leitungen sind längst Standard. Trotzdem bleiben viele im alten, teuren Vertrag. Der Grund: Der Wechsel klingt kompliziert – ist er aber meist nicht. Genau hier locken Anbieter mit Rabatten, Startguthaben und dem klassischen **DSL-Wechselbonus**. (Stand: Oktober 2026)
 
 Ein Problem bleibt aber: Ein hoher Bonus auf dem Werbebanner sieht toll aus. Das macht den Tarif aber noch lange nicht zum Schnäppchen. Erst wenn du Bonus, Grundgebühr, Anschlusskosten und Laufzeit genau zusammenrechnest, siehst du die Wahrheit: Sparst du wirklich – oder zahlst du nur eine hübsch verpackte Startprämie selbst?
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-![Merkkarte: Kernaussagen zu DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-merkkarte.svg)
+![Merkkarte: Kernaussagen zu DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-merkkarte. svg)
 
 *Abbildung: Merkkarte zu „DSL-Wechselbonus sichern: So sparst du beim Internetvertrag“ (eigene Darstellung aus diesem Beitrag).*
 
@@ -168,7 +169,7 @@ Ein Vorlauf von **ca. 3 bis 4 Monaten** ist ideal, um:. Das ist ein Modellwert.
 
 Viele der besten Cashback-Aktionen laufen zudem nur kurze Zeit. Wer früh startet, kann gezielt zuschlagen.
 
-![Gliederung des Beitrags: DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-ablauf.svg)
+![Gliederung des Beitrags: DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-ablauf. svg)
 
 *Abbildung: Gliederung zu „DSL-Wechselbonus sichern: So sparst du beim Internetvertrag“ – 5 Stationen von „Was ein DSL-Wechselbonus überhaupt ist?“ bis „Wann sich ein Anbieterwechsel besonders lohnt“ (eigene Darstellung).*
 

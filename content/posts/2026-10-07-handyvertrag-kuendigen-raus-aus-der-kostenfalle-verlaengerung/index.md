@@ -48,6 +48,7 @@ faktencheck: "2026-10-07"
 kurzantwort: "Prüfe zuerst die Laufzeit und das vereinbarte Enddatum. Nach einer stillschweigenden Verlängerung kannst du einen Handyvertrag grundsätzlich mit Monatsfrist kündigen. Nutze deine Vertragsunterlagen und sichere dir eine Bestätigung."
 ---
 
+
 Handyvertrag kündigen klingt einfach. In der Praxis zählen das Ende der festen Laufzeit, der Kündigungsweg und ein mögliches Gerät.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.

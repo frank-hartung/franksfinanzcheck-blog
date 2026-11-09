@@ -1,27 +1,3 @@
-{"date": "2026-08-12", "kritisch": 0, "fest": 0}
-{"date": "2026-08-12", "kritisch": 0, "fest": 1}
-{"date": "2026-08-12", "kritisch": 0, "fest": 0}
-{"date": "2026-08-12", "kritisch": 0, "fest": 0}
-{"date": "2026-08-12", "kritisch": 0, "fest": 1}
-{"date": "2026-08-12", "kritisch": 0, "fest": 1}
-{"date": "2026-08-12", "kritisch": 0, "fest": 0}
-{"date": "2026-08-12", "kritisch": 0, "fest": 0}
-{"date": "2026-08-12", "kritisch": 0, "fest": 1}
-{"date": "2026-08-12", "kritisch": 0, "fest": 0}
-{"date": "2026-08-12", "kritisch": 0, "fest": 0}
-{"date": "2026-08-12", "kritisch": 0, "fest": 0}
-{"date": "2026-08-12", "kritisch": 0, "fest": 0}
-{"date": "2026-08-12", "kritisch": 0, "fest": 0}
-{"date": "2026-08-12", "kritisch": 0, "fest": 0}
-{"date": "2026-08-12", "kritisch": 0, "fest": 0}
-{"date": "2026-08-12", "kritisch": 0, "fest": 2}
-{"date": "2026-08-13", "kritisch": 3, "fest": 4}
-{"date": "2026-08-13", "kritisch": 0, "fest": 0}
-{"date": "2026-08-13", "kritisch": 0, "fest": 0}
-{"date": "2026-08-13", "kritisch": 0, "fest": 0}
-{"date": "2026-08-13", "kritisch": 0, "fest": 0}
-{"date": "2026-08-13", "kritisch": 0, "fest": 0}
-{"date": "2026-08-13", "kritisch": 0, "fest": 0}
 {"date": "2026-08-13", "kritisch": 0, "fest": 0}
 {"date": "2026-08-13", "kritisch": 0, "fest": 0}
 {"date": "2026-08-13", "kritisch": 0, "fest": 0}
@@ -421,3 +397,4 @@
 {"date": "2026-11-05", "kritisch": 1, "fest": 1, "modus": "verify"}
 {"date": "2026-11-05", "kritisch": 1, "fest": 1, "modus": "set-current", "geaendert": ["layouts/_partials/cover.html", "layouts/_partials/head.html"]}
 {"date": "2026-11-06", "kritisch": 0, "fest": 1, "modus": "set-current", "geaendert": ["scripts/publikations_vertrag.py"]}
+{"date": "2026-11-09", "kritisch": 0, "fest": 0, "modus": "verify"}

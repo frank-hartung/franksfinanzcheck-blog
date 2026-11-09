@@ -140,27 +140,27 @@ Die folgende Matrix unterstützt dich bei der optimalen Wechselsituation:
         <td><strong>Vertrag älter als 24 Monate</strong> (Rabatt entfallen)</td>
         <td>Kündigen &amp; Wechseln</td>
         <td><span class="ff-decision-badge ff-decision-badge – yes">Gering (10 Min.)</span></td>
-        <td>150–350 € / 2 Jahre</td>
+        <td>150–350 € / 2 Jahre</td>  
         <td>Neuen Anbieter beauftragen; dieser kündigt den Altvertrag automatisch zum Monatsende.</td>
       </tr>
       <tr>
         <td><strong>Zufrieden mit Leitung, aber Preis steigt</strong></td>
         <td>Kündigen &amp; Nachverhandeln</td>
         <td><span class="ff-decision-badge ff-decision-badge – yes">Gering (1 Anruf)</span></td>
-        <td>100–200 € / 2 Jahre</td>
+        <td>100–200 € / 2 Jahre</td>  
         <td>Kündigung vormerken; bei der Kundenrückgewinnung (Retention) Neukundenrabatt einfordern.</td>
       </tr>
       <tr>
         <td><strong>Glasfaser-Ausbaugebiet (FTTH verfügbar)</strong></td>
         <td>Technologiewechsel</td>
-        <td><span class="ff-decision-badge ff-decision-badge – warn">Mittel (Montage)</span></td>
+        <td><span class="ff-decision-badge ff-decision-badge – warn">Mittel (Montage)</span></td>  
         <td>Höhere Stabilität</td>
         <td>Kostenlosen Hausanschluss während der Nachfragebündelung sichern; Tarif vergleichen.</td>
       </tr>
       <tr>
         <td><strong>Anhaltende Leitungsstörungen / Unterversorgung</strong></td>
         <td>Sonderkündigung nach TKG</td>
-        <td><span class="ff-decision-badge ff-decision-badge – warn">Mittel (Messung)</span></td>
+        <td><span class="ff-decision-badge ff-decision-badge – warn">Mittel (Messung)</span></td>  
         <td>Sofortiger Ausstieg</td>
         <td>BNetzA-Desktop-App nutzen (30 Messungen an 3 Tagen) → Fristlose Kündigung nach § 57 TKG.</td>
       </tr>

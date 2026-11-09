@@ -534,6 +534,21 @@
       "mikro": 0,
       "serien": 0,
       "ueberlang": false
+    },
+    "2026-11-09-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
     }
   },
   "hinweis": "Sperrklinke des Struktur-Guards: je Artikel der akzeptierte Stand an Mikro-Abschnitten/Serien. Werte dürfen nur kleiner werden – Zuwachs ist ein Fund (scripts/struktur_guard.py).",
@@ -542,5 +557,5 @@
     "neu_toleranz": 2,
     "serie_min": 3
   },
-  "stand": "2026-11-04"
+  "stand": "2026-11-09"
 }

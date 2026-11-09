@@ -49,6 +49,7 @@ quellen:
 kurzantwort: "Ein Doppeltarifzähler erfasst Strom getrennt nach Zeiten: nachts günstiger, tagsüber teurer. Er lohnt sich nur, wenn du einen großen Teil deines Verbrauchs in die günstigen Stunden verschieben kannst. Als Orientierung gilt ein Nachtanteil von mindestens 30 bis 40 Prozent – darunter ist ein Tarif mit einem Preis für alle Stunden meist einfacher und nicht teurer."
 ---
 
+
 Die Idee klingt einleuchtend: Strom, der nachts fließt, ist billiger. Also verschiebe ich Waschmaschine, Trockner und Geschirrspüler in die Nacht und spare.
 
 Ob das stimmt, entscheidet nicht die Idee, sondern eine einzige Zahl: der Anteil deines Verbrauchs, der tatsächlich in die günstigen Stunden fällt. Wer diesen Anteil nicht kennt, wettet auf einen Rabatt, den er nie erreicht. Wer einen Nachtstromtarif prüft, misst deshalb zuerst den eigenen Nachtanteil – nicht den Rabatt auf dem Papier.

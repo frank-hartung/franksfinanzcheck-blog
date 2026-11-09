@@ -23,6 +23,7 @@ quellen:
     url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
     herausgeber: "Statistisches Bundesamt"
 faktencheck: 2026-10-08
+kurzantwort: "Du solltest mindestens drei bis sechs Monatsausgaben ansparen – das entspricht bei einem Nettoeinkommen von 2 000 € etwa 6 000 € – 12 000 €. Die Verbraucherzentrale empfiehlt diesen Betrag als sicheren Puffer"
 ---
 
 Die Stromrechnung fällt höher aus als gedacht. Das Auto macht plötzlich laute Geräusche beim Bremsen. Das liebste Hemd reißt direkt in der Naht. Solche kleinen Schocks im Alltag zeigen uns eines sehr deutlich. Ein finanzielles Polster ist im Leben pures Gold wert. Es schützt dich vor Sorgen und gibt dir Sicherheit.

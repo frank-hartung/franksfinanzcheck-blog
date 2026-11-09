@@ -60,7 +60,7 @@ Alte Technik verschwendet dabei oft viel Energie.
 Du zahlst für Leistung, die ohne Nutzen verpufft.  
 Moderne Sensoren steuern den Bedarf heute viel genauer.
 
-So kannst du deine [Stromkosten senken](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/) – bei gleicher Leistung. [Stromfresser finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/) hilft dir dabei.
+So kannst du deine [Stromkosten senken](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/) – bei gleicher Leistung. [Stromfresser finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/) hilft dir dabei.  
 Ein schlechter Wirkungsgrad belastet dein Konto jeden Monat.
 
 Alte Motoren oder spröde Dichtungen treiben den Zähler nach oben.  
@@ -75,8 +75,7 @@ Kühlschränke mit zu wenig Kühlmittel laufen oft ohne Pause durch.
 In einer Beispielrechnung braucht ein solches Altgerät bis zu 50 % mehr Strom als im Neuzustand.  
 Reinige oft das Gitter auf der Rückseite und spare so bares Geld.
 
-Kalk auf den Heizstäben in der Waschmaschine wirkt wie eine Sperre.  
-Die Hitze muss zuerst durch den Kalk. Das kostet Zeit und treibt deine Stromkosten unnötig hoch. Entkalke deine Geräte daher regelmäßig für volle Leistung.
+Kalk auf den Heizstäben in der Waschmaschine wirkt wie eine Sperre. Die Hitze muss zuerst durch den Kalk. Das kostet Zeit und treibt deine Stromkosten unnötig hoch. Entkalke deine Geräte daher regelmäßig für volle Leistung.
 
 ## Welche Geräte verbrauchen am meisten?
 

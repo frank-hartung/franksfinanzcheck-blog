@@ -25,6 +25,7 @@ cover:
   alt: "Flugverspätung Entschädigung: So holst du dein Geld zurück"
   caption: "Tipp von FranksFinanzcheck"
 faktencheck: 2026-11-01
+kurzantwort: "Bei einer Flugverspätung von mindestens drei Stunden am Zielort haben Reisende nach EU-Recht Anspruch auf eine Entschädigung von bis zu 600 Euro pro Person. Um das Geld zurückzuerhalten, kann die Forderung entweder direkt bei der Airline eingereicht oder über spezialisierte Online-Dienstleister geltend gemacht werden."
 ---
 
 Du stehst am Flughafen. Die Urlaubsstimmung ist groß. Plötzlich ändert sich die Anzeige am Gate. Dein Flug hat Verspätung.
@@ -47,7 +48,7 @@ Das füllt die Urlaubskasse wieder auf. Es mindert den Stress der Verspätung. H
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Unser Partner vergleicht keine Einzelflüge, wohl aber Pauschalreisen mit Flug und Hotel – im Paket oft günstiger als getrennt gebucht: [**Pauschalreise mit Flug vergleichen**](/go/fluege/)
+💡 **Schnell-Tipp von FranksFinanzcheck:** Unser Partner vergleicht keine Einzelflüge, wohl aber Pauschalreisen mit Flug und Hotel – im Paket oft günstiger als getrennt gebucht: [**Pauschalreise mit Flug vergleichen**](/go/fluege/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Was sind Fluggastrechte?

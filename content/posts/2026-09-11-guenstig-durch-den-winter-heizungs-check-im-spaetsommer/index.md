@@ -35,6 +35,7 @@ quellen:
 faktencheck: 2026-11-02
 ---
 
+
 Heizungs-Check im Check: Der erste kalte Montag ist ein schlechter Zeitpunkt für diese Entdeckung: Drei Heizkörper gluckern, und die Therme meldet eine Störung. Im Spätsommer findest du dieselben Probleme – ohne Jacke, ohne Notdienst, ohne Zeitdruck.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.

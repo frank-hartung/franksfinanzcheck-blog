@@ -35,6 +35,7 @@ quellen:
 faktencheck: 2026-10-07
 ---
 
+
  Davon bleiben am Ende vielleicht 50 € für dich frei; das ist ein Modellwert. Du willst dieses Geld nicht einfach nur auf dem Sparbuch parken. Dein Ziel ist es, das Kapital langfristig und sicher zu vermehren.
 
 Du hast sicher schon von einem ETF-Sparplan gehört. Aber welche Schritte sind für den Start wirklich nötig?
@@ -54,7 +55,7 @@ Welche Fallen lauern auf dem Weg zum Erfolg? Hier gehst du von der ersten Idee b
 
 ## Was ist ein ETF-Sparplan und wie funktioniert er?
 
-Ein ETF-Sparplan funktioniert wie ein automatischer Dauerauftrag für dein Depot. Du überweist jeden Monat eine feste Summe an deinen Broker. Dieser kauft für dich Anteile an einem Indexfonds zum aktuellen Kurs an der Börse. So baust du dein Vermögen Stück für Stück auf, ohne selbst aktiv werden zu müssen.
+Ein ETF-Sparplan funktioniert wie ein automatischer [Dauerauftrag](../../posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/) für dein Depot. Du überweist jeden Monat eine feste Summe an deinen Broker. Dieser kauft für dich Anteile an einem Indexfonds zum aktuellen Kurs an der Börse. So baust du dein Vermögen Stück für Stück auf, ohne selbst aktiv werden zu müssen.
 
 Das Prinzip ähnelt dem Kauf von einzelnen Aktien. Du musst aber nicht jedes Mal den vollen Preis für ein ganzes Papier zahlen.
 
@@ -107,7 +108,7 @@ Hier folgt ein konkretes **Rechenbeispiel** für deine [finanzielle](../../posts
 
 Durch den Zinseszinseffekt wächst dein Kapital deutlich stärker als auf einem normalen Konto. Nach 10 Jahren hättest du bereits etwa 7.700 € angespart.
 
-Nach den vollen 20 Jahren steht dein Depot bei rund 30.000 €. Dein Gewinn beträgt in diesem Beispiel also etwa 18.000 €. Diese Rechnung zeigt, wie stark [kleine Beträge](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/) über die Zeit für dich arbeiten.
+Nach den vollen 20 Jahren steht dein Depot bei rund 30.000 €. Dein Gewinn beträgt in diesem Beispiel also etwa 18.000 €. Diese Rechnung zeigt, wie stark kleine Beträge über die Zeit für dich arbeiten.
 
 ## Typische Fehler und wie du sie vermeidest
 

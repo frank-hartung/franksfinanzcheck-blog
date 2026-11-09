@@ -24,6 +24,7 @@ quellen:
     url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
     herausgeber: "Statistisches Bundesamt"
 faktencheck: 2026-10-08
+kurzantwort: "Finanztexte müssen die strengen YMYL-Anforderungen erfüllen, da Google für sensible Finanzthemen eine besonders hohe fachliche Autorität und belegbare Quellen verlangt. Das E-E-A-T-Prinzip macht zudem die nachweisbare praktische Erfahrung des Autors zur Grundvoraussetzung für eine gute Sichtbarkeit in den Suchergebnissen."
 ---
 
 **Stand: 06.10.2026.** Dieser News-Kompakt-Artikel ordnet eine aktuelle Entwicklung ein. Konditionen und Regeln können sich ändern – prüfe Details immer beim jeweiligen Anbieter. Der Text soll dir einen schnellen Überblick geben, ohne Fachjargon.

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-11-06T02:36:57+00:00",
+  "generatedAt": "2026-11-09T07:29:15+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -1248,6 +1248,38 @@
     },
     "/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/": {
       "image": "images/covers/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub/": {
+      "image": "images/covers/2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check/": {
+      "image": "images/covers/2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",

@@ -50,7 +50,7 @@ Die Idee ist simpel: Du gibst deinem Geld von Anfang an Aufgaben. Ein Teil deckt
 💡 **Schnell-Tipp von FranksFinanzcheck:** Wenn dein Budget endlich planbar werden soll, trenne Sparen konsequent vom Girokonto-Alltag. Ein separates [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) macht genau das leichter: [**Tagesgeldkonto der C24 Bank eröffnen**](/go/tagesgeld/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-![Merkkarte: Kernaussagen zu 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](abbildung-merkkarte.svg)
+![Merkkarte: Kernaussagen zu 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](abbildung-merkkarte. svg)
 
 *Abbildung: Merkkarte zu „50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken“ (eigene Darstellung aus diesem Beitrag).*
 
@@ -142,14 +142,14 @@ Steigende Pflichtkosten können die 50-Prozent-Grenze sprengen. Dann brauchst du
 
 **Modellrechnung, keine Marktstudie:** Die folgenden Beträge sind frei gewählte Annahmen für einen Beispielhaushalt. Besonders die 140 € für Strom und Gas sind kein aktueller Durchschnittspreis. Ersetze jeden Posten durch deine eigenen Werte.
 
-### 50 % Notwendiges = 1.400 €
-- Miete warm: 920 € (als Modellwert)
-- Strom und Gas: 140 €
-- Lebensmittel und Drogerie: 240 €
-- Internet und Mobilfunk: 45 €
-- Versicherungen: 55 €
+### 50 % Notwendiges = 1.400 €
+- Miete warm: 920 € (als Modellwert)
+- Strom und Gas: 140 €
+- Lebensmittel und Drogerie: 240 €
+- Internet und Mobilfunk: 45 €
+- Versicherungen: 55 €
 
-**Hinweis zum Stand der Preise:** Energie lag im Oktober 2026 um **+14,9 %** über dem Vorjahr, die Inflationsrate insgesamt bei **+2,8 %**, Nahrungsmittel bei **+0,4 %** ([Statistisches Bundesamt, Verbraucherpreisindex](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html)). Für die 50-Prozent-Quote heißt das: Der Posten Strom und Gas ist in diesem Beispiel der schnellste, der den Pflichtblock sprengt. Wenn deine Energiekosten stärker steigen als dein Einkommen, rechnet die Regel nicht mehr mit 50 % auf – dann ist nicht dein Budget falsch, sondern der Markt. Prüfe den Tarif, bevor du an anderen Stellen kürzt.
+**Hinweis zum Stand der Preise:** Energie lag im Oktober 2026 um **+14,9 %** über dem Vorjahr, die Inflationsrate insgesamt bei **+2,8 %**, Nahrungsmittel bei **+0,4 %** ([Statistisches Bundesamt, Verbraucherpreisindex](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html)). Für die 50-Prozent-Quote heißt das: Der Posten Strom und Gas ist in diesem Beispiel der schnellste, der den Pflichtblock sprengt. Wenn deine Energiekosten stärker steigen als dein Einkommen, rechnet die Regel nicht mehr mit 50 % auf – dann ist nicht dein Budget falsch, sondern der Markt. Prüfe den Tarif, bevor du an anderen Stellen kürzt.
 
 ### 30 % Wünsche = 840 €
 - Freizeit und Essen gehen: 260 € (im Rechenfall)
@@ -178,9 +178,9 @@ Denn dort zahlst du jeden Monat automatisch.
 - Versicherungen aktualisieren
 - unnötige Abos kündigen
 
-Wenn du hier **50 € bis 150 € pro Monat** freischaufelst, wirkt die 50–30–20-Regel plötzlich viel realistischer als Modellannahme.
+Wenn du hier **50 € bis 150 € pro Monat** freischaufelst, wirkt die 50–30–20-Regel plötzlich viel realistischer als Modellannahme.
 
-Warum dieser Hebel gerade 2026 zählt: Bei einer Inflationsrate von **+2,8 %** (Oktober 2026) und **+14,9 %** bei Energie ([Statistisches Bundesamt](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html)) wächst der Pflichtblock von allein. Wer die Fixkosten senkt, hält die 50-Prozent-Quote – wer es nicht tut, muss die Differenz bei den Wünschen oder beim Sparen abziehen. Die 20 % sind deshalb kein Rest, sondern der Teil, den die Teuerung zuerst angreift.
+Warum dieser Hebel gerade 2026 zählt: Bei einer Inflationsrate von **+2,8 %** (Oktober 2026) und **+14,9 %** bei Energie ([Statistisches Bundesamt](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html)) wächst der Pflichtblock von allein. Wer die Fixkosten senkt, hält die 50-Prozent-Quote – wer es nicht tut, muss die Differenz bei den Wünschen oder beim Sparen abziehen. Die 20 % sind deshalb kein Rest, sondern der Teil, den die Teuerung zuerst angreift.
 
 Passend dazu helfen dir auch diese Ratgeber:
 
@@ -233,7 +233,7 @@ Wer aus dem Nichts sofort perfekt bei 50–30–20 landen will, bricht oft wiede
 ### Fehler 4: Gehaltserhöhungen komplett verleben
 Mehr Netto heißt nicht automatisch [mehr Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/), wenn sofort alles in höhere Ausgaben fließt.
 
-![Gliederung des Beitrags: 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](abbildung-ablauf.svg)
+![Gliederung des Beitrags: 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](abbildung-ablauf. svg)
 
 *Abbildung: Gliederung zu „50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken“ – 5 Stationen von „Was bedeutet die 50-30-20-Regel konkret?“ bis „So könnte das im Alltag aussehen“ (eigene Darstellung).*
 

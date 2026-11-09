@@ -59,7 +59,7 @@ Der **Energieausweis** ist der Steckbrief für deine Immobilie. Er fasst alle En
 
 Das Dokument macht Häuser bundesweit vergleichbar. Es wirkt wie das Etikett an deinem Kühlschrank oder deiner Waschmaschine. So erkennst du sofort, ob das Haus Energie verschwendet oder sparsam arbeitet.
 
-Der Ausweis enthält Daten zu Heizung und Warmwasser. Auch die Qualität der Dämmung wird detailliert bewertet. Er ist die Basis für meinen Franks Fixkosten‑Kompass. Er hilft beim ersten Schritt: Kosten erkennen.
+Der Ausweis enthält Daten zu Heizung und [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/). Auch die Qualität der Dämmung wird detailliert bewertet. Er ist die Basis für meinen Franks Fixkosten‑Kompass. Er hilft beim ersten Schritt: Kosten erkennen.
 
 Ein guter Ausweis deckt verborgene Schwachstellen auf. Er zeigt dir genau, an welchen Stellen Wärme ungenutzt entweicht. Das können alte Dachfenster, eine veraltete Heizung oder ungedämmte Kellerdecken sein.
 
@@ -108,7 +108,7 @@ Bei großen Häusern mit vielen Wohnungen steigen die Gebühren je nach Aufwand 
 
 Das Farbspektrum von Grün bis Rot gibt die Richtung vor. Dein Gebäude erhält eine **Energieeffizienzklasse Haus** von A+ bis H. A+ steht für Top-Werte wie beim Neubau, H für unsanierte Altbauten.
 
-Zwei Werte stehen im Fokus: Endenergie und Primärenergie. Die Endenergie zeigt die Menge, die du am Monatsende wirklich bezahlst. Dazu gehören etwa Erdgas, Heizöl oder der Strom für deine Wärmepumpe.
+Zwei Werte stehen im Fokus: Endenergie und Primärenergie. Die Endenergie zeigt die Menge, die du am Monatsende wirklich bezahlst. Dazu gehören etwa Erdgas, Heizöl oder der Strom für deine [Wärmepumpe](../../posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/).
 
 Die Primärenergie rechnet auch die Gewinnung und den Weg des Brennstoffs mit ein. Eine Wärmepumpe schneidet hier sehr gut ab, da sie freie Wärme aus der Luft nutzt. Reine Stromheizungen landen wegen hoher Verluste oft im roten Bereich.
 
@@ -128,7 +128,7 @@ Die Differenz beträgt in dieser Modellrechnung 2.352 € pro Jahr. Über ein J
 
 ## So gehst du vor: Den Energieausweis richtig beantragen
 
-Dein aktuelles Dokument läuft bald ab oder du planst einen Verkauf? Dann bereite den Antrag Schritt für Schritt vor. So [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du Fehler und unnötige Kosten beim Experten:
+Dein aktuelles Dokument läuft bald ab oder du planst einen Verkauf? Dann bereite den Antrag [Schritt für Schritt](../../posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/) vor. So [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du Fehler und unnötige Kosten beim Experten:
 
 1. **Unterlagen sammeln:** Lege Grundrisse, Baubeschreibungen und die letzten Heizkostenabrechnungen deines Hauses bereit. Notiere auch das Baujahr und alle bisherigen Umbauten.
 2. **Ausweistyp klären:** Prüfe anhand von Baujahr und Anzahl der Wohnungen, ob du freie Wahl hast oder ob das Gesetz den Bedarfsausweis verlangt.

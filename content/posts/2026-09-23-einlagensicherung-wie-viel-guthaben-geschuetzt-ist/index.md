@@ -44,6 +44,7 @@ faktencheck: 2026-10-13
 kurzantwort: "Gesetzlich geschützt sind Bankguthaben bis 100.000 Euro je Einleger und je Bank. Entscheidend ist nicht der Markenname, sondern das Institut, das die Einlage führt: Zwei Konten bei derselben Bank teilen sich den Schutzbetrag. Anlagen in Aktien, Fonds oder Anleihen fallen nicht unter die Einlagensicherung."
 ---
 
+
 Die Einlagensicherung spielt bei der Unterschrift kaum eine Rolle. Erst wenn eine Bank in Schwierigkeiten gerät, rückt sie ins Rampenlicht. Steht sie dann in den Nachrichten, ist es zu spät für die einfache Antwort.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -95,7 +96,7 @@ Der Schutzumfang im Überblick:
 
 Die folgende Rechnung nutzt angenommene Beträge. Sie beschreibt keinen Marktzustand, sondern die Mechanik.
 
-Annahmen: Du hast 70.000 € auf einem [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) bei Institut A. Dazu kommt ein Girokonto desselben Instituts mit 45.000 €. Bei Institut B liegen 60.000 € auf einem zweiten [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/). Alle drei Konten laufen auf deinen Namen.
+Annahmen: Du hast 70.000 € auf einem [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) bei Institut A. Dazu kommt ein Girokonto desselben Instituts mit 45.000 €. Bei Institut B liegen 60.000 € auf einem zweiten Tagesgeldkonto. Alle drei Konten laufen auf deinen Namen.
 
 Rechenweg Institut A: 70.000 € plus 45.000 € ergeben 115.000 €. Beide Konten gehören zum selben Institut. Rechenweg Institut B: 60.000 € liegen unterhalb der Grenze.
 
@@ -212,7 +213,7 @@ Der Ernstfall ist selten. Die zuständige Sicherung zahlt dein Guthaben bis zur 
 
 
 **Weiterlesen:** [Ratgeber Konto & Karten](../../pillar/konto-karten/)
-**Lesetipp:** [Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/)
+**Lesetipp:** [Tagesgeld-Zinsen 2026](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/): Die besten Zinssätze im Vergleich
 
 ---
 

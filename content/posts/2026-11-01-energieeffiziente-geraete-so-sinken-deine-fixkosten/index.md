@@ -33,6 +33,7 @@ faktencheck: 2026-10-30
 kurzantwort: "Energieeffiziente Geräte senken die Stromkosten um bis zu 50 Prozent im Vergleich zu veralteten Modellen. Durch den gezielten Austausch alter Stromfresser wie Kühl-Gefrier-Kombinationen lassen sich jährlich mehrere hundert Euro an Fixkosten einsparen."
 ---
 
+
 Wenn die Tage kürzer werden, flattern oft die Stromrechnungen ins Haus. Viele Menschen erschrecken dann über die hohen Nachzahlungen. Oft suchen wir die Schuld beim Stromanbieter oder bei den steigenden Preisen. Doch der wahre Grund für hohe Fixkosten versteckt sich meist in der eigenen Küche oder im Keller. **Energieeffiziente** **Geräte** sind der Hebel, mit dem du deine Kosten wirklich kontrollierst.
 
 In deinem **Zuhause** arbeiten viele Helfer rund um die Uhr. Ein alter Kühlschrank oder eine betagte Waschmaschine können echte Geldfresser sein.
@@ -170,7 +171,7 @@ Es geht darum, die Technik für sich arbeiten zu lassen. Ein modernes Gerät nim
 ## Häufige Fragen
 
 ### Lohnt sich die Reparatur eines alten Geräts noch?
- Als Daumenregel gilt: Ist das Gerät älter als zehn Jahre und kostet die Reparatur mehr als die Hälfte eines Neugeräts, lohnt es sich meist nicht; das ist ein Rechenbeispiel. Ein neues Modell spart zudem sofort [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/) ein, was die Reparaturkosten eines alten Stromfressers oft unwirtschaftlich macht.
+ Als Daumenregel gilt: Ist das Gerät älter als zehn Jahre und kostet die Reparatur mehr als die Hälfte eines Neugeräts, lohnt es sich meist nicht; das ist ein Rechenbeispiel. Ein neues Modell spart zudem sofort Stromkosten ein, was die Reparaturkosten eines alten Stromfressers oft unwirtschaftlich macht.
 
 ### Was bedeutet die neue Skala auf dem Energielabel?
 Seit März 2021 gibt es eine neue Skala von A bis G. Die alten Bezeichnungen wie A+++ wurden abgeschafft. Das soll die Vergleichbarkeit verbessern. Ein Gerät, das früher A+++ hatte, findet sich heute oft in der Klasse C oder D wieder. Die Klasse A ist derzeit für noch effizientere zukünftige Technik reserviert.

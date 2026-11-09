@@ -50,6 +50,7 @@ quellen:
 faktencheck: "2026-10-14"
 ---
 
+
 Wenn du den DNS-Server wechselst, änderst du den Server, der deine Namensanfragen bearbeitet. Das kann Filter, Datenschutz und die Antwortzeit beeinflussen. Es macht den Anschluss aber nicht schneller. Und es verschlüsselt DNS nicht automatisch.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -60,7 +61,7 @@ Wenn du den DNS-Server wechselst, änderst du den Server, der deine Namensanfrag
 - Öffentliche DNS-Server können Anfragen verschlüsseln (DoH/DoT). Sie schützen aber nicht vor allen Netzwerkdaten.
 - Filterfunktionen der Anbieter unterscheiden sich. Sie blockieren bekannte schädliche Domains. Sie ersetzen keinen Virenschutz.
 
-![Merkkarte: Kernaussagen zu DNS-Server wechseln: Datenschutz, Filter und Einrichtung](abbildung-merkkarte.svg)
+![Merkkarte: Kernaussagen zu DNS-Server wechseln: Datenschutz, Filter und Einrichtung](abbildung-merkkarte. svg)
 
 *Abbildung: Merkkarte zu „DNS-Server wechseln: Datenschutz, Filter und Einrichtung“ (eigene Darstellung aus diesem Beitrag).*
 
@@ -160,7 +161,7 @@ Zahlen brauchen Kontext. Ein einzelner Wert ist wenig wert. Mehrere Werte zusamm
 
 Ist ein DNS-Server 5 Millisekunden schneller? Dann merkst du das im Alltag nicht. Ist er 50 Millisekunden schneller? Dann kann das spürbar werden. Gibt es Timeouts? Dann ist dieser DNS-Server keine gute Wahl. Nimm einen anderen. Stabilität geht vor Tempo.
 
-![Gliederung des Beitrags: DNS-Server wechseln: Datenschutz, Filter und Einrichtung](abbildung-ablauf.svg)
+![Gliederung des Beitrags: DNS-Server wechseln: Datenschutz, Filter und Einrichtung](abbildung-ablauf. svg)
 
 *Abbildung: Gliederung zu „DNS-Server wechseln: Datenschutz, Filter und Einrichtung“ – 5 Stationen von „Was macht ein DNS-Server?“ bis „Was du nach dem Wechsel testen solltest“ (eigene Darstellung).*
 
@@ -202,7 +203,7 @@ Viel Spaß beim Testen.
 **Wird mein Internet durch einen anderen DNS-Server schneller?**
 Nicht zwingend. Ein DNS-Server kann die DNS-Abfrage beschleunigen oder verlangsamen. Er erhöht aber nicht die Bandbreite und verbessert kein Funkloch. Vergleiche mehrere Tage unter denselben Bedingungen.
 
-**Kann mein [Internetanbieter](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) meine DNS-Anfragen danach noch sehen?**
+**Kann mein Internetanbieter meine DNS-Anfragen danach noch sehen?**
 Bei klassischem, unverschlüsseltem DNS kann ein Netzwerkbetreiber die Anfragen weiterhin mitlesen. Mit DoH oder DoT wird die Verbindung zum DNS-Server verschlüsselt. Der gewählte DNS-Server verarbeitet die Anfrage trotzdem. Weitere Verbindungsdaten bleiben sichtbar.
 
 **Welcher DNS-Anbieter ist der beste?**

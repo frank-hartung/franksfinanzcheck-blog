@@ -108,8 +108,7 @@ Auch das Wetter hat einen Einfluss auf die Wege für den Transport. Wenn die Fl�
 
 ## Modellrechnung: Was kostet ein 1 000‑Liter‑Tank (Beispielrechnung)?
 
-**Annahmen für das Beispiel**  
-- Der Preis für das Öl liegt im Tief bei 0,80 € (Beispielrechnung) pro Liter (Schnitt für Januar 2026).
+**Annahmen für das Beispiel** - Der Preis für das Öl liegt im Tief bei 0,80 € (Beispielrechnung) pro Liter (Schnitt für Januar 2026).
 - Der Preis im Zeitraum mit den höchsten Kosten liegt bei 1,10 € (Beispielrechnung) pro Liter.
 - Die Menge für den Kauf beträgt genau 1 000 Liter (Beispielrechnung) für einen kleinen Haushalt.
 

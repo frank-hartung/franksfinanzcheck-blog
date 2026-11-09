@@ -34,6 +34,7 @@ faktencheck: 2026-10-07
 kurzantwort: "Erstelle zuerst ein lückenloses Ausgaben-Protokoll. Identifiziere alle wiederkehrenden Kosten. Ersetze teure Verträge durch günstigere Alternativen. Setze dir ein konkretes monatliches Sparziel. Prüfe es wöchentlich."
 ---
 
+
 💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Stromtarife vergleichen**](/go/strom/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
@@ -179,7 +180,7 @@ Befolge diesen Pfad für nachhaltig geringere Ausgaben. Er führt dich sicher an
 
 Manchmal scheust du den Aufwand eines Wechsels beim [Internetanbieter](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/). Auch ohne Anbieterwechsel kannst du deine Kosten senken:
 
-- **Die Kundenrückgewinnung:** Rufe an und frage nach besseren Konditionen. Erwähne dabei konkret die günstigeren Angebote der Konkurrenz.
+- **Die Kundenrückgewinnung:** Rufe an und frage nach besseren Konditionen. Erwähne dabei konkret die [günstigeren](../../posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/) Angebote der Konkurrenz.
 - **Die Kündigungsabteilung:** Verlange ein Gespräch mit den Spezialisten für Kündigungen. Diese Mitarbeiter haben oft viel größere Rabatt-Spielräume als die Hotline.
 - **Downgrade prüfen:** [Brauchst du wirklich](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/) die maximale Geschwindigkeit? Ein kleinerer Tarif spart oft einen dreistelligen Euro-Betrag im Jahr ein – ohne spürbaren Verlust an Nutzbarkeit.
 
@@ -200,7 +201,7 @@ Durchsuche dein E-Mail-Postfach nach Begriffen wie "Rechnung" oder "Abonnement".
 Bei höheren Preisen darfst du fast immer sofort kündigen. Du kannst den Vertrag dann meist innerhalb von kurzer Frist auflösen. Das ist deine beste Chance für einen vorzeitigen Wechsel zu einem günstigeren Tarif.
 
 **Lohnt sich ein Kontowechsel für wenige Euro Ersparnis im Monat?**
-Selbst kleine monatliche Beträge summieren sich über die Jahre zu einem spürbaren Betrag auf deinem Konto. Moderne Banken bieten zudem bessere Apps für dein Haushaltsbuch an. Es geht immer um die Summe vieler kleiner Optimierungen. Wer konsequent [kleine Beträge](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/) zur Seite legt, erreicht schnell einen dreistelligen Betrag.
+Selbst kleine monatliche Beträge summieren sich über die Jahre zu einem spürbaren Betrag auf deinem Konto. Moderne Banken bieten zudem bessere Apps für dein Haushaltsbuch an. Es geht immer um die Summe vieler kleiner Optimierungen. Wer konsequent kleine Beträge zur Seite legt, erreicht schnell einen dreistelligen Betrag.
 
 - **Rechner:** [Fixkosten-Scanner: alle Verträge in 90 Sekunden nach Sparhebel sortieren](../../werkzeuge/fixkosten-scanner/)
 

@@ -41,7 +41,7 @@ quellen:
     herausgeber: "Verbraucherzentrale"
     datum: "2026-09-30"
 faktencheck: 2026-10-13
-kurzantwort: "Ein Großeinkauf ist nur dann günstiger, wenn der Grundpreis je Einheit sinkt und nichts verdirbt. Rechne dafür immer drei Größen zusammen: Preis, Menge und Schwund. Was du lagerst, sollte trocken, kühl und dunkel liegen – und in einer Menge, die du im üblichen Rhythmus verbrauchst."
+kurzantwort: "Ein Großeinkauf ist nur dann günstiger, wenn der Grundpreis je Einheit sinkt und nichts verdirbt. Rechne dafür immer drei Größen zusammen: Preis, Menge und Schwund. Was du lagerst, sollte trocken, kühl und dunkel liegen und in einer Menge, die du im üblichen Rhythmus verbrauchst."
 ---
 
 Ein voller Einkaufswagen sieht nach kluger Planung aus. Er ist es nur, wenn die Rechnung am Ende stimmt. Großeinkauf ist kein Sparen, sondern eine Wette auf den eigenen Verbrauch.

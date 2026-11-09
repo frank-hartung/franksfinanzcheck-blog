@@ -44,7 +44,7 @@ Dennoch gibt es bei der Wahl des passenden Tarifs viele Details zu beachten. Nic
 Hier schauen wir uns an, wie du Transparenz in deine Stromrechnung bringst. Wir nutzen dafür den 4K-Prüfpfad von Franks Fixkosten-Kompass. So behältst du die volle Kontrolle über deine monatlichen Kosten.
 
 **Das Wichtigste in Kürze**
-- Ein Wechsel ist jederzeit unter Einhaltung der Kündigungsfrist möglich und dauert technisch nur wenige Minuten.
+- Ein Wechsel ist jederzeit unter Einhaltung der [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) möglich und dauert technisch nur wenige Minuten.
 - Echte Ökotarife erkennst du an Siegeln wie „Grüner Strom“ oder „ok-power“.
 - In einer Modellrechnung (Annahme: 3.500 kWh Jahresverbrauch) führt eine Senkung des Arbeitspreises um 10 Cent pro kWh zu einer Ersparnis von 350 € im Jahr (Rechnung: 3.500 x 0,10 = 350).
 - Der Wechselprozess ist gesetzlich abgesichert, sodass eine lückenlose Versorgung jederzeit gesichert bleibt.
@@ -65,7 +65,7 @@ Du investierst zusätzlich in neue Anlagen. Nur so wächst der Anteil der erneue
 
 ## Warum lohnt es sich, Ökostrom Tarife zu vergleichen?
 
-Ein Vergleich ist die Basis für jede finanzielle Entscheidung im Haushalt. Viele Menschen bleiben jahrelang in der teuren Grundversorgung.
+Ein Vergleich ist die Basis für jede [finanzielle](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) Entscheidung im Haushalt. Viele Menschen bleiben jahrelang in der teuren Grundversorgung.
 
 Das kostet unnötig Geld. Wer regelmäßig **Ökostrom Tarife vergleichen** geht, findet oft bessere Konditionen. Dabei geht es nicht nur um den Preis pro Kilowattstunde. Es geht um das Gesamtpaket.
 
@@ -203,7 +203,7 @@ Nein, das ist in Deutschland gesetzlich ausgeschlossen. Die Grundversorgung ist 
 In der Regel nimmt der Prozess einige Wochen in Anspruch. Das hängt stark von deiner aktuellen Kündigungsfrist ab. Die technische Umstellung erfolgt meist zum Ersten eines Monats. Der neue Anbieter informiert dich rechtzeitig über den genauen Termin. Du musst während dieser Zeit nichts weiter unternehmen.
 
 ### Was passiert mit meinem alten Bonus, wenn ich kündige?
-Das ist ein wichtiger Punkt. Viele Boni werden erst nach Ende der Mindestlaufzeit ausgezahlt oder mit der initialen Jahresrechnung verrechnet. Wenn du vorher kündigst, verfällt der Anspruch oft. Achte darauf, dass deine Vertragslaufzeit und die Bonusbedingungen zusammenpassen. Kündige erst, wenn der Bonus sicher verdient ist.
+Das ist ein wichtiger Punkt. Viele Boni werden erst nach Ende der Mindestlaufzeit ausgezahlt oder mit der initialen Jahresrechnung verrechnet. Wenn du vorher kündigst, verfällt der Anspruch oft. Achte darauf, dass deine [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) und die Bonusbedingungen zusammenpassen. Kündige erst, wenn der Bonus sicher verdient ist.
 
 ### Brauche ich einen neuen Stromzähler für Ökostrom?
 Nein, für den Bezug von Ökostrom ist kein spezieller Zähler erforderlich. Dein vorhandener Zähler misst einfach die Menge des verbrauchten Stroms. Wer allerdings moderne Smart-Meter-Tarife nutzen möchte, braucht die entsprechende digitale Technik. Für herkömmliche Ökotarife reicht dein ganz normaler Drehstromzähler oder der einfache digitale Zähler aus.

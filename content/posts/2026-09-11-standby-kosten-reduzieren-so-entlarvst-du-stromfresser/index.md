@@ -36,6 +36,7 @@ quellen:
 faktencheck: 2026-09-28
 ---
 
+
 Standby Kosten im Check: Zwei Watt im Standby wirken harmlos. Zehn Geräte mit zusammen 20 Watt kosten bei 37 Cent pro kWh aber knapp **65 € im Jahr**. Kein [finanzieller](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) Weltuntergang – nur ein teures rotes Lämpchen.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -263,7 +264,7 @@ Bei Dauerbetrieb sind es 87,6 kWh im Rechenbeispiel. Mit 37 Cent pro kWh zahlst 
 Für Standby sollte es kleine Leistungen im niedrigen Wattbereich erfassen. Prüfe Messbereich und Auflösung in der Anleitung.
 
 ### Darf ich den Router nachts abschalten?
-Ja, wenn du dann weder Telefonie noch [Smart Home](../../posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/), Sicherheitsfunktionen oder Updates brauchst. Prüfe zuerst den [Energiespar](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/)- oder WLAN-Zeitplan.
+Ja, wenn du dann weder Telefonie noch Smart Home, Sicherheitsfunktionen oder Updates brauchst. Prüfe zuerst den [Energiespar](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/)- oder WLAN-Zeitplan.
 
 ### Sind schaltbare Steckdosenleisten sicher?
 Nutze geprüfte Produkte, beachte die maximale Belastung und schließe keine ungeeigneten Hochleistungsgeräte an. Beschädigte Leisten gehören ersetzt.
