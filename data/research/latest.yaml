@@ -1,5 +1,5 @@
-generated_at: '2026-11-08T10:45:31Z'
-day: '2026-11-08'
+generated_at: '2026-11-09T12:06:51Z'
+day: '2026-11-09'
 mode: deterministic
 teams:
   trending:
@@ -252,57 +252,60 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 5 einfache Schritte zum Aufbau eines Notgroschens
-    pillar: frugalismus
+  - topic: 10 Tipps für günstige Reiseversicherungen
+    pillar: versicherungen
     signal: niche_hook
-    source: topics:5 einfache Schritte zum Aufbau eines Notgroschens
-    score: 0.55
-    keywords: []
-  - topic: 'Handyvertrag wechseln: Wann sich der Wechselbonus wirklich lohnt'
-    pillar: internet-dsl
-    signal: niche_hook
-    source: 'topics:Handyvertrag wechseln: Wann sich der Wechselbonus wirklich lohnt'
+    source: topics:10 Tipps für günstige Reiseversicherungen
     score: 0.55
     keywords:
-    - Handyvertrag wechseln Bonus
-    - Wechselbonus Handytarif
-    - Mobilfunk wechseln lohnt sich
-  - topic: Kreditkarten mit guten Leistungen
+    - Reiseversicherung
+    - Versicherungsvergleich
+    - Günstige Versicherungen
+  - topic: 'Kartenzahlung mit PIN: So bleibt die Karte sicher'
     pillar: konto-karten
     signal: niche_hook
-    source: topics:Kreditkarten mit guten Leistungen
+    source: 'topics:Kartenzahlung mit PIN: So bleibt die Karte sicher'
     score: 0.55
     keywords:
-    - Kreditkarte
-    - Leistungen
-    - Vorteile
-  - topic: Mietwagen-Verträge vor dem Urlaub checken
+    - Kartenzahlung PIN
+    - Karte sichern
+    - Kontaktlos zahlen
+  - topic: 'Konto kündigen und wechseln: Schritt-für-Schritt-Anleitung'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Konto kündigen und wechseln: Schritt-für-Schritt-Anleitung'
+    score: 0.55
+    keywords:
+    - Konto wechseln
+    - Kontowechsel Anleitung
+    - Girokonto kündigen
+  - topic: 'Krankenzusatzversicherung: Welche Bausteine sich lohnen'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Krankenzusatzversicherung: Welche Bausteine sich lohnen'
+    score: 0.55
+    keywords:
+    - Krankenzusatz
+    - Versicherung
+    - Zahnzusatz
+  - topic: 'Mietwagen-Verträge: Was du vor dem Unterschreiben wissen musst'
     pillar: mietwagen
     signal: niche_hook
-    source: topics:Mietwagen-Verträge vor dem Urlaub checken
+    source: 'topics:Mietwagen-Verträge: Was du vor dem Unterschreiben wissen musst'
     score: 0.55
     keywords:
     - Mietwagen
     - Verträge
-    - Urlaub
-  - topic: 'Umzug: Diese Versicherungen und Verträge musst du ummelden'
-    pillar: versicherungen
+    - Wissenswertes
+  - topic: Preiswerter DSL-Anschluss für Zuhause
+    pillar: internet-dsl
     signal: niche_hook
-    source: 'topics:Umzug: Diese Versicherungen und Verträge musst du ummelden'
+    source: topics:Preiswerter DSL-Anschluss für Zuhause
     score: 0.55
     keywords:
-    - Umzug Checkliste
-    - Verträge ummelden
-    - Umzug sparen
-  - topic: Wie du deine Bankgebühren um 50 % reduzieren kannst
-    pillar: konto-karten
-    signal: niche_hook
-    source: topics:Wie du deine Bankgebühren um 50 % reduzieren kannst
-    score: 0.55
-    keywords:
-    - Bankgebühren sparen
-    - Konto-gebühren
-    - Gebühren-reduzierung
+    - DSL
+    - Anschluss
+    - Preiswert
 live_web:
   enabled: false
   findings: []
