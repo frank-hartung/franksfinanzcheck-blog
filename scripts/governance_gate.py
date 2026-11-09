@@ -560,7 +560,7 @@ def _selftest():
         # allein darf NICHT alarmieren (exit_only-Policy, vgl. #206).
         ("lesbarkeit", "Gesamt-Ampel: **GREEN**\n\n| Level | Code | Befund |\n|---|---|---|\n", "", 0, "green"),
         ("lesbarkeit", "Gesamt-Ampel: **AMBER**\n\n| AMBER | read_avg | Ø Flesch 58.0 < Ziel 62 |", "", 1, "amber"),
-        ("lesbarkeit", "Gesamt-Ampel: **RED**\n\n| RED | read_floor | content/posts/x – Flesch 53.0 < Floor 55 |", "", 1, "red"),
+        ("lesbarkeit", "Gesamt-Ampel: **RED**\n\n| RED | read_floor | content/posts/x – Flesch 53.0 < Floor 60 |", "", 1, "red"),
     ]
     for step, rep, log, rc, want in cases:
         got = classify(step, rep, log, rc, "test")
