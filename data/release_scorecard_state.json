@@ -1,42 +1,42 @@
 {
   "version": 1,
-  "generated_at": "2026-11-08T16:45:05Z",
+  "generated_at": "2026-11-09T11:32:38Z",
   "modus": "kandidaten",
-  "commit": "8fcc7cacea8c053a40460bd29a3ef49ef2fd81b4",
+  "commit": "ad82475c72bf267c2e40d6753d53d2acf9973b8f",
   "kapazitaet": {
-    "stichtag": "2026-11-08",
-    "basis": "2026-11-08",
+    "stichtag": "2026-11-09",
+    "basis": "2026-11-09",
     "projiziert": false,
-    "artikel": 115,
-    "faellig": 0,
+    "artikel": 118,
+    "faellig": 3,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
       "slug": "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser",
       "frist": "2026-11-12",
-      "restlaufzeit": 4
+      "restlaufzeit": 3
     },
     "budget": 4,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 4.0,
-    "bedarf_je_tag": 2.822,
-    "bedarf_je_woche": 19.8,
-    "deckung_prozent": 141.7,
+    "bedarf_je_tag": 2.911,
+    "bedarf_je_woche": 20.4,
+    "deckung_prozent": 137.4,
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
-    "abbau_tage": null,
+    "abbau_tage": 0,
     "verletzungen_alt": 0,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
     "verletzungen": [],
-    "offen_im_horizont": 115,
+    "offen_im_horizont": 118,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
       "geprueft": true,
-      "bis": "2027-03-08",
+      "bis": "2027-03-09",
       "tage": 120,
       "weg_frei": true,
       "erstverletzung": null,
@@ -54,6 +54,93 @@
   },
   "ursachen": [
     {
+      "check": "T6-textverstaendnis",
+      "dimension": "technik",
+      "wirkung": "blockiert",
+      "entscheidung": "auto",
+      "quelle": "scripts/textverstaendnis_guard.py (via publish_gate.textverstaendnis_failures)",
+      "artikel": [
+        "2026-08-10-dsl-wechselbonus-sichern",
+        "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden",
+        "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+        "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+        "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
+        "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+        "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
+        "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+        "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
+        "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
+        "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet",
+        "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich",
+        "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
+        "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
+        "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster",
+        "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
+        "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
+        "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+        "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt"
+      ],
+      "anzahl": 20
+    },
+    {
+      "check": "F4-fachbefund",
+      "dimension": "faktenalter",
+      "wirkung": "blockiert",
+      "entscheidung": "human",
+      "quelle": "scripts/faktenfrische_befund_ledger.py (via publish_gate.fakten_befund_failures)",
+      "artikel": [
+        "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+        "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+        "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+        "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+        "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
+        "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
+        "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
+        "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
+        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
+        "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
+        "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
+        "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
+        "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+        "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
+        "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+        "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen"
+      ],
+      "anzahl": 19
+    },
+    {
+      "check": "RD1-duplikate",
+      "dimension": "redundanz",
+      "wirkung": "blockiert",
+      "entscheidung": "auto",
+      "quelle": "scripts/duplikat_guard.py D1–D6 (via publish_gate.duplicate_failures)",
+      "artikel": [
+        "2026-08-10-dsl-wechselbonus-sichern",
+        "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden",
+        "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+        "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
+        "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+        "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
+        "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+        "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
+        "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
+        "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet",
+        "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich",
+        "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
+        "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
+        "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster",
+        "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
+        "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+        "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt"
+      ],
+      "anzahl": 18
+    },
+    {
       "check": "T1w-zeichenlaenge-optimum",
       "dimension": "technik",
       "wirkung": "warnung",
@@ -61,47 +148,110 @@
       "quelle": "scripts/check_length.py (Status unter-/ueber-optimum)",
       "artikel": [
         "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+        "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
         "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
         "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
-        "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
-        "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen"
+        "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp"
       ],
       "anzahl": 5
+    },
+    {
+      "check": "T2-seo-audit",
+      "dimension": "technik",
+      "wirkung": "blockiert",
+      "entscheidung": "auto",
+      "quelle": "scripts/seo_audit.py (via publish_gate.seo_audit_failures; braucht public/)",
+      "artikel": [
+        "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet"
+      ],
+      "anzahl": 1
+    },
+    {
+      "check": "T5-lesbarkeit",
+      "dimension": "technik",
+      "wirkung": "blockiert",
+      "entscheidung": "auto",
+      "quelle": "scripts/readability_check.py (via publish_gate.readability_failures)",
+      "artikel": [
+        "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen"
+      ],
+      "anzahl": 1
     }
   ],
   "befundlage": {
-    "nicht_beweisbar": "Fachbefund-Ledger nicht lesbar: Ungültige Folgeentscheidung für ('2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag', 'f83f21c1f2e2012f672e'): Vorgänger fehlt oder stimmt nicht"
+    "offen": 107,
+    "seiten": 26,
+    "live_befunde": 77,
+    "live_seiten": 19,
+    "ueberholt": 92,
+    "ohne_fassung": 15,
+    "nicht_entscheidbar": 0,
+    "aeltester_tage": 10,
+    "frist_tage": 14,
+    "ueber_frist": 0,
+    "je_slug": {
+      "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": 3,
+      "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": 5,
+      "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": 5,
+      "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": 5,
+      "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": 5,
+      "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": 5,
+      "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": 5,
+      "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": 5,
+      "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": 5,
+      "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": 2,
+      "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": 3,
+      "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": 3,
+      "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": 3,
+      "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": 2,
+      "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": 5,
+      "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": 5,
+      "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": 3,
+      "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": 3,
+      "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": 5
+    }
   },
-  "tool_fehler": {
-    "F4-fachbefund": "Fachbefund-Ledger nicht beweisbar: Ungültige Folgeentscheidung für ('2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag', 'f83f21c1f2e2012f672e'): Vorgänger fehlt oder stimmt nicht"
-  },
+  "tool_fehler": {},
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
-      "sha256": "0a9c47ec2d3105d826f129e1c3311c1bc97cb74290597d4d6df9314ff4947049",
-      "urteil": "nicht beweisbar",
+      "sha256": "7a2e1a3e3c6085b53c73f70020db5c789c1994f8f1b5fd310154b9ff50e27c3c",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D1-EXAKT: Absatz doppelt (Z.1305 ≈ Z.1059): *Abbildung: Merkkarte zu „DSL-Wechselbonus sichern: So sparst du beim Internetvertrag“ (eigene Darst…; D1-EXAKT: Absatz doppelt (Z.9100 ≈ Z.8765): *Abbildung: Gliederung zu „DSL-Wechselbonus sichern: So sparst du beim Internetvertrag“ – 5 Statione…"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-merkkarte. svg“ (Anker: „Merkkarte: Kernaussagen zu DSL-Wechselbo“); R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-ablauf. svg“ (Anker: „Gliederung des Beitrags: DSL-Wechselbonu“)"
+        }
+      ]
     },
     "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": {
       "sha256": "cf87821bde5269a7c421643a000365a69ec7602969f5d6dfd2106dedf7150b85",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -114,12 +264,12 @@
     },
     "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
       "sha256": "518d46f3fe8729a56931239e8ae505b0442caeb73638d4ff8adcb43906890a06",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "hoch",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -131,31 +281,44 @@
       "checks": []
     },
     "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": {
-      "sha256": "a531c29ac51e5870bd9bb922ab9796c3fc018ea4849935ade62fbedad94d2567",
-      "urteil": "nicht beweisbar",
+      "sha256": "03af92e09a39d5da683dc9c8e46ca89d77d4bc7239a2db13dd238fb881c4bc98",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D1-EXAKT: Absatz doppelt (Z.1126 ≈ Z.880): *Abbildung: Merkkarte zu „Geld abheben im Ausland: Wo die Gebühren wirklich entstehen“ (eigene Darst…; D1-EXAKT: Absatz doppelt (Z.8758 ≈ Z.8454): *Abbildung: Gliederung zu „Geld abheben im Ausland: Wo die Gebühren wirklich entstehen“ – 5 Statione…"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-merkkarte. svg“ (Anker: „Merkkarte: Kernaussagen zu Geld abheben “); R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-ablauf. svg“ (Anker: „Gliederung des Beitrags: Geld abheben im“)"
+        }
+      ]
     },
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
-      "sha256": "711eb6599a98df25ba922c63e1ac76dd0e0b48c8f5da40e25a85d92678109c84",
-      "urteil": "nicht beweisbar",
+      "sha256": "6fb140577dad71b3e5af37bfd370163f63c06e0ba7fb9784e998339edb617145",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -163,17 +326,24 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "30caa57be394afb62947 (luecke): Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg.; 32a3ea879f2cf126b3a7 (luecke): Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist.; c583efe1ce02df3ca2d7 (luecke):"
+        }
+      ]
     },
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
-      "sha256": "e5758a1ef8cf43568b644ee914b40dc9f47fca22a3ebd057364973355056d327",
-      "urteil": "nicht beweisbar",
+      "sha256": "0b1f1dda8743de034d50aa71d5ae51a131df13747f93bd38427f581c5e5d6163",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -181,17 +351,30 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "437b809ffbf41e5af434 (luecke): Keine Quelle für die Aussage, dass das Gesetz bei einem Tarifwechsel die Grundversorgung garantiert – regulatorischer Rahmen fehlt.; 9fbacd9942c2dfa1447f (luecke): Keine Quelle für die Behauptung, dass ein Grad weniger Raumtemperatur rund 6 % Energie einspart – Prozent‑Angabe fehlt.; da30cbb5fbc8c801daf0 (luecke): Keine Quelle für die Angabe, dass durch Optimierungsm"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-merkkarte. svg“ (Anker: „Merkkarte: Kernaussagen zu Gasrechnung s“); R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-ablauf. svg“ (Anker: „Gliederung des Beitrags: Gasrechnung sen“)"
+        }
+      ]
     },
     "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
-      "sha256": "26c8114cffa436520fb85104b756b645691ddf862361891624e31f41dd013f40",
-      "urteil": "nicht beweisbar",
+      "sha256": "7ae06df3ecbf3066e0fd0a0154e29562f3f9dfba05bec837c645138fdd0e1f4d",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -199,60 +382,91 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": {
-      "sha256": "a748bd5f0ef151781047e43351d468a80827deea74bfb425b253167554370293",
-      "urteil": "nicht beweisbar",
+      "sha256": "9501347e0a8eaa1627cd280618849620a9e2b875a6823f629d0f111c8c5cbcab",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-29",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "47f855cb4f0fe1e5c65f (luecke): Angaben zu möglichen Einsparungen beim Kfz‑Versicherungswechsel (150 €‑400 € bzw. 180 €‑350 €) sind ohne Quellenangabe; keine der genannten Zahlen findet sich in den bereitgestellten Statistiken.; 6b0aa3429d97e8c74ed8 (luecke): Die Behauptung, technische Maßnahmen beim Heizen senken den Energieverbrauch um 8 %‑12 %, wird nicht belegt; die bereitgestellten Daten entha"
+        },
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D1-EXAKT: Absatz doppelt (Z.2265 ≈ Z.2029): *Abbildung: Merkkarte zu „Sparen im Herbst: Spartipps für die goldene Jahreszeit“ (eigene Darstellun…; D1-EXAKT: Absatz doppelt (Z.14799 ≈ Z.14481): *Abbildung: Gliederung zu „Sparen im Herbst: Spartipps für die goldene Jahreszeit“ – 5 Stationen von…"
+        },
         {
           "check": "T1w-zeichenlaenge-optimum",
           "dimension": "technik",
           "wirkung": "warnung",
-          "detail": "Zeichenlänge ueber-optimum (18299 Zeichen, Optimum 12.000–18.000)"
+          "detail": "Zeichenlänge ueber-optimum (18851 Zeichen, Optimum 12.000–18.000)"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-merkkarte. svg“ (Anker: „Merkkarte: Kernaussagen zu Sparen im Her“); R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-ablauf. svg“ (Anker: „Gliederung des Beitrags: Sparen im Herbs“)"
         }
       ]
     },
     "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
-      "sha256": "bea92c04ac5699dd84e5135b5083876aeeb1c0a243c29934219d9b52a9842fee",
-      "urteil": "nicht beweisbar",
+      "sha256": "ec6ec1d9e457d4c2e0f9d50e2e142ed07a12a5f586d3c3717d0ccc808ecfa7e9",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D1-EXAKT: Absatz doppelt (Z.9273 ≈ Z.8946): *Abbildung: Gliederung zu „WLAN verbessern: So bringst du stabilen Speed in jede Ecke“ – 5 Stationen…"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-merkkarte. svg“ (Anker: „Merkkarte: Kernaussagen zu WLAN verbesse“); R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-ablauf. svg“ (Anker: „Gliederung des Beitrags: WLAN verbessern“)"
+        }
+      ]
     },
     "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan": {
       "sha256": "1d1a232974ccb814184d5e04c26702977fbeedced7aff6b2cdc17facf64a0353",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -264,31 +478,50 @@
       "checks": []
     },
     "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
-      "sha256": "5bdab9f74c81e86216dad103c688365e6a1accdd7975ad832434980064e9ef18",
-      "urteil": "nicht beweisbar",
+      "sha256": "2a707c93331674e40e0df073e9fe0b7a875e9caaf368add035a2ba30ca610681",
+      "urteil": "blockiert",
       "risikoklasse": "erhoeht",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "1dbeb2f8c51e78d11d49 (luecke): Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 € an reinen Gebühren kosten, ist unbelegt.; 33e736ac6afe996b491a (luecke): Behauptung, dass Echtzeit‑Überweisungen bei kostenlosen Konten generell gebührenfrei sind, fehlt jede Quelle.; 96b7b7768d402884810c (luecke): Aussage, dass Einlagen bis 100.000 € durch die deutsche Einlagensicherung geschützt sind"
+        },
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D1-EXAKT: Absatz doppelt (Z.1408 ≈ Z.1174): *Abbildung: Merkkarte zu „Kostenloses Girokonto: Ein Konto ohne Gebühren finden“ (eigene Darstellung…"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-merkkarte. svg“ (Anker: „Merkkarte: Kernaussagen zu Kostenloses G“); R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-ablauf. svg“ (Anker: „Gliederung des Beitrags: Kostenloses Gir“)"
+        }
+      ]
     },
     "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
       "sha256": "3572ba22f4f8761a1da485017114c803f9d6e21dc59165b5a83d83416381bd79",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "hoch",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -301,12 +534,12 @@
     },
     "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": {
       "sha256": "7da7c614db5447c3ae2ce698ae6c8cbc3b84d5fef6e4b16c2e6195eb4f459a2d",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "hoch",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -318,67 +551,118 @@
       "checks": []
     },
     "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
-      "sha256": "d96c005e8d13d9142b7cafe5ff24ba3295f3e11cac0166090bdf41afa1b66999",
-      "urteil": "nicht beweisbar",
+      "sha256": "112ce02d101f12897421c6a6678e5d020ae4609c54330dcedc69e15dd8298056",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D1-EXAKT: Absatz doppelt (Z.9825 ≈ Z.9488): *Abbildung: Gliederung zu „DSL-Vergleich: So findest du den günstigsten Internettarif“ – 5 Stationen…"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-merkkarte. svg“ (Anker: „Merkkarte: Kernaussagen zu DSL-Vergleich“); R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-ablauf. svg“ (Anker: „Gliederung des Beitrags: DSL-Vergleich: “)"
+        }
+      ]
     },
     "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": {
-      "sha256": "97aa34a02986635019a06addbc020f3fc295d6dcfd403d1d6eeccc2a6d9e26c8",
-      "urteil": "nicht beweisbar",
+      "sha256": "4a4dd274fd970bfb687ebb1488b3d62ac112cabd1bf53328c0c95c9cdda8f8d3",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-22",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "43470330b3b48c9cee49 (luecke): Der Artikel empfiehlt, Kühl- und Gefriergeräte mindestens 24 Stunden, besser mehrere Tage zu messen, liefert jedoch keine Quelle für diese Messdauer.; 8ddc1025e45be176ad3a (luecke): Es wird kein regulatorischer Rahmen (z. B. Aufgaben der Bundesnetzagentur) genannt, obwohl das Thema Stromversorgung berührt wird; entsprechende Vorgaben fehlen im Text.; 95d6d2877620e5a0"
+        },
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D1-EXAKT: Absatz doppelt (Z.1060 ≈ Z.824): *Abbildung: Merkkarte zu „Energiediebe stoppen: So kannst du Stromfresser finden“ (eigene Darstellun…; D1-EXAKT: Absatz doppelt (Z.9971 ≈ Z.9648): *Abbildung: Gliederung zu „Energiediebe stoppen: So kannst du Stromfresser finden“ – 5 Stationen von…"
+        },
+        {
+          "check": "T1w-zeichenlaenge-optimum",
+          "dimension": "technik",
+          "wirkung": "warnung",
+          "detail": "Zeichenlänge ueber-optimum (18154 Zeichen, Optimum 12.000–18.000)"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-merkkarte. svg“ (Anker: „Merkkarte: Kernaussagen zu Energiediebe “); R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-ablauf. svg“ (Anker: „Gliederung des Beitrags: Energiediebe st“)"
+        }
+      ]
     },
     "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
-      "sha256": "54d443304c106c37fd2b895ee84d492207b7cc244e79188f3dad0ad3b8d60749",
-      "urteil": "nicht beweisbar",
+      "sha256": "b6e5d81e5ec29a8cc2938a4a7d6c32a62fdf4cf5a1a8302db007f284861bc71c",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D1-EXAKT: Absatz doppelt (Z.1937 ≈ Z.1699): *Abbildung: Merkkarte zu „DSL-Tarif für dein Zuhause: Das passende Angebot finden“ (eigene Darstellu…; D1-EXAKT: Absatz doppelt (Z.9496 ≈ Z.9150): *Abbildung: Gliederung zu „DSL-Tarif für dein Zuhause: Das passende Angebot finden“ – 5 Stationen vo…"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-merkkarte. svg“ (Anker: „Merkkarte: Kernaussagen zu DSL-Tarif für“); R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-ablauf. svg“ (Anker: „Gliederung des Beitrags: DSL-Tarif für d“)"
+        }
+      ]
     },
     "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
-      "sha256": "aba22011758336811f9497dabb94968611cb44d9af805241b9479e4d9e2914cc",
-      "urteil": "nicht beweisbar",
+      "sha256": "905288727fca2270be6a787731f5dd679b2c1d5c054ac8ceae8116a4a95b58d4",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -386,42 +670,67 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "4afb8daed73677ee6224 (luecke): Angabe, dass 58 % der Nutzer ihr Haushaltsbuch digital führen, beruft sich angeblich auf Statista 2025, jedoch wird keine Quelle genannt.; 9eb9a90899cc8ca66020 (luecke): Sparpotenzial‑Beispiele (z. B. DSL‑Tarifwechsel von 44 € auf 24 €) enthalten konkrete Zahlen ohne Quellenangabe.; b4bd085bc84a6131b644 (luecke): Behauptung, dass 60 % der Haushalte in Deutschland ihr"
+        }
+      ]
     },
     "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
-      "sha256": "53c38cd31bb602cdb0e04c1a49eae6e5465b10ef352002af240aa35cebba2680",
-      "urteil": "nicht beweisbar",
+      "sha256": "e223331b01339f4394808ae17ae64d475e3f6f764f9189fa0534725ed74734f6",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-29",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "0051151e6c46f4c2bdb3 (luecke): Der Artikel nennt eine Kautionshöhe von 900 € bis 2.500 €, ohne dass die Verbraucherzentrale diese Spanne angibt.; 0790f52160dfaa819917 (luecke): Die angegebene Ersparnis von 145 € bei einer einwöchigen Anmietung ist nicht durch Zahlen der Verbraucherzentrale gedeckt.; 53c3fde8e986e6560890 (luecke): Die Behauptung, dass Flughafen‑Mietstationen 15 %‑25 % teurer sind, "
+        },
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D1-EXAKT: Absatz doppelt (Z.1339 ≈ Z.1105): *Abbildung: Merkkarte zu „Mietwagen ohne Kautionsfallen: So sparst du im Urlaub“ (eigene Darstellung…; D1-EXAKT: Absatz doppelt (Z.10678 ≈ Z.10348): *Abbildung: Gliederung zu „Mietwagen ohne Kautionsfallen: So sparst du im Urlaub“ – 5 Stationen von …"
+        },
         {
           "check": "T1w-zeichenlaenge-optimum",
           "dimension": "technik",
           "wirkung": "warnung",
-          "detail": "Zeichenlänge ueber-optimum (18296 Zeichen, Optimum 12.000–18.000)"
+          "detail": "Zeichenlänge ueber-optimum (18858 Zeichen, Optimum 12.000–18.000)"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-merkkarte. svg“ (Anker: „Merkkarte: Kernaussagen zu Mietwagen ohn“); R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-ablauf. svg“ (Anker: „Gliederung des Beitrags: Mietwagen ohne “)"
         }
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "f541df65178959971f2cdf66376ff0a8dea187b089f62a428200315a339a7889",
-      "urteil": "nicht beweisbar",
+      "sha256": "dbbf33ed3fd409fa432695800675c561162e7e1312cb11b27ae7ccf0134b2e92",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -429,53 +738,91 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
-      "sha256": "d68dfb68fd2094f22b51794d26e56f4dd1124ee3b162833720a012f106d1bd8c",
-      "urteil": "nicht beweisbar",
+      "sha256": "54d367d61c2ac17f199994fb3f63bfa537068e9cb5e02926e7e38f2514ac4a91",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "252413dcc16cea146beb (luecke): Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher angekündigt werden muss, ohne dafür eine Quelle anzugeben.; 48a0a962046c8315270e (praezision): Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf den Anbieter überträgt und dafür ein höherer Startpreis üblich ist, fehlt eine konkrete Quelle und bleibt vage.; 9326152f4d788cff56bd ("
+        },
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D1-EXAKT: Absatz doppelt (Z.7474 ≈ Z.7163): *Abbildung: Gliederung zu „Preisgarantie Gas: Was bei Preiserhöhung hilft“ – 5 Stationen von „Wenn e…"
+        },
+        {
+          "check": "T5-lesbarkeit",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Flesch 59.7 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-merkkarte. svg“ (Anker: „Merkkarte: Kernaussagen zu Preisgarantie“); R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-ablauf. svg“ (Anker: „Gliederung des Beitrags: Preisgarantie G“)"
+        }
+      ]
     },
     "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
-      "sha256": "29f76bf8d7a6de5622e928d33a2d046ecf0fb72c97e2e18276b038535bc2ddd5",
-      "urteil": "nicht beweisbar",
+      "sha256": "c5e4bffd65827d2a532e77e7eaa7ef9ca56c3d0b8f5a06caffc91a5aac218fa5",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-12",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D1-EXAKT: Absatz doppelt (Z.1151 ≈ Z.911): *Abbildung: Merkkarte zu „DNS-Server wechseln: Datenschutz, Filter und Einrichtung“ (eigene Darstell…; D1-EXAKT: Absatz doppelt (Z.10834 ≈ Z.10525): *Abbildung: Gliederung zu „DNS-Server wechseln: Datenschutz, Filter und Einrichtung“ – 5 Stationen v…"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-merkkarte. svg“ (Anker: „Merkkarte: Kernaussagen zu DNS-Server we“); R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-ablauf. svg“ (Anker: „Gliederung des Beitrags: DNS-Server wech“)"
+        }
+      ]
     },
     "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": {
       "sha256": "702f93d731cbe2387bec397b6b5fde6cf485fc530578f1439f3deb8a6057fe7c",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -488,12 +835,12 @@
     },
     "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen": {
       "sha256": "57b0abe868cb95e28c91f7e900c382ba8e67439c831ec181e5dd05d1eeba1d20",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "hoch",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -505,31 +852,44 @@
       "checks": []
     },
     "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
-      "sha256": "42f35a75ee456f29f235e45201b4794bfb2c77307787a4bccb726cde19871e6c",
-      "urteil": "nicht beweisbar",
+      "sha256": "b8ba2d38d99588ea1820150197fadf2bba6654a82603d7b9bd22d93ccb58d845",
+      "urteil": "blockiert",
       "risikoklasse": "erhoeht",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D1-EXAKT: Absatz doppelt (Z.1200 ≈ Z.960): *Abbildung: Merkkarte zu „Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich“ (eigene Darstell…; D1-EXAKT: Absatz doppelt (Z.9457 ≈ Z.9144): *Abbildung: Gliederung zu „Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich“ – 5 Stationen v…"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-merkkarte. svg“ (Anker: „Merkkarte: Kernaussagen zu Tagesgeld-Zin“); R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-ablauf. svg“ (Anker: „Gliederung des Beitrags: Tagesgeld-Zinse“)"
+        }
+      ]
     },
     "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": {
       "sha256": "5aa8bd31e68a11ddab2a1c572db15bff3efdf50c86c7c2a0e8ced6518730688b",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -542,12 +902,12 @@
     },
     "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen": {
       "sha256": "5d82e9843028f9023a6afe6da6edc13a2333b19843acb6cffb7dc801903702e4",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -559,13 +919,13 @@
       "checks": []
     },
     "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt": {
-      "sha256": "a4a1a21cc7c1bba2a09c4b20af8f9b859fe9084a84f57af70005b14ad17d35e5",
-      "urteil": "nicht beweisbar",
+      "sha256": "9a99fad3afe9643be4436aa96b40af329716f77c4623f1ff609e1d2ba1c32e23",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -573,17 +933,17 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte": {
-      "sha256": "f06381152632a5960bbfaf5371320725019c619ee8ee00da7d70cbced5a090d4",
-      "urteil": "nicht beweisbar",
+      "sha256": "0d9053e54d33752b584f015fe206a19e9e828a487923845be6d1e9b05ba35dcd",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -591,17 +951,17 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen": {
-      "sha256": "b291fe9f934bc1feaf283800a96e560b0f2c0abcbf0169c33808fcb43ac9bf9c",
-      "urteil": "nicht beweisbar",
+      "sha256": "cf6ee2e2840a7d9d8015b3a38c6a4019afc52fcdb2b7918514a91b4db2860d97",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -609,17 +969,17 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-26",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": {
-      "sha256": "43ec7efe20912ee8bd77c60439c94884df852fac7d70ec326a809e9b470a579d",
-      "urteil": "nicht beweisbar",
+      "sha256": "704bb5b82220b5086c7fc1c37fbc9114272cf171f7a96191a0c572c501a454c7",
+      "urteil": "blockiert",
       "risikoklasse": "erhoeht",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -627,17 +987,24 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "16b3b8584ff802803aa9 (luecke): Angaben zum Fremdwährungsentgelt von „fast zwei Prozent“ bei Zahlungen in fremder Währung fehlen jede belegbare Referenz.; 7ff042b6fe804cdf101b (praezision): Formulierungen wie „einige Anbieter ohne Auslandsgebühr gehören zu den besten Karten für Reisen“ sind pauschal und ohne messbare Daten unpräzise.; bec83c4b814183fa1086 (luecke): Die Aussage, dass die kostenlose "
+        }
+      ]
     },
     "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": {
-      "sha256": "2e3ca085ada3cb53d47297726da70911e8b5fec2887d30cbe2c969fb580b2b75",
-      "urteil": "nicht beweisbar",
+      "sha256": "c22a7ee0afc7f2f273a8107a2d029c8f99e3e2e593fa1c29604b20d142f852fb",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -645,35 +1012,54 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-12",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
-      "sha256": "71ebfc49f849da523ebb6a88bf951f330afef86306dc2eef2271bccedf3a00cf",
-      "urteil": "nicht beweisbar",
+      "sha256": "21017b185fcf4ce0dbe51852db33a0e18347cf0b252b03a2e25a580efa93694f",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-20",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "20c08cb650ef6e24af64 (luecke): Der Ratgeber vernachlässigt bei der Kalkulation der Sparfähigkeit die massive Preissteigerung bei Energie (+14,9 %), die das Budget für monatliche Sparraten erheblich belastet.; 6aafb23c0c6dbb06ce3b (veraltet): Die im Rechenbeispiel zur Realrendite genutzte Inflationsrate von 2 % ist veraltet; die vorläufige Rate für Oktober 2026 beträgt laut Statistischem Bundesamt "
+        },
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D1-EXAKT: Absatz doppelt (Z.10395 ≈ Z.10038): *Abbildung: Gliederung zu „Finanzielle Freiheit erreichen: Denke dich reich – Geld“ – 5 Stationen vo…"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-merkkarte. svg“ (Anker: „Merkkarte: Kernaussagen zu Finanzielle F“); R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-ablauf. svg“ (Anker: „Gliederung des Beitrags: Finanzielle Fre“)"
+        }
+      ]
     },
     "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen": {
       "sha256": "4726400fec2bdfdc74c650b016633052b08e8721ad014bec4f748faa70e394b0",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -685,13 +1071,13 @@
       "checks": []
     },
     "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": {
-      "sha256": "4fb146d60b3f44759f61da13d569f130b71840870dff3f6eadf19adaa688fdc9",
-      "urteil": "nicht beweisbar",
+      "sha256": "5bd6779ecdc751b20b13181118e784c3b07eec3dced2d8cd41304138eefd133d",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -699,42 +1085,67 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-20",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "24f05ddc03ffdd50118f (praezision): Die Kalkulation der Fixkostenersparnis bei Energie (Strom/Gas) ist unpräzise, da sie den aktuellen Preisanstieg von +14,9 % bei Energieprodukten nicht einbezieht.; 4816322f061dfdc03bcd (luecke): Bei den Einsparpotenzialen für Lebensmittel fehlt der Bezug zur aktuellen Preissteigerung von +0,4 % bei Nahrungsmitteln.; 7017065ee7c74c7ae452 (veraltet): Der Artikel nu"
+        }
+      ]
     },
     "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": {
-      "sha256": "98ab70d0d2b6991e29773724ce2250df0208d5190420fd44915e27236e77fedb",
-      "urteil": "nicht beweisbar",
+      "sha256": "7a3f3bb2fd1bc7ca25ac6c39d9d3ee4872f133376ac484ae677886f63477026d",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-21",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "1e06a96f6f71e104ce0b (praezision): Während Meal Prep als großer Sparhebel betont wird, zeigt die Marktlage für Nahrungsmittel eine moderate Teuerung von nur 0,4 %, was die Priorisierung der Sparbemühungen relativiert.; 81c6a707139046b83ccd (luecke): Der Ratgeber empfiehlt die Revision von Fixkosten, lässt aber die drastische Preissteigerung bei Energie von +14,9 % unerwähnt, die ein wesentlicher T"
+        },
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D1-EXAKT: Absatz doppelt (Z.10243 ≈ Z.9070): *Abbildung: Gliederung zu „Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick“ – 5 Stationen …"
+        },
         {
           "check": "T1w-zeichenlaenge-optimum",
           "dimension": "technik",
           "wirkung": "warnung",
-          "detail": "Zeichenlänge ueber-optimum (19963 Zeichen, Optimum 12.000–18.000)"
+          "detail": "Zeichenlänge ueber-optimum (20553 Zeichen, Optimum 12.000–18.000)"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-merkkarte. svg“ (Anker: „Merkkarte: Kernaussagen zu Alltagsfehler“); R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-ablauf. svg“ (Anker: „Gliederung des Beitrags: Alltagsfehler v“)"
         }
       ]
     },
     "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": {
-      "sha256": "473ce99e987356bf821f7d2df88fd6acff4566a058cd49f20eb33feb68a26549",
-      "urteil": "nicht beweisbar",
+      "sha256": "f690c980eaaa62ce454570087f34f0ba49f3a75c6540a24705494f9f7c915418",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -742,35 +1153,48 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-02",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster": {
-      "sha256": "90602a84d3d745cf3c508171ca9b7bc5605ae6e5942e61e576c8aeb8799ae1ac",
-      "urteil": "nicht beweisbar",
+      "sha256": "f741d8037e5d6090f708476dbd71ba57244093223eba60374b515c8d408ef6cc",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D1-EXAKT: Absatz doppelt (Z.1982 ≈ Z.1746): *Abbildung: Merkkarte zu „Notgroschen: Die Wahrheit über das finanzielle Polster“ (eigene Darstellun…; D1-EXAKT: Absatz doppelt (Z.8701 ≈ Z.8379): *Abbildung: Gliederung zu „Notgroschen: Die Wahrheit über das finanzielle Polster“ – 5 Stationen von…"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-merkkarte. svg“ (Anker: „Merkkarte: Kernaussagen zu Notgroschen: “); R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-ablauf. svg“ (Anker: „Gliederung des Beitrags: Notgroschen: Di“)"
+        }
+      ]
     },
     "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": {
-      "sha256": "86cf92eac4c32f75b3c86d81be4064ffff96700fef96acd36a17494a576a5477",
-      "urteil": "nicht beweisbar",
+      "sha256": "86d47ae20559e2fefe77f85ea765c1c51649ccecea0ff7e4defb4b95906cd400",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -778,35 +1202,61 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-21",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "5a1bf10697f58e5fe14a (luecke): Der Ratgeber nennt Sparbeispiele für Heizkosten, lässt aber die aktuelle Preissteigerung bei Energie von +14,9 % (Stand Oktober 2026) unerwähnt, die den finanziellen Druck auf Haushalte massiv erhöht.; e48f9237cff6397c49a6 (praezision): Die in Aussicht gestellten Ersparnisse von bis zu 200 € werden nicht ins Verhältnis zur aktuellen Inflationsrate von +2,8 % gesetzt,"
+        }
+      ]
     },
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
-      "sha256": "6c992eaac9ca76d63346ddffd19cb8545a031deaa35c4a0018765da211c5759b",
-      "urteil": "nicht beweisbar",
+      "sha256": "ab69bc18e3aeacc5e3b5a34618bb083b9ae6160a7bba16183b0053c4f21a68f0",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-21",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "6cb2229c5eb83b02da23 (veraltet): Die Kalkulation der Fixkosten (Energie 140 €) und die Empfehlung zur Senkung der Kosten ignorieren den aktuellen Markttrend massiv steigender Energiepreise (+14,9 %), was die 50-Prozent-Quote für notwendige Ausgaben gefährdet.; f00055a1cb65ee22165f (luecke): Der Ratgeber verspricht eine 'planbare' Budgetierung, lässt aber die aktuelle Inflationsrate von 2,8 % unerw"
+        },
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D1-EXAKT: Absatz doppelt (Z.1611 ≈ Z.1369): *Abbildung: Merkkarte zu „50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken“ (eigene Darstel…; D1-EXAKT: Absatz doppelt (Z.10983 ≈ Z.9525): *Abbildung: Gliederung zu „50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken“ – 5 Stationen …"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-merkkarte. svg“ (Anker: „Merkkarte: Kernaussagen zu 50-30-20-Rege“); R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-ablauf. svg“ (Anker: „Gliederung des Beitrags: 50-30-20-Regel:“)"
+        }
+      ]
     },
     "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
-      "sha256": "2bfda68f5b26d04504e0b84957b4e0445043a40000ea7fb2d971c686dc12d69b",
-      "urteil": "nicht beweisbar",
+      "sha256": "2e0d1a68a957554be4dda28b954a36e74249c0090ae472b922d04fb5d913dab8",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -814,17 +1264,17 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-02",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": {
-      "sha256": "1e1ed28e6666c2a3f229bc975cdfbaa2a01003bd065799a5a25e32f76973cbfb",
-      "urteil": "nicht beweisbar",
+      "sha256": "123ecbd66eb005c889a252ec3540eb82df858b397bfc9c5209c298d1fa01c395",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -832,17 +1282,17 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-12",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug": {
-      "sha256": "48109232d0a7645c661ffe92783e3526498fd0b800053965baf4055ad8b76e50",
-      "urteil": "nicht beweisbar",
+      "sha256": "70bf355db29f167bdd8f482dea38f0ebc1e9b6a3e72ba245a7e6bf07f606be8a",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -850,17 +1300,17 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
-      "sha256": "145cf059e2253e0ecb1b18b277ecdc9569cced1ba4e38f0ab7062c87bd737d01",
-      "urteil": "nicht beweisbar",
+      "sha256": "d0167053714d775996b0dde6a65d757bb122d57a8760832e605b34f098eeb579",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -868,17 +1318,24 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-02",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "0aa915539d57841e5014 (luecke): Die Aussage, dass die Verbraucherzentrale empfiehlt, Boni im ersten Vergleich auszublenden, fehlt eine Quellenangabe.; 5e1be48085014a836807 (luecke): Der angegebene BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird nicht belegt.; 6fdf31c3b68b6122bd0d (praezision): Die pauschale Formulierung, dass bei zentraler Heizung der Vermieter oder die Eigentümergemeinsch"
+        }
+      ]
     },
     "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": {
-      "sha256": "ff017f509737b38d63c6cdd1b8ba328b412c453ef97e79fbd33803e6f9dc17c0",
-      "urteil": "nicht beweisbar",
+      "sha256": "02bad0a9c2f2c3f0fb72d09f656eb2006659dc4fad89ebb96d53146f96ca7e9f",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -886,17 +1343,24 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-02",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "334751e6f61ad0033fe4 (luecke): Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quellenangabe.; 36759a5efe5e8e5163d0 (luecke): Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird ohne Quelle angegeben.; 942922d1afd7844618e9 (luecke): Die Rechnung „1 Cent pro kWh bei 18.00"
+        }
+      ]
     },
     "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet": {
-      "sha256": "ab118e6e6a847ff03b47266de40701c858cde8b452279692b287369a2eaf0d51",
-      "urteil": "nicht beweisbar",
+      "sha256": "f266ce21739385362b00584b1e9e99301e1e3fcae8223631a0e51203c23dd843",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -904,17 +1368,24 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "T2-seo-audit",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "harte SEO-Mängel (score_issues > 0, seo_audit.py)"
+        }
+      ]
     },
     "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist": {
-      "sha256": "2a97306cd52bac6894b5cf04ad53a05ac215da0887b3fe6c6373d6c904b16314",
-      "urteil": "nicht beweisbar",
+      "sha256": "4f43744957847ce984319749a69d063bd4c9615b08a46c557e3159d69e64cb2b",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -922,17 +1393,17 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert": {
       "sha256": "d9131d00aaf25f441b4c601d7c0b0f304db6e16877780558bbef9196bb6e18bb",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -944,13 +1415,13 @@
       "checks": []
     },
     "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
-      "sha256": "b5aa8342e8a8e6fe57594a9dbaea52ba605d36942e065fad1034442f685aeacc",
-      "urteil": "nicht beweisbar",
+      "sha256": "7dff59f959e287f64bd73add49e2d35a106fdc891439d1160ec9c380f99a4694",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -958,17 +1429,17 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
       "sha256": "b0da0ee7a42fd9fb67ddd8d438ce56a048a2a83aaa78571a7d87687c76a46fd1",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -980,13 +1451,13 @@
       "checks": []
     },
     "2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet": {
-      "sha256": "3adca5301b04d91f65bff76e074e070b60621a5be9e1dc89207b90c2c902b4ac",
-      "urteil": "nicht beweisbar",
+      "sha256": "1b153213d744a029ab39128a0ef5acf0fa2e29ec499f4b9b797a8b1a0fa1631e",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -994,17 +1465,17 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
-      "sha256": "e71287424898dc523872ead82e0776b40df267cf15f8969957808fa18c7bf9ce",
-      "urteil": "nicht beweisbar",
+      "sha256": "f5192963ae3672b9dcab5a290f4b9e9c54585a293fb5d9467bb791c142278eb0",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "warnung",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1012,24 +1483,30 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-13",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "T1w-zeichenlaenge-optimum",
           "dimension": "technik",
           "wirkung": "warnung",
-          "detail": "Zeichenlänge ueber-optimum (18112 Zeichen, Optimum 12.000–18.000)"
+          "detail": "Zeichenlänge ueber-optimum (18870 Zeichen, Optimum 12.000–18.000)"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-merkkarte. svg“ (Anker: „Merkkarte: Kernaussagen zu Last Minute U“); R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-ablauf. svg“ (Anker: „Gliederung des Beitrags: Last Minute Url“)"
         }
       ]
     },
     "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
       "sha256": "0bb339ebf97b5578eade49d589f61feb7483d6e647d21c3649b7876ebb350495",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1041,13 +1518,13 @@
       "checks": []
     },
     "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {
-      "sha256": "21aa7763ea2ac72595d54ddef70be9a548c7b77bdbbd0daf83314fd57ceb61d5",
-      "urteil": "nicht beweisbar",
+      "sha256": "5ed005602fa894baec60d65df98d132fbe8e44f07415692d674c0c41c277e214",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1055,17 +1532,17 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-18",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": {
-      "sha256": "ccce34ee53a9a58439d7c44671a72c965fa1b4cdbacc5e21129c2c58f0ebeaff",
-      "urteil": "nicht beweisbar",
+      "sha256": "7f8e2a19d909e063f7e828bde8bafea29cab5ffed09a42083a4bfe9f8cb1ab07",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1073,17 +1550,24 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-03",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "58f03a64adaaf8125959 (praezision): Während der Artikel vor hohen Kosten für Festmenüs warnt, liegt die Preissteigerung bei Nahrungsmitteln laut Destatis im Oktober 2026 bei lediglich +0,4 % und damit deutlich unter der allgemeinen Inflation.; a7f5f01ef15a38839a0d (praezision): Die Pauschale für 'Anreise und Mobilität' (10 % des Budgets) berücksichtigt nicht die überdurchschnittliche Preissteigerun"
+        }
+      ]
     },
     "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest": {
       "sha256": "803dbb47352bf7693121f850a3508706fedcfbb4853dc3192d773736d2f17419",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "erhoeht",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1096,12 +1580,12 @@
     },
     "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen": {
       "sha256": "4b67a71a916d0d547daadd89a41dee1cb10808023d2ee3a8a2c5451d9289fb68",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1113,13 +1597,13 @@
       "checks": []
     },
     "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": {
-      "sha256": "87f289f6060465bc02642b354a6489bdbc7ec16eefa6d5a8ed9531e98b74dca3",
-      "urteil": "nicht beweisbar",
+      "sha256": "78d2004c405bd079683e0df9a3238f8c8dce1d132a969e068ad7552de015afff",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1127,35 +1611,54 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
-      "sha256": "0e9a3c3dcd173d050b6eb9bd25d71b8646f618a716618c96de76490b8c69e241",
-      "urteil": "nicht beweisbar",
+      "sha256": "ef9210514ca21c89321acd42827276659da06078fb637c046ec1e9aee919d482",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-03",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "089b89138417e63a3dcf (luecke): Es fehlt der für Campingbuchungen relevante Regulierungsrahmen (Unterscheidung Mietrecht bei Stellplätzen vs. Reiserecht), den die Fundstelle für den Bereich Reise nur allgemein andeutet.; 1158934e7a18c7b2099b (luecke): Die Preisangabe von 20 bis 45 € pro Nacht wird als realistischer Wert positioniert, ist jedoch nicht durch Marktdaten oder eine Referenzstelle in den"
+        },
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D1-EXAKT: Absatz doppelt (Z.973 ≈ Z.749): *Abbildung: Merkkarte zu „Campingurlaub planen: Budget für Platz und Fahrt“ (eigene Darstellung aus …"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-merkkarte. svg“ (Anker: „Merkkarte: Kernaussagen zu Campingurlaub“); R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-ablauf. svg“ (Anker: „Gliederung des Beitrags: Campingurlaub p“)"
+        }
+      ]
     },
     "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
       "sha256": "43507adc459faf75e39df17d5b5baf96842eeae6f42bb3d8f495d0e2b4973bec",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "erhoeht",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1167,13 +1670,13 @@
       "checks": []
     },
     "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": {
-      "sha256": "2c024ec6c15b726ab376f37ecdf5e00bb69ee414a89d750cbf2ab59fdff2ff8a",
-      "urteil": "nicht beweisbar",
+      "sha256": "9370a5d95f050e66332758e7037015b4d54dee13aa19f4b3a74ffb5a0fa781c5",
+      "urteil": "freigabe-reif",
       "risikoklasse": "erhoeht",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1181,17 +1684,17 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": {
-      "sha256": "b090bb7870bfe29a1f903a7b6051dc3ae0e87df670b28ba2824beee66c08da67",
-      "urteil": "nicht beweisbar",
+      "sha256": "6b994161e047d28d3f0958905dd549b169ebbe2dc908adea3033b81d42310a61",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1199,17 +1702,24 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-03",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "7067eabb89a917ae67a4 (luecke): Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu unklaren Angeboten und Problemen mit Online-Buchungen.; af2ccb4222eeb195222f (praezision): Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht automatisch, ob das Auto zum individuellen Urlaub passt – ohne Messgröße bleibt die Aussage ungenau.; d9c8b522bf1dcaed0340 (luecke): Die Ve"
+        }
+      ]
     },
     "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": {
       "sha256": "34e8cd1620fa2c5c61d1a36f8089cfabadaf1e96232419bcc0b5cf7478a4ad59",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1222,12 +1732,12 @@
     },
     "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck": {
       "sha256": "7fc685b7028540d26591b9eb6cdb5abcf6ef8e430368925b11ccf0021539942e",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1239,31 +1749,44 @@
       "checks": []
     },
     "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": {
-      "sha256": "0b2e1d31f8305bc57439234c7df39a45419dd52d3690207995aae44e02ba6bc7",
-      "urteil": "nicht beweisbar",
+      "sha256": "8618d99bcfa8abb0c7354e5a95ccc06f355f2e6f653d4f2bc11996f6363d1cda",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
-        "redundanz": "bestanden",
+        "redundanz": "blockiert",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "RD1-duplikate",
+          "dimension": "redundanz",
+          "wirkung": "blockiert",
+          "detail": "D1-EXAKT: Absatz doppelt (Z.2016 ≈ Z.1784): *Abbildung: Merkkarte zu „Energiekosten senken: Smarte Helfer für den Haushalt“ (eigene Darstellung …; D1-EXAKT: Absatz doppelt (Z.9382 ≈ Z.9027): *Abbildung: Gliederung zu „Energiekosten senken: Smarte Helfer für den Haushalt“ – 5 Stationen von „…"
+        },
+        {
+          "check": "T6-textverstaendnis",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-merkkarte. svg“ (Anker: „Merkkarte: Kernaussagen zu Energiekosten“); R8-URL-LEERZEICHEN: URL mit Leerzeichen: „abbildung-ablauf. svg“ (Anker: „Gliederung des Beitrags: Energiekosten s“)"
+        }
+      ]
     },
     "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle": {
       "sha256": "44c00b10819c9ce1c309f6df2fdde3de49c45e4ad059f3fb56bc61c4cbe6205d",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1275,13 +1798,13 @@
       "checks": []
     },
     "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt": {
-      "sha256": "6453284b0791fb522b361028ceef8b7ec2510b0ca1bc72431ac7e4ff4564e0f8",
-      "urteil": "nicht beweisbar",
+      "sha256": "5e3fccca20d3cae382653c6247a1826ddb76dce4252a27690d250e0f160bab8a",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1289,17 +1812,17 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-05",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten": {
-      "sha256": "4f08f73eba45b5c90d4fd964dc618b1a716241c31265d6cbf8d972bb8b881b7c",
-      "urteil": "nicht beweisbar",
+      "sha256": "950e2546c4e2fb626d673dda2b0934d43d1caa4e2be8d86b00aa78a9922dcf78",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1307,17 +1830,17 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
-      "sha256": "5bdfc3ec90e9d1d1214ada206a25e06b57461f027b5c620c117aab0629d8de86",
-      "urteil": "nicht beweisbar",
+      "sha256": "1116b2c903bdbfc88e2e7875ce014dc673667af96642531f5a019c6cad44b79f",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1325,17 +1848,17 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
       "sha256": "39e973d8bf8064c55451d6b681f32d2a69bfc0e5e4969c2349932d56f459696f",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1347,13 +1870,13 @@
       "checks": []
     },
     "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
-      "sha256": "4cc79aa22f6f581cd1c3bd00c44937bac40b93f04481a375a5e6bf70c56dda6c",
-      "urteil": "nicht beweisbar",
+      "sha256": "16d7172501a776788beb087968de72a85328d7f15a5c78a365df3b02054a8ec2",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1361,17 +1884,17 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-03",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick": {
-      "sha256": "ee71677addabd3c2bcea21decb8136b97eac9f509871266e8611f7d3f2ed14ef",
-      "urteil": "nicht beweisbar",
+      "sha256": "0f561c721e97dc20784da73c4855f32ba52722aac1cb58873d7a2a2a618339e4",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1379,17 +1902,17 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto": {
-      "sha256": "509f5a8268ed8268310de6c4be68a51087a9e85d9a68a0f10a3f9b7525ad6520",
-      "urteil": "nicht beweisbar",
+      "sha256": "51ca96ef52331ecaeaf476ee62197e0a6929fad7711560fabd9567e27a25f388",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1397,17 +1920,17 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks": {
       "sha256": "691568c6b33b7d6988347495947ce7887a770f3422b1d94b8742932aa3aa4b2a",
-      "urteil": "nicht beweisbar",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1419,13 +1942,13 @@
       "checks": []
     },
     "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen": {
-      "sha256": "c2c4a236a74d8290e3bf765550a989e1f8396dc4e622ef7182dc6d1c76912575",
-      "urteil": "nicht beweisbar",
+      "sha256": "b5d43e1099ab1714a3690f3f60921cb18841e30ca3862ab13830825e1b8fdc12",
+      "urteil": "warnung",
       "risikoklasse": "erhoeht",
       "dimensionen": {
         "technik": "warnung",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1433,24 +1956,24 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "T1w-zeichenlaenge-optimum",
           "dimension": "technik",
           "wirkung": "warnung",
-          "detail": "Zeichenlänge unter-optimum (10258 Zeichen, Optimum 12.000–18.000)"
+          "detail": "Zeichenlänge unter-optimum (10252 Zeichen, Optimum 12.000–18.000)"
         }
       ]
     },
     "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
-      "sha256": "6a5d5b3009564e5b2bbd51919ed6c7f5a9bcc690390739ab2a98ad9383153744",
-      "urteil": "nicht beweisbar",
+      "sha256": "ac974a6411fa07dc87420d7c38c2ec9752ee9eaf35da05e55dbceed21be193ef",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1458,17 +1981,17 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-14",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht": {
-      "sha256": "3b4894d8698bb9e18aaccd90ea10b68129a2fdb8a50ae7cfc7807b1ce56f7516",
-      "urteil": "nicht beweisbar",
+      "sha256": "82612b49b19a17762dc55fc8c3a21b6a7303049672cd6ea10680962f06035d0c",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1476,17 +1999,17 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-11",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege": {
-      "sha256": "20e96b9dd489b5e1b1a912b88d042f58c825997d56c5eae477f6a68ac6532882",
-      "urteil": "nicht beweisbar",
+      "sha256": "0d8dc6c0d86f15a400c4d17b54ed9b1cfb6724363d3aadb32d01b78cceb6edfd",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1494,17 +2017,17 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-25",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": {
-      "sha256": "ffb5e72f471ab4da3a9321db95cd20c4bb134ac8d4c87a9e81c23d9283fe8c49",
-      "urteil": "nicht beweisbar",
+      "sha256": "62dc6acc4ad9e29f360923e8553ee5489f1a30ff0644597a3e19f063c52288c1",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "nicht beweisbar",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1512,8 +2035,51 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-12",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
+    },
+    "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem": {
+      "sha256": "0ab116f2f4a0173e8423b50fbc2577bc41f5949f979aafd19504feb8e93139af",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-12-14",
+      "siegel_drift": "neu versiegelt",
+      "checks": []
+    },
+    "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang": {
+      "sha256": "d8b9ff169dfe1aa393c5d06c4ab17ed1b40285ac438844a44ebe0042b10eb741",
+      "urteil": "warnung",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "warnung",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-12-20",
+      "siegel_drift": "neu versiegelt",
+      "checks": [
+        {
+          "check": "Q2-quellen-vorhanden",
+          "dimension": "quellen",
+          "wirkung": "warnung",
+          "detail": "keine Belegkette im Frontmatter (quellen) – nachpflegen (faktenfrische)"
+        }
+      ]
     }
   }
 }
