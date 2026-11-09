@@ -1,1 +1,62 @@
-{}
+{
+  "2026-11-09-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten": {
+    "datei_sha256": "daae0c61ad4a84ea1f96b3615817eed5e6c3bc7d4fddfa13b5811c632346cbce",
+    "first": "2026-11-09T12:16:05Z",
+    "grund": "Faktenfrische nicht bestanden: 14c3214fbb1ecaf8e091 (luecke): Die im Pin-Titel und der Beschreibung beworbene Ersparnis von 680 Euro wird ohne die im Haupttext vorhandene Kennzeichnung als Modellrechnung oder Bezug auf Marktdaten der Aufsic",
+    "hits": 1,
+    "laeufe": [
+      "run:42612645699"
+    ],
+    "last": "2026-11-09T12:38:20Z",
+    "lauf": "run:42612645699",
+    "signatur": "faktenfrische nicht bestanden: <n>c<n>fbb<n>ecaf<n>e<n> (luecke): die im pin-titel und der beschreibung beworbene ersparnis von <n> euro wird ohne die im haupttext vorhandene kennzeichnung als modellr"
+  },
+  "2026-11-09-geschirrspueler-voll-so-sparst-du-wasser-und-strom": {
+    "datei_sha256": "49ae14087105d424649d2310d68d090d189f5366a661ae76acbf1d3e1b52b6b1",
+    "first": "2026-11-09T12:38:20Z",
+    "grund": "Faktenfrische nicht bestanden: 9151ccc225057698b89d (luecke): Keine Quelle für die genannten Strom‑ und Wasserverbrauchswerte (0,9 kWh/10 l Eco‑Modus, 1,5 kWh/15 l Intensiv‑Modus) bereitgestellt.; ad0ce583b3e26bbb1918 (luecke): Keine Quelle",
+    "hits": 1,
+    "laeufe": [
+      "run:42612645699"
+    ],
+    "last": "2026-11-09T12:38:20Z",
+    "lauf": "run:42612645699",
+    "signatur": "faktenfrische nicht bestanden: <n>ccc<n>b<n>d (luecke): keine quelle für die genannten strom‑ und wasserverbrauchswerte (<n>,<n> kwh/<n> l eco‑modus, <n>,<n> kwh/<n> l intensiv‑modus) bereitgestellt.;"
+  },
+  "2026-11-09-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": {
+    "datei_sha256": "b3867867c3ab7822fe419ca44a4a7bccb707944c8160ffb831c383b8b17be833",
+    "first": "2026-11-09T12:16:05Z",
+    "grund": "Faktenfrische nicht bestanden: 0b564f460c41218244bd (luecke): Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.; 3ad2eefed314eb172c26 (luecke): Die Aussag",
+    "hits": 1,
+    "laeufe": [
+      "run:42612645699"
+    ],
+    "last": "2026-11-09T12:38:20Z",
+    "lauf": "run:42612645699",
+    "signatur": "faktenfrische nicht bestanden: <n>b<n>f<n>c<n>bd (luecke): der artikel behauptet, dass heizöl‑preise ihr tief meist in den monaten januar und februar erreichen, ohne dafür eine quelle anzugeben.; <n>a"
+  },
+  "2026-11-09-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee": {
+    "datei_sha256": "6e80a52a16daf92fb63685709ec374f3dfcfd3fe4bfb152f01ddcaf916faa029",
+    "first": "2026-11-09T12:38:20Z",
+    "grund": "Reserve-Qualitäts-Gate: RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Das macht vier Tassen am Tag oder 1.460 Becher im Jahr.",
+    "hits": 1,
+    "laeufe": [
+      "run:42612645699"
+    ],
+    "last": "2026-11-09T12:38:20Z",
+    "lauf": "run:42612645699",
+    "signatur": "reserve-qualitäts-gate: rs<n>: <n> zahlenbehauptung(en) ohne satzbeleg oder klare modellannahme: das macht vier tassen am tag oder <n>.<n> becher im jahr."
+  },
+  "2026-11-09-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten": {
+    "datei_sha256": "305a28e85804eede673edb88dcdb492c6b531d9d5b8d8254a5f5ad44c9a615d4",
+    "first": "2026-11-09T12:38:20Z",
+    "grund": "Faktenfrische nicht bestanden: 7e542b30e43a78ce22e9 (luecke): Die Angabe zur Erweiterung der Pfandpflicht auf Säfte und Milcherzeugnisse seit Januar 2022 ist eine historische Marktdatenaussage ohne Beleg in den Fundstellen.; 9e659a6f4a12cc2",
+    "hits": 1,
+    "laeufe": [
+      "run:42612645699"
+    ],
+    "last": "2026-11-09T12:38:20Z",
+    "lauf": "run:42612645699",
+    "signatur": "faktenfrische nicht bestanden: <n>e<n>b<n>e<n>a<n>ce<n>e<n> (luecke): die angabe zur erweiterung der pfandpflicht auf säfte und milcherzeugnisse seit januar <n> ist eine historische marktdatenaussage "
+  }
+}

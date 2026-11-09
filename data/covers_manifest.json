@@ -1242,8 +1242,8 @@
   }
  },
  "2026-10-14-heizperiode-vorbereiten-im-spaetsommer": {
-  "title": "Heizperiode vorbereiten im Spätsommer",
-  "ts": "2026-11-05T11:46:56+00:00",
+  "title": "Gasrechnung senken: Heizperiode vorbereiten im Spätsommer",
+  "ts": "2026-11-09T12:08:58+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1404,8 +1404,8 @@
   }
  },
  "2026-10-26-gastarife-vergleichen-vor-dem-herbst": {
-  "title": "Gastarife vergleichen: Kosten, Fristen und Verbrauch prüfen",
-  "ts": "2026-11-05T11:46:53+00:00",
+  "title": "Gasvergleich: Kosten, Fristen und Verbrauch prüfen",
+  "ts": "2026-11-09T12:08:54+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1557,8 +1557,8 @@
   }
  },
  "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden": {
-  "title": "Günstige Flüge für den Spätsommer finden",
-  "ts": "2026-11-07T11:12:48+00:00",
+  "title": "Flugtickets günstig: Günstige Flüge für den Spätsommer",
+  "ts": "2026-11-09T12:09:02+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -1567,7 +1567,7 @@
  },
  "2026-11-09-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten": {
   "title": "Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten",
-  "ts": "2026-11-09T07:29:11+00:00",
+  "ts": "2026-11-09T12:57:32+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1586,6 +1586,69 @@
  "2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check": {
   "title": "WLAN verbessern: Mesh-System oder Repeater im Check?",
   "ts": "2026-11-09T07:29:15+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-11-09-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": {
+  "title": "Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden",
+  "ts": "2026-11-09T12:57:41+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-11-09-geschirrspueler-voll-so-sparst-du-wasser-und-strom": {
+  "title": "Spülmaschine beladen: So sparst du Wasser und Strom",
+  "ts": "2026-11-09T12:57:36+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-11-09-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee": {
+  "title": "Kaffeemaschine Stromverbrauch: Was kostet die Tasse Kaffee?",
+  "ts": "2026-11-09T12:57:45+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-11-09-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten": {
+  "title": "Mehrwegflaschen Pfand: So optimierst du deine Fixkosten",
+  "ts": "2026-11-09T12:57:49+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten": {
+  "title": "Strompreis 2026: Herbst-Check für deine Stromkosten",
+  "ts": "2026-11-09T12:57:53+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-11-09-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
+  "title": "Wie viel Streaming‑Bandbreite: Du wirklich brauchst",
+  "ts": "2026-11-09T12:57:58+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-11-09-wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
+  "title": "WLAN-Frust lösen: So findest du den besten Router Standort",
+  "ts": "2026-11-09T12:58:03+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",

@@ -89,7 +89,7 @@
     "seit": "2026-10-30",
     "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
     "titel": "Energieeffiziente Geräte: So sinken deine Fixkosten",
-    "zuletzt_im_pool": "2026-11-08",
+    "zuletzt_im_pool": "2026-11-09",
     "zustand": "pool"
   },
   "energieeffizienz-im-haushalt-5-schnelle-spartricks": {
@@ -132,7 +132,7 @@
     "seit": "2026-10-30",
     "slug": "2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
     "titel": "Fenster abdichten: So stoppst du Zugluft an alten Rahmen",
-    "zuletzt_im_pool": "2026-11-08",
+    "zuletzt_im_pool": "2026-11-09",
     "zustand": "pool"
   },
   "flugvergleich-im-winter-so-findest-du-echte-billigfluege": {
@@ -146,7 +146,7 @@
     "seit": "2026-11-01",
     "slug": "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck",
     "titel": "Flugverspätung Entschädigung: So holst du dein Geld zurück",
-    "zuletzt_im_pool": "2026-11-08",
+    "zuletzt_im_pool": "2026-11-09",
     "zustand": "pool"
   },
   "frugalismus-familie-clever-sparen-ohne-verzicht": {
@@ -154,6 +154,13 @@
     "slug": "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht",
     "titel": "Frugalismus Familie: Clever sparen ohne Verzicht",
     "zuletzt_im_pool": "2026-10-29",
+    "zustand": "pool"
+  },
+  "gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten": {
+    "seit": "2026-11-09",
+    "slug": "2026-11-09-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
+    "titel": "Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten",
+    "zuletzt_im_pool": "2026-11-09",
     "zustand": "pool"
   },
   "gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
@@ -182,6 +189,13 @@
     "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
     "zustand": "pool"
   },
+  "geschirrspueler-voll-so-sparst-du-wasser-und-strom": {
+    "seit": "2026-11-09",
+    "slug": "2026-11-09-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
+    "titel": "Spülmaschine beladen: So sparst du Wasser und Strom",
+    "zuletzt_im_pool": "2026-11-09",
+    "zustand": "pool"
+  },
   "handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": {
     "seit": "2026-10-07",
     "slug": "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung",
@@ -208,10 +222,10 @@
       "check_length.py"
     ],
     "seit": "2026-10-07",
-    "slug": "2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+    "slug": "2026-11-09-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
     "titel": "Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden",
     "zuletzt_geheilt": "2026-10-29",
-    "zuletzt_im_pool": "2026-11-08",
+    "zuletzt_im_pool": "2026-11-09",
     "zuletzt_reaktiviert": "2026-10-24",
     "zustand": "pool"
   },
@@ -220,6 +234,13 @@
     "slug": "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert",
     "titel": "Internet & DSL-Update: Was sich jetzt für dich ändert",
     "zuletzt_im_pool": "2026-10-06",
+    "zustand": "pool"
+  },
+  "kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee": {
+    "seit": "2026-11-09",
+    "slug": "2026-11-09-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee",
+    "titel": "Kaffeemaschine Stromverbrauch: Was kostet die Tasse Kaffee?",
+    "zuletzt_im_pool": "2026-11-09",
     "zustand": "pool"
   },
   "kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
@@ -239,6 +260,13 @@
     "slug": "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
     "titel": "Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp",
     "zuletzt_im_pool": "2026-09-30",
+    "zustand": "pool"
+  },
+  "mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten": {
+    "seit": "2026-11-09",
+    "slug": "2026-11-09-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
+    "titel": "Mehrwegflaschen Pfand: So optimierst du deine Fixkosten",
+    "zuletzt_im_pool": "2026-11-09",
     "zustand": "pool"
   },
   "oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": {
@@ -272,6 +300,13 @@
     "titel": "Stromkosten senken: Clevere Haushaltsgeräte im Überblick",
     "zuletzt_im_pool": "2026-10-23",
     "zuletzt_reaktiviert": "2026-10-07",
+    "zustand": "pool"
+  },
+  "strompreis-2026-herbst-check-fuer-deine-stromkosten": {
+    "seit": "2026-11-09",
+    "slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+    "titel": "Strompreis 2026: Herbst-Check für deine Stromkosten",
+    "zuletzt_im_pool": "2026-11-09",
     "zustand": "pool"
   },
   "urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": {
@@ -334,6 +369,20 @@
     "titel": "Smart Home: So prüfst du echte Stromersparnis",
     "zuletzt_im_pool": "2026-10-14",
     "zuletzt_reaktiviert": "2026-10-07",
+    "zustand": "pool"
+  },
+  "wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
+    "seit": "2026-11-09",
+    "slug": "2026-11-09-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein",
+    "titel": "Wie viel Streaming‑Bandbreite: Du wirklich brauchst – dein",
+    "zuletzt_im_pool": "2026-11-09",
+    "zustand": "pool"
+  },
+  "wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
+    "seit": "2026-11-09",
+    "slug": "2026-11-09-wlan-frust-loesen-so-findest-du-den-besten-router-standort",
+    "titel": "WLAN-Frust lösen: So findest du den besten Router Standort",
+    "zuletzt_im_pool": "2026-11-09",
     "zustand": "pool"
   },
   "wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
