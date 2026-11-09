@@ -1416,6 +1416,23 @@ history:
     #WLAN #Internet #DNSUndNetzsicherheit #DNSServerWechseln'
   ref: '117586845999926723'
   ai: true
+- posted_at: '2026-11-10T00:48:12.776318+01:00'
+  channel: mastodon
+  slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  title: 'Preisgarantie Gas: Was bei Preiserhöhung hilft'
+  angle: zahl
+  url: https://mastodon.social/@FranksFinanzcheck/117589153983480017
+  ok: true
+  text: '💶 Schütze dich vor plötzlichen Gaspreiserhöhungen
+
+    Eine Gaspreisgarantie dämpft Preissprünge nur bei den vertraglich geschützten
+    Bestandteilen.
+
+    https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+    #Gaspreis #Preisgarantie #Gasrechnung #Heizkosten'
+  ref: '117589153983480017'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1441,4 +1458,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-11-09T15:01:19.790129+01:00'
+updated_at: '2026-11-10T00:48:16.876149+01:00'

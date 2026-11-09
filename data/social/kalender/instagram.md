@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Instagram
 
-> Automatisch aktualisiert: 09.11.2026 15:01 (Europe/Berlin)  
+> Automatisch aktualisiert: 10.11.2026 00:48 (Europe/Berlin)  
 > Profil: https://www.instagram.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `instagram.ics`
 
@@ -12,12 +12,9 @@
 
 ## Kommende Beiträge
 
-### Mo, 09. November 2026
-- **18:45** ⏳ Privathaftpflicht: Warum so wichtig und was sie kostet — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/
 ### Di, 10. November 2026
-- **11:45** ⏳ Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/
+- **11:45** ⏳ Privathaftpflicht: Warum so wichtig und was sie kostet — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/
 ### Do, 12. November 2026
 - **11:45** ⏳ Frugalismus Familie: Clever sparen ohne Verzicht — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/
@@ -34,11 +31,14 @@
 - **11:45** ⏳ Wohngebäudeversicherung Vergleich: Worauf du achten musst — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/
 ### Sa, 21. November 2026
-- **11:45** ⏳ Gaspreiserhöhung Sonderkündigungsrecht — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/
+- **11:45** ⏳ Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/
 ### So, 22. November 2026
 - **11:45** ⏳ Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/
+### Di, 24. November 2026
+- **11:45** ⏳ Gaspreiserhöhung Sonderkündigungsrecht — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/
 
 ## Zuletzt veröffentlicht
 

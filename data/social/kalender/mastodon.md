@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 09.11.2026 15:01 (Europe/Berlin)  
+> Automatisch aktualisiert: 10.11.2026 00:48 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Mo, 09. November 2026
-- **11:30** ⏳ Preisgarantie Gas: Was bei Preiserhöhung hilft — _zahl_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/
 ### Mi, 11. November 2026
 - **07:30** ⏳ Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/
@@ -46,6 +43,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 10.11.2026 00:48 · Preisgarantie Gas: Was bei Preiserhöhung hilft → https://mastodon.social/@FranksFinanzcheck/117589153983480017
 - ✅ 09.11.2026 15:01 · DNS-Server wechseln: Datenschutz, Filter und Einrichtung → https://mastodon.social/@FranksFinanzcheck/117586845999926723
 - ✅ 08.11.2026 23:26 · Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht → https://mastodon.social/@FranksFinanzcheck/117583170393481412
 - ✅ 06.11.2026 20:58 · Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar → https://mastodon.social/@FranksFinanzcheck/117571265279215472
@@ -55,7 +53,6 @@
 - ✅ 03.11.2026 21:09 · Energiediebe stoppen: So kannst du Stromfresser finden → https://mastodon.social/@FranksFinanzcheck/117554322337329380
 - ✅ 03.11.2026 13:52 · Privathaftpflicht: Warum so wichtig und was sie kostet → https://mastodon.social/@FranksFinanzcheck/117552600058173229
 - ✅ 03.11.2026 00:08 · DSL-Vergleich: So findest du den günstigsten Internettarif → https://mastodon.social/@FranksFinanzcheck/117549362262666799
-- ✅ 02.11.2026 14:38 · Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 → https://mastodon.social/@FranksFinanzcheck/117547119746092264
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
