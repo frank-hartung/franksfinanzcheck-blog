@@ -1,8 +1,8 @@
 {
   "target": 6,
   "ready": 2,
-  "pool_size": 8,
-  "generated_at": "2026-11-09T12:38:20Z",
+  "pool_size": 11,
+  "generated_at": "2026-11-09T16:15:54Z",
   "candidates": [
     {
       "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
@@ -41,9 +41,25 @@
     {
       "slug": "2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
       "ready": false,
-      "sha256": "bd69fd006c8b388fe54d1271cfcd5e8ea81097547cb104cc45c8e9dde20ee3a0",
-      "measured_at": "2026-11-09T12:32:41Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
+      "sha256": "2b538352069fe1b2c002ad8e2a85e3f52cf4c11a8505bd1cd515a5829de66b30",
+      "flesch": 66.1,
+      "measured_at": "2026-11-09T16:14:53Z",
+      "reason": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: ide",
+      "details": [
+        "🛑 2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
+        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…hinweis dieser artikel dient ausschließlich der allgemeinen information und stellt…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…keine anlage rechts oder steuerberatung dar prüfe konditionen und bedingungen…“ – doppelte Passage, manuell reparieren",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 0.972,
+      "parts": {
+        "spelling": 0.92,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
     },
     {
       "slug": "2026-11-09-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
@@ -159,11 +175,93 @@
         "affiliate": 1.0,
         "readability": 0.95
       }
+    },
+    {
+      "slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "ready": false,
+      "sha256": "32da796daeacbabe7a247da4822fe91f12f0c72ccfadbad5dc43c03e7de84ed6",
+      "flesch": 67.9,
+      "measured_at": "2026-11-09T16:14:54Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 8 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Ich empfehle meistens Laufzeiten von maximal 12 Monaten.",
+      "details": [
+        "RS5: 8 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Ich empfehle meistens Laufzeiten von maximal 12 Monaten."
+      ],
+      "score": 0.944,
+      "parts": {
+        "spelling": 0.9,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 0.96,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-11-09-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein",
+      "ready": false,
+      "sha256": "985808ae3cb435911d8cf96b04e6014d7777e0ed95d6d07d6707cee59353b215",
+      "flesch": 61.7,
+      "measured_at": "2026-11-09T16:14:57Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Addiere den Bandbreitenbedarf jedes Geräts und lege einen Puffer von etwa 10 % für Schwankungen ein.",
+      "details": [
+        "RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Addiere den Bandbreitenbedarf jedes Geräts und lege einen Puffer von etwa 10 % für Schwankungen ein.",
+        "Umfang: 647 Wörter / 4482 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
+      ],
+      "score": 0.82,
+      "parts": {
+        "spelling": 0.86,
+        "meta": 0.5499999999999999,
+        "structure": 0.7,
+        "typography": 0.7,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-11-09-wlan-frust-loesen-so-findest-du-den-besten-router-standort",
+      "ready": false,
+      "sha256": "a312a41348d09164062bfd0f9a0807b8c9fdeefdcdf73ca325d5499e23057ea8",
+      "flesch": 73.0,
+      "measured_at": "2026-11-09T16:15:54Z",
+      "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+      "details": [
+        "🛑 2026-11-09-wlan-frust-loesen-so-findest-du-den-besten-router-standort: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+        "Profi-Affiliate-Check nicht bestanden: A3: nur 0 interne Links (< 2)",
+        "Affiliate-Link-Integrität nicht bestanden (defekte/nicht gerenderte CTA): /go/dsl-anbieterwechsel/ nicht registriert; /go/dsl-anbieterwechsel/ wird gerendert, ist aber nicht in check24_links.yaml registriert",
+        "Werbekennzeichnung nicht bestanden (fehlt, steht hinter dem ersten Partnerlink oder nennt falsche Zahl/Partner): [O3] beworbene Ziele fehlen im Register data/affiliate_ziele.yaml: dsl-anbieterwechsel; [O3] genannte Partner ['CHECK24', 'Partner (dsl-anbieterwechsel)'] ≠ tatsächlich verlinkte Partner ['CHECK24']",
+        "Affiliate-Intent nicht bestanden (Link liefert ein anderes Produkt als Anker/Satz versprechen): IW0 Zeile 161: Route /go/dsl-anbieterwechsel/ ist nicht in scripts/check24_links.yaml registriert – Ziel unbekannt, keine Beweisbarkeit",
+        "Textverständnis-Gate nicht bestanden: R7-INTRO-FORMEL: „in diesem artikel“ ×1 (Template-Sprache – umformulieren)",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft).",
+        "Messfassung wurde durch die Gate-Vorheilung verändert und danach bytegenau zurückgestellt – der Befund oben gilt für die HEILFASSUNG, nicht für die Datei auf der Platte (Vorheilung prüft seit #884 den Publikations-Vertrag)"
+      ],
+      "score": 0.909,
+      "parts": {
+        "spelling": 0.84,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 0.74,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "42612645699",
+    "kind": "partial",
+    "run_id": "42652236555",
     "run_attempt": "1"
+  },
+  "recert": {
+    "at": "2026-11-09T16:15:54Z",
+    "renewed": [
+      "2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
+      "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "2026-11-09-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein",
+      "2026-11-09-wlan-frust-loesen-so-findest-du-den-besten-router-standort"
+    ],
+    "tool": "scripts/reserve_recert.py"
   }
 }
