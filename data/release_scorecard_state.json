@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "generated_at": "2026-11-09T19:34:03Z",
+  "generated_at": "2026-11-09T21:11:46Z",
   "modus": "kandidaten",
-  "commit": "25e40a3048bbe9b551110877b04b713de64b385c",
+  "commit": "472cfa01e9e35e63a3bfda1a5e8fc0a1d8e3a4b9",
   "kapazitaet": {
     "stichtag": "2026-11-09",
     "basis": "2026-11-09",
     "projiziert": false,
-    "artikel": 125,
-    "faellig": 4,
+    "artikel": 126,
+    "faellig": 3,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
@@ -19,9 +19,9 @@
     "budget": 4,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 4.0,
-    "bedarf_je_tag": 3.056,
-    "bedarf_je_woche": 21.4,
-    "deckung_prozent": 130.9,
+    "bedarf_je_tag": 3.067,
+    "bedarf_je_woche": 21.5,
+    "deckung_prozent": 130.4,
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
@@ -31,7 +31,7 @@
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
     "verletzungen": [],
-    "offen_im_horizont": 125,
+    "offen_im_horizont": 126,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
@@ -50,7 +50,7 @@
     "empfohlenes_budget": 4,
     "empfehlung_erreicht": true,
     "hartes_limit": 16,
-    "spitze_geprueft": 58
+    "spitze_geprueft": 60
   },
   "ursachen": [
     {
