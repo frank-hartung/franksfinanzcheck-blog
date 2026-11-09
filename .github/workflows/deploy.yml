@@ -509,7 +509,9 @@ jobs:
       - name: H1-Wache – Quell- und Layoutvertrag (genau eine H1)
         run: |
           python3 scripts/h1_wache.py --selftest
-          python3 -m unittest scripts.tests.test_h1_wache scripts.tests.test_a11y_audit
+          # Ein roter Test nennt seinen Namen als Annotation (#1137).
+          python3 scripts/ci_tests.py --titel "H1-Wache – Tests" -- \
+            python3 -m unittest scripts.tests.test_h1_wache scripts.tests.test_a11y_audit
           python3 scripts/h1_wache.py --source-only
 
       # ===== URL-HYGIENE-GATE (PREMIUM-FIX 03.09.2026) =====================
@@ -692,11 +694,13 @@ jobs:
           python3 scripts/weiterleitungen.py --selftest
           python3 scripts/weiterleitungen.py --check
           python3 scripts/weiterleitungen.py --verify
-          python3 -m unittest scripts.tests.test_weiterleitungen
+          python3 scripts/ci_tests.py --titel "Weiterleitungen – Tests" -- \
+            python3 -m unittest scripts.tests.test_weiterleitungen
           # Regel F (Konsolidierung) rechnet ihre drei Belege selbst nach –
           # auch für Einträge, die in der Quelle noch gar nicht stehen.
           python3 scripts/konsolidierung.py --selftest
-          python3 -m unittest scripts.tests.test_konsolidierung
+          python3 scripts/ci_tests.py --titel "Konsolidierung – Tests" -- \
+            python3 -m unittest scripts.tests.test_konsolidierung
           # Und die Alternative zur Konsolidierung: Für jedes im Register
           # dokumentierte Rollenpaar (Feld `paar`) müssen Struktur,
           # Entscheidung, Frist und Rollenlink stehen. Am 30.10.2026 hatte
@@ -882,7 +886,7 @@ jobs:
         run: python3 scripts/faktenfrische.py --selftest
 
       - name: Faktenfrische Gas – Rückfallschutz #996
-        run: python3 -m unittest scripts.tests.test_faktenfrische_996
+        run: python3 scripts/ci_tests.py --titel "Faktenfrische Gas" -- python3 -m unittest scripts.tests.test_faktenfrische_996
 
       - name: Publish-Gate (harte Qualitäts-, Affiliate-, Fakten- und YMYL-Freigaben)
         run: python3 scripts/publish_gate.py
@@ -912,7 +916,13 @@ jobs:
       - name: KI-Transparenz – Text, Bild und Provenienz testen
         run: |
           command -v hugo
-          python3 -m unittest scripts.tests.test_ki_transparenz_render scripts.tests.test_ki_cover_provenienz scripts.tests.test_ki_cover_generator_schutz scripts.tests.test_ki_cover_render_audit scripts.tests.test_ki_provenienz_render scripts.tests.test_ki_bild_markierung -v
+          # DER SCHRITT, DER DIE AUSLIEFERUNG ANHIELT (#1137, 08.11.2026).
+          # Er war rot und sagte nur „exit code 1" – die Ursache (ein
+          # Render-Prüfstand ohne den Modalitäten-Helfer, #1129) stand allein
+          # im flüchtigen Log. Jetzt nennt jeder rote Test seinen Namen als
+          # Annotation, unabhängig davon, ob jemand an das Log kommt.
+          python3 scripts/ci_tests.py --titel "KI-Transparenz" -- \
+            python3 -m unittest scripts.tests.test_ki_transparenz_render scripts.tests.test_ki_cover_provenienz scripts.tests.test_ki_cover_generator_schutz scripts.tests.test_ki_cover_render_audit scripts.tests.test_ki_provenienz_render scripts.tests.test_ki_bild_markierung -v
 
       - name: KI-Cover – Herkunft und Originaldatei prüfen
         run: python3 scripts/ki_cover_provenienz.py --gate

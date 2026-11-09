@@ -138,38 +138,18 @@ jobs:
       - name: Code-Regression – Suite und Selbsttests
         if: ${{ !cancelled() }}
         run: |
-          # EIN ROTER TEST MUSS SEINEN NAMEN SAGEN (08.11.2026).
+          # EIN ROTER TEST MUSS SEINEN NAMEN SAGEN (08.11.2026, #1137).
           # „Process completed with exit code 1" ist keine Diagnose: Ohne den
           # Testnamen beginnt jede Ferndiagnose mit Raten – und wer die Logs
           # nicht abrufen kann (Sandbox, Aufbewahrungsfrist), kommt gar nicht
           # an die Ursache. Jeder rote Test wird deshalb als Annotation an den
           # Lauf gehängt (lesbar über die Check-Runs-API, unabhängig vom Log).
-          set +e
-          python3 -m unittest discover -s scripts/tests -v > /tmp/suite.log 2>&1
-          SUITE_RC=$?
-          set -e
-          tail -120 /tmp/suite.log
-          if [ "$SUITE_RC" != "0" ]; then
-            # Name UND Behauptung: Der Name sagt, WER rot ist, der Rumpf sagt,
-            # WARUM. Ohne beides endet jede Ferndiagnose in „nochmal raten".
-            python3 - <<'PYANNO'
-          import re
-          import pathlib
-
-          def ent(text: str) -> str:
-              # GitHub-Annotation: %, Zeilenumbrüche und CR maskieren.
-              return (text.replace('%', '%25').replace('\r', '')
-                          .replace('\n', '%0A'))[:1500]
-
-          log = pathlib.Path('/tmp/suite.log').read_text(errors='ignore')
-          muster = re.compile(r'^(FAIL|ERROR): (\S+) \((.*?)\)\n-+\n(.*?)'
-                              r'(?=\n(?:={20,}|-{20,}|Ran \d+ tests))', re.S | re.M)
-          for art, name, ort, rumpf in list(muster.findall(log))[:10]:
-              print(f"::error title=Code-Regression::{ent(name)} ({ent(ort)})"
-                    f" %0A{ent(rumpf)}")
-          PYANNO
-            exit 1
-          fi
+          # Die Auswertung steht in `scripts/ci_tests.py` – EINE Umsetzung für
+          # alle Testschritte. Sie stand vorher dreimal als Kopie im Workflow;
+          # Regel V7 der Workflow-Wache verhindert, dass ein Schritt wieder
+          # an ihr vorbeiläuft. Der Exit-Code der Suite bleibt unverändert.
+          python3 scripts/ci_tests.py --titel "Code-Regression" \
+            --log /tmp/suite.log -- python3 -m unittest discover -s scripts/tests -v
           python3 scripts/engine_generate.py --selftest
           python3 scripts/reserve_pool.py --selftest
           python3 scripts/cadence_guard.py --selftest
@@ -189,19 +169,10 @@ jobs:
         run: |
           # Dieselbe Diagnose wie in der Code-Regression: Der rote Test nennt
           # seinen Namen (und seine Behauptung) als Annotation, unabhängig
-          # davon, ob jemand an das Log kommt.
-          set +e
-          set -o pipefail
-          python3 scripts/selftest_clock.py --trap-discover scripts/tests --offset 97 \
-            > /tmp/uhr.log 2>&1
-          UHR_RC=$?
-          set -e
-          tail -80 /tmp/uhr.log
-          if [ "$UHR_RC" != "0" ]; then
-            grep -E '^(FAIL|ERROR): ' /tmp/uhr.log | head -5 \
-              | sed -E 's/^[A-Z]+: ([^ (]+).*/::error title=Uhr-Probe::\1/' || true
-            exit "$UHR_RC"
-          fi
+          # davon, ob jemand an das Log kommt. Auch hier: EINE Umsetzung
+          # (`scripts/ci_tests.py`), kein zweiter Kopierblock.
+          python3 scripts/ci_tests.py --titel "Uhr-Probe" --log /tmp/uhr.log -- \
+            python3 scripts/selftest_clock.py --trap-discover scripts/tests --offset 97
       # KI-PROBE (Dauerheilung Content-Engine v2 #138, 08.10.2026): Jeder
       # Selbsttest, den irgendein Workflow aufruft, läuft hier mit Attrappen-
       # Schlüsseln und gesperrtem Netz. Hier fehlen echte Schlüssel – in der
