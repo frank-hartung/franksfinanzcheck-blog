@@ -2,9 +2,9 @@
   {
     "suchbegriff": "100 mbit internet monatlich kündbar",
     "clicks": 0,
-    "impressions": 54,
+    "impressions": 58,
     "ctr": 0.0,
-    "position": 47.11
+    "position": 46.1
   },
   {
     "suchbegriff": "250 mbit internet monatlich kündbar",
@@ -58,9 +58,16 @@
   {
     "suchbegriff": "dsl ohne vertragslaufzeit oder mit 24 monaten – was lohnt sich mehr?",
     "clicks": 0,
+    "impressions": 2,
+    "ctr": 0.0,
+    "position": 17.5
+  },
+  {
+    "suchbegriff": "dsl ratgeber",
+    "clicks": 0,
     "impressions": 1,
     "ctr": 0.0,
-    "position": 19.0
+    "position": 14.0
   },
   {
     "suchbegriff": "dsl und mobilfunk",
@@ -169,6 +176,13 @@
   },
   {
     "suchbegriff": "ich suche ein gerät, das mir hilft, die gesamtbetriebskosten jahr für jahr zu senken.",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 4.0
+  },
+  {
+    "suchbegriff": "ich will heute noch zu ökostrom wechseln. welche anbieter haben den schnellsten online-wechselprozess?",
     "clicks": 0,
     "impressions": 1,
     "ctr": 0.0,
