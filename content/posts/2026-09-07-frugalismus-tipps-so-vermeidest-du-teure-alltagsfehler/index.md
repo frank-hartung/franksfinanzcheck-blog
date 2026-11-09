@@ -56,6 +56,10 @@ Gute **[Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-c
 
 *Abbildung: Merkkarte zu „Alltagsfehler vermeiden: 5 [Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) im Überblick“ (eigene Darstellung aus diesem Beitrag).*
 
+![Merkkarte: Kernaussagen zu Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte zu „Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick“ (eigene Darstellung aus diesem Beitrag).*
+
 ## Das Wichtigste in Kürze
 
 - **Fehlkäufe bremsen:** Kurze Wartezeiten vor dem Kauf stoppen viele Impulsentscheidungen.
@@ -147,6 +151,10 @@ Richte deine Sparziele an deinen echten Ausgaben aus. [Destatis](https://www.des
 Lebensmittel kosteten im Oktober 0,4 Prozent mehr. Diese Mittelwerte gelten nicht automatisch für deinen Haushalt.
 
 Meal Prep kann trotzdem viel sparen, wenn du häufig teuer außer Haus isst. Hast du diese Ausgabe kaum, prüfe zuerst Energie-, Wohn- und Vertragskosten. Vergleiche im Haushaltsbuch deine eigenen Vormonatsausgaben und aktualisiere die Planung, wenn sich deine tatsächlichen Preise ändern. Die nachfolgenden Euro-Beträge bleiben Modellrechnungen.
+
+![Gliederung des Beitrags: Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung zu „Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick“ – 5 Stationen von „Warum diese Frugalismus-Tipps dein Mindset verändern“ bis „Trick 2: Das Prinzip der No-Spend-Weekends“ (eigene Darstellung).*
 
 ## Trick 4: Meal Prepping und der Wocheneinkauf
 

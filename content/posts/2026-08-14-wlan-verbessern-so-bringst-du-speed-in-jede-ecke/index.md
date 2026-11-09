@@ -53,6 +53,10 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 *Abbildung: Merkkarte zu „WLAN verbessern: So bringst du stabilen Speed in jede Ecke“ (eigene Darstellung aus diesem Beitrag).*
 
+![Merkkarte: Kernaussagen zu WLAN verbessern: So bringst du stabilen Speed in jede Ecke](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte zu „WLAN verbessern: So bringst du stabilen Speed in jede Ecke“ (eigene Darstellung aus diesem Beitrag).*
+
 ## Die häufigsten WLAN-Bremsen im Haushalt
 
 Bevor du Geld für neue Hardware ausgibst, prüfe die Störfaktoren in der Wohnung. Diese Punkte bremsen WLAN am häufigsten:
@@ -136,6 +140,10 @@ Mietest du den Router für 5 bis 8 € und hast trotzdem Funklöcher? Dann zahl
 7. **Nach 7 Tagen erneut messen.** Dieselbe Uhrzeit, dieselben drei Orte. Nur Zahlen beweisen, dass die Maßnahme wirkt.
 
 ![Gliederung des Beitrags: WLAN verbessern: So bringst du stabilen Speed in jede Ecke](abbildung-ablauf. svg)
+
+*Abbildung: Gliederung zu „WLAN verbessern: So bringst du stabilen Speed in jede Ecke“ – 5 Stationen von „Die häufigsten WLAN-Bremsen im Haushalt“ bis „Typische WLAN-Fehler, die Speed fressen“ (eigene Darstellung).*
+
+![Gliederung des Beitrags: WLAN verbessern: So bringst du stabilen Speed in jede Ecke](abbildung-ablauf.svg)
 
 *Abbildung: Gliederung zu „WLAN verbessern: So bringst du stabilen Speed in jede Ecke“ – 5 Stationen von „Die häufigsten WLAN-Bremsen im Haushalt“ bis „Typische WLAN-Fehler, die Speed fressen“ (eigene Darstellung).*
 

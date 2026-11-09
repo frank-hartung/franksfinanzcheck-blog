@@ -46,6 +46,10 @@ faktencheck: 2026-10-14
 
 *Abbildung: Merkkarte zu „Last Minute Urlaub: So [findest du echte](../../posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/) Reiseschnäppchen“ (eigene Darstellung aus diesem Beitrag).*
 
+![Merkkarte: Kernaussagen zu Last Minute Urlaub: So findest du echte Reiseschnäppchen](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte zu „Last Minute Urlaub: So findest du echte Reiseschnäppchen“ (eigene Darstellung aus diesem Beitrag).*
+
 ## Last-Minute-Urlaub: So ordnest du mögliche Preisvorteile ein
 
  Nachlässe von bis zu 50 % seien Einzelfälle; das ist ein Modellwert. Sie sind keine verlässliche Erwartung ([Einordnung zu Last-Minute-Angeboten](https://www.welt.de/reise/article6a327762e495aff7b58467a5/last-minute-urlaub-winken-wirklich-die-besten-schnaeppchen-wenn-man-auf-den-letzten-druecker-bucht.html)).
@@ -159,6 +163,10 @@ Auf dieser Annahme wäre Angebot B um 40 € günstiger. Das gilt nur, wenn Rei
 ![Gliederung des Beitrags: Last Minute Urlaub: So findest du echte Reiseschnäppchen](abbildung-ablauf. svg)
 
 *Abbildung: Gliederung zu „Last Minute Urlaub: So findest du echte Reiseschnäppchen“ – 5 Stationen von „Last-Minute-Urlaub: So ordnest du mögliche Preisvorteile ein“ bis „Typische Fehler, die das [Urlaubsbudget](../../posts/2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub/) belasten“ (eigene Darstellung).*
+
+![Gliederung des Beitrags: Last Minute Urlaub: So findest du echte Reiseschnäppchen](abbildung-ablauf.svg)
+
+*Abbildung: Gliederung zu „Last Minute Urlaub: So findest du echte Reiseschnäppchen“ – 5 Stationen von „Last-Minute-Urlaub: So ordnest du mögliche Preisvorteile ein“ bis „Typische Fehler, die das Urlaubsbudget belasten“ (eigene Darstellung).*
 
 ## Checkliste vor der Buchung
 

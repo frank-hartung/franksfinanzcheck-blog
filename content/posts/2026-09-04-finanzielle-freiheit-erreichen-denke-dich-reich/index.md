@@ -62,6 +62,10 @@ Willst du echte **[finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-du
 
 *Abbildung: Merkkarte zu „[Finanzielle Freiheit](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/) erreichen: Denke dich reich – Geld“ (eigene Darstellung aus diesem Beitrag).*
 
+![Merkkarte: Kernaussagen zu Finanzielle Freiheit erreichen: Denke dich reich – Geld](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte zu „Finanzielle Freiheit erreichen: Denke dich reich – Geld“ (eigene Darstellung aus diesem Beitrag).*
+
 ## Warum scheitern die meisten daran, finanzielle Freiheit erreichen zu wollen?
 
 Viele halten hohes Einkommen für Wohlstand. Du siehst den Sportwagen vom Nachbarn.
@@ -194,6 +198,10 @@ Lies Bücher und seriöse Quellen. Wer mehr weiß, bleibt ruhig. Kontinuität sc
 7. **Monatliche Review** (15 Minuten): Soll‑Ist‑Vergleich, Anpassungen.
 
 ![Gliederung des Beitrags: Finanzielle Freiheit erreichen: Denke dich reich – Geld](abbildung-ablauf. svg)
+
+*Abbildung: Gliederung zu „Finanzielle Freiheit erreichen: Denke dich reich – Geld“ – 5 Stationen von „Warum scheitern die meisten daran, finanzielle Freiheit erreichen zu wollen?“ bis „So gehst du vor: Deine ersten Schritte“ (eigene Darstellung).*
+
+![Gliederung des Beitrags: Finanzielle Freiheit erreichen: Denke dich reich – Geld](abbildung-ablauf.svg)
 
 *Abbildung: Gliederung zu „Finanzielle Freiheit erreichen: Denke dich reich – Geld“ – 5 Stationen von „Warum scheitern die meisten daran, finanzielle Freiheit erreichen zu wollen?“ bis „So gehst du vor: Deine ersten Schritte“ (eigene Darstellung).*
 

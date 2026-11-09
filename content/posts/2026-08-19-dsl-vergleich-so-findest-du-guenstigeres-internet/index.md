@@ -57,6 +57,10 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 *Abbildung: Merkkarte zu „[DSL-Vergleich](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/): So findest du den günstigsten Internettarif“ (eigene Darstellung aus diesem Beitrag).*
 
+![Merkkarte: Kernaussagen zu DSL-Vergleich: So findest du den günstigsten Internettarif](abbildung-merkkarte.svg)
+
+*Abbildung: Merkkarte zu „DSL-Vergleich: So findest du den günstigsten Internettarif“ (eigene Darstellung aus diesem Beitrag).*
+
 ## Wie berechnest du den echten Effektivpreis?
 
 Verlasse dich nicht auf die plakative Grundgebühr der ersten Monate. Addiere stattdessen alle Kostenfaktoren über die vollen 24 Monate:. Das ist ein Modellwert.
@@ -134,6 +138,10 @@ Ein Bestandskunden-Tarif ohne Rabatt kostet oft ca. 45 € plus Hardware; das i
 **Stille Vertragsverlängerungen.** Zwar ist nach 24 Monaten eine monatliche Kündigung gesetzlich Standard, aber Provider bieten oft „Tarif-Optimierungen“ an, die eine neue 24-monatige Bindung auslösen; das ist ein Rechenbeispiel. Prüfe solche Angebote kritisch auf ihre Flexibilität.
 
 ![Gliederung des Beitrags: DSL-Vergleich: So findest du den günstigsten Internettarif](abbildung-ablauf. svg)
+
+*Abbildung: Gliederung zu „DSL-Vergleich: So findest du den günstigsten Internettarif“ – 5 Stationen von „Wie berechnest du den echten Effektivpreis?“ bis „In drei Schritten zum neuen Internetanschluss“ (eigene Darstellung).*
+
+![Gliederung des Beitrags: DSL-Vergleich: So findest du den günstigsten Internettarif](abbildung-ablauf.svg)
 
 *Abbildung: Gliederung zu „DSL-Vergleich: So findest du den günstigsten Internettarif“ – 5 Stationen von „Wie berechnest du den echten Effektivpreis?“ bis „In drei Schritten zum neuen Internetanschluss“ (eigene Darstellung).*
 
