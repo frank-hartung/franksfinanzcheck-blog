@@ -1,59 +1,29 @@
 {
   "target": 6,
-  "ready": 5,
+  "ready": 1,
   "pool_size": 6,
   "generated_at": "2026-11-06T14:16:14Z",
   "candidates": [
     {
       "slug": "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem",
-      "ready": true,
+      "ready": false,
       "sha256": "ad0969c0a822afc57b2282b2d9f66fb4d39733404375d046a7826bfd20ceda8e",
-      "flesch": 67.1,
       "measured_at": "2026-11-06T11:22:44Z",
-      "score": 0.986,
-      "parts": {
-        "spelling": 1.0,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.96,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
-      "ready": true,
+      "ready": false,
       "sha256": "a9ca42a6a43af5b859bdc5e4460e06fbc7e9e4919345f89d062863cf07ba8456",
-      "flesch": 67.3,
       "measured_at": "2026-11-06T11:23:48Z",
-      "score": 0.962,
-      "parts": {
-        "spelling": 0.88,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.96,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck",
-      "ready": true,
+      "ready": false,
       "sha256": "722e590d7e31e5406851c4b421c5c3130c816ef23b6f3986fb2f25c102db8f7b",
-      "flesch": 72.0,
       "measured_at": "2026-11-06T11:24:52Z",
-      "score": 0.93,
-      "parts": {
-        "spelling": 0.9,
-        "meta": 0.85,
-        "structure": 1.0,
-        "typography": 0.92,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.9
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
@@ -80,20 +50,10 @@
     },
     {
       "slug": "2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "ready": true,
+      "ready": false,
       "sha256": "dbd4d9293d2dbfad330da6d9b281e58fc454bbdb533793ea1f371ded48734bdd",
-      "flesch": 70.8,
       "measured_at": "2026-11-06T11:26:58Z",
-      "score": 0.996,
-      "parts": {
-        "spelling": 0.98,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
