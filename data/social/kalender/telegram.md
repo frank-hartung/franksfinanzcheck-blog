@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 08.11.2026 23:57 (Europe/Berlin)  
+> Automatisch aktualisiert: 09.11.2026 15:01 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -12,6 +12,9 @@
 
 ## Kommende Beiträge
 
+### Mo, 09. November 2026
+- **18:00** ⏳ Privathaftpflicht: Warum so wichtig und was sie kostet — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/
 ### Sa, 14. November 2026
 - **07:00** ⏳ Frugalismus Familie: Clever sparen ohne Verzicht — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/

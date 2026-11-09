@@ -1399,6 +1399,23 @@ history:
     #Frugalismus #Geldsparen #Tagesgeld #Zinsen'
   ref: '117583170393481412'
   ai: true
+- posted_at: '2026-11-09T15:01:15.800333+01:00'
+  channel: mastodon
+  slug: 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet
+  title: 'DNS-Server wechseln: Datenschutz, Filter und Einrichtung'
+  angle: zahl
+  url: https://mastodon.social/@FranksFinanzcheck/117586845999926723
+  ok: true
+  text: 'Sicheres Surfen: Verschlüsselte DNS‑Anfragen schützen deine Daten. 🔒
+
+    Öffentliche DNS‑Server bieten DoH/DoT – deine Anfragen bleiben privat, Bandbreite
+    bleibt unverändert.
+
+    https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+
+    #WLAN #Internet #DNSUndNetzsicherheit #DNSServerWechseln'
+  ref: '117586845999926723'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1424,4 +1441,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-11-08T23:57:08.381994+01:00'
+updated_at: '2026-11-09T15:01:19.790129+01:00'
