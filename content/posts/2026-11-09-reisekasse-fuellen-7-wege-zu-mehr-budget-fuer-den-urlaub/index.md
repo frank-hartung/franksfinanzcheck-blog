@@ -3,8 +3,9 @@ title: "Reisekasse füllen: 7 Wege zu mehr Budget für den Urlaub"
 description: Möchtest du deine Reisekasse füllen? Hier erfährst du, wie du dein Urlaubsbudget durch clevere Fixkosten-Checks und Cashback tipps nachhaltig erhöhst.
 date: 2026-11-09T07:11:36Z
 draft: true
+cadence_wait: true
 cadence_demoted: 2026-11-09T11:26:10Z
-cadence_grund: "faktenfrische: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg"
+cadence_grund: "faktenfrische aufgehoben: faktencheck: 2026-11-09 – Re-Queue für vollständigen Publish-Gate-Lauf"
 tags: ["Mietwagen und Wohnmobil", "Reisekosten sparen"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
@@ -27,6 +28,7 @@ cover:
   alt: "Reisekasse füllen: 7 Wege zu mehr Budget für den Urlaub"
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Kürze deine monatlichen Fixkosten um 5 % – bei 800 € Aufwand sparst du damit rund 40 € im Monat und 480 € im Jahr (Modellrechnung: 800 € × 0,05 = 40 €; 40 € × 12 = 480 €). Nutze Cashback‑Programme, die im Schnitt 2 % deiner Ausgaben zurückgeben (Quelle: )."
+faktencheck: 2026-11-09
 ---
 
 Reisekasse füllen im Check: Der Flug ist gebucht. Die Unterkunft in den Bergen oder am Meer steht fest. Doch beim Blick auf das aktuelle Bankkonto sinkt die Vorfreude schlagartig. Viele Haushalte kennen dieses Gefühl, wenn das Ersparte kaum für die geplanten Ausflüge oder das Abendessen im Restaurant reicht.

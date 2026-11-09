@@ -2,12 +2,12 @@
 
 _Stand 2026-11-09 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**107 offene Befunde auf 26 Seiten · davon 19 Live-Seiten mit 77 Befunden · ältester 10 Tage · Frist 14 Tage.**
+**117 offene Befunde auf 28 Seiten · davon 19 Live-Seiten mit 77 Befunden · ältester 10 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 107 |
-| Seiten betroffen | 26 (davon live: 19) |
+| Offene Befunde | 117 |
+| Seiten betroffen | 28 (davon live: 19) |
 | Text seit dem Befund geändert | 92 |
 | Altbestand ohne Fassungs-Hash | 15 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
@@ -32,11 +32,11 @@ _Stand 2026-11-09 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 107 von 107 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 107 von 117 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
-### `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026` · **LIVE** (nicht beweisbar) · Risikoklasse standard · 3 Befund(e)
+### `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
 
 Datei: `content/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/index.md`
 
@@ -52,7 +52,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 32a3ea879f2cf126b3a
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden c583efe1ce02df3ca2d7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden` · **LIVE** (nicht beweisbar) · Risikoklasse standard · 5 Befund(e)
+### `2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
 
 Datei: `content/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/index.md`
 
@@ -72,7 +72,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden db8a69f08dc0020adeb
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e834f4702e87194affe7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen` · **LIVE** (nicht beweisbar) · Risikoklasse standard · 5 Befund(e)
+### `2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
 
 Datei: `content/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/index.md`
 
@@ -92,7 +92,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden ab4d084fd367c8e4d51
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d215addd22dea72c44df --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor` · **LIVE** (nicht beweisbar) · Risikoklasse standard · 5 Befund(e)
+### `2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
 
 Datei: `content/posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/index.md`
 
@@ -112,7 +112,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden c27c182c615bd7ca3b7
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e1e40e9bbbdd109df86e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro` · **LIVE** (nicht beweisbar) · Risikoklasse standard · 5 Befund(e)
+### `2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
 
 Datei: `content/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/index.md`
 
@@ -132,7 +132,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden d41f0d5ce8798df0211
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e139d0769faadd04392a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` · **LIVE** (nicht beweisbar) · Risikoklasse standard · 3 Befund(e)
+### `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
 
 Datei: `content/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/index.md`
 
@@ -148,7 +148,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden a7f5f01ef15a38839a0
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden bcc2bdf06220d5097133 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust` · **LIVE** (nicht beweisbar) · Risikoklasse standard · 3 Befund(e)
+### `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
 
 Datei: `content/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/index.md`
 
@@ -164,7 +164,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1158934e7a18c7b2099
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3716cfd3ab5aec6d774b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen` · **LIVE** (nicht beweisbar) · Risikoklasse standard · 5 Befund(e)
+### `2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
 
 Datei: `content/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/index.md`
 
@@ -184,7 +184,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden e2975509f3f130de075
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f1704e45e970a8f4b078 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren` · **LIVE** (nicht beweisbar) · Risikoklasse erhoeht · 5 Befund(e)
+### `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren` · **LIVE** (blockiert) · Risikoklasse erhoeht · 5 Befund(e)
 
 Datei: `content/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/index.md`
 
@@ -204,7 +204,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden a25bb6bbcb25ba8b0e2
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f94f8ba1e4342e67e45a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier` · **LIVE** (nicht beweisbar) · Risikoklasse standard · 5 Befund(e)
+### `2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
 
 Datei: `content/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/index.md`
 
@@ -224,7 +224,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden baed76dc211bd15dd46
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d7c3cfb422310cf26ca6 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen` · **LIVE** (nicht beweisbar) · Risikoklasse erhoeht · 5 Befund(e)
+### `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen` · **LIVE** (blockiert) · Risikoklasse erhoeht · 5 Befund(e)
 
 Datei: `content/posts/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen/index.md`
 
@@ -244,7 +244,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden f9aff86b6eba71b153a
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden fed9215b770ea4879eda --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` · **LIVE** (nicht beweisbar) · Risikoklasse standard · 2 Befund(e)
+### `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` · **LIVE** (blockiert) · Risikoklasse standard · 2 Befund(e)
 
 Datei: `content/posts/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich/index.md`
 
@@ -258,7 +258,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 20c08cb650ef6e24af6
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6aafb23c0c6dbb06ce3b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum` · **LIVE** (nicht beweisbar) · Risikoklasse standard · 3 Befund(e)
+### `2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
 
 Datei: `content/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/index.md`
 
@@ -274,7 +274,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4816322f061dfdc03bc
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7017065ee7c74c7ae452 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler` · **LIVE** (nicht beweisbar) · Risikoklasse standard · 3 Befund(e)
+### `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
 
 Datei: `content/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/index.md`
 
@@ -290,7 +290,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 81c6a707139046b83cc
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8cc00288af8a1f2b02d8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag` · **LIVE** (nicht beweisbar) · Risikoklasse standard · 3 Befund(e)
+### `2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
 
 Datei: `content/posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/index.md`
 
@@ -306,7 +306,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden e48f9237cff6397c49a
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f6de6b078d49f9d42e0e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026` · **LIVE** (nicht beweisbar) · Risikoklasse standard · 2 Befund(e)
+### `2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026` · **LIVE** (blockiert) · Risikoklasse standard · 2 Befund(e)
 
 Datei: `content/posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/index.md`
 
@@ -320,7 +320,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6cb2229c5eb83b02da2
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f00055a1cb65ee22165f --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden` · **LIVE** (nicht beweisbar) · Risikoklasse standard · 5 Befund(e)
+### `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
 
 Datei: `content/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/index.md`
 
@@ -340,7 +340,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden ab16029999747466a63
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden b057dee3603e09f494b5 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` · **LIVE** (nicht beweisbar) · Risikoklasse standard · 5 Befund(e)
+### `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
 
 Datei: `content/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/index.md`
 
@@ -360,7 +360,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 84c991c5d152b14a267
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a70e7adc97c58317ccc1 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` · **LIVE** (nicht beweisbar) · Risikoklasse standard · 5 Befund(e)
+### `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
 
 Datei: `content/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/index.md`
 
@@ -400,11 +400,11 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9d9d4afc8d6c421a0d1
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden fb50388539a0e8b4461c --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu` · nicht im Live-Bestand · 5 Befund(e)
+### `2026-11-09-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu` · nicht im Live-Bestand · 5 Befund(e)
 
-Seite: `2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu`
+Seite: `2026-11-09-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu`
 
-Herkunft nach Datums-Lift: `2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu` → `2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu`. Befund-ID und Fassungsanker bleiben unverändert; das Re-Dating ist keine fachliche Entscheidung.
+Herkunft nach Datums-Lift: `2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu` → `2026-11-09-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu`. Befund-ID und Fassungsanker bleiben unverändert; das Re-Dating ist keine fachliche Entscheidung.
 
 | Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
 |---|---|---|---|---|---|
@@ -510,6 +510,46 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden d0a5cf7bb64eb0cd46c
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ec53e181336df8dc61ac --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f3f9184bfca9b097f68e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden fb4d2260f4fa291c35ae --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub` · nicht im Live-Bestand · 5 Befund(e)
+
+Seite: `2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `11a92bff688ccbb5a485` | luecke | 0 T | Text unverändert seit dem Befund | Die Behauptung, dass bis zum Sommer 500 € mehr im Urlaubsbudget verfügbar sind, fehlt eine Quellenangabe. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+| `1d4896d8ed60f5b6921f` | praezision | 0 T | Text unverändert seit dem Befund | Die Aussage, dass Cashback‑Portale „seit vielen Jahren am Markt etabliert“ sind, ist ein unpräzises Superlativ ohne messbare Daten. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+| `4d2bc6c3e60fb9b4a719` | luecke | 0 T | Text unverändert seit dem Befund | Die Aussage, dass eine 5 %ige Reduktion der Fixkosten bei 800 € Aufwand 40 € im Monat bzw. 480 € im Jahr spart, wird nicht durch die angeführte Quelle belegt. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+| `76b5cdfda85516962cf8` | luecke | 0 T | Text unverändert seit dem Befund | Angaben zu typischen Kündigungsfristen von ein bis drei Monaten werden von der Quelle nicht bestätigt. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+| `b292db236a31ea0a1629` | luecke | 0 T | Text unverändert seit dem Befund | Der genannte durchschnittliche Cashback‑Satz von 2 % der Ausgaben ist nicht durch die Quelle gestützt. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 11a92bff688ccbb5a485 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1d4896d8ed60f5b6921f --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4d2bc6c3e60fb9b4a719 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 76b5cdfda85516962cf8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden b292db236a31ea0a1629 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten` · nicht im Live-Bestand · 5 Befund(e)
+
+Seite: `2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `1c6e4d2f12da24ec4081` | luecke | 0 T | Text unverändert seit dem Befund | Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `5b539daf371f7362a3ef` | praezision | 0 T | Text unverändert seit dem Befund | Die Empfehlung, dynamische Tarife erforderten zwingend einen Smart Meter, wird ohne Angabe von Voraussetzungen, Kosten oder Verfügbarkeit präzisiert. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `77d809de9e06d1d6910d` | luecke | 0 T | Text unverändert seit dem Befund | Es wird eine Prognose für den Strompreis 2026 angegeben („Trends erkennen“, „Netzentgelte steigen“), ohne dass dafür aktuelle Marktdaten oder offizielle Prognosen genannt werden. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `ad7c0a90ef52ff35130e` | luecke | 0 T | Text unverändert seit dem Befund | Der Artikel behauptet, dass Preisgarantien vor Preissteigerungen schützen, liefert jedoch keine Quelle für diese Aussage. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `f227178fbda2cc59c350` | luecke | 0 T | Text unverändert seit dem Befund | Die Aussage, dass Ökostrom‑Tarife häufig günstiger als die Grundversorgung seien, wird nicht durch eine Quelle belegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1c6e4d2f12da24ec4081 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5b539daf371f7362a3ef --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 77d809de9e06d1d6910d --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ad7c0a90ef52ff35130e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden f227178fbda2cc59c350 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ---

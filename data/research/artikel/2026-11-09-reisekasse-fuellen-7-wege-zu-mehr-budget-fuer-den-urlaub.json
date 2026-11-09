@@ -1,0 +1,80 @@
+{
+  "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
+  "titel": "Reisekasse füllen: 7 Wege zu mehr Budget für den Urlaub",
+  "erzeugt": "2026-11-09 13:17 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 0,
+    "klasse": "saisonal",
+    "grund": "Erstrecherche – noch nie faktengeprüft",
+    "alter_tage": null,
+    "intervall": 30,
+    "frist": null,
+    "restlaufzeit": null
+  },
+  "geo": {
+    "punkte": 4,
+    "maximum": 6,
+    "prozent": 67,
+    "offen": [
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
+      "Sichtbares Prüfdatum (`faktencheck:`)"
+    ],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": false,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": false
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite verbraucherzentrale.de",
+      "url": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "datum": "",
+      "quelle": "verbraucherzentrale.de",
+      "kanal": "web",
+      "auszug": "Title: Reise & Mobilität\n\nURL Source: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet\n\nMarkdown Content:\n[Direkt zum Inhalt](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet#main-content)\n\n*   [Preise, Tarife, Anbieterwechsel](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel) \n    *   [Strom sparen](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen) \n    *   [Heizen und Warmwasser](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser) \n    *   [Energetische Sanierung](https://www.verbraucherzentrale.de/wissen/energie/energetische-sanierung) \n    *   [Erneuerbare Energien](https://www.verbraucherzentrale.de/wissen/energie/erneuerbare-energien) \n    *   [Förderprogramme](https://www.verbraucherzentrale.de/wissen/energie/foerderprogramme) \n    *   [E-Mobilität](https://www.verbraucherzentrale.de/wissen/energie/emobilitaet) \n    *   [Probleme mit Verträgen und Rechnungen](https://www.verbraucherzentrale.de/wissen/energie/probleme-mit-vertraegen-und-rechnungen)\n\n*   [Reise](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet)\n\n## [Reise](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet)\n\n*   [Urlaub buchen](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen) \n    *   [Hotels und Ferienhäuser](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/hotels-und-ferienhaeuser) \n    *   [Unterwegs sein](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/unterwegs-sein) \n    *   [E-Mobilität](https://www.verbraucherzentrale.de/wissen/energie/emobilitaet)\n\n### [Reise-Spezial: Urlaub](https://www.verbraucherzentrale.de/reisespezial-tipps-fuer-urlauber)\n\nFlug- oder Reisedaten geändert? Rechte für Urlaub...\n\n### [Musterbriefe](https://www.verbraucherzen",
+      "score": 2,
+      "belegfaehig": true,
+      "herausgeber": "Verbraucherzentrale",
+      "rang": 2,
+      "zitierbar": false
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Die Aussage, dass eine 5 %ige Reduktion der Fixkosten bei 800 € Aufwand 40 € im Monat bzw. 480 € im Jahr spart, wird nicht durch die angeführte Quelle belegt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der genannte durchschnittliche Cashback‑Satz von 2 % der Ausgaben ist nicht durch die Quelle gestützt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Behauptung, dass bis zum Sommer 500 € mehr im Urlaubsbudget verfügbar sind, fehlt eine Quellenangabe.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "luecke",
+      "text": "Angaben zu typischen Kündigungsfristen von ein bis drei Monaten werden von der Quelle nicht bestätigt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Aussage, dass Cashback‑Portale „seit vielen Jahren am Markt etabliert“ sind, ist ein unpräzises Superlativ ohne messbare Daten.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    }
+  ],
+  "fehler": [
+    "Verbraucherzentrale – Reise: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+  ],
+  "fassung_sha256": "3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37",
+  "text_sha256": "0aee05b5b2cf4a978fb3295c8cb20ea1292679ef8503d530ba6f296ccdc6541e",
+  "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b)"
+}

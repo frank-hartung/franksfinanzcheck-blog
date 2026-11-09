@@ -1,8 +1,8 @@
 {
-  "erzeugt": "2026-11-09T11:25:36Z",
+  "erzeugt": "2026-11-09T13:19:36Z",
   "stichtag": "2026-11-09",
-  "offen": 107,
-  "seiten": 26,
+  "offen": 117,
+  "seiten": 28,
   "live_seiten": 19,
   "live_befunde": 77,
   "ueberholt": 92,
@@ -38,8 +38,10 @@
     "2026-10-28-dsl-und-internet-flat-guenstig-sichern": 5,
     "2026-11-02-last-minute-urlaubsangebote-sichern": 5,
     "2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen": 4,
-    "2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": 5,
     "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden": 5,
+    "2026-11-09-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": 5,
+    "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub": 5,
+    "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten": 5,
     "strom-sparen": 3
   },
   "befunde": [
@@ -473,7 +475,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "slug": "2026-11-09-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ursprungs_slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "id": "0b564f460c41218244bd",
       "typ": "luecke",
@@ -485,7 +487,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "slug": "2026-11-09-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ursprungs_slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "id": "3ad2eefed314eb172c26",
       "typ": "luecke",
@@ -497,7 +499,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "slug": "2026-11-09-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ursprungs_slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "id": "43788c2cdcdfda52e753",
       "typ": "luecke",
@@ -509,7 +511,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "slug": "2026-11-09-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ursprungs_slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "id": "5eedec8afbdef6a4ca49",
       "typ": "luecke",
@@ -521,7 +523,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "slug": "2026-11-09-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ursprungs_slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "id": "81881c5bc61824d25f5a",
       "typ": "praezision",
@@ -1222,6 +1224,116 @@
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
       "alter_tage": 10,
       "fassung_status": "ohne-fassung",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
+      "id": "11a92bff688ccbb5a485",
+      "typ": "luecke",
+      "text": "Die Behauptung, dass bis zum Sommer 500 € mehr im Urlaubsbudget verfügbar sind, fehlt eine Quellenangabe.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
+      "id": "1d4896d8ed60f5b6921f",
+      "typ": "praezision",
+      "text": "Die Aussage, dass Cashback‑Portale „seit vielen Jahren am Markt etabliert“ sind, ist ein unpräzises Superlativ ohne messbare Daten.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
+      "id": "4d2bc6c3e60fb9b4a719",
+      "typ": "luecke",
+      "text": "Die Aussage, dass eine 5 %ige Reduktion der Fixkosten bei 800 € Aufwand 40 € im Monat bzw. 480 € im Jahr spart, wird nicht durch die angeführte Quelle belegt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
+      "id": "76b5cdfda85516962cf8",
+      "typ": "luecke",
+      "text": "Angaben zu typischen Kündigungsfristen von ein bis drei Monaten werden von der Quelle nicht bestätigt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
+      "id": "b292db236a31ea0a1629",
+      "typ": "luecke",
+      "text": "Der genannte durchschnittliche Cashback‑Satz von 2 % der Ausgaben ist nicht durch die Quelle gestützt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "id": "1c6e4d2f12da24ec4081",
+      "typ": "luecke",
+      "text": "Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "id": "5b539daf371f7362a3ef",
+      "typ": "praezision",
+      "text": "Die Empfehlung, dynamische Tarife erforderten zwingend einen Smart Meter, wird ohne Angabe von Voraussetzungen, Kosten oder Verfügbarkeit präzisiert.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "id": "77d809de9e06d1d6910d",
+      "typ": "luecke",
+      "text": "Es wird eine Prognose für den Strompreis 2026 angegeben („Trends erkennen“, „Netzentgelte steigen“), ohne dass dafür aktuelle Marktdaten oder offizielle Prognosen genannt werden.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "id": "ad7c0a90ef52ff35130e",
+      "typ": "luecke",
+      "text": "Der Artikel behauptet, dass Preisgarantien vor Preissteigerungen schützen, liefert jedoch keine Quelle für diese Aussage.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "id": "f227178fbda2cc59c350",
+      "typ": "luecke",
+      "text": "Die Aussage, dass Ökostrom‑Tarife häufig günstiger als die Grundversorgung seien, wird nicht durch eine Quelle belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
     }
