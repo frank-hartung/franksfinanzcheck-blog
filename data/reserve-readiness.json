@@ -2,7 +2,7 @@
   "target": 6,
   "ready": 3,
   "pool_size": 12,
-  "generated_at": "2026-11-09T19:52:02Z",
+  "generated_at": "2026-11-09T23:32:19Z",
   "candidates": [
     {
       "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
@@ -104,9 +104,9 @@
     {
       "slug": "2026-11-09-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
       "ready": false,
-      "sha256": "cf6cb960592f17c0de1a9ede37d5fdc4d792bc550b3c763bc7c0937b6d6a5faf",
+      "sha256": "115cbc3cdb2fb46c06b42ba56f382fef824a194d3ee0a721cb9a7d9dabdbf291",
       "flesch": 63.8,
-      "measured_at": "2026-11-09T19:49:29Z",
+      "measured_at": "2026-11-09T23:29:53Z",
       "reason": "Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-Zwilling gegen den Bestand, #714): U1-PHRASEN: 5 gleiche 7-Wort-Phrasen mit 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang (z. B. „bares geld ein haeufi",
       "details": [
         "🛑 2026-11-09-geschirrspueler-voll-so-sparst-du-wasser-und-strom: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
@@ -171,14 +171,16 @@
     {
       "slug": "2026-11-09-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
       "ready": false,
-      "sha256": "e0aa82033904bc0c3b00e88c6724528100bbfab7691ac03bff7b6e22809906bc",
+      "sha256": "b1d0d1141fd4419585a71c6291e5b7199cbf671c92c6046bb8860d98becdf5de",
       "flesch": 63.5,
-      "measured_at": "2026-11-09T19:50:21Z",
-      "reason": "Reserve-Qualitäts-Gate: RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Vielleicht zahlst du für 250 Mbit/s, aber dein WLAN schafft hardwarebedingt nur 50 Mbit/s.",
+      "measured_at": "2026-11-09T23:31:07Z",
+      "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
-        "RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Vielleicht zahlst du für 250 Mbit/s, aber dein WLAN schafft hardwarebedingt nur 50 Mbit/s."
+        "🛑 2026-11-09-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
       ],
-      "score": 0.964,
+      "score": 0.974,
       "parts": {
         "spelling": 0.9,
         "meta": 1.0,
@@ -186,15 +188,15 @@
         "typography": 0.94,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.95
+        "readability": 1.0
       }
     },
     {
       "slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ready": false,
-      "sha256": "6ddbac61d86dd63f37c09c6bb52d0c4ed0bcabd9897b777d81f8ca3f7b42170f",
+      "sha256": "39fd3e3fa7dd4bda098ab994b6f537712607ef88675a6d15dabff49a58d0493d",
       "flesch": 66.1,
-      "measured_at": "2026-11-09T19:51:10Z",
+      "measured_at": "2026-11-09T23:32:19Z",
       "reason": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
       "details": [
         "🛑 2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -258,8 +260,17 @@
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "42679123911",
+    "kind": "partial",
+    "run_id": "42720310493",
     "run_attempt": "1"
+  },
+  "recert": {
+    "at": "2026-11-09T23:32:19Z",
+    "renewed": [
+      "2026-11-09-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
+      "2026-11-09-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
+      "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten"
+    ],
+    "tool": "scripts/reserve_recert.py"
   }
 }
