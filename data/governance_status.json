@@ -1,17 +1,17 @@
 {
   "counts": {
-    "amber": 2,
-    "green": 8,
+    "amber": 1,
+    "green": 9,
     "info": 2,
     "red": 0
   },
-  "fingerprint": "65df3aa59195",
-  "generated": "2026-10-26T11:09:49+00:00",
+  "fingerprint": "c0e52bebedd7",
+  "generated": "2026-11-09T13:56:59+00:00",
   "issue_action": "report",
   "last": {
     "action": "report",
     "changed": true,
-    "fingerprint": "65df3aa59195",
+    "fingerprint": "c0e52bebedd7",
     "verdict": "AMBER"
   },
   "steps": {
@@ -23,7 +23,7 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "/tmp/automation-report.md",
-      "ts": "2026-10-26T11:09:41+00:00"
+      "ts": "2026-11-09T13:56:52+00:00"
     },
     "build": {
       "actionable": false,
@@ -33,7 +33,7 @@
       "level": "green",
       "message": "Schritt erfolgreich (Report folgt nicht)",
       "report": "",
-      "ts": "2026-10-26T11:09:44+00:00"
+      "ts": "2026-11-09T13:56:55+00:00"
     },
     "click-chain": {
       "actionable": false,
@@ -43,7 +43,7 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "CLICK-CHAIN-REPORT.md",
-      "ts": "2026-10-26T11:09:47+00:00"
+      "ts": "2026-11-09T13:56:58+00:00"
     },
     "clicks": {
       "actionable": false,
@@ -53,17 +53,17 @@
       "level": "info",
       "message": "Datenlage offen (noch kein Export/Import)",
       "report": "CLICK-REPORT.md",
-      "ts": "2026-10-26T11:09:47+00:00"
+      "ts": "2026-11-09T13:56:57+00:00"
     },
     "cwv": {
-      "actionable": true,
-      "code": "cls_img",
-      "exit": 1,
-      "findings": 1,
-      "level": "amber",
-      "message": "10 <img>-Elemente ohne width/height/style (CLS-Risiko)",
+      "actionable": false,
+      "code": "ok",
+      "exit": 0,
+      "findings": 0,
+      "level": "green",
+      "message": "in Ordnung",
       "report": "CWV-REPORT.md",
-      "ts": "2026-10-26T11:09:45+00:00"
+      "ts": "2026-11-09T13:56:56+00:00"
     },
     "decay": {
       "actionable": false,
@@ -73,17 +73,17 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "DECAY-REPORT.md",
-      "ts": "2026-10-26T11:09:44+00:00"
+      "ts": "2026-11-09T13:56:55+00:00"
     },
     "lesbarkeit": {
       "actionable": true,
       "code": "read_draft",
       "exit": 0,
-      "findings": 1,
+      "findings": 3,
       "level": "amber",
-      "message": "2026-10-26-gastarife-vergleichen-vor-dem-herbst/index.md (Entwurf) – Flesch 51.5 < Publish-Schwelle 60",
+      "message": "2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen/index.md (Entwurf) – Flesch 41.7 < Publish-Schwelle 60; 2026-11-02-last-minute-urlaubsangebote-sichern/index.md (Entwurf) – Flesch 49.9 < Publish-Schwelle 60; 2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif/index.md (Entw",
       "report": "LESBARKEIT-REPORT.md",
-      "ts": "2026-10-26T11:09:46+00:00"
+      "ts": "2026-11-09T13:56:57+00:00"
     },
     "live-policy": {
       "actionable": false,
@@ -93,7 +93,7 @@
       "level": "green",
       "message": "in Ordnung (2 Hinweis(e))",
       "report": "LIVE-POLICY-REPORT.md",
-      "ts": "2026-10-26T11:09:49+00:00"
+      "ts": "2026-11-09T13:56:59+00:00"
     },
     "pinperf": {
       "actionable": false,
@@ -103,7 +103,7 @@
       "level": "info",
       "message": "Datenlage offen (noch kein Export/Import)",
       "report": "PINTEREST-PERF-REPORT.md",
-      "ts": "2026-10-26T11:09:46+00:00"
+      "ts": "2026-11-09T13:56:57+00:00"
     },
     "revenue-funnel": {
       "actionable": false,
@@ -113,7 +113,7 @@
       "level": "green",
       "message": "in Ordnung (2 Hinweis(e))",
       "report": "REVENUE-FUNNEL-REPORT.md",
-      "ts": "2026-10-26T11:09:47+00:00"
+      "ts": "2026-11-09T13:56:57+00:00"
     },
     "scorecard": {
       "actionable": false,
@@ -123,7 +123,7 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "EDITORIAL-SCORECARD.md",
-      "ts": "2026-10-26T11:09:49+00:00"
+      "ts": "2026-11-09T13:56:59+00:00"
     },
     "secrets": {
       "actionable": false,
@@ -133,7 +133,7 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "SECRETS-REPORT.md",
-      "ts": "2026-10-26T11:09:46+00:00"
+      "ts": "2026-11-09T13:56:57+00:00"
     }
   },
   "verdict": "AMBER",
