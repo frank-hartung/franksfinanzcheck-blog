@@ -11,7 +11,7 @@ pillar: "internet-dsl"
 author: "Frank Hartung"
 keywords: ["WLAN verbessern", "Mesh WLAN oder Repeater", "WLAN verstärker", "Schnelles Internet zuhause", "Mesh-System", "DSL-Vergleich", "Internetvertrag wechseln"]
 pinwand: Internet & DSL | WLAN-Tipps & Tarife
-pin_title: "Funklöcher adé: WLAN-Verstärker oder Mesh-System?"
+pin_title: "WLAN verbessern: Mesh-System oder Repeater im Check?"
 pin_description: "*Werbung | Ein Zimmer mit Empfang, das nächste ohne – das Kästchen aus dem Elektromarkt hilft da oft nur halb: Wir zeigen, wann ein 30-€-Repeater reicht, wann nur ein Mesh-System Ruhe bringt und was beide Lösungen wirklich kosten. Jetzt lesen! Mit Rechenbeispiel (120 €)."
 ai_generated: true
 ai_provider: "Content-Engine v2"
