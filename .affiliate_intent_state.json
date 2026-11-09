@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-08 11:02:07 UTC",
+ "generated_at": "2026-11-09 12:25:12 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 116,
- "checked_links": 270,
+ "checked_articles": 119,
+ "checked_links": 279,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -109,7 +109,7 @@
   {
    "code": "IW4",
    "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
-   "line": 20,
+   "line": 21,
    "route": "strom",
    "slot": "top",
    "owner": "human",
@@ -120,7 +120,7 @@
   {
    "code": "IW4",
    "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
-   "line": 76,
+   "line": 77,
    "route": "strom",
    "slot": "mid",
    "owner": "human",
@@ -131,7 +131,7 @@
   {
    "code": "IW4",
    "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
-   "line": 155,
+   "line": 156,
    "route": "strom",
    "slot": "end",
    "owner": "human",
@@ -186,7 +186,7 @@
   {
    "code": "IW2",
    "slug": "2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-   "line": 133,
+   "line": 132,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
@@ -219,7 +219,7 @@
   {
    "code": "IW2",
    "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden",
-   "line": 93,
+   "line": 98,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
