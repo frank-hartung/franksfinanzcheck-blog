@@ -40,13 +40,13 @@ Das WLAN-Signal besteht aus elektromagnetischen Wellen. Diese Wellen breiten sic
 
 Ein schlechter **Router Standort** bremst die Wellen aus. Jedes Hindernis schwächt das Signal ab. Das führt zu langsamen Downloads. Dein Ping in Spielen steigt an. Video-Anrufe brechen plötzlich ab. Viele Nutzer greifen dann sofort zu teuren Verstärkern. Das ist oft unnötig. Es belastet dein Budget ohne echten Mehrwert. 
 
-Im Rahmen meines 4K-Prüfpfads schauen wir uns zuerst die Konditionen an. Du bezahlst monatlich für eine bestimmte Leistung. Wenn diese Leistung nicht bei deinem Endgerät ankommt, zahlst du zu viel. Wir wollen, dass du die volle Bandbreite nutzt. Das Ziel ist es, den **WLAN Empfang verbessern** zu können, ohne einen Cent extra auszugeben. 
+Im Rahmen meines 4K-Prüfpfads schauen wir uns zuerst die Konditionen an. Du bezahlst monatlich für eine bestimmte Leistung. Wenn diese Leistung nicht bei deinem Endgerät ankommt, zahlst du zu viel. Wir wollen, dass du die volle Bandbreite nutzt. Das Ziel ist es, den **WLAN-Empfang verbessern** zu können, ohne einen Cent extra auszugeben. 
 
 Die Physik lässt sich nicht austricksen. Aber du kannst sie für dich nutzen. Der richtige Platz sorgt dafür, dass die Wellen frei schwingen können. Das reduziert Fehlerkorrekturen im Datenstrom. Dein Internet fühlt sich sofort schneller an. Es ist die einfachste Methode, um Fixkosten bei der Hardware zu sparen.
 
 ## So findest du den perfekten Platz für dein WLAN
 
-Die Suche nach dem idealen Platz erfordert etwas Geduld. Du musst kein Techniker sein. Es reicht, logisch vorzugehen. Hier sind meine bewährten **WLAN Tipps** für dich. Gehe diese Liste Schritt für Schritt durch.
+Die Suche nach dem idealen Platz erfordert etwas Geduld. Du musst kein Techniker sein. Es reicht, logisch vorzugehen. Hier sind meine bewährten **WLAN-Tipps** für dich. Gehe diese Liste Schritt für Schritt durch.
 
 **So gehst du vor:**
 
@@ -62,7 +62,7 @@ Ein freier Platz ist Gold wert. Viele Menschen stellen das Gerät in den Flur. D
 
 ## Welche Hindernisse fressen dein Signal?
 
-Nicht alle Gegenstände sind gleich schlimm für dein WLAN. Manche Materialien wirken wie ein Schutzschild. Sie lassen kaum Wellen durch. Wenn du diese Störer kennst, kannst du sie umgehen. Das hilft dir massiv dabei, den **WLAN Empfang verbessern** zu können.
+Nicht alle Gegenstände sind gleich schlimm für dein WLAN. Manche Materialien wirken wie ein Schutzschild. Sie lassen kaum Wellen durch. Wenn du diese Störer kennst, kannst du sie umgehen. Das hilft dir massiv dabei, den **WLAN-Empfang verbessern** zu können.
 
 Metall ist der größte Feind. Es reflektiert die Wellen oder schluckt sie komplett. Ein Router hinter einem Fernseher ist eine schlechte Idee. Das Gehäuse des Fernsehers besteht oft aus Metall. Auch Heizkörper sind problematisch. Sie wirken wie eine Mauer für deine Daten.
 
@@ -114,7 +114,7 @@ Schau dir deine monatliche Rechnung an. Wie viel zahlst du für welche Geschwind
 
 Wenn dein Router bereits seit vielen Jahren im Einsatz ist und mehrere Technik-Generationen übersprungen hat, könnte er das Nadelöhr sein. In diesem Fall lohnt es sich, über einen Anbieterwechsel nachzudenken. Ein neuer Anbieter schenkt dir oft die Hardware zum Start. Das senkt deine Fixkosten effektiv. Du bekommst moderne Technik ohne hohe Einmalkosten.
 
-Du kannst hier direkt prüfen, ob es günstigere Tarife für dich gibt: [DSL-Tarife vergleichen](/go/dsl-anbieterwechsel/) (sponsored). Ein Wechsel ist heute unkompliziert. Die Anbieter regeln die Kündigung meist untereinander. So bleibst du lückenlos online. Aber denk daran: Auch der beste neue Router braucht einen guten Platz. Die **WLAN Tipps** aus diesem Artikel gelten also weiterhin.
+Du kannst hier direkt prüfen, ob es günstigere Tarife für dich gibt: [DSL-Tarife vergleichen](/go/dsl-anbieterwechsel/) (sponsored). Ein Wechsel ist heute unkompliziert. Die Anbieter regeln die Kündigung meist untereinander. So bleibst du lückenlos online. Aber denk daran: Auch der beste neue Router braucht einen guten Platz. Die **WLAN-Tipps** aus diesem Artikel gelten also weiterhin.
 
 ## Warum lohnt sich der Aufwand der Optimierung?
 

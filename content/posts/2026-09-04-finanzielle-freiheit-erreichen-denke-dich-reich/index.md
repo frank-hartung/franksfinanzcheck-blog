@@ -203,8 +203,6 @@ Lies Bücher und seriöse Quellen. Wer mehr weiß, bleibt ruhig. Kontinuität sc
 
 ![Gliederung des Beitrags: Finanzielle Freiheit erreichen: Denke dich reich – Geld](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „Finanzielle Freiheit erreichen: Denke dich reich – Geld“ – 5 Stationen von „Warum scheitern die meisten daran, finanzielle Freiheit erreichen zu wollen?“ bis „So gehst du vor: Deine ersten Schritte“ (eigene Darstellung).*
-
 ## Welche Fehler kosten dich am meisten Geld?
 
 Viele warten auf den perfekten Moment. Sie hoffen auf Crash oder tiefe Kurse.

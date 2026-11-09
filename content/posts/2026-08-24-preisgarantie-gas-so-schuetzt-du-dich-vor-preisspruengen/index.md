@@ -158,8 +158,6 @@ Kündige selbst, schriftlich, und verlange eine Bestätigung. Beim normalen Wech
 
 ![Gliederung des Beitrags: Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „Preisgarantie Gas: Was bei Preiserhöhung hilft“ – 5 Stationen von „Wenn ein neuer Preis im Brief steht“ bis „Preisänderung erhalten: diese fünf Punkte markieren“ (eigene Darstellung).*
-
 ## Jahrespreis nach einer Erhöhung rechnen
 
 Der Arbeitspreis steigt von 10,5 auf 12,0 Cent. Der Unterschied beträgt 1,5 Cent pro kWh im Rechenfall.

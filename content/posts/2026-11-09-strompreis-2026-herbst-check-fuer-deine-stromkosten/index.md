@@ -88,10 +88,6 @@ Lass uns das Ganze an einem konkreten Beispiel durchrechnen. Wir nehmen einen Mu
 - Arbeitspreis: 3.500 kWh * 0,42 Euro = 1.470 Euro (Modellrechnung).
 - Gesamtkosten alt: 1.470 Euro + 150 Euro = 1.620 Euro pro Jahr (Modellrechnung).
 
-**Schritt 2: Kosten des neuen Tarifs berechnen**
-- Arbeitspreis: 3.500 kWh * 0,32 Euro = 1.120 Euro (Modellrechnung).
-- Gesamtkosten neu: 1.120 Euro + 120 Euro = 1.240 Euro pro Jahr (Modellrechnung).
-
 **Schritt 3: Ersparnis ermitteln**
 - Differenz: 1.620 Euro - 1.240 Euro = 380 Euro Ersparnis im ersten Jahr (Modellrechnung).
 

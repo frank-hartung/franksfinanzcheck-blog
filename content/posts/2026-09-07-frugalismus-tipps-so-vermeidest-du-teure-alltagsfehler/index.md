@@ -154,8 +154,6 @@ Meal Prep kann trotzdem viel sparen, wenn du häufig teuer außer Haus isst. Has
 
 ![Gliederung des Beitrags: Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick“ – 5 Stationen von „Warum diese Frugalismus-Tipps dein Mindset verändern“ bis „Trick 2: Das Prinzip der No-Spend-Weekends“ (eigene Darstellung).*
-
 ## Trick 4: Meal Prepping und der Wocheneinkauf
 
 Essen gehen und der schnelle Gang zum Bäcker können deine Ausgaben erhöhen. Wie groß der Effekt ist, zeigt dein Haushaltsbuch. Eine einfache Routine gegen ungeplante Käufe: Plane am Wochenende die Mahlzeiten der kommenden Woche und kaufe gezielt danach ein.

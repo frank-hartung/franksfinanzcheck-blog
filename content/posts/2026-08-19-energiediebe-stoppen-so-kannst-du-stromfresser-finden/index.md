@@ -56,8 +56,6 @@ Darum gilt bei Stromfressern eine einfache Regel: **erst messen, dann rechnen, d
 
 ![Merkkarte: Kernaussagen zu Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „Energiediebe stoppen: So kannst du Stromfresser finden“ (eigene Darstellung aus diesem Beitrag).*
-
 ## Dein Schnellstart – Energiediebe stoppen
 
 Beginne mit einem Gerät. Wähle einen typischen Tag. Lies den Zähler ab. Miss den Verbrauch.
@@ -174,8 +172,6 @@ Daraus folgt aber noch kein klares Ja. Geht das alte Gerät ohnehin bald kaputt,
 *Abbildung: Gliederung zu „Energiediebe stoppen: So kannst du Stromfresser finden“ – 5 Stationen von „Dein Schnellstart – Energiediebe stoppen“ bis „Die Kostenformel, die du wirklich brauchst“ (eigene Darstellung).*
 
 ![Gliederung des Beitrags: Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-ablauf.svg)
-
-*Abbildung: Gliederung zu „Energiediebe stoppen: So kannst du Stromfresser finden“ – 5 Stationen von „Dein Schnellstart – Energiediebe stoppen“ bis „Die Kostenformel, die du wirklich brauchst“ (eigene Darstellung).*
 
 ## Was du nach der Messung mit dem Ergebnis machst?
 

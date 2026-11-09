@@ -62,8 +62,6 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ![Merkkarte: Kernaussagen zu Energiekosten senken: Smarte Helfer für den Haushalt](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „Energiekosten senken: Smarte Helfer für den Haushalt“ (eigene Darstellung aus diesem Beitrag).*
-
 ## Warum steigen die Energiekosten trotz Sparbemühungen oft weiter?
 
 Viele Menschen in Deutschland gehen bereits bewusst mit Ressourcen um. Du schaltest das Licht aus oder wäschst bei niedrigen Temperaturen. Dennoch bleiben die **Energiekosten** oft stabil oder steigen sogar an. Das liegt häufig an der sogenannten Phantomlast.
@@ -143,8 +141,6 @@ Vernachlässige niemals die Sicherheit deiner Geräte. Billigprodukte ohne Updat
 *Abbildung: Gliederung zu „Energiekosten senken: Smarte Helfer für den Haushalt“ – 5 Stationen von „Warum steigen die Energiekosten trotz Sparbemühungen oft weiter?“ bis „Schritt-für-Schritt: So rüstest du deinen Haushalt auf“ (eigene Darstellung).*
 
 ![Gliederung des Beitrags: Energiekosten senken: Smarte Helfer für den Haushalt](abbildung-ablauf.svg)
-
-*Abbildung: Gliederung zu „Energiekosten senken: Smarte Helfer für den Haushalt“ – 5 Stationen von „Warum steigen die Energiekosten trotz Sparbemühungen oft weiter?“ bis „Schritt-für-Schritt: So rüstest du deinen Haushalt auf“ (eigene Darstellung).*
 
 ## Modellrechnung: Smarte Thermostate vs. Manuelle Regelung
 

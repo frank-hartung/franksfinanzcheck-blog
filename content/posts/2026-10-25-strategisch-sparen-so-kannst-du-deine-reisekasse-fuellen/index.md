@@ -11,7 +11,7 @@ pillar: "mietwagen"
 author: "Frank Hartung"
 keywords: ["Reisekasse füllen", "Urlaubsbudget", "Geld für Urlaub sparen", "Cashback Tipps", "Strategisch sparen", "Strategisch", "Reisekasse", "Frugalismus"]
 pinwand: Günstig reisen | Reisebudget & Mietwagen
-pin_title: "Strategisch sparen: So kannst du deine Reisekasse füllen"
+pin_title: "Mehr Geld für den Urlaub: So polsterst du deine Reisekasse auf"
 pin_description: "*Werbung | Der Traumurlaub scheitert am Budget? Mit diesen 7 Alltags-Tricks füllt sich deine Urlaubskasse fast von allein – vom Cashback-Konto über No-Spend-Tage bis zum cleveren Verkaufen. So sind bis zum Sommer 500 € mehr drin. Jetzt lesen!"
 ai_generated: true
 ai_provider: "Content-Engine v2"
@@ -35,7 +35,6 @@ faktencheck: 2026-10-15
 lastmod: 2026-10-28
 kurzantwort: "Rechne die Sparrate so: Reisekosten minus bereits Erspartem, geteilt durch die Monate bis zur Zahlung. Cashback ist ein Extra, keine Grundlage. Modellrechnungen nennen ihre Annahmen."
 ---
-
 
 [Reisekasse](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/) Füllen im Check: **Eine volle Urlaubskasse beginnt mit einem klaren Ziel und einer festen Summe im Monat.** Plane Unterkunft, Anreise und Essen vor Ort nach echten Angeboten für dein Datum. Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts. Die verlinkte Übersicht belegt eine allgemeine Stabilisierung der Preise nicht.
 
