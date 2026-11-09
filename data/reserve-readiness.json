@@ -1,6 +1,6 @@
 {
   "target": 6,
-  "ready": 1,
+  "ready": 0,
   "pool_size": 6,
   "generated_at": "2026-11-06T14:16:14Z",
   "candidates": [
@@ -57,20 +57,10 @@
     },
     {
       "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
-      "ready": true,
+      "ready": false,
       "sha256": "bacd1b5062e4111bdfa8badd784d1d919c9a052ccf69c6787db9b5e209dc4e73",
-      "flesch": 61.7,
       "measured_at": "2026-11-06T11:28:05Z",
-      "score": 0.928,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.88,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.9
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     }
   ],
   "measurement": {
