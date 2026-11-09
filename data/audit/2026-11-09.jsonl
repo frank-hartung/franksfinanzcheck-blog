@@ -2,3 +2,4 @@
 {"ts": "2026-11-09T07:27:02Z", "module": "fix_dash_und", "action": "apply", "input": {"files": 2}, "output": {"changes": 2}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-11-09T07:27:02Z", "module": "fix_spaces", "action": "apply", "input": {"files": 118}, "output": {"fixes": 163}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-11-09T07:28:50Z", "module": "pinterest_pin_text_sync", "action": "apply", "input": {"posts": 112}, "output": {"changed": 2}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-11-09T07:33:59Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 4}, "status": "ok", "critical": false, "commit": null}

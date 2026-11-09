@@ -110,7 +110,7 @@ Das Farbspektrum von Grün bis Rot gibt die Richtung vor. Dein Gebäude erhält 
 
 Zwei Werte stehen im Fokus: Endenergie und Primärenergie. Die Endenergie zeigt die Menge, die du am Monatsende wirklich bezahlst. Dazu gehören etwa Erdgas, Heizöl oder der Strom für deine [Wärmepumpe](../../posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/).
 
-Die Primärenergie rechnet auch die Gewinnung und den Weg des Brennstoffs mit ein. Eine Wärmepumpe schneidet hier sehr gut ab, da sie freie Wärme aus der Luft nutzt. Reine Stromheizungen landen wegen hoher Verluste oft im roten Bereich.
+Die Primärenergie rechnet auch die Gewinnung und den Weg des Brennstoffs mit ein. Eine [Wärmepumpe](../../posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/) schneidet hier sehr gut ab, da sie freie Wärme aus der Luft nutzt. Reine Stromheizungen landen wegen hoher Verluste oft im roten Bereich.
 
 Die Klasse bestimmt deine monatlichen Fixkosten stark. Ein Wechsel von Klasse F zu C spart in der Modellrechnung unten über zweitausend Euro im Jahr. Nutze den Ausweis als Fahrplan für deine Ersparnis.
 

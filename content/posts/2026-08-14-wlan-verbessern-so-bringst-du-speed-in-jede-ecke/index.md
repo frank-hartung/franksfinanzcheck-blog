@@ -51,7 +51,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ![Merkkarte: Kernaussagen zu WLAN verbessern: So bringst du stabilen Speed in jede Ecke](abbildung-merkkarte. svg)
 
-*Abbildung: Merkkarte zu „WLAN verbessern: So bringst du stabilen Speed in jede Ecke“ (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „[WLAN verbessern](../../posts/2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check/): So bringst du stabilen Speed in jede Ecke“ (eigene Darstellung aus diesem Beitrag).*
 
 ![Merkkarte: Kernaussagen zu WLAN verbessern: So bringst du stabilen Speed in jede Ecke](abbildung-merkkarte.svg)
 

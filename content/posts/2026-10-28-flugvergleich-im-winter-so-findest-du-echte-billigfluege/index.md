@@ -58,7 +58,7 @@ Da ist die Kreditkarte schon fast gezückt. Dann kommen Kosten für den Check‑
 
 Ein weiteres Problem ist der Tunnelblick auf den Abflughafen. Viele suchen nur ab dem größten Flughafen in der Nähe. Dabei liegen kleinere Flughäfen oft nur eine Stunde weiter weg. Diese werden häufig von Billigfliegern genutzt.
 
-Die Gebühren für die Airlines sind dort niedriger. Diesen Vorteil geben sie manchmal an dich weiter. Wenn du deine **Reisekosten sparen** willst, musst du den Radius deiner Suche erweitern. Prüfe auch Züge zum Flug, die oft im Ticket enthalten sind oder wenig kosten.
+Die Gebühren für die Airlines sind dort niedriger. Diesen Vorteil geben sie manchmal an dich weiter. Wenn du deine **[Reisekosten](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/) sparen** willst, musst du den Radius deiner Suche erweitern. Prüfe auch Züge zum Flug, die oft im Ticket enthalten sind oder wenig kosten.
 
 Zuletzt spielt das Timing eine Rolle. Im Winter sind besonders die Ferienzeiten teuer. Wer genau an Weihnachten oder Silvester fliegen will, zahlt Spitzenpreise.
 

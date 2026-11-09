@@ -96,7 +96,7 @@ Der Schutzumfang im Überblick:
 
 Die folgende Rechnung nutzt angenommene Beträge. Sie beschreibt keinen Marktzustand, sondern die Mechanik.
 
-Annahmen: Du hast 70.000 € auf einem [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) bei Institut A. Dazu kommt ein Girokonto desselben Instituts mit 45.000 €. Bei Institut B liegen 60.000 € auf einem zweiten Tagesgeldkonto. Alle drei Konten laufen auf deinen Namen.
+Annahmen: Du hast 70.000 € auf einem [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) bei Institut A. Dazu kommt ein Girokonto desselben Instituts mit 45.000 €. Bei Institut B liegen 60.000 € auf einem zweiten [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/). Alle drei Konten laufen auf deinen Namen.
 
 Rechenweg Institut A: 70.000 € plus 45.000 € ergeben 115.000 €. Beide Konten gehören zum selben Institut. Rechenweg Institut B: 60.000 € liegen unterhalb der Grenze.
 

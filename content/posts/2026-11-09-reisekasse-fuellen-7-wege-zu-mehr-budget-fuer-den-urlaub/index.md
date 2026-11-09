@@ -61,7 +61,7 @@ Viele Menschen scheitern nicht am Willen, sondern an der Methode. Ein häufiger 
 4. **Kein separates Sparkonto:** Wenn das Urlaubsgeld auf dem Girokonto liegt, gibst du es im Alltag unbewusst aus.
 5. **Cashback-Chancen liegen lassen:** Du kaufst online ein, ohne Portale zu nutzen, die dir Geld zurückerstatten.
 
-**Faustregel:** Überweise dein Sparziel für den Urlaub immer direkt am Monatsanfang per Dauerauftrag auf ein separates Konto. Was du nicht siehst, gibst du seltener aus.
+**Faustregel:** Überweise dein Sparziel für den Urlaub immer direkt am Monatsanfang per [Dauerauftrag](../../posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/) auf ein separates Konto. Was du nicht siehst, gibst du seltener aus.
 
 ## Cashback tipps für ein größeres Urlaubsbudget
 
@@ -101,19 +101,19 @@ Damit du nicht den Überblick verlierst, gehst du am besten strukturiert vor. Hi
 2. **Kündigungsfenster sichern:** Trage dir alle Fristen für Versicherungen, Handyverträge und Abos in deinen Kalender ein. So verpasst du nie wieder einen Wechseltermin.
 3. **Vergleiche ziehen:** Prüfe bei jedem Vertrag, ob die Konditionen noch zeitgemäß sind. Nutze Vergleichsportale für Strom, Gas und Versicherungen.
 4. **Cashback aktivieren:** Registriere dich bei einem seriösen Rückvergütungsportal. Installiere dir ggf. eine Browser-Erweiterung, die dich an Rückvergütungen erinnert.
-5. **Kurs halten:** Überprüfe deine Ausgaben quartalsweise. Nur wer dranbleibt, sichert sich langfristig finanzielle Freiheit für seine Reisen.
+5. **Kurs halten:** Überprüfe deine Ausgaben quartalsweise. Nur wer dranbleibt, sichert sich langfristig [finanzielle Freiheit](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/) für seine Reisen.
 
 ## Warum ist das Urlaubsbudget oft zu knapp?
 
 Oft liegt es an der mangelnden Planung der Nebenkosten. Viele Menschen kalkulieren nur Flug und Hotel. Doch die Kosten vor Ort sind die eigentlichen Budgetfresser. Ein Eis hier, eine Parkgebühr dort und das Trinkgeld im Restaurant. Ohne Puffer wird es schnell eng.
 
- Wer täglich drei Euro für Kleinigkeiten ausgibt, verbraucht im Monat rund 90 €; das ist ein Beispielwert. Auf das Jahr gerechnet ist das ein vierstelliger Betrag. Wenn du dieses Geld stattdessen gezielt beiseitelegst, kannst du deine **Reisekasse füllen**, ohne auf Lebensqualität zu verzichten. Es geht nicht um Verzicht, sondern um bewusste Entscheidungen.
+ Wer täglich drei Euro für Kleinigkeiten ausgibt, verbraucht im Monat rund 90 €; das ist ein Beispielwert. Auf das Jahr gerechnet ist das ein vierstelliger Betrag. Wenn du dieses Geld stattdessen gezielt beiseitelegst, kannst du deine **[Reisekasse füllen](../../posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/)**, ohne auf Lebensqualität zu verzichten. Es geht nicht um Verzicht, sondern um bewusste Entscheidungen.
 
 ## Den Überblick behalten mit dem Fixkosten-Cockpit
 
 Mein Ziel mit FranksFinanzcheck ist es, dir ein Werkzeug an die Hand zu geben. Du sollst kein Fachchinesisch lernen müssen. Es geht um einfache Mathematik. Wenn du deine Verträge im Griff hast, hast du mehr Geld für das Leben.
 
-Ein jährlicher Vertrags-Check ist wie eine Inspektion beim Auto. Er stellt sicher, dass alles effizient läuft. Strom, Versicherungen, Internet und das Bankkonto sollten einmal im Jahr auf den Prüfstand. Oft deckt dieser eine Nachmittag mehr Sparpotenzial auf als alle kleinen Spartipps über das Jahr verteilt. Das ist der effizienteste Weg, um **Geld für Urlaub sparen** zu können.
+Ein jährlicher Vertrags-Check ist wie eine Inspektion beim Auto. Er stellt sicher, dass alles effizient läuft. Strom, Versicherungen, Internet und das Bankkonto sollten einmal im Jahr auf den Prüfstand. Oft deckt dieser eine Nachmittag mehr Sparpotenzial auf als alle kleinen Spartipps über das Jahr verteilt. Das ist der effizienteste Weg, um **Geld für [Urlaub sparen](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/)** zu können.
 
 ## Tabelle: Sparpotenziale im Haushalt im Überblick
 
@@ -130,7 +130,7 @@ In dieser Tabelle siehst du, wo du am schnellsten ansetzen kannst. Die Hebelwirk
 
 ## Fazit: Reisekasse füllen – 7 Wege zu mehr Budget für den Urlaub
 
- Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen; das ist ein Modellwert.
+ Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – [fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) reichen; das ist ein Modellwert.
 
 ## Häufige Fragen
 

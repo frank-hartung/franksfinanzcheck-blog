@@ -3,11 +3,11 @@ title: "WLAN verbessern: Mesh-System oder Repeater im Check?"
 description: Endlich überall schnelles Internet zuhause! Wir zeigen dir, wie du dein WLAN verbessern kannst und ob Mesh oder ein WLAN Verstärker die bessere Wahl ist.
 date: 2026-11-09T07:09:44Z
 draft: false
-tags: ["WLAN verbessern"]
+tags: ["WLAN verbessern", "DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["WLAN verbessern", "Mesh WLAN oder Repeater", "WLAN verstärker", "Schnelles Internet zuhause", "Mesh-System"]
+keywords: ["WLAN verbessern", "Mesh WLAN oder Repeater", "WLAN verstärker", "Schnelles Internet zuhause", "Mesh-System", "DSL-Vergleich", "Internetvertrag wechseln"]
 pinwand: Internet & DSL | WLAN-Tipps & Tarife
 pin_title: "Funklöcher adé: WLAN-Verstärker oder Mesh-System?"
 pin_description: "*Werbung | Ein Zimmer mit Empfang, das nächste ohne – das Kästchen aus dem Elektromarkt hilft da oft nur halb: Wir zeigen, wann ein 30-€-Repeater reicht, wann nur ein Mesh-System Ruhe bringt und was beide Lösungen wirklich kosten. Jetzt lesen! Mit Rechenbeispiel (120 €)."
@@ -29,7 +29,7 @@ cover:
 TITEL: [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): Mesh-System oder Repeater im Check?
 
 ARTIKEL:
-Du sitzt im Homeoffice und die Videokonferenz bricht ab. Im Schlafzimmer lädt der Film nicht. Solche Funklöcher nerven im Alltag gewaltig. Oft liegt es nicht am Anbieter, sondern an der Hardware in den eigenen vier Wänden. Wenn du dein **WLAN verbessern** willst, stehst du meist vor einer Wahl: Reicht ein günstiger Repeater oder muss es ein teures Mesh-System sein? In diesem Artikel klären wir, welche Technik für deine Wohnung passt. Wir schauen uns die Kosten genau an. So triffst du eine kluge Wahl für dein Heimnetzwerk.
+Du sitzt im Homeoffice und die Videokonferenz bricht ab. Im Schlafzimmer lädt der Film nicht. Solche Funklöcher nerven im Alltag gewaltig. Oft liegt es nicht am Anbieter, sondern an der Hardware in den eigenen vier Wänden. Wenn du dein **[WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/)** willst, stehst du meist vor einer Wahl: Reicht ein günstiger Repeater oder muss es ein teures Mesh-System sein? In diesem Artikel klären wir, welche Technik für deine Wohnung passt. Wir schauen uns die Kosten genau an. So triffst du eine kluge Wahl für dein Heimnetzwerk.
 
 **Das Wichtigste in Kürze**
 * **WLAN-Verstärker** (Repeater) eignen sich vor allem für kleine Wohnungen und einzelne Funklöcher.
@@ -104,7 +104,7 @@ Gute Technik kostet Geld. Aber ein falscher Tarif kostet auf Dauer mehr. Wir mac
 **Die Rechnung:**
 * Ersparnis pro Monat durch [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/): 15 € (50 € – 35 €).
 * Ersparnis pro Jahr: 180 € (15 € x 12 Monate).
-* Amortisation der Hardware: Nach genau 12 Monaten hat sich das Mesh-System durch den günstigeren Tarif bezahlt gemacht (180 € Kosten / 15 € Ersparnis).
+* Amortisation der Hardware: Nach genau 12 Monaten hat sich das Mesh-System durch den [günstigeren](../../posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/) Tarif bezahlt gemacht (180 € Kosten / 15 € Ersparnis).
 
 In dieser Beispielrechnung zeigt sich: Wer einmal in Technik investiert, kann bei den Fixkosten dauerhaft sparen. Du hast dann **[schnelles Internet](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/) zu Hause** und zahlst nur das, was du wirklich nutzt.
 
@@ -132,18 +132,18 @@ Achte auch auf die Kabel. Wenn du deine Mesh-Stationen mit alten LAN-Kabeln verb
 Wenn die Hardware optimal läuft, ist es Zeit für den Kosten-Check. Bei FranksFinanzcheck nutzen wir den 4K-Prüfpfad. So behältst du die Kontrolle über deine Verträge.
 
 * **Kosten sehen:** Schau in deine Kontoauszüge. Was geht jeden Monat für Internet weg?
-* **Konditionen rechnen:** Vergleiche deinen Preis mit aktuellen Angeboten. Brauchst du wirklich die maximale Bandbreite des teuersten Angebots oder reicht eine deutlich geringere Geschwindigkeit für Homeoffice und Netflix?
+* **Konditionen rechnen:** Vergleiche deinen Preis mit aktuellen Angeboten. [Brauchst du wirklich](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/) die maximale Bandbreite des teuersten Angebots oder reicht eine deutlich geringere Geschwindigkeit für Homeoffice und Netflix?
 * **Kündigungsfenster sichern:** Wann kannst du wechseln? Markiere dir den Termin im Kalender.
 * **Kurs halten: Prüfe in regelmäßigen Zeitabständen konsequent nach, ob dein Tarif noch fair ist.** Der Markt ändert sich ständig.
 
-Oft gibt es für Neukunden hohe Rabatte oder Wechselprämien. Wenn deine Hardware (Mesh oder Verstärker) aktuell ist, kannst du solche Angebote voll ausnutzen. Ein Anbieterwechsel ist heute unkompliziert. Die Hardware in deiner Wohnung bleibt ja dein Eigentum und funktioniert mit jedem Anbieter.
+Oft gibt es für Neukunden hohe Rabatte oder Wechselprämien. Wenn deine Hardware (Mesh oder Verstärker) aktuell ist, kannst du solche Angebote voll ausnutzen. Ein [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) ist heute unkompliziert. Die Hardware in deiner Wohnung bleibt ja dein Eigentum und funktioniert mit jedem Anbieter.
 
 Hier kannst du prüfen, ob es aktuell bessere Tarife für dich gibt:
 [Hier DSL-Tarife vergleichen und Fixkosten senken](/go/dsl/) (Werbung | sponsored)
 
 ## Fazit: WLAN verbessern – Mesh-System oder Repeater im Check
 
- Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen; das ist ein Modellwert.
+ Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – [fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) reichen; das ist ein Modellwert.
 
 ## Häufige Fragen
 

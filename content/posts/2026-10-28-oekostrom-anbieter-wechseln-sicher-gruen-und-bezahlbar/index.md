@@ -140,7 +140,7 @@ Vermeide auch Tarife mit Paketpreisen. Hier kaufst du zum Beispiel genau 3.000 k
 
 Verbrauchst du weniger, bekommst du kein [Geld zurück](../../posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/). Verbrauchst du mehr, wird jede zusätzliche Kilowattstunde extrem teuer. Das ist für die meisten Haushalte ein schlechtes Geschäft. Bleib bei Tarifen, die nach tatsächlichem Verbrauch abrechnen.
 
-Achte zudem auf die Kündigungsfrist. Seit 2022 haben sich die Gesetze für Verbraucher verbessert.
+Achte zudem auf die [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/). Seit 2022 haben sich die Gesetze für Verbraucher verbessert.
 
 Verträge, die nach der Mindestlaufzeit weiterlaufen, sind oft monatlich kündbar. Prüfe dies in deinen Unterlagen, bevor du einen neuen Vertrag unterschreibst. So bleibst du flexibel im Kurs.
 

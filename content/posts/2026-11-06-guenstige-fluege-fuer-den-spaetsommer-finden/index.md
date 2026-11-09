@@ -96,6 +96,11 @@ Ein weiterer Fehler ist das Ignorieren der Tankregeln beim Auto. Wählen Sie imm
 
 Prüfen Sie auch die Versicherung für das Auto genau. Ein Schutz ohne Selbstbeteiligung ist oft ratsam. So haben Sie im Schadensfall keinen Ärger mit dem Geld. Viele Portale bieten diesen Schutz direkt bei der Buchung an. Das ist meist günstiger als der Kauf direkt beim Vermieter. Lesen Sie das Kleingedruckte zu den Schäden an Glas und Reifen. Diese sind oft nicht in der Basis-Police enthalten.
 
+
+
+**Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/)
+**Lesetipp:** [Reisekasse füllen: 7 Wege zu mehr Budget für den Urlaub](../../posts/2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub/)
+
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 
 ### Wie früh sollte ich meinen Flug für den Spätsommer buchen?

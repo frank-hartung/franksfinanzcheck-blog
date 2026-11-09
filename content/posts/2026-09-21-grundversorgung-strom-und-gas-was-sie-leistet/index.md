@@ -1,5 +1,5 @@
 ---
-title: "Grundversorgung Strom und Gas: Was sie leistet"
+title: "Grundversorgung Strom"
 description: "Grundversorgung Strom und Gas: das Auffangnetz der Energieversorgung und meist der teuerste Tarif. Wie du hineingerätst und wieder herauskommst."
 date: 2026-09-21T06:10:00Z
 lastmod: 2026-10-13

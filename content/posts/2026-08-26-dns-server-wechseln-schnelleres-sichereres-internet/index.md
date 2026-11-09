@@ -211,7 +211,7 @@ Viel Spaß beim Testen.
 **Wird mein Internet durch einen anderen DNS-Server schneller?**
 Nicht zwingend. Ein DNS-Server kann die DNS-Abfrage beschleunigen oder verlangsamen. Er erhöht aber nicht die Bandbreite und verbessert kein Funkloch. Vergleiche mehrere Tage unter denselben Bedingungen.
 
-**Kann mein Internetanbieter meine DNS-Anfragen danach noch sehen?**
+**Kann mein [Internetanbieter](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) meine DNS-Anfragen danach noch sehen?**
 Bei klassischem, unverschlüsseltem DNS kann ein Netzwerkbetreiber die Anfragen weiterhin mitlesen. Mit DoH oder DoT wird die Verbindung zum DNS-Server verschlüsselt. Der gewählte DNS-Server verarbeitet die Anfrage trotzdem. Weitere Verbindungsdaten bleiben sichtbar.
 
 **Welcher DNS-Anbieter ist der beste?**

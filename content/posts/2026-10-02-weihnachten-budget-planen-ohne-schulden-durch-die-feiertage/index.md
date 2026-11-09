@@ -73,7 +73,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 Genau das ist der Hebel: Weihnachten [Budget planen](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/).
 
 
-Darum geht es hier konkret: Weihnachten Budget planen.
+Darum geht es hier konkret: Weihnachten [Budget planen](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/).
 
 
 Das Fest trifft deine Kasse gleich doppelt. Der Dezember ist ohnehin ein teurer Monat. Und die Kosten kommen alle auf einmal.

@@ -76,7 +76,7 @@ Richte ein eigenes Sparziel ein. Du kannst Geld regelmäßig beiseitelegen, wenn
 
 Mach aus dem Ziel keinen Test deiner Disziplin. Wenn eine Rechnung dazwischenkommt, darfst du den Plan ändern. Prüfe dann, ob du den Reisezeitraum verschieben oder Kosten senken willst. Nimm kein Geld aus einer wichtigen Rücklage, nur damit die Buchung heute klappt.
 
-Eine separate Reisekasse hilft, das übrige Geld nicht versehentlich auszugeben. Sie muss kein besonderes Konto sein. Wichtig ist, dass du den Zweck erkennst und die Bedingungen verstehst. Prüfe mögliche Kosten und Zugriff, bevor du ein neues Produkt eröffnest.
+Eine separate [Reisekasse](../../posts/2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub/) hilft, das übrige Geld nicht versehentlich auszugeben. Sie muss kein besonderes Konto sein. Wichtig ist, dass du den Zweck erkennst und die Bedingungen verstehst. Prüfe mögliche Kosten und Zugriff, bevor du ein neues Produkt eröffnest.
 
 ## Was gehört in den Preisvergleich?
 
