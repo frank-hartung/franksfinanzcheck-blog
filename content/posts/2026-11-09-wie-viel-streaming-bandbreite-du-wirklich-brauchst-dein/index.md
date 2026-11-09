@@ -1,6 +1,6 @@
 ---
 title: "Wie viel Streaming‑Bandbreite: Du wirklich brauchst"
-description: "Streaming Bandbreite: Erhalte klare Antworten, wie viel…"
+description: "Wie viel Streaming‑Bandbreite: Du wirklich brauchst – so gehst du Schritt für Schritt vor, mit Rechenbeispiel und FAQ. Ehrlich, Zahlen statt Werbeversprechen."
 date: 2026-11-09T12:41:53Z
 draft: true
 reserve: true
