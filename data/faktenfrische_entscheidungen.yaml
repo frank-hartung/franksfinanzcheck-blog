@@ -2402,6 +2402,9 @@ entscheidungen:
   ursprungs_geprueft_fassung: 5c7f58caaba06a29a48045f07ca94372036ba96cec4b8349554367da74556b11
   projektion: betrieb-v2
   umgebunden_am: '2026-11-07'
+- slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_ursprung_slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_id: 30caa57be394afb62947
   geprueft_fassung: e899c20e8c81144116a4953e2439f23500dab8212fb3ed8281c7e18f0e5936ec
   typ: luecke
   beanstandung: Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt
@@ -2416,11 +2419,10 @@ entscheidungen:
     zum eigenen Tarif.
   vorgaenger_geprueft_fassung: b94188b3f0aa97192cf0c59e9012b4f07616f623a739ddb12799e90bc3c628fc
   folgeentscheidung: true
+  befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
 - slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
   befund_ursprung_slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
   befund_id: 32a3ea879f2cf126b3a7
-  befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
-  geprueft_fassung: f1e2ecf24394650b9b2c70093c6b4be49eb4bf52cabaddea7e5371c986ebe878
   geprueft_fassung: e899c20e8c81144116a4953e2439f23500dab8212fb3ed8281c7e18f0e5936ec
   typ: luecke
   beanstandung: Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen
@@ -2440,6 +2442,10 @@ entscheidungen:
   ursprungs_geprueft_fassung: 5c7f58caaba06a29a48045f07ca94372036ba96cec4b8349554367da74556b11
   projektion: betrieb-v2
   umgebunden_am: '2026-11-07'
+  befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
+- slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_ursprung_slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_id: 32a3ea879f2cf126b3a7
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
   entschieden_am: '2026-11-07'
   fassung_wechsel: true
@@ -2449,11 +2455,16 @@ entscheidungen:
     der Bundesnetzagentur erklärt.'
   vorgaenger_geprueft_fassung: b94188b3f0aa97192cf0c59e9012b4f07616f623a739ddb12799e90bc3c628fc
   folgeentscheidung: true
+  typ: luecke
+  beanstandung: Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen
+    der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim
+    Anbieterwechsel zentral ist.
+  befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
+  uebernommen_aus: vorheriger-block
+  geprueft_fassung: e899c20e8c81144116a4953e2439f23500dab8212fb3ed8281c7e18f0e5936ec
 - slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
   befund_ursprung_slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
   befund_id: c583efe1ce02df3ca2d7
-  befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
-  geprueft_fassung: f1e2ecf24394650b9b2c70093c6b4be49eb4bf52cabaddea7e5371c986ebe878
   geprueft_fassung: e899c20e8c81144116a4953e2439f23500dab8212fb3ed8281c7e18f0e5936ec
   typ: luecke
   beanstandung: Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur
@@ -2472,6 +2483,10 @@ entscheidungen:
   ursprungs_geprueft_fassung: 5c7f58caaba06a29a48045f07ca94372036ba96cec4b8349554367da74556b11
   projektion: betrieb-v2
   umgebunden_am: '2026-11-07'
+  befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
+- slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_ursprung_slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_id: c583efe1ce02df3ca2d7
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
   entschieden_am: '2026-11-07'
   fassung_wechsel: true
@@ -2480,11 +2495,16 @@ entscheidungen:
     nur mit dem eigenen Angebot und nennt keine Behörden-Ersparnis.
   vorgaenger_geprueft_fassung: b94188b3f0aa97192cf0c59e9012b4f07616f623a739ddb12799e90bc3c628fc
   folgeentscheidung: true
+  typ: luecke
+  beanstandung: Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur
+    für Januar 2026 (360 €) wird durch die allgemeine Übersichtsseite der Behörde
+    nicht gestützt.
+  befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
+  uebernommen_aus: vorheriger-block
+  geprueft_fassung: e899c20e8c81144116a4953e2439f23500dab8212fb3ed8281c7e18f0e5936ec
 - slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
   befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
   befund_id: 252413dcc16cea146beb
-  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
-  geprueft_fassung: 4ad23caa4da547978a2aef833fe5d5d81b85d51294720a7b0868ca5176349751
   geprueft_fassung: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
   typ: luecke
   beanstandung: Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher
@@ -2503,6 +2523,10 @@ entscheidungen:
   ursprungs_geprueft_fassung: 707147d80fda98774eef638e29e50b9ce4420bfe0421cc831795e9886a3bf4cc
   projektion: betrieb-v2
   umgebunden_am: '2026-11-07'
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_id: 252413dcc16cea146beb
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
   entschieden_am: '2026-11-07'
   fassung_wechsel: true
@@ -2512,11 +2536,15 @@ entscheidungen:
     Regeln verwiesen.
   vorgaenger_geprueft_fassung: 7b33855c9cf6cba7be6f1d9314ba75af40a5a74a8a9cd4d6ffbe539e78d12571
   folgeentscheidung: true
+  typ: luecke
+  beanstandung: Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher
+    angekündigt werden muss, ohne dafür eine Quelle anzugeben.
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+  uebernommen_aus: vorheriger-block
+  geprueft_fassung: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
 - slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
   befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
   befund_id: 48a0a962046c8315270e
-  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
-  geprueft_fassung: 4ad23caa4da547978a2aef833fe5d5d81b85d51294720a7b0868ca5176349751
   geprueft_fassung: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
   typ: praezision
   beanstandung: Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf
@@ -2537,6 +2565,10 @@ entscheidungen:
   ursprungs_geprueft_fassung: 707147d80fda98774eef638e29e50b9ce4420bfe0421cc831795e9886a3bf4cc
   projektion: betrieb-v2
   umgebunden_am: '2026-11-07'
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_id: 48a0a962046c8315270e
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
   entschieden_am: '2026-11-07'
   fassung_wechsel: true
@@ -2546,11 +2578,16 @@ entscheidungen:
     wird nicht mehr als üblich unterstellt.
   vorgaenger_geprueft_fassung: 7b33855c9cf6cba7be6f1d9314ba75af40a5a74a8a9cd4d6ffbe539e78d12571
   folgeentscheidung: true
+  typ: praezision
+  beanstandung: Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf
+    den Anbieter überträgt und dafür ein höherer Startpreis üblich ist, fehlt eine
+    konkrete Quelle und bleibt vage.
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+  uebernommen_aus: vorheriger-block
+  geprueft_fassung: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
 - slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
   befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
   befund_id: 9326152f4d788cff56bd
-  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
-  geprueft_fassung: 4ad23caa4da547978a2aef833fe5d5d81b85d51294720a7b0868ca5176349751
   geprueft_fassung: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
   typ: praezision
   beanstandung: Die Aussage, dass man „in der Regel“ zum Zeitpunkt der Preisänderung
@@ -2570,6 +2607,10 @@ entscheidungen:
   ursprungs_geprueft_fassung: 707147d80fda98774eef638e29e50b9ce4420bfe0421cc831795e9886a3bf4cc
   projektion: betrieb-v2
   umgebunden_am: '2026-11-07'
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_id: 9326152f4d788cff56bd
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
   entschieden_am: '2026-11-07'
   fassung_wechsel: true
@@ -2579,11 +2620,16 @@ entscheidungen:
     gebunden.
   vorgaenger_geprueft_fassung: 7b33855c9cf6cba7be6f1d9314ba75af40a5a74a8a9cd4d6ffbe539e78d12571
   folgeentscheidung: true
+  typ: praezision
+  beanstandung: Die Aussage, dass man „in der Regel“ zum Zeitpunkt der Preisänderung
+    Sonderkündigungsrecht hat, ist unpräzise und wird nicht durch eine konkrete Regelung
+    belegt.
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+  uebernommen_aus: vorheriger-block
+  geprueft_fassung: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
 - slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
   befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
   befund_id: ab4d084fd367c8e4d518
-  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
-  geprueft_fassung: 4ad23caa4da547978a2aef833fe5d5d81b85d51294720a7b0868ca5176349751
   geprueft_fassung: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
   typ: luecke
   beanstandung: Der angegebene durchschnittliche Gaspreis von 11,93 Cent/kWh für 2026
@@ -2602,6 +2648,10 @@ entscheidungen:
   ursprungs_geprueft_fassung: 707147d80fda98774eef638e29e50b9ce4420bfe0421cc831795e9886a3bf4cc
   projektion: betrieb-v2
   umgebunden_am: '2026-11-07'
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_id: ab4d084fd367c8e4d518
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
   entschieden_am: '2026-11-07'
   fassung_wechsel: true
@@ -2610,11 +2660,15 @@ entscheidungen:
     eigene Vertragswerte und Modellrechnungen statt eines unbelegten Durchschnittspreises.
   vorgaenger_geprueft_fassung: 7b33855c9cf6cba7be6f1d9314ba75af40a5a74a8a9cd4d6ffbe539e78d12571
   folgeentscheidung: true
+  typ: luecke
+  beanstandung: Der angegebene durchschnittliche Gaspreis von 11,93 Cent/kWh für 2026
+    (laut BDEW) wird nicht durch eine Quelle belegt.
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+  uebernommen_aus: vorheriger-block
+  geprueft_fassung: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
 - slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
   befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
   befund_id: d215addd22dea72c44df
-  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
-  geprueft_fassung: 4ad23caa4da547978a2aef833fe5d5d81b85d51294720a7b0868ca5176349751
   geprueft_fassung: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
   typ: luecke
   beanstandung: Die Angabe, dass die Verbraucherzentrale etwa 6 % weniger Heizenergie
@@ -2633,6 +2687,10 @@ entscheidungen:
   ursprungs_geprueft_fassung: 707147d80fda98774eef638e29e50b9ce4420bfe0421cc831795e9886a3bf4cc
   projektion: betrieb-v2
   umgebunden_am: '2026-11-07'
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_id: d215addd22dea72c44df
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
   entschieden_am: '2026-11-07'
   fassung_wechsel: true
@@ -2641,11 +2699,15 @@ entscheidungen:
     die neue Fassung ergänzt die Schimmelgrenze und trennt Verbrauchseffekt von Geldersparnis.
   vorgaenger_geprueft_fassung: 7b33855c9cf6cba7be6f1d9314ba75af40a5a74a8a9cd4d6ffbe539e78d12571
   folgeentscheidung: true
+  typ: luecke
+  beanstandung: Die Angabe, dass die Verbraucherzentrale etwa 6 % weniger Heizenergie
+    pro Grad niedrigerer Raumtemperatur nennt, fehlt eine Quellenangabe.
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+  uebernommen_aus: vorheriger-block
+  geprueft_fassung: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
 - slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
   befund_ursprung_slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
   befund_id: 089b89138417e63a3dcf
-  befund_fassung: 4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7
-  geprueft_fassung: 3b3904ecbdf508734f8bacb2716c2757b685338e1c236cd1f839e61855bf62c1
   geprueft_fassung: b2693d4ac268b6500f367a8f752410fc3a7a7ca0cec7481069f01a1c1c472717
   typ: luecke
   beanstandung: Es fehlt der für Campingbuchungen relevante Regulierungsrahmen (Unterscheidung
@@ -2661,6 +2723,13 @@ entscheidungen:
     Pauschalreiserecht deshalb nicht automatisch greift und dass Storno, Maengel und
     Anzahlung im Vertrag stehen. Die allgemeine Andeutung der Fundstelle ist damit
     durch eine konkrete Einordnung ersetzt.'
+  befund_fassung: 4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7
+  vorgaenger_geprueft_fassung: c1031348c0bc901cabd62afb88cca65bee618bbc231fc1e758d105d8d334ae74
+  folgeentscheidung: true
+  kette_ergaenzt: true
+- slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
+  befund_ursprung_slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
+  befund_id: 089b89138417e63a3dcf
   beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen/onlinereisebueros-so-vermeiden-sie-probleme-bei-der-urlaubsbuchung-11306
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
   entschieden_am: '2026-11-07'
@@ -2671,11 +2740,16 @@ entscheidungen:
     und verweist auf den VZ-Ratgeber.
   vorgaenger_geprueft_fassung: c1031348c0bc901cabd62afb88cca65bee618bbc231fc1e758d105d8d334ae74
   folgeentscheidung: true
+  typ: luecke
+  beanstandung: Es fehlt der für Campingbuchungen relevante Regulierungsrahmen (Unterscheidung
+    Mietrecht bei Stellplätzen vs. Reiserecht), den die Fundstelle für den Bereich
+    Reise nur allgemein andeutet.
+  befund_fassung: 4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7
+  uebernommen_aus: vorheriger-block
+  geprueft_fassung: b2693d4ac268b6500f367a8f752410fc3a7a7ca0cec7481069f01a1c1c472717
 - slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
   befund_ursprung_slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
   befund_id: 1158934e7a18c7b2099b
-  befund_fassung: 4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7
-  geprueft_fassung: 3b3904ecbdf508734f8bacb2716c2757b685338e1c236cd1f839e61855bf62c1
   geprueft_fassung: b2693d4ac268b6500f367a8f752410fc3a7a7ca0cec7481069f01a1c1c472717
   typ: luecke
   beanstandung: Die Preisangabe von 20 bis 45 € pro Nacht wird als realistischer Wert
@@ -2690,6 +2764,13 @@ entscheidungen:
     Die verbliebenen Betraege sind als Modellrechnung mit frei gewaehltem Wert gekennzeichnet
     (''31 Euro je Nacht ... Der Betrag ist frei gewaehlt und kein Durchschnittspreis'').
     Eine Marktpreis-Behauptung ohne Beleg gibt es damit nicht mehr.'
+  befund_fassung: 4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7
+  vorgaenger_geprueft_fassung: c1031348c0bc901cabd62afb88cca65bee618bbc231fc1e758d105d8d334ae74
+  folgeentscheidung: true
+  kette_ergaenzt: true
+- slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
+  befund_ursprung_slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
+  befund_id: 1158934e7a18c7b2099b
   beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen/onlinereisebueros-so-vermeiden-sie-probleme-bei-der-urlaubsbuchung-11306
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 07.11.2026)
   entschieden_am: '2026-11-07'
@@ -2699,6 +2780,13 @@ entscheidungen:
     ein konkretes Angebot am Wunschplatz inklusive Pflichtgebühren als Planungsgrundlage.
   vorgaenger_geprueft_fassung: c1031348c0bc901cabd62afb88cca65bee618bbc231fc1e758d105d8d334ae74
   folgeentscheidung: true
+  typ: luecke
+  beanstandung: Die Preisangabe von 20 bis 45 € pro Nacht wird als realistischer Wert
+    positioniert, ist jedoch nicht durch Marktdaten oder eine Referenzstelle in den
+    Fundstellen belegt.
+  befund_fassung: 4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7
+  uebernommen_aus: vorheriger-block
+  geprueft_fassung: b2693d4ac268b6500f367a8f752410fc3a7a7ca0cec7481069f01a1c1c472717
 - slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
   befund_ursprung_slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
   befund_id: 3716cfd3ab5aec6d774b
@@ -2877,6 +2965,9 @@ entscheidungen:
     Text nicht mehr.'
   vorgaenger_geprueft_fassung: cb5fd9779ae0f95d7258a3635f307d01d33dac670303c6fec734ec64721fd162
   folgeentscheidung: true
+- slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
+  befund_ursprung_slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
+  befund_id: 3716cfd3ab5aec6d774b
   geprueft_fassung: b2693d4ac268b6500f367a8f752410fc3a7a7ca0cec7481069f01a1c1c472717
   typ: praezision
   beanstandung: Der Verweis auf die Verbraucherzentrale zur Prüfung von Buchungsangaben
@@ -2891,6 +2982,7 @@ entscheidungen:
     Storno ergänzt.
   vorgaenger_geprueft_fassung: c1031348c0bc901cabd62afb88cca65bee618bbc231fc1e758d105d8d334ae74
   folgeentscheidung: true
+  befund_fassung: 4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7
 - slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
   befund_ursprung_slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
   befund_id: 1e06a96f6f71e104ce0b
@@ -2908,6 +3000,9 @@ entscheidungen:
     bestätigt. Die Meal-Prep-Priorisierung ist relativiert: Der moderate Nahrungsmittelwert
     +0,4 % wird genannt, und die Sparwirkung wird an die eigenen Auswärts-Essgewohnheiten
     gebunden. Unbelegte 20-%-/Drittel-Aussagen sind entfernt.'
+  vorgaenger_geprueft_fassung: 63d9c9e0ce536b0749e7c9f7267eee47688637e905d181727b7d508e6f8ed673
+  folgeentscheidung: true
+  kette_ergaenzt: true
 - slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
   befund_ursprung_slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
   befund_id: 81c6a707139046b83ccd
@@ -2925,6 +3020,9 @@ entscheidungen:
     bestätigt. Die Energiepreisentwicklung ist mit Destatis-Quelle ergänzt: Oktober
     vorläufig +12,2 %, September +14,9 %. Die Fixkostenprüfung bleibt, wird aber an
     den eigenen Rechnungen ausgerichtet.'
+  vorgaenger_geprueft_fassung: 63d9c9e0ce536b0749e7c9f7267eee47688637e905d181727b7d508e6f8ed673
+  folgeentscheidung: true
+  kette_ergaenzt: true
 - slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
   befund_ursprung_slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
   befund_id: 8cc00288af8a1f2b02d8
@@ -2941,6 +3039,9 @@ entscheidungen:
     bestätigt. Die vorläufige Oktober-Inflation von 2,8 % ist mit Destatis-PM ergänzt;
     das Haushaltsbuch wird auf eigene Vormonatsausgaben und tatsächliche Preisänderungen
     verpflichtet.
+  vorgaenger_geprueft_fassung: 63d9c9e0ce536b0749e7c9f7267eee47688637e905d181727b7d508e6f8ed673
+  folgeentscheidung: true
+  kette_ergaenzt: true
 - slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
   befund_ursprung_slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
   befund_id: 5a1bf10697f58e5fe14a
@@ -2958,6 +3059,9 @@ entscheidungen:
     bestätigt. Die Energiepreisentwicklung ist mit Destatis-Quelle ergänzt und korrekt
     zwischen September +14,9 % und Oktober vorläufig +12,2 % unterschieden. Heizbeispiele
     bleiben als Modellrechnung markiert.
+  vorgaenger_geprueft_fassung: 80864b8c6acf0d1db81e616d26dae11573d1297910cd528c3fd856e5c43872e4
+  folgeentscheidung: true
+  kette_ergaenzt: true
 - slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
   befund_ursprung_slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
   befund_id: e48f9237cff6397c49a6
@@ -2975,6 +3079,9 @@ entscheidungen:
     bestätigt. Die 50–200-€-Aussage ist in Kurzantwort und Text als Modellwert markiert
     und ausdrücklich nicht als Inflationsausgleich oder zugesagte Ersparnis formuliert;
     die Oktober-Inflation 2,8 % ist belegt.
+  vorgaenger_geprueft_fassung: 80864b8c6acf0d1db81e616d26dae11573d1297910cd528c3fd856e5c43872e4
+  folgeentscheidung: true
+  kette_ergaenzt: true
 - slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
   befund_ursprung_slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
   befund_id: f6de6b078d49f9d42e0e
@@ -2992,6 +3099,9 @@ entscheidungen:
     bestätigt. Der Nahrungsmittelwert +0,4 % ist mit Destatis-Quelle ergänzt und gegen
     den Energie-Teilindex abgegrenzt. Die Lebensmittelplanung wird nicht mehr aus
     einer unbelegten Marktbehauptung priorisiert.
+  vorgaenger_geprueft_fassung: 80864b8c6acf0d1db81e616d26dae11573d1297910cd528c3fd856e5c43872e4
+  folgeentscheidung: true
+  kette_ergaenzt: true
 - slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   befund_ursprung_slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   befund_id: 6cb2229c5eb83b02da23
@@ -3009,6 +3119,9 @@ entscheidungen:
     bestätigt. Die 140-€-Energieannahme ist ausdrücklich als frei gewählter Modellwert
     markiert. Die neue Fassung ergänzt die Destatis-Preisentwicklung und erklärt,
     wann die 50-Prozent-Quote angepasst werden muss.
+  vorgaenger_geprueft_fassung: 93eef60478faa401224d3e086cafcfb76bab450425b25ec27238b631771eced3
+  folgeentscheidung: true
+  kette_ergaenzt: true
 - slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   befund_ursprung_slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   befund_id: f00055a1cb65ee22165f
@@ -3026,6 +3139,9 @@ entscheidungen:
     bestätigt. Planbarkeit ist von Unveränderlichkeit abgegrenzt: Oktober-Inflation
     2,8 %, Energie +12,2 % und Nahrungsmittel +0,4 % sind mit Destatis-PM belegt;
     Budget und Sparrate werden an echte Rechnungen gekoppelt.'
+  vorgaenger_geprueft_fassung: 93eef60478faa401224d3e086cafcfb76bab450425b25ec27238b631771eced3
+  folgeentscheidung: true
+  kette_ergaenzt: true
 - slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
   befund_ursprung_slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
   befund_id: 43470330b3b48c9cee49
@@ -3219,972 +3335,3 @@ entscheidungen:
     nur abgeleitete Bildzeile geaendert.'
   vorgaenger_geprueft_fassung: a628247a97b7075b144bba5ac67889b3906a6c749d71336b7c77d70b02b621e5
   folgeentscheidung: true
-fassung_normalisierungen:
-- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
-  befund_id: 47f855cb4f0fe1e5c65f
-  von: d79d585ae1f171cca0d78eeef212069938c405d4c15e470eb39c1e513c7f5248
-  nach: 61076cb7a7922644f552f238c500cd9725a6767245ed89e55ec6b4a8ee8031da
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
-  befund_id: 6b0aa3429d97e8c74ed8
-  von: d79d585ae1f171cca0d78eeef212069938c405d4c15e470eb39c1e513c7f5248
-  nach: 61076cb7a7922644f552f238c500cd9725a6767245ed89e55ec6b4a8ee8031da
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
-  befund_id: 7f66ec82ee1a3f095b0c
-  von: d79d585ae1f171cca0d78eeef212069938c405d4c15e470eb39c1e513c7f5248
-  nach: 61076cb7a7922644f552f238c500cd9725a6767245ed89e55ec6b4a8ee8031da
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
-  befund_id: 84c991c5d152b14a2675
-  von: d79d585ae1f171cca0d78eeef212069938c405d4c15e470eb39c1e513c7f5248
-  nach: 61076cb7a7922644f552f238c500cd9725a6767245ed89e55ec6b4a8ee8031da
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
-  befund_id: a70e7adc97c58317ccc1
-  von: d79d585ae1f171cca0d78eeef212069938c405d4c15e470eb39c1e513c7f5248
-  nach: 61076cb7a7922644f552f238c500cd9725a6767245ed89e55ec6b4a8ee8031da
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
-  befund_id: 0051151e6c46f4c2bdb3
-  von: 43f25bedcb59a3ef8ebdf48e43bcf3fe1c266a5dba9b564a60df1bb94c8fb3d0
-  nach: 399bf8cda5e04bdf71b3122b5065934b72b9ca317bd14816ef2a4764da2617f3
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
-  befund_id: 0790f52160dfaa819917
-  von: 43f25bedcb59a3ef8ebdf48e43bcf3fe1c266a5dba9b564a60df1bb94c8fb3d0
-  nach: 399bf8cda5e04bdf71b3122b5065934b72b9ca317bd14816ef2a4764da2617f3
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
-  befund_id: 53c3fde8e986e6560890
-  von: 43f25bedcb59a3ef8ebdf48e43bcf3fe1c266a5dba9b564a60df1bb94c8fb3d0
-  nach: 399bf8cda5e04bdf71b3122b5065934b72b9ca317bd14816ef2a4764da2617f3
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
-  befund_id: 89adecebaae75c147402
-  von: 43f25bedcb59a3ef8ebdf48e43bcf3fe1c266a5dba9b564a60df1bb94c8fb3d0
-  nach: 399bf8cda5e04bdf71b3122b5065934b72b9ca317bd14816ef2a4764da2617f3
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
-  befund_id: a1a269b73a1b9c2dfc88
-  von: 43f25bedcb59a3ef8ebdf48e43bcf3fe1c266a5dba9b564a60df1bb94c8fb3d0
-  nach: 399bf8cda5e04bdf71b3122b5065934b72b9ca317bd14816ef2a4764da2617f3
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
-  befund_id: 124ff2c3cd3917c274aa
-  von: 62c6cd41a8758c7ba2c79e3b2391bf6bff6ef15964c94b77e1f916336620773e
-  nach: d4773de9014aae3d0bddaa2ede4a1465a626a79127d071d2ddf6ff1680ee9850
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
-  befund_id: 7bdec96c0329769bebe6
-  von: 62c6cd41a8758c7ba2c79e3b2391bf6bff6ef15964c94b77e1f916336620773e
-  nach: d4773de9014aae3d0bddaa2ede4a1465a626a79127d071d2ddf6ff1680ee9850
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas
-  befund_id: a56734aa032e0ed9e0c4
-  von: 62c6cd41a8758c7ba2c79e3b2391bf6bff6ef15964c94b77e1f916336620773e
-  nach: d4773de9014aae3d0bddaa2ede4a1465a626a79127d071d2ddf6ff1680ee9850
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
-  befund_id: 30caa57be394afb62947
-  von: e899c20e8c81144116a4953e2439f23500dab8212fb3ed8281c7e18f0e5936ec
-  nach: faa0c1d843ddbaa63ed657c4939fa6aa4c8e70a48b59ef91c9dcbaef59836e00
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
-  befund_id: 32a3ea879f2cf126b3a7
-  von: e899c20e8c81144116a4953e2439f23500dab8212fb3ed8281c7e18f0e5936ec
-  nach: faa0c1d843ddbaa63ed657c4939fa6aa4c8e70a48b59ef91c9dcbaef59836e00
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
-  befund_id: c583efe1ce02df3ca2d7
-  von: e899c20e8c81144116a4953e2439f23500dab8212fb3ed8281c7e18f0e5936ec
-  nach: faa0c1d843ddbaa63ed657c4939fa6aa4c8e70a48b59ef91c9dcbaef59836e00
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
-  befund_id: 437b809ffbf41e5af434
-  von: 2c8bb988de5e5275d98544b15f6a016dd57d09f1285476b366cdf229f6f658e7
-  nach: 3f0055320883a0f6399b8eed20a1af0105577efbba80b4c49cd68eec994406c8
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
-  befund_id: 9fbacd9942c2dfa1447f
-  von: 2c8bb988de5e5275d98544b15f6a016dd57d09f1285476b366cdf229f6f658e7
-  nach: 3f0055320883a0f6399b8eed20a1af0105577efbba80b4c49cd68eec994406c8
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
-  befund_id: da30cbb5fbc8c801daf0
-  von: 2c8bb988de5e5275d98544b15f6a016dd57d09f1285476b366cdf229f6f658e7
-  nach: 3f0055320883a0f6399b8eed20a1af0105577efbba80b4c49cd68eec994406c8
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
-  befund_id: db8a69f08dc0020adebd
-  von: 2c8bb988de5e5275d98544b15f6a016dd57d09f1285476b366cdf229f6f658e7
-  nach: 3f0055320883a0f6399b8eed20a1af0105577efbba80b4c49cd68eec994406c8
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
-  befund_id: e834f4702e87194affe7
-  von: 2c8bb988de5e5275d98544b15f6a016dd57d09f1285476b366cdf229f6f658e7
-  nach: 3f0055320883a0f6399b8eed20a1af0105577efbba80b4c49cd68eec994406c8
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
-  befund_id: 252413dcc16cea146beb
-  von: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
-  nach: 3a99d09b9f4c92f64e655fd022b2c63d86909caec60dc50ed2833cd7c8ae3a0b
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
-  befund_id: 48a0a962046c8315270e
-  von: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
-  nach: 3a99d09b9f4c92f64e655fd022b2c63d86909caec60dc50ed2833cd7c8ae3a0b
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
-  befund_id: 9326152f4d788cff56bd
-  von: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
-  nach: 3a99d09b9f4c92f64e655fd022b2c63d86909caec60dc50ed2833cd7c8ae3a0b
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
-  befund_id: ab4d084fd367c8e4d518
-  von: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
-  nach: 3a99d09b9f4c92f64e655fd022b2c63d86909caec60dc50ed2833cd7c8ae3a0b
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
-  befund_id: d215addd22dea72c44df
-  von: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
-  nach: 3a99d09b9f4c92f64e655fd022b2c63d86909caec60dc50ed2833cd7c8ae3a0b
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort
-  befund_id: 3f0a88ede9d44ee910cb
-  von: 05589f81ec3f44b37ac454fff366ae71c56b05d33e27f440fd3def26cf5595d3
-  nach: 914d9d162ec060fa1444dabd7fff595e01844697d905e7d88b84a11c6d64ed9a
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort
-  befund_id: 51e259fd2d8582e774f7
-  von: 05589f81ec3f44b37ac454fff366ae71c56b05d33e27f440fd3def26cf5595d3
-  nach: 914d9d162ec060fa1444dabd7fff595e01844697d905e7d88b84a11c6d64ed9a
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort
-  befund_id: 55f8eeedc587cf0895ee
-  von: 05589f81ec3f44b37ac454fff366ae71c56b05d33e27f440fd3def26cf5595d3
-  nach: 914d9d162ec060fa1444dabd7fff595e01844697d905e7d88b84a11c6d64ed9a
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
-  befund_id: 045ff990e44a7035e9a0
-  von: 6b555fc607d67d841f386ba4e32d300ff2260284f195f8fcb0d5d7f3350d4fed
-  nach: 0058ab244b37964098402bcb1a2c3e45c345f44886d1b4223eef86122b26c43e
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
-  befund_id: 8919c2d1145af782d17a
-  von: 6b555fc607d67d841f386ba4e32d300ff2260284f195f8fcb0d5d7f3350d4fed
-  nach: 0058ab244b37964098402bcb1a2c3e45c345f44886d1b4223eef86122b26c43e
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer
-  befund_id: c39938841291b1e9e140
-  von: 6b555fc607d67d841f386ba4e32d300ff2260284f195f8fcb0d5d7f3350d4fed
-  nach: 0058ab244b37964098402bcb1a2c3e45c345f44886d1b4223eef86122b26c43e
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
-  befund_id: 0aa915539d57841e5014
-  von: c163b3a7e5e2278a90e85d5245097b15bfc8c0155026d71f1eb25abedb9f6f05
-  nach: 9b2d2616667bd134ba51f359a109d4ce9fc0659e997a5f0b23ed627a3023067e
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
-  befund_id: 5e1be48085014a836807
-  von: c163b3a7e5e2278a90e85d5245097b15bfc8c0155026d71f1eb25abedb9f6f05
-  nach: 9b2d2616667bd134ba51f359a109d4ce9fc0659e997a5f0b23ed627a3023067e
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
-  befund_id: 6fdf31c3b68b6122bd0d
-  von: c163b3a7e5e2278a90e85d5245097b15bfc8c0155026d71f1eb25abedb9f6f05
-  nach: 9b2d2616667bd134ba51f359a109d4ce9fc0659e997a5f0b23ed627a3023067e
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
-  befund_id: c27c182c615bd7ca3b78
-  von: c163b3a7e5e2278a90e85d5245097b15bfc8c0155026d71f1eb25abedb9f6f05
-  nach: 9b2d2616667bd134ba51f359a109d4ce9fc0659e997a5f0b23ed627a3023067e
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
-  befund_id: e1e40e9bbbdd109df86e
-  von: c163b3a7e5e2278a90e85d5245097b15bfc8c0155026d71f1eb25abedb9f6f05
-  nach: 9b2d2616667bd134ba51f359a109d4ce9fc0659e997a5f0b23ed627a3023067e
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
-  befund_id: 334751e6f61ad0033fe4
-  von: f25e4371dda7c430c3ba9ba6552e1f618da3e222231d79c6f92e2e5fb128955a
-  nach: 81c0d89a4716909a8dfb6a590d67948263143e353f965bf7b16cfbb0f1bca0b0
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
-  befund_id: 36759a5efe5e8e5163d0
-  von: f25e4371dda7c430c3ba9ba6552e1f618da3e222231d79c6f92e2e5fb128955a
-  nach: 81c0d89a4716909a8dfb6a590d67948263143e353f965bf7b16cfbb0f1bca0b0
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
-  befund_id: 942922d1afd7844618e9
-  von: f25e4371dda7c430c3ba9ba6552e1f618da3e222231d79c6f92e2e5fb128955a
-  nach: 81c0d89a4716909a8dfb6a590d67948263143e353f965bf7b16cfbb0f1bca0b0
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
-  befund_id: d41f0d5ce8798df0211b
-  von: f25e4371dda7c430c3ba9ba6552e1f618da3e222231d79c6f92e2e5fb128955a
-  nach: 81c0d89a4716909a8dfb6a590d67948263143e353f965bf7b16cfbb0f1bca0b0
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
-  befund_id: e139d0769faadd04392a
-  von: f25e4371dda7c430c3ba9ba6552e1f618da3e222231d79c6f92e2e5fb128955a
-  nach: 81c0d89a4716909a8dfb6a590d67948263143e353f965bf7b16cfbb0f1bca0b0
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
-  befund_id: 04e40219cb4ff593b415
-  von: 9a11783d70e3a308e78233faaae8a87aac71f3bacb7212309e6a83cf8782b7f4
-  nach: 08f5f37a465e74d2790e490292f4fd2eeda455befa24c572334af8f3bc44d9a5
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
-  befund_id: 2d01dc2629ad9c81f569
-  von: 9a11783d70e3a308e78233faaae8a87aac71f3bacb7212309e6a83cf8782b7f4
-  nach: 08f5f37a465e74d2790e490292f4fd2eeda455befa24c572334af8f3bc44d9a5
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
-  befund_id: 3fd64026f55df4965cc9
-  von: 9a11783d70e3a308e78233faaae8a87aac71f3bacb7212309e6a83cf8782b7f4
-  nach: 08f5f37a465e74d2790e490292f4fd2eeda455befa24c572334af8f3bc44d9a5
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
-  befund_id: 799c93c89a10fc3cf267
-  von: 9a11783d70e3a308e78233faaae8a87aac71f3bacb7212309e6a83cf8782b7f4
-  nach: 08f5f37a465e74d2790e490292f4fd2eeda455befa24c572334af8f3bc44d9a5
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig
-  befund_id: cd81b3d9001b04c0a4e1
-  von: 9a11783d70e3a308e78233faaae8a87aac71f3bacb7212309e6a83cf8782b7f4
-  nach: 08f5f37a465e74d2790e490292f4fd2eeda455befa24c572334af8f3bc44d9a5
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
-  befund_id: 58f03a64adaaf8125959
-  von: 6c3f7310efa402d0023bf19076d03c95039d1e6cfecd26726b8928a40d43c577
-  nach: bb2a3b336c1cbafa15495aa2112307dc78ad2a3c76d054ef924e0a2c2d22effb
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
-  befund_id: a7f5f01ef15a38839a0d
-  von: 6c3f7310efa402d0023bf19076d03c95039d1e6cfecd26726b8928a40d43c577
-  nach: bb2a3b336c1cbafa15495aa2112307dc78ad2a3c76d054ef924e0a2c2d22effb
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
-  befund_id: bcc2bdf06220d5097133
-  von: 6c3f7310efa402d0023bf19076d03c95039d1e6cfecd26726b8928a40d43c577
-  nach: bb2a3b336c1cbafa15495aa2112307dc78ad2a3c76d054ef924e0a2c2d22effb
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
-  befund_id: 089b89138417e63a3dcf
-  von: b2693d4ac268b6500f367a8f752410fc3a7a7ca0cec7481069f01a1c1c472717
-  nach: 981494a67798dde40dfd7aa043c9d05ffd0e9277ed2ca41e654f729907ba2390
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
-  befund_id: 1158934e7a18c7b2099b
-  von: b2693d4ac268b6500f367a8f752410fc3a7a7ca0cec7481069f01a1c1c472717
-  nach: 981494a67798dde40dfd7aa043c9d05ffd0e9277ed2ca41e654f729907ba2390
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
-  befund_id: 3716cfd3ab5aec6d774b
-  von: b2693d4ac268b6500f367a8f752410fc3a7a7ca0cec7481069f01a1c1c472717
-  nach: 981494a67798dde40dfd7aa043c9d05ffd0e9277ed2ca41e654f729907ba2390
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen
-  befund_id: 7067eabb89a917ae67a4
-  von: 5b0d2f124a51460f8fb96e1d7ef1592ec34e7e1870109e3c59eace7c6048af95
-  nach: 5d808ae675018ce3c96575a29cbeeac29251c448b95c8bb2ee260d31920e43be
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen
-  befund_id: af2ccb4222eeb195222f
-  von: 5b0d2f124a51460f8fb96e1d7ef1592ec34e7e1870109e3c59eace7c6048af95
-  nach: 5d808ae675018ce3c96575a29cbeeac29251c448b95c8bb2ee260d31920e43be
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen
-  befund_id: d9c8b522bf1dcaed0340
-  von: 5b0d2f124a51460f8fb96e1d7ef1592ec34e7e1870109e3c59eace7c6048af95
-  nach: 5d808ae675018ce3c96575a29cbeeac29251c448b95c8bb2ee260d31920e43be
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen
-  befund_id: e2975509f3f130de0755
-  von: 5b0d2f124a51460f8fb96e1d7ef1592ec34e7e1870109e3c59eace7c6048af95
-  nach: 5d808ae675018ce3c96575a29cbeeac29251c448b95c8bb2ee260d31920e43be
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen
-  befund_id: f1704e45e970a8f4b078
-  von: 5b0d2f124a51460f8fb96e1d7ef1592ec34e7e1870109e3c59eace7c6048af95
-  nach: 5d808ae675018ce3c96575a29cbeeac29251c448b95c8bb2ee260d31920e43be
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig
-  befund_id: 34e4bb2acfa235699da5
-  von: a66296006c46fe193c168ec5a973b37bfc193e9c39959d5bea8d0cf9855c58ac
-  nach: f65a5834a712d8491585d7bf2d89ef84a31dbd9b5ad8aa9db4865c7565fd7499
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig
-  befund_id: 42b9d842341d892d42d0
-  von: a66296006c46fe193c168ec5a973b37bfc193e9c39959d5bea8d0cf9855c58ac
-  nach: f65a5834a712d8491585d7bf2d89ef84a31dbd9b5ad8aa9db4865c7565fd7499
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig
-  befund_id: 866d8b711dc2de369444
-  von: a66296006c46fe193c168ec5a973b37bfc193e9c39959d5bea8d0cf9855c58ac
-  nach: f65a5834a712d8491585d7bf2d89ef84a31dbd9b5ad8aa9db4865c7565fd7499
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig
-  befund_id: bd4c46a336f33a639f05
-  von: a66296006c46fe193c168ec5a973b37bfc193e9c39959d5bea8d0cf9855c58ac
-  nach: f65a5834a712d8491585d7bf2d89ef84a31dbd9b5ad8aa9db4865c7565fd7499
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig
-  befund_id: e76768fdef3ef5afa026
-  von: a66296006c46fe193c168ec5a973b37bfc193e9c39959d5bea8d0cf9855c58ac
-  nach: f65a5834a712d8491585d7bf2d89ef84a31dbd9b5ad8aa9db4865c7565fd7499
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
-  befund_id: 1dbeb2f8c51e78d11d49
-  von: ee80b1c41c43ad1ca41cfbc4c049935f1cd2e8e26e5e063cf9c4300337e1df87
-  nach: fe19039509c173f575a6ebddd49d477f7f7b185a905854143a5cabb7910c6758
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
-  befund_id: 33e736ac6afe996b491a
-  von: ee80b1c41c43ad1ca41cfbc4c049935f1cd2e8e26e5e063cf9c4300337e1df87
-  nach: fe19039509c173f575a6ebddd49d477f7f7b185a905854143a5cabb7910c6758
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
-  befund_id: 96b7b7768d402884810c
-  von: ee80b1c41c43ad1ca41cfbc4c049935f1cd2e8e26e5e063cf9c4300337e1df87
-  nach: fe19039509c173f575a6ebddd49d477f7f7b185a905854143a5cabb7910c6758
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
-  befund_id: a25bb6bbcb25ba8b0e22
-  von: ee80b1c41c43ad1ca41cfbc4c049935f1cd2e8e26e5e063cf9c4300337e1df87
-  nach: fe19039509c173f575a6ebddd49d477f7f7b185a905854143a5cabb7910c6758
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
-  befund_id: f94f8ba1e4342e67e45a
-  von: ee80b1c41c43ad1ca41cfbc4c049935f1cd2e8e26e5e063cf9c4300337e1df87
-  nach: fe19039509c173f575a6ebddd49d477f7f7b185a905854143a5cabb7910c6758
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
-  befund_id: 4afb8daed73677ee6224
-  von: 64b0b6a3e1fcc7c896291a8df01b19f12dcd6577c7d369f94b21cef8c29f2d2f
-  nach: 339b1806dc3e4205545b0e0ea216006129e5374620a5b9b7d734e732d0b92d69
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
-  befund_id: 9eb9a90899cc8ca66020
-  von: 64b0b6a3e1fcc7c896291a8df01b19f12dcd6577c7d369f94b21cef8c29f2d2f
-  nach: 339b1806dc3e4205545b0e0ea216006129e5374620a5b9b7d734e732d0b92d69
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
-  befund_id: b4bd085bc84a6131b644
-  von: 64b0b6a3e1fcc7c896291a8df01b19f12dcd6577c7d369f94b21cef8c29f2d2f
-  nach: 339b1806dc3e4205545b0e0ea216006129e5374620a5b9b7d734e732d0b92d69
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
-  befund_id: baed76dc211bd15dd46f
-  von: 64b0b6a3e1fcc7c896291a8df01b19f12dcd6577c7d369f94b21cef8c29f2d2f
-  nach: 339b1806dc3e4205545b0e0ea216006129e5374620a5b9b7d734e732d0b92d69
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
-  befund_id: d7c3cfb422310cf26ca6
-  von: 64b0b6a3e1fcc7c896291a8df01b19f12dcd6577c7d369f94b21cef8c29f2d2f
-  nach: 339b1806dc3e4205545b0e0ea216006129e5374620a5b9b7d734e732d0b92d69
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps
-  befund_id: 3fe383f6d452737f66f2
-  von: 2aeeea4817c9e61a787dd5a47c651de20aa67b0167f44ce645d29b7e24e0f4d4
-  nach: ead1433fad0468ded13602e4acbe764e177fdca9797cfbe7510003eb035bd48b
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps
-  befund_id: 7bba759bbb4ca14c7f35
-  von: 2aeeea4817c9e61a787dd5a47c651de20aa67b0167f44ce645d29b7e24e0f4d4
-  nach: ead1433fad0468ded13602e4acbe764e177fdca9797cfbe7510003eb035bd48b
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps
-  befund_id: e8e32a383b6f803cc8d4
-  von: 2aeeea4817c9e61a787dd5a47c651de20aa67b0167f44ce645d29b7e24e0f4d4
-  nach: ead1433fad0468ded13602e4acbe764e177fdca9797cfbe7510003eb035bd48b
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
-  befund_id: 16b3b8584ff802803aa9
-  von: 3542dedd52220209f49b8549d8278f5e4b249601b1e352acd2557bd65a6e0313
-  nach: 1388fe45e97bc03275444b274720d0046054a32f5c8b93e1b5ddb83529d53973
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
-  befund_id: 7ff042b6fe804cdf101b
-  von: 3542dedd52220209f49b8549d8278f5e4b249601b1e352acd2557bd65a6e0313
-  nach: 1388fe45e97bc03275444b274720d0046054a32f5c8b93e1b5ddb83529d53973
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
-  befund_id: bec83c4b814183fa1086
-  von: 3542dedd52220209f49b8549d8278f5e4b249601b1e352acd2557bd65a6e0313
-  nach: 1388fe45e97bc03275444b274720d0046054a32f5c8b93e1b5ddb83529d53973
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
-  befund_id: f9aff86b6eba71b153a6
-  von: 3542dedd52220209f49b8549d8278f5e4b249601b1e352acd2557bd65a6e0313
-  nach: 1388fe45e97bc03275444b274720d0046054a32f5c8b93e1b5ddb83529d53973
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
-  befund_id: fed9215b770ea4879eda
-  von: 3542dedd52220209f49b8549d8278f5e4b249601b1e352acd2557bd65a6e0313
-  nach: 1388fe45e97bc03275444b274720d0046054a32f5c8b93e1b5ddb83529d53973
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-28-dsl-und-internet-flat-guenstig-sichern
-  befund_id: 05be346e82c80b2a8664
-  von: 009fcd4b02dc2737e5d9986593ea2979ffd8757bf74668e77ecbff24a3834bfd
-  nach: 3f650b59aae30570b6e9fd85ffdf52e8d76a0355fc7f430bd3a5a9f5c41da11a
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-28-dsl-und-internet-flat-guenstig-sichern
-  befund_id: d0a5cf7bb64eb0cd46c8
-  von: 009fcd4b02dc2737e5d9986593ea2979ffd8757bf74668e77ecbff24a3834bfd
-  nach: 3f650b59aae30570b6e9fd85ffdf52e8d76a0355fc7f430bd3a5a9f5c41da11a
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-28-dsl-und-internet-flat-guenstig-sichern
-  befund_id: ec53e181336df8dc61ac
-  von: 009fcd4b02dc2737e5d9986593ea2979ffd8757bf74668e77ecbff24a3834bfd
-  nach: 3f650b59aae30570b6e9fd85ffdf52e8d76a0355fc7f430bd3a5a9f5c41da11a
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-28-dsl-und-internet-flat-guenstig-sichern
-  befund_id: f3f9184bfca9b097f68e
-  von: 009fcd4b02dc2737e5d9986593ea2979ffd8757bf74668e77ecbff24a3834bfd
-  nach: 3f650b59aae30570b6e9fd85ffdf52e8d76a0355fc7f430bd3a5a9f5c41da11a
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-28-dsl-und-internet-flat-guenstig-sichern
-  befund_id: fb4d2260f4fa291c35ae
-  von: 009fcd4b02dc2737e5d9986593ea2979ffd8757bf74668e77ecbff24a3834bfd
-  nach: 3f650b59aae30570b6e9fd85ffdf52e8d76a0355fc7f430bd3a5a9f5c41da11a
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden
-  befund_id: 176642ea8acfa44f1152
-  von: ec863589891f5a5ea552aebd03cd9523a53cafc60e2e56365a71a9509632781c
-  nach: 0f94a4cea6fbc8072d6a9393c4606565871aa8eccc0b28abdf1f59c641c406c5
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden
-  befund_id: 2520f45d441ef87614e3
-  von: ec863589891f5a5ea552aebd03cd9523a53cafc60e2e56365a71a9509632781c
-  nach: 0f94a4cea6fbc8072d6a9393c4606565871aa8eccc0b28abdf1f59c641c406c5
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden
-  befund_id: 33bda5941052d9334598
-  von: ec863589891f5a5ea552aebd03cd9523a53cafc60e2e56365a71a9509632781c
-  nach: 0f94a4cea6fbc8072d6a9393c4606565871aa8eccc0b28abdf1f59c641c406c5
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden
-  befund_id: 7406eaba3aa749c46f4b
-  von: ec863589891f5a5ea552aebd03cd9523a53cafc60e2e56365a71a9509632781c
-  nach: 0f94a4cea6fbc8072d6a9393c4606565871aa8eccc0b28abdf1f59c641c406c5
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden
-  befund_id: 9f47e6d2aa8cf2a8ff91
-  von: ec863589891f5a5ea552aebd03cd9523a53cafc60e2e56365a71a9509632781c
-  nach: 0f94a4cea6fbc8072d6a9393c4606565871aa8eccc0b28abdf1f59c641c406c5
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich
-  befund_id: 20c08cb650ef6e24af64
-  von: aae33865f0f84980b0a5f9c96a35e4003d87069e9b6695bbad26e18d16d74f45
-  nach: ecde8451417ac49ceace3a0767c78cab7bb5e917db3703163e404d9f384990d8
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich
-  befund_id: 6aafb23c0c6dbb06ce3b
-  von: aae33865f0f84980b0a5f9c96a35e4003d87069e9b6695bbad26e18d16d74f45
-  nach: ecde8451417ac49ceace3a0767c78cab7bb5e917db3703163e404d9f384990d8
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
-  befund_id: 24f05ddc03ffdd50118f
-  von: be2c33c144ef7862a025f6fa09504cb8a9a76a6a01d815d65f9f293c52ad6f7e
-  nach: db0bb067347b0efd02cb227b5b1850338f0ce317ec7df947287e4f87a76279b3
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
-  befund_id: 4816322f061dfdc03bcd
-  von: be2c33c144ef7862a025f6fa09504cb8a9a76a6a01d815d65f9f293c52ad6f7e
-  nach: db0bb067347b0efd02cb227b5b1850338f0ce317ec7df947287e4f87a76279b3
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
-  befund_id: 7017065ee7c74c7ae452
-  von: be2c33c144ef7862a025f6fa09504cb8a9a76a6a01d815d65f9f293c52ad6f7e
-  nach: db0bb067347b0efd02cb227b5b1850338f0ce317ec7df947287e4f87a76279b3
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-11-02-last-minute-urlaubsangebote-sichern
-  befund_id: 0a2bec9dc02e16c057ee
-  von: 19ab33d86a322015b37fcb4092c59b7446ffffacf15493b8a49b09298c071d90
-  nach: f5c0a530f15dd0483204591a248cc6a923bf523e9c536687252bda8d9ce25e13
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-11-02-last-minute-urlaubsangebote-sichern
-  befund_id: 274c32d1a16e9dffcf1a
-  von: 19ab33d86a322015b37fcb4092c59b7446ffffacf15493b8a49b09298c071d90
-  nach: f5c0a530f15dd0483204591a248cc6a923bf523e9c536687252bda8d9ce25e13
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-11-02-last-minute-urlaubsangebote-sichern
-  befund_id: 5c572a933edece129bba
-  von: 19ab33d86a322015b37fcb4092c59b7446ffffacf15493b8a49b09298c071d90
-  nach: f5c0a530f15dd0483204591a248cc6a923bf523e9c536687252bda8d9ce25e13
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-11-02-last-minute-urlaubsangebote-sichern
-  befund_id: 9d9d4afc8d6c421a0d14
-  von: 19ab33d86a322015b37fcb4092c59b7446ffffacf15493b8a49b09298c071d90
-  nach: f5c0a530f15dd0483204591a248cc6a923bf523e9c536687252bda8d9ce25e13
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-11-02-last-minute-urlaubsangebote-sichern
-  befund_id: fb50388539a0e8b4461c
-  von: 19ab33d86a322015b37fcb4092c59b7446ffffacf15493b8a49b09298c071d90
-  nach: f5c0a530f15dd0483204591a248cc6a923bf523e9c536687252bda8d9ce25e13
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
-  befund_id: 785eee76d888bb05ad96
-  von: c83db5c8f5f3145ce12303a945dcf8b870eb432f8ee23ca268cacc91c97d3f98
-  nach: fe9b5dadcbfb0b0fcf828c6150893dd98363eca463722f55cfda39ef66fac300
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
-  befund_id: 843ec148e23841b7bf35
-  von: c83db5c8f5f3145ce12303a945dcf8b870eb432f8ee23ca268cacc91c97d3f98
-  nach: fe9b5dadcbfb0b0fcf828c6150893dd98363eca463722f55cfda39ef66fac300
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
-  befund_id: def43a04853be4c35f7f
-  von: c83db5c8f5f3145ce12303a945dcf8b870eb432f8ee23ca268cacc91c97d3f98
-  nach: fe9b5dadcbfb0b0fcf828c6150893dd98363eca463722f55cfda39ef66fac300
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
-  befund_id: f064ea49ccefde26aef9
-  von: c83db5c8f5f3145ce12303a945dcf8b870eb432f8ee23ca268cacc91c97d3f98
-  nach: fe9b5dadcbfb0b0fcf828c6150893dd98363eca463722f55cfda39ef66fac300
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
-  befund_id: 4284fd2d9c9005e7af8f
-  von: bd1f7a3f9f9a3f406dc2142b9138b1696791c753bdb0386b46fce925460ded24
-  nach: 4d89113d0557136cd0859e68f06b60d3b9cb8613bb0fca90be3bd819e563f986
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
-  befund_id: 84e247f17354e224c973
-  von: bd1f7a3f9f9a3f406dc2142b9138b1696791c753bdb0386b46fce925460ded24
-  nach: 4d89113d0557136cd0859e68f06b60d3b9cb8613bb0fca90be3bd819e563f986
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
-  befund_id: a2a7dc69f10393af6531
-  von: bd1f7a3f9f9a3f406dc2142b9138b1696791c753bdb0386b46fce925460ded24
-  nach: 4d89113d0557136cd0859e68f06b60d3b9cb8613bb0fca90be3bd819e563f986
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
-  befund_id: cb794331f1cc0c715a55
-  von: bd1f7a3f9f9a3f406dc2142b9138b1696791c753bdb0386b46fce925460ded24
-  nach: 4d89113d0557136cd0859e68f06b60d3b9cb8613bb0fca90be3bd819e563f986
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
-  befund_id: e6729081522126e972c2
-  von: bd1f7a3f9f9a3f406dc2142b9138b1696791c753bdb0386b46fce925460ded24
-  nach: 4d89113d0557136cd0859e68f06b60d3b9cb8613bb0fca90be3bd819e563f986
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: versicherungen
-  befund_id: 360dbd44c71db04f43e0
-  von: 9baf4c50aa717700886318791320fd165b2da5eee131820f7ee34ecf0a529c40
-  nach: 0dcb27fcf884938805f9e43a4db65ef3d7a5d6f9175a4beba2d1457d21eaf1aa
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: versicherungen
-  befund_id: a4f736ca6f8f1a70fe60
-  von: 9baf4c50aa717700886318791320fd165b2da5eee131820f7ee34ecf0a529c40
-  nach: 0dcb27fcf884938805f9e43a4db65ef3d7a5d6f9175a4beba2d1457d21eaf1aa
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: versicherungen
-  befund_id: c2de49121dea2b8b7cc6
-  von: 9baf4c50aa717700886318791320fd165b2da5eee131820f7ee34ecf0a529c40
-  nach: 0dcb27fcf884938805f9e43a4db65ef3d7a5d6f9175a4beba2d1457d21eaf1aa
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: versicherungen
-  befund_id: de9bc512fad04e99c1da
-  von: 9baf4c50aa717700886318791320fd165b2da5eee131820f7ee34ecf0a529c40
-  nach: 0dcb27fcf884938805f9e43a4db65ef3d7a5d6f9175a4beba2d1457d21eaf1aa
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: versicherungen
-  befund_id: e7ab68c9e3b2f443c904
-  von: 9baf4c50aa717700886318791320fd165b2da5eee131820f7ee34ecf0a529c40
-  nach: 0dcb27fcf884938805f9e43a4db65ef3d7a5d6f9175a4beba2d1457d21eaf1aa
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
-  befund_id: 1e06a96f6f71e104ce0b
-  von: 30c5d5824140945b95e845db27e7470b93db82ea7959bd92f90f1dce552f4bf6
-  nach: dfb2a19a5d456bf91efb380cf41f1d56e2c14e56853ce86bf6a2660a4dcebf5e
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
-  befund_id: 81c6a707139046b83ccd
-  von: 30c5d5824140945b95e845db27e7470b93db82ea7959bd92f90f1dce552f4bf6
-  nach: dfb2a19a5d456bf91efb380cf41f1d56e2c14e56853ce86bf6a2660a4dcebf5e
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
-  befund_id: 8cc00288af8a1f2b02d8
-  von: 30c5d5824140945b95e845db27e7470b93db82ea7959bd92f90f1dce552f4bf6
-  nach: dfb2a19a5d456bf91efb380cf41f1d56e2c14e56853ce86bf6a2660a4dcebf5e
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
-  befund_id: 5a1bf10697f58e5fe14a
-  von: db4e9f96cbbb640aaddc961bb840e3a36ca3188abc497d59789044563e779f65
-  nach: 40bc6cbb4094b0f8743440e1f968541a00e7583c8a87e92a0ec77e61a6f1bfbb
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
-  befund_id: e48f9237cff6397c49a6
-  von: db4e9f96cbbb640aaddc961bb840e3a36ca3188abc497d59789044563e779f65
-  nach: 40bc6cbb4094b0f8743440e1f968541a00e7583c8a87e92a0ec77e61a6f1bfbb
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'
-- slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
-  befund_id: f6de6b078d49f9d42e0e
-  von: db4e9f96cbbb640aaddc961bb840e3a36ca3188abc497d59789044563e779f65
-  nach: 40bc6cbb4094b0f8743440e1f968541a00e7583c8a87e92a0ec77e61a6f1bfbb
-  am: '2026-11-07'
-  grund: 'Fassungsbindung auf Kerntext umgestellt (#1098): Beim Migrieren war der
-    Alt-Hash bytegleich zum heutigen Text; abgeleitete Bildzeilen tragen keine eigene
-    Aussage.'

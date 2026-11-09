@@ -583,8 +583,14 @@ jobs:
             // Rot sieht man, Grün glaubt man. Seit 07.11. misst
             // `scripts/backup_selbstheilung.py` diesen Zustand (Klasse
             // `leerlauf`, Exit 4) und meldet ihn über einen eigenen Schritt.
+            // 08.11.2026: Der Wortlaut ist die Klasse. Zwei Schritte tragen das
+            // Wort „Selbstheilung“ (Anstoßen) bzw. „Leerlauf prüfen“ (Lesen).
+            // Vorher matchte diese Regel JEDES „Selbstheilung“ – damit wurde
+            // ein Werkzeugfehler der Heilung als grüner Leerlauf gelesen (und
+            // der Rat „bitte einrichten“ stand über einem Code-Problem).
+            // Die Simulation hält beide Richtungen fest (#1030, #923).
             const backupLeerlauf = (isBackup || isBackupFrisch) && !backupEinrichtung &&
-              failedStepNames.some(s => String(s).includes('Selbstheilung'));
+              failedStepNames.some(s => String(s).includes('Leerlauf prüfen'));
             // ================================================================
             //  WF-53E2 / #780 (16.10.2026): EIN ROTER SELBSTTEST IST EINE
             //  CODE-REGRESSION – KEIN SCHLÜSSEL, KEIN AUSFALL, KEIN NEUSTART

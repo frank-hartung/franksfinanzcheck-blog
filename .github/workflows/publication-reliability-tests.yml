@@ -46,15 +46,17 @@ permissions:
 jobs:
   regression:
     runs-on: ubuntu-24.04
-    # 01.11.2026: 20 -> 30 Minuten. Die Suite läuft in diesem Job zweimal
+    # 08.11.2026: 30 -> 45 Minuten. Die Suite läuft in diesem Job ZWEIMAL
     # (Code-Regression und Uhr-Probe an fremden Kalendertagen). Am aufgenommenen
-    # Stand brauchten die beiden Schritte 8m33s und 8m28s; zusammen mit Build,
-    # Reserve-Snapshot und KI-Probe lag der Lauf über 20 Minuten und die
-    # KI-Probe wurde mitten im Schritt abgeschnitten (Lauf 41335261721,
-    # Schritt 11 "cancelled"). Die Grenze ist eine Notbremse gegen Hänger, keine
-    # Messung – die Prüfungen selbst bleiben unverändert. Wer sie wieder senkt,
-    # muss die Schrittdauern im letzten grünen Lauf nachweisen.
-    timeout-minutes: 30
+    # Stand brauchten die beiden Schritte 8m33s und 8m28s; seitdem ist die Suite
+    # um rund 230 Tests gewachsen und braucht lokal gemessen 14m29s je Lauf
+    # (5676 Tests, echter Hugo-Build, Hugo 0.168.0). Zwei solche Läufe plus
+    # Build, Reserve-Snapshot und KI-Probe sprengen 30 Minuten allein durch
+    # Rechenzeit – Lauf 42504141712 wurde bei 30m0s abgeschnitten, obwohl der
+    # Code-Regression-Schritt durch war. Die Grenze ist eine Notbremse gegen
+    # Hänger, keine Messung; die Prüfungen selbst bleiben unverändert. Wer sie
+    # wieder senkt, muss die Schrittdauern im letzten grünen Lauf nachweisen.
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
@@ -117,10 +119,57 @@ jobs:
       # Auslieferung aller 75). Der Job bleibt über den Snapshot rot –
       # fail-closed im Sinne von #634 – aber er liefert wieder Signal.
       # `!cancelled()` ist das Haus-Muster, siehe Beweis-Ledger-Schritt unten.
+      # MESSUNG UND MESSOBJEKT MÜSSEN DERSELBE STAND SEIN (08.11.2026).
+      # Der Build oben entsteht in Schritt 6; zwischen ihm und der Suite
+      # arbeiten aber „KI-Cover-Provenienz“ und der Reserve-Snapshot an
+      # content/ und data/. Gemessen wurde danach ein `public/`, das älter war
+      # als der Bestand – im Lauf 42518243348 stand deshalb ein Entwurf im
+      # Feed, den die Suite (zu Recht) nicht als Seite kannte: 49 von 50
+      # Items belegt. Der Prüf-Build wird deshalb unmittelbar vor der Suite
+      # WIEDERHOLT: gleicher Stand, gleiche Wahrheit. Er ist billig (~3 s)
+      # und macht den Job reproduzierbar, statt ihn zu entschärfen.
+      - name: Prüf-Build vor der Suite (gleicher Stand wie die Messung)
+        if: ${{ !cancelled() }}
+        uses: ./.github/actions/hugo-build
+        with:
+          args: --minify --destination public --cleanDestinationDir
+          label: "Prüf-Build (Suite-Stand)"
+
       - name: Code-Regression – Suite und Selbsttests
         if: ${{ !cancelled() }}
         run: |
-          python3 -m unittest discover -s scripts/tests -v
+          # EIN ROTER TEST MUSS SEINEN NAMEN SAGEN (08.11.2026).
+          # „Process completed with exit code 1" ist keine Diagnose: Ohne den
+          # Testnamen beginnt jede Ferndiagnose mit Raten – und wer die Logs
+          # nicht abrufen kann (Sandbox, Aufbewahrungsfrist), kommt gar nicht
+          # an die Ursache. Jeder rote Test wird deshalb als Annotation an den
+          # Lauf gehängt (lesbar über die Check-Runs-API, unabhängig vom Log).
+          set +e
+          python3 -m unittest discover -s scripts/tests -v > /tmp/suite.log 2>&1
+          SUITE_RC=$?
+          set -e
+          tail -120 /tmp/suite.log
+          if [ "$SUITE_RC" != "0" ]; then
+            # Name UND Behauptung: Der Name sagt, WER rot ist, der Rumpf sagt,
+            # WARUM. Ohne beides endet jede Ferndiagnose in „nochmal raten".
+            python3 - <<'PYANNO'
+          import re
+          import pathlib
+
+          def ent(text: str) -> str:
+              # GitHub-Annotation: %, Zeilenumbrüche und CR maskieren.
+              return (text.replace('%', '%25').replace('\r', '')
+                          .replace('\n', '%0A'))[:1500]
+
+          log = pathlib.Path('/tmp/suite.log').read_text(errors='ignore')
+          muster = re.compile(r'^(FAIL|ERROR): (\S+) \((.*?)\)\n-+\n(.*?)'
+                              r'(?=\n(?:={20,}|-{20,}|Ran \d+ tests))', re.S | re.M)
+          for art, name, ort, rumpf in list(muster.findall(log))[:10]:
+              print(f"::error title=Code-Regression::{ent(name)} ({ent(ort)})"
+                    f" %0A{ent(rumpf)}")
+          PYANNO
+            exit 1
+          fi
           python3 scripts/engine_generate.py --selftest
           python3 scripts/reserve_pool.py --selftest
           python3 scripts/cadence_guard.py --selftest
@@ -137,7 +186,22 @@ jobs:
       # vorgestellten Uhr: dieselben Tests, fremdes Datum, gleiches Ergebnis.
       - name: Uhr-Probe – die Suite muss an jedem Kalendertag grün sein
         if: ${{ !cancelled() }}   # Blustradius #676: Daten-Befund schaltet Code-Prüfung nicht aus
-        run: python3 scripts/selftest_clock.py --trap-discover scripts/tests --offset 97
+        run: |
+          # Dieselbe Diagnose wie in der Code-Regression: Der rote Test nennt
+          # seinen Namen (und seine Behauptung) als Annotation, unabhängig
+          # davon, ob jemand an das Log kommt.
+          set +e
+          set -o pipefail
+          python3 scripts/selftest_clock.py --trap-discover scripts/tests --offset 97 \
+            > /tmp/uhr.log 2>&1
+          UHR_RC=$?
+          set -e
+          tail -80 /tmp/uhr.log
+          if [ "$UHR_RC" != "0" ]; then
+            grep -E '^(FAIL|ERROR): ' /tmp/uhr.log | head -5 \
+              | sed -E 's/^[A-Z]+: ([^ (]+).*/::error title=Uhr-Probe::\1/' || true
+            exit "$UHR_RC"
+          fi
       # KI-PROBE (Dauerheilung Content-Engine v2 #138, 08.10.2026): Jeder
       # Selbsttest, den irgendein Workflow aufruft, läuft hier mit Attrappen-
       # Schlüsseln und gesperrtem Netz. Hier fehlen echte Schlüssel – in der

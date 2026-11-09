@@ -94,6 +94,57 @@ ABFRAGE_TAKT_S = 15
 VORUEBERGEHEND = {0, 429, 500, 502, 503, 504}
 AKTIVE_ZUSTAENDE = {"queued", "in_progress", "requested", "waiting", "pending"}
 
+# Die Frischwache selbst – sie ist der Aufrufer und liefert den Rückweg-Nachweis
+# (Schritt „Kurzpruefung Wiederherstellbarkeit“). Getrennt von WORKFLOW, weil
+# „keine Sicherung gelaufen“ und „der Nachweis wurde übersprungen“ zwei
+# verschiedene Aussagen sind (WF-9E5A / #923).
+FRISCHE_WORKFLOW = "backup-frischwache.yml"
+
+# =====================================================================
+#  KLASSEN – was darf dieses Modul selbst, und was nie? (H2)
+#  ------------------------------------------------------------
+#  Ein Selbstheiler, der „alles“ reparieren darf, ist ein Freibrief. Heilbar
+#  ist hier GENAU eine Klasse: der nicht gestartete Lauf. Alles andere hat
+#  einen Inhaber (Zugänge, Passphrase, Environment-Regeln) oder ist eine
+#  Code-Frage (übersprungener Nachweis) – ein Anstoß würde dort nur denselben
+#  Fehler wiederholen und das Grün erkaufen, statt es zu belegen.
+# =====================================================================
+KLASSEN = {
+    "scheduler": {
+        "heilbar": True,
+        "grund": ("Der geplante Lauf fehlt (Scheduler-Aussetzer, verworfenes Token, "
+                  "Environment-Regel) – ein Anstoß von `backup-offsite.yml` auf `main` "
+                  "ist der geprüfte Weg und wird nach 15 Min. erneut gemessen."),
+    },
+    "leerlauf": {
+        "heilbar": False,
+        "grund": ("Ein grüner Lauf ohne `BACKUP_REPO`/`BACKUP_PASSPHRASE` sichert nur "
+                  "eine Kurzzeitkopie im selben Konto. Das ist eine Einrichtungs-"
+                  "aufgabe (E1/E3) – ein Neustart erzeugt nur einen weiteren grünen "
+                  "Leerlauf."),
+    },
+    "scheinbeweis": {
+        "heilbar": False,
+        "grund": ("Der Rückweg-Nachweis wurde übersprungen oder ist gescheitert. „Nicht "
+                  "geprüft“ ist kein Grün; ein Anstoß ändert an einem übersprungenen "
+                  "Schritt nichts."),
+    },
+    "einrichtung": {
+        "heilbar": False,
+        "grund": ("E1–E8 sind Zugänge und Regeln des Inhabers. Dieses Modul legt keine "
+                  "Secrets, Variablen oder Environment-Regeln an (Rechte-Trennung) – "
+                  "es nennt nur, was fehlt."),
+    },
+}
+
+# Exit-Codes des Betriebs-Urteils (dieselbe Sprache wie das Alerting):
+# 0 = kein Befund · 1 = Befund ohne Beweis (Scheinbeweis) · 3 = Inhaber-Schritt
+# (Einrichtung hat Vorrang) · 4 = grüner Leerlauf bei vollständiger Einrichtung.
+EXIT_BEFUND = 1
+EXIT_EINRICHTUNG = 3
+EXIT_LEERLAUF = 4
+EXIT_WERKZEUG = 2
+
 
 # =====================================================================
 #  HTTP – eine Stelle, im Selbsttest austauschbar
@@ -263,13 +314,14 @@ def entscheide(befunde: list[dict], *, aktiver_lauf: bool = False,
 #  Lauf-Historie und Anstoß
 # =====================================================================
 def laeufe_holen(quelle: str, workflow: str, token: str,
-                 http=None) -> tuple[int, list[dict] | None, str]:
+                 http=None, per_page: int = 30) -> tuple[int, list[dict] | None, str]:
     if not quelle or "/" not in quelle:
         return 0, None, "Kein Quell-Repository (GITHUB_REPOSITORY) angegeben."
     if not token:
         return 401, None, "Kein Aktion-Token (actions: write) vorhanden."
     http = http or HTTP
-    url = f"{GH_API}/repos/{quelle}/actions/workflows/{urllib.parse.quote(workflow)}/runs?per_page=30"
+    url = (f"{GH_API}/repos/{quelle}/actions/workflows/{urllib.parse.quote(workflow)}"
+           f"/runs?per_page={max(1, min(int(per_page), 100))}")
     status, daten, netz = http("GET", url, token)
     if status != 200 or not isinstance(daten, dict):
         meldung = ""
@@ -322,6 +374,244 @@ def _laeufe_auswerten(laeufe: list[dict], jetzt: dt.datetime) -> dict:
             versuche_24h += 1
     return {"aktiv": aktiv, "letzter_start_min": letzter_start_min,
             "versuche_24h": versuche_24h, "juengster": juengster}
+
+
+# =====================================================================
+#  ZEUGEN UND MESSHÖHE (WF-9E5A / #923, 07.11.2026)
+#  ------------------------------------------------------------
+#  Die Lehre des Tages: „Ein System, das an der falschen Höhe misst, ist
+#  nicht halb richtig – es ist in beide Richtungen falsch.“
+#    · Gemessen wird der JOB („backup“), nicht der Gesamtlauf: Ein KV-Job
+#      kann rot sein, während der Repo-Job grün ist – und umgekehrt.
+#    · Gemessen wird der jüngste Lauf, der Schritte HAT: Ein `workflow_dispatch`
+#      auf einem fremden Branch steht als `skipped` mit NULL Schritten in der
+#      Liste (Job-Guard `refs/heads/main`). Wer den liest, löscht den Befund
+#      genau dann, wenn er ihn braucht.
+# =====================================================================
+def _zeugt_lauf(lauf) -> bool:
+    """Ist dieser Lauf ein Zeuge – oder nur ein Platzhalter?
+
+    Ein Lauf ohne Ausführung (`skipped`, kein Abschluss) bezeugt nichts. Er
+    ist kein Fehler, aber er ist auch kein Beweis: Er wird ÜBERSPRUNGEN, nicht
+    als „grün“ oder „rot“ gelesen.
+    """
+    if not isinstance(lauf, dict):
+        return False
+    return str(lauf.get("conclusion") or "").strip() not in ("", "skipped")
+
+
+def _jobs_url(lauf: dict, quelle: str) -> str:
+    """Job-Liste eines Laufs – bevorzugt die von GitHub gelieferte `jobs_url`.
+
+    Die API nennt die Adresse im Lauf selbst (`jobs_url`). Sie zu benutzen
+    hält die Endpunkt-Liste dieses Moduls bei DREI Pfaden: Es entsteht kein
+    vierter, hartkodierter GitHub-Pfad, und die Rechte-Zusage des Vertrags
+    bleibt lesbar.
+    """
+    direkt = str(lauf.get("jobs_url") or "").strip()
+    if not direkt:
+        direkt = GH_API + f"/repos/{quelle}/actions/runs/{int(lauf.get('id') or 0)}/jobs"
+    return direkt if "?" in direkt else direkt + "?per_page=50"
+
+
+def _jobs_des_juengsten(quelle: str, token: str, workflow: str = FRISCHE_WORKFLOW,
+                        http=None) -> tuple[int, list[dict], str]:
+    """Jobs des jüngsten Laufs, der tatsächlich Schritte hat (fail-closed)."""
+    http = http or HTTP
+    status, laeufe, meldung = laeufe_holen(quelle, workflow, token, http, per_page=20)
+    if status != 200 or laeufe is None:
+        return status, [], meldung or f"HTTP {status}"
+    zeugen = [l for l in laeufe if _zeugt_lauf(l)]
+    zeugen.sort(key=lambda l: _iso(l.get("created_at")) or dt.datetime.min.replace(
+        tzinfo=dt.timezone.utc), reverse=True)
+    for lauf in zeugen:
+        status, daten, netz = http("GET", _jobs_url(lauf, quelle), token)
+        if status != 200 or not isinstance(daten, dict):
+            continue
+        jobs = [j for j in (daten.get("jobs") or []) if isinstance(j, dict)]
+        if any(j.get("steps") for j in jobs):
+            return 200, jobs, ""
+    return 200, [], "Kein abgeschlossener Lauf mit Schritten gefunden."
+
+
+def _schritte_des_juengsten(quelle: str, token: str, workflow: str = FRISCHE_WORKFLOW,
+                            http=None) -> list[dict]:
+    """Alle Schritte des jüngsten zeugenden Laufs (leer, wenn keiner zeugt)."""
+    status, jobs, _ = _jobs_des_juengsten(quelle, token, workflow, http)
+    if status != 200:
+        return []
+    return [s for j in jobs for s in (j.get("steps") or []) if isinstance(s, dict)]
+
+
+def pruefe_leerlauf(jobs, ziel_gesetzt, pflicht_gesetzt, jetzt=None) -> list[dict]:
+    """Der grüne Leerlauf: Job „backup“ success – und trotzdem nichts gesichert.
+
+    Ohne dauerhaftes Ziel (`BACKUP_REPO`) bzw. ohne Passphrase legt der Job
+    ausschließlich eine 7-Tage-Kurzzeitkopie im SELBEN Konto ab. Bei
+    Kontoverlust ist sie mit weg. „Gelaufen“ ist dann wahr, „gesichert“ nicht –
+    und dieses Grün ist gefährlicher als jedes Rot im Backup: Rot sieht man,
+    Grün glaubt man.
+
+    Der KV-Job ist kein Zeuge: Er legt nie ein Repo-Artefakt an, sein Grün
+    sagt nichts über das Offsite-Backup.
+    """
+    gemessen = jetzt or dt.datetime.now(dt.timezone.utc)
+    # Nur die ANWESENHEIT wird gelesen, nie der Wert – und der Name sagt das
+    # auch: `ziel_gesetzt`/`pflicht_gesetzt` sind JA/NEIN, keine Geheimnisse.
+    # (Klartext-Wache FLUSS; ein Name wie `passphrase` behauptete einen Wert,
+    # den diese Prüfung nie sieht – CODE-SCANNING-80.)
+    ziel_da, pflicht_da = bool(ziel_gesetzt), bool(pflicht_gesetzt)
+    befund: list[dict] = []
+    for job in jobs or []:
+        if not isinstance(job, dict):
+            continue
+        name = str(job.get("name") or "").strip()
+        if name.lower() != "backup":
+            continue
+        if str(job.get("conclusion") or "").strip() != "success":
+            continue
+        fehlt = [kennung for kennung, gesetzt in (("BACKUP_REPO", ziel_da),
+                                                  ("BACKUP_PASSPHRASE", pflicht_da))
+                 if not gesetzt]
+        if not fehlt:
+            continue
+        befund.append({
+            "klasse": "leerlauf",
+            "praefix": "backup",
+            "heilbar": False,
+            "stufe": "warnung",
+            "text": (f"Job „{name}“ ist grün, gesichert wurde aber nichts "
+                     f"({', '.join(fehlt)} fehlt) – es existiert nur eine "
+                     "Kurzzeitkopie im selben Konto, kein Offsite-Schutz."),
+            "beleg": {"job": name, "conclusion": "success", "fehlt": fehlt,
+                      "gemessen": gemessen.isoformat()},
+        })
+    return befund
+
+
+def _leerlauf_urteil(jobs: list[dict], umgebung: dict, jetzt, *,
+                     einrichtung_offen=None) -> dict:
+    """`betreibe_urteil` ohne Netz – der Selbsttest braucht keinen Dispatch."""
+    def http(methode: str, url: str, kopf, koerper=None):
+        if url.endswith("/runs?per_page=20"):
+            return 200, {"workflow_runs": [{"id": 7, "conclusion": "success",
+                                            "created_at": "2026-11-07T03:00:00Z"}]}, ""
+        return 200, {"jobs": [{**j, "steps": j.get("steps") or [
+            {"name": "Bundle + Arbeitskopie erstellen", "conclusion": "success"}]}
+            for j in jobs]}, ""
+
+    return betreibe_urteil({**umgebung, "GITHUB_REPOSITORY": "a/b", "GH_TOKEN": "t"},
+                           jetzt=jetzt, http=http, einrichtung_offen=einrichtung_offen)
+
+
+def pruefe_scheinbeweis(schritte, jetzt=None) -> list[dict]:
+    """Ein übersprungener Rückweg-Nachweis ist ein Befund, kein Nichts."""
+    gemessen = jetzt or dt.datetime.now(dt.timezone.utc)
+    befund: list[dict] = []
+    for schritt in schritte or []:
+        if not isinstance(schritt, dict):
+            continue
+        name = str(schritt.get("name") or "")
+        if "Wiederherstellbarkeit" not in name:
+            continue
+        if str(schritt.get("conclusion") or "") != "skipped":
+            continue
+        befund.append({
+            "klasse": "scheinbeweis",
+            "praefix": "rueckweg",
+            "heilbar": False,
+            "stufe": "warnung",
+            "text": (f"Schritt „{name}“ wurde übersprungen – der Rückweg ist damit "
+                     "nicht belegt („nicht geprüft“ ist kein Grün)."),
+            "beleg": {"schritt": name, "conclusion": "skipped",
+                      "gemessen": gemessen.isoformat()},
+        })
+    return befund
+
+
+def betreibe_urteil(umgebung: dict | None = None, *, jetzt: dt.datetime | None = None,
+                    http=None, quelle: str = "", workflow: str = WORKFLOW,
+                    einrichtung_offen: list[str] | None = None) -> dict:
+    """Urteil auf JOB-Ebene – ohne Anstoß, ohne Schreibzugriff.
+
+    Struktur: `{"messbar": bool, "befunde": [...], "exit": int, "text": str}`.
+    Die Reihenfolge der Klassen ist die Reihenfolge der Antworten: offene
+    Einrichtung zuerst (sie ist die Ursache), dann Leerlauf, dann Scheinbeweis.
+    """
+    umgebung = dict(os.environ) if umgebung is None else umgebung
+    http = http or HTTP
+    jetzt = jetzt or dt.datetime.now(dt.timezone.utc)
+    quelle = quelle or _quelle_bestimmen(umgebung=umgebung)
+    token = aktion_token(umgebung) or lese_token(umgebung)
+
+    status, jobs, meldung = _jobs_des_juengsten(quelle, token, workflow, http)
+    if status != 200:
+        return {"messbar": False, "befunde": [], "exit": EXIT_WERKZEUG,
+                "text": f"Lauf-Historie nicht lesbar (HTTP {status}: {meldung})."}
+
+    leerlauf = pruefe_leerlauf(jobs, bool(umgebung.get("BACKUP_REPO")),
+                               bool(umgebung.get("BACKUP_PASSPHRASE")), jetzt)
+    schritte = [s for j in jobs for s in (j.get("steps") or []) if isinstance(s, dict)]
+    schein = pruefe_scheinbeweis(schritte, jetzt)
+    befunde = leerlauf + schein
+
+    # Vorrang ist Absicht: Ist die Einrichtung offen, ist SIE die Antwort –
+    # der Leerlauf ist dann die Folge, nicht die Ursache. Ob E1–E8 offen sind,
+    # weiß nur die Einrichtungsprüfung des Workflows (Schritt „Voraussetzungen
+    # prüfen“); hier wird sie übergeben, nicht geraten. Der Workflow ruft
+    # diesen Schritt erst NACH einer grünen Einrichtungsprüfung auf – deshalb
+    # ist der Leerlauf dort erreichbar (Exit 4).
+    if einrichtung_offen:
+        return {"messbar": True, "befunde": befunde, "exit": EXIT_EINRICHTUNG,
+                "text": (f"Einrichtung offen ({', '.join(einrichtung_offen)}) – das ist "
+                         "der Inhaber-Weg, ein Anstoß ändert daran nichts.")}
+    if leerlauf:
+        return {"messbar": True, "befunde": befunde, "exit": EXIT_LEERLAUF,
+                "text": "Ein Lauf ist grün, gesichert wurde aber nichts."}
+    if schein:
+        return {"messbar": True, "befunde": befunde, "exit": EXIT_BEFUND,
+                "text": "Der Rückweg-Nachweis fehlt – der Befund ist nicht bewiesen."}
+    return {"messbar": True, "befunde": [], "exit": 0,
+            "text": "Kein Befund auf Job-Ebene: Der jüngste zeugende Lauf ist belegt."}
+
+
+def vertrag() -> int:
+    """Gibt den Klassen- und Rechte-Vertrag aus und prüft ihn (echter Vertrag).
+
+    Ein Vertrag, den niemand prüft, ist eine Beschreibung. Deshalb endet dieser
+    Aufruf rot, wenn die Zusagen nicht mehr stimmen – er läuft im Workflow
+    VOR der Heilung (fail-closed).
+    """
+    fehler: list[str] = []
+    heilbar = {k for k, v in KLASSEN.items() if v.get("heilbar")}
+    if heilbar != {"scheduler"}:
+        fehler.append(f"Nur `scheduler` darf heilbar sein – gefunden: {sorted(heilbar)}")
+    for klasse, eintrag in KLASSEN.items():
+        if not str(eintrag.get("grund") or "").strip():
+            fehler.append(f"Klasse `{klasse}` nennt keinen Grund")
+    post = [p for p in ENDPUNKTE if "dispatches" in p]
+    if len(post) != 1:
+        fehler.append("Genau EIN Schreib-Endpunkt (dispatches) ist erlaubt")
+    if not any("dispatches" in p for p in ENDPUNKTE):
+        fehler.append("Der Anstoß-Endpunkt fehlt in ENDPUNKTE")
+
+    print("Backup-Selbstheilung · Vertrag")
+    print(f"  Endpunkte: {len(ENDPUNKTE)} (nur `/dispatches` schreibt)")
+    for klasse in sorted(KLASSEN):
+        eintrag = KLASSEN[klasse]
+        marke = "heilbar" if eintrag["heilbar"] else "nicht heilbar"
+        print(f"  [{klasse}/{marke}] {eintrag['grund']}")
+    print(f"  Exit: 0 kein Befund · {EXIT_BEFUND} Scheinbeweis · "
+          f"{EXIT_EINRICHTUNG} Einrichtung (Vorrang) · {EXIT_LEERLAUF} Leerlauf · "
+          f"{EXIT_WERKZEUG} Werkzeugfehler")
+    print(f"  Messhöhe: Job-Ebene, jüngster Lauf MIT Schritten ({FRISCHE_WORKFLOW}, {WORKFLOW})")
+    if fehler:
+        for eintrag in fehler:
+            print(f"❌ {eintrag}")
+        print(f"🛑 Vertrag verletzt: {len(fehler)} Abweichung(en).")
+        return 1
+    print("✅ Vertrag eingehalten.")
+    return 0
 
 
 # =====================================================================
@@ -720,15 +1010,73 @@ def selbsttest() -> int:
     if gift in text:
         fehler.append("S18: ein Secret-Wert steht im Bericht")
 
+    # S19: Der Klassenvertrag – heilbar ist GENAU der nicht gestartete Lauf (H2)
+    if {k for k, v in KLASSEN.items() if v["heilbar"]} != {"scheduler"}:
+        fehler.append("S19a: es darf nur `scheduler` heilbar sein")
+    for klasse in ("leerlauf", "scheinbeweis", "einrichtung"):
+        if klasse not in KLASSEN or KLASSEN[klasse]["heilbar"]:
+            fehler.append(f"S19b: `{klasse}` fehlt oder gilt als heilbar")
+        elif not str(KLASSEN[klasse]["grund"]).strip():
+            fehler.append(f"S19c: `{klasse}` nennt keinen Grund")
+
+    # S20: Der grüne Leerlauf – Job-Ebene, der KV-Job ist KEIN Zeuge
+    gruen = [{"name": "backup", "conclusion": "success"}]
+    if len(pruefe_leerlauf(gruen, "", False, jetzt)) != 1:
+        fehler.append("S20a: grüner backup-Job ohne Ziel/Passphrase muss gemeldet werden")
+    if pruefe_leerlauf(gruen, "a/b", True, jetzt) != []:
+        fehler.append("S20b: mit Ziel und Passphrase ist derselbe Job kein Befund")
+    kv = [{"name": "KV-/D1-Backup (Abonnenten + Einwilligungsnachweise)",
+           "conclusion": "success"}]
+    if pruefe_leerlauf(kv, "", False, jetzt) != []:
+        fehler.append("S20c: der KV-Job ist kein Zeuge für das Repo-Artefakt")
+    if pruefe_leerlauf([{"name": "backup", "conclusion": "failure"}], "", False, jetzt) != []:
+        fehler.append("S20d: ein roter Job ist kein Leerlauf (er ist rot)")
+    if not pruefe_scheinbeweis([{"name": "Kurzpruefung Wiederherstellbarkeit "
+                                         "(strukturell, ohne Secrets)",
+                                 "conclusion": "skipped"}], jetzt):
+        fehler.append("S20e: ein übersprungener Rückweg-Nachweis ist ein Befund")
+
+    # S20f: Reihenfolge der Antworten – offene Einrichtung hat Vorrang (Exit 3)
+    if _leerlauf_urteil(gruen, {"BACKUP_REPO": "", "BACKUP_PASSPHRASE": ""}, jetzt,
+                        einrichtung_offen=["BACKUP_REPO"])["exit"] != EXIT_EINRICHTUNG:
+        fehler.append("S20f: offene Einrichtung muss Vorrang vor dem Leerlauf haben")
+    if _leerlauf_urteil(gruen, {"BACKUP_REPO": "", "BACKUP_PASSPHRASE": ""},
+                        jetzt)["exit"] != EXIT_LEERLAUF:
+        fehler.append("S20g: nach grüner Einrichtungsprüfung ist der Leerlauf Exit 4")
+    if _leerlauf_urteil(gruen, {"BACKUP_REPO": "a/b", "BACKUP_PASSPHRASE": "x"},
+                        jetzt)["exit"] != 0:
+        fehler.append("S20h: ein belegter grüner Job ist kein Leerlauf")
+
+    # S21: Ein geskippter Lauf ist kein Zeuge – er darf gar nicht befragt werden
+    leer = {"id": 2, "conclusion": "skipped", "created_at": "2026-11-07T15:24:31Z"}
+    echt = {"id": 1, "conclusion": "failure", "created_at": "2026-11-06T19:48:59Z"}
+    gelesen: list[str] = []
+
+    def zeugen_http(methode, url, kopf):
+        gelesen.append(url)
+        if url.endswith("/runs?per_page=20"):
+            return 200, {"workflow_runs": [leer, echt]}, ""
+        return 200, {"jobs": [{"name": "backup", "conclusion": "failure", "steps": [
+            {"name": "Bundle + Arbeitskopie erstellen", "conclusion": "failure"}]}]}, ""
+
+    schritte = _schritte_des_juengsten("a/b", "t", FRISCHE_WORKFLOW, zeugen_http)
+    if not schritte:
+        fehler.append("S21a: der zeugende Lauf hätte Schritte liefern müssen")
+    if any("/runs/2/jobs" in u for u in gelesen):
+        fehler.append("S21b: der geskippte Lauf darf gar nicht erst befragt werden")
+    if _zeugt_lauf(leer) or not _zeugt_lauf(echt):
+        fehler.append("S21c: `_zeugt_lauf` verwechselt Platzhalter und Zeugen")
+
     if fehler:
         for eintrag in fehler:
             print(f"❌ {eintrag}")
         print(f"🛑 backup_selbstheilung-Selbsttest: {len(fehler)} Abweichung(en).")
         return 1
-    print("✅ backup_selbstheilung-Selbsttest: 18 Fallgruppen – Tagesfenster, Grenzen, "
+    print("✅ backup_selbstheilung-Selbsttest: 21 Fallgruppen – Tagesfenster, Grenzen, "
           "laufende Sicherung, Mindestabstand, Budget, Lauf-Auswertung, ein Anstoß je Lauf, "
           "zweite Messung als einziger Grün-Nachweis, gescheiterter Lauf, 403, unlesbare "
-          "Historie, Probe-Modus, Rechte-Trennung und Eingabe-Auflösung.")
+          "Historie, Probe-Modus, Rechte-Trennung, Eingabe-Auflösung, Klassenvertrag, "
+          "grüner Leerlauf (Job-Ebene) und Zeugen-Filter.")
     return 0
 
 
@@ -743,6 +1091,12 @@ def main(argv=None) -> int:
                         help="messen und entscheiden, aber nichts anstoßen (Standard)")
     gruppe.add_argument("--heilen", action="store_true",
                         help="messen, Sicherung anstoßen, warten, erneut messen")
+    gruppe.add_argument("--plan", action="store_true",
+                        help="Befunde auf Job-Ebene nach Klassen ordnen (nichts anstoßen)")
+    gruppe.add_argument("--leerlauf", action="store_true",
+                        help="nur den grünen Leerlauf und den Rückweg-Nachweis messen")
+    ap.add_argument("--vertrag", action="store_true",
+                    help="Klassen- und Rechte-Vertrag ausgeben und prüfen")
     ap.add_argument("--selftest", action="store_true", help="Offline-Selbsttest")
     ap.add_argument("--json", action="store_true", help="Maschinenlesbares Ergebnis")
     ap.add_argument("--ausgabe", default="", help="Ergebnis zusätzlich als JSON-Datei schreiben")
@@ -754,8 +1108,26 @@ def main(argv=None) -> int:
     args = ap.parse_args(list(sys.argv[1:] if argv is None else argv))
     if args.selftest:
         return selbsttest()
+    if args.vertrag:
+        return vertrag()
 
     umgebung = dict(os.environ)
+    if args.plan or args.leerlauf:
+        # Reine LESUNG: kein Dispatch, kein Schreibzugriff. Die Job-Ebene ist
+        # die Messhöhe (WF-9E5A / #923) – ein KV-Job darf das Urteil über den
+        # Repo-Job nicht verfälschen.
+        urteil = betreibe_urteil(umgebung, quelle=args.quelle.strip(),
+                                 workflow=args.workflow.strip() or WORKFLOW)
+        for befund in urteil.get("befunde", []):
+            print(f"  ⚠️ [{befund['klasse']}/nicht heilbar] {befund['text']}")
+        print(urteil["text"])
+        print(f"Anleitung: {ANLEITUNG} (Abschnitt „Selbstheilung“)")
+        if umgebung.get("GITHUB_ACTIONS") == "true":
+            _anhaengen(umgebung.get("GITHUB_STEP_SUMMARY", ""),
+                       "\n".join([f"- [{b['klasse']}] {b['text']}"
+                                  for b in urteil.get("befunde", [])]) + "\n")
+        return int(urteil["exit"])
+
     ergebnis = heile(umgebung, anstossen=bool(args.heilen),
                      warten_s=max(0, args.wartezeit),
                      repo=args.repo.strip(), quelle=args.quelle.strip(),

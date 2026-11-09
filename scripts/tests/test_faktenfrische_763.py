@@ -424,54 +424,38 @@ class Faktenfrische763MetaTests(unittest.TestCase):
                 self.assertFalse(finds, f'Harte Textverständnis-Regeln: {finds}')
 
     def test_faktenfrische_queue_haelt_befunde_geschlossen(self):
-        """Der offene-Queue-Eintrag darf die zwei Slugs nicht mehr führen.
-        Ein neuer Lauf, der dieselben Fehler zurückmeldet, macht hier rot.
-
-        RICHTIGE QUELLE (07.11.2026, #1072-Nachlauf): Maßgeblich sind die
-        FACHLICHEN Befunde, nicht das Feld `offen`. `offen` ist der
-        Fälligkeits-/GEO-Report des Laufs (`faktenfrische.py`, Abschnitt
-        "queue schreiben": je Artikel Grund, Frist und GEO-Prozent) – ein
-        Artikel steht dort, sobald sein `faktencheck` fällig ist, auch ohne
-        jeden Fachbefund. Der Test verglich damit zwei verschiedene Dinge und
-        war auf main dauerhaft rot, sobald die Seiten wieder fällig wurden.
-        """
-        queue = json_load(ROOT / 'data' / 'faktenfrische_queue.json')
-        for eintrag in queue.get('fachbefunde', []):
-            self.assertNotIn(eintrag.get('slug'), (HEIZ, REISE),
-                             f'Queue meldet offene Fachbefunde für {eintrag.get("slug")}')
         """Kein OFFENER BEFUND darf die zwei Slugs wieder führen.
 
-        07.11.2026 – Messhöhe korrigiert: Der Test las `queue['offen']` und
-        hielt das für die Befundliste. Das Feld ist aber der ARBEITSVORRAT
-        (Seiten, die noch nicht dran waren, mit Frist). Folge in beide
-        Richtungen: Er wurde rot, als die Heizperiode am 07.11. turnusgemäß
-        wieder in den Vorrat rutschte („frisch geprüft vor 23 Tagen“) – ein
-        Fehlalarm ohne Sachfehler – und er wäre grün geblieben, wenn ein
-        echter Befund zurückgekehrt wäre. Gemessen wird jetzt dort, wo
-        Befunde stehen: im Ledger (`fachbefunde`).
+        MESSHÖHE (07.11.2026, #1072; Nachzug 08.11.2026, #1126)
+        ---------------------------------------------------------
+        Maßgeblich sind die FACHLICHEN Befunde, nicht das Feld `offen`.
+        `offen` ist der Fälligkeits-/GEO-Report des Laufs
+        (`faktenfrische.py`, Abschnitt „queue schreiben": je Artikel Grund,
+        Frist und GEO-Prozent) – dort steht eine Seite, sobald ihr
+        `faktencheck` fällig ist, auch ohne jeden Fachbefund. Der Test verglich
+        damit zwei verschiedene Dinge: Er wurde rot, als die Heizperiode am
+        07.11. turnusgemäß wieder in den Vorrat rutschte („frisch geprüft vor
+        23 Tagen") – ein Fehlalarm ohne Sachfehler – und er wäre grün
+        geblieben, wenn ein echter Befund zurückgekehrt wäre.
+
+        Gemessen wird deshalb im Ledger (`fachbefunde`). Die Arbeitsliste darf
+        die Seiten führen (Frist 14.11.2026, Vorlauf 14 Tage) – sie darf nur
+        keinen Befund tragen. Ein neuer Lauf, der die Fehler erneut meldet,
+        schreibt sie ins Ledger und macht diese Prüfung weiter rot.
         """
         import faktenfrische_befund_ledger as ledger
         kerne = {kern_von(s) for s in (HEIZ, REISE)}
-        for eintrag in ledger.offene_befunde(ROOT / 'data' / 'faktenfrische_queue.json'):
-            kern = kern_von(eintrag.get('slug') or '')
+        for eintrag in ledger.offene_befunde(
+                ROOT / "data" / "faktenfrische_queue.json"):
+            kern = kern_von(eintrag.get("slug") or "")
             self.assertNotIn(kern, kerne,
-                             f'Offener Befund zurückgekehrt für {eintrag.get("slug")}: '
-                             f'{eintrag.get("typ")} – {eintrag.get("text")}')
-        """Ein neuer Lauf darf dieselben BEFUNDE nicht zurückmelden.
-
-        Die frühere Fassung prüfte, ob der Slug überhaupt in der Arbeitsliste
-        steht – und verwechselte damit den **Vorlauf** mit einem **Befund**.
-        Am 07.11.2026 wurde sie zur Zeitbombe: die Seiten haben Frist
-        14.11.2026, sind also mit 14 Tagen Vorlauf turnusmäßig wieder in
-        `offen` („frisch geprüft vor 23 Tagen“), ohne offenen Befund. Geprüft
-        wird deshalb das Befund-Ledger (`faktenfrische_gleis`): ein Lauf, der
-        die Fehler erneut meldet, schreibt sie in `fachbefunde` und macht
-        diese Prüfung weiter rot.
-        """
+                             f'Offener Befund zurückgekehrt für '
+                             f'{eintrag.get("slug")}: {eintrag.get("typ")} – '
+                             f'{eintrag.get("text")}')
         self.assertFalse(offene_befunde((HEIZ, REISE)),
-                         'Queue meldet offenen Befund für eine der zwei Seiten')
+                         "Queue meldet offenen Befund für eine der zwei Seiten")
         self.assertFalse(arbeitsliste_traegt_befunde((HEIZ, REISE)),
-                         'Queue-Eintrag transportiert einen Befund')
+                         "Queue-Eintrag transportiert einen Befund")
 
     def test_systemprompt_trennt_modell_tatsache_und_werbung(self):
         prompt = faktenfrische.SYSTEM_PROMPT

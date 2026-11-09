@@ -372,20 +372,36 @@ class WorkflowVertrag(unittest.TestCase):
         self.assertIn("--ausgabe /tmp/frische_final.json", run)
 
     def test_nur_der_heilungsschritt_hat_das_dispatch_recht(self):
-        """Das Lauf-Token steht in genau zwei Schritten – beide mit eigenem Grund.
+        """Das Lauf-Token steht in genau drei Schritten – jeder mit eigenem Grund.
 
         „Voraussetzungen prüfen“ liest damit die Environment-Regeln (E8), die
         der Ziel-Token nicht sehen darf (#923); „Selbstheilung“ stößt damit den
-        Lauf an. Die Messung dazwischen bleibt beim fein eingeschränkten
-        Ziel-Token – sonst läge das Dispatch-Recht über dem ganzen Lauf.
+        Lauf an; „Leerlauf prüfen“ liest Jobs und Schritte des jüngsten Laufs
+        mit Schritten (dieselbe Messhöhe, #923). Die Messung dazwischen bleibt
+        beim fein eingeschränkten Ziel-Token – sonst läge das Lauf-Recht über
+        dem ganzen Job.
+
+        Entscheidend ist nicht die Zahl der Leser, sondern die Zahl der
+        SCHREIBER: Genau EIN Schritt darf `--heilen` aufrufen. Ein zweiter
+        Heilschritt wäre ein zweiter Weg zu einem Doppellauf (der Befund vom
+        08.11.2026: der alte Beweis-Schritt stand neben dem neuen Heilschritt
+        und rief ebenfalls `--heilen`).
         """
         self.assertEqual(self.job.get("permissions"), {"contents": "read", "actions": "write"})
         mit_lauf_token = [name for name, schritt in self.schritte.items()
                           if "github.token" in str(schritt.get("env", {}))]
         self.assertEqual(sorted(mit_lauf_token),
                          sorted([self._schritt("Voraussetzungen prüfen")["name"],
-                                 self._schritt("Selbstheilung")["name"]]))
+                                 self._schritt("Selbstheilung")["name"],
+                                 self._schritt("Leerlauf prüfen")["name"]]))
         self.assertNotIn("github.token", str(self._schritt("Frische messen").get("env", {})))
+        heiler = [s for s in self.job["steps"] if "--heilen" in str(s.get("run", ""))]
+        self.assertEqual(len(heiler), 1,
+                         "genau ein Schritt darf anstoßen (kein zweiter Heilschritt)")
+        self.assertIn("--heilen", self._schritt("Selbstheilung")["run"])
+        # Die Leerlauf-Prüfung ist LESEND – sie darf nicht ebenfalls anstoßen.
+        self.assertNotIn("--heilen", self._schritt("Leerlauf prüfen")["run"])
+        self.assertIn("--leerlauf", self._schritt("Leerlauf prüfen")["run"])
 
     def test_schlussurteil_ist_fail_closed_und_kommt_nach_der_heilung(self):
         namen = [s.get("name", "") for s in self.job["steps"]]

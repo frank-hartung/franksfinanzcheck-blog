@@ -69,6 +69,21 @@ jobs:
       - name: Messwerkzeug vervollständigen (PyYAML)
         run: python3 -m pip install -q --disable-pip-version-check --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
 
+      # STRUKTUR ZUERST (08.11.2026, #1098): Die Akte kann eine kaputte
+      # Schließakte nicht lesen – und eine kaputte Schließakte entsteht lautlos,
+      # weil YAML doppelte Schlüssel still überschreibt. Der Heiler läuft
+      # deshalb VOR dem Erzeugen, ist idempotent, weist Unzuordenbares aus und
+      # rollt bei Zweifel zurück. Die anschließende Strukturprüfung ist
+      # fail-closed: Was sie nicht bestätigt, wird nicht committet.
+      - name: Schließakte strukturell heilen (Selbstheilung, fail-closed)
+        run: |
+          set -Eeuo pipefail
+          python3 scripts/faktenfrische_befund_ledger.py --selftest
+          python3 scripts/faktenfrische_befund_ledger.py --reparieren --apply \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          python3 scripts/faktenfrische_befund_ledger.py --struktur-pruefen \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+
       - name: Akte neu erzeugen und bei Änderung committen
         env:
           GIT_USER: Faktenfrische-Akte-Bot
@@ -89,4 +104,12 @@ jobs:
               "chore(faktenfrische): Akte und Stand nachgezogen [skip ci]" \
               BEFUND-AKTE.md \
               data/faktenfrische_befunde_state.json
+          fi
+          # Die strukturelle Heilung der Schließakte ist ein eigener Commit:
+          # Sie ändert Beweisstand, nicht Redaktion – und der nächste Lauf soll
+          # nicht dieselbe Reparatur wiederholen (#1098).
+          if ! git diff --quiet -- data/faktenfrische_entscheidungen.yaml; then
+            bash scripts/git_sync.sh \
+              "chore(faktenfrische): Schließakte strukturell geheilt (#1098) [skip ci]" \
+              data/faktenfrische_entscheidungen.yaml
           fi
