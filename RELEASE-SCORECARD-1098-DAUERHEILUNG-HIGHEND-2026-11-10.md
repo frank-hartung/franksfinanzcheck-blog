@@ -158,6 +158,28 @@ CI misst sie im gebauten `public/` (fail-closed, unverändert).
   `test_faktenfrische_befund_akte`, `test_scorecard_ticket`,
   `test_abbildungen_ableiten`, `test_abbildungen_nachzug` – grün.
 
+**Vollsuite (`python3 -m unittest discover -s scripts/tests`): 5.761 Tests,
+23 Fehlschläge, 8 Fehler.** Diese 31 sind **nicht** von diesem Branch: Ein
+Export von `origin/main` (`963c044`) in ein separates Verzeichnis zeigt
+exakt dieselben Testnamen (23/8, gleiche Module, gleiche Namen). Beweis statt
+Beteuerung – 0 Abweichungen durch diesen Branch.
+
+Einordnung der 31 (Fremdursachen, bereits auf `main` rot):
+
+* 6 Fehler = fehlende CI-Pakete in dieser Umgebung (`pillow` u. a. aus
+  `requirements-ci.in`) – fail-closed, kein Code-Defekt.
+* 3 = `blustradius_register` (C38, Schritt `GSC-Leistungsdaten – …` ohne
+  Registereintrag, s. Abschnitt 5b).
+* 5 Subtest-Fehlschläge in `test_faktenfrische_1072` = die fünf Befunde, die
+  der `main`-Faktenfrische-Lauf (`963c044`) auf dem Waschmaschinen-Artikel
+  angelegt hat; sie nennen eine Fundstelle, die **nicht wörtlich** im Artikel
+  steht. Genau diese Klasse verwirft die neue Ankerprüfung in
+  `faktenfrische.py` – der Bestand aus der Zeit davor bleibt menschlich zu
+  entscheiden (steht im Dossier).
+* Rest (pagefind-Version im Manifest vs. Test, Hugo-Pin, Pflichtcheck,
+  Reserve-/Offenlegungs-/Watchdog-Verdrahtung) = offene Roten auf `main`,
+  unabhängig von #1098.
+
 ---
 
 ## 4. Was offen bleibt – und warum das richtig ist
