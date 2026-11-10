@@ -1,0 +1,118 @@
+{
+  "slug": "2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif",
+  "titel": "Handytarife vergleichen: So findest du den günstigsten Tarif",
+  "erzeugt": "2026-11-10 12:55 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 0,
+    "klasse": "YMYL",
+    "grund": "Erstrecherche – noch nie faktengeprüft",
+    "alter_tage": null,
+    "intervall": 45,
+    "frist": null,
+    "restlaufzeit": null
+  },
+  "geo": {
+    "punkte": 3,
+    "maximum": 6,
+    "prozent": 50,
+    "offen": [
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)",
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
+      "Sichtbares Prüfdatum (`faktencheck:`)"
+    ],
+    "treffer": {
+      "kurzantwort": false,
+      "faq": true,
+      "quellen": false,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": false
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesnetzagentur.de",
+      "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "datum": "",
+      "quelle": "bundesnetzagentur.de",
+      "kanal": "web",
+      "auszug": "*   [Breitbandversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Breitband/start.html)\n        *   [Kupfer-Glas-Migration](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Kupfer-Glas/start.html)\n        *   [Funk und Frequenzen](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Frequenzen/start.html)\n        *   [Nummerierung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Nummerierung/start.html)\n        *   [Unternehmenspflichten](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Unternehmenspflichten/start.html)\n        *   [Technik und Produktsicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Technik/start.html)\n        *   [Öffentliche Sicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/OeffentlicheSicherheit/start.html)\n        *   [Grundversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Grundversorgung/start.html)\n\n1.   [Homepage](https://www.bundesnetzagentur.de/DE/Home/home_node.html \"Zur Startseite\")\n2.   [Fachthemen](https://www.bundesnetzagentur.de/DE/Themen/start.html \"Themen\")\n3.   [UntermenuOeffnen](javascript:void(0))[Energie](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html \"Energie\")**Telekom­munikation**[Digitales](https://www.bundesnetzagentur.de/DE/Fachthemen/Digitales/start.html \"Alle Fachthemen rund um Digitales\")[Post](https://www.bundesnetzagentur.de/DE/Fachthemen/Post/start.html \"Post\")[Eisenbahnen](https://www.bundesnetzagentur.de/DE/Fachthemen/Eisenbahnen/start.html \"Eisenbahnen\")[BNetzA Data Hub](https://www.bundesnetzagentur.de/DE/Fachthemen/DataHub/start.html \"BNetzA Data Hub\")[Beschlusskammern](https://www.bundesnetzagentur.de/DE/Beschlusskammer",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Bundesnetzagentur",
+      "rang": 1,
+      "zitierbar": true
+    },
+    {
+      "titel": "heise+ | Expertentalk: Günstiger heizen – Tarife, Förderung, Heizmythen",
+      "url": "https://www.heise.de/ratgeber/Expertentalk-Guenstiger-heizen-Tarife-Foerderung-Heizmythen-11508874.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus",
+      "datum": "2026-11-10T10:00",
+      "quelle": "heise online",
+      "kanal": "rss",
+      "auszug": "So sparen Sie Geld beim Heizen: Im Live-Expertentalk am Dienstag, 10. November 2026, beantworten wir ab 17 Uhr Ihre Fragen zum Thema Heizkosten.",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "heise online",
+      "rang": 3,
+      "zitierbar": true
+    },
+    {
+      "titel": "heise+ | 4K-UHD-Blu-ray-Player im Test: Die letzten Scheibendreher",
+      "url": "https://www.heise.de/ratgeber/4K-UHD-Blu-ray-Player-im-Test-Die-letzten-Scheibendreher-11468170.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus",
+      "datum": "2026-11-10T07:30",
+      "quelle": "heise online",
+      "kanal": "rss",
+      "auszug": "Filmliebhaber schwören auf die Bild- und Tonqualität von UHD Blu-rays. Doch es gibt kaum noch Player. Wir vergleichen vier Modelle von Sony und Panasonic.",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "heise online",
+      "rang": 3,
+      "zitierbar": true
+    },
+    {
+      "titel": "EU-Förderbank: Zehn Milliarden Euro für Europas Tech-Unternehmen",
+      "url": "https://www.heise.de/news/EU-Foerderbank-Zehn-Milliarden-Euro-fuer-Europas-Tech-Unternehmen-11517852.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+      "datum": "2026-11-09T16:56",
+      "quelle": "heise online",
+      "kanal": "rss",
+      "auszug": "Milliardeninvestitionen sollen Europas Tech-Firmen wachsen lassen. Dafür tun sich private Investoren mit EU-Institutionen und Mitgliedsländern zusammen.",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "heise online",
+      "rang": 3,
+      "zitierbar": false
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Der Artikel behauptet, dass Verträge nach sechs Monaten die Preise erhöhen, ohne dafür eine Quelle anzugeben.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Faustregel, dass zusätzliche Gebühren mindestens 5 % der Grundgebühr betragen müssen, wird nicht belegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Empfehlung, den Handytarif einmal jährlich bzw. vierteljährlich zu prüfen, fehlt eine Quellenangabe.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Aussage, dass CHECK24 alle aktuellen Angebote liefert, ist ein Vollständigkeitsversprechen ohne Messgröße.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Regel „Datenvolumen halbieren, das du wirklich brauchst“ wird als allgemeine Faustregel präsentiert, ohne Messdaten oder Quelle.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    }
+  ],
+  "fehler": [],
+  "fassung_sha256": "99ac16bb17807df7665e658d6c02bd867f0875e986125ae5f06bbbe2e493ef60",
+  "text_sha256": "6849b2fed4695900343dff1bf8fb451c2e5a543c6d7b416e18008f20f92862da",
+  "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)"
+}

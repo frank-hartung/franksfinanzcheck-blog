@@ -33,9 +33,8 @@ quellen:
     url: "https://www.umweltbundesamt.de/themen/klima-energie/energiesparen/leerlaufverluste"
     herausgeber: "Umweltbundesamt"
     datum: "2015-09-30"
-faktencheck: 2026-09-28
+faktencheck: 2026-11-10
 ---
-
 
 Standby Kosten im Check: Zwei Watt im Standby wirken harmlos. Zehn Geräte mit zusammen 20 Watt kosten bei 37 Cent pro kWh aber knapp **65 € im Jahr**. Kein [finanzieller](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) Weltuntergang – nur ein teures rotes Lämpchen.
 

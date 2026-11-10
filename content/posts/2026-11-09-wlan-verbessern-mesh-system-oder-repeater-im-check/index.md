@@ -3,8 +3,9 @@ title: "WLAN verbessern: Mesh-System oder Repeater im Check?"
 description: Endlich überall schnelles Internet zuhause! Wir zeigen dir, wie du dein WLAN verbessern kannst und ob Mesh oder ein WLAN Verstärker die bessere Wahl ist.
 date: 2026-11-09T07:09:44Z
 draft: true
+cadence_wait: true
 cadence_demoted: 2026-11-09T11:26:10Z
-cadence_grund: "faktenfrische: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg"
+cadence_grund: "faktenfrische aufgehoben: faktencheck: 2026-11-10 – Re-Queue für vollständigen Publish-Gate-Lauf"
 tags: ["WLAN verbessern", "DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
@@ -26,6 +27,7 @@ cover:
   image: "images/covers/2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check.jpg"
   alt: "WLAN verbessern: Mesh-System oder Repeater im Check?"
   caption: "Tipp von FranksFinanzcheck"
+faktencheck: 2026-11-10
 ---
 
 Du sitzt im Homeoffice und die Videokonferenz bricht ab. Im Schlafzimmer lädt der Film nicht. Solche Funklöcher nerven im Alltag gewaltig. Oft liegt es nicht am Anbieter, sondern an der Hardware in den eigenen vier Wänden.
