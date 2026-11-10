@@ -45,7 +45,7 @@ Dass der Befund den Deploy nicht gestoppt hat, hat einen klaren Grund: Die Metad
 
 | Datei | Änderung |
 |---|---|
-| `content/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/index.md` | `quellen` mit zwei Einträgen eingefügt (Q1 Umweltbundesamt, Q2 Verbraucherzentrale Niedersachsen). `kurzantwort` neu gefasst: volle Trommel nach UBA, Modellrechnung 61 € / 83 € / 22 € pro Jahr, gekennzeichnet als Rechnung. Unbelegte Angaben („bis zu 15 %“, „0,5 kWh“, „5 Liter“, „rund 5 €“) entfernt. |
+| `content/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/index.md` | `quellen` mit zwei Einträgen eingefügt (Q1 Umweltbundesamt, Q2 Verbraucherzentrale Niedersachsen). `kurzantwort` neu gefasst: volle Trommel nach UBA, Modellrechnung (inzwischen ersetzt, siehe Nachtrag 8) 61 € / 83 € / 22 € pro Jahr, gekennzeichnet als Rechnung. Unbelegte Angaben („bis zu 15 %“, „0,5 kWh“, „5 Liter“, „rund 5 €“) entfernt. |
 | `WF-7B6B-1148-DAUERHEILUNG-HIGHEND-2026-11-10.md` (neu) | dieser Bericht |
 
 **Nicht geändert:** Titel, Description, Cover, `faktencheck`-Datum (`2026-11-05`), Fließtext, Tags, Offenlegung. Das `faktencheck`-Datum bleibt bewusst auf dem Stand der Fachprüfung. Eine neue Prüfung ist nicht erfolgt, und das Datum soll keine Prüfung behaupten, die es nicht gab.
@@ -54,7 +54,7 @@ Dass der Befund den Deploy nicht gestoppt hat, hat einen klaren Grund: Die Metad
 
 - **Keine erfundenen Quellen.** Jede Quelle wurde vor dem Eintrag abgerufen und gelesen. Die Referenz der Bundesnetzagentur aus dem Dossier wurde **nicht** übernommen, weil sie die Aussagen nicht belegt.
 - **Rang und Herausgeber.** Umweltbundesamt (Bundesbehörde) und Verbraucherzentrale (anerkannte Verbraucherberatung) sind Primär- bzw. anerkannte Sekundärquellen.
-- **Modellzahlen bleiben Modell.** Die 22 € beruhen auf Annahmen (0,9 kWh bzw. 0,6 kWh je Ladung, 0,40 €/kWh, 0,005 €/Liter). Diese stehen im Fließtext unter „Annahmen für die Modellrechnung“. Die Kurzantwort verweist darauf und behauptet keine Messung. Ob diese Annahmen für Leser zutreffen, ist eine Redaktionsfrage (Abschnitt 6).
+- **Modellzahlen bleiben Modell.** Die Differenz von 28 bis 42 € beruht auf Annahmen mit Quellenwerten (siehe Nachtrag, Abschnitt 8). Diese stehen im Fließtext unter „Annahmen für die Modellrechnung“. Die Kurzantwort verweist darauf und behauptet keine Messung. Ob diese Annahmen für Leser zutreffen, ist eine Redaktionsfrage (Abschnitt 6).
 - **Kein Eingriff in den Fließtext.** Der Fließtext wurde nicht umgeschrieben. Die Lesbarkeit ist eine eigene Aufgabe (Abschnitt 6), und sie sollte nicht als Nebeneffekt dieses Gate-Fixes passieren.
 
 ---
@@ -93,7 +93,7 @@ Dass der Befund den Deploy nicht gestoppt hat, hat einen klaren Grund: Die Metad
 ## 6. Offene Punkte (nicht Teil dieses Vorgangs)
 
 1. **Publish-Pfad ohne Quellenpflicht (Governance, C34).** Die Engine erzeugt Entwürfe ohne `quellen`, und `draft: false` kann ohne Belegkette gesetzt werden. Eine harte Sperre im Publish-Gate wäre eine Änderung der dokumentierten C34-Entscheidung. Das entscheidet der Inhaber. Empfehlung: M4 als Pflicht-Check für Veröffentlichungen mit `draft: false` ab einem festen Stichtag, mit Vorlauf für bestehende Entwürfe.
-2. **Fachprüfung des Artikels.** Die Verschleiß-Aussagen (Stoßdämpfer, Lagerschaden, Heizstäbe) sind unbelegt. Der Abschnitt „Rechnet man den geringeren Verschleiß und die Einsparung bei Waschmittel hinzu, wird der Hebel noch größer“ ist ebenfalls unbelegt und sollte gestrichen oder belegt werden. Die Modellannahmen (0,9/0,6 kWh, 50/35 Liter, 0,40 €/kWh, 0,005 €/Liter) sollten gegen eine Quelle geprüft werden. Dafür braucht es einen Menschen; Text entscheidet die Redaktion.
+2. **Fachprüfung des Artikels (Verschleiß und Modellannahmen erledigt, siehe Abschnitt 8).** Offen bleiben weitere unbelegte Aussagen außerhalb dieses Auftrags, etwa Heizspirale und Entkalkung, Schaumbildung bei Waschmittelüberdosierung und die Mechanik-Passagen („verdoppelt deine Kosten“). Diese sollte die Redaktion prüfen. Text entscheidet die Redaktion.
 3. **Lesbarkeit und Gestaltung des Artikels.** Der Fließtext ist kurzsatzig und stellenweise holprig („Richtiges Waschmaschine beladen senkt deine Fixkosten“ in der Description), enthält Füllphrasen („Du handelst nach dem 4K-Prinzip“) und Wiederholungen. Eine Überarbeitung gehört in eine eigene Aufgabe mit Lesbarkeitsmessung (`scripts/readability_check.py`) und Redaktionsfreigabe. Sie wurde hier bewusst nicht als Nebeneffekt gemacht.
 4. **Abschlussvermerk.** Der PR trägt `Closes #1148`. Den Vermerk schreibt `vorgangs-abschluss.yml` (Regel D2), nicht ein Agent von Hand.
 
@@ -102,3 +102,17 @@ Dass der Befund den Deploy nicht gestoppt hat, hat einen klaren Grund: Die Metad
 ## 7. Hinweis zur Vollsuite
 
 Nicht ausgeführt: `python3 -m unittest discover -s scripts/tests` (Vollsuite). Der vorige Vorgang hatte dort vier Fehlschläge gefunden, die auch auf `origin/main` rot sind (Inhalts-Register, Versicherungs-Cluster). Dieser Vorgang ändert nur Frontmatter und Kurzantwort eines Artikels; die betroffenen Gates sind oben einzeln grün gelaufen.
+
+---
+
+## 8. Nachtrag: Verschleiß und Modellannahmen (Auftrag vom 10.11.2026)
+
+**Verschleiß.** Die nicht belegten Aussagen zu Stoßdämpfern, Lagerschäden, Heizstäben, Pumpe, Innenwand und Unwucht sind entfernt. Belegt bleibt nur, was Forum Waschen stützt: Die Nennbeladung nicht überschreiten, weil sonst Zuverlässigkeit und Gerätesicherheit leiden können (Q4). Der Hinweis, Taschen zu leeren, bleibt ohne Schadensbehauptung. Der Satz zu „geringerem Verschleiß“ und Waschmittel ist gestrichen.
+
+**Modellannahmen.** Alle Werte sind jetzt quellenbelegt. Strom 0,9 kWh (Vattenfall, Q5) bzw. 0,7 kWh bei halber Ladung (Stromauskunft 20–30 % Ersparnis, Q6). Wasser 50 L (Vattenfall, Q5) bzw. 35–50 L bei halber Ladung (35 L ist Szenarioannahme). Strompreis 0,373 €/kWh (BDEW Herbst 2026, Q3). Wasser und Abwasser 4,68 €/m³ (Destatis 2025, Sekundärquelle Q7). Kontrolle für Mecklenburg-Vorpommern mit 5,00 €/m³ (LAiV, Q8): Die Differenz steigt um rund 0,60 bis 1,60 € pro Jahr, die Gesamtkosten um 1,60 bis 3,20 €.
+
+**Ergebnis.** 100 volle Ladungen: 56,97 € pro Jahr. 200 halbe Ladungen: 84,98 € (35 L) bis 99,02 € (50 L). Differenz: 28 bis 42 € pro Jahr. Die alten Werte (61 € / 83 € / 22 €, 0,40 €/kWh, 0,005 €/L) sind ersetzt, auch in der Kurzantwort.
+
+**Quellenhinweise.** Destatis-Originalseite lieferte einen 404-Fehler. Die Werte stammen deshalb aus Sekundärquellen, die Destatis zitieren. Die Stromauskunft-Seite ist von 2022, der Bereich 20–30 % wird nur als Grenze verwendet. Das `faktencheck`-Datum bleibt unverändert, weil keine neue Fachprüfung stattgefunden hat.
+
+**Status.** Die Änderungen gelten als Vorschlag. Die Redaktion bleibt Freigabeinstanz für den Text (Redaktionsstatut).
