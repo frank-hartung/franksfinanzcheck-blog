@@ -88,7 +88,7 @@ Lauf-Zusammenfassung „F-01 · Sicherheits-Header“:
 | Klasse | Exit | Bedeutung | Was du tust |
 |---|---|---|---|
 | **OK** | 0 | beide Ziele gemessen, alle Pflicht-Header im Soll | F-01 belegt; die Meldung schließt erst, wenn zusätzlich Worker und vollständiger Live-Nachweis grün sind (D1) |
-| **TEILWEISE** | 0 (Mess-CLI) | ein Ziel gemessen und sauber, ein Ziel nicht erreichbar | kein neuer Header-Befund, aber **kein Abschlussnachweis**. Der abschließende Live-Nachweis bleibt rot; das nicht gemessene Ziel erneut messen. Eine Messung auf dem Haupt-Host belegt nicht die Einrichtung des `www`-Hosts. |
+| **TEILWEISE** | 0 (Mess-CLI) | ein Ziel gemessen und sauber, ein Ziel nicht erreichbar | kein neuer Header-Befund, aber **kein Abschlussnachweis**. Der abschließende Live-Nachweis bleibt rot; das nicht gemessene Ziel erneut messen. Die Live-Wache misst derzeit `/` und `/methodik/` auf `franksfinanzcheck.de`, nicht den `www`-Host. Dessen DNS-Proxy-Status zusätzlich mit `npm run edge:freigabe` prüfen. |
 | **BEFUND** | 1 | gemessen, und es fehlt etwas | je nach Diagnose Abschnitt A1 Schritt 1 (Proxy aus) oder Schritt 3 (Regel unvollständig) – der Bericht nennt es ausdrücklich |
 | **STOERUNG** | 2 | kein Ziel erreichbar | **kein** Sicherheitsbefund: Erreichbarkeit prüfen, Lauf neu starten |
 | **WACHE-FEHLER** | sonst / leer | Prüfung selbst defekt, z. B. fehlender Bericht oder Exit-Code | Workflow/Skript prüfen; keine Edge-Änderung auf Verdacht |
@@ -128,16 +128,24 @@ jeder Schritt den nächsten belegt:
    `newsletter-worker` von `main`. Der Secret-Job hält auf Freigabe; den
    Lauf freigeben oder abbrechen (A4, „Die Freigabe ist ein Klick“). Der
    Lauf muss `/healthz` mit `bau == ff-newsletter-2026-10-24` belegen.
-4. **Edge-Regel anwenden** (A1): `npm run edge:freigabe` (Exit 0), dann
-   `npm run edge:freigabe:apply`, dann `npm run edge:b7` und den
-   Datenschutztext committen. Der Apply braucht
+4. **Edge-Regel und Datenschutz** (A1/B7): Zuerst den Datenschutztext fachlich
+   und rechtlich prüfen und die Veröffentlichung passend zur Proxy-Umstellung
+   planen. `npm run edge:freigabe` liest den API-Iststand: Exit 1 bedeutet
+   belegte Abweichung; Exit 2 bedeutet nicht prüfbar und ist **kein** Grund für
+   einen Eingriff auf Verdacht. Bei belegtem Befund und nach Betreiberfreigabe
+   `npm run edge:freigabe:apply` ausführen. Der Apply braucht
    `CLOUDFLARE_API_TOKEN` mit `Zone.DNS:Edit`, `Zone.Settings:Edit`,
-   `Zone.Transform Rules:Edit` für diese Zone.
+   `Zone.Transform Rules:Edit` für diese Zone und passt B7 nach erfolgreicher
+   API-Gegenmessung lokal an. Den Text prüfen, committen und veröffentlichen;
+   `npm run edge:b7` prüft nur den lokalen Checkout. Anschließend
+   `npm run edge:freigabe` erneut ausführen und Exit 0 belegen. Ist der
+   API-Iststand bereits im Soll, aber die öffentliche Wirkung abweichend,
+   keine blinde Änderung durchführen, sondern A1 untersuchen.
 5. **Live-Nachweis:** `gh workflow run sicherheits-wache.yml --ref main`.
-   Nur der vollständige erfolgreiche Live-Job schließt #972. Die Warnung
-   „Produktions-Environment“ bleibt danach als #922-Nachweis bestehen, bis
-   der Bypass-Schalter im Dashboard steht; sie ist keine Live-Sicherheits-
-   Abweichung, sondern die Vorbedingung für den nächsten Deploy. Seit dem
+   Nur der vollständige erfolgreiche Live-Job schließt #972. Für einen neuen
+   Worker-Deploy muss das Environment zuvor vollständig abgesichert sein;
+   eine spätere Drift-Warnung ist getrennt vom Live-Betriebsbild zu behandeln
+   und vor dem nächsten Deploy zu beheben. Seit dem
    05.11.2026 stehen Diagnose und nächster Schritt als erste Annotationen
    des Auswerte-Schritts (F5) – ein roter Lauf ist damit ohne Log-Download
    und ohne Artefakt lesbar.
@@ -708,7 +716,7 @@ Heilung, sondern ein falscher Abschluss.
   auch unter Bash `-e`; die Auswertung entscheidet.
 - Jeder belegte Befund steht einzeln als gegen Kommando-Injektion geschützte
   Check-Annotation in GitHub, außerdem in der Lauf-Zusammenfassung. Bereinigte
-  Berichte bleiben sieben Tage als Artefakt `sicherheits-live-nachweis` erhalten.
+  Berichte bleiben 90 Tage als Artefakt `sicherheits-live-nachweis` erhalten.
   Keine rohen Health-Antworten, Export-Einträge, Adressen oder Cookies hochladen.
 
 **Nach Übernahme der Korrektur und Einrichtung nach A1/A3/A4:**
