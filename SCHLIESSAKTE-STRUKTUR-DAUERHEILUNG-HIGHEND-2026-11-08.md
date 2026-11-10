@@ -392,6 +392,83 @@ FAIL/ERROR eine eigene Annotation `::error title=Uhr-Probe::<name>`; der
 Exit-Code wird durchgereicht (`c4ae916`). Dieselbe Regel wie in §6: ein rotes
 Gate nennt seinen Zeugen.
 
+## 8. #1137: der Deploy starb an einem Gate, das nur „exit code 1“ sagte
+
+Der Bot-Watchdog meldete am 08.11. „Auslieferung blockiert“: Der letzte
+`deploy.yml`-Lauf endete vor dem Pages-Upload, blockierender Schritt
+„KI-Transparenz – Text, Bild und Provenienz testen“. Aus dem Lauf war die
+Ursache **nicht** lesbar – die Prüfung trug genau eine Annotation:
+
+```
+Process completed with exit code 1.
+```
+
+Sechs Testmodule in einem Schritt, und keines nannte sich. Die Ursache lag
+allein im Schritt-Log; wer das Log nicht abrufen kann oder darf (Sandbox,
+Aufbewahrungsfrist), kann den Ausfall nicht heilen. Das ist derselbe Defekt
+wie in §6 und §7, nur an der teuersten Stelle: dem Schritt, der die
+Auslieferung anhält.
+
+**Reproduktion (nicht geraten).** Ein Arbeitsbaum auf `origin/main`
+(`b384cc7`) mit `requirements-ci.txt` und Hugo 0.168.0 zeigt denselben
+Fehlschlag wie in §5:
+
+```
+ERROR: setUpClass (scripts.tests.test_ki_provenienz_render.KiProvenienzRenderTest)
+  subprocess.CalledProcessError: Command '['hugo', '--quiet']' returned non-zero exit status 1
+```
+
+Auf dem PR-Stand laufen dieselben sechs Module grün (`Ran 27 tests … OK`) –
+der Deploy-Blocker ist die letzte Auswirkung von #1129, nicht ein neuer
+Inhaltsbefund. Die Kette war die ganze Zeit korrekt **fail-closed**; defekt
+war nur, dass ein rotes Gate seinen Zeugen nicht nannte.
+
+**Heilung – eine Umsetzung statt drei Kopien.** Die Auswertung stand vorher
+dreimal als eingebetteter Python-Block in den Workflows (Code-Regression,
+Uhr-Probe, und der Deploy hatte sie gar nicht). Jetzt gibt es
+`scripts/ci_tests.py`:
+
+```
+python3 scripts/ci_tests.py --titel "KI-Transparenz" -- \
+  python3 -m unittest scripts.tests.test_ki_transparenz_render … -v
+```
+
+* Der Helfer schreibt die volle Ausgabe in eine Logdatei, zeigt die letzten
+  120 Zeilen und setzt **je rotem Test** eine Annotation
+  (`Name (Ort)` + Behauptung, maskiert, auf 1500 Zeichen begrenzt, `--max 10`).
+* Fehlschläge **ohne** unittest-Format (Absturz im Setup, fehlendes Binary,
+  Import-Fehler) bekommen eine Notfall-Annotation mit Exit-Code und
+  Log-Spitze. „Exit 1 ohne Namen“ ist damit strukturell nicht mehr möglich.
+* Der Exit-Code des Befehls wird unverändert durchgereicht – die Auswertung
+  macht kein rotes Gate grün.
+* Eingesetzt in `deploy.yml` (5 Testschritte: H1-Wache, Weiterleitungen,
+  Konsolidierung, Faktenfrische Gas, KI-Transparenz) und in
+  `publication-reliability-tests.yml` (Code-Regression, Uhr-Probe).
+
+**Der Wächter (V7).** `scripts/workflow_vertrag_wache.py` prüft in den
+Lieferketten-Workflows (`deploy.yml`,
+`publication-reliability-tests.yml`) jeden `python3 -m unittest`-Aufruf:
+läuft er nicht über `scripts/ci_tests.py`, ist das ein Befund. Ausnahmen nur
+mit Begründung in derselben Zeile (`# V7-AUSNAHME: <Grund>`) – eine Ausnahme
+ohne Grund ist eine Lücke, kein Sonderfall. Umbruch über `\` wird korrekt als
+EIN Aufruf gelesen; Kommentarzeilen sind Dokumentation, kein Aufruf. Fünf
+Sabotage-Proben im Selbsttest halten die Regel scharf (ungeschützt erkannt,
+geschützt nicht beanstandet, Ausnahme mit/ohne Grund, Kommentar, fremder
+Workflow).
+
+**Nachweis lokal:**
+
+```
+python3 scripts/ci_tests.py --selftest                 → ✓ (Maskierung, 2 Blöcke, Notfallpfad)
+python3 -m unittest scripts.tests.test_ci_tests         → Ran 7 tests … OK
+python3 scripts/workflow_vertrag_wache.py --selftest    → ✅ V1–V7 (inkl. V7-Sabotage)
+python3 scripts/workflow_vertrag_wache.py --gate        → 102 Dateien, grün
+python3 scripts/automation_premium_audit.py --strict    → grün
+```
+
+**Die Regel (dieselbe wie §6/§7, jetzt mit Wächter):** Ein Gate, das die
+Auslieferung anhalten darf, muss seinen Zeugen nennen – und ein Testlauf, der
+ihn nicht nennt, ist ein Vertragsverstoß, kein Stilfehler.
 ## 8. Zwei Befunde, die niemand sah – eine Ableitung und eine Schwelle
 
 Beide Befunde kamen aus demselben Lauf (`42609545452`, Code-Regression), und

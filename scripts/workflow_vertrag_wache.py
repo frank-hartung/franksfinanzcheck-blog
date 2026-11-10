@@ -64,6 +64,11 @@
 #        `}}` macht die Datei ungültig, PyYAML sieht nur Text.
 #    V6  SCHRITT-PFLICHT: Ein Schritt ohne `run:` und ohne `uses:`
 #        ist ein Befund (er tut nichts und meldet trotzdem Erfolg).
+#    V7  ROTER TEST NENNT SEINEN NAMEN: In den Workflows, die die
+#        Auslieferung anhalten können (ANNOTATIONS_PFLICHT), muss jeder
+#        `python3 -m unittest`-Aufruf über `scripts/ci_tests.py` laufen.
+#        Sonst steht im Lauf nur „exit code 1" und die Ursache liegt
+#        allein im flüchtigen Log – genau der Zustand von #1137.
 #
 #  WICHTIG – WAS DIESE WACHE NICHT KANN
 #  ------------------------------------
@@ -116,6 +121,17 @@ SCHRITT_SCHLUESSEL = {
     "name", "uses", "with", "run", "env", "if", "id", "shell",
     "working-directory", "continue-on-error", "timeout-minutes",
 }
+
+# V7 – Workflows, die die Auslieferung anhalten können. Ein roter Test dort
+# muss seinen Namen als Annotation mitliefern (#1137, 08.11.2026). Der Kreis
+# ist bewusst klein und wächst mit dem Umbau: Wer einen Workflow aufnimmt,
+# stellt seine Testschritte auf `scripts/ci_tests.py` um – umgekehrt gilt:
+# solange ein Workflow nicht aufgenommen ist, prüft V7 ihn nicht.
+ANNOTATIONS_PFLICHT = frozenset({"deploy.yml", "publication-reliability-tests.yml"})
+ANNOTATIONS_HELFER = "scripts/ci_tests.py"
+# Ausnahme mit Begründungspflicht: `# V7-AUSNAHME: <Grund>` in derselben
+# Zeile. Eine Ausnahme ohne Grund ist keine Ausnahme, sondern eine Lücke.
+V7_AUSNAHME = re.compile(r"#\s*V7-AUSNAHME:\s*\S")
 
 TRIGGER = {
     "push", "pull_request", "pull_request_target", "schedule",
@@ -216,6 +232,45 @@ def _zeile_von(text: str, muster: str) -> int:
     return 0
 
 
+# ------------------------------------------------------------ V7 (offline)
+
+def _logische_zeilen(skript: str) -> List[str]:
+    """Zeilenfortsetzungen (`\` am Zeilenende) zu einer logischen Zeile ziehen.
+
+    Ein Aufruf über zwei Zeilen ist EIN Aufruf:
+        python3 scripts/ci_tests.py --titel X -- \
+          python3 -m unittest …
+    Ohne das Zusammenziehen meldet V7 jeden sauber umbrochenen Aufruf.
+    """
+    return skript.replace(chr(92) + chr(10), " ").splitlines()
+
+
+def _pruefe_v7(datei: str, job: str, nr: int, schritt: dict) -> List[Befund]:
+    """V7 – ein Testlauf in einem Lieferketten-Workflow nennt seinen Namen."""
+    if Path(datei).name not in ANNOTATIONS_PFLICHT:
+        return []
+    skript = schritt.get("run")
+    if not isinstance(skript, str):
+        return []
+    befunde: List[Befund] = []
+    for zeile in _logische_zeilen(skript):
+        if "python3 -m unittest" not in zeile:
+            continue
+        if zeile.lstrip().startswith("#"):      # Dokumentation, kein Aufruf
+            continue
+        if ANNOTATIONS_HELFER in zeile:          # läuft durch die Auswertung
+            continue
+        if V7_AUSNAHME.search(zeile):            # begründete Ausnahme
+            continue
+        befunde.append(Befund(
+            "V7", f"{datei}",
+            f"Job »{job}« Schritt {nr} (»{schritt.get('name', '?')}«): "
+            f"`python3 -m unittest` ohne {ANNOTATIONS_HELFER} – ein roter Test "
+            f"meldet dann nur „exit code 1“ (#1137). Aufruf: "
+            f"python3 {ANNOTATIONS_HELFER} --titel <Schritt> -- python3 -m unittest …"))
+    return befunde
+
+
 # ------------------------------------------------------------ V3–V6 (offline)
 
 def pruefe_struktur(text: str, name: str) -> Tuple[List[Befund], Optional[dict]]:
@@ -291,6 +346,7 @@ def pruefe_struktur(text: str, name: str) -> Tuple[List[Befund], Optional[dict]]
                         f"»{schluessel}«"))
             hat_run = "run" in schritt
             hat_uses = "uses" in schritt
+            befunde.extend(_pruefe_v7(name, job_name, nr, schritt))
             if not hat_run and not hat_uses:
                 befunde.append(Befund(
                     "V6", name,
@@ -558,7 +614,7 @@ def pruefen(root: Path = ROOT, *, online: bool = False,
 
 def bericht(befunde: Sequence[Befund], geprueft: int, online: bool) -> str:
     zeilen = ["🛡️  WORKFLOW-VERTRAG-WACHE", ""]
-    zeilen.append(f"Geprüft: {geprueft} Workflow-Datei(en), Regeln V1–V6 "
+    zeilen.append(f"Geprüft: {geprueft} Workflow-Datei(en), Regeln V1–V7 "
                   f"({'online, inkl. Anbieter-Auflösung' if online else 'offline'}).")
     zeilen.append("")
     if not befunde:
@@ -664,6 +720,46 @@ jobs:
         fehler.append(f"doppelter Schlüssel nicht erkannt: {b}")
 
 
+
+def _selftest_v7(fehler: List[str]) -> None:
+    """Sabotage-Proben für V7: ohne Wächter wäre der Ausfall von #1137 zurück."""
+    vorlage = """
+name: X
+on: [push]
+jobs:
+  a:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Tests
+        run: |
+{koerper}
+"""
+
+    def lauf(koerper: str, datei: str = "deploy.yml") -> List[Befund]:
+        befund, _ = pruefe_struktur(vorlage.format(koerper=koerper), datei)
+        return [b for b in befund if b.regel == "V7"]
+
+    # 1. Ungeschützt: der Testlauf nennt keinen Namen → Befund.
+    if not lauf("          python3 -m unittest scripts.tests.test_x"):
+        fehler.append("V7 erkennt einen ungeschützten Testlauf nicht")
+    # 2. Geschützt (auch über zwei Zeilen umbrochen) → kein Befund.
+    geschuetzt = ("          python3 scripts/ci_tests.py --titel X -- " + chr(92)
+                  + "\n            python3 -m unittest scripts.tests.test_x")
+    if lauf(geschuetzt):
+        fehler.append(f"V7 beanstandet einen geschützten Aufruf: {lauf(geschuetzt)}")
+    # 3. Ausnahme MIT Grund → kein Befund; ohne Grund → Befund.
+    if lauf("          python3 -m unittest x # V7-AUSNAHME: nur lokal möglich"):
+        fehler.append("V7 ignoriert eine begründete Ausnahme nicht")
+    if not lauf("          python3 -m unittest x # V7-AUSNAHME:"):
+        fehler.append("V7 akzeptiert eine Ausnahme ohne Grund")
+    # 4. Dokumentation ist kein Aufruf.
+    if lauf("          # python3 -m unittest x   (nur Beispiel)"):
+        fehler.append("V7 hält einen Kommentar für einen Aufruf")
+    # 5. Außerhalb der Lieferketten-Workflows gilt V7 (noch) nicht.
+    if lauf("          python3 -m unittest x", "link-check.yml"):
+        fehler.append("V7 greift in einem nicht aufgenommenen Workflow")
+
+
 def _selftest_vertraege(fehler: List[str]) -> None:
     """Pin- und Eingabe-Vertrag (V1/V2) – reine Dict-Prüfung, braucht kein YAML."""
     action = "peter-evans/create-issue-from-file@433e51abf769039ee20ba1293a088ca19d573b7f"
@@ -735,8 +831,10 @@ def _selftest() -> int:
         beschriftung = "V1/V2 (ohne YAML-Strukturproben)"
     else:
         _selftest_struktur(fehler)
+        _selftest_v7(fehler)
         _selftest_vertraege(fehler)
-        beschriftung = "V1–V6, Typvertrag, Doppelschlüssel, Negativ-Proben"
+        beschriftung = ("V1–V7, Typvertrag, Doppelschlüssel, Negativ-Proben, "
+                        "V7-Sabotage")
 
     if fehler:
         print("❌ Selbsttest fehlgeschlagen:")
@@ -790,7 +888,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         print(bericht(befunde, geprueft, args.online))
 
     if befunde and args.gate:
-        print("::error::Workflow-Vertragsverletzung – Details oben (Regeln V1–V6).")
+        print("::error::Workflow-Vertragsverletzung – Details oben (Regeln V1–V7).")
         return 1
     return 0
 
