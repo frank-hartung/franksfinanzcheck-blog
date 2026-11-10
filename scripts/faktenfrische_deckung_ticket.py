@@ -83,6 +83,28 @@ def spitze_befund(messung: dict) -> str | None:
     return None
 
 
+def gegenprobe_befund(messung: dict) -> str | None:
+    """Der Rahmen für eine EINGEFRORENE Messung – oder None (#1107, 10.11.2026).
+
+    Bis zum 10.11.2026 kannte das Ticket nur „grün", „rot" und „beweislos"
+    und unterschied bei der Projektion allein `trajektorie: true|false`.
+    Damit las sich eine eingefrorene Zukunftsmessung (Stichtag mit dem
+    Prüfstand seines eigenen Tages) wie ein Betriebsnachweis. Genau aus
+    dieser Verwechslung entstand #1107. Jetzt ist der dritte Zustand
+    sichtbar: Das Ticket nennt ihn beim Namen, und es schließt sich
+    daraus NICHT (eine Gegenprobe belegt keinen Betriebszustand).
+    """
+    if not (messung.get("projektion") or {}).get("eingefroren"):
+        return None
+    p = messung.get("projektion") or {}
+    return (
+        "⚠️ **Eingefrorene Gegenprobe – kein Betriebsnachweis (#1107):** "
+        f"Der Stichtag {p.get('stichtag')} liegt in der Zukunft und wurde mit "
+        "dem Prüfstand genau dieses Tages gemessen (als hätte der Bot bis dahin "
+        "nichts geprüft). Aus einer Momentaufnahme schließt dieses Ticket "
+        "**nichts** – der Weg ab heute wird ohne `--gegenprobe` gemessen.")
+
+
 def horizont_befund(messung: dict) -> str:
     """Der Weg des Bots als Satz – auch „nicht gemessen“ ist ein Satz (#1107).
 
@@ -107,20 +129,34 @@ def horizont_befund(messung: dict) -> str:
 
 
 def projektion_zeile(messung: dict) -> str:
-    """Woher die Zahl kommt: Weg des Bots oder Nachweis des Stichtags (#1107)."""
+    """Woher die Zahl kommt – drei Zustände, nicht zwei (#1107, 10.11.2026).
+
+    Vorher stand hier für JEDEN Nicht-Trajektorien-Fall „Nachweis, keine
+    Projektion in die Zukunft“. Das war doppelt falsch: Der Horizont
+    darunter ist auch am heutigen Stichtag eine Prognose, und eine
+    eingefrorene Zukunftsmessung ist genau das Gegenteil eines Nachweises.
+    """
     p = messung.get("projektion") or {}
-    if p.get("trajektorie"):
+    modus = p.get("modus")
+    if modus == "eingefroren" or (modus is None and p.get("eingefroren")):
+        return (f"⚠️ eingefrorene Gegenprobe zum Stichtag {p.get('stichtag')} "
+                "(kein Betriebsnachweis, #1107)")
+    if modus == "weg" or (modus is None and p.get("trajektorie")):
         return (f"Stichtag {p.get('stichtag')} ab **{p.get('ausgangspunkt')}** "
                 "gerechnet (Weg des Bots, nicht eingefroren)")
     if p.get("stichtag"):
-        return (f"Stichtag {p.get('stichtag')} selbst (Nachweis, keine "
-                "Projektion in die Zukunft)")
+        return (f"Stand vom {p.get('stichtag')} – Ausgangspunkt des Horizonts "
+                "(Prognose, kein eingefrorener Zukunftstag)")
     return "–"
 
 
 def bewertung(messung: dict | None, fehler: str | None) -> str:
     """→ 'gruen' | 'rot' | 'beweislos'. Rein, ohne Dateizugriff."""
     if fehler is not None or messung is None:
+        return "beweislos"
+    # Eine eingefrorene Gegenprobe ist kein Betriebsnachweis (#1107):
+    # Sie darf weder schließen (grün) noch einen Auftrag erzeugen (rot).
+    if (messung.get("projektion") or {}).get("eingefroren"):
         return "beweislos"
     if not messung.get("empfehlung_erreicht", True):
         return "rot"
@@ -173,6 +209,9 @@ def ticket_body(messung: dict | None, fehler: str | None,
         return "\n".join(zeilen) + "\n" + MARKER
 
     m = messung or {}
+    gegenprobe = gegenprobe_befund(m)
+    if gegenprobe:
+        zeilen += [gegenprobe, ""]
     spitze = spitze_befund(m)
     deckung = _de_zahl(m.get("deckung_prozent", 0), 0)
     zeilen += [
@@ -471,6 +510,33 @@ def selftest() -> int:
     pruefe("D7c", "nicht gemessen" in ticket_body(_proben_messung(
         kadenz_horizont={"geprueft": False}), None,
         heute=dt.date(2026, 11, 6)), True)
+
+    # D8 – Eingefrorene Gegenprobe ist kein Betriebsnachweis (#1107) ------
+    eingefroren = _proben_messung(
+        projektion={"stichtag": "2026-11-26", "ausgangspunkt": "2026-11-26",
+                    "trajektorie": False, "modus": "eingefroren",
+                    "eingefroren": True, "warnung": "Gegenprobe",
+                    "regel": "x"})
+    pruefe("D8a", bewertung(eingefroren, None), "beweislos")
+    pruefe("D8b", bool(gegenprobe_befund(eingefroren)), True)
+    pruefe("D8c", gegenprobe_befund(_proben_messung()), None)
+    body8 = ticket_body(eingefroren, None, heute=dt.date(2026, 11, 10))
+    for gefordert in ("kein Betriebsnachweis", "2026-11-26",
+                      "nicht beweisbar",
+                      "Aus einer Momentaufnahme schließt dieses Ticket"):
+        faelle[0] += 1
+        if gefordert not in body8:
+            fehler.append(f"D8: {gefordert!r} fehlt im Gegenproben-Text")
+    # Gegenprobe: Eine echte Trajektorie trägt den Rahmen nicht.
+    echt = _proben_messung(projektion={"stichtag": "2026-11-26",
+                                       "ausgangspunkt": "2026-11-10",
+                                       "trajektorie": True, "modus": "weg",
+                                       "eingefroren": False, "warnung": None,
+                                       "regel": "x"})
+    pruefe("D8d", bewertung(echt, None), "gruen")
+    pruefe("D8e", "kein Betriebsnachweis" in ticket_body(echt, None,
+                                                         heute=dt.date(2026, 11, 10)),
+           False)
 
     if fehler:
         print("❌ Selbsttest Deckungs-Ticket rot:")
