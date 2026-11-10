@@ -55,6 +55,19 @@ ausgegeben. Die drei fehlerhaft zusammengeführten GSC-Artefakte wurden in
 diesem Paket auf den letzten konsistenten Messcommit `6c9d473` zurückgeholt;
 Artefakt-Wache, Weiterleitungs- und Konsolidierungstests sind wieder grün.
 
+**CI-Nachprüfung:** Die unabhängige PR-Prüfung fand vier weitere, im
+Ausgangsbranch entstandene Merge-Artefakte unter `data/gsc/abdeckung/`. Alle
+wurden aus dem letzten nachweislich gültigen Messcommit `6c9d473` beziehungsweise
+mit der vorhandenen Artefakt-Wache wiederhergestellt. Der lokale Hugo-Pin wurde
+auf den Stand der Installationsaktion zurückgeführt, die Pagefind-Verträge auf
+den bereits vorhandenen exakten Pin `1.6.0` nachgezogen. Beim fehlenden
+Quellenvermerk des Waschmaschinen-Artikels wurde keine Recherche vorgetäuscht:
+Als konservative, bereits im Bestand verwendete Haushaltsquelle ist die
+Verbraucherzentrale vermerkt; die konkreten Modellannahmen bleiben im Text
+ausdrücklich Beispielwerte. Artefakt-, Konfliktmarker-, Metadaten-, ReDoS- sowie
+die betroffenen 137 Vertrags-/GSC-Tests sind lokal grün; Gesamtsuite und erneute
+CI bleiben die abschließende technische Abnahme.
+
 ### Weiterhin nicht automatisch abschließbar
 
 Anbieterinventar und schriftliche Anbieterauskünfte nach Art. 50 Abs. 2,
