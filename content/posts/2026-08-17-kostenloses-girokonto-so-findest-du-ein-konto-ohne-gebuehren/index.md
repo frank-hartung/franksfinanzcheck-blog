@@ -9,7 +9,7 @@ categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
 
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.jpg"
   alt: "Kostenloses Girokonto: So findest du ein Konto ohne Gebühren"

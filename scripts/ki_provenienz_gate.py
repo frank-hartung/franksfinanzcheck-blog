@@ -493,7 +493,11 @@ def wache(root: Path = ROOT, *, trocken: bool = False, bau: Path | None = None,
     ergebnis = heilen(root, trocken=trocken, bau=bau, nur_quelle=nur_quelle)
     heute = _datum_heute()
     state = kp.state_lesen(root)
-    erstmals: dict[str, str] = state.get("ungeklaert_erstmals") or {}
+    # Kopie: Das Bereinigen geklärter Slugs darf nicht schon `state`
+    # verändern, bevor der Alt-/Neu-Vergleich läuft. Sonst vergleicht die
+    # Wache dasselbe Objekt mit sich selbst und verwirft die Klärung beim
+    # Schreiben (Realbefund am 10.11.2026: 0 offen, 12 Leichen im Zustand).
+    erstmals: dict[str, str] = dict(state.get("ungeklaert_erstmals") or {})
     ungeklaert = kp.ungeklaert(root)
     for slug in ungeklaert:
         erstmals.setdefault(slug, heute)

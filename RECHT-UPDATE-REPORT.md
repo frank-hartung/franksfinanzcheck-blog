@@ -11,6 +11,60 @@ fachanwaltliche Prüfung empfohlen (siehe Abschnitt „Nächste Schritte“).
 
 ---
 
+## Nachtrag 2026-11-10 · Unbelegte Herkunftsausnahmen fail-closed geschlossen (#1028)
+
+**Frist-ID:** `ki-vo-kennzeichnung-bestand` (Frist 02.12.2026) ·
+**Status: alle zwölf ungeklärten Register-Einträge entschieden; neun konservativ
+gekennzeichnet, drei durch fassungsgebundene Redaktionsnachweise belegt.
+Anbieter-Nachweise und betriebliche Freigabe bleiben menschliche Aufgaben.**
+Dokumentierte technische Selbsteinschätzung, keine Rechtsberatung.
+
+### Entscheidung statt Dauer-Eskalation
+
+Die Wache meldete seit dem 07.11.2026 zwölf `menschlich`-Einträge ohne Beleg.
+Drei Artikel besitzen inzwischen einen freigegebenen Prüfblock mit benannter
+Redaktion, Prüfdatum und einem gegen die aktuelle Fassung neu berechneten
+`inhalt_sha256`. Sie nutzen den bereits vorhandenen Redaktionspfad nach K2.
+Die übrigen neun Artikel hatten keinen Prüfblock und wurden auf
+`ai_generated: true` gesetzt. Das behauptet keine rekonstruierte Herkunft,
+vermeidet aber eine unbelegte Nicht-Kennzeichnung.
+
+`scripts/ki_kennzeichnung_gate.py` akzeptiert die Ausnahme jetzt nur noch mit
+Status, Prüfername und -rolle, Prüfdatum und passendem Fassungs-Hash. Ein
+Listeneintrag oder `status: freigegeben` allein reicht nicht mehr. Nach einer
+Textänderung schlägt K2 fehl; die vorhandene Selbstheilung setzt konservativ
+`ai_generated: true`, ohne einen Prüfblock zu erfinden. Sechs Unit-Tests und
+der erweiterte Selbsttest sichern diesen Vertrag; die Suite läuft über
+`npm run test:ki`. Die tägliche Wache führt Selbsttest, Heilung und beide
+Regressionssuiten nun selbst aus und committet geheilte Artikel. Ein weiterer
+Regressionstest stellt sicher, dass geklärte Einträge auch wirklich aus dem
+Dauerzustand verschwinden statt als historische „offene“ Leichen zu bleiben.
+
+### Messung und Live-Befund
+
+Lokaler Hugo-Build: 121 Seiten, kein Fehler. `ki_provenienz_gate.py --gate`:
+111/111 reguläre Seiten in 19 Abschnitten, 50 Feed-Items, 0 Funde.
+`ki_kennzeichnung_gate.py --gate`, `ki_bild_markierung.py --gate` und die
+KI-Unit-Suiten sind grün. Der Live-Stand aus `origin/gh-pages` (Artefakt
+`305a07e`, Quelle `2b8c37c`) trägt Meta/scope/`describedby`, schema.org
+`creditText`, das sichtbare KI-Stimmen-Siegel, den erreichbaren Impressum-Anker
+sowie den `ffki:`-Feed-Kanal. Der aktuellste Deploy des Hauptbranches scheitert
+am 10.11.2026 dagegen vor dem Build am separaten Weiterleitungs-Gate; dieser
+allgemeine Auslieferungsbefund wird nicht als erfolgreiche neue Live-Abnahme
+ausgegeben. Die drei fehlerhaft zusammengeführten GSC-Artefakte wurden in
+diesem Paket auf den letzten konsistenten Messcommit `6c9d473` zurückgeholt;
+Artefakt-Wache, Weiterleitungs- und Konsolidierungstests sind wieder grün.
+
+### Weiterhin nicht automatisch abschließbar
+
+Anbieterinventar und schriftliche Anbieterauskünfte nach Art. 50 Abs. 2,
+Bildherkunft/Deepfake-Prüfung je tatsächlich verwendetem Bild und die finale
+Betreiberfreigabe erfordern Tatsachen außerhalb des Repos. Kein KI-Cover wird
+ohne Beleg deklariert. Der Workflow `erledigt=ki-vo-kennzeichnung-bestand`
+wurde nicht ausgeführt.
+
+---
+
 ## Nachtrag 2026-11-07 · Kanaltreue, Verbreitungsweg und Dauerwache (#1028)
 
 **Frist-ID:** `ki-vo-kennzeichnung-bestand` (Frist 02.12.2026) ·

@@ -26,6 +26,7 @@ Tests, die einen Build brauchen, überspringen sich ohne `public/` – der
 Bestand wird in CI immer vor dem Testlauf gebaut.
 """
 from pathlib import Path
+import json
 import re
 import tempfile
 import unittest
@@ -343,6 +344,25 @@ class WacheTest(unittest.TestCase):
         self.assertEqual(zweiter["lage"]["ungeklaert"], erster["lage"]["ungeklaert"])
         self.assertEqual(zweiter["state"], erster["state"],
                          "derselbe Bestand erzeugt nicht denselben Zustand")
+
+    def test_geklaerte_eintraege_werden_aus_dem_zustand_entfernt(self):
+        daten = self.root / "data"
+        daten.mkdir()
+        (daten / "ki_kennzeichnung.yaml").write_text(
+            "maschinell:\nmenschlich:\n", encoding="utf-8")
+        (daten / "ki_provenienz_state.json").write_text(json.dumps({
+            "frist": "2026-12-02", "funde": 0,
+            "ungeklaert_erstmals": {"alt-eintrag": "2026-11-07"},
+        }), encoding="utf-8")
+        ergebnis = gate.wache(self.root, nur_quelle=True)
+        self.assertTrue(ergebnis["state_geaendert"],
+                        "die Klärung muss persistiert werden")
+        self.assertEqual(ergebnis["state"]["ungeklaert_erstmals"], {})
+        gespeichert = json.loads(
+            (daten / "ki_provenienz_state.json").read_text(encoding="utf-8"))
+        self.assertEqual(gespeichert["ungeklaert_erstmals"], {})
+        folge = gate.wache(self.root, nur_quelle=True)
+        self.assertFalse(folge["state_geaendert"], "die Bereinigung ist idempotent")
 
     def test_abgeleitete_zahlen_stehen_nicht_im_dauerzustand(self):
         # Alter und Restfrist ändern sich täglich, ohne dass sich am Bestand

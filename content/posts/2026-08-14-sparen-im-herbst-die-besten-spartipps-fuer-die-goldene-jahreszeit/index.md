@@ -9,7 +9,7 @@ categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
 
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit.jpg"
   alt: "Sparen im Herbst: Die besten Spartipps für die goldene Jahreszeit"

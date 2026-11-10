@@ -101,12 +101,16 @@ menschliche Herkunft. Einzelne Markdown-Bilder sind hiervon nicht erfasst.
 
 ## 3. Artikel und Freigabe
 
-Die `menschlich`-Einträge in `data/ki_kennzeichnung.yaml` sind laut Register
-nicht alle belegt; menschliche Prüfung und redaktionelle Verantwortung müssen
-für die jeweilige veröffentlichte Fassung tatsächlich nachgewiesen sein.
-Automatische Tests oder eine bloße Status-Zeile reichen nicht. Bei fehlendem
-Nachweis Herkunft klären und ggf. sachgerecht kennzeichnen; keine menschliche
-Prüfung erfinden. Deepfake- und Textpflichten nicht verwechseln.
+Seit dem 10.11.2026 ist die Ausnahme „redaktionelle Verantwortung“
+fail-closed: `ai_generated: false` akzeptiert das Kennzeichnungs-Gate nur mit
+freigegebenem Status, Prüfername und -rolle, Prüfdatum sowie einem gültigen
+`inhalt_sha256`, der exakt zur veröffentlichten Fassung passt. Ein Eintrag
+unter `menschlich` oder eine bloße Status-Zeile reicht ausdrücklich nicht.
+Die neun zuvor unbelegten Ausnahmen wurden konservativ auf
+`ai_generated: true` gestellt; drei später fassungsgebunden geprüfte Artikel
+nutzen den Redaktionspfad. Eine Änderung am Text entwertet die Ausnahme
+automatisch. Die Heilung kennzeichnet konservativ und erfindet weder Herkunft
+noch menschliche Prüfung. Deepfake- und Textpflichten nicht verwechseln.
 
 ## 3b. Maschinenlesbare Betreiberebene (#1028)
 

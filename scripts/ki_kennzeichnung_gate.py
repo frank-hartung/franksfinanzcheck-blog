@@ -12,8 +12,10 @@
 #
 #  Regeln (Register: data/ki_kennzeichnung.yaml):
 #    K1  Artikel unter `maschinell` haben IMMER ai_generated: true.
-#    K2  ai_generated: false nur mit Eintrag unter `menschlich` ODER mit
-#        freigegebener `redaktionelle_pruefung` (status: freigegeben).
+#    K2  ai_generated: false nur mit fassungsgebunden freigegebener
+#        `redaktionelle_pruefung`: Status, Prüfer und Prüfdatum sowie ein
+#        gültiger inhalt_sha256 sind Pflicht. Ein `menschlich`-Listeneintrag
+#        oder eine bloße Status-Zeile ist ausdrücklich KEIN Nachweis (#1028).
 #    K3  Fehlt das Feld, gilt es als false (→ K2).
 #
 #  Aufruf:
@@ -32,6 +34,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 POSTS = ROOT / "content" / "posts"
 REGISTER = ROOT / "data" / "ki_kennzeichnung.yaml"
 
@@ -71,12 +75,40 @@ def ki_wert(kopf: str) -> bool | None:
     return None if not m else m.group(1) == "true"
 
 
-def freigegeben(kopf: str) -> bool:
-    m = re.search(r"(?ms)^redaktionelle_pruefung:\s*\n(.*?)(?=^\S|\Z)", kopf)
-    if not m:
-        return False
-    st = re.search(r"(?m)^\s+status:\s*[\"']?([A-Za-z]+)", m.group(1))
-    return bool(st and st.group(1).lower() in ("freigegeben", "approved"))
+def freigabe_fehler(pfad: Path) -> str | None:
+    """Prüft die Ausnahme „redaktionelle Verantwortung“ fail-closed.
+
+    Ein Register-Eintrag oder ``status: freigegeben`` beweist weder eine
+    Prüfung noch, dass sie die heutige Fassung betrifft. Der Fingerabdruck
+    wird deshalb mit demselben Kanon wie das zentrale Redaktions-Gate neu
+    berechnet. Fehlt PyYAML oder ist das Frontmatter kaputt, wird die Ausnahme
+    verweigert und der konkrete Grund als K2-Befund gemeldet.
+    """
+    try:
+        from scripts import editorial_review_gate as redaktion
+        fm, body, _ = redaktion.load_article(pfad)
+    except Exception as exc:  # Gate-Befund statt Traceback oder stiller Ausnahme
+        return f"Prüfprotokoll nicht lesbar ({type(exc).__name__}: {exc})"
+
+    review = fm.get("redaktionelle_pruefung") or {}
+    if not isinstance(review, dict):
+        return "redaktionelle_pruefung ist kein Mapping"
+    fehlen = []
+    if str(review.get("status") or "").strip().lower() not in ("freigegeben", "approved"):
+        fehlen.append("Status freigegeben")
+    reviewer = review.get("pruefer") or {}
+    if not isinstance(reviewer, dict) or not all(
+            str(reviewer.get(feld) or "").strip() for feld in ("name", "rolle")):
+        fehlen.append("Prüfername und Prüferrolle")
+    if not str(review.get("pruefdatum") or "").strip():
+        fehlen.append("Prüfdatum")
+    expected = redaktion.content_fingerprint(fm, body)
+    sealed = str(review.get("inhalt_sha256") or "").strip().lower()
+    if not re.fullmatch(r"[0-9a-f]{64}", sealed):
+        fehlen.append("gültiger Fassungs-Hash")
+    elif sealed != expected:
+        fehlen.append("Fassungs-Hash stimmt nicht mit der veröffentlichten Fassung überein")
+    return "; ".join(fehlen) if fehlen else None
 
 
 def pruefen(posts: Path = POSTS, register: dict | None = None) -> list[tuple[Path, str]]:
@@ -93,8 +125,12 @@ def pruefen(posts: Path = POSTS, register: dict | None = None) -> list[tuple[Pat
         wert = ki_wert(kopf)
         if slug in reg["maschinell"] and wert is not True:
             funde.append((p, "K1 maschinell erstellt, aber nicht als KI gekennzeichnet"))
-        elif wert is not True and slug not in reg["menschlich"] and not freigegeben(kopf):
-            funde.append((p, "K2 ai_generated: false ohne Register-Eintrag „menschlich“ und ohne freigegebene redaktionelle Prüfung"))
+        elif wert is not True:
+            grund = freigabe_fehler(p)
+            if grund:
+                funde.append((p, "K2 ai_generated: false ohne belastbar freigegebene "
+                                 f"redaktionelle Prüfung ({grund}); ein „menschlich“-"
+                                 "Eintrag allein ist kein Nachweis"))
     return funde
 
 
@@ -124,14 +160,14 @@ def selbsttest() -> int:
             "bot-gut": "ai_generated: true",
             "mensch": "ai_generated: false",
             "ohne-feld": "title: x",
-            "geprueft": "ai_generated: false\nredaktionelle_pruefung:\n  status: freigegeben\n  pruefer:\n    name: X",
+            "status-ohne-beleg": "ai_generated: false\nredaktionelle_pruefung:\n  status: freigegeben\n  pruefer:\n    name: X",
             "maschine-als-mensch": "ai_generated: false",
         }.items():
             (posts / slug).mkdir(parents=True)
             (posts / slug / "index.md").write_text(f"---\ntitle: T\n{kopf}\n---\nText\n", encoding="utf-8")
         reg = {"maschinell": {"bot-falsch", "bot-gut", "maschine-als-mensch"}, "menschlich": {"mensch", "maschine-als-mensch"}}
         funde = {slug_von(p): g for p, g in pruefen(posts, reg)}
-        erwartet = {"bot-falsch", "ohne-feld", "maschine-als-mensch"}
+        erwartet = {"bot-falsch", "mensch", "ohne-feld", "status-ohne-beleg", "maschine-als-mensch"}
         if set(funde) != erwartet:
             fehler.append(f"Funde {sorted(funde)} statt {sorted(erwartet)}")
         for p, _ in pruefen(posts, reg):
@@ -140,8 +176,8 @@ def selbsttest() -> int:
             fehler.append("Heilung nicht vollständig")
         if "ai_generated: true" not in (posts / "ohne-feld" / "index.md").read_text(encoding="utf-8"):
             fehler.append("fehlendes Feld nicht ergänzt")
-        if "ai_generated: false" not in (posts / "mensch" / "index.md").read_text(encoding="utf-8"):
-            fehler.append("menschlicher Artikel wurde verändert")
+        if "ai_generated: true" not in (posts / "mensch" / "index.md").read_text(encoding="utf-8"):
+            fehler.append("unbelegter „menschlich“-Eintrag umging die konservative Kennzeichnung")
     reg_echt = register_lesen()
     if not reg_echt["maschinell"]:
         fehler.append("Register data/ki_kennzeichnung.yaml leer oder unlesbar")
