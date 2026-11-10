@@ -32,7 +32,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from faktenfrische_gleis import (  # noqa: E402
-    arbeitsliste_traegt_befunde, offene_befunde)
+    arbeitsliste_traegt_befunde, eintraege_in_offen, offene_befunde)
 sys.path.insert(0, str(ROOT / 'scripts'))
 import faktenfrische  # noqa: E402
 
@@ -424,24 +424,26 @@ class Faktenfrische763MetaTests(unittest.TestCase):
                 self.assertFalse(finds, f'Harte Textverständnis-Regeln: {finds}')
 
     def test_faktenfrische_queue_haelt_befunde_geschlossen(self):
-        """Kein OFFENER BEFUND darf die zwei Slugs wieder führen.
+        """Kein OFFENER BEFUND und keine ARBEIT darf die zwei Slugs führen.
 
-        MESSHÖHE (07.11.2026, #1072; Nachzug 08.11.2026, #1126)
-        ---------------------------------------------------------
-        Maßgeblich sind die FACHLICHEN Befunde, nicht das Feld `offen`.
-        `offen` ist der Fälligkeits-/GEO-Report des Laufs
-        (`faktenfrische.py`, Abschnitt „queue schreiben": je Artikel Grund,
-        Frist und GEO-Prozent) – dort steht eine Seite, sobald ihr
-        `faktencheck` fällig ist, auch ohne jeden Fachbefund. Der Test verglich
-        damit zwei verschiedene Dinge: Er wurde rot, als die Heizperiode am
-        07.11. turnusgemäß wieder in den Vorrat rutschte („frisch geprüft vor
-        23 Tagen") – ein Fehlalarm ohne Sachfehler – und er wäre grün
-        geblieben, wenn ein echter Befund zurückgekehrt wäre.
+        MESSHÖHE (07.11.2026, #1072; Dauerheilung 10.11.2026, #1126)
+        -------------------------------------------------------------
+        Maßgeblich sind die FACHLICHEN Befunde, nicht die Arbeitsliste.
+        Zwei Fehler waren zu trennen:
 
-        Gemessen wird deshalb im Ledger (`fachbefunde`). Die Arbeitsliste darf
-        die Seiten führen (Frist 14.11.2026, Vorlauf 14 Tage) – sie darf nur
-        keinen Befund tragen. Ein neuer Lauf, der die Fehler erneut meldet,
-        schreibt sie ins Ledger und macht diese Prüfung weiter rot.
+          * Der Test las `offen` und hielt das für „offene Befunde“. Eine
+            turnusgemäß wieder aufgenommene Seite („frisch geprüft vor
+            23 Tagen") machte ihn am 07.11. rot – ein Fehlalarm.
+          * Die Queue selbst war widersprüchlich: `offen` führte Seiten, die
+            im selben Eintrag `faellig: false` und eine Frist in der Zukunft
+            trugen. Genau das meldet #1126.
+
+        Beides ist geheilt. `offen` führt nur noch ARBEIT (fällig,
+        befundbehaftet, abgebrochen); der Vorlauf steht in `vorlauf`. Der
+        Test prüft deshalb (a) das Ledger, (b) dass die Seiten nirgends als
+        Arbeit geführt werden und (c) dass kein Vorratseintrag einen Befund
+        mitschleppt. Ein neuer Lauf, der die Fehler erneut meldet, schreibt
+        sie ins Ledger und macht diese Prüfung rot.
         """
         import faktenfrische_befund_ledger as ledger
         kerne = {kern_von(s) for s in (HEIZ, REISE)}
@@ -454,6 +456,9 @@ class Faktenfrische763MetaTests(unittest.TestCase):
                              f'{eintrag.get("text")}')
         self.assertFalse(offene_befunde((HEIZ, REISE)),
                          "Queue meldet offenen Befund für eine der zwei Seiten")
+        self.assertFalse(eintraege_in_offen((HEIZ, REISE)),
+                         "Frisch geprüfte Seite steht als ARBEIT in `offen` "
+                         "(#1126) – sie gehört in den Vorlauf")
         self.assertFalse(arbeitsliste_traegt_befunde((HEIZ, REISE)),
                          "Queue-Eintrag transportiert einen Befund")
 

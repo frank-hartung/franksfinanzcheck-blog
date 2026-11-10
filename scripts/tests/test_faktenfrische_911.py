@@ -43,7 +43,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from faktenfrische_gleis import (  # noqa: E402
-    arbeitsliste_traegt_befunde, offene_befunde)
+    arbeitsliste_traegt_befunde, eintraege_in_offen, offene_befunde)
 sys.path.insert(0, str(ROOT / 'scripts'))
 import faktenfrische  # noqa: E402
 
@@ -532,10 +532,10 @@ class Faktenfrische911MetaTests(unittest.TestCase):
                                .read_text(encoding='utf-8'))
         except FileNotFoundError:
             self.skipTest('Queue-Datei nicht vorhanden')
-        # 07.11.2026 – Messhöhe korrigiert (wie #763/#823): offene BEFUNDE
-        # stehen im Ledger (`fachbefunde`), `queue['offen']` ist der
-        # Arbeitsvorrat mit Fristen. Aus dem Vorrat „Befunde“ zu lesen war in
-        # beide Richtungen falsch.
+        # 07.11./10.11.2026 – Messhöhe korrigiert (wie #763/#823): offene
+        # BEFUNDE stehen im Ledger (`fachbefunde`). `offen` führt seit
+        # Schema 2 nur ARBEIT, `vorlauf` die Termine; aus dem Vorrat „Befunde“
+        # zu lesen war in beide Richtungen falsch.
         import faktenfrische_befund_ledger as ledger
         kerne = {re.sub(r'^\d{4}-\d{2}-\d{2}-', '', s) for s in (STROM, GAS)}
         for eintrag in ledger.offene_befunde(ROOT / 'data' / 'faktenfrische_queue.json'):
@@ -547,6 +547,9 @@ class Faktenfrische911MetaTests(unittest.TestCase):
         führen (Turnus, Vorlauf), ein Befund darf dort nicht mitreisen."""
         self.assertFalse(offene_befunde((STROM, GAS)),
                          'Queue meldet offenen Befund für eine der zwei Seiten')
+        self.assertFalse(eintraege_in_offen((STROM, GAS)),
+                         'Frisch geprüfte Seite steht als ARBEIT in `offen` '
+                         '(#1126) – sie gehört in den Vorlauf')
         self.assertFalse(arbeitsliste_traegt_befunde((STROM, GAS)),
                          'Queue-Eintrag transportiert einen Befund')
         # Der Register-Eintrag muss den Lauf und die Heilung datieren.

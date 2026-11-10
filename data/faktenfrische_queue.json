@@ -1,4 +1,5 @@
 {
+  "schema": 2,
   "erzeugt": "2026-11-10 12:57 UTC",
   "uebersicht": {
     "gesamt": 126,
@@ -3144,7 +3145,10 @@
       "grund": "frisch geprüft vor 27 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-13",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-14-heizperiode-vorbereiten-im-spaetsommer",
@@ -3152,7 +3156,10 @@
       "grund": "frisch geprüft vor 26 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-14",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
@@ -3160,7 +3167,10 @@
       "grund": "frisch geprüft vor 26 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-14",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "frugalismus",
@@ -3168,7 +3178,10 @@
       "grund": "frisch geprüft vor 39 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-16",
-      "geo": 67
+      "geo": 67,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert",
@@ -3176,7 +3189,10 @@
       "grund": "frisch geprüft vor 39 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-16",
-      "geo": 83
+      "geo": 83,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss",
@@ -3184,7 +3200,10 @@
       "grund": "frisch geprüft vor 37 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-18",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest",
@@ -3192,7 +3211,10 @@
       "grund": "frisch geprüft vor 36 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-19",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
@@ -3200,7 +3222,10 @@
       "grund": "frisch geprüft vor 21 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-19",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-19-urlaubskasse-clever-aufbessern",
@@ -3208,7 +3233,10 @@
       "grund": "frisch geprüft vor 21 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-19",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt",
@@ -3216,7 +3244,10 @@
       "grund": "frisch geprüft vor 35 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-20",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
@@ -3224,7 +3255,10 @@
       "grund": "frisch geprüft vor 35 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-20",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
@@ -3232,7 +3266,10 @@
       "grund": "frisch geprüft vor 35 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-20",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto",
@@ -3240,7 +3277,10 @@
       "grund": "frisch geprüft vor 35 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-20",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks",
@@ -3248,7 +3288,10 @@
       "grund": "frisch geprüft vor 35 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-20",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit",
@@ -3256,7 +3299,10 @@
       "grund": "frisch geprüft vor 34 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-21",
-      "geo": 67
+      "geo": 67,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet",
@@ -3264,7 +3310,10 @@
       "grund": "frisch geprüft vor 34 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-21",
-      "geo": 83
+      "geo": 83,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung",
@@ -3272,7 +3321,10 @@
       "grund": "frisch geprüft vor 34 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-21",
-      "geo": 83
+      "geo": 83,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken",
@@ -3280,7 +3332,10 @@
       "grund": "frisch geprüft vor 34 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-21",
-      "geo": 67
+      "geo": 67,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle",
@@ -3288,7 +3343,10 @@
       "grund": "frisch geprüft vor 34 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-21",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-21-mietwagen-fallen-im-urlaub-vermeiden",
@@ -3296,7 +3354,10 @@
       "grund": "frisch geprüft vor 19 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-21",
-      "geo": 83
+      "geo": 83,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
@@ -3304,7 +3365,10 @@
       "grund": "frisch geprüft vor 34 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-21",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen",
@@ -3312,7 +3376,10 @@
       "grund": "frisch geprüft vor 34 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-21",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich",
@@ -3320,7 +3387,10 @@
       "grund": "frisch geprüft vor 33 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-22",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck",
@@ -3328,17 +3398,24 @@
       "grund": "frisch geprüft vor 32 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-23",
-      "geo": 83
+      "geo": 83,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     }
   ],
-  "offen": [
+  "offen": [],
+  "vorlauf": [
     {
       "slug": "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
       "titel": "Last Minute Urlaub: So findest du echte Reiseschnäppchen",
       "grund": "frisch geprüft vor 27 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-13",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-14-heizperiode-vorbereiten-im-spaetsommer",
@@ -3346,7 +3423,10 @@
       "grund": "frisch geprüft vor 26 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-14",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
@@ -3354,7 +3434,10 @@
       "grund": "frisch geprüft vor 26 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-14",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "frugalismus",
@@ -3362,7 +3445,10 @@
       "grund": "frisch geprüft vor 39 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-16",
-      "geo": 67
+      "geo": 67,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert",
@@ -3370,7 +3456,10 @@
       "grund": "frisch geprüft vor 39 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-16",
-      "geo": 83
+      "geo": 83,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss",
@@ -3378,7 +3467,10 @@
       "grund": "frisch geprüft vor 37 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-18",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest",
@@ -3386,7 +3478,10 @@
       "grund": "frisch geprüft vor 36 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-19",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
@@ -3394,7 +3489,10 @@
       "grund": "frisch geprüft vor 21 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-19",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-19-urlaubskasse-clever-aufbessern",
@@ -3402,7 +3500,10 @@
       "grund": "frisch geprüft vor 21 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-19",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt",
@@ -3410,7 +3511,10 @@
       "grund": "frisch geprüft vor 35 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-20",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
@@ -3418,7 +3522,10 @@
       "grund": "frisch geprüft vor 35 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-20",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
@@ -3426,7 +3533,10 @@
       "grund": "frisch geprüft vor 35 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-20",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto",
@@ -3434,7 +3544,10 @@
       "grund": "frisch geprüft vor 35 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-20",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks",
@@ -3442,7 +3555,10 @@
       "grund": "frisch geprüft vor 35 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-20",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit",
@@ -3450,7 +3566,10 @@
       "grund": "frisch geprüft vor 34 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-21",
-      "geo": 67
+      "geo": 67,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet",
@@ -3458,7 +3577,10 @@
       "grund": "frisch geprüft vor 34 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-21",
-      "geo": 83
+      "geo": 83,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung",
@@ -3466,7 +3588,10 @@
       "grund": "frisch geprüft vor 34 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-21",
-      "geo": 83
+      "geo": 83,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken",
@@ -3474,7 +3599,10 @@
       "grund": "frisch geprüft vor 34 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-21",
-      "geo": 67
+      "geo": 67,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle",
@@ -3482,7 +3610,10 @@
       "grund": "frisch geprüft vor 34 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-21",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-21-mietwagen-fallen-im-urlaub-vermeiden",
@@ -3490,7 +3621,10 @@
       "grund": "frisch geprüft vor 19 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-11-21",
-      "geo": 83
+      "geo": 83,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick",
@@ -3498,7 +3632,10 @@
       "grund": "frisch geprüft vor 34 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-21",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen",
@@ -3506,7 +3643,10 @@
       "grund": "frisch geprüft vor 34 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-21",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich",
@@ -3514,7 +3654,10 @@
       "grund": "frisch geprüft vor 33 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-22",
-      "geo": 100
+      "geo": 100,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck",
@@ -3522,7 +3665,10 @@
       "grund": "frisch geprüft vor 32 Tagen (Intervall 45 Tage)",
       "faellig": false,
       "frist": "2026-11-23",
-      "geo": 83
+      "geo": 83,
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     }
   ],
   "laeufe": [
