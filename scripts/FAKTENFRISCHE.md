@@ -203,3 +203,25 @@ nächste verfügbare Anbieter. Timeout und Versuche stehen im Recherchevertrag.
 Ein gesetzter Schlüssel ist kein Verfügbarkeitsnachweis; zum Betrieb muss
 mindestens ein funktionierender API-Zugang als Actions-Secret vorhanden sein.
 Die Fachprüfung ersetzt keine menschliche Abnahme.
+
+### Nachlauf der Befundakte (#1120)
+
+Die Akte und ihr JSON-Zustand sind eine abgeleitete Arbeitsliste, keine
+redaktionelle Entscheidung. `--wache --json` prüft die vollständige Projektion
+am dokumentierten Stichtag (einschließlich Markdown, Befund-IDs, Fassungen,
+Konfiguration und Live-Sicht); nur der technische Erzeugungszeitpunkt wird
+ignoriert. Ein gleicher Zähler allein beweist keine Aktualität. Bei
+`veraltet: true` beide Dateien mit `--schreiben` neu erzeugen und gemeinsam
+prüfen. Ledger-/Werkzeugfehler bleiben getrennt sichtbar.
+
+Der Workflow **Befundakte nachziehen** reagiert auf relevante menschliche
+Pushes und läuft zusätzlich alle drei Stunden, weil GitHub Pushes mit
+`GITHUB_TOKEN` und `[skip ci]` nicht zuverlässig als Workflow-Auslöser
+behandelt. GitHub-Zeitläufe sind Best Effort, keine garantierte Frist; bei
+Bedarf auf `main` manuell starten. Der Nachzug holt den neuesten `main`-Stand,
+berechnet beide Dateien darauf und pusht nur Fast-Forward. Bei einem Rennen
+wird neu berechnet statt eine alte Projektion zu rebasen; nach fünf erfolglosen
+Pushes bleibt der Lauf rot. Strukturreparaturen der Schließakte werden vorher
+separat geprüft und gesichert; Fachentscheidungen trifft die Automatik nicht.
+Die unabhängige Nachlauf-Wache meldet Abweichungen weiterhin, sie blockiert
+keine Auslieferung. Regressionen: `python3 -m unittest scripts.tests.test_befund_akte_nachlauf`.

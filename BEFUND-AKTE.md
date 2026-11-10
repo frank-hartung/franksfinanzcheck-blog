@@ -400,7 +400,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 89adecebaae75c14740
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a1a269b73a1b9c2dfc88 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` · **LIVE** · Risikoklasse standard · 5 Befund(e)
+### `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
 
 Datei: `content/posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/index.md`
 
