@@ -153,7 +153,9 @@ CI misst sie im gebauten `public/` (fail-closed, unverändert).
   (Schutzzonen, Doppelzeile/Idempotenz, Datei-URL, Bestandsscan, eigene
   Belegkette, Textanker, Leerzeilen-Projektion, F4-Dossier vollständig/aktuell).
 * Selbsttests: `fix_spaces` 62 Fälle · `abbildungen_ableiten` · `fix_url_hygiene`
-  · `faktenfrische` 40/40 · `faktenfrische_befund_ledger` · Governance C1–C49.
+  · `faktenfrische` 40/40 · `faktenfrische_befund_ledger` · `artefakt_waechter`
+  (627 Artefakte heil) · Governance C1–C49 **vor** dem main-Merge grün; seit
+  `7b93454` (PR #1162) sind **C6/C38 rot** – Fremdursache, s. Abschnitt 5c.
 * Bestehende Suiten: `test_faktenfrische_betriebsflaechen`,
   `test_faktenfrische_befund_akte`, `test_scorecard_ticket`,
   `test_abbildungen_ableiten`, `test_abbildungen_nachzug` – grün.
@@ -264,7 +266,25 @@ statt an den Floor zielen soll, ist laut Anleitung eine Entscheidung der
 Chefredaktion über `entscheidung: auto|human` in der SSOT – keine Reparatur
 im Vorbeigehen.
 
-### 5b. Befund auf `main`, der nicht zu #1098 gehört: C38 (Blustradius)
+### 5b. Zweite Fremdursache auf `main`, hier geheilt: kaputte GSC-Abdeckung
+
+Der Automatik-Commit `e82c0eb` („Leistungsdaten 2026-11-09“) hat fünf
+Abdeckungs-Artefakte als **Merge-Schnitt** nach `main` getragen:
+`data/gsc/abdeckung/befund.json` und `prioritaet.json` waren ungültiges JSON
+(doppelte Schlüssel, fehlende Objekttrenner), `ursachen.json` und
+`verlinkungsheilung.json` hatten doppelte Objektschlüssel. Folge auf `main`:
+`test_gsc_abdeckung` (Vertrag zu Code-Scanning-Alert Nr. 87) und der
+Artefakt-Wächter im Integritäts-Siegel waren rot – **beide vor diesem
+Branch**, beide denselben Fehler meldend.
+
+Heilung ohne neue Messung: `befund.json`/`.md` und `prioritaet.json` aus dem
+letzten gültigen Stand `6c9d473` zurückgeholt; die zwei A2-Artefakte mit dem
+dafür gebauten Heiler (`scripts/artefakt_waechter.py --heal`, „letzter
+Eintrag gewinnt“, Gegenprobe) bereinigt. Danach: **627 Artefakte strukturell
+heil**, 118 Tests (`test_gsc_abdeckung` + `test_redos_security`) grün, im CI
+**„ReDoS-Wache“ und „Integritäts-Siegel“ von rot auf grün**.
+
+### 5c. Befund auf `main`, der nicht zu #1098 gehört: C38 (Blustradius)
 
 `python3 scripts/governance_contract.py` meldet auf dem gemergten Stand
 C6/C38: Der Schritt `GSC-Leistungsdaten – Artefaktprüfung (fail-closed)`
