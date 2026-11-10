@@ -13,6 +13,11 @@ on:
       - ".github/workflows/visual-data-gate.yml"
   workflow_dispatch: {}
 
+# Supersede obsolete PR revisions; manual dispatch runs remain unique.
+concurrency:
+  group: "${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}"
+  cancel-in-progress: true
+
 permissions:
   contents: read
 

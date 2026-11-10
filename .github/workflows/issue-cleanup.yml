@@ -26,6 +26,11 @@ on:
         required: false
         default: "true"
 
+# Keep explicit cleanup requests independent; do not discard an active run.
+concurrency:
+  group: "${{ github.workflow }}-${{ github.run_id }}"
+  cancel-in-progress: false
+
 permissions:
   contents: read
   issues: write

@@ -51,7 +51,10 @@ class PagefindVertrag(unittest.TestCase):
     def test_suchindex_skript_baut_public(self):
         pkg = json.loads(lies("package.json"))
         self.assertIn("--site public", pkg["scripts"]["suchindex"])
-        self.assertIn("--force-language de", pkg["scripts"]["suchindex"])
+        self.assertIn("scripts/pagefind_build.py", pkg["scripts"]["suchindex"])
+        helper = lies("scripts/pagefind_build.py")
+        self.assertIn("--force-language", helper)
+        self.assertIn('"de"', helper)
 
     def test_deploy_baut_index_nach_hugo_und_vor_veroeffentlichung(self):
         wf = lies(".github/workflows/deploy.yml")
@@ -161,7 +164,8 @@ class PackageVertrag(unittest.TestCase):
         befehl = pkg["scripts"]["suchindex"]
         self.assertIn("rm -rf public/pagefind", befehl,
                       "alte Fragmente aus früheren Läufen dürfen nicht im Index landen")
-        self.assertIn("--exclude-selectors 'a.anchor'", befehl,
+        helper = lies("scripts/pagefind_build.py")
+        self.assertIn('"--exclude-selectors", "a.anchor"', helper,
                       "Anker-Zeichen „#“ dürfen nicht in den Auszügen stehen")
 
     def test_suchindex_ist_fail_closed_mit_wache(self):

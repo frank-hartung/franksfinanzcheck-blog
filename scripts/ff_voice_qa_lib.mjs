@@ -262,7 +262,7 @@ export function toolbarHtml(lang) {
     <div class="ff-voice-bar__nav" role="group" aria-label="Abschnittsnavigation beim Vorlesen">
       <button type="button" class="ff-voice-btn ff-voice-btn--icon" id="ff-voice-prev" aria-label="Vorheriger Abschnitt"></button>
       <button type="button" class="ff-voice-btn ff-voice-btn--icon" id="ff-voice-next" aria-label="Nächster Abschnitt"></button>
-      <button type="button" class="ff-voice-btn ff-voice-btn--icon" id="ff-voice-stop" aria-label="Vorlesen beenden"></button>
+      <button type="button" class="ff-voice-btn ff-voice-btn--icon" id="ff-voice-stop" aria-label="Beenden – Vorlesen stoppen"></button>
     </div>
 
     <button type="button" class="ff-voice-btn ff-voice-btn--summary" id="ff-voice-summary" aria-haspopup="dialog" aria-label="Kurzfassung des Artikels anzeigen">

@@ -4,7 +4,7 @@
   "private": true,
   "description": "E2E-Tests (Playwright) für FranksFinanzcheck – Startseite, Artikel, Navigation, SEO/A11y und Affiliate-Integrität. Siehe e2e/ und .github/workflows/e2e.yml.",
   "scripts": {
-    "suchindex": "rm -rf public/pagefind && pagefind --site public --force-language de --exclude-selectors 'a.anchor' && python3 scripts/suchindex_check.py --site public",
+    "suchindex": "rm -rf public/pagefind && python3 scripts/pagefind_build.py --site public && python3 scripts/suchindex_check.py --site public",
     "suchindex:pruefen": "python3 scripts/suchindex_check.py --site public",
     "test:suche": "node --test tools/ff-suche.test.mjs && python3 scripts/suchindex_check.py --selftest && python3 -m unittest scripts.tests.test_suche_pagefind",
     "test:suche:browser": "playwright test e2e/suche.spec.mjs",
