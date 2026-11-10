@@ -165,6 +165,18 @@ PyYAML 6.0.3 und die übrigen in `requirements-ci.txt` gepinnten Pakete wurden f
 
 **Vorbefund, unverändert, eigener Kanal:** `python3 scripts/artefakt_waechter.py` meldet zwei syntaktisch gebrochene GSC-Artefakte (`data/gsc/top_seiten_28t.json`, `data/gsc/top_suchbegriffe_28t.json`). Beide sind **bereits in `HEAD` ungültig** und wurden von diesem Vorgang nicht berührt. Sie gehören nicht zu WF-829B und werden bewusst **nicht von Hand rekonstruiert** (D7: ein Messartefakt ist eine ganze Messung, kein Text) – die Heilung ist ein neuer Lauf ihres Erzeugers.
 
+**Live-Gegenprobe auf dem PR (Run 42867976651, `pull_request`):** `Worker-Tests (ohne Deployment)` = `success`, `Deploy planen` / `Produktions-Environment absichern …` / `Deploy …` = `skipped`, **`Deploy-Beweis · kein stiller Skip` = `success`**. Damit ist der neue Vertrag nicht nur offline, sondern in der echten CI auf einem Nicht-Deploy-Ereignis belegt. `Verträge, Eichprobe und Verdrahtung (offline)` = `pass`; der Live-Heiljob ist auf PRs planmäßig `skipping`.
+
+**Drei rote PR-Checks sind Vorbefunde des Hauptstands** und liegen ausschließlich in Dateien, die dieser Vorgang nicht berührt hat (alle drei lokal am unveränderten `HEAD` nachgefahren):
+
+| Check | Roter Schritt | Ursache im Bestand |
+|---|---|---|
+| `Integritäts-Siegel` | Artefakt-Wächter | drei syntaktisch gebrochene GSC-Artefakte (`data/gsc/meta.json`, `top_seiten_28t.json`, `top_suchbegriffe_28t.json`) |
+| `ReDoS-Wache` | Sicherheitsvertrag zu Alert Nr. 87 | `test_gsc_abdeckung` liest dieselben gebrochenen GSC-Daten; `redos_guard.py` und `test_redos_security` sind grün |
+| `Playwright-Suite` | Metadaten-Wache – Quelle | M4: Artikel vom 05.11.2026 ohne `quellen` im Frontmatter; der Workflow-Kommentar nennt diesen Bestandsbefund ausdrücklich |
+
+Sie gehören nicht zu WF-829B und werden bewusst **nicht von Hand rekonstruiert** (D7: ein Messartefakt ist eine ganze Messung, kein Text; der M4-Befund ist eine Redaktionsentscheidung). Die Heilung ist ein neuer Lauf des jeweiligen Erzeugers – kein Eingriff in diesen Vorgang.
+
 ---
 
 ## 6. Grenzen und was offen bleibt
