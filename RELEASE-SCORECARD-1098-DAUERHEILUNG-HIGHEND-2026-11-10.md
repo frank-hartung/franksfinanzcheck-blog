@@ -135,7 +135,11 @@ Doppelpunkt – `check_titles` R1). SEO-Audit danach: **0 score_issues**.
 | `check_titles` | – | **0 Verstöße / 126 Titel** |
 | `abbildungen --check` | 20 Beiträge mit Doppelzeile | **0 Befunde** |
 | Zerlegte Asset-URLs im Bestand | 40 | **0** |
-| `F4-fachbefund` (live) | 21 Artikel / 87 Befunde | 19 Artikel / **77 Befunde** (nur noch menschlich) |
+| `F4-fachbefund` (live) | 21 Artikel / 87 Befunde | 20 Artikel / **82 Befunde** (nur noch menschlich; 5 davon aus einem main-Lauf nach dem Branch-Stand) |
+
+`T1w-zeichenlaenge-optimum` ist per SSOT `wirkung: warnung` und deshalb
+**kein Blocker** (der Exit-Code der Scorecard kennt nur „blockiert“ und
+„nicht beweisbar“). Er ist trotzdem nicht weggeklammert – siehe Abschnitt 5.
 
 Zusätzlich grün über den gesamten Live-Bestand gemessen:
 `T3` Titel, `T4` Keyword, `T5` Lesbarkeit, `RD1` Duplikate, `RD2`
@@ -145,9 +149,9 @@ CI misst sie im gebauten `public/` (fail-closed, unverändert).
 
 ### Tests
 
-* `scripts/tests/test_1098_produktionswahrheit.py` – **14 neue Regressionstests**
+* `scripts/tests/test_1098_produktionswahrheit.py` – **20 Regressionstests**
   (Schutzzonen, Doppelzeile/Idempotenz, Datei-URL, Bestandsscan, eigene
-  Belegkette, Textanker, Leerzeilen-Projektion).
+  Belegkette, Textanker, Leerzeilen-Projektion, F4-Dossier vollständig/aktuell).
 * Selbsttests: `fix_spaces` 62 Fälle · `abbildungen_ableiten` · `fix_url_hygiene`
   · `faktenfrische` 40/40 · `faktenfrische_befund_ledger` · Governance C1–C49.
 * Bestehende Suiten: `test_faktenfrische_betriebsflaechen`,
@@ -159,11 +163,27 @@ CI misst sie im gebauten `public/` (fail-closed, unverändert).
 ## 4. Was offen bleibt – und warum das richtig ist
 
 **F4 ist per Vertrag menschlich** (`data/release_scorecard.yaml`:
-`entscheidung: human`). Die verbleibenden 77 Live-Befunde stehen vollständig,
+`entscheidung: human`). Die verbleibenden Live-Befunde stehen vollständig,
 mit früherer Entscheidung, heutigem Zahlenabgleich und Datei-Hash in
-`F4-ENTSCHEIDUNGSVORLAGE-1098-2026-11-10.md`. Die Maschine entscheidet sie
-nicht – auch nicht durch ein neues Prüfdatum und nicht durch eine hübschere
-Formulierung.
+`F4-ENTSCHEIDUNGSVORLAGE.md`. Die Maschine entscheidet sie nicht – auch nicht
+durch ein neues Prüfdatum und nicht durch eine hübschere Formulierung.
+
+Das Dossier ist ab dieser Runde **keine Handarbeit mehr**, sondern eine
+Projektion mit Prüfmodus:
+
+```bash
+python3 scripts/f4_entscheidungsvorlage.py            # schreibt die Vorlage
+python3 scripts/f4_entscheidungsvorlage.py --check    # Exit 1 = veraltet
+```
+
+Grund: Die erste Fassung wurde von Hand gebaut und war nach dem nächsten
+Automatik-Lauf unvollständig (fünf Befunde, die die Tageswache danach fand,
+standen nicht darin). Ein Dossier, das der Wirklichkeit hinterherläuft, ist
+derselbe Fehler wie ein veraltetes Register. `--check` und sechs Tests
+(`test_1098_produktionswahrheit.Entscheidungsvorlage`) erzwingen jetzt:
+jeder offene Live-Befund steht im Dokument, jeder hat eine fertige
+Schließzeile, und das Dokument nennt für jeden beanstandeten Wert die heutige
+Zeile – mit oder ohne Kennzeichnung.
 
 Schließweg (unverändert, eine Zeile je Befund):
 
@@ -177,3 +197,66 @@ python3 scripts/release_scorecard.py --live --streng
 Mit der Projektion `betrieb-v3` bleibt eine so getroffene Entscheidung künftig
 auch dann gültig, wenn der Abbildungs-Nachzug einen Block verschiebt. Genau
 dieser Kreislauf ist damit beendet.
+
+---
+
+## 5. Was dieser Stand bewusst NICHT anfasst (und warum)
+
+Zwei Dinge bleiben offen – nicht aus Zeitmangel, sondern weil sie eine
+Entscheidung oder eine andere Baustelle sind. Beides ist hier messbar
+benannt, damit es niemand „übersehen“ kann.
+
+### 5a. `T1w-zeichenlaenge-optimum` – 5 Beiträge, Hinweis, kein Blocker
+
+Gemessen mit `check_length.py` (Optimum 12.000–18.000, Deckel 22.000):
+
+| Artikel | Zeichen | Richtung |
+|---|---|---|
+| `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler` | 19.890 | 1.890 über dem Optimum |
+| `2026-08-14-sparen-im-herbst-…-goldene-jahreszeit` | 18.299 | 299 darüber |
+| `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` | 18.296 | 296 darüber |
+| `2026-09-30-last-minute-urlaub-…-sommer-schnaepp` | 18.112 | 112 darüber |
+| `2026-10-24-etf-sparplan-starten-…` | 10.252 | 1.748 **unter** dem Optimum, über dem Floor |
+
+Warum hier keine Textänderung passiert ist:
+
+1. **SSOT:** `T1w` ist `wirkung: warnung`. Der Exit-Code der Scorecard kennt
+   nur `blockiert`/`nicht beweisbar` – Warnungen schließen das Ticket nicht
+   und öffnen es nicht. `docs/ANLEITUNG-RELEASE-SCORECARD.md` sagt dazu
+   ausdrücklich: „T1w in Richtung `ueber-optimum` ist kein Kürzungsauftrag.“
+2. **Fassungsbindung:** Jede Fließtextänderung ändert den Aussage-Hash. Beim
+   `frugalismus`-Beitrag stehen **3 offene Live-Fachbefunde** – ein Eingriff
+   würde die Redaktionsarbeit *vor* der F4-Entscheidung verändern und den
+   menschlichen Prüfstand verschieben, statt ihn zu schließen. Genau das ist
+   die Reihenfolge-Falle, die den F4-Kreislauf groß gemacht hat.
+3. **Nachfüllen wäre Symptompflege:** Der Beitrag unter dem Optimum braucht
+   Substanz (FAQ mit Aussagen), nicht Zeichen. Neue Aussagen sind neue
+   Befundkandidaten – sinnvoll erst **nach** dem F4-Durchgang.
+
+**Reihenfolge (Empfehlung an die Chefredaktion):** F4 entscheiden → danach
+`T1w` redaktionell nachziehen (Rezept: `docs/ANLEITUNG-RELEASE-SCORECARD.md`,
+Abschnitt „Längen-Nachführung“). Der Erzeuger dieser Drift ist dokumentiert:
+KI-Politur (`profi_polish.py`) prüft nur die Untergrenze (≥ 85 % des
+Originals), nicht den Optimums-Deckel. Ob die Engine künftig *ans Optimum*
+statt an den Floor zielen soll, ist laut Anleitung eine Entscheidung der
+Chefredaktion über `entscheidung: auto|human` in der SSOT – keine Reparatur
+im Vorbeigehen.
+
+### 5b. Befund auf `main`, der nicht zu #1098 gehört: C38 (Blustradius)
+
+`python3 scripts/governance_contract.py` meldet auf dem gemergten Stand
+C6/C38: Der Schritt `GSC-Leistungsdaten – Artefaktprüfung (fail-closed)`
+(deploy.yml, hinzugekommen mit `7b93454` / PR #1162) steht in **keinem**
+Eintrag von `data/blustradius-deploy.yml`. Dieselbe Ursache färbt den
+Lauf `42870913442` (Qualitäts-Gate, `main`, 18:01 UTC) rot – also **vor**
+diesem Branch.
+
+Das ist bewusst **nicht** hier geheilt: Wer einen Schritt in den
+Auslieferungsweg stellt, entscheidet laut Register selbst, ob sein rotes
+Ergebnis die Auslieferung anhalten darf (`infra`/`inhalt` = ja, `werkzeug` =
+nein). Diese Entscheidung gehört dem Betreiber, nicht dem Reparatur-PR –
+eine stillschweigend eingetragene Klasse wäre genau die Umgehung, gegen die
+C38 gebaut wurde. Nachzutragen ist ein Eintrag in
+`data/blustradius-deploy.yml` mit `name`, `klasse` und `grund`; die
+Nachbar-Schritte (`Weiterleitungen – … (fail-closed)`: `infra`) sind die
+nächstliegende Analogie.

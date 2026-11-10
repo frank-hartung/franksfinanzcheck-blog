@@ -24,7 +24,48 @@ cover:
   image: "images/covers/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang.jpg"
   alt: "Waschmaschine beladen: Weniger Kosten bei jedem Waschgang"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Ein optimal beladener Trommel (ca. 80 % Kapazität) verbraucht im Modellbeispiel bis zu 15 % weniger Wasser und Energie pro Waschgang – das entspricht etwa 0,5 kWh und 5 Liter Wasser (Beispielwerte). Bei einem durchschnittlichen Haushalt mit 4 Waschgängen pro Woche sind das im Modelljahr rund 5 € an Strom‑ und Wasserkosten. Richtiges Beladen kann die Fixkosten senken, ohne die Waschergebnisse zu beeinträchtigen."
+kurzantwort: "Eine volle Trommel bei normaler Koch- und Buntwäsche spart Energie, Wasser und Geld. Das Umweltbundesamt empfiehlt sie ausdrücklich, mit einer Handbreit Luft über der Wäsche. In der Modellrechnung dieses Artikels (Annahmen im Abschnitt Modellrechnung, Strompreis laut BDEW Oktober 2026) kosten 100 volle Ladungen im Jahr rund 57 Euro und 200 halbe Ladungen bei gleicher Wäschemenge rund 85 bis 99 Euro. Der Unterschied liegt in diesem Modell bei rund 28 bis 42 Euro pro Jahr. Das ist eine Rechnung mit Quellenwerten, keine Messung in deinem Haushalt."
+quellen:
+  - id: "Q1"
+    titel: "Klimabewusstes Wäschewaschen entlastet die Umwelt und spart Kosten"
+    url: "https://www.umweltbundesamt.de/umwelttipps-fuer-den-alltag/haushalt-wohnen/waesche-waschen-waschmittel"
+    herausgeber: "Umweltbundesamt"
+    datum: "2024-12-02"
+  - id: "Q2"
+    titel: "Stromsparmythen – Zwischen Legende und Wirklichkeit"
+    url: "https://www.verbraucherzentrale-niedersachsen.de/wissen/energie/strom-sparen/stromsparmythen-zwischen-legende-und-wirklichkeit-120159"
+    herausgeber: "Verbraucherzentrale Niedersachsen"
+    datum: "2026-06-24"
+  - id: "Q3"
+    titel: "BDEW-Strompreisanalyse Herbst 2026 (Haushaltsstrompreis, Durchschnitt aller verfügbaren Tarife)"
+    url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"
+    herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
+    datum: "2026-10-28"
+  - id: "Q4"
+    titel: "Richtige Beladung einer Waschmaschine (Anleitung mit PDF-Download)"
+    url: "https://www.ikw.org/haushaltspflege/services/haushaltstipps/richtige-beladung-einer-waschmaschine"
+    herausgeber: "FORUM WASCHEN"
+    datum: "2019-06-24"
+  - id: "Q5"
+    titel: "Waschmaschine: Stromverbrauch & Kosten im Überblick"
+    url: "https://www.vattenfall.de/infowelt-energie/energie-sparen/stromverbrauch-einer-waschmaschine"
+    herausgeber: "Vattenfall"
+    datum: "2026-11-10"
+  - id: "Q6"
+    titel: "Stromverbrauch und Stromkosten einer Waschmaschine"
+    url: "https://www.stromauskunft.de/stromverbrauch/stromverbrauch-einer-waschmaschine/"
+    herausgeber: "Stromauskunft"
+    datum: "2022-09-09"
+  - id: "Q7"
+    titel: "Wasser und Abwasser in der Nebenkostenabrechnung (Sekundärquelle: Statistisches Bundesamt, Entgelte 2025)"
+    url: "https://www.mein-nebenkostenrechner.de/ratgeber/wasser-abwasser-nebenkostenabrechnung"
+    herausgeber: "mein-nebenkostenrechner.de (zitiert Destatis)"
+    datum: "2025-01-01"
+  - id: "Q8"
+    titel: "Wasserentgelte 2023 bis 2025 (Pressemitteilung Nr. 17/2026)"
+    url: "https://www.laiv-mv.de/Pressemitteilungen/?id=218304&processor=processor.sa.pressemitteilung"
+    herausgeber: "Statistisches Amt Mecklenburg-Vorpommern (LAiV)"
+    datum: "2026-03-10"
 faktencheck: 2026-11-05
 ---
 
@@ -43,9 +84,9 @@ Dieser Artikel zeigt dir, wie du mit kleinen Handgriffen deine Haushaltskasse en
 Dabei nutzen wir den 4K-Prüfpfad von FranksFinanzcheck für deine Kostenkontrolle.
 
 **Das Wichtigste in Kürze**
-- **Optimale Füllmenge:** Eine Faustbreite Platz über der Wäsche sorgt für die beste Reinigungsleistung und spart Energie.
-- **Kostenfaktor:** Ein voll genutzter Waschgang ist in der Modellrechnung deutlich günstiger als zwei halbe Ladungen.
-- **Verschleißschutz:** Überladung kann die Lager der Maschine beschädigen und teure Reparaturen nach sich ziehen (je nach Gerät und Häufigkeit).
+- **Optimale Füllmenge:** Eine Handbreit Platz über der Wäsche sorgt für die beste Reinigungsleistung und spart Energie.
+- **Kostenfaktor:** In der Modellrechnung kostet eine volle Ladung rund 0,57 Euro, zwei halbe Ladungen kosten rund 0,85 bis 0,99 Euro.
+- **Verschleißschutz:** Forum Waschen rät, die Nennbeladung des Geräts nicht zu überschreiten, weil sonst Zuverlässigkeit und Gerätesicherheit leiden können. Leere vor dem Waschen alle Taschen.
 - **Fixkosten-Check:** Wer beim Waschen spart, sollte auch seinen Stromtarif prüfen, um das volle Sparpotenzial zu nutzen.
 
 
@@ -107,27 +148,16 @@ Wer diese Grenzen ignoriert, zahlt später für neue Kleidung oder Reparaturen d
 
 Ein häufiger Fehler ist das "Stopfen".
 Wenn du die Wäsche mit Kraft in die Maschine drückst, ist sie überladen.
-Das belastet die Aufhängung der Trommel massiv.
+Forum Waschen weist darauf hin, dass die Nennbeladung des Geräts nicht überschritten werden sollte, weil sonst Zuverlässigkeit und Gerätesicherheit leiden können.
+Die Nennbeladung steht auf dem Typenschild und in der Gebrauchsanleitung deines Geräts.
 
-Die Stoßdämpfer verschleißen schneller.
-Ein Lagerschaden kann das wirtschaftliche Aus für das Gerät bedeuten.
-Das ist ein massiver Verstoß gegen das Ziel, die Fixkosten niedrig zu halten.
-Eine neue **Waschmaschine** kostet deutlich mehr als die Ersparnis durch ein paar vollgequetschte Ladungen.
-
-Ein weiterer Fehler ist das Ignorieren von Kleinteilen.
-Socken oder kleine Tücher können zwischen Dichtung und Trommel rutschen.
-Dort blockieren sie das System oder beschädigen die Pumpe.
-Nutze für solche Teile immer ein Wäschenetz.
-
-Das schont die Maschine und deine Nerven.
-Auch das Vergessen von Gegenständen in den Taschen ist teuer.
-Münzen oder Schlüssel wirken wie Geschosse in der rotierenden Trommel.
-Du zerstörst die Innenwand oder die Heizstäbe.
+Ein weiterer Fehler ist das Vergessen von Gegenständen in den Taschen.
+Leere deshalb alle Taschen, bevor du die Wäsche einlegst.
+Für kleine Teile wie Socken oder Tücher empfiehlt sich ein Wäschenetz.
 
 Hier ist eine Liste der typischen Fehler beim Beladen:
 - Die Maschine wird wahllos vollgestopft, ohne auf das Programm zu achten.
 - Reißverschlüsse bleiben offen und beschädigen andere Kleidungsstücke.
-- Schwere Teile wie Badematten werden alleine gewaschen, was zu Unwucht führt.
 - Die Dosierung des Waschmittels wird nicht an die Beladungsmenge angepasst.
 - Fremdkörper in den Taschen werden vor dem Waschgang nicht entfernt.
 
@@ -137,7 +167,7 @@ Um das Maximum aus jedem Liter Wasser und jeder Kilowattstunde herauszuholen, hi
 So gehst du vor:
 
 1. **Sammeln und Sortieren:** Warte, bis du genug Wäsche einer Kategorie für eine volle Trommel hast.
-2. **Taschen prüfen:** Leere alle Fächer konsequent aus, um Schäden an der Maschine zu vermeiden.
+2. **Taschen prüfen:** Leere alle Fächer konsequent aus.
 3. **Wäsche vorbereiten:** Schließe alle Reißverschlüsse und drehe bedruckte Kleidung auf links.
 4. **Richtig beladen:** Lege die Teile locker in die Trommel, ohne sie zu pressen.
 5. **Programm wählen:** Nutze die Eco‑Einstellung, wenn die Zeit es zulässt.
@@ -154,26 +184,28 @@ Viele Menschen unterschätzen, wie stark sich das Nutzerverhalten auf die Abrech
 Wir erstellen eine Beispielrechnung für einen Haushalt.
 
 **Annahmen für die Modellrechnung:**
-- Die Waschmaschine verbraucht pro vollem Waschgang in der Modellrechnung 0,9 kWh Strom und 50 Liter Wasser.
-- Ein halber Waschgang verbraucht in der Modellrechnung noch immer 0,6 kWh Strom und 35 Liter Wasser.
-- Der Strompreis liegt in der Modellrechnung bei 0,40 € pro kWh.
-- Der Preis für Wasser und Abwasser liegt in der Modellrechnung bei 0,005 € pro Liter (5,00 € pro m³).
-- Der Haushalt wäscht in der Modellrechnung entweder in 100 vollen Ladungen oder in 200 halben Ladungen pro Jahr.
+- **Volle Ladung:** 0,9 kWh Strom und 50 Liter Wasser pro Waschgang. Vattenfall nennt für ein mittelaltes Gerät 0,9 kWh pro Waschgang und etwa 49 Liter Wasser pro Waschgang, unabhängig vom Füllstand.
+- **Halbe Ladung:** 0,7 kWh Strom pro Waschgang. Das entspricht rund 22 Prozent weniger als bei voller Ladung. Stromauskunft nennt eine Ersparnis von 20 bis 30 Prozent.
+- **Wasser bei halber Ladung:** 35 bis 50 Liter pro Waschgang. Die Obergrenze entspricht dem Vattenfall-Wert, der unabhängig vom Füllstand gilt. Die Untergrenze von 35 Litern ist eine Szenarioannahme für Geräte mit Mengenautomatik und keine Herstellerangabe.
+- **Strompreis:** 0,373 Euro pro kWh. Das ist der Haushaltsdurchschnitt laut BDEW-Strompreisanalyse vom Oktober 2026. Dein Tarif kann davon abweichen.
+- **Wasser und Abwasser:** 4,68 Euro pro Kubikmeter brutto. Das ist der Bundesdurchschnitt 2025 (Trinkwasser 2,06 Euro plus Abwasser 2,62 Euro) laut Statistischem Bundesamt, zitiert über eine Sekundärquelle. Grundgebühren sind nicht enthalten.
+- **Haushalt:** 100 volle oder 200 halbe Ladungen pro Jahr bei gleicher Wäschemenge.
 
 **Rechnung für 100 volle Ladungen (Beispielrechnung):**
-- [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/): 100 x 0,9 kWh x 0,40 €/kWh = 36,00 € (Ergebnis der Modellrechnung).
-- Wasserkosten: 100 x 50 Liter x 0,005 €/Liter = 25,00 € (Ergebnis der Modellrechnung).
-- Gesamtkosten pro Jahr: 61,00 € (Ergebnis der Modellrechnung).
+- [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/): 100 x 0,9 kWh x 0,373 €/kWh = 33,57 € (Ergebnis der Modellrechnung).
+- Wasserkosten: 100 x 0,050 m³ x 4,68 €/m³ = 23,40 € (Ergebnis der Modellrechnung).
+- Gesamtkosten pro Jahr: 56,97 € (Ergebnis der Modellrechnung).
 
 **Rechnung für 200 halbe Ladungen (Beispielrechnung):**
-- Stromkosten: 200 x 0,6 kWh x 0,40 €/kWh = 48,00 € (Ergebnis der Modellrechnung).
-- Wasserkosten: 200 x 35 Liter x 0,005 €/Liter = 35,00 € (Ergebnis der Modellrechnung).
-- Gesamtkosten pro Jahr: 83,00 € (Ergebnis der Modellrechnung).
+- Stromkosten: 200 x 0,7 kWh x 0,373 €/kWh = 52,22 € (Ergebnis der Modellrechnung).
+- Wasserkosten: 200 x 0,035 m³ x 4,68 €/m³ = 32,76 € bei 35 Litern, bzw. 200 x 0,050 m³ x 4,68 €/m³ = 46,80 € bei 50 Litern (Ergebnis der Modellrechnung).
+- Gesamtkosten pro Jahr: 84,98 € (35 Liter) bis 99,02 € (50 Liter) (Ergebnis der Modellrechnung).
 
 **Differenz (Beispielrechnung):**
-In diesem Modell spart der Haushalt 22,00 € pro Jahr allein durch das richtige Befüllen der Maschine (Ergebnis der Modellrechnung).
-Über eine Laufzeit von zehn Jahren summiert sich das in der Modellrechnung auf 220,00 € (Ergebnis der Berechnung).
-Rechnet man den [geringeren](../../posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/) Verschleiß und die Einsparung bei Waschmittel hinzu, wird der Hebel noch größer.
+In diesem Modell spart der Haushalt 28 bis 42 Euro pro Jahr durch volle statt halber Ladungen (Ergebnis der Modellrechnung).
+Über zehn Jahre summiert sich das auf 280 bis 420 Euro, ohne Preissteigerungen (Ergebnis der Berechnung).
+Liegt der Wasserpreis in deiner Gemeinde höher, steigt die Differenz um etwa 0,60 bis 1,60 Euro pro Jahr. In Mecklenburg-Vorpommern lag der Durchschnitt 2025 laut Statistischem Amt bei 5,00 Euro pro Kubikmeter. Dann ergibt sich eine Differenz von rund 28,65 bis 43,65 Euro.
+Nicht eingerechnet sind Waschmittel, Trocknerstrom und Reparaturkosten, weil dafür in diesem Modell keine belastbaren Quellenwerte vorliegen.
 
 ## Warum lohnt sich der Blick auf den Stromtarif?
 
@@ -210,8 +242,8 @@ Jede Strategie hat ihre Auswirkungen auf die Finanzen und den Alltag.
 
 | Strategie | Vorteile | Nachteile |
 | :--- | :--- | :--- |
-| **Warten auf volle Trommel** | Höchste Kostenersparnis, weniger Verschleiß der Maschine. | Man braucht mehr Kleidung im Schrank, hoher Platzbedarf für Schmutzwäsche. |
-| **Tägliches Waschen kleiner Mengen** | Man braucht weniger Kleidung, keine hohen Wäscheberge. | Hoher Strom- und Wasserverbrauch, schnellerer Verschleiß des Geräts. |
+| **Warten auf volle Trommel** | Höchste Kostenersparnis, weniger Waschgänge pro Jahr. | Man braucht mehr Kleidung im Schrank, hoher Platzbedarf für Schmutzwäsche. |
+| **Tägliches Waschen kleiner Mengen** | Man braucht weniger Kleidung, keine hohen Wäscheberge. | Hoher Strom- und Wasserverbrauch, weil mehr Waschgänge anfallen. |
 | **Nutzung von Kurzprogrammen** | Zeitersparnis bei leicht verschmutzter Wäsche. | Oft höherer Energieverbrauch pro kg Wäsche, da schneller aufgeheizt wird. |
 | **Eco-Programme konsequent nutzen** | Niedrigster Energieverbrauch pro Waschgang. | Lange Laufzeiten (oft 3–4 Stunden), Planung erforderlich. |
 
@@ -246,7 +278,7 @@ Du bekommst die gleiche saubere Wäsche für weniger Geld.
 Das ist der Kern von FranksFinanzcheck: Intelligentes Handeln statt blindem Sparen.
 
 Kombiniere diese Tipps mit einem regelmäßigen Check deiner Verträge.
-Wenn du das nächste Mal vor deiner Waschmaschine stehst, denk an die Faustbreite Platz.
+Wenn du das nächste Mal vor deiner Waschmaschine stehst, denk an die Handbreit Platz.
 Dein Konto wird es dir am Ende des Jahres danken.
 Wer seine Kosten sieht, seine Konditionen rechnet und das Kündigungsfenster nutzt, hält seinen finanziellen Kurs stabil.
 
@@ -259,8 +291,7 @@ Wer seine Kosten sieht, seine Konditionen rechnet und das Kündigungsfenster nut
 
 ### Wie merke ich, dass meine Waschmaschine überladen ist?
 Wenn du die Wäsche mit Druck in die Trommel schieben musst, ist sie zu voll.
-Ein weiteres Zeichen ist eine sehr laute Geräuschentwicklung beim Schleudern.
-Wenn die Maschine "wandert" oder stark vibriert, ist die Unwucht durch zu viel Wäsche oft die Ursache.
+Forum Waschen empfiehlt, die Nennbeladung des Geräts nicht zu überschreiten.
 
 ### Spart ein Kurzprogramm wirklich Geld?
 In der Regel nicht.
@@ -268,11 +299,9 @@ Kurzprogramme müssen das Wasser in sehr kurzer Zeit aufheizen.
 Das erfordert eine hohe Heizleistung.
 Zudem wird oft mehr Wasser verwendet, um das Waschmittel schneller auszuspülen.
 
-### Schadet eine zu leere Trommel der Maschine?
-Eine sehr geringe Beladung kann zu einer starken Unwucht führen.
-Die Elektronik moderner Maschinen bricht den Schleudervorgang dann oft ab.
-Das führt dazu, dass die Wäsche klatschnass aus der Maschine kommt.
-Im Trockner verbrauchst du dann noch mehr Strom.
+### Lohnt sich eine halbe Ladung, wenn ich Strom sparen will?
+Nur bedingt. Eine halbe Trommel spart laut Stromauskunft nur 20 bis 30 Prozent Strom gegenüber einer vollen Ladung.
+Pro Kilogramm Wäsche steigt der Verbrauch daher. Forum Waschen weist darauf hin, dass weniger Wäsche zwar den absoluten Energieverbrauch senkt, aber den Verbrauch pro Kilo erhöht.
 
 ### Muss ich das Waschmittel bei einer halben Ladung halbieren?
 Ja, die Dosierung sollte immer an die Wäschemenge angepasst werden.

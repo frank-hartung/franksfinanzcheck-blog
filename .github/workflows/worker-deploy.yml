@@ -41,6 +41,37 @@
 #  Reihenfolge (Prüfung → Auflösung → Vorbereitung → Deploy) bleibt.
 #  Wer nur den Zugang prüfen will, ohne zu deployen: Workflow
 #  „Deploy-Zugang prüfen“ (workflow_dispatch, gleiches Environment).
+# ------------------------------------------------------------
+#  TRIGGER-VERTRAG WF-829B / #922, 10.11.2026 (gemessen, nicht vermutet)
+#  ------------------------------------------------------------
+#  Ein freigabepflichtiger Produktions-Deploy ist ein WILLENSakt. Das
+#  Runbook A4 sagt es selbst: „Actions → Cloudflare-Worker deployen →
+#  Run workflow (main)". Trotzdem hat dieses Workflow-File jeden `push`
+#  auf einen Worker-Pfad als Deploy-Versuch behandelt. Das Ergebnis war
+#  strukturell unvermeidlich: Das fail-closed-Gate las das Environment
+#  `cloudflare-produktion` (seit 25.10. ungesichert), brach korrekt vor
+#  jedem Secret-Zugriff ab – und jeder Abhängigkeits-Bump wurde zu einem
+#  roten Lauf samt Nachführung von #922. Acht rote Läufe seit dem 27.10.
+#  Der parallele Selbstheilungs-Workflow lief siebenmal grün, viermal
+#  davon mit ausgeführtem Live-Heiljob – ohne eine Zeile am Environment
+#  zu ändern: Ihm fehlt `administration=write` (live 403), und
+#  `can_admins_bypass` hat in REST wie GraphQL keinen Schreibweg.
+#
+#  DESHALB AB JETZT:
+#    · `workflow_dispatch` → Plan, Produktions-Gate, Deploy (unverändert,
+#      inklusive des harten Stopps VOR den Cloudflare-Secrets).
+#    · `push` / `pull_request` → NUR der geheimnisfreie Testjob. Kein
+#      Environment, kein Secret, kein Wrangler, kein Freigabe-Versuch.
+#    · `abschluss` (immer) beweist die Trennung: Ein geplanter Deploy darf
+#      nie `skipped` sein, und ein Push/PR darf nie deployen. Ein grüner
+#      Lauf ohne ausgeführten Deploy ist damit ausgeschlossen – genau der
+#      Vorfall vom 24.10.2026 (Run 40100342025), diesmal am Verhalten
+#      gemessen statt an einer Stellvertreter-Einstellung.
+#
+#  NICHT GEÄNDERT: die drei Schutzziele des Environments, das Gate, die
+#  Reihenfolge, die Ressourcenauflösung, der Build-Nachweis. Nichts wurde
+#  gelockert, um Grün zu erzeugen. Wer deployen will, löst den Lauf auf
+#  `main` bewusst aus; die Environment-Freigabe bleibt Menschenhandlung.
 # ============================================================
 name: Cloudflare-Worker deployen
 
@@ -55,6 +86,25 @@ on:
           - newsletter-worker
           - klick-zaehler
           - ki-assistent
+  # Beide Filter sind deckungsgleich (W3 der Trigger-Wache). Jedes Skript,
+  # das unten in einem `run:`-Block steht, muss in BEIDEN Listen stehen.
+  pull_request:
+    paths:
+      - "newsletter-worker/**"
+      - "cloudflare/klick-zaehler/**"
+      - "cloudflare/ki-assistent/**"
+      - "tools/wrangler/**"
+      - "scripts/worker_deploy_vorbereiten.py"
+      - "scripts/worker_ressourcen.py"
+      - "scripts/worker_zugang.py"
+      - "scripts/github_kommando.py"
+      - "scripts/worker_environment_guard.py"
+      - "scripts/manifest_guard.py"
+      - "scripts/ci_tests.py"
+      - "scripts/worker_deploy_abschluss.py"
+      - "scripts/tests/test_worker_deploy_abschluss.py"
+      - ".github/workflows/worker-deploy.yml"
+      - ".github/workflows/produktions-schutz-selbstheilung.yml"
   push:
     branches: [main]
     paths:
@@ -68,7 +118,11 @@ on:
       - "scripts/github_kommando.py"
       - "scripts/worker_environment_guard.py"
       - "scripts/manifest_guard.py"
+      - "scripts/ci_tests.py"
+      - "scripts/worker_deploy_abschluss.py"
+      - "scripts/tests/test_worker_deploy_abschluss.py"
       - ".github/workflows/worker-deploy.yml"
+      - ".github/workflows/produktions-schutz-selbstheilung.yml"
 
 permissions:
   contents: read
@@ -78,8 +132,36 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Push/PR: NUR Tests. Kein Environment, kein Secret, kein Wrangler.
+  # Der Name bleibt bei „Worker-Tests", damit ein roter Test vom Fehler-
+  # Alerting als Code-Regression (Runbook-Klasse `worker-deploy`) erkannt wird.
+  tests:
+    name: Worker-Tests (ohne Deployment)
+    if: github.event_name != 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Node bereitstellen
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+
+      - name: Worker-Tests (alle drei Worker, geheimnisfrei)
+        run: |
+          set -euo pipefail
+          python3 scripts/ci_tests.py --titel "Worker-Tests (ohne Deployment)" -- bash -c 'set -euo pipefail; (cd newsletter-worker && node --test); (cd cloudflare/klick-zaehler && node --test test/worker.test.mjs); (cd cloudflare/ki-assistent && node --test test/worker.test.mjs)'
+
+      - name: Deploy-Vorbereitung selbsttesten (offline, ohne Schreiben)
+        run: python3 scripts/worker_deploy_vorbereiten.py --selftest
+
   plan:
     name: Deploy planen
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     outputs:
@@ -90,32 +172,11 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Geänderte Dateien ermitteln (nur bei push)
-        id: diff
-        if: github.event_name == 'push'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          VORHER: ${{ github.event.before }}
-          NACHHER: ${{ github.sha }}
-          REPO: ${{ github.repository }}
-        run: |
-          set -euo pipefail
-          if [ -z "$VORHER" ] || [ "$VORHER" = "0000000000000000000000000000000000000000" ]; then
-            echo "dateien=*" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          {
-            echo "dateien<<ENDE_DATEIEN"
-            gh api "repos/${REPO}/compare/${VORHER}...${NACHHER}" --jq '.files[].filename' || echo "*"
-            echo "ENDE_DATEIEN"
-          } >> "$GITHUB_OUTPUT"
-
       - name: Deploybereite Worker bestimmen
         id: plan
         env:
           EREIGNIS: ${{ github.event_name }}
           AUSWAHL: ${{ inputs.worker }}
-          GEAENDERT: ${{ steps.diff.outputs.dateien }}
           REF: ${{ github.ref }}
         run: |
           python3 scripts/worker_deploy_vorbereiten.py --selftest
@@ -124,7 +185,7 @@ jobs:
   production-policy:
     name: Produktions-Environment absichern (nur main, Reviewer, kein Admin-Bypass)
     needs: plan
-    if: needs.plan.outputs.worker != '[]' && needs.plan.outputs.worker != '' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'workflow_dispatch' && needs.plan.outputs.worker != '[]' && needs.plan.outputs.worker != '' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     # Dieses Vorab-Gate liest nur GitHub-Environment-Metadaten. Es hat weder
@@ -151,7 +212,7 @@ jobs:
   deploy:
     name: Deploy ${{ matrix.worker }}
     needs: [plan, production-policy]
-    if: github.ref == 'refs/heads/main' && needs.plan.outputs.worker != '[]' && needs.plan.outputs.worker != ''
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && needs.plan.outputs.worker != '[]' && needs.plan.outputs.worker != ''
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     environment:
@@ -261,3 +322,38 @@ jobs:
             echo "- Commit: ${GITHUB_SHA}"
             echo "- Freigegeben über Environment cloudflare-produktion"
           } >> "$GITHUB_STEP_SUMMARY"
+
+  # ------------------------------------------------------------
+  #  ABSCHLUSS · Der Beweis am Verhalten, nicht an der Einstellung.
+  #  Läuft IMMER (auch wenn ein vorgelagerter Job rot oder übersprungen
+  #  ist) und liest ausschließlich `needs.*.result`. Kein Secret, kein
+  #  Environment, kein Netz. Ein roter Befund nennt den Job beim Namen.
+  # ------------------------------------------------------------
+  abschluss:
+    name: Deploy-Beweis · kein stiller Skip
+    if: always()
+    needs: [plan, tests, production-policy, deploy]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Beweis selbsttesten (offline, Gegenproben)
+        run: python3 scripts/worker_deploy_abschluss.py --selftest
+
+      - name: Deploy-Beweis aus der Lage DIESES Laufs
+        env:
+          EREIGNIS: ${{ github.event_name }}
+          REF: ${{ github.ref }}
+          GEPLANT: ${{ needs.plan.outputs.worker }}
+          ERGEBNIS_PLAN: ${{ needs.plan.result }}
+          ERGEBNIS_TESTS: ${{ needs.tests.result }}
+          ERGEBNIS_POLICY: ${{ needs.production-policy.result }}
+          ERGEBNIS_DEPLOY: ${{ needs.deploy.result }}
+        run: |
+          python3 scripts/worker_deploy_abschluss.py --pruefen --md "$GITHUB_STEP_SUMMARY"

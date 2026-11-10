@@ -1,13 +1,15 @@
-# F4-Entscheidungsvorlage #1098 — Stand 10.11.2026 (Vorschlag)
+# F4-Entscheidungsvorlage — Stand 2026-11-10 (Vorschlag)
 
-**Status: VORSCHLAG – noch nicht entschieden.** Die Artikel bleiben in der
-Scorecard blockiert, bis der Herausgeber die heutigen Fassungen bestätigt. Dieses
-Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
+**Status: VORSCHLAG – nichts entschieden.** Die Artikel bleiben in der
+Scorecard blockiert, bis der Herausgeber die heutigen Fassungen bestätigt.
+Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
-**77 offene Live-Befunde auf 19 Artikeln.** Davon sind **72** bereits früher
-vom Herausgeber entschieden und durch eine spätere Textänderung wieder geöffnet
-worden (fassungsgebundene Bindung, kein Rückfall). **5** Befunde sind neu – sie
-betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser`.
+**82 offene Live-Befunde auf 20 Artikeln.** Davon sind **77** bereits früher entschieden und durch eine spätere Textänderung
+wieder geöffnet worden (fassungsgebundene Bindung, kein Rückfall). **5** Befunde sind neu.
+
+Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus `data/faktenfrische_befunde_state.json`,
+`data/faktenfrische_entscheidungen.yaml`, dem Scorecard-Siegel und den heutigen Artikeln.
+Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 
 ## Neu ohne frühere Entscheidung
 
@@ -20,13 +22,13 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 ## `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026`
 
 - Datei-SHA256 (heute): `6fb140577dad71b3e5af37bfd370163f63c06e0ba7fb9784e998339edb617145`
-- Offene Befunde: **3**
+- Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `30caa57be394afb62947` | luecke | 2026-11-07 · 3. Entscheidung | alle Werte **nicht mehr im Text** | Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprec… |
-| `32a3ea879f2cf126b3a7` | luecke | 2026-11-07 · 3. Entscheidung | kein Wert genannt (Aussage/Präzision) | Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähn… |
-| `c583efe1ce02df3ca2d7` | luecke | 2026-11-07 · 3. Entscheidung | alle Werte **nicht mehr im Text** | Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur für Januar 2026 (360 €) wird durch die allg… |
+| `30caa57be394afb62947` | luecke | 2026-11-07 · 3. Entscheidung | nicht mehr im Text: 11,93 Cent | Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender… |
+| `32a3ea879f2cf126b3a7` | luecke | 2026-11-07 · 3. Entscheidung | kein Wert genannt (Aussage/Präzision) | Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der… |
+| `c583efe1ce02df3ca2d7` | luecke | 2026-11-07 · 3. Entscheidung | nicht mehr im Text: 360 € | Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur für Januar 2026 (360 €) wird durch die allgemeine… |
 
 ### `30caa57be394afb62947`
 
@@ -46,7 +48,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session bestätigt. Der Regulierungsrahmen ist im Abschnitt zum Preisschreiben konkretisiert: Informationsfrist, Änderungsgrund, Garantieumfang und Sonderkündigung werden anhand der Bundesnetzagentur erklärt.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `c583efe1ce02df3ca2d7`
 
@@ -58,20 +60,18 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 - Im heutigen Text nicht mehr vorhanden: 360 €
 
----
-
 ## `2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden`
 
 - Datei-SHA256 (heute): `eccbb868494f175b4ce2b490178af5dba8799a9448afdf10e309f1f95142bc0a`
-- Offene Befunde: **5**
+- Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `437b809ffbf41e5af434` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Keine Quelle für die Aussage, dass das Gesetz bei einem Tarifwechsel die Grundversorgung garantiert – regulato… |
-| `9fbacd9942c2dfa1447f` | luecke | 2026-11-04 · 1. Entscheidung | 6 % (Zeile 139) | Keine Quelle für die Behauptung, dass ein Grad weniger Raumtemperatur rund 6 % Energie einspart – Prozent‑Anga… |
-| `da30cbb5fbc8c801daf0` | luecke | 2026-11-04 · 1. Entscheidung | 15 % (Zeile 215) | Keine Quelle für die Angabe, dass durch Optimierungsmaßnahmen 10‑15 % Einsparungen realistisch sind – Prozent‑… |
+| `437b809ffbf41e5af434` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Keine Quelle für die Aussage, dass das Gesetz bei einem Tarifwechsel die Grundversorgung garantiert – regulatorischer… |
+| `9fbacd9942c2dfa1447f` | luecke | 2026-11-04 · 1. Entscheidung | 6 % in Zeile 4 ohne Kennzeichnung | Keine Quelle für die Behauptung, dass ein Grad weniger Raumtemperatur rund 6 % Energie einspart – Prozent‑Angabe fehlt. |
+| `da30cbb5fbc8c801daf0` | luecke | 2026-11-04 · 1. Entscheidung | 15 % in Zeile 70 gekennzeichnet | Keine Quelle für die Angabe, dass durch Optimierungsmaßnahmen 10‑15 % Einsparungen realistisch sind – Prozent‑Wert un… |
 | `db8a69f08dc0020adebd` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Keine Quelle für die Aussage, dass im Oktober 2026 bessere Gaspreise gelten – Preis‑Trend‑Behauptung fehlt. |
-| `e834f4702e87194affe7` | luecke | 2026-11-04 · 1. Entscheidung | alle Werte **nicht mehr im Text** | Keine Quelle für die Angabe, dass ein Einfamilienhaus typischerweise 18.000 kWh/Jahr verbraucht – Verbrauchsza… |
+| `e834f4702e87194affe7` | luecke | 2026-11-04 · 1. Entscheidung | 18.000 kWh in Zeile 43 ohne Kennzeichnung | Keine Quelle für die Angabe, dass ein Einfamilienhaus typischerweise 18.000 kWh/Jahr verbraucht – Verbrauchszahl ist… |
 
 ### `437b809ffbf41e5af434`
 
@@ -81,7 +81,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Grund-/Ersatzversorgung mit Bundesnetzagentur-Beleg präzisiert; 6-%-Faustwert und 10–15 % Anlageneinstellung der Verbraucherzentrale zugeordnet und verlinkt; Preistrend-Aussage gestrichen; 18.000 kWh ausdrücklich als Rechenannahme markiert.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `9fbacd9942c2dfa1447f`
 
@@ -91,7 +91,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Grund-/Ersatzversorgung mit Bundesnetzagentur-Beleg präzisiert; 6-%-Faustwert und 10–15 % Anlageneinstellung der Verbraucherzentrale zugeordnet und verlinkt; Preistrend-Aussage gestrichen; 18.000 kWh ausdrücklich als Rechenannahme markiert.
 
-- `6 %` Zeile 139 (gekennzeichnet): „Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892) nennt rund 6 % weniger Heizenergie je Grad nied“
+- Heute in Zeile 4: 6 % – **ohne** Kennzeichnung
 
 ### `da30cbb5fbc8c801daf0`
 
@@ -101,7 +101,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Grund-/Ersatzversorgung mit Bundesnetzagentur-Beleg präzisiert; 6-%-Faustwert und 10–15 % Anlageneinstellung der Verbraucherzentrale zugeordnet und verlinkt; Preistrend-Aussage gestrichen; 18.000 kWh ausdrücklich als Rechenannahme markiert.
 
-- `15 %` Zeile 215 (ohne Kennzeichnung): „Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892) nennt für eine richtig eingestellte Heizungsanl“
+- Heute in Zeile 70: 15 % – gekennzeichnet („beispielwert“)
 
 ### `db8a69f08dc0020adebd`
 
@@ -111,7 +111,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Grund-/Ersatzversorgung mit Bundesnetzagentur-Beleg präzisiert; 6-%-Faustwert und 10–15 % Anlageneinstellung der Verbraucherzentrale zugeordnet und verlinkt; Preistrend-Aussage gestrichen; 18.000 kWh ausdrücklich als Rechenannahme markiert.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `e834f4702e87194affe7`
 
@@ -121,22 +121,20 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Grund-/Ersatzversorgung mit Bundesnetzagentur-Beleg präzisiert; 6-%-Faustwert und 10–15 % Anlageneinstellung der Verbraucherzentrale zugeordnet und verlinkt; Preistrend-Aussage gestrichen; 18.000 kWh ausdrücklich als Rechenannahme markiert.
 
-- Im heutigen Text nicht mehr vorhanden: 18.000 kWh/Jahr
-
----
+- Heute in Zeile 43: 18.000 kWh – **ohne** Kennzeichnung
 
 ## `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren`
 
 - Datei-SHA256 (heute): `d755f513518902ff3b28f05b60053a0837d224f71cd937f230872480a1616ee7`
-- Offene Befunde: **5**
+- Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `1dbeb2f8c51e78d11d49` | luecke | 2026-11-04 · 1. Entscheidung | alle Werte **nicht mehr im Text** | Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 € an reinen Gebühren kosten, ist unbelegt. |
+| `1dbeb2f8c51e78d11d49` | luecke | 2026-11-04 · 1. Entscheidung | nicht mehr im Text: 150 €, 250 € | Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 € an reinen Gebühren kosten, ist unbelegt. |
 | `33e736ac6afe996b491a` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Behauptung, dass Echtzeit‑Überweisungen bei kostenlosen Konten generell gebührenfrei sind, fehlt jede Quelle. |
-| `96b7b7768d402884810c` | luecke | 2026-11-04 · 1. Entscheidung | 100.000 € (Zeile 214) | Aussage, dass Einlagen bis 100.000 € durch die deutsche Einlagensicherung geschützt sind, wird nicht belegt. |
-| `a25bb6bbcb25ba8b0e22` | luecke | 2026-11-04 · 1. Entscheidung | 8 % (Zeile 91); 11 % (Zeile 91) | Angabe von Dispozinsen von 8 % bis 11 % ohne Quellenangabe. |
-| `f94f8ba1e4342e67e45a` | luecke | 2026-11-04 · 1. Entscheidung | alle Werte **nicht mehr im Text** | Angabe, dass ein Kontowechsel 120 € bis 180 € im Jahr spart, fehlt jede Quelle. |
+| `96b7b7768d402884810c` | luecke | 2026-11-04 · 1. Entscheidung | 100.000 € in Zeile 215 ohne Kennzeichnung | Aussage, dass Einlagen bis 100.000 € durch die deutsche Einlagensicherung geschützt sind, wird nicht belegt. |
+| `a25bb6bbcb25ba8b0e22` | luecke | 2026-11-04 · 1. Entscheidung | 8 % in Zeile 5 gekennzeichnet · 11 % in Zeile 92 ohne Kennzeichnung | Angabe von Dispozinsen von 8 % bis 11 % ohne Quellenangabe. |
+| `f94f8ba1e4342e67e45a` | luecke | 2026-11-04 · 1. Entscheidung | nicht mehr im Text: 180 € · 120 € in Zeile 88 ohne Kennzeichnung | Angabe, dass ein Kontowechsel 120 € bis 180 € im Jahr spart, fehlt jede Quelle. |
 
 ### `1dbeb2f8c51e78d11d49`
 
@@ -146,7 +144,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Unbelegte Gebühren-/Zins-Spannen (150–250 €, Dispo 8–11 %, Wechsel 120–180 €) entfernt oder als Beispiel markiert; Echtzeit-Überweisung relativiert; Einlagensicherung 100.000 € mit Bundesbank-Quelle belegt.
 
-- Im heutigen Text nicht mehr vorhanden: 150 €, 250 €
+- Im heutigen Text nicht mehr vorhanden: 150 €, 250 €
 
 ### `33e736ac6afe996b491a`
 
@@ -156,7 +154,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Unbelegte Gebühren-/Zins-Spannen (150–250 €, Dispo 8–11 %, Wechsel 120–180 €) entfernt oder als Beispiel markiert; Echtzeit-Überweisung relativiert; Einlagensicherung 100.000 € mit Bundesbank-Quelle belegt.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `96b7b7768d402884810c`
 
@@ -166,7 +164,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Unbelegte Gebühren-/Zins-Spannen (150–250 €, Dispo 8–11 %, Wechsel 120–180 €) entfernt oder als Beispiel markiert; Echtzeit-Überweisung relativiert; Einlagensicherung 100.000 € mit Bundesbank-Quelle belegt.
 
-- `100.000 €` Zeile 214 (ohne Kennzeichnung): „Hat die Bank eine deutsche Lizenz, sind Einlagen bis 100.000 € pro Kunde und Bank gesetzlich gesichert ([Deutsche Bundesbank zur Einlagensicherung](https://www.bundesbank.de/de/aufgaben/bankenaufsicht“
+- Heute in Zeile 215: 100.000 € – **ohne** Kennzeichnung
 
 ### `a25bb6bbcb25ba8b0e22`
 
@@ -176,8 +174,8 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Unbelegte Gebühren-/Zins-Spannen (150–250 €, Dispo 8–11 %, Wechsel 120–180 €) entfernt oder als Beispiel markiert; Echtzeit-Überweisung relativiert; Einlagensicherung 100.000 € mit Bundesbank-Quelle belegt.
 
-- `8 %` Zeile 91 (gekennzeichnet): „| Dispozins | ca. 12 % bis 15 % | ca. 8 % bis 11 % | Zinsersparnis |“
-- `11 %` Zeile 91 (gekennzeichnet): „| Dispozins | ca. 12 % bis 15 % | ca. 8 % bis 11 % | Zinsersparnis |“
+- Heute in Zeile 5: 8 % – gekennzeichnet („modellwert“)
+- Heute in Zeile 92: 11 % – **ohne** Kennzeichnung
 
 ### `f94f8ba1e4342e67e45a`
 
@@ -187,22 +185,21 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Unbelegte Gebühren-/Zins-Spannen (150–250 €, Dispo 8–11 %, Wechsel 120–180 €) entfernt oder als Beispiel markiert; Echtzeit-Überweisung relativiert; Einlagensicherung 100.000 € mit Bundesbank-Quelle belegt.
 
-- Im heutigen Text nicht mehr vorhanden: 120 €, 180 €
-
----
+- Im heutigen Text nicht mehr vorhanden: 180 €
+- Heute in Zeile 88: 120 € – **ohne** Kennzeichnung
 
 ## `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden`
 
 - Datei-SHA256 (heute): `01a0b2abe713c6f6dc2a7054506cfe64bf688792adc98f49af87a9107fc7c16f`
-- Offene Befunde: **5**
+- Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `43470330b3b48c9cee49` | luecke | 2026-11-07 · 1. Entscheidung | alle Werte **nicht mehr im Text** | Der Artikel empfiehlt, Kühl- und Gefriergeräte mindestens 24 Stunden, besser mehrere Tage zu messen, liefert j… |
-| `8ddc1025e45be176ad3a` | luecke | 2026-11-07 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Es wird kein regulatorischer Rahmen (z. B. Aufgaben der Bundesnetzagentur) genannt, obwohl das Thema Stromvers… |
+| `43470330b3b48c9cee49` | luecke | 2026-11-07 · 1. Entscheidung | 24 Stunden in Zeile 95 ohne Kennzeichnung | Der Artikel empfiehlt, Kühl- und Gefriergeräte mindestens 24 Stunden, besser mehrere Tage zu messen, liefert jedoch k… |
+| `8ddc1025e45be176ad3a` | luecke | 2026-11-07 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Es wird kein regulatorischer Rahmen (z. B. Aufgaben der Bundesnetzagentur) genannt, obwohl das Thema Stromversorgung… |
 | `95d6d2877620e5a056ce` | luecke | 2026-11-07 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Aussage, dass Verbraucherzentralen oder Bibliotheken Messgeräte verleihen, wird ohne Beleg gemacht. |
-| `ab16029999747466a638` | luecke | 2026-11-07 · 1. Entscheidung | 0,37 € (Zeile 96) | Die Berechnung mit einem Arbeitspreis von 0,37 €/kWh wird angegeben, ohne dass ein aktueller Preis‑ oder Markt… |
-| `b057dee3603e09f494b5` | luecke | 2026-11-07 · 1. Entscheidung | 650 € (Zeile 119); 10,3 Jahre (Zeile 120) | Das Amortisationsbeispiel (Kaufpreis 650 €, Amortisationszeit 10,3 Jahre) enthält keine Quelle für die zugrund… |
+| `ab16029999747466a638` | luecke | 2026-11-07 · 1. Entscheidung | 0,37 € in Zeile 97 gekennzeichnet | Die Berechnung mit einem Arbeitspreis von 0,37 €/kWh wird angegeben, ohne dass ein aktueller Preis‑ oder Marktwert be… |
+| `b057dee3603e09f494b5` | luecke | 2026-11-07 · 1. Entscheidung | 650 € in Zeile 120 ohne Kennzeichnung · 10,3 Jahre in Zeile 121 ohne Kennzeichnung | Das Amortisationsbeispiel (Kaufpreis 650 €, Amortisationszeit 10,3 Jahre) enthält keine Quelle für die zugrunde liege… |
 
 ### `43470330b3b48c9cee49`
 
@@ -212,7 +209,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Beanstandung inhaltlich behoben: Die bisher unbelegte 24-Stunden-Angabe ist durch die quellengedeckte Sieben-Tage-Messung der Verbraucherzentrale ersetzt; jede Nennstelle im Artikel fuehrt die Quelle inline.
 
-- Im heutigen Text nicht mehr vorhanden: 24 Stunden
+- Heute in Zeile 95: 24 Stunden – **ohne** Kennzeichnung
 
 ### `8ddc1025e45be176ad3a`
 
@@ -222,7 +219,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Beanstandung inhaltlich behoben: Zustaendigkeit des Messstellenbetreibers und das Recht auf Befundpruefung sind mit dem Verbraucherportal der Bundesnetzagentur belegt und im Artikel inline verlinkt.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `95d6d2877620e5a056ce`
 
@@ -232,7 +229,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Beanstandung inhaltlich behoben: Aussage auf die belegte Ausleihe in VZ-Beratungsstellen verengt, regionale Unterschiede ausdruecklich benannt, unbelegter Bibliotheks-Hinweis entfernt.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `ab16029999747466a638`
 
@@ -242,7 +239,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Beanstandung inhaltlich behoben: Rechenwert 0,37 EUR/kWh entspricht dem BDEW-Haushaltsdurchschnitt Oktober 2026 (37,3 ct/kWh, Stand 28.10.2026), inline verlinkt und als Durchschnitt mit Vorrang des eigenen Tarifs gekennzeichnet.
 
-- `0,37 €` Zeile 96 (gekennzeichnet): „**Beispiel:** Eine Gerätegruppe zieht unnötig 18 Watt; das ist ein Modellwert. Umgerechnet sind das **157,7 kWh im Jahr**. Der [BDEW](https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanal“
+- Heute in Zeile 97: 0,37 € – gekennzeichnet („modellwert“)
 
 ### `b057dee3603e09f494b5`
 
@@ -252,23 +249,21 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Beanstandung inhaltlich behoben: Kaufpreis und Verbrauchswerte sind als frei gewaehlte Modellannahmen ohne Marktbezug gekennzeichnet; der Leser wird auf eigene Messung und EU-Energielabel verwiesen, der Preisfaktor ist auf BDEW belegt.
 
-- `650 €` Zeile 119 (gekennzeichnet): „- Angenommener Kaufpreis: **650 €** (frei gewählt, kein Marktpreis)“
-- `10,3 Jahre` Zeile 120 (gekennzeichnet): „- Einfache Amortisationszeit: **rund 10,3 Jahre**“
-
----
+- Heute in Zeile 120: 650 € – **ohne** Kennzeichnung
+- Heute in Zeile 121: 10,3 Jahre – **ohne** Kennzeichnung
 
 ## `2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier`
 
 - Datei-SHA256 (heute): `905288727fca2270be6a787731f5dd679b2c1d5c054ac8ceae8116a4a95b58d4`
-- Offene Befunde: **5**
+- Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `4afb8daed73677ee6224` | luecke | 2026-11-04 · 1. Entscheidung | alle Werte **nicht mehr im Text** | Angabe, dass 58 % der Nutzer ihr Haushaltsbuch digital führen, beruft sich angeblich auf Statista 2025, jedoch… |
-| `9eb9a90899cc8ca66020` | luecke | 2026-11-04 · 1. Entscheidung | 44 € (Zeile 119); 24 € (Zeile 27) | Sparpotenzial‑Beispiele (z. B. DSL‑Tarifwechsel von 44 € auf 24 €) enthalten konkrete Zahlen ohne Quellenangab… |
-| `b4bd085bc84a6131b644` | luecke | 2026-11-04 · 1. Entscheidung | 60 % (Zeile 182) | Behauptung, dass 60 % der Haushalte in Deutschland ihr Geld nicht nachverfolgen, wird mit einer Auswertung der… |
-| `baed76dc211bd15dd46f` | praezision | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Versprechen, dass ein Haushaltsbuch „schnell“ zeigt, welche Posten sich lohnen, ist nicht quantifiziert und fe… |
-| `d7c3cfb422310cf26ca6` | praezision | 2026-11-04 · 1. Entscheidung | 2.500 € (Zeile 100) | Die Aussage, dass die 50‑30‑20‑Regel für ein Nettoeinkommen von 2.500 € realistisch sei, wird ohne Hinweis auf… |
+| `4afb8daed73677ee6224` | luecke | 2026-11-04 · 1. Entscheidung | nicht mehr im Text: 58 % | Angabe, dass 58 % der Nutzer ihr Haushaltsbuch digital führen, beruft sich angeblich auf Statista 2025, jedoch wird k… |
+| `9eb9a90899cc8ca66020` | luecke | 2026-11-04 · 1. Entscheidung | 44 € in Zeile 120 ohne Kennzeichnung · 24 € in Zeile 15 ohne Kennzeichnung | Sparpotenzial‑Beispiele (z. B. DSL‑Tarifwechsel von 44 € auf 24 €) enthalten konkrete Zahlen ohne Quellenangabe. |
+| `b4bd085bc84a6131b644` | luecke | 2026-11-04 · 1. Entscheidung | 60 % in Zeile 123 ohne Kennzeichnung | Behauptung, dass 60 % der Haushalte in Deutschland ihr Geld nicht nachverfolgen, wird mit einer Auswertung der Stiftu… |
+| `baed76dc211bd15dd46f` | praezision | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Versprechen, dass ein Haushaltsbuch „schnell“ zeigt, welche Posten sich lohnen, ist nicht quantifiziert und fehlt an… |
+| `d7c3cfb422310cf26ca6` | praezision | 2026-11-04 · 1. Entscheidung | 2.500 € in Zeile 101 gekennzeichnet | Die Aussage, dass die 50‑30‑20‑Regel für ein Nettoeinkommen von 2.500 € realistisch sei, wird ohne Hinweis auf region… |
 
 ### `4afb8daed73677ee6224`
 
@@ -278,7 +273,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Unbelegte Prozentzahlen (58 % Statista, 60 % Stiftung Warentest) entfernt; Sparbeispiel als Rechenbeispiel gekennzeichnet; 50-30-20-Aussage mit Einschränkung (regionale Unterschiede) versehen.
 
-- Im heutigen Text nicht mehr vorhanden: 58 %
+- Im heutigen Text nicht mehr vorhanden: 58 %
 
 ### `9eb9a90899cc8ca66020`
 
@@ -288,8 +283,8 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Unbelegte Prozentzahlen (58 % Statista, 60 % Stiftung Warentest) entfernt; Sparbeispiel als Rechenbeispiel gekennzeichnet; 50-30-20-Aussage mit Einschränkung (regionale Unterschiede) versehen.
 
-- `44 €` Zeile 119 (ohne Kennzeichnung): „| DSL-Tarif wechseln (44 € → 24 €) | 20 € |“
-- `24 €` Zeile 27 (gekennzeichnet): „> 📊 **Modellrechnung (keine Erfahrungswerte):** Drei Streaming-Abos zu je 9 € plus ein Sportvertrag zu 25 € ergeben 52 € im Monat. Wer diese vier Posten kündigt, spart im Jahr 624 €. Setze hier deine “
+- Heute in Zeile 120: 44 € – **ohne** Kennzeichnung
+- Heute in Zeile 15: 24 € – **ohne** Kennzeichnung
 
 ### `b4bd085bc84a6131b644`
 
@@ -299,7 +294,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Unbelegte Prozentzahlen (58 % Statista, 60 % Stiftung Warentest) entfernt; Sparbeispiel als Rechenbeispiel gekennzeichnet; 50-30-20-Aussage mit Einschränkung (regionale Unterschiede) versehen.
 
-- `60 %` Zeile 182 (gekennzeichnet): „Doch die 50 % für Fixkosten hängen von Miete und Wohnort ab; das ist ein Beispielwert. In teuren Städten sind 55 bis 60 % normal. Wichtig ist die Sparrate: Sie sollte dauerhaft bei 10 bis 20 % liegen.“
+- Heute in Zeile 123: 60 % – **ohne** Kennzeichnung
 
 ### `baed76dc211bd15dd46f`
 
@@ -309,7 +304,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Unbelegte Prozentzahlen (58 % Statista, 60 % Stiftung Warentest) entfernt; Sparbeispiel als Rechenbeispiel gekennzeichnet; 50-30-20-Aussage mit Einschränkung (regionale Unterschiede) versehen.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `d7c3cfb422310cf26ca6`
 
@@ -319,22 +314,20 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Unbelegte Prozentzahlen (58 % Statista, 60 % Stiftung Warentest) entfernt; Sparbeispiel als Rechenbeispiel gekennzeichnet; 50-30-20-Aussage mit Einschränkung (regionale Unterschiede) versehen.
 
-- `2.500 €` Zeile 100 (gekennzeichnet): „Bei 2.500 € netto heißt das: 1.250 € Fixkosten, 750 € Freizeit, 500 € Sparrate; das ist ein Beispielwert. Drückst du die Fixkosten auf 1.000 €, steigt die Sparrate auf 750 €. Das gelingt mit [einem ko“
-
----
+- Heute in Zeile 101: 2.500 € – gekennzeichnet („beispielwert“)
 
 ## `2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen`
 
 - Datei-SHA256 (heute): `0a4e27a71e3dec1b4fd5a61b9f93a88f9cc644c57ed78353fca17bf5be7b45a2`
-- Offene Befunde: **5**
+- Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `252413dcc16cea146beb` | luecke | 2026-11-07 · 3. Entscheidung | kein Wert genannt (Aussage/Präzision) | Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher angekündigt werden muss, ohne dafür ei… |
-| `48a0a962046c8315270e` | praezision | 2026-11-07 · 3. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf den Anbieter überträgt und dafür ein höhere… |
-| `9326152f4d788cff56bd` | praezision | 2026-11-07 · 3. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Aussage, dass man „in der Regel“ zum Zeitpunkt der Preisänderung Sonderkündigungsrecht hat, ist unpräzise … |
-| `ab4d084fd367c8e4d518` | luecke | 2026-11-07 · 3. Entscheidung | alle Werte **nicht mehr im Text** | Der angegebene durchschnittliche Gaspreis von 11,93 Cent/kWh für 2026 (laut BDEW) wird nicht durch eine Quelle… |
-| `d215addd22dea72c44df` | luecke | 2026-11-07 · 3. Entscheidung | 6 % (Zeile 159) | Die Angabe, dass die Verbraucherzentrale etwa 6 % weniger Heizenergie pro Grad niedrigerer Raumtemperatur nenn… |
+| `252413dcc16cea146beb` | luecke | 2026-11-07 · 3. Entscheidung | kein Wert genannt (Aussage/Präzision) | Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher angekündigt werden muss, ohne dafür eine Quel… |
+| `48a0a962046c8315270e` | praezision | 2026-11-07 · 3. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf den Anbieter überträgt und dafür ein höherer Start… |
+| `9326152f4d788cff56bd` | praezision | 2026-11-07 · 3. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Aussage, dass man „in der Regel“ zum Zeitpunkt der Preisänderung Sonderkündigungsrecht hat, ist unpräzise und wir… |
+| `ab4d084fd367c8e4d518` | luecke | 2026-11-07 · 3. Entscheidung | nicht mehr im Text: 11,93 Cent | Der angegebene durchschnittliche Gaspreis von 11,93 Cent/kWh für 2026 (laut BDEW) wird nicht durch eine Quelle belegt. |
+| `d215addd22dea72c44df` | luecke | 2026-11-07 · 3. Entscheidung | 6 % in Zeile 3 ohne Kennzeichnung | Die Angabe, dass die Verbraucherzentrale etwa 6 % weniger Heizenergie pro Grad niedrigerer Raumtemperatur nennt, fehl… |
 
 ### `252413dcc16cea146beb`
 
@@ -344,7 +337,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session bestätigt. Die Ein-Monats-Frist ist quellengebunden und auf Haushaltskunden außerhalb der Grundversorgung präzisiert; für die Grundversorgung wird auf die strengeren Regeln verwiesen.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `48a0a962046c8315270e`
 
@@ -354,7 +347,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session bestätigt. Die vage Risiko-Transfer-Aussage ist durch den konkreten Vergleich der vertraglich geschützten Preisbestandteile ersetzt; ein höherer Startpreis wird nicht mehr als üblich unterstellt.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `9326152f4d788cff56bd`
 
@@ -364,7 +357,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session bestätigt. Das Sonderkündigungsrecht ist mit Zeitpunkt, Zugang vor Wirksamwerden und den Ausnahmen separierte Klausel/Umsatzsteuer präzisiert und an die Bundesnetzagentur gebunden.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `ab4d084fd367c8e4d518`
 
@@ -374,7 +367,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session bestätigt. Die unbelegte 11,93-ct-Aussage ist entfernt. Die neue Fassung nutzt eigene Vertragswerte und Modellrechnungen statt eines unbelegten Durchschnittspreises.
 
-- Im heutigen Text nicht mehr vorhanden: 11,93 Cent
+- Im heutigen Text nicht mehr vorhanden: 11,93 Cent
 
 ### `d215addd22dea72c44df`
 
@@ -384,22 +377,20 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session bestätigt. Der 6-%-Richtwert ist direkt mit der Verbraucherzentrale verlinkt; die neue Fassung ergänzt die Schimmelgrenze und trennt Verbrauchseffekt von Geldersparnis.
 
-- `6 %` Zeile 159 (gekennzeichnet): „Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892) nennt etwa 6 % weniger Heizenergie pro Grad nie“
-
----
+- Heute in Zeile 3: 6 % – **ohne** Kennzeichnung
 
 ## `2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn`
 
 - Datei-SHA256 (heute): `e30b40915c7209ad4b71c43f9940563d716b6ed4961e10111e6703cbfc992b48`
-- Offene Befunde: **5**
+- Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `278d89267d9122a1e9d8` | luecke | 2026-11-07 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Angaben zu gesetzlichen Vorgaben für Warmwassertemperaturen zur Vermeidung von Legionellen werden nicht durch … |
-| `450c3aa629342062825e` | luecke | 2026-11-07 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Aussage, dass Warmwasser der zweitgrößte Kostenposten im Haushalt ist, wird nicht durch eine der bereitges… |
-| `7601167c9f3560093fb0` | luecke | 2026-11-07 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Behauptung, dass Warmwasser in der Heizkostenabrechnung üblicherweise als eigener Block ausgewiesen wird, … |
-| `7efbcd7a4275fe1577bb` | luecke | 2026-11-07 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Verweise auf die Verbraucherzentrale (Tipps zum Heizkosten sparen, Heizung optimieren) können nicht mit den an… |
-| `971a719f94ca492f640e` | luecke | 2026-11-07 · 1. Entscheidung | 0,30 € (Zeile 52) | Der Preis von 0,30 € pro Kilowattstunde in der Modellrechnung ist nicht mit einer Quelle belegt. |
+| `278d89267d9122a1e9d8` | luecke | 2026-11-07 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Angaben zu gesetzlichen Vorgaben für Warmwassertemperaturen zur Vermeidung von Legionellen werden nicht durch die ber… |
+| `450c3aa629342062825e` | luecke | 2026-11-07 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Aussage, dass Warmwasser der zweitgrößte Kostenposten im Haushalt ist, wird nicht durch eine der bereitgestellten… |
+| `7601167c9f3560093fb0` | luecke | 2026-11-07 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Behauptung, dass Warmwasser in der Heizkostenabrechnung üblicherweise als eigener Block ausgewiesen wird, fehlt e… |
+| `7efbcd7a4275fe1577bb` | luecke | 2026-11-07 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Verweise auf die Verbraucherzentrale (Tipps zum Heizkosten sparen, Heizung optimieren) können nicht mit den angegeben… |
+| `971a719f94ca492f640e` | luecke | 2026-11-07 · 1. Entscheidung | 0,30 € in Zeile 53 gekennzeichnet | Der Preis von 0,30 € pro Kilowattstunde in der Modellrechnung ist nicht mit einer Quelle belegt. |
 
 ### `278d89267d9122a1e9d8`
 
@@ -409,7 +400,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Beanstandung inhaltlich behoben: 55 Grad im Leitungssystem, 60 Grad am Speicherausgang bei ueber 400 Litern bzw. ueber 3 Litern Leitungsinhalt und die Dreimonatspruefung sind mit dem VZ-Ratgeber vom 21.07.2026 samt Bezug zur Trinkwasserverordnung belegt.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `450c3aa629342062825e`
 
@@ -419,7 +410,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Beanstandung inhaltlich behoben: Die Rangbehauptung zum Kostenposten ist gestrichen und durch den belegten Energieanteil von rund 16 Prozent (co2online, Grafik Stand 10/2025) ersetzt; Kostenbezug ausdruecklich als tarifabhaengig gekennzeichnet, auch in Description und pin_description.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `7601167c9f3560093fb0`
 
@@ -429,7 +420,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Beanstandung inhaltlich behoben: Die Pflicht zur Kostentrennung bei verbundenen Anlagen ist mit Paragraph 9 Absatz 1, 2 und 4 Heizkostenverordnung im amtlichen Wortlaut belegt und inline verlinkt.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `7efbcd7a4275fe1577bb`
 
@@ -439,7 +430,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Beanstandung inhaltlich behoben: Jeder VZ-Verweis fuehrt auf die Fundstelle, die die behauptete Aussage tatsaechlich enthaelt; der unpassende Verweis 13892 ist entfernt und die Quellenliste entsprechend korrigiert.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `971a719f94ca492f640e`
 
@@ -449,22 +440,20 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Beanstandung inhaltlich behoben: 0,30 EUR/kWh ist als frei gewaehlte Rechenannahme ohne Marktpreisanspruch gekennzeichnet, dem belegten BDEW-Durchschnitt gegenuebergestellt und um den Hinweis auf Gas- bzw. Waermepreis bei zentraler Versorgung ergaenzt.
 
-- `0,30 €` Zeile 52 (gekennzeichnet): „Die beiden Varianten in der Übersicht. Die Euro-Werte rechnen mit frei gewählten 0,30 € je Kilowattstunde – kein Marktpreis, sondern eine Rechenannahme. Zum Vergleich: Der [BDEW](https://www.bdew.de/s“
-
----
+- Heute in Zeile 53: 0,30 € – gekennzeichnet („rechenannahme“)
 
 ## `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen`
 
 - Datei-SHA256 (heute): `704bb5b82220b5086c7fc1c37fbc9114272cf171f7a96191a0c572c501a454c7`
-- Offene Befunde: **5**
+- Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `16b3b8584ff802803aa9` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Angaben zum Fremdwährungsentgelt von „fast zwei Prozent“ bei Zahlungen in fremder Währung fehlen jede belegbar… |
-| `7ff042b6fe804cdf101b` | praezision | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Formulierungen wie „einige Anbieter ohne Auslandsgebühr gehören zu den besten Karten für Reisen“ sind pauschal… |
-| `bec83c4b814183fa1086` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Aussage, dass die kostenlose Sperr‑Notrufnummer 116 für alle Karten in Deutschland gilt, wird nicht durch … |
-| `f9aff86b6eba71b153a6` | luecke | 2026-11-04 · 1. Entscheidung | alle Werte **nicht mehr im Text** | Die Angabe, dass Sollzinsen bei Teilzahlung zwischen 12 % und 20 % liegen, ist nicht mit einer Quelle belegt. |
-| `fed9215b770ea4879eda` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Behauptung, dass eine gute Kreditkarte im Jahr nichts kostet (keine Jahres‑ und keine Fremdwährungsgebühr)… |
+| `16b3b8584ff802803aa9` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Angaben zum Fremdwährungsentgelt von „fast zwei Prozent“ bei Zahlungen in fremder Währung fehlen jede belegbare Refer… |
+| `7ff042b6fe804cdf101b` | praezision | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Formulierungen wie „einige Anbieter ohne Auslandsgebühr gehören zu den besten Karten für Reisen“ sind pauschal und oh… |
+| `bec83c4b814183fa1086` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Aussage, dass die kostenlose Sperr‑Notrufnummer 116 für alle Karten in Deutschland gilt, wird nicht durch eine Qu… |
+| `f9aff86b6eba71b153a6` | luecke | 2026-11-04 · 1. Entscheidung | 12 % in Zeile 145 ohne Kennzeichnung · 20 % in Zeile 9 ohne Kennzeichnung | Die Angabe, dass Sollzinsen bei Teilzahlung zwischen 12 % und 20 % liegen, ist nicht mit einer Quelle belegt. |
+| `fed9215b770ea4879eda` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Behauptung, dass eine gute Kreditkarte im Jahr nichts kostet (keine Jahres‑ und keine Fremdwährungsgebühr), wird… |
 
 ### `16b3b8584ff802803aa9`
 
@@ -474,7 +463,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Sperrnummer auf 116 116 korrigiert und mit sperr-notruf.de belegt; unbelegte Zins-/Gebührenspannen (12–20 %, 'fast zwei Prozent', 'kostet im Jahr nichts') entfernt oder relativiert; Superlativ bei Reise-Karten abgeschwächt.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `7ff042b6fe804cdf101b`
 
@@ -484,7 +473,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Sperrnummer auf 116 116 korrigiert und mit sperr-notruf.de belegt; unbelegte Zins-/Gebührenspannen (12–20 %, 'fast zwei Prozent', 'kostet im Jahr nichts') entfernt oder relativiert; Superlativ bei Reise-Karten abgeschwächt.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `bec83c4b814183fa1086`
 
@@ -494,7 +483,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Sperrnummer auf 116 116 korrigiert und mit sperr-notruf.de belegt; unbelegte Zins-/Gebührenspannen (12–20 %, 'fast zwei Prozent', 'kostet im Jahr nichts') entfernt oder relativiert; Superlativ bei Reise-Karten abgeschwächt.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `f9aff86b6eba71b153a6`
 
@@ -504,7 +493,8 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Sperrnummer auf 116 116 korrigiert und mit sperr-notruf.de belegt; unbelegte Zins-/Gebührenspannen (12–20 %, 'fast zwei Prozent', 'kostet im Jahr nichts') entfernt oder relativiert; Superlativ bei Reise-Karten abgeschwächt.
 
-- Im heutigen Text nicht mehr vorhanden: 12 %, 20 %
+- Heute in Zeile 145: 12 % – **ohne** Kennzeichnung
+- Heute in Zeile 9: 20 % – **ohne** Kennzeichnung
 
 ### `fed9215b770ea4879eda`
 
@@ -514,19 +504,17 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Sperrnummer auf 116 116 korrigiert und mit sperr-notruf.de belegt; unbelegte Zins-/Gebührenspannen (12–20 %, 'fast zwei Prozent', 'kostet im Jahr nichts') entfernt oder relativiert; Superlativ bei Reise-Karten abgeschwächt.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
-
----
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich`
 
 - Datei-SHA256 (heute): `8cea15915d71f14688ab188a4ba584c6104b11c718605b8b0ca5c68e6cbc80d6`
-- Offene Befunde: **2**
+- Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `20c08cb650ef6e24af64` | luecke | 2026-11-05 · 1. Entscheidung | 14,9 % (Zeile 116) | Der Ratgeber vernachlässigt bei der Kalkulation der Sparfähigkeit die massive Preissteigerung bei Energie (+14… |
-| `6aafb23c0c6dbb06ce3b` | veraltet | 2026-11-05 · 1. Entscheidung | 2 % (Zeile 131); 2,8 % (Zeile 116) | Die im Rechenbeispiel zur Realrendite genutzte Inflationsrate von 2 % ist veraltet; die vorläufige Rate für Ok… |
+| `20c08cb650ef6e24af64` | luecke | 2026-11-05 · 1. Entscheidung | 14,9 % in Zeile 117 ohne Kennzeichnung | Der Ratgeber vernachlässigt bei der Kalkulation der Sparfähigkeit die massive Preissteigerung bei Energie (+14,9 %),… |
+| `6aafb23c0c6dbb06ce3b` | veraltet | 2026-11-05 · 1. Entscheidung | 2 % in Zeile 6 ohne Kennzeichnung · 2,8 % in Zeile 117 ohne Kennzeichnung | Die im Rechenbeispiel zur Realrendite genutzte Inflationsrate von 2 % ist veraltet; die vorläufige Rate für Oktober 2… |
 
 ### `20c08cb650ef6e24af64`
 
@@ -536,7 +524,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Heutiger Text geprueft: die beanstandete Energie-Preissteigerung (+14,9 %) mit Bezug zur Sparfahigkeit ist nicht mehr enthalten; der heutige Text nennt keine Energiepreise mehr. Befund gegenueber heutigem Text gegenstandslos.
 
-- `14,9 %` Zeile 116 (gekennzeichnet): „Die Sparfähigkeit eines Haushalts bemisst sich nicht am Gehalt allein, sondern an den Fixkosten, die übrig bleiben. Energie ist dabei ein wesentlicher Posten: Energieprodukte kosteten laut Statistisch“
+- Heute in Zeile 117: 14,9 % – **ohne** Kennzeichnung
 
 ### `6aafb23c0c6dbb06ce3b`
 
@@ -546,21 +534,19 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Heutiger Text geprueft: die veraltete Inflationsrate von 2 % mit der Rendite-Rechnung ist nicht mehr enthalten; der heutige Text nennt keine Inflationsrate mehr. Befund gegenueber heutigem Text gegenstandslos.
 
-- `2 %` Zeile 131 (gekennzeichnet): „Bei 7 % nominal und 2,8 % Inflation bleibt eine reale Rendite von etwa 4,2 %; das ist ein Modellwert. Das reale Endkapital nach 20 Jahren beträgt dann etwa 113.000 €, immer noch ein beachtlicher Vermö“
-- `2,8 %` Zeile 116 (gekennzeichnet): „Die Sparfähigkeit eines Haushalts bemisst sich nicht am Gehalt allein, sondern an den Fixkosten, die übrig bleiben. Energie ist dabei ein wesentlicher Posten: Energieprodukte kosteten laut Statistisch“
-
----
+- Heute in Zeile 6: 2 % – **ohne** Kennzeichnung
+- Heute in Zeile 117: 2,8 % – **ohne** Kennzeichnung
 
 ## `2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum`
 
 - Datei-SHA256 (heute): `5bd6779ecdc751b20b13181118e784c3b07eec3dced2d8cd41304138eefd133d`
-- Offene Befunde: **3**
+- Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `24f05ddc03ffdd50118f` | praezision | 2026-11-06 · 3. Entscheidung | 14,9 % (Zeile 110) | Die Kalkulation der Fixkostenersparnis bei Energie (Strom/Gas) ist unpräzise, da sie den aktuellen Preisanstie… |
-| `4816322f061dfdc03bcd` | luecke | 2026-11-06 · 3. Entscheidung | 0,4 % (Zeile 150) | Bei den Einsparpotenzialen für Lebensmittel fehlt der Bezug zur aktuellen Preissteigerung von +0,4 % bei Nahru… |
-| `7017065ee7c74c7ae452` | veraltet | 2026-11-06 · 3. Entscheidung | 2,8 % (Zeile 173) | Der Artikel nutzt Kostenszenarien für 2024/2025, während aktuelle Daten für Oktober 2026 eine Inflationsrate v… |
+| `24f05ddc03ffdd50118f` | praezision | 2026-11-06 · 3. Entscheidung | 14,9 % in Zeile 111 gekennzeichnet | Die Kalkulation der Fixkostenersparnis bei Energie (Strom/Gas) ist unpräzise, da sie den aktuellen Preisanstieg von +… |
+| `4816322f061dfdc03bcd` | luecke | 2026-11-06 · 3. Entscheidung | 0,4 % in Zeile 151 gekennzeichnet | Bei den Einsparpotenzialen für Lebensmittel fehlt der Bezug zur aktuellen Preissteigerung von +0,4 % bei Nahrungsmitt… |
+| `7017065ee7c74c7ae452` | veraltet | 2026-11-06 · 3. Entscheidung | 2,8 % in Zeile 174 ohne Kennzeichnung | Der Artikel nutzt Kostenszenarien für 2024/2025, während aktuelle Daten für Oktober 2026 eine Inflationsrate von +2,8… |
 
 ### `24f05ddc03ffdd50118f`
 
@@ -570,7 +556,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Folgeentscheidung nach Textänderung vom 06.11.2026 (RD1/T6-Remediation im strengen Release-Scorecard-Lauf #1070): Dublette der Statistisches-Bundesamt-Quellenangabe entzerrt, Bezug 'Quelle wie oben' verankert. Inhaltlicher Befund ist gegenüber dem heutigen Text gegenstandslos (Energieargument mit Datumsstand Oktober 2026, vorläufig).
 
-- `14,9 %` Zeile 110 (gekennzeichnet): „**Hinweis zum Stand der Preise:** Laut vorläufigem Verbraucherpreisindex des Statistischen Bundesamts lagen die Energieprodukte im Oktober 2026 um +14,9 % über dem Vorjahreswert. Die Tabelle ist ein B“
+- Heute in Zeile 111: 14,9 % – gekennzeichnet („annahme“)
 
 ### `4816322f061dfdc03bcd`
 
@@ -580,7 +566,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Folgeentscheidung nach Textänderung vom 06.11.2026 (RD1/T6-Remediation im strengen Release-Scorecard-Lauf #1070): Dublette der Statistisches-Bundesamt-Quellenangabe entzerrt, Bezug 'Quelle wie oben' verankert. Inhaltlicher Befund ist gegenüber dem heutigen Text gegenstandslos.
 
-- `0,4 %` Zeile 150 (gekennzeichnet): „**Hinweis zum Stand der Preise:** Nach dem Indexstand des Statistischen Bundesamts lagen Nahrungsmittel im Oktober 2026 um +0,4 % über dem Niveau des Vorjahresmonats. Die Beispiele sind Orientierungsw“
+- Heute in Zeile 151: 0,4 % – gekennzeichnet („orientierungswert“)
 
 ### `7017065ee7c74c7ae452`
 
@@ -590,20 +576,18 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Folgeentscheidung nach Textänderung vom 06.11.2026 (RD1/T6-Remediation im strengen Release-Scorecard-Lauf #1070): Dublette der Statistisches-Bundesamt-Quellenangabe entzerrt, Bezug 'Quelle wie oben' verankert. Inhaltlicher Befund ist gegenüber dem heutigen Text gegenstandslos.
 
-- `2,8 %` Zeile 173 (gekennzeichnet): „Nehmen wir ein bewusst vereinfachtes Beispielszenario zum Preisstand Oktober 2026 (Inflationsrate vorläufig 2,8 %, Statistisches Bundesamt, Verbraucherpreisindex). Du kaufst an 220 Arbeitstagen unterw“
-
----
+- Heute in Zeile 174: 2,8 % – **ohne** Kennzeichnung
 
 ## `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler`
 
 - Datei-SHA256 (heute): `5708f03841d4c833d0b0c641c463929eb5a523d5bfc7a0419ba48b149751ac41`
-- Offene Befunde: **3**
+- Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `1e06a96f6f71e104ce0b` | praezision | 2026-11-07 · 2. Entscheidung | 0,4 % (Zeile 32) | Während Meal Prep als großer Sparhebel betont wird, zeigt die Marktlage für Nahrungsmittel eine moderate Teuer… |
-| `81c6a707139046b83ccd` | luecke | 2026-11-07 · 2. Entscheidung | 14,9 % (Zeile 32) | Der Ratgeber empfiehlt die Revision von Fixkosten, lässt aber die drastische Preissteigerung bei Energie von +… |
-| `8cc00288af8a1f2b02d8` | veraltet | 2026-11-07 · 2. Entscheidung | 2,8 % (Zeile 32) | Die Budget-Tipps berücksichtigen nicht die aktuelle Inflationsrate von 2,8 % (Stand Oktober 2026), was die Kau… |
+| `1e06a96f6f71e104ce0b` | praezision | 2026-11-07 · 2. Entscheidung | 0,4 % in Zeile 33 ohne Kennzeichnung | Während Meal Prep als großer Sparhebel betont wird, zeigt die Marktlage für Nahrungsmittel eine moderate Teuerung von… |
+| `81c6a707139046b83ccd` | luecke | 2026-11-07 · 2. Entscheidung | 14,9 % in Zeile 33 ohne Kennzeichnung | Der Ratgeber empfiehlt die Revision von Fixkosten, lässt aber die drastische Preissteigerung bei Energie von +14,9 %… |
+| `8cc00288af8a1f2b02d8` | veraltet | 2026-11-07 · 2. Entscheidung | 2,8 % in Zeile 33 ohne Kennzeichnung | Die Budget-Tipps berücksichtigen nicht die aktuelle Inflationsrate von 2,8 % (Stand Oktober 2026), was die Kaufkraft-… |
 
 ### `1e06a96f6f71e104ce0b`
 
@@ -613,7 +597,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session bestätigt. Die Meal-Prep-Priorisierung ist relativiert: Der moderate Nahrungsmittelwert +0,4 % wird genannt, und die Sparwirkung wird an die eigenen Auswärts-Essgewohnheiten gebunden. Unbelegte 20-%-/Drittel-Aussagen sind entfernt.
 
-- `0,4 %` Zeile 32 (ohne Kennzeichnung): „**Hinweis zum Stand der Preise:** Im Oktober 2026 lagen die Verbraucherpreise um **+2,8 %** über dem Vorjahr, Energie um **+14,9 %** und Nahrungsmittel um **+0,4 %** ([Statistisches Bundesamt, Verbrau“
+- Heute in Zeile 33: 0,4 % – **ohne** Kennzeichnung
 
 ### `81c6a707139046b83ccd`
 
@@ -623,7 +607,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session bestätigt. Die Energiepreisentwicklung ist mit Destatis-Quelle ergänzt: Oktober vorläufig +12,2 %, September +14,9 %. Die Fixkostenprüfung bleibt, wird aber an den eigenen Rechnungen ausgerichtet.
 
-- `14,9 %` Zeile 32 (ohne Kennzeichnung): „**Hinweis zum Stand der Preise:** Im Oktober 2026 lagen die Verbraucherpreise um **+2,8 %** über dem Vorjahr, Energie um **+14,9 %** und Nahrungsmittel um **+0,4 %** ([Statistisches Bundesamt, Verbrau“
+- Heute in Zeile 33: 14,9 % – **ohne** Kennzeichnung
 
 ### `8cc00288af8a1f2b02d8`
 
@@ -633,20 +617,18 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session bestätigt. Die vorläufige Oktober-Inflation von 2,8 % ist mit Destatis-PM ergänzt; das Haushaltsbuch wird auf eigene Vormonatsausgaben und tatsächliche Preisänderungen verpflichtet.
 
-- `2,8 %` Zeile 32 (ohne Kennzeichnung): „**Hinweis zum Stand der Preise:** Im Oktober 2026 lagen die Verbraucherpreise um **+2,8 %** über dem Vorjahr, Energie um **+14,9 %** und Nahrungsmittel um **+0,4 %** ([Statistisches Bundesamt, Verbrau“
-
----
+- Heute in Zeile 33: 2,8 % – **ohne** Kennzeichnung
 
 ## `2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag`
 
 - Datei-SHA256 (heute): `86d47ae20559e2fefe77f85ea765c1c51649ccecea0ff7e4defb4b95906cd400`
-- Offene Befunde: **3**
+- Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `5a1bf10697f58e5fe14a` | luecke | 2026-11-07 · 2. Entscheidung | 14,9 % (Zeile 84) | Der Ratgeber nennt Sparbeispiele für Heizkosten, lässt aber die aktuelle Preissteigerung bei Energie von +14,9… |
-| `e48f9237cff6397c49a6` | praezision | 2026-11-07 · 2. Entscheidung | 200 € (Zeile 6); 2,8 % (Zeile 8) | Die in Aussicht gestellten Ersparnisse von bis zu 200 € werden nicht ins Verhältnis zur aktuellen Inflationsra… |
-| `f6de6b078d49f9d42e0e` | praezision | 2026-11-07 · 2. Entscheidung | 0,4 % (Zeile 144) | Beim Fokus auf Lebensmittelplanung fehlt der Hinweis auf die vergleichsweise moderate Preissteigerung von +0,4… |
+| `5a1bf10697f58e5fe14a` | luecke | 2026-11-07 · 2. Entscheidung | 14,9 % in Zeile 36 ohne Kennzeichnung | Der Ratgeber nennt Sparbeispiele für Heizkosten, lässt aber die aktuelle Preissteigerung bei Energie von +14,9 % (Sta… |
+| `e48f9237cff6397c49a6` | praezision | 2026-11-07 · 2. Entscheidung | 200 € in Zeile 7 gekennzeichnet · 2,8 % in Zeile 9 gekennzeichnet | Die in Aussicht gestellten Ersparnisse von bis zu 200 € werden nicht ins Verhältnis zur aktuellen Inflationsrate von… |
+| `f6de6b078d49f9d42e0e` | praezision | 2026-11-07 · 2. Entscheidung | 0,4 % in Zeile 38 ohne Kennzeichnung | Beim Fokus auf Lebensmittelplanung fehlt der Hinweis auf die vergleichsweise moderate Preissteigerung von +0,4 % bei… |
 
 ### `5a1bf10697f58e5fe14a`
 
@@ -656,7 +638,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session bestätigt. Die Energiepreisentwicklung ist mit Destatis-Quelle ergänzt und korrekt zwischen September +14,9 % und Oktober vorläufig +12,2 % unterschieden. Heizbeispiele bleiben als Modellrechnung markiert.
 
-- `14,9 %` Zeile 84 (ohne Kennzeichnung): „**Warum der Hebel 2026 größer ist:** Energie war im Oktober 2026 **+14,9 %** teurer als im Vorjahr ([Statistisches Bundesamt](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/“
+- Heute in Zeile 36: 14,9 % – **ohne** Kennzeichnung
 
 ### `e48f9237cff6397c49a6`
 
@@ -666,8 +648,8 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session bestätigt. Die 50–200-€-Aussage ist in Kurzantwort und Text als Modellwert markiert und ausdrücklich nicht als Inflationsausgleich oder zugesagte Ersparnis formuliert; die Oktober-Inflation 2,8 % ist belegt.
 
-- `200 €` Zeile 6 (gekennzeichnet): „Schon ein oder zwei gute Gewohnheiten schaffen oft **50 € bis 200 € mehr Spielraum im Monat**; das ist ein Modellwert. Genau darum geht es in diesen **5 einfachen Frugalismus-Tricks für den Alltag**.“
-- `2,8 %` Zeile 8 (gekennzeichnet): „**Damit du die Summe richtig einordnest:** Die Inflationsrate lag im Oktober 2026 bei **+2,8 %** ([Statistisches Bundesamt](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_i“
+- Heute in Zeile 7: 200 € – gekennzeichnet („modellwert“)
+- Heute in Zeile 9: 2,8 % – gekennzeichnet („modellrechnung“)
 
 ### `f6de6b078d49f9d42e0e`
 
@@ -677,19 +659,17 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session bestätigt. Der Nahrungsmittelwert +0,4 % ist mit Destatis-Quelle ergänzt und gegen den Energie-Teilindex abgegrenzt. Die Lebensmittelplanung wird nicht mehr aus einer unbelegten Marktbehauptung priorisiert.
 
-- `0,4 %` Zeile 144 (ohne Kennzeichnung): „**Was die Preise dazu sagen:** Nahrungsmittel waren im Oktober 2026 nur **+0,4 %** teurer, Energie dagegen **+14,9 %** ([Statistisches Bundesamt](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Ve“
-
----
+- Heute in Zeile 38: 0,4 % – **ohne** Kennzeichnung
 
 ## `2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026`
 
 - Datei-SHA256 (heute): `b085bf3a0f5a94f284779ed76bb5ff023ad2cac2096be5cd7b3b3a2b6e61d06a`
-- Offene Befunde: **2**
+- Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `6cb2229c5eb83b02da23` | veraltet | 2026-11-07 · 3. Entscheidung | 140 € (Zeile 103); 14,9 % (Zeile 112) | Die Kalkulation der Fixkosten (Energie 140 €) und die Empfehlung zur Senkung der Kosten ignorieren den aktuell… |
-| `f00055a1cb65ee22165f` | luecke | 2026-11-07 · 3. Entscheidung | 2,8 % (Zeile 112); 0,4 % (Zeile 112) | Der Ratgeber verspricht eine 'planbare' Budgetierung, lässt aber die aktuelle Inflationsrate von 2,8 % unerwäh… |
+| `6cb2229c5eb83b02da23` | veraltet | 2026-11-07 · 3. Entscheidung | 140 € in Zeile 104 gekennzeichnet · 14,9 % in Zeile 96 ohne Kennzeichnung | Die Kalkulation der Fixkosten (Energie 140 €) und die Empfehlung zur Senkung der Kosten ignorieren den aktuellen Mark… |
+| `f00055a1cb65ee22165f` | luecke | 2026-11-07 · 3. Entscheidung | 2,8 % in Zeile 82 ohne Kennzeichnung · 0,4 % in Zeile 98 ohne Kennzeichnung | Der Ratgeber verspricht eine 'planbare' Budgetierung, lässt aber die aktuelle Inflationsrate von 2,8 % unerwähnt, die… |
 
 ### `6cb2229c5eb83b02da23`
 
@@ -699,8 +679,8 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Folgeentscheidung auf der heutigen Fassung: Der Befund ist durch den Destatis-Absatz (PM 382, 30.10.2026: Energie +12,2 Prozent, September 14,9 Prozent als Vormonat) bereits behoben. Seit der Erstentscheidung hat nur der Textpflege-Bot die abgeleitete Abbildungszeile neu erzeugt; der gepruefte Inhalt ist unveraendert.
 
-- `140 €` Zeile 103 (gekennzeichnet): „**Modellrechnung, keine Marktstudie:** Die folgenden Beträge sind frei gewählte Annahmen für einen Beispielhaushalt. Besonders die 140 € für Strom und Gas sind kein aktueller Durchschnittspreis. Erset“
-- `14,9 %` Zeile 112 (gekennzeichnet): „**Hinweis zum Stand der Preise:** Energie lag im Oktober 2026 um **+14,9 %** über dem Vorjahr, die Inflationsrate insgesamt bei **+2,8 %**, Nahrungsmittel bei **+0,4 %** ([Statistisches Bundesamt, Ver“
+- Heute in Zeile 104: 140 € – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 96: 14,9 % – **ohne** Kennzeichnung
 
 ### `f00055a1cb65ee22165f`
 
@@ -710,68 +690,74 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Folgeentscheidung auf der heutigen Fassung: Die Inflationsluecke ist mit Destatis PM 382 vom 30.10.2026 (2,8 Prozent Gesamt, 0,4 Prozent Nahrungsmittel) samt Datum, Primarquelle und budgetbezogener Handlungsanweisung geschlossen; seither nur abgeleitete Bildzeile geaendert.
 
-- `2,8 %` Zeile 112 (gekennzeichnet): „**Hinweis zum Stand der Preise:** Energie lag im Oktober 2026 um **+14,9 %** über dem Vorjahr, die Inflationsrate insgesamt bei **+2,8 %**, Nahrungsmittel bei **+0,4 %** ([Statistisches Bundesamt, Ver“
-- `0,4 %` Zeile 112 (gekennzeichnet): „**Hinweis zum Stand der Preise:** Energie lag im Oktober 2026 um **+14,9 %** über dem Vorjahr, die Inflationsrate insgesamt bei **+2,8 %**, Nahrungsmittel bei **+0,4 %** ([Statistisches Bundesamt, Ver“
-
----
+- Heute in Zeile 82: 2,8 % – **ohne** Kennzeichnung
+- Heute in Zeile 98: 0,4 % – **ohne** Kennzeichnung
 
 ## `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser`
 
 - Datei-SHA256 (heute): `adbde627796fe38dc1f98398f3dcaae86af80d45453b12d771ae42dac3bfa9b7`
-- Offene Befunde: **5**
+- Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `7a87eaaa2b863ba8cc46` | luecke | — neu — | kein Wert genannt (Aussage/Präzision) | Ein relevanter regulatorischer Rahmen (z. B. Vorgaben der Bundesnetzagentur oder BDEW) wird nicht genannt, obw… |
-| `9d67a5e6bd11212c7c1e` | praezision | — neu — | kein Wert genannt (Aussage/Präzision) | Die Aussage, dass bestimmte Gerätegruppen (TV‑Ecke, Homeoffice, alte Audio‑Technik) zuerst zu senken „lohnt“, … |
-| `a54abc1cad73d20fb689` | luecke | — neu — | 32 € (Zeile 19) | Die konkreten Jahreskosten (z. B. 32 € für 10 W Standby) beruhen auf dem nicht belegten Strompreis und werden … |
-| `a7d1cf6485921e117919` | luecke | — neu — | 37,3 Cent (Zeile 41) | Der angegebene durchschnittliche Strompreis von 37,3 Cent/kWh (BDEW‑Schnitt) wird ohne Quellenangabe genannt. |
-| `a7f69a854430d62a4a3e` | luecke | — neu — | kein Wert genannt (Aussage/Präzision) | Die Empfehlung, dass ein günstigerer Arbeitspreis der zweite wichtigste Hebel sei, fehlt jede Quelle oder regu… |
+| `7a87eaaa2b863ba8cc46` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Ein relevanter regulatorischer Rahmen (z. B. Vorgaben der Bundesnetzagentur oder BDEW) wird nicht genannt, obwohl die… |
+| `9d67a5e6bd11212c7c1e` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Die Aussage, dass bestimmte Gerätegruppen (TV‑Ecke, Homeoffice, alte Audio‑Technik) zuerst zu senken „lohnt“, wird oh… |
+| `a54abc1cad73d20fb689` | luecke | **neu** | 32 € in Zeile 20 gekennzeichnet | Die konkreten Jahreskosten (z. B. 32 € für 10 W Standby) beruhen auf dem nicht belegten Strompreis und werden nicht a… |
+| `a7d1cf6485921e117919` | luecke | **neu** | 37,3 Cent in Zeile 42 ohne Kennzeichnung | Der angegebene durchschnittliche Strompreis von 37,3 Cent/kWh (BDEW‑Schnitt) wird ohne Quellenangabe genannt. |
+| `a7f69a854430d62a4a3e` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Die Empfehlung, dass ein günstigerer Arbeitspreis der zweite wichtigste Hebel sei, fehlt jede Quelle oder regulatoris… |
 
 ### `7a87eaaa2b863ba8cc46`
 
 **Befund:** Ein relevanter regulatorischer Rahmen (z. B. Vorgaben der Bundesnetzagentur oder BDEW) wird nicht genannt, obwohl die Fundstelle darauf hinweist, dass solche Vorgaben existieren.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `9d67a5e6bd11212c7c1e`
 
 **Befund:** Die Aussage, dass bestimmte Gerätegruppen (TV‑Ecke, Homeoffice, alte Audio‑Technik) zuerst zu senken „lohnt“, wird ohne messbare Daten oder Vergleichskriterien gemacht.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `a54abc1cad73d20fb689`
 
 **Befund:** Die konkreten Jahreskosten (z. B. 32 € für 10 W Standby) beruhen auf dem nicht belegten Strompreis und werden nicht als Modellrechnung gekennzeichnet.
 
-- `32 €` Zeile 19 (gekennzeichnet): „- **10 Watt rund um die Uhr** entsprechen 87,6 kWh und bei 0,37 €/kWh rund 32 € im Jahr als Beispielwert.“
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 20: 32 € – gekennzeichnet („beispielwert“)
 
 ### `a7d1cf6485921e117919`
 
 **Befund:** Der angegebene durchschnittliche Strompreis von 37,3 Cent/kWh (BDEW‑Schnitt) wird ohne Quellenangabe genannt.
 
-- `37,3 Cent` Zeile 41 (gekennzeichnet): „Dann multiplizierst du mit deinem Preis pro kWh. Der BDEW-Schnitt von 37,3 Cent pro kWh{{< beleg kennzahl="bdew-haushaltsstrompreis" kurz="BDEW" >}} dient hier nur als Rechenwert. Auf deiner Rechnung “
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 42: 37,3 Cent – **ohne** Kennzeichnung
 
 ### `a7f69a854430d62a4a3e`
 
 **Befund:** Die Empfehlung, dass ein günstigerer Arbeitspreis der zweite wichtigste Hebel sei, fehlt jede Quelle oder regulatorische Einordnung.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
 
----
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor`
 
 - Datei-SHA256 (heute): `d0167053714d775996b0dde6a65d757bb122d57a8760832e605b34f098eeb579`
-- Offene Befunde: **5**
+- Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `0aa915539d57841e5014` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Aussage, dass die Verbraucherzentrale empfiehlt, Boni im ersten Vergleich auszublenden, fehlt eine Quellen… |
-| `5e1be48085014a836807` | luecke | 2026-11-04 · 1. Entscheidung | alle Werte **nicht mehr im Text** | Der angegebene BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird nicht belegt. |
-| `6fdf31c3b68b6122bd0d` | praezision | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die pauschale Formulierung, dass bei zentraler Heizung der Vermieter oder die Eigentümergemeinschaft den Anbie… |
-| `c27c182c615bd7ca3b78` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Der Artikel behauptet, dass laut Bundesnetzagentur Preisänderungen klar angekündigt und begründet sein müssen,… |
-| `e1e40e9bbbdd109df86e` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Es wird angegeben, dass bei einer Preisänderung in der Regel ein Sonderkündigungsrecht besteht, ohne dafür ein… |
+| `0aa915539d57841e5014` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Aussage, dass die Verbraucherzentrale empfiehlt, Boni im ersten Vergleich auszublenden, fehlt eine Quellenangabe. |
+| `5e1be48085014a836807` | luecke | 2026-11-04 · 1. Entscheidung | nicht mehr im Text: 11,93 Cent | Der angegebene BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird nicht belegt. |
+| `6fdf31c3b68b6122bd0d` | praezision | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die pauschale Formulierung, dass bei zentraler Heizung der Vermieter oder die Eigentümergemeinschaft den Anbieter wäh… |
+| `c27c182c615bd7ca3b78` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Der Artikel behauptet, dass laut Bundesnetzagentur Preisänderungen klar angekündigt und begründet sein müssen, liefer… |
+| `e1e40e9bbbdd109df86e` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Es wird angegeben, dass bei einer Preisänderung in der Regel ein Sonderkündigungsrecht besteht, ohne dafür eine Quell… |
 
 ### `0aa915539d57841e5014`
 
@@ -781,7 +767,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Verbraucherzentrale-Bonusempfehlung verlinkt; BDEW 11,93 durch 12,23 (Herbst 2026, verlinkt) ersetzt; Zentralheizung-Formulierung präzisiert (Gebäudeeigentümer schließt Liefervertrag); Sonderkündigung mit Bundesnetzagentur-Kündigungsseite belegt.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `5e1be48085014a836807`
 
@@ -791,7 +777,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Verbraucherzentrale-Bonusempfehlung verlinkt; BDEW 11,93 durch 12,23 (Herbst 2026, verlinkt) ersetzt; Zentralheizung-Formulierung präzisiert (Gebäudeeigentümer schließt Liefervertrag); Sonderkündigung mit Bundesnetzagentur-Kündigungsseite belegt.
 
-- Im heutigen Text nicht mehr vorhanden: 11,93 Cent
+- Im heutigen Text nicht mehr vorhanden: 11,93 Cent
 
 ### `6fdf31c3b68b6122bd0d`
 
@@ -801,7 +787,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Verbraucherzentrale-Bonusempfehlung verlinkt; BDEW 11,93 durch 12,23 (Herbst 2026, verlinkt) ersetzt; Zentralheizung-Formulierung präzisiert (Gebäudeeigentümer schließt Liefervertrag); Sonderkündigung mit Bundesnetzagentur-Kündigungsseite belegt.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `c27c182c615bd7ca3b78`
 
@@ -811,7 +797,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Verbraucherzentrale-Bonusempfehlung verlinkt; BDEW 11,93 durch 12,23 (Herbst 2026, verlinkt) ersetzt; Zentralheizung-Formulierung präzisiert (Gebäudeeigentümer schließt Liefervertrag); Sonderkündigung mit Bundesnetzagentur-Kündigungsseite belegt.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `e1e40e9bbbdd109df86e`
 
@@ -821,22 +807,20 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Verbraucherzentrale-Bonusempfehlung verlinkt; BDEW 11,93 durch 12,23 (Herbst 2026, verlinkt) ersetzt; Zentralheizung-Formulierung präzisiert (Gebäudeeigentümer schließt Liefervertrag); Sonderkündigung mit Bundesnetzagentur-Kündigungsseite belegt.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
-
----
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro`
 
 - Datei-SHA256 (heute): `02bad0a9c2f2c3f0fb72d09f656eb2006659dc4fad89ebb96d53146f96ca7e9f`
-- Offene Befunde: **5**
+- Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `334751e6f61ad0033fe4` | luecke | 2026-11-04 · 1. Entscheidung | 20.000 kWh (Zeile 162); 360 € (Zeile 162) | Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt je… |
-| `36759a5efe5e8e5163d0` | luecke | 2026-11-04 · 1. Entscheidung | 6 % (Zeile 172) | Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt,… |
-| `942922d1afd7844618e9` | luecke | 2026-11-04 · 1. Entscheidung | 1 Cent (Zeile 7); 18.000 kWh (Zeile 7); 180 € (Zeile 7) | Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt rund 180 € im Jahr“ wird nicht belegt. |
-| `d41f0d5ce8798df0211b` | praezision | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“ ist ein Superlativ ohne messbare Dat… |
-| `e139d0769faadd04392a` | luecke | 2026-11-04 · 1. Entscheidung | alle Werte **nicht mehr im Text** | Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne Quellenangabe genannt. |
+| `334751e6f61ad0033fe4` | luecke | 2026-11-04 · 1. Entscheidung | 20.000 kWh in Zeile 163 ohne Kennzeichnung · 360 € in Zeile 163 ohne Kennzeichnung | Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quel… |
+| `36759a5efe5e8e5163d0` | luecke | 2026-11-04 · 1. Entscheidung | 6 % in Zeile 4 ohne Kennzeichnung | Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird o… |
+| `942922d1afd7844618e9` | luecke | 2026-11-04 · 1. Entscheidung | 1 Cent in Zeile 4 ohne Kennzeichnung · 18.000 kWh in Zeile 8 ohne Kennzeichnung · 180 € in Zeile 8 ohne Kennzeichnung | Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt rund 180 € im Jahr“ wird nicht belegt. |
+| `d41f0d5ce8798df0211b` | praezision | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“ ist ein Superlativ ohne messbare Daten oder… |
+| `e139d0769faadd04392a` | luecke | 2026-11-04 · 1. Entscheidung | nicht mehr im Text: 11,93 Cent | Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne Quellenangabe genannt. |
 
 ### `334751e6f61ad0033fe4`
 
@@ -846,8 +830,8 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Unbelegte 360-€-BNetzA-Zahl entfernt; 6-%-Faustwert der Verbraucherzentrale zugeordnet; 180-€-Rechnung als Rechenbeispiel mit Annahme gekennzeichnet; Superlativ 'Die besten Tarife' entfernt; BDEW-Wert auf 12,23 (Herbst 2026) aktualisiert.
 
-- `20.000 kWh` Zeile 162 (gekennzeichnet): „Rechenbeispiel ohne Marktversprechen: Liegen zwischen altem und neuem Tarif 1,8 Cent pro kWh, sind das bei 20.000 kWh rechnerisch 360 € im Jahr. Das ist nur ein Durchschnitt, kein persönliches Verspre“
-- `360 €` Zeile 162 (gekennzeichnet): „Rechenbeispiel ohne Marktversprechen: Liegen zwischen altem und neuem Tarif 1,8 Cent pro kWh, sind das bei 20.000 kWh rechnerisch 360 € im Jahr. Das ist nur ein Durchschnitt, kein persönliches Verspre“
+- Heute in Zeile 163: 20.000 kWh – **ohne** Kennzeichnung
+- Heute in Zeile 163: 360 € – **ohne** Kennzeichnung
 
 ### `36759a5efe5e8e5163d0`
 
@@ -857,7 +841,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Unbelegte 360-€-BNetzA-Zahl entfernt; 6-%-Faustwert der Verbraucherzentrale zugeordnet; 180-€-Rechnung als Rechenbeispiel mit Annahme gekennzeichnet; Superlativ 'Die besten Tarife' entfernt; BDEW-Wert auf 12,23 (Herbst 2026) aktualisiert.
 
-- `6 %` Zeile 172 (gekennzeichnet): „Pro Grad weniger Raumtemperatur sinkt der Heizbedarf nach der Faustregel der [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum“
+- Heute in Zeile 4: 6 % – **ohne** Kennzeichnung
 
 ### `942922d1afd7844618e9`
 
@@ -867,9 +851,9 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Unbelegte 360-€-BNetzA-Zahl entfernt; 6-%-Faustwert der Verbraucherzentrale zugeordnet; 180-€-Rechnung als Rechenbeispiel mit Annahme gekennzeichnet; Superlativ 'Die besten Tarife' entfernt; BDEW-Wert auf 12,23 (Herbst 2026) aktualisiert.
 
-- `1 Cent` Zeile 7 (gekennzeichnet): „Dieser Ablauf ist bewusst knapp gehalten im Modellfall. Nach 60 Minuten hast du keine perfekt eingestellte Heizung, aber eine klare Prioritätenliste. Bei 18.000 kWh Jahresverbrauch macht schon 1 Cent “
-- `18.000 kWh` Zeile 7 (gekennzeichnet): „Dieser Ablauf ist bewusst knapp gehalten im Modellfall. Nach 60 Minuten hast du keine perfekt eingestellte Heizung, aber eine klare Prioritätenliste. Bei 18.000 kWh Jahresverbrauch macht schon 1 Cent “
-- `180 €` Zeile 7 (gekennzeichnet): „Dieser Ablauf ist bewusst knapp gehalten im Modellfall. Nach 60 Minuten hast du keine perfekt eingestellte Heizung, aber eine klare Prioritätenliste. Bei 18.000 kWh Jahresverbrauch macht schon 1 Cent “
+- Heute in Zeile 4: 1 Cent – **ohne** Kennzeichnung
+- Heute in Zeile 8: 18.000 kWh – **ohne** Kennzeichnung
+- Heute in Zeile 8: 180 € – **ohne** Kennzeichnung
 
 ### `d41f0d5ce8798df0211b`
 
@@ -879,7 +863,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Unbelegte 360-€-BNetzA-Zahl entfernt; 6-%-Faustwert der Verbraucherzentrale zugeordnet; 180-€-Rechnung als Rechenbeispiel mit Annahme gekennzeichnet; Superlativ 'Die besten Tarife' entfernt; BDEW-Wert auf 12,23 (Herbst 2026) aktualisiert.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `e139d0769faadd04392a`
 
@@ -889,20 +873,18 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Unbelegte 360-€-BNetzA-Zahl entfernt; 6-%-Faustwert der Verbraucherzentrale zugeordnet; 180-€-Rechnung als Rechenbeispiel mit Annahme gekennzeichnet; Superlativ 'Die besten Tarife' entfernt; BDEW-Wert auf 12,23 (Herbst 2026) aktualisiert.
 
-- Im heutigen Text nicht mehr vorhanden: 11,93 Cent
-
----
+- Im heutigen Text nicht mehr vorhanden: 11,93 Cent
 
 ## `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage`
 
 - Datei-SHA256 (heute): `7f8e2a19d909e063f7e828bde8bafea29cab5ffed09a42083a4bfe9f8cb1ab07`
-- Offene Befunde: **3**
+- Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `58f03a64adaaf8125959` | praezision | 2026-11-04 · 1. Entscheidung | 0,4 % (Zeile 59) | Während der Artikel vor hohen Kosten für Festmenüs warnt, liegt die Preissteigerung bei Nahrungsmitteln laut D… |
-| `a7f5f01ef15a38839a0d` | praezision | 2026-11-04 · 1. Entscheidung | 10 % (Zeile 66); 14,9 % (Zeile 59) | Die Pauschale für 'Anreise und Mobilität' (10 % des Budgets) berücksichtigt nicht die überdurchschnittliche Pr… |
-| `bcc2bdf06220d5097133` | luecke | 2026-11-04 · 1. Entscheidung | 600 € (Zeile 59); 2,8 % (Zeile 59) | Die Modellrechnung für das Weihnachtsbudget (600 €) lässt die aktuelle Teuerungsrate unberücksichtigt. Laut St… |
+| `58f03a64adaaf8125959` | praezision | 2026-11-04 · 1. Entscheidung | 0,4 % in Zeile 60 gekennzeichnet | Während der Artikel vor hohen Kosten für Festmenüs warnt, liegt die Preissteigerung bei Nahrungsmitteln laut Destatis… |
+| `a7f5f01ef15a38839a0d` | praezision | 2026-11-04 · 1. Entscheidung | 10 % in Zeile 27 ohne Kennzeichnung · 14,9 % in Zeile 60 gekennzeichnet | Die Pauschale für 'Anreise und Mobilität' (10 % des Budgets) berücksichtigt nicht die überdurchschnittliche Preisstei… |
+| `bcc2bdf06220d5097133` | luecke | 2026-11-04 · 1. Entscheidung | 600 € in Zeile 60 gekennzeichnet · 2,8 % in Zeile 60 gekennzeichnet | Die Modellrechnung für das Weihnachtsbudget (600 €) lässt die aktuelle Teuerungsrate unberücksichtigt. Laut Statistis… |
 
 ### `58f03a64adaaf8125959`
 
@@ -912,7 +894,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Modellrechnung 600 € um Destatis-Einordnung Oktober 2026 (Inflation +2,8 %, Nahrungsmittel +0,4 %, Energie +14,9 %) ergänzt; Pauschalen als Beispielwerte gekennzeichnet.
 
-- `0,4 %` Zeile 59 (gekennzeichnet): „Zur Einordnung der Preise: Die Inflation lag im Oktober 2026 bei +2,8 %, Nahrungsmittel verteuerten sich mit +0,4 % deutlich schwächer, Energie dagegen mit +14,9 % stark ([Destatis – Verbraucherpreisi“
+- Heute in Zeile 60: 0,4 % – gekennzeichnet („modellrechnung“)
 
 ### `a7f5f01ef15a38839a0d`
 
@@ -922,8 +904,8 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Modellrechnung 600 € um Destatis-Einordnung Oktober 2026 (Inflation +2,8 %, Nahrungsmittel +0,4 %, Energie +14,9 %) ergänzt; Pauschalen als Beispielwerte gekennzeichnet.
 
-- `10 %` Zeile 66 (gekennzeichnet): „| Anreise | ca. 60 € | 10 % |“
-- `14,9 %` Zeile 59 (gekennzeichnet): „Zur Einordnung der Preise: Die Inflation lag im Oktober 2026 bei +2,8 %, Nahrungsmittel verteuerten sich mit +0,4 % deutlich schwächer, Energie dagegen mit +14,9 % stark ([Destatis – Verbraucherpreisi“
+- Heute in Zeile 27: 10 % – **ohne** Kennzeichnung
+- Heute in Zeile 60: 14,9 % – gekennzeichnet („modellrechnung“)
 
 ### `bcc2bdf06220d5097133`
 
@@ -933,21 +915,19 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Modellrechnung 600 € um Destatis-Einordnung Oktober 2026 (Inflation +2,8 %, Nahrungsmittel +0,4 %, Energie +14,9 %) ergänzt; Pauschalen als Beispielwerte gekennzeichnet.
 
-- `600 €` Zeile 59 (gekennzeichnet): „Zur Einordnung der Preise: Die Inflation lag im Oktober 2026 bei +2,8 %, Nahrungsmittel verteuerten sich mit +0,4 % deutlich schwächer, Energie dagegen mit +14,9 % stark ([Destatis – Verbraucherpreisi“
-- `2,8 %` Zeile 59 (gekennzeichnet): „Zur Einordnung der Preise: Die Inflation lag im Oktober 2026 bei +2,8 %, Nahrungsmittel verteuerten sich mit +0,4 % deutlich schwächer, Energie dagegen mit +14,9 % stark ([Destatis – Verbraucherpreisi“
-
----
+- Heute in Zeile 60: 600 € – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 60: 2,8 % – gekennzeichnet („modellrechnung“)
 
 ## `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust`
 
 - Datei-SHA256 (heute): `aaf1b8fc656815c4c592b37ab14b2c762b15fb7639bfc9498855d212a96d17ee`
-- Offene Befunde: **3**
+- Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `089b89138417e63a3dcf` | luecke | 2026-11-07 · 3. Entscheidung | kein Wert genannt (Aussage/Präzision) | Es fehlt der für Campingbuchungen relevante Regulierungsrahmen (Unterscheidung Mietrecht bei Stellplätzen vs. … |
-| `1158934e7a18c7b2099b` | luecke | 2026-11-07 · 3. Entscheidung | alle Werte **nicht mehr im Text** | Die Preisangabe von 20 bis 45 € pro Nacht wird als realistischer Wert positioniert, ist jedoch nicht durch Mar… |
-| `3716cfd3ab5aec6d774b` | praezision | 2026-11-07 · 3. Entscheidung | kein Wert genannt (Aussage/Präzision) | Der Verweis auf die Verbraucherzentrale zur Prüfung von Buchungsangaben führt auf eine allgemeine Übersichtsse… |
+| `089b89138417e63a3dcf` | luecke | 2026-11-07 · 3. Entscheidung | kein Wert genannt (Aussage/Präzision) | Es fehlt der für Campingbuchungen relevante Regulierungsrahmen (Unterscheidung Mietrecht bei Stellplätzen vs. Reisere… |
+| `1158934e7a18c7b2099b` | luecke | 2026-11-07 · 3. Entscheidung | nicht mehr im Text: 45 € | Die Preisangabe von 20 bis 45 € pro Nacht wird als realistischer Wert positioniert, ist jedoch nicht durch Marktdaten… |
+| `3716cfd3ab5aec6d774b` | praezision | 2026-11-07 · 3. Entscheidung | kein Wert genannt (Aussage/Präzision) | Der Verweis auf die Verbraucherzentrale zur Prüfung von Buchungsangaben führt auf eine allgemeine Übersichtsseite ohn… |
 
 ### `089b89138417e63a3dcf`
 
@@ -957,7 +937,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session bestätigt. Die pauschale Mietrechtszuordnung ist entfernt. Die neue Fassung unterscheidet nach konkret gebuchten Leistungen, Vertragspartner und Veranstalter/Vermittler-Rolle und verweist auf den VZ-Ratgeber.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `1158934e7a18c7b2099b`
 
@@ -977,22 +957,20 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session bestätigt. Der allgemeine VZ-Übersichtslink ist durch den konkreten Ratgeber Online-Reisebüros ersetzt und um einen Buchungscheck für Leistungsangaben, Anbieter, Endpreis und Storno ergänzt.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
-
----
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen`
 
 - Datei-SHA256 (heute): `6b994161e047d28d3f0958905dd549b169ebbe2dc908adea3033b81d42310a61`
-- Offene Befunde: **5**
+- Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `7067eabb89a917ae67a4` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu unklaren Angeboten und Problemen mit Onlin… |
-| `af2ccb4222eeb195222f` | praezision | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht automatisch, ob das Auto zum individuel… |
-| `d9c8b522bf1dcaed0340` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Verbraucherzentrale beschreibt, dass sich eine Pauschalreise unter bestimmten Bedingungen auf eine andere … |
+| `7067eabb89a917ae67a4` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu unklaren Angeboten und Problemen mit Online-Buchu… |
+| `af2ccb4222eeb195222f` | praezision | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht automatisch, ob das Auto zum individuellen Url… |
+| `d9c8b522bf1dcaed0340` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Verbraucherzentrale beschreibt, dass sich eine Pauschalreise unter bestimmten Bedingungen auf eine andere Person… |
 | `e2975509f3f130de0755` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Verbraucherzentrale empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im Blick zu behalten. |
-| `f1704e45e970a8f4b078` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Bei einer Pauschalreise gilt die Mitteilung als rechtzeitig, wenn sie dem Veranstalter spätestens sieben Tage … |
+| `f1704e45e970a8f4b078` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Bei einer Pauschalreise gilt die Mitteilung als rechtzeitig, wenn sie dem Veranstalter spätestens sieben Tage vor Rei… |
 
 ### `7067eabb89a917ae67a4`
 
@@ -1002,7 +980,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Verbraucherzentrale-Hinweise zu Buchungsproblemen, Übertragbarkeit von Pauschalreisen (§ 651e BGB, Sieben-Tage-Frist) und Budgetplanung artikel-eigen ergänzt; Mietwagen-Aussage präzisiert.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `af2ccb4222eeb195222f`
 
@@ -1012,7 +990,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Verbraucherzentrale-Hinweise zu Buchungsproblemen, Übertragbarkeit von Pauschalreisen (§ 651e BGB, Sieben-Tage-Frist) und Budgetplanung artikel-eigen ergänzt; Mietwagen-Aussage präzisiert.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `d9c8b522bf1dcaed0340`
 
@@ -1022,7 +1000,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Verbraucherzentrale-Hinweise zu Buchungsproblemen, Übertragbarkeit von Pauschalreisen (§ 651e BGB, Sieben-Tage-Frist) und Budgetplanung artikel-eigen ergänzt; Mietwagen-Aussage präzisiert.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `e2975509f3f130de0755`
 
@@ -1032,7 +1010,7 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Verbraucherzentrale-Hinweise zu Buchungsproblemen, Übertragbarkeit von Pauschalreisen (§ 651e BGB, Sieben-Tage-Frist) und Budgetplanung artikel-eigen ergänzt; Mietwagen-Aussage präzisiert.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ### `f1704e45e970a8f4b078`
 
@@ -1042,13 +1020,78 @@ betreffen alle den Artikel `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du
 
 > Verbraucherzentrale-Hinweise zu Buchungsproblemen, Übertragbarkeit von Pauschalreisen (§ 651e BGB, Sieben-Tage-Frist) und Budgetplanung artikel-eigen ergänzt; Mietwagen-Aussage präzisiert.
 
-- Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+## `2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang`
+
+- Datei-SHA256 (heute): `d2e6413dcd25664720e776b35253dc2d483b322c861dc7191f8ea34ab2cce910`
+- Offene Live-Befunde: **5**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `4284fd2d9c9005e7af8f` | praezision | 2026-11-05 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Behauptung, dass Überladung der Maschine zu schnellerem Verschleiß und teuren Reparaturen führt, wird ohne konkrete D… |
+| `84e247f17354e224c973` | praezision | 2026-11-05 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Aussage, dass das richtige Beladen allein die Fixkosten senkt, ohne weitere Maßnahmen, ist ein pauschales Leistungsve… |
+| `a2a7dc69f10393af6531` | luecke | 2026-11-05 · 1. Entscheidung | nicht mehr im Text: 0,40 €, 0,005 € · 0,9 kWh in Zeile 19 gekennzeichnet · 0,6 kWh in Zeile 122 ohne Kennzeichnung · 22 € in Zeile 119 ohne Kennzeichnung | Die Modellrechnung (0,9 kWh/50 L bei vollem Waschgang, 0,6 kWh/35 L bei halbem Waschgang, Strompreis 0,40 €/kWh, Wass… |
+| `cb794331f1cc0c715a55` | luecke | 2026-11-05 · 1. Entscheidung | 5 € in Zeile 19 gekennzeichnet | Die Aussage, dass bei 4 Waschgängen pro Woche ein durchschnittlicher Haushalt rund 5 € jährlich an Strom‑ und Wasserk… |
+| `e6729081522126e972c2` | luecke | 2026-11-05 · 1. Entscheidung | nicht mehr im Text: 15 % · 80 % in Zeile 132 gekennzeichnet | Angabe, dass ein optimal beladener Trommel (ca. 80 % Kapazität) bis zu 15 % weniger Wasser und Energie verbraucht, wi… |
+
+### `4284fd2d9c9005e7af8f`
+
+**Befund:** Behauptung, dass Überladung der Maschine zu schnellerem Verschleiß und teuren Reparaturen führt, wird ohne konkrete Daten oder Messgröße angegeben.
+
+**Frühere Entscheidung (2026-11-05):** Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026
+
+> Heutiger Text geprueft: Überladung behauptet heute nur noch kauselich ('kann die Lager beschädigen'), keine konkreten Reparaturkosten oder Verschleißdaten mehr als Tatsache.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `84e247f17354e224c973`
+
+**Befund:** Aussage, dass das richtige Beladen allein die Fixkosten senkt, ohne weitere Maßnahmen, ist ein pauschales Leistungsversprechen ohne Nennung von Mechanismen oder Grenzen.
+
+**Frühere Entscheidung (2026-11-05):** Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026
+
+> Heutiger Text geprueft: 'richtiges Beladen senkt die Fixkosten' heute als Moglichkeit ('kann die Fixkosten senken') und als Modellbeispiel dargestellt, nicht als pauschales Leistungsversprechen.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `a2a7dc69f10393af6531`
+
+**Befund:** Die Modellrechnung (0,9 kWh/50 L bei vollem Waschgang, 0,6 kWh/35 L bei halbem Waschgang, Strompreis 0,40 €/kWh, Wasserpreis 0,005 €/L) und die daraus resultierende Jahresersparnis von 22 € fehlen einer fundierten Quelle.
+
+**Frühere Entscheidung (2026-11-05):** Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026
+
+> Heutiger Text geprueft: Modellrechnung (0,9 kWh/50 L, 0,6 kWh/35 L, 0,40 €/kWh, 0,005 €/L, 22 €/Jahr) steht heute durchgehend als 'Ergebnis der Modellrechnung' mit offengelegten Annahmen da; keine Außenbehauptung mehr.
+
+- Im heutigen Text nicht mehr vorhanden: 0,40 €, 0,005 €
+- Heute in Zeile 19: 0,9 kWh – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 122: 0,6 kWh – **ohne** Kennzeichnung
+- Heute in Zeile 119: 22 € – **ohne** Kennzeichnung
+
+### `cb794331f1cc0c715a55`
+
+**Befund:** Die Aussage, dass bei 4 Waschgängen pro Woche ein durchschnittlicher Haushalt rund 5 € jährlich an Strom‑ und Wasserkosten spart, ist nicht mit einer Quelle belegt.
+
+**Frühere Entscheidung (2026-11-05):** Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026
+
+> Heutiger Text geprueft: 'rund 5 € jährlich' steht heute nur noch als Modelljahr-Beispiel ('im Modelljahr rund 5 €'), keine versprochene Ersparnis mehr.
+
+- Heute in Zeile 19: 5 € – gekennzeichnet („modellrechnung“)
+
+### `e6729081522126e972c2`
+
+**Befund:** Angabe, dass ein optimal beladener Trommel (ca. 80 % Kapazität) bis zu 15 % weniger Wasser und Energie verbraucht, wird nicht durch eine Quelle belegt.
+
+**Frühere Entscheidung (2026-11-05):** Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026
+
+> Heutiger Text geprueft: '80 % Kapazität / bis zu 15 % weniger' steht heute nur noch als gekennzeichnetes Modellbeispiel mit Beispielwerten, keine Tatsachenbehauptung mehr.
+
+- Im heutigen Text nicht mehr vorhanden: 15 %
+- Heute in Zeile 132: 80 % – gekennzeichnet („modellrechnung“)
 
 ---
 
-**Summe: 77 offene Befunde auf 19 Artikeln.**
-
-## Entscheidungsbefehl (eine Zeile je Befund)
+## Schließweg (eine Zeile je Befund)
 
 ```bash
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 30caa57be394afb62947 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
@@ -1128,5 +1171,15 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden af2ccb4222eeb195222
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d9c8b522bf1dcaed0340 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e2975509f3f130de0755 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f1704e45e970a8f4b078 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4284fd2d9c9005e7af8f --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 84e247f17354e224c973 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden a2a7dc69f10393af6531 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden cb794331f1cc0c715a55 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden e6729081522126e972c2 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_akte.py --schreiben
+python3 scripts/release_scorecard.py --live --streng
 ```
 
+_Jede Entscheidung ist fassungsgebunden: Sie gilt für den heute geprüften
+Text (Projektion `betrieb-v3`). Ändert sich ein Satz, öffnet der Befund
+erneut – das ist gewollt. Abgeleitete Blöcke und Leerzeilen öffnen nichts._

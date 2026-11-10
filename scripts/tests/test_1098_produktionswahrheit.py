@@ -204,5 +204,57 @@ class BestandUndErzeuger(unittest.TestCase):
         self.assertEqual(len(befunde), 1)
 
 
+class Entscheidungsvorlage(unittest.TestCase):
+    """Das F4-Dossier darf der Wirklichkeit nicht hinterherlaufen (#1098).
+
+    In der ersten Runde war die Vorlage von Hand gebaut; fünf Befunde, die ein
+    Automatik-Lauf danach fand, fehlten. Ein Dossier, das unvollständig ist,
+    ist kein Schließweg – diese Tests erzwingen Vollständigkeit und Aktualität.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        import faktenfrische_befund_akte as akte
+        import f4_entscheidungsvorlage as vorlage
+        cls.akte, cls.vorlage = akte, vorlage
+        cls.live = akte.live_seiten()
+        cls.befunde = [b for b in ledger.befunde_mit_status() if b["slug"] in cls.live]
+        cls.text = vorlage.ZIEL.read_text(encoding="utf-8")
+
+    def test_jeder_offene_live_befund_steht_im_dossier(self):
+        fehlend = [b["id"] for b in self.befunde if b["id"] not in self.text]
+        self.assertEqual(fehlend, [], "Befunde ohne Dossier-Eintrag")
+
+    def test_jeder_befund_hat_einen_schliessweg(self):
+        fehlend = [b["id"] for b in self.befunde
+                   if f"--entscheiden {b['id']}" not in self.text]
+        self.assertEqual(fehlend, [], "Befunde ohne fertige Schließzeile")
+
+    def test_dossier_ist_aktuell(self):
+        self.assertEqual(self.vorlage.main(["--check"]), 0,
+                         "F4-ENTSCHEIDUNGSVORLAGE.md ist veraltet – "
+                         "python3 scripts/f4_entscheidungsvorlage.py")
+
+    def test_dossier_entscheidet_nichts(self):
+        # Kein Ledger-Schreibaufruf, kein „entschieden“-Status: reine Projektion.
+        for verboten in ("--entscheiden " + "'", "--von \"Frank Hartung\""):
+            self.assertNotIn(verboten, self.text)
+        self.assertIn("nichts entschieden", self.text)
+
+    def test_werte_regex_verwechselt_jahreszahl_nicht_mit_betrag(self):
+        # Lehre aus der ersten Handfassung: „2026“ ist kein Geldbetrag.
+        self.assertEqual(self.vorlage.werte("Stand 2026 ohne Quelle"), [])
+        self.assertEqual(self.vorlage.werte("rund 360 € Ersparnis"),
+                         [("360", "€")])
+
+    def test_heutige_lage_erkennt_kennzeichnung(self):
+        text = "Zeile\nDer Strompreis liegt bei 0,40 €/kWh als Modellwert."
+        _, lang = self.vorlage.lage(text, "Strompreis von 0,40 €/kWh ohne Quelle")
+        self.assertIn("gekennzeichnet", lang)
+        _, lang = self.vorlage.lage("Der Strompreis liegt bei 0,40 €/kWh.",
+                                    "Strompreis von 0,40 €/kWh ohne Quelle")
+        self.assertIn("ohne** Kennzeichnung", lang)
+
+
 if __name__ == "__main__":
     unittest.main()
