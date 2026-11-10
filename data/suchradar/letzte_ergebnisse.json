@@ -1,5 +1,5 @@
 {
- "zeitstempel": "2026-11-09T16:32:27.298753+02:00",
+ "zeitstempel": "2026-11-10T15:56:17.465413+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 25,
  "zaehlung": {
@@ -125,16 +125,6 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Tibber Alternative",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
    "anfrage": "Tierarzt Rücklage",
    "eigener_rang": 0,
    "vorher": 0,
@@ -246,6 +236,16 @@
   },
   {
    "anfrage": "Urlaub",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Urlaub Mietwagen",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
