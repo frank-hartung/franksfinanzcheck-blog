@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-09 12:25:12 UTC",
+ "generated_at": "2026-11-10 12:00:17 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 119,
- "checked_links": 279,
+ "checked_articles": 127,
+ "checked_links": 302,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -151,50 +151,6 @@
    "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Pauschalreisen“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   },
   {
-   "code": "IW2",
-   "slug": "2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-   "line": 184,
-   "route": "allgemein",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
-   "slug": "2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-   "line": 18,
-   "route": "allgemein",
-   "slot": "top",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "top-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
-   "slug": "2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-   "line": 60,
-   "route": "allgemein",
-   "slot": "mid",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "mid-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
-   "slug": "2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-   "line": 132,
-   "route": "allgemein",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
    "code": "IW4",
    "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
    "line": 26,
@@ -226,6 +182,72 @@
    "severity": "P3",
    "blocking": false,
    "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Mietwagen“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-09-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
+   "line": 183,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-09-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
+   "line": 199,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif",
+   "line": 110,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Handytarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-09-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+   "line": 18,
+   "route": "allgemein",
+   "slot": "top",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "top-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-09-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+   "line": 60,
+   "route": "allgemein",
+   "slot": "mid",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "mid-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-09-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+   "line": 132,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   }
  ],
  "errors": []
