@@ -23,7 +23,7 @@
 #   · fail-closed sichtbar – ein roter Lauf heißt „Akte konnte nicht
 #     nachziehen“, nie „es ist alles gut“ (C33);
 #   · kein Selbst-Trigger (die eigenen Commits berühren nur Akte/Stand und
-#     stehen nicht unter `paths:`).
+#     stehen nicht unter `paths:`). Der Zeitlauf fängt Bot-Pushes auf.
 name: Befundakte nachziehen
 
 on:
@@ -40,19 +40,27 @@ on:
       - "scripts/faktenfrische_befund_ledger.py"
       # Wird aufgerufen (git_sync.sh) – W1 des Trigger-Wache.
       - "scripts/git_sync.sh"
+      - "scripts/befund_akte_sync.sh"
+      - "data/release_scorecard_state.json"
+      - "data/agent_reach/faktenfrische.yaml"
       - ".github/workflows/befund-akte-nachziehen.yml"
+  # GITHUB_TOKEN- und [skip ci]-Commits lösen keinen Push-Lauf aus.
+  # Ein unabhängiger Zeitlauf schließt diese Lücke (Best Effort bei GitHub).
+  schedule:
+    - cron: "47 */3 * * *"
   workflow_dispatch: {}
 
 permissions:
   contents: write
 
 concurrency:
-  # Nie zwei Selbstheilungs-Läufe gleichzeitig – der letzte gewinnt.
+  # Nie zwei Selbstheilungs-Läufe gleichzeitig; kein laufender Push wird abgebrochen.
   group: befund-akte-nachziehen
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   nachziehen:
+    if: github.ref == 'refs/heads/main'
     name: Akte & Stand neu erzeugt, nur bei Änderung committet
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -69,6 +77,9 @@ jobs:
       - name: Messwerkzeug vervollständigen (PyYAML)
         run: python3 -m pip install -q --disable-pip-version-check --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
 
+      - name: Nachlauf und Push-Rennen regressionstesten
+        run: python3 -m unittest -v scripts.tests.test_befund_akte_nachlauf
+
       # STRUKTUR ZUERST (08.11.2026, #1098): Die Akte kann eine kaputte
       # Schließakte nicht lesen – und eine kaputte Schließakte entsteht lautlos,
       # weil YAML doppelte Schlüssel still überschreibt. Der Heiler läuft
@@ -84,32 +95,20 @@ jobs:
           python3 scripts/faktenfrische_befund_ledger.py --struktur-pruefen \
             | tee -a "$GITHUB_STEP_SUMMARY"
 
-      - name: Akte neu erzeugen und bei Änderung committen
+      # Reparaturen an der menschlichen Schließakte zuerst gesondert sichern.
+      # Danach wird die Projektion auf dem neuesten main neu berechnet; ein
+      # Push-Rennen führt zu erneuter Berechnung, niemals zu blindem Rebase.
+      - name: Strukturreparatur sichern
         env:
           GIT_USER: Faktenfrische-Akte-Bot
           GIT_MAIL: faktenfrische-bot@users.noreply.github.com
         run: |
-          python3 scripts/faktenfrische_befund_akte.py --schreiben \
-            | tee -a "$GITHUB_STEP_SUMMARY"
-          if git diff --quiet -- BEFUND-AKTE.md data/faktenfrische_befunde_state.json; then
-            echo "Akte ist auf dem Stand der Warteschlange."
-          elif git diff -I'^[[:space:]]*"erzeugt":' --quiet \
-                     -- BEFUND-AKTE.md data/faktenfrische_befunde_state.json; then
-            # Gleicher Stand außer Erzeugungszeitpunkt (läuft bei JEDEM
-            # Lauf – sonst committete der Bot die Uhr statt des Befunds).
-            git checkout -- BEFUND-AKTE.md data/faktenfrische_befunde_state.json
-            echo "Nur Erzeugungszeitpunkt – kein Commit."
-          else
-            bash scripts/git_sync.sh \
-              "chore(faktenfrische): Akte und Stand nachgezogen [skip ci]" \
-              BEFUND-AKTE.md \
-              data/faktenfrische_befunde_state.json
-          fi
-          # Die strukturelle Heilung der Schließakte ist ein eigener Commit:
-          # Sie ändert Beweisstand, nicht Redaktion – und der nächste Lauf soll
-          # nicht dieselbe Reparatur wiederholen (#1098).
+          set -Eeuo pipefail
           if ! git diff --quiet -- data/faktenfrische_entscheidungen.yaml; then
             bash scripts/git_sync.sh \
               "chore(faktenfrische): Schließakte strukturell geheilt (#1098) [skip ci]" \
               data/faktenfrische_entscheidungen.yaml
           fi
+
+      - name: Akte auf aktuellem main nachziehen
+        run: bash scripts/befund_akte_sync.sh | tee -a "$GITHUB_STEP_SUMMARY"
