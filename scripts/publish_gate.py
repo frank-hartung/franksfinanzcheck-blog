@@ -727,6 +727,47 @@ def uniqueness_failures(candidates):
         return {}, f"Einzigartigkeits-Wache nicht auswertbar: {exc}"
 
 
+def kurzantwort_failures(candidates):
+    """Gate-Kontrolle: jeder veröffentlichte Beitrag braucht eine Kurzantwort.
+
+    Hintergrund #1110 (06.11.2026): Der automatische Kadenz-/Titel-/Cover-
+    Lauf (Commit `0b55fca`) entfernte die artikelbezogene `kurzantwort` aus
+    einem bereits freigegebenen Post, und das Publish-Gate bemerkte es nicht
+    – es gab schlicht keine Prüfung für das Frontmatter-Feld. Die
+    Metadaten-Wache erkennt den Mangel als M4 („Kurzantwort fehlt“), blockt
+    aber nicht; das harte Pre-Publish-Gate ist die letzte Stelle vor dem
+    Deploy und darf eine still entfernte Kurzantwort nicht durchwinken.
+
+    Regel: Jeder Kandidat aus `content/posts/` mit `draft: false` braucht ein
+    nicht-leeres `kurzantwort` im Frontmatter. Fehlt es, wird der Kandidat
+    zurückgestellt – konsistent mit den anderen inhaltlichen Gate-Fällen
+    (heutige Neu-Artikel werden wie üblich verworfen, ältere Re-Queue-Posts
+    auf `draft` gehalten; der Content bleibt erhalten, die Redaktion ergänzt
+    die Kurzantwort und gibt frei).
+
+    Rückgabe: ({slug: [grund]}, None). Ein Werkzeugfehler ist hier nicht
+    vorgesehen: das Frontmatter liegt vor und wird zeilenweise gelesen.
+    """
+    fehlend = {}
+    for slug in candidates:
+        path = os.path.join(POSTS_DIR, slug, "index.md")
+        if not os.path.exists(path):
+            continue
+        try:
+            with open(path, encoding="utf-8") as fh:
+                content = fh.read()
+        except OSError:
+            continue
+        match = re.search(r"(?m)^kurzantwort:\s*(.+?)\s*$", content)
+        wert = (match.group(1) or "").strip().strip('"').strip("'") if match else ""
+        if not wert:
+            fehlend[slug] = [
+                "Kurzantwort fehlt – veröffentlichte Ratgeber brauchen ein "
+                "nicht-leeres `kurzantwort` im Frontmatter (M4, #1110)"
+            ]
+    return fehlend, None
+
+
 def r5_self_heal_candidates(candidates):
     """Letzte deterministische Heilung für R5-ABSATZ-HART.
 
@@ -978,6 +1019,7 @@ def main():
     understanding_fail, understanding_warn = textverstaendnis_failures(candidates)
     duplicate_fail, duplicate_tool_error = duplicate_failures(candidates)
     uniq_fail, uniq_tool_error = uniqueness_failures(candidates)
+    kurz_fail, kurz_tool_error = kurzantwort_failures(candidates)
     for w in (len_warn, seo_warn, facts_warn):
         if w:
             print(f"⚠ {w}")
@@ -1154,6 +1196,9 @@ def main():
             reasons.append("Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche "
                            "Passage/Titel-Zwilling gegen den Bestand, #714): "
                            + "; ".join(uniq_fail[slug]))
+        if slug in kurz_fail:
+            reasons.append("Kurzantwort-Gate nicht bestanden: "
+                           + "; ".join(kurz_fail[slug]))
 
         if reasons:
             if slug in review_high_risk and slug in review_fail:
