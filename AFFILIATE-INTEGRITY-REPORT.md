@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-11-08 11:02:04 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-11-10 12:00:14 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 78 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
+**Geprüfte Live-Artikel:** 80 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -90,6 +90,8 @@
 | 2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht | 3 → 3 ✅ | /go/allgemein/ |
 | 2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege | 1 → 2 ✅ | /go/fluege/ |
 | 2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar | 2 → 3 ✅ | /go/strom/ |
+| 2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem | 1 → 3 ✅ | /go/gas/ |
+| 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang | 2 → 3 ✅ | /go/strom/ |
 
 ## Hinweise (nicht blockierend)
 

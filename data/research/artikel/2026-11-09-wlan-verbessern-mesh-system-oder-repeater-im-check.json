@@ -1,0 +1,82 @@
+{
+  "slug": "2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check",
+  "titel": "WLAN verbessern: Mesh-System oder Repeater im Check?",
+  "erzeugt": "2026-11-10 12:55 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 0,
+    "klasse": "YMYL",
+    "grund": "Erstrecherche – noch nie faktengeprüft",
+    "alter_tage": null,
+    "intervall": 45,
+    "frist": null,
+    "restlaufzeit": null
+  },
+  "geo": {
+    "punkte": 3,
+    "maximum": 6,
+    "prozent": 50,
+    "offen": [
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)",
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
+      "Sichtbares Prüfdatum (`faktencheck:`)"
+    ],
+    "treffer": {
+      "kurzantwort": false,
+      "faq": true,
+      "quellen": false,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": false
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesnetzagentur.de",
+      "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "datum": "",
+      "quelle": "bundesnetzagentur.de",
+      "kanal": "web",
+      "auszug": "*   [_Fachthemen_](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/DE/Themen/start.html \"erster Klick öffnet das Untermenü, zweiter Klick geht zur Zielseite\")\n    *   [Energie](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/DE/Fachthemen/ElektrizitaetundGas/start.html)\n    *   [_Telekom­munikation_](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/DE/Fachthemen/Telekommunikation/start.html)\n        *   [Breitbandversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/DE/Fachthemen/Telekommunikation/Breitband/start.html)\n        *   [Kupfer-Glas-Migration](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/DE/Fachthemen/Telekommunikation/Kupfer-Glas/start.html)\n        *   [Funk und Frequenzen](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/DE/Fachthemen/Telekommunikation/Frequenzen/start.html)\n        *   [Nummerierung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/DE/Fachthemen/Telekommunikation/Nummerierung/start.html)\n        *   [Unternehmenspflichten](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/DE/Fachthemen/Telekommunikation/Unternehmenspflichten/start.html)\n        *   [Technik und Produktsicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/DE/Fachthemen/Telekommunikation/Technik/start.html)\n        *   [Öffentliche Sicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/DE/Fachthemen/Telekommunikation/OeffentlicheSicherheit/start.html)\n        *   [Grundversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/DE/Fachthemen/Telekommunikation/Grundversorgung/start.html)\n            *   [Allgemeines](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunika",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Bundesnetzagentur",
+      "rang": 1,
+      "zitierbar": false
+    },
+    {
+      "titel": "EU-Förderbank: Zehn Milliarden Euro für Europas Tech-Unternehmen",
+      "url": "https://www.heise.de/news/EU-Foerderbank-Zehn-Milliarden-Euro-fuer-Europas-Tech-Unternehmen-11517852.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+      "datum": "2026-11-09T16:56",
+      "quelle": "heise online",
+      "kanal": "rss",
+      "auszug": "Milliardeninvestitionen sollen Europas Tech-Firmen wachsen lassen. Dafür tun sich private Investoren mit EU-Institutionen und Mitgliedsländern zusammen.",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "heise online",
+      "rang": 3,
+      "zitierbar": false
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Der Ratgeber thematisiert den Anbieterwechsel und Bandbreiten, lässt aber den regulatorischen Rahmen der Bundesnetzagentur zur Breitbandversorgung und zum Verbraucherschutz bei Minderleistung unerwähnt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die pauschale Behauptung, Hardware bleibe stets Eigentum des Nutzers, ist unpräzise, da die Bundesnetzagentur die Kupfer-Glas-Migration begleitet, die oft providerseitige Technikwechsel und neue Netzabschlusspunkte erfordert.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Aussagen zu Markttrends wie hohen Neukundenrabatten und Wechselprämien werden als Marktfakten ohne Bezug zu offiziellen Referenzwerten oder Berichten der Aufsichtsbehörde dargestellt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    }
+  ],
+  "fehler": [],
+  "fassung_sha256": "d88c015c6b529777b36be86e867b4003161fa4dc5eb5c6ba17827279eade94a1",
+  "text_sha256": "1d237b82439ebe1268cebba41c54d677f84b994eadacc34da7441b098920260e",
+  "fachpruefung": "geprüft (gemini:gemini-3-flash-preview)"
+}

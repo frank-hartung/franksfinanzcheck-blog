@@ -1106,6 +1106,36 @@ jobs:
               || true
           fi
 
+      # ABGELEITETE REGISTER FOLGEN IHRER QUELLE (09.11.2026).
+      # `data/fachpruefung_register.yaml` ist eine Ableitung aus dem Live-Bestand.
+      # Die Gates oben heilen laufend Inhalt (Titel, Links, Formulierungen); die
+      # Ableitung zog niemand nach. Im Lauf 42609545452 war deshalb
+      # `test_register_ist_aktuell` rot, obwohl der Bestand KORREKT war – Wochen
+      # nach der Heilung, weil die Suite das einzige war, das die Kopie ansah.
+      # Die Regel: eine Ableitung folgt ihrer Quelle im SELBEN Commit (wie das
+      # LCP-Manifest oben). Der Nachzug ist deterministisch, ohne Netz, ohne KI
+      # und idempotent; er läuft VOR `gate_diff`, damit die Änderung im selben
+      # Heilungs-Commit landet und den Rebuild auslöst.
+      # Fail-closed nur für das kaputte WERKZEUG (Selbsttest); ein Restbefund
+      # am Register wird gemeldet statt die Auslieferung als Geisel zu nehmen
+      # (C34 – und der Test in `scripts/tests/test_abgeleitete_register.py`
+      # färbt ihn rot, statt dass es niemand merkt).
+      - name: Abgeleitete Register – Selbsttest (Nachzug muss lauffähig sein)
+        run: python3 scripts/abgeleitete_register.py --selftest
+
+      - name: Abgeleitete Register nachziehen (Ableitung folgt ihrer Quelle)
+        run: |
+          set +e
+          python3 scripts/abgeleitete_register.py --fix
+          nachzug=$?
+          set -e
+          if [ "$nachzug" -ne 0 ]; then
+            echo "⚠ Register-Nachzug unvollständig (Exit $nachzug) – Ableitung bleibt auf altem Stand."
+            python3 scripts/werkzeugbefund.py --melden "abgeleitete-register" \
+              "Der Nachzug abgeleiteter Register ist gescheitert (Exit $nachzug). Die Artefakte (u.a. data/fachpruefung_register.yaml) bleiben auf dem alten Stand; der Test scripts/tests/test_abgeleitete_register.py macht das sichtbar. Kein Geiselnehmen der Auslieferung (C34)." \
+              || true
+          fi
+
       - name: Gate-Heilungsdiff merken (alle Gates, inkl. Publish-Gate)
         id: gate_diff
         run: |

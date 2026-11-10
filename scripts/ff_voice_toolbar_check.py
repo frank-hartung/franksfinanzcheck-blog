@@ -159,6 +159,20 @@ def main() -> int:
     # ---------- 4 · Engine ----------
     engine = read(ENGINE)
     check("Engine vorhanden", bool(engine), ENGINE)
+    # WCAG 2.5.3 / axe label-content-name-mismatch: every dynamic accessible
+    # name must begin with the visible label, not merely contain a paraphrase.
+    for phrase in (
+        "playAria: 'Vorlesen – KI-Stimme:",
+        "playAriaNeutral: 'Vorlesen – KI-Stimme:",
+        "pauseAria: 'Pausieren – KI-Stimme", "resumeAria: 'Weiterlesen – KI-Stimme",
+        "stopAria: 'Beenden –", "playAria: 'Listen – AI voice:",
+        "playAriaNeutral: 'Listen – AI voice:", "pauseAria: 'Pause – AI voice",
+        "resumeAria: 'Resume – AI voice", "stopAria: 'Stop –",
+    ):
+        check("Engine: sichtbarer Text führt zugänglichen Namen an (%s)" % phrase.split(":")[0],
+              phrase in engine)
+    check("Partial: initialer Name beginnt mit sichtbarem Vorlesen-Text",
+          'Vorlesen – KI-Stimme:' in partial)
     check("Engine: Version geführt", "VOICE_VERSION" in engine)
     check("Engine: keine Debug-Ausgaben", "console.log" not in engine)
     check("Engine: keine Tracking-Aufrufe",

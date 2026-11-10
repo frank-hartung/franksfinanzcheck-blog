@@ -229,7 +229,7 @@ function pageHtml({ speech = 'double', speechMode = 'working', speechVoices = 'm
 <div class="ff-voice-bar__nav" role="group">
 <button type="button" id="ff-voice-prev" aria-label="Vorheriger Abschnitt"></button>
 <button type="button" id="ff-voice-next" aria-label="Nächster Abschnitt"></button>
-<button type="button" id="ff-voice-stop" aria-label="Vorlesen beenden"></button>
+<button type="button" id="ff-voice-stop" aria-label="Beenden – Vorlesen stoppen"></button>
 </div>
 <button type="button" id="ff-voice-summary" aria-haspopup="dialog"><span id="ff-voice-summary-label">Kurzfassung</span></button>
 <div class="ff-voice-bar__meta"><span id="ff-voice-remaining"></span><span id="ff-voice-status" role="status" aria-live="polite"></span></div>

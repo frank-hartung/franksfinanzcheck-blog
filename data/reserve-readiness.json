@@ -1,45 +1,75 @@
 {
   "target": 6,
-  "ready": 1,
-  "pool_size": 6,
-  "generated_at": "2026-11-06T14:16:14Z",
+  "ready": 5,
+  "pool_size": 12,
+  "generated_at": "2026-11-10T12:23:40Z",
   "candidates": [
     {
-      "slug": "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem",
-      "ready": false,
-      "sha256": "ad0969c0a822afc57b2282b2d9f66fb4d39733404375d046a7826bfd20ceda8e",
-      "measured_at": "2026-11-06T11:22:44Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
-    },
-    {
       "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
-      "ready": false,
-      "sha256": "a9ca42a6a43af5b859bdc5e4460e06fbc7e9e4919345f89d062863cf07ba8456",
-      "measured_at": "2026-11-06T11:23:48Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
+      "ready": true,
+      "sha256": "9d7543eee4977a8762d862a6fc40079ef3046225a63e0712fe4fb31af02f7caf",
+      "flesch": 67.3,
+      "measured_at": "2026-11-10T12:09:21Z",
+      "score": 0.962,
+      "parts": {
+        "spelling": 0.88,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.96,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
     },
     {
       "slug": "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck",
-      "ready": false,
-      "sha256": "722e590d7e31e5406851c4b421c5c3130c816ef23b6f3986fb2f25c102db8f7b",
-      "measured_at": "2026-11-06T11:24:52Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
+      "ready": true,
+      "sha256": "301d266e2a34c74147914c134391e511a427c35ffd800b0b15a1fe36b20732e1",
+      "flesch": 72.0,
+      "measured_at": "2026-11-10T12:10:47Z",
+      "score": 0.952,
+      "parts": {
+        "spelling": 0.9,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.92,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.9
+      }
     },
     {
-      "slug": "2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
+      "slug": "2026-11-09-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
+      "ready": true,
+      "sha256": "9e84128b5e56c55e543679b023ced0690b0ae0fda47e0c0700f9b51bf1634f27",
+      "flesch": 66.4,
+      "measured_at": "2026-11-10T12:12:16Z",
+      "score": 0.918,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 0.85,
+        "structure": 1.0,
+        "typography": 0.9,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
       "ready": false,
-      "sha256": "889161232b1b47285215bf72e73587d9489c83bc133b2bba15b077742539ecac",
-      "flesch": 66.1,
-      "measured_at": "2026-11-06T14:16:14Z",
+      "sha256": "d6b2d353485fa4667e0dcc9e1f0c4468739b7e888ce2faf6b26781958dbef93f",
+      "flesch": 66.2,
+      "measured_at": "2026-11-10T12:13:39Z",
       "reason": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: ide",
       "details": [
-        "🛑 2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
+        "🛑 2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…hinweis dieser artikel dient ausschließlich der allgemeinen information und stellt…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…keine anlage rechts oder steuerberatung dar prüfe konditionen und bedingungen…“ – doppelte Passage, manuell reparieren",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
-      "score": 0.972,
+      "score": 0.968,
       "parts": {
-        "spelling": 0.92,
+        "spelling": 0.9,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.98,
@@ -49,40 +79,179 @@
       }
     },
     {
-      "slug": "2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "slug": "2026-11-10-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
       "ready": false,
-      "sha256": "dbd4d9293d2dbfad330da6d9b281e58fc454bbdb533793ea1f371ded48734bdd",
-      "measured_at": "2026-11-06T11:26:58Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
+      "sha256": "5f0e2585f27b9a57676b905aee13c9374e06d9ff72d0a1dc6f8241f44bdddc9f",
+      "flesch": 62.1,
+      "measured_at": "2026-11-10T12:15:02Z",
+      "reason": "Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-Zwilling gegen den Bestand, #714): U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem (z. B. „du eine feste menge gas ",
+      "details": [
+        "🛑 2026-11-10-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-Zwilling gegen den Bestand, #714): U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem (z. B. „du eine feste menge gas verbrauchst du“) – ab 5 ist es Dopplung, Passage umschreiben",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.97,
+      "parts": {
+        "spelling": 0.96,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 0.9,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
     },
     {
-      "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
-      "ready": true,
-      "sha256": "bacd1b5062e4111bdfa8badd784d1d919c9a052ccf69c6787db9b5e209dc4e73",
-      "flesch": 61.7,
-      "measured_at": "2026-11-06T11:28:05Z",
-      "score": 0.928,
+      "slug": "2026-11-10-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
+      "ready": false,
+      "sha256": "263c5b3d020cb7d8f965be8a8e139f1fd439bf0245076f7fc4ee3a9cd424780c",
+      "flesch": 63.8,
+      "measured_at": "2026-11-10T12:16:30Z",
+      "reason": "Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-Zwilling gegen den Bestand, #714): U1-PHRASEN: 5 gleiche 7-Wort-Phrasen mit 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang (z. B. „bares geld ein haeufi",
+      "details": [
+        "🛑 2026-11-10-geschirrspueler-voll-so-sparst-du-wasser-und-strom: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-Zwilling gegen den Bestand, #714): U1-PHRASEN: 5 gleiche 7-Wort-Phrasen mit 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang (z. B. „bares geld ein haeufiger fehler ist das“) – ab 5 ist es Dopplung, Passage umschreiben",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+      ],
+      "score": 0.938,
       "parts": {
         "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.88,
+        "typography": 0.98,
+        "uniqueness": 0.9,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "ready": false,
+      "sha256": "6de768e2e0e2d86a9ee448ea0319375027b1f8477d8b755e59f79b6d32cd0133",
+      "flesch": 70.9,
+      "measured_at": "2026-11-10T12:17:51Z",
+      "reason": "Faktenfrische nicht bestanden: 0b564f460c41218244bd (luecke): Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.; 3ad2eefed314eb172c26 (luecke): Die Aussag",
+      "details": [
+        "🛑 2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "Faktenfrische nicht bestanden: 0b564f460c41218244bd (luecke): Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.; 3ad2eefed314eb172c26 (luecke): Die Aussage, dass durch frühzeitige Bestellung Kosten um 10 % bis 20 % im Herbst eingespart werden können, ist unbelegt.; 43788c2cdcdfda52e753 (luecke): Die Modellrechnung verwendet einen Tiefpreis von 0,80 €/Liter, ohne dass diese Preisangabe belegt wird.; 5eedec8afbdef6a4ca49 (luecke): Es wird angegeben, dass typische Fehler beim Heizölkauf bis zu 15 % Mehrkosten verursachen können, jedoch fehlt ein Nachweis für diese Zahl.; 81881c5bc61824d25f5a (praezision): Die Faustregel, dass man bestellen sollte, wenn Preise vier Wochen unter dem Schnitt der letzten 12 Monate liegen, wird ohne Messgrundlage oder Quelle genannt.",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 1.0,
+      "parts": {
+        "spelling": 1.0,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.9
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee",
+      "ready": true,
+      "sha256": "aad7490eb6d91429d0bf416b8c43882e55e65677d770de2d1be996c7f9dbc5dd",
+      "flesch": 60.4,
+      "measured_at": "2026-11-10T12:19:22Z",
+      "score": 0.954,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.94,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
+      "ready": false,
+      "sha256": "74ee065a2dbebf2d0293fc5d36489dc410bc1766aa74ba867804756b381e7524",
+      "flesch": 63.1,
+      "measured_at": "2026-11-10T12:20:47Z",
+      "reason": "Faktenfrische nicht bestanden: 2922b4732eedad6ba0b4 (luecke): Der Ratgeber thematisiert den Wechsel von DSL-Tarifen und die Optimierung der Hardware, lässt aber den regulatorischen Rahmen der Bundesnetzagentur zu Breitbandversorgung und Unt",
+      "details": [
+        "🛑 2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "Faktenfrische nicht bestanden: 2922b4732eedad6ba0b4 (luecke): Der Ratgeber thematisiert den Wechsel von DSL-Tarifen und die Optimierung der Hardware, lässt aber den regulatorischen Rahmen der Bundesnetzagentur zu Breitbandversorgung und Unternehmenspflichten (z. B. beim Anbieterwechsel) unerwähnt.; ad9d482ec847195ec37b (praezision): Das Versprechen, das Signal werde in 'voller Stärke' weitergegeben, vernachlässigt physikalische und regulatorische Systemgrenzen im Bereich Funk und Frequenzen sowie Aspekte der Produktsicherheit.",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 0.962,
+      "parts": {
+        "spelling": 0.88,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.86,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "ready": false,
+      "sha256": "06f0c0efe69f02e4a11e0b1186a40ab3326f63fb8a7b6c2238f0c606103afa65",
+      "flesch": 66.0,
+      "measured_at": "2026-11-10T12:22:12Z",
+      "reason": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
+      "details": [
+        "🛑 2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erforderten zwingend einen Smart Meter, wird ohne Angabe von Voraussetzungen, Kosten oder Verfügbarkeit präzisiert.; 77d809de9e06d1d6910d (luecke): Es wird eine Prognose für den Strompreis 2026 angegeben („Trends erkennen“, „Netzentgelte steigen“), ohne dass dafür aktuelle Marktdaten oder offizielle Prognosen genannt werden.; ad7c0a90ef52ff35130e (luecke): Der Artikel behauptet, dass Preisgarantien vor Preissteigerungen schützen, liefert jedoch keine Quelle für diese Aussage.; f227178fbda2cc59c350 (luecke): Die Aussage, dass Ökostrom‑Tarife häufig günstiger als die Grundversorgung seien, wird nicht durch eine Quelle belegt.",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 0.962,
+      "parts": {
+        "spelling": 0.96,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.7,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-11-10-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein",
+      "ready": false,
+      "sha256": "98d8ecb556108886476ba1ca3cc63e9144d40896afcdeaa19e6abc8565f930ec",
+      "flesch": 60.7,
+      "measured_at": "2026-11-10T12:22:15Z",
+      "reason": "Reserve-Qualitäts-Gate: Umfang: 742 Wörter / 5178 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
+      "details": [
+        "Umfang: 742 Wörter / 5178 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
+      ],
+      "score": 0.897,
+      "parts": {
+        "spelling": 0.86,
+        "meta": 1.0,
+        "structure": 0.7,
+        "typography": 0.7,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort",
+      "ready": true,
+      "sha256": "6cedd9a7eed60243d5a2ba94796730ff03abb9c7456750f83544be6c2e364c32",
+      "flesch": 72.5,
+      "measured_at": "2026-11-10T12:23:40Z",
+      "score": 0.954,
+      "parts": {
+        "spelling": 0.84,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.96,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
       }
     }
   ],
   "measurement": {
-    "kind": "partial",
-    "run_id": "42231878203",
+    "kind": "full",
+    "run_id": "42807629512",
     "run_attempt": "1"
-  },
-  "recert": {
-    "at": "2026-11-06T14:16:14Z",
-    "renewed": [
-      "2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen"
-    ],
-    "tool": "scripts/reserve_recert.py"
   }
 }

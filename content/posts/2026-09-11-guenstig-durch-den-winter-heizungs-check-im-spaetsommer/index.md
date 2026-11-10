@@ -261,7 +261,7 @@ Ein guter Heizungs-Check findet Probleme, bevor sie teuer und dringend werden. R
 
 Heute genügt der Start: Fotografiere Anlagendruck und Zählerstand, notiere drei Problemräume und plane einen Probelauf. Alles Sicherheitsrelevante bleibt beim Fachbetrieb.
 
-**Weiterlesen:** [Heizkosten in der laufenden Saison senken](../../posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/) · [Spätsommer-Check für Tarif und Heizung](../../posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/)
+**Weiterlesen:** [Heizkosten in der laufenden Saison senken](../../posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/) · [Spätsommer-Check für Tarif und Heizung](../../posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/) · [Waschmaschine beladen](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/)
 
 ## Häufige Fragen
 

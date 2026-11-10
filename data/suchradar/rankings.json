@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-08T14:23:07.231048+02:00",
+ "stand": "2026-11-10T15:56:17.465413+02:00",
  "rankings": [
   {
    "anfrage": "DSL Anbieter Vergleich",
@@ -18,7 +18,7 @@
    "delta": 0,
    "titel": "",
    "url": "",
-   "quelle": "searxng",
+   "quelle": "wikipedia",
    "sichtbar": false
   },
   {
@@ -83,26 +83,6 @@
   },
   {
    "anfrage": "Stromanbieter wechseln",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Test",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Tibber Alternative",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -213,6 +193,26 @@
   },
   {
    "anfrage": "Unnötige Versicherungen kündigen",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Urlaub",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Urlaub Mietwagen",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,

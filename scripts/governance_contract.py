@@ -1575,13 +1575,34 @@ def c20_lesbarkeit_und_hysterese(script_texts, gate_text):
             out.append(("C20", f"scripts/readability_check.py: `{name}` = {m.group(1)} "
                                f"liegt unter dem vertraglichen Mindestwert {mindest:g} – "
                                "ein abgesenktes Ziel heilt nichts, es misst nur anders."))
-    m = re.search(r"(?m)^FLOOR_MIN\s*=\s*([0-9.]+)", rc)
+    # Der Bestands-Boden darf nicht AUFGEWEICHT werden – und nicht über die
+    # Publish-Schwelle klettern (dann wäre der Bestand strenger als neue
+    # Artikel: zwei Wahrheiten, #585). Die frühere Prüfung verbot das ANHEBEN
+    # (> 55 = Befund) und zementierte damit ein Leck: der Bestand durfte unter
+    # der Publish-Schwelle liegen, die er selbst verspricht. Am 09.11.2026
+    # stand der Boden deshalb auf 55, während 59,7 im Bestand als „OK“ galt;
+    # jetzt gilt FLOOR_MIN == NEW_FLESCH_MIN (60), gemessen 80/80 Artikel.
+    m = re.search(r"(?m)^FLOOR_MIN\s*=\s*(.+)$", rc)
+    ziel = re.search(r"(?m)^NEW_FLESCH_MIN\s*=\s*([0-9.]+)", rc)
     if not m:
         out.append(("C20", "scripts/readability_check.py: `FLOOR_MIN` fehlt."))
-    elif float(m.group(1)) > 55.0:
-        out.append(("C20", f"scripts/readability_check.py: `FLOOR_MIN` = {m.group(1)} "
-                           "wurde angehoben – der Bestands-Boden darf nicht weicher "
-                           "werden als 55."))
+    else:
+        wert = m.group(1).split("#")[0].strip()
+        try:
+            boden = float(wert)
+        except ValueError:                       # FLOOR_MIN = NEW_FLESCH_MIN
+            boden = float(ziel.group(1)) if ziel else None
+        if boden is None:
+            out.append(("C20", "scripts/readability_check.py: `FLOOR_MIN` ist an "
+                               "keine Zahl gebunden – der Boden ist nicht prüfbar."))
+        elif boden < 55.0:
+            out.append(("C20", f"scripts/readability_check.py: `FLOOR_MIN` = {boden:g} "
+                               "liegt unter dem dokumentierten Bestands-Boden 55 – "
+                               "ein aufgeweichter Boden heilt nichts, er misst anders."))
+        elif ziel and boden > float(ziel.group(1)):
+            out.append(("C20", f"scripts/readability_check.py: `FLOOR_MIN` = {boden:g} "
+                               f"liegt über der Publish-Schwelle {ziel.group(1)} – der "
+                               "Bestand wäre strenger als neue Artikel (zwei Wahrheiten)."))
 
     # c) Das Deploy-Fenster ist endlich, konfigurierbar und läuft ab.
     if "GRACE_MIN" not in lp:

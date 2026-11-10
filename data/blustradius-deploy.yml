@@ -429,6 +429,25 @@ schritte:
       trug, bleibt Redaktion/Texter und geht als Werkzeugbefund ans Siegel –
       C34 verbietet, die Live-Site daran einzufrieren.
 
+  - name: Abgeleitete Register – Selbsttest (Nachzug muss lauffähig sein)
+    klasse: gate-selbsttest
+    schuetzt: Abgeleitete Register nachziehen (Ableitung folgt ihrer Quelle)
+    grund: >-
+      Ein blinder Nachzug würde das Register unverändert lassen und dabei
+      Erfolg melden. Dann committet der Gate-Schritt eine Ableitung, die
+      ihrer Quelle hinterherläuft – genau der Zustand, in dem
+      `test_register_ist_aktuell` Wochen später rot wurde. Der Selbsttest
+      beweist vorher, dass Schreiber und Drift-Erkennung arbeiten.
+
+  - name: Abgeleitete Register nachziehen (Ableitung folgt ihrer Quelle)
+    klasse: werkzeug
+    grund: >-
+      Zieht abgeleitete Artefakte (u.a. data/fachpruefung_register.yaml) auf
+      den Stand der gehealten Inhalte. Rot heißt: der Nachzug ist gescheitert
+      – die Ableitung bleibt alt und `scripts/tests/test_abgeleitete_register.py`
+      macht das sichtbar. Das ist ein Werkzeugbefund und niemals ein Grund,
+      die öffentliche Auslieferung anzuhalten (C34/C38).
+
   - name: Gate-Heilungsdiff merken (alle Gates, inkl. Publish-Gate)
     klasse: infra
     grund: Reine Zustandsfeststellung für den Commit-Schritt.

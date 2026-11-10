@@ -1,0 +1,186 @@
+{
+  "datum": "2026-11-09",
+  "erzeugt_utc": "2026-11-09 16:51 UTC",
+  "agent_reach": "Agent Reach v1.5.0",
+  "kanal_ok": 5,
+  "kanal_fehler": 2,
+  "ergebnisse": {
+    "rss": {
+      "web.dev – Blog (Core Web Vitals, Baseline)": {
+        "treffer": [
+          {
+            "titel": "New to the web platform in September",
+            "url": "https://web.dev/blog/web-platform-09-2026?hl=en",
+            "datum": "Fri, 02 Oct 2026",
+            "quelle": "web.dev – Blog (Core Web Vitals, Baseline)"
+          },
+          {
+            "titel": "August 2026 Baseline monthly digest",
+            "url": "https://web.dev/blog/baseline-digest-aug-2026?hl=en",
+            "datum": "Mon, 28 Sep 2026",
+            "quelle": "web.dev – Blog (Core Web Vitals, Baseline)"
+          },
+          {
+            "titel": "Find features to support for Interop 2027 with your coding agent",
+            "url": "https://web.dev/blog/coding-agents-interop-proposals?hl=en",
+            "datum": "Fri, 18 Sep 2026",
+            "quelle": "web.dev – Blog (Core Web Vitals, Baseline)"
+          },
+          {
+            "titel": "Submit your proposals for Interop 2027",
+            "url": "https://web.dev/blog/interop-2027-proposals?hl=en",
+            "datum": "Thu, 03 Sep 2026",
+            "quelle": "web.dev – Blog (Core Web Vitals, Baseline)"
+          },
+          {
+            "titel": "New to the web platform in August",
+            "url": "https://web.dev/blog/web-platform-08-2026?hl=en",
+            "datum": "Fri, 28 Aug 2026",
+            "quelle": "web.dev – Blog (Core Web Vitals, Baseline)"
+          },
+          {
+            "titel": "July 2026 Baseline monthly digest",
+            "url": "https://web.dev/blog/baseline-digest-jul-2026?hl=en",
+            "datum": "Mon, 10 Aug 2026",
+            "quelle": "web.dev – Blog (Core Web Vitals, Baseline)"
+          }
+        ],
+        "fehler": null
+      },
+      "Chrome Developers – Blog (Lighthouse, DevTools)": {
+        "treffer": [
+          {
+            "titel": "What's New in WebGPU (Chrome 155-156)",
+            "url": "https://developer.chrome.com/blog/new-in-webgpu-155-156?hl=en",
+            "datum": "Wed, 07 Oct 2026",
+            "quelle": "Chrome Developers – Blog (Lighthouse, DevTools)"
+          },
+          {
+            "titel": "Shipping JPEG XL in Chrome",
+            "url": "https://developer.chrome.com/blog/jpeg-xl-in-chrome?hl=en",
+            "datum": "Tue, 06 Oct 2026",
+            "quelle": "Chrome Developers – Blog (Lighthouse, DevTools)"
+          },
+          {
+            "titel": "Email verification updates, October 2026",
+            "url": "https://developer.chrome.com/blog/email-verification-october-2026?hl=en",
+            "datum": "Mon, 05 Oct 2026",
+            "quelle": "Chrome Developers – Blog (Lighthouse, DevTools)"
+          },
+          {
+            "titel": "Chrome 156 beta",
+            "url": "https://developer.chrome.com/blog/chrome-156-beta?hl=en",
+            "datum": "Wed, 30 Sep 2026",
+            "quelle": "Chrome Developers – Blog (Lighthouse, DevTools)"
+          },
+          {
+            "titel": "HTML-in-Canvas updates: Iterating toward a better Web API",
+            "url": "https://developer.chrome.com/blog/html-in-canvas-ot-changes?hl=en",
+            "datum": "Tue, 29 Sep 2026",
+            "quelle": "Chrome Developers – Blog (Lighthouse, DevTools)"
+          },
+          {
+            "titel": "Connection allowlists: Secure your web application's network access",
+            "url": "https://developer.chrome.com/blog/connection-allowlist-announcement?hl=en",
+            "datum": "Wed, 23 Sep 2026",
+            "quelle": "Chrome Developers – Blog (Lighthouse, DevTools)"
+          }
+        ],
+        "fehler": null
+      },
+      "Smashing Magazine (UI/UX-Handwerk)": {
+        "treffer": [
+          {
+            "titel": "A New Community For In-House UX People",
+            "url": "https://smashingmagazine.com/2026/11/ux-insiders-community-in-house-ux-people/",
+            "datum": "Fri, 06 Nov 2026",
+            "quelle": "Smashing Magazine (UI/UX-Handwerk)"
+          },
+          {
+            "titel": "Making Immersive LLM Chat Experiences More Accessible",
+            "url": "https://smashingmagazine.com/2026/11/making-immersive-llm-chat-experiences-more-accessible/",
+            "datum": "Thu, 05 Nov 2026",
+            "quelle": "Smashing Magazine (UI/UX-Handwerk)"
+          },
+          {
+            "titel": "Modern CSS Might Make Your Front-End More Complex",
+            "url": "https://smashingmagazine.com/2026/11/modern-css-might-make-your-front-end-more-complex/",
+            "datum": "Tue, 03 Nov 2026",
+            "quelle": "Smashing Magazine (UI/UX-Handwerk)"
+          },
+          {
+            "titel": "A Spark Of Color In November’s Gray (2026 Wallpapers Edition)",
+            "url": "https://smashingmagazine.com/2026/10/desktop-wallpaper-calendars-november-2026/",
+            "datum": "Sat, 31 Oct 2026",
+            "quelle": "Smashing Magazine (UI/UX-Handwerk)"
+          },
+          {
+            "titel": "Accordion Icons: Which Work Best?",
+            "url": "https://smashingmagazine.com/2026/10/accordion-icons-which-work-best/",
+            "datum": "Fri, 23 Oct 2026",
+            "quelle": "Smashing Magazine (UI/UX-Handwerk)"
+          },
+          {
+            "titel": "Embracing Playful Imperfection With The CSS `random()` Function",
+            "url": "https://smashingmagazine.com/2026/10/embracing-playful-imperfection-css-random-function/",
+            "datum": "Tue, 20 Oct 2026",
+            "quelle": "Smashing Magazine (UI/UX-Handwerk)"
+          }
+        ],
+        "fehler": null
+      },
+      "Nielsen Norman Group (Usability-Forschung)": {
+        "treffer": [
+          {
+            "titel": "Agent Harness: Definition",
+            "url": "https://www.nngroup.com/articles/agent-harness/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication",
+            "datum": "Fri, 06 Nov 2026",
+            "quelle": "Nielsen Norman Group (Usability-Forschung)"
+          },
+          {
+            "titel": "Usability 101: Introduction to Usability",
+            "url": "https://www.nngroup.com/articles/usability-101-introduction-to-usability/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication",
+            "datum": "Fri, 06 Nov 2026",
+            "quelle": "Nielsen Norman Group (Usability-Forschung)"
+          },
+          {
+            "titel": "UX Conference January Announced (Jan 19 - Feb 1)",
+            "url": "https://www.nngroup.com/training/january/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication",
+            "datum": "Fri, 06 Nov 2026",
+            "quelle": "Nielsen Norman Group (Usability-Forschung)"
+          },
+          {
+            "titel": "The Role of UX in Agentic Software Factories",
+            "url": "https://www.nngroup.com/articles/ux-agentic-software-factories/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication",
+            "datum": "Fri, 30 Oct 2026",
+            "quelle": "Nielsen Norman Group (Usability-Forschung)"
+          },
+          {
+            "titel": "Experience Design: Dropping the “User” from “User Experience”",
+            "url": "https://www.nngroup.com/articles/ux-vs-experience-design/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication",
+            "datum": "Fri, 30 Oct 2026",
+            "quelle": "Nielsen Norman Group (Usability-Forschung)"
+          },
+          {
+            "titel": "UX Disciplines: Glossary",
+            "url": "https://www.nngroup.com/articles/ux-disciplines-glossary/?utm_source=rss&utm_medium=feed&utm_campaign=rss-syndication",
+            "datum": "Fri, 23 Oct 2026",
+            "quelle": "Nielsen Norman Group (Usability-Forschung)"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "youtube": {},
+    "github": {
+      "lighthouse-ci performance budget": {
+        "treffer": [],
+        "fehler": "gh-Fehler: gh: To use GitHub CLI in a GitHub Actions workflow, set the GH_TOKEN environment variable. Example:"
+      },
+      "design tokens css variables": {
+        "treffer": [],
+        "fehler": "gh-Fehler: gh: To use GitHub CLI in a GitHub Actions workflow, set the GH_TOKEN environment variable. Example:"
+      }
+    }
+  }
+}

@@ -77,10 +77,11 @@ DEFAULT_WHITELIST = {
 def load_whitelist():
     wl = set(DEFAULT_WHITELIST)
     if os.path.exists(WHITELIST_FILE):
-        for line in open(WHITELIST_FILE, encoding="utf-8"):
-            line = line.strip()
-            if line and not line.startswith("#"):
-                wl.add(line.lower())
+        with open(WHITELIST_FILE, encoding="utf-8") as source:
+            for line in source:
+                line = line.strip()
+                if line and not line.startswith("#"):
+                    wl.add(line.lower())
     return wl
 
 

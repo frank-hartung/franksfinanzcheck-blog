@@ -1,14 +1,14 @@
 ---
 title: "Waschmaschine beladen: Weniger Kosten bei jedem Waschgang"
 description: Richtiges Waschmaschine beladen senkt deine Fixkosten. Erfahre, wie du den Wasserverbrauch im Haushalt reduzierst und jeden Waschgang sparen kannst.
-date: 2026-11-05T11:21:45Z
-draft: true
-reserve: true
+date: 2026-11-09T11:26:12Z
+draft: false
+reserve_published: 2026-11-09
 tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Waschmaschine beladen", "Waschgang sparen", "Wasserverbrauch Haushalt", "Waschmaschine", "Waschgang"]
+keywords: ["Waschmaschine beladen", "Waschgang sparen", "Wasserverbrauch Haushalt", "Waschmaschine"]
 pin_title: "Waschmaschine beladen: Weniger Kosten bei jedem Waschgang"
 pin_description: "*Werbung | Richtiges Waschmaschine beladen senkt deine Fixkosten. Erfahre, wie du den Wasserverbrauch im Haushalt reduzierst und jeden Waschgang sparen kannst. Mehr Spartipps auf FranksFinanzcheck! #waschmaschine #beladen #waschgang"
 ai_generated: true

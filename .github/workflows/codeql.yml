@@ -50,6 +50,11 @@ on:
     - cron: "30 3 * * 1"
   workflow_dispatch:
 
+# Supersede obsolete PR revisions; non-PR events receive unique run groups.
+concurrency:
+  group: "${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}"
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 permissions:
   # Top-Level strikt lesend (Least Privilege); Schreibrechte nur im Job `analyze`.
   contents: read

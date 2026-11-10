@@ -62,8 +62,6 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ![Merkkarte: Kernaussagen zu Notgroschen: Die Wahrheit über das finanzielle Polster](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „Notgroschen: Die Wahrheit über das finanzielle Polster“ (eigene Darstellung aus diesem Beitrag).*
-
 ## Warum die klassische Drei-Monats-Regel oft zu grob ist
 
 Viele Ratgeber nennen pauschal drei Netto-Monatsgehälter. Das wirkt griffig, hilft dir aber nur begrenzt. Zwei Menschen mit identischem Gehalt können völlig unterschiedliche Risiken haben. Eine alleinstehende Person ohne Auto und ohne Kinder braucht meist weniger Reserve als eine Familie mit Haus, Auto und hoher monatlicher Belastung.
@@ -150,8 +148,6 @@ Wenn deine Fixkosten deutlich über 50 % liegen, solltest du zuerst die großen
 *Abbildung: Gliederung zu „Notgroschen: Die Wahrheit über das finanzielle Polster“ – 5 Stationen von „Warum die klassische Drei-Monats-Regel oft zu grob ist“ bis „Ein Rechenbeispiel für 2026“ (eigene Darstellung).*
 
 ![Gliederung des Beitrags: Notgroschen: Die Wahrheit über das finanzielle Polster](abbildung-ablauf.svg)
-
-*Abbildung: Gliederung zu „Notgroschen: Die Wahrheit über das finanzielle Polster“ – 5 Stationen von „Warum die klassische Drei-Monats-Regel oft zu grob ist“ bis „Ein Rechenbeispiel für 2026“ (eigene Darstellung).*
 
 ## Wann 1.000 € ein guter Start sind – aber nicht das Endziel
 

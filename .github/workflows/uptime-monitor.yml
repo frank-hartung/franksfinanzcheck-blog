@@ -29,6 +29,11 @@ on:
     - cron: "*/30 * * * *"
   workflow_dispatch: {}
 
+# Preserve every monitor occurrence; never cancel an in-flight outage check.
+concurrency:
+  group: "${{ github.workflow }}-${{ github.run_id }}"
+  cancel-in-progress: false
+
 permissions:
   issues: write
 

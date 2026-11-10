@@ -1,0 +1,93 @@
+{
+  "slug": "2026-11-09-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein",
+  "titel": "Wie viel Streaming‑Bandbreite: Du wirklich brauchst",
+  "erzeugt": "2026-11-09 13:18 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 0,
+    "klasse": "standard",
+    "grund": "Erstrecherche – noch nie faktengeprüft",
+    "alter_tage": null,
+    "intervall": 90,
+    "frist": null,
+    "restlaufzeit": null
+  },
+  "geo": {
+    "punkte": 2,
+    "maximum": 6,
+    "prozent": 33,
+    "offen": [
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)",
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
+      "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)",
+      "Sichtbares Prüfdatum (`faktencheck:`)"
+    ],
+    "treffer": {
+      "kurzantwort": false,
+      "faq": true,
+      "quellen": false,
+      "zahlen": false,
+      "tabelle": true,
+      "faktencheck": false
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesnetzagentur.de",
+      "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "datum": "",
+      "quelle": "bundesnetzagentur.de",
+      "kanal": "web",
+      "auszug": "*   [Breitbandversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Breitband/start.html)\n        *   [Kupfer-Glas-Migration](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Kupfer-Glas/start.html)\n        *   [Funk und Frequenzen](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Frequenzen/start.html)\n        *   [Nummerierung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Nummerierung/start.html)\n        *   [Unternehmenspflichten](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Unternehmenspflichten/start.html)\n        *   [Technik und Produktsicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Technik/start.html)\n        *   [Öffentliche Sicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/OeffentlicheSicherheit/start.html)\n        *   [Grundversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Grundversorgung/start.html)\n\n1.   [Homepage](https://www.bundesnetzagentur.de/DE/Home/home_node.html \"Zur Startseite\")\n2.   [Fachthemen](https://www.bundesnetzagentur.de/DE/Themen/start.html \"Themen\")\n3.   [UntermenuOeffnen](javascript:void(0))[Energie](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html \"Energie\")**Telekom­munikation**[Digitales](https://www.bundesnetzagentur.de/DE/Fachthemen/Digitales/start.html \"Alle Fachthemen rund um Digitales\")[Post](https://www.bundesnetzagentur.de/DE/Fachthemen/Post/start.html \"Post\")[Eisenbahnen](https://www.bundesnetzagentur.de/DE/Fachthemen/Eisenbahnen/start.html \"Eisenbahnen\")[BNetzA Data Hub](https://www.bundesnetzagentur.de/DE/Fachthemen/DataHub/start.html \"BNetzA Data Hub\")[Beschlusskammern](https://www.bundesnetzagentur.de/DE/Beschlusskammer",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Bundesnetzagentur",
+      "rang": 1,
+      "zitierbar": true
+    },
+    {
+      "titel": "heise+ | Obsbot Talent 2 im Test: Mehrkamera-Streaming aus einem Gerät",
+      "url": "https://www.heise.de/tests/Obsbot-Talent-2-im-Test-Mehrkamera-Streaming-aus-einem-Geraet-11484037.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus",
+      "datum": "2026-11-08T11:00",
+      "quelle": "heise online",
+      "kanal": "rss",
+      "auszug": "Mehrere Kameras, ein kompaktes Gerät: Obsbots Talent 2 mischt, streamt und zeichnet auf. Im Test zeigt sich, wie es als Regiecomputer fungiert.",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "heise online",
+      "rang": 3,
+      "zitierbar": true
+    },
+    {
+      "titel": "Mobilfunk-Resilienz nach Blackout: 72-Stunden-Puffer kostet Milliarden",
+      "url": "https://www.heise.de/news/Mobilfunk-Resilienz-nach-Blackout-72-Stunden-Puffer-kostet-Milliarden-11516559.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+      "datum": "2026-11-08T10:55",
+      "quelle": "heise online",
+      "kanal": "rss",
+      "auszug": "Forscher beziffern die Kosten für eine 3-tägige Notstromabdeckung aller Mobilfunkmasten auf bis zu elf Milliarden Euro pro Jahr. Sie verweisen auf Alternativen.",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "heise online",
+      "rang": 3,
+      "zitierbar": true
+    },
+    {
+      "titel": "Samsung plant offenbar kostenpflichtigen Galaxy-AI-Tarif",
+      "url": "https://www.heise.de/news/Samsung-soll-an-Abo-fuer-Galaxy-AI-Funktionen-arbeiten-11516987.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+      "datum": "2026-11-09T10:37",
+      "quelle": "heise online",
+      "kanal": "rss",
+      "auszug": "Samsung arbeitet offenbar daran, einen Teil seiner Galaxy-AI-Funktionen hinter eine Bezahlschranke zu packen.",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "heise online",
+      "rang": 3,
+      "zitierbar": false
+    }
+  ],
+  "befunde": [],
+  "fehler": [],
+  "fassung_sha256": "b9a4d5bcadea07c0585f0e059587e917af1139f145a279d9b281cb91ed9fdbe5",
+  "text_sha256": "010edaa3c5ae991b88f4cb09e1e960a36436ef5cac2d2a57ad063f567a591ac3",
+  "fachpruefung": "Fehler: gemini: HTTPError; groq: HTTPError; cloudflare: TimeoutError"
+}

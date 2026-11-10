@@ -26,7 +26,7 @@ quellen:
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
     datum: "2024-01-01"
-faktencheck: 2026-10-13
+faktencheck: 2026-11-10
 ---
 
 **Stand: 13.10.2026.** Dieser News-Kompakt-Artikel ordnet eine aktuelle Entwicklung ein. Belegbare Zahlen stammen aus den zuletzt veröffentlichten amtlichen Daten der Bundesnetzagentur – gesicherte Prognosen für 2026 gibt es nicht. Konditionen und Regeln können sich ändern – prüfe Details immer beim jeweiligen Anbieter.

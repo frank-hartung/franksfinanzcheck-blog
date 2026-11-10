@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-11-09T07:29:15+00:00",
+  "generatedAt": "2026-11-09T11:30:50+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -1262,8 +1262,8 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
-    "/posts/2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub/": {
-      "image": "images/covers/2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub.jpg",
+    "/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/": {
+      "image": "images/covers/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -1278,8 +1278,8 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
-    "/posts/2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check/": {
-      "image": "images/covers/2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check.jpg",
+    "/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/": {
+      "image": "images/covers/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",

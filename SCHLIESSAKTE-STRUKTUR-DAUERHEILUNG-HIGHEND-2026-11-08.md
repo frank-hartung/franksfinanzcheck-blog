@@ -469,3 +469,176 @@ python3 scripts/automation_premium_audit.py --strict    → grün
 **Die Regel (dieselbe wie §6/§7, jetzt mit Wächter):** Ein Gate, das die
 Auslieferung anhalten darf, muss seinen Zeugen nennen – und ein Testlauf, der
 ihn nicht nennt, ist ein Vertragsverstoß, kein Stilfehler.
+## 8. Zwei Befunde, die niemand sah – eine Ableitung und eine Schwelle
+
+Beide Befunde kamen aus demselben Lauf (`42609545452`, Code-Regression), und
+beide waren **keine** Code-Fehler. Sie sind Lehrstücke dafür, wie eine
+Prüfkette grün aussieht, während der Bestand längst etwas anderes sagt.
+
+### 8.1 Das Register war eine Ableitung, die niemand nachzog
+
+```
+FAIL: test_register_ist_aktuell (test_inhalts_register.FachpruefungRegisterTests)
+AssertionError: 1 != 0
+🛑 fachpruefung_register.yaml ist veraltet
+```
+
+`data/fachpruefung_register.yaml` ist keine Redaktionsdatei. Es ist eine
+**Ableitung** aus dem Live-Bestand: Slug, Titel, Risikoklasse, Status und
+alle Sätze mit Euro-/Prozentangaben (`scripts/fachpruefung_register.py`).
+Die Gates im Deploy heilen laufend Inhalt – Titel, Links, Formulierungen,
+Frontmatter. Der Nachzug der Ableitung war Handarbeit und fand nicht statt.
+Der Bestand war zum Zeitpunkt des roten Laufs **korrekt**; falsch war allein
+die Kopie. Gemessene Abweichung beim Nachzug: 4 Zeilen (Fundstellen-Snippets
+und ein Titel, der inzwischen gekürzt war).
+
+**Heilung – maschinell, im selben Commit:**
+
+* `scripts/abgeleitete_register.py` – ein Verzeichnis abgeleiteter Artefakte
+  mit ihrem EINZIGEN Schreiber, `--check`, `--fix`, `--selftest`
+  (Drift-Erkennung wird gegen eine getamperte Fassung bewiesen).
+* `deploy.yml` zieht die Register **vor** `gate_diff` nach. Damit landet die
+  Ableitung im selben Heilungs-Commit wie ihre Quelle und löst den Rebuild
+  aus – dieselbe Bauart wie das LCP-Manifest (`#1014`).
+* Beide neuen Schritte stehen im Blustradius-Register: der Selbsttest als
+  `gate-selbsttest` (ein blinder Nachzug meldet Erfolg und lässt die
+  Ableitung alt – genau der Zustand, der rot wurde), der Nachzug als
+  `werkzeug` (ein gescheiterter Nachzug nimmt die Auslieferung nicht als
+  Geisel, C34 – der Test färbt ihn rot).
+* `scripts/tests/test_abgeleitete_register.py` (7 Tests) hält die
+  Verbindung: Nachzug vorhanden, Selbsttest davor, Nachzug **vor** dem
+  Commit, jedes Register aktuell, Drift-Erkennung nennt die Zeile.
+
+**Die Regel:** Eine Ableitung folgt ihrer Quelle – im selben Commit, maschinell.
+
+### 8.2 Dieselbe Zahl, zwei Urteile: der Bestands-Boden lag unter der Zusage
+
+```
+AssertionError: 59.7 not greater than or equal to 60.0 :
+2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen:
+Flesch 59.7 < Publish-Schwelle 60.0 (R6)
+```
+
+Für das Publish-Gate war 59,7 zu wenig – **jeder neue** Artikel scheitert
+daran. Für die Wochen-Wache `readability_check.py --gate-bestand` war
+dieselbe Zahl **OK**, weil deren Bestands-Boden `FLOOR_MIN` bei 55 lag. Der
+Artikel trug also die Zusage seiner eigenen Veröffentlichung nicht mehr, und
+keine Wache sagte es: Der Boden war als Toleranz für Altbestand gedacht und
+wurde zum Leck. Entdeckt hat es Wochen später ein Vertragstest (#1027), der
+drei Gas-Artikel namentlich prüft.
+
+**Heilung des Falls (redaktionell, nicht maschinell):** Der Text wurde an
+seinen Nahtstellen gestrafft – 14 Sätze geteilt bzw. entzerrt (Semikolon-
+Reihungen, „, und“-Reihungen, ein 5-Satz-Absatz getrennt). Keine Zahl, keine
+Aussage, kein Link verändert. Ergebnis: **Flesch 60,4 · Score 100/100**, vorher
+59,7 / 95. Der hauseigene Heiler war vorher befragt und hatte den Fall
+ausdrücklich abgelehnt („Restlücke: Flesch 59.7 < 60 – Text bleibt unangetastet
+(fail-closed)“), weil er an dieser Stelle keine sichere Nahtstelle findet –
+deshalb ist die Änderung hier eine redaktionelle, mit dem Test als Wächter.
+
+**Heilung der Klasse (maschinell):**
+
+* `FLOOR_MIN = NEW_FLESCH_MIN` – genau **eine** Flesch-Zahl für
+  „veröffentlichbar“ (R6, 60). Gemessen am Umstellungstag: **80 von 80**
+  Live-Artikeln ≥ 60,0 (Ø 64,9). Der Boden ist keine Toleranz mehr, sondern
+  die Zusage des Bestands an sich selbst.
+* `governance_contract.py` C20 prüfte bisher das Gegenteil: `FLOOR_MIN > 55`
+  war ein Befund („wurde angehoben“). Damit war das Anheben – also das
+  Schließen des Lecks – vertraglich verboten. Die Regel prüft jetzt die
+  Aufweichung: `FLOOR_MIN < 55` ist ein Befund, und `FLOOR_MIN` über
+  `NEW_FLESCH_MIN` ebenfalls (dann wäre der Bestand strenger als neue
+  Artikel: zwei Wahrheiten).
+* `scripts/tests/test_lesbarkeit_eine_schwelle.py` (7 Tests) hält beide
+  Richtungen: Boden == Publish-Schwelle, 59,7 im Live-Bestand ist **rot**
+  (mit Zahl im Befund), 60,0 ist grün, Entwürfe blockieren nicht – und ein
+  Bestand aus null gemessenen Artikeln ist kein Grün, sondern eine kaputte
+  Messung (dieselbe Bauart wie die Blindheitsschwelle aus §6).
+* Doku und Scorecard ziehen mit (`docs/GOVERNANCE-KONTRAKT.md` C20,
+  `editorial_scorecard.py` inkl. Import-Fallback).
+
+**Die Regel:** Eine Kennzahl, zwei Schwellen, zwei Urteile – das ist keine
+Toleranz, das ist ein Leck. Der Bestand muss halten, was er verspricht.
+
+### 8.3 Nachweise (lokal gefahren)
+
+```
+python3 scripts/abgeleitete_register.py --selftest      → ✓ (Drift-Erkennung geprüft)
+python3 scripts/abgeleitete_register.py --check         → ✅ aktuell
+python3 scripts/readability_check.py --selftest         → ✅
+python3 scripts/readability_check.py --gate-bestand     → ✅ 80 Live-Artikel, Ø 64,9, kein Artikel < 60
+python3 scripts/blustradius_register.py --check         → ✅ 85 Schritte erklärt
+python3 scripts/governance_contract.py                  → ✅ 47 Regeln (C20 neu gefasst)
+python3 scripts/workflow_vertrag_wache.py --gate        → ✅ 102 Workflows
+python3 scripts/hugo_build_vertrag.py --gate            → ✅
+unittest 10 Module (Register, Schwelle, Lesbarkeit, Scorecard) → Ran 200 tests … OK
+```
+
+## 9. Zwei Befunde, die der PR sichtbar machte – und die älter waren als er
+
+Beim Öffnen des PR liefen zwei Gates rot, die **auf dem unberührten
+Ausgangsstand genauso rot sind** (nachgewiesen in einem Arbeitsbaum auf
+`c8cc152`):
+
+```
+FAIL: test_keine_inhaltsseite_ohne_redaktionellen_inlink
+  ['/posts/2026-10-30-gaspreiserhoehung-…/', '/posts/2026-11-05-waschmaschine-…/']
+
+FAIL: test_keine_falsch_positiven_im_bestand
+  content/posts/2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check/index.md:
+  R16 schlägt im Bestand an
+```
+
+### 9.1 Zwei verwaiste Seiten (kein redaktioneller Inlink)
+
+GSC-Abdeckung: zwei Live-Seiten ohne eingehenden redaktionellen Link. Für
+diese Klasse gibt es im Haus einen **deterministischen Heiler** – er wurde
+nicht erfunden, sondern benutzt:
+
+```
+python3 scripts/gsc_abdeckung.py --verlinkung            # 4 Paare, Trockenlauf
+python3 scripts/gsc_abdeckung.py --verlinkung --heilen   # 4 Links eingefügt
+  vorher ohne Inlink: 2 → nachher: 0
+```
+
+Der Heiler wählt Quelle und Ziel aus dem Bestand und setzt den Link im
+Fließtext. Kein Text umgeschrieben, keine Aussage verändert.
+
+### 9.2 Ein Artikel ging mit Prompt-Kopfzeilen live
+
+Der Body von `2026-11-09-wlan-verbessern-…` begann mit
+
+```
+TITEL: [WLAN verbessern](…): Mesh-System oder Repeater im Check?
+
+ARTIKEL:
+Du sitzt im Homeoffice …
+```
+
+Das ist die deutsche Ausgabeform des Prompts – sichtbar auf der Live-Seite.
+Gefunden hat es erst der Bestands-Test (R16 über alle Artikel), und auch der
+nur zur Hälfte: `R16-PROMPT-ECHO` kannte `ARTIKEL`, aber **nicht** `TITEL`.
+Ein Kopf ohne die zweite Zeile wäre durchgegangen.
+
+**Heilung:**
+* Inhalt: die beiden geleakten Kopfzeilen entfernt (der Fließtext beginnt
+  jetzt mit dem ersten echten Satz).
+* Wache: `sprachkern` R16 kennt jetzt `TITEL|BESCHREIBUNG` – **deckungsgleich
+  mit der Markerliste des Parsers** (`generate_drafts._MARKER_RX`). Zwei
+  Listen, zwei Wahrheiten waren die Ursache: der Parser hätte die Form
+  entfernt, die Wache sah sie nicht.
+* Tests: `test_r16_kennt_die_deutsche_ausgabeform` (TITEL, BESCHREIBUNG,
+  BODY … je Marker) und eine Gegenprobe, dass „Tipp:“/„Beispiel:“/„Fazit:“
+  weiter still bleiben.
+
+**Die Regel:** Eine Wache, die nur die halbe Form kennt, ist eine halbe Wache.
+
+### 9.3 Was hier bewusst NICHT gemacht wurde
+
+`metadaten_wache` meldet auf `main` zwei weitere Inhaltsbefunde (M4: der
+Waschmaschinen-Artikel führt quantitative Aussagen ohne `quellen`-Block;
+M2: eine zu kurze Description am Streaming-Artikel). Beides ist **redaktionell**
+und nicht heilbar: Quellen werden nicht erfunden, und eine Description wird
+nicht mit Behauptungen aufgefüllt. Die Wache nennt Datei und Feld – das ist
+der Auftrag an die Redaktion, kein Maschinenauftrag. Diese Befunde stehen
+nicht in diesem PR, weil sie im gemergten Stand von `main` entstehen und
+nicht in seinem Ausgangsstand.

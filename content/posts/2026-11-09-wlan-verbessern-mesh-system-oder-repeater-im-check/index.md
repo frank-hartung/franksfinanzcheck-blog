@@ -2,14 +2,17 @@
 title: "WLAN verbessern: Mesh-System oder Repeater im Check?"
 description: Endlich überall schnelles Internet zuhause! Wir zeigen dir, wie du dein WLAN verbessern kannst und ob Mesh oder ein WLAN Verstärker die bessere Wahl ist.
 date: 2026-11-09T07:09:44Z
-draft: false
+draft: true
+cadence_wait: true
+cadence_demoted: 2026-11-09T11:26:10Z
+cadence_grund: "faktenfrische aufgehoben: faktencheck: 2026-11-10 – Re-Queue für vollständigen Publish-Gate-Lauf"
 tags: ["WLAN verbessern", "DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
 keywords: ["WLAN verbessern", "Mesh WLAN oder Repeater", "WLAN verstärker", "Schnelles Internet zuhause", "Mesh-System", "DSL-Vergleich", "Internetvertrag wechseln"]
 pinwand: Internet & DSL | WLAN-Tipps & Tarife
-pin_title: "Funklöcher adé: WLAN-Verstärker oder Mesh-System?"
+pin_title: "WLAN verbessern: Mesh-System oder Repeater im Check?"
 pin_description: "*Werbung | Ein Zimmer mit Empfang, das nächste ohne – das Kästchen aus dem Elektromarkt hilft da oft nur halb: Wir zeigen, wann ein 30-€-Repeater reicht, wann nur ein Mesh-System Ruhe bringt und was beide Lösungen wirklich kosten. Jetzt lesen! Mit Rechenbeispiel (120 €)."
 ai_generated: true
 ai_provider: "Content-Engine v2"
@@ -24,11 +27,9 @@ cover:
   image: "images/covers/2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check.jpg"
   alt: "WLAN verbessern: Mesh-System oder Repeater im Check?"
   caption: "Tipp von FranksFinanzcheck"
+faktencheck: 2026-11-10
 ---
 
-TITEL: [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): Mesh-System oder Repeater im Check?
-
-ARTIKEL:
 Du sitzt im Homeoffice und die Videokonferenz bricht ab. Im Schlafzimmer lädt der Film nicht. Solche Funklöcher nerven im Alltag gewaltig. Oft liegt es nicht am Anbieter, sondern an der Hardware in den eigenen vier Wänden.
 
 Wenn du dein **[WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/)** willst, stehst du meist vor einer Wahl: Reicht ein günstiger Repeater oder muss es ein teures Mesh-System sein? In diesem Artikel klären wir, welche Technik für deine Wohnung passt. Wir schauen uns die Kosten genau an. So triffst du eine kluge Wahl für dein Heimnetzwerk.

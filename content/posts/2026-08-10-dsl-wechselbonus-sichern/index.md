@@ -50,8 +50,6 @@ Ein Problem bleibt aber: Ein hoher Bonus auf dem Werbebanner sieht toll aus. Das
 
 ![Merkkarte: Kernaussagen zu DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „DSL-Wechselbonus sichern: So sparst du beim Internetvertrag“ (eigene Darstellung aus diesem Beitrag).*
-
 ## Das Wichtigste in Kürze
 
 - Ein **DSL-Wechselbonus** ist lediglich ein Puzzleteil der Gesamtrechnung, nicht die alleinige Ersparnis.
@@ -178,8 +176,6 @@ Viele der besten Cashback-Aktionen laufen zudem nur kurze Zeit. Wer früh starte
 *Abbildung: Gliederung zu „DSL-Wechselbonus sichern: So sparst du beim Internetvertrag“ – 5 Stationen von „Was ein DSL-Wechselbonus überhaupt ist?“ bis „Wann sich ein Anbieterwechsel besonders lohnt“ (eigene Darstellung).*
 
 ![Gliederung des Beitrags: DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-ablauf.svg)
-
-*Abbildung: Gliederung zu „DSL-Wechselbonus sichern: So sparst du beim Internetvertrag“ – 5 Stationen von „Was ein DSL-Wechselbonus überhaupt ist?“ bis „Wann sich ein Anbieterwechsel besonders lohnt“ (eigene Darstellung).*
 
 ## Router mieten oder kaufen?
 

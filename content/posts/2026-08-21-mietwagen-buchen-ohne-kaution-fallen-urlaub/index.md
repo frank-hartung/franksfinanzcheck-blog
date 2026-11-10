@@ -49,8 +49,6 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ![Merkkarte: Kernaussagen zu Mietwagen ohne Kautionsfallen: So sparst du im Urlaub](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „Mietwagen ohne Kautionsfallen: So sparst du im Urlaub“ (eigene Darstellung aus diesem Beitrag).*
-
 ## Was ist die Mietwagen-Kaution überhaupt?
 
 Die Kaution ist eine **Sicherheit**, die der Vermieter während der Mietzeit auf deiner Kreditkarte blockiert. Sie dient dazu, drei Risiken abzudecken:
@@ -174,8 +172,6 @@ Am günstigsten ist die Buchung, die schnell geht als Modellannahme. Die Rückga
 *Abbildung: Gliederung zu „Mietwagen ohne Kautionsfallen: So sparst du im Urlaub“ – 5 Stationen von „Was ist die Mietwagen-Kaution überhaupt?“ bis „Echte Zahlen: Drei Mietwagen-Szenarien im Vergleich“ (eigene Darstellung).*
 
 ![Gliederung des Beitrags: Mietwagen ohne Kautionsfallen: So sparst du im Urlaub](abbildung-ablauf.svg)
-
-*Abbildung: Gliederung zu „Mietwagen ohne Kautionsfallen: So sparst du im Urlaub“ – 5 Stationen von „Was ist die Mietwagen-Kaution überhaupt?“ bis „Echte Zahlen: Drei Mietwagen-Szenarien im Vergleich“ (eigene Darstellung).*
 
 ## Bonus: Nebenkosten, die oft vergessen werden
 

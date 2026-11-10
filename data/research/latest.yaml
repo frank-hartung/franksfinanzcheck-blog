@@ -1,5 +1,5 @@
-generated_at: '2026-11-08T10:45:31Z'
-day: '2026-11-08'
+generated_at: '2026-11-10T11:45:37Z'
+day: '2026-11-10'
 mode: deterministic
 teams:
   trending:
@@ -252,57 +252,51 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 5 einfache Schritte zum Aufbau eines Notgroschens
-    pillar: frugalismus
-    signal: niche_hook
-    source: topics:5 einfache Schritte zum Aufbau eines Notgroschens
-    score: 0.55
-    keywords: []
-  - topic: 'Handyvertrag wechseln: Wann sich der Wechselbonus wirklich lohnt'
-    pillar: internet-dsl
-    signal: niche_hook
-    source: 'topics:Handyvertrag wechseln: Wann sich der Wechselbonus wirklich lohnt'
-    score: 0.55
-    keywords:
-    - Handyvertrag wechseln Bonus
-    - Wechselbonus Handytarif
-    - Mobilfunk wechseln lohnt sich
-  - topic: Kreditkarten mit guten Leistungen
+  - topic: 'Altersvorsorge: Die besten Wege für deine Rente'
     pillar: konto-karten
     signal: niche_hook
-    source: topics:Kreditkarten mit guten Leistungen
+    source: 'topics:Altersvorsorge: Die besten Wege für deine Rente'
+    score: 0.55
+    keywords: []
+  - topic: Die 50-30-20-Regel einfach erklärt
+    pillar: frugalismus
+    signal: niche_hook
+    source: topics:Die 50-30-20-Regel einfach erklärt
+    score: 0.55
+    keywords: []
+  - topic: 'ETF-Sparplan für Einsteiger: So startest du monatlich'
+    pillar: frugalismus
+    signal: niche_hook
+    source: 'topics:ETF-Sparplan für Einsteiger: So startest du monatlich'
+    score: 0.55
+    keywords: []
+  - topic: 'Kfz-Versicherung für Fahranfänger: So sparst du beim Einstieg'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Kfz-Versicherung für Fahranfänger: So sparst du beim Einstieg'
     score: 0.55
     keywords:
-    - Kreditkarte
-    - Leistungen
-    - Vorteile
-  - topic: Mietwagen-Verträge vor dem Urlaub checken
+    - Kfz Versicherung
+    - Fahranfänger
+    - Auto Versicherung
+  - topic: 'Konto kündigen und wechseln: Schritt-für-Schritt-Anleitung'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Konto kündigen und wechseln: Schritt-für-Schritt-Anleitung'
+    score: 0.55
+    keywords:
+    - Konto wechseln
+    - Kontowechsel Anleitung
+    - Girokonto kündigen
+  - topic: Mietwagen-Kosten im Ausland minimieren
     pillar: mietwagen
     signal: niche_hook
-    source: topics:Mietwagen-Verträge vor dem Urlaub checken
+    source: topics:Mietwagen-Kosten im Ausland minimieren
     score: 0.55
     keywords:
     - Mietwagen
-    - Verträge
-    - Urlaub
-  - topic: 'Umzug: Diese Versicherungen und Verträge musst du ummelden'
-    pillar: versicherungen
-    signal: niche_hook
-    source: 'topics:Umzug: Diese Versicherungen und Verträge musst du ummelden'
-    score: 0.55
-    keywords:
-    - Umzug Checkliste
-    - Verträge ummelden
-    - Umzug sparen
-  - topic: Wie du deine Bankgebühren um 50 % reduzieren kannst
-    pillar: konto-karten
-    signal: niche_hook
-    source: topics:Wie du deine Bankgebühren um 50 % reduzieren kannst
-    score: 0.55
-    keywords:
-    - Bankgebühren sparen
-    - Konto-gebühren
-    - Gebühren-reduzierung
+    - Ausland
+    - Kosten minimieren
 live_web:
   enabled: false
   findings: []

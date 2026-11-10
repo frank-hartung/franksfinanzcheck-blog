@@ -566,7 +566,14 @@ jobs:
             echo "Zustand unverändert."
             exit 0
           fi
-          scripts/git_sync.sh "chore(gsc): Indexierungs-Zustand $(date -u +%F)" $pfade
+          if scripts/git_sync.sh "chore(gsc): Indexierungs-Zustand $(date -u +%F)" $pfade; then
+            echo "✅ Indexierungs-Kontingent-Zustand direkt auf main gesichert." >> "$GITHUB_STEP_SUMMARY"
+          else
+            rc=$?
+            echo "::warning::Indexierungs-Kontingent-Zustand konnte nicht auf main gesichert werden (Exit $rc); dieser Lauf könnte den Tageszähler beim nächsten Lauf nicht kennen."
+            echo "⚠️ **Indexierungszustand nicht gesichert** (Exit $rc). Tageskontingent vor dem nächsten Lauf gegenprüfen." >> "$GITHUB_STEP_SUMMARY"
+            exit "$rc"
+          fi
 
       - name: PR öffnen, wenn sich Leistungsdaten geändert haben
         env:

@@ -6,7 +6,7 @@ Misst für jeden Artikel die wichtigsten Lesbarkeits-Kennzahlen auf
 Top-Level-Niveau (deutsche Amstad-Formel – Flesch-Reading-Ease angepasst):
 
   - Flesch-Score (Amstad): 180 − (Wörter/Sätze) − (58,5 × Silben/Wörter)
-      Ziel: ≥ 55 (verständlich) – Top-Level: 60–75
+      Top-Level: 60–75 · Publish UND Bestand: ≥ 60 (eine Zahl, R6)
   - Ø Satzlänge            Ziel: 12–18 Wörter
   - Ø Wortlänge            Ziel: ≤ 6 Buchstaben
   - Anteil langer Wörter   Ziel: < 15 % (> 12 Buchstaben)
@@ -44,9 +44,22 @@ ABSATZ_MAX_SENT = 4         # war 6
 # `(v or 100) >= 70` grün gefärbt wurde (Härtung G2). Das Regelwerk definiert
 # als Zielhorizont Flesch-Amstad Ø ≥ 62. Scorecard und Gate nutzen jetzt
 # dieselben Schwellen – eine Kennzahl, eine Wahrheit.
+# BESTANDS-BODEN = PUBLISH-SCHWELLE (09.11.2026).
+# Der Boden stand bei 55 – als Toleranz für Altbestand aus der Zeit vor der
+# R6-Härtung. Diese Toleranz hat sich als Leck erwiesen: `--gate-bestand` sah
+# einen Live-Artikel mit Flesch 59,7 wöchentlich als „OK“, während dieselbe
+# Zahl im Publish-Gate einen neuen Artikel blockiert hätte. Der Artikel
+# (`2026-08-24-preisgarantie-gas-…`) fiel so unter die eigene Zusage, und
+# bemerkt wurde es erst Wochen später von einem Vertragstest (#1027).
+# Gemessen am 09.11.2026 trug der Bestand die strengere Zahl bereits:
+# 80 von 80 Live-Artikeln ≥ 60,0 (Ø 64,9). Damit gibt es im Haus wieder
+# GENAU EINE Flesch-Zahl für „veröffentlichbar“ – R6, 60 –, und sie gilt für
+# neue Artikel UND für den Bestand. Ein Boden unter der Publish-Schwelle
+# wäre eine zweite Wahrheit; das ist die Bauart, die §6 der Schließakte
+# beschreibt (Messung an einer Kante, die niemand mehr prüft).
 AVG_TARGET = 62.0        # Regelwerk: Flesch-Amstad Ø ≥ 62 (6-Monats-Zielhorizont)
-FLOOR_MIN = 55.0         # Bestand: kein Artikel dauerhaft unter 55 (Warn-/Issue-Schwelle)
 NEW_FLESCH_MIN = 60.0    # R6: neue Artikel Flesch ≥ 60 – hart im Publish-Gate
+FLOOR_MIN = NEW_FLESCH_MIN  # Bestand trägt dieselbe Schwelle (siehe Begründung oben)
 # Keyword-Dump-Grenze (R2): einzelne Zeile/Block > 500 Zeichen mit > 12 Kommas
 DUMP_MAX_LEN = 500
 DUMP_MAX_COMMAS = 12
@@ -340,6 +353,10 @@ def gate_bestand_urteil(results):
     below_floor = [r for r in live if r['flesch'] < FLOOR_MIN]
     drafts_below = [r for r in drafts if r['flesch'] < NEW_FLESCH_MIN]
     stopper = []
+    # Ein Bestand aus NULL Artikeln ist kein Grün, sondern eine kaputte Messung
+    # (dieselbe Bauart wie die Blindheitsschwelle in §6 der Schließakte).
+    if not live:
+        stopper.append("kein Live-Artikel gemessen – ein leerer Bestand ist kein Grün")
     if live and avg_live < AVG_TARGET:
         stopper.append(f"Ø Flesch (live) {avg_live:.1f} < Ziel {AVG_TARGET:.0f}")
     for r in sorted(below_floor, key=lambda x: x['flesch']):

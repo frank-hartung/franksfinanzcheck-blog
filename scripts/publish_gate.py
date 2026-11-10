@@ -554,10 +554,13 @@ def readability_failures(candidates):
     nur noch melden, was sie nicht mehr verhindern durfte.
 
     Deshalb gilt ab sofort zusätzlich die SSOT-Schwelle aus
-    `readability_check`: `NEW_FLESCH_MIN` (60.0) – mit Sicherheitsabstand zum
-    Bestands-Floor (55.0), damit ein neuer Artikel den Durchschnitt hebt statt
-    ihn zu drücken. Die Schwelle wird importiert, nicht kopiert; der
-    `--selftest` des Prüfers verteidigt sie gegen stilles Absenken.
+    `readability_check`: `NEW_FLESCH_MIN` (60.0). Seit 09.11.2026 ist der
+    Bestands-Boden `FLOOR_MIN` DIESELBE Zahl – die frühere Lücke (Boden 55,
+    Tor 60) ließ einen Live-Artikel bei Flesch 59,7 als „OK“ durchgehen
+    (Schließakte §8). Damit gibt es keine zwei Wahrheiten mehr; ein neuer
+    Artikel muss den Durchschnitt über das Ziel (62) heben, nicht über den
+    Boden. Die Schwelle wird importiert, nicht kopiert; der `--selftest` des
+    Prüfers verteidigt sie gegen stilles Absenken.
     """
     try:
         from readability_check import load_article, analyze, NEW_FLESCH_MIN
