@@ -49,13 +49,10 @@ Die folgenden Schritte zeigen dir, wie du dein **[WLAN verbessern](../../posts/2
 💡 **Schnell-Tipp von FranksFinanzcheck:** Prüfe jetzt, ob an deiner Adresse schnellere Tarife mit modernen Wi-Fi-6-Routern günstiger verfügbar sind: [**Internet & DSL vergleichen**](/go/dsl/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-![Merkkarte: Kernaussagen zu WLAN verbessern: So bringst du stabilen Speed in jede Ecke](abbildung-merkkarte. svg)
-
-*Abbildung: Merkkarte zu „[WLAN verbessern](../../posts/2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check/): So bringst du stabilen Speed in jede Ecke“ (eigene Darstellung aus diesem Beitrag).*
-
 ![Merkkarte: Kernaussagen zu WLAN verbessern: So bringst du stabilen Speed in jede Ecke](abbildung-merkkarte.svg)
 
 *Abbildung: Merkkarte zu „WLAN verbessern: So bringst du stabilen Speed in jede Ecke“ (eigene Darstellung aus diesem Beitrag).*
+
 
 ## Die häufigsten WLAN-Bremsen im Haushalt
 
@@ -139,11 +136,9 @@ Mietest du den Router für 5 bis 8 € und hast trotzdem Funklöcher? Dann zahl
 6. **Gäste-WLAN an, IoT getrennt.** Kameras und Staubsaugerroboter gehören nicht ins Arbeitsnetz.
 7. **Nach 7 Tagen erneut messen.** Dieselbe Uhrzeit, dieselben drei Orte. Nur Zahlen beweisen, dass die Maßnahme wirkt.
 
-![Gliederung des Beitrags: WLAN verbessern: So bringst du stabilen Speed in jede Ecke](abbildung-ablauf. svg)
+![Gliederung des Beitrags: WLAN verbessern: So bringst du stabilen Speed in jede Ecke](abbildung-ablauf.svg)
 
 *Abbildung: Gliederung zu „WLAN verbessern: So bringst du stabilen Speed in jede Ecke“ – 5 Stationen von „Die häufigsten WLAN-Bremsen im Haushalt“ bis „Typische WLAN-Fehler, die Speed fressen“ (eigene Darstellung).*
-
-![Gliederung des Beitrags: WLAN verbessern: So bringst du stabilen Speed in jede Ecke](abbildung-ablauf.svg)
 
 ## Was Mesh, Repeater und Powerline 2026 konkret unterscheiden?
 

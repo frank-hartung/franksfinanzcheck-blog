@@ -257,6 +257,63 @@ def lade_artikel(pfad: str) -> dict | None:
     }
 
 
+def eigene_belegkette(art: dict) -> list[dict]:
+    """Die vom Artikel SELBST zitierte Belegkette aus dem Frontmatter.
+
+    WARUM (10.11.2026, #1098): Die KI-Fachprüfung bekam bis heute nur die
+    frischen Recherche-Fundstellen. Eine Aussage, die der Artikel mit
+    „laut BDEW“ belegt und im Frontmatter als Quelle führt, war für den
+    Prüfer damit „ohne Quellenangabe“ – obwohl die Quelle im selben Dokument
+    steht. Die Folge waren Fachbefunde, die nur ein Mensch schließen darf,
+    und eine Scorecard, die wegen dieser Blindstelle dauerhaft rot blieb.
+    Die eigene Belegkette ist Prüfgegenstand, kein Freibrief: Ein Befund
+    bleibt zulässig, wenn die zitierte Quelle die Aussage nicht trägt –
+    behauptet werden darf aber nicht mehr, es gebe gar keine Quelle.
+    """
+    try:
+        import yaml
+    except ImportError:                                  # pragma: no cover
+        return []
+    try:
+        fm = yaml.safe_load(art.get("fm", "")) or {}
+    except Exception:                                    # noqa: BLE001
+        return []
+    roh = fm.get("quellen") if isinstance(fm, dict) else None
+    if not isinstance(roh, list):
+        return []
+    out = []
+    for q in roh[:10]:
+        if not isinstance(q, dict) or not q.get("url"):
+            continue
+        out.append({
+            "titel": str(q.get("titel") or "")[:140],
+            "url": str(q.get("url")),
+            "herausgeber": str(q.get("herausgeber") or "")[:80],
+            "datum": str(q.get("datum") or "")[:10],
+        })
+    return out
+
+
+def _belegketten_block(art: dict) -> str:
+    """Prompt-Block der eigenen Belegkette (leer, wenn keine existiert)."""
+    ketten = eigene_belegkette(art)
+    if not ketten:
+        return ("EIGENE BELEGKETTE DES ARTIKELS: keine (Frontmatter ohne "
+                "`quellen`) – eine Beleglücke ist hier zulässig.")
+    zeilen = ["EIGENE BELEGKETTE DES ARTIKELS (vom Autor zitiert, im "
+              "Frontmatter geführt):"]
+    for q in ketten:
+        zeilen.append(f"- {q['titel']} | {q['herausgeber']}"
+                      f"{' | ' + q['datum'] if q['datum'] else ''} | {q['url']}")
+    zeilen.append(
+        "Regel dazu: Eine Aussage, die durch einen dieser Belege gedeckt ist, "
+        "ist KEINE Beleglücke. Melde nur, wenn der Beleg die Aussage nicht "
+        "tragen kann (falsche Seite, anderer Zeitraum, andere Zielgruppe) – "
+        "und nenne dann genau diesen Grund. Erfinde keine fehlende Quelle, "
+        "wo eine Quelle im Dokument steht.")
+    return "\n".join(zeilen)
+
+
 # Felder, die NUR der Lauf kennt und die in keiner Datei stehen. Wer eine
 # frisch gelesene Fassung an ihre Stelle setzt, verliert sie (#984).
 LAUF_FELDER = ("_faellig", "_geo", "bereich")
@@ -691,7 +748,7 @@ gelieferten Fundstellen stehen.
 4. Antworte AUSSCHLIESSLICH mit einem JSON-Objekt, ohne Vorspann, ohne \
 Code-Fence, in diesem Schema:
 {"artikel_sha256":"den übergebenen PRUEF_HASH wörtlich zurückgeben",
- "befunde":[{"typ":"veraltet|luecke|praezision","text":"...","beleg":"https://..."}],
+ "befunde":[{"typ":"veraltet|luecke|praezision","text":"...","stelle":"wörtliches Zitat aus dem Artikeltext","beleg":"https://..."}],
  "quellen":[{"titel":"...","url":"https://...","herausgeber":"...","datum":"YYYY-MM-DD"}],
  "kurzfazit":"ein Satz"}
 5. Maximal 5 Befunde, maximal 4 Quellen. Deutsche Sprache, konkret, ohne Floskeln.
@@ -815,11 +872,15 @@ def claude_fachpruefung(art: dict, dossier: dict, cfg: dict,
         f"KURZANTWORT: {art.get('kurzantwort') or '–'}\n"
         f"PIN-TITEL: {fm_wert(art.get('fm', ''), 'pin_title') or '–'}\n"
         f"PIN-BESCHREIBUNG: {fm_wert(art.get('fm', ''), 'pin_description') or '–'}\n\n"
-        f"PRUEF_HASH: {pruef_hash}\n"
+        f"PRUEF_HASH: {pruef_hash}\n\n"
+        f"{_belegketten_block(art)}\n\n"
         f"ARTIKELTEXT (vollständig):\n{art['body']}\n\n"
         f"FRISCHE FUNDSTELLEN:\n{fund_text}\n\n"
         "Aufgabe: Nenne fachliche Befunde (veraltete Angaben, fehlende Aspekte, "
-        "unpräzise Formulierungen) und belege sie ausschließlich mit den obigen URLs."
+        "unpräzise Formulierungen) und belege sie ausschließlich mit den obigen URLs. "
+        "Jeder Befund nennt in `stelle` den betroffenen Satz AUS DEM ARTIKELTEXT "
+        "wörtlich (max. 200 Zeichen). Ein Befund ohne wörtliche Fundstelle im Text "
+        "wird verworfen."
     )
     fehler = []
     for provider in anbieter:
@@ -840,7 +901,17 @@ def claude_fachpruefung(art: dict, dossier: dict, cfg: dict,
                 if daten.get("artikel_sha256") != pruef_hash:
                     fehler.append(f"{provider}/{modell}: Prüfversion passt nicht")
                     continue
-                return *claude_antwort_pruefen(antwort, dossier, cfg), f"geprüft ({provider}:{modell})"
+                verworfen: list = []
+                befunde, quellen = claude_antwort_pruefen(
+                    antwort, dossier, cfg, artikel_body=art.get("body", ""),
+                    verworfen=verworfen)
+                status = f"geprüft ({provider}:{modell})"
+                if verworfen:
+                    # Sichtbar machen, nicht verschweigen: Ein verworfener
+                    # Befund ist ein Formatfehler des Prüfers, kein Freispruch.
+                    status += (f"; {len(verworfen)} Befund(e) ohne belegbaren "
+                               "Textanker verworfen")
+                return befunde, quellen, status
             fehler.append(f"{provider}/{modell}: ungültiges Antwortformat")
             continue
         fehler.append(f"{provider}/{modell}: keine verwertbare Antwort")
@@ -880,14 +951,41 @@ def _text(wert: object) -> str:
     return wert.strip() if isinstance(wert, str) else ""
 
 
-def claude_antwort_pruefen(rohantwort: str, dossier: dict, cfg: dict) -> tuple[list[dict], list[dict]]:
+def _anker_form(text: str) -> str:
+    """Vergleichsform für einen wörtlichen Textanker.
+
+    Entfernt nur Markdown-Schmuck und vereinheitlicht Leerraum. Inhaltliche
+    Glättung findet NICHT statt: Ein Befund, der seinen Satz nicht wiederfindet,
+    ist kein Befund über diesen Text.
+    """
+    text = re.sub(r"[*_`>#\[\]()]", " ", str(text or ""))
+    return re.sub(r"\s+", " ", text).strip().lower()
+
+
+def _anker_belegt(stelle: str, body: str) -> bool:
+    """True, wenn `stelle` wörtlich (markdown-normalisiert) im Body steht."""
+    anker = _anker_form(stelle)
+    if len(anker) < 12:
+        return False
+    return anker in _anker_form(body)
+
+
+def claude_antwort_pruefen(rohantwort: str, dossier: dict, cfg: dict,
+                           artikel_body: str | None = None,
+                           verworfen: list | None = None) -> tuple[list[dict], list[dict]]:
     """ANTI-HALLUZINATIONS-VERTRAG.
 
     Verworfen wird alles, was nicht doppelt gedeckt ist:
       (a) die URL muss WÖRTLICH im Dossier stehen und
       (b) ihre Domain muss auf der Allowlist liegen.
-    Damit kann keine erfundene Quelle und keine Provisionsseite in einen
-    Artikel gelangen – unabhängig davon, was das Modell antwortet.
+    Seit 10.11.2026 (#1098) gilt zusätzlich:
+      (c) der Befund muss seinen Satz WÖRTLICH im Artikeltext haben
+          (`stelle`), wenn der Aufrufer den Body mitgibt. Ein Befund ohne
+          Textanker beschreibt keinen Text – er ist nicht entscheidbar und
+          darf keinen Menschen binden.
+    Damit kann keine erfundene Quelle, keine Provisionsseite und kein
+    freischwebender Befund in einen Artikel gelangen – unabhängig davon, was
+    das Modell antwortet.
     """
     index = allowlist_index(cfg)
     erlaubte_urls = {t.get("url", "") for t in dossier.get("treffer", []) if t.get("url")}
@@ -899,11 +997,17 @@ def claude_antwort_pruefen(rohantwort: str, dossier: dict, cfg: dict) -> tuple[l
     for b in (daten.get("befunde") or [])[:5]:
         if not isinstance(b, dict) or not _text(b.get("text")):
             continue
+        stelle = _text(b.get("stelle"))
+        if artikel_body is not None and not _anker_belegt(stelle, artikel_body):
+            if verworfen is not None:
+                verworfen.append(stelle or _text(b["text"])[:80])
+            continue
         beleg = _text(b.get("beleg"))
         if beleg and (beleg not in erlaubte_urls or not ist_belegfaehig(beleg, index)):
             beleg = ""   # ungedeckte URL fliegt raus, der Befund bleibt lesbar
         befunde.append({"typ": (_text(b.get("typ")) or "befund")[:20],
-                        "text": _text(b["text"])[:400], "beleg": beleg})
+                        "text": _text(b["text"])[:400], "stelle": stelle[:200],
+                        "beleg": beleg})
 
     max_q = int((cfg.get("budget") or {}).get("max_quellen_frontmatter", 4))
     quellen, gesehen = [], set()
@@ -1439,6 +1543,36 @@ def selftest() -> int:
     pruefe("ST3a", len(befunde), 1)
     pruefe("ST3b", befunde[0]["beleg"], "")
     pruefe("ST3c", [q["url"] for q in quellen], ["https://www.destatis.de/echt"])
+
+    # ST3d–ST3g – Textanker (10.11.2026, #1098): Ein Befund ohne wörtliche
+    # Fundstelle im Artikel ist nicht entscheidbar und wird verworfen. Die
+    # Prüfung ist mechanisch (Stringvergleich), nicht fachlich.
+    body = ("Laut BDEW kostet die Kilowattstunde im Oktober 2026 rund "
+            "11,93 Cent. Der Preis gilt für Neukunden.")
+    def _antwort(stelle: str) -> str:
+        return json.dumps({"artikel_sha256": "x",
+                           "befunde": [{"typ": "luecke", "text": "Beleglücke",
+                                        "stelle": stelle, "beleg": ""}],
+                           "quellen": []})
+    b_ok, _ = claude_antwort_pruefen(_antwort("Kilowattstunde im Oktober 2026"),
+                                     dossier, cfg, artikel_body=body)
+    pruefe("ST3d", len(b_ok), 1)
+    verworfen: list = []
+    b_frei, _ = claude_antwort_pruefen(
+        _antwort("Diese Aussage steht nicht im Artikel"), dossier, cfg,
+        artikel_body=body, verworfen=verworfen)
+    pruefe("ST3e", (len(b_frei), len(verworfen)), (0, 1))
+    # Ohne Body bleibt der Altvertrag gültig (Rückwärtsbindung der Dossiers).
+    b_alt, _ = claude_antwort_pruefen(_antwort("irgendetwas"), dossier, cfg)
+    pruefe("ST3f", len(b_alt), 1)
+    # Die eigene Belegkette ist Prüfgegenstand und steht im Prompt.
+    art_q = {"fm": 'title: "X"\nquellen:\n  - titel: "BDEW-Analyse"\n'
+                   '    url: "https://www.bdew.de/x"\n    herausgeber: "BDEW"\n'
+                   '    datum: "2026-10-28"\n'}
+    eigene = eigene_belegkette(art_q)
+    pruefe("ST3g", (len(eigene), eigene[0]["url"]),
+           (1, "https://www.bdew.de/x"))
+    pruefe("ST3h", "BDEW-Analyse" in _belegketten_block(art_q), True)
 
     # ST4 – Frontmatter: YAML-sicher, idempotent, Body unberührt
     fm = 'title: "Test"\ndate: 2026-09-01\n'

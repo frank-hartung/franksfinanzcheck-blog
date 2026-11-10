@@ -97,7 +97,38 @@ def resolve_fragment(fragment: str, slugs: list) -> str | None:
     return None
 
 
-def heal_url(url: str, slugs: list) -> str | None:
+def heal_asset_url(url: str, basis: Path | None) -> str | None:
+    """Heilt eine RELATIVE Datei-URL, deren Leerzeichen die Datei unauffindbar
+    macht (`abbildung-merkkarte. svg` → `abbildung-merkkarte.svg`).
+
+    Warum das eine eigene Klasse ist (10.11.2026, #1098): `fix_url_hygiene`
+    löste bisher nur Post-Slugs auf. Eine zerlegte Bild-URL zeigt aber auf
+    eine Datei im selben Ordner – der Slug-Resolver kann sie nie finden, also
+    blieb der harte R8-URL-LEERZEICHEN stehen, obwohl die Heilung trivial und
+    beweisbar ist (die Zieldatei existiert). Geheilt wird NUR, wenn die Datei
+    ohne die Leerzeichen nachweislich existiert – niemals geraten.
+    """
+    if not basis or not url:
+        return None
+    if url.startswith(("http://", "https://", "mailto:", "#", "/", "data:")):
+        return None
+    if '"' in url or "'" in url:
+        return None
+    if " " not in url and "%20" not in url and "%2e" not in url.lower():
+        return None
+    ziel, trenner, anker = url.partition("#")
+    ziel, frage, query = ziel.partition("?")
+    entpackt = ziel.replace("%20", " ").replace("%2E", ".").replace("%2e", ".")
+    ohne_leerraum = entpackt.replace(" ", "")
+    if ohne_leerraum == entpackt:
+        return None
+    if not (basis / ohne_leerraum).is_file():
+        return None
+    return ohne_leerraum + (frage + query if frage else "") + \
+        (trenner + anker if trenner else "")
+
+
+def heal_url(url: str, slugs: list, basis: Path | None = None) -> str | None:
     """Korrigiert EINE Markdown-URL, wenn sie ein heilbares Leerzeichen/
     %20-Problem hat und eindeutig auflösbar ist. None = keine Änderung."""
     if not url or url.startswith(("http://", "https://", "mailto:", "#")):
@@ -109,6 +140,11 @@ def heal_url(url: str, slugs: list) -> str | None:
         return None
     if " " not in url and "%20" not in url:
         return None
+    # 1) Eine Datei im selben Ordner ist der stärkere Beweis als ein Slug:
+    #    Sie existiert – oder die Heilung unterbleibt.
+    datei = heal_asset_url(url, basis)
+    if datei is not None:
+        return datei
     url = url.replace("%20", " ")  # %20 ist kodiertes Leerzeichen
     segs = [s for s in url.split("/") if s != ""]
     if not segs:
@@ -128,7 +164,7 @@ def heal_url(url: str, slugs: list) -> str | None:
 _LINK_RE = re.compile(r"(\[[^\]]*\])\(([^)]*)\)")
 
 
-def heal_text(text: str, slugs: list) -> tuple:
+def heal_text(text: str, slugs: list, basis: Path | None = None) -> tuple:
     """Heilt alle URLs in einem Markdown-Text.
 
     Rückgabe: (neuer_text, anzahl_fixes, [beschreibungen])."""
@@ -138,7 +174,7 @@ def heal_text(text: str, slugs: list) -> tuple:
     def _sub(m: re.Match) -> str:
         nonlocal new_count
         head, url = m.group(1), m.group(2)
-        fixed = heal_url(url, slugs)
+        fixed = heal_url(url, slugs, basis)
         if fixed is None or fixed == url:
             return m.group(0)
         new_count += 1
@@ -168,7 +204,9 @@ def run_fix(root: Path = CONTENT, posts_dir: Path = POSTS,
     stats = {"files": 0, "fixes": 0, "unreviewed": []}
     for path in content_files(root):
         text = path.read_text(encoding="utf-8")
-        new_text, count, _ = heal_text(text, slugs)
+        # `basis` = Ordner der Datei: nur dort ist eine relative Datei-URL
+        # (Bild, SVG, PDF) überhaupt auflösbar.
+        new_text, count, _ = heal_text(text, slugs, path.parent)
         if count and do_write:
             import editorial_review_gate as _ymyl_gate
             if _ymyl_gate.automatic_change_findings(text, new_text):
@@ -319,7 +357,30 @@ def run_selftest() -> list:
     if hold_is_healable("publish-gate: Lesbarkeits-Gate nicht bestanden: Score 60"):
         fehler.append("Nicht-heilbarer hold fälschlich als heilbar erkannt")
 
-    # 7) End-to-End: --heal-holds auf Fixture (Temp-Posts)
+    # 7) Zerlegte DATEI-URL im selben Ordner (Dauerheilung 10.11.2026, #1098).
+    #    `fix_spaces.py` machte aus `abbildung-merkkarte.svg` ein
+    #    `abbildung-merkkarte. svg`; der Slug-Resolver konnte das nie heilen.
+    with tempfile.TemporaryDirectory() as tmp:
+        basis = Path(tmp)
+        (basis / "abbildung-merkkarte.svg").write_text("<svg/>", encoding="utf-8")
+        for kaputt in ("abbildung-merkkarte. svg",
+                       "abbildung-merkkarte%2E svg",
+                       "./abbildung-merkkarte. svg"):
+            fixed = heal_url(kaputt, slugs, basis)
+            erwartet = "abbildung-merkkarte.svg" if not kaputt.startswith("./") \
+                else "./abbildung-merkkarte.svg"
+            if fixed != erwartet:
+                fehler.append(f"Datei-URL nicht geheilt: {kaputt!r} → {fixed!r}")
+        if heal_url("abbildung-merkkarte. svg", slugs) is not None:
+            fehler.append("Datei-URL ohne Ordnerkontext wurde geändert (Rate-Verbot)")
+        if heal_url("gibtsnicht. svg", slugs, basis) is not None:
+            fehler.append("Nicht existierende Datei wurde geändert (Rate-Verbot)")
+        body = "![Merkkarte](abbildung-merkkarte. svg)\n"
+        neu_body, anzahl, _ = heal_text(body, slugs, basis)
+        if anzahl != 1 or "(abbildung-merkkarte.svg)" not in neu_body:
+            fehler.append(f"heal_text heilte die Bildzeile nicht: {neu_body!r}")
+
+    # 8) End-to-End: --heal-holds auf Fixture (Temp-Posts)
     with tempfile.TemporaryDirectory() as tmp:
         fx_root = Path(tmp)
         fx_posts = fx_root / "content" / "posts"
