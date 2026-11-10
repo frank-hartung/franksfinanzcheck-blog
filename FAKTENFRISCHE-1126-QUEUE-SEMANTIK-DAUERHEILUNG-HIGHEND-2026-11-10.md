@@ -127,6 +127,17 @@ $ python3 scripts/faktenfrische.py --selftest
 
 $ python3 scripts/automation_premium_audit.py --strict
 🟢 alle Actions gepinnt, alle Jobs mit Timeout/Permissions/Concurrency
+
+$ python3 -m unittest discover -s scripts/tests      # volle Suite, sauberer Baum
+Ran 5749 tests in 659.028s
+OK (skipped=6)
+
+$ python3 scripts/selftest_clock.py --trap-modul scripts.tests.test_faktenfrische_messhoehe --offset 97
+✅ scripts.tests.test_faktenfrische_messhoehe: bleibt unter einer um 97 Tage
+   vorgestellten Uhr grün. (15 Tests, darunter alle Fristen 2026-11-13…23)
+
+$ python3 scripts/blustradius_register.py --check
+✅ Blustradius-Vertrag erfüllt: 86 Schritte des Auslieferungswegs erklären ihren Blustradius.
 ```
 
 Die beiden Tests aus dem Befund sind grün, **weil** die Daten stimmen – nicht,
