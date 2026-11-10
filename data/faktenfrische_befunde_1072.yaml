@@ -932,7 +932,15 @@ befunde:
   entscheidung: 'Heutiger Text geprueft: Überladung behauptet heute nur noch kauselich
     (''kann die Lager beschädigen''), keine konkreten Reparaturkosten oder Verschleißdaten
     mehr als Tatsache.'
-  status: behoben
+  status: ueberholt
+  abgeloest_am: '2026-11-10'
+  abgeloest_durch: WF-7B6B-1148-DAUERHEILUNG-HIGHEND-2026-11-10.md
+  abloesung_grund: >-
+    Der Artikel wurde am 10.11.2026 unter WF-7B6B (PR #1163, Issue #1148) neu belegt:
+    acht Quellen im Frontmatter, neue Modellrechnung mit offengelegten Annahmen,
+    die unbelegten Aussagen entfernt. Die Anker dieser Entscheidung stammen aus der
+    Fassung vom 05.11.2026; die Pruefung gilt dieser Fassung, nicht dem heutigen Text.
+    Die Sperre gegen die alte Behauptung bleibt in Kraft.
   belegtyp: ergaenzt
   beleg_url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
   anker:
@@ -955,7 +963,15 @@ befunde:
   entscheidung: 'Heutiger Text geprueft: ''richtiges Beladen senkt die Fixkosten''
     heute als Moglichkeit (''kann die Fixkosten senken'') und als Modellbeispiel dargestellt,
     nicht als pauschales Leistungsversprechen.'
-  status: behoben
+  status: ueberholt
+  abgeloest_am: '2026-11-10'
+  abgeloest_durch: WF-7B6B-1148-DAUERHEILUNG-HIGHEND-2026-11-10.md
+  abloesung_grund: >-
+    Der Artikel wurde am 10.11.2026 unter WF-7B6B (PR #1163, Issue #1148) neu belegt:
+    acht Quellen im Frontmatter, neue Modellrechnung mit offengelegten Annahmen,
+    die unbelegten Aussagen entfernt. Die Anker dieser Entscheidung stammen aus der
+    Fassung vom 05.11.2026; die Pruefung gilt dieser Fassung, nicht dem heutigen Text.
+    Die Sperre gegen die alte Behauptung bleibt in Kraft.
   belegtyp: ergaenzt
   beleg_url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
   anker:
@@ -979,7 +995,15 @@ befunde:
   entscheidung: 'Heutiger Text geprueft: Modellrechnung (0,9 kWh/50 L, 0,6 kWh/35
     L, 0,40 €/kWh, 0,005 €/L, 22 €/Jahr) steht heute durchgehend als ''Ergebnis der
     Modellrechnung'' mit offengelegten Annahmen da; keine Außenbehauptung mehr.'
-  status: behoben
+  status: ueberholt
+  abgeloest_am: '2026-11-10'
+  abgeloest_durch: WF-7B6B-1148-DAUERHEILUNG-HIGHEND-2026-11-10.md
+  abloesung_grund: >-
+    Der Artikel wurde am 10.11.2026 unter WF-7B6B (PR #1163, Issue #1148) neu belegt:
+    acht Quellen im Frontmatter, neue Modellrechnung mit offengelegten Annahmen,
+    die unbelegten Aussagen entfernt. Die Anker dieser Entscheidung stammen aus der
+    Fassung vom 05.11.2026; die Pruefung gilt dieser Fassung, nicht dem heutigen Text.
+    Die Sperre gegen die alte Behauptung bleibt in Kraft.
   belegtyp: ergaenzt
   beleg_url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
   anker:
@@ -1002,7 +1026,15 @@ befunde:
   entscheidung: 'Heutiger Text geprueft: ''rund 5 € jährlich'' steht heute nur noch
     als Modelljahr-Beispiel (''im Modelljahr rund 5 €''), keine versprochene Ersparnis
     mehr.'
-  status: behoben
+  status: ueberholt
+  abgeloest_am: '2026-11-10'
+  abgeloest_durch: WF-7B6B-1148-DAUERHEILUNG-HIGHEND-2026-11-10.md
+  abloesung_grund: >-
+    Der Artikel wurde am 10.11.2026 unter WF-7B6B (PR #1163, Issue #1148) neu belegt:
+    acht Quellen im Frontmatter, neue Modellrechnung mit offengelegten Annahmen,
+    die unbelegten Aussagen entfernt. Die Anker dieser Entscheidung stammen aus der
+    Fassung vom 05.11.2026; die Pruefung gilt dieser Fassung, nicht dem heutigen Text.
+    Die Sperre gegen die alte Behauptung bleibt in Kraft.
   belegtyp: ergaenzt
   beleg_url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
   anker:
@@ -1024,7 +1056,15 @@ befunde:
   entscheidung: 'Heutiger Text geprueft: ''80 % Kapazität / bis zu 15 % weniger''
     steht heute nur noch als gekennzeichnetes Modellbeispiel mit Beispielwerten, keine
     Tatsachenbehauptung mehr.'
-  status: behoben
+  status: ueberholt
+  abgeloest_am: '2026-11-10'
+  abgeloest_durch: WF-7B6B-1148-DAUERHEILUNG-HIGHEND-2026-11-10.md
+  abloesung_grund: >-
+    Der Artikel wurde am 10.11.2026 unter WF-7B6B (PR #1163, Issue #1148) neu belegt:
+    acht Quellen im Frontmatter, neue Modellrechnung mit offengelegten Annahmen,
+    die unbelegten Aussagen entfernt. Die Anker dieser Entscheidung stammen aus der
+    Fassung vom 05.11.2026; die Pruefung gilt dieser Fassung, nicht dem heutigen Text.
+    Die Sperre gegen die alte Behauptung bleibt in Kraft.
   belegtyp: ergaenzt
   beleg_url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
   anker:
