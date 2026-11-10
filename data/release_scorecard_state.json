@@ -1,20 +1,20 @@
 {
   "version": 1,
-  "generated_at": "2026-11-10T12:56:01Z",
-  "modus": "kandidaten",
-  "commit": "24bb2b6a8d82ac693aaacf37954be7f1fcc1804e",
+  "generated_at": "2026-11-10T13:29:23Z",
+  "modus": "live",
+  "commit": "8b173b077986d3f63ab9eb7935db41c95cfa6735",
   "kapazitaet": {
     "stichtag": "2026-11-10",
     "basis": "2026-11-10",
     "projiziert": false,
     "artikel": 126,
-    "faellig": 2,
+    "faellig": 0,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
-      "slug": "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser",
-      "frist": "2026-11-12",
-      "restlaufzeit": 2
+      "slug": "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
+      "frist": "2026-11-13",
+      "restlaufzeit": 3
     },
     "budget": 4,
     "laeufe_je_tag": 1.0,
@@ -25,7 +25,7 @@
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
-    "abbau_tage": 0,
+    "abbau_tage": null,
     "verletzungen_alt": 0,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
@@ -75,13 +75,14 @@
         "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
         "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
         "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
+        "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser",
         "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
         "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
         "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
         "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
         "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen"
       ],
-      "anzahl": 20
+      "anzahl": 21
     },
     {
       "check": "T6-textverstaendnis",
@@ -140,10 +141,10 @@
     }
   ],
   "befundlage": {
-    "offen": 122,
-    "seiten": 29,
-    "live_befunde": 82,
-    "live_seiten": 20,
+    "offen": 140,
+    "seiten": 33,
+    "live_befunde": 87,
+    "live_seiten": 21,
     "ueberholt": 102,
     "ohne_fassung": 15,
     "nicht_entscheidbar": 0,
@@ -166,6 +167,7 @@
       "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": 3,
       "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": 3,
       "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": 2,
+      "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": 5,
       "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": 5,
       "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": 5,
       "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": 3,
@@ -640,7 +642,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
@@ -1129,22 +1131,29 @@
       "checks": []
     },
     "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": {
-      "sha256": "123ecbd66eb005c889a252ec3540eb82df858b397bfc9c5209c298d1fa01c395",
-      "urteil": "freigabe-reif",
+      "sha256": "adbde627796fe38dc1f98398f3dcaae86af80d45453b12d771ae42dac3bfa9b7",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-12",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "naechste_pruefung": "2026-12-25",
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "7a87eaaa2b863ba8cc46 (luecke): Ein relevanter regulatorischer Rahmen (z. B. Vorgaben der Bundesnetzagentur oder BDEW) wird nicht genannt, obwohl die Fundstelle darauf hinweist, dass solche Vorgaben existieren.; 9d67a5e6bd11212c7c1e (praezision): Die Aussage, dass bestimmte Gerätegruppen (TV‑Ecke, Homeoffice, alte Audio‑Technik) zuerst zu senken „lohnt“, wird ohne messbare Daten oder Vergleichskrit"
+        }
+      ]
     },
     "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug": {
       "sha256": "70bf355db29f167bdd8f482dea38f0ebc1e9b6a3e72ba245a7e6bf07f606be8a",
