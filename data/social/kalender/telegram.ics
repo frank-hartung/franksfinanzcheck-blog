@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:telegram:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-a
  chten-musst:nutzen:2026-11-10@franksfinanzcheck.de
-DTSTAMP:20261110T133534Z
+DTSTAMP:20261110T133727Z
 DTSTART:20261110T170000Z
 DTEND:20261110T171500Z
 SUMMARY:Telegram (Kanal): Wohngebäudeversicherung Vergleich: Worauf du
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-12-energieausweis-was-das-dokument-fuer-deine-fix
  kosten:nutzen:2026-11-14@franksfinanzcheck.de
-DTSTAMP:20261110T133534Z
+DTSTAMP:20261110T133727Z
 DTSTART:20261114T060000Z
 DTEND:20261114T061500Z
 SUMMARY:Telegram (Kanal): Energieausweis: Was er für deine Fixkosten b
@@ -38,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-u
  pdate-2026:nutzen:2026-11-15@franksfinanzcheck.de
-DTSTAMP:20261110T133534Z
+DTSTAMP:20261110T133727Z
 DTSTART:20261115T060000Z
 DTEND:20261115T061500Z
 SUMMARY:Telegram (Kanal): Dein Haus sicher schützen: Das neue Vorsorge
@@ -53,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-b
  ezahlbar:nutzen:2026-11-21@franksfinanzcheck.de
-DTSTAMP:20261110T133534Z
+DTSTAMP:20261110T133727Z
 DTSTART:20261121T060000Z
 DTEND:20261121T061500Z
 SUMMARY:Telegram (Kanal): Ökostrom Anbieter wechseln: Sicher\, grün un
@@ -68,7 +68,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und
  -was-sie-kostet:nutzen:2026-11-22@franksfinanzcheck.de
-DTSTAMP:20261110T133534Z
+DTSTAMP:20261110T133727Z
 DTSTART:20261122T060000Z
 DTEND:20261122T061500Z
 SUMMARY:Telegram (Kanal): Privathaftpflicht: Warum so wichtig und was 
