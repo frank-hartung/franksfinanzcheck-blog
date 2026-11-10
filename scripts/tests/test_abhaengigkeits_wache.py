@@ -177,6 +177,44 @@ class StrukturRegelnTest(unittest.TestCase):
         befunde = wache.pruefe_struktur(self.root)
         self.assertEqual([b.regel for b in befunde], [wache.REGEL_MEHRFACH])
 
+    def test_a9_untergrenze_aus_vertrag_und_overrides(self) -> None:
+        self.schreibe(
+            wache.SCHUTZ_VERTRAG_PFAD,
+            json.dumps(
+                {
+                    "schema": 1,
+                    "mindestversionen": {
+                        "npm:minimatch": {"ab": "11.0.1", "ghsa": ["GHSA-g3hv-75wg-m249"]},
+                    },
+                }
+            ),
+        )
+        self.schreibe(
+            "package.json",
+            json.dumps({"devDependencies": {"x": "1.0.0"}, "overrides": {"glob": ">=14.0.4"}}),
+        )
+        self.schreibe(
+            "package-lock.json",
+            json.dumps(
+                {
+                    "lockfileVersion": 3,
+                    "packages": {
+                        "": {},
+                        "node_modules/x": {"version": "1.0.0"},
+                        "node_modules/minimatch": {"version": "10.2.6"},
+                        "node_modules/glob": {"version": "13.0.6"},
+                    },
+                }
+            ),
+        )
+        befunde = wache.pruefe_struktur(self.root)
+        self.assertEqual([b.regel for b in befunde], [wache.REGEL_UNTERGRENZE, wache.REGEL_UNTERGRENZE])
+
+    def test_a9_kaputter_vertrag_ist_fehler_statt_freibrief(self) -> None:
+        self.schreibe(wache.SCHUTZ_VERTRAG_PFAD, "{ungueltig")
+        befunde = wache.pruefe_struktur(self.root)
+        self.assertEqual([b.regel for b in befunde], [wache.REGEL_UNTERGRENZE])
+
 
 class AdHocInstallationTest(unittest.TestCase):
     """Regeln A7/A8 (WF-E813 / #972, 01.11.2026).
@@ -308,6 +346,27 @@ class AuditTest(unittest.TestCase):
     def test_ohne_fix_bleibt_der_befund_stehen(self) -> None:
         roh = {"ghsa_id": "GHSA-n", "severity": "medium", "summary": "kein fix", "vulnerabilities": []}
         self.assertEqual(wache._normalisiere(roh)["fixed"], "")
+
+    def test_mehrzweig_advisory_waehlt_aufsteigenden_fix_statt_downgrade(self) -> None:
+        roh = {
+            "ghsa_id": "GHSA-7r86-cg39-jmmj",
+            "severity": "high",
+            "summary": "Mehrzweig",
+            "vulnerabilities": [
+                {
+                    "package": {"ecosystem": "npm", "name": "minimatch"},
+                    "vulnerable_version_range": "< 3.1.3",
+                    "first_patched_version": {"identifier": "3.1.3"},
+                },
+                {
+                    "package": {"ecosystem": "npm", "name": "minimatch"},
+                    "vulnerable_version_range": ">= 10.0.0, < 10.2.3",
+                    "first_patched_version": {"identifier": "10.2.3"},
+                },
+            ],
+        }
+        anf = wache.Anforderung("npm", "minimatch", "10.2.1", "package-lock.json", 0, "lock")
+        self.assertEqual(wache._normalisiere(roh, anf)["fixed"], "10.2.3")
 
 
 class HauptprogrammTest(unittest.TestCase):

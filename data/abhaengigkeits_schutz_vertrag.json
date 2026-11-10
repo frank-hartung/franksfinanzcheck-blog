@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "nur_verschaerfen": true,
+  "ignore_scripts_pflicht": true,
+  "erlaubte_npm_hosts": [
+    "registry.npmjs.org"
+  ],
+  "heil_branch_praefix": "automation/deps-heilung-",
+  "ledger": "data/abhaengigkeits_schutz_belege.jsonl",
+  "mindestversionen": {
+    "npm:glob": {
+      "ab": "14.0.2",
+      "ghsa": [
+        "GHSA-3g3m-2fjr-6pw4"
+      ],
+      "seit": "2026-11-10",
+      "grund": "Glob: AbortSignal cancellation bypass allows post-timeout filesystem traversal"
+    },
+    "npm:minimatch": {
+      "ab": "11.0.1",
+      "ghsa": [
+        "GHSA-g3hv-75wg-m249"
+      ],
+      "seit": "2026-11-10",
+      "grund": "minimatch has potential denial of service via globparts amplification"
+    }
+  },
+  "begruendung": "Dependabot-Alert #79 (GHSA-g3hv-75wg-m249 / CVE-2026-118764, minimatch < 11.0.1) und GHSA-3g3m-2fjr-6pw4 (glob < 14.0.2) kamen am 10.11.2026 über PR #1139 ins Lockfile, weil der Advisory-Audit bei PRs schwieg und kein Offline-Untergrenzen-Vertrag existierte. Jede geheilte Schwachstelle verankert hier ihre first_patched_version dauerhaft für Regel A9."
+}
