@@ -142,12 +142,12 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 | Seiten im Bestand (Posts + Ratgeber) | 126 |
 | Fällig heute / überfällig | 0 / 0 |
 | Bedarf | 3,08 Prüfungen/Tag (21,5/Woche) |
-| Angebot | 4,00/Tag (Budget 4 × 1,00 Läufe/Tag) |
-| **Deckung** | **130 %** |
+| Angebot | 5,00/Tag (Budget 5 × 1,00 Läufe/Tag) |
+| **Deckung** | **162 %** |
 | Rückstand abgebaut | **nicht abbaubar** im Horizont |
 | Nächste Frist | `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` am 2026-11-13 (in 3 Tagen) |
-| Empfohlenes Budget | 4 je Lauf (Limit 16) |
-| Spitzentag (#1039) | ✅ mitgemessen (63 Bündeltage, kein Befund) |
+| Empfohlenes Budget | 5 je Lauf (Limit 18) |
+| Spitzentag (#1039) | ✅ mitgemessen (59 Bündeltage, kein Befund) |
 
 ✅ Deckung ausreichend: Der Takt kann den Bestand halten. Ein roter Faktenstand ist damit ein echter Inhaltsbefund (F4), kein Kadenz-Artefakt.
 

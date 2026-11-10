@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-10T13:58:42Z",
+  "generated_at": "2026-11-10T16:46:33Z",
   "modus": "kandidaten",
-  "commit": "852f70115f6eb8acbd4f42a9f659d1c086ef0da6",
+  "commit": "2b8c37c4ffe0800e3c5226144e6a2d7d271aad98",
   "kapazitaet": {
     "stichtag": "2026-11-10",
     "basis": "2026-11-10",
@@ -16,12 +16,12 @@
       "frist": "2026-11-13",
       "restlaufzeit": 3
     },
-    "budget": 4,
+    "budget": 5,
     "laeufe_je_tag": 1.0,
-    "kapazitaet_je_tag": 4.0,
+    "kapazitaet_je_tag": 5.0,
     "bedarf_je_tag": 3.078,
     "bedarf_je_woche": 21.5,
-    "deckung_prozent": 130.0,
+    "deckung_prozent": 162.5,
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
@@ -46,11 +46,11 @@
       "seiten": 0,
       "rueckstand_verletzungen": 0
     },
-    "sockel": 4,
-    "empfohlenes_budget": 4,
+    "sockel": 5,
+    "empfohlenes_budget": 5,
     "empfehlung_erreicht": true,
-    "hartes_limit": 16,
-    "spitze_geprueft": 63
+    "hartes_limit": 18,
+    "spitze_geprueft": 59
   },
   "ursachen": [
     {
@@ -642,7 +642,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
