@@ -9,6 +9,7 @@
   },
   {
    "kriterium": "Abdeckungsbefund nicht älter als 14 Tage",
+   "messung": "Stand 2026-10-19 (21 Tage alt)",
    "messung": "Stand 2026-10-19 (22 Tage alt)",
    "naechster_schritt": "Export einlesen (`--import`)",
    "status": "offen",
@@ -283,6 +284,7 @@
   "delta_3_nicht_indexiert": 59,
   "delta_7_indexiert": -22,
   "delta_7_nicht_indexiert": 67,
+  "detail_alter_tage": 14,
   "detail_alter_tage": 15,
   "detail_fehlend": [
    "Nicht gefunden (404).csv",
@@ -295,6 +297,7 @@
   "detail_stand": "2026-10-26",
   "detail_urls": 4,
   "detail_vorhanden": 1,
+  "export_alter_tage": 21,
   "export_alter_tage": 22,
   "gruende": {
    "crawled_not_indexed": 4,
@@ -363,6 +366,7 @@
    "delta_3_nicht_indexiert": 59,
    "delta_7_indexiert": -22,
    "delta_7_nicht_indexiert": 67,
+   "detail_alter_tage": 14,
    "detail_alter_tage": 15,
    "detail_fehlend": [
     "Nicht gefunden (404).csv",
@@ -375,6 +379,7 @@
    "detail_stand": "2026-10-26",
    "detail_urls": 4,
    "detail_vorhanden": 1,
+   "export_alter_tage": 21,
    "export_alter_tage": 22,
    "gruende": {
     "crawled_not_indexed": 4,
@@ -462,6 +467,16 @@
    "wirkung": "69 von 111 indexierbaren Seiten hat Google noch nicht abgerufen (62.2 % des Bestands). Das ist der größte Einzelposten und der einzige, der sich ohne Google-Zugriff bewegen lässt: interne Verlinkung, Aktualität, Autorität."
   },
   {
+   "aufwand": "S",
+   "beleg": "Stand 2026-10-19 · 21 Tage alt",
+   "dringlichkeit": "P2",
+   "id": "M10",
+   "owner": "Mensch",
+   "schritt": "Search Console → Indexierung → Seiten → Exportieren, dann `python3 scripts/gsc_abdeckung.py --import <verzeichnis> --audit --schreiben`.",
+   "titel": "Neuen Abdeckungs-Export einlesen",
+   "wirkung": "Der Befund steht auf dem Stand von vor 21 Tagen. Zahlen, die älter als vier Wochen sind, taugen nicht als Entscheidungsgrundlage."
+  },
+  {
    "aufwand": "M",
    "beleg": "4 × „Gecrawlt – zurzeit nicht indexiert“",
    "dringlichkeit": "P2",
@@ -473,6 +488,7 @@
   },
   {
    "aufwand": "S",
+   "beleg": "117 indexiert bei 111 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (4 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (2 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (2 Impr.), /tags/ (1 Impr.), /tags/dns-server-%C3%A4ndern/ (1 Impr.)",
    "beleg": "117 indexiert bei 111 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (4 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (1 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /tags/ (1 Impr.), /tags/dns-server-%C3%A4ndern/ (1 Impr.)",
    "dringlichkeit": "P2",
    "id": "M4",
@@ -538,6 +554,11 @@
   "seiten": [
    {
     "grund": "verlinkt",
+    "impressionen": 158,
+    "inlinks": 17,
+    "lastmod_tage": null,
+    "outlinks": 2,
+    "position": 41.59,
     "impressionen": 166,
     "inlinks": 17,
     "lastmod_tage": null,
@@ -588,6 +609,18 @@
    },
    {
     "grund": "verlinkt",
+    "impressionen": 15,
+    "inlinks": 9,
+    "lastmod_tage": null,
+    "outlinks": 5,
+    "position": 20.6,
+    "score": 6.94,
+    "url": "/pillar/versicherungen/"
+   },
+   {
+    "grund": "verlinkt",
+    "impressionen": 9,
+    "inlinks": 4,
     "impressionen": 11,
     "inlinks": 6,
     "lastmod_tage": null,
@@ -608,6 +641,13 @@
    },
    {
     "grund": "verlinkt",
+    "impressionen": 8,
+    "inlinks": 6,
+    "lastmod_tage": null,
+    "outlinks": 8,
+    "position": 7.25,
+    "score": 5.94,
+    "url": "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/"
     "impressionen": 12,
     "inlinks": 2,
     "lastmod_tage": null,
@@ -758,6 +798,16 @@
    },
    {
     "grund": "verlinkt",
+    "impressionen": 2,
+    "inlinks": 2,
+    "lastmod_tage": null,
+    "outlinks": 3,
+    "position": 6.0,
+    "score": 4.07,
+    "url": "/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/"
+   },
+   {
+    "grund": "verlinkt",
     "impressionen": 1,
     "inlinks": 2,
     "lastmod_tage": null,
@@ -768,6 +818,16 @@
    },
    {
     "grund": "verlinkt",
+    "impressionen": 1,
+    "inlinks": 2,
+    "lastmod_tage": null,
+    "outlinks": 8,
+    "position": 4.0,
+    "score": 3.93,
+    "url": "/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/"
+   },
+   {
+    "grund": "verlinkt",
     "impressionen": 6,
     "inlinks": 3,
     "lastmod_tage": null,
@@ -775,6 +835,16 @@
     "position": 2.33,
     "score": 3.77,
     "url": "/ueber/"
+   },
+   {
+    "grund": "verlinkt",
+    "impressionen": 6,
+    "inlinks": 16,
+    "lastmod_tage": null,
+    "outlinks": 6,
+    "position": 23.0,
+    "score": 3.7,
+    "url": "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/"
    },
    {
     "grund": "verlinkt",
@@ -1647,6 +1717,7 @@
     "url": "/werkzeuge/tarifwechsel-entscheidungsbaum/"
    }
   ],
+  "stand": "2026-11-09",
   "stand": "2026-11-10",
   "welle1": [
    "/pillar/internet-dsl/",
@@ -1654,6 +1725,10 @@
    "/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/",
    "/pillar/konto-karten/",
    "/impressum/",
+   "/pillar/versicherungen/",
+   "/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/",
+   "/datenschutz/",
+   "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
    "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
    "/pillar/versicherungen/",
    "/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/",
@@ -1670,9 +1745,12 @@
    "/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
    "/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/",
    "/",
+   "/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/",
    "/posts/",
    "/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/",
+   "/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/",
    "/ueber/",
+   "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/",
    "/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
    "/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/",
    "/werkzeuge/balkonkraftwerk-rechner/",
@@ -1696,6 +1774,10 @@
    "https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/",
    "https://franksfinanzcheck.de/pillar/konto-karten/",
    "https://franksfinanzcheck.de/impressum/",
+   "https://franksfinanzcheck.de/pillar/versicherungen/",
+   "https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/",
+   "https://franksfinanzcheck.de/datenschutz/",
+   "https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
    "https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
    "https://franksfinanzcheck.de/pillar/versicherungen/",
    "https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/",
@@ -1712,9 +1794,12 @@
    "https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
    "https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/",
    "https://franksfinanzcheck.de/",
+   "https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/",
    "https://franksfinanzcheck.de/posts/",
    "https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/",
+   "https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/",
    "https://franksfinanzcheck.de/ueber/",
+   "https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/",
    "https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
    "https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/",
    "https://franksfinanzcheck.de/werkzeuge/balkonkraftwerk-rechner/",
@@ -1815,6 +1900,7 @@
   "repo": "content/ (Näherung, kein Build gemessen)"
  },
  "schema": 1,
+ "stand": "2026-11-09T13:52:47Z",
  "stand": "2026-11-10T13:26:50Z",
  "tote_ziele": [
   {
@@ -2066,6 +2152,7 @@
   {
    "regel": "W8",
    "schwere": "hinweis",
+   "text": "Der Abdeckungsbericht ist 21 Tage alt (Stand 2026-10-19). Die Search Console liefert ihn nur als CSV – ohne neuen Export misst dieser Befund die Vergangenheit."
    "text": "Der Abdeckungsbericht ist 22 Tage alt (Stand 2026-10-19). Die Search Console liefert ihn nur als CSV – ohne neuen Export misst dieser Befund die Vergangenheit."
   },
   {

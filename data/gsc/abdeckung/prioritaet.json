@@ -4,6 +4,11 @@
  "seiten": [
   {
    "grund": "verlinkt",
+   "impressionen": 158,
+   "inlinks": 17,
+   "lastmod_tage": null,
+   "outlinks": 2,
+   "position": 41.59,
    "impressionen": 166,
    "inlinks": 17,
    "lastmod_tage": null,
@@ -54,6 +59,18 @@
   },
   {
    "grund": "verlinkt",
+   "impressionen": 15,
+   "inlinks": 9,
+   "lastmod_tage": null,
+   "outlinks": 5,
+   "position": 20.6,
+   "score": 6.94,
+   "url": "/pillar/versicherungen/"
+  },
+  {
+   "grund": "verlinkt",
+   "impressionen": 9,
+   "inlinks": 4,
    "impressionen": 11,
    "inlinks": 6,
    "lastmod_tage": null,
@@ -74,6 +91,13 @@
   },
   {
    "grund": "verlinkt",
+   "impressionen": 8,
+   "inlinks": 6,
+   "lastmod_tage": null,
+   "outlinks": 8,
+   "position": 7.25,
+   "score": 5.94,
+   "url": "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/"
    "impressionen": 12,
    "inlinks": 2,
    "lastmod_tage": null,
@@ -224,6 +248,16 @@
   },
   {
    "grund": "verlinkt",
+   "impressionen": 2,
+   "inlinks": 2,
+   "lastmod_tage": null,
+   "outlinks": 3,
+   "position": 6.0,
+   "score": 4.07,
+   "url": "/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/"
+  },
+  {
+   "grund": "verlinkt",
    "impressionen": 1,
    "inlinks": 2,
    "lastmod_tage": null,
@@ -234,6 +268,16 @@
   },
   {
    "grund": "verlinkt",
+   "impressionen": 1,
+   "inlinks": 2,
+   "lastmod_tage": null,
+   "outlinks": 8,
+   "position": 4.0,
+   "score": 3.93,
+   "url": "/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/"
+  },
+  {
+   "grund": "verlinkt",
    "impressionen": 6,
    "inlinks": 3,
    "lastmod_tage": null,
@@ -241,6 +285,16 @@
    "position": 2.33,
    "score": 3.77,
    "url": "/ueber/"
+  },
+  {
+   "grund": "verlinkt",
+   "impressionen": 6,
+   "inlinks": 16,
+   "lastmod_tage": null,
+   "outlinks": 6,
+   "position": 23.0,
+   "score": 3.7,
+   "url": "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/"
   },
   {
    "grund": "verlinkt",
@@ -1113,6 +1167,7 @@
    "url": "/werkzeuge/tarifwechsel-entscheidungsbaum/"
   }
  ],
+ "stand": "2026-11-09",
  "stand": "2026-11-10",
  "welle1": [
   "/pillar/internet-dsl/",
@@ -1120,6 +1175,10 @@
   "/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/",
   "/pillar/konto-karten/",
   "/impressum/",
+  "/pillar/versicherungen/",
+  "/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/",
+  "/datenschutz/",
+  "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
   "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
   "/pillar/versicherungen/",
   "/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/",
@@ -1136,9 +1195,12 @@
   "/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
   "/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/",
   "/",
+  "/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/",
   "/posts/",
   "/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/",
+  "/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/",
   "/ueber/",
+  "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/",
   "/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
   "/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/",
   "/werkzeuge/balkonkraftwerk-rechner/",
@@ -1162,6 +1224,10 @@
   "https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/",
   "https://franksfinanzcheck.de/pillar/konto-karten/",
   "https://franksfinanzcheck.de/impressum/",
+  "https://franksfinanzcheck.de/pillar/versicherungen/",
+  "https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/",
+  "https://franksfinanzcheck.de/datenschutz/",
+  "https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
   "https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
   "https://franksfinanzcheck.de/pillar/versicherungen/",
   "https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/",
@@ -1178,9 +1244,12 @@
   "https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
   "https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/",
   "https://franksfinanzcheck.de/",
+  "https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/",
   "https://franksfinanzcheck.de/posts/",
   "https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/",
+  "https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/",
   "https://franksfinanzcheck.de/ueber/",
+  "https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/",
   "https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
   "https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/",
   "https://franksfinanzcheck.de/werkzeuge/balkonkraftwerk-rechner/",

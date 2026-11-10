@@ -1,13 +1,50 @@
 {
- "auftrag": 0,
- "eingefuegt": [],
- "geheilt": [],
+ "auftrag": 4,
+ "eingefuegt": [
+  {
+   "grund": "gleicher Pillar",
+   "inlinks_jetzt": 0,
+   "meldung": "eingefügt",
+   "quelle": "/posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/",
+   "ziel": "/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/"
+  },
+  {
+   "grund": "gleicher Pillar",
+   "inlinks_jetzt": 0,
+   "meldung": "eingefügt",
+   "quelle": "/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/",
+   "ziel": "/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/"
+  },
+  {
+   "grund": "gleicher Pillar",
+   "inlinks_jetzt": 0,
+   "meldung": "eingefügt",
+   "quelle": "/posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/",
+   "ziel": "/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/"
+  },
+  {
+   "grund": "gleicher Pillar",
+   "inlinks_jetzt": 0,
+   "meldung": "eingefügt",
+   "quelle": "/posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/",
+   "ziel": "/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/"
+  }
+ ],
+ "geheilt": [
+  "/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/",
+  "/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/"
+ ],
  "geschrieben": true,
  "max": 10,
  "nachher_ohne_inlink": [],
  "offen": [],
+ "stand": "2026-11-09T13:52:47Z",
+ "status": "geheilt",
  "stand": "2026-11-10T13:26:50Z",
  "status": "sauber",
  "verweigert": [],
- "vorher_ohne_inlink": []
+ "vorher_ohne_inlink": [
+  "/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/",
+  "/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/"
+ ]
 }
