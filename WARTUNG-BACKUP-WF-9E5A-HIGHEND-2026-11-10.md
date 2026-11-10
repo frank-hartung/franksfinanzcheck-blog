@@ -268,3 +268,74 @@ nicht mehr lügt, wenn sie es nicht tut.
 3. **Exit-Codes des Wizards** (`rc=1` bei `--check`, `rc=4` bei Leerlauf) sind
    jetzt korrekt als „nicht prüfbar" bzw. „Einrichtung offen" klassifiziert;
    ein automatisierter Lauf im CI ist weiterhin nicht verdrahtet.
+
+---
+
+## 8. Nachtrag 10.11.2026, 19:20 UTC — was während dieser Arbeit passierte
+
+Drei Dinge haben sich geändert, **während** dieser Vorgang lief. Sie stehen
+hier, weil sie den Vorgang berühren, nicht weil sie zu ihm gehören.
+
+### 8.1 `main` war für jeden Pull-Request gesperrt — vier kaputte Artefakte
+
+Beim Abarbeiten der CI-Checks fiel auf: `Integritäts-Siegel` und `ReDoS-Wache`
+waren auf **jedem** Pull-Request rot — auch auf PR #1161, der mit dieser Arbeit
+nichts zu tun hat. Ursache war nicht der Code, sondern `main` selbst:
+
+| Datei | Befund |
+|---|---|
+| `data/gsc/abdeckung/befund.json` | Zeile 651: fehlendes Komma, ein kompletter Datensatz in einen anderen gespleißt |
+| `data/gsc/abdeckung/prioritaet.json` | Zeile 101: dasselbe Muster |
+| `data/gsc/abdeckung/ursachen.json` | doppelter Schlüssel `erzeugt` |
+| `data/gsc/abdeckung/verlinkungsheilung.json` | doppelte Schlüssel `stand`/`status` |
+
+Die letzten beiden sind **gültiges** JSON — `json.load` nimmt still den letzten
+Wert. Genau deshalb hat sie niemand gesehen; der Artefakt-Wächter prüft seit
+#653 auch auf doppelte Schlüssel (A2).
+
+**Heilung:** mit dem Erzeuger neu geschrieben (`gsc_abdeckung.py --schreiben`
+bzw. `--prioritaet`), nicht von Hand kommentiert. Seine Schreibfunktion ist
+atomar (`tmp` + `replace`) und benutzt `json.dumps` — sie kann keine
+Syntaxfehler erzeugen. Einen gespleißten Datensatz von Hand zu rekonstruieren
+wäre geraten, nicht belegt.
+
+Nach der Heilung: **627 Artefakte strukturell heil**, `Integritäts-Siegel` und
+`ReDoS-Wache` **grün**.
+
+### 8.2 `gate` ist rot — und der Grund hat einen Namen
+
+`gate` scheitert an drei Selbsttests (`reserve_finisher`, `governance_contract`,
+`blustradius_register`). Die Ursache ist **nicht der Code**:
+
+```
+🛑 Wirkungsprobe: Vertrag verletzt: YMYL: Schreibprüfung nicht auswertbar
+   (ParseError: PyYAML fehlt: python3 -m pip install pyyaml) – fail-closed
+```
+
+Der Schritt „Python-Abhängigkeiten (für Governance-Skripte)" in
+`link-check.yml` endet mit `2>/dev/null || true`. Ein gescheiterter
+`pip install` wird damit **verschluckt**; die Selbsttests laufen ohne `pyyaml`
+und fail-closen.
+
+Belegt durch Gegenprobe in beiden Richtungen:
+
+| Umgebung | `reserve_finisher` | `governance_contract` | `blustradius_register` |
+|---|---|---|---|
+| `/usr/bin/python3` **ohne** pyyaml (= CI) | rc=2 | rc=1 | rc=2 |
+| `/usr/bin/python3` **mit** pyyaml 6.0.3 | rc=0 | rc=0 | rc=0 |
+| `/tmp/venv` (mit pyyaml) | rc=0 | rc=0 | rc=0 |
+| Uhr +97 und +1461 Tage, mit pyyaml | rc=0 | rc=0 | rc=0 |
+
+`pyyaml==6.0.3` steht in `requirements-ci.txt` (Zeile 827) — die Abhängigkeit
+ist also **deklariert**; sie kommt nur nicht an. Das ist ein eigener Vorgang
+(CI-Härtung: `|| true` gehört vor den Verbraucher, nicht über den Fehler) und
+**nicht Teil dieses PR**.
+
+### 8.3 #1107 wurde geschlossen — vom Herausgeber
+
+Um 18:33 UTC, während dieser Vorgang lief, hat **der Herausgeber** #1107 mit
+Schließakte geschlossen (`completed`, „keine Korridor-Änderung"), und PR #1172
+wurde um 18:36 gemergt. Der Agent hat weder geschlossen noch gemergt; die
+Entscheidung liegt laut `CLAUDE.md` D2 beim Herausgeber. Der Punkt „#1107
+bleibt offen" in Abschnitt 7 ist damit **überholt** — er bleibt als Protokoll
+stehen, weil er den Stand zur Zeit der Abfassung beschreibt.
