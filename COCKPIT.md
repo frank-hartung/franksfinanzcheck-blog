@@ -1,6 +1,6 @@
 # 🚦 COCKPIT – franksfinanzcheck.de
 
-**Stand:** 2026-11-08 23:38 UTC · generiert von `scripts/cockpit.py`
+**Stand:** 2026-11-10 02:39 UTC · generiert von `scripts/cockpit.py`
 
 > Eine Seite statt 70+ Status-Dateien. Jeder Bereich bekommt eine Ampel und einen Satz Begründung. Wer tiefer graben will, findet die Quelle unter jedem Bereich – diese Datei archiviert nichts, sie verweist nur.
 
@@ -8,8 +8,8 @@
 
 | Bereich | Ampel | Kurzbefund |
 |---|---|---|
-| Content-Pipeline | 🟡 | 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve ungeprüft: 🛑 Zertifikat ist veraltet (57.4 h > 36 h) – kein Nachweis für den aktuellen Pool. Ursache: reserve_readiness.py lief nicht (API-/Hugo-Fehler?) oder der Push ging verloren. |
-| SEO & Technik | 🟡 | 1 Prüfpunkt(e) auffällig (cwv) |
+| Content-Pipeline | 🟡 | 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig |
+| SEO & Technik | 🟢 | in Ordnung |
 | Affiliate & Umsatz | 🟢 | in Ordnung (2 Kennzahl(en) noch ohne Datenlage) |
 | Secrets & Zugänge | 🔴 | 1 Zugang/Zugänge abgelehnt: PINTEREST_ACCESS_TOKEN – Re-Auth nötig |
 | Social-Automation | 🟢 | 1/10 Kanäle live (Mastodon) |
@@ -20,15 +20,14 @@
 ## Details
 
 ### Content-Pipeline — 🟡 GELB
-- 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve ungeprüft: 🛑 Zertifikat ist veraltet (57.4 h > 36 h) – kein Nachweis für den aktuellen Pool. Ursache: reserve_readiness.py lief nicht (API-/Hugo-Fehler?) oder der Push ging verloren.
-- lesbarkeit: 2026-10-26-gastarife-vergleichen-vor-dem-herbst/index.md (Entwurf) – Flesch 51.5 < Publish-Schwelle 60
-- Artikel-Reserve ungeprüft: 🛑 Zertifikat ist veraltet (57.4 h > 36 h) – kein Nachweis für den aktuellen Pool. Ursache: reserve_readiness.py lief nicht (API-/Hugo-Fehler?) oder der Push ging verloren.
+- 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig
+- lesbarkeit: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen/index.md (Entwurf) – Flesch 41.7 < Publish-Schwelle 60; 2026-11-02-last-minute-urlaubsangebote-sichern/index.md (E…
+- Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig
 
 Quellen: `data/governance_status.json`, `data/reserve-readiness.json`, `PRODUKTIONS-STATUS.md`
 
-### SEO & Technik — 🟡 GELB
-- 1 Prüfpunkt(e) auffällig (cwv)
-- cwv: 10 <img>-Elemente ohne width/height/style (CLS-Risiko)
+### SEO & Technik — 🟢 GRÜN
+- in Ordnung
 - Search Console (2026-10-19): 117 von 437 bekannten URLs im Index (26.8 %), 320 nicht indexiert, 189 davon ohne Erklärung im Bestand
 
 Quellen: `data/governance_status.json`, `data/gsc/abdeckung/befund.json`
@@ -48,13 +47,13 @@ Quellen: `data/governance_status.json`, `data/secrets_state.json`, `docs/PINTERE
 ### Social-Automation — 🟢 GRÜN
 - 1/10 Kanäle live (Mastodon)
 - 9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md
-- letzter erfolgreicher Post vor 0.0 Tag(en)
+- letzter erfolgreicher Post vor 0.1 Tag(en)
 
 Quellen: `data/social/state.yaml`, `data/social/channels.yaml`, `SOCIAL-PERF-REPORT.md`, `docs/RUNBUCH-SOCIAL-SECRETS.md`
 
 ### Newsletter — 🔴 ROT
 - noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)
-- 5 Artikel in der Warteschlange, ältester 88 Tag(e) alt
+- 5 Artikel in der Warteschlange, ältester 90 Tag(e) alt
 
 Quellen: `data/newsletter_journal.jsonl`, `data/newsletter_state.json`, `data/newsletter_kadenz.json`
 
