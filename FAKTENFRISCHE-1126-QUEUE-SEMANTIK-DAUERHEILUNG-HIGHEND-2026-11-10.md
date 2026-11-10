@@ -149,6 +149,7 @@ abschalten.
 | `test_gsc_abdeckung`, `test_gsc_artefakte`, `test_authority_engine`, `test_konsolidierung` (4) | `data/gsc/abdeckung/befund.json` war ein Spleiß aus zwei Läufen (fehlendes Komma, doppelte Fragmente); die Rohartefakte unter `data/gsc/` waren auf `main` bereits durch #1162 geheilt | Befund mit dem sanktionierten Erzeuger neu geschrieben (`gsc_abdeckung.py --audit --schreiben`). Das Ergebnis ist feldgleich mit dem letzten gültigen Git-Stand (11-10) – nichts erfunden, nur der Spleiß entfernt. |
 | `test_blustradius_register` (3), `test_bot_watchdog_meldetakt` (1), `test_pflichtcheck` (1) | PR #1162 (10.11. 18:54) stellte den Schritt „GSC-Leistungsdaten – Artefaktprüfung (fail-closed)“ in den deploy-Job, ohne ihn im Blustradius-Register zu erklären – der Vertrag C38 meldet das sofort und zu Recht | Schritt im Register als `inhalt` erklärt: Die GSC-Daten sind die Rechengrundlage der Konsolidierungsregel F; ein gemischter Export würde eine Inhaltsentscheidung auf falscher Grundlage treffen. Kein `werkzeug`, weil hier das versionierte Artefakt geprüft wird, nicht die Website-Messung. |
 | `test_offenlegung_gate` (1), `test_reserve_pipeline` (2) | #1170 (10.11. 19:01) fügte die harte Gate-Regel `kurzantwort_failures` hinzu, ohne Deckungszeile in `reserve_healer_coverage.py` – die Reserve hätte Nacht für Nacht an einer Regel geparkt, die kein Heiler kennt | Begründete AUSNAHME statt Heiler: Die Kurzantwort ist eine redaktionelle Aussage (M4); ein Generator würde sie erfinden (C15). Kandidat bleibt als Entwurf/Hold, die Redaktion ergänzt. |
+| `Integritäts-Siegel` (CI-Job, bricht den PR ab) | Drei weitere GSC-Abdeckungsartefakte waren Text-Merges aus zwei Läufen: `verlinkungsheilung.json` und `ursachen.json` mit doppelten Schlüsseln, `prioritaet.json` mit fehlendem Komma (A1/A2 des Artefakt-Wächters) | `prioritaet.json` mit dem sanktionierten Erzeuger neu berechnet (dieselben 111 URLs, kein Verlust); in den beiden anderen der überholte 09.11.-Kopf entfernt, der 10.11.-Stand bleibt. `artefakt_waechter` → 627 Artefakte heil. |
 | `test_publication_reliability` (1) | Derselbe #1170-Block: Der R5-Fixture-Post trug keine `kurzantwort`; der Test maß dadurch die neue Frontmatter-Regel statt der R5-Heilung | Fixture-Frontmatter um eine echte Kurzantwort ergänzt – der Test misst wieder, was sein Name sagt. |
 
 Nicht durch Code heilbar und hier ehrlich benannt: Die Tests
@@ -213,6 +214,8 @@ entstehen.
 * `scripts/tests/test_suche_pagefind.py`, `scripts/tests/test_manifest_guard.py`,
   `requirements-hugo.txt`, `data/gsc/abdeckung/befund.json`/`.md` – die
   zusätzlichen Rots aus Abschnitt 5.
+* `data/gsc/abdeckung/{prioritaet,ursachen,verlinkungsheilung}.json` –
+  Merge-Spleiße entfernt bzw. mit dem Erzeuger neu berechnet.
 * `data/blustradius-deploy.yml` – der neue GSC-Artefaktschritt erklärt
   (Klasse `inhalt`, Begründung im Register).
 * `scripts/reserve_healer_coverage.py` – begründete Ausnahme für
