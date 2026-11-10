@@ -179,6 +179,14 @@ jobs:
       #  Rat des Offsite-Jobs nicht doppelt vergeben wird.
       # ================================================================
       - name: Voraussetzungen prüfen (fail-closed – kein Schein-Grün)
+        # 10.11.2026 (WF-9E5A / #923): Die Prüfung hinterlässt ihren Befund als
+        # AUSGABE (welche Kennungen offen sind), damit der Schritt „Leerlauf
+        # prüfen“ den Vorrang der Einrichtung belegen kann, statt ihn zu raten.
+        # Die Ausgabe ist unabhängig vom Exit-Code: Ein Werkzeugfehler (z. B.
+        # unlesbare API) ist „geprüft=false“ und gibt KEINE Kennungen – dann
+        # bleibt es beim allgemeinen Rat dieses Schritts und nicht bei einem
+        # Vorrang, den niemand gemessen hat.
+        id: einrichtung
         env:
           # E8 liest die Environment-Schutzregeln des QUELL-Repos. Der fein
           # eingeschränkte Backup-Token (nur das Ziel-Repo) darf genau das
@@ -187,9 +195,21 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set +e
-          python3 scripts/backup_einrichtung.py --pruefen
+          python3 scripts/backup_einrichtung.py --pruefen --ausgabe /tmp/einrichtung.json
           code=$?
           set -e
+          OFFEN=""
+          if [ -s /tmp/einrichtung.json ]; then
+            OFFEN="$(python3 -c "import json;d=json.load(open('/tmp/einrichtung.json'));print(','.join(d.get('offen',[])))" 2>/dev/null || echo '')"
+          fi
+          # Nur ein LESBARES Ergebnis (Datei vorhanden) gilt als „geprüft“.
+          if [ -s /tmp/einrichtung.json ]; then
+            echo "geprueft=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "geprueft=false" >> "$GITHUB_OUTPUT"
+          fi
+          echo "offen=$OFFEN" >> "$GITHUB_OUTPUT"
+          echo "Offene Pflichtpunkte laut Prüfung: ${OFFEN:-keine (oder nicht lesbar)}"
           if [ "$code" != "0" ]; then
             echo "::error::Die Offsite-Sicherung ist nicht eingerichtet (E1–E8 offen) – die Frischwache kann deshalb nichts messen und meldet NICHT grün. Siehe docs/ANLEITUNG-OFFSITE-BACKUP.md, Abschnitt „Live-Status“."
             exit 1
@@ -420,28 +440,47 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           BACKUP_REPO: ${{ vars.BACKUP_REPO }}
           BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+          # 10.11.2026 (WF-9E5A / #923): „Einrichtung offen“ hat Vorrang vor
+          # dem Leerlauf (Exit 3 statt 4) – sonst stünde der Rat „gesichert
+          # wurde nichts, Weg: Schritte 1–7“ über einer Ursache, die der
+          # Schritt DARÜBER bereits benannt hat, und dieselbe Ursache trüge
+          # zwei Rot-Stellen mit zwei Räten.
+          # Den Zustand kennt nur die Einrichtungsprüfung; sie hinterlegt ihn
+          # als Ausgabe. Er wird ÜBERGEBEN, nicht geraten.
+          EINRICHTUNG_OFFEN: ${{ steps.einrichtung.outputs.offen || '' }}
         run: |
           set +e
-          python3 scripts/backup_selbstheilung.py --leerlauf
+          ARGUMENTE=(--leerlauf)
+          if [ -n "${EINRICHTUNG_OFFEN:-}" ]; then
+            # Komma-Liste („E1,E2“) → ein Argument je Kennung.
+            IFS=',' read -r -a KENNUNGEN <<< "$EINRICHTUNG_OFFEN"
+            ARGUMENTE+=(--einrichtung-offen "${KENNUNGEN[@]}")
+          fi
+          python3 scripts/backup_selbstheilung.py "${ARGUMENTE[@]}"
           RC=$?
           set -e
           # 0 = kein Befund auf Job-Ebene                        → grün
           # 1 = Rückweg-Nachweis fehlt/übersprungen              → ROT (mit Beleg)
           # 2 = Prüfung nicht entscheidbar (API/Format)          → ROT (C33)
+          # 3 = Einrichtung offen (Vorrang)                      → ROT, Einrichtungs-Rat
           # 4 = ein Lauf ist grün, gesichert wurde aber NICHTS   → ROT, eigener Rat
-          if [ "$RC" = "1" ]; then
-            echo "::error::Der Rückweg-Nachweis ist nicht belegt (Exit 1) – Details in der Job-Zusammenfassung."
-            exit 1
-          fi
-          if [ "$RC" = "2" ]; then
-            echo "::error::Die Leerlauf-Prüfung konnte nicht entscheiden (Exit 2) – Anleitung: docs/ANLEITUNG-OFFSITE-BACKUP.md"
-            exit 1
-          fi
-          if [ "$RC" = "4" ]; then
-            echo "::error title=Backup-Leerlauf::Ein Lauf ist grün, gesichert wurde aber nichts (kein dauerhaftes Ziel bzw. keine Passphrase). Das ist kein Erfolg: Es existiert nur eine 7-Tage-Kurzzeitkopie im selben Konto. Weg: docs/ANLEITUNG-OFFSITE-BACKUP.md, Schritte 1–7."
-            exit 1
-          fi
-          exit 0
+          # FAIL-CLOSED (10.11.2026): JEDER Code außer 0 ist rot. Vorher fielen
+          # 3 und jeder unbekannte Code in `exit 0` – der Schritt war grün,
+          # während das Skript „Inhaber-Schritt“ meldete. Ein Wächter, der nur
+          # die Codes kennt, die er erwartet, ist bei allem anderen blind.
+          case "$RC" in
+            0) exit 0 ;;
+            1) echo "::error::Der Rückweg-Nachweis ist nicht belegt (Exit 1) – Details in der Job-Zusammenfassung."
+               exit 1 ;;
+            2) echo "::error::Die Leerlauf-Prüfung konnte nicht entscheiden (Exit 2) – Anleitung: docs/ANLEITUNG-OFFSITE-BACKUP.md"
+               exit 1 ;;
+            3) echo "::error title=Backup-Einrichtung offen::Die Einrichtung ist unvollständig – deshalb ist „gesichert wurde nichts“ die Folge, nicht die Ursache. Ein Neustart hilft nicht; der Schritt „Voraussetzungen prüfen“ nennt jeden offenen Punkt mit Link (E1–E8)."
+               exit 1 ;;
+            4) echo "::error title=Backup-Leerlauf::Ein Lauf ist grün, gesichert wurde aber nichts (kein dauerhaftes Ziel bzw. keine Passphrase). Das ist kein Erfolg: Es existiert nur eine 7-Tage-Kurzzeitkopie im selben Konto. Weg: docs/ANLEITUNG-OFFSITE-BACKUP.md, Schritte 1–7."
+               exit 1 ;;
+            *) echo "::error::Die Leerlauf-Prüfung endete mit unbekanntem Exit-Code $RC – ohne lesbares Urteil kein Grün. Anleitung: docs/ANLEITUNG-OFFSITE-BACKUP.md"
+               exit 1 ;;
+          esac
 
       #  SCHLUSSURTEIL (WF-3150 / #1030, 07.11.2026)
       #  ------------------------------------------------------------
