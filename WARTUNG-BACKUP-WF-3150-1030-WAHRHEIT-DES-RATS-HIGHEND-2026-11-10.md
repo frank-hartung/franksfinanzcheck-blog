@@ -215,6 +215,38 @@ selbst, sobald die Kette grün ist — durch den Resolve-Gate-Pfad des Alertings
 
 ---
 
+## 6b · Drei Merge-Blocker, die nicht aus diesem Auftrag stammen
+
+Der Pull Request #1171 war nach der Backup-Heilung **noch rot** – nicht wegen
+der Sicherung, sondern wegen drei Wachen, die auf `main` schon rot standen
+(nachgeprüft in einem eigenen Worktree auf `origin/main`, gleiche Fehlbilder):
+
+| Wache | Befund | Ursache | Heilung |
+|---|---|---|---|
+| `blustradius_register --selftest` | „Schritt 30 ‚GSC-Leistungsdaten – Artefaktprüfung (fail-closed)‘ steht in keinem Register“ | `deploy.yml` bekam den Schritt am 10.11. mit **#1162**, das Register `data/blustradius-deploy.yml` keinen Eintrag (C38: jeder Schritt des Auslieferungswegs erklärt seinen Blustradius) | Eintrag **`infra`** – geprüft wird nicht Inhalt, sondern das Messartefakt (G1–G4) |
+| `reserve_finisher --selftest` | „Gate-Regel ohne Heiler: `kurzantwort_failures`“ | **#1110** machte die Kurzantwort zu einer ablehnenden Gate-Regel, ohne Deckungseintrag. Der Finisher verweigert seitdem **vor** jeder Arbeit die Kette – der Reserve-Lauf kann nichts veredeln | **begründete Ausnahme**, kein Heiler: Ein Heiler im Veredelungslauf müsste die Kurzantwort *erfinden*. Die zwei echten Schreiber sind benannt (`pflichtfeld_verlust_wache --fix` aus HEAD, `generate_kurzantworten.py` mit YMYL-Sperre) |
+| `selftest_runner` (Hinweis) | „`ki_provenienz.py` erwähnt `--selftest` … ein Aufruf startet die Standard-Aktion“ | Die Datei ist eine **Bibliothek**: ihr `__main__`-Zweig endet mit `raise SystemExit`. Die behauptete Folge gibt es nicht | `verweigert_direktaufruf()` misst die Folge, statt sie zu behaupten („Folge: keine“); Gegenprobe im Runner-Selbsttest in beide Richtungen |
+
+**Warum das dazugehört:** Ein Gate, das wegen eines fehlenden Registereintrags
+*jeden* Pull Request blockiert, ist derselbe Schaden wie ein falscher Rat – es
+lenkt vom echten Befund ab. Und ein Hinweis, der eine Gefahr behauptet, die es
+nicht gibt, kostet beim nächsten echten Fall die Aufmerksamkeit.
+
+Zusätzlich war der Arbeitsbaum mit **kaputten Merge-Artefakten** belastet
+(`data/gsc/abdeckung/befund.json` und `prioritaet.json`: ein Gabelrest mitten
+im Objekt, danach alle Felder ein zweites Mal – `json.loads` scheiterte in
+Zeile 651 bzw. 101, `test_gsc_abdeckung` ebenso). Geheilt mit den **Erzeugern**
+(`gsc_abdeckung.py --schreiben` / `--prioritaet`), nicht per Editor; die
+A2-Dubletten über `artefakt_waechter.py --heal`. Der Datenstand bleibt dabei
+sichtbar: Der Export ist vom 19.10. und damit 22 Tage alt – er glänzt nicht.
+
+**Gesamtlauf danach:** `selftest_runner` **283 Wachen, 566 Uhr-Proben, kein
+Befund** (mit vollständiger Prüfgrundlage aus `requirements-ci.txt`; ohne
+PyYAML/Pillow schlagen Wachen bewusst fail-closed fehl – das ist #1001, kein
+Wachen-Defekt). `governance_contract --quick` ✅ 47 Regeln.
+
+---
+
 ## 7 · Geänderte Dateien
 
 | Datei | Änderung |
@@ -225,6 +257,10 @@ selbst, sobald die Kette grün ist — durch den Resolve-Gate-Pfad des Alertings
 | `scripts/tests/test_backup_einrichtung.py` | `test_einrichtungsbefund_geht_an_den_leerlauf_schritt`, `test_kein_abbruch_mitten_im_heilungskreis` |
 | `scripts/tests/test_backup_selbstheilung.py` | `AuskunftsVertrag` (3 Tests in beide Richtungen) |
 | `docs/ANLEITUNG-OFFSITE-BACKUP.md` | Abschnitt „Eine Ursache, ein Rat – und kein Abbruch mitten in der Heilung“; Fallzahlen nachgezogen |
+| `data/blustradius-deploy.yml` | Registereintrag `infra` für „GSC-Leistungsdaten – Artefaktprüfung (fail-closed)“ (C38, Befund aus #1162) |
+| `scripts/reserve_healer_coverage.py` | begründete Ausnahme `kurzantwort_failures` (Befund aus #1110) – kein Heiler, weil die Kurzantwort Inhalt ist |
+| `scripts/selftest_runner.py` | `verweigert_direktaufruf()`: der Hinweis zu einer Bibliothek behauptet keine Standard-Aktion mehr; Selbsttest mit Gegenprobe |
+| `data/gsc/abdeckung/befund.json`, `befund.md`, `prioritaet.json`, `ursachen.json`, `verlinkungsheilung.json` | Merge-Artefakte mit den Erzeugern geheilt (A1/A2) |
 
 ---
 
