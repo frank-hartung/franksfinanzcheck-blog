@@ -3800,6 +3800,12 @@ def c44_themen_nachschub(script_texts, wflows, root=BLOG_DIR):
 #      `kadenz_horizont` wäre die Heilung löschbar, ohne dass ein Gate
 #      anschlägt – und der nächste Handlauf erzeugte wieder ein Ticket aus
 #      einer Momentaufnahme.
+#      Seit 10.11.2026 ist die Messart selbst ein Pflichtbegriff: Wer
+#      `projektions_modus` entfernt, macht aus der eingefrorenen Gegenprobe
+#      wieder einen scheinbaren Nachweis (`trajektorie: false` allein sagt
+#      nicht, ob der Stichtag heute oder in der Zukunft liegt). `eingefroren`
+#      und `--gegenprobe` sind deshalb ebenfalls Marker: Löschen macht den
+#      Bau rot, nicht erst das Ticket.
 #   d) Die Release-Scorecard nennt die Ursache, nicht nur das Symptom.
 #   e) Ein Vertrag ohne Test ist Prosa.
 C45_WACHE = "faktenfrische_kapazitaet.py"
@@ -3824,7 +3830,14 @@ C45_MARKER = ("faelligkeit", "--selftest", "laeufe_aus_workflow",
               # Ticket mit Frist („rot am 26.11./31.12.“), das niemand
               # nachrechnen kann.
               "bestand_trajektorie", "projektions_ausgangspunkt",
-              "kadenz_horizont")
+              "kadenz_horizont",
+              # #1107 (10.11.2026): Drei Zustände statt zwei. Ohne
+              # `projektions_modus` ist „eingefroren“ nicht mehr von
+              # „heute“ zu unterscheiden – die Verwechslung, die das
+              # Ticket erzeugt hat. `--gegenprobe` ist der einzige Weg,
+              # das Fehlbild absichtlich zu reproduzieren; ein Gate darf
+              # ihn nie still benutzen.
+              "projektions_modus", "eingefroren", "--gegenprobe")
 
 
 def _c45_deckung(root=BLOG_DIR):

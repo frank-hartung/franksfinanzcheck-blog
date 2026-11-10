@@ -311,8 +311,8 @@ def _schreiben(text: str, zustand: dict) -> None:
                           encoding="utf-8")
 
 
-def erstellen(stichtag: dt.date | None = None) -> dict:
-    stichtag = stichtag or dt.date.today()
+def projektion(stichtag: dt.date) -> tuple[str, dict]:
+    """Eine gemeinsame, schreibfreie Projektion für Erzeugung und Prüfung."""
     cfg = _config()
     befunde = ledger.befunde_mit_status(stichtag=stichtag)
     live = live_seiten()
@@ -330,20 +330,41 @@ def erstellen(stichtag: dt.date | None = None) -> dict:
         zustand["belegstellen_ohne"] = belege.get("ohne_stelle", 0)
         zustand["belegstellen_funde"] = len(belege.get("funde") or [])
     _schreiben(akte_bauen(befunde, live, zustand, belege), zustand)
+    return akte_bauen(befunde, live, zustand), zustand
+
+
+def erstellen(stichtag: dt.date | None = None) -> dict:
+    text, zustand = projektion(stichtag or dt.date.today())
+    _schreiben(text, zustand)
     return zustand
 
 
 def wache() -> dict:
-    """Struktur und Schließweg – nicht die Arbeitsgeschwindigkeit der Menschen."""
+    """Schließweg und vollständige Projektion am dokumentierten Stichtag prüfen.
+
+    Der Zeitstempel ist keine fachliche Änderung; ein neuer Tag allein macht
+    die Akte nicht falsch. Neue Befunde, Fassungen, Konfiguration, Live-Sicht
+    und Änderungen am Markdown werden dagegen auch bei gleicher Anzahl erkannt.
+    """
     stand = ledger.wache()
-    frisch = {}
+    frisch = {"akte_offen": None, "akte_stand": None, "veraltet": True}
     try:
         alt = json.loads(STATE_PATH.read_text(encoding="utf-8"))
-        frisch = {"akte_offen": alt.get("offen"),
-                  "akte_stand": alt.get("stichtag"),
-                  "veraltet": alt.get("offen") != stand["offen"]}
-    except (OSError, ValueError):
-        frisch = {"akte_offen": None, "akte_stand": None, "veraltet": True}
+        if not isinstance(alt, dict):
+            raise ValueError("Zustand ist kein Objekt")
+        frisch.update(akte_offen=alt.get("offen"), akte_stand=alt.get("stichtag"))
+        stichtag = dt.date.fromisoformat(alt["stichtag"])
+        if stichtag > dt.date.today():
+            raise ValueError("Stichtag liegt in der Zukunft")
+        dokument = AKTE_PATH.read_text(encoding="utf-8")
+    except (OSError, ValueError, TypeError, KeyError):
+        stand.update(frisch)
+        return stand  # Fehlende oder defekte Projektion ist kein Grün.
+    # Ledgerfehler dürfen hier nicht als veraltete Datei verschluckt werden.
+    text, erwartet = projektion(stichtag)
+    alt_ohne_zeit = {k: v for k, v in alt.items() if k != "erzeugt"}
+    erwartet_ohne_zeit = {k: v for k, v in erwartet.items() if k != "erzeugt"}
+    frisch["veraltet"] = alt_ohne_zeit != erwartet_ohne_zeit or dokument != text
     stand.update(frisch)
     return stand
 

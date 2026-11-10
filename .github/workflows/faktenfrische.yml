@@ -202,7 +202,7 @@ jobs:
           # Wurzelverzeichnisse vermeidet den früheren pathspec-Fehler, wenn
           # in einem Lauf kein Dossier erzeugt wurde. Gestagt werden danach
           # ausschließlich die fachlich-owned Pfade.
-          if git status --porcelain -- content/ data/ FAKTENFRISCHE-REPORT.md | grep -q .; then
+          if git status --porcelain -- content/ data/ FAKTENFRISCHE-REPORT.md BEFUND-AKTE.md | grep -q .; then
             bash scripts/git_sync.sh \
               "content(fakten): Belegkette aufgefrischt (Agent Reach + Claude)" \
               content/ \

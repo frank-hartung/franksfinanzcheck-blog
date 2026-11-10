@@ -3,6 +3,9 @@
   "generated_at": "2026-11-10T18:35:09Z",
   "modus": "live",
   "commit": null,
+  "generated_at": "2026-11-10T18:44:49Z",
+  "modus": "kandidaten",
+  "commit": "32d2eb459f00ea14ce6e134c1786c4e5bd1d094e",
   "kapazitaet": {
     "stichtag": "2026-11-10",
     "basis": "2026-11-10",
@@ -60,11 +63,131 @@
     "live_seiten": 0,
     "ueberholt": 0,
     "ohne_fassung": 0,
+  "ursachen": [
+    {
+      "check": "F4-fachbefund",
+      "dimension": "faktenalter",
+      "wirkung": "blockiert",
+      "entscheidung": "human",
+      "quelle": "scripts/faktenfrische_befund_ledger.py (via publish_gate.fakten_befund_failures)",
+      "artikel": [
+        "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+        "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+        "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+        "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+        "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+        "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier",
+        "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
+        "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn",
+        "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen",
+        "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
+        "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum",
+        "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
+        "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag",
+        "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
+        "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser",
+        "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+        "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
+        "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+        "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+        "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang"
+      ],
+      "anzahl": 22
+    },
+    {
+      "check": "T6-textverstaendnis",
+      "dimension": "technik",
+      "wirkung": "blockiert",
+      "entscheidung": "auto",
+      "quelle": "scripts/textverstaendnis_guard.py (via publish_gate.textverstaendnis_failures)",
+      "artikel": [
+        "2026-08-10-dsl-wechselbonus-sichern",
+        "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden",
+        "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+        "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+        "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke",
+        "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
+        "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet",
+        "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
+        "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
+        "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
+        "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+        "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet",
+        "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich",
+        "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich",
+        "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
+        "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster",
+        "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026",
+        "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
+        "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+        "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt"
+      ],
+      "anzahl": 20
+    },
+    {
+      "check": "T1w-zeichenlaenge-optimum",
+      "dimension": "technik",
+      "wirkung": "warnung",
+      "entscheidung": "auto",
+      "quelle": "scripts/check_length.py (Status unter-/ueber-optimum)",
+      "artikel": [
+        "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+        "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
+        "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler",
+        "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp"
+      ],
+      "anzahl": 4
+    },
+    {
+      "check": "T2-seo-audit",
+      "dimension": "technik",
+      "wirkung": "blockiert",
+      "entscheidung": "auto",
+      "quelle": "scripts/seo_audit.py (via publish_gate.seo_audit_failures; braucht public/)",
+      "artikel": [
+        "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet"
+      ],
+      "anzahl": 1
+    }
+  ],
+  "befundlage": {
+    "offen": 145,
+    "seiten": 34,
+    "live_befunde": 92,
+    "live_seiten": 22,
+    "ueberholt": 107,
+    "ohne_fassung": 15,
     "nicht_entscheidbar": 0,
     "aeltester_tage": null,
     "frist_tage": 14,
     "ueber_frist": 0,
     "je_slug": {}
+    "je_slug": {
+      "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": 3,
+      "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": 5,
+      "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": 5,
+      "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": 5,
+      "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": 5,
+      "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": 5,
+      "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": 5,
+      "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": 5,
+      "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": 5,
+      "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": 5,
+      "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": 2,
+      "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": 3,
+      "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": 3,
+      "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": 3,
+      "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": 2,
+      "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": 5,
+      "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": 5,
+      "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": 5,
+      "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": 3,
+      "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": 3,
+      "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": 5,
+      "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang": 5
+    }
   },
   "tool_fehler": {},
   "artikel": {
@@ -1512,13 +1635,13 @@
       "checks": []
     },
     "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang": {
-      "sha256": "be9e1426b9a12d3109fa3f17d21f540306ee05531f7e0c46a122a131b4fd6b16",
-      "urteil": "warnung",
+      "sha256": "d2e6413dcd25664720e776b35253dc2d483b322c861dc7191f8ea34ab2cce910",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
-        "quellen": "warnung",
-        "faktenalter": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1526,13 +1649,13 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-20",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
-          "check": "Q2-quellen-vorhanden",
-          "dimension": "quellen",
-          "wirkung": "warnung",
-          "detail": "keine Belegkette im Frontmatter (quellen) – nachpflegen (faktenfrische)"
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "4284fd2d9c9005e7af8f (praezision): Behauptung, dass Überladung der Maschine zu schnellerem Verschleiß und teuren Reparaturen führt, wird ohne konkrete Daten oder Messgröße angegeben.; 84e247f17354e224c973 (praezision): Aussage, dass das richtige Beladen allein die Fixkosten senkt, ohne weitere Maßnahmen, ist ein pauschales Leistungsversprechen ohne Nennung von Mechanismen oder Grenzen.; a2a7dc69f1"
         }
       ]
     }

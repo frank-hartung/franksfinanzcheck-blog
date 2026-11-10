@@ -118,7 +118,7 @@ def pruefe_akte(root: str) -> tuple[list[dict], list[dict]]:
     if not stand.get("veraltet"):
         return [], []
     return [{"bereich": "akte",
-             "text": (f"BEFUND-AKTE.md ist nicht auf dem Stand der Queue "
+             "text": (f"BEFUND-AKTE.md oder Zustand stimmt nicht mit dem Ledger überein "
                       f"(Akte: {stand.get('akte_offen')} offen, Ledger: "
                       f"{stand.get('offen')}) – `python3 scripts/faktenfrische_"
                       f"befund_akte.py --schreiben`"),

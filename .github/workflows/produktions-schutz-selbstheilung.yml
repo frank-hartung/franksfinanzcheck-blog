@@ -118,6 +118,11 @@ jobs:
        (github.event_name == 'workflow_run' && github.event.workflow_run.head_branch == 'main'))
     runs-on: ubuntu-24.04
     timeout-minutes: 8
+    # `checks: write` NUR für die Ampel unten: ein Status am Commit, kein
+    # Deploy-Recht, kein Secret, keine Freigabe. `contents: read` bleibt.
+    permissions:
+      contents: read
+      checks: write
     steps:
       - name: Repository auschecken
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -178,6 +183,66 @@ jobs:
               exit 1
               ;;
           esac
+
+      # ----------------------------------------------------------
+      #  AMPEL (WF-829B / #922, 10.11.2026): Ein grüner Heil-Lauf,
+      #  der nichts geheilt hat, ist eine Lüge mit Betriebszulassung.
+      #  Seit dem 07.11. lief dieser Workflow siebenmal `success`,
+      #  viermal davon mit ausgeführtem Live-Heiljob – das Environment
+      #  blieb unverändert. C14 gebietet die Warnstufe
+      #  statt Dauer-Rot – aber der Commit darf deshalb nicht grün
+      #  aussehen. `action_required` ist genau dieser Zustand: offen,
+      #  besitzbar, mit Schließpfad, ohne neuen Alarm. Der Zustand
+      #  verschwindet von selbst, sobald die Nachmessung `SICHER`
+      #  oder `GEHEILT` liefert. Es wird KEIN Deployment freigegeben.
+      # ----------------------------------------------------------
+      - name: Ampel · Zustand am Commit sichtbar machen (nie Grün ohne Heilung)
+        if: ${{ !cancelled() && steps.messung.outcome != 'skipped' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}
+          MESS_CODE: ${{ steps.messung.outputs.code }}
+          LAUF_ID: ${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          case "$MESS_CODE" in
+            0)
+              SCHLUSS=success
+              TITEL="Produktions-Schutz: Zielzustand mit Nachmessung belegt"
+              TEXT="Reviewer, Branch-Regel main und Admin-Bypass-Sperre sind belegt. Der Deploy bleibt eine bewusste Auslösung auf main."
+              ;;
+            1)
+              SCHLUSS=action_required
+              TITEL="Produktions-Schutz: Inhaberhandlung offen (#922)"
+              TEXT="Das Repository darf dieses Environment nicht selbst absichern: Dem Token fehlt administration=write (HTTP 403), und can_admins_bypass hat in REST wie GraphQL keinen Schreibweg. Einmalig: Secret UMGEBUNGS_ADMIN_TOKEN mit Environments-Schreibrecht hinterlegen und im Dashboard 'Allow administrators to bypass configured protection rules' ausschalten. Der Tageslauf heilt dann selbst; der Deploy bleibt bis dahin fail-closed gesperrt."
+              ;;
+            *)
+              SCHLUSS=failure
+              TITEL="Produktions-Schutz: Messung nicht belegbar"
+              TEXT="Eichprobe, Belegkette, Netz oder Nachmessung sind ungeprüft. Ungeprüft gilt nicht als sauber; der Lauf ist rot."
+              ;;
+          esac
+          ZEIT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          jq -n \
+            --arg name "Produktions-Schutz · Environment (WF-829B)" \
+            --arg sha "$SHA" \
+            --arg schluss "$SCHLUSS" \
+            --arg zeit "$ZEIT" \
+            --arg titel "$TITEL" \
+            --arg summary "$TEXT" \
+            --arg details "https://github.com/${REPO}/issues/922" \
+            --arg text "Beleg und Nachmessung: https://github.com/${REPO}/actions/runs/${LAUF_ID}" \
+            '{name:$name, head_sha:$sha, status:"completed", conclusion:$schluss,
+              completed_at:$zeit, details_url:$details,
+              external_id:"wf-829b-produktionsschutz",
+              output:{
+                title:$titel, summary:$summary, text:$text
+              }
+            }' \
+            > "$RUNNER_TEMP/produktions_schutz_ampel.json"
+          gh api -X POST "repos/${REPO}/check-runs" \
+            --input "$RUNNER_TEMP/produktions_schutz_ampel.json" > /dev/null
 
       - name: Belegkette aufbewahren (ohne Secrets oder Antworttexte)
         if: ${{ !cancelled() }}
