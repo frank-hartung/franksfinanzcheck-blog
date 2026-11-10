@@ -1,17 +1,10 @@
 # 📌 PINTEREST-REPORT
 
-**Stand:** 2026-11-09 18:59 UTC · Modus: FIX
+**Stand:** 2026-11-10 12:49 UTC · Modus: FIX
 
-**Report-Schema:** 5 · **Geprüfte Artikel:** 119 (live: 80 · geparkt: 39)
-**Quellfingerabdruck:** `19d51ee4a868c26faa2c1bdec587a24ecf942a6ce48ffeab5109a10e8d13e4c6`
+**Report-Schema:** 5 · **Geprüfte Artikel:** 120 (live: 80 · geparkt: 40)
+**Quellfingerabdruck:** `1079f317a7b09932ab4d25447684368d14d3404e67c46cf03526e845cd48881d`
 
-Probleme: 2 · Geheilt: 2
+Probleme: 0 · Geheilt: 0
 
-| Code | Artikel | Problem |
-|---|---|---|
-| P4b | 2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich, 2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check | DUPLIKAT-pin_title (Spam-Risiko) |
-| P4b | 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen, 2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub | DUPLIKAT-pin_title (Spam-Risiko) |
-
-**Selbstheilung (diese Runde):**
-- [P4b] 2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check: pin_title ent-dupliziert → WLAN verbessern: Mesh-System oder Repeater im Check?
-- [P4b] 2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub: pin_title ent-dupliziert → Reisekasse füllen: 7 Wege zu mehr Budget für den Urlaub
+✅ Alle Pinterest-Signale im Profi-Bereich.
