@@ -185,6 +185,10 @@ on:
       # bleibt der Deploy fail-closed rot und NIEMAND merkt, dass die Reparatur
       # selbst nicht mehr läuft. Genau dieser Kanal darf nicht blind sein.
       - "Produktions-Schutz · Selbstheilung (WF-829B)"
+      # Dependabot-Alert #79 (10.11.2026): Der Selbstheilungs-Lauf für
+      # Abhängigkeiten darf bei Eichproben-Bruch (Exit 3) oder Rollback (Exit 2)
+      # niemals stumm scheitern.
+      - "Abhängigkeits-Schutz · Selbstheilung"
     types:
       - completed
 
@@ -904,9 +908,9 @@ jobs:
                     ]
                   : runbookKlasse === 'sicherheit-abhaengigkeiten'
                     ? [
-                        '1. **Einordnung:** Rot ist der Job „Abhängigkeiten“. Er prüft den AUSGELIEFERTEN Bestand gegen die Advisory-Datenbank (Online-Audit, nur im Tageslauf/auf Zuruf) und – bei jedem Push – die Struktur: exakte Pins, Quelle ↔ Hash-Lock, Lockfiles, Action-SHAs, Image-Tags und seit dem 01.11.2026 jedes `pip install` ohne `-r` (Regeln A1–A8).',
-                        '2. **Nachfahren:** `npm run deps:audit` (Exit 1 = Fundstelle, Exit 2 = Störung) und `npm run deps:check` (offline). Beide nennen Paket, Version, GHSA, Fix und die Herkunftsdatei; der Bericht steht als Annotation und im Lauf-Log.',
-                        '3. **Heilen (Exit 1):** Version auf die genannte `first_patched_version` pinnen – bei pip in `requirements-ci.in` UND `requirements-ci.txt` gemeinsam (neue Hashes, Regel A2 prüft die Gleichheit); bei den optionalen Manifesten `requirements-poppy.txt`/`requirements-tts.txt` genügt die eine Zeile. Danach `npm run deps:check && npm run deps:audit`. Eine Ad-hoc-Installation in einem Workflow (A7/A8) wird nicht gepinnt, sondern durch `-r <manifest>` ersetzt.',
+                        '1. **Einordnung:** Rot ist der Job „Abhängigkeiten“. Er prüft den AUSGELIEFERTEN Bestand gegen die Advisory-Datenbank (Online-Audit im Tageslauf, auf Zuruf und seit #79 bei jedem Paket-/Workflow-Diff) sowie die Struktur: exakte Pins, Quelle ↔ Hash-Lock, Lockfiles, Action-SHAs, Image-Tags, Ad-hoc-Installs und Sicherheits-Untergrenzen (Regeln A1–A9).',
+                        '2. **Nachfahren:** `npm run deps:audit` (Exit 1 = Fundstelle, Exit 2 = Störung), `npm run deps:check` (offline) und `npm run deps:heal` (automatische Selbstheilung mit Nachmessung). Beide nennen Paket, Version, GHSA, Fix und die Herkunftsdatei; der Bericht steht als Annotation und im Lauf-Log.',
+                        '3. **Heilen (Exit 1):** Automatisch öffnet der Folgelauf „Abhängigkeits-Schutz · Selbstheilung“ einen nachgemessenen PR (`automation/deps-heilung-*`, Audit H-02: `--ignore-scripts`) oder lokal per `npm run deps:heal`. Manuell: Version auf `first_patched_version` pinnen – bei pip in `requirements-ci.in` UND `requirements-ci.txt` gemeinsam (neue Hashes, Regel A2); bei optionalen Manifesten `requirements-poppy.txt`/`requirements-tts.txt` die Zeile. Danach `npm run deps:check && npm run deps:audit`. Ad-hoc-Installationen (A7/A8) durch `-r <manifest>` ersetzen.',
                         '4. **Störung (Exit 2) ist kein Freibrief:** Netz, Rate-Limit oder fehlendes Token heißen UNGEPRÜFT, nicht sauber. Lauf per „Run workflow“ wiederholen, nichts auf Verdacht ändern.',
                         '5. **Wenn hier zusätzlich F-01/Worker rot sind:** Das ist ein zweiter, unabhängiger Befund (die Meldung nennt beide Jobs). Der Edge-Weg steht in `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A1; die Klasse dieser Meldung ist trotzdem der Bestand – erst die Pins, dann die Live-Messung. Runbook: Abschnitt E, Beweisführung `ABHAENGIGKEITS-SICHERHEIT-PREMIUM-2026-10-24.md`.'
                       ]
