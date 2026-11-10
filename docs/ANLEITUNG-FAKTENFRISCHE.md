@@ -217,7 +217,7 @@ sieht und keinen künftigen Ausfall.
 |---|---|---|
 | Sockel 12, Vorlauf 7 (bis 06.11.2026) | 3 (Tag 0, 14, 15) | 11 |
 | Sockel 4, Vorlauf 7 | 35 von 46 | 27 |
-| **Sockel 4, Vorlauf 14 (heute)** | 3 (Tag 0, 1, 2) | 6 |
+| **Sockel 4, Vorlauf 14 (Stand 06.11.2026)** | 3 (Tag 0, 1, 2) | 6 |
 | Sockel 4, Vorlauf 21 | 3 (Tag 0, 1, 2) | 6 |
 
 Tag 0 ist mit jedem Limit inhärent (5 Verletzungen auch bei Limit 16). Der Vorlauf
@@ -524,3 +524,41 @@ im Report – das ist die Redaktions-Landkarte für den nächsten Ausbau.
 - **Neue Belegquelle:** nur nach Prüfung in `quellen_allowlist` aufnehmen und
   den Rang begründen. Die Allowlist ist der einzige Schutz davor, dass eine
   Werbeseite zum „Beleg“ wird.
+
+
+## Betriebsnachtrag 10.11.2026 – Kapazität mit realem Bestand nachgemessen
+
+Die vollständige Regression mit **126 Artikeln** deckte zwei Randfälle auf, die
+mit dem früheren Sockel 4 nicht mehr abgesichert waren: Ein siebentägiger
+Ausfall ab Tag 10 ließ zwei YMYL-Fristen um je einen Tag reißen; der
++97-Tage-Vollrückstand benötigte das gesamte Limit 16 und ließ damit keine
+Reserve. Das war kein fachlicher Befund zu den Artikeln, sondern ein
+Betriebs-/Kapazitätsfehler.
+
+Die SSOT (`data/agent_reach/faktenfrische.yaml`) ist nachgemessen:
+
+- **Sockel 5** ist die kleinste getestete Untergrenze, die einen siebentägigen
+  Ausfall bei Start an Tag 3, 10 oder 20 mit der echten Automatik ohne
+  Fristverletzung übersteht.
+- **Hartes Limit 18** lässt im +97-Tage-Vollrückstand zwei Plätze über dem
+  gemessenen Bedarf von 16. Das Limit ist eine Obergrenze für Rückstände,
+  nicht das tägliche Normalbudget.
+- Intervalle, Publikationstakt, Vorlauf 14, Mindestdeckung und menschliche
+  Fachfreigaben bleiben unverändert.
+- Eine Gegenprobe mit dem früheren Sockel 4 bleibt im Regressionstest rot;
+  so kann die Betriebsanpassung nicht später unbemerkt zurückgenommen werden.
+
+Nachweise:
+
+```bash
+python3 -m unittest \
+  scripts.tests.test_faktenfrische_kapazitaet.RepoZustandTest.test_kadenz_deckt_den_bestand \
+  scripts.tests.test_faktenfrische_kapazitaet.RepoZustandTest.test_vollrueckstand_nach_97_tagen_behaelt_reserve \
+  scripts.tests.test_faktenfrische_kapazitaet.AusfallToleranzTest -v
+python3 scripts/faktenfrische_kapazitaet.py --wache --json
+```
+
+Die tägliche Faktenfrische-Wache misst den Vertrag weiterhin live; bei
+Unterdeckung wird kein Siegel erteilt, sondern der vorhandene deduplizierte
+Schließpfad ausgelöst. Die volle Regression läuft bei Änderungen an `scripts/**`,
+`data/**`, Content und Workflows.

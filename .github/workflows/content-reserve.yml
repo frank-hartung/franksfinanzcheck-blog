@@ -886,11 +886,22 @@ jobs:
         run: |
           git config user.name "Content-Bot"
           git config user.email "content-bot@users.noreply.github.com"
-          git add data/alert_router_state.json 2>/dev/null || true
+          if ! git add data/alert_router_state.json; then
+            echo "::warning::Routing-Zustand konnte nicht zum Commit vorgemerkt werden."
+            echo "⚠️ **Watchdog-Routing-Zustand nicht gesichert:** `git add` fehlgeschlagen; nächster planmäßiger Abgleich versucht erneut." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
           if git diff --cached --quiet; then
             echo "Routing-Zustand unverändert."
+            echo "✅ Watchdog-Routing-Zustand war bereits aktuell." >> "$GITHUB_STEP_SUMMARY"
           elif ! git commit -m "chore(watchdog): Reserve-Heilung abgeglichen"; then
             echo "::warning::Routing-Zustand konnte nicht committed werden."
+            echo "⚠️ **Watchdog-Routing-Zustand nicht gesichert:** Commit fehlgeschlagen; nächster planmäßiger Abgleich versucht erneut." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
           elif ! BRANCH=main scripts/git_sync.sh --push-only; then
             echo "::warning::Routing-Zustand konnte nicht nach main gepusht werden."
+            echo "⚠️ **Watchdog-Routing-Zustand nicht gesichert:** Push nach `main` fehlgeschlagen; nächster planmäßiger Abgleich versucht erneut." >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          else
+            echo "✅ Watchdog-Routing-Zustand auf `main` gesichert." >> "$GITHUB_STEP_SUMMARY"
           fi

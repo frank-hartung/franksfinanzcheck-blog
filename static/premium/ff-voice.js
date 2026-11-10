@@ -173,9 +173,9 @@
       // – für beide Tonpfade (Studiotonspur UND Geräte-Engine, beide
       // synthetisch). Der vollständige Satz steht zusätzlich in
       // aria-describedby (#ff-voice-ki-hinweis), den die Engine nie anfasst.
-      playAria: 'Artikel vorlesen – maschinell erzeugte Stimme (männliche ElevenLabs-Premium-Stimme, DE & EN)',
-      playAriaNeutral: 'Artikel vorlesen – maschinell erzeugte Stimme (Stimme deines Geräts)',
-      pauseAria: 'Vorlesen pausieren', resumeAria: 'Vorlesen fortsetzen', stopAria: 'Vorlesen beenden',
+      playAria: 'Vorlesen – KI-Stimme: maschinell erzeugte Stimme (männliche ElevenLabs-Premium-Stimme, DE & EN)',
+      playAriaNeutral: 'Vorlesen – KI-Stimme: maschinell erzeugte Stimme (Stimme deines Geräts)',
+      pauseAria: 'Pausieren – KI-Stimme, Vorlesen anhalten', resumeAria: 'Weiterlesen – KI-Stimme, Vorlesen fortsetzen', stopAria: 'Beenden – Vorlesen stoppen',
       summaryBtn: 'Kurzfassung', summaryAria: 'Kurzfassung des Artikels anzeigen',
       unsupported: 'Vorlesen wird von diesem Browser nicht unterstützt.',
       noText: 'Kein vorlesbarer Text gefunden.',
@@ -243,9 +243,9 @@
       play: 'Listen', pause: 'Pause', resume: 'Resume', stop: 'Stop',
       // #1028: mirror of the German strings – the machine-generated voice is
       // disclosed in the accessible name, not only in the server markup.
-      playAria: 'Listen to article – machine-generated voice (male ElevenLabs premium voice, DE & EN)',
-      playAriaNeutral: 'Listen to article – machine-generated voice (your device voice)',
-      pauseAria: 'Pause listening', resumeAria: 'Resume listening', stopAria: 'Stop listening',
+      playAria: 'Listen – AI voice: machine-generated article voice (male ElevenLabs premium voice, DE & EN)',
+      playAriaNeutral: 'Listen – AI voice: machine-generated article voice (your device voice)',
+      pauseAria: 'Pause – AI voice, stop listening', resumeAria: 'Resume – AI voice, continue listening', stopAria: 'Stop – end listening',
       summaryBtn: 'Summary', summaryAria: 'Show article summary',
       unsupported: 'Listening is not supported by this browser.',
       noText: 'No readable text found.',

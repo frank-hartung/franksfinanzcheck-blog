@@ -188,6 +188,11 @@ on:
     types:
       - completed
 
+# Isolate each observed workflow_run; never cancel a failure/resolve event.
+concurrency:
+  group: "${{ github.workflow }}-${{ github.event.workflow_run.id }}"
+  cancel-in-progress: false
+
 permissions:
   contents: read  # Top-Level strikt lesend; Schreibrechte explizit pro Job
 

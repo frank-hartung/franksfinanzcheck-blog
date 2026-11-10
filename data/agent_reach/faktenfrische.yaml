@@ -45,23 +45,27 @@ budget:
   # `max_artikel_pro_lauf`-Zeile doppelt in der Datei (Rest eines
   # Heil-Laufs, #1021). PyYAML nimmt still den letzten Wert – der
   # Artefakt-Wächter hat den Doppel-Schlüssel gefunden.
-  max_artikel_pro_lauf: 4       # Sockel = Untergrenze; die Automatik hebt bis zum Limit (06.11.2026: 12 → 4)
+  max_artikel_pro_lauf: 5       # Sockel = Untergrenze; Automatik hebt bis zum Limit
   # 02.11.2026 (#912): 112 Seiten benötigen 3,01 Prüfungen/Tag bei
   # 110 % Mindestdeckung – Sockel 3 → 4. 04.11.2026 (#1039): 4 → 12.
   # 06.11.2026 (#1107): Die Bündel-Begründung von #1039 war ein MESSFEHLER
   # (Projektion ab dem eingefrorenen Prüfstand). Gemessen als Trajektorie ab
   # heute: Sockel 4 trägt alle 52 Montage (0 rot); Sockel 3 → 12 rot.
   # Herausgeber-Entscheidung 06.11.2026: Sockel 12 → 4.
-  # Ausfalltoleranz 7 Tage: getragen vom Vorlauf (planung.vorlauf_tage: 14),
-  # nicht vom Sockel. Gemessen mit der echten Automatik über alle Starttage:
-  # ab Tag 3 ohne Fristverletzung. Ein Ausfall, der an Tag 1 oder 2 beginnt,
-  # verursacht 1–4 Verletzungen; Tag 0 ist mit jedem Limit inhärent (5).
-  # Gemessen: scripts/faktenfrische_kapazitaet.py (--json) und die Ausfall-Probe.
-  # Limit 16 und die Nachholfrist bleiben unverändert.
-  # 04.11.2026: Die +97-Tage-Uhrprobe legte alle 112 Prüftermine in denselben
-  # Vollrückstand. Limit 10 konnte ihn nicht binnen sieben Tagen abbauen.
-  # Die Kalenderrechnung wählt jetzt 14; Limit 16 lässt zwei Plätze Reserve.
-  # Sockel, Intervalle, Takt, Nachholfrist und Mindestdeckung bleiben gleich.
+  # NACHMESSUNG 10.11.2026 (gesamte Regression, 126 Artikel): Ein 7-Tage-
+  # Ausfall ab Tag 10 ließ zwei YMYL-Fristen um einen Tag reißen (SLA-Test).
+  # Sockel 5 ist die kleinste getestete Änderung, die alle drei Ausfallstarts
+  # (Tag 3/10/20) ohne Fristverletzung trägt. Das ist +1 Prüfung/Tag im
+  # Normalbetrieb, keine Änderung der Fachintervalle oder Prüfkriterien.
+  # Limit 16 war beim +97-Tage-Vollrückstand zugleich das empfohlene Budget:
+  # keine Reserve (C45). Limit 18 lässt zwei Plätze Reserve; Sockel bleibt
+  # elastisch und das harte Limit wird nur bei echtem Rückstand ausgeschöpft.
+  # Gemessen: tests/test_faktenfrische_kapazitaet.py, echte Workflow-Kadenz.
+  # Historie 04.11.2026: Der +97-Tage-Stresstest fand zunächst Limit 10 zu
+  # klein; die Kalenderrechnung stieg auf 14, danach auf 16. Die erneute
+  # Messung mit 126 Artikeln vom 10.11.2026 belegt Limit 18 (16 + 2 Reserve).
+  # Prüffristen, Rechercheintervalle, Takt, Nachholfrist und Mindestdeckung
+  # bleiben unverändert.
   max_treffer_je_artikel: 6     # so viele Fundstellen ins Dossier
   max_quellen_frontmatter: 4    # so viele Belege in den Artikel
   web_max_zeichen: 1800         # Klartext-Auszug je Webseite
@@ -80,7 +84,7 @@ budget:
   #  Die Heilung ist nicht „weniger messen“: Die Intervalle oben
   #  bleiben unangetastet. Es wird mehr geliefert.
   auto_skalierung: true         # Budget folgt dem Bedarf (unten)
-  hartes_limit_pro_lauf: 16     # Vollrückstand: 14 je Lauf + 2 Plätze Reserve
+  hartes_limit_pro_lauf: 18     # 16 nötige + 2 Reserveplätze im +97-Tage-Stresstest
   #  Das harte Limit ist der Vertrag mit der Deckungs-Wache
   #  (scripts/faktenfrische_kapazitaet.py, Governance C45): Es muss
   #  den Bedarf auch an einem Spitzentag decken. Reicht es nicht
@@ -92,9 +96,10 @@ budget:
 #  Stichtag anfängt, arbeitet an einer roten Scorecard.
 planung:
   # Arbeit beginnt, wenn die Frist so viele Tage entfernt ist.
-  # 06.11.2026 (#1107): 7 → 14. Der Vorlauf ist der Hebel für die
-  # Ausfalltoleranz: Mit 14 Tagen werden Fristen einer 7-Tage-Lücke
-  # vorab bearbeitet. Bei Sockel 4 reicht 7 nicht (35 von 46 Starttagen rot).
+  # 06.11.2026 (#1107): 7 → 14. Der Vorlauf beginnt die Arbeit vor der Frist.
+  # Nachmessung 10.11.2026: Sockel 5 + Vorlauf 14 trägt die geprüften
+  # 7-Tage-Ausfallstarts (Tag 3/10/20); mit Sockel 4 rissen zwei Fristen.
+  # Die Testgarantie gilt ausdrücklich nicht für Ausfallstart Tag 0–2.
   vorlauf_tage: 14
   # Ein Rückstand (bereits überfällige Seiten) muss binnen so vielen
   # Tagen abgebaut sein – sonst ist der Lauf rot (Schließpfad).

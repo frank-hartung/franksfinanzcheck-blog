@@ -31,6 +31,7 @@ import re
 import sys
 import datetime
 import statistics
+from pathlib import Path
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
@@ -206,7 +207,8 @@ def _data_lamp(total, articles, configured):
 def _trend():
     """Letzte Scorecard-Stände (für die eine Zahl, die ein Chefredakteur sieht)."""
     try:
-        rows = [json.loads(l) for l in open(_HISTORY, encoding="utf-8") if l.strip()]
+        rows = [json.loads(line) for line in Path(_HISTORY).read_text(encoding="utf-8").splitlines()
+                if line.strip()]
     except (OSError, json.JSONDecodeError):
         return None, None
     rows = [r for r in rows if isinstance(r, dict) and r.get("score") is not None]
@@ -221,7 +223,7 @@ def _count_live_drafts():
     slugs = post_utils.list_post_paths()
     for p in slugs:
         try:
-            t = open(p, encoding="utf-8").read()
+            t = Path(p).read_text(encoding="utf-8")
         except OSError:
             continue
         if post_utils.slug_of(p) == "_index":
@@ -237,7 +239,7 @@ def _pillar_counts():
     counts = {}
     for p in post_utils.list_post_paths():
         try:
-            t = open(p, encoding="utf-8").read()
+            t = Path(p).read_text(encoding="utf-8")
         except OSError:
             continue
         m = re.search(r"^pillar:\s*[\"']?([^\"'\n]+)", t, re.M)
@@ -287,7 +289,7 @@ def _lektor_findings():
     if not os.path.exists(fp):
         return None
     try:
-        t = open(fp, encoding="utf-8").read()
+        t = Path(fp).read_text(encoding="utf-8")
     except OSError:
         return None
     # Nur AUTO-behebbare Regeln zählen als "Befund".
@@ -643,7 +645,7 @@ def _append_history(d, score):
         os.makedirs(os.path.dirname(_HISTORY), exist_ok=True)
         with open(_HISTORY, "a", encoding="utf-8") as f:
             f.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
-        lines = [l for l in open(_HISTORY, encoding="utf-8").read().splitlines() if l.strip()]
+        lines = [l for l in Path(_HISTORY).read_text(encoding="utf-8").splitlines() if l.strip()]
         if len(lines) > 260:                      # Retention: gut 5 Jahre Wochenläufe
             with open(_HISTORY, "w", encoding="utf-8") as f:
                 f.write("\n".join(lines[-260:]) + "\n")
