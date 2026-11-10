@@ -1,4 +1,12 @@
 {
+  "erzeugt": "2026-11-10T18:33:08Z",
+  "stichtag": "2026-11-10",
+  "offen": 0,
+  "seiten": 0,
+  "live_seiten": 0,
+  "live_befunde": 0,
+  "ueberholt": 0,
+  "ohne_fassung": 0,
   "erzeugt": "2026-11-10T18:31:53Z",
   "stichtag": "2026-11-10",
   "offen": 145,
@@ -9,11 +17,13 @@
   "ohne_fassung": 15,
   "seite_fehlt": 0,
   "nicht_entscheidbar": 0,
-  "aeltester_tage": 11,
+  "aeltester_tage": null,
   "frist_tage": 14,
   "eskalation_tage": 21,
   "ueber_frist": 0,
   "in_eskalation": 0,
+  "je_seite": {},
+  "befunde": [],
   "je_seite": {
     "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": 3,
     "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": 5,
@@ -1658,5 +1668,8 @@
     }
   ],
   "akte": "BEFUND-AKTE.md",
-  "regel": "scripts/faktenfrische_befund_ledger.py"
+  "regel": "scripts/faktenfrische_befund_ledger.py",
+  "belegstellen": 60,
+  "belegstellen_ohne": 127,
+  "belegstellen_funde": 0
 }

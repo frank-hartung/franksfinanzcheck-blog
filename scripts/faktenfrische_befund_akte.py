@@ -54,7 +54,10 @@ CONFIG_PATH = ROOT / "data" / "agent_reach" / "faktenfrische.yaml"
 STANDARD_FRIST = 14
 STANDARD_ESKALATION = 21
 ENTSCHEIDEN = ("python3 scripts/faktenfrische_befund_ledger.py --entscheiden {id} "
-               "--von \"<Name>\" --begruendung \"<was geprüft/geändert wurde>\"")
+               "--von \"<Name>\" --art geaendert --stelle \"<wörtlicher Satz "
+               "aus dem Artikel>\" --begruendung \"<was geprüft/geändert wurde>\"")
+# ^ `--art`/`--stelle` sind seit 10.11.2026 Pflicht: Eine Entscheidung, die eine
+#   Änderung behauptet, muss den Satz zitieren, der sie trägt (Heilungsbeleg).
 
 STATUS_RANG = {"ueberholt": 0, "ohne-fassung": 1, "aktuell": 2, "seite-fehlt": 3}
 STATUS_TEXT = {
@@ -141,7 +144,8 @@ def zustand_bauen(befunde: list[dict], live: dict[str, dict], *,
     }
 
 
-def akte_bauen(befunde: list[dict], live: dict[str, dict], zustand: dict) -> str:
+def akte_bauen(befunde: list[dict], live: dict[str, dict], zustand: dict,
+               belege: dict | None = None) -> str:
     """Reine Funktion: Befunde + Zustand → Markdown-Arbeitsdatei."""
     z: list[str] = []
     add = z.append
@@ -171,6 +175,30 @@ def akte_bauen(befunde: list[dict], live: dict[str, dict], zustand: dict) -> str
     add(f"| In Eskalation ({zustand['eskalation_tage']} Tage) | "
         f"{zustand['in_eskalation']} |")
     add("")
+    if belege is not None:
+        add("## Heilungsbelege (Beweislage der Schließakte)")
+        add("")
+        add(f"**{belege.get('geprueft', 0)} dokumentierte Heilung(en)** zitieren "
+            f"einen Satz, der heute im Artikel steht · "
+            f"{belege.get('ohne_stelle', 0)} Altentscheidung(en) ohne Belegstelle · "
+            f"{belege.get('seite_fehlt', 0)} Seite(n) nicht im Bestand.")
+        add("")
+        if belege.get("funde"):
+            add(f"> **{len(belege['funde'])} Belegstelle(n) stehen nicht mehr im "
+                "Text.** Die Heilung ist damit nicht mehr belegt und muss neu "
+                "entschieden werden (`--entscheiden … --art geaendert --stelle "
+                "\"…\"`). Prüfen: `python3 scripts/faktenfrische_befund_ledger.py "
+                "--pruefe-stellen`.")
+            add("")
+            for fund in belege["funde"][:20]:
+                add(f"- `{fund['slug']}` · `{fund['befund_id']}` "
+                    f"({fund.get('art', '')}, {fund.get('entschieden_am', '')}): "
+                    f"„{str(fund.get('belegstelle', ''))[:120]}“")
+            add("")
+        else:
+            add("Die Rückprobe (`--pruefe-stellen`) ist grün: Jede dokumentierte "
+                "Belegstelle steht im heutigen Text.")
+            add("")
     add("## So schließt du einen Befund")
     add("")
     add("1. **Text und Beleg prüfen.** Mangel korrigieren (Zahl belegen oder "
@@ -293,6 +321,15 @@ def projektion(stichtag: dt.date) -> tuple[str, dict]:
                             stichtag=stichtag)
     zustand["akte"] = str(AKTE_PATH.relative_to(ROOT))
     zustand["regel"] = "scripts/faktenfrische_befund_ledger.py"
+    try:
+        belege = ledger.stellen_pruefen()
+    except Exception:  # noqa: BLE001 – die Akte darf an der Rückprobe nicht sterben
+        belege = None
+    if belege is not None:
+        zustand["belegstellen"] = belege.get("geprueft", 0)
+        zustand["belegstellen_ohne"] = belege.get("ohne_stelle", 0)
+        zustand["belegstellen_funde"] = len(belege.get("funde") or [])
+    _schreiben(akte_bauen(befunde, live, zustand, belege), zustand)
     return akte_bauen(befunde, live, zustand), zustand
 
 

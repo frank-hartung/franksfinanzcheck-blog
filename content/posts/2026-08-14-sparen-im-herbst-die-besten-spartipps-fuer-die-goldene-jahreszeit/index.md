@@ -50,9 +50,6 @@ Wer clever vorgeht, kann beim **Sparen im Herbst** seine Haushaltskosten spürba
 💡 **Schnell‑Tipp von FranksFinanzcheck:** Überprüfe deine Absicherung und spare bei den großen Policen – allen voran der Kfz-Versicherung (Wechselstichtag 30. November): [**Jetzt Kfz-Versicherung vergleichen**](/go/kfz-versicherung/)  
 _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-![Merkkarte: Kernaussagen zu Sparen im Herbst: Spartipps für die goldene Jahreszeit](abbildung-merkkarte. svg)
-
-*Abbildung: Merkkarte zu „Sparen im Herbst: Spartipps für die goldene Jahreszeit“ (eigene Darstellung aus diesem Beitrag).*
 
 ![Merkkarte: Kernaussagen zu Sparen im Herbst: Spartipps für die goldene Jahreszeit](abbildung-merkkarte.svg)
 
@@ -258,9 +255,6 @@ Wenn der Herbst so läuft, startest du mit Puffer ins neue Jahr. Du zahlst keine
 
 <!-- premium-length-2026-b -->
 
-![Gliederung des Beitrags: Sparen im Herbst: Spartipps für die goldene Jahreszeit](abbildung-ablauf. svg)
-
-*Abbildung: Gliederung zu „Sparen im Herbst: Spartipps für die goldene Jahreszeit“ – 5 Stationen von „Welche Sparhebel lohnen sich im Herbst besonders?“ bis „Weihnachtskonto im September“ (eigene Darstellung).*
 
 ![Gliederung des Beitrags: Sparen im Herbst: Spartipps für die goldene Jahreszeit](abbildung-ablauf.svg)
 

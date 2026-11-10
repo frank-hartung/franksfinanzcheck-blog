@@ -231,6 +231,12 @@ def _is_protected(line: str) -> bool:
 # NIE wieder Leerzeichen in URLs eingefuegt/veraendert werden.
 RE_URL = re.compile(r"https?://[^\s)\]\}]+(?:\s+[^\s)\]\}]+)*")
 
+# Markdown-Ziel (Bild oder Link, relativ ODER absolut) als Ganzes. Der Inhalt
+# der Klammer ist Maschinensyntax und wird vor jeder Regel maskiert; siehe
+# `_mask_md_ziele` (Befund 10.11.2026: 40 kaputte Bildziele durch Regel D).
+_MD_ZIEL = re.compile(r"(!?\[[^\]]*\])\(([^)]*)\)")
+
+
 
 def _mask_urls(line: str) -> tuple[str, list[tuple[str, str]]]:
     """Ersetzt URLs durch eindeutige Token (§URL0§, §URL1§, …).
@@ -319,12 +325,47 @@ def fix_line(line: str) -> tuple[str, int]:
     return line, changed
 
 
+def _mask_md_ziele(line: str) -> tuple[str, list[tuple[str, str]]]:
+    """Maskiert JEDES Markdown-Ziel – relativ oder absolut (10.11.2026, #1072).
+
+    WARUM DAS NÖTIG IST
+    -------------------
+    `_mask_urls` schützt nur `http(s)://…`. Markdown-Ziele des Bestands sind
+    aber oft relativ: `(abbildung-merkkarte.svg)`, `(../posts/2026-08-12-x/)`.
+    Regel D liest den Punkt vor `svg` als Satzende und schreibt daraus
+    `abbildung-merkkarte. svg` – ein Bildziel, das es nicht gibt. So entstanden
+    bis zum 10.11.2026 **40 kaputte Bildziele in 20 Beiträgen**; der Ableiter
+    hielt die Abbildung danach für fehlend und fügte sie ein zweites Mal ein
+    (siehe `scripts/bildziel_wache.py`).
+
+    Ein Ziel im Markdown ist Maschinensyntax, kein Fließtext: Dort darf keine
+    Leerzeichen-Regel greifen – weder Regel D noch Regel C (Leerzeichen vor
+    Satzzeichen) noch Regel A. Deshalb wird der Klammerinhalt vor allen Regeln
+    durch ein Token ersetzt und danach zeichengenau zurückgeschrieben.
+    """
+    ziele: list[tuple[str, str]] = []
+    def _repl(m):
+        tok = f"§ZIEL{len(ziele)}§"
+        ziele.append((tok, m.group(2)))
+        return f"{m.group(1)}({tok})"
+    maskiert = _MD_ZIEL.sub(_repl, line)
+    return maskiert, ziele
+
+
+def _unmask_md_ziele(line: str, ziele: list[tuple[str, str]]) -> str:
+    for tok, ziel in ziele:
+        line = line.replace(tok, ziel)
+    return line
+
+
 def fix_line_safe(line: str) -> tuple[str, int]:
-    """fix_line mit URL-Maskierung (URLs werden nie veraendert)."""
-    masked, urls = _mask_urls(line)
+    """fix_line mit Maskierung von Markdown-Zielen (nie verändert)."""
+    masked, ziele = _mask_md_ziele(line)
+    masked, urls = _mask_urls(masked)
     out, n = fix_line(masked)
     for tok, u in urls:
         out = out.replace(tok, u)
+    out = _unmask_md_ziele(out, ziele)
     return out, n
 
 
@@ -339,12 +380,14 @@ def fix_body(body: str) -> tuple[str, int]:
             # zwischen Zahl und %/€ sowie „z.B.“ → „z. B.“. Alle anderen
             # Regeln (Leerzeichen-Kollaps etc.) würden Tabellen-Spacing
             # zerstören. URLs bleiben maskiert.
-            masked, urls = _mask_urls(line)
+            masked, ziele = _mask_md_ziele(line)
+            masked, urls = _mask_urls(masked)
             new = re.sub(r"(\d)[ \u00a0]+([%€])",
                          lambda m: m.group(1) + NBSP + m.group(2), masked)
             new = re.sub(r"([zZ])\.B\.", r"\1. B.", new)
             for tok, u in urls:
                 new = new.replace(tok, u)
+            new = _unmask_md_ziele(new, ziele)
             if new != line:
                 changed += 1
             out.append(new)
@@ -375,6 +418,12 @@ SELBSTTEST = [
     ("Das gilt z. B. ab morgen", "Das gilt z. B. ab morgen"),
     ("Kosten ca. 3 Euro", "Kosten ca. 3 Euro"),
     ("Siehe https://a.de/b für Details", "Siehe https://a.de/b für Details"),
+    # Markdown-Ziele sind Maschinensyntax – Regel D darf den Punkt vor der
+    # Endung nicht als Satzende lesen (Befund 10.11.2026, 40 kaputte Bildziele).
+    ("![Merkkarte](abbildung-merkkarte.svg)", "![Merkkarte](abbildung-merkkarte.svg)"),
+    ("![Gliederung](abbildung-ablauf.svg)", "![Gliederung](abbildung-ablauf.svg)"),
+    ("[Weiterlesen](../posts/2026-08-12-x/index.md)", "[Weiterlesen](../posts/2026-08-12-x/index.md)"),
+    ("[Datei](/downloads/ratgeber.pdf)", "[Datei](/downloads/ratgeber.pdf)"),
     ("Adresse www.example.de ist gemeint", "Adresse www.example.de ist gemeint"),
     ("18.000 Menschen lesen mit", "18.000 Menschen lesen mit"),
     # E) Komma

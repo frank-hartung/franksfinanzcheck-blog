@@ -13,7 +13,7 @@ ai_generated: true
 ki_redaktion: "chatgpt"
 ki_redaktion_status: "review"
 news_kategorie: "energie"
-kurzantwort: "Variable Tarife geben Marktpreise direkt an dich weiter – das Preisrisiko trägst du, nicht der Anbieter. Ein Festpreis kehrt das Verhältnis um, gilt aber nur für die Laufzeit des Vertrags und kostet meist einen Aufschlag. Vergleiche deshalb den Gesamtpreis aus Grund- und Arbeitspreis, achte auf Preisdeckel und Kündigungsfristen und rechne mit deinem echten Jahresverbrauch."
+kurzantwort: "Variable Tarife geben Marktpreise direkt an dich weiter – das Preisrisiko trägst du, nicht der Anbieter. Ein Festpreis kehrt das Verhältnis um, gilt aber nur für die Laufzeit des Vertrags und kann einen Aufschlag kosten. Vergleiche deshalb den Gesamtpreis aus Grund- und Arbeitspreis, achte auf Preisdeckel und Kündigungsfristen und rechne mit deinem echten Jahresverbrauch."
 pin_title: "Energiepreise 2026: Was du jetzt beim Strom- und Gasvertrag prüfen solltest"
 pin_description: "*Werbung | Energiepreise 2026: Was du jetzt beim Strom- und Gasvertrag prüfen solltest – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun … Mehr Spartipps auf FranksFinanzcheck! #energieupdate"
 cover:
@@ -54,14 +54,14 @@ Beides sorgt dafür, dass zwei Haushalte am Ende zwei verschiedene Rechnungen be
 - **Deine Kosten schwanken** – Mit einem variablen Tarif erlebst du den Markt direkt. Sinken die Preise an der Börse, zahlst du weniger. Steigen sie dort an, wird es für dich teurer. Ein Festpreis schützt dich vor solchen Sprüngen. Du zahlst für die gesamte Laufzeit den gleichen Preis. Erst wenn der Vertrag endet, gilt wieder der aktuelle Marktpreis. Fallen die Preise am Markt stark ab? Dann zahlst du beim Festpreis oft mehr als nötig.
 - **Dein Verbrauch entscheidet** – Haushalte mit hohem Bedarf fahren oft mit einem Festpreis besser. Der stabile Preis wiegt hier schwer. Wer wenig Energie nutzt, profitiert dagegen eher von niedrigen Preisen am Markt. Hier fallen kleine Sprünge nach oben weniger ins Gewicht.
 - **Planbar oder flexibel** – Ein Festpreis gibt dir Sicherheit bei den Kosten. Du weißt genau, was am Monatsende vom Konto abgeht. Ein variabler Tarif bleibt dagegen flexibler. Das hilft dir, wenn sich dein Leben oder dein Verbrauch bald ändern soll.
-- **Zwischenformen beachten** – Manche Anbieter kombinieren Schutz mit Flexibilität. Es gibt variable Tarife mit einer Garantie oder einer Obergrenze. Der Preis bleibt beweglich, kann aber nur bis zu einem Deckel steigen. Solche Varianten stehen im Vergleich selten ganz oben. Frag deshalb gezielt nach diesen Modellen.
+- **Zwischenformen beachten** – Manche Anbieter kombinieren Schutz mit Flexibilität. Es gibt variable Tarife mit einer Garantie oder einer Obergrenze. Der Preis bleibt beweglich, kann aber nur bis zu einem Deckel steigen. Frag deshalb gezielt nach diesen Modellen und rechne den Gesamtpreis über die volle Laufzeit.
 - **Die Laufzeit bindet dich** – Verträge mit Festpreis laufen oft über ein oder zwei Jahre. Das kann ein großer Vorteil sein. Es kann dich aber auch an einen teuren Vertrag binden. Das ist ärgerlich, wenn die Preise am Markt plötzlich sinken.
-- **Der Markt bewegt sich** – Die Preise an den Märkten für Energie schwanken wieder stärker. Wer aufmerksam bleibt, sichert sich Vorteile. Wechsel rechtzeitig zu einem günstigeren Angebot, wenn dein alter Vertrag ausläuft.
+- **Der Markt bewegt sich** – Die Preise an den Märkten für Energie ändern sich laufend; verlässliche Vorhersagen gibt es nicht. Wer aufmerksam bleibt, sichert sich Vorteile. Wechsel rechtzeitig zu einem günstigeren Angebot, wenn dein alter Vertrag ausläuft.
 
 ## Was du jetzt konkret tun kannst
 
 1. **Analysiere deinen Verbrauch genau** – Nimm dir die Abrechnungen der letzten zwei Jahre vor. So weißt du, wie viel Energie du im Schnitt verbrauchst. Diese Zahl ist der wichtigste Wert für jeden Vergleich. Ohne diesen Wert sind alle Angebote nur Schätzungen.
-2. **Vergleiche die Modelle** – Nutze unabhängige Portale für einen Vergleich. Dort siehst du variable Angebote und Festpreise direkt nebeneinander. Anbieter müssen den Grundpreis und den Arbeitspreis getrennt nennen. Die Bundesnetzagentur verlangt das für mehr Klarheit. Rechne beide Werte für ein Jahr zusammen. Erst der Gesamtpreis zeigt, was ein Tarif wirklich kostet.
+2. **Vergleiche die Modelle** – Nutze unabhängige Portale für einen Vergleich. Dort siehst du variable Angebote und Festpreise direkt nebeneinander. Anbieter weisen Grundpreis und Arbeitspreis getrennt aus. Rechne beide Werte für ein Jahr zusammen. Erst der Gesamtpreis zeigt, was ein Tarif wirklich kostet.
 3. **Prüfe die Bedingungen im Vertrag** – Achte auf Fristen für die Kündigung und auf Garantien beim Preis. Kleine Unterschiede wirken hier oft sehr stark. Ein langer Vertrag zu einem hohen Preis wird schnell zu einer Last für dein Budget.
 4. **Berücksichtige deine Pläne** – Willst du in den nächsten Monaten umziehen? Dann kann ein flexibler Tarif ohne lange Bindung sinnvoll sein. Bleibst du lange in deiner Wohnung? Dann darf es auch ein fester Preis für zwei Jahre sein.
 5. **Setze auf Effizienz** – Ein bewusster Umgang mit Strom und Wärme senkt deine Kosten immer. Das gilt völlig unabhängig von deinem Tarif. Jede gesparte Einheit hilft dir bei jedem Modell.
@@ -77,7 +77,7 @@ Der zweite Weg sind langfristige Verträge für die Lieferung. Sie legen den Pre
 
 Damit tragen die beiden Seiten das Risiko ganz unterschiedlich. Bei einem variablen Tarif gehen die Preise vom Spot-Markt direkt an dich. Steigen sie dort, steigt auch deine Rechnung sofort. Sinken sie, zahlst du weniger. Das Risiko bei den Preisen trägst du allein – nicht die Firma.
 
-Bei einem Festpreis ist das anders. Der Anbieter übernimmt das Risiko für die Dauer der Laufzeit. Er kalkuliert dafür einen Aufschlag in den Preis ein. Du zahlst also einen Aufpreis für deine Sicherheit. Du sparst nur dann Geld, wenn die Preise am Markt über deinem Festpreis liegen. Endet die Laufzeit, gilt wieder der Preis vom Markt.
+Bei einem Festpreis ist das anders. Der Anbieter übernimmt das Risiko für die Dauer der Laufzeit und kalkuliert es in den Preis ein. Ein Festpreis kann deshalb teurer sein als ein variabler Tarif – muss es aber nicht. Du sparst, wenn die Preise am Markt über deinem Festpreis liegen. Endet die Laufzeit, gilt wieder der Preis vom Markt.
 
 **Faustregel 1:** Variable Tarife sind meist dann günstig, wenn die Preise stabil bleiben oder sinken. Steigen sie am Markt stark an, wird es für dich schnell teuer.
 

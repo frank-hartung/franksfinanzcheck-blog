@@ -52,9 +52,6 @@ Ein Punkt bleibt wichtig: Lies das Kleingedruckte. Viele Banken haben ihre Preis
 💡 **Schnell-Tipp von FranksFinanzcheck:** Ein dauerhaft günstiges Konto mit starker App und guten Alltagsfunktionen kannst du direkt prüfen: [**Kostenloses C24 Girokonto eröffnen**](/go/girokonto/)  
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-![Merkkarte: Kernaussagen zu Kostenloses Girokonto: Ein Konto ohne Gebühren finden](abbildung-merkkarte. svg)
-
-*Abbildung: Merkkarte zu „Kostenloses Girokonto: Ein Konto ohne Gebühren finden“ (eigene Darstellung aus diesem Beitrag).*
 
 ![Merkkarte: Kernaussagen zu Kostenloses Girokonto: Ein Konto ohne Gebühren finden](abbildung-merkkarte.svg)
 
@@ -122,6 +119,8 @@ Eine Filiale kostet Miete und Personal. Diese Kosten trägst du über die Gebüh
 
 ### Beispielhafte Gegenüberstellung
 
+Die Beträge in dieser Tabelle sind gerundete Beispielwerte zur Orientierung. Verbindlich ist das Preis- und Leistungsverzeichnis deiner Bank.
+
 | Kostenpunkt | Klassische Filialbank | Modernes Online-Konto | Unterschied |
 |---|---:|---:|---:|
 | Kontoführung | ca. 10,00 € pro Monat | 0,00 € | ca. 120,00 € |
@@ -179,9 +178,6 @@ Der typische Ablauf ist heute kinderleicht:
 
 Lass dein altes Konto noch zwei bis drei Monate offen; das ist eine Modellannahme. So siehst du, ob auch der Beitrag für die Versicherung sauber umzieht. Erst danach kündigst du.
 
-![Gliederung des Beitrags: Kostenloses Girokonto: Ein Konto ohne Gebühren finden](abbildung-ablauf. svg)
-
-*Abbildung: Gliederung zu „Kostenloses Girokonto: Ein Konto ohne Gebühren finden“ – 5 Stationen von „Was ein Girokonto wirklich teuer macht“ bis „Girocard oder Debitkarte – was [brauchst du wirklich](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/)?“ (eigene Darstellung).*
 
 ![Gliederung des Beitrags: Kostenloses Girokonto: Ein Konto ohne Gebühren finden](abbildung-ablauf.svg)
 

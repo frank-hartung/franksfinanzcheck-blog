@@ -50,7 +50,7 @@ Hier erfährst du alles über die Zyklen am Markt. Wir zeigen dir, wie du den Ma
 - Die **Heizöl Preise** schwanken saisonal; ein garantierter Tiefpunkt in einem bestimmten Monat (z. B. Januar oder Februar) existiert nicht – eine kurzfristige Marktbeobachtung ersetzt keine Preisprognose.
 - Wer frühzeitig sein Öl bestellt, schützt sich vor hohen Kosten am Ende vom Jahr.
 - Die Entwicklung vom Preis lässt sich mit einem einfachen Pfad aus vier Schritten prüfen.
-- Typische Fehler beim Kauf kosten dich oft bis zu 15 % (Beispielrechnung) mehr an Kosten für die Wärme als Beispielwert.
+- Typische Fehler beim Kauf kosten dich Geld – wie viel, hängt vom Einzelfall ab; einen pauschalen Prozentsatz gibt es nicht.
 - Ein voller Tank im Sommer gibt dir Sicherheit für die kalte Zeit im Jahr.
 - Vergleiche immer mehrere Angebote, bevor du einen festen Vertrag unterschreibst.
 
@@ -73,7 +73,7 @@ Im Frühling stabilisieren sich die Preise oft auf einem mittleren Niveau. Der S
 
 ## Warum lohnt es sich, Heizöl rechtzeitig zu bestellen?
 
-Du hast hohe Kosten am Ende des Jahres von 10 % (Beispielrechnung) bis zu 20 % (Rechenbeispiel) im Herbst. Das ist ein Modellwert. Diese Ersparnis kannst du für andere Dinge in deinem Haushalt nutzen. Wer wartet, bis der Tank fast leer ist, verliert seine Macht als Käufer.
+Wer erst bestellt, wenn der Tank fast leer ist, kauft zu dem Preis, den der Markt gerade verlangt. Wie viel eine frühe Bestellung spart, lässt sich nicht garantieren – es hängt vom Preisverlauf ab. Plane deshalb einen Puffer ein und beobachte den Markt über mehrere Wochen. Was du dabei sparst, kannst du für andere Dinge in deinem Haushalt nutzen.
 
 Du musst dann zu jedem Preis kaufen, den der Markt gerade verlangt. Das führt oft zu Frust und leeren Taschen am Ende des Monats. Zudem wählst du bei einer frühen Bestellung den Termin für die Lieferung völlig frei aus.
 
@@ -110,7 +110,7 @@ Auch das Wetter hat einen Einfluss auf die Wege für den Transport. Wenn die Fl�
 
 ## Modellrechnung: Was kostet ein 1 000‑Liter‑Tank (Beispielrechnung)?
 
-**Annahmen für das Beispiel** – Der Preis für das Öl liegt im Tief bei 0,80 € (Beispielrechnung) pro Liter (Schnitt für Januar 2026).
+**Annahmen für das Beispiel** – Der Preis für das Öl liegt im Tief bei 0,80 € pro Liter. Das ist eine frei gewählte Rechenannahme, kein Marktwert.
 - Der Preis im Zeitraum mit den höchsten Kosten liegt bei 1,10 € (Beispielrechnung) pro Liter.
 - Die Menge für den Kauf beträgt genau 1 000 Liter (Beispielrechnung) für einen kleinen Haushalt.
 

@@ -220,8 +220,18 @@ einen Menschen, ein Prüfdatum schließt ihn nie.
   `BEFUND-AKTE.md` (`faktenfrische_befund_akte.py --schreiben`) ist die
   Arbeitsliste mit ID, Fassungsstand und fertigem Befehl;
   `faktenfrische_befund_ledger.py --entscheiden <ID> --von "<Name>"
+  --art geaendert|gegenstandslos|verworfen --stelle "<wörtlicher Satz>"
   --begruendung "<≥20 Zeichen>"` schreibt die Entscheidung mit Person,
   Zeitpunkt und beiden Hashes. Ohne Person/Begründung schreibt er nichts.
+- **Der Heilungsbeleg ist Pflicht (10.11.2026):** Wer `--art geaendert`
+  oder `--art gegenstandslos` wählt, muss den Satz zitieren, der die
+  Entscheidung trägt. Der Ledger prüft ihn vor dem Schreiben gegen Titel,
+  Description, Kurzantwort und Body (ohne Betriebsflächen) und schreibt bei
+  fehlender Stelle **nichts**. Grund: Am 10.11.2026 waren zwei Heilungen
+  wegen eines abgebrochenen Schreibvorgangs nicht in der Datei – die
+  Entscheidungen hätten den Befund trotzdem geschlossen, weil sie an den
+  unveränderten Text banden. `--pruefe-stellen` liest die Akte gegen den
+  Bestand zurück (Exit 1, wenn eine Belegstelle verschwunden ist).
 - **Zwei Hashes, ein Zweck:** `pruef_hash` bindet die KI-Antwort an die volle
   Prüffassung (inkl. Quellen), `text_hash` den Befund an die Aussageflächen.
   Quellenpflege öffnet keine Entscheidung mehr; eine Textheilung öffnet sie

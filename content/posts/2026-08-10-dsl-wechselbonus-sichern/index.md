@@ -44,9 +44,6 @@ Ein Problem bleibt aber: Ein hoher Bonus auf dem Werbebanner sieht toll aus. Das
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-![Merkkarte: Kernaussagen zu DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-merkkarte. svg)
-
-*Abbildung: Merkkarte zu „DSL-Wechselbonus sichern: So sparst du beim Internetvertrag“ (eigene Darstellung aus diesem Beitrag).*
 
 ![Merkkarte: Kernaussagen zu DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-merkkarte.svg)
 
@@ -171,9 +168,6 @@ Ein Vorlauf von **ca. 3 bis 4 Monaten** ist ideal, um:. Das ist ein Modellwert.
 
 Viele der besten Cashback-Aktionen laufen zudem nur kurze Zeit. Wer früh startet, kann gezielt zuschlagen.
 
-![Gliederung des Beitrags: DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-ablauf. svg)
-
-*Abbildung: Gliederung zu „DSL-Wechselbonus sichern: So sparst du beim Internetvertrag“ – 5 Stationen von „Was ein DSL-Wechselbonus überhaupt ist?“ bis „Wann sich ein Anbieterwechsel besonders lohnt“ (eigene Darstellung).*
 
 ![Gliederung des Beitrags: DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-ablauf.svg)
 

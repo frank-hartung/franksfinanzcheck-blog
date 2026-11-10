@@ -621,7 +621,7 @@ befunde:
   beleg_url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
   anker:
   - garantierter tiefpunkt
-  - modellwert
+  - rechenannahme
   - beispielrechnung
   verboten_behauptend:
   - heizöl-preise erreichen ihr tief meist in den monaten januar und februar
@@ -645,7 +645,7 @@ befunde:
   belegtyp: ergaenzt
   beleg_url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
   anker:
-  - das ist ein modellwert
+  - lässt sich nicht garantieren
   verboten_behauptend:
   - kosten um 10 % bis 20 % im herbst eingespart werden können
   rest_risiko: Frühzeitige Bestellung ist keine garantierte Ersparnis.
@@ -692,7 +692,7 @@ befunde:
   belegtyp: ergaenzt
   beleg_url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
   anker:
-  - das ist ein modellwert
+  - einen pauschalen prozentsatz gibt es nicht
   - fehler beim kauf
   verboten_behauptend:
   - typische fehler beim heizölkauf bis zu 15 % mehrkosten

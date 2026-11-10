@@ -2,6 +2,14 @@
 
 _Stand 2026-11-10 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
+**0 offene Befunde auf 0 Seiten · davon 0 Live-Seiten mit 0 Befunden · ältester – Tage · Frist 14 Tage.**
+
+| Kennzahl | Wert |
+|---|---|
+| Offene Befunde | 0 |
+| Seiten betroffen | 0 (davon live: 0) |
+| Text seit dem Befund geändert | 0 |
+| Altbestand ohne Fassungs-Hash | 0 |
 **145 offene Befunde auf 34 Seiten · davon 22 Live-Seiten mit 92 Befunden · ältester 11 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
@@ -14,13 +22,19 @@ _Stand 2026-11-10 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 | Über der Frist (14 Tage) | 0 |
 | In Eskalation (21 Tage) | 0 |
 
+## Heilungsbelege (Beweislage der Schließakte)
+
+**60 dokumentierte Heilung(en)** zitieren einen Satz, der heute im Artikel steht · 127 Altentscheidung(en) ohne Belegstelle · 0 Seite(n) nicht im Bestand.
+
+Die Rückprobe (`--pruefe-stellen`) ist grün: Jede dokumentierte Belegstelle steht im heutigen Text.
+
 ## So schließt du einen Befund
 
 1. **Text und Beleg prüfen.** Mangel korrigieren (Zahl belegen oder entfernen, Aussage präzisieren) oder den Befund fachlich begründet zurückweisen. Der Text ist redaktionell – die Maschine schreibt ihn nie.
 2. **Entscheidung dokumentieren** (eine Zeile, bindet an den heutigen Text und an genau diesen Befund):
 
    ```bash
-   python3 scripts/faktenfrische_befund_ledger.py --entscheiden <BEFUND-ID> --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+   python3 scripts/faktenfrische_befund_ledger.py --entscheiden <BEFUND-ID> --von "<Name>" --art geaendert --stelle "<wörtlicher Satz aus dem Artikel>" --begruendung "<was geprüft/geändert wurde>"
    ```
 
 3. **Akte und Messung nachziehen:**
@@ -32,6 +46,7 @@ _Stand 2026-11-10 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
+## Keine offenen Befunde
 > **Wichtig – betrifft 122 von 145 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
@@ -670,6 +685,5 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 72bbf29e4ef70a71ad0
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f0103f4c6a777aaa4845 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
----
+Alle fachlichen Befunde sind dokumentiert entschieden. F4 ist grün – sofern die Messung im selben Stand läuft.
 
-_Diese Akte entscheidet nichts und schließt nichts. Sie macht sichtbar, was zu entscheiden ist, wer es entscheiden muss (Herausgeber/Redaktion) und wie der Schließweg lautet. Regel: `scripts/faktenfrische_befund_ledger.py`, Governance C46._
