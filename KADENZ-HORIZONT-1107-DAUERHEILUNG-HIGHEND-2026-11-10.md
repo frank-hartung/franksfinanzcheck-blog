@@ -195,9 +195,53 @@ Entscheidungen (Artefakt-Reparatur, Pin-Vertrag) tragen.
   dieser Branch entscheidet nichts nach.
 - **Kein Workflow-Umbau.** Die Messart reist in `--json` und `--wache` mit;
   der bestehende Schritt und das bestehende Ticket lesen sie.
-- **Kein Schließen von #1107.** Die Schließung liegt beim Herausgeber; der
-  Befund, aus dem die Frist entstand, ist nachrechenbar widerlegt (Abschnitt
-  3), und seit heute ist auch die Verwechslung, die ihn erzeugte, nicht mehr
-  still möglich.
+- **Keine Schließung ohne Entscheidung.** Die Schließung von #1107 spricht
+  der Herausgeber aus; diese Datei trägt die Grundlage dafür (Abschnitt 9).
+  Der Befund, aus dem die Frist entstand, ist nachrechenbar widerlegt, und
+  die Verwechslung, die ihn erzeugte, ist seit heute nicht mehr still
+  möglich.
 - **Keine Zusage zur Ausfalltoleranz.** Gemessen und benannt, nicht zugesagt
   (`AusfallToleranzTest`, SSOT-Kommentar 10.11.2026).
+
+---
+
+## 9 · Schließakte #1107 (Herausgeber-Entscheidung, 10.11.2026)
+
+**Entscheidung:** Das Ticket „⏰ Frist: Kadenz-Horizont – projiziert
+26.11./31.12.2026 rot, auch am Limit (Frist 20.11.2026)“ wird **geschlossen**
+(Grund `completed`). Die Frist war eine **Entscheidungs**-Frist; die
+Entscheidung lautet: *keine Korridor-Änderung*, weil der Befund, der sie
+verlangte, kein Betriebszustand war.
+
+**Grundlage – drei Belege, jeder einzeln nachrechenbar:**
+
+1. **Der Befund ist widerlegt (Abschnitt 3).** Am 26.11. und 31.12.2026
+   reißt auf dem Weg des Bots keine Frist (0 überfällig, 0 gerissene
+   Termine, Weg frei bis 2027-03-26 bzw. 2027-04-30). Der Tageslauf vom
+   10.11.2026 ist grün (Deckung 162,5 %, `--wache` Exit 0).
+2. **Das Fehlbild ist reproduzierbar, aber markiert.** Dieselben Tage mit
+   `--gegenprobe` liefern 25 bzw. 114 überfällige Seiten und „auch Limit 18
+   trägt nicht“ – mit `modus: eingefroren`, Warnung und Exit 2 für jede
+   Wache. Es beschreibt, was wäre, wenn der Bot ab heute aufhörte.
+3. **Die Mechanik ist bindend.** C45 verlangt `projektions_modus`,
+   `eingefroren` und `--gegenprobe`; die Tests `MessartDreiZustaendeTest`
+   und `EingefroreneGegenprobeTest` sowie ST15 halten beide Richtungen
+   fest. Eine Momentaufnahme von Hand erreicht weder ein Ticket noch eine
+   Wache.
+
+**Frist:** Die Frist vom **20.11.2026** ist mit der Schließung am 10.11.2026
+eingehalten – zehn Tage vorher, nicht nachträglich verlängert.
+
+**Wiederaufnahme statt Zombie:** Wird die Kadenz wirklich zu eng, öffnet der
+Lauf das Deckungs-Ticket (`faktenfrische-deckung`) selbst – mit Datum,
+Zahlen und drei Schließpfaden – und schließt es bei Grün wieder. Es gibt
+keinen zweiten Alarm und keine stille Wiedereröffnung dieses Tickets.
+
+**Was diese Schließung ausdrücklich NICHT behauptet:**
+
+| Nicht behauptet | Belegt durch |
+|---|---|
+| „Der Korridor ist richtig für alle Zeiten“ | Sockel 5 / Limit 18 bleiben Entscheidung des Herausgebers (`faktenfrische.yaml`); `BuenndelWacheSweepTest` und der Ausfall-Test messen sie nach. |
+| „Der PR ist gemergt“ | PR #1172 ist offen; die Änderung wirkt erst nach dem Merge. |
+| „`main` ist grün“ | Drei Checks sind auf `main` **vor** diesem Branch rot und bleiben es: Artefakt-Wächter (ungültiges JSON in `data/gsc/`), `governance_contract.py --selftest` (C38 Blustradius) und `reserve_finisher.py --selftest` (Heiler-Deckung). Auf einem sauberen `origin/main`-Worktree (`c637e2a`) reproduziert – eigene Entscheidungen, nicht Teil dieser Akte. |
+| „Alle Artikel sind fachlich richtig“ | Das ist die Fachprüfung (F4/Ledger), nicht die Kadenz. Eine grüne Deckung sagt „die Kadenz trägt“, nicht „jede Quelle stimmt“. |
