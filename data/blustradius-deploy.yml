@@ -237,6 +237,18 @@ schritte:
     klasse: inhalt
     grund: Tag-Flächen sind indexierte Seiten – Befund ist fachlich gemeint.
 
+  - name: GSC-Leistungsdaten – Artefaktprüfung (fail-closed)
+    klasse: inhalt
+    grund: >
+      Die Search-Console-Daten sind die Rechengrundlage der Konsolidierungs-
+      regel F: Sie entscheiden mit, welche Seiten zusammengelegt werden. Ein
+      gemischter, doppelter oder unvollständiger Export würde diese
+      Inhaltsentscheidung auf falscher Grundlage treffen – der Build stoppt,
+      statt auf blinden Zahlen zu veröffentlichen. Der Befund ist fachlich
+      (Bestand), kein Werkzeugfehler: Geprüft wird das versionierte Artefakt,
+      nicht die Website-Messung; die Heilung ist ein belegbar gültiger Stand
+      (`gsc_artefakte_guard.py --heal`), keine Laufzeit-Toleranz.
+
   - name: Weiterleitungen – Selbsttest, Quelle und Unit-Tests (fail-closed)
     klasse: infra
     grund: Eine kaputte Weiterleitungsquelle oder fehlende Zielseiten sind technische Fehler. Ohne sie wäre die Auslieferung der 301-Ersatzseiten nicht konsistent. Der Befund ist kein fachlicher Inhalt.

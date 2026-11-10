@@ -235,6 +235,22 @@ AUSNAHMEN: dict[str, str] = {
         "am Entwurf müsste Rechtsangaben umschreiben, ohne sie zu prüfen "
         "(C15). Der Kandidat bleibt als Hold erhalten; zuständig ist die "
         "Redaktion (#714).",
+    # Kurzantwort-Pflicht (10.11.2026, #1110 als #1170 aus main): Das harte
+    # Gate verlangt für jeden veröffentlichten Post ein nicht-leeres
+    # `kurzantwort` im Frontmatter. Die Regel kam ohne Deckungszeile – die
+    # Reserve-Kette hätte den Vorrat Nacht für Nacht an einer Regel geparkt,
+    # die keiner ihrer Heiler kennt (Klassenbefund dieser Wache, #349).
+    # Bewusst KEIN Auto-Heiler: Die Kurzantwort ist die redaktionelle
+    # Aussage des Artikels in ein bis zwei Sätzen (M4). Ein Generator am
+    # Entwurf würde sie erfinden und als Redaktionsaussage ausgeben – genau
+    # der Schein, den C15 verbietet. Der Kandidat bleibt als Entwurf/Hold
+    # erhalten; die Redaktion ergänzt den Satz und gibt frei.
+    "kurzantwort_failures":
+        "Die Kurzantwort ist eine redaktionelle Aussage über den Artikel "
+        "(M4, #1110) – kein Formatfeld, das ein Werkzeug erzeugen darf. Ein "
+        "Heiler würde sie erfinden und als Redaktionsaussage veröffentlichen "
+        "(C15). Der Kandidat bleibt als Entwurf/Hold erhalten; die Redaktion "
+        "ergänzt die Kurzantwort und gibt frei.",
 }
 
 # ---------------------------------------------------------------------------

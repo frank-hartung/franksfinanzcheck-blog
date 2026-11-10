@@ -351,6 +351,10 @@ class R5HoldRecoveryTests(unittest.TestCase):
             'date: 2026-09-07T06:00:00Z\n'
             f'draft: {str(draft).lower()}\n'
             'keywords: ["Gasrechnung senken"]\n'
+            # #1110/#1170: das harte Gate verlangt eine nicht-leere
+            # Kurzantwort; ohne sie prüft dieser Test nicht mehr die
+            # R5-Heilung, sondern die neue Frontmatter-Regel.
+            'kurzantwort: "Gasrechnung senken: die wichtigsten Hebel im Überblick."\n'
             f'{extra}'
             '---\n\n'
             'Gasrechnung senken im Check: Der erste Satz hat genug Wörter. Der zweite Satz hat genug Wörter. '
