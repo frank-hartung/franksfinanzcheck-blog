@@ -520,6 +520,85 @@ Werkzeug, das hier „repariert“, repariert das Falsche.
 
 ---
 
+### A4c · Die Grenze der Automation ist gemessen, nicht behauptet (WF-829B / #922, 10.11.2026)
+
+**Befund am echten Objekt.** `GET /repos/frank-hartung/franksfinanzcheck-blog/environments/cloudflare-produktion`
+liefert am 10.11.2026, 17:18 UTC weiterhin `can_admins_bypass: true`,
+`protection_rules: []`, `deployment_branch_policy: null`, `updated_at`
+**25.10.2026** – seit der automatischen Anlage hat niemand dieses Environment
+konfiguriert. Drei Messungen am selben Tag:
+
+| Messung | Ergebnis |
+|---|---|
+| `python3 scripts/worker_environment_guard.py --check` | Exit 1 · drei Befunde (Reviewer, Bypass, Branch-Policy) |
+| `python3 scripts/worker_environment_einrichten.py --pruefen` | `MACHBAR / OBERFLAECHE / MACHBAR` |
+| `PUT …/environments/cloudflare-produktion` | **HTTP 403** · Antwortkopf `X-Accepted-Github-Permissions: administration=write` · „Resource not accessible by integration" |
+| GraphQL-Introspection `UpdateEnvironmentInput` | nur `waitTimer`, `reviewers`, `preventSelfReview` – **kein** Bypass-Feld |
+| Läufe von „Cloudflare-Worker deployen" seit 27.10. | **acht rote Läufe**, jeder mit `production-policy → failure`, `deploy → skipped` |
+| Läufe der Selbstheilung seit 07.11. | **7 `success`, davon 4 mit Live-Heiljob**, Environment unverändert (`updated_at` bleibt 25.10.) |
+
+Damit ist die Grenze keine Vermutung mehr: Der Installationstoken in dieser
+Umgebung hat kein `administration=write`; `can_admins_bypass` ist über
+**keine** GitHub-API schreibbar. Ein Heil-Lauf, der grün meldet, während das
+Environment unberührt bleibt, ist ein grüner Lauf ohne Heilung – dieselbe
+Klasse wie #809 („Behoben" ohne den Job, der rot war).
+
+**Was am 10.11.2026 im Repository geheilt wurde.** Die Ursache der täglichen
+Rotmeldung war nicht das Gate, sondern der **Auslöser**: Ein freigabepflichtiger
+Produktions-Deploy wurde von jedem `push` auf einen Worker-Pfad ausgelöst –
+auch von Dependabot-Bumps an `tools/wrangler/**`. Bei unverändertem Environment
+war jeder dieser Läufe garantiert rot. A4 sagt selbst, dass deployt wird, wenn
+ein Mensch *Run workflow* drückt; der `push`-Trigger widersprach dem Runbook.
+
+| Ebene | Vertrag ab 10.11.2026 |
+|---|---|
+| `workflow_dispatch` auf `main` | `plan` → `production-policy` → `deploy`, **unverändert**, inklusive hartem Stopp vor jedem Cloudflare-Secret |
+| `push` / `pull_request` | nur `tests` (alle drei Worker, `scripts/ci_tests.py`), kein Environment, kein Secret, kein Wrangler |
+| `abschluss` (`if: always()`) | `scripts/worker_deploy_abschluss.py` beweist am **Verhalten**: jeder geplante Deploy muss `success` sein; jeder Deploy-Job auf Push/PR ist ein harter Befund. Ein stiller Skip wird nie grün (Vorfall 24.10., Run 40100342025) |
+| Ampel im Heil-Lauf | Der gemessene Zustand steht als Check-Run am Commit: `success` nur bei Exit 0, **`action_required`** bei `OFFEN` (mit Link auf #922 und den zwei Inhaber-Schritten), `failure` bei Exit 2/3. C14 bleibt gewahrt – Warnstufe statt Dauer-Rot –, aber der Commit sieht nicht grün aus. Das einzige neue Recht ist `checks: write` für diesen Status; kein Deploy-Recht, kein Secret, keine Freigabe |
+
+**Nichts wurde gelockert.** Die drei Schutzziele, das Gate, die Reihenfolge,
+die Ressourcenauflösung und der `/healthz`-Nachweis stehen unverändert. Der
+Heil-Lauf ersetzt das Gate nicht (`--wache`, Regel W5). `#922` bleibt offen:
+ein Vorgang schließt mit dem Abschlussvermerk des Workflows (D2), und
+`alert_resolve_gate.py` verlangt den **grünen Job, der rot war** – erst ein
+echter grüner Deploy-Lauf schließt die Meldung. Ein Bericht tut es nicht.
+
+**Die drei Inhaber-Handgriffe (einmalig, in dieser Reihenfolge):**
+
+```bash
+# 1 · Schreibrecht als Secret hinterlegen: UMGEBUNGS_ADMIN_TOKEN
+#    feingranular mit „Environments: read/write" (klassisch: repo/administration)
+#    Danach heilt der Tageslauf 05:48 UTC Reviewer + Branch-Regel selbst –
+#    mit Eichprobe, Nachmessung und Belegkette. Kontrolle ohne Eingriff:
+npm run worker:selbstheilung:pruefen
+npm run worker:selbstheilung:wache
+
+# 2 · Dashboard, einziger API-freier Schalter:
+#    Settings → Environments → cloudflare-produktion →
+#    „Allow administrators to bypass configured protection rules" AUS
+#    Kontrolle: python3 scripts/worker_environment_guard.py --check
+
+# 3 · Actions → „Cloudflare-Worker deployen" → Run workflow (main, newsletter-worker)
+#    Der Job hält bei „Review deployments" – das ist der gewollte Schutz.
+#    Freigeben; `/healthz` muss den bau-Stempel aus wrangler.toml liefern.
+```
+
+**Nachweis der Heilung im Liegenden:**
+
+```bash
+npm run test:worker:abschluss       # 16 Gegenproben + 18 Vertragstests am echten Workflow
+npm run test:worker:selbstheilung   # Eichprobe, Verdrahtung, 38 Vertragstests
+npm run trigger:check               # 102 Workflows, 0 Befunde
+npm run workflow:js                 # alle github-script-Blöcke kompilieren
+python3 scripts/workflow_vertrag_wache.py --gate   # V1–V7, 102 Workflows
+```
+
+Bericht mit Messwerten, Gegenproben und Grenzen:
+`WARTUNG-VEROEFFENTLICHUNG-WF-829B-922-DAUERHEILUNG-HIGHEND-2026-11-10.md`.
+
+---
+
 ### A5 · Automatik-Kette auf dem eigenen Rechner (Finding F-04)
 
 **Lage:** Drei Türen waren offen — Whisper ohne Token (jede besuchte Webseite
