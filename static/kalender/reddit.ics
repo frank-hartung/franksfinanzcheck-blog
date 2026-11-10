@@ -5,4 +5,19 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Reddit
 X-WR-TIMEZONE:Europe/Berlin
+BEGIN:VEVENT
+UID:reddit:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-spare
+ n:nutzen:2026-11-10@franksfinanzcheck.de
+DTSTAMP:20261110T133534Z
+DTSTART:20261110T131500Z
+DTEND:20261110T133000Z
+SUMMARY:Reddit: Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen (
+ nutzen)
+DESCRIPTION:Status: Standby (Zugang fehlt)\nWinkel: nutzen\nKanal: Red
+ dit\nArtikel: https://franksfinanzcheck.de/posts/2026-08-26-kfz-versi
+ cherung-vergleich-bis-zu-800-euro-sparen/
+URL:https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-ver
+ gleich-bis-zu-800-euro-sparen/
+STATUS:TENTATIVE
+END:VEVENT
 END:VCALENDAR
