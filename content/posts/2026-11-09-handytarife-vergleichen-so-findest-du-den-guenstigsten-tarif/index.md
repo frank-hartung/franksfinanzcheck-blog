@@ -61,7 +61,7 @@ Du hast einen Vertrag mit 20 € Grundgebühr und 0,10 € pro MB Zusatzdate
 
 ## Leistungsmerkmale richtig bewerten  
 
-Viele Nutzer wählen den Tarif nach dem größten Datenvolumen, obwohl sie selten mehr als die Hälfte nutzen. Die Faustregel – Datenvolumen halbieren, das du wirklich brauchst – hilft, überflüssige Kosten zu vermeiden. Ebenso ist die Netzabdeckung entscheidend, weil ein günstiger Tarif nichts nützt, wenn du häufig keinen Empfang hast.  
+Prüfe in deiner Rechnung, wie viel Datenvolumen du tatsächlich verbrauchst. Die Faustregel – halbiere das gebuchte Volumen und teste, ob du damit auskommst – hilft, überflüssige Kosten zu vermeiden. Ebenso ist die Netzabdeckung entscheidend, weil ein günstiger Tarif nichts nützt, wenn du häufig keinen Empfang hast.  
 
 **Rechenbeispiel:**  
 Dein aktueller Tarif bietet 10 GB Daten. Du nutzt im Schnitt 4,5 GB pro Monat.  
@@ -78,7 +78,7 @@ Monatliche Ersparnis = 10 €; Jahresersparnis = 120 €.
 
 ## Kostenfallen und versteckte Gebühren erkennen  
 
-Verträge locken häufig mit niedrigen Einstiegspreisen, die nach sechs Monaten steigen. Auch „Service‑Gebühren“ für die Kundenbetreuung können die Rechnung aufblähen. Die Faustregel – jede zusätzliche Gebühr muss mindestens 5 % des Grundpreises betragen, sonst lohnt sie sich nicht – hilft, solche Fallen zu durchschauen.  
+Viele Angebote werben mit einem niedrigen Einstiegspreis, der nur für die ersten Monate der Mindestlaufzeit gilt. Auch „Service‑Gebühren“ für die Kundenbetreuung können die Rechnung aufblähen. Rechne jede Zusatzgebühr auf den Jahrespreis hoch, bevor du vergleichst – so erkennst du solche Fallen.  
 
 **Rechenbeispiel:**  
 Grundgebühr 20 €, Service‑Gebühr 1,50 €.  
@@ -87,7 +87,7 @@ Eine weitere Gebühr von 0,80 € würde nur 4 % ausmachen und sollte hinter
 
 | Kostenfalle | Typische Erscheinungsform | Wie du sie vermeidest |
 |-------------|---------------------------|-----------------------|
-| Preiserhöhung nach Einführungsphase | Preis steigt nach 6 Monaten | Vertragsbedingungen genau lesen |
+| Preiserhöhung nach Einführungsphase | Preis steigt nach der Aktionsphase | Vertragsbedingungen genau lesen |
 | Service‑Gebühr | Monatliche Pauschale für Support | Nur akzeptieren, wenn sie < 5 % der Grundgebühr ist |
 | Roaming‑Kosten | Extra‑Gebühr bei Auslandsnutzung | Daten‑Roaming im Handy deaktivieren |
 | Vertragsbindung | Lange Laufzeit ohne Kündigungsoption | Kündigungsfrist notieren und rechtzeitig handeln |

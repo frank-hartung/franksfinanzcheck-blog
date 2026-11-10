@@ -161,7 +161,9 @@ Wenn die Hardware optimal läuft, ist es Zeit für den Kosten-Check. Bei FranksF
 * **Kündigungsfenster sichern:** Wann kannst du wechseln? Markiere dir den Termin im Kalender.
 * **Kurs halten: Prüfe in regelmäßigen Zeitabständen konsequent nach, ob dein Tarif noch fair ist.** Der Markt ändert sich ständig.
 
-Oft gibt es für Neukunden hohe Rabatte oder Wechselprämien. Wenn deine Hardware (Mesh oder Verstärker) aktuell ist, kannst du solche Angebote voll ausnutzen. Ein [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) ist heute unkompliziert. Die Hardware in deiner Wohnung bleibt ja dein Eigentum und funktioniert mit jedem Anbieter.
+Anbieter werben oft mit Neukundenrabatten oder Wechselprämien. Rechne solche Boni nur mit, wenn du ihre Bedingungen erfüllst, und vergleiche den Preis nach Ablauf der Aktion. Ein [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) ist heute unkompliziert. Hardware, die du selbst gekauft hast, bleibt dein Eigentum; den Router des Anbieters gibst du beim Wechsel in der Regel zurück. Prüfe vor dem Kauf, ob dein Gerät zum Anschluss des neuen Anbieters passt – DSL, Kabel und Glasfaser brauchen unterschiedliche Technik.
+
+Ein Hinweis zum Kleingedruckten: Kommt dauerhaft deutlich weniger Bandbreite an als zugesagt, hast du nach dem Telekommunikationsgesetz Anspruch auf eine Rechnungskürzung. Miss dafür mehrfach mit einem Speedtest und melde die Abweichung beim Anbieter. Bleibt er untätig, ist die Bundesnetzagentur die zuständige Schlichtungsstelle.
 
 Hier kannst du prüfen, ob es aktuell bessere Tarife für dich gibt:
 [Hier DSL-Tarife vergleichen und Fixkosten senken](/go/dsl/) (Werbung | sponsored)

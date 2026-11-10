@@ -18,7 +18,7 @@ cover:
   image: "images/covers/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser.jpg"
   alt: "Standby Kosten reduzieren: So entlarvst du Stromfresser"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Standby-Kosten berechnest du mit Leistung mal Zeit: 10 Watt Dauerlast ergeben 87,6 kWh im Jahr und bei 37 Cent pro kWh rund 32 Euro. Miss zuerst TV-Ecke, Homeoffice und alte Audiotechnik. Schalte nur ab, wenn keine Telefonie, Updates, Aufnahmen, Wartungszyklen oder Smart-Home-Funktionen davon abhängen."
+kurzantwort: "Standby-Kosten berechnest du mit Leistung mal Zeit: 10 Watt Dauerlast ergeben 87,6 kWh im Jahr und bei 37 Cent pro kWh rund 32 Euro (Rechenbeispiel). Miss zuerst TV-Ecke, Homeoffice und alte Audiotechnik. Schalte nur ab, wenn keine Telefonie, Updates, Aufnahmen, Wartungszyklen oder Smart-Home-Funktionen davon abhängen."
 social_posted: true
 quellen:
   - titel: "BDEW-Strompreisanalyse Herbst 2026: 37,3 ct/kWh im Durchschnitt"
@@ -66,6 +66,8 @@ Ein ausgeschaltetes Gerät kann trotzdem Strom ziehen. Dafür gibt es verschiede
 2. **Schein-Aus:** Das Gerät wirkt aus, bleibt intern aber am Netz.
 3. **Netzwerk-Bereitschaft:** Updates, App-Zugriff oder Fernstart bleiben aktiv.
 4. **Dauerbetrieb:** Router, Smart-Home-Zentrale oder Kühlschrank erfüllen bewusst ständig eine Aufgabe.
+
+Für neue Geräte setzt die EU mit den Ökodesign-Vorgaben Grenzen für den Bereitschaftsbetrieb; deshalb ziehen aktuelle Fernseher und Ladegeräte oft deutlich weniger als alte. Die Werte für dein Gerät stehen in der Anleitung oder im Datenblatt – miss im Zweifel selbst nach.
 
 Nur die ersten drei Arten bieten echtes Spar-Potenzial. Auch dort gilt: Prüfe erst, welche Funktion beim Abschalten wegfällt.
 

@@ -3335,3 +3335,2552 @@ entscheidungen:
     nur abgeleitete Bildzeile geaendert.'
   vorgaenger_geprueft_fassung: a628247a97b7075b144bba5ac67889b3906a6c749d71336b7c77d70b02b621e5
   folgeentscheidung: true
+- slug: 2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub
+  befund_ursprung_slug: 2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub
+  befund_id: 11a92bff688ccbb5a485
+  befund_fassung: 3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37
+  geprueft_fassung: c3ab1ce69de89640f65e451f115fd6554b84d82b102d0116b9733b758972dcf3
+  typ: luecke
+  beanstandung: Die Behauptung, dass bis zum Sommer 500 € mehr im Urlaubsbudget verfügbar
+    sind, fehlt eine Quellenangabe.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die unbelegte 500-Euro-Zusage im
+    Pinterest-Text ist entfernt und auf das Ergebnis der eigenen Modellrechnung (600
+    Euro aus 35 + 15 + 10 Euro ueber 10 Monate) umgestellt; der falsche Klammerwert
+    120 Euro ist gestrichen.'
+  belegstelle: 'Gesamtergebnis: Durch diese drei einfachen Maßnahmen stehen nach 10
+    Monaten insgesamt 600 € zusätzlich für die Reisekasse zur Verfügung (Ergebnis
+    der Modellrechnung bei den genannten Annahmen).'
+  art: geaendert
+- slug: 2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub
+  befund_ursprung_slug: 2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub
+  befund_id: 1d4896d8ed60f5b6921f
+  befund_fassung: 3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37
+  geprueft_fassung: c3ab1ce69de89640f65e451f115fd6554b84d82b102d0116b9733b758972dcf3
+  typ: praezision
+  beanstandung: Die Aussage, dass Cashback‑Portale „seit vielen Jahren am Markt etabliert“
+    sind, ist ein unpräzises Superlativ ohne messbare Daten.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Der Superlativ ''seit vielen Jahren
+    am Markt etabliert'' ist ersetzt durch pruefbare Kriterien (nachvollziehbare Auszahlungsregeln,
+    keine Mitgliedsgebuehr, Auszahlungsschwelle pruefen).'
+  belegstelle: Seriöse Portale erkennst du an nachvollziehbaren Auszahlungsregeln
+    und daran, dass sie keine Mitgliedsgebühr verlangen.
+  art: geaendert
+- slug: 2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub
+  befund_ursprung_slug: 2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub
+  befund_id: 4d2bc6c3e60fb9b4a719
+  befund_fassung: 3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37
+  geprueft_fassung: c3ab1ce69de89640f65e451f115fd6554b84d82b102d0116b9733b758972dcf3
+  typ: luecke
+  beanstandung: Die Aussage, dass eine 5 %ige Reduktion der Fixkosten bei 800 € Aufwand
+    40 € im Monat bzw. 480 € im Jahr spart, wird nicht durch die angeführte Quelle
+    belegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Zurueckgewiesen, weil gegenstandslos: Die 5-Prozent-Rechnung ist in
+    der Kurzantwort ausdruecklich als Modellrechnung mit offengelegter Formel (800
+    x 0,05 = 40; 40 x 12 = 480) gekennzeichnet. Fuer frei gewaehlte Annahmen ist kein
+    Quellenbeleg zu verlangen; ein Marktversprechen wird nicht erhoben.'
+- slug: 2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub
+  befund_ursprung_slug: 2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub
+  befund_id: 76b5cdfda85516962cf8
+  befund_fassung: 3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37
+  geprueft_fassung: c3ab1ce69de89640f65e451f115fd6554b84d82b102d0116b9733b758972dcf3
+  typ: luecke
+  beanstandung: Angaben zu typischen Kündigungsfristen von ein bis drei Monaten werden
+    von der Quelle nicht bestätigt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die unbelegte Spanne ''ein bis drei
+    Monate'' und das sinnlose Etikett ''Rechenbeispiel'' sind entfernt; der Absatz
+    verweist jetzt auf die Frist im eigenen Vertrag und die Kalenderpflege.'
+  belegstelle: Eine gute Basis ist es, die Kosten für Verpflegung, Eintritte und lokale
+    Transporte für drei Tage zu notieren; das ist ein Rechenbeispiel.
+  art: geaendert
+- slug: 2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub
+  befund_ursprung_slug: 2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub
+  befund_id: b292db236a31ea0a1629
+  befund_fassung: 3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37
+  geprueft_fassung: c3ab1ce69de89640f65e451f115fd6554b84d82b102d0116b9733b758972dcf3
+  typ: luecke
+  beanstandung: Der genannte durchschnittliche Cashback‑Satz von 2 % der Ausgaben
+    ist nicht durch die Quelle gestützt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Der unbelegte Durchschnittssatz von
+    2 Prozent ist aus der Kurzantwort entfernt (dort stand zudem ein leeres ''(Quelle:
+    )''); die Aussage ist an den haendlerspezifisch ausgewiesenen Satz gebunden.'
+  belegstelle: Kürze deine monatlichen Fixkosten um 5 % – bei 800 € Aufwand sparst
+    du damit rund 40 € im Monat und 480 € im Jahr
+  art: geaendert
+- slug: 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
+  befund_ursprung_slug: 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
+  befund_id: 7a87eaaa2b863ba8cc46
+  befund_fassung: e18927c1687e07957831dfb26f4faa27f539ebfe813e2ea4bd1c42960e9f51de
+  geprueft_fassung: aa57d0183bc61ee68b6c1e2fafb8f68896d7f2b118002894bc59d31025fe15d9
+  typ: luecke
+  beanstandung: Ein relevanter regulatorischer Rahmen (z. B. Vorgaben der Bundesnetzagentur
+    oder BDEW) wird nicht genannt, obwohl die Fundstelle darauf hinweist, dass solche
+    Vorgaben existieren.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Der fehlende Regulierungsrahmen ist
+    im Abschnitt ''Standby ist nicht gleich Dauerbetrieb'' ergaenzt (EU-Oekodesign-Grenzen
+    fuer den Bereitschaftsbetrieb, Werte in Anleitung/Datenblatt, Messhinweis) - ohne
+    erfundene Zahlen.'
+  belegstelle: Für neue Geräte setzt die EU mit den Ökodesign-Vorgaben Grenzen für
+    den Bereitschaftsbetrieb; deshalb ziehen aktuelle Fernseher und Ladegeräte oft
+    deutlich weniger als alte.
+  art: geaendert
+- slug: 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
+  befund_ursprung_slug: 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
+  befund_id: 9d67a5e6bd11212c7c1e
+  befund_fassung: e18927c1687e07957831dfb26f4faa27f539ebfe813e2ea4bd1c42960e9f51de
+  geprueft_fassung: aa57d0183bc61ee68b6c1e2fafb8f68896d7f2b118002894bc59d31025fe15d9
+  typ: praezision
+  beanstandung: Die Aussage, dass bestimmte Gerätegruppen (TV‑Ecke, Homeoffice, alte
+    Audio‑Technik) zuerst zu senken „lohnt“, wird ohne messbare Daten oder Vergleichskriterien
+    gemacht.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Zurueckgewiesen, weil gegenstandslos: Das Vergleichskriterium steht
+    im Text (0,1 Watt Leerlauf lohnt keine Muehe, eine alte Gerategruppe mit 18 Watt
+    schon); die Priorisierung folgt der Rechnung Watt x Preis, nicht einem unbelegten
+    Marktversprechen.'
+- slug: 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
+  befund_ursprung_slug: 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
+  befund_id: a54abc1cad73d20fb689
+  befund_fassung: e18927c1687e07957831dfb26f4faa27f539ebfe813e2ea4bd1c42960e9f51de
+  geprueft_fassung: aa57d0183bc61ee68b6c1e2fafb8f68896d7f2b118002894bc59d31025fe15d9
+  typ: luecke
+  beanstandung: Die konkreten Jahreskosten (z. B. 32 € für 10 W Standby) beruhen auf
+    dem nicht belegten Strompreis und werden nicht als Modellrechnung gekennzeichnet.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die 32 Euro in der Kurzantwort sind
+    jetzt ausdruecklich als Rechenbeispiel gekennzeichnet; der Strompreis ist ueber
+    den Beleg-Chip aus dem Kennzahlen-Register (BDEW) direkt an der Zahl belegt.'
+  belegstelle: 'Standby-Kosten berechnest du mit Leistung mal Zeit: 10 Watt Dauerlast
+    ergeben 87,6 kWh im Jahr und bei 37 Cent pro kWh rund 32 Euro (Rechenbeispiel).'
+  art: geaendert
+- slug: 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
+  befund_ursprung_slug: 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
+  befund_id: a7d1cf6485921e117919
+  befund_fassung: e18927c1687e07957831dfb26f4faa27f539ebfe813e2ea4bd1c42960e9f51de
+  geprueft_fassung: aa57d0183bc61ee68b6c1e2fafb8f68896d7f2b118002894bc59d31025fe15d9
+  typ: luecke
+  beanstandung: Der angegebene durchschnittliche Strompreis von 37,3 Cent/kWh (BDEW‑Schnitt)
+    wird ohne Quellenangabe genannt.
+  beleg: https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Zurueckgewiesen, weil gegenstandslos: Die 37,3 Cent tragen im Satz
+    den sichtbaren Beleg-Chip {{< beleg kennzahl="bdew-haushaltsstrompreis" >}} und
+    stehen in der Quellenliste (BDEW-Strompreisanalyse, Stand 21.08.2026). Die Behauptung
+    ''ohne Quellenangabe'' trifft den heutigen Text nicht.'
+- slug: 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
+  befund_ursprung_slug: 2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser
+  befund_id: a7f69a854430d62a4a3e
+  befund_fassung: e18927c1687e07957831dfb26f4faa27f539ebfe813e2ea4bd1c42960e9f51de
+  geprueft_fassung: aa57d0183bc61ee68b6c1e2fafb8f68896d7f2b118002894bc59d31025fe15d9
+  typ: luecke
+  beanstandung: Die Empfehlung, dass ein günstigerer Arbeitspreis der zweite wichtigste
+    Hebel sei, fehlt jede Quelle oder regulatorische Einordnung.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Zurueckgewiesen, weil gegenstandslos: Die Zeile steht im Werbebaustein
+    Schnell-Tipp, nicht als Marktbehauptung. Inhaltlich ist ''zweiter Hebel'' die
+    Faktorenlogik der Stromkosten (Verbrauch x Arbeitspreis) und damit keine pruefbeduerftige
+    Zahl.'
+- slug: 2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert
+  befund_ursprung_slug: 2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert
+  befund_id: 1d448c9cdc2618ef9bdf
+  befund_fassung: a686d8769236260d86e898fb7f0e751ef0760e0da50eb439e743f550f5f621ec
+  geprueft_fassung: ceebe10c66565f047ee0954c1476c05fc487215e298c36b6217413b41c8a2b28
+  typ: luecke
+  beanstandung: Der Hinweis, dass Festpreis‑Tarife in der Regel einen Aufschlag enthalten,
+    fehlt jede Beleggrundlage.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Aus der Aufschlag-Behauptung ist
+    eine Moeglichkeit geworden (''kann einen Aufschlag kosten - muss es aber nicht''),
+    in Kurzantwort und Abschnitt zum Festpreis; die Risikouebernahme bleibt als Mechanismus
+    erklaert.'
+  belegstelle: Ein Festpreis kehrt das Verhältnis um, gilt aber nur für die Laufzeit
+    des Vertrags und kann einen Aufschlag kosten.
+  art: geaendert
+- slug: 2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert
+  befund_ursprung_slug: 2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert
+  befund_id: 2188f6b0006eb0607871
+  befund_fassung: a686d8769236260d86e898fb7f0e751ef0760e0da50eb439e743f550f5f621ec
+  geprueft_fassung: ceebe10c66565f047ee0954c1476c05fc487215e298c36b6217413b41c8a2b28
+  typ: luecke
+  beanstandung: Die Behauptung, die Bundesnetzagentur fordere die getrennte Angabe
+    von Grund‑ und Arbeitspreis, wird nicht durch die verlinkte Quelle belegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die unbelegte Zuschreibung an die
+    Bundesnetzagentur ist entfernt; der Satz beschreibt jetzt nur noch, was auf jedem
+    Tarifblatt steht (Grundpreis und Arbeitspreis getrennt) und was der Leser damit
+    rechnet.'
+  belegstelle: Belegbare Zahlen stammen aus den zuletzt veröffentlichten amtlichen
+    Daten der Bundesnetzagentur – gesicherte Prognosen für 2026 gibt es nicht.
+  art: geaendert
+- slug: 2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert
+  befund_ursprung_slug: 2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert
+  befund_id: 33917254a91a1c551389
+  befund_fassung: a686d8769236260d86e898fb7f0e751ef0760e0da50eb439e743f550f5f621ec
+  geprueft_fassung: ceebe10c66565f047ee0954c1476c05fc487215e298c36b6217413b41c8a2b28
+  typ: praezision
+  beanstandung: Die Aussage, dass variable Tarife mit Preisgarantie oder Deckel im
+    Vergleich „selten ganz oben“ stehen, ist ein untermauertes Superlativ ohne Messgröße.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Das unmesbare Superlativ ''stehen
+    im Vergleich selten ganz oben'' ist gestrichen; an seiner Stelle steht die Handlungsanweisung,
+    den Gesamtpreis ueber die volle Laufzeit zu rechnen.'
+  belegstelle: Frag deshalb gezielt nach diesen Modellen und rechne den Gesamtpreis
+    über die volle Laufzeit.
+  art: geaendert
+- slug: 2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert
+  befund_ursprung_slug: 2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert
+  befund_id: 82badcfa80493134c12a
+  befund_fassung: a686d8769236260d86e898fb7f0e751ef0760e0da50eb439e743f550f5f621ec
+  geprueft_fassung: ceebe10c66565f047ee0954c1476c05fc487215e298c36b6217413b41c8a2b28
+  typ: luecke
+  beanstandung: Die Aussage, dass variable Tarife das Marktpreisrisiko vollständig
+    auf den Kunden übertragen, wird ohne Quellenangabe gemacht.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Zurueckgewiesen, weil gegenstandslos: Dass ein variabler Tarif Preisaenderungen
+    weitergibt und der Kunde damit das Preisrisiko traegt, ist die Definition des
+    Tarifmodells, keine Marktzahl. Der Artikel nennt keine Prozent- oder Euro-Werte
+    fuer diese Aussage.'
+- slug: 2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert
+  befund_ursprung_slug: 2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert
+  befund_id: b44fd9621fb708f45c90
+  befund_fassung: a686d8769236260d86e898fb7f0e751ef0760e0da50eb439e743f550f5f621ec
+  geprueft_fassung: ceebe10c66565f047ee0954c1476c05fc487215e298c36b6217413b41c8a2b28
+  typ: luecke
+  beanstandung: Die Behauptung, dass sich die Energiemärkte 2026 wieder stärker bewegen,
+    wird ohne aktuelle Marktdaten belegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die unbelegte Trendbehauptung ''schwanken
+    wieder staerker'' ist ersetzt durch ''aendern sich laufend; verlaessliche Vorhersagen
+    gibt es nicht'' - konsistent mit dem Stand-Hinweis oben im Artikel.'
+  belegstelle: Der Markt bewegt sich – Die Preise an den Märkten für Energie ändern
+    sich laufend; verlässliche Vorhersagen gibt es nicht.
+  art: geaendert
+- slug: 2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif
+  befund_ursprung_slug: 2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif
+  befund_id: 3efe31a371440636f465
+  befund_fassung: 99ac16bb17807df7665e658d6c02bd867f0875e986125ae5f06bbbe2e493ef60
+  geprueft_fassung: 7ba3a76290d7018645c1d22ef52dd150aa0cff2093e8a71c679d0da589aeb7cf
+  typ: luecke
+  beanstandung: Empfehlung, den Handytarif einmal jährlich bzw. vierteljährlich zu
+    prüfen, fehlt eine Quellenangabe.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Zurueckgewiesen, weil gegenstandsvoll beantwortet: Die Prueffrequenz
+    ist eine Handlungsempfehlung an den Leser (jaehrlich, bei geaenderter Nutzung
+    vierteljaehrlich) und keine Marktbehauptung; die Begruendung steht im selben Absatz.'
+  belegstelle: Einmal im Jahr reicht, wenn du deine Nutzung nicht stark änderst.
+  art: gegenstandslos
+- slug: 2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif
+  befund_ursprung_slug: 2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif
+  befund_id: 49c1a762c2df16c52b7a
+  befund_fassung: 99ac16bb17807df7665e658d6c02bd867f0875e986125ae5f06bbbe2e493ef60
+  geprueft_fassung: 7ba3a76290d7018645c1d22ef52dd150aa0cff2093e8a71c679d0da589aeb7cf
+  typ: luecke
+  beanstandung: Der Artikel behauptet, dass Verträge nach sechs Monaten die Preise
+    erhöhen, ohne dafür eine Quelle anzugeben.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die pauschale Sechs-Monats-Behauptung
+    ist in Text und Tabelle ersetzt durch ''Einstiegspreis gilt nur fuer die ersten
+    Monate der Mindestlaufzeit'' bzw. ''nach der Aktionsphase'' - ohne unbelegte Frist.'
+  belegstelle: Viele Angebote werben mit einem niedrigen Einstiegspreis, der nur für
+    die ersten Monate der Mindestlaufzeit gilt.
+  art: geaendert
+- slug: 2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif
+  befund_ursprung_slug: 2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif
+  befund_id: 56c5b1f92a70c6ebeb0b
+  befund_fassung: 99ac16bb17807df7665e658d6c02bd867f0875e986125ae5f06bbbe2e493ef60
+  geprueft_fassung: 7ba3a76290d7018645c1d22ef52dd150aa0cff2093e8a71c679d0da589aeb7cf
+  typ: praezision
+  beanstandung: Die Aussage, dass CHECK24 alle aktuellen Angebote liefert, ist ein
+    Vollständigkeitsversprechen ohne Messgröße.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Zurueckgewiesen, weil gegenstandslos: Der heutige Text behauptet nirgends,
+    CHECK24 liste alle Angebote. Er verlangt, mindestens drei Vergleichsangebote zu
+    pruefen; ein Vollstaendigkeitsversprechen steht dort nicht.'
+- slug: 2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif
+  befund_ursprung_slug: 2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif
+  befund_id: c6d20c93f94cee2ae5ae
+  befund_fassung: 99ac16bb17807df7665e658d6c02bd867f0875e986125ae5f06bbbe2e493ef60
+  geprueft_fassung: 7ba3a76290d7018645c1d22ef52dd150aa0cff2093e8a71c679d0da589aeb7cf
+  typ: praezision
+  beanstandung: Die Regel „Datenvolumen halbieren, das du wirklich brauchst“ wird
+    als allgemeine Faustregel präsentiert, ohne Messdaten oder Quelle.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die Marktbehauptung ''viele Nutzer
+    brauchen nur die Haelfte'' ist entfernt; die Faustregel ist jetzt als eigener
+    Test formuliert (Volumen halbieren und pruefen, ob es reicht) und damit ohne Messdatenanspruch.'
+  belegstelle: Die Faustregel – halbiere das gebuchte Volumen und teste, ob du damit
+    auskommst – hilft, überflüssige Kosten zu vermeiden.
+  art: geaendert
+- slug: 2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif
+  befund_ursprung_slug: 2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif
+  befund_id: f6a30c4191c47f5cdf0a
+  befund_fassung: 99ac16bb17807df7665e658d6c02bd867f0875e986125ae5f06bbbe2e493ef60
+  geprueft_fassung: 7ba3a76290d7018645c1d22ef52dd150aa0cff2093e8a71c679d0da589aeb7cf
+  typ: luecke
+  beanstandung: Die Faustregel, dass zusätzliche Gebühren mindestens 5 % der Grundgebühr
+    betragen müssen, wird nicht belegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die erfundene Fuenf-Prozent-Faustregel
+    ist ersatzlos gestrichen; an ihre Stelle tritt die nachvollziehbare Rechnung ''Zusatzgebuehr
+    auf den Jahrespreis hochrechnen''.'
+  belegstelle: Rechne jede Zusatzgebühr auf den Jahrespreis hoch, bevor du vergleichst
+    – so erkennst du solche Fallen.
+  art: geaendert
+- slug: 2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check
+  befund_ursprung_slug: 2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check
+  befund_id: 6d89862b38c33c827817
+  befund_fassung: d88c015c6b529777b36be86e867b4003161fa4dc5eb5c6ba17827279eade94a1
+  geprueft_fassung: 67a76f8d6b92b6a44e454bbd7577d80d525406d97269a5ea5376df169ca8f8fe
+  typ: praezision
+  beanstandung: Die pauschale Behauptung, Hardware bleibe stets Eigentum des Nutzers,
+    ist unpräzise, da die Bundesnetzagentur die Kupfer-Glas-Migration begleitet, die
+    oft providerseitige Technikwechsel und neue Netzabschlusspunkte erfordert.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die pauschale Eigentumsaussage ist
+    praezisiert - selbst gekaufte Hardware bleibt Eigentum, der Anbieter-Router geht
+    zurueck; zusaetzlich der Hinweis, dass DSL, Kabel und Glasfaser unterschiedliche
+    Technik brauchen.'
+  belegstelle: Hardware, die du selbst gekauft hast, bleibt dein Eigentum; den Router
+    des Anbieters gibst du beim Wechsel in der Regel zurück.
+  art: geaendert
+- slug: 2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check
+  befund_ursprung_slug: 2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check
+  befund_id: 72bbf29e4ef70a71ad06
+  befund_fassung: d88c015c6b529777b36be86e867b4003161fa4dc5eb5c6ba17827279eade94a1
+  geprueft_fassung: 67a76f8d6b92b6a44e454bbd7577d80d525406d97269a5ea5376df169ca8f8fe
+  typ: luecke
+  beanstandung: Aussagen zu Markttrends wie hohen Neukundenrabatten und Wechselprämien
+    werden als Marktfakten ohne Bezug zu offiziellen Referenzwerten oder Berichten
+    der Aufsichtsbehörde dargestellt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Aus der Marktfakt-Positur (''es gibt
+    hohe Rabatte'') ist die beobachtbare Werbeaussage geworden (''Anbieter werben
+    oft mit ...''); dazu die Rechenregel, Boni nur bei erfuellten Bedingungen und
+    nur bis zum Aktionsende zu zaehlen.'
+  belegstelle: Anbieter werben oft mit Neukundenrabatten oder Wechselprämien.
+  art: geaendert
+- slug: 2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check
+  befund_ursprung_slug: 2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check
+  befund_id: f0103f4c6a777aaa4845
+  befund_fassung: d88c015c6b529777b36be86e867b4003161fa4dc5eb5c6ba17827279eade94a1
+  geprueft_fassung: 67a76f8d6b92b6a44e454bbd7577d80d525406d97269a5ea5376df169ca8f8fe
+  typ: luecke
+  beanstandung: Der Ratgeber thematisiert den Anbieterwechsel und Bandbreiten, lässt
+    aber den regulatorischen Rahmen der Bundesnetzagentur zur Breitbandversorgung
+    und zum Verbraucherschutz bei Minderleistung unerwähnt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Der regulatorische Rahmen ist ergaenzt
+    - Anspruch auf Rechnungskuerzung bei dauerhafter Minderleistung nach dem Telekommunikationsgesetz,
+    Nachweispflicht per Speedtest und Bundesnetzagentur als Schlichtungsstelle.'
+  belegstelle: Kommt dauerhaft deutlich weniger Bandbreite an als zugesagt, hast du
+    nach dem Telekommunikationsgesetz Anspruch auf eine Rechnungskürzung.
+  art: geaendert
+- slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_ursprung_slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_id: 30caa57be394afb62947
+  befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
+  geprueft_fassung: d8a9d2d08ff1dcb7d73a70434e10a18a5d6ff397e7c5830fe2a6998e329427fd
+  typ: luecke
+  beanstandung: Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt
+    in den Recherche-Fundstellen ein entsprechender Beleg.
+  beleg: https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Der Wert 11,93 Cent kommt nicht mehr
+    vor. Die Marktuebersicht nennt die BDEW-Neukundenmittelwerte 12,23 und 11,67 Cent/kWh
+    mit Inline-Link und Quellenangabe in der Belegkette.'
+  vorgaenger_geprueft_fassung: e899c20e8c81144116a4953e2439f23500dab8212fb3ed8281c7e18f0e5936ec
+  folgeentscheidung: true
+- slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_ursprung_slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_id: 32a3ea879f2cf126b3a7
+  befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
+  geprueft_fassung: d8a9d2d08ff1dcb7d73a70434e10a18a5d6ff397e7c5830fe2a6998e329427fd
+  typ: luecke
+  beanstandung: Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen
+    der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim
+    Anbieterwechsel zentral ist.
+  beleg: https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Der Regulierungsrahmen steht im Abschnitt
+    zum Preisschreiben - vier Pruefpunkte (Wirksamkeitsdatum, Aenderungsgrund, betroffene
+    Preisbestandteile, Kuendigungsfrist) plus Sonderkündigungs-Hinweis, alle mit Bundesnetzagentur-Link
+    in Text und Belegkette.'
+  vorgaenger_geprueft_fassung: e899c20e8c81144116a4953e2439f23500dab8212fb3ed8281c7e18f0e5936ec
+  folgeentscheidung: true
+- slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_ursprung_slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
+  befund_id: c583efe1ce02df3ca2d7
+  befund_fassung: 17a0305ffcc14a51833aa7d16cfcef85c7d0b8ecdf1f03dd67df176eede114af
+  geprueft_fassung: d8a9d2d08ff1dcb7d73a70434e10a18a5d6ff397e7c5830fe2a6998e329427fd
+  typ: luecke
+  beanstandung: Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur
+    für Januar 2026 (360 €) wird durch die allgemeine Übersichtsseite der Behörde
+    nicht gestützt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Eine Behoerden-Ersparnis von 360
+    Euro ist nicht mehr behauptet; der Artikel rechnet ausschliesslich mit eigenen
+    Modellannahmen (1,5 Cent x 20.000 kWh = 300 Euro) und kennzeichnet das als Modellannahme.'
+  vorgaenger_geprueft_fassung: e899c20e8c81144116a4953e2439f23500dab8212fb3ed8281c7e18f0e5936ec
+  folgeentscheidung: true
+- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_id: 252413dcc16cea146beb
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+  geprueft_fassung: a871836ec448a0ce080cfcb1439851c0e4d7edf6e01b2b00e25569dbbb54e921
+  typ: luecke
+  beanstandung: Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher
+    angekündigt werden muss, ohne dafür eine Quelle anzugeben.
+  beleg: https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Die Ein-Monats-Frist fuer Haushaltskunden
+    ausserhalb der Grundversorgung ist mit Inline-Link auf die Bundesnetzagentur belegt
+    und von der Grundversorgung abgegrenzt.'
+  vorgaenger_geprueft_fassung: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
+  folgeentscheidung: true
+- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_id: 48a0a962046c8315270e
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+  geprueft_fassung: a871836ec448a0ce080cfcb1439851c0e4d7edf6e01b2b00e25569dbbb54e921
+  typ: praezision
+  beanstandung: Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf
+    den Anbieter überträgt und dafür ein höherer Startpreis üblich ist, fehlt eine
+    konkrete Quelle und bleibt vage.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Der Text behauptet keinen hoeheren
+    Startpreis mehr, sondern stellt fest, dass eine Garantie nur die vertraglich geschuetzten
+    Bestandteile begrenzt und ein Aufpreis nicht zwingend ist - entscheidbar ueber
+    den konkreten Vergleich.'
+  vorgaenger_geprueft_fassung: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
+  folgeentscheidung: true
+- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_id: 9326152f4d788cff56bd
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+  geprueft_fassung: a871836ec448a0ce080cfcb1439851c0e4d7edf6e01b2b00e25569dbbb54e921
+  typ: praezision
+  beanstandung: Die Aussage, dass man „in der Regel“ zum Zeitpunkt der Preisänderung
+    Sonderkündigungsrecht hat, ist unpräzise und wird nicht durch eine konkrete Regelung
+    belegt.
+  beleg: https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Kuendigung/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Das Sonderkündigungsrecht ist mit
+    Zeitpunkt (Wirksamwerden), Zugang vor Wirksamwerden und den Ausnahmen (separate
+    Klausel, reine Steuerweitergabe) praezisiert; die Handlungsempfehlung stammt aus
+    der Bundesnetzagentur.'
+  vorgaenger_geprueft_fassung: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
+  folgeentscheidung: true
+  belegstelle: Bei einer einseitigen Preisänderung kannst du grundsätzlich zum Zeitpunkt
+    der Änderung Sonderkündigen; Ausnahmen sind möglich.
+  art: gegenstandslos
+- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_id: ab4d084fd367c8e4d518
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+  geprueft_fassung: a871836ec448a0ce080cfcb1439851c0e4d7edf6e01b2b00e25569dbbb54e921
+  typ: luecke
+  beanstandung: Der angegebene durchschnittliche Gaspreis von 11,93 Cent/kWh für 2026
+    (laut BDEW) wird nicht durch eine Quelle belegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Der Durchschnittspreis 11,93 Cent
+    ist entfernt; der Artikel nutzt eigene Vertragswerte und Modellrechnungen, die
+    als solche gekennzeichnet sind.'
+  vorgaenger_geprueft_fassung: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
+  folgeentscheidung: true
+  belegstelle: Dein Gaspreis ist also kein Live-Ticker vom Großhandel.
+  art: gegenstandslos
+- slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_ursprung_slug: 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen
+  befund_id: d215addd22dea72c44df
+  befund_fassung: d672bc8e4ec87074bdad74b3013c4a007b5d097501cbe52d3b362956e2edea51
+  geprueft_fassung: a871836ec448a0ce080cfcb1439851c0e4d7edf6e01b2b00e25569dbbb54e921
+  typ: luecke
+  beanstandung: Die Angabe, dass die Verbraucherzentrale etwa 6 % weniger Heizenergie
+    pro Grad niedrigerer Raumtemperatur nennt, fehlt eine Quellenangabe.
+  beleg: https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Der Sechs-Prozent-Richtwert wird
+    der Verbraucherzentrale zugeschrieben und ist im selben Satz auf den VZ-Ratgeber
+    verlinkt (Heizkosten sparen, Stand 24.09.2026).'
+  vorgaenger_geprueft_fassung: 9a0ef2197864a182462af91e373b3d01ffc85a2b5be4a82068494d37c142b199
+  folgeentscheidung: true
+- slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  befund_ursprung_slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  befund_id: 437b809ffbf41e5af434
+  befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
+  geprueft_fassung: bd84be742d96b64a88655f8dcbeb59a3801ed2a13bdd28d9439ccd6f88875ef9
+  typ: luecke
+  beanstandung: Keine Quelle für die Aussage, dass das Gesetz bei einem Tarifwechsel
+    die Grundversorgung garantiert – regulatorischer Rahmen fehlt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Eine Garantie der Grundversorgung
+    durch ''das Gesetz'' wird nicht behauptet. Der Text beschreibt korrekt die Zuordnung
+    zur Grund- oder Ersatzversorgung durch den oertlichen Grundversorger bei Lieferende.'
+  vorgaenger_geprueft_fassung: 4f199b1a67b923cc3cedcb7cac51419bdaf1c7baba1d92ab77d2db9cff99b608
+  folgeentscheidung: true
+- slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  befund_ursprung_slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  befund_id: 9fbacd9942c2dfa1447f
+  befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
+  geprueft_fassung: bd84be742d96b64a88655f8dcbeb59a3801ed2a13bdd28d9439ccd6f88875ef9
+  typ: luecke
+  beanstandung: Keine Quelle für die Behauptung, dass ein Grad weniger Raumtemperatur
+    rund 6 % Energie einspart – Prozent‑Angabe fehlt.
+  beleg: https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Der Sechs-Prozent-Wert steht mit
+    Inline-Link auf die Verbraucherzentrale im Satz und ist als Faustwert gekennzeichnet;
+    die Geldwirkung wird als Rechnung mit eigenem Verbrauch erklaert.'
+  vorgaenger_geprueft_fassung: 4f199b1a67b923cc3cedcb7cac51419bdaf1c7baba1d92ab77d2db9cff99b608
+  folgeentscheidung: true
+- slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  befund_ursprung_slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  befund_id: da30cbb5fbc8c801daf0
+  befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
+  geprueft_fassung: bd84be742d96b64a88655f8dcbeb59a3801ed2a13bdd28d9439ccd6f88875ef9
+  typ: luecke
+  beanstandung: Keine Quelle für die Angabe, dass durch Optimierungsmaßnahmen 10‑15 %
+    Einsparungen realistisch sind – Prozent‑Wert unbelegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Eine Spanne von 10 bis 15 Prozent
+    durch Optimierungsmassnahmen wird nicht mehr genannt; der Text rechnet nur mit
+    dem dokumentierten Zaehlerstand und dem eigenen Tarif.'
+  vorgaenger_geprueft_fassung: 4f199b1a67b923cc3cedcb7cac51419bdaf1c7baba1d92ab77d2db9cff99b608
+  folgeentscheidung: true
+- slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  befund_ursprung_slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  befund_id: db8a69f08dc0020adebd
+  befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
+  geprueft_fassung: bd84be742d96b64a88655f8dcbeb59a3801ed2a13bdd28d9439ccd6f88875ef9
+  typ: luecke
+  beanstandung: Keine Quelle für die Aussage, dass im Oktober 2026 bessere Gaspreise
+    gelten – Preis‑Trend‑Behauptung fehlt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Die Behauptung ''im Oktober 2026
+    bessere Gaspreise'' ist nicht enthalten. ''Stand: Oktober 2026'' bezeichnet nur
+    den Redaktionsstand des Checks.'
+  vorgaenger_geprueft_fassung: 4f199b1a67b923cc3cedcb7cac51419bdaf1c7baba1d92ab77d2db9cff99b608
+  folgeentscheidung: true
+- slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  befund_ursprung_slug: 2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden
+  befund_id: e834f4702e87194affe7
+  befund_fassung: 8735136fa5f58b5ea7c4db767e0cc5c460e24368611498e5a6801a9a48fcd316
+  geprueft_fassung: bd84be742d96b64a88655f8dcbeb59a3801ed2a13bdd28d9439ccd6f88875ef9
+  typ: luecke
+  beanstandung: Keine Quelle für die Angabe, dass ein Einfamilienhaus typischerweise
+    18.000 kWh/Jahr verbraucht – Verbrauchszahl ist unbelegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Die 18.000 kWh sind ausdruecklich
+    als Annahme eingefuehrt (''Bei angenommenen 18.000 kWh'', Tabellenzeile ''Modellannahme'')
+    mit dem Hinweis, dass der echte Verbrauch auf der Rechnung steht.'
+  vorgaenger_geprueft_fassung: 4f199b1a67b923cc3cedcb7cac51419bdaf1c7baba1d92ab77d2db9cff99b608
+  folgeentscheidung: true
+- slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  befund_ursprung_slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  befund_id: 0aa915539d57841e5014
+  befund_fassung: ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c
+  geprueft_fassung: 955d71869c17113b7f84ae78496539fd0919a5903b180c40e8e7839288d387fa
+  typ: luecke
+  beanstandung: Die Aussage, dass die Verbraucherzentrale empfiehlt, Boni im ersten
+    Vergleich auszublenden, fehlt eine Quellenangabe.
+  beleg: https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-finden-sie-den-passenden-strom-oder-gastarif-6436
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die Empfehlung, Boni im ersten Vergleich
+    auszublenden, ist jetzt mit Inline-Link auf den VZ-Ratgeber ''Passender Strom-
+    oder Gastarif'' belegt und um den Hinweis auf Anbieterpruefung ergaenzt.'
+  vorgaenger_geprueft_fassung: 4a6a9a742d9c4dd85d8a747b360a85276e259470f66fcc90f1015a8e65d0ef4c
+  folgeentscheidung: true
+  belegstelle: 'rät dazu: erst ohne Bonus vergleichen'
+  art: geaendert
+- slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  befund_ursprung_slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  befund_id: 5e1be48085014a836807
+  befund_fassung: ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c
+  geprueft_fassung: 955d71869c17113b7f84ae78496539fd0919a5903b180c40e8e7839288d387fa
+  typ: luecke
+  beanstandung: Der angegebene BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026
+    wird nicht belegt.
+  beleg: https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: 11,93 Cent kommt nicht mehr vor.
+    Massstab ist jetzt der BDEW-Neukunden-Schnitt 12,23 Cent/kWh fuer Einfamilienhaeuser
+    mit Inline-Link auf die BDEW-Gaspreisanalyse.'
+  vorgaenger_geprueft_fassung: 4a6a9a742d9c4dd85d8a747b360a85276e259470f66fcc90f1015a8e65d0ef4c
+  folgeentscheidung: true
+- slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  befund_ursprung_slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  befund_id: 6fdf31c3b68b6122bd0d
+  befund_fassung: ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c
+  geprueft_fassung: 955d71869c17113b7f84ae78496539fd0919a5903b180c40e8e7839288d387fa
+  typ: praezision
+  beanstandung: Die pauschale Formulierung, dass bei zentraler Heizung der Vermieter
+    oder die Eigentümergemeinschaft den Anbieter wählt, ist zu ungenau und nicht belegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Die Aussage ist nicht mehr pauschal,
+    sondern als Unterscheidung formuliert (eigener Gasvertrag vs. zentrale Heizung
+    ueber Vermieter bzw. Eigentuemergemeinschaft) und begruendet, warum das den Vergleich
+    beeinflusst.'
+  vorgaenger_geprueft_fassung: 4a6a9a742d9c4dd85d8a747b360a85276e259470f66fcc90f1015a8e65d0ef4c
+  folgeentscheidung: true
+  belegstelle: Unterscheide eigenen Gasvertrag und zentrale Heizung über den Vermieter.
+  art: gegenstandslos
+- slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  befund_ursprung_slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  befund_id: c27c182c615bd7ca3b78
+  befund_fassung: ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c
+  geprueft_fassung: 955d71869c17113b7f84ae78496539fd0919a5903b180c40e8e7839288d387fa
+  typ: luecke
+  beanstandung: Der Artikel behauptet, dass laut Bundesnetzagentur Preisänderungen
+    klar angekündigt und begründet sein müssen, liefert jedoch keinen Beleg dafür.
+  beleg: https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die Aussage zur Bundesnetzagentur
+    traegt jetzt den Inline-Link auf ''Preise und Abschlaege'' direkt am Satz; die
+    Kuendigungsseite ist zusaetzlich in der Belegkette.'
+  vorgaenger_geprueft_fassung: 4a6a9a742d9c4dd85d8a747b360a85276e259470f66fcc90f1015a8e65d0ef4c
+  folgeentscheidung: true
+  belegstelle: muss eine Preisänderung klar angekündigt und begründet sein
+  art: geaendert
+- slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  befund_ursprung_slug: 2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor
+  befund_id: e1e40e9bbbdd109df86e
+  befund_fassung: ff0d6079540a84edd7a563e165f3ce3f032d4c5b64cecdbd6e76b5a9950b784c
+  geprueft_fassung: 955d71869c17113b7f84ae78496539fd0919a5903b180c40e8e7839288d387fa
+  typ: luecke
+  beanstandung: Es wird angegeben, dass bei einer Preisänderung in der Regel ein Sonderkündigungsrecht
+    besteht, ohne dafür eine Quelle zu nennen.
+  beleg: https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Kuendigung/start.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Das Sonderkündigungsrecht ist jetzt
+    im Satz auf die Bundesnetzagentur verlinkt (Kuendigung und Widerruf) und diese
+    Quelle in die Belegkette aufgenommen; die Ausnahmen bleiben benannt.'
+  vorgaenger_geprueft_fassung: 4a6a9a742d9c4dd85d8a747b360a85276e259470f66fcc90f1015a8e65d0ef4c
+  folgeentscheidung: true
+  belegstelle: Meist darfst du zum Zeitpunkt der Änderung
+  art: geaendert
+- slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  befund_ursprung_slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  befund_id: 334751e6f61ad0033fe4
+  befund_fassung: 3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a
+  geprueft_fassung: be5efc6530a5d3cddc90357b923def3a8914965a9caf11db33435e7c65859b09
+  typ: luecke
+  beanstandung: Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar
+    2026 im Schnitt etwa 360 € spart, fehlt jede Quellenangabe.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Eine Behoerden-Ersparnis fuer Januar
+    2026 ist nicht behauptet. Die 360 Euro sind als reine Rechnung gekennzeichnet
+    (1,8 Cent x 20.000 kWh) und ausdruecklich kein persoenliches Versprechen.'
+  vorgaenger_geprueft_fassung: 2fcbd0954f9b7334253caae89341880870ad178731c8dc2e1f575f4aeb8e6b3a
+  folgeentscheidung: true
+- slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  befund_ursprung_slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  befund_id: 36759a5efe5e8e5163d0
+  befund_fassung: 3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a
+  geprueft_fassung: be5efc6530a5d3cddc90357b923def3a8914965a9caf11db33435e7c65859b09
+  typ: luecke
+  beanstandung: Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur
+    der Heizbedarf um etwa 6 % sinkt, wird ohne Quelle angegeben.
+  beleg: https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Der Sechs-Prozent-Faustwert ist der
+    Verbraucherzentrale zugeschrieben und im selben Absatz auf den VZ-Ratgeber verlinkt;
+    zusaetzlich steht dort, dass der Effekt nicht einfach addierbar ist.'
+  vorgaenger_geprueft_fassung: 2fcbd0954f9b7334253caae89341880870ad178731c8dc2e1f575f4aeb8e6b3a
+  folgeentscheidung: true
+- slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  befund_ursprung_slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  befund_id: 942922d1afd7844618e9
+  befund_fassung: 3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a
+  geprueft_fassung: be5efc6530a5d3cddc90357b923def3a8914965a9caf11db33435e7c65859b09
+  typ: luecke
+  beanstandung: Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt
+    rund 180 € im Jahr“ wird nicht belegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Zurueckgewiesen, weil gegenstandslos: 1 Cent x 18.000 kWh = 180 Euro
+    ist eine offengelegte Multiplikation mit genannten Eingabewerten, keine Marktbehauptung.
+    Der Marktwert im Artikel (12,23 Cent) ist mit BDEW-Link belegt.'
+  vorgaenger_geprueft_fassung: 2fcbd0954f9b7334253caae89341880870ad178731c8dc2e1f575f4aeb8e6b3a
+  folgeentscheidung: true
+- slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  befund_ursprung_slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  befund_id: d41f0d5ce8798df0211b
+  befund_fassung: 3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a
+  geprueft_fassung: be5efc6530a5d3cddc90357b923def3a8914965a9caf11db33435e7c65859b09
+  typ: praezision
+  beanstandung: Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“
+    ist ein Superlativ ohne messbare Daten oder Vergleichskriterien.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Der Superlativ ''die besten Tarife''
+    ist entfernt; der Werbebaustein sagt jetzt neutral ''Tarife findest du ueber unseren
+    Partner-Vergleich'' und ist als Werbung gekennzeichnet.'
+  vorgaenger_geprueft_fassung: 2fcbd0954f9b7334253caae89341880870ad178731c8dc2e1f575f4aeb8e6b3a
+  folgeentscheidung: true
+- slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  befund_ursprung_slug: 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro
+  befund_id: e139d0769faadd04392a
+  befund_fassung: 3fed6bd3e4f6d267d90a9b21a247e4048c242bef0fd35493e70aac394fc5bb9a
+  geprueft_fassung: be5efc6530a5d3cddc90357b923def3a8914965a9caf11db33435e7c65859b09
+  typ: luecke
+  beanstandung: Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne
+    Quellenangabe genannt.
+  beleg: https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: 11,93 Cent kommt nicht mehr vor;
+    genannt ist der BDEW-Neukunden-Durchschnitt 12,23 Cent/kWh mit Inline-Link. Die
+    360 Euro sind als Rechenbeispiel ohne Marktversprechen markiert.'
+  vorgaenger_geprueft_fassung: 2fcbd0954f9b7334253caae89341880870ad178731c8dc2e1f575f4aeb8e6b3a
+  folgeentscheidung: true
+- slug: 2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen
+  befund_ursprung_slug: 2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen
+  befund_id: 7067eabb89a917ae67a4
+  befund_fassung: d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06
+  geprueft_fassung: 90e11145464a66d5d42d513abe702c3265e33558e3e023ef0699eae13ac30e85
+  typ: luecke
+  beanstandung: Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu
+    unklaren Angeboten und Problemen mit Online-Buchungen.
+  beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text umgesetzt: Der Hinweis auf die Verbraucherzentrale
+    steht mit Inline-Link auf Q1 (Urlaub buchen) direkt im Satz; der Befundtext beschreibt
+    genau diese Fundstelle und nennt keinen Mangel mehr.'
+  vorgaenger_geprueft_fassung: 94f7a280ddff5dbb9d95bc79f7d8d185ce5836fedb6f0e9652b40f45e3252aa1
+  folgeentscheidung: true
+- slug: 2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen
+  befund_ursprung_slug: 2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen
+  befund_id: af2ccb4222eeb195222f
+  befund_fassung: d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06
+  geprueft_fassung: 90e11145464a66d5d42d513abe702c3265e33558e3e023ef0699eae13ac30e85
+  typ: praezision
+  beanstandung: Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht
+    automatisch, ob das Auto zum individuellen Urlaub passt – ohne Messgröße bleibt
+    die Aussage ungenau.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text umgesetzt: Der Absatz sagt jetzt selbst, dass ein
+    Mietwagenvergleich nur Angebote sichtbar macht und nicht prueft, ob das Auto zum
+    Urlaub passt - genau die geforderte Praezisierung.'
+  vorgaenger_geprueft_fassung: 94f7a280ddff5dbb9d95bc79f7d8d185ce5836fedb6f0e9652b40f45e3252aa1
+  folgeentscheidung: true
+- slug: 2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen
+  befund_ursprung_slug: 2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen
+  befund_id: d9c8b522bf1dcaed0340
+  befund_fassung: d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06
+  geprueft_fassung: 90e11145464a66d5d42d513abe702c3265e33558e3e023ef0699eae13ac30e85
+  typ: luecke
+  beanstandung: Die Verbraucherzentrale beschreibt, dass sich eine Pauschalreise unter
+    bestimmten Bedingungen auf eine andere Person übertragen lässt.
+  beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen/statt-stornierung-so-uebertragen-sie-pauschalreisen-auf-jemand-anderen-50515
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die Aussage zur Uebertragung einer
+    Pauschalreise traegt jetzt den Inline-Link auf den VZ-Ratgeber zur Vertragsuebertragung;
+    die gesetzliche Grundlage steht als Q4 in der Belegkette.'
+  vorgaenger_geprueft_fassung: 94f7a280ddff5dbb9d95bc79f7d8d185ce5836fedb6f0e9652b40f45e3252aa1
+  folgeentscheidung: true
+  belegstelle: beschreibt, dass sich eine Pauschalreise unter bestimmten Bedingungen
+    auf eine andere Person übertragen lässt
+  art: geaendert
+- slug: 2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen
+  befund_ursprung_slug: 2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen
+  befund_id: e2975509f3f130de0755
+  befund_fassung: d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06
+  geprueft_fassung: 90e11145464a66d5d42d513abe702c3265e33558e3e023ef0699eae13ac30e85
+  typ: luecke
+  beanstandung: Die Verbraucherzentrale empfiehlt, größere Ausgaben vorauszuplanen
+    und das eigene Budget im Blick zu behalten.
+  beleg: https://www.verbraucherzentrale.de/wissen/geld-versicherungen/effektiv-sparen-auch-mit-kleinem-budget-87610
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die Empfehlung der Verbraucherzentrale
+    zur Vorausplanung ist jetzt im Satz auf den VZ-Ratgeber ''Effektiv sparen'' verlinkt
+    (Q3).'
+  vorgaenger_geprueft_fassung: 94f7a280ddff5dbb9d95bc79f7d8d185ce5836fedb6f0e9652b40f45e3252aa1
+  folgeentscheidung: true
+  belegstelle: empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im
+    Blick zu behalten
+  art: geaendert
+- slug: 2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen
+  befund_ursprung_slug: 2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen
+  befund_id: f1704e45e970a8f4b078
+  befund_fassung: d625ec0e9d12dfeb5c2b213c7e42b52673df6033efb58187d46527995606ba06
+  geprueft_fassung: 90e11145464a66d5d42d513abe702c3265e33558e3e023ef0699eae13ac30e85
+  typ: luecke
+  beanstandung: Bei einer Pauschalreise gilt die Mitteilung als rechtzeitig, wenn
+    sie dem Veranstalter spätestens sieben Tage vor Reisebeginn zugeht (§ 651e BGB).
+  beleg: https://www.gesetze-im-internet.de/bgb/__651e.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text umgesetzt: Die Sieben-Tage-Frist ist mit dem amtlichen
+    Wortlaut des Paragraph 651e BGB verlinkt (gesetze-im-internet.de) und steht als
+    Q4 in der Belegkette.'
+  vorgaenger_geprueft_fassung: 94f7a280ddff5dbb9d95bc79f7d8d185ce5836fedb6f0e9652b40f45e3252aa1
+  folgeentscheidung: true
+- slug: 2026-11-02-last-minute-urlaubsangebote-sichern
+  befund_ursprung_slug: 2026-11-02-last-minute-urlaubsangebote-sichern
+  befund_id: 0a2bec9dc02e16c057ee
+  befund_fassung: 6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2
+  geprueft_fassung: df5ec250704e00d0631545e0044d16d6093cb6baa6e05460cabb94a904e86055
+  typ: luecke
+  beanstandung: Die 50‑30‑20‑Regel für die Urlaubsbudget‑Aufteilung wird ohne Quellenangabe
+    präsentiert.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Die 50-30-20-Aufteilung ist ausdruecklich
+    als einfaches Budget-Modell ''keine Vorgabe'' eingefuehrt; damit ist sie eine
+    Rechenhilfe und keine Marktbehauptung, die eine Quelle braucht.'
+  vorgaenger_geprueft_fassung: b4955624402d38f03eed81400cd4c2e9e622b16bf1e4cdd58f7e56ba647f139b
+  folgeentscheidung: true
+- slug: 2026-11-02-last-minute-urlaubsangebote-sichern
+  befund_ursprung_slug: 2026-11-02-last-minute-urlaubsangebote-sichern
+  befund_id: 274c32d1a16e9dffcf1a
+  befund_fassung: 6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2
+  geprueft_fassung: df5ec250704e00d0631545e0044d16d6093cb6baa6e05460cabb94a904e86055
+  typ: luecke
+  beanstandung: Die Angabe, dass das Weglassen der Vollkasko‑Selbstbeteiligung die
+    Kosten um 10 % bis 20 % senken kann, ist nicht mit einer Quelle belegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Eine Einsparung von 10 bis 20 Prozent
+    durch Weglassen der Vollkasko-Selbstbeteiligung steht nicht mehr im Artikel; die
+    Tabelle sagt nur noch ''optional, kann die Gesamtkosten senken''.'
+  vorgaenger_geprueft_fassung: b4955624402d38f03eed81400cd4c2e9e622b16bf1e4cdd58f7e56ba647f139b
+  folgeentscheidung: true
+- slug: 2026-11-02-last-minute-urlaubsangebote-sichern
+  befund_ursprung_slug: 2026-11-02-last-minute-urlaubsangebote-sichern
+  befund_id: 5c572a933edece129bba
+  befund_fassung: 6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2
+  geprueft_fassung: df5ec250704e00d0631545e0044d16d6093cb6baa6e05460cabb94a904e86055
+  typ: luecke
+  beanstandung: Die Aussage, dass Stornogebühren häufig einem Tagespreis entsprechen,
+    ist unbelegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Die Behauptung ''Stornogebuehren
+    entsprechen einem Tagespreis'' ist ersetzt durch die vertragsabhaengige Aussage,
+    dass Hoehe und Anfall vom Vertrag abhaengen und vorab zu pruefen sind.'
+  vorgaenger_geprueft_fassung: b4955624402d38f03eed81400cd4c2e9e622b16bf1e4cdd58f7e56ba647f139b
+  folgeentscheidung: true
+  belegstelle: Ob und in welcher Höhe eine solche Gebühr anfällt, hängt vom Vertrag
+    ab.
+  art: gegenstandslos
+- slug: 2026-11-02-last-minute-urlaubsangebote-sichern
+  befund_ursprung_slug: 2026-11-02-last-minute-urlaubsangebote-sichern
+  befund_id: 9d9d4afc8d6c421a0d14
+  befund_fassung: 6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2
+  geprueft_fassung: df5ec250704e00d0631545e0044d16d6093cb6baa6e05460cabb94a904e86055
+  typ: luecke
+  beanstandung: Die Behauptung, dass Last‑Minute‑Deals wegen Restkapazitäten zu niedrigeren
+    Preisen führen, fehlt eine fundierte Quelle.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die Aussage zu Restkapazitaeten ist
+    als Einschaetzung gekennzeichnet (''das ist eine Einschaetzung, keine garantierte
+    Marktprognose''); die unbelegte 27-Prozent-Ersparnis in der Kurzantwort ist entfernt.'
+  vorgaenger_geprueft_fassung: b4955624402d38f03eed81400cd4c2e9e622b16bf1e4cdd58f7e56ba647f139b
+  folgeentscheidung: true
+  belegstelle: Das kann an Restkapazitäten liegen, die Anbieter schnell füllen wollen
+    – das ist eine Einschätzung, keine garantierte Marktprognose.
+  art: geaendert
+- slug: 2026-11-02-last-minute-urlaubsangebote-sichern
+  befund_ursprung_slug: 2026-11-02-last-minute-urlaubsangebote-sichern
+  befund_id: fb50388539a0e8b4461c
+  befund_fassung: 6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2
+  geprueft_fassung: df5ec250704e00d0631545e0044d16d6093cb6baa6e05460cabb94a904e86055
+  typ: praezision
+  beanstandung: Die Empfehlung, ausschließlich CHECK24 für den Mietwagenvergleich
+    zu nutzen, ist ein unqualifiziertes Superlativ ohne Messgrundlage.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Der Artikel empfiehlt kein ausschliessliches
+    CHECK24, sondern ein Vergleichsportal und die anschliessende Pruefung der Konditionen
+    beim Anbieter.'
+  vorgaenger_geprueft_fassung: b4955624402d38f03eed81400cd4c2e9e622b16bf1e4cdd58f7e56ba647f139b
+  folgeentscheidung: true
+- slug: 2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 0b564f460c41218244bd
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: 1fa6efb463dc9a7a6d8a3047fb79d33f716a855effa9a2e517436e8b54fce99d
+  typ: luecke
+  beanstandung: Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten
+    Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Der Artikel behauptet keinen Tiefpunkt
+    in Januar oder Februar, sondern schliesst ihn ausdruecklich aus (''ein garantierter
+    Tiefpunkt ... existiert nicht'').'
+- slug: 2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 3ad2eefed314eb172c26
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: 1fa6efb463dc9a7a6d8a3047fb79d33f716a855effa9a2e517436e8b54fce99d
+  typ: luecke
+  beanstandung: Die Aussage, dass durch frühzeitige Bestellung Kosten um 10 % bis
+    20 % im Herbst eingespart werden können, ist unbelegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Der misslungene Satz mit den 10-bis-20-Prozent-Zahlen
+    (sprachlich sinnlos, unbelegt) ist ersetzt durch die Aussage, dass sich die Ersparnis
+    nicht garantieren laesst und vom Preisverlauf abhaengt.'
+  belegstelle: Wie viel eine frühe Bestellung spart, lässt sich nicht garantieren
+    – es hängt vom Preisverlauf ab.
+  art: geaendert
+- slug: 2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 43788c2cdcdfda52e753
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: 1fa6efb463dc9a7a6d8a3047fb79d33f716a855effa9a2e517436e8b54fce99d
+  typ: luecke
+  beanstandung: Die Modellrechnung verwendet einen Tiefpreis von 0,80 €/Liter, ohne
+    dass diese Preisangabe belegt wird.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Der Literpreis ist jetzt ausdruecklich
+    eine frei gewaehlte Rechenannahme ohne Marktwertanspruch; der widerspruechliche
+    Zusatz ''Schnitt fuer Januar 2026'' ist entfernt.'
+  belegstelle: Annahmen für das Beispiel – Der Preis für das Öl liegt im Tief bei
+    0,80 € pro Liter. Das ist eine frei gewählte Rechenannahme, kein Marktwert.
+  art: geaendert
+- slug: 2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 5eedec8afbdef6a4ca49
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: 1fa6efb463dc9a7a6d8a3047fb79d33f716a855effa9a2e517436e8b54fce99d
+  typ: luecke
+  beanstandung: Es wird angegeben, dass typische Fehler beim Heizölkauf bis zu 15 %
+    Mehrkosten verursachen können, jedoch fehlt ein Nachweis für diese Zahl.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Eine Mehrkosten-Angabe von bis zu
+    15 Prozent steht nicht mehr im Artikel; der Absatz beschreibt nur noch den Mechanismus
+    (kein Puffer, kein Preisvergleich).'
+- slug: 2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 81881c5bc61824d25f5a
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: 1fa6efb463dc9a7a6d8a3047fb79d33f716a855effa9a2e517436e8b54fce99d
+  typ: praezision
+  beanstandung: Die Faustregel, dass man bestellen sollte, wenn Preise vier Wochen
+    unter dem Schnitt der letzten 12 Monate liegen, wird ohne Messgrundlage oder Quelle
+    genannt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text umgesetzt: Die Vier-Wochen-Regel ist ausdruecklich
+    als Orientierung ohne Marktbeleg und ohne Vorhersageanspruch eingefuehrt; ein
+    garantierter Tiefpunkt wird ausgeschlossen.'
+- slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  befund_ursprung_slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  befund_id: 1dbeb2f8c51e78d11d49
+  befund_fassung: ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4
+  geprueft_fassung: 693815e767ab8a37ef5932e524b9918c4ba26f5288538c61b1cf4725536a6926
+  typ: luecke
+  beanstandung: Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 €
+    an reinen Gebühren kosten, ist unbelegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die konkrete Behauptung 150 bis 250
+    Euro ist nicht mehr enthalten; die Beispieltabelle ist jetzt ausdruecklich als
+    gerundete Beispielwerte gekennzeichnet, verbindlich ist das Preisverzeichnis der
+    Bank.'
+  vorgaenger_geprueft_fassung: fc44b1dbede0a80f0f0b0f60a7631a3ad2f2b6e7f89c920771e6c3d759e34b9b
+  folgeentscheidung: true
+  belegstelle: Die Beträge in dieser Tabelle sind gerundete Beispielwerte zur Orientierung.
+  art: geaendert
+- slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  befund_ursprung_slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  befund_id: 33e736ac6afe996b491a
+  befund_fassung: ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4
+  geprueft_fassung: 693815e767ab8a37ef5932e524b9918c4ba26f5288538c61b1cf4725536a6926
+  typ: luecke
+  beanstandung: Behauptung, dass Echtzeit‑Überweisungen bei kostenlosen Konten generell
+    gebührenfrei sind, fehlt jede Quelle.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Der Artikel behauptet keine generelle
+    Gebuehrenfreiheit fuer Echtzeit-Ueberweisungen, sondern verweist auf das Preisverzeichnis
+    des Kontomodells; die Tabelle zeigt ''oft 0,00 Euro''.'
+  vorgaenger_geprueft_fassung: fc44b1dbede0a80f0f0b0f60a7631a3ad2f2b6e7f89c920771e6c3d759e34b9b
+  folgeentscheidung: true
+- slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  befund_ursprung_slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  befund_id: 96b7b7768d402884810c
+  befund_fassung: ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4
+  geprueft_fassung: 693815e767ab8a37ef5932e524b9918c4ba26f5288538c61b1cf4725536a6926
+  typ: luecke
+  beanstandung: Aussage, dass Einlagen bis 100.000 € durch die deutsche Einlagensicherung
+    geschützt sind, wird nicht belegt.
+  beleg: https://www.bundesbank.de/de/aufgaben/bankenaufsicht/einlagensicherung/einlagensicherung-602936
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text umgesetzt: Die 100.000-Euro-Grenze ist im Satz auf
+    die Deutsche Bundesbank zur Einlagensicherung verlinkt und steht als Quelle in
+    der Belegkette.'
+  vorgaenger_geprueft_fassung: fc44b1dbede0a80f0f0b0f60a7631a3ad2f2b6e7f89c920771e6c3d759e34b9b
+  folgeentscheidung: true
+- slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  befund_ursprung_slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  befund_id: a25bb6bbcb25ba8b0e22
+  befund_fassung: ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4
+  geprueft_fassung: 693815e767ab8a37ef5932e524b9918c4ba26f5288538c61b1cf4725536a6926
+  typ: luecke
+  beanstandung: Angabe von Dispozinsen von 8 % bis 11 % ohne Quellenangabe.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die Dispozins-Spanne steht nur noch
+    in der Beispieltabelle, die jetzt als gerundete Beispielwerte deklariert ist;
+    der Text verweist fuer den verbindlichen Satz auf das Preisverzeichnis.'
+  vorgaenger_geprueft_fassung: fc44b1dbede0a80f0f0b0f60a7631a3ad2f2b6e7f89c920771e6c3d759e34b9b
+  folgeentscheidung: true
+  belegstelle: Der Dispozins steht im Preisverzeichnis und unterscheidet sich je nach
+    Bank deutlich.
+  art: geaendert
+- slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  befund_ursprung_slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  befund_id: f94f8ba1e4342e67e45a
+  befund_fassung: ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4
+  geprueft_fassung: 693815e767ab8a37ef5932e524b9918c4ba26f5288538c61b1cf4725536a6926
+  typ: luecke
+  beanstandung: Angabe, dass ein Kontowechsel 120 € bis 180 € im Jahr spart, fehlt
+    jede Quelle.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Eine Ersparnis von 120 bis 180 Euro
+    pro Jahr wird nicht behauptet; die Tabelle nennt eine Spanne von etwa 140 bis
+    240 Euro als Beispielwert und verweist auf das Preisverzeichnis.'
+  vorgaenger_geprueft_fassung: fc44b1dbede0a80f0f0b0f60a7631a3ad2f2b6e7f89c920771e6c3d759e34b9b
+  folgeentscheidung: true
+- slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+  befund_ursprung_slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+  befund_id: 43470330b3b48c9cee49
+  befund_fassung: 88f6ad30a8aefbea4932d1fc7823da0cf8e0ab7e76ba55ae6ce56b5a64a146d1
+  geprueft_fassung: 3738ebccadfda33468da64acb7c6b0a8b5e66ed415d15b7923a1f8f822e033db
+  typ: luecke
+  beanstandung: Der Artikel empfiehlt, Kühl- und Gefriergeräte mindestens 24 Stunden,
+    besser mehrere Tage zu messen, liefert jedoch keine Quelle für diese Messdauer.
+  beleg: https://www.verbraucherzentrale.de/wissen/energie/strom-sparen/so-finden-sie-den-passenden-kuehlschrank-10573
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text umgesetzt: Die Messdauer von sieben Tagen ist im
+    Satz der Verbraucherzentrale zugeschrieben und mit Inline-Link auf den VZ-Ratgeber
+    belegt; ein zweiter Absatz wiederholt das mit derselben Quelle.'
+  vorgaenger_geprueft_fassung: bcda862f034df4285f82e2ca5ecaa06a03c8cff4142e4c7a67e679db02685364
+  folgeentscheidung: true
+- slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+  befund_ursprung_slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+  befund_id: 8ddc1025e45be176ad3a
+  befund_fassung: 88f6ad30a8aefbea4932d1fc7823da0cf8e0ab7e76ba55ae6ce56b5a64a146d1
+  geprueft_fassung: 3738ebccadfda33468da64acb7c6b0a8b5e66ed415d15b7923a1f8f822e033db
+  typ: luecke
+  beanstandung: Es wird kein regulatorischer Rahmen (z. B. Aufgaben der Bundesnetzagentur)
+    genannt, obwohl das Thema Stromversorgung berührt wird; entsprechende Vorgaben
+    fehlen im Text.
+  beleg: https://www.bundesnetzagentur.de/DE/Vportal/Energie/Metering/artikel.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text umgesetzt: Der regelnde Rahmen ist benannt - Messstellenbetreiber
+    fuer Einbau, Betrieb und Pruefung des Haushaltszaehlers mit Inline-Link auf die
+    Bundesnetzagentur, die als Quelle in der Belegkette steht.'
+  vorgaenger_geprueft_fassung: bcda862f034df4285f82e2ca5ecaa06a03c8cff4142e4c7a67e679db02685364
+  folgeentscheidung: true
+- slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+  befund_ursprung_slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+  befund_id: 95d6d2877620e5a056ce
+  befund_fassung: 88f6ad30a8aefbea4932d1fc7823da0cf8e0ab7e76ba55ae6ce56b5a64a146d1
+  geprueft_fassung: 3738ebccadfda33468da64acb7c6b0a8b5e66ed415d15b7923a1f8f822e033db
+  typ: luecke
+  beanstandung: Die Aussage, dass Verbraucherzentralen oder Bibliotheken Messgeräte
+    verleihen, wird ohne Beleg gemacht.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Die Aussage, Verbraucherzentralen
+    oder Bibliotheken verleihen Messgeraete, steht nicht mehr im Artikel. Der Text
+    nennt Messgeraet, Messplan und Messwoche ohne Ausleihbehauptung.'
+  vorgaenger_geprueft_fassung: bcda862f034df4285f82e2ca5ecaa06a03c8cff4142e4c7a67e679db02685364
+  folgeentscheidung: true
+- slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+  befund_ursprung_slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+  befund_id: ab16029999747466a638
+  befund_fassung: 88f6ad30a8aefbea4932d1fc7823da0cf8e0ab7e76ba55ae6ce56b5a64a146d1
+  geprueft_fassung: 3738ebccadfda33468da64acb7c6b0a8b5e66ed415d15b7923a1f8f822e033db
+  typ: luecke
+  beanstandung: Die Berechnung mit einem Arbeitspreis von 0,37 €/kWh wird angegeben,
+    ohne dass ein aktueller Preis‑ oder Marktwert belegt wird.
+  beleg: https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Die 0,37 Euro pro kWh sind im Satz
+    mit dem BDEW-Link verbunden und die Rechnung ist als Modellwert gekennzeichnet;
+    der BDEW-Strompreis ist Quelle in der Belegkette.'
+  vorgaenger_geprueft_fassung: bcda862f034df4285f82e2ca5ecaa06a03c8cff4142e4c7a67e679db02685364
+  folgeentscheidung: true
+- slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+  befund_ursprung_slug: 2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden
+  befund_id: b057dee3603e09f494b5
+  befund_fassung: 88f6ad30a8aefbea4932d1fc7823da0cf8e0ab7e76ba55ae6ce56b5a64a146d1
+  geprueft_fassung: 3738ebccadfda33468da64acb7c6b0a8b5e66ed415d15b7923a1f8f822e033db
+  typ: luecke
+  beanstandung: Das Amortisationsbeispiel (Kaufpreis 650 €, Amortisationszeit 10,3 Jahre)
+    enthält keine Quelle für die zugrunde liegenden Annahmen oder Preise.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Alle Annahmen des Amortisationsbeispiels
+    sind offengelegt und gekennzeichnet - 650 Euro ausdruecklich ''frei gewaehlt,
+    kein Marktpreis'', 0,37 Euro mit BDEW-Link, 18 Watt als Modellwert.'
+  vorgaenger_geprueft_fassung: bcda862f034df4285f82e2ca5ecaa06a03c8cff4142e4c7a67e679db02685364
+  folgeentscheidung: true
+- slug: 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn
+  befund_ursprung_slug: 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn
+  befund_id: 278d89267d9122a1e9d8
+  befund_fassung: 69cbd8a400bf4785eb72ca73a7f9e235da4ce561e7f3c073e08b6de7b2f8cfd5
+  geprueft_fassung: 19cd32d36ef7cffe52c9035c0114c9a4bbb9f6110911323961fdc22cb85a280d
+  typ: luecke
+  beanstandung: Angaben zu gesetzlichen Vorgaben für Warmwassertemperaturen zur Vermeidung
+    von Legionellen werden nicht durch die bereitgestellten Quellen gestützt.
+  beleg: https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/kosten-fuer-warmwasser-senken-das-koennen-sie-als-hausbesitzer-tun-17755
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text umgesetzt: 55 Grad im Leitungssystem und 60 Grad
+    am Speicherausgang (ueber 400 Liter bzw. ueber drei Liter Leitungsinhalt) sind
+    mit dem VZ-Ratgeber und dem Bezug zur Trinkwasserverordnung belegt; die Dreimonatspruefung
+    steht daneben.'
+  vorgaenger_geprueft_fassung: 0be85e6671d38a6fa82cfccf853b7e7f0456bc9c17cc283348ee760d02743eac
+  folgeentscheidung: true
+- slug: 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn
+  befund_ursprung_slug: 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn
+  befund_id: 450c3aa629342062825e
+  befund_fassung: 69cbd8a400bf4785eb72ca73a7f9e235da4ce561e7f3c073e08b6de7b2f8cfd5
+  geprueft_fassung: 19cd32d36ef7cffe52c9035c0114c9a4bbb9f6110911323961fdc22cb85a280d
+  typ: luecke
+  beanstandung: Die Aussage, dass Warmwasser der zweitgrößte Kostenposten im Haushalt
+    ist, wird nicht durch eine der bereitgestellten Quellen belegt.
+  beleg: https://www.co2online.de/energie-sparen/
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Die Rangbehauptung ''zweitgroesster
+    Kostenposten'' ist entfernt. Genannt ist der belegte Energieanteil von rund 16
+    Prozent (co2online) mit ausdruecklichem Hinweis, dass die Euro-Wirkung vom Tarif
+    abhaengt.'
+  vorgaenger_geprueft_fassung: 0be85e6671d38a6fa82cfccf853b7e7f0456bc9c17cc283348ee760d02743eac
+  folgeentscheidung: true
+- slug: 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn
+  befund_ursprung_slug: 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn
+  befund_id: 7601167c9f3560093fb0
+  befund_fassung: 69cbd8a400bf4785eb72ca73a7f9e235da4ce561e7f3c073e08b6de7b2f8cfd5
+  geprueft_fassung: 19cd32d36ef7cffe52c9035c0114c9a4bbb9f6110911323961fdc22cb85a280d
+  typ: luecke
+  beanstandung: Die Behauptung, dass Warmwasser in der Heizkostenabrechnung üblicherweise
+    als eigener Block ausgewiesen wird, fehlt eine Quellenangabe.
+  beleg: https://www.gesetze-im-internet.de/heizkostenv/__9.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text umgesetzt: Die Pflicht zur Kostentrennung bei verbundenen
+    Anlagen ist mit Paragraph 9 Heizkostenverordnung im amtlichen Wortlaut belegt
+    und inline verlinkt; der dezentrale Fall bleibt getrennt beschrieben.'
+  vorgaenger_geprueft_fassung: 0be85e6671d38a6fa82cfccf853b7e7f0456bc9c17cc283348ee760d02743eac
+  folgeentscheidung: true
+- slug: 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn
+  befund_ursprung_slug: 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn
+  befund_id: 7efbcd7a4275fe1577bb
+  befund_fassung: 69cbd8a400bf4785eb72ca73a7f9e235da4ce561e7f3c073e08b6de7b2f8cfd5
+  geprueft_fassung: 19cd32d36ef7cffe52c9035c0114c9a4bbb9f6110911323961fdc22cb85a280d
+  typ: luecke
+  beanstandung: Verweise auf die Verbraucherzentrale (Tipps zum Heizkosten sparen,
+    Heizung optimieren) können nicht mit den angegebenen Fundstellen belegt werden.
+  beleg: https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/warmwasser-im-alltag-sparen-so-gehts-17752
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text umgesetzt: Jeder VZ-Verweis fuehrt auf die Fundstelle,
+    die die jeweilige Aussage traegt (17752 Warmwasser im Alltag, 30096 Heizung optimieren,
+    17755 Warmwasserkosten); der inhaltsleere Verweis 13892 ist nicht mehr enthalten.'
+  vorgaenger_geprueft_fassung: 0be85e6671d38a6fa82cfccf853b7e7f0456bc9c17cc283348ee760d02743eac
+  folgeentscheidung: true
+- slug: 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn
+  befund_ursprung_slug: 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn
+  befund_id: 971a719f94ca492f640e
+  befund_fassung: 69cbd8a400bf4785eb72ca73a7f9e235da4ce561e7f3c073e08b6de7b2f8cfd5
+  geprueft_fassung: 19cd32d36ef7cffe52c9035c0114c9a4bbb9f6110911323961fdc22cb85a280d
+  typ: luecke
+  beanstandung: Der Preis von 0,30 € pro Kilowattstunde in der Modellrechnung ist
+    nicht mit einer Quelle belegt.
+  beleg: https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text umgesetzt: 0,30 Euro je kWh sind als frei gewaehlte
+    Rechenannahme ohne Marktpreisanspruch gekennzeichnet und dem belegten BDEW-Durchschnitt
+    gegenuebergestellt.'
+  vorgaenger_geprueft_fassung: 0be85e6671d38a6fa82cfccf853b7e7f0456bc9c17cc283348ee760d02743eac
+  folgeentscheidung: true
+- slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
+  befund_ursprung_slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
+  befund_id: 4afb8daed73677ee6224
+  befund_fassung: cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b
+  geprueft_fassung: dfbaef5fe8c9710eb466b618e31d1cc4f26d988dfc7e287678991f0046e47c18
+  typ: luecke
+  beanstandung: Angabe, dass 58 % der Nutzer ihr Haushaltsbuch digital führen, beruft
+    sich angeblich auf Statista 2025, jedoch wird keine Quelle genannt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Die 58-Prozent-Angabe und der Verweis
+    auf Statista stehen nicht mehr im Artikel; heute heisst es nur ''Viele Nutzer
+    fuehren ihr Haushaltsbuch heute digital'' ohne Zahl.'
+  vorgaenger_geprueft_fassung: 7032366326524af816fcb51c168b6e5249724b484ee4dbc08729d5bbf26f0244
+  folgeentscheidung: true
+- slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
+  befund_ursprung_slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
+  befund_id: 9eb9a90899cc8ca66020
+  befund_fassung: cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b
+  geprueft_fassung: dfbaef5fe8c9710eb466b618e31d1cc4f26d988dfc7e287678991f0046e47c18
+  typ: luecke
+  beanstandung: Sparpotenzial‑Beispiele (z. B. DSL‑Tarifwechsel von 44 € auf 24 €)
+    enthalten konkrete Zahlen ohne Quellenangabe.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die konkreten Beispiele (DSL 44 auf
+    24 Euro, 80 bis 150 Euro Abos, 380 Euro Ersparnis) sind entfernt bzw. durch die
+    Aufforderung ersetzt, mit den eigenen Buchungen zu rechnen; die 430-Euro-Zusage
+    im Pinterest-Text ist gestrichen.'
+  vorgaenger_geprueft_fassung: 7032366326524af816fcb51c168b6e5249724b484ee4dbc08729d5bbf26f0244
+  folgeentscheidung: true
+  belegstelle: 'Abo-Schlupflöcher: Streaming-Dienste, Cloud-Speicher, Fitnessstudio,
+    Zeitungs-Flatrates und Lieferdienste können sich zu einem dreistelligen Monatsbetrag
+    summieren – prüfe deine eigenen Buchungen statt mit einer Pauschale zu rechnen.'
+  art: geaendert
+- slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
+  befund_ursprung_slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
+  befund_id: b4bd085bc84a6131b644
+  befund_fassung: cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b
+  geprueft_fassung: dfbaef5fe8c9710eb466b618e31d1cc4f26d988dfc7e287678991f0046e47c18
+  typ: luecke
+  beanstandung: Behauptung, dass 60 % der Haushalte in Deutschland ihr Geld nicht
+    nachverfolgen, wird mit einer Auswertung der Stiftung Warentest angegeben, jedoch
+    fehlt ein entsprechender Nachweis.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Eine 60-Prozent-Angabe zur Stiftung
+    Warentest steht nicht mehr im Artikel; der Absatz beschreibt nur noch den Mechanismus
+    (unbekannter Geldabfluss) ohne Zahl und ohne Institutsbezug.'
+  vorgaenger_geprueft_fassung: 7032366326524af816fcb51c168b6e5249724b484ee4dbc08729d5bbf26f0244
+  folgeentscheidung: true
+- slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
+  befund_ursprung_slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
+  befund_id: baed76dc211bd15dd46f
+  befund_fassung: cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b
+  geprueft_fassung: dfbaef5fe8c9710eb466b618e31d1cc4f26d988dfc7e287678991f0046e47c18
+  typ: praezision
+  beanstandung: Versprechen, dass ein Haushaltsbuch „schnell“ zeigt, welche Posten
+    sich lohnen, ist nicht quantifiziert und fehlt an konkreten Evidenzangaben.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text umgesetzt: Die 50-30-20-Regel ist ausdruecklich als
+    einfaches Budget-System und Modellrechnung eingefuehrt; das ''schnelle Zeigen''
+    ist auf das Wochen-Ritual und die eigene Auswertung bezogen, nicht als Messversprechen
+    formuliert.'
+  vorgaenger_geprueft_fassung: 7032366326524af816fcb51c168b6e5249724b484ee4dbc08729d5bbf26f0244
+  folgeentscheidung: true
+  belegstelle: Ich zeige dir, wie es funktioniert und welche Posten sich typischerweise
+    lohnen – als Modellrechnung mit angenommenen Werten, nicht als Erfahrungsbericht.
+  art: geaendert
+- slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
+  befund_ursprung_slug: 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
+  befund_id: d7c3cfb422310cf26ca6
+  befund_fassung: cd66aa09045a2732b4436128c4da60fff040fda643e564260fff20ba93fe024b
+  geprueft_fassung: dfbaef5fe8c9710eb466b618e31d1cc4f26d988dfc7e287678991f0046e47c18
+  typ: praezision
+  beanstandung: Die Aussage, dass die 50‑30‑20‑Regel für ein Nettoeinkommen von 2.500 €
+    realistisch sei, wird ohne Hinweis auf regionale Unterschiede oder empirische
+    Daten präsentiert.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text umgesetzt: Der Abschnitt ''Ist die 50-30-20-Regel
+    realistisch?'' behandelt die Grenzen des Modells; die Aussage ist als Modell und
+    nicht als empirischer Befund eingefuehrt.'
+  vorgaenger_geprueft_fassung: 7032366326524af816fcb51c168b6e5249724b484ee4dbc08729d5bbf26f0244
+  folgeentscheidung: true
+- slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  befund_ursprung_slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  befund_id: 16b3b8584ff802803aa9
+  befund_fassung: 6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5
+  geprueft_fassung: 3498ce4a52ceb50df5e90026d365c19082a6eb9154e62d67b6c6cfc150d1cbcd
+  typ: luecke
+  beanstandung: Angaben zum Fremdwährungsentgelt von „fast zwei Prozent“ bei Zahlungen
+    in fremder Währung fehlen jede belegbare Referenz.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die Prozentangabe ''zwei Prozent
+    im Ausland'' ist entfernt; der Satz nennt jetzt den Mechanismus (Jahresgebuehr
+    hier, Aufschlag bei Fremdwaehrung dort) ohne unbelegten Marktwert.'
+  vorgaenger_geprueft_fassung: db4ec8e16a3b72c664bed1f8ab1801fde264601760b001c3997568e989211053
+  folgeentscheidung: true
+  belegstelle: Zwölf Euro Jahresgebühr hier, ein Aufschlag beim Bezahlen in fremder
+    Währung dort.
+  art: geaendert
+- slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  befund_ursprung_slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  befund_id: 7ff042b6fe804cdf101b
+  befund_fassung: 6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5
+  geprueft_fassung: 3498ce4a52ceb50df5e90026d365c19082a6eb9154e62d67b6c6cfc150d1cbcd
+  typ: praezision
+  beanstandung: Formulierungen wie „einige Anbieter ohne Auslandsgebühr gehören zu
+    den besten Karten für Reisen“ sind pauschal und ohne messbare Daten unpräzise.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Die Formulierung ''gehoeren zu den
+    besten Karten'' existiert nicht mehr; der Text sagt, dass es Anbieter ohne Auslandsgebuehr
+    gibt und sie fuer Reisende einen genauen Blick wert sind - ohne Ranking.'
+  vorgaenger_geprueft_fassung: db4ec8e16a3b72c664bed1f8ab1801fde264601760b001c3997568e989211053
+  folgeentscheidung: true
+- slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  befund_ursprung_slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  befund_id: bec83c4b814183fa1086
+  befund_fassung: 6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5
+  geprueft_fassung: 3498ce4a52ceb50df5e90026d365c19082a6eb9154e62d67b6c6cfc150d1cbcd
+  typ: luecke
+  beanstandung: Die Aussage, dass die kostenlose Sperr‑Notrufnummer 116 für alle Karten
+    in Deutschland gilt, wird nicht durch eine Quelle gestützt.
+  beleg: https://www.sperr-notruf.de/
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text umgesetzt: Die Sperr-Notrufnummer 116 116 ist inline
+    auf sperr-notruf.de verlinkt und als bundesweit einheitliche Nummer beschrieben.'
+  vorgaenger_geprueft_fassung: db4ec8e16a3b72c664bed1f8ab1801fde264601760b001c3997568e989211053
+  folgeentscheidung: true
+- slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  befund_ursprung_slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  befund_id: f9aff86b6eba71b153a6
+  befund_fassung: 6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5
+  geprueft_fassung: 3498ce4a52ceb50df5e90026d365c19082a6eb9154e62d67b6c6cfc150d1cbcd
+  typ: luecke
+  beanstandung: Die Angabe, dass Sollzinsen bei Teilzahlung zwischen 12 % und 20 %
+    liegen, ist nicht mit einer Quelle belegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Eine Sollzins-Spanne von 12 bis 20
+    Prozent steht nicht mehr im Artikel; der Text verweist auf das Preisverzeichnis
+    der Karte und warnt vor Teilzahlung ohne Zahl zu nennen.'
+  vorgaenger_geprueft_fassung: db4ec8e16a3b72c664bed1f8ab1801fde264601760b001c3997568e989211053
+  folgeentscheidung: true
+- slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  befund_ursprung_slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  befund_id: fed9215b770ea4879eda
+  befund_fassung: 6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5
+  geprueft_fassung: 3498ce4a52ceb50df5e90026d365c19082a6eb9154e62d67b6c6cfc150d1cbcd
+  typ: luecke
+  beanstandung: Die Behauptung, dass eine gute Kreditkarte im Jahr nichts kostet (keine
+    Jahres‑ und keine Fremdwährungsgebühr), wird ohne jegliche Quelle angegeben.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Aus der absoluten Zusage ''kostet
+    im Jahr nichts'' ist die Moeglichkeit geworden (''kann im Jahr nichts kosten:
+    Es gibt Karten ohne Jahresgebuehr''); der Auslandsfall ist an das konkrete Fremdwaehrungsentgelt
+    gebunden.'
+  vorgaenger_geprueft_fassung: db4ec8e16a3b72c664bed1f8ab1801fde264601760b001c3997568e989211053
+  folgeentscheidung: true
+  belegstelle: 'Eine gute Kreditkarte kann im Jahr nichts kosten: Es gibt Karten ohne
+    Jahresgebühr.'
+  art: geaendert
+- slug: 2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden
+  befund_ursprung_slug: 2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden
+  befund_id: 0e68294e193918d5b5b0
+  befund_fassung: d3de9e74dca246d48198b40d035722f42ac0715d466ae188d423d77944bc4445
+  geprueft_fassung: c36d765563548ba75dbb0f0d1acb068f1ce097920eeb6f134c0d6053ad51a999
+  typ: luecke
+  beanstandung: Der Text nennt eine angeblich gängige Faustregel von 20 % Rabatt im
+    Spätsommer (Beispiel 300 € → 240 €) ohne Quellenangabe.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Der Satz ''oft Rabatte von 20 Prozent,
+    gängige Faustregel'' ist ersetzt durch eine ausdrueckliche Rechenannahme (''Beispielwert,
+    kein Marktversprechen''); die Rechnung selbst bleibt nachvollziehbar.'
+  belegstelle: Nehmen wir als Rechenannahme 20 Prozent Nachlass – ein Beispielwert,
+    kein Marktversprechen.
+  art: geaendert
+- slug: 2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden
+  befund_ursprung_slug: 2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden
+  befund_id: 4d91ef71fa76febdb769
+  befund_fassung: d3de9e74dca246d48198b40d035722f42ac0715d466ae188d423d77944bc4445
+  geprueft_fassung: c36d765563548ba75dbb0f0d1acb068f1ce097920eeb6f134c0d6053ad51a999
+  typ: luecke
+  beanstandung: Es wird angegeben, dass Flüge an Dienstagen und Mittwochen günstiger
+    seien und an Freitagen bzw. Sonntagen teurer, ohne Beleg.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die unbelegte Wochentagsregel (Dienstag/Mittwoch
+    billiger, Freitag/Sonntag teurer) ist durch eine Pruefanweisung ersetzt: mehrere
+    Wochentage vergleichen, Nachfrage am Freitag- und Sonntagabend als Mechanismus
+    erklaeren.'
+  belegstelle: Freitagabend und Sonntagabend sind bei Pendlern beliebt; verschiebst
+    du um einen Tag, siehst du den Unterschied direkt im Preis.
+  art: geaendert
+- slug: 2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden
+  befund_ursprung_slug: 2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden
+  befund_id: 5b427fb4f05b475d9a89
+  befund_fassung: d3de9e74dca246d48198b40d035722f42ac0715d466ae188d423d77944bc4445
+  geprueft_fassung: c36d765563548ba75dbb0f0d1acb068f1ce097920eeb6f134c0d6053ad51a999
+  typ: luecke
+  beanstandung: Die Empfehlung, Flüge vier bis acht Wochen im Voraus zu buchen, weil
+    die Preise dann am niedrigsten seien, wird nicht belegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Das ''klare Zeitfenster'' ist an
+    beiden Stellen als Erfahrungswert ohne Garantie formuliert und um die Empfehlung
+    ergaenzt, den Preis per Alert zu beobachten und im Budget zu buchen.'
+  belegstelle: 'Ein Erfahrungswert aus der Praxis, keine Garantie: Viele günstige
+    Angebote tauchen vier bis acht Wochen vor Abflug auf.'
+  art: geaendert
+- slug: 2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden
+  befund_ursprung_slug: 2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden
+  befund_id: e933e34672f0b6464d1e
+  befund_fassung: d3de9e74dca246d48198b40d035722f42ac0715d466ae188d423d77944bc4445
+  geprueft_fassung: c36d765563548ba75dbb0f0d1acb068f1ce097920eeb6f134c0d6053ad51a999
+  typ: luecke
+  beanstandung: Der Artikel behauptet, dass im Spätsommer die Nachfrage nach Flügen
+    sinkt und dadurch die Preise fallen, ohne dafür eine Quelle anzugeben.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die pauschale Kausalkette ''Nachfrage
+    sinkt, deshalb sinken die Preise'' ist als Mechanismus mit ausdruecklichem Vorbehalt
+    formuliert (haengt von Strecke und Auslastung ab, kein garantierter Rabatt).'
+  belegstelle: Ob und wie stark die Preise fallen, hängt von Strecke und Auslastung
+    ab – ein garantierter Rabatt ist das nicht.
+  art: geaendert
+- slug: 2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden
+  befund_ursprung_slug: 2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden
+  befund_id: eb6a47df5535fa267a82
+  befund_fassung: d3de9e74dca246d48198b40d035722f42ac0715d466ae188d423d77944bc4445
+  geprueft_fassung: c36d765563548ba75dbb0f0d1acb068f1ce097920eeb6f134c0d6053ad51a999
+  typ: luecke
+  beanstandung: Behauptet wird, dass Kombi‑Deals für Flug + Mietwagen typischerweise
+    5–15 % Einsparungen bringen, ohne Nachweis.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die Spanne von 5 bis 15 Prozent fuer
+    Kombi-Deals ist durch die Rechenanweisung ersetzt, beide Wege getrennt zu vergleichen
+    und dann zu entscheiden; die Garantieformel ''garantiert das beste Angebot'' ist
+    gestrichen.'
+  belegstelle: Wie viel ein Bündel spart, hängt vom Anbieter und der Reise ab – rechne
+    den Gesamtpreis beider Wege gegen und entscheide dann.
+  art: geaendert
+- slug: 2026-10-28-dsl-und-internet-flat-guenstig-sichern
+  befund_ursprung_slug: 2026-10-28-dsl-und-internet-flat-guenstig-sichern
+  befund_id: 05be346e82c80b2a8664
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 4064f9db6da5b09ee8b6cbf0c44dbbcccfeffc2e5c1b7d11687a3511c5ae8dd3
+  typ: luecke
+  beanstandung: Wechselboni von 50 € bis 100 € werden genannt, jedoch fehlt jede belegbare
+    Angabe zu deren Höhe oder Häufigkeit.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Eine Bonusspanne von 50 bis 100 Euro
+    wird nicht mehr behauptet. Der Artikel sagt ausdruecklich, dass es keine gesetzliche
+    Spanne und keine belastbare Statistik gibt und die Werte je Anbieter schwanken.'
+  vorgaenger_geprueft_fassung: 6aaec06f5b5f9167fcc21a7a5387d889c826f004d3cae2d3ec7634a08dbdcb16
+  folgeentscheidung: true
+- slug: 2026-10-28-dsl-und-internet-flat-guenstig-sichern
+  befund_ursprung_slug: 2026-10-28-dsl-und-internet-flat-guenstig-sichern
+  befund_id: d0a5cf7bb64eb0cd46c8
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 4064f9db6da5b09ee8b6cbf0c44dbbcccfeffc2e5c1b7d11687a3511c5ae8dd3
+  typ: luecke
+  beanstandung: Der Artikel erwähnt keinen regulatorischen Rahmen (z. B. Informations‑
+    und Preisbindungspflichten der Bundesnetzagentur) obwohl die Fundstelle darauf
+    hinweist, dass solche Vorgaben existieren.
+  beleg: https://www.gesetze-im-internet.de/tkg_2021/__56.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text umgesetzt: Der regulatorische Rahmen ist belegt -
+    Paragraph 56 TKG zur Hoechstlaufzeit mit Link auf gesetze-im-internet.de, zusaetzlich
+    Vertragszusammenfassung und Kuendigungsrecht als Verbraucherrechte.'
+  vorgaenger_geprueft_fassung: 6aaec06f5b5f9167fcc21a7a5387d889c826f004d3cae2d3ec7634a08dbdcb16
+  folgeentscheidung: true
+- slug: 2026-10-28-dsl-und-internet-flat-guenstig-sichern
+  befund_ursprung_slug: 2026-10-28-dsl-und-internet-flat-guenstig-sichern
+  befund_id: ec53e181336df8dc61ac
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 4064f9db6da5b09ee8b6cbf0c44dbbcccfeffc2e5c1b7d11687a3511c5ae8dd3
+  typ: luecke
+  beanstandung: Der Artikel behauptet, dass DSL‑Verträge häufig eine Laufzeit von
+    24 Monaten haben und danach eine Kündigungsfrist von einem Monat gilt, ohne dafür
+    eine Quelle anzugeben.
+  beleg: https://www.gesetze-im-internet.de/tkg_2021/__56.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text umgesetzt: Die 24-Monats-Laufzeit und die Kuendigungsfrist
+    sind nicht mehr als Marktbehauptung formuliert, sondern als gesetzlicher Rahmen
+    nach Paragraph 56 TKG mit Inline-Link belegt.'
+  vorgaenger_geprueft_fassung: 6aaec06f5b5f9167fcc21a7a5387d889c826f004d3cae2d3ec7634a08dbdcb16
+  folgeentscheidung: true
+- slug: 2026-10-28-dsl-und-internet-flat-guenstig-sichern
+  befund_ursprung_slug: 2026-10-28-dsl-und-internet-flat-guenstig-sichern
+  befund_id: f3f9184bfca9b097f68e
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 4064f9db6da5b09ee8b6cbf0c44dbbcccfeffc2e5c1b7d11687a3511c5ae8dd3
+  typ: luecke
+  beanstandung: Die 50‑30‑20‑Regel wird als allgemein gültige Budget‑Methode dargestellt,
+    ohne Hinweis, dass es sich um ein Modell handelt oder Quelle dafür zu nennen.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text umgesetzt: Die 50-30-20-Regel ist im Rechenbeispiel
+    als Modell eingefuehrt und auf das eigene Nettoeinkommen bezogen; der Aenderungsgrund
+    im Frontmatter dokumentiert die Kennzeichnung.'
+  vorgaenger_geprueft_fassung: 6aaec06f5b5f9167fcc21a7a5387d889c826f004d3cae2d3ec7634a08dbdcb16
+  folgeentscheidung: true
+- slug: 2026-10-28-dsl-und-internet-flat-guenstig-sichern
+  befund_ursprung_slug: 2026-10-28-dsl-und-internet-flat-guenstig-sichern
+  befund_id: fb4d2260f4fa291c35ae
+  befund_fassung: legacy-unbekannt
+  geprueft_fassung: 4064f9db6da5b09ee8b6cbf0c44dbbcccfeffc2e5c1b7d11687a3511c5ae8dd3
+  typ: praezision
+  beanstandung: Die Angabe, dass für zwei HD‑Streams gleichzeitig etwa 30 Mbit/s benötigt
+    werden, ist nicht durch Daten belegt und lässt Spielraum für Fehlinterpretationen.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text umgesetzt: Der Bandbreitenbedarf ist als ''uebliche
+    Modellannahme'' gekennzeichnet und an das Nutzungsverhalten gebunden; die 30 Mbit/s
+    sind damit keine Marktbehauptung.'
+  vorgaenger_geprueft_fassung: 6aaec06f5b5f9167fcc21a7a5387d889c826f004d3cae2d3ec7634a08dbdcb16
+  folgeentscheidung: true
+- slug: 2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten
+  befund_ursprung_slug: 2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten
+  befund_id: 1c6e4d2f12da24ec4081
+  befund_fassung: b8ec531212d9b54052333dd21c50eea192d37c44aab683b3072afae3b6330f4f
+  geprueft_fassung: 8e1c6b28497dbb85649f29b43ec8a419182579a253ab3559abe37176da7d878e
+  typ: luecke
+  beanstandung: Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert,
+    fehlt eine nachweisbare Quelle.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die pauschale Dauer ''3 bis 6 Wochen''
+    mit sinnlosem Etikett ''Beispielrechnung'' ist ersetzt durch den Mechanismus (Dauer
+    haengt von Netzbetreiber und Zaehlerstand ab, Terminbestaetigung durch den Anbieter).'
+  belegstelle: Wie lange genau, hängt vom Netzbetreiber und vom Zählerstand ab; den
+    Termin bestätigt dir der neue Anbieter schriftlich.
+  art: geaendert
+- slug: 2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten
+  befund_ursprung_slug: 2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten
+  befund_id: 5b539daf371f7362a3ef
+  befund_fassung: b8ec531212d9b54052333dd21c50eea192d37c44aab683b3072afae3b6330f4f
+  geprueft_fassung: 8e1c6b28497dbb85649f29b43ec8a419182579a253ab3559abe37176da7d878e
+  typ: praezision
+  beanstandung: Die Empfehlung, dynamische Tarife erforderten zwingend einen Smart
+    Meter, wird ohne Angabe von Voraussetzungen, Kosten oder Verfügbarkeit präzisiert.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die Smart-Meter-Voraussetzung ist
+    um die Voraussetzung ergaenzt - Tausch haengt vom Messstellenbetreiber ab, Termin
+    vor der Unterschrift klaeren.'
+  belegstelle: Ob und wann dein Zähler getauscht wird, hängt vom Messstellenbetreiber
+    ab – frage den Termin beim Anbieter ab, bevor du unterschreibst.
+  art: geaendert
+- slug: 2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten
+  befund_ursprung_slug: 2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten
+  befund_id: 77d809de9e06d1d6910d
+  befund_fassung: b8ec531212d9b54052333dd21c50eea192d37c44aab683b3072afae3b6330f4f
+  geprueft_fassung: 8e1c6b28497dbb85649f29b43ec8a419182579a253ab3559abe37176da7d878e
+  typ: luecke
+  beanstandung: Es wird eine Prognose für den Strompreis 2026 angegeben („Trends erkennen“,
+    „Netzentgelte steigen“), ohne dass dafür aktuelle Marktdaten oder offizielle Prognosen
+    genannt werden.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die unbelegte Trendprognose (Netzentgelte
+    steigen, Versorger geben es weiter) und die Pauschale ''Grundversorgung zahlt
+    fast immer zu viel'' sind durch Mechanismen und den Verweis auf die Veroeffentlichung
+    des Netzbetreibers ersetzt; eine exakte Vorhersage wird ausdruecklich ausgeschlossen.'
+  belegstelle: Wie hoch dein Netzentgelt ist, veröffentlicht dein Netzbetreiber –
+    dieser Wert zählt für deine Rechnung, nicht eine pauschale Prognose.
+  art: geaendert
+- slug: 2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten
+  befund_ursprung_slug: 2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten
+  befund_id: ad7c0a90ef52ff35130e
+  befund_fassung: b8ec531212d9b54052333dd21c50eea192d37c44aab683b3072afae3b6330f4f
+  geprueft_fassung: 8e1c6b28497dbb85649f29b43ec8a419182579a253ab3559abe37176da7d878e
+  typ: luecke
+  beanstandung: Der Artikel behauptet, dass Preisgarantien vor Preissteigerungen schützen,
+    liefert jedoch keine Quelle für diese Aussage.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die Aussage ist auf den tatsaechlichen
+    Wirkungsbereich begrenzt (''begrenzt Preiserhoehungen fuer die vertraglich geschuetzten
+    Bestandteile'') statt eines pauschalen Schutzes vor Preissteigerungen.'
+  belegstelle: Eine Preisgarantie begrenzt Preiserhöhungen für die vertraglich geschützten
+    Bestandteile.
+  art: geaendert
+- slug: 2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten
+  befund_ursprung_slug: 2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten
+  befund_id: f227178fbda2cc59c350
+  befund_fassung: b8ec531212d9b54052333dd21c50eea192d37c44aab683b3072afae3b6330f4f
+  geprueft_fassung: 8e1c6b28497dbb85649f29b43ec8a419182579a253ab3559abe37176da7d878e
+  typ: luecke
+  beanstandung: Die Aussage, dass Ökostrom‑Tarife häufig günstiger als die Grundversorgung
+    seien, wird nicht durch eine Quelle belegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die Preisbehauptung ''Oekostrom oft
+    guenstiger als die Grundversorgung'' ist ersetzt durch die pruefbare Anweisung,
+    Arbeits- und Grundpreis zu vergleichen statt das Label zu bewerten.'
+  belegstelle: 'Ökostrom muss nicht teurer sein: Vergleiche Arbeitspreis und Grundpreis,
+    nicht das Label.'
+  art: geaendert
+- slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
+  befund_ursprung_slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
+  befund_id: 785eee76d888bb05ad96
+  befund_fassung: cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf
+  geprueft_fassung: ad17df8dfe8af17c22f3bac7f3f2daf86337964faf2fa8d684ad06972dbc47eb
+  typ: luecke
+  beanstandung: Die im Rechenbeispiel genutzte Kilometerpauschale von 0,20 €/km wird
+    als Referenzwert ohne Quellenangabe (z. B. Branchenverband) angeführt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Die 0,20 Euro je Kilometer stehen
+    ausschliesslich in der ausdruecklich so bezeichneten Annahme des Rechenbeispiels
+    (''Annahme: ... Kilometerpauschale 0,20 Euro pro km''), nicht als Marktreferenz.'
+  vorgaenger_geprueft_fassung: 2e0bf5d87784e28b64fb68a123c8a49791870b59e5861cf09aec4c937943b9a8
+  folgeentscheidung: true
+- slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
+  befund_ursprung_slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
+  befund_id: 843ec148e23841b7bf35
+  befund_fassung: cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf
+  geprueft_fassung: ad17df8dfe8af17c22f3bac7f3f2daf86337964faf2fa8d684ad06972dbc47eb
+  typ: luecke
+  beanstandung: Der als Handlungsschritt empfohlene '4K-Prüfpfad' wird im Text nicht
+    erläutert und ist in der genannten Quelle nicht enthalten.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Der 4K-Pruefpfad ist im Abschnitt
+    direkt darunter vollstaendig erklaert - vier nummerierte Schritte (Kosten sehen,
+    Konditionen rechnen, Kuendigungsfenster sichern, Kurs halten) mit Beispielen.'
+  vorgaenger_geprueft_fassung: 2e0bf5d87784e28b64fb68a123c8a49791870b59e5861cf09aec4c937943b9a8
+  folgeentscheidung: true
+- slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
+  befund_ursprung_slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
+  befund_id: def43a04853be4c35f7f
+  befund_fassung: cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf
+  geprueft_fassung: ad17df8dfe8af17c22f3bac7f3f2daf86337964faf2fa8d684ad06972dbc47eb
+  typ: luecke
+  beanstandung: Die Preisprognose (Anstieg in den letzten 3 Wochen) und der empfohlene
+    Buchungsvorlauf (3-4 Wochen) sind Marktdaten ohne Beleg durch die Fachquelle.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die pauschale Empfehlung ''mehrere
+    Wochen vorher'' ist als Vorteilsargument (Auswahl, Preissprünge in der Hochsaison)
+    formuliert; die Preisaussage der Marktbeobachter ist ausdruecklich als Einschaetzung
+    und nicht als Prognose gekennzeichnet.'
+  vorgaenger_geprueft_fassung: 2e0bf5d87784e28b64fb68a123c8a49791870b59e5861cf09aec4c937943b9a8
+  folgeentscheidung: true
+  belegstelle: 'Buche nicht erst in der letzten Woche: Wer mehrere Wochen vorher vergleicht,
+    hat mehr Auswahl und kann Preissprünge in der Hochsaison aussitzen.'
+  art: geaendert
+- slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
+  befund_ursprung_slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
+  befund_id: f064ea49ccefde26aef9
+  befund_fassung: cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf
+  geprueft_fassung: ad17df8dfe8af17c22f3bac7f3f2daf86337964faf2fa8d684ad06972dbc47eb
+  typ: praezision
+  beanstandung: Das Versprechen, CHECK24 vergleiche 'alle großen Anbieter', ist ein
+    Vollständigkeitsversprechen ohne Nennung von Auswahlkriterien oder der Marktabdeckung.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Ein Vollstaendigkeitsversprechen
+    (''alle grossen Anbieter'') steht nicht im Artikel; der Text sagt ''Vergleich
+    vieler Anbieter'' und verweist auf Preis-, Fahrzeugtyp- und Zusatzleistungsfilter.'
+  vorgaenger_geprueft_fassung: 2e0bf5d87784e28b64fb68a123c8a49791870b59e5861cf09aec4c937943b9a8
+  folgeentscheidung: true
+- slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
+  befund_ursprung_slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
+  befund_id: 58f03a64adaaf8125959
+  befund_fassung: 7203c0f7cedd638a87bafcfcd5fc6e920ab79959793f832239386b0690ac776f
+  geprueft_fassung: 13454437d452d68f64ee5cbd7d2db72b691835ef1782d4ef8fd73bde49e3f6fc
+  typ: praezision
+  beanstandung: Während der Artikel vor hohen Kosten für Festmenüs warnt, liegt die
+    Preissteigerung bei Nahrungsmitteln laut Destatis im Oktober 2026 bei lediglich
+    +0,4 % und damit deutlich unter der allgemeinen Inflation.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text eingeordnet: Der Absatz nennt Destatis-Werte mit
+    Datum und Quelle - 2,8 Prozent gesamt, Nahrungsmittel +0,4 Prozent, Energie +14,9
+    Prozent - und relativiert damit die Kostenwarnung beim Festmenue.'
+  vorgaenger_geprueft_fassung: 31255b4841f8f9a69815013b95d6c9cc2af9314c12b35b89f762bce3b9980f4e
+  folgeentscheidung: true
+- slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
+  befund_ursprung_slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
+  befund_id: a7f5f01ef15a38839a0d
+  befund_fassung: 7203c0f7cedd638a87bafcfcd5fc6e920ab79959793f832239386b0690ac776f
+  geprueft_fassung: 13454437d452d68f64ee5cbd7d2db72b691835ef1782d4ef8fd73bde49e3f6fc
+  typ: praezision
+  beanstandung: Die Pauschale für 'Anreise und Mobilität' (10 % des Budgets) berücksichtigt
+    nicht die überdurchschnittliche Preissteigerung bei Energie von +14,9 %, die Fahrtkosten
+    im Vergleich zum Vorjahr massiv verteuern kann.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text eingeordnet: Die Anreise-Pauschale ist ausdruecklich
+    ein Platzhalter der Modellrechnung; der Text verlangt, die Fahrtkosten am echten
+    Preis zu pruefen, und nennt die Energie-Teuerung als Grund.'
+  vorgaenger_geprueft_fassung: 31255b4841f8f9a69815013b95d6c9cc2af9314c12b35b89f762bce3b9980f4e
+  folgeentscheidung: true
+- slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
+  befund_ursprung_slug: 2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage
+  befund_id: bcc2bdf06220d5097133
+  befund_fassung: 7203c0f7cedd638a87bafcfcd5fc6e920ab79959793f832239386b0690ac776f
+  geprueft_fassung: 13454437d452d68f64ee5cbd7d2db72b691835ef1782d4ef8fd73bde49e3f6fc
+  typ: luecke
+  beanstandung: Die Modellrechnung für das Weihnachtsbudget (600 €) lässt die aktuelle
+    Teuerungsrate unberücksichtigt. Laut Statistischen Bundesamt liegt die Inflationsrate
+    im Oktober 2026 bei +2,8 %, was als Referenzwert für die Budgetplanung zum Vorjahr
+    fehlt.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text eingeordnet: Die Teuerung ist mit der vorlaeufigen
+    Oktober-Rate von 2,8 Prozent (Destatis) samt Quellenlink im Artikel; die Modellrechnung
+    ist davon getrennt als solche gekennzeichnet.'
+  vorgaenger_geprueft_fassung: 31255b4841f8f9a69815013b95d6c9cc2af9314c12b35b89f762bce3b9980f4e
+  folgeentscheidung: true
+- slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
+  befund_ursprung_slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
+  befund_id: 089b89138417e63a3dcf
+  befund_fassung: 4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7
+  geprueft_fassung: 887a9983218bee7a5da565baf552d4dd1304e00373f8398e3f3c7d0cf5467001
+  typ: luecke
+  beanstandung: Es fehlt der für Campingbuchungen relevante Regulierungsrahmen (Unterscheidung
+    Mietrecht bei Stellplätzen vs. Reiserecht), den die Fundstelle für den Bereich
+    Reise nur allgemein andeutet.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text umgesetzt: Der Regulierungsrahmen ist konkretisiert
+    - eine Stellplatzbuchung ist nicht automatisch eine Pauschalreise; entscheidend
+    sind gebuchte Leistungen, Vertragspartner und Veranstalterrolle.'
+  vorgaenger_geprueft_fassung: b2693d4ac268b6500f367a8f752410fc3a7a7ca0cec7481069f01a1c1c472717
+  folgeentscheidung: true
+- slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
+  befund_ursprung_slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
+  befund_id: 1158934e7a18c7b2099b
+  befund_fassung: 4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7
+  geprueft_fassung: 887a9983218bee7a5da565baf552d4dd1304e00373f8398e3f3c7d0cf5467001
+  typ: luecke
+  beanstandung: Die Preisangabe von 20 bis 45 € pro Nacht wird als realistischer Wert
+    positioniert, ist jedoch nicht durch Marktdaten oder eine Referenzstelle in den
+    Fundstellen belegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Eine Spanne von 20 bis 45 Euro pro
+    Nacht steht nicht mehr im Artikel; als Planungsgrundlage dient jetzt das konkrete
+    Angebot am Wunschplatz inklusive Pflichtgebuehren.'
+  vorgaenger_geprueft_fassung: b2693d4ac268b6500f367a8f752410fc3a7a7ca0cec7481069f01a1c1c472717
+  folgeentscheidung: true
+- slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
+  befund_ursprung_slug: 2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust
+  befund_id: 3716cfd3ab5aec6d774b
+  befund_fassung: 4a06ab9b1a7de846cbb002e27647b11fbab84a998d0e763885e66564874eb2e7
+  geprueft_fassung: 887a9983218bee7a5da565baf552d4dd1304e00373f8398e3f3c7d0cf5467001
+  typ: praezision
+  beanstandung: Der Verweis auf die Verbraucherzentrale zur Prüfung von Buchungsangaben
+    führt auf eine allgemeine Übersichtsseite ohne konkrete Checklisten für Camping-Angebote.
+  beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen/onlinereisebueros-so-vermeiden-sie-probleme-bei-der-urlaubsbuchung-11306
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text umgesetzt: Der allgemeine VZ-Uebersichtslink ist
+    durch den konkreten Ratgeber ''Online-Reisebueros: Probleme bei der Urlaubsbuchung
+    vermeiden'' ersetzt und um Pruefpunkte zu Leistungsangaben, Anbieter, Endpreis
+    und Storno ergaenzt.'
+  vorgaenger_geprueft_fassung: b2693d4ac268b6500f367a8f752410fc3a7a7ca0cec7481069f01a1c1c472717
+  folgeentscheidung: true
+  belegstelle: Konkrete Prüfpunkte für Onlinebuchungen liefert die Verbraucherzentrale
+    im Ratgeber
+  art: geaendert
+- slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
+  befund_ursprung_slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
+  befund_id: 24f05ddc03ffdd50118f
+  befund_fassung: 04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9
+  geprueft_fassung: c612e5223aa5227dcab4cc2733ad25043c51b90e811ac2708b9faa72474ccf10
+  typ: praezision
+  beanstandung: Die Kalkulation der Fixkostenersparnis bei Energie (Strom/Gas) ist
+    unpräzise, da sie den aktuellen Preisanstieg von +14,9 % bei Energieprodukten
+    nicht einbezieht.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text eingeordnet: Der Artikel nennt den Energie-Anstieg
+    von +14,9 Prozent (Destatis, Oktober 2026) im Preisstand-Hinweis und rechnet das
+    Szenario ausdruecklich auf den Preisstand Oktober 2026.'
+  vorgaenger_geprueft_fassung: 39e90e75075a69125812c0c8c1956b81fb3181e66caad88cdfa8fffdcc0714b8
+  folgeentscheidung: true
+- slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
+  befund_ursprung_slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
+  befund_id: 4816322f061dfdc03bcd
+  befund_fassung: 04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9
+  geprueft_fassung: c612e5223aa5227dcab4cc2733ad25043c51b90e811ac2708b9faa72474ccf10
+  typ: luecke
+  beanstandung: Bei den Einsparpotenzialen für Lebensmittel fehlt der Bezug zur aktuellen
+    Preissteigerung von +0,4 % bei Nahrungsmitteln.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text eingeordnet: Der Hinweis zum Preisstand nennt neben
+    Energie +14,9 Prozent auch die moderate Teuerung der Nahrungsmittel von +0,4 Prozent;
+    die Sparpotenziale sind damit relativiert.'
+  vorgaenger_geprueft_fassung: 39e90e75075a69125812c0c8c1956b81fb3181e66caad88cdfa8fffdcc0714b8
+  folgeentscheidung: true
+- slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
+  befund_ursprung_slug: 2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum
+  befund_id: 7017065ee7c74c7ae452
+  befund_fassung: 04e00d997c32ab6d898e79814ad8760805bbcfb339f3a11ea21e4054025f92c9
+  geprueft_fassung: c612e5223aa5227dcab4cc2733ad25043c51b90e811ac2708b9faa72474ccf10
+  typ: veraltet
+  beanstandung: Der Artikel nutzt Kostenszenarien für 2024/2025, während aktuelle
+    Daten für Oktober 2026 eine Inflationsrate von +2,8 % ausweisen.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Die Szenarien rechnen nicht mehr
+    mit 2024/2025, sondern ausdruecklich zum Preisstand Oktober 2026 mit der vorlaeufigen
+    Inflationsrate 2,8 Prozent und Quellenangabe (Statistisches Bundesamt).'
+  vorgaenger_geprueft_fassung: 39e90e75075a69125812c0c8c1956b81fb3181e66caad88cdfa8fffdcc0714b8
+  folgeentscheidung: true
+- slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
+  befund_ursprung_slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
+  befund_id: 1e06a96f6f71e104ce0b
+  befund_fassung: 795c7b990680201f40a39431e82decc20b19b5551b2fa662f66f4bb2b4c80776
+  geprueft_fassung: 9d65f38eccf7ea7174917c727586b0bc9c5aa2f53301c619e8ed2f2b83a49458
+  typ: praezision
+  beanstandung: Während Meal Prep als großer Sparhebel betont wird, zeigt die Marktlage
+    für Nahrungsmittel eine moderate Teuerung von nur 0,4 %, was die Priorisierung
+    der Sparbemühungen relativiert.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text eingeordnet: Die Meal-Prep-Priorisierung ist relativiert
+    - der Absatz verweist auf Energie-, Wohn- und Vertragskosten, wenn Auswaertsessen
+    keine Rolle spielt, und nennt Nahrungsmittel +0,4 Prozent gegen Energie +14,9
+    Prozent mit Destatis-Link.'
+  vorgaenger_geprueft_fassung: 30c5d5824140945b95e845db27e7470b93db82ea7959bd92f90f1dce552f4bf6
+  folgeentscheidung: true
+  belegstelle: Hast du diese Ausgabe kaum, prüfe zuerst Energie-, Wohn- und Vertragskosten.
+  art: gegenstandslos
+- slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
+  befund_ursprung_slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
+  befund_id: 81c6a707139046b83ccd
+  befund_fassung: 795c7b990680201f40a39431e82decc20b19b5551b2fa662f66f4bb2b4c80776
+  geprueft_fassung: 9d65f38eccf7ea7174917c727586b0bc9c5aa2f53301c619e8ed2f2b83a49458
+  typ: luecke
+  beanstandung: Der Ratgeber empfiehlt die Revision von Fixkosten, lässt aber die
+    drastische Preissteigerung bei Energie von +14,9 % unerwähnt, die ein wesentlicher
+    Treiber der Haushaltsausgaben ist.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text eingeordnet: Der Preisstand-Hinweis nennt Verbraucherpreise
+    +2,8 Prozent, Energie +14,9 Prozent und Nahrungsmittel +0,4 Prozent mit Destatis-Link;
+    die Fixkostenpruefung ist daran ausgerichtet.'
+  vorgaenger_geprueft_fassung: 30c5d5824140945b95e845db27e7470b93db82ea7959bd92f90f1dce552f4bf6
+  folgeentscheidung: true
+  belegstelle: Lebensmittel waren im Oktober 2026 nur +0,4 % teurer als im Vorjahr,
+    Energie dagegen +14,9 %
+  art: gegenstandslos
+- slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
+  befund_ursprung_slug: 2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler
+  befund_id: 8cc00288af8a1f2b02d8
+  befund_fassung: 795c7b990680201f40a39431e82decc20b19b5551b2fa662f66f4bb2b4c80776
+  geprueft_fassung: 9d65f38eccf7ea7174917c727586b0bc9c5aa2f53301c619e8ed2f2b83a49458
+  typ: veraltet
+  beanstandung: Die Budget-Tipps berücksichtigen nicht die aktuelle Inflationsrate
+    von 2,8 % (Stand Oktober 2026), was die Kaufkraft-Annahmen im Haushaltsbuch beeinflusst.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Die Inflationsrate von 2,8 Prozent
+    (Oktober 2026, Destatis) steht mit Quellenlink im Artikel; das Haushaltsbuch wird
+    auf die eigenen Vormonatsausgaben verpflichtet.'
+  vorgaenger_geprueft_fassung: 30c5d5824140945b95e845db27e7470b93db82ea7959bd92f90f1dce552f4bf6
+  folgeentscheidung: true
+- slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_ursprung_slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_id: 5a1bf10697f58e5fe14a
+  befund_fassung: 07a463b531e0c47a7c04e0e9b0d2e462b1dfebd5333e8fc771aa9d09d50573ed
+  geprueft_fassung: 380bb4b87de709438b464f1e8105c7b1ebc47404bcc12a8d1ca80d294db6713f
+  typ: luecke
+  beanstandung: Der Ratgeber nennt Sparbeispiele für Heizkosten, lässt aber die aktuelle
+    Preissteigerung bei Energie von +14,9 % (Stand Oktober 2026) unerwähnt, die den
+    finanziellen Druck auf Haushalte massiv erhöht.
+  beleg: https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text eingeordnet: Der Energie-Anstieg von +14,9 Prozent
+    (Oktober 2026) steht an zwei Stellen mit Destatis-Link (Pressemitteilung 382 und
+    Verbraucherpreisindex) und begruendet ausdruecklich, warum der Hebel groesser
+    ist.'
+  vorgaenger_geprueft_fassung: db4e9f96cbbb640aaddc961bb840e3a36ca3188abc497d59789044563e779f65
+  folgeentscheidung: true
+- slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_ursprung_slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_id: e48f9237cff6397c49a6
+  befund_fassung: 07a463b531e0c47a7c04e0e9b0d2e462b1dfebd5333e8fc771aa9d09d50573ed
+  geprueft_fassung: 380bb4b87de709438b464f1e8105c7b1ebc47404bcc12a8d1ca80d294db6713f
+  typ: praezision
+  beanstandung: Die in Aussicht gestellten Ersparnisse von bis zu 200 € werden nicht
+    ins Verhältnis zur aktuellen Inflationsrate von +2,8 % gesetzt, welche die reale
+    Kaufkraft des gesparten Geldes mindert.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text eingeordnet: Die Ersparnis von 50 bis 200 Euro ist
+    als Modellwert gekennzeichnet und wird ausdruecklich gegen die Inflationsrate
+    von 2,8 Prozent eingeordnet (''Damit du die Summe richtig einordnest'').'
+  vorgaenger_geprueft_fassung: db4e9f96cbbb640aaddc961bb840e3a36ca3188abc497d59789044563e779f65
+  folgeentscheidung: true
+- slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_ursprung_slug: 2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_id: f6de6b078d49f9d42e0e
+  befund_fassung: 07a463b531e0c47a7c04e0e9b0d2e462b1dfebd5333e8fc771aa9d09d50573ed
+  geprueft_fassung: 380bb4b87de709438b464f1e8105c7b1ebc47404bcc12a8d1ca80d294db6713f
+  typ: praezision
+  beanstandung: Beim Fokus auf Lebensmittelplanung fehlt der Hinweis auf die vergleichsweise
+    moderate Preissteigerung von +0,4 % bei Nahrungsmitteln, was diesen Hebel gegenüber
+    den stark steigenden Energiekosten relativiert.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text eingeordnet: Die moderate Teuerung der Nahrungsmittel
+    von +0,4 Prozent steht mit Destatis-Link im Einordnungs-Absatz; die Lebensmittelplanung
+    ist damit gegen Energie und Gesamtinflation abgewogen.'
+  vorgaenger_geprueft_fassung: db4e9f96cbbb640aaddc961bb840e3a36ca3188abc497d59789044563e779f65
+  folgeentscheidung: true
+- slug: 2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_ursprung_slug: 2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_id: 82cc87314e0d4fcb21e9
+  befund_fassung: b428abd37f3a9d17f09b12b480cdd42057d5cb7af27ae94d669734a01d0d414e
+  geprueft_fassung: d0708ff104827cc1c8466e1e534a27ce815d619fcbc0da9065221c6a7ce6db50
+  typ: luecke
+  beanstandung: Die kalkulierte Ersparnis bei Energiekosten (15 €/Monat) berücksichtigt
+    nicht den aktuellen Markttrend massiv steigender Preise (+14,9 % bei Energie).
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text eingeordnet: Die 15 Euro beim Stromtarifcheck sind
+    im Abschnitt ''Was hinter den 15 Euro steckt'' an den Energieindex Oktober 2026
+    (+14,9 Prozent) gebunden und mit Destatis-Link belegt.'
+  vorgaenger_geprueft_fassung: 16af0cf1acee1fa767689c22d83308ca22df9a33eada1641ce75706b1b13e2cb
+  folgeentscheidung: true
+- slug: 2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_ursprung_slug: 2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_id: bd5ee70c85ec7db78f26
+  befund_fassung: b428abd37f3a9d17f09b12b480cdd42057d5cb7af27ae94d669734a01d0d414e
+  geprueft_fassung: d0708ff104827cc1c8466e1e534a27ce815d619fcbc0da9065221c6a7ce6db50
+  typ: luecke
+  beanstandung: Die pauschalen Jahressparwerte von 300 € bis 1.000 € werden in Marktfakten-Positur
+    ohne Nennung einer Referenzquelle oder eines Absenders (z. B. Destatis) aufgeführt.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text eingeordnet: Die Jahres-Sparwerte sind als Modellwerte
+    gekennzeichnet und mit dem Preisstand-Hinweis (2,8 Prozent gesamt, 14,9 Prozent
+    Energie, 0,4 Prozent Nahrungsmittel) samt Destatis-Link eingeordnet.'
+  vorgaenger_geprueft_fassung: 16af0cf1acee1fa767689c22d83308ca22df9a33eada1641ce75706b1b13e2cb
+  folgeentscheidung: true
+- slug: 2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_ursprung_slug: 2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag
+  befund_id: f83f21c1f2e2012f672e
+  befund_fassung: b428abd37f3a9d17f09b12b480cdd42057d5cb7af27ae94d669734a01d0d414e
+  geprueft_fassung: d0708ff104827cc1c8466e1e534a27ce815d619fcbc0da9065221c6a7ce6db50
+  typ: praezision
+  beanstandung: Die Sparversprechen im Bereich Lebensmittel vernachlässigen die Inflationsrate
+    bei Nahrungsmitteln (+0,4 %), was Modellrechnungen ohne Inflationsbereinigung
+    ungenau macht.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text eingeordnet: Die Preisstand-Angabe nennt die Nahrungsmittel-Teuerung
+    von +0,4 Prozent ausdruecklich; damit ist die Modellrechnung eingeordnet statt
+    inflationsblind.'
+  vorgaenger_geprueft_fassung: 16af0cf1acee1fa767689c22d83308ca22df9a33eada1641ce75706b1b13e2cb
+  folgeentscheidung: true
+- slug: strom-sparen
+  befund_ursprung_slug: strom-sparen
+  befund_id: 0f248aaad2d2b8d87d0d
+  befund_fassung: 27ed2aeec0801dacd52877f9d71d8839ac1017ae7fb611fdb7111ab2d300c300
+  geprueft_fassung: 69e539eca453c63ab8ab1925aa41a8bd6092e0256022b9cad4c721acb969b7b5
+  typ: luecke
+  beanstandung: Die im Marktradar angegebenen Durchschnittspreise für Strom (37,3 ct/kWh)
+    und Gas (12,23 ct/kWh) werden ohne Quellenangabe genannt.
+  beleg: https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Das Marktradar traegt den Quellenstand
+    ''04.11.2026 - BDEW'' direkt in der Kopfzeile, und beide BDEW-Analysen (37,3 ct/kWh
+    Strom, 12,23 ct/kWh Gas) stehen mit Titel und URL in der Belegkette der Seite.'
+- slug: strom-sparen
+  befund_ursprung_slug: strom-sparen
+  befund_id: 3a69bd57886154a18b8e
+  befund_fassung: 27ed2aeec0801dacd52877f9d71d8839ac1017ae7fb611fdb7111ab2d300c300
+  geprueft_fassung: 69e539eca453c63ab8ab1925aa41a8bd6092e0256022b9cad4c721acb969b7b5
+  typ: luecke
+  beanstandung: Die Aussage, dass bei Preiserhöhungen ein gesetzliches 14‑tägiges
+    Sonderkündigungsrecht besteht, fehlt eine rechtliche Quellenangabe.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Die unbelegte Behauptung eines gesetzlichen
+    14-taegigen Sonderkündigungsrechts ist entfernt; der Schritt verweist jetzt auf
+    das Preisschreiben und die Vertragsunterlagen und behaelt die Handlung (Kuendigungsfenster
+    sichern).'
+  belegstelle: 'Kündigungsfenster sichern: Wird dein Preis einseitig erhöht, prüfe
+    dein Sonderkündigungsrecht – die Bedingungen stehen im Preisschreiben und in deinen
+    Vertragsunterlagen.'
+  art: geaendert
+- slug: strom-sparen
+  befund_ursprung_slug: strom-sparen
+  befund_id: 4f777954306ac7b21e03
+  befund_fassung: 27ed2aeec0801dacd52877f9d71d8839ac1017ae7fb611fdb7111ab2d300c300
+  geprueft_fassung: 69e539eca453c63ab8ab1925aa41a8bd6092e0256022b9cad4c721acb969b7b5
+  typ: luecke
+  beanstandung: Die Behauptung, dass ein Lieferantenwechsel und ein technischer Anschlusswechsel
+    nicht dasselbe seien, wird nicht durch eine Quelle belegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Zurueckgewiesen, weil gegenstandslos: Die Unterscheidung zwischen
+    Lieferantenwechsel und technischem Anschlusswechsel ist eine Begriffsabgrenzung,
+    keine Marktzahl; der Text ergaenzt die Handlungsanweisung, sich Termin und Ablauf
+    vom neuen Anbieter bestaetigen zu lassen.'
+  belegstelle: Ein Lieferantenwechsel und ein technischer Anschlusswechsel sind nicht
+    dasselbe.
+  art: gegenstandslos
+- slug: 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich
+  befund_ursprung_slug: 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich
+  befund_id: 20c08cb650ef6e24af64
+  befund_fassung: 0b1abb78b1bc9f39f55904c72b1e235ff7f68520ca3571f1b2456ffe77a06f0b
+  geprueft_fassung: 21d9b3c540202ff1367d35fcb481e12c3e3e311408dfa1adbae75f50aa800c6a
+  typ: luecke
+  beanstandung: Der Ratgeber vernachlässigt bei der Kalkulation der Sparfähigkeit
+    die massive Preissteigerung bei Energie (+14,9 %), die das Budget für monatliche
+    Sparraten erheblich belastet.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beanstandung inhaltlich behoben: Der Absatz zur Sparfaehigkeit nennt
+    jetzt die drei Destatis-Werte getrennt (2,8 Prozent gesamt, 14,9 Prozent Energie,
+    0,4 Prozent Nahrungsmittel) - zuvor war die Energie-Teuerung faelschlich mit 2,8
+    Prozent ausgewiesen.'
+  vorgaenger_geprueft_fassung: b6f1fa7c06609fad65d5d3b603178f323872e495e107d815245dba24279614ce
+  folgeentscheidung: true
+  belegstelle: 'Energie ist dabei ein wesentlicher Posten: Die Verbraucherpreise insgesamt
+    lagen laut Statistischem Bundesamt im Oktober 2026 vorläufig 2,8 % über dem Vorjahr,
+    Energie verteuerte sich um 14,9 % und Nahrungsmittel nur um 0,4 %.'
+  art: geaendert
+- slug: 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich
+  befund_ursprung_slug: 2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich
+  befund_id: 6aafb23c0c6dbb06ce3b
+  befund_fassung: 0b1abb78b1bc9f39f55904c72b1e235ff7f68520ca3571f1b2456ffe77a06f0b
+  geprueft_fassung: 21d9b3c540202ff1367d35fcb481e12c3e3e311408dfa1adbae75f50aa800c6a
+  typ: veraltet
+  beanstandung: Die im Rechenbeispiel zur Realrendite genutzte Inflationsrate von
+    2 % ist veraltet; die vorläufige Rate für Oktober 2026 beträgt laut Statistischem
+    Bundesamt 2,8 %.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Die Realrendite rechnet mit der vorlaeufigen
+    Inflationsrate Oktober 2026 von 2,8 Prozent (Destatis) statt mit 2 Prozent; das
+    Ergebnis (rund 4,2 Prozent real) ist als Modellwert gekennzeichnet.'
+  vorgaenger_geprueft_fassung: b6f1fa7c06609fad65d5d3b603178f323872e495e107d815245dba24279614ce
+  folgeentscheidung: true
+- slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
+  befund_ursprung_slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
+  befund_id: 6cb2229c5eb83b02da23
+  befund_fassung: 63dc456fea78500599e8bfc7e74fb116592ff435a305f9839c5b48691618ae65
+  geprueft_fassung: 89b3f9187f097b81599e7255c12ee7f1607f16ed42721707fa24e17f8f1ddf4a
+  typ: veraltet
+  beanstandung: Die Kalkulation der Fixkosten (Energie 140 €) und die Empfehlung zur
+    Senkung der Kosten ignorieren den aktuellen Markttrend massiv steigender Energiepreise
+    (+14,9 %), was die 50-Prozent-Quote für notwendige Ausgaben gefährdet.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text eingeordnet: Der Absatz zu diesem Hebel nennt 2,8
+    Prozent Inflation und 14,9 Prozent Energie mit Destatis-Link; der Preisstand-Hinweis
+    wiederholt alle drei Werte und ordnet die 50-Prozent-Quote ein.'
+  vorgaenger_geprueft_fassung: 9db4da9d92ba6c25f08848907d61e90a2f482e611a97d39e75e7800c198e15f4
+  folgeentscheidung: true
+  belegstelle: 'Warum dieser Hebel gerade 2026 zählt: Bei einer Inflationsrate von
+    +2,8 % (Oktober 2026) und +14,9 % bei Energie'
+  art: gegenstandslos
+- slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
+  befund_ursprung_slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
+  befund_id: f00055a1cb65ee22165f
+  befund_fassung: 63dc456fea78500599e8bfc7e74fb116592ff435a305f9839c5b48691618ae65
+  geprueft_fassung: 89b3f9187f097b81599e7255c12ee7f1607f16ed42721707fa24e17f8f1ddf4a
+  typ: luecke
+  beanstandung: Der Ratgeber verspricht eine 'planbare' Budgetierung, lässt aber die
+    aktuelle Inflationsrate von 2,8 % unerwähnt, die insbesondere den Block der notwendigen
+    Ausgaben (Nahrungsmittel +0,4 %) dynamisch belastet.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text eingeordnet: Der Preisstand-Hinweis nennt 2,8 Prozent
+    Inflation, 14,9 Prozent Energie und 0,4 Prozent Nahrungsmittel mit Destatis-Link
+    und leitet daraus die Handlungsanweisung fuer die 50-Prozent-Grenze ab.'
+  vorgaenger_geprueft_fassung: 9db4da9d92ba6c25f08848907d61e90a2f482e611a97d39e75e7800c198e15f4
+  folgeentscheidung: true
+  belegstelle: 'Hinweis zum Stand der Preise: Energie lag im Oktober 2026 um +14,9
+    % über dem Vorjahr, die Inflationsrate insgesamt bei +2,8 %, Nahrungsmittel bei
+    +0,4 %'
+  art: gegenstandslos
+- slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  befund_ursprung_slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  befund_id: 16b3b8584ff802803aa9
+  befund_fassung: 6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5
+  geprueft_fassung: c883b26a2d9225ed18827f78bee23d842fc11652151936284982307354b7981b
+  typ: luecke
+  beanstandung: Angaben zum Fremdwährungsentgelt von „fast zwei Prozent“ bei Zahlungen
+    in fremder Währung fehlen jede belegbare Referenz.
+  beleg: ''
+  art: geaendert
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung nach der Fazit-Praezisierung: Die Angabe ''fast
+    zwei Prozent'' ist gestrichen; der Absatz nennt jetzt den Mechanismus (Wert steht
+    im Preisverzeichnis) und verweist auf die Rechnung mit dem eigenen Beispielbetrag.
+    Beleg: Belegstelle im heutigen Text.'
+  belegstelle: Wie hoch es ist, steht im Preisverzeichnis deiner Karte
+  vorgaenger_geprueft_fassung: 3498ce4a52ceb50df5e90026d365c19082a6eb9154e62d67b6c6cfc150d1cbcd
+  folgeentscheidung: true
+- slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  befund_ursprung_slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  befund_id: 7ff042b6fe804cdf101b
+  befund_fassung: 6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5
+  geprueft_fassung: c883b26a2d9225ed18827f78bee23d842fc11652151936284982307354b7981b
+  typ: praezision
+  beanstandung: Formulierungen wie „einige Anbieter ohne Auslandsgebühr gehören zu
+    den besten Karten für Reisen“ sind pauschal und ohne messbare Daten unpräzise.
+  beleg: ''
+  art: gegenstandslos
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Am heutigen Text gegenstandslos: Der Superlativ ''gehoeren zu den
+    besten Karten'' ist nicht mehr enthalten; der Absatz beschreibt den Interbankenkurs
+    und empfiehlt einen genauen Blick statt einer Rangliste.'
+  belegstelle: Anbieter ohne Auslandsgebühr gibt es einige.
+  vorgaenger_geprueft_fassung: 3498ce4a52ceb50df5e90026d365c19082a6eb9154e62d67b6c6cfc150d1cbcd
+  folgeentscheidung: true
+- slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  befund_ursprung_slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  befund_id: bec83c4b814183fa1086
+  befund_fassung: 6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5
+  geprueft_fassung: c883b26a2d9225ed18827f78bee23d842fc11652151936284982307354b7981b
+  typ: luecke
+  beanstandung: Die Aussage, dass die kostenlose Sperr‑Notrufnummer 116 für alle Karten
+    in Deutschland gilt, wird nicht durch eine Quelle gestützt.
+  beleg: ''
+  art: geaendert
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Beleg nachgetragen statt Behauptung: Der Sperr-Notruf ist im Satz
+    auf sperr-notruf.de verlinkt; die Kostenaussage ist auf das deutsche Festnetz
+    begrenzt und damit pruefbar.'
+  belegstelle: sperrt Karten rund um die Uhr; aus dem deutschen Festnetz ist der Anruf
+    kostenlos.
+  vorgaenger_geprueft_fassung: 3498ce4a52ceb50df5e90026d365c19082a6eb9154e62d67b6c6cfc150d1cbcd
+  folgeentscheidung: true
+- slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  befund_ursprung_slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  befund_id: f9aff86b6eba71b153a6
+  befund_fassung: 6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5
+  geprueft_fassung: c883b26a2d9225ed18827f78bee23d842fc11652151936284982307354b7981b
+  typ: luecke
+  beanstandung: Die Angabe, dass Sollzinsen bei Teilzahlung zwischen 12 % und 20 %
+    liegen, ist nicht mit einer Quelle belegt.
+  beleg: ''
+  art: geaendert
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Zahl durch Mechanismus ersetzt: Die Spanne 12 bis 20 Prozent ist gestrichen;
+    der Text verweist auf das Preisverzeichnis der Bank und leitet daraus die Regel
+    ab, die Karte voll auszugleichen.'
+  belegstelle: Die Sollzinsen stehen im Preisverzeichnis und sind in der Regel hoch.
+  vorgaenger_geprueft_fassung: 3498ce4a52ceb50df5e90026d365c19082a6eb9154e62d67b6c6cfc150d1cbcd
+  folgeentscheidung: true
+- slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  befund_ursprung_slug: 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen
+  befund_id: fed9215b770ea4879eda
+  befund_fassung: 6381720758265094dbc5b74661ddb9f75411c77d031fd5faab22e6e670fcf4c5
+  geprueft_fassung: c883b26a2d9225ed18827f78bee23d842fc11652151936284982307354b7981b
+  typ: luecke
+  beanstandung: Die Behauptung, dass eine gute Kreditkarte im Jahr nichts kostet (keine
+    Jahres‑ und keine Fremdwährungsgebühr), wird ohne jegliche Quelle angegeben.
+  beleg: ''
+  art: geaendert
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Zusage entschaerft: Das Fazit sagt jetzt ''kann im Jahr nichts kosten''
+    statt ''kostet nichts'' - dieselbe Form wie in Kurzantwort und Fliesstext, gedeckt
+    durch Karten ohne Jahresgebuehr.'
+  belegstelle: Die richtige Kreditkarte kann im Jahr nichts kosten
+  vorgaenger_geprueft_fassung: 3498ce4a52ceb50df5e90026d365c19082a6eb9154e62d67b6c6cfc150d1cbcd
+  folgeentscheidung: true
+- slug: 2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 0b564f460c41218244bd
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: a4a818bae55b4be171685f4c6f32d637083813593426ff7c2ff9107cbf62e902
+  typ: luecke
+  beanstandung: Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten
+    Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.
+  beleg: ''
+  art: gegenstandslos
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung am geaenderten Text: Der Artikel behauptet kein
+    Tief in Januar/Februar mehr, sondern schliesst es in Kurzantwort, Hauptteil und
+    FAQ ausdruecklich aus (''existiert nicht'') und verweist auf Marktbeobachtung
+    statt Prognose.'
+  belegstelle: ein garantierter Tiefpunkt (z. B. im Januar oder Februar) existiert
+    nicht
+  vorgaenger_geprueft_fassung: 1fa6efb463dc9a7a6d8a3047fb79d33f716a855effa9a2e517436e8b54fce99d
+  folgeentscheidung: true
+- slug: 2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 3ad2eefed314eb172c26
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: a4a818bae55b4be171685f4c6f32d637083813593426ff7c2ff9107cbf62e902
+  typ: luecke
+  beanstandung: Die Aussage, dass durch frühzeitige Bestellung Kosten um 10 % bis
+    20 % im Herbst eingespart werden können, ist unbelegt.
+  beleg: ''
+  art: gegenstandslos
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung am geaenderten Text: Die 10-bis-20-Prozent-Ersparnis
+    ist ersatzlos gestrichen; der Absatz nennt den Mechanismus (Puffer, Marktbeobachtung)
+    und die fehlende Garantie.'
+  belegstelle: Wie viel eine frühe Bestellung spart, lässt sich nicht garantieren
+    – es hängt vom Preisverlauf ab.
+  vorgaenger_geprueft_fassung: 1fa6efb463dc9a7a6d8a3047fb79d33f716a855effa9a2e517436e8b54fce99d
+  folgeentscheidung: true
+- slug: 2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 43788c2cdcdfda52e753
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: a4a818bae55b4be171685f4c6f32d637083813593426ff7c2ff9107cbf62e902
+  typ: luecke
+  beanstandung: Die Modellrechnung verwendet einen Tiefpreis von 0,80 €/Liter, ohne
+    dass diese Preisangabe belegt wird.
+  beleg: ''
+  art: geaendert
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung am geaenderten Text: Der Literpreis 0,80 Euro steht
+    ausdruecklich als frei gewaehlte Rechenannahme ohne Marktwertanspruch; die Modellrechnung
+    ist damit als Beispiel gekennzeichnet, nicht als Marktbeleg.'
+  belegstelle: Das ist eine frei gewählte Rechenannahme, kein Marktwert.
+  vorgaenger_geprueft_fassung: 1fa6efb463dc9a7a6d8a3047fb79d33f716a855effa9a2e517436e8b54fce99d
+  folgeentscheidung: true
+- slug: 2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 5eedec8afbdef6a4ca49
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: a4a818bae55b4be171685f4c6f32d637083813593426ff7c2ff9107cbf62e902
+  typ: luecke
+  beanstandung: Es wird angegeben, dass typische Fehler beim Heizölkauf bis zu 15 %
+    Mehrkosten verursachen können, jedoch fehlt ein Nachweis für diese Zahl.
+  beleg: ''
+  art: geaendert
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung mit Korrektur: Die 15-Prozent-Mehrkostenangabe ist
+    jetzt wirklich entfernt (vorher stand sie noch als ''Beispielrechnung'' im Text);
+    der Satz nennt nur noch den Einzelfall. Die fruehere Begruendung war insoweit
+    unzutreffend - der Heilungsbeleg zeigt den heutigen Satz.'
+  belegstelle: Typische Fehler beim Kauf kosten dich Geld – wie viel, hängt vom Einzelfall
+    ab; einen pauschalen Prozentsatz gibt es nicht.
+  vorgaenger_geprueft_fassung: 1fa6efb463dc9a7a6d8a3047fb79d33f716a855effa9a2e517436e8b54fce99d
+  folgeentscheidung: true
+- slug: 2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 81881c5bc61824d25f5a
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: a4a818bae55b4be171685f4c6f32d637083813593426ff7c2ff9107cbf62e902
+  typ: praezision
+  beanstandung: Die Faustregel, dass man bestellen sollte, wenn Preise vier Wochen
+    unter dem Schnitt der letzten 12 Monate liegen, wird ohne Messgrundlage oder Quelle
+    genannt.
+  beleg: ''
+  art: gegenstandslos
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung)'
+  entschieden_am: '2026-11-10'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung am geaenderten Text: Die Vier-Wochen-Regel ist ausdruecklich
+    als Orientierung ohne Marktbeleg eingefuehrt, mit dem Hinweis, dass sie keine
+    Vorhersage ist und kein garantierter Tiefpunkt existiert.'
+  belegstelle: Als Orientierung ohne Marktbeleg
+  vorgaenger_geprueft_fassung: 1fa6efb463dc9a7a6d8a3047fb79d33f716a855effa9a2e517436e8b54fce99d
+  folgeentscheidung: true

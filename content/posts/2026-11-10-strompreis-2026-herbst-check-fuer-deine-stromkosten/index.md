@@ -82,10 +82,9 @@ Der Markt für Energie ist volatil.
 Er hängt von den Kosten für die Erzeugung und die Netzentgelte ab.  
 Auch politische Entscheidungen spielen eine große Rolle.
 
-Dennoch lassen sich Trends erkennen.  
-Die Netzentgelte steigen in vielen Regionen tendenziell an.  
-Das liegt am Ausbau der Stromnetze.  
-Diese Kosten geben die Versorger fast immer an dich weiter.
+Ein Trend lässt sich daraus nicht sicher ableiten.  
+Netzentgelte können regional steigen, weil der Ausbau der Stromnetze bezahlt werden muss.  
+Wie hoch dein Netzentgelt ist, veröffentlicht dein Netzbetreiber – dieser Wert zählt für deine Rechnung, nicht eine pauschale Prognose.
 
 Eine **Strompreis‑Prognose** dient dir lediglich als Orientierung.  
 Du ersetzt niemals deine eigene Kalkulation.  
@@ -94,13 +93,13 @@ Dein lokaler Preis zählt.
 
 In manchen Regionen sinken die Preise, während sie anderswo steigen.  
 Das hängt stark von deinem Wohnort und dem bisherigen Anbieter ab.  
-Wer in der Grundversorgung steckt, zahlt fast immer zu viel.  
+In der Grundversorgung gilt der Preis des örtlichen Grundversorgers. Vergleiche ihn mit Wettbewerbsangeboten – die Differenz ist genau der Betrag, um den es geht.  
 Beobachte die Beschaffungspreise an der Börse nur am Rande.
 
 Für dich als Privatperson sind die Endkundenpreise entscheidend.  
 Diese enthalten Steuern, Abgaben und Umlagen.  
 Diese machen oft mehr als 50 % (Modellrechnung) deines Strompreises aus.  
-Ein Vertrag mit Preisgarantie sichert dich gegen Schwankungen ab.
+Eine Preisgarantie begrenzt Preiserhöhungen für die vertraglich geschützten Bestandteile.
 
 ## Strompreis 2026: Wann lohnt sich das Abwarten?
 
@@ -219,13 +218,13 @@ Das kann sehr günstig sein, wenn du deinen Verbrauch steuern kannst.
 Hast du eine [Waschmaschine](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/) für den Nachtbetrieb oder ein Elektroauto?
 
 Dann könnten diese Tarife für dich interessant sein.  
-Allerdings setzen diese Tarife einen Smart Meter voraus.  
+Allerdings setzen diese Tarife einen Smart Meter voraus. Ob und wann dein Zähler getauscht wird, hängt vom Messstellenbetreiber ab – frage den Termin beim Anbieter ab, bevor du unterschreibst.  
 Das ist ein digitaler Stromzähler für Echtzeit‑Daten.  
 In meinem Fixkosten‑Cockpit betrachten wir dies als Option für Fortgeschrittene.
 
 Man muss sich aktiv mit seinem Verbrauch beschäftigen wollen.  
 Wer Sicherheit und einen festen Preis möchte, wählt klassische Tarife.  
-Die Preisgarantie schützt dich hier vor Spitzen an der Börse.  
+Die Preisgarantie deckelt hier die vertraglich geschützten Bestandteile.  
 So bleibt dein Budget planbar.
 
 ## Zusammenfassung der Strategie
@@ -263,14 +262,14 @@ Bei einer Insolvenz springt sofort der örtliche Grundversorger ein.
 Du hast dann Zeit, dir in Ruhe einen neuen Anbieter zu suchen.
 
 ### Wie lange dauert ein Wechsel im Durchschnitt?  
-Der Wechselprozess dauert meist zwischen 3 und 6 Wochen (Beispielrechnung).  
+Ein Wechsel dauert in der Praxis oft einige Wochen. Wie lange genau, hängt vom Netzbetreiber und vom Zählerstand ab; den Termin bestätigt dir der neue Anbieter schriftlich.  
 Das hängt von den Fristen deines alten Vertrags ab.  
 Die Umstellung am Zähler merkst du technisch nicht.  
 Es ändert sich lediglich der Empfänger deiner monatlichen Abschläge.
 
 ### Sind Ökostrom‑Tarife teurer als herkömmlicher Strom?  
 Das ist ein weit verbreiteter Irrtum.  
-Oft sind Ökostrom‑Tarife günstiger als die Grundversorgung.  
+Ökostrom muss nicht teurer sein: Vergleiche Arbeitspreis und Grundpreis, nicht das Label.  
 Viele Wettbewerber bieten ausschließlich Ökostrom an.  
 Ein Vergleich lohnt sich hier für die Umwelt und deinen Geldbeutel.
 

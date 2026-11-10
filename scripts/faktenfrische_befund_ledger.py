@@ -57,14 +57,48 @@ danach ab, liegen seine Befunde nur im Dossier. `--nachlese` liest die
 Dossiers und ergänzt ausschließlich, was im Ledger fehlt – idempotent, ohne
 eine Fassung zu erfinden und ohne je einen Befund zu schließen.
 
+HEILUNGSBELEG: DIE ZITIERTE STELLE (10.11.2026, #1072)
+-------------------------------------------------------
+Die Fassungsbindung beweist, WELCHER Text gelesen wurde – nicht, dass die
+Begründung stimmt. Am 10.11.2026 fiel genau diese Lücke auf: Zwei
+Textheilungen waren wegen eines fehlgeschlagenen Schreibvorgangs NICHT in
+der Datei gelandet, die zugehörigen Entscheidungen („… ist entfernt und
+durch … ersetzt“) wären trotzdem gültig gewesen – sie banden an den
+UNVERÄNDERTEN Text und schlossen den Befund. Die Akte hätte eine Heilung
+behauptet, die es nicht gab. Kein Hash kann das sehen: Er beschreibt den
+Text, nicht die Behauptung über ihn.
+
+Deshalb verlangt jede Entscheidung, die eine Änderung behauptet, den
+**Heilungsbeleg**: `--stelle "<wörtlicher Satz aus dem heutigen Artikel>"`.
+Der Satz wird vor dem Schreiben gegen die Aussageflächen des Artikels
+geprüft (Titel, Description, Kurzantwort, Body ohne Betriebsflächen) –
+tolerant gegen Schmalleerzeichen (U+202F/U+00A0), typografische
+Anführungszeichen, Markdown-Betonung und Zeilenumbrüche, aber inhaltlich
+exakt. Fehlt die Stelle, wird NICHTS geschrieben (fail-closed).
+
+  `art` = `geaendert`       → Belegstelle Pflicht (der neue Satz)
+  `art` = `gegenstandslos`  → Belegstelle Pflicht (der Satz, der die
+                              Beanstandung am heutigen Text widerlegt)
+  `art` = `verworfen`       → keine Stelle (die Aussage wird gestrichen
+                              oder war nie haltbar; Beleg = Begründung)
+  `art` = `unbestimmt`      → Altbestand vor dem 10.11.2026, keine Stelle
+
+`--pruefe-stellen` liest die Akte gegen den heutigen Bestand zurück: Eine
+dokumentierte Belegstelle, die es nicht mehr gibt, ist ein Fund (Exit 1) –
+die Heilung ist dann nicht mehr belegt und muss neu entschieden werden.
+Das ist die mechanische Selbstheilung: Sie prüft die Beweislage, sie
+entscheidet nichts fachlich.
+
 NUTZUNG
   python3 scripts/faktenfrische_befund_ledger.py                 # offene Befunde
   python3 scripts/faktenfrische_befund_ledger.py --fassung <datei>
   python3 scripts/faktenfrische_befund_ledger.py --text-hash <datei>
   python3 scripts/faktenfrische_befund_ledger.py --entscheiden <befund-id> \\
-      --von "Name" --begruendung "was geprüft/geändert wurde" [--beleg URL]
+      --von "Name" --art geaendert --stelle "wörtlicher Satz" \\
+      --begruendung "was geprüft/geändert wurde" [--beleg URL]
   python3 scripts/faktenfrische_befund_ledger.py --nachlese [--apply]
   python3 scripts/faktenfrische_befund_ledger.py --wache         # entscheidbar?
+  python3 scripts/faktenfrische_befund_ledger.py --pruefe-stellen
   python3 scripts/faktenfrische_befund_ledger.py --selftest
 
 EXIT: 0 ok · 1 nicht entscheidbarer/strukturfehlerhafter Befundstand
@@ -77,6 +111,7 @@ import hashlib
 import json
 import re
 import tempfile
+import unicodedata
 from pathlib import Path
 
 import yaml
@@ -958,6 +993,67 @@ def slug_aliases_aus_bestand() -> dict[str, str]:
     return bestand_identitaeten()[1]
 
 
+# ----------------------------------------------------------------------
+# Heilungsbeleg: die zitierte Stelle (10.11.2026, #1072)
+# ----------------------------------------------------------------------
+ARTEN = ("geaendert", "gegenstandslos", "verworfen", "unbestimmt")
+STELLE_MIN = 20
+
+
+def _vergleichsform(text: str) -> str:
+    """Vergleichsfassung eines Satzes – tolerant gegen Typografie, nicht Inhalt.
+
+    WARUM (10.11.2026): Der Anlass war ein Schreibvorgang, der wegen eines
+    unsichtbaren `\u202f` in „3 und 6 Wochen" abbrach. Genau diese Zeichen
+    dürfen eine Belegprüfung nicht rot machen: `2,8 %` mit Schmalleerzeichen
+    und `2,8 %` mit Normal-Leerzeichen sind DIESELBE Aussage. Entfernt wird
+    deshalb ausschließlich Darstellung (Leerraum-Varianten, typografische
+    Anführungszeichen, Gedankenstriche, Markdown-Betonung). Zahlen, Wörter
+    und Satzzeichen bleiben unangetastet – ein anderer Satz bleibt ein
+    anderer Satz.
+    """
+    s = unicodedata.normalize("NFKC", str(text or ""))
+    for zeichen in ("\u202f", "\u00a0", "\u2009", "\u2007", "\u2008",
+                    "\u200a", "\u200b", "\t", "\r", "\n"):
+        s = s.replace(zeichen, " ")
+    for alt, neu in (("\u201e", '"'), ("\u201c", '"'), ("\u201d", '"'),
+                     ("\u201a", '"'), ("\u00ab", '"'), ("\u00bb", '"'),
+                     ("\u2018", "'"), ("\u2019", "'"),
+                     ("\u2013", "-"), ("\u2014", "-"), ("\u2212", "-"),
+                     ("\u2011", "-"), ("\u2010", "-")):
+        s = s.replace(alt, neu)
+    s = re.sub(r"[*`~_]", "", s)          # Markdown-Betonung ist keine Aussage
+    s = re.sub(r"\s+", " ", s)
+    return s.strip().casefold()
+
+
+def aussagen_aus_bestand() -> dict[str, str]:
+    """slug → prüfbare Aussageflächen (Titel, Description, Kurzantwort, Body).
+
+    Die Betriebsflächen bleiben draußen (`aussage_body`): Ein Satz aus der
+    vom Werkzeug geschriebenen „Weiterlesen"-Zeile belegt keine
+    redaktionelle Heilung – dieselbe Grenze wie bei `text_hash`.
+    """
+    ergebnis: dict[str, str] = {}
+    for art in _alle_artikel_fuer_identitaet():
+        slug = art.get("slug")
+        if not slug:
+            continue
+        fm = _frontmatter(art)
+        teile = [str(fm.get("title") or ""),
+                 str(fm.get("description") or ""),
+                 str(fm.get("kurzantwort") or ""),
+                 aussage_body(art.get("body", ""))]
+        ergebnis[str(slug)] = _vergleichsform(" \n ".join(teile))
+    return ergebnis
+
+
+def stelle_im_text(stelle: str, aussage: str) -> bool:
+    """Steht der zitierte Satz in diesen Aussageflächen?"""
+    geprueft = _vergleichsform(stelle)
+    return bool(geprueft) and geprueft in _vergleichsform(aussage)
+
+
 # Betriebsflächen im ROLLEN-BLINDVERFAHREN: Jede Zeile, die als Betriebsfläche
 # erkannt wird, wird durch einen festen Platzhalter ersetzt (eine Zeile bleibt
 # eine Zeile). Damit bleibt die STRUKTUR der Entscheidungsgrundlage erhalten,
@@ -1636,17 +1732,25 @@ def bindung_auf_feine_projektion(*, decisions_path: Path = ENTSCHEIDUNGEN,
 
 def entscheidung_anfuegen(befund_id_: str, von: str, begruendung: str,
                           beleg: str = "", *,
+                          art: str = "unbestimmt", stelle: str = "",
                           queue_path: Path = QUEUE,
                           decisions_path: Path = ENTSCHEIDUNGEN,
                           fassungen: dict | None = None,
                           heute: dt.date | None = None,
-                          aliases: dict[str, str] | None = None) -> dict:
+                          aliases: dict[str, str] | None = None,
+                          aussagen: dict[str, str] | None = None) -> dict:
     """Eine menschliche Entscheidung dokumentieren, fassungsgebunden.
 
     Es gibt hier keinen Automatik-Pfad: Ohne Namen und Begründung schreibt
     diese Funktion nichts. Sie prüft die Zuordnung, bindet an den heutigen
     Text und macht den Befund damit schließbar – auch wenn der Text seit dem
     Befund korrigiert wurde (genau das ist der Normalfall einer Heilung).
+
+    `art` und `stelle` (10.11.2026): Eine Entscheidung, die eine Änderung
+    behauptet, MUSS den Satz zitieren, der die Änderung trägt. Er wird vor
+    dem Schreiben gegen die heutigen Aussageflächen geprüft. Ohne diese
+    Prüfung konnte eine Entscheidung eine Heilung behaupten, die nie in der
+    Datei ankam – der Befund war zu, die Akte falsch.
     """
     von = (von or "").strip()
     begruendung = (begruendung or "").strip()
@@ -1655,6 +1759,16 @@ def entscheidung_anfuegen(befund_id_: str, von: str, begruendung: str,
     if len(begruendung) < BEGRUENDUNG_MIN:
         raise LedgerFehler(f"`--begruendung` braucht mindestens {BEGRUENDUNG_MIN} "
                            "Zeichen (was wurde geprüft, geändert oder verworfen?)")
+    art = (art or "unbestimmt").strip().lower()
+    if art not in ARTEN:
+        raise LedgerFehler(f"Unbekannte Entscheidungsart `{art}` – erlaubt: "
+                           f"{', '.join(ARTEN)}")
+    stelle = " ".join((stelle or "").split())
+    if art in ("geaendert", "gegenstandslos") and len(_vergleichsform(stelle)) < STELLE_MIN:
+        raise LedgerFehler(
+            f"`--stelle` fehlt oder ist zu kurz (min. {STELLE_MIN} Zeichen): "
+            f"Für `--art {art}` muss der Satz zitiert werden, der die "
+            "Entscheidung trägt – sonst ist die Heilung nicht belegbar")
     heute = heute or dt.date.today()
     if fassungen is None:
         fassungen, geladene_aliases = bestand_identitaeten()
@@ -1674,6 +1788,20 @@ def entscheidung_anfuegen(befund_id_: str, von: str, begruendung: str,
     if stand["status"] == "seite-fehlt":
         raise LedgerFehler(f"{entry['slug']}: {stand['hinweis']}")
     aktuell = fassungen[entry["slug"]]["text"]
+    if stelle:
+        # Fail-closed VOR dem Schreiben: Der zitierte Satz muss im heutigen
+        # Artikel stehen. Das ist die einzige Prüfung, die eine behauptete
+        # Heilung von einer nur behaupteten unterscheiden kann (10.11.2026).
+        flaechen = aussagen if aussagen is not None else aussagen_aus_bestand()
+        aussage = flaechen.get(entry["slug"])
+        if aussage is None:
+            raise LedgerFehler(
+                f"{entry['slug']}: Aussageflächen nicht lesbar – die Belegstelle "
+                "ist damit nicht prüfbar (kein Schreiben auf Verdacht)")
+        if not stelle_im_text(stelle, aussage):
+            raise LedgerFehler(
+                f"{entry['slug']}: Die Belegstelle steht NICHT im heutigen Text "
+                f"– nichts geschrieben. Zitat: \"{stelle[:140]}\"")
     decisions = entscheidungen_laden(decisions_path)
     alt = decisions.get((entry["slug"], befund_id_))
     if alt:
@@ -1698,11 +1826,14 @@ def entscheidung_anfuegen(befund_id_: str, von: str, begruendung: str,
         "typ": entry.get("typ", ""),
         "beanstandung": entry.get("text", "")[:400],
         "beleg": beleg.strip(),
+        "art": art,
         "entschieden_von": von,
         "entschieden_am": heute.isoformat(),
         "fassung_wechsel": stand["status"] != "aktuell",
         "begruendung": begruendung,
     }
+    if stelle:
+        decision["belegstelle"] = stelle
     if vorgaenger:
         # Folgeentscheidung: Kette statt Überschreiben – die Vorgänger-
         # Entscheidung bleibt in der Datei stehen und ist hier referenziert.
@@ -1745,6 +1876,133 @@ def wache(*, queue_path: Path = QUEUE, decisions_path: Path = ENTSCHEIDUNGEN,
         "gruen": not nicht_entscheidbar and not ohne_begruendung,
         "funde": [f"{e['slug']} · {e['id']}: {e['nicht_entscheidbar_grund']}"
                   for e in nicht_entscheidbar],
+    }
+
+
+def belegstelle_nachtragen(befund_id_: str, stelle: str, *,
+                           slug: str = "", art: str = "",
+                           decisions_path: Path = ENTSCHEIDUNGEN,
+                           fassungen: dict | None = None,
+                           aussagen: dict[str, str] | None = None) -> dict:
+    """Einem BESTEHENDEN Beschluss seinen Beweissatz nachtragen (Nachbeleg).
+
+    WARUM (10.11.2026): Die 317 Entscheidungen der Vorrunden entstanden, als
+    die Belegstelle noch nicht verlangt wurde. Sie nachträglich zu einer
+    neuen Entscheidung zu machen, würde 317 Befunde neu aufwerfen, obwohl
+    sich am Text nichts geändert hat. Der Nachbeleg ist die kleinere,
+    ehrliche Operation: Der Satz wird gegen den HEUTIGEN Text geprüft und an
+    die vorhandene Entscheidung gehängt – nur wenn die Entscheidung diesen
+    Text überhaupt noch abdeckt. Es entsteht kein neuer Beschluss, keine
+    Fassung und kein Schließen; die Prüfung ist rein mechanisch.
+    """
+    stelle = " ".join((stelle or "").split())
+    if len(_vergleichsform(stelle)) < STELLE_MIN:
+        raise LedgerFehler(f"`--stelle` fehlt oder ist zu kurz (min. {STELLE_MIN} Zeichen)")
+    if art:
+        art = art.strip().lower()
+        if art not in ARTEN:
+            raise LedgerFehler(f"Unbekannte Entscheidungsart `{art}`")
+    if fassungen is None:
+        fassungen, _aliases = bestand_identitaeten()
+    fassungen = _normalisiere_fassungen(fassungen)
+    daten = _laden_streng(decisions_path)
+    eintraege = daten.get("entscheidungen") if isinstance(daten, dict) else None
+    if not isinstance(eintraege, list):
+        raise LedgerFehler("Entscheidungen müssen eine Liste sein")
+    # Dieselbe Beanstandung kann in mehreren Artikeln stehen – die Befund-ID
+    # ist textgebunden, nicht artikelgebunden (10.11.2026 nachgemessen: bis zu
+    # vier Beschlüsse je ID). Der Slug wählt den richtigen aus; ohne Slug
+    # bleibt nur der eindeutige Fall zulässig.
+    treffer = [(i, e) for i, e in enumerate(eintraege)
+               if isinstance(e, dict) and str(e.get("befund_id") or "") == befund_id_
+               and (not slug or str(e.get("slug")) == slug)]
+    if not treffer:
+        raise LedgerFehler(f"Keine Entscheidung mit der Befund-ID `{befund_id_}`"
+                           + (f" auf `{slug}`" if slug else ""))
+    if len(treffer) > 1:
+        if not slug:
+            raise LedgerFehler(f"Befund-ID `{befund_id_}` ist in der Akte nicht "
+                               f"eindeutig ({len(treffer)} Beschlüsse) – mit "
+                               "`--fuer <slug>` wählen")
+        # Anfügeprotokoll: Innerhalb eines Artikels gilt der ZULETZT
+        # geschriebene Beschluss (dieselbe Regel wie `entscheidungen_laden`).
+        treffer = [treffer[-1]]
+    index, eintrag = treffer[0]
+    slug = str(eintrag.get("slug") or "")
+    aktuell = fassungen.get(slug)
+    if not aktuell:
+        raise LedgerFehler(f"{slug}: Seite nicht im Bestand – Nachbeleg unmöglich")
+    # Der Nachbeleg gilt nur für den Text, über den entschieden wurde.
+    moeglich = {aktuell.get(k) for k in ("text", "pruef", "text_alt",
+                                         "text_alt_nackt", "text_alt_ein",
+                                         "text_v1", "text_v1_rand")}
+    if str(eintrag.get("geprueft_fassung") or "") not in moeglich:
+        raise LedgerFehler(f"{slug}: Der Text hat sich seit der Entscheidung "
+                           "geändert – Nachbeleg wäre eine Beweisfälschung. "
+                           "Bitte neu entscheiden (--entscheiden)")
+    if eintrag.get("belegstelle"):
+        raise LedgerFehler(f"{slug}: Diese Entscheidung trägt bereits eine "
+                           "Belegstelle – nichts zu tun")
+    flaechen = aussagen if aussagen is not None else aussagen_aus_bestand()
+    aussage = flaechen.get(slug)
+    if aussage is None:
+        raise LedgerFehler(f"{slug}: Aussageflächen nicht lesbar – nicht prüfbar")
+    if not stelle_im_text(stelle, aussage):
+        raise LedgerFehler(f"{slug}: Die Belegstelle steht NICHT im heutigen Text "
+                           f"– nichts geschrieben. Zitat: \"{stelle[:140]}\"")
+    eintraege[index] = dict(eintrag, belegstelle=stelle)
+    if art:
+        eintraege[index]["art"] = art
+    _yaml_schreiben(decisions_path, {"entscheidungen": eintraege})
+    return {"slug": slug, "befund_id": befund_id_, "belegstelle": stelle}
+
+
+def stellen_pruefen(*, decisions_path: Path = ENTSCHEIDUNGEN,
+                    aussagen: dict[str, str] | None = None) -> dict:
+    """Rückprobe: Stehen die dokumentierten Heilungsbelege noch im Text?
+
+    Die Fassungsbindung hält einen Befund geschlossen, solange der Text
+    derselbe ist. Sie sagt aber nichts darüber, ob der Satz, auf den sich
+    die Entscheidung beruft, noch existiert – nach einer späteren
+    redaktionellen Änderung kann die Entscheidung formal weiterbinden und
+    inhaltlich gegenstandslos geworden sein. Diese Rückprobe macht das
+    sichtbar: mechanisch, ohne Urteil, Exit 1 bei einem Fund.
+
+    Altbestand vor dem 10.11.2026 trägt keine Belegstelle; er wird als
+    `ohne_stelle` gezählt, nicht als Fund (eine Regeländerung darf keine
+    Redaktionsarbeit löschen).
+    """
+    if aussagen is None:
+        aussagen = aussagen_aus_bestand()
+    decisions = entscheidungen_laden(decisions_path)
+    geprueft = 0
+    ohne_stelle = 0
+    seite_fehlt = 0
+    funde: list[dict] = []
+    arten: dict[str, int] = {}
+    for (slug, befund), entry in sorted(decisions.items()):
+        art = str(entry.get("art") or "unbestimmt")
+        arten[art] = arten.get(art, 0) + 1
+        stelle = str(entry.get("belegstelle") or "").strip()
+        if not stelle:
+            ohne_stelle += 1
+            continue
+        aussage = aussagen.get(slug)
+        if aussage is None:
+            seite_fehlt += 1
+            continue
+        geprueft += 1
+        if not stelle_im_text(stelle, aussage):
+            funde.append({"slug": slug, "befund_id": befund, "art": art,
+                          "belegstelle": stelle,
+                          "entschieden_am": entry.get("entschieden_am", "")})
+    return {
+        "ok": not funde,
+        "geprueft": geprueft,
+        "ohne_stelle": ohne_stelle,
+        "seite_fehlt": seite_fehlt,
+        "arten": dict(sorted(arten.items())),
+        "funde": funde,
     }
 
 
@@ -1857,6 +2115,93 @@ def selftest() -> int:
         assert any("ohne_hash.json" in h for h in ergebnis["hinweise"]), ergebnis
         assert len(zusammenfuehren(_json_object(leer), [])) == 1
         assert nachlese_anwenden(dossier_dir, leer)["fehlend"] == []
+
+    # (i) Heilungsbeleg (10.11.2026, #1072): Eine Entscheidung, die eine
+    # Änderung BEHAUPTET, muss den Satz zitieren, der sie trägt. Ohne diese
+    # Prüfung schloss eine Entscheidung den Befund, obwohl der Schreibvorgang
+    # abgebrochen war – die Akte behauptete eine Heilung, die es nicht gab.
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        queue_path = tmp / "queue.json"
+        decisions = tmp / "decisions.yaml"
+        fassung_a = body_hash("Text A")
+        eintrag = {"id": befund_id("seite", finding), "slug": "seite",
+                   "fassung_sha256": fassung_a, "text_sha256": fassung_a,
+                   **finding, "beleg": "", "zuletzt_gesehen": "2026-11-09 08:00 UTC"}
+        queue_path.write_text(json.dumps({"fachbefunde": [eintrag]}), encoding="utf-8")
+        fassungen = {"seite": {"text": fassung_a, "pruef": fassung_a}}
+        body = ("Die Energiepreise lagen im Oktober 2026 um 2,8\u202f% über dem "
+                "Vorjahr.\n\n**Weiterlesen:** [Strompreis prüfen](/posts/strompreis/)")
+        aussagen = {"seite": _vergleichsform(
+            " \n ".join(["Titel", "Beschreibung", "", aussage_body(body)]))}
+
+        # (i1) `geaendert` ohne Stelle ist keine belegte Entscheidung.
+        try:
+            entscheidung_anfuegen(eintrag["id"], "Redaktion", "Text geändert " * 4,
+                                  art="geaendert", queue_path=queue_path,
+                                  decisions_path=decisions, fassungen=fassungen,
+                                  aussagen=aussagen, heute=dt.date(2026, 11, 10))
+        except LedgerFehler:
+            pass
+        else:
+            raise AssertionError("Behauptete Änderung ohne Belegstelle akzeptiert")
+        assert not decisions.exists(), "Akte trotz fehlender Stelle geschrieben"
+
+        # (i2) Eine Stelle aus einer Betriebsfläche belegt keine Redaktion.
+        try:
+            entscheidung_anfuegen(eintrag["id"], "Redaktion", "Satz neu formuliert " * 3,
+                                  art="geaendert",
+                                  stelle="Weiterlesen: Strompreis prüfen",
+                                  queue_path=queue_path, decisions_path=decisions,
+                                  fassungen=fassungen, aussagen=aussagen,
+                                  heute=dt.date(2026, 11, 10))
+        except LedgerFehler:
+            pass
+        else:
+            raise AssertionError("Betriebsflächen-Satz als Beleg akzeptiert")
+
+        # (i3) Dieselbe Aussage in anderer Typografie ist derselbe Satz.
+        zitat = ("Die Energiepreise lagen im Oktober 2026 um 2,8 %\n  über dem Vorjahr.")
+        entscheidung_anfuegen(eintrag["id"], "Redaktion",
+                              "Zahl am heutigen Text geprüft und eingeordnet " * 2,
+                              art="geaendert", stelle=zitat,
+                              queue_path=queue_path, decisions_path=decisions,
+                              fassungen=fassungen, aussagen=aussagen,
+                              heute=dt.date(2026, 11, 10))
+        assert offene_befunde(queue_path, decisions, fassungen) == []
+        roh = decisions.read_text(encoding="utf-8")
+        assert "art: geaendert" in roh and "belegstelle:" in roh, roh[-600:]
+
+        # (i4) Die Rückprobe findet die Stelle – und meldet ihren Verlust.
+        assert stellen_pruefen(decisions_path=decisions, aussagen=aussagen)["ok"]
+        verloren = {"seite": _vergleichsform("Ein ganz anderer Text ohne den Satz.")}
+        stand = stellen_pruefen(decisions_path=decisions, aussagen=verloren)
+        assert not stand["ok"] and len(stand["funde"]) == 1, stand
+        assert stand["funde"][0]["befund_id"] == eintrag["id"]
+
+        # (i5) Nachbeleg: an einen bestehenden Beschluss anhängen, nie erfinden.
+        zweiter = dict(eintrag, id=befund_id("seite", {"typ": "luecke",
+                                                       "text": "Andere Lücke"}))
+        queue_path.write_text(json.dumps({"fachbefunde": [eintrag, zweiter]}),
+                              encoding="utf-8")
+        entscheidung_anfuegen(zweiter["id"], "Redaktion",
+                              "Aussage verworfen, weil sie am Text nicht steht " * 2,
+                              art="verworfen", queue_path=queue_path,
+                              decisions_path=decisions, fassungen=fassungen,
+                              aussagen=aussagen, heute=dt.date(2026, 11, 10))
+        try:
+            belegstelle_nachtragen(zweiter["id"], "Satz, den es nicht gibt, aber lang",
+                                   decisions_path=decisions, fassungen=fassungen,
+                                   aussagen=verloren)
+        except LedgerFehler:
+            pass
+        else:
+            raise AssertionError("Nachbeleg ohne Textdeckung akzeptiert")
+        bericht = belegstelle_nachtragen(zweiter["id"], zitat,
+                                         decisions_path=decisions,
+                                         fassungen=fassungen, aussagen=aussagen)
+        assert bericht["befund_id"] == zweiter["id"]
+        assert stellen_pruefen(decisions_path=decisions, aussagen=aussagen)["geprueft"] == 2
 
     # WF-8F6F / #1073: Re-Dating ist keine Löschung und keine Entscheidung.
     with tempfile.TemporaryDirectory() as tmp:
@@ -2267,7 +2612,8 @@ def selftest() -> int:
           "nicht, Altbestand entscheidbar, Re-Dating-Aliasse (#1073), Nachlese, "
           "Betriebsflächen öffnen nicht (Weiterlesen/Abbildung/Transparenz/"
           "Werkzeug-Anhang, #1072), doppelte Schlüssel scheitern laut und "
-          "sind beweisbar heilbar (#1098), fail-closed.")
+          "sind beweisbar heilbar (#1098), Heilungsbeleg nur mit wörtlicher "
+          "Stelle im heutigen Text (10.11.2026), fail-closed.")
     return 0
 
 
@@ -2283,6 +2629,22 @@ if __name__ == "__main__":
     parser.add_argument("--begruendung",
                         help="was geprüft/geändert/verworfen wurde (Pflicht)")
     parser.add_argument("--beleg", default="", help="fakultativer Beleg (URL)")
+    parser.add_argument("--art", default="",
+                        help="geaendert | gegenstandslos | verworfen "
+                             "(Pflicht bei --entscheiden)")
+    parser.add_argument("--stelle", default="",
+                        help="wörtlicher Satz aus dem heutigen Artikel, der "
+                             "die Entscheidung trägt (Pflicht bei "
+                             "--art geaendert/gegenstandslos)")
+    parser.add_argument("--fuer", default="",
+                        help="Slug, wenn dieselbe Befund-ID in mehreren "
+                             "Artikeln steht (mit --beleghafte)")
+    parser.add_argument("--beleghafte", metavar="BEFUND_ID",
+                        help="bestehender Entscheidung ihren Beweissatz "
+                             "nachtragen (mit --stelle)")
+    parser.add_argument("--pruefe-stellen", action="store_true",
+                        help="Exit 1, wenn eine dokumentierte Belegstelle "
+                             "nicht mehr im Artikel steht")
     parser.add_argument("--nachlese", action="store_true",
                         help="Dossier-Befunde finden, die im Ledger fehlen")
     parser.add_argument("--apply", action="store_true",
@@ -2333,11 +2695,20 @@ if __name__ == "__main__":
         if args.entscheiden:
             if not args.von or not args.begruendung:
                 parser.error("--entscheiden braucht --von und --begruendung")
+            if not args.art:
+                parser.error("--entscheiden braucht --art "
+                             "(geaendert | gegenstandslos | verworfen) – "
+                             "eine Entscheidung muss sagen, was sie behauptet")
             decision = entscheidung_anfuegen(args.entscheiden, args.von,
-                                             args.begruendung, args.beleg)
+                                             args.begruendung, args.beleg,
+                                             art=args.art, stelle=args.stelle)
             print(f"✅ {decision['slug']} · {decision['befund_id']} entschieden "
                   f"von {decision['entschieden_von']} "
+                  f"[{decision.get('art', 'unbestimmt')}] "
                   f"({'Fassung hatte sich geändert' if decision['fassung_wechsel'] else 'Text unverändert'}).")
+            if decision.get("belegstelle"):
+                print(f"   Belegstelle im heutigen Text gefunden: "
+                      f"\"{decision['belegstelle'][:110]}\"")
             raise SystemExit(0)
         if args.struktur_pruefen:
             stand = struktur_pruefen()
@@ -2393,6 +2764,33 @@ if __name__ == "__main__":
                     for fund in stand["funde"]:
                         print(f"   - {fund}")
             raise SystemExit(0 if stand["gruen"] else 1)
+        if args.beleghafte:
+            bericht = belegstelle_nachtragen(args.beleghafte, args.stelle,
+                                             slug=args.fuer, art=args.art)
+            print(f"✅ Nachbeleg: {bericht['slug']} · {bericht['befund_id']} "
+                  f"zitiert heute \"{bericht['belegstelle'][:110]}\"")
+            raise SystemExit(0)
+        if args.pruefe_stellen:
+            stand = stellen_pruefen()
+            if args.json:
+                print(json.dumps(stand, ensure_ascii=False, indent=2))
+            elif stand["ok"]:
+                print(f"✅ Belegstellen halten: {stand['geprueft']} dokumentierte "
+                      f"Heilungen im heutigen Text nachgewiesen "
+                      f"({stand['ohne_stelle']} Altentscheidungen ohne Stelle, "
+                      f"{stand['seite_fehlt']} Seite(n) nicht im Bestand).")
+            else:
+                print(f"❌ {len(stand['funde'])} dokumentierte Belegstelle(n) "
+                      f"stehen nicht mehr im Artikel – die Heilung ist nicht "
+                      f"mehr belegt:")
+                for fund in stand["funde"]:
+                    print(f"   - {fund['slug']} · {fund['befund_id']} "
+                          f"({fund['art']}, entschieden {fund['entschieden_am']}): "
+                          f"\"{fund['belegstelle'][:120]}\"")
+                print("   Heilung: Befund neu entscheiden "
+                      "(faktenfrische_befund_ledger.py --entscheiden … "
+                      "--art geaendert --stelle \"…\").")
+            raise SystemExit(0 if stand["ok"] else 1)
         if args.json:
             print(json.dumps(befunde_mit_status(), ensure_ascii=False, indent=2))
         else:

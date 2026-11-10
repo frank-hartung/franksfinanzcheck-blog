@@ -27,6 +27,9 @@ quellen:
     url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/so-finden-sie-den-passenden-strom-oder-gastarif-6436"
     herausgeber: "Verbraucherzentrale"
     datum: "2026-07-29"
+  - titel: "Kündigung und Widerruf bei Energieverträgen"
+    url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Kuendigung/start.html"
+    herausgeber: "Bundesnetzagentur"
   - titel: "BDEW-Gaspreisanalyse August 2026"
     url: "https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/"
     herausgeber: "BDEW Bundesverband der Energie- und Wasserwirtschaft"
@@ -202,7 +205,7 @@ Die Verbraucherzentrale empfiehlt, Boni im ersten Vergleich zunächst auszublend
 
 ## Was tun bei einer angekündigten Preiserhöhung?
 
-Lies das Schreiben ganz durch. Laut Bundesnetzagentur muss eine Preisänderung klar angekündigt und begründet sein. Meist darfst du zum Zeitpunkt der Änderung Sonderkündigen.
+Lies das Schreiben ganz durch. Laut [Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Vportal/Energie/PreiseAbschlaege/start.html) muss eine Preisänderung klar angekündigt und begründet sein. Meist darfst du zum Zeitpunkt der Änderung [Sonderkündigen](https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Kuendigung/start.html).
 
 Kündige in diesem Fall selbst, und zwar rechtzeitig. Verlass dich nicht auf den neuen Anbieter, wenn die Frist knapp ist. Heb Schreiben und Kündigungsnachweis gut auf.
 

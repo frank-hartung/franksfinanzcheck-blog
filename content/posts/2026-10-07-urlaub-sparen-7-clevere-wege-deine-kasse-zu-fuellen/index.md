@@ -66,7 +66,7 @@ Beginne mit dem Betrag, den du für die Reise einsetzen kannst, ohne Miete oder 
 
 Teile das Budget in gut erkennbare Gruppen: Anfahrt, Unterkunft, Essen, Aktivitäten, Versicherung und freie Reserve. Du musst nicht jeden Betrag gleich genau kennen. Markiere, welche Preise bereits feststehen und welche nur Schätzungen sind. So siehst du, wo noch eine Information fehlt.
 
-Die Verbraucherzentrale empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im Blick zu behalten.
+Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/effektiv-sparen-auch-mit-kleinem-budget-87610) empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im Blick zu behalten.
 
 Ein Preisvergleich zeigt dir Angebote nebeneinander – ob Fahrzeuggröße, Kofferraum und Kindersitze zu deinem Urlaub passen, prüfst du an deiner eigenen Packliste. Die Verbraucherzentrale sammelt [Hinweise zu Reisebuchungen und Problemen mit Online-Buchungen](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen), wenn ein Angebot unklar wirkt. Ihre [Hinweise zum Sparen mit kleinem Budget](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/effektiv-sparen-auch-mit-kleinem-budget-87610) bieten einen guten Einstieg. Passe die Idee an deine Einnahmen und festen Kosten an.
 
@@ -94,7 +94,7 @@ Wenn du ohnehin ein Auto brauchst, ist eine Unterkunft mit guter Anbindung viell
 
 Eine Pauschalreise bündelt mehrere Leistungen in einer Buchung. Eine individuelle Reise lässt dich Unterkunft, Fahrt und weitere Teile selbst zusammenstellen. Keine Form ist immer günstiger. Vergleiche, was du wirklich bekommst und wer bei Änderungen dein Ansprechpartner ist.
 
-Wenn dir vor der Reise etwas dazwischenkommt, prüfe zuerst deinen Vertrag. Die Verbraucherzentrale beschreibt, dass sich eine Pauschalreise unter bestimmten Bedingungen auf eine andere Person übertragen lässt.
+Wenn dir vor der Reise etwas dazwischenkommt, prüfe zuerst deinen Vertrag. Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen/statt-stornierung-so-uebertragen-sie-pauschalreisen-auf-jemand-anderen-50515) beschreibt, dass sich eine Pauschalreise unter bestimmten Bedingungen auf eine andere Person übertragen lässt.
 
 Lies dazu die [Hinweise zur Übertragung einer Pauschalreise](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen/statt-stornierung-so-uebertragen-sie-pauschalreisen-auf-jemand-anderen-50515).
 

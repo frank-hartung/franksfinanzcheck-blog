@@ -19,7 +19,7 @@ kurzantwort: "Ein Haushaltsbuch funktioniert nur dann dauerhaft, wenn die Method
 social_posted: true
 keywords: ["Haushaltsbuch führen", "Haushaltsbuch App", "Excel Haushaltsbuch Vorlage", "Ausgaben tracken", "50 30 20 Regel", "Budgetplanung", "Fixkosten senken"]
 pin_title: "Haushaltsbuch führen: App, Excel oder Papier?"
-pin_description: "*Werbung | Haushaltsplanung, die im Alltag hält: App, Excel-Tabelle oder Stift im ehrlichen Vergleich. Mit der 50-30-20-Regel und einem einfachen Wochen-Ritual sparst du bis zu 430 Euro im Monat. Jetzt die Vorlage und Tipps lesen."
+pin_description: "*Werbung | Haushaltsplanung, die im Alltag hält: App, Excel-Tabelle oder Stift im ehrlichen Vergleich. Mit der 50-30-20-Regel und einem einfachen Wochen-Ritual behältst du den Überblick. Jetzt die Vorlage und Tipps lesen."
 pinwand: "Budget & Haushaltskasse: clever planen"
 quellen:
   - titel: "Gesetzliche Einlagensicherung in Deutschland"
@@ -56,9 +56,9 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Seit 2022 sind die Lebenshaltungskosten dauerhaft hoch. Lebensmittel, Energie und Mieten fressen oft mehr als die Hälfte des Nettoeinkommens. Wer seine Ausgaben nicht kennt, tappt in drei typische Fallen:
 
-* **Abo-Schlupflöcher:** Streaming-Dienste, Cloud-Speicher, Fitnessstudio, Zeitungs-Flatrates und Lieferdienste summieren sich oft auf 80 € bis 150 € pro Monat – ohne dass man einzeln bewusst darauf verzichtet als Modellwert.
+* **Abo-Schlupflöcher:** Streaming-Dienste, Cloud-Speicher, Fitnessstudio, Zeitungs-Flatrates und Lieferdienste können sich zu einem dreistelligen Monatsbetrag summieren – prüfe deine eigenen Buchungen statt mit einer Pauschale zu rechnen.
 * **Kleinvieh-Mist:** Ein Coffee-to-go für 3,50 €, der Snack am Bahnhof oder die spontane Bestellung machen im Monat schnell 120 € bis 200 € aus.
-* **Zu teure Verträge:** Handy, Internet, Kfz-Versicherung und Energieverträge laufen oft Jahre lang, ohne jemals verglichen zu werden. Ein regelmäßiger Vergleich [spart bei DSL bis zu 380 € über 24 Monate](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/).
+* **Zu teure Verträge:** Handy, Internet, Kfz-Versicherung und Energieverträge laufen oft Jahre lang, ohne jemals verglichen zu werden. Ein regelmäßiger Vergleich zahlt sich aus; wie viel, hängt von deinem Altvertrag ab. Rechne mit deiner eigenen Rechnung.
 
 Ein Haushaltsbuch wirkt wie eine Lupe. Es zeigt, wo Monat für Monat Geld versickert. Ziel ist nicht Verzicht. Ziel ist eine **bewusste Entscheidung** statt einer automatischen Ausgabe.
 

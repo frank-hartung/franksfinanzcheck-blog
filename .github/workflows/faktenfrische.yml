@@ -162,6 +162,12 @@ jobs:
             | tee -a "$GITHUB_STEP_SUMMARY"
           python3 scripts/faktenfrische_befund_ledger.py --struktur-pruefen \
             | tee -a "$GITHUB_STEP_SUMMARY"
+          # HEILUNGSBELEG (10.11.2026, #1072): Eine Entscheidung, die eine
+          # Änderung behauptet, muss den Satz zitieren, der sie trägt. Diese
+          # Rückprobe prüft, ob der zitierte Satz noch im Artikel steht. Sie
+          # entscheidet nichts fachlich – sie hält die Beweislage ehrlich.
+          python3 scripts/faktenfrische_befund_ledger.py --pruefe-stellen \
+            | tee -a "$GITHUB_STEP_SUMMARY"
           python3 scripts/faktenfrische_befund_ledger.py --nachlese --apply \
             | tee -a "$GITHUB_STEP_SUMMARY"
 

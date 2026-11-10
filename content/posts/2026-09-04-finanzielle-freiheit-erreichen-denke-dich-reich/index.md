@@ -58,9 +58,6 @@ Willst du echte **[finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-du
 
 💡 **Schnell-Tipp von FranksFinanzcheck:** Aktuelle Zinsen auf ein kostenloses Tagesgeldkonto gibt es bei der C24 Bank (CHECK24-Tochter): [**Tagesgeldkonto der C24 Bank eröffnen**](/go/tagesgeld/)
 
-![Merkkarte: Kernaussagen zu Finanzielle Freiheit erreichen: Denke dich reich – Geld](abbildung-merkkarte. svg)
-
-*Abbildung: Merkkarte zu „[Finanzielle Freiheit](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/) erreichen: Denke dich reich – Geld“ (eigene Darstellung aus diesem Beitrag).*
 
 ![Merkkarte: Kernaussagen zu Finanzielle Freiheit erreichen: Denke dich reich – Geld](abbildung-merkkarte.svg)
 
@@ -156,7 +153,7 @@ Das Ergebnis zeigt, wann sich dein Geld verdoppelt. Bei 6 % sind das rund 12 Ja
 
 ### Energiepreise in der Kalkulation nicht vergessen
 
-Die Sparfähigkeit eines Haushalts bemisst sich nicht am Gehalt allein, sondern an den Fixkosten, die übrig bleiben. Energie ist dabei ein wesentlicher Posten: Energieprodukte kosteten laut Statistischem Bundesamt (Verbraucherpreisindex) im Oktober 2026 vorläufig 2,8 % mehr als ein Jahr zuvor; Energie insgesamt verteuerte sich um +14,9 % gegenüber dem Vorjahresmonat. Wer die monatliche Sparrate kalkuliert, sollte aktuelle Energiepreise Einpreisen – sonst ist die geplante Rate zu hoch angesetzt und das Budget für den Vermögensaufbau schmilzt schneller als gedacht.
+Die Sparfähigkeit eines Haushalts bemisst sich nicht am Gehalt allein, sondern an den Fixkosten, die übrig bleiben. Energie ist dabei ein wesentlicher Posten: Die Verbraucherpreise insgesamt lagen laut Statistischem Bundesamt im Oktober 2026 vorläufig 2,8 % über dem Vorjahr, Energie verteuerte sich um 14,9 % und Nahrungsmittel nur um 0,4 %. Wer die monatliche Sparrate kalkuliert, sollte die aktuellen Energiepreise aus der eigenen Abrechnung einsetzen – sonst ist die geplante Rate zu hoch angesetzt und das Budget für den Vermögensaufbau schmilzt schneller als gedacht.
 
 [Quelle: Statistisches Bundesamt, Verbraucherpreisindex und Inflationsrate in Deutschland, https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html]
 
@@ -197,9 +194,6 @@ Lies Bücher und seriöse Quellen. Wer mehr weiß, bleibt ruhig. Kontinuität sc
 6. **Finanz‑App installieren** und Kategorien anpassen.
 7. **Monatliche Review** (15 Minuten): Soll‑Ist‑Vergleich, Anpassungen.
 
-![Gliederung des Beitrags: Finanzielle Freiheit erreichen: Denke dich reich – Geld](abbildung-ablauf. svg)
-
-*Abbildung: Gliederung zu „Finanzielle Freiheit erreichen: Denke dich reich – Geld“ – 5 Stationen von „Warum scheitern die meisten daran, finanzielle Freiheit erreichen zu wollen?“ bis „So gehst du vor: Deine ersten Schritte“ (eigene Darstellung).*
 
 ![Gliederung des Beitrags: Finanzielle Freiheit erreichen: Denke dich reich – Geld](abbildung-ablauf.svg)
 

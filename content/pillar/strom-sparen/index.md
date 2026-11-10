@@ -90,7 +90,7 @@ Statt planlosem Aktionismus folgt die Energie-Optimierung auf FranksFinanzcheck 
 
 1. **Kosten sehen:** Sammle deine letzte Jahresabrechnung für Strom und Gas. Notiere Jahresverbrauch (kWh), Grundpreis (€/Monat) und Arbeitspreis (ct/kWh).
 2. **Konditionen rechnen:** Prüfe mit den integrierten Rechnern, ob dein monatlicher Abschlag fair kalkuliert ist und wie viel ein Wechsel einspart.
-3. **Kündigungsfenster sichern:** Bei Preiserhöhungen hast du ein gesetzliches 14-tägiges Sonderkündigungsrecht. Ansonsten übernimmt der neue Anbieter die Kündigung automatisch.
+3. **Kündigungsfenster sichern:** Wird dein Preis einseitig erhöht, prüfe dein Sonderkündigungsrecht – die Bedingungen stehen im Preisschreiben und in deinen Vertragsunterlagen. Ansonsten übernimmt der neue Anbieter die Kündigung automatisch.
 4. **Kurs halten:** Einmal im Jahr im Spätsommer (August/September) prüfen, bevor die Heizperiode beginnt.
 
 ---

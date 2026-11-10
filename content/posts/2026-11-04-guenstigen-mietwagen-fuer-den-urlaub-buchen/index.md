@@ -84,7 +84,7 @@ Verhandle nach Möglichkeit eine Rückgabe mit vollem Tank, um Nachzahlungen zu 
 
 Dieses Beispiel zeigt, wie schnell Zusatzgebühren den Preis in die Höhe treiben können. Ein genauer Blick auf die Kilometerpauschale lohnt sich besonders bei langen Strecken. Wenn du die Pauschale durch ein unbegrenztes Kilometerpaket ersetzt, kann sich die Rechnung deutlich verbessern.
 
-## Timing und Buchungsstrategie Der ideale Buchungszeitpunkt liegt in der Regel mehrere Wochen vor dem gewünschten Anreisetag.
+## Timing und Buchungsstrategie Buche nicht erst in der letzten Woche: Wer mehrere Wochen vorher vergleicht, hat mehr Auswahl und kann Preissprünge in der Hochsaison aussitzen.
 Marktbeobachter beschreiben, dass die Preise in den letzten drei Buchungswochen häufig ansteigen können – das ist eine Einschätzung, keine garantierte Marktprognose.
 Setze dir einen Erinnerungszeitpunkt im Kalender, um rechtzeitig zu vergleichen.
 
