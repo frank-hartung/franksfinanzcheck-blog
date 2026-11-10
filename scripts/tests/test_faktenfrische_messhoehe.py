@@ -120,6 +120,11 @@ class QueueSchemaVertrag(unittest.TestCase):
         faelle["fällig im vorlauf"] = {**qd, "vorlauf": qd["vorlauf"] + [qd["offen"][0]]}
         faelle["befunddaten im vorrat"] = {
             **qd, "offen": [dict(e, id="c" * 20) for e in qd["offen"]]}
+        # Status von Hand verdreht: Die Zerlegung bleibt vollständig, aber der
+        # Eintrag behauptet Arbeit, obwohl seine Fakten Vorlauf sind.
+        faelle["status verdreht"] = {
+            **qd, "offen": qd["offen"] + [dict(qd["vorlauf"][0], status="faellig")],
+            "vorlauf": []}
         for name, kaputt in faelle.items():
             with self.subTest(sabotage=name):
                 self.assertTrue(faktenfrische.queue_invariante(kaputt),

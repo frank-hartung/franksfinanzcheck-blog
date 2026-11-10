@@ -1715,6 +1715,13 @@ def queue_invariante(daten: dict) -> list[str]:
             fehler.append(f"`vorlauf` führt eine abgebrochene Seite: {slug}")
 
     for slug, eintrag in {**offen, **vorlauf}.items():
+        # Der Status ist eine ABLEITUNG, keine Behauptung: Wer ihn von Hand
+        # setzt, kann `offen` und `vorlauf` gegeneinander verdrehen, ohne dass
+        # die Zerlegung auffällt. Diese Zeile schließt die letzte Lücke.
+        erwartet = queue_status_von(eintrag)
+        if eintrag.get("status") != erwartet:
+            fehler.append(f"Status {eintrag.get('status')!r} passt nicht zu den "
+                          f"Fakten ({erwartet!r}): {slug}")
         if "id" in eintrag or "text" in eintrag:
             fehler.append(f"Befunddaten im Arbeitsvorrat: {slug}")
         if "frist" not in eintrag:
