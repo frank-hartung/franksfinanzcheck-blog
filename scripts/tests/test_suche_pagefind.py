@@ -41,11 +41,21 @@ def ohne_js_kommentare(js: str) -> str:
 
 class PagefindVertrag(unittest.TestCase):
     def test_version_ist_exakt_gepinnt(self):
+        """Ein exakter Pin, keine Bandbreite – die VERSION prüft der Lockfile.
+
+        Die Zahl selbst stand hier bis 10.11.2026 als Literal (1.5.2) und
+        machte jeden belegten Dependabot-Bump (pagefind 1.5.2 → 1.6.0, #1140)
+        zu einem roten `regression`-Lauf, obwohl package.json und Lockfile
+        gemeinsam, exakt und konsistent gebumpt waren. Der Vertrag lautet
+        „exakt gepinnt und in beiden Dateien gleich“, nicht „für immer 1.5.2“.
+        """
         pkg = json.loads(lies("package.json"))
-        self.assertEqual(pkg["dependencies"]["pagefind"], "1.5.2",
+        version = pkg["dependencies"]["pagefind"]
+        self.assertRegex(version, r"^\d+\.\d+\.\d+$",
                          "exakt pinnen: kein ^ und kein ~ bei einem Such-Werkzeug im Deploy")
         lock = json.loads(lies("package-lock.json"))
-        self.assertEqual(lock["packages"][""]["dependencies"]["pagefind"], "1.5.2")
+        self.assertEqual(lock["packages"][""]["dependencies"]["pagefind"], version,
+                         "package.json und package-lock.json müssen denselben Pin tragen")
         self.assertIn("node_modules/pagefind", lock["packages"])
 
     def test_suchindex_skript_baut_public(self):
@@ -149,8 +159,10 @@ class PackageVertrag(unittest.TestCase):
 
     def test_pagefind_ist_einzige_produktionsabhaengigkeit_exakt(self):
         pkg = json.loads(lies("package.json"))
-        self.assertEqual(pkg["dependencies"], {"pagefind": "1.5.2"},
+        self.assertEqual(set(pkg["dependencies"]), {"pagefind"},
                          "Deploy installiert mit --omit=dev: pagefind muss in dependencies stehen")
+        self.assertRegex(pkg["dependencies"]["pagefind"], r"^\d+\.\d+\.\d+$",
+                         "Die einzige Produktionsabhängigkeit trägt einen exakten Pin")
         self.assertNotIn("pagefind", pkg.get("devDependencies", {}),
                          "pagefind darf nicht zusätzlich als Dev-Abhängigkeit stehen")
 
