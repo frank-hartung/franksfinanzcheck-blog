@@ -24,7 +24,18 @@ cover:
   image: "images/covers/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang.jpg"
   alt: "Waschmaschine beladen: Weniger Kosten bei jedem Waschgang"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Ein optimal beladener Trommel (ca. 80 % Kapazität) verbraucht im Modellbeispiel bis zu 15 % weniger Wasser und Energie pro Waschgang – das entspricht etwa 0,5 kWh und 5 Liter Wasser (Beispielwerte). Bei einem durchschnittlichen Haushalt mit 4 Waschgängen pro Woche sind das im Modelljahr rund 5 € an Strom‑ und Wasserkosten. Richtiges Beladen kann die Fixkosten senken, ohne die Waschergebnisse zu beeinträchtigen."
+kurzantwort: "Eine volle Trommel bei normaler Koch- und Buntwäsche spart Energie, Wasser und Geld. Das Umweltbundesamt empfiehlt sie ausdrücklich, mit einer Handbreit Luft über der Wäsche. In der Modellrechnung dieses Artikels (Annahmen im Abschnitt Modellrechnung) kosten 100 volle Ladungen im Jahr rund 61 Euro und 200 halbe Ladungen bei gleicher Wäschemenge rund 83 Euro. Der Unterschied liegt in diesem Modell bei 22 Euro pro Jahr. Das ist eine Rechnung, keine Messung in deinem Haushalt."
+quellen:
+  - id: "Q1"
+    titel: "Klimabewusstes Wäschewaschen entlastet die Umwelt und spart Kosten"
+    url: "https://www.umweltbundesamt.de/umwelttipps-fuer-den-alltag/haushalt-wohnen/waesche-waschen-waschmittel"
+    herausgeber: "Umweltbundesamt"
+    datum: "2024-12-02"
+  - id: "Q2"
+    titel: "Stromsparmythen – Zwischen Legende und Wirklichkeit"
+    url: "https://www.verbraucherzentrale-niedersachsen.de/wissen/energie/strom-sparen/stromsparmythen-zwischen-legende-und-wirklichkeit-120159"
+    herausgeber: "Verbraucherzentrale Niedersachsen"
+    datum: "2026-06-24"
 faktencheck: 2026-11-05
 ---
 
