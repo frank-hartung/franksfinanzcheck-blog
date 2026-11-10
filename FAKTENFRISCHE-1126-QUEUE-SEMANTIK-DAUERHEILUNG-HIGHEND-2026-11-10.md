@@ -135,7 +135,29 @@ weil die Prüfung abgeschaltet wurde. Die Sabotageproben in
 Eintrag in `offen`, eine aus `offen` entfernte Arbeit, eine fällige Seite im
 `vorlauf` und Befunddaten im Vorrat machen die Wache rot.
 
-## 5. Was ausdrücklich offen bleibt
+## 5. Zusätzliche Rots im selben Job (beim Beweis gefunden und geheilt)
+
+Der Befund nennt zwei Tests. Beim Nachfahren der vollen Suite wurden **weitere**
+Rots sichtbar, die nicht aus #1126 stammen, aber denselben Job blockieren. Sie
+sind mitgeheilt, jede mit derselben Regel: Vertrag erhalten, nicht Prüfung
+abschalten.
+
+| Rot | Ursache | Heilung |
+|---|---|---|
+| `test_suche_pagefind` (2), `test_manifest_guard` (1) | Dependabot-Bump pagefind 1.5.2 → 1.6.0 (#1140) war in `package.json` + Lockfile korrekt, aber drei Tests trugen die Version als Literal | Tests prüfen jetzt den VERTRAG: exakter Pin (kein `^`/`~`), gleiche Version in `package.json` und `package-lock.json`, pagefind als einzige Produktionsabhängigkeit. Der Vorfall-Nachbau im Manifest-Guard holt seine Version aus dem Bestand. |
+| `test_local_verification` (2) | `requirements-hugo.txt` war durch den Python-Gruppen-Bump (#1142) auf 0.169.0 mit zehn Hashes gesprungen, während Action und 30 Workflows weiter 0.168.0 fahren | `requirements-hugo.txt` wieder auf den einen, im Aktions-Fallback verifizierten 0.168.0-Wheel-Hash gesetzt – lokale Prüfung und CI bauen dieselbe Version. |
+| `test_gsc_abdeckung`, `test_gsc_artefakte`, `test_authority_engine`, `test_konsolidierung` (4) | `data/gsc/abdeckung/befund.json` war ein Spleiß aus zwei Läufen (fehlendes Komma, doppelte Fragmente); die Rohartefakte unter `data/gsc/` waren auf `main` bereits durch #1162 geheilt | Befund mit dem sanktionierten Erzeuger neu geschrieben (`gsc_abdeckung.py --audit --schreiben`). Das Ergebnis ist feldgleich mit dem letzten gültigen Git-Stand (11-10) – nichts erfunden, nur der Spleiß entfernt. |
+| `test_blustradius_register` (3), `test_bot_watchdog_meldetakt` (1), `test_pflichtcheck` (1) | PR #1162 (10.11. 18:54) stellte den Schritt „GSC-Leistungsdaten – Artefaktprüfung (fail-closed)“ in den deploy-Job, ohne ihn im Blustradius-Register zu erklären – der Vertrag C38 meldet das sofort und zu Recht | Schritt im Register als `inhalt` erklärt: Die GSC-Daten sind die Rechengrundlage der Konsolidierungsregel F; ein gemischter Export würde eine Inhaltsentscheidung auf falscher Grundlage treffen. Kein `werkzeug`, weil hier das versionierte Artefakt geprüft wird, nicht die Website-Messung. |
+| `test_offenlegung_gate` (1), `test_reserve_pipeline` (2) | #1170 (10.11. 19:01) fügte die harte Gate-Regel `kurzantwort_failures` hinzu, ohne Deckungszeile in `reserve_healer_coverage.py` – die Reserve hätte Nacht für Nacht an einer Regel geparkt, die kein Heiler kennt | Begründete AUSNAHME statt Heiler: Die Kurzantwort ist eine redaktionelle Aussage (M4); ein Generator würde sie erfinden (C15). Kandidat bleibt als Entwurf/Hold, die Redaktion ergänzt. |
+| `test_publication_reliability` (1) | Derselbe #1170-Block: Der R5-Fixture-Post trug keine `kurzantwort`; der Test maß dadurch die neue Frontmatter-Regel statt der R5-Heilung | Fixture-Frontmatter um eine echte Kurzantwort ergänzt – der Test misst wieder, was sein Name sagt. |
+
+Nicht durch Code heilbar und hier ehrlich benannt: Die Tests
+`test_ki_cover_*`/`test_veroeffentlichungs_wache` brauchen Pillow, der
+Feed-Test braucht einen echten Hugo-Build. Beides liefert die CI
+(`requirements-ci.txt`, Hugo-Schritt vor der Suite); lokal wurden sie mit
+installiertem Pillow und Hugo 0.168.0 zusätzlich nachgefahren.
+
+## 6. Was ausdrücklich offen bleibt
 
 * **Offene Fachbefunde außerhalb des Terminplans** stehen im Ledger und in
   `BEFUND-AKTE.md` (F4, Governance C46). Die Queue ist der Faktenfrische-Plan
@@ -147,7 +169,7 @@ Eintrag in `offen`, eine aus `offen` entfernte Arbeit, eine fällige Seite im
 * **Die Kadenz-/Deckungsfrage** aus #912/#1039 ist unberührt; Schema 2 ändert
   weder Budget noch Intervalle, nur die Benennung des Vorrats.
 
-## 6. Rückfall-Schutz (was einen Rückfall rot macht)
+## 7. Rückfall-Schutz (was einen Rückfall rot macht)
 
 | Wächter | Ort | Wirkung |
 |---|---|---|
@@ -163,7 +185,7 @@ Wer den Alias wieder einführt, `offen` wieder mit dem Vorlauf füllt oder die
 Invariante abschaltet, macht den `regression`-Job rot – und zwar mit Namen
 (`scripts/ci_tests.py` annotiert den roten Test seit #1137).
 
-## 7. Rollback
+## 8. Rollback
 
 Ein Rollback ist ein Daten-Rollback, kein Code-Rollback: Die Queue lässt sich
 aus dem letzten Commit wiederherstellen (`git checkout <sha> --
@@ -173,7 +195,7 @@ würde von `queue_invariante` und den Tests sofort rot gemeldet. Das ist
 gewollt: Ein Zustand, den niemand mehr erklären kann, darf nicht wieder
 entstehen.
 
-## 8. Geänderte Dateien
+## 9. Geänderte Dateien
 
 * `scripts/faktenfrische.py` – Schema 2, `queue_status_von`,
   `queue_invariante`, fail-closed-Schreiber, `--queue-normalisieren`,
@@ -188,4 +210,13 @@ entstehen.
   Sabotageproben, Migrationstest und AST-Rückfallwache.
 * `scripts/FAKTENFRISCHE.md`, `docs/ANLEITUNG-FAKTENFRISCHE.md` – Betrieb und
   Verfahren.
+* `scripts/tests/test_suche_pagefind.py`, `scripts/tests/test_manifest_guard.py`,
+  `requirements-hugo.txt`, `data/gsc/abdeckung/befund.json`/`.md` – die
+  zusätzlichen Rots aus Abschnitt 5.
+* `data/blustradius-deploy.yml` – der neue GSC-Artefaktschritt erklärt
+  (Klasse `inhalt`, Begründung im Register).
+* `scripts/reserve_healer_coverage.py` – begründete Ausnahme für
+  `kurzantwort_failures`.
+* `scripts/tests/test_publication_reliability.py` – R5-Fixture trägt die
+  seit #1170 geforderte Kurzantwort.
 * dieser Bericht.
