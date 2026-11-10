@@ -5,6 +5,9 @@
     "impressions": 58,
     "ctr": 0.0,
     "position": 46.1
+    "impressions": 61,
+    "ctr": 0.0,
+    "position": 45.61
   },
   {
     "suchbegriff": "250 mbit internet monatlich kündbar",
@@ -28,6 +31,13 @@
     "position": 67.0
   },
   {
+    "suchbegriff": "bank ohne gebühren",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 19.0
+  },
+  {
     "suchbegriff": "banken mit kostenfreiem girokonto",
     "clicks": 0,
     "impressions": 1,
@@ -44,9 +54,9 @@
   {
     "suchbegriff": "dsl inklusivvolumen",
     "clicks": 0,
-    "impressions": 1,
+    "impressions": 2,
     "ctr": 0.0,
-    "position": 31.0
+    "position": 47.5
   },
   {
     "suchbegriff": "dsl mobilfunk",
@@ -147,6 +157,13 @@
     "position": 43.33
   },
   {
+    "suchbegriff": "finanztest gebäudeversicherung",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 91.0
+  },
+  {
     "suchbegriff": "fixkosten senken",
     "clicks": 0,
     "impressions": 1,
@@ -156,9 +173,9 @@
   {
     "suchbegriff": "frank dsl",
     "clicks": 0,
-    "impressions": 13,
+    "impressions": 14,
     "ctr": 0.0,
-    "position": 7.31
+    "position": 7.07
   },
   {
     "suchbegriff": "haftpflichtversicherung rückwirkend",
@@ -173,6 +190,13 @@
     "impressions": 1,
     "ctr": 0.0,
     "position": 45.0
+  },
+  {
+    "suchbegriff": "ich habe heute abend endlich zeit und will den ökostromwechsel durchziehen. bei welchem anbieter geht das am schnellsten?",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 11.0
   },
   {
     "suchbegriff": "ich suche ein gerät, das mir hilft, die gesamtbetriebskosten jahr für jahr zu senken.",
@@ -236,6 +260,13 @@
     "impressions": 1,
     "ctr": 0.0,
     "position": 67.0
+  },
+  {
+    "suchbegriff": "konto ohne karte",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 33.0
   },
   {
     "suchbegriff": "konto umsonst",
@@ -322,6 +353,13 @@
     "position": 22.0
   },
   {
+    "suchbegriff": "meine gasrechnung ist dieses jahr wieder gestiegen. ich würde gerne zu einem nachhaltigen anbieter wechseln, der trotzdem bezahlbar ist. welche optionen habe ich?",
+    "clicks": 0,
+    "impressions": 2,
+    "ctr": 0.0,
+    "position": 8.5
+  },
+  {
     "suchbegriff": "mobile dsl-flatrate",
     "clicks": 0,
     "impressions": 3,
@@ -364,6 +402,13 @@
     "position": 95.67
   },
   {
+    "suchbegriff": "sparkasse kontomodelle vergleich",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 99.0
+  },
+  {
     "suchbegriff": "strategien zur kostenkontrolle",
     "clicks": 0,
     "impressions": 2,
@@ -399,6 +444,13 @@
     "position": 14.0
   },
   {
+    "suchbegriff": "welche monatlich kündbare internet tarife mit 250 mbit mit viel datenvolumen kannst du empfehlen?",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 20.0
+  },
+  {
     "suchbegriff": "wie kann ich die kosten für energieversorgung reduzieren?",
     "clicks": 0,
     "impressions": 1,
@@ -420,6 +472,13 @@
     "position": 11.0
   },
   {
+    "suchbegriff": "wir ziehen nächsten monat um und brauchen einen neuen stromanbieter. welche ökostromanbieter übernehmen die anmeldung komplett und haben einen einfachen wechselprozess?",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 10.0
+  },
+  {
     "suchbegriff": "wird haftpflicht bei schaden teurer",
     "clicks": 0,
     "impressions": 1,
@@ -432,5 +491,33 @@
     "impressions": 3,
     "ctr": 0.0,
     "position": 53.0
+  },
+  {
+    "suchbegriff": "zu ökostrom wechseln",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 27.0
+  },
+  {
+    "suchbegriff": "ökostrom wechsel",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 30.0
+  },
+  {
+    "suchbegriff": "ökostrom wechseln",
+    "clicks": 0,
+    "impressions": 3,
+    "ctr": 0.0,
+    "position": 8.33
+  },
+  {
+    "suchbegriff": "ökostromanbieter wechseln",
+    "clicks": 0,
+    "impressions": 2,
+    "ctr": 0.0,
+    "position": 19.5
   }
 ]

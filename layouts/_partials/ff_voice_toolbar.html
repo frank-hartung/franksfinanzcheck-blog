@@ -82,10 +82,11 @@
           seine Höhe dauerhaft, und diese Reserve darf nicht kippen
           (CLS-Kernwert, Vertrag in ff-voice.css Abschnitt 1).
         · `aria-hidden="true"`: Der sichtbare Text wird nicht doppelt
-          vorgelesen, weil derselbe Sachverhalt im barrierefreien Namen
-          (I18N `playAria`/`playAriaNeutral` in ff-voice.js) und in der
-          Beschreibung unten steht. WCAG 2.5.3 bleibt erfüllt: Der
-          sichtbare Knopftext „Vorlesen" steckt weiterhin im Namen.
+          vorgelesen. Der zugängliche Name beginnt mit dem sichtbaren
+          Knopftext „Vorlesen" (WCAG 2.5.3) und ergänzt die Herkunft der
+          Stimme; der vollständige Hinweis steht zusätzlich in der
+          Beschreibung unten. Auch Pause/Fortsetzen/Beenden müssen mit
+          ihrem jeweils sichtbaren Statuswort im Namen beginnen.
         · `aria-describedby` überlebt die Laufzeit: ff-voice.js schreibt
           die `aria-label` bei jedem Zustandswechsel neu (Zeile ~4261),
           die Beschreibung fasst es nicht an. Deshalb hängt der
@@ -95,7 +96,7 @@
           schöngeredet. `data-ff-ki-voice-label` ist der Prüfanker für
           scripts/ki_provenienz_gate.py (Regel M4, Modalität audio).
         ============================================================ */ -}}
-    <button type="button" class="ff-voice-btn ff-voice-btn--primary" id="ff-voice-play" aria-pressed="false" aria-label="{{ if eq $pageLang "en" }}Listen to article – machine-generated voice{{ else }}Artikel vorlesen – maschinell erzeugte Stimme{{ end }}" aria-describedby="ff-voice-ki-hinweis">
+    <button type="button" class="ff-voice-btn ff-voice-btn--primary" id="ff-voice-play" aria-pressed="false" aria-label="{{ if eq $pageLang "en" }}Listen – AI voice: machine-generated article voice{{ else }}Vorlesen – KI-Stimme: maschinell erzeugte Stimme{{ end }}" aria-describedby="ff-voice-ki-hinweis">
       <span class="ff-voice-btn__icon" aria-hidden="true">
         <svg class="ff-voice-ico ff-voice-ico--play" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.54.84l10.3-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14Z"/></svg>
         <svg class="ff-voice-ico ff-voice-ico--pause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><rect x="7" y="5" width="3.6" height="14" rx="1.2"/><rect x="13.4" y="5" width="3.6" height="14" rx="1.2"/></svg>
@@ -112,7 +113,7 @@
       <button type="button" class="ff-voice-btn ff-voice-btn--icon" id="ff-voice-next" aria-label="Nächster Abschnitt">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5l10 7L6 19V5Z"/><rect x="16.8" y="5" width="2.2" height="14" rx="1"/></svg>
       </button>
-      <button type="button" class="ff-voice-btn ff-voice-btn--icon" id="ff-voice-stop" aria-label="Vorlesen beenden">
+      <button type="button" class="ff-voice-btn ff-voice-btn--icon" id="ff-voice-stop" aria-label="Beenden – Vorlesen stoppen">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
       </button>
     </div>

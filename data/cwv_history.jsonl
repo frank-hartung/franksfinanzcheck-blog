@@ -20,3 +20,4 @@
 {"blocking_js": 0, "build_measured": true, "codes": [], "count_img": 2290, "findings": 0, "generated": "2026-10-29", "html_files": 400, "img_nosize": 0, "inline_js": 288, "verdict": "GREEN", "worst_cover_bytes": 130973}
 {"blocking_js": 0, "build_measured": true, "codes": [], "count_img": 2290, "findings": 0, "generated": "2026-10-29", "html_files": 400, "img_nosize": 0, "inline_js": 288, "verdict": "GREEN", "worst_cover_bytes": 130973}
 {"blocking_js": 0, "build_measured": true, "codes": [], "count_img": 2290, "findings": 0, "generated": "2026-10-30", "html_files": 401, "img_nosize": 0, "inline_js": 288, "verdict": "GREEN", "worst_cover_bytes": 130973}
+{"blocking_js": 0, "build_measured": true, "codes": [], "count_img": 2095, "findings": 0, "generated": "2026-11-09", "html_files": 412, "img_nosize": 0, "inline_js": 294, "verdict": "GREEN", "worst_cover_bytes": 130973}

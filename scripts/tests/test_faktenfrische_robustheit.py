@@ -143,7 +143,15 @@ class FaktenfrischeRobustheit(unittest.TestCase):
             self.assertEqual(ff.main(), 0)
             second = json.loads(Path(ff.QUEUE_PFAD).read_text(encoding="utf-8"))
             self.assertEqual(second["laeufe"][0]["befunde"], [])
-            self.assertEqual(second["fachbefunde"], first["fachbefunde"])
+            # `zuletzt_gesehen` is refreshed by design. Compare the identity and
+            # substance, not a minute-granularity wall-clock field that changes
+            # if the two calls happen to cross a minute boundary.
+            self.assertEqual(len(second["fachbefunde"]), len(first["fachbefunde"]))
+            for neu, alt in zip(second["fachbefunde"], first["fachbefunde"]):
+                self.assertEqual(
+                    {k: v for k, v in neu.items() if k != "zuletzt_gesehen"},
+                    {k: v for k, v in alt.items() if k != "zuletzt_gesehen"})
+                self.assertGreaterEqual(neu["zuletzt_gesehen"], alt["zuletzt_gesehen"])
             self.assertEqual(second["uebersicht"]["befunde"], 1)
             self.assertEqual(apply.call_args_list[0].args[1], [])
 

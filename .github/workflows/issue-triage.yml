@@ -26,6 +26,11 @@ on:
         required: false
         default: "✅ Erledigt bzw. obsolet – beim Triage-Durchgang automatisch geschlossen. Wird vom Wochen-Cleanup nach 14 Tagen archiviert (gesperrt, nicht gelöscht)."
 
+# Keep triage requests independent; do not discard an active run.
+concurrency:
+  group: "${{ github.workflow }}-${{ github.run_id }}"
+  cancel-in-progress: false
+
 permissions:
   issues: write
 

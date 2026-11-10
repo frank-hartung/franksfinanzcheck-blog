@@ -1,18 +1,17 @@
 ---
 title: "Reisekasse füllen: 7 Wege zu mehr Budget für den Urlaub"
 description: Möchtest du deine Reisekasse füllen? Hier erfährst du, wie du dein Urlaubsbudget durch clevere Fixkosten-Checks und Cashback tipps nachhaltig erhöhst.
-date: 2026-11-09T07:11:36Z
+date: 2026-11-09T13:57:18Z
 draft: true
-cadence_wait: true
-cadence_demoted: 2026-11-09T11:26:10Z
-cadence_grund: "faktenfrische aufgehoben: faktencheck: 2026-11-09 – Re-Queue für vollständigen Publish-Gate-Lauf"
+cadence_demoted: 2026-11-09T13:58:54Z
+cadence_grund: "faktenfrische: 11a92bff688ccbb5a485 (luecke): Die Behauptung, dass bis zum Sommer 500 € mehr im Urlaubsbudget verfügbar sind, fehlt eine Quellenangabe.; 1d4896d8ed60f5b6921f (pr…"
 tags: ["Mietwagen und Wohnmobil", "Reisekosten sparen"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"
 keywords: ["Reisekasse füllen", "Urlaubsbudget", "Geld für Urlaub sparen", "Cashback Tipps", "Reisekasse"]
 pinwand: Günstig reisen | Reisebudget & Mietwagen
-pin_title: "Mehr Geld für den Urlaub: So polsterst du deine Reisekasse auf"
+pin_title: "Reisekasse füllen: 7 Wege zu mehr Budget für den Urlaub"
 pin_description: "*Werbung | Der Traumurlaub scheitert am Budget? Mit diesen 7 Alltags-Tricks füllt sich deine Urlaubskasse fast von allein – vom Cashback-Konto über No-Spend-Tage bis zum cleveren Verkaufen. So sind bis zum Sommer 500 € mehr drin. Jetzt lesen! Mit Rechenbeispiel (120 €)."
 ai_generated: true
 ai_provider: "Content-Engine v2"

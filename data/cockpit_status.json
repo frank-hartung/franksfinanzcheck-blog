@@ -1,13 +1,13 @@
 {
-  "generated": "2026-11-08T23:38:00Z",
+  "generated": "2026-11-10T02:39:54Z",
   "overall": "rot",
   "buckets": {
     "Content-Pipeline": {
       "level": "gelb",
       "lines": [
-        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve ungeprüft: 🛑 Zertifikat ist veraltet (57.4 h > 36 h) – kein Nachweis für den aktuellen Pool. Ursache: reserve_readiness.py lief nicht (API-/Hugo-Fehler?) oder der Push ging verloren.",
-        "lesbarkeit: 2026-10-26-gastarife-vergleichen-vor-dem-herbst/index.md (Entwurf) – Flesch 51.5 < Publish-Schwelle 60",
-        "Artikel-Reserve ungeprüft: 🛑 Zertifikat ist veraltet (57.4 h > 36 h) – kein Nachweis für den aktuellen Pool. Ursache: reserve_readiness.py lief nicht (API-/Hugo-Fehler?) oder der Push ging verloren."
+        "1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig",
+        "lesbarkeit: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen/index.md (Entwurf) – Flesch 41.7 < Publish-Schwelle 60; 2026-11-02-last-minute-urlaubsangebote-sichern/index.md (E…",
+        "Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig"
       ],
       "sources": [
         "data/governance_status.json",
@@ -16,10 +16,9 @@
       ]
     },
     "SEO & Technik": {
-      "level": "gelb",
+      "level": "gruen",
       "lines": [
-        "1 Prüfpunkt(e) auffällig (cwv)",
-        "cwv: 10 <img>-Elemente ohne width/height/style (CLS-Risiko)",
+        "in Ordnung",
         "Search Console (2026-10-19): 117 von 437 bekannten URLs im Index (26.8 %), 320 nicht indexiert, 189 davon ohne Erklärung im Bestand"
       ],
       "sources": [
@@ -56,7 +55,7 @@
       "lines": [
         "1/10 Kanäle live (Mastodon)",
         "9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md",
-        "letzter erfolgreicher Post vor 0.0 Tag(en)"
+        "letzter erfolgreicher Post vor 0.1 Tag(en)"
       ],
       "sources": [
         "data/social/state.yaml",
@@ -69,7 +68,7 @@
       "level": "rot",
       "lines": [
         "noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)",
-        "5 Artikel in der Warteschlange, ältester 88 Tag(e) alt"
+        "5 Artikel in der Warteschlange, ältester 90 Tag(e) alt"
       ],
       "sources": [
         "data/newsletter_journal.jsonl",

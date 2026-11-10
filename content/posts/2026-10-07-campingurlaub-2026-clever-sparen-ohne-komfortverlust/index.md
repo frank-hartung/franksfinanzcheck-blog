@@ -60,8 +60,6 @@ Camping wirkt oft preiswert, solange du nur den Platz ansiehst. Zur Reise gehör
 
 ![Merkkarte: Kernaussagen zu Campingurlaub planen: Budget für Platz und Fahrt](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „Campingurlaub planen: Budget für Platz und Fahrt“ (eigene Darstellung aus diesem Beitrag).*
-
 ## Welche Kosten gehören in ein Campingbudget?
 
 

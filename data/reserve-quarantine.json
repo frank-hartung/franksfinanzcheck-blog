@@ -1,62 +1,92 @@
 {
-  "2026-11-09-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten": {
-    "datei_sha256": "daae0c61ad4a84ea1f96b3615817eed5e6c3bc7d4fddfa13b5811c632346cbce",
-    "first": "2026-11-09T12:16:05Z",
-    "grund": "Faktenfrische nicht bestanden: 14c3214fbb1ecaf8e091 (luecke): Die im Pin-Titel und der Beschreibung beworbene Ersparnis von 680 Euro wird ohne die im Haupttext vorhandene Kennzeichnung als Modellrechnung oder Bezug auf Marktdaten der Aufsic",
+  "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen": {
+    "datei_sha256": "d6b2d353485fa4667e0dcc9e1f0c4468739b7e888ce2faf6b26781958dbef93f",
+    "fassung_gewechselt": true,
+    "first": "2026-11-10T12:23:40Z",
+    "grund": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: ide",
     "hits": 1,
     "laeufe": [
-      "run:42612645699"
+      "run:42807629512"
     ],
-    "last": "2026-11-09T12:38:20Z",
-    "lauf": "run:42612645699",
-    "signatur": "faktenfrische nicht bestanden: <n>c<n>fbb<n>ecaf<n>e<n> (luecke): die im pin-titel und der beschreibung beworbene ersparnis von <n> euro wird ohne die im haupttext vorhandene kennzeichnung als modellr"
+    "last": "2026-11-10T12:23:40Z",
+    "lauf": "run:42807629512",
+    "signatur": "textverständnis-gate nicht bestanden: r<n>-phrasen-doppel: identische <n>-wort-sequenz im fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check<n> prüfen wichtiger…“ – doppelte passage, "
   },
-  "2026-11-09-geschirrspueler-voll-so-sparst-du-wasser-und-strom": {
-    "datei_sha256": "49ae14087105d424649d2310d68d090d189f5366a661ae76acbf1d3e1b52b6b1",
-    "first": "2026-11-09T12:38:20Z",
-    "grund": "Faktenfrische nicht bestanden: 9151ccc225057698b89d (luecke): Keine Quelle für die genannten Strom‑ und Wasserverbrauchswerte (0,9 kWh/10 l Eco‑Modus, 1,5 kWh/15 l Intensiv‑Modus) bereitgestellt.; ad0ce583b3e26bbb1918 (luecke): Keine Quelle",
+  "2026-11-10-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten": {
+    "datei_sha256": "5f0e2585f27b9a57676b905aee13c9374e06d9ff72d0a1dc6f8241f44bdddc9f",
+    "fassung_gewechselt": true,
+    "first": "2026-11-10T12:23:40Z",
+    "grund": "Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-Zwilling gegen den Bestand, #714): U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem (z. B. „du eine feste menge gas ",
     "hits": 1,
     "laeufe": [
-      "run:42612645699"
+      "run:42807629512"
     ],
-    "last": "2026-11-09T12:38:20Z",
-    "lauf": "run:42612645699",
-    "signatur": "faktenfrische nicht bestanden: <n>ccc<n>b<n>d (luecke): keine quelle für die genannten strom‑ und wasserverbrauchswerte (<n>,<n> kwh/<n> l eco‑modus, <n>,<n> kwh/<n> l intensiv‑modus) bereitgestellt.;"
+    "last": "2026-11-10T12:23:40Z",
+    "lauf": "run:42807629512",
+    "signatur": "einzigartigkeits-gate u<n>–u<n> nicht bestanden (gleiche passage/titel-zwilling gegen den bestand, #<n>): u<n>-phrasen: <n> gleiche <n>-wort-phrasen mit <slug> (z. b. „du eine feste menge gas"
   },
-  "2026-11-09-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": {
-    "datei_sha256": "b3867867c3ab7822fe419ca44a4a7bccb707944c8160ffb831c383b8b17be833",
-    "first": "2026-11-09T12:16:05Z",
+  "2026-11-10-geschirrspueler-voll-so-sparst-du-wasser-und-strom": {
+    "datei_sha256": "263c5b3d020cb7d8f965be8a8e139f1fd439bf0245076f7fc4ee3a9cd424780c",
+    "fassung_gewechselt": true,
+    "first": "2026-11-10T12:23:40Z",
+    "grund": "Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-Zwilling gegen den Bestand, #714): U1-PHRASEN: 5 gleiche 7-Wort-Phrasen mit 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang (z. B. „bares geld ein haeufi",
+    "hits": 1,
+    "laeufe": [
+      "run:42807629512"
+    ],
+    "last": "2026-11-10T12:23:40Z",
+    "lauf": "run:42807629512",
+    "signatur": "einzigartigkeits-gate u<n>–u<n> nicht bestanden (gleiche passage/titel-zwilling gegen den bestand, #<n>): u<n>-phrasen: <n> gleiche <n>-wort-phrasen mit <slug> (z. b. „bares geld ein haeufi"
+  },
+  "2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": {
+    "datei_sha256": "6de768e2e0e2d86a9ee448ea0319375027b1f8477d8b755e59f79b6d32cd0133",
+    "fassung_gewechselt": true,
+    "first": "2026-11-10T12:23:40Z",
     "grund": "Faktenfrische nicht bestanden: 0b564f460c41218244bd (luecke): Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.; 3ad2eefed314eb172c26 (luecke): Die Aussag",
     "hits": 1,
     "laeufe": [
-      "run:42612645699"
+      "run:42807629512"
     ],
-    "last": "2026-11-09T12:38:20Z",
-    "lauf": "run:42612645699",
+    "last": "2026-11-10T12:23:40Z",
+    "lauf": "run:42807629512",
     "signatur": "faktenfrische nicht bestanden: <n>b<n>f<n>c<n>bd (luecke): der artikel behauptet, dass heizöl‑preise ihr tief meist in den monaten januar und februar erreichen, ohne dafür eine quelle anzugeben.; <n>a"
   },
-  "2026-11-09-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee": {
-    "datei_sha256": "6e80a52a16daf92fb63685709ec374f3dfcfd3fe4bfb152f01ddcaf916faa029",
-    "first": "2026-11-09T12:38:20Z",
-    "grund": "Reserve-Qualitäts-Gate: RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Das macht vier Tassen am Tag oder 1.460 Becher im Jahr.",
+  "2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung": {
+    "datei_sha256": "74ee065a2dbebf2d0293fc5d36489dc410bc1766aa74ba867804756b381e7524",
+    "first": "2026-11-10T12:23:40Z",
+    "grund": "Faktenfrische nicht bestanden: 2922b4732eedad6ba0b4 (luecke): Der Ratgeber thematisiert den Wechsel von DSL-Tarifen und die Optimierung der Hardware, lässt aber den regulatorischen Rahmen der Bundesnetzagentur zu Breitbandversorgung und Unt",
     "hits": 1,
     "laeufe": [
-      "run:42612645699"
+      "run:42807629512"
     ],
-    "last": "2026-11-09T12:38:20Z",
-    "lauf": "run:42612645699",
-    "signatur": "reserve-qualitäts-gate: rs<n>: <n> zahlenbehauptung(en) ohne satzbeleg oder klare modellannahme: das macht vier tassen am tag oder <n>.<n> becher im jahr."
+    "last": "2026-11-10T12:23:40Z",
+    "lauf": "run:42807629512",
+    "signatur": "faktenfrische nicht bestanden: <n>b<n>eedad<n>ba<n>b<n> (luecke): der ratgeber thematisiert den wechsel von dsl-tarifen und die optimierung der hardware, lässt aber den regulatorischen rahmen der bund"
   },
-  "2026-11-09-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten": {
-    "datei_sha256": "305a28e85804eede673edb88dcdb492c6b531d9d5b8d8254a5f5ad44c9a615d4",
-    "first": "2026-11-09T12:38:20Z",
-    "grund": "Faktenfrische nicht bestanden: 7e542b30e43a78ce22e9 (luecke): Die Angabe zur Erweiterung der Pfandpflicht auf Säfte und Milcherzeugnisse seit Januar 2022 ist eine historische Marktdatenaussage ohne Beleg in den Fundstellen.; 9e659a6f4a12cc2",
+  "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten": {
+    "datei_sha256": "06f0c0efe69f02e4a11e0b1186a40ab3326f63fb8a7b6c2238f0c606103afa65",
+    "fassung_gewechselt": true,
+    "first": "2026-11-10T12:23:40Z",
+    "grund": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
     "hits": 1,
     "laeufe": [
-      "run:42612645699"
+      "run:42807629512"
     ],
-    "last": "2026-11-09T12:38:20Z",
-    "lauf": "run:42612645699",
-    "signatur": "faktenfrische nicht bestanden: <n>e<n>b<n>e<n>a<n>ce<n>e<n> (luecke): die angabe zur erweiterung der pfandpflicht auf säfte und milcherzeugnisse seit januar <n> ist eine historische marktdatenaussage "
+    "last": "2026-11-10T12:23:40Z",
+    "lauf": "run:42807629512",
+    "signatur": "faktenfrische nicht bestanden: <n>c<n>e<n>d<n>f<n>da<n>ec<n> (luecke): der hinweis, dass ein anbieterwechsel im durchschnitt <n>‑<n> wochen dauert, fehlt eine nachweisbare quelle.; <n>b<n>daf<n>f<n>a<"
+  },
+  "2026-11-10-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
+    "datei_sha256": "98d8ecb556108886476ba1ca3cc63e9144d40896afcdeaa19e6abc8565f930ec",
+    "fassung_gewechselt": true,
+    "first": "2026-11-10T12:23:40Z",
+    "grund": "Reserve-Qualitäts-Gate: Umfang: 742 Wörter / 5178 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
+    "hits": 1,
+    "laeufe": [
+      "run:42807629512"
+    ],
+    "last": "2026-11-10T12:23:40Z",
+    "lauf": "run:42807629512",
+    "signatur": "reserve-qualitäts-gate: umfang: <n> wörter / <n> zeichen; premium verlangt mindestens <n>.<n> wörter und <n><score> zeichen"
   }
 }

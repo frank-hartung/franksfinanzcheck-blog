@@ -1,5 +1,5 @@
-generated_at: '2026-11-09T12:06:51Z'
-day: '2026-11-09'
+generated_at: '2026-11-10T11:45:37Z'
+day: '2026-11-10'
 mode: deterministic
 teams:
   trending:
@@ -252,24 +252,33 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 10 Tipps für günstige Reiseversicherungen
-    pillar: versicherungen
-    signal: niche_hook
-    source: topics:10 Tipps für günstige Reiseversicherungen
-    score: 0.55
-    keywords:
-    - Reiseversicherung
-    - Versicherungsvergleich
-    - Günstige Versicherungen
-  - topic: 'Kartenzahlung mit PIN: So bleibt die Karte sicher'
+  - topic: 'Altersvorsorge: Die besten Wege für deine Rente'
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Kartenzahlung mit PIN: So bleibt die Karte sicher'
+    source: 'topics:Altersvorsorge: Die besten Wege für deine Rente'
+    score: 0.55
+    keywords: []
+  - topic: Die 50-30-20-Regel einfach erklärt
+    pillar: frugalismus
+    signal: niche_hook
+    source: topics:Die 50-30-20-Regel einfach erklärt
+    score: 0.55
+    keywords: []
+  - topic: 'ETF-Sparplan für Einsteiger: So startest du monatlich'
+    pillar: frugalismus
+    signal: niche_hook
+    source: 'topics:ETF-Sparplan für Einsteiger: So startest du monatlich'
+    score: 0.55
+    keywords: []
+  - topic: 'Kfz-Versicherung für Fahranfänger: So sparst du beim Einstieg'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Kfz-Versicherung für Fahranfänger: So sparst du beim Einstieg'
     score: 0.55
     keywords:
-    - Kartenzahlung PIN
-    - Karte sichern
-    - Kontaktlos zahlen
+    - Kfz Versicherung
+    - Fahranfänger
+    - Auto Versicherung
   - topic: 'Konto kündigen und wechseln: Schritt-für-Schritt-Anleitung'
     pillar: konto-karten
     signal: niche_hook
@@ -279,33 +288,15 @@ teams:
     - Konto wechseln
     - Kontowechsel Anleitung
     - Girokonto kündigen
-  - topic: 'Krankenzusatzversicherung: Welche Bausteine sich lohnen'
-    pillar: versicherungen
-    signal: niche_hook
-    source: 'topics:Krankenzusatzversicherung: Welche Bausteine sich lohnen'
-    score: 0.55
-    keywords:
-    - Krankenzusatz
-    - Versicherung
-    - Zahnzusatz
-  - topic: 'Mietwagen-Verträge: Was du vor dem Unterschreiben wissen musst'
+  - topic: Mietwagen-Kosten im Ausland minimieren
     pillar: mietwagen
     signal: niche_hook
-    source: 'topics:Mietwagen-Verträge: Was du vor dem Unterschreiben wissen musst'
+    source: topics:Mietwagen-Kosten im Ausland minimieren
     score: 0.55
     keywords:
     - Mietwagen
-    - Verträge
-    - Wissenswertes
-  - topic: Preiswerter DSL-Anschluss für Zuhause
-    pillar: internet-dsl
-    signal: niche_hook
-    source: topics:Preiswerter DSL-Anschluss für Zuhause
-    score: 0.55
-    keywords:
-    - DSL
-    - Anschluss
-    - Preiswert
+    - Ausland
+    - Kosten minimieren
 live_web:
   enabled: false
   findings: []

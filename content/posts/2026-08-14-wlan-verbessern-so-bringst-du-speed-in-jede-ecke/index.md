@@ -145,8 +145,6 @@ Mietest du den Router für 5 bis 8 € und hast trotzdem Funklöcher? Dann zahl
 
 ![Gliederung des Beitrags: WLAN verbessern: So bringst du stabilen Speed in jede Ecke](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „WLAN verbessern: So bringst du stabilen Speed in jede Ecke“ – 5 Stationen von „Die häufigsten WLAN-Bremsen im Haushalt“ bis „Typische WLAN-Fehler, die Speed fressen“ (eigene Darstellung).*
-
 ## Was Mesh, Repeater und Powerline 2026 konkret unterscheiden?
 
 Mesh-Systeme (WLAN 6/6E) nutzen eine gemeinsame SSID. Sie reichen dich an den stärksten Knoten weiter. Zoom bricht nicht ab. Repeater schaffen das oft nicht.

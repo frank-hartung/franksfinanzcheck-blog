@@ -9,6 +9,34 @@
 # ============================================================
 version: 1
 vorschlaege:
+- titel: 'Saugroboter Eufy C30 Edge im Test: Kleine Station, fairer Preis, große Leistung'
+  url: https://www.heise.de/bestenlisten/testbericht/saugroboter-eufy-c30-edge-im-test-kleine-station-fairer-preis-grosse-leistung/34bhq0b?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag
+  quelle: heise online (Internet/Telekommunikation)
+  erfasst: '2026-11-09T21:39:50'
+  brief: 2026-11-09-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-11-09-internet-recherche.json – Quellenprüfung erforderlich.
+- titel: 'Spritpreise: Sinkender Ölpreis sorgt für Erholung bei E10, Benzin und Diesel'
+  url: https://www.spiegel.de/wirtschaft/spritpreise-sinkender-oelpreis-sorgt-fuer-erholung-bei-e10-benzin-und-diesel-a-29f929ff-3e9a-4239-8c85-07942e5402ad#ref=rss
+  quelle: DER SPIEGEL – Wirtschaft
+  erfasst: '2026-11-09T21:39:50'
+  brief: 2026-11-09-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-11-09-internet-recherche.json – Quellenprüfung erforderlich.
+- titel: Mobilfunkunternehmen Vodafone plant Abbau von 2.300 Stellen
+  url: https://www.tagesschau.de/wirtschaft/unternehmen/vodafone-stellenabbau-102.html
+  quelle: Tagesschau – alle Meldungen
+  erfasst: '2026-11-09T21:39:50'
+  brief: 2026-11-09-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-11-09-internet-recherche.json – Quellenprüfung erforderlich.
+- titel: 'Zucker-, Plastik- und Stromsteuer: Die offenen Baustellen im Haushalt'
+  url: https://www.tagesschau.de/inland/innenpolitik/haushalt-steuerplaene-bundesregierung-100.html
+  quelle: Tagesschau – alle Meldungen
+  erfasst: '2026-11-09T21:39:50'
+  brief: 2026-11-09-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-11-09-internet-recherche.json – Quellenprüfung erforderlich.
 - titel: Viele Gebäude weiterhin ohne Elementarschadenversicherung
   url: https://www.tagesschau.de/wirtschaft/verbraucher/klimaschaeden-versicherungen-100.html
   quelle: Tagesschau Wirtschaft (RSS)
@@ -303,4 +331,4 @@ vorschlaege:
   brief: 2026-09-28-internet-recherche.json
   status: offen
   notiz: Automatisch erfasst aus 2026-09-28-internet-recherche.json – Quellenprüfung erforderlich.
-zuletzt_ergaenzt: '2026-11-08T19:28:44'
+zuletzt_ergaenzt: '2026-11-09T21:39:50'

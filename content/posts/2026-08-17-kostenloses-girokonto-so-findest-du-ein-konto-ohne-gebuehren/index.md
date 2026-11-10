@@ -58,8 +58,6 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ![Merkkarte: Kernaussagen zu Kostenloses Girokonto: Ein Konto ohne Gebühren finden](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „Kostenloses Girokonto: Ein Konto ohne Gebühren finden“ (eigene Darstellung aus diesem Beitrag).*
-
 ## Das Wichtigste in Kürze
 
 - Ein echtes kostenloses Konto zeichnet sich durch 0 € Kontoführung aus, oft gekoppelt an einen Mindestgeldeingang als Modellwert.

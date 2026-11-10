@@ -1,0 +1,229 @@
+{
+  "datum": "2026-11-09",
+  "erzeugt_utc": "2026-11-09 16:27 UTC",
+  "agent_reach": "Agent Reach v1.5.0",
+  "kanal_ok": 7,
+  "kanal_fehler": 1,
+  "ergebnisse": {
+    "rss": {
+      "Tagesschau – alle Meldungen": {
+        "treffer": [
+          {
+            "titel": "Frankreichs Linksradikale: \"Weniger polarisieren? Werde ich nicht tun\"",
+            "url": "https://www.tagesschau.de/ausland/europa/frankreich-melenchon-lfi-wahlkampf-100.html",
+            "datum": "2026-11-09T16:25",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Frankreich erhöht Mindestlohn um 1,6 Prozent",
+            "url": "https://www.tagesschau.de/ausland/europa/frankreich-erhoehung-mindestlohn-100.html",
+            "datum": "2026-11-09T16:25",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Zucker-, Plastik- und Stromsteuer: Die offenen Baustellen im Haushalt",
+            "url": "https://www.tagesschau.de/inland/innenpolitik/haushalt-steuerplaene-bundesregierung-100.html",
+            "datum": "2026-11-09T16:24",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Mobilfunkunternehmen Vodafone plant Abbau von 2.300 Stellen",
+            "url": "https://www.tagesschau.de/wirtschaft/unternehmen/vodafone-stellenabbau-102.html",
+            "datum": "2026-11-09T16:09",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Russell Brand zu mehr als zehn Jahren Haft verurteilt",
+            "url": "https://www.tagesschau.de/ausland/russell-brand-strafmass-100.html",
+            "datum": "2026-11-09T15:56",
+            "quelle": "Tagesschau – alle Meldungen"
+          }
+        ],
+        "fehler": null
+      },
+      "DER SPIEGEL – Wirtschaft": {
+        "treffer": [
+          {
+            "titel": "Nvidia-Aktien verlieren auch zum Handelsstart in New York deutlich",
+            "url": "https://www.spiegel.de/wirtschaft/unternehmen/nvidia-aktien-verlieren-auch-zum-handelsstart-in-new-york-deutlich-a-4c20ed90-2b37-48b9-8f13-6230f8a0459d#ref=rss",
+            "datum": "Mon, 9 Nov 2026 ",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Spritpreise: Sinkender Ölpreis sorgt für Erholung bei E10, Benzin und Diesel",
+            "url": "https://www.spiegel.de/wirtschaft/spritpreise-sinkender-oelpreis-sorgt-fuer-erholung-bei-e10-benzin-und-diesel-a-29f929ff-3e9a-4239-8c85-07942e5402ad#ref=rss",
+            "datum": "Mon, 9 Nov 2026 ",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Wirtschaft in Deutschland: Ökonom Moritz Schularick ruft zu mehr Veränderungsbereitschaft auf",
+            "url": "https://www.spiegel.de/wirtschaft/wirtschaft-in-deutschland-oekonom-moritz-schularick-ruft-zu-mehr-veraenderungsbereitschaft-auf-a-ce39f8bd-8d4d-4c05-86fa-067aae988e2f#ref=rss",
+            "datum": "Mon, 9 Nov 2026 ",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "USA: Demokraten prüfen Verteidigungsinvestitionen von Eric und Donald Trump Jr.",
+            "url": "https://www.spiegel.de/wirtschaft/usa-demokraten-pruefen-verteidigungsinvestitionen-von-eric-und-donald-trump-jr-a-0f732125-901a-4bf8-822e-dd2dd67fc459#ref=rss",
+            "datum": "Mon, 9 Nov 2026 ",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Jensen Huang: Die Affäre des Nvidia-Chefs – eine Geschichte der Honigfallen",
+            "url": "https://www.spiegel.de/wirtschaft/jensen-huang-die-affaere-des-nvidia-chefs-eine-geschichte-der-honigfallen-a-e96abebf-c82b-4e15-aa6d-f56af06d5c32#ref=rss",
+            "datum": "Mon, 9 Nov 2026 ",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          }
+        ],
+        "fehler": null
+      },
+      "heise online (Internet/Telekommunikation)": {
+        "treffer": [
+          {
+            "titel": "EU-Förderbank: Zehn Milliarden Euro für Europas Tech-Unternehmen",
+            "url": "https://www.heise.de/news/EU-Foerderbank-Zehn-Milliarden-Euro-fuer-Europas-Tech-Unternehmen-11517852.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-11-09T16:56",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Outlook.com: Die Mail ist echt – und sie kommt trotzdem nicht an",
+            "url": "https://www.heise.de/news/Outlook-com-Die-Mail-ist-echt-und-sie-kommt-trotzdem-nicht-an-11517776.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-11-09T16:46",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Bundeskartellamt startet Marktbefragung zu Googles Autodiensten",
+            "url": "https://www.heise.de/news/Bundeskartellamt-startet-Marktbefragung-zu-Googles-Autodiensten-11517806.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-11-09T16:41",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Neue Gallium- und Germanium-Materialien für Leistungshalbleiter reifen heran",
+            "url": "https://www.heise.de/news/Neue-Gallium-und-Germanium-Materialien-fuer-Leistungshalbleiter-reifen-heran-11517812.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-11-09T16:38",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Saugroboter Eufy C30 Edge im Test: Kleine Station, fairer Preis, große Leistung",
+            "url": "https://www.heise.de/bestenlisten/testbericht/saugroboter-eufy-c30-edge-im-test-kleine-station-fairer-preis-grosse-leistung/34bhq0b?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-11-09T16:00",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "youtube": {
+      "Strompreis senken Anbieter wechseln": {
+        "treffer": [
+          {
+            "titel": "Geld sparen mit Strom/Gas Anbieter Wechsel | Frugalismus Tipps",
+            "url": "https://www.youtube.com/watch?v=TmCaACcZgN8",
+            "kanal": "BusinessWikinger",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Dein Stromtarifwechsel in nur 5 Schritten - SPARE bis zu €850!",
+            "url": "https://www.youtube.com/watch?v=U4K-J6fDdqw",
+            "kanal": "Verträge, Vorsorge & Sparpotenziale",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Vergleichsportale VS Energievermittler24.de (Sparen durch Stromanbieter wechseln)",
+            "url": "https://www.youtube.com/watch?v=1ujV_wftSdA",
+            "kanal": "Strom & Gas Energievermittler24",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "STROMKOSTEN SENKEN LEICHT GEMACHT",
+            "url": "https://www.youtube.com/watch?v=AV6klzZwCeo",
+            "kanal": "Energiepreis Reduktion",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "TIBBER - Stromkosten senken! Geld Sparen, Stromtarif, Strombörse",
+            "url": "https://www.youtube.com/watch?v=a6flroWreNk",
+            "kanal": "Frührentner",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      },
+      "ETF Sparplan für Anfänger erklärt": {
+        "treffer": [
+          {
+            "titel": "Alles über ETFs in nur 15 Minuten: Index, Sparplan, Steuern",
+            "url": "https://www.youtube.com/watch?v=r80NOOdFIn8",
+            "kanal": "Finanztip",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "So fängst du 2026 mit dem Investieren an (in 10 Min!)",
+            "url": "https://www.youtube.com/watch?v=eTCTGwFO1-Y",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Investieren in ETFs: DAS musst du VORHER wissen!",
+            "url": "https://www.youtube.com/watch?v=b0jlsAiAT04",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF kaufen 2024: Anleitung zum Sparen mit ETFs - in 3 Schritten zur Geldanlage mit ETF Sparplan",
+            "url": "https://www.youtube.com/watch?v=JoQ9_KliPWk",
+            "kanal": "Stiftung Warentest",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF Sparplan: Schritt-für-Schritt zum ETF Portfolio",
+            "url": "https://www.youtube.com/watch?v=LCLpqN99_iU",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      },
+      "Kreditkarten Vergleich ohne Jahresgebühr": {
+        "treffer": [
+          {
+            "titel": "Kreditkarten ohne Auslandsgebühren (2026) Welche lohnt sich wirklich?",
+            "url": "https://www.youtube.com/watch?v=2HuHTzSNDvE",
+            "kanal": "GeldRat",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten-Vergleich 2026: NEUER Testsieger? Die besten kostenlosen Kreditkarten! | Finanzfluss",
+            "url": "https://www.youtube.com/watch?v=jNOYUslvA1I",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten Vergleich: Die besten kostenlosen Kreditkarten 2025! | Finanzfluss",
+            "url": "https://www.youtube.com/watch?v=r0VXMVcN1k4",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "0€ Kreditkarten Vergleich (2026) Welche ist die Beste?",
+            "url": "https://www.youtube.com/watch?v=6onQLIHJ-R0",
+            "kanal": "GeldRat",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "3 kostenlose Kreditkarten (2026) Welche ist die Beste?",
+            "url": "https://www.youtube.com/watch?v=X9JIX97yF34",
+            "kanal": "GeldRat",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "github": {
+      "haushaltsbuch": {
+        "treffer": [],
+        "fehler": "gh-Fehler: gh: To use GitHub CLI in a GitHub Actions workflow, set the GH_TOKEN environment variable. Example:"
+      }
+    }
+  }
+}
