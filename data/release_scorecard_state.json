@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-10T13:29:23Z",
-  "modus": "live",
-  "commit": "8b173b077986d3f63ab9eb7935db41c95cfa6735",
+  "generated_at": "2026-11-10T13:58:42Z",
+  "modus": "kandidaten",
+  "commit": "852f70115f6eb8acbd4f42a9f659d1c086ef0da6",
   "kapazitaet": {
     "stichtag": "2026-11-10",
     "basis": "2026-11-10",
@@ -628,7 +628,7 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "dbbf33ed3fd409fa432695800675c561162e7e1312cb11b27ae7ccf0134b2e92",
+      "sha256": "f541df65178959971f2cdf66376ff0a8dea187b089f62a428200315a339a7889",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -642,7 +642,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
@@ -1145,7 +1145,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-25",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
