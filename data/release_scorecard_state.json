@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "generated_at": "2026-11-10T12:05:01Z",
+  "generated_at": "2026-11-10T12:56:01Z",
   "modus": "kandidaten",
-  "commit": "7392edac20aec333a5f8b868002ff94ab2638eff",
+  "commit": "24bb2b6a8d82ac693aaacf37954be7f1fcc1804e",
   "kapazitaet": {
     "stichtag": "2026-11-10",
     "basis": "2026-11-10",
     "projiziert": false,
     "artikel": 126,
-    "faellig": 3,
+    "faellig": 2,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
@@ -19,9 +19,9 @@
     "budget": 4,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 4.0,
-    "bedarf_je_tag": 3.067,
+    "bedarf_je_tag": 3.078,
     "bedarf_je_woche": 21.5,
-    "deckung_prozent": 130.4,
+    "deckung_prozent": 130.0,
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
@@ -50,7 +50,7 @@
     "empfohlenes_budget": 4,
     "empfehlung_erreicht": true,
     "hartes_limit": 16,
-    "spitze_geprueft": 60
+    "spitze_geprueft": 63
   },
   "ursachen": [
     {
@@ -626,7 +626,7 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "f541df65178959971f2cdf66376ff0a8dea187b089f62a428200315a339a7889",
+      "sha256": "dbbf33ed3fd409fa432695800675c561162e7e1312cb11b27ae7ccf0134b2e92",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -640,7 +640,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
