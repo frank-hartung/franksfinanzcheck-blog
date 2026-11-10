@@ -41,6 +41,7 @@ on:
       # Wird aufgerufen (git_sync.sh) – W1 des Trigger-Wache.
       - "scripts/git_sync.sh"
       - "scripts/befund_akte_sync.sh"
+      - "scripts/tests/test_befund_akte_nachlauf.py"
       - "data/release_scorecard_state.json"
       - "data/agent_reach/faktenfrische.yaml"
       - ".github/workflows/befund-akte-nachziehen.yml"
