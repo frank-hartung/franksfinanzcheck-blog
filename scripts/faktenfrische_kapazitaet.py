@@ -61,6 +61,18 @@
 #     Horizont, an dem ein Prüftermin reißt, und den Tag, bis zu dem
 #     gemessen wurde. „Rot“ ohne Tag ist eine Meinung; das Ticket trägt
 #     seitdem ein Datum aus dem heutigen Lauf statt einer Momentaufnahme.
+#  9. Jede Messung sagt, WELCHE Art Zahl sie ist (`projektion.modus`,
+#     10.11.2026): `weg` (Zukunftstag ab heute), `nachweis` (Stand von
+#     heute/gestern) oder `eingefroren` (Zukunftstag mit dem Prüfstand
+#     seines eigenen Tages). Der dritte Zustand ist die Lehre aus #1107:
+#     Vorher trugen beide Nicht-Trajektorien denselben Text „Nachweis,
+#     keine Projektion“ – und genau der eingefrorene Zukunftstag, der
+#     das Ticket erzeugt hat, sah darin wie ein Betriebsnachweis aus.
+#     Eingefroren ist ab jetzt laut, nicht still: Warnung im Klartext,
+#     `eingefroren: true` im JSON, kein Schließen im Deckungs-Ticket und
+#     `--wache` verweigert die Gegenprobe (Exit 2). Erreichbar ist sie
+#     nur noch über den ausdrücklichen Schalter `--gegenprobe`; der
+#     reproduziert das Fehlbild, statt es zu behaupten.
 #
 #  WAS HIER NICHT PASSIERT
 #  -----------------------
@@ -80,11 +92,19 @@
 #                                        reißt (Workflow-Schritt)
 #    python3 scripts/faktenfrische_kapazitaet.py --budget-empfehlung
 #                                        # nur die Zahl für --max
+#    python3 scripts/faktenfrische_kapazitaet.py --stichtag 2026-11-26
+#                                        # Zukunftstag ab HEUTE (Weg des Bots)
+#    python3 scripts/faktenfrische_kapazitaet.py --stichtag 2026-11-26 \
+#            --gegenprobe                # eingefrorener Stand (Fehlbild #1107,
+#                                        # laut markiert – kein Nachweis)
+#    python3 scripts/faktenfrische_kapazitaet.py --wache --gegenprobe
+#                                        # Exit 2: eine Wache auf einer
+#                                        # Gegenprobe wäre ein Scheinnachweis
 #    python3 scripts/faktenfrische_kapazitaet.py --selftest # Sabotage-Proben
 #
 #  EXIT: 0 = Plan gedeckt · 1 = Rückstand nicht fristgerecht abbaubar
 #        oder Spitzentag reißt die Frist (nur mit --wache) ·
-#        2 = Werkzeugfehler (fail-closed)
+#        2 = Werkzeugfehler oder unzulässige Messart (fail-closed)
 # ============================================================
 from __future__ import annotations
 
@@ -313,6 +333,68 @@ def projektions_ausgangspunkt(stichtag: dt.date,
     """
     heute = heute or ff.heute()
     return heute if stichtag > heute else stichtag
+
+
+# ------------------------------------------------------------------
+#  Welche ART Zahl ist das? Drei Zustände, nicht zwei (#1107, 10.11.2026)
+# ------------------------------------------------------------------
+#  BEFUND (10.11.2026, Nachprüfung von #1107): Die Heilung vom 07.11.2026
+#  ließ zwei Zustände übrig – `trajektorie: true` (Weg ab heute) und
+#  `trajektorie: false`. Der zweite Zustand trug im Klartext den Satz
+#  „Stichtag selbst (Nachweis, keine Projektion in die Zukunft)“.
+#
+#  Das ist bei einem ZUKUNFTSTAG, der mit seinem eigenen Prüfstand
+#  gemessen wurde, nachweislich falsch: Es IST eine Projektion (in die
+#  Zukunft) und sie IST eingefroren – genau das Fehlbild, aus dem #1107
+#  entstand. Wer den API-Weg `plan(..., basis=stichtag)` benutzte, bekam
+#  also weiterhin eine Zahl, die sich wie ein Betriebsnachweis las.
+#
+#  Deshalb heißt die Frage ab jetzt nicht „Trajektorie ja/nein“, sondern
+#  „welcher der drei Fälle liegt vor“:
+PROJEKTION_WEG = "weg"                  # Zukunftstag, ab heute gerechnet
+PROJEKTION_NACHWEIS = "nachweis"        # Stand von heute/gestern (echter Nachweis)
+PROJEKTION_EINGEFROREN = "eingefroren"  # Zukunftstag mit dem Prüfstand seines Tages
+
+EINGEFROREN_WARNUNG = (
+    "Eingefrorene Gegenprobe: Der Stichtag liegt in der Zukunft und wurde mit "
+    "dem Prüfstand GENAU DIESES Tages gemessen – als hätte der Bot bis dahin "
+    "nichts geprüft. Das beschreibt keinen Zustand, den der Bot erreicht, und "
+    "ist kein Betriebsnachweis (#1107). Der Weg ab heute steht in derselben "
+    "Messung ohne --gegenprobe.")
+
+
+def projektions_modus(stichtag: dt.date, basis: dt.date,
+                      heute: dt.date | None = None) -> str:
+    """→ `weg` | `nachweis` | `eingefroren` – die eine Stelle (C19).
+
+    * `basis < stichtag`: Der Zukunftstag wird ab dem Ausgangspunkt gerechnet.
+    * `basis == stichtag`, Stichtag in der Zukunft: eingefroren (Fehlbild).
+    * sonst: Nachweis des Stands von heute/gestern.
+
+    Ein Ausgangspunkt NACH dem Stichtag ist keine Messung – das wirft
+    `plan()` bereits fail-closed. Hier wird er vorsichtshalber ebenfalls
+    abgewiesen, statt in einen stillen Default zu fallen.
+    """
+    if basis > stichtag:
+        raise ValueError("Ausgangspunkt der Projektion liegt nach dem Stichtag.")
+    if basis < stichtag:
+        return PROJEKTION_WEG
+    # Nur dieser Zweig braucht die Uhr: Ob „Stichtag = Ausgangspunkt“ ein
+    # Nachweis (heute/gestern) oder eine eingefrorene Zukunft ist, entscheidet
+    # allein der heutige Tag.
+    heute = heute or ff.heute()
+    return PROJEKTION_EINGEFROREN if stichtag > heute else PROJEKTION_NACHWEIS
+
+
+def projektions_regel(modus: str) -> str:
+    """Ein Satz je Zustand – damit keine Oberfläche eine eigene Lesart baut."""
+    return {
+        PROJEKTION_WEG: ("Zukunft wird ab dem Ausgangspunkt gerechnet – nie mit "
+                         "dem eingefrorenen Prüfstand (#1107)."),
+        PROJEKTION_NACHWEIS: ("Stand des Stichtags (heute/gestern) – kein "
+                              "Hellsehen, kein eingefrorener Zukunftstag (#1107)."),
+        PROJEKTION_EINGEFROREN: EINGEFROREN_WARNUNG,
+    }[modus]
 
 
 def kadenz_horizont(lauf: dict, stichtag: dt.date, horizont_tage: int) -> dict:
@@ -950,14 +1032,20 @@ def diagnose_zeilen(p: dict, markdown: bool = True) -> list[str]:
         zeilen.append(f"- Projektion: Stichtag {p['stichtag']} ab {p['basis']} "
                       "gerechnet – das ist der Weg des Bots, kein eingefrorener "
                       "Stand (#1107)")
+    # Der dritte Zustand (#1107, 10.11.2026): Eine eingefrorene Gegenprobe
+    # darf nie wie ein Betriebsnachweis aussehen (C33). Ihr Rahmen steht
+    # deshalb GANZ OBEN – vor jeder Zahl, die sie erzeugt.
+    proj = p.get("projektion") or {}
+    eingefroren = bool(proj.get("eingefroren"))
     kh = p.get("kadenz_horizont") or {}
     if kh.get("geprueft"):
+        rahmen = " (im eingefrorenen Stand)" if eingefroren else ""
         if kh.get("weg_frei"):
-            zeilen.append(f"- Weg des Bots: kein Prüftermin reißt bis {kh['bis']} "
-                          f"({kh['tage']} Tage Horizont)")
+            zeilen.append(f"- Weg des Bots{rahmen}: kein Prüftermin reißt bis "
+                          f"{kh['bis']} ({kh['tage']} Tage Horizont)")
         else:
             zeilen.append(
-                f"- ⚠️ Weg des Bots: erster gerissener Termin am "
+                f"- ⚠️ Weg des Bots{rahmen}: erster gerissener Termin am "
                 f"{kh.get('erstverletzung')} (`{kh.get('erstverletzung_seite')}`, "
                 f"Frist {kh.get('erstverletzung_frist')}) – "
                 f"{kh.get('verletzungen')} gerissene Termine auf "
@@ -976,6 +1064,13 @@ def diagnose_zeilen(p: dict, markdown: bool = True) -> list[str]:
         seiten = "Seite" if p["verletzungen_neu"] == 1 else "Seiten"
         zeilen.append(f"- ⚠️ {p['verletzungen_neu']} {seiten} mit ZUKÜNFTIGER "
                       "Frist würden gerissen – das ist die Zahl, die zählt")
+    if eingefroren:
+        zeilen.insert(0, (
+            f"- ⚠️ {fett('Eingefrorene Gegenprobe – kein Betriebsnachweis')}: "
+            f"Stichtag {p['stichtag']} liegt in der Zukunft und wurde mit dem "
+            "Prüfstand genau dieses Tages gemessen (als hätte der Bot bis dahin "
+            "nichts geprüft). Das ist das Fehlbild aus #1107; den Weg ab heute "
+            "misst dieselbe Datei ohne `--gegenprobe`."))
     return zeilen
 
 
@@ -1207,6 +1302,50 @@ def selftest() -> int:
         geworfen = True
     pruefe("ST14h", geworfen, True)
 
+    # ST15 – Drei Zustände, nicht zwei (#1107, 10.11.2026) ----------------
+    # Vorher trugen "Weg" und "eingefrorene Zukunft" beide `trajektorie:
+    # false` – und der eingefrorene Fall las sich wie ein Nachweis. Genau
+    # daraus entstand das Ticket. Jetzt ist die Messart ein eigener Wert.
+    pruefe("ST15a", projektions_modus(ziel, PROBETAG, PROBETAG), PROJEKTION_WEG)
+    pruefe("ST15b", projektions_modus(PROBETAG, PROBETAG, PROBETAG),
+           PROJEKTION_NACHWEIS)
+    pruefe("ST15c", projektions_modus(PROBETAG - dt.timedelta(days=3),
+                                      PROBETAG - dt.timedelta(days=3), PROBETAG),
+           PROJEKTION_NACHWEIS)
+    pruefe("ST15d", projektions_modus(ziel, ziel, PROBETAG), PROJEKTION_EINGEFROREN)
+    # Fail-closed wie `plan()`: Ausgangspunkt nach dem Stichtag ist keine Messung.
+    geworfen = False
+    try:
+        projektions_modus(PROBETAG, PROBETAG + dt.timedelta(days=1), PROBETAG)
+    except ValueError:
+        geworfen = True
+    pruefe("ST15e", geworfen, True)
+    # Uhr-Zwang: „eingefroren“ existiert nur relativ zu einem HEUTE, das VOR
+    # dem Stichtag liegt. Ohne die eingefrorene Uhr wäre derselbe Aufruf ein
+    # Nachweis – und der Selbsttest prüfte den falschen Zweig.
+    echt_heute = ff.heute
+    ff.heute = lambda: PROBETAG
+    try:
+        gegenprobe = messe(traegt, cfg_bundel, 1.0, ziel, basis=ziel, budget=2)
+        weg_messung = messe(traegt, cfg_bundel, 1.0, ziel, budget=2)
+    finally:
+        ff.heute = echt_heute
+    pruefe("ST15f", (gegenprobe["projektion"]["modus"],
+                     gegenprobe["projektion"]["eingefroren"]),
+           (PROJEKTION_EINGEFROREN, True))
+    pruefe("ST15g", gegenprobe["projektion"]["warnung"], EINGEFROREN_WARNUNG)
+    pruefe("ST15h", (weg_messung["projektion"]["modus"],
+                     weg_messung["projektion"]["eingefroren"],
+                     weg_messung["projektion"]["warnung"]),
+           (PROJEKTION_WEG, False, None))
+    # Der Rahmen steht VOR den Zahlen, die er erzeugt – und er ist auch im
+    # Klartext (markdown=False) lesbar.
+    zeilen = diagnose_zeilen(gegenprobe, markdown=False)
+    pruefe("ST15i", any("Eingefrorene Gegenprobe" in z for z in zeilen), True)
+    pruefe("ST15j", any("im eingefrorenen Stand" in z for z in zeilen), True)
+    pruefe("ST15k", any("Eingefrorene Gegenprobe" in z
+                        for z in diagnose_zeilen(weg_messung, markdown=False)), False)
+
     if fehler:
         print("❌ Selbsttest Faktenfrische-Kapazität rot:")
         for f in fehler:
@@ -1264,12 +1403,18 @@ def messe(artikel: list[dict], cfg: dict, laeufe: float, stichtag: dt.date,
     ergebnis.update(spitze_zahlen(artikel, cfg, gewaehlt, laeufe,
                                   stichtag, horizont_tage, basis=basis))
     ausgangspunkt = basis or stichtag
+    # Drei Zustände statt zwei (#1107, 10.11.2026): Der eingefrorene
+    # Zukunftstag ist weder „Weg“ noch „Nachweis“ – er ist eine Gegenprobe
+    # und muss als solche lesbar sein, in JSON und Klartext.
+    modus = projektions_modus(stichtag, ausgangspunkt)
     ergebnis["projektion"] = {
         "stichtag": stichtag.isoformat(),
         "ausgangspunkt": ausgangspunkt.isoformat(),
-        "trajektorie": ausgangspunkt < stichtag,
-        "regel": ("Zukunft wird ab dem Ausgangspunkt gerechnet – nie mit dem "
-                  "eingefrorenen Prüfstand (#1107)."),
+        "trajektorie": modus == PROJEKTION_WEG,
+        "modus": modus,
+        "eingefroren": modus == PROJEKTION_EINGEFROREN,
+        "warnung": EINGEFROREN_WARNUNG if modus == PROJEKTION_EINGEFROREN else None,
+        "regel": projektions_regel(modus),
     }
     return ergebnis
 
@@ -1288,6 +1433,10 @@ def main() -> int:
     p.add_argument("--stichtag",
                    help="Probetag (ISO) – ein Tag in der Zukunft wird ab HEUTE "
                         "als Weg gerechnet, nie eingefroren (#1107)")
+    p.add_argument("--gegenprobe", action="store_true",
+                   help="Eingefrorener Vergleich (#1107): den Zukunftstag mit "
+                        "dem Prüfstand SEINES Tages messen. Verlangt --stichtag "
+                        "in der Zukunft und ist nie eine Wache (Exit 2).")
     p.add_argument("--selftest", action="store_true")
     args = p.parse_args()
 
@@ -1305,6 +1454,24 @@ def main() -> int:
                     else ff.heute())
     except ValueError:
         print("🛑 --stichtag ist kein ISO-Datum", file=sys.stderr)
+        return 2
+
+    # Die Gegenprobe ist ein Nachweis-Werkzeug, kein Betriebsmodus
+    # (#1107, 10.11.2026): Sie reproduziert das Fehlbild von Hand – ein
+    # Ticket oder eine Wache darf daraus nie einen Zustand machen.
+    if args.gegenprobe and args.wache:
+        print("🛑 --wache und --gegenprobe schließen sich aus: Eine Wache auf "
+              "einer eingefrorenen Gegenprobe wäre ein Scheinnachweis (#1107).",
+              file=sys.stderr)
+        return 2
+    if args.gegenprobe and not args.stichtag:
+        print("🛑 --gegenprobe verlangt --stichtag (den einzufrierenden "
+              "Zukunftstag, #1107).", file=sys.stderr)
+        return 2
+    if args.gegenprobe and stichtag <= ff.heute():
+        print("🛑 --gegenprobe verlangt einen ZUKUNFTSTAG: heute oder gestern "
+              "sind ein echter Nachweis, keine eingefrorene Projektion (#1107).",
+              file=sys.stderr)
         return 2
 
     laeufe, hinweise = laeufe_aus_workflow()
@@ -1334,7 +1501,14 @@ def main() -> int:
     # HEUTE als Trajektorie gerechnet – der Weg des Bots, nie sein
     # eingefrorener Prüfstand. Ein vergangener Stichtag bleibt ein Nachweis
     # jenes Tages. Die Regel steht in EINER Funktion, nicht in jedem Aufrufer.
-    basis = projektions_ausgangspunkt(stichtag)
+    # Die eingefrorene Sicht ist seit 10.11.2026 nur noch über den
+    # ausdrücklichen Schalter `--gegenprobe` erreichbar.
+    basis = stichtag if args.gegenprobe else projektions_ausgangspunkt(stichtag)
+    if args.wache and projektions_modus(stichtag, basis) == PROJEKTION_EINGEFROREN:
+        print("🛑 Eine Wache auf einer eingefrorenen Gegenprobe ist kein "
+              "Betriebsnachweis – bitte ohne --gegenprobe messen (#1107).",
+              file=sys.stderr)
+        return 2
 
     if args.budget_empfehlung:
         try:
@@ -1358,6 +1532,9 @@ def main() -> int:
         return 0
 
     print(klartext(ergebnis, hinweise))
+    if ergebnis.get("projektion", {}).get("eingefroren"):
+        # Letzte Zeile = was man mitnehmen darf (#1107, 10.11.2026).
+        print(f"\n⚠️ {EINGEFROREN_WARNUNG}")
     if ergebnis["empfehlung_erreicht"] and ergebnis["empfohlenes_budget"] > ergebnis["budget"]:
         print(f"\n→ Empfohlenes Budget für diesen Lauf: {ergebnis['empfohlenes_budget']} "
               f"(Sockel {ergebnis['sockel']}, Limit {ergebnis['hartes_limit']})")

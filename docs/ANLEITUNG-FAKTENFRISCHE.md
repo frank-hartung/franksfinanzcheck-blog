@@ -91,6 +91,9 @@ python3 scripts/faktenfrische_kapazitaet.py --json     # maschinenlesbar
 python3 scripts/faktenfrische_kapazitaet.py --stichtag 2026-12-31 --json
 #   → Projektion: Stichtag 2026-12-31 ab heute gerechnet (Weg des Bots),
 #     nie mit dem eingefrorenen Prüfstand (#1107)
+python3 scripts/faktenfrische_kapazitaet.py --stichtag 2026-12-31 --gegenprobe
+#   → ⚠️ eingefrorene Gegenprobe (Fehlbild aus #1107) – laut markiert,
+#     kein Betriebsnachweis, und nie mit --wache kombinierbar
 ```
 
 ### Nachzug 06.11.2026: der Spitzentag wird mitgemessen (#1039)
@@ -172,6 +175,52 @@ und ein Handlauf konnte weiterhin einen Zukunftstag einfrieren. Jetzt gilt:
    **D** frei“ oder „reißt zuerst am **D2** (`seite`, Frist F)“. Eine
    Momentaufnahme von Hand kann kein Ticket mehr füllen; der Alarm öffnet,
    aktualisiert und schließt sich weiter selbst (C14).
+
+**Nachzug 10.11.2026: Drei Zustände statt zwei – die Gegenprobe ist laut (#1107).**
+Die Heilung vom 07.11. ließ genau zwei Fälle übrig: `trajektorie: true`
+(Weg ab heute) und `trajektorie: false`. Der zweite Fall trug im Klartext
+den Satz „Stichtag selbst (Nachweis, keine Projektion in die Zukunft)“ – und
+das ist für einen **Zukunftstag mit dem Prüfstand seines eigenen Tages**
+nachweislich falsch: Es *ist* eine Projektion und sie *ist* eingefroren.
+Genau dieser Satz hat aus dem Fehlbild ein Ticket mit Frist gemacht
+(#1107). Wer den API-Weg `plan(..., basis=stichtag)` benutzte, bekam
+weiterhin eine Zahl, die sich wie ein Betriebsnachweis las.
+
+Seit 10.11.2026 sagt jede Messung, **welche Art Zahl** sie ist:
+
+| `projektion.modus` | Wann | Bedeutung |
+|---|---|---|
+| `weg` | Stichtag in der Zukunft, ab heute gerechnet | der Weg des Bots (Betriebsnachweis) |
+| `nachweis` | Stichtag heute/gestern | Stand des Tages – Ausgangspunkt der 120-Tage-Prognose |
+| `eingefroren` | Stichtag in der Zukunft, aus seinem eigenen Stand gemessen | ⚠️ **Gegenprobe, kein Betriebsnachweis** |
+
+Was daran bindend ist:
+
+1. **Die Entscheidung steht in EINER Funktion** (`projektions_modus`,
+   Marker in C45). Eine Oberfläche, die selbst rät, gibt es nicht mehr.
+2. **Eingefroren ist laut, nicht still:** `eingefroren: true` und `warnung`
+   im JSON, eine ⚠️-Zeile **vor** den Zahlen im Klartext („Weg des Bots
+   (im eingefrorenen Stand) …“), und eine Schlusszeile nach dem Bericht.
+3. **Kein Gate frisst eine Gegenprobe:** `--wache --gegenprobe` endet mit
+   **Exit 2** („eine Wache auf einer Gegenprobe wäre ein Scheinnachweis“).
+   Das Deckungs-Ticket bewertet eine eingefrorene Messung als
+   **beweislos** – sie schließt nichts und erzeugt keinen Auftrag.
+4. **Erreichbar nur noch absichtlich:** `--gegenprobe` verlangt `--stichtag`
+   in der Zukunft; heute/gestern sind ein echter Nachweis und werden
+   abgewiesen. Damit lässt sich das Fehlbild von #1107 **reproduzieren**,
+   ohne es zu behaupten:
+
+   ```bash
+   python3 scripts/faktenfrische_kapazitaet.py --stichtag 2026-11-26 --json
+   # → modus "weg", 0 überfällig, Weg frei
+   python3 scripts/faktenfrische_kapazitaet.py --stichtag 2026-11-26 --gegenprobe --json
+   # → modus "eingefroren", 25 überfällig, 13 gerissene Termine
+   ```
+
+**Vertrag:** C45 verlangt zusätzlich `projektions_modus`, `eingefroren` und
+`--gegenprobe` – wer die Unterscheidung löscht, macht den Bau rot.
+**Tests:** `MessartDreiZustaendeTest` (kapazität) und
+`EingefroreneGegenprobeTest` (Ticket); ST15 im Selbsttest der Kapazität.
 
 **Arbeitsliste ist kein Befund.** Wer wissen will, ob ein Befund offen ist,
 fragt das **Ledger** (`scripts/faktenfrische_befund_ledger.py`), nicht

@@ -1,0 +1,314 @@
+# ============================================================
+#  ABHÄNGIGKEITS-SCHUTZ · SELBSTHEILUNG (Dependabot-Alert #79, 10.11.2026)
+#  ------------------------------------------------------------
+#  WARUM DIESER LAUF EXISTIERT
+#  PR #1139 brachte transitiv `minimatch@10.2.6` (GHSA-g3hv-75wg-m249 / #79)
+#  und `glob@13.0.6` (GHSA-3g3m-2fjr-6pw4) auf `main`. Ein reines Melde-Gate
+#  lässt neu veröffentlichte Schwachstellen im liegenden Bestand bis zum
+#  nächsten Handeingriff offen.
+#
+#  Dieser Workflow schließt den Regelkreis H-02-konform in fünf Schichten:
+#    1. EICHPROBE (Exit 3 bei blindem Prüfer – kein Urteil, kein Schreiben)
+#    2. HEILUNG (`--package-lock-only --ignore-scripts`, streng aufsteigend,
+#       Sicherheits-Overrides bei Major-Sprüngen, pip `.in` + Hash-Lock sync)
+#    3. NACHMESSUNG (Struktur A1–A9 + Manifest-Wache + Live-Advisory-Audit;
+#       atomarer Rollback bei jeder Verschlechterung -> Exit 2)
+#    4. BELEGKETTE (`data/abhaengigkeits_schutz_belege.jsonl`, SHA-256 ab GENESIS)
+#    5. BEREITSTELLUNG als geprüfter PR (`automation/deps-heilung-*` über
+#       `scripts/git_sync.sh`) – kein blinder Direkt-Merge auf `main` (Audit H-02).
+# ============================================================
+name: Abhängigkeits-Schutz · Selbstheilung
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/abhaengigkeits_schutz_vertrag.json"
+      - "data/abhaengigkeits_schutz_belege.jsonl"
+      - ".gitattributes"
+      - "scripts/abhaengigkeits_selbstheilung.py"
+      - "scripts/tests/test_abhaengigkeits_selbstheilung.py"
+      - "scripts/abhaengigkeits_wache.py"
+      - "scripts/tests/test_abhaengigkeits_wache.py"
+      - "scripts/manifest_guard.py"
+      - "scripts/git_sync.sh"
+      - "package.json"
+      - "package-lock.json"
+      - "tools/*/package.json"
+      - "tools/*/package-lock.json"
+      - "cloudflare/*/package.json"
+      - "cloudflare/*/package-lock.json"
+      - "newsletter-worker/package.json"
+      - "requirements*.txt"
+      - "requirements-ci.in"
+      - ".github/workflows/abhaengigkeits-selbstheilung.yml"
+      - ".github/workflows/sicherheits-wache.yml"
+      - ".github/workflows/alert-on-failure.yml"
+  pull_request:
+    paths:
+      - "data/abhaengigkeits_schutz_vertrag.json"
+      - "data/abhaengigkeits_schutz_belege.jsonl"
+      - ".gitattributes"
+      - "scripts/abhaengigkeits_selbstheilung.py"
+      - "scripts/tests/test_abhaengigkeits_selbstheilung.py"
+      - "scripts/abhaengigkeits_wache.py"
+      - "scripts/tests/test_abhaengigkeits_wache.py"
+      - "scripts/manifest_guard.py"
+      - "scripts/git_sync.sh"
+      - "package.json"
+      - "package-lock.json"
+      - "tools/*/package.json"
+      - "tools/*/package-lock.json"
+      - "cloudflare/*/package.json"
+      - "cloudflare/*/package-lock.json"
+      - "newsletter-worker/package.json"
+      - "requirements*.txt"
+      - "requirements-ci.in"
+      - ".github/workflows/abhaengigkeits-selbstheilung.yml"
+      - ".github/workflows/sicherheits-wache.yml"
+      - ".github/workflows/alert-on-failure.yml"
+  schedule:
+    - cron: "18 6 * * *"   # täglich 06:18 UTC – direkt nach der Sicherheits-Wache (06:05 UTC)
+  workflow_dispatch:
+    inputs:
+      modus:
+        description: "heilen (PR vorbereiten) oder pruefen (nur messen)"
+        required: false
+        default: "heilen"
+        type: choice
+        options:
+          - heilen
+          - pruefen
+  workflow_run:
+    workflows:
+      - "Sicherheits-Wache"
+    types:
+      - completed
+
+concurrency:
+  group: "abhaengigkeits-selbstheilung-${{ github.ref }}"
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  vertraege:
+    name: Eichprobe, Verdrahtung und Vertragstests (offline)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Heiler selbsttesten – Eichprobe und Sabotageproben
+        run: python3 scripts/abhaengigkeits_selbstheilung.py --selftest
+
+      - name: Verdrahtungs-Wache – Vertrag, Belegkette und Tore prüfen
+        run: python3 scripts/abhaengigkeits_selbstheilung.py --wache
+
+      - name: Abhängigkeits- und Manifest-Wache selbsttesten
+        run: |
+          set -euo pipefail
+          python3 scripts/abhaengigkeits_wache.py --selftest
+          python3 scripts/manifest_guard.py --selftest
+
+      - name: Vertragstests der Abhängigkeits-Selbstheilung
+        run: python3 -m unittest scripts.tests.test_abhaengigkeits_selbstheilung scripts.tests.test_abhaengigkeits_wache -v
+
+  selbstheilung:
+    name: Bestand auditieren, heilen, nachmessen und PR bereitstellen
+    needs: vertraege
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'schedule' ||
+       github.event_name == 'workflow_dispatch' ||
+       (github.event_name == 'workflow_run' &&
+        github.event.workflow_run.head_branch == 'main' &&
+        github.event.workflow_run.conclusion == 'failure'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      pull-requests: write
+      checks: write
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Python bereitstellen
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Node.js bereitstellen (für npm --package-lock-only --ignore-scripts)
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+
+      - name: Abhängigkeiten messen und selbstheilen (neutraler Exit)
+        id: messung
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          MODUS: ${{ inputs.modus || 'heilen' }}
+        run: |
+          set -uo pipefail
+          BERICHT_JSON="$RUNNER_TEMP/deps_selbstheilung.json"
+          BERICHT_MD="$RUNNER_TEMP/deps_selbstheilung.md"
+          code=0
+          if [ "$MODUS" = "pruefen" ]; then
+            python3 scripts/abhaengigkeits_selbstheilung.py --pruefen \
+              --json --md "$BERICHT_MD" > "$BERICHT_JSON" || code=$?
+          else
+            python3 scripts/abhaengigkeits_selbstheilung.py --heilen \
+              --json --md "$BERICHT_MD" > "$BERICHT_JSON" || code=$?
+          fi
+          cat "$BERICHT_MD" >> "$GITHUB_STEP_SUMMARY"
+          klasse="$(jq -r '.klasse // "UNBEKANNT"' "$BERICHT_JSON" 2>/dev/null || echo UNBEKANNT)"
+          befund_id="$(jq -r '.befund_id // "unbekannt"' "$BERICHT_JSON" 2>/dev/null || echo unbekannt)"
+          anzahl_dateien="$(jq -r '(.geaenderte_dateien // []) | length' "$BERICHT_JSON" 2>/dev/null || echo 0)"
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          echo "klasse=$klasse" >> "$GITHUB_OUTPUT"
+          echo "befund_id=$befund_id" >> "$GITHUB_OUTPUT"
+          echo "anzahl_dateien=$anzahl_dateien" >> "$GITHUB_OUTPUT"
+
+      - name: Geprüften Selbstheilungs-PR öffnen oder aktualisieren (Audit H-02)
+        id: pr
+        if: >-
+          !cancelled() &&
+          steps.messung.outcome != 'skipped' &&
+          steps.messung.outputs.anzahl_dateien != '0' &&
+          (steps.messung.outputs.klasse == 'GEHEILT' || steps.messung.outputs.klasse == 'OFFEN')
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BEFUND_ID: ${{ steps.messung.outputs.befund_id }}
+          KLASSE: ${{ steps.messung.outputs.klasse }}
+          BASIS_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          BERICHT_JSON="$RUNNER_TEMP/deps_selbstheilung.json"
+          BERICHT_MD="$RUNNER_TEMP/deps_selbstheilung.md"
+          PRAEFIX="automation/deps-heilung-${BEFUND_ID}"
+
+          # Idempotenz über Tage: Liegt für genau diese Befund-ID bereits ein
+          # offener PR vor, wird kein zweiter Zeitstempel-Commit erzeugt.
+          OFFENER_PR="$(gh pr list --state open --base main --limit 30 \
+            --json number,headRefName,url \
+            --jq "[.[] | select(.headRefName | startswith(\"$PRAEFIX\"))][0].url // \"\"")"
+          if [ -n "$OFFENER_PR" ]; then
+            echo "Offener Heilungs-PR für Befund $BEFUND_ID existiert bereits: $OFFENER_PR"
+            echo "pr_url=$OFFENER_PR" >> "$GITHUB_OUTPUT"
+            git checkout -- .
+            exit 0
+          fi
+
+          KURZ_SHA="$(printf '%s' "$BASIS_SHA" | cut -c1-7)"
+          BRANCH="${PRAEFIX}-${KURZ_SHA}"
+          mapfile -t PFADE < <(jq -r '.geaenderte_dateien[]' "$BERICHT_JSON")
+          if [ "${#PFADE[@]}" -eq 0 ]; then
+            echo "Keine geänderten Dateien gemeldet – kein PR."
+            exit 0
+          fi
+
+          git checkout -B "$BRANCH"
+          GIT_USER="Abhaengigkeits-Selbstheilung" \
+          GIT_MAIL="abhaengigkeits-selbstheilung@users.noreply.github.com" \
+          BRANCH="$BRANCH" bash scripts/git_sync.sh \
+            "fix(deps): automatische Sicherheits-Selbstheilung (${BEFUND_ID})" \
+            "${PFADE[@]}"
+
+          PR_BODY="$RUNNER_TEMP/deps_pr_body.md"
+          {
+            cat "$BERICHT_MD"
+            echo ""
+            echo "---"
+            echo "**Sicherheits-Vertrag (Audit H-02):** Dieser PR wurde mit"
+            echo "\`--package-lock-only --ignore-scripts\` erzeugt, gegen die GitHub"
+            echo "Advisory Database nachgemessen und in \`data/abhaengigkeits_schutz_belege.jsonl\`"
+            echo "verkettet belegt. Bitte Diff & Herkunft prüfen und regulär mergen."
+          } > "$PR_BODY"
+
+          PR_URL="$(gh pr create --base main --head "$BRANCH" \
+            --title "fix(deps): Sicherheits-Selbstheilung (${BEFUND_ID})" \
+            --body-file "$PR_BODY")"
+          echo "Geprüfter Selbstheilungs-PR erstellt: $PR_URL"
+          echo "pr_url=$PR_URL" >> "$GITHUB_OUTPUT"
+
+      - name: Ampel und Endurteil auswerten (nie Scheingrün bei offenem Befund)
+        if: ${{ !cancelled() && steps.messung.outcome != 'skipped' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}
+          LAUF_ID: ${{ github.run_id }}
+          MESS_CODE: ${{ steps.messung.outputs.code }}
+          KLASSE: ${{ steps.messung.outputs.klasse }}
+          PR_URL: ${{ steps.pr.outputs.pr_url }}
+        run: |
+          set -euo pipefail
+          ZEIT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          case "$KLASSE:$MESS_CODE" in
+            SICHER:0)
+              SCHLUSS=success
+              TITEL="Abhängigkeits-Schutz: Bestand befundfrei belegt"
+              TEXT="Alle ausgelieferten Abhängigkeiten, Pins und A9-Untergrenzen sind ohne Advisory-Treffer bestätigt."
+              EXIT_ZIEL=0
+              ;;
+            GEHEILT:0)
+              SCHLUSS=action_required
+              TITEL="Abhängigkeits-Schutz: Geprüfter Heilungs-PR liegt bereit"
+              TEXT="Die Selbstheilung hat alle offenen Advisories behoben und nachgemessen. Merge des Heilungs-PRs (Audit H-02) schließt den Befund auf main: ${PR_URL:-siehe Lauf-Zusammenfassung}"
+              echo "::warning title=Heilungs-PR bereit::$TEXT"
+              EXIT_ZIEL=0
+              ;;
+            OFFEN:1)
+              SCHLUSS=action_required
+              TITEL="Abhängigkeits-Schutz: Offener Befund benötigt Betreiber-Entscheidung"
+              TEXT="Mindestens eine Schwachstelle hat noch keinen monotonen Upstream-Fix (oder Teilheilung in ${PR_URL:-Lauf-Zusammenfassung})."
+              echo "::warning title=Abhängigkeits-Befund offen::$TEXT"
+              EXIT_ZIEL=0
+              ;;
+            *:3)
+              SCHLUSS=failure
+              TITEL="Abhängigkeits-Schutz: Messgerät nicht eichfähig (Exit 3)"
+              TEXT="Die Eichprobe zu Vorfall #79 ist gescheitert – kein Urteil und kein Schreibzugriff."
+              echo "::error title=Messgerät nicht eichfähig::$TEXT"
+              EXIT_ZIEL=1
+              ;;
+            *)
+              SCHLUSS=failure
+              TITEL="Abhängigkeits-Schutz: Nicht belegbar oder Rollback (Exit $MESS_CODE)"
+              TEXT="Netz/API, Belegkette oder Nachmessung sind fehlgeschlagen; eventuelle Änderungen wurden atomar zurückgerollt."
+              echo "::error title=Abhängigkeits-Selbstheilung fehlgeschlagen::$TEXT"
+              EXIT_ZIEL=1
+              ;;
+          esac
+
+          jq -n \
+            --arg name "Abhängigkeits-Schutz · Selbstheilung (#79)" \
+            --arg sha "$SHA" \
+            --arg conclusion "$SCHLUSS" \
+            --arg completed_at "$ZEIT" \
+            --arg details_url "https://github.com/$REPO/actions/runs/$LAUF_ID" \
+            --arg title "$TITEL" \
+            --arg summary "$TEXT" \
+            '{
+              name: $name,
+              head_sha: $sha,
+              status: "completed",
+              conclusion: $conclusion,
+              completed_at: $completed_at,
+              details_url: $details_url,
+              output: { title: $title, summary: $summary }
+            }' | gh api "repos/$REPO/check-runs" --method POST --input - >/dev/null
+          exit "$EXIT_ZIEL"
