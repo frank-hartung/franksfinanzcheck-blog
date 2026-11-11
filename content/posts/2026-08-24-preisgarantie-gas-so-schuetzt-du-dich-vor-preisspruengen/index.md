@@ -55,7 +55,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ![Merkkarte: Kernaussagen zu Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „Preisgarantie Gas: Was bei Preiserhöhung hilft“ (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Gaspreisgarantie: Was bei Preiserhöhung hilft“ (eigene Darstellung aus diesem Beitrag).*
 
 
 ## Wenn ein neuer Preis im Brief steht
@@ -111,7 +111,7 @@ Angenommen, dein Verbrauch liegt bei 20.000 kWh. Tarif A kostet 10,8 Cent pro kW
 | A steigt nach 6 Monaten für 60 % des Verbrauchs um 1,5 ct | 2.520 € | 2.440 € |
 | A sinkt nicht, Marktangebote werden 1 ct günstiger | 2.340 € bis Wechsel | 2.440 € gebunden |
 
-Die zweite Zeile rechnet mit 12.000 kWh × 1,5 Cent = 180 € Mehrkosten. Das ist ein Modellwert. Tarif B kostet anfangs 100 € mehr. In diesem Fall wäre er aber 80 € günstiger.
+Die zweite Zeile rechnet mit 12.000 kWh × 1,5 Cent = 180 € Mehrkosten. Das ist ein Modellwert. Tarif B kostet anfangs 100 € mehr. In diesem Fall wäre er aber 80 € günstiger.
 
 Das ist keine Vorhersage. Es zeigt nur den Preis für die Sicherheit. Eine Garantie kauft dir Planung – keine sichere Ersparnis.
 
@@ -151,13 +151,13 @@ Kündige selbst, schriftlich, und verlange eine Bestätigung. Beim normalen Wech
 
 ![Gliederung des Beitrags: Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „Preisgarantie Gas: Was bei Preiserhöhung hilft“ – 5 Stationen von „Wenn ein neuer Preis im Brief steht“ bis „Preisänderung erhalten: diese fünf Punkte markieren“ (eigene Darstellung).*
+*Abbildung: Gliederung zu „Gaspreisgarantie: Was bei Preiserhöhung hilft“ – 5 Stationen von „Wenn ein neuer Preis im Brief steht“ bis „Preisänderung erhalten: diese fünf Punkte markieren“ (eigene Darstellung).*
 
 ## Jahrespreis nach einer Erhöhung rechnen
 
 Der Arbeitspreis steigt von 10,5 auf 12,0 Cent. Der Unterschied beträgt 1,5 Cent pro kWh im Rechenfall.
 
-Bei 18.000 kWh wären das für ein volles Jahr **270 €**. Das ist ein Rechenbeispiel.
+Bei 18.000 kWh wären das für ein volles Jahr **270 €**. Das ist ein Rechenbeispiel.
 
 Gilt der neue Preis nur für einen Teil des Abrechnungsjahres, musst du den Verbrauch zeitanteilig aufteilen. Gasverbrauch fällt nicht gleichmäßig an. Der Winter wiegt stärker.
 

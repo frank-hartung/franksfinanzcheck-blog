@@ -52,7 +52,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ![Merkkarte: Kernaussagen zu 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken“ (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „50–30–20-Regel: Beherrsche dein Budget – Fixkosten senken“ (eigene Darstellung aus diesem Beitrag).*
 
 ## Das Wichtigste in Kürze
 
@@ -132,9 +132,9 @@ Das sind aufs Jahr gerechnet **6.720 €**. Selbst wenn du davon zuerst nur ein
 
 ## Preisänderungen im Budget berücksichtigen
 
-Ein Budget muss Bewegungen aushalten. Die Oktober-Schätzung von [Destatis](https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html) vom 30.10.2026 zeigt 2,8 Prozent Inflation. Für Energie weist sie 12,2 Prozent Zuwachs zum Vorjahr aus; der Septemberwert lag bei 14,9 Prozent.
+Ein Budget muss Bewegungen aushalten. Die Oktober-Schätzung von [Destatis](https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html) vom 30.10.2026 zeigt 2,8 % Inflation. Für Energie weist sie 12,2 % Zuwachs zum Vorjahr aus; der Septemberwert lag bei 14,9 %.
 
-Nahrungsmittel standen bei plus 0,4 Prozent. Nutze diese Zahlen als Hinweis, nicht als pauschalen Aufschlag.
+Nahrungsmittel standen bei plus 0,4 %. Nutze diese Zahlen als Hinweis, nicht als pauschalen Aufschlag.
 
 Steigende Pflichtkosten können die 50-Prozent-Grenze sprengen. Dann brauchst du kürzere Wünsche, günstigere Verträge oder eine andere Zielquote. Passe die Sparrate an, bis Reserve und laufende Rechnungen wieder gedeckt sind.
 
@@ -217,7 +217,7 @@ Zehn Minuten reichen oft. Wichtig ist nur, dass du nachsteuerst, wenn eine Kateg
 
 ![Gliederung des Beitrags: 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken“ – 5 Stationen von „Was bedeutet die 50-30-20-Regel konkret?“ bis „So könnte das im Alltag aussehen“ (eigene Darstellung).*
+*Abbildung: Gliederung zu „50–30–20-Regel: Beherrsche dein Budget – Fixkosten senken“ – 5 Stationen von „Was bedeutet die 50–30–20-Regel konkret?“ bis „So könnte das im Alltag aussehen“ (eigene Darstellung).*
 
 ## Die häufigsten Denkfehler
 

@@ -64,7 +64,7 @@ faktencheck: 2026-11-07
 kurzantwort: "Warmwasser entsteht entweder in der Heizungsanlage oder in einem elektrischen Gerät. In beiden Fällen zahlen drei Faktoren: die Temperatur, die Wassermenge und die Verluste auf dem Weg zum Hahn. Weil Warmwasser auf vielen Abrechnungen in einem eigenen Block steht, lässt sich der Anteil meist genau ablesen."
 ---
 
-Duschen ist die alltäglichste Handlung im Haushalt und gleichzeitig eine der teuersten. Über das Jahr kommt viel zusammen: [co2online](https://www.co2online.de/energie-sparen/) beziffert die Wassererwärmung auf rund 16 Prozent des gesamten Haushalts-Energieverbrauchs, die Raumwärme auf rund zwei Drittel. Warmwasser ist damit – neben dem Haushaltsstrom – einer der beiden großen Blöcke hinter der Heizung. Das sind Durchschnittswerte; wie viel Euro daraus werden, hängt an deinem Tarif und deiner Nutzung. Nur sieht man es nicht, weil nichts sichtbar verbrennt und nichts hörbar läuft.
+Duschen ist die alltäglichste Handlung im Haushalt und gleichzeitig eine der teuersten. Über das Jahr kommt viel zusammen: [co2online](https://www.co2online.de/energie-sparen/) beziffert die Wassererwärmung auf rund 16 % des gesamten Haushalts-Energieverbrauchs, die Raumwärme auf rund zwei Drittel. Warmwasser ist damit – neben dem Haushaltsstrom – einer der beiden großen Blöcke hinter der Heizung. Das sind Durchschnittswerte; wie viel Euro daraus werden, hängt an deinem Tarif und deiner Nutzung. Nur sieht man es nicht, weil nichts sichtbar verbrennt und nichts hörbar läuft.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -198,7 +198,7 @@ Diese Gegenüberstellung dauert [fünf Minuten](../../posts/2026-09-20-finanziel
 
 ### Wie hoch ist der Warmwasseranteil an den Heizkosten?
 
-Das hängt von Haushalt, Anlage und Nutzung ab. Als Faustgröße für den Energieverbrauch nennt [co2online](https://www.co2online.de/energie-sparen/) rund 16 Prozent Warmwasseranteil im Haushalt. Deinen eigenen Kostenanteil liest du auf der Heizkostenabrechnung ab – dort steht er bei zentraler Versorgung als eigener Wert.
+Das hängt von Haushalt, Anlage und Nutzung ab. Als Faustgröße für den Energieverbrauch nennt [co2online](https://www.co2online.de/energie-sparen/) rund 16 % Warmwasseranteil im Haushalt. Deinen eigenen Kostenanteil liest du auf der Heizkostenabrechnung ab – dort steht er bei zentraler Versorgung als eigener Wert.
 
 ### Ist ein Durchlauferhitzer teurer als ein Speicher?
 

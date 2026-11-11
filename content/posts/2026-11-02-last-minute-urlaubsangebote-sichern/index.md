@@ -51,16 +51,16 @@ Schreibe jeden Punkt einzeln auf. So wird der Gesamtpreis für dich transparent.
 Jetzt geht es an die genauen Zahlen. Nimm dir einen Zettel oder eine Liste zur Hand. Trage dort alle einzelnen Posten ein. Hier folgt ein genaues Beispiel für deine Rechnung. Wir nehmen eine Reise von fünf Tagen an. Das hilft dir beim Planen deines Budgets. Du siehst sofort die Wirkung der einzelnen Kosten.
 
 **Rechenbeispiel:**
-Wir gehen von diesen Werten für die Reise aus: Der Grundpreis liegt bei 30 Euro am Tag. Die Kaution beträgt 500 Euro. Du wählst einen Schutz ohne eigenen Anteil bei Schaden. Die Tankregel lautet: voll abholen und voll zurückgeben. Es gibt keinen zweiten Fahrer für die Tour. Ein Navi kostet 5 Euro am Tag extra.
+Wir gehen von diesen Werten für die Reise aus: Der Grundpreis liegt bei 30 € am Tag. Die Kaution beträgt 500 €. Du wählst einen Schutz ohne eigenen Anteil bei Schaden. Die Tankregel lautet: voll abholen und voll zurückgeben. Es gibt keinen zweiten Fahrer für die Tour. Ein Navi kostet 5 € am Tag extra.
 
-- Der Grundpreis: Du fährst fünf Tage lang. Das macht 5 mal 30 Euro. Die Summe ist 150 Euro.
-- Die Kaution: Die Firma blockt 500 Euro auf deiner Karte. Das Geld gehört dir weiterhin. Du bekommst es nach der Fahrt zurück.
-- Das Tanken: Du zahlst 0 Euro an den Verleih. Du füllst den Tank vor der Abgabe selbst an der Zapfsäule.
-- Das Navi: Du nutzt das Gerät für fünf Tage. Das kostet 5 mal 5 Euro. Die Summe ist 25 Euro.
+- Der Grundpreis: Du fährst fünf Tage lang. Das macht 5 mal 30 €. Die Summe ist 150 €.
+- Die Kaution: Die Firma blockt 500 € auf deiner Karte. Das Geld gehört dir weiterhin. Du bekommst es nach der Fahrt zurück.
+- Das Tanken: Du zahlst 0 € an den Verleih. Du füllst den Tank vor der Abgabe selbst an der Zapfsäule.
+- Das Navi: Du nutzt das Gerät für fünf Tage. Das kostet 5 mal 5 €. Die Summe ist 25 €.
 
-**Gesamtkosten ohne Kaution:** Addiere nun die Beträge für den Urlaub. 150 Euro für das Auto plus 25 Euro für das Navi. Das macht zusammen 175 Euro für die ganze Zeit.
+**Gesamtkosten ohne Kaution:** Addiere nun die Beträge für den Urlaub. 150 € für das Auto plus 25 € für das Navi. Das macht zusammen 175 € für die ganze Zeit.
 
-Die Kaution ist keine echte Ausgabe für dich. Du bekommst das Geld nach der Reise wieder. Das gilt bei einem Wagen ohne neue Schäden. Manche Firmen verlangen Geld für den Verzicht auf den Eigenanteil. Das macht den Preis pro Tag teurer. Eine Faustregel besagt: Ohne diesen Schutz sinkt der Preis oft um 10 bis 20 Prozent. Das ist eine gängige Regel für den Markt. Wäge das Risiko für dich genau ab. Ein kleiner Kratzer kann sonst am Ende teuer werden. Mit einem Schutz ohne Eigenanteil fährst du oft entspannter.
+Die Kaution ist keine echte Ausgabe für dich. Du bekommst das Geld nach der Reise wieder. Das gilt bei einem Wagen ohne neue Schäden. Manche Firmen verlangen Geld für den Verzicht auf den Eigenanteil. Das macht den Preis pro Tag teurer. Eine Faustregel besagt: Ohne diesen Schutz sinkt der Preis oft um 10 bis 20 %. Das ist eine gängige Regel für den Markt. Wäge das Risiko für dich genau ab. Ein kleiner Kratzer kann sonst am Ende teuer werden. Mit einem Schutz ohne Eigenanteil fährst du oft entspannter.
 
 ## Buchungszeitpunkt nutzen – Last Minute Vorteile und Fallen
 
@@ -68,10 +68,10 @@ Ein schneller Deal lockt oft mit kleinen Preisen. Die Kosten sinken scheinbar ku
 
 Nutze ein Portal wie **CHECK24** für deine Suche. Prüfe dort jedes Detail der Angebote. Lies das Kleingedruckte in Ruhe durch. Manche Rabatte gelten nur an fernen Orten. Andere verlangen eine Zahlung sofort nach der Buchung. Dieses Geld bekommst du bei einer Absage nicht zurück. Das erhöht dein Risiko bei der Planung.
 
-Nutze die **50-30-20-Regel** für dein gesamtes Geld. Das ist ein einfaches Modell für dein Budget im Urlaub. Es ist eine Hilfe für die Planung, keine feste Vorgabe. So teilst du dein Geld sinnvoll auf:
-- 50 Prozent vom Budget für feste Kosten. Dazu zählen Flug, Hotel und das Auto.
-- 30 Prozent vom Budget für den Spaß. Das sind Essen, Trinken und Ausflüge.
-- 20 Prozent vom Budget für Notfälle. Das ist dein Puffer für Überraschungen.
+Nutze die **50–30–20-Regel** für dein gesamtes Geld. Das ist ein einfaches Modell für dein Budget im Urlaub. Es ist eine Hilfe für die Planung, keine feste Vorgabe. So teilst du dein Geld sinnvoll auf:
+- 50 % vom Budget für feste Kosten. Dazu zählen Flug, Hotel und das Auto.
+- 30 % vom Budget für den Spaß. Das sind Essen, Trinken und Ausflüge.
+- 20 % vom Budget für Notfälle. Das ist dein Puffer für Überraschungen.
 So deckst du auch extra Gebühren beim Verleih ab. Dein Budget für die Reise bleibt sicher. Du erlebst keine bösen Wunder nach der Rückkehr. Ein Puffer gibt dir ein gutes Gefühl beim Reisen.
 
 ## Vertrag und Kündigungsfenster – flexibel bleiben
@@ -114,7 +114,7 @@ Nutze ein Portal für den schnellen Vergleich. Ein guter Dienst für die Suche i
 Die Regel „Voll abholen und voll zurückgeben“ ist meist die beste Wahl. Du zahlst dann nur den echten Preis für den Sprit an der Tankstelle. Andere Regeln sind oft teurer für dich. Bei der Option „Voll abholen und leer zurückgeben“ zahlst du den Sprit oft im Voraus. Die Preise beim Verleih liegen meist weit über dem Marktpreis. Zudem bekommst du kein Geld für Reste im Tank zurück. Tanke den Wagen also lieber selbst kurz vor der Abgabe an einer Station in der Nähe.
 
 ### Sollte ich den Eigenanteil beim Schutz immer ausschalten?
-Das hängt von deinem Wunsch nach Sicherheit ab. Ohne Eigenanteil zahlst du bei einem Schaden nichts dazu. Das kostet pro Tag meist einen Aufpreis. Wenn du das Risiko selbst tragen willst, sparst du diesen Betrag. Die Ersparnis liegt oft bei 10 bis 20 Prozent vom Preis. Doch ein kleiner Unfall kann dann schnell teuer werden. Für einen entspannten Urlaub ist ein Schutz ohne Eigenanteil oft die bessere Wahl. So musst du dir keine Sorgen um Kratzer am Auto machen.
+Das hängt von deinem Wunsch nach Sicherheit ab. Ohne Eigenanteil zahlst du bei einem Schaden nichts dazu. Das kostet pro Tag meist einen Aufpreis. Wenn du das Risiko selbst tragen willst, sparst du diesen Betrag. Die Ersparnis liegt oft bei 10 bis 20 % vom Preis. Doch ein kleiner Unfall kann dann schnell teuer werden. Für einen entspannten Urlaub ist ein Schutz ohne Eigenanteil oft die bessere Wahl. So musst du dir keine Sorgen um Kratzer am Auto machen.
 
 ### Wie hoch sollte meine Kaution sein, ohne das Budget zu belasten?
 Die Kaution ist kein Geld, das du ausgibst. Die Firma blockt den Betrag nur auf deiner Kreditkarte. Du bekommst das Geld nach der Fahrt wieder zurück. Plane diese Summe aber fest als Puffer ein. Dein Kreditrahmen auf der Karte muss groß genug sein. Sonst kannst du im Urlaub kein Geld mehr abheben oder im Restaurant zahlen. Die Höhe der Kaution steht meist in den Details zum Angebot. Prüfe diesen Wert vor der Buchung ganz genau.

@@ -151,7 +151,7 @@ Das sind über **500 € im Jahr**, ohne dass du deine Lebensqualität sichtbar
 
 **Hinweis zum Stand der Preise:** Laut vorläufigem Verbraucherpreisindex des Statistischen Bundesamts lagen die Energieprodukte im Oktober 2026 um +14,9 % über dem Vorjahreswert. Die Tabelle ist ein Beispiel mit Annahmen; deine tatsächliche Ersparnis hängt von deinem Tarif, deinen Preisen und deinem Verbrauch ab und kann bei Energie höher ausfallen.
 
-[Quelle: Statistisches Bundesamt – Verbraucherpreisindex im Oktober 2026, vorläufig: Energieprodukte mit einem Anstieg von 14,9 Prozent gegenüber dem Vorjahresmonat. Link: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html]
+[Quelle: Statistisches Bundesamt – Verbraucherpreisindex im Oktober 2026, vorläufig: Energieprodukte mit einem Anstieg von 14,9 % gegenüber dem Vorjahresmonat. Link: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html]
 
 Wenn du damit anfangen willst, helfen dir diese Artikel weiter:
 

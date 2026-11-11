@@ -143,9 +143,9 @@ Häufig gibt es kostenlose Alternativen: Die örtliche Bibliothek verleiht Filme
 
 ## Preisentwicklung richtig einordnen
 
-Richte deine Sparziele an deinen echten Ausgaben aus. [Destatis](https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html) meldete am 30. Oktober 2026 eine vorläufige Teuerungsrate von 2,8 Prozent. Energie war danach 12,2 Prozent teurer als ein Jahr zuvor. Im September lag dieser Wert noch bei 14,9 Prozent.
+Richte deine Sparziele an deinen echten Ausgaben aus. [Destatis](https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html) meldete am 30. Oktober 2026 eine vorläufige Teuerungsrate von 2,8 %. Energie war danach 12,2 % teurer als ein Jahr zuvor. Im September lag dieser Wert noch bei 14,9 %.
 
-Lebensmittel kosteten im Oktober 0,4 Prozent mehr. Diese Mittelwerte gelten nicht automatisch für deinen Haushalt.
+Lebensmittel kosteten im Oktober 0,4 % mehr. Diese Mittelwerte gelten nicht automatisch für deinen Haushalt.
 
 Meal Prep kann trotzdem viel sparen, wenn du häufig teuer außer Haus isst. Hast du diese Ausgabe kaum, prüfe zuerst Energie-, Wohn- und Vertragskosten. Vergleiche im Haushaltsbuch deine eigenen Vormonatsausgaben und aktualisiere die Planung, wenn sich deine tatsächlichen Preise ändern. Die nachfolgenden Euro-Beträge bleiben Modellrechnungen.
 

@@ -153,7 +153,7 @@ In dieser Tabelle siehst du, wo du am schnellsten ansetzen kannst. Die Hebelwirk
 | **Einkauf** | Nutzung von Cashback-Systemen | Gering | Mittel |
 | **Mobilität** | Frühzeitiger Mietwagen-Preisvergleich | Gering | Hoch |
 
-## Fazit: Reisekasse füllen – 7 Wege zu mehr Budget für den Urlaub
+## Fazit: Reisekasse füllen – sieben Wege zu mehr Budget für den Urlaub
 
  Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – [fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) reichen; das ist ein Modellwert.
 

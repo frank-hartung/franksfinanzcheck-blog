@@ -33,7 +33,7 @@ Du öffnest deine letzte Rechnung. Der Preis für dein Handy steigt jedes Jahr e
 Ein klarer Blick spart Zeit. Er verhindert falsche Entscheidungen beim Kauf. Zuerst prüfst du deine Leistungen. Was nutzt du wirklich an Daten und Minuten? Dann schaust du genau auf die Kosten. Prüfe den Preis pro Monat und den Preis pro Jahr. Vergleiche am Ende die Regeln im Vertrag. So vermeidest du böse Überraschungen nach dem Abschluss.
 
 **Rechenbeispiel:**
-Stell dir vor, du zahlst 30 Euro im Monat. Dein Vertrag läuft ein Jahr lang. Das macht 360 Euro Fixkosten im Jahr. Ein neuer Tarif kostet nur 25 Euro im Monat. Du sparst also 5 Euro jeden Monat ein. Auf das ganze Jahr gerechnet sind das 60 Euro Ersparnis. Dieses Geld bleibt einfach auf deinem Konto liegen.
+Stell dir vor, du zahlst 30 € im Monat. Dein Vertrag läuft ein Jahr lang. Das macht 360 € Fixkosten im Jahr. Ein neuer Tarif kostet nur 25 € im Monat. Du sparst also 5 € jeden Monat ein. Auf das ganze Jahr gerechnet sind das 60 € Ersparnis. Dieses Geld bleibt einfach auf deinem Konto liegen.
 
 | Prüfpunkt | Warum wichtig | Wie du prüfst |
 |-----------|---------------|---------------|
@@ -47,8 +47,8 @@ Stell dir vor, du zahlst 30 Euro im Monat. Dein Vertrag läuft ein Jahr lang. Da
 Der 4K-Prüfpfad macht deine Kosten sofort sichtbar. Er besteht aus vier einfachen Schritten für deinen Erfolg. Zuerst kommen die Kosten. Dann folgen die Konditionen für den Vertrag. Danach sicherst du das Fenster für die Kündigung. Am Ende hältst du den Kurs für die Zukunft. Jeder Schritt gibt dir Sicherheit bei deiner Entscheidung.
 
 **Rechenbeispiel:**
-Dein Vertrag hat eine Gebühr von 20 Euro. Jedes extra Megabyte kostet dich 0,10 Euro. Im letzten Monat hast du das Limit um 200 MB überschritten.
-20 Euro Grundpreis + (200 MB × 0,10 Euro) = 20 Euro + 20 Euro = 40 Euro Kosten.
+Dein Vertrag hat eine Gebühr von 20 €. Jedes extra Megabyte kostet dich 0,10 €. Im letzten Monat hast du das Limit um 200 MB überschritten.
+20 € Grundpreis + (200 MB × 0,10 €) = 20 € + 20 € = 40 € Kosten.
 Du zahlst also das Doppelte durch kleine Extras.
 
 Kosten sehen bedeutet volle Klarheit für dich. Nimm dir deine letzten drei Rechnungen vor. Addiere alle Beträge für diesen Zeitraum. Suche nach Posten für Anrufe ins Ausland. Auch Sondernummern kosten oft viel Geld. Notiere dir den Durchschnitt pro Monat. Das ist dein Startpunkt für den Vergleich.
@@ -71,7 +71,7 @@ Kurs halten bedeutet regelmäßige Kontrolle. Prüfe deinen Tarif alle drei Mona
 Viele Nutzer wählen zu große Pakete für ihr Handy. Sie brauchen das hohe Volumen im Alltag selten. Oft reicht die Hälfte der Daten völlig aus. Die Faustregel hilft dir beim Sparen von Geld. Halbiere dein gebuchtes Volumen im Kopf. Passt dein echter Verbrauch noch in diese Menge? Dann ist dein aktueller Tarif zu groß und zu teuer.
 
 **Rechenbeispiel:**
-Dein Tarif bietet 10 GB Daten für das Internet. Du verbrauchst aber nur 4,5 GB im Monat. Ein Paket mit 5 GB reicht also völlig aus. Der große Tarif kostet dich 25 Euro. Das kleine Paket gibt es schon für 15 Euro. Du sparst 10 Euro im Monat ein. Das sind 120 Euro Ersparnis in jedem Jahr.
+Dein Tarif bietet 10 GB Daten für das Internet. Du verbrauchst aber nur 4,5 GB im Monat. Ein Paket mit 5 GB reicht also völlig aus. Der große Tarif kostet dich 25 €. Das kleine Paket gibt es schon für 15 €. Du sparst 10 € im Monat ein. Das sind 120 € Ersparnis in jedem Jahr.
 
 Die Netzabdeckung ist ein wichtiger Punkt beim Vergleich. Ein billiger Tarif hilft dir nicht ohne Empfang. Prüfe die Karten der Anbieter vor dem Kauf genau. In Städten ist das Netz meistens sehr gut. Auf dem Land gibt es oft noch Lücken. Frage Freunde nach ihren Erfahrungen an deinem Wohnort. Ein guter Empfang spart dir viel Frust im Alltag.
 
@@ -87,14 +87,14 @@ Die Netzabdeckung ist ein wichtiger Punkt beim Vergleich. Ein billiger Tarif hil
 Werbeangebote locken oft mit sehr kleinen Preisen. Nach sechs Monaten steigt der Preis meistens stark an. Das steht oft nur im Kleingedruckten des Vertrags. Auch Gebühren für den Service kosten dich Geld. Diese Pauschalen blähen die Rechnung unnötig auf. Nutze unsere Faustregel für solche Gebühren. Eine Gebühr sollte immer klein bleiben.
 
 **Rechenbeispiel:**
-Deine Grundgebühr liegt bei 20 Euro im Monat. Der Anbieter verlangt 1,50 Euro Gebühr für den Service. Teile die Gebühr durch den Grundpreis deines Tarifs. Das ergibt einen Wert von 7,5 Prozent. Dieser Wert liegt über unserer Grenze von 5 Prozent. Die Gebühr ist also recht hoch. Prüfe, ob es Tarife ohne diesen Posten gibt.
+Deine Grundgebühr liegt bei 20 € im Monat. Der Anbieter verlangt 1,50 € Gebühr für den Service. Teile die Gebühr durch den Grundpreis deines Tarifs. Das ergibt einen Wert von 7,5 %. Dieser Wert liegt über unserer Grenze von 5 %. Die Gebühr ist also recht hoch. Prüfe, ob es Tarife ohne diesen Posten gibt.
 
-Anschlussgebühren sind eine weitere Falle beim Wechsel. Viele Anbieter verlangen einmalig 30 Euro oder mehr. Rechne diesen Betrag auf die Laufzeit um. Bei 24 Monaten sind das 1,25 Euro pro Monat extra. Manche Anbieter streichen diese Gebühr bei einer Aktion. Achte beim Vergleich auf solche Geschenke der Anbieter. Das senkt deine Kosten sofort.
+Anschlussgebühren sind eine weitere Falle beim Wechsel. Viele Anbieter verlangen einmalig 30 € oder mehr. Rechne diesen Betrag auf die Laufzeit um. Bei 24 Monaten sind das 1,25 € pro Monat extra. Manche Anbieter streichen diese Gebühr bei einer Aktion. Achte beim Vergleich auf solche Geschenke der Anbieter. Das senkt deine Kosten sofort.
 
 | Kostenfalle | Typische Erscheinungsform | Wie du sie vermeidest |
 |-------------|---------------------------|-----------------------|
 | Preiserhöhung | Preis steigt nach 6 Monaten | Regeln genau lesen |
-| Service-Gebühr | Monatliche Pauschale | Nur unter 5 % akzeptieren |
+| Service-Gebühr | Monatliche Pauschale | Nur unter 5 % akzeptieren |
 | Roaming-Kosten | Gebühr im Ausland | Roaming im Handy sperren |
 | Bindung | Lange Laufzeit | Frist genau notieren |
 
@@ -103,9 +103,9 @@ Anschlussgebühren sind eine weitere Falle beim Wechsel. Viele Anbieter verlange
 Das Timing beim Wechsel ist sehr wichtig. Viele Nutzer warten oft viel zu lange. Dann verpassen sie die wichtige Frist zur Kündigung. Andere Nutzer wechseln dagegen viel zu früh. Dann zahlen sie zwei Verträge zur gleichen Zeit. Das nennt man eine teure Doppelzahlung. Das vernichtet deine Ersparnis im ersten Jahr sofort.
 
 **Rechenbeispiel:**
-Du findest einen neuen Deal für 27 Euro. Dein alter Vertrag kostet 28 Euro im Monat. Du wechselst nun zwei Monate zu früh. Jetzt zahlst du beide Beträge gleichzeitig. Das sind 55 Euro Kosten in diesen Monaten. Die Ersparnis im Jahr liegt bei 12 Euro. Durch den Fehler zahlst du am Ende kräftig drauf.
+Du findest einen neuen Deal für 27 €. Dein alter Vertrag kostet 28 € im Monat. Du wechselst nun zwei Monate zu früh. Jetzt zahlst du beide Beträge gleichzeitig. Das sind 55 € Kosten in diesen Monaten. Die Ersparnis im Jahr liegt bei 12 €. Durch den Fehler zahlst du am Ende kräftig drauf.
 
-Ein weiterer Fehler ist der Fokus auf Rabatte. Ein Rabatt von 50 Prozent klingt erst einmal super. Er gilt aber oft nur für drei Monate. Danach zahlst du den vollen Preis für den Rest. Rechne immer die Summe über die ganze Zeit aus. Nur der Durchschnittspreis zeigt dir die Wahrheit. Lass dich nicht von großen Prozentzeichen blenden.
+Ein weiterer Fehler ist der Fokus auf Rabatte. Ein Rabatt von 50 % klingt erst einmal super. Er gilt aber oft nur für drei Monate. Danach zahlst du den vollen Preis für den Rest. Rechne immer die Summe über die ganze Zeit aus. Nur der Durchschnittspreis zeigt dir die Wahrheit. Lass dich nicht von großen Prozentzeichen blenden.
 
 | Typischer Fehler | Warum er teuer wird | Wie du ihn vermeidest |
 |------------------|---------------------|-----------------------|
