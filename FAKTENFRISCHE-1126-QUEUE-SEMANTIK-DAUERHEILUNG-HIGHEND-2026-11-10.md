@@ -140,6 +140,16 @@ $ python3 scripts/blustradius_register.py --check
 ✅ Blustradius-Vertrag erfüllt: 86 Schritte des Auslieferungswegs erklären ihren Blustradius.
 ```
 
+Und derselbe Job in der CI (Lauf 42890209624, Commit `4c82a37`, Job
+`regression`, 40 min): **alle Schritte grün**, ausdrücklich
+
+* `Code-Regression – Suite und Selbsttests` → success,
+* `Uhr-Probe – die Suite muss an jedem Kalendertag grün sein` → success,
+* `KI-Probe`, `Beweis-Ledger-Isolation`, `Beweis-Ledger unberührt` → success.
+
+Das ist der Beweis am gemessenen Ort: Der Job, der den Befund trug, ist
+grün – nicht nur ein lokaler Nachlauf.
+
 Die beiden Tests aus dem Befund sind grün, **weil** die Daten stimmen – nicht,
 weil die Prüfung abgeschaltet wurde. Die Sabotageproben in
 `test_faktenfrische_messhoehe.py` beweisen die Gegenrichtung: Ein Vorlauf-
