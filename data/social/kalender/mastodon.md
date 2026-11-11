@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 11.11.2026 13:48 (Europe/Berlin)  
+> Automatisch aktualisiert: 11.11.2026 21:14 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,12 +12,9 @@
 
 ## Kommende Beiträge
 
-### Mi, 11. November 2026
-- **13:47** ⏳ Gaspreiserhöhung Sonderkündigungsrecht — _nutzen_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/
 ### Fr, 13. November 2026
 - **07:30** ⏳ Wlan verbessern mesh system oder repeater im check — _nutzen_ · Launch
-- **07:30** ⏳ Gaspreiserhöhung Sonderkündigungsrecht — _nutzen_ · Launch  
+- **07:30** ⏳ Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/
 ### Mo, 16. November 2026
 - **07:30** ⏳ WLAN verbessern: So bringst du stabilen Speed in jede Ecke — _zahl_ · Evergreen  
