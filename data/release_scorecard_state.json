@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "generated_at": "2026-11-10T18:01:44Z",
+  "generated_at": "2026-11-11T11:46:04Z",
   "modus": "kandidaten",
-  "commit": "7b934546c8a46ff1a39eb2b10ed08a83fa029cbf",
+  "commit": "92a938f6bef15cc07579dfc1446ed8cc65f9312d",
   "kapazitaet": {
-    "stichtag": "2026-11-10",
-    "basis": "2026-11-10",
+    "stichtag": "2026-11-11",
+    "basis": "2026-11-11",
     "projiziert": false,
     "artikel": 126,
     "faellig": 0,
@@ -14,7 +14,7 @@
     "naechste_frist": {
       "slug": "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
       "frist": "2026-11-13",
-      "restlaufzeit": 3
+      "restlaufzeit": 2
     },
     "budget": 5,
     "laeufe_je_tag": 1.0,
@@ -36,7 +36,7 @@
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
       "geprueft": true,
-      "bis": "2027-03-10",
+      "bis": "2027-03-11",
       "tage": 120,
       "weg_frei": true,
       "erstverletzung": null,
@@ -50,7 +50,7 @@
     "empfohlenes_budget": 5,
     "empfehlung_erreicht": true,
     "hartes_limit": 18,
-    "spitze_geprueft": 59
+    "spitze_geprueft": 58
   },
   "ursachen": [
     {
@@ -80,9 +80,10 @@
         "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
         "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
         "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
-        "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen"
+        "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+        "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang"
       ],
-      "anzahl": 21
+      "anzahl": 22
     },
     {
       "check": "T6-textverstaendnis",
@@ -141,14 +142,14 @@
     }
   ],
   "befundlage": {
-    "offen": 140,
-    "seiten": 33,
-    "live_befunde": 87,
-    "live_seiten": 21,
-    "ueberholt": 102,
+    "offen": 145,
+    "seiten": 34,
+    "live_befunde": 92,
+    "live_seiten": 22,
+    "ueberholt": 107,
     "ohne_fassung": 15,
     "nicht_entscheidbar": 0,
-    "aeltester_tage": 11,
+    "aeltester_tage": 12,
     "frist_tage": 14,
     "ueber_frist": 0,
     "je_slug": {
@@ -172,7 +173,8 @@
       "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": 5,
       "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": 3,
       "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": 3,
-      "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": 5
+      "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": 5,
+      "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang": 5
     }
   },
   "tool_fehler": {},
@@ -1914,8 +1916,8 @@
       "siegel_drift": "unverändert",
       "checks": []
     },
-    "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang": {
-      "sha256": "be9e1426b9a12d3109fa3f17d21f540306ee05531f7e0c46a122a131b4fd6b16",
+    "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck": {
+      "sha256": "46fbd9f0e9dceec778245f3e46ceab27c95abf16ceca79e0bd2f646a36cb0afe",
       "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1928,7 +1930,57 @@
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
+      "naechste_pruefung": "2026-12-16",
+      "siegel_drift": "unverändert",
+      "checks": [
+        {
+          "check": "Q2-quellen-vorhanden",
+          "dimension": "quellen",
+          "wirkung": "warnung",
+          "detail": "keine Belegkette im Frontmatter (quellen) – nachpflegen (faktenfrische)"
+        }
+      ]
+    },
+    "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang": {
+      "sha256": "d2e6413dcd25664720e776b35253dc2d483b322c861dc7191f8ea34ab2cce910",
+      "urteil": "blockiert",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "blockiert",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
       "naechste_pruefung": "2026-12-20",
+      "siegel_drift": "unverändert",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "4284fd2d9c9005e7af8f (praezision): Behauptung, dass Überladung der Maschine zu schnellerem Verschleiß und teuren Reparaturen führt, wird ohne konkrete Daten oder Messgröße angegeben.; 84e247f17354e224c973 (praezision): Aussage, dass das richtige Beladen allein die Fixkosten senkt, ohne weitere Maßnahmen, ist ein pauschales Leistungsversprechen ohne Nennung von Mechanismen oder Grenzen.; a2a7dc69f1"
+        }
+      ]
+    },
+    "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
+      "sha256": "92263bc1ded969c870e32a205d628fccd152904efee0765d56bf23a7d8d6cac1",
+      "urteil": "warnung",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "warnung",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2027-02-07",
       "siegel_drift": "unverändert",
       "checks": [
         {

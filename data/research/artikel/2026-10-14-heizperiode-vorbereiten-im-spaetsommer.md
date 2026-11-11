@@ -1,12 +1,12 @@
 # Faktenfrische: Heizperiode vorbereiten im Spätsommer
 
-> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-10-15 09:22 UTC.
+> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-11 12:06 UTC.
 > Agent-Reach-Kanäle, nur lesend. Fundstellen sind Signale, keine Freigabe.
 
 - **Artikel:** `content/posts/2026-10-14-heizperiode-vorbereiten-im-spaetsommer/index.md`
 - **Themenwelt:** strom-sparen
-- **Fälligkeit:** Erstrecherche – noch nie faktengeprüft (Klasse: saisonal)
-- **GEO-Reife:** 3/6 (50 %)
+- **Fälligkeit:** frisch geprüft vor 27 Tagen (Intervall 30 Tage) (Klasse: saisonal)
+- **GEO-Reife:** 6/6 (100 %)
 - **Suchbegriffe:** Gasrechnung senken, Heizkosten sparen, Herbst Vorbereitung, Heizung prüfen, Heizperiode vorbereiten im Spätsommer, Heizperiode, vorbereiten, Strompreis, Gaspreis, Energie, Heizkosten, Photovoltaik
 - **Kanäle:** rss:Bundesnetzagentur – Pressemitteilungen, rss:Verbraucherzentrale – Energie, web:bundesnetzagentur.de
 
@@ -19,28 +19,24 @@
 
 > Title: Bundesnetzagentur - Energie
 > 
-> *   [_Energie_](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html)
->     *   [Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html)
-> 
-> *   [Digitales und Telekommunikation](https://www.bundesnetzagentur.de/DE/Vportal/TK/start.html)
->     *   [Energie](https://www.bundesnetzagentur.de/DE/Vportal/Energie/start.html)
->     *   [Post](https://www.bundesnetzagentur.de/DE/Vportal/Post/start.html)
->     *   [Anfragen und Beschwerden](https://www.bundesnetzagentur.de/DE/Vportal/AnfragenBeschwerden/start.ht
+> *   [_Fachthemen_](https://www.bundesnetzagentur.de/DE/Themen/start.html "erster Klick öffnet das Untermenü, zweiter Klick geht zur Zielseite")
+>     *   [Energie](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) 
+>     *   [Telekom­munikation](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) 
+>         *   [Breitbandversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Breitband/start.html) 
+>         *   [Kupfer-Glas-Migration](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommun
 
 ## Fachliche Befunde (KI-Fachprüfung)
 
-- **luecke** – Die Angabe, dass das Entlüften der Heizkörper 5 % Energie einspart, wird von der Bundesnetzagentur nicht belegt; dort gibt es keine konkrete Prozentangabe zum Einsparpotenzial beim Entlüften. (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
-- **praezision** – Die pauschale Empfehlung, das Raumthermostat auf 20 °C zu stellen, ist zu unpräzise, weil die Bundesnetzagentur betont, dass die optimale Raumtemperatur von individuellen Faktoren wie Gebäudedämmung und persönlichem Komfort abhängt. (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
-- **luecke** – Die Aussage, dass ein Router im Standby‑Modus 5 W verbraucht, wird von der Bundesnetzagentur nicht bestätigt; in den bereitgestellten Informationen werden keine Watt‑Angaben zu einzelnen Geräten genannt. (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
-- **luecke** – Der Hinweis, den Tarifwechsel über das Vergleichsportal CHECK24 zu erledigen, ist nicht durch die Bundesnetzagentur unterstützt; die Behörde liefert lediglich allgemeine Informationen zum Anbieterwechsel, nicht zu konkreten Vergleichsportalen.
+Status: geprüft (gemini:gemini-3-flash-preview)
+
+- **luecke** – Der Artikel verweist für Informationen zum Stromverbrauch von Routern auf die Bundesnetzagentur, verlinkt jedoch die Fachabteilung für Energie statt die zuständige Abteilung für Telekommunikation. (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
+- **praezision** – Die pauschale Einordnung der Behördenseite als 'kein Beleg für Tipps' greift zu kurz; die Fundstelle ist das zentrale Aufsichtsportal für den regulierten Energiemarkt (Strom/Gas). (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
 
 ## Offene GEO-Punkte
 
-- Kurzantwort-Box (direkte Antwort für AI Overviews)
-- Belegkette im Frontmatter (`quellen:` → citation-Schema)
-- Sichtbares Prüfdatum (`faktencheck:`)
+- keine
 
 ## Kanal-Störungen
 
-- Bundesnetzagentur – Pressemitteilungen: Feed nicht lesbar
-- Verbraucherzentrale – Energie: Feed nicht lesbar
+- Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)
+- Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)
