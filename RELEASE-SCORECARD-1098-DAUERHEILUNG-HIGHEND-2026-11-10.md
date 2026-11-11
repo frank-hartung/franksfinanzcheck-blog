@@ -433,3 +433,34 @@ Sandbox- bzw. Alt-Befunde, keine Regression dieses Branches.
 `public/`) und A3 (Offenlegung mit Netz) in der Sandbox nicht beweisbar
 sind – „fail-closed“ ist dort die richtige Antwort. Beweisbar ist die
 F4-Zahl, und die ist **0 live**.
+
+### 6f. Der eine rote CI-Job, den ich bewusst **nicht** grün gemacht habe
+
+`Playwright-Suite` → `Metadaten-Wache – Quelle (Titel, Description, Belege)`
+ist rot – auf `origin/main` **genau identisch** (nachgemessen im
+`origin/main`-Export, gleiche zwei Dateien, gleicher Text). Ursache:
+
+```
+[M4] content/posts/2026-11-01-flugverspaetung-entschaedigung-…/index.md: Keine Quelle im Frontmatter (quellen)
+[M4] content/posts/2026-11-10-wlan-frust-loesen-…/index.md:                    Keine Quelle im Frontmatter (quellen)
+```
+
+Beide Beiträge sind am 11.11. aus der Reserve-/Engine-Kette live gegangen
+(`engine_level: draft`, `redaktionelle_pruefung.status: ausstehend`) und
+nennen **keine einzige** Quelle – im Frontmatter nicht und im Text nicht.
+
+Warum ich das nicht „grün schreibe“: Ein Quellenblock, den ich mir
+ausdenke, wäre exakt die Phantom-Quelle, die RS6 verbietet – und RS6 ist
+der Grund, warum der Befund überhaupt etwas wert ist. Die zwei Beiträge
+brauchen eine redaktionelle Quellenbasis (Fluggastrechte: EU-VO 261/2004;
+Router-Standort: eine belastbare Verbraucher-/Regulierungsquelle), nicht
+ein YAML-Feld.
+
+Der **Klassenfehler** dahinter ist größer als die zwei Dateien: Weder
+`publish_gate.py` noch `reserviere`/`engine_generate` noch
+`publikations_vertrag.py` prüfen `quellen` – die einzige Prüfung ist die
+Metadaten-Wache, und die ist im Auslieferungsweg seit C34 `werkzeug`
+(tolerant), im E2E-Workflow aber hart. Damit kann die Kette einen Beitrag
+ohne eine einzige Quelle live stellen, und niemand merkt es außer dem
+einen E2E-Job. Das ist der nächste sinnvolle Schnitt (Gate im Produzenten
++ eingefrorener Selbsttest), nicht ein nachträglich gebauter Quellenblock.
