@@ -129,7 +129,7 @@ $ python3 scripts/automation_premium_audit.py --strict
 🟢 alle Actions gepinnt, alle Jobs mit Timeout/Permissions/Concurrency
 
 $ python3 -m unittest discover -s scripts/tests      # volle Suite, sauberer Baum
-Ran 5749 tests in 659.028s
+Ran 5787 tests in 689.616s
 OK (skipped=6)
 
 $ python3 scripts/selftest_clock.py --trap-modul scripts.tests.test_faktenfrische_messhoehe --offset 97
