@@ -52,7 +52,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ![Merkkarte: Kernaussagen zu 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „50–30–20-Regel: Beherrsche dein Budget – Fixkosten senken“ (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken“ (eigene Darstellung aus diesem Beitrag).*
 
 ## Das Wichtigste in Kürze
 
@@ -217,7 +217,7 @@ Zehn Minuten reichen oft. Wichtig ist nur, dass du nachsteuerst, wenn eine Kateg
 
 ![Gliederung des Beitrags: 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „50–30–20-Regel: Beherrsche dein Budget – Fixkosten senken“ – 5 Stationen von „Was bedeutet die 50–30–20-Regel konkret?“ bis „So könnte das im Alltag aussehen“ (eigene Darstellung).*
+*Abbildung: Gliederung zu „50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken“ – 5 Stationen von „Was bedeutet die 50-30-20-Regel konkret?“ bis „So könnte das im Alltag aussehen“ (eigene Darstellung).*
 
 ## Die häufigsten Denkfehler
 

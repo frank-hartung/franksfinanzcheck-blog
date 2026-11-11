@@ -55,7 +55,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ![Merkkarte: Kernaussagen zu Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „Gaspreisgarantie: Was bei Preiserhöhung hilft“ (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Preisgarantie Gas: Was bei Preiserhöhung hilft“ (eigene Darstellung aus diesem Beitrag).*
 
 
 ## Wenn ein neuer Preis im Brief steht
@@ -151,7 +151,7 @@ Kündige selbst, schriftlich, und verlange eine Bestätigung. Beim normalen Wech
 
 ![Gliederung des Beitrags: Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „Gaspreisgarantie: Was bei Preiserhöhung hilft“ – 5 Stationen von „Wenn ein neuer Preis im Brief steht“ bis „Preisänderung erhalten: diese fünf Punkte markieren“ (eigene Darstellung).*
+*Abbildung: Gliederung zu „Preisgarantie Gas: Was bei Preiserhöhung hilft“ – 5 Stationen von „Wenn ein neuer Preis im Brief steht“ bis „Preisänderung erhalten: diese fünf Punkte markieren“ (eigene Darstellung).*
 
 ## Jahrespreis nach einer Erhöhung rechnen
 
