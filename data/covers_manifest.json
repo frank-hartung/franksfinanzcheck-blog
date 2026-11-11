@@ -28,7 +28,7 @@
  },
  "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
   "title": "Preisgarantie Gas: So sicherst du günstige Tarife",
-  "ts": "2026-11-09T07:33:06+00:00",
+  "ts": "2026-11-11T16:00:37+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1458,8 +1458,8 @@
   }
  },
  "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem": {
-  "title": "Gaspreiserhöhung Sonderkündigungsrecht",
-  "ts": "2026-10-30T10:31:59+00:00",
+  "title": "Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas",
+  "ts": "2026-11-11T16:00:52+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1760,6 +1760,15 @@
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten": {
+  "title": "Kreditkarte ohne Jahresgebühr: Die besten kostenlosen Karten",
+  "ts": "2026-11-11T16:00:56+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
    "savings": ""
   }
  }

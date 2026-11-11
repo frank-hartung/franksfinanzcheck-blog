@@ -1,5 +1,5 @@
 ---
-title: "Gaspreiserhöhung Sonderkündigungsrecht"
+title: "Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas"
 description: Nutze dein Gaspreiserhöhung Sonderkündigungsrecht. Ich zeige dir, wie du die Grundversorgung Gas kündigen kannst und beim Gastarife vergleichen sparst.
 date: 2026-11-09T11:26:53Z
 draft: false

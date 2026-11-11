@@ -6,7 +6,7 @@ draft: true
 tags: ["Kreditkarte und Kredit"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
-keywords: ["Kreditkarte ohne Gebühren", "Kreditkarten Vergleich", "Kostenlose Kreditkarte"]
+keywords: ["Kreditkarte ohne Gebühren", "Kreditkarten Vergleich", "Kostenlose Kreditkarte", "Kreditkarte ohne Jahresgebühr", "Kreditkarte", "Jahresgebühr", "kostenlosen"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
@@ -15,6 +15,12 @@ redaktionelle_pruefung:
   risikoklasse: "erhoeht"
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
+pin_title: "Kreditkarte ohne Jahresgebühr: Die besten kostenlosen Karten"
+pin_description: "*Werbung | Kreditkarte ohne Jahresgebühr: Die besten kostenlosen Karten – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit… Mehr Spartipps auf FranksFinanzcheck! #kreditkarte #ohne #gebuehren"
+cover:
+  image: "images/covers/2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten.jpg"
+  alt: "Kreditkarte ohne Jahresgebühr: Die besten kostenlosen Karten"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Du hast gerade deine Kreditkartenabrechnung erhalten und bemerkst, dass Jahresgebühren und Fremdwährungsentgelte deine Ausgaben unnötig aufblähen. Gerade im Urlaub oder beim Online‑Shopping im Ausland können solche versteckten Kosten schnell ein Loch ins Budget reißen. Eine Kreditkarte ohne Jahresgebühr ist daher ein einfacher Hebel, um deine Fixkosten zu senken – vorausgesetzt du wählst das passende Modell und prüfst die Bedingungen sorgfältig.

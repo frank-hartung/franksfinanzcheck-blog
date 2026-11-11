@@ -16,7 +16,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Guter Schutz für dein Zuhause hat drei Teile: die passende Police für Gebäude oder Hausrat, einen Schutz gegen Naturgefahren und eine Summe, die zum heutigen Wert passt. Alte Verträge lassen gerade bei Starkregen und Rückstau Lücken. Wer seine Klauseln kennt, steht besser da und zahlt oft nicht mehr."
 social_posted: true
-keywords: ["Dein Haus sicher schützen", "Hausversicherung", "Hausratversicherung", "Elementarschadenversicherung", "Wohngebäudeversicherung", "Unterversicherung vermeiden", "Vorsorge-Update", "Haus Schutz Kosten", "Einbruchschutz Haus"]
+keywords: ["Dein Haus sicher schützen", "Hausversicherung", "Hausratversicherung", "Elementarschadenversicherung", "Wohngebäudeversicherung", "Unterversicherung vermeiden", "Vorsorge-Update", "Haus Schutz Kosten"]
 pin_title: "Dein Haus sicher schützen: Das Vorsorge-Update 2026"
 pin_description: "*Werbung | Hausrat, Elementarschäden, Unterversicherung: Das Vorsorge-Update 2026 zeigt dir, welche Policen wirklich schützen und wo du bei deiner Immobilie Geld sparst. Ein Check, der sich in Minuten rechnet. Jetzt lesen."
 pinwand: "Versicherungen clever wechseln & sparen"
