@@ -464,3 +464,29 @@ Metadaten-Wache, und die ist im Auslieferungsweg seit C34 `werkzeug`
 ohne eine einzige Quelle live stellen, und niemand merkt es außer dem
 einen E2E-Job. Das ist der nächste sinnvolle Schnitt (Gate im Produzenten
 + eingefrorener Selbsttest), nicht ein nachträglich gebauter Quellenblock.
+
+### 6g. `gate` (Governance-Selbsttests) – rot auf `main`, seit mindestens 20 Stunden
+
+Der Job „Qualitäts-Gate“ ist auf `main` in **jedem** der letzten vier Läufe
+rot (`43024578580`, `42981764755`, `42880553253`, `42876882752`), also
+lange vor diesem Branch. Reproduziert mit `scripts/selftest_runner.py`
+(284 Wachen, 566 Uhr-Proben):
+
+```
+❌ scripts/reserve_finisher.py --selftest Exit 2:
+   - Gate-Regel ohne Heiler: [{'regel': 'kurzantwort_failures',
+                               'art': 'keine-deckung'}] []
+```
+
+Das ist die #349-Klasse: `publish_gate.py` hat am 07.11. mit #1110 die
+Regel `kurzantwort_failures` bekommen, `reserve_healer_coverage.REGEL_HEILER`
+kennt sie nicht. Ein Reserve-Kandidat ohne Kurzantwort kann damit **nie**
+reif werden – genau der „strukturell unerreichbare Zielbestand“, gegen den
+die Deckungs-Wache gebaut wurde.
+
+Die Heilung ist **nicht** ein Eintrag in der Tabelle: Der einzige Heiler
+für dieses Feld ist `generate_kurzantworten.py`, und der arbeitet über ein
+LLM (`generate_drafts`) – er hängt also an Modellzugang und AI-Budget.
+Ein Heiler, der im Nachtlauf Geld kostet, ist eine Betreiber-Entscheidung,
+keine Reparatur, die ein Agent nebenbei einhängt. Deshalb: Befund
+dokumentiert, Tabelle **nicht** stillschweigend erweitert.
