@@ -63,10 +63,20 @@
     },
     {
       "slug": "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-      "ready": false,
+      "ready": true,
       "sha256": "e1abbf3d59a90d48f559148b9d781d6039598dd72c52400f9a0d424fc35fe121",
+      "flesch": 67.4,
       "measured_at": "2026-11-11T11:23:22Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
+      "score": 0.968,
+      "parts": {
+        "spelling": 0.9,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
     },
     {
       "slug": "2026-11-10-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
@@ -139,20 +149,10 @@
     },
     {
       "slug": "2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
-      "ready": true,
+      "ready": false,
       "sha256": "8baebef6a63b951e42af3db8a6f2f671fd5378591f54334f7bb12e05df0b1df3",
-      "flesch": 62.1,
       "measured_at": "2026-11-11T11:26:21Z",
-      "score": 0.962,
-      "parts": {
-        "spelling": 0.88,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.86,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten",
