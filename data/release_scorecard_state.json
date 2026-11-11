@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-11T06:36:47Z",
+  "generated_at": "2026-11-11T11:46:04Z",
   "modus": "kandidaten",
-  "commit": "88c13027ba8e14c08eb851a48b7b5b2856567416",
+  "commit": "92a938f6bef15cc07579dfc1446ed8cc65f9312d",
   "kapazitaet": {
     "stichtag": "2026-11-11",
     "basis": "2026-11-11",
@@ -1931,7 +1931,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-16",
-      "siegel_drift": "neu versiegelt",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "Q2-quellen-vorhanden",
@@ -1981,7 +1981,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-02-07",
-      "siegel_drift": "neu versiegelt",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "Q2-quellen-vorhanden",
