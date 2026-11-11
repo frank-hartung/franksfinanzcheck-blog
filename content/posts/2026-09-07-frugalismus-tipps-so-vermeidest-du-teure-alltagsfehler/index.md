@@ -200,7 +200,7 @@ Legst du diese Summe jedes Jahr mit rund **7 % Rendite** an, stehen nach 20 Jah
 
 Sparen darf nicht wehtun. Wer sich ständig einschränkt, verliert das Ziel aus den Augen. Belohne dich deshalb für Etappenziele: Ist der erste Tausender auf dem Tagesgeldkonto, gönn dir bewusst etwas, das dir wirklich Freude macht.
 
-Hilfreich ist auch ein Umfeld mit ähnlichen Werten. **Geld sparen im Alltag** fällt deutlich leichter, wenn nicht jede Verabredung im teuren Restaurant endet. In Foren und Gruppen findest du außerdem laufend neue Kniffe.
+Hilfreich ist auch ein Umfeld mit ähnlichen Werten. **[Geld sparen im Alltag](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/)** fällt deutlich leichter, wenn nicht jede Verabredung im teuren Restaurant endet. In Foren und Gruppen findest du außerdem laufend neue Kniffe.
 
 Und betrachte Frugalismus als Experiment: Wie wenig brauche ich wirklich, um zufrieden zu sein? Weniger Besitz bedeutet weniger Wartung, weniger Aufräumen, weniger Sorgen. Diese Entlastung ist oft mehr wert als der Betrag auf dem Konto.
 

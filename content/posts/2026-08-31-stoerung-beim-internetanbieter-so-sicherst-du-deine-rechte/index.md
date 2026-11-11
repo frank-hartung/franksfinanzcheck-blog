@@ -59,7 +59,7 @@ Der Grund ist selten die Rechtslage. Er ist die Beweislage. Wer den Ausfall nich
 * Jeder Ausfall gehört gemeldet – telefonisch **und** schriftlich, mit Datum und Uhrzeit.
 * Verlange eine **Vorgangsnummer** und notiere sie zusammen mit dem Namen des Mitarbeiters.
 * Der Anbieter muss die Störung beheben; eine pauschale Wartezeit gibt es nicht, aber eine Pflicht zur zeitnahen Entstörung.
-* Nach längeren Ausfällen prüfe eine **Gutschrift oder Entschädigung** – die Regeln zum Wechsel und zur Umschaltung findest du im [Verbraucherportal der Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Vertrag/start.html).
+* Nach längeren Ausfällen prüfe eine **Gutschrift oder [Entschädigung](../../posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/)** – die Regeln zum Wechsel und zur Umschaltung findest du im [Verbraucherportal der Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Vertrag/start.html).
 * Bleibt die Reaktion aus, hilft eine Beschwerde über die [Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html).
 
 ---

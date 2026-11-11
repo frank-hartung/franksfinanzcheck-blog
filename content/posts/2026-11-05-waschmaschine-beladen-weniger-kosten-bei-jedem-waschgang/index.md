@@ -197,7 +197,7 @@ Wir erstellen eine Beispielrechnung für einen Haushalt.
 - Gesamtkosten pro Jahr: 56,97 € (Ergebnis der Modellrechnung).
 
 **Rechnung für 200 halbe Ladungen (Beispielrechnung):**
-- Stromkosten: 200 x 0,7 kWh x 0,373 €/kWh = 52,22 € (Ergebnis der Modellrechnung).
+- [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/): 200 x 0,7 kWh x 0,373 €/kWh = 52,22 € (Ergebnis der Modellrechnung).
 - Wasserkosten: 200 x 0,035 m³ x 4,68 €/m³ = 32,76 € bei 35 Litern, bzw. 200 x 0,050 m³ x 4,68 €/m³ = 46,80 € bei 50 Litern (Ergebnis der Modellrechnung).
 - Gesamtkosten pro Jahr: 84,98 € (35 Liter) bis 99,02 € (50 Liter) (Ergebnis der Modellrechnung).
 

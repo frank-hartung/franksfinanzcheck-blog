@@ -50,7 +50,7 @@ kurzantwort: "Ein Doppeltarifzähler erfasst Strom getrennt nach Zeiten: nachts 
 ---
 
 
-Die Idee klingt einleuchtend: Strom, der nachts fließt, ist billiger. Also verschiebe ich Waschmaschine, Trockner und Geschirrspüler in die Nacht und spare.
+Die Idee klingt einleuchtend: Strom, der nachts fließt, ist billiger. Also verschiebe ich [Waschmaschine](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/), Trockner und Geschirrspüler in die Nacht und spare.
 
 Ob das stimmt, entscheidet nicht die Idee, sondern eine einzige Zahl: der Anteil deines Verbrauchs, der tatsächlich in die günstigen Stunden fällt. Wer diesen Anteil nicht kennt, wettet auf einen Rabatt, den er nie erreicht. Wer einen Nachtstromtarif prüft, misst deshalb zuerst den eigenen Nachtanteil – nicht den Rabatt auf dem Papier.
 

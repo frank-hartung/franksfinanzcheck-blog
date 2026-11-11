@@ -182,7 +182,7 @@ Nein. Die Funktion hängt vom Gerät ab. Prüfe, ob die Anzeige einen Momentwert
 Das lässt sich nicht allein am Baujahr erkennen. Miss zuerst, wo Strom anfällt, und prüfe, welche Regel etwas verändert. Wenn du keine klare Aufgabe findest, brauchst du kein neues System.
 
 ### Wie lange sollte ich messen, bevor ich kaufe?
-Zwei Wochen sind ein guter Anfang, besser ist ein voller Zyklus des Geräts im Modellfall. Lass die Waschmaschine laufen, heize einen Tag normal, nutze den Fernseher wie immer. Ein Abend zeigt nur den Moment. Zwei Wochen zeigen deinen Rhythmus – und ob eine smarte Steckdose daran überhaupt etwas ändert.
+Zwei Wochen sind ein guter Anfang, besser ist ein voller Zyklus des Geräts im Modellfall. Lass die [Waschmaschine](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/) laufen, heize einen Tag normal, nutze den Fernseher wie immer. Ein Abend zeigt nur den Moment. Zwei Wochen zeigen deinen Rhythmus – und ob eine smarte Steckdose daran überhaupt etwas ändert.
 
 ### Welche Geräte eignen sich für eine Automatik?
 Geeignet sind Verbraucher mit klaren Pausen: Beleuchtung, Fernseher, Ladegeräte. Ungeeignet sind Geräte, die laufen müssen: Gefrierschrank, Router, Heizungspumpe. Trennst du sie zur falschen Zeit, riskierst du verdorbene Lebensmittel und Fehlerbilder, die mehr kosten, als jede Stromersparnis einbringt.
