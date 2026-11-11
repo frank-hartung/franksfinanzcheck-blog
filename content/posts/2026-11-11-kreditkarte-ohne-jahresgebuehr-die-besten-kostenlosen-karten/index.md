@@ -84,6 +84,11 @@ Viele Nutzer wechseln die Karte, ohne die Kündigungsfristen des alten Vertrags 
 > **Rechenbeispiel:**  
 > Du hast eine Jahresgebühr von 60 € und kündigst erst 30 Tage nach Ablauf der Frist. Die Gebühr wird erneut fällig, also 60 € extra. Durch rechtzeitige Kündigung sparst du diese 60 €, was einer Monatsmiete von etwa 300 € entspricht (Faustregel: 20 % des Nettoeinkommens für Miete).  
 
+
+
+**Weiterlesen:** [Ratgeber Konto Karten](../../pillar/konto-karten/)
+**Lesetipp:** [Bankgebühren senken: 7 Schritte zum günstigeren Konto](../../posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/)
+
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 
 | Frage                                          | Kurzantwort                                            |

@@ -114,6 +114,11 @@ Ein weiterer Fehler ist der Fokus auf Rabatte. Ein Rabatt von 50 Prozent klingt 
 | Nur Monatspreis | Jahresgebühr ist höher | Gesamtkosten rechnen |
 | Zusatzoptionen | Unnötige Gebühren | Optionen sofort abwählen |
 
+
+
+**Weiterlesen:** [Ratgeber Internet Dsl](../../pillar/internet-dsl/)
+**Lesetipp:** [WLAN-Frust lösen: So findest du den besten Router Standort](../../posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/)
+
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 
 ### Wie oft sollte ich meinen Handytarif prüfen?
