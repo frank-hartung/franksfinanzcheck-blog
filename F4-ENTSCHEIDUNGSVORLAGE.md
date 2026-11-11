@@ -6,8 +6,8 @@ Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
 **Bezugsstand: 2026-11-11** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
 
-**90 offene Live-Befunde auf 22 Artikeln.** Davon sind **77** bereits früher entschieden und durch eine spätere Textänderung
-wieder geöffnet worden (fassungsgebundene Bindung, kein Rückfall). **13** Befunde sind neu.
+**90 offene Live-Befunde auf 22 Artikeln.** Davon sind **80** bereits früher entschieden und durch eine spätere Textänderung
+wieder geöffnet worden (fassungsgebundene Bindung, kein Rückfall). **10** Befunde sind neu.
 
 Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus `data/faktenfrische_befunde_state.json`,
 `data/faktenfrische_entscheidungen.yaml`, dem Scorecard-Siegel und den heutigen Artikeln.
@@ -25,9 +25,6 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 - `7c375a3e1a9bfab1468c` · `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` · Hinweis auf § 651r BGB (Insolvenzsicherung bei Pauschalreisen) enthält keinen Verweis auf eine Rechtsquelle oder Verbraucherzentrale‑Information.
 - `ea11d36614fa115503b4` · `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` · Behauptung, dass Nachlässe von bis zu 50 % nur Einzelfälle sind, wird ohne Quellenangabe präsentiert.
 - `f7b1c869dd8e442eaf16` · `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` · Aussage, dass der „beste Zeitpunkt zum Buchen“ ein Modellwert sei, bleibt vage und ohne messbare Daten oder Studien untermauert.
-- `98eb45f772ad7a0aac7b` · `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` · Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt im Text Referenzwerte (120 € Strom, 80 € Kfz), für die in der Quelle keine Marktdaten oder Durchschnittswerte als Beleg vorliegen.
-- `b7f0d52968d89cdf8c5b` · `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` · Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne Nennung konkreter rechtlicher Grundlagen (DSGVO) unpräzise, während die Quelle explizit auf rechtliche Verbraucherthemen fokussiert.
-- `be911855d67f998be662` · `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` · Der Ratgeber nennt keinen Regulierungsrahmen für Reisebuchungen (z. B. Fluggastrechte oder Stornierungsregeln), obwohl die Quelle diese als zentrale Informationsbereiche ausweist.
 
 ## `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026`
 
@@ -1087,20 +1084,22 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen`
 
-- Datei-SHA256 (heute): `ca65c7c5a8a31668fbb6452ea920926e1317b2c4371fbb1b3974ef9d4ad30ea9`
+- Datei-SHA256 (heute): `a68518f90cc55e984a2fbebc707182bba3bbd70be722e0c96b20457e6783a24a`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `98eb45f772ad7a0aac7b` | luecke | **neu** | 500 € in Zeile 67 gekennzeichnet · 120 € in Zeile 26 gekennzeichnet · 80 € in Zeile 25 gekennzeichnet | Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt im Text Referenzwerte (120 € Strom, 80 € Kfz), für… |
-| `b7f0d52968d89cdf8c5b` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne Nennung konkreter rechtlicher Grundlagen (DSGVO) u… |
-| `be911855d67f998be662` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Der Ratgeber nennt keinen Regulierungsrahmen für Reisebuchungen (z. B. Fluggastrechte oder Stornierungsregeln), obwoh… |
+| `98eb45f772ad7a0aac7b` | luecke | 2026-11-11 · 1. Entscheidung | 500 € in Zeile 67 gekennzeichnet · 120 € in Zeile 26 gekennzeichnet · 80 € in Zeile 25 gekennzeichnet | Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt im Text Referenzwerte (120 € Strom, 80 € Kfz), für… |
+| `b7f0d52968d89cdf8c5b` | praezision | 2026-11-11 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne Nennung konkreter rechtlicher Grundlagen (DSGVO) u… |
+| `be911855d67f998be662` | luecke | 2026-11-11 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Der Ratgeber nennt keinen Regulierungsrahmen für Reisebuchungen (z. B. Fluggastrechte oder Stornierungsregeln), obwoh… |
 
 ### `98eb45f772ad7a0aac7b`
 
 **Befund:** Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt im Text Referenzwerte (120 € Strom, 80 € Kfz), für die in der Quelle keine Marktdaten oder Durchschnittswerte als Beleg vorliegen.
 
-**Frühere Entscheidung:** keine – dieser Befund ist neu.
+**Frühere Entscheidung (2026-11-11):** Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026
+
+> PIN-Beschreibung am 11.11.2026 auf die Modellrechnung des Artikels umgestellt: Die 500 Euro stehen jetzt ausdruecklich als frei gewaehlte Annahmen der Beispielrechnung, nicht als Marktdurchschnitt oder Sparversprechen; der Fliesstext kennzeichnet die Betraege bereits als solche.
 
 - Heute in Zeile 67: 500 € – gekennzeichnet („modellrechnung“)
 - Heute in Zeile 26: 120 € – gekennzeichnet („modellrechnung“)
@@ -1110,7 +1109,9 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 **Befund:** Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne Nennung konkreter rechtlicher Grundlagen (DSGVO) unpräzise, während die Quelle explizit auf rechtliche Verbraucherthemen fokussiert.
 
-**Frühere Entscheidung:** keine – dieser Befund ist neu.
+**Frühere Entscheidung (2026-11-11):** Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026
+
+> FAQ-Antwort zur Datensicherheit ergaenzt: Die DSGVO (Verordnung (EU) 2016/679) ist als rechtlicher Rahmen genannt, samt Verarbeitungsgrundlage und Rechten auf Auskunft, Berichtigung, Loeschung und Widerruf. Die Antwort bleibt bei der Eigenentscheidung ueber die Einwilligung.
 
 Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
@@ -1118,7 +1119,9 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 **Befund:** Der Ratgeber nennt keinen Regulierungsrahmen für Reisebuchungen (z. B. Fluggastrechte oder Stornierungsregeln), obwohl die Quelle diese als zentrale Informationsbereiche ausweist.
 
-**Frühere Entscheidung:** keine – dieser Befund ist neu.
+**Frühere Entscheidung (2026-11-11):** Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026
+
+> FAQ-Antwort zu Flugreisen ergaenzt: Die EU-Fluggastrechte-Verordnung (EG) Nr. 261/2004 ist als Regulierungsrahmen fuer Annullierung, grosse Verspaetung und Nichtbefoerderung genannt; Storno-, Zahlungs- und Mietbedingungen verweisen auf die Vertragsbedingungen des Anbieters.
 
 Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 

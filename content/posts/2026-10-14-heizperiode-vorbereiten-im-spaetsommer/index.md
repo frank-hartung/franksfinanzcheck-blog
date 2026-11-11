@@ -87,6 +87,8 @@ Ein Router im Betrieb braucht mehr Strom als ein Gerät im Standby. Der echte Hu
 
 Hinweise dazu findest du oft in den Daten vom Hersteller. Mit einem Messgerät für die Steckdose erfährst du den echten Wert. Allgemeine Zahlen für alle Router gibt es nicht. Eine amtliche Liste mit einem festen Wert für dein Gerät gibt es nicht.
 
+Wo der Router am besten steht und was er dort verbraucht, steht im [Leitfaden zum Router-Standort](../../posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/).
+
 Trenne nur solche Geräte vom Netz, die du gerade nicht brauchst. Beim Router hängen oft viele Dienste an der Leitung. Das Telefon ist so ein Fall, Geräte im Smart-Home auch.
 
 Kühlschränke dürfen niemals einfach so vom Strom. Geräte für die Medizin oder Technik für die Sicherheit bleiben ebenfalls an. Diese Dinge sind keine Kandidaten für das Ausschalten in der Nacht.

@@ -188,7 +188,7 @@ Nein. Prüfen und Wechseln sind zwei Schritte. Vergleiche den nötigen Schutz, d
 
 ### Welche Regeln gelten für Flugreisen?
 
-Bei Flügen von und nach Deutschland und innerhalb der EU gilt die EU-Fluggastrechte-Verordnung (EG) Nr. 261/2004. Sie regelt Ansprüche bei Annullierung, großer Verspätung und Nichtbeförderung – unabhängig vom Ticketpreis. Stornierungs-, Zahlungs- und Mietbedingungen stehen dagegen in den Vertragsbedingungen deines Anbieters; lies sie vor der Buchung.
+Bei Flügen von und nach Deutschland und innerhalb der EU gilt die EU-Fluggastrechte-Verordnung (EG) Nr. 261/2004. Sie regelt Ansprüche bei Annullierung, großer Verspätung und Nichtbeförderung – unabhängig vom Ticketpreis. Stornierungs-, Zahlungs- und Mietbedingungen stehen dagegen in den Vertragsbedingungen deines Anbieters; lies sie vor der Buchung. Was bei Verspätung oder Ausfall gilt, steht in [unserem Leitfaden zur Flugverspätung](../../posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/).
 
 ### Brauche ich ein separates Konto?
 
