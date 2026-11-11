@@ -150,7 +150,7 @@ Auch das Ziel selbst bietet Sparpotenzial. Muss es die bekannte Kanaren‑Insel 
 
 Oder ist ein Ziel auf dem Festland im Winter genauso reizvoll? Oft sind weniger bekannte Orte deutlich günstiger. Dort sind auch die Lebenshaltungskosten vor Ort niedriger. Das schont dein gesamtes Budget und nicht nur den Posten für den Flug.
 
-**Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/) **Lesetipp:** [Urlaub sparen](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/): Budget, Buchung und Kosten im Blick · [Strategisch sparen](../../posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/)
+**Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/) · [Flugverspätung Entschädigung](../../posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/) **Lesetipp:** [Urlaub sparen](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/): Budget, Buchung und Kosten im Blick · [Strategisch sparen](../../posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/)
 
 ## Häufige Fragen
 
