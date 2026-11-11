@@ -1,6 +1,6 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-11-11 21:30 UTC  
+**Stand:** 2026-11-11 23:45 UTC  
 **Stufe:** OK  
 **Befund:** Letzter Publikationstag (2026-11-11): 2 Artikel – Ziel erfüllt. – Bestand: 2 von Gates gehalten (ältester 2 Tage: faktenfrische: 6d89862b38c33c827817 (praezision): Die pauschale Behauptung, Hardware bleibe stets Eigentum des Nutzers, ist unpräzise, da die Bundesnetzagentur die Kupfer-Glas-M…)
 
