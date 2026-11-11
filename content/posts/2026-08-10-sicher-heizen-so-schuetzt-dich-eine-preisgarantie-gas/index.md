@@ -15,7 +15,7 @@ cover:
   caption: "Tipp von FranksFinanzcheck"
 kurzantwort: "Eine Gaspreisgarantie schützt nur die Teile des Preises, die im Vertrag stehen, und nur für eine feste Zeit. Meist ist der Einkauf des Gases erfasst. Steuern, Abgaben, Umlagen und Netzkosten können außen vor bleiben. Die Garantie lohnt sich, wenn Preis, Umfang und Laufzeit zusammenpassen. Sie lohnt sich nicht, wenn du schon zum Start deutlich zu viel zahlst."
 social_posted: true
-keywords: ["Sicher heizen", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich", "Heizkosten"]
+keywords: ["Sicher heizen", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich", "Heizkosten", "Heizkosten sparen", "Brandschutz beim"]
 pin_title: "Sicher heizen: Gaspreisgarantie gegen den Preisschock"
 pin_description: "*Werbung | Eine Gaspreisgarantie schützt nur die Preisbestandteile, die im Vertrag stehen – und nur für die vereinbarte Zeit. So prüfst du Umfang, Laufzeit und Gesamtpreis, bevor du wechselst. Jetzt die Checkliste lesen."
 pin_text_sync: false
