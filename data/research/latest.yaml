@@ -1,5 +1,5 @@
-generated_at: '2026-11-10T11:45:37Z'
-day: '2026-11-10'
+generated_at: '2026-11-11T11:26:46Z'
+day: '2026-11-11'
 mode: deterministic
 teams:
   trending:
@@ -252,51 +252,60 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 'Altersvorsorge: Die besten Wege für deine Rente'
+  - topic: 10 Tipps für günstige Reisekreditkarten
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Altersvorsorge: Die besten Wege für deine Rente'
-    score: 0.55
-    keywords: []
-  - topic: Die 50-30-20-Regel einfach erklärt
-    pillar: frugalismus
-    signal: niche_hook
-    source: topics:Die 50-30-20-Regel einfach erklärt
-    score: 0.55
-    keywords: []
-  - topic: 'ETF-Sparplan für Einsteiger: So startest du monatlich'
-    pillar: frugalismus
-    signal: niche_hook
-    source: 'topics:ETF-Sparplan für Einsteiger: So startest du monatlich'
-    score: 0.55
-    keywords: []
-  - topic: 'Kfz-Versicherung für Fahranfänger: So sparst du beim Einstieg'
-    pillar: versicherungen
-    signal: niche_hook
-    source: 'topics:Kfz-Versicherung für Fahranfänger: So sparst du beim Einstieg'
+    source: topics:10 Tipps für günstige Reisekreditkarten
     score: 0.55
     keywords:
-    - Kfz Versicherung
-    - Fahranfänger
-    - Auto Versicherung
-  - topic: 'Konto kündigen und wechseln: Schritt-für-Schritt-Anleitung'
+    - Reisekreditkarten
+    - günstige Karten
+    - Reisekosten sparen
+  - topic: 'Balkon bepflanzen: So senkst du die Gemüsekosten'
+    pillar: frugalismus
+    signal: niche_hook
+    source: 'topics:Balkon bepflanzen: So senkst du die Gemüsekosten'
+    score: 0.55
+    keywords:
+    - Balkon Gemüse
+    - Kräuter ziehen
+    - Gemüse selber ziehen
+  - topic: Energiekosten senken mit kleinen Veränderungen
+    pillar: strom-sparen
+    signal: niche_hook
+    source: topics:Energiekosten senken mit kleinen Veränderungen
+    score: 0.55
+    keywords:
+    - Energie
+    - Kosten
+    - SparTipps
+  - topic: Kostenloses Girokonto ohne Gebühren finden
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Konto kündigen und wechseln: Schritt-für-Schritt-Anleitung'
+    source: topics:Kostenloses Girokonto ohne Gebühren finden
     score: 0.55
     keywords:
-    - Konto wechseln
-    - Kontowechsel Anleitung
-    - Girokonto kündigen
-  - topic: Mietwagen-Kosten im Ausland minimieren
+    - Kostenloses Girokonto
+    - Girokonto Vergleich
+    - Kontoführungsgebühren sparen
+  - topic: 'Stromanbieter wechseln: Tarife prüfen und Kosten senken'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Stromanbieter wechseln: Tarife prüfen und Kosten senken'
+    score: 0.55
+    keywords:
+    - Stromanbieter wechseln
+    - Stromvergleich
+    - Stromkosten senken
+  - topic: Versteckte Kosten im Mietwagenvertrag entschlüsseln
     pillar: mietwagen
     signal: niche_hook
-    source: topics:Mietwagen-Kosten im Ausland minimieren
+    source: topics:Versteckte Kosten im Mietwagenvertrag entschlüsseln
     score: 0.55
     keywords:
-    - Mietwagen
-    - Ausland
-    - Kosten minimieren
+    - Mietwagenvertrag
+    - versteckte Kosten
+    - Urlaubskasse
 live_web:
   enabled: false
   findings: []
