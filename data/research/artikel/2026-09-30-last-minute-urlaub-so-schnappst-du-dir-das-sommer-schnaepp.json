@@ -1,30 +1,29 @@
 {
   "slug": "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
-  "titel": "Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp",
-  "erzeugt": "2026-10-02 19:50 UTC",
+  "titel": "Last Minute Urlaub: So findest du echte Reiseschnäppchen",
+  "erzeugt": "2026-11-11 12:06 UTC",
   "faellig": {
-    "faellig": true,
-    "prio": 0,
+    "faellig": false,
+    "prio": 9,
     "klasse": "saisonal",
-    "grund": "Erstrecherche – noch nie faktengeprüft",
-    "alter_tage": null,
-    "intervall": 30
+    "grund": "frisch geprüft vor 28 Tagen (Intervall 30 Tage)",
+    "alter_tage": 28,
+    "intervall": 30,
+    "frist": "2026-11-13",
+    "restlaufzeit": 2
   },
   "geo": {
-    "punkte": 4,
+    "punkte": 6,
     "maximum": 6,
-    "prozent": 67,
-    "offen": [
-      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
-      "Sichtbares Prüfdatum (`faktencheck:`)"
-    ],
+    "prozent": 100,
+    "offen": [],
     "treffer": {
       "kurzantwort": true,
       "faq": true,
-      "quellen": false,
+      "quellen": true,
       "zahlen": true,
       "tabelle": true,
-      "faktencheck": false
+      "faktencheck": true
     }
   },
   "treffer": [
@@ -34,16 +33,45 @@
       "datum": "",
       "quelle": "verbraucherzentrale.de",
       "kanal": "web",
-      "auszug": "Title: Reise & Mobilität\n\nURL Source: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet\n\nMarkdown Content:\n[Direkt zum Inhalt](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet#main-content)\n\n*   [Preise, Tarife, Anbieterwechsel](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel) \n    *   [Strom sparen](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen) \n    *   [Heizen und Warmwasser](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser) \n    *   [Energetische Sanierung](https://www.verbraucherzentrale.de/wissen/energie/energetische-sanierung) \n    *   [Erneuerbare Energien](https://www.verbraucherzentrale.de/wissen/energie/erneuerbare-energien) \n    *   [Förderprogramme](https://www.verbraucherzentrale.de/wissen/energie/foerderprogramme) \n    *   [E-Mobilität](https://www.verbraucherzentrale.de/wissen/energie/emobilitaet) \n    *   [Probleme mit Verträgen und Rechnungen](https://www.verbraucherzentrale.de/wissen/energie/probleme-mit-vertraegen-und-rechnungen)\n\n*   [Reise](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet)\n\n## [Reise](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet)\n\n*   [Urlaub buchen](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen) \n    *   [Hotels und Ferienhäuser](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/hotels-und-ferienhaeuser) \n    *   [Unterwegs sein](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/unterwegs-sein) \n    *   [E-Mobilität](https://www.verbraucherzentrale.de/wissen/energie/emobilitaet)\n\n### [Reise-Spezial: Urlaub](https://www.verbraucherzentrale.de/reisespezial-tipps-fuer-urlauber)\n\nFlug- oder Reisedaten geändert? Rechte für Urlaub...\n\n### [Musterbriefe](https://www.verbraucherzen",
-      "score": 2,
+      "auszug": "Title: Reise & Mobilität\n\nURL Source: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet\n\nMarkdown Content:\n[Direkt zum Inhalt](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet#main-content)\n\nKonsum verstehen: Klima, Umwelt und echte Kosten ...\n\n*   [Preise, Tarife, Anbieterwechsel](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel) \n    *   [Strom sparen](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen) \n    *   [Heizen und Warmwasser](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser) \n    *   [Energetische Sanierung](https://www.verbraucherzentrale.de/wissen/energie/energetische-sanierung) \n    *   [Erneuerbare Energien](https://www.verbraucherzentrale.de/wissen/energie/erneuerbare-energien) \n    *   [Förderprogramme](https://www.verbraucherzentrale.de/wissen/energie/foerderprogramme) \n    *   [E-Mobilität](https://www.verbraucherzentrale.de/wissen/energie/emobilitaet) \n    *   [Probleme mit Verträgen und Rechnungen](https://www.verbraucherzentrale.de/wissen/energie/probleme-mit-vertraegen-und-rechnungen)\n\n*   [Reise](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet)\n\n## [Reise](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet)\n\n*   [Urlaub buchen](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen) \n    *   [Hotels und Ferienhäuser](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/hotels-und-ferienhaeuser) \n    *   [Unterwegs sein](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/unterwegs-sein) \n    *   [E-Mobilität](https://www.verbraucherzentrale.de/wissen/energie/emobilitaet)\n\n### [Reise-Spezial: Urlaub](https://www.verbraucherzentrale.de/reisespezial-tipps-fuer-urlauber)\n\nFlug- oder Reisedaten geändert? Rechte für Ur",
+      "score": 3,
       "belegfaehig": true,
       "herausgeber": "Verbraucherzentrale",
       "rang": 2,
       "zitierbar": false
     }
   ],
-  "befunde": [],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Behauptung, dass Nachlässe von bis zu 50 % nur Einzelfälle sind, wird ohne Quellenangabe präsentiert.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "luecke",
+      "text": "Definition des Begriffs „Last Minute“ (maximal 14 Tage zwischen Buchung und Abreise) wird mit dem Deutschen Reiseverband angegeben, jedoch fehlt ein Nachweis.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "luecke",
+      "text": "Hinweis auf § 651r BGB (Insolvenzsicherung bei Pauschalreisen) enthält keinen Verweis auf eine Rechtsquelle oder Verbraucherzentrale‑Information.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "praezision",
+      "text": "Aussage, dass der „beste Zeitpunkt zum Buchen“ ein Modellwert sei, bleibt vage und ohne messbare Daten oder Studien untermauert.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "praezision",
+      "text": "Angabe, dass Preisalarme keinen Tiefstpreis garantieren, wird nicht durch konkrete Zahlen oder Vergleichsstudien belegt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    }
+  ],
   "fehler": [
-    "Verbraucherzentrale – Reise: Feed nicht lesbar"
-  ]
+    "Verbraucherzentrale – Reise: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+  ],
+  "fassung_sha256": "9b40b227c873706c977355ceb637c72916b53c4428c526e7e9d5a8f9829bed77",
+  "text_sha256": "81a7302bb30d96dcadd0086a4b4afc9b69ad155868c200e99480f330cfaa49b1",
+  "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)"
 }

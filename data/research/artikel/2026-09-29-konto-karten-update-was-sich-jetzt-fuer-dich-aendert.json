@@ -1,33 +1,31 @@
 {
   "slug": "2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert",
-  "titel": "Konto & Karten-Update: Was sich jetzt für dich ändert",
-  "erzeugt": "2026-10-02 19:49 UTC",
+  "titel": "Girocard, Debitkarte oder Maestro: Welche Karte passt?",
+  "erzeugt": "2026-11-11 12:07 UTC",
   "faellig": {
-    "faellig": true,
-    "prio": 0,
+    "faellig": false,
+    "prio": 9,
     "klasse": "YMYL",
-    "grund": "Erstrecherche – noch nie faktengeprüft",
-    "alter_tage": null,
-    "intervall": 45
+    "grund": "frisch geprüft vor 40 Tagen (Intervall 45 Tage)",
+    "alter_tage": 40,
+    "intervall": 45,
+    "frist": "2026-11-16",
+    "restlaufzeit": 5
   },
   "geo": {
-    "punkte": 1,
+    "punkte": 5,
     "maximum": 6,
-    "prozent": 17,
+    "prozent": 83,
     "offen": [
-      "Kurzantwort-Box (direkte Antwort für AI Overviews)",
-      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
-      "Konkrete Zahlen/Euro-Beträge im Text (Zitierbarkeit)",
-      "Mindestens eine Tabelle (extrahierbare Struktur)",
-      "Sichtbares Prüfdatum (`faktencheck:`)"
+      "Mindestens eine Tabelle (extrahierbare Struktur)"
     ],
     "treffer": {
-      "kurzantwort": false,
+      "kurzantwort": true,
       "faq": true,
-      "quellen": false,
-      "zahlen": false,
+      "quellen": true,
+      "zahlen": true,
       "tabelle": false,
-      "faktencheck": false
+      "faktencheck": true
     }
   },
   "treffer": [
@@ -37,7 +35,7 @@
       "datum": "",
       "quelle": "verbraucherzentrale.de",
       "kanal": "web",
-      "auszug": "Title: Seite wurde nicht gefunden | Verbraucherzentrale.de\n\nURL Source: https://www.verbraucherzentrale.de/aktuelle-meldungen\n\nWarning: Target URL returned error 404: Not Found\n\nMarkdown Content:\n[Direkt zum Inhalt](https://www.verbraucherzentrale.de/aktuelle-meldungen#main-content)\n\n[](https://www.verbraucherzentrale.de/)\n\nSuche\n\n## Wählen sie Ihr Bundesland\n\nWählen Sie Ihr Bundesland, um regionale Angebote und Services zu sehen.\n\nStandort wählen \n\nBundesland festlegen \n\n[Wie wir mit Ihren Daten umgehen](https://www.verbraucherzentrale.de/datenschutz)\n\n Menü \n\n*   [Beratung](https://www.verbraucherzentrale.de/beratung)\n*   [Beschwerde einreichen](https://www.verbraucherzentrale.de/beschwerde)\n*   [Bildung](https://www.verbraucherzentrale.de/bildung)\n*   [Klagen](https://www.verbraucherzentrale.de/verbandsklagen)\n*   [Politik](https://www.verbraucherzentrale.de/politik)\n*   [Shop](https://shop.verbraucherzentrale.de/)\n\nSuche Suche\n\n Themen \n\n*   [Finanzen](https://www.verbraucherzentrale.de/wissen/geld-versicherungen) \n\nclose \n\n## [Finanzen](https://www.verbraucherzentrale.de/wissen/geld-versicherungen) \n\n    *   [Sparen und Anlegen](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen) \n    *   [Altersvorsorge](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/altersvorsorge) \n    *   [Bau- und Immobilienfinanzierung](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/bau-und-immobilienfinanzierung) \n    *   [Kredit, Schulden, Insolvenz](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/kredit-schulden-insolvenz) \n    *   [Krankenversicherung](https://www.verbraucherzentrale.de/wissen/gesundheit-pflege/krankenversicherung) \n    *   [Pflegeantrag und Leistungen](https://www.verbraucherzentrale.de/wissen/gesu",
+      "auszug": "Title: Seite wurde nicht gefunden | Verbraucherzentrale.de\n\nURL Source: https://www.verbraucherzentrale.de/aktuelle-meldungen\n\nPublished Time: Wed, 11 Nov 2026 12:07:46 GMT\n\nWarning: Target URL returned error 404: Not Found\n\nMarkdown Content:\n[Direkt zum Inhalt](https://www.verbraucherzentrale.de/aktuelle-meldungen#main-content)\n\n[](https://www.verbraucherzentrale.de/)\n\nSuche\n\n## Wählen sie Ihr Bundesland\n\nWählen Sie Ihr Bundesland, um regionale Angebote und Services zu sehen.\n\nStandort wählen \n\nBundesland festlegen \n\n[Wie wir mit Ihren Daten umgehen](https://www.verbraucherzentrale.de/datenschutz)\n\n Menü \n\n*   [Beratung](https://www.verbraucherzentrale.de/beratung)\n*   [Beschwerde einreichen](https://www.verbraucherzentrale.de/beschwerde)\n*   [Bildung](https://www.verbraucherzentrale.de/bildung)\n*   [Klagen](https://www.verbraucherzentrale.de/verbandsklagen)\n*   [Politik](https://www.verbraucherzentrale.de/politik)\n*   [Shop](https://shop.verbraucherzentrale.de/)\n\nSuche Suche\n\n Themen \n\n*   [Finanzen](https://www.verbraucherzentrale.de/wissen/geld-versicherungen) \n\nclose \n\n## [Finanzen](https://www.verbraucherzentrale.de/wissen/geld-versicherungen) \n\n    *   [Sparen und Anlegen](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen) \n    *   [Altersvorsorge](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/altersvorsorge) \n    *   [Bau- und Immobilienfinanzierung](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/bau-und-immobilienfinanzierung) \n    *   [Kredit, Schulden, Insolvenz](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/kredit-schulden-insolvenz) \n    *   [Krankenversicherung](https://www.verbraucherzentrale.de/wissen/gesundheit-pflege/krankenversicherung) \n    *   [Pflegeantrag und Leistungen]",
       "score": 0,
       "belegfaehig": true,
       "herausgeber": "Verbraucherzentrale",
@@ -45,38 +43,12 @@
       "zitierbar": true
     },
     {
-      "titel": "Update Wirtschaft vom 02.10.2026",
-      "url": "https://www.tagesschau.de/multimedia/sendung/tagesschau24/boerselive/video-1659176.html",
-      "datum": "Fri, 02 Oct 2026",
+      "titel": "Affäre von Nvidia-Chef Huang: Darum geht es beim Spionage-Verdacht",
+      "url": "https://www.tagesschau.de/wirtschaft/unternehmen/faq-nvidia-spionage-100.html",
+      "datum": "Mon, 09 Nov 2026",
       "quelle": "tagesschau – Wirtschaft",
       "kanal": "rss",
-      "auszug": "Update Wirtschaft vom 02.10.2026",
-      "score": 1,
-      "belegfaehig": true,
-      "herausgeber": "tagesschau",
-      "rang": 3,
-      "zitierbar": true
-    },
-    {
-      "titel": "Warum es schon wieder Diskussionen über die Zuckersteuer gibt",
-      "url": "https://www.tagesschau.de/inland/innenpolitik/zuckersteuer-protest-klingbeil-entwurf-100.html",
-      "datum": "Thu, 01 Oct 2026",
-      "quelle": "tagesschau – Wirtschaft",
-      "kanal": "rss",
-      "auszug": "Dass eine Zuckersteuer kommen soll, war eigentlich schon geklärt. Dennoch bremst das Kanzleramt jetzt bei einem Entwurf aus dem Finanzministerium. Was steckt dahinter? Warum drängt das Thema? Von Nicole Kohnert.",
-      "score": 1,
-      "belegfaehig": true,
-      "herausgeber": "tagesschau",
-      "rang": 3,
-      "zitierbar": false
-    },
-    {
-      "titel": "BGH kippt Preiserhöhung bei Amazon Prime",
-      "url": "https://www.tagesschau.de/wirtschaft/verbraucher/amazon-prime-preiserhoehung-bgh-100.html",
-      "datum": "Thu, 01 Oct 2026",
-      "quelle": "tagesschau – Wirtschaft",
-      "kanal": "rss",
-      "auszug": "Eine Preiserhöhung von Amazon Prime vor vier Jahren ist laut BGH-Urteil unwirksam. Bestimmte Kundinnen und Kunden können jetzt Geld zurückverlangen. Verbraucherschützer raten zur Sammelklage. Von Klaus Hempel.",
+      "auszug": "Der US-Chipkonzern Nvidia ermittelt gegen seinen Chef Jensen Huang wegen einer Affäre mit einer mutmaßlichen chinesischen Spionin. Welche Vorwürfe konkret im Raum stehen - und welche Folgen sie haben könnten.",
       "score": 1,
       "belegfaehig": true,
       "herausgeber": "tagesschau",
@@ -84,8 +56,37 @@
       "zitierbar": false
     }
   ],
-  "befunde": [],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Viele Banken stellen ihre Standardkarten auf kostenlose Debit‑Visas oder Mastercards um – ohne aktuelle Quelle belegt.",
+      "beleg": "https://www.verbraucherzentrale.de/aktuelle-meldungen"
+    },
+    {
+      "typ": "luecke",
+      "text": "Für die herkömmliche Girocard werden häufig Gebühren von etwa 0,99 Euro monatlich erhoben – Angabe fehlt in den bereitgestellten Quellen.",
+      "beleg": "https://www.verbraucherzentrale.de/aktuelle-meldungen"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Maestro‑Funktion soll seit Juli 2023 schrittweise eingestellt werden – keine Quelle dafür vorhanden.",
+      "beleg": "https://www.verbraucherzentrale.de/aktuelle-meldungen"
+    },
+    {
+      "typ": "luecke",
+      "text": "Befristete Sonderzinsen bei Tagesgeldkonten und deren starke Absenkung nach der Aktionsphase werden behauptet, ohne dass die angegebenen Quellen dies belegen.",
+      "beleg": "https://www.tagesschau.de/wirtschaft/unternehmen/faq-nvidia-spionage-100.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Ein schneller Kontowechsel sei jederzeit kostenlos und sichere dauerhaft die besten Zinsen – diese Aussage fehlt in den bereitgestellten Quellen.",
+      "beleg": "https://www.tagesschau.de/wirtschaft/unternehmen/faq-nvidia-spionage-100.html"
+    }
+  ],
   "fehler": [
-    "Verbraucherzentrale – Aktuelle Meldungen: Feed nicht lesbar"
-  ]
+    "Verbraucherzentrale – Aktuelle Meldungen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+  ],
+  "fassung_sha256": "7ee958a50b5ec0f40c06cb60034168aec209d61e6a89e366d644d18151f325cf",
+  "text_sha256": "a1e0d5a801b677258905ef24b571abb1d66da8619286579b6834aa8a24263b20",
+  "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)"
 }

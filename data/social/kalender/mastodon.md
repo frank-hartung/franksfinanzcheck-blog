@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 10.11.2026 14:37 (Europe/Berlin)  
+> Automatisch aktualisiert: 10.11.2026 22:20 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -56,7 +56,6 @@
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
-- 🚫 11.10. 20:00 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken · L9 Zahl ohne Beleg im Artikel: 503020
 - 🚫 12.10. 07:30 · 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken · L9 Zahl ohne Beleg im Artikel: 503020
 - 🚫 24.10. 07:30 · Strategisch sparen so kannst du deine reisekasse fuellen · Artikel nicht mehr im Bestand
 - 🚫 30.10. 11:30 · Heizoel preise 2026 so findest du den optimalen kaufzeitpu · Artikel nicht mehr im Bestand

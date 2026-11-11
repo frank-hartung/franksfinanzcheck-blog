@@ -150,5 +150,56 @@ class TicketBodyTest(unittest.TestCase):
                                          heute=PROBEDATUM).splitlines()[0])
 
 
+class EingefroreneGegenprobeTest(unittest.TestCase):
+    """Eine eingefrorene Messung ist kein Betriebsnachweis (#1107, 10.11.2026).
+
+    Vorher kannte das Ticket nur grün/rot/beweislos und unterschied bei der
+    Projektion allein `trajektorie`. Eine Messung mit `basis = stichtag`
+    (Zukunftstag, Prüfstand seines eigenen Tages) sah damit wie ein Nachweis
+    aus – genau die Verwechslung, aus der #1107 entstand. Jetzt gilt sie als
+    `beweislos`: Sie schließt nichts und erzeugt keinen Auftrag.
+    """
+
+    GEGENPROBE = {"stichtag": "2026-11-26", "ausgangspunkt": "2026-11-26",
+                  "trajektorie": False, "modus": "eingefroren",
+                  "eingefroren": True, "warnung": "Gegenprobe (#1107)",
+                  "regel": "x"}
+
+    def test_gegenprobe_ist_beweislos_nicht_gruen(self):
+        self.assertEqual(ticket.bewertung(
+            messung(projektion=self.GEGENPROBE), None), "beweislos")
+
+    def test_gegenprobe_erzeugt_keinen_auftrag(self):
+        # Auch wenn die eingefrorene Zahl „rot“ aussieht: Sie beschreibt keinen
+        # Zustand, den der Bot erreicht – also kein Ticket, kein Auftrag.
+        self.assertEqual(ticket.bewertung(
+            messung(projektion=self.GEGENPROBE, puenktlich=False,
+                    empfehlung_erreicht=False), None), "beweislos")
+
+    def test_ticket_text_nennt_die_gegenprobe_beim_namen(self):
+        body = ticket.ticket_body(messung(projektion=self.GEGENPROBE), None,
+                                  heute=PROBEDATUM)
+        self.assertIn("kein Betriebsnachweis", body)
+        self.assertIn("2026-11-26", body)
+        self.assertIn("nicht beweisbar", body.splitlines()[0])
+        self.assertIn(ticket.MARKER, body)
+
+    def test_weg_und_nachweis_tragen_den_rahmen_nicht(self):
+        weg = {"stichtag": "2026-11-26", "ausgangspunkt": "2026-11-10",
+               "trajektorie": True, "modus": "weg", "eingefroren": False,
+               "warnung": None, "regel": "x"}
+        heute = {"stichtag": "2026-11-10", "ausgangspunkt": "2026-11-10",
+                 "trajektorie": False, "modus": "nachweis",
+                 "eingefroren": False, "warnung": None, "regel": "x"}
+        self.assertIsNone(ticket.gegenprobe_befund(messung(projektion=weg)))
+        self.assertIsNone(ticket.gegenprobe_befund(messung(projektion=heute)))
+        self.assertIn("ab **2026-11-10**",
+                      ticket.projektion_zeile(messung(projektion=weg)))
+        self.assertNotIn("Projektion in die Zukunft",
+                         ticket.projektion_zeile(messung(projektion=heute)),
+                         "Der heutige Stand ist der Ausgangspunkt einer "
+                         "Prognose – nicht ihr Gegenteil")
+
+
 if __name__ == "__main__":
     unittest.main()

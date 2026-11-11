@@ -10,6 +10,10 @@
 # Recht als „nicht belegbar" ablehnt (D7: eine ganze Messung, kein Text).
 # Stattdessen: sichtbarer Konflikt, EINE Fassung wählen, Kette neu prüfen.
 data/produktions_schutz_belege.jsonl merge=binary
+# Dieselbe Ketten-Regel gilt für die Belegkette der Abhängigkeits-Selbstheilung
+# (#79, 10.11.2026): verkettete SHA-256-Zeilen ab GENESIS dürfen nie per
+# merge=union gemischt werden – sichtbarer Konflikt statt gebrochener Kette.
+data/abhaengigkeits_schutz_belege.jsonl merge=binary
 
 # Das Integritäts-Siegel ist ein MASCHINEN-Artefakt, kein Quelltext: Es wird
 # von scripts/integrity_guard.py geschrieben (SHA-256-Map + verkettete Akte)

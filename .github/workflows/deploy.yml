@@ -688,6 +688,11 @@ jobs:
       # bei Fehlern. Ohne Netz, ohne Hugo. Der Proxy-Check (cf-ray) ist
       # bewusst NICHT hier: er braucht Internet und ist eine Betreiber-
       # prüfung. Ergänzt das Gate H9 (Ziele live, keine Kette/Schleife).
+      # Die Konsolidierung nutzt GSC-Daten. Ein kaputter Export ist ein
+      # Artefaktfehler, kein defekter Selbsttest; vor der Nutzung hart prüfen.
+      - name: GSC-Leistungsdaten – Artefaktprüfung (fail-closed)
+        run: python3 scripts/gsc_artefakte_guard.py --check
+
       - name: Weiterleitungen – Selbsttest, Quelle und Unit-Tests (fail-closed)
         run: |
           python3 scripts/publikations_weiterleitung.py --selftest

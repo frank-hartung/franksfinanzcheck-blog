@@ -809,6 +809,101 @@ class ProjektionsAusgangspunktTest(unittest.TestCase):
         self.assertEqual(weg["basis"], PROBETAG.isoformat())
 
 
+class MessartDreiZustaendeTest(unittest.TestCase):
+    """Drei Zustände statt zwei – die Gegenprobe ist laut (#1107, 10.11.2026).
+
+    BEFUND: `trajektorie: false` bedeutete zweierlei – „Stand von heute“ UND
+    „Zukunftstag mit dem Prüfstand seines eigenen Tages“. Im Klartext stand
+    für beide derselbe Satz („Nachweis, keine Projektion in die Zukunft“).
+    Genau dieser Satz machte aus dem Fehlbild ein Ticket. Jetzt entscheidet
+    `projektions_modus`, und der dritte Zustand ist nicht mehr still:
+    Warnung im Klartext, `eingefroren: true` im JSON, kein Ticket, keine
+    Wache – und `--gegenprobe` als einziger Weg dorthin.
+    """
+
+    ZIEL = PROBETAG + dt.timedelta(days=9)
+
+    def test_modus_trennt_heute_von_der_eingefrorenen_zukunft(self):
+        self.assertEqual(
+            kap.projektions_modus(self.ZIEL, PROBETAG, PROBETAG),
+            kap.PROJEKTION_WEG)
+        self.assertEqual(
+            kap.projektions_modus(PROBETAG, PROBETAG, PROBETAG),
+            kap.PROJEKTION_NACHWEIS)
+        self.assertEqual(
+            kap.projektions_modus(PROBETAG - dt.timedelta(days=3),
+                                  PROBETAG - dt.timedelta(days=3), PROBETAG),
+            kap.PROJEKTION_NACHWEIS,
+            "Ein vergangener Stichtag ist ein Nachweis – keine Gegenprobe")
+        self.assertEqual(
+            kap.projektions_modus(self.ZIEL, self.ZIEL, PROBETAG),
+            kap.PROJEKTION_EINGEFROREN)
+
+    def test_ausgangspunkt_nach_dem_stichtag_ist_kein_zustand(self):
+        with self.assertRaises(ValueError):
+            kap.projektions_modus(PROBETAG, PROBETAG + dt.timedelta(days=1),
+                                  PROBETAG)
+
+    def test_messe_markiert_die_gegenprobe_und_ihre_warnung(self):
+        bundel = kap_probe_bundel(8)
+        cfg = cfg_probe(budget=2, limit=10)
+        with mock.patch.object(ff, "heute", return_value=PROBETAG):
+            gegen = kap.messe(bundel, cfg, 1.0, self.ZIEL,
+                              basis=self.ZIEL, budget=2)
+            weg = kap.messe(bundel, cfg, 1.0, self.ZIEL, budget=2)
+        self.assertTrue(gegen["projektion"]["eingefroren"])
+        self.assertEqual(gegen["projektion"]["modus"], kap.PROJEKTION_EINGEFROREN)
+        self.assertEqual(gegen["projektion"]["warnung"], kap.EINGEFROREN_WARNUNG)
+        self.assertFalse(gegen["projektion"]["trajektorie"])
+        self.assertEqual(weg["projektion"]["modus"], kap.PROJEKTION_WEG)
+        self.assertFalse(weg["projektion"]["eingefroren"])
+        self.assertIsNone(weg["projektion"]["warnung"])
+        # Das Fehlbild bleibt sichtbar, der Weg bleibt grün – sonst prüft
+        # der Test nichts (Gegenprobe in beide Richtungen).
+        self.assertFalse(gegen["puenktlich"])
+        self.assertTrue(weg["puenktlich"], weg["verletzungen"])
+
+    def test_klartext_stellt_den_rahmen_vor_die_zahlen(self):
+        bundel = kap_probe_bundel(8)
+        cfg = cfg_probe(budget=2, limit=10)
+        with mock.patch.object(ff, "heute", return_value=PROBETAG):
+            gegen = kap.messe(bundel, cfg, 1.0, self.ZIEL,
+                              basis=self.ZIEL, budget=2)
+        zeilen = kap.diagnose_zeilen(gegen, markdown=False)
+        warnung = [i for i, z in enumerate(zeilen)
+                   if "Eingefrorene Gegenprobe" in z]
+        horizont = [i for i, z in enumerate(zeilen) if "Weg des Bots" in z]
+        self.assertEqual(warnung, [0],
+                         f"Der Rahmen muss die erste Zeile sein: {zeilen}")
+        self.assertTrue(horizont and warnung[0] < horizont[0], zeilen)
+        self.assertTrue(any("im eingefrorenen Stand" in z for z in zeilen), zeilen)
+
+    def test_wache_verweigert_eine_eingefrorene_gegenprobe(self):
+        fehler = io.StringIO()
+        with mock.patch.object(ff, "heute", return_value=PROBETAG), \
+                mock.patch.object(sys, "argv", [
+                    "faktenfrische_kapazitaet.py", "--gegenprobe",
+                    "--stichtag", self.ZIEL.isoformat(), "--wache"]), \
+                contextlib.redirect_stderr(fehler):
+            rc = kap.main()
+        self.assertEqual(rc, 2, "Eine Wache auf einer Gegenprobe ist ein "
+                                "Scheinnachweis (#1107)")
+        self.assertIn("Gegenprobe", fehler.getvalue())
+
+    def test_gegenprobe_verlangt_einen_zukunftstag(self):
+        for argv in (["--gegenprobe", "--stichtag", PROBETAG.isoformat()],
+                     ["--gegenprobe"]):
+            fehler = io.StringIO()
+            with mock.patch.object(ff, "heute", return_value=PROBETAG), \
+                    mock.patch.object(sys, "argv",
+                                      ["faktenfrische_kapazitaet.py", *argv]), \
+                    contextlib.redirect_stderr(fehler):
+                rc = kap.main()
+            self.assertEqual(rc, 2, argv)
+            self.assertIn("ZUKUNFTSTAG" if len(argv) > 1 else "--stichtag",
+                          fehler.getvalue())
+
+
 class KadenzHorizontTest(unittest.TestCase):
     """Der Weg des Bots wird als DATUM berichtet – nicht nur als Urteil (#1107).
 

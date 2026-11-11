@@ -185,6 +185,10 @@ on:
       # bleibt der Deploy fail-closed rot und NIEMAND merkt, dass die Reparatur
       # selbst nicht mehr läuft. Genau dieser Kanal darf nicht blind sein.
       - "Produktions-Schutz · Selbstheilung (WF-829B)"
+      # Dependabot-Alert #79 (10.11.2026): Der Selbstheilungs-Lauf für
+      # Abhängigkeiten darf bei Eichproben-Bruch (Exit 3) oder Rollback (Exit 2)
+      # niemals stumm scheitern.
+      - "Abhängigkeits-Schutz · Selbstheilung"
     types:
       - completed
 
@@ -904,9 +908,9 @@ jobs:
                     ]
                   : runbookKlasse === 'sicherheit-abhaengigkeiten'
                     ? [
-                        '1. **Einordnung:** Rot ist der Job „Abhängigkeiten“. Er prüft den AUSGELIEFERTEN Bestand gegen die Advisory-Datenbank (Online-Audit, nur im Tageslauf/auf Zuruf) und – bei jedem Push – die Struktur: exakte Pins, Quelle ↔ Hash-Lock, Lockfiles, Action-SHAs, Image-Tags und seit dem 01.11.2026 jedes `pip install` ohne `-r` (Regeln A1–A8).',
-                        '2. **Nachfahren:** `npm run deps:audit` (Exit 1 = Fundstelle, Exit 2 = Störung) und `npm run deps:check` (offline). Beide nennen Paket, Version, GHSA, Fix und die Herkunftsdatei; der Bericht steht als Annotation und im Lauf-Log.',
-                        '3. **Heilen (Exit 1):** Version auf die genannte `first_patched_version` pinnen – bei pip in `requirements-ci.in` UND `requirements-ci.txt` gemeinsam (neue Hashes, Regel A2 prüft die Gleichheit); bei den optionalen Manifesten `requirements-poppy.txt`/`requirements-tts.txt` genügt die eine Zeile. Danach `npm run deps:check && npm run deps:audit`. Eine Ad-hoc-Installation in einem Workflow (A7/A8) wird nicht gepinnt, sondern durch `-r <manifest>` ersetzt.',
+                        '1. **Einordnung:** Rot ist der Job „Abhängigkeiten“. Er prüft den AUSGELIEFERTEN Bestand gegen die Advisory-Datenbank (Online-Audit im Tageslauf, auf Zuruf und seit #79 bei jedem Paket-/Workflow-Diff) sowie die Struktur: exakte Pins, Quelle ↔ Hash-Lock, Lockfiles, Action-SHAs, Image-Tags, Ad-hoc-Installs und Sicherheits-Untergrenzen (Regeln A1–A9).',
+                        '2. **Nachfahren:** `npm run deps:audit` (Exit 1 = Fundstelle, Exit 2 = Störung), `npm run deps:check` (offline) und `npm run deps:heal` (automatische Selbstheilung mit Nachmessung). Beide nennen Paket, Version, GHSA, Fix und die Herkunftsdatei; der Bericht steht als Annotation und im Lauf-Log.',
+                        '3. **Heilen (Exit 1):** Automatisch öffnet der Folgelauf „Abhängigkeits-Schutz · Selbstheilung“ einen nachgemessenen PR (`automation/deps-heilung-*`, Audit H-02: `--ignore-scripts`) oder lokal per `npm run deps:heal`. Manuell: Version auf `first_patched_version` pinnen – bei pip in `requirements-ci.in` UND `requirements-ci.txt` gemeinsam (neue Hashes, Regel A2); bei optionalen Manifesten `requirements-poppy.txt`/`requirements-tts.txt` die Zeile. Danach `npm run deps:check && npm run deps:audit`. Ad-hoc-Installationen (A7/A8) durch `-r <manifest>` ersetzen.',
                         '4. **Störung (Exit 2) ist kein Freibrief:** Netz, Rate-Limit oder fehlendes Token heißen UNGEPRÜFT, nicht sauber. Lauf per „Run workflow“ wiederholen, nichts auf Verdacht ändern.',
                         '5. **Wenn hier zusätzlich F-01/Worker rot sind:** Das ist ein zweiter, unabhängiger Befund (die Meldung nennt beide Jobs). Der Edge-Weg steht in `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A1; die Klasse dieser Meldung ist trotzdem der Bestand – erst die Pins, dann die Live-Messung. Runbook: Abschnitt E, Beweisführung `ABHAENGIGKEITS-SICHERHEIT-PREMIUM-2026-10-24.md`.'
                       ]
@@ -962,7 +966,7 @@ jobs:
                       // über jedes github-script) laufen lassen.
                       : runbookKlasse === 'worker-deploy-zugang'
                         ? [
-                            '1. **Fail-closed – gewollt, kein Betriebsausfall.** Der Deploy bricht absichtlich ab, bevor Wrangler läuft: entweder fehlt im Environment `cloudflare-produktion` der Zugang (`CF_WORKERS_DEPLOY_TOKEN` mit Workers-Scripts-Lese- und Deploy-Recht, `CLOUDFLARE_ACCOUNT_ID`), oder seine Schutzregeln sind nicht lesbar (Reviewer-/Branch-/Admin-Bypass-Policy). Ohne diesen Schutz würde ein übersprungener Deploy grün melden – genau das ist der Vorfall vom 24.10.2026 (Run 40100342025).',
+                            '1. **Fail-closed – gewollt, kein Betriebsausfall.** Der Deploy bricht absichtlich ab, bevor Wrangler läuft: entweder fehlt im Environment `cloudflare-produktion` der Zugang (`CF_WORKERS_DEPLOY_TOKEN` mit Workers-Scripts-Lese- und Deploy-Recht, `CLOUDFLARE_ACCOUNT_ID`), oder seine Schutzregeln sind nicht lesbar (Reviewer-/Branch-/Admin-Bypass-Policy). Ohne diesen Schutz würde ein übersprungener Deploy grün melden – genau das ist der Vorfall vom 24.10.2026 (Run 40100342025). Seit dem 10.11.2026 wird der Deploy ausschließlich bewusst per „Run workflow" auf main ausgelöst; Push und PR laufen nur noch als geheimnisfreie Worker-Tests, und der Abschlussjob macht jeden übersprungenen Deploy sichtbar rot.',
                             '2. **Environment zuerst absichern:** Settings → Environments → `cloudflare-produktion`: mindestens ein `Required Reviewer`, bei „Deployment branches and tags“ exakt der Branch `main`, und „Allow administrators to bypass configured protection rules“ aus (`can_admins_bypass=false`). Read-only prüfbar ohne Cloudflare-Secrets: `python3 scripts/worker_environment_guard.py --check` (Workflow-Token mit `actions: read`).',
                             '3. **Alle Befunde in einem Lauf:** Der Schritt „Zugang prüfen (alle Befunde auf einmal, lesend)“ sammelt Token, Konto-ID, Token-Gültigkeit, Leserecht und je Worker die produktive Bindung – und schreibt ein Dossier in die Job-Zusammenfassung. Keine Ressourcen-IDs manuell kopieren: Der Resolver liest die bestehenden Bindungen (`ABO`/KV aus `ff-newsletter`, `DB`/D1 aus `klick-zaehler`) selbst und bricht bei Fehlen oder Mehrdeutigkeit rot ab.',
                             '4. **Vorher prüfen, ohne zu deployen:** Actions → „Deploy-Zugang prüfen“ → „Run workflow“ (`main`). Der Lauf liest nur (`/user/tokens/verify` und die bestehenden Script-Einstellungen), legt nichts an und deployt nichts. Danach ausrollen: Actions → „Cloudflare-Worker deployen“ → „Run workflow“ (`main`); ein grüner Plan genügt nicht, der Deploy muss laufen und `/healthz` den Build-Stempel aus `wrangler.toml` liefern. Der erste grüne Deploy-Lauf schließt diese Meldung selbst.',

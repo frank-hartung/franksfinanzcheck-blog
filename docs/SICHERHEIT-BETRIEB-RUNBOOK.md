@@ -88,7 +88,7 @@ Lauf-Zusammenfassung „F-01 · Sicherheits-Header“:
 | Klasse | Exit | Bedeutung | Was du tust |
 |---|---|---|---|
 | **OK** | 0 | beide Ziele gemessen, alle Pflicht-Header im Soll | F-01 belegt; die Meldung schließt erst, wenn zusätzlich Worker und vollständiger Live-Nachweis grün sind (D1) |
-| **TEILWEISE** | 0 (Mess-CLI) | ein Ziel gemessen und sauber, ein Ziel nicht erreichbar | kein neuer Header-Befund, aber **kein Abschlussnachweis**. Der abschließende Live-Nachweis bleibt rot; das nicht gemessene Ziel erneut messen. Eine Messung auf dem Haupt-Host belegt nicht die Einrichtung des `www`-Hosts. |
+| **TEILWEISE** | 0 (Mess-CLI) | ein Ziel gemessen und sauber, ein Ziel nicht erreichbar | kein neuer Header-Befund, aber **kein Abschlussnachweis**. Der abschließende Live-Nachweis bleibt rot; das nicht gemessene Ziel erneut messen. Die Live-Wache misst derzeit `/` und `/methodik/` auf `franksfinanzcheck.de`, nicht den `www`-Host. Dessen DNS-Proxy-Status zusätzlich mit `npm run edge:freigabe` prüfen. |
 | **BEFUND** | 1 | gemessen, und es fehlt etwas | je nach Diagnose Abschnitt A1 Schritt 1 (Proxy aus) oder Schritt 3 (Regel unvollständig) – der Bericht nennt es ausdrücklich |
 | **STOERUNG** | 2 | kein Ziel erreichbar | **kein** Sicherheitsbefund: Erreichbarkeit prüfen, Lauf neu starten |
 | **WACHE-FEHLER** | sonst / leer | Prüfung selbst defekt, z. B. fehlender Bericht oder Exit-Code | Workflow/Skript prüfen; keine Edge-Änderung auf Verdacht |
@@ -128,16 +128,24 @@ jeder Schritt den nächsten belegt:
    `newsletter-worker` von `main`. Der Secret-Job hält auf Freigabe; den
    Lauf freigeben oder abbrechen (A4, „Die Freigabe ist ein Klick“). Der
    Lauf muss `/healthz` mit `bau == ff-newsletter-2026-10-24` belegen.
-4. **Edge-Regel anwenden** (A1): `npm run edge:freigabe` (Exit 0), dann
-   `npm run edge:freigabe:apply`, dann `npm run edge:b7` und den
-   Datenschutztext committen. Der Apply braucht
+4. **Edge-Regel und Datenschutz** (A1/B7): Zuerst den Datenschutztext fachlich
+   und rechtlich prüfen und die Veröffentlichung passend zur Proxy-Umstellung
+   planen. `npm run edge:freigabe` liest den API-Iststand: Exit 1 bedeutet
+   belegte Abweichung; Exit 2 bedeutet nicht prüfbar und ist **kein** Grund für
+   einen Eingriff auf Verdacht. Bei belegtem Befund und nach Betreiberfreigabe
+   `npm run edge:freigabe:apply` ausführen. Der Apply braucht
    `CLOUDFLARE_API_TOKEN` mit `Zone.DNS:Edit`, `Zone.Settings:Edit`,
-   `Zone.Transform Rules:Edit` für diese Zone.
+   `Zone.Transform Rules:Edit` für diese Zone und passt B7 nach erfolgreicher
+   API-Gegenmessung lokal an. Den Text prüfen, committen und veröffentlichen;
+   `npm run edge:b7` prüft nur den lokalen Checkout. Anschließend
+   `npm run edge:freigabe` erneut ausführen und Exit 0 belegen. Ist der
+   API-Iststand bereits im Soll, aber die öffentliche Wirkung abweichend,
+   keine blinde Änderung durchführen, sondern A1 untersuchen.
 5. **Live-Nachweis:** `gh workflow run sicherheits-wache.yml --ref main`.
-   Nur der vollständige erfolgreiche Live-Job schließt #972. Die Warnung
-   „Produktions-Environment“ bleibt danach als #922-Nachweis bestehen, bis
-   der Bypass-Schalter im Dashboard steht; sie ist keine Live-Sicherheits-
-   Abweichung, sondern die Vorbedingung für den nächsten Deploy. Seit dem
+   Nur der vollständige erfolgreiche Live-Job schließt #972. Für einen neuen
+   Worker-Deploy muss das Environment zuvor vollständig abgesichert sein;
+   eine spätere Drift-Warnung ist getrennt vom Live-Betriebsbild zu behandeln
+   und vor dem nächsten Deploy zu beheben. Seit dem
    05.11.2026 stehen Diagnose und nächster Schritt als erste Annotationen
    des Auswerte-Schritts (F5) – ein roter Lauf ist damit ohne Log-Download
    und ohne Artefakt lesbar.
@@ -520,6 +528,85 @@ Werkzeug, das hier „repariert“, repariert das Falsche.
 
 ---
 
+### A4c · Die Grenze der Automation ist gemessen, nicht behauptet (WF-829B / #922, 10.11.2026)
+
+**Befund am echten Objekt.** `GET /repos/frank-hartung/franksfinanzcheck-blog/environments/cloudflare-produktion`
+liefert am 10.11.2026, 17:18 UTC weiterhin `can_admins_bypass: true`,
+`protection_rules: []`, `deployment_branch_policy: null`, `updated_at`
+**25.10.2026** – seit der automatischen Anlage hat niemand dieses Environment
+konfiguriert. Drei Messungen am selben Tag:
+
+| Messung | Ergebnis |
+|---|---|
+| `python3 scripts/worker_environment_guard.py --check` | Exit 1 · drei Befunde (Reviewer, Bypass, Branch-Policy) |
+| `python3 scripts/worker_environment_einrichten.py --pruefen` | `MACHBAR / OBERFLAECHE / MACHBAR` |
+| `PUT …/environments/cloudflare-produktion` | **HTTP 403** · Antwortkopf `X-Accepted-Github-Permissions: administration=write` · „Resource not accessible by integration" |
+| GraphQL-Introspection `UpdateEnvironmentInput` | nur `waitTimer`, `reviewers`, `preventSelfReview` – **kein** Bypass-Feld |
+| Läufe von „Cloudflare-Worker deployen" seit 27.10. | **acht rote Läufe**, jeder mit `production-policy → failure`, `deploy → skipped` |
+| Läufe der Selbstheilung seit 07.11. | **7 `success`, davon 4 mit Live-Heiljob**, Environment unverändert (`updated_at` bleibt 25.10.) |
+
+Damit ist die Grenze keine Vermutung mehr: Der Installationstoken in dieser
+Umgebung hat kein `administration=write`; `can_admins_bypass` ist über
+**keine** GitHub-API schreibbar. Ein Heil-Lauf, der grün meldet, während das
+Environment unberührt bleibt, ist ein grüner Lauf ohne Heilung – dieselbe
+Klasse wie #809 („Behoben" ohne den Job, der rot war).
+
+**Was am 10.11.2026 im Repository geheilt wurde.** Die Ursache der täglichen
+Rotmeldung war nicht das Gate, sondern der **Auslöser**: Ein freigabepflichtiger
+Produktions-Deploy wurde von jedem `push` auf einen Worker-Pfad ausgelöst –
+auch von Dependabot-Bumps an `tools/wrangler/**`. Bei unverändertem Environment
+war jeder dieser Läufe garantiert rot. A4 sagt selbst, dass deployt wird, wenn
+ein Mensch *Run workflow* drückt; der `push`-Trigger widersprach dem Runbook.
+
+| Ebene | Vertrag ab 10.11.2026 |
+|---|---|
+| `workflow_dispatch` auf `main` | `plan` → `production-policy` → `deploy`, **unverändert**, inklusive hartem Stopp vor jedem Cloudflare-Secret |
+| `push` / `pull_request` | nur `tests` (alle drei Worker, `scripts/ci_tests.py`), kein Environment, kein Secret, kein Wrangler |
+| `abschluss` (`if: always()`) | `scripts/worker_deploy_abschluss.py` beweist am **Verhalten**: jeder geplante Deploy muss `success` sein; jeder Deploy-Job auf Push/PR ist ein harter Befund. Ein stiller Skip wird nie grün (Vorfall 24.10., Run 40100342025) |
+| Ampel im Heil-Lauf | Der gemessene Zustand steht als Check-Run am Commit: `success` nur bei Exit 0, **`action_required`** bei `OFFEN` (mit Link auf #922 und den zwei Inhaber-Schritten), `failure` bei Exit 2/3. C14 bleibt gewahrt – Warnstufe statt Dauer-Rot –, aber der Commit sieht nicht grün aus. Das einzige neue Recht ist `checks: write` für diesen Status; kein Deploy-Recht, kein Secret, keine Freigabe |
+
+**Nichts wurde gelockert.** Die drei Schutzziele, das Gate, die Reihenfolge,
+die Ressourcenauflösung und der `/healthz`-Nachweis stehen unverändert. Der
+Heil-Lauf ersetzt das Gate nicht (`--wache`, Regel W5). `#922` bleibt offen:
+ein Vorgang schließt mit dem Abschlussvermerk des Workflows (D2), und
+`alert_resolve_gate.py` verlangt den **grünen Job, der rot war** – erst ein
+echter grüner Deploy-Lauf schließt die Meldung. Ein Bericht tut es nicht.
+
+**Die drei Inhaber-Handgriffe (einmalig, in dieser Reihenfolge):**
+
+```bash
+# 1 · Schreibrecht als Secret hinterlegen: UMGEBUNGS_ADMIN_TOKEN
+#    feingranular mit „Environments: read/write" (klassisch: repo/administration)
+#    Danach heilt der Tageslauf 05:48 UTC Reviewer + Branch-Regel selbst –
+#    mit Eichprobe, Nachmessung und Belegkette. Kontrolle ohne Eingriff:
+npm run worker:selbstheilung:pruefen
+npm run worker:selbstheilung:wache
+
+# 2 · Dashboard, einziger API-freier Schalter:
+#    Settings → Environments → cloudflare-produktion →
+#    „Allow administrators to bypass configured protection rules" AUS
+#    Kontrolle: python3 scripts/worker_environment_guard.py --check
+
+# 3 · Actions → „Cloudflare-Worker deployen" → Run workflow (main, newsletter-worker)
+#    Der Job hält bei „Review deployments" – das ist der gewollte Schutz.
+#    Freigeben; `/healthz` muss den bau-Stempel aus wrangler.toml liefern.
+```
+
+**Nachweis der Heilung im Liegenden:**
+
+```bash
+npm run test:worker:abschluss       # 16 Gegenproben + 18 Vertragstests am echten Workflow
+npm run test:worker:selbstheilung   # Eichprobe, Verdrahtung, 38 Vertragstests
+npm run trigger:check               # 102 Workflows, 0 Befunde
+npm run workflow:js                 # alle github-script-Blöcke kompilieren
+python3 scripts/workflow_vertrag_wache.py --gate   # V1–V7, 102 Workflows
+```
+
+Bericht mit Messwerten, Gegenproben und Grenzen:
+`WARTUNG-VEROEFFENTLICHUNG-WF-829B-922-DAUERHEILUNG-HIGHEND-2026-11-10.md`.
+
+---
+
 ### A5 · Automatik-Kette auf dem eigenen Rechner (Finding F-04)
 
 **Lage:** Drei Türen waren offen — Whisper ohne Token (jede besuchte Webseite
@@ -708,7 +795,7 @@ Heilung, sondern ein falscher Abschluss.
   auch unter Bash `-e`; die Auswertung entscheidet.
 - Jeder belegte Befund steht einzeln als gegen Kommando-Injektion geschützte
   Check-Annotation in GitHub, außerdem in der Lauf-Zusammenfassung. Bereinigte
-  Berichte bleiben sieben Tage als Artefakt `sicherheits-live-nachweis` erhalten.
+  Berichte bleiben 90 Tage als Artefakt `sicherheits-live-nachweis` erhalten.
   Keine rohen Health-Antworten, Export-Einträge, Adressen oder Cookies hochladen.
 
 **Nach Übernahme der Korrektur und Einrichtung nach A1/A3/A4:**
@@ -876,27 +963,52 @@ durch Unterdrücken des Alarms.
 
 ## E. Abhängigkeiten — wenn GitHub Alarme zeigt und der Bestand sauber ist
 
-**Stand 24.10.2026** · Grundlage `ABHAENGIGKEITS-SICHERHEIT-PREMIUM-2026-10-24.md`
+**Stand 10.11.2026** · Grundlage `ABHAENGIGKEITS-SICHERHEIT-PREMIUM-2026-10-24.md` & `WARTUNG-ABHAENGIGKEITEN-MINIMATCH-79-SELBSTHEILUNG-HIGHEND-2026-11-10.md`
 
 GitHub meldete 58 offene Schwachstellen, während der ausgelieferte Bestand
 nach vollständiger Prüfung gegen dieselbe Advisory-Datenbank 0 Fundstellen
 hatte. Die Anzeige war älter als der Bestand. Dieser Abschnitt beschreibt,
-wie der Zustand **gemessen** wird — und was ein Befund auslöst.
+wie der Zustand **gemessen** wird — und wie Befunde seit Alert `#79`
+(`minimatch` DoS `GHSA-g3hv-75wg-m249`) automatisch **geheilt und gegen
+Rückfälle verriegelt** werden.
 
 ### E1 · Messen, nicht glauben
 
 ```bash
-npm run deps:check     # offline: Pins, Quelle ↔ Hash-Lock, Locks, SHAs, Tags
-npm run deps:audit     # online: jede ausgelieferte Version gegen die Advisory-DB
-npm run test:deps      # Sabotage- und Gegenproben der Wache
+npm run deps:check          # offline: Pins (A1–A8) + Sicherheits-Untergrenzen (A9)
+npm run deps:audit          # online: jede ausgelieferte Version gegen die Advisory-DB
+npm run deps:heal:pruefen   # Eichprobe + Vertrag + Belegkette + Audit (lesend)
+npm run deps:heal:wache     # Verdrahtungs-Wache über Vertrag, Kette und Workflows
+npm run test:deps           # Sabotage- und Gegenproben von Wache + Selbstheilung
 ```
 
-Der Audit braucht `GITHUB_TOKEN` (in Actions vorhanden). Rund 310
-Versionen, etwa 70 Sekunden, Exit 0 sauber · 1 Befund · 2 Störung.
+Der Audit braucht `GITHUB_TOKEN` (in Actions vorhanden). Rund 339
+Versionen, Exit 0 sauber · 1 Befund · 2 Störung · 3 Messgerät defekt (beim Heiler).
+Seit dem 10.11.2026 läuft der Online-Audit in `sicherheits-wache.yml` nicht mehr
+nur im Tageslauf, sondern bei **jedem** Pull Request und Push, der Manifeste,
+Lockfiles, Workflows oder den Schutz-Vertrag berührt (`--audit-bedarf`).
 
-### E2 · Befund heilen (Exit 1)
+### E2 · Befund heilen — automatisch und lokal (Exit 1)
 
-Der Treffer nennt Paket, Version, Schweregrad, GHSA und `first_patched_version`.
+Der Treffer nennt Paket, Version, Schweregrad, GHSA und `first_patched_version`
+(bei mehrzweigigen GHSAs streng aufsteigend für den betroffenen Versionszweig).
+
+- **Automatisch im Betrieb (`Abhängigkeits-Schutz · Selbstheilung`):** Täglich um
+  06:18 UTC sowie automatisch nach einem roten Lauf der `Sicherheits-Wache` auf
+  `main` führt `.github/workflows/abhaengigkeits-selbstheilung.yml` den Heiler
+  aus: Eichprobe → streng monotone Anhebung mit `--package-lock-only
+  --ignore-scripts` (inkl. `overrides` bei blockierenden Major-Eltern-Ranges und
+  synchronem pip-Hash-Lock) → Lieferketten-Prüfung (`integrity` +
+  `registry.npmjs.org` + `hasInstallScript`-Ausweis) → **Nachmessung** (Rollback
+  bei Verschlechterung) → SHA-256-Eintrag in
+  `data/abhaengigkeits_schutz_belege.jsonl` → Verankerung der
+  `first_patched_version` in `data/abhaengigkeits_schutz_vertrag.json` (Regel
+  `A9`) → Eröffnung eines geprüften Heilungs-PRs (`automation/deps-heilung-*`,
+  Audit H-02: kein blinder Direkt-Merge auf `main`).
+- **Lokal auf Zuruf:** `GITHUB_TOKEN="$(gh auth token)" npm run deps:heal`
+  führt exakt denselben fünfstufigen Heil- und Nachmesslauf im Arbeitsbaum aus.
+
+Manuelle Checkliste (falls ohne Heiler gearbeitet wird):
 
 1. Version auf `first_patched_version` pinnen — in **allen** Stellen, die die
    Wache als Herkunft nennt (`quellen`).
@@ -905,9 +1017,9 @@ Der Treffer nennt Paket, Version, Schweregrad, GHSA und `first_patched_version`.
    denselben Pin (Regel A2 prüft die Gleichheit).
 3. `npm run deps:check && npm run deps:audit` — erst danach ist der Befund
    geschlossen.
-4. Kein `first_patched_version` veröffentlicht? Dann bleibt der Befund offen
-   und wird als bewusster Eintrag im PR genannt. Er verschwindet nicht durch
-   Dismiss.
+4. Kein `first_patched_version` veröffentlicht? Dann bleibt der Befund ehrlich
+   `OFFEN` (Exit 1, Ampel `action_required`) und wird als bewusster Eintrag
+   genannt. Er verschwindet nicht durch Dismiss.
 
 ### E3 · Störung (Exit 2) ist kein Freibrief
 
