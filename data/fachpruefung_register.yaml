@@ -51,7 +51,7 @@ beitraege:
     zahlen_fundstellen:
       - "Für ein einfaches Konto zahlen viele 8 € bis 18 € im Monat; das ist ein Modellwert."
       - "Im Jahr sind es aber 96 € bis 216 €."
-      - "![Merkkarte: Kernaussagen zu Kostenloses Girokonto: Ein Konto ohne Gebühren finden](abbildung-merkkarte.svg) ## Das Wichtigste in Kürze - Ein echtes kostenloses Konto zeichnet sich durch 0 € Kontoführung aus, oft gekoppe"
+      - "## Das Wichtigste in Kürze - Ein echtes kostenloses Konto zeichnet sich durch 0 € Kontoführung aus, oft gekoppelt an einen Mindestgeldeingang als Modellwert."
       - "10 € bis 15 €),."
       - "Kontoführung dauerhaft bei 0 € Manche Banken führen das Konto ohne jede Bedingung für 0 €; das ist ein Rechenbeispiel."
       - "Die Gebühr entfällt dann, wenn 700 € bis 1.000 € im Monat eingehen."
@@ -185,7 +185,7 @@ beitraege:
       - "Rechenweg für die Überbrückung: 2 mal 15 € ergeben 30 €, 4 mal 12 € ergeben 48 €."
       - "Modellrechnung: Die Gesamtkosten der Lücke liegen bei rund 96,60 €."
   - slug: "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet"
-    titel: "Grundversorgung Strom"
+    titel: "Grundversorgung Strom und Gas: Was sie leistet und kostet"
     pillar: "strom-sparen"
     risikoklasse: "erhoeht"
     status: "ausstehend"

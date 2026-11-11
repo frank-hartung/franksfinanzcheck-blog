@@ -76,6 +76,30 @@ BILD_RE = {
     MERK: re.compile(r"^!\[[^\]]*\]\(" + re.escape(MERK) + r"\)\s*$"),
     ABLAUF: re.compile(r"^!\[[^\]]*\]\(" + re.escape(ABLAUF) + r"\)\s*$"),
 }
+
+
+def _bildzeile_re(bild):
+    """Erkennt JEDE Markdown-Bildzeile auf dieses Asset – auch die kaputte.
+
+    ANLASS (10.11.2026, Release-Scorecard #1098): `fix_spaces.py` zerlegte das
+    Ziel `abbildung-merkkarte.svg` in `abbildung-merkkarte. svg` (Regel D
+    setzte nach jedem Punkt ein Leerzeichen). `BILD_RE` erkannte nur die
+    heile Fassung; der Nachzug hielt den Beitrag damit für „Abbildung fehlt“
+    und fügte eine ZWEITE, heile Bildzeile ein. Der Text trug danach eine
+    kaputte (R8-URL-LEERZEICHEN, hart blockierend) und eine heile Zeile.
+    Deshalb ist die Erkennung jetzt absichtlich nachsichtig: Ein Punkt mit
+    beliebigem Leerraum (oder %2e) zählt. Geschrieben wird ausschließlich die
+    kanonische Zeile – erkannt wird jede Fassung.
+    """
+    stamm, punkt, endung = bild.rpartition(".")
+    assert punkt and stamm and endung, bild
+    return re.compile(
+        r"^!\[(?P<alt>[^\]]*)\]\(\s*" + re.escape(stamm)
+        + r"\s*(?:\.\s*|%2e)" + re.escape(endung) + r"\s*\)\s*$",
+        re.I)
+
+
+BILD_ANY = {bild: _bildzeile_re(bild) for bild in (MERK, ABLAUF)}
 UNTERSCHRIFT_RE = re.compile(r"^\*Abbildung:[^\n]*\*\s*$")
 
 
@@ -201,19 +225,24 @@ def caption_ablauf(title, steps):
 def _setze_unterschrift(lines, bild, caption, title=None):
     """Bildzeile + Unterschrift setzen bzw. eine Altfassung ersetzen.
 
+    Erkannt wird jede Fassung der Zeile (`BILD_ANY`, auch die von
+    `fix_spaces.py` zerlegte). Geschrieben wird immer die kanonische Form –
+    damit heilt ein Lauf den Defekt, statt ihn zu verdoppeln.
+
     Rückgabe: (lines, gefunden). `gefunden` ist False, wenn die Bildzeile
     fehlt – dann fügt der Aufrufer den ganzen Block ein (Erstlauf).
     """
-    muster = BILD_RE[bild]
+    muster = BILD_ANY[bild]
+    prefix = ("Merkkarte: Kernaussagen zu " if bild == MERK
+              else "Gliederung des Beitrags: ")
     for i, line in enumerate(lines):
-        if not muster.match(line.strip()):
+        treffer = muster.match(line.strip())
+        if not treffer:
             continue
         # Auch der zugängliche Alternativtext gehört zur aktuellen Überschrift;
         # bei einer Umbenennung darf nicht nur die SVG und die Caption wechseln.
-        if title is not None:
-            prefix = ("Merkkarte: Kernaussagen zu " if bild == MERK
-                      else "Gliederung des Beitrags: ")
-            lines[i] = f"![{prefix}{title}]({bild})"
+        alt = f"{prefix}{title}" if title is not None else treffer.group("alt")
+        lines[i] = f"![{alt}]({bild})"
         # Die Unterschrift steht direkt unter der Bildzeile; dazwischen darf
         # genau EINE Leerzeile liegen (Hugo rendert sie als <figcaption>).
         j = i + 1
@@ -226,6 +255,29 @@ def _setze_unterschrift(lines, bild, caption, title=None):
         lines[i + 1:i + 1] = ["", caption]
         return lines, True
     return lines, False
+
+
+def _entferne_doppelte_bildzeilen(lines, bild):
+    """Lässt genau EINE Bildzeile je Asset stehen (die erste, kanonische).
+
+    Die zweite Zeile ist kein Inhalt, sondern der Rückstand eines früheren
+    Nachzugs, der die kaputte Fassung nicht erkannt hat. Mit ihr entfernt
+    der Heiler auch die Unterschrift, die ausschließlich zu ihr gehört –
+    die Unterschrift der erhaltenen Zeile bleibt unangetastet.
+    """
+    muster = BILD_ANY[bild]
+    treffer = [i for i, line in enumerate(lines) if muster.match(line.strip())]
+    for i in reversed(treffer[1:]):
+        del lines[i]                                     # die doppelte Zeile
+        j = i
+        if j < len(lines) and not lines[j].strip():
+            k = j + 1
+            if k < len(lines) and UNTERSCHRIFT_RE.match(lines[k].strip()):
+                del lines[k]                             # ihre Unterschrift
+            del lines[j]                                 # ihre Leerzeile
+        elif j < len(lines) and UNTERSCHRIFT_RE.match(lines[j].strip()):
+            del lines[j]
+    return lines
 
 
 def render(post_path, write):
@@ -241,6 +293,10 @@ def render(post_path, write):
         lines = body.split("\n")
         lines, hat_merk = _setze_unterschrift(lines, MERK, merk_caption, title)
         lines, hat_ablauf = _setze_unterschrift(lines, ABLAUF, ablauf_caption, title)
+        # Rückstände eines Laufs, der die zerlegte Zeile nicht erkannte:
+        # entfernen, BEVOR der Block im Erstlauf-Fall eingefügt wird.
+        lines = _entferne_doppelte_bildzeilen(lines, MERK)
+        lines = _entferne_doppelte_bildzeilen(lines, ABLAUF)
         if not (hat_merk and hat_ablauf):  # Erstlauf: Blöcke einfügen
             h2 = [i for i, line in enumerate(lines) if line.startswith("## ")]
             if len(h2) < 2:
@@ -293,13 +349,29 @@ def pruefe_post(path, problems, gesehen):
     for name in (MERK, ABLAUF):
         if not os.path.isfile(os.path.join(folder, name)):
             problems.append(f"{slug}: Datei fehlt {name}")
-        if name not in body:
+        zeilen = [z for z in body.split("\n") if BILD_ANY[name].match(z.strip())]
+        if not zeilen:
             problems.append(f"{slug}: nicht eingebunden {name}")
             continue
         prefix = ("Merkkarte: Kernaussagen zu " if name == MERK
                   else "Gliederung des Beitrags: ")
-        if f"![{prefix}{title}]({name})" not in body:
-            problems.append(f"{slug}: Bild-Alternativtext ist nicht artikelgenau ({name})")
+        kanonisch = f"![{prefix}{title}]({name})"
+        # GENAU EINE ZEILE, UND ZWAR DIE KANONISCHE (10.11.2026, #1098).
+        # Vorher genügte `name in body`: Eine korrekte Zeile tarnte eine
+        # zweite, zerlegte (`abbildung-merkkarte. svg`) – die Scorecard sah
+        # sie als R8-URL-LEERZEICHEN, dieses Gate sah nichts.
+        if len(zeilen) != 1:
+            problems.append(
+                f"{slug}: Bildzeile {name} steht {len(zeilen)}× im Text – "
+                "genau eine kanonische Zeile erwartet (Doppelzeile entfernen)")
+        if zeilen[0].strip() != kanonisch:
+            problems.append(
+                f"{slug}: Bildzeile {name} ist nicht kanonisch "
+                f"(erwartet: {kanonisch[:80]}…) – heilen")
+        # Zerlegte Fassung auch außerhalb einer Bildzeile (R8-URL-LEERZEICHEN).
+        stamm, _punkt, endung = name.rpartition(".")
+        if re.search(re.escape(stamm) + r"\.\s+" + re.escape(endung), body):
+            problems.append(f"{slug}: zerlegte URL {stamm}. {endung} im Text – heilen")
         if erwartet[name] not in body:
             problems.append(
                 f"{slug}: Unterschrift fehlt oder ist nicht artikelgenau "
@@ -413,6 +485,25 @@ def selftest():
     assert neu_titel[0] == "![Merkkarte: Kernaussagen zu Neuer Titel](abbildung-merkkarte.svg)"
     wiederholt, _ = _setze_unterschrift(neu_titel, MERK, a_merk, "Neuer Titel")
     assert wiederholt == neu_titel, "Bild-Alt-Text muss nach Titelwechsel stabil sein"
+    # #1098 (10.11.2026): `fix_spaces.py` zerlegte das Ziel zu ". svg". Der
+    # Nachzug erkannte nur die heile Zeile und fügte eine zweite ein. Beide
+    # Fassungen werden jetzt erkannt; die Doppelzeile wird entfernt.
+    kaputt = [f"![Merkkarte: Kernaussagen zu T](abbildung-merkkarte. svg)", "",
+              "*Abbildung: alte Fassung (eigene Darstellung).*", "",
+              f"![Merkkarte: Kernaussagen zu T]({MERK})", "", "## Kapitel"]
+    geheilt, gefunden = _setze_unterschrift(list(kaputt), MERK, a_merk)
+    assert gefunden and "abbildung-merkkarte. svg" not in "\n".join(geheilt)
+    geheilt = _entferne_doppelte_bildzeilen(geheilt, MERK)
+    assert sum(1 for z in geheilt if z.startswith("![Merkkarte")) == 1, geheilt
+    assert sum(1 for z in geheilt if z.startswith("*Abbildung:")) == 1, geheilt
+    assert geheilt[2] == a_merk, geheilt
+    nochmal, _ = _setze_unterschrift(list(geheilt), MERK, a_merk)
+    nochmal = _entferne_doppelte_bildzeilen(nochmal, MERK)
+    assert nochmal == geheilt, "Heilung der Doppelzeile ist nicht idempotent"
+    # Die nachsichtige Erkennung darf NICHT beliebige Bilder treffen.
+    fremd = ["![Cover](cover.webp)", "", "## Kapitel"]
+    unberuehrt, gefunden = _setze_unterschrift(list(fremd), MERK, a_merk)
+    assert not gefunden and unberuehrt == fremd
     print("✅ Abbildungen-Selbsttest bestanden (artikelgenaue Bildzeilen, "
           "Altfassung wird ersetzt, idempotent)")
     return 0
