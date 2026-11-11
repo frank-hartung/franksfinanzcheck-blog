@@ -315,6 +315,34 @@ meldet für diesen Artikel korrekt `ueberholt`.
 
 ---
 
+## 7c · Der zweite fremde Blocker: zwei Seiten ohne Belegkette
+
+`Playwright-Suite` scheiterte im Schritt „Metadaten-Wache – Quelle“. Gemessen
+auf **`origin/main`** (eigener Worktree, gleiches Werkzeug):
+
+```
+[M4] content/posts/2026-11-01-flugverspaetung-entschaedigung-…: Keine Quelle im Frontmatter (quellen)
+[M4] content/posts/2026-11-10-wlan-frust-loesen-…:           Keine Quelle im Frontmatter (quellen)
+```
+
+Beides sind die beiden Seiten, die ich im Schritt davor über den
+**Verlinkungsauftrag** angeschlossen habe — der Schritt hat den Befund
+**aufgedeckt, nicht erzeugt**: Beide Dateien tragen `quellen:` schon auf
+`main` nicht (`grep -c '^quellen:'` → **0/0**).
+
+**Warum ich keine Quellen erfinde:** `metadaten_wache.py` führt M4 in der
+Liste „Nicht heilbar bleibt gemeldet: M1, M4, M5, M6 …“. Der Grund steht im
+Kopf der Wache und in der Akte zu #1110: Eine Quelle ist eine Recherche- und
+Freigabeentscheidung (YMYL). Ein Agent, der eine plausible URL einsetzt,
+erzeugt einen Beleg, der nichts belegt — die teuerste Art von Grün.
+
+**Was passiert ist, dass es nicht wieder still bleibt:** Der Befund steht hier,
+im PR und im Ledger. Die Redaktion trägt die Quellen nach
+(`belegketten_wache.py --strict` prüft danach, ob die Zitate noch die
+zitierten sind).
+
+---
+
 ## 8 · Restrisiken, bewusst benannt
 
 | Risiko | Wirkung | Gegenmaßnahme |
