@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-11T12:45:16Z",
-  "modus": "live",
-  "commit": "b56e91547814b05eac9f32acde4168d67da0ba7a",
+  "generated_at": "2026-11-11T12:52:19Z",
+  "modus": "kandidaten",
+  "commit": "b5bfea8640f929cc9976378a205c0d473cb361a6",
   "kapazitaet": {
     "stichtag": "2026-11-11",
     "basis": "2026-11-11",
@@ -648,7 +648,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
@@ -1359,7 +1359,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-11",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1851,7 +1851,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-11",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1998,7 +1998,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-02-07",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "Q2-quellen-vorhanden",
