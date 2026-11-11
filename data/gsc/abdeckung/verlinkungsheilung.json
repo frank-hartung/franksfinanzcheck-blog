@@ -5,44 +5,44 @@
    "grund": "gleicher Pillar",
    "inlinks_jetzt": 0,
    "meldung": "eingefügt",
-   "quelle": "/posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/",
-   "ziel": "/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/"
+   "quelle": "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/",
+   "ziel": "/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/"
   },
   {
    "grund": "gleicher Pillar",
    "inlinks_jetzt": 0,
    "meldung": "eingefügt",
-   "quelle": "/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/",
-   "ziel": "/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/"
+   "quelle": "/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/",
+   "ziel": "/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/"
   },
   {
    "grund": "gleicher Pillar",
    "inlinks_jetzt": 0,
    "meldung": "eingefügt",
-   "quelle": "/posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/",
-   "ziel": "/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/"
+   "quelle": "/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/",
+   "ziel": "/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/"
   },
   {
    "grund": "gleicher Pillar",
    "inlinks_jetzt": 0,
    "meldung": "eingefügt",
-   "quelle": "/posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/",
-   "ziel": "/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/"
+   "quelle": "/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/",
+   "ziel": "/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/"
   }
  ],
  "geheilt": [
-  "/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/",
-  "/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/"
+  "/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/",
+  "/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/"
  ],
  "geschrieben": true,
- "max": 10,
+ "max": 4,
  "nachher_ohne_inlink": [],
  "offen": [],
- "stand": "2026-11-10T13:26:50Z",
- "status": "sauber",
+ "stand": "2026-11-11T13:01:46Z",
+ "status": "geheilt",
  "verweigert": [],
  "vorher_ohne_inlink": [
-  "/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/",
-  "/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/"
+  "/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/",
+  "/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/"
  ]
 }

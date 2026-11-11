@@ -185,7 +185,7 @@ Ein transparenter **DSL-Vergleich** ist der effektivste Weg, um die monatlichen 
 
 Der beste Tarif ist derjenige, der genau deinen Bedarf deckt, ohne für ungenutzte Megabit oder unnötige Hardware-Miete zu bezahlen.
 
-**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/): So sparst du beim Internetvertrag · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): So bringst du [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/): So sparst du beim Internetvertrag · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): So bringst du [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [WLAN-Frust lösen](../../posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/)
 
 ## Häufige Fragen
 
