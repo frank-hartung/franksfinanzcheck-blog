@@ -53,7 +53,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 - Unterscheide **Standby**, **Netzwerk-Bereitschaft** und notwendigen **Dauerbetrieb**.
 - Miss zuerst Gerätegruppen: TV-Ecke, Homeoffice und alte Audiotechnik.
-- **10 Watt rund um die Uhr** entsprechen 87,6 kWh und bei 0,37 €/kWh rund 32 € im Jahr als Beispielwert.
+- **10 Watt rund um die Uhr** entsprechen 87,6 kWh und bei 0,37 €/kWh rund 32 € im Jahr (Rechenbeispiel).
 - Eine schaltbare Leiste lohnt eher bei mehreren Geräten als bei einem modernen Ladegerät.
 - Router, Smart-Home-Zentralen und Geräte mit Wartungszyklen schaltest du nicht blind ab.
 - Senke zuerst die unnötige Dauerlast; vergleiche danach den Stromtarif.
@@ -174,7 +174,7 @@ Am Ende brauchst du keine perfekte Inventur. Notiere die zwei größten unnötig
 
 ### „Neue Geräte verbrauchen im Standby immer fast nichts“
 
-Für viele Standby-Zustände gelten strenge Grenzwerte. Netzwerk-Bereitschaft und aktive Komfortfunktionen können trotzdem mehr Strom ziehen. Miss einfach dein Modell.
+Für viele Standby-Zustände gelten strenge Grenzwerte der EU-Ökodesign-Verordnung. Netzwerk-Bereitschaft und aktive Komfortfunktionen können trotzdem mehr Strom ziehen. Miss einfach dein Modell.
 
 ### „Jedes Ladegerät muss sofort raus“
 

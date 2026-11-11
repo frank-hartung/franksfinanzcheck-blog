@@ -237,6 +237,21 @@ schritte:
     klasse: inhalt
     grund: Tag-Flächen sind indexierte Seiten – Befund ist fachlich gemeint.
 
+  # 11.11.2026 (#1098): Der Schritt stand seit 7b93454 (PR #1162) im
+  # Auslieferungsweg, ohne Blastradius-Entscheidung – C6/C38 und damit das
+  # Qualitäts-Gate waren auf JEDEM Pull Request rot. Klasse bewusst
+  # `werkzeug`: ein kaputter Search-Console-Export ist ein defektes
+  # Messwerkzeug, kein Inhaltsbefund und kein Build-Problem. Ein
+  # Messartefakt darf die Live-Site nicht einfrieren (#676/#740) – der
+  # Befund geht über den Meldeweg an das Siegel.
+  - name: GSC-Leistungsdaten – Artefaktprüfung (C34-toleriert)
+    klasse: werkzeug
+    grund: >-
+      Messgrundlage der Konsolidierung und des Abdeckungsberichts. Rot heißt:
+      der Export ist unbrauchbar, nicht der Bestand. Die Prüfung meldet ihren
+      Befund über `scripts/werkzeugbefund.py --melden` an das Siegel und hält
+      die Auslieferung nicht an (C34, #676/#740).
+
   - name: Weiterleitungen – Selbsttest, Quelle und Unit-Tests (fail-closed)
     klasse: infra
     grund: Eine kaputte Weiterleitungsquelle oder fehlende Zielseiten sind technische Fehler. Ohne sie wäre die Auslieferung der 301-Ersatzseiten nicht konsistent. Der Befund ist kein fachlicher Inhalt.

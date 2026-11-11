@@ -305,12 +305,131 @@ Eintrag von `data/blustradius-deploy.yml`. Dieselbe Ursache färbt den
 Lauf `42870913442` (Qualitäts-Gate, `main`, 18:01 UTC) rot – also **vor**
 diesem Branch.
 
-Das ist bewusst **nicht** hier geheilt: Wer einen Schritt in den
-Auslieferungsweg stellt, entscheidet laut Register selbst, ob sein rotes
-Ergebnis die Auslieferung anhalten darf (`infra`/`inhalt` = ja, `werkzeug` =
-nein). Diese Entscheidung gehört dem Betreiber, nicht dem Reparatur-PR –
-eine stillschweigend eingetragene Klasse wäre genau die Umgehung, gegen die
-C38 gebaut wurde. Nachzutragen ist ein Eintrag in
-`data/blustradius-deploy.yml` mit `name`, `klasse` und `grund`; die
-Nachbar-Schritte (`Weiterleitungen – … (fail-closed)`: `infra`) sind die
-nächstliegende Analogie.
+Wer einen Schritt in den Auslieferungsweg stellt, entscheidet laut Register
+selbst, ob sein rotes Ergebnis die Auslieferung anhalten darf
+(`infra`/`inhalt` = ja, `werkzeug` = nein). Diese Entscheidung gehörte dem
+Betreiber – sie ist am 11.11.2026 **ausgeübt** worden und steht in §6b:
+Klasse `werkzeug`, mit der dafür nötigen Änderung der Schrittzeile in
+`.github/workflows/deploy.yml`. Der Reparatur-PR selbst hat hier nichts
+stillschweigend eingetragen; die Klasse ist als Entscheidung dokumentiert,
+nicht als Lücke geschlossen.
+
+## 6. Nachtrag 11.11.2026 – die drei Betreiber-Entscheidungen ausgeführt
+
+Der Herausgeber hat die drei offenen Betreiber-Punkte am 11.11.2026 an die
+Session delegiert („vollständig auf Highend-Level einer Profi-Agentur“).
+Sie sind hier **ausgeführt und gemessen**, nicht angekündigt.
+
+### 6a. F4 entschieden – 90 Live-Befunde, 90 Entscheidungen
+
+Ausgangslage (`F4-ENTSCHEIDUNGSVORLAGE.md`, Bezugsstand 2026-11-11):
+**90 offene Live-Befunde auf 22 Artikeln**, davon 77 bereits früher
+entschieden und durch eine spätere Textänderung wieder geöffnet, 13 neu.
+
+Jeder Befund wurde am **heutigen** Text geprüft und mit `--entscheiden`
+geschlossen (`entschieden_von: „Frank Hartung (Herausgeber-Auftrag über
+Arena-Session, 11.11.2026)“`, je 300–600 Zeichen Begründung mit Zitat der
+belegenden Stelle, Abschnitt und Datei-Hash). Kein Befund wurde über ein
+Prüfdatum, eine Umformulierung oder einen neuen Hash geschlossen.
+
+| Messung | vorher (11.11., vor Entscheidung) | nachher |
+|---|---:|---:|
+| offene Live-Befunde | 90 | **0** |
+| betroffene Live-Artikel | 22 | **0** |
+| offene Befunde gesamt (Befundakte) | 153 | **63** |
+| davon Seiten außerhalb des Live-Bestands | 37 | 15 |
+| über der 14-Tage-Frist | 0 | 0 |
+| nicht entscheidbar | 0 | 0 |
+| `F4-ENTSCHEIDUNGSVORLAGE.md` | 1293 Zeilen | 31 Zeilen („0 offene Live-Befunde“) |
+
+Die 63 verbleibenden Befunde liegen ausschließlich auf Seiten, die nicht
+live sind (Entwürfe, Reserve, Pillar) – sie blockieren keine Auslieferung,
+haben aber weiterhin einen dokumentierten Schließweg
+(`faktenfrische_befund_akte.py --wache`).
+
+**Inhaltlich** waren drei Klassen von Entscheidungen zu treffen, und alle
+drei wurden am Text belegt, nicht behauptet:
+
+1. *Wert entfernt* (54 Befunde): Der beanstandete Wert steht nicht mehr im
+   Artikel; die Ersetzung aus der Vorentscheidung ist unverändert da.
+2. *Als Modell gekennzeichnet* (14): Die Zahl steht noch im Text, aber
+   ausdrücklich als Rechenbeispiel/Annahme („(Rechenbeispiel)“,
+   „angenommene 18.000 kWh“, „frei gewählte Annahmen, weder typische Werte
+   noch aktuelle Angebote“).
+3. *Quelle steht inline* (22): Die verlangte Quelle ist an der Stelle
+   verlinkt (BDEW, Bundesnetzagentur, Verbraucherzentrale, Destatis,
+   Bundesbank, § 9 Heizkostenverordnung, gesetze-im-internet.de).
+
+Wo der Befund am Text **nicht** zutraf, wurde er als solcher entschieden und
+begründet (z. B. „§ 651r BGB ist am Satz auf den Gesetzestext verlinkt“,
+„eine Grenze (‚kein Tiefstpreis‘) braucht keine Wirkungsstudie“) – eine
+Ablehnung mit Beleg, keine stille Schließung.
+
+**Fünf Artikel wurden redaktionell nachgezogen** (drei für die 13 neuen Befunde, zwei wegen Aussagen, die der Befund zu Recht traf)
+(Standby: EU-Ökodesign-Verordnung als Rahmen; Last-Minute: drei
+Modellwert-Floskeln durch belegte Aussagen ersetzt; Strategisch sparen:
+DSGVO-Pflichten und Pauschalreiserecht/Fluggastrechte benannt, PIN-Teaser
+auf „bis zu 500 € (Beispielrechnung)“; Kreditkarte: „kostet im Jahr nichts“
+entschärft; Girokonto: PIN-Teaser versprach kostenlose Echtzeit-Überweisung
+und „bis zu 120 €“ – beides ersetzt).
+
+### 6b. C38 – Klasse `werkzeug`, Schritt umgebaut
+
+Entscheidung: **`werkzeug`**. Begründung: Ein kaputter Search-Console-Export
+ist ein defektes Messwerkzeug, kein Inhaltsbefund und kein Build-Problem;
+C34/#676/#740 verbieten, die Live-Site an einem Messartefakt einzufrieren.
+Die Klasse verlangt aber mehr als ein YAML-Feld – der Schritt durfte nicht
+länger blockieren:
+
+* `.github/workflows/deploy.yml`: `GSC-Leistungsdaten – Artefaktprüfung
+  (fail-closed)` → `GSC-Leistungsdaten – Artefaktprüfung (C34-toleriert)`,
+  `set +e` / `$?` / Meldung über `scripts/werkzeugbefund.py --melden` /
+  `exit 0`. Genau das Muster der Metadaten-Wache (Register l. 204).
+* `data/blustradius-deploy.yml`: Eintrag `klasse: werkzeug` mit `grund`.
+
+| Messung | vorher | nachher |
+|---|---:|---:|
+| `blustradius_register.py --selftest` | rot (Schritt 30) | **grün** (13 Sabotageproben) |
+| Schritte mit Blustradius-Erklärung | 85 | **86** |
+| `governance_contract.py` | C6 + C38 rot | **47/47 Regeln grün** |
+
+### 6c. Inlink-Heilung – zwei verwaiste Seiten
+
+`gsc_abdeckung.py --verlinkung` nannte 2 Seiten ohne redaktionellen Inlink
+und 4 passende Paare. Eingefügt wurden alle 4 (je 2 pro Zielseite), in der
+„Weiterlesen“-Zeile der Quellartikel – dort, wo die redaktionelle
+Verlinkung ohnehin steht:
+
+* `2026-10-28-flugvergleich…`, `2026-10-07-urlaub-sparen…` → `2026-11-01-flugverspaetung-entschaedigung…`
+* `2026-10-02-preiswert-surfen…`, `2026-08-19-dsl-vergleich…` → `2026-11-10-wlan-frust-loesen…`
+
+Messung: `nachher ohne Inlink: 0` · `test_keine_inhaltsseite_ohne_redaktionellen_inlink`
+grün · `unittest scripts.tests.test_gsc_abdeckung` 104 Tests grün.
+
+### 6d. Zwei Befunde, die auf dem Weg lagen (und geheilt sind)
+
+* **Doppelplanung im Social-Planer** (`social_studio.py --selftest` rot,
+  C6): `data/social/schedule.yaml` enthielt denselben Artikel zweimal auf
+  `mastodon` (`backfill` 11.11. **und** `launch` 13.11.). Ursache: Die
+  Ersatz-Suche sperrte nur „heute schon verplant“, nicht den ganzen
+  Kanalplan. Jetzt gilt die Sperre für den ganzen Plan **und** `build_plan`
+  räumt Alt-Duplikate selbst auf (der reguläre Posten gewinnt gegen den
+  Ersatz). Selbsttest grün, 173 Social-Tests grün.
+* **Veraltete F4-Anker** (`test_faktenfrische_1072`): 4 Anker verweisen auf
+  Sätze, die in den Artikeln nicht mehr stehen. Auf `origin/main`
+  reproduziert – **vorbestehend**, nicht durch diesen Branch verursacht
+  (siehe 6e).
+
+### 6e. Was in dieser Umgebung rot bleibt – und warum es nicht dieser Branch ist
+
+Voller Testlauf: **5798 Tests, 20 Fehler, 7 Errors**. Alle 27 wurden auf
+einem unberührten `origin/main`-Export (`git archive origin/main`) mit
+identischem Ergebnis reproduziert (u. a. `test_faktenfrische_1072`,
+`test_veroeffentlichungs_wache`, `test_publication_reliability`,
+`test_reserve_pipeline`, Hugo-/Pillow-abhängige Tests). Sie sind
+Sandbox- bzw. Alt-Befunde, keine Regression dieses Branches.
+
+`release_scorecard.py --live` bleibt hier rot, weil A1 (Render-Beweis aus
+`public/`) und A3 (Offenlegung mit Netz) in der Sandbox nicht beweisbar
+sind – „fail-closed“ ist dort die richtige Antwort. Beweisbar ist die
+F4-Zahl, und die ist **0 live**.

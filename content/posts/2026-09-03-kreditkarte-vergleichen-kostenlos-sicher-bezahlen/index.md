@@ -173,7 +173,7 @@ Mit dieser Liste findest du eine Karte, deren laufende Kosten zu deinem Alltag p
 
 ## Fazit: Kreditkarte vergleichen – Kostenlos und sicher zahlen
 
-Eine gute Kreditkarte kostet im Jahr nichts und außerhalb Europas kein Vermögen – der Preis sitzt im Fremdwährungsentgelt und in der Teilzahlung. Vergleiche Jahresgebühr, Auslandseinsatz und Rückzahlungsfrist, stelle dann die Vollzahlung ein und behalte die Umsatzbenachrichtigung an.
+Eine gute Kreditkarte kann im Jahr ohne Jahresgebühr auskommen und außerhalb Europas ohne Zusatzentgelt funktionieren – der Preis sitzt im Fremdwährungsentgelt und in der Teilzahlung. Vergleiche Jahresgebühr, Auslandseinsatz und Rückzahlungsfrist, stelle dann die Vollzahlung ein und behalte die Umsatzbenachrichtigung an.
 
 ## Häufige Fragen zur Kreditkarte
 

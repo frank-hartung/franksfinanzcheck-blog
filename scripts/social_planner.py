@@ -495,6 +495,35 @@ def build_plan(cfg: dict, pool: list[dict], state: dict, now: datetime | None = 
     # stehen und würde trotz Sperrfrist rausgehen.
     items = [it for it in items if _not_in_cooldown(it, cfg, state, now, performance)]
 
+    # Selbstheilung im Altbestand des Plans: DOPPELPLANUNG (#1098, 11.11.2026).
+    # Ein Artikel darf pro Kanal nur EINMAL geplant sein – der Selbsttest von
+    # `social_studio` prüft genau das, und es war real rot: In
+    # data/social/schedule.yaml stand derselbe Beitrag auf mastodon zweimal
+    # (`backfill` am 11.11. für einen ausgefallenen Slot UND `launch` am
+    # 13.11.). Zwei Postings desselben Artikels auf demselben Kanal sind
+    # Doppelung, kein Nachrücken. Regel: der REGULÄRE Posten gewinnt gegen den
+    # Ersatz; unter Gleichrangigen bleibt der früheste stehen. Die Historie
+    # (published/failed/blocked) bleibt unangetastet – sie ist Beleg, nicht Plan.
+    _einmalig: dict = {}
+    _reihenfolge: list = []
+    for _it in items:
+        if _it.get("status") != "planned":
+            _reihenfolge.append(_it)
+            continue
+        _key = (_it.get("channel"), _it.get("slug"))
+        _vorher = _einmalig.get(_key)
+        if _vorher is None:
+            _einmalig[_key] = _it
+            _reihenfolge.append(_it)
+            continue
+        if _vorher.get("kind") == "backfill" and _it.get("kind") != "backfill":
+            _einmalig[_key] = _it
+            _reihenfolge[_reihenfolge.index(_vorher)] = _it
+        print(f"   🧹 Doppelplanung entfernt: {_key[0]} / {_key[1]} "
+              f"({_vorher.get('kind')} {_vorher.get('date')} gegen "
+              f"{_it.get('kind')} {_it.get('date')})")
+    items = _reihenfolge
+
     # Gate-Quarantäne gilt auch für bereits geplante Posten: Ein Slot, der
     # sehenden Auges ins Gate läuft, ist ein verlorener Sendetermin.
     quar = quarantiniert(state, now)

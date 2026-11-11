@@ -688,10 +688,29 @@ jobs:
       # bei Fehlern. Ohne Netz, ohne Hugo. Der Proxy-Check (cf-ray) ist
       # bewusst NICHT hier: er braucht Internet und ist eine Betreiber-
       # prüfung. Ergänzt das Gate H9 (Ziele live, keine Kette/Schleife).
-      # Die Konsolidierung nutzt GSC-Daten. Ein kaputter Export ist ein
-      # Artefaktfehler, kein defekter Selbsttest; vor der Nutzung hart prüfen.
-      - name: GSC-Leistungsdaten – Artefaktprüfung (fail-closed)
-        run: python3 scripts/gsc_artefakte_guard.py --check
+      # Die Konsolidierung und der Abdeckungsbericht rechnen aus den
+      # Search-Console-Exporten. Ein kaputter Export ist ein defektes
+      # Messwerkzeug – kein Inhaltsbefund und kein Build-Problem.
+      # 11.11.2026 (#1098, C38): Bis hierher stand ein hartes `--check`, das
+      # den deploy-Job ohne Registererklärung rot machen konnte. Genau diese
+      # Bauweise fror die Live-Site am 09.10. (#676) und am 14.10. (#740) ein.
+      # Jetzt: prüfen, Befund über `werkzeugbefund.py --melden` ans Siegel
+      # geben, Auslieferung NICHT anhalten (Klasse `werkzeug` im
+      # Blustradius-Register, data/blustradius-deploy.yml).
+      - name: GSC-Leistungsdaten – Artefaktprüfung (C34-toleriert)
+        run: |
+          set +e
+          python3 scripts/gsc_artefakte_guard.py --check
+          artefakt=$?
+          set -e
+          if [ "$artefakt" -eq 0 ]; then
+            echo "✅ GSC-Artefakte gültig, eindeutig und zueinander passend."
+          else
+            echo "⚠ GSC-Artefakte nicht verwertbar (Exit $artefakt) – C34: die Auslieferung läuft weiter, der Befund geht an das Siegel."
+            python3 scripts/werkzeugbefund.py --melden "gsc-artefakte" \
+              "GSC-Artefaktprüfung meldet Exit $artefakt: data/gsc/ ist nicht gültig, eindeutig oder zueinander passend. Die Konsolidierung und der Abdeckungsbericht rechnen dann mit einem unbrauchbaren Stand – ein Messbefund, kein Inhaltsbefund. C34: die Auslieferung läuft weiter, der Befund steht im Siegel (#1098)." \
+              || true
+          fi
 
       - name: Weiterleitungen – Selbsttest, Quelle und Unit-Tests (fail-closed)
         run: |
