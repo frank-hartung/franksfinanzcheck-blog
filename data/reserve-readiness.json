@@ -1,6 +1,6 @@
 {
   "target": 6,
-  "ready": 5,
+  "ready": 3,
   "pool_size": 12,
   "generated_at": "2026-11-10T12:23:40Z",
   "candidates": [
@@ -23,20 +23,10 @@
     },
     {
       "slug": "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck",
-      "ready": true,
+      "ready": false,
       "sha256": "301d266e2a34c74147914c134391e511a427c35ffd800b0b15a1fe36b20732e1",
-      "flesch": 72.0,
       "measured_at": "2026-11-10T12:10:47Z",
-      "score": 0.952,
-      "parts": {
-        "spelling": 0.9,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.92,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.9
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-09-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
@@ -233,20 +223,10 @@
     },
     {
       "slug": "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort",
-      "ready": true,
+      "ready": false,
       "sha256": "6cedd9a7eed60243d5a2ba94796730ff03abb9c7456750f83544be6c2e364c32",
-      "flesch": 72.5,
       "measured_at": "2026-11-10T12:23:40Z",
-      "score": 0.954,
-      "parts": {
-        "spelling": 0.84,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.96,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     }
   ],
   "measurement": {
