@@ -678,8 +678,16 @@ await run('#761-Nachführung: offene Meldung mit GROQ-Rat → gleiche Nummer, Ei
   { anzahl: 1, nummer: 761,
     imBody: ['<!-- alert-runbook: backup-einrichtung -->', 'Einrichtung unvollständig – ein Neustart hilft nicht',
              'E1–E8', 'https://x/runs/7620', 'https://x/jobs/7620', 'Voraussetzungen prüfen',
-             '**Offen seit:** 15.10.2026, 09:54:25', 'actions/workflows/backup-offsite.yml'],
-    nichtImBody: ['GROQ', 'Häufigste Ursachen', 'API-Key abgelaufen', 'https://x/runs/38701800402'] });
+             '**Offen seit:** 15.10.2026, 09:54:25', 'actions/workflows/backup-offsite.yml',
+             // 10.11.2026 (WF-9E5A / #923): Der Rat muss den EINEN wirksamen
+             // Schritt benennen und darf nicht behaupten, es gehe von selbst.
+             'kommt hier NICHT zum Zug', 'Run workflow'],
+    nichtImBody: ['GROQ', 'Häufigste Ursachen', 'API-Key abgelaufen', 'https://x/runs/38701800402',
+             // Die alte Zusage war FALSCH: Solange „Voraussetzungen prüfen“ rot
+             // ist, wird „Frische messen“ übersprungen, damit auch die
+             // Selbstheilung. Ein Rat, der die einzige wirksame Handlung zur
+             // Fußnote macht, kostet genau die Zeit, die er sparen will.
+             'musst du nichts mehr anstoßen', 'stößt „Offsite-Backup“ selbst an'] });
 // Idempotenz: Steht der Rat schon drin UND der aufgezeichnete Lauf ist der
 // aktuelle, bleibt die Meldung unberührt (keine tägliche Umschrift).
 await run('Nachführung idempotent: gleicher Rat + gleicher Lauf → keine Umschrift',

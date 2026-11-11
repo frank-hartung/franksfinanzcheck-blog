@@ -166,8 +166,49 @@ sys.exit(0 if os.environ["GEGEBENER_NAME"] in namen else 1)
 '
 }
 
-variable_wert() {  # $1 = Variablenname; stdout = Wert (leer, wenn nicht gesetzt)
-  gh variable get "$1" --repo "$QUELLE" 2>/dev/null | tr -d '\r\n'
+variable_lesen() {  # $1 = Variablenname; stdout = Wert; Exit 0 = gesetzt, 1 = fehlt, 2 = nicht prüfbar
+  # 10.11.2026 (WF-9E5A / #923): Zwei Fehler in einer Zeile geheilt.
+  #  1. `gh variable get` gibt es erst ab gh 2.31 – auf älteren CLIs (Debian
+  #     liefert 2.23) bricht der Aufruf mit „unknown command" ab, und der
+  #     Wizard machte daraus `BACKUP_REPO=unknown command "variable" for "gh"`:
+  #     eine Fehlermeldung als Repository-Name, danach „Repository nicht
+  #     auffindbar". Belegt mit einer gh-Attrappe (siehe
+  #     WizardVersionsVertrag in scripts/tests/test_backup_einrichtung.py).
+  #  2. Fehlt der Lesetunnel (403), war das Ergebnis leer – also „fehlt".
+  #     Ein unlesbarer Punkt ist aber kein fehlender (dieselbe Lehre wie beim
+  #     E8-Schutz und beim 02.11.); er gehört in `ungeprueft`, nie in `offen`.
+  # Die REST-API kann jede gh-Version und trennt die drei Zustände sauber:
+  #   200 → Wert, 404 → nicht gesetzt, alles andere → nicht prüfbar.
+  local antwort code wert
+  antwort="$(gh api "repos/$QUELLE/actions/variables/$1" 2>/dev/null)"
+  code=$?
+  if [ "$code" -ne 0 ]; then
+    # 404 erkennt gh am Text; ein generisches Scheitern bleibt „nicht prüfbar".
+    if printf '%s' "$antwort" | grep -q '"status": *"404"'; then
+      return 1
+    fi
+    return 2
+  fi
+  wert="$(printf '%s' "$antwort" | python3 -c '
+import json, sys
+try:
+    d = json.load(sys.stdin)
+except Exception:
+    sys.exit(1)
+v = d.get("value")
+if not isinstance(v, str):
+    sys.exit(1)
+sys.stdout.write(v)
+' 2>/dev/null)" || return 2
+  printf '%s' "$wert"
+  return 0
+}
+
+variable_wert() {  # $1 = Variablenname; stdout = Wert (leer, wenn nicht gesetzt ODER nicht lesbar)
+  # Nur für Stellen, an denen „leer" nicht als „fehlt" gedeutet wird (Setzen).
+  # Jede PRÜFUNG nimmt `variable_lesen` und zählt den Code – sonst entsteht
+  # wieder ein Fehlalarm aus einem Leseproblem.
+  variable_lesen "$1" 2>/dev/null | tr -d '\r\n'
 }
 
 frage_ja() {  # $1 = Frage; Exit 0 bei j/J
@@ -308,11 +349,15 @@ check() {
 
   # E1 Ziel-Repository (Variable + Repo-Existenz + Sichtbarkeit)
   local ziel_wert repo_json sichtbar
-  ziel_wert="$(variable_wert BACKUP_REPO)"
-  if [ -z "$ziel_wert" ]; then
-    offen "E1 Repository-Variable BACKUP_REPO fehlt"
-    link "$NEUES_REPO_URL"
-  else
+  ziel_wert="$(variable_lesen BACKUP_REPO 2>/dev/null)"
+  case $? in
+    1) offen "E1 Repository-Variable BACKUP_REPO fehlt"
+       link "$NEUES_REPO_URL"
+       ziel_wert="" ;;
+    2) ungeprueft "E1 BACKUP_REPO – Variable nicht lesbar (Variable-API gesperrt) – Anwesenheit NICHT bestätigt"
+       ziel_wert="" ;;
+  esac
+  if [ -n "$ziel_wert" ]; then
     repo_json="$(gh api "repos/$ziel_wert" 2>/dev/null)" || repo_json=""
     if [ -z "$repo_json" ]; then
       offen "E1 BACKUP_REPO=$ziel_wert – Repository nicht auffindbar/kein Zugriff"
@@ -355,24 +400,27 @@ check() {
 
   # E6 KV-Namespace (Variable, 32 Hex-Zeichen)
   local kv
-  kv="$(variable_wert KV_NAMESPACE_ID_ABO)"
-  if [ -z "$kv" ]; then
-    offen "E6 Repository-Variable KV_NAMESPACE_ID_ABO fehlt"
-    link "$CF_KV_URL"
-  elif printf '%s' "$kv" | grep -Eq '^[0-9a-fA-F]{32}$'; then
-    ok "E6 KV_NAMESPACE_ID_ABO gesetzt (Format 32 Hex-Zeichen)"
-  else
-    offen "E6 KV_NAMESPACE_ID_ABO hat nicht das Format einer Namespace-ID (32 Hex-Zeichen erwartet, Name „ABO“ ist falsch)"
-  fi
+  kv="$(variable_lesen KV_NAMESPACE_ID_ABO 2>/dev/null)"
+  case $? in
+    1) offen "E6 Repository-Variable KV_NAMESPACE_ID_ABO fehlt"
+       link "$CF_KV_URL" ;;
+    2) ungeprueft "E6 KV_NAMESPACE_ID_ABO – Variable nicht lesbar (Variable-API gesperrt) – Anwesenheit NICHT bestätigt" ;;
+    *)
+      if printf '%s' "$kv" | grep -Eq '^[0-9a-fA-F]{32}$'; then
+        ok "E6 KV_NAMESPACE_ID_ABO gesetzt (Format 32 Hex-Zeichen)"
+      else
+        offen "E6 KV_NAMESPACE_ID_ABO hat nicht das Format einer Namespace-ID (32 Hex-Zeichen erwartet, Name „ABO“ ist falsch)"
+      fi ;;
+  esac
 
   # E7 D1 (optional)
   local d1
-  d1="$(variable_wert D1_DATABASE_ID)"
-  if [ -n "$d1" ]; then
-    ok "E7 D1_DATABASE_ID gesetzt (Klick-Zähler wird mitgesichert)"
-  else
-    info "E7 D1_DATABASE_ID nicht gesetzt – optional (nur nötig, wenn der Klick-Zähler mitgesichert werden soll)"
-  fi
+  d1="$(variable_lesen D1_DATABASE_ID 2>/dev/null)"
+  case $? in
+    0) ok "E7 D1_DATABASE_ID gesetzt (Klick-Zähler wird mitgesichert)" ;;
+    1) info "E7 D1_DATABASE_ID nicht gesetzt – optional (nur nötig, wenn der Klick-Zähler mitgesichert werden soll)" ;;
+    *) info "E7 D1_DATABASE_ID nicht lesbar – optional, deshalb ohne Befund (Sicherung nur KV)" ;;
+  esac
 
   abschnitt "Ergebnis"
   if [ "$OFFENE" -eq 0 ] && [ "$UNGEPRUEFT" -eq 0 ]; then

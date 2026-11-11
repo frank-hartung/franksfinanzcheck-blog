@@ -101,6 +101,33 @@ AKTIVE_ZUSTAENDE = {"queued", "in_progress", "requested", "waiting", "pending"}
 FRISCHE_WORKFLOW = "backup-frischwache.yml"
 
 # =====================================================================
+#  DIE ZWEI MESSHÖHEN DES BETRIEBS-URTEILS (10.11.2026, WF-9E5A / #923)
+#  ---------------------------------------------------------------
+#  BEFUND (reproduziert, nicht vermutet): `betreibe_urteil` las die Jobs
+#  GENAU EINES Workflows – und der Aufrufer „Leerlauf prüfen“ übergibt
+#  keinen `--workflow`, also lief die Messung gegen `backup-offsite.yml`.
+#  Der Rückweg-Nachweis steht aber in `backup-frischwache.yml`
+#  (`FRISCHE_WORKFLOW`). Folge: `pruefe_scheinbeweis` bekam NIE die Schritte,
+#  die es prüfen soll – der Befund war auf diesem Weg unerreichbar. Genau die
+#  Klasse „richtige Frage, falsche Höhe“ aus der Akte vom 07.11., nur diesmal
+#  im Code des Prüfers selbst: Der Selbsttest rief `_schritte_des_juengsten`
+#  mit `FRISCHE_WORKFLOW` auf und war deshalb grün, während der Betrieb pfiff.
+#
+#  WARUM ES SO ENTSTANDEN IST (und warum die Heilung zwei Zeugen braucht):
+#    `--leerlauf` soll ZWEI verschiedene Aussagen treffen, und sie stehen in
+#    ZWEI verschiedenen Läufen:
+#      · „Job `backup` grün, aber nichts gesichert“  → Offsite-Lauf (WORKFLOW)
+#      · „Rückweg-Nachweis übersprungen“             → Frischwache-Lauf
+#    Eine Messung an einer Stelle kann nur eine davon sehen. Deshalb misst
+#    das Urteil jetzt BEIDE und führt die Befunde zusammen.
+#
+#  GRENZE (bleibt, wie sie war): Es wird weiterhin nur GELESEN. Zwei Leser
+#  erweitern kein Recht; der Schreib-Endpunkt bleibt genau einer
+#  (`…/dispatches`, vertraglich geprüft in `--vertrag` und im Endpunkt-Vertrag).
+# =====================================================================
+URTEIL_QUELLEN = (WORKFLOW, FRISCHE_WORKFLOW)
+
+# =====================================================================
 #  KLASSEN – was darf dieses Modul selbst, und was nie? (H2)
 #  ------------------------------------------------------------
 #  Ein Selbstheiler, der „alles“ reparieren darf, ist ein Freibrief. Heilbar
@@ -491,7 +518,12 @@ def pruefe_leerlauf(jobs, ziel_gesetzt, pflicht_gesetzt, jetzt=None) -> list[dic
 
 def _leerlauf_urteil(jobs: list[dict], umgebung: dict, jetzt, *,
                      einrichtung_offen=None) -> dict:
-    """`betreibe_urteil` ohne Netz – der Selbsttest braucht keinen Dispatch."""
+    """`betreibe_urteil` ohne Netz – der Selbsttest braucht keinen Dispatch.
+
+    Misst EINE Quelle (`workflow=` ausdrücklich gesetzt): Der Fall will die
+    Leerlauf-Regel prüfen, nicht die Zusammenführung zweier Läufe – sonst
+    lieferte dieselbe Attrappe ihre Jobs zweimal (siehe S22 für den Verbund).
+    """
     def http(methode: str, url: str, kopf, koerper=None):
         if url.endswith("/runs?per_page=20"):
             return 200, {"workflow_runs": [{"id": 7, "conclusion": "success",
@@ -501,7 +533,8 @@ def _leerlauf_urteil(jobs: list[dict], umgebung: dict, jetzt, *,
             for j in jobs]}, ""
 
     return betreibe_urteil({**umgebung, "GITHUB_REPOSITORY": "a/b", "GH_TOKEN": "t"},
-                           jetzt=jetzt, http=http, einrichtung_offen=einrichtung_offen)
+                           jetzt=jetzt, http=http, einrichtung_offen=einrichtung_offen,
+                           workflow=WORKFLOW)
 
 
 def pruefe_scheinbeweis(schritte, jetzt=None) -> list[dict]:
@@ -530,13 +563,21 @@ def pruefe_scheinbeweis(schritte, jetzt=None) -> list[dict]:
 
 
 def betreibe_urteil(umgebung: dict | None = None, *, jetzt: dt.datetime | None = None,
-                    http=None, quelle: str = "", workflow: str = WORKFLOW,
+                    http=None, quelle: str = "", workflow: str = "",
                     einrichtung_offen: list[str] | None = None) -> dict:
     """Urteil auf JOB-Ebene – ohne Anstoß, ohne Schreibzugriff.
 
     Struktur: `{"messbar": bool, "befunde": [...], "exit": int, "text": str}`.
     Die Reihenfolge der Klassen ist die Reihenfolge der Antworten: offene
     Einrichtung zuerst (sie ist die Ursache), dann Leerlauf, dann Scheinbeweis.
+
+    GEMESSEN WIRD AN DER HÖHE, AUF DER DIE AUSSAGE STEHT (10.11.2026):
+    Ohne `workflow` werden BEIDE Läufe gelesen – der Offsite-Lauf (dort steht
+    der Job `backup`) und die Frischwache (dort steht der Rückweg-Nachweis).
+    Vorher las dieser Pfad nur `backup-offsite.yml`, weil der Aufrufer keinen
+    `--workflow` übergibt – der Scheinbeweis-Befund war damit unerreichbar.
+    Ein ausdrücklich übergebener `workflow` bleibt einäugig: Wer eine Quelle
+    benennt, bekommt genau sie (und der Selbsttest prüft beide Betriebsarten).
     """
     umgebung = dict(os.environ) if umgebung is None else umgebung
     http = http or HTTP
@@ -544,10 +585,27 @@ def betreibe_urteil(umgebung: dict | None = None, *, jetzt: dt.datetime | None =
     quelle = quelle or _quelle_bestimmen(umgebung=umgebung)
     token = aktion_token(umgebung) or lese_token(umgebung)
 
-    status, jobs, meldung = _jobs_des_juengsten(quelle, token, workflow, http)
-    if status != 200:
+    quellen = (workflow.strip(),) if workflow.strip() else URTEIL_QUELLEN
+    jobs: list[dict] = []
+    gelesen: list[str] = []
+    meldungen: list[tuple[str, int, str]] = []
+    for datei in quellen:
+        status, teil, meldung = _jobs_des_juengsten(quelle, token, datei, http)
+        if status != 200:
+            meldungen.append((datei, status, meldung))
+            continue
+        gelesen.append(datei)
+        jobs += teil
+
+    # Unlesbar ist nur, was GAR nicht lesbar war. Eine fehlende zweite Quelle
+    # (z. B. die Frischwache lief noch nie) ist kein Werkzeugfehler – sie ist
+    # die Abwesenheit eines Zeugen und wird als solche benannt, nicht als
+    # „nichts gefunden“ verkauft.
+    if not gelesen:
+        datei, status, meldung = meldungen[0]
         return {"messbar": False, "befunde": [], "exit": EXIT_WERKZEUG,
-                "text": f"Lauf-Historie nicht lesbar (HTTP {status}: {meldung})."}
+                "text": f"Lauf-Historie nicht lesbar ({datei}: HTTP {status}: {meldung}).",
+                "quellen": []}
 
     leerlauf = pruefe_leerlauf(jobs, bool(umgebung.get("BACKUP_REPO")),
                                bool(umgebung.get("BACKUP_PASSPHRASE")), jetzt)
@@ -564,15 +622,19 @@ def betreibe_urteil(umgebung: dict | None = None, *, jetzt: dt.datetime | None =
     if einrichtung_offen:
         return {"messbar": True, "befunde": befunde, "exit": EXIT_EINRICHTUNG,
                 "text": (f"Einrichtung offen ({', '.join(einrichtung_offen)}) – das ist "
-                         "der Inhaber-Weg, ein Anstoß ändert daran nichts.")}
+                         "der Inhaber-Weg, ein Anstoß ändert daran nichts."),
+                "quellen": gelesen}
     if leerlauf:
         return {"messbar": True, "befunde": befunde, "exit": EXIT_LEERLAUF,
-                "text": "Ein Lauf ist grün, gesichert wurde aber nichts."}
+                "text": "Ein Lauf ist grün, gesichert wurde aber nichts.",
+                "quellen": gelesen}
     if schein:
         return {"messbar": True, "befunde": befunde, "exit": EXIT_BEFUND,
-                "text": "Der Rückweg-Nachweis fehlt – der Befund ist nicht bewiesen."}
+                "text": "Der Rückweg-Nachweis fehlt – der Befund ist nicht bewiesen.",
+                "quellen": gelesen}
     return {"messbar": True, "befunde": [], "exit": 0,
-            "text": "Kein Befund auf Job-Ebene: Der jüngste zeugende Lauf ist belegt."}
+            "text": "Kein Befund auf Job-Ebene: Der jüngste zeugende Lauf ist belegt.",
+            "quellen": gelesen}
 
 
 def vertrag() -> int:
@@ -1067,16 +1129,70 @@ def selbsttest() -> int:
     if _zeugt_lauf(leer) or not _zeugt_lauf(echt):
         fehler.append("S21c: `_zeugt_lauf` verwechselt Platzhalter und Zeugen")
 
+    # S22: ZWEI AUSSAGEN, ZWEI LÄUFE (10.11.2026) – der Selbsttest, der den
+    # Betriebsfehler vom selben Tag gefunden hätte.
+    # ------------------------------------------------------------------
+    # In Produktion las `--leerlauf` NUR `backup-offsite.yml` (der Aufrufer
+    # übergibt keinen `--workflow`). Der Rückweg-Nachweis steht aber in der
+    # Frischwache – `pruefe_scheinbeweis` bekam also nie die Schritte, die es
+    # prüfen soll, und der Befund war unerreichbar. S21 war grün, weil er die
+    # Frischwache AUSDRÜCKLICH übergab: ein Test, der den Pfad prüft, den der
+    # Betrieb nicht nimmt. S22 misst ohne `workflow` – wie der Workflow.
+    offsite_jobs = [{"name": "backup", "conclusion": "success",
+                     "steps": [{"name": "Bundle + Arbeitskopie erstellen",
+                                "conclusion": "success"}]}]
+    frisch_jobs = [{"name": "Backup-Frische pruefen (RPO 24 h / 52 h)",
+                    "conclusion": "failure",
+                    "steps": [{"name": "Kurzpruefung Wiederherstellbarkeit "
+                                       "(strukturell, ohne Secrets)",
+                               "conclusion": "skipped"}]}]
+
+    umgebung_voll = {"GITHUB_REPOSITORY": "a/b", "GH_TOKEN": "t",
+                     "BACKUP_REPO": "a/b", "BACKUP_PASSPHRASE": "x"}
+    # Die Attrappe muss wissen, WELCHE Quelle sie gerade beantwortet: Beide
+    # Workflows liefern `/runs`- und `/jobs`-Adressen; die `jobs_url` des Laufs
+    # trägt danach keine Spur der Quelle mehr. Sie merkt sich deshalb den
+    # zuletzt gelesenen Workflow – genau wie es die echte API je Lauf tut.
+    verbund_zaehler = {"frisch": False}
+
+    def verbund_http(methode, url, kopf, koerper=None):
+        if "/runs?per_page=" in url:
+            frisch = FRISCHE_WORKFLOW in url
+            verbund_zaehler["frisch"] = frisch
+            return 200, {"workflow_runs": [{"id": 2 if frisch else 1,
+                                            "conclusion": "failure",
+                                            "created_at": "2026-11-10T10:39:04Z"}]}, ""
+        return 200, {"jobs": frisch_jobs if verbund_zaehler["frisch"] else offsite_jobs}, ""
+
+    gemessen = betreibe_urteil(umgebung_voll, jetzt=jetzt, http=verbund_http)
+    klassen = [b["klasse"] for b in gemessen["befunde"]]
+    if gemessen.get("quellen") != list(URTEIL_QUELLEN):
+        fehler.append(f"S22a: ohne --workflow müssen beide Läufe gelesen werden "
+                      f"(gelesen: {gemessen.get('quellen')})")
+    if "scheinbeweis" not in klassen:
+        fehler.append("S22b: der übersprungene Rückweg-Nachweis aus der Frischwache "
+                      "fehlt im Urteil (gemessen wurde die falsche Höhe)")
+    if gemessen["exit"] != EXIT_BEFUND:
+        fehler.append(f"S22c: erwartet Exit {EXIT_BEFUND} (Scheinbeweis), "
+                      f"bekommen {gemessen['exit']}")
+    # Gegenprobe: Ein ausdrücklich benannter Workflow bleibt einäugig – wer eine
+    # Quelle nennt, bekommt genau sie (sonst wäre `--workflow` eine Lüge).
+    einzeln = betreibe_urteil(umgebung_voll, jetzt=jetzt, http=verbund_http,
+                             workflow=WORKFLOW)
+    if "scheinbeweis" in [b["klasse"] for b in einzeln["befunde"]]:
+        fehler.append("S22d: mit --workflow darf nicht in der anderen Quelle gemessen werden")
+
     if fehler:
         for eintrag in fehler:
             print(f"❌ {eintrag}")
         print(f"🛑 backup_selbstheilung-Selbsttest: {len(fehler)} Abweichung(en).")
         return 1
-    print("✅ backup_selbstheilung-Selbsttest: 21 Fallgruppen – Tagesfenster, Grenzen, "
+    print("✅ backup_selbstheilung-Selbsttest: 22 Fallgruppen – Tagesfenster, Grenzen, "
           "laufende Sicherung, Mindestabstand, Budget, Lauf-Auswertung, ein Anstoß je Lauf, "
           "zweite Messung als einziger Grün-Nachweis, gescheiterter Lauf, 403, unlesbare "
           "Historie, Probe-Modus, Rechte-Trennung, Eingabe-Auflösung, Klassenvertrag, "
-          "grüner Leerlauf (Job-Ebene) und Zeugen-Filter.")
+          "grüner Leerlauf (Job-Ebene), Zeugen-Filter und die ZWEI Messhöhen "
+          "(Offsite-Lauf + Frischwache).")
     return 0
 
 
@@ -1102,7 +1218,24 @@ def main(argv=None) -> int:
     ap.add_argument("--ausgabe", default="", help="Ergebnis zusätzlich als JSON-Datei schreiben")
     ap.add_argument("--repo", default="", help="Backup-Repository (besitzer/name)")
     ap.add_argument("--quelle", default="", help="Quell-Repository (besitzer/name)")
-    ap.add_argument("--workflow", default=WORKFLOW, help="Workflow-Datei der Sicherung")
+    # 10.11.2026 (WF-9E5A / #923): Der Aufrufer (Schritt „Voraussetzungen
+    # prüfen“) hat E1–E8 bereits live gemessen. Sein Befund wird ÜBERGEBEN,
+    # nicht neu geraten – und er entscheidet den Vorrang (Exit 3 schlägt 4).
+    # Ohne diesen Weg war Exit 3 in der Frischwache unerreichbar: `--leerlauf`
+    # fiel immer auf Exit 4, und der Rat „gesichert wurde nichts“ stand über
+    # der Ursache, die der Schritt davor längst benannt hatte.
+    ap.add_argument("--einrichtung-offen", nargs="*", default=[],
+                    metavar="KENNUNG",
+                    help="offene Pflichtpunkte E1–E8 aus der Einrichtungsprüfung (Vorrang)")
+    # BEWUSST ohne Default (10.11.2026): Der Default `WORKFLOW` machte „kein
+    # --workflow übergeben“ ununterscheidbar von „ausdrücklich nur den
+    # Offsite-Lauf messen“ – und weil der Workflow das Flag nie setzt, hat
+    # `--leerlauf` in Produktion NIE die Frischwache gelesen. Der Rückweg-
+    # Nachweis steht dort; der Befund war damit unerreichbar (S22).
+    # `--probe`/`--heilen` setzen weiterhin selbst `WORKFLOW`, wenn nichts
+    # angegeben ist – dort ist „keine Angabe“ die Sicherung selbst.
+    ap.add_argument("--workflow", default="",
+                    help="nur diese Workflow-Datei messen (Standard: Sicherung + Frischwache)")
     ap.add_argument("--wartezeit", type=int, default=WARTEZEIT_S,
                     help="Sekunden, die auf den angestoßenen Lauf gewartet wird")
     args = ap.parse_args(list(sys.argv[1:] if argv is None else argv))
@@ -1116,10 +1249,18 @@ def main(argv=None) -> int:
         # Reine LESUNG: kein Dispatch, kein Schreibzugriff. Die Job-Ebene ist
         # die Messhöhe (WF-9E5A / #923) – ein KV-Job darf das Urteil über den
         # Repo-Job nicht verfälschen.
+        # 10.11.2026: OHNE `--workflow` misst das Urteil BEIDE Läufe (Offsite
+        # für den Leerlauf, Frischwache für den Rückweg-Nachweis). Vorher fiel
+        # der Aufruf hier auf `backup-offsite.yml` zurück – die Frischwache
+        # wurde nie gelesen und der Scheinbeweis-Befund war unerreichbar.
         urteil = betreibe_urteil(umgebung, quelle=args.quelle.strip(),
-                                 workflow=args.workflow.strip() or WORKFLOW)
+                                 workflow=args.workflow.strip(),
+                                 einrichtung_offen=[k for k in args.einrichtung_offen if k.strip()])
         for befund in urteil.get("befunde", []):
             print(f"  ⚠️ [{befund['klasse']}/nicht heilbar] {befund['text']}")
+        quellen = urteil.get("quellen") or []
+        if quellen:
+            print(f"Gemessen: {', '.join(quellen)} (Job-Ebene, jüngster Lauf mit Schritten)")
         print(urteil["text"])
         print(f"Anleitung: {ANLEITUNG} (Abschnitt „Selbstheilung“)")
         if umgebung.get("GITHUB_ACTIONS") == "true":

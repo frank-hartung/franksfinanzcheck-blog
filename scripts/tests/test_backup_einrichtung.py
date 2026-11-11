@@ -1059,9 +1059,17 @@ class FrischwacheEinrichtungVertrag(unittest.TestCase):
                          "der Einrichtungsschritt darf nicht mehr als Fußnote laufen")
         self.assertIn("python3 scripts/backup_einrichtung.py --pruefen", text)
         # Der Schritt muss bei offenem Punkt rot werden – kein `exit 0`/`|| true`.
-        self.assertRegex(text, r"backup_einrichtung\.py --pruefen\n\s+code=\$\?")
+        # 10.11.2026: Der Aufruf schreibt sein Ergebnis zusätzlich als JSON
+        # (`--ausgabe`), damit der Schritt „Leerlauf prüfen“ den Vorrang der
+        # Einrichtung belegen kann. Der Exit-Code bleibt die Bedingung.
+        self.assertRegex(text, r"backup_einrichtung\.py --pruefen(?: --ausgabe \S+)?\n\s+code=\$\?")
         self.assertIn('exit 1', text)
         self.assertNotIn("|| true", text.split("Voraussetzungen prüfen (fail-closed")[1][:800])
+        # Der Befund ist eine AUSGABE des Schritts, nicht ein zweiter Aufruf:
+        # Ohne `id` gäbe es `steps.einrichtung.outputs.offen` nicht, und der
+        # Vorrang (Exit 3) wäre im Leerlauf-Schritt wieder geraten.
+        self.assertIn("id: einrichtung", text,
+                      "der Einrichtungsschritt muss seinen Befund als Ausgabe bereitstellen")
 
     def test_messung_ohne_ziel_oder_token_bleibt_rot(self):
         """Auch die zweite Schranke darf fehlende Eingaben nie als Erfolg melden."""
@@ -1383,13 +1391,29 @@ class SelbstheilungVertrag(unittest.TestCase):
         # Ein Beweis, der still grün wird, wenn er scheitert, ist keiner.
         block = text.split("Leerlauf prüfen – grüner Lauf ohne Sicherung", 1)[1].split(
             "- name:", 1)[0]
-        self.assertIn('if [ "$RC" = "1" ]', block)
+        # 10.11.2026 (WF-9E5A / #923): ZWEI Befunde in einer Zeile.
+        # 1. Der Block behandelt JEDEN Code außer 0 als rot (`case … *)`).
+        #    Vorher fielen Code 3 und jeder unbekannte Code in `exit 0` –
+        #    der Schritt war grün, während das Skript „Inhaber-Schritt“
+        #    meldete. Ein Wächter, der nur die Codes kennt, die er erwartet,
+        #    ist bei allem anderen blind.
+        self.assertIn('case "$RC" in', block)
+        self.assertIn("0) exit 0 ;;", block)
+        self.assertIn("*) echo", block, "unbekannte Exit-Codes müssen rot sein")
+        # 2. Die Einrichtung hat Vorrang: Ihr Befund wird ÜBERGEBEN (Ausgabe
+        #    des Schritts davor), nicht neu geraten.
+        self.assertIn("EINRICHTUNG_OFFEN", block)
+        self.assertIn("--einrichtung-offen", block)
+        self.assertIn("steps.einrichtung.outputs.offen", block)
+        # Jeder behandelte Code endet rot – und die zwei eigenen Räte bleiben.
+        for code in ("1", "2", "3", "4"):
+            self.assertIn(f"{code}) echo", block, f"Exit {code} muss eine eigene Antwort haben")
         self.assertIn("exit 1", block)
         # Ein grüner Lauf, der nichts sichert, ist der schwerere Befund als
         # „bitte einrichten“ – er behauptet bereits Erfolg. Deshalb eigener
         # Exit-Code (4), eigener Rat, rot.
-        self.assertIn('if [ "$RC" = "4" ]', block)
         self.assertIn("Backup-Leerlauf", block)
+        self.assertIn("Backup-Einrichtung offen", block)
 
     def test_rueckweg_nachweis_wird_nicht_mehr_stillschweigend_uebersprungen(self):
         """Der Befund vom 07.11.: `skipped` statt „nicht belegt“."""
@@ -1529,6 +1553,77 @@ class SelbstheilungVertrag(unittest.TestCase):
         self.assertIn("leerlauf", text)
         self.assertIn("backup-leerlauf", text,
                       "der eigene Alerting-Rat muss in der Anleitung stehen")
+
+class WizardVariablenVertrag(unittest.TestCase):
+    """#923 (10.11.2026): Drei Zustaende statt zwei - keine gh-Version als Bedingung.
+
+    ZWEI BEFUNDE, beide mit einer gh-Attrappe reproduziert (nicht vermutet):
+
+    1. `gh variable get` gibt es erst ab gh 2.31. Debian liefert 2.23, und der
+       Wizard machte aus dem Abbruch eine Variablenbelegung:
+       `BACKUP_REPO=unknown command "variable" for "gh"` - danach "Repository
+       nicht auffindbar" ueber einem Wert, der nie gelesen wurde.
+    2. Fehlte der Lesetunnel (403), war die Antwort leer - also "fehlt".
+       Ein unlesbarer Punkt ist aber kein fehlender. #923 hat genau diese
+       Verwechslung am 02.11. schon einmal geheilt (E8, `ungeprueft`).
+
+    Der Vertrag prueft BEIDE Richtungen: 404 -> fehlt (offen),
+    403 -> nicht pruefbar (ungeprueft, NICHT bestaetigt).
+    """
+
+    WIZARD = SCRIPTS / "backup_einrichten_wizard.sh"
+
+    def _check(self, gh_skript: str):
+        import os
+        import tempfile
+        with tempfile.TemporaryDirectory() as ordner:
+            gh = Path(ordner) / "gh"
+            gh.write_text(gh_skript, encoding="utf-8")
+            gh.chmod(0o755)
+            umgebung = {k: v for k, v in os.environ.items() if k != "GITHUB_ACTIONS"}
+            umgebung["PATH"] = f"{ordner}:{umgebung.get('PATH', '')}"
+            return subprocess.run(["bash", str(self.WIZARD), "--check"],
+                                  capture_output=True, text=True, timeout=180, env=umgebung)
+
+    def test_kein_gh_variable_unterbefehl_mehr(self):
+        """Die Lesart darf nicht von der gh-Version abhaengen (gh 2.23 kennt ihn nicht)."""
+        text = self.WIZARD.read_text(encoding="utf-8")
+        # Nur AUSGEFUEHRTER Code zaehlt: Der Kommentar nennt den alten Befehl
+        # ausdruecklich (damit ihn niemand wieder einbaut) - das ist kein Fund.
+        zeilen = [z.strip() for z in text.splitlines()
+                  if z.strip() and not z.strip().startswith("#")]
+        treffer = [z for z in zeilen if "gh variable get" in z]
+        self.assertEqual(treffer, [],
+                         "`gh variable get` existiert erst ab gh 2.31 - "
+                         "auf aelteren CLIs wird daraus eine Fehlermeldung als Wert")
+        self.assertIn('gh api "repos/$QUELLE/actions/variables/', text)
+
+    def test_404_ist_fehlt_403_ist_ungeprueft(self):
+        """Der Kern: "nicht lesbar" ist kein "nicht gesetzt"."""
+        attrappe = (
+            "#!/usr/bin/env bash\n"
+            'case "$*" in\n'
+            '  "auth status"*) exit 0 ;;\n'
+            "  api*\"actions/variables/BACKUP_REPO\"*) "
+            "echo '{\"message\":\"Not Found\",\"status\":\"404\"}'; exit 1 ;;\n"
+            "  api*\"actions/variables/\"*) "
+            "echo '{\"message\":\"Resource not accessible by integration\","
+            "\"status\":\"403\"}'; exit 1 ;;\n"
+            "  api*\"secrets\"*) "
+            "echo '{\"message\":\"Resource not accessible by integration\"}' >&2; exit 1 ;;\n"
+            '  api*"environments"*) exit 1 ;;\n'
+            "esac\n"
+            "exit 1\n"
+        )
+        lauf = self._check(attrappe)
+        self.assertIn("E1 Repository-Variable BACKUP_REPO fehlt", lauf.stdout,
+                      "404 muss als 'fehlt' gelesen werden")
+        self.assertIn("E6 KV_NAMESPACE_ID_ABO", lauf.stdout)
+        self.assertIn("Variable nicht lesbar", lauf.stdout,
+                      "403 darf NICHT als 'fehlt' gelesen werden")
+        self.assertIn("NICHT bestätigt", lauf.stdout)
+        self.assertEqual(lauf.returncode, 1)
+        self.assertNotIn("Alle Pflichtpunkte sind eingerichtet", lauf.stdout)
 
 
 if __name__ == "__main__":

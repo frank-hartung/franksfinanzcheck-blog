@@ -825,7 +825,28 @@ def _fristen_exportieren(ergebnis: Ergebnis, pfad: str) -> None:
         _anhaengen(pfad, f"BACKUP_FRIST_TAGE={int(tage)}\nBACKUP_FRIST_ZUGANG={name}\n")
 
 
-def befehl_pruefen(umgebung: dict | None = None, jetzt: dt.datetime | None = None) -> int:
+def befund_json(ergebnis: Ergebnis) -> str:
+    """Maschinenlesbares Ergebnis – Kennungen, keine Werte.
+
+    10.11.2026 (WF-9E5A / #923): Der Schritt „Leerlauf prüfen“ braucht den
+    Zustand der Einrichtung, um den VORRANG zu belegen („Einrichtung offen
+    schlägt Leerlauf“) statt ihn zu raten. Übergeben wird nur, was hier
+    gemessen wurde: die Kennungen der offenen Pflichtpunkte und die Stufen.
+
+    KEINE SECRET-WERTE: `text` und `abhilfe` sind statisch formulierte Sätze
+    („fehlt“, „läuft am … ab“); der Selbsttest mit vergifteten Werten prüft,
+    dass kein Wert hineingerät (F12).
+    """
+    return json.dumps({
+        "offen": [b.kennung for b in ergebnis.offen()],
+        "warnungen": [b.kennung for b in ergebnis.befunde if b.stufe == "warnung"],
+        "befunde": [{"kennung": b.kennung, "stufe": b.stufe} for b in ergebnis.befunde],
+        "environment_offen": ergebnis.environment_offen,
+    }, ensure_ascii=False)
+
+
+def befehl_pruefen(umgebung: dict | None = None, jetzt: dt.datetime | None = None,
+                   ausgabe: str = "") -> int:
     umgebung = dict(os.environ) if umgebung is None else umgebung
     ergebnis = pruefen(umgebung, jetzt)
     print(konsolen_bericht(ergebnis))
@@ -835,6 +856,13 @@ def befehl_pruefen(umgebung: dict | None = None, jetzt: dt.datetime | None = Non
     _anhaengen(umgebung.get("GITHUB_STEP_SUMMARY", ""),
                zusammenfassung(ergebnis, (umgebung.get("GITHUB_REPOSITORY") or "").strip()))
     _fristen_exportieren(ergebnis, umgebung.get("GITHUB_ENV", ""))
+    if ausgabe:
+        try:
+            with open(ausgabe, "w", encoding="utf-8") as datei:
+                datei.write(befund_json(ergebnis))
+        except OSError as fehler:  # noqa: BLE001 – der Pfad ist Beiwerk, das Urteil nicht
+            print(f"::warning::Ergebnis konnte nicht nach {ausgabe} geschrieben werden ({fehler}) – "
+                  "der Befund oben gilt unverändert.")
     return 1 if ergebnis.offen() else 0
 
 
@@ -1186,12 +1214,14 @@ def main(argv: list[str] | None = None) -> int:
     gruppe.add_argument("--pruefen", action="store_true", help="Voraussetzungen prüfen (Exit 1 bei offenem Punkt)")
     gruppe.add_argument("--fristen", action="store_true", help="Ablauf-Vorwarnung (letzter Job-Schritt)")
     gruppe.add_argument("--selftest", action="store_true", help="Selbsttest ohne Netz")
+    zerleger.add_argument("--ausgabe", default="",
+                          help="Ergebnis zusätzlich als JSON schreiben (Kennungen, keine Werte)")
     argumente = zerleger.parse_args(argv)
     if argumente.selftest:
         return selbsttest()
     if argumente.fristen:
         return befehl_fristen()
-    return befehl_pruefen()
+    return befehl_pruefen(ausgabe=argumente.ausgabe)
 
 
 if __name__ == "__main__":

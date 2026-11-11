@@ -866,7 +866,18 @@ jobs:
                 ? [
                     '1. **Einrichtung unvollständig – ein Neustart hilft nicht.** „Voraussetzungen prüfen“ ist absichtlich rot (fail-closed): Mindestens ein Zugang oder Ziel der Sicherung fehlt, ist falsch oder abgelaufen. Bis das erledigt ist, werden Abonnenten und Einwilligungsnachweise NICHT gesichert.',
                     '2. Den **jüngsten** Lauf öffnen ([Läufe von „Offsite-Backup“](' + backupLaeufe + '), oberster Eintrag) → **Summary**: Die Checkliste E1–E8 nennt jeden offenen Punkt mit dem Link, unter dem er erledigt wird. Schritt für Schritt: ' + backupAnleitung + '.',
-                    '3. Danach **musst du nichts mehr anstoßen** (seit 07.11.2026): Der nächste Lauf der [„Backup-Frischwache“](' + backupFrischLaeufe + ') sieht, dass noch keine Sicherung existiert, stößt „Offsite-Backup“ selbst an und misst erneut – grün wird er erst mit frischem Release. Wer nicht bis 13:00 UTC warten will: Actions → „Offsite-Backup“ → „Run workflow“ (Branch `main`). Der erste grüne Lauf schließt diese Meldung automatisch.'
+                    // 10.11.2026 (WF-9E5A / #923): Die frühere Nummer 3 sagte „Du
+                    // musst danach nichts mehr anstoßen – die Frischwache stößt
+                    // selbst an". Das war die einzige Zusage des Rats, und sie war
+                    // im Zustand dieses Rats FALSCH: Solange „Voraussetzungen
+                    // prüfen" rot ist, wird „Frische messen" übersprungen (GitHubs
+                    // `success()`), damit auch „Selbstheilung", und der einzige
+                    // wirksame Schritt bleibt der Handbefehl – den der Rat
+                    // ausgerechnet als Fußnote führte. Belegt am jüngsten Lauf:
+                    // Voraussetzungen failure → messen skipped → heilung skipped.
+                    // Ein Rat, der die eine wirksame Handlung zur Nebensache macht,
+                    // kostet genau die Zeit, die er sparen will.
+                    '3. **Die Selbstheilung kommt hier NICHT zum Zug** – ehrlich benannt, statt versprochen: Solange dieser Schritt rot ist, wird die Messung und damit der Selbstheilungsschritt übersprungen (GitHubs `success()`). Der einzige wirksame Weg ist der Handbefehl, sobald E1–E8 stehen: Actions → „Offsite-Backup“ → „Run workflow“ (Branch `main`). Erst danach greift die Automatik wieder: Jeder Lauf der [„Backup-Frischwache“](' + backupFrischLaeufe + ') misst selbst, stößt bei fehlender Sicherung an und lässt diese Meldung erst bei **frischem** Release ausgehen – grün heißt dabei: gesichert, nicht nur gelaufen. Der erste grüne Lauf schließt diese Meldung automatisch.'
                   ]
                 : runbookKlasse === 'backup-frist'
                 ? [
