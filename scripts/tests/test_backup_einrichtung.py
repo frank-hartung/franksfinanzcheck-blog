@@ -484,6 +484,59 @@ class FrischwacheVertrag(unittest.TestCase):
         self.assertIn("backup-frisch", alert)
         self.assertIn("RPO", alert)
 
+    # ================================================================
+    #  EINE URSACHE, EIN RAT (#1030, 10.11.2026)
+    #  ----------------------------------------------------------------
+    #  BEFUND (Lauf 42715328453, 09.11. 22:49 UTC): Der Lauf trug ZWEI
+    #  rote Schritte – „Voraussetzungen prüfen“ und „Leerlauf prüfen“.
+    #  Beide hatten dieselbe Ursache (E1/E2/E3/E5/E6 offen), aber nur der
+    #  erste trug den Einrichtungs-Rat; der zweite verlangte zusätzlich
+    #  „kein dauerhaftes Ziel“ – obwohl gar kein Lauf grün war. Die
+    #  Meldung las beide Fehlerzeilen und riet in zwei Richtungen.
+    #  Ursache im Code: `betreibe_urteil(..., einrichtung_offen=…)` gab es
+    #  seit dem 07.11., der Workflow füllte den Parameter NIE.
+    # ================================================================
+    def test_einrichtungsbefund_geht_an_den_leerlauf_schritt(self):
+        job = _frischwache_workflow()["jobs"]["frischwache"]
+        schritte = {s.get("name", ""): s for s in job["steps"]}
+        setup = [s for n, s in schritte.items() if "Voraussetzungen prüfen" in n]
+        self.assertEqual(len(setup), 1)
+        self.assertEqual(setup[0].get("id"), "setup",
+                         "der Schritt muss eine id haben, sonst kann er nichts weitergeben")
+        leerlauf = [s for n, s in schritte.items() if "Leerlauf prüfen" in n][0]
+        self.assertEqual(leerlauf.get("env", {}).get("OFFENE_EINRICHTUNG"),
+                         "${{ steps.setup.outputs.offene_einrichtung }}",
+                         "der Leerlauf-Schritt muss den Befund LESEN, nicht raten")
+        # Der Prüfer schreibt ihn – und der Schritt liest ihn AUCH bei Rot
+        # (der wichtigste Fall ist der rote Einrichtungsschritt).
+        self.assertIn("$GITHUB_OUTPUT", setup[0]["run"])
+        self.assertIn("offene_einrichtung", (SCRIPTS / "backup_einrichtung.py").read_text(encoding="utf-8"))
+        # Bei offener Einrichtung vergibt der Schritt KEINEN zweiten Rat.
+        run = leerlauf["run"]
+        self.assertIn('if [ -n "${OFFENE_EINRICHTUNG:-}" ]', run)
+        self.assertLess(run.index("OFFENE_EINRICHTUNG"), run.index("--leerlauf"),
+                        "die Ursache wird VOR der eigenen Messung geprüft")
+        self.assertIn("::notice", run)
+        # Und der Prüfer selbst antwortet ohne Auskunft fail-closed (Exit 2),
+        # statt zu raten – der Fall vom 10.11.2026.
+        self.assertIn("--ohne-setup", (SCRIPTS / "backup_selbstheilung.py").read_text(encoding="utf-8"))
+
+    def test_kein_abbruch_mitten_im_heilungskreis(self):
+        """Die Selbstheilung wartet bis 15 Min. auf den angestoßenen Lauf.
+
+        Mit `cancel-in-progress: true` hat jeder nachfolgende Push-Lauf genau
+        diesen Wartezustand abgewürgt – der einzige Schreiber im Kreis. Der
+        tagliche Lauf und ein manueller Anstoß dürfen nie verdrängt werden;
+        nur der Push-Lauf (Code-Probe zu einem Prüfer) darf sich selbst
+        verdrängen.
+        """
+        daten = _frischwache_workflow()
+        concurrency = daten.get("concurrency") or {}
+        self.assertEqual(concurrency.get("group"), "backup-frischwache-${{ github.ref }}")
+        self.assertEqual(concurrency.get("cancel-in-progress"),
+                         "${{ github.event_name == 'push' }}",
+                         "nur ein Push-Lauf darf einen anderen verdrängen – nie der Tageslauf")
+
 
 class RueckwegVertrag(unittest.TestCase):
     """WF-9E5A / #923 (01.11.2026): Ein Drill, der nichts prüft, ist grün.
