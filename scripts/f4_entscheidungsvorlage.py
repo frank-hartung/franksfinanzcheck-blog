@@ -48,6 +48,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 ZIEL = ROOT / "F4-ENTSCHEIDUNGSVORLAGE.md"
 POSTS = ROOT / "content" / "posts"
 ENTSCHEIDUNGEN = ROOT / "data" / "faktenfrische_entscheidungen.yaml"
+ZUSTAND = ROOT / "data" / "faktenfrische_befunde_state.json"
 
 # Werte mit Einheit – bewusst MIT Einheit: „2026“ ist kein Betrag
 # (Lehre aus der ersten Handfassung, in der die Zahl „2026“ als Wert galt).
@@ -68,6 +69,28 @@ def prosa(text: str) -> str:
 
 def datei_hash(pfad: Path) -> str:
     return hashlib.sha256(pfad.read_bytes()).hexdigest()
+
+
+def bezugsdatum() -> dt.date:
+    """Das Datum, auf das sich die Vorlage bezieht – NICHT die Wanduhr.
+
+    WARUM (10.11.2026, CI rot um 0:00 UTC): Die erste Fassung schrieb
+    `date.today()` in die Überschrift. `--check` verglich damit einen Text,
+    den die Uhr erzeugt – um Mitternacht war die Vorlage „veraltet“, obwohl
+    sich keine Zeile Inhalt geändert hatte. Ein Selbsttest, der die Wanduhr
+    liest, ist keine Prüfung, sondern eine Verabredung mit dem Kalender
+    (dieselbe Lehre wie `selftest_runner` mit den Uhr-Proben).
+
+    Bezug ist deshalb der Stand der Befundakte (`erzeugt` in
+    `data/faktenfrische_befunde_state.json`) – eine Quelle, committet und
+    damit reproduzierbar.
+    """
+    try:
+        daten = json.loads(ZUSTAND.read_text(encoding="utf-8"))
+        erzeugt = str(daten.get("erzeugt") or "")
+        return dt.date.fromisoformat(erzeugt[:10])
+    except (OSError, ValueError):
+        return dt.date.today()
 
 
 def entscheidungen() -> dict[tuple[str, str], list[dict]]:
@@ -157,11 +180,15 @@ def baue(stichtag: dt.date) -> str:
     seiten = sorted({b["slug"] for b in offen})
 
     z: list[str] = []
-    z.append(f"# F4-Entscheidungsvorlage — Stand {stichtag.isoformat()} (Vorschlag)")
+    z.append("# F4-Entscheidungsvorlage — offene Live-Befunde (Vorschlag)")
     z.append("")
     z.append("**Status: VORSCHLAG – nichts entschieden.** Die Artikel bleiben in der")
     z.append("Scorecard blockiert, bis der Herausgeber die heutigen Fassungen bestätigt.")
     z.append("Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.")
+    z.append("")
+    z.append(f"**Bezugsstand: {stichtag.isoformat()}** – der Stand der Befundakte "
+             "(`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die "
+             "Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.")
     z.append("")
     z.append(f"**{len(offen)} offene Live-Befunde auf {len(seiten)} Artikeln.** Davon sind "
              f"**{len(alt)}** bereits früher entschieden und durch eine spätere Textänderung")
@@ -261,12 +288,13 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--check", action="store_true",
                         help="nur prüfen: Exit 1, wenn die Vorlage veraltet ist")
     parser.add_argument("--stdout", action="store_true", help="auf die Ausgabe schreiben")
-    parser.add_argument("--stichtag", default=None, help="JJJJ-MM-TT (Vorgabe: heute)")
+    parser.add_argument("--stichtag", default=None,
+                        help="JJJJ-MM-TT (Vorgabe: Stand der Befundakte, nicht die Uhr)")
     args = parser.parse_args(argv)
 
     try:
         stichtag = (dt.date.fromisoformat(args.stichtag) if args.stichtag
-                    else dt.date.today())
+                    else bezugsdatum())
     except ValueError:
         print("🛑 --stichtag muss JJJJ-MM-TT sein", file=sys.stderr)
         return 2

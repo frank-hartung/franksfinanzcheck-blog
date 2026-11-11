@@ -218,7 +218,11 @@ class Entscheidungsvorlage(unittest.TestCase):
         import f4_entscheidungsvorlage as vorlage
         cls.akte, cls.vorlage = akte, vorlage
         cls.live = akte.live_seiten()
-        cls.befunde = [b for b in ledger.befunde_mit_status() if b["slug"] in cls.live]
+        # Bezugsdatum aus dem Zustand, nicht aus der Wanduhr: ein Selbsttest,
+        # der die Uhr liest, kippt um Mitternacht (real passiert am 10.11.2026).
+        cls.stichtag = vorlage.bezugsdatum()
+        cls.befunde = [b for b in ledger.befunde_mit_status(stichtag=cls.stichtag)
+                       if b["slug"] in cls.live]
         cls.text = vorlage.ZIEL.read_text(encoding="utf-8")
 
     def test_jeder_offene_live_befund_steht_im_dossier(self):
@@ -234,6 +238,20 @@ class Entscheidungsvorlage(unittest.TestCase):
         self.assertEqual(self.vorlage.main(["--check"]), 0,
                          "F4-ENTSCHEIDUNGSVORLAGE.md ist veraltet – "
                          "python3 scripts/f4_entscheidungsvorlage.py")
+
+    def test_vorlage_ist_uhrfest(self):
+        """Zweimal erzeugt = zweimal gleich, und ohne Uhr im Text.
+
+        Die erste Fassung schrieb `date.today()` in die Überschrift; `--check`
+        war damit um 0:00 UTC rot, ohne dass sich ein Zeichen Inhalt geändert
+        hatte. Bezug ist jetzt der Stand der Befundakte.
+        """
+        a = self.vorlage.baue(self.stichtag)
+        b = self.vorlage.baue(self.stichtag)
+        self.assertEqual(a, b)
+        self.assertEqual(a, self.text)
+        self.assertIn(f"Bezugsstand: {self.stichtag.isoformat()}", a)
+        self.assertEqual(self.vorlage.bezugsdatum(), self.stichtag)
 
     def test_dossier_entscheidet_nichts(self):
         # Kein Ledger-Schreibaufruf, kein „entschieden“-Status: reine Projektion.

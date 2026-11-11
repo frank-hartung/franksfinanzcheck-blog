@@ -203,7 +203,17 @@ python3 scripts/f4_entscheidungsvorlage.py --check    # Exit 1 = veraltet
 Grund: Die erste Fassung wurde von Hand gebaut und war nach dem nächsten
 Automatik-Lauf unvollständig (fünf Befunde, die die Tageswache danach fand,
 standen nicht darin). Ein Dossier, das der Wirklichkeit hinterherläuft, ist
-derselbe Fehler wie ein veraltetes Register. `--check` und sechs Tests
+derselbe Fehler wie ein veraltetes Register.
+
+Zweite Lehre aus dem eigenen CI-Lauf: Die erste Skript-Fassung schrieb
+`date.today()` in die Überschrift – um 0:00 UTC war `--check` rot, ohne dass
+sich ein Zeichen Inhalt geändert hatte. Ein Selbsttest, der die Wanduhr
+liest, ist keine Prüfung, sondern eine Verabredung mit dem Kalender. Bezug
+ist jetzt der **Stand der Befundakte** (`erzeugt` in
+`data/faktenfrische_befunde_state.json`) – committet, reproduzierbar,
+uhrfest (`test_vorlage_ist_uhrfest`).
+
+`--check` und sieben Tests
 (`test_1098_produktionswahrheit.Entscheidungsvorlage`) erzwingen jetzt:
 jeder offene Live-Befund steht im Dokument, jeder hat eine fertige
 Schließzeile, und das Dokument nennt für jeden beanstandeten Wert die heutige
