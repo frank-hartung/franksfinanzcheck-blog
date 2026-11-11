@@ -1,6 +1,6 @@
 {
   "target": 6,
-  "ready": 3,
+  "ready": 2,
   "pool_size": 10,
   "generated_at": "2026-11-11T11:27:06Z",
   "candidates": [
@@ -63,20 +63,10 @@
     },
     {
       "slug": "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-      "ready": true,
+      "ready": false,
       "sha256": "e1abbf3d59a90d48f559148b9d781d6039598dd72c52400f9a0d424fc35fe121",
-      "flesch": 67.4,
       "measured_at": "2026-11-11T11:23:22Z",
-      "score": 0.968,
-      "parts": {
-        "spelling": 0.9,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-10-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
