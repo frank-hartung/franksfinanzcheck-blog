@@ -2,9 +2,9 @@
   {
     "suchbegriff": "100 mbit internet monatlich kündbar",
     "clicks": 0,
-    "impressions": 61,
+    "impressions": 64,
     "ctr": 0.0,
-    "position": 45.61
+    "position": 45.53
   },
   {
     "suchbegriff": "250 mbit internet monatlich kündbar",
@@ -30,9 +30,9 @@
   {
     "suchbegriff": "bank ohne gebühren",
     "clicks": 0,
-    "impressions": 1,
+    "impressions": 4,
     "ctr": 0.0,
-    "position": 19.0
+    "position": 34.5
   },
   {
     "suchbegriff": "banken mit kostenfreiem girokonto",
@@ -47,6 +47,20 @@
     "impressions": 11,
     "ctr": 0.0,
     "position": 62.73
+  },
+  {
+    "suchbegriff": "dkv gebäudeversicherung vergleich",
+    "clicks": 0,
+    "impressions": 3,
+    "ctr": 0.0,
+    "position": 59.0
+  },
+  {
+    "suchbegriff": "dsl 250 monatlich kündbar",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 32.0
   },
   {
     "suchbegriff": "dsl inklusivvolumen",
@@ -252,6 +266,13 @@
     "position": 57.73
   },
   {
+    "suchbegriff": "konto 0",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 43.0
+  },
+  {
     "suchbegriff": "konto eröffnen kostenlos",
     "clicks": 0,
     "impressions": 1,
@@ -261,9 +282,16 @@
   {
     "suchbegriff": "konto ohne karte",
     "clicks": 0,
-    "impressions": 1,
+    "impressions": 2,
     "ctr": 0.0,
-    "position": 33.0
+    "position": 34.5
+  },
+  {
+    "suchbegriff": "konto ohne kontoführungsgebühren",
+    "clicks": 0,
+    "impressions": 2,
+    "ctr": 0.0,
+    "position": 50.5
   },
   {
     "suchbegriff": "konto umsonst",
@@ -282,9 +310,9 @@
   {
     "suchbegriff": "kosten standleitung",
     "clicks": 0,
-    "impressions": 1,
+    "impressions": 2,
     "ctr": 0.0,
-    "position": 85.0
+    "position": 80.5
   },
   {
     "suchbegriff": "kostenersparnis",
@@ -352,9 +380,9 @@
   {
     "suchbegriff": "meine gasrechnung ist dieses jahr wieder gestiegen. ich würde gerne zu einem nachhaltigen anbieter wechseln, der trotzdem bezahlbar ist. welche optionen habe ich?",
     "clicks": 0,
-    "impressions": 2,
+    "impressions": 3,
     "ctr": 0.0,
-    "position": 8.5
+    "position": 8.0
   },
   {
     "suchbegriff": "mobile dsl-flatrate",
@@ -362,6 +390,13 @@
     "impressions": 3,
     "ctr": 0.0,
     "position": 63.33
+  },
+  {
+    "suchbegriff": "mobilfunk und dsl",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 14.0
   },
   {
     "suchbegriff": "mobilfunk und dsl vertrag",
@@ -492,9 +527,9 @@
   {
     "suchbegriff": "zu ökostrom wechseln",
     "clicks": 0,
-    "impressions": 1,
+    "impressions": 2,
     "ctr": 0.0,
-    "position": 27.0
+    "position": 22.5
   },
   {
     "suchbegriff": "ökostrom wechsel",
@@ -506,15 +541,15 @@
   {
     "suchbegriff": "ökostrom wechseln",
     "clicks": 0,
-    "impressions": 3,
+    "impressions": 7,
     "ctr": 0.0,
-    "position": 8.33
+    "position": 12.71
   },
   {
     "suchbegriff": "ökostromanbieter wechseln",
     "clicks": 0,
-    "impressions": 2,
+    "impressions": 4,
     "ctr": 0.0,
-    "position": 19.5
+    "position": 30.25
   }
 ]
