@@ -19,6 +19,8 @@ redaktionelle_pruefung:
 
 Du hast gerade deine Kreditkartenabrechnung erhalten und bemerkst, dass Jahresgebühren und Fremdwährungsentgelte deine Ausgaben unnötig aufblähen. Gerade im Urlaub oder beim Online‑Shopping im Ausland können solche versteckten Kosten schnell ein Loch ins Budget reißen. Eine Kreditkarte ohne Jahresgebühr ist daher ein einfacher Hebel, um deine Fixkosten zu senken – vorausgesetzt du wählst das passende Modell und prüfst die Bedingungen sorgfältig.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 ## Kriterien für eine kostenlose Kreditkarte
 
 Eine kostenlose Kreditkarte ist mehr als nur „keine Jahresgebühr“. Sie sollte zudem keine versteckten Auslandseinsatzgebühren erheben und dir grundlegende Sicherheitsfeatures bieten. Die nachfolgende Tabelle fasst die wichtigsten Kriterien zusammen.
