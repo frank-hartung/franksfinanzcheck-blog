@@ -9,7 +9,7 @@ categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
 
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife.jpg"
   alt: "Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 €"

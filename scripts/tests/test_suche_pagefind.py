@@ -42,10 +42,10 @@ def ohne_js_kommentare(js: str) -> str:
 class PagefindVertrag(unittest.TestCase):
     def test_version_ist_exakt_gepinnt(self):
         pkg = json.loads(lies("package.json"))
-        self.assertEqual(pkg["dependencies"]["pagefind"], "1.5.2",
+        self.assertEqual(pkg["dependencies"]["pagefind"], "1.6.0",
                          "exakt pinnen: kein ^ und kein ~ bei einem Such-Werkzeug im Deploy")
         lock = json.loads(lies("package-lock.json"))
-        self.assertEqual(lock["packages"][""]["dependencies"]["pagefind"], "1.5.2")
+        self.assertEqual(lock["packages"][""]["dependencies"]["pagefind"], "1.6.0")
         self.assertIn("node_modules/pagefind", lock["packages"])
 
     def test_suchindex_skript_baut_public(self):
@@ -149,7 +149,7 @@ class PackageVertrag(unittest.TestCase):
 
     def test_pagefind_ist_einzige_produktionsabhaengigkeit_exakt(self):
         pkg = json.loads(lies("package.json"))
-        self.assertEqual(pkg["dependencies"], {"pagefind": "1.5.2"},
+        self.assertEqual(pkg["dependencies"], {"pagefind": "1.6.0"},
                          "Deploy installiert mit --omit=dev: pagefind muss in dependencies stehen")
         self.assertNotIn("pagefind", pkg.get("devDependencies", {}),
                          "pagefind darf nicht zusätzlich als Dev-Abhängigkeit stehen")

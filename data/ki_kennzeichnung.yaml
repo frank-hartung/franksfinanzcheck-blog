@@ -3,12 +3,12 @@
 #  Sicherheitsaudit 14.10.2026 (M-17). Gepflegt von Menschen, geprüft von
 #  scripts/ki_kennzeichnung_gate.py (im Deploy mit --fix).
 #
-#  REGEL: `ai_generated: false` ist nur erlaubt, wenn der Artikel
-#    a) hier unter `menschlich` steht (bewusste Entscheidung des Betreibers)
-#       ODER
-#    b) einen freigegebenen Block `redaktionelle_pruefung` hat (status:
-#       freigegeben) – dann hat ein Mensch die redaktionelle Verantwortung
-#       übernommen (Ausnahme nach Art. 50 Abs. 4 UAbs. 2).
+#  REGEL: `ai_generated: false` ist nur erlaubt mit einem freigegebenen Block
+#    `redaktionelle_pruefung` samt Prüfer, Prüfdatum und gültigem Fassungs-Hash
+#    – dann hat ein Mensch die redaktionelle Verantwortung für genau diese
+#    Fassung übernommen (Ausnahme nach Art. 50 Abs. 4 UAbs. 2).
+#    Ein Eintrag unter `menschlich` oder ein Status ohne Fassungs-Hash ist
+#    seit dem Abschluss #1028 ausdrücklich KEIN ausreichender Nachweis.
 #  Alles andere setzt das Gate auf `ai_generated: true` („Mit KI erstellt“).
 #  Artikel unter `maschinell` dürfen NIE auf false gesetzt werden, auch nicht
 #  über `menschlich` (Lehre aus Commit 1a8a6d10, der 9 Bot-Artikel still
@@ -42,21 +42,11 @@ maschinell:
   - 2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert
   - 2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich
 
-# Unter dem Konto des Betreibers committet (frank-hartung), Herkunft aus
-# dem Repo allein NICHT belegbar – teils lauten die Commits „optimize
-# articles …“, was auf KI-Agenten hindeutet. BITTE PRÜFEN: Hat ein Mensch
-# den Text geschrieben oder vor Veröffentlichung geprüft, bleibt der Eintrag.
-# Sonst Eintrag löschen – das Gate setzt dann ai_generated: true.
+# Keine unbelegten Herkunftsausnahmen (Abschluss #1028, 10.11.2026):
+# `ai_generated: false` ist hier nur noch mit einem separaten, freigegebenen
+# Block `redaktionelle_pruefung` zulässig. Neun Einträge ohne jeden Nachweis
+# wurden konservativ auf ai_generated: true gestellt. Drei inzwischen
+# fassungsgebunden freigegebene Artikel nutzen den Prüfpfad nach K2 und
+# brauchen keinen zusätzlichen, widersprüchlichen Register-Eintrag.
+# Eine Herkunft oder menschliche Prüfung wird dadurch nicht behauptet.
 menschlich:
-  - 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
-  - 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit
-  - 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
-  - 2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet
-  - 2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst
-  - 2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause
-  - 2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier
-  - 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub
-  - 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife
-  - 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen
-  - 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich
-  - 2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen

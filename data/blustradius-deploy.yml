@@ -237,6 +237,26 @@ schritte:
     klasse: inhalt
     grund: Tag-Flächen sind indexierte Seiten – Befund ist fachlich gemeint.
 
+  # Befund 10.11.2026 (C38): `deploy.yml` bekam den Schritt
+  # „GSC-Leistungsdaten – Artefaktprüfung (fail-closed)“ (gsc_artefakte_guard.py
+  # --check, Commit 7b93454 / PR #1162) – ohne Registereintrag. Der
+  # Blustradius-Selbsttest des Governance-Gates wurde dadurch rot und blockierte
+  # JEDEN Pull Request. Klasse `infra`, nicht `inhalt`: Geprüft werden nicht
+  # Inhalte, sondern das Messartefakt selbst (G1–G4: parsebar, eindeutig,
+  # zueinander passend). Ist es kaputt, sind die Zahlen der Search Console
+  # nicht messbar – dann darf die Weiterleitungskonsolidierung nicht mit
+  # erfundenen Zahlen arbeiten (C34: erst messen, dann handeln).
+  - name: GSC-Leistungsdaten – Artefaktprüfung (fail-closed)
+    klasse: infra
+    grund: >-
+      Die Wache urteilt über die Lesbarkeit der Search-Console-Artefakte
+      (data/gsc/, G1–G4), nicht über fachlichen Inhalt. Rot heißt: Das
+      Messwerkzeug hat keine belastbare Grundlage (Merge-Artefakt, doppelter
+      Schlüssel, widersprüchlicher Zeitraum) – dann darf weder die
+      Weiterleitungskonsolidierung noch ein Bericht daraus rechnen. Bei
+      belegbar gültigem Stand heilt der Wächter selbst (--heal) und bleibt
+      grün; ohne belegbaren Stand bleibt der Fund stehen (Exit 1).
+
   - name: Weiterleitungen – Selbsttest, Quelle und Unit-Tests (fail-closed)
     klasse: infra
     grund: Eine kaputte Weiterleitungsquelle oder fehlende Zielseiten sind technische Fehler. Ohne sie wäre die Auslieferung der 301-Ersatzseiten nicht konsistent. Der Befund ist kein fachlicher Inhalt.

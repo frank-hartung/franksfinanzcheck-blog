@@ -224,7 +224,7 @@
     "ki:bild": "python3 scripts/ki_bild_markierung.py",
     "ki:bild:gate": "python3 scripts/ki_bild_markierung.py --gate",
     "ki:bild:markieren": "python3 scripts/ki_bild_markierung.py --write",
-    "test:ki": "python3 scripts/ki_transportweg.py --selftest && python3 scripts/ki_redaktion.py --selftest && python3 scripts/ki_assistent_gate.py --selftest && python3 scripts/ki_provenienz_gate.py --selftest && python3 scripts/ki_bild_markierung.py --selftest && python3 -m unittest scripts.tests.test_ki_transportweg scripts.tests.test_kostensperre scripts.tests.test_ki_provenienz_render scripts.tests.test_ki_provenienz_gate scripts.tests.test_ki_bild_markierung && node --test cloudflare/ki-assistent/test/worker.test.mjs",
+    "test:ki": "python3 scripts/ki_transportweg.py --selftest && python3 scripts/ki_redaktion.py --selftest && python3 scripts/ki_assistent_gate.py --selftest && python3 scripts/ki_provenienz_gate.py --selftest && python3 scripts/ki_bild_markierung.py --selftest && python3 -m unittest scripts.tests.test_ki_transportweg scripts.tests.test_kostensperre scripts.tests.test_ki_kennzeichnung_gate scripts.tests.test_ki_provenienz_render scripts.tests.test_ki_provenienz_gate scripts.tests.test_ki_transparenz_render scripts.tests.test_ki_bild_markierung && node --test cloudflare/ki-assistent/test/worker.test.mjs",
     "url:wache": "python3 scripts/url_substring_guard.py",
     "url:wache:json": "python3 scripts/url_substring_guard.py --json --quiet",
     "url:wache:check": "python3 scripts/url_host.py --selftest && python3 scripts/url_substring_guard.py --selftest",

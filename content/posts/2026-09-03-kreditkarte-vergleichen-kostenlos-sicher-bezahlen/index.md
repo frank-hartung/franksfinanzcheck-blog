@@ -13,7 +13,7 @@ keywords: ["Kreditkarte vergleichen", "kostenlose Kreditkarte", "Kreditkarte ohn
 pinwand: "Konto & Karten | Gebührenfrei & clever"
 pin_title: "Kreditkarte 2026: Kostenlos & sicher bezahlen"
 pin_description: "*Werbung | Kreditkarten sind nicht gleich Kreditkarten: Jahresgebühren, Fremdwährungszuschläge und unnütze Versicherungen treiben die Kosten. Wir zeigen, worauf es beim Vergleich wirklich ankommt und wie du im Ausland und online gebührenfrei zahlst. Jetzt vergleichen."
-ai_generated: false
+ai_generated: true
 engine_level: "reserve"
 kurzantwort: "Eine gute Kreditkarte kann dich im Jahr nichts kosten: Es gibt Karten ohne Jahresgebühr und ohne Fremdwährungsgebühr beim Bezahlen in Euro-fremden Währungen und eine App mit sofortiger Sperrfunktion. Achte außerdem auf eine kostenlose Nutzung im Ausland, eine transparente Abrechnung ohne Sollzinsen und sinnvolle, nicht aufgeblähte Versicherungspakete."
 social_posted: true

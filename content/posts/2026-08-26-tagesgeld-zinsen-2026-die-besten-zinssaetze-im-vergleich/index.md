@@ -9,7 +9,7 @@ categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
 
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich.jpg"
   alt: "Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich"

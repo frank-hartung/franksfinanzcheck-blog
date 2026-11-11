@@ -65,6 +65,9 @@ on:
       # Messwerkzeuge selbst.
       - "scripts/ki_provenienz.py"
       - "scripts/ki_provenienz_gate.py"
+      - "scripts/ki_kennzeichnung_gate.py"
+      - "scripts/tests/test_ki_kennzeichnung_gate.py"
+      - "scripts/tests/test_ki_provenienz_gate.py"
       - "scripts/ki_bild_markierung.py"
       - "scripts/image_optimizer.py"
       # Wird aufgerufen (git_sync.sh) – W1 der Trigger-Wache.
@@ -106,6 +109,14 @@ jobs:
 
       # M1/M4/M5 prüfen die AUSGELIEFERTE Wahrheit in public/, nicht die
       # Absicht einer Vorlage. Ohne Build wäre die Hälfte der Regeln blind.
+      # Unbelegte Nicht-Kennzeichnung ist kein Dauerzustand: K2 verlangt
+      # Prüfer, Prüfdatum und passenden Fassungs-Hash. Die vorhandene
+      # Heilung setzt sonst konservativ ai_generated: true, bevor Hugo baut.
+      - name: KI-Kennzeichnung – Selbsttest und fail-closed-Heilung
+        run: |
+          python3 scripts/ki_kennzeichnung_gate.py --selftest
+          python3 scripts/ki_kennzeichnung_gate.py --fix
+
       - name: Hugo installieren (Extended, verifiziert, mehrquellig)
         uses: ./.github/actions/install-hugo
         with:
@@ -119,6 +130,9 @@ jobs:
 
       - name: KI-Provenienz – Selbsttest (Wache muss lauffähig sein)
         run: python3 scripts/ki_provenienz_gate.py --selftest
+
+      - name: KI-Kennzeichnung und Provenienz – Regression
+        run: python3 -m unittest scripts.tests.test_ki_kennzeichnung_gate scripts.tests.test_ki_provenienz_gate
 
       # Exit-Code wird aufgehoben, nicht verschluckt: Die Heilung muss
       # committet sein, BEVOR der Lauf rot wird – sonst repariert die Wache
@@ -139,7 +153,7 @@ jobs:
           GIT_USER: KI-Provenienz-Bot
           GIT_MAIL: ki-provenienz-bot@users.noreply.github.com
         run: |
-          PFADE="content/impressum/index.md layouts/rss.xml layouts/_default/rss.xml static data/ki_provenienz_state.json data/ki_provenienz_history.jsonl"
+          PFADE="content/impressum/index.md content/posts layouts/rss.xml layouts/_default/rss.xml static data/ki_provenienz_state.json data/ki_provenienz_history.jsonl"
           if [ -z "$(git status --porcelain -- $PFADE)" ]; then
             echo "Kein Eingriff: Quelle, Spiegelung, Ableitungen und Zustand sind unverändert."
           else

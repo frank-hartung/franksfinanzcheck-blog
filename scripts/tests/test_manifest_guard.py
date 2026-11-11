@@ -73,13 +73,13 @@ class VorfallTests(unittest.TestCase):
         gut = (ROOT / mg.MANIFEST).read_text(encoding="utf-8")
         kaputt_block = (
             '"dependencies": {\n'
-            '    "pagefind": "1.5.2"\n'
+            '    "pagefind": "1.6.0"\n'
             '    "lighthouse": "13.5.0",\n'
-            '    "pagefind": "^1.5.2"\n'
+            '    "pagefind": "^1.6.0"\n'
             '  }')
-        assert '"dependencies": {\n    "pagefind": "1.5.2"\n  }' in gut, \
+        assert '"dependencies": {\n    "pagefind": "1.6.0"\n  }' in gut, \
             "Anker im aktuellen package.json fehlt – Testfixture anpassen"
-        kaputt = gut.replace('"dependencies": {\n    "pagefind": "1.5.2"\n  }', kaputt_block, 1)
+        kaputt = gut.replace('"dependencies": {\n    "pagefind": "1.6.0"\n  }', kaputt_block, 1)
         erwartete_zeile = kaputt.splitlines().index('    "lighthouse": "13.5.0",') + 1
 
         with tempfile.TemporaryDirectory() as tmp:

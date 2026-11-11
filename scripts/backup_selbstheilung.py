@@ -61,6 +61,7 @@ import argparse
 import datetime as dt
 import json
 import os
+import re
 import sys
 import time
 import urllib.error
@@ -500,8 +501,12 @@ def _leerlauf_urteil(jobs: list[dict], umgebung: dict, jetzt, *,
             {"name": "Bundle + Arbeitskopie erstellen", "conclusion": "success"}]}
             for j in jobs]}, ""
 
+    # `einrichtung_offen=None` heißt hier: die Einrichtungsprüfung LIEF und hat
+    # nichts offen (ein leeres Ergebnis). Nur so unterscheidet der Aufrufer
+    # „geprüft, alles gut“ von „gar nicht geprüft“ (#1030).
     return betreibe_urteil({**umgebung, "GITHUB_REPOSITORY": "a/b", "GH_TOKEN": "t"},
-                           jetzt=jetzt, http=http, einrichtung_offen=einrichtung_offen)
+                           jetzt=jetzt, http=http, einrichtung_offen=einrichtung_offen,
+                           setup_geprueft=True)
 
 
 def pruefe_scheinbeweis(schritte, jetzt=None) -> list[dict]:
@@ -529,20 +534,80 @@ def pruefe_scheinbeweis(schritte, jetzt=None) -> list[dict]:
     return befund
 
 
+# =====================================================================
+#  WER HAT ES GESEHEN? (Vorgang WF-3150 / #1030, 10.11.2026)
+#  ------------------------------------------------------------
+#  BEFUND (Lauf 42715328453): Derselbe Lauf hatte ZWEI rote Schritte –
+#  „Voraussetzungen prüfen“ (richtig, Einrichtungs-Rat) und „Leerlauf
+#  prüfen“ (falsch: es war kein Lauf grün). Ursache: Der zweite Schritt
+#  bekam den Befund des ersten nicht. Er riet – und riet anders.
+#  `betreibe_urteil(..., einrichtung_offen=…)` gab es dafür seit dem
+#  07.11. schon; der Workflow füllte den Parameter nie.
+#
+#  Jetzt gilt: Der Schritt, der es WEISS, sagt es in `GITHUB_OUTPUT`
+#  (`offene_einrichtung=E1 E3`). Der nächste Schritt liest genau diesen
+#  Wert. Fehlt er, obwohl der Vorgänger „Voraussetzungen prüfen“ nicht
+#  durchgelaufen ist, wird NICHT geraten: dann ist die Prüfung „nicht
+#  entscheidbar“ (Exit 2, rot) – „weiß nicht“ ist nie ein Grün.
+# =====================================================================
+UMGEBUNG_OFFEN = "OFFENE_EINRICHTUNG"
+# Nur die Kennungen des Einrichtungsvertrags (E1 … E8). Alles andere ist
+# „nicht lesbar“ – ein Tippfehler darf nicht als Einrichtungspunkt gelten.
+KENNUNG = re.compile(r"^E[1-8]$")
+
+
+def einrichtung_offen_aus_umgebung(umgebung: dict | None = None) -> list[str] | None:
+    """Offene Kennungen aus der Umgebung – oder `None`, wenn niemand sie weiß.
+
+    Bewusst DREI Antworten, nicht zwei:
+
+      `[]`   – die Einrichtungsprüfung ist durchgelaufen und hat nichts offen.
+      `[..]` – sie hat diese Punkte offen gemeldet (Ursache bekannt).
+      `None` – sie lief nicht oder nicht lesbar: Der Aufrufer darf nicht
+               raten und muss fail-closed antworten.
+
+    Die Kennungen sind `E1` … `E8`. Die Trennzeichen werden breit
+    akzeptiert (Leerzeichen, Komma, Semikolon), damit ein Aufruf von Hand
+    nicht an einem Komma scheitert; alles andere ist „nicht lesbar“.
+    """
+    umgebung = dict(os.environ) if umgebung is None else umgebung
+    if UMGEBUNG_OFFEN not in umgebung:
+        return None
+    roh = str(umgebung.get(UMGEBUNG_OFFEN) or "").strip()
+    if not roh:
+        return []
+    teile = [t.strip() for t in roh.replace(";", " ").replace(",", " ").split() if t.strip()]
+    if not all(KENNUNG.match(t) for t in teile):
+        return None
+    return teile
+
+
 def betreibe_urteil(umgebung: dict | None = None, *, jetzt: dt.datetime | None = None,
                     http=None, quelle: str = "", workflow: str = WORKFLOW,
-                    einrichtung_offen: list[str] | None = None) -> dict:
+                    einrichtung_offen: list[str] | None = None,
+                    setup_geprueft: bool = False) -> dict:
     """Urteil auf JOB-Ebene – ohne Anstoß, ohne Schreibzugriff.
 
     Struktur: `{"messbar": bool, "befunde": [...], "exit": int, "text": str}`.
     Die Reihenfolge der Klassen ist die Reihenfolge der Antworten: offene
     Einrichtung zuerst (sie ist die Ursache), dann Leerlauf, dann Scheinbeweis.
+
+    `einrichtung_offen` ist die Antwort der Einrichtungsprüfung dieses Laufs
+    (siehe `einrichtung_offen_aus_umgebung`). Ist sie `None` UND meldet
+    `setup_geprueft=False`, dass sie gar nicht gelaufen ist, gibt es keine
+    Entscheidungsgrundlage: dann Exit 2 (Werkzeugfehler), nicht Exit 0.
     """
     umgebung = dict(os.environ) if umgebung is None else umgebung
     http = http or HTTP
     jetzt = jetzt or dt.datetime.now(dt.timezone.utc)
     quelle = quelle or _quelle_bestimmen(umgebung=umgebung)
     token = aktion_token(umgebung) or lese_token(umgebung)
+
+    if einrichtung_offen is None and not setup_geprueft:
+        return {"messbar": False, "befunde": [], "exit": EXIT_WERKZEUG,
+                "text": ("Die Einrichtungsprüfung dieses Laufs hat ihr Ergebnis nicht "
+                         "hinterlassen – ohne sie wäre jede Antwort geraten. Kein Grün, "
+                         "kein Leerlauf-Rat (Vorgang WF-3150).")}
 
     status, jobs, meldung = _jobs_des_juengsten(quelle, token, workflow, http)
     if status != 200:
@@ -1047,6 +1112,28 @@ def selbsttest() -> int:
                         jetzt)["exit"] != 0:
         fehler.append("S20h: ein belegter grüner Job ist kein Leerlauf")
 
+    # S22 (#1030, 10.11.2026): OHNE Auskunft der Einrichtungsprüfung wird nicht
+    # geraten. Lauf 42715328453 zeigte, was Raten kostet: derselbe Lauf trug
+    # zwei Rote Stellen mit zwei verschiedenen Ratschlägen – und der zweite
+    # („ein Lauf ist grün, gesichert wurde nichts“) war schlicht falsch.
+    if einrichtung_offen_aus_umgebung({}) is not None:
+        fehler.append("S22a: ohne OFFENE_EINRICHTUNG darf es keine Antwort geben (None)")
+    if einrichtung_offen_aus_umgebung({UMGEBUNG_OFFEN: ""}) != []:
+        fehler.append("S22b: leerer Wert heißt „geprüft, nichts offen“")
+    if einrichtung_offen_aus_umgebung({UMGEBUNG_OFFEN: "E1,E3; E5"}) != ["E1", "E3", "E5"]:
+        fehler.append("S22c: Kennungen müssen auch mit Komma/Semikolon gelesen werden")
+    if einrichtung_offen_aus_umgebung({UMGEBUNG_OFFEN: "E9 BACKUP_REPO"}) is not None:
+        fehler.append("S22d: unbekannte Kennung ist „nicht lesbar“, kein Einrichtungspunkt")
+    ohne_auskunft = betreibe_urteil({"GITHUB_REPOSITORY": "a/b", "GH_TOKEN": "t"}, jetzt=jetzt,
+                                    http=lambda *a, **k: (_ for _ in ()).throw(
+                                        AssertionError("ohne Auskunft darf niemand gefragt werden")))
+    if ohne_auskunft["exit"] != EXIT_WERKZEUG or "nicht hinterlassen" not in ohne_auskunft["text"]:
+        fehler.append(f"S22e: ohne Auskunft muss Exit 2 kommen, war {ohne_auskunft}")
+    # Gegenprobe: MIT Auskunft (leer = geprüft) ist derselbe Aufruf grün.
+    geprueft = _leerlauf_urteil([], {"BACKUP_REPO": "a/b", "BACKUP_PASSPHRASE": "x"}, jetzt)
+    if geprueft["exit"] != 0 or not geprueft["messbar"]:
+        fehler.append(f"S22f: geprüfte, leere Auskunft muss grün sein: {geprueft}")
+
     # S21: Ein geskippter Lauf ist kein Zeuge – er darf gar nicht befragt werden
     leer = {"id": 2, "conclusion": "skipped", "created_at": "2026-11-07T15:24:31Z"}
     echt = {"id": 1, "conclusion": "failure", "created_at": "2026-11-06T19:48:59Z"}
@@ -1072,11 +1159,12 @@ def selbsttest() -> int:
             print(f"❌ {eintrag}")
         print(f"🛑 backup_selbstheilung-Selbsttest: {len(fehler)} Abweichung(en).")
         return 1
-    print("✅ backup_selbstheilung-Selbsttest: 21 Fallgruppen – Tagesfenster, Grenzen, "
+    print("✅ backup_selbstheilung-Selbsttest: 22 Fallgruppen – Tagesfenster, Grenzen, "
           "laufende Sicherung, Mindestabstand, Budget, Lauf-Auswertung, ein Anstoß je Lauf, "
           "zweite Messung als einziger Grün-Nachweis, gescheiterter Lauf, 403, unlesbare "
           "Historie, Probe-Modus, Rechte-Trennung, Eingabe-Auflösung, Klassenvertrag, "
-          "grüner Leerlauf (Job-Ebene) und Zeugen-Filter.")
+          "grüner Leerlauf (Job-Ebene), Zeugen-Filter und seit dem 10.11.2026 (#1030) "
+          "die Regel „ohne Auskunft der Einrichtungsprüfung wird nicht geraten“.")
     return 0
 
 
@@ -1105,6 +1193,9 @@ def main(argv=None) -> int:
     ap.add_argument("--workflow", default=WORKFLOW, help="Workflow-Datei der Sicherung")
     ap.add_argument("--wartezeit", type=int, default=WARTEZEIT_S,
                     help="Sekunden, die auf den angestoßenen Lauf gewartet wird")
+    ap.add_argument("--ohne-setup", action="store_true",
+                    help=("Aufruf ohne Einrichtungsprüfung dieses Laufs (nur lokal von Hand): "
+                          "OFFENE_EINRICHTUNG wird nicht gelesen und nicht geraten"))
     args = ap.parse_args(list(sys.argv[1:] if argv is None else argv))
     if args.selftest:
         return selbsttest()
@@ -1116,8 +1207,21 @@ def main(argv=None) -> int:
         # Reine LESUNG: kein Dispatch, kein Schreibzugriff. Die Job-Ebene ist
         # die Messhöhe (WF-9E5A / #923) – ein KV-Job darf das Urteil über den
         # Repo-Job nicht verfälschen.
+        #
+        # #1030 (10.11.2026): Die Ursache kommt aus der Einrichtungsprüfung
+        # DIESES Laufs, nicht aus einer Vermutung. `--ohne-setup` sagt
+        # ausdrücklich, dass es sie nicht gab (lokaler Aufruf von Hand:
+        # dann bleibt nur der Job-Befund, und der Grund wird als solcher
+        # benannt). Im Workflow steht die Prüfung davor und füllt
+        # `OFFENE_EINRICHTUNG`.
+        offen = None if args.ohne_setup else einrichtung_offen_aus_umgebung(umgebung)
         urteil = betreibe_urteil(umgebung, quelle=args.quelle.strip(),
-                                 workflow=args.workflow.strip() or WORKFLOW)
+                                 workflow=args.workflow.strip() or WORKFLOW,
+                                 einrichtung_offen=offen,
+                                 setup_geprueft=bool(args.ohne_setup))
+        if offen:
+            print(f"Ursache zuerst: Die Einrichtung ist offen ({', '.join(offen)}) – "
+                  "der Einrichtungsschritt desselben Laufs trägt den Rat.")
         for befund in urteil.get("befunde", []):
             print(f"  ⚠️ [{befund['klasse']}/nicht heilbar] {befund['text']}")
         print(urteil["text"])

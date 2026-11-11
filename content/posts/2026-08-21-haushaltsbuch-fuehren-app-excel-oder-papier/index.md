@@ -9,7 +9,7 @@ categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
 
-ai_generated: false
+ai_generated: true
 cover:
   image: "images/covers/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier.jpg"
   alt: "Haushaltsbuch führen: App, Excel oder Papier?"
