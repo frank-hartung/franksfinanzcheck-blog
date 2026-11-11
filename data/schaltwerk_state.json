@@ -91,6 +91,7 @@
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/ig-metall-wirtschaftsmeldung-oktober2026-100.html": "2026-10-27T20:36:38+01:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/konjunktur/inflation-eurozone-anstieg-102.html": "2026-10-04T16:20:48+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/konjunktur/inflation-eurozone-oktober-102.html": "2026-11-04T18:57:22+01:00",
+    "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/konjunktur/inflation-tankrabatt-spritpreise-oktober-100.html": "2026-11-11T17:05:03+01:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/unternehmen/volkswagen-vw-arbeitskampf-tarifvertrag-100.html": "2026-10-04T16:20:48+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/unternehmen/vw-tarifvertraege-sparkurs-100.html": "2026-10-04T16:20:48+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/verbraucher/energie-heizen-winter-100.html": "2026-10-17T13:08:39+02:00",
@@ -107,7 +108,7 @@
     "reach-signale-kuratieren": "2026-11-09T21:39:50+01:00",
     "standby-erinnerung": "2026-10-04T23:53:19+02:00",
     "stiller-kanal": "2026-11-08T23:26:29+01:00",
-    "verbraucher-nachrichten": "2026-11-08T19:28:44+01:00",
+    "verbraucher-nachrichten": "2026-11-11T17:05:03+01:00",
     "wochenbericht": "2026-11-08T19:28:44+01:00"
   },
   "marker": {
@@ -235,7 +236,8 @@
       "2026-11-02": 1,
       "2026-11-03": 1,
       "2026-11-04": 1,
-      "2026-11-08": 1
+      "2026-11-08": 1,
+      "2026-11-11": 1
     },
     "wochenbericht": {
       "2026-10-18": 1,
