@@ -452,6 +452,30 @@ def pruefe_grundlage(python: str, baum_wurzel: str = BLOG_DIR) -> list[str]:
     ]
 
 
+def verweigert_direktaufruf(pfad: str) -> bool:
+    """Verweigert die Datei den Aufruf ohne Argumente?
+
+    Ein Hinweis „ein Aufruf startet die Standard-Aktion" ist nur dann wahr, wenn
+    es eine gibt. `ki_provenienz.py` ist eine Bibliothek: Ihr `__main__`-Zweig
+    beendet sich mit `raise SystemExit(<Hinweis auf das Gate>)` und führt
+    nichts aus. Der Hinweis bleibt (Transparenz über die Entdeckung), die
+    Behauptung darin wird aber nicht erfunden – ein Melder, der aus einem
+    harmlosen Fall eine Gefahr macht, kostet beim nächsten echten Fall die
+    Aufmerksamkeit.
+    """
+    try:
+        with open(pfad, encoding="utf-8", errors="ignore") as fh:
+            text = fh.read()
+    except OSError:
+        return False
+    stelle = text.find('if __name__ == "__main__"')
+    if stelle < 0:
+        stelle = text.find("if __name__ == '__main__'")
+    if stelle < 0:
+        return False
+    return "raise SystemExit" in text[stelle:]
+
+
 def pruefen(python: str = "python3", uhr_probe: bool = True,
             skript_dir: str = SKRIPT_DIR, deckel: int = ZEITDECKEL,
             baum_wurzel: str = BLOG_DIR) -> dict:
@@ -468,9 +492,17 @@ def pruefen(python: str = "python3", uhr_probe: bool = True,
     for pfad in erwaehnt:
         datei = os.path.basename(pfad)
         if datei not in GEFAHREN:
-            hinweise.append(f"scripts/{datei} erwähnt `--selftest`, implementiert es "
-                            "aber nicht (Quote fehlt) – der Runner führt es NICHT. "
-                            "Ein Aufruf mit der Flagge startet die Standard-Aktion.")
+            if verweigert_direktaufruf(pfad):
+                hinweise.append(
+                    f"scripts/{datei} erwähnt `--selftest`, implementiert es aber "
+                    "nicht (Quote fehlt) – der Runner führt es NICHT. Folge: keine. "
+                    "Die Datei ist eine Bibliothek und verweigert den Direktaufruf "
+                    "(`raise SystemExit` im `__main__`-Zweig); die Flagge landet nie "
+                    "in einer Standard-Aktion.")
+            else:
+                hinweise.append(f"scripts/{datei} erwähnt `--selftest`, implementiert es "
+                                "aber nicht (Quote fehlt) – der Runner führt es NICHT. "
+                                "Ein Aufruf mit der Flagge startet die Standard-Aktion.")
     for datei, grund in GEFAHREN.items():
         if not grund.strip():
             befunde.append(f"Gefahren-Eintrag {datei} ohne Begründung")
@@ -669,6 +701,14 @@ def _selftest() -> int:
         with open(os.path.join(skripte, "erwaehnung.py"), "w", encoding="utf-8") as fh:
             fh.write("# Diagnose: python3 scripts/x.py --selftest\n"
                      "import sys\nsys.exit(0)\n")
+        # Bibliothek ohne Selbsttest (ki_provenienz-Fall, 10.11.2026): Der
+        # Direktaufruf endet im `__main__`-Zweig mit `raise SystemExit`. Der
+        # Hinweis bleibt (Transparenz), die Behauptung „startet die
+        # Standard-Aktion" darf aber nicht erfunden werden.
+        with open(os.path.join(skripte, "bibliothek.py"), "w", encoding="utf-8") as fh:
+            fh.write("# CLI: scripts/gate.py --selftest\n"
+                     "if __name__ == \"__main__\":\n"
+                     "    raise SystemExit('Bibliothek – bitte das Gate aufrufen')\n")
         # SSOT-Stub: verlangt eine vorhandene, eine fehlende und eine ausgenommene Wache
         with open(os.path.join(skripte, "governance_contract.py"), "w",
                   encoding="utf-8") as fh:
@@ -724,6 +764,18 @@ def _selftest() -> int:
             fehler.append("Skript ohne --selftest wird fälschlich geprüft")
         if "erwaehnung.py" not in hinweise:
             fehler.append("Erwähnung ohne Implementierung bleibt ohne Hinweis")
+        if "erwaehnung.py" in hinweise and "startet die Standard-Aktion" not in hinweise:
+            fehler.append("Der Gefahren-Hinweis nennt die Folge nicht (dann ist er "
+                          "nur eine Erwähnung, keine Warnung)")
+        # Gegenprobe: Bei einer Bibliothek, die den Direktaufruf VERWEIGERT, ist
+        # genau diese Folge falsch – der Hinweis muss sie durch „Folge: keine"
+        # ersetzen, sonst entwertet er die echten Fälle.
+        if "bibliothek.py" not in hinweise:
+            fehler.append("Bibliothek ohne --selftest bleibt ohne Hinweis (Transparenz)")
+        if "bibliothek.py" in hinweise and "startet die Standard-Aktion" in \
+                " ".join(h for h in hinweise if "bibliothek.py" in h):
+            fehler.append("Der Hinweis behauptet bei einer Bibliothek mit "
+                          "SystemExit eine Standard-Aktion, die es nicht gibt")
         if "heiler-rest.md" not in texte or "C15" not in texte:
             fehler.append("C15-Wache sieht den schreibenden Selbsttest nicht")
         if "chronik.jsonl" not in texte:
