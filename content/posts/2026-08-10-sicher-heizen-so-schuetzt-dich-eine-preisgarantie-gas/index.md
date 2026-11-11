@@ -236,7 +236,7 @@ Der passende Tarif hängt von dir ab. Diese drei Fragen helfen dir weiter:
 | Bin ich bereit, jährlich 15 Minuten in einen Vergleich zu investieren? | Du bist ein aktiver Wechsler | 12 Monate Laufzeit sind ideal |
 | Steht eine energetische Sanierung bevor? | Dein Verbrauch wird stark sinken | Achte auf kurze Kündigungsfristen |
 
-Vergleiche immer den Preis im Jahr ohne Bonus. Setze dir dabei eine klare Grenze. Ein Beispiel: „Für den Schutz zahle ich 50 bis 100 € im Jahr mehr, aber keinen Cent darüber.“. Das ist ein Beispielwert.
+ Ein Beispiel: „Für den Schutz zahle ich 50 bis 100 € im Jahr mehr, aber keinen Cent darüber.“; das ist ein Modellwert. Das ist ein Beispielwert.
 
 **Faustregel:** Eine Preisgarantie schützt dich nur dann vor Überraschungen, wenn sie Arbeitspreis, Grundpreis und Laufzeit lückenlos abdeckt – vergleiche auch das Kleingedruckte zu Preisanpassungen.
 

@@ -142,7 +142,7 @@ Manche Anbieter locken mit guten Routern oder Spielekonsolen. Prüfe genau: Brau
 Ein Wechsel lohnt sich im Oktober 2026 besonders oft, wenn:
 
 - Dein aktueller Vertrag die Mindestlaufzeit überschritten hat,
-- du monatlich deutlich mehr als **ca. 40 € bis 50 €** für Standard-DSL (100–250 Mbit/s) zahlst,. Das ist ein Rechenbeispiel.
+- du monatlich deutlich mehr als **ca. 40 € bis 50 €** für Standard-DSL (100–250 Mbit/s) zahlst; das ist ein Modellwert. Das ist ein Rechenbeispiel.
 - Du noch einen alten Vertrag ohne moderne Glasfaser-Optionen nutzt,
 - dein aktueller Anbieter keine Treue-Rabatte gewährt,
 - die Verbindungsqualität nicht mehr deinen Anforderungen entspricht.
@@ -159,7 +159,7 @@ Achte zudem auf die Routermiete: Schon **ca. 6 € bis 9 €** im Monat summie
 
 Hektik ist beim [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) ein schlechter Ratgeber. Wer erst kurz vor Ende der [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) sucht, übersieht oft das Kleingedruckte.
 
-Ein Vorlauf von **ca. 3 bis 4 Monaten** ist ideal, um:. Das ist ein Modellwert.
+Ein Vorlauf von **ca. 3 bis 4 Monaten** ist ideal, um; das ist ein Beispielwert. Das ist ein Modellwert.
 
 - In Ruhe Tarife und Boni zu vergleichen,
 - die Hardware-Kompatibilität zu prüfen,

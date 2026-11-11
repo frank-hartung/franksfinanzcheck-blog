@@ -300,7 +300,7 @@ Das erfordert eine hohe Heizleistung.
 Zudem wird oft mehr Wasser verwendet, um das Waschmittel schneller auszuspülen.
 
 ### Lohnt sich eine halbe Ladung, wenn ich Strom sparen will?
-Nur bedingt. Eine halbe Trommel spart laut Stromauskunft nur 20 bis 30 % Strom gegenüber einer vollen Ladung.
+ Eine halbe Trommel spart laut Stromauskunft nur 20 bis 30 % Strom gegenüber einer vollen Ladung; das ist ein Modellwert.
 Pro Kilogramm Wäsche steigt der Verbrauch daher. Forum Waschen weist darauf hin, dass weniger Wäsche zwar den absoluten Energieverbrauch senkt, aber den Verbrauch pro Kilo erhöht.
 
 ### Muss ich das Waschmittel bei einer halben Ladung halbieren?

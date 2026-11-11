@@ -49,7 +49,6 @@ quellen:
 kurzantwort: "Bei einer Störung meldest du den Ausfall beim Anbieter und lässt dir eine Vorgangsnummer geben. Bewahre Datum, Uhrzeit, Messwerte und jede Nachricht auf. Der Anbieter muss die Störung zeitnah beheben; bleibt der Anschluss länger tot, prüfe eine Gutschrift oder Entschädigung und wende dich an die Bundesnetzagentur, wenn die Reaktion ausbleibt."
 ---
 
-
 Eine Störung beim [Internetanbieter](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) beginnt harmlos: Ein Video ruckelt, eine Seite lädt nicht; das ist ein Modellwert. Zwanzig Minuten später steht fest: Der Anschluss ist tot. Dann beginnt der schwierige Teil. Viele Verbraucher geben auf, obwohl sie im Recht sind.
 
 Der Grund ist selten die Rechtslage. Er ist die Beweislage. Wer den Ausfall nicht ab der ersten Minute festhält, hat später eine Erinnerung und keine Unterlagen.
@@ -92,7 +91,7 @@ Der erste Schritt kostet keine Wartezeit. Er spart oft den Anruf. Gehe die vier 
 
 Die Meldung entscheidet über den weiteren Verlauf. Sie muss drei Dinge leisten: den Ausfall beschreiben, ihn zeitlich einordnen und einen Vorgang erzeugen.
 
-**Erstens: schriftlich melden.** Nutze das Kontaktformular oder die Adresse aus den Vertragsunterlagen. Ein Anruf ist schnell, hinterlässt aber keine Spur. Meldest du telefonisch, schreibe danach eine kurze E-Mail mit dem Inhalt: „Ich habe am heutigen Tag um 18:40 Uhr eine Störung gemeldet, Vorgangsnummer 0815, Ergebnis: keine Besserung.". Das ist ein Modellwert.
+ Meldest du telefonisch, schreibe danach eine kurze E-Mail mit dem Inhalt: „Ich habe am heutigen Tag um 18:40 Uhr eine Störung gemeldet, Vorgangsnummer 0815, Ergebnis: keine Besserung."; das ist ein Modellwert. Das ist ein Modellwert.
 
 **Zweitens: alles notieren.** Datum, Uhrzeit, Symptom, Dauer der Warteschleife, Name des Mitarbeiters, Vorgangsnummer. Ein Zettel oder eine Notiz auf dem Handy reicht. Diese Liste ist später mehr wert als jede Erinnerung.
 

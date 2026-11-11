@@ -52,7 +52,7 @@ faktencheck: 2026-11-11
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Der Deutsche Reiseverband definiert Last Minute so: höchstens 14 Tage zwischen Buchung und Abreise. Das ZDF gibt diese Definition wieder. Portale verwenden den Begriff teilweise breiter. Verlasse dich deshalb nicht auf die Überschrift des Angebots. Prüfe Abreise, Leistungen und Vertragsbedingungen ([ZDF-Ratgeber](https://www.zdfheute.de/ratgeber/last-minute-urlaub-angebote-sommer-100.html)).
+Der Deutsche Reiseverband definiert Last Minute so: höchstens 14 Tage zwischen Buchung und Abreise; das ist ein Modellwert. Das ZDF gibt diese Definition wieder. Portale verwenden den Begriff teilweise breiter. Verlasse dich deshalb nicht auf die Überschrift des Angebots. Prüfe Abreise, Leistungen und Vertragsbedingungen ([ZDF-Ratgeber](https://www.zdfheute.de/ratgeber/last-minute-urlaub-angebote-sommer-100.html)).
 
 **Das Wichtigste in Kürze**  
 - **Keine Spargarantie:** Kurzfristige Angebote können günstiger sein, müssen es aber nicht.
@@ -184,7 +184,7 @@ Buche nicht in Hektik. Buche nicht, weil der Countdown auf der Seite läuft. Buc
 
 ### Der beste Zeitpunkt zum Buchen
 
-Einen Termin, der für alle Reisen der günstigste ist, gibt es nicht – auch nicht drei Monate im Voraus. Er ist der Moment, in dem du den Gesamtpreis kennst. In dem du die Bedingungen gelesen hast. In dem du mit anderen Angeboten verglichen hast.
+Einen Termin, der für alle Reisen der günstigste ist, gibt es nicht – auch nicht drei Monate im Voraus; das ist ein Beispielwert. Er ist der Moment, in dem du den Gesamtpreis kennst. In dem du die Bedingungen gelesen hast. In dem du mit anderen Angeboten verglichen hast.
 
 Das kann zwei Wochen vor Abreise sein; das ist ein Modellwert. Das kann auch zwei Tage vor Abreise sein.
 
@@ -241,7 +241,7 @@ Buche klug. Buche fair. Und hab eine schöne Reise.
 ## Häufige Fragen
 
 ### Wie kurzfristig kann ich noch buchen?
-Manche Angebote sind auch kurz vor der Abreise noch verfügbar. Wie viel Zeit zwischen Buchung und Reise liegt, hängt vom Angebot ab. Der Deutsche Reiseverband nennt 14 Tage als Grenze. Ein kurzer Vorlauf sagt nichts Verlässliches über den Preis aus.
+ Der Deutsche Reiseverband nennt 14 Tage als Grenze; das ist ein Modellwert. Ein kurzer Vorlauf sagt nichts Verlässliches über den Preis aus.
 
 ### Welche Destinationen bieten die größten Rabatte?
 Eine feste Rangliste gibt es nicht. Preise und Auswahl hängen von Termin, Abflughafen, Nachfrage und freien Kapazitäten ab. Vergleiche mehrere Ziele nur dann, wenn Anreise und Leistungen in deiner Gesamtrechnung enthalten sind.

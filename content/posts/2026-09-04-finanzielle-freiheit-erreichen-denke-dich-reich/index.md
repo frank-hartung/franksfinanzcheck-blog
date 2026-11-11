@@ -39,7 +39,6 @@ quellen:
 faktencheck: 2026-11-05
 ---
 
-
 Du verdienst **ein Beispiel von 5.000 € netto** – und trotzdem bleibt nichts übrig im Modellfall? Der Kontostand hängt selten vom Gehalt ab. Deine Gedanken über Geld und Konsum entscheiden.
 
 Willst du echte **[finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/)** erreichen? Dann löse zuerst die Ketten im Kopf. Wer nur Statussymbolen jagt, bleibt Sklave seiner Ausgaben.
@@ -153,7 +152,7 @@ Das Ergebnis zeigt, wann sich dein Geld verdoppelt. Bei 6 % sind das rund 12 Ja
 
 ### Energiepreise in der Kalkulation nicht vergessen
 
-Die Sparfähigkeit eines Haushalts bemisst sich nicht am Gehalt allein, sondern an den Fixkosten, die übrig bleiben. Energie ist dabei ein wesentlicher Posten: Energieprodukte kosteten laut Statistischem Bundesamt (Verbraucherpreisindex) im Oktober 2026 vorläufig 2,8 % mehr als ein Jahr zuvor; Energie insgesamt verteuerte sich um +14,9 % gegenüber dem Vorjahresmonat. Wer die monatliche Sparrate kalkuliert, sollte aktuelle Energiepreise Einpreisen – sonst ist die geplante Rate zu hoch angesetzt und das Budget für den Vermögensaufbau schmilzt schneller als gedacht.
+ Energie ist dabei ein wesentlicher Posten: Energieprodukte kosteten laut Statistischem Bundesamt (Verbraucherpreisindex) im Oktober 2026 vorläufig 2,8 % mehr als ein Jahr zuvor; Energie insgesamt verteuerte sich um +14,9 % gegenüber dem Vorjahresmonat; das ist ein Modellwert. Wer die monatliche Sparrate kalkuliert, sollte aktuelle Energiepreise Einpreisen – sonst ist die geplante Rate zu hoch angesetzt und das Budget für den Vermögensaufbau schmilzt schneller als gedacht.
 
 [Quelle: Statistisches Bundesamt, Verbraucherpreisindex und Inflationsrate in Deutschland, https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html]
 

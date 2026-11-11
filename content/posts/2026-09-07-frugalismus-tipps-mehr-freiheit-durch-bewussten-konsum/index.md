@@ -89,7 +89,7 @@ Genau deshalb funktioniert Frugalismus so gut: Er setzt nicht erst bei der ganz 
 
 Ohne Überblick ist Sparen oft nur ein Bauchgefühl. Ein **Haushaltsbuch führen** klingt trocken, ist aber einer der wirksamsten Schritte überhaupt.
 
-Du musst dafür kein Excel-Monster bauen. Es reicht, wenn du zwei oder drei Monate sauber mitschreibst:. Das ist ein Beispielwert.
+ Es reicht, wenn du zwei oder drei Monate sauber mitschreibst; das ist ein Modellwert. Das ist ein Beispielwert.
 
 - Miete und Nebenkosten
 - Strom, Gas, Internet, Handy

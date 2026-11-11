@@ -37,7 +37,6 @@ quellen:
 faktencheck: "2026-10-13"
 ---
 
-
 Tagesgeldkonto im Check: Das Girokonto zahlt dir weiter 0,0 %; das ist ein Modellwert.
 
 Viele Banken geben dir heute **ca. 1,7 % bis 3,2 %**; das ist ein Beispielwert. Dein Geld bleibt dabei täglich verfügbar. Für den **[Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)** gibt es keinen besseren Platz.
@@ -96,7 +95,7 @@ Drei Gründe sprechen dafür:
 
 - **Girokonto:** Ca. 1–2 Monatsausgaben für laufende Kosten.
 - **Tagesgeld:** Ca. 3–6 Monatsausgaben als eiserne Reserve für Unvorhergesehenes.
-- **Festgeld:** Kapital, das in den nächsten 12 bis 36 Monaten sicher benötigt wird (z. B. Autokauf); das ist ein Rechenbeispiel.
+- **Festgeld:** Kapital, das in den nächsten 12 bis 36 Monaten sicher benötigt wird (z. B. Autokauf); das ist ein Rechenbeispiel; das ist ein Modellwert.
 - **Aktien-ETFs:** Langfristiger Vermögensaufbau mit einem Zeithorizont von über 10 Jahren.
 
 ## So funktioniert die EU-Einlagensicherung
@@ -188,7 +187,7 @@ Diese Summe deckt fast einen Monat Versicherungen. Oder einen kurzen Urlaub.
 
 Ein guter Notgroschen trägt deine Finanzen. Üblich sind **drei bis sechs Netto-Gehälter**:
 
-- **Alleinstehende (ca. 2.500 € Netto):** ca. 7.500 € bis 15.000 €. Das ist ein Beispielwert.
+- **Alleinstehende (ca. 2.500 € Netto):** ca. 7.500 € bis 15.000 €; das ist ein Beispielwert. Das ist ein Beispielwert.
 - **Haushalt mit Kindern (ca. 5.000 € Netto):** ca. 15.000 € bis 30.000 €
 
 Dieses Geld gehört aufs Tagesgeldkonto, sonst nirgends. In Aktien wäre es zu riskant.

@@ -71,7 +71,7 @@ Die Gebühr im Monat ist nur die Spitze. Dahinter stecken viele kleine Posten. S
 Typische Kostenfaktoren sind heutzutage:
 
 - Monatliche Grundgebühren für die Kontoverwaltung,
-- Jährliche Kosten für die Girocard (oft ca. 10 € bis 15 €),. Das ist ein Beispielwert.
+- Jährliche Kosten für die Girocard (oft ca. 10 € bis 15 €); das ist ein Modellwert. Das ist ein Beispielwert.
 - Einzelgebühren für Echtzeit-Überweisungen oder SMS-TANs,
 - Hohe Gebühren für Abhebungen an Fremdautomaten,
 - Zweistellige Dispozinsen, die bei Kontoüberzug sofort greifen,

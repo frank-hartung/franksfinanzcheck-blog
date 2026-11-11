@@ -45,7 +45,7 @@ Ein Tarifportal findet in Sekunden hunderte Gastarife. Danach kommt die echte Ar
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Dieser Leitfaden führt dich in zehn Minuten von der Jahresrechnung bis zur sicheren Wahl.
+Dieser Leitfaden führt dich in zehn Minuten von der Jahresrechnung bis zur sicheren Wahl; das ist ein Modellwert.
 
 ---
 
@@ -80,7 +80,7 @@ Du brauchst:
 - Zählernummer oder Marktlokations-ID für den späteren Abschluss,
 - nächstmöglichen Kündigungstermin.
 
-Dein Abschlag gehört nicht ins Verbrauchsfeld. Er ist nur eine Vorauszahlung. Nimmst du aus Versehen 18.000 Eurocent statt 18.000 kWh oder nur eine grobe Schätzung, vergleicht das Portal am falschen Bedarf.
+ Nimmst du aus Versehen 18.000 Eurocent statt 18.000 kWh oder nur eine grobe Schätzung, vergleicht das Portal am falschen Bedarf; das ist ein Beispielwert.
 
 ## Minute 2: Gesamtpreis des alten Tarifs rechnen
 
@@ -109,7 +109,7 @@ Warum? Vergleichsportale verdienen an vermittelten Abschlüssen. Das macht sie n
 
 ## Minute 4: Laufzeit und Kündigung prüfen
 
-Rund zwölf Monate Laufzeit können ein Mittelweg sein. Feste Preise gibt es nur für die Teile und den Zeitraum, die Garantie abdeckt.
+Rund zwölf Monate Laufzeit können ein Mittelweg sein; das ist ein Modellwert. Feste Preise gibt es nur für die Teile und den Zeitraum, die Garantie abdeckt.
 
 Prüfe:
 
@@ -152,7 +152,7 @@ Rechne zwei Preise:
 
 \*unter der vereinfachenden Annahme unveränderter Preise.
 
-Tarif A gewinnt im ersten Jahr knapp. Tarif B ist ohne Bonus 160 € günstiger. Wer nicht sicher jährlich neu vergleicht, sollte das ernst nehmen.
+ Tarif B ist ohne Bonus 160 € günstiger; das ist ein Rechenbeispiel. Wer nicht sicher jährlich neu vergleicht, sollte das ernst nehmen.
 
 ## Minute 7: Zahlungsmodell und Paketmengen
 
@@ -212,7 +212,7 @@ Eine längere Laufzeit kann sinnvoll sein, wenn:
 - dein Verbrauch stabil ist,
 - dir Planungssicherheit wichtiger als jährliche Flexibilität ist.
 
-Rechne den Sicherheitsaufschlag. Kostet der 24-Monats-Tarif 0,7 Cent mehr, sind das bei 20.000 kWh **140 € pro Jahr**. Diesen Betrag zahlst du für zusätzliche Ruhe – falls alle anderen Bedingungen vergleichbar sind.
+ Kostet der 24-Monats-Tarif 0,7 Cent mehr, sind das bei 20.000 kWh **140 € pro Jahr**; das ist ein Rechenbeispiel. Diesen Betrag zahlst du für zusätzliche Ruhe – falls alle anderen Bedingungen vergleichbar sind.
 
 ## Der Check nach dem Abschluss
 
@@ -224,7 +224,7 @@ Prüfe die Bestätigung:
 - Ist der Abschlag plausibel?
 - Wurde der alte Vertrag beendet?
 
-Setze zwei Termine: acht Wochen vor Ende der Garantie und acht Wochen vor dem frühesten Kündigungstermin. Je nach Vertrag kann ein anderer Vorlauf nötig sein; die Erinnerung ist nur dein Prüfzeitpunkt.
+Setze zwei Termine: acht Wochen vor Ende der Garantie und acht Wochen vor dem frühesten Kündigungstermin; das ist eine Modellannahme. Je nach Vertrag kann ein anderer Vorlauf nötig sein; die Erinnerung ist nur dein Prüfzeitpunkt.
 
 > 💡 **Schnell-Tipp von FranksFinanzcheck:** Starte den Vergleich erst, wenn der Jahresverbrauch vor dir liegt: [**Gastarife vergleichen**](/go/gas/). Der Link ist Werbung; für dich entstehen keine Mehrkosten.
 
@@ -278,6 +278,8 @@ Prüfe deshalb unmittelbar vor dem Absenden noch einmal Arbeits- und Grundpreis.
 
 Bewahre die Tabelle mindestens bis zur ersten Rechnung auf. Dann kannst du Preis, Bonus und Abschlag mit dem ursprünglichen Angebot abgleichen.
 
+**Faustregel:** Wer Laufzeit und Kündigungsfrist vor dem Abschluss kennt, zahlt seltener für einen Vertrag, den er längst nicht mehr nutzt.
+
 ## Fazit: Erst neutral vergleichen, dann Vorteile einrechnen
 
 Ein guter Gastarif bleibt auch ohne großen Bonus nachvollziehbar. Er hat einen konkurrenzfähigen Gesamtpreis, eine verständliche Garantie und eine Laufzeit, die zu dir passt.
@@ -292,7 +294,7 @@ Dein nächster Schritt: Öffne die letzte Rechnung, notiere kWh, Arbeits- und Gr
 Für die erste Sortierung ja. Danach kannst du den sicheren Bonus separat für das erste Jahr einrechnen.
 
 **Welche Laufzeit ist sinnvoll?**
-Für viele Haushalte etwa zwölf Monate. Längere Laufzeiten können bei fairem Preis und großem Sicherheitswunsch passen.
+Für viele Haushalte etwa zwölf Monate; das ist ein Modellwert. Längere Laufzeiten können bei fairem Preis und großem Sicherheitswunsch passen.
 
 **Ist der billigste Portal-Tarif automatisch gut?**
 Nein. Prüfe Preis ohne Bonus, Garantie, Laufzeit, Zahlungsweise und Anbieter direkt.

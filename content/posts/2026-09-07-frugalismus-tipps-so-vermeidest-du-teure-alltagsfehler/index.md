@@ -45,7 +45,6 @@ quellen:
 faktencheck: 2026-11-06
 ---
 
-
 [Frugalismus](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) Im Alltag scheitert selten am guten Vorsatz. Meist scheitert er an kleinen Fehlkäufen, unklaren Routinen und dem Gefühl, Sparen müsse sofort weh tun.
 
 Lukas steht im Supermarkt vor einem Milchaufschäumer für rund **35 €**; das ist ein Modellwert. Klingt nach Schnäppchen. Drei Monate später steht das Gerät unbenutzt im Schrank. Genau so entstehen Ausgaben, die im Moment harmlos wirken und am Monatsende trotzdem fehlen.
@@ -229,6 +228,8 @@ Halte zusätzlich in einem Satz fest, was seltener passiert ist: ein ausgelassen
 Ein Totalverzicht scheitert meist in der zweiten Woche. Eine Leitplanke nicht. Setze für genau eine Alltagskategorie eine feste Monatsgrenze, zum Beispiel 40 € für Snacks unterwegs oder zwei Lieferdienst-Bestellungen pro Monat. Die Grenze muss nicht hart sein, sie soll dir nur früh zeigen, wann aus Gewohnheit wieder Geld abfließt.
 
 Schreib diese eine Grenze sichtbar auf: als Notiz am Handy, auf der Einkaufsliste oder im Geldordner. So kämpfst du nicht gegen jeden Wunsch, sondern steuerst bewusst einen kleinen Bereich – und genau das hältst du auch im dritten Monat noch durch.
+
+**Faustregel:** Spare zuerst dort, wo du dich nicht einschränkst: Verträge, Gebühren und Doppelkäufe kosten mehr als der tägliche Kaffee.
 
 ## Fazit: Sparen ohne Frust statt Verzicht mit Zähneknirschen
 

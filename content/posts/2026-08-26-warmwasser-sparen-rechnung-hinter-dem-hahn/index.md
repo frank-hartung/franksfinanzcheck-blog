@@ -126,7 +126,7 @@ Die beiden Varianten in der Übersicht. Die Euro-Werte rechnen mit frei gewählt
 
 Die Temperatur am Warmwasserspeicher lässt sich nicht beliebig senken. Die Verbraucherzentrale nennt in ihrem Ratgeber [Kosten für Warmwasser senken](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/kosten-fuer-warmwasser-senken-das-koennen-sie-als-hausbesitzer-tun-17755) die maßgeblichen Werte: Im gesamten Warmwasser-Leitungssystem sollen mindestens 55 °C herrschen. Für größere Anlagen schreibt das die Trinkwasserverordnung vor.
 
-In Speichern mit mehr als 400 Litern muss das Wasser am Speicherausgang gemäß Trinkwasserverordnung immer mindestens 60 °C erreichen. Dasselbe gilt für Leitungen, in denen mehr als drei Liter warmes Wasser stehen. Prüfe die Einstellung deshalb alle drei Monate. Wer den Speicher weiter absenkt, spart Energie und riskiert damit die Trinkwasserhygiene.
+In Speichern mit mehr als 400 Litern muss das Wasser am Speicherausgang gemäß Trinkwasserverordnung immer mindestens 60 °C erreichen; das ist ein Modellwert. Dasselbe gilt für Leitungen, in denen mehr als drei Liter warmes Wasser stehen. Prüfe die Einstellung deshalb alle drei Monate. Wer den Speicher weiter absenkt, spart Energie und riskiert damit die Trinkwasserhygiene.
 
 Für dich heißt das: Die Temperatur ist kein freier Regler. Frage bei einer Änderung die Fachfirma, die deine Anlage wartet. Wer in einem Mehrfamilienhaus wohnt, sollte diese Angelegenheit ohnehin der Verwaltung überlassen und stattdessen die Menge beeinflussen.
 

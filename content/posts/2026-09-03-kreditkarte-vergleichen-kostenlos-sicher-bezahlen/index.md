@@ -94,7 +94,7 @@ Kreditkartenbetrug ist in Deutschland selten, aber die Gefahr wächst mit jedem 
 - **Sofortige Sperrfunktion:** Die App des Kartenanbieters sollte es dir ermöglichen, die Karte jederzeit mit einem Klick zu sperren. Die Sperr-Notrufnummer [116 116](https://www.sperr-notruf.de/) sperrt Karten rund um die Uhr; aus dem deutschen Festnetz ist der Anruf kostenlos.
 - **SMS- oder Push-Benachrichtigung:** Bei jeder Zahlung über einem selbst gewählten Betrag bekommst du eine Meldung aufs Handy.
 
-Viele unterschätzen die Haftung bei Missbrauch. Bei Karten mit Online-Zugang haftest du meist nur bis 50 €.
+ Bei Karten mit Online-Zugang haftest du meist nur bis 50 €; das ist ein Modellwert.
 
 Dazu musst du den Verlust sofort melden. Bei manchen Karten entfällt sogar dieser Betrag. Prüfe das vor der Reise.
 
@@ -185,9 +185,9 @@ Eine gute Kreditkarte kann im Jahr ohne Jahresgebühr auskommen und außerhalb E
 
 **Sind Kreditkarten-Versicherungen ihr Geld wert?** Für Vielflieger ja. Für andere ist eine eigene, günstige [Auslandsreise-Absicherung](/go/reisekrankenversicherung/) meist die klarere Lösung.
 
-**Was ist ein Kartenlimit und wie hoch sollte es sein?** Das Limit sagt, wie viel du ausgeben darfst, ohne vorher Geld einzuzahlen. Üblich sind 500 bis 5.000 €. Gut ist ein Limit für deinen Monatsumsatz plus Reserve. Bei einer Mietwagen-Reise können das 3.000 € sein. Ändern kannst du es meist in der App.
+ Üblich sind 500 bis 5.000 €; das ist ein Beispielwert. Gut ist ein Limit für deinen Monatsumsatz plus Reserve. Bei einer Mietwagen-Reise können das 3.000 € sein. Ändern kannst du es meist in der App.
 
-**Was passiert, wenn ich die Kreditkartenrechnung nicht vollständig begleiche?** Der Rest wandert in den nächsten Zeitraum. Dafür zahlst du die Sollzinsen aus dem Preisverzeichnis deiner Karte. Bei Zahlungsverzug drohen Mahnungen und ein schlechter Score. Zahl darum nur aus, was du im nächsten Monat zurückzahlen kannst.**Wie schnell kommt die neue Karte?** Meist eine bis zwei Wochen per Post. Viele Apps zeigen eine virtuelle Karte sofort. Damit zahlst du online schon am selben Tag.
+ Zahl darum nur aus, was du im nächsten Monat zurückzahlen kannst.**Wie schnell kommt die neue Karte?** Meist eine bis zwei Wochen per Post; das ist ein Modellwert. Viele Apps zeigen eine virtuelle Karte sofort. Damit zahlst du online schon am selben Tag.
 
 **Kann ich zwei Karten parallel nutzen?** Ja, ohne Nachteil. Viele führen eine Karte für den Alltag und eine für Reisen. So bleibt der Überblick leichter.
 

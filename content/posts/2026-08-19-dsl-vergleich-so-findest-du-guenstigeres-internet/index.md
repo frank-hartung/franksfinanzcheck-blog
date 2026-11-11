@@ -37,7 +37,6 @@ quellen:
 faktencheck: "2026-10-13"
 ---
 
-
 [DSL-Vergleich](../../posts/2026-08-10-dsl-wechselbonus-sichern/) im Check: Der deutsche Telekommunikationsmarkt ist auch im Herbst 2026 ein Dickicht aus aggressiven Lockangeboten und komplexen Tarifstrukturen; das ist ein Modellwert. Provider werben oft mit extrem niedrigen Einstiegspreisen ab ca. 10 € bis 15 € in der ersten Vertragshälfte. (Stand: Oktober 2026). Doch Vorsicht: Im Kleingedruckten zeigt sich häufig, dass die monatliche Grundgebühr nach der ersten Phase auf rund 45 € bis 55 € ansteigt. Hinzu kommen oft versteckte Bereitstellungskosten, die das vermeintliche Schnäppchen verteuern.
 
 Ein unabhängiger **[DSL-Vergleich](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/)** bringt Licht ins Dunkel der Tarif-Dschungel; das ist ein Beispielwert. Diese Anleitung zeigt dir, wie du den echten Effektivpreis ermittelst, anstatt auf Marketing-Tricks hereinzufallen. Du erfährst, welche Bandbreite im aktuellen Jahr 2026 wirklich zu deinem digitalen Alltag passt und wie du über die gesamte Laufzeit hinweg bis zu ca. 300 € bis 400 € sparst.
@@ -60,7 +59,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Wie berechnest du den echten Effektivpreis?
 
-Verlasse dich nicht auf die plakative Grundgebühr der ersten Monate. Addiere stattdessen alle Kostenfaktoren über die vollen 24 Monate:. Das ist ein Modellwert.
+ Addiere stattdessen alle Kostenfaktoren über die vollen 24 Monate; das ist ein Modellwert. Das ist ein Modellwert.
 
 * **Grundgebühr der Einstiegsphase:** Oft stark rabattierte Monate (ca. 1 bis 10 oder 12 Monate); das ist ein Beispielwert.
 * **Reguläre Grundgebühr der Folgemonate:** Der Standardpreis, der bis zum Ende des 24. Monats anfällt.
@@ -114,13 +113,13 @@ Schauen wir uns ein realistisches Beispiel aus dem Oktober 2026 an: Ein Provider
 
 Nach 12 Monaten springt der Preis auf rund 49,99 €; das ist ein Modellwert. Die Hardware-Miete liegt bei ca. 6 € pro Monat. Die Anschlussgebühr beträgt einmalig ca. 69,95 €, während ein Wechselbonus von 120 € lockt. Die ehrliche Rechnung sieht so aus:
 
-- 12 Monate à ca. 24,99 € = 299,88 €. Das ist ein Rechenbeispiel.
+- 12 Monate à ca. 24,99 € = 299,88 €; das ist ein Beispielwert. Das ist ein Rechenbeispiel.
 - 12 Monate à ca. 49,99 € = 599,88 €
 - Router-Miete (24 Mo.) = ca. 144,00 €
 - Bereitstellung = ca. 69,95 €
 - Abzüglich Bonus = -120,00 €
 
-**Gesamtkosten: 993,71 € / 24 = ca. 41,40 € effektiver Monatspreis.** Der beworbene Einstiegspreis von 24,99 € liegt also rund 40 % unter der Realität; das ist eine Modellannahme. Wer nur auf den Bannerpreis schaut, vergleicht Äpfel mit Birnen.
+**Gesamtkosten: 993,71 € / 24 = ca. 41,40 € effektiver Monatspreis.** Der beworbene Einstiegspreis von 24,99 € liegt also rund 40 % unter der Realität; das ist eine Modellannahme; das ist ein Modellwert. Wer nur auf den Bannerpreis schaut, vergleicht Äpfel mit Birnen.
 
 Ein Bestandskunden-Tarif ohne Rabatt kostet oft ca. 45 € plus Hardware; das ist ein Modellwert. Ein Wechsel auf einen optimierten Tarif für effektiv ca. 33 € spart dir somit ca. **288 €** über die [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/).
 
@@ -164,7 +163,7 @@ Glasfaser bietet oft die besten Latenzwerte, was besonders bei Online-Anwendunge
 Diese Frage entscheidet oft über die Wirtschaftlichkeit eines Tarifs. Miete wirkt bequem, ist aber meist teurer.
 
 Ein Beispiel (Stand: Oktober 2026):
-- Monatliche Miete: **ca. 6,50 €**. Das ist ein Beispielwert.
+- Monatliche Miete: **ca. 6,50 €**; das ist ein Rechenbeispiel. Das ist ein Beispielwert.
 - Kosten nach 24 Monaten: **ca. 156 €**
 
 Ein moderner Mittelklasse-Router kostet im Handel oft zwischen ca. 130 € und 180 €; das ist ein Modellwert. Nach zwei Jahren gehört das Gerät dir und du kannst es im neuen Vertrag weiterverwenden oder verkaufen. Mieten lohnt sich meist nur, wenn man modernste High-End-Technik inklusive Vor-Ort-Service wünscht.
