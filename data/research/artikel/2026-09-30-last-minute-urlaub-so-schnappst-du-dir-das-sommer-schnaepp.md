@@ -1,13 +1,13 @@
-# Faktenfrische: Last Minute Urlaub: – So schnappst du dir das Sommer‑Schnäpp
+# Faktenfrische: Last Minute Urlaub: So findest du echte Reiseschnäppchen
 
-> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-10-02 19:50 UTC.
+> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-11 12:06 UTC.
 > Agent-Reach-Kanäle, nur lesend. Fundstellen sind Signale, keine Freigabe.
 
 - **Artikel:** `content/posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/index.md`
 - **Themenwelt:** mietwagen
-- **Fälligkeit:** Erstrecherche – noch nie faktengeprüft (Klasse: saisonal)
-- **GEO-Reife:** 4/6 (67 %)
-- **Suchbegriffe:** Last Minute Urlaub, Reiseangebote günstig, Sommerurlaub Schnäppchen, Mietwagen, Kaution, Selbstbeteiligung, Reise, Minute, Urlaub, schnappst, Sommer
+- **Fälligkeit:** frisch geprüft vor 28 Tagen (Intervall 30 Tage) (Klasse: saisonal)
+- **GEO-Reife:** 6/6 (100 %)
+- **Suchbegriffe:** Last Minute Urlaub, Reiseangebote günstig, Reiseschnäppchen, Mietwagen, Kaution, Selbstbeteiligung, Reise, Minute, Urlaub, findest, echte
 - **Kanäle:** rss:Verbraucherzentrale – Reise, web:verbraucherzentrale.de
 
 ## Fundstellen
@@ -24,20 +24,27 @@
 > Markdown Content:
 > [Direkt zum Inhalt](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet#main-content)
 > 
+> Konsum verstehen: Klima, Umwelt und echte Kosten ...
+> 
 > *   [Preise, Tarife, Anbieterwechsel](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel) 
 >     *   [Strom sparen](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen) 
 >     *   [Heizen und Warmwasser](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser) 
->     *   [Energetische Sanierung](https://www.verbraucherzentrale.de/wissen/e
+>     *   [Energetische 
 
-## Fachliche Befunde (Claude)
+## Fachliche Befunde (KI-Fachprüfung)
 
-_Keine Fachprüfung in diesem Lauf (kein PUTER_AUTH_TOKEN oder keine Befunde)._
+Status: geprüft (groq:openai/gpt-oss-120b)
+
+- **luecke** – Behauptung, dass Nachlässe von bis zu 50 % nur Einzelfälle sind, wird ohne Quellenangabe präsentiert. (Beleg: <https://www.verbraucherzentrale.de/wissen/reise-mobilitaet>)
+- **luecke** – Definition des Begriffs „Last Minute“ (maximal 14 Tage zwischen Buchung und Abreise) wird mit dem Deutschen Reiseverband angegeben, jedoch fehlt ein Nachweis. (Beleg: <https://www.verbraucherzentrale.de/wissen/reise-mobilitaet>)
+- **luecke** – Hinweis auf § 651r BGB (Insolvenzsicherung bei Pauschalreisen) enthält keinen Verweis auf eine Rechtsquelle oder Verbraucherzentrale‑Information. (Beleg: <https://www.verbraucherzentrale.de/wissen/reise-mobilitaet>)
+- **praezision** – Aussage, dass der „beste Zeitpunkt zum Buchen“ ein Modellwert sei, bleibt vage und ohne messbare Daten oder Studien untermauert. (Beleg: <https://www.verbraucherzentrale.de/wissen/reise-mobilitaet>)
+- **praezision** – Angabe, dass Preisalarme keinen Tiefstpreis garantieren, wird nicht durch konkrete Zahlen oder Vergleichsstudien belegt. (Beleg: <https://www.verbraucherzentrale.de/wissen/reise-mobilitaet>)
 
 ## Offene GEO-Punkte
 
-- Belegkette im Frontmatter (`quellen:` → citation-Schema)
-- Sichtbares Prüfdatum (`faktencheck:`)
+- keine
 
 ## Kanal-Störungen
 
-- Verbraucherzentrale – Reise: Feed nicht lesbar
+- Verbraucherzentrale – Reise: Abruf fehlgeschlagen (HTTP Error 404: Not Found)

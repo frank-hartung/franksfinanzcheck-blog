@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-11-09T11:30:50+00:00",
+  "generatedAt": "2026-11-11T06:34:56+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -1278,8 +1278,40 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
+    "/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/": {
+      "image": "images/covers/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
     "/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/": {
       "image": "images/covers/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/": {
+      "image": "images/covers/2026-11-09-wlan-frust-loesen-so-findest-du-den-besten-router-standort.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",

@@ -26,7 +26,7 @@ quellen:
     titel: "Bundesnetzagentur - Energie"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
-faktencheck: 2026-10-15
+faktencheck: 2026-11-11
 lastmod: 2026-10-16
 kurzantwort: "Prüfe Heizkörper nach Bedarf, messe den Verbrauch und vergleiche Jahreskosten inklusive Grundpreis. Entlüften hat keine garantierte Sparquote; 20 °C sind nur eine mögliche Orientierung. Technische und hygienische Einstellungen gehören in fachkundige Hände."
 ---

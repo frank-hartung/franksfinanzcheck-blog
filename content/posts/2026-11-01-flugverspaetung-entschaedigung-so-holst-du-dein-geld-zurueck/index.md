@@ -1,9 +1,9 @@
 ---
 title: "Flugverspätung Entschädigung: So holst du dein Geld zurück"
 description: "Flugverspätung Entschädigung sichern: Lerne deine Fluggastrechte kennen. Wir zeigen dir, wie du einfach eine Entschädigung beantragen kannst. Tipps…"
-date: 2026-11-01T15:29:40Z
-draft: true
-reserve: true
+date: 2026-11-11T06:30:03Z
+draft: false
+reserve_published: 2026-11-11
 tags: ["Mietwagen und Wohnmobil", "Reisekosten sparen"]
 categories: ["Ratgeber"]
 pillar: "mietwagen"

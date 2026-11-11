@@ -135,7 +135,7 @@ Doppelpunkt – `check_titles` R1). SEO-Audit danach: **0 score_issues**.
 | `check_titles` | – | **0 Verstöße / 126 Titel** |
 | `abbildungen --check` | 20 Beiträge mit Doppelzeile | **0 Befunde** |
 | Zerlegte Asset-URLs im Bestand | 40 | **0** |
-| `F4-fachbefund` (live) | 21 Artikel / 87 Befunde | 20 Artikel / **82 Befunde** (nur noch menschlich; 5 davon aus einem main-Lauf nach dem Branch-Stand) |
+| `F4-fachbefund` (live) | 21 Artikel / 87 Befunde | 22 Artikel / **90 Befunde** (nur noch menschlich; der Zuwachs kommt aus den main-Läufen vom 10./11.11., nicht aus diesem Branch) |
 
 `T1w-zeichenlaenge-optimum` ist per SSOT `wirkung: warnung` und deshalb
 **kein Blocker** (der Exit-Code der Scorecard kennt nur „blockiert“ und
@@ -193,7 +193,9 @@ mit früherer Entscheidung, heutigem Zahlenabgleich und Datei-Hash in
 durch ein neues Prüfdatum und nicht durch eine hübschere Formulierung.
 
 Das Dossier ist ab dieser Runde **keine Handarbeit mehr**, sondern eine
-Projektion mit Prüfmodus:
+Projektion mit Prüfmodus (Stand hier: 90 Live-Befunde auf 22 Artikeln, nach
+dem Merge mit `main` vom 11.11.2026 – die läuft der Generator mit, ohne dass
+jemand Zahlen abschreibt):
 
 ```bash
 python3 scripts/f4_entscheidungsvorlage.py            # schreibt die Vorlage

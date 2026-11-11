@@ -963,27 +963,52 @@ durch Unterdrücken des Alarms.
 
 ## E. Abhängigkeiten — wenn GitHub Alarme zeigt und der Bestand sauber ist
 
-**Stand 24.10.2026** · Grundlage `ABHAENGIGKEITS-SICHERHEIT-PREMIUM-2026-10-24.md`
+**Stand 10.11.2026** · Grundlage `ABHAENGIGKEITS-SICHERHEIT-PREMIUM-2026-10-24.md` & `WARTUNG-ABHAENGIGKEITEN-MINIMATCH-79-SELBSTHEILUNG-HIGHEND-2026-11-10.md`
 
 GitHub meldete 58 offene Schwachstellen, während der ausgelieferte Bestand
 nach vollständiger Prüfung gegen dieselbe Advisory-Datenbank 0 Fundstellen
 hatte. Die Anzeige war älter als der Bestand. Dieser Abschnitt beschreibt,
-wie der Zustand **gemessen** wird — und was ein Befund auslöst.
+wie der Zustand **gemessen** wird — und wie Befunde seit Alert `#79`
+(`minimatch` DoS `GHSA-g3hv-75wg-m249`) automatisch **geheilt und gegen
+Rückfälle verriegelt** werden.
 
 ### E1 · Messen, nicht glauben
 
 ```bash
-npm run deps:check     # offline: Pins, Quelle ↔ Hash-Lock, Locks, SHAs, Tags
-npm run deps:audit     # online: jede ausgelieferte Version gegen die Advisory-DB
-npm run test:deps      # Sabotage- und Gegenproben der Wache
+npm run deps:check          # offline: Pins (A1–A8) + Sicherheits-Untergrenzen (A9)
+npm run deps:audit          # online: jede ausgelieferte Version gegen die Advisory-DB
+npm run deps:heal:pruefen   # Eichprobe + Vertrag + Belegkette + Audit (lesend)
+npm run deps:heal:wache     # Verdrahtungs-Wache über Vertrag, Kette und Workflows
+npm run test:deps           # Sabotage- und Gegenproben von Wache + Selbstheilung
 ```
 
-Der Audit braucht `GITHUB_TOKEN` (in Actions vorhanden). Rund 310
-Versionen, etwa 70 Sekunden, Exit 0 sauber · 1 Befund · 2 Störung.
+Der Audit braucht `GITHUB_TOKEN` (in Actions vorhanden). Rund 339
+Versionen, Exit 0 sauber · 1 Befund · 2 Störung · 3 Messgerät defekt (beim Heiler).
+Seit dem 10.11.2026 läuft der Online-Audit in `sicherheits-wache.yml` nicht mehr
+nur im Tageslauf, sondern bei **jedem** Pull Request und Push, der Manifeste,
+Lockfiles, Workflows oder den Schutz-Vertrag berührt (`--audit-bedarf`).
 
-### E2 · Befund heilen (Exit 1)
+### E2 · Befund heilen — automatisch und lokal (Exit 1)
 
-Der Treffer nennt Paket, Version, Schweregrad, GHSA und `first_patched_version`.
+Der Treffer nennt Paket, Version, Schweregrad, GHSA und `first_patched_version`
+(bei mehrzweigigen GHSAs streng aufsteigend für den betroffenen Versionszweig).
+
+- **Automatisch im Betrieb (`Abhängigkeits-Schutz · Selbstheilung`):** Täglich um
+  06:18 UTC sowie automatisch nach einem roten Lauf der `Sicherheits-Wache` auf
+  `main` führt `.github/workflows/abhaengigkeits-selbstheilung.yml` den Heiler
+  aus: Eichprobe → streng monotone Anhebung mit `--package-lock-only
+  --ignore-scripts` (inkl. `overrides` bei blockierenden Major-Eltern-Ranges und
+  synchronem pip-Hash-Lock) → Lieferketten-Prüfung (`integrity` +
+  `registry.npmjs.org` + `hasInstallScript`-Ausweis) → **Nachmessung** (Rollback
+  bei Verschlechterung) → SHA-256-Eintrag in
+  `data/abhaengigkeits_schutz_belege.jsonl` → Verankerung der
+  `first_patched_version` in `data/abhaengigkeits_schutz_vertrag.json` (Regel
+  `A9`) → Eröffnung eines geprüften Heilungs-PRs (`automation/deps-heilung-*`,
+  Audit H-02: kein blinder Direkt-Merge auf `main`).
+- **Lokal auf Zuruf:** `GITHUB_TOKEN="$(gh auth token)" npm run deps:heal`
+  führt exakt denselben fünfstufigen Heil- und Nachmesslauf im Arbeitsbaum aus.
+
+Manuelle Checkliste (falls ohne Heiler gearbeitet wird):
 
 1. Version auf `first_patched_version` pinnen — in **allen** Stellen, die die
    Wache als Herkunft nennt (`quellen`).
@@ -992,9 +1017,9 @@ Der Treffer nennt Paket, Version, Schweregrad, GHSA und `first_patched_version`.
    denselben Pin (Regel A2 prüft die Gleichheit).
 3. `npm run deps:check && npm run deps:audit` — erst danach ist der Befund
    geschlossen.
-4. Kein `first_patched_version` veröffentlicht? Dann bleibt der Befund offen
-   und wird als bewusster Eintrag im PR genannt. Er verschwindet nicht durch
-   Dismiss.
+4. Kein `first_patched_version` veröffentlicht? Dann bleibt der Befund ehrlich
+   `OFFEN` (Exit 1, Ampel `action_required`) und wird als bewusster Eintrag
+   genannt. Er verschwindet nicht durch Dismiss.
 
 ### E3 · Störung (Exit 2) ist kein Freibrief
 

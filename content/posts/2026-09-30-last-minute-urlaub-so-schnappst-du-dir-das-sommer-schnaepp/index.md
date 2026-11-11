@@ -38,7 +38,7 @@ quellen:
     titel: "BGB § 651r – Insolvenzsicherung. Sicherungsschein"
     url: "https://www.gesetze-im-internet.de/bgb/__651r.html"
     herausgeber: "Bundesministerium der Justiz"
-faktencheck: 2026-10-14
+faktencheck: 2026-11-11
 ---
 
 ![Merkkarte: Kernaussagen zu Last Minute Urlaub: So findest du echte Reiseschnäppchen](abbildung-merkkarte.svg)

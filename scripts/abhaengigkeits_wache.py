@@ -136,6 +136,9 @@ REGEL_DOCKER = "A5"       # bewegliches Image-Tag
 REGEL_MEHRFACH = "A6"     # gleiche Anforderung mit zwei Versionen
 REGEL_LAUFZEIT = "A7"     # Ad-hoc-pip-Install im Workflow ohne Pin/Hash
 REGEL_IMAGE_PIP = "A8"    # pip-Install im Image-Build ohne Pin
+REGEL_UNTERGRENZE = "A9"  # Sicherheits-Untergrenze (Vertrag / overrides) unterschritten
+
+SCHUTZ_VERTRAG_PFAD = "data/abhaengigkeits_schutz_vertrag.json"
 
 SCHWERE_FEHLER = "fehler"
 SCHWERE_WARNUNG = "warnung"
@@ -755,6 +758,301 @@ def pruefe_laufzeit_installationen(root: Path) -> List[Befund]:
     return befunde
 
 
+def versions_schluessel(version: str) -> Optional[Tuple[Tuple[int, ...], int, str]]:
+    """Zerlegt eine SemVer-/PEP-440-Version linear (ohne Backtracking-Regex).
+
+    Liefert `(zahlen_tupel, freigabe_rang, vorab_rest)`:
+    normale Releases (`freigabe_rang = 1`) sortieren nach Vorabversionen (`0`)
+    derselben Zahlenbasis (`1.0.0-rc.1 < 1.0.0`). Ungültige Texte liefern `None`.
+    """
+    if not isinstance(version, str):
+        return None
+    kern = version.strip()
+    if not kern:
+        return None
+    if kern[0] in ("v", "V"):
+        kern = kern[1:]
+    kern = kern.split("+", 1)[0].strip()
+    if not kern:
+        return None
+    haupt, *vorab_teile = kern.split("-", 1)
+    vorab = vorab_teile[0] if vorab_teile else ""
+    segmente = haupt.split(".")
+    zahlen: List[int] = []
+    for seg in segmente:
+        if not seg:
+            return None
+        ziffern = ""
+        rest = ""
+        for zeichen in seg:
+            if zeichen.isdigit() and not rest:
+                ziffern += zeichen
+            else:
+                rest += zeichen
+        if not ziffern:
+            return None
+        zahlen.append(int(ziffern))
+        if rest and not vorab:
+            # PEP-440-Suffixe wie `1.2.0rc1` oder `1.2a1` als Vorab-Anteil werten,
+            # `post1` dagegen als Nach-Release oberhalb der Basis.
+            klein = rest.lower()
+            if klein.startswith("post"):
+                nach = klein[4:].lstrip("._-")
+                zahlen.append(int(nach) if nach.isdigit() else 1)
+            else:
+                vorab = klein
+    while len(zahlen) < 3:
+        zahlen.append(0)
+    freigabe_rang = 0 if vorab else 1
+    return (tuple(zahlen), freigabe_rang, vorab.lower())
+
+
+def vergleiche_versionen(links: str, rechts: str) -> Optional[int]:
+    """`-1` wenn `links < rechts`, `0` bei Gleichheit, `+1` wenn `links > rechts`."""
+    sl = versions_schluessel(links)
+    sr = versions_schluessel(rechts)
+    if sl is None or sr is None:
+        return None
+    lz, lr, lv = sl
+    rz, rr, rv = sr
+    breite = max(len(lz), len(rz))
+    lz_pad = lz + (0,) * (breite - len(lz))
+    rz_pad = rz + (0,) * (breite - len(rz))
+    k_links = (lz_pad, lr, lv)
+    k_rechts = (rz_pad, rr, rv)
+    if k_links < k_rechts:
+        return -1
+    if k_links > k_rechts:
+        return 1
+    return 0
+
+
+def ist_version_unter(ist: str, mindest: str) -> bool:
+    """True, wenn `ist` streng unterhalb der Mindestversion `mindest` liegt."""
+    vgl = vergleiche_versionen(ist, mindest)
+    return vgl == -1
+
+
+def _trifft_versionsbereich(version: str, bereich: str) -> bool:
+    """Prüft GitHub-Advisory-Bereiche der Form `>= 7.0.0, < 11.0.1`."""
+    if not bereich or not bereich.strip():
+        return True
+    for teil in bereich.split(","):
+        klausel = teil.strip()
+        if not klausel:
+            continue
+        for op in (">=", "<=", "!=", "==", ">", "<", "="):
+            if klausel.startswith(op):
+                ziel = klausel[len(op):].strip()
+                vgl = vergleiche_versionen(version, ziel)
+                if vgl is None:
+                    return False
+                if op == ">=" and vgl < 0:
+                    return False
+                if op == "<=" and vgl > 0:
+                    return False
+                if op == ">" and vgl <= 0:
+                    return False
+                if op == "<" and vgl >= 0:
+                    return False
+                if op in ("=", "==") and vgl != 0:
+                    return False
+                if op == "!=" and vgl == 0:
+                    return False
+                break
+        else:
+            return False
+    return True
+
+
+def _override_untergrenze(spezifikation: object) -> Tuple[Optional[str], bool]:
+    """Liest aus einem `overrides`-Eintrag `(mindestversion, exakt)`."""
+    if not isinstance(spezifikation, str):
+        return None, False
+    wert = spezifikation.strip()
+    if not wert or wert.startswith("$"):
+        return None, False
+    if wert.startswith(">="):
+        ziel = wert[2:].strip()
+        if "," in ziel or " " in ziel:
+            ziel = ziel.split(",", 1)[0].split()[0]
+        return (ziel, False) if versions_schluessel(ziel) is not None else (None, False)
+    if wert.startswith("^") or wert.startswith("~"):
+        ziel = wert[1:].strip()
+        return (ziel, False) if versions_schluessel(ziel) is not None else (None, False)
+    if versions_schluessel(wert) is not None:
+        return wert, True
+    return None, False
+
+
+def pruefe_untergrenzen(root: Path) -> List[Befund]:
+    """A9: Sicherheits-Untergrenzen aus Vertrag und `package.json#overrides`.
+
+    Schließt die Offline-Lücke aus Alert #79 (`minimatch < 11.0.1`,
+    `glob < 14.0.2`): Einmal geheilte Schwachstellen verankern ihre
+    `first_patched_version` in `data/abhaengigkeits_schutz_vertrag.json`.
+    Fällt ein künftiger Merge, Rebase oder transitiver Bump darunter zurück,
+    schlägt `--check` sofort ohne Netz an.
+    """
+    befunde: List[Befund] = []
+    vertrag_pfad = root / SCHUTZ_VERTRAG_PFAD
+    mindest_map: Dict[Tuple[str, str], Tuple[str, str]] = {}
+
+    if vertrag_pfad.is_file():
+        doppelt: List[str] = []
+
+        def _paar_hook(paare: List[Tuple[str, object]]) -> Dict[str, object]:
+            gesehen_lokal: set[str] = set()
+            for schluessel, _ in paare:
+                if schluessel in gesehen_lokal and schluessel not in doppelt:
+                    doppelt.append(schluessel)
+                gesehen_lokal.add(schluessel)
+            return dict(paare)
+
+        try:
+            vertrag = json.loads(
+                vertrag_pfad.read_text(encoding="utf-8"),
+                object_pairs_hook=_paar_hook,
+            )
+        except json.JSONDecodeError as fehler:
+            befunde.append(
+                Befund(
+                    REGEL_UNTERGRENZE,
+                    SCHWERE_FEHLER,
+                    SCHUTZ_VERTRAG_PFAD,
+                    fehler.lineno,
+                    f"Schutz-Vertrag ist kein gültiges JSON: {fehler.msg}",
+                )
+            )
+            vertrag = None
+
+        if doppelt:
+            befunde.append(
+                Befund(
+                    REGEL_UNTERGRENZE,
+                    SCHWERE_FEHLER,
+                    SCHUTZ_VERTRAG_PFAD,
+                    1,
+                    f"Doppelte Schlüssel im Schutz-Vertrag: {', '.join(doppelt)}",
+                )
+            )
+
+        if isinstance(vertrag, dict):
+            eintraege = vertrag.get("mindestversionen")
+            if not isinstance(eintraege, dict):
+                befunde.append(
+                    Befund(
+                        REGEL_UNTERGRENZE,
+                        SCHWERE_FEHLER,
+                        SCHUTZ_VERTRAG_PFAD,
+                        1,
+                        "`mindestversionen` im Schutz-Vertrag muss ein Objekt sein.",
+                    )
+                )
+            else:
+                for roher_key, wert in sorted(eintraege.items()):
+                    if ":" not in roher_key:
+                        befunde.append(
+                            Befund(
+                                REGEL_UNTERGRENZE,
+                                SCHWERE_FEHLER,
+                                SCHUTZ_VERTRAG_PFAD,
+                                1,
+                                f"Ungültiger Schlüssel `{roher_key}` – erwartet `<oekosystem>:<paket>`.",
+                            )
+                        )
+                        continue
+                    oeko, paket = roher_key.split(":", 1)
+                    ab = ""
+                    hinweis = ""
+                    if isinstance(wert, str):
+                        ab = wert.strip()
+                    elif isinstance(wert, dict):
+                        ab = str(wert.get("ab") or "").strip()
+                        ghsa = wert.get("ghsa")
+                        if isinstance(ghsa, list) and ghsa:
+                            hinweis = ", ".join(str(x) for x in ghsa)
+                        elif isinstance(ghsa, str) and ghsa:
+                            hinweis = ghsa
+                    if versions_schluessel(ab) is None:
+                        befunde.append(
+                            Befund(
+                                REGEL_UNTERGRENZE,
+                                SCHWERE_FEHLER,
+                                SCHUTZ_VERTRAG_PFAD,
+                                1,
+                                f"Ungültige Mindestversion `{ab}` für `{roher_key}`.",
+                            )
+                        )
+                        continue
+                    mindest_map[(oeko.strip().lower(), paket.strip().lower())] = (ab, hinweis)
+
+    if mindest_map:
+        for dep in sammle_abhaengigkeiten(root):
+            if dep.herkunft == "range" or not dep.version:
+                continue
+            vorgabe = mindest_map.get((dep.oekosystem.lower(), dep.name.lower()))
+            if vorgabe is None:
+                continue
+            ab, ghsa_hinweis = vorgabe
+            if ist_version_unter(dep.version, ab):
+                zusatz = f" ({ghsa_hinweis})" if ghsa_hinweis else ""
+                befunde.append(
+                    Befund(
+                        REGEL_UNTERGRENZE,
+                        SCHWERE_FEHLER,
+                        dep.quelle,
+                        dep.zeile,
+                        f"`{dep.name}@{dep.version}` unterschreitet Sicherheits-Untergrenze "
+                        f"`>={ab}` aus `{SCHUTZ_VERTRAG_PFAD}`{zusatz}.",
+                    )
+                )
+
+    for manifest, lock in _manifest_paare(root):
+        if lock is None:
+            continue
+        try:
+            m_daten = json.loads(manifest.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            continue  # pruefe_manifest_paar meldet den JSON-Fehler bereits
+        overrides = m_daten.get("overrides")
+        if not isinstance(overrides, dict) or not overrides:
+            continue
+        try:
+            aufgeloest = parse_lockfile(lock.read_text(encoding="utf-8"), _rel(lock, root))
+        except Stoerung:
+            continue
+        for paket_name, spez in sorted(overrides.items()):
+            untergrenze, exakt = _override_untergrenze(spez)
+            if untergrenze is None:
+                continue
+            treffer_lock = [a for a in aufgeloest if a.name.lower() == paket_name.lower()]
+            for eintrag in treffer_lock:
+                if exakt and vergleiche_versionen(eintrag.version, untergrenze) != 0:
+                    befunde.append(
+                        Befund(
+                            REGEL_UNTERGRENZE,
+                            SCHWERE_FEHLER,
+                            eintrag.quelle,
+                            eintrag.zeile,
+                            f"`{eintrag.name}@{eintrag.version}` weicht vom exakten Override "
+                            f"`{untergrenze}` in `{_rel(manifest, root)}` ab.",
+                        )
+                    )
+                elif not exakt and ist_version_unter(eintrag.version, untergrenze):
+                    befunde.append(
+                        Befund(
+                            REGEL_UNTERGRENZE,
+                            SCHWERE_FEHLER,
+                            eintrag.quelle,
+                            eintrag.zeile,
+                            f"`{eintrag.name}@{eintrag.version}` unterschreitet Override "
+                            f"`>={untergrenze}` aus `{_rel(manifest, root)}`.",
+                        )
+                    )
+    return befunde
+
+
 def pruefe_struktur(root: Path) -> List[Befund]:
     """Alle Offline-Regeln – deterministisch, ohne Netz."""
     befunde: List[Befund] = []
@@ -766,6 +1064,7 @@ def pruefe_struktur(root: Path) -> List[Befund]:
     befunde += pruefe_actions(root)
     befunde += pruefe_doppelte(root)
     befunde += pruefe_laufzeit_installationen(root)
+    befunde += pruefe_untergrenzen(root)
     for muster in ("tools/n8n/docker-compose.yml", "tools/n8n/Dockerfile*"):
         for pfad in sorted(root.glob(muster)):
             befunde += parse_container(pfad.read_text(encoding="utf-8"), _rel(pfad, root))
@@ -851,8 +1150,17 @@ class DateiAdvisoryQuelle(AdvisoryQuelle):
         return list(self.daten.get(schluessel, []))
 
 
-def _normalisiere(roh: Dict[str, object]) -> Dict[str, str]:
-    """Bringt API- und Datei-Dialekt auf eine Form."""
+def _normalisiere(
+    roh: Dict[str, object],
+    anforderung: Optional[Anforderung] = None,
+) -> Dict[str, str]:
+    """Bringt API- und Datei-Dialekt auf eine Form.
+
+    Bei mehrzweigigen GHSA-Einträgen (z. B. `minimatch` mit Fixes `3.1.3`,
+    `9.0.6`, `10.2.3`, `11.0.1`) wird der zum abgefragten Paket und
+    Versionszweig passende, streng aufsteigende Fix gewählt – niemals ein
+    Downgrade auf einen älteren Major-Zweig.
+    """
     if "ghsa" in roh:  # Datei-Dialekt
         return {
             "ghsa": str(roh.get("ghsa", "")),
@@ -863,15 +1171,53 @@ def _normalisiere(roh: Dict[str, object]) -> Dict[str, str]:
     gefunden = roh.get("vulnerabilities") or []
     fix = ""
     if isinstance(gefunden, list):
-        for eintrag in gefunden:
-            if not isinstance(eintrag, dict):
-                continue
+        eintraege = [e for e in gefunden if isinstance(e, dict)]
+        if anforderung is not None:
+            passend_paket = []
+            for eintrag in eintraege:
+                paket = eintrag.get("package")
+                if not isinstance(paket, dict):
+                    continue
+                p_name = str(paket.get("name") or "").strip().lower()
+                p_oeko = str(paket.get("ecosystem") or "").strip().lower()
+                if p_name and p_name != anforderung.name.lower():
+                    continue
+                if p_oeko and p_oeko != anforderung.oekosystem.lower():
+                    continue
+                passend_paket.append(eintrag)
+            if passend_paket:
+                eintraege = passend_paket
+
+        kandidaten_bereich: List[str] = []
+        kandidaten_aufwaerts: List[str] = []
+        kandidaten_alle: List[str] = []
+        for eintrag in eintraege:
             kandidat = eintrag.get("first_patched_version")
             if isinstance(kandidat, dict):
                 kandidat = kandidat.get("identifier")
-            if kandidat:
-                fix = str(kandidat)
-                break
+            if not kandidat:
+                continue
+            kand_str = str(kandidat).strip()
+            if not kand_str:
+                continue
+            kandidaten_alle.append(kand_str)
+            if anforderung is not None and anforderung.version:
+                bereich = str(eintrag.get("vulnerable_version_range") or "").strip()
+                vgl = vergleiche_versionen(kand_str, anforderung.version)
+                if vgl is not None and vgl > 0:
+                    kandidaten_aufwaerts.append(kand_str)
+                    if bereich and _trifft_versionsbereich(anforderung.version, bereich):
+                        kandidaten_bereich.append(kand_str)
+
+        auswahl = kandidaten_bereich or kandidaten_aufwaerts
+        if auswahl:
+            auswahl_sortiert = sorted(
+                auswahl,
+                key=lambda v: versions_schluessel(v) or ((999999, 0, 0), 1, v),
+            )
+            fix = auswahl_sortiert[0]
+        elif anforderung is None and kandidaten_alle:
+            fix = kandidaten_alle[0]
     return {
         "ghsa": str(roh.get("ghsa_id", "")),
         "severity": str(roh.get("severity", "unknown")),
@@ -913,7 +1259,7 @@ def auditiere(
         treffer = quelle.suche(anforderung)
         bilanz.geprueft += 1
         for roh in treffer:
-            normal = _normalisiere(roh)
+            normal = _normalisiere(roh, anforderung)
             bilanz.treffer.append(
                 Treffer(
                     oekosystem=anforderung.oekosystem,
@@ -1184,6 +1530,86 @@ def run_selftest() -> List[str]:
     except Stoerung:
         pass
 
+    # --- 7 · A9-Untergrenzen & mehrzweigige Advisory-Normalisierung (#79) ---
+    with tempfile.TemporaryDirectory() as tmp_a9:
+        baum_a9 = Path(tmp_a9)
+        _schreibe(
+            baum_a9,
+            SCHUTZ_VERTRAG_PFAD,
+            json.dumps(
+                {
+                    "schema": 1,
+                    "mindestversionen": {
+                        "npm:minimatch": {"ab": "11.0.1", "ghsa": ["GHSA-g3hv-75wg-m249"]},
+                        "npm:glob": {"ab": "14.0.2", "ghsa": ["GHSA-3g3m-2fjr-6pw4"]},
+                    },
+                }
+            ),
+        )
+        _schreibe(
+            baum_a9,
+            "package.json",
+            json.dumps({"devDependencies": {"minimatch": "10.2.6"}, "overrides": {"glob": ">=14.0.4"}}),
+        )
+        _schreibe(
+            baum_a9,
+            "package-lock.json",
+            json.dumps(
+                {
+                    "lockfileVersion": 3,
+                    "packages": {
+                        "": {},
+                        "node_modules/minimatch": {"version": "10.2.6"},
+                        "node_modules/glob": {"version": "14.0.2"},
+                    },
+                }
+            ),
+        )
+        funde_a9 = pruefe_untergrenzen(baum_a9)
+        pruefe(
+            "A9/Vertrag+Override feuern",
+            len(funde_a9) == 2 and all(b.regel == REGEL_UNTERGRENZE for b in funde_a9),
+            f"gefeuert: {[b.als_dict() for b in funde_a9]}",
+        )
+        _schreibe(
+            baum_a9,
+            "package-lock.json",
+            json.dumps(
+                {
+                    "lockfileVersion": 3,
+                    "packages": {
+                        "": {},
+                        "node_modules/minimatch": {"version": "11.0.6"},
+                        "node_modules/glob": {"version": "14.0.4"},
+                    },
+                }
+            ),
+        )
+        pruefe("Gegenprobe/A9-sauber", pruefe_untergrenzen(baum_a9) == [])
+
+    mehrzweig_roh = {
+        "ghsa_id": "GHSA-7r86-cg39-jmmj",
+        "severity": "high",
+        "summary": "Mehrzweig-Test",
+        "vulnerabilities": [
+            {
+                "package": {"ecosystem": "npm", "name": "minimatch"},
+                "vulnerable_version_range": "< 3.1.3",
+                "first_patched_version": {"identifier": "3.1.3"},
+            },
+            {
+                "package": {"ecosystem": "npm", "name": "minimatch"},
+                "vulnerable_version_range": ">= 10.0.0, < 10.2.3",
+                "first_patched_version": {"identifier": "10.2.3"},
+            },
+        ],
+    }
+    norm_10 = _normalisiere(
+        mehrzweig_roh,
+        Anforderung("npm", "minimatch", "10.2.1", "package-lock.json", 0, "lock"),
+    )
+    pruefe("Normalisierung/kein Downgrade", norm_10["fixed"] == "10.2.3", f"bekam: {norm_10}")
+
     return fehler
 
 
@@ -1215,8 +1641,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
             for eintrag in fehler:
                 print(f"   · {eintrag}", file=sys.stderr)
             return 2
-        print("✅ Selbsttest bestanden (5 Parser, 8 Strukturregeln inkl. Ad-hoc-Install, "
-              "4 Gegenproben, Budget-Schutz).")
+        print("✅ Selbsttest bestanden (5 Parser, 9 Strukturregeln inkl. Ad-hoc-Install & "
+              "A9-Untergrenzen, 5 Gegenproben, Mehrzweig-Fix-Schutz, Budget-Schutz).")
         return 0
 
     if not args.check and not args.audit:

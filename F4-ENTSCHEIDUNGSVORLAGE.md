@@ -4,10 +4,10 @@
 Scorecard blockiert, bis der Herausgeber die heutigen Fassungen bestätigt.
 Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
-**Bezugsstand: 2026-11-10** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
+**Bezugsstand: 2026-11-11** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
 
-**82 offene Live-Befunde auf 20 Artikeln.** Davon sind **77** bereits früher entschieden und durch eine spätere Textänderung
-wieder geöffnet worden (fassungsgebundene Bindung, kein Rückfall). **5** Befunde sind neu.
+**90 offene Live-Befunde auf 22 Artikeln.** Davon sind **77** bereits früher entschieden und durch eine spätere Textänderung
+wieder geöffnet worden (fassungsgebundene Bindung, kein Rückfall). **13** Befunde sind neu.
 
 Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus `data/faktenfrische_befunde_state.json`,
 `data/faktenfrische_entscheidungen.yaml`, dem Scorecard-Siegel und den heutigen Artikeln.
@@ -20,6 +20,14 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 - `a54abc1cad73d20fb689` · `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` · Die konkreten Jahreskosten (z. B. 32 € für 10 W Standby) beruhen auf dem nicht belegten Strompreis und werden nicht als Modellrechnung gekennzeichnet.
 - `a7d1cf6485921e117919` · `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` · Der angegebene durchschnittliche Strompreis von 37,3 Cent/kWh (BDEW‑Schnitt) wird ohne Quellenangabe genannt.
 - `a7f69a854430d62a4a3e` · `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` · Die Empfehlung, dass ein günstigerer Arbeitspreis der zweite wichtigste Hebel sei, fehlt jede Quelle oder regulatorische Einordnung.
+- `33278b9e7942ebfdbbac` · `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` · Definition des Begriffs „Last Minute“ (maximal 14 Tage zwischen Buchung und Abreise) wird mit dem Deutschen Reiseverband angegeben, jedoch fehlt ein Nachweis.
+- `6ad7358a9afcfef3babb` · `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` · Angabe, dass Preisalarme keinen Tiefstpreis garantieren, wird nicht durch konkrete Zahlen oder Vergleichsstudien belegt.
+- `7c375a3e1a9bfab1468c` · `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` · Hinweis auf § 651r BGB (Insolvenzsicherung bei Pauschalreisen) enthält keinen Verweis auf eine Rechtsquelle oder Verbraucherzentrale‑Information.
+- `ea11d36614fa115503b4` · `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` · Behauptung, dass Nachlässe von bis zu 50 % nur Einzelfälle sind, wird ohne Quellenangabe präsentiert.
+- `f7b1c869dd8e442eaf16` · `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` · Aussage, dass der „beste Zeitpunkt zum Buchen“ ein Modellwert sei, bleibt vage und ohne messbare Daten oder Studien untermauert.
+- `98eb45f772ad7a0aac7b` · `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` · Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt im Text Referenzwerte (120 € Strom, 80 € Kfz), für die in der Quelle keine Marktdaten oder Durchschnittswerte als Beleg vorliegen.
+- `b7f0d52968d89cdf8c5b` · `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` · Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne Nennung konkreter rechtlicher Grundlagen (DSGVO) unpräzise, während die Quelle explizit auf rechtliche Verbraucherthemen fokussiert.
+- `be911855d67f998be662` · `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` · Der Ratgeber nennt keinen Regulierungsrahmen für Reisebuchungen (z. B. Fluggastrechte oder Stornierungsregeln), obwohl die Quelle diese als zentrale Informationsbereiche ausweist.
 
 ## `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026`
 
@@ -877,6 +885,59 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 - Im heutigen Text nicht mehr vorhanden: 11,93 Cent
 
+## `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp`
+
+- Datei-SHA256 (heute): `f71bb051e8ecd76e8fcbdd4eeaf19f8d756ad2b11e2a9bba7060b47b35147863`
+- Offene Live-Befunde: **5**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `33278b9e7942ebfdbbac` | luecke | **neu** | 14 Tage in Zeile 14 gekennzeichnet | Definition des Begriffs „Last Minute“ (maximal 14 Tage zwischen Buchung und Abreise) wird mit dem Deutschen Reiseverb… |
+| `6ad7358a9afcfef3babb` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Angabe, dass Preisalarme keinen Tiefstpreis garantieren, wird nicht durch konkrete Zahlen oder Vergleichsstudien belegt. |
+| `7c375a3e1a9bfab1468c` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Hinweis auf § 651r BGB (Insolvenzsicherung bei Pauschalreisen) enthält keinen Verweis auf eine Rechtsquelle oder Verb… |
+| `ea11d36614fa115503b4` | luecke | **neu** | 50 % in Zeile 10 gekennzeichnet | Behauptung, dass Nachlässe von bis zu 50 % nur Einzelfälle sind, wird ohne Quellenangabe präsentiert. |
+| `f7b1c869dd8e442eaf16` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Aussage, dass der „beste Zeitpunkt zum Buchen“ ein Modellwert sei, bleibt vage und ohne messbare Daten oder Studien u… |
+
+### `33278b9e7942ebfdbbac`
+
+**Befund:** Definition des Begriffs „Last Minute“ (maximal 14 Tage zwischen Buchung und Abreise) wird mit dem Deutschen Reiseverband angegeben, jedoch fehlt ein Nachweis.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 14: 14 Tage – gekennzeichnet („beispielwert“)
+
+### `6ad7358a9afcfef3babb`
+
+**Befund:** Angabe, dass Preisalarme keinen Tiefstpreis garantieren, wird nicht durch konkrete Zahlen oder Vergleichsstudien belegt.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `7c375a3e1a9bfab1468c`
+
+**Befund:** Hinweis auf § 651r BGB (Insolvenzsicherung bei Pauschalreisen) enthält keinen Verweis auf eine Rechtsquelle oder Verbraucherzentrale‑Information.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `ea11d36614fa115503b4`
+
+**Befund:** Behauptung, dass Nachlässe von bis zu 50 % nur Einzelfälle sind, wird ohne Quellenangabe präsentiert.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 10: 50 % – gekennzeichnet („modellwert“)
+
+### `f7b1c869dd8e442eaf16`
+
+**Befund:** Aussage, dass der „beste Zeitpunkt zum Buchen“ ein Modellwert sei, bleibt vage und ohne messbare Daten oder Studien untermauert.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
 ## `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage`
 
 - Datei-SHA256 (heute): `7f8e2a19d909e063f7e828bde8bafea29cab5ffed09a42083a4bfe9f8cb1ab07`
@@ -1024,6 +1085,43 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
+## `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen`
+
+- Datei-SHA256 (heute): `ca65c7c5a8a31668fbb6452ea920926e1317b2c4371fbb1b3974ef9d4ad30ea9`
+- Offene Live-Befunde: **3**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `98eb45f772ad7a0aac7b` | luecke | **neu** | 500 € in Zeile 67 gekennzeichnet · 120 € in Zeile 26 gekennzeichnet · 80 € in Zeile 25 gekennzeichnet | Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt im Text Referenzwerte (120 € Strom, 80 € Kfz), für… |
+| `b7f0d52968d89cdf8c5b` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne Nennung konkreter rechtlicher Grundlagen (DSGVO) u… |
+| `be911855d67f998be662` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Der Ratgeber nennt keinen Regulierungsrahmen für Reisebuchungen (z. B. Fluggastrechte oder Stornierungsregeln), obwoh… |
+
+### `98eb45f772ad7a0aac7b`
+
+**Befund:** Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt im Text Referenzwerte (120 € Strom, 80 € Kfz), für die in der Quelle keine Marktdaten oder Durchschnittswerte als Beleg vorliegen.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 67: 500 € – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 26: 120 € – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 25: 80 € – gekennzeichnet („modellrechnung“)
+
+### `b7f0d52968d89cdf8c5b`
+
+**Befund:** Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne Nennung konkreter rechtlicher Grundlagen (DSGVO) unpräzise, während die Quelle explizit auf rechtliche Verbraucherthemen fokussiert.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `be911855d67f998be662`
+
+**Befund:** Der Ratgeber nennt keinen Regulierungsrahmen für Reisebuchungen (z. B. Fluggastrechte oder Stornierungsregeln), obwohl die Quelle diese als zentrale Informationsbereiche ausweist.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
 ## `2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang`
 
 - Datei-SHA256 (heute): `d2e6413dcd25664720e776b35253dc2d483b322c861dc7191f8ea34ab2cce910`
@@ -1162,6 +1260,11 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 36759a5efe5e8e5163d
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 942922d1afd7844618e9 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d41f0d5ce8798df0211b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e139d0769faadd04392a --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 33278b9e7942ebfdbbac --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6ad7358a9afcfef3babb --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7c375a3e1a9bfab1468c --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ea11d36614fa115503b4 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden f7b1c869dd8e442eaf16 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 58f03a64adaaf8125959 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a7f5f01ef15a38839a0d --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden bcc2bdf06220d5097133 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
@@ -1173,6 +1276,9 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden af2ccb4222eeb195222
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d9c8b522bf1dcaed0340 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e2975509f3f130de0755 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f1704e45e970a8f4b078 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 98eb45f772ad7a0aac7b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden b7f0d52968d89cdf8c5b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden be911855d67f998be662 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4284fd2d9c9005e7af8f --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 84e247f17354e224c973 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a2a7dc69f10393af6531 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
