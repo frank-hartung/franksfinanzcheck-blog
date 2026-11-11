@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 10.11.2026 14:37 (Europe/Berlin)  
+> Automatisch aktualisiert: 11.11.2026 13:48 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -12,7 +12,7 @@
 
 ## Kommende Beiträge
 
-### Di, 10. November 2026
+### Mi, 11. November 2026
 - **18:00** ⏳ Wohngebäudeversicherung Vergleich: Worauf du achten musst — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/
 ### Sa, 14. November 2026

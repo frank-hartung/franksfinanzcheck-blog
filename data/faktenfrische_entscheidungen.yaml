@@ -3335,3 +3335,89 @@ entscheidungen:
     nur abgeleitete Bildzeile geaendert.'
   vorgaenger_geprueft_fassung: a628247a97b7075b144bba5ac67889b3906a6c749d71336b7c77d70b02b621e5
   folgeentscheidung: true
+- slug: 2026-10-14-heizperiode-vorbereiten-im-spaetsommer
+  befund_ursprung_slug: 2026-10-14-heizperiode-vorbereiten-im-spaetsommer
+  befund_id: 61ed9d03642fa5afa89e
+  befund_fassung: 03af3ebe8b01c8276c2d2ba9624807d080592390fa81c1c49ce047d9cf88135e
+  geprueft_fassung: a1f9905fbaec9bd99b0a1736e3b9b812ba98763e420998b05987139c39b71506
+  typ: praezision
+  beanstandung: Die pauschale Einordnung der Behördenseite als 'kein Beleg für Tipps'
+    greift zu kurz; die Fundstelle ist das zentrale Aufsichtsportal für den regulierten
+    Energiemarkt (Strom/Gas).
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
+  entschieden_am: '2026-11-11'
+  fassung_wechsel: true
+  begruendung: 'Text am 11.11.2026 praezisiert: Die Bundesnetzagentur wird nicht mehr
+    pauschal als ''kein Beleg fuer Tipps'' abgetan, sondern als Aufsichtsbehoerde
+    des regulierten Strom- und Gasmarkts und amtliche Fundstelle eingeordnet - mit
+    der klaren Grenze, dass sie keine festen Sparquoten belegt und keinen Dienst wie
+    CHECK24 empfiehlt.'
+- slug: 2026-10-14-heizperiode-vorbereiten-im-spaetsommer
+  befund_ursprung_slug: 2026-10-14-heizperiode-vorbereiten-im-spaetsommer
+  befund_id: bbd476563a6a52c57957
+  befund_fassung: 03af3ebe8b01c8276c2d2ba9624807d080592390fa81c1c49ce047d9cf88135e
+  geprueft_fassung: a1f9905fbaec9bd99b0a1736e3b9b812ba98763e420998b05987139c39b71506
+  typ: luecke
+  beanstandung: Der Artikel verweist für Informationen zum Stromverbrauch von Routern
+    auf die Bundesnetzagentur, verlinkt jedoch die Fachabteilung für Energie statt
+    die zuständige Abteilung für Telekommunikation.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
+  entschieden_am: '2026-11-11'
+  fassung_wechsel: true
+  begruendung: 'Router-Absatz korrigiert: Der Verweis auf die Energie-Fachabteilung
+    der Bundesnetzagentur ist entfernt; der Text sagt jetzt, dass es keine amtliche
+    Liste mit einem festen Wert je Geraet gibt. Der Router-Stromverbrauch wird ueber
+    Herstellerangaben und ein Steckdosen-Messgeraet bestimmt.'
+- slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  befund_ursprung_slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  befund_id: 98eb45f772ad7a0aac7b
+  befund_fassung: 66ed7c316cbe7b939230e8e79bda1f6fc9dcd44ef556c3aacf4f5c9dde9e92f7
+  geprueft_fassung: 10b0aed58f99a8134577d0130f00dd31b5bcd43ff1baf6313ff30cfb95086cfa
+  typ: luecke
+  beanstandung: Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt
+    im Text Referenzwerte (120 € Strom, 80 € Kfz), für die in der Quelle keine Marktdaten
+    oder Durchschnittswerte als Beleg vorliegen.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
+  entschieden_am: '2026-11-11'
+  fassung_wechsel: true
+  begruendung: 'PIN-Beschreibung am 11.11.2026 auf die Modellrechnung des Artikels
+    umgestellt: Die 500 Euro stehen jetzt ausdruecklich als frei gewaehlte Annahmen
+    der Beispielrechnung, nicht als Marktdurchschnitt oder Sparversprechen; der Fliesstext
+    kennzeichnet die Betraege bereits als solche.'
+- slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  befund_ursprung_slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  befund_id: b7f0d52968d89cdf8c5b
+  befund_fassung: 66ed7c316cbe7b939230e8e79bda1f6fc9dcd44ef556c3aacf4f5c9dde9e92f7
+  geprueft_fassung: 10b0aed58f99a8134577d0130f00dd31b5bcd43ff1baf6313ff30cfb95086cfa
+  typ: praezision
+  beanstandung: Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne
+    Nennung konkreter rechtlicher Grundlagen (DSGVO) unpräzise, während die Quelle
+    explizit auf rechtliche Verbraucherthemen fokussiert.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
+  entschieden_am: '2026-11-11'
+  fassung_wechsel: true
+  begruendung: 'FAQ-Antwort zur Datensicherheit ergaenzt: Die DSGVO (Verordnung (EU)
+    2016/679) ist als rechtlicher Rahmen genannt, samt Verarbeitungsgrundlage und
+    Rechten auf Auskunft, Berichtigung, Loeschung und Widerruf. Die Antwort bleibt
+    bei der Eigenentscheidung ueber die Einwilligung.'
+- slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  befund_ursprung_slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  befund_id: be911855d67f998be662
+  befund_fassung: 66ed7c316cbe7b939230e8e79bda1f6fc9dcd44ef556c3aacf4f5c9dde9e92f7
+  geprueft_fassung: 10b0aed58f99a8134577d0130f00dd31b5bcd43ff1baf6313ff30cfb95086cfa
+  typ: luecke
+  beanstandung: Der Ratgeber nennt keinen Regulierungsrahmen für Reisebuchungen (z.
+    B. Fluggastrechte oder Stornierungsregeln), obwohl die Quelle diese als zentrale
+    Informationsbereiche ausweist.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
+  entschieden_am: '2026-11-11'
+  fassung_wechsel: true
+  begruendung: 'FAQ-Antwort zu Flugreisen ergaenzt: Die EU-Fluggastrechte-Verordnung
+    (EG) Nr. 261/2004 ist als Regulierungsrahmen fuer Annullierung, grosse Verspaetung
+    und Nichtbefoerderung genannt; Storno-, Zahlungs- und Mietbedingungen verweisen
+    auf die Vertragsbedingungen des Anbieters.'

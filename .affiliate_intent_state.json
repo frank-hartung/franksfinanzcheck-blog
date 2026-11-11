@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-10 12:00:17 UTC",
+ "generated_at": "2026-11-11 11:37:38 UTC",
  "exit_code": 0,
  "modus": "FIX",
  "checked_articles": 127,
- "checked_links": 302,
+ "checked_links": 303,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -164,7 +164,7 @@
   {
    "code": "IW4",
    "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
-   "line": 262,
+   "line": 250,
    "route": "strom",
    "slot": "end",
    "owner": "human",
@@ -185,28 +185,6 @@
   },
   {
    "code": "IW2",
-   "slug": "2026-11-09-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-   "line": 183,
-   "route": "allgemein",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
-   "slug": "2026-11-09-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-   "line": 199,
-   "route": "allgemein",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
    "slug": "2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif",
    "line": 110,
    "route": "allgemein",
@@ -218,7 +196,18 @@
   },
   {
    "code": "IW2",
-   "slug": "2026-11-09-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+   "slug": "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
+   "line": 258,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
    "line": 18,
    "route": "allgemein",
    "slot": "top",
@@ -229,7 +218,7 @@
   },
   {
    "code": "IW2",
-   "slug": "2026-11-09-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+   "slug": "2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
    "line": 60,
    "route": "allgemein",
    "slot": "mid",
@@ -240,14 +229,36 @@
   },
   {
    "code": "IW2",
-   "slug": "2026-11-09-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-   "line": 132,
+   "slug": "2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+   "line": 131,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
    "severity": "P3",
    "blocking": false,
    "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
+   "line": 147,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „DSL- & Internettarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+   "line": 275,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   }
  ],
  "errors": []

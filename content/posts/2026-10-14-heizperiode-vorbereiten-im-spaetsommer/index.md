@@ -26,8 +26,8 @@ quellen:
     titel: "Bundesnetzagentur - Energie"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
-faktencheck: 2026-10-15
-lastmod: 2026-10-16
+faktencheck: 2026-11-11
+lastmod: 2026-11-11
 kurzantwort: "Prüfe Heizkörper nach Bedarf, messe den Verbrauch und vergleiche Jahreskosten inklusive Grundpreis. Entlüften hat keine garantierte Sparquote; 20 °C sind nur eine mögliche Orientierung. Technische und hygienische Einstellungen gehören in fachkundige Hände."
 ---
 
@@ -85,7 +85,7 @@ Kalte Außenwände brauchen Schutz vor Schimmel. Ein starkes Auskühlen der Räu
 
 Ein Router im Betrieb braucht mehr Strom als ein Gerät im Standby. Der echte Hunger nach Strom hängt vom Modell ab. Die aktiven Funktionen spielen dafür eine große Rolle.
 
-Hinweise dazu findest du oft in den Daten vom Hersteller. Mit einem Messgerät für die Steckdose erfährst du den echten Wert. Allgemeine Zahlen für alle Router gibt es nicht. Selbst die Liste der Bundesnetzagentur liefert hier keinen festen Wert für dein Gerät.
+Hinweise dazu findest du oft in den Daten vom Hersteller. Mit einem Messgerät für die Steckdose erfährst du den echten Wert. Allgemeine Zahlen für alle Router gibt es nicht. Eine amtliche Liste mit einem festen Wert für dein Gerät gibt es nicht.
 
 Trenne nur solche Geräte vom Netz, die du gerade nicht brauchst. Beim Router hängen oft viele Dienste an der Leitung. Das Telefon ist so ein Fall, Geräte im Smart-Home auch.
 
@@ -122,7 +122,7 @@ Hier sparst du 120 € im Jahr. Ist der Grundpreis beim neuen Anbieter aber um 
 
 Nutze für deine Suche nach Infos viele verschiedene Wege. Schau direkt bei den Anbietern und auf Portalen nach. Kein Weg allein zeigt dir sicher den kleinsten Preis.
 
-Einen guten Einstieg bietet die Seite der [Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html). Diese Seite ist aber kein Beleg für feste Quoten beim Sparen. Sie ist auch keine Empfehlung für den Dienst von CHECK24.
+Einen guten Einstieg in die Regeln des Strom- und Gasmarkts bietet die Seite der [Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html). Sie ist die Aufsichtsbehörde für den regulierten Energiemarkt und damit eine amtliche Fundstelle – feste Sparquoten belegt sie aber nicht. Eine Empfehlung für den Dienst von CHECK24 ist sie ebenfalls nicht.
 
 ## Warmwasser und Heizkurve: keine pauschalen Eingriffe
 
@@ -183,7 +183,7 @@ Was bei dir wirklich gilt, zeigen nur dein Zähler, dein Messgerät und dein Ver
 
 ## Quellen und Einordnung
 
-Dieser Text wurde am **15. Oktober 2026** für die Ausgabe #763 fachlich korrigiert und am **16. Oktober 2026** redaktionell geglättet. Die Seite der Bundesnetzagentur dient als Start für Infos vom Amt. Sie ist kein Beweis für alle Tipps im Haushalt.
+Dieser Text wurde am **15. Oktober 2026** für die Ausgabe #763 fachlich korrigiert und am **16. Oktober 2026** redaktionell geglättet. Am **11. November 2026** wurde die Einordnung der Bundesnetzagentur präzisiert: Sie ist die Aufsichtsbehörde für Strom und Gas und eine amtliche Fundstelle – feste Sparquoten belegt sie nicht.
 
 Alle Beispiele für die Rechnung nutzen eigene Annahmen. Wir haben dafür fiktive Zahlen gewählt. Es wurden keine Preise von echten Anbietern für diesen Text genutzt. Messwerte für einzelne Geräte stammen nicht aus einer neuen Studie.
 

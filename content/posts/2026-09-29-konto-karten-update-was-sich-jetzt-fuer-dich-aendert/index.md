@@ -27,7 +27,7 @@ quellen:
     url: "https://www.tagesschau.de/multimedia/sendung/tagesschau24/boerselive/video-1659176.html"
     herausgeber: "tagesschau"
     datum: "2026-10-02"
-faktencheck: 2026-10-02
+faktencheck: 2026-11-11
 kurzantwort: "Viele Banken stellen ihre Standardkarten auf kostenlose Debit-Visas oder Mastercards um. Für die herkömmliche Girocard werden oft Gebühren von etwa 0,99 Euro monatlich erhoben. Da die Maestro-Funktion seit Juli 2023 schrittweise eingestellt wird, sollten Kunden prüfen, ob ihre Karte bereits auf den neuen Debit-Standard aktualisiert wurde."
 ---
 
