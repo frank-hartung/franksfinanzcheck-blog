@@ -264,6 +264,57 @@ Wachen-Defekt). `governance_contract --quick` ✅ 47 Regeln.
 
 ---
 
+## 7b · Ein fremder Blocker, der offen bleibt (und offen bleiben muss)
+
+Der Merge mit `main` (Stand `b56e915`, 11.11.) ist konfliktfrei – aber der
+Regressionslauf bleibt rot, und zwar **nicht** an dieser Arbeit. `main` selbst
+ist seit Stunden rot, mit demselben Bild wie mein Zweig:
+
+| Prüfung | Ergebnis |
+|---|---|
+| `scripts/tests/test_faktenfrische_1072.py` auf **`origin/main`** (eigener Worktree) | **9 Failures** — 5 Befunde × (Anker + Beleg) |
+| derselbe Test auf meiner Branch (gemergt) | identisch 9 Failures, **gleiche** Befund-IDs |
+| Artikel-Datei | bytegleich mit `main` (`sha256 d2e6413d…`) |
+| Register `data/faktenfrische_befunde_1072.yaml` | bytegleich mit `main` |
+
+**Ursache, belegt am Commit-Baum:** `dcbd416` („fix(content): Quellenkette
+Waschmaschinen-Artikel (WF-7B6B #1148)“, PR **#1163**) hat den Artikel
+`2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang`
+**neu geschrieben** — Quellen ersetzt, Kurzantwort gekürzt, Abschnitte
+gestrichen. Das #1072-Register und die 47 Entscheidungen wurden **nicht**
+mitgezogen. Damit gilt:
+
+- die fünf Anker („kann die Lager der Maschine beschädigen“, „je nach Gerät
+  und Häufigkeit“, „kann die Fixkosten senken“, „Modellbeispiel“,
+  „im Modelljahr rund 5 €“, „Beispielwerte“) stehen **nicht mehr** im Text;
+- die Beleg-URL der fünf Befunde (Bundesnetzagentur-Startseite) steht
+  **nicht** in den neuen Artikelquellen — sie stand dort auch vorher nie,
+  sie war der Beleg der *Redaktionsprüfung*, nicht eine Artikelquelle.
+
+**Warum ich das nicht selbst „repariere“:** Ein neuer Anker und eine neue
+Beleg-URL wären eine **menschliche Fachfreigabe** (YMYL) — genau der Vorgang,
+den dieses Repo mit #1072/#1127 installiert hat und den `C15` („Beweisen ist
+nicht Heilen“) verbietet. Ein Agent, der die Prüffassung fortschreibt, weil
+sie nicht mehr passt, hebt die Prüfung auf. Ich habe deshalb **nichts** an
+`faktenfrische_befunde_1072.yaml`, `faktenfrische_entscheidungen.yaml` oder
+dem Artikel geändert.
+
+**Was der Befund zusätzlich zeigt (Werkzeug-Lücke, nicht repariert):**
+`test_faktenfrische_1072` läuft **in keinem Pull-Request-Gate**
+(`bestand-regression-wache.yml` und `deploy.yml` rufen nur die
+996er-Datei). Aufgefallen ist der Schaden erst in der vollen
+`unittest discover`-Suite des `regression`-Jobs — nach dem Merge von #1163.
+Ein Test, der erst nach dem Merge läuft, hält keinen Merge auf.
+
+**Was zu tun ist (Inhaber/Redaktion):** Die fünf Befunde am **heutigen**
+Text neu entscheiden (`python3 scripts/faktenfrische_befund_ledger.py
+--entscheiden <id> --von … --begruendung …`) oder das Register auf die
+#1163-Fassung umbinden — die Werkzeuge dafür liegen bereit
+(`faktenfrische_befund_akte.py`, `--struktur-pruefen`). Der Ledger selbst
+meldet für diesen Artikel korrekt `ueberholt`.
+
+---
+
 ## 8 · Restrisiken, bewusst benannt
 
 | Risiko | Wirkung | Gegenmaßnahme |
