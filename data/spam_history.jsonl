@@ -463,3 +463,5 @@
 {"ts": "2026-11-12T12:59:39Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden", "rules": ["B2", "B3", "B5"]}
 {"ts": "2026-11-12T12:59:39Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
 {"ts": "2026-11-12T12:59:40Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 12}
+{"ts": "2026-11-12T20:19:23Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
+{"ts": "2026-11-12T20:19:23Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 12}
