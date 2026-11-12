@@ -144,7 +144,7 @@ So gehst du vor, um systematisch den besten Preis zu finden:
 
 Wer starr an einem Datum festhält, verliert fast immer. Die Algorithmen der Airlines erkennen hohe Nachfrage sofort. Wenn in einem Bundesland die Ferien beginnen, steigen die Preise sprunghaft an.
 
-In der Modellrechnung mit einer Annahme, einen Tag früher oder zwei Tage später zu fliegen, ergibt sich oft eine deutliche Ersparnis. In unserem Modell gehen wir davon aus, dass eine Verschiebung um zwei Tage die Kosten um bis zu 30 % senken kann (Annahme: Ticketpreis = 200 € am Freitag vs. 140 € am Mittwoch). Das ist eine einfache Art, wie du deine **Reisekosten sparen** kannst.
+In der Modellrechnung mit einer Annahme, einen Tag früher oder zwei Tage später zu fliegen, ergibt sich oft eine deutliche Ersparnis. In unserem Modell gehen wir davon aus, dass eine Verschiebung um zwei Tage die Kosten um bis zu 30 % senken kann (Annahme: Ticketpreis = 200 € am Freitag vs. 140 € am Mittwoch). Das ist eine einfache Art, wie du deine **[Reisekosten](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/) sparen** kannst.
 
 Auch das Ziel selbst bietet Sparpotenzial. Muss es die bekannte Kanaren‑Insel sein?
 

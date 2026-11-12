@@ -85,7 +85,7 @@ Dabei nutzen wir den 4K-Prüfpfad von FranksFinanzcheck für deine Kostenkontrol
 
 **Das Wichtigste in Kürze**
 - **Optimale Füllmenge:** Eine Handbreit Platz über der Wäsche sorgt für die beste Reinigungsleistung und spart Energie.
-- **Kostenfaktor:** In der Modellrechnung kostet eine volle Ladung rund 0,57 Euro, zwei halbe Ladungen kosten rund 0,85 bis 0,99 Euro.
+- **Kostenfaktor:** In der Modellrechnung kostet eine volle Ladung rund 0,57 €, zwei halbe Ladungen kosten rund 0,85 bis 0,99 €.
 - **Verschleißschutz:** Forum Waschen rät, die Nennbeladung des Geräts nicht zu überschreiten, weil sonst Zuverlässigkeit und Gerätesicherheit leiden können. Leere vor dem Waschen alle Taschen.
 - **Fixkosten-Check:** Wer beim Waschen spart, sollte auch seinen Stromtarif prüfen, um das volle Sparpotenzial zu nutzen.
 
@@ -185,26 +185,26 @@ Wir erstellen eine Beispielrechnung für einen Haushalt.
 
 **Annahmen für die Modellrechnung:**
 - **Volle Ladung:** 0,9 kWh Strom und 50 Liter Wasser pro Waschgang. Vattenfall nennt für ein mittelaltes Gerät 0,9 kWh pro Waschgang und etwa 49 Liter Wasser pro Waschgang, unabhängig vom Füllstand.
-- **Halbe Ladung:** 0,7 kWh Strom pro Waschgang. Das entspricht rund 22 Prozent weniger als bei voller Ladung. Stromauskunft nennt eine Ersparnis von 20 bis 30 Prozent.
+- **Halbe Ladung:** 0,7 kWh Strom pro Waschgang. Das entspricht rund 22 % weniger als bei voller Ladung. Stromauskunft nennt eine Ersparnis von 20 bis 30 %.
 - **Wasser bei halber Ladung:** 35 bis 50 Liter pro Waschgang. Die Obergrenze entspricht dem Vattenfall-Wert, der unabhängig vom Füllstand gilt. Die Untergrenze von 35 Litern ist eine Szenarioannahme für Geräte mit Mengenautomatik und keine Herstellerangabe.
-- **Strompreis:** 0,373 Euro pro kWh. Das ist der Haushaltsdurchschnitt laut BDEW-Strompreisanalyse vom Oktober 2026. Dein Tarif kann davon abweichen.
-- **Wasser und Abwasser:** 4,68 Euro pro Kubikmeter brutto. Das ist der Bundesdurchschnitt 2025 (Trinkwasser 2,06 Euro plus Abwasser 2,62 Euro) laut Statistischem Bundesamt, zitiert über eine Sekundärquelle. Grundgebühren sind nicht enthalten.
+- **Strompreis:** 0,373 € pro kWh. Das ist der Haushaltsdurchschnitt laut BDEW-Strompreisanalyse vom Oktober 2026. Dein Tarif kann davon abweichen.
+- **Wasser und Abwasser:** 4,68 € pro Kubikmeter brutto. Das ist der Bundesdurchschnitt 2025 (Trinkwasser 2,06 € plus Abwasser 2,62 €) laut Statistischem Bundesamt, zitiert über eine Sekundärquelle. Grundgebühren sind nicht enthalten.
 - **Haushalt:** 100 volle oder 200 halbe Ladungen pro Jahr bei gleicher Wäschemenge.
 
 **Rechnung für 100 volle Ladungen (Beispielrechnung):**
-- [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/): 100 x 0,9 kWh x 0,373 €/kWh = 33,57 € (Ergebnis der Modellrechnung).
-- Wasserkosten: 100 x 0,050 m³ x 4,68 €/m³ = 23,40 € (Ergebnis der Modellrechnung).
-- Gesamtkosten pro Jahr: 56,97 € (Ergebnis der Modellrechnung).
+- [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/): 100 x 0,9 kWh x 0,373 €/kWh = 33,57 € (Ergebnis der Modellrechnung).
+- Wasserkosten: 100 x 0,050 m³ x 4,68 €/m³ = 23,40 € (Ergebnis der Modellrechnung).
+- Gesamtkosten pro Jahr: 56,97 € (Ergebnis der Modellrechnung).
 
 **Rechnung für 200 halbe Ladungen (Beispielrechnung):**
-- Stromkosten: 200 x 0,7 kWh x 0,373 €/kWh = 52,22 € (Ergebnis der Modellrechnung).
-- Wasserkosten: 200 x 0,035 m³ x 4,68 €/m³ = 32,76 € bei 35 Litern, bzw. 200 x 0,050 m³ x 4,68 €/m³ = 46,80 € bei 50 Litern (Ergebnis der Modellrechnung).
-- Gesamtkosten pro Jahr: 84,98 € (35 Liter) bis 99,02 € (50 Liter) (Ergebnis der Modellrechnung).
+- [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/): 200 x 0,7 kWh x 0,373 €/kWh = 52,22 € (Ergebnis der Modellrechnung).
+- Wasserkosten: 200 x 0,035 m³ x 4,68 €/m³ = 32,76 € bei 35 Litern, bzw. 200 x 0,050 m³ x 4,68 €/m³ = 46,80 € bei 50 Litern (Ergebnis der Modellrechnung).
+- Gesamtkosten pro Jahr: 84,98 € (35 Liter) bis 99,02 € (50 Liter) (Ergebnis der Modellrechnung).
 
 **Differenz (Beispielrechnung):**
-In diesem Modell spart der Haushalt 28 bis 42 Euro pro Jahr durch volle statt halber Ladungen (Ergebnis der Modellrechnung).
-Über zehn Jahre summiert sich das auf 280 bis 420 Euro, ohne Preissteigerungen (Ergebnis der Berechnung).
-Liegt der Wasserpreis in deiner Gemeinde höher, steigt die Differenz um etwa 0,60 bis 1,60 Euro pro Jahr. In Mecklenburg-Vorpommern lag der Durchschnitt 2025 laut Statistischem Amt bei 5,00 Euro pro Kubikmeter. Dann ergibt sich eine Differenz von rund 28,65 bis 43,65 Euro.
+In diesem Modell spart der Haushalt 28 bis 42 € pro Jahr durch volle statt halber Ladungen (Ergebnis der Modellrechnung).
+Über zehn Jahre summiert sich das auf 280 bis 420 €, ohne Preissteigerungen (Ergebnis der Berechnung).
+Liegt der Wasserpreis in deiner Gemeinde höher, steigt die Differenz um etwa 0,60 bis 1,60 € pro Jahr. In Mecklenburg-Vorpommern lag der Durchschnitt 2025 laut Statistischem Amt bei 5,00 € pro Kubikmeter. Dann ergibt sich eine Differenz von rund 28,65 bis 43,65 €.
 Nicht eingerechnet sind Waschmittel, Trocknerstrom und Reparaturkosten, weil dafür in diesem Modell keine belastbaren Quellenwerte vorliegen.
 
 ## Warum lohnt sich der Blick auf den Stromtarif?
@@ -300,7 +300,7 @@ Das erfordert eine hohe Heizleistung.
 Zudem wird oft mehr Wasser verwendet, um das Waschmittel schneller auszuspülen.
 
 ### Lohnt sich eine halbe Ladung, wenn ich Strom sparen will?
-Nur bedingt. Eine halbe Trommel spart laut Stromauskunft nur 20 bis 30 Prozent Strom gegenüber einer vollen Ladung.
+ Eine halbe Trommel spart laut Stromauskunft nur 20 bis 30 % Strom gegenüber einer vollen Ladung; das ist ein Modellwert.
 Pro Kilogramm Wäsche steigt der Verbrauch daher. Forum Waschen weist darauf hin, dass weniger Wäsche zwar den absoluten Energieverbrauch senkt, aber den Verbrauch pro Kilo erhöht.
 
 ### Muss ich das Waschmittel bei einer halben Ladung halbieren?

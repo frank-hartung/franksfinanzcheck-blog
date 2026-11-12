@@ -172,7 +172,7 @@ Damit du nichts vergisst, hier eine kurze Liste für deinen nächsten Prüftermi
 
 - [ ] Aktueller Jahresverbrauch in kWh bekannt?
 - [ ] Zählernummer griffbereit?
-- [ ] Kündigungsfrist des alten Vertrags geprüft?
+- [ ] [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) des alten Vertrags geprüft?
 - [ ] Siegel für echten Ökostrom (ok-power oder Grüner Strom) vorhanden?
 - [ ] Preisgarantie für die gesamte Mindestlaufzeit inkludiert?
 - [ ] Keine Vorauskasse oder Paketpreise gewählt?

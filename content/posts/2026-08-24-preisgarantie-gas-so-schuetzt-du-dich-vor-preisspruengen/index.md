@@ -42,7 +42,7 @@ faktencheck: 2026-11-01
 
 Eine [Preisgarantie beim Gas](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/) klingt beruhigend. Springt der Börsenpreis, warnt schnell eine Schlagzeile.
 
-Sollst du jetzt sofort einen Vertrag für zwei Jahre unterschreiben? Bleib ruhig. Der Preis an der Börse wirkt nicht eins zu eins und nicht sofort auf deinen Tarif als Kunde.
+Sollst du jetzt sofort einen Vertrag für zwei Jahre unterschreiben; das ist ein Modellwert? Bleib ruhig. Der Preis an der Börse wirkt nicht eins zu eins und nicht sofort auf deinen Tarif als Kunde.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -53,13 +53,10 @@ Wichtig wird es erst, wenn dein Anbieter den Preis wirklich ändert oder deine G
 💡 **Schnell-Tipp von FranksFinanzcheck:** Tarife kannst du über unseren Partner-Vergleich prüfen: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-![Merkkarte: Kernaussagen zu Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-merkkarte. svg)
-
-*Abbildung: Merkkarte zu „[Preisgarantie Gas](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/): Was bei Preiserhöhung hilft“ (eigene Darstellung aus diesem Beitrag).*
-
 ![Merkkarte: Kernaussagen zu Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-merkkarte.svg)
 
 *Abbildung: Merkkarte zu „Preisgarantie Gas: Was bei Preiserhöhung hilft“ (eigene Darstellung aus diesem Beitrag).*
+
 
 ## Wenn ein neuer Preis im Brief steht
 
@@ -83,7 +80,7 @@ Mach ein Foto vom Zähler, bevor ein neuer Preis gilt. Speichere Brief, Vertrag 
 - Kündige bei knapper Sonderfrist selbst und nachweisbar.
 - Schließe keinen teuren Tarif nur aus Angst vor einer Schlagzeile ab.
 
-## Warum ein Börsensprung nicht morgen auf deiner Rechnung steht
+## Warum ein Börsensprung nicht morgen auf deiner Rechnung steht?
 
 Versorger kaufen Gas zu verschiedenen Zeiten und über getrennte Verträge ein. Dazu kommen Netz-Kosten, Vertrieb, Steuern, Abgaben und Umlagen. Dein Gaspreis ist also kein Live-Ticker vom Großhandel.
 
@@ -114,7 +111,7 @@ Angenommen, dein Verbrauch liegt bei 20.000 kWh. Tarif A kostet 10,8 Cent pro kW
 | A steigt nach 6 Monaten für 60 % des Verbrauchs um 1,5 ct | 2.520 € | 2.440 € |
 | A sinkt nicht, Marktangebote werden 1 ct günstiger | 2.340 € bis Wechsel | 2.440 € gebunden |
 
-Die zweite Zeile rechnet mit 12.000 kWh × 1,5 Cent = 180 € Mehrkosten. Das ist ein Modellwert. Tarif B kostet anfangs 100 € mehr. In diesem Fall wäre er aber 80 € günstiger.
+Die zweite Zeile rechnet mit 12.000 kWh × 1,5 Cent = 180 € Mehrkosten; das ist ein Beispielwert. Das ist ein Modellwert. Tarif B kostet anfangs 100 € mehr. In diesem Fall wäre er aber 80 € günstiger.
 
 Das ist keine Vorhersage. Es zeigt nur den Preis für die Sicherheit. Eine Garantie kauft dir Planung – keine sichere Ersparnis.
 
@@ -152,17 +149,15 @@ Rechne den neuen Jahrespreis aus und vergleiche ihn. Wenn ein Sonderkündigungsr
 
 Kündige selbst, schriftlich, und verlange eine Bestätigung. Beim normalen Wechsel kann der neue Anbieter die Kündigung für dich übernehmen. Bei einer Sonderkündigung wegen der Erhöhung rät die Bundesnetzagentur: Handle selbst.
 
-![Gliederung des Beitrags: Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-ablauf. svg)
+![Gliederung des Beitrags: Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-ablauf.svg)
 
 *Abbildung: Gliederung zu „Preisgarantie Gas: Was bei Preiserhöhung hilft“ – 5 Stationen von „Wenn ein neuer Preis im Brief steht“ bis „Preisänderung erhalten: diese fünf Punkte markieren“ (eigene Darstellung).*
 
-![Gliederung des Beitrags: Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-ablauf.svg)
-
 ## Jahrespreis nach einer Erhöhung rechnen
 
-Der Arbeitspreis steigt von 10,5 auf 12,0 Cent. Der Unterschied beträgt 1,5 Cent pro kWh im Rechenfall.
+Der Arbeitspreis steigt von 10,5 auf 12,0 Cent; das ist ein Modellwert. Der Unterschied beträgt 1,5 Cent pro kWh im Rechenfall.
 
-Bei 18.000 kWh wären das für ein volles Jahr **270 €**. Das ist ein Rechenbeispiel.
+Bei 18.000 kWh wären das für ein volles Jahr **270 €**; das ist ein Rechenbeispiel. Das ist ein Rechenbeispiel.
 
 Gilt der neue Preis nur für einen Teil des Abrechnungsjahres, musst du den Verbrauch zeitanteilig aufteilen. Gasverbrauch fällt nicht gleichmäßig an. Der Winter wiegt stärker.
 
@@ -194,7 +189,7 @@ Prüfe beim neuen Tarif:
 - Zahlungsweise,
 - Preis im Folgejahr.
 
-Eine längere Garantie ist nicht automatisch sicherer. Wenn du dafür schon am Start 2 Cent pro kWh mehr zahlst, kostet die Absicherung bei 20.000 kWh 400 € jährlich.
+ Wenn du dafür schon am Start 2 Cent pro kWh mehr zahlst, kostet die Absicherung bei 20.000 kWh 400 € jährlich; das ist ein Rechenbeispiel.
 
 ## Verbrauch ist dein zweites Sicherheitsnetz
 
@@ -221,7 +216,7 @@ Erhöhung widerspricht der Garantie, Schreiben ist intransparent oder neuer Jahr
 
 Auch Schweigen ist ein Anlass zum Prüfen. Läuft die Garantie aus, kann der Vertrag zunächst zum bisherigen Preis weitergehen. Dein Schutz gegen spätere Änderungen ist dann aber weg.
 
-Rechne vier bis acht Wochen vorher den aktuellen Jahrespreis und vergleiche ihn mit neuen Angeboten. Kündige nicht vorschnell, wenn dein Vertrag weiter günstig ist. Notiere stattdessen, wie flexibel du nach der Laufzeit wechseln kannst.
+Rechne vier bis acht Wochen vorher den aktuellen Jahrespreis und vergleiche ihn mit neuen Angeboten; das ist eine Modellannahme. Kündige nicht vorschnell, wenn dein Vertrag weiter günstig ist. Notiere stattdessen, wie flexibel du nach der Laufzeit wechseln kannst.
 
 Es gibt drei mögliche Entscheidungen:
 
@@ -260,6 +255,8 @@ Behandle beides getrennt. So verlierst du weder die Wechselfrist noch den Überb
 
 Prüfe nach dem Wechsel auch die Schlussrechnung. Ein sauberer neuer Vertrag heilt keinen falschen Endstand beim alten Anbieter.
 
+**Faustregel:** Eine Garantie ist nur so viel wert wie ihre Laufzeit; prüfe, was nach dem Ende der Zusage gilt.
+
 ## Fazit: Auf Schreiben reagieren, nicht auf Schlagzeilen
 
 Preissprünge am Markt verdienen Aufmerksamkeit, aber keine Panik. Entscheidend ist dein Vertrag. Prüfe Garantie, neue Preise und Frist; rechne danach den Jahresbetrag.
@@ -279,7 +276,7 @@ Haushaltskunden müssen grundsätzlich mindestens einen Monat vor der Änderung 
 **Bleibt mein Abschlag trotz Garantie gleich?**
 Nicht zwingend. Verbrauchsprognose oder ausgenommene Preisbestandteile können den Abschlag verändern. Verlange eine nachvollziehbare Berechnung.
 
-**Sollte ich wegen steigender Börsenpreise sofort 24 Monate abschließen?**
+**Sollte ich wegen steigender Börsenpreise sofort 24 Monate abschließen?**. Das ist ein Modellwert.
 Nein. Vergleiche zuerst aktuellen Gesamtpreis, Garantieumfang und Aufpreis für die längere Bindung.
 
 **Was mache ich bei einer unklaren oder möglicherweise unzulässigen Erhöhung?**

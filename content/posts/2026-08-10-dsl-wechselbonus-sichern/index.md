@@ -37,18 +37,15 @@ quellen:
 faktencheck: "2026-10-13"
 ---
 
-
 DSL-Wechselbonus sichern im Check: Viele Haushalte zahlen für ihr Internet noch denselben Preis wie vor drei oder vier Jahren; das ist ein Modellwert. Glasfaser und schnelle Leitungen sind längst Standard. Trotzdem bleiben viele im alten, teuren Vertrag. Der Grund: Der Wechsel klingt kompliziert – ist er aber meist nicht. Genau hier locken Anbieter mit Rabatten, Startguthaben und dem klassischen **DSL-Wechselbonus**. (Stand: Oktober 2026)
 
 Ein Problem bleibt aber: Ein hoher Bonus auf dem Werbebanner sieht toll aus. Das macht den Tarif aber noch lange nicht zum Schnäppchen. Erst wenn du Bonus, Grundgebühr, Anschlusskosten und Laufzeit genau zusammenrechnest, siehst du die Wahrheit: Sparst du wirklich – oder zahlst du nur eine hübsch verpackte Startprämie selbst?
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-![Merkkarte: Kernaussagen zu DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-merkkarte. svg)
+![Merkkarte: Kernaussagen zu DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-merkkarte.svg)
 
 *Abbildung: Merkkarte zu „DSL-Wechselbonus sichern: So sparst du beim Internetvertrag“ (eigene Darstellung aus diesem Beitrag).*
-
-![Merkkarte: Kernaussagen zu DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-merkkarte.svg)
 
 ## Das Wichtigste in Kürze
 
@@ -145,7 +142,7 @@ Manche Anbieter locken mit guten Routern oder Spielekonsolen. Prüfe genau: Brau
 Ein Wechsel lohnt sich im Oktober 2026 besonders oft, wenn:
 
 - Dein aktueller Vertrag die Mindestlaufzeit überschritten hat,
-- du monatlich deutlich mehr als **ca. 40 € bis 50 €** für Standard-DSL (100–250 Mbit/s) zahlst,. Das ist ein Rechenbeispiel.
+- du monatlich deutlich mehr als **ca. 40 € bis 50 €** für Standard-DSL (100–250 Mbit/s) zahlst; das ist ein Modellwert. Das ist ein Rechenbeispiel.
 - Du noch einen alten Vertrag ohne moderne Glasfaser-Optionen nutzt,
 - dein aktueller Anbieter keine Treue-Rabatte gewährt,
 - die Verbindungsqualität nicht mehr deinen Anforderungen entspricht.
@@ -162,7 +159,7 @@ Achte zudem auf die Routermiete: Schon **ca. 6 € bis 9 €** im Monat summie
 
 Hektik ist beim [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) ein schlechter Ratgeber. Wer erst kurz vor Ende der [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) sucht, übersieht oft das Kleingedruckte.
 
-Ein Vorlauf von **ca. 3 bis 4 Monaten** ist ideal, um:. Das ist ein Modellwert.
+Ein Vorlauf von **ca. 3 bis 4 Monaten** ist ideal, um; das ist ein Beispielwert. Das ist ein Modellwert.
 
 - In Ruhe Tarife und Boni zu vergleichen,
 - die Hardware-Kompatibilität zu prüfen,
@@ -171,11 +168,9 @@ Ein Vorlauf von **ca. 3 bis 4 Monaten** ist ideal, um:. Das ist ein Modellwert.
 
 Viele der besten Cashback-Aktionen laufen zudem nur kurze Zeit. Wer früh startet, kann gezielt zuschlagen.
 
-![Gliederung des Beitrags: DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-ablauf. svg)
+![Gliederung des Beitrags: DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-ablauf.svg)
 
 *Abbildung: Gliederung zu „DSL-Wechselbonus sichern: So sparst du beim Internetvertrag“ – 5 Stationen von „Was ein DSL-Wechselbonus überhaupt ist?“ bis „Wann sich ein Anbieterwechsel besonders lohnt“ (eigene Darstellung).*
-
-![Gliederung des Beitrags: DSL-Wechselbonus sichern: So sparst du beim Internetvertrag](abbildung-ablauf.svg)
 
 ## Router mieten oder kaufen?
 

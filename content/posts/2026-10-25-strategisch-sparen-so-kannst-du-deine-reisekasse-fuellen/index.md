@@ -161,6 +161,8 @@ Am ersten Tag jedes Monats stellst du vier kurze Fragen. Schreib die Antworten i
 - [ ] Boni ohne Auszahlung sind nicht eingeplant.
 - [ ] Storno, Zahlung und Mietregeln sind gelesen.
 
+Reguliert ist dabei nur, was der Anbieter schuldet, nicht was du sparst: Bei Pauschalreisen gilt das Pauschalreiserecht mit Storno- und Insolvenzregeln (§§ 651a ff. BGB), bei Flügen die EU-Fluggastrechte-Verordnung 261/2004. Lies die Bedingungen, bevor du zahlst – dort steht, was im Streitfall gilt.
+
 ## Passende Beiträge zum Weiterlesen
 
 - [Last‑Minute‑Urlaub: So schnappst du dir das Schnäppchen](../../posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/)
@@ -180,7 +182,7 @@ Rechne: Kosten der Reise minus Geld, das schon da ist. Teile den Rest durch die 
 
 ### Sind Cashback‑Apps sicher für meine Daten?
 
-Das lässt sich nicht pauschal zusagen. Sieh dir Anbieter, Berechtigungen und Datenschutzhinweise an. Frag auch: Wie lösche ich mein Konto und meine Daten? Rechtliche Pflichten ersetzen nicht deine eigene Entscheidung über die Zustimmung.
+Das lässt sich nicht pauschal zusagen. Sieh dir Anbieter, Berechtigungen und Datenschutzhinweise an. Frag auch: Wie lösche ich mein Konto und meine Daten? Nach der DSGVO muss der Anbieter Zweck und Rechtsgrundlage der Verarbeitung nennen und dir Auskunft und Löschung deiner Daten ermöglichen. Diese Pflichten ersetzen nicht deine eigene Entscheidung über die Zustimmung.
 
 ### Muss ich jedes Jahr meine Versicherung wechseln?
 

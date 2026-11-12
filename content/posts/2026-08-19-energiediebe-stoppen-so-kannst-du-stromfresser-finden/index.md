@@ -43,18 +43,15 @@ quellen:
 faktencheck: 2026-11-07
 ---
 
-
 Du willst Energiediebe stoppen? Die Stromrechnung steigt. Muss da gleich der alte Kühlschrank raus? Nicht so schnell. Alte Geräte sind nicht immer die größten Stromfresser. Oft steckt der teure Kandidat ganz woanders: im Keller, beim [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) oder in der Spielekonsole, die rund um die Uhr im Standby läuft.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Darum gilt bei Stromfressern eine einfache Regel: **erst messen, dann rechnen, dann entscheiden**. So sparst du mehr als mit einem Kauf aus schlechtem Gewissen.
 
-![Merkkarte: Kernaussagen zu Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-merkkarte. svg)
+![Merkkarte: Kernaussagen zu Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-merkkarte.svg)
 
 *Abbildung: Merkkarte zu „Energiediebe stoppen: So kannst du Stromfresser finden“ (eigene Darstellung aus diesem Beitrag).*
-
-![Merkkarte: Kernaussagen zu Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-merkkarte.svg)
 
 ## Dein Schnellstart – Energiediebe stoppen
 
@@ -89,7 +86,7 @@ Mach danach mit dem größten Dauerläufer weiter. Das kann ein Kühlschrank sei
 ## Das Wichtigste in Kürze
 
 - Nutze deinen **eigenen Arbeitspreis** aus dem Stromvertrag. Nicht irgendeinen Werbewert.
-- Miss Kühl- und Gefriergeräte **sieben Tage** und rechne auf das Jahr hoch. Diese Messdauer empfiehlt die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen/so-finden-sie-den-passenden-kuehlschrank-10573).
+- Miss Kühl- und Gefriergeräte **sieben Tage** und rechne auf das Jahr hoch; das ist ein Modellwert. Diese Messdauer empfiehlt die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen/so-finden-sie-den-passenden-kuehlschrank-10573).
 - Rechne Dauerlast so: **Watt × Stunden ÷ 1.000 = kWh**.
 - Teile Geräte danach in drei Gruppen: **abschalten, anders nutzen, ersetzen**.
 - Vergleiche bei einem Neukauf den konkreten Verbrauch in kWh. Nicht nur die Effizienzklasse.
@@ -167,11 +164,9 @@ Ein zu großes neues Gerät kann trotz guter Klasse mehr Strom brauchen als ein 
 
 Daraus folgt aber noch kein klares Ja. Geht das alte Gerät ohnehin bald kaputt, sieht die Rechnung anders aus. Läuft es gut, ist Weiternutzen oft die klügere Wahl.
 
-![Gliederung des Beitrags: Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-ablauf. svg)
+![Gliederung des Beitrags: Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-ablauf.svg)
 
 *Abbildung: Gliederung zu „Energiediebe stoppen: So kannst du Stromfresser finden“ – 5 Stationen von „Dein Schnellstart – Energiediebe stoppen“ bis „Die Kostenformel, die du wirklich brauchst“ (eigene Darstellung).*
-
-![Gliederung des Beitrags: Energiediebe stoppen: So kannst du Stromfresser finden](abbildung-ablauf.svg)
 
 ## Was du nach der Messung mit dem Ergebnis machst?
 

@@ -50,11 +50,9 @@ Die Idee ist simpel: Du gibst deinem Geld von Anfang an Aufgaben. Ein Teil deckt
 💡 **Schnell-Tipp von FranksFinanzcheck:** Wenn dein Budget endlich planbar werden soll, trenne Sparen konsequent vom Girokonto-Alltag. Ein separates [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/) macht genau das leichter: [**Tagesgeldkonto der C24 Bank eröffnen**](/go/tagesgeld/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-![Merkkarte: Kernaussagen zu 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](abbildung-merkkarte. svg)
+![Merkkarte: Kernaussagen zu 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](abbildung-merkkarte.svg)
 
 *Abbildung: Merkkarte zu „50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken“ (eigene Darstellung aus diesem Beitrag).*
-
-![Merkkarte: Kernaussagen zu 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](abbildung-merkkarte.svg)
 
 ## Das Wichtigste in Kürze
 
@@ -134,9 +132,9 @@ Das sind aufs Jahr gerechnet **6.720 €**. Selbst wenn du davon zuerst nur ein
 
 ## Preisänderungen im Budget berücksichtigen
 
-Ein Budget muss Bewegungen aushalten. Die Oktober-Schätzung von [Destatis](https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html) vom 30.10.2026 zeigt 2,8 Prozent Inflation. Für Energie weist sie 12,2 Prozent Zuwachs zum Vorjahr aus; der Septemberwert lag bei 14,9 Prozent.
+Ein Budget muss Bewegungen aushalten. Die Oktober-Schätzung von [Destatis](https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html) vom 30.10.2026 zeigt 2,8 % Inflation. Für Energie weist sie 12,2 % Zuwachs zum Vorjahr aus; der Septemberwert lag bei 14,9 %.
 
-Nahrungsmittel standen bei plus 0,4 Prozent. Nutze diese Zahlen als Hinweis, nicht als pauschalen Aufschlag.
+Nahrungsmittel standen bei plus 0,4 %. Nutze diese Zahlen als Hinweis, nicht als pauschalen Aufschlag.
 
 Steigende Pflichtkosten können die 50-Prozent-Grenze sprengen. Dann brauchst du kürzere Wünsche, günstigere Verträge oder eine andere Zielquote. Passe die Sparrate an, bis Reserve und laufende Rechnungen wieder gedeckt sind.
 
@@ -238,8 +236,6 @@ Wer aus dem Nichts sofort perfekt bei 50–30–20 landen will, bricht oft wiede
 
 ### Fehler 4: Gehaltserhöhungen komplett verleben
 Mehr Netto heißt nicht automatisch [mehr Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/), wenn sofort alles in höhere Ausgaben fließt.
-
-![Gliederung des Beitrags: 50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken](abbildung-ablauf. svg)
 
 ## Was tun, wenn 50-30-20 gerade nicht passt?
 

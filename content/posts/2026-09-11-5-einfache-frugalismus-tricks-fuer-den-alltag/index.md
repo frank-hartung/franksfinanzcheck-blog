@@ -78,9 +78,9 @@ Das kann für den einen mehr Reisegeld sein. Für den anderen ein größerer [No
 
 ## Erst die eigenen Preise prüfen
 
-Laut [Destatis](https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html) lagen die Verbraucherpreise im Oktober 2026 vorläufig 2,8 Prozent über dem Vorjahr. Der Energie-Teilindex stieg um 12,2 Prozent. Einen Monat zuvor hatte er um 14,9 Prozent zugelegt.
+Laut [Destatis](https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html) lagen die Verbraucherpreise im Oktober 2026 vorläufig 2,8 % über dem Vorjahr. Der Energie-Teilindex stieg um 12,2 %. Einen Monat zuvor hatte er um 14,9 % zugelegt.
 
-Bei Nahrungsmitteln betrug der Zuwachs 0,4 Prozent. Das ist kein Automatismus für deine Rechnung. Schau auf deine eigenen Verträge und Kassenbons.
+Bei Nahrungsmitteln betrug der Zuwachs 0,4 %. Das ist kein Automatismus für deine Rechnung. Schau auf deine eigenen Verträge und Kassenbons.
 
 Auch die genannten 50 € bis 200 € sind nur Modellwerte. Sie sind kein Inflationsausgleich und keine zugesagte Ersparnis. Entscheidend ist, was nach deinen tatsächlichen neuen Ausgaben übrig bleibt.
 

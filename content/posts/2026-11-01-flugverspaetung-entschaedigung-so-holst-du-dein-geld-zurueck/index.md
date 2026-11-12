@@ -170,7 +170,7 @@ Um den Nutzen zu verstehen, hilft ein Blick auf die Zahlen. Wir nutzen hier eine
 
 In diesem Beispiel bekommt die Familie 700 € oder 1.000 € zurück. Das ist ein erheblicher Betrag für die Haushaltskasse.
 
-Es deckt vielleicht die Kosten für den Mietwagen oder mehrere Restaurantbesuche. Solche Beträge sollte man nicht liegen lassen. Es ist eine einfache Rechnung: Zeitverlust gegen finanzielle Kompensation.
+Es deckt vielleicht die Kosten für den Mietwagen oder mehrere Restaurantbesuche. Solche Beträge sollte man nicht liegen lassen. Es ist eine einfache Rechnung: Zeitverlust gegen [finanzielle](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) Kompensation.
 
 ## Was kostet dich die Durchsetzung?
 

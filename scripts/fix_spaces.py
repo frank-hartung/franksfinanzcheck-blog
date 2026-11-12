@@ -226,23 +226,66 @@ def _is_protected(line: str) -> bool:
     return "|" in line or "`" in line or line.lstrip().startswith((">", "```"))
 
 
+# ---------------------------------------------------------------------------
+# SCHUTZZONEN (Dauerheilung 10.11.2026, Release-Scorecard #1098)
+# ---------------------------------------------------------------------------
+# WARUM ES DIESE MASKE GIBT
+# Der Generator war bis zum 10.11.2026 nur gegen `http(s)://`-URLs gehärtet.
+# Regel D („fehlendes Leerzeichen nach .!?“) lief deshalb durch JEDES
+# Markdown-Ziel und zerlegte Dateinamen: `![Merkkarte](abbildung-merkkarte.svg)`
+# wurde zu `(abbildung-merkkarte. svg)`. Der Textverständnis-Guard meldete das
+# als R8-URL-LEERZEICHEN (harter Fehler), die Scorecard blockierte 20
+# Live-Artikel. Der Abbildungs-Nachzug erkannte die kaputte Zeile nicht mehr
+# und fügte eine zweite, korrekte ein – aus einem Schönheitsfehler wurden zwei.
+# Die Reparatur dauerte jeweils einen PR, der nächste SEO-/Content-Lauf
+# zerstörte sie wieder (a5586fbe → 3a3c59a3 → 0019dbc5 → c5ea4970 → ef8085a7).
+# Eine Regel, die ihre eigene Heilung auffrisst, ist kein Schönheitsfehler,
+# sondern ein Defekt.
+#
+# Deshalb gilt jetzt: Alles, was ein ZIEL ist (Markdown-Ziel, HTML-Attribut),
+# und alles, was ein DATEINAME ist, wird vor ALLEN Regeln tokenisiert. Die
+# Token (§Z0§) enthalten weder Punkt noch Leerzeichen; keine Regel kann sie
+# treffen. Der Selbsttest friert die Fälle ein.
+RE_MD_ZIEL = re.compile(r"\]\([^)\n]*\)")
+RE_HTML_ATTRIBUT = re.compile(
+    r"(?i)\b(?:src|href|srcset|poster)\s*=\s*(?:\"[^\"]*\"|'[^']*')")
+# Dateinamen mit echter Endung – auch ohne Pfad und in Prosa. Nur diese
+# Endungen: „z. B.“, „d. h.“ und „Stand 20xx“ dürfen KEINE Schutzzone sein.
+DATEI_ENDUNGEN = (
+    "svg", "png", "jpg", "jpeg", "webp", "avif", "gif", "ico", "bmp", "tif", "tiff",
+    "pdf", "md", "html", "htm", "css", "js", "mjs", "cjs", "json", "jsonl", "yml",
+    "yaml", "toml", "csv", "tsv", "txt", "xml", "rss", "atom", "zip", "gz", "tar",
+    "xlsx", "docx", "pptx", "mp3", "wav", "ogg", "mp4", "webm", "woff", "woff2",
+    "ttf", "otf", "eot", "wasm", "map",
+)
+RE_DATEINAME = re.compile(
+    r"(?<![\w./-])(?:[\w.-]*/)*[\w-]+\.(?:" + "|".join(DATEI_ENDUNGEN) + r")(?![\w-])",
+    re.I)
 # URL-Maske: matcht http(s)-URLs (auch mit internen Leerzeichen durch
-# fruehere Fehllauefe) – wird vor den Leerzeichen-Regeln maskiert, damit
+# fruehere Fehllaeufe) – wird vor den Leerzeichen-Regeln maskiert, damit
 # NIE wieder Leerzeichen in URLs eingefuegt/veraendert werden.
 RE_URL = re.compile(r"https?://[^\s)\]\}]+(?:\s+[^\s)\]\}]+)*")
 
 
 def _mask_urls(line: str) -> tuple[str, list[tuple[str, str]]]:
-    """Ersetzt URLs durch eindeutige Token (§URL0§, §URL1§, …).
-    Die Token enthalten keine Leerzeichen/Punkte → werden von keiner
-    Leerzeichen-Regel veraendert und koennen danach sicher zurueck-
-    ersetzt werden (positionsunabhaengig)."""
-    urls = []
+    """Ersetzt URLs und alle übrigen Ziele/Dateinamen durch Token (§Z0§, …).
+
+    Der Name bleibt aus Kompatibilitätsgründen (Aufrufer, Doku, Tests), die
+    Funktion schützt aber seit dem 10.11.2026 mehr als nur http(s)-URLs:
+    Markdown-Ziele, HTML-Attribute, Dateinamen und URLs. Die Token enthalten
+    keine Leerzeichen/Punkte → werden von keiner Leerzeichen-Regel veraendert
+    und koennen danach sicher zurueck-ersetzt werden (positionsunabhaengig).
+    """
+    held: list[tuple[str, str]] = []
+
     def _repl(m):
-        tok = f"§URL{len(urls)}§"
-        urls.append((tok, m.group(0)))
+        tok = f"§Z{len(held)}§"
+        held.append((tok, m.group(0)))
         return tok
-    return RE_URL.sub(_repl, line), urls
+
+    for muster in (RE_MD_ZIEL, RE_HTML_ATTRIBUT, RE_URL, RE_DATEINAME):
+        line = muster.sub(_repl, line)
+    return line, held
 
 
 def fix_line(line: str) -> tuple[str, int]:
@@ -390,6 +433,33 @@ SELBSTTEST = [
     ("| Tabelle | 1.2 3,4 |", "| Tabelle | 1.2 3,4 |"),
     ("Code `a  b` bleibt", "Code `a  b` bleibt"),
     ("> Blockquote  mit Doppel", "> Blockquote  mit Doppel"),
+    # ----------------------------------------------------------------
+    # SCHUTZZONEN (Dauerheilung 10.11.2026, #1098). Jeder Fall ist ein
+    # echter Bestandsdefekt: Regel D zerlegte das Ziel nach dem Punkt.
+    # ----------------------------------------------------------------
+    # Markdown-Bild und -Link: Dateiname bleibt unangetastet
+    ("![Merkkarte: Kernaussagen](abbildung-merkkarte.svg)",
+     "![Merkkarte: Kernaussagen](abbildung-merkkarte.svg)"),
+    ("![Gliederung](abbildung-ablauf.svg)", "![Gliederung](abbildung-ablauf.svg)"),
+    ("[Beitrag lesen](../2026-08-10-dsl-wechselbonus-sichern/index.md)",
+     "[Beitrag lesen](../2026-08-10-dsl-wechselbonus-sichern/index.md)"),
+    ("[DSL vergleichen](/go/dsl/)", "[DSL vergleichen](/go/dsl/)"),
+    ("[Titel](beitrag.html#abschnitt)", "[Titel](beitrag.html#abschnitt)"),
+    # Die URL bleibt ganz – auch mit Titel-Attribut
+    ("[Angebot](https://example.de/a?b=1 \"Titel\")",
+     "[Angebot](https://example.de/a?b=1 \"Titel\")"),
+    # HTML-Attribute sind Ziele, kein Fließtext
+    ('<img src="abbildung-merkkarte.svg" alt="Merkkarte">',
+     '<img src="abbildung-merkkarte.svg" alt="Merkkarte">'),
+    # Ein Dateiname in Prosa ist auch ein Ziel (Datei wird verlinkt)
+    ("Die Datei abbildung-merkkarte.svg liegt im Beitragsordner.",
+     "Die Datei abbildung-merkkarte.svg liegt im Beitragsordner."),
+    ("Lies cover.webp und daten.json im selben Ordner.",
+     "Lies cover.webp und daten.json im selben Ordner."),
+    # Gegenprobe: Abkürzungen und Zahlen sind KEINE Schutzzone – Regel D
+    # muss hier weiter greifen (sonst wäre die Härtung eine Abschaltung).
+    ("Satz.Neuer Anfang bleibt geheilt", "Satz. Neuer Anfang bleibt geheilt"),
+    ("Das ist z.B.so nicht gemeint", "Das ist z. B. so nicht gemeint"),
 ]
 
 

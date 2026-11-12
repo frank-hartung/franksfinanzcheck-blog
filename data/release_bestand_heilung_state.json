@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "generated_at": "2026-11-10T13:27:04Z",
+  "generated_at": "2026-11-11T12:42:18Z",
   "modus": "apply",
   "status": "nichts-zu-heilen",
-  "basis_commit": "8b173b077986d3f63ab9eb7935db41c95cfa6735",
+  "basis_commit": "b56e91547814b05eac9f32acde4168d67da0ba7a",
   "baseline_blocker": [
     [
       "2026-08-10-dsl-wechselbonus-sichern",
@@ -151,6 +151,10 @@
     ],
     [
       "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
+      "F4-fachbefund"
+    ],
+    [
+      "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
       "T6-textverstaendnis"
     ],
     [
@@ -172,6 +176,14 @@
     [
       "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt",
       "T6-textverstaendnis"
+    ],
+    [
+      "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
+      "F4-fachbefund"
+    ],
+    [
+      "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
+      "F4-fachbefund"
     ]
   ],
   "baseline_hashes": {
@@ -225,7 +237,7 @@
     "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": "b5aa8342e8a8e6fe57594a9dbaea52ba605d36942e065fad1034442f685aeacc",
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": "b0da0ee7a42fd9fb67ddd8d438ce56a048a2a83aaa78571a7d87687c76a46fd1",
     "2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet": "1b153213d744a029ab39128a0ef5acf0fa2e29ec499f4b9b797a8b1a0fa1631e",
-    "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": "f5192963ae3672b9dcab5a290f4b9e9c54585a293fb5d9467bb791c142278eb0",
+    "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": "d31d98750b5de06d594126900c2395a8ae42563ad9ddc8394860b1bc09018e2b",
     "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": "0bb339ebf97b5578eade49d589f61feb7483d6e647d21c3649b7876ebb350495",
     "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": "5ed005602fa894baec60d65df98d132fbe8e44f07415692d674c0c41c277e214",
     "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": "7f8e2a19d909e063f7e828bde8bafea29cab5ffed09a42083a4bfe9f8cb1ab07",
@@ -249,12 +261,14 @@
     "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto": "51ca96ef52331ecaeaf476ee62197e0a6929fad7711560fabd9567e27a25f388",
     "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks": "691568c6b33b7d6988347495947ce7887a770f3422b1d94b8742932aa3aa4b2a",
     "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen": "b5d43e1099ab1714a3690f3f60921cb18841e30ca3862ab13830825e1b8fdc12",
-    "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": "f00bd58c797af514e4b9d792f2089a602383b113925ab8da36426e6a6e2fdded",
+    "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": "ca65c7c5a8a31668fbb6452ea920926e1317b2c4371fbb1b3974ef9d4ad30ea9",
     "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht": "82612b49b19a17762dc55fc8c3a21b6a7303049672cd6ea10680962f06035d0c",
     "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege": "0d8dc6c0d86f15a400c4d17b54ed9b1cfb6724363d3aadb32d01b78cceb6edfd",
     "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": "62dc6acc4ad9e29f360923e8553ee5489f1a30ff0644597a3e19f063c52288c1",
     "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem": "0ab116f2f4a0173e8423b50fbc2577bc41f5949f979aafd19504feb8e93139af",
-    "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang": "be9e1426b9a12d3109fa3f17d21f540306ee05531f7e0c46a122a131b4fd6b16"
+    "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck": "46fbd9f0e9dceec778245f3e46ceab27c95abf16ceca79e0bd2f646a36cb0afe",
+    "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang": "d2e6413dcd25664720e776b35253dc2d483b322c861dc7191f8ea34ab2cce910",
+    "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": "05a0a30956760835994f59784acdcd8dcd7be7fe263f817cf6129726ce6a2712"
   },
   "artikel": [],
   "uebergaben": [
@@ -402,8 +416,9 @@
     },
     {
       "slug": "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
-      "grund": "Artikelbudget erreicht",
+      "grund": "menschlicher Prüfstand: F4-fachbefund",
       "checks": [
+        "F4-fachbefund",
         "T6-textverstaendnis"
       ]
     },
@@ -434,6 +449,20 @@
       "grund": "Artikelbudget erreicht",
       "checks": [
         "T6-textverstaendnis"
+      ]
+    },
+    {
+      "slug": "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
+      "grund": "menschlicher Prüfstand: F4-fachbefund",
+      "checks": [
+        "F4-fachbefund"
+      ]
+    },
+    {
+      "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
+      "grund": "menschlicher Prüfstand: F4-fachbefund",
+      "checks": [
+        "F4-fachbefund"
       ]
     },
     {

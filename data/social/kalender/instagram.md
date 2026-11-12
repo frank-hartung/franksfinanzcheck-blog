@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Instagram
 
-> Automatisch aktualisiert: 10.11.2026 22:20 (Europe/Berlin)  
+> Automatisch aktualisiert: 11.11.2026 21:14 (Europe/Berlin)  
 > Profil: https://www.instagram.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `instagram.ics`
 
@@ -13,8 +13,8 @@
 ## Kommende Beiträge
 
 ### Do, 12. November 2026
-- **11:45** ⏳ Wohngebäudeversicherung Vergleich: Worauf du achten musst — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/
+- **11:45** ⏳ Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/
 ### Sa, 14. November 2026
 - **11:45** ⏳ Energieausweis: Was er für deine Fixkosten bedeutet — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/
@@ -28,11 +28,11 @@
 - **11:45** ⏳ Privathaftpflicht: Warum so wichtig und was sie kostet — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/
 ### Sa, 21. November 2026
-- **11:45** ⏳ Gaspreiserhöhung Sonderkündigungsrecht — _nutzen_ · Launch  
+- **11:45** ⏳ Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/
 ### So, 22. November 2026
-- **11:45** ⏳ Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/
+- **11:45** ⏳ Wohngebäudeversicherung Vergleich: Worauf du achten musst — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/
 ### Di, 24. November 2026
 - **11:45** ⏳ Waschmaschine beladen: Weniger Kosten bei jedem Waschgang — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/

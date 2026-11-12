@@ -38,7 +38,6 @@ quellen:
 faktencheck: "2026-10-07"
 ---
 
-
 Sieben Gewohnheiten für [finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) im Check: [Finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) klingt nach einem großen Ziel. Im Alltag beginnt sie oft mit kleinen, klaren Entscheidungen.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -56,7 +55,7 @@ Dann kannst du entscheiden, was bleiben soll und was sich ändern darf.
 ## Was bedeutet finanzielle Freiheit im Alltag?
 
 
-Darum geht es hier konkret: 7 Gewohnheiten für finanzielle Freiheit.
+Darum geht es hier konkret: sieben Gewohnheiten für finanzielle Freiheit.
 
 
 Darum geht es hier konkret: sieben Gewohnheiten für finanzielle Freiheit.
@@ -199,7 +198,7 @@ Finanzielle Freiheit entsteht selten plötzlich. Sie wächst, wenn du deine Ents
 Genau das ist der Hebel: sieben Gewohnheiten für finanzielle Freiheit.
 
 
-Genau das ist der Hebel: 7 Gewohnheiten für finanzielle Freiheit.
+Genau das ist der Hebel: sieben Gewohnheiten für finanzielle Freiheit.
 
 ## Häufige Fragen
 
@@ -222,7 +221,7 @@ Kopple die Gewohnheit an etwas Festes. Etwa den Kontoblick an den Montagskaffee.
 
 ### Was mache ich in einem teuren Monat?
 
-Halte die Routine, auch wenn die Beträge sinken. Fünf Euro statt fünfzig zählen. Es geht um das Muster, nicht um die Summe.
+ Fünf Euro statt fünfzig zählen; das ist ein Modellwert. Es geht um das Muster, nicht um die Summe.
 
 ### Soll ich das Geld sofort aufteilen?
 

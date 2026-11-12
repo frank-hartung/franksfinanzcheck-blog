@@ -1,5 +1,5 @@
 ---
-title: "Gaspreiserhöhung Sonderkündigungsrecht"
+title: "Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas"
 description: Nutze dein Gaspreiserhöhung Sonderkündigungsrecht. Ich zeige dir, wie du die Grundversorgung Gas kündigen kannst und beim Gastarife vergleichen sparst.
 date: 2026-11-09T11:26:53Z
 draft: false
@@ -115,7 +115,7 @@ Das ist der bequemste Weg.
 Du suchst dir einen neuen Tarif und gibst den Wechsel in Auftrag. 
 
 Der neue Versorger meldet dich beim alten ab. 
-In der Grundversorgung hast du ohnehin nur zwei Wochen (Modellrechnung) Kündigungsfrist. 
+In der Grundversorgung hast du ohnehin nur zwei Wochen (Modellrechnung) [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/). 
 Du bist dort also sehr flexibel. 
 Wenn du aber dein Sonderkündigungsrecht in einem Sondervertrag nutzt, solltest du selbst kündigen.
 
@@ -146,7 +146,7 @@ Prüfe auch, ob es sich um einen Ökogastarif handelt.
 Oft sind diese kaum teurer als konventionelle Tarife. 
 Nutze Vergleichsportale, aber schalte die Filter klug. 
 Filtere nach hoher Kundenempfehlung. 
-So vermeidest du schwarze Schafe auf dem Markt. 
+So [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du schwarze Schafe auf dem Markt. 
 
 [Hier kannst du direkt Gastarife vergleichen und sparen.](/go/gas/)
 

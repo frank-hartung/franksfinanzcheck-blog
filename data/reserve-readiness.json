@@ -1,8 +1,8 @@
 {
   "target": 6,
-  "ready": 4,
+  "ready": 3,
   "pool_size": 10,
-  "generated_at": "2026-11-11T11:27:06Z",
+  "generated_at": "2026-11-11T21:29:41Z",
   "candidates": [
     {
       "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
@@ -63,10 +63,16 @@
     },
     {
       "slug": "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-      "ready": true,
-      "sha256": "e1abbf3d59a90d48f559148b9d781d6039598dd72c52400f9a0d424fc35fe121",
-      "flesch": 67.4,
-      "measured_at": "2026-11-11T11:23:22Z",
+      "ready": false,
+      "sha256": "b2f6a8204c56356fb1912274ddaa69bb11b9c031a1c62e56d721af27c0540205",
+      "flesch": 66.5,
+      "measured_at": "2026-11-11T21:27:11Z",
+      "reason": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: ide",
+      "details": [
+        "🛑 2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
+        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…hinweis dieser artikel dient ausschließlich der allgemeinen information und stellt…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…keine anlage rechts oder steuerberatung dar prüfe konditionen und bedingungen…“ – doppelte Passage, manuell reparieren",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
       "score": 0.968,
       "parts": {
         "spelling": 0.9,
@@ -150,9 +156,9 @@
     {
       "slug": "2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
       "ready": true,
-      "sha256": "8baebef6a63b951e42af3db8a6f2f671fd5378591f54334f7bb12e05df0b1df3",
-      "flesch": 62.1,
-      "measured_at": "2026-11-11T11:26:21Z",
+      "sha256": "7c7b0269ab02c21994708bb90f62be62b6dca0fc3a06ed78dd1da85fb06409b8",
+      "flesch": 62.4,
+      "measured_at": "2026-11-11T21:28:26Z",
       "score": 0.962,
       "parts": {
         "spelling": 0.88,
@@ -167,9 +173,9 @@
     {
       "slug": "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ready": false,
-      "sha256": "031a948019b1c98235a472d35ce7a96c841ab87580b3068df388b021bf5f7a25",
-      "flesch": 65.0,
-      "measured_at": "2026-11-11T11:27:04Z",
+      "sha256": "0339c140255fadbd36fe911c4a08d9927a3aee8c117980b3292cec19bfddec66",
+      "flesch": 65.3,
+      "measured_at": "2026-11-11T21:29:38Z",
       "reason": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
       "details": [
         "🛑 2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -190,28 +196,38 @@
     {
       "slug": "2026-11-10-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein",
       "ready": false,
-      "sha256": "98d8ecb556108886476ba1ca3cc63e9144d40896afcdeaa19e6abc8565f930ec",
-      "flesch": 60.7,
-      "measured_at": "2026-11-11T11:27:06Z",
-      "reason": "Reserve-Qualitäts-Gate: Umfang: 742 Wörter / 5178 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
+      "sha256": "947a5aa0a109acaa6dbf3fe570921ddd48f8c18eba6cb607ffbd11c912f570ab",
+      "flesch": 78.2,
+      "measured_at": "2026-11-11T21:29:41Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 4 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Viele Menschen zahlen für 250 Mbps, obwohl sie nur 50 Mbps nutzen.",
       "details": [
-        "Umfang: 742 Wörter / 5178 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
+        "RS5: 4 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Viele Menschen zahlen für 250 Mbps, obwohl sie nur 50 Mbps nutzen."
       ],
-      "score": 0.897,
+      "score": 0.952,
       "parts": {
-        "spelling": 0.86,
+        "spelling": 0.96,
         "meta": 1.0,
-        "structure": 0.7,
+        "structure": 1.0,
         "typography": 0.7,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 1.0
+        "readability": 0.95
       }
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "43010569226",
+    "kind": "partial",
+    "run_id": "43102444136",
     "run_attempt": "1"
+  },
+  "recert": {
+    "at": "2026-11-11T21:29:41Z",
+    "renewed": [
+      "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
+      "2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
+      "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "2026-11-10-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein"
+    ],
+    "tool": "scripts/reserve_recert.py"
   }
 }

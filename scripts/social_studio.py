@@ -196,14 +196,22 @@ def backfill_candidate(cfg: dict, pool: list[dict], state: dict, schedule: dict,
     validator = gate_validator(meta, state)
     quar = planner.quarantiniert(state, now)
     heute = now.date().isoformat()
-    heute_verbaut = {it.get("slug") for it in (schedule.get("items") or [])
-                     if it.get("channel") == cid and it.get("date") == heute}
+    # #1098 (11.11.2026): Doppelplanung auf demselben Kanal.
+    # Vorher galt nur „heute schon verplant“ als Sperre. Ein Artikel, der auf
+    # demselben Kanal zwei Tage später ohnehin als Launch geplant ist, konnte
+    # damit ZUSÄTZLICH als Ersatz eingeplant werden – real beobachtet im
+    # Selbsttest: mastodon + 2026-10-30-gaspreiserhoehung… einmal `backfill`
+    # (11.11.) und einmal `launch` (13.11.). Zwei Beiträge zum selben Artikel
+    # auf demselben Kanal sind Doppelung, nicht Nachrücken. Die Sperre gilt
+    # deshalb für den ganzen Plan des Kanals, nicht nur für den Tag.
+    verbaut = {it.get("slug") for it in (schedule.get("items") or [])
+               if it.get("channel") == cid}
     cands = planner._candidates(cfg, pool, state, now, planner.load_performance())
     kandidat: list[dict] = [
         c for c in cands
         if c["channel"] == cid
         and c["slug"] not in skip
-        and c["slug"] not in heute_verbaut
+        and c["slug"] not in verbaut
         and (cid, c["slug"]) not in quar
         and c["earliest"] <= now
     ]

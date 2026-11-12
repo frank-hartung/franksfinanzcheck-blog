@@ -10,6 +10,7 @@
   {
    "kriterium": "Abdeckungsbefund nicht älter als 14 Tage",
    "messung": "Stand 2026-10-19 (23 Tage alt)",
+   "messung": "Stand 2026-10-19 (22 Tage alt)",
    "naechster_schritt": "Export einlesen (`--import`)",
    "status": "offen",
    "ziel": "laufend"
@@ -288,6 +289,7 @@
   "delta_7_indexiert": -22,
   "delta_7_nicht_indexiert": 67,
   "detail_alter_tage": 16,
+  "detail_alter_tage": 15,
   "detail_fehlend": [
    "Nicht gefunden (404).csv",
    "Gefunden – zurzeit nicht indexiert.csv",
@@ -300,6 +302,7 @@
   "detail_urls": 4,
   "detail_vorhanden": 1,
   "export_alter_tage": 23,
+  "export_alter_tage": 22,
   "gruende": {
    "crawled_not_indexed": 4,
    "discovered_not_indexed": 69,
@@ -368,6 +371,7 @@
    "delta_7_indexiert": -22,
    "delta_7_nicht_indexiert": 67,
    "detail_alter_tage": 16,
+   "detail_alter_tage": 15,
    "detail_fehlend": [
     "Nicht gefunden (404).csv",
     "Gefunden – zurzeit nicht indexiert.csv",
@@ -380,6 +384,7 @@
    "detail_urls": 4,
    "detail_vorhanden": 1,
    "export_alter_tage": 23,
+   "export_alter_tage": 22,
    "gruende": {
     "crawled_not_indexed": 4,
     "discovered_not_indexed": 69,
@@ -464,6 +469,7 @@
    "schritt": "Interne Links auf die betroffenen Seiten verdichten (jede Seite aus mindestens zwei Artikeln erreichbar), Änderungsdatum ehrlich setzen, Publikations-Kadenz auf 2/Tag begrenzen; wöchentlich `scripts/gsc_indexierung.py --pruefen` für den Status je URL.",
    "titel": "Crawl-Nachfrage für gefundene, nicht abgerufene Seiten",
    "wirkung": "69 von 113 indexierbaren Seiten hat Google noch nicht abgerufen (61.1 % des Bestands). Das ist der größte Einzelposten und der einzige, der sich ohne Google-Zugriff bewegen lässt: interne Verlinkung, Aktualität, Autorität."
+   "wirkung": "69 von 111 indexierbaren Seiten hat Google noch nicht abgerufen (62.2 % des Bestands). Das ist der größte Einzelposten und der einzige, der sich ohne Google-Zugriff bewegen lässt: interne Verlinkung, Aktualität, Autorität."
   },
   {
    "aufwand": "M",
@@ -478,6 +484,7 @@
   {
    "aufwand": "S",
    "beleg": "117 indexiert bei 113 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (3 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (1 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /tags/ (1 Impr.), /tags/dns-server-%C3%A4ndern/ (1 Impr.)",
+   "beleg": "117 indexiert bei 111 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (4 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (1 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /tags/ (1 Impr.), /tags/dns-server-%C3%A4ndern/ (1 Impr.)",
    "dringlichkeit": "P2",
    "id": "M4",
    "owner": "Automat",
@@ -544,6 +551,8 @@
     "grund": "verlinkt",
     "impressionen": 173,
     "inlinks": 18,
+    "impressionen": 166,
+    "inlinks": 17,
     "lastmod_tage": null,
     "outlinks": 2,
     "position": 41.39,
@@ -624,6 +633,18 @@
     "grund": "verlinkt",
     "impressionen": 10,
     "inlinks": 4,
+    "impressionen": 15,
+    "inlinks": 9,
+    "lastmod_tage": null,
+    "outlinks": 5,
+    "position": 20.53,
+    "score": 6.95,
+    "url": "/pillar/versicherungen/"
+   },
+   {
+    "grund": "verlinkt",
+    "impressionen": 12,
+    "inlinks": 2,
     "lastmod_tage": null,
     "outlinks": 9,
     "position": 5.7,
@@ -1672,6 +1693,7 @@
    }
   ],
   "stand": "2026-11-11",
+  "stand": "2026-11-10",
   "welle1": [
    "/pillar/internet-dsl/",
    "/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/",
@@ -1842,6 +1864,7 @@
  },
  "schema": 1,
  "stand": "2026-11-11T12:41:45Z",
+ "stand": "2026-11-10T13:26:50Z",
  "tote_ziele": [
   {
    "quellen": [
@@ -2093,6 +2116,7 @@
    "regel": "W8",
    "schwere": "hinweis",
    "text": "Der Abdeckungsbericht ist 23 Tage alt (Stand 2026-10-19). Die Search Console liefert ihn nur als CSV – ohne neuen Export misst dieser Befund die Vergangenheit."
+   "text": "Der Abdeckungsbericht ist 22 Tage alt (Stand 2026-10-19). Die Search Console liefert ihn nur als CSV – ohne neuen Export misst dieser Befund die Vergangenheit."
   },
   {
    "regel": "W9",

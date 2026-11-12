@@ -1,37 +1,37 @@
 {
   "version": 1,
-  "generated_at": "2026-11-11T11:46:04Z",
+  "generated_at": "2026-11-11T12:52:19Z",
   "modus": "kandidaten",
-  "commit": "92a938f6bef15cc07579dfc1446ed8cc65f9312d",
+  "commit": "b5bfea8640f929cc9976378a205c0d473cb361a6",
   "kapazitaet": {
     "stichtag": "2026-11-11",
     "basis": "2026-11-11",
     "projiziert": false,
-    "artikel": 126,
-    "faellig": 0,
+    "artikel": 127,
+    "faellig": 1,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
-      "slug": "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
-      "frist": "2026-11-13",
-      "restlaufzeit": 2
+      "slug": "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss",
+      "frist": "2026-11-18",
+      "restlaufzeit": 7
     },
     "budget": 5,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 5.0,
-    "bedarf_je_tag": 3.078,
-    "bedarf_je_woche": 21.5,
-    "deckung_prozent": 162.5,
+    "bedarf_je_tag": 3.1,
+    "bedarf_je_woche": 21.7,
+    "deckung_prozent": 161.3,
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
-    "abbau_tage": null,
+    "abbau_tage": 0,
     "verletzungen_alt": 0,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
     "verletzungen": [],
-    "offen_im_horizont": 126,
+    "offen_im_horizont": 127,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
@@ -50,7 +50,7 @@
     "empfohlenes_budget": 5,
     "empfehlung_erreicht": true,
     "hartes_limit": 18,
-    "spitze_geprueft": 58
+    "spitze_geprueft": 57
   },
   "ursachen": [
     {
@@ -78,12 +78,14 @@
         "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser",
         "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
         "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+        "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
         "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage",
         "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
         "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
+        "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
         "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang"
       ],
-      "anzahl": 22
+      "anzahl": 24
     },
     {
       "check": "T6-textverstaendnis",
@@ -142,10 +144,10 @@
     }
   ],
   "befundlage": {
-    "offen": 145,
-    "seiten": 34,
-    "live_befunde": 92,
-    "live_seiten": 22,
+    "offen": 163,
+    "seiten": 39,
+    "live_befunde": 100,
+    "live_seiten": 24,
     "ueberholt": 107,
     "ohne_fassung": 15,
     "nicht_entscheidbar": 0,
@@ -171,9 +173,11 @@
       "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": 5,
       "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": 5,
       "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": 5,
+      "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": 5,
       "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": 3,
       "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": 3,
       "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": 5,
+      "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": 3,
       "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang": 5
     }
   },
@@ -630,7 +634,7 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "f541df65178959971f2cdf66376ff0a8dea187b089f62a428200315a339a7889",
+      "sha256": "dbbf33ed3fd409fa432695800675c561162e7e1312cb11b27ae7ccf0134b2e92",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1341,22 +1345,28 @@
       "checks": []
     },
     "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
-      "sha256": "f5192963ae3672b9dcab5a290f4b9e9c54585a293fb5d9467bb791c142278eb0",
+      "sha256": "d31d98750b5de06d594126900c2395a8ae42563ad9ddc8394860b1bc09018e2b",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "blockiert",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-13",
+      "naechste_pruefung": "2026-12-11",
       "siegel_drift": "unverändert",
       "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "33278b9e7942ebfdbbac (luecke): Definition des Begriffs „Last Minute“ (maximal 14 Tage zwischen Buchung und Abreise) wird mit dem Deutschen Reiseverband angegeben, jedoch fehlt ein Nachweis.; 6ad7358a9afcfef3babb (praezision): Angabe, dass Preisalarme keinen Tiefstpreis garantieren, wird nicht durch konkrete Zahlen oder Vergleichsstudien belegt.; 7c375a3e1a9bfab1468c (luecke): Hinweis auf § 651r BG"
+        },
         {
           "check": "T1w-zeichenlaenge-optimum",
           "dimension": "technik",
@@ -1827,22 +1837,29 @@
       ]
     },
     "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
-      "sha256": "f00bd58c797af514e4b9d792f2089a602383b113925ab8da36426e6a6e2fdded",
-      "urteil": "freigabe-reif",
+      "sha256": "ca65c7c5a8a31668fbb6452ea920926e1317b2c4371fbb1b3974ef9d4ad30ea9",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-14",
+      "naechste_pruefung": "2026-12-11",
       "siegel_drift": "unverändert",
-      "checks": []
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "98eb45f772ad7a0aac7b (luecke): Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt im Text Referenzwerte (120 € Strom, 80 € Kfz), für die in der Quelle keine Marktdaten oder Durchschnittswerte als Beleg vorliegen.; b7f0d52968d89cdf8c5b (praezision): Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne Nennung konkreter rechtlicher Grundlagen (DSGVO) unpräzise, während "
+        }
+      ]
     },
     "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht": {
       "sha256": "82612b49b19a17762dc55fc8c3a21b6a7303049672cd6ea10680962f06035d0c",
@@ -1967,7 +1984,7 @@
       ]
     },
     "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
-      "sha256": "92263bc1ded969c870e32a205d628fccd152904efee0765d56bf23a7d8d6cac1",
+      "sha256": "05a0a30956760835994f59784acdcd8dcd7be7fe263f817cf6129726ce6a2712",
       "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {

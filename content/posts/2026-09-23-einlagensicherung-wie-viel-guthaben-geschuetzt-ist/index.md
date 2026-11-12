@@ -213,7 +213,7 @@ Der Ernstfall ist selten. Die zuständige Sicherung zahlt dein Guthaben bis zur 
 
 
 **Weiterlesen:** [Ratgeber Konto & Karten](../../pillar/konto-karten/)
-**Lesetipp:** [Tagesgeld-Zinsen 2026](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/): Die besten Zinssätze im Vergleich
+**Lesetipp:** [Tagesgeld-Zinsen 2026](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/): Die besten [Zinssätze im Vergleich](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/)
 
 ---
 
