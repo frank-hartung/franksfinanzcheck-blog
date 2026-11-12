@@ -64,16 +64,16 @@ class Heilvertrag(unittest.TestCase):
 
     def test_kein_token_oder_keine_freigabe(self):
         for token, consent in [('', 'true'), ('x', ''), ('x', 'TRUE')]:
-            self.assertEqual(self.run_heal(token=token, freigabe=consent)[0], 2)
+            self.assertEqual(self.run_heal(token=token, freigabe=consent)[0], heal.POLICY_BLOCKED)
         self.api.assert_not_called()
         self.apply.assert_not_called()
 
     def test_b7_schranke_fail_closed(self):
         for text in ['', 'kein Proxy von Cloudflare', edge.B7_MIT_PROXY_SATZ]:
             self.b7.write_text(text, encoding='utf8')
-            self.assertEqual(self.run_heal()[0], 2)
+            self.assertEqual(self.run_heal()[0], heal.POLICY_BLOCKED)
         self.b7.unlink()
-        self.assertEqual(self.run_heal()[0], 2)
+        self.assertEqual(self.run_heal()[0], heal.POLICY_BLOCKED)
         self.api.assert_not_called()
 
     def test_klassen_und_ungueltige_messung_heilen_nie(self):
@@ -163,6 +163,25 @@ class Verdrahtung(unittest.TestCase):
                                     capture_output=True, text=True, cwd=ROOT)
             self.assertEqual(result.returncode, 2)
             self.assertFalse((root / 'audit').exists())
+
+    def test_cli_fehlende_freigabe_ist_warnung_und_keine_zweite_jobstoerung(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _, daten = messung()
+            (root / 'daten').write_text(json.dumps(daten), encoding='utf8')
+            (root / 'bericht').write_text(daten['bericht'], encoding='utf8')
+            result = subprocess.run([sys.executable, str(ROOT / 'scripts/live_selbstheilung.py'),
+                                     '--run', '--daten', str(root / 'daten'),
+                                     '--bericht', str(root / 'bericht'), '--code', '1',
+                                     '--ledger', str(root / 'audit')],
+                                    capture_output=True, text=True, cwd=ROOT,
+                                    env={'GITHUB_STEP_SUMMARY': str(root / 'summary')})
+            self.assertEqual(result.returncode, 0)
+            self.assertIn('::warning title=F-01 Selbstheilung nicht freigegeben::', result.stdout)
+            self.assertIn('CF_EDGE_HEAL_TOKEN', result.stdout)
+            self.assertEqual(json.loads((root / 'audit').read_text().splitlines()[-1])['status'],
+                             'freigabe_fehlt')
+            self.assertIn('absichtliche Schutzschranke', (root / 'summary').read_text())
 
     def test_cli_fehlt_messung_schreibt_nicht(self):
         with tempfile.TemporaryDirectory() as tmp:

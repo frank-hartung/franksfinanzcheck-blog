@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-11 11:37:38 UTC",
+ "generated_at": "2026-11-12 12:02:40 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 127,
- "checked_links": 303,
+ "checked_articles": 128,
+ "checked_links": 305,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -186,7 +186,7 @@
   {
    "code": "IW2",
    "slug": "2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif",
-   "line": 110,
+   "line": 119,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
@@ -198,6 +198,17 @@
    "code": "IW2",
    "slug": "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
    "line": 258,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
+   "line": 267,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
@@ -259,6 +270,17 @@
    "severity": "P3",
    "blocking": false,
    "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten",
+   "line": 98,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Kreditkarten“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   }
  ],
  "errors": []

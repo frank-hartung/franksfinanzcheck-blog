@@ -1,6 +1,6 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-11-11 11:37:36 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-11-12 12:02:36 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
 **Geprüfte Live-Artikel:** 82 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
 
@@ -58,7 +58,7 @@
 | 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro | 2 → 3 ✅ | /go/gas/ |
 | 2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet | 0 → 1 ✅ | /go/strom/ |
 | 2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist | 0 → 1 ✅ | /go/tagesgeld/ |
-| 2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert | 2 → 2 ✅ | /go/dsl/ |
+| 2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert | 1 → 2 ✅ | /go/dsl/ |
 | 2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich | 3 → 3 ✅ | /go/dsl/ |
 | 2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden | 0 → 1 ✅ | /go/gas/ |
 | 2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet | 0 → 1 ✅ | /go/allgemein/ |

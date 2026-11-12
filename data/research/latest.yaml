@@ -1,5 +1,5 @@
-generated_at: '2026-11-11T11:26:46Z'
-day: '2026-11-11'
+generated_at: '2026-11-12T11:50:02Z'
+day: '2026-11-12'
 mode: deterministic
 teams:
   trending:
@@ -252,60 +252,60 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 10 Tipps für günstige Reisekreditkarten
-    pillar: konto-karten
-    signal: niche_hook
-    source: topics:10 Tipps für günstige Reisekreditkarten
-    score: 0.55
-    keywords:
-    - Reisekreditkarten
-    - günstige Karten
-    - Reisekosten sparen
-  - topic: 'Balkon bepflanzen: So senkst du die Gemüsekosten'
-    pillar: frugalismus
-    signal: niche_hook
-    source: 'topics:Balkon bepflanzen: So senkst du die Gemüsekosten'
-    score: 0.55
-    keywords:
-    - Balkon Gemüse
-    - Kräuter ziehen
-    - Gemüse selber ziehen
-  - topic: Energiekosten senken mit kleinen Veränderungen
-    pillar: strom-sparen
-    signal: niche_hook
-    source: topics:Energiekosten senken mit kleinen Veränderungen
-    score: 0.55
-    keywords:
-    - Energie
-    - Kosten
-    - SparTipps
-  - topic: Kostenloses Girokonto ohne Gebühren finden
-    pillar: konto-karten
-    signal: niche_hook
-    source: topics:Kostenloses Girokonto ohne Gebühren finden
-    score: 0.55
-    keywords:
-    - Kostenloses Girokonto
-    - Girokonto Vergleich
-    - Kontoführungsgebühren sparen
-  - topic: 'Stromanbieter wechseln: Tarife prüfen und Kosten senken'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Stromanbieter wechseln: Tarife prüfen und Kosten senken'
-    score: 0.55
-    keywords:
-    - Stromanbieter wechseln
-    - Stromvergleich
-    - Stromkosten senken
-  - topic: Versteckte Kosten im Mietwagenvertrag entschlüsseln
+  - topic: Günstige Flüge für den Spätsommer finden
     pillar: mietwagen
     signal: niche_hook
-    source: topics:Versteckte Kosten im Mietwagenvertrag entschlüsseln
+    source: topics:Günstige Flüge für den Spätsommer finden
     score: 0.55
     keywords:
-    - Mietwagenvertrag
-    - versteckte Kosten
-    - Urlaubskasse
+    - Flugtickets günstig
+    - Flugvergleich
+    - Reisebudget sparen
+  - topic: Internet-Speed optimieren mit dem richtigen Router
+    pillar: internet-dsl
+    signal: niche_hook
+    source: topics:Internet-Speed optimieren mit dem richtigen Router
+    score: 0.55
+    keywords:
+    - Internet-Speed
+    - Router
+    - Optimieren
+  - topic: Mietwagen-Kosten im Ausland minimieren
+    pillar: mietwagen
+    signal: niche_hook
+    source: topics:Mietwagen-Kosten im Ausland minimieren
+    score: 0.55
+    keywords:
+    - Mietwagen
+    - Ausland
+    - Kosten minimieren
+  - topic: 'Schufa-Eintrag löschen lassen: So gehst du richtig vor'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Schufa-Eintrag löschen lassen: So gehst du richtig vor'
+    score: 0.55
+    keywords:
+    - Schufa Eintrag löschen
+    - Negativeintrag entfernen
+    - Bonität verbessern
+  - topic: 'Steckdosenleiste mit Schalter: Der unterschätzte Hebel am Arbeitsplatz'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Steckdosenleiste mit Schalter: Der unterschätzte Hebel am Arbeitsplatz'
+    score: 0.55
+    keywords:
+    - Steckdosenleiste Schalter
+    - Standby vermeiden
+    - Arbeitsplatz Strom
+  - topic: 'Undichte Fenster abdichten: Was bei alten Rahmen zuerst hilft'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Undichte Fenster abdichten: Was bei alten Rahmen zuerst hilft'
+    score: 0.55
+    keywords:
+    - Fenster abdichten
+    - Zugluft stoppen
+    - Heizkosten senken
 live_web:
   enabled: false
   findings: []

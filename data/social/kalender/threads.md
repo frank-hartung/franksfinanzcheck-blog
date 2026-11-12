@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Threads
 
-> Automatisch aktualisiert: 11.11.2026 21:14 (Europe/Berlin)  
+> Automatisch aktualisiert: 12.11.2026 14:51 (Europe/Berlin)  
 > Profil: https://www.threads.net/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `threads.ics`
 
@@ -13,23 +13,23 @@
 ## Kommende Beiträge
 
 ### Do, 12. November 2026
-- **09:15** ⏳ Privathaftpflicht: Warum so wichtig und was sie kostet — _nutzen_ · Launch  
+- **16:15** ⏳ Privathaftpflicht: Warum so wichtig und was sie kostet — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/
-- **16:15** ⏳ Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/
+- **20:30** ⏳ Energieausweis: Was er für deine Fixkosten bedeutet — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/
 ### Fr, 13. November 2026
 - **09:15** ⏳ Dein Haus sicher schützen: Das neue Vorsorge-Update 2026 — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/
-- **16:15** ⏳ Energieausweis: Was er für deine Fixkosten bedeutet — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/
+- **16:15** ⏳ Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/
 ### Sa, 14. November 2026
-- **09:15** ⏳ Wohngebäudeversicherung Vergleich: Worauf du achten musst — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/
+- **09:15** ⏳ Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/
 - **16:15** ⏳ Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/
 ### So, 15. November 2026
-- **09:15** ⏳ Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/
+- **09:15** ⏳ Wohngebäudeversicherung Vergleich: Worauf du achten musst — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/
 - **16:15** ⏳ Waschmaschine beladen: Weniger Kosten bei jedem Waschgang — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/
 ### Mo, 16. November 2026
@@ -82,6 +82,11 @@
   https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/
 - **16:15** ⏳ Lastschrift und Dauerauftrag: Was du prüfen solltest — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/
+### Do, 26. November 2026
+- **09:15** ⏳ Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/
+- **16:15** ⏳ Störung beim Internetanbieter: So sicherst du deine Rechte — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte/
 
 ## Zuletzt veröffentlicht
 

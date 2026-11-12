@@ -266,9 +266,9 @@ Marken-Oberflächen-Wache vom 20.09.2026:
 | **RTO** (Wiederherstellung) | < 30 Min. für KV, < 60 Min. für Repo | Probe `restore_drill.sh` in < 5 Min.; Ernstfall-Anleitung unten mit `gh release download` + `openssl` + `wrangler kv bulk put --remote` |
 | **Aufbewahrung** | Repo 14, KV 35 Releases (Entwürfe) | `backup-offsite.yml` KEEP=14 / 35; älteste darüber automatische Löschung |
 | **Verschlüsselung** | AES-256-CBC/PBKDF2, Bundle 200k, KV 600k | Workflow + Prüfer `backup_einrichtung.py` E3 (≥ 20 Zeichen, empfohlen 32+) |
-| **Prüfung** | 8 Live-Punkte E1–E8 je Lauf, 3 Frist-Stufen, 18 Fallgruppen Selbsttest | `backup_einrichtung.py --selftest`, `test_backup_einrichtung` (47 Tests, inkl. Wizard- und Rückweg-Vertrag) |
+| **Prüfung** | 8 Live-Punkte E1–E8 je Lauf, 3 Frist-Stufen, 19 Fallgruppen Selbsttest | `backup_einrichtung.py --selftest`, `test_backup_einrichtung` (47 Tests, inkl. Wizard- und Rückweg-Vertrag) |
 | **Ablauf-Warnung** | 30 Tage gelb, 14 Tage rot (nach Sicherung) | `BACKUP_FRIST_TAGE` → letzter Schritt `Fristwarnung` + Alerting `backup-frist` |
-| **Operative Wache** | Täglich 13:00 UTC, beide Familien `backup-*` + `kv-backup-*`, inkl. Inhalts-Nachweis (Assets) | `backup_freshness_guard.py` (15 Fälle) + `backup_selbstheilung.py` (18 Fälle, Selbstheilung mit Budget) + Workflow `backup-frischwache.yml` → Alerting `backup-frisch` |
+| **Operative Wache** | Täglich 13:00 UTC, beide Familien `backup-*` + `kv-backup-*`, inkl. Inhalts-Nachweis (Assets) | `backup_freshness_guard.py` (15 Fälle) + `backup_selbstheilung.py` (22 Fälle, Selbstheilung mit Budget) + Workflow `backup-frischwache.yml` → Alerting `backup-frisch` |
 
 **Was gesichert wird – vollständig:**
 
@@ -350,7 +350,7 @@ den Kreis jetzt selbst:
 ```bash
 python3 scripts/backup_selbstheilung.py --probe        # messen + entscheiden, kein Anstoß
 python3 scripts/backup_selbstheilung.py --heilen       # mit Anstoß (braucht actions: write)
-python3 scripts/backup_selbstheilung.py --selftest     # 18 Fallgruppen, offline
+python3 scripts/backup_selbstheilung.py --selftest     # 22 Fallgruppen, offline
 npm run backup:selbstheilung                           # Kurzform der Probe
 ```
 
@@ -358,6 +358,47 @@ npm run backup:selbstheilung                           # Kurzform der Probe
 erzeugt keine Secrets, ändert keine Environment-Regel und schaltet keinen
 Schutz ab. Fehlt die Einrichtung (E1–E8), bleibt der Lauf rot im Schritt
 „Voraussetzungen prüfen“ – mit Einrichtungs-Rat, nicht mit Frische-Rat.
+
+### Eine Ursache, ein Rat – und kein Abbruch mitten in der Heilung
+
+Zwei Zusagen, die seit dem **10.11.2026** gelten (Vorgang WF-3150 / #1030)
+und die man an einem roten Lauf nachprüfen kann:
+
+**1. Der Leerlauf-Schritt rät nicht mehr.** Am 09.11.2026 (Lauf
+`42715328453`) trug ein Lauf **zwei** rote Schritte mit **zwei**
+verschiedenen Ratschlägen: „Voraussetzungen prüfen“ (richtig: E1–E8 offen)
+und „Leerlauf prüfen“ (falsch: „ein Lauf ist grün, gesichert wurde nichts“ –
+es war gar kein Lauf grün). Der zweite Schritt bekam den Befund des ersten
+nie, obwohl der Prüfer den Parameter dafür seit dem 07.11. hatte.
+
+Seitdem gilt: Der Schritt, der es weiß, sagt es – „Voraussetzungen prüfen“
+schreibt die offenen Kennungen (`E1 … E8`) in seine Schritt-Ausgabe
+`offene_einrichtung`, der Leerlauf-Schritt liest sie:
+
+| Lage | Was der Leerlauf-Schritt tut |
+|---|---|
+| Einrichtung nachweislich offen | **ein Hinweis, kein zweiter Rat** – die Ursache trägt „Voraussetzungen prüfen“ |
+| Einrichtung geprüft, nichts offen (`offene_einrichtung` leer) | der echte Leerlauf-Befund (Exit 4) bleibt unverändert scharf |
+| gar keine Auskunft (Schritt nicht gelaufen) | **Exit 2, rot** – „weiß nicht“ ist kein Grün und kein Rat |
+
+**Nachschärfung 12.11.2026:** Ein leerer Wert allein ist keine Auskunft –
+GitHub liefert für eine Schritt-Ausgabe denselben leeren Text, wenn der
+Schritt übersprungen wurde oder abgestürzt ist. Die Einrichtungsprüfung
+schreibt deshalb zusätzlich `einrichtung_geprueft=ja`; fehlt dieser Beleg,
+verwirft der Leerlauf-Schritt den Wert und endet rot (Exit 2). Erst damit ist
+die dritte Zeile der Tabelle im Workflow tatsächlich erreichbar (Akte
+`WARTUNG-BACKUP-WF-3150-1030-HIGHEND-2026-11-12.md`).
+
+Lokal von Hand (`npm run backup:selbstheilung`) gibt es die Einrichtungslage
+nicht; dort sagt der Aufruf das ausdrücklich: `--ohne-setup`.
+
+**2. Der Heilungslauf wird nicht mehr abgewürgt.** `cancel-in-progress` galt
+für *jeden* Lauf dieses Workflows. Seit die Wache selbst anstößt und bis zu
+15 Minuten auf das Ergebnis wartet, brach ein nachfolgender Lauf genau diesen
+Wartezustand ab – der einzige Schreiber im Kreis hat sich selbst verdrängt.
+Jetzt darf nur ein `push`-Lauf (Code-Probe an einem Prüfer, ohne
+Betriebsabsicht) einen anderen verdrängen; der **tägliche Lauf** und ein
+**manueller „Run workflow“** laufen immer zu Ende.
 
 ## Einrichtung Schritt für Schritt
 

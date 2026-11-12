@@ -26,7 +26,7 @@ quellen:
     titel: "Referenzseite verbraucherzentrale.de"
     url: "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
     herausgeber: "Verbraucherzentrale"
-faktencheck: 2026-10-20
+faktencheck: 2026-11-12
 kurzantwort: "Die Urlaubskasse lässt sich effektiv durch automatisierte Sparraten, den Verkauf von Gebrauchtwaren und die gezielte Reduzierung von Fixkosten vergrößern. Durch die konsequente Einsparung kleiner Alltagsbeträge können Reisende jährlich durchschnittlich 500 Euro zusätzlich für ihre Reisekasse generieren."
 ---
 

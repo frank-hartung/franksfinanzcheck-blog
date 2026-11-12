@@ -27,3 +27,4 @@
 {"zeitstempel": "2026-11-09T16:32:27.298753+02:00", "anfragen": 25, "zaehlung": {"ok": 23, "cache": 0, "fehler": 2, "uebersprungen": 0}, "treffer": 194, "sichtbar": 0}
 {"zeitstempel": "2026-11-10T15:56:17.465413+02:00", "anfragen": 25, "zaehlung": {"ok": 23, "cache": 0, "fehler": 2, "uebersprungen": 0}, "treffer": 194, "sichtbar": 0}
 {"zeitstempel": "2026-11-11T15:07:58.172963+02:00", "anfragen": 25, "zaehlung": {"ok": 23, "cache": 0, "fehler": 2, "uebersprungen": 0}, "treffer": 197, "sichtbar": 0}
+{"zeitstempel": "2026-11-12T16:09:00.051702+02:00", "anfragen": 25, "zaehlung": {"ok": 23, "cache": 0, "fehler": 2, "uebersprungen": 0}, "treffer": 197, "sichtbar": 0}
