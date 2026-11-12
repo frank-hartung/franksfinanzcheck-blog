@@ -166,8 +166,61 @@ sys.exit(0 if os.environ["GEGEBENER_NAME"] in namen else 1)
 '
 }
 
-variable_wert() {  # $1 = Variablenname; stdout = Wert (leer, wenn nicht gesetzt)
-  gh variable get "$1" --repo "$QUELLE" 2>/dev/null | tr -d '\r\n'
+variable_lesen() {  # $1 = Variablenname; stdout = Wert; Exit 0 = gesetzt, 1 = fehlt, 2 = nicht prüfbar
+  # 12.11.2026 (WF-3150 / #1030): Zwei Fehler in einer Zeile geheilt.
+  #  1. `gh variable get` gibt es erst ab gh 2.31 – auf älteren CLIs (Debian
+  #     liefert 2.23.0) bricht der Aufruf ab; ohne REST-Endpunkt wird die
+  #     Variable nie gelesen.
+  #  2. Fehlt der Lesetunnel (403), war das Ergebnis leer – also „fehlt“.
+  #     Ein unlesbarer Punkt ist aber kein fehlender; er gehört in `ungeprueft`,
+  #     nie in `offen`.
+  # Die REST-API funktioniert auf jeder gh-Version und trennt drei Zustände:
+  #   200 → Wert, 404 → nicht gesetzt, alles andere → nicht prüfbar.
+  local antwort code wert
+  # `gh api` schreibt den HTTP-Fehler nach STDERR (z. B. `gh: Not Found (HTTP 404)`).
+  # Beides wird zusammengefasst: Die Unterscheidung 404/„alles andere“ hängt
+  # sonst an einem Kanal, den dieser Aufruf gar nicht liest.
+  antwort="$(gh api "repos/$QUELLE/actions/variables/$1" 2>&1)"
+  code=$?
+  if [ "$code" -ne 0 ]; then
+    case "$antwort" in
+      *"HTTP 404"*|*'"status": "404"'*|*"Not Found"*) return 1 ;;
+    esac
+    return 2
+  fi
+  wert="$(printf '%s' "$antwort" | python3 -c '
+import json, sys
+try:
+    d = json.load(sys.stdin)
+except Exception:
+    sys.exit(1)
+v = d.get("value")
+if not isinstance(v, str):
+    sys.exit(1)
+sys.stdout.write(v)
+' 2>/dev/null)" || return 2
+  printf '%s' "$wert"
+  return 0
+}
+
+variable_setzen() {  # $1 = Variablenname, $2 = Wert; REST-Fallback für gh < 2.31
+  local name="$1" wert="$2" koerper
+  if gh variable --help >/dev/null 2>&1; then
+    gh variable set "$name" --repo "$QUELLE" --body "$wert" 2>/dev/null && return 0
+  fi
+  koerper="$(NAME="$name" WERT="$wert" python3 -c '
+import json, os
+print(json.dumps({"name": os.environ["NAME"], "value": os.environ["WERT"]}))
+')" || return 1
+  if printf '%s' "$koerper" | gh api -X PATCH "repos/$QUELLE/actions/variables/$name" --input - >/dev/null 2>&1; then
+    return 0
+  fi
+  printf '%s' "$koerper" | gh api -X POST "repos/$QUELLE/actions/variables" --input - >/dev/null 2>&1
+}
+
+variable_wert() {  # $1 = Variablenname; stdout = Wert (leer, wenn nicht gesetzt ODER nicht lesbar)
+  # Nur für Stellen beim Setzen; jede PRÜFUNG nutzt `variable_lesen`.
+  variable_lesen "$1" 2>/dev/null | tr -d '\r\n'
 }
 
 frage_ja() {  # $1 = Frage; Exit 0 bei j/J
@@ -308,11 +361,15 @@ check() {
 
   # E1 Ziel-Repository (Variable + Repo-Existenz + Sichtbarkeit)
   local ziel_wert repo_json sichtbar
-  ziel_wert="$(variable_wert BACKUP_REPO)"
-  if [ -z "$ziel_wert" ]; then
-    offen "E1 Repository-Variable BACKUP_REPO fehlt"
-    link "$NEUES_REPO_URL"
-  else
+  ziel_wert="$(variable_lesen BACKUP_REPO 2>/dev/null)"
+  case $? in
+    1) offen "E1 Repository-Variable BACKUP_REPO fehlt"
+       link "$NEUES_REPO_URL"
+       ziel_wert="" ;;
+    2) ungeprueft "E1 BACKUP_REPO – Variable nicht lesbar (Variable-API gesperrt) – Anwesenheit NICHT bestätigt"
+       ziel_wert="" ;;
+  esac
+  if [ -n "$ziel_wert" ]; then
     repo_json="$(gh api "repos/$ziel_wert" 2>/dev/null)" || repo_json=""
     if [ -z "$repo_json" ]; then
       offen "E1 BACKUP_REPO=$ziel_wert – Repository nicht auffindbar/kein Zugriff"
@@ -355,24 +412,32 @@ check() {
 
   # E6 KV-Namespace (Variable, 32 Hex-Zeichen)
   local kv
-  kv="$(variable_wert KV_NAMESPACE_ID_ABO)"
-  if [ -z "$kv" ]; then
-    offen "E6 Repository-Variable KV_NAMESPACE_ID_ABO fehlt"
-    link "$CF_KV_URL"
-  elif printf '%s' "$kv" | grep -Eq '^[0-9a-fA-F]{32}$'; then
-    ok "E6 KV_NAMESPACE_ID_ABO gesetzt (Format 32 Hex-Zeichen)"
-  else
-    offen "E6 KV_NAMESPACE_ID_ABO hat nicht das Format einer Namespace-ID (32 Hex-Zeichen erwartet, Name „ABO“ ist falsch)"
-  fi
+  kv="$(variable_lesen KV_NAMESPACE_ID_ABO 2>/dev/null)"
+  case $? in
+    1) offen "E6 Repository-Variable KV_NAMESPACE_ID_ABO fehlt"
+       link "$CF_KV_URL" ;;
+    2) ungeprueft "E6 KV_NAMESPACE_ID_ABO – Variable nicht lesbar (Variable-API gesperrt) – Anwesenheit NICHT bestätigt" ;;
+    *)
+      if printf '%s' "$kv" | grep -Eq '^[0-9a-fA-F]{32}$'; then
+        ok "E6 KV_NAMESPACE_ID_ABO gesetzt (Format 32 Hex-Zeichen)"
+      else
+        offen "E6 KV_NAMESPACE_ID_ABO hat nicht das Format einer Namespace-ID (32 Hex-Zeichen erwartet, Name „ABO“ ist falsch)"
+      fi ;;
+  esac
 
-  # E7 D1 (optional)
+  # E7 D1 (optional, UUID 8-4-4-4-12 wie in backup_einrichtung.py)
   local d1
-  d1="$(variable_wert D1_DATABASE_ID)"
-  if [ -n "$d1" ]; then
-    ok "E7 D1_DATABASE_ID gesetzt (Klick-Zähler wird mitgesichert)"
-  else
-    info "E7 D1_DATABASE_ID nicht gesetzt – optional (nur nötig, wenn der Klick-Zähler mitgesichert werden soll)"
-  fi
+  d1="$(variable_lesen D1_DATABASE_ID 2>/dev/null)"
+  case $? in
+    0)
+      if printf '%s' "$d1" | grep -Eq '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'; then
+        ok "E7 D1_DATABASE_ID gesetzt (Format UUID, Klick-Zähler wird mitgesichert)"
+      else
+        offen "E7 D1_DATABASE_ID hat kein gültiges UUID-Format (8-4-4-4-12 Hex erwartet)"
+      fi ;;
+    1) info "E7 D1_DATABASE_ID nicht gesetzt – optional (nur nötig, wenn der Klick-Zähler mitgesichert werden soll)" ;;
+    *) info "E7 D1_DATABASE_ID nicht lesbar – optional, deshalb ohne Befund (Sicherung nur KV)" ;;
+  esac
 
   abschnitt "Ergebnis"
   if [ "$OFFENE" -eq 0 ] && [ "$UNGEPRUEFT" -eq 0 ]; then
@@ -477,7 +542,7 @@ fi
 if [ "$(variable_wert BACKUP_REPO)" = "$ZIEL" ]; then
   ok "Repository-Variable BACKUP_REPO=$ZIEL ist gesetzt"
 else
-  if gh variable set BACKUP_REPO --repo "$QUELLE" --body "$ZIEL" 2>/dev/null; then
+  if variable_setzen BACKUP_REPO "$ZIEL"; then
     ok "Repository-Variable BACKUP_REPO=$ZIEL gesetzt"
   else
     hinweis "Variable konnte nicht gesetzt werden – manuell: Settings → Secrets and variables → Actions → Variables → BACKUP_REPO = $ZIEL"
@@ -598,7 +663,7 @@ while :; do
     hinweis "Keine Namespace-ID (32 Hex-Zeichen erwartet) – bitte die ID kopieren, nicht den Namen."
     continue
   fi
-  if gh variable set KV_NAMESPACE_ID_ABO --repo "$QUELLE" --body "$KV_ID" 2>/dev/null; then
+  if variable_setzen KV_NAMESPACE_ID_ABO "$KV_ID"; then
     ok "Repository-Variable KV_NAMESPACE_ID_ABO gesetzt"
   else
     hinweis "Variable konnte nicht gesetzt werden – manuell eintragen (Settings → Variables)."
@@ -609,16 +674,16 @@ done
 # ---- Schritt 7 (E7): D1 optional ----------------------------------------
 abschnitt "Schritt 7/7 (E7, optional) – D1-Datenbank des Klick-Zählers"
 if frage_ja "Soll der Klick-Zähler (D1) mitgesichert werden?"; then
-  info "ID: Cloudflare → Storage & Databases → D1 → Datenbank des Klick-Zählers (32 Hex-Zeichen)."
+  info "ID: Cloudflare → Storage & Databases → D1 → Datenbank des Klick-Zählers (UUID, 8-4-4-4-12 Hex)."
   info "Der CF-Token aus Schritt 5 braucht dafür zusätzlich „D1: Read“."
   while :; do
     D1_ID="$(heimlich "D1_DATABASE_ID einfügen (leer lassen = überspringen):")"
     [ -z "$D1_ID" ] && { hinweis "Übersprungen."; break; }
-    if ! printf '%s' "$D1_ID" | grep -Eq '^[0-9a-fA-F]{32}$'; then
-      hinweis "Keine D1-ID (32 Hex-Zeichen erwartet) – bitte neu."
+    if ! printf '%s' "$D1_ID" | grep -Eq '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'; then
+      hinweis "Keine D1-Datenbank-ID (UUID 8-4-4-4-12 Hex erwartet, wie in Cloudflare D1 angezeigt) – bitte neu."
       continue
     fi
-    gh variable set D1_DATABASE_ID --repo "$QUELLE" --body "$D1_ID" 2>/dev/null \
+    variable_setzen D1_DATABASE_ID "$D1_ID" \
       && ok "Repository-Variable D1_DATABASE_ID gesetzt" \
       || hinweis "Variable konnte nicht gesetzt werden – manuell eintragen."
     break
