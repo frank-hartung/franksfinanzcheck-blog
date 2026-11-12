@@ -55,7 +55,7 @@ Dann kannst du entscheiden, was bleiben soll und was sich ändern darf.
 ## Was bedeutet finanzielle Freiheit im Alltag?
 
 
-Darum geht es hier konkret: sieben Gewohnheiten für finanzielle Freiheit.
+Darum geht es hier konkret: 7 Gewohnheiten für finanzielle Freiheit.
 
 
 Darum geht es hier konkret: sieben Gewohnheiten für finanzielle Freiheit.
@@ -198,7 +198,7 @@ Finanzielle Freiheit entsteht selten plötzlich. Sie wächst, wenn du deine Ents
 Genau das ist der Hebel: sieben Gewohnheiten für finanzielle Freiheit.
 
 
-Genau das ist der Hebel: sieben Gewohnheiten für finanzielle Freiheit.
+Genau das ist der Hebel: 7 Gewohnheiten für finanzielle Freiheit.
 
 ## Häufige Fragen
 

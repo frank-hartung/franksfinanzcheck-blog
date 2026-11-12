@@ -1,6 +1,6 @@
 {
   "target": 6,
-  "ready": 3,
+  "ready": 2,
   "pool_size": 10,
   "generated_at": "2026-11-12T11:50:36Z",
   "candidates": [
@@ -40,20 +40,10 @@
     },
     {
       "slug": "2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
-      "ready": true,
+      "ready": false,
       "sha256": "7c7b0269ab02c21994708bb90f62be62b6dca0fc3a06ed78dd1da85fb06409b8",
-      "flesch": 62.4,
       "measured_at": "2026-11-12T11:43:53Z",
-      "score": 0.962,
-      "parts": {
-        "spelling": 0.88,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.86,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-09-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",

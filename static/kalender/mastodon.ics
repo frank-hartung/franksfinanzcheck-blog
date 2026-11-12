@@ -6,24 +6,9 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Mastodon
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:mastodon:2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfall
- e-verlaengerung:takeaway:2026-10-13@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
-DTSTART:20261013T053000Z
-DTEND:20261013T054500Z
-SUMMARY:Mastodon: Handyvertrag kündigen: Enddatum\, Nachweis und Rufnu
- mmer (takeaway)
-DESCRIPTION:Status: veröffentlicht\nWinkel: takeaway\nKanal: Mastodon\
- nArtikel: https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-
- kuendigen-raus-aus-der-kostenfalle-verlaengerung/
-URL:https://franksfinanzcheck.de/posts/2026-10-07-handyvertrag-kuendig
- en-raus-aus-der-kostenfalle-verlaengerung/
-STATUS:CONFIRMED
-END:VEVENT
-BEGIN:VEVENT
 UID:mastodon:2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordn
  en:nutzen:2026-10-13@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261013T153000Z
 DTEND:20261013T154500Z
 SUMMARY:Mastodon: Der erste eigene Haushalt: Fixkosten von Anfang an o
@@ -38,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nu
  tzen:2026-10-14@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261014T053000Z
 DTEND:20261014T054500Z
 SUMMARY:Mastodon: Geld abheben im Ausland: Wo die Gebühren wirklich en
@@ -53,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-17-abos-und-vertraege-stiller-posten-haushaltspla
  n:nutzen:2026-10-14@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261014T093000Z
 DTEND:20261014T094500Z
 SUMMARY:Mastodon: Abos und Verträge: Der stille Posten im Haushaltspla
@@ -68,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn:nut
  zen:2026-10-15@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261015T053000Z
 DTEND:20261015T054500Z
 SUMMARY:Mastodon: Warmwasser sparen: Die Rechnung hinter – Warmwasserk
@@ -83,7 +68,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruef
  en:nutzen:2026-10-15@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261015T093000Z
 DTEND:20261015T094500Z
 SUMMARY:Mastodon: Lastschrift und Dauerauftrag: Was du prüfen solltest
@@ -98,7 +83,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzae
  hler-noch-lohnt:nutzen:2026-10-16@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261016T053000Z
 DTEND:20261016T054500Z
 SUMMARY:Mastodon: Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler l
@@ -113,7 +98,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-
  deine-rechte:nutzen:2026-10-16@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261016T093000Z
 DTEND:20261016T094500Z
 SUMMARY:Mastodon: Störung beim Internetanbieter: So sicherst du deine 
@@ -128,7 +113,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fu
  ellen:takeaway:2026-10-17@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261017T053000Z
 DTEND:20261017T054500Z
 SUMMARY:Mastodon: Urlaub sparen: Budget\, Buchung und Kosten im Blick 
@@ -143,7 +128,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mit
  nehmen:nutzen:2026-10-17@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261017T093000Z
 DTEND:20261017T094500Z
 SUMMARY:Mastodon: Umzug mit Internet: Anschluss und Rufnummer mitnehme
@@ -158,7 +143,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet:
  nutzen:2026-10-18@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261018T053000Z
 DTEND:20261018T054500Z
 SUMMARY:Mastodon: Grundversorgung Strom und Gas: Was sie leistet und k
@@ -173,7 +158,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt
  -ist:nutzen:2026-10-18@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261018T093000Z
 DTEND:20261018T094500Z
 SUMMARY:Mastodon: Einlagensicherung: Wie viel Guthaben geschützt ist (
@@ -188,7 +173,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-v
  ermeiden:nutzen:2026-10-19@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261019T053000Z
 DTEND:20261019T054500Z
 SUMMARY:Mastodon: Zählerstand ablesen und melden: Schätzwerte vermeide
@@ -203,7 +188,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-r
  echnet:nutzen:2026-10-19@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261019T093000Z
 DTEND:20261019T094500Z
 SUMMARY:Mastodon: Großeinkauf und Vorrat: Wann Bevorraten sich rechnet
@@ -218,7 +203,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wir
  klich-druecken:nutzen:2026-10-20@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261020T053000Z
 DTEND:20261020T054500Z
 SUMMARY:Mastodon: Smart Home: So prüfst du echte Stromersparnis – Smar
@@ -233,7 +218,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-gel
  d-zurueck:nutzen:2026-10-20@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261020T093000Z
 DTEND:20261020T094500Z
 SUMMARY:Mastodon: Balkonkraftwerk Förderung: So holst du dir Geld zurü
@@ -248,7 +233,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-ha
  ushalt:nutzen:2026-10-21@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261021T053000Z
 DTEND:20261021T054500Z
 SUMMARY:Mastodon: Energiekosten senken: Smarte Helfer für den Haushalt
@@ -263,7 +248,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fu
  er-schritt:frage:2026-10-21@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261021T053000Z
 DTEND:20261021T054500Z
 SUMMARY:Mastodon: Dein Weg zu geringeren Monatskosten: Schritt für Sch
@@ -278,7 +263,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-
  kontrolle:nutzen:2026-10-22@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261022T053000Z
 DTEND:20261022T054500Z
 SUMMARY:Mastodon: Haushaltskosten reduzieren: So gewinnst du die Kontr
@@ -293,7 +278,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkos
  ten-falle:nutzen:2026-10-22@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261022T053000Z
 DTEND:20261022T054500Z
 SUMMARY:Mastodon: VPN Zuhause: Schutzschild oder unnötige Fixkosten-Fa
@@ -308,7 +293,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sof
  ort-senken:frage:2026-10-23@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261023T053000Z
 DTEND:20261023T054500Z
 SUMMARY:Mastodon: Kleine Energiespar‑Tricks: Deine Kosten sofort senke
@@ -323,7 +308,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest
  -du-richtig:vergleich:2026-10-23@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261023T053000Z
 DTEND:20261023T054500Z
 SUMMARY:Mastodon: Wärmepumpe vs. Gasheizung 2026: So entscheidest du r
@@ -338,7 +323,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgaran
  tie-gas:zitat:2026-10-24@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261024T093000Z
 DTEND:20261024T094500Z
 SUMMARY:Mastodon: Sicher heizen: Was sie abdeckt und wie lange sie läu
@@ -353,7 +338,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im
  -ueberblick:nutzen:2026-10-24@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261024T093705Z
 DTEND:20261024T095205Z
 SUMMARY:Mastodon: Stromkosten senken: Clevere Haushaltsgeräte im Überb
@@ -368,7 +353,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-
  2026:zitat:2026-10-25@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261025T103000Z
 DTEND:20261025T104500Z
 SUMMARY:Mastodon: 50-30-20-Regel: Beherrsche dein Budget – Fixkosten s
@@ -383,7 +368,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-10-dsl-wechselbonus-sichern:zahl:2026-10-26@frank
  sfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261026T063000Z
 DTEND:20261026T064500Z
 SUMMARY:Mastodon: DSL-Wechselbonus sichern: So sparst du beim Internet
@@ -398,7 +383,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstiger
  en-konto:nutzen:2026-10-26@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261026T063000Z
 DTEND:20261026T064500Z
 SUMMARY:Mastodon: Bankgebühren senken: 7 Schritte zum günstigeren Kont
@@ -413,7 +398,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartr
  icks:zahl:2026-10-27@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261027T063000Z
 DTEND:20261027T064500Z
 SUMMARY:Mastodon: Energieeffizienz im Haushalt: 5 schnelle Spartricks 
@@ -428,7 +413,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige
  -tarife-fuer-2026:frage:2026-10-27@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261027T103000Z
 DTEND:20261027T104500Z
 SUMMARY:Mastodon: Preisgarantie Gas: So sicherst du günstige Tarife (f
@@ -443,7 +428,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-
  monatlichen:vergleich:2026-10-28@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261028T063000Z
 DTEND:20261028T064500Z
 SUMMARY:Mastodon: ETF-Sparplan starten: Deine Schritt-für-Schritt-Anle
@@ -458,7 +443,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-verme
  iden:zahl:2026-10-28@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261028T103000Z
 DTEND:20261028T104500Z
 SUMMARY:Mastodon: Gasrechnung senken: Fehler im Spätsommer vermeiden (
@@ -473,7 +458,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-an
  bieterwechsel:frage:2026-10-29@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261029T063000Z
 DTEND:20261029T064500Z
 SUMMARY:Mastodon: DSL-Anbieterwechsel: Ablauf\, Ausfallzeiten und Effe
@@ -488,7 +473,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekas
  se-fuellen:nutzen:2026-10-29@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261029T063000Z
 DTEND:20261029T064500Z
 SUMMARY:Mastodon: Strategisch sparen: So kannst du deine Reisekasse fü
@@ -503,7 +488,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-10-27-frugalismus-familie-clever-sparen-ohne-verzich
  t:thread:2026-10-30@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261030T163000Z
 DTEND:20261030T164500Z
 SUMMARY:Mastodon: Frugalismus Familie: Clever sparen ohne Verzicht (th
@@ -518,7 +503,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-10-28-flugvergleich-im-winter-so-findest-du-echte-bi
  lligfluege:nutzen:2026-10-30@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261030T190000Z
 DTEND:20261030T191500Z
 SUMMARY:Mastodon: Flugvergleich im Winter: So findest du echte Billigf
@@ -533,7 +518,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-
  ohne-gebuehren:takeaway:2026-10-31@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261031T103000Z
 DTEND:20261031T104500Z
 SUMMARY:Mastodon: Kostenloses Girokonto: Ein Konto ohne Gebühren finde
@@ -548,7 +533,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-u
  pdate-2026:zahl:2026-11-02@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261102T103000Z
 DTEND:20261102T104500Z
 SUMMARY:Mastodon: Dein Haus sicher schützen: Das neue Vorsorge-Update 
@@ -563,7 +548,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-inter
  net:thread:2026-11-02@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261102T163000Z
 DTEND:20261102T164500Z
 SUMMARY:Mastodon: DSL-Vergleich: So findest du den günstigsten Interne
@@ -578,7 +563,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und
  -was-sie-kostet:zitat:2026-11-03@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261103T063000Z
 DTEND:20261103T064500Z
 SUMMARY:Mastodon: Privathaftpflicht: Warum so wichtig und was sie kost
@@ -593,7 +578,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser
  -finden:frage:2026-11-03@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261103T103000Z
 DTEND:20261103T104500Z
 SUMMARY:Mastodon: Energiediebe stoppen: So kannst du Stromfresser find
@@ -608,7 +593,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:za
  hl:2026-11-04@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261104T063000Z
 DTEND:20261104T064500Z
 SUMMARY:Mastodon: Haushaltsbuch führen: App\, Excel oder Stift im Verg
@@ -623,7 +608,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:za
  hl:2026-11-04@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261104T103000Z
 DTEND:20261104T104500Z
 SUMMARY:Mastodon: Mietwagen ohne Kautionsfallen: So sparst du im Urlau
@@ -638,7 +623,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-10-12-energieausweis-was-das-dokument-fuer-deine-fix
  kosten:zitat:2026-11-06@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261106T103000Z
 DTEND:20261106T104500Z
 SUMMARY:Mastodon: Energieausweis: Was er für deine Fixkosten bedeutet 
@@ -653,7 +638,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-b
  ezahlbar:zitat:2026-11-06@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261106T163000Z
 DTEND:20261106T164500Z
 SUMMARY:Mastodon: Ökostrom Anbieter wechseln: Sicher\, grün und bezahl
@@ -668,7 +653,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalism
  us-tipps:zahl:2026-11-09@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261108T222630Z
 DTEND:20261108T224130Z
 SUMMARY:Mastodon: Frugalismus-Tipps: Mehr Freiheit durch klugen Verzic
@@ -683,7 +668,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-26-dns-server-wechseln-schnelleres-sichereres-int
  ernet:zahl:2026-11-09@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261109T063000Z
 DTEND:20261109T064500Z
 SUMMARY:Mastodon: DNS-Server wechseln: Datenschutz\, Filter und Einric
@@ -698,7 +683,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-prei
  sspruengen:zahl:2026-11-09@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261109T103000Z
 DTEND:20261109T104500Z
 SUMMARY:Mastodon: Preisgarantie Gas: Was bei Preiserhöhung hilft (zahl)
@@ -712,7 +697,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-spa
  ren:zahl:2026-11-11@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261111T063000Z
 DTEND:20261111T064500Z
 SUMMARY:Mastodon: Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen
@@ -727,7 +712,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-c
  heck:nutzen:2026-11-13@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261113T063000Z
 DTEND:20261113T064500Z
 SUMMARY:Mastodon: Wlan verbessern mesh system oder repeater im check (
@@ -738,7 +723,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-
  aus-dem:nutzen:2026-11-13@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261113T063000Z
 DTEND:20261113T064500Z
 SUMMARY:Mastodon: Gaspreiserhöhung Sonderkündigungsrecht: Grundversorg
@@ -753,7 +738,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ec
  ke:zahl:2026-11-16@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261116T063000Z
 DTEND:20261116T064500Z
 SUMMARY:Mastodon: WLAN verbessern: So bringst du stabilen Speed in jed
@@ -768,7 +753,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem
  -waschgang:nutzen:2026-11-16@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261116T103000Z
 DTEND:20261116T104500Z
 SUMMARY:Mastodon: Waschmaschine beladen: Weniger Kosten bei jedem Wasc
@@ -783,7 +768,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dei
  n-geld-zurueck:thread:2026-11-18@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261118T063000Z
 DTEND:20261118T064500Z
 SUMMARY:Mastodon: Flugverspätung Entschädigung: So holst du dein Geld 
@@ -798,7 +783,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-rou
  ter-standort:frage:2026-11-18@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261118T103000Z
 DTEND:20261118T104500Z
 SUMMARY:Mastodon: WLAN-Frust lösen: So findest du den besten Router St
@@ -813,7 +798,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-a
  chten-musst:zahl:2026-11-20@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261120T063000Z
 DTEND:20261120T064500Z
 SUMMARY:Mastodon: Wohngebäudeversicherung Vergleich: Worauf du achten 
@@ -828,7 +813,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-26-handytarif-vergleichen-2026-guenstige-tarife:z
  ahl:2026-11-20@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261120T103000Z
 DTEND:20261120T104500Z
 SUMMARY:Mastodon: Handytarif 2026 vergleichen: Günstige Tarife ab 4\,9
@@ -843,7 +828,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-
  schnaeppchen:zahl:2026-11-23@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261123T063000Z
 DTEND:20261123T064500Z
 SUMMARY:Mastodon: September-Roadtrip: Clevere Wege zum Mietwagen-Schnä
@@ -858,7 +843,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezah
  len:zahl:2026-11-23@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261123T103000Z
 DTEND:20261123T104500Z
 SUMMARY:Mastodon: Kreditkarte vergleichen: Kostenlos und sicher zahlen
@@ -873,7 +858,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewusste
  n-konsum:zahl:2026-11-25@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261125T063000Z
 DTEND:20261125T064500Z
 SUMMARY:Mastodon: Frugalismus für Einsteiger: Mit kleinen Schritten sp
@@ -888,7 +873,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:mastodon:2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im
  -vergleich:zahl:2026-11-25@franksfinanzcheck.de
-DTSTAMP:20261111T201419Z
+DTSTAMP:20261112T135104Z
 DTSTART:20261125T103000Z
 DTEND:20261125T104500Z
 SUMMARY:Mastodon: Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergl
