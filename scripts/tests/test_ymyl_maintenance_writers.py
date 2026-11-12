@@ -130,6 +130,24 @@ class MaintenanceWritersTests(unittest.TestCase):
         self.assertIsNone(update_articles.set_lastmod(art, 'Geänderter Body.\n'))
         self.assertEqual(self.raw, self.path.read_text(encoding='utf-8'))
 
+    def test_kurzantwort_generator_reports_a_guarded_write_as_skipped(self):
+        import generate_kurzantworten
+        answer = ("Die Konditionen hängen vom Vertrag ab. "
+                  "Prüfe deshalb die Angaben des Anbieters vor dem Abschluss.")
+        out = io.StringIO()
+        with patch.object(sys, 'argv', [
+                'generate_kurzantworten.py', '--file', str(self.path)]), \
+             patch.object(gate, 'automatic_write_protected', return_value=False), \
+             patch.object(generate_kurzantworten.g, 'call_groq',
+                          return_value=answer), \
+             patch.object(generate_kurzantworten, 'set_kurzantwort',
+                          return_value=False), \
+             contextlib.redirect_stdout(out):
+            self.assertEqual(1, generate_kurzantworten.main())
+        self.assertIn('Schreibschutz verworfen', out.getvalue())
+        self.assertIn('0 Kurzantworten erzeugt, 1 übersprungen', out.getvalue())
+        self.assertEqual(self.raw, self.path.read_text(encoding='utf-8'))
+
     def test_all_scheduled_unlocked_writers_enforce_ymyl_guard(self):
         scripts_dir = Path(__file__).resolve().parents[1]
         expected = (
