@@ -1,8 +1,8 @@
 {
   "target": 6,
-  "ready": 2,
+  "ready": 3,
   "pool_size": 10,
-  "generated_at": "2026-11-12T11:50:36Z",
+  "generated_at": "2026-11-12T17:01:31Z",
   "candidates": [
     {
       "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
@@ -41,9 +41,25 @@
     {
       "slug": "2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
       "ready": false,
-      "sha256": "7c7b0269ab02c21994708bb90f62be62b6dca0fc3a06ed78dd1da85fb06409b8",
-      "measured_at": "2026-11-12T11:43:53Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
+      "sha256": "89b4b09949f5767b5b044265e4af1605e1bba3952f8aae2a6139d7aca2aed6f8",
+      "flesch": 61.5,
+      "measured_at": "2026-11-12T16:59:22Z",
+      "reason": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: ide",
+      "details": [
+        "🛑 2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
+        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…hinweis dieser artikel dient ausschließlich der allgemeinen information und stellt…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…keine anlage rechts oder steuerberatung dar prüfe konditionen und bedingungen…“ – doppelte Passage, manuell reparieren",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 0.962,
+      "parts": {
+        "spelling": 0.88,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.86,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
     },
     {
       "slug": "2026-11-09-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
@@ -70,16 +86,10 @@
     },
     {
       "slug": "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-      "ready": false,
-      "sha256": "b2f6a8204c56356fb1912274ddaa69bb11b9c031a1c62e56d721af27c0540205",
-      "flesch": 66.5,
-      "measured_at": "2026-11-12T11:46:10Z",
-      "reason": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: ide",
-      "details": [
-        "🛑 2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
-        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…hinweis dieser artikel dient ausschließlich der allgemeinen information und stellt…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…keine anlage rechts oder steuerberatung dar prüfe konditionen und bedingungen…“ – doppelte Passage, manuell reparieren",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
+      "ready": true,
+      "sha256": "8bbbc9f4100dcb65ec67c935a0deaa3913f71545a3fe2dd33ce8f3826a5c7a35",
+      "flesch": 67.4,
+      "measured_at": "2026-11-12T17:00:27Z",
       "score": 0.968,
       "parts": {
         "spelling": 0.9,
@@ -163,13 +173,14 @@
     {
       "slug": "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ready": false,
-      "sha256": "0339c140255fadbd36fe911c4a08d9927a3aee8c117980b3292cec19bfddec66",
-      "flesch": 65.3,
-      "measured_at": "2026-11-12T11:50:34Z",
+      "sha256": "6172a267708be1eebd308588e5f867a94b4ff4acef08a1006e3415f2f65f505b",
+      "flesch": 64.3,
+      "measured_at": "2026-11-12T17:01:31Z",
       "reason": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
       "details": [
         "🛑 2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
         "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erforderten zwingend einen Smart Meter, wird ohne Angabe von Voraussetzungen, Kosten oder Verfügbarkeit präzisiert.; 77d809de9e06d1d6910d (luecke): Es wird eine Prognose für den Strompreis 2026 angegeben („Trends erkennen“, „Netzentgelte steigen“), ohne dass dafür aktuelle Marktdaten oder offizielle Prognosen genannt werden.; ad7c0a90ef52ff35130e (luecke): Der Artikel behauptet, dass Preisgarantien vor Preissteigerungen schützen, liefert jedoch keine Quelle für diese Aussage.; f227178fbda2cc59c350 (luecke): Die Aussage, dass Ökostrom‑Tarife häufig günstiger als die Grundversorgung seien, wird nicht durch eine Quelle belegt.",
+        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…hinweis dieser artikel dient ausschließlich der allgemeinen information und stellt…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…keine anlage rechts oder steuerberatung dar prüfe konditionen und bedingungen…“ – doppelte Passage, manuell reparieren",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
       ],
       "score": 0.962,
@@ -206,8 +217,17 @@
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "43210335142",
+    "kind": "partial",
+    "run_id": "43264271512",
     "run_attempt": "1"
+  },
+  "recert": {
+    "at": "2026-11-12T17:01:31Z",
+    "renewed": [
+      "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
+      "2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
+      "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten"
+    ],
+    "tool": "scripts/reserve_recert.py"
   }
 }
