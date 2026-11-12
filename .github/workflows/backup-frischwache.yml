@@ -93,9 +93,28 @@ on:
 permissions:
   contents: read
 
+# ============================================================
+#  NIE MITTEN IM HEILUNGSKREIS ABBRECHEN (#1030, 10.11.2026)
+#  ----------------------------------------------------------
+#  BEFUND: `cancel-in-progress: true` galt für JEDEN Lauf dieses Workflows.
+#  Seit dem 07.11. ist der Lauf aber keine reine Messung mehr: Er stößt die
+#  Sicherung selbst an und wartet bis zu 15 Minuten auf ihr Ergebnis. Traf
+#  in dieser Zeit ein weiterer Lauf derselben Gruppe ein (der `push`-Trigger
+#  unten feuert bei JEDER Änderung an einem der Prüfer), wurde der laufende
+#  Lauf abgebrochen – und zwar GENAU an der Stelle, an der die Wache heilt.
+#  Ein Heilungslauf, der sich selbst abwürgt, ist keine Heilung.
+#  Der erste angestoßene Lauf läuft trotzdem zu Ende (`concurrency` von
+#  backup-offsite.yml: `cancel-in-progress: false`) – abgebrochen wurde nur
+#  der Zeuge.
+#  JETZT: Der PLANMÄSSIGE Tageslauf darf nie abgebrochen werden (er trägt
+#  die Selbstheilung), und auch ein manueller „Run workflow“ nicht – er ist
+#  eine Entscheidung eines Menschen. Nur der `push`-Lauf (eine Code-Änderung
+#  an einem Prüfer, ohne Betriebsabsicht) darf sich verdrängen: Er ist die
+#  Qualitätsprobe des neuen Codes, nicht die Tageswache.
+# ============================================================
 concurrency:
   group: backup-frischwache-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'push' }}
 
 jobs:
   frischwache:
@@ -179,6 +198,12 @@ jobs:
       #  Rat des Offsite-Jobs nicht doppelt vergeben wird.
       # ================================================================
       - name: Voraussetzungen prüfen (fail-closed – kein Schein-Grün)
+        # #1030 (10.11.2026): Dieser Schritt ist die EINZIGE Stelle, die weiß,
+        # welche Einrichtungspunkte offen sind. Er sagt es in `GITHUB_OUTPUT`
+        # (`offene_einrichtung`), und der Leerlauf-Schritt liest es. Bis heute
+        # bekam der seinen Befund nicht – und antwortete mit einem zweiten,
+        # falschen Rat (Lauf 42715328453).
+        id: setup
         env:
           # E8 liest die Environment-Schutzregeln des QUELL-Repos. Der fein
           # eingeschränkte Backup-Token (nur das Ziel-Repo) darf genau das
@@ -190,8 +215,11 @@ jobs:
           python3 scripts/backup_einrichtung.py --pruefen
           code=$?
           set -e
+          # Die Ausgabe entsteht AUCH bei Rot (der Prüfer schreibt sie immer) –
+          # sonst wüsste der nächste Schritt im wichtigsten Fall nichts.
+          OFFEN="$(grep -m1 '^offene_einrichtung=' "$GITHUB_OUTPUT" 2>/dev/null | cut -d= -f2- || true)"
           if [ "$code" != "0" ]; then
-            echo "::error::Die Offsite-Sicherung ist nicht eingerichtet (E1–E8 offen) – die Frischwache kann deshalb nichts messen und meldet NICHT grün. Siehe docs/ANLEITUNG-OFFSITE-BACKUP.md, Abschnitt „Live-Status“."
+            echo "::error::Die Offsite-Sicherung ist nicht eingerichtet (E1–E8 offen: ${OFFEN:-unbekannt}) – die Frischwache kann deshalb nichts messen und meldet NICHT grün. Siehe docs/ANLEITUNG-OFFSITE-BACKUP.md, Abschnitt „Live-Status“."
             exit 1
           fi
 
@@ -420,7 +448,32 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           BACKUP_REPO: ${{ vars.BACKUP_REPO }}
           BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+          # #1030: Der Befund der Einrichtungsprüfung – die Ursache, nicht die
+          # Vermutung. Ist der Schritt oben rot geworden, steht hier die Liste
+          # der offenen Punkte; ist er grün geworden, ist der Wert LEER
+          # („geprüft, nichts offen“). Beides ist eine Auskunft.
+          OFFENE_EINRICHTUNG: ${{ steps.setup.outputs.offene_einrichtung }}
+          # Nachschärfung 12.11.2026: Ein leerer Wert oben sieht genauso aus,
+          # wenn der Schritt übersprungen wurde oder abgestürzt ist. Erst
+          # dieser Beleg („ja“) macht aus „leer“ die Auskunft „nichts offen“.
+          EINRICHTUNG_GEPRUEFT: ${{ steps.setup.outputs.einrichtung_geprueft }}
         run: |
+          # Ohne Beleg der Einrichtungsprüfung gibt es KEINE Auskunft: Die
+          # Variable wird entfernt, der Prüfer liest „niemand weiß es“ und
+          # endet mit Exit 2 (rot) – statt aus einem leeren Feld „alles
+          # eingerichtet“ zu lesen und aus alten Jobs zu raten.
+          if [ "${EINRICHTUNG_GEPRUEFT:-}" != "ja" ]; then
+            unset OFFENE_EINRICHTUNG
+          fi
+          # #1030 (10.11.2026): Die Einrichtungsprüfung davor hat ihren Befund
+          # in `OFFENE_EINRICHTUNG` hinterlassen. Sie bekommt Vorrang – sie ist
+          # die URSACHE. Ohne sie gäbe es keinen einzigen Satz, der hier stimmt;
+          # deshalb wird ohne Auskunft NICHT geraten (der Prüfer endet dann mit
+          # Exit 2, geraten wäre er bei Exit 0 oder 4).
+          if [ -n "${OFFENE_EINRICHTUNG:-}" ]; then
+            echo "::notice title=Backup-Leerlauf::Die Einrichtung ist offen (${OFFENE_EINRICHTUNG}) – die Ursache trägt der Schritt „Voraussetzungen prüfen“. Hier wird deshalb kein zweiter Rat vergeben (ein grüner Job kann nicht entstehen, solange die Sicherung nicht eingerichtet ist)."
+            exit 0
+          fi
           set +e
           python3 scripts/backup_selbstheilung.py --leerlauf
           RC=$?
