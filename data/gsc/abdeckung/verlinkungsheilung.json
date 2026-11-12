@@ -1,50 +1,13 @@
 {
- "auftrag": 4,
- "eingefuegt": [
-  {
-   "grund": "gleicher Pillar",
-   "inlinks_jetzt": 0,
-   "meldung": "eingefügt",
-   "quelle": "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/",
-   "ziel": "/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/"
-  },
-  {
-   "grund": "gleicher Pillar",
-   "inlinks_jetzt": 0,
-   "meldung": "eingefügt",
-   "quelle": "/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/",
-   "ziel": "/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/"
-  },
-  {
-   "grund": "gleicher Pillar",
-   "inlinks_jetzt": 0,
-   "meldung": "eingefügt",
-   "quelle": "/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/",
-   "ziel": "/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/"
-  },
-  {
-   "grund": "gleicher Pillar",
-   "inlinks_jetzt": 0,
-   "meldung": "eingefügt",
-   "quelle": "/posts/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte/",
-   "quelle": "/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/",
-   "ziel": "/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/"
-  }
- ],
- "geheilt": [
-  "/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/",
-  "/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/"
- ],
+ "auftrag": 0,
+ "eingefuegt": [],
+ "geheilt": [],
  "geschrieben": true,
- "max": 4,
+ "max": 10,
  "nachher_ohne_inlink": [],
  "offen": [],
- "stand": "2026-11-11T12:41:45Z",
- "stand": "2026-11-11T13:01:46Z",
- "status": "geheilt",
+ "stand": "2026-11-12T13:44:49Z",
+ "status": "sauber",
  "verweigert": [],
- "vorher_ohne_inlink": [
-  "/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/",
-  "/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/"
- ]
+ "vorher_ohne_inlink": []
 }
