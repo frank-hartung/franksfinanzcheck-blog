@@ -1,7 +1,6 @@
 # Befund Abdeckung
 
-## Abdeckung (Search Console, Stand 2026-10-19, 23 Tage alt)
-## Abdeckung (Search Console, Stand 2026-10-19, 22 Tage alt)
+## Abdeckung (Search Console, Stand 2026-10-19, 24 Tage alt)
 
 **Gesamtbild: 🟢 GRÜN** · Quelle: `google-search-console (Abdeckungsbericht, CSV-Export)` · Gegenprobe: `content/ (Näherung, kein Build gemessen)`
 
@@ -26,11 +25,8 @@
 ### Widersprüche
 
 - ℹ️ **W5** 117 Seiten sind im Index, indexierbar sind 113 – 4 Einträge sind Altlasten (entfernte, weitergeleitete oder abgeschaltete URLs). Sie kosten kein Crawl-Budget mehr, verzerren aber jede Quote.
-- ℹ️ **W8** Der Abdeckungsbericht ist 23 Tage alt (Stand 2026-10-19). Die Search Console liefert ihn nur als CSV – ohne neuen Export misst dieser Befund die Vergangenheit.
-- ℹ️ **W9** Detail-Listen sind 16 Tage alt (`data/gsc/abdeckung/details/`). Ohne sie lassen sich die gemeldeten URLs nicht triagieren – die Summen bleiben Summen.
-- ℹ️ **W5** 117 Seiten sind im Index, indexierbar sind 111 – 6 Einträge sind Altlasten (entfernte, weitergeleitete oder abgeschaltete URLs). Sie kosten kein Crawl-Budget mehr, verzerren aber jede Quote.
-- ℹ️ **W8** Der Abdeckungsbericht ist 22 Tage alt (Stand 2026-10-19). Die Search Console liefert ihn nur als CSV – ohne neuen Export misst dieser Befund die Vergangenheit.
-- ℹ️ **W9** Detail-Listen sind 15 Tage alt (`data/gsc/abdeckung/details/`). Ohne sie lassen sich die gemeldeten URLs nicht triagieren – die Summen bleiben Summen.
+- ℹ️ **W8** Der Abdeckungsbericht ist 24 Tage alt (Stand 2026-10-19). Die Search Console liefert ihn nur als CSV – ohne neuen Export misst dieser Befund die Vergangenheit.
+- ℹ️ **W9** Detail-Listen sind 17 Tage alt (`data/gsc/abdeckung/details/`). Ohne sie lassen sich die gemeldeten URLs nicht triagieren – die Summen bleiben Summen.
 - ℹ️ **W11** 2 Linkziel(e) im Inhalt werden nicht gebaut (Entwurf oder gelöscht). Das Rendering zeigt dort nur Text – die Verlinkung ist wirkungslos: veröffentlichen oder entlinken.
 
 ### Vertrag: noindex-Bestand und Gateways — 🟢 in Ordnung
@@ -48,8 +44,8 @@
 
 ### Links ins Leere
 
-- `/posts/2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub/` – 4 Quelle(n); die Seite wird nicht gebaut, der Link erscheint als Text.
-- `/posts/2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check/` – 2 Quelle(n); die Seite wird nicht gebaut, der Link erscheint als Text.
+- `/posts/2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub/` – 3 Quelle(n); die Seite wird nicht gebaut, der Link erscheint als Text.
+- `/posts/2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check/` – 1 Quelle(n); die Seite wird nicht gebaut, der Link erscheint als Text.
 
 ### Anfrage-Wellen (M2)
 
@@ -57,17 +53,16 @@
 
 | Score | Seite | Impressionen | Inlinks | Grund |
 |---|---|---|---|---|
-| 11.0 | `/pillar/internet-dsl/` | 173 | 18 | verlinkt |
-| 11.0 | `/pillar/internet-dsl/` | 166 | 17 | verlinkt |
+| 11.0 | `/pillar/internet-dsl/` | 179 | 18 | verlinkt |
 | 11.0 | `/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/` | 59 | 2 | verlinkt |
+| 10.67 | `/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/` | 29 | 16 | verlinkt |
+| 10.0 | `/pillar/konto-karten/` | 27 | 11 | verlinkt |
+| 9.55 | `/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/` | 23 | 2 | verlinkt |
 | 9.0 | `/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/` | 24 | 7 | verlinkt |
-| 9.0 | `/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/` | 20 | 2 | verlinkt |
-| 8.67 | `/pillar/konto-karten/` | 23 | 11 | verlinkt |
-| 7.54 | `/impressum/` | 20 | 7 | verlinkt |
+| 7.91 | `/impressum/` | 21 | 7 | verlinkt |
 | 7.35 | `/pillar/versicherungen/` | 16 | 9 | verlinkt |
 | 7.03 | `/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/` | 11 | 6 | verlinkt |
 | 6.76 | `/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/` | 10 | 4 | verlinkt |
-| 6.33 | `/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/` | 16 | 16 | verlinkt |
 
 ### Sprünge im Verlauf
 
@@ -80,8 +75,7 @@
 | Kriterium | Ziel | Status | Messung |
 |---|---|---|---|
 | Gate grün (kein Rückschritt, kein Widerspruch) | sofort | ✅ | Gate: gruen |
-| Abdeckungsbefund nicht älter als 14 Tage | laufend | 🛑 | Stand 2026-10-19 (23 Tage alt) |
-| Abdeckungsbefund nicht älter als 14 Tage | laufend | 🛑 | Stand 2026-10-19 (22 Tage alt) |
+| Abdeckungsbefund nicht älter als 14 Tage | laufend | 🛑 | Stand 2026-10-19 (24 Tage alt) |
 | 404er mit Nachfrage triagiert | sofort | 🛑 | 189 ohne Erklärung im Bestand |
 | Indexquote steigt | 14 Tage | ❔ | 26.8 % bei 1 Momentaufnahme(n) |
 | Seiten ohne redaktionellen Inlink | 30 Tage | ✅ | 0 Seiten |
@@ -91,12 +85,10 @@
 | ID | Dringlichkeit | Maßnahme | Beleg |
 |---|---|---|---|
 | M1 | P1 | 404-Detail-Liste einlesen und triagieren | Übersicht: 223 × 404 · erklärbar 34 · offen 189 |
-| M10 | P1 | Neuen Abdeckungs-Export einlesen | Stand 2026-10-19 · 23 Tage alt |
+| M10 | P1 | Neuen Abdeckungs-Export einlesen | Stand 2026-10-19 · 24 Tage alt |
 | M2 | P1 | Crawl-Nachfrage für gefundene, nicht abgerufene Seiten | 69 „Gefunden – zurzeit nicht indexiert“ bei 113 indexierbaren Seiten |
-| M10 | P1 | Neuen Abdeckungs-Export einlesen | Stand 2026-10-19 · 22 Tage alt |
-| M2 | P1 | Crawl-Nachfrage für gefundene, nicht abgerufene Seiten | 69 „Gefunden – zurzeit nicht indexiert“ bei 111 indexierbaren Seiten |
 | M3 | P2 | Redaktions-Queue für „gecrawlt, nicht indexiert“ | 4 × „Gecrawlt – zurzeit nicht indexiert“ |
-| M4 | P2 | Index-Altlasten benennen statt mitzählen | 117 indexiert bei 113 indexierbaren Seiten · mit Nachfrage: /posts/kuehlschrank-strom-sparen-einstellung/ (3 Impr.), /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (1 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /tags/ (1 Impr.), /tags/dns-server-%C3%A4ndern/ (1 Impr.) |
+| M4 | P2 | Index-Altlasten benennen statt mitzählen | 117 indexiert bei 113 indexierbaren Seiten · mit Nachfrage: /posts/2026-08-07-frugalismus-fuer-den-erfolg/ (1 Impr.), /posts/elementarschadenversicherung-hochwasser-starkregen/ (1 Impr.), /posts/kuehlschrank-strom-sparen-einstellung/ (1 Impr.), /tags/ (1 Impr.), /tags/dns-server-%C3%A4ndern/ (1 Impr.) |
 | M7 | P2 | Sprung im Abdeckungsbericht erklären | Diagramm 2026-10-17: indexiert 138 → 117 |
 | M9 | P2 | Indexquote als Zielgröße etablieren | 117 von 437 bekannten URLs |
 | M5 | P3 | noindex-Bestand als Vertrag führen | 5 × robotsNoIndex in content/ · GSC 5 |

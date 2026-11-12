@@ -2,9 +2,9 @@
   {
     "seite": "https://franksfinanzcheck.de/",
     "clicks": 1,
-    "impressions": 7,
-    "ctr": 0.1429,
-    "position": 1.43
+    "impressions": 8,
+    "ctr": 0.125,
+    "position": 1.5
   },
   {
     "seite": "https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
@@ -18,35 +18,35 @@
     "clicks": 0,
     "impressions": 14,
     "ctr": 0.0,
-    "position": 10.0
+    "position": 9.86
   },
   {
     "seite": "https://franksfinanzcheck.de/impressum/",
     "clicks": 0,
-    "impressions": 20,
+    "impressions": 21,
     "ctr": 0.0,
-    "position": 11.25
+    "position": 10.86
   },
   {
     "seite": "https://franksfinanzcheck.de/pillar/",
     "clicks": 0,
-    "impressions": 9,
+    "impressions": 10,
     "ctr": 0.0,
-    "position": 5.22
+    "position": 5.2
   },
   {
     "seite": "https://franksfinanzcheck.de/pillar/internet-dsl/",
     "clicks": 0,
-    "impressions": 173,
+    "impressions": 179,
     "ctr": 0.0,
-    "position": 41.39
+    "position": 40.94
   },
   {
     "seite": "https://franksfinanzcheck.de/pillar/konto-karten/",
     "clicks": 0,
-    "impressions": 23,
+    "impressions": 27,
     "ctr": 0.0,
-    "position": 58.83
+    "position": 56.52
   },
   {
     "seite": "https://franksfinanzcheck.de/pillar/versicherungen/",
@@ -58,9 +58,9 @@
   {
     "seite": "https://franksfinanzcheck.de/posts/",
     "clicks": 0,
-    "impressions": 4,
+    "impressions": 5,
     "ctr": 0.0,
-    "position": 3.5
+    "position": 4.0
   },
   {
     "seite": "https://franksfinanzcheck.de/posts/2026-08-07-frugalismus-fuer-den-erfolg/",
@@ -68,6 +68,13 @@
     "impressions": 1,
     "ctr": 0.0,
     "position": 8.0
+  },
+  {
+    "seite": "https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 9.0
   },
   {
     "seite": "https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/",
@@ -100,23 +107,23 @@
   {
     "seite": "https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/",
     "clicks": 0,
-    "impressions": 16,
+    "impressions": 29,
     "ctr": 0.0,
-    "position": 31.75
+    "position": 36.55
   },
   {
     "seite": "https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/",
     "clicks": 0,
-    "impressions": 6,
+    "impressions": 7,
     "ctr": 0.0,
-    "position": 46.67
+    "position": 40.29
   },
   {
     "seite": "https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/",
     "clicks": 0,
-    "impressions": 1,
+    "impressions": 4,
     "ctr": 0.0,
-    "position": 81.0
+    "position": 65.0
   },
   {
     "seite": "https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/",
@@ -128,9 +135,9 @@
   {
     "seite": "https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/",
     "clicks": 0,
-    "impressions": 6,
+    "impressions": 7,
     "ctr": 0.0,
-    "position": 11.0
+    "position": 9.86
   },
   {
     "seite": "https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/",
@@ -198,9 +205,16 @@
   {
     "seite": "https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/",
     "clicks": 0,
-    "impressions": 20,
+    "impressions": 23,
     "ctr": 0.0,
-    "position": 16.7
+    "position": 21.17
+  },
+  {
+    "seite": "https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 50.0
   },
   {
     "seite": "https://franksfinanzcheck.de/posts/elementarschadenversicherung-hochwasser-starkregen/",
@@ -212,9 +226,9 @@
   {
     "seite": "https://franksfinanzcheck.de/posts/kuehlschrank-strom-sparen-einstellung/",
     "clicks": 0,
-    "impressions": 3,
+    "impressions": 1,
     "ctr": 0.0,
-    "position": 16.67
+    "position": 3.0
   },
   {
     "seite": "https://franksfinanzcheck.de/tags/",
@@ -254,9 +268,9 @@
   {
     "seite": "https://franksfinanzcheck.de/ueber/",
     "clicks": 0,
-    "impressions": 6,
+    "impressions": 7,
     "ctr": 0.0,
-    "position": 2.33
+    "position": 2.57
   },
   {
     "seite": "https://franksfinanzcheck.de/werkzeuge/balkonkraftwerk-rechner/",
