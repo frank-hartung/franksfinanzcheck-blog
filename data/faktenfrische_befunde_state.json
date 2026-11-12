@@ -1,5 +1,5 @@
 {
-  "erzeugt": "2026-11-12T16:39:18Z",
+  "erzeugt": "2026-11-12T20:18:01Z",
   "stichtag": "2026-11-12",
   "offen": 139,
   "seiten": 35,
@@ -45,9 +45,9 @@
     "2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif": 5,
     "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub": 5,
     "2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check": 3,
-    "2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": 5,
-    "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten": 5,
     "2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten": 4,
+    "2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": 5,
+    "2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten": 5,
     "frugalismus": 3,
     "strom-sparen": 3
   },
@@ -262,7 +262,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "slug": "2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ursprungs_slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "id": "0b564f460c41218244bd",
       "typ": "luecke",
@@ -274,7 +274,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "slug": "2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ursprungs_slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "id": "3ad2eefed314eb172c26",
       "typ": "luecke",
@@ -286,7 +286,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "slug": "2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ursprungs_slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "id": "43788c2cdcdfda52e753",
       "typ": "luecke",
@@ -298,7 +298,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "slug": "2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ursprungs_slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "id": "5eedec8afbdef6a4ca49",
       "typ": "luecke",
@@ -310,7 +310,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "slug": "2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ursprungs_slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "id": "81881c5bc61824d25f5a",
       "typ": "praezision",
@@ -894,7 +894,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "1c6e4d2f12da24ec4081",
       "typ": "luecke",
@@ -906,7 +906,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "5b539daf371f7362a3ef",
       "typ": "praezision",
@@ -918,7 +918,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "77d809de9e06d1d6910d",
       "typ": "luecke",
@@ -930,7 +930,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "ad7c0a90ef52ff35130e",
       "typ": "luecke",
@@ -942,7 +942,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "f227178fbda2cc59c350",
       "typ": "luecke",
