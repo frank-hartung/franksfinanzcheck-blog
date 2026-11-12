@@ -340,6 +340,13 @@ schritte:
       Ein Rückfall in unbelegte Gaspreis- oder Rechtsaussagen muss die
       Veröffentlichung blockieren, bis der Inhalt fachlich geprüft ist.
 
+  - name: Faktenfrische Register – Rückfallschutz #1072
+    klasse: inhalt
+    grund: >-
+      Das Register #1072 hält 47 entschiedene Aussagen aus zwölf Artikeln.
+      Ein Rückfall – im Body oder auf einer Meta-Fläche – blockiert die
+      Veröffentlichung, bis der Befund neu entschieden ist.
+
   - name: Publish-Gate (harte Qualitäts-, Affiliate-, Fakten- und YMYL-Freigaben)
     klasse: inhalt
     grund: >-

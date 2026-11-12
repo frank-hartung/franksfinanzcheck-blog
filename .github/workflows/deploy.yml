@@ -912,6 +912,13 @@ jobs:
       - name: Faktenfrische Gas – Rückfallschutz #996
         run: python3 scripts/ci_tests.py --titel "Faktenfrische Gas" -- python3 -m unittest scripts.tests.test_faktenfrische_996
 
+      # Das Register #1072 ist die zweite Schließakte. Bis zum 12.11.2026 lief
+      # sie nur in der allgemeinen Suite; der Publish-Gate prüfte sie nicht
+      # selbst. Genau deshalb konnte ein Rückfall in `description` und
+      # `pin_description` unbemerkt bleiben, bis ein Test zufällig lief.
+      - name: Faktenfrische Register – Rückfallschutz #1072
+        run: python3 scripts/ci_tests.py --titel "Faktenfrische Register" -- python3 -m unittest scripts.tests.test_faktenfrische_1072
+
       - name: Publish-Gate (harte Qualitäts-, Affiliate-, Fakten- und YMYL-Freigaben)
         run: python3 scripts/publish_gate.py
 
