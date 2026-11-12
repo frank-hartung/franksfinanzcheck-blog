@@ -63,11 +63,11 @@
            Er verteilte 50 Artikel weiter, von denen 66 im Dokumentkopf
            `ai_generated: true` tragen – ohne eine einzige Angabe zur
            Herkunft. Was die Seite maschinenlesbar kennzeichnet, ging auf
-           dem Verbreitungsweg verloren. Art. 50 KI-VO ist zwar eine
-           Anbieterpflicht, der Verhaltenskodex der Kommission vom
-           10.06.2026 verlangt von nachgelagerten Akteuren aber
-           ausdrücklich, Kennzeichnungen NICHT zu entfernen. Ein Feed, der
-           die Angabe der eigenen Seite verschluckt, entfernt sie.
+           diesem Verbreitungsweg verloren. Die Markierungspflicht nach
+           Art. 50 Abs. 2 betrifft Anbieter; der Transparenz-Kodex ist ein
+           freiwilliger Nachweisweg, keine pauschale gesetzliche Pflicht
+           jedes nachgelagerten Akteurs. Die Weitergabe eigener Angaben ist
+           eine zusätzliche Betreibermaßnahme, kein Anbieterbeweis.
 
            Drei Angaben, alle aus _funcs/ki_modalitaeten.html (dieselbe
            Funktion, aus der auch der Dokumentkopf lebt – kein zweiter
@@ -99,8 +99,44 @@
       <link>{{ .Permalink }}?utm_source=pinterest&amp;utm_medium=social&amp;utm_campaign=rss-autopublish</link>
       <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
       <guid isPermaLink="true">{{ printf "%s" (.Permalink) | html }}</guid>
-      <description>{{ $desc := or (.Params.pin_description) (.Description) }}{{ if $desc }}{{ printf "%s" $desc | html }}{{ else }}{{ printf "%s" (.Summary | plainify) | html }}{{ end }}</description>
       {{- $bereiche := partial "_funcs/ki_modalitaeten.html" . -}}
+      {{- /* Lesbarer Fallback für Empfänger, die ffki nicht auswerten.
+             Er betrifft den Zielartikel/dessen Cover, nicht das Pin-Bild.
+             Übernahme/Anzeige bei Pinterest bleibt eine Live-Abnahme. */ -}}
+      {{- $desc := or (.Params.pin_description) (.Description) (.Summary | plainify) -}}
+      {{- $roh := trim (printf "%s" $desc) " \t\r\n" -}}
+      {{- $prefix := "" -}}
+      {{- if hasPrefix $roh "*Werbung" -}}
+        {{- $roh = trim (strings.TrimPrefix "*Werbung" $roh) " \t\r\n" -}}
+        {{- if hasPrefix $roh "|" }}{{ $roh = trim (strings.TrimPrefix "|" $roh) " \t\r\n" }}{{ end -}}
+        {{- $prefix = "*Werbung | " -}}
+      {{- end -}}
+      {{- $hinweise := slice -}}
+      {{- if in $bereiche "text" }}{{ $hinweise = $hinweise | append "Zielartikel: mit KI erstellt oder bearbeitet." }}{{ end -}}
+      {{- if in $bereiche "image" }}{{ $hinweise = $hinweise | append "Zielartikel-Cover: mit KI erstellt oder bearbeitet." }}{{ end -}}
+      {{- $hinweis := delimit $hinweise " " -}}
+      {{- if $hinweis -}}
+        {{- if hasPrefix $roh $hinweis }}{{ $roh = trim (strings.TrimPrefix $hinweis $roh) " \t\r\n" }}{{ end -}}
+        {{- $prefix = printf "%s%s " $prefix $hinweis -}}
+      {{- end -}}
+      {{- /* 500 Zeichen: Werbung und Herkunft vorn, ein vorhandener Hashtag-
+             Schlussblock hinten. Nur die Prosa dazwischen wird gekürzt.
+             Passen die geschützten Teile allein nicht, bleibt der Text zu lang:
+             M5 blockiert den Deploy, statt einen Hinweis abzuschneiden. */ -}}
+      {{- $tags := "" -}}
+      {{- $tagtreffer := findRE `(?:^|\s)#[^\s#]+(?:\s+#[^\s#]+)*\s*$` $roh 1 -}}
+      {{- if $tagtreffer -}}
+        {{- $ende := index $tagtreffer 0 -}}
+        {{- $tags = trim $ende " \t\r\n" -}}
+        {{- $roh = trim (strings.TrimSuffix $ende $roh) " \t\r\n" -}}
+      {{- end -}}
+      {{- $raum := sub 500 (len $prefix) -}}
+      {{- if $tags }}{{ $raum = sub $raum (add (len $tags) 1) }}{{ end -}}
+      {{- if gt (len $roh) $raum -}}
+        {{- if gt $raum 1 }}{{ $roh = printf "%s…" (strings.Substr $roh 0 (sub $raum 1)) }}{{ else }}{{ $roh = "" }}{{ end -}}
+      {{- end -}}
+      {{- $desc = trim (printf "%s%s %s" $prefix $roh $tags) " \t\r\n" -}}
+      <description>{{ printf "%s" $desc | html }}</description>
       {{- if $bereiche }}
       <atom:link rel="describedby" href="{{ "impressum/#ki-hinweis" | absURL }}" title="Hinweis zu KI-unterstützten Inhalten" />
       {{- if in $bereiche "text" }}

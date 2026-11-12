@@ -11,12 +11,144 @@ fachanwaltliche Prüfung empfohlen (siehe Abschnitt „Nächste Schritte“).
 
 ---
 
+## Nachtrag 2026-11-12 · Rollen, Ausspielwege und gesicherter Fristabschluss (#1028)
+
+**Frist-ID:** `ki-vo-kennzeichnung-bestand` · **Status: offen.** Dieser
+Arbeitsstand liegt auf einem Arbeitsbranch und ist weder integriert noch live
+abgenommen. Issue [#1028](https://github.com/frank-hartung/franksfinanzcheck-blog/issues/1028)
+bleibt offen. Anbieter-/Systeminventar, schriftliche Markierungsnachweise,
+Bildherkunft, Einzelfallklärung, Live-Abnahme und Betreiberfreigabe stehen aus.
+Dies ist eine technische Selbsteinschätzung, keine Rechtsberatung.
+
+### Rechtliche Einordnung und Korrektur älterer Aussagen
+
+* [Art. 50 Abs. 2 KI-VO](https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act)
+  richtet die technische Markierung grundsätzlich an **Anbieter** generativer
+  Systeme. Für vor dem 02.08.2026 in Verkehr gebrachte Systeme nennt
+  [Art. 111 Abs. 4](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-111)
+  den 02.12.2026. Die ältere Angabe „Art. 113 n. F.“ im Nachtrag vom
+  05.11. war für diese Übergangsfrist falsch. Die eigene Rolle ist **für jedes
+  eingesetzte System** zu klären; pauschal „dieser Blog ist niemals Anbieter“
+  ist ohne Systeminventar nicht belegt.
+* [Art. 50 Abs. 4](https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act)
+  unterscheidet insbesondere Deepfakes und bestimmte veröffentlichte Texte zu
+  Angelegenheiten öffentlichen Interesses. Für solche Texte kann bei
+  substanzieller menschlicher Überprüfung oder redaktioneller Kontrolle und
+  übernommener redaktioneller Verantwortung eine Ausnahme greifen. Nicht
+  jedes KI-Bild und nicht jeder KI-Text ist allein wegen KI-Nutzung
+  kennzeichnungspflichtig. Ein Impressum oder Meta-Tag ersetzt keinen
+  gegebenenfalls sichtbaren Deepfake-Hinweis bei erster Wahrnehmung.
+* Der [Transparenz-Kodex](https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content)
+  ist ein freiwilliger Nachweisweg; die gesetzlichen Pflichten bleiben davon
+  getrennt. Der ältere pauschale Satz, jeder Betreiber müsse beim Weitergeben
+  den Nichterhalt einer Anbieter-Markierung beweisen, wird zurückgenommen.
+  Die tatsächliche Rolle, der Anwendungsfall und einschlägige Pflichten sind
+  individuell zu prüfen; Markierungen technisch zu erhalten ist sinnvoll.
+
+### Technische Änderungen im Arbeitsbranch
+
+* Das Provenienz-Gate prüft HTML und Feed strukturiert, ordnet Feed-Items ihrer
+  eigenen internen Zielseite zu und läuft im **regulären** Deploy nach letztem
+  Build und Pagefind vor `gh-pages` und dem offiziellen Pages-Artefakt. Fehlende
+  oder beschädigte Messgrundlagen werden als Werkzeugfehler gemeldet. Das ist
+  nur ein lokaler/CI-Vertrag, keine Bestätigung eines erfolgreichen Actions-
+  Deploys. Der bestehende Notfall-Deploy umgeht die KI-Gates bewusst, um
+  dringende Rechts-/Sicherheitskorrekturen nicht aufzuhalten; danach ist eine
+  gesonderte Provenienz- und Live-Prüfung nötig. Er ist nicht durch diese
+  Änderung dauerhaft abgesichert.
+* RSS behält bei langen Beschreibungen Werbe- und lesbare Text-/Coverhinweise;
+  die drei direkten Pinterest-Publisher prüfen Quelle, Ziel, Beschreibung und
+  bei deklarierten KI-Covern das belegte Original. Social-Neukodierung wird
+  für diese Originale vermieden; alte Social-Ableitungen werden gemeldet.
+  Lokale Dateien und gemockte API-Payloads beweisen **nicht**, dass Pinterest
+  Hinweise anzeigt oder Metadaten, Wasserzeichen und Signaturen beibehält.
+* Ungeklärte Herkunft wird nicht automatisch als KI-Herkunft behauptet. Die
+  Wache führt auch aus dem Register entfernte Fälle weiter; fehlender oder
+  beschädigter Wachzustand ist kein leerer, geheilter Zustand. Am 12.11.2026
+  waren weiterhin zwölf `menschlich`-Einträge ungeklärt. Kein einzelnes
+  Bestandscover ist hier als KI-generiert oder rein menschlich bewiesen.
+* Der Fristen-Workflow erhält eine Nachweissperre: Altflags und beschädigte
+  Belege dürfen nicht schließen; ein `--dry-run` schreibt und postet nichts.
+  Ein ausschließlich vom freigebenden Inhaberkonto manuell gestarteter Lauf
+  prüft Belegdateien, Inhalte des Wachzustands, offiziellen Deploy, Review
+  und Live-Abnahme formal. Nach unabhängigem Testjob und State-Push liest ein
+  nachgelagerter Job State und Belege auf `main` erneut und schließt erst dann
+  das zugehörige Issue. Site-/KI-Drift, ein laufender regulärer oder
+  Notfall-Deploy, ein neueres Pages-Deployment oder ein Wechsel von
+  getesteter Workflow-Revision, Testjob-Versuch, Abschlusscode,
+  Kalender oder Register blockieren. Vorzeitiges, unbelegtes Schließen von
+  #1028 wird erkannt; ein unklarer Close nach Abbruch wird nicht blind
+  rückgängig gemacht. Andere Fristen dürfen #1028 auch bei falscher Issue-
+  Zuordnung nicht schließen oder kommentieren. Ein später wieder geöffnetes
+  oder nicht lesbares Issue führt zur Quarantäne des bisherigen Abschlusses,
+  nicht zur automatischen Neuschließung. Nach einem Abbruch kann der zweite
+  State-Push bis zur nächsten Prüfung ein unbestätigtes Erledigt-Feld
+  enthalten. Nur die vollständig geprüfte Workflow-Quittung zählt als
+  Abschluss. Die Prüfung kann die Wahrheit und rechtliche Eignung der
+  Dokumente nicht beweisen; Verfahren und Grenzen:
+  `docs/KI-TRANSPARENZ-ABNAHME.md` §5.
+  Die irreführende Abschlussanleitung wurde am 12.11. im offenen Issue #1028
+  berichtigt; der alte Produktions-Workflow selbst bleibt bis zur Integration
+  dieser Änderung ungeschützt und darf nicht vorzeitig benutzt werden.
+
+### Prüfstand am 12.11.2026
+
+* Lokaler Hugo-Build: **113/113** reguläre Seiten in 19 Abschnitten und
+  **50 Feed-Items** geprüft, **0 technische Provenienzfunde**. Cover-Gate:
+  129 Referenzen, davon **0 als KI deklariert**; IPTC-Gate deshalb ohne
+  deklarierten Bestandsfall. Null deklarierte Cover sind kein
+  Herkunftsnachweis. Ein ergänzender `ki_cover_render_audit.py`-Lauf verglich
+  128 verschiedene Dateien: 79 waren byte-identisch mit der aktuellen
+  Pillow-Reproduktion, 49 wichen ab, keine Messung scheiterte. Weder Identität
+  noch Abweichung belegt die tatsächliche Herkunft oder KI-Verwendung.
+  Wache-Trockenlauf: **12 ungeklärte Fälle**, 20 Tage Restfrist, eine
+  menschliche Eskalation, Exit 1; State unverändert.
+* 271 KI-/Cover-/Feed-/Pinterest-/Fristen-Tests und 262 Pinterest-/Social-Tests
+  bestanden lokal; dazu 134 Deploy-/Blustradius-/Workflow-Tests und 244
+  Regressionen der pausierten #922-Arbeiten. Die 45 isolierten Fristtests
+  decken auch Notfall-Fence, Wiederöffnungsprüfung und falsche Issue-Zuordnungen
+  ab. Die Testgruppen überschneiden sich teilweise und sind nicht als getrennte
+  Nachweise zu addieren.
+  Der Blustradius-Vertrag umfasst 87 Deploy-Schritte, der Integritäts-Lock
+  55 geschützte Dateien. Social-Bestandstests erzeugten bestehende
+  `ResourceWarning`-Meldungen über ungeschlossene Lesezugriffe; das ist kein
+  Live-Nachweis. Die Abschluss-Gegenproben nutzen isolierte, fiktive Belege
+  und gemockte GitHub-Antworten – sie schließen kein echtes Issue.
+* Der letzte abgefragte offizielle Pages-Status war am 11.11. für die
+  Ausgangsrevision `3a4c2a452a98a0a8247067fc048760a5b99cc855` erfolgreich;
+  der zugehörige [Gesamtlauf](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/43024578356)
+  endete dennoch **failure**. Er enthält nicht diesen Arbeitsstand und ist
+  keine Abnahme. PR [#1167](https://github.com/frank-hartung/franksfinanzcheck-blog/pull/1167)
+  ist offen und konfliktbehaftet; ungeklärte Herkunft daraus wird nicht
+  übernommen. Der Arbeitsbranch basiert auf `0e7784de93cb964c57baa9eabf1d28ea51959d98`.
+
+### Grenzen und nächster Schritt
+
+Der Nachtrag vom 07.11. behauptete eine **vollständige und dauerhafte**
+Sicherung auf sieben Kanälen; das war zu weitgehend. Die beschriebenen
+Betreiber-Signale und Tests decken nur die konkret geprüften Fälle ab, nicht
+alle Bildtypen, externen Plattformen oder Anbieterpflichten. Keine echte
+Pinterest-Veröffentlichung, keine Live-Abnahme und keine Betreiberfreigabe
+wurden für diesen Arbeitsstand vorgenommen. Die zwölf Einträge, tatsächliche
+Anbieter und Coverherkunft dürfen nicht durch Vermutung „geheilt“ werden.
+
+Der lokale Build nutzt wie die Deploy-/Wache-Workflows Hugo **0.168.0
+Extended**; `requirements-hugo.txt` pinnt dagegen **0.169.0** für die lokale
+Verifikation. Die Abweichung ist gesondert zu prüfen, nicht als identische
+Buildumgebung auszugeben. Vor einem Fristabschluss sind Integration, ein
+passender erfolgreicher offizieller Pages-Deploy, reale Kanalproben und
+beleggebundene Betreiberfreigabe nach dem Runbook erforderlich.
+
+---
+
 ## Nachtrag 2026-11-07 · Kanaltreue, Verbreitungsweg und Dauerwache (#1028)
 
 **Frist-ID:** `ki-vo-kennzeichnung-bestand` (Frist 02.12.2026) ·
-**Status: Betreiberebene auf sieben Kanälen vollständig und dauerhaft gesichert;
-Anbieter-Nachweise, Bildherkunft und Live-Abnahme weiter offen. Frist bleibt
-offen.** Selbsteinschätzung des Betreibers, keine Rechtsberatung.
+**Historischer Status vom 07.11.:** Die damalige Aussage „Betreiberebene auf
+sieben Kanälen vollständig und dauerhaft gesichert“ war überzogen und ist
+durch den Nachtrag vom 12.11. eingeschränkt. Anbieter-Nachweise, Bildherkunft,
+Registerprüfung und Live-Abnahme bleiben offen; die Frist bleibt offen.
+Selbsteinschätzung, keine Rechtsberatung.
 **Akte:** `KI-VO-MASCHINENLESBAR-1028-KANALTREUE-DAUERWACHE-HIGHEND-2026-11-07.md`
 
 ### Anlass
@@ -52,7 +184,9 @@ Genau das war unvollständig.
 
 ### Was jetzt gilt
 
-Sieben Kanäle aus **einer** Quelle (`layouts/_partials/_funcs/ki_modalitaeten.html`):
+Sieben damals betrachtete Kanäle und Schutzmaßnahmen; der Modalitäten-Helfer
+`layouts/_partials/_funcs/ki_modalitaeten.html` ist gemeinsame Quelle für
+HTML-/Feed-Signale, während Bilddateien und Publisher weitere Pfade haben:
 Meta-Signale mit `scope` und `rel="describedby"`, schema.org `creditText`,
 Bildattribute am `<img>`, IPTC `DigitalSourceType` in der Bilddatei,
 **sichtbare Angabe zur Tonspur** je Modalität, **Feed-Kanal** auf Kanal- und
@@ -116,7 +250,7 @@ nicht, benennen aber erstmals konkret, was „maschinenlesbar" heißen soll:
 | 10.06.2026 | Verhaltenskodex zur Transparenz KI-generierter Inhalte (Art. 50 Abs. 7) | Abschnitt 1 = Anbieter (Markierung), Abschnitt 2 = Betreiber (Kennzeichnung). Geschichteter Ansatz: **digital signierte, zeitgestempelte Metadaten** plus **unwahrnehmbares Wasserzeichen**, optional Fingerabdruck/Register. Bei Freitext gilt die Wasserzeichenmaßnahme oberhalb von 200 Tokens. Beitritt freiwillig und je Abschnitt. |
 | 08./09.07.2026 | Angemessenheitsbewertung von Kommission und KI-Ausschuss | Der Kodex gilt als geeigneter Nachweisweg für die von ihm adressierten Pflichten – er ersetzt die Verordnung nicht. |
 | 20.07.2026 | Leitlinien der Kommission zu Art. 50, C(2026) 5054 final | Auslegungshilfe, u. a. zu Deepfakes und redaktioneller Kontrolle; enthält auch ein freiwilliges EU-Kennzeichnungssymbol. |
-| 27.08.2026 | Verordnung (EU) 2026/1744 („Digital Omnibus") in Kraft | Verschiebt die Hochrisiko-Pflichten, **nicht** Art. 50. Einzige Erleichterung: Art. 50 Abs. 2 erst bis **02.12.2026** für Systeme, die vor dem 02.08.2026 in Verkehr gebracht wurden (Art. 113 n. F.). |
+| 27.08.2026 | Verordnung (EU) 2026/1744 („Digital Omnibus") in Kraft | Für die Nachfrist zu Art. 50 Abs. 2 gilt bei vor dem 02.08.2026 in Verkehr gebrachten Systemen der **02.12.2026**. Korrektur 12.11.: Rechtsgrundlage ist **Art. 111 Abs. 4**, nicht wie hier zuvor angegeben Art. 113. |
 | 29.07.2026 | KI-MIG (Gesetz zur Durchführung der VO (EU) 2024/1689) in Kraft | **Bundesnetzagentur** ist zentrale Marktüberwachungsbehörde; Verstöße gegen Art. 50 sind nach Art. 99 Abs. 4 bußgeldbewehrt (bis 15 Mio. € oder 3 %, für KMU der niedrigere Betrag). |
 
 Quellen: [Kommission: Verhaltenskodex](https://digital-strategy.ec.europa.eu/en/news/commission-publishes-code-practice-marking-and-labelling-ai-generated-content),
@@ -138,14 +272,13 @@ deshalb als Betreiberangabe, nicht als Standard deklariert).
 Recherchestand 05.11.2026; keine der Quellen ist eine Auskunft an diesen
 Betreiber. Im Einzelfall bleibt fachanwaltliche Prüfung vorbehalten.
 
-**Rollenklärung (unverändert, jetzt mit Belegkette):** Dieser Blog ist
-**Betreiber** (er setzt fremde Modelle ein), nicht Anbieter. Die
-maschinenlesbare Markierung der Ausgabe schuldet der Anbieter des jeweiligen
-Systems – für Bestandssysteme bis 02.12.2026. Was der Betreiber schuldet, ist
-die wahrnehmbare Offenlegung (Art. 50 Abs. 4/5) und – wenn er Inhalte unter
-eigenem Namen weitergibt – der Nachweis, dass er die Anbieter-Markierung nicht
-entfernt. Ein eigenes Meta-Tag ist deshalb keine Erfüllung von Abs. 2; es ist
-eine **zusätzliche, maschinenlesbare Betreiberangabe**.
+**Rollenklärung – Korrektur 12.11.:** Dass der Blog ausschließlich Betreiber
+und niemals Anbieter sei, ist ohne Inventar und Einzelfallprüfung nicht belegt.
+Art. 50 Abs. 2 betrifft grundsätzlich die Anbieter; Abs. 4/5 regeln getrennt
+Offenlegungspflichten für bestimmte Fälle. Die frühere pauschale Aussage einer
+Nachweispflicht jedes weitergebenden Betreibers für nicht entfernte
+Anbieter-Markierungen ist nicht hinreichend belegt. Ein eigenes Meta-Tag ist
+keine Erfüllung von Abs. 2; es ist eine **zusätzliche Betreiberangabe**.
 
 ### Was gebaut wurde (maschinenlesbare Betreiberebene, vier Kanäle)
 
@@ -228,11 +361,11 @@ NPM-Zugänge: `ki:provenienz[:gate]`, `ki:bild[:gate|:markieren]`, `test:ki`.
    Erst danach den Workflow mit `erledigt=ki-vo-kennzeichnung-bestand`
    ausführen. Issue #1028 und Frist bleiben bis dahin offen.
 
-**Neu offener Punkt:** Die Ausspielwege OG-Bild, Pinterest-Pin und
-RSS/Feeds tragen die neuen Angaben nicht. Für Text ist das unschädlich
-(keine Deepfake-Pflicht ohne öffentliches Interesse), für ein künftig
-deklariertes KI-Cover müssten OG-/Pinterest-Dateien gesondert markiert oder
-die Ausspielung unterbunden werden.
+**Damals offener Punkt:** OG-Bild, Pinterest-Pin und RSS/Feeds trugen die
+neuen Angaben nicht. Der pauschale frühere Satz, das sei für Text
+unschädlich, war zu weitgehend: Textpflichten und Deepfake-Pflichten sind
+getrennt nach Inhalt und Ausspielweg zu prüfen. Der Nachtrag vom 12.11.
+beschreibt die lokale Feed-/Pinterest-Absicherung und ihre Live-Grenzen.
 
 ---
 
@@ -423,8 +556,9 @@ Keine pauschale Behauptung einer erfüllten Anbieterpflicht oder C2PA-Signatur.
   am Artikelanfang, auch wenn eine redaktionelle Freigabe vorliegt. Der alte
   Wortlaut „Mit KI-Unterstützung recherchiert“ deckte das Erstellen nicht ab.
   Das `data-ff-ki-label` ist lediglich ein lokal maschinenlesbarer HTML-Haken,
-  kein Wasserzeichen. Das Gate kann bei ungeklärter Herkunft vorsorglich
-  `true` setzen: Das ist keine verifizierte Provenienz.
+  kein Wasserzeichen. **Korrektur 12.11.:** Bei ungeklärter Herkunft setzt
+  das Gate nicht mehr vorsorglich `true`; nur eine positive Registerangabe
+  rechtfertigt eine entsprechende mechanische Korrektur.
 - Bild und Text werden getrennt behandelt: Nur bei **belegter** KI-Erzeugung
   oder -Bearbeitung eines Covers `cover.ai_generated: true` im Frontmatter
   setzen. Dann erscheint die sichtbare Bildunterschrift im Artikel **und** in

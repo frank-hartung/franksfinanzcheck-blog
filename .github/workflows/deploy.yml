@@ -929,8 +929,9 @@ jobs:
         run: python3 scripts/roh_html_gate.py --quarantaene
 
       # KI-KENNZEICHNUNG (Audit 14.10.2026, M-17; Art. 50 Abs. 4 KI-VO):
-      # Bot-Artikel tragen ai_generated: true → Label „Mit KI erstellt“.
-      # Selbstheilend (--fix), Commit über den Gate-Heilungspfad unten.
+      # Bei positiver Registerangabe fehlendes Label wiederherstellen; bei
+      # ungeklärter Herkunft keine KI-Tatsache erfinden, sondern eskalieren.
+      # Der Gate-Heilungspfad committet belegte K1-Korrekturen unten.
       - name: KI-Kennzeichnung – Selbsttest
         run: python3 scripts/ki_kennzeichnung_gate.py --selftest
 
@@ -946,7 +947,7 @@ jobs:
           # im flüchtigen Log. Jetzt nennt jeder rote Test seinen Namen als
           # Annotation, unabhängig davon, ob jemand an das Log kommt.
           python3 scripts/ci_tests.py --titel "KI-Transparenz" -- \
-            python3 -m unittest scripts.tests.test_ki_transparenz_render scripts.tests.test_ki_cover_provenienz scripts.tests.test_ki_cover_generator_schutz scripts.tests.test_ki_cover_render_audit scripts.tests.test_ki_provenienz_render scripts.tests.test_ki_bild_markierung -v
+            python3 -m unittest scripts.tests.test_ki_transparenz_render scripts.tests.test_ki_cover_provenienz scripts.tests.test_ki_cover_generator_schutz scripts.tests.test_ki_cover_render_audit scripts.tests.test_ki_provenienz_render scripts.tests.test_ki_bild_markierung scripts.tests.test_ki_provenienz_gate scripts.tests.test_ki_provenienz_auslieferung scripts.tests.test_pinterest_ki_provenienz scripts.tests.test_ki_frist_freigabe -v
 
       - name: KI-Cover – Herkunft und Originaldatei prüfen
         run: python3 scripts/ki_cover_provenienz.py --gate
@@ -1600,6 +1601,17 @@ jobs:
           test -s public/pagefind/pagefind.js
           test -s public/pagefind/pagefind-entry.json
           echo "Suchindex: $(find public/pagefind -type f | wc -l) Dateien, $(du -sh public/pagefind | cut -f1)"
+
+      # #1028: Die erste Provenienzprüfung liegt VOR mehreren Content-Gates,
+      # dem möglichen Rebuild und dem Audio-/Suchindex-Ausbau. Sie beweist
+      # daher nicht den Stand, der gleich veröffentlicht wird. Dieses Gate
+      # prüft das FERTIGE public/ erneut, unabhängig davon, ob ein Rebuild
+      # nötig war – vor gh-pages UND dem offiziellen Pages-Artefakt.
+      # Kein Heil- oder Bauschritt darf danach still HTML/Feed verändern.
+      # Ein rotes oder nicht messbares Ergebnis darf diesen Stand nicht als
+      # geprüft ausliefern. Das ist Betreibertransparenz, kein Anbieterbeweis.
+      - name: KI-Provenienz – finales Veröffentlichungs-Gate
+        run: python3 scripts/ki_provenienz_gate.py --gate
 
       # ============ WERKZEUGBEFUNDE EINSAMMELN (C38, #740 Teil 2) ==========
       # EIN Meldeweg statt drei Sonderwege: Jeder Mess-Schritt, der an einem

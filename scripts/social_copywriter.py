@@ -25,6 +25,7 @@
 # ============================================================
 from __future__ import annotations
 
+import hashlib
 import os
 import re
 import sys
@@ -338,6 +339,7 @@ def load_article(path: str, base_url: str = DEFAULT_BASE) -> dict:
         "published": published,
         "url": f"{base_url.rstrip('/')}/posts/{slug}/",
         "raw_fm": fm,
+        "source_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
     }
 
 
@@ -569,11 +571,11 @@ def _hard_fit(text: str, max_chars: int, keep: list[str]) -> str:
     if len(res) <= max_chars:
         return res
     if protected:
-        # Notfall: Kopf kappen, der Link überlebt als letztes Element.
-        tail = "\n\n" + protected[-1]
-        head = res[: max_chars - len(tail)].rstrip(" ,;:-–—")
-        if len(head) + len(tail) <= max_chars:
-            return head + tail
+        # Kein geschütztes Element opfern. Passen Link UND Tags selbst ohne
+        # Prosa nicht, bleibt das Ergebnis absichtlich zu lang: Das Social-
+        # Gate muss ablehnen, statt durch einen blinden Slice z. B. den Link
+        # oder einen Hashtag zu zerlegen und trotzdem zu senden.
+        return "\n\n".join(protected)
     return res[:max_chars]
 
 

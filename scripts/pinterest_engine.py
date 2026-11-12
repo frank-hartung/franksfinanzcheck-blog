@@ -38,11 +38,13 @@ import re
 import sys
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 import pinterest_hashtags as ph  # noqa: E402 – Hashtag-SSOT (#729)
+import ki_provenienz as kp  # noqa: E402 – deklarierte Zielangaben (#1028)
 from post_utils import list_post_paths  # noqa: E402
 
 BASE_URL = os.environ.get("BLOG_BASE_URL", "https://franksfinanzcheck.de")
@@ -213,7 +215,9 @@ def resolve_boards(token, board_config):
 def load_posts():
     posts = []
     for path in list_post_paths():
-        content = open(path, encoding="utf-8").read()
+        with open(path, encoding="utf-8") as datei:
+            content = datei.read()
+        ki_text, ki_bild = kp.social_erklaerungen(kp.kopf_von(content))
         m = re.search(r"^title:\s*[\"']?(.+?)[\"']?\s*$", content, re.M)
         d = re.search(r"^description:\s*[\"']?(.+?)[\"']?\s*$", content, re.M)
         c = re.search(r'^cover:\s*\n\s*image:\s*["\']?(.+?)["\']?\s*$', content, re.M)
@@ -237,6 +241,7 @@ def load_posts():
             "slug": slug, "path": path, "content": content,
             "title": (m.group(1) if m else slug).strip().replace("<br>", " "),
             "description": (d.group(1) if d else "").strip(),
+            "ki_text": ki_text, "ki_bild": ki_bild,
             "cover": ((pi.group(1) if pi else "") or (c.group(1) if c else "")).strip(),
             "tags": tag_list or kw_list,
             "keywords": kw_list,
@@ -279,6 +284,8 @@ def pin_text(post):
         text = post["pin_description"].replace("&", "und")
         if not text.lstrip().startswith("*Werbung"):
             text = "*Werbung | " + text
+        text = kp.social_hinweis(text, ki_text=post.get("ki_text") is True,
+                                 ki_bild=post.get("ki_bild") is True)
         # Letzte Instanz vor der API: Ein Text, der ältere Fassungen der
         # Hashtag-Regel passiert hat, darf nicht als Pin ausgeliefert werden
         # (#729). `heile` ist bei konformen Texten byte-identisch.
@@ -290,6 +297,8 @@ def pin_text(post):
     # Agentur-Fix 31.08.2026: ALLE Pins mit Werbung-Kennzeichnung (UWG)
     # – auch der Fallback (deterministische Texte) muss compliant sein.
     text = f"*Werbung | {desc} Mehr Spartipps auf FranksFinanzcheck! {hashtags}"
+    text = kp.social_hinweis(text, ki_text=post.get("ki_text") is True,
+                             ki_bild=post.get("ki_bild") is True)
     # Auch der Fallback läuft durch die SSOT: Bei einem zu langen Text kürzt
     # `heile` die PROSA und behält den Tag-Block – ein blindes `[:500]` konnte
     # den letzten Tag zerschneiden ('… #geldspar'), was hier niemand messen
@@ -329,13 +338,30 @@ def write_queue(queue):
 # Pinterest API
 # ---------------------------------------------------------------------------
 
+def pin_image_url(post):
+    bild = str(post.get("cover") or "")
+    if urllib.parse.urlsplit(bild).scheme:
+        return bild
+    return urllib.parse.urljoin(BASE_URL.rstrip("/") + "/", bild.lstrip("/"))
+
+
 def api_post_pin(token, board_id, post):
+    # Nicht nur load_posts() vertrauen: Auch direkte Aufrufer und Änderungen
+    # nach der Planung müssen vor dem POST an die echte Quelle gebunden sein.
+    kopf = kp.social_post_quelle(post)
+    link = f"{BASE_URL}/posts/{post['slug']}/{PIN_UTM}"
+    image_url = pin_image_url(post)
+    kp.social_ziel_pruefen(link, post["slug"], BASE_URL)
+    kp.social_bild_pruefen(kopf, image_url, BASE_URL)
+    description = pin_text(post)
+    kp.social_beschreibung_pruefen(description, ki_text=post["ki_text"],
+                                    ki_bild=post["ki_bild"])
     body = {
         "board_id": board_id,
         "media_source": {"source_type": "image_url", "content_type": "image/jpeg",
-                         "data": f"{BASE_URL}/{post['cover']}"},
-        "description": pin_text(post),
-        "link": f"{BASE_URL}/posts/{post['slug']}/{PIN_UTM}",
+                         "data": image_url},
+        "description": description,
+        "link": link,
         "title": pin_title_of(post),
     }
     req = urllib.request.Request(f"{API}/pins", data=json.dumps(body).encode(),
@@ -529,7 +555,7 @@ def main():
             "title": pin_title_of(p),
             "description": pin_text(p),
             "link": f"{BASE_URL}/posts/{p['slug']}/{PIN_UTM}",
-            "media": f"{BASE_URL}/{p['cover']}",
+            "media": pin_image_url(p),
             "aff_links": len(re.findall(r"\]\(/go/", p["content"]))})
         if not pin_ok:
             fail += 1
@@ -542,7 +568,7 @@ def main():
                 "title": pin_title_of(p),
                 "description": pin_text(p),
                 "link": f"{BASE_URL}/posts/{p['slug']}/{PIN_UTM}",
-                "media": f"{BASE_URL}/{p['cover']}",
+                "media": pin_image_url(p),
                 "board": board_name, "source": "engine"})
             ok += 1
             print(f"  ✓ Pin erstellt: {p['slug']} → [{board_name}]")

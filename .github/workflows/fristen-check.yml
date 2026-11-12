@@ -27,8 +27,11 @@
 #
 #  ERLEDIGT MARKIEREN:
 #    Actions → "Fristen-Check (Recht)" → Run workflow →
-#    Eingabe `erledigt=<frist-id>` (mehrere mit Komma) →
-#    Frist wird neu terminiert, Issue automatisch geschlossen.
+#    Eingabe `erledigt=<frist-id>` (mehrere mit Komma).
+#    #1028 ist zusätzlich an echte Nachweise, Betreiberfreigabe und den
+#    erfolgreichen Testjob gebunden. Erst NACH dem State-Push wird das
+#    zugehörige Issue in einem eigenen Job geschlossen; vgl. Runbook §5.
+#    Andere Fristen bleiben vom KI-Nachweis unabhängig.
 #
 #  Manuell: wie oben ohne Eingabe = sofortiger Check-Lauf.
 # ============================================================
@@ -52,15 +55,37 @@ on:
 permissions:
   contents: write
   issues: write
+  actions: read
+  deployments: read
 
 concurrency:
   group: fristen-check
   cancel-in-progress: false
 
 jobs:
+  # Unabhängiger Job: Ein Defekt der KI-Gegenproben darf die Erinnerung und
+  # Bearbeitung ANDERER Rechtsfristen nicht verhindern. Der KI-Close dagegen
+  # ist ausdrücklich an den Erfolg beider Jobs gebunden.
+  abschluss-tests:
+    name: KI-Abschluss-Gegenproben
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Python-Abhängigkeiten installieren
+        run: python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
+      - name: KI-Abschlusswege isoliert testen
+        run: python3 -m unittest scripts.tests.test_ki_frist_freigabe -v
+
   fristen:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    outputs:
+      ki_beantragt: ${{ steps.check.outputs.ki_beantragt }}
+      exit_code: ${{ steps.check.outputs.exit_code }}
     steps:
       - name: Repository auschecken
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -69,16 +94,32 @@ jobs:
         run: python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
 
       - name: Fristen prüfen + Issues eskalieren
+        id: check
         env:
           GH_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           FRISTEN_DONE: ${{ github.event.inputs.erledigt }}
           FRISTEN_SCAN_ONLY: ${{ github.event.inputs.nur_scan }}
         run: |
-          ARGS=""
-          if [ -n "$FRISTEN_DONE" ]; then ARGS="$ARGS --done $FRISTEN_DONE"; fi
-          if [ "$FRISTEN_SCAN_ONLY" = "true" ]; then ARGS="$ARGS --scan-only"; fi
-          python3 scripts/fristen_check.py $ARGS
+          args=()
+          if [ -n "$FRISTEN_DONE" ]; then args+=(--done "$FRISTEN_DONE"); fi
+          if [ "$FRISTEN_SCAN_ONLY" = "true" ]; then args+=(--scan-only); fi
+          ki_beantragt=false
+          IFS=',' read -r -a ids <<< "$FRISTEN_DONE"
+          for id in "${ids[@]}"; do
+            id="${id#"${id%%[![:space:]]*}"}"
+            id="${id%"${id##*[![:space:]]}"}"
+            if [ "$id" = "ki-vo-kennzeichnung-bestand" ]; then ki_beantragt=true; fi
+          done
+          echo "ki_beantragt=$ki_beantragt" >> "$GITHUB_OUTPUT"
+          set +e
+          python3 scripts/fristen_check.py "${args[@]}"
+          code=$?
+          set -e
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          # 3 = KI-Abschluss, Issue-Überwachung oder Issue-Zuordnung unklar.
+          # Andere Fristen wurden verarbeitet; ihren State erst sichern, DANN rot.
+          if [ "$code" -ne 0 ] && [ "$code" -ne 3 ]; then exit "$code"; fi
 
       - name: Report & State committen
         run: |
@@ -93,3 +134,48 @@ jobs:
             git commit -m "chore: Fristen-Report aktualisiert [skip ci]"
             scripts/git_sync.sh --push-only
           fi
+
+      - name: Unbestätigten KI-Abschluss oder Issue-Zuordnung sichtbar machen
+        if: steps.check.outputs.exit_code == '3'
+        run: |
+          echo "::error::KI-Abschluss, Issue-Überwachung oder Issue-Zuordnung nicht bestätigt; andere bearbeitete Fristen wurden separat gespeichert."
+          exit 3
+
+  ki-freigabe:
+    name: KI-Freigabe nach State und Tests
+    needs: [fristen, abschluss-tests]
+    if: >-
+      needs.fristen.result == 'success' &&
+      needs.abschluss-tests.result == 'success' &&
+      needs.fristen.outputs.ki_beantragt == 'true' &&
+      needs.fristen.outputs.exit_code == '0'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Gepushten main-Stand auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+      - name: Python-Abhängigkeiten installieren
+        run: python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
+      - name: KI-Freigabe nach Tests vorbereiten
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python3 scripts/fristen_check.py --prepare-ki
+      - name: KI-Abschluss-State committen
+        run: |
+          git config user.name "Fristen-Bot"
+          git config user.email "fristen-bot@users.noreply.github.com"
+          git add data/fristen_state.json
+          if git diff --cached --quiet; then
+            echo "::error::Vorbereiteter KI-Abschluss hat keinen State geändert."
+            exit 1
+          fi
+          git commit -m "chore: KI-Frist nach Betreiberfreigabe abschließen [skip ci]"
+          scripts/git_sync.sh --push-only
+      - name: "KI-Frist: Issue nach Beleg und State schließen"
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python3 scripts/fristen_check.py --finalize-ki
