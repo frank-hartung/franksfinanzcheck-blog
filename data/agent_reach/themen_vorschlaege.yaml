@@ -9,6 +9,13 @@
 # ============================================================
 version: 1
 vorschlaege:
+- titel: Bundeskabinett beschließt Aufbau einer Gasreserve
+  url: https://www.tagesschau.de/inland/gasreserve-126.html
+  quelle: Tagesschau Wirtschaft (RSS)
+  erfasst: '2026-11-12T13:34:27'
+  brief: ''
+  status: offen
+  notiz: RSS-Trigger des Schaltwerks – Quellenprüfung erforderlich.
 - titel: 'Urteil: BGH nimmt Rechtsschutzversicherungen in die Pflicht'
   url: https://www.tagesschau.de/wirtschaft/verbraucher/bgh-urteil-rechtsschutzversicherung-100.html
   quelle: Tagesschau Wirtschaft (RSS)
@@ -345,4 +352,4 @@ vorschlaege:
   brief: 2026-09-28-internet-recherche.json
   status: offen
   notiz: Automatisch erfasst aus 2026-09-28-internet-recherche.json – Quellenprüfung erforderlich.
-zuletzt_ergaenzt: '2026-11-11T23:40:24'
+zuletzt_ergaenzt: '2026-11-12T13:34:27'
