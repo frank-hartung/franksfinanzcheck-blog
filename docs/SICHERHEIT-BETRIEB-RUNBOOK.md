@@ -115,10 +115,11 @@ jeder Schritt den nächsten belegt:
 1. **Environment absichern** (A4): Required Reviewer `Frank Hartung`,
    Deployment branches and tags → `Selected` → ausschließlich `main`,
    *Allow administrators to bypass configured protection rules* → **aus**.
-   Reviewer und Branch-Regel kann
+   Nur bei nachweislich leerem Ausgangszustand kann
    `python3 scripts/worker_environment_einrichten.py --anwenden --reviewer frank-hartung`
-   mit einem Token setzen, das `Environments: read/write` darf; den
-   Bypass-Schalter stellt nur das Dashboard. `npm run worker:environment`
+   Reviewer und Branch-Regel mit einer berechtigten GitHub-Verbindung setzen
+   (Repository-Recht `Administration: write`). Andernfalls im Dashboard
+   bearbeiten; den Bypass setzt das Werkzeug nie. `npm run worker:environment`
    muss Exit 0 melden.
 2. **Zugang hinterlegen** (A4): `CF_WORKERS_DEPLOY_TOKEN` (Workers Scripts:
    Read + Deploy) und `CLOUDFLARE_ACCOUNT_ID` im Environment
@@ -326,14 +327,21 @@ Reviewer* hinterlegt, unter *Deployment branches and tags* ausschließlich
 protection rules* deaktiviert sein (`can_admins_bypass: false`). Tags und
 weitere Branch-Muster sind nicht zulässig.
 
-Vor jedem Worker-Deploy prüft `scripts/worker_environment_guard.py` diese
-read-only über die GitHub-API in einem **separaten Job ohne Environment und
-ohne Cloudflare-Secrets** (`actions: read`). Der Secret-tragende Deploy-Job
-wartet auf dessen Erfolg und ist zusätzlich auf `refs/heads/main` begrenzt.
-Fehlende oder nicht lesbare Policies stoppen den Lauf vor Wrangler; die
-Annotation nennt die verletzte Bedingung. Lokal ist nur der Selbsttest möglich:
-`python3 scripts/worker_environment_guard.py --selftest`. Der Live-Befehl
-`--check` benötigt `GITHUB_REPOSITORY` und einen `GITHUB_TOKEN` mit `actions: read`.
+Vor jedem Worker-Deploy **und vor der separaten Zugangsprüfung** prüft
+`scripts/worker_environment_guard.py` die Policy read-only über die GitHub-API
+in einem **separaten Job ohne Environment und ohne Cloudflare-Secrets**
+(`actions: read`). Der jeweilige Secret-Job hängt von diesem Gate ab und ist
+auf `refs/heads/main` begrenzt. Nach einer Freigabewartezeit wird die Policy
+im Secret-Job erneut geprüft, bevor Cloudflare-Zugänge an einen Schritt
+übergeben werden. Fehlende oder unlesbare Policies stoppen beide Wege.
+
+Die Vor- und Nachprüfung ersetzen nicht die tatsächlichen GitHub-Schutzregeln:
+Secrets werden von GitHub beim Start des Environment-Jobs freigegeben, und
+Workflow-Dateien eines anderen Refs können verändert werden. Daher sind die
+Reviewer-, Branch- und Bypass-Einstellungen im Dashboard unverzichtbar. Lokal
+ist der Selbsttest möglich: `python3 scripts/worker_environment_guard.py
+--selftest`. Der Live-Befehl `--check` benötigt `GITHUB_REPOSITORY` und einen
+GitHub-Zugang mit `actions: read`.
 
 **Schritt 3 — aufräumen:** Das ungenutzte Environment `GITHUB_WORKFLOW_TOKEN`
 löschen (Audit P-4: es wird von keinem Workflow verwendet, existiert aber
@@ -362,9 +370,11 @@ Fehler selbst. Lokal und ohne Netz: `python3 scripts/worker_zugang.py
 
 **Die Freigabe einrichten, statt sie nur zu melden (WF-829B/#922, 30.10.2026):**
 Bis zum 30.10.2026 konnte das Repository die fehlende Freigabe nur MELDEN.
-`scripts/worker_environment_einrichten.py` stellt sie her – mit einem Token,
-das Environments schreiben darf (feingranular *Environments: read/write*,
-klassisch `repo`), lokal oder aus einem Lauf heraus:
+`scripts/worker_environment_einrichten.py` kann Reviewer und Branch-Regel
+nur bei einem nachweislich leeren, bestehenden Environment herstellen. Der
+Schreib-Endpunkt verlangt das Repository-Recht **`Administration: write`**
+(zum Lesen `Actions: read`); alternativ alle drei Einstellungen direkt im
+Dashboard vornehmen:
 
 ```bash
 export GITHUB_TOKEN=…                       # darf Environments lesen UND schreiben
@@ -379,30 +389,46 @@ Der Lauf nennt je Ziel eine Klasse und den einen nächsten Schritt:
 | Klasse | Bedeutung | Weg |
 |---|---|---|
 | `ERFUELLT` | belegt | – |
-| `MACHBAR` | fehlt, per GitHub-API setzbar | `--anwenden` |
-| `OBERFLAECHE` | fehlt, **nur im Dashboard** setzbar | Settings → Environments → `cloudflare-produktion` → *Allow administrators to bypass configured protection rules* **aus** |
+| `MACHBAR` | leerer Ausgangszustand, mit Schreibrecht möglicherweise per API setzbar | `--anwenden` und Nachmessung |
+| `OBERFLAECHE` | fehlt, **von diesem Werkzeug nicht automatisch gesetzt** | Settings → Environments → `cloudflare-produktion` → *Allow administrators to bypass configured protection rules* **aus** |
 | `ABWEICHUNG` / `UNBEKANNT` | vorhanden, aber nicht von diesem Werkzeug gesetzt (z. B. eine zusätzliche Branch-Regel) | von Hand prüfen |
 | `OFFEN` | nicht belegbar – niemals grün | zuerst die Ursache der Unlesbarkeit |
 
-Zwei Grenzen sind gemessen, nicht vermutet:
+Zwei Grenzen sind für diesen Einrichter wichtig:
 
-1. **`can_admins_bypass` ist über keine GitHub-API setzbar.** Die REST-Route
-   „Create or update an environment" nimmt ausschließlich `wait_timer`,
-   `prevent_self_review`, `reviewers` und `deployment_branch_policy` an
-   (`additionalProperties: false` in der veröffentlichten OpenAPI-Beschreibung);
-   die GraphQL-Mutation `updateEnvironment` kennt das Feld nicht. Das Werkzeug
-   meldet „eingerichtet bis auf einen Schalter" statt „eingerichtet" – ein
-   falsches Grün hier würde den Deploy freigeben, den das Gate zu Recht
-   blockiert.
-2. **Ein Token ohne Schreibrecht scheitert mit HTTP 403** – genau wie das
-   Agenten-Token dieses Repositories. Die Meldung nennt das fehlende Recht,
-   damit ein Rechtebefund nicht als Code-Regression gelesen wird.
+1. **`can_admins_bypass` wird vom Werkzeug nicht geschrieben.** Die offizielle
+   [REST-Dokumentation](https://docs.github.com/en/rest/deployments/environments#create-or-update-an-environment)
+   führt das Feld nicht als Schreibparameter auf. Das ist aber kein Beweis,
+   dass jede API-Version es ablehnt: Der
+   [go-github-Client](https://github.com/google/go-github/blob/master/github/repos_environments.go)
+   modelliert es und ein [externer Test](https://github.com/daiksud/gh-settings/pull/469)
+   meldet erfolgreiche Schreib- und Lesetests mit API-Version `2026-03-10`.
+   Für dieses Repository und die hier verwendete API-Version wurde das mangels
+   Schreibrecht nicht verifiziert. Bis dahin Dashboard nutzen und `--check`
+   nachmessen; der Guard bleibt fail-closed.
+2. **HTTP 401/403 belegt eine Zugriffsverweigerung**, nicht allein deren Grund.
+   Die Verbindung und für Schreibzugriffe `Administration: write` prüfen;
+   der fehlende Zugriff ist nicht als Code-Regression auszugeben.
 
-`--anwenden` verschärft ausschließlich: kein `DELETE`, kein Entfernen eines
-bestehenden Reviewers, keine Änderung von `wait_timer` oder
-`prevent_self_review`. Alle Environments des Repositories listet `--inventur`
-(ein Required Reviewer auf `github-pages` würde die Veröffentlichung anhalten –
-diese Entscheidung bleibt bewusst beim Menschen).
+**Schreibgrenze:** `--anwenden` schreibt nur, wenn unmittelbar zuvor ein
+bestehendes Environment ohne Protection Rules, ohne Branch-Policy und mit
+`can_admins_bypass: true` gelesen wurde. Bei vorhandenen oder unlesbaren
+Regeln, bereits abgeschaltetem Bypass, abweichenden Branches oder 404 bleibt
+es beim lesenden Befund und der Dashboard-Aufgabe. Das verhindert insbesondere,
+vorhandene Reviewer-Listen automatisch zu erweitern: GitHub benötigt die
+Zustimmung **eines** Reviewers, zusätzliche Personen vergrößern also den
+Freigabekreis. Ein ausgelassenes PUT-Feld beweist zudem nicht, dass jede
+API-Version den bisherigen Wert erhält.
+
+Der Einrichter vergleicht den kompletten Stand vor dem PUT erneut, prüft
+Reviewer und leere Branch-Liste vor dem POST und liest anschließend nochmals
+zurück. Unbelegte oder nur teilweise angenommene Schritte bleiben offen. Die
+API bietet dabei keine hier belegte atomare Sperre gegen zeitgleiche
+Dashboard-Änderungen: **Konfiguration nicht parallel zum automatischen
+Heil-Lauf ändern**. Im Zweifel den Heil-Lauf erst beenden und das Dashboard
+verwenden. Alle Environments listet `--inventur` (ein Required Reviewer auf
+`github-pages` würde die Veröffentlichung anhalten – diese Entscheidung bleibt
+beim Menschen).
 
 **Die Freigabe ist ein Klick – und der Wartezustand ist bewacht (01.11.2026):**
 Sobald `cloudflare-produktion` einen Required Reviewer trägt und der
@@ -443,20 +469,19 @@ Deshalb gibt es zwei Griffe, die zusammengehören:
 
 ### A4b · Der Heilweg läuft jetzt selbst (WF-829B / #922, 07.11.2026)
 
-**Der eigentliche Befund war nicht das Environment, sondern die Verdrahtung.**
-`--anwenden` (siehe oben) existiert seit dem 30.10.2026, wurde aber von
+**Zusätzlich zum ungesicherten Environment fehlte ein automatischer Aufruf.**
+`--anwenden` (siehe oben) existiert seit dem 30.10.2026, wurde aber zunächst von
 **keinem automatischen Lauf** aufgerufen. Die tägliche Sicherheits-Wache rief
 nur `--pruefen --warnstufe`: jeden Morgen derselbe Befund, jeden Tag keine
-Heilung. Ein gemeldeter Schaden mit vorhandenem, aber nicht verdrahtetem
-Heilpfad ist eine Warteschlange. Die Vorberichte vom 01./03./04.11.2026 haben
-den Zustand korrekt beschrieben und genau deshalb für „geheilt“ gehalten.
+Heilung. Die Verdrahtung allein ersetzt weder die nötigen Schreibrechte noch
+belegt sie die tatsächliche Änderung des Environments.
 
 **Seit dem 07.11. läuft `.github/workflows/produktions-schutz-selbstheilung.yml`:**
 
 | Wann | Warum |
 |---|---|
-| täglich 05:48 UTC | vor der Sicherheits-Wache (06:05 UTC) – Drift wird behoben, bevor sie gemeldet wird |
-| nach **jedem** Lauf von „Cloudflare-Worker deployen“ auf `main` | auch und gerade nach einem roten, fail-closed abgebrochenen Deploy: der Fehler löst seine Reparatur aus |
+| täglich 05:48 UTC | vor der Sicherheits-Wache (06:05 UTC) – Drift messen, bei leerem Ausgangszustand ggf. Teilheilung versuchen |
+| nach **jedem** Lauf von „Cloudflare-Worker deployen“ auf `main` | auch nach einem roten Deploy: erneut messen und nur innerhalb der Schreibgrenze handeln |
 | `workflow_dispatch` (`modus=heilen`/`pruefen`) | auf Zuruf, `pruefen` ist rein lesend |
 | Push/PR an Heiler, Tests, Vertrag, Kette, Workflow, Deploy-Pfad | eine Änderung am Heilwerkzeug löst seine Prüfung aus (Trigger-Wache W1/W3) |
 
@@ -469,12 +494,15 @@ den Zustand korrekt beschrieben und genau deshalb für „geheilt“ gehalten.
 2. **Messen** über `worker_environment_einrichten.stand()` und `planen()`; die
    Zieldefinition steht in `data/produktions_schutz_vertrag.json` und wird
    strikt gegen die Konstanten des Einrichters und des Gates geprüft.
-3. **Nur verschärfend schreiben** über `einrichter.schreiben()` – genau zwei
-   erlaubte Wege (`PUT` Environment, `POST` Branch-Regel), kein `DELETE`, keine
-   Ersetzung bestehender Reviewer, nie `can_admins_bypass`.
-4. **Nachmessen**: ohne zweiten Stand gilt nichts als geheilt. Ein
-   schlechterer Stand nach dem Eingriff bricht mit Exit 2 ab; ein verbleibender
-   offener Rest bleibt `OFFEN` (Exit 1), auch wenn zwei Ziele geheilt wurden.
+3. **Begrenzt schreiben** über `einrichter.schreiben()` – nur im leeren
+   Ausgangszustand, nach erneuter Vormessung und über genau zwei Wege (`PUT`
+   Environment, `POST` Branch-Regel). Vor dem POST muss der Zwischenstand
+   stimmen. Bestehende/unklare Schutzregeln werden nicht überschrieben und
+   `can_admins_bypass` wird nicht gesendet (Schreibgrenze in A4).
+4. **Nachmessen**: Ohne bestätigten Endstand gilt nichts als geheilt. Ein
+   verlorenes vorher belegtes Ziel oder ein unlesbarer Stand ergibt Exit 2;
+   ein offener Rest bleibt `OFFEN` (Exit 1). Bereits angenommene Teilschritte
+   werden bei einem späteren Fehler mitgemeldet.
 
 **Beleg:** `data/produktions_schutz_belege.jsonl`, append-only, jede Zeile mit
 `seq`, `prev_sha256` und `sha256` über die vorangehende Zeile (deshalb
@@ -502,29 +530,30 @@ und keine `pending_deployments` vorkommen – **und dass
 Wird die Verdrahtung entfernt, wird sie zum Befund, statt still zu verrotten.
 
 ```bash
-npm run test:worker:selbstheilung         # Selbsttest, Wache, 38 Vertragstests
+npm run test:worker:selbstheilung         # Selbsttest, Wache und Vertragstests
 npm run worker:selbstheilung:pruefen      # rein lesend, keine Belegzeile
 npm run worker:selbstheilung:wache        # Verdrahtung und Kette prüfen
 npm run worker:selbstheilung              # heilen + Beleg (lokal, mit Token)
 ```
 
-**Zwei Dinge bleiben Inhaber-Aufgaben – bewusst nicht automatisiert:**
+**Was ohne passende Rechte offen bleibt:**
 
-1. **Ein Token**: Secret `UMGEBUNGS_ADMIN_TOKEN` mit feingranularem Recht
-   `Environments: read/write` (klassisch `repo`/`administration`). Fehlt es,
-   fällt der Lauf auf `github.token` zurück; die API antwortet **403**, der
-   Heiler meldet `RECHT` und behauptet keine Heilung. Am 07.11.2026 um 09:55 UTC
-   ist genau das gemessen und als erster Beleg (`seq: 1`) festgehalten.
-2. **Ein Schalter im Dashboard**: *Allow administrators to bypass configured
-   protection rules* **aus**. Keine GitHub-API nimmt `can_admins_bypass` an
-   (REST `additionalProperties: false`, GraphQL kennt das Feld nicht). Danach
-   hält der Deploy wie gewollt bei *Review deployments* – freigeben bleibt
-   Menschenhandlung (siehe A4).
+1. Reviewer und Branch-Regel im Dashboard einrichten oder bei leerem
+   Ausgangszustand eine bereits berechtigte GitHub-Verbindung für den
+   Einrichter verwenden. Der schreibende REST-Endpunkt verlangt
+   `Administration: write`; ohne Zugriff meldet der Heiler `RECHT` und
+   behauptet keine Heilung. Am 07.11.2026 um 09:55 UTC ist eine solche
+   403-Antwort als erster Beleg (`seq: 1`) festgehalten.
+2. *Allow administrators to bypass configured protection rules* im Dashboard
+   **aus**. Der Einrichter schreibt das undokumentierte Feld nicht (siehe A4).
+   Danach hält der Deploy wie gewollt bei *Review deployments* – freigeben
+   bleibt Menschenhandlung.
 
 **Was dieser Lauf ausdrücklich nicht tut:** keine Deploy-Freigabe, keine
-Cloudflare-Secrets, kein Wrangler, kein Lockern, kein Ersetzen des harten
-Stopps. Der harte Stopp steht weiter **vor** jedem Secret-Zugriff. Ein
-Werkzeug, das hier „repariert“, repariert das Falsche.
+Cloudflare-Secrets, kein Wrangler, kein Überschreiben bestehender Schutzregeln
+und kein Ersetzen des harten Stopps. Der harte Stopp steht weiter **vor**
+der Übergabe von Cloudflare-Secrets an einen Schritt. Ein Werkzeug, das hier
+das Gate entfernt, repariert das Falsche.
 
 ---
 
@@ -545,11 +574,12 @@ konfiguriert. Drei Messungen am selben Tag:
 | Läufe von „Cloudflare-Worker deployen" seit 27.10. | **acht rote Läufe**, jeder mit `production-policy → failure`, `deploy → skipped` |
 | Läufe der Selbstheilung seit 07.11. | **7 `success`, davon 4 mit Live-Heiljob**, Environment unverändert (`updated_at` bleibt 25.10.) |
 
-Damit ist die Grenze keine Vermutung mehr: Der Installationstoken in dieser
-Umgebung hat kein `administration=write`; `can_admins_bypass` ist über
-**keine** GitHub-API schreibbar. Ein Heil-Lauf, der grün meldet, während das
-Environment unberührt bleibt, ist ein grüner Lauf ohne Heilung – dieselbe
-Klasse wie #809 („Behoben" ohne den Job, der rot war).
+Damit war die Zugriffsgrenze des damaligen Installationstokens belegt:
+Der Schreibversuch wurde mit 403 verweigert. Die frühere Schlussfolgerung,
+`can_admins_bypass` sei über **keine** API schreibbar, war dagegen zu weit
+(siehe A4: undokumentierter Parameter, externe Gegenprobe, hier ungeprüft).
+Ein Heil-Lauf, der grün meldet, während das Environment unberührt bleibt,
+ist ein grüner Lauf ohne Heilung – dieselbe Klasse wie #809.
 
 **Was am 10.11.2026 im Repository geheilt wurde.** Die Ursache der täglichen
 Rotmeldung war nicht das Gate, sondern der **Auslöser**: Ein freigabepflichtiger
@@ -560,7 +590,7 @@ ein Mensch *Run workflow* drückt; der `push`-Trigger widersprach dem Runbook.
 
 | Ebene | Vertrag ab 10.11.2026 |
 |---|---|
-| `workflow_dispatch` auf `main` | `plan` → `production-policy` → `deploy`, **unverändert**, inklusive hartem Stopp vor jedem Cloudflare-Secret |
+| `workflow_dispatch` auf `main` | `tests` → `plan` → `production-policy` → `deploy`, inklusive hartem Stopp vor Übergabe der Cloudflare-Secrets |
 | `push` / `pull_request` | nur `tests` (alle drei Worker, `scripts/ci_tests.py`), kein Environment, kein Secret, kein Wrangler |
 | `abschluss` (`if: always()`) | `scripts/worker_deploy_abschluss.py` beweist am **Verhalten**: jeder geplante Deploy muss `success` sein; jeder Deploy-Job auf Push/PR ist ein harter Befund. Ein stiller Skip wird nie grün (Vorfall 24.10., Run 40100342025) |
 | Ampel im Heil-Lauf | Der gemessene Zustand steht als Check-Run am Commit: `success` nur bei Exit 0, **`action_required`** bei `OFFEN` (mit Link auf #922 und den zwei Inhaber-Schritten), `failure` bei Exit 2/3. C14 bleibt gewahrt – Warnstufe statt Dauer-Rot –, aber der Commit sieht nicht grün aus. Das einzige neue Recht ist `checks: write` für diesen Status; kein Deploy-Recht, kein Secret, keine Freigabe |
@@ -572,34 +602,42 @@ ein Vorgang schließt mit dem Abschlussvermerk des Workflows (D2), und
 `alert_resolve_gate.py` verlangt den **grünen Job, der rot war** – erst ein
 echter grüner Deploy-Lauf schließt die Meldung. Ein Bericht tut es nicht.
 
-**Die drei Inhaber-Handgriffe (einmalig, in dieser Reihenfolge):**
+**Inhaber-Handgriffe (in dieser Reihenfolge):**
 
-```bash
-# 1 · Schreibrecht als Secret hinterlegen: UMGEBUNGS_ADMIN_TOKEN
-#    feingranular mit „Environments: read/write" (klassisch: repo/administration)
-#    Danach heilt der Tageslauf 05:48 UTC Reviewer + Branch-Regel selbst –
-#    mit Eichprobe, Nachmessung und Belegkette. Kontrolle ohne Eingriff:
-npm run worker:selbstheilung:pruefen
-npm run worker:selbstheilung:wache
+1. Settings → Environments → `cloudflare-produktion`: Reviewer hinzufügen,
+   unter *Selected branches and tags* **nur den Branch `main`** auswählen und
+   *Allow administrators to bypass configured protection rules* **ausschalten**.
+   `python3 scripts/worker_environment_guard.py --check` muss Exit 0 melden.
+2. Die Cloudflare-Umgebungssecrets auf Vorhandensein und Gültigkeit prüfen;
+   Actions → **„Deploy-Zugang prüfen“** → *Run workflow* (`main`) liefert
+   nach der erforderlichen Freigabe das lesende Dossier.
+3. Actions → **„Cloudflare-Worker deployen“** → *Run workflow* (`main`,
+   `newsletter-worker`) → *Review deployments*. Der erfolgreiche Deploy und
+   der eigene `Deploy-Nachweis` verlangen von `/healthz` HTTP **200**, `ok: true`
+   und den `bau`-Stempel aus `wrangler.toml`. Ein 503 mit passendem Stempel
+   genügt nicht. Erst danach darf #922 automatisch schließen.
 
-# 2 · Dashboard, einziger API-freier Schalter:
-#    Settings → Environments → cloudflare-produktion →
-#    „Allow administrators to bypass configured protection rules" AUS
-#    Kontrolle: python3 scripts/worker_environment_guard.py --check
+Der `BUILD`-Stempel ist ein manuell gepflegter Versionswert, kein Hash des
+aktuellen Commits. Er muss bei Worker-Änderungen aktualisiert werden; ein
+identischer Stempel allein beweist keine neue Auslieferung. Deshalb verlangt
+`alert_resolve_gate.py` zusätzlich den erfolgreichen Deploy-Schritt und den
+Abschlussjob desselben manuellen Laufs. Der geheimnisfreie Testjob aller drei
+Worker läuft dabei ebenfalls: So kann ein zuletzt gemeldeter Testfehler im
+Deploy-Lauf nachgewiesen werden, ohne dass ein grüner Test-Push #922 schließt.
 
-# 3 · Actions → „Cloudflare-Worker deployen" → Run workflow (main, newsletter-worker)
-#    Der Job hält bei „Review deployments" – das ist der gewollte Schutz.
-#    Freigeben; `/healthz` muss den bau-Stempel aus wrangler.toml liefern.
-```
+Für einen fehlgeschlagenen konkreten anderen Worker verlangt der Schließpfad
+stattdessen dessen eigenen erfolgreichen Deploy und Nachweisschritt. Ein
+`push`, ein anderes Worker-Deployment oder ein übersprungener Nachweisschritt
+ist kein Beweis für den gemeldeten Worker.
 
 **Nachweis der Heilung im Liegenden:**
 
 ```bash
-npm run test:worker:abschluss       # 16 Gegenproben + 18 Vertragstests am echten Workflow
-npm run test:worker:selbstheilung   # Eichprobe, Verdrahtung, 38 Vertragstests
-npm run trigger:check               # 102 Workflows, 0 Befunde
+npm run test:worker:abschluss       # Gegenproben und Vertragstests am echten Workflow
+npm run test:worker:selbstheilung   # Eichprobe, Verdrahtung und Vertragstests
+npm run trigger:check               # Trigger-Vollständigkeit
 npm run workflow:js                 # alle github-script-Blöcke kompilieren
-python3 scripts/workflow_vertrag_wache.py --gate   # V1–V7, 102 Workflows
+python3 scripts/workflow_vertrag_wache.py --gate   # Workflow-Regeln V1–V7
 ```
 
 Bericht mit Messwerten, Gegenproben und Grenzen:
