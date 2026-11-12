@@ -1,6 +1,6 @@
 # Release-Scorecard – die Produktionswahrheit
 
-**Stand:** 2026-11-12 · **Modus:** live · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
+**Stand:** 2026-11-12 · **Modus:** kandidaten · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
 
 > Eine Zeile pro Artikel, acht Dimensionen, ein Wahrheitsort. Was hier rot ist, ist rot – nichts wird weggeklammert.
 
@@ -105,7 +105,7 @@
 | `2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-12 | **freigabe-reif** |
 | `2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-14 | **freigabe-reif** |
 | `2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck` | ✅ bestanden | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-16 | **warnung** |
-| `2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-20 | **blockiert** |
+| `2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-20 | **freigabe-reif** |
 | `2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort` | ✅ bestanden | ⚠️ warnung | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-02-07 | **warnung** |
 
 ## Was blockiert – nach Prüfung, nicht nach Dimension
@@ -114,14 +114,14 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 
 | Check | Dimension | Wirkung | Entscheidet | Artikel |
 |---|---|---|---|---|
-| **F4-fachbefund** | faktenalter | blockiert | Mensch (Herausgeber/Redaktion) | 21 |
+| **F4-fachbefund** | faktenalter | blockiert | Mensch (Herausgeber/Redaktion) | 20 |
 | **T1w-zeichenlaenge-optimum** | technik | warnung | Maschine (deterministisch) | 2 |
 
 - **F4-fachbefund** – Schließweg: scripts/faktenfrische_befund_ledger.py (via publish_gate.fakten_befund_failures) · betroffen: `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas`, `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026`, `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit`, `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren`, `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden`, `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` …
 
 ## Offene Fachbefunde (F4) – was die Redaktion entscheiden muss
 
-**153** offene Befunde auf **38** Seiten (live: 83 auf 21 Artikeln) · ältester **13 Tage** · Frist 14 Tage · über der Frist: **0**.
+**139** offene Befunde auf **35** Seiten (live: 78 auf 20 Artikeln) · ältester **13 Tage** · Frist 14 Tage · über der Frist: **0**.
 
 **Ein Prüfdatum schließt keinen Fachbefund.** F1 (Alter) und F4 (Inhalt) sind getrennte Verträge; die Maschine entscheidet nie fachlich. Die Arbeitsdatei mit jeder Befund-ID, dem Fassungsstand und dem fertigen Entscheidungsbefehl ist `BEFUND-AKTE.md` (`python3 scripts/faktenfrische_befund_akte.py --schreiben`).
 
@@ -129,7 +129,7 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden <ID> --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-⚠️ **110 Befunde** wurden an einem älteren Text erhoben; der Text wurde seither geändert. Entschieden wird der HEUTIGE Text – genau das macht `--entscheiden` fassungsgebunden.
+⚠️ **96 Befunde** wurden an einem älteren Text erhoben; der Text wurde seither geändert. Entschieden wird der HEUTIGE Text – genau das macht `--entscheiden` fassungsgebunden.
 
 ✅ **F1 (Faktenalter) ist nicht die Ursache:** Die Deckung trägt den Bestand; rot ist der Inhalt, nicht der Takt.
 
@@ -139,11 +139,11 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 
 | Kennzahl | Wert |
 |---|---|
-| Seiten im Bestand (Posts + Ratgeber) | 127 |
+| Seiten im Bestand (Posts + Ratgeber) | 128 |
 | Fällig heute / überfällig | 0 / 0 |
-| Bedarf | 3,10 Prüfungen/Tag (21,7/Woche) |
+| Bedarf | 3,12 Prüfungen/Tag (21,9/Woche) |
 | Angebot | 5,00/Tag (Budget 5 × 1,00 Läufe/Tag) |
-| **Deckung** | **161 %** |
+| **Deckung** | **160 %** |
 | Rückstand abgebaut | **nicht abbaubar** im Horizont |
 | Nächste Frist | `2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert` am 2026-11-19 (in 7 Tagen) |
 | Empfohlenes Budget | 5 je Lauf (Limit 18) |
@@ -151,7 +151,7 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 
 ✅ Deckung ausreichend: Der Takt kann den Bestand halten. Ein roter Faktenstand ist damit ein echter Inhaltsbefund (F4), kein Kadenz-Artefakt.
 
-## Blockierende Funde (21 Artikel)
+## Blockierende Funde (20 Artikel)
 
 ### `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas` (blockiert, Risikoklasse standard)
 
@@ -233,10 +233,6 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 
 - **F4-fachbefund** [faktenalter]: 089b89138417e63a3dcf (luecke): Es fehlt der für Campingbuchungen relevante Regulierungsrahmen (Unterscheidung Mietrecht bei Stellplätzen vs. Reiserecht), den die Fundstelle für den Bereich Reise nur allgemein andeutet.; 1158934e7a18c7b2099b (luecke): Die Preisangabe von 20 bis 45 € pro Nacht wird als realistischer Wert positioniert, ist jedoch nicht durch Marktdaten oder eine Referenzstelle in den Fundstellen belegt.; 3716cfd3ab5aec6d774b (praezision): Der Verweis auf die Verbraucherzentrale zur Prüfung von Buchungsangaben führt auf eine allgemeine Übersichtsseite ohne konkrete Checklisten für Camping-Angebote.
 
-### `2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang` (blockiert, Risikoklasse standard)
-
-- **F4-fachbefund** [faktenalter]: 4284fd2d9c9005e7af8f (praezision): Behauptung, dass Überladung der Maschine zu schnellerem Verschleiß und teuren Reparaturen führt, wird ohne konkrete Daten oder Messgröße angegeben.; 84e247f17354e224c973 (praezision): Aussage, dass das richtige Beladen allein die Fixkosten senkt, ohne weitere Maßnahmen, ist ein pauschales Leistungsversprechen ohne Nennung von Mechanismen oder Grenzen.; a2a7dc69f10393af6531 (luecke): Die Modellrechnung (0,9 kWh/50 L bei vollem Waschgang, 0,6 kWh/35 L bei halbem Waschgang, Strompreis 0,40 €/kWh, Wasserpreis 0,005 €/L) und die daraus resultierende Jahresersparnis von 22 € fehlen einer fundierten Quelle.; cb794331f1cc0c715a55 (luecke): Die Aussage, dass bei 4 Waschgängen pro Woche ein durchschnittlicher Haushalt rund 5 € jährlich an Strom‑ und Wasserkosten spart, ist nicht mit einer Quelle belegt.; e6729081522126e972c2 (luecke): Angabe, dass ein optimal beladener Trommel (ca. 80 % Kapazität) bis zu 15 % weniger Wasser und Energie verbraucht, wird nicht durch eine Quelle belegt.
-
 ## Warnungen ohne Blockade (3 Artikel)
 
 - `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen` – T1w-zeichenlaenge-optimum: Zeichenlänge unter-optimum (10252 Zeichen, Optimum 12.000–18.000)
@@ -274,18 +270,19 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 | `2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen` | standard | nicht erforderlich | frisch geprüft vor 7 Tagen (Intervall 30 Tage) | 2026-12-05 |
 | `2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden` | standard | nicht erforderlich | frisch geprüft vor 5 Tagen (Intervall 30 Tage) | 2026-12-07 |
 | `2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif` | erhoeht | nicht erforderlich | frisch geprüft vor 2 Tagen (Intervall 45 Tage) | 2026-12-25 |
-| `2026-11-09-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 45 Tage) | 2026-12-24 |
 | `2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 30 Tage) | 2026-12-09 |
 | `2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check` | standard | nicht erforderlich | frisch geprüft vor 2 Tagen (Intervall 45 Tage) | 2026-12-25 |
 | `2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen` | standard | nicht erforderlich | frisch geprüft vor 13 Tagen (Intervall 30 Tage) | 2026-11-29 |
-| `2026-11-10-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten` | erhoeht | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 30 Tage) | 2026-12-09 |
-| `2026-11-10-geschirrspueler-voll-so-sparst-du-wasser-und-strom` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 45 Tage) | 2026-12-24 |
-| `2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu` | standard | nicht erforderlich | frisch geprüft vor 9 Tagen (Intervall 30 Tage) | 2026-12-03 |
 | `2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 45 Tage) | 2026-12-24 |
-| `2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung` | standard | nicht erforderlich | frisch geprüft vor 2 Tagen (Intervall 90 Tage) | 2027-02-08 |
-| `2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 30 Tage) | 2026-12-09 |
-| `2026-11-10-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 45 Tage) | 2026-12-24 |
 | `2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten` | erhoeht | nicht erforderlich | frisch geprüft vor 0 Tagen (Intervall 45 Tage) | 2026-12-27 |
+| `2026-11-12-deine-naechtliche-grundlast-strom-so-erkennst-du-wo` | standard | nicht erforderlich | frisch geprüft vor 0 Tagen (Intervall 45 Tage) | 2026-12-27 |
+| `2026-11-12-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten` | erhoeht | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 30 Tage) | 2026-12-09 |
+| `2026-11-12-geschirrspueler-voll-so-sparst-du-wasser-und-strom` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 45 Tage) | 2026-12-24 |
+| `2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu` | standard | nicht erforderlich | frisch geprüft vor 9 Tagen (Intervall 30 Tage) | 2026-12-03 |
+| `2026-11-12-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 45 Tage) | 2026-12-24 |
+| `2026-11-12-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung` | standard | nicht erforderlich | frisch geprüft vor 2 Tagen (Intervall 90 Tage) | 2027-02-08 |
+| `2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 30 Tage) | 2026-12-09 |
+| `2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein` | standard | nicht erforderlich | frisch geprüft vor 3 Tagen (Intervall 45 Tage) | 2026-12-24 |
 
 ## Ausnahmen (Falsch-Alarm-Protokoll)
 
