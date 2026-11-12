@@ -2,14 +2,14 @@
   "target": 6,
   "ready": 3,
   "pool_size": 10,
-  "generated_at": "2026-11-11T21:29:41Z",
+  "generated_at": "2026-11-12T11:50:36Z",
   "candidates": [
     {
       "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
       "ready": true,
       "sha256": "9d7543eee4977a8762d862a6fc40079ef3046225a63e0712fe4fb31af02f7caf",
       "flesch": 67.3,
-      "measured_at": "2026-11-11T11:21:02Z",
+      "measured_at": "2026-11-12T11:41:34Z",
       "score": 0.962,
       "parts": {
         "spelling": 0.88,
@@ -22,11 +22,45 @@
       }
     },
     {
+      "slug": "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee",
+      "ready": true,
+      "sha256": "aad7490eb6d91429d0bf416b8c43882e55e65677d770de2d1be996c7f9dbc5dd",
+      "flesch": 60.4,
+      "measured_at": "2026-11-12T11:42:46Z",
+      "score": 0.954,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.94,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
+      "ready": true,
+      "sha256": "7c7b0269ab02c21994708bb90f62be62b6dca0fc3a06ed78dd1da85fb06409b8",
+      "flesch": 62.4,
+      "measured_at": "2026-11-12T11:43:53Z",
+      "score": 0.962,
+      "parts": {
+        "spelling": 0.88,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.86,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
       "slug": "2026-11-09-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
       "ready": false,
       "sha256": "9e84128b5e56c55e543679b023ced0690b0ae0fda47e0c0700f9b51bf1634f27",
       "flesch": 66.4,
-      "measured_at": "2026-11-11T11:21:49Z",
+      "measured_at": "2026-11-12T11:45:04Z",
       "reason": "Kurzantwort-Gate nicht bestanden: Kurzantwort fehlt – veröffentlichte Ratgeber brauchen ein nicht-leeres `kurzantwort` im Frontmatter (M4, #1110)",
       "details": [
         "🛑 2026-11-09-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
@@ -45,28 +79,11 @@
       }
     },
     {
-      "slug": "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee",
-      "ready": true,
-      "sha256": "aad7490eb6d91429d0bf416b8c43882e55e65677d770de2d1be996c7f9dbc5dd",
-      "flesch": 60.4,
-      "measured_at": "2026-11-11T11:22:38Z",
-      "score": 0.954,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.94,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
       "slug": "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
       "ready": false,
       "sha256": "b2f6a8204c56356fb1912274ddaa69bb11b9c031a1c62e56d721af27c0540205",
       "flesch": 66.5,
-      "measured_at": "2026-11-11T21:27:11Z",
+      "measured_at": "2026-11-12T11:46:10Z",
       "reason": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: ide",
       "details": [
         "🛑 2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
@@ -89,7 +106,7 @@
       "ready": false,
       "sha256": "5f0e2585f27b9a57676b905aee13c9374e06d9ff72d0a1dc6f8241f44bdddc9f",
       "flesch": 62.1,
-      "measured_at": "2026-11-11T11:24:06Z",
+      "measured_at": "2026-11-12T11:47:15Z",
       "reason": "Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-Zwilling gegen den Bestand, #714): U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem (z. B. „du eine feste menge gas ",
       "details": [
         "🛑 2026-11-10-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
@@ -112,7 +129,7 @@
       "ready": false,
       "sha256": "263c5b3d020cb7d8f965be8a8e139f1fd439bf0245076f7fc4ee3a9cd424780c",
       "flesch": 63.8,
-      "measured_at": "2026-11-11T11:24:53Z",
+      "measured_at": "2026-11-12T11:48:24Z",
       "reason": "Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-Zwilling gegen den Bestand, #714): U1-PHRASEN: 5 gleiche 7-Wort-Phrasen mit 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang (z. B. „bares geld ein haeufi",
       "details": [
         "🛑 2026-11-10-geschirrspueler-voll-so-sparst-du-wasser-und-strom: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
@@ -135,7 +152,7 @@
       "ready": false,
       "sha256": "f0f52600c2d2ee4f861d878d626daccd940550399774ca9ede77f73abfcd225c",
       "flesch": 70.9,
-      "measured_at": "2026-11-11T11:25:36Z",
+      "measured_at": "2026-11-12T11:49:29Z",
       "reason": "Faktenfrische nicht bestanden: 0b564f460c41218244bd (luecke): Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.; 3ad2eefed314eb172c26 (luecke): Die Aussag",
       "details": [
         "🛑 2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -154,28 +171,11 @@
       }
     },
     {
-      "slug": "2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
-      "ready": true,
-      "sha256": "7c7b0269ab02c21994708bb90f62be62b6dca0fc3a06ed78dd1da85fb06409b8",
-      "flesch": 62.4,
-      "measured_at": "2026-11-11T21:28:26Z",
-      "score": 0.962,
-      "parts": {
-        "spelling": 0.88,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.86,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
-    },
-    {
       "slug": "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ready": false,
       "sha256": "0339c140255fadbd36fe911c4a08d9927a3aee8c117980b3292cec19bfddec66",
       "flesch": 65.3,
-      "measured_at": "2026-11-11T21:29:38Z",
+      "measured_at": "2026-11-12T11:50:34Z",
       "reason": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
       "details": [
         "🛑 2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -198,7 +198,7 @@
       "ready": false,
       "sha256": "947a5aa0a109acaa6dbf3fe570921ddd48f8c18eba6cb607ffbd11c912f570ab",
       "flesch": 78.2,
-      "measured_at": "2026-11-11T21:29:41Z",
+      "measured_at": "2026-11-12T11:50:36Z",
       "reason": "Reserve-Qualitäts-Gate: RS5: 4 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Viele Menschen zahlen für 250 Mbps, obwohl sie nur 50 Mbps nutzen.",
       "details": [
         "RS5: 4 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Viele Menschen zahlen für 250 Mbps, obwohl sie nur 50 Mbps nutzen."
@@ -216,18 +216,8 @@
     }
   ],
   "measurement": {
-    "kind": "partial",
-    "run_id": "43102444136",
+    "kind": "full",
+    "run_id": "43210335142",
     "run_attempt": "1"
-  },
-  "recert": {
-    "at": "2026-11-11T21:29:41Z",
-    "renewed": [
-      "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-      "2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
-      "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten",
-      "2026-11-10-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein"
-    ],
-    "tool": "scripts/reserve_recert.py"
   }
 }
