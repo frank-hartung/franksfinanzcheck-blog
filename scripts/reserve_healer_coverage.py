@@ -160,6 +160,18 @@ REGEL_HEILER: dict[str, tuple[str, ...]] = {
 # Pflicht, damit eine künftige Regel nicht zwischen „gedeckt“ und „vergessen“
 # fällt.
 AUSNAHMEN: dict[str, str] = {
+    # #1110: Das Gate verlangt eine inhaltlich passende Kurzantwort. Der
+    # Generator der Kette kann bei fehlendem Feld helfen, deckt aber nicht
+    # alle Fälle: ein leeres vorhandenes Feld wird übersprungen, Provider
+    # können fehlen und YMYL-Schreibschutz kann Änderungen verhindern.
+    # Eine bloße Tabellen-Zuordnung zum Generator wäre deshalb Schein-Deckung.
+    # Das Publish-Gate bleibt unverändert aktiv; fehlende Antworten sind ein
+    # redaktioneller Hold und erfordern fachliche Prüfung und Freigabe.
+    "kurzantwort_failures":
+        "Fehlende oder leere Kurzantworten bleiben bis zur redaktionellen "
+        "Ergänzung und Prüfung im Hold. Der Generator kann unterstützen, "
+        "deckt aber leere Felder, Provider-Ausfälle und YMYL-Schreibschutz "
+        "nicht zuverlässig ab und ersetzt keine fachliche Freigabe (#1110).",
     # #912: Ein fachlicher Befund ist keine automatisch heilbare Formatregel.
     # Die Faktenfrische recherchiert und korrigiert, darf aber einen offenen
     # Befund nicht durch einen Lauf-/Quellenstempel oder Modellantwort schließen.
