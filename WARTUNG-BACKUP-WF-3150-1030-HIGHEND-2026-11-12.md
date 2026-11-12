@@ -65,12 +65,21 @@ antwortet „niemand weiß es“ und endet rot.
 | Kennungen ohne Beleg | Hinweis (grün) | rot |
 
 **Bewusst nicht übernommen:** die Änderungen von #1171 an
-`scripts/reserve_healer_coverage.py`, `scripts/selftest_runner.py`,
-`data/blustradius-deploy.yml`, vier Artikeln und den GSC-Daten. Sie gehören
-nicht zur Sicherung. Geprüft: `selftest_runner.py --selftest` und der
-Standardlauf von `reserve_healer_coverage.py` sind auf dem heutigen `main`
-ohne sie grün; ob #1171 sie für ein anderes Gate brauchte, zeigt der CI-Lauf
-dieses Zweigs.
+`scripts/selftest_runner.py`, `data/blustradius-deploy.yml`, vier Artikeln
+und den GSC-Daten. Sie gehören nicht zur Sicherung.
+
+**Sachfremd, aber nötig – eigener Commit:** Der Pflicht-Check `gate` ist auf
+`main` seit mindestens dem 11.11. rot (Läufe `42981764755` … `43182245556`),
+Schritt „Governance-Selbsttests“: `reserve_finisher.py --selftest` meldet
+„Gate-Regel ohne Heiler: `kurzantwort_failures`“. Das trifft **jeden** Pull
+Request und ist einer der Gründe, warum #1171 nie grün wurde. Übernommen ist
+dafür der eine Eintrag aus #1171 in `scripts/reserve_healer_coverage.py`
+(begründete Ausnahme: Die Kurzantwort ist Inhalt; geheilt wird sie durch
+`pflichtfeld_verlust_wache.py --fix` und `generate_kurzantworten.py`, nicht
+durch einen Reserve-Heiler). Beide Skripte existieren mit den genannten
+Funktionen; der Selbsttest ist danach grün. Das ist eine fachliche
+Entscheidung über die Reserve-Kette – sie steht deshalb in einem eigenen
+Commit und lässt sich einzeln zurücknehmen.
 
 ## 4 · Was nur der Inhaber erledigen kann
 
@@ -151,3 +160,4 @@ und braucht nach diesem Merge einen Abgleich.
 | `scripts/tests/test_backup_einrichtung.py` | Vertrag + vier ausgeführte Leerlauf-Fälle |
 | `scripts/tests/test_backup_selbstheilung.py` | Auskunftsvertrag |
 | `docs/ANLEITUNG-OFFSITE-BACKUP.md` | Abschnitt „Eine Ursache, ein Rat“ + Nachschärfung |
+| `scripts/reserve_healer_coverage.py` | eigener Commit: begründete Ausnahme `kurzantwort_failures` (entsperrt `gate`, sachfremd) |
