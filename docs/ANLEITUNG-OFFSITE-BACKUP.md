@@ -6,11 +6,33 @@
 > Probe `scripts/restore_drill.sh` · Export `scripts/kv_backup.py` ·
 > Einrichtungs-Wizard `scripts/backup_einrichten_wizard.sh`
 
+### Integrität des Exports (12.11.2026)
+
+Der Export bricht ab, wenn eine KV-Seite ungültig ist, ein Cursor wiederholt
+wird oder ein angeforderter Wert fehlt bzw. kein Text ist. Ein fehlgeschlagener
+Bulk-Abruf fällt nicht mehr auf Einzelabrufe zurück: Deren Fehlerantworten
+konnten früher als gesicherter Wert erscheinen. D1-Tabellen mit Sonderzeichen
+im Namen werden ebenfalls exportiert, statt still ausgelassen zu werden.
+Die Gegenproben laufen im Backup-Job und mit `npm run test:backup`.
+
+KV-Listen und Werte werden zeitlich nacheinander gelesen, nicht als atomarer
+Snapshot; gleichzeitige Änderungen können zu einem Abbruch führen und müssen
+durch einen weiteren Lauf erneut gesichert werden.
+
+**Einrichtung am 12.11.2026:** Der Inhaber hat die Einrichtung abgeschlossen;
+[Backup-Lauf 43216033861](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/43216033861)
+und [Frischwache 43236761664](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/43236761664)
+waren erfolgreich. Der KV-Export und das Git-Bundle wurden separat lokal
+entschlüsselt und strukturell geprüft; ein Hugo-Build und ein tatsächlicher
+Cloudflare-Rückimport wurden nicht durchgeführt. D1 war nicht eingerichtet.
+Die ältere Diagnose auf dieser Seite beschreibt den damaligen Stand. Eine
+unabhängige zweite Kopie außerhalb des GitHub-Kontos ist noch einzurichten.
+
 ## Kurz: Was ist zu tun?
 
 Die nächtliche Sicherung der Abonnenten und Einwilligungsnachweise (Job
-„KV-/D1-Backup“) ist **absichtlich rot**, bis die Zugänge unten eingerichtet
-sind. Das kann nur der Inhaber: An Secrets und an das Cloudflare-Konto kommen
+„KV-/D1-Backup“) bleibt **absichtlich rot**, falls die Zugänge unten nicht
+korrekt eingerichtet sind. Das kann nur der Inhaber: An Secrets und an das Cloudflare-Konto kommen
 Agenten nicht heran, und das ist auch richtig so. Aufwand: etwa 10 Minuten,
 alle Links sind vorbelegt.
 
@@ -379,7 +401,8 @@ fehlen und das Environment nicht nachweislich nur `main` zulässt, setzt er
 
 1. Vorbelegtes Formular öffnen – Sichtbarkeit **Private** ist gesetzt:
    <https://github.com/new?owner=frank-hartung&name=franksfinanzcheck-backup&visibility=private&description=Private+Sicherungen+%28verschl%C3%BCsselt%29>
-   → „Create repository“. README und Lizenz sind nicht nötig.
+   → „Add a README“ aktivieren (erster Commit als Grundlage für Releases)
+   und „Create repository“ wählen. Eine Lizenz ist nicht nötig.
 2. Repository-Variable anlegen: <https://github.com/frank-hartung/franksfinanzcheck-blog/settings/variables/actions> → „New repository
    variable“ → Name `BACKUP_REPO`, Wert `frank-hartung/franksfinanzcheck-backup`.
 
