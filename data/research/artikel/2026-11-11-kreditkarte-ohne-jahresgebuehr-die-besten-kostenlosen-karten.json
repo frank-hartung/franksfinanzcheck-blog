@@ -1,0 +1,80 @@
+{
+  "slug": "2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten",
+  "titel": "Kreditkarte ohne Jahresgebühr: Die besten kostenlosen Karten",
+  "erzeugt": "2026-11-12 13:11 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 0,
+    "klasse": "YMYL",
+    "grund": "Erstrecherche – noch nie faktengeprüft",
+    "alter_tage": null,
+    "intervall": 45,
+    "frist": null,
+    "restlaufzeit": null
+  },
+  "geo": {
+    "punkte": 3,
+    "maximum": 6,
+    "prozent": 50,
+    "offen": [
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)",
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
+      "Sichtbares Prüfdatum (`faktencheck:`)"
+    ],
+    "treffer": {
+      "kurzantwort": false,
+      "faq": true,
+      "quellen": false,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": false
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesbank.de",
+      "url": "https://www.bundesbank.de/de/presse/pressenotizen",
+      "datum": "",
+      "quelle": "bundesbank.de",
+      "kanal": "web",
+      "auszug": "URL Source: https://www.bundesbank.de/de/presse/pressenotizen\n\nFinal URL: https://www.bundesbank.de/de/presse/pressemitteilungen\n\nMarkdown Content:\n*   [Hauptnavigation](https://www.bundesbank.de/de/presse/pressemitteilungen#main-navigation \" Sprung zur Hauptnavigation\")\n*   [Suche](https://www.bundesbank.de/de/presse/pressemitteilungen#header-search \"Sprung zur Suche\")\n*   [Inhaltsbereich](https://www.bundesbank.de/de/presse/pressemitteilungen#main-content \"Sprung zum Inhaltsbereich\")\n\n*   [Kontakt](https://www.bundesbank.de/de/startseite/kontakt \"Kontakt\")\n*   [Glossar](https://www.bundesbank.de/de/startseite/glossar \"Glossar\")\n*   [Gebärdensprache](https://www.bundesbank.de/de/startseite/gebaerdensprache \"Gebärdensprache\")\n*   [Leichte Sprache](https://publikationen.bundesbank.de/publikationen-de/die-bundes-bank-in-leichter-sprache)\n*   [EN](https://www.bundesbank.de/en)\n\nSuche\n*   Suche\n*   Bankleitzahlen\n\n*   [Anmelden](https://www.bundesbank.de/de/startseite/anmelden \"Anmelden\")\n\n[![Image 1: Deutsche Bundesbank](https://www.bundesbank.de/resource/crblob/722082/6a4e8cec477af9daea8b48e194795928/472B63F073F071307366337C94F8C870/logo-data.svg)](https://www.bundesbank.de/de \"Deutsche Bundesbank\")\n\nNavigation anzeigen  Suche anzeigen \n*   [en](https://www.bundesbank.de/en \"English\")\n\n*   Bundesbank\n\n![Image 2: Schmuckbild für den Webseitenbereich \"Diversity, Equity & Inclusion\"\" ©Personalwerk](blob:http://localhost/a6ead9acc5af34cb22c78a05ed144ef7)© smallredgirl / Fotolia   Green Finance   Der Klimawandel stellt auch den Finanzsektor vor große Herausforderungen.Die Bundesbank unterstützt den Wandel hin zu einer kohlenstoffarmen Wirtschaft.  [Green Finance](https://www.bundesbank.de/de/bundesbank/green-finance)  ![Image 3: Finance Flash](https://www.bundesbank.de/resourc",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Deutsche Bundesbank",
+      "rang": 1,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Eine typische Auslandseinsatzgebühr liegt bei 1 % des Umsatzes.",
+      "stelle": "Eine typische Auslandseinsatzgebühr liegt bei 1 % des Umsatzes. Ohne Gebühr sparst du 12 € jährlich (1 % × 1 200 € = 12 €).",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Du hast eine Jahresgebühr von 60 € und kündigst erst 30 Tage nach Ablauf der Frist.",
+      "stelle": "Du hast eine Jahresgebühr von 60 € und kündigst erst 30 Tage nach Ablauf der Frist. Die Gebühr wird erneut fällig, also 60 € extra.",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Du investierst 15 Minuten in den CHECK24‑Filter und sparst im Schnitt 5 Minuten pro Anbieter.",
+      "stelle": "Du investierst 15 Minuten in den CHECK24‑Filter und sparst im Schnitt 5 Minuten pro Anbieter, weil die wichtigsten Kosten sofort sichtbar sind.",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Keine versteckten Kosten, wenn die Karte „keine Jahres‑ und keine Auslandseinsatzgebühr“ nennt.",
+      "stelle": "Ja, wenn die Karte ausdrücklich „keine Jahres‑ und keine Auslandseinsatzgebühr“ nennt.",
+      "beleg": ""
+    }
+  ],
+  "fehler": [
+    "Deutsche Bundesbank – Pressenotizen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+  ],
+  "fassung_sha256": "90946b45c6a31b668ed042f81e0fa5c1cc508aa34e27865dc843673628435788",
+  "text_sha256": "bc38e1552db18e662769b5f9e8a7e67c96d083fb3400106e089c56b9fbe01dd1",
+  "fachpruefung": "geprüft (groq:openai/gpt-oss-120b); 1 Befund(e) ohne belegbaren Textanker verworfen"
+}

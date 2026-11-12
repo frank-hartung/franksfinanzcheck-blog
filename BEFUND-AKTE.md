@@ -2,12 +2,12 @@
 
 _Stand 2026-11-12 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**143 offene Befunde auf 35 Seiten · davon 20 Live-Seiten mit 80 Befunden · ältester 13 Tage · Frist 14 Tage.**
+**153 offene Befunde auf 38 Seiten · davon 21 Live-Seiten mit 83 Befunden · ältester 13 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 143 |
-| Seiten betroffen | 35 (davon live: 20) |
+| Offene Befunde | 153 |
+| Seiten betroffen | 38 (davon live: 21) |
 | Text seit dem Befund geändert | 110 |
 | Altbestand ohne Fassungs-Hash | 15 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
@@ -32,7 +32,7 @@ _Stand 2026-11-12 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 125 von 143 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 125 von 153 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -396,6 +396,22 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7bba759bbb4ca14c7f3
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e8e32a383b6f803cc8d4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · **LIVE** · Risikoklasse standard · 3 Befund(e)
+
+Datei: `content/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `6b5921bdc76490587167` | luecke | 0 T | Text unverändert seit dem Befund | Seit 2026 nutzen die großen Anbieter die Technik mit dem Namen Vectoring; das ist ein Modellwert. Sie senkt das Rauschen auf der Leitung. In der Stadt sind damit bis zu 250 Mbps stabil drin. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `8436b91bdb63a6316979` | praezision | 0 T | Text unverändert seit dem Befund | Preisgarantie über mindestens 12 Monate; ohne Garantie darf der Anbieter bald erhöhen, oft um bis zu 10 %. | – |
+| `a4ff01e649b789f19e6a` | luecke | 0 T | Text unverändert seit dem Befund | Für 50 Mbps zahlst du heute meist ca. 20–40 € im Monat; das ist ein Beispielwert. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6b5921bdc76490587167 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8436b91bdb63a6316979 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden a4ff01e649b789f19e6a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-11-02-last-minute-urlaubsangebote-sichern` · nicht im Live-Bestand · 5 Befund(e)
 
 Seite: `2026-11-02-last-minute-urlaubsangebote-sichern`
@@ -674,6 +690,40 @@ Seite: `frugalismus`
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 760cdea8544be9d1c7c0 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden cacd65ac080f79a719ae --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d2bfec8aa9b7a0807f0e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-10-19-urlaubskasse-clever-aufbessern` · nicht im Live-Bestand · 3 Befund(e)
+
+Seite: `2026-10-19-urlaubskasse-clever-aufbessern`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `17cddd994cefcdc30f31` | luecke | 0 T | Text unverändert seit dem Befund | Ein Mietwagen ist oft ein teurer Posten. Er kostet meistens fast so viel wie der Flug oder das Hotel. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+| `676fdb5ff70228b06bdc` | luecke | 0 T | Text unverändert seit dem Befund | Geld sollte innerhalb von 48 Stunden zurück sein. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+| `88051266499d4040f7f3` | luecke | 0 T | Text unverändert seit dem Befund | Die Preise werden dort fair und offen gezeigt. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 17cddd994cefcdc30f31 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 676fdb5ff70228b06bdc --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 88051266499d4040f7f3 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten` · nicht im Live-Bestand · 4 Befund(e)
+
+Seite: `2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `228c9da3c42ee90e34bf` | luecke | 0 T | Text unverändert seit dem Befund | Eine typische Auslandseinsatzgebühr liegt bei 1 % des Umsatzes. | – |
+| `7728690d5c2f7c141d8d` | luecke | 0 T | Text unverändert seit dem Befund | Du hast eine Jahresgebühr von 60 € und kündigst erst 30 Tage nach Ablauf der Frist. | – |
+| `cc0de46a82ad90851506` | luecke | 0 T | Text unverändert seit dem Befund | Du investierst 15 Minuten in den CHECK24‑Filter und sparst im Schnitt 5 Minuten pro Anbieter. | – |
+| `d553d0d6c7706a69ad13` | luecke | 0 T | Text unverändert seit dem Befund | Keine versteckten Kosten, wenn die Karte „keine Jahres‑ und keine Auslandseinsatzgebühr“ nennt. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 228c9da3c42ee90e34bf --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7728690d5c2f7c141d8d --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden cc0de46a82ad90851506 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d553d0d6c7706a69ad13 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ---
