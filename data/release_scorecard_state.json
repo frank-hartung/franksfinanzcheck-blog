@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "generated_at": "2026-11-13T12:34:42Z",
-  "modus": "kandidaten",
-  "commit": "4e23e11ca292854968e1f7771bf1d61aaf8de99f",
+  "generated_at": "2026-11-13T13:06:33Z",
+  "modus": "live",
+  "commit": "481b888e12fc80a8e2ba5db684013ddca4e3ce5b",
   "kapazitaet": {
     "stichtag": "2026-11-13",
     "basis": "2026-11-13",
     "projiziert": false,
-    "artikel": 131,
-    "faellig": 0,
+    "artikel": 132,
+    "faellig": 1,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
@@ -19,19 +19,19 @@
     "budget": 5,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 5.0,
-    "bedarf_je_tag": 3.178,
-    "bedarf_je_woche": 22.2,
-    "deckung_prozent": 157.3,
+    "bedarf_je_tag": 3.2,
+    "bedarf_je_woche": 22.4,
+    "deckung_prozent": 156.3,
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
-    "abbau_tage": null,
+    "abbau_tage": 0,
     "verletzungen_alt": 0,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
     "verletzungen": [],
-    "offen_im_horizont": 131,
+    "offen_im_horizont": 132,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
@@ -79,9 +79,13 @@
         "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
         "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
         "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss",
-        "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust"
+        "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+        "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt",
+        "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
+        "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
+        "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto"
       ],
-      "anzahl": 20
+      "anzahl": 24
     },
     {
       "check": "T1w-zeichenlaenge-optimum",
@@ -97,10 +101,10 @@
     }
   ],
   "befundlage": {
-    "offen": 139,
-    "seiten": 35,
-    "live_befunde": 78,
-    "live_seiten": 20,
+    "offen": 155,
+    "seiten": 39,
+    "live_befunde": 94,
+    "live_seiten": 24,
     "ueberholt": 96,
     "ohne_fassung": 15,
     "nicht_entscheidbar": 0,
@@ -127,7 +131,11 @@
       "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": 5,
       "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": 5,
       "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": 3,
-      "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": 3
+      "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": 3,
+      "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": 3,
+      "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten": 4,
+      "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": 5,
+      "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto": 4
     }
   },
   "tool_fehler": {},
@@ -519,7 +527,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1419,22 +1427,29 @@
       "checks": []
     },
     "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": {
-      "sha256": "0b2e1d31f8305bc57439234c7df39a45419dd52d3690207995aae44e02ba6bc7",
-      "urteil": "freigabe-reif",
+      "sha256": "efe8a111a983b5be5f488672e9b94a11b00e0e00443f7561f1d9b3616d5f1757",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "naechste_pruefung": "2026-12-28",
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "4d0125136c5b940946e4 (luecke): Lichtsteuerung: Bedarfssteuerung – 2 bis 5 % des Stromverbrauchs.; 7aeb2098034d16a46885 (luecke): Anbieter locken mit Neukundenboni, die nach der üblichen Erstlaufzeit entfallen; danach steigt der Arbeitspreis massiv an.; ea97b5dd6695de127fd2 (luecke): Heizungssteuerung: Smarte Thermostate können Heizkosten einsparen. Die Spanne von 10 bis 25 % ist ein Beispielwert a"
+        }
+      ]
     },
     "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle": {
       "sha256": "44c00b10819c9ce1c309f6df2fdde3de49c45e4ad059f3fb56bc61c4cbe6205d",
@@ -1473,22 +1488,29 @@
       "checks": []
     },
     "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten": {
-      "sha256": "ec37a881835dfda3575f131a220de39cb9d1ea2f8537d85a0d907a41354449a9",
-      "urteil": "freigabe-reif",
+      "sha256": "31a05a8468f948d91b753469dd48f170e117908c34c3690d87c7d5db09d617bc",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "naechste_pruefung": "2026-12-28",
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "1dc0f20f9ab3a6b783bc (luecke): Behauptung, dass ein fehlender Ausweis zu empfindlichen Bußgeldern führt, fehlt eine belegbare Quelle.; 7b94ca07b36c0b7cb1cc (luecke): Aussage, dass Baudenkmäler von der Ausweispflicht befreit sind, wird nicht durch die angegebene Quelle gestützt.; 985f506ee04087bf7253 (luecke): Angabe, dass ein Wechsel von Energieeffizienzklasse F zu C über 2.000 € Jahresersparnis b"
+        }
+      ]
     },
     "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
       "sha256": "1116b2c903bdbfc88e2e7875ce014dc673667af96642531f5a019c6cad44b79f",
@@ -1509,22 +1531,29 @@
       "checks": []
     },
     "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
-      "sha256": "39e973d8bf8064c55451d6b681f32d2a69bfc0e5e4969c2349932d56f459696f",
-      "urteil": "freigabe-reif",
+      "sha256": "9408e4530b68ed42fb774baac407ae58a9fba46807a026e4f3ac201bab315840",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "naechste_pruefung": "2026-12-28",
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "19ab248b17415c73edfb (luecke): Thermostat um 1 °C senken | 4 % – 6 % der Heizkosten; 372bb51051e8bd7c5f71 (luecke): Viele Anbieter belohnen einen niedrigen Verbrauch mit besseren Konditionen; 6aaff85e3a7591d0c5b2 (luecke): für dich entstehen keine Mehrkosten; 7e6087a4117a857a92c8 (luecke): Durch diese zwei Maßnahmen sparst du in dieser Beispielrechnung jährlich rund 140 €; e28b4ad1f6d608d2ec77 (lu"
+        }
+      ]
     },
     "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
       "sha256": "16d7172501a776788beb087968de72a85328d7f15a5c78a365df3b02054a8ec2",
@@ -1563,22 +1592,29 @@
       "checks": []
     },
     "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto": {
-      "sha256": "5e3637934aaa56503dc11f16627298dd18dc0e40f69e9bd0ae5ac36f936283e7",
-      "urteil": "freigabe-reif",
+      "sha256": "5db24f8b1568f30858a9ffe40f6e25e507271abe48394a4e5047607a0e1aa32b",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-20",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "naechste_pruefung": "2026-12-28",
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "04ae33652c1c5eb4e2b8 (luecke): Ein kurzer Check spart dir oft mehrere hundert Euro im Jahr.; 5223a3c7287ff81939cd (luecke): Faustregel: ... mehr als 5 % deines Nettoeinkommens ... Meist sinken diese Kosten um über 80 %; 9800545ae945ec280b34 (luecke): Ein Wechsel ist für dich in der Regel komplett kostenlos als Beispielwert.; bc0e4f2eb357a682c674 (luecke): Bei einem normalen Einkommen sollten die G"
+        }
+      ]
     },
     "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks": {
       "sha256": "691568c6b33b7d6988347495947ce7887a770f3422b1d94b8742932aa3aa4b2a",
@@ -1771,7 +1807,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-29",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
@@ -1789,7 +1825,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-02-07",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "Q2-quellen-vorhanden",
@@ -1800,7 +1836,7 @@
       ]
     },
     "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
-      "sha256": "1218cac688ad1c8af91da95f5646d91dc6d220116c167cccc6298edbc8fa6ca6",
+      "sha256": "bef38a465cdefa79188fd4e19ec2a7181612e9205330abc98bc3bd2cc686a0c7",
       "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1826,7 +1862,7 @@
           "check": "T1w-zeichenlaenge-optimum",
           "dimension": "technik",
           "wirkung": "warnung",
-          "detail": "Zeichenlänge unter-optimum (10802 Zeichen, Optimum 12.000–18.000)"
+          "detail": "Zeichenlänge unter-optimum (10788 Zeichen, Optimum 12.000–18.000)"
         }
       ]
     }
