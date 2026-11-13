@@ -1,8 +1,8 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-11-13 20:55 UTC  
+**Stand:** 2026-11-13 22:52 UTC  
 **Stufe:** OK  
-**Befund:** Letzter Publikationstag (2026-11-13): 2 Artikel – Ziel erfüllt. – Bestand: 2 von Gates gehalten (ältester 4 Tage: faktenfrische: 6d89862b38c33c827817 (praezision): Die pauschale Behauptung, Hardware bleibe stets Eigentum des Nutzers, ist unpräzise, da die Bundesnetzagentur die Kupfer-Glas-M…)
+**Befund:** Letzter Publikationstag (2026-11-13): 2 Artikel – Ziel erfüllt. – Bestand: 2 von Gates gehalten (ältester 4 Tage: faktenfrische: 11a92bff688ccbb5a485 (luecke): Die Behauptung, dass bis zum Sommer 500 € mehr im Urlaubsbudget verfügbar sind, fehlt eine Quellenangabe.; 1d4896d8ed60f5b6921f (pr…)
 
 | Kennzahl | Wert |
 |---|---|
