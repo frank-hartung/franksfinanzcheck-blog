@@ -1,8 +1,8 @@
 {
   "target": 6,
-  "ready": 2,
+  "ready": 3,
   "pool_size": 12,
-  "generated_at": "2026-11-13T12:14:37Z",
+  "generated_at": "2026-11-13T14:38:16Z",
   "candidates": [
     {
       "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
@@ -41,22 +41,22 @@
     {
       "slug": "2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
       "ready": false,
-      "sha256": "2ce2ad1fc6e3485c931115c0868f90f9ac148fac9e803c52c8c494860c934463",
-      "flesch": 64.5,
-      "measured_at": "2026-11-13T12:05:15Z",
-      "reason": "Reserve-Qualitäts-Gate: Umfang: 763 Wörter / 5693 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
+      "sha256": "a84352b1e9908156475e9502ae9b5558f6c2e529c51f3d576e8ad39c2856592f",
+      "flesch": 58.5,
+      "measured_at": "2026-11-13T14:34:15Z",
+      "reason": "Reserve-Qualitäts-Gate: Umfang: 876 Wörter / 6532 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
       "details": [
-        "Umfang: 763 Wörter / 5693 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
+        "Umfang: 876 Wörter / 6532 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
       ],
-      "score": 0.871,
+      "score": 0.839,
       "parts": {
-        "spelling": 0.84,
+        "spelling": 0.88,
         "meta": 0.85,
         "structure": 0.7,
         "typography": 0.7,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 1.0
+        "readability": 0.8
       }
     },
     {
@@ -177,16 +177,10 @@
     },
     {
       "slug": "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
-      "ready": false,
-      "sha256": "67c67d1b4bbefd0a5bc7d7c81408845a93553da1dd96990b9e981c839c8e96a4",
-      "flesch": 60.8,
-      "measured_at": "2026-11-13T12:12:13Z",
-      "reason": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: ide",
-      "details": [
-        "🛑 2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…hinweis dieser artikel dient ausschließlich der allgemeinen information und stellt…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…keine anlage rechts oder steuerberatung dar prüfe konditionen und bedingungen…“ – doppelte Passage, manuell reparieren",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
+      "ready": true,
+      "sha256": "669471505b259455fd09efebda9f12a5327cae13076c3698b43aa89ea70277bc",
+      "flesch": 61.6,
+      "measured_at": "2026-11-13T14:35:34Z",
       "score": 0.962,
       "parts": {
         "spelling": 0.88,
@@ -201,15 +195,14 @@
     {
       "slug": "2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst",
       "ready": false,
-      "sha256": "dd652f2f4f1bb1a06a4716035760b7858eeb877aa936688d20cafdb3a6df06fc",
+      "sha256": "32447f0b68e92cbc1e8acff81ae3f177183ff69d1c41ea610e7c02bc34437498",
       "flesch": 62.9,
-      "measured_at": "2026-11-13T12:13:27Z",
-      "reason": "Faktenfrische nicht bestanden: 15c33c3d8391354fc901 (luecke): Ein gut gepflegtes Lederteil entwickelt eine Patina und wird mit der Zeit oft schöner.; 8c626b2f9633cf1f8df7 (luecke): Faustregel: Ein Kleidungsstück sollte mindestens 30 Mal get",
+      "measured_at": "2026-11-13T14:36:58Z",
+      "reason": "Kurzantwort-Gate nicht bestanden: Kurzantwort fehlt – veröffentlichte Ratgeber brauchen ein nicht-leeres `kurzantwort` im Frontmatter (M4, #1110)",
       "details": [
-        "🛑 2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
-        "Faktenfrische nicht bestanden: 15c33c3d8391354fc901 (luecke): Ein gut gepflegtes Lederteil entwickelt eine Patina und wird mit der Zeit oft schöner.; 8c626b2f9633cf1f8df7 (luecke): Faustregel: Ein Kleidungsstück sollte mindestens 30 Mal getragen werden können, damit sich die Anschaffung ökologisch und ökonomisch lohnt.; c3b3214d7ca5a81fb22a (luecke): Neue Textilien verlieren sofort nach dem Kauf massiv an Wert.; d05e6be293b31e4347ff (luecke): Schwere Baumwollstoffe sind fast unzerstörbar.",
+        "🛑 2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Kurzantwort-Gate nicht bestanden: Kurzantwort fehlt – veröffentlichte Ratgeber brauchen ein nicht-leeres `kurzantwort` im Frontmatter (M4, #1110)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
       "score": 0.933,
       "parts": {
@@ -225,14 +218,14 @@
     {
       "slug": "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ready": false,
-      "sha256": "3d64e70aff9ff304aa1c5bf8538f3baee7578630e26fabdeb7d2e53d10808ad5",
-      "flesch": 64.2,
-      "measured_at": "2026-11-13T12:14:36Z",
+      "sha256": "5409165a453589f8004323a60dc628661eab76ab82021960a189606f07dc6abf",
+      "flesch": 65.2,
+      "measured_at": "2026-11-13T14:38:14Z",
       "reason": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
       "details": [
         "🛑 2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
         "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erforderten zwingend einen Smart Meter, wird ohne Angabe von Voraussetzungen, Kosten oder Verfügbarkeit präzisiert.; 77d809de9e06d1d6910d (luecke): Es wird eine Prognose für den Strompreis 2026 angegeben („Trends erkennen“, „Netzentgelte steigen“), ohne dass dafür aktuelle Marktdaten oder offizielle Prognosen genannt werden.; ad7c0a90ef52ff35130e (luecke): Der Artikel behauptet, dass Preisgarantien vor Preissteigerungen schützen, liefert jedoch keine Quelle für diese Aussage.; f227178fbda2cc59c350 (luecke): Die Aussage, dass Ökostrom‑Tarife häufig günstiger als die Grundversorgung seien, wird nicht durch eine Quelle belegt.",
-        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…hinweis dieser artikel dient ausschließlich der allgemeinen information und stellt…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…keine anlage rechts oder steuerberatung dar prüfe konditionen und bedingungen…“ – doppelte Passage, manuell reparieren",
+        "Redundanz-Gate D1–D6 nicht bestanden: D2-NEAR: Fast-Duplikat (Ratio 0.90, Z.6967 ≈ Z.6777): **Schritt 2: Kosten des neuen Tarifs berechnen** - Arbeitspreis: 3.500 kWh × 0,32 € = 1.12…",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
       ],
       "score": 0.962,
@@ -249,19 +242,19 @@
     {
       "slug": "2026-11-13-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste",
       "ready": false,
-      "sha256": "148922b4abb8cc53aa95c3b4a679a78715710418a4c63888e496692c9e54e4e7",
+      "sha256": "b1f1b8de8940f0bd802be535bfe8da5ce99754a3d837cd5ae0edcc7eb26540ad",
       "flesch": 60.8,
-      "measured_at": "2026-11-13T12:14:37Z",
-      "reason": "Reserve-Qualitäts-Gate: Umfang: 773 Wörter / 5675 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
+      "measured_at": "2026-11-13T14:38:16Z",
+      "reason": "Reserve-Qualitäts-Gate: Umfang: 804 Wörter / 5913 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
       "details": [
-        "Umfang: 773 Wörter / 5675 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
+        "Umfang: 804 Wörter / 5913 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
       ],
-      "score": 0.895,
+      "score": 0.914,
       "parts": {
         "spelling": 0.96,
         "meta": 0.85,
         "structure": 0.7,
-        "typography": 0.8,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.95
@@ -269,8 +262,19 @@
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "43415998554",
+    "kind": "partial",
+    "run_id": "43443427597",
     "run_attempt": "1"
+  },
+  "recert": {
+    "at": "2026-11-13T14:38:16Z",
+    "renewed": [
+      "2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
+      "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
+      "2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst",
+      "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "2026-11-13-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste"
+    ],
+    "tool": "scripts/reserve_recert.py"
   }
 }
