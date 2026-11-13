@@ -1,13 +1,48 @@
 {
- "auftrag": 0,
- "eingefuegt": [],
- "geheilt": [],
+ "auftrag": 4,
+ "eingefuegt": [
+  {
+   "grund": "gleicher Pillar",
+   "inlinks_jetzt": 0,
+   "meldung": "eingefügt",
+   "quelle": "/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/",
+   "ziel": "/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/"
+  },
+  {
+   "grund": "gleicher Pillar",
+   "inlinks_jetzt": 0,
+   "meldung": "eingefügt",
+   "quelle": "/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/",
+   "ziel": "/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/"
+  },
+  {
+   "grund": "gleicher Pillar",
+   "inlinks_jetzt": 0,
+   "meldung": "eingefügt",
+   "quelle": "/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/",
+   "ziel": "/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/"
+  },
+  {
+   "grund": "gleicher Pillar",
+   "inlinks_jetzt": 0,
+   "meldung": "eingefügt",
+   "quelle": "/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/",
+   "ziel": "/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/"
+  }
+ ],
+ "geheilt": [
+  "/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/",
+  "/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/"
+ ],
  "geschrieben": true,
  "max": 10,
  "nachher_ohne_inlink": [],
  "offen": [],
- "stand": "2026-11-12T13:44:49Z",
- "status": "sauber",
+ "stand": "2026-11-13T13:04:30Z",
+ "status": "geheilt",
  "verweigert": [],
- "vorher_ohne_inlink": []
+ "vorher_ohne_inlink": [
+  "/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/",
+  "/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/"
+ ]
 }

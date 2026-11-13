@@ -1,5 +1,5 @@
 {
- "anzahl": 4,
+ "anzahl": 5,
  "entschieden": [
   {
    "aktion": "kein Inhalt (Asset/Feed) – belassen",
@@ -35,30 +35,58 @@
    "ziel": null
   },
   {
-   "aktion": "entschieden am 2026-10-30 (Wiedervorlage 2026-11-13)",
+   "aktion": "Wirkung belegt – Eintrag schließen",
    "alter_tage": null,
-   "beleg": "Register: Rolle getrennt: Jahresplan (K3) – nicht konsolidieren – Am 26.10.2026 als Rolle getrennt entschieden (1 Impression, Position 7,0); am 30.10.2026 erneut geprüft, weil die Schwester-Seite auf 14 Impressionen gewachsen ist (Position 40,9, 0 Klicks): Titel-Überschneidung 0,00, 0 gemeinsame Zwischenüberschriften, 0,0 % wörtliche Sätze – weiterhin zwei Rollen, keine Dublette. Rollenlink in beide Richtungen gesetzt. (Eigentümer: redaktion)",
-   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "beleg": "Entscheidung vom 2026-10-30 (Rolle getrennt: Kontrollpfad (4K) – nicht konsolidieren): Die URL steht nicht mehr in dieser Liste. Ob sie im Index ist, sagt der nächste Export.",
+   "grund": "nicht mehr gemeldet",
    "prioritaet": "P3",
+   "schluessel": "register",
+   "url": "/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/",
+   "vorschlag": "",
+   "ziel": null
+  }
+ ],
+ "eskaliert": [
+  "/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/"
+ ],
+ "nach_prioritaet": {
+  "P0": 1,
+  "P3": 4
+ },
+ "offen": [
+  {
+   "aktion": "Entscheidung umsetzen (Wiedervorlage 2026-11-13 überschritten) · überfällig seit 18 Tagen (SLA 7)",
+   "alter_tage": 18,
+   "beleg": "Register: Rolle getrennt: Jahresplan (K3) – nicht konsolidieren – Am 26.10.2026 als Rolle getrennt entschieden (1 Impression, Position 7,0); am 30.10.2026 erneut geprüft, weil die Schwester-Seite auf 14 Impressionen gewachsen ist (Position 40,9, 0 Klicks): Titel-Überschneidung 0,00, 0 gemeinsame Zwischenüberschriften, 0,0 % wörtliche Sätze – weiterhin zwei Rollen, keine Dublette. Rollenlink in beide Richtungen gesetzt. (Eigentümer: redaktion) · Seite steht seit 2026-10-19 unverändert – die Entscheidung vom 2026-10-30 ist noch nicht umgesetzt.",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P0",
    "schluessel": "crawled_not_indexed",
    "url": "/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
    "vorschlag": "",
    "ziel": null
   }
  ],
- "eskaliert": [],
- "nach_prioritaet": {
-  "P3": 4
- },
- "offen": [],
  "register_eintraege": 3,
  "sla": {
   "P0": 1,
   "P1": 7,
   "P2": 30
  },
- "wirkung_belegt": [],
+ "wirkung_belegt": [
+  "/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/"
+ ],
  "zeilen": [
+  {
+   "aktion": "Entscheidung umsetzen (Wiedervorlage 2026-11-13 überschritten) · überfällig seit 18 Tagen (SLA 7)",
+   "alter_tage": 18,
+   "beleg": "Register: Rolle getrennt: Jahresplan (K3) – nicht konsolidieren – Am 26.10.2026 als Rolle getrennt entschieden (1 Impression, Position 7,0); am 30.10.2026 erneut geprüft, weil die Schwester-Seite auf 14 Impressionen gewachsen ist (Position 40,9, 0 Klicks): Titel-Überschneidung 0,00, 0 gemeinsame Zwischenüberschriften, 0,0 % wörtliche Sätze – weiterhin zwei Rollen, keine Dublette. Rollenlink in beide Richtungen gesetzt. (Eigentümer: redaktion) · Seite steht seit 2026-10-19 unverändert – die Entscheidung vom 2026-10-30 ist noch nicht umgesetzt.",
+   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "prioritaet": "P0",
+   "schluessel": "crawled_not_indexed",
+   "url": "/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
+   "vorschlag": "",
+   "ziel": null
+  },
   {
    "aktion": "kein Inhalt (Asset/Feed) – belassen",
    "alter_tage": null,
@@ -93,13 +121,13 @@
    "ziel": null
   },
   {
-   "aktion": "entschieden am 2026-10-30 (Wiedervorlage 2026-11-13)",
+   "aktion": "Wirkung belegt – Eintrag schließen",
    "alter_tage": null,
-   "beleg": "Register: Rolle getrennt: Jahresplan (K3) – nicht konsolidieren – Am 26.10.2026 als Rolle getrennt entschieden (1 Impression, Position 7,0); am 30.10.2026 erneut geprüft, weil die Schwester-Seite auf 14 Impressionen gewachsen ist (Position 40,9, 0 Klicks): Titel-Überschneidung 0,00, 0 gemeinsame Zwischenüberschriften, 0,0 % wörtliche Sätze – weiterhin zwei Rollen, keine Dublette. Rollenlink in beide Richtungen gesetzt. (Eigentümer: redaktion)",
-   "grund": "Gecrawlt – zurzeit nicht indexiert",
+   "beleg": "Entscheidung vom 2026-10-30 (Rolle getrennt: Kontrollpfad (4K) – nicht konsolidieren): Die URL steht nicht mehr in dieser Liste. Ob sie im Index ist, sagt der nächste Export.",
+   "grund": "nicht mehr gemeldet",
    "prioritaet": "P3",
-   "schluessel": "crawled_not_indexed",
-   "url": "/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
+   "schluessel": "register",
+   "url": "/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/",
    "vorschlag": "",
    "ziel": null
   }

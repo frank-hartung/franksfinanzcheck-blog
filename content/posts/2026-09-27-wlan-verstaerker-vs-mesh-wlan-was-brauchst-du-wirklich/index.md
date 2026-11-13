@@ -194,7 +194,7 @@ Die Frage „WLAN‑Verstärker oder Mesh‑WLAN?“ beantwortet sich fast von s
 
 Bleibt der Grundsatz, der mir bei jeder Netzwerkfrage am meisten Geld gespart hat: **Miss zweimal, kauf einmal.**
 
-**Weiterlesen:** [Pillar Internet & DSL](../../pillar/internet-dsl/) · [WLAN verbessern in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) · [DNS‑Server wechseln für schnelleres Internet](../../posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/)
+**Weiterlesen:** [Pillar Internet & DSL](../../pillar/internet-dsl/) · [WLAN verbessern in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) · [DNS‑Server wechseln für schnelleres Internet](../../posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/) · [Wie viel Streaming‑Bandbreite](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/)
 
 ## Häufige Fragen
 
