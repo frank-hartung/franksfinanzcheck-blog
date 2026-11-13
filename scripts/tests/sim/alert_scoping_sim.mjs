@@ -599,6 +599,25 @@ await run('#923-Gegenprobe: offene Einrichtung schlägt den Leerlauf-Rat',
                        conclusion: 'failure' }] }] },
   true, ['<!-- alert-runbook: backup-einrichtung -->'],
   null, ['<!-- alert-runbook: backup-leerlauf -->']);
+
+// #1030 (12.11.2026): DIESELBE Ursache, andere Folge. Schlagen in der
+// Frischwache „Voraussetzungen prüfen" UND der Rückweg-Nachweis fehl, ist die
+// Einrichtung die Antwort – der Rückweg ist die Folge, nicht die Ursache.
+// Vorher prüfte nur der Offsite-Zweig den Einrichtungsbefund, und der Lauf
+// bekam den Rat „prüfe den Rückweg" (eine Prüfung, die an fehlenden Zugängen
+// scheitert, ist kein Rückweg-Befund).
+await run('#1030-Gegenprobe: offene Einrichtung schlägt den Rückweg-Rat', 
+  { workflowName: 'Backup-Frischwache (operative RPO-Wache)', branch: 'main', event: 'schedule',
+    conclusion: 'failure',
+    jobs: [{ name: 'Backup-Frische pruefen (RPO 24 h / 52 h)', conclusion: 'failure',
+             html_url: 'https://x/jobs/1030c',
+             steps: [{ name: 'Voraussetzungen prüfen (fail-closed – kein Schein-Grün)',
+                       conclusion: 'failure' },
+                     { name: 'Kurzpruefung Wiederherstellbarkeit (strukturell, ohne Secrets)',
+                       conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: backup-einrichtung -->'],
+  null, ['<!-- alert-runbook: backup-restore -->']);
+
 // 07.11.2026 (WF-3150 / #1030): Die Messung urteilt nicht mehr selbst. Rot
 //     wird der Schluss-Schritt NACH der Selbstheilung. Der Rat muss sagen,
 //     dass die Wache schon gehandelt hat (Anstoß, zweite Messung) – der alte

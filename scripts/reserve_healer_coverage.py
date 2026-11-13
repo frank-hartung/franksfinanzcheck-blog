@@ -235,6 +235,30 @@ AUSNAHMEN: dict[str, str] = {
         "am Entwurf müsste Rechtsangaben umschreiben, ohne sie zu prüfen "
         "(C15). Der Kandidat bleibt als Hold erhalten; zuständig ist die "
         "Redaktion (#714).",
+    # Kurzantwort-Verlust (10.11.2026): `kurzantwort_failures` wurde mit #1110
+    # (06.11.2026) eine ablehnende Publish-Gate-Regel – die Deckungstabelle
+    # bekam keinen Eintrag, und der Reserve-Finisher verweigerte seitdem VOR
+    # jeder Arbeit die Kette (rot auf `main`, nicht erst in diesem Zweig).
+    # Bewusst KEIN Reserve-Heiler, und zwar aus demselben Grund wie D3/D4:
+    # Die Kurzantwort ist der Inhalt selbst (2–3 Sätze, die die Kernfrage des
+    # Artikels beantworten). Ein Heiler, der sie im Veredelungslauf „ergänzt“,
+    # würde sie erfinden – genau das, was #1110 verbietet. Die beiden echten
+    # Schreiber liegen außerhalb dieser Kette und sind belegt:
+    #   * `pflichtfeld_verlust_wache.py --fix` holt ein VERLORENES Feld
+    #     bytegenau aus HEAD zurück (Deploy, direkt nach dem Selbsttest) –
+    #     der Vorfall vom 06.11. (`0b55fca`) ist damit reversibel;
+    #   * `generate_kurzantworten.py` erzeugt eine fehlende Kurzantwort mit
+    #     KI-Provider und YMYL-Sperre (`automatic_change_findings`) im
+    #     Content-Engine-Lauf.
+    # Ein dritter Schreiber in der Reserve-Kette wäre eine zweite Wahrheit
+    # über denselben Text – und würde den Fund verdecken statt ihn zu beheben.
+    "kurzantwort_failures":
+        "Die Kurzantwort ist Inhalt, nicht Format: Ein Reserve-Heiler müsste "
+        "sie erfinden, statt sie zurückzuholen (C15). Geheilt wird an den "
+        "beiden echten Stellen – `pflichtfeld_verlust_wache.py --fix` stellt "
+        "ein verlorenes Feld aus HEAD wieder her, `generate_kurzantworten.py` "
+        "erzeugt eine fehlende mit KI-Provider und YMYL-Sperre. Der Entwurf "
+        "bleibt bis dahin zurückgestellt (#1110).",
 }
 
 # ---------------------------------------------------------------------------

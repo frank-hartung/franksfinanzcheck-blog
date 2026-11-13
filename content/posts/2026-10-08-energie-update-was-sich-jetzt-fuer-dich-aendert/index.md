@@ -20,6 +20,12 @@ cover:
   image: "images/covers/2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert.jpg"
   alt: "Energiepreise 2026: Was du jetzt beim Strom- und Gasvertrag prüfen solltest"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: a8ffd9a50f334a305be7abf196bdd6fd23756fa141d02d9207addba51438f59a
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur - Energie"

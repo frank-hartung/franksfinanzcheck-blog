@@ -199,9 +199,14 @@ externe API-Änderungen. Diese während des Versuchs vermeiden.
 
 **Nachweis und Störung:** `f01-heilung.jsonl` protokolliert Schritte und Klassen
 ohne Token oder Rohantworten im Artifact `sicherheits-live-nachweis` (90 Tage).
-Vor dem ersten Write steht `aenderung_begonnen`; Abbruch/Fehler kann **teilweise
-Änderungen** hinterlassen, es gibt keinen automatischen Rollback. Bei Abbruch
-kann das Artifact fehlen; Actions-Log und Cloudflare-Audit sind dann zu prüfen.
+Fehlende Betreiberfreigabe oder ein im Repository noch offener/fehlender B7-Text
+wird als **Warnung „gesperrt“** protokolliert, nicht als zweite fehlgeschlagene
+Reparatur: Das ist die erwartete fail-closed-Schutzschranke. API-/Messfehler und
+Fehler nach Beginn eines Schreibversuchs bleiben dagegen Fehler. Vor dem ersten
+Write steht `aenderung_begonnen`; Abbruch/Fehler kann
+**teilweise Änderungen** hinterlassen, es gibt keinen automatischen Rollback.
+Bei Abbruch kann das Artifact fehlen; Actions-Log und Cloudflare-Audit sind dann
+zu prüfen.
 Der ursprüngliche F-01-Auswerteschritt und der ursprüngliche Gesamtabschluss
 bleiben unverändert: ein erfolgreich geheilter roter Lauf bleibt rot. Erst ein
 späterer vollständiger Live-Lauf mit Header **und** Worker sowie B7 darf den

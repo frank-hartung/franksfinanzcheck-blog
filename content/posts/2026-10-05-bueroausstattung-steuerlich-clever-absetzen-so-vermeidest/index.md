@@ -24,21 +24,19 @@ cover:
   image: "images/covers/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest.jpg"
   alt: "Büroausstattung steuerlich clever absetzen: So geht's"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 90aa0a6a0428968eec0d60076d8ae5f6152e517a94048afb67791eea442a423e
+    geprueft_am: 2026-11-13
 kurzantwort: "Arbeitsmittel wie Schreibtisch, Monitor oder Bürostuhl kannst du als Werbungskosten absetzen, wenn du sie so gut wie ausschließlich beruflich nutzt. Bis 800 Euro netto (rund 952 Euro brutto) zählt die Anschaffung sofort im Kaufjahr, teurere Möbel verteilst du über die Nutzungsdauer. Zusätzlich gibt es die Tagespauschale von 6 Euro für jeden Homeoffice-Tag, höchstens 1.260 Euro im Jahr."
 quellen:
   - id: "Q1"
-    titel: "§ 6 Abs. 2 EStG – geringwertige Wirtschaftsgüter"
-    url: "https://www.gesetze-im-internet.de/estg/__6.html"
-    herausgeber: "Bundesministerium der Justiz"
-  - id: "Q2"
-    titel: "§ 4 Abs. 5 Satz 1 Nr. 6c EStG – Tagespauschale Homeoffice"
-    url: "https://www.gesetze-im-internet.de/estg/__4.html"
-    herausgeber: "Bundesministerium der Justiz"
-  - id: "Q3"
-    titel: "§ 9 EStG – Werbungskosten und Arbeitsmittel"
-    url: "https://www.gesetze-im-internet.de/estg/__9.html"
-    herausgeber: "Bundesministerium der Justiz"
-faktencheck: 2026-10-05
+    titel: "Referenzseite destatis.de"
+    url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+    herausgeber: "Statistisches Bundesamt"
+faktencheck: 2026-11-12
 ---
 
 Büroausstattung steuerlich clever absetzen: Das klingt nach Papierkrieg. Es sind aber nur drei Regeln. Schreibtisch, Monitor und Bürostuhl kosten im Jahr schnell ein paar hundert Euro.

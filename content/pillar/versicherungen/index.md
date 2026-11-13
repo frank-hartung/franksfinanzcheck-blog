@@ -14,6 +14,12 @@ cover:
   alt: "Versicherungen: Der große Ratgeber für den richtigen Schutz"
   caption: "Kompletter Ratgeber von FranksFinanzcheck"
   preload: false   # Bild liefert og:image, nicht den LCP
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: ffb6735b5a395642e879014b288b5ade3c6d7be67c179b86c7a61ff670cfe8e4
+    geprueft_am: 2026-11-13
 faktencheck: 2026-10-30
 quellen:
   - titel: "Wichtige Versicherungen im Überblick: Was Sie wirklich brauchen"

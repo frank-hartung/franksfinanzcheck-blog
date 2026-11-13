@@ -1,0 +1,311 @@
+generated_at: '2026-11-12T11:50:02Z'
+day: '2026-11-12'
+mode: deterministic
+teams:
+  trending:
+  - topic: Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
+      ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
+    pillar: strom-sparen
+    signal: trending
+    source: aktuelle_entwicklungen:energie-herbst-nachzahlung
+    score: 0.75
+  - topic: Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu
+      an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.
+    pillar: strom-sparen
+    signal: trending
+    source: aktuelle_entwicklungen:energie-jahreswechsel-wechselfenster
+    score: 0.75
+  - topic: Zwischen variablen Tarifen und Festpreisverträgen gibt es 2026 wieder größere
+      Preisunterschiede – pauschale Empfehlungen greifen hier zu kurz, es kommt auf
+      den eigenen Verbrauch an.
+    pillar: strom-sparen
+    signal: trending
+    source: aktuelle_entwicklungen:energie-variable-vs-fest
+    score: 0.75
+  - topic: Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende –
+      ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
+      statt sie automatisch zu verlängern.
+    pillar: versicherungen
+    signal: trending
+    source: aktuelle_entwicklungen:versicherung-beitragsanpassung-jahresende
+    score: 0.7
+  - topic: Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste
+      Ergebnis nimmt, lässt oft bares Geld liegen.
+    pillar: versicherungen
+    signal: trending
+    source: aktuelle_entwicklungen:versicherung-vergleichsportale-nicht-vollstaendig
+    score: 0.7
+  - topic: Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
+      sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
+      inzwischen öfter als nur beim Kontowechsel.
+    pillar: konto-karten
+    signal: trending
+    source: aktuelle_entwicklungen:konto-gebuehren-transparenz
+    score: 0.6
+  - topic: Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als sie
+      im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
+      als der reine Anbieterwechsel.
+    pillar: internet-dsl
+    signal: trending
+    source: aktuelle_entwicklungen:internet-tarifdschungel-bandbreite
+    score: 0.6
+  - topic: Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der genaue
+      Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen Monaten
+      wieder fallen.
+    pillar: konto-karten
+    signal: trending
+    source: aktuelle_entwicklungen:zinsumfeld-tagesgeld
+    score: 0.6
+  - topic: Ein jährlicher Vertrags-Check – Strom, Versicherung, Konto, Internet an
+      einem Nachmittag – deckt erfahrungsgemäß mehr Sparpotenzial auf als einzelne
+      spontane Wechsel übers Jahr verteilt.
+    pillar: null
+    signal: trending
+    source: aktuelle_entwicklungen:saisonal-fruehjahrsputz-vertraege
+    score: 0.6
+  news:
+  - topic: Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
+      ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
+    pillar: strom-sparen
+    signal: news
+    source: aktuelle_entwicklungen:energie-herbst-nachzahlung
+    score: 0.85
+  - topic: Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu
+      an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.
+    pillar: strom-sparen
+    signal: news
+    source: aktuelle_entwicklungen:energie-jahreswechsel-wechselfenster
+    score: 0.85
+  - topic: Zwischen variablen Tarifen und Festpreisverträgen gibt es 2026 wieder größere
+      Preisunterschiede – pauschale Empfehlungen greifen hier zu kurz, es kommt auf
+      den eigenen Verbrauch an.
+    pillar: strom-sparen
+    signal: news
+    source: aktuelle_entwicklungen:energie-variable-vs-fest
+    score: 0.85
+  - topic: Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende –
+      ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
+      statt sie automatisch zu verlängern.
+    pillar: versicherungen
+    signal: news
+    source: aktuelle_entwicklungen:versicherung-beitragsanpassung-jahresende
+    score: 0.8
+  - topic: Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste
+      Ergebnis nimmt, lässt oft bares Geld liegen.
+    pillar: versicherungen
+    signal: news
+    source: aktuelle_entwicklungen:versicherung-vergleichsportale-nicht-vollstaendig
+    score: 0.8
+  evergreen:
+  - topic: 'Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung'
+    pillar: frugalismus
+    signal: evergreen
+    source: 'topics:Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung'
+    score: 0.85
+    keywords: []
+  - topic: Heizperiode vorbereiten im Spätsommer
+    pillar: strom-sparen
+    signal: evergreen
+    source: topics:Heizperiode vorbereiten im Spätsommer
+    score: 0.85
+    keywords:
+    - Gasrechnung senken
+    - Heizkosten sparen
+    - Herbst Vorbereitung
+    - Heizung prüfen
+  - topic: Die besten DSL-Tarife für Zuhause und unterwegs
+    pillar: internet-dsl
+    signal: evergreen
+    source: topics:Die besten DSL-Tarife für Zuhause und unterwegs
+    score: 0.85
+    keywords:
+    - DSL-Tarife
+    - Zuhause
+    - unterwegs
+  - topic: Mietwagen-Tarife im Vergleich für den Urlaub
+    pillar: mietwagen
+    signal: evergreen
+    source: topics:Mietwagen-Tarife im Vergleich für den Urlaub
+    score: 0.85
+    keywords:
+    - Mietwagen
+    - Tarife
+    - Vergleich
+  - topic: Kontoeröffnung mit günstigen Gebühren
+    pillar: konto-karten
+    signal: evergreen
+    source: topics:Kontoeröffnung mit günstigen Gebühren
+    score: 0.85
+    keywords:
+    - Kontoeröffnung
+    - Günstige Gebühren
+    - Kontenvergleich
+  - topic: 'Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
+    pillar: versicherungen
+    signal: evergreen
+    source: 'topics:Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
+    score: 0.85
+    keywords:
+    - Versicherungen prüfen Jahresende
+    - Policen kündigen Dezember
+    - überversichert was kündigen
+  pain_points:
+  - topic: Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft merken
+      Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
+    pillar: strom-sparen
+    signal: pain_point
+    source: pain_points:strom-nachzahlung-herbst
+    score: 0.95
+  - topic: Policen werden automatisch verlängert und Jahr für Jahr teurer – wer nie
+      vergleicht, zahlt für alte Verträge deutlich zu viel.
+    pillar: versicherungen
+    signal: pain_point
+    source: pain_points:versicherung-zu-teuer-verlaengert
+    score: 0.92
+  - topic: Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich höher
+      aus als erwartet – der Schock kommt mit der Heizperiode.
+    pillar: strom-sparen
+    signal: pain_point
+    source: pain_points:gas-preisschock-heizperiode
+    score: 0.9
+  - topic: Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich vergleicht,
+      zahlt für Leistungen, die es anderswo gratis gibt.
+    pillar: konto-karten
+    signal: pain_point
+    source: pain_points:konto-gebuehren-schleichend
+    score: 0.88
+  - topic: Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die Rechnung
+      bleibt hoch, der Speed trotzdem mau.
+    pillar: internet-dsl
+    signal: pain_point
+    source: pain_points:dsl-teuer-trotz-schlecht
+    score: 0.85
+  - topic: Funklöcher in Wohnung oder Homeoffice nerven täglich – oft liegt es nicht
+      am Anbieter, sondern an Router und WLAN-Aufbau.
+    pillar: internet-dsl
+    signal: pain_point
+    source: pain_points:dsl-wlan-funkloch
+    score: 0.8
+  - topic: Mietwagen-Buchungen mit hoher Kaution und versteckten Zusatzgebühren verderben
+      die Urlaubskasse – die Fallen liegen im Kleingedruckten.
+    pillar: mietwagen
+    signal: pain_point
+    source: pain_points:mietwagen-kaution-falle
+    score: 0.78
+  - topic: Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub unbemerkt
+      Geld – ein Kostenvergleich lohnt sich vor jeder Reise.
+    pillar: konto-karten
+    signal: pain_point
+    source: pain_points:kreditkarte-versteckte-kosten
+    score: 0.75
+  - topic: Frugalismus wird oft als reiner Verzicht missverstanden – dabei geht es
+      um bewussten Konsum, nicht um Askese.
+    pillar: frugalismus
+    signal: pain_point
+    source: pain_points:frugalismus-verzicht-missverstanden
+    score: 0.72
+  - topic: Viele unterschätzen, was Hausrat im Ernstfall wirklich kostet – oder zahlen
+      umgekehrt für überhöhte Summen ohne Prüfung.
+    pillar: versicherungen
+    signal: pain_point
+    source: pain_points:hausrat-unterschaetzt
+    score: 0.7
+  viral_outliers:
+  - topic: 'Preisgarantie Gas: So schützt du dich vor Preissprüngen'
+    pillar: strom-sparen
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.84
+  - topic: 'Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe'
+    pillar: strom-sparen
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.83
+  - topic: 'Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen'
+    pillar: internet-dsl
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.82
+  - topic: 'Internet und DSL wechseln: Praxis-Tipps ohne Ausfall'
+    pillar: internet-dsl
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.81
+  - topic: 'Haushaltsbuch führen: App, Excel oder Papier?'
+    pillar: konto-karten
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.81
+  - topic: 'Sicher heizen: Gaspreisgarantie gegen den Preisschock'
+    pillar: strom-sparen
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.79
+  - topic: 'Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht'
+    pillar: frugalismus
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.78
+  - topic: 'Spätsommer-Schnäppchen: Mietwagen jetzt günstig buchen'
+    pillar: mietwagen
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.77
+  niche_hooks:
+  - topic: Günstige Flüge für den Spätsommer finden
+    pillar: mietwagen
+    signal: niche_hook
+    source: topics:Günstige Flüge für den Spätsommer finden
+    score: 0.55
+    keywords:
+    - Flugtickets günstig
+    - Flugvergleich
+    - Reisebudget sparen
+  - topic: Internet-Speed optimieren mit dem richtigen Router
+    pillar: internet-dsl
+    signal: niche_hook
+    source: topics:Internet-Speed optimieren mit dem richtigen Router
+    score: 0.55
+    keywords:
+    - Internet-Speed
+    - Router
+    - Optimieren
+  - topic: Mietwagen-Kosten im Ausland minimieren
+    pillar: mietwagen
+    signal: niche_hook
+    source: topics:Mietwagen-Kosten im Ausland minimieren
+    score: 0.55
+    keywords:
+    - Mietwagen
+    - Ausland
+    - Kosten minimieren
+  - topic: 'Schufa-Eintrag löschen lassen: So gehst du richtig vor'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Schufa-Eintrag löschen lassen: So gehst du richtig vor'
+    score: 0.55
+    keywords:
+    - Schufa Eintrag löschen
+    - Negativeintrag entfernen
+    - Bonität verbessern
+  - topic: 'Steckdosenleiste mit Schalter: Der unterschätzte Hebel am Arbeitsplatz'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Steckdosenleiste mit Schalter: Der unterschätzte Hebel am Arbeitsplatz'
+    score: 0.55
+    keywords:
+    - Steckdosenleiste Schalter
+    - Standby vermeiden
+    - Arbeitsplatz Strom
+  - topic: 'Undichte Fenster abdichten: Was bei alten Rahmen zuerst hilft'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Undichte Fenster abdichten: Was bei alten Rahmen zuerst hilft'
+    score: 0.55
+    keywords:
+    - Fenster abdichten
+    - Zugluft stoppen
+    - Heizkosten senken
+live_web:
+  enabled: false
+  findings: []

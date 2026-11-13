@@ -127,6 +127,29 @@
   {{- with .Params.cover.alt -}}
     {{- $image = merge $image (dict "caption" (. | plainify | htmlUnescape | chomp)) -}}
   {{- end -}}
+  {{- /* ---------- IPTC-Erzeugungsart am Bild (#1028, 13.11.2026) ----------
+       `digitalSourceType` ist die schema.org-Eigenschaft, die auf die
+       IPTC-Vokabeln zeigt (schema.org Release 24.0; Google liest
+       `TrainedAlgorithmicMediaDigitalSource` in strukturierten Daten).
+       Bisher stand die Erzeugungsart NUR im `data-`Attribut des <img> und
+       im XMP der Datei – im JSON-LD fehlte sie, obwohl Artikel-Schema und
+       Bildkanal dieselbe Aussage tragen sollen.
+
+       NUR belegt: Der Wert kommt aus `cover.ki_pruefung.
+       digital_source_type`, also aus derselben Quelle wie das XMP-Feld in
+       der Bilddatei. Ohne Beleg wird nichts behauptet – eine erfundene
+       Herkunftsangabe wäre schlimmer als keine. Gemappt wird ausschließlich
+       das, was schema.org als Enumeration kennt. */ -}}
+  {{- $quelleTyp := "" -}}
+  {{- with .Params.cover.ki_pruefung -}}{{- $quelleTyp = .digital_source_type | default "" -}}{{- end -}}
+  {{- if $quelleTyp -}}
+    {{- $schemaTyp := dict
+          "trainedAlgorithmicMedia" "https://schema.org/TrainedAlgorithmicMediaDigitalSource"
+          "compositeWithTrainedAlgorithmicMedia" "https://schema.org/CompositeWithTrainedAlgorithmicMediaDigitalSource" -}}
+    {{- with index $schemaTyp $quelleTyp -}}
+      {{- $image = merge $image (dict "digitalSourceType" .) -}}
+    {{- end -}}
+  {{- end -}}
   {{- $out = merge $out (dict "image" $image) -}}
 {{- end -}}
 {{- if gt (len $rubrik) 0 -}}

@@ -2,6 +2,8 @@
 #  BEFUND-REGISTER FAKTENFRISCHE #996
 #  Lauf: 01.11.2026, 11:29 UTC · Redaktionelle Heilung: 02.11.2026 (PR #1017)
 #  Dauerheilung / Rückfallbeseitigung: 03.11.2026
+#  Anker-Nachzug 12.11.2026: N16 an die überarbeitete Fassung gebunden
+#  (der alte Satz ist im Text vom 11.11.2026 ersetzt, die Aussage nicht).
 #
 #  Dieses Register ist die redaktionelle Schließakte zu den 16
 #  fachlichen Befunden aus Issue #996. Es ersetzt keine Fachprüfung,
@@ -348,13 +350,14 @@ befunde:
     artikel: "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen"
     typ: "praezision"
     befund: "Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf den Anbieter überträgt und dafür ein höherer Startpreis üblich ist, fehlt eine konkrete Quelle und bleibt vage."
-    entscheidung: "Keine 'übliche' Aufpreis-Behauptung mehr: Der Aufpreis ist eine nachzurechnende Differenz konkreter Tarife (Modell: 2 ct/kWh × 20.000 kWh = 400 €/Jahr); die Garantie schützt nur vertraglich genannte Bestandteile. Am 03.11.2026 zusätzlich geheilt: Der Pin-Text 'beste Zeit für den Gaswechsel … Preise anziehen' ist ersetzt."
+    entscheidung: "Keine 'übliche' Aufpreis-Behauptung mehr: Der Aufpreis ist eine nachzurechnende Differenz konkreter Tarife (Modell: 2 ct/kWh × 20.000 kWh = 400 €/Jahr); die Garantie schützt nur vertraglich genannte Bestandteile. Am 03.11.2026 zusätzlich geheilt: Der Pin-Text 'beste Zeit für den Gaswechsel … Preise anziehen' ist ersetzt. Am 12.11.2026 Anker nachgezogen: Der Satz „Eine längere Garantie ist nicht automatisch sicherer“ wurde bei der Textüberarbeitung am 11.11.2026 ersetzt durch „Eine Garantie kauft dir Planung – keine sichere Ersparnis“; die Entscheidung selbst bleibt unverändert."
     status: "behoben"
     ledger_signatur: "ausstehend"
     belegtyp: "streichung"
     beleg_url: null
     anker:
-      - "Eine längere Garantie ist nicht automatisch sicherer"
+      - "Eine Garantie kauft dir Planung"
+      - "Ein Aufpreis ist nicht zwingend"
       - "kostet die Absicherung bei 20.000 kWh 400 € jährlich"
     verboten_behauptend:
       - "höherer Startpreis üblich"

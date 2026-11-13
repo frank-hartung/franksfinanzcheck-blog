@@ -26,6 +26,12 @@ cover:
   image: "images/covers/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht.jpg"
   alt: "Frugalismus Familie: Clever sparen ohne Verzicht"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: bb145cea7720b11186868766df90a834ebdeecaa69c91bedf5313ebc40d90c44
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Verbraucherpreisindex und Inflationsrate – Statistisches Bundesamt"

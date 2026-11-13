@@ -27,13 +27,19 @@ cover:
   image: "images/covers/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken.jpg"
   alt: "Kleine Energiespar‑Tricks: Deine Kosten sofort senken"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: f72a797eb2e25ecf2c933cc9acc9d24cda1c0c122f38e048d4a586c4f45c6308
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur - Energie"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
     datum: "2024-01-01"
-faktencheck: 2026-10-06
+faktencheck: 2026-11-13
 kurzantwort: "Durch das Absenken der Raumtemperatur um einen Grad sowie den konsequenten Einsatz von LED-Leuchtmitteln und schaltbaren Steckerleisten sinken Heiz- und Strombedarf spürbar. Die Beispielrechnung im Artikel zeigt, wie sich solche kleinen Handgriffe im Alltag über das Jahr auf dreistellige Euro-Beträge summieren."
 ---
 

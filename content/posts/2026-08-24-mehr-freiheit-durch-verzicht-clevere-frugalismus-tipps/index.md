@@ -14,12 +14,18 @@ cover:
   image: "images/covers/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps.jpg"
   alt: "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 4f41cc46c6f975cad16bebd7d685a8037d332620e9246c6961745384a82dc0da
+    geprueft_am: 2026-11-13
 kurzantwort: "Frugalismus bedeutet nicht knauseriger Verzicht, sondern das bewusste Eliminieren von Konsumausgaben ohne Mehrwert. Durch die 50–30–20-Budgetmethode, das Kappen unnötiger Verträge und den automatisierten Vermögensaufbau kann ein monatlicher Überschuss für Notgroschen und ETF-Sparpläne entstehen. Wie hoch er ausfällt, hängt von Einkommen, Fixkosten und Konsum ab."
 
 social_posted: true
 keywords: ["Frugalismus-Tipps", "Geld sparen im Alltag", "50 30 20 Regel", "Finanzielle Freiheit", "Notgroschen aufbauen", "Tagesgeld Zinsen", "Frugalismus Tipps"]
 pin_title: "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht"
-pin_description: "*Werbung | Frugalismus mit System: Die 50-30-20-Regel als Kompass, 5 Hacks für den Alltag und eine Fallstudie mit rund 380 € Ersparnis pro Monat. So gewinnst du Zeit und finanzielle Freiheit. Jetzt Guide lesen!"
+pin_description: "*Werbung | Frugalismus mit System: 50-30-20-Regel als Kompass, fünf Alltagshacks und ein Rechenbeispiel mit fiktiver Person (rund 380 € im Monat). Mehr Spartipps auf FranksFinanzcheck! #frugalismustipps #geld #sparen"
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 quellen:
   - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"

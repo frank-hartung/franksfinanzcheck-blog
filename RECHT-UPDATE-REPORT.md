@@ -138,6 +138,138 @@ Verifikation. Die Abweichung ist gesondert zu prüfen, nicht als identische
 Buildumgebung auszugeben. Vor einem Fristabschluss sind Integration, ein
 passender erfolgreicher offizieller Pages-Deploy, reale Kanalproben und
 beleggebundene Betreiberfreigabe nach dem Runbook erforderlich.
+## Nachtrag 2026-11-13 · Bildherkunft-Cover-Pipeline, CI-Gate und Freigabe-Liste (#1028)
+
+**Frist-ID:** `ki-vo-kennzeichnung-bestand` (Frist 02.12.2026) ·  
+**Status: Bildherkunft dauerhaft belegbar und im Deploy gegated; Anbieter-Nachweise, 12 ungeklärte `menschlich`-Einträge, Live-Abnahme und Betreiberfreigabe weiter offen. Frist bleibt offen.**  
+Selbsteinschätzung des Betreibers, keine Rechtsberatung.  
+**Akte:** `KI-VO-MASCHINENLESBAR-1028-COVER-PIPELINE-CI-FREIGABE-HIGHEND-2026-11-13.md`
+
+### Anlass
+
+Die Kernlücke #1028 auf der Bild-Ebene ist geschlossen: Die Covers sind beweisbar nicht von einem generativen Bildmodell stammend, sondern deterministisch gerenderte Vorlagen (Verlauf, Badge, Titeltext, Markenband). Derselbe Input ergibt dieselbe Datei – gemessen am 13.11.2026: **132 von 132 Covern pixelidentisch zu einem frischen Render**, 0 Befunde. Ohne den Beleg wäre „nicht deklariert" von „nicht geprüft" nicht zu unterscheiden; mit Beleg ist es eine Aussage.
+
+### Was dauerhaft behoben ist (kein Einmal-Patch)
+
+1. **Ein Schreibpfad statt zwei** (`scripts/generate_covers.py`): `make_cover` rendert und schreibt die responsive Varianten selbst; der bisherige zweite `ensure_responsive_variants`-Durchlauf (Pillow öffnet + speichert neu) wurde entfernt. Der war die Ursache für die 17/131 XMP-Verluste und die sha256-Abweichungen bei identischen Pixeln. Jetzt: ein Erzeugungspfad, idempotent (`--force` rendert nichts Neues, wenn nichts sich geändert hat).
+
+2. **Herkunft in die Datei** (`make_cover` ruft `_herkunft_markieren`): Jedes gerenderte Cover bekommt IPTC-XMP `DigitalSourceType=algorithmicMedia` (APP1, kein Neukodieren, Pixel bleiben unverändert). Alle 133 Cover-Dateien tragen die Markierung.
+
+3. **Frontmatter-Beleg** (`scripts/ki_cover_herkunft.py --attestieren`): `cover.ki_pruefung` (`digital_source_type`, `variante: renderer-v3`, `sha256` der markierten Datei, `verfahren`, `geprueft_am`) in 132 Artikeln/Säulen.
+
+4. **Stale-Referenzen heilen** (`ensure_cover_in_frontmatter`): Weist auf ein altes Cover-JPG (anderes Datum im Dateinamen) um auf `images/covers/<slug>.jpg` – passiert bei jeder `--force`/`--slug` Lauf selbstheilend. Das war die Ursache der 17 Drift-Befunde (Slug/Datum geändert, Cover-Datei nicht mitgezogen).
+
+5. **Reproduktionswache** (`--pruefen`): Rendert jedes Cover neu, verlangt Pixelgleichheit + Frontmatter-Beleg. 132 reproduziert, 2 außerhalb des Renderbereichs (Markenbild auf statischen /newsletter-Seiten, gezählt nicht bewertet), 0 Befunde.
+
+6. **Selbsttest** (`--selftest`): 5 Sabotage-Proben grün (fehlender Beleg erkannt, Attestation wirksam, manipuliertes Bild erkannt, KI-Beleg geschützt, IPTC in der Datei lesbar).
+
+7. **CI-Gate** (`.github/workflows/deploy.yml` + `data/blustradius-deploy.yml`): `--selftest` (gate-selbsttest) und `--pruefen` (inhalt, fail-closed) stehen vor dem Hugo-Block im `deploy`-Job; ein driftendes oder unbelegtes Cover stoppt den Deploy, bevor etwas gebaut wird. Blustradius-Register: 90/90 Schritte erklärt.
+
+8. **Freigabe-Liste** (`scripts/freigabe_liste.py` + `docs/FREIGABE-VORLAGE-KI-VO-KENNZEICHNUNG-BESTAND.md`): Die 12 `menschlich`-Einträge (14.08.–03.09.2026) werden vom Betreiber einzeln abgehakt (Zustand in `data/freigabe_state.json`, `ki_kennzeichnung.yaml` unangetastet). Erst wenn alle 12 getickt sind, erzeugt das Tool die Betreibererklärung mit `erledigt=ki-vo-kennzeichnung-bestand` und Unterschriftszeilen.
+
+### Messung am 13.11.2026
+
+`scripts/ki_cover_herkunft.py --pruefen`: **132/132** Cover reproduziert, 2 außerhalb des Renderbereichs, **0 Befunde**.  
+`scripts/ki_cover_herkunft.py --selftest`: 5/5 grün.  
+`scripts/ki_cover_herkunft.py --attestieren`: 132 Belege geschrieben, 2 bereits belegt, 0 Fehler.  
+`scripts/blustradius_register.py --check`: 90 Schritte, Vertrag erfüllt.  
+Reihenfolge (Pflicht): erst `--markieren` (Datei), dann `--attestieren` (sha256 der markierten Datei), dann `--pruefen`.
+
+### Offen vor Fristabschluss
+
+Unverändert offen und **nicht** technisch heilbar: Anbieter-Inventar und schriftliche Bestätigung zur Markierung nach Art. 50 Abs. 2 (Anfragevorlage in `docs/KI-TRANSPARENZ-ABNAHME.md` §1); die Herkunft der Titelbilder als solche (deshalb steht `digitalSourceType` im JSON-LD noch nirgends); die 12 ungeklärten `menschlich`-Einträge (warten auf Operator-Ticks in der Freigabe-Liste); die Live-Abnahme nach `docs/KI-TRANSPARENZ-ABNAHME.md` §4 (jetzt 11 Kanäle) und die Betreiberfreigabe (`erledigt=ki-vo-kennzeichnung-bestand`).
+
+## Nachtrag 2026-11-13 · Tondatei, schema.org, llms.txt und Interaktions-Offenlegung (#1028)
+
+**Frist-ID:** `ki-vo-kennzeichnung-bestand` (Frist 02.12.2026) ·
+**Status: Betreiberebene auf elf Kanälen vollständig und dauerhaft gesichert;
+Anbieter-Nachweise, Bildherkunft, Live-Abnahme und Betreiberfreigabe weiter
+offen. Frist bleibt offen, Issue #1028 bleibt offen.**
+Selbsteinschätzung des Betreibers, keine Rechtsberatung.
+**Akte:** `KI-VO-MASCHINENLESBAR-1028-TON-SCHEMA-INTERAKTION-HIGHEND-2026-11-13.md`
+
+### Anlass
+
+Der Nachtrag vom 07.11.2026 schloss mit sieben Kanälen. Am 13.11.2026 wurde
+nicht der Bericht gelesen, sondern **die Auslieferung durchgegangen** – jeder
+Weg, auf dem ein Inhalt das Haus verlässt. Drei Kanäle fehlten, und zwar
+dieselben drei, die eine reine Seitenprüfung nie sieht:
+
+1. **Die Tondatei selbst.** 115 Seiten kennzeichnen die maschinelle
+   Vorlese-Stimme sichtbar und maschinenlesbar – die ausgelieferte MP3 enthielt
+   **keine einzige** Herkunftsangabe. Wer sie herunterlädt, in eine App zieht
+   oder weitergibt, hält synthetische Sprache ohne Herkunft in der Hand. Für
+   Bilder war dieser Weg am 05.11.2026 geschlossen worden, für Ton nie.
+2. **Das JSON-LD.** `creditText` sagte, *dass* KI beteiligt war. Welcher Art
+   das Titelbild ist (`trainedAlgorithmicMedia`), stand im Bild und im
+   `<img>`-Attribut, aber nicht im schema.org-Markup – dem Ort, an den
+   Such- und Antwormalgorithmen zuerst schauen.
+3. **Der Assistent.** Der Worker schickte zu jeder Antwort einen Hinweis im
+   JSON-Körper (`hinweis`, `ki: true`); der Client las das Feld **nie**. Der
+   Dialog begrüßte mit „Hallo! 👋", als wäre ein Mensch am anderen Ende.
+
+Punkt 3 ist der rechtlich heikelste, weil Art. 50 Abs. 1 KI-VO seit
+**02.08.2026 ohne Übergangsfrist** gilt: Wer unmittelbar mit einem KI-System
+interagiert, muss das erkennen können – im ersten Moment, nicht in einer
+Fußzeile. Die Nachfrist bis 02.12.2026 betrifft nur Abs. 2 (Markierung am
+Werk) und nur Systeme, die vor dem 02.08.2026 in Verkehr kamen.
+
+### Was jetzt gilt
+
+Vier Kanäle kamen hinzu, alle aus derselben Quelle wie die bisherigen:
+
+| # | Kanal | Wirkung |
+|---|---|---|
+| 8 | schema.org `digitalSourceType` | Erzeugungsart des Titelbilds im JSON-LD – `TrainedAlgorithmicMediaDigitalSource` bzw. `CompositeWithTrainedAlgorithmicMediaDigitalSource` (IPTC-Vokabular), **nur** bei belegter Erzeugungsart |
+| 9 | Ton in der Datei | `DigitalSourceType`, `AISystemUsed`, `Provenance`, `Software` als ID3-TXXX (MP3) bzw. RIFF-INFO (WAV); ohne Neukodierung, bytegenau umkehrbar |
+| 10 | `llms.txt` | Abschnitt „Woher diese Inhalte kommen" für KI-Antwortmaschinen: Text, Bild, Ton, Assistent, Betreiber-Erklärung statt Anbieterpflicht |
+| 11 | Interaktions-Offenlegung | Satz im Dialogkopf, Hinweis unter jeder Antwort, HTTP-Kopfzeile `ai-generated` auf **jedem** Antwortpfad |
+
+**Warum Ton der wichtigste der vier ist:** Er ist der einzige Kanal, der die
+Seite physisch verlässt. Eine Kennzeichnung, die beim Herunterladen abfällt,
+ist auf dem Verbreitungsweg keine. Genau das will der Verhaltenskodex vom
+10.06.2026 verhindern, wenn er nachgelagerte Akteure verpflichtet, vorhandene
+Markierungen nicht zu entfernen – der Betreiber muss sie also erst einmal
+**in** das Werk legen. Der Marker schreibt nur, was ein Erzeugerbeleg
+(`*.track.json`) deckt; ohne Beleg bleibt die Datei unangetastet. Er kodiert
+nichts neu (Audiodaten byteweise unverändert), überschreibt keine fremden
+Metadaten und lässt sich bytegenau zurücknehmen – geprüft an echter
+`ffmpeg`-Ausgabe (MP3 ID3v2.4, WAV), unabhängig gegengelesen mit `mutagen`
+und `ffprobe`.
+
+**Warum schema.org heute nirgends steht:** Für **kein** Titelbild ist eine
+Erzeugungsart belegt (0 von 115 Artikeln). Das Feld wird deshalb nicht
+gesetzt – es an `ai_generated` zu hängen wäre eine Erfindung über die
+Bildherkunft. Der Kanal ist fertig und nachgewiesen (Probe mit gesetztem Wert:
+genau eine Seite trägt die Angabe, keine andere), er wartet auf Belege.
+
+**Was die Interaktions-Offenlegung ausdrücklich nicht ist:** keine Aussage
+darüber, ob der Assistent *live* ist. Ist kein Endpoint gesetzt, erscheint
+kein Widget – und mit ihm keine Offenlegung für etwas, das es nicht gibt.
+Beides hängt am selben Schalter; eine Fassung ohne die andere ist nicht
+möglich. Das Impressum sagt jetzt genau das und behauptet weder einen
+laufenden Chatbot noch dessen Abwesenheit.
+
+### Messung am 13.11.2026
+
+`ki_provenienz_gate.py --gate`: **115/115** Seiten, 19 Abschnitte, **50**
+Feed-Items, 0 Tonspuren im Lauf, **0 Funde**. `--selftest` 15 Szenarien grün
+(neu: M9 fehlender Abschnitt und M9 überzogene Behauptung).
+`ki_assistent_gate.py --selftest` grün mit neuer Regel **KA11** (Sabotageprobe:
+Offenlegung aus dem Dialogkopf entfernt → erkannt). Worker-Tests **20/20**
+(`node --test`), Audio-Tests **16/16** (davon 4 Encoder-Proben mit echtem
+`ffmpeg`, sonst selbstüberspringend). Gate-Gegenproben: Tonspur ohne
+Markierung → M3-Fund, nach `--write` → wieder grün; Fremdherkunft →
+`blockiert`; `--entfernen` → bytegleich.
+
+### Offen vor Fristabschluss
+
+Unverändert offen und **nicht** technisch heilbar: Anbieter-Inventar und
+schriftliche Bestätigung zur Markierung nach Art. 50 Abs. 2; die Herkunft der
+Titelbilder (deshalb steht `digitalSourceType` im JSON-LD noch nirgends); die
+12 ungeklärten `menschlich`-Einträge (14.08.–03.09.2026); die Live-Abnahme nach
+`docs/KI-TRANSPARENZ-ABNAHME.md` §4, jetzt um vier Kanäle erweitert, und die
+Betreiberfreigabe (`erledigt=ki-vo-kennzeichnung-bestand`).
 
 ---
 

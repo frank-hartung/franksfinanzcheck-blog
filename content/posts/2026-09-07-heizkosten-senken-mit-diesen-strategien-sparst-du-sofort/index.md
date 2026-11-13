@@ -18,6 +18,12 @@ cover:
   image: "images/covers/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort.jpg"
   alt: "Heizkosten senken: Mit diesen Strategien sparst du sofort"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 823ec799c7c91f53ebcf85c06b7bc874a8a5921388f9ff936a249a54e07af250
+    geprueft_am: 2026-11-13
 kurzantwort: "Heizkosten senkst du zuerst über passende Raumtemperaturen, kurzes Stoßlüften und freie Heizkörper. Ein Grad weniger spart als Faustwert etwa 6 Prozent Heizenergie, sofern du vorher tatsächlich wärmer geheizt hast. Miss monatlich den Verbrauch und prüfe zusätzlich Arbeitspreis sowie Grundpreis; ein niedrigerer Abschlag allein spart nichts."
 quellen:
   - titel: "Heizung: 10 einfache Tipps zum Heizkosten sparen"

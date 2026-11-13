@@ -14,6 +14,12 @@ cover:
   alt: "Strom & Gas sparen: Der große Ratgeber für niedrige Energiekosten"
   caption: "Kompletter Ratgeber von FranksFinanzcheck"
   preload: false   # Bild liefert og:image, nicht den LCP
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 59ccb59226887bb6574f7e23fcddf9cfe70f33117cf49c5640b5aba582327555
+    geprueft_am: 2026-11-13
 quellen:
   - titel: "BDEW-Strompreisanalyse: Haushaltsstrompreis 2026 bei 37,3 ct/kWh"
     url: "https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/"

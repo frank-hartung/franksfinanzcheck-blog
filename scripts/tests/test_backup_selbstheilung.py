@@ -301,6 +301,52 @@ class Heilungskreis(unittest.TestCase):
         self.assertIn("Hülle", r["befunde"][0]["text"])
 
 
+class AuskunftsVertrag(unittest.TestCase):
+    """#1030 (10.11.2026): Ohne Auskunft der Einrichtungsprüfung wird nicht geraten.
+
+    Belegter Schaden (Lauf 42715328453): Ein Lauf, zwei rote Schritte, zwei
+    verschiedene Ratschläge – der zweite („ein Lauf ist grün, gesichert wurde
+    nichts“) war falsch, weil gar kein Lauf grün war. Ein zweiter Rat ist
+    keine Gründlichkeit, sondern eine falsche Fährte.
+    """
+
+    def test_drei_antworten_statt_zwei(self):
+        self.assertIsNone(bs.einrichtung_offen_aus_umgebung({}),
+                          "keine Angabe = „weiß nicht“ (nicht: „nichts offen“)")
+        self.assertEqual(bs.einrichtung_offen_aus_umgebung({bs.UMGEBUNG_OFFEN: ""}), [],
+                         "leerer Wert = geprüft, nichts offen")
+        self.assertEqual(bs.einrichtung_offen_aus_umgebung({bs.UMGEBUNG_OFFEN: "E1,E3; E5"}),
+                         ["E1", "E3", "E5"], "Trennzeichen dürfen den Aufruf nicht zerlegen")
+        self.assertIsNone(bs.einrichtung_offen_aus_umgebung({bs.UMGEBUNG_OFFEN: "E9 BACKUP_REPO"}),
+                          "nur der Einrichtungsvertrag E1–E8 zählt; alles andere ist unlesbar")
+
+    def test_ohne_auskunft_kein_gruen_und_kein_zweiter_rat(self):
+        gerufen: list[str] = []
+
+        def http(methode, url, token, koerper=None):
+            gerufen.append(url)
+            raise AssertionError("ohne Auskunft darf niemand befragt werden")
+
+        urteil = bs.betreibe_urteil({"GITHUB_REPOSITORY": "a/b", "GH_TOKEN": "t"},
+                                    jetzt=JETZT, http=http)
+        self.assertEqual(urteil["exit"], bs.EXIT_WERKZEUG,
+                         "„weiß nicht“ ist rot (2), nie grün und nie Leerlauf (4)")
+        self.assertEqual(gerufen, [], "die API wird ohne Grundlage nicht befragt")
+        self.assertIn("nicht hinterlassen", urteil["text"])
+        self.assertIn("WF-3150", urteil["text"], "der Befund nennt den Vorgang")
+
+    def test_mit_auskunft_bleibt_der_leerlauf_erreichbar(self):
+        """Die Gegenprobe: Die neue Regel darf den echten Befund nicht verschlucken."""
+        gruen = [{"name": "backup", "conclusion": "success"}]
+        leer = bs._leerlauf_urteil(gruen, {"BACKUP_REPO": "", "BACKUP_PASSPHRASE": ""}, JETZT)
+        self.assertEqual(leer["exit"], bs.EXIT_LEERLAUF,
+                         "ein grüner Job ohne Ziel/Passphrase bleibt Exit 4")
+        offen = bs._leerlauf_urteil(gruen, {"BACKUP_REPO": "", "BACKUP_PASSPHRASE": ""},
+                                    JETZT, einrichtung_offen=["E1", "E3"])
+        self.assertEqual(offen["exit"], bs.EXIT_EINRICHTUNG,
+                         "offene Einrichtung hat Vorrang – sie ist die Ursache")
+
+
 class EndpunktVertrag(unittest.TestCase):
     """Die Rechte-Erweiterung (actions: write) bleibt auf drei Aufrufe begrenzt."""
 

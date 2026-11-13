@@ -734,6 +734,21 @@ jobs:
           # Rollenlink in einer Richtung, ist dieser Build rot.
           python3 scripts/konsolidierung.py --rollenpaare
 
+      # ===== COVER-HERKUNFT-GATE (#1028, KI-VO, Frist 02.12.2026) =====
+      # Jedes ausgelieferte Cover braucht einen nachweisbaren Herkunfts-Beleg:
+      #   · Frontmatter `cover.ki_pruefung` (sha256 der Datei, algorithmicMedia)
+      #   · IPTC-XMP `DigitalSourceType=algorithmicMedia` in der JPG selbst
+      #   · Reproduktionswache: ein frisches Render muss pixelidentisch sein
+      # Der Selbsttest läuft zuerst – eine sabotierte Prüflogik darf kein
+      # grünes Gate liefern. --pruefen ist fail-closed: ein driftendes oder
+      # unbelegtes Cover bricht den Deploy ab, bevor etwas gebaut wird.
+      # Runbook: docs/KI-TRANSPARENZ-ABNAHME.md (§4 Live-Akzeptanz)
+      # ----------------------------------------------------------------
+      - name: Cover-Herkunft – Selbsttest (Wache muss lauffähig sein)
+        run: python3 scripts/ki_cover_herkunft.py --selftest
+      - name: Cover-Herkunft – Reproduktionswache (fail-closed)
+        run: python3 scripts/ki_cover_herkunft.py --pruefen
+
       - name: Hugo installieren (Extended, verifiziert, mehrquellig)
         uses: ./.github/actions/install-hugo
         with:
@@ -912,6 +927,13 @@ jobs:
       - name: Faktenfrische Gas – Rückfallschutz #996
         run: python3 scripts/ci_tests.py --titel "Faktenfrische Gas" -- python3 -m unittest scripts.tests.test_faktenfrische_996
 
+      # Das Register #1072 ist die zweite Schließakte. Bis zum 12.11.2026 lief
+      # sie nur in der allgemeinen Suite; der Publish-Gate prüfte sie nicht
+      # selbst. Genau deshalb konnte ein Rückfall in `description` und
+      # `pin_description` unbemerkt bleiben, bis ein Test zufällig lief.
+      - name: Faktenfrische Register – Rückfallschutz #1072
+        run: python3 scripts/ci_tests.py --titel "Faktenfrische Register" -- python3 -m unittest scripts.tests.test_faktenfrische_1072
+
       - name: Publish-Gate (harte Qualitäts-, Affiliate-, Fakten- und YMYL-Freigaben)
         run: python3 scripts/publish_gate.py
 
@@ -946,8 +968,15 @@ jobs:
           # Render-Prüfstand ohne den Modalitäten-Helfer, #1129) stand allein
           # im flüchtigen Log. Jetzt nennt jeder rote Test seinen Namen als
           # Annotation, unabhängig davon, ob jemand an das Log kommt.
+          # `test_ki_audio_markierung` gehört hierher, nicht in den
+          # Tonspur-Schritt weiter unten: Die Tests brauchen keinen
+          # Encoder (die Encoder-Proben überspringen sich selbst, wenn
+          # ffmpeg fehlt), und ein Vertragsbruch im Tonkanal ist ein
+          # Inhaltsbefund am Kennzeichnungsvertrag – nicht ein Werkzeug,
+          # das gerade nicht messen kann.
           python3 scripts/ci_tests.py --titel "KI-Transparenz" -- \
             python3 -m unittest scripts.tests.test_ki_transparenz_render scripts.tests.test_ki_cover_provenienz scripts.tests.test_ki_cover_generator_schutz scripts.tests.test_ki_cover_render_audit scripts.tests.test_ki_provenienz_render scripts.tests.test_ki_bild_markierung scripts.tests.test_ki_provenienz_gate scripts.tests.test_ki_provenienz_auslieferung scripts.tests.test_pinterest_ki_provenienz scripts.tests.test_ki_frist_freigabe -v
+            python3 -m unittest scripts.tests.test_ki_transparenz_render scripts.tests.test_ki_cover_provenienz scripts.tests.test_ki_cover_generator_schutz scripts.tests.test_ki_cover_render_audit scripts.tests.test_ki_provenienz_render scripts.tests.test_ki_bild_markierung scripts.tests.test_ki_audio_markierung -v
 
       - name: KI-Cover – Herkunft und Originaldatei prüfen
         run: python3 scripts/ki_cover_provenienz.py --gate
@@ -1547,6 +1576,43 @@ jobs:
             --html-dir public \
             --out-dir public/audio/articles \
             || echo "⚠ Es bleiben beanstandete Spuren – bitte im Log nachsehen"
+
+      # ------------------------------------------------------------
+      # KENNZEICHNUNG IN DER TONDATEI (#1028, Frist 02.12.2026)
+      # Die Seite sagt seit dem 05.11.2026, dass eine maschinelle Stimme
+      # vorliest – die MP3 selbst sagte es nicht. Wer sie herunterlädt,
+      # weiterreicht oder spiegelt, hielt synthetische Sprache ohne
+      # Herkunft in der Hand. Genau diese Lücke schließt der Schritt:
+      # Er schreibt `DigitalSourceType` (IPTC-Vokabular), System,
+      # Herkunfts-URL und Werkzeug als ID3-TXXX (MP3) bzw. RIFF-INFO
+      # (WAV) in jede belegte Spur – ohne ein Sample neu zu kodieren.
+      #
+      # Klasse `werkzeug` im Blustradius-Register (data/blustradius-deploy.yml):
+      # Der Schritt MISST und REPARIERT, er entscheidet nichts über Inhalte.
+      # Ein kaputtes Werkzeug ist kein Grund, die Welt nicht mehr zu
+      # beliefern (C34/#676/#740) – der Befund geht über
+      # `scripts/werkzeugbefund.py --melden` an das Siegel, der Lauf
+      # bleibt grün. Das Gate `ki_provenienz_gate.py` (M3) prüft danach
+      # am ausgelieferten Bestand nach; es ist der Ort, an dem ein
+      # Fehlbestand rot wird.
+      - name: Tonspuren mit KI-Herkunft markieren (#1028)
+        run: |
+          set +e
+          python3 scripts/ki_audio_markierung.py --write \
+            --dir public/audio/articles
+          markierung=$?
+          python3 scripts/ki_audio_markierung.py --check \
+            --dir public/audio/articles
+          kontrolle=$?
+          set -e
+          if [ "$markierung" -eq 0 ] && [ "$kontrolle" -eq 0 ]; then
+            echo "✅ Tonspuren tragen ihre Herkunft in der Datei."
+          else
+            echo "⚠ Tonspur-Markierung unvollständig (write=$markierung, check=$kontrolle) – C34: die Auslieferung läuft weiter, der Befund geht an das Siegel."
+            python3 scripts/werkzeugbefund.py --melden "ki-tonspur-markierung" \
+              "Die Markierung der Vorlese-Tonspuren meldet Exit $markierung (schreiben) / $kontrolle (prüfen): Mindestens eine ausgelieferte Audiodatei trägt ihre KI-Herkunft nicht in sich (ID3-TXXX bei MP3, RIFF-INFO bei WAV). Die Seitenkennzeichnung ist davon unberührt – der Befund betrifft die DATEI, die beim Herunterladen oder Weiterreichen von der Seite getrennt wird (#1028, Art. 50 Abs. 2 KI-VO, Frist 02.12.2026)." \
+              || true
+          fi
 
       # NACHWEIS FÜR DEN AUDIO-BACKFILL (Runbook: docs/AUDIO-BACKFILL-RUNBUCH.md)
       # Wer `audio_backfill=true` auslöst, startet bewusst einen Lauf von bis zu

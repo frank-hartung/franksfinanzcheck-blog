@@ -15,6 +15,10 @@ import cloudflare_edge_freigabe as edge
 import sicherheits_nachweis as nachweis
 
 ZONE = "franksfinanzcheck.de"
+# Internal result 3 means a deliberate fail-closed policy block (not a failed
+# repair attempt). The CLI renders it as a warning; the original live finding
+# still owns the job result.
+POLICY_BLOCKED = 3
 OWNER = ("Betreiber: B7 rechtlich prüfen und veröffentlichen; anschließend "
          "Zone-Token CF_EDGE_HEAL_TOKEN und CF_EDGE_AUTOHEAL=true bewusst einrichten "
          "(Runbook A1c). Worker-Deploy und Environment bleiben Betreiberaufgaben.")
@@ -40,6 +44,12 @@ def vollstaendige_ziele(daten, *, sauber=False):
                     and 200 <= z["status"] < 300
                     and (not sauber or z.get("fehlend") == []) for z in ziele)
             and {z["url"] for z in ziele} == set(header.ZIELE))
+
+
+def workflow_warnung(text):
+    """Emit a safe GitHub Actions warning without allowing command injection."""
+    sicher = text.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+    print(f"::warning title=F-01 Selbstheilung nicht freigegeben::{sicher}")
 
 
 def ausfuehren(daten, code, token, freigabe, ledger, *, api_pruefen=None,
@@ -69,16 +79,16 @@ def ausfuehren(daten, code, token, freigabe, ledger, *, api_pruefen=None,
     if not vollstaendige_ziele(daten):
         return ende(2, "unvollstaendig", "F-01 nicht vollständig messbar; keine Änderung.")
     if freigabe != "true" or not token or not token.strip():
-        return ende(2, "freigabe_fehlt", "Automatische Heilung gesperrt. " + OWNER)
+        return ende(POLICY_BLOCKED, "freigabe_fehlt", "Automatische Heilung gesperrt. " + OWNER)
     # B7 vor jedem Eingriff als zusätzliche Schranke: ein nicht vorhandener oder
     # alter Text darf nicht durch eine technische Reparatur überspielt werden.
     try:
         text = Path(b7_pfad).read_text(encoding="utf-8")
         if (edge.datenschutz_b7_offen(text) or edge.B7_MIT_PROXY_SATZ not in text
                 or edge.B7_TABELLE_NEU not in text or edge.B7_DIENSTLEISTER_NEU not in text):
-            return ende(2, "b7_offen", "Datenschutz B7 nicht vollständig im Repo. " + OWNER)
+            return ende(POLICY_BLOCKED, "b7_offen", "Datenschutz B7 nicht vollständig im Repo. " + OWNER)
     except (OSError, UnicodeError):
-        return ende(2, "b7_fehlt", "Datenschutz B7 nicht prüfbar. " + OWNER)
+        return ende(POLICY_BLOCKED, "b7_fehlt", "Datenschutz B7 nicht prüfbar. " + OWNER)
     try:
         vorher, _ = api_pruefen(token, ZONE)
         eintrag(ledger, "api_vorher", exit=vorher)
@@ -132,6 +142,13 @@ def main():
                                 os.environ.get("CF_EDGE_AUTOHEAL", ""), args.ledger)
     except (nachweis.NachweisFehler, OSError, UnicodeError):
         code, text = 2, "Messdatei oder Audit-Protokoll nicht lesbar/schreibbar; keine verlässliche Heilung."
+    blockiert = code == POLICY_BLOCKED
+    if blockiert:
+        workflow_warnung(text)
+        text = "**Gesperrt (absichtliche Schutzschranke; kein Schreibzugriff):** " + text
+        # The header measurement and final evidence steps remain authoritative;
+        # this warning cannot turn a failed live finding into a green run.
+        code = 0
     print("F-01 Selbstheilung: " + text)
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary:

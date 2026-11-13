@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem.jpg"
   alt: "Gaspreiserhöhung Sonderkündigungsrecht: Raus aus"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: eee3ca84df2521342b2c95023a3a2481a4565ad8c33d160fdc855486a5687c32
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Referenzseite bundesnetzagentur.de"

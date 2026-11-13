@@ -220,6 +220,20 @@
       if (data.answer) {
         addMessage(data.answer, "bot", true);
         history.push({ role: "assistant", content: data.answer });
+        // ---- OFFENLEGUNG AUS DER ANTWORT (Art. 50 Abs. 1 KI-VO, #1028) ----
+        // Befund 13.11.2026: Der Worker schickt seit jeher `hinweis` mit
+        // („Antwort einer KI. Allgemeine Information, keine Anlage-,
+        // Steuer- oder Rechtsberatung…"), der Client hat das Feld NIE
+        // gelesen – `grep -c "data.hinweis"` ergab 0. Der Hinweis reiste
+        // durch das Netz und wurde an der Tür abgegeben.
+        // Er gehört zur Antwort: Er wird direkt darunter gesetzt, nicht in
+        // die Fußzeile (die ist bei geschlossenem Dialog unsichtbar).
+        if (typeof data.hinweis === "string" && data.hinweis.trim()) {
+          const hinweis = document.createElement("p");
+          hinweis.className = "ff-ki-msg__hinweis";
+          hinweis.textContent = data.hinweis.trim();
+          messages.lastElementChild.appendChild(hinweis);
+        }
       } else {
         addMessage(
           "Der Assistent konnte keine Antwort finden. Bitte formuliere die Frage anders.",

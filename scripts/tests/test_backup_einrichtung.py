@@ -484,6 +484,112 @@ class FrischwacheVertrag(unittest.TestCase):
         self.assertIn("backup-frisch", alert)
         self.assertIn("RPO", alert)
 
+    # ================================================================
+    #  EINE URSACHE, EIN RAT (#1030, 10.11.2026)
+    #  ----------------------------------------------------------------
+    #  BEFUND (Lauf 42715328453, 09.11. 22:49 UTC): Der Lauf trug ZWEI
+    #  rote Schritte – „Voraussetzungen prüfen“ und „Leerlauf prüfen“.
+    #  Beide hatten dieselbe Ursache (E1/E2/E3/E5/E6 offen), aber nur der
+    #  erste trug den Einrichtungs-Rat; der zweite verlangte zusätzlich
+    #  „kein dauerhaftes Ziel“ – obwohl gar kein Lauf grün war. Die
+    #  Meldung las beide Fehlerzeilen und riet in zwei Richtungen.
+    #  Ursache im Code: `betreibe_urteil(..., einrichtung_offen=…)` gab es
+    #  seit dem 07.11., der Workflow füllte den Parameter NIE.
+    # ================================================================
+    def test_einrichtungsbefund_geht_an_den_leerlauf_schritt(self):
+        job = _frischwache_workflow()["jobs"]["frischwache"]
+        schritte = {s.get("name", ""): s for s in job["steps"]}
+        setup = [s for n, s in schritte.items() if "Voraussetzungen prüfen" in n]
+        self.assertEqual(len(setup), 1)
+        self.assertEqual(setup[0].get("id"), "setup",
+                         "der Schritt muss eine id haben, sonst kann er nichts weitergeben")
+        leerlauf = [s for n, s in schritte.items() if "Leerlauf prüfen" in n][0]
+        self.assertEqual(leerlauf.get("env", {}).get("OFFENE_EINRICHTUNG"),
+                         "${{ steps.setup.outputs.offene_einrichtung }}",
+                         "der Leerlauf-Schritt muss den Befund LESEN, nicht raten")
+        # Der Prüfer schreibt ihn – und der Schritt liest ihn AUCH bei Rot
+        # (der wichtigste Fall ist der rote Einrichtungsschritt).
+        self.assertIn("$GITHUB_OUTPUT", setup[0]["run"])
+        self.assertIn("offene_einrichtung", (SCRIPTS / "backup_einrichtung.py").read_text(encoding="utf-8"))
+        # Bei offener Einrichtung vergibt der Schritt KEINEN zweiten Rat.
+        run = leerlauf["run"]
+        self.assertIn('if [ -n "${OFFENE_EINRICHTUNG:-}" ]', run)
+        self.assertLess(run.index("OFFENE_EINRICHTUNG"), run.index("--leerlauf"),
+                        "die Ursache wird VOR der eigenen Messung geprüft")
+        self.assertIn("::notice", run)
+        # Und der Prüfer selbst antwortet ohne Auskunft fail-closed (Exit 2),
+        # statt zu raten – der Fall vom 10.11.2026.
+        self.assertIn("--ohne-setup", (SCRIPTS / "backup_selbstheilung.py").read_text(encoding="utf-8"))
+
+    def test_kein_abbruch_mitten_im_heilungskreis(self):
+        """Die Selbstheilung wartet bis 15 Min. auf den angestoßenen Lauf.
+
+        Mit `cancel-in-progress: true` hat jeder nachfolgende Push-Lauf genau
+        diesen Wartezustand abgewürgt – der einzige Schreiber im Kreis. Der
+        tagliche Lauf und ein manueller Anstoß dürfen nie verdrängt werden;
+        nur der Push-Lauf (Code-Probe zu einem Prüfer) darf sich selbst
+        verdrängen.
+        """
+        daten = _frischwache_workflow()
+        concurrency = daten.get("concurrency") or {}
+        self.assertEqual(concurrency.get("group"), "backup-frischwache-${{ github.ref }}")
+        self.assertEqual(concurrency.get("cancel-in-progress"),
+                         "${{ github.event_name == 'push' }}",
+                         "nur ein Push-Lauf darf einen anderen verdrängen – nie der Tageslauf")
+
+    # ================================================================
+    #  „LEER“ IST KEINE AUSKUNFT (#1030, Nachschärfung 12.11.2026)
+    #  ----------------------------------------------------------------
+    #  BEFUND: `${{ steps.setup.outputs.offene_einrichtung }}` ist für
+    #  GitHub in drei Lagen derselbe leere Text – „geprüft, nichts offen“,
+    #  „Schritt übersprungen“ und „Prüfer abgestürzt“. Die Zusage „ohne
+    #  Auskunft Exit 2“ war damit im Workflow nicht erreichbar: Ein
+    #  übersprungener Einrichtungsschritt hätte als „alles eingerichtet“
+    #  gegolten, und der Leerlauf-Schritt hätte wieder aus alten Jobs
+    #  geraten. Deshalb trägt die Auskunft einen Beleg, und der Block wird
+    #  hier AUSGEFÜHRT, nicht nur gelesen.
+    # ================================================================
+    def _leerlauf_block(self) -> dict:
+        job = _frischwache_workflow()["jobs"]["frischwache"]
+        return [s for s in job["steps"] if "Leerlauf prüfen" in s.get("name", "")][0]
+
+    def _leerlauf_ausfuehren(self, **umgebung: str):
+        env = {"PATH": os.environ.get("PATH", ""), "HOME": os.environ.get("HOME", "/tmp"),
+               "GITHUB_REPOSITORY": "a/b", "GH_TOKEN": "", "PYTHONDONTWRITEBYTECODE": "1"}
+        env.update(umgebung)
+        return subprocess.run(["bash", "-e", "-c", self._leerlauf_block()["run"]],
+                              cwd=str(REPO), env=env, capture_output=True, text=True, timeout=120)
+
+    def test_leerer_wert_traegt_einen_beleg(self):
+        schritt = self._leerlauf_block()
+        self.assertEqual(schritt.get("env", {}).get("EINRICHTUNG_GEPRUEFT"),
+                         "${{ steps.setup.outputs.einrichtung_geprueft }}")
+        run = schritt["run"]
+        self.assertIn("unset OFFENE_EINRICHTUNG", run)
+        self.assertLess(run.index("unset OFFENE_EINRICHTUNG"), run.index('if [ -n "${OFFENE_EINRICHTUNG:-}" ]'),
+                        "erst der Beleg, dann die Auskunft")
+        self.assertEqual(be.GEPRUEFT_WERT, "ja")
+        self.assertIn(f'!= "{be.GEPRUEFT_WERT}"', run)
+
+    def test_offene_einrichtung_mit_beleg_gibt_einen_hinweis_keinen_zweiten_rat(self):
+        lauf = self._leerlauf_ausfuehren(OFFENE_EINRICHTUNG="E1 E2 E3 E5 E6", EINRICHTUNG_GEPRUEFT="ja")
+        self.assertEqual(lauf.returncode, 0, lauf.stdout + lauf.stderr)
+        self.assertIn("::notice title=Backup-Leerlauf::", lauf.stdout)
+        self.assertNotIn("::error", lauf.stdout, "kein zweiter roter Rat für dieselbe Ursache")
+
+    def test_uebersprungener_einrichtungsschritt_ist_rot_nicht_gruen(self):
+        """Beide Felder leer = der Schritt lief nie. Das ist „weiß nicht“."""
+        lauf = self._leerlauf_ausfuehren(OFFENE_EINRICHTUNG="", EINRICHTUNG_GEPRUEFT="")
+        self.assertEqual(lauf.returncode, 1, lauf.stdout + lauf.stderr)
+        self.assertIn("konnte nicht entscheiden", lauf.stdout)
+        self.assertNotIn("Ein Lauf ist grün", lauf.stdout,
+                         "ohne Auskunft wird NICHT aus alten Jobs geraten (Lauf 42715328453)")
+
+    def test_auskunft_ohne_beleg_zaehlt_nicht(self):
+        lauf = self._leerlauf_ausfuehren(OFFENE_EINRICHTUNG="E1", EINRICHTUNG_GEPRUEFT="")
+        self.assertEqual(lauf.returncode, 1, lauf.stdout + lauf.stderr)
+        self.assertNotIn("::notice", lauf.stdout)
+
 
 class RueckwegVertrag(unittest.TestCase):
     """WF-9E5A / #923 (01.11.2026): Ein Drill, der nichts prüft, ist grün.
@@ -1230,6 +1336,11 @@ class WizardScheinGruenVertrag(unittest.TestCase):
                 "#!/usr/bin/env bash\n"
                 'case "$*" in\n'
                 '  "auth status"*) exit 0 ;;\n'
+                # 12.11.2026 (#1030): Der Wizard liest Variablen über die REST-API
+                # (`gh variable` fehlt in gh 2.23.0). Die Attrappe muss deshalb den
+                # REST-Pfad bedienen – sonst prüft der Test nur den Fehlerfall.
+                '  api*"actions/variables/BACKUP_REPO"*) echo \'{"name":"BACKUP_REPO","value":"frank-hartung/franksfinanzcheck-backup"}\'; exit 0 ;;\n'
+                '  api*"actions/variables/KV_NAMESPACE_ID_ABO"*) echo \'{"name":"KV_NAMESPACE_ID_ABO","value":"0123456789abcdef0123456789abcdef"}\'; exit 0 ;;\n'
                 '  "variable get BACKUP_REPO"*) echo "frank-hartung/franksfinanzcheck-backup"; exit 0 ;;\n'
                 '  "variable get KV_NAMESPACE_ID_ABO"*) echo "0123456789abcdef0123456789abcdef"; exit 0 ;;\n'
                 '  "variable get "*) exit 1 ;;\n'
@@ -1247,6 +1358,67 @@ class WizardScheinGruenVertrag(unittest.TestCase):
                          "ungeprüfte Pflichtpunkte ergaben wieder Exit 0:\n" + lauf.stdout)
         self.assertNotIn("Alle Pflichtpunkte sind eingerichtet", lauf.stdout)
         self.assertIn("NICHT bestätigt", lauf.stdout)
+
+    def _variablen_attrappe(self, ordner: str, verhalten: str) -> None:
+        """gh-Attrappe, die NUR die Variablen-API unterschiedlich beantwortet.
+
+        `verhalten`: `404` = Variable fehlt, `403` = Lesen gesperrt.
+        Alles andere (Secret-Liste, Environment, Ziel-Repo) bleibt unlesbar –
+        so bleibt der Lauf rot und der Befund eindeutig der Variable zuzuordnen.
+        """
+        gh = Path(ordner) / "gh"
+        if verhalten == "404":
+            variablen = ('  api*"actions/variables/"*) '
+                         'echo "gh: Not Found (HTTP 404)" >&2; exit 1 ;;\n')
+        else:
+            variablen = ('  api*"actions/variables/"*) '
+                         'echo "gh: Resource not accessible by integration (HTTP 403)" >&2;'
+                         ' exit 1 ;;\n')
+        gh.write_text(
+            "#!/usr/bin/env bash\n"
+            'case "$*" in\n'
+            '  "auth status"*) exit 0 ;;\n'
+            + variablen +
+            '  api*"secrets"*) echo "gh: Not Found (HTTP 404)" >&2; exit 1 ;;\n'
+            '  api*"deployment-branch-policies"*) echo "gh: Not Found (HTTP 404)" >&2; exit 1 ;;\n'
+            '  api*"environments/backup"*) echo "gh: Not Found (HTTP 404)" >&2; exit 1 ;;\n'
+            '  api*) echo "gh: Not Found (HTTP 404)" >&2; exit 1 ;;\n'
+            "esac\n"
+            "exit 1\n", encoding="utf-8")
+        gh.chmod(0o755)
+
+    def test_fehlende_variable_ist_offen_und_nicht_unlesbar(self):
+        """404 = „fehlt“ (Einrichtungs-Rat) – nicht „nicht prüfbar“."""
+        import subprocess
+        import tempfile
+        with tempfile.TemporaryDirectory() as ordner:
+            self._variablen_attrappe(ordner, "404")
+            lauf = subprocess.run(["bash", str(self.WIZARD), "--check"],
+                                  capture_output=True, text=True, timeout=180,
+                                  env=self._wizard_umgebung(ordner))
+        self.assertEqual(lauf.returncode, 1, lauf.stdout)
+        self.assertIn("E1 Repository-Variable BACKUP_REPO fehlt", lauf.stdout)
+        self.assertIn("E6 Repository-Variable KV_NAMESPACE_ID_ABO fehlt", lauf.stdout)
+        self.assertNotIn("Variable nicht lesbar", lauf.stdout)
+
+    def test_gesperrte_variable_api_ist_ungeprueft_und_nie_fehlt(self):
+        """403 = „nicht prüfbar“ – ein gesperrter Lesetunnel ist kein fehlender Wert.
+
+        Vor dem 12.11.2026 endete derselbe Fall als leere Ausgabe und damit als
+        „Variable fehlt“: Der Wizard schickte den Inhaber los, einen Wert
+        einzutragen, der längst stand (gh 2.23.0 kennt `gh variable get` nicht).
+        """
+        import subprocess
+        import tempfile
+        with tempfile.TemporaryDirectory() as ordner:
+            self._variablen_attrappe(ordner, "403")
+            lauf = subprocess.run(["bash", str(self.WIZARD), "--check"],
+                                  capture_output=True, text=True, timeout=180,
+                                  env=self._wizard_umgebung(ordner))
+        self.assertEqual(lauf.returncode, 1, lauf.stdout)
+        self.assertIn("Variable nicht lesbar", lauf.stdout)
+        self.assertNotIn("E1 Repository-Variable BACKUP_REPO fehlt", lauf.stdout)
+        self.assertNotIn("Alle Pflichtpunkte sind eingerichtet", lauf.stdout)
 
     def test_in_ci_wird_der_menschen_schritt_verweigert(self):
         """Die Einrichtung ist ein Menschen-Schritt – in CI nie „grün“ durchlaufen.
@@ -1383,13 +1555,24 @@ class SelbstheilungVertrag(unittest.TestCase):
         # Ein Beweis, der still grün wird, wenn er scheitert, ist keiner.
         block = text.split("Leerlauf prüfen – grüner Lauf ohne Sicherung", 1)[1].split(
             "- name:", 1)[0]
-        self.assertIn('if [ "$RC" = "1" ]', block)
+        self.assertIn('case "$RC" in', block)
         self.assertIn("exit 1", block)
         # Ein grüner Lauf, der nichts sichert, ist der schwerere Befund als
         # „bitte einrichten“ – er behauptet bereits Erfolg. Deshalb eigener
         # Exit-Code (4), eigener Rat, rot.
-        self.assertIn('if [ "$RC" = "4" ]', block)
+        self.assertIn("4)", block)
         self.assertIn("Backup-Leerlauf", block)
+        # FAIL-CLOSED (12.11.2026, #1030): Die frühere if-Kette ließ Exit 3 und
+        # JEDEN unbekannten Code still auf `exit 0` fallen – ein Urteil, das
+        # niemand kennt, galt damit als grün. Der Rückfall-Zweig muss rot sein.
+        zweige = block.split('case "$RC" in', 1)[1].split("esac", 1)[0]
+        rueckfall = zweige.rsplit("*)", 1)[1]
+        self.assertIn("exit 1", rueckfall,
+                      "jeder unbekannte Exit-Code der Leerlauf-Prüfung muss rot werden")
+        self.assertNotIn("exit 0", rueckfall)
+        # Und der Einrichtungs-Vorrang (Exit 3) wird benannt, nicht verschluckt.
+        self.assertIn("3)", block)
+        self.assertIn("Backup-Einrichtung offen", block)
 
     def test_rueckweg_nachweis_wird_nicht_mehr_stillschweigend_uebersprungen(self):
         """Der Befund vom 07.11.: `skipped` statt „nicht belegt“."""

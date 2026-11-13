@@ -25,6 +25,12 @@ cover:
   image: "images/covers/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen.jpg"
   alt: "Urlaubskosten planen und Reisebudget im Blick behalten"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: b92a2a58c6a52c1421dc9603fccb95dde040ed0be4c1840f5f2cb2198ce632fc
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Urlaub buchen: Hinweise zu Angeboten und Buchungsproblemen"

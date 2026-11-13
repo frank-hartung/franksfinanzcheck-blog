@@ -18,6 +18,12 @@ cover:
   image: "images/covers/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor.jpg"
   alt: "Gasrechnung prüfen: Fehler finden und Nachzahlung vermeiden"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 1f3409474fe8a4fe86ecefba421a24984cdbaa7a3c9027ff32f575092ae94410
+    geprueft_am: 2026-11-13
 kurzantwort: "Prüfe vor der Heizperiode fünf Punkte: Abrechnungszeitraum, Anfangs- und Endzählerstand, Verbrauch in kWh, Arbeits- und Grundpreis sowie verbuchte Abschläge. Nur Haushalte mit eigenem Gasvertrag können den Anbieter selbst wechseln. Bei zentraler Heizung kontrollierst du Heizkostenabrechnung, Verbrauchswerte und Vorauszahlungen und meldest technische Mängel dem Vermieter."
 quellen:
   - titel: "Informationen zu Strom- und Gaspreisen für Haushaltskunden"

@@ -14,6 +14,12 @@ cover:
   image: "images/covers/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026.jpg"
   alt: "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 78b5bee5a32147a1399ef1e4f0633f43ce7d59f7edb9aa5be0a6bc097e36aeb3
+    geprueft_am: 2026-11-13
 kurzantwort: "Guter Schutz für dein Zuhause hat drei Teile: die passende Police für Gebäude oder Hausrat, einen Schutz gegen Naturgefahren und eine Summe, die zum heutigen Wert passt. Alte Verträge lassen gerade bei Starkregen und Rückstau Lücken. Wer seine Klauseln kennt, steht besser da und zahlt oft nicht mehr."
 social_posted: true
 keywords: ["Dein Haus sicher schützen", "Hausversicherung", "Hausratversicherung", "Elementarschadenversicherung", "Wohngebäudeversicherung", "Unterversicherung vermeiden", "Vorsorge-Update", "Haus Schutz Kosten"]

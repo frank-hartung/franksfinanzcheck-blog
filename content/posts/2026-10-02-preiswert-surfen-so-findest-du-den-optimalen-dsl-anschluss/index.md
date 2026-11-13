@@ -4,7 +4,7 @@ description: "Preiswert surfen mit DSL: Vergleiche Tarifkosten und Vertragsbedin
 date: 2026-10-05T19:22:11Z
 draft: false
 reserve_published: 2026-10-02
-faktencheck: 2026-10-04
+faktencheck: 2026-11-12
 tags: ["DSL-Vergleich", "Internet und Mobilfunk", "WLAN verbessern", "DNS und Netzsicherheit"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
@@ -25,6 +25,12 @@ cover:
   image: "images/covers/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss.jpg"
   alt: "Preiswert surfen: So findest du den optimalen DSL‑Anschluss"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 16e6706d22cc08972da01741816085074aa37b5daefbd85410a7a2cbab4b15e6
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur – Fachthemen Telekommunikation"
@@ -43,7 +49,6 @@ quellen:
     datum: "2026-10-02"
 kurzantwort: "Den besten DSL‑Anschluss findest du, indem du regelmäßig vergleichst und dann wechselst. Neukunden bekommen die besten Preise. Mit Prämien und Cashback sparst du oft über 300 Euro in zwei Jahren. Wichtig ist außerdem die richtige Geschwindigkeit: Zahle nur für das Tempo, das du wirklich brauchst."
 ---
-
 
 Du willst preiswert surfen? Dein Anschluss kostet viel, aber du nutzt das volle Tempo nie?
 

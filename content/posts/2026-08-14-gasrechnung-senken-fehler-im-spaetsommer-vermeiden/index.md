@@ -13,6 +13,12 @@ cover:
   image: "images/covers/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden.jpg"
   alt: "Gasrechnung senken: Fehler im Spätsommer vermeiden"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 9db41c76f49c332435b0f249e400b2f40a686859587bde1ee957daccff47b09f
+    geprueft_am: 2026-11-13
 kurzantwort: "Die teuersten Spätsommer-Fehler sind ein ungeprüfter Tarif, ein unrealistischer Abschlag, fehlende Zählerstände, ein aufgeschobener Heizungs-Check und pauschale Technik-Einstellungen. Prüfe Arbeitspreis, Grundpreis und Vorjahresverbrauch getrennt. Entlüfte nur bei Bedarf; wiederkehrender Druckverlust, Störungen und Arbeiten am Wärmeerzeuger gehören zum Fachbetrieb."
 social_posted: true
 keywords: ["Gasrechnung senken", "Heizkosten senken", "Gastarif wechseln", "Heizung entlüften", "Gasvergleich", "Gaspreisgarantie", "Gas spare", "Heizkosten sparen"]

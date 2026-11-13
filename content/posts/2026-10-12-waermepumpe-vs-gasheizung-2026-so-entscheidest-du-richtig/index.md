@@ -25,9 +25,15 @@ redaktionelle_pruefung:
 
 inspiration: "Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?"
 cover:
-  image: "images/covers/2026-10-07-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig.jpg"
+  image: "images/covers/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig.jpg"
   alt: "Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: ac64b594d766b3383e308f1396b88b1c80c0910f87f8018c3314778b1c23710f
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur - Energie"

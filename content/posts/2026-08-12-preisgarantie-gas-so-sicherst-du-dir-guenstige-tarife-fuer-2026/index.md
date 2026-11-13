@@ -13,6 +13,12 @@ cover:
   image: "images/covers/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026.jpg"
   alt: "Preisgarantie Gas: So sicherst du günstige Tarife"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 29d784935beff7fd7d44b3d9891d39461cc5c40c184adedf2c143e38d9341afd
+    geprueft_am: 2026-11-13
 kurzantwort: "Für einen belastbaren Gasvergleich brauchst du Postleitzahl und echten Jahresverbrauch. Blende Boni zunächst aus, sortiere nach Gesamtpreis und prüfe anschließend Arbeitspreis, Grundpreis, Vertragslaufzeit, Kündigungsfrist und Garantieumfang auf der Anbieterseite. Rechne Jahr eins und das Folgejahr getrennt; meide Vorkasse und unpassende Paketmengen."
 social_posted: true
 keywords: ["Preisgarantie Gas 2026", "Gastarife mit Preisgarantie", "Gaspreise absichern", "Gasanbieter Festpreis", "Heizkosten 2026 senken", "Preisgarantie Gas", "Gasanbieter mit Preisgarantie", "Gaspreisentwicklung 202"]
@@ -52,7 +58,7 @@ Dieser Leitfaden führt dich in zehn Minuten von der Jahresrechnung bis zur sich
 💡 **Schnell-Tipp von FranksFinanzcheck:** Tarife kannst du über unseren Partner-Vergleich prüfen: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-## Gaspreisgarantie: So startest du ohne Stress – Gaspreisgarantie 2026
+## Preisgarantie Gas 2026: Gaspreisgarantie: So startest du ohne Stress
 
 Lege die letzte Gasrechnung neben den Vertrag. Notiere den Verbrauch in kWh, den Preis je kWh und den festen Preis im Jahr. Mehr brauchst du für den ersten Vergleich nicht. Mit diesen drei Werten erkennst du rasch, ob ein Angebot wirklich zu deinem Haushalt passt.
 

@@ -25,6 +25,12 @@ cover:
   image: "images/covers/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte.jpg"
   alt: "Störung beim Internetanbieter: So sicherst du deine Rechte"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 549285c9daa23be591ded8a766eb388a863b4861aea899a57c97bb313ab20c9f
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur – Verbraucherportal Telekommunikation: Vertrag und Laufzeit"
@@ -210,7 +216,7 @@ Melde den Ausfall per E-Mail oder Kontaktformular und bewahre den Beleg. Nach me
 
 Das ist ein Einzelfall mit strengen Voraussetzungen. Hol dafür eine Beratung, statt selbst zu kündigen. Ein gekündigter Anschluss ist schwerer zu reparieren als ein laufender.
 
-**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Tarif prüfen](../../posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/) · [DNS-Hack testen](../../posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/)
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Tarif prüfen](../../posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/) · [DNS-Hack testen](../../posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/) · [WLAN-Frust lösen](../../posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/)
 **Lesetipp:** [Umzug mit Internet: Anschluss und Rufnummer mitnehmen](../../posts/2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen/)
 
 ---

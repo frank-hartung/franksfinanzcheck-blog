@@ -276,6 +276,12 @@ function corsHeaders(origin, env) {
     "Vary": "Origin",
     "X-Content-Type-Options": "nosniff",
     "Cache-Control": "no-store",
+    // Jede Antwort – auch die Fehlerantwort – sagt, was hier antwortet.
+    // Sie steht in `corsHeaders`, weil JEDER Antwortpfad diese Funktion
+    // benutzt; eine zweite Stelle wäre eine zweite Gelegenheit, sie zu
+    // vergessen (genau das war der Befund: der Hinweis im Körper wurde im
+    // Client nie gelesen, `data.hinweis` kam dort nicht vor).
+    [KI_KOPFZEILE]: KI_KOPFZEILE_WERT,
   };
 }
 
@@ -308,6 +314,16 @@ async function turnstilePruefen(token, ip, env, holen = fetch) {
 const HINWEIS =
   "Antwort einer KI. Allgemeine Information, keine Anlage-, Steuer- oder Rechtsberatung. " +
   "Bitte prüfe wichtige Angaben selbst.";
+// MASCHINENLESBARE OFFENLEGUNG (#1028, 13.11.2026)
+// Art. 50 Abs. 1 KI-VO verlangt, dass Menschen die Interaktion mit einem
+// KI-System erkennen. Der Satz im Antwortkörper ist der sichtbare Teil;
+// diese Kopfzeile ist derselbe Sachverhalt für Werzeuge, die nur die
+// HTTP-Antwort sehen (Reverse Proxy, Monitoring, ein Skript, das die API
+// direkt aufruft). Sie ist bewusst KEIN Ersatz für die sichtbare
+// Offenlegung im Widget – sie ergänzt sie auf der Leitung.
+const KI_KOPFZEILE = "ai-generated";
+const KI_KOPFZEILE_WERT =
+  "true; interactiv=chatbot; disclosure=visible-in-widget; ai-act=art-50-1";
 const MAX_BODY_BYTES = 32 * 1024;
 
 function json(daten, status, cors, extra = {}) {
@@ -449,4 +465,5 @@ export default {
 
 // Nur für Tests (node --test, siehe test/worker.test.mjs): Die CORS-Entscheidung
 // ist sicherheitsrelevant und wird deshalb direkt geprüft, nicht über Umwege.
-export { corsHeaders, vorschauHost, erlaubteHerkunft, proxyBaseUrl, turnstilePruefen, handle, HINWEIS };
+export { corsHeaders, vorschauHost, erlaubteHerkunft, proxyBaseUrl, turnstilePruefen, handle,
+         HINWEIS, KI_KOPFZEILE, KI_KOPFZEILE_WERT };

@@ -21,10 +21,18 @@ cover:
   image: "images/covers/2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden.jpg"
   alt: "Günstige Flüge für den Spätsommer finden"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 54bfaff8e93f5560b86cf70bfdf3c350101edd40b2fe1a7e236ea4c5c71bdecb
+    geprueft_am: 2026-11-13
 faktencheck: 2026-11-07
 ---
 
 Sie wollen im September verreisen. Die freien Tage stehen vor der Tür. Das Budget für den Urlaub soll klein bleiben. Teure Tickets für den Flug schrecken oft ab. Doch ein paar einfache Kniffe senken den Preis. Sie wollen am Zielort mobil sein. Ein Mietwagen ist dann oft die beste Wahl. Dieser Ratgeber zeigt Ihnen den Weg. Sie finden günstige Flüge. Sie wählen das richtige Auto. Sie sparen durch kluge Planung viel Geld. So bleibt mehr Geld in der Reisekasse.
+
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 ## Flugpreise im Spätsommer verstehen
 

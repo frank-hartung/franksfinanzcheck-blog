@@ -15,6 +15,12 @@ cover:
   image: "images/covers/2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert.jpg"
   alt: "Girocard, Debitkarte oder Maestro: Welche Karte dein Konto braucht"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 732eac56e0fa8a0334d87d5178b3e2fa8610b24c80acd154b2f9c2e7c4ae3423
+    geprueft_am: 2026-11-13
 pin_title: "Girocard, Debitkarte oder Maestro: Welche Karte dein Konto braucht"
 pin_description: "*Werbung | Girocard, Debitkarte oder Maestro im Vergleich: Einsatz, Kosten und Prüfpunkte für dein Konto. Einordnung mit Prüfhinweisen. Mehr Spartipps auf FranksFinanzcheck! #debitkarte #oder #maestro"
 quellen:

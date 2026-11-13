@@ -153,6 +153,24 @@ class KiProvenienzRenderTest(unittest.TestCase):
         self.assertNotIn("<source", self.html("ki-bild"))
         self.assertNotIn("srcset=", self.html("ki-bild"))
 
+    def test_schema_traegt_die_iptc_erzeugungsart(self):
+        """`digitalSourceType` im Artikel-JSON-LD – nur wenn belegt (#1028).
+
+        Befund 13.11.2026: Die Erzeugungsart des Covers stand im
+        `data-`Attribut und im XMP der Datei, aber nicht im strukturierten
+        Datenknoten. Wer nur das JSON-LD liest (Rich-Result-Prüfer,
+        Antwortmaschine), sah ein Bild ohne Herkunftsangabe.
+        """
+        bild = jsonld(self.html("ki-bild"))["image"]
+        self.assertEqual(
+            bild["digitalSourceType"],
+            "https://schema.org/TrainedAlgorithmicMediaDigitalSource")
+        # Ohne belegten Wert wird nichts behauptet – der Knoten bleibt still.
+        ohne = jsonld(self.html("ki-bild-ohne-typ")).get("image", {})
+        self.assertNotIn("digitalSourceType", ohne)
+        # Ein Text-Artikel ohne KI-Bild trägt den Bildkanal gar nicht.
+        self.assertNotIn("digitalSourceType", jsonld(self.html("ki-text")))
+
 
 if __name__ == "__main__":
     unittest.main()

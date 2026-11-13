@@ -14,6 +14,12 @@ cover:
   image: "images/covers/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet.jpg"
   alt: "DSL-Vergleich: So findest du günstigeres Internet"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 3335d3afaa59168f5caded03908955b93c714d70125276c974bbc5cf5e29d503
+    geprueft_am: 2026-11-13
 kurzantwort: "Ein transparenter DSL-Vergleich berechnet die effektiven Monatspreise über die gesamte 24-monatige Vertragslaufzeit inklusive aller Aktionsrabatte, Router-Gebühren und Wechselprämien. Wer alle zwei Jahre seinen Festnetztarif wechselt, senkt die monatlichen Internetkosten im Schnitt von 44,95 € auf 24,95 €."
 
 social_posted: true

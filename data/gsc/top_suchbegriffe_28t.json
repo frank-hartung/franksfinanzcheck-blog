@@ -2,9 +2,9 @@
   {
     "suchbegriff": "100 mbit internet monatlich kündbar",
     "clicks": 0,
-    "impressions": 61,
+    "impressions": 66,
     "ctr": 0.0,
-    "position": 45.61
+    "position": 45.35
   },
   {
     "suchbegriff": "250 mbit internet monatlich kündbar",
@@ -21,6 +21,13 @@
     "position": 48.14
   },
   {
+    "suchbegriff": "abschlusschance girokonto",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 64.0
+  },
+  {
     "suchbegriff": "angebote zur kostenkontrolle",
     "clicks": 0,
     "impressions": 1,
@@ -30,9 +37,16 @@
   {
     "suchbegriff": "bank ohne gebühren",
     "clicks": 0,
+    "impressions": 8,
+    "ctr": 0.0,
+    "position": 39.38
+  },
+  {
+    "suchbegriff": "bank ohne girokonto gebühren",
+    "clicks": 0,
     "impressions": 1,
     "ctr": 0.0,
-    "position": 19.0
+    "position": 50.0
   },
   {
     "suchbegriff": "banken mit kostenfreiem girokonto",
@@ -42,11 +56,32 @@
     "position": 54.0
   },
   {
+    "suchbegriff": "banken ohne gebühren",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 39.0
+  },
+  {
     "suchbegriff": "dauerhafte kostenkontrolle",
     "clicks": 0,
     "impressions": 11,
     "ctr": 0.0,
     "position": 62.73
+  },
+  {
+    "suchbegriff": "dkv gebäudeversicherung vergleich",
+    "clicks": 0,
+    "impressions": 3,
+    "ctr": 0.0,
+    "position": 59.0
+  },
+  {
+    "suchbegriff": "dsl 250 monatlich kündbar",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 32.0
   },
   {
     "suchbegriff": "dsl inklusivvolumen",
@@ -72,16 +107,16 @@
   {
     "suchbegriff": "dsl ratgeber",
     "clicks": 0,
-    "impressions": 1,
+    "impressions": 2,
     "ctr": 0.0,
-    "position": 14.0
+    "position": 21.5
   },
   {
     "suchbegriff": "dsl und mobilfunk",
     "clicks": 0,
-    "impressions": 3,
+    "impressions": 4,
     "ctr": 0.0,
-    "position": 11.33
+    "position": 11.5
   },
   {
     "suchbegriff": "dsl vergleich monatlich kündbar",
@@ -170,9 +205,16 @@
   {
     "suchbegriff": "frank dsl",
     "clicks": 0,
-    "impressions": 14,
+    "impressions": 15,
     "ctr": 0.0,
     "position": 7.07
+  },
+  {
+    "suchbegriff": "frugalismus",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 50.0
   },
   {
     "suchbegriff": "haftpflichtversicherung rückwirkend",
@@ -252,6 +294,20 @@
     "position": 57.73
   },
   {
+    "suchbegriff": "keine kontoführungsgebühren",
+    "clicks": 0,
+    "impressions": 4,
+    "ctr": 0.0,
+    "position": 34.5
+  },
+  {
+    "suchbegriff": "konto 0",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 43.0
+  },
+  {
     "suchbegriff": "konto eröffnen kostenlos",
     "clicks": 0,
     "impressions": 1,
@@ -259,11 +315,32 @@
     "position": 67.0
   },
   {
-    "suchbegriff": "konto ohne karte",
+    "suchbegriff": "konto ohne gebühren",
     "clicks": 0,
     "impressions": 1,
     "ctr": 0.0,
-    "position": 33.0
+    "position": 45.0
+  },
+  {
+    "suchbegriff": "konto ohne karte",
+    "clicks": 0,
+    "impressions": 2,
+    "ctr": 0.0,
+    "position": 34.5
+  },
+  {
+    "suchbegriff": "konto ohne kontoführungsgebühren",
+    "clicks": 0,
+    "impressions": 4,
+    "ctr": 0.0,
+    "position": 51.0
+  },
+  {
+    "suchbegriff": "konto ohne kontof√ºhrungsgeb√ºhr",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 29.0
   },
   {
     "suchbegriff": "konto umsonst",
@@ -282,9 +359,9 @@
   {
     "suchbegriff": "kosten standleitung",
     "clicks": 0,
-    "impressions": 1,
+    "impressions": 2,
     "ctr": 0.0,
-    "position": 85.0
+    "position": 80.5
   },
   {
     "suchbegriff": "kostenersparnis",
@@ -352,9 +429,9 @@
   {
     "suchbegriff": "meine gasrechnung ist dieses jahr wieder gestiegen. ich würde gerne zu einem nachhaltigen anbieter wechseln, der trotzdem bezahlbar ist. welche optionen habe ich?",
     "clicks": 0,
-    "impressions": 2,
+    "impressions": 3,
     "ctr": 0.0,
-    "position": 8.5
+    "position": 8.0
   },
   {
     "suchbegriff": "mobile dsl-flatrate",
@@ -362,6 +439,13 @@
     "impressions": 3,
     "ctr": 0.0,
     "position": 63.33
+  },
+  {
+    "suchbegriff": "mobilfunk und dsl",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 14.0
   },
   {
     "suchbegriff": "mobilfunk und dsl vertrag",
@@ -399,11 +483,25 @@
     "position": 95.67
   },
   {
+    "suchbegriff": "schadenrechnung",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 2.0
+  },
+  {
     "suchbegriff": "sparkasse kontomodelle vergleich",
     "clicks": 0,
     "impressions": 1,
     "ctr": 0.0,
     "position": 99.0
+  },
+  {
+    "suchbegriff": "sparkonto eröffnen kostenlos",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 70.0
   },
   {
     "suchbegriff": "strategien zur kostenkontrolle",
@@ -439,6 +537,13 @@
     "impressions": 1,
     "ctr": 0.0,
     "position": 14.0
+  },
+  {
+    "suchbegriff": "wechsel ökostromanbieter",
+    "clicks": 0,
+    "impressions": 1,
+    "ctr": 0.0,
+    "position": 45.0
   },
   {
     "suchbegriff": "welche monatlich kündbare internet tarife mit 250 mbit mit viel datenvolumen kannst du empfehlen?",
@@ -492,9 +597,16 @@
   {
     "suchbegriff": "zu ökostrom wechseln",
     "clicks": 0,
+    "impressions": 2,
+    "ctr": 0.0,
+    "position": 22.5
+  },
+  {
+    "suchbegriff": "ökogas wechseln",
+    "clicks": 0,
     "impressions": 1,
     "ctr": 0.0,
-    "position": 27.0
+    "position": 62.0
   },
   {
     "suchbegriff": "ökostrom wechsel",
@@ -506,15 +618,15 @@
   {
     "suchbegriff": "ökostrom wechseln",
     "clicks": 0,
-    "impressions": 3,
+    "impressions": 7,
     "ctr": 0.0,
-    "position": 8.33
+    "position": 12.71
   },
   {
     "suchbegriff": "ökostromanbieter wechseln",
     "clicks": 0,
-    "impressions": 2,
+    "impressions": 5,
     "ctr": 0.0,
-    "position": 19.5
+    "position": 33.4
   }
 ]

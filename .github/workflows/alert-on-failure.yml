@@ -571,8 +571,6 @@ jobs:
             // Nur die beiden Backup-Workflows: Ein gleichnamiger Schritt in
             // einem fremden Kanal behält sein eigenes Runbook (Gegenprobe in
             // der Simulation).
-            const backupRestore = (isBackup || isBackupFrisch) && !backupEinrichtung &&
-              failedStepNames.some(s => String(s).includes('Wiederherstellbarkeit'));
             // 02.11.2026 (WF-9E5A / #923): Die Frischwache prüft die
             // Einrichtung inzwischen SELBST und wird rot, wenn E1–E8 offen
             // sind. Vorher lief sie zehnmal grün, obwohl keine einzige
@@ -584,6 +582,18 @@ jobs:
             // „Einrichtung unvollständig", nicht „Scheduler-Hänger").
             const backupFrischEinrichtung = isBackupFrisch &&
               failedStepNames.some(s => String(s).includes('Voraussetzungen prüfen'));
+            // 12.11.2026 (#1030, WF-3150) – EINE URSACHE, EIN RAT. Die
+            // Einrichtungs-Prüfung steht in BEIDEN Backup-Workflows. Geprüft
+            // wurde bisher nur die des Offsite-Jobs; ein Lauf der Frischwache
+            // mit offener Einrichtung UND rotem Rückweg-Nachweis bekam
+            // deshalb den Rat „prüfe den Rückweg" – die Folge statt der
+            // Ursache, und derselbe Fehler, den #1030 im Workflow geheilt hat.
+            // Beide Klassen hängen an derselben Bedingung, also an derselben
+            // Zeile: der Einrichtungsbefund hat Vorrang vor allem, was aus ihm
+            // folgt (Rückweg, Leerlauf).
+            const backupEinrichtungOffen = backupEinrichtung || backupFrischEinrichtung;
+            const backupRestore = (isBackup || isBackupFrisch) && !backupEinrichtungOffen &&
+              failedStepNames.some(s => String(s).includes('Wiederherstellbarkeit'));
             // 07.11.2026 (WF-9E5A / #923): DER GRÜNE LEERLAUF.
             // ------------------------------------------------------
             // BEFUND: Der Repo-Job meldet `success`, obwohl weder
@@ -602,7 +612,7 @@ jobs:
             // ein Werkzeugfehler der Heilung als grüner Leerlauf gelesen (und
             // der Rat „bitte einrichten“ stand über einem Code-Problem).
             // Die Simulation hält beide Richtungen fest (#1030, #923).
-            const backupLeerlauf = (isBackup || isBackupFrisch) && !backupEinrichtung &&
+            const backupLeerlauf = (isBackup || isBackupFrisch) && !backupEinrichtungOffen &&
               failedStepNames.some(s => String(s).includes('Leerlauf prüfen'));
             // ================================================================
             //  WF-53E2 / #780 (16.10.2026): EIN ROTER SELBSTTEST IST EINE

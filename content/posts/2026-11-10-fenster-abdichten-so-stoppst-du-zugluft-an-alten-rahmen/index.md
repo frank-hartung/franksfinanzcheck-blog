@@ -1,14 +1,14 @@
 ---
 title: "Fenster abdichten: So stoppst du Zugluft an alten Rahmen"
 description: "Fenster abdichten leicht gemacht: Mit diesen Tipps kannst du Zugluft stoppen und effektiv Heizkosten senken. Erfahre jetzt, worauf es ankommt."
-date: 2026-11-10T11:34:25Z
-draft: true
-reserve: true
+date: 2026-11-13T00:29:05Z
+draft: false
+reserve_published: 2026-11-13
 tags: ["Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Fenster abdichten", "Zugluft stoppen", "Heizkosten senken", "Abdichten"]
+keywords: ["Fenster abdichten", "Zugluft stoppen", "Heizkosten senken"]
 pin_title: "Fenster abdichten: So stoppst du Zugluft an alten Rahmen"
 pin_description: "*Werbung | Fenster abdichten leicht gemacht: Mit diesen Tipps kannst du Zugluft stoppen und effektiv Heizkosten senken. Erfahre jetzt, worauf es ankommt. Mehr Spartipps auf FranksFinanzcheck! #fenster #abdichten #zugluft"
 ai_generated: true
@@ -21,9 +21,15 @@ redaktionelle_pruefung:
 
 inspiration: "Undichte Fenster abdichten: Was bei alten Rahmen zuerst hilft"
 cover:
-  image: "images/covers/2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen.jpg"
+  image: "images/covers/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen.jpg"
   alt: "Fenster abdichten: So stoppst du Zugluft an alten Rahmen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 78cb072b8898e0f8ffa080e37dd245a4a055838266fa118ed80013be47e36400
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Referenzseite bundesnetzagentur.de"
@@ -36,10 +42,12 @@ faktenfrische_aliases:
   - "2026-11-09-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen"
 ---
 
-Draußen sinken die Temperaturen.  
+Fenster abdichten im Check: Draußen sinken die Temperaturen.  
 Du sitzt auf dem Sofa und spürst einen kühlen Hauch am Nacken.  
 Die Heizung läuft auf Hochtouren, doch das Zimmer bleibt kühl.  
-Ein Blick auf die alten Holzrahmen zeigt oft das Problem.  
+Ein Blick auf die alten Holzrahmen zeigt oft das Problem.
+
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Die Dichtungen sind spröde oder fehlen ganz.  
 Teure neue Fenster sind meist nicht sofort nötig.  
@@ -300,9 +308,3 @@ _Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Informa
 
 
 ---
-
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
-
-*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
-
-_Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information und stellt keine Anlage-, Rechts- oder Steuerberatung dar. Prüfe Konditionen und Bedingungen immer beim jeweiligen Anbieter._

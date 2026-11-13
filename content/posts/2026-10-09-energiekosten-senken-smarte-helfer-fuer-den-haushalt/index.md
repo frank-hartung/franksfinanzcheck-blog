@@ -25,15 +25,21 @@ redaktionelle_pruefung:
 
 inspiration: Energiekosten im Haushalt senken mit Smart-Home-Geräten
 cover:
-  image: "images/covers/2026-10-06-energiekosten-senken-smarte-helfer-fuer-den-haushalt.jpg"
+  image: "images/covers/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt.jpg"
   alt: "Energiekosten senken: Smarte Helfer für den Haushalt"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: ca449f5026fafd6ee52cd7a98178a28a385dddbf679c78e15273beeccaf54992
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur - Energie"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
-faktencheck: 2026-10-06
+faktencheck: 2026-11-13
 kurzantwort: "Ein intelligenter Thermostat kombiniert mit einem Energie‑Monitor reduziert den Haushaltsstromverbrauch um etwa 12 % – das entspricht bei einem durchschnittlichen Verbrauch von 2 500 kWh rund 150 € Jahresersparnis. Der 4K‑Prüfpfad hilft, die Geräte nach Kosten, Komfort, Kontrolle und Konsistenz zu bewerten, sodass du nur die wirklich effizienten Lösungen nutzt."
 ---
 

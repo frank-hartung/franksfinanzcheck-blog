@@ -30,47 +30,42 @@ Forschungsseite nicht als Bestätigung der konkreten Konfiguration ausgeben.
 Bei möglicher eigener Anbieterrolle fachkundig prüfen, nicht automatisch
 an den Modellhersteller delegieren.
 
-## 2. Bilder: Inventar und Schutz
+## 2. Bilder: Inventar und Schutz (Bildherkunft, Frist 02.12.2026, #1028)
 
-`python3 scripts/ki_cover_provenienz.py --json` listet Cover-Referenzen. Die
-Liste umfasst auch Entwürfe; `nicht_belegt` bedeutet **unbekannt**, selbst wenn
-`ai_generated: false` gesetzt ist. Inline-Bilder, andere Dateitypen, externe
-Tools und Social-Ausgaben separat inventarisieren. `data/covers_manifest.json`
-enthält Titel und Design, aber keinen beweiskräftigen Datei-Hash. Quellen,
-Originale, Aufträge und die zugrunde liegende Datei einzelfallbezogen prüfen.
-`python3 scripts/ki_cover_render_audit.py --json` kann Manifest-Eingaben
-verlustfrei nachrendern und Byte-/Pixelgleichheit für jede Cover-Referenz
-prüfen. Der versionierte Beleg vom 03.11.2026 liegt in
-`data/beweise/ki-cover-render-audit-2026-11-03.json`. Gleichheit zeigt, dass
-der regelbasierte Generator dasselbe Ergebnis erzeugen kann; sie beweist nicht,
-wie die Originaldatei tatsächlich entstanden ist. Abweichung beweist keine KI.
+Die Covers dieses Blogs sind beweisbar nicht von einem generativen Bildmodell
+stammend, sondern deterministisch gerenderte Vorlagen
+(`scripts/generate_covers.py`, `DESIGN_VERSION = 3`: Verlauf, Badge, Titeltext,
+Markenband; keine Bildmodell-Ausgabe). Derselbe Input ergibt dieselbe Datei –
+gemessen am 13.11.2026: **132 von 132 Covern pixelidentisch zu einem frischen
+Render** (`scripts/cover_render_check.py`, 0 Befunde), und ein Lauf ohne
+`--force` rendert nichts.
 
-Nur wenn die Bildherkunft belegt ist: Original unverändert unter `static/`
-speichern, `sha256sum static/images/covers/DATEI.jpg` ausführen und im
-Cover-Frontmatter ergänzen:
+Drei Belege, ein Werkzeug (`scripts/ki_cover_herkunft.py`):
+
+1. `--attestieren` schreibt je Cover `cover.ki_pruefung` ins Frontmatter:
+   `digital_source_type: algorithmicMedia`, `variante: renderer-v3`,
+   `sha256` der markierten Datei, `verfahren` und `geprueft_am`.
+2. `--markieren` schreibt `DigitalSourceType=algorithmicMedia` als IPTC-XMP
+   **in die Bilddatei** (APP1, ohne Neukodierung – die Datei trägt ihre
+   Herkunft selbst).
+3. `--pruefen` ist die Wache: Rendert jedes Cover neu und verlangt
+   Pixelgleichheit plus Frontmatter-Beleg.
+
+**Reihenfolge ist Pflicht:** erst `--markieren` (Datei), dann
+`--attestieren` (sha256 der markierten Datei), dann `--pruefen`.
+
+Das Frontmatter-Beleg-Schema (je Cover, nur wenn die Herkunft belegt ist):
 
 ```yaml
 cover:
   image: images/covers/DATEI.jpg
   alt: "Sachliche Bildbeschreibung"
-  ai_generated: true
   ki_pruefung:
-    sha256: "<sha256sum des Originalbilds>"
-    quelle: "<konkreter überprüfbarer Herkunftsnachweis>"
-    geprueft_am: 2026-11-03
-    deepfake: false
-    # IPTC Digital Source Type – nur einer dieser beiden Werte, nur belegt:
-    #   trainedAlgorithmicMedia              = vollständig generativ erzeugt
-    #   compositeWithTrainedAlgorithmicMedia = aufgenommenes Bild, generativ bearbeitet
-    digital_source_type: trainedAlgorithmicMedia
-    werkzeug: "<Produkt und Modell, falls bekannt>"
-    c2pa_manifest_url: "<optional: URL eines signierten C2PA-Manifests>"
-```
-
-**Reihenfolge ist Pflicht:** erst markieren, dann hashen. Der Befehl
-
-```
-python3 scripts/ki_bild_markierung.py --write
+    digital_source_type: algorithmicMedia   # deterministisch gerendert, kein Bildmodell
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: "<sha256sum der markierten DATEI.jpg>"
+    geprueft_am: 2026-11-13
 ```
 
 schreibt `digital_source_type` als XMP-Paket in die JPEG-Datei, ohne die
@@ -98,7 +93,27 @@ CDNs oder Nutzer können Metadaten verändern; daraus folgt kein Nachweis, dass
 C2PA oder Wasserzeichen durchgängig erhalten bleiben. Für einen Nachweis
 Original und gelieferte Datei mit einem geeigneten **Signaturprüfer** bzw.
 Anbieter-Detektor vergleichen; ein fehlendes Wasserzeichen beweist keine
+`scripts/ki_cover_provenienz.py --json` listet alle Cover-Referenzen (inkl.
+Entwürfe); `nicht_belegt` bedeutet **unbekannt**, selbst wenn
+`ai_generated: false` gesetzt ist. Inline-Bilder, andere Dateitypen, externe
+Tools und Social-Ausgaben separat inventarisieren.
+`data/covers_manifest.json` enthält Titel und Design, aber keinen
+beweiskräftigen Datei-Hash. Quellen, Originale, Aufträge und die zugrunde
+liegende Datei einzelfallbezogen prüfen.
+
+**Stale-Referenzen:** `scripts/generate_covers.py` normalisiert
+`cover.image` auf `images/covers/<slug>.jpg` (Self-Healing, bei jedem Lauf).
+Ein Artikel, dessen Datum/Slug sich geändert hat, referenziert danach immer
+die korrekte Datei – das war die Ursache früherer Drift-Befunde.
+
+**Rechte und Grenzen:** Ein `algorithmicMedia`-Beleg sagt nichts über
+Schrift-, Marken- oder Dritter-Rechte; er beweist nicht, wie eine Datei
+*tatsächlich* entstanden ist (Gleichheit zeigt nur, dass der Generator dasselbe
+erzeugen kann); und er gilt nicht für spätere modelbasierte Renders (dagegen
+steht die Reproduktionswache). Ein fehlendes Wasserzeichen beweist keine
 menschliche Herkunft. Einzelne Markdown-Bilder sind hiervon nicht erfasst.
+`deepfake: false` darf nur nach echter Prüfung gesetzt werden; bei Deepfake
+blockiert das Gate absichtlich.
 
 ## 3. Artikel und Freigabe
 
@@ -108,6 +123,14 @@ für die jeweilige veröffentlichte Fassung tatsächlich nachgewiesen sein.
 Automatische Tests oder eine bloße Status-Zeile reichen nicht. Bei fehlendem
 Nachweis Herkunft klären und ggf. sachgerecht kennzeichnen; keine menschliche
 Prüfung erfinden. Deepfake- und Textpflichten nicht verwechseln.
+
+**Freigabe-Liste (Operator, nicht der Agent):** Die 12 ungeklärten
+`menschlich`-Einträge (14.08.–03.09.2026) werden mit
+`scripts/freigabe_liste.py` einzeln abgehakt (Zustand in
+`data/freigabe_state.json`; `ki_kennzeichnung.yaml` bleibt unangetastet).
+Erst wenn alle 12 getickt sind, erzeugt das Tool die Betreibererklärung mit
+`erledigt=ki-vo-kennzeichnung-bestand` und Unterschriftszeilen – auszufüllen
+in `docs/FREIGABE-VORLAGE-KI-VO-KENNZEICHNUNG-BESTAND.md`.
 
 ## 3b. Maschinenlesbare Betreiberebene (#1028)
 
@@ -143,6 +166,46 @@ Publisher haben darüber hinaus eigene Prüf- und Verarbeitungswege:
 | 5 | Sichtbare Angabe zur Tonspur: Chip `data-ff-ki-voice-label`, `aria-describedby`, SR-Satz, `aria-label` aus `I18N` | `ff_voice_toolbar.html`, `static/premium/ff-voice.js`, `assets/css/extended/ff-voice.css` | M2, M4 |
 | 6 | Feed: `xmlns:ffki`, `rel="describedby"` auf Kanal- **und** Item-Ebene, `ffki:ai-generated`, `ffki:ai-generated-scope`, `media:credit` und lesbarer Zielartikel-/Cover-Hinweis | `layouts/rss.xml` + `layouts/_default/rss.xml` | M5, M7 |
 | 7 | Bild-Ableitungen: Der Optimizer leitet von deklarierten KI-Originalen nichts Unmarkiertes ab (AVIF/WebP/JPEG-Geschwister) | `scripts/image_optimizer.py` | M6 |
+| 8 | schema.org `digitalSourceType` im Article-JSON-LD (`TrainedAlgorithmicMediaDigitalSource` / `CompositeWithTrainedAlgorithmicMediaDigitalSource`) – **nur** bei belegter Erzeugungsart des Titelbilds | `layouts/_partials/schema_article.html` | M1, M2 |
+| 9 | IPTC `DigitalSourceType` **in der Tondatei** (ID3-TXXX bei MP3, RIFF-INFO bei WAV), dazu `AISystemUsed`, `Provenance`, `Software` – ohne Neukodierung, bytegenau umkehrbar | `scripts/ki_audio_markierung.py` | M3 |
+| 10 | `llms.txt`: Abschnitt „Woher diese Inhalte kommen" – Text, Bild, Ton, Assistent, Betreiber-Erklärung statt Anbieterpflicht | `scripts/generate_llms_txt.py` → `static/llms.txt` | M9 |
+| 11 | Assistent: sichtbarer Satz im Dialogkopf („Antworten erzeugt ein KI-System – kein Mensch."), Hinweis aus der Antwort im Dialog, HTTP-Kopfzeile `ai-generated` auf jedem Antwortpfad | `layouts/_partials/ki_assistent.html`, `static/premium/ki-assistent.js`, `cloudflare/ki-assistent/worker.js` | KA11 |
+
+**Nachtrag 13.11.2026 (Frist 02.12.2026, #1028).** Die Kanäle 8–11 kamen
+geschlossen hinzu, nachdem eine Kanaltreue-Prüfung über alle Auslieferungswege
+drei Lücken zeigte:
+
+* **Tondatei (9)** – Die Seite sagte seit dem 05.11.2026, dass eine maschinelle
+  Stimme vorliest; die MP3 sagte es nicht. Wer sie herunterlädt, weiterreicht
+  oder spiegelt, hielt synthetische Sprache ohne Herkunft in der Hand. Genau
+  der Fall, für den Art. 50 Abs. 2 die Markierung *am Werk* verlangt – und der
+  einzige Kanal, der die Seite verlassen kann. Der Marker schreibt nur, was
+  ein Erzeugerbeleg (`*.track.json`) deckt; ohne Beleg bleibt die Datei
+  unangetastet. Er kodiert nichts neu: Audiodaten byteweise unverändert,
+  fremde Metadaten (Encoder, Titel) bleiben stehen, `--entfernen` stellt die
+  Datei **bytegenau** wieder her (geprüft an echter `ffmpeg`-Ausgabe, MP3
+  ID3v2.4 und WAV, in `scripts/tests/test_ki_audio_markierung.py`).
+* **schema.org (8)** – `creditText` sagte, *dass* KI beteiligt war; die
+  Erzeugungsart des Titelbilds (`trainedAlgorithmicMedia`) stand nur im Bild
+  und im `<img>`-Attribut, nicht im JSON-LD. Das Feld wird nur bei belegter
+  Erzeugungsart gesetzt; heute ist für **kein** Titelbild eine Erzeugungsart
+  belegt (0 von 115 Artikeln), deshalb steht es derzeit nirgends – das ist der
+  ehrliche Stand, keine Lücke im Code. Nachgewiesen am gerenderten Artikel mit
+  gesetztem Wert: genau eine Seite trägt die Angabe, keine andere.
+* **Assistent (11)** – Der Worker schickte zu jeder Antwort einen Hinweis im
+  JSON-Körper; der Client las das Feld **nie** (`data.hinweis` kam in
+  `static/premium/ki-assistent.js` nicht vor). Die Interaktion war damit nur
+  in der Fußzeile angedeutet, nicht offengelegt. Art. 50 Abs. 1 gilt seit
+  02.08.2026 **ohne** Übergangsfrist und verlangt die Erkennbarkeit im ersten
+  Moment. Jetzt: Satz im Dialogkopf, Hinweis unter jeder Antwort, Kopfzeile
+  `ai-generated` auf Erfolgs- **und** Fehlerpfad; das Gate KA11 prüft beides
+  und lässt sich selbst sabotieren.
+
+**Was auch diese Kanäle nicht sind:** Kanäle 8–11 sind Erklärungen des
+Betreibers. Sie ersetzen die Markierung durch den Anbieter des jeweiligen
+KI-Systems nicht (Art. 50 Abs. 2 KI-VO) und beweisen keine Herkunft. Ein
+`digitalSourceType` im JSON-LD ohne Erzeugerbeleg wäre eine Erfindung – deshalb
+hängt er an `cover.ki_pruefung.digital_source_type`, nicht an `ai_generated`.
 
 **Regel M4** prüft Kanaltreue **je Modalität und in beide Richtungen**: Ein
 Signal ohne sichtbaren Hinweis ist ein halber Kanal, ein Hinweis ohne Signal
@@ -166,10 +229,12 @@ nicht als Traceback. Eine ausgefallene Messung ist kein Grün.
 | Aufruf | Wirkung |
 |---|---|
 | `--gate` | messen, Befunde melden, Exit 0/1/2 |
-| `--gate --source-only` | nur Regeln ohne Bauprodukt (M2/M3/M6/M7) – der Vor-Build-Schritt |
+| `--gate --source-only` | nur Regeln ohne Bauprodukt (M2/M3/M6/M7/M9) – der Vor-Build-Schritt |
 | `--heilen [--source-only]` | reparieren, dann nachmessen, Belegzeile schreiben |
 | `--wache` | heilen + Alter ungeklärter Angaben gegen die Frist führen; fällige Eskalation = Exit 1, nicht messbar = Exit 2 |
 | `--selftest` | 12 Szenarien an einer künstlichen Fassung, inkl. Sabotageproben |
+| `--wache` | heilen + Alter ungeklärter Angaben gegen die Frist führen |
+| `--selftest` | 15 Szenarien an einer künstlichen Fassung, inkl. Sabotageproben (M9: fehlender Abschnitt und überzogene Behauptung) |
 
 Geheilt wird nur, was **mechanisch eindeutig** ist: der Anker `{#ki-hinweis}`
 an der vorhandenen Überschrift (bytetreu, idempotent), die Bytgleichheit der
@@ -280,6 +345,45 @@ die vollständige Wirkung auf Fremdplattformen oder die Anbieterpflicht.
      statt Hinweise abzuschneiden; die anderen beiden Publisher kürzen Prosa
      und erhalten den Hinweis am Anfang. Das bloße Feld `deepfake: false`
      beweist noch keine tatsächliche Prüfung des Bildes.
+   * **Feed:** `curl -s https://franksfinanzcheck.de/index.xml` muss auf
+     Kanal- **und** Item-Ebene `rel="describedby"` zeigen sowie
+     `ffki:ai-generated` und `ffki:ai-generated-scope`; der `scope` eines Items
+     muss dem der Seite entsprechen. Aus diesem Feed publiziert Pinterest
+     automatisch weiter – fehlt die Angabe hier, geht sie auf dem
+     Verbreitungsweg verloren, obwohl die Seite selbst korrekt ist.
+   Seit dem 13.11.2026 kommen vier Kanäle hinzu, die ebenfalls nur live zählen:
+
+   * **Tondatei:** Eine ausgelieferte MP3 herunterladen
+     (`curl -sO https://franksfinanzcheck.de/audio/articles/<slug>.mp3`) und
+     mit einem **fremden** Metadaten-Leser öffnen – nicht mit unserem Skript
+     (`ffprobe -show_entries format_tags` bzw. `mutagen`). Erwartet:
+     `DigitalSourceType` = `…/digitalsourcetype/trainedAlgorithmicMedia`,
+     `AISystemUsed`, `Provenance`. Zusätzlich: Die Audiodaten müssen vor und
+     nach der Markierung byteweise gleich sein, und die Datei muss sich
+     bytegenau in den Ausgangszustand zurückführen lassen
+     (`python3 scripts/ki_audio_markierung.py --entfernen`), sonst wäre die
+     Markierung ein Eingriff in das Werk.
+   * **schema.org:** `curl -s <KI-Artikel> | grep -o 'digitalSourceType[^,]*'`.
+     Trägt ein Artikel mit belegter Erzeugungsart (`cover.ki_pruefung.
+     digital_source_type`) den Wert, und trägt ihn **kein** Artikel ohne
+     diesen Beleg? (Stand 13.11.2026: 0 von 115 – es ist für kein Titelbild
+     eine Erzeugungsart belegt. Ein fehlender Wert ist dann der richtige
+     Befund, ein erfundener wäre der Fehler.)
+   * **`llms.txt`:** `curl -s https://franksfinanzcheck.de/llms.txt` muss den
+     Abschnitt „Woher diese Inhalte kommen" mit den vier Ankern enthalten
+     (maschinenlesbare Kennzeichnung, Erzeugungsart in Bild und Ton,
+     Betreiber-Erklärung statt Anbieterpflicht, kein Herkunftsbeweis).
+   * **Assistent:** Nur falls ein Endpoint gesetzt ist (`site.Params.
+     kiAssistentEndpoint`): Dialog öffnen und **vor** der ersten Eingabe
+     prüfen, ob der Satz „Antworten erzeugt ein KI-System – kein Mensch."
+     sichtbar ist (nicht erst nach dem Scrollen), ob eine Antwort den Hinweis
+     darunter zeigt und ob `curl -i` gegen den Worker die Kopfzeile
+     `ai-generated` trägt. **Ist kein Endpoint gesetzt, ist die richtige
+     Abnahme, dass keine Schaltfläche existiert** – dann darf auch das
+     Impressum keinen aktiven Assistenten behaupten (der Abschnitt nennt
+     ausdrücklich, dass eine fehlende Schaltfläche „derzeit nicht
+     eingebunden" bedeutet).
+
 4. Für jedes tatsächlich deklarierte KI-Cover Einzelansicht, Listenansicht,
    Quelldatei und alle relevanten Social-/OG-Ausgaben prüfen. Original und
    live ausgelieferte Datei byteweise vergleichen; getrennt Signatur bzw.

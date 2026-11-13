@@ -23,9 +23,15 @@ redaktionelle_pruefung:
 
 inspiration: "VPN für Zuhause: Brauchst du das wirklich?"
 cover:
-  image: "images/covers/2026-10-07-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle.jpg"
+  image: "images/covers/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle.jpg"
   alt: "VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: afc7c419f33f8207b343630757fe009aaf88c8e6e3177a6577d0e00119f73e92
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "BSI – Was ist ein virtuelles privates Netzwerk (VPN)?"
