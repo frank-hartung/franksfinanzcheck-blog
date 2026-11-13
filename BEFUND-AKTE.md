@@ -392,7 +392,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8436b91bdb63a631697
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a4ff01e649b789f19e6a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` · **LIVE** · Risikoklasse standard · 3 Befund(e)
+### `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
 
 Datei: `content/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/index.md`
 
@@ -408,7 +408,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7aeb2098034d16a4688
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ea97b5dd6695de127fd2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten` · **LIVE** · Risikoklasse standard · 4 Befund(e)
+### `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten` · **LIVE** (blockiert) · Risikoklasse standard · 4 Befund(e)
 
 Datei: `content/posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/index.md`
 
@@ -426,7 +426,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 985f506ee04087bf725
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ee321fa37210590f7e9b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` · **LIVE** · Risikoklasse standard · 5 Befund(e)
+### `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
 
 Datei: `content/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/index.md`
 
@@ -446,7 +446,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7e6087a4117a857a92c
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e28b4ad1f6d608d2ec77 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` · **LIVE** · Risikoklasse standard · 4 Befund(e)
+### `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` · **LIVE** (blockiert) · Risikoklasse standard · 4 Befund(e)
 
 Datei: `content/posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/index.md`
 
