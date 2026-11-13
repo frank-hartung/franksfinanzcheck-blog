@@ -1,6 +1,6 @@
-stand: '2026-11-12'
+stand: '2026-11-13'
 issue: 1072
-lauf: 2026-11-12 16:30 UTC
+lauf: 2026-11-13 13:25 UTC
 runden:
 - stand: '2026-11-05'
   lauf: 2026-11-05 12:43 UTC
@@ -18,13 +18,23 @@ runden:
     Anker an den Text vom 12.11. gebunden, 5 Belege auf die BDEW-Strompreisanalyse
     umgestellt, 2 Aussagen als Streichung geführt (beleg_url null), die drei
     Quellenverzeichnisse ergänzt, 2 ungedeckte Meta-Aussagen entschärft.
+- stand: '2026-11-13'
+  lauf: 2026-11-13 13:25 UTC
+  umfang: Fünf Heizöl-Befunde erneut am aktuellen, weiterhin zurückgestellten Draft geprüft.
+    Saisonprognosen und unbelegte Preis-/Sparzahlen entfernt; keine unpassende
+    Bundesnetzagentur-Quelle mehr als Beleg geführt. Folgeentscheidungen binden an
+    den Text-Hash vom 13.11.2026; Veröffentlichung bleibt gesperrt bis zur Fachabnahme.
 recherche:
-  methode: Redaktionelle Prüfung jedes Befunds am heutigen Text (Stand 05.11.2026);
+  methode: Redaktionelle Prüfung jedes Befunds am jeweils dokumentierten Textstand;
   nachpruefung_2026_11_12: Zweite Runde für die Befunde, deren Anker der Umbau vom
     11.11.2026 verschoben hat. Methode unverändert (Text gegen Entscheidung geprüft),
     zusätzlich Verbots-Prüfung über Meta-Flächen und Beleg gegen Quellenverzeichnis.
     Quellen nur aus der Allowlist in data/agent_reach/faktenfrische.yaml; keine Übernahme
     von Marktzahlen ohne Fundstelle.
+  nachpruefung_2026_11_13: Fünf Heizöl-Befunde erneut am aktuellen Draft geprüft.
+    Saisonprognosen und unbelegte Preis-/Sparzahlen entfernt; keine unpassende
+    Bundesnetzagentur-Quelle mehr als Beleg geführt. Folgeentscheidungen sind an
+    den Text-Hash vom 13.11.2026 gebunden. Draft bleibt bis zur Fachabnahme gesperrt.
   abrufe:
   - url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
     titel: Startseite Energie – Bundesnetzagentur
@@ -32,7 +42,7 @@ recherche:
     abgerufen: '2026-11-05'
     verwendet_fuer:
     - Preisgarantie-Gas-Befunde
-    - Heizöl-Befunde
+    - Heizöl-Befunde (im Nachlauf 13.11.2026 als ungeeignet verworfen)
     - Regulierungsrahmen
   - url: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
     titel: Verbraucherpreisindex und Inflationsrate in Deutschland
@@ -87,8 +97,8 @@ artikel:
 - slug: 2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden
   titel: Kostenloses Girokonto ohne Gebühren finden
   befunde: 5
-- slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
-  titel: 'Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden'
+- slug: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  titel: 'Heizölpreise vergleichen: So planst du deine Bestellung'
   befunde: 5
 - slug: 2026-11-02-last-minute-urlaubsangebote-sichern
   titel: Last-Minute Urlaubsangebote sichern
@@ -626,125 +636,122 @@ befunde:
   entschieden_am: '2026-11-05'
   entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
 - id: 0b564f460c41218244bd
-  artikel: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
-  titel: 'Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden'
+  artikel: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  titel: 'Heizölpreise vergleichen: So planst du deine Bestellung'
   typ: luecke
   befund: Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten
     Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.
-  entscheidung: 'Slug 2026-11-01 nicht mehr im Bestand: Artikel am 05.11.2026 umdatiert
-    auf 2026-11-05 (Draft/reserve, redaktionelle Prüfung ausstehend, nicht veroeffentlicht).
-    Die beanstandete Aussage (Tief Jan/Feb, 10–20 % Herbst-Ersparnis, Tiefpreis 0,80
-    €, 15 %-Fehler, 4-Wochen-Faustregel) ist im aktuellen Draft entfernt oder als
-    Modell/Beispiel gekennzeichnet; Befund gegenueber der dokumentierten Fassung gegenstandslos.'
+  entscheidung: >-
+    Saisonale Tiefpreisbehauptung und Empfehlung Januar/Februar im aktuellen Entwurf entfernt.
+    Keine gleichwertige datierte Heizöl-Preisreihe vorhanden; der Text nennt daher ausdrücklich
+    keinen bevorzugten Monat.
   status: behoben
-  belegtyp: ergaenzt
-  beleg_url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  belegtyp: streichung
+  beleg_url: null
   anker:
-  - garantierter tiefpunkt
-  - modellwert
-  - beispielrechnung
+  - einen verlässlich besten monat
+  - keinen bestimmten monat
+  - ohne eine passende, datierte preisreihe
   verboten_behauptend:
   - heizöl-preise erreichen ihr tief meist in den monaten januar und februar
-  rest_risiko: Saisonalität ist kein Versprechen für den jeweiligen Kaufzeitpunkt.
+  rest_risiko: Keine Monatsprognose oder Ersparnis zugesagt; der Entwurf bleibt zurückgestellt.
   ledger_fassung_sha256: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
-  geprueft_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: ce7dd8c5ef0a596abbc4628c7be2878fc8ef9ded0c9acbbf3ff7cb29bc1ed602
+  entschieden_am: '2026-11-13'
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
 - id: 3ad2eefed314eb172c26
-  artikel: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
-  titel: 'Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden'
+  artikel: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  titel: 'Heizölpreise vergleichen: So planst du deine Bestellung'
   typ: luecke
   befund: Die Aussage, dass durch frühzeitige Bestellung Kosten um 10 % bis 20 % im
     Herbst eingespart werden können, ist unbelegt.
-  entscheidung: 'Slug 2026-11-01 nicht mehr im Bestand: Artikel am 05.11.2026 umdatiert
-    auf 2026-11-05 (Draft/reserve, redaktionelle Prüfung ausstehend, nicht veroeffentlicht).
-    Die beanstandete Aussage (Tief Jan/Feb, 10–20 % Herbst-Ersparnis, Tiefpreis 0,80
-    €, 15 %-Fehler, 4-Wochen-Faustregel) ist im aktuellen Draft entfernt oder als
-    Modell/Beispiel gekennzeichnet; Befund gegenueber der dokumentierten Fassung gegenstandslos.'
+  entscheidung: >-
+    Unbelegte Einsparspanne von 10 bis 20 Prozent samt Herbst- und Frühbestellversprechen
+    vollständig entfernt. Der Text stellt klar, dass frühere Anfrage keine Ersparnis garantiert.
   status: behoben
-  belegtyp: ergaenzt
-  beleg_url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  belegtyp: streichung
+  beleg_url: null
   anker:
-  - das ist ein modellwert
+  - beziffertes sparversprechen nicht belastbar
+  - einen festen prozentsatz sparen
+  - sie garantiert keine ersparnis
   verboten_behauptend:
   - kosten um 10 % bis 20 % im herbst eingespart werden können
-  rest_risiko: Frühzeitige Bestellung ist keine garantierte Ersparnis.
+  rest_risiko: Eine Angebotsanfrage oder frühere Bestellung garantiert keine Ersparnis.
   ledger_fassung_sha256: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
-  geprueft_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: ce7dd8c5ef0a596abbc4628c7be2878fc8ef9ded0c9acbbf3ff7cb29bc1ed602
+  entschieden_am: '2026-11-13'
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
 - id: 43788c2cdcdfda52e753
-  artikel: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
-  titel: 'Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden'
+  artikel: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  titel: 'Heizölpreise vergleichen: So planst du deine Bestellung'
   typ: luecke
   befund: Die Modellrechnung verwendet einen Tiefpreis von 0,80 €/Liter, ohne dass
     diese Preisangabe belegt wird.
-  entscheidung: 'Slug 2026-11-01 nicht mehr im Bestand: Artikel am 05.11.2026 umdatiert
-    auf 2026-11-05 (Draft/reserve, redaktionelle Prüfung ausstehend, nicht veroeffentlicht).
-    Die beanstandete Aussage (Tief Jan/Feb, 10–20 % Herbst-Ersparnis, Tiefpreis 0,80
-    €, 15 %-Fehler, 4-Wochen-Faustregel) ist im aktuellen Draft entfernt oder als
-    Modell/Beispiel gekennzeichnet; Befund gegenueber der dokumentierten Fassung gegenstandslos.'
+  entscheidung: >-
+    Der erfundene Tiefpreis von 0,80 Euro je Liter und die daran hängende Beispielrechnung wurden
+    entfernt. Die Ersatzrechnung verwendet ausschließlich konkrete Werte aus persönlichen
+    Angeboten.
   status: behoben
-  belegtyp: ergaenzt
-  beleg_url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  belegtyp: streichung
+  beleg_url: null
   anker:
-  - (beispielrechnung)
-  - 0,80 €
+  - eigene angebotsrechnung
+  - setze ausschließlich die werte aus den konkreten angeboten ein
+  - einen markt-tiefpreis
   verboten_behauptend:
   - tiefpreis von 0,80 €/liter ohne quell
-  rest_risiko: Der Tiefpreis ist ein Modellwert, kein Marktbeleg.
+  rest_risiko: Die Formel vergleicht individuelle Angebote, nicht Marktpreise oder Zeitpunkte.
   ledger_fassung_sha256: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
-  geprueft_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: ce7dd8c5ef0a596abbc4628c7be2878fc8ef9ded0c9acbbf3ff7cb29bc1ed602
+  entschieden_am: '2026-11-13'
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
 - id: 5eedec8afbdef6a4ca49
-  artikel: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
-  titel: 'Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden'
+  artikel: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  titel: 'Heizölpreise vergleichen: So planst du deine Bestellung'
   typ: luecke
   befund: Es wird angegeben, dass typische Fehler beim Heizölkauf bis zu 15 % Mehrkosten
     verursachen können, jedoch fehlt ein Nachweis für diese Zahl.
-  entscheidung: 'Slug 2026-11-01 nicht mehr im Bestand: Artikel am 05.11.2026 umdatiert
-    auf 2026-11-05 (Draft/reserve, redaktionelle Prüfung ausstehend, nicht veroeffentlicht).
-    Die beanstandete Aussage (Tief Jan/Feb, 10–20 % Herbst-Ersparnis, Tiefpreis 0,80
-    €, 15 %-Fehler, 4-Wochen-Faustregel) ist im aktuellen Draft entfernt oder als
-    Modell/Beispiel gekennzeichnet; Befund gegenueber der dokumentierten Fassung gegenstandslos.'
+  entscheidung: >-
+    Die pauschale Behauptung zu bis zu 15 Prozent Mehrkosten wurde gestrichen. Fehler werden nun
+    als prüfbare Vergleichsschritte beschrieben, nicht beziffert.
   status: behoben
-  belegtyp: ergaenzt
-  beleg_url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  belegtyp: streichung
+  beleg_url: null
   anker:
-  - das ist ein modellwert
-  - fehler beim kauf
+  - häufige fehler beim angebotsvergleich
+  - keine pauschale ersparnisrechnung
+  - prüfe stattdessen auch den endbetrag
   verboten_behauptend:
   - typische fehler beim heizölkauf bis zu 15 % mehrkosten
-  rest_risiko: Individuelle Kauffehler lassen sich nicht pauschal beziffern.
+  rest_risiko: Individuelle Kostenfolgen werden nicht pauschal beziffert.
   ledger_fassung_sha256: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
-  geprueft_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: ce7dd8c5ef0a596abbc4628c7be2878fc8ef9ded0c9acbbf3ff7cb29bc1ed602
+  entschieden_am: '2026-11-13'
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
 - id: 81881c5bc61824d25f5a
-  artikel: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
-  titel: 'Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden'
+  artikel: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  titel: 'Heizölpreise vergleichen: So planst du deine Bestellung'
   typ: praezision
   befund: Die Faustregel, dass man bestellen sollte, wenn Preise vier Wochen unter
     dem Schnitt der letzten 12 Monate liegen, wird ohne Messgrundlage oder Quelle
     genannt.
-  entscheidung: 'Slug 2026-11-01 nicht mehr im Bestand: Artikel am 05.11.2026 umdatiert
-    auf 2026-11-05 (Draft/reserve, redaktionelle Prüfung ausstehend, nicht veroeffentlicht).
-    Die beanstandete Aussage (Tief Jan/Feb, 10–20 % Herbst-Ersparnis, Tiefpreis 0,80
-    €, 15 %-Fehler, 4-Wochen-Faustregel) ist im aktuellen Draft entfernt oder als
-    Modell/Beispiel gekennzeichnet; Befund gegenueber der dokumentierten Fassung gegenstandslos.'
+  entscheidung: >-
+    Die 4-Wochen-Regel zum 12-Monatsdurchschnitt wurde samt Tiefpunkt-Prognose entfernt. Der
+    Entwurf enthält nur noch eine persönliche Erinnerungsroutine, ausdrücklich keine Marktregel.
   status: behoben
-  belegtyp: ergaenzt
-  beleg_url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  belegtyp: streichung
+  beleg_url: null
   anker:
-  - garantierter tiefpunkt
-  - orientierung ohne marktbeleg
+  - keine marktregel
+  - keine preisprognose
+  - bestimmten saisonalen bestellzeitpunkt können wir ohne
   verboten_behauptend: []
-  rest_risiko: Die Faustregel ist keine Marktprognose für Heizölpreise.
+  rest_risiko: Persönliche Erinnerungsroutinen sind keine Marktregel oder Preisprognose.
   ledger_fassung_sha256: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
-  geprueft_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: ce7dd8c5ef0a596abbc4628c7be2878fc8ef9ded0c9acbbf3ff7cb29bc1ed602
+  entschieden_am: '2026-11-13'
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
 - id: 0a2bec9dc02e16c057ee
   artikel: 2026-11-02-last-minute-urlaubsangebote-sichern
   titel: Last-Minute Urlaubsangebote sichern

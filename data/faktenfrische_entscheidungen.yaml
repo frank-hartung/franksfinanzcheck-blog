@@ -5289,3 +5289,78 @@ entscheidungen:
   vorgaenger_geprueft_fassung: 2e0bf5d87784e28b64fb68a123c8a49791870b59e5861cf09aec4c937943b9a8
   projektion: betrieb-v3
   folgeentscheidung: true
+- slug: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 0b564f460c41218244bd
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: ce7dd8c5ef0a596abbc4628c7be2878fc8ef9ded0c9acbbf3ff7cb29bc1ed602
+  typ: luecke
+  beanstandung: Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten
+    Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
+  entschieden_am: '2026-11-13'
+  fassung_wechsel: true
+  begruendung: Saisonale Tiefpreisbehauptung und Empfehlung Januar/Februar im aktuellen
+    Entwurf entfernt. Keine gleichwertige datierte Heizöl-Preisreihe vorhanden; der
+    Text nennt daher ausdrücklich keinen bevorzugten Monat.
+- slug: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 3ad2eefed314eb172c26
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: ce7dd8c5ef0a596abbc4628c7be2878fc8ef9ded0c9acbbf3ff7cb29bc1ed602
+  typ: luecke
+  beanstandung: Die Aussage, dass durch frühzeitige Bestellung Kosten um 10 % bis
+    20 % im Herbst eingespart werden können, ist unbelegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
+  entschieden_am: '2026-11-13'
+  fassung_wechsel: true
+  begruendung: Unbelegte Einsparspanne von 10 bis 20 Prozent samt Herbst- und Frühbestellversprechen
+    vollständig entfernt. Der Text stellt klar, dass frühere Anfrage keine Ersparnis
+    garantiert.
+- slug: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 43788c2cdcdfda52e753
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: ce7dd8c5ef0a596abbc4628c7be2878fc8ef9ded0c9acbbf3ff7cb29bc1ed602
+  typ: luecke
+  beanstandung: Die Modellrechnung verwendet einen Tiefpreis von 0,80 €/Liter, ohne
+    dass diese Preisangabe belegt wird.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
+  entschieden_am: '2026-11-13'
+  fassung_wechsel: true
+  begruendung: Der erfundene Tiefpreis von 0,80 Euro je Liter und die daran hängende
+    Beispielrechnung wurden entfernt. Die Ersatzrechnung verwendet ausschließlich
+    konkrete Werte aus persönlichen Angeboten.
+- slug: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 5eedec8afbdef6a4ca49
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: ce7dd8c5ef0a596abbc4628c7be2878fc8ef9ded0c9acbbf3ff7cb29bc1ed602
+  typ: luecke
+  beanstandung: Es wird angegeben, dass typische Fehler beim Heizölkauf bis zu 15 %
+    Mehrkosten verursachen können, jedoch fehlt ein Nachweis für diese Zahl.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
+  entschieden_am: '2026-11-13'
+  fassung_wechsel: true
+  begruendung: Die pauschale Behauptung zu bis zu 15 Prozent Mehrkosten wurde gestrichen.
+    Fehler werden nun als prüfbare Vergleichsschritte beschrieben, nicht beziffert.
+- slug: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
+  befund_id: 81881c5bc61824d25f5a
+  befund_fassung: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
+  geprueft_fassung: ce7dd8c5ef0a596abbc4628c7be2878fc8ef9ded0c9acbbf3ff7cb29bc1ed602
+  typ: praezision
+  beanstandung: Die Faustregel, dass man bestellen sollte, wenn Preise vier Wochen
+    unter dem Schnitt der letzten 12 Monate liegen, wird ohne Messgrundlage oder Quelle
+    genannt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
+  entschieden_am: '2026-11-13'
+  fassung_wechsel: true
+  begruendung: Die 4-Wochen-Regel zum 12-Monatsdurchschnitt wurde samt Tiefpunkt-Prognose
+    entfernt. Der Entwurf enthält nur noch eine persönliche Erinnerungsroutine, ausdrücklich
+    keine Marktregel.
