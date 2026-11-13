@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-12T16:09:00.051702+02:00",
+ "stand": "2026-11-13T15:36:31.127763+02:00",
  "rankings": [
   {
    "anfrage": "DSL Anbieter Vergleich",
@@ -83,16 +83,6 @@
   },
   {
    "anfrage": "Stromanbieter wechseln",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Tipps",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,

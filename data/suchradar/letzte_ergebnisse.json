@@ -1,25 +1,25 @@
 {
- "zeitstempel": "2026-11-12T16:09:00.051702+02:00",
+ "zeitstempel": "2026-11-13T15:36:31.127763+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 25,
  "zaehlung": {
-  "ok": 23,
+  "ok": 22,
   "cache": 0,
-  "fehler": 2,
+  "fehler": 3,
   "uebersprungen": 0
  },
- "treffer_gesamt": 197,
+ "treffer_gesamt": 187,
  "treffer_organisch": 0,
  "datenqualitaet": {
-  "anfragen_erfolgreich": 23,
+  "anfragen_erfolgreich": 22,
   "anfragen_organisch": 0,
-  "anfragen_rueckfall": 23,
-  "treffer_gesamt": 197,
+  "anfragen_rueckfall": 22,
+  "treffer_gesamt": 187,
   "treffer_organisch": 0,
-  "treffer_rueckfall": 197,
+  "treffer_rueckfall": 187,
   "rueckfall_anteil": 1.0,
   "anbieter": {
-   "wikipedia": 23
+   "wikipedia": 22
   },
   "aussagekraft": "keine"
  },
@@ -31,6 +31,10 @@
   {
    "anfrage": "Gaskosten senken",
    "fehler": "Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: keine Treffer | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
+  },
+  {
+   "anfrage": "Urlaubskosten planen",
+   "fehler": "Kein Anbieter lieferte Treffer für 'Urlaubskosten planen': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: keine Treffer | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   }
  ],
  "rang": [
@@ -116,16 +120,6 @@
   },
   {
    "anfrage": "Stromanbieter wechseln",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Tipps",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -271,6 +265,6 @@
   "merkmale": {}
  },
  "quota": {
-  "wikipedia": 23
+  "wikipedia": 22
  }
 }
