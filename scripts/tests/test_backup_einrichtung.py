@@ -1135,6 +1135,111 @@ class Exportvertrag(unittest.TestCase):
         self.assertEqual(rc, 1, "ein Export, den die eigene Probe bemängelt, war grün")
 
 
+class KVExportIntegritaet(unittest.TestCase):
+    """Keine Teilseiten oder API-Fehler als wiederherstellbare Sicherung ausgeben."""
+
+    def setUp(self):
+        import kv_backup
+        from unittest.mock import patch
+        self.kb = kv_backup
+        self.patch = patch.object(kv_backup, "HTTP")
+        self.http = self.patch.start()
+        self.addCleanup(self.patch.stop)
+
+    def test_paginierung_und_besondere_werte(self):
+        self.http.side_effect = [
+            {"success": True, "result": [{"name": "a"}], "result_info": {"cursor": "next"}},
+            {"success": True, "result": [{"name": "b"}], "result_info": {"cursor": ""}},
+            {"success": True, "result": {"values": {"a": '{"x":1}', "b": ""}}},
+        ]
+        keys = self.kb.kv_schluessel("t", "a", "n")
+        self.assertIn("cursor=next", self.http.call_args.args[1])
+        self.assertEqual(self.kb.kv_werte("t", "a", "n", [k["name"] for k in keys]),
+                         {"a": '{"x":1}', "b": ""})
+
+    def test_unvollstaendige_schluessellisten_sind_nicht_leer(self):
+        faelle = [
+            {"success": True},
+            {"success": True, "result": [], "result_info": []},
+            {"success": True, "result": [None], "result_info": {"cursor": ""}},
+            {"success": True, "result": [{"name": "a", "expiration": "bad"}], "result_info": {"cursor": ""}},
+            {"success": False, "result": [], "result_info": {"cursor": ""}},
+        ]
+        for antwort in faelle:
+            with self.subTest(antwort=antwort):
+                self.http.return_value = antwort
+                with self.assertRaises(RuntimeError):
+                    self.kb.kv_schluessel("t", "a", "n")
+
+    def test_cursorzyklus_und_doppelter_schluessel(self):
+        for seiten in ([{"name": "a"}, {"name": "b"}], [{"name": "a"}, {"name": "a"}]):
+            self.http.side_effect = [
+                {"success": True, "result": [seiten[0]], "result_info": {"cursor": "next"}},
+                {"success": True, "result": [seiten[1]], "result_info": {"cursor": "next"}},
+            ]
+            with self.assertRaises(RuntimeError):
+                self.kb.kv_schluessel("t", "a", "n")
+
+    def test_bulk_fehler_und_teilantworten_ohne_fallback(self):
+        for antwort in [
+            {"success": False, "errors": [{"message": "secret"}]},
+            {"success": True, "result": {"values": {}}},
+            {"success": True, "result": {"values": {"private-key": None}}},
+            {"success": True, "result": {"values": {"private-key": "ok", "extra": "x"}}},
+            {"success": True, "result": []},
+        ]:
+            with self.subTest(antwort=antwort):
+                self.http.reset_mock(side_effect=True)
+                self.http.return_value = antwort
+                with self.assertRaises(RuntimeError) as ctx:
+                    self.kb.kv_werte("t", "a", "n", ["private-key"])
+                self.assertNotIn("private-key", str(ctx.exception))
+                self.assertNotIn("secret", str(ctx.exception))
+                self.http.assert_called_once()
+
+    def test_bulk_mehr_als_100_schluessel_und_fehler_im_zweiten_paket(self):
+        namen = [f"key-{i}" for i in range(101)]
+        self.http.side_effect = [
+            {"success": True, "result": {"values": {n: "x" for n in namen[:100]}}},
+            {"success": False},
+        ]
+        with self.assertRaises(RuntimeError):
+            self.kb.kv_werte("t", "a", "n", namen)
+        self.assertEqual(self.http.call_count, 2)
+
+    def test_http_fehler_mit_success_true_bleibt_fehler(self):
+        from unittest.mock import patch
+        import urllib.error
+        fehler = urllib.error.HTTPError("https://example.invalid", 403, "Forbidden", {},
+                                        io.BytesIO(b'{"success":true}'))
+        with patch("urllib.request.urlopen", side_effect=fehler):
+            antwort = self.kb._http("GET", "https://example.invalid", "t")
+        self.assertIs(antwort["success"], False)
+        self.assertEqual(antwort["_status"], 403)
+
+    def test_fehlender_cursor_ist_laut_api_zulaessiges_ende(self):
+        for info in ({}, None):
+            self.http.return_value = {"success": True, "result": [], "result_info": info}
+            self.assertEqual(self.kb.kv_schluessel("t", "a", "n"), [])
+
+    def test_d1_sonderzeichen_werden_gesichert_nicht_uebersprungen(self):
+        self.http.side_effect = [
+            {"success": True, "result": [{"results": [{"name": 'clicks-"2026'}]}]},
+            {"success": True, "result": [{"results": [{"n": 7}]}]},
+        ]
+        self.assertEqual(self.kb.d1_export("t", "a", "db"), {'clicks-"2026': [{"n": 7}]})
+        self.assertEqual(self.http.call_args.args[3]["sql"], 'SELECT * FROM "clicks-""2026"')
+
+    def test_d1_ungueltige_tabellenliste_und_abfragefehler(self):
+        for antwort in [
+            {"success": True, "result": [{"results": [{"name": "ok"}, {}]}]},
+            {"success": True, "result": [{"success": False, "results": []}]},
+        ]:
+            self.http.return_value = antwort
+            with self.assertRaises(RuntimeError):
+                self.kb.d1_export("t", "a", "db")
+
+
 class FrischwacheEinrichtungVertrag(unittest.TestCase):
     """#923 (02.11.2026): Die Frischwache meldete grün, während nichts gesichert wurde.
 

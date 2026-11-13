@@ -1,5 +1,19 @@
 """Offline-Regression für die redaktionelle Heilung von Issue #1072.
 
+Stand 05.11.2026. Geprüft werden Bedeutungs-Invarianten, Beleg-Urls und
+die Registerbindung, keine starren Formulierungen (Lehre aus #763/#823).
+Nummerierung wie im Register `data/faktenfrische_befunde_1072.yaml`.
+
+Dauerhaftigkeit heißt hier dreierlei:
+  1. Die 47 beanstandeten Aussagen dürfen behauptend nie zurückkehren;
+     Dämpfungen, Verneinungen und ausdrücklich verworfene Beispiele
+     bleiben erlaubt.
+  2. Historische Anker und Belege gelten nur für die geprüfte Fassung. Fehlen
+     sie nach einer Textänderung, muss derselbe Befund im Ledger offen und
+     als überholt erkennbar sein; ein neues `faktencheck`-Datum schließt ihn
+     nicht und die Redaktion muss die neue Fassung prüfen.
+  3. Gate-Parität: Beleg-Urls stammen aus der Allowlist und stehen in den
+     Artikelquellen; Register und Ledger stimmen überein.
 Stand 12.11.2026 (zweite Runde). Geprüft werden Bedeutungs-Invarianten,
 Beleg-Urls und die Registerbindung, keine starren Formulierungen
 (Lehre aus #763/#823). Nummerierung wie im Register
@@ -130,12 +144,34 @@ def allowlist_domains():
     return [q['domain'] for q in data['quellen_allowlist']]
 
 
+def historischer_mangel_ist_offen(befund, offene):
+    """Ein veralteter Beleg ist nur akzeptabel, wenn genau dieser Befund offen ist.
+
+    Keine Entscheidung wird erzeugt: Das Publish-Gate/Scorecard hält den
+    überholten Befund bis zur menschlichen Prüfung der aktuellen Fassung offen.
+    """
+    eintrag = offene.get((befund['artikel'], befund['id']))
+    return isinstance(eintrag, dict) and eintrag.get('fassung_status') == 'ueberholt'
 def meta_flaeche(fm):
     return ' '.join(str(fm.get(k, '')) for k in META_FELDER)
 
 
 class Faktenfrische1072RegisterTests(unittest.TestCase):
     """Register-Struktur und -Konsistenz mit Ledger/Queue."""
+
+    @classmethod
+    def setUpClass(cls):
+        import faktenfrische_befund_ledger as ledger
+        cls.offene = {(b['slug'], b['id']): b for b in ledger.befunde_mit_status()}
+
+    def test_historischer_mangel_braucht_exakt_denselben_offenen_befund(self):
+        b = {'artikel': 'probe', 'id': 'id-1'}
+        self.assertTrue(historischer_mangel_ist_offen(b, {
+            ('probe', 'id-1'): {'fassung_status': 'ueberholt'}}))
+        for offene in ({}, {('anderer', 'id-1'): {'fassung_status': 'ueberholt'}},
+                       {('probe', 'id-2'): {'fassung_status': 'ueberholt'}},
+                       {('probe', 'id-1'): {'fassung_status': 'aktuell'}}):
+            self.assertFalse(historischer_mangel_ist_offen(b, offene))
 
     def test_register_issue_und_stand(self):
         reg = register()
@@ -190,6 +226,10 @@ class Faktenfrische1072RegisterTests(unittest.TestCase):
                     cache[b['artikel']] = norm(meta_flaeche(fm) + ' ' + body)
                 joined = cache[b['artikel']]
                 for anker in b['anker']:
+                    if norm(anker) not in joined:
+                        self.assertTrue(historischer_mangel_ist_offen(b, self.offene),
+                                        f'Anker fehlt und Befund ist nicht als überholt offen: '
+                                        f'{anker!r} ({b["id"]})')
                     self.assertIn(
                         norm(anker), joined,
                         f'Anker fehlt: {anker!r} ({b["id"]}). Der Text wurde nach der '
@@ -267,6 +307,11 @@ class Faktenfrische1072RegisterTests(unittest.TestCase):
                     cache[b['artikel']] = read(b['artikel'])[0]
                 fm = cache[b['artikel']]
                 quellen = [q['url'] for q in (fm.get('quellen') or [])]
+                if quellen:
+                    if b['beleg_url'] not in quellen:
+                        self.assertTrue(historischer_mangel_ist_offen(b, self.offene),
+                                        f'Beleg fehlt und Befund ist nicht als überholt offen: '
+                                        f'{b["beleg_url"]} ({b["id"]})')
                 self.assertIn(b['beleg_url'], quellen,
                               f'Beleg steht nicht in den Artikelquellen: {b["beleg_url"]}')
 
