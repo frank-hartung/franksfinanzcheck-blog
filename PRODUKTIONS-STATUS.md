@@ -1,6 +1,6 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-11-13 00:59 UTC  
+**Stand:** 2026-11-13 14:38 UTC  
 **Stufe:** OK  
 **Befund:** Letzter Publikationstag (2026-11-13): 2 Artikel – Ziel erfüllt. – Bestand: 2 von Gates gehalten (ältester 4 Tage: faktenfrische: 11a92bff688ccbb5a485 (luecke): Die Behauptung, dass bis zum Sommer 500 € mehr im Urlaubsbudget verfügbar sind, fehlt eine Quellenangabe.; 1d4896d8ed60f5b6921f (pr…)
 
