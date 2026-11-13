@@ -1,0 +1,74 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//FranksFinanzcheck//Shorts-Schmiede Kalender//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:FranksFinanzcheck – Reels & Shorts
+X-WR-TIMEZONE:Europe/Berlin
+BEGIN:VEVENT
+UID:video-20261114@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261114T062000Z
+DTEND:20261114T070500Z
+SUMMARY:Shorts-Schmiede: Reels & Shorts produzieren
+DESCRIPTION:Bis zu 2 vertikale Kurzvideos (9:16) aus jungen Artikeln\,
+  Upload auf YouTube Shorts / Instagram Reels.
+STATUS:TENTATIVE
+RRULE:FREQ=WEEKLY;BYDAY=TU,SA;COUNT=1
+END:VEVENT
+BEGIN:VEVENT
+UID:video-20261117@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261117T062000Z
+DTEND:20261117T070500Z
+SUMMARY:Shorts-Schmiede: Reels & Shorts produzieren
+DESCRIPTION:Bis zu 2 vertikale Kurzvideos (9:16) aus jungen Artikeln\,
+  Upload auf YouTube Shorts / Instagram Reels.
+STATUS:TENTATIVE
+RRULE:FREQ=WEEKLY;BYDAY=TU,SA;COUNT=1
+END:VEVENT
+BEGIN:VEVENT
+UID:video-20261121@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261121T062000Z
+DTEND:20261121T070500Z
+SUMMARY:Shorts-Schmiede: Reels & Shorts produzieren
+DESCRIPTION:Bis zu 2 vertikale Kurzvideos (9:16) aus jungen Artikeln\,
+  Upload auf YouTube Shorts / Instagram Reels.
+STATUS:TENTATIVE
+RRULE:FREQ=WEEKLY;BYDAY=TU,SA;COUNT=1
+END:VEVENT
+BEGIN:VEVENT
+UID:video-20261124@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261124T062000Z
+DTEND:20261124T070500Z
+SUMMARY:Shorts-Schmiede: Reels & Shorts produzieren
+DESCRIPTION:Bis zu 2 vertikale Kurzvideos (9:16) aus jungen Artikeln\,
+  Upload auf YouTube Shorts / Instagram Reels.
+STATUS:TENTATIVE
+RRULE:FREQ=WEEKLY;BYDAY=TU,SA;COUNT=1
+END:VEVENT
+BEGIN:VEVENT
+UID:video-20261128@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261128T062000Z
+DTEND:20261128T070500Z
+SUMMARY:Shorts-Schmiede: Reels & Shorts produzieren
+DESCRIPTION:Bis zu 2 vertikale Kurzvideos (9:16) aus jungen Artikeln\,
+  Upload auf YouTube Shorts / Instagram Reels.
+STATUS:TENTATIVE
+RRULE:FREQ=WEEKLY;BYDAY=TU,SA;COUNT=1
+END:VEVENT
+BEGIN:VEVENT
+UID:video-20261201@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261201T062000Z
+DTEND:20261201T070500Z
+SUMMARY:Shorts-Schmiede: Reels & Shorts produzieren
+DESCRIPTION:Bis zu 2 vertikale Kurzvideos (9:16) aus jungen Artikeln\,
+  Upload auf YouTube Shorts / Instagram Reels.
+STATUS:TENTATIVE
+RRULE:FREQ=WEEKLY;BYDAY=TU,SA;COUNT=1
+END:VEVENT
+END:VCALENDAR
