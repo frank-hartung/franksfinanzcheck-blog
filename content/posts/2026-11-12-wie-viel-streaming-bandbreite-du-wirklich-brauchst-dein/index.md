@@ -1,9 +1,9 @@
 ---
 title: "Wie viel Streaming‑Bandbreite: Du wirklich brauchst"
 description: "Streaming Bandbreite: Ruckel So sparst du jeden Monat bares Geld. Schritt für Schritt erklärt – ohne Fachchinesisch. Mit praktischen Tipps für den Alltag."
-date: 2026-11-12T17:09:12Z
-draft: true
-reserve: true
+date: 2026-11-13T00:30:17Z
+draft: false
+reserve_published: 2026-11-13
 tags: ["DSL-Vergleich", "Internet und Mobilfunk", "WLAN verbessern", "DNS und Netzsicherheit"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"

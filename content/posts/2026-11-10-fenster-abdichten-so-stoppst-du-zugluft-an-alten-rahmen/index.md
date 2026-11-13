@@ -1,9 +1,9 @@
 ---
 title: "Fenster abdichten: So stoppst du Zugluft an alten Rahmen"
 description: "Fenster abdichten leicht gemacht: Mit diesen Tipps kannst du Zugluft stoppen und effektiv Heizkosten senken. Erfahre jetzt, worauf es ankommt."
-date: 2026-11-10T11:34:25Z
-draft: true
-reserve: true
+date: 2026-11-13T00:29:05Z
+draft: false
+reserve_published: 2026-11-13
 tags: ["Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
