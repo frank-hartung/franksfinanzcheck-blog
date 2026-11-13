@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-13T00:40:03Z",
+  "generated_at": "2026-11-13T08:09:13Z",
   "modus": "kandidaten",
-  "commit": "6e761385395a9b62aeff354d7aec2534a40ffae3",
+  "commit": "04abbb9452c847b4d2ae0e6bcb7a66f243b8db32",
   "kapazitaet": {
     "stichtag": "2026-11-13",
     "basis": "2026-11-13",
@@ -1757,7 +1757,7 @@
       "checks": []
     },
     "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen": {
-      "sha256": "effbf3dfc286f03ea6df33717456a0399bc0b3e0ec58f3089062cbcd54fbadab",
+      "sha256": "196ee6a28a0efe7919b0d07079a5af7801244265a00b859cc87ce1f7d88c4a59",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1771,7 +1771,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-29",
-      "siegel_drift": "neu versiegelt",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
@@ -1814,7 +1814,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-24",
-      "siegel_drift": "neu versiegelt",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "Q2-quellen-vorhanden",
