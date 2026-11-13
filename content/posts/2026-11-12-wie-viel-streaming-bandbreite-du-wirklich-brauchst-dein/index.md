@@ -8,9 +8,9 @@ tags: ["DSL-Vergleich", "Internet und Mobilfunk", "WLAN verbessern", "DNS und Ne
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["Streaming Bandbreite", "Internetgeschwindigkeit", "Streaming ruckelt", "Wie viel Streaming‑Bandbreite", "Streaming"]
+keywords: ["Streaming Bandbreite", "Internetgeschwindigkeit", "Streaming ruckelt", "Wie viel Streaming‑Bandbreite", "Bandbreite"]
 pin_title: "Wie viel Streaming‑Bandbreite: Du wirklich brauchst – dein"
-pin_description: "*Werbung | Streaming Bandbreite: Erhalte klare Antworten, wie viel… Mehr Spartipps auf FranksFinanzcheck! #streaming #bandbreite #internetgeschwindigkeit"
+pin_description: "*Werbung | Streaming Bandbreite: Ruckel So sparst du jeden Monat bares Geld. Schritt für Schritt erklärt – ohne Fachchinesisch. Mit praktischen Tipps für den Alltag. Mehr Spartipps auf FranksFinanzcheck! #streaming #bandbreite #internetgeschwindigkeit"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
