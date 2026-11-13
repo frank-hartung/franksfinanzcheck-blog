@@ -36,10 +36,12 @@ faktenfrische_aliases:
   - "2026-11-09-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen"
 ---
 
-Draußen sinken die Temperaturen.  
+Fenster abdichten im Check: Draußen sinken die Temperaturen.  
 Du sitzt auf dem Sofa und spürst einen kühlen Hauch am Nacken.  
 Die Heizung läuft auf Hochtouren, doch das Zimmer bleibt kühl.  
-Ein Blick auf die alten Holzrahmen zeigt oft das Problem.  
+Ein Blick auf die alten Holzrahmen zeigt oft das Problem.
+
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Die Dichtungen sind spröde oder fehlen ganz.  
 Teure neue Fenster sind meist nicht sofort nötig.  
