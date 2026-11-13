@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 13.11.2026 14:13 (Europe/Berlin)  
+> Automatisch aktualisiert: 13.11.2026 21:31 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -12,21 +12,18 @@
 
 ## Kommende Beiträge
 
-### Fr, 13. November 2026
-- **18:00** ⏳ Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/
 ### Sa, 14. November 2026
+- **07:00** ⏳ Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/
+### So, 15. November 2026
 - **07:00** ⏳ Flugverspätung Entschädigung: So holst du dein Geld zurück — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/
-### So, 15. November 2026
+### Sa, 21. November 2026
 - **07:00** ⏳ Wohngebäudeversicherung Vergleich: Worauf du achten musst — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/
-### Sa, 21. November 2026
+### So, 22. November 2026
 - **07:00** ⏳ Energieausweis: Was er für deine Fixkosten bedeutet — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/
-### So, 22. November 2026
-- **07:00** ⏳ Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/
 
 ## Zuletzt veröffentlicht
 
