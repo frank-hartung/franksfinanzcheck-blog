@@ -119,7 +119,7 @@ Wenn du zu früh kündigst, zahlst du oft doppelt oder musst hohe Gebühren trag
 
 ## Faustregel für die Bandbreite
 
-Hier ist eine einfache Regel für deinen Alltag. Sie hilft dir, wenn du schnell eine Entscheidung treffen musst.
+Hier ist eine einfache Regel für deinen Alltag. Sie hilft dir, wenn du schnell entscheiden musst.
 
 **Faustregel:** Rechne pro Gerät mit 25 Mbps für 4K und mit 5 Mbps für HD. Addiere alle Geräte, die zur gleichen Zeit laufen sollen. Schlage am Ende noch einmal 10 % als Sicherheit oben drauf. Dieser Puffer fängt kleine Schwankungen in der Leitung ab. So bleibt dein Bild auch dann scharf, wenn das Netz mal kurz etwas langsamer wird.
 
