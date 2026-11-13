@@ -39,20 +39,28 @@ Aufruf (als Bibliothek; CLI lebt im Gate)
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
 import subprocess
 import sys
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
+from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import quote, urljoin, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 
 # --------------------------------------------------------------------------
 #  VOKABULAR – genau einmal, für Vorlagen und Wache zugleich
 # --------------------------------------------------------------------------
+
+#: Schutzvertrag für die konkret überwachte Bestandsfrist. Eine Änderung der
+#: Rechtslage verlangt eine bewusste gemeinsame Anpassung des Kalenders.
+FRIST_ID = "ki-vo-kennzeichnung-bestand"
+FRIST_DATUM = "2026-12-02"
 
 #: Reihenfolge ist Vertrag: `delimit` im Template erzeugt „text,image,audio".
 MODALITAETEN = ("text", "image", "audio")
@@ -70,6 +78,13 @@ ANKER = {
 #: keine Adressen; dokumentiert in docs/KI-TRANSPARENZ-ABNAHME.md §3b.
 NAMESPACE = "https://franksfinanzcheck.de/ns/ki-provenance/1.0/"
 NAMESPACE_KURZ = "ffki"
+
+#: Ergänzende Angaben auf Verbreitungswegen. Sie unterscheiden Zielartikel,
+#: dessen Cover und einen separat generierten Pin-Text. Die Präsenz in einem
+#: Payload beweist weder eine Anbieter-Markierung noch die Plattformanzeige.
+SOCIAL_TEXT = "Zielartikel: mit KI erstellt oder bearbeitet."
+SOCIAL_BILD = "Zielartikel-Cover: mit KI erstellt oder bearbeitet."
+SOCIAL_PIN = "Pin-Text: mit KI erstellt oder bearbeitet."
 
 #: IPTC-Vokabular für die Bild-Erzeugungsart (dieselbe Liste wie in
 #: scripts/ki_bild_markierung.py – dort steht sie als ERLAUBTE_TYPEN).
@@ -218,7 +233,10 @@ def _basis_von(rel: Path, pfad: Path, kopf: str) -> str:
         return url.strip("/")
     verz = rel.parent
     if pfad.name == "index.md":
-        teile = verz.parts
+        # Auch ein Leaf-Bundle kann in Hugo einen expliziten slug tragen.
+        # Der Verzeichnisname ist dann NICHT der veröffentlichte URL-Pfad.
+        slug = pfad_wert(kopf, ("slug",))
+        teile = verz.parent.parts + (slug,) if slug else verz.parts
     else:
         slug = pfad_wert(kopf, ("slug",)) or pfad.stem
         teile = verz.parts + (slug,)
@@ -268,36 +286,137 @@ def seiten(root: Path = ROOT, *, nur_abschnitte: tuple[str, ...] | None = None) 
 #  Bauprodukt: was tatsächlich ausgeliefert wird
 # --------------------------------------------------------------------------
 
-_META = re.compile(r"""<meta\s+name=["']?ai-generated["']?\s+content=["']?(true|false)["']?""", re.I)
-_SCOPE = re.compile(r"""<meta\s+name=["']?ai-generated-scope["']?\s+content=["']?([a-z,]*)["']?""", re.I)
-_TOOLBAR = re.compile(r"""<(div|section)[^>]{0,120}class=["']?ff-voice-slot""", re.I)
-_CREDIT = re.compile(r""""creditText"\s*:\s*"([^"]{0,200})" """, re.I)
+_VOID_TAGS = frozenset({"area", "base", "br", "col", "embed", "hr", "img", "input",
+                        "link", "meta", "param", "source", "track", "wbr"})
+_ANZEIGETEXTE = {
+    "text": ("mit ki erstellt oder bearbeitet",),
+    "image": ("bild mit ki erstellt oder bearbeitet",),
+    "audio": ("ki-stimme", "ai voice"),
+}
+
+
+class _DokumentSignale(HTMLParser):
+    """Tatsächliche Elemente statt Treffer in Kommentaren oder fremden Links.
+
+    HTMLParser berücksichtigt unquotierte/minifizierte Attribute. Versteckte
+    oder leere Marker zählen nicht als Hinweis. CSS und Screenreader-Verhalten
+    sind damit nicht nachgewiesen und bleiben Teil der Live-Abnahme.
+    """
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.stapel = []
+        self.meta = []
+        self.scope = []
+        self.ziele = []
+        self.marker = {m: [] for m in ANKER}
+        self.bilder = []
+        self.toolbar = False
+        self.jsonld = []
+
+    def handle_starttag(self, tag, attrs):
+        werte = {k.lower(): (v or "") for k, v in attrs}
+        im_kopf = any(frame["tag"] == "head" for frame in self.stapel)
+        if im_kopf and tag == "meta":
+            name = werte.get("name", "").lower()
+            if name == "ai-generated":
+                self.meta.append(werte.get("content", ""))
+            elif name == "ai-generated-scope":
+                self.scope.append(werte.get("content", ""))
+        if im_kopf and tag == "link" and "describedby" in werte.get("rel", "").lower().split():
+            self.ziele.append(werte.get("href", ""))
+        klassen = werte.get("class", "").split()
+        if tag in ("div", "section") and "ff-voice-slot" in klassen:
+            self.toolbar = True
+        if tag == "img":
+            self.bilder.append(werte)
+
+        stil = re.sub(r"\s+", "", werte.get("style", "").lower())
+        versteckt = (bool(self.stapel and self.stapel[-1]["versteckt"])
+                      or "hidden" in werte or tag in ("template", "script", "style", "noscript")
+                      or "display:none" in stil or "visibility:hidden" in stil
+                      or bool({"sr-only", "visually-hidden", "hidden"} & set(klassen)))
+        marker = []
+        for modalitaet, attribut in ANKER.items():
+            if attribut in werte:
+                eintrag = {"versteckt": versteckt, "text": []}
+                self.marker[modalitaet].append(eintrag)
+                marker.append(eintrag)
+        if tag not in _VOID_TAGS:
+            self.stapel.append({"tag": tag, "versteckt": versteckt, "marker": marker,
+                                "jsonld": [] if im_kopf and tag == "script" and
+                                werte.get("type", "").lower() == "application/ld+json"
+                                else None})
+
+    def handle_startendtag(self, tag, attrs):
+        self.handle_starttag(tag, attrs)
+        if tag not in _VOID_TAGS:
+            self.handle_endtag(tag)
+
+    def handle_endtag(self, tag):
+        for index in range(len(self.stapel) - 1, -1, -1):
+            if self.stapel[index]["tag"] == tag:
+                for frame in self.stapel[index:]:
+                    if frame["jsonld"] is not None:
+                        self.jsonld.append("".join(frame["jsonld"]))
+                del self.stapel[index:]
+                break
+
+    def handle_data(self, daten):
+        if not self.stapel:
+            return
+        if not self.stapel[-1]["versteckt"]:
+            for frame in self.stapel:
+                for marker in frame["marker"]:
+                    marker["text"].append(daten)
+        for frame in self.stapel:
+            if frame["jsonld"] is not None:
+                frame["jsonld"].append(daten)
 
 
 def signale(html: str) -> dict:
-    """Alle maschinenlesbaren und sichtbaren Angaben einer gebauten Seite.
+    """Signale der gebauten Seite strukturiert lesen; keine CSS-Liveprüfung."""
+    parser = _DokumentSignale()
+    parser.feed(html)
+    parser.close()
+    artikel = []
+    json_fehler = []
 
-    Bewusst aus dem BAUPRODUKT gelesen, nicht aus dem Frontmatter: Eine
-    halbe Regression (ein Kanal da, der andere weg) fällt nur auf, wenn die
-    ausgelieferte Wahrheit verglichen wird.
+    def artikel_sammeln(daten):
+        if isinstance(daten, list):
+            for eintrag in daten:
+                artikel_sammeln(eintrag)
+        elif isinstance(daten, dict):
+            typ = daten.get("@type")
+            if typ == "Article" or (isinstance(typ, list) and "Article" in typ):
+                artikel.append(daten)
+            if "@graph" in daten:
+                artikel_sammeln(daten["@graph"])
 
-    Die Tonspur wird aus dem Vorhandensein der Lesehilfe abgeleitet – nicht
-    aus einer nachgebauten Template-Bedingung. So folgt die Wache der
-    Ausspielung, auch wenn jemand die Bedingung in ff_voice_toolbar.html
-    ändert; ein zweiter Pflegeort wäre genau der Fehler, den M4 verhindern
-    soll.
-    """
-    meta = _META.search(html)
-    scope = _SCOPE.search(html)
-    bereiche = tuple(b for b in (scope.group(1).split(",") if scope else ()) if b in MODALITAETEN)
+    for block in parser.jsonld:
+        try:
+            artikel_sammeln(json.loads(block))
+        except (TypeError, ValueError) as exc:
+            json_fehler.append(str(exc))
+    sichtbare = {}
+    for modalitaet, eintraege in parser.marker.items():
+        sichtbare[modalitaet] = any(
+            not eintrag["versteckt"] and any(
+                erwartung in " ".join("".join(eintrag["text"]).lower().split())
+                for erwartung in _ANZEIGETEXTE[modalitaet])
+            for eintrag in eintraege)
+    scope = parser.scope[0] if parser.scope else ""
     return {
-        "meta": bool(meta and meta.group(1).lower() == "true"),
-        "bereiche": bereiche,
-        "describedby": "rel=describedby" in html or 'rel="describedby"' in html,
-        "toolbar": bool(_TOOLBAR.search(html)),
-        "anker": {m: (a in html) for m, a in ANKER.items()},
-        "credit": (_CREDIT.search(html).group(1) if _CREDIT.search(html) else ""),
-        "bild_attribut": "data-digital-source-type" in html,
+        "meta": parser.meta == ["true"], "meta_werte": parser.meta,
+        "bereiche": tuple(b for b in scope.split(",") if b in MODALITAETEN),
+        "scope_werte": parser.scope,
+        "describedby": bool(parser.ziele), "describedby_ziele": parser.ziele,
+        "toolbar": parser.toolbar, "anker": sichtbare,
+        "anker_vorhanden": {m: bool(e) for m, e in parser.marker.items()},
+        "artikel": artikel, "json_fehler": json_fehler,
+        "credit": artikel[0].get("creditText", "") if artikel else "",
+        "bilder": parser.bilder,
+        "bild_attribut": any("data-digital-source-type" in bild for bild in parser.bilder),
     }
 
 
@@ -319,67 +438,326 @@ def erwartet(seite: Seite, sig: dict) -> tuple[str, ...]:
 
 
 # --------------------------------------------------------------------------
-#  Feed
+#  Feed und Social-Verbreitung
 # --------------------------------------------------------------------------
+
+def _social_fakten(kopf: str, root: Path | None = None) -> tuple[bool, bool, Path | None]:
+    """Deklaration und, bei KI-Covern, fassungsgebundenen Bildnachweis lesen.
+
+    Publisher laufen unabhängig vom Hugo-Deploy. Defektes/mehrdeutiges YAML
+    ist nicht „keine Angabe“. Fehlende Flags sind kein Herkunftsnachweis. Ein
+    deklariertes KI-Cover muss dieselbe Hash-/Quellen-/Datum-/Deepfake-Prüfung
+    wie beim Deploy bestehen und das erwartete IPTC-Feld tragen.
+    """
+    if not kopf.strip():
+        raise WerkzeugFehler("Frontmatter für Pinterest fehlt")
+    try:
+        import yaml  # Publisher-Workflows installieren requirements-ci.txt
+        from yaml.nodes import MappingNode, ScalarNode
+        baum = yaml.compose(kopf, Loader=yaml.SafeLoader)
+    except ImportError as exc:
+        raise WerkzeugFehler("PyYAML für Pinterest-Kennzeichnung fehlt") from exc
+    except Exception as exc:
+        raise WerkzeugFehler(f"Frontmatter für Pinterest ungültig: {exc}") from exc
+    if not isinstance(baum, MappingNode):
+        raise WerkzeugFehler("Frontmatter für Pinterest ist kein YAML-Objekt")
+
+    def feld(knoten, name):
+        if any(isinstance(k, ScalarNode) and k.tag == "tag:yaml.org,2002:merge"
+               for k, _ in knoten.value):
+            raise WerkzeugFehler("Frontmatter für Pinterest: YAML-Merge nicht eindeutig messbar")
+        treffer = [v for k, v in knoten.value
+                   if isinstance(k, ScalarNode) and k.value.lower() == name]
+        if len(treffer) > 1:
+            raise WerkzeugFehler(f"Frontmatter für Pinterest: {name} mehrfach")
+        return treffer[0] if treffer else None
+
+    def boolean(knoten, name):
+        if knoten is None:
+            return False
+        if (not isinstance(knoten, ScalarNode)
+                or knoten.tag != "tag:yaml.org,2002:bool"
+                or knoten.value.lower() not in ("true", "false")):
+            raise WerkzeugFehler(f"Frontmatter für Pinterest: {name} ist kein true/false")
+        return knoten.value.lower() == "true"
+
+    def zeichen(knoten):
+        if (isinstance(knoten, ScalarNode)
+                and knoten.tag in ("tag:yaml.org,2002:str", "tag:yaml.org,2002:timestamp")):
+            return knoten.value
+        return None
+
+    text = boolean(feld(baum, "ai_generated"), "ai_generated")
+    cover = feld(baum, "cover")
+    original = None
+    if cover is None or (isinstance(cover, ScalarNode) and
+                         cover.tag == "tag:yaml.org,2002:null"):
+        bild = False
+    elif isinstance(cover, MappingNode):
+        bild = boolean(feld(cover, "ai_generated"), "cover.ai_generated")
+        if bild:
+            pruefung = feld(cover, "ki_pruefung")
+            if not isinstance(pruefung, MappingNode):
+                raise WerkzeugFehler("Social: Nachweis des KI-Covers fehlt")
+            deepfake = feld(pruefung, "deepfake")
+            if deepfake is None or boolean(deepfake, "cover.ki_pruefung.deepfake"):
+                raise WerkzeugFehler("Social: KI-Cover ohne dokumentierte Deepfake-Freigabe; nicht senden")
+            nachweis = {name: zeichen(feld(pruefung, name)) for name in
+                        ("sha256", "quelle", "geprueft_am", "digital_source_type")}
+            nachweis["deepfake"] = False
+            daten = {"image": zeichen(feld(cover, "image")), "ai_generated": True,
+                     "ki_pruefung": nachweis}
+            try:
+                import ki_cover_provenienz as cover_provenienz
+                import ki_bild_markierung as markierung
+                original, _ = cover_provenienz.pruefe_ki_cover(Path(root or ROOT), daten)
+                typ = markierung.typ_aus(daten)
+                if typ not in markierung.ERLAUBTE_TYPEN:
+                    raise ValueError("gültiger IPTC DigitalSourceType im Nachweis fehlt")
+                stand = markierung.lesen(original)
+                if stand["format"] != "jpeg" or stand["digital_source_type"] != typ:
+                    raise ValueError("KI-Cover trägt nicht den belegten IPTC DigitalSourceType")
+            except (ImportError, OSError, ValueError) as exc:
+                raise WerkzeugFehler(f"Social: KI-Cover nicht nachweisbar: {exc}") from exc
+    else:
+        raise WerkzeugFehler("Frontmatter für Pinterest: cover ist kein Objekt")
+    return text, bild, original
+
+
+def social_erklaerungen(kopf: str, root: Path | None = None) -> tuple[bool, bool]:
+    """Nur explizit deklarierte Modalitäten; KI-Cover müssen belegt sein."""
+    text, bild, _ = _social_fakten(kopf, root)
+    return text, bild
+
+
+def social_cover_original(kopf: str, root: Path | None = None) -> Path | None:
+    """Belegtes KI-Original oder None bei unbekannter/anderer Herkunft."""
+    return _social_fakten(kopf, root)[2]
+
+
+def social_hinweis(text: str, *, ki_text: bool = False, ki_bild: bool = False,
+                    ki_pin: bool = False) -> str:
+    """Deklarierte Angaben früh einfügen; die Werbung bleibt gegebenenfalls vorn.
+
+    Fallback für Empfänger, die den eigenen RSS-Namensraum nicht auswerten.
+    Er behauptet nichts über ein separat erstelltes Pin-Bild und garantiert
+    nicht, dass eine Fremdplattform die Beschreibung übernimmt oder anzeigt.
+    """
+    hinweise = ([SOCIAL_TEXT] if ki_text is True else [])
+    hinweise += [SOCIAL_BILD] if ki_bild is True else []
+    hinweise += [SOCIAL_PIN] if ki_pin is True else []
+    if not hinweise:
+        return text
+    beschreibung = str(text or "").strip()
+    prefix = ""
+    if beschreibung.startswith("*Werbung"):
+        beschreibung = beschreibung[len("*Werbung"):].lstrip()
+        if beschreibung.startswith("|"):
+            beschreibung = beschreibung[1:].lstrip()
+        prefix = "*Werbung | "
+    hinweis = " ".join(hinweise)
+    if not beschreibung.startswith(hinweis):
+        beschreibung = f"{hinweis} {beschreibung}".rstrip()
+    return prefix + beschreibung
+
+
+def social_beschreibung_pruefen(text: str, *, ki_text: bool, ki_bild: bool,
+                                 ki_pin: bool = False, limit: int = 500) -> None:
+    """An der Sendegrenze weder Hinweise abschneiden noch Widersprüche senden."""
+    if limit <= 0 or len(text) > limit:
+        raise WerkzeugFehler(f"Pinterest-Beschreibung mit Herkunftshinweisen "
+                             f"überschreitet das Limit ({len(text)}/{limit})")
+    if not text.startswith("*Werbung | "):
+        raise WerkzeugFehler("Pinterest: Werbekennzeichnung fehlt am Anfang")
+    if social_hinweis(text, ki_text=ki_text, ki_bild=ki_bild, ki_pin=ki_pin) != text:
+        raise WerkzeugFehler("Pinterest-Herkunftshinweis fehlt am Anfang")
+    for hinweis, erwartet in ((SOCIAL_TEXT, ki_text), (SOCIAL_BILD, ki_bild),
+                              (SOCIAL_PIN, ki_pin)):
+        if text.count(hinweis) != int(erwartet):
+            raise WerkzeugFehler("Pinterest-Beschreibung enthält doppelte oder "
+                                 "nicht deklarierte Herkunftshinweise")
+
+
+def social_post_quelle(post: dict, root: Path | None = None) -> str:
+    """Die Ausgangsdatei vor dem POST erneut lesen und mit dem Snapshot binden."""
+    root = Path(root or ROOT).resolve()
+    if not isinstance(post, dict) or not isinstance(post.get("path"), str):
+        raise WerkzeugFehler("Pinterest-Artikelpfad fehlt")
+    try:
+        pfad = Path(post["path"]).resolve(strict=True)
+        posts = (root / "content/posts").resolve()
+        if not pfad.is_relative_to(posts) or pfad.suffix != ".md":
+            raise ValueError("Artikelpfad liegt nicht unter content/posts")
+        slug = pfad.parent.name if pfad.name == "index.md" else pfad.stem
+        if post.get("slug") != slug:
+            raise ValueError("Artikelpfad und Slug passen nicht zusammen")
+        inhalt = pfad.read_text(encoding="utf-8")
+    except (OSError, UnicodeError, ValueError) as exc:
+        raise WerkzeugFehler(f"Pinterest-Artikelquelle nicht lesbar: {exc}") from exc
+    if not isinstance(post.get("content"), str) or inhalt != post["content"]:
+        raise WerkzeugFehler("Pinterest-Artikel hat sich seit dem Laden geändert")
+    kopf = kopf_von(inhalt)
+    text, bild = social_erklaerungen(kopf, root)
+    if post.get("ki_text") is not text or post.get("ki_bild") is not bild:
+        raise WerkzeugFehler("Pinterest-Angaben passen nicht zur Artikelquelle")
+    return kopf
+
+
+def social_artikel_quelle(artikel: dict, slug: str, root: Path | None = None) -> tuple[str, str]:
+    """Social-Studio-Snapshot an tatsächliche Artikeldatei und URL binden."""
+    root = Path(root or ROOT).resolve()
+    if not isinstance(artikel, dict) or not isinstance(artikel.get("path"), str):
+        raise WerkzeugFehler("Social: Artikelquelle fehlt")
+    try:
+        pfad = Path(artikel["path"]).resolve(strict=True)
+        if not pfad.is_relative_to((root / "content/posts").resolve()) or pfad.suffix != ".md":
+            raise ValueError("Artikelpfad liegt nicht unter content/posts")
+        datei_slug = pfad.parent.name if pfad.name == "index.md" else pfad.stem
+        if not slug or slug != datei_slug or artikel.get("slug") != slug:
+            raise ValueError("Artikelpfad und Slug passen nicht zusammen")
+        inhalt = pfad.read_text(encoding="utf-8")
+        if hashlib.sha256(inhalt.encode("utf-8")).hexdigest() != artikel.get("source_sha256"):
+            raise ValueError("Artikel hat sich seit der Planung geändert")
+        kopf = kopf_von(inhalt)
+        if kopf.strip() != str(artikel.get("raw_fm") or "").strip():
+            raise ValueError("Frontmatter passt nicht zur Artikelquelle")
+        url = urlsplit(str(artikel.get("url") or ""))
+        suffix = "/posts/" + quote(slug) + "/"
+        if (url.scheme != "https" or not url.netloc or url.username is not None
+                or url.password is not None or url.query or url.fragment
+                or not url.path.endswith(suffix)):
+            raise ValueError("Artikel-URL passt nicht zur Quelle")
+        basis = f"{url.scheme}://{url.netloc}{url.path[:-len(suffix)]}/"
+    except (OSError, UnicodeError, ValueError) as exc:
+        raise WerkzeugFehler(f"Social: Artikelquelle nicht nachweisbar: {exc}") from exc
+    social_erklaerungen(kopf, root)
+    return kopf, basis
+
+
+def social_ziel_pruefen(link: str, slug: str, basis: str) -> None:
+    """Ein Pin darf nicht die Angaben eines anderen Zielartikels verwenden."""
+    try:
+        erwartet = urlsplit(urljoin(basis.rstrip("/") + "/", "posts/" + quote(slug) + "/"))
+        aktuell = urlsplit(link)
+        if (aktuell.scheme != erwartet.scheme or aktuell.netloc != erwartet.netloc
+                or aktuell.path != erwartet.path or aktuell.fragment):
+            raise ValueError("URL passt nicht zur geprüften Artikelquelle")
+    except (TypeError, ValueError) as exc:
+        raise WerkzeugFehler(f"Pinterest-Ziel nicht eindeutig: {exc}") from exc
+
+
+def social_bild_pruefen(kopf: str, bild_url: str, basis: str, root: Path | None = None) -> None:
+    """Ein deklariertes KI-Cover nur als belegtes, nicht umkodiertes Original senden."""
+    root = Path(root or ROOT).resolve()
+    original = social_cover_original(kopf, root)
+    if original is None:
+        return  # Herkunft einer anderen Bildquelle bleibt ausdrücklich offen
+    rel = original.relative_to((root / "static").resolve()).as_posix()
+    erwartet = urljoin(basis.rstrip("/") + "/", quote(rel, safe="/"))
+    if bild_url != erwartet:
+        raise WerkzeugFehler("Social: Bild ist nicht das geprüfte KI-Cover-Original; "
+                             "abweichende Pin-/Social-Datei gesondert prüfen")
+
+
+def social_pinterest_beschreibung(paket: dict, limit: int = 500) -> str:
+    """Finale Pinterest-Copy; fehlende Herkunftsquelle oder Überlänge blockieren.
+
+    Ein fremdes `pin_image` oder eine Plattformkopie ist nicht durch das
+    Cover-Flag belegt. Eine KI-Politur des Pin-Textes ist dagegen separat im
+    Paket vermerkt und bekommt einen eigenen Hinweis.
+    """
+    artikel = paket.get("article") or {}
+    if not isinstance(artikel, dict):
+        raise WerkzeugFehler("Pinterest-Artikelquelle fehlt")
+    ki_text, ki_bild = social_erklaerungen(str(artikel.get("raw_fm") or ""))
+    ki_pin = paket.get("ai_polished", False)
+    if type(ki_pin) is not bool:
+        raise WerkzeugFehler("Pinterest: Kennzeichnung der Pin-Text-Politur ist ungültig")
+    roh = str(paket.get("text") or "").strip()
+    if not roh.startswith("*Werbung"):
+        roh = "*Werbung | " + roh
+    beschreibung = social_hinweis(roh, ki_text=ki_text, ki_bild=ki_bild, ki_pin=ki_pin)
+    social_beschreibung_pruefen(beschreibung, ki_text=ki_text, ki_bild=ki_bild,
+                                ki_pin=ki_pin, limit=limit)
+    return beschreibung
+
 
 def feed_pfad(root: Path = ROOT) -> Path:
     return root / BAU / "index.xml"
 
 
-def feed_items(pfad: Path) -> list[dict]:
-    """Items des gebauten Feeds samt Herkunftsangaben.
+def feed_daten(pfad: Path) -> tuple[list[dict], list[str]]:
+    """RSS-Items und Kanalziele strukturiert lesen, ohne Werte zu erraten.
 
-    Ohne `xml.etree`-Namensraum-Falle: `bool(Element)` ist für ein Element
-    ohne Kinder False – wer das übersieht, zählt 50 vorhandene Angaben als
-    null. Deshalb wird hier auf `is None` geprüft.
+    Das tatsächliche Template legt ``media:credit`` IN ``media:content`` ab.
+    Wir bewahren deshalb auch den Bildbezug, Rollen, Werte und Mehrfacheinträge
+    auf. Ein vorhandenes Element mit dem Text ``false`` ist kein ``true``.
     """
     import xml.etree.ElementTree as ET
 
     if not pfad.is_file():
-        return []
+        raise WerkzeugFehler(f"Feed fehlt: {pfad}")
     try:
         wurzel = ET.parse(pfad).getroot()
     except ET.ParseError as exc:
         raise WerkzeugFehler(f"Feed ist kein valides XML: {exc}") from exc
+    kanaele = wurzel.findall("channel")
+    if wurzel.tag != "rss" or len(kanaele) != 1:
+        raise WerkzeugFehler("Feed muss genau einen RSS-channel enthalten")
+    kanal = kanaele[0]
     ns = {"atom": "http://www.w3.org/2005/Atom",
           "media": "http://search.yahoo.com/mrss/",
           NAMESPACE_KURZ: NAMESPACE}
-    kanal = wurzel.find("channel")
-    if kanal is None:
-        return []
+
+    def ziele(element):
+        return [(a.get("href") or "").strip() for a in element.findall("atom:link", ns)
+                if (a.get("rel") or "").strip() == "describedby"]
+
+    def credit(element):
+        return {"wert": (element.text or "").strip(),
+                "rolle": (element.get("role") or "").strip(),
+                "schema": (element.get("scheme") or "").strip()}
+
     raus = []
     for item in kanal.findall("item"):
-        guid = item.findtext("guid") or item.findtext("link") or ""
-        beschrieben = [a for a in item.findall("atom:link", ns)
-                       if (a.get("rel") or "") == "describedby"]
-        scope = item.find(f"{NAMESPACE_KURZ}:ai-generated-scope", ns)
+        guids = [(g.text or "").strip() for g in item.findall("guid")]
+        links = [(link.text or "").strip() for link in item.findall("link")]
+        werte = [(e.text or "").strip() for e in
+                 item.findall(f"{NAMESPACE_KURZ}:ai-generated", ns)]
+        scopes = [(e.text or "").strip() for e in
+                  item.findall(f"{NAMESPACE_KURZ}:ai-generated-scope", ns)]
+        medien = [{"url": (m.get("url") or "").strip(),
+                   "credits": [credit(c) for c in m.findall("media:credit", ns)]}
+                  for m in item.findall("media:content", ns)]
+        freie_credits = [credit(c) for c in item.findall("media:credit", ns)]
+        beschrieben = ziele(item)
+        beschreibungen = [(e.text or "").strip() for e in item.findall("description")]
+        guid = guids[0] if guids else ""
         raus.append({
-            "guid": guid,
+            "guid": guid, "guids": guids, "links": links,
             "slug": _slug_aus_url(guid),
-            "scope": (scope.text or "").strip() if scope is not None else "",
-            "ai_generated": item.find(f"{NAMESPACE_KURZ}:ai-generated", ns) is not None,
-            "describedby": bool(beschrieben),
-            "media_credit": item.find("media:credit", ns) is not None,
+            "scope": scopes[0] if scopes else "", "scopes": scopes,
+            "ai_generated": werte == ["true"], "ai_werte": werte,
+            "describedby": bool(beschrieben), "describedby_ziele": beschrieben,
+            "media_credit": bool(freie_credits or any(m["credits"] for m in medien)),
+            "medien": medien, "freie_credits": freie_credits,
+            "description": beschreibungen[0] if beschreibungen else "",
+            "descriptions": beschreibungen,
         })
-    return raus
+    return raus, ziele(kanal)
+
+
+def feed_items(pfad: Path) -> list[dict]:
+    """Items des gebauten Feeds; widersprüchliche Einzelwerte bleiben sichtbar."""
+    return feed_daten(pfad)[0]
 
 
 def feed_kanal_angabe(pfad: Path) -> bool:
-    """Trägt der FEED (Kanal-Ebene) die IANA-Relation auf den Hinweis?"""
-    import xml.etree.ElementTree as ET
-
-    if not pfad.is_file():
-        return False
+    """Ob ein Kanal-Verweis existiert; M5 prüft zusätzlich sein exaktes Ziel."""
     try:
-        wurzel = ET.parse(pfad).getroot()
-    except ET.ParseError:
+        return bool(feed_daten(pfad)[1])
+    except (OSError, WerkzeugFehler):
         return False
-    kanal = wurzel.find("channel")
-    if kanal is None:
-        return False
-    ns = {"atom": "http://www.w3.org/2005/Atom"}
-    return any((a.get("rel") or "") == "describedby"
-               for a in kanal.findall("atom:link", ns))
 
 
 def _slug_aus_url(url: str) -> str:
@@ -529,34 +907,75 @@ def unmarkierte_ableitungen(root: Path = ROOT) -> list[tuple[Seite, str]]:
     return raus
 
 
+def social_ableitungen(root: Path = ROOT) -> list[tuple[Seite, str]]:
+    """Bereits vorhandene Social-Varianten deklarierter KI-Cover melden.
+
+    Der Dateiname weist auf einen möglichen Ableitungsweg, beweist aber nicht,
+    dass die alte Datei aus dem aktuellen Original stammt. Nicht automatisch
+    löschen oder ihre Herkunft behaupten: eine Person muss sie prüfen/entfernen.
+    """
+    ordner = root / "static/images/social"
+    if not ordner.is_dir():
+        return []
+    dateien = [p for p in ordner.iterdir() if p.is_file() and p.suffix.lower() == ".jpg"]
+    raus = []
+    for seite in ki_originale(root):
+        if seite.abschnitt != "posts":
+            continue
+        prefix = seite.slug + "-"
+        for datei in dateien:
+            if datei.stem.startswith(prefix) and re.fullmatch(r"\d+x\d+", datei.stem[len(prefix):]):
+                raus.append((seite, datei.relative_to(root / "static").as_posix()))
+    return raus
+
+
 # --------------------------------------------------------------------------
 #  Register: ungeklärte Herkunft (offener Punkt 3 aus #1028)
 # --------------------------------------------------------------------------
 
 def register(root: Path = ROOT) -> dict[str, set[str]]:
-    """`maschinell`/`menschlich` aus data/ki_kennzeichnung.yaml.
+    """Das Register der gewählten Repository-Wurzel lesen."""
+    return register_datei(root / "data" / "ki_kennzeichnung.yaml")
 
-    Bewusst abhängigkeitsfrei gelesen (derselbe Leser wie in
-    scripts/ki_kennzeichnung_gate.py): Das Register muss auch dann lesbar
-    bleiben, wenn PyYAML fehlt – sonst meldet die Wache blind.
+
+def register_datei(pfad: Path) -> dict[str, set[str]]:
+    """Register im dokumentierten Listenformat strikt und ohne PyYAML lesen.
+
+    Eine fehlende Datei, ein Tippfehler oder eine unbeachtete YAML-Zeile darf
+    die offene Warteschlange nicht unbemerkt auf null reduzieren. Andere
+    YAML-Schreibweisen werden bewusst als nicht messbar zurückgewiesen.
     """
     daten: dict[str, set[str]] = {"maschinell": set(), "menschlich": set()}
-    pfad = root / "data" / "ki_kennzeichnung.yaml"
     if not pfad.is_file():
-        return daten
+        raise WerkzeugFehler(f"Register fehlt: {pfad}")
+    try:
+        zeilen = pfad.read_text(encoding="utf-8").splitlines()
+    except (OSError, UnicodeError) as exc:
+        raise WerkzeugFehler(f"Register nicht lesbar: {exc}") from exc
     aktuell = None
-    for zeile in pfad.read_text(encoding="utf-8", errors="ignore").splitlines():
+    koepfe: set[str] = set()
+    for nummer, zeile in enumerate(zeilen, 1):
         if not zeile.strip() or zeile.lstrip().startswith("#"):
             continue
-        m = re.match(r"^([a-z_]+):\s*$", zeile)
+        m = re.fullmatch(r"(maschinell|menschlich):\s*(\[\])?\s*(?:#.*)?", zeile)
         if m:
-            aktuell = m.group(1) if m.group(1) in daten else None
+            aktuell = m.group(1)
+            if aktuell in koepfe:
+                raise WerkzeugFehler(f"Register Zeile {nummer}: doppelter Abschnitt {aktuell}")
+            koepfe.add(aktuell)
+            if m.group(2):
+                aktuell = None  # nach einer explizit leeren Liste kein weiterer Eintrag
             continue
-        m = _RE_LISTE.match(zeile)
-        if m and aktuell:
-            wert = m.group(1).strip().strip("\"'")
-            if re.fullmatch(r"[A-Za-z0-9._\-]+", wert):
-                daten[aktuell].add(wert)
+        m = re.fullmatch(r"\s+-\s+([A-Za-z0-9._-]+|'[A-Za-z0-9._-]+'|"
+                         r'"[A-Za-z0-9._-]+")\s*(?:#.*)?', zeile)
+        if not m or aktuell is None:
+            raise WerkzeugFehler(f"Register Zeile {nummer}: unbekanntes Listenformat")
+        wert = m.group(1).strip("\"'")
+        if wert in daten[aktuell]:
+            raise WerkzeugFehler(f"Register Zeile {nummer}: doppelter Eintrag {wert}")
+        daten[aktuell].add(wert)
+    if koepfe != set(daten) or daten["maschinell"] & daten["menschlich"]:
+        raise WerkzeugFehler("Register unvollständig oder maschinell/menschlich widersprüchlich")
     return daten
 
 
@@ -582,13 +1001,31 @@ def _jetzt() -> str:
 
 def state_lesen(root: Path = ROOT) -> dict:
     pfad = root / STATE
-    if not pfad.is_file():
-        return {}
+
+    def eindeutig(paare):
+        daten = {}
+        for schluessel, wert in paare:
+            if schluessel in daten:
+                raise ValueError(f"doppelter Zustandsschlüssel: {schluessel}")
+            daten[schluessel] = wert
+        return daten
+
     try:
-        daten = json.loads(pfad.read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        return {}
-    return daten if isinstance(daten, dict) else {}
+        # Der versionierte Zustand darf nicht durch Löschen als leer gelten.
+        daten = json.loads(pfad.read_text(encoding="utf-8"), object_pairs_hook=eindeutig)
+        if not isinstance(daten, dict):
+            raise ValueError("Zustand ist kein Objekt")
+        erstmals = daten.get("ungeklaert_erstmals")
+        if not isinstance(erstmals, dict):
+            raise ValueError("ungeklaert_erstmals fehlt oder ist kein Objekt")
+        for slug, zeit in erstmals.items():
+            if (not isinstance(slug, str) or not slug or not isinstance(zeit, str)
+                    or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", zeit)):
+                raise ValueError("ungültiger Eintrag im Altersregister")
+            date.fromisoformat(zeit)
+        return daten
+    except (OSError, UnicodeError, ValueError) as exc:
+        raise WerkzeugFehler(f"Wachzustand nicht lesbar: {exc}") from exc
 
 
 def state_schreiben(root: Path, daten: dict) -> None:

@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-11-11 11:37:36 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-11-13 11:46:40 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 82 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
+**Geprüfte Live-Artikel:** 84 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -58,7 +58,7 @@
 | 2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro | 2 → 3 ✅ | /go/gas/ |
 | 2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet | 0 → 1 ✅ | /go/strom/ |
 | 2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist | 0 → 1 ✅ | /go/tagesgeld/ |
-| 2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert | 2 → 2 ✅ | /go/dsl/ |
+| 2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert | 1 → 2 ✅ | /go/dsl/ |
 | 2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich | 3 → 3 ✅ | /go/dsl/ |
 | 2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden | 0 → 1 ✅ | /go/gas/ |
 | 2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet | 0 → 1 ✅ | /go/allgemein/ |
@@ -93,7 +93,9 @@
 | 2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem | 1 → 3 ✅ | /go/gas/ |
 | 2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck | 2 → 3 ✅ | /go/fluege/ |
 | 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang | 2 → 3 ✅ | /go/strom/ |
+| 2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen | 4 → 4 ✅ | /go/allgemein/, /go/strom/ |
 | 2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort | 2 → 3 ✅ | /go/dsl/ |
+| 2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein | 3 → 3 ✅ | /go/dsl/ |
 
 ## Hinweise (nicht blockierend)
 
@@ -101,6 +103,8 @@
 - 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub: 5 Affiliate-Links im Artikel – Anti-Stuffing prüfen (affiliate_profi_check.py A5)
 - 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt: Redaktionell ausgenommen von der Mindestpflicht für Affiliate-Links: Reiner DNS-Messtest ohne passendes Tarifangebot – ein Tarif-CTA wäre sachfremd.
 - 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster: 4 Affiliate-Links im Artikel – Anti-Stuffing prüfen (affiliate_profi_check.py A5)
+- 2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen: Klick-Attribution (data-klick=affiliate_click) fehlt an mindestens einem Gateway-Link – Umsatz-Messung pro Artikel unvollständig (Prüfpunkt: render-link.html)
+- 2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen: 4 Affiliate-Links im Artikel – Anti-Stuffing prüfen (affiliate_profi_check.py A5)
 
 ## Begründete Ausnahmen (kein Affiliate-CTA – redaktionelle Entscheidung)
 

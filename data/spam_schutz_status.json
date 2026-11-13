@@ -1,14 +1,14 @@
 {
-  "stand": "2026-11-10T18:47:52Z",
+  "stand": "2026-11-12T19:05:43Z",
   "urteil": "rot",
   "probleme": [
-    "KI-Anteil live: 85.0 % (rot ab 65 %)",
+    "KI-Anteil live: 85.4 % (rot ab 65 %)",
     "KI-Artikel ohne Werbe-Offenlegung: 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt"
   ],
   "kpis": {
-    "live_artikel": 80,
-    "ki_artikel": 68,
-    "ki_anteil_prozent": 85.0,
+    "live_artikel": 82,
+    "ki_artikel": 70,
+    "ki_anteil_prozent": 85.4,
     "tempo_max_pro_tag": 2,
     "tempo_letzte7_tage": 6,
     "auto_freigaben_letzte7_tage": 0,

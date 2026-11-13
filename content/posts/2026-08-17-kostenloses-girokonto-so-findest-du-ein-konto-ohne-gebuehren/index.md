@@ -14,6 +14,12 @@ cover:
   image: "images/covers/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.jpg"
   alt: "Kostenloses Girokonto: So findest du ein Konto ohne Gebühren"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 32feb876450b02c7d699c378b39833e41b81bd9e1ff51edcbaa465ede98bac64
+    geprueft_am: 2026-11-13
 kurzantwort: "Ein echtes kostenloses Girokonto kostet dich keine Gebühr im Monat. Auch Karte und Bargeld sollten nichts kosten; ob Echtzeit-Überweisungen gratis sind, steht im Preisverzeichnis des Kontomodells. Wer von einer teuren Filiale zu einer Online-Bank wechselt, kann die früheren Kontogebühren einsparen – der Betrag steht in deinem alten Preisverzeichnis. Wichtig ist nicht nur der Preis von 0 €, sondern auch das Kleingedruckte."
 
 social_posted: true
@@ -71,7 +77,7 @@ Die Gebühr im Monat ist nur die Spitze. Dahinter stecken viele kleine Posten. S
 Typische Kostenfaktoren sind heutzutage:
 
 - Monatliche Grundgebühren für die Kontoverwaltung,
-- Jährliche Kosten für die Girocard (oft ca. 10 € bis 15 €),. Das ist ein Beispielwert.
+- Jährliche Kosten für die Girocard (oft ca. 10 € bis 15 €); das ist ein Modellwert. Das ist ein Beispielwert.
 - Einzelgebühren für Echtzeit-Überweisungen oder SMS-TANs,
 - Hohe Gebühren für Abhebungen an Fremdautomaten,
 - Zweistellige Dispozinsen, die bei Kontoüberzug sofort greifen,

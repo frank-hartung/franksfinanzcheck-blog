@@ -15,6 +15,12 @@ cover:
   image: "images/covers/2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich.jpg"
   alt: "Zahnzusatzversicherung Vergleich 2026: Kosten und Leistungen im Überblick"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: ac4a52fc20b40a32cc2cc2dc0ddbaf5bfc72f0f69a3ee7c16389cd59ec59a8b6
+    geprueft_am: 2026-11-13
 savings: "oft 80 bis 100 % Erstattung"
 pin_title: "Zahnzusatzversicherung 2026: Kosten, Leistungen & Fallen im Check"
 pin_description: "*Werbung | Zahnzusatzversicherung 2026 im großen Vergleich: Was gute Tarife kosten, welche Leistungen zählen und wie du Zahnstaffel, GOZ und Gesundheitsfragen prüfst. #zahnzusatzversicherung #zahnersatzkosten #implantatkosten"

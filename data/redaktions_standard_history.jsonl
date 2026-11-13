@@ -305,3 +305,40 @@
 {"zeit": "2026-11-06T22:24:36.629390+00:00", "slug": "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
 {"zeit": "2026-11-09T07:29:28.759190+00:00", "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub", "regel": "RS5", "aktion": "fix-deterministisch"}
 {"zeit": "2026-11-09T07:29:28.759190+00:00", "slug": "2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T14:22:49.790748+00:00", "slug": "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
+{"zeit": "2026-11-11T14:22:49.790748+00:00", "slug": "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-08-10-dsl-wechselbonus-sichern", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026", "regel": "RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen", "regel": "RS2+RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler", "regel": "RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
+{"zeit": "2026-11-11T17:24:00.541379+00:00", "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
+{"zeit": "2026-11-11T21:41:15.395467+00:00", "slug": "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
+{"zeit": "2026-11-11T21:41:15.395467+00:00", "slug": "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
+{"zeit": "2026-11-11T23:45:52.936010+00:00", "slug": "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
+{"zeit": "2026-11-11T23:45:52.936010+00:00", "slug": "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
+{"zeit": "2026-11-13T14:39:17.546234+00:00", "slug": "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}

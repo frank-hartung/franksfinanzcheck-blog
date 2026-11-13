@@ -14,6 +14,12 @@ cover:
   image: "images/covers/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich.jpg"
   alt: "Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 2b51d48e7a9cce04b92315b99c2645ea54d9ece25944951078a2abd85ad2d064
+    geprueft_am: 2026-11-13
 kurzantwort: "Tagesgeld bringt 2026 wieder 1,8 bis 3,2 Prozent Zinsen. Damit ist es der beste Platz für deinen Notgroschen. Du kommst täglich an dein Geld, und der Staat schützt es bis 100.000 € pro Person und Bank. Auf dem Girokonto bekommst du dagegen 0,0 Prozent. Die besten Zinsen findest du im Vergleich. Achte auf eine lange Zinsgarantie von 6 bis 12 Monaten und auf das Land der Bank."
 
 social_posted: true
@@ -36,7 +42,6 @@ quellen:
     datum: "2025-11-08"
 faktencheck: "2026-10-13"
 ---
-
 
 Tagesgeldkonto im Check: Das Girokonto zahlt dir weiter 0,0 %; das ist ein Modellwert.
 
@@ -96,7 +101,7 @@ Drei Gründe sprechen dafür:
 
 - **Girokonto:** Ca. 1–2 Monatsausgaben für laufende Kosten.
 - **Tagesgeld:** Ca. 3–6 Monatsausgaben als eiserne Reserve für Unvorhergesehenes.
-- **Festgeld:** Kapital, das in den nächsten 12 bis 36 Monaten sicher benötigt wird (z. B. Autokauf); das ist ein Rechenbeispiel.
+- **Festgeld:** Kapital, das in den nächsten 12 bis 36 Monaten sicher benötigt wird (z. B. Autokauf); das ist ein Rechenbeispiel; das ist ein Modellwert.
 - **Aktien-ETFs:** Langfristiger Vermögensaufbau mit einem Zeithorizont von über 10 Jahren.
 
 ## So funktioniert die EU-Einlagensicherung
@@ -188,7 +193,7 @@ Diese Summe deckt fast einen Monat Versicherungen. Oder einen kurzen Urlaub.
 
 Ein guter Notgroschen trägt deine Finanzen. Üblich sind **drei bis sechs Netto-Gehälter**:
 
-- **Alleinstehende (ca. 2.500 € Netto):** ca. 7.500 € bis 15.000 €. Das ist ein Beispielwert.
+- **Alleinstehende (ca. 2.500 € Netto):** ca. 7.500 € bis 15.000 €; das ist ein Beispielwert. Das ist ein Beispielwert.
 - **Haushalt mit Kindern (ca. 5.000 € Netto):** ca. 15.000 € bis 30.000 €
 
 Dieses Geld gehört aufs Tagesgeldkonto, sonst nirgends. In Aktien wäre es zu riskant.

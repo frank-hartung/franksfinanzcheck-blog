@@ -20,6 +20,12 @@ cover:
   image: "images/covers/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert.jpg"
   alt: "DSL-Tarif prüfen: Effektivpreis statt Lockpreis, Routermiete im Blick"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 8a765d99e3d2764bbbe49ea5f23f3ef8f2e036c8d269ed81791cbef15d1db0b0
+    geprueft_am: 2026-11-13
 pin_title: "DSL-Tarif prüfen: Effektivpreis statt Lockpreis, Routermiete im Blick"
 pin_description: "*Werbung | Viele Haushalte zahlen bei Internet und DSL für zu viel Leistung oder zu alte Verträge. So prüfst du Bedarf, Effektivpreis und Wechseloptionen sinnvoll. Mehr Spartipps auf FranksFinanzcheck! #internetdslupdate #dslupdate #dslvergleich"
 quellen:
@@ -48,7 +54,7 @@ Genau deshalb ist das wichtigste Update im Markt oft kein großer Technik‑Skan
 
 ---
 
-💡 **Schnell‑Tipp von FranksFinanzcheck:** Wenn du wissen willst, ob dein Internetvertrag noch passt, vergleiche nicht nur die Maximalgeschwindigkeit. Entscheidend ist der Effektivpreis über 24 Monate und ob dein Bedarf wirklich getroffen wird: [**Internet & DSL vergleichen**](/go/dsl/). Das ist ein Modellwert.
+ Entscheidend ist der Effektivpreis über 24 Monate und ob dein Bedarf wirklich getroffen wird: [**Internet & DSL vergleichen**](/go/dsl/); das ist ein Modellwert. Das ist ein Modellwert.
 _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Das Wichtigste in Kürze
@@ -76,7 +82,7 @@ Die Folge: Ein Haushalt kann technisch völlig ordentlich versorgt sein – und 
 
 Viele wählen beim Internettarif nach dem Bauchgefühl: lieber zu viel als zu wenig. Das ist verständlich. Finanziell ist es oft unnötig.
 
-Denn ein Tarif mit 250 Mbit/s ist nicht automatisch sinnvoller als einer mit 50 oder 100 Mbit/s. Entscheidend ist, wie dein Haushalt das Internet wirklich nutzt; das ist ein Beispielwert.
+Denn ein Tarif mit 250 Mbit/s ist nicht automatisch sinnvoller als einer mit 50 oder 100 Mbit/s. Entscheidend ist, wie dein Haushalt das Internet wirklich nutzt; das ist ein Beispielwert; das ist ein Beispielwert.
 
 ### Was oft gleichzeitig läuft
 
@@ -142,7 +148,7 @@ Dazu kommen häufig:
 
 Darum gilt:
 
-**Nicht der Monat 1 zählt, sondern der Gesamtpreis über 24 Monate.** (im Rechenbeispiel). Das ist ein Modellwert.
+**Nicht der Monat 1 zählt, sondern der Gesamtpreis über 24 Monate.** (im Rechenbeispiel); das ist ein Modellwert. Das ist ein Modellwert.
 
 ### Beispielrechnung
 

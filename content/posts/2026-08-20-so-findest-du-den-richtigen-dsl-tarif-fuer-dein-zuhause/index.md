@@ -13,6 +13,12 @@ cover:
   image: "images/covers/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause.jpg"
   alt: "DSL-Tarif für dein Zuhause: Das passende Angebot finden"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 5aef955c33cc03fed647db5ce72cf9c7b727c4c0c0548c7412cff35780ca4ab5
+    geprueft_am: 2026-11-13
 kurzantwort: "Den passenden DSL-Tarif findest du über deinen echten Bedarf, nicht über die größte Werbezahl. Für 1 bis 2 Personen reichen oft 50 bis 100 Mbit/s. Familien und Homeoffice-Haushalte fahren meist mit 100 bis 250 Mbit/s gut. Rechne immer den Effektivpreis über 24 Monate. Sonst verstecken sich dort schnell 250 € bis 400 € Mehrkosten."
 keywords: ["DSL Tarif finden", "Internet Geschwindigkeit Bedarf", "DSL vs Kabel", "Günstiger Internetanschluss", "DSL Tarifberatung", "DSL-Tarif für dein Zuhause", "DSL Tarif für dein Zuhause", "DSL-Tarif"]
 pin_title: "Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen"
@@ -34,7 +40,7 @@ quellen:
 faktencheck: "2026-10-13"
 ---
 
-DSL-Tarif finden im Check: Im Vertrag steht eine prestigeträchtige Zahl wie 1.000 Mbit/s. Im Alltag funktionieren aber nur ein paar smarte Geräte und zwei Laptops gleichzeitig; das ist ein Modellwert. Das Ergebnis: Ein teurer Vertrag. Die Leistung im heimischen WLAN wird nie voll ausgeschöpft.
+DSL-Tarif finden im Check: Im Vertrag steht eine prestigeträchtige Zahl wie 1.000 Mbit/s. Im Alltag funktionieren aber nur ein paar smarte Geräte und zwei Laptops gleichzeitig; das ist ein Modellwert; das ist ein Modellwert. Das Ergebnis: Ein teurer Vertrag. Die Leistung im heimischen WLAN wird nie voll ausgeschöpft.
 
 Dieser Ratgeber hilft dir, im Tarif-Dschungel den Durchblick zu behalten. Kein technisches Kauderwelsch. Nur das Wesentliche: Wie viel Geschwindigkeit brauchst du wirklich? Wann lohnt sich Glasfaser? Wie verhinderst du, dass versteckte Kosten deine Ersparnis auffressen?
 
@@ -71,7 +77,7 @@ Für Singles, die gelegentlich streamen und im Homeoffice arbeiten, sind **50 Mb
 
 ### Diese Anwendungen ziehen Bandbreite
 
-- 4K-Stream (Ultra HD): ca. **15 bis 25 Mbit/s**. Das ist ein Rechenbeispiel.
+- 4K-Stream (Ultra HD): ca. **15 bis 25 Mbit/s**; das ist ein Beispielwert. Das ist ein Rechenbeispiel.
 - Hochauflösende Video-Calls: ca. **5 bis 10 Mbit/s**
 - Cloud-Synchronisation: oft **10 Mbit/s** oder deutlich mehr im Upload
 - Gaming: Benötigt wenig Bandbreite, aber einen niedrigen Ping (Latenz)
@@ -233,7 +239,7 @@ Bevor du buchst, investiere diese Viertelstunde:
 
 ## Häufige Fragen
 
-**Reichen 50 Mbit/s für Homeoffice und Streaming?**. Das ist ein Modellwert.
+**Reichen 50 Mbit/s für Homeoffice und Streaming?**; das ist ein Modellwert. Das ist ein Modellwert.
 Ja, für einen normalen Haushalt mit ein bis zwei Personen ist das meist völlig ausreichend. Solange nicht drei 4K-Streams gleichzeitig laufen, bietet diese Bandbreite eine solide Basis für flüssiges Arbeiten und Entertainment.
 
 **Wann lohnt sich Glasfaser?**

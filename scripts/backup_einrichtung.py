@@ -825,6 +825,47 @@ def _fristen_exportieren(ergebnis: Ergebnis, pfad: str) -> None:
         _anhaengen(pfad, f"BACKUP_FRIST_TAGE={int(tage)}\nBACKUP_FRIST_ZUGANG={name}\n")
 
 
+# =====================================================================
+#  URSACHE WEITERGEBEN, NICHT ZWEIMAL RATEN (Vorgang WF-3150 / #1030)
+#  ------------------------------------------------------------------
+#  BEFUND (10.11.2026, Lauf 42715328453): Die Frischwache stellte zwei
+#  rote Schritte in EINEN Lauf – „Voraussetzungen prüfen“ und „Leerlauf
+#  prüfen“. Beide hatten dieselbe Ursache (offene Einrichtung), aber nur
+#  der erste trug den Einrichtungs-Rat. Die Leerlauf-Prüfung fragte die
+#  Tatsache, die der Lauf eine Sekunde vorher schon bewiesen hatte,
+#  NICHT ab – obwohl `betreibe_urteil(..., einrichtung_offen=…)` dafür
+#  seit dem 07.11. genau einen Parameter hat – und antwortete mit dem
+#  zweiten, falschen Rat („ein Lauf ist grün, gesichert wurde nichts“),
+#  sobald der jüngste Offsite-Job grün war. Am 10.11. stand deshalb
+#  „Backup-Leerlauf“ als Fehlerzeile in der Meldung, obwohl gar kein Lauf
+#  grün war.
+#  Geheilt: Der Schritt, der es WEISS, sagt es – in `GITHUB_OUTPUT`.
+#  Der nächste Schritt liest es, statt zu raten; fehlt die Angabe,
+#  bleibt er bei „nicht entscheidbar“ (rot), nicht bei „grün“.
+# =====================================================================
+OFFENE_EINTRAGUNG = "offene_einrichtung"
+# Nachschärfung 12.11.2026 (#1030): Ein LEERER Wert allein ist keine Auskunft.
+# GitHub liefert für `steps.<id>.outputs.<name>` denselben leeren Text, wenn
+# der Schritt übersprungen wurde, abgestürzt ist oder „nichts offen“ gemeldet
+# hat. Erst dieses zweite Feld unterscheidet „geprüft, nichts offen“ von
+# „nie geprüft“ – ohne es wäre die Zusage „weiß nicht ist kein Grün“ im
+# Workflow nicht erreichbar gewesen.
+GEPRUEFT_EINTRAGUNG = "einrichtung_geprueft"
+GEPRUEFT_WERT = "ja"
+
+
+def offene_kennungen(ergebnis: Ergebnis) -> list[str]:
+    """Die Kennungen der offenen Pflichtpunkte – reine Ausgabe, keine Werte."""
+    return [b.kennung for b in ergebnis.offen()]
+
+
+def _setup_ausgabe_schreiben(ergebnis: Ergebnis, pfad: str) -> None:
+    if not pfad:
+        return
+    _anhaengen(pfad, f"{OFFENE_EINTRAGUNG}={' '.join(offene_kennungen(ergebnis))}\n"
+                     f"{GEPRUEFT_EINTRAGUNG}={GEPRUEFT_WERT}\n")
+
+
 def befehl_pruefen(umgebung: dict | None = None, jetzt: dt.datetime | None = None) -> int:
     umgebung = dict(os.environ) if umgebung is None else umgebung
     ergebnis = pruefen(umgebung, jetzt)
@@ -835,6 +876,8 @@ def befehl_pruefen(umgebung: dict | None = None, jetzt: dt.datetime | None = Non
     _anhaengen(umgebung.get("GITHUB_STEP_SUMMARY", ""),
                zusammenfassung(ergebnis, (umgebung.get("GITHUB_REPOSITORY") or "").strip()))
     _fristen_exportieren(ergebnis, umgebung.get("GITHUB_ENV", ""))
+    # #1030: Die offenen Kennungen gehen als Ausgabe an den nächsten Schritt.
+    _setup_ausgabe_schreiben(ergebnis, umgebung.get("GITHUB_OUTPUT", ""))
     return 1 if ergebnis.offen() else 0
 
 
@@ -1073,6 +1116,38 @@ def selbsttest() -> int:  # noqa: C901 – bewusst ein Block: jede Fallgruppe si
             if "::warning title=Backup-Einrichtung E2" not in gesamt or "| **E1**" not in gesamt:
                 fehler.append("F12: Annotation oder Zusammenfassung fehlt")
 
+        # F19 (#1030, 10.11.2026): Die offenen Kennungen gehen maschinenlesbar
+        # als Schritt-Ausgabe weiter – sonst muss der nächste Schritt raten,
+        # und genau das erzeugte zwei Rote Stellen mit zwei Ratschlägen
+        # (Lauf 42715328453: „Voraussetzungen prüfen“ + „Leerlauf prüfen“).
+        with tempfile.TemporaryDirectory() as ordner:
+            ausgabe = os.path.join(ordner, "output")
+            HTTP = welt()
+            with redirect_stdout(io.StringIO()):
+                befehl_pruefen({**voll, "GITHUB_ACTIONS": "true", "GITHUB_OUTPUT": ausgabe}, jetzt)
+            inhalt = open(ausgabe, encoding="utf-8").read() if os.path.exists(ausgabe) else ""
+            if f"{OFFENE_EINTRAGUNG}=\n" not in inhalt:
+                fehler.append(f"F19: vollständige Einrichtung muss „{OFFENE_EINTRAGUNG}“ LEER ausgeben – "
+                              f"sonst liest der nächste Schritt einen alten Grund: {inhalt!r}")
+            leerstand = os.path.join(ordner, "output-leer")
+            with redirect_stdout(io.StringIO()):
+                befehl_pruefen({"GITHUB_ACTIONS": "true", "GITHUB_OUTPUT": leerstand}, jetzt)
+            leer_inhalt = open(leerstand, encoding="utf-8").read()
+            if f"{OFFENE_EINTRAGUNG}=E1 E2 E3 E4 E5 E6" not in leer_inhalt:
+                fehler.append(f"F19: Leerstand muss E1–E6 in Reihenfolge melden: {leer_inhalt!r}")
+            if "GIFTWERT" in leer_inhalt or "github_pat" in leer_inhalt:
+                fehler.append("F19: die Ausgabe darf keinen Secret-Wert tragen")
+            # Beide Lagen tragen den Beleg „geprüft“ – ein leerer Wert allein
+            # sähe im Workflow aus wie ein übersprungener Schritt (12.11.2026).
+            for name, text in (("vollständig", inhalt), ("Leerstand", leer_inhalt)):
+                if f"{GEPRUEFT_EINTRAGUNG}={GEPRUEFT_WERT}\n" not in text:
+                    fehler.append(f"F19: {name} ohne „{GEPRUEFT_EINTRAGUNG}={GEPRUEFT_WERT}“ – "
+                                  f"der nächste Schritt könnte „nie geprüft“ für „nichts offen“ halten")
+            # Ohne GITHUB_OUTPUT darf der Aufruf nicht abstürzen (lokaler Lauf).
+            with redirect_stdout(io.StringIO()):
+                if befehl_pruefen({**voll, "GITHUB_ACTIONS": "true"}, jetzt) != 0:
+                    fehler.append("F19: gesunde Einrichtung muss ohne Ausgabedatei Exit 0 liefern")
+
         # F13: Annotationen sind einzeilig und korrekt kodiert
         probe = Ergebnis()
         probe.neu("E9", "Titel: mit, Sonderzeichen", "fehler", "Zeile 1\nZeile 2 100%")
@@ -1173,10 +1248,11 @@ def selbsttest() -> int:  # noqa: C901 – bewusst ein Block: jede Fallgruppe si
             print(f"❌ {eintrag}")
         print(f"🛑 backup_einrichtung-Selbsttest: {len(fehler)} Abweichung(en).")
         return 1
-    print("✅ backup_einrichtung-Selbsttest: 18 Fallgruppen – Leerstand (#761), gesunde Einrichtung, "
+    print("✅ backup_einrichtung-Selbsttest: 19 Fallgruppen – Leerstand (#761), gesunde Einrichtung, "
           "öffentliches Ziel, 401/404, Fristen, Passphrase-Grenze, Konto-Token, KV-/D1-Rechte, "
           "Environment-Schutz, Netzausfall + Wiederholung, keine Secret-Werte in der Ausgabe, Kodierung, "
-          "Reihenfolge „erst absichern, dann befüllen“.")
+          "Reihenfolge „erst absichern, dann befüllen“ und seit dem 10.11.2026 (#1030) die offenen "
+          "Kennungen als Schritt-Ausgabe (damit der nächste Schritt nicht raten muss).")
     return 0
 
 

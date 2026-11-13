@@ -1,7 +1,7 @@
 {
   "artikel": {
     "2026-08-10-dsl-wechselbonus-sichern": {
-      "mikro": 6,
+      "mikro": 5,
       "serien": 0,
       "ueberlang": false
     },
@@ -31,7 +31,7 @@
       "ueberlang": false
     },
     "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
-      "mikro": 13,
+      "mikro": 12,
       "serien": 0,
       "ueberlang": false
     },
@@ -76,7 +76,7 @@
       "ueberlang": false
     },
     "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
-      "mikro": 1,
+      "mikro": 0,
       "serien": 0,
       "ueberlang": false
     },
@@ -121,7 +121,7 @@
       "ueberlang": false
     },
     "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": {
-      "mikro": 2,
+      "mikro": 1,
       "serien": 0,
       "ueberlang": false
     },
@@ -146,7 +146,7 @@
       "ueberlang": false
     },
     "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": {
-      "mikro": 3,
+      "mikro": 2,
       "serien": 0,
       "ueberlang": false
     },
@@ -166,7 +166,7 @@
       "ueberlang": false
     },
     "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": {
-      "mikro": 6,
+      "mikro": 5,
       "serien": 0,
       "ueberlang": false
     },
@@ -191,7 +191,7 @@
       "ueberlang": false
     },
     "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
-      "mikro": 6,
+      "mikro": 5,
       "serien": 0,
       "ueberlang": false
     },
@@ -510,23 +510,13 @@
       "serien": 0,
       "ueberlang": false
     },
-    "2026-11-01-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen": {
-      "mikro": 1,
-      "serien": 0,
-      "ueberlang": false
-    },
     "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck": {
       "mikro": 1,
       "serien": 0,
       "ueberlang": false
     },
-    "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": {
-      "mikro": 1,
-      "serien": 0,
-      "ueberlang": false
-    },
     "2026-11-02-last-minute-urlaubsangebote-sichern": {
-      "mikro": 2,
+      "mikro": 1,
       "serien": 0,
       "ueberlang": false
     },
@@ -535,8 +525,23 @@
       "serien": 0,
       "ueberlang": false
     },
-    "2026-11-09-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten": {
+    "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang": {
       "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-09-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten": {
+      "mikro": 0,
       "serien": 0,
       "ueberlang": false
     },
@@ -549,6 +554,56 @@
       "mikro": 1,
       "serien": 0,
       "ueberlang": false
+    },
+    "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-10-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-10-geschirrspueler-voll-so-sparst-du-wasser-und-strom": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": {
+      "mikro": 2,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten": {
+      "mikro": 2,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-10-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten": {
+      "mikro": 4,
+      "serien": 0,
+      "ueberlang": false
     }
   },
   "hinweis": "Sperrklinke des Struktur-Guards: je Artikel der akzeptierte Stand an Mikro-Abschnitten/Serien. Werte dürfen nur kleiner werden – Zuwachs ist ein Fund (scripts/struktur_guard.py).",
@@ -557,5 +612,5 @@
     "neu_toleranz": 2,
     "serie_min": 3
   },
-  "stand": "2026-11-09"
+  "stand": "2026-11-11"
 }

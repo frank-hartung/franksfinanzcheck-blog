@@ -14,6 +14,12 @@ cover:
   image: "images/covers/2026-08-10-dsl-wechselbonus-sichern.jpg"
   alt: "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: ffb84d17d61893c59fff3b439bf7a6b0620671df15fba9196082fd22992d92aa
+    geprueft_am: 2026-11-13
 kurzantwort: "Ein DSL-Wechselbonus ist nur dann wirklich attraktiv, wenn du ihn zusammen mit Grundgebühr, Anschlusskosten und Laufzeit rechnest. Gute Angebote drücken den Effektivpreis über 24 Monate spürbar – oft um 10 € bis 20 € pro Monat. Wer nur auf den Bonus schaut, tappt schnell in die Rabattfalle."
 
 social_posted: true
@@ -36,7 +42,6 @@ quellen:
     datum: "2026-08-05"
 faktencheck: "2026-10-13"
 ---
-
 
 DSL-Wechselbonus sichern im Check: Viele Haushalte zahlen für ihr Internet noch denselben Preis wie vor drei oder vier Jahren; das ist ein Modellwert. Glasfaser und schnelle Leitungen sind längst Standard. Trotzdem bleiben viele im alten, teuren Vertrag. Der Grund: Der Wechsel klingt kompliziert – ist er aber meist nicht. Genau hier locken Anbieter mit Rabatten, Startguthaben und dem klassischen **DSL-Wechselbonus**. (Stand: Oktober 2026)
 
@@ -143,7 +148,7 @@ Manche Anbieter locken mit guten Routern oder Spielekonsolen. Prüfe genau: Brau
 Ein Wechsel lohnt sich im Oktober 2026 besonders oft, wenn:
 
 - Dein aktueller Vertrag die Mindestlaufzeit überschritten hat,
-- du monatlich deutlich mehr als **ca. 40 € bis 50 €** für Standard-DSL (100–250 Mbit/s) zahlst,. Das ist ein Rechenbeispiel.
+- du monatlich deutlich mehr als **ca. 40 € bis 50 €** für Standard-DSL (100–250 Mbit/s) zahlst; das ist ein Modellwert. Das ist ein Rechenbeispiel.
 - Du noch einen alten Vertrag ohne moderne Glasfaser-Optionen nutzt,
 - dein aktueller Anbieter keine Treue-Rabatte gewährt,
 - die Verbindungsqualität nicht mehr deinen Anforderungen entspricht.
@@ -160,7 +165,7 @@ Achte zudem auf die Routermiete: Schon **ca. 6 € bis 9 €** im Monat summie
 
 Hektik ist beim [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) ein schlechter Ratgeber. Wer erst kurz vor Ende der [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) sucht, übersieht oft das Kleingedruckte.
 
-Ein Vorlauf von **ca. 3 bis 4 Monaten** ist ideal, um:. Das ist ein Modellwert.
+Ein Vorlauf von **ca. 3 bis 4 Monaten** ist ideal, um; das ist ein Beispielwert. Das ist ein Modellwert.
 
 - In Ruhe Tarife und Boni zu vergleichen,
 - die Hardware-Kompatibilität zu prüfen,

@@ -45,6 +45,9 @@ jobs:
       - name: Krypto- und YAML-Bibliotheken für Token-Auto-Refresh & Engine installieren
         run: pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
 
+      - name: KI-Herkunft an Pinterest-Sendegrenzen testen
+        run: python3 -m unittest scripts.tests.test_pinterest_ki_provenienz -v
+
       - name: Pinterest-Bereitschaft prüfen (sauber skip ohne Keys)
         id: bereit
         # 12.08.: Kein Secret + keine enc -> kein roter Tageslauf mehr.

@@ -1,14 +1,11 @@
 version: 1
-generated_at: '2026-11-11T11:49:30.404687+00:00'
+generated_at: '2026-11-13T12:06:39.652125+00:00'
 window_days: 60
 min_samples: 3
 channels:
   mastodon:
-    samples: 11
+    samples: 10
     angles:
-      takeaway:
-        score: 1.0
-        samples: 2
       nutzen:
         score: 1.0
         samples: 5
@@ -16,6 +13,9 @@ channels:
         score: 1.0
         samples: 3
       zahl:
+        score: 1.0
+        samples: 1
+      takeaway:
         score: 1.0
         samples: 1
     pillars:

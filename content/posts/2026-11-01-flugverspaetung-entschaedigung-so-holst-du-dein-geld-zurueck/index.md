@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck.jpg"
   alt: "Flugverspätung Entschädigung: So holst du dein Geld zurück"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: b284ab6f9a980457b6a7c4cdac407766c345924d38986271e2fee0b10e4e8e4b
+    geprueft_am: 2026-11-13
 faktencheck: 2026-11-01
 kurzantwort: "Bei einer Flugverspätung von mindestens drei Stunden am Zielort haben Reisende nach EU-Recht Anspruch auf eine Entschädigung von bis zu 600 Euro pro Person. Um das Geld zurückzuerhalten, kann die Forderung entweder direkt bei der Airline eingereicht oder über spezialisierte Online-Dienstleister geltend gemacht werden."
 ---
@@ -170,7 +176,7 @@ Um den Nutzen zu verstehen, hilft ein Blick auf die Zahlen. Wir nutzen hier eine
 
 In diesem Beispiel bekommt die Familie 700 € oder 1.000 € zurück. Das ist ein erheblicher Betrag für die Haushaltskasse.
 
-Es deckt vielleicht die Kosten für den Mietwagen oder mehrere Restaurantbesuche. Solche Beträge sollte man nicht liegen lassen. Es ist eine einfache Rechnung: Zeitverlust gegen finanzielle Kompensation.
+Es deckt vielleicht die Kosten für den Mietwagen oder mehrere Restaurantbesuche. Solche Beträge sollte man nicht liegen lassen. Es ist eine einfache Rechnung: Zeitverlust gegen [finanzielle](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) Kompensation.
 
 ## Was kostet dich die Durchsetzung?
 

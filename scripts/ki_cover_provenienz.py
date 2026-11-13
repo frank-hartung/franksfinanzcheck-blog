@@ -54,6 +54,36 @@ def local_cover(root: Path, name: str) -> Path:
     return target
 
 
+def pruefe_ki_cover(root: Path, cover: dict) -> tuple[Path, str]:
+    """Fassungsgebundenen Nachweis für EIN deklariertes Original prüfen.
+
+    Auch Social-Publisher nutzen dieselbe Prüfung an ihrer Sendegrenze;
+    ein bloßes `deepfake: false` ersetzt Hash, Quelle und Datum nicht.
+    """
+    path = local_cover(root, cover.get("image"))
+    if not path.is_file():
+        raise ValueError("Originaldatei fehlt")
+    sha = hashlib.sha256(path.read_bytes()).hexdigest()
+    evidence = cover.get("ki_pruefung")
+    if not isinstance(evidence, dict):
+        raise ValueError("cover.ki_pruefung mit sha256, quelle, geprueft_am und deepfake fehlt")
+    if evidence.get("sha256") != sha:
+        raise ValueError("sha256 stimmt nicht mit Originaldatei überein")
+    if not isinstance(evidence.get("quelle"), str) or not evidence["quelle"].strip():
+        raise ValueError("konkreter Herkunftsnachweis fehlt")
+    try:
+        date = dt.date.fromisoformat(str(evidence.get("geprueft_am", "")))
+    except ValueError:
+        raise ValueError("geprueft_am muss ein ISO-Datum sein") from None
+    if date > dt.date.today():
+        raise ValueError("geprueft_am liegt in der Zukunft")
+    if type(evidence.get("deepfake")) is not bool:
+        raise ValueError("Deepfake-Einzelfallprüfung (true/false) fehlt")
+    if evidence["deepfake"]:
+        raise ValueError("Deepfake nicht freigegeben: Social-, OG- und sonstige Ausspielwege gesondert absichern")
+    return path, sha
+
+
 def collect(root: Path = ROOT):
     result = []
     for p in sorted((root / "content").rglob("*.md")):
@@ -110,28 +140,7 @@ def audit(root: Path = ROOT):
                     errors.append(f"{rel}: dieselbe Datei ist in {declared[path].relative_to(root).as_posix()} als KI-Cover deklariert; auch hier Kennzeichnung und Prüfung ergänzen")
             continue
         try:
-            path = local_cover(root, cover.get("image"))
-            if not path.is_file():
-                raise ValueError("Originaldatei fehlt")
-            sha = hashlib.sha256(path.read_bytes()).hexdigest()
-            rec["sha256"] = sha
-            evidence = cover.get("ki_pruefung")
-            if not isinstance(evidence, dict):
-                raise ValueError("cover.ki_pruefung mit sha256, quelle, geprueft_am und deepfake fehlt")
-            if evidence.get("sha256") != sha:
-                raise ValueError("sha256 stimmt nicht mit Originaldatei überein")
-            if not isinstance(evidence.get("quelle"), str) or not evidence["quelle"].strip():
-                raise ValueError("konkreter Herkunftsnachweis fehlt")
-            try:
-                date = dt.date.fromisoformat(str(evidence.get("geprueft_am", "")))
-            except ValueError:
-                raise ValueError("geprueft_am muss ein ISO-Datum sein") from None
-            if date > dt.date.today():
-                raise ValueError("geprueft_am liegt in der Zukunft")
-            if type(evidence.get("deepfake")) is not bool:
-                raise ValueError("Deepfake-Einzelfallprüfung (true/false) fehlt")
-            if evidence["deepfake"]:
-                raise ValueError("Deepfake nicht freigegeben: Social-, OG- und sonstige Ausspielwege gesondert absichern")
+            _, rec["sha256"] = pruefe_ki_cover(root, cover)
         except (OSError, ValueError) as exc:
             errors.append(f"{rel}: {exc}")
     return records, errors

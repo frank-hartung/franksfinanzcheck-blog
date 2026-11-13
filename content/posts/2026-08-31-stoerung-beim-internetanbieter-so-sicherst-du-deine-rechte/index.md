@@ -25,6 +25,12 @@ cover:
   image: "images/covers/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte.jpg"
   alt: "Störung beim Internetanbieter: So sicherst du deine Rechte"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 549285c9daa23be591ded8a766eb388a863b4861aea899a57c97bb313ab20c9f
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur – Verbraucherportal Telekommunikation: Vertrag und Laufzeit"
@@ -49,7 +55,6 @@ quellen:
 kurzantwort: "Bei einer Störung meldest du den Ausfall beim Anbieter und lässt dir eine Vorgangsnummer geben. Bewahre Datum, Uhrzeit, Messwerte und jede Nachricht auf. Der Anbieter muss die Störung zeitnah beheben; bleibt der Anschluss länger tot, prüfe eine Gutschrift oder Entschädigung und wende dich an die Bundesnetzagentur, wenn die Reaktion ausbleibt."
 ---
 
-
 Eine Störung beim [Internetanbieter](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) beginnt harmlos: Ein Video ruckelt, eine Seite lädt nicht; das ist ein Modellwert. Zwanzig Minuten später steht fest: Der Anschluss ist tot. Dann beginnt der schwierige Teil. Viele Verbraucher geben auf, obwohl sie im Recht sind.
 
 Der Grund ist selten die Rechtslage. Er ist die Beweislage. Wer den Ausfall nicht ab der ersten Minute festhält, hat später eine Erinnerung und keine Unterlagen.
@@ -59,7 +64,7 @@ Der Grund ist selten die Rechtslage. Er ist die Beweislage. Wer den Ausfall nich
 * Jeder Ausfall gehört gemeldet – telefonisch **und** schriftlich, mit Datum und Uhrzeit.
 * Verlange eine **Vorgangsnummer** und notiere sie zusammen mit dem Namen des Mitarbeiters.
 * Der Anbieter muss die Störung beheben; eine pauschale Wartezeit gibt es nicht, aber eine Pflicht zur zeitnahen Entstörung.
-* Nach längeren Ausfällen prüfe eine **Gutschrift oder Entschädigung** – die Regeln zum Wechsel und zur Umschaltung findest du im [Verbraucherportal der Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Vertrag/start.html).
+* Nach längeren Ausfällen prüfe eine **Gutschrift oder [Entschädigung](../../posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/)** – die Regeln zum Wechsel und zur Umschaltung findest du im [Verbraucherportal der Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Vertrag/start.html).
 * Bleibt die Reaktion aus, hilft eine Beschwerde über die [Bundesnetzagentur](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html).
 
 ---
@@ -92,7 +97,7 @@ Der erste Schritt kostet keine Wartezeit. Er spart oft den Anruf. Gehe die vier 
 
 Die Meldung entscheidet über den weiteren Verlauf. Sie muss drei Dinge leisten: den Ausfall beschreiben, ihn zeitlich einordnen und einen Vorgang erzeugen.
 
-**Erstens: schriftlich melden.** Nutze das Kontaktformular oder die Adresse aus den Vertragsunterlagen. Ein Anruf ist schnell, hinterlässt aber keine Spur. Meldest du telefonisch, schreibe danach eine kurze E-Mail mit dem Inhalt: „Ich habe am heutigen Tag um 18:40 Uhr eine Störung gemeldet, Vorgangsnummer 0815, Ergebnis: keine Besserung.". Das ist ein Modellwert.
+ Meldest du telefonisch, schreibe danach eine kurze E-Mail mit dem Inhalt: „Ich habe am heutigen Tag um 18:40 Uhr eine Störung gemeldet, Vorgangsnummer 0815, Ergebnis: keine Besserung."; das ist ein Modellwert. Das ist ein Modellwert.
 
 **Zweitens: alles notieren.** Datum, Uhrzeit, Symptom, Dauer der Warteschleife, Name des Mitarbeiters, Vorgangsnummer. Ein Zettel oder eine Notiz auf dem Handy reicht. Diese Liste ist später mehr wert als jede Erinnerung.
 
@@ -211,7 +216,7 @@ Melde den Ausfall per E-Mail oder Kontaktformular und bewahre den Beleg. Nach me
 
 Das ist ein Einzelfall mit strengen Voraussetzungen. Hol dafür eine Beratung, statt selbst zu kündigen. Ein gekündigter Anschluss ist schwerer zu reparieren als ein laufender.
 
-**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Tarif prüfen](../../posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/) · [DNS-Hack testen](../../posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/)
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Tarif prüfen](../../posts/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert/) · [DNS-Hack testen](../../posts/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt/) · [WLAN-Frust lösen](../../posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/)
 **Lesetipp:** [Umzug mit Internet: Anschluss und Rufnummer mitnehmen](../../posts/2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen/)
 
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Gaspreiserhöhung Sonderkündigungsrecht"
+title: "Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas"
 description: Nutze dein Gaspreiserhöhung Sonderkündigungsrecht. Ich zeige dir, wie du die Grundversorgung Gas kündigen kannst und beim Gastarife vergleichen sparst.
 date: 2026-11-09T11:26:53Z
 draft: false
@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem.jpg"
   alt: "Gaspreiserhöhung Sonderkündigungsrecht: Raus aus"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: eee3ca84df2521342b2c95023a3a2481a4565ad8c33d160fdc855486a5687c32
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Referenzseite bundesnetzagentur.de"
@@ -115,7 +121,7 @@ Das ist der bequemste Weg.
 Du suchst dir einen neuen Tarif und gibst den Wechsel in Auftrag. 
 
 Der neue Versorger meldet dich beim alten ab. 
-In der Grundversorgung hast du ohnehin nur zwei Wochen (Modellrechnung) Kündigungsfrist. 
+In der Grundversorgung hast du ohnehin nur zwei Wochen (Modellrechnung) [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/). 
 Du bist dort also sehr flexibel. 
 Wenn du aber dein Sonderkündigungsrecht in einem Sondervertrag nutzt, solltest du selbst kündigen.
 
@@ -146,7 +152,7 @@ Prüfe auch, ob es sich um einen Ökogastarif handelt.
 Oft sind diese kaum teurer als konventionelle Tarife. 
 Nutze Vergleichsportale, aber schalte die Filter klug. 
 Filtere nach hoher Kundenempfehlung. 
-So vermeidest du schwarze Schafe auf dem Markt. 
+So [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du schwarze Schafe auf dem Markt. 
 
 [Hier kannst du direkt Gastarife vergleichen und sparen.](/go/gas/)
 

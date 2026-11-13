@@ -22,6 +22,12 @@ cover:
   image: "images/covers/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich.jpg"
   alt: "Finanzielle Freiheit erreichen: Denke dich reich"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 50d002a47de018a6314e632c931ee6ea4006fa68e23b536747d791bb47d99963
+    geprueft_am: 2026-11-13
 social_posted: false
 quellen:
   - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"
@@ -38,7 +44,6 @@ quellen:
     datum: "2026-08-14"
 faktencheck: 2026-11-05
 ---
-
 
 Du verdienst **ein Beispiel von 5.000 € netto** – und trotzdem bleibt nichts übrig im Modellfall? Der Kontostand hängt selten vom Gehalt ab. Deine Gedanken über Geld und Konsum entscheiden.
 
@@ -153,7 +158,7 @@ Das Ergebnis zeigt, wann sich dein Geld verdoppelt. Bei 6 % sind das rund 12 Ja
 
 ### Energiepreise in der Kalkulation nicht vergessen
 
-Die Sparfähigkeit eines Haushalts bemisst sich nicht am Gehalt allein, sondern an den Fixkosten, die übrig bleiben. Energie ist dabei ein wesentlicher Posten: Energieprodukte kosteten laut Statistischem Bundesamt (Verbraucherpreisindex) im Oktober 2026 vorläufig 2,8 % mehr als ein Jahr zuvor; Energie insgesamt verteuerte sich um +14,9 % gegenüber dem Vorjahresmonat. Wer die monatliche Sparrate kalkuliert, sollte aktuelle Energiepreise Einpreisen – sonst ist die geplante Rate zu hoch angesetzt und das Budget für den Vermögensaufbau schmilzt schneller als gedacht.
+ Energie ist dabei ein wesentlicher Posten: Energieprodukte kosteten laut Statistischem Bundesamt (Verbraucherpreisindex) im Oktober 2026 vorläufig 2,8 % mehr als ein Jahr zuvor; Energie insgesamt verteuerte sich um +14,9 % gegenüber dem Vorjahresmonat; das ist ein Modellwert. Wer die monatliche Sparrate kalkuliert, sollte aktuelle Energiepreise Einpreisen – sonst ist die geplante Rate zu hoch angesetzt und das Budget für den Vermögensaufbau schmilzt schneller als gedacht.
 
 [Quelle: Statistisches Bundesamt, Verbraucherpreisindex und Inflationsrate in Deutschland, https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html]
 

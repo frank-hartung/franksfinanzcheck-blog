@@ -14,6 +14,12 @@ cover:
   image: "images/covers/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke.jpg"
   alt: "WLAN verbessern: So bringst du stabilen Speed in jede Ecke"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 6977b6bf039c58ab815a18dda3b085b2db1e77f6741710dd3aee268c17e6476f
+    geprueft_am: 2026-11-13
 kurzantwort: "Um dein WLAN spürbar zu verbessern, platziere den Router zentral und frei auf mindestens 1 Meter Höhe, trenne 2,4-GHz- und 5-GHz-Frequenzbänder und nutze bei größeren Wohnungen ein modernes Mesh-System. Dadurch steigt die nutzbare Datenrate in abgelegenen Räumen oft von unter 20 Mbit/s auf über 180 Mbit/s."
 
 social_posted: true

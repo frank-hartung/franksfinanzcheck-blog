@@ -19,6 +19,12 @@ cover:
   image: "images/covers/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026.jpg"
   alt: "50-30-20-Regel: Beherrsche dein Budget"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: f474fc648fed66a1239baee1b17691caac27a6331008ab023e08d373111af3a5
+    geprueft_am: 2026-11-13
 quellen:
   - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"
     url: "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Einkommen-Konsum-Lebensbedingungen/Konsumausgaben-Lebenshaltungskosten/_inhalt.html"
@@ -132,9 +138,9 @@ Das sind aufs Jahr gerechnet **6.720 €**. Selbst wenn du davon zuerst nur ein
 
 ## Preisänderungen im Budget berücksichtigen
 
-Ein Budget muss Bewegungen aushalten. Die Oktober-Schätzung von [Destatis](https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html) vom 30.10.2026 zeigt 2,8 Prozent Inflation. Für Energie weist sie 12,2 Prozent Zuwachs zum Vorjahr aus; der Septemberwert lag bei 14,9 Prozent.
+Ein Budget muss Bewegungen aushalten. Die Oktober-Schätzung von [Destatis](https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html) vom 30.10.2026 zeigt 2,8 % Inflation. Für Energie weist sie 12,2 % Zuwachs zum Vorjahr aus; der Septemberwert lag bei 14,9 %.
 
-Nahrungsmittel standen bei plus 0,4 Prozent. Nutze diese Zahlen als Hinweis, nicht als pauschalen Aufschlag.
+Nahrungsmittel standen bei plus 0,4 %. Nutze diese Zahlen als Hinweis, nicht als pauschalen Aufschlag.
 
 Steigende Pflichtkosten können die 50-Prozent-Grenze sprengen. Dann brauchst du kürzere Wünsche, günstigere Verträge oder eine andere Zielquote. Passe die Sparrate an, bis Reserve und laufende Rechnungen wieder gedeckt sind.
 

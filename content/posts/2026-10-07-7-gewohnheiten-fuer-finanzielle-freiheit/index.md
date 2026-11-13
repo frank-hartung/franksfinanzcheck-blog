@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit.jpg"
   alt: "Sieben Geldgewohnheiten für mehr Übersicht und finanziellen Spielraum"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 980627d531e5d1368e2bc1043cdbd867a832c21488bf83aea69ca7f076c409d5
+    geprueft_am: 2026-11-13
 pin_title: "7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen"
 pin_description: "*Werbung | Finanzielle Freiheit beginnt im Alltag: Sieben klare Gewohnheiten helfen dir, Einnahmen, Fixkosten, Rücklagen und Ziele ohne leere Versprechen zu ordnen. Mehr Spartipps auf FranksFinanzcheck! #finanziellefreiheit #budgetplanen #ruecklagenbilden"
 quellen:
@@ -37,7 +43,6 @@ quellen:
     datum: "2026-10-07"
 faktencheck: "2026-10-07"
 ---
-
 
 Sieben Gewohnheiten für [finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) im Check: [Finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) klingt nach einem großen Ziel. Im Alltag beginnt sie oft mit kleinen, klaren Entscheidungen.
 
@@ -222,7 +227,7 @@ Kopple die Gewohnheit an etwas Festes. Etwa den Kontoblick an den Montagskaffee.
 
 ### Was mache ich in einem teuren Monat?
 
-Halte die Routine, auch wenn die Beträge sinken. Fünf Euro statt fünfzig zählen. Es geht um das Muster, nicht um die Summe.
+ Fünf Euro statt fünfzig zählen; das ist ein Modellwert. Es geht um das Muster, nicht um die Summe.
 
 ### Soll ich das Geld sofort aufteilen?
 

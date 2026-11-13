@@ -13,6 +13,12 @@ cover:
   image: "images/covers/2026-09-21-tierkrankenversicherung-hund-katze-kosten.jpg"
   alt: "Tierkrankenversicherung für Hund und Katze: Kosten realistisch einschätzen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 811dac0b8f5fb2dd74fe0952016afcf2c93e744dc2b7e652911b79253efe9710
+    geprueft_am: 2026-11-13
 kurzantwort: "Eine Tierkrankenversicherung kann sich lohnen, wenn du hohe Tierarztkosten finanziell nicht gut abfedern kannst oder maximale Planbarkeit möchtest. Entscheidend ist nicht der billigste Monatsbeitrag, sondern das Zusammenspiel aus Leistungsumfang, Selbstbeteiligung, Erstattung und Ausschlüssen. Wer Hund oder Katze nur nach dem Beitrag absichert, vergleicht zu kurz."
 social_posted: true
 keywords: ["Tierkrankenversicherung Hund", "Tierkrankenversicherung Katze", "Tierarztkosten absichern", "Haustier Versicherung", "OP Versicherung Tier", "Tierkrankenversicherung für Hund & Katze", "Tierkrankenversicherung", "realistisch"]

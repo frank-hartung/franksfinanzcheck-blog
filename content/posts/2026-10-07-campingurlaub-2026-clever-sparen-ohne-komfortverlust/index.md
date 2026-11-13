@@ -25,6 +25,12 @@ cover:
   image: "images/covers/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust.jpg"
   alt: "Campingurlaub planen und Kosten für Platz, Fahrt und Ausrüstung erfassen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 4d8613efd489cccf0ed2242c099631ab5ddfedd71ccccf9c2ccd8779b4ea7fc4
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Urlaub buchen: Hinweise zu Angeboten und Buchungsproblemen"
@@ -216,11 +222,11 @@ Kühle nur, was du wirklich brauchst. Ein guter Kühler hält mehrere Tage. Kauf
 
 ### Wie plane ich den Einkauf vor der Abreise?
 
-Mach eine Liste für die ersten drei Tage. Alles Frische kaufst du unterwegs. Trockenes wie Nudeln, Haferflocken und Kaffee kommt von zu Hause. Das spart Platz und Geld.
+Mach eine Liste für die ersten drei Tage; das ist ein Modellwert. Alles Frische kaufst du unterwegs. Trockenes wie Nudeln, Haferflocken und Kaffee kommt von zu Hause. Das spart Platz und Geld.
 
 ### Lohnt sich die längere Anreisezeit?
 
-Plane Pausen alle zwei Stunden ein. Das kostet Zeit, spart aber Nerven. Ein warmer Kaffee am Rastplatz ist günstiger als eine Panne mit Bergung.
+Plane Pausen alle zwei Stunden ein; das ist ein Beispielwert. Das kostet Zeit, spart aber Nerven. Ein warmer Kaffee am Rastplatz ist günstiger als eine Panne mit Bergung.
 
 ### Was hilft gegen Regen auf der Tour?
 

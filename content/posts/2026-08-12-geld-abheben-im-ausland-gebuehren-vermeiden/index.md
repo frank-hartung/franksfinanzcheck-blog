@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden.jpg"
   alt: "Geld abheben im Ausland: Wo die Gebühren wirklich entstehen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: f304024abb7ba1b44c25cd04afc414b75de9e81d9c32c0073207ef1c9a8f9d59
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "BaFin – Girokonto: Rechte und Pflichten, Entgelte und Kontenvergleich"

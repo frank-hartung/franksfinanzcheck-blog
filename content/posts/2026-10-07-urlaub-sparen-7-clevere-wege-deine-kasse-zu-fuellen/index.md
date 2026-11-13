@@ -25,6 +25,12 @@ cover:
   image: "images/covers/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen.jpg"
   alt: "Urlaubskosten planen und Reisebudget im Blick behalten"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: b92a2a58c6a52c1421dc9603fccb95dde040ed0be4c1840f5f2cb2198ce632fc
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Urlaub buchen: Hinweise zu Angeboten und Buchungsproblemen"
@@ -160,7 +166,7 @@ Schreibe die wichtigsten Bedingungen auf. Bewahre Bestätigung, Zahlungsbeleg un
 
 **Faustregel:** Vergleiche eine Reise nach dem Gesamtpreis und den Bedingungen, nicht nach dem ersten Preis auf dem Bildschirm.
 
-**Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/) · [Mietwagen buchen und Bedingungen prüfen](../../posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/) · [Last-Minute-Urlaub planen](../../posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/) · [Campingurlaub planen](../../posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/) · [September-Roadtrip](../../posts/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen/)
+**Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/) · [Mietwagen buchen und Bedingungen prüfen](../../posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/) · [Last-Minute-Urlaub planen](../../posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/) · [Campingurlaub planen](../../posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust/) · [September-Roadtrip](../../posts/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen/) · [Flugverspätung Entschädigung](../../posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/)
 
 ## Häufige Fragen
 

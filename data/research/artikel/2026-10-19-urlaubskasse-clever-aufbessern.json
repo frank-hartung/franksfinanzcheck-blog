@@ -1,31 +1,29 @@
 {
   "slug": "2026-10-19-urlaubskasse-clever-aufbessern",
   "titel": "Urlaubskasse clever aufbessern",
-  "erzeugt": "2026-10-20 09:36 UTC",
+  "erzeugt": "2026-11-12 13:14 UTC",
   "faellig": {
-    "faellig": true,
-    "prio": 0,
+    "faellig": false,
+    "prio": 9,
     "klasse": "saisonal",
-    "grund": "Erstrecherche – noch nie faktengeprüft",
-    "alter_tage": null,
-    "intervall": 30
+    "grund": "frisch geprüft vor 23 Tagen (Intervall 30 Tage)",
+    "alter_tage": 23,
+    "intervall": 30,
+    "frist": "2026-11-19",
+    "restlaufzeit": 7
   },
   "geo": {
-    "punkte": 3,
+    "punkte": 6,
     "maximum": 6,
-    "prozent": 50,
-    "offen": [
-      "Kurzantwort-Box (direkte Antwort für AI Overviews)",
-      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
-      "Sichtbares Prüfdatum (`faktencheck:`)"
-    ],
+    "prozent": 100,
+    "offen": [],
     "treffer": {
-      "kurzantwort": false,
+      "kurzantwort": true,
       "faq": true,
-      "quellen": false,
+      "quellen": true,
       "zahlen": true,
       "tabelle": true,
-      "faktencheck": false
+      "faktencheck": true
     }
   },
   "treffer": [
@@ -43,8 +41,30 @@
       "zitierbar": false
     }
   ],
-  "befunde": [],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Ein Mietwagen ist oft ein teurer Posten. Er kostet meistens fast so viel wie der Flug oder das Hotel.",
+      "stelle": "Ein Mietwagen ist oft ein teurer Posten. Er kostet meistens fast so viel wie der Flug oder das Hotel.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Preise werden dort fair und offen gezeigt.",
+      "stelle": "Die Preise werden dort fair und offen gezeigt. Du siehst sofort, welcher Anbieter wirklich günstig ist.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "luecke",
+      "text": "Geld sollte innerhalb von 48 Stunden zurück sein.",
+      "stelle": "Das Geld sollte innerhalb von 48 Stunden zurück sein. Das gilt natürlich nur, wenn der Wagen heil ist.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    }
+  ],
   "fehler": [
-    "Verbraucherzentrale – Reise: Feed nicht lesbar"
-  ]
+    "Verbraucherzentrale – Reise: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+  ],
+  "fassung_sha256": "17802654cc959499546c3128f367e907a6557707608239a1295a1904c3a60e86",
+  "text_sha256": "6809978056dc31a5c3548bcf5d150a4bf0cd9e607f480a202b96c8d8d18fe466",
+  "fachpruefung": "geprüft (groq:openai/gpt-oss-120b); 2 Befund(e) ohne belegbaren Textanker verworfen"
 }

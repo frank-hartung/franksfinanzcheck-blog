@@ -1,12 +1,12 @@
 # Faktenfrische: Urlaubskasse clever aufbessern
 
-> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-10-20 09:36 UTC.
+> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-12 13:14 UTC.
 > Agent-Reach-Kanäle, nur lesend. Fundstellen sind Signale, keine Freigabe.
 
 - **Artikel:** `content/posts/2026-10-19-urlaubskasse-clever-aufbessern/index.md`
 - **Themenwelt:** mietwagen
-- **Fälligkeit:** Erstrecherche – noch nie faktengeprüft (Klasse: saisonal)
-- **GEO-Reife:** 3/6 (50 %)
+- **Fälligkeit:** frisch geprüft vor 23 Tagen (Intervall 30 Tage) (Klasse: saisonal)
+- **GEO-Reife:** 6/6 (100 %)
 - **Suchbegriffe:** Urlaub sparen, Reisebudget Tipps, Günstig reisen, Urlaubskasse clever aufbessern, Urlaubskasse, aufbessern, Mietwagen, Kaution, Selbstbeteiligung, Reise, clever
 - **Kanäle:** rss:Verbraucherzentrale – Reise, web:verbraucherzentrale.de
 
@@ -33,14 +33,16 @@
 
 ## Fachliche Befunde (KI-Fachprüfung)
 
-_Keine Fachprüfung in diesem Lauf (kein KI-Schlüssel GROQ_API_KEY/GEMINI_API_KEY oder keine Befunde)._
+Status: geprüft (groq:openai/gpt-oss-120b); 2 Befund(e) ohne belegbaren Textanker verworfen
+
+- **luecke** – Ein Mietwagen ist oft ein teurer Posten. Er kostet meistens fast so viel wie der Flug oder das Hotel. (Beleg: <https://www.verbraucherzentrale.de/wissen/reise-mobilitaet>)
+- **luecke** – Die Preise werden dort fair und offen gezeigt. (Beleg: <https://www.verbraucherzentrale.de/wissen/reise-mobilitaet>)
+- **luecke** – Geld sollte innerhalb von 48 Stunden zurück sein. (Beleg: <https://www.verbraucherzentrale.de/wissen/reise-mobilitaet>)
 
 ## Offene GEO-Punkte
 
-- Kurzantwort-Box (direkte Antwort für AI Overviews)
-- Belegkette im Frontmatter (`quellen:` → citation-Schema)
-- Sichtbares Prüfdatum (`faktencheck:`)
+- keine
 
 ## Kanal-Störungen
 
-- Verbraucherzentrale – Reise: Feed nicht lesbar
+- Verbraucherzentrale – Reise: Abruf fehlgeschlagen (HTTP Error 404: Not Found)

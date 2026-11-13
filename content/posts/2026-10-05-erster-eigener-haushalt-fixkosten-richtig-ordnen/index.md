@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen.jpg"
   alt: "Der erste eigene Haushalt: Fixkosten von Anfang an ordnen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 9a43b184ed2f72abe0b4587c97d5e8948a39a10180bd127c7681176a1d205264
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Verbraucherzentrale – Haushaltsbuch führen: So behalten Sie Ihre Ausgaben im Blick"
@@ -133,7 +139,7 @@ Dieser Trick klingt banal und wirkt sofort. Die Verbraucherzentrale beschreibt d
 
 ## Der Puffer in der ersten Wohnung
 
-Der erste Puffer muss nicht groß sein. Er muss existieren. Fang mit einem Betrag an, der eine kaputte Waschmaschine oder eine unerwartete Fahrt abdeckt, ohne dass du einen Kredit brauchst.
+Der erste Puffer muss nicht groß sein. Er muss existieren. Fang mit einem Betrag an, der eine kaputte [Waschmaschine](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/) oder eine unerwartete Fahrt abdeckt, ohne dass du einen Kredit brauchst.
 
 Ein eigenes Konto für diesen Zweck hilft, weil es nicht im Alltag sichtbar ist. Wähle ein Konto, das du nicht täglich öffnest, und überweise einen festen Betrag. Auch [kleine Beträge](../../posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/) bauen auf, wenn der Rhythmus stimmt.
 

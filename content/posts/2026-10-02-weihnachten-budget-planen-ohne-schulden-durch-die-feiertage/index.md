@@ -27,6 +27,12 @@ cover:
   image: "images/covers/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage.jpg"
   alt: "Weihnachten Budget planen: Ohne Schulden durch die Feiertage"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 7db38fceb77f099806cb302028455faafc4cf55b921c985423443f7ed57245a7
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Verbraucherzentrale – Effektiv sparen auch mit kleinem Budget"

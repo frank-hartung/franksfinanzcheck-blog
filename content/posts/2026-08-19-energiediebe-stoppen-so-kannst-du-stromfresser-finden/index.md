@@ -13,6 +13,12 @@ cover:
   image: "images/covers/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden.jpg"
   alt: "Energiediebe stoppen: So kannst du Stromfresser finden"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 9b316f5a073bdf5043ab8656f4e395592313a60da508ef60cb6534ab849ce01a
+    geprueft_am: 2026-11-13
 kurzantwort: "Stromfresser findest du am zuverlässigsten mit einem Energiekostenmessgerät. Miss Kühlgeräte sieben Tage lang und Geräte mit wechselnden Programmen über mehrere vollständige Nutzungen. Rechne dann Jahresverbrauch mal persönlichem Strompreis. Erst wenn die jährliche Ersparnis den Kaufpreis in sinnvoller Zeit ausgleicht, lohnt ein Austausch."
 social_posted: true
 keywords: ["Energiediebe stoppen", "Stromfresser finden", "Strom sparen Haushalt", "Standby Stromfresser", "Stromkosten senken"]
@@ -42,7 +48,6 @@ quellen:
     datum: "2026-11-07"
 faktencheck: 2026-11-07
 ---
-
 
 Du willst Energiediebe stoppen? Die Stromrechnung steigt. Muss da gleich der alte Kühlschrank raus? Nicht so schnell. Alte Geräte sind nicht immer die größten Stromfresser. Oft steckt der teure Kandidat ganz woanders: im Keller, beim [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) oder in der Spielekonsole, die rund um die Uhr im Standby läuft.
 
@@ -87,7 +92,7 @@ Mach danach mit dem größten Dauerläufer weiter. Das kann ein Kühlschrank sei
 ## Das Wichtigste in Kürze
 
 - Nutze deinen **eigenen Arbeitspreis** aus dem Stromvertrag. Nicht irgendeinen Werbewert.
-- Miss Kühl- und Gefriergeräte **sieben Tage** und rechne auf das Jahr hoch. Diese Messdauer empfiehlt die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen/so-finden-sie-den-passenden-kuehlschrank-10573).
+- Miss Kühl- und Gefriergeräte **sieben Tage** und rechne auf das Jahr hoch; das ist ein Modellwert. Diese Messdauer empfiehlt die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen/so-finden-sie-den-passenden-kuehlschrank-10573).
 - Rechne Dauerlast so: **Watt × Stunden ÷ 1.000 = kWh**.
 - Teile Geräte danach in drei Gruppen: **abschalten, anders nutzen, ersetzen**.
 - Vergleiche bei einem Neukauf den konkreten Verbrauch in kWh. Nicht nur die Effizienzklasse.

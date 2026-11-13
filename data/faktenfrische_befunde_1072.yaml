@@ -1,8 +1,28 @@
-stand: '2026-11-05'
+stand: '2026-11-12'
 issue: 1072
-lauf: 2026-11-05 12:43 UTC
+lauf: 2026-11-12 16:30 UTC
+runden:
+- stand: '2026-11-05'
+  lauf: 2026-11-05 12:43 UTC
+  umfang: Erstentscheidung – 47 Befunde am damaligen Text geprüft (Beleg-Allowlist,
+    Anker, Verbote).
+- stand: '2026-11-07'
+  umfang: Umbindung derselben Entscheidungen auf die Aussage-Projektion `betrieb-v2`,
+    weil der alte Hash Betriebsflächen mitzählte (kein neuer Befund, kein neuer Satz).
+- stand: '2026-11-11'
+  umfang: 90 Ledger-Einträge aus dem Nachlauf zur Produktionswahrheit (#1098), darunter
+    alle fünf Waschmaschinen-Befunde. Das Register wurde dabei nicht mitgeschrieben.
+- stand: '2026-11-12'
+  lauf: 2026-11-12 16:30 UTC
+  umfang: 14 Befunde in drei Artikeln neu entschieden (Pakete A/B/C/D und Issue 996).
+    Anker an den Text vom 12.11. gebunden, 5 Belege auf die BDEW-Strompreisanalyse
+    umgestellt, 2 Aussagen als Streichung geführt (beleg_url null), die drei
+    Quellenverzeichnisse ergänzt, 2 ungedeckte Meta-Aussagen entschärft.
 recherche:
   methode: Redaktionelle Prüfung jedes Befunds am heutigen Text (Stand 05.11.2026);
+  nachpruefung_2026_11_12: Zweite Runde für die Befunde, deren Anker der Umbau vom
+    11.11.2026 verschoben hat. Methode unverändert (Text gegen Entscheidung geprüft),
+    zusätzlich Verbots-Prüfung über Meta-Flächen und Beleg gegen Quellenverzeichnis.
     Quellen nur aus der Allowlist in data/agent_reach/faktenfrische.yaml; keine Übernahme
     von Marktzahlen ohne Fundstelle.
   abrufe:
@@ -731,107 +751,137 @@ befunde:
   typ: luecke
   befund: Die 50‑30‑20‑Regel für die Urlaubsbudget‑Aufteilung wird ohne Quellenangabe
     präsentiert.
-  entscheidung: 'Heutiger Text geprueft: 50–30–20-Regel heute als einfaches Budget-Modell
-    gekennzeichnet (''keine Vorgabe''), nicht als allgemeingultige Urlaubsregel.'
+  entscheidung: 'Am 12.11.2026 am überarbeiteten Text neu entschieden: Die 50-30-20-Aufteilung
+    steht heute ausdrücklich als „einfaches Modell für dein Budget im Urlaub“ und
+    „keine feste Vorgabe“ da – also als Planungshilfe, nicht als Regel mit Studienbeleg.
+    Die Beleg-Url der Verbraucherzentrale steht jetzt zusätzlich im Quellenverzeichnis
+    des Artikels; eine Prozent- oder Marktaussage wird nicht mehr behauptet.'
+  entscheidung_vorgaenger: 'Heutiger Text geprueft: 50–30–20-Regel heute als einfaches
+    Budget-Modell gekennzeichnet (''keine Vorgabe''), nicht als allgemeingultige
+    Urlaubsregel.'
   status: behoben
   belegtyp: ergaenzt
   beleg_url: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
   anker:
-  - einfaches budget-modell
-  - keine vorgabe
+  - einfaches modell für dein budget im urlaub
+  - keine feste vorgabe
   verboten_behauptend:
   - 50-30-20-regel für die urlaubsbudget-aufteilung ohne quell
   rest_risiko: Die Aufteilung ist eine Orientierung, keine Finanzregel.
   ledger_fassung_sha256: 6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2
-  geprueft_fassung: 19ab33d86a322015b37fcb4092c59b7446ffffacf15493b8a49b09298c071d90
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: e1c28aa72d49c371b539c09da48c0183025baaedf2a7e04e35d52ebb371c7d43
+  projektion: betrieb-v3
+  entschieden_am: '2026-11-12'
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
 - id: 274c32d1a16e9dffcf1a
   artikel: 2026-11-02-last-minute-urlaubsangebote-sichern
   titel: Last-Minute Urlaubsangebote sichern
   typ: luecke
   befund: Die Angabe, dass das Weglassen der Vollkasko‑Selbstbeteiligung die Kosten
     um 10 % bis 20 % senken kann, ist nicht mit einer Quelle belegt.
-  entscheidung: 'Heutiger Text geprueft: ''10–20 %'' heute als ''gangige Faustregel
-    für Versicherungs-Aufschlage'' gekennzeichnet; keine garantierte Ersparnis mehr.'
+  entscheidung: 'Am 12.11.2026 neu entschieden: Die 10-bis-20-Prozent-Angabe ist
+    heute als „Faustregel“ und „gängige Regel für den Markt“ gekennzeichnet; sie
+    wird nicht als Messwert und nicht als garantierte Ersparnis behauptet. Damit
+    trägt die Dämpfung die Entscheidung, nicht eine Zahl.'
+  entscheidung_vorgaenger: 'Heutiger Text geprueft: ''10–20 %'' heute als ''gangige
+    Faustregel für Versicherungs-Aufschlage'' gekennzeichnet; keine garantierte
+    Ersparnis mehr.'
   status: behoben
   belegtyp: ergaenzt
   beleg_url: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
   anker:
-  - gängige faustregel
-  - keine garantierte marktprognose
+  - eine faustregel besagt
+  - eine gängige regel für den markt
   verboten_behauptend:
   - ersparnis von 10 % bis 20 % garantiert
   rest_risiko: Die tatsächliche Ersparnis hängt vom Tarif und Fahrzeug ab.
   ledger_fassung_sha256: 6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2
-  geprueft_fassung: 19ab33d86a322015b37fcb4092c59b7446ffffacf15493b8a49b09298c071d90
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: e1c28aa72d49c371b539c09da48c0183025baaedf2a7e04e35d52ebb371c7d43
+  projektion: betrieb-v3
+  entschieden_am: '2026-11-12'
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
 - id: 5c572a933edece129bba
   artikel: 2026-11-02-last-minute-urlaubsangebote-sichern
   titel: Last-Minute Urlaubsangebote sichern
   typ: luecke
   befund: Die Aussage, dass Stornogebühren häufig einem Tagespreis entsprechen, ist
     unbelegt.
-  entscheidung: 'Heutiger Text geprueft: Teil-Stornogebuhr heute als vertragsabhangig
-    dargestellt (''ob und in welcher Hohe ... hangt vom Vertrag ab''), kein Tagespreis
-    mehr als Festwert.'
+  entscheidung: 'Am 12.11.2026 neu entschieden: Die Gleichsetzung „Stornogebühr
+    entspricht einem Tagespreis“ ist im überarbeiteten Text nicht mehr enthalten.
+    Übrig bleibt der Verweis auf den eigenen Vertrag. Für eine gestrichene Aussage
+    gibt es keine Beleg-Url – Hausregel: beleglos ist nur die Streichung.'
+  entscheidung_vorgaenger: 'Heutiger Text geprueft: Teil-Stornogebuhr heute als
+    vertragsabhangig dargestellt (''ob und in welcher Hohe ... hangt vom Vertrag
+    ab''), kein Tagespreis mehr als Festwert.'
   status: behoben
-  belegtyp: ergaenzt
-  beleg_url: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
+  belegtyp: streichung
+  beleg_url: null
   anker:
-  - hängt vom vertrag ab
+  - die genaue höhe steht in deinem vertrag
+  - prüfe das genaue datum in deinem vertrag
   verboten_behauptend:
   - stornogebühren häufig einem tagespreis entsprechen
   rest_risiko: Stornobedingungen sind anbieterabhängig.
   ledger_fassung_sha256: 6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2
-  geprueft_fassung: 19ab33d86a322015b37fcb4092c59b7446ffffacf15493b8a49b09298c071d90
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: e1c28aa72d49c371b539c09da48c0183025baaedf2a7e04e35d52ebb371c7d43
+  projektion: betrieb-v3
+  entschieden_am: '2026-11-12'
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
 - id: 9d9d4afc8d6c421a0d14
   artikel: 2026-11-02-last-minute-urlaubsangebote-sichern
   titel: Last-Minute Urlaubsangebote sichern
   typ: luecke
   befund: Die Behauptung, dass Last‑Minute‑Deals wegen Restkapazitäten zu niedrigeren
     Preisen führen, fehlt eine fundierte Quelle.
-  entscheidung: 'Heutiger Text geprueft: Last-Minute-Preisrueckgang heute als Einschatzung
-    ohne Marktprognose gekennzeichnet (''kann an Restkapazitanzen liegen''), keine
-    gesicherte Marktdatenbehauptung mehr.'
+  entscheidung: 'Am 12.11.2026 neu entschieden: Der Preiseffekt kurz vor Reisebeginn
+    steht heute als „scheinbar“ und „logische Einschätzung für den Markt“ da – eine
+    Erwartung, keine Marktprognose mit Datenanspruch. Beleg und Quellenverzeichnis
+    sind deckungsgleich.'
+  entscheidung_vorgaenger: 'Heutiger Text geprueft: Last-Minute-Preisrueckgang heute
+    als Einschatzung ohne Marktprognose gekennzeichnet (''kann an Restkapazitanzen
+    liegen''), keine gesicherte Marktdatenbehauptung mehr.'
   status: behoben
   belegtyp: ergaenzt
   beleg_url: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
   anker:
-  - einschätzung, keine garantierte marktprognose
+  - logische einschätzung für den markt
+  - die kosten sinken scheinbar
   verboten_behauptend:
   - last-minute-deals wegen restkapazitäten zu niedrigeren preisen führen
   rest_risiko: Last-Minute-Preise können auch steigen.
   ledger_fassung_sha256: 6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2
-  geprueft_fassung: 19ab33d86a322015b37fcb4092c59b7446ffffacf15493b8a49b09298c071d90
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: e1c28aa72d49c371b539c09da48c0183025baaedf2a7e04e35d52ebb371c7d43
+  projektion: betrieb-v3
+  entschieden_am: '2026-11-12'
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
 - id: fb50388539a0e8b4461c
   artikel: 2026-11-02-last-minute-urlaubsangebote-sichern
   titel: Last-Minute Urlaubsangebote sichern
   typ: praezision
   befund: Die Empfehlung, ausschließlich CHECK24 für den Mietwagenvergleich zu nutzen,
     ist ein unqualifiziertes Superlativ ohne Messgrundlage.
-  entscheidung: 'Heutiger Text geprueft: ''ausschlie?lich CHECK24'' entfernt; heute
-    ''Vergleichsportale wie CHECK24'' als ein Beispiel unter mehreren, kein Vollstandigkeitsversprechen
-    mehr.'
+  entscheidung: 'Am 12.11.2026 neu entschieden: CHECK24 ist heute ein Beispiel („ein
+    guter Dienst für die Suche“), keine ausschließliche Empfehlung. Der Text verlangt
+    zusätzlich den Vergleich der Endsumme und der Bedingungen. Ein Superlativ wird
+    nicht mehr behauptet.'
+  entscheidung_vorgaenger: 'Heutiger Text geprueft: ''ausschlie?lich CHECK24'' entfernt;
+    heute ''Vergleichsportale wie CHECK24'' als ein Beispiel unter mehreren, kein
+    Vollstandigkeitsversprechen mehr.'
   status: behoben
   belegtyp: ergaenzt
   beleg_url: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
   anker:
-  - vergleichsportal
-  - check24
+  - ein guter dienst für die suche ist check24
+  - achte dabei nicht nur auf den kleinsten preis pro tag
   verboten_behauptend:
   - ausschließlich check24
   - alle großen anbieter
   rest_risiko: Ein einziges Portal zeigt keine Marktabdeckung.
   ledger_fassung_sha256: 6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2
-  geprueft_fassung: 19ab33d86a322015b37fcb4092c59b7446ffffacf15493b8a49b09298c071d90
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: e1c28aa72d49c371b539c09da48c0183025baaedf2a7e04e35d52ebb371c7d43
+  projektion: betrieb-v3
+  entschieden_am: '2026-11-12'
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
 - id: 785eee76d888bb05ad96
   artikel: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
   titel: Günstigen Mietwagen für den Urlaub buchen
@@ -840,7 +890,13 @@ befunde:
     Referenzwert ohne Quellenangabe (z. B. Branchenverband) angeführt.
   entscheidung: 'Heutiger Text geprueft: 0,20 €/km steht nur noch als kennzeichnete
     Rechenbeispiel-Annahme (''Annahme: Kilometerpauschale 0,20 € pro km''), nicht
-    als allgemeiner Referenzwert.'
+    als allgemeiner Referenzwert. Am 12.11.2026 an die heutige Fassung gebunden:
+    Die Beleg-Url steht jetzt im Quellenverzeichnis des Artikels (vorher war sie
+    nur im Register genannt), und die Kurzantwort führt keine Zahlen mit leeren
+    Zitatklammern mehr. Die Entscheidung selbst bleibt unverändert.'
+  entscheidung_vorgaenger: 'Heutiger Text geprueft: 0,20 €/km steht nur noch als
+    kennzeichnete Rechenbeispiel-Annahme (''Annahme: Kilometerpauschale 0,20 € pro
+    km''), nicht als allgemeiner Referenzwert.'
   status: behoben
   belegtyp: ergaenzt
   beleg_url: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
@@ -851,9 +907,10 @@ befunde:
   - kilometerpauschale von 0,20 €/km wird als referenzwert
   rest_risiko: Die tatsächliche Pauschale hängt vom Anbieter und Vertrag ab.
   ledger_fassung_sha256: cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf
-  geprueft_fassung: c83db5c8f5f3145ce12303a945dcf8b870eb432f8ee23ca268cacc91c97d3f98
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: 8ac687755f34263c980b7ffd282bb7492f9ac2cc71d10a60c62d5d8dcaf711ff
+  projektion: betrieb-v3
+  entschieden_am: '2026-11-12'
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
 - id: 843ec148e23841b7bf35
   artikel: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
   titel: Günstigen Mietwagen für den Urlaub buchen
@@ -862,7 +919,13 @@ befunde:
     und ist in der genannten Quelle nicht enthalten.
   entscheidung: 'Heutiger Text geprueft: Der 4K-Prüfpfad ist heute in einem eigenen
     Abschnitt erklart (Kosten sehen, Konditionen rechnen, kundigungsfenster sichern,
-    Kurs halten) und ist nicht mehr nur eine unbelegte Nennung.'
+    Kurs halten) und ist nicht mehr nur eine unbelegte Nennung. Am 12.11.2026 an
+    die heutige Fassung gebunden: Die Beleg-Url steht jetzt im Quellenverzeichnis
+    des Artikels (vorher war sie nur im Register genannt), und die Kurzantwort führt
+    keine Zahlen mit leeren Zitatklammern mehr. Die Entscheidung selbst bleibt unverändert.'
+  entscheidung_vorgaenger: 'Heutiger Text geprueft: Der 4K-Prüfpfad ist heute in
+    einem eigenen Abschnitt erklart (Kosten sehen, Konditionen rechnen, kundigungsfenster
+    sichern, Kurs halten) und ist nicht mehr nur eine unbelegte Nennung.'
   status: behoben
   belegtyp: ergaenzt
   beleg_url: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
@@ -874,9 +937,10 @@ befunde:
   verboten_behauptend: []
   rest_risiko: Der Prüfpfad strukturiert nur; er garantiert keinen niedrigen Preis.
   ledger_fassung_sha256: cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf
-  geprueft_fassung: c83db5c8f5f3145ce12303a945dcf8b870eb432f8ee23ca268cacc91c97d3f98
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: 8ac687755f34263c980b7ffd282bb7492f9ac2cc71d10a60c62d5d8dcaf711ff
+  projektion: betrieb-v3
+  entschieden_am: '2026-11-12'
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
 - id: def43a04853be4c35f7f
   artikel: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
   titel: Günstigen Mietwagen für den Urlaub buchen
@@ -885,7 +949,13 @@ befunde:
     (3-4 Wochen) sind Marktdaten ohne Beleg durch die Fachquelle.
   entscheidung: 'Heutiger Text geprueft: Preisprognose (''letzten drei Buchungswochen'')
     heute als Einschatzung ohne Marktprognose gekennzeichnet; Buchungsvorlauf 3–4
-    Wochen nur noch als Orientierung ohne Marktgarantie.'
+    Wochen nur noch als Orientierung ohne Marktgarantie. Am 12.11.2026 an die heutige
+    Fassung gebunden: Die Beleg-Url steht jetzt im Quellenverzeichnis des Artikels
+    (vorher war sie nur im Register genannt), und die Kurzantwort führt keine Zahlen
+    mit leeren Zitatklammern mehr. Die Entscheidung selbst bleibt unverändert.'
+  entscheidung_vorgaenger: 'Heutiger Text geprueft: Preisprognose (''letzten drei
+    Buchungswochen'') heute als Einschatzung ohne Marktprognose gekennzeichnet;
+    Buchungsvorlauf 3–4 Wochen nur noch als Orientierung ohne Marktgarantie.'
   status: behoben
   belegtyp: ergaenzt
   beleg_url: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
@@ -896,9 +966,10 @@ befunde:
   - preisprognose (anstieg in den letzten 3 wochen)
   rest_risiko: Ein Buchungsvorlauf ist keine Preissicherheit.
   ledger_fassung_sha256: cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf
-  geprueft_fassung: c83db5c8f5f3145ce12303a945dcf8b870eb432f8ee23ca268cacc91c97d3f98
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: 8ac687755f34263c980b7ffd282bb7492f9ac2cc71d10a60c62d5d8dcaf711ff
+  projektion: betrieb-v3
+  entschieden_am: '2026-11-12'
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
 - id: f064ea49ccefde26aef9
   artikel: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
   titel: Günstigen Mietwagen für den Urlaub buchen
@@ -907,7 +978,13 @@ befunde:
     ohne Nennung von Auswahlkriterien oder der Marktabdeckung.
   entscheidung: 'Heutiger Text geprueft: Vollstandigkeitsversprechen ''alle großen
     Anbieter'' entfernt; heute ''Vergleichsportale wie CHECK24 ... viele Anbieter'',
-    kein ausschließender Anspruch mehr.'
+    kein ausschließender Anspruch mehr. Am 12.11.2026 an die heutige Fassung gebunden:
+    Die Beleg-Url steht jetzt im Quellenverzeichnis des Artikels (vorher war sie
+    nur im Register genannt), und die Kurzantwort führt keine Zahlen mit leeren
+    Zitatklammern mehr. Die Entscheidung selbst bleibt unverändert.'
+  entscheidung_vorgaenger: 'Heutiger Text geprueft: Vollstandigkeitsversprechen
+    ''alle großen Anbieter'' entfernt; heute ''Vergleichsportale wie CHECK24 ...
+    viele Anbieter'', kein ausschließender Anspruch mehr.'
   status: behoben
   belegtyp: ergaenzt
   beleg_url: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
@@ -920,9 +997,10 @@ befunde:
   rest_risiko: Portale können einzelne Konditionen zeigen, aber keine Vollständigkeit
     zusichern.
   ledger_fassung_sha256: cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf
-  geprueft_fassung: c83db5c8f5f3145ce12303a945dcf8b870eb432f8ee23ca268cacc91c97d3f98
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: 8ac687755f34263c980b7ffd282bb7492f9ac2cc71d10a60c62d5d8dcaf711ff
+  projektion: betrieb-v3
+  entschieden_am: '2026-11-12'
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
 - id: 4284fd2d9c9005e7af8f
   artikel: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
   titel: 'Waschmaschine beladen: Weniger Kosten bei jedem Waschgang'
@@ -943,16 +1021,30 @@ befunde:
     Die Sperre gegen die alte Behauptung bleibt in Kraft.
   belegtyp: ergaenzt
   beleg_url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  entscheidung: 'Paket C, entschieden am 12.11.2026: Die Folgebehauptung „Überladung
+    führt zu Verschleiß und teuren Reparaturen“ ist gestrichen. Sie stützte sich
+    allein auf FORUM WASCHEN (ikw.org) – keine Domain der Allowlist, und die Kausalaussage
+    war im Quellentext nicht belegt. Geblieben sind zwei belegbare Sätze: die Empfehlung,
+    die Nennbeladung nicht zu überschreiten (im Text der Quelle Q4 zugeordnet),
+    und die Kostenfolge eines wiederholten Waschgangs, die der Artikel selbst herleitet.
+    Beleglosigkeit wird als Streichung geführt, nicht als Beleg.'
+  entscheidung_vorgaenger: 'Heutiger Text geprueft: Überladung behauptet heute nur
+    noch kauselich (''kann die Lager beschädigen''), keine konkreten Reparaturkosten
+    oder Verschleißdaten mehr als Tatsache.'
+  status: behoben
+  belegtyp: streichung
+  beleg_url: null
   anker:
-  - kann die lager der maschine beschädigen
-  - je nach gerät und häufigkeit
+  - forum waschen empfiehlt, die nennbeladung des geräts nicht zu überschreiten
+  - riskiert, dass die wäsche nicht sauber wird
   verboten_behauptend:
   - überladung der maschine zu schnellerem verschleiß und teuren reparaturen führt
   rest_risiko: Ob Überladung schadet, hängt von Gerät, Programm und Häufigkeit ab.
   ledger_fassung_sha256: e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3
-  geprueft_fassung: bd1f7a3f9f9a3f406dc2142b9138b1696791c753bdb0386b46fce925460ded24
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: d2de44d6edf218d75a4c02dfc136f42f017d0244e39312472a8c5d4aa9fc7872
+  projektion: betrieb-v3
+  entschieden_am: '2026-11-12'
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
 - id: 84e247f17354e224c973
   artikel: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
   titel: 'Waschmaschine beladen: Weniger Kosten bei jedem Waschgang'
@@ -972,19 +1064,31 @@ befunde:
     die unbelegten Aussagen entfernt. Die Anker dieser Entscheidung stammen aus der
     Fassung vom 05.11.2026; die Pruefung gilt dieser Fassung, nicht dem heutigen Text.
     Die Sperre gegen die alte Behauptung bleibt in Kraft.
+  entscheidung: 'Paket B, entschieden am 12.11.2026: Der Rückfall saß in den Meta-Flächen
+    – `description` und `pin_description` behaupteten weiter „senkt deine Fixkosten“,
+    der Body „senkt die Betriebskosten … nachhaltig“. Alle drei Stellen stehen wieder
+    in der Möglichkeitsform, der Body nennt den Effekt als kleinen Baustein und
+    nicht als Alleinursache. Die Prüfung deckte bis dahin nur den Body ab; deshalb
+    prüft der Regressionstest jetzt auch Titel, Beschreibung, Kurzantwort und Pin-Text.
+    Beleg: BDEW-Strompreisanalyse (Q3 im Artikel) trägt den Strompreis der Rechnung.'
+  entscheidung_vorgaenger: 'Heutiger Text geprueft: ''richtiges Beladen senkt die
+    Fixkosten'' heute als Moglichkeit (''kann die Fixkosten senken'') und als Modellbeispiel
+    dargestellt, nicht als pauschales Leistungsversprechen.'
+  status: behoben
   belegtyp: ergaenzt
-  beleg_url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  beleg_url: https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/
   anker:
-  - kann die fixkosten senken
-  - modellbeispiel
+  - kleiner baustein in deinem persönlichen fixkosten-cockpit
+  - kann die betriebskosten deines haushalts senken
   verboten_behauptend:
   - das richtige beladen allein die fixkosten senkt
   rest_risiko: Beladen allein senkt keine garantierten Fixkosten; Tarif und Nutzungsverhalten
     zählen mit.
   ledger_fassung_sha256: e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3
-  geprueft_fassung: bd1f7a3f9f9a3f406dc2142b9138b1696791c753bdb0386b46fce925460ded24
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: d2de44d6edf218d75a4c02dfc136f42f017d0244e39312472a8c5d4aa9fc7872
+  projektion: betrieb-v3
+  entschieden_am: '2026-11-12'
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
 - id: a2a7dc69f10393af6531
   artikel: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
   titel: 'Waschmaschine beladen: Weniger Kosten bei jedem Waschgang'
@@ -1004,18 +1108,30 @@ befunde:
     die unbelegten Aussagen entfernt. Die Anker dieser Entscheidung stammen aus der
     Fassung vom 05.11.2026; die Pruefung gilt dieser Fassung, nicht dem heutigen Text.
     Die Sperre gegen die alte Behauptung bleibt in Kraft.
+  entscheidung: 'Paket A, entschieden am 12.11.2026: Die Modellrechnung ist heute
+    vollständig offengelegt (Annahmen, Rechenwege, „Ergebnis der Modellrechnung“).
+    Der frühere Beleg (Bundesnetzagentur-Startseite) trug keinen der Werte; er ist
+    durch die BDEW-Strompreisanalyse ersetzt, die im Artikel als Q3 zitiert ist
+    und den Strompreis von 0,373 €/kWh trägt. Die Wasser- und Verbrauchswerte bleiben
+    als Szenario gekennzeichnet.'
+  entscheidung_vorgaenger: 'Heutiger Text geprueft: Modellrechnung (0,9 kWh/50 L,
+    0,6 kWh/35 L, 0,40 €/kWh, 0,005 €/L, 22 €/Jahr) steht heute durchgehend als
+    ''Ergebnis der Modellrechnung'' mit offengelegten Annahmen da; keine Außenbehauptung
+    mehr.'
+  status: behoben
   belegtyp: ergaenzt
-  beleg_url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  beleg_url: https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/
   anker:
-  - ergebnis der modellrechnung
   - annahmen für die modellrechnung
+  - ergebnis der modellrechnung
   verboten_behauptend:
   - modellrechnung ... fehlen einer fundierten quelle
   rest_risiko: Die Modellrechnung arbeitet mit offengelegten Annahmen, keine Außenbehauptung.
   ledger_fassung_sha256: e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3
-  geprueft_fassung: bd1f7a3f9f9a3f406dc2142b9138b1696791c753bdb0386b46fce925460ded24
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: d2de44d6edf218d75a4c02dfc136f42f017d0244e39312472a8c5d4aa9fc7872
+  projektion: betrieb-v3
+  entschieden_am: '2026-11-12'
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
 - id: cb794331f1cc0c715a55
   artikel: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
   titel: 'Waschmaschine beladen: Weniger Kosten bei jedem Waschgang'
@@ -1035,18 +1151,28 @@ befunde:
     die unbelegten Aussagen entfernt. Die Anker dieser Entscheidung stammen aus der
     Fassung vom 05.11.2026; die Pruefung gilt dieser Fassung, nicht dem heutigen Text.
     Die Sperre gegen die alte Behauptung bleibt in Kraft.
+  entscheidung: 'Paket A, entschieden am 12.11.2026: Die alte „rund 5 € im Modelljahr“-Aussage
+    existiert nicht mehr; der Artikel rechnet 100 volle gegen 200 halbe Ladungen
+    und kommt auf 28 bis 42 € pro Jahr – ausgewiesen als Ergebnis der Modellrechnung.
+    Beleg für den Preisanteil ist die BDEW-Strompreisanalyse (Q3 im Artikel).'
+  entscheidung_vorgaenger: 'Heutiger Text geprueft: ''rund 5 € jährlich'' steht
+    heute nur noch als Modelljahr-Beispiel (''im Modelljahr rund 5 €''), keine versprochene
+    Ersparnis mehr.'
+  status: behoben
   belegtyp: ergaenzt
-  beleg_url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  beleg_url: https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/
   anker:
-  - im modelljahr rund 5 €
+  - 28 bis 42 € pro jahr
+  - ergebnis der modellrechnung
   verboten_behauptend:
   - rund 5 € jährlich an strom- und wasserkosten spart
   rest_risiko: Die Ersparnis hängt von Strompreis, Wasserpreis und Waschverhalten
     ab.
   ledger_fassung_sha256: e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3
-  geprueft_fassung: bd1f7a3f9f9a3f406dc2142b9138b1696791c753bdb0386b46fce925460ded24
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: d2de44d6edf218d75a4c02dfc136f42f017d0244e39312472a8c5d4aa9fc7872
+  projektion: betrieb-v3
+  entschieden_am: '2026-11-12'
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
 - id: e6729081522126e972c2
   artikel: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
   titel: 'Waschmaschine beladen: Weniger Kosten bei jedem Waschgang'
@@ -1065,18 +1191,27 @@ befunde:
     die unbelegten Aussagen entfernt. Die Anker dieser Entscheidung stammen aus der
     Fassung vom 05.11.2026; die Pruefung gilt dieser Fassung, nicht dem heutigen Text.
     Die Sperre gegen die alte Behauptung bleibt in Kraft.
+  entscheidung: 'Paket A, entschieden am 12.11.2026: Die „bis zu 15 %“-Angabe ist
+    entfallen. Der Artikel nennt seine Annahmen und sagt in der Kurzantwort ausdrücklich,
+    dass es eine Rechnung mit Quellenwerten und keine Messung im Haushalt ist. Beleg:
+    BDEW-Strompreisanalyse (Q3); Verbrauchswerte sind als Quelle bzw. Szenario benannt.'
+  entscheidung_vorgaenger: 'Heutiger Text geprueft: ''80 % Kapazität / bis zu 15
+    % weniger'' steht heute nur noch als gekennzeichnetes Modellbeispiel mit Beispielwerten,
+    keine Tatsachenbehauptung mehr.'
+  status: behoben
   belegtyp: ergaenzt
-  beleg_url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
+  beleg_url: https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/
   anker:
-  - modellbeispiel
-  - beispielwerte
+  - annahmen für die modellrechnung
+  - das ist eine rechnung mit quellenwerten, keine messung in deinem haushalt
   verboten_behauptend:
   - bis zu 15 % weniger wasser und energie verbraucht
   rest_risiko: Der Wert hängt von Maschine, Programm und Beladung ab.
   ledger_fassung_sha256: e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3
-  geprueft_fassung: bd1f7a3f9f9a3f406dc2142b9138b1696791c753bdb0386b46fce925460ded24
-  entschieden_am: '2026-11-05'
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 05.11.2026'
+  geprueft_fassung: d2de44d6edf218d75a4c02dfc136f42f017d0244e39312472a8c5d4aa9fc7872
+  projektion: betrieb-v3
+  entschieden_am: '2026-11-12'
+  entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
 - id: 360dbd44c71db04f43e0
   artikel: versicherungen
   titel: 'Versicherungen: Der große Ratgeber für den richtigen Schutz'

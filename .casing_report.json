@@ -1,13 +1,13 @@
 {
- "stand": "2026-11-10T13:46:42Z",
+ "stand": "2026-11-12T13:59:25Z",
  "modus": "fix · Bestand · +Pinterest-Plan",
- "dateien": 1,
- "gepruefte_dateien": 131,
- "woerter": 243855,
- "erkannte_befunde": 5,
+ "dateien": 2,
+ "gepruefte_dateien": 132,
+ "woerter": 246720,
+ "erkannte_befunde": 6,
  "befunde": 5,
  "hart": 0,
- "gefixt": 0,
+ "gefixt": 1,
  "geparkt": [],
  "dateien_liste": [
   {
@@ -15,6 +15,12 @@
    "erkannte_befunde": 5,
    "befunde": 5,
    "woerter": 1012
+  },
+  {
+   "pfad": "content/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/index.md",
+   "erkannte_befunde": 1,
+   "befunde": 0,
+   "woerter": 2015
   }
  ]
 }

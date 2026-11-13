@@ -18,6 +18,12 @@ cover:
   image: "images/covers/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag.jpg"
   alt: "5 einfache Frugalismus-Tricks für den Alltag"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 91d1c3b08fffa5855688932bdef57986f31ad862c0a03ac58e75e48e7da73e07
+    geprueft_am: 2026-11-13
 pin_title: "Frugalismus für Einsteiger: 5 Tricks, die sofort funktionieren"
 pin_description: "*Werbung | Frugalismus klingt nach Verzicht – ist aber cleveres Priorisieren: Diese 5 Einsteiger-Tricks zeigen, wie du ohne Verzichtsgefühl 100 € und mehr im Monat freischaufelst. Inklusive der beliebten 30-Tage-Wunschliste. Jetzt starten!"
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
@@ -78,9 +84,9 @@ Das kann für den einen mehr Reisegeld sein. Für den anderen ein größerer [No
 
 ## Erst die eigenen Preise prüfen
 
-Laut [Destatis](https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html) lagen die Verbraucherpreise im Oktober 2026 vorläufig 2,8 Prozent über dem Vorjahr. Der Energie-Teilindex stieg um 12,2 Prozent. Einen Monat zuvor hatte er um 14,9 Prozent zugelegt.
+Laut [Destatis](https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_382_611.html) lagen die Verbraucherpreise im Oktober 2026 vorläufig 2,8 % über dem Vorjahr. Der Energie-Teilindex stieg um 12,2 %. Einen Monat zuvor hatte er um 14,9 % zugelegt.
 
-Bei Nahrungsmitteln betrug der Zuwachs 0,4 Prozent. Das ist kein Automatismus für deine Rechnung. Schau auf deine eigenen Verträge und Kassenbons.
+Bei Nahrungsmitteln betrug der Zuwachs 0,4 %. Das ist kein Automatismus für deine Rechnung. Schau auf deine eigenen Verträge und Kassenbons.
 
 Auch die genannten 50 € bis 200 € sind nur Modellwerte. Sie sind kein Inflationsausgleich und keine zugesagte Ersparnis. Entscheidend ist, was nach deinen tatsächlichen neuen Ausgaben übrig bleibt.
 

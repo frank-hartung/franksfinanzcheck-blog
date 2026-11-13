@@ -1,5 +1,5 @@
-generated_at: '2026-11-11T11:26:46Z'
-day: '2026-11-11'
+generated_at: '2026-11-13T11:31:51Z'
+day: '2026-11-13'
 mode: deterministic
 teams:
   trending:
@@ -252,60 +252,63 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 10 Tipps für günstige Reisekreditkarten
-    pillar: konto-karten
+  - topic: Energiekosten senken mit Smart-Home-Geräten
+    pillar: strom-sparen
     signal: niche_hook
-    source: topics:10 Tipps für günstige Reisekreditkarten
+    source: topics:Energiekosten senken mit Smart-Home-Geräten
     score: 0.55
     keywords:
-    - Reisekreditkarten
-    - günstige Karten
-    - Reisekosten sparen
-  - topic: 'Balkon bepflanzen: So senkst du die Gemüsekosten'
+    - Smart-Home
+    - Energiekosten
+    - Strom sparen
+  - topic: 'Haustier im Alltag: Diese laufenden Ausgaben kommen dazu'
     pillar: frugalismus
     signal: niche_hook
-    source: 'topics:Balkon bepflanzen: So senkst du die Gemüsekosten'
+    source: 'topics:Haustier im Alltag: Diese laufenden Ausgaben kommen dazu'
     score: 0.55
     keywords:
-    - Balkon Gemüse
-    - Kräuter ziehen
-    - Gemüse selber ziehen
-  - topic: Energiekosten senken mit kleinen Veränderungen
-    pillar: strom-sparen
+    - Haustier Kosten
+    - Tierarzt Rücklage
+    - Haustier Budget
+  - topic: 'Jahresabschluss-Check: Diese 4 Versicherungen solltest du im Dezember
+      kündigen'
+    pillar: versicherungen
     signal: niche_hook
-    source: topics:Energiekosten senken mit kleinen Veränderungen
+    source: 'topics:Jahresabschluss-Check: Diese 4 Versicherungen solltest du im Dezember
+      kündigen'
     score: 0.55
     keywords:
-    - Energie
-    - Kosten
-    - SparTipps
-  - topic: Kostenloses Girokonto ohne Gebühren finden
+    - Versicherungen prüfen Jahresende
+    - Policen kündigen Dezember
+    - Unnötige Versicherungen kündigen
+    - Doppelversicherung vermeiden
+  - topic: 'Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?'
     pillar: konto-karten
     signal: niche_hook
-    source: topics:Kostenloses Girokonto ohne Gebühren finden
+    source: 'topics:Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?'
     score: 0.55
     keywords:
-    - Kostenloses Girokonto
-    - Girokonto Vergleich
-    - Kontoführungsgebühren sparen
-  - topic: 'Stromanbieter wechseln: Tarife prüfen und Kosten senken'
-    pillar: strom-sparen
+    - Konto eröffnen
+    - Schufa
+    - Konto ohne Schufa
+  - topic: 'Versicherungen im Vergleich: Was du wissen musst'
+    pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Stromanbieter wechseln: Tarife prüfen und Kosten senken'
+    source: 'topics:Versicherungen im Vergleich: Was du wissen musst'
     score: 0.55
     keywords:
-    - Stromanbieter wechseln
-    - Stromvergleich
-    - Stromkosten senken
-  - topic: Versteckte Kosten im Mietwagenvertrag entschlüsseln
-    pillar: mietwagen
+    - Versicherungen
+    - Vergleich
+    - Wissenswertes
+  - topic: Wie du deine Bankgebühren um 50 % reduzieren kannst
+    pillar: konto-karten
     signal: niche_hook
-    source: topics:Versteckte Kosten im Mietwagenvertrag entschlüsseln
+    source: topics:Wie du deine Bankgebühren um 50 % reduzieren kannst
     score: 0.55
     keywords:
-    - Mietwagenvertrag
-    - versteckte Kosten
-    - Urlaubskasse
+    - Bankgebühren sparen
+    - Konto-gebühren
+    - Gebühren-reduzierung
 live_web:
   enabled: false
   findings: []

@@ -1,5 +1,5 @@
 {
- "zeitstempel": "2026-11-10T15:56:17.465413+02:00",
+ "zeitstempel": "2026-11-12T16:09:00.051702+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 25,
  "zaehlung": {
@@ -8,15 +8,15 @@
   "fehler": 2,
   "uebersprungen": 0
  },
- "treffer_gesamt": 194,
+ "treffer_gesamt": 197,
  "treffer_organisch": 0,
  "datenqualitaet": {
   "anfragen_erfolgreich": 23,
   "anfragen_organisch": 0,
   "anfragen_rueckfall": 23,
-  "treffer_gesamt": 194,
+  "treffer_gesamt": 197,
   "treffer_organisch": 0,
-  "treffer_rueckfall": 194,
+  "treffer_rueckfall": 197,
   "rueckfall_anteil": 1.0,
   "anbieter": {
    "wikipedia": 23
@@ -116,26 +116,6 @@
   },
   {
    "anfrage": "Stromanbieter wechseln",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Tierarzt Rücklage",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Tierversicherung",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -246,6 +226,26 @@
   },
   {
    "anfrage": "Urlaub Mietwagen",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Urlaub sparen",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Urlaubskasse",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,

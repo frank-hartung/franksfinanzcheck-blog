@@ -23,9 +23,15 @@ redaktionelle_pruefung:
 
 inspiration: "Mehr Geld für den Urlaub: So polsterst du deine Reisekasse auf"
 cover:
-  image: "images/covers/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.jpg"
+  image: "images/covers/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.jpg"
   alt: "Strategisch sparen: So kannst du deine Reisekasse füllen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 3235c18f03cb362199ce9d77d9d6a727ffbdb74206b93e023168cb3fa59b50f4
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Reise & Mobilität"
@@ -161,6 +167,8 @@ Am ersten Tag jedes Monats stellst du vier kurze Fragen. Schreib die Antworten i
 - [ ] Boni ohne Auszahlung sind nicht eingeplant.
 - [ ] Storno, Zahlung und Mietregeln sind gelesen.
 
+Reguliert ist dabei nur, was der Anbieter schuldet, nicht was du sparst: Bei Pauschalreisen gilt das Pauschalreiserecht mit Storno- und Insolvenzregeln (§§ 651a ff. BGB), bei Flügen die EU-Fluggastrechte-Verordnung 261/2004. Lies die Bedingungen, bevor du zahlst – dort steht, was im Streitfall gilt.
+
 ## Passende Beiträge zum Weiterlesen
 
 - [Last‑Minute‑Urlaub: So schnappst du dir das Schnäppchen](../../posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/)
@@ -181,6 +189,7 @@ Rechne: Kosten der Reise minus Geld, das schon da ist. Teile den Rest durch die 
 ### Sind Cashback‑Apps sicher für meine Daten?
 
 Das lässt sich nicht pauschal zusagen. Anbieter mit Sitz in der EU müssen sich an die DSGVO halten (Verordnung (EU) 2016/679): Sie dürfen nur Daten verarbeiten, für die eine Rechtsgrundlage besteht, und du hast Rechte auf Auskunft, Berichtigung, Löschung und Widerruf einer Einwilligung. Sieh dir trotzdem Anbieter, Berechtigungen und Datenschutzhinweise an. Frag auch: Wie lösche ich mein Konto und meine Daten? Rechtliche Pflichten ersetzen nicht deine eigene Entscheidung über die Zustimmung.
+Das lässt sich nicht pauschal zusagen. Sieh dir Anbieter, Berechtigungen und Datenschutzhinweise an. Frag auch: Wie lösche ich mein Konto und meine Daten? Nach der DSGVO muss der Anbieter Zweck und Rechtsgrundlage der Verarbeitung nennen und dir Auskunft und Löschung deiner Daten ermöglichen. Diese Pflichten ersetzen nicht deine eigene Entscheidung über die Zustimmung.
 
 ### Muss ich jedes Jahr meine Versicherung wechseln?
 

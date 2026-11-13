@@ -21,9 +21,15 @@ redaktionelle_pruefung:
 
 inspiration: "Billig fliegen im Winter: 10 Geheimtipps"
 cover:
-  image: "images/covers/2026-10-26-flugvergleich-im-winter-so-findest-du-echte-billigfluege.jpg"
+  image: "images/covers/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege.jpg"
   alt: "Flugvergleich im Winter: So findest du echte Billigflüge"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: d4e7214311a21706a0612f7acb0792793fef1337987a8c44f8c75998de33bd66
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Reise & Mobilität"
@@ -144,13 +150,13 @@ So gehst du vor, um systematisch den besten Preis zu finden:
 
 Wer starr an einem Datum festhält, verliert fast immer. Die Algorithmen der Airlines erkennen hohe Nachfrage sofort. Wenn in einem Bundesland die Ferien beginnen, steigen die Preise sprunghaft an.
 
-In der Modellrechnung mit einer Annahme, einen Tag früher oder zwei Tage später zu fliegen, ergibt sich oft eine deutliche Ersparnis. In unserem Modell gehen wir davon aus, dass eine Verschiebung um zwei Tage die Kosten um bis zu 30 % senken kann (Annahme: Ticketpreis = 200 € am Freitag vs. 140 € am Mittwoch). Das ist eine einfache Art, wie du deine **Reisekosten sparen** kannst.
+In der Modellrechnung mit einer Annahme, einen Tag früher oder zwei Tage später zu fliegen, ergibt sich oft eine deutliche Ersparnis. In unserem Modell gehen wir davon aus, dass eine Verschiebung um zwei Tage die Kosten um bis zu 30 % senken kann (Annahme: Ticketpreis = 200 € am Freitag vs. 140 € am Mittwoch). Das ist eine einfache Art, wie du deine **[Reisekosten](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/) sparen** kannst.
 
 Auch das Ziel selbst bietet Sparpotenzial. Muss es die bekannte Kanaren‑Insel sein?
 
 Oder ist ein Ziel auf dem Festland im Winter genauso reizvoll? Oft sind weniger bekannte Orte deutlich günstiger. Dort sind auch die Lebenshaltungskosten vor Ort niedriger. Das schont dein gesamtes Budget und nicht nur den Posten für den Flug.
 
-**Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/) **Lesetipp:** [Urlaub sparen](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/): Budget, Buchung und Kosten im Blick · [Strategisch sparen](../../posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/)
+**Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/) · [Flugverspätung Entschädigung](../../posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/) **Lesetipp:** [Urlaub sparen](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/): Budget, Buchung und Kosten im Blick · [Strategisch sparen](../../posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/)
 
 ## Häufige Fragen
 

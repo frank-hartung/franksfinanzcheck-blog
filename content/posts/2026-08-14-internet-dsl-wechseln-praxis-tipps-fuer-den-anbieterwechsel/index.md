@@ -14,6 +14,12 @@ cover:
   image: "images/covers/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel.jpg"
   alt: "Internet & DSL wechseln: So gelingt der Anbieterwechsel"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: d19933f723c037941d47eee9056e63d7a0874af0e1687ead9227def392943557
+    geprueft_am: 2026-11-13
 kurzantwort: "Ein Anbieterwechsel bei Internet und DSL ist heute meist ein Verwaltungsprozess, kein Technikdrama. Wer Effektivpreis, Bonus, Routerkosten und Laufzeit sauber vergleicht, spart über 24 Monate oft mehrere hundert Euro. Wichtig ist vor allem, den Wechsel möglichst über den neuen Anbieter laufen zu lassen und nicht nur auf die erste Rabattphase zu schauen."
 
 social_posted: true
@@ -36,7 +42,6 @@ quellen:
     datum: "2026-08-05"
 faktencheck: "2026-10-13"
 ---
-
 
 Viele zahlen beim Internet nicht deshalb zu viel, weil die Leitung so teuer wäre. Sie zahlen zu viel, weil alte Verträge still weiterlaufen. Bestandskunden rutschen dann oft in Tarife, die deutlich teurer sind als aktuelle Neukundenangebote – bei gleicher Technik im Keller.
 

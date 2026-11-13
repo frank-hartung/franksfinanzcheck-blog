@@ -38,8 +38,12 @@ M1  Auslieferung  Jede gebaute Seite trägt genau die Signale, die ihr
     Geprüft wird der GEBAUTE Baum, alle Abschnitte – nicht nur posts/.
 M2  Vertrag       Die Kanäle bleiben eingebunden (Vorlagen, CSS, Engine,
     Feed, Bild-Optimizer).
-M3  Bilddatei     Jedes deklarierte KI-Cover trägt IPTC `DigitalSourceType`
-    in der Datei (scripts/ki_bild_markierung.py).
+M3  Dateiebene     Jedes deklarierte KI-Cover trägt IPTC `DigitalSourceType`
+    in der Bilddatei (scripts/ki_bild_markierung.py) UND jede
+    ausgelieferte Vorlese-Tonspur ihre Herkunft im Container (ID3 bei MP3,
+    RIFF-INFO bei WAV, scripts/ki_audio_markierung.py). Beides ist derselbe
+    Gedanke: Die Angabe muss die DATEI überleben, sonst geht sie beim
+    Herunterladen, Weiterreichen oder Spiegeln verloren.
 M4  Kanaltreue    Jede deklarierte Modalität hat einen sichtbaren Anker –
     text → `data-ff-ki-label`, image → `data-ff-ki-image-label`,
     audio → `data-ff-ki-voice-label`. Und umgekehrt: kein sichtbarer Anker
@@ -52,6 +56,9 @@ M6  Bild-Ableitung  Ein deklariertes KI-Original hat keine unmarkierten
 M7  Spiegelung    layouts/rss.xml und layouts/_default/rss.xml sind bytgleich
     (Hugo zieht je Version die eine oder andere – driftet eine, ist die
     Kennzeichnung versionsabhängig).
+M9  llms.txt      Der Kanal für KI-Antwortmaschinen nennt die Herkunft:
+    maschinenlesbare Kennzeichnung, Erzeugungsart in Bild und Ton,
+    Betreiber-Erklärung statt Anbieterpflicht, kein Herkunftsbeweis.
 
 SELBSTHEILUNG
 -------------
@@ -82,8 +89,10 @@ import argparse
 import json
 import re
 import sys
+import tomllib
 from datetime import date, datetime, timezone
 from pathlib import Path
+from urllib.parse import quote, unquote, urljoin, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -110,9 +119,8 @@ except ImportError:  # pragma: no cover – ohne Namespace-Paket direkt laden
     #                                           und Heilung)
 
 BAU = kp.BAU
-ARTIKEL_MUSTER = '"@type":"Article"'
-CREDIT_TEXT_MUSTER = re.compile(r'"creditText"\s*:\s*"([^"]{0,400})"')
-FRIST_ID = "ki-vo-kennzeichnung-bestand"
+FRIST_ID = kp.FRIST_ID
+FRIST_DATUM = kp.FRIST_DATUM
 
 
 # --------------------------------------------------------------------------
@@ -147,18 +155,27 @@ def _frist(root: Path = ROOT) -> str | None:
     falschen Moment nicht.
     """
     pfad = root / "data" / "recht-fristen.yaml"
-    if not pfad.is_file():
+    try:
+        zeilen = pfad.read_text(encoding="utf-8").splitlines()
+    except (OSError, UnicodeError):
         return None
     im_block = False
-    for zeile in pfad.read_text(encoding="utf-8", errors="ignore").splitlines():
-        if re.match(r"^\s*-\s+id:\s*", zeile):
-            im_block = FRIST_ID in zeile
+    anzahl = 0
+    daten: list[str] = []
+    for zeile in zeilen:
+        m = re.match(r"^\s*-\s+id:\s*([^#]+?)\s*(?:#.*)?$", zeile)
+        if m:
+            im_block = m.group(1).strip().strip("\"'") == FRIST_ID
+            if im_block:
+                anzahl += 1
             continue
         if im_block:
-            m = re.match(r"^\s+faellig_am:\s*[\"']?(\d{4}-\d{2}-\d{2})", zeile)
+            m = re.match(r"^\s+faellig_am:\s*[\"']?(\d{4}-\d{2}-\d{2})[\"']?\s*(?:#.*)?$", zeile)
             if m:
-                return m.group(1)
-    return None
+                daten.append(m.group(1))
+    if anzahl != 1 or len(daten) != 1:
+        return None
+    return daten[0]
 
 
 # --------------------------------------------------------------------------
@@ -182,6 +199,11 @@ def regel_m1_m4(bau: Path, root: Path):
         return [_fund("M1", f"kein Bauprodukt unter {bau}/ – Auslieferung nicht "
                             "geprüft (nach `hugo` erneut laufen lassen)")], 0, 0
 
+    try:
+        basis = _feed_basis_url(root)
+    except kp.WerkzeugFehler as exc:
+        return [_fund("W0", str(exc))], 0, 0
+    hinweis = urljoin(basis, kp.HINWEIS_URL)
     geprueft = 0
     live = 0
     for seite in kp.seiten(root):
@@ -206,53 +228,51 @@ def regel_m1_m4(bau: Path, root: Path):
         ort = str(datei)
         kennung = seite.basis or "/"
 
-        # --- M1: Primärsignal -------------------------------------------
-        if seite.ki_text and not sig["meta"]:
-            funde.append(_fund("M1", f"{kennung}: ai_generated: true, aber das gebaute "
-                                     'HTML trägt kein <meta name="ai-generated" '
-                                     'content="true">', ort))
-        elif not seite.ki_text and sig["meta"]:
-            funde.append(_fund("M1", f"{kennung}: ohne ai_generated: true wird eine "
-                                     "KI-Erzeugung ausgewiesen – Signal entfernen oder "
-                                     "Herkunft klären", ort))
+        # --- M1: Werte und Ziel im tatsächlichen Dokumentkopf -----------
+        meta_soll = ["true"] if seite.ki_text else []
+        if sig["meta_werte"] != meta_soll:
+            funde.append(_fund("M1", f"{kennung}: ai-generated {sig['meta_werte']!r}, "
+                                     f"erwartet {meta_soll!r}", ort))
+        scope_soll = [",".join(erwartet)] if erwartet else []
+        if sig["scope_werte"] != scope_soll:
+            funde.append(_fund("M1", f"{kennung}: ai-generated-scope "
+                                     f"{sig['scope_werte']!r}, erwartet {scope_soll!r}", ort))
+        seiten_url = urljoin(basis, quote(seite.basis.strip("/") + "/", safe="/%:@-._~"))
+        ziele = [urljoin(seiten_url, ziel) for ziel in sig["describedby_ziele"]]
+        ziel_soll = [hinweis] if erwartet else []
+        if ziele != ziel_soll:
+            funde.append(_fund("M1", f"{kennung}: rel=\"describedby\" "
+                                     f"{ziele!r}, erwartet {ziel_soll!r}", ort))
 
-        # --- M1: Modalitäten --------------------------------------------
-        if set(sig["bereiche"]) != set(erwartet):
-            funde.append(_fund("M1", f"{kennung}: ai-generated-scope lautet "
-                                     f"„{','.join(sig['bereiche']) or '–'}“, erwartet "
-                                     f"„{','.join(erwartet) or '–'}“", ort))
-
-        # --- M1: IANA-Relation ------------------------------------------
-        if erwartet and not sig["describedby"]:
-            funde.append(_fund("M1", f"{kennung}: deklarierte Modalitäten ohne "
-                                     'rel="describedby" auf den Hinweis', ort))
-        elif not erwartet and sig["describedby"]:
-            funde.append(_fund("M1", f"{kennung}: rel=\"describedby\" auf den KI-Hinweis "
-                                     "ohne deklarierte Modalität", ort))
-
-        # --- M1: Bildkanal im DOM ---------------------------------------
+        # --- M1: Kennzeichnung am tatsächlich verwendeten Cover ---------
         if seite.ki_bild:
-            if "data-ai-generated" not in html:
-                funde.append(_fund("M1", f"{kennung}: cover.ai_generated: true, aber das "
-                                         "gebaute <img> trägt kein data-ai-generated", ort))
-            if seite.quellentyp and "data-digital-source-type" not in html:
-                funde.append(_fund("M1", f"{kennung}: digital_source_type belegt, aber "
-                                         "nicht als data-digital-source-type ausgeliefert",
-                                   ort))
+            original = kp.pfad_wert(seite.kopf, ("cover", "image")) or ""
+            original_url = urljoin(basis, quote(original.lstrip("/"), safe="/%:@-._~"))
+            bildpfad = _feed_url_pfad(original_url, basis)
+            bilder = [bild for bild in sig["bilder"] if bildpfad and
+                      _feed_url_pfad(urljoin(seiten_url, bild.get("src", "")), basis,
+                                     query_erlaubt=True) == bildpfad]
+            if (len(bilder) != 1 or bilder[0].get("data-ai-generated") != "true"
+                    or (seite.quellentyp and
+                        bilder[0].get("data-digital-source-type") != seite.quellentyp)
+                    or "srcset" in bilder[0]):
+                funde.append(_fund("M1", f"{kennung}: KI-Cover fehlt, zeigt nicht auf das "
+                                         "Original oder trägt falsche Bildattribute/srcset", ort))
 
-        # --- M1: schema.org creditText ----------------------------------
-        if ARTIKEL_MUSTER in html:
-            m = CREDIT_TEXT_MUSTER.search(html)
-            credit = m.group(1) if m else ""
-            if "text" in erwartet and "Mit KI erstellt" not in credit:
-                funde.append(_fund("M1", f"{kennung}: Article-Schema ohne creditText zur "
-                                         "Text-Herkunft", ort))
-            if "image" in erwartet and "Cover mit KI erstellt" not in credit:
-                funde.append(_fund("M1", f"{kennung}: Article-Schema ohne creditText zur "
-                                         "Bild-Herkunft", ort))
-            if "audio" in erwartet and "Tonspur maschinell erzeugt" not in credit:
-                funde.append(_fund("M1", f"{kennung}: Article-Schema ohne creditText zur "
-                                         "Tonspur", ort))
+        # --- M1: Article-Schema darf nicht durch Weglassen verschwinden --
+        if seite.abschnitt in ("posts", "pillar"):
+            if sig["json_fehler"] or len(sig["artikel"]) != 1:
+                funde.append(_fund("M1", f"{kennung}: genau ein gültiges Article-JSON-LD "
+                                         "im Dokumentkopf erwartet", ort))
+            else:
+                credit = sig["artikel"][0].get("creditText")
+                credit = credit if isinstance(credit, str) else ""
+                for modalitaet, text in (("text", "Mit KI erstellt"),
+                                         ("image", "Cover mit KI erstellt"),
+                                         ("audio", "Tonspur maschinell erzeugt")):
+                    if modalitaet in erwartet and text not in credit:
+                        funde.append(_fund("M1", f"{kennung}: Article-Schema ohne creditText "
+                                                 f"zur Modalität {modalitaet}", ort))
 
         # --- M4: Kanaltreue je Modalität --------------------------------
         for modalitaet in erwartet:
@@ -261,7 +281,7 @@ def regel_m1_m4(bau: Path, root: Path):
                                          "maschinenlesbar deklariert, hat aber keinen "
                                          f"sichtbaren Anker ({kp.ANKER[modalitaet]})", ort))
         for modalitaet, anker in kp.ANKER.items():
-            if sig["anker"][modalitaet] and modalitaet not in erwartet:
+            if sig["anker_vorhanden"][modalitaet] and modalitaet not in erwartet:
                 funde.append(_fund("M4", f"{kennung}: sichtbarer Anker {anker} ohne "
                                          f"deklarierte Modalität „{modalitaet}“", ort))
     return funde, geprueft, live
@@ -302,8 +322,82 @@ def regel_m3(root: Path, *, werkzeug_blind: bool = False):
     return [_fund("M3", f) for f in fehler], False
 
 
+def _feed_basis_url(root: Path) -> str:
+    """Produktionsbasis aus Hugos Konfiguration, nicht aus dem zu prüfenden Feed."""
+    try:
+        with (root / "hugo.toml").open("rb") as datei:
+            basis = tomllib.load(datei).get("baseURL")
+        if not isinstance(basis, str):
+            raise ValueError("baseURL fehlt")
+        url = urlsplit(basis)
+        if (url.scheme.lower() not in ("http", "https") or not url.hostname
+                or url.username is not None or url.password is not None
+                or url.query or url.fragment or not url.path.endswith("/")):
+            raise ValueError("baseURL ist keine absolute Basis-URL mit abschließendem /")
+        _ = url.port  # ungültige Portangaben dürfen nicht unbemerkt bleiben
+        return basis
+    except (OSError, ValueError, tomllib.TOMLDecodeError) as exc:
+        raise kp.WerkzeugFehler(f"Hugo-baseURL nicht verlässlich lesbar: {exc}") from exc
+
+
+def _feed_url_pfad(url: str, basis: str, *, query_erlaubt: bool = False) -> str | None:
+    """URL nur bei exakter Herkunft und eindeutigem Pfad zuordnen.
+
+    Query-Parameter sind nur am Link erlaubt (Pinterest-UTM), nicht an der
+    stabilen GUID. Ein gleicher letzter Slug auf fremdem Host oder unter einem
+    anderen Pfad ist ausdrücklich keine Identität.
+    """
+    try:
+        teile, grund = urlsplit(url), urlsplit(basis)
+        if (teile.scheme.lower() != grund.scheme.lower()
+                or teile.netloc.lower() != grund.netloc.lower()
+                or teile.username is not None or teile.password is not None
+                or teile.fragment or (teile.query and not query_erlaubt)):
+            return None
+        _ = teile.port
+        pfad = unquote(teile.path, errors="strict")
+        basis_pfad = unquote(grund.path, errors="strict")
+    except (TypeError, UnicodeError, ValueError):
+        return None
+    if (not pfad.startswith(basis_pfad) or "\\" in pfad or "//" in pfad
+            or any(t in (".", "..") for t in pfad.split("/"))):
+        return None
+    return pfad.rstrip("/") or "/"
+def regel_m3_audio(bau: Path, root: Path, *, werkzeug_blind: bool = False):
+    """M3 (Ton): Die Herkunft steht IN der Tonspur, nicht nur auf der Seite.
+
+    BEFUND 13.11.2026 – die Lücke, die sieben Kanäle nicht sahen:
+    Der Blog liefert vorab erzeugte Vorlese-Tonspuren aus (synthetische
+    Stimme, /audio/articles/*.mp3). Die Seite kennzeichnet das sichtbar und
+    maschinenlesbar – die DATEI enthielt keine einzige Angabe. Wer sie
+    herunterlädt oder weiterreicht, hält synthetische Sprache ohne
+    Herkunft in der Hand. Für Bilder gab es diesen Weg seit dem 05.11.2026
+    (`ki_bild_markierung.py`), für Ton fehlte er.
+
+    Gemessen wird am AUSGELIEFERTEN Bauprodukt (`public/audio/articles`),
+    nicht am Quellbaum: Nur was dort liegt, kommt beim Leser an. Liegt in
+    diesem Lauf keine Tonspur vor, ist das kein Fund (Audio ist Zusatz-
+    fläche) – aber es wird gezählt und berichtet, damit „0 geprüft" nicht
+    wie „0 Probleme" aussieht.
+    """
+    try:
+        import ki_audio_markierung  # noqa: PLC0415
+    except ImportError as exc:
+        if werkzeug_blind:
+            return [], True, 0
+        return ([_fund("M3", f"ki_audio_markierung.py nicht ladbar – Markierung in "
+                             f"der Tonspur nicht prüfbar: {exc}")], True, 0)
+    verzeichnis = Path(bau) / "audio" / "articles"
+    try:
+        befunde, fehler = ki_audio_markierung.pruefen(verzeichnis)
+    except Exception as exc:  # pragma: no cover – blind melden, nie still grün
+        return ([_fund("M3", f"Tonspur-Bestand nicht prüfbar "
+                             f"({type(exc).__name__}: {exc})")], True, 0)
+    return [_fund("M3", f) for f in fehler], False, len(befunde)
+
+
 def regel_m5(bau: Path, root: Path):
-    """Feed: dieselbe Angabe wie auf der Seite – kein Verlust beim Verteilen."""
+    """Jedes Feed-Item an SEINER gebauten Seite und seinen Werten messen."""
     funde = []
     pfad = Path(bau) / "index.xml"
     if not pfad.is_file():
@@ -312,54 +406,121 @@ def regel_m5(bau: Path, root: Path):
                                      "prüfbar"))
         return funde, 0, []
     try:
-        items = kp.feed_items(pfad)
+        basis = _feed_basis_url(root)
+    except kp.WerkzeugFehler as exc:
+        return [_fund("W0", str(exc))], 0, []
+    try:
+        items, kanal_ziele = kp.feed_daten(pfad)
     except kp.WerkzeugFehler as exc:
         return [_fund("M5", str(exc))], 0, []
 
-    if items and not kp.feed_kanal_angabe(pfad):
-        funde.append(_fund("M5", "der Feed trägt auf Kanal-Ebene kein "
-                                 'atom:link rel="describedby" auf den Hinweis'))
+    hinweis = urljoin(basis, kp.HINWEIS_URL)
+    if kanal_ziele != [hinweis]:
+        funde.append(_fund("M5", "Kanal-Ebene: genau ein atom:link rel=\"describedby\" "
+                                 f"auf {hinweis} erwartet, erhalten {kanal_ziele!r}"))
 
-    seiten_by_slug = {s.slug: s for s in kp.seiten(root) if not s.entwurf}
+    seiten: dict[str, list[kp.Seite]] = {}
+    for seite in kp.seiten(root):
+        if seite.entwurf or seite.abschnitt != "posts":
+            continue
+        seiten_url = urljoin(basis, quote(seite.basis.strip("/") + "/", safe="/%:@-._~"))
+        key = _feed_url_pfad(seiten_url, basis)
+        if key is not None:
+            seiten.setdefault(key, []).append(seite)
+    if not items and any(
+            not kp.wahr(kp.pfad_wert(s.kopf, ("hiddenInRss",)))
+            and (bau / s.basis / "index.html").is_file()
+            for gruppe in seiten.values() for s in gruppe):
+        funde.append(_fund("M5", "Feed ist leer, obwohl sichtbare gebaute Artikel existieren"))
+
     geprueft = 0
     ohne_seite: list[str] = []
+    gesehen: set[str] = set()
     for item in items:
-        seite = seiten_by_slug.get(item["slug"])
-        if seite is None:
-            # Kein stilles Überspringen: Ein Feed-Item, das keine Seite im
-            # Bestand hat, ist eine Lücke in der Messung (M5 wäre für dieses
-            # Item blind). Es wird GEZÄHLT und benannt, nicht verschluckt –
-            # Befund vom 08.11.2026: In CI waren 49 von 50 Items gemappt, und
-            # niemand konnte sehen, welches fehlte.
-            # Mit Beleg: Slug UND die Quelle, aus der er stammt. Ein Befund,
-            # der nur den Slug nennt, ist bei abweichender URL nicht zu
-            # bestätigen (Befund 08.11.2026: 49/50, Item unbekannt).
-            ohne_seite.append(f"{item['slug']} ← {item['guid'] or 'ohne guid'}")
+        kennung = item["guid"] or "ohne GUID"
+        guids, links = item["guids"], item["links"]
+        guid = _feed_url_pfad(guids[0], basis) if len(guids) == 1 else None
+        link = (_feed_url_pfad(links[0], basis, query_erlaubt=True)
+                if len(links) == 1 else None)
+        kandidaten = seiten.get(guid, []) if guid else []
+        if not guid or guid != link or len(kandidaten) != 1 or guid in gesehen:
+            ohne_seite.append(f"{item['slug'] or '–'} ← {kennung}")
+            funde.append(_fund("M5", f"{kennung}: GUID und Link müssen eindeutig auf "
+                                     "dieselbe gebaute eigene Artikelseite zeigen; "
+                                     "fremder Host, anderer Pfad, Dublette oder "
+                                     "fehlende/mehrdeutige Zuordnung"))
+            continue
+        gesehen.add(guid)
+        seite = kandidaten[0]
+        gebaut = bau / seite.basis / "index.html" if seite.basis else bau / "index.html"
+        if not gebaut.is_file():
+            ohne_seite.append(f"{item['slug'] or '–'} ← {kennung}")
+            funde.append(_fund("M5", f"{kennung}: zugeordnete Seite ist nicht gebaut"))
             continue
         geprueft += 1
-        gebaut = bau / seite.basis / "index.html" if seite.basis else bau / "index.html"
-        erwartet: tuple[str, ...] = ()
-        if gebaut.is_file():
-            html = gebaut.read_text(encoding="utf-8", errors="ignore")
-            erwartet = kp.erwartet(seite, kp.signale(html))
-        if not erwartet:
-            if item["scope"] or item["describedby"]:
-                funde.append(_fund("M5", f"{item['slug']}: Feed-Item trägt eine "
-                                         "Herkunftsangabe, die Seite deklariert keine"))
-            continue
-        if not item["describedby"]:
-            funde.append(_fund("M5", f"{item['slug']}: Feed-Item ohne "
-                                     'atom:link rel="describedby"'))
-        if set(filter(None, item["scope"].split(","))) != set(erwartet):
-            funde.append(_fund("M5", f"{item['slug']}: ffki:ai-generated-scope lautet "
-                                     f"„{item['scope'] or '–'}“, die Seite deklariert "
-                                     f"„{','.join(erwartet)}“"))
-        if "text" in erwartet and not item["ai_generated"]:
-            funde.append(_fund("M5", f"{item['slug']}: ai_generated: true, aber das "
-                                     "Feed-Item trägt kein ffki:ai-generated"))
-        if seite.quellentyp and not item["media_credit"]:
-            funde.append(_fund("M5", f"{item['slug']}: IPTC-Erzeugungsart belegt, aber "
-                                     "das Feed-Item trägt kein media:credit"))
+        html = gebaut.read_text(encoding="utf-8", errors="strict")
+        erwartet = kp.erwartet(seite, kp.signale(html))
+        scopes = [",".join(erwartet)] if erwartet else []
+        if item["scopes"] != scopes:
+            funde.append(_fund("M5", f"{kennung}: ffki:ai-generated-scope "
+                                     f"{item['scopes']!r}, erwartet {scopes!r}"))
+        ki_werte = ["true"] if "text" in erwartet else []
+        if item["ai_werte"] != ki_werte:
+            funde.append(_fund("M5", f"{kennung}: ffki:ai-generated "
+                                     f"{item['ai_werte']!r}, erwartet {ki_werte!r}"))
+        ziele = [hinweis] if erwartet else []
+        if item["describedby_ziele"] != ziele:
+            funde.append(_fund("M5", f"{kennung}: atom:link rel=\"describedby\" "
+                                     f"{item['describedby_ziele']!r}, erwartet {ziele!r}"))
+
+        # ffki ist eine Betreiber-Erweiterung und wird nicht von jedem
+        # Empfänger verstanden. Ein früher lesbarer Fallback im tatsächlich
+        # gebauten RSS-Text verbessert die Weitergabe, beweist aber NICHT,
+        # dass Pinterest ihn übernimmt oder anzeigt.
+        beschreibungen = item["descriptions"]
+        if len(beschreibungen) != 1 or not beschreibungen[0]:
+            funde.append(_fund("M5", f"{kennung}: genau eine nichtleere description erwartet"))
+        else:
+            beschreibung = beschreibungen[0]
+            if len(beschreibung) > 500:
+                funde.append(_fund("M5", f"{kennung}: Feed-description ist länger als "
+                                         f"500 Zeichen ({len(beschreibung)}); "
+                                         "geschützte Angaben nicht abschneiden"))
+            if any(beschreibung.count(hinweis) > 1
+                   for hinweis in (kp.SOCIAL_TEXT, kp.SOCIAL_BILD)):
+                funde.append(_fund("M5", f"{kennung}: doppelter Herkunftshinweis in "
+                                         "der Feed-description"))
+            if beschreibung.startswith("*Werbung | "):
+                beschreibung = beschreibung[len("*Werbung | "):]
+            soll = kp.social_hinweis("", ki_text=seite.ki_text, ki_bild=seite.ki_bild)
+            if soll and not beschreibung.startswith(soll):
+                funde.append(_fund("M5", f"{kennung}: lesbarer Herkunftshinweis am Anfang "
+                                         f"der Feed-description fehlt ({soll})"))
+            if ((not seite.ki_text and kp.SOCIAL_TEXT in beschreibung)
+                    or (not seite.ki_bild and kp.SOCIAL_BILD in beschreibung)):
+                funde.append(_fund("M5", f"{kennung}: description behauptet eine nicht "
+                                         "deklarierte Text- oder Cover-Herkunft"))
+
+        credits = item["freie_credits"] + [c for m in item["medien"] for c in m["credits"]]
+        ki_credits = [c for c in credits if c["rolle"] == "digitalsourcetype"
+                      or c["schema"] == kp.IPTC_VOKABULAR]
+        if seite.quellentyp and not seite.ki_bild:
+            funde.append(_fund("M5", f"{kennung}: IPTC-Erzeugungsart ohne deklariertes KI-Cover"))
+        elif seite.ki_bild and seite.quellentyp:
+            original = kp.pfad_wert(seite.kopf, ("cover", "image")) or ""
+            bild_url = urljoin(basis, quote(original.lstrip("/"), safe="/%:@-._~"))
+            bild = _feed_url_pfad(bild_url, basis)
+            medien = [m for m in item["medien"]
+                      if bild and _feed_url_pfad(m["url"], basis) == bild]
+            erwartet_credit = {"wert": seite.quellentyp, "rolle": "digitalsourcetype",
+                               "schema": kp.IPTC_VOKABULAR}
+            if (len(medien) != 1 or medien[0]["credits"] != [erwartet_credit]
+                    or ki_credits != [erwartet_credit]):
+                funde.append(_fund("M5", f"{kennung}: media:credit muss mit Rolle, "
+                                         "IPTC-Schema und belegtem Wert am tatsächlichen "
+                                         "Cover-media:content stehen"))
+        elif ki_credits:
+            funde.append(_fund("M5", f"{kennung}: IPTC-Feedangabe ohne belegte KI-Bildart"))
     return funde, geprueft, ohne_seite
 
 
@@ -381,7 +542,78 @@ def regel_m6(root: Path):
         funde.append(_fund("M6", f"{seite.slug}: static/{rel} ist eine öffentlich "
                                  "erreichbare Ableitung eines deklarierten KI-Originals "
                                  "und trägt dessen IPTC-Markierung nicht", f"static/{rel}"))
+    for seite, rel in kp.social_ableitungen(root):
+        funde.append(_fund("M6", f"{seite.slug}: static/{rel} ist eine mögliche ältere "
+                                 "Social-Variante des KI-Covers; Herkunft und Markierung "
+                                 "gesondert prüfen oder Datei bewusst entfernen", f"static/{rel}"))
     return funde
+
+
+# Die Angaben, ohne die ein Sprachmodell den Korpus falsch einordnet:
+# Es muss erkennen können, was maschinell entstanden ist, was das NICHT
+# beweist und dass der Zitier-Rahmen weiter gilt. Geprüft wird auf
+# inhaltliche Anker, nicht auf den Wortlaut – der Generator darf den Text
+# umformulieren, aber nicht den Sachverhalt verlieren.
+LLMS_ANKER = (
+    ("ai-generated", "nennt die maschinenlesbare Kennzeichnung nicht"),
+    ("DigitalSourceType", "nennt die Erzeugungsart in Bild/Ton nicht"),
+    ("Art. 50", "verwechselt Betreiber-Erklärung und Anbieterpflicht"),
+    ("kein Herkunftsbeweis", "behauptet mehr, als die Angaben tragen"),
+)
+
+
+def regel_m9(root: Path):
+    """M9 – llms.txt: Auch der Kanal für Sprachmodelle sagt, was KI ist.
+
+    Warum das ein Kanal ist und nicht Kosmetik: `llms.txt` wird von
+    KI-Antwortmaschinen gelesen, bevor sie eine Seite zitieren. Stand dort
+    nur „diese Datei hilft beim Zitieren", erfuhr das System das Wichtigste
+    nicht – dass ein Teil der Texte maschinell entsteht, dass Titelbilder
+    ihre Erzeugungsart in der Datei tragen und dass diese Angaben vom
+    Betreiber stammen. Genau die Zielgruppe, die Art. 50 Abs. 2 im Blick
+    hat (Maschinen, die Inhalte weiterverarbeiten), war der einzige Kanal
+    ohne Aussage (#1028).
+    """
+    datei = root / "static" / "llms.txt"
+    if not datei.is_file():
+        return [_fund("M9", "static/llms.txt fehlt – der Kanal für "
+                            "KI-Antwortmaschinen ist nicht prüfbar", "static/llms.txt")]
+    try:
+        text = datei.read_text(encoding="utf-8")
+    except OSError as exc:
+        return [_fund("M9", f"static/llms.txt nicht lesbar: {exc}", "static/llms.txt")]
+    if "KI-Kennzeichnung" not in text:
+        return [_fund("M9", "static/llms.txt hat keinen Abschnitt zur "
+                            "KI-Kennzeichnung (`generate_llms_txt.py` laufen lassen)",
+                      "static/llms.txt")]
+    # Zeilenumbrüche sind Formatierung, nicht Inhalt: Ein Satz, der über
+    # zwei Zeilen läuft, ist derselbe Satz. Ohne diese Normalisierung wäre
+    # die Prüfung eine Layout-Wache (und schlug genau so fehl).
+    flach = " ".join(text.split())
+    fehlend = [grund for anker, grund in LLMS_ANKER if " ".join(anker.split()) not in flach]
+    if fehlend:
+        return [_fund("M9", "static/llms.txt " + "; ".join(fehlend),
+                      "static/llms.txt")]
+    # Der Generator ist die Quelle: Weicht die Datei ab, ist die geprüfte
+    # Fassung nicht die ausgelieferte (dieselbe Logik wie M7 beim RSS-Spiegel).
+    # Nur für den ECHTEN Repo-Baum: Der Generator liest `content/` des Repos,
+    # nicht die Prüfliage des Selbsttests. Eine Drift-Messung gegen ein
+    # Fixture wäre immer rot und damit wertlos.
+    if root.resolve() != ROOT.resolve():
+        return []
+    import subprocess  # noqa: PLC0415
+    import sys  # noqa: PLC0415
+    try:
+        lauf = subprocess.run([sys.executable, str(root / "scripts" / "generate_llms_txt.py"),
+                               "--check"], capture_output=True, text=True, timeout=60)
+    except (OSError, subprocess.SubprocessError) as exc:
+        return [_fund("M9", f"Drift-Prüfung der llms.txt nicht möglich ({exc})",
+                      "static/llms.txt")]
+    if lauf.returncode != 0:
+        return [_fund("M9", "static/llms.txt weicht vom Generator ab – die geprüfte "
+                            "Fassung ist nicht die ausgelieferte "
+                            "(`generate_llms_txt.py` laufen lassen)", "static/llms.txt")]
+    return []
 
 
 def regel_m7(root: Path):
@@ -447,12 +679,22 @@ def pruefen(root: Path = ROOT, bau: Path | None = None, *, nur_quelle: bool = Fa
     funde += regel_m2(root)
     m3, m3_blind = regel_m3(root, werkzeug_blind=bool(fehlende))
     funde += m3
+    ton_funde, ton_blind, ton_geprueft = regel_m3_audio(bau, root,
+                                                       werkzeug_blind=bool(fehlende))
+    funde += ton_funde
+    m3_blind = m3_blind or ton_blind
     feed_ohne_seite: list[str] = []
     if not nur_quelle:
         m5, feed_items, feed_ohne_seite = regel_m5(bau, root)
         funde += m5
     funde += regel_m6(root)
     funde += regel_m7(root)
+    try:
+        anzahl_ungeklaert = len(kp.ungeklaert(root))
+    except kp.WerkzeugFehler as exc:
+        funde.append(_fund("W0", str(exc)))
+        anzahl_ungeklaert = None
+    funde += regel_m9(root)
 
     kennzahlen.update({
         "nur_quelle": nur_quelle,
@@ -462,8 +704,9 @@ def pruefen(root: Path = ROOT, bau: Path | None = None, *, nur_quelle: bool = Fa
         "feed_items_ohne_seite": feed_ohne_seite,
         "abschnitte": sorted({s.abschnitt for s in kp.seiten(root)}),
         "ki_originale": len(kp.ki_originale(root)),
-        "ungeklaert": len(kp.ungeklaert(root)),
+        "ungeklaert": anzahl_ungeklaert,
         "m3_blind": m3_blind,
+        "tonspuren_geprueft": ton_geprueft,
     })
     return funde, geprueft, kennzahlen
 
@@ -483,7 +726,7 @@ def heilen(root: Path = ROOT, *, trocken: bool = False, bau: Path | None = None,
 
 
 def wache(root: Path = ROOT, *, trocken: bool = False, bau: Path | None = None,
-          nur_quelle: bool = False) -> dict:
+          nur_quelle: bool = False, heute: str | None = None) -> dict:
     """Dauerlauf: heilen, nachmessen, Alter der offenen Punkte führen.
 
     Das Alter ist der Teil, der aus einer Warteschlange eine Wache macht:
@@ -491,15 +734,46 @@ def wache(root: Path = ROOT, *, trocken: bool = False, bau: Path | None = None,
     ist, wird benannt – statt täglich grün durchzugehen.
     """
     ergebnis = heilen(root, trocken=trocken, bau=bau, nur_quelle=nur_quelle)
-    heute = _datum_heute()
-    state = kp.state_lesen(root)
-    erstmals: dict[str, str] = state.get("ungeklaert_erstmals") or {}
-    ungeklaert = kp.ungeklaert(root)
+    heute = heute or _datum_heute()
+    try:
+        state = kp.state_lesen(root)
+    except kp.WerkzeugFehler as exc:
+        ergebnis["funde_nachher"].append(_fund("W0", str(exc), kp.STATE))
+        ergebnis["state"] = {}
+        ergebnis["state_geaendert"] = False
+        ergebnis["lage"] = {"frist": _frist(root), "tage_bis_frist": None,
+                            "ungeklaert": None, "aeltester_eintrag": "",
+                            "aeltester_alter_tage": None,
+                            "zuletzt_geaendert": None, "revision": ""}
+        return ergebnis
+    # Nicht die gelesene Referenz verändern: Der Vergleich unten entscheidet,
+    # ob der versionierte Zustand bei einem tatsächlichen Befundwechsel schreibt.
+    erstmals: dict[str, str] = dict(state["ungeklaert_erstmals"])
+    try:
+        ungeklaert = kp.ungeklaert(root)
+    except kp.WerkzeugFehler as exc:
+        # Die Quelle ist nicht messbar. Keinen einzigen alten offenen Eintrag
+        # als „geklärt“ löschen und keinen neuen Zustand persistieren – auch
+        # wenn das Register erst nach der ersten Messung beschädigt wurde.
+        if not any(f.get("regel") == "W0" and f.get("text") == str(exc)
+                   for f in ergebnis["funde_nachher"]):
+            ergebnis["funde_nachher"].append(_fund("W0", str(exc)))
+        ergebnis["state"] = state
+        ergebnis["state_geaendert"] = False
+        ergebnis["lage"] = {"frist": _frist(root), "tage_bis_frist": None,
+                            "ungeklaert": None, "aeltester_eintrag": "",
+                            "aeltester_alter_tage": None,
+                            "zuletzt_geaendert": state.get("zuletzt_geaendert"),
+                            "revision": state.get("revision", "")}
+        return ergebnis
+    # Aus dem Register verschwunden ≠ geklärt: PRs können Einträge löschen,
+    # ohne eine menschliche Prüfung oder die Herkunft nachgewiesen zu haben.
+    # Alte Fälle bleiben sichtbar, bis der Betreiber nach dokumentierter
+    # Entscheidung Register UND Zustand bewusst berichtigt.
+    entfernt = sorted(set(erstmals) - set(ungeklaert))
+    ungeklaert = sorted(set(ungeklaert) | set(entfernt))
     for slug in ungeklaert:
         erstmals.setdefault(slug, heute)
-    for slug in list(erstmals):
-        if slug not in ungeklaert:
-            erstmals.pop(slug)               # geklärt – Alter läuft nicht weiter
 
     # Ältester Eintrag = kleinestes Erst-Datum. Nicht „größtes Alter > 0":
     # Am ersten Tag ist jedes Alter 0, und dann bliebe der Eintrag namenlos –
@@ -514,23 +788,37 @@ def wache(root: Path = ROOT, *, trocken: bool = False, bau: Path | None = None,
         except ValueError:
             alter_tage = 0
 
-    frist = _frist(root)
-    tage_bis_frist = None
-    if frist:
-        try:
-            tage_bis_frist = (date.fromisoformat(frist) - date.fromisoformat(heute)).days
-        except ValueError:
-            tage_bis_frist = None
+    kalender_frist = _frist(root)
+    frist = FRIST_DATUM
+    frist_fehler = kalender_frist != FRIST_DATUM
+    # Eine versehentliche Verschiebung im Kalender darf die Wache nicht
+    # beruhigen. Der gemeinsame Schutzvertrag bleibt maßgeblich, bis eine
+    # neue Rechtslage bewusst in BEIDEN Quellen reviewt wurde.
+    tage_bis_frist = (date.fromisoformat(frist) - date.fromisoformat(heute)).days
+    if frist_fehler:
+        ergebnis["funde_nachher"].append(
+            _fund("W0", f"Frist {FRIST_ID} fehlt, ist uneindeutig oder weicht vom "
+                        f"Schutzvertrag {FRIST_DATUM} ab; Eskalation nutzt den Schutzvertrag",
+                  "data/recht-fristen.yaml"))
 
     eskalation = list(ergebnis.get("eskalation") or [])
     if ungeklaert and tage_bis_frist is not None and tage_bis_frist <= 30:
         eskalation.append({
             "grund": "register",
             "datei": "data/ki_kennzeichnung.yaml",
-            "text": f"{len(ungeklaert)} `menschlich`-Einträge sind {tage_bis_frist} Tage "
-                    f"vor der Frist ({frist}) ungeklärt – ältester seit {alter_tage} "
-                    f"Tagen ({aeltester}). Ob ein Mensch die redaktionelle "
-                    "Verantwortung übernommen hat, weiß nur der Betreiber."})
+            "text": f"{len(ungeklaert)} Fälle aus Register und Wachzustand sind "
+                    f"{tage_bis_frist} Tage vor der Frist ({frist}) ungeklärt – "
+                    f"ältester seit {alter_tage} Tagen ({aeltester}). Ob ein Mensch "
+                    "die redaktionelle Verantwortung übernommen hat, weiß nur "
+                    "der Betreiber."})
+    if entfernt:
+        eskalation.append({
+            "grund": "register-entfernt",
+            "datei": str(kp.STATE),
+            "text": "Nicht mehr im Register, aber weiterhin im Wachzustand: "
+                    + ", ".join(entfernt)
+                    + ". Nur nach dokumentierter Klärung bewusst berichtigen.",
+        })
 
     neu = {
         "frist": frist,
@@ -545,16 +833,17 @@ def wache(root: Path = ROOT, *, trocken: bool = False, bau: Path | None = None,
     # 06.11.2026: „sonst committete der Bot die Uhr statt des Befunds").
     # Sie werden zur Laufzeit gerechnet und nur berichtet, nie gespeichert.
     alt = {k: state.get(k) for k in neu}
-    geaendert = alt != neu
-    state.update(neu)
-    state["zuletzt_geaendert"] = heute
-    state["revision"] = ergebnis.get("revision", "")
-    if not trocken and geaendert:
-        kp.state_schreiben(root, state)
+    geaendert = alt != neu and not frist_fehler
+    if geaendert:
+        state.update(neu)
+        state["zuletzt_geaendert"] = heute
+        state["revision"] = ergebnis.get("revision", "")
+        if not trocken:
+            kp.state_schreiben(root, state)
     if not trocken and ergebnis["eingriffe"]:
         # Belegzeilen nur für echte Eingriffe – ein Lauf ohne Eingriff hat
         # nichts zu belegen und soll das Ledger nicht blähen.
-        kp.ledger(root, {"schritt": "wache", "revision": state["revision"],
+        kp.ledger(root, {"schritt": "wache", "revision": state.get("revision", ""),
                          "eingriffe": len(ergebnis["eingriffe"]),
                          "eskalationen": len(eskalation),
                          "funde": len(ergebnis["funde_nachher"]),
@@ -569,8 +858,8 @@ def wache(root: Path = ROOT, *, trocken: bool = False, bau: Path | None = None,
         "ungeklaert": len(ungeklaert),
         "aeltester_eintrag": aeltester,
         "aeltester_alter_tage": alter_tage,
-        "zuletzt_geaendert": heute,
-        "revision": state["revision"],
+        "zuletzt_geaendert": state.get("zuletzt_geaendert"),
+        "revision": state.get("revision", ""),
     }
     return ergebnis
 
@@ -594,6 +883,7 @@ def bericht(funde, kennzahlen, *, json_format: bool = False) -> str:
             f"{kennzahlen.get('seiten_live', 0)} gebauten Seiten geprüft "
             f"({len(kennzahlen.get('abschnitte', []))} Abschnitte), "
             f"{kennzahlen.get('feed_items_geprueft', 0)} Feed-Items, "
+            f"{kennzahlen.get('tonspuren_geprueft', 0)} Tonspur(en), "
             f"{len(funde)} Fund(e).",
         ]
     for f in funde:
@@ -605,10 +895,14 @@ def bericht(funde, kennzahlen, *, json_format: bool = False) -> str:
                       "RSS-Spiegelung und Bild-Ableitungen stimmen. "
                       "Die ausgelieferten Seiten prüft M1/M4/M5 nach dem Build.")
     elif not funde:
+        zeilen.append("✅ Geprüfte lokale Betreiberangaben im Bauprodukt sind "
+                      "konsistent (Meta, Schema, Feed, deklarierte Cover und "
+                      "Hinweismarker). Kein Herkunfts-, Anbieter- oder "
+                      "Live-Nachweis; externe Plattformen sind separat zu prüfen.")
         zeilen.append("✅ Maschinenlesbare Kennzeichnung liegt auf allen Kanälen: "
-                      "Meta + scope + describedby im Kopf, creditText im Schema, "
-                      "Bildattribut und IPTC-Feld, Herkunftsangabe im Feed – und jede "
-                      "Modalität hat einen sichtbaren Anker.")
+                      "Meta + scope + describedby im Kopf, creditText und digitalSourceType "
+                      "im Schema, Bildattribut und IPTC-Feld in der Bilddatei, Herkunft in "
+                      "Tonspur und Feed – und jede Modalität hat einen sichtbaren Anker.")
     return "\n".join(zeilen)
 
 
@@ -628,7 +922,7 @@ def wachenbericht(ergebnis: dict) -> str:
     if lage:
         zeilen.append(f"- Frist: {lage.get('frist') or 'unbekannt'} "
                       f"({lage.get('tage_bis_frist')} Tage)")
-        zeilen.append(f"- Ungeklärte `menschlich`-Einträge: {lage.get('ungeklaert')} "
+        zeilen.append(f"- Ungeklärte Fälle aus Register und Wachzustand: {lage.get('ungeklaert')} "
                       f"(ältester {lage.get('aeltester_alter_tage')} Tage, "
                       f"{lage.get('aeltester_eintrag') or '–'})")
         zeilen.append(f"- Zustand geändert (Commit nötig): "
@@ -658,6 +952,10 @@ def selbsttest() -> int:
     fehler: list[str] = []
     with tempfile.TemporaryDirectory() as tmp:
         root = Path(tmp)
+        (root / "hugo.toml").write_text('baseURL = "https://x/"\n', encoding="utf-8")
+        (root / "data").mkdir()
+        (root / "data/ki_kennzeichnung.yaml").write_text(
+            "maschinell:\n  - ki-artikel\nmenschlich:\n", encoding="utf-8")
         inhalt = root / "content"
         for slug, ki in (("ki-artikel", True), ("mensch-artikel", False)):
             (inhalt / "posts" / slug).mkdir(parents=True)
@@ -672,6 +970,13 @@ def selbsttest() -> int:
         (inhalt / "pillar" / "thema").mkdir(parents=True)
         (inhalt / "pillar" / "thema" / "index.md").write_text(
             "---\ntitle: Thema\nai_generated: false\n---\nText\n", encoding="utf-8")
+
+        # 0) Der llms.txt-Kanal gehört zur Prüfliage: Ohne ihn wäre M9 im
+        # Selbsttest blind – und ein grüner Selbsttest, der den eigenen
+        # Kanal nicht kennt, ist eine Behauptung. Die Datei kommt aus dem
+        # Generator des Repos, damit Wortlaut und Anker zusammenpassen.
+        (root / "static").mkdir(parents=True, exist_ok=True)
+        shutil.copy(ROOT / "static" / "llms.txt", root / "static" / "llms.txt")
 
         for rel in ("layouts/_partials/head.html", "layouts/_partials/schema_article.html",
                     "layouts/_partials/cover.html", "layouts/_partials/ff_voice_toolbar.html",
@@ -705,10 +1010,14 @@ def selbsttest() -> int:
             kopf = '<meta name="ai-generated" content="true">' if meta else ""
             sig = ('<meta name="ai-generated-scope" content="' + scope + '">'
                    '<link rel="describedby" href="/impressum/#ki-hinweis">')
-            sichtbar = '<span data-ff-ki-label>Mit KI erstellt</span>' if label else ""
+            sichtbar = ('<span data-ff-ki-label>Mit KI erstellt oder bearbeitet</span>'
+                        if label else "")
             siegel = '<span data-ff-ki-voice-label>KI-Stimme</span>' if ton else ""
             leiste = '<div class="ff-voice-slot"></div>' if toolbar else ""
-            datei.write_text(f"<html><head>{kopf}{sig}</head><body>{leiste}{sichtbar}"
+            credit = ("Mit KI erstellt. " if meta else "") + "Tonspur maschinell erzeugt."
+            artikel = json.dumps({"@type": "Article", "creditText": credit})
+            schema = f'<script type="application/ld+json">{artikel}</script>'
+            datei.write_text(f"<html><head>{kopf}{sig}{schema}</head><body>{leiste}{sichtbar}"
                              f"{siegel}</body></html>", encoding="utf-8")
         # Das Impressum ist eine reguläre Seite ohne Lesehilfe und ohne
         # KI-Angabe – es muss gebaut sein, sonst meldet M1 zu Recht.
@@ -722,6 +1031,8 @@ def selbsttest() -> int:
                     'href="https://x/impressum/#ki-hinweis"/>' if kanal else "")
             körper = "".join(
                 f"<item><guid>https://x/posts/{slug}/</guid>"
+                f"<link>https://x/posts/{slug}/?utm_source=pinterest</link>"
+                f"<description>{kp.social_hinweis('Beispiel', ki_text=ki)}</description>"
                 '<atom:link rel="describedby" href="https://x/impressum/#ki-hinweis"/>'
                 + ("<ffki:ai-generated>true</ffki:ai-generated>" if ki else "")
                 + (f'<ffki:ai-generated-scope>{scope}</ffki:ai-generated-scope>'
@@ -803,6 +1114,28 @@ def selbsttest() -> int:
         m5 = [f for f in pruefen(root)[0] if f["regel"] == "M5"]
         if m5:
             fehler.append(f"M5 meldet trotz vollständiger Angabe: {[f['text'] for f in m5]}")
+        # Früher wurden unbekannte Items nur gezählt, aber nicht als Fund
+        # durchgereicht. Ein gleicher Slug auf fremdem Host täuschte sogar die
+        # Zuordnung; ein vorhandenes Element mit false galt als true.
+        feed([("ki-artikel", "text,audio", True), ("nicht-im-bestand", "", False)])
+        unbekannt, _, ohne = regel_m5(bau, root)
+        if not ohne or not any(f["regel"] == "M5" and "nicht-im-bestand" in f["text"]
+                               for f in unbekannt):
+            fehler.append("M5 lässt ein unbekanntes Feed-Item ohne Fund passieren")
+        feed([("ki-artikel", "text,audio", True)])
+        feed_datei = bau / "index.xml"
+        original_feed = feed_datei.read_text(encoding="utf-8")
+        feed_datei.write_text(original_feed.replace("https://x/posts/ki-artikel/",
+                                                    "https://fremd/posts/ki-artikel/"),
+                              encoding="utf-8")
+        if not regel_m5(bau, root)[0]:
+            fehler.append("M5 lässt einen fremden Host mit gleichem Slug passieren")
+        feed_datei.write_text(original_feed.replace(">true</ffki:ai-generated>",
+                                                    ">false</ffki:ai-generated>"),
+                              encoding="utf-8")
+        if not any("ffki:ai-generated" in f["text"] for f in regel_m5(bau, root)[0]):
+            fehler.append("M5 verwechselt false mit true")
+        feed([("ki-artikel", "text,audio", True), ("mensch-artikel", "audio", False)])
 
         # 8) M7: Spiegel driftet → Fund, und --heilen gleicht an
         spiegel = root / kp.RSS_SPIEGEL
@@ -817,6 +1150,26 @@ def selbsttest() -> int:
             fehler.append("nach der Heilung sind die RSS-Vorlagen noch immer ungleich")
         if any(f["regel"] == "M7" for f in ergebnis["funde_nachher"]):
             fehler.append("M7 bleibt nach der Heilung rot")
+
+        # 8b) M9: Der llms.txt-Kanal verliert seine Herkunftsaussage → Fund.
+        # Beide Formen werden geprüft: fehlender Abschnitt und Abschnitt mit
+        # einem Satz, der Sachverhalte behauptet, die er nicht belegt.
+        llms = root / "static" / "llms.txt"
+        llms_original = llms.read_text(encoding="utf-8")
+        llms.write_text("# FranksFinanzcheck\n\nNur Zitierhinweise.\n", encoding="utf-8")
+        if not any(f["regel"] == "M9" for f in pruefen(root)[0]):
+            fehler.append("M9 merkt den fehlenden Kennzeichnungs-Abschnitt nicht")
+        # „Herkunftsbeweis" steht im Generator über einen Zeilenumbruch
+        # verteilt – ein Ersetzen des ganzen Satzes hätte hier nichts
+        # getroffen und die Probe stillschweigend entschärft.
+        llms.write_text(llms_original.replace("Herkunftsbeweis",
+                                              "Echtheitsgarantie"), encoding="utf-8")
+        if not any(f["regel"] == "M9" and "behauptet mehr" in f["text"]
+                   for f in pruefen(root)[0]):
+            fehler.append("M9 merkt eine überzogene Behauptung im llms.txt nicht")
+        llms.write_text(llms_original, encoding="utf-8")
+        if any(f["regel"] == "M9" for f in pruefen(root)[0]):
+            fehler.append("M9 bleibt nach der Wiederherstellung rot")
 
         # 9) Heilung des Impressum-Ankers + Belegzeile
         imp = root / kp.IMPRESSUM
@@ -855,19 +1208,20 @@ def selbsttest() -> int:
         (root / "data" / "ki_kennzeichnung.yaml").write_text(
             "maschinell:\n  - ki-artikel\nmenschlich:\n  - alt-eintrag\n", encoding="utf-8")
         (root / "data" / "recht-fristen.yaml").write_text(
-            f"fristen:\n  - id: {FRIST_ID}\n    faellig_am: \"{_datum_heute()}\"\n",
+            f"fristen:\n  - id: {FRIST_ID}\n    faellig_am: \"{FRIST_DATUM}\"\n",
             encoding="utf-8")
-        lauf = wache(root)
+        (root / kp.STATE).write_text('{"ungeklaert_erstmals": {}}', encoding="utf-8")
+        lauf = wache(root, heute=FRIST_DATUM)
         lage = lauf["lage"]
         if lage["ungeklaert"] != 1 or lage["aeltester_eintrag"] != "alt-eintrag":
             fehler.append(f"Wache führt das Register nicht: {lage}")
-        if lauf["state"].get("ungeklaert_erstmals") != {"alt-eintrag": _datum_heute()}:
+        if lauf["state"].get("ungeklaert_erstmals") != {"alt-eintrag": FRIST_DATUM}:
             fehler.append(f"Dauerzustand führt das Erst-Datum nicht: {lauf['state']}")
         if not lauf["state_geaendert"]:
             fehler.append("erster Lauf meldet keine Zustandsänderung")
         if not any(e.get("grund") == "register" for e in lauf["eskalation"]):
             fehler.append("Wache eskaliert ungeklärte Einträge kurz vor der Frist nicht")
-        zweiter = wache(root)
+        zweiter = wache(root, heute=FRIST_DATUM)
         if zweiter["lage"]["aeltester_alter_tage"] != 0:
             fehler.append("das Alter wird beim zweiten Lauf nicht gehalten")
         if zweiter["lage"]["aeltester_eintrag"] != "alt-eintrag":
@@ -900,8 +1254,9 @@ def selbsttest() -> int:
     if fehler:
         return 2
     print("✅ KI-Provenienz-Gate: M1 Auslieferung (ganzer Baum), M2 Vorlagenvertrag, "
-          "M3 Bilddatei, M4 Kanaltreue je Modalität, M5 Feed, M6 Bild-Ableitungen, "
-          "M7 RSS-Spiegelung – plus Selbstheilung mit Beleg und Wache mit Alter.")
+          "M3 Dateiebene (Bild + Ton), M4 Kanaltreue je Modalität, M5 Feed, "
+          "M6 Bild-Ableitungen, M7 RSS-Spiegelung, M9 llms.txt – plus "
+          "Selbstheilung mit Beleg und Wache mit Alter.")
     return 0
 
 
@@ -944,6 +1299,11 @@ def main(argv=None) -> int:
                 print(wachenbericht(ergebnis))
             funde = ergebnis["funde_nachher"]
             code = main_exit_werkzeug(funde)
+            # Eine fällige menschliche Entscheidung ist keine technische
+            # Messlücke, aber auch kein abgeschlossenes grünes Verfahren.
+            # Werkzeugfehler (2) behalten Vorrang vor Eskalation (1).
+            if code == 0 and ergebnis.get("eskalation"):
+                code = 1
             if code == 2:
                 kp.werkzeugbefund_melden("ki_provenienz",
                                          "KI-Provenienz-Wache blind: "

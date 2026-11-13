@@ -21,6 +21,12 @@ cover:
   image: "images/covers/2026-10-28-dsl-und-internet-flat-guenstig-sichern.jpg"
   alt: "DSL- und Internet-Flat günstig sichern"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 5cc724bec482e1a80094a951a1eb65c789c0c39872af74775ac6942e08d116e3
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "§ 56 TKG – Vertragslaufzeit, Kündigung nach stillschweigender Vertragsverlängerung"

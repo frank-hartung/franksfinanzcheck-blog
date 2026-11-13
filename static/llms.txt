@@ -37,6 +37,40 @@ FranksFinanzcheck steht in keiner geschäftlichen oder gesellschaftsrechtlichen 
 - Hinweis: Allgemeine Informationen, keine individuelle Finanz-, Steuer-
   oder Rechtsberatung. Alle Angaben ohne Gewähr.
 
+## Woher diese Inhalte kommen (KI-Kennzeichnung, #1028)
+
+Diese Angaben sind für Systeme gedacht, die die Seiten maschinell
+weiterverarbeiten. Sie sagen, was am Inhalt maschinell entstanden ist –
+nicht, was richtig ist (das prüft die Redaktion, nicht das Modell).
+
+- **Texte:** Ein Teil der Artikel wird mit generativer KI erstellt oder
+  bearbeitet. Welche, sagt jede Seite selbst: die Meta-Angaben
+  `ai-generated` und `ai-generated-scope` im Dokumentkopf nennen die
+  betroffenen Modalitäten (Text, Bild, Ton). Jeder Artikel ist zusätzlich
+  am Seitenanfang sichtbar als „Mit KI erstellt oder bearbeitet"
+  gekennzeichnet. Fehlt `ai-generated`, ist für diese Seite keine
+  KI-Erzeugung belegt – bitte keine hineininterpretieren.
+- **Bilder:** Titelbilder tragen, wenn ihre Erzeugungsart belegt ist, das
+  IPTC-Feld `DigitalSourceType` in der Bilddatei selbst und
+  `creditText`/`digitalSourceType` im schema.org-Markup der Seite.
+  Ein Titelbild ohne diese Angabe ist nicht als KI-Bild deklariert.
+- **Ton:** Vorlese-Tonspuren sind synthetische Sprache. Die Datei trägt
+  ihre Herkunft in sich (`DigitalSourceType` im IPTC-Vokabular, als
+  ID3-TXXX bei MP3 bzw. RIFF-INFO bei WAV), nicht nur die Seite.
+- **Assistent:** Ein KI-Chat-Assistent kann auf Seiten eingebunden sein.
+  Antworten erzeugt ein Sprachmodell, nicht ein Mensch; jede Antwort trägt
+  einen entsprechenden Hinweis, und die HTTP-Antwort führt die Kopfzeile
+  `ai-generated`. Wo keine Assistenten-Schaltfläche erscheint, ist keiner
+  aktiv.
+- **Was das nicht ist:** Diese Erklärungen stammen vom Betreiber. Sie
+  ersetzen nicht die maschinenlesbare Markierung durch den Anbieter des
+  jeweiligen KI-Systems (Art. 50 Abs. 2 KI-VO). Sie sind kein
+  Herkunftsbeweis. Rechtevorbehalt und Zitierregeln oben bleiben unberührt.
+- **Zitierpflicht bei Kennzeichnung:** Wird ein als KI-erzeugt
+  gekennzeichneter Text übernommen, bitte die Kennzeichnung mitübernehmen –
+  sonst geht beim Weiterverbreiten verloren, was die Quelle gerade
+  transparent macht.
+
 ## Themen-Ratgeber (Pillars)
 
 - [Strom & Gas sparen](https://franksfinanzcheck.de/pillar/strom-sparen/): Strom-, Gas- und Heizkosten senken: Stromfresser enttarnen, Preisgarantien nutzen, Anbieter wechseln und dynamische Tarife einordnen – mit Rechnern.
@@ -46,10 +80,18 @@ FranksFinanzcheck steht in keiner geschäftlichen oder gesellschaftsrechtlichen 
 - [Frugalismus & Budget](https://franksfinanzcheck.de/pillar/frugalismus/): Haushaltsbudget ordnen, 50–30–20-Regel anwenden, Notgroschen krisenfest aufbauen, Geldlecks schließen und finanzielle Unabhängigkeit erreichen.
 - [Mietwagen & Reisen](https://franksfinanzcheck.de/pillar/mietwagen/): Mietwagen günstig buchen, versteckte Schalter-Fallen vermeiden, Flugpreise drücken und die Reisekasse optimal aufbessern.
 
-## Alle Artikel (neueste zuerst, 76 Beiträge)
+## Alle Artikel (neueste zuerst, 84 Beiträge)
 
+- [Wie viel Streaming‑Bandbreite: Du wirklich brauchst](https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/): Streaming Bandbreite: Ruckel So sparst du jeden Monat bares Geld. Schritt für Schritt erklärt – ohne Fachchinesisch. Mit praktischen Tipps für den Alltag.
+- [Fenster abdichten: So stoppst du Zugluft an alten Rahmen](https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/): Fenster abdichten leicht gemacht: Mit diesen Tipps kannst du Zugluft stoppen und effektiv Heizkosten senken. Erfahre jetzt, worauf es ankommt.
+- [WLAN-Frust lösen: So findest du den besten Router Standort](https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/): WLAN Empfang verbessern ohne Kosten: Optimiere deinen Router Standort mit einfachen Tipps für stabiles Internet in jedem Raum. Lies jetzt mehr.
+- [Flugverspätung Entschädigung: So holst du dein Geld zurück](https://franksfinanzcheck.de/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/): Flugverspätung Entschädigung sichern: Lerne deine Fluggastrechte kennen. Wir zeigen dir, wie du einfach eine Entschädigung beantragen kannst. Tipps…
+- [Waschmaschine beladen: Weniger Kosten bei jedem Waschgang](https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/): Waschmaschine beladen: Richtig beladen kann deine Fixkosten senken. Erfahre, wie du Wasser im Haushalt reduzierst und jeden Waschgang sparst.
+- [Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas](https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/): Nutze dein Gaspreiserhöhung Sonderkündigungsrecht. Ich zeige dir, wie du die Grundversorgung Gas kündigen kannst und beim Gastarife vergleichen sparst.
+- [Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar](https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/): Willst du den Ökostrom Anbieter wechseln? Erfahre hier, wie du Tarife prüfst, seriöse Labels erkennst und deine Fixkosten clever reduzierst.
+- [Energieausweis: Was er für deine Fixkosten bedeutet](https://franksfinanzcheck.de/posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/): Energieausweis-Kosten und Pflicht: Was das Dokument kostet, wann du einen brauchst und wie die Energieeffizienzklasse die Haus-Kosten senkt.
 - [Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen](https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/): Kfz-Versicherung Vergleich 2026: Mit 7 Tipps holst du bis zu 800 € Ersparnis – Kündigungsfrist 30.11., SF-Klasse & Werkstattbindung.
-- [Wohngebäudeversicherung Vergleich: Worauf du achten musst](https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/): Wohngebäudeversicherung Vergleich: So vergleichst du richtig – Elementarschaden, grobe Fahrlässigkeit, Neuwert und Selbstbeteiligung
+- [Wohngebäudeversicherung Vergleich: Worauf du achten musst](https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/): Wohngebäudeversicherung Vergleich: So vergleichst du richtig – Elementarschaden, grobe Fahrlässigkeit, Neuwert und Selbstbeteiligung.
 - [Privathaftpflicht: Warum so wichtig und was sie kostet](https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/): Privathaftpflicht im Überblick: Welche Schäden sie abdeckt, welche Klauseln wichtig sind und wie sich Kosten und Leistungen vergleichen lassen.
 - [Dein Haus sicher schützen: Das neue Vorsorge-Update 2026](https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/): Haus und Hausrat absichern: Worauf Eigentümer und Mieter bei Wohngebäude, Hausrat, Elementarschutz und Versicherungssumme achten sollten.
 - [Flugvergleich im Winter: So findest du echte Billigflüge](https://franksfinanzcheck.de/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/): Günstig abheben statt draufzahlen: Mit dem richtigen Flugvergleich findest du Billigflüge im Winter. Vermeide Fehler und senke deine Reisekosten effektiv.
@@ -86,7 +128,7 @@ FranksFinanzcheck steht in keiner geschäftlichen oder gesellschaftsrechtlichen 
 - [Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen](https://franksfinanzcheck.de/posts/2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor/): Gasrechnung prüfen statt nur auf die Endsumme schauen: So kontrollierst du Zeitraum, Zählerstände, Verbrauch, Preise und Abschläge – auch als Mieter.
 - [Einlagensicherung: Wie viel Guthaben geschützt ist](https://franksfinanzcheck.de/posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/): Was Einlagensicherung leistet, was sie nicht abdeckt und wie du vor einer Geldanlage prüfst, wie viele Institute hinter einem Angebot stehen. Mit.
 - [Heizkosten senken: Mit diesen Strategien sparst du sofort](https://franksfinanzcheck.de/posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/): Heizkosten senken ohne Frieren: Mit passenden Temperaturen, richtigem Lüften, freien Heizkörpern und Verbrauchskontrolle sparst du sofort.
-- [Grundversorgung Strom und Gas: Was sie leistet](https://franksfinanzcheck.de/posts/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet/): Grundversorgung Strom und Gas: das Auffangnetz der Energieversorgung und meist der teuerste Tarif. Wie du hineingerätst und wieder herauskommst.
+- [Grundversorgung Strom und Gas: Was sie leistet und kostet](https://franksfinanzcheck.de/posts/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet/): Grundversorgung Strom und Gas: das Auffangnetz der Energieversorgung und meist der teuerste Tarif. Wie du hineingerätst und wieder herauskommst.
 - [Finanzieller Puffer: Der Rechenweg in fünf Minuten](https://franksfinanzcheck.de/posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/): Finanzieller Puffer: Wie groß dein Notgroschen wirklich sein sollte. Klare Faustregeln, Rechenbeispiele und ein alltagstauglicher Sparplan.
 - [DSL-Tarif für dein Zuhause: Das passende Angebot finden](https://franksfinanzcheck.de/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/): DSL-Tarif finden: Prüfe deinen Bedarf, den Effektivpreis über 24 Monate und Routerkosten. Das Angebot soll zu deinem Haushalt passen.
 - [Sparen im Herbst: Spartipps für die goldene Jahreszeit](https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/): Sparen im Herbst: Mit diesen 7 praxiserprobten Spartipps für Heizung, Versicherungen, Kfz-Wechsel & Haushaltsbudget sparst du jedes Jahr spürbar Geld.
@@ -108,7 +150,7 @@ FranksFinanzcheck steht in keiner geschäftlichen oder gesellschaftsrechtlichen 
 - [Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt](https://franksfinanzcheck.de/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/): Nachtstrom-Tarife können günstiger sein, müssen es aber nicht. So rechnest du Hoch- und Niedertarif, den Nachtanteil und den Vergleich zum Einheitstarif.
 - [Lastschrift und Dauerauftrag: Was du prüfen solltest](https://franksfinanzcheck.de/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/): Lastschrift prüfen: Abbuchungen vom Konto laufen in drei Wegen. Wie du sie auseinanderhältst, erkennst, was du freigegeben hast, und richtig widersprichst.
 - [WLAN verbessern: So bringst du stabilen Speed in jede Ecke](https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): WLAN verbessern leicht gemacht: Router richtig positionieren, Mesh-WLAN einrichten, Störquellen beseitigen & maximale Geschwindigkeit im ganzen Haus.
-- [Warmwasser sparen: Die Rechnung hinter – Warmwasserkosten](https://franksfinanzcheck.de/posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/): Warmwasser ist der zweite große Posten im Haushalt und steht selten auf der Rechnung. So findest du deinen Verbrauch und drehst an den richtigen Stellen.
+- [Warmwasser sparen: Die Rechnung hinter – Warmwasserkosten](https://franksfinanzcheck.de/posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/): Warmwasser braucht rund 16 Prozent der Haushaltsenergie. So liest du deinen Anteil auf der Abrechnung ab und drehst an den richtigen Stellen.
 - [DNS-Server wechseln: Datenschutz, Filter und Einrichtung](https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/): DNS-Server wechseln: So vergleichst du Resolver, aktivierst DoH/DoT und richtest sie sicher ein. Bandbreite und WLAN werden nicht schneller.
 - [Preisgarantie Gas: Was bei Preiserhöhung hilft](https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/): Preisgarantie Gas: Steigt der Preis trotz Garantie? So prüfst du die Klausel, rechnest Marktrisiken ein und nutzt Widerspruch oder Sonderkündigung.
 - [Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht](https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/): Frugalismus mit System: 50-30-20-Regel als Kompass, fünf Alltagshacks und ein Rechenbeispiel mit fiktiver Person (rund 380 € im Monat).
@@ -134,4 +176,4 @@ FranksFinanzcheck steht in keiner geschäftlichen oder gesellschaftsrechtlichen 
 - RSS-Feed (neueste Artikel): https://franksfinanzcheck.de/index.xml
 
 *Diese Datei wird automatisch aus den Live-Inhalten erzeugt
-(scripts/generate_llms_txt.py). Stand: 2026-11-04.*
+(scripts/generate_llms_txt.py). Stand: 2026-11-13.*

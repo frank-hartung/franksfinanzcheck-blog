@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn.jpg"
   alt: "Warmwasser sparen: Die Rechnung hinter dem Hahn"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 650f202ee3709fc60feb4da7fa9924e21cf90abb2c9600fc8f30176ad208e045
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Verbraucherzentrale – Warmwasser im Alltag sparen: So geht's"
@@ -64,7 +70,7 @@ faktencheck: 2026-11-07
 kurzantwort: "Warmwasser entsteht entweder in der Heizungsanlage oder in einem elektrischen Gerät. In beiden Fällen zahlen drei Faktoren: die Temperatur, die Wassermenge und die Verluste auf dem Weg zum Hahn. Weil Warmwasser auf vielen Abrechnungen in einem eigenen Block steht, lässt sich der Anteil meist genau ablesen."
 ---
 
-Duschen ist die alltäglichste Handlung im Haushalt und gleichzeitig eine der teuersten. Über das Jahr kommt viel zusammen: [co2online](https://www.co2online.de/energie-sparen/) beziffert die Wassererwärmung auf rund 16 Prozent des gesamten Haushalts-Energieverbrauchs, die Raumwärme auf rund zwei Drittel. Warmwasser ist damit – neben dem Haushaltsstrom – einer der beiden großen Blöcke hinter der Heizung. Das sind Durchschnittswerte; wie viel Euro daraus werden, hängt an deinem Tarif und deiner Nutzung. Nur sieht man es nicht, weil nichts sichtbar verbrennt und nichts hörbar läuft.
+Duschen ist die alltäglichste Handlung im Haushalt und gleichzeitig eine der teuersten. Über das Jahr kommt viel zusammen: [co2online](https://www.co2online.de/energie-sparen/) beziffert die Wassererwärmung auf rund 16 % des gesamten Haushalts-Energieverbrauchs, die Raumwärme auf rund zwei Drittel. Warmwasser ist damit – neben dem Haushaltsstrom – einer der beiden großen Blöcke hinter der Heizung. Das sind Durchschnittswerte; wie viel Euro daraus werden, hängt an deinem Tarif und deiner Nutzung. Nur sieht man es nicht, weil nichts sichtbar verbrennt und nichts hörbar läuft.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -126,7 +132,7 @@ Die beiden Varianten in der Übersicht. Die Euro-Werte rechnen mit frei gewählt
 
 Die Temperatur am Warmwasserspeicher lässt sich nicht beliebig senken. Die Verbraucherzentrale nennt in ihrem Ratgeber [Kosten für Warmwasser senken](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/kosten-fuer-warmwasser-senken-das-koennen-sie-als-hausbesitzer-tun-17755) die maßgeblichen Werte: Im gesamten Warmwasser-Leitungssystem sollen mindestens 55 °C herrschen. Für größere Anlagen schreibt das die Trinkwasserverordnung vor.
 
-In Speichern mit mehr als 400 Litern muss das Wasser am Speicherausgang gemäß Trinkwasserverordnung immer mindestens 60 °C erreichen. Dasselbe gilt für Leitungen, in denen mehr als drei Liter warmes Wasser stehen. Prüfe die Einstellung deshalb alle drei Monate. Wer den Speicher weiter absenkt, spart Energie und riskiert damit die Trinkwasserhygiene.
+In Speichern mit mehr als 400 Litern muss das Wasser am Speicherausgang gemäß Trinkwasserverordnung immer mindestens 60 °C erreichen; das ist ein Modellwert. Dasselbe gilt für Leitungen, in denen mehr als drei Liter warmes Wasser stehen. Prüfe die Einstellung deshalb alle drei Monate. Wer den Speicher weiter absenkt, spart Energie und riskiert damit die Trinkwasserhygiene.
 
 Für dich heißt das: Die Temperatur ist kein freier Regler. Frage bei einer Änderung die Fachfirma, die deine Anlage wartet. Wer in einem Mehrfamilienhaus wohnt, sollte diese Angelegenheit ohnehin der Verwaltung überlassen und stattdessen die Menge beeinflussen.
 
@@ -198,7 +204,7 @@ Diese Gegenüberstellung dauert [fünf Minuten](../../posts/2026-09-20-finanziel
 
 ### Wie hoch ist der Warmwasseranteil an den Heizkosten?
 
-Das hängt von Haushalt, Anlage und Nutzung ab. Als Faustgröße für den Energieverbrauch nennt [co2online](https://www.co2online.de/energie-sparen/) rund 16 Prozent Warmwasseranteil im Haushalt. Deinen eigenen Kostenanteil liest du auf der Heizkostenabrechnung ab – dort steht er bei zentraler Versorgung als eigener Wert.
+Das hängt von Haushalt, Anlage und Nutzung ab. Als Faustgröße für den Energieverbrauch nennt [co2online](https://www.co2online.de/energie-sparen/) rund 16 % Warmwasseranteil im Haushalt. Deinen eigenen Kostenanteil liest du auf der Heizkostenabrechnung ab – dort steht er bei zentraler Versorgung als eigener Wert.
 
 ### Ist ein Durchlauferhitzer teurer als ein Speicher?
 

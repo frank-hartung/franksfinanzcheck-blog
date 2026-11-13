@@ -23,6 +23,12 @@ cover:
   image: "images/covers/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum.jpg"
   alt: "Frugalismus-Tipps: Mehr Freiheit durch bewussten Konsum"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: b7d858f1727fc9f01ac5c715ccfad34257be33e112711c9c1a950dd9ddfdc9e8
+    geprueft_am: 2026-11-13
 kurzantwort: "Frugalismus beginnt nicht mit Verzicht, sondern mit Überblick. Wer kleine Alltagsausgaben sichtbar macht, Fixkosten regelmäßig prüft und Impulskäufe bremst, schafft oft 50 € bis 200 € mehr Spielraum im Monat. Entscheidend ist nicht Perfektion, sondern ein System, das du dauerhaft im Alltag durchhältst."
 social_posted: true
 quellen:
@@ -89,7 +95,7 @@ Genau deshalb funktioniert Frugalismus so gut: Er setzt nicht erst bei der ganz 
 
 Ohne Überblick ist Sparen oft nur ein Bauchgefühl. Ein **Haushaltsbuch führen** klingt trocken, ist aber einer der wirksamsten Schritte überhaupt.
 
-Du musst dafür kein Excel-Monster bauen. Es reicht, wenn du zwei oder drei Monate sauber mitschreibst:. Das ist ein Beispielwert.
+ Es reicht, wenn du zwei oder drei Monate sauber mitschreibst; das ist ein Modellwert. Das ist ein Beispielwert.
 
 - Miete und Nebenkosten
 - Strom, Gas, Internet, Handy
@@ -151,7 +157,7 @@ Das sind über **500 € im Jahr**, ohne dass du deine Lebensqualität sichtbar
 
 **Hinweis zum Stand der Preise:** Laut vorläufigem Verbraucherpreisindex des Statistischen Bundesamts lagen die Energieprodukte im Oktober 2026 um +14,9 % über dem Vorjahreswert. Die Tabelle ist ein Beispiel mit Annahmen; deine tatsächliche Ersparnis hängt von deinem Tarif, deinen Preisen und deinem Verbrauch ab und kann bei Energie höher ausfallen.
 
-[Quelle: Statistisches Bundesamt – Verbraucherpreisindex im Oktober 2026, vorläufig: Energieprodukte mit einem Anstieg von 14,9 Prozent gegenüber dem Vorjahresmonat. Link: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html]
+[Quelle: Statistisches Bundesamt – Verbraucherpreisindex im Oktober 2026, vorläufig: Energieprodukte mit einem Anstieg von 14,9 % gegenüber dem Vorjahresmonat. Link: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html]
 
 Wenn du damit anfangen willst, helfen dir diese Artikel weiter:
 
