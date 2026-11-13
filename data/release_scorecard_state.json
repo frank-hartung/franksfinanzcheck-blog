@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-13T08:09:13Z",
+  "generated_at": "2026-11-13T11:56:17Z",
   "modus": "kandidaten",
-  "commit": "04abbb9452c847b4d2ae0e6bcb7a66f243b8db32",
+  "commit": "ce52cdeb13091a4525f126376fdab1f1ea9c4221",
   "kapazitaet": {
     "stichtag": "2026-11-13",
     "basis": "2026-11-13",
@@ -1771,7 +1771,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-29",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
