@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-13T14:47:49Z",
+  "generated_at": "2026-11-13T15:22:27Z",
   "modus": "kandidaten",
-  "commit": "01542e636a4a5b59f0078f6d108dc0db0e70a405",
+  "commit": "c4bf63c5c7cb8a9044ab51c5d9807444c55fc468",
   "kapazitaet": {
     "stichtag": "2026-11-13",
     "basis": "2026-11-13",
@@ -98,6 +98,17 @@
         "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler"
       ],
       "anzahl": 2
+    },
+    {
+      "check": "T5-lesbarkeit",
+      "dimension": "technik",
+      "wirkung": "blockiert",
+      "entscheidung": "auto",
+      "quelle": "scripts/readability_check.py (via publish_gate.readability_failures)",
+      "artikel": [
+        "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar"
+      ],
+      "anzahl": 1
     }
   ],
   "befundlage": {
@@ -527,7 +538,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1714,11 +1725,11 @@
       "checks": []
     },
     "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": {
-      "sha256": "b027a36aece240020458c4d3f0b3faa2d8bb2861b77c92f0fe4a7723493bfe97",
-      "urteil": "freigabe-reif",
+      "sha256": "008370ba7f9ba117d2a859e898e7f90551027c07e3ecbc24c26d22d3a28eaef6",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "bestanden",
+        "technik": "blockiert",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -1728,8 +1739,15 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-12",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "T5-lesbarkeit",
+          "dimension": "technik",
+          "wirkung": "blockiert",
+          "detail": "Flesch 59.6 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)"
+        }
+      ]
     },
     "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem": {
       "sha256": "651b141c35a5aa9b6d5017f881915e0c86a8eb5ef3adce5e79594b03e0a2cf54",
@@ -1825,7 +1843,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-02-07",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "Q2-quellen-vorhanden",
