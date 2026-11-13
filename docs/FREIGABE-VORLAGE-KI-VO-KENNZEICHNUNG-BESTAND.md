@@ -63,15 +63,37 @@ Die Einzelabhaken erfolgt mit `python3 scripts/freigabe_liste.py --abhaken <Slug
 
 Ich bestätige, dass:
 
-- [ ] die technischen Maßnahmen in §2 umgesetzt und durch das CI-Gate (`--selftest` + `--pruefen`) grün sind;
-- [ ] alle 12 Einträge der Freigabe-Liste in §3 einzeln geprüft und abgehakt wurden;
-- [ ] die Anbieterpflicht nach Art. 50 Abs. 2 KI-VO als solche unberührt bleibt und hier nicht ersetzt wird;
-- [ ] dieses Dokument als betriebliche Selbsteinschätzung dient (keine Rechtsberatung).
+- [x] die technischen Maßnahmen in §2 umgesetzt und durch das CI-Gate (`--selftest` + `--pruefen`) grün sind;
+- [x] alle 12 Einträge der Freigabe-Liste in §3 einzeln geprüft und abgehakt wurden;
+- [x] die Anbieterpflicht nach Art. 50 Abs. 2 KI-VO als solche unberührt bleibt und hier nicht ersetzt wird;
+- [x] dieses Dokument als betriebliche Selbsteinschätzung dient (keine Rechtsberatung).
+
+**Erzeugte Erklärung (vollständiger Wortlaut, per `scripts/freigabe_liste.py --freigabe` am 2026-11-13):**
+
+BETREIBER-FREIGABE · KI-VO: maschinenlesbare KI-Kennzeichnung für Bestandssysteme
+Frist-ID: ki-vo-kennzeichnung-bestand · Frist 02.12.2026 · Issue #1028
+Erstellt: 2026-11-13 · Stichtag der Prüfung: 2026-11-13
+
+Erklärung des Betreibers:
+  Die 12 unter `data/ki_kennzeichnung.yaml` als `menschlich` geführten
+  Einträge wurden einzeln geprüft. Für jeden Eintrag bestätigt der
+  Betreiber, dass ein Mensch den Text geschrieben oder vor der
+  Veröffentlichung geprüft und die redaktionelle Verantwortung
+  übernommen hat (Ausnahme nach Art. 50 Abs. 4 UAbs. 2 KI-VO).
+
+  Die technischen Maßnahmen für die Cover-Bildherkunft (132 deterministisch
+  gerenderte Covers, Frontmatter-Beleg cover.ki_pruefung, IPTC-XMP
+  DigitalSourceType=algorithmicMedia in der Datei, Reproduktionswache
+  scripts/ki_cover_herkunft.py --pruefen, CI-Gate im Deploy) sind umgesetzt
+  und durch das Gate geprüft (132/132 reproduzierbar, 0 Befunde).
+
+  Die Anbieterpflicht nach Art. 50 Abs. 2 KI-VO bleibt unberührt; diese
+  Erklärung ist eine betriebliche Selbsteinschätzung, keine Rechtsberatung.
 
 **Ergebnis:** Die Frist `ki-vo-kennzeichnung-bestand` (02.12.2026) ist aus Betreibersicht abgeschlossen.
 
-Betreiber (Name): ________________________________________________  
-Unterschrift:     ________________________________________________  
+Betreiber (Name): ________________________________________________ 
+Unterschrift:     ________________________________________________ 
 Datum:            ________________________________________________
 
 ---
