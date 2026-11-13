@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "generated_at": "2026-11-13T11:56:17Z",
+  "generated_at": "2026-11-13T12:34:42Z",
   "modus": "kandidaten",
-  "commit": "ce52cdeb13091a4525f126376fdab1f1ea9c4221",
+  "commit": "4e23e11ca292854968e1f7771bf1d61aaf8de99f",
   "kapazitaet": {
     "stichtag": "2026-11-13",
     "basis": "2026-11-13",
     "projiziert": false,
-    "artikel": 128,
+    "artikel": 131,
     "faellig": 0,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
@@ -19,9 +19,9 @@
     "budget": 5,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 5.0,
-    "bedarf_je_tag": 3.122,
-    "bedarf_je_woche": 21.9,
-    "deckung_prozent": 160.1,
+    "bedarf_je_tag": 3.178,
+    "bedarf_je_woche": 22.2,
+    "deckung_prozent": 157.3,
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
@@ -31,7 +31,7 @@
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
     "verletzungen": [],
-    "offen_im_horizont": 128,
+    "offen_im_horizont": 131,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
@@ -50,7 +50,7 @@
     "empfohlenes_budget": 5,
     "empfehlung_erreicht": true,
     "hartes_limit": 18,
-    "spitze_geprueft": 57
+    "spitze_geprueft": 58
   },
   "ursachen": [
     {
@@ -505,7 +505,7 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "ea4c07b6ff241f21b932b0e9c99b7e75f4495d3967956bf5465b7fbc9d8d3277",
+      "sha256": "c4cbdb32291d79b98af139162d47b4a18fbd25c3405d104017fdd2de6762d613",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -519,7 +519,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1757,7 +1757,7 @@
       "checks": []
     },
     "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen": {
-      "sha256": "196ee6a28a0efe7919b0d07079a5af7801244265a00b859cc87ce1f7d88c4a59",
+      "sha256": "11fe41c9b56ad92efd2594149f38d2adcfae4d3ad7f05d0cd67eee59186f0030",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1771,11 +1771,11 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-29",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
-      "sha256": "5eaf1eb17551d79b6fa5f07bdf339e9b19d4fd18c6348981dfa58dfc4810a292",
+      "sha256": "05a0a30956760835994f59784acdcd8dcd7be7fe263f817cf6129726ce6a2712",
       "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1789,7 +1789,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-02-07",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "Q2-quellen-vorhanden",
@@ -1800,7 +1800,7 @@
       ]
     },
     "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
-      "sha256": "df5dfbefd369c8252b63144966d6f4810d5285f3b61645005c9d86e4e47a4282",
+      "sha256": "1218cac688ad1c8af91da95f5646d91dc6d220116c167cccc6298edbc8fa6ca6",
       "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1814,7 +1814,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-24",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "Q2-quellen-vorhanden",
