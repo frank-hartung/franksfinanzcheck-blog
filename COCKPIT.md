@@ -1,6 +1,6 @@
 # 🚦 COCKPIT – franksfinanzcheck.de
 
-**Stand:** 2026-11-12 01:52 UTC · generiert von `scripts/cockpit.py`
+**Stand:** 2026-11-13 00:59 UTC · generiert von `scripts/cockpit.py`
 
 > Eine Seite statt 70+ Status-Dateien. Jeder Bereich bekommt eine Ampel und einen Satz Begründung. Wer tiefer graben will, findet die Quelle unter jedem Bereich – diese Datei archiviert nichts, sie verweist nur.
 
@@ -8,7 +8,7 @@
 
 | Bereich | Ampel | Kurzbefund |
 |---|---|---|
-| Content-Pipeline | 🟡 | 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig |
+| Content-Pipeline | 🟡 | 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 2/6 bereit – Nachschub nötig |
 | SEO & Technik | 🟢 | in Ordnung |
 | Affiliate & Umsatz | 🟢 | in Ordnung (2 Kennzahl(en) noch ohne Datenlage) |
 | Secrets & Zugänge | 🔴 | 1 Zugang/Zugänge abgelehnt: PINTEREST_ACCESS_TOKEN – Re-Auth nötig |
@@ -20,9 +20,9 @@
 ## Details
 
 ### Content-Pipeline — 🟡 GELB
-- 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig
+- 1 Prüfpunkt(e) auffällig (lesbarkeit) · Artikel-Reserve knapp: 2/6 bereit – Nachschub nötig
 - lesbarkeit: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen/index.md (Entwurf) – Flesch 41.7 < Publish-Schwelle 60; 2026-11-02-last-minute-urlaubsangebote-sichern/index.md (E…
-- Artikel-Reserve knapp: 3/6 bereit – Nachschub nötig
+- Artikel-Reserve knapp: 2/6 bereit – Nachschub nötig
 
 Quellen: `data/governance_status.json`, `data/reserve-readiness.json`, `PRODUKTIONS-STATUS.md`
 
@@ -47,13 +47,13 @@ Quellen: `data/governance_status.json`, `data/secrets_state.json`, `docs/PINTERE
 ### Social-Automation — 🟢 GRÜN
 - 1/10 Kanäle live (Mastodon)
 - 9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md
-- letzter erfolgreicher Post vor 0.5 Tag(en)
+- letzter erfolgreicher Post vor 1.5 Tag(en)
 
 Quellen: `data/social/state.yaml`, `data/social/channels.yaml`, `SOCIAL-PERF-REPORT.md`, `docs/RUNBUCH-SOCIAL-SECRETS.md`
 
 ### Newsletter — 🔴 ROT
 - noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)
-- 5 Artikel in der Warteschlange, ältester 86 Tag(e) alt
+- 5 Artikel in der Warteschlange, ältester 87 Tag(e) alt
 
 Quellen: `data/newsletter_journal.jsonl`, `data/newsletter_state.json`, `data/newsletter_kadenz.json`
 
