@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-13T13:06:33Z",
-  "modus": "live",
-  "commit": "481b888e12fc80a8e2ba5db684013ddca4e3ce5b",
+  "generated_at": "2026-11-13T13:32:45Z",
+  "modus": "kandidaten",
+  "commit": "0df785f25d0d68b364968394eafed173d433a112",
   "kapazitaet": {
     "stichtag": "2026-11-13",
     "basis": "2026-11-13",
@@ -105,7 +105,7 @@
     "seiten": 39,
     "live_befunde": 94,
     "live_seiten": 24,
-    "ueberholt": 96,
+    "ueberholt": 100,
     "ohne_fassung": 15,
     "nicht_entscheidbar": 0,
     "aeltester_tage": 14,
@@ -312,7 +312,7 @@
       ]
     },
     "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
-      "sha256": "885d3ba3733109d0496d0f4610e7a0a786c511e310d2472bcbef11314ba3b686",
+      "sha256": "e2105edf555a9f1f14cbf7f63954b9df1a1551bb5888b025943a7f282e3667b2",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -326,7 +326,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan": {
@@ -1118,7 +1118,7 @@
       "checks": []
     },
     "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
-      "sha256": "b5aa8342e8a8e6fe57594a9dbaea52ba605d36942e065fad1034442f685aeacc",
+      "sha256": "76d47bf8dd9d6cbf294f367b0b1cfac4ffb897fd13b1ec5c9607dda75f82258b",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1132,7 +1132,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
@@ -1197,7 +1197,7 @@
       ]
     },
     "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
-      "sha256": "0bb339ebf97b5578eade49d589f61feb7483d6e647d21c3649b7876ebb350495",
+      "sha256": "51b78fe59c59c08826168499a0aec8e88aeea280ebbe5f95d2add594e13145a4",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1211,7 +1211,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-03",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {
@@ -1409,7 +1409,7 @@
       "checks": []
     },
     "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck": {
-      "sha256": "7fc685b7028540d26591b9eb6cdb5abcf6ef8e430368925b11ccf0021539942e",
+      "sha256": "e656acb4651be290caa78176f667fccf82b7f8c0d6be763692c9ad70a22fee1b",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1423,7 +1423,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-23",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": {
@@ -1441,7 +1441,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-28",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1502,7 +1502,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-28",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1545,7 +1545,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-28",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1606,7 +1606,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-28",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1850,7 +1850,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-24",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "Q2-quellen-vorhanden",
