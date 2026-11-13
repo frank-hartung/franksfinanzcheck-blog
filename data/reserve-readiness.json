@@ -1,6 +1,6 @@
 {
   "target": 6,
-  "ready": 4,
+  "ready": 2,
   "pool_size": 11,
   "generated_at": "2026-11-12T18:05:19Z",
   "candidates": [
@@ -23,20 +23,10 @@
     },
     {
       "slug": "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-      "ready": true,
+      "ready": false,
       "sha256": "8bbbc9f4100dcb65ec67c935a0deaa3913f71545a3fe2dd33ce8f3826a5c7a35",
-      "flesch": 67.4,
       "measured_at": "2026-11-12T17:55:17Z",
-      "score": 0.968,
-      "parts": {
-        "spelling": 0.9,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee",
@@ -57,20 +47,10 @@
     },
     {
       "slug": "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein",
-      "ready": true,
+      "ready": false,
       "sha256": "f06a7d3f9dc486579a1172dbdc09b83b18f3542332dc278d5f88282391dea41b",
-      "flesch": 77.6,
       "measured_at": "2026-11-12T17:57:52Z",
-      "score": 0.992,
-      "parts": {
-        "spelling": 0.96,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-12-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
