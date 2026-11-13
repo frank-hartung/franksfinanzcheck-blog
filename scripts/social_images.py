@@ -24,6 +24,7 @@ from __future__ import annotations
 import os
 import sys
 import time
+from pathlib import Path
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_DIR = os.path.join(BLOG_DIR, "static")
@@ -60,6 +61,19 @@ def ensure_variant(src: str, slug: str, ratio: str, force: bool = False) -> str 
         return None
     if ratio not in RATIOS:
         return src
+    # Die JPEG-Neukodierung unten entfernt XMP und kann Anbieter-Markierungen
+    # beschädigen. Deklarierte KI-Originale (auch Pfad-Aliase) nie umkodieren;
+    # ist die Inventarmessung defekt, lieber das Original als eine blinde Kopie.
+    root = Path(BLOG_DIR).resolve()
+    if Path(src).resolve().is_relative_to((root / "static").resolve()):
+        try:
+            import ki_cover_provenienz
+            if Path(src).resolve() in ki_cover_provenienz.protected_paths(root):
+                print("    ⚠ Deklariertes KI-Cover: Original statt Social-Neukodierung.")
+                return src
+        except Exception as exc:  # noqa: BLE001 – kein ungeschütztes Re-Encode
+            print(f"    ⚠ KI-Cover-Schutz nicht messbar ({exc}) – nutze das Original.")
+            return src
     try:
         from PIL import Image
     except Exception:  # noqa: BLE001 – ohne Pillow: Original verwenden

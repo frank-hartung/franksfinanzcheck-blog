@@ -36,7 +36,14 @@
 #    1. <!-- alert-jobs: ["Job-Name"] -->   (JSON-Liste, Neuform)
 #    2. Fallback: „- Job **„Job-Name“**“ aus „Fehlgeschlagene Schritte“
 #
-#  EINGABE: Body der Meldung (Datei oder -) und die Jobs des Laufs
+#  WF-829B / #922 (12.11.2026): Bei einem roten Environment-Gate beweist
+#    dessen späteres Grün allein noch keinen Deploy oder /healthz. Zusätzlich
+#    müssen Dispatch, Tests, Plan, Policy, Abschlussjob und der betroffene
+#    Deploy samt Deploy- und Nachweisschritt im selben Lauf belegt sein. Wenn
+#    kein Worker genannt ist, ist der Newsletter-Worker mit /healthz nötig.
+#    Fehlende, mehrdeutige oder übersprungene Belege lassen die Meldung offen.
+#
+#  EINGABE: Body der Meldung (Datei oder -), Ereignis und die Jobs samt Steps
 #           (JSON wie GET /actions/runs/{id}/jobs, auch als nackte Liste).
 #  AUSGABE: JSON {"schliessen": bool, "grund": str, "gemessen": [...],
 #                 "fehlend": [...]}  ·  Exit 0 = gültige Entscheidung,
@@ -62,6 +69,20 @@ JOBSZEILE = re.compile(r"^[ \t]*- Job \*\*[„\"](?P<name>.+?)[“\"]\*\*", re.M
 ABGESCHNITT = re.compile(r"^[ \t]*- Job \*\*", re.M)
 
 GRUENE_KLUSSEL = ("success",)
+
+WORKER_WORKFLOW = "Cloudflare-Worker deployen"
+WORKER_MARKER = re.compile(r"<!--\s*alert-key:\s*WF-829B\s*-->")
+WORKER_TESTS = "Worker-Tests (ohne Deployment)"
+WORKER_PLAN = "Deploy planen"
+WORKER_POLICY = "Produktions-Environment absichern (nur main, Reviewer, kein Admin-Bypass)"
+WORKER_ABSCHLUSS = "Deploy-Beweis · kein stiller Skip"
+WORKER_DEPLOYS = frozenset({"Deploy newsletter-worker", "Deploy klick-zaehler",
+                            "Deploy ki-assistent"})
+
+
+def ist_worker_deploy(body: str, workflow: str | None = None) -> bool:
+    """Auch ältere Meldungen ohne Marker unterliegen dem Deploy-Nachweis."""
+    return workflow == WORKER_WORKFLOW or bool(WORKER_MARKER.search(body or ""))
 
 
 def jobs_aus_body(body: str) -> list[str]:
@@ -113,10 +134,55 @@ def jobs_aus_lauf(roh) -> dict[str, str]:
     return tabelle
 
 
-def entscheiden(body: str, lauf_jobs) -> dict:
-    """Die einzige Regel: Ohne den grünen Job, der rot war, kein „Behoben“."""
+def worker_deploy_nachweis(lauf_jobs, gemeldet: list[str], ereignis: str | None) -> tuple[str, list[str]]:
+    """Belegt den passenden Produktions-Deploy anhand der Jobs-API (fail-closed).
+
+    Die Schritt-Liste ist nötig: Ein erfolgreiches Policy-Gate oder ein grüner
+    Job ohne ausgeführten Deploy-/Nachweisschritt beweist keine Auslieferung.
+    GitHub kann Matrix-Jobs gleich benennen; doppelte Namen sind hier deshalb
+    mehrdeutig und kein Beweis. Alle Anforderungen gelten für denselben Lauf.
+    """
+    if ereignis != "workflow_dispatch":
+        return "WF-829B benötigt einen manuellen Deploy-Lauf (`workflow_dispatch`).", []
+    jobs = lauf_jobs.get("jobs") if isinstance(lauf_jobs, dict) else lauf_jobs
+    if not isinstance(jobs, list) or any(not isinstance(job, dict) for job in jobs):
+        return "WF-829B: Job-Liste des Deploy-Laufs ist nicht lesbar.", []
+
+    # Sind konkrete Worker gemeldet, müssen genau diese erfolgreich sein.
+    # Bei einem gemeinsamen Policy-Befund wie #922 fehlt diese Information:
+    # Dann ist der dokumentierte Newsletter-Deploy samt /healthz der Beweis.
+    worker = [name for name in gemeldet if name in WORKER_DEPLOYS]
+    if not worker:
+        worker = ["Deploy newsletter-worker"]
+    notwendig = [WORKER_TESTS, WORKER_PLAN, WORKER_POLICY, WORKER_ABSCHLUSS, *worker]
+    for name in notwendig:
+        treffer = [job for job in jobs if job.get("name") == name]
+        if len(treffer) != 1 or treffer[0].get("conclusion") != "success":
+            return f"WF-829B: Job „{name}“ fehlt, ist mehrdeutig oder nicht erfolgreich.", [name]
+        if name not in WORKER_DEPLOYS:
+            continue
+        schritte = treffer[0].get("steps")
+        if not isinstance(schritte, list) or any(not isinstance(s, dict) for s in schritte):
+            return f"WF-829B: Schritte von „{name}“ sind nicht lesbar.", [name]
+        for schritt in ("Deploy", "Deploy-Nachweis"):
+            gefunden = [s for s in schritte if s.get("name") == schritt]
+            if len(gefunden) != 1 or gefunden[0].get("conclusion") != "success":
+                return (f"WF-829B: „{name}“ ohne eindeutigen erfolgreichen Schritt „{schritt}“.",
+                        [f"{name}: {schritt}"])
+    return "", []
+
+
+def entscheiden(body: str, lauf_jobs, *, ereignis: str | None = None,
+                workflow: str | None = None) -> dict:
+    """Ohne den grünen Job, der rot war, und ggf. Deploy-Nachweis kein „Behoben“."""
     gemeldet = jobs_aus_body(body)
     lauf = jobs_aus_lauf(lauf_jobs)
+
+    if ist_worker_deploy(body, workflow):
+        grund, fehlend = worker_deploy_nachweis(lauf_jobs, gemeldet, ereignis)
+        if grund:
+            return {"schliessen": False, "grund": grund,
+                    "gemessen": sorted(lauf), "fehlend": fehlend}
 
     if not gemeldet:
         # Altvertrag (Meldung ohne jede Job-Angabe): ein grüner Lauf auf main
@@ -259,6 +325,23 @@ def selftest() -> int:
     assert jobs_aus_lauf({"jobs": [{"name": "X", "conclusion": "success"}]})["X"] == "success"
     faelle += 1
 
+    # #922: Ein grünes Environment-Gate und ein anderer Worker sind kein
+    # Newsletter-Deploy. Erst der echte Deploy samt Nachweis darf schließen.
+    body_worker = '<!-- alert-key: WF-829B -->\n<!-- alert-jobs: ' + json.dumps([WORKER_POLICY]) + ' -->'
+    jobs = [{"name": WORKER_TESTS, "conclusion": "success"},
+            {"name": WORKER_PLAN, "conclusion": "success"},
+            {"name": WORKER_POLICY, "conclusion": "success"},
+            {"name": WORKER_ABSCHLUSS, "conclusion": "success"},
+            {"name": "Deploy newsletter-worker", "conclusion": "success", "steps": [
+                {"name": "Deploy", "conclusion": "success"},
+                {"name": "Deploy-Nachweis", "conclusion": "success"}]}]
+    assert not entscheiden(body_worker, jobs[:-1], ereignis="workflow_dispatch")["schliessen"]
+    assert not entscheiden(body_worker, jobs, ereignis="push")["schliessen"]
+    assert entscheiden(body_worker, jobs, ereignis="workflow_dispatch")["schliessen"]
+    jobs[-1]["steps"][-1]["conclusion"] = "skipped"
+    assert not entscheiden(body_worker, jobs, ereignis="workflow_dispatch")["schliessen"]
+    faelle += 1
+
     print(f"✅ SELBSTTEST OK — {faelle} Fälle grün (Job-Beweis statt „irgendein "
           "grüner Lauf“, WF-E813 / #809).")
     return 0
@@ -268,12 +351,13 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Auto-Close-Gate: „Behoben“ nur mit Job-Beweis (WF-E813 / #809).")
     parser.add_argument("--body", help="Body der Meldung (Datei oder - für stdin)")
-    parser.add_argument("--jobs", help="Jobs des Laufs als JSON-Datei")
+    parser.add_argument("--jobs", help="Jobs und Schritte des Laufs als JSON-Datei")
+    parser.add_argument("--ereignis", help="Ereignis des abgeschlossenen Laufs")
+    parser.add_argument("--workflow", help="Name des abgeschlossenen Workflows (auch für Altmeldungen)")
     parser.add_argument("--json", action="store_true", help="Entscheidung als JSON")
     parser.add_argument("--nennt-jobs", action="store_true",
-                        help="Nur prüfen, OB die Meldung Jobs nennt (Exit 0/1) – "
-                             "der Aufrufer holt die Job-Liste nur dann, wie es "
-                             "der Übergangsvertrag verlangt (WF-E813 / #809).")
+                        help="Exit 0, wenn Job-Belege benötigt werden; bei WF-829B "
+                             "auch für Altmeldungen ohne Job-Angabe.")
     parser.add_argument("--selftest", action="store_true", help="prüft die Prüfung")
     args = parser.parse_args(argv)
 
@@ -287,11 +371,9 @@ def main(argv: list[str] | None = None) -> int:
         body = (sys.stdin.read() if args.body == "-"
                 else open(args.body, encoding="utf-8").read())
         if args.nennt_jobs:
-            # Übergangsvertrag: Meldungen ohne jede Job-Nennung behalten ihren
-            # bisherigen Schließpfad (andere Workflows), der Job-Beweis greift
-            # ab der ersten Nennung. Der Aufrufer entscheidet so, OB er die
-            # Job-Liste des Laufs überhaupt abruft.
-            return 0 if jobs_aus_body(body) else 1
+            # Der Übergangsvertrag bleibt für andere Workflows bestehen.
+            # WF-829B braucht auch ohne Job-Marker zwingend Deploy-Belege.
+            return 0 if jobs_aus_body(body) or ist_worker_deploy(body, args.workflow) else 1
         with open(args.jobs, encoding="utf-8") as f:
             lauf_jobs = json.load(f)
     except OSError as fehler:
@@ -301,7 +383,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"❌ Job-JSON nicht lesbar: {fehler}", file=sys.stderr)
         return 2
 
-    e = entscheiden(body, lauf_jobs)
+    e = entscheiden(body, lauf_jobs, ereignis=args.ereignis, workflow=args.workflow)
     if args.json:
         print(json.dumps(e, ensure_ascii=False, indent=2))
     else:

@@ -151,3 +151,8 @@ scripts/wachen_vertrag.py merge=binary
 # in der GitHub-Ansicht aus – der Inhalt bleibt klickbar, der Lärm ist weg.
 /*-REPORT.md -diff linguist-generated=true
 /*-STATUS.md -diff linguist-generated=true
+
+# Der Recht-Update-Report ist keine automatisch überschriebene Messdatei,
+# sondern eine redaktionelle Rechts- und Nachweishistorie. Änderungen müssen
+# im PR als Text sichtbar und fachlich reviewbar bleiben (#1028).
+/RECHT-UPDATE-REPORT.md diff linguist-generated=false

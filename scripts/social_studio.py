@@ -42,6 +42,7 @@ import social_copywriter as copy       # noqa: E402
 import social_gate as gate             # noqa: E402
 import social_images as images         # noqa: E402
 import social_planner as planner       # noqa: E402
+import ki_provenienz as kp             # noqa: E402 – Pinterest-Herkunft (#1028)
 
 COCKPIT = os.path.join(BLOG_DIR, "SOCIAL-AUTOPILOT-STATUS.md")
 MAX_ATTEMPTS = 3
@@ -115,8 +116,12 @@ def cover_source(article: dict) -> str:
     auf Platte erzeugen – bei 44 Artikeln × 10 Kanälen ein unnötiger
     Schreiblauf in jedem Zweistunden-Takt.
     """
+    raw = str(article.get("raw_fm") or "")
+    original = kp.social_cover_original(raw) if raw else None
+    if original:
+        return str(original)
     rel = article.get("cover") or ""
-    src = os.path.join(BLOG_DIR, "static", rel) if rel else ""
+    src = os.path.join(BLOG_DIR, "static", rel.lstrip("/")) if rel else ""
     if src and os.path.isfile(src):
         return src
     guess = os.path.join(BLOG_DIR, "static", "images", "covers",
@@ -136,9 +141,10 @@ def gate_validator(meta: dict, state: dict):
     def pruefen(article: dict, cid: str, ch: dict, angle: str) -> tuple[bool, str]:
         try:
             pkg = copy.compose(article, cid, ch, angle, meta, use_llm=False)
+            pinterest_kennzeichnung(pkg, cid, ch)
+            src = cover_source(article)
         except Exception as exc:  # noqa: BLE001 – Vorprüfung darf nie killen
-            return False, f"Textbau gescheitert: {exc}"
-        src = cover_source(article)
+            return False, f"Text-/Bildprüfung gescheitert: {exc}"
         if src and ((ch.get("media") or {}).get("supported", True)):
             pkg["media_path"] = src
             pkg["media_url"] = f"{base}/{images.static_rel(src)}"
@@ -154,27 +160,41 @@ def resolve_media(article: dict, channel_cfg: dict, meta: dict) -> tuple[str, st
     media_cfg = (channel_cfg or {}).get("media") or {}
     if not media_cfg.get("supported", True):
         return "", ""
-    rel = article.get("cover") or ""
-    src = os.path.join(BLOG_DIR, "static", rel) if rel else ""
-    if not src or not os.path.isfile(src):
-        # Fallback: Cover nach Slug-Konvention
-        guess = os.path.join(BLOG_DIR, "static", "images", "covers",
-                             f"{article['slug']}.jpg")
-        src = guess if os.path.isfile(guess) else ""
+    src = cover_source(article)
     if not src:
         return "", ""
+    raw = str(article.get("raw_fm") or "")
+    original = kp.social_cover_original(raw) if raw else None
     variant = media_cfg.get("variant")
-    if variant:
+    if variant and not original:
         src = images.ensure_variant(src, article["slug"], variant) or src
     url = f"{str(meta.get('base_url') or '').rstrip('/')}/{images.static_rel(src)}"
     return src, url
 
 
 # -------------------------------------------------------------------- Senden
+def pinterest_kennzeichnung(pkg: dict, cid: str, ch: dict) -> None:
+    """Kennzeichnung VOR der Social-Freigabe und dem Dry-Run hinzufügen."""
+    if cid != "pinterest":
+        return
+    limit = min(500, int(((ch or {}).get("text") or {}).get("max_chars") or 500))
+    try:
+        pkg["text"] = kp.social_pinterest_beschreibung(pkg, limit)
+    except kp.WerkzeugFehler as exc:
+        # Die Gate-Vorprüfung kann diesen Beitrag blockieren und nachrücken;
+        # der API-Adapter prüft dieselbe Grenze nochmals unmittelbar vor POST.
+        pkg["ki_kennzeichnung_fehler"] = str(exc)
+
+
 def build_package(article: dict, cid: str, ch: dict, angle: str, meta: dict,
                   use_llm: bool) -> dict:
     pkg = copy.compose(article, cid, ch, angle, meta, use_llm=use_llm)
-    path, url = resolve_media(article, ch, meta)
+    pinterest_kennzeichnung(pkg, cid, ch)
+    try:
+        path, url = resolve_media(article, ch, meta)
+    except kp.WerkzeugFehler as exc:
+        pkg["ki_bild_fehler"] = str(exc)
+        path, url = "", ""
     pkg["media_path"] = path
     pkg["media_url"] = url if url and str(url).startswith("https://") else ""
     return pkg

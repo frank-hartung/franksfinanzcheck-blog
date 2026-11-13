@@ -11,8 +11,9 @@
 #  Warteschlange, keine Selbstheilung (dieselbe Klasse wie GSC #1097).
 #
 #  WAS DIESER LAUF ANDERS MACHT
-#    · Messen → NUR VERSCHÄRFEND schreiben → NACHMESSEN → Beleg. Ohne
-#      Nachmessung gilt nichts als geheilt; eine Verschlechterung bricht ab.
+#    · Messen → nur im eindeutig leeren Ausgangszustand schreiben →
+#      Zwischen-/Nachmessung → Beleg. Vorhandene Schutzregeln werden nicht
+#      überschrieben; gleichzeitige Dashboard-Edits sind nicht atomar sperrbar.
 #    · Vor jedem Urteil steht die Eichprobe: Der Vorfall wird im Speicher
 #      nachgebaut. Erkennt der Prüfer ihn nicht, gibt es Exit 3 und keinen
 #      Schreibzugriff (Lehre aus dem zerstörten Siegel vom 04.11.2026).
@@ -24,7 +25,7 @@
 #      und dass der harte Stopp im Deploy-Pfad unangetastet ist. Wird die
 #      Verdrahtung entfernt, wird sie zum Befund, statt still zu verrotten.
 #
-#  AUSLÖSER – Heilung passiert, ohne dass jemand daran denkt:
+#  AUSLÖSER – Messung und ggf. begrenzte Teilheilung laufen automatisch:
 #    · täglich 05:48 UTC (vor der Sicherheits-Wache um 06:05),
 #    · unmittelbar NACH jedem Lauf von „Cloudflare-Worker deployen" auf main –
 #      auch und gerade nach einem roten, fail-closed abgebrochenen Deploy,
@@ -33,16 +34,18 @@
 #
 #  WAS DIESER LAUF AUSDRÜCKLICH NICHT TUT
 #    · Keine Deploy-Freigabe. Freigeben bleibt Menschenhandlung.
-#    · Kein `can_admins_bypass`: keine GitHub-API nimmt dieses Feld an. Der
-#      Schalter im Dashboard bleibt EINE einmalige Inhaberhandlung.
-#    · Keine Cloudflare-Secrets, kein Wrangler, kein Löschen, kein Lockern.
+#    · Kein `can_admins_bypass`: Der REST-Schreibparameter ist nicht offiziell
+#      dokumentiert und für dieses Repository nicht verifiziert. Dieses
+#      Werkzeug nutzt den Dashboard-Schalter und misst danach nach.
+#    · Keine Cloudflare-Secrets, kein Wrangler, kein Löschen, keine automatische
+#      Änderung eines bereits geschützten oder unklaren Environments.
 #    · Kein Ersetzen des Gates: `worker_environment_guard.py --check` bleibt im
 #      Deploy-Pfad VOR jedem Secret-Zugriff (W5 der Verdrahtungs-Wache).
 #
-#  TOKEN: `UMGEBUNGS_ADMIN_TOKEN` (feingranular `Environments: read/write`)
-#  ist optional. Fehlt es, fällt der Lauf auf `github.token` zurück; die API
-#  antwortet dann 403, der Heiler meldet RECHT (Exit 1, Warnstufe) und behauptet
-#  keine Heilung. Ein fehlendes Recht wird nie als „übersprungen/grün" gebucht.
+#  TOKEN: `UMGEBUNGS_ADMIN_TOKEN` (Repository-Recht `Administration: write`)
+#  ist optional. Fehlt es, fällt der Lauf auf `github.token` zurück. Bei einer
+#  API-Verweigerung (401/403) meldet der Heiler RECHT (Exit 1, Warnstufe) und
+#  behauptet keine Heilung; der konkrete Grund für die Verweigerung ist offen.
 # ============================================================
 name: Produktions-Schutz · Selbstheilung (WF-829B)
 
@@ -52,6 +55,10 @@ on:
     paths:
       - "scripts/produktions_schutz_selbstheilung.py"
       - "scripts/tests/test_produktions_schutz_selbstheilung.py"
+      - "scripts/worker_environment_einrichten.py"
+      - "scripts/tests/test_worker_environment_einrichten.py"
+      - "scripts/worker_environment_guard.py"
+      - "scripts/tests/test_worker_environment_guard.py"
       - "data/produktions_schutz_vertrag.json"
       - "data/produktions_schutz_belege.jsonl"
       - ".github/workflows/produktions-schutz-selbstheilung.yml"
@@ -60,6 +67,10 @@ on:
     paths:
       - "scripts/produktions_schutz_selbstheilung.py"
       - "scripts/tests/test_produktions_schutz_selbstheilung.py"
+      - "scripts/worker_environment_einrichten.py"
+      - "scripts/tests/test_worker_environment_einrichten.py"
+      - "scripts/worker_environment_guard.py"
+      - "scripts/tests/test_worker_environment_guard.py"
       - "data/produktions_schutz_vertrag.json"
       - "data/produktions_schutz_belege.jsonl"
       - ".github/workflows/produktions-schutz-selbstheilung.yml"
@@ -168,7 +179,7 @@ jobs:
               # C14: Ein Zustand, den das Repository nicht herstellen kann
               # (Rechtebefund, Dashboard-Schalter), ist eine offene Entscheidung
               # mit Schließpfad – kein Dauer-Rot ohne Handlungsmöglichkeit.
-              echo "::warning title=Produktions-Schutz offen::Der Tageslauf hat alles verschärft, was die API zulässt. Für den Rest: Secret UMGEBUNGS_ADMIN_TOKEN mit Environments-Schreibrecht hinterlegen und den Administrator-Bypass im Dashboard einmalig ausschalten. Der Deploy bleibt bis dahin fail-closed gesperrt."
+              echo "::warning title=Produktions-Schutz offen::Ein oder mehrere Schutzziele sind nicht erreicht. Die Zusammenfassung nennt die gemessenen Befunde und nächsten Schritte. Der Deploy bleibt fail-closed gesperrt."
               ;;
             2)
               echo "::error title=Produktions-Schutz nicht belegbar::Netz, API oder Belegkette sind ungeprüft. Ungeprüft gilt nicht als sauber."
@@ -215,7 +226,7 @@ jobs:
             1)
               SCHLUSS=action_required
               TITEL="Produktions-Schutz: Inhaberhandlung offen (#922)"
-              TEXT="Das Repository darf dieses Environment nicht selbst absichern: Dem Token fehlt administration=write (HTTP 403), und can_admins_bypass hat in REST wie GraphQL keinen Schreibweg. Einmalig: Secret UMGEBUNGS_ADMIN_TOKEN mit Environments-Schreibrecht hinterlegen und im Dashboard 'Allow administrators to bypass configured protection rules' ausschalten. Der Tageslauf heilt dann selbst; der Deploy bleibt bis dahin fail-closed gesperrt."
+              TEXT="Reviewer, Branch-Regel oder Admin-Bypass-Sperre sind noch nicht vollständig belegt. Die Zusammenfassung dieses Laufs nennt die tatsächlichen Befunde. Im Dashboard cloudflare-produktion absichern und danach den Guard erneut ausführen; der Deploy bleibt bis dahin fail-closed gesperrt."
               ;;
             *)
               SCHLUSS=failure

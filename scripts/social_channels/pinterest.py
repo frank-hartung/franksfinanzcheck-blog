@@ -22,6 +22,8 @@ import json
 import os
 import urllib.parse
 
+import ki_provenienz as kp
+
 from . import (ChannelAdapter, PublishResult, failed, http_json, register,
                skipped)
 
@@ -104,19 +106,32 @@ class PinterestAdapter(ChannelAdapter):
         if not ok:
             return skipped(reason)
 
-        board = self.resolve_board((item.get("article") or {}).get("pillar") or "")
+        # Letzte Grenze, auch wenn ein Aufrufer den Studio-Plan umgeht:
+        # keine fehlenden Kennzeichnungen, unmessbare Quelle oder abgeschnittene
+        # Pflicht-Hinweise senden. Die Social-Freigabe sieht denselben Text.
+        try:
+            article = item.get("article") or {}
+            kopf, basis = kp.social_artikel_quelle(article, item.get("slug") or "")
+            kp.social_ziel_pruefen(item.get("url") or "", item["slug"], basis)
+            media_url = item.get("media_url") or ""
+            if not str(media_url).startswith("https://"):
+                return failed("Pinterest braucht eine öffentliche HTTPS-Bild-URL")
+            kp.social_bild_pruefen(kopf, media_url, basis)
+            description = kp.social_pinterest_beschreibung(item, min(self.max_chars, 500))
+        except kp.WerkzeugFehler as exc:
+            return failed(str(exc))
+        if item.get("ki_kennzeichnung_fehler") or description != (item.get("text") or ""):
+            return failed("Pinterest-Herkunftshinweis fehlt in der freigegebenen Beschreibung")
+
+        board = self.resolve_board(article.get("pillar") or "")
         if not board:
             return failed("Kein Pinterest-Board auflösbar (PINTEREST_BOARD_ID setzen)")
-
-        media_url = item.get("media_url") or ""
-        if not str(media_url).startswith("https://"):
-            return failed("Pinterest braucht eine öffentliche HTTPS-Bild-URL")
 
         title = (item.get("headline") or "")[: int(self.text_cfg.get("title_max_chars", 100))]
         payload = {
             "board_id": board,
             "title": title,
-            "description": (item.get("text") or "")[: int(self.text_cfg.get("max_chars", 500))],
+            "description": description,
             "link": item.get("url") or "",
             "media_source": {"source_type": "image_url", "url": media_url},
         }

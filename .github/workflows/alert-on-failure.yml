@@ -501,8 +501,12 @@ jobs:
             // die bestehende Klasse `selbsttest` (Erkennung über
             // `selbsttestFailed`). Hier zählt nur der Zugangsbefund selbst.
             const istZugangsPruefung = wfName === 'Deploy-Zugang prüfen';
+            // Der Prüfknopf hat ebenfalls ein vorgeschaltetes Policy-Gate und
+            // misst nach der Freigabe erneut. Auch dessen Befunde brauchen den
+            // Environment-Rat, nicht den allgemeinen Workflow-Rat.
             const zugangsPruefungFailed = istZugangsPruefung &&
-              failedStepNames.some(s => String(s).includes('Zugang prüfen (alle Befunde'));
+              failedStepNames.some(s => String(s).includes('Zugang prüfen (alle Befunde') ||
+                String(s).includes('Produktions-Environment absichern'));
             // 26.10.2026: CodeQL-Sicherheitswache. Das Gate zählt offene
             // Security-Fundstellen im SARIF (Regel, Datei, Zeile stehen in
             // den Annotationen). Ein ruhendes Gate hätte Fundstellen still
@@ -979,7 +983,7 @@ jobs:
                             '1. **Fail-closed – gewollt, kein Betriebsausfall.** Der Deploy bricht absichtlich ab, bevor Wrangler läuft: entweder fehlt im Environment `cloudflare-produktion` der Zugang (`CF_WORKERS_DEPLOY_TOKEN` mit Workers-Scripts-Lese- und Deploy-Recht, `CLOUDFLARE_ACCOUNT_ID`), oder seine Schutzregeln sind nicht lesbar (Reviewer-/Branch-/Admin-Bypass-Policy). Ohne diesen Schutz würde ein übersprungener Deploy grün melden – genau das ist der Vorfall vom 24.10.2026 (Run 40100342025). Seit dem 10.11.2026 wird der Deploy ausschließlich bewusst per „Run workflow" auf main ausgelöst; Push und PR laufen nur noch als geheimnisfreie Worker-Tests, und der Abschlussjob macht jeden übersprungenen Deploy sichtbar rot.',
                             '2. **Environment zuerst absichern:** Settings → Environments → `cloudflare-produktion`: mindestens ein `Required Reviewer`, bei „Deployment branches and tags“ exakt der Branch `main`, und „Allow administrators to bypass configured protection rules“ aus (`can_admins_bypass=false`). Read-only prüfbar ohne Cloudflare-Secrets: `python3 scripts/worker_environment_guard.py --check` (Workflow-Token mit `actions: read`).',
                             '3. **Alle Befunde in einem Lauf:** Der Schritt „Zugang prüfen (alle Befunde auf einmal, lesend)“ sammelt Token, Konto-ID, Token-Gültigkeit, Leserecht und je Worker die produktive Bindung – und schreibt ein Dossier in die Job-Zusammenfassung. Keine Ressourcen-IDs manuell kopieren: Der Resolver liest die bestehenden Bindungen (`ABO`/KV aus `ff-newsletter`, `DB`/D1 aus `klick-zaehler`) selbst und bricht bei Fehlen oder Mehrdeutigkeit rot ab.',
-                            '4. **Vorher prüfen, ohne zu deployen:** Actions → „Deploy-Zugang prüfen“ → „Run workflow“ (`main`). Der Lauf liest nur (`/user/tokens/verify` und die bestehenden Script-Einstellungen), legt nichts an und deployt nichts. Danach ausrollen: Actions → „Cloudflare-Worker deployen“ → „Run workflow“ (`main`); ein grüner Plan genügt nicht, der Deploy muss laufen und `/healthz` den Build-Stempel aus `wrangler.toml` liefern. Der erste grüne Deploy-Lauf schließt diese Meldung selbst.',
+                            '4. **Vorher prüfen, ohne zu deployen:** Actions → „Deploy-Zugang prüfen“ → „Run workflow“ (`main`). Auch dieser Lauf prüft die Environment-Policy vor der Freigabe und danach erneut. Er liest nur, legt nichts an und deployt nichts. Danach den gemeldeten Worker deployen; ist nur das gemeinsame Policy-Gate betroffen, `newsletter-worker` wählen. Tests, Plan, Policy, Deploy und Abschluss müssen grün sein; der Newsletter-Nachweis verlangt `/healthz` mit HTTP 200, `ok: true` und dem Build-Stempel aus `wrangler.toml`. Erst dieser Nachweis erlaubt das automatische Schließen.',
                             '5. Runbook: `docs/SICHERHEIT-BETRIEB-RUNBOOK.md`, A4/D2. Selbsttests: `python3 scripts/worker_zugang.py --selftest`, `python3 scripts/worker_ressourcen.py --selftest`, `python3 scripts/worker_environment_guard.py --selftest`; lokal ohne Netz: `python3 scripts/worker_zugang.py --pruefen`.'
 
                           ]
@@ -1205,16 +1209,23 @@ jobs:
             jq -r --argjson nr "$n" \
               '.[] | select(.number == $nr) | .body // ""' /tmp/offene.json \
               > "/tmp/meldung-${n}.md"
-            if ! python3 scripts/alert_resolve_gate.py \
-                 --body "/tmp/meldung-${n}.md" --nennt-jobs; then
+            if python3 scripts/alert_resolve_gate.py \
+                 --body "/tmp/meldung-${n}.md" --nennt-jobs --workflow "$WF_NAME"; then
+              : # Job- und gegebenenfalls Deploy-Belege werden unten geprüft.
+            else
+              code=$?
+              if [ "$code" != "1" ]; then
+                echo "::warning::Issue #${n} bleibt offen: Meldung nicht lesbar (Exit ${code})."
+                continue
+              fi
               gh issue close "$n" --repo "$GITHUB_REPOSITORY" \
-                --comment "✅ Behoben: Der Vorgang läuft wieder fehlerfrei auf \\`${RUN_BRANCH_SAUBER}\\` ([Run](${RUN_URL})). Diese Meldung wird nach der Aufräum-Frist dauerhaft gelöscht."
+                --comment "✅ Behoben: Der Vorgang läuft wieder fehlerfrei auf \`${RUN_BRANCH_SAUBER}\` ([Run](${RUN_URL})). Diese Meldung wird nach der Aufräum-Frist dauerhaft gelöscht."
               echo "→ Issue #$n geschlossen (Übergangsform ohne Job-Nennung)."
               continue
             fi
             if [ -z "$LAUF_JOBS" ]; then
-              if gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${RUN_ID}/jobs" \
-                   --paginate --jq '.jobs[] | {name, conclusion}' \
+              if gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${RUN_ID}/jobs?filter=latest&per_page=100" \
+                   --paginate --jq '.jobs[] | {name, conclusion, steps: [(.steps // [])[] | {name, conclusion}]}' \
                    | jq -s '{jobs: .}' > /tmp/lauf-jobs.json; then
                 LAUF_JOBS="/tmp/lauf-jobs.json"
               else
@@ -1224,7 +1235,8 @@ jobs:
               fi
             fi
             ENTSCHEID="$(python3 scripts/alert_resolve_gate.py \
-              --body "/tmp/meldung-${n}.md" --jobs /tmp/lauf-jobs.json --json \
+              --body "/tmp/meldung-${n}.md" --jobs /tmp/lauf-jobs.json \
+              --workflow "$WF_NAME" --ereignis "$RUN_EVENT" --json \
               || echo '{"schliessen": false, "grund": "Entscheidung nicht möglich (Werkzeugfehler) – ohne Beweis kein Behoben."}')"
             if [ "$(jq -r '.schliessen' <<<"$ENTSCHEID")" = "true" ]; then
               gh issue close "$n" --repo "$GITHUB_REPOSITORY" \
