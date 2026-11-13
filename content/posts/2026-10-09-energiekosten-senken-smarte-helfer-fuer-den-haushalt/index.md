@@ -33,7 +33,7 @@ quellen:
     titel: "Bundesnetzagentur - Energie"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
-faktencheck: 2026-10-06
+faktencheck: 2026-11-13
 kurzantwort: "Ein intelligenter Thermostat kombiniert mit einem Energie‑Monitor reduziert den Haushaltsstromverbrauch um etwa 12 % – das entspricht bei einem durchschnittlichen Verbrauch von 2 500 kWh rund 150 € Jahresersparnis. Der 4K‑Prüfpfad hilft, die Geräte nach Kosten, Komfort, Kontrolle und Konsistenz zu bewerten, sodass du nur die wirklich effizienten Lösungen nutzt."
 ---
 

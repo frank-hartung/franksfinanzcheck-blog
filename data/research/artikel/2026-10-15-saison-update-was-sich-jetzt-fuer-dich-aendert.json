@@ -1,16 +1,16 @@
 {
   "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
   "titel": "Herbst-Check: Strom, Versicherung, Konto und Internet",
-  "erzeugt": "2026-11-12 13:13 UTC",
+  "erzeugt": "2026-11-13 12:33 UTC",
   "faellig": {
     "faellig": false,
     "prio": 9,
     "klasse": "saisonal",
-    "grund": "frisch geprüft vor 23 Tagen (Intervall 30 Tage)",
-    "alter_tage": 23,
+    "grund": "frisch geprüft vor 24 Tagen (Intervall 30 Tage)",
+    "alter_tage": 24,
     "intervall": 30,
     "frist": "2026-11-19",
-    "restlaufzeit": 7
+    "restlaufzeit": 6
   },
   "geo": {
     "punkte": 6,
@@ -47,5 +47,5 @@
   ],
   "fassung_sha256": "74edb65d844de6d4b9978d6e6f4694242f74c0ceefdd525b08d39462a3e62225",
   "text_sha256": "c411d781ab66569fc2561e38eb3e5e19be4617adc26f5c8d14544075f8722799",
-  "fachpruefung": "Fehler: gemini: IncompleteResponseError; groq: HTTPError; cloudflare: TimeoutError"
+  "fachpruefung": "geprüft (groq:openai/gpt-oss-120b); 1 Befund(e) ohne belegbaren Textanker verworfen"
 }

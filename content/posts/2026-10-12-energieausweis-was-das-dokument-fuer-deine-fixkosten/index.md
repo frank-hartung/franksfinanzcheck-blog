@@ -32,7 +32,7 @@ quellen:
     titel: "Referenzseite bundesnetzagentur.de"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
-faktencheck: 2026-10-06
+faktencheck: 2026-11-13
 kurzantwort: "Ja, ein Energieausweis ist beim Verkauf oder der Neuvermietung einer Immobilie gesetzlich verpflichtend. Die Kosten hängen davon ab, ob ein einfacher Verbrauchsausweis oder ein detaillierter Bedarfsausweis erstellt wird. Eine gute Energieeffizienzklasse senkt die laufenden Heizkosten deutlich und stärkt deine Position bei Verkauf oder Vermietung."
 ---
 

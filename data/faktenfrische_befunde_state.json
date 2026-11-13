@@ -1,10 +1,10 @@
 {
-  "erzeugt": "2026-11-13T02:10:24Z",
+  "erzeugt": "2026-11-13T12:35:55Z",
   "stichtag": "2026-11-13",
-  "offen": 139,
-  "seiten": 35,
-  "live_seiten": 20,
-  "live_befunde": 78,
+  "offen": 155,
+  "seiten": 39,
+  "live_seiten": 24,
+  "live_befunde": 94,
   "ueberholt": 96,
   "ohne_fassung": 15,
   "seite_fehlt": 0,
@@ -38,16 +38,20 @@
     "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": 3,
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": 3,
     "2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert": 5,
+    "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": 3,
+    "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten": 4,
+    "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": 5,
     "2026-10-14-heizperiode-vorbereiten-im-spaetsommer": 2,
     "2026-10-19-urlaubskasse-clever-aufbessern": 3,
+    "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto": 4,
     "2026-10-28-dsl-und-internet-flat-guenstig-sichern": 5,
     "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden": 5,
     "2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif": 5,
     "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub": 5,
     "2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check": 3,
     "2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten": 4,
-    "2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": 5,
-    "2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten": 5,
+    "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": 5,
+    "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten": 5,
     "frugalismus": 3,
     "strom-sparen": 3
   },
@@ -262,7 +266,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "slug": "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ursprungs_slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "id": "0b564f460c41218244bd",
       "typ": "luecke",
@@ -274,7 +278,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "slug": "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ursprungs_slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "id": "3ad2eefed314eb172c26",
       "typ": "luecke",
@@ -286,7 +290,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "slug": "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ursprungs_slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "id": "43788c2cdcdfda52e753",
       "typ": "luecke",
@@ -298,7 +302,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "slug": "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ursprungs_slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "id": "5eedec8afbdef6a4ca49",
       "typ": "luecke",
@@ -310,7 +314,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "slug": "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "ursprungs_slug": "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
       "id": "81881c5bc61824d25f5a",
       "typ": "praezision",
@@ -894,7 +898,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "1c6e4d2f12da24ec4081",
       "typ": "luecke",
@@ -906,7 +910,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "5b539daf371f7362a3ef",
       "typ": "praezision",
@@ -918,7 +922,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "77d809de9e06d1d6910d",
       "typ": "luecke",
@@ -930,7 +934,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "ad7c0a90ef52ff35130e",
       "typ": "luecke",
@@ -942,7 +946,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "f227178fbda2cc59c350",
       "typ": "luecke",
@@ -1587,6 +1591,182 @@
       "text": "Keine versteckten Kosten, wenn die Karte „keine Jahres‑ und keine Auslandseinsatzgebühr“ nennt.",
       "beleg": "",
       "alter_tage": 1,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt",
+      "id": "4d0125136c5b940946e4",
+      "typ": "luecke",
+      "text": "Lichtsteuerung: Bedarfssteuerung – 2 bis 5 % des Stromverbrauchs.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt",
+      "id": "7aeb2098034d16a46885",
+      "typ": "luecke",
+      "text": "Anbieter locken mit Neukundenboni, die nach der üblichen Erstlaufzeit entfallen; danach steigt der Arbeitspreis massiv an.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt",
+      "id": "ea97b5dd6695de127fd2",
+      "typ": "luecke",
+      "text": "Heizungssteuerung: Smarte Thermostate können Heizkosten einsparen. Die Spanne von 10 bis 25 % ist ein Beispielwert aus der Rechnung unten.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
+      "id": "1dc0f20f9ab3a6b783bc",
+      "typ": "luecke",
+      "text": "Behauptung, dass ein fehlender Ausweis zu empfindlichen Bußgeldern führt, fehlt eine belegbare Quelle.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
+      "id": "7b94ca07b36c0b7cb1cc",
+      "typ": "luecke",
+      "text": "Aussage, dass Baudenkmäler von der Ausweispflicht befreit sind, wird nicht durch die angegebene Quelle gestützt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
+      "id": "985f506ee04087bf7253",
+      "typ": "luecke",
+      "text": "Angabe, dass ein Wechsel von Energieeffizienzklasse F zu C über 2.000 € Jahresersparnis bringt, ist unbelegt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
+      "id": "ee321fa37210590f7e9b",
+      "typ": "luecke",
+      "text": "Keine Quelle für die Angabe, dass ein Energieausweis ein volles Jahrzehnt gültig ist, sofern keine größeren Umbauten erfolgen.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
+      "id": "19ab248b17415c73edfb",
+      "typ": "luecke",
+      "text": "Thermostat um 1 °C senken | 4 % – 6 % der Heizkosten",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
+      "id": "372bb51051e8bd7c5f71",
+      "typ": "luecke",
+      "text": "Viele Anbieter belohnen einen niedrigen Verbrauch mit besseren Konditionen",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
+      "id": "6aaff85e3a7591d0c5b2",
+      "typ": "luecke",
+      "text": "für dich entstehen keine Mehrkosten",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
+      "id": "7e6087a4117a857a92c8",
+      "typ": "luecke",
+      "text": "Durch diese zwei Maßnahmen sparst du in dieser Beispielrechnung jährlich rund 140 €",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
+      "id": "e28b4ad1f6d608d2ec77",
+      "typ": "luecke",
+      "text": "Strom (LED‑Umrüstung) | 100 € – 140 € | etwa 8 %",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto",
+      "id": "04ae33652c1c5eb4e2b8",
+      "typ": "luecke",
+      "text": "Ein kurzer Check spart dir oft mehrere hundert Euro im Jahr.",
+      "beleg": "",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto",
+      "id": "5223a3c7287ff81939cd",
+      "typ": "luecke",
+      "text": "Faustregel: ... mehr als 5 % deines Nettoeinkommens ... Meist sinken diese Kosten um über 80 %",
+      "beleg": "",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto",
+      "id": "9800545ae945ec280b34",
+      "typ": "luecke",
+      "text": "Ein Wechsel ist für dich in der Regel komplett kostenlos als Beispielwert.",
+      "beleg": "",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto",
+      "id": "bc0e4f2eb357a682c674",
+      "typ": "luecke",
+      "text": "Bei einem normalen Einkommen sollten die Gebühren fast Null sein.",
+      "beleg": "",
+      "alter_tage": 0,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""

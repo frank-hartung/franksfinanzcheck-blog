@@ -1,11 +1,11 @@
 # Faktenfrische: Herbst-Check: Strom, Versicherung, Konto und Internet
 
-> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-12 13:13 UTC.
+> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-13 12:33 UTC.
 > Agent-Reach-Kanäle, nur lesend. Fundstellen sind Signale, keine Freigabe.
 
 - **Artikel:** `content/posts/2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert/index.md`
 - **Themenwelt:** frugalismus
-- **Fälligkeit:** frisch geprüft vor 23 Tagen (Intervall 30 Tage) (Klasse: saisonal)
+- **Fälligkeit:** frisch geprüft vor 24 Tagen (Intervall 30 Tage) (Klasse: saisonal)
 - **GEO-Reife:** 6/6 (100 %)
 - **Suchbegriffe:** Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen, Saison Update, Herbst-Check, Herbst Check, DSL-Vergleich, Inflation, Verbraucherpreise, Sparquote, Haushaltsbudget, Herbst
 - **Kanäle:** rss:Statistisches Bundesamt – Pressemitteilungen, web:destatis.de
@@ -31,7 +31,7 @@
 
 ## Fachliche Befunde (KI-Fachprüfung)
 
-Status: Fehler: gemini: IncompleteResponseError; groq: HTTPError; cloudflare: TimeoutError
+Status: geprüft (groq:openai/gpt-oss-120b); 1 Befund(e) ohne belegbaren Textanker verworfen
 
 _Keine Befunde gemeldet; Prüfstatus siehe oben._
 

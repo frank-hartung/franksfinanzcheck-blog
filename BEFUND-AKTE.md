@@ -2,12 +2,12 @@
 
 _Stand 2026-11-13 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**139 offene Befunde auf 35 Seiten · davon 20 Live-Seiten mit 78 Befunden · ältester 14 Tage · Frist 14 Tage.**
+**155 offene Befunde auf 39 Seiten · davon 24 Live-Seiten mit 94 Befunden · ältester 14 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 139 |
-| Seiten betroffen | 35 (davon live: 20) |
+| Offene Befunde | 155 |
+| Seiten betroffen | 39 (davon live: 24) |
 | Text seit dem Befund geändert | 96 |
 | Altbestand ohne Fassungs-Hash | 15 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
@@ -32,7 +32,7 @@ _Stand 2026-11-13 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 111 von 139 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 111 von 155 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -392,11 +392,83 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8436b91bdb63a631697
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a4ff01e649b789f19e6a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu` · nicht im Live-Bestand · 5 Befund(e)
+### `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` · **LIVE** · Risikoklasse standard · 3 Befund(e)
 
-Seite: `2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu`
+Datei: `content/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/index.md`
 
-Herkunft nach Datums-Lift: `2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu` → `2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu`. Befund-ID und Fassungsanker bleiben unverändert; das Re-Dating ist keine fachliche Entscheidung.
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `4d0125136c5b940946e4` | luecke | 0 T | Text unverändert seit dem Befund | Lichtsteuerung: Bedarfssteuerung – 2 bis 5 % des Stromverbrauchs. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `7aeb2098034d16a46885` | luecke | 0 T | Text unverändert seit dem Befund | Anbieter locken mit Neukundenboni, die nach der üblichen Erstlaufzeit entfallen; danach steigt der Arbeitspreis massiv an. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `ea97b5dd6695de127fd2` | luecke | 0 T | Text unverändert seit dem Befund | Heizungssteuerung: Smarte Thermostate können Heizkosten einsparen. Die Spanne von 10 bis 25 % ist ein Beispielwert aus der Rechnung unten. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4d0125136c5b940946e4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7aeb2098034d16a46885 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ea97b5dd6695de127fd2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten` · **LIVE** · Risikoklasse standard · 4 Befund(e)
+
+Datei: `content/posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `1dc0f20f9ab3a6b783bc` | luecke | 0 T | Text unverändert seit dem Befund | Behauptung, dass ein fehlender Ausweis zu empfindlichen Bußgeldern führt, fehlt eine belegbare Quelle. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `7b94ca07b36c0b7cb1cc` | luecke | 0 T | Text unverändert seit dem Befund | Aussage, dass Baudenkmäler von der Ausweispflicht befreit sind, wird nicht durch die angegebene Quelle gestützt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `985f506ee04087bf7253` | luecke | 0 T | Text unverändert seit dem Befund | Angabe, dass ein Wechsel von Energieeffizienzklasse F zu C über 2.000 € Jahresersparnis bringt, ist unbelegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `ee321fa37210590f7e9b` | luecke | 0 T | Text unverändert seit dem Befund | Keine Quelle für die Angabe, dass ein Energieausweis ein volles Jahrzehnt gültig ist, sofern keine größeren Umbauten erfolgen. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1dc0f20f9ab3a6b783bc --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7b94ca07b36c0b7cb1cc --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 985f506ee04087bf7253 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ee321fa37210590f7e9b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` · **LIVE** · Risikoklasse standard · 5 Befund(e)
+
+Datei: `content/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `19ab248b17415c73edfb` | luecke | 0 T | Text unverändert seit dem Befund | Thermostat um 1 °C senken \| 4 % – 6 % der Heizkosten | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `372bb51051e8bd7c5f71` | luecke | 0 T | Text unverändert seit dem Befund | Viele Anbieter belohnen einen niedrigen Verbrauch mit besseren Konditionen | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `6aaff85e3a7591d0c5b2` | luecke | 0 T | Text unverändert seit dem Befund | für dich entstehen keine Mehrkosten | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `7e6087a4117a857a92c8` | luecke | 0 T | Text unverändert seit dem Befund | Durch diese zwei Maßnahmen sparst du in dieser Beispielrechnung jährlich rund 140 € | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `e28b4ad1f6d608d2ec77` | luecke | 0 T | Text unverändert seit dem Befund | Strom (LED‑Umrüstung) \| 100 € – 140 € \| etwa 8 % | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 19ab248b17415c73edfb --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 372bb51051e8bd7c5f71 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6aaff85e3a7591d0c5b2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7e6087a4117a857a92c8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden e28b4ad1f6d608d2ec77 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` · **LIVE** · Risikoklasse standard · 4 Befund(e)
+
+Datei: `content/posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `04ae33652c1c5eb4e2b8` | luecke | 0 T | Text unverändert seit dem Befund | Ein kurzer Check spart dir oft mehrere hundert Euro im Jahr. | – |
+| `5223a3c7287ff81939cd` | luecke | 0 T | Text unverändert seit dem Befund | Faustregel: ... mehr als 5 % deines Nettoeinkommens ... Meist sinken diese Kosten um über 80 % | – |
+| `9800545ae945ec280b34` | luecke | 0 T | Text unverändert seit dem Befund | Ein Wechsel ist für dich in der Regel komplett kostenlos als Beispielwert. | – |
+| `bc0e4f2eb357a682c674` | luecke | 0 T | Text unverändert seit dem Befund | Bei einem normalen Einkommen sollten die Gebühren fast Null sein. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 04ae33652c1c5eb4e2b8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5223a3c7287ff81939cd --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9800545ae945ec280b34 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden bc0e4f2eb357a682c674 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu` · nicht im Live-Bestand · 5 Befund(e)
+
+Seite: `2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu`
+
+Herkunft nach Datums-Lift: `2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu` → `2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu`. Befund-ID und Fassungsanker bleiben unverändert; das Re-Dating ist keine fachliche Entscheidung.
 
 | Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
 |---|---|---|---|---|---|
@@ -486,11 +558,11 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 76b5cdfda85516962cf
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden b292db236a31ea0a1629 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten` · nicht im Live-Bestand · 5 Befund(e)
+### `2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten` · nicht im Live-Bestand · 5 Befund(e)
 
-Seite: `2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten`
+Seite: `2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten`
 
-Herkunft nach Datums-Lift: `2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten` → `2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten`. Befund-ID und Fassungsanker bleiben unverändert; das Re-Dating ist keine fachliche Entscheidung.
+Herkunft nach Datums-Lift: `2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten` → `2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten`. Befund-ID und Fassungsanker bleiben unverändert; das Re-Dating ist keine fachliche Entscheidung.
 
 | Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
 |---|---|---|---|---|---|

@@ -32,7 +32,7 @@ quellen:
     titel: "Referenzseite bundesbank.de"
     url: "https://www.bundesbank.de/de/presse/pressenotizen"
     herausgeber: "Deutsche Bundesbank"
-faktencheck: 2026-10-06
+faktencheck: 2026-11-13
 ---
 
 Bankgebühren im Check: Viele Bankkunden verschenken jeden Monat Geld. Sie zahlen Gebühren, die sie gar nicht bemerken. In sieben Schritten zeige ich dir, wie du dein Konto aufräumst.

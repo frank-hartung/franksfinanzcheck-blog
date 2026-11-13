@@ -33,7 +33,7 @@ quellen:
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
     datum: "2024-01-01"
-faktencheck: 2026-10-06
+faktencheck: 2026-11-13
 kurzantwort: "Durch das Absenken der Raumtemperatur um einen Grad sowie den konsequenten Einsatz von LED-Leuchtmitteln und schaltbaren Steckerleisten sinken Heiz- und Strombedarf spürbar. Die Beispielrechnung im Artikel zeigt, wie sich solche kleinen Handgriffe im Alltag über das Jahr auf dreistellige Euro-Beträge summieren."
 ---
 
