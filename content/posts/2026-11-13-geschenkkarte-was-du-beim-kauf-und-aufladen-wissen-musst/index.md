@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst.jpg"
   alt: "Geschenkkarte: Was du beim Kauf und Aufladen wissen musst"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 5e0da2ade9fa30201f06cde8ff0574d5794a7d9a4af9a34237063cc9fb8613ff
+    geprueft_am: 2026-11-13
 kurzantwort: "Beim Kauf und Aufladen einer Geschenkkarte solltest du immer auf ein unbeschädigtes Sicherheitsfeld achten, den Aktivierungsbeleg aufbewahren und versteckte Inaktivitätsgebühren prüfen. Wer das Guthaben zeitnah einlöst, vermeidet schleichenden Wertverlust und Ausfallrisiken."
 quellen:
   - id: "Q1"

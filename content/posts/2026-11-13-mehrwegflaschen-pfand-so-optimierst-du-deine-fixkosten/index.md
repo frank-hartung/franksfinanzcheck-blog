@@ -21,9 +21,15 @@ redaktionelle_pruefung:
 
 inspiration: "Mehrwegflaschen: So rechnet sich die Rückgabe"
 cover:
-  image: "images/covers/2026-11-09-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten.jpg"
+  image: "images/covers/2026-11-13-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten.jpg"
   alt: "Mehrwegflaschen Pfand: So optimierst du deine Fixkosten"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 18db7bed277c6c5e86bffb5fe6a17acb52f6fbdba03bc87640ba2d347f0022eb
+    geprueft_am: 2026-11-13
 kurzantwort: "Mehrwegflaschen-Pfand bindet im Haushalt laufend bares Geld, das erst bei der Rückgabe wieder frei wird. Wer leere Gebinde mit festem Sammelplatz bei jedem Einkauf zurückbringt und Pfandbons sofort an der Kasse einlöst, vermeidet unnötige Verluste im Haushaltsbudget."
 quellen:
   - id: "Q1"

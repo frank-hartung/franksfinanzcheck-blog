@@ -14,6 +14,12 @@ cover:
   image: "images/covers/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub.jpg"
   alt: "Mietwagen buchen ohne Kaution: So umgehst du die Fallen im Urlaub"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 160f69057c8130a9df759cd26e4139d0e8ebaf36ff52ee719ac19cedeced2015
+    geprueft_am: 2026-11-13
 kurzantwort: "Einen Mietwagen komplett ohne Kaution gibt es in der Praxis nur in Ausnahmefällen, aber du kannst die Kaution deutlich senken und das Risiko auf null reduzieren: Buche ein Angebot mit 'Vollkasko ohne Selbstbeteiligung' über einen deutschen Vergleichsanbieter, hinterlege eine echte Kreditkarte (keine Debitkarte) und lehne jede Zusatzversicherung am Schalter konsequent ab. So vermeidest du die typische 900-€-bis-1.500-€-Blockierung und sparst gegenüber der Buchung vor Ort spürbar."
 
 social_posted: true

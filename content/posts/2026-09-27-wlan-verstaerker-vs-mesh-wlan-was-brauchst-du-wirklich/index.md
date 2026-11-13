@@ -18,6 +18,12 @@ cover:
   image: "images/covers/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich.jpg"
   alt: "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 986b56a89c8167cd99640722e46a23eedf13cee7c0edccad95925b125e435b73
+    geprueft_am: 2026-11-13
 quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"

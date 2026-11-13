@@ -13,6 +13,12 @@ cover:
   image: "images/covers/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet.jpg"
   alt: "DNS-Server wechseln: Datenschutz, Filter und Einrichtung"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 21d9e250714d868359515a06970123ac110253f84a157ccc6f517e960d3242e4
+    geprueft_am: 2026-11-13
 kurzantwort: "Ein DNS-Server übersetzt Domainnamen in IP-Adressen. Ein Wechsel ändert vor allem, welcher Resolver deine Anfragen erhält. Er erhöht nicht die Bandbreite und verschlüsselt DNS nicht automatisch. Für verschlüsselte Anfragen brauchst du DNS over HTTPS (DoH) oder DNS over TLS (DoT). Das verlagert das Vertrauen auf den gewählten DNS-Anbieter."
 keywords: ["DNS-Server wechseln", "DNS-Resolver wechseln", "öffentliche DNS-Server", "DNS over HTTPS", "DNS over TLS", "DNS-Datenschutz", "FRITZ!Box DNS ändern", "DNS Server wechseln"]
 pin_title: "DNS wechseln leicht gemacht: Mehr Tempo ohne neuen Tarif"

@@ -21,9 +21,15 @@ redaktionelle_pruefung:
 
 inspiration: "Spülmaschine: So wird sie wirklich voll und sparsam"
 cover:
-  image: "images/covers/2026-11-09-geschirrspueler-voll-so-sparst-du-wasser-und-strom.jpg"
+  image: "images/covers/2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom.jpg"
   alt: "Spülmaschine beladen: So sparst du Wasser und Strom"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 027ef48bd3bff7e13fde7cc5221e709dc661e7c3af920f5002455e175eb42cb7
+    geprueft_am: 2026-11-13
 faktencheck: 2026-11-09
 kurzantwort: "Starte deine Spülmaschine erst voll beladen, ordne Geschirr ohne verdeckte Sprüharme ein und verzichte auf das Vorspülen unter fließendem Wasser. Im Eco-Programm sinkt der Bedarf an Strom und Wasser deutlich gegenüber schnellen Kurzprogrammen."
 quellen:

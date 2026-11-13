@@ -21,9 +21,15 @@ redaktionelle_pruefung:
 
 inspiration: Energieeffiziente Geräte für dein Zuhause
 cover:
-  image: "images/covers/2026-10-30-energieeffiziente-geraete-so-sinken-deine-fixkosten.jpg"
+  image: "images/covers/2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten.jpg"
   alt: "Energieeffiziente Geräte: So sinken deine Fixkosten"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: c12d4f556aa5e517c746219f4ab5e93bef52bc1e786d35559c6b113e4651562b
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Referenzseite bundesnetzagentur.de"

@@ -23,6 +23,12 @@ cover:
   image: "images/covers/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler.jpg"
   alt: "Frugalismus-Tipps: So vermeidest du teure Alltagsfehler"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: cc52ce4d47cc6f1718b538cb24a9f427e41870b6c849c3e54fb5ca2f771bcebf
+    geprueft_am: 2026-11-13
 kurzantwort: "Setze automatische Überweisungen ein, um monatlich mindestens 20 % deines Nettoeinkommens zu sparen, und nutze die 30‑Tage‑Regel, bevor du größere Anschaffungen tätigst. Vergleiche Preise online und kaufe nur, wenn du den Bedarf nach 24 Stunden immer noch hast. So vermeidest du Impulskäufe, senkst laufende Kosten und baust nachhaltig Vermögen auf."
 social_posted: true
 quellen:

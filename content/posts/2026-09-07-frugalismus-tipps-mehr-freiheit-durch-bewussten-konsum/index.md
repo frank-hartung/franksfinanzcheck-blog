@@ -23,6 +23,12 @@ cover:
   image: "images/covers/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum.jpg"
   alt: "Frugalismus-Tipps: Mehr Freiheit durch bewussten Konsum"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: b7d858f1727fc9f01ac5c715ccfad34257be33e112711c9c1a950dd9ddfdc9e8
+    geprueft_am: 2026-11-13
 kurzantwort: "Frugalismus beginnt nicht mit Verzicht, sondern mit Überblick. Wer kleine Alltagsausgaben sichtbar macht, Fixkosten regelmäßig prüft und Impulskäufe bremst, schafft oft 50 € bis 200 € mehr Spielraum im Monat. Entscheidend ist nicht Perfektion, sondern ein System, das du dauerhaft im Alltag durchhältst."
 social_posted: true
 quellen:

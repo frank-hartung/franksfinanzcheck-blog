@@ -18,6 +18,12 @@ cover:
   image: "images/covers/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro.jpg"
   alt: "Gasrechnung senken: Spätsommer-Check für Heizung und Gastarif"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 2204bbc60d8991fe442eeb86d241bb0372fa6903b56b477024466747377ee0a6
+    geprueft_am: 2026-11-13
 kurzantwort: "Für den Spätsommer-Check reichen 60 Minuten: 15 Minuten Rechnung und Vertrag prüfen, 10 Minuten Zähler dokumentieren, 25 Minuten Heizkörper und Thermostate kontrollieren und 10 Minuten Maßnahmen sortieren. Ob du hunderte Euro sparst, hängt vom Ausgangstarif und Zustand der Heizung ab; ein fester Betrag lässt sich seriös nicht versprechen."
 quellen:
   - titel: "BDEW-Gaspreisanalyse August 2026"

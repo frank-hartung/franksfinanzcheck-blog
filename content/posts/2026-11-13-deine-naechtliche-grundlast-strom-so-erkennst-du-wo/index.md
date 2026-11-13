@@ -22,9 +22,15 @@ redaktionelle_pruefung:
 
 inspiration: "Grundlast messen: Wo dein Strom nachts hingeht"
 cover:
-  image: "images/covers/2026-11-12-deine-naechtliche-grundlast-strom-so-erkennst-du-wo.jpg"
+  image: "images/covers/2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo.jpg"
   alt: "Grundlast Strom: Stromverbrauch nachts messen und senken"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: a7e8263a30473a377f7399afd7f8fb2ce45f2be7f35ecda03714f7869ef9c117
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Referenzseite bundesnetzagentur.de"

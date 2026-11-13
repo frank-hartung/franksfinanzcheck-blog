@@ -19,6 +19,12 @@ cover:
   image: "images/covers/2026-10-19-urlaubskasse-clever-aufbessern.jpg"
   alt: "Urlaubskasse clever aufbessern"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 5c9f108e1ff78b2a3a3ac7d166d2a15e3ac0fbb3caeb239af0668776cab2c651
+    geprueft_am: 2026-11-13
 pin_title: "Urlaubskasse clever aufbessern"
 pin_description: "*Werbung | Urlaubskasse clever aufbessern – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ. Mehr Spartipps auf FranksFinanzcheck! #urlaub #sparen #reisebudget"
 quellen:

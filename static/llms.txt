@@ -37,6 +37,40 @@ FranksFinanzcheck steht in keiner geschäftlichen oder gesellschaftsrechtlichen 
 - Hinweis: Allgemeine Informationen, keine individuelle Finanz-, Steuer-
   oder Rechtsberatung. Alle Angaben ohne Gewähr.
 
+## Woher diese Inhalte kommen (KI-Kennzeichnung, #1028)
+
+Diese Angaben sind für Systeme gedacht, die die Seiten maschinell
+weiterverarbeiten. Sie sagen, was am Inhalt maschinell entstanden ist –
+nicht, was richtig ist (das prüft die Redaktion, nicht das Modell).
+
+- **Texte:** Ein Teil der Artikel wird mit generativer KI erstellt oder
+  bearbeitet. Welche, sagt jede Seite selbst: die Meta-Angaben
+  `ai-generated` und `ai-generated-scope` im Dokumentkopf nennen die
+  betroffenen Modalitäten (Text, Bild, Ton). Jeder Artikel ist zusätzlich
+  am Seitenanfang sichtbar als „Mit KI erstellt oder bearbeitet"
+  gekennzeichnet. Fehlt `ai-generated`, ist für diese Seite keine
+  KI-Erzeugung belegt – bitte keine hineininterpretieren.
+- **Bilder:** Titelbilder tragen, wenn ihre Erzeugungsart belegt ist, das
+  IPTC-Feld `DigitalSourceType` in der Bilddatei selbst und
+  `creditText`/`digitalSourceType` im schema.org-Markup der Seite.
+  Ein Titelbild ohne diese Angabe ist nicht als KI-Bild deklariert.
+- **Ton:** Vorlese-Tonspuren sind synthetische Sprache. Die Datei trägt
+  ihre Herkunft in sich (`DigitalSourceType` im IPTC-Vokabular, als
+  ID3-TXXX bei MP3 bzw. RIFF-INFO bei WAV), nicht nur die Seite.
+- **Assistent:** Ein KI-Chat-Assistent kann auf Seiten eingebunden sein.
+  Antworten erzeugt ein Sprachmodell, nicht ein Mensch; jede Antwort trägt
+  einen entsprechenden Hinweis, und die HTTP-Antwort führt die Kopfzeile
+  `ai-generated`. Wo keine Assistenten-Schaltfläche erscheint, ist keiner
+  aktiv.
+- **Was das nicht ist:** Diese Erklärungen stammen vom Betreiber. Sie
+  ersetzen nicht die maschinenlesbare Markierung durch den Anbieter des
+  jeweiligen KI-Systems (Art. 50 Abs. 2 KI-VO). Sie sind kein
+  Herkunftsbeweis. Rechtevorbehalt und Zitierregeln oben bleiben unberührt.
+- **Zitierpflicht bei Kennzeichnung:** Wird ein als KI-erzeugt
+  gekennzeichneter Text übernommen, bitte die Kennzeichnung mitübernehmen –
+  sonst geht beim Weiterverbreiten verloren, was die Quelle gerade
+  transparent macht.
+
 ## Themen-Ratgeber (Pillars)
 
 - [Strom & Gas sparen](https://franksfinanzcheck.de/pillar/strom-sparen/): Strom-, Gas- und Heizkosten senken: Stromfresser enttarnen, Preisgarantien nutzen, Anbieter wechseln und dynamische Tarife einordnen – mit Rechnern.
@@ -46,11 +80,13 @@ FranksFinanzcheck steht in keiner geschäftlichen oder gesellschaftsrechtlichen 
 - [Frugalismus & Budget](https://franksfinanzcheck.de/pillar/frugalismus/): Haushaltsbudget ordnen, 50–30–20-Regel anwenden, Notgroschen krisenfest aufbauen, Geldlecks schließen und finanzielle Unabhängigkeit erreichen.
 - [Mietwagen & Reisen](https://franksfinanzcheck.de/pillar/mietwagen/): Mietwagen günstig buchen, versteckte Schalter-Fallen vermeiden, Flugpreise drücken und die Reisekasse optimal aufbessern.
 
-## Alle Artikel (neueste zuerst, 82 Beiträge)
+## Alle Artikel (neueste zuerst, 84 Beiträge)
 
+- [Wie viel Streaming‑Bandbreite: Du wirklich brauchst](https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/): Streaming Bandbreite: Ruckel So sparst du jeden Monat bares Geld. Schritt für Schritt erklärt – ohne Fachchinesisch. Mit praktischen Tipps für den Alltag.
+- [Fenster abdichten: So stoppst du Zugluft an alten Rahmen](https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/): Fenster abdichten leicht gemacht: Mit diesen Tipps kannst du Zugluft stoppen und effektiv Heizkosten senken. Erfahre jetzt, worauf es ankommt.
 - [WLAN-Frust lösen: So findest du den besten Router Standort](https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/): WLAN Empfang verbessern ohne Kosten: Optimiere deinen Router Standort mit einfachen Tipps für stabiles Internet in jedem Raum. Lies jetzt mehr.
 - [Flugverspätung Entschädigung: So holst du dein Geld zurück](https://franksfinanzcheck.de/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/): Flugverspätung Entschädigung sichern: Lerne deine Fluggastrechte kennen. Wir zeigen dir, wie du einfach eine Entschädigung beantragen kannst. Tipps…
-- [Waschmaschine beladen: Weniger Kosten bei jedem Waschgang](https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/): Richtiges Waschmaschine beladen senkt deine Fixkosten. Erfahre, wie du den Wasserverbrauch im Haushalt reduzierst und jeden Waschgang sparen kannst.
+- [Waschmaschine beladen: Weniger Kosten bei jedem Waschgang](https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/): Waschmaschine beladen: Richtig beladen kann deine Fixkosten senken. Erfahre, wie du Wasser im Haushalt reduzierst und jeden Waschgang sparst.
 - [Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas](https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/): Nutze dein Gaspreiserhöhung Sonderkündigungsrecht. Ich zeige dir, wie du die Grundversorgung Gas kündigen kannst und beim Gastarife vergleichen sparst.
 - [Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar](https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/): Willst du den Ökostrom Anbieter wechseln? Erfahre hier, wie du Tarife prüfst, seriöse Labels erkennst und deine Fixkosten clever reduzierst.
 - [Energieausweis: Was er für deine Fixkosten bedeutet](https://franksfinanzcheck.de/posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/): Energieausweis-Kosten und Pflicht: Was das Dokument kostet, wann du einen brauchst und wie die Energieeffizienzklasse die Haus-Kosten senkt.
@@ -140,4 +176,4 @@ FranksFinanzcheck steht in keiner geschäftlichen oder gesellschaftsrechtlichen 
 - RSS-Feed (neueste Artikel): https://franksfinanzcheck.de/index.xml
 
 *Diese Datei wird automatisch aus den Live-Inhalten erzeugt
-(scripts/generate_llms_txt.py). Stand: 2026-11-11.*
+(scripts/generate_llms_txt.py). Stand: 2026-11-13.*

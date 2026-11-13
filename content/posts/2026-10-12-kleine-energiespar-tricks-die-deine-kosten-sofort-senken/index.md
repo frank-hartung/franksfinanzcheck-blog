@@ -27,6 +27,12 @@ cover:
   image: "images/covers/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken.jpg"
   alt: "Kleine Energiespar‑Tricks: Deine Kosten sofort senken"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: f72a797eb2e25ecf2c933cc9acc9d24cda1c0c122f38e048d4a586c4f45c6308
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur - Energie"

@@ -14,6 +14,12 @@ cover:
   image: "images/covers/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier.jpg"
   alt: "Haushaltsbuch führen: App, Excel oder Papier?"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 94d30e41f264a4a65095a2b9cbbf3971b282540058d44fe542c58bf69719c15d
+    geprueft_am: 2026-11-13
 kurzantwort: "Ein Haushaltsbuch funktioniert nur dann dauerhaft, wenn die Methode zu deinem Alltag passt: Für die meisten Menschen ist eine kostenlose Banking-App mit automatischer Kategorisierung am bequemsten, Zahlen-Fans fahren mit einer Excel-Tabelle flexibler, und für wenige Konten ist Stift und Papier nach wie vor schnell. Wer alle Ausgaben für einige Wochen erfasst, sieht schnell, welche Posten sich lohnen."
 
 social_posted: true

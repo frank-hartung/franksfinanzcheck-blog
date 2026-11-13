@@ -14,6 +14,12 @@ cover:
   image: "images/covers/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen.jpg"
   alt: "Kfz-Versicherung Vergleich 2026: Bis zu 800 € pro Jahr sparen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 4599371af5008f63d5c62a0fc496df4abeda12b69e9393e8fcb3cae7cc9bb5f8
+    geprueft_am: 2026-11-13
 kurzantwort: "Der günstigste Zeitpunkt für einen Kfz-Versicherungsvergleich ist jedes Jahr zwischen August und November: Bis zum 30.11. muss die Kündigung beim alten Versicherer vorliegen. Mit Werkstattbindung, höherer Selbstbeteiligung (150 € TK / 300 € VK), Rabattschutz, der korrekten Jahreskilometerleistung und dem Vergleich von 80+ Tarifen lässt sich der Beitrag um durchschnittlich 300 € bis 800 € pro Jahr senken – bei gleichem oder sogar besserem Leistungsumfang."
 
 social_posted: true

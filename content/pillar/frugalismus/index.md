@@ -14,6 +14,12 @@ cover:
   alt: "Haushaltsbudget & Frugalismus: Der große Ratgeber für finanzielle Puffer"
   caption: "Kompletter Ratgeber von FranksFinanzcheck"
   preload: false   # Bild liefert og:image, nicht den LCP
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 93603129e7c5a1f7e163d86de217fc1d6f9a511ae35e4d972c44676d4431ec75
+    geprueft_am: 2026-11-13
 quellen:
   - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"
     url: "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Einkommen-Konsum-Lebensbedingungen/Konsumausgaben-Lebenshaltungskosten/_inhalt.html"

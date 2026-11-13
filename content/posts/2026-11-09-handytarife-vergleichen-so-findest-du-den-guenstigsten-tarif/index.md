@@ -21,6 +21,12 @@ cover:
   image: "images/covers/2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif.jpg"
   alt: "Handytarife vergleichen: So findest du den günstigsten Tarif"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: d6dd5606be3f3e5d034f03bea6bc155cacaea6c3d6cc27871c22b2481ed8e09f
+    geprueft_am: 2026-11-13
 faktencheck: 2026-11-10
 ---
 

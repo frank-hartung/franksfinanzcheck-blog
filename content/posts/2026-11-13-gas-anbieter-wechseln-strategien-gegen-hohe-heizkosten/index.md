@@ -22,9 +22,15 @@ redaktionelle_pruefung:
 
 inspiration: "Gas-Anbieter wechseln: So sparst du bis zu 680 Euro"
 cover:
-  image: "images/covers/2026-11-09-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten.jpg"
+  image: "images/covers/2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten.jpg"
   alt: "Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: dcbbc8546ff118b29543ce634daa5a301d6f41e79cf34b92f738e8c7e565cf40
+    geprueft_am: 2026-11-13
 faktencheck: 2026-11-09
 kurzantwort: "Ein Wechsel des Gasanbieters senkt hohe Heizkosten besonders beim Ausstieg aus der teuren Grundversorgung. Achte beim Vergleich auf Arbeitspreis, Grundpreis, kurze Laufzeiten und eine klare Preisgarantie – die Belieferung läuft während des gesamten Wechsels unterbrechungsfrei weiter."
 quellen:

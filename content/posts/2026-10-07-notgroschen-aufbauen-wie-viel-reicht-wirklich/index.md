@@ -15,6 +15,12 @@ cover:
   image: "images/covers/2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich.jpg"
   alt: "Notgroschen aufbauen: Wie viel reicht wirklich?"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: fe7946df28f4905e8dcc24e69ff0480598b7e04c851afa46d34292d126928159
+    geprueft_am: 2026-11-13
 pin_title: "Notgroschen aufbauen: Wie viel reicht wirklich?"
 pin_description: "*Werbung | Notgroschen aufbauen: Wie viel reicht wirklich? – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten … Mehr Spartipps auf FranksFinanzcheck! #notgroschenaufbauen #notgroschen"
 quellen:

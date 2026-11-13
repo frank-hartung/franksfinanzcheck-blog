@@ -25,6 +25,12 @@ cover:
   image: "images/covers/2026-11-13-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste.jpg"
   alt: "Weniger Spontankäufe: Dein Essensplan Woche ohne Reste"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 73a882cc7e31b4531113f7903c7ae00174e2eb98a2ffe4e92cba9487d9efbe16
+    geprueft_am: 2026-11-13
 faktencheck: 2026-11-13
 ---
 

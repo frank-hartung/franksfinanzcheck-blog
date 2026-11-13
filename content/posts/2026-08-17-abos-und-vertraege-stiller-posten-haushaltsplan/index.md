@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan.jpg"
   alt: "Abos und Verträge: Der stille Posten im Haushaltsplan"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: aa73736382c67aa36496a2ccec6c8e08f2ba27f6894895ccebcb5b29ab8ea928
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Verbraucherzentrale – Effektiv sparen, auch mit kleinem Budget"

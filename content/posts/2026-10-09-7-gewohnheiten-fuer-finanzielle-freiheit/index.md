@@ -19,6 +19,12 @@ cover:
   image: "images/covers/2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit.jpg"
   alt: "7 Gewohnheiten für finanzielle Freiheit"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: eb87d5563c1d625edee5e3b7db2cc59bb3e5486652432b91d3aac84c64bab9ef
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Referenzseite destatis.de"

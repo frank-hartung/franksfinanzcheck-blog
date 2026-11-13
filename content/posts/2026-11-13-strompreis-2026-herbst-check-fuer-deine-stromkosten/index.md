@@ -21,9 +21,15 @@ redaktionelle_pruefung:
 
 inspiration: "Strompreis im Herbst 2026: Jetzt wechseln oder warten?"
 cover:
-  image: "images/covers/2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten.jpg"
+  image: "images/covers/2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten.jpg"
   alt: "Strompreis 2026: Herbst-Check für deine Stromkosten"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: db56633bc101286956a8f35cb57fa925f76b986ab45dcb18bfc9aee0ca01600f
+    geprueft_am: 2026-11-13
 faktencheck: 2026-11-09
 kurzantwort: "Ob sich ein Stromtarifwechsel im Herbst lohnt, entscheidet nicht eine unsichere Preisprognose, sondern der Vergleich deiner aktuellen Jahresabrechnung mit verfügbaren Wahltarifen. Prüfe Arbeitspreis, Grundpreis, Laufzeit und den Umfang einer eingeschränkten Preisgarantie, bevor deine Kündigungsfrist abläuft."
 quellen:

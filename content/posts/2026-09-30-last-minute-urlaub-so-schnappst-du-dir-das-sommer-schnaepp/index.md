@@ -22,6 +22,12 @@ cover:
   image: "images/covers/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp.jpg"
   alt: "Last Minute Urlaub: So findest du echte Reiseschnäppchen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: fe6e7fa6c361facbbd17c3b2e7a85593e9a3ff069731b0831db3337984089215
+    geprueft_am: 2026-11-13
 kurzantwort: "Last-Minute-Angebote können günstiger sein, sind aber keine Spargarantie. Wer bei Reiseziel, Abflugort und Reisezeit flexibel bleibt, kann mehr Angebote vergleichen. Entscheidend ist der Gesamtpreis inklusive Gepäck, Transfers, Unterkunft und Zusatzkosten – nicht der Rabatt-Aufdruck."
 quellen:
   - id: "Q1"

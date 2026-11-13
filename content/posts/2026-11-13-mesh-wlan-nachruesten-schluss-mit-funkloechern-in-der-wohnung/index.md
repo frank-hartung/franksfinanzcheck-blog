@@ -21,9 +21,15 @@ redaktionelle_pruefung:
 
 inspiration: "Mesh-WLAN nachrüsten: Für welche Wohnung sich das lohnt"
 cover:
-  image: "images/covers/2026-11-09-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung.jpg"
+  image: "images/covers/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung.jpg"
   alt: "Mesh WLAN nachrüsten: Schluss mit Funklöchern in der Wohnung"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 9d9150b5ab8e08a50ce018350f8bacb1737b06152e8b97c5759213cd6d78b1d7
+    geprueft_am: 2026-11-13
 kurzantwort: "Ein Mesh-WLAN ersetzt einzelne Funklöcher durch vernetzte Knotenpunkte, die deine Wohnung nahtlos unter einem einzigen Netzwerknamen versorgen. Die Nachrüstung lohnt sich besonders bei verwinkelten Grundrissen oder massiven Wänden und spart teure Notlösungen über zusätzliches Mobilfunk-Datenvolumen."
 quellen:
   - id: "Q1"

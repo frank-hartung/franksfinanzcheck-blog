@@ -23,6 +23,12 @@ cover:
   image: "images/covers/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung.jpg"
   alt: "Handyvertrag kündigen: Laufzeit, Frist und Wechsel prüfen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 10cda2ae3080492c56a543da7b29489fcb767466513878c5c1ec54947739ee34
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Telekommunikationsgesetz § 56: Vertragslaufzeit und Kündigung"

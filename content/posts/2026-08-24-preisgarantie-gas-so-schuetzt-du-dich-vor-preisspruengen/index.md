@@ -13,6 +13,12 @@ cover:
   image: "images/covers/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen.jpg"
   alt: "Preisgarantie Gas: So schützt du dich vor Preissprüngen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: a53f2b2162fb163214470b81f63417501a739278f37df625a0036b48635de2be
+    geprueft_am: 2026-11-13
 kurzantwort: "Eine Gaspreisgarantie dämpft Preissprünge nur bei den vertraglich geschützten Bestandteilen. Erhöht der Anbieter trotzdem den Preis, vergleichst du Änderungsgrund und Klausel, notierst das Wirksamkeitsdatum und prüfst dein Sonderkündigungsrecht. Reagiere auf dein konkretes Schreiben – nicht auf kurzfristige Börsenmeldungen."
 social_posted: true
 keywords: ["Preisgarantie Gas", "Gaspreissprünge", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich", "Gaspreisgarantie", "Preiserhöhung"]

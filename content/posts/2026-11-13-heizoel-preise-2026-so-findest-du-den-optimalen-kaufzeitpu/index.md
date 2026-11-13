@@ -31,9 +31,15 @@ ai_provider: "Content-Engine v2"
 engine_level: "draft"
 inspiration: "Heizöl kaufen: Wann ist der beste Zeitpunkt?"
 cover:
-  image: "images/covers/2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu.jpg"
+  image: "images/covers/2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu.jpg"
   alt: "Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 97a3cc3b9e57a8551206fd3eb00abf175463411e42256fe7b5cfd85b8325fff1
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Referenzseite bundesnetzagentur.de"

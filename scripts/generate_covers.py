@@ -25,6 +25,7 @@ Nutzung:
 """
 import glob
 import os
+from pathlib import Path
 import re
 import sys
 
@@ -346,6 +347,25 @@ def title_tokens(line):
     return list(zip(words, gold))
 
 
+def _herkunft_markieren(out_path):
+    """Schreibt `DigitalSourceType=algorithmicMedia` in die fertige JPG.
+
+    Bewusst fehlertolerant: Eine fehlende Schrift oder ein voller Datenträger
+    darf die Cover-Produktion nicht anhalten (C34 – erst liefern). Der Beleg
+    wird ohnehin nachgelagert geprüft (`scripts/ki_cover_herkunft.py
+    --pruefen` meldet ein Cover ohne Markierung als Befund).
+    """
+    try:
+        from ki_bild_markierung import paket_bauen, schreiben
+        schreiben(Path(out_path), paket_bauen(
+            "algorithmicMedia",
+            werkzeug="generate_covers.py (Pillow, deterministisch)",
+            hinweis="Cover von FranksFinanzcheck – deterministisch "
+                    "gezeichnet, kein KI-Bildmodell"))
+    except Exception as exc:  # pragma: no cover – Umgebung, nicht Inhalt
+        print(f"  ⚠ Herkunftsmarkierung nicht geschrieben ({type(exc).__name__}: {exc})")
+
+
 def make_cover(title, slug, out_path, force=False, badge=None, savings=None):
     W, H = 1000, 1500
     # Vertikaler Verlauf Smaragdgrün → dunkel + dezente Premium-Vignette
@@ -539,6 +559,15 @@ def make_cover(title, slug, out_path, force=False, badge=None, savings=None):
                font=trust_font, fill=CREAM)
 
     img.save(out_path, "JPEG", quality=88)
+    # HERKUNFT IN DIE DATEI (#1028, 13.11.2026)
+    # Das Cover ist deterministisch gezeichnet – kein Bildmodell, kein
+    # Training. Diese Herkunft gehört in die Datei selbst und nicht nur ins
+    # Frontmatter: Sie ist die einzige Angabe, die ein Herunterladen,
+    # Weiterreichen oder Spiegeln überlebt. Der Aufruf ist rein additiv
+    # (APP1-XMP vor den Bilddaten, kein Neukodieren) – die Pixel bleiben
+    # unverändert, und weil er HIER steht, gilt er für jeden Erzeugungspfad
+    # (Artikel, Pillar, Marke) und kann nicht vergessen werden.
+    _herkunft_markieren(out_path)
     extra = f" [Pille: {pill_text}]" if (pill_font and pill_text) else ""
     print(f"  ✓ Cover: {os.path.basename(out_path)}{extra}")
 
@@ -546,6 +575,10 @@ def make_cover(title, slug, out_path, force=False, badge=None, savings=None):
     # Mobile: 360/480, Desktop: 620/720, Full-Fallback: 1000 WebP/AVIF.
     modern = save_modern_variants(img, out_path, force=force)
     print(f"  ✓ Responsive/Modern: {len(modern)} Varianten für {os.path.basename(out_path)}")
+    # Rückgabe, damit der Aufrufer weiß, ob Varianten entstanden sind.
+    # Vorher gab die Funktion `None` zurück – ein `if gemacht:` hätte immer
+    # falsch geantwortet (Befund 13.11.2026 beim Umbau auf einen Schreibpfad).
+    return modern
 
 
 def _title_from_content(content):
@@ -573,6 +606,23 @@ def ensure_cover_in_frontmatter(md_path, slug, title=None, caption=None,
     image_path = f"images/covers/{slug}.jpg"   # OHNE Slash: Hugo absURL + Subdir-BaseURL
 
     if re.search(r"^cover:", content, re.M):
+        # Self-Healing #1028: cover.image auf den kanonischen Pfad normalisieren.
+        # Ein Artikel, dessen Datum/Slug sich geändert hat, referenziert ggf.
+        # noch ein altes Cover-JPG (anderes Datum im Dateinamen). Das korrekte
+        # images/covers/<slug>.jpg wurde im selben Lauf bereits gerendert
+        # (mit Herkunftsmarkierung). Der Verweis wird hierauf gebogen, damit
+        # Frontmatter und Datei dauerhaft übereinstimmen – auch bei künftigen
+        # Datum-/Slug-Änderungen, ohne manuellen Eingriff.
+        m_img = re.search(r'^(\s*image:\s*)["\']?(.+?)["\']?\s*$', content, re.M)
+        if m_img:
+            alt_img = m_img.group(2).strip().strip('"').strip("'")
+            if alt_img != image_path:
+                content = (content[:m_img.start()]
+                           + f'{m_img.group(1)}"{image_path}"'
+                           + content[m_img.end():])
+                with open(md_path, "w", encoding="utf-8") as f:
+                    f.write(content)
+                return True
         # Premium-Parität (11.09.2026): Pillar-Cover liefern og:image und das
         # Article-Bild, werden auf der Ratgeber-Seite selbst aber bewusst NICHT
         # über dem Falt gerendert – dort steht die Sparestabelle, sie ist der
@@ -693,11 +743,14 @@ def ensure_pillar_covers(force=False, only=None, protected=None):
         if protected and os.path.realpath(out_path) in protected:
             print(f"  ⚠ KI-Original geschützt, Pillar-Cover nicht neu gerendert: {out_path}")
             continue
+        # Gleiche Regel wie im Artikel-Pfad: genau ein Erzeugungs- und
+        # Schreibzugriff. `make_cover` schreibt die Varianten selbst.
         if force or not os.path.exists(out_path) or drift:
-            make_cover(title, slug, out_path, force=force or drift,
-                       badge=badge, savings=savings)
+            if make_cover(title, slug, out_path, force=force or drift,
+                          badge=badge, savings=savings):
+                variants += 1
             covers += 1
-        if ensure_responsive_variants(out_path, force=force or drift):
+        elif ensure_responsive_variants(out_path, force=False):
             variants += 1
         if ensure_cover_in_frontmatter(
                 path, slug, title=title,
@@ -728,12 +781,14 @@ def ensure_brand_cover(force=False, protected=None):
     if protected and os.path.realpath(out_path) in protected:
         print(f"  ⚠ KI-Original geschützt: {out_path}")
         return 0, 0
+    variants = 0
     if force or not os.path.exists(out_path):
-        make_cover(BRAND_COVER_TITLE, BRAND_COVER_SLUG, out_path,
-                   force=force or not os.path.exists(out_path),
-                   badge=BRAND_COVER_BADGE, savings=None)
+        variants = 1 if make_cover(BRAND_COVER_TITLE, BRAND_COVER_SLUG, out_path,
+                                   force=force or not os.path.exists(out_path),
+                                   badge=BRAND_COVER_BADGE, savings=None) else 0
         made = 1
-    variants = 1 if ensure_responsive_variants(out_path, force=force) else 0
+    elif ensure_responsive_variants(out_path, force=force):
+        variants = 1
     manifest = load_manifest()
     if force or manifest.get(BRAND_COVER_SLUG, {}).get("title") != BRAND_COVER_TITLE:
         manifest_set(BRAND_COVER_SLUG, BRAND_COVER_TITLE,
@@ -791,12 +846,27 @@ def main():
         if os.path.realpath(out_path) in protected:
             print(f"  ⚠ KI-Original geschützt, Cover nicht neu gerendert: {out_path}")
             continue
-        if force or only_slug or not os.path.exists(out_path) or design_drift:
-            make_cover(title, slug, out_path,
-                       force=force or bool(only_slug) or design_drift,
-                       badge=badge, savings=savings)
+        # EIN SCHREIBZUGRIFF STATT ZWEI (#1028, Befund 13.11.2026)
+        # `make_cover` erzeugt seit jeher die Varianten selbst
+        # (`save_modern_variants` innerhalb der Funktion). Der zusätzliche
+        # `ensure_responsive_variants`-Aufruf danach las die Datei erneut ein
+        # und schrieb sie über `optimize_cover_image` NOCHMALS – mit anderem
+        # Encoder-Pfad (Pillow öffnet und speichert neu), also byteweise
+        # anderem Ergebnis bei gleichen Pixeln. Sichtbar wurde das erst, als
+        # ein Herkunftsbeleg die Datei per sha256 binden sollte: Der Beleg
+        # war nach dem zweiten Schreiben falsch, obwohl niemand das Bild
+        # geändert hatte. Jetzt: genau ein Erzeugungspfad.
+        neu_gerendert = (force or only_slug or not os.path.exists(out_path)
+                         or design_drift)
+        if neu_gerendert:
+            varianten = make_cover(title, slug, out_path,
+                                   force=force or bool(only_slug) or design_drift,
+                                   badge=badge, savings=savings)
             covers += 1
-        if ensure_responsive_variants(out_path, force=force or bool(only_slug) or design_drift):
+            if varianten:
+                variants += 1
+        elif ensure_responsive_variants(out_path, force=False):
+            # Nur wenn etwas FEHLT: Varianten nachziehen, Bild unangetastet.
             variants += 1
         if ensure_cover_in_frontmatter(path, slug, title=title):
             frontmatter += 1

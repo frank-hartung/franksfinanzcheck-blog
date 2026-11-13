@@ -14,6 +14,12 @@ cover:
   image: "images/covers/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife.jpg"
   alt: "Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 €"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 4aa34844a52fdad70c93a690ffe12a9cc106339e9793f6c770230a4400e4123b
+    geprueft_am: 2026-11-13
 kurzantwort: "Beim Handytarif-Vergleich 2026 zahlst du für eine solide Allnet-Flat mit 10-25 GB Datenvolumen im besten Netz zwischen 4,99 € und 14,99 € im Monat – 5G ist bei vielen Tarifen bereits inklusive. Entscheidend sind nicht nur der Preis, sondern Netzqualität an deinen Wohnorten, die LTE/5G-Abdeckung, inkludiertes EU-Roaming und eine Laufzeit von maximal 24 Monaten. Wer jetzt vergleicht und wechselt, spart gegenüber typischen Alttarifen (25-40 €) bis zu 360 € pro Jahr."
 
 social_posted: true

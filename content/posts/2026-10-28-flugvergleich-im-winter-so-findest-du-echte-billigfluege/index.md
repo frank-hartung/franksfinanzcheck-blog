@@ -21,9 +21,15 @@ redaktionelle_pruefung:
 
 inspiration: "Billig fliegen im Winter: 10 Geheimtipps"
 cover:
-  image: "images/covers/2026-10-26-flugvergleich-im-winter-so-findest-du-echte-billigfluege.jpg"
+  image: "images/covers/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege.jpg"
   alt: "Flugvergleich im Winter: So findest du echte Billigflüge"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: d4e7214311a21706a0612f7acb0792793fef1337987a8c44f8c75998de33bd66
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Reise & Mobilität"

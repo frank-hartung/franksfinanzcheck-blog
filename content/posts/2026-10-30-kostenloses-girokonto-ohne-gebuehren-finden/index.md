@@ -21,6 +21,12 @@ cover:
   image: "images/covers/2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden.jpg"
   alt: "Kostenloses Girokonto ohne Gebühren finden"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 75520a75ee560e4b5c5a02633bc5f7f46bccb556ee89e993840fbf54d9317ba3
+    geprueft_am: 2026-11-13
 faktencheck: 2026-10-31
 quellen:
   - id: "Q1"
