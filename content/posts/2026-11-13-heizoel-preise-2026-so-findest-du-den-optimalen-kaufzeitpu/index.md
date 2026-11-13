@@ -18,7 +18,7 @@ redaktionelle_pruefung:
 kurzantwort: "Einen verlässlich besten Monat oder garantierten Tiefpreis kann dieser Ratgeber nicht nennen. Vergleiche konkrete Angebote für dieselbe Liefermenge und Lieferadresse, rechne sämtliche ausgewiesenen Kosten ein und plane die Bestellung, bevor der Tank knapp wird."
 affiliate_exempt: true
 affiliate_exempt_reason: "Für Heizöl ist keine passende, registrierte Partnerroute vorhanden (CHECK24 führt kein Heizöl); ein Strom- oder Gastarif-CTA wäre sachfremd. Der Artikel bleibt deshalb bewusst ohne Affiliate-CTA."
-tags: ["Heizkosten senken", "Heizöl"]
+tags: ["Heizkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
@@ -30,7 +30,7 @@ ai_provider: "Content-Engine v2"
 engine_level: "draft"
 inspiration: "Heizöl kaufen: Angebote vergleichen und Bestellung planen"
 cover:
-  image: "images/covers/2026-10-24-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu.jpg"
+  image: "images/covers/2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu.jpg"
   alt: "Notizbuch mit Heizöl-Angebotsvergleich"
   caption: "Angebote vor der Bestellung anhand derselben Angaben vergleichen"
 faktencheck: 2026-11-03
