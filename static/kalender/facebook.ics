@@ -6,26 +6,26 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Facebook (Seite)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:facebook:2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und
- -was-sie-kostet:nutzen:2026-11-12@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261112T141500Z
-DTEND:20261112T143000Z
-SUMMARY:Facebook (Seite): Privathaftpflicht: Warum so wichtig und was 
- sie kostet (nutzen)
+UID:facebook:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-spa
+ ren:nutzen:2026-11-13@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261113T141500Z
+DTEND:20261113T143000Z
+SUMMARY:Facebook (Seite): Kfz-Versicherung Vergleich 2026: Bis zu 800 
+ € sparen (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-08-17-privathaftpfli
- cht-warum-sie-so-wichtig-ist-und-was-sie-kostet/
-URL:https://franksfinanzcheck.de/posts/2026-08-17-privathaftpflicht-wa
- rum-sie-so-wichtig-ist-und-was-sie-kostet/
+ Artikel: https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicheru
+ ng-vergleich-bis-zu-800-euro-sparen/
+URL:https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-ver
+ gleich-bis-zu-800-euro-sparen/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-10-12-energieausweis-was-das-dokument-fuer-deine-fix
- kosten:nutzen:2026-11-12@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261112T184500Z
-DTEND:20261112T190000Z
+ kosten:nutzen:2026-11-13@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261113T184500Z
+DTEND:20261113T190000Z
 SUMMARY:Facebook (Seite): Energieausweis: Was er für deine Fixkosten b
  edeutet (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
@@ -37,10 +37,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-a
- chten-musst:nutzen:2026-11-13@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261113T084500Z
-DTEND:20261113T090000Z
+ chten-musst:nutzen:2026-11-14@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261114T084500Z
+DTEND:20261114T090000Z
 SUMMARY:Facebook (Seite): Wohngebäudeversicherung Vergleich: Worauf du
   achten musst (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
@@ -52,10 +52,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-
- aus-dem:nutzen:2026-11-13@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261113T141500Z
-DTEND:20261113T143000Z
+ aus-dem:nutzen:2026-11-14@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261114T141500Z
+DTEND:20261114T143000Z
 SUMMARY:Facebook (Seite): Gaspreiserhöhung Sonderkündigungsrecht: Grun
  dversorgung Gas (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
@@ -66,26 +66,26 @@ URL:https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-so
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:facebook:2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-u
- pdate-2026:nutzen:2026-11-14@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261114T084500Z
-DTEND:20261114T090000Z
-SUMMARY:Facebook (Seite): Dein Haus sicher schützen: Das neue Vorsorge
- -Update 2026 (nutzen)
+UID:facebook:2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brau
+ chst-dein:nutzen:2026-11-15@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261115T084500Z
+DTEND:20261115T090000Z
+SUMMARY:Facebook (Seite): Wie viel Streaming‑Bandbreite: Du wirklich b
+ rauchst (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sich
- er-schuetzen-das-neue-vorsorge-update-2026/
-URL:https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-sch
- uetzen-das-neue-vorsorge-update-2026/
+ Artikel: https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-strea
+ ming-bandbreite-du-wirklich-brauchst-dein/
+URL:https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-b
+ andbreite-du-wirklich-brauchst-dein/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-b
- ezahlbar:nutzen:2026-11-14@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261114T141500Z
-DTEND:20261114T143000Z
+ ezahlbar:nutzen:2026-11-15@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261115T141500Z
+DTEND:20261115T143000Z
 SUMMARY:Facebook (Seite): Ökostrom Anbieter wechseln: Sicher\, grün un
  d bezahlbar (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
@@ -96,26 +96,11 @@ URL:https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-w
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:facebook:2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-spa
- ren:nutzen:2026-11-15@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261115T084500Z
-DTEND:20261115T090000Z
-SUMMARY:Facebook (Seite): Kfz-Versicherung Vergleich 2026: Bis zu 800 
- € sparen (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicheru
- ng-vergleich-bis-zu-800-euro-sparen/
-URL:https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-ver
- gleich-bis-zu-800-euro-sparen/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
 UID:facebook:2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dei
- n-geld-zurueck:nutzen:2026-11-15@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261115T141500Z
-DTEND:20261115T143000Z
+ n-geld-zurueck:nutzen:2026-11-16@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261116T084500Z
+DTEND:20261116T090000Z
 SUMMARY:Facebook (Seite): Flugverspätung Entschädigung: So holst du de
  in Geld zurück (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
@@ -128,9 +113,9 @@ END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-rou
  ter-standort:nutzen:2026-11-16@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261116T084500Z
-DTEND:20261116T090000Z
+DTSTAMP:20261113T131331Z
+DTSTART:20261116T141500Z
+DTEND:20261116T143000Z
 SUMMARY:Facebook (Seite): WLAN-Frust lösen: So findest du den besten R
  outer Standort (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
@@ -141,26 +126,26 @@ URL:https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:facebook:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgaran
- tie-gas:nutzen:2026-11-16@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261116T141500Z
-DTEND:20261116T143000Z
-SUMMARY:Facebook (Seite): Sicher heizen: Was sie abdeckt und wie lange
-  sie läuft (nutzen)
+UID:facebook:2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alt
+ en-rahmen:nutzen:2026-11-17@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261117T084500Z
+DTEND:20261117T090000Z
+SUMMARY:Facebook (Seite): Fenster abdichten: So stoppst du Zugluft an 
+ alten Rahmen (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-
- so-schuetzt-dich-eine-preisgarantie-gas/
-URL:https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-sch
- uetzt-dich-eine-preisgarantie-gas/
+ Artikel: https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdich
+ ten-so-stoppst-du-zugluft-an-alten-rahmen/
+URL:https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so
+ -stoppst-du-zugluft-an-alten-rahmen/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-10-dsl-wechselbonus-sichern:nutzen:2026-11-17@fra
  nksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261117T084500Z
-DTEND:20261117T090000Z
+DTSTAMP:20261113T131331Z
+DTSTART:20261117T141500Z
+DTEND:20261117T143000Z
 SUMMARY:Facebook (Seite): DSL-Wechselbonus sichern: So sparst du beim 
  Internetvertrag (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
@@ -172,10 +157,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem
- -waschgang:nutzen:2026-11-17@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261117T141500Z
-DTEND:20261117T143000Z
+ -waschgang:nutzen:2026-11-18@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261118T084500Z
+DTEND:20261118T090000Z
 SUMMARY:Facebook (Seite): Waschmaschine beladen: Weniger Kosten bei je
  dem Waschgang (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
@@ -186,11 +171,41 @@ URL:https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-belade
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
+UID:facebook:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nu
+ tzen:2026-11-18@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261118T141500Z
+DTEND:20261118T143000Z
+SUMMARY:Facebook (Seite): Geld abheben im Ausland: Wo die Gebühren wir
+ klich entstehen (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-i
+ m-ausland-gebuehren-vermeiden/
+URL:https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausl
+ and-gebuehren-vermeiden/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:facebook:2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgaran
+ tie-gas:nutzen:2026-11-19@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261119T084500Z
+DTEND:20261119T090000Z
+SUMMARY:Facebook (Seite): Sicher heizen: Was sie abdeckt und wie lange
+  sie läuft (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-
+ so-schuetzt-dich-eine-preisgarantie-gas/
+URL:https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-sch
+ uetzt-dich-eine-preisgarantie-gas/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
 UID:facebook:2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-an
- bieterwechsel:nutzen:2026-11-18@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261118T084500Z
-DTEND:20261118T090000Z
+ bieterwechsel:nutzen:2026-11-19@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261119T141500Z
+DTEND:20261119T143000Z
 SUMMARY:Facebook (Seite): DSL-Anbieterwechsel: Ablauf\, Ausfallzeiten 
  und Effektivpreis (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
@@ -202,10 +217,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige
- -tarife-fuer-2026:nutzen:2026-11-18@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261118T141500Z
-DTEND:20261118T143000Z
+ -tarife-fuer-2026:nutzen:2026-11-20@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261120T084500Z
+DTEND:20261120T090000Z
 SUMMARY:Facebook (Seite): Preisgarantie Gas: So sicherst du günstige T
  arife (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
@@ -216,26 +231,26 @@ URL:https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:facebook:2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden:nu
- tzen:2026-11-19@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261119T084500Z
-DTEND:20261119T090000Z
-SUMMARY:Facebook (Seite): Geld abheben im Ausland: Wo die Gebühren wir
- klich entstehen (nutzen)
+UID:facebook:2026-08-17-abos-und-vertraege-stiller-posten-haushaltspla
+ n:nutzen:2026-11-20@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261120T141500Z
+DTEND:20261120T143000Z
+SUMMARY:Facebook (Seite): Abos und Verträge: Der stille Posten im Haus
+ haltsplan (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-i
- m-ausland-gebuehren-vermeiden/
-URL:https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausl
- and-gebuehren-vermeiden/
+ Artikel: https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertr
+ aege-stiller-posten-haushaltsplan/
+URL:https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-s
+ tiller-posten-haushaltsplan/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-verme
- iden:nutzen:2026-11-19@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261119T141500Z
-DTEND:20261119T143000Z
+ iden:nutzen:2026-11-21@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261121T084500Z
+DTEND:20261121T090000Z
 SUMMARY:Facebook (Seite): Gasrechnung senken: Fehler im Spätsommer ver
  meiden (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
@@ -247,10 +262,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-
- ohne-gebuehren:nutzen:2026-11-20@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261120T084500Z
-DTEND:20261120T090000Z
+ ohne-gebuehren:nutzen:2026-11-21@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261121T141500Z
+DTEND:20261121T143000Z
 SUMMARY:Facebook (Seite): Kostenloses Girokonto: Ein Konto ohne Gebühr
  en finden (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
@@ -261,41 +276,11 @@ URL:https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokont
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:facebook:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-inter
- net:nutzen:2026-11-20@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261120T141500Z
-DTEND:20261120T143000Z
-SUMMARY:Facebook (Seite): DSL-Vergleich: So findest du den günstigsten
-  Internettarif (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-
- so-findest-du-guenstigeres-internet/
-URL:https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-fin
- dest-du-guenstigeres-internet/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:facebook:2026-08-17-abos-und-vertraege-stiller-posten-haushaltspla
- n:nutzen:2026-11-21@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261121T084500Z
-DTEND:20261121T090000Z
-SUMMARY:Facebook (Seite): Abos und Verträge: Der stille Posten im Haus
- haltsplan (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertr
- aege-stiller-posten-haushaltsplan/
-URL:https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-s
- tiller-posten-haushaltsplan/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
 UID:facebook:2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser
- -finden:nutzen:2026-11-21@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261121T141500Z
-DTEND:20261121T143000Z
+ -finden:nutzen:2026-11-22@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261122T084500Z
+DTEND:20261122T090000Z
 SUMMARY:Facebook (Seite): Energiediebe stoppen: So kannst du Stromfres
  ser finden (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
@@ -306,41 +291,11 @@ URL:https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:facebook:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:nu
+UID:facebook:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:nu
  tzen:2026-11-22@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261122T084500Z
-DTEND:20261122T090000Z
-SUMMARY:Facebook (Seite): Mietwagen ohne Kautionsfallen: So sparst du 
- im Urlaub (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buch
- en-ohne-kaution-fallen-urlaub/
-URL:https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohn
- e-kaution-fallen-urlaub/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:facebook:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalism
- us-tipps:nutzen:2026-11-22@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
+DTSTAMP:20261113T131331Z
 DTSTART:20261122T141500Z
 DTEND:20261122T143000Z
-SUMMARY:Facebook (Seite): Frugalismus-Tipps: Mehr Freiheit durch kluge
- n Verzicht (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-
- durch-verzicht-clevere-frugalismus-tipps/
-URL:https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-
- verzicht-clevere-frugalismus-tipps/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:facebook:2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier:nu
- tzen:2026-11-23@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261123T084500Z
-DTEND:20261123T090000Z
 SUMMARY:Facebook (Seite): Haushaltsbuch führen: App\, Excel oder Stift
   im Vergleich (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
@@ -351,11 +306,41 @@ URL:https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehre
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:facebook:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-prei
- sspruengen:nutzen:2026-11-23@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
+UID:facebook:2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-inter
+ net:nutzen:2026-11-23@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261123T084500Z
+DTEND:20261123T090000Z
+SUMMARY:Facebook (Seite): DSL-Vergleich: So findest du den günstigsten
+  Internettarif (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-
+ so-findest-du-guenstigeres-internet/
+URL:https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-fin
+ dest-du-guenstigeres-internet/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:facebook:2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub:nu
+ tzen:2026-11-23@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
 DTSTART:20261123T141500Z
 DTEND:20261123T143000Z
+SUMMARY:Facebook (Seite): Mietwagen ohne Kautionsfallen: So sparst du 
+ im Urlaub (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buch
+ en-ohne-kaution-fallen-urlaub/
+URL:https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohn
+ e-kaution-fallen-urlaub/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:facebook:2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-prei
+ sspruengen:nutzen:2026-11-24@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261124T084500Z
+DTEND:20261124T090000Z
 SUMMARY:Facebook (Seite): Preisgarantie Gas: Was bei Preiserhöhung hil
  ft (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
@@ -366,41 +351,11 @@ URL:https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:facebook:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ec
- ke:nutzen:2026-11-24@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261124T084500Z
-DTEND:20261124T090000Z
-SUMMARY:Facebook (Seite): WLAN verbessern: So bringst du stabilen Spee
- d in jede Ecke (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbesser
- n-so-bringst-du-speed-in-jede-ecke/
-URL:https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-b
- ringst-du-speed-in-jede-ecke/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:facebook:2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn:nut
- zen:2026-11-24@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
+UID:facebook:2026-08-26-dns-server-wechseln-schnelleres-sichereres-int
+ ernet:nutzen:2026-11-24@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
 DTSTART:20261124T141500Z
 DTEND:20261124T143000Z
-SUMMARY:Facebook (Seite): Warmwasser sparen: Die Rechnung hinter – War
- mwasserkosten (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-08-26-warmwasser-spa
- ren-rechnung-hinter-dem-hahn/
-URL:https://franksfinanzcheck.de/posts/2026-08-26-warmwasser-sparen-re
- chnung-hinter-dem-hahn/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:facebook:2026-08-26-dns-server-wechseln-schnelleres-sichereres-int
- ernet:nutzen:2026-11-25@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261125T084500Z
-DTEND:20261125T090000Z
 SUMMARY:Facebook (Seite): DNS-Server wechseln: Datenschutz\, Filter un
  d Einrichtung (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
@@ -411,11 +366,41 @@ URL:https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:facebook:2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruef
- en:nutzen:2026-11-25@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
+UID:facebook:2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalism
+ us-tipps:nutzen:2026-11-25@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261125T084500Z
+DTEND:20261125T090000Z
+SUMMARY:Facebook (Seite): Frugalismus-Tipps: Mehr Freiheit durch kluge
+ n Verzicht (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-
+ durch-verzicht-clevere-frugalismus-tipps/
+URL:https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-
+ verzicht-clevere-frugalismus-tipps/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:facebook:2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn:nut
+ zen:2026-11-25@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
 DTSTART:20261125T141500Z
 DTEND:20261125T143000Z
+SUMMARY:Facebook (Seite): Warmwasser sparen: Die Rechnung hinter – War
+ mwasserkosten (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-08-26-warmwasser-spa
+ ren-rechnung-hinter-dem-hahn/
+URL:https://franksfinanzcheck.de/posts/2026-08-26-warmwasser-sparen-re
+ chnung-hinter-dem-hahn/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:facebook:2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruef
+ en:nutzen:2026-11-26@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261126T084500Z
+DTEND:20261126T090000Z
 SUMMARY:Facebook (Seite): Lastschrift und Dauerauftrag: Was du prüfen 
  solltest (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
@@ -426,26 +411,41 @@ URL:https://franksfinanzcheck.de/posts/2026-08-28-lastschrift-und-daue
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:facebook:2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-
- deine-rechte:nutzen:2026-11-26@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261126T084500Z
-DTEND:20261126T090000Z
-SUMMARY:Facebook (Seite): Störung beim Internetanbieter: So sicherst d
- u deine Rechte (nutzen)
+UID:facebook:2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzae
+ hler-noch-lohnt:nutzen:2026-11-26@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261126T141500Z
+DTEND:20261126T143000Z
+SUMMARY:Facebook (Seite): Nachtstrom-Tarife: Wann sich ein Doppeltarif
+ zähler lohnt (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-08-31-stoerung-beim-
- internetanbieter-so-sicherst-du-deine-rechte/
-URL:https://franksfinanzcheck.de/posts/2026-08-31-stoerung-beim-intern
- etanbieter-so-sicherst-du-deine-rechte/
+ Artikel: https://franksfinanzcheck.de/posts/2026-08-31-nachtstrom-tar
+ ife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/
+URL:https://franksfinanzcheck.de/posts/2026-08-31-nachtstrom-tarife-wa
+ nn-sich-ein-doppeltarifzaehler-noch-lohnt/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:facebook:2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ec
+ ke:nutzen:2026-11-27@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261127T084500Z
+DTEND:20261127T090000Z
+SUMMARY:Facebook (Seite): WLAN verbessern: So bringst du stabilen Spee
+ d in jede Ecke (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbesser
+ n-so-bringst-du-speed-in-jede-ecke/
+URL:https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-b
+ ringst-du-speed-in-jede-ecke/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:facebook:2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-
- schnaeppchen:nutzen:2026-11-26@franksfinanzcheck.de
-DTSTAMP:20261112T135104Z
-DTSTART:20261126T141500Z
-DTEND:20261126T143000Z
+ schnaeppchen:nutzen:2026-11-27@franksfinanzcheck.de
+DTSTAMP:20261113T131331Z
+DTSTART:20261127T141500Z
+DTEND:20261127T143000Z
 SUMMARY:Facebook (Seite): September-Roadtrip: Clevere Wege zum Mietwag
  en-Schnäppchen (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Facebook (Seite)\n

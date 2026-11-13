@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken.jpg"
   alt: "Smarte Steckdose und Strommessung im Haushalt"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 151bb1240b317002659e435ff44d85970287633258b44427bc0a55dfed8b5429
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Energiesparen im Haushalt"

@@ -6,9 +6,9 @@ WARUM DIESE DATEI EXISTIERT (07.11.2026)
 Seit dem 25.10.2026 ist `cloudflare-produktion` ungesichert: kein Required
 Reviewer, keine Branch-Regel, Administrator-Bypass an. `worker_environment_guard.py`
 hält den Deploy deshalb fail-closed vor jedem Secret-Zugriff – richtigerweise.
-`worker_environment_einrichten.py --anwenden` kann zwei der drei Ziele per API
-herstellen und sagt beim dritten die Wahrheit (nur Dashboard). **Aber: Dieser
-Befehl stand seit dem 30.10.2026 in keinem automatischen Lauf.** Die Tages-Wache
+`worker_environment_einrichten.py --anwenden` kann bei leerem Ausgangszustand
+zwei Ziele per API versuchen; den Bypass setzt das Werkzeug nicht. **Aber:
+Dieser Befehl stand seit dem 30.10.2026 in keinem automatischen Lauf.** Die Tages-Wache
 ruft ausschließlich `--pruefen --warnstufe` auf. Jeden Morgen wurde derselbe
 Befund neu gemeldet, jeden Tag blieb er liegen. Das ist keine Wache, sondern
 eine Warteschlange – dieselbe Klasse wie GSC #1097, nur an der teureren Stelle.
@@ -22,9 +22,9 @@ Dieses Modul schließt die Lücke, ohne das Gate anzutasten:
                  Erkennt der Prüfer ihn nicht mehr, gibt es kein Urteil und
                  keinen Schreibzugriff: Exit 3 „MESSGERÄT NICHT EICHFÄHIG"
                  (dieselbe Lehre wie das Integritäts-Siegel am 04.11.2026).
-  · HEILUNG      messen → nur verschärfend schreiben → NACHMESSEN. Ohne
-                 Nachmessung gilt nichts als geheilt; eine Verschlechterung
-                 ist ein Abbruch (Exit 2), kein Teilerfolg.
+  · HEILUNG      messen → nur im nachweislich leeren Ausgangszustand schreiben
+                 → NACHMESSEN. Ohne Nachmessung gilt nichts als geheilt; ein
+                 Verlust bereits belegter Ziele ist ein Abbruch (Exit 2).
   · BELEGKETTE   append-only JSONL mit verketteten SHA-256-Prüfsummen: jeder
                  Lauf hält Vormessung, Nachmessung, Schritte, Klasse und Grund
                  fest. Kein Token, kein Antworttext, kein Fremdlink.
@@ -36,12 +36,16 @@ Dieses Modul schließt die Lücke, ohne das Gate anzutasten:
 
 GRENZEN, DIE DIESES WERKZEUG NICHT ÜBERSCHREITET
   · Es gibt NIE eine Deploy-Freigabe (`pending_deployments` bleibt tabu).
-  · Es setzt nie `can_admins_bypass` – keine GitHub-API nimmt das Feld an.
+  · Es setzt nie `can_admins_bypass`: Der Schreibparameter ist in der
+    offiziellen REST-Spezifikation nicht dokumentiert; Dashboard + Nachmessung
+    bleiben für dieses Werkzeug der bestätigte Weg.
   · Es liest keine Cloudflare-Secrets und berührt nur `api.github.com` über
     die bereits geprüften Endpunkte des Einrichters.
-  · Es lockert nichts: kein DELETE, keine Ersetzung bestehender Reviewer.
-  · Fehlt dem Token das Recht (HTTP 403), ist das ein RECHT-Befund – kein
-    Code-Fehler, kein Grün, kein „übersprungen".
+  · Kein DELETE und kein automatisches Ersetzen oder Erweitern bestehender
+    Schutzregeln. Zeitgleiche Dashboard-Änderungen sind nicht atomar sperrbar;
+    diese nicht parallel zum Lauf ausführen.
+  · HTTP 401/403 ist ein Zugriffs-/Rechtebefund, kein belegter Code-Fehler,
+    kein Grün und kein „übersprungen".
 
 Bedienung:
     python3 scripts/produktions_schutz_selbstheilung.py --selftest
@@ -84,6 +88,8 @@ DEPLOY_NAME = "Cloudflare-Worker deployen"
 
 PFlicht_PFADE = (
     SKRIPT, TESTDATEI, VERTRAG_PFAD, LEDGER_PFAD, ARBEITSFLUSS, DEPLOY_FLUSS,
+    "scripts/worker_environment_einrichten.py", "scripts/tests/test_worker_environment_einrichten.py",
+    "scripts/worker_environment_guard.py", "scripts/tests/test_worker_environment_guard.py",
 )
 
 VERTRAG_SCHLUESSEL = {
@@ -247,17 +253,16 @@ def eichprobe() -> list[str]:
     if einrichter.SCHREIBEN_ERLAUBT != {("PUT", "umgebung"), ("POST", "regeln")}:
         fehler.append("E5 neue Schreibwege im Einrichter – Nur-Verschärfen nicht mehr belegt")
 
-    rufe: list[tuple[str, str, dict | None]] = []
-
-    def transport(methode, url, token, koerper):
-        rufe.append((methode, url, koerper))
-        return 200, {}, b"{}"
-
+    transport = Transport()
     try:
-        einrichter.schreiben(klassen_zu_lagen(lagen), UNSICHER, repo="eich/probe",
-                             token="EICHPROBE", reviewer_id=42, transport=transport)
+        rest, _schritte = einrichter.schreiben(
+            klassen_zu_lagen(lagen), UNSICHER, repo="eich/probe",
+            token="EICHPROBE", reviewer_id=42, transport=transport)
+        if not any(l.ziel == "bypass" and l.klasse == einrichter.KLASSE_OBERFLAECHE for l in rest):
+            fehler.append("E6 ungeschriebener Bypass wird als geheilt ausgegeben")
     except (einrichter.WerkzeugFehler, einrichter.BefundFehler) as exc:
         fehler.append(f"E6 Schreibprobe abgebrochen: {type(exc).__name__}")
+    rufe = transport.rufe
     methoden = [(m, u.rsplit("/", 1)[-1]) for m, u, _k in rufe]
     if any(m == "DELETE" for m, _ in methoden):
         fehler.append("E6 DELETE im Heilweg")
@@ -266,10 +271,25 @@ def eichprobe() -> list[str]:
     if not any(k and "reviewers" in k for _m, _u, k in rufe):
         fehler.append("E6 Reviewer wird nicht gesetzt")
     if any(k and "can_admins_bypass" in json.dumps(k) for _m, _u, k in rufe):
-        fehler.append("E6 Bypass-Feld im Schreibkörper – die API nimmt es nicht an")
+        fehler.append("E6 undokumentiertes Bypass-Feld im Schreibkörper")
+    if sum(m == "GET" for m, _u, _k in rufe) < 5:
+        fehler.append("E6 Vor-, Zwischen- oder Nachmessung fehlt")
     if any(l.ziel == "bypass" and l.klasse != einrichter.KLASSE_OBERFLAECHE
            for l in einrichter.planen({**SICHER, "can_admins_bypass": True}, REGELN_MAIN)):
         fehler.append("E7 Admin-Bypass als automatisch heilbar ausgewiesen")
+
+    # Ein geschützter Zustand darf nicht durch einen partiellen PUT gelockert
+    # werden – insbesondere keine Erweiterung bestehender Reviewer-Listen.
+    geschuetzt = {**UNSICHER, "can_admins_bypass": False}
+    t = Transport(umgebung=geschuetzt)
+    try:
+        einrichter.schreiben(einrichter.planen(geschuetzt, None), geschuetzt,
+                             repo="eich/probe", token="EICHPROBE", reviewer_id=42, transport=t)
+    except (einrichter.WerkzeugFehler, einrichter.BefundFehler):
+        # Ein expliziter Sicherheitsabbruch ist ebenfalls zulässig.
+        pass
+    if any(m != "GET" for m, _u, _k in t.rufe):
+        fehler.append("E8 geschützter Ausgangszustand wurde geschrieben")
     return fehler
 
 
@@ -291,23 +311,26 @@ def messen(repo: str, token: str, transport: Callable | None = None
            ) -> tuple[dict | None, list | None, list]:
     """Ein einziger Messweg: `einrichter.stand` + `einrichter.planen`."""
     umgebung, regeln = einrichter.stand(repo, token, transport=transport)
-    # Fehlt das Environment, urteilt dieselbe Regel über ein leeres Objekt:
-    # Reviewer und Branch sind machbar, der Bypass bleibt Oberfläche. Kein
-    # zweiter Wahrheitsbegriff, kein eigener Text für denselben Befund.
-    lagen = einrichter.planen(umgebung if umgebung is not None else {}, regeln)
+    # 404 bedeutet fehlend ODER nicht sichtbar: niemals automatisch anlegen,
+    # keinen Zustand raten und insbesondere keine Nachmessung behaupten.
+    if umgebung is None:
+        raise einrichter.WerkzeugFehler(einrichter._status_text(404, "lesen"))
+    lagen = einrichter.planen(umgebung, regeln)
     return umgebung, regeln, lagen
 
 
 def verschlechterungen(vorher: dict, nachher: dict) -> list[str]:
-    """Ein Heiler darf NIEMALS etwas lockern – auch nicht zwischen zwei Läufen."""
-    rang = {einrichter.KLASSE_ERFUELLT: 0, einrichter.KLASSE_MACHBAR: 1,
-            einrichter.KLASSE_OBERFLAECHE: 2, einrichter.KLASSE_OFFEN: 3,
-            einrichter.KLASSE_ABWEICHUNG: 4, einrichter.KLASSE_UNBEKANNT: 4,
-            einrichter.KLASSE_RECHT: 4}
+    """Bereits belegte Ziele dürfen nicht verloren gehen.
+
+    MACHBAR und ABWEICHUNG beschreiben den Handlungsweg, keine Rangfolge der
+    Sicherheit. Beispielsweise ist eine ausgewählte leere Branch-Liste zwar
+    manuell zu bearbeiten, aber restriktiver als eine fehlende Branch-Policy.
+    """
     offen: list[str] = []
     for ziel, klasse in vorher.items():
         jetzt = nachher.get(ziel)
-        if jetzt is None or rang.get(jetzt, 9) > rang.get(klasse, 9):
+        if jetzt is None or (klasse == einrichter.KLASSE_ERFUELLT
+                             and jetzt != einrichter.KLASSE_ERFUELLT):
             offen.append(f"{ziel}: {klasse} → {jetzt}")
     return offen
 
@@ -325,8 +348,9 @@ def _gruende(lagen: list, recht: str | None) -> list[str]:
             # Lauf wäre das ein Rückfall in genau die Warteschlange, die dieser
             # Vorgang beendet: Deshalb steht hier der Heil-Lauf, nicht der
             # Handbefehl. Für alle anderen Klassen bleibt die Originalmaßnahme.
-            naechster = ("Automatisch: der Heil-Lauf setzt dies, sobald "
-                         "`UMGEBUNGS_ADMIN_TOKEN` mit `Environments: write` steht.")
+            naechster = ("Automatisch: Der Heil-Lauf kann dies mit gültigem "
+                         "Repository-Recht `Administration: write` versuchen; "
+                         "die Nachmessung entscheidet. Alternativ im Dashboard setzen.")
         else:
             naechster = lage.massnahme or "von Hand prüfen"
         texte.append(f"{lage.klasse} · {ziel}: {lage.text} → {naechster}")
@@ -336,7 +360,7 @@ def _gruende(lagen: list, recht: str | None) -> list[str]:
 def heilen(*, repo: str, token: str, vertrag: dict, transport: Callable | None = None,
            ledger: Path | str | None = None, lauf: str = "lokal",
            jetzt: str | None = None, schreiben_erlaubt: bool = True) -> Ergebnis:
-    """Messen → (nur verschärfend) schreiben → NACHMESSEN → belegen.
+    """Messen → im leeren Ausgangszustand begrenzt schreiben → nachmessen.
 
     `transport` ist die einzige Testgrenze; `ledger=None` unterdrückt das
     Schreiben der Belegkette (für Selbsttest und `--pruefen`).
@@ -389,25 +413,27 @@ def heilen(*, repo: str, token: str, vertrag: dict, transport: Callable | None =
                 lagen, umgebung, repo=repo, token=token, reviewer_id=reviewer_id,
                 transport=transport)
         except einrichter.BefundFehler as exc:
+            schritte = list(exc.schritte)
             text = str(exc)
             if "Recht" in text or "403" in text or "401" in text:
                 recht = ("GitHub-API verweigert das Schreiben (HTTP 401/403). "
-                         "Dem Token fehlt `Environments: write`; das ist ein "
-                         "Rechtebefund, keine Code-Regression. Der harte Stopp bleibt.")
+                         "GitHub-Verbindung und Repository-Recht `Administration: write` "
+                         "prüfen; der harte Stopp bleibt.")
             else:
-                grund = f"Schreiben nicht belegbar: {type(exc).__name__}"
+                grund = f"Schreiben nicht belegbar: {exc}"
                 protokoll.update({"art": "messung", "gruende": [grund],
                                   "ergebnis": KLASSE_NICHT_BELEGBAR,
-                                  "vorher": dict(vorher), "schritte": []})
+                                  "vorher": dict(vorher), "schritte": schritte})
                 return _abschluss(KLASSE_NICHT_BELEGBAR,
-                                  Lage(dict(vorher), {}, [], [grund]), protokoll, ledger)
+                                  Lage(dict(vorher), {}, schritte, [grund]), protokoll, ledger)
         except einrichter.WerkzeugFehler as exc:
+            schritte = list(exc.schritte)
             grund = f"Schreiben nicht belegbar: {exc}"
             protokoll.update({"art": "messung", "gruende": [grund],
                               "ergebnis": KLASSE_NICHT_BELEGBAR,
-                              "vorher": dict(vorher), "schritte": []})
+                              "vorher": dict(vorher), "schritte": schritte})
             return _abschluss(KLASSE_NICHT_BELEGBAR,
-                              Lage(dict(vorher), {}, [], [grund]), protokoll, ledger)
+                              Lage(dict(vorher), {}, schritte, [grund]), protokoll, ledger)
 
     # NACHMESSUNG: ohne sie ist „geheilt" eine Behauptung. Sie läuft auch dann,
     # wenn nichts geschrieben wurde – Idempotenz ist sonst unbelegt.
@@ -439,8 +465,8 @@ def heilen(*, repo: str, token: str, vertrag: dict, transport: Callable | None =
         klasse = KLASSE_OFFEN
         gruende = _gruende(lagen_nachher, recht)
         if schritte:
-            gruende.insert(0, f"{len(schritte)} Verschärfung(en) ausgeführt und "
-                              "nachgemessen; weitere Ziele bleiben offen.")
+            gruende.insert(0, f"{len(schritte)} Schreibschritt(e) von GitHub angenommen; "
+                              "der Zustand wurde nachgemessen, weitere Ziele bleiben offen.")
     elif schritte:
         klasse, gruende = KLASSE_GEHEILT, []
     else:
@@ -717,12 +743,11 @@ def wache(*, root: Path | str | None = None, ledger: Path | str | None = None) -
 ZIEL_TEXT = {"reviewer": "Required Reviewer", "branch": "Branch-Regel `main`",
              "bypass": "Kein Administrator-Bypass", "unbekannt": "Unbekannter Befund"}
 NACHSTER_SCHRITT = {
-    KLASSE_SICHER: "Keiner. Der Deploy-Pfad ist frei; die Freigabe bleibt Menschenhandlung.",
-    KLASSE_GEHEILT: "Keiner. Die Nachmessung belegt den Zielzustand; Freigeben bleibt Menschenhandlung.",
-    KLASSE_OFFEN: "Einmalig: Dashboard-Schalter `Allow administrators to bypass …` aus. "
-                  "Für die automatischen Ziele ein Token mit `Environments: write` "
-                  "als Secret `UMGEBUNGS_ADMIN_TOKEN` hinterlegen; der Tageslauf heilt dann selbst.",
-    KLASSE_RECHT: "Token mit `Environments: write` hinterlegen.",
+    KLASSE_SICHER: "Environment-Policy belegt; Zugang und Deploy separat prüfen. Freigeben bleibt Menschenhandlung.",
+    KLASSE_GEHEILT: "Environment-Policy nachgemessen; Zugang und Deploy separat prüfen. Freigeben bleibt Menschenhandlung.",
+    KLASSE_OFFEN: "Offene Ziele in der Tabelle prüfen und im Dashboard absichern; "
+                  "danach den Guard erneut ausführen.",
+    KLASSE_RECHT: "GitHub-Verbindung und Repository-Recht `Administration: write` prüfen.",
     KLASSE_OBERFLAECHE: "Ein Schalter im Dashboard.",
     KLASSE_NICHT_BELEGBAR: "Netz/API prüfen, danach erneut messen. Ungeprüft gilt nicht als sauber.",
     KLASSE_MESSGERAET: "Heiler nicht eichfähig: keine Freigabe, kein Schreiben. Code prüfen.",
@@ -743,9 +768,11 @@ def als_md(ergebnis: Ergebnis) -> str:
                       f"{e.lage.vorher.get(ziel, '–')} | {e.lage.nachher.get(ziel, '–')} |")
     zeilen.append("")
     if e.lage.schritte:
-        zeilen += ["**Ausgeführte Verschärfungen:**"] + [f"- {s}" for s in e.lage.schritte] + [""]
+        zeilen += ["**Schreibversuche und angenommene Schritte:**"] + [
+            f"- {s}" for s in e.lage.schritte] + [""]
+        zeilen += ["_Annahme ist kein Nachweis der Wirkung; die Nachmessung entscheidet._", ""]
     else:
-        zeilen += ["**Ausgeführte Verschärfungen:** keine (Rechtebefund, bereits sicher oder Nur-Lesen).", ""]
+        zeilen += ["**Schreibschritte:** keine belegt.", ""]
     if e.lage.gruende:
         zeilen += ["**Offene Befunde:**"] + [f"- {g}" for g in e.lage.gruende] + [""]
     zeilen += [f"**Nächster Schritt:** {NACHSTER_SCHRITT.get(e.klasse, '–')}", "",
@@ -831,18 +858,17 @@ jobs:
 
 
 class Transport:
-    """Netzersatz: ein Zustand vor dem Schreiben, einer danach, Schreibstatus frei."""
+    """Zustandsbehafteter Netzersatz; der nicht gesendete Bypass bleibt unverändert."""
 
     def __init__(self, *, umgebung=None, regeln=None, danach=None,
                  schreiben=200, nutzer=None):
-        self.umgebung = dict(UNSICHER) if umgebung is None else umgebung
-        self.danach = dict(SICHER) if danach is None else danach
-        self.regeln = [] if regeln is None else regeln
+        self.umgebung = json.loads(json.dumps(UNSICHER if umgebung is None else umgebung))
+        self.danach = json.loads(json.dumps(danach)) if danach is not None else None
+        self.regeln = json.loads(json.dumps([] if regeln is None else regeln))
         self.danach_regeln = list(REGELN_MAIN)
         self.schreiben = schreiben
         self.nutzer = {"id": 42} if nutzer is None else nutzer
         self.rufe: list[tuple[str, str, object]] = []
-        self._geschrieben = False
 
     def __call__(self, methode, url, token, koerper):
         self.rufe.append((methode, url, koerper))
@@ -850,15 +876,23 @@ class Transport:
             if url.endswith("/users/frank-hartung"):
                 return 200, {}, json.dumps(self.nutzer).encode()
             if url.endswith("/deployment-branch-policies?per_page=100"):
-                regeln = self.danach_regeln if self._geschrieben else self.regeln
-                return 200, {}, json.dumps({"total_count": len(regeln),
-                                            "branch_policies": regeln}).encode()
-            zustand = self.danach if self._geschrieben else self.umgebung
-            return 200, {}, json.dumps(zustand).encode()
+                return 200, {}, json.dumps({"total_count": len(self.regeln),
+                                            "branch_policies": self.regeln}).encode()
+            return 200, {}, json.dumps(self.umgebung).encode()
         if methode in ("PUT", "POST"):
             if self.schreiben >= 400:
                 return self.schreiben, {}, b"{}"
-            self._geschrieben = True
+            if methode == "PUT":
+                self.umgebung["deployment_branch_policy"] = koerper["deployment_branch_policy"]
+                self.umgebung["protection_rules"] = [
+                    {"type": "required_reviewers", "reviewers": [
+                        {"type": r["type"], "reviewer": {"id": r["id"]}}
+                        for r in koerper["reviewers"]]}, {"type": "branch_policy"}]
+            else:
+                self.regeln.append(dict(koerper))
+                if self.danach is not None:
+                    self.umgebung = self.danach
+                    self.regeln = list(self.danach_regeln)
         return 200, {}, b"{}"
 
 
@@ -904,33 +938,31 @@ def _selftest() -> int:
         if not vertrag_fehler(probe):
             fehler.append(f"2 Vertragssabotage nicht erkannt: {name}")
 
-    # 3 · Heilung: Vorfall → zwei Schreibwege → Nachmessung → GEHEILT.
+    # 3 · Teilheilung: Der Stub verändert nur tatsächlich gesendete Felder.
+    #     Der nicht gesendete Bypass bleibt wahr – niemals als GEHEILT buchen.
     t = Transport()
     erg = heilen(repo="frank/x", token="PROBE", vertrag=vertrag, transport=t,
                  ledger=None, lauf="selftest", jetzt="2026-11-07T00:00:00+00:00")
-    if erg.klasse != KLASSE_GEHEILT or erg.code != 0:
-        fehler.append(f"3 Heilung nicht belegt: {erg.klasse}")
+    if erg.klasse != KLASSE_OFFEN or erg.code != 1:
+        fehler.append(f"3 Teilheilung falsch eingeordnet: {erg.klasse}")
     if erg.lage.vorher.get("reviewer") != einrichter.KLASSE_MACHBAR:
         fehler.append("3 Vormessung fehlt")
     if erg.lage.nachher.get("reviewer") != einrichter.KLASSE_ERFUELLT:
         fehler.append("3 Nachmessung fehlt oder ist nicht grün")
+    if erg.lage.nachher.get("bypass") != einrichter.KLASSE_OBERFLAECHE:
+        fehler.append("3 offener Bypass wurde verschwiegen")
     methoden = [m for m, _u, _k in t.rufe if m in ("PUT", "POST", "DELETE")]
     if sorted(methoden) != ["POST", "PUT"]:
         fehler.append(f"3 falsche Schreibwege: {methoden}")
     if any(m == "DELETE" for m, _u, _k in t.rufe):
         fehler.append("3 DELETE im Heilweg")
 
-    # 3b · Teilheilung: zwei Ziele geheilt, der Dashboard-Schalter bleibt offen.
-    # Genau der Stand, den ein echtes Token erzeugt – niemals als GEHEILT ausgeben.
-    t = Transport(danach={**SICHER, "can_admins_bypass": True})
+    # 3b · Eine 200/201-Antwort ohne die erwartete Nachmessung ist kein Erfolg.
+    t = Transport(danach={**SICHER, "protection_rules": []})
     erg = heilen(repo="frank/x", token="PROBE", vertrag=vertrag, transport=t,
                  ledger=None, lauf="selftest", jetzt="2026-11-07T00:00:00+00:00")
-    if erg.klasse != KLASSE_OFFEN or not erg.lage.schritte:
-        fehler.append(f"3b Teilheilung falsch eingeordnet: {erg.klasse}")
-    if erg.lage.nachher.get("reviewer") != einrichter.KLASSE_ERFUELLT:
-        fehler.append("3b geheilte Ziele nicht nachgemessen")
-    if not any("bleiben offen" in g for g in erg.lage.gruende):
-        fehler.append("3b offener Rest wurde nicht benannt")
+    if erg.klasse != KLASSE_NICHT_BELEGBAR or len(erg.lage.schritte) != 2:
+        fehler.append(f"3b nicht belegte Nachmessung falsch eingeordnet: {erg.klasse}")
 
     # 4 · Idempotenz: sicherer Zustand schreibt nichts und sagt SICHER.
     t = Transport(umgebung=dict(SICHER), danach=dict(SICHER), regeln=list(REGELN_MAIN))
@@ -1099,7 +1131,7 @@ def main(argv: list[str] | None = None) -> int:
                   "Der harte Stopp bleibt; Freigeben bleibt Menschenhandlung.")
         elif ergebnis.code == 1:
             annotation("warning", f"{ergebnis.klasse}: Der Deploy bleibt fail-closed "
-                       "gesperrt; der Tageslauf heilt, sobald Rechte und Schalter stehen.",
+                       "gesperrt; offene Ziele im Dashboard prüfen und die Schreibgrenze beachten.",
                        titel="Produktions-Schutz offen")
         elif ergebnis.code == 2:
             annotation("error", f"{ergebnis.klasse}: ungeprüft gilt nicht als sauber.",

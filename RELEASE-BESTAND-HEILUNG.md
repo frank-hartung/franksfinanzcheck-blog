@@ -1,13 +1,12 @@
 # Release-Bestand – Selbstheilung
 
-**Stand:** 2026-11-12T13:48:27Z · **Status:** bestaetigt
+**Stand:** 2026-11-13T13:03:33Z · **Status:** nichts-zu-heilen
 
 Die Scorecard misst; dieser Lauf heilt nur die sichere, deterministische Teilmenge.
 Fachbefunde und Freigaben bleiben menschlich. Ein verworfener Versuch wird vollständig zurückgerollt.
 
 | Artikel | Ziel-Checks | Heiler |
 |---|---|---|
-| `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit` | T6-textverstaendnis | politur_heiler |
 
 ## Übergabe an Redaktion/Fachwache
 
@@ -31,4 +30,7 @@ Fachbefunde und Freigaben bleiben menschlich. Ein verworfener Versuch wird volls
 - `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
-- `2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
+- `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
+- `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
+- `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
+- `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund

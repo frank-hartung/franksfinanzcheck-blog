@@ -1,9 +1,9 @@
-generated_at: '2026-11-12T11:50:02Z'
-start_date: '2026-11-13'
+generated_at: '2026-11-13T11:31:52Z'
+start_date: '2026-11-14'
 cadence: Mo/Mi/Fr · 2–3 Artikel/Tag (DAUERVORGABE)
 slots:
-- date: '2026-11-13'
-  weekday: Fri
+- date: '2026-11-16'
+  weekday: Mon
   slot: 1
   topic: 'Grundversorgung raus: So entkommst du dem teuersten Stromtarif'
   pillar: strom-sparen
@@ -24,8 +24,8 @@ slots:
 
     - [news] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu
     an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.'
-- date: '2026-11-16'
-  weekday: Mon
+- date: '2026-11-18'
+  weekday: Wed
   slot: 2
   topic: 'Ökostrom wechseln: Günstig und seriös im Vergleich'
   pillar: strom-sparen
@@ -48,8 +48,8 @@ slots:
     - [trending] Zwischen variablen Tarifen und Festpreisverträgen gibt es 2026 wieder
     größere Preisunterschiede – pauschale Empfehlungen greifen hier zu kurz, es kommt
     auf den eigenen Verbrauch an.'
-- date: '2026-11-18'
-  weekday: Wed
+- date: '2026-11-20'
+  weekday: Fri
   slot: 3
   topic: 'Kfz-Versicherung wechseln zum 1. Januar: Diese Fristen gelten'
   pillar: versicherungen
@@ -69,10 +69,10 @@ slots:
     – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
     statt sie automatisch zu verlängern.
 
-    - [pain_point] Policen werden automatisch verlängert und Jahr für Jahr teurer
-    – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel.'
-- date: '2026-11-20'
-  weekday: Fri
+    - [niche_hook] Jahresabschluss-Check: Diese 4 Versicherungen solltest du im Dezember
+    kündigen'
+- date: '2026-11-23'
+  weekday: Mon
   slot: 4
   topic: 'Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
   pillar: versicherungen
@@ -84,106 +84,19 @@ slots:
 
     - [evergreen] Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember
 
+    - [niche_hook] Jahresabschluss-Check: Diese 4 Versicherungen solltest du im Dezember
+    kündigen
+
     - [pain_point] Policen werden automatisch verlängert und Jahr für Jahr teurer
     – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel.
 
     - [news] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
     – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
-    statt sie automatisch zu verlängern.
-
-    - [trending] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
-    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
     statt sie automatisch zu verlängern.'
-- date: '2026-11-23'
-  weekday: Mon
-  slot: 5
-  topic: 'Homeoffice: So planst du die Leitung für zwei Arbeitsplätze'
-  pillar: internet-dsl
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
-    Rechnung bleibt hoch, der Speed trotzdem mau.
-
-    - [trending] Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als
-    sie im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
-    als der reine Anbieterwechsel.
-
-    - [evergreen] Die besten DSL-Tarife für Zuhause und unterwegs
-
-    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall'
 - date: '2026-11-25'
   weekday: Wed
-  slot: 6
-  topic: 'WLAN-Repeater oder Powerline: Was durch Wände wirklich kommt'
-  pillar: internet-dsl
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [pain_point] Funklöcher in Wohnung oder Homeoffice nerven täglich – oft liegt
-    es nicht am Anbieter, sondern an Router und WLAN-Aufbau.
-
-    - [evergreen] Die besten DSL-Tarife für Zuhause und unterwegs
-
-    - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
-    Rechnung bleibt hoch, der Speed trotzdem mau.
-
-    - [viral_outlier] Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen'
-- date: '2026-11-27'
-  weekday: Fri
-  slot: 7
-  topic: Jahresvergleich für deine Versicherungen
-  pillar: versicherungen
-  source: topics
-  campaign: kfz-wechselsaison-2027
-  cta: Jetzt Kfz-Versicherung vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [pain_point] Policen werden automatisch verlängert und Jahr für Jahr teurer
-    – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel.
-
-    - [evergreen] Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember
-
-    - [pain_point] Viele unterschätzen, was Hausrat im Ernstfall wirklich kostet –
-    oder zahlen umgekehrt für überhöhte Summen ohne Prüfung.
-
-    - [news] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
-    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
-    statt sie automatisch zu verlängern.'
-- date: '2026-11-30'
-  weekday: Mon
-  slot: 8
-  topic: 'Zweitwagen anmelden: So startest du nicht in der teuren Schadenfreiheitsklasse
-    0'
-  pillar: versicherungen
-  source: topics
-  campaign: kfz-wechselsaison-2027
-  cta: Jetzt Kfz-Versicherung vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [pain_point] Policen werden automatisch verlängert und Jahr für Jahr teurer
-    – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel.
-
-    - [evergreen] Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember
-
-    - [news] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
-    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
-    statt sie automatisch zu verlängern.
-
-    - [news] Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das
-    erstbeste Ergebnis nimmt, lässt oft bares Geld liegen.'
-- date: '2026-12-02'
-  weekday: Wed
-  slot: 9
-  topic: Die besten Kreditkarten für den Alltag im Vergleich
+  slot: 5
+  topic: 'Gemeinschaftskonto für Paare: So teilt ihr Kosten fair'
   pillar: konto-karten
   source: topics
   campaign: null
@@ -198,16 +111,121 @@ slots:
     sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
     inzwischen öfter als nur beim Kontowechsel.
 
-    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
-    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.
+    - [evergreen] Kontoeröffnung mit günstigen Gebühren
+
+    - [viral_outlier] Haushaltsbuch führen: App, Excel oder Papier?'
+- date: '2026-11-27'
+  weekday: Fri
+  slot: 6
+  topic: 'VPN für Zuhause: Brauchst du das wirklich?'
+  pillar: internet-dsl
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [evergreen] Die besten DSL-Tarife für Zuhause und unterwegs
+
+    - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
+    Rechnung bleibt hoch, der Speed trotzdem mau.
+
+    - [trending] Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als
+    sie im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
+    als der reine Anbieterwechsel.
+
+    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall'
+- date: '2026-11-30'
+  weekday: Mon
+  slot: 7
+  topic: Versteckte Kosten im Mietwagenvertrag entschlüsseln
+  pillar: mietwagen
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [pain_point] Mietwagen-Buchungen mit hoher Kaution und versteckten Zusatzgebühren
+    verderben die Urlaubskasse – die Fallen liegen im Kleingedruckten.
+
+    - [evergreen] Mietwagen-Tarife im Vergleich für den Urlaub
+
+    - [viral_outlier] Spätsommer-Schnäppchen: Mietwagen jetzt günstig buchen
+
+    - [trending] Ein jährlicher Vertrags-Check – Strom, Versicherung, Konto, Internet
+    an einem Nachmittag – deckt erfahrungsgemäß mehr Sparpotenzial auf als einzelne
+    spontane Wechsel übers Jahr verteilt.'
+- date: '2026-12-02'
+  weekday: Wed
+  slot: 8
+  topic: Stromspar-Apps im Test für den Haushalt
+  pillar: strom-sparen
+  source: topics
+  campaign: winter-energie-2026-27
+  cta: Jetzt Strom- & Gaspreise vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [news] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu
+    an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.
+
+    - [trending] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise
+    neu an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.
+
+    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
+    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
+
+    - [news] Zwischen variablen Tarifen und Festpreisverträgen gibt es 2026 wieder
+    größere Preisunterschiede – pauschale Empfehlungen greifen hier zu kurz, es kommt
+    auf den eigenen Verbrauch an.'
+- date: '2026-12-04'
+  weekday: Fri
+  slot: 9
+  topic: 'Kartenzahlung mit PIN: So bleibt die Karte sicher'
+  pillar: konto-karten
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
 
     - [trending] Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der
     genaue Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen
-    Monaten wieder fallen.'
-- date: '2026-12-04'
-  weekday: Fri
+    Monaten wieder fallen.
+
+    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
+    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.
+
+    - [evergreen] Kontoeröffnung mit günstigen Gebühren
+
+    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
+    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.'
+- date: '2026-12-07'
+  weekday: Mon
   slot: 10
-  topic: 'Depot eröffnen: Worauf Anfänger 2026 achten sollten'
+  topic: 'Handyvertrag wechseln: Wann sich der Wechselbonus wirklich lohnt'
+  pillar: internet-dsl
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
+    Rechnung bleibt hoch, der Speed trotzdem mau.
+
+    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall
+
+    - [trending] Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als
+    sie im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
+    als der reine Anbieterwechsel.
+
+    - [evergreen] Die besten DSL-Tarife für Zuhause und unterwegs'
+- date: '2026-12-09'
+  weekday: Wed
+  slot: 11
+  topic: Günstige Kreditkarten für den Online-Einkauf
   pillar: konto-karten
   source: topics
   campaign: null
@@ -220,48 +238,31 @@ slots:
 
     - [evergreen] Kontoeröffnung mit günstigen Gebühren
 
-    - [viral_outlier] Haushaltsbuch führen: App, Excel oder Papier?
+    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
+    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.
+
+    - [trending] Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
+    sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
+    inzwischen öfter als nur beim Kontowechsel.'
+- date: '2026-12-11'
+  weekday: Fri
+  slot: 12
+  topic: Die Vorteile einer kostenlosen Kreditkarten-Umstellung
+  pillar: konto-karten
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
+    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.
 
     - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
-    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.'
-- date: '2026-12-07'
-  weekday: Mon
-  slot: 11
-  topic: Energiekosten im Haushalt senken mit Smart-Home-Geräten
-  pillar: strom-sparen
-  source: topics
-  campaign: winter-energie-2026-27
-  cta: Jetzt Strom- & Gaspreise vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
+    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.
 
-    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
-    höher aus als erwartet – der Schock kommt mit der Heizperiode.
+    - [trending] Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der
+    genaue Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen
+    Monaten wieder fallen.
 
-    - [evergreen] Heizperiode vorbereiten im Spätsommer
-
-    - [viral_outlier] Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe
-
-    - [niche_hook] Steckdosenleiste mit Schalter: Der unterschätzte Hebel am Arbeitsplatz'
-- date: '2026-12-09'
-  weekday: Wed
-  slot: 12
-  topic: 10 Tipps für günstige Reiseversicherungen im Ausland
-  pillar: versicherungen
-  source: topics
-  campaign: kfz-wechselsaison-2027
-  cta: Jetzt Kfz-Versicherung vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [pain_point] Policen werden automatisch verlängert und Jahr für Jahr teurer
-    – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel.
-
-    - [pain_point] Viele unterschätzen, was Hausrat im Ernstfall wirklich kostet –
-    oder zahlen umgekehrt für überhöhte Summen ohne Prüfung.
-
-    - [evergreen] Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember
-
-    - [news] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
-    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
-    statt sie automatisch zu verlängern.'
+    - [niche_hook] Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?'

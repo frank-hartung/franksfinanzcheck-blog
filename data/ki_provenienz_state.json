@@ -1,7 +1,7 @@
 {
   "frist": "2026-12-02",
-  "funde": 0,
-  "revision": "4d60e22",
+  "funde": 50,
+  "revision": "cd2cf6d",
   "ungeklaert_erstmals": {
     "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": "2026-11-07",
     "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": "2026-11-07",
@@ -16,5 +16,6 @@
     "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": "2026-11-07",
     "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": "2026-11-07"
   },
-  "zuletzt": "2026-11-07"
+  "zuletzt": "2026-11-07",
+  "zuletzt_geaendert": "2026-11-13"
 }

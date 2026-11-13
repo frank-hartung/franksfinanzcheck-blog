@@ -126,7 +126,11 @@ def main():
             print(f"  ⚠ Antwort nach Bereinigung noch fehlerhaft: {os.path.basename(os.path.dirname(path))}")
             fail += 1
             continue
-        set_kurzantwort(path, answer)
+        if not set_kurzantwort(path, answer):
+            print(f"  ⚠ Änderung durch redaktionellen/YMYL-Schreibschutz verworfen: "
+                  f"{os.path.basename(os.path.dirname(path))}")
+            fail += 1
+            continue
         ok += 1
         print(f"  ✓ {os.path.basename(os.path.dirname(path))[:50]} → {answer[:60]}…")
         time.sleep(1)  # Rate-Limit-Schonung

@@ -14,6 +14,12 @@ cover:
   image: "images/covers/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich.jpg"
   alt: "Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 2b51d48e7a9cce04b92315b99c2645ea54d9ece25944951078a2abd85ad2d064
+    geprueft_am: 2026-11-13
 kurzantwort: "Tagesgeld bringt 2026 wieder 1,8 bis 3,2 Prozent Zinsen. Damit ist es der beste Platz für deinen Notgroschen. Du kommst täglich an dein Geld, und der Staat schützt es bis 100.000 € pro Person und Bank. Auf dem Girokonto bekommst du dagegen 0,0 Prozent. Die besten Zinsen findest du im Vergleich. Achte auf eine lange Zinsgarantie von 6 bis 12 Monaten und auf das Land der Bank."
 
 social_posted: true

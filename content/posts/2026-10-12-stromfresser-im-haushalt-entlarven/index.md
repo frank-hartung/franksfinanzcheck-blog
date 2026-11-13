@@ -16,6 +16,12 @@ cover:
   image: "images/covers/2026-10-12-stromfresser-im-haushalt-entlarven.jpg"
   alt: "Stromfresser im Haushalt entlarven"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 1b2cf105993b19cd56f8fcc77b9a112d2597f6aae3ba2da01d939b1f8ed8ecf1
+    geprueft_am: 2026-11-13
 pin_title: "Stromfresser im Haushalt entlarven"
 pin_description: "*Werbung | Stromfresser im Haushalt entlarven – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ. Mehr Spartipps auf FranksFinanzcheck! #stromfresserfinden #stromsparentipps #energiekostensenken"
 kurzantwort: "Stromfresser findest du in zwei Schritten: Die Bundesnetzagentur bietet ein kostenloses Online-Tool zur Analyse deines Stromverbrauchs, ein Stecker-Messgerät (ab etwa 20 Euro) misst die einzelnen Geräte nach. Aktuelle Geräte ziehen im Stand-by meist nur 0,5 bis 2 Watt – ältere oft deutlich mehr. Bei rund 40 Cent pro Kilowattstunde lohnt sich ein Neukauf, wenn sich die Anschaffung in spätestens fünf Jahren rechnet."

@@ -61,6 +61,13 @@
     "zuletzt_reaktiviert": "2026-10-07",
     "zustand": "pool"
   },
+  "deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
+    "seit": "2026-11-12",
+    "slug": "2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
+    "titel": "Deine nächtliche Grundlast Strom: Stromverbrauch nachts",
+    "zuletzt_im_pool": "2026-11-13",
+    "zustand": "pool"
+  },
   "dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
     "reaktiviert": 1,
     "reaktiviert_mit": [
@@ -89,7 +96,7 @@
     "seit": "2026-10-30",
     "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
     "titel": "Energieeffiziente Geräte: So sinken deine Fixkosten",
-    "zuletzt_im_pool": "2026-11-10",
+    "zuletzt_im_pool": "2026-11-13",
     "zustand": "pool"
   },
   "energieeffizienz-im-haushalt-5-schnelle-spartricks": {
@@ -132,7 +139,7 @@
     "seit": "2026-10-30",
     "slug": "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
     "titel": "Fenster abdichten: So stoppst du Zugluft an alten Rahmen",
-    "zuletzt_im_pool": "2026-11-10",
+    "zuletzt_im_pool": "2026-11-12",
     "zustand": "pool"
   },
   "flugvergleich-im-winter-so-findest-du-echte-billigfluege": {
@@ -158,9 +165,9 @@
   },
   "gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten": {
     "seit": "2026-11-09",
-    "slug": "2026-11-10-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
+    "slug": "2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
     "titel": "Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten",
-    "zuletzt_im_pool": "2026-11-10",
+    "zuletzt_im_pool": "2026-11-13",
     "zustand": "pool"
   },
   "gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
@@ -189,11 +196,18 @@
     "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
     "zustand": "pool"
   },
+  "geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst": {
+    "seit": "2026-11-13",
+    "slug": "2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst",
+    "titel": "Geschenkkarte: Was du beim Kauf und Aufladen wissen musst",
+    "zuletzt_im_pool": "2026-11-13",
+    "zustand": "pool"
+  },
   "geschirrspueler-voll-so-sparst-du-wasser-und-strom": {
     "seit": "2026-11-09",
-    "slug": "2026-11-10-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
+    "slug": "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
     "titel": "Spülmaschine beladen: So sparst du Wasser und Strom",
-    "zuletzt_im_pool": "2026-11-10",
+    "zuletzt_im_pool": "2026-11-13",
     "zustand": "pool"
   },
   "handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": {
@@ -222,10 +236,10 @@
       "check_length.py"
     ],
     "seit": "2026-10-07",
-    "slug": "2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+    "slug": "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
     "titel": "Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden",
     "zuletzt_geheilt": "2026-10-29",
-    "zuletzt_im_pool": "2026-11-10",
+    "zuletzt_im_pool": "2026-11-13",
     "zuletzt_reaktiviert": "2026-10-24",
     "zustand": "pool"
   },
@@ -240,7 +254,7 @@
     "seit": "2026-11-09",
     "slug": "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee",
     "titel": "Kaffeemaschine Stromverbrauch: Was kostet die Tasse Kaffee?",
-    "zuletzt_im_pool": "2026-11-10",
+    "zuletzt_im_pool": "2026-11-13",
     "zustand": "pool"
   },
   "kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
@@ -264,16 +278,16 @@
   },
   "mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten": {
     "seit": "2026-11-09",
-    "slug": "2026-11-09-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
+    "slug": "2026-11-13-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
     "titel": "Mehrwegflaschen Pfand: So optimierst du deine Fixkosten",
-    "zuletzt_im_pool": "2026-11-10",
+    "zuletzt_im_pool": "2026-11-13",
     "zustand": "pool"
   },
   "mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung": {
     "seit": "2026-11-09",
-    "slug": "2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
+    "slug": "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
     "titel": "Mesh WLAN nachrüsten: Schluss mit Funklöchern in der Wohnung",
-    "zuletzt_im_pool": "2026-11-10",
+    "zuletzt_im_pool": "2026-11-13",
     "zustand": "pool"
   },
   "oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": {
@@ -288,6 +302,13 @@
     "slug": "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss",
     "titel": "Preiswert surfen: So findest du den optimalen DSL‑Anschluss",
     "zuletzt_im_pool": "2026-10-02",
+    "zustand": "pool"
+  },
+  "secondhand-kleidung-so-erkennst-du-qualitaet-sparst": {
+    "seit": "2026-11-13",
+    "slug": "2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst",
+    "titel": "Secondhand Kleidung: So erkennst du Qualität & sparst",
+    "zuletzt_im_pool": "2026-11-13",
     "zustand": "pool"
   },
   "strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
@@ -311,9 +332,9 @@
   },
   "strompreis-2026-herbst-check-fuer-deine-stromkosten": {
     "seit": "2026-11-09",
-    "slug": "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+    "slug": "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
     "titel": "Strompreis 2026: Herbst-Check für deine Stromkosten",
-    "zuletzt_im_pool": "2026-11-10",
+    "zuletzt_im_pool": "2026-11-13",
     "zustand": "pool"
   },
   "urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": {
@@ -366,6 +387,13 @@
     "zuletzt_im_pool": "2026-10-02",
     "zustand": "pool"
   },
+  "weniger-spontankaeufe-dein-essensplan-woche-ohne-reste": {
+    "seit": "2026-11-13",
+    "slug": "2026-11-13-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste",
+    "titel": "Weniger Spontankäufe: Dein Essensplan Woche ohne Reste",
+    "zuletzt_im_pool": "2026-11-13",
+    "zustand": "pool"
+  },
   "wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": {
     "reaktiviert": 1,
     "reaktiviert_mit": [
@@ -380,9 +408,9 @@
   },
   "wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
     "seit": "2026-11-09",
-    "slug": "2026-11-10-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein",
+    "slug": "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein",
     "titel": "Wie viel Streaming‑Bandbreite: Du wirklich brauchst",
-    "zuletzt_im_pool": "2026-11-10",
+    "zuletzt_im_pool": "2026-11-12",
     "zustand": "pool"
   },
   "wlan-frust-loesen-so-findest-du-den-besten-router-standort": {

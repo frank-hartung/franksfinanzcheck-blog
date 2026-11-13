@@ -14,6 +14,12 @@ cover:
   alt: "Konto & Karten: Der große Ratgeber für gebührenfreie Finanzen"
   caption: "Kompletter Ratgeber von FranksFinanzcheck"
   preload: false   # Bild liefert og:image, nicht den LCP
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 0b8b9c563f798f617300e7ee32e20583045971cd6dc69abab61be87a5d542a40
+    geprueft_am: 2026-11-13
 faktencheck: "2026-10-13"
 quellen:
   - titel: "Gesetzliche Einlagensicherung in Deutschland"

@@ -11,12 +11,276 @@ fachanwaltliche Prüfung empfohlen (siehe Abschnitt „Nächste Schritte“).
 
 ---
 
+## Nachtrag 2026-11-12 · Rollen, Ausspielwege und gesicherter Fristabschluss (#1028)
+
+**Frist-ID:** `ki-vo-kennzeichnung-bestand` · **Status: offen.** Dieser
+Arbeitsstand liegt auf einem Arbeitsbranch und ist weder integriert noch live
+abgenommen. Issue [#1028](https://github.com/frank-hartung/franksfinanzcheck-blog/issues/1028)
+bleibt offen. Anbieter-/Systeminventar, schriftliche Markierungsnachweise,
+Bildherkunft, Einzelfallklärung, Live-Abnahme und Betreiberfreigabe stehen aus.
+Dies ist eine technische Selbsteinschätzung, keine Rechtsberatung.
+
+### Rechtliche Einordnung und Korrektur älterer Aussagen
+
+* [Art. 50 Abs. 2 KI-VO](https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act)
+  richtet die technische Markierung grundsätzlich an **Anbieter** generativer
+  Systeme. Für vor dem 02.08.2026 in Verkehr gebrachte Systeme nennt
+  [Art. 111 Abs. 4](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-111)
+  den 02.12.2026. Die ältere Angabe „Art. 113 n. F.“ im Nachtrag vom
+  05.11. war für diese Übergangsfrist falsch. Die eigene Rolle ist **für jedes
+  eingesetzte System** zu klären; pauschal „dieser Blog ist niemals Anbieter“
+  ist ohne Systeminventar nicht belegt.
+* [Art. 50 Abs. 4](https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act)
+  unterscheidet insbesondere Deepfakes und bestimmte veröffentlichte Texte zu
+  Angelegenheiten öffentlichen Interesses. Für solche Texte kann bei
+  substanzieller menschlicher Überprüfung oder redaktioneller Kontrolle und
+  übernommener redaktioneller Verantwortung eine Ausnahme greifen. Nicht
+  jedes KI-Bild und nicht jeder KI-Text ist allein wegen KI-Nutzung
+  kennzeichnungspflichtig. Ein Impressum oder Meta-Tag ersetzt keinen
+  gegebenenfalls sichtbaren Deepfake-Hinweis bei erster Wahrnehmung.
+* Der [Transparenz-Kodex](https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content)
+  ist ein freiwilliger Nachweisweg; die gesetzlichen Pflichten bleiben davon
+  getrennt. Der ältere pauschale Satz, jeder Betreiber müsse beim Weitergeben
+  den Nichterhalt einer Anbieter-Markierung beweisen, wird zurückgenommen.
+  Die tatsächliche Rolle, der Anwendungsfall und einschlägige Pflichten sind
+  individuell zu prüfen; Markierungen technisch zu erhalten ist sinnvoll.
+
+### Technische Änderungen im Arbeitsbranch
+
+* Das Provenienz-Gate prüft HTML und Feed strukturiert, ordnet Feed-Items ihrer
+  eigenen internen Zielseite zu und läuft im **regulären** Deploy nach letztem
+  Build und Pagefind vor `gh-pages` und dem offiziellen Pages-Artefakt. Fehlende
+  oder beschädigte Messgrundlagen werden als Werkzeugfehler gemeldet. Das ist
+  nur ein lokaler/CI-Vertrag, keine Bestätigung eines erfolgreichen Actions-
+  Deploys. Der bestehende Notfall-Deploy umgeht die KI-Gates bewusst, um
+  dringende Rechts-/Sicherheitskorrekturen nicht aufzuhalten; danach ist eine
+  gesonderte Provenienz- und Live-Prüfung nötig. Er ist nicht durch diese
+  Änderung dauerhaft abgesichert.
+* RSS behält bei langen Beschreibungen Werbe- und lesbare Text-/Coverhinweise;
+  die drei direkten Pinterest-Publisher prüfen Quelle, Ziel, Beschreibung und
+  bei deklarierten KI-Covern das belegte Original. Social-Neukodierung wird
+  für diese Originale vermieden; alte Social-Ableitungen werden gemeldet.
+  Lokale Dateien und gemockte API-Payloads beweisen **nicht**, dass Pinterest
+  Hinweise anzeigt oder Metadaten, Wasserzeichen und Signaturen beibehält.
+* Ungeklärte Herkunft wird nicht automatisch als KI-Herkunft behauptet. Die
+  Wache führt auch aus dem Register entfernte Fälle weiter; fehlender oder
+  beschädigter Wachzustand ist kein leerer, geheilter Zustand. Am 12.11.2026
+  waren weiterhin zwölf `menschlich`-Einträge ungeklärt. Kein einzelnes
+  Bestandscover ist hier als KI-generiert oder rein menschlich bewiesen.
+* Der Fristen-Workflow erhält eine Nachweissperre: Altflags und beschädigte
+  Belege dürfen nicht schließen; ein `--dry-run` schreibt und postet nichts.
+  Ein ausschließlich vom freigebenden Inhaberkonto manuell gestarteter Lauf
+  prüft Belegdateien, Inhalte des Wachzustands, offiziellen Deploy, Review
+  und Live-Abnahme formal. Nach unabhängigem Testjob und State-Push liest ein
+  nachgelagerter Job State und Belege auf `main` erneut und schließt erst dann
+  das zugehörige Issue. Site-/KI-Drift, ein laufender regulärer oder
+  Notfall-Deploy, ein neueres Pages-Deployment oder ein Wechsel von
+  getesteter Workflow-Revision, Testjob-Versuch, Abschlusscode,
+  Kalender oder Register blockieren. Vorzeitiges, unbelegtes Schließen von
+  #1028 wird erkannt; ein unklarer Close nach Abbruch wird nicht blind
+  rückgängig gemacht. Andere Fristen dürfen #1028 auch bei falscher Issue-
+  Zuordnung nicht schließen oder kommentieren. Ein später wieder geöffnetes
+  oder nicht lesbares Issue führt zur Quarantäne des bisherigen Abschlusses,
+  nicht zur automatischen Neuschließung. Nach einem Abbruch kann der zweite
+  State-Push bis zur nächsten Prüfung ein unbestätigtes Erledigt-Feld
+  enthalten. Nur die vollständig geprüfte Workflow-Quittung zählt als
+  Abschluss. Die Prüfung kann die Wahrheit und rechtliche Eignung der
+  Dokumente nicht beweisen; Verfahren und Grenzen:
+  `docs/KI-TRANSPARENZ-ABNAHME.md` §5.
+  Die irreführende Abschlussanleitung wurde am 12.11. im offenen Issue #1028
+  berichtigt; der alte Produktions-Workflow selbst bleibt bis zur Integration
+  dieser Änderung ungeschützt und darf nicht vorzeitig benutzt werden.
+
+### Prüfstand am 12.11.2026
+
+* Lokaler Hugo-Build: **113/113** reguläre Seiten in 19 Abschnitten und
+  **50 Feed-Items** geprüft, **0 technische Provenienzfunde**. Cover-Gate:
+  129 Referenzen, davon **0 als KI deklariert**; IPTC-Gate deshalb ohne
+  deklarierten Bestandsfall. Null deklarierte Cover sind kein
+  Herkunftsnachweis. Ein ergänzender `ki_cover_render_audit.py`-Lauf verglich
+  128 verschiedene Dateien: 79 waren byte-identisch mit der aktuellen
+  Pillow-Reproduktion, 49 wichen ab, keine Messung scheiterte. Weder Identität
+  noch Abweichung belegt die tatsächliche Herkunft oder KI-Verwendung.
+  Wache-Trockenlauf: **12 ungeklärte Fälle**, 20 Tage Restfrist, eine
+  menschliche Eskalation, Exit 1; State unverändert.
+* 271 KI-/Cover-/Feed-/Pinterest-/Fristen-Tests und 262 Pinterest-/Social-Tests
+  bestanden lokal; dazu 134 Deploy-/Blustradius-/Workflow-Tests und 244
+  Regressionen der pausierten #922-Arbeiten. Die 45 isolierten Fristtests
+  decken auch Notfall-Fence, Wiederöffnungsprüfung und falsche Issue-Zuordnungen
+  ab. Die Testgruppen überschneiden sich teilweise und sind nicht als getrennte
+  Nachweise zu addieren.
+  Der Blustradius-Vertrag umfasst 87 Deploy-Schritte, der Integritäts-Lock
+  55 geschützte Dateien. Social-Bestandstests erzeugten bestehende
+  `ResourceWarning`-Meldungen über ungeschlossene Lesezugriffe; das ist kein
+  Live-Nachweis. Die Abschluss-Gegenproben nutzen isolierte, fiktive Belege
+  und gemockte GitHub-Antworten – sie schließen kein echtes Issue.
+* Der letzte abgefragte offizielle Pages-Status war am 11.11. für die
+  Ausgangsrevision `3a4c2a452a98a0a8247067fc048760a5b99cc855` erfolgreich;
+  der zugehörige [Gesamtlauf](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/43024578356)
+  endete dennoch **failure**. Er enthält nicht diesen Arbeitsstand und ist
+  keine Abnahme. PR [#1167](https://github.com/frank-hartung/franksfinanzcheck-blog/pull/1167)
+  ist offen und konfliktbehaftet; ungeklärte Herkunft daraus wird nicht
+  übernommen. Der Arbeitsbranch basiert auf `0e7784de93cb964c57baa9eabf1d28ea51959d98`.
+
+### Grenzen und nächster Schritt
+
+Der Nachtrag vom 07.11. behauptete eine **vollständige und dauerhafte**
+Sicherung auf sieben Kanälen; das war zu weitgehend. Die beschriebenen
+Betreiber-Signale und Tests decken nur die konkret geprüften Fälle ab, nicht
+alle Bildtypen, externen Plattformen oder Anbieterpflichten. Keine echte
+Pinterest-Veröffentlichung, keine Live-Abnahme und keine Betreiberfreigabe
+wurden für diesen Arbeitsstand vorgenommen. Die zwölf Einträge, tatsächliche
+Anbieter und Coverherkunft dürfen nicht durch Vermutung „geheilt“ werden.
+
+Der lokale Build nutzt wie die Deploy-/Wache-Workflows Hugo **0.168.0
+Extended**; `requirements-hugo.txt` pinnt dagegen **0.169.0** für die lokale
+Verifikation. Die Abweichung ist gesondert zu prüfen, nicht als identische
+Buildumgebung auszugeben. Vor einem Fristabschluss sind Integration, ein
+passender erfolgreicher offizieller Pages-Deploy, reale Kanalproben und
+beleggebundene Betreiberfreigabe nach dem Runbook erforderlich.
+## Nachtrag 2026-11-13 · Bildherkunft-Cover-Pipeline, CI-Gate und Freigabe-Liste (#1028)
+
+**Frist-ID:** `ki-vo-kennzeichnung-bestand` (Frist 02.12.2026) ·  
+**Status: Bildherkunft dauerhaft belegbar und im Deploy gegated; Anbieter-Nachweise, 12 ungeklärte `menschlich`-Einträge, Live-Abnahme und Betreiberfreigabe weiter offen. Frist bleibt offen.**  
+Selbsteinschätzung des Betreibers, keine Rechtsberatung.  
+**Akte:** `KI-VO-MASCHINENLESBAR-1028-COVER-PIPELINE-CI-FREIGABE-HIGHEND-2026-11-13.md`
+
+### Anlass
+
+Die Kernlücke #1028 auf der Bild-Ebene ist geschlossen: Die Covers sind beweisbar nicht von einem generativen Bildmodell stammend, sondern deterministisch gerenderte Vorlagen (Verlauf, Badge, Titeltext, Markenband). Derselbe Input ergibt dieselbe Datei – gemessen am 13.11.2026: **132 von 132 Covern pixelidentisch zu einem frischen Render**, 0 Befunde. Ohne den Beleg wäre „nicht deklariert" von „nicht geprüft" nicht zu unterscheiden; mit Beleg ist es eine Aussage.
+
+### Was dauerhaft behoben ist (kein Einmal-Patch)
+
+1. **Ein Schreibpfad statt zwei** (`scripts/generate_covers.py`): `make_cover` rendert und schreibt die responsive Varianten selbst; der bisherige zweite `ensure_responsive_variants`-Durchlauf (Pillow öffnet + speichert neu) wurde entfernt. Der war die Ursache für die 17/131 XMP-Verluste und die sha256-Abweichungen bei identischen Pixeln. Jetzt: ein Erzeugungspfad, idempotent (`--force` rendert nichts Neues, wenn nichts sich geändert hat).
+
+2. **Herkunft in die Datei** (`make_cover` ruft `_herkunft_markieren`): Jedes gerenderte Cover bekommt IPTC-XMP `DigitalSourceType=algorithmicMedia` (APP1, kein Neukodieren, Pixel bleiben unverändert). Alle 133 Cover-Dateien tragen die Markierung.
+
+3. **Frontmatter-Beleg** (`scripts/ki_cover_herkunft.py --attestieren`): `cover.ki_pruefung` (`digital_source_type`, `variante: renderer-v3`, `sha256` der markierten Datei, `verfahren`, `geprueft_am`) in 132 Artikeln/Säulen.
+
+4. **Stale-Referenzen heilen** (`ensure_cover_in_frontmatter`): Weist auf ein altes Cover-JPG (anderes Datum im Dateinamen) um auf `images/covers/<slug>.jpg` – passiert bei jeder `--force`/`--slug` Lauf selbstheilend. Das war die Ursache der 17 Drift-Befunde (Slug/Datum geändert, Cover-Datei nicht mitgezogen).
+
+5. **Reproduktionswache** (`--pruefen`): Rendert jedes Cover neu, verlangt Pixelgleichheit + Frontmatter-Beleg. 132 reproduziert, 2 außerhalb des Renderbereichs (Markenbild auf statischen /newsletter-Seiten, gezählt nicht bewertet), 0 Befunde.
+
+6. **Selbsttest** (`--selftest`): 5 Sabotage-Proben grün (fehlender Beleg erkannt, Attestation wirksam, manipuliertes Bild erkannt, KI-Beleg geschützt, IPTC in der Datei lesbar).
+
+7. **CI-Gate** (`.github/workflows/deploy.yml` + `data/blustradius-deploy.yml`): `--selftest` (gate-selbsttest) und `--pruefen` (inhalt, fail-closed) stehen vor dem Hugo-Block im `deploy`-Job; ein driftendes oder unbelegtes Cover stoppt den Deploy, bevor etwas gebaut wird. Blustradius-Register: 90/90 Schritte erklärt.
+
+8. **Freigabe-Liste** (`scripts/freigabe_liste.py` + `docs/FREIGABE-VORLAGE-KI-VO-KENNZEICHNUNG-BESTAND.md`): Die 12 `menschlich`-Einträge (14.08.–03.09.2026) werden vom Betreiber einzeln abgehakt (Zustand in `data/freigabe_state.json`, `ki_kennzeichnung.yaml` unangetastet). Erst wenn alle 12 getickt sind, erzeugt das Tool die Betreibererklärung mit `erledigt=ki-vo-kennzeichnung-bestand` und Unterschriftszeilen.
+
+### Messung am 13.11.2026
+
+`scripts/ki_cover_herkunft.py --pruefen`: **132/132** Cover reproduziert, 2 außerhalb des Renderbereichs, **0 Befunde**.  
+`scripts/ki_cover_herkunft.py --selftest`: 5/5 grün.  
+`scripts/ki_cover_herkunft.py --attestieren`: 132 Belege geschrieben, 2 bereits belegt, 0 Fehler.  
+`scripts/blustradius_register.py --check`: 90 Schritte, Vertrag erfüllt.  
+Reihenfolge (Pflicht): erst `--markieren` (Datei), dann `--attestieren` (sha256 der markierten Datei), dann `--pruefen`.
+
+### Offen vor Fristabschluss
+
+Unverändert offen und **nicht** technisch heilbar: Anbieter-Inventar und schriftliche Bestätigung zur Markierung nach Art. 50 Abs. 2 (Anfragevorlage in `docs/KI-TRANSPARENZ-ABNAHME.md` §1); die Herkunft der Titelbilder als solche (deshalb steht `digitalSourceType` im JSON-LD noch nirgends); die 12 ungeklärten `menschlich`-Einträge (warten auf Operator-Ticks in der Freigabe-Liste); die Live-Abnahme nach `docs/KI-TRANSPARENZ-ABNAHME.md` §4 (jetzt 11 Kanäle) und die Betreiberfreigabe (`erledigt=ki-vo-kennzeichnung-bestand`).
+
+## Nachtrag 2026-11-13 · Tondatei, schema.org, llms.txt und Interaktions-Offenlegung (#1028)
+
+**Frist-ID:** `ki-vo-kennzeichnung-bestand` (Frist 02.12.2026) ·
+**Status: Betreiberebene auf elf Kanälen vollständig und dauerhaft gesichert;
+Anbieter-Nachweise, Bildherkunft, Live-Abnahme und Betreiberfreigabe weiter
+offen. Frist bleibt offen, Issue #1028 bleibt offen.**
+Selbsteinschätzung des Betreibers, keine Rechtsberatung.
+**Akte:** `KI-VO-MASCHINENLESBAR-1028-TON-SCHEMA-INTERAKTION-HIGHEND-2026-11-13.md`
+
+### Anlass
+
+Der Nachtrag vom 07.11.2026 schloss mit sieben Kanälen. Am 13.11.2026 wurde
+nicht der Bericht gelesen, sondern **die Auslieferung durchgegangen** – jeder
+Weg, auf dem ein Inhalt das Haus verlässt. Drei Kanäle fehlten, und zwar
+dieselben drei, die eine reine Seitenprüfung nie sieht:
+
+1. **Die Tondatei selbst.** 115 Seiten kennzeichnen die maschinelle
+   Vorlese-Stimme sichtbar und maschinenlesbar – die ausgelieferte MP3 enthielt
+   **keine einzige** Herkunftsangabe. Wer sie herunterlädt, in eine App zieht
+   oder weitergibt, hält synthetische Sprache ohne Herkunft in der Hand. Für
+   Bilder war dieser Weg am 05.11.2026 geschlossen worden, für Ton nie.
+2. **Das JSON-LD.** `creditText` sagte, *dass* KI beteiligt war. Welcher Art
+   das Titelbild ist (`trainedAlgorithmicMedia`), stand im Bild und im
+   `<img>`-Attribut, aber nicht im schema.org-Markup – dem Ort, an den
+   Such- und Antwormalgorithmen zuerst schauen.
+3. **Der Assistent.** Der Worker schickte zu jeder Antwort einen Hinweis im
+   JSON-Körper (`hinweis`, `ki: true`); der Client las das Feld **nie**. Der
+   Dialog begrüßte mit „Hallo! 👋", als wäre ein Mensch am anderen Ende.
+
+Punkt 3 ist der rechtlich heikelste, weil Art. 50 Abs. 1 KI-VO seit
+**02.08.2026 ohne Übergangsfrist** gilt: Wer unmittelbar mit einem KI-System
+interagiert, muss das erkennen können – im ersten Moment, nicht in einer
+Fußzeile. Die Nachfrist bis 02.12.2026 betrifft nur Abs. 2 (Markierung am
+Werk) und nur Systeme, die vor dem 02.08.2026 in Verkehr kamen.
+
+### Was jetzt gilt
+
+Vier Kanäle kamen hinzu, alle aus derselben Quelle wie die bisherigen:
+
+| # | Kanal | Wirkung |
+|---|---|---|
+| 8 | schema.org `digitalSourceType` | Erzeugungsart des Titelbilds im JSON-LD – `TrainedAlgorithmicMediaDigitalSource` bzw. `CompositeWithTrainedAlgorithmicMediaDigitalSource` (IPTC-Vokabular), **nur** bei belegter Erzeugungsart |
+| 9 | Ton in der Datei | `DigitalSourceType`, `AISystemUsed`, `Provenance`, `Software` als ID3-TXXX (MP3) bzw. RIFF-INFO (WAV); ohne Neukodierung, bytegenau umkehrbar |
+| 10 | `llms.txt` | Abschnitt „Woher diese Inhalte kommen" für KI-Antwortmaschinen: Text, Bild, Ton, Assistent, Betreiber-Erklärung statt Anbieterpflicht |
+| 11 | Interaktions-Offenlegung | Satz im Dialogkopf, Hinweis unter jeder Antwort, HTTP-Kopfzeile `ai-generated` auf **jedem** Antwortpfad |
+
+**Warum Ton der wichtigste der vier ist:** Er ist der einzige Kanal, der die
+Seite physisch verlässt. Eine Kennzeichnung, die beim Herunterladen abfällt,
+ist auf dem Verbreitungsweg keine. Genau das will der Verhaltenskodex vom
+10.06.2026 verhindern, wenn er nachgelagerte Akteure verpflichtet, vorhandene
+Markierungen nicht zu entfernen – der Betreiber muss sie also erst einmal
+**in** das Werk legen. Der Marker schreibt nur, was ein Erzeugerbeleg
+(`*.track.json`) deckt; ohne Beleg bleibt die Datei unangetastet. Er kodiert
+nichts neu (Audiodaten byteweise unverändert), überschreibt keine fremden
+Metadaten und lässt sich bytegenau zurücknehmen – geprüft an echter
+`ffmpeg`-Ausgabe (MP3 ID3v2.4, WAV), unabhängig gegengelesen mit `mutagen`
+und `ffprobe`.
+
+**Warum schema.org heute nirgends steht:** Für **kein** Titelbild ist eine
+Erzeugungsart belegt (0 von 115 Artikeln). Das Feld wird deshalb nicht
+gesetzt – es an `ai_generated` zu hängen wäre eine Erfindung über die
+Bildherkunft. Der Kanal ist fertig und nachgewiesen (Probe mit gesetztem Wert:
+genau eine Seite trägt die Angabe, keine andere), er wartet auf Belege.
+
+**Was die Interaktions-Offenlegung ausdrücklich nicht ist:** keine Aussage
+darüber, ob der Assistent *live* ist. Ist kein Endpoint gesetzt, erscheint
+kein Widget – und mit ihm keine Offenlegung für etwas, das es nicht gibt.
+Beides hängt am selben Schalter; eine Fassung ohne die andere ist nicht
+möglich. Das Impressum sagt jetzt genau das und behauptet weder einen
+laufenden Chatbot noch dessen Abwesenheit.
+
+### Messung am 13.11.2026
+
+`ki_provenienz_gate.py --gate`: **115/115** Seiten, 19 Abschnitte, **50**
+Feed-Items, 0 Tonspuren im Lauf, **0 Funde**. `--selftest` 15 Szenarien grün
+(neu: M9 fehlender Abschnitt und M9 überzogene Behauptung).
+`ki_assistent_gate.py --selftest` grün mit neuer Regel **KA11** (Sabotageprobe:
+Offenlegung aus dem Dialogkopf entfernt → erkannt). Worker-Tests **20/20**
+(`node --test`), Audio-Tests **16/16** (davon 4 Encoder-Proben mit echtem
+`ffmpeg`, sonst selbstüberspringend). Gate-Gegenproben: Tonspur ohne
+Markierung → M3-Fund, nach `--write` → wieder grün; Fremdherkunft →
+`blockiert`; `--entfernen` → bytegleich.
+
+### Offen vor Fristabschluss
+
+Unverändert offen und **nicht** technisch heilbar: Anbieter-Inventar und
+schriftliche Bestätigung zur Markierung nach Art. 50 Abs. 2; die Herkunft der
+Titelbilder (deshalb steht `digitalSourceType` im JSON-LD noch nirgends); die
+12 ungeklärten `menschlich`-Einträge (14.08.–03.09.2026); die Live-Abnahme nach
+`docs/KI-TRANSPARENZ-ABNAHME.md` §4, jetzt um vier Kanäle erweitert, und die
+Betreiberfreigabe (`erledigt=ki-vo-kennzeichnung-bestand`).
+
+---
+
 ## Nachtrag 2026-11-07 · Kanaltreue, Verbreitungsweg und Dauerwache (#1028)
 
 **Frist-ID:** `ki-vo-kennzeichnung-bestand` (Frist 02.12.2026) ·
-**Status: Betreiberebene auf sieben Kanälen vollständig und dauerhaft gesichert;
-Anbieter-Nachweise, Bildherkunft und Live-Abnahme weiter offen. Frist bleibt
-offen.** Selbsteinschätzung des Betreibers, keine Rechtsberatung.
+**Historischer Status vom 07.11.:** Die damalige Aussage „Betreiberebene auf
+sieben Kanälen vollständig und dauerhaft gesichert“ war überzogen und ist
+durch den Nachtrag vom 12.11. eingeschränkt. Anbieter-Nachweise, Bildherkunft,
+Registerprüfung und Live-Abnahme bleiben offen; die Frist bleibt offen.
+Selbsteinschätzung, keine Rechtsberatung.
 **Akte:** `KI-VO-MASCHINENLESBAR-1028-KANALTREUE-DAUERWACHE-HIGHEND-2026-11-07.md`
 
 ### Anlass
@@ -52,7 +316,9 @@ Genau das war unvollständig.
 
 ### Was jetzt gilt
 
-Sieben Kanäle aus **einer** Quelle (`layouts/_partials/_funcs/ki_modalitaeten.html`):
+Sieben damals betrachtete Kanäle und Schutzmaßnahmen; der Modalitäten-Helfer
+`layouts/_partials/_funcs/ki_modalitaeten.html` ist gemeinsame Quelle für
+HTML-/Feed-Signale, während Bilddateien und Publisher weitere Pfade haben:
 Meta-Signale mit `scope` und `rel="describedby"`, schema.org `creditText`,
 Bildattribute am `<img>`, IPTC `DigitalSourceType` in der Bilddatei,
 **sichtbare Angabe zur Tonspur** je Modalität, **Feed-Kanal** auf Kanal- und
@@ -116,7 +382,7 @@ nicht, benennen aber erstmals konkret, was „maschinenlesbar" heißen soll:
 | 10.06.2026 | Verhaltenskodex zur Transparenz KI-generierter Inhalte (Art. 50 Abs. 7) | Abschnitt 1 = Anbieter (Markierung), Abschnitt 2 = Betreiber (Kennzeichnung). Geschichteter Ansatz: **digital signierte, zeitgestempelte Metadaten** plus **unwahrnehmbares Wasserzeichen**, optional Fingerabdruck/Register. Bei Freitext gilt die Wasserzeichenmaßnahme oberhalb von 200 Tokens. Beitritt freiwillig und je Abschnitt. |
 | 08./09.07.2026 | Angemessenheitsbewertung von Kommission und KI-Ausschuss | Der Kodex gilt als geeigneter Nachweisweg für die von ihm adressierten Pflichten – er ersetzt die Verordnung nicht. |
 | 20.07.2026 | Leitlinien der Kommission zu Art. 50, C(2026) 5054 final | Auslegungshilfe, u. a. zu Deepfakes und redaktioneller Kontrolle; enthält auch ein freiwilliges EU-Kennzeichnungssymbol. |
-| 27.08.2026 | Verordnung (EU) 2026/1744 („Digital Omnibus") in Kraft | Verschiebt die Hochrisiko-Pflichten, **nicht** Art. 50. Einzige Erleichterung: Art. 50 Abs. 2 erst bis **02.12.2026** für Systeme, die vor dem 02.08.2026 in Verkehr gebracht wurden (Art. 113 n. F.). |
+| 27.08.2026 | Verordnung (EU) 2026/1744 („Digital Omnibus") in Kraft | Für die Nachfrist zu Art. 50 Abs. 2 gilt bei vor dem 02.08.2026 in Verkehr gebrachten Systemen der **02.12.2026**. Korrektur 12.11.: Rechtsgrundlage ist **Art. 111 Abs. 4**, nicht wie hier zuvor angegeben Art. 113. |
 | 29.07.2026 | KI-MIG (Gesetz zur Durchführung der VO (EU) 2024/1689) in Kraft | **Bundesnetzagentur** ist zentrale Marktüberwachungsbehörde; Verstöße gegen Art. 50 sind nach Art. 99 Abs. 4 bußgeldbewehrt (bis 15 Mio. € oder 3 %, für KMU der niedrigere Betrag). |
 
 Quellen: [Kommission: Verhaltenskodex](https://digital-strategy.ec.europa.eu/en/news/commission-publishes-code-practice-marking-and-labelling-ai-generated-content),
@@ -138,14 +404,13 @@ deshalb als Betreiberangabe, nicht als Standard deklariert).
 Recherchestand 05.11.2026; keine der Quellen ist eine Auskunft an diesen
 Betreiber. Im Einzelfall bleibt fachanwaltliche Prüfung vorbehalten.
 
-**Rollenklärung (unverändert, jetzt mit Belegkette):** Dieser Blog ist
-**Betreiber** (er setzt fremde Modelle ein), nicht Anbieter. Die
-maschinenlesbare Markierung der Ausgabe schuldet der Anbieter des jeweiligen
-Systems – für Bestandssysteme bis 02.12.2026. Was der Betreiber schuldet, ist
-die wahrnehmbare Offenlegung (Art. 50 Abs. 4/5) und – wenn er Inhalte unter
-eigenem Namen weitergibt – der Nachweis, dass er die Anbieter-Markierung nicht
-entfernt. Ein eigenes Meta-Tag ist deshalb keine Erfüllung von Abs. 2; es ist
-eine **zusätzliche, maschinenlesbare Betreiberangabe**.
+**Rollenklärung – Korrektur 12.11.:** Dass der Blog ausschließlich Betreiber
+und niemals Anbieter sei, ist ohne Inventar und Einzelfallprüfung nicht belegt.
+Art. 50 Abs. 2 betrifft grundsätzlich die Anbieter; Abs. 4/5 regeln getrennt
+Offenlegungspflichten für bestimmte Fälle. Die frühere pauschale Aussage einer
+Nachweispflicht jedes weitergebenden Betreibers für nicht entfernte
+Anbieter-Markierungen ist nicht hinreichend belegt. Ein eigenes Meta-Tag ist
+keine Erfüllung von Abs. 2; es ist eine **zusätzliche Betreiberangabe**.
 
 ### Was gebaut wurde (maschinenlesbare Betreiberebene, vier Kanäle)
 
@@ -228,11 +493,11 @@ NPM-Zugänge: `ki:provenienz[:gate]`, `ki:bild[:gate|:markieren]`, `test:ki`.
    Erst danach den Workflow mit `erledigt=ki-vo-kennzeichnung-bestand`
    ausführen. Issue #1028 und Frist bleiben bis dahin offen.
 
-**Neu offener Punkt:** Die Ausspielwege OG-Bild, Pinterest-Pin und
-RSS/Feeds tragen die neuen Angaben nicht. Für Text ist das unschädlich
-(keine Deepfake-Pflicht ohne öffentliches Interesse), für ein künftig
-deklariertes KI-Cover müssten OG-/Pinterest-Dateien gesondert markiert oder
-die Ausspielung unterbunden werden.
+**Damals offener Punkt:** OG-Bild, Pinterest-Pin und RSS/Feeds trugen die
+neuen Angaben nicht. Der pauschale frühere Satz, das sei für Text
+unschädlich, war zu weitgehend: Textpflichten und Deepfake-Pflichten sind
+getrennt nach Inhalt und Ausspielweg zu prüfen. Der Nachtrag vom 12.11.
+beschreibt die lokale Feed-/Pinterest-Absicherung und ihre Live-Grenzen.
 
 ---
 
@@ -423,8 +688,9 @@ Keine pauschale Behauptung einer erfüllten Anbieterpflicht oder C2PA-Signatur.
   am Artikelanfang, auch wenn eine redaktionelle Freigabe vorliegt. Der alte
   Wortlaut „Mit KI-Unterstützung recherchiert“ deckte das Erstellen nicht ab.
   Das `data-ff-ki-label` ist lediglich ein lokal maschinenlesbarer HTML-Haken,
-  kein Wasserzeichen. Das Gate kann bei ungeklärter Herkunft vorsorglich
-  `true` setzen: Das ist keine verifizierte Provenienz.
+  kein Wasserzeichen. **Korrektur 12.11.:** Bei ungeklärter Herkunft setzt
+  das Gate nicht mehr vorsorglich `true`; nur eine positive Registerangabe
+  rechtfertigt eine entsprechende mechanische Korrektur.
 - Bild und Text werden getrennt behandelt: Nur bei **belegter** KI-Erzeugung
   oder -Bearbeitung eines Covers `cover.ai_generated: true` im Frontmatter
   setzen. Dann erscheint die sichtbare Bildunterschrift im Artikel **und** in

@@ -21,8 +21,20 @@ cover:
   image: "images/covers/2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen.jpg"
   alt: "Günstigen Mietwagen für den Urlaub buchen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: ff79b04d101cc410f7816f0db4aebaa5b21cc8138e943cd21b823e68eb20783f
+    geprueft_am: 2026-11-13
 faktencheck: 2026-11-05
-kurzantwort: "Buche den Mietwagen mindestens 21 Tage vor deiner Reise – du sparst laut ADAC‑Umfrage durchschnittlich 15 % gegenüber einer Last‑Minute‑Buchung (). Vergleiche die Preise auf Vergleichsportalen und achte darauf, dass keine versteckten Zusatzgebühren von rund 9 € pro Tag anfallen ()."
+kurzantwort: "Buche den Mietwagen früh – mindestens drei Wochen vor der Reise. Ein früher Buchungszeitpunkt ist meist günstiger als eine Buchung kurz vor dem Start. Vergleiche die Preise auf Vergleichsportalen und prüfe, welche Zusatzgebühren im Endpreis stecken, statt nur den Tagespreis zu lesen."
+quellen:
+  - id: "Q1"
+    titel: "Reise & Mobilität – Beratung zu Mietwagen, Storno und Reisekosten"
+    url: "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-11-05"
 ---
 
 Du planst den Sommerurlaub und brauchst ein flexibles Fortbewegungsmittel für die Strandregion.  

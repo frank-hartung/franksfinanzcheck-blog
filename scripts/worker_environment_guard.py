@@ -333,10 +333,11 @@ def main(argv: list[str] | None = None) -> int:
         ziel = f"https://github.com/{os.environ.get('GITHUB_REPOSITORY', '')}/settings/environments/{ENVIRONMENT}"
         meldung = (f"Environment `{ENVIRONMENT}` ist nicht deploy-sicher: " + " ".join(gruende)
                    + f" Settings: {ziel}"
-                   + " Herstellen, soweit eine GitHub-API es zulässt: "
-                     "`python3 scripts/worker_environment_einrichten.py --anwenden` "
-                     "(Required Reviewer und Branch-Regel `main`; der "
-                     "Administrator-Bypass bleibt ein Schalter im Dashboard)."
+                   + " Im Dashboard Required Reviewer, nur Branch `main` und die "
+                     "Admin-Bypass-Sperre einrichten. Nur bei leerem Ausgangszustand "
+                     "kann `python3 scripts/worker_environment_einrichten.py --anwenden "
+                     "--reviewer <login>` Reviewer und Branch-Regel versuchen; "
+                     "den Bypass setzt dieses Werkzeug nicht."
                    + " Deploy bleibt vor dem Zugriff auf Cloudflare-Secrets gesperrt.")
         annotation("error", meldung, titel="Cloudflare-Produktionsfreigabe unsicher")
         return 1

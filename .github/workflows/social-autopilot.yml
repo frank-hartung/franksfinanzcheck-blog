@@ -94,6 +94,7 @@ jobs:
           python3 scripts/social_studio.py --selftest
           python3 scripts/social_calendar.py --selftest
           python3 scripts/social_perf_feedback.py --selftest
+          python3 -m unittest scripts.tests.test_pinterest_ki_provenienz -v
 
       - name: Plan erneuern / Status schreiben
         if: ${{ github.event.inputs.modus == 'plan' || github.event.inputs.modus == 'status' }}

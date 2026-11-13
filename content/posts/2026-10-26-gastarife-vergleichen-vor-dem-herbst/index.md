@@ -23,6 +23,12 @@ cover:
   image: "images/covers/2026-10-26-gastarife-vergleichen-vor-dem-herbst.jpg"
   alt: "Gastarife und Jahreskosten vergleichen"
   caption: "Gastarife anhand der Gesamtkosten prüfen"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 875653d4d94ea25a3c13a0be16b4ab8b6972c8f78bddb91e57c83831509c85ae
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Strom- und Gaspreise: Preisänderungen und Abschläge"

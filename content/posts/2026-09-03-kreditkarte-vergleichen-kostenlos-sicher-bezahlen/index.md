@@ -21,6 +21,12 @@ cover:
   image: "images/covers/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen.jpg"
   alt: "Kreditkarte vergleichen: Kostenlos und sicher zahlen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: fc6d125faab610ad6a192ad13d26a499ce3212d1982a79d45f079007e58fc02b
+    geprueft_am: 2026-11-13
 quellen:
   - titel: "Gesetzliche Einlagensicherung in Deutschland"
     url: "https://www.bundesbank.de/de/aufgaben/bankenaufsicht/einlagensicherung/einlagensicherung-602936"

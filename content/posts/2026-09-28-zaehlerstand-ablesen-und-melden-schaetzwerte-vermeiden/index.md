@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden.jpg"
   alt: "Zählerstand ablesen und melden: Schätzwerte vermeiden"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 06da67eb7b386ee26d9b8beea361bb2b4a41c8bbe43e8714868faa2b228d2d94
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur – Verbraucherportal: Preise, Abschläge und Abrechnung"

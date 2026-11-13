@@ -330,6 +330,13 @@ class WacheTest(unittest.TestCase):
         (self.root / "content/posts").mkdir(parents=True)
         (self.root / "content/posts/a.md").write_text(
             _frontmatter(["title: A", "ai_generated: true"]), encoding="utf-8")
+        (self.root / "data").mkdir()
+        (self.root / "data/ki_kennzeichnung.yaml").write_text(
+            "maschinell:\n  - a\nmenschlich:\n", encoding="utf-8")
+        (self.root / "data/recht-fristen.yaml").write_text(
+            f'fristen:\n  - id: {gate.FRIST_ID}\n    faellig_am: "2026-12-02"\n',
+            encoding="utf-8")
+        (self.root / kp.STATE).write_text('{"ungeklaert_erstmals": {}}', encoding="utf-8")
 
     def test_zweiter_lauf_schreibt_keinen_zustand(self):
         erster = gate.wache(self.root, nur_quelle=True)

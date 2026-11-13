@@ -1446,6 +1446,23 @@ history:
     #Privathaftpflicht #Versicherung #KFZVersicherung #KFZHaftpflicht'
   ref: '117597882570629474'
   ai: true
+- posted_at: '2026-11-13T14:13:26.995638+01:00'
+  channel: mastodon
+  slug: 2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem
+  title: 'Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas'
+  angle: nutzen
+  url: https://mastodon.social/@FranksFinanzcheck/117609307232793284
+  ok: true
+  text: '🔧 Nutze dein Sonderkündigungsrecht und steig aus der teuren Grundversorgung
+    aus, bevor die neue Gasrate gilt.
+
+    Du kannst den Vertrag bis zum Tag vor der Preisänderung kündigen und sofort nach
+    besseren Tarifen mit Preisgarantie suchen.
+
+    https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/?utm_source=mastodon&utm_medium=social&utm_campaign=autopilot
+    #Gaspreis #Preisgarantie #GastarifWechseln #GastarifeVergleichen'
+  ref: '117609307232793284'
+  ai: true
 failures:
 - at: '2026-09-30T18:51:07.136181+02:00'
   channel: mastodon
@@ -1471,4 +1488,4 @@ failures:
   channel: mastodon
   slug: 2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026
   reason: 'L9 Zahl ohne Beleg im Artikel: 503020'
-updated_at: '2026-11-12T14:51:03.646186+01:00'
+updated_at: '2026-11-13T14:13:31.026343+01:00'

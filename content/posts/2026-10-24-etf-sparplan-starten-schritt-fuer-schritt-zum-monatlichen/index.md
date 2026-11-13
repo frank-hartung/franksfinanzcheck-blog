@@ -27,6 +27,12 @@ cover:
   image: "images/covers/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen.jpg"
   alt: "ETF‑Sparplan starten: Schritt‑für‑Schritt zum Sparplan"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 0fb05b8603de3280de1cbe55ce76521d76ed85d34ba4744296d9cff38e2e85a4
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Referenzseite destatis.de"

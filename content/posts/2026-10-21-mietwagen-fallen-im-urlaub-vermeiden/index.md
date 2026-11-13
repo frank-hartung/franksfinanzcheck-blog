@@ -21,6 +21,12 @@ cover:
   image: "images/covers/2026-10-21-mietwagen-fallen-im-urlaub-vermeiden.jpg"
   alt: "Mietwagen-Fallen im Urlaub vermeiden"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: ae8f1a2f7a8a9af3c7783634c2b2fefc1cc65148662c8d918b91dd33dda153fa
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Reise & Mobilität"

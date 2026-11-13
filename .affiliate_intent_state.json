@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-12 12:02:40 UTC",
+ "generated_at": "2026-11-13 11:46:42 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 128,
- "checked_links": 305,
+ "checked_articles": 129,
+ "checked_links": 309,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -175,7 +175,7 @@
   {
    "code": "IW2",
    "slug": "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden",
-   "line": 98,
+   "line": 100,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
@@ -197,73 +197,7 @@
   {
    "code": "IW2",
    "slug": "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-   "line": 258,
-   "route": "allgemein",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
-   "slug": "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
-   "line": 267,
-   "route": "allgemein",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
-   "slug": "2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-   "line": 18,
-   "route": "allgemein",
-   "slot": "top",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "top-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
-   "slug": "2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-   "line": 60,
-   "route": "allgemein",
-   "slot": "mid",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "mid-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
-   "slug": "2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-   "line": 131,
-   "route": "allgemein",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
-   "slug": "2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
-   "line": 147,
-   "route": "allgemein",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „DSL- & Internettarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
-   "slug": "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten",
-   "line": 275,
+   "line": 260,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
@@ -281,6 +215,83 @@
    "severity": "P3",
    "blocking": false,
    "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Kreditkarten“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+   "line": 18,
+   "route": "allgemein",
+   "slot": "top",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "top-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+   "line": 60,
+   "route": "allgemein",
+   "slot": "mid",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "mid-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+   "line": 131,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Gastarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-12-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
+   "line": 147,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „DSL- & Internettarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-12-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
+   "line": 154,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „DSL- & Internettarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+   "line": 275,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+   "line": 282,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   }
  ],
  "errors": []

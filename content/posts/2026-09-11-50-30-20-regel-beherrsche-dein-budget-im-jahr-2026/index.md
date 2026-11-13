@@ -19,6 +19,12 @@ cover:
   image: "images/covers/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026.jpg"
   alt: "50-30-20-Regel: Beherrsche dein Budget"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: f474fc648fed66a1239baee1b17691caac27a6331008ab023e08d373111af3a5
+    geprueft_am: 2026-11-13
 quellen:
   - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"
     url: "https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Einkommen-Konsum-Lebensbedingungen/Konsumausgaben-Lebenshaltungskosten/_inhalt.html"

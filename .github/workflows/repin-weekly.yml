@@ -50,6 +50,9 @@ jobs:
       - name: Krypto- und YAML-Bibliotheken für Token-Auto-Refresh & Pins installieren
         run: pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
 
+      - name: KI-Herkunft an Pinterest-Sendegrenzen testen
+        run: python3 -m unittest scripts.tests.test_pinterest_ki_provenienz -v
+
       - name: Artikel bei Pinterest nachpinnen
         env:
           PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}

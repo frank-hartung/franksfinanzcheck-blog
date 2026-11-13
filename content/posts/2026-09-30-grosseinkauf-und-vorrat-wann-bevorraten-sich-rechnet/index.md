@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet.jpg"
   alt: "Großeinkauf und Vorrat: Wann Bevorraten sich rechnet"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 8ad4ea9cb44affdaca126f23c8c75f777b54db19c1e8464b3e6a5dea885d23d9
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Verbraucherzentrale – Effektiv sparen, auch mit kleinem Budget"

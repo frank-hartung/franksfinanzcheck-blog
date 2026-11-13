@@ -1441,6 +1441,11 @@ class WizardScheinGruenVertrag(unittest.TestCase):
                 "#!/usr/bin/env bash\n"
                 'case "$*" in\n'
                 '  "auth status"*) exit 0 ;;\n'
+                # 12.11.2026 (#1030): Der Wizard liest Variablen über die REST-API
+                # (`gh variable` fehlt in gh 2.23.0). Die Attrappe muss deshalb den
+                # REST-Pfad bedienen – sonst prüft der Test nur den Fehlerfall.
+                '  api*"actions/variables/BACKUP_REPO"*) echo \'{"name":"BACKUP_REPO","value":"frank-hartung/franksfinanzcheck-backup"}\'; exit 0 ;;\n'
+                '  api*"actions/variables/KV_NAMESPACE_ID_ABO"*) echo \'{"name":"KV_NAMESPACE_ID_ABO","value":"0123456789abcdef0123456789abcdef"}\'; exit 0 ;;\n'
                 '  "variable get BACKUP_REPO"*) echo "frank-hartung/franksfinanzcheck-backup"; exit 0 ;;\n'
                 '  "variable get KV_NAMESPACE_ID_ABO"*) echo "0123456789abcdef0123456789abcdef"; exit 0 ;;\n'
                 '  "variable get "*) exit 1 ;;\n'
@@ -1458,6 +1463,67 @@ class WizardScheinGruenVertrag(unittest.TestCase):
                          "ungeprüfte Pflichtpunkte ergaben wieder Exit 0:\n" + lauf.stdout)
         self.assertNotIn("Alle Pflichtpunkte sind eingerichtet", lauf.stdout)
         self.assertIn("NICHT bestätigt", lauf.stdout)
+
+    def _variablen_attrappe(self, ordner: str, verhalten: str) -> None:
+        """gh-Attrappe, die NUR die Variablen-API unterschiedlich beantwortet.
+
+        `verhalten`: `404` = Variable fehlt, `403` = Lesen gesperrt.
+        Alles andere (Secret-Liste, Environment, Ziel-Repo) bleibt unlesbar –
+        so bleibt der Lauf rot und der Befund eindeutig der Variable zuzuordnen.
+        """
+        gh = Path(ordner) / "gh"
+        if verhalten == "404":
+            variablen = ('  api*"actions/variables/"*) '
+                         'echo "gh: Not Found (HTTP 404)" >&2; exit 1 ;;\n')
+        else:
+            variablen = ('  api*"actions/variables/"*) '
+                         'echo "gh: Resource not accessible by integration (HTTP 403)" >&2;'
+                         ' exit 1 ;;\n')
+        gh.write_text(
+            "#!/usr/bin/env bash\n"
+            'case "$*" in\n'
+            '  "auth status"*) exit 0 ;;\n'
+            + variablen +
+            '  api*"secrets"*) echo "gh: Not Found (HTTP 404)" >&2; exit 1 ;;\n'
+            '  api*"deployment-branch-policies"*) echo "gh: Not Found (HTTP 404)" >&2; exit 1 ;;\n'
+            '  api*"environments/backup"*) echo "gh: Not Found (HTTP 404)" >&2; exit 1 ;;\n'
+            '  api*) echo "gh: Not Found (HTTP 404)" >&2; exit 1 ;;\n'
+            "esac\n"
+            "exit 1\n", encoding="utf-8")
+        gh.chmod(0o755)
+
+    def test_fehlende_variable_ist_offen_und_nicht_unlesbar(self):
+        """404 = „fehlt“ (Einrichtungs-Rat) – nicht „nicht prüfbar“."""
+        import subprocess
+        import tempfile
+        with tempfile.TemporaryDirectory() as ordner:
+            self._variablen_attrappe(ordner, "404")
+            lauf = subprocess.run(["bash", str(self.WIZARD), "--check"],
+                                  capture_output=True, text=True, timeout=180,
+                                  env=self._wizard_umgebung(ordner))
+        self.assertEqual(lauf.returncode, 1, lauf.stdout)
+        self.assertIn("E1 Repository-Variable BACKUP_REPO fehlt", lauf.stdout)
+        self.assertIn("E6 Repository-Variable KV_NAMESPACE_ID_ABO fehlt", lauf.stdout)
+        self.assertNotIn("Variable nicht lesbar", lauf.stdout)
+
+    def test_gesperrte_variable_api_ist_ungeprueft_und_nie_fehlt(self):
+        """403 = „nicht prüfbar“ – ein gesperrter Lesetunnel ist kein fehlender Wert.
+
+        Vor dem 12.11.2026 endete derselbe Fall als leere Ausgabe und damit als
+        „Variable fehlt“: Der Wizard schickte den Inhaber los, einen Wert
+        einzutragen, der längst stand (gh 2.23.0 kennt `gh variable get` nicht).
+        """
+        import subprocess
+        import tempfile
+        with tempfile.TemporaryDirectory() as ordner:
+            self._variablen_attrappe(ordner, "403")
+            lauf = subprocess.run(["bash", str(self.WIZARD), "--check"],
+                                  capture_output=True, text=True, timeout=180,
+                                  env=self._wizard_umgebung(ordner))
+        self.assertEqual(lauf.returncode, 1, lauf.stdout)
+        self.assertIn("Variable nicht lesbar", lauf.stdout)
+        self.assertNotIn("E1 Repository-Variable BACKUP_REPO fehlt", lauf.stdout)
+        self.assertNotIn("Alle Pflichtpunkte sind eingerichtet", lauf.stdout)
 
     def test_in_ci_wird_der_menschen_schritt_verweigert(self):
         """Die Einrichtung ist ein Menschen-Schritt – in CI nie „grün“ durchlaufen.
@@ -1594,13 +1660,24 @@ class SelbstheilungVertrag(unittest.TestCase):
         # Ein Beweis, der still grün wird, wenn er scheitert, ist keiner.
         block = text.split("Leerlauf prüfen – grüner Lauf ohne Sicherung", 1)[1].split(
             "- name:", 1)[0]
-        self.assertIn('if [ "$RC" = "1" ]', block)
+        self.assertIn('case "$RC" in', block)
         self.assertIn("exit 1", block)
         # Ein grüner Lauf, der nichts sichert, ist der schwerere Befund als
         # „bitte einrichten“ – er behauptet bereits Erfolg. Deshalb eigener
         # Exit-Code (4), eigener Rat, rot.
-        self.assertIn('if [ "$RC" = "4" ]', block)
+        self.assertIn("4)", block)
         self.assertIn("Backup-Leerlauf", block)
+        # FAIL-CLOSED (12.11.2026, #1030): Die frühere if-Kette ließ Exit 3 und
+        # JEDEN unbekannten Code still auf `exit 0` fallen – ein Urteil, das
+        # niemand kennt, galt damit als grün. Der Rückfall-Zweig muss rot sein.
+        zweige = block.split('case "$RC" in', 1)[1].split("esac", 1)[0]
+        rueckfall = zweige.rsplit("*)", 1)[1]
+        self.assertIn("exit 1", rueckfall,
+                      "jeder unbekannte Exit-Code der Leerlauf-Prüfung muss rot werden")
+        self.assertNotIn("exit 0", rueckfall)
+        # Und der Einrichtungs-Vorrang (Exit 3) wird benannt, nicht verschluckt.
+        self.assertIn("3)", block)
+        self.assertIn("Backup-Einrichtung offen", block)
 
     def test_rueckweg_nachweis_wird_nicht_mehr_stillschweigend_uebersprungen(self):
         """Der Befund vom 07.11.: `skipped` statt „nicht belegt“."""

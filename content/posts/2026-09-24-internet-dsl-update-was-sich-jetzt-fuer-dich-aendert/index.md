@@ -20,6 +20,12 @@ cover:
   image: "images/covers/2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert.jpg"
   alt: "DSL-Tarif prüfen: Effektivpreis statt Lockpreis, Routermiete im Blick"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 8a765d99e3d2764bbbe49ea5f23f3ef8f2e036c8d269ed81791cbef15d1db0b0
+    geprueft_am: 2026-11-13
 pin_title: "DSL-Tarif prüfen: Effektivpreis statt Lockpreis, Routermiete im Blick"
 pin_description: "*Werbung | Viele Haushalte zahlen bei Internet und DSL für zu viel Leistung oder zu alte Verträge. So prüfst du Bedarf, Effektivpreis und Wechseloptionen sinnvoll. Mehr Spartipps auf FranksFinanzcheck! #internetdslupdate #dslupdate #dslvergleich"
 quellen:

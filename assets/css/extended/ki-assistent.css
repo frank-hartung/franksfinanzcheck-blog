@@ -144,6 +144,34 @@
   color: var(--secondary);
   line-height: 1.4;
 }
+/* ---- KI-Offenlegung nach Art. 50 Abs. 1 KI-VO (#1028, 13.11.2026) ----
+   WARUM DIESE REGEL EXISTIERT
+   Der Satz „Antworten erzeugt ein KI-System – kein Mensch." stand vorher
+   nirgends im Widget: Der Dialog begrüßte mit „Hallo! 👋", als wäre ein
+   Mensch am anderen Ende. Die Offenlegung muss im ersten Moment sichtbar
+   sein (Art. 50 Abs. 1), nicht erst nach dem Scrollen – deshalb steht sie
+   im Kopf des Dialogs, vor der Beschreibung.
+
+   WARUM NICHT `--secondary` UND `opacity`
+   Die Fußzeile fährt ihre Zurückhaltung über `--secondary` + `opacity: .7`
+   (gemessen: deutlich unter 4.5:1). Für den Offenlegungssatz ist das keine
+   Option – er ist Pflichttext, kein Beiwerk. Er nimmt `--content`
+   (= `--primary`) in voller Deckkraft und wird durch eine feine Linie
+   abgesetzt, damit er als eigener Satz gelesen wird, nicht als Fließtext
+   der Überschrift. Kontrast wird gemessen, nicht behauptet:
+   `scripts/a11y_audit.py` löst beide Themen aus der CSS-Quelle auf. */
+.ff-ki-header__ki {
+  margin: 2px 0 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--primary);
+  line-height: 1.35;
+  padding-left: 8px;
+  border-left: 2px solid var(--primary);
+}
+/* Kein Einblenden, keine Bewegung: Der Satz ist bei jedem Öffnen da –
+   eine Offenlegung, die hereinfährt, ist keine Offenlegung. */
+
 .ff-ki-header__close {
   margin-left: auto;
   width: 32px;
@@ -351,6 +379,22 @@
   color: var(--secondary);
   opacity: 0.7;
   flex-shrink: 0;
+}
+
+/* ---- Offenlegung je Antwort (Art. 50 Abs. 1, #1028) ----
+   Der Worker schickt zu jeder Antwort einen Hinweissatz mit. Angezeigt
+   wird er leise, aber LESBAR: `--secondary` in voller Deckkraft (kein
+   Eltern-`opacity` wie in der Fußzeile), eigene Zeile, abgesetzt durch
+   eine feine Linie. Er darf die Antwort nicht erschlagen – aber er darf
+   auch nicht verschwinden. */
+.ff-ki-msg__hinweis {
+  margin: 6px 0 0;
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: var(--secondary);
+  opacity: 1;
 }
 
 /* ---- Error State ---- */

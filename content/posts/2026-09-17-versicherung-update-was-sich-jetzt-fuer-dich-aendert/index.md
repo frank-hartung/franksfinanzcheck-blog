@@ -18,6 +18,12 @@ cover:
   image: "images/covers/2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert.jpg"
   alt: "Versicherungsbeiträge steigen: Sonderkündigung und Stichtage prüfen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: cc2fcc0a13d42130ecb43b5dc80b00c4efe8b4b07d4b1a91bd3a9e672c5b0e14
+    geprueft_am: 2026-11-13
 pin_title: "Versicherungsbeiträge steigen: Sonderkündigung und Stichtage prüfen"
 pin_description: "*Werbung | Zum Jahresende steigen oft Beiträge oder Bedingungen ändern sich. So prüfst du Versicherungen klug, nutzt Fristen und vermeidest unnötige Mehrkosten. Mehr Spartipps auf FranksFinanzcheck! #versicherungupdate #versicherungenpruefen"
 quellen:

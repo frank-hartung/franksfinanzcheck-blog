@@ -13,28 +13,33 @@ im Repo existierte kein Weg, diesen Zustand zu beenden – nur einer, ihn zu
 melden. Das Gate ist damit eine Prüfung ohne Heilpfad: Jeder Deploy war rot,
 und die einzige Antwort war ein Rat in Prosa.
 
-Dieses Werkzeug ist der Heilpfad. Es führt den Zielzustand herbei, soweit eine
-GitHub-API ihn überhaupt zulässt, und sagt über den Rest die Wahrheit:
+Dieses Werkzeug kann den leeren Ausgangszustand teilweise absichern und sagt
+über den Rest die Wahrheit:
 
-  · `reviewer`   – Required Reviewer                    → per API setzbar
-  · `branch`     – exakt der Branch `main`              → per API setzbar
-  · `bypass`     – kein Administrator-Bypass            → NUR im Dashboard
+  · `reviewer`   – Required Reviewer                    → im leeren Zustand per API
+  · `branch`     – exakt der Branch `main`              → im leeren Zustand per API
+  · `bypass`     – kein Administrator-Bypass            → in diesem Werkzeug
+                                                          nur im Dashboard
 
-Die dritte Spalte ist keine Unlust, sondern eine Grenze der Schnittstelle: Die
-REST-Route „Create or update an environment" nimmt ausschließlich `wait_timer`,
-`prevent_self_review`, `reviewers` und `deployment_branch_policy` an
-(`additionalProperties: false`, geprüft gegen die veröffentlichte
-OpenAPI-Beschreibung der GitHub-REST-API), und die GraphQL-Mutation
-`updateEnvironment` kennt `can_admins_bypass` nicht. Ein Werkzeug, das hier
-„eingerichtet" meldet, würde den Deploy freigeben, den das Gate zu Recht
-blockiert. Es meldet deshalb „eingerichtet bis auf einen Schalter" – mit dem
-Link dorthin.
+Die veröffentlichte REST-Spezifikation dokumentiert `can_admins_bypass` nicht
+als Schreibparameter. Das belegt jedoch NICHT, dass die API das Feld generell
+ablehnt: Andere Clients und externe Tests berichten von Unterstützung. Für
+unser Repository und die verwendete API-Version ist das mangels Schreibrechten
+nicht verifiziert. Dieses Werkzeug sendet das undokumentierte Feld daher nicht;
+der Schalter wird im Dashboard gesetzt und anschließend vom Guard nachgemessen.
+Ein offener oder unlesbarer Bypass wird niemals als eingerichtet gemeldet.
 
-GRUNDSATZ: DIESES SKRIPT VERSCHÄRFT NUR, ES LOCKERT NIE.
-  · Es entfernt keinen Reviewer und löscht keine Branch-Regel (kein DELETE).
-  · Es ergänzt einen fehlenden Reviewer, statt eine Liste zu ersetzen.
-  · Es setzt keine `wait_timer`- und keine `prevent_self_review`-Werte: Beides
-    ist eine Betriebsentscheidung eines Menschen, nicht eine Lücke.
+SCHREIBGRENZE: Nur ein nachweislich leeres, bestehendes Environment mit
+aktivem Bypass und ohne Branch-Policy wird automatisch bearbeitet. Sobald eine
+Schutzregel, ein abgeschalteter/unbekannter Bypass oder eine Branch-Policy
+vorhanden ist, bleibt die Änderung beim Menschen. Ein zusätzlicher Reviewer
+kann den Freigabekreis erweitern, da EINER der Reviewer genügt. Das Auslassen
+von PUT-Feldern beweist nicht, dass GitHub sie in jeder API-Version erhält.
+Vor dem PUT wird der Ausgangszustand erneut gelesen, nach PUT und POST wird
+nachgemessen. Das ist keine atomare Sperre gegen gleichzeitige Dashboard-Edits;
+solche Änderungen nicht parallel zum automatischen Lauf ausführen.
+
+  · Kein DELETE und kein automatisches Ersetzen bestehender Schutzregeln.
   · Es liest und schreibt ausschließlich api.github.com, folgt keinen
     Weiterleitungen und gibt kein Token, keinen Antworttext und keinen Header
     aus – nur Klassen, HTTP-Status und feste Satztemplate.
@@ -58,7 +63,7 @@ import sys
 import urllib.error
 import urllib.parse
 import urllib.request
-from typing import Callable, NamedTuple
+from typing import Callable, Mapping, NamedTuple
 
 from github_kommando import annotation
 
@@ -109,18 +114,17 @@ KLASSE_OFFEN = "OFFEN"
 
 MASSNAHME = {
     "reviewer": (
-        "Automatisch setzbar: `python3 scripts/worker_environment_einrichten.py "
-        "--anwenden` (ergänzt den fehlenden Reviewer, bestehende bleiben stehen)."
+        "Nur bei nachweislich leerem Ausgangszustand automatisch setzbar: "
+        "`python3 scripts/worker_environment_einrichten.py --anwenden --reviewer <login>`."
     ),
     "branch": (
-        "Automatisch setzbar: `python3 scripts/worker_environment_einrichten.py "
-        "--anwenden` (Branch-Auswahl auf `Selected branches and tags` und Regel `main`)."
+        "Nur bei nachweislich leerem Ausgangszustand automatisch setzbar: "
+        "`python3 scripts/worker_environment_einrichten.py --anwenden --reviewer <login>`."
     ),
     "bypass": (
-        "Nur im Dashboard: Settings → Environments → `cloudflare-produktion` → "
-        "„Allow administrators to bypass configured protection rules“ AUS. Keine "
-        "GitHub-API nimmt dieses Feld an (REST: `additionalProperties: false`; "
-        "GraphQL `updateEnvironment` kennt es nicht)."
+        "Dieses Werkzeug setzt den Bypass nicht: Im Dashboard Settings → Environments → "
+        "`cloudflare-produktion` → „Allow administrators to bypass configured "
+        "protection rules“ AUS; anschließend mit dem Guard nachmessen."
     ),
     "unbekannt": (
         "Nicht automatisch gesetzt: zuerst von Hand im Dashboard prüfen, danach "
@@ -140,11 +144,19 @@ class WerkzeugFehler(RuntimeError):
 
     exit_code = 2
 
+    def __init__(self, text: str, *, schritte: list[str] | None = None):
+        super().__init__(text)
+        self.schritte = list(schritte or [])
+
 
 class BefundFehler(RuntimeError):
     """Der Zustand ist belegt und weicht ab – fail-closed."""
 
     exit_code = 1
+
+    def __init__(self, text: str, *, schritte: list[str] | None = None):
+        super().__init__(text)
+        self.schritte = list(schritte or [])
 
 
 class _KeineWeiterleitung(urllib.request.HTTPRedirectHandler):
@@ -248,17 +260,18 @@ def _json_lesen(status: int, roh: bytes, *, art: str) -> object:
 def _status_text(status: int, art: str) -> str:
     """Feste Satztemplate je Status – keine fremden Antworttexte im Log."""
     if status in (401, 403):
+        recht = ("Repository-Recht `Administration: write`"
+                 if art == "schreiben" else "Repository-Recht `Actions: read`")
         return (
-            f"GitHub-API verweigert den Zugriff (HTTP {status}). Dem Token fehlt das Recht, "
-            f"Environments zu {'schreiben' if art == 'schreiben' else 'lesen'} "
-            "(feingranular: `Environments: read/write`, klassisch: `repo`/"
-            "`administration`). Das ist ein Rechtebefund, keine Code-Regression – "
-            "die Einrichtung bleibt eine Inhaber-Aufgabe."
+            f"GitHub-API verweigert den Zugriff (HTTP {status}). Berechtigung und "
+            f"Gültigkeit der GitHub-Verbindung prüfen: benötigt wird {recht}. "
+            "Das ist ein Zugriffs-/Rechtebefund, keine belegte Code-Regression – "
+            "die Einrichtung bleibt bis dahin eine Inhaber-Aufgabe."
         )
     if status == 404:
         return (
-            f"GitHub-Environment `{UMGEBUNG}` ist nicht erreichbar (HTTP 404). "
-            "Es wird mit `--anwenden` mitsamt Reviewer und Branch-Regel angelegt."
+            f"GitHub-Environment `{UMGEBUNG}` fehlt oder ist nicht sichtbar (HTTP 404). "
+            "Es wird nicht automatisch angelegt; Zugriff und Dashboard prüfen."
         )
     return f"GitHub-API antwortete mit HTTP {status}; der Stand ist nicht belegbar."
 
@@ -301,13 +314,31 @@ def zuordnen(abweichung: str) -> str:
     return "unbekannt"
 
 
-def planen(umgebung: dict, regeln: list | None) -> list[Lage]:
+def _leerer_ausgangszustand(umgebung: object, regeln: object) -> bool:
+    """Nur der eindeutig ungeschützte Ausgangszustand ist automatisch änderbar.
+
+    Bereits vorhandene Schutzregeln, ein deaktivierter/unbekannter Bypass oder
+    eine Branch-Policy dürfen nicht durch einen partiellen PUT riskiert werden.
+    """
+    return (isinstance(umgebung, dict)
+            and umgebung.get("protection_rules") == []
+            and umgebung.get("can_admins_bypass") is True
+            and "deployment_branch_policy" in umgebung
+            and umgebung["deployment_branch_policy"] is None
+            and regeln is None)
+
+
+def planen(umgebung: object, regeln: list | None) -> list[Lage]:
     """Übersetzt den gemessenen Stand in eine Lage je Ziel.
 
     Die Bewertung selbst kommt aus `worker_environment_guard.abweichungen` –
     dieses Skript erfindet keine zweite Wahrheit, es übersetzt sie nur in
     Ziele und machbare Schritte.
     """
+    if umgebung is None:
+        return [Lage(ziel, KLASSE_OFFEN,
+                     f"Environment `{UMGEBUNG}` fehlt oder ist nicht sichtbar; Zustand nicht belegbar.",
+                     MASSNAHME["unbekannt"]) for ziel in ZIELE]
     abweichungen = guard.abweichungen(umgebung, regeln)
     gefunden: dict[str, list[str]] = {ziel: [] for ziel in ZIELE}
     unbekannt: list[str] = []
@@ -325,12 +356,20 @@ def planen(umgebung: dict, regeln: list | None) -> list[Lage]:
             lagen.append(Lage(ziel, KLASSE_ERFUELLT,
                               f"{ZIEL_TEXT[ziel]}: belegt.", ""))
             continue
-        klasse = KLASSE_OBERFLAECHE if ziel == "bypass" else KLASSE_MACHBAR
-        lagen.append(Lage(ziel, klasse, " ".join(texte), MASSNAHME[ziel]))
+        if ziel == "bypass":
+            klasse, massnahme = KLASSE_OBERFLAECHE, MASSNAHME[ziel]
+        elif _leerer_ausgangszustand(umgebung, regeln):
+            klasse, massnahme = KLASSE_MACHBAR, MASSNAHME[ziel]
+        else:
+            # Ein schon geschützter oder unklarer Zustand kann mit einem PUT
+            # bestehende Einstellungen verlieren oder zusätzliche Personen
+            # freigabeberechtigen. Das ist keine automatische Verschärfung.
+            klasse, massnahme = KLASSE_ABWEICHUNG, MASSNAHME["unbekannt"]
+        lagen.append(Lage(ziel, klasse, " ".join(texte), massnahme))
     if unbekannt:
         grund = " ".join(unbekannt)
         lagen = [Lage(l.ziel, KLASSE_OFFEN, f"Nicht belegbar: {grund}", MASSNAHME["unbekannt"])
-                 if l.klasse == KLASSE_ERFUELLT else l for l in lagen]
+                 if l.klasse in (KLASSE_ERFUELLT, KLASSE_MACHBAR) else l for l in lagen]
     for text in unbekannt:
         lagen.append(Lage("unbekannt", KLASSE_UNBEKANNT, text, MASSNAHME["unbekannt"]))
     return lagen
@@ -367,25 +406,6 @@ def _reviewer_gueltig(eintrag: object) -> bool:
     return _reviewer_id(eintrag) is not None
 
 
-def _reviewer(umgebung: dict) -> list[dict]:
-    """Bestehende, gültige Reviewer-Einträge in Schreibform (ergänzt, nie ersetzt)."""
-    regeln = umgebung.get("protection_rules")
-    if not isinstance(regeln, list):
-        return []
-    eintraege: list[dict] = []
-    for regel in regeln:
-        if not isinstance(regel, dict) or regel.get("type") != "required_reviewers":
-            continue
-        liste = regel.get("reviewers")
-        if not isinstance(liste, list):
-            continue
-        for eintrag in liste:
-            if not _reviewer_gueltig(eintrag):
-                continue
-            eintraege.append({"type": eintrag.get("type"), "id": _reviewer_id(eintrag)})
-    return eintraege
-
-
 def nutzer_id(login: str, *, repo: str, token: str,
               transport: Callable | None = None) -> int:
     """Löst einen Anmeldenamen in eine Reviewer-ID auf (ein Aufruf, lesend)."""
@@ -400,70 +420,136 @@ def nutzer_id(login: str, *, repo: str, token: str,
     return ident
 
 
+def _erwartete_absicherung(umgebung: object, reviewer_id: int, *,
+                           bypass: tuple[bool, ...]) -> bool:
+    """Nachweis der gesetzten Regeln, ohne andere oder unlesbare Regeln zu raten."""
+    if not isinstance(umgebung, dict) or umgebung.get("can_admins_bypass") not in bypass:
+        return False
+    # `1 == True` in Python, ist aber keine belegte GitHub-Boolean-Antwort.
+    if not isinstance(umgebung.get("can_admins_bypass"), bool):
+        return False
+    policy = umgebung.get("deployment_branch_policy")
+    if (not isinstance(policy, dict) or policy.get("protected_branches") is not False
+            or policy.get("custom_branch_policies") is not True):
+        return False
+    regeln = umgebung.get("protection_rules")
+    if (not isinstance(regeln, list) or any(not isinstance(r, dict) for r in regeln)
+            or any(r.get("type") not in ("required_reviewers", "branch_policy") for r in regeln)):
+        return False
+    reviewer_regeln = [r for r in regeln if r.get("type") == "required_reviewers"]
+    if len(reviewer_regeln) != 1 or sum(r.get("type") == "branch_policy" for r in regeln) > 1:
+        return False
+    reviewer = reviewer_regeln[0].get("reviewers")
+    return (isinstance(reviewer, list) and len(reviewer) == 1
+            and _reviewer_gueltig(reviewer[0]) and reviewer[0].get("type") == "User"
+            and _reviewer_id(reviewer[0]) == reviewer_id)
+
+
 def schreiben(lagen: list[Lage], umgebung: dict | None, *, repo: str, token: str,
               reviewer_id: int | None, transport: Callable | None = None,
               melden: Callable[[str], None] | None = None) -> tuple[list[Lage], list[str]]:
-    """Wendet an, was die API zulässt. Liefert (Rest-Lage, ausgeführte Schritte).
+    """Sichert nur den leeren Ausgangszustand ab; jeder Schritt wird nachgelesen.
 
-    Verschärft nur: kein DELETE, keine Ersetzung bestehender Reviewer, keine
-    Änderung von `wait_timer`/`prevent_self_review`.
+    Eine veränderte oder bereits geschützte Umgebung wird NICHT überschrieben.
+    Zwischen Vormessung und PUT gibt es keine atomare API-Sperre: Deshalb dürfen
+    Dashboard-Änderungen nicht gleichzeitig mit diesem Lauf stattfinden.
     """
     sagen = melden or (lambda text: None)
     schritte: list[str] = []
-    rest: list[Lage] = list(lagen)
 
-    def klasse(ziel: str) -> str | None:
-        return next((l.klasse for l in lagen if l.ziel == ziel), None)
+    machbar = {l.ziel for l in lagen if l.klasse == KLASSE_MACHBAR}
+    if not machbar:
+        return list(lagen), schritte
+    klassen = {l.ziel: l.klasse for l in lagen}
+    if (len(lagen) != len(ZIELE) or klassen != {
+            "reviewer": KLASSE_MACHBAR, "branch": KLASSE_MACHBAR,
+            "bypass": KLASSE_OBERFLAECHE}
+            or not _leerer_ausgangszustand(umgebung, None)):
+        raise BefundFehler("Ausgangszustand ist nicht eindeutig leer – kein automatischer Schreibzugriff. "
+                          "Schutzregeln im Dashboard prüfen und dort bearbeiten.")
+    if not isinstance(reviewer_id, int) or isinstance(reviewer_id, bool) or reviewer_id <= 0:
+        raise WerkzeugFehler("Eine gültige Reviewer-ID fehlt; `--reviewer <login>` oder "
+                             "`--reviewer-id <id>` übergeben.")
 
-    if klasse("reviewer") == KLASSE_MACHBAR and reviewer_id is None:
-        raise WerkzeugFehler(
-            "Required Reviewer fehlt, aber es ist keine Reviewer-ID bekannt. "
-            "`--reviewer <login>` oder `--reviewer-id <id>` übergeben "
-            "(im Workflow: `github.repository_owner_id`)."
-        )
+    # Nicht mit einem veralteten Plan schreiben. Ein Vergleich des gesamten
+    # gelesenen Objekts erkennt auch Änderungen außerhalb der drei Ziele.
+    aktuell, aktuelle_regeln = stand(repo, token, transport=transport)
+    if aktuell != umgebung or not _leerer_ausgangszustand(aktuell, aktuelle_regeln):
+        raise BefundFehler("Environment wurde seit der Vormessung geändert oder ist nicht eindeutig leer – "
+                          "kein automatischer Schreibzugriff. Erneut prüfen oder Dashboard verwenden.")
 
-    fehlend = klasse("branch") == KLASSE_MACHBAR or klasse("reviewer") == KLASSE_MACHBAR
-    neu = umgebung is None
-    if not fehlend and not neu:
-        return rest, schritte
-
-    koerper: dict = {}
-    if klasse("reviewer") == KLASSE_MACHBAR:
-        eintraege = _reviewer(umgebung) if umgebung else []
-        if not any(e.get("id") == reviewer_id for e in eintraege):
-            eintraege.append({"type": "User", "id": reviewer_id})
-        koerper["reviewers"] = eintraege
-    if klasse("branch") == KLASSE_MACHBAR:
-        koerper["deployment_branch_policy"] = {
-            "protected_branches": False,
-            "custom_branch_policies": True,
-        }
-    if not koerper:
-        return rest, schritte
-
-    status, _kopf, roh = _senden("PUT", f"{API}/repos/{repo}/environments/{UMGEBUNG}",
-                                 token, repo=repo, koerper=koerper, transport=transport)
+    koerper = {
+        "reviewers": [{"type": "User", "id": reviewer_id}],
+        "deployment_branch_policy": {"protected_branches": False, "custom_branch_policies": True},
+    }
+    try:
+        status, _kopf, _roh = _senden("PUT", f"{API}/repos/{repo}/environments/{UMGEBUNG}",
+                                      token, repo=repo, koerper=koerper, transport=transport)
+    except WerkzeugFehler:
+        raise WerkzeugFehler("Ergebnis des Environment-PUT nicht belegbar; Dashboard prüfen.",
+                             schritte=["Environment-PUT versucht (Ergebnis unbekannt)."]) from None
     if status not in (200, 201):
-        raise BefundFehler(_status_text(status, "schreiben"))
-    _json_lesen(200, b"{}", art="schreiben")
-    sagen("PUT Environment: " + (", ".join(sorted(koerper)) or "nichts"))
-    schritte.append("Environment `" + UMGEBUNG + "` geschrieben: " + ", ".join(sorted(koerper)))
+        if status in (401, 403):
+            raise BefundFehler(_status_text(status, "schreiben"))
+        # Ein Serverfehler, eine unerwartete Antwort oder ein Konflikt belegt
+        # nicht, dass der Request wirkungslos blieb. Auch keinen Retry raten.
+        raise WerkzeugFehler(
+            f"Environment-PUT antwortete mit HTTP {status}; Wirkung nicht belegbar. Dashboard prüfen.",
+            schritte=["Environment-PUT versucht (Wirkung unbekannt)."])
+    sagen("PUT Environment: deployment_branch_policy, reviewers")
+    schritte.append(f"Environment-PUT für `{UMGEBUNG}` angenommen.")
 
-    if klasse("branch") == KLASSE_MACHBAR:
+    # Vor Freigabe des Branches muss der GET beweisen, dass Reviewer und
+    # Selected-Policy wirklich stehen und keine alten Regeln reaktiviert wurden.
+    try:
+        zwischen, zwischen_regeln = stand(repo, token, transport=transport)
+    except WerkzeugFehler:
+        raise WerkzeugFehler("Environment-PUT wurde angenommen; Zwischenstand nicht lesbar. "
+                             "Keine Branch-Regel hinzugefügt; Dashboard prüfen.",
+                             schritte=schritte) from None
+    if (not _erwartete_absicherung(zwischen, reviewer_id, bypass=(True,))
+            or zwischen_regeln != []):
+        raise WerkzeugFehler("Environment-PUT wurde angenommen, aber der Zwischenstand ist nicht "
+                             "eindeutig. Keine Branch-Regel hinzugefügt; Dashboard prüfen.",
+                             schritte=schritte)
+
+    try:
         status, _kopf, _roh = _senden(
             "POST", f"{API}/repos/{repo}/environments/{UMGEBUNG}/deployment-branch-policies",
             token, repo=repo, koerper={"name": ZWEIG, "type": "branch"}, transport=transport)
-        if status not in (200, 201):
-            raise BefundFehler(_status_text(status, "schreiben"))
-        schritte.append(f"Branch-Regel `{ZWEIG}` ergänzt.")
+    except WerkzeugFehler:
+        raise WerkzeugFehler("Environment-PUT angenommen; Ergebnis des Branch-POST nicht belegbar. "
+                             "Dashboard prüfen.", schritte=schritte +
+                             ["Branch-POST versucht (Ergebnis unbekannt)."]) from None
+    if status not in (200, 201):
+        if status in (401, 403):
+            raise BefundFehler("Environment-PUT wurde angenommen, Branch-Regel nicht belegt. "
+                              + _status_text(status, "schreiben") + " Dashboard prüfen.",
+                              schritte=schritte)
+        raise WerkzeugFehler(
+            f"Environment-PUT angenommen; Branch-POST antwortete mit HTTP {status}. "
+            "Wirkung nicht belegbar. Dashboard prüfen.",
+            schritte=schritte + ["Branch-POST versucht (Wirkung unbekannt)."])
+    schritte.append(f"Branch-POST für `{ZWEIG}` angenommen.")
 
-    rest = [l for l in lagen if l.klasse not in (KLASSE_MACHBAR,)]
-    return rest, schritte
+    try:
+        nachher, regeln = stand(repo, token, transport=transport)
+    except WerkzeugFehler:
+        raise WerkzeugFehler("Environment-PUT und Branch-POST wurden angenommen; "
+                             "Nachmessung nicht lesbar. Dashboard prüfen.",
+                             schritte=schritte) from None
+    if (not _erwartete_absicherung(nachher, reviewer_id, bypass=(True, False))
+            or not isinstance(regeln, list) or len(regeln) != 1
+            or not isinstance(regeln[0], dict)
+            or regeln[0].get("name") != ZWEIG or regeln[0].get("type") != "branch"):
+        raise WerkzeugFehler("Environment-PUT und Branch-POST wurden angenommen; "
+                             "Nachmessung weicht ab. Dashboard prüfen.", schritte=schritte)
+    return planen(nachher, regeln), schritte
 
 
 def stand(repo: str, token: str, *, transport: Callable | None = None
           ) -> tuple[dict | None, list | None]:
-    """Liest Environment und Branch-Regeln. (None, None) = Environment fehlt."""
+    """Liest Environment und Branch-Regeln. (None, None) = 404/nicht sichtbar."""
     status, _kopf, roh = _senden("GET", f"{API}/repos/{repo}/environments/{UMGEBUNG}",
                                  token, repo=repo, transport=transport)
     if status == 404:
@@ -607,6 +693,33 @@ def _ausgabe(text: str, md_pfad: str | None) -> None:
         raise WerkzeugFehler(f"Bericht nicht schreibbar: {type(fehler).__name__}.") from None
 
 
+def _fehler_ausgeben(exc: WerkzeugFehler | BefundFehler, *,
+                     json_ausgabe: bool, md_pfad: str | None) -> int:
+    """Auch bei einem Abbruch dürfen angenommene/ungewisse Schritte nicht verschwinden."""
+    if json_ausgabe:
+        print(json.dumps({"environment": UMGEBUNG, "fehler": str(exc),
+                          "schritte": exc.schritte, "exit": exc.exit_code},
+                         ensure_ascii=False, indent=2))
+        return exc.exit_code
+
+    titel = ("Produktions-Environment nicht belegbar" if isinstance(exc, WerkzeugFehler)
+             else "Produktions-Environment nicht einrichtbar")
+    if exc.schritte or md_pfad:
+        zeilen = [f"## {titel}", "", f"- **Fehler:** {exc}"]
+        if exc.schritte:
+            zeilen += ["", "**Schreibversuche und angenommene Schritte:**"]
+            zeilen += [f"- {schritt}" for schritt in exc.schritte]
+            zeilen += ["", "Annahme ist kein Nachweis der Wirkung; Dashboard prüfen."]
+        try:
+            _ausgabe("\n".join(zeilen) + "\n", md_pfad)
+        except WerkzeugFehler as bericht_fehler:
+            annotation("error", str(bericht_fehler), titel="Bericht nicht belegbar")
+            annotation("error", str(exc), titel=titel)
+            return 2
+    annotation("error", str(exc), titel=titel)
+    return exc.exit_code
+
+
 def _selftest() -> int:
     """Sabotage- und Gegenproben OHNE Netz."""
     sicher = {
@@ -632,7 +745,7 @@ def _selftest() -> int:
                    "branch": KLASSE_MACHBAR}:
         fehler.append(f"2 Live-Stand falsch eingeordnet: {klassen}")
 
-    # 3 · Admin-Bypass ist NIE als machbar gekennzeichnet – die API kann ihn nicht.
+    # 3 · Das Werkzeug kennzeichnet den Admin-Bypass NIE als automatisch machbar.
     lagen = planen({**sicher, "can_admins_bypass": True}, regeln_main)
     if [l for l in lagen if l.ziel == "bypass" and l.klasse != KLASSE_OBERFLAECHE]:
         fehler.append("3 Admin-Bypass als machbar ausgegeben")
@@ -659,44 +772,53 @@ def _selftest() -> int:
         except WerkzeugFehler:
             pass
 
-    # 6 · Schreiben verschärft nur: bestehender Reviewer bleibt, keiner fliegt raus,
-    #     kein can_admins_bypass im Körper.
+    # 6 · Nur der ungeschützte Ausgangszustand wird bearbeitet. Der Stub
+    #     bildet GET → PUT → Zwischenmessung → POST → Nachmessung ab.
     gesendet: list[tuple[str, str, dict | None]] = []
+    leer = {"protection_rules": [], "can_admins_bypass": True, "deployment_branch_policy": None}
+    nach_put = {"protection_rules": [
+        {"type": "required_reviewers", "reviewers": [{"type": "User", "reviewer": {"id": 42}}]},
+        {"type": "branch_policy"}], "can_admins_bypass": True,
+        "deployment_branch_policy": {"protected_branches": False, "custom_branch_policies": True}}
+    phase = [0]
 
     def transport(methode, url, token, koerper):
         gesendet.append((methode, url, koerper))
         if methode == "GET":
             if url.endswith("/deployment-branch-policies?per_page=100"):
-                return 200, {}, json.dumps({"total_count": 0, "branch_policies": []}).encode()
-            return 200, {}, json.dumps({"protection_rules": [], "can_admins_bypass": True,
-                                        "deployment_branch_policy": None}).encode()
+                liste = regeln_main if phase[0] == 2 else []
+                return 200, {}, json.dumps({"total_count": len(liste), "branch_policies": liste}).encode()
+            return 200, {}, json.dumps(leer if phase[0] == 0 else nach_put).encode()
+        phase[0] = 1 if methode == "PUT" else 2
         return 200, {}, b"{}"
 
-    # Zwei Required-Reviewer-Regeln: das Gate meldet „mehrdeutig" – ein echter
-    # Mensch (ID 7) steht aber schon drin. Er darf beim Zusammenführen nicht
-    # herausfallen; die Mehrdeutigkeit wird aufgelöst, nicht die Person entfernt.
+    rest, schritte = schreiben(planen(leer, None), leer, repo="frank/x", token="TOKEN",
+                               reviewer_id=42, transport=transport)
+    koerper = next((k for m, _u, k in gesendet if m == "PUT"), None)
+    if not koerper or koerper.get("reviewers") != [{"type": "User", "id": 42}]:
+        fehler.append("6 fehlender Reviewer nicht eindeutig gesetzt")
+    if koerper and "can_admins_bypass" in koerper:
+        fehler.append("6 can_admins_bypass im Schreibkörper")
+    if [m for m, _u, _k in gesendet].count("GET") < 5 or len(schritte) != 2:
+        fehler.append("6 Zwischen- oder Nachmessung fehlt")
+    if {l.ziel: l.klasse for l in rest} != {"reviewer": KLASSE_ERFUELLT,
+                                             "branch": KLASSE_ERFUELLT,
+                                             "bypass": KLASSE_OBERFLAECHE}:
+        fehler.append("6 Teilheilung oder offener Bypass falsch eingeordnet")
+
+    # Bestehende Reviewer dürfen nicht ergänzt/zusammengeführt werden: Schon
+    # ein zusätzlicher Reviewer erweitert die Menge der Freigabeberechtigten.
     doppelt = {"protection_rules": [
         {"type": "required_reviewers", "reviewers": [{"type": "User", "reviewer": {"id": 7}}]},
         {"type": "required_reviewers", "reviewers": [{"type": "User", "reviewer": {"id": 8}}]},
     ], "can_admins_bypass": True, "deployment_branch_policy": None}
+    gesendet.clear()
     lagen = planen(doppelt, None)
-    if not any(l.ziel == "reviewer" and l.klasse == KLASSE_MACHBAR for l in lagen):
-        fehler.append("6 mehrdeutige Reviewer-Regel nicht als machbar erkannt")
-    rest, schritte = schreiben(lagen, doppelt, repo="frank/x", token="TOKEN",
-                               reviewer_id=42, transport=transport)
-    koerper = next((k for m, _u, k in gesendet if m == "PUT"), None)
-    if not koerper:
-        fehler.append("6 kein PUT gesendet")
-    else:
-        ids = {e.get("id") for e in koerper.get("reviewers", [])}
-        if not {7, 8, 42} <= ids:
-            fehler.append(f"6 bestehender Reviewer verloren: {ids}")
-        if len(koerper.get("reviewers", [])) != len(ids):
-            fehler.append("6 Reviewer doppelt eingetragen")
-        if "can_admins_bypass" in json.dumps(koerper):
-            fehler.append("6 can_admins_bypass im Schreibkörper")
-    if [l for l in rest if l.ziel == "bypass" and l.klasse != KLASSE_OBERFLAECHE]:
-        fehler.append("6 Admin-Bypass nach dem Schreiben verschwiegen")
+    if not any(l.ziel == "reviewer" and l.klasse == KLASSE_ABWEICHUNG for l in lagen):
+        fehler.append("6 vorhandene Reviewer wurden als automatisch änderbar eingestuft")
+    schreiben(lagen, doppelt, repo="frank/x", token="TOKEN", reviewer_id=42, transport=transport)
+    if gesendet:
+        fehler.append("6 geschützte Umgebung wurde automatisch geändert")
 
     # 7 · Idempotenz: erfüllter Zustand sendet keinen Schreibaufruf.
     gesendet.clear()
@@ -707,11 +829,7 @@ def _selftest() -> int:
 
     # 8 · Fehlender Reviewer OHNE ID ist ein Werkzeugfehler, kein Teilerfolg.
     try:
-        schreiben(planen({"protection_rules": [], "can_admins_bypass": False,
-                          "deployment_branch_policy": {"protected_branches": False,
-                                                       "custom_branch_policies": True}},
-                         regeln_main),
-                  {"protection_rules": []}, repo="frank/x", token="TOKEN",
+        schreiben(planen(leer, None), leer, repo="frank/x", token="TOKEN",
                   reviewer_id=None, transport=transport)
         fehler.append("8 fehlende Reviewer-ID wurde nicht gemeldet")
     except WerkzeugFehler:
@@ -746,19 +864,19 @@ def _selftest() -> int:
     if fehler:
         print("❌ Selbsttest: " + "; ".join(fehler))
         return 2
-    print("✅ SELBSTTEST OK — Zuordnung, OFFEN ist nie grün, Endpunktgrenzen, "
-          "Nur-Verschärfen, Idempotenz, Rechtebefund und Geheimnisfreiheit belegt.")
+    print("✅ SELBSTTEST OK — Zuordnung, OFFEN ist nie grün, Endpunkt- und Schreibgrenzen, "
+          "Zwischen-/Nachmessung, Idempotenz, Rechtebefund und Geheimnisfreiheit belegt.")
     return 0
 
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(
-        description="Stellt die Produktionsfreigabe des Worker-Deploys her (nur verschärfend).")
+        description="Prüft die Produktionsfreigabe; kann bei leerem Ausgangszustand begrenzt schreiben.")
     gruppe = ap.add_mutually_exclusive_group(required=True)
     gruppe.add_argument("--pruefen", action="store_true",
                         help="Einrichtungsstand lesen und je Ziel einordnen")
     gruppe.add_argument("--anwenden", action="store_true",
-                        help="setzt, was die GitHub-API zulässt (idempotent)")
+                        help="nur bei leerem Ausgangszustand Reviewer und Branch-Regel versuchen")
     gruppe.add_argument("--inventur", action="store_true",
                         help="alle Environments des Repositories auflisten")
     gruppe.add_argument("--selftest", action="store_true", help="Sabotage- und Gegenproben")
@@ -796,29 +914,24 @@ def main(argv: list[str] | None = None) -> int:
 
         umgebung, regeln = stand(repo, token)
         if umgebung is None:
-            lagen = [Lage(ziel, KLASSE_MACHBAR,
-                          f"Environment `{UMGEBUNG}` existiert nicht.",
-                          MASSNAHME[ziel]) for ziel in ("reviewer", "branch")]
-            lagen.append(Lage("bypass", KLASSE_OBERFLAECHE,
-                              "Beim Anlegen ist der Administrator-Bypass der "
-                              "Voreinstellung nach an.", MASSNAHME["bypass"]))
-        else:
-            lagen = planen(umgebung, regeln)
+            raise WerkzeugFehler(_status_text(404, "lesen"))
+        lagen = planen(umgebung, regeln)
 
         schritte: list[str] = []
         if args.anwenden:
             lagen, schritte = schreiben(
                 lagen, umgebung, repo=repo, token=token, reviewer_id=reviewer_id)
-            if umgebung is None or any(s.startswith("Environment") or s.startswith("Branch")
-                                       for s in schritte):
-                umgebung, regeln = stand(repo, token)
-                lagen = planen(umgebung, regeln) if umgebung else lagen
-    except WerkzeugFehler as exc:
-        annotation("error", str(exc), titel="Produktions-Environment nicht belegbar")
-        return exc.exit_code
-    except BefundFehler as exc:
-        annotation("error", str(exc), titel="Produktions-Environment nicht einrichtbar")
-        return exc.exit_code
+            if schritte:
+                try:
+                    umgebung, regeln = stand(repo, token)
+                    if umgebung is None:
+                        raise WerkzeugFehler(_status_text(404, "lesen"))
+                except WerkzeugFehler as exc:
+                    raise WerkzeugFehler(f"Zusätzliche Nachmessung nicht belegbar: {exc}",
+                                         schritte=schritte) from None
+                lagen = planen(umgebung, regeln)
+    except (WerkzeugFehler, BefundFehler) as exc:
+        return _fehler_ausgeben(exc, json_ausgabe=args.json, md_pfad=args.md)
 
     offen = [l for l in lagen if l.klasse != KLASSE_ERFUELLT]
     if args.json:
@@ -826,7 +939,11 @@ def main(argv: list[str] | None = None) -> int:
                           "schritte": schritte, "offen": len(offen)}, indent=2))
         return 1 if offen else 0
 
-    _ausgabe(als_md(lagen, schritte=schritte), args.md)
+    try:
+        _ausgabe(als_md(lagen, schritte=schritte), args.md)
+    except WerkzeugFehler as exc:
+        return _fehler_ausgeben(WerkzeugFehler(str(exc), schritte=schritte),
+                               json_ausgabe=False, md_pfad=None)
     for lage in offen:
         print(f"❌ [{lage.klasse}] {ZIEL_TEXT.get(lage.ziel, lage.ziel)}: {lage.text}")
         if lage.massnahme:

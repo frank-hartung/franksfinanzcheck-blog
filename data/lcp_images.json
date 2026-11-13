@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-11-11T06:34:56+00:00",
+  "generatedAt": "2026-11-13T15:30:26+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -1007,7 +1007,7 @@
       "decoding": "async"
     },
     "/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/": {
-      "image": "images/covers/2026-10-06-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck.jpg",
+      "image": "images/covers/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -1023,7 +1023,7 @@
       "decoding": "async"
     },
     "/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/": {
-      "image": "images/covers/2026-10-06-energiekosten-senken-smarte-helfer-fuer-den-haushalt.jpg",
+      "image": "images/covers/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -1039,7 +1039,7 @@
       "decoding": "async"
     },
     "/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/": {
-      "image": "images/covers/2026-10-07-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle.jpg",
+      "image": "images/covers/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -1087,7 +1087,7 @@
       "decoding": "async"
     },
     "/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/": {
-      "image": "images/covers/2026-10-07-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle.jpg",
+      "image": "images/covers/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -1119,7 +1119,7 @@
       "decoding": "async"
     },
     "/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/": {
-      "image": "images/covers/2026-10-07-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig.jpg",
+      "image": "images/covers/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -1135,7 +1135,7 @@
       "decoding": "async"
     },
     "/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/": {
-      "image": "images/covers/2026-10-12-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick.jpg",
+      "image": "images/covers/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -1199,7 +1199,7 @@
       "decoding": "async"
     },
     "/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/": {
-      "image": "images/covers/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.jpg",
+      "image": "images/covers/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -1231,7 +1231,7 @@
       "decoding": "async"
     },
     "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/": {
-      "image": "images/covers/2026-10-26-flugvergleich-im-winter-so-findest-du-echte-billigfluege.jpg",
+      "image": "images/covers/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
@@ -1310,8 +1310,40 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
+    "/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/": {
+      "image": "images/covers/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
     "/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/": {
-      "image": "images/covers/2026-11-09-wlan-frust-loesen-so-findest-du-den-besten-router-standort.jpg",
+      "image": "images/covers/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/": {
+      "image": "images/covers/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",

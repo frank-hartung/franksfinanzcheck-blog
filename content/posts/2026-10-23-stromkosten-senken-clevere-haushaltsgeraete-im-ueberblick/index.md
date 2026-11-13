@@ -23,9 +23,15 @@ redaktionelle_pruefung:
 
 inspiration: Stromkosten senken mit cleveren Haushaltsgeräten
 cover:
-  image: "images/covers/2026-10-12-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick.jpg"
+  image: "images/covers/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick.jpg"
   alt: "Stromkosten senken: Clevere Haushaltsgeräte im Überblick"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 0b19e72dd44e039168859ff6909b1a80726360b350637f6fde9270367758bf8f
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur - Energie"

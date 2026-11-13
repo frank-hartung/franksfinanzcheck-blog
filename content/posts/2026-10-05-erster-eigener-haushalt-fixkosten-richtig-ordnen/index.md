@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen.jpg"
   alt: "Der erste eigene Haushalt: Fixkosten von Anfang an ordnen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 9a43b184ed2f72abe0b4587c97d5e8948a39a10180bd127c7681176a1d205264
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Verbraucherzentrale – Haushaltsbuch führen: So behalten Sie Ihre Ausgaben im Blick"

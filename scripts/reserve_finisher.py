@@ -249,7 +249,9 @@ def lift_to_today(index: Path) -> Path:
 # SCOPE-VERTRAG (Stufe-2-Kommentar im Workflow): Die Kette veredelt NUR die
 # Pool-Kandidaten, NIE den Live-Bestand.
 #   • Scope „file"  = pro Kandidat mit `--file <pfad>` (fix_linebreaks,
-#     spellcheck, grammar_check, meta_optimizer, generate_kurzantworten).
+#     spellcheck, grammar_check, meta_optimizer). `generate_kurzantworten.py`
+#     bleibt bewusst außerhalb dieser Kette: Eine Kurzantwort ist redaktioneller
+#     Inhalt, kein deterministisches Formatfeld (M4, #1110).
 #     Pflicht für Heiler, die ganze Dateien umschreiben können:
 #     fix_linebreaks baut ohne KI Zeilenumbrüche korpusweit zurück und hat am
 #     08.09.2026 nachweislich Live-Listen/Blockquotes zusammengeklebt; und
@@ -360,7 +362,12 @@ HEALER_CHAIN = [
     # außerhalb der Pool-Kandidaten bytegenau zurück – Live-Cover und
     # Live-Frontmatter können so nicht mehr „nebenbei“ mitgepusht werden.
     ("check_covers.py", ["--fix"]),
-    ("generate_kurzantworten.py", [], "file"),
+    # Eine fehlende Kurzantwort ist ein redaktioneller Hold, kein
+    # Formatfehler. Der Content-Engine-Schritt bleibt der konfigurierte Lauf
+    # für diesen KI-Schreiber; die Reserve-Finisher-Kette erfindet die Antwort
+    # nicht aus Titel und Description. `kurzantwort_failures` bleibt deshalb
+    # eine explizite, begründete Ausnahme in reserve_healer_coverage.py
+    # (#1110/#1121).
     # REPARATUR 11.09.2026 (Reserve #5, #247) & WF-D4E0 (#821): Der
     # deterministische R5-Absatz-Splitter läuft VOR redaktions_standard.py,
     # damit neu entstandene Teil-Absätze im darauffolgenden Schritt je Absatz
@@ -1144,6 +1151,17 @@ def selftest() -> int:
                           "als gedeckt gemeldet – ein Name ist keine Wirkung (#609)")
         if not (deckung.get("wirkung") or {}).get("nachgewiesen"):
             fehler.append("keine grüne Wirkungsprobe für die Zahlen-Heiler (#609)")
+        # M4 / WF-D4E0 #1121: Fehlende Kurzantworten bleiben ein
+        # redaktioneller Hold. Der KI-Texter arbeitet im Content-Engine-Lauf,
+        # aber darf in der Reserve-Finisher-Kette nicht aus Titel/Description
+        # eine unbelegte Finanz-Aussage erfinden.
+        ausnahmen = {d["regel"] for d in deckung.get("ausnahmen", [])}
+        if "kurzantwort_failures" not in ausnahmen:
+            fehler.append("Kurzantwort-Gate muss als begründeter "
+                          "Redaktions-Hold klassifiziert bleiben (#1110)")
+        if any(e[0] == "generate_kurzantworten.py" for e in HEALER_CHAIN):
+            fehler.append("generate_kurzantworten darf keine Reserve-Heilung "
+                          "auslösen (redaktioneller Inhalt, #1110)")
     intent_schritte = [e for e in HEALER_CHAIN
                        if e[0] == "affiliate_intent_guard.py"]
     if not intent_schritte or not all("--fix" in e[1] and e[2] == "file"
@@ -1180,7 +1198,7 @@ def selftest() -> int:
         return 2
     print("✅ Reserve-Finisher-Selbsttest grün (Pool-Filter, Hash-Zertifikat, "
           "Slug-Tail, lastmod/date-Sync, CTA-Hygiene, Heiler-Deckung "
-          "Gate↔Kette inkl. #349).")
+          "Gate↔Kette inkl. #349, Kurzantwort als Redaktions-Hold #1110/#1121).")
     return 0
 
 

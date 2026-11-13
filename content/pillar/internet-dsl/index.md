@@ -14,6 +14,12 @@ cover:
   alt: "Internet, DSL & Mobilfunk: Der große Ratgeber für schnelles Netz"
   caption: "Kompletter Ratgeber von FranksFinanzcheck"
   preload: false   # Bild liefert og:image, nicht den LCP
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 5dc3b01f150a08528974710a08173d894f0411c51bb83782d1bc8153984b47f9
+    geprueft_am: 2026-11-13
 quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"

@@ -26,6 +26,12 @@ cover:
   image: "images/covers/2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub.jpg"
   alt: "Reisekasse füllen: 7 Wege zu mehr Budget für den Urlaub"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 756d5af6d8d05f5da49f85aada9738e6da816817876fae2ae5a5c753d518ed4a
+    geprueft_am: 2026-11-13
 kurzantwort: "Kürze deine monatlichen Fixkosten um 5 % – bei 800 € Aufwand sparst du damit rund 40 € im Monat und 480 € im Jahr (Modellrechnung: 800 € × 0,05 = 40 €; 40 € × 12 = 480 €). Nutze Cashback‑Programme, die im Schnitt 2 % deiner Ausgaben zurückgeben (Quelle: )."
 faktencheck: 2026-11-09
 ---

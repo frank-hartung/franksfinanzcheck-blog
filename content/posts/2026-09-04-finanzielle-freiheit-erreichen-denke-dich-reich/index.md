@@ -22,6 +22,12 @@ cover:
   image: "images/covers/2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich.jpg"
   alt: "Finanzielle Freiheit erreichen: Denke dich reich"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 50d002a47de018a6314e632c931ee6ea4006fa68e23b536747d791bb47d99963
+    geprueft_am: 2026-11-13
 social_posted: false
 quellen:
   - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"

@@ -23,7 +23,19 @@ cover:
   image: "images/covers/2026-11-02-last-minute-urlaubsangebote-sichern.jpg"
   alt: "Last-Minute Urlaubsangebote sichern"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Buche flexible Reisen innerhalb von 48 Stunden, nutze Preis‑Alert‑Tools und vergleiche Direktanbieter mit Last‑Minute‑Portalen. So sparst du durchschnittlich 27 % gegenüber dem Normalpreis – Statista (2023) Halte deinen Reisepass und Zahlungsdaten bereit, damit du sofort bestätigen kannst."
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: b7316d59ceb0f7a7d62bea0f5c0abf6dc2c37687a612fe91609c2816823c44e2
+    geprueft_am: 2026-11-13
+kurzantwort: "Buche flexible Reisen innerhalb von 48 Stunden, nutze Preis‑Alert‑Tools und vergleiche Direktanbieter mit Last‑Minute‑Portalen. Ob du damit wirklich günstiger fährst, zeigt erst der Vergleich der Endsummen – eine garantierte Ersparnis gibt es nicht. Halte deinen Reisepass und Zahlungsdaten bereit, damit du sofort bestätigen kannst."
+quellen:
+  - id: "Q1"
+    titel: "Reise & Mobilität – Beratung zu Mietwagen, Storno und Reisekosten"
+    url: "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    herausgeber: "Verbraucherzentrale"
+    datum: "2026-11-05"
 ---
 
 Du willst spontan weg. Das Ticket für den Flug ist gebucht. Das Hotel hat noch ein Zimmer frei. Jetzt fehlt nur noch der passende Wagen. Bei einem **Last Minute Urlaub** zählt das richtige Timing. Wer zu spät bucht, zahlt oft hohe Preise. Wer früh genug sucht, findet ein echtes **Sommerurlaub Schnäppchen**. In diesem Ratgeber zeige ich dir den Weg zum besten Deal. Du lernst, wie du versteckte Kosten sofort erkennst. Du rechnest die Konditionen für deinen Trip aus. Mit dem 4-K-Prüfpfad von Franks Fixkosten-Kompass sicherst du deine Wahl ab. So bleibt mehr Geld für die Reisekasse übrig.
