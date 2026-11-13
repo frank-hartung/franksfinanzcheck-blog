@@ -69,7 +69,7 @@ Durch clevere Kombinationen bleibt kaum etwas ungenutzt.
 
 | Fehler | Warum er kostet | Wie du ihn [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) |
 |--------|----------------|----------------------|
-| Zu wenig Portionen planen | Du kaufst nach und nach nach | Notiere genaue Portionen pro Person |
+| Zu wenig Portionen planen | Du kaufst nach und nach | Notiere genaue Portionen pro Person |
 | Keine Resteverwertung | Reste landen im Müll | Plane ein „Reste‑Gericht“ für jeden Tag |
 | Spontankäufe trotz Liste | Impulsive Entscheidungen | Lege das Handy beim Einkauf weg |
 | Unflexible Rezepte | Du kannst nicht improvisieren | Wähle Gerichte mit austauschbaren Zutaten |
