@@ -1,9 +1,9 @@
 ---
 title: "Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten"
 description: "Gas-Anbieter wechseln und Heizkosten senken: So vergleichst du Arbeitspreis, Grundpreis und Preisgarantien ohne Pause in der Gasversorgung."
-date: 2026-11-13T11:26:17Z
-draft: true
+date: 2026-11-13T18:06:45Z
 reserve: true
+draft: true
 tags: ["Gastarif wechseln"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"

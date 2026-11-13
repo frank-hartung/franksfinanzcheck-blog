@@ -359,7 +359,16 @@ def feed_items(pfad: Path) -> list[dict]:
             "scope": (scope.text or "").strip() if scope is not None else "",
             "ai_generated": item.find(f"{NAMESPACE_KURZ}:ai-generated", ns) is not None,
             "describedby": bool(beschrieben),
-            "media_credit": item.find("media:credit", ns) is not None,
+            # Media RSS (Yahoo-Spezifikation) erlaubt `media:credit` sowohl als
+            # direktes Kind von <item> als auch INNERHALB von <media:content>.
+            # Unsere Vorlage (layouts/rss.xml) schreibt den Credit in
+            # <media:content>, weil er dort zum konkreten Bild gehört. Wer nur
+            # `item.find()` prüft, sieht 50 korrekte Angaben als fehlend an –
+            # die Meldung „Feed-Item trägt kein media:credit“ war damit ein
+            # Messfehler, kein Bestandsfehler (Befund 13.11.2026, 50 Funde).
+            "media_credit": (item.find("media:credit", ns) is not None
+                             or item.find("media:content/media:credit", ns)
+                             is not None),
         })
     return raus
 

@@ -1,84 +1,87 @@
 {
   "target": 6,
-  "ready": 0,
+  "ready": 11,
   "pool_size": 12,
-  "generated_at": "2026-11-13T12:14:37Z",
+  "generated_at": "2026-11-13T19:34:33Z",
   "candidates": [
     {
       "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
-      "ready": false,
-      "sha256": "9d7543eee4977a8762d862a6fc40079ef3046225a63e0712fe4fb31af02f7caf",
-      "measured_at": "2026-11-13T12:03:58Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
+      "ready": true,
+      "sha256": "ff4c55ac20b3266a1b41c9ee22db6d66498d0912df2a5dcb120c986bb11ffbce",
+      "flesch": 66.7,
+      "measured_at": "2026-11-13T19:19:33Z",
+      "score": 0.974,
+      "parts": {
+        "spelling": 0.94,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.96,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
     },
     {
       "slug": "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee",
-      "ready": false,
-      "sha256": "aad7490eb6d91429d0bf416b8c43882e55e65677d770de2d1be996c7f9dbc5dd",
-      "measured_at": "2026-11-13T12:05:13Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
-    },
-    {
-      "slug": "2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
-      "ready": false,
-      "sha256": "2ce2ad1fc6e3485c931115c0868f90f9ac148fac9e803c52c8c494860c934463",
-      "flesch": 64.5,
-      "measured_at": "2026-11-13T12:05:15Z",
-      "reason": "Reserve-Qualitäts-Gate: Umfang: 763 Wörter / 5693 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
-      "details": [
-        "Umfang: 763 Wörter / 5693 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
-      ],
-      "score": 0.871,
+      "ready": true,
+      "sha256": "90a1ea61374612813c3196c08ec0f2feef27b1d80ec078bddaf06f76817b7575",
+      "flesch": 60.4,
+      "measured_at": "2026-11-13T19:21:04Z",
+      "score": 0.952,
       "parts": {
-        "spelling": 0.84,
-        "meta": 0.85,
-        "structure": 0.7,
-        "typography": 0.7,
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.92,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 1.0
       }
     },
     {
+      "slug": "2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
+      "ready": true,
+      "sha256": "a6b2cbc8c4fed5a5236bd9c81b0b0d0ccc1ca5a23ea82bf8207488624460a2dd",
+      "flesch": 69.9,
+      "measured_at": "2026-11-13T19:22:27Z",
+      "score": 0.978,
+      "parts": {
+        "spelling": 0.94,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
       "slug": "2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
-      "ready": false,
-      "sha256": "d2b830917b632879ed5c5b5e4db964ccd3c590a8fd879ad5edc325e4448f7e3c",
-      "flesch": 62.1,
-      "measured_at": "2026-11-13T12:06:23Z",
-      "reason": "Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-Zwilling gegen den Bestand, #714): U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem (z. B. „du eine feste menge gas ",
-      "details": [
-        "🛑 2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-Zwilling gegen den Bestand, #714): U1-PHRASEN: 7 gleiche 7-Wort-Phrasen mit 2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem (z. B. „du eine feste menge gas verbrauchst du“) – ab 5 ist es Dopplung, Passage umschreiben",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.97,
+      "ready": true,
+      "sha256": "524b4b03665b31184405ba6b37c2ff86ef9a41b74fec63b28c33d6d041fb414d",
+      "flesch": 61.9,
+      "measured_at": "2026-11-13T19:23:46Z",
+      "score": 0.98,
       "parts": {
         "spelling": 0.96,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.98,
-        "uniqueness": 0.9,
+        "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.95
       }
     },
     {
       "slug": "2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst",
-      "ready": false,
-      "sha256": "7d4c3e100bcda64243a0acd28d2867fea2a4c176018aa1e80bca8dd9b9252511",
+      "ready": true,
+      "sha256": "01883d9970559cbc2aca768af9ca2c3a913664c90e41d900fcb6017a751c52d9",
       "flesch": 62.7,
-      "measured_at": "2026-11-13T12:07:30Z",
-      "reason": "Faktenfrische nicht bestanden: e7b2fed61f22a34dabf9 (luecke): In Deutschland gelten klare Regeln für die Verjährung von Gutscheinen. Meistens bleiben diese Karten drei Jahre lang gültig.; f6f5b9963e56b7639774 (luecke): Die Frist startet am ",
-      "details": [
-        "🛑 2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
-        "Faktenfrische nicht bestanden: e7b2fed61f22a34dabf9 (luecke): In Deutschland gelten klare Regeln für die Verjährung von Gutscheinen. Meistens bleiben diese Karten drei Jahre lang gültig.; f6f5b9963e56b7639774 (luecke): Die Frist startet am Ende des Jahres, in dem du sie kaufst. Ein Kauf im Mai führt also zur Gültigkeit bis Ende Dezember drei Jahre später.",
-        "Kurzantwort-Gate nicht bestanden: Kurzantwort fehlt – veröffentlichte Ratgeber brauchen ein nicht-leeres `kurzantwort` im Frontmatter (M4, #1110)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
-      "score": 0.958,
+      "measured_at": "2026-11-13T19:25:03Z",
+      "score": 0.988,
       "parts": {
-        "spelling": 0.9,
-        "meta": 0.85,
+        "spelling": 0.94,
+        "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
         "uniqueness": 1.0,
@@ -88,88 +91,47 @@
     },
     {
       "slug": "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
-      "ready": false,
-      "sha256": "6c31bc3c677b90ba7a7f0396bf96322f31ea112bf7837efff59ee4b66fc07c0c",
-      "flesch": 63.8,
-      "measured_at": "2026-11-13T12:08:43Z",
-      "reason": "Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-Zwilling gegen den Bestand, #714): U1-PHRASEN: 5 gleiche 7-Wort-Phrasen mit 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang (z. B. „bares geld ein haeufi",
-      "details": [
-        "🛑 2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-Zwilling gegen den Bestand, #714): U1-PHRASEN: 5 gleiche 7-Wort-Phrasen mit 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang (z. B. „bares geld ein haeufiger fehler ist das“) – ab 5 ist es Dopplung, Passage umschreiben",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.938,
+      "ready": true,
+      "sha256": "7a14e36357722f7832e2fe3b2f1357909374c15bb3ccea4351a13fb2a6723952",
+      "flesch": 63.6,
+      "measured_at": "2026-11-13T19:26:27Z",
+      "score": 0.954,
       "parts": {
-        "spelling": 0.8,
+        "spelling": 0.84,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 0.9,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
-    {
-      "slug": "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "ready": false,
-      "sha256": "a06696b24d3491a6fd649a1adabf964965f305fe86d1842950519e8fee724338",
-      "flesch": 70.9,
-      "measured_at": "2026-11-13T12:09:49Z",
-      "reason": "Faktenfrische nicht bestanden: 0b564f460c41218244bd (luecke): Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.; 3ad2eefed314eb172c26 (luecke): Die Aussag",
-      "details": [
-        "🛑 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
-        "Faktenfrische nicht bestanden: 0b564f460c41218244bd (luecke): Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.; 3ad2eefed314eb172c26 (luecke): Die Aussage, dass durch frühzeitige Bestellung Kosten um 10 % bis 20 % im Herbst eingespart werden können, ist unbelegt.; 43788c2cdcdfda52e753 (luecke): Die Modellrechnung verwendet einen Tiefpreis von 0,80 €/Liter, ohne dass diese Preisangabe belegt wird.; 5eedec8afbdef6a4ca49 (luecke): Es wird angegeben, dass typische Fehler beim Heizölkauf bis zu 15 % Mehrkosten verursachen können, jedoch fehlt ein Nachweis für diese Zahl.; 81881c5bc61824d25f5a (praezision): Die Faustregel, dass man bestellen sollte, wenn Preise vier Wochen unter dem Schnitt der letzten 12 Monate liegen, wird ohne Messgrundlage oder Quelle genannt.",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
-      "score": 1.0,
-      "parts": {
-        "spelling": 1.0,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
+        "typography": 0.96,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 1.0
+        "readability": 0.95
       }
     },
     {
       "slug": "2026-11-13-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
-      "ready": false,
-      "sha256": "108f2c7ecfe3cd3750e5892bc3d004c5f1b8dba3ecaf5217e4a4ef9318a7a1e7",
-      "flesch": 66.4,
-      "measured_at": "2026-11-13T12:11:03Z",
-      "reason": "Kurzantwort-Gate nicht bestanden: Kurzantwort fehlt – veröffentlichte Ratgeber brauchen ein nicht-leeres `kurzantwort` im Frontmatter (M4, #1110)",
-      "details": [
-        "🛑 2026-11-13-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Kurzantwort-Gate nicht bestanden: Kurzantwort fehlt – veröffentlichte Ratgeber brauchen ein nicht-leeres `kurzantwort` im Frontmatter (M4, #1110)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.918,
+      "ready": true,
+      "sha256": "a8f0c0fee75ea0fa08a4f1afd89ae1a6cc4df0140e265a3395f643f249863c09",
+      "flesch": 66.0,
+      "measured_at": "2026-11-13T19:27:48Z",
+      "score": 0.938,
       "parts": {
-        "spelling": 0.8,
-        "meta": 0.85,
+        "spelling": 0.84,
+        "meta": 1.0,
         "structure": 1.0,
         "typography": 0.9,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.95
+        "readability": 0.9
       }
     },
     {
       "slug": "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
-      "ready": false,
-      "sha256": "67c67d1b4bbefd0a5bc7d7c81408845a93553da1dd96990b9e981c839c8e96a4",
-      "flesch": 60.8,
-      "measured_at": "2026-11-13T12:12:13Z",
-      "reason": "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: ide",
-      "details": [
-        "🛑 2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…hinweis dieser artikel dient ausschließlich der allgemeinen information und stellt…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…keine anlage rechts oder steuerberatung dar prüfe konditionen und bedingungen…“ – doppelte Passage, manuell reparieren",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
-      ],
-      "score": 0.962,
+      "ready": true,
+      "sha256": "5410f7f70046418f46c2e8acecc85dd3eb0d443d874b69c99e9e6d46a0a4c9dc",
+      "flesch": 61.6,
+      "measured_at": "2026-11-13T19:29:08Z",
+      "score": 0.966,
       "parts": {
-        "spelling": 0.88,
+        "spelling": 0.9,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.86,
@@ -180,21 +142,14 @@
     },
     {
       "slug": "2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst",
-      "ready": false,
-      "sha256": "dd652f2f4f1bb1a06a4716035760b7858eeb877aa936688d20cafdb3a6df06fc",
-      "flesch": 62.9,
-      "measured_at": "2026-11-13T12:13:27Z",
-      "reason": "Faktenfrische nicht bestanden: 15c33c3d8391354fc901 (luecke): Ein gut gepflegtes Lederteil entwickelt eine Patina und wird mit der Zeit oft schöner.; 8c626b2f9633cf1f8df7 (luecke): Faustregel: Ein Kleidungsstück sollte mindestens 30 Mal get",
-      "details": [
-        "🛑 2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
-        "Faktenfrische nicht bestanden: 15c33c3d8391354fc901 (luecke): Ein gut gepflegtes Lederteil entwickelt eine Patina und wird mit der Zeit oft schöner.; 8c626b2f9633cf1f8df7 (luecke): Faustregel: Ein Kleidungsstück sollte mindestens 30 Mal getragen werden können, damit sich die Anschaffung ökologisch und ökonomisch lohnt.; c3b3214d7ca5a81fb22a (luecke): Neue Textilien verlieren sofort nach dem Kauf massiv an Wert.; d05e6be293b31e4347ff (luecke): Schwere Baumwollstoffe sind fast unzerstörbar.",
-        "Kurzantwort-Gate nicht bestanden: Kurzantwort fehlt – veröffentlichte Ratgeber brauchen ein nicht-leeres `kurzantwort` im Frontmatter (M4, #1110)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
-      ],
-      "score": 0.933,
+      "ready": true,
+      "sha256": "a0734a9dc0c239daf281441f2dee25fa0f82d7b67548549f821723d0509a7aac",
+      "flesch": 62.8,
+      "measured_at": "2026-11-13T19:30:34Z",
+      "score": 0.956,
       "parts": {
         "spelling": 0.8,
-        "meta": 0.85,
+        "meta": 1.0,
         "structure": 1.0,
         "typography": 0.96,
         "uniqueness": 1.0,
@@ -203,21 +158,54 @@
       }
     },
     {
+      "slug": "2026-11-13-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste",
+      "ready": true,
+      "sha256": "20d7b2a4d68cc60821e4101faec679f6bc85183fec24c0d7a904672f92411aca",
+      "flesch": 68.3,
+      "measured_at": "2026-11-13T19:31:55Z",
+      "score": 0.982,
+      "parts": {
+        "spelling": 0.96,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "ready": true,
+      "sha256": "9568345cab832a4b5c16dccd022143d4020b133c0b1f6b31e2eb257a7ede37fd",
+      "flesch": 60.4,
+      "measured_at": "2026-11-13T19:33:14Z",
+      "score": 0.924,
+      "parts": {
+        "spelling": 0.92,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 0.5,
+        "readability": 0.95
+      }
+    },
+    {
       "slug": "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ready": false,
-      "sha256": "3d64e70aff9ff304aa1c5bf8538f3baee7578630e26fabdeb7d2e53d10808ad5",
-      "flesch": 64.2,
-      "measured_at": "2026-11-13T12:14:36Z",
+      "sha256": "67bdadcf7fcd2168e642f9e025d4fb700d52141d768227ab8f2832e9f108884a",
+      "flesch": 62.8,
+      "measured_at": "2026-11-13T19:34:33Z",
       "reason": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
       "details": [
         "🛑 2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
         "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erforderten zwingend einen Smart Meter, wird ohne Angabe von Voraussetzungen, Kosten oder Verfügbarkeit präzisiert.; 77d809de9e06d1d6910d (luecke): Es wird eine Prognose für den Strompreis 2026 angegeben („Trends erkennen“, „Netzentgelte steigen“), ohne dass dafür aktuelle Marktdaten oder offizielle Prognosen genannt werden.; ad7c0a90ef52ff35130e (luecke): Der Artikel behauptet, dass Preisgarantien vor Preissteigerungen schützen, liefert jedoch keine Quelle für diese Aussage.; f227178fbda2cc59c350 (luecke): Die Aussage, dass Ökostrom‑Tarife häufig günstiger als die Grundversorgung seien, wird nicht durch eine Quelle belegt.",
-        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…jetzt vergleichen und sparen jetzt fixkosten auf check24 prüfen wichtiger…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…hinweis dieser artikel dient ausschließlich der allgemeinen information und stellt…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…keine anlage rechts oder steuerberatung dar prüfe konditionen und bedingungen…“ – doppelte Passage, manuell reparieren",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
       ],
-      "score": 0.962,
+      "score": 0.954,
       "parts": {
-        "spelling": 0.96,
+        "spelling": 0.92,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.7,
@@ -225,32 +213,9 @@
         "affiliate": 1.0,
         "readability": 1.0
       }
-    },
-    {
-      "slug": "2026-11-13-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste",
-      "ready": false,
-      "sha256": "148922b4abb8cc53aa95c3b4a679a78715710418a4c63888e496692c9e54e4e7",
-      "flesch": 60.8,
-      "measured_at": "2026-11-13T12:14:37Z",
-      "reason": "Reserve-Qualitäts-Gate: Umfang: 773 Wörter / 5675 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
-      "details": [
-        "Umfang: 773 Wörter / 5675 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
-      ],
-      "score": 0.895,
-      "parts": {
-        "spelling": 0.96,
-        "meta": 0.85,
-        "structure": 0.7,
-        "typography": 0.8,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "43415998554",
-    "run_attempt": "1"
+    "kind": "full"
   }
 }

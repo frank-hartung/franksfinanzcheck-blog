@@ -2,13 +2,13 @@
 
 _Stand 2026-11-13 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**155 offene Befunde auf 39 Seiten · davon 24 Live-Seiten mit 94 Befunden · ältester 14 Tage · Frist 14 Tage.**
+**150 offene Befunde auf 38 Seiten · davon 24 Live-Seiten mit 94 Befunden · ältester 14 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 155 |
-| Seiten betroffen | 39 (davon live: 24) |
-| Text seit dem Befund geändert | 96 |
+| Offene Befunde | 150 |
+| Seiten betroffen | 38 (davon live: 24) |
+| Text seit dem Befund geändert | 95 |
 | Altbestand ohne Fassungs-Hash | 15 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
 | Über der Frist (14 Tage) | 0 |
@@ -32,7 +32,7 @@ _Stand 2026-11-13 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 111 von 155 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 110 von 150 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -464,28 +464,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9800545ae945ec280b3
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden bc0e4f2eb357a682c674 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu` · nicht im Live-Bestand · 5 Befund(e)
-
-Seite: `2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu`
-
-Herkunft nach Datums-Lift: `2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu` → `2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu`. Befund-ID und Fassungsanker bleiben unverändert; das Re-Dating ist keine fachliche Entscheidung.
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `0b564f460c41218244bd` | luecke | 10 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `3ad2eefed314eb172c26` | luecke | 10 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Aussage, dass durch frühzeitige Bestellung Kosten um 10 % bis 20 % im Herbst eingespart werden können, ist unbelegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `43788c2cdcdfda52e753` | luecke | 10 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Modellrechnung verwendet einen Tiefpreis von 0,80 €/Liter, ohne dass diese Preisangabe belegt wird. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `5eedec8afbdef6a4ca49` | luecke | 10 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Es wird angegeben, dass typische Fehler beim Heizölkauf bis zu 15 % Mehrkosten verursachen können, jedoch fehlt ein Nachweis für diese Zahl. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `81881c5bc61824d25f5a` | praezision | 10 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Faustregel, dass man bestellen sollte, wenn Preise vier Wochen unter dem Schnitt der letzten 12 Monate liegen, wird ohne Messgrundlage oder Quelle genannt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 0b564f460c41218244bd --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3ad2eefed314eb172c26 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 43788c2cdcdfda52e753 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5eedec8afbdef6a4ca49 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 81881c5bc61824d25f5a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
 ### `2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag` · nicht im Live-Bestand · 3 Befund(e)
 
 Seite: `2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag`
@@ -598,6 +576,24 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 49c1a762c2df16c52b7
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 56c5b1f92a70c6ebeb0b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden c6d20c93f94cee2ae5ae --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f6a30c4191c47f5cdf0a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten` · nicht im Live-Bestand · 4 Befund(e)
+
+Seite: `2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `228c9da3c42ee90e34bf` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Eine typische Auslandseinsatzgebühr liegt bei 1 % des Umsatzes. | – |
+| `7728690d5c2f7c141d8d` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Du hast eine Jahresgebühr von 60 € und kündigst erst 30 Tage nach Ablauf der Frist. | – |
+| `cc0de46a82ad90851506` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Du investierst 15 Minuten in den CHECK24‑Filter und sparst im Schnitt 5 Minuten pro Anbieter. | – |
+| `d553d0d6c7706a69ad13` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Keine versteckten Kosten, wenn die Karte „keine Jahres‑ und keine Auslandseinsatzgebühr“ nennt. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 228c9da3c42ee90e34bf --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7728690d5c2f7c141d8d --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden cc0de46a82ad90851506 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d553d0d6c7706a69ad13 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-10-28-dsl-und-internet-flat-guenstig-sichern` · nicht im Live-Bestand · 5 Befund(e)
@@ -720,24 +716,6 @@ Seite: `2026-10-19-urlaubskasse-clever-aufbessern`
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 17cddd994cefcdc30f31 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 676fdb5ff70228b06bdc --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 88051266499d4040f7f3 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten` · nicht im Live-Bestand · 4 Befund(e)
-
-Seite: `2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `228c9da3c42ee90e34bf` | luecke | 1 T | Text unverändert seit dem Befund | Eine typische Auslandseinsatzgebühr liegt bei 1 % des Umsatzes. | – |
-| `7728690d5c2f7c141d8d` | luecke | 1 T | Text unverändert seit dem Befund | Du hast eine Jahresgebühr von 60 € und kündigst erst 30 Tage nach Ablauf der Frist. | – |
-| `cc0de46a82ad90851506` | luecke | 1 T | Text unverändert seit dem Befund | Du investierst 15 Minuten in den CHECK24‑Filter und sparst im Schnitt 5 Minuten pro Anbieter. | – |
-| `d553d0d6c7706a69ad13` | luecke | 1 T | Text unverändert seit dem Befund | Keine versteckten Kosten, wenn die Karte „keine Jahres‑ und keine Auslandseinsatzgebühr“ nennt. | – |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 228c9da3c42ee90e34bf --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7728690d5c2f7c141d8d --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden cc0de46a82ad90851506 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden d553d0d6c7706a69ad13 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ---

@@ -1,29 +1,15 @@
 {
-  "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": {
-    "datei_sha256": "2d78a0098f56f061d01a4dda1c9c7a3a6162c4e888cadf32c9c0cccf45abb771",
-    "fassung_gewechselt": true,
-    "first": "2026-11-13T16:06:17Z",
-    "grund": "Faktenfrische nicht bestanden: 0b564f460c41218244bd (luecke): Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.; 3ad2eefed314eb172c26 (luecke): Die Aussag",
-    "hits": 1,
-    "klasse": "menschlich",
-    "laeufe": [
-      "lokal:2026-11-13"
-    ],
-    "last": "2026-11-13T16:06:17Z",
-    "lauf": "lokal:2026-11-13",
-    "signatur": "faktenfrische nicht bestanden: <n>b<n>f<n>c<n>bd (luecke): der artikel behauptet, dass heizöl‑preise ihr tief meist in den monaten januar und februar erreichen, ohne dafür eine quelle anzugeben.; <n>a"
-  },
   "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten": {
-    "datei_sha256": "3187957109f5cf34e327f413843c3857733ab6ea6e6d66a393269cfad3386b84",
+    "datei_sha256": "e4b8e6ffd20f75daa9700cec6e0e657f12642ac37a185f0ba391a697ab402ebc",
     "fassung_gewechselt": true,
-    "first": "2026-11-13T16:06:17Z",
+    "first": "2026-11-13T17:04:42Z",
     "grund": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
     "hits": 1,
     "klasse": "menschlich",
     "laeufe": [
       "lokal:2026-11-13"
     ],
-    "last": "2026-11-13T16:06:17Z",
+    "last": "2026-11-13T19:34:33Z",
     "lauf": "lokal:2026-11-13",
     "signatur": "faktenfrische nicht bestanden: <n>c<n>e<n>d<n>f<n>da<n>ec<n> (luecke): der hinweis, dass ein anbieterwechsel im durchschnitt <n>‑<n> wochen dauert, fehlt eine nachweisbare quelle.; <n>b<n>daf<n>f<n>a<"
   }

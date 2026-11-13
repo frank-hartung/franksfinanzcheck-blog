@@ -1,10 +1,9 @@
 ---
-title: "Grundlast Strom: Stromverbrauch nachts messen & senken"
+title: "Deine nächtliche Grundlast Strom: Stromverbrauch nachts"
 description: "Grundlast Strom messen: So liest du deinen Stromverbrauch nachts am Zähler ab, findest stille Dauerläufer und senkst deine Stromkosten."
-kurzantwort: "Deine nächtliche Grundlast zeigt am Zähler genau, welche Geräte auch im Schlaf Strom ziehen. Wer den Stand abends und morgens an mehreren Tagen vergleicht, findet teure Dauerläufer und senkt seine laufenden Kosten ohne Verzicht."
-date: 2026-11-13T11:26:17Z
-draft: true
+date: 2026-11-13T18:04:35Z
 reserve: true
+draft: true
 tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
@@ -23,20 +22,21 @@ redaktionelle_pruefung:
 inspiration: "Grundlast messen: Wo dein Strom nachts hingeht"
 cover:
   image: "images/covers/2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo.jpg"
-  alt: "Grundlast Strom: Stromverbrauch nachts messen und senken"
+  alt: "Deine nächtliche Grundlast Strom: So erkennst"
   caption: "Tipp von FranksFinanzcheck"
   ki_pruefung:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: a7e8263a30473a377f7399afd7f8fb2ce45f2be7f35ecda03714f7869ef9c117
+    sha256: 5f3e4f588b8f09943906adbee190cdd77928e3436fc29eec1f7fb5571bbb8a4a
     geprueft_am: 2026-11-13
+faktencheck: 2026-11-12
+kurzantwort: "Deine nächtliche Grundlast zeigt am Zähler genau, welche Geräte auch im Schlaf Strom ziehen. Wer den Stand abends und morgens an mehreren Tagen vergleicht, findet teure Dauerläufer und senkt seine laufenden Kosten ohne Verzicht."
 quellen:
   - id: "Q1"
     titel: "Referenzseite bundesnetzagentur.de"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
-faktencheck: 2026-11-12
 faktenfrische_aliases:
   - "2026-11-12-deine-naechtliche-grundlast-strom-so-erkennst-du-wo"
 ---

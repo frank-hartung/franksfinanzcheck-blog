@@ -32,15 +32,15 @@ cover:
     geprueft_am: 2026-11-13
 faktencheck: 2026-11-09
 kurzantwort: "Ob sich ein Stromtarifwechsel im Herbst lohnt, entscheidet nicht eine unsichere Preisprognose, sondern der Vergleich deiner aktuellen Jahresabrechnung mit verfügbaren Wahltarifen. Prüfe Arbeitspreis, Grundpreis, Laufzeit und den Umfang einer eingeschränkten Preisgarantie, bevor deine Kündigungsfrist abläuft."
+faktenfrische_aliases:
+  - "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten"
+  - "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten"
+  - "2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten"
 quellen:
   - id: "Q1"
     titel: "Referenzseite bundesnetzagentur.de"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
-faktenfrische_aliases:
-  - "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten"
-  - "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten"
-  - "2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten"
 ---
 
 Draußen färben sich die Blätter bunt und die Tage werden kürzer.  

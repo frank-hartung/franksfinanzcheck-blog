@@ -1,9 +1,9 @@
 ---
 title: "Geschenkkarte: Was du beim Kauf und Aufladen wissen musst"
 description: Eine Geschenkkarte ist praktisch, birgt aber oft versteckte Kosten. Wir zeigen dir, wie du beim Gutschein aufladen und Karte verschenken Geld sparst.
-date: 2026-11-13T11:26:10Z
-draft: true
+date: 2026-11-13T18:08:35Z
 reserve: true
+draft: true
 tags: ["Girokonto", "Kreditkarte und Kredit", "Tagesgeld und Zinsen"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"

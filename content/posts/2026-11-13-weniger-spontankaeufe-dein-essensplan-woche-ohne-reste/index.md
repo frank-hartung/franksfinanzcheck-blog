@@ -1,7 +1,6 @@
 ---
 title: "Weniger Spontankäufe: Dein Essensplan Woche ohne Reste"
 description: "Mit einem klaren Essensplan für die Woche vermeidest du Spontankäufe, verwertest Vorräte komplett und entlastest dein monatliches Haushaltsbudget."
-kurzantwort: "Ein guter Essensplan für die Woche stoppt teure Spontankäufe im Markt und sorgt dafür, dass offene Zutaten ganz aufgebraucht werden. Wer erst seine Vorräte prüft, passende Gerichte kombiniert und strikt nach Liste einkauft, senkt seine Ausgaben dauerhaft ohne Verzicht."
 date: 2026-11-13T11:49:36Z
 draft: true
 reserve: true
@@ -31,6 +30,7 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: 73a882cc7e31b4531113f7903c7ae00174e2eb98a2ffe4e92cba9487d9efbe16
     geprueft_am: 2026-11-13
+kurzantwort: "Ein guter Essensplan für die Woche stoppt teure Spontankäufe im Markt und sorgt dafür, dass offene Zutaten ganz aufgebraucht werden. Wer erst seine Vorräte prüft, passende Gerichte kombiniert und strikt nach Liste einkauft, senkt seine Ausgaben dauerhaft ohne Verzicht."
 faktencheck: 2026-11-13
 ---
 

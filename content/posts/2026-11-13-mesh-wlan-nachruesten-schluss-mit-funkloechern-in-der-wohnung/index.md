@@ -30,16 +30,17 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: 9d9150b5ab8e08a50ce018350f8bacb1737b06152e8b97c5759213cd6d78b1d7
     geprueft_am: 2026-11-13
+
 kurzantwort: "Ein Mesh-WLAN ersetzt einzelne Funklöcher durch vernetzte Knotenpunkte, die deine Wohnung nahtlos unter einem einzigen Netzwerknamen versorgen. Die Nachrüstung lohnt sich besonders bei verwinkelten Grundrissen oder massiven Wänden und spart teure Notlösungen über zusätzliches Mobilfunk-Datenvolumen."
+faktenfrische_aliases:
+  - "2026-11-09-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung"
+  - "2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung"
+  - "2026-11-12-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung"
 quellen:
   - id: "Q1"
     titel: "Referenzseite bundesnetzagentur.de"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
     herausgeber: "Bundesnetzagentur"
-faktenfrische_aliases:
-  - "2026-11-09-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung"
-  - "2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung"
-  - "2026-11-12-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung"
 faktencheck: 2026-11-10
 ---
 
