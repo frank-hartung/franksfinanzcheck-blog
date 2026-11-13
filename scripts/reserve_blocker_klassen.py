@@ -202,10 +202,50 @@ GATE_BEFUNDE: tuple[dict, ...] = (
      "grund": "Offene redaktionelle Prüfung gehört einem Menschen."},
     {"muster": "ymyl", "klasse": MENSCHLICH,
      "grund": "YMYL-Risikoklasse: nur mit menschlicher Freigabe."},
+    # WF-D4E0 (#1121): Die vier bewussten Redaktions-Holds aus
+    # `reserve_healer_coverage.AUSNAHMEN` (Kurzantwort #1110, Einzigartigkeit
+    # #714, Redundanz #676, offene Fachbefunde #912) müssen VOR generischen
+    # Teilwörtern wie „frontmatter“, „titel“ oder „faktenfrische“ stehen.
+    # Vorher traf „Kurzantwort-Gate … im Frontmatter“ das Muster `frontmatter`
+    # (`unheilbar` -> Janitor-Löschrisiko!), „Einzigartigkeits-Gate … Titel-
+    # Zwilling“ traf `titel` (`heilbar`), und ein offener Fachbefund
+    # `<20-hex> (luecke|widerspruch|praezision|aktualitaet)` traf das generische
+    # `faktenfrische` (`heilbar`). Alle vier gehören der Redaktion: nie löschen,
+    # aber nach der Quarantäne den automatischen Pool-Slot für Nachschub räumen.
+    {"muster": "kurzantwort-gate", "klasse": MENSCHLICH,
+     "grund": ("Fehlende Kurzantwort (M4, #1110) ist redaktioneller Inhalt – "
+               "die Reserve-Kette erfindet sie nicht; der Entwurf wartet als "
+               "Hold auf Ergänzung und wird nie gelöscht.")},
+    {"muster": "kurzantwort fehlt", "klasse": MENSCHLICH,
+     "grund": "Fehlende Kurzantwort (M4, #1110) gehört in die Redaktion."},
+    {"muster": "einzigartigkeits-gate", "klasse": MENSCHLICH,
+     "grund": ("Phrasen-Dopplung (U1) und Titel-Zwillinge (U2) erfordern eine "
+               "redaktionelle Entscheidung (#714) – nie löschen.")},
+    {"muster": "redundanz-gate", "klasse": MENSCHLICH,
+     "grund": ("Cross-Artikel-Redundanz (D1–D6) ist eine redaktionelle "
+               "Entscheidung (#676) – nie löschen.")},
+    {"muster": "werbekennzeichnung nicht bestanden", "klasse": MENSCHLICH,
+     "grund": ("Offenlegungs-Befund (O1–O7) ist ein Template-/Registerbefund "
+               "(C15) – der Entwurf wird nicht gelöscht.")},
+    {"muster": "(luecke):", "klasse": MENSCHLICH,
+     "grund": ("Offener Fachbefund (Beleglücke, #912) braucht eine "
+               "fassungsgebundene Redaktionsentscheidung im Ledger.")},
+    {"muster": "(widerspruch):", "klasse": MENSCHLICH,
+     "grund": ("Offener Fachbefund (Widerspruch, #912) braucht eine "
+               "fassungsgebundene Redaktionsentscheidung im Ledger.")},
+    {"muster": "(praezision):", "klasse": MENSCHLICH,
+     "grund": ("Offener Fachbefund (Präzision, #912) braucht eine "
+               "fassungsgebundene Redaktionsentscheidung im Ledger.")},
+    {"muster": "(aktualitaet):", "klasse": MENSCHLICH,
+     "grund": ("Offener Fachbefund (Aktualität, #912) braucht eine "
+               "fassungsgebundene Redaktionsentscheidung im Ledger.")},
     {"muster": "zeichenlänge", "klasse": HEILBAR, "heiler": ("check_length.py",),
      "grund": ("Der Längen-Floor wird von der Kette gehoben; ein kurzer "
                "Entwurf heißt meist nur: Der Gratis-Provider war im "
                "Cooldown (Realfall #594).")},
+    {"muster": "reserve-qualitäts-gate: umfang:", "klasse": HEILBAR,
+     "heiler": ("check_length.py",),
+     "grund": "Kurzer Vorstufen-Entwurf wird von check_length.py verlängert."},
     {"muster": "faktenfrische", "klasse": HEILBAR, "heiler": ("faktenfrische.py",),
      "grund": "Erst-/Folgerecherche zieht der echte Rechercheweg nach."},
     # REPARATUR 07.10.2026 (WACHE-609): Bis hierher stand nur
@@ -312,6 +352,27 @@ def gate_befund_loeschbar(grund: str) -> tuple[bool, dict]:
     """Rechtfertigt dieser ausgemusterte Gate-Fund eine Löschung?"""
     bewertung = gate_befund_klasse(grund)
     return bewertung["klasse"] == UNHEILBAR, bewertung
+
+
+def gate_befund_ausmusterbar(grund: str) -> tuple[bool, dict]:
+    """Darf die Quarantäne diesen Kandidaten aus dem automatischen Pool nehmen?
+
+    WF-D4E0 (#1121): Ausmustern (`reserve_blocked`) und Löschen (`reserve_janitor`)
+    sind ZWEI verschiedene Entscheidungen:
+      * `UNHEILBAR` (Dublette, kaputtes Frontmatter): aus dem Pool nehmen UND
+        nach Frist vom Janitor räumbar (`gate_befund_loeschbar` == True).
+      * `MENSCHLICH` (offener Fachbefund #912, fehlende Kurzantwort #1110,
+        Einzigartigkeit #714, Redundanz #676, YMYL-Freigabe): KEIN Auto-Heiler
+        der Reserve-Kette darf diesen Befund schließen (`AUSNAHMEN`). Bliebe
+        der Kandidat für immer mit `reserve: true` im 12er-Pool, blockierte er
+        den automatischen Nachschub dauerhaft (`Pool Capacity Deadlock`). Er
+        verlässt deshalb nach der Quarantäne den automatischen Pool als
+        aufbewahrter Redaktions-Hold (`reserve_blocked`) – der Janitor löscht
+        `MENSCHLICH` ausdrücklich NIE (`gate_befund_loeschbar` == False).
+      * `HEILBAR`, `TRANSIENT`, `unbekannt`: bleiben fail-closed im Pool.
+    """
+    bewertung = gate_befund_klasse(grund)
+    return bewertung["klasse"] in (UNHEILBAR, MENSCHLICH), bewertung
 
 
 def alle() -> tuple[dict, ...]:
@@ -513,6 +574,22 @@ def run_selftest() -> int:
         fehler.append("Werkzeugfehler muss transient sein")
     if gate_befund_klasse("Freigabe fehlt")["klasse"] != MENSCHLICH:
         fehler.append("offene Freigabe gehört einem Menschen")
+    # WF-D4E0 (#1121): Redaktions-Holds sind ausmusterbar (räumen den Pool-Slot
+    # für Nachschub), aber NIE löschbar (Janitor verschont MENSCHLICH).
+    for hold_fund in (
+        "Kurzantwort-Gate nicht bestanden: Kurzantwort fehlt – veröffentlichte "
+        "Ratgeber brauchen ein nicht-leeres `kurzantwort` im Frontmatter (M4, #1110)",
+        "Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-"
+        "Zwilling gegen den Bestand, #714): U1-PHRASEN",
+        "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): "
+        "Wechseldauer ohne Quelle",
+    ):
+        if gate_befund_loeschbar(hold_fund)[0]:
+            fehler.append(f"Redaktions-Hold darf nie löschbar sein: {hold_fund[:50]}")
+        if not gate_befund_ausmusterbar(hold_fund)[0]:
+            fehler.append(f"Redaktions-Hold muss Pool-Slot räumen können: {hold_fund[:50]}")
+    if gate_befund_ausmusterbar("Zeichenlänge (check_length.py) nicht bestanden")[0]:
+        fehler.append("heilbarer Befund darf nicht ausgemustert werden (#614)")
     if not gate_befund_loeschbar("Dublette zu 2026-09-11-x")[0]:
         fehler.append("eine echte Dublette muss löschbar bleiben")
 

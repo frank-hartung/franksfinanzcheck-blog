@@ -4,7 +4,7 @@ description: Wie hoch ist der Kaffeemaschine Stromverbrauch? Wir vergleichen Kap
 date: 2026-11-10T11:34:25Z
 draft: true
 reserve: true
-tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromkosten senken"]
+tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
@@ -25,7 +25,12 @@ cover:
   alt: "Kaffeemaschine Stromverbrauch: Was kostet die Tasse Kaffee?"
   caption: "Tipp von FranksFinanzcheck"
 faktencheck: 2026-11-09
-kurzantwort: "Eine typische Kapselmaschine verbraucht etwa 0,05 kWh pro Tasse, das entspricht bei einem Strompreis von 0,30 €/kWh rund 0,015 € (1,5 Cent) pro Kaffee. Ein Vollautomat liegt meist bei 0,12 kWh pro Tasse, also etwa 0,036 € (3,6 Cent) pro Getränk. Damit ist der Stromverbrauch pro Tasse bei Kapselgeräten fast halb so hoch wie bei Vollautomaten."
+kurzantwort: "Der Stromverbrauch einer Kaffeemaschine fällt vor allem durch Aufheizphasen, Spülvorgänge und dauerhaften Standby ins Gewicht, während im Alltag die Portionskosten den größten Unterschied machen. Wer nach dem Brühen abschaltet und ab mehreren Tassen täglich Bohnen oder Pulver statt Kapseln nutzt, senkt seine laufenden Kosten deutlich."
+quellen:
+  - id: "Q1"
+    titel: "Referenzseite bundesnetzagentur.de"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    herausgeber: "Bundesnetzagentur"
 faktenfrische_aliases:
   - "2026-11-09-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee"
 ---
@@ -145,7 +150,7 @@ Oft stecken Haushalte in alten Verträgen mit hohen Preisen fest. Besonders im H
 
 **Faustregel:** Wenn dein Kaffeekonsum bei mehr als drei Tassen täglich liegt, solltest du dich von Kapselsystemen verabschieden und auf Bohnen oder Pulver setzen.
 
-Wenn du beim Strom sparen willst, lohnt sich oft ein Blick auf den Anbieter. Unter [diesem Link kannst du deinen Stromanbieter prüfen und wechseln](/go/strom/) (Werbung/Affiliate). Ein Wechsel kann die Kosten für jede Tasse Kaffee indirekt senken.
+Wenn du beim Strom sparen willst, lohnt sich oft ein Blick auf den Anbieter. Über unseren Vergleich kannst du deinen [Stromanbieter prüfen und wechseln](/go/strom/) {rel="sponsored"}. Ein Wechsel kann die Kosten für jede Tasse Kaffee indirekt senken.
 
 Jede Kilowattstunde kostet Geld. Ein günstigerer Arbeitspreis pro Kilowattstunde wirkt sich auf alle Geräte im Haushalt aus. Achte auch auf die Wasserhärte in deiner Region. Hartes Wasser führt schneller zu Verkalkung.
 

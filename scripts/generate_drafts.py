@@ -972,6 +972,93 @@ def parse_article(raw, topic, angle_name):
     return title, desc, body
 
 
+def _strip_kurzantwort_markup(text: str) -> str:
+    """Entfernt Markdown/Links und kaputte leere Zitatklammern `()`."""
+    out = str(text or "")
+    for _ in range(4):
+        vor = out
+        out = re.sub(r"!\[([^\[\]]*)\]\((?:[^()]|\([^()]*\))*\)", r"\1", out)
+        out = re.sub(r"\[([^\[\]]+)\]\((?:[^()]|\([^()]*\))*\)", r"\1", out)
+        if out == vor:
+            break
+    out = re.sub(r"\]\((?:[^()]|\([^()]*\))*\)", "", out)
+    out = out.replace("[", "").replace("]", "")
+    out = re.sub(r"https?://[^\s<>\"')]+", "", out, flags=re.I)
+    out = re.sub(r"\(\s*\)", "", out)
+    out = re.sub(r"[*_`#>]", "", out)
+    out = re.sub(r"\s+([.,;:!?])", r"\1", out)
+    return re.sub(r"\s+", " ", out).strip()
+
+
+def ableite_kurzantwort_aus_body(body: str, desc: str = "") -> str:
+    """Leitet die Geburts-Kurzantwort (M4, #1110) aus dem eigenen Artikeltext ab.
+
+    WF-D4E0 (#1121): Seit #1110 verlangt `publish_gate.kurzantwort_failures` ein
+    nicht-leeres `kurzantwort:` im Frontmatter, während `reserve_finisher`
+    keinen separaten KI-Schreiber ausführen darf (keine erfundenen Zahlen nur
+    aus Titel/Description). Bei der Geburt liegt der geprüfte Artikeltext aber
+    bereits vor – samt Pflichtblock „Das Wichtigste in Kürze“. Wir verdichten
+    ausschließlich ziffernfreie Kernaussagen aus diesem Block (Fallback: erste
+    ziffernfreie Einleitungssätze / Description) zu 2–3 klaren Sätzen ohne
+    Markdown-Artefakte oder leere Klammern `()`. Enthält jeder Kandidat Zahlen,
+    werden nur Sätze übernommen, die bereits im geprüften Body stehen.
+    """
+    text = str(body or "")
+    kandidaten: list[str] = []
+
+    # 1) Bullet-Punkte aus „Das Wichtigste in Kürze“ (REDAKTIONS-STANDARD 1)
+    m_kuerze = re.search(
+        r"(?ims)\*{0,2}Das Wichtigste in Kürze:?\*{0,2}\s*\n+((?:\s*[-*•]\s+.+\n?){1,6})",
+        text,
+    )
+    if m_kuerze:
+        for zeile in m_kuerze.group(1).splitlines():
+            kern = re.sub(r"^\s*[-*•]\s+", "", zeile).strip()
+            kern = _strip_kurzantwort_markup(kern)
+            # Optionales fettes Label am Bullet-Anfang („Hebel nutzen: …“ -> Satz)
+            kern = re.sub(r"^[A-ZÄÖÜ][^:.!?]{1,28}:\s+", "", kern).strip()
+            if kern and kern[-1] not in ".!?":
+                kern += "."
+            if len(kern) >= 25:
+                kandidaten.append(kern)
+
+    # 2) Erste Einleitungssätze vor der ersten Zwischenüberschrift
+    if len([s for s in kandidaten if not re.search(r"\d", s)]) < 2:
+        vor_h2 = re.split(r"(?m)^##\s+", text, maxsplit=1)[0]
+        for absatz in re.split(r"\n\s*\n", vor_h2):
+            s = absatz.strip()
+            if (not s or s.startswith(("#", "-", "*", ">", "|", "!"))
+                    or "wichtigste in kürze" in s.lower()
+                    or "transparenz:" in s.lower()
+                    or "wichtiger hinweis:" in s.lower()):
+                continue
+            klartext = _strip_kurzantwort_markup(s)
+            for satz in re.split(r"(?<=[.!?])\s+", klartext):
+                satz = satz.strip()
+                if len(satz) >= 30 and not satz.endswith("?"):
+                    if satz[-1] not in ".!":
+                        satz += "."
+                    if satz not in kandidaten:
+                        kandidaten.append(satz)
+
+    # Ziffernfreie Sätze bevorzugen (keine unbelegten Zahlen in M4/YMYL tragen)
+    ohne_zahlen = [s for s in kandidaten if not re.search(r"\d", s)]
+    auswahl = (ohne_zahlen if len(ohne_zahlen) >= 2 else kandidaten)[:3]
+    antwort = ""
+    for satz in auswahl:
+        probe = (antwort + " " + satz).strip() if antwort else satz
+        if len(probe) <= 340 or not antwort:
+            antwort = probe
+        if len(antwort) >= 180 and antwort.count(".") >= 2:
+            break
+
+    if not antwort and desc:
+        antwort = _strip_kurzantwort_markup(desc)
+        if antwort and antwort[-1] not in ".!?":
+            antwort += "."
+    return antwort[:360].strip()
+
+
 def validate_frontmatter(path):
     """Prüft Pflichtfelder im Frontmatter eines frisch erstellten Artikels.
     Fehlende/kaputte Felder werden repariert. Wirft Exception bei nicht
@@ -1169,10 +1256,16 @@ def write_draft(topic_entry, angle, provider, used_titles, auto_publish=False):
     except Exception as exc:  # noqa: BLE001 - Gate klassifiziert später fail-closed
         print(f"  ⚠ Risikoklasse nicht vormerkbar: {exc}")
         review_block = ""
+    kurzantwort = ableite_kurzantwort_aus_body(body, desc)
+    kurzantwort_line = (
+        f"kurzantwort: {json.dumps(kurzantwort, ensure_ascii=False)}\n"
+        if kurzantwort else ""
+    )
     frontmatter = (
         "---\n"
         f"title: {yaml_str(title)}\n"
         f"description: {yaml_str(desc)}\n"
+        f"{kurzantwort_line}"
         f"date: {date}\n"
         f"draft: {draft_flag}\n"
         f'tags: {json.dumps(_register_tags(keywords, topic_entry.get("pillar"), title), ensure_ascii=False)}\n'

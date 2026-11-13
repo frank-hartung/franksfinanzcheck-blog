@@ -247,5 +247,56 @@ class VerdrahtungTests(unittest.TestCase):
         self.assertIn("reserve_finisher.py --finish", workflow)
 
 
+class HinweisDedupeTests(unittest.TestCase):
+    """WF-D4E0 (#1121): Doppelte Wichtiger-Hinweis-/Transparenz-Absätze + CHECK24-Ziffern."""
+
+    def test_doppelter_wichtiger_hinweis_mit_check24_cta_wird_entfernt(self):
+        absaetze = [
+            "## Überblick",
+            "Wenn du deine laufenden Verträge einmal im Jahr systematisch prüfst, erkennst du teure Altverträge sofort. Notiere dir Kündigungsfristen, Grundpreise und Arbeitspreise klar in deiner Übersicht, damit keine automatische Verlängerung dein Haushaltsbudget unnötig belastet.",
+            "Vergleiche bei jedem Tarifwechsel immer die gesamten Jahreskosten über mindestens zwei Jahre hinweg. Ein einmaliger Bonus wirkt auf den ersten Blick attraktiv, ersetzt aber niemals einen dauerhaft fairen Grund- und Arbeitspreis bei seriösen Anbietern am Markt.",
+            "Halte alle Bestätigungen schriftlich fest und speichere die letzte Abrechnung griffbereit ab. Mit einem festen Termin im Kalender bleibt dein Fixkosten-Cockpit dauerhaft aktuell, ohne dass du im Alltag viel Zeit für Papierkram investieren musst.",
+            "## Konkrete Schritte im Haushalt",
+            "Starte mit deiner letzten Stromabrechnung und lies den tatsächlichen Verbrauch in Kilowattstunden sauber ab. Im nächsten Schritt prüfst du den Arbeitspreis pro Einheit sowie die monatliche Grundgebühr deines aktuellen Versorgers.",
+            "Achte bei neuen Angeboten auf kurze Mindestlaufzeiten und eine transparente Preisgarantie. Vorauskasse und starre Pakettarife schließt du bei der Auswahl konsequent aus, damit du flexibel bleibst und kein Insolvenzrisiko trägst.",
+            "Nach dem Auftrag übernimmt in der Regel der neue Lieferant die Kündigung beim bisherigen Versorger. Deine Belieferung zu Hause läuft während des gesamten Wechsels gesetzlich gesichert ohne jede Unterbrechung weiter.",
+            "Auch bei Internet, Mobilfunk und Versicherungen zahlt sich dieser ruhige Blick in die Unterlagen aus. Schon eine halbe Stunde pro Quartal genügt meistens, um schleichende Preiserhöhungen rechtzeitig vor Ablauf der Frist abzufangen.",
+            "Lege dir dafür einen schlichten Ordner mit deinen wichtigsten Verträgen und Abrechnungen an. Dort trägst du für Strom, Gas, DSL und Mobilfunk jeweils das Vertragsende sowie die geltende Frist für den Wechsel übersichtlich ein.",
+            "So behältst du das ganze Jahr über die volle Kontrolle über deine monatlichen Ausgaben. Keine versteckte Klausel überrascht dich mehr, und dein verfügbares Einkommen bleibt zuverlässig in deiner eigenen Haushaltskasse.",
+            "## Häufige Fragen",
+            "### Wie oft lohnt sich der Check?\nEinmal pro Jahr reicht im Alltag völlig aus, solange keine schriftliche Preiserhöhung ins Haus flattert und sich dein Bedarf im Haushalt nicht wesentlich verändert hat.",
+            "### Wer übernimmt die Abmeldung beim alten Anbieter?\nIm Regelfall erledigt dein neuer Vertragspartner die fristgerechte Kündigung elektronisch im Hintergrund, sofern du nicht kurzfristig ein Sonderkündigungsrecht wegen einer Preiserhöhung ausübst.",
+        ]
+        body_kern = "\n\n".join(absaetze)
+        raw = (
+            "---\n"
+            "title: \"Probe: Doppelter Hinweis\"\n"
+            "date: 2026-11-13\n"
+            "draft: true\n"
+            "reserve: true\n"
+            "---\n\n"
+            + body_kern + "\n\n"
+            "---\n\n"
+            "👉 **Jetzt vergleichen und sparen:** [**→ Jetzt auf CHECK24 prüfen**](/go/allgemein/)\n\n"
+            "*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link "
+            "erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*\n\n"
+            "_Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information "
+            "und stellt keine Anlage-, Rechts- oder Steuerberatung dar._\n\n"
+            "---\n\n"
+            "👉 **Jetzt vergleichen und sparen:** [**→ Jetzt auf CHECK24 prüfen**](/go/allgemein/)\n\n"
+            "*Dieser Artikel enthält Affiliate\u2011Links (Werbung). Beim Abschluss über einen Link "
+            "erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*\n\n"
+            "_Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information "
+            "und stellt keine Anlage-, Rechts- oder Steuerberatung dar._\n"
+        )
+        res = ph.heile_text("probe-hinweis", raw)
+        self.assertTrue(res["ok"], res)
+        self.assertTrue(any("R15-PHRASEN-DOPPEL" in b for b in res["behoben"]), res)
+        neu = res["neu_raw"]
+        self.assertEqual(neu.count("Wichtiger Hinweis:"), 1)
+        self.assertEqual(
+            len(re.findall(r"Affiliate[-\u2010\u2011]Links", neu)), 1)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)

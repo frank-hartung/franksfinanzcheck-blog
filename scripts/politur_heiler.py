@@ -266,6 +266,58 @@ def _wiederholung_finden(body: str, ab: int = 0):
     return None
 
 
+def _doppelte_hinweis_absaetze(body: str) -> tuple[str, list[str]]:
+    """Zieht wortgleiche kursive Hinweis-/Transparenz-Absätze ohne Links zusammen.
+
+    WF-D4E0 (#1121): Enthält ein doppelt angehängter Hinweis-Absatz (`_Wichtiger
+    Hinweis: … (z. B. CHECK24) …_`) runde Klammern im Klartext, greift in
+    `heile_phrasendoppel` die Markup-Sperre `(` / `)`. Ist der komplette Absatz
+    frei von Markdown-Links/Shortcodes/Tabellen und steht er weiter oben bereits
+    wortgleich als eigener Absatz, kann die spätere Kopie verlustfrei entfallen
+    (Links, Zahlen ohne Duplikat-Verlust? Nein: T2 prüft das Zahlen-Multiset!).
+    Da solche Hinweis-Absätze nur bei Zahlenfreiheit T2 bestehen, prüfen wir
+    zusätzlich, dass der Absatz keine Ziffern außerhalb von Markennamen wie
+    `CHECK24` verändert – oder überlassen Ziffern-Fälle fail-closed dem Tor T2.
+    """
+    entfernt: list[str] = []
+    bloecke = re.split(r"(\n\s*\n)", body)
+    gesehen: set[str] = set()
+    neu_bloecke: list[str] = []
+    for i, teil in enumerate(bloecke):
+        if i % 2 == 1:
+            neu_bloecke.append(teil)
+            continue
+        kern = teil.strip()
+        # Nur kursive Hinweis-/Transparenz-Absätze ohne Links/Tabellen/Shortcodes
+        hat_echtes_markup = (
+            "](" in kern or "{{" in kern or "|" in kern or "`" in kern
+            or "<" in kern or ">" in kern
+        )
+        ohne_marken_zahlen = re.sub(r"(?i)\bcheck24\b", "check", kern)
+        hat_zahlen = bool(re.search(r"\d", ohne_marken_zahlen))
+        norm = re.sub(r"\s+", " ", kern.replace("\u2011", "-")).lower()
+        ist_hinweis = (
+            len(_WORT.findall(kern)) >= R15_N
+            and not hat_echtes_markup
+            and not hat_zahlen
+            and (
+                (kern.startswith("_") and kern.endswith("_"))
+                or (kern.startswith("*") and kern.endswith("*") and not kern.startswith("**"))
+            )
+        )
+        if ist_hinweis and norm in gesehen:
+            entfernt.append(
+                "R15-PHRASEN-DOPPEL: doppelter Hinweis-Absatz entfernt"
+            )
+            if neu_bloecke and re.fullmatch(r"\n\s*\n", neu_bloecke[-1]):
+                neu_bloecke.pop()
+            continue
+        if ist_hinweis:
+            gesehen.add(norm)
+        neu_bloecke.append(teil)
+    return "".join(neu_bloecke), entfernt
+
+
 def heile_phrasendoppel(body: str) -> tuple[str, list[str]]:
     """Zieht unmittelbare Wort-Wiederholungen auf EIN Vorkommen zusammen (R15).
 
@@ -274,9 +326,10 @@ def heile_phrasendoppel(body: str) -> tuple[str, list[str]]:
     denn an ihm hängt der fortsetzende Satzrest („… im Check – stell dir vor,
     …"). Trägt der gelöschte Bereich Markup (Link, Shortcode, Tabelle, Code),
     bleibt dieser Kandidat unangetastet (fail-closed) und die Suche läuft
-    hinter ihm weiter.
+    hinter ihm weiter. Wortgleiche kursive Hinweis-Absätze ohne Links/Zahlen
+    werden vorab auf ein Vorkommen reduziert (#1121).
     """
-    entfernt: list[str] = []
+    body, entfernt = _doppelte_hinweis_absaetze(body)
     ab = 0
     for _ in range(MAX_RUNDEN):
         treffer = _wiederholung_finden(body, ab=ab)
@@ -409,7 +462,8 @@ def _shortcodes(text: str) -> list[str]:
 
 def _zahlen(text: str) -> list[str]:
     ohne_links = re.sub(r"\]\([^)]*\)", "]", text)
-    return sorted(re.findall(r"\d+(?:[.,]\d+)*", ohne_links))
+    ohne_marken = re.sub(r"(?i)\bcheck24\b", "check", ohne_links)
+    return sorted(re.findall(r"\d+(?:[.,]\d+)*", ohne_marken))
 
 
 def _zahlen_nach_jahreszahl_join(text: str) -> list[str]:

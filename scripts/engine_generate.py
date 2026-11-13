@@ -360,10 +360,24 @@ def save_article(title, desc, body, draft=False, inspiration=None, pillar=None,
     except Exception as _review_err:  # Publish-Gate klassifiziert erneut fail-closed
         print(f"  ⚠ Redaktionelle Risikoklasse nicht vormerkbar: {_review_err}")
         review_block = ""
+    kurzantwort = g.ableite_kurzantwort_aus_body(body, desc)
+    try:
+        import casing_guard as _cg
+        if kurzantwort:
+            kurzantwort = _cg.apply_rules(
+                kurzantwort, _cg.PIN_RULES, _cg.Sink(), 0,
+                heading=False, continuation=True,
+            )
+    except Exception:  # noqa: BLE001 – Casing ist Prävention, nie Blockade
+        pass
+    kurzantwort_line = (
+        f"kurzantwort: {yaml_quote(kurzantwort)}\n" if kurzantwort else ""
+    )
     frontmatter = (
         "---\n"
         f'title: {yaml_quote(title)}\n'
         f'description: {yaml_quote(desc)}\n'
+        f"{kurzantwort_line}"
         f"date: {now_utc_iso()}\n"
         f"draft: {draft_line}\n"
         f"tags: {tag_yaml}\n"

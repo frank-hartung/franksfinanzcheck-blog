@@ -141,8 +141,42 @@ def is_transient(grund: str) -> bool:
     return any(z.lower() in (grund or "").lower() for z in TRANSIENT)
 
 
+_LIFT_FM_SCHLUESSEL = ("date:", "lastmod:", "faktenfrische_aliases:")
+
+
+def _inhalt_normalisiert(text: str) -> bytes:
+    """Inhaltsrelevante Bytes ohne reine Tages-Lift-Stempel (`lift_to_today`).
+
+    WF-D4E0 (#1121): `reserve_finisher.lift_to_today()` hebt jeden Morgen
+    `date:`, `lastmod:` und `faktenfrische_aliases:` auf heute. Hashte
+    `datei_hash()` die rohen Dateibytes, galt derselbe unveränderte Entwurf
+    jeden Tag als „neue Fassung“ (`fassung_gewechselt: True`) und der Zähler
+    sprang dauerhaft auf `1/2` zurück – die Quarantäne konnte nie auslösen.
+    Alle echten Inhalts- und Metadatenfelder (`title:`, `description:`,
+    `kurzantwort:`, `keywords:`, `quellen:`, Body) fließen weiterhin bytegenau
+    in den Hash ein: jede echte Reparatur setzt den Zähler auf 1 zurück.
+    """
+    parts = text.split("---", 2)
+    if len(parts) != 3 or parts[0] != "":
+        return text.encode("utf-8")
+    fm_zeilen: list[str] = []
+    in_alias_block = False
+    for zeile in parts[1].splitlines():
+        if in_alias_block:
+            if not zeile.strip() or zeile[0].isspace():
+                continue
+            in_alias_block = False
+        if zeile.startswith("faktenfrische_aliases:"):
+            in_alias_block = True
+            continue
+        if zeile.startswith(("date:", "lastmod:")):
+            continue
+        fm_zeilen.append(zeile)
+    return ("---\n" + "\n".join(fm_zeilen) + "\n---" + parts[2]).encode("utf-8")
+
+
 def datei_hash(slug: str, posts_dir: Path | None = None) -> str:
-    """SHA-256 des Kandidaten-Textes – der Zähler hängt an den BYTES.
+    """SHA-256 des inhaltsrelevanten Kandidaten-Textes (ohne Tages-Lift-Stempel).
 
     Befund 26.10.2026 (Inhaltsqualität, Reserve-Engpass): Ein Kandidat wurde
     wegen einer Politur-Ruine („23 Dezember“) zweimal bemängelt. Die Redaktion
@@ -153,7 +187,7 @@ def datei_hash(slug: str, posts_dir: Path | None = None) -> str:
     """
     pfad = (Path(posts_dir) if posts_dir else POSTS_DIR) / slug / "index.md"
     try:
-        return hashlib.sha256(pfad.read_bytes()).hexdigest()
+        return hashlib.sha256(_inhalt_normalisiert(pfad.read_text(encoding="utf-8"))).hexdigest()
     except OSError:
         return ""
 
@@ -305,15 +339,26 @@ def record(rows: list[dict], state_path: Path | None = None,
         eintrag["last"] = now_iso()
         eintrag["grund"] = grund
         state[slug] = eintrag
+        bewertung_vorab = bk.gate_befund_klasse(grund)
+        eintrag["klasse"] = bewertung_vorab["klasse"]
+        state[slug] = eintrag
         if eintrag["hits"] < limit:
             continue
-        # ---- Klassen-Tor (Reparatur 07.10.2026, #614) --------------------
-        # Nicht die Zahl der Läufe entscheidet, sondern die Klasse des
-        # Befunds. Nur Unheilbares verliert die Fahne; alles andere bleibt
-        # Material für die Heiler-Kette (siehe Kopf-Doku).
-        loeschbar, bewertung = bk.gate_befund_loeschbar(grund)
+        # ---- Klassen-Tor (Reparatur 07.10.2026 #614, erweitert #1121) -----
+        # Nicht die Zahl der Läufe allein entscheidet, sondern die Klasse des
+        # Befunds:
+        #   * HEILBAR / TRANSIENT / unbekannt: bleiben im Pool (Heiler-Material
+        #     bzw. fail-closed).
+        #   * UNHEILBAR (Dublette, Frontmatter-Torso): verliert die Fahne.
+        #   * MENSCHLICH (offener Fachbefund #912, Kurzantwort #1110, U1/U2 #714,
+        #     D1–D6 #676, YMYL-Freigabe): KEIN Auto-Heiler darf eingreifen
+        #     (`AUSNAHMEN`). Nach `limit` Läufen räumt der Kandidat den
+        #     automatischen Pool-Slot als aufbewahrter Redaktions-Hold
+        #     (`reserve_blocked`), damit Nachschub entstehen kann; der Janitor
+        #     löscht `MENSCHLICH` ausdrücklich NIE.
+        ausmusterbar, bewertung = bk.gate_befund_ausmusterbar(grund)
         eintrag["klasse"] = bewertung["klasse"]
-        if not loeschbar:
+        if not ausmusterbar:
             eintrag["geschont"] = True
             eintrag["heiler"] = list(bewertung["heiler"])
             state[slug] = eintrag
@@ -514,6 +559,38 @@ def run_selftest() -> int:
         record([{"slug": "2026-09-15-gut", "ready": True}], state_path, posts)
         if "2026-09-15-gut" in load_state(state_path):
             fehler.append("geheilter Kandidat muss den Zähler verlieren")
+
+        # 4b) WF-D4E0 (#1121): Tages-Lift (`date:` / `lastmod:` /
+        #     `faktenfrische_aliases:`) darf den Zähler NICHT auf 1 zurücksetzen;
+        #     ein Redaktions-Hold (`MENSCHLICH`) räumt nach 2 Läufen den Pool-Slot
+        #     als `reserve_blocked`, ohne je vom Janitor löschbar zu werden.
+        (posts / "2026-11-12-hold").mkdir(parents=True, exist_ok=True)
+        (posts / "2026-11-12-hold" / "index.md").write_text(
+            '---\ntitle: "Hold"\ndate: 2026-11-12T03:00:00Z\nlastmod: 2026-11-12\n'
+            'draft: true\nreserve: true\n---\n\nText.\n', encoding="utf-8")
+        hold_state = root / "hold-q.json"
+        hold_grund = ("Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 "
+                      "(luecke): Wechseldauer ohne Quelle")
+        record([{"slug": "2026-11-12-hold", "ready": False,
+                 "reason": hold_grund}], hold_state, posts, apply=True,
+               run_key="run:tag1")
+        # Nächster Morgen: lift_to_today benennt um und hebt date/lastmod/aliases
+        (posts / "2026-11-12-hold").rename(posts / "2026-11-13-hold")
+        (posts / "2026-11-13-hold" / "index.md").write_text(
+            '---\ntitle: "Hold"\ndate: 2026-11-13T03:00:00Z\nlastmod: 2026-11-13\n'
+            'draft: true\nreserve: true\nfaktenfrische_aliases:\n'
+            '  - "2026-11-12-hold"\n---\n\nText.\n', encoding="utf-8")
+        ausgemustert_hold = record(
+            [{"slug": "2026-11-13-hold", "ready": False, "reason": hold_grund}],
+            hold_state, posts, apply=True, run_key="run:tag2")
+        if len(ausgemustert_hold) != 1:
+            fehler.append("Tages-Lift hat den Quarantäne-Zähler zurückgesetzt "
+                          f"(#1121): {load_state(hold_state)}")
+        hold_text = (posts / "2026-11-13-hold" / "index.md").read_text("utf-8")
+        if "reserve_blocked:" not in hold_text or "reserve: true" in hold_text:
+            fehler.append("Redaktions-Hold räumte den Pool-Slot nicht (#1121)")
+        if bk.gate_befund_loeschbar(hold_grund)[0]:
+            fehler.append("Redaktions-Hold darf nie löschbar sein (#1121)")
 
         # 5) Werkzeugfehler zählen nicht (kein Content-Urteil) – auch nicht
         #    über mehrere Läufe hinweg.

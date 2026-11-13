@@ -24,7 +24,12 @@ cover:
   image: "images/covers/2026-11-09-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung.jpg"
   alt: "Mesh WLAN nachrüsten: Schluss mit Funklöchern in der Wohnung"
   caption: "Tipp von FranksFinanzcheck"
-kurzantwort: "Das Nachrüsten von Mesh WLAN lohnt sich besonders in Wohnungen ab etwa 80 Quadratmetern oder bei massiven Wänden, um Funklöcher durch ein intelligentes Netzwerk mehrerer Knotenpunkte zu eliminieren. Im Gegensatz zu herkömmlichen Repeatern sorgt die Mesh-Technologie für eine unterbrechungsfreie Verbindung mit nur einem einzigen Netzwerknamen in der gesamten Wohnfläche."
+kurzantwort: "Ein Mesh-WLAN ersetzt einzelne Funklöcher durch vernetzte Knotenpunkte, die deine Wohnung nahtlos unter einem einzigen Netzwerknamen versorgen. Die Nachrüstung lohnt sich besonders bei verwinkelten Grundrissen oder massiven Wänden und spart teure Notlösungen über zusätzliches Mobilfunk-Datenvolumen."
+quellen:
+  - id: "Q1"
+    titel: "Referenzseite bundesnetzagentur.de"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    herausgeber: "Bundesnetzagentur"
 faktenfrische_aliases:
   - "2026-11-09-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung"
   - "2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung"
@@ -46,8 +51,8 @@ Doch lohnt sich der [finanzielle](../../posts/2026-09-09-notgroschen-die-wahrhei
 
 ---
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**Jetzt Stromtarife vergleichen**](/go/strom/)  
-*(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)*
+💡 **Schnell-Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner-Vergleich: [**DSL- & Glasfasertarife vergleichen**](/go/dsl/)
+_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Was ist ein Mesh-System eigentlich?
 
@@ -157,7 +162,7 @@ Mit einem stabilen Mesh-System im Hintergrund bist du flexibel bei der Wahl dein
 Ja, die meisten Mesh-Systeme lassen sich an jeden vorhandenen Router anschließen. Du verbindest die Basisstation einfach per LAN-Kabel. Der alte Router liefert das Internet und das Mesh-System verteilt es intelligent. Oft ist es sinnvoll, das alte WLAN am Router dann auszuschalten. So verhinderst du Funkstörungen zwischen den Geräten.
 
 ### Verbraucht ein Mesh-System viel Strom?
-Jeder zusätzliche Knotenpunkt verbraucht natürlich etwas Energie. Moderne Systeme sind jedoch sehr effizient. Du regelst die Leistung oft herunter, wenn keine Geräte aktiv sind. Im Vergleich zu den Kosten für mobiles Datenvolumen sind die [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/) meist vernachlässigbar. In einer sauberen Fixkosten-Rechnung solltest du sie dennoch kurz überschlagen.
+Jeder zusätzliche Knotenpunkt verbraucht natürlich etwas Energie. Moderne Systeme sind jedoch sehr effizient und regeln die Leistung oft herunter, wenn keine Geräte aktiv sind. Im Vergleich zu den Kosten für mobiles Datenvolumen sind die [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/) meist vernachlässigbar. In einer sauberen Fixkosten-Rechnung solltest du sie dennoch kurz überschlagen.
 
 ### Wie viele Knotenpunkte brauche ich für meine Wohnung?
 Das hängt stark von der Bauweise ab. Für eine normale Wohnung mit drei Zimmern reichen meist zwei Knotenpunkte aus. Bei einer sehr verwinkelten Wohnung oder über zwei Etagen sind drei Geräte oft besser. Starte lieber mit einem kleineren Set. Die meisten Systeme kannst du später problemlos um weitere Satelliten erweitern.
@@ -170,19 +175,7 @@ Nein, das ist gerade der große Vorteil. Die Knotenpunkte kommunizieren kabellos
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Stromtarife vergleichen**](/go/strom/)
-
-*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
-
----
-
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
-
-_Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information und stellt keine Anlage-, Rechts- oder Steuerberatung dar. Prüfe Konditionen und Bedingungen immer beim jeweiligen Anbieter._
-
----
-
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
+👉 **Jetzt vergleichen und sparen:** [**→ DSL- & Glasfasertarife vergleichen**](/go/dsl/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
 
