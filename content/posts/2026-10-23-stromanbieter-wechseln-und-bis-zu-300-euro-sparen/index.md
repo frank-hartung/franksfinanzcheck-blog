@@ -23,6 +23,12 @@ cover:
   image: "images/covers/2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen.jpg"
   alt: "Stromtarif und Jahreskosten vergleichen"
   caption: "Stromtarife anhand der Gesamtkosten prüfen"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 5f109cd223b5f1e02b47a59339309a6fbddeb71095fb52a9e87b87fa0bf5bbf7
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Lieferantenwechsel – Informationen für Verbraucherinnen und Verbraucher"

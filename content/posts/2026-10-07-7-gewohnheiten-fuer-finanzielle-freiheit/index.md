@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit.jpg"
   alt: "Sieben Geldgewohnheiten für mehr Übersicht und finanziellen Spielraum"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 980627d531e5d1368e2bc1043cdbd867a832c21488bf83aea69ca7f076c409d5
+    geprueft_am: 2026-11-13
 pin_title: "7 Gewohnheiten für finanzielle Freiheit: Geld bewusst ordnen"
 pin_description: "*Werbung | Finanzielle Freiheit beginnt im Alltag: Sieben klare Gewohnheiten helfen dir, Einnahmen, Fixkosten, Rücklagen und Ziele ohne leere Versprechen zu ordnen. Mehr Spartipps auf FranksFinanzcheck! #finanziellefreiheit #budgetplanen #ruecklagenbilden"
 quellen:

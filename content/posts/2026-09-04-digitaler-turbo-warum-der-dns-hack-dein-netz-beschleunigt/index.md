@@ -17,6 +17,12 @@ cover:
   image: "images/covers/2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt.jpg"
   alt: "DNS-Hack testen: Antwortzeit statt gefühltem Tempo"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 46d623144815d334a426a8cccb50234b24e339cbe41bd45d2edcb25fa1ec4b5e
+    geprueft_am: 2026-11-13
 kurzantwort: "Ein anderer DNS-Server kann die Dauer einzelner Namensauflösungen verändern, aber weder die Bandbreite erhöhen noch eine schnellere Website garantieren. Mit dig kannst du Antwortzeiten einzelner DNS-Abfragen vergleichen. Das ist ein Orientierungstest, kein vollständiger Internet- oder Seitenlade-Test."
 quellen:
   - titel: "BIND 9-Handbuch: dig als DNS-Abfragewerkzeug"

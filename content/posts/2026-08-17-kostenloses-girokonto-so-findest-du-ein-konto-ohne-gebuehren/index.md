@@ -14,6 +14,12 @@ cover:
   image: "images/covers/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren.jpg"
   alt: "Kostenloses Girokonto: So findest du ein Konto ohne Gebühren"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 32feb876450b02c7d699c378b39833e41b81bd9e1ff51edcbaa465ede98bac64
+    geprueft_am: 2026-11-13
 kurzantwort: "Ein echtes kostenloses Girokonto kostet dich keine Gebühr im Monat. Auch Karte und Bargeld sollten nichts kosten; ob Echtzeit-Überweisungen gratis sind, steht im Preisverzeichnis des Kontomodells. Wer von einer teuren Filiale zu einer Online-Bank wechselt, kann die früheren Kontogebühren einsparen – der Betrag steht in deinem alten Preisverzeichnis. Wichtig ist nicht nur der Preis von 0 €, sondern auch das Kleingedruckte."
 
 social_posted: true

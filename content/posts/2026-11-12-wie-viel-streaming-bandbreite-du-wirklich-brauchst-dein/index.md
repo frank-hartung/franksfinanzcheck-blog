@@ -21,9 +21,15 @@ redaktionelle_pruefung:
 
 inspiration: "Streaming-Qualität: Wie viel Bandbreite du wirklich brauchst"
 cover:
-  image: "images/covers/2026-11-09-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein.jpg"
+  image: "images/covers/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein.jpg"
   alt: "Wie viel Streaming‑Bandbreite: Du wirklich brauchst – dein"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: cf5369124c0fe68f972c8c08377292d6535d15df3ebfaa5fe5e83d23d0ced017
+    geprueft_am: 2026-11-13
 faktencheck: 2026-11-09
 kurzantwort: "Für einen einzelnen HD‑Stream (1080 p) brauchst du etwa 5 Mbps; ein SD‑Stream kommt mit rund 3 Mbps aus, ein 4K‑Stream erfordert mindestens 15 Mbps – Netflix empfiehlt diese Werte (). Mehrere gleichzeitige Streams bedeuten einfach die Summe des jeweiligen Bedarfs, z. B. zwei HD‑Streams ≈ 10 Mbps."
 faktenfrische_aliases:

@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn.jpg"
   alt: "Warmwasser sparen: Die Rechnung hinter dem Hahn"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 650f202ee3709fc60feb4da7fa9924e21cf90abb2c9600fc8f30176ad208e045
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Verbraucherzentrale – Warmwasser im Alltag sparen: So geht's"

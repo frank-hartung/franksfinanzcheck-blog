@@ -21,9 +21,15 @@ redaktionelle_pruefung:
 
 inspiration: "Grundlast messen: Wo dein Strom nachts hingeht"
 cover:
-  image: "images/covers/2026-11-12-deine-naechtliche-grundlast-strom-so-erkennst-du-wo.jpg"
+  image: "images/covers/2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo.jpg"
   alt: "Deine nächtliche Grundlast Strom: So erkennst"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: ef3d8f0d9c2feac820e9f82352fa2f50b0247f908ac286c5af6f69476d9ca482
+    geprueft_am: 2026-11-13
 faktencheck: 2026-11-12
 faktenfrische_aliases:
   - "2026-11-12-deine-naechtliche-grundlast-strom-so-erkennst-du-wo"

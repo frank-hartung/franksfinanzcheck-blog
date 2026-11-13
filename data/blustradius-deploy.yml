@@ -252,9 +252,50 @@ schritte:
       Befund über `scripts/werkzeugbefund.py --melden` an das Siegel und hält
       die Auslieferung nicht an (C34, #676/#740).
 
+  # #1028 · Maschinenlesbare KI-Kennzeichnung, Kanal TONDATEI (13.11.2026)
+  # Die Seite kennzeichnete die maschinelle Vorlese-Stimme auf sieben
+  # Kanälen – die Audiodatei selbst auf keinem. Der Schritt schreibt die
+  # Herkunft in den Container (ID3-TXXX bei MP3, RIFF-INFO bei WAV), ohne
+  # ein Sample neu zu kodieren, und prüft sie danach nach.
+  # Warum `werkzeug` und nicht `inhalt`: Der Schritt entscheidet nichts über
+  # den Inhalt – er misst, ob die Markierung da ist, und schreibt sie hin.
+  # Ein kaputter Marker ist kein Grund, die Auslieferung einzufrieren
+  # (C34, #676, #740). Der Befund geht über `werkzeugbefund.py --melden`
+  # an das Siegel; das Gate `ki_provenienz_gate.py` (M3) prüft am
+  # ausgelieferten Bestand und ist der Ort, an dem ein Fehlbestand rot wird.
+  - name: Tonspuren mit KI-Herkunft markieren (#1028)
+    klasse: werkzeug
+    grund: >-
+      Markierung der ausgelieferten Vorlese-Tonspuren in der Datei selbst
+      (IPTC `DigitalSourceType` als ID3-TXXX bzw. RIFF-INFO, dazu System,
+      Herkunfts-URL und Werkzeug). Rot heißt: eine Tonspur ist nicht lesbar,
+      widerspricht ihrem Erzeugerbeleg (`*.track.json`) oder ein Werkzeug
+      ist ausgefallen – ein Messbefund, kein Inhaltsbefund. C34: die
+      Auslieferung läuft weiter, der Befund geht über
+      `scripts/werkzeugbefund.py --melden` an das Siegel (#1028,
+      Art. 50 Abs. 2 KI-VO, Frist 02.12.2026).
+
   - name: Weiterleitungen – Selbsttest, Quelle und Unit-Tests (fail-closed)
     klasse: infra
     grund: Eine kaputte Weiterleitungsquelle oder fehlende Zielseiten sind technische Fehler. Ohne sie wäre die Auslieferung der 301-Ersatzseiten nicht konsistent. Der Befund ist kein fachlicher Inhalt.
+
+  # #1028 · Maschinenlesbare KI-Kennzeichnung, Cover-Herkunft (13.11.2026)
+  # Jedes ausgelieferte Cover braucht einen nachweisbaren Herkunfts-Beleg
+  # (Frontmatter ki_pruefung + IPTC-XMP in der Datei). Die Reproduktionswache
+  # rendert jedes Cover neu und verlangt Pixelgleichheit – driftet ein Cover
+  # oder fehlt der Beleg, geht nichts live.
+  - name: Cover-Herkunft – Selbsttest (Wache muss lauffähig sein)
+    klasse: gate-selbsttest
+    schuetzt: Cover-Herkunft – Reproduktionswache (fail-closed)
+    grund: >-
+      Ohne lauffähige Wache bliebe die Cover-Herkunft ungeprüft – ein
+      ungeklärtes Cover dürfte nicht ausgeliefert werden.
+  - name: Cover-Herkunft – Reproduktionswache (fail-closed)
+    klasse: inhalt
+    grund: >-
+      Ein Cover, das nicht pixelidentisch zu seinem Render ist oder dessen
+      Herkunft nicht belegt ist, darf nicht live gehen
+      (Art. 50 KI-VO, Frist 02.12.2026, Issue #1028).
 
   - name: Hugo installieren (Extended, verifiziert, mehrquellig)
     klasse: infra

@@ -23,6 +23,12 @@ cover:
   image: "images/covers/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet.jpg"
   alt: "DSL-Vertrag prüfen: Preis, Router und Wechseltermin vergleichen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: f7948cfd22673fb5c9f2b8e994307e2a3a0c81443385bb94bb16ba6a7cd5dd5f
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Telekommunikationsgesetz § 56: Vertragslaufzeit und Kündigung"

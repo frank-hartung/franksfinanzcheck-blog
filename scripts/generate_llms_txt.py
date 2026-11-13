@@ -132,6 +132,40 @@ FranksFinanzcheck steht in keiner geschäftlichen oder gesellschaftsrechtlichen 
 - Hinweis: Allgemeine Informationen, keine individuelle Finanz-, Steuer-
   oder Rechtsberatung. Alle Angaben ohne Gewähr.
 
+## Woher diese Inhalte kommen (KI-Kennzeichnung, #1028)
+
+Diese Angaben sind für Systeme gedacht, die die Seiten maschinell
+weiterverarbeiten. Sie sagen, was am Inhalt maschinell entstanden ist –
+nicht, was richtig ist (das prüft die Redaktion, nicht das Modell).
+
+- **Texte:** Ein Teil der Artikel wird mit generativer KI erstellt oder
+  bearbeitet. Welche, sagt jede Seite selbst: die Meta-Angaben
+  `ai-generated` und `ai-generated-scope` im Dokumentkopf nennen die
+  betroffenen Modalitäten (Text, Bild, Ton). Jeder Artikel ist zusätzlich
+  am Seitenanfang sichtbar als „Mit KI erstellt oder bearbeitet"
+  gekennzeichnet. Fehlt `ai-generated`, ist für diese Seite keine
+  KI-Erzeugung belegt – bitte keine hineininterpretieren.
+- **Bilder:** Titelbilder tragen, wenn ihre Erzeugungsart belegt ist, das
+  IPTC-Feld `DigitalSourceType` in der Bilddatei selbst und
+  `creditText`/`digitalSourceType` im schema.org-Markup der Seite.
+  Ein Titelbild ohne diese Angabe ist nicht als KI-Bild deklariert.
+- **Ton:** Vorlese-Tonspuren sind synthetische Sprache. Die Datei trägt
+  ihre Herkunft in sich (`DigitalSourceType` im IPTC-Vokabular, als
+  ID3-TXXX bei MP3 bzw. RIFF-INFO bei WAV), nicht nur die Seite.
+- **Assistent:** Ein KI-Chat-Assistent kann auf Seiten eingebunden sein.
+  Antworten erzeugt ein Sprachmodell, nicht ein Mensch; jede Antwort trägt
+  einen entsprechenden Hinweis, und die HTTP-Antwort führt die Kopfzeile
+  `ai-generated`. Wo keine Assistenten-Schaltfläche erscheint, ist keiner
+  aktiv.
+- **Was das nicht ist:** Diese Erklärungen stammen vom Betreiber. Sie
+  ersetzen nicht die maschinenlesbare Markierung durch den Anbieter des
+  jeweiligen KI-Systems (Art. 50 Abs. 2 KI-VO). Sie sind kein
+  Herkunftsbeweis. Rechtevorbehalt und Zitierregeln oben bleiben unberührt.
+- **Zitierpflicht bei Kennzeichnung:** Wird ein als KI-erzeugt
+  gekennzeichneter Text übernommen, bitte die Kennzeichnung mitübernehmen –
+  sonst geht beim Weiterverbreiten verloren, was die Quelle gerade
+  transparent macht.
+
 ## Themen-Ratgeber (Pillars)
 
 {pillar_lines}

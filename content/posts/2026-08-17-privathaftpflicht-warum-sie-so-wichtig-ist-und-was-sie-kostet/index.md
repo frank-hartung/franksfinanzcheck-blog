@@ -15,6 +15,12 @@ cover:
   image: "images/covers/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet.jpg"
   alt: "Privathaftpflicht: Warum sie so wichtig ist und was sie kostet"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 154d316349ff7366de53d450d9e1c833a018becbd97d059bd3871ab585aee395
+    geprueft_am: 2026-11-13
 kurzantwort: "Die Privathaftpflicht schützt dich vor hohen Forderungen. Solche Summen können deine Existenz bedrohen. Ein guter Tarif kostet nur wenige Euro im Monat. Achte nicht nur auf den Preis. Wichtig sind Forderungsausfall, Schlüsselverlust und grobe Fahrlässigkeit."
 
 social_posted: true

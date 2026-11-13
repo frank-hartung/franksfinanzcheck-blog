@@ -25,6 +25,12 @@ cover:
   image: "images/covers/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt.jpg"
   alt: "Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: bc9d06acf32c912141fd7d88be64c70e71346736c9ef841ab633083d388623e8
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur – Fachthemen Elektrizität und Gas"

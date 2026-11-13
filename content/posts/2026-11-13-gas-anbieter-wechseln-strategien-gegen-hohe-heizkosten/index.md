@@ -22,9 +22,15 @@ redaktionelle_pruefung:
 
 inspiration: "Gas-Anbieter wechseln: So sparst du bis zu 680 Euro"
 cover:
-  image: "images/covers/2026-11-09-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten.jpg"
+  image: "images/covers/2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten.jpg"
   alt: "Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: dcbbc8546ff118b29543ce634daa5a301d6f41e79cf34b92f738e8c7e565cf40
+    geprueft_am: 2026-11-13
 faktencheck: 2026-11-09
 kurzantwort: "Ein Wechsel des Gasanbieters ermöglicht durch den Vergleich von Tarifen und Neukundenboni oft eine jährliche Ersparnis von über 300 Euro. Verbraucher sollten dabei auf eine Preisgarantie von mindestens 12 Monaten achten, um sich langfristig vor Preiserhöhungen zu schützen. Der Wechsel ist unkompliziert und findet ohne Unterbrechung der Gasversorgung statt."
 faktenfrische_aliases:

@@ -72,8 +72,30 @@
     {{- /* Header */ -}}
     <div class="ff-ki-header">
       <div class="ff-ki-header__icon" aria-hidden="true">◈</div>
+    {{- /* ============================================================
+        KI-OFFENLEGUNG NACH ART. 50 ABS. 1 KI-VO (#1028, 13.11.2026)
+        ------------------------------------------------------------
+        Befund: Der Chat-Assistent ist gebaut und auslieferbar, aber er
+        sagte es nirgends – das Widget begrüßte mit „Hallo! 👋" und
+        „Kostenlose Finanz-Fragen", als wäre ein Mensch am anderen Ende.
+        Genau das verlangt Art. 50 Abs. 1: Wer unmittelbar mit einem
+        KI-System interagiert, muss das ERKENNEN können – und zwar im
+        ersten Moment, nicht erst in einer Fußzeile nach dem Scrollen.
+
+        Der Satz steht deshalb im Header (sichtbar, ohne Scrollen) und
+        zusätzlich in der Fußzeile (mit Link auf den Impressum-Hinweis).
+        Er hängt am ENDPOINT: Ohne konfigurierten Endpoint erscheint kein
+        Widget – und damit auch keine Offenlegung für etwas, das es nicht
+        gibt. Mit Endpoint erscheint beides zusammen. Eine Fassung ohne
+        den anderen ist nicht möglich; der Zustand ist fail-closed.
+
+        Vorlesehilfe: Der Text ist echte Prosa (kein aria-label), er wird
+        also vorgelesen, wenn der Fokus in den Dialog kommt. Das Siegel
+        ist KEIN dekoratives Element – es trägt Bedeutung.
+        ============================================================ */ -}}
       <div class="ff-ki-header__text">
         <h3>Franks KI-Assistent</h3>
+        <p class="ff-ki-header__ki" data-ff-ki-chat-label>Antworten erzeugt ein KI-System – kein Mensch.</p>
         <p>Kostenlose Finanz-Fragen · Kein Account nötig</p>
       </div>
       <button type="button"
@@ -123,7 +145,9 @@
 
     {{- /* Footer */ -}}
     <div class="ff-ki-footer">
-      KI-generiert · Keine Anlageberatung · <a href="/datenschutz/" rel="noopener">Datenschutz</a>
+      KI-generiert · Keine Anlageberatung ·
+      <a href="/impressum/#ki-hinweis" rel="noopener">Hinweis zu KI-Inhalten</a> ·
+      <a href="/datenschutz/" rel="noopener">Datenschutz</a>
     </div>
   </div>
 

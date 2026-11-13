@@ -18,6 +18,12 @@ cover:
   image: "images/covers/2026-10-06-markt-update-was-sich-jetzt-fuer-dich-aendert.jpg"
   alt: "Google-Regeln für Finanzratgeber: Was Erfahrung und Quellen zählen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 2f940027915b5ef4b82e0b4a86bb2bccb3fb741e6b3eabfe4cfd43f84d4a6d01
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Referenzseite destatis.de"

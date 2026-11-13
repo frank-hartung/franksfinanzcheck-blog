@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt.jpg"
   alt: "Dein Weg zu geringeren Monatskosten: Schritt für Schritt"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 81c29ba98f0c994e981b68c47be2d9977613a4e0adf131b8ded9ab13b4b0f191
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Verbraucherpreisindex und Inflationsrate"

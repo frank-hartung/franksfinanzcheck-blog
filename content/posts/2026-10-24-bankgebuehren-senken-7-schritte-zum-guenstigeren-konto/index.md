@@ -27,6 +27,12 @@ cover:
   image: "images/covers/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto.jpg"
   alt: "Bankgebühren senken: 7 Schritte zum günstigeren Konto"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 0435ff88a5b928448df0c42a7dc6a2ca7302d345ba9359d79599e1891c375d02
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Referenzseite bundesbank.de"

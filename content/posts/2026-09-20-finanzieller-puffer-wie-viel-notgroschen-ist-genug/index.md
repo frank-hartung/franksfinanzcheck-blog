@@ -22,6 +22,12 @@ cover:
   image: "images/covers/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug.jpg"
   alt: "Notgroschen berechnen: Der Rechenweg in fünf Minuten"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: b533bc60c52779657cca44a76ce244036f8292620d9013e79009a3a1af438b25
+    geprueft_am: 2026-11-13
 kurzantwort: "Ein Notgroschen sollte meist drei bis sechs Monate deiner festen Lebenshaltungskosten abdecken. Bei 1.500 € monatlichen Fixkosten sind das grob 4.500 € bis 9.000 €. So fängst du Reparaturen, kaputte Geräte oder kurze Einkommenslücken ab, ohne sofort den Dispo zu nutzen."
 quellen:
   - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"

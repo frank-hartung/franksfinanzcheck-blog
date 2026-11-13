@@ -25,6 +25,12 @@ cover:
   image: "images/covers/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust.jpg"
   alt: "Campingurlaub planen und Kosten für Platz, Fahrt und Ausrüstung erfassen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 4d8613efd489cccf0ed2242c099631ab5ddfedd71ccccf9c2ccd8779b4ea7fc4
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Urlaub buchen: Hinweise zu Angeboten und Buchungsproblemen"

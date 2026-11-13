@@ -24,9 +24,15 @@ redaktionelle_pruefung:
 
 inspiration: Haushaltskosten reduzieren mit einfachen Mitteln
 cover:
-  image: "images/covers/2026-10-07-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle.jpg"
+  image: "images/covers/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle.jpg"
   alt: "Haushaltskosten reduzieren: So gewinnst du die Kontrolle"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 850721aad410c6a6d0bdf99f54060b30b17104b5c93afdca3b25b041020c579a
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Verbraucherpreisindex und Inflationsrate"

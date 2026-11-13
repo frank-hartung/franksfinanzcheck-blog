@@ -25,6 +25,12 @@ cover:
   image: "images/covers/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar.jpg"
   alt: "Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: a1bb625359346045e2dc9e0c8bdd2281e2c3fc37837bddeb455d2a641f077237
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur – Energie"

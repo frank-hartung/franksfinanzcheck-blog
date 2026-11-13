@@ -23,6 +23,12 @@ cover:
   image: "images/covers/2026-11-02-last-minute-urlaubsangebote-sichern.jpg"
   alt: "Last-Minute Urlaubsangebote sichern"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: b7316d59ceb0f7a7d62bea0f5c0abf6dc2c37687a612fe91609c2816823c44e2
+    geprueft_am: 2026-11-13
 kurzantwort: "Buche flexible Reisen innerhalb von 48 Stunden, nutze Preis‑Alert‑Tools und vergleiche Direktanbieter mit Last‑Minute‑Portalen. Ob du damit wirklich günstiger fährst, zeigt erst der Vergleich der Endsummen – eine garantierte Ersparnis gibt es nicht. Halte deinen Reisepass und Zahlungsdaten bereit, damit du sofort bestätigen kannst."
 quellen:
   - id: "Q1"

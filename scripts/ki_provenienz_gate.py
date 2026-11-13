@@ -38,8 +38,12 @@ M1  Auslieferung  Jede gebaute Seite trägt genau die Signale, die ihr
     Geprüft wird der GEBAUTE Baum, alle Abschnitte – nicht nur posts/.
 M2  Vertrag       Die Kanäle bleiben eingebunden (Vorlagen, CSS, Engine,
     Feed, Bild-Optimizer).
-M3  Bilddatei     Jedes deklarierte KI-Cover trägt IPTC `DigitalSourceType`
-    in der Datei (scripts/ki_bild_markierung.py).
+M3  Dateiebene     Jedes deklarierte KI-Cover trägt IPTC `DigitalSourceType`
+    in der Bilddatei (scripts/ki_bild_markierung.py) UND jede
+    ausgelieferte Vorlese-Tonspur ihre Herkunft im Container (ID3 bei MP3,
+    RIFF-INFO bei WAV, scripts/ki_audio_markierung.py). Beides ist derselbe
+    Gedanke: Die Angabe muss die DATEI überleben, sonst geht sie beim
+    Herunterladen, Weiterreichen oder Spiegeln verloren.
 M4  Kanaltreue    Jede deklarierte Modalität hat einen sichtbaren Anker –
     text → `data-ff-ki-label`, image → `data-ff-ki-image-label`,
     audio → `data-ff-ki-voice-label`. Und umgekehrt: kein sichtbarer Anker
@@ -52,6 +56,9 @@ M6  Bild-Ableitung  Ein deklariertes KI-Original hat keine unmarkierten
 M7  Spiegelung    layouts/rss.xml und layouts/_default/rss.xml sind bytgleich
     (Hugo zieht je Version die eine oder andere – driftet eine, ist die
     Kennzeichnung versionsabhängig).
+M9  llms.txt      Der Kanal für KI-Antwortmaschinen nennt die Herkunft:
+    maschinenlesbare Kennzeichnung, Erzeugungsart in Bild und Ton,
+    Betreiber-Erklärung statt Anbieterpflicht, kein Herkunftsbeweis.
 
 SELBSTHEILUNG
 -------------
@@ -302,6 +309,39 @@ def regel_m3(root: Path, *, werkzeug_blind: bool = False):
     return [_fund("M3", f) for f in fehler], False
 
 
+def regel_m3_audio(bau: Path, root: Path, *, werkzeug_blind: bool = False):
+    """M3 (Ton): Die Herkunft steht IN der Tonspur, nicht nur auf der Seite.
+
+    BEFUND 13.11.2026 – die Lücke, die sieben Kanäle nicht sahen:
+    Der Blog liefert vorab erzeugte Vorlese-Tonspuren aus (synthetische
+    Stimme, /audio/articles/*.mp3). Die Seite kennzeichnet das sichtbar und
+    maschinenlesbar – die DATEI enthielt keine einzige Angabe. Wer sie
+    herunterlädt oder weiterreicht, hält synthetische Sprache ohne
+    Herkunft in der Hand. Für Bilder gab es diesen Weg seit dem 05.11.2026
+    (`ki_bild_markierung.py`), für Ton fehlte er.
+
+    Gemessen wird am AUSGELIEFERTEN Bauprodukt (`public/audio/articles`),
+    nicht am Quellbaum: Nur was dort liegt, kommt beim Leser an. Liegt in
+    diesem Lauf keine Tonspur vor, ist das kein Fund (Audio ist Zusatz-
+    fläche) – aber es wird gezählt und berichtet, damit „0 geprüft" nicht
+    wie „0 Probleme" aussieht.
+    """
+    try:
+        import ki_audio_markierung  # noqa: PLC0415
+    except ImportError as exc:
+        if werkzeug_blind:
+            return [], True, 0
+        return ([_fund("M3", f"ki_audio_markierung.py nicht ladbar – Markierung in "
+                             f"der Tonspur nicht prüfbar: {exc}")], True, 0)
+    verzeichnis = Path(bau) / "audio" / "articles"
+    try:
+        befunde, fehler = ki_audio_markierung.pruefen(verzeichnis)
+    except Exception as exc:  # pragma: no cover – blind melden, nie still grün
+        return ([_fund("M3", f"Tonspur-Bestand nicht prüfbar "
+                             f"({type(exc).__name__}: {exc})")], True, 0)
+    return [_fund("M3", f) for f in fehler], False, len(befunde)
+
+
 def regel_m5(bau: Path, root: Path):
     """Feed: dieselbe Angabe wie auf der Seite – kein Verlust beim Verteilen."""
     funde = []
@@ -384,6 +424,73 @@ def regel_m6(root: Path):
     return funde
 
 
+# Die Angaben, ohne die ein Sprachmodell den Korpus falsch einordnet:
+# Es muss erkennen können, was maschinell entstanden ist, was das NICHT
+# beweist und dass der Zitier-Rahmen weiter gilt. Geprüft wird auf
+# inhaltliche Anker, nicht auf den Wortlaut – der Generator darf den Text
+# umformulieren, aber nicht den Sachverhalt verlieren.
+LLMS_ANKER = (
+    ("ai-generated", "nennt die maschinenlesbare Kennzeichnung nicht"),
+    ("DigitalSourceType", "nennt die Erzeugungsart in Bild/Ton nicht"),
+    ("Art. 50", "verwechselt Betreiber-Erklärung und Anbieterpflicht"),
+    ("kein Herkunftsbeweis", "behauptet mehr, als die Angaben tragen"),
+)
+
+
+def regel_m9(root: Path):
+    """M9 – llms.txt: Auch der Kanal für Sprachmodelle sagt, was KI ist.
+
+    Warum das ein Kanal ist und nicht Kosmetik: `llms.txt` wird von
+    KI-Antwortmaschinen gelesen, bevor sie eine Seite zitieren. Stand dort
+    nur „diese Datei hilft beim Zitieren", erfuhr das System das Wichtigste
+    nicht – dass ein Teil der Texte maschinell entsteht, dass Titelbilder
+    ihre Erzeugungsart in der Datei tragen und dass diese Angaben vom
+    Betreiber stammen. Genau die Zielgruppe, die Art. 50 Abs. 2 im Blick
+    hat (Maschinen, die Inhalte weiterverarbeiten), war der einzige Kanal
+    ohne Aussage (#1028).
+    """
+    datei = root / "static" / "llms.txt"
+    if not datei.is_file():
+        return [_fund("M9", "static/llms.txt fehlt – der Kanal für "
+                            "KI-Antwortmaschinen ist nicht prüfbar", "static/llms.txt")]
+    try:
+        text = datei.read_text(encoding="utf-8")
+    except OSError as exc:
+        return [_fund("M9", f"static/llms.txt nicht lesbar: {exc}", "static/llms.txt")]
+    if "KI-Kennzeichnung" not in text:
+        return [_fund("M9", "static/llms.txt hat keinen Abschnitt zur "
+                            "KI-Kennzeichnung (`generate_llms_txt.py` laufen lassen)",
+                      "static/llms.txt")]
+    # Zeilenumbrüche sind Formatierung, nicht Inhalt: Ein Satz, der über
+    # zwei Zeilen läuft, ist derselbe Satz. Ohne diese Normalisierung wäre
+    # die Prüfung eine Layout-Wache (und schlug genau so fehl).
+    flach = " ".join(text.split())
+    fehlend = [grund for anker, grund in LLMS_ANKER if " ".join(anker.split()) not in flach]
+    if fehlend:
+        return [_fund("M9", "static/llms.txt " + "; ".join(fehlend),
+                      "static/llms.txt")]
+    # Der Generator ist die Quelle: Weicht die Datei ab, ist die geprüfte
+    # Fassung nicht die ausgelieferte (dieselbe Logik wie M7 beim RSS-Spiegel).
+    # Nur für den ECHTEN Repo-Baum: Der Generator liest `content/` des Repos,
+    # nicht die Prüfliage des Selbsttests. Eine Drift-Messung gegen ein
+    # Fixture wäre immer rot und damit wertlos.
+    if root.resolve() != ROOT.resolve():
+        return []
+    import subprocess  # noqa: PLC0415
+    import sys  # noqa: PLC0415
+    try:
+        lauf = subprocess.run([sys.executable, str(root / "scripts" / "generate_llms_txt.py"),
+                               "--check"], capture_output=True, text=True, timeout=60)
+    except (OSError, subprocess.SubprocessError) as exc:
+        return [_fund("M9", f"Drift-Prüfung der llms.txt nicht möglich ({exc})",
+                      "static/llms.txt")]
+    if lauf.returncode != 0:
+        return [_fund("M9", "static/llms.txt weicht vom Generator ab – die geprüfte "
+                            "Fassung ist nicht die ausgelieferte "
+                            "(`generate_llms_txt.py` laufen lassen)", "static/llms.txt")]
+    return []
+
+
 def regel_m7(root: Path):
     """Beide RSS-Vorlagen bytgleich – sonst hängt die Kennzeichnung an Hugo."""
     abweichung = kp.rss_spiegel_abweichung(root)
@@ -447,12 +554,17 @@ def pruefen(root: Path = ROOT, bau: Path | None = None, *, nur_quelle: bool = Fa
     funde += regel_m2(root)
     m3, m3_blind = regel_m3(root, werkzeug_blind=bool(fehlende))
     funde += m3
+    ton_funde, ton_blind, ton_geprueft = regel_m3_audio(bau, root,
+                                                       werkzeug_blind=bool(fehlende))
+    funde += ton_funde
+    m3_blind = m3_blind or ton_blind
     feed_ohne_seite: list[str] = []
     if not nur_quelle:
         m5, feed_items, feed_ohne_seite = regel_m5(bau, root)
         funde += m5
     funde += regel_m6(root)
     funde += regel_m7(root)
+    funde += regel_m9(root)
 
     kennzahlen.update({
         "nur_quelle": nur_quelle,
@@ -464,6 +576,7 @@ def pruefen(root: Path = ROOT, bau: Path | None = None, *, nur_quelle: bool = Fa
         "ki_originale": len(kp.ki_originale(root)),
         "ungeklaert": len(kp.ungeklaert(root)),
         "m3_blind": m3_blind,
+        "tonspuren_geprueft": ton_geprueft,
     })
     return funde, geprueft, kennzahlen
 
@@ -594,6 +707,7 @@ def bericht(funde, kennzahlen, *, json_format: bool = False) -> str:
             f"{kennzahlen.get('seiten_live', 0)} gebauten Seiten geprüft "
             f"({len(kennzahlen.get('abschnitte', []))} Abschnitte), "
             f"{kennzahlen.get('feed_items_geprueft', 0)} Feed-Items, "
+            f"{kennzahlen.get('tonspuren_geprueft', 0)} Tonspur(en), "
             f"{len(funde)} Fund(e).",
         ]
     for f in funde:
@@ -606,9 +720,9 @@ def bericht(funde, kennzahlen, *, json_format: bool = False) -> str:
                       "Die ausgelieferten Seiten prüft M1/M4/M5 nach dem Build.")
     elif not funde:
         zeilen.append("✅ Maschinenlesbare Kennzeichnung liegt auf allen Kanälen: "
-                      "Meta + scope + describedby im Kopf, creditText im Schema, "
-                      "Bildattribut und IPTC-Feld, Herkunftsangabe im Feed – und jede "
-                      "Modalität hat einen sichtbaren Anker.")
+                      "Meta + scope + describedby im Kopf, creditText und digitalSourceType "
+                      "im Schema, Bildattribut und IPTC-Feld in der Bilddatei, Herkunft in "
+                      "Tonspur und Feed – und jede Modalität hat einen sichtbaren Anker.")
     return "\n".join(zeilen)
 
 
@@ -672,6 +786,13 @@ def selbsttest() -> int:
         (inhalt / "pillar" / "thema").mkdir(parents=True)
         (inhalt / "pillar" / "thema" / "index.md").write_text(
             "---\ntitle: Thema\nai_generated: false\n---\nText\n", encoding="utf-8")
+
+        # 0) Der llms.txt-Kanal gehört zur Prüfliage: Ohne ihn wäre M9 im
+        # Selbsttest blind – und ein grüner Selbsttest, der den eigenen
+        # Kanal nicht kennt, ist eine Behauptung. Die Datei kommt aus dem
+        # Generator des Repos, damit Wortlaut und Anker zusammenpassen.
+        (root / "static").mkdir(parents=True, exist_ok=True)
+        shutil.copy(ROOT / "static" / "llms.txt", root / "static" / "llms.txt")
 
         for rel in ("layouts/_partials/head.html", "layouts/_partials/schema_article.html",
                     "layouts/_partials/cover.html", "layouts/_partials/ff_voice_toolbar.html",
@@ -818,6 +939,26 @@ def selbsttest() -> int:
         if any(f["regel"] == "M7" for f in ergebnis["funde_nachher"]):
             fehler.append("M7 bleibt nach der Heilung rot")
 
+        # 8b) M9: Der llms.txt-Kanal verliert seine Herkunftsaussage → Fund.
+        # Beide Formen werden geprüft: fehlender Abschnitt und Abschnitt mit
+        # einem Satz, der Sachverhalte behauptet, die er nicht belegt.
+        llms = root / "static" / "llms.txt"
+        llms_original = llms.read_text(encoding="utf-8")
+        llms.write_text("# FranksFinanzcheck\n\nNur Zitierhinweise.\n", encoding="utf-8")
+        if not any(f["regel"] == "M9" for f in pruefen(root)[0]):
+            fehler.append("M9 merkt den fehlenden Kennzeichnungs-Abschnitt nicht")
+        # „Herkunftsbeweis" steht im Generator über einen Zeilenumbruch
+        # verteilt – ein Ersetzen des ganzen Satzes hätte hier nichts
+        # getroffen und die Probe stillschweigend entschärft.
+        llms.write_text(llms_original.replace("Herkunftsbeweis",
+                                              "Echtheitsgarantie"), encoding="utf-8")
+        if not any(f["regel"] == "M9" and "behauptet mehr" in f["text"]
+                   for f in pruefen(root)[0]):
+            fehler.append("M9 merkt eine überzogene Behauptung im llms.txt nicht")
+        llms.write_text(llms_original, encoding="utf-8")
+        if any(f["regel"] == "M9" for f in pruefen(root)[0]):
+            fehler.append("M9 bleibt nach der Wiederherstellung rot")
+
         # 9) Heilung des Impressum-Ankers + Belegzeile
         imp = root / kp.IMPRESSUM
         imp.write_text("## Hinweis zu KI-gestützten Inhalten\n\nText\n", encoding="utf-8")
@@ -900,8 +1041,9 @@ def selbsttest() -> int:
     if fehler:
         return 2
     print("✅ KI-Provenienz-Gate: M1 Auslieferung (ganzer Baum), M2 Vorlagenvertrag, "
-          "M3 Bilddatei, M4 Kanaltreue je Modalität, M5 Feed, M6 Bild-Ableitungen, "
-          "M7 RSS-Spiegelung – plus Selbstheilung mit Beleg und Wache mit Alter.")
+          "M3 Dateiebene (Bild + Ton), M4 Kanaltreue je Modalität, M5 Feed, "
+          "M6 Bild-Ableitungen, M7 RSS-Spiegelung, M9 llms.txt – plus "
+          "Selbstheilung mit Beleg und Wache mit Alter.")
     return 0
 
 

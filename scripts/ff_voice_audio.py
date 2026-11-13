@@ -82,6 +82,7 @@ import html as html_mod
 import json
 import os
 import re
+from pathlib import Path
 import shutil
 import sys
 import time
@@ -91,6 +92,28 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 
 import ff_voice_backends as ttb  # noqa: E402
+
+# Gleiche Begründung wie bei ttb: Läuft diese Datei als Skript, liegt
+# `scripts/` auf dem Pfad; unter `python3 -m unittest` heißt dasselbe Modul
+# `scripts.ki_audio_markierung`. Beides muss gehen, sonst ist die Markierung
+# im Selbsttest unsichtbar und im Betrieb da – oder umgekehrt.
+try:  # pragma: no cover – Importweg hängt vom Aufrufer ab
+    from scripts import ki_audio_markierung as _tonmarkierung
+except ImportError:  # pragma: no cover
+    import ki_audio_markierung as _tonmarkierung  # type: ignore
+
+
+def setze_tonmarkierung(audio_path: str, engine: str) -> str:
+    """Herkunft in die Tonspur schreiben; Rückgabe ist das Ergebniswort.
+
+    Bewusst eine eigene Funktion: Der Selbsttest kann sie einzeln prüfen,
+    ohne eine ganze Vertonung zu brauchen (D6 – ein `--selftest` prüft das
+    Modul, dessen Namen er trägt, und reicht nicht bloß eine Flagge weiter).
+    """
+    if not audio_path or not os.path.exists(audio_path):
+        return "keine-datei"
+    return _tonmarkierung.schreiben(Path(audio_path), _tonmarkierung.ERLAUBTE_TYPEN[0],
+                                    system=(engine or None))
 
 # Alias der Aussprache-Regie (Selbsttest/Parität sprechen denselben
 # Namen wie der Reader: speechNormalize ↔ normalize_speech).
@@ -2114,6 +2137,21 @@ def main(argv=None) -> int:
         }
         with open(track_json, "w", encoding="utf-8") as fh:
             json.dump(dict(payload, fingerprint=fp), fh, ensure_ascii=False, indent=1)
+        # ---- MARKIERUNG IN DER DATEI (#1028, 13.11.2026) ----------------
+        # Die Seite sagt „maschinell erzeugte Stimme" – die Tonspur selbst
+        # sagte nichts. Wer die MP3 herunterlädt, weiterreicht oder spiegelt,
+        # hielt synthetische Sprache ohne Herkunft in der Hand. Hier wird
+        # dieselbe Angabe IN den Container geschrieben (ID3 bei MP3,
+        # RIFF-INFO bei WAV), ohne ein Sample neu zu kodieren.
+        # Die Markierung ist Zusatzfläche: Scheitert sie, bleibt die Spur
+        # gültig und der Befund steht im Log (Werkzeugbefund, kein
+        # Veröffentlichungsgrund) – das Gate `ki_provenienz_gate.py` (M3)
+        # meldet sie danach am ausgelieferten Bestand.
+        try:
+            setze_tonmarkierung(final_audio, engine)
+        except Exception as exc:  # nie die Vertonung an einer Markierung töten
+            print("  ⚠ %s: Tonspur-Markierung nicht geschrieben (%s: %s)"
+                  % (slug, type(exc).__name__, exc))
         inject_track_config(path, payload)
         produced += 1
         print("Tonspur: %-58s %6.1f s  %d Blöcke  peak %d · %.0f %% Ton"
