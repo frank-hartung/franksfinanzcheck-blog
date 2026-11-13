@@ -52,6 +52,43 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden <ID> \
 python3 scripts/faktenfrische_befund_ledger.py --wache     # dito, Ledger-scharf
 ```
 
+### Queue-Schema 2: `offen` ist Arbeit, `vorlauf` ist Termin (#1126)
+
+`data/faktenfrische_queue.json` trug bis zum 10.11.2026 zwei Namen für zwei
+verschiedene Dinge: `offen` (Alias `arbeitsvorrat`) war die Arbeitsliste **mit
+Frist** – also auch Seiten, die „frisch geprüft vor 23 Tagen“ und erst in
+sieben Tagen fällig waren. Ein solcher Eintrag widersprach sich selbst
+(„offen“ und „nicht fällig“) und machte am 07.11. drei Aktentests rot, ohne
+dass ein Sachfehler zurückkam; über `regression` blockierte er jeden PR
+(#1126).
+
+Seit Schema 2 gilt **eine** Regel, an der Erzeuger, Migration und Wächter
+hängen:
+
+| Feld | Inhalt | Beispiel |
+|---|---|---|
+| `offen` | **Arbeit**: fällig (`status: faellig`), offener Fachbefund (`befund`), abgebrochener Lauf (`unvollstaendig`) | Frist erreicht oder Befund offen |
+| `vorlauf` | **Termin**: Frist rückt näher, aber weder fällig noch befundbehaftet | „frisch geprüft vor 26 Tagen“, Frist 14.11. |
+| `arbeitsvorrat` | Obermenge beider – für Planung und Kapazität | alle Seiten mit Termin |
+| `fachbefunde` | Befunde (ID, Typ, Text, Fassung) – **nur** hier | F4, über das Ledger |
+
+Jeder Eintrag trägt seinen `status`; er wird aus `faellig`, `befund` und
+`unvollstaendig` abgeleitet (`queue_status_von`) und nie von Hand gesetzt.
+`queue_invariante` prüft vor dem Schreiben die lückenlose, überschneidungsfreie
+Zerlegung; ein widersprüchlicher Datensatz wird **nicht geschrieben**, der Lauf
+endet mit Exit 2. Die Migration bestehender Dateien ist ein Trockenlauf ohne
+Netz, Artikeländerung oder erfundene Frist und idempotent:
+
+```sh
+python3 scripts/faktenfrische.py --queue-normalisieren          # Vorschau
+python3 scripts/faktenfrische.py --queue-normalisieren --apply  # schreiben
+```
+
+Der Rückfall-Schutz steht in `queue_invariante` (Selbsttest ST9a–ST9k) und in
+`scripts/tests/test_faktenfrische_messhoehe.py` (Sabotageproben: Vorlauf in
+`offen`, Arbeit entfernt, Befunddaten im Vorrat). Wer `offen` wieder zum Alias
+des Arbeitsvorrats macht, macht den Test rot.
+
 `BEFUND-AKTE.md` ist die Sicht für Menschen (ID, Typ, Alter, Fassungsstand,
 Beanstandung, Beleg, fertiger Befehl), `data/faktenfrische_befunde_state.json`
 das Siegel (Zahlen für Ticket und Scorecard), `data/faktenfrische_entscheidungen.yaml`

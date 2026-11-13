@@ -71,15 +71,22 @@ class VorfallTests(unittest.TestCase):
         if shutil.which("git") is None:
             self.skipTest("git nicht verfügbar")
         gut = (ROOT / mg.MANIFEST).read_text(encoding="utf-8")
+        # Die Pin-Nummer kommt aus dem BESTAND, nicht aus dem Test: Ein
+        # belegter Dependabot-Bump (hier pagefind 1.5.2 → 1.6.0, #1140) darf
+        # den Vorfall-Nachbau nicht rot machen. Geprüft wird die FORM des
+        # kaputten Blocks (fehlendes Komma + doppelter Schlüssel), nicht eine
+        # zufällig eingefrorene Version.
+        version = json.loads(gut)["dependencies"]["pagefind"]
+        gut_block = f'"dependencies": {{\n    "pagefind": "{version}"\n  }}'
         kaputt_block = (
             '"dependencies": {\n'
-            '    "pagefind": "1.5.2"\n'
+            f'    "pagefind": "{version}"\n'
             '    "lighthouse": "13.5.0",\n'
-            '    "pagefind": "^1.5.2"\n'
+            f'    "pagefind": "^{version}"\n'
             '  }')
-        assert '"dependencies": {\n    "pagefind": "1.5.2"\n  }' in gut, \
+        assert gut_block in gut, \
             "Anker im aktuellen package.json fehlt – Testfixture anpassen"
-        kaputt = gut.replace('"dependencies": {\n    "pagefind": "1.5.2"\n  }', kaputt_block, 1)
+        kaputt = gut.replace(gut_block, kaputt_block, 1)
         erwartete_zeile = kaputt.splitlines().index('    "lighthouse": "13.5.0",') + 1
 
         with tempfile.TemporaryDirectory() as tmp:

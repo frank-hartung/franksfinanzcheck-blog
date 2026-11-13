@@ -7,6 +7,9 @@ Nummerierung wie im Register `data/faktenfrische_befunde_1072.yaml`.
 Dauerhaftigkeit heißt hier dreierlei:
   1. Die 47 beanstandeten Aussagen dürfen behauptend nie zurückkehren;
      Dämpfungen, Verneinungen und ausdrücklich verworfene Beispiele
+     bleiben erlaubt – für JEDEN Status, auch für überholte Einträge.
+  2. Ein offener Befund ist an den aktuellen Text gebunden (Anker, Quellen);
+     ein neuer `faktencheck`-Datum schließt keinen Befund (F4 ≠ F1).
      bleiben erlaubt.
   2. Historische Anker und Belege gelten nur für die geprüfte Fassung. Fehlen
      sie nach einer Textänderung, muss derselbe Befund im Ledger offen und
@@ -39,6 +42,18 @@ Dauerhaftigkeit heißt hier viererlei:
      den Artikelquellen und ist bei `belegtyp: streichung` `null`; Register
      und Ledger-Kette stimmen überein.
 
+ÜBERHOLT IST KEIN FREISPRUCH (10.11.2026, aus #1163/#1148 gelernt)
+  Wird ein Artikel nach der Entscheidung vollständig neu belegt – hier am
+  10.11.2026 durch WF-7B6B (#1148): acht Quellen, neue Modellrechnung,
+  unbelegte Aussagen entfernt –, dann gilt die Prüfung der damaligen
+  Fassung, nicht dem heutigen Text. Das wird als `status: ueberholt`
+  ausgewiesen, mit Datum, Nachfolge-Dokument und Begründung. Die Wache
+  verlangt dann den BELEG der Nachprüfung (das Dokument existiert und nennt
+  den Artikel) statt eines Ankers, der in der neuen Fassung zu Recht fehlt.
+  Die Sperre gegen die alte Behauptung (`verboten_behauptend`) bleibt
+  unverändert scharf: Ein überholter Eintrag darf nie grün werden, weil die
+  Aussage zurückkehrt.
+
 Kein Ersatz für eine Fachprüfung: Rückfall-Schutz, kein Wahrheitsbeweis.
 """
 import re
@@ -55,6 +70,12 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 REGISTER = ROOT / 'data' / 'faktenfrische_befunde_1072.yaml'
 QUEUE = ROOT / 'data' / 'faktenfrische_queue.json'
 ENTSCHEIDUNGEN = ROOT / 'data' / 'faktenfrische_entscheidungen.yaml'
+
+# `behoben` = am heutigen Text geprüft; `ueberholt` = durch eine belegte
+# Nachprüfung ersetzt (Fassungsbindung, siehe Modul-Docstring).
+STATUS_WERTE = ('behoben', 'ueberholt')
+ISO_TAG = re.compile(r'^\d{4}-\d{2}-\d{2}$')
+
 ALLOWLIST = ROOT / 'data' / 'agent_reach' / 'faktenfrische.yaml'
 
 META_FELDER = ('title', 'description', 'kurzantwort', 'pin_title', 'pin_description')
@@ -144,6 +165,30 @@ def allowlist_domains():
     return [q['domain'] for q in data['quellen_allowlist']]
 
 
+def status_fehler(b):
+    """Prüft den Statusvertrag eines Registereintrags – eine Quelle für
+    Strukturpflichten UND Sabotage-Probe (sonst prüften beide verschieden)."""
+    fehler = []
+    if b.get('status') not in STATUS_WERTE:
+        fehler.append(f'Status {b.get("status")!r} ist kein Vertragswert')
+    if not b.get('entschieden_von'):
+        fehler.append('entschieden_von fehlt')
+    if len(str(b.get('entscheidung') or '')) < 20:
+        fehler.append('Begründung zu kurz')
+    if not b.get('anker'):
+        fehler.append('kein Bedeutungsanker')
+    if not b.get('geprueft_fassung'):
+        fehler.append('geprueft_fassung fehlt')
+    if b.get('status') == 'ueberholt':
+        if not b.get('abgeloest_durch'):
+            fehler.append('überholt ohne Nachfolge-Dokument')
+        if not ISO_TAG.match(str(b.get('abgeloest_am') or '')):
+            fehler.append('abgeloest_am fehlt oder ist kein ISO-Tag')
+        if len(str(b.get('abloesung_grund') or '')) < 40:
+            fehler.append('Ablösung ohne Begründung')
+        if str(b.get('abgeloest_am') or '') <= str(b.get('entschieden_am') or ''):
+            fehler.append('Ablösung nicht nach der Entscheidung')
+    return fehler
 def historischer_mangel_ist_offen(befund, offene):
     """Ein veralteter Beleg ist nur akzeptabel, wenn genau dieser Befund offen ist.
 
@@ -198,6 +243,8 @@ class Faktenfrische1072RegisterTests(unittest.TestCase):
         self.assertEqual(len(befunde), 47)
         for b in befunde:
             with self.subTest(befund=b['id']):
+                self.assertEqual(status_fehler(b), [],
+                                 f'Befund {b["id"]}: Statusvertrag verletzt')
                 self.assertEqual(b['status'], 'behoben')
                 self.assertTrue(b['entschieden_von'])
                 self.assertIn(b['entschieden_am'], [str(r['stand']) for r in reg['runden']],
@@ -221,6 +268,12 @@ class Faktenfrische1072RegisterTests(unittest.TestCase):
         cache = {}
         for b in reg['befunde']:
             with self.subTest(befund=b['id']):
+                if b['status'] == 'ueberholt':
+                    # Fassungsbindung: Die Anker gehören zur Fassung, die am
+                    # 05.11. geprüft wurde. Dass sie im heutigen Text fehlen,
+                    # ist bei einer Neubelegung erwartbar; bewiesen wird die
+                    # Nachprüfung im eigenen Test unten.
+                    continue
                 if b['artikel'] not in cache:
                     fm, body = read(b['artikel'])
                     cache[b['artikel']] = norm(meta_flaeche(fm) + ' ' + body)
@@ -303,6 +356,10 @@ class Faktenfrische1072RegisterTests(unittest.TestCase):
                 self.assertTrue(any(b['beleg_url'].split('/')[2].endswith(d)
                                     for d in domains),
                                 f'Beleg nicht auf der Allowlist: {b["beleg_url"]}')
+                if b['status'] == 'ueberholt':
+                    # Die Quellen des HEUTIGEN Textes sind nicht die Quellen
+                    # der damaligen Entscheidung (siehe Modul-Docstring).
+                    continue
                 if b['artikel'] not in cache:
                     cache[b['artikel']] = read(b['artikel'])[0]
                 fm = cache[b['artikel']]
@@ -389,6 +446,45 @@ class Faktenfrische1072RegisterTests(unittest.TestCase):
                      'body': 'Text'}
         self.assertNotEqual(ledger_mod.text_hash(basis),
                             ledger_mod.text_hash(geaendert))
+
+    def test_sabotage_statusvertrag_bleibt_scharf(self):
+        """Die Ablösung ist kein Schlupfloch: vier Verstöße müssen auffallen."""
+        gut = next(b for b in register()['befunde'] if b['status'] == 'ueberholt')
+        self.assertEqual(status_fehler(gut), [], 'Positivprobe rot – Probe taugt nichts')
+        faelle = {
+            'ohne Nachfolge-Dokument': dict(gut, abgeloest_durch=''),
+            'Nachfolge vor der Entscheidung': dict(gut, abgeloest_am='2026-11-04'),
+            'Ablösung ohne Begründung': dict(gut, abloesung_grund='weil'),
+            'unbekannter Status': dict(gut, status='erledigt'),
+        }
+        for name, eintrag in faelle.items():
+            with self.subTest(fall=name):
+                self.assertNotEqual(status_fehler(eintrag), [],
+                                    f'Sabotage „{name}“ blieb grün')
+
+    def test_ueberholte_befunde_haben_eine_belegte_nachpruefung(self):
+        """„Überholt“ nur mit Dokument: es existiert und nennt den Artikel.
+
+        Damit ist die Ablösung nachprüfbar statt behauptet. Ein Tippfehler im
+        Dateinamen, ein gelöschter Bericht oder ein Dokument, das den Artikel
+        gar nicht behandelt, macht die Wache rot.
+        """
+        reg = register()
+        geprueft = 0
+        for b in reg['befunde']:
+            if b['status'] != 'ueberholt':
+                continue
+            geprueft += 1
+            with self.subTest(befund=b['id']):
+                pfad = ROOT / str(b['abgeloest_durch'])
+                self.assertTrue(pfad.is_file(),
+                                f'Befund {b["id"]}: Nachfolge-Dokument {pfad.name} fehlt')
+                text = pfad.read_text(encoding='utf-8')
+                self.assertIn(b['artikel'], text,
+                              f'Befund {b["id"]}: {pfad.name} nennt den Artikel nicht')
+                self.assertGreaterEqual(len(text.strip()), 500,
+                                        f'Befund {b["id"]}: Nachfolge-Dokument ist zu dünn')
+        self.assertGreater(geprueft, 0, 'kein überholter Befund – Test prüft nichts')
 
     def test_faktencheck_datum_schliesst_keinen_befund(self):
         """Ein neuer faktencheck-Datum schließt per se keinen F4-Befund (F4 ≠ F1)."""

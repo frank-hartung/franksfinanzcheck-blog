@@ -2,6 +2,14 @@
 
 _Stand 2026-11-13 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
+**148 offene Befunde auf 35 Seiten · davon 21 Live-Seiten mit 87 Befunden · ältester 12 Tage · Frist 14 Tage.**
+
+| Kennzahl | Wert |
+|---|---|
+| Offene Befunde | 148 |
+| Seiten betroffen | 35 (davon live: 21) |
+| Text seit dem Befund geändert | 117 |
+| Altbestand ohne Fassungs-Hash | 5 |
 **155 offene Befunde auf 39 Seiten · davon 24 Live-Seiten mit 94 Befunden · ältester 14 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
@@ -32,6 +40,7 @@ _Stand 2026-11-13 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
+> **Wichtig – betrifft 122 von 148 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 > **Wichtig – betrifft 111 von 155 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
@@ -356,6 +365,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 84c991c5d152b14a267
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a70e7adc97c58317ccc1 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-11-02-last-minute-urlaubsangebote-sichern` · nicht im Live-Bestand · 5 Befund(e)
 ### `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
 
 Datei: `content/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/index.md`

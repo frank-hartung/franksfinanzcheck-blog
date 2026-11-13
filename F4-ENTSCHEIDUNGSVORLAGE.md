@@ -6,6 +6,8 @@ Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
 **Bezugsstand: 2026-11-12** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
 
+**87 offene Live-Befunde auf 21 Artikeln.** Davon sind **77** bereits früher entschieden und durch eine spätere Textänderung
+wieder geöffnet worden (fassungsgebundene Bindung, kein Rückfall). **10** Befunde sind neu.
 **83 offene Live-Befunde auf 21 Artikeln.** Davon sind **80** bereits früher entschieden und durch eine spätere Textänderung
 wieder geöffnet worden (fassungsgebundene Bindung, kein Rückfall). **3** Befunde sind neu.
 
@@ -15,6 +17,16 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 
 ## Neu ohne frühere Entscheidung
 
+- `7a87eaaa2b863ba8cc46` · `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` · Ein relevanter regulatorischer Rahmen (z. B. Vorgaben der Bundesnetzagentur oder BDEW) wird nicht genannt, obwohl die Fundstelle darauf hinweist, dass solche Vorgaben existieren.
+- `9d67a5e6bd11212c7c1e` · `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` · Die Aussage, dass bestimmte Gerätegruppen (TV‑Ecke, Homeoffice, alte Audio‑Technik) zuerst zu senken „lohnt“, wird ohne messbare Daten oder Vergleichskriterien gemacht.
+- `a54abc1cad73d20fb689` · `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` · Die konkreten Jahreskosten (z. B. 32 € für 10 W Standby) beruhen auf dem nicht belegten Strompreis und werden nicht als Modellrechnung gekennzeichnet.
+- `a7d1cf6485921e117919` · `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` · Der angegebene durchschnittliche Strompreis von 37,3 Cent/kWh (BDEW‑Schnitt) wird ohne Quellenangabe genannt.
+- `a7f69a854430d62a4a3e` · `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` · Die Empfehlung, dass ein günstigerer Arbeitspreis der zweite wichtigste Hebel sei, fehlt jede Quelle oder regulatorische Einordnung.
+- `33278b9e7942ebfdbbac` · `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` · Definition des Begriffs „Last Minute“ (maximal 14 Tage zwischen Buchung und Abreise) wird mit dem Deutschen Reiseverband angegeben, jedoch fehlt ein Nachweis.
+- `6ad7358a9afcfef3babb` · `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` · Angabe, dass Preisalarme keinen Tiefstpreis garantieren, wird nicht durch konkrete Zahlen oder Vergleichsstudien belegt.
+- `7c375a3e1a9bfab1468c` · `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` · Hinweis auf § 651r BGB (Insolvenzsicherung bei Pauschalreisen) enthält keinen Verweis auf eine Rechtsquelle oder Verbraucherzentrale‑Information.
+- `ea11d36614fa115503b4` · `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` · Behauptung, dass Nachlässe von bis zu 50 % nur Einzelfälle sind, wird ohne Quellenangabe präsentiert.
+- `f7b1c869dd8e442eaf16` · `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` · Aussage, dass der „beste Zeitpunkt zum Buchen“ ein Modellwert sei, bleibt vage und ohne messbare Daten oder Studien untermauert.
 - `6b5921bdc76490587167` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Seit 2026 nutzen die großen Anbieter die Technik mit dem Namen Vectoring; das ist ein Modellwert. Sie senkt das Rauschen auf der Leitung. In der Stadt sind damit bis zu 250 Mbps stabil drin.
 - `8436b91bdb63a6316979` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Preisgarantie über mindestens 12 Monate; ohne Garantie darf der Anbieter bald erhöhen, oft um bis zu 10 %.
 - `a4ff01e649b789f19e6a` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Für 50 Mbps zahlst du heute meist ca. 20–40 € im Monat; das ist ein Beispielwert.
@@ -1050,6 +1062,70 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 **Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
 
+> Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session bestätigt. Der allgemeine VZ-Übersichtslink ist durch den konkreten Ratgeber Online-Reisebüros ersetzt und um einen Buchungscheck für Leistungsangaben, Anbieter, Endpreis und Storno ergänzt.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+## `2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen`
+
+- Datei-SHA256 (heute): `6b994161e047d28d3f0958905dd549b169ebbe2dc908adea3033b81d42310a61`
+- Offene Live-Befunde: **5**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `7067eabb89a917ae67a4` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu unklaren Angeboten und Problemen mit Online-Buchu… |
+| `af2ccb4222eeb195222f` | praezision | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht automatisch, ob das Auto zum individuellen Url… |
+| `d9c8b522bf1dcaed0340` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Verbraucherzentrale beschreibt, dass sich eine Pauschalreise unter bestimmten Bedingungen auf eine andere Person… |
+| `e2975509f3f130de0755` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Verbraucherzentrale empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im Blick zu behalten. |
+| `f1704e45e970a8f4b078` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Bei einer Pauschalreise gilt die Mitteilung als rechtzeitig, wenn sie dem Veranstalter spätestens sieben Tage vor Rei… |
+
+### `7067eabb89a917ae67a4`
+
+**Befund:** Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu unklaren Angeboten und Problemen mit Online-Buchungen.
+
+**Frühere Entscheidung (2026-11-04):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 04.11.2026)
+
+> Verbraucherzentrale-Hinweise zu Buchungsproblemen, Übertragbarkeit von Pauschalreisen (§ 651e BGB, Sieben-Tage-Frist) und Budgetplanung artikel-eigen ergänzt; Mietwagen-Aussage präzisiert.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `af2ccb4222eeb195222f`
+
+**Befund:** Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht automatisch, ob das Auto zum individuellen Urlaub passt – ohne Messgröße bleibt die Aussage ungenau.
+
+**Frühere Entscheidung (2026-11-04):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 04.11.2026)
+
+> Verbraucherzentrale-Hinweise zu Buchungsproblemen, Übertragbarkeit von Pauschalreisen (§ 651e BGB, Sieben-Tage-Frist) und Budgetplanung artikel-eigen ergänzt; Mietwagen-Aussage präzisiert.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `d9c8b522bf1dcaed0340`
+
+**Befund:** Die Verbraucherzentrale beschreibt, dass sich eine Pauschalreise unter bestimmten Bedingungen auf eine andere Person übertragen lässt.
+
+**Frühere Entscheidung (2026-11-04):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 04.11.2026)
+
+> Verbraucherzentrale-Hinweise zu Buchungsproblemen, Übertragbarkeit von Pauschalreisen (§ 651e BGB, Sieben-Tage-Frist) und Budgetplanung artikel-eigen ergänzt; Mietwagen-Aussage präzisiert.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `e2975509f3f130de0755`
+
+**Befund:** Die Verbraucherzentrale empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im Blick zu behalten.
+
+**Frühere Entscheidung (2026-11-04):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 04.11.2026)
+
+> Verbraucherzentrale-Hinweise zu Buchungsproblemen, Übertragbarkeit von Pauschalreisen (§ 651e BGB, Sieben-Tage-Frist) und Budgetplanung artikel-eigen ergänzt; Mietwagen-Aussage präzisiert.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `f1704e45e970a8f4b078`
+
+**Befund:** Bei einer Pauschalreise gilt die Mitteilung als rechtzeitig, wenn sie dem Veranstalter spätestens sieben Tage vor Reisebeginn zugeht (§ 651e BGB).
+
+**Frühere Entscheidung (2026-11-04):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 04.11.2026)
+
+> Verbraucherzentrale-Hinweise zu Buchungsproblemen, Übertragbarkeit von Pauschalreisen (§ 651e BGB, Sieben-Tage-Frist) und Budgetplanung artikel-eigen ergänzt; Mietwagen-Aussage präzisiert.
 > Am heutigen Text geprüft (SHA-256 aaf1b8fc6568): Die verlangte Quelle steht im Abschnitt „Welche Kosten gehören in ein Campingbudget?“ inline – „Die Verbraucherzentrale erklärt in ihrem Ratgeber [Online-Reisebüros](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen/onlinereisebueros-so-vermeiden-sie-pr“. Der Befund trifft die heutige Fassung damit nicht mehr.
 
 Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
@@ -1204,6 +1280,11 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden a4ff01e649b789f19e6
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 089b89138417e63a3dcf --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1158934e7a18c7b2099b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3716cfd3ab5aec6d774b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7067eabb89a917ae67a4 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden af2ccb4222eeb195222f --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d9c8b522bf1dcaed0340 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden e2975509f3f130de0755 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden f1704e45e970a8f4b078 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4284fd2d9c9005e7af8f --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 84e247f17354e224c973 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a2a7dc69f10393af6531 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"

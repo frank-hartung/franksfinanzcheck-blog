@@ -1,4 +1,12 @@
 {
+  "erzeugt": "2026-11-11T13:38:27Z",
+  "stichtag": "2026-11-11",
+  "offen": 148,
+  "seiten": 35,
+  "live_seiten": 21,
+  "live_befunde": 87,
+  "ueberholt": 117,
+  "ohne_fassung": 5,
   "erzeugt": "2026-11-13T15:58:29Z",
   "stichtag": "2026-11-13",
   "offen": 155,
@@ -1651,6 +1659,8 @@
       "nicht_entscheidbar_grund": ""
     },
     {
+      "slug": "frugalismus",
+      "id": "760cdea8544be9d1c7c0",
       "slug": "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
       "id": "985f506ee04087bf7253",
       "typ": "luecke",
