@@ -1,42 +1,22 @@
 {
   "target": 6,
-  "ready": 2,
+  "ready": 0,
   "pool_size": 12,
   "generated_at": "2026-11-13T12:14:37Z",
   "candidates": [
     {
       "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
-      "ready": true,
+      "ready": false,
       "sha256": "9d7543eee4977a8762d862a6fc40079ef3046225a63e0712fe4fb31af02f7caf",
-      "flesch": 67.3,
       "measured_at": "2026-11-13T12:03:58Z",
-      "score": 0.962,
-      "parts": {
-        "spelling": 0.88,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.96,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee",
-      "ready": true,
+      "ready": false,
       "sha256": "aad7490eb6d91429d0bf416b8c43882e55e65677d770de2d1be996c7f9dbc5dd",
-      "flesch": 60.4,
       "measured_at": "2026-11-13T12:05:13Z",
-      "score": 0.954,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.94,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
