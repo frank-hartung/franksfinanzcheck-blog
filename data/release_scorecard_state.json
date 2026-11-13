@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "generated_at": "2026-11-12T20:25:51Z",
+  "generated_at": "2026-11-13T00:40:03Z",
   "modus": "kandidaten",
-  "commit": "ceba1562d6107102eb40cd2b6e4253f232a3fdb7",
+  "commit": "6e761385395a9b62aeff354d7aec2534a40ffae3",
   "kapazitaet": {
-    "stichtag": "2026-11-12",
-    "basis": "2026-11-12",
+    "stichtag": "2026-11-13",
+    "basis": "2026-11-13",
     "projiziert": false,
     "artikel": 128,
     "faellig": 0,
@@ -14,7 +14,7 @@
     "naechste_frist": {
       "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
       "frist": "2026-11-19",
-      "restlaufzeit": 7
+      "restlaufzeit": 6
     },
     "budget": 5,
     "laeufe_je_tag": 1.0,
@@ -36,7 +36,7 @@
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
       "geprueft": true,
-      "bis": "2027-03-12",
+      "bis": "2027-03-13",
       "tage": 120,
       "weg_frei": true,
       "erstverletzung": null,
@@ -104,7 +104,7 @@
     "ueberholt": 96,
     "ohne_fassung": 15,
     "nicht_entscheidbar": 0,
-    "aeltester_tage": 13,
+    "aeltester_tage": 14,
     "frist_tage": 14,
     "ueber_frist": 0,
     "je_slug": {
@@ -226,7 +226,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-01",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -519,7 +519,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1300,7 +1300,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
@@ -1753,7 +1753,25 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-20",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
+      "checks": []
+    },
+    "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen": {
+      "sha256": "effbf3dfc286f03ea6df33717456a0399bc0b3e0ec58f3089062cbcd54fbadab",
+      "urteil": "freigabe-reif",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "bestanden",
+        "quellen": "bestanden",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-11-29",
+      "siegel_drift": "neu versiegelt",
       "checks": []
     },
     "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
@@ -1771,13 +1789,44 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-02-07",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "Q2-quellen-vorhanden",
           "dimension": "quellen",
           "wirkung": "warnung",
           "detail": "keine Belegkette im Frontmatter (quellen) – nachpflegen (faktenfrische)"
+        }
+      ]
+    },
+    "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
+      "sha256": "df5dfbefd369c8252b63144966d6f4810d5285f3b61645005c9d86e4e47a4282",
+      "urteil": "warnung",
+      "risikoklasse": "standard",
+      "dimensionen": {
+        "technik": "warnung",
+        "quellen": "warnung",
+        "faktenalter": "bestanden",
+        "affiliate": "bestanden",
+        "redundanz": "bestanden",
+        "ymyl": "bestanden",
+        "freigabe": "nicht erforderlich",
+        "revision": "bestanden"
+      },
+      "naechste_pruefung": "2026-12-24",
+      "siegel_drift": "neu versiegelt",
+      "checks": [
+        {
+          "check": "Q2-quellen-vorhanden",
+          "dimension": "quellen",
+          "wirkung": "warnung",
+          "detail": "keine Belegkette im Frontmatter (quellen) – nachpflegen (faktenfrische)"
+        },
+        {
+          "check": "T1w-zeichenlaenge-optimum",
+          "dimension": "technik",
+          "wirkung": "warnung",
+          "detail": "Zeichenlänge unter-optimum (10802 Zeichen, Optimum 12.000–18.000)"
         }
       ]
     }
