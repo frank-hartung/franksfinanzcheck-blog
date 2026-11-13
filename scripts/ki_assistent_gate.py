@@ -44,6 +44,7 @@ REGELN = {
     "KA8": "Keine Tracking-Pixel oder externen Requests vor Nutzeraktion",
     "KA9": "Worker-Code vorhanden",
     "KA10": "CORS-Freigabe host-genau (keine Zeichenketten-Prüfung der Herkunft)",
+    "KA11": "Offenlegung der Interaktion (Art. 50 Abs. 1 KI-VO) – sichtbar und auf der Leitung",
 }
 
 ERGEBNISSE = {"bereit": [], "warnung": [], "defekt": []}
@@ -235,6 +236,75 @@ def pruefe_ka9():
         status("KA9", "defekt", f"Worker unvollständig: fehlt {', '.join(missing)}")
 
 
+def pruefe_ka11():
+    """Offenlegung der Interaktion – sichtbar UND maschinenlesbar (Art. 50 Abs. 1).
+
+    BEFUND 13.11.2026 (Frist `ki-vo-kennzeichnung-bestand`, 02.12.2026)
+    Der Assistent war gebaut und auslieferbar, aber er sagte es nirgends:
+    Das Widget begrüßte mit „Hallo! 👋", als wäre ein Mensch am anderen
+    Ende. Der Hinweis, den der Worker seit jeher im JSON-Körper mitschickt,
+    wurde im Client NIE gelesen (`data.hinweis` kam dort nicht vor), und
+    eine Kopfzeile gab es gar nicht. Art. 50 Abs. 1 KI-VO gilt seit
+    02.08.2026 OHNE Übergangsfrist – für die Offenlegung bei Interaktion
+    gibt es keine Nachfrist wie bei Abs. 2.
+
+    Geprüft wird beides, weil eines ohne das andere nur halb ist:
+      · sichtbar (Widget): ein Satz im Dialogkopf, der die KI benennt,
+        und ein Link auf den Hinweis im Impressum.
+      · maschinenlesbar (Worker): eine Kopfzeile `ai-generated`, die auf
+        JEDEM Antwortpfad mitkommt, und der Hinweis im Körper.
+    """
+    partial = inhalt(ROOT / "layouts" / "_partials" / "ki_assistent.html")
+    shortcode = inhalt(ROOT / "layouts" / "shortcodes" / "ki_assistent.html")
+    worker = inhalt(ROOT / "cloudflare" / "ki-assistent" / "worker.js")
+    js = inhalt(ROOT / "static" / "premium" / "ki-assistent.js")
+    css = inhalt(ROOT / "assets" / "css" / "extended" / "ki-assistent.css")
+
+    fehlend: list[str] = []
+    for name, text in (("Partial", partial), ("Shortcode", shortcode)):
+        if "data-ff-ki-chat-label" not in text:
+            fehlend.append(f"{name}: sichtbare Offenlegung im Dialogkopf fehlt "
+                           "(data-ff-ki-chat-label)")
+        if "impressum/#ki-hinweis" not in text:
+            fehlend.append(f"{name}: kein Verweis auf den KI-Hinweis im Impressum")
+    # FAil-CLOSED PRÜFEN, NICHT HOFFEN (#1028): Die Offenlegung darf nur
+    # zusammen mit dem Widget erscheinen. Stünde sie außerhalb des
+    # `{{ if ... $endpoint }}`-Blocks, behauptete jede Seite eine
+    # KI-Interaktion, die es dort nicht gibt – eine falsche Angabe ist
+    # schlimmer als eine fehlende. Geprüft wird die Stellung im Quelltext:
+    # der Offenlegungs-Satz muss NACH der Endpoint-Weiche stehen.
+    for name, text in (("Partial", partial), ("Shortcode", shortcode)):
+        weiche = text.find("$endpoint")
+        satz = text.find("data-ff-ki-chat-label")
+        schliessung = text.find("{{- end -}}", satz)
+        if weiche < 0:
+            fehlend.append(f"{name}: keine Endpoint-Weiche – Offenlegung nicht fail-closed")
+        elif satz < weiche:
+            fehlend.append(f"{name}: Offenlegung steht VOR der Endpoint-Weiche – "
+                           "sie würde auch ohne Widget erscheinen (falsche Angabe)")
+        elif schliessung < 0:
+            fehlend.append(f"{name}: Blockende der Offenlegung nicht gefunden – "
+                           "Stellung im Template nicht prüfbar")
+
+    if ".ff-ki-header__ki" not in css:
+        fehlend.append("CSS: die Offenlegung ist nicht gestaltet (.ff-ki-header__ki)")
+    if "AI_OFFENLEGUNG" not in worker and "KI_KOPFZEILE" not in worker:
+        fehlend.append("Worker: keine Kopfzeile, die die KI-Interaktion meldet")
+    if "data.hinweis" not in js:
+        fehlend.append("Client: der Hinweis aus der Antwort wird nicht angezeigt "
+                       "(gleicher Befund wie 13.11.2026: `data.hinweis` fehlte)")
+    # Die Offenlegung darf nicht an eine Fußzeile mit `opacity` gebunden sein:
+    # ein Pflichtsatz ist kein Beiwerk.
+    if re.search(r"\.ff-ki-header__ki\s*\{[^}]*opacity\s*:\s*0?\.", css):
+        fehlend.append("CSS: die Offenlegung wird über `opacity` zurückgenommen – "
+                       "Pflichttext darf nicht ausgeblendet werden")
+    if fehlend:
+        for grund in fehlend:
+            status("KA11", "defekt", grund)
+        return
+    status("KA11", "bereit")
+
+
 # ---- Selftest (Sabotage-Proben) ----
 def selftest() -> int:
     """Testet, dass das Gate Sabotage erkennt."""
@@ -337,6 +407,35 @@ def selftest() -> int:
         ERGEBNISSE["warnung"].clear()
         ERGEBNISSE["defekt"].clear()
 
+    # Test 5: Die Interaktions-Offenlegung ist sabotierbar (Art. 50 Abs. 1).
+    partial_pfad = ROOT / "layouts" / "_partials" / "ki_assistent.html"
+    backup_partial = partial_pfad.read_bytes() if partial_pfad.exists() else None
+    if backup_partial is not None:
+        try:
+            partial_pfad.write_text(
+                backup_partial.decode("utf-8").replace("data-ff-ki-chat-label", ""),
+                encoding="utf-8")
+            pruefe_ka11()
+            if not any(e["regel"] == "KA11" for e in ERGEBNISSE["defekt"]):
+                print("FAIL: KA11 erkannte die entfernte Offenlegung im Dialogkopf nicht.")
+                fehler += 1
+            else:
+                print("OK: KA11 erkennt eine fehlende Interaktions-Offenlegung.")
+        finally:
+            partial_pfad.write_bytes(backup_partial)
+        ERGEBNISSE["bereit"].clear()
+        ERGEBNISSE["warnung"].clear()
+        ERGEBNISSE["defekt"].clear()
+        pruefe_ka11()
+        if any(e["regel"] == "KA11" for e in ERGEBNISSE["defekt"]):
+            print(f"FAIL: KA11 beanstandet den echten Bestand ({ERGEBNISSE['defekt']}).")
+            fehler += 1
+        else:
+            print("OK: KA11 lässt den echten Bestand passieren.")
+        ERGEBNISSE["bereit"].clear()
+        ERGEBNISSE["warnung"].clear()
+        ERGEBNISSE["defekt"].clear()
+
     if fehler == 0:
         print("\nAlle Sabotage-Proben erkannt. Gate ist scharf.")
     else:
@@ -360,7 +459,7 @@ def main():
     # Alle Prüfungen laufen lassen
     for pruefer in [pruefe_ka1, pruefe_ka2, pruefe_ka3, pruefe_ka4,
                     pruefe_ka5, pruefe_ka6, pruefe_ka7, pruefe_ka8, pruefe_ka9,
-                    pruefe_ka10]:
+                    pruefe_ka10, pruefe_ka11]:
         try:
             pruefer()
         except Exception as exc:

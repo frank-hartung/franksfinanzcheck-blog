@@ -25,9 +25,15 @@ redaktionelle_pruefung:
 
 inspiration: Energiekosten im Haushalt senken mit Smart-Home-Geräten
 cover:
-  image: "images/covers/2026-10-06-energiekosten-senken-smarte-helfer-fuer-den-haushalt.jpg"
+  image: "images/covers/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt.jpg"
   alt: "Energiekosten senken: Smarte Helfer für den Haushalt"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: ca449f5026fafd6ee52cd7a98178a28a385dddbf679c78e15273beeccaf54992
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur - Energie"

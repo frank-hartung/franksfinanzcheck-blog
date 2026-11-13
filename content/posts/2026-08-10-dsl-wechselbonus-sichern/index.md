@@ -14,6 +14,12 @@ cover:
   image: "images/covers/2026-08-10-dsl-wechselbonus-sichern.jpg"
   alt: "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: ffb84d17d61893c59fff3b439bf7a6b0620671df15fba9196082fd22992d92aa
+    geprueft_am: 2026-11-13
 kurzantwort: "Ein DSL-Wechselbonus ist nur dann wirklich attraktiv, wenn du ihn zusammen mit Grundgebühr, Anschlusskosten und Laufzeit rechnest. Gute Angebote drücken den Effektivpreis über 24 Monate spürbar – oft um 10 € bis 20 € pro Monat. Wer nur auf den Bonus schaut, tappt schnell in die Rabattfalle."
 
 social_posted: true

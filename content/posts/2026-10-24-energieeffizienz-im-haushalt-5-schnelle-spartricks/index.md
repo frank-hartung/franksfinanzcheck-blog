@@ -26,6 +26,12 @@ cover:
   image: "images/covers/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks.jpg"
   alt: "Energieeffizienz im Haushalt: 5 schnelle Spartricks"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 7675cdb9957775022233beb198a72c4dcb507152978c6850048dbc827867be55
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur – Energie"

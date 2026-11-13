@@ -21,6 +21,12 @@ cover:
   image: "images/covers/2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen.jpg"
   alt: "Günstigen Mietwagen für den Urlaub buchen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: ff79b04d101cc410f7816f0db4aebaa5b21cc8138e943cd21b823e68eb20783f
+    geprueft_am: 2026-11-13
 faktencheck: 2026-11-05
 kurzantwort: "Buche den Mietwagen früh – mindestens drei Wochen vor der Reise. Ein früher Buchungszeitpunkt ist meist günstiger als eine Buchung kurz vor dem Start. Vergleiche die Preise auf Vergleichsportalen und prüfe, welche Zusatzgebühren im Endpreis stecken, statt nur den Tagespreis zu lesen."
 quellen:

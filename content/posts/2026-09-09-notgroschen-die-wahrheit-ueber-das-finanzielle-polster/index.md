@@ -20,6 +20,12 @@ cover:
   image: "images/covers/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster.jpg"
   alt: "Notgroschen: Die Wahrheit über das finanzielle Polster"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 2991072d6db20302cc3ebbd60b96caae4f5baf7ce9f56c2285fc3ea897f4c96c
+    geprueft_am: 2026-11-13
 kurzantwort: "Ein Notgroschen sollte mindestens drei‑ bis sechs‑mal deine monatlichen Fixkosten betragen – bei 1 000 € Fixausgaben also etwa 3 000 € bis 6 000 €. Wenn du ein geringes Einkommen hast, reicht ein Startpolster von rund 1 000 €. Passe die Summe an deine persönliche Ausgaben‑ und Risikosituation an."
 social_posted: true
 quellen:

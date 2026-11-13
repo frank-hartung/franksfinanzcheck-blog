@@ -21,9 +21,15 @@ redaktionelle_pruefung:
 
 inspiration: "Grundlast messen: Wo dein Strom nachts hingeht"
 cover:
-  image: "images/covers/2026-11-12-deine-naechtliche-grundlast-strom-so-erkennst-du-wo.jpg"
+  image: "images/covers/2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo.jpg"
   alt: "Deine nächtliche Grundlast Strom: So erkennst"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: ef3d8f0d9c2feac820e9f82352fa2f50b0247f908ac286c5af6f69476d9ca482
+    geprueft_am: 2026-11-13
 faktencheck: 2026-11-12
 faktenfrische_aliases:
   - "2026-11-12-deine-naechtliche-grundlast-strom-so-erkennst-du-wo"
@@ -129,12 +135,3 @@ Mess die Differenz über einen Tag; ein hoher Wert weist auf einen Defekt hin.
 👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Stromtarife vergleichen**](/go/strom/)
 
 *Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
-
-
----
-
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
-
-*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
-
-_Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information und stellt keine Anlage-, Rechts- oder Steuerberatung dar. Prüfe Konditionen und Bedingungen immer beim jeweiligen Anbieter._

@@ -14,6 +14,12 @@ cover:
   image: "images/covers/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit.jpg"
   alt: "Sparen im Herbst: Die besten Spartipps für die goldene Jahreszeit"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 43779efcbcb3340cfc0136c73ce9565be18fb1707c003159c184c58627d6c815
+    geprueft_am: 2026-11-13
 kurzantwort: "Der Herbst bündelt mehrere feste Spar-Termine im Jahr: Kfz-Stichtag, Heizungs-Check und Vorratskäufe. Durch den Stichtag der Kfz-Versicherung (30. November), das Optimieren der Heizungsanlage, das Bündeln von Sachversicherungen und saisonale Vorratskäufe lassen sich jedes Jahr spürbare Summen an Fix- und Konsumkosten einsparen."
 
 social_posted: true

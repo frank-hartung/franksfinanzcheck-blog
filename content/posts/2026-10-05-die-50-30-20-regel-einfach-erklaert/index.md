@@ -15,6 +15,12 @@ cover:
   image: "images/covers/2026-10-05-die-50-30-20-regel-einfach-erklaert.jpg"
   alt: "Die 50-30-20-Regel einfach erklärt"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 6eb2bdd8dae8d036fa4615ebc1f8d0e59975786d2f48e34189dc20f8dbb107b1
+    geprueft_am: 2026-11-13
 pin_title: "Die 50-30-20-Regel einfach erklärt"
 pin_description: "*Werbung | Die 50-30-20-Regel einfach erklärt – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ. Mehr Spartipps auf FranksFinanzcheck! #die #503020regel #einfach"
 quellen:

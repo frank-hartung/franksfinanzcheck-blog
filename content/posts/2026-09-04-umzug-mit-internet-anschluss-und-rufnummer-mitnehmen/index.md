@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen.jpg"
   alt: "Umzug mit Internet: Anschluss und Rufnummer mitnehmen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: df7d48011a181c9eb5bf197caf67ff84fc7ab668257b5c564c1025f5269f02a8
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Telekommunikationsgesetz § 56 – Vertragslaufzeit, Kündigung"

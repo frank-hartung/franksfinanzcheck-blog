@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-11-13-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste.jpg"
   alt: "Weniger Spontankäufe: Dein Essensplan Woche ohne Reste"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 73a882cc7e31b4531113f7903c7ae00174e2eb98a2ffe4e92cba9487d9efbe16
+    geprueft_am: 2026-11-13
 faktencheck: 2026-11-13
 ---
 
@@ -69,7 +75,7 @@ Durch clevere Kombinationen bleibt kaum etwas ungenutzt.
 
 | Fehler | Warum er kostet | Wie du ihn [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) |
 |--------|----------------|----------------------|
-| Zu wenig Portionen planen | Du kaufst nach und nach | Notiere genaue Portionen pro Person |
+| Zu wenig Portionen planen | Du kaufst nach und nach nach | Notiere genaue Portionen pro Person |
 | Keine Resteverwertung | Reste landen im Müll | Plane ein „Reste‑Gericht“ für jeden Tag |
 | Spontankäufe trotz Liste | Impulsive Entscheidungen | Lege das Handy beim Einkauf weg |
 | Unflexible Rezepte | Du kannst nicht improvisieren | Wähle Gerichte mit austauschbaren Zutaten |

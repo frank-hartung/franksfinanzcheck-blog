@@ -19,6 +19,12 @@ cover:
   image: "images/covers/2026-10-14-heizperiode-vorbereiten-im-spaetsommer.jpg"
   alt: "Heizperiode vorbereiten im Spätsommer"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: a04dc716e9cb6e2258efe374567e41a0cfb1198aec0196af59817cf40590005f
+    geprueft_am: 2026-11-13
 pin_title: "Heizperiode vorbereiten im Spätsommer"
 pin_description: "*Werbung | Heizperiode vorbereiten: Heizkörper nach Bedarf prüfen, Verbrauch messen und Tarife mit Grundpreis vergleichen. Rechenwege offen, ohne Sparversprechen. Mehr Spartipps auf FranksFinanzcheck! #gasrechnung #senken #heizkosten"
 quellen:

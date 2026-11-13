@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet.jpg"
   alt: "Grundversorgung Strom und Gas: Was sie leistet"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 77e177bbe6e12d1becc5439d066a84f57f1767245e34db8dfa648d34261ef7f1
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur – Fachthemen Elektrizität und Gas"

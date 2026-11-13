@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst.jpg"
   alt: "Secondhand Kleidung: So erkennst du Qualität & sparst"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 192d7da6c5269359ec99e27184d6c68d2aa731fb148c1d3b9505d837afe4334c
+    geprueft_am: 2026-11-13
 faktencheck: 2026-11-13
 ---
 

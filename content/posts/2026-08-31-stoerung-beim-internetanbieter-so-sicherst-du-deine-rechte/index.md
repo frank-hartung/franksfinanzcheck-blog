@@ -25,6 +25,12 @@ cover:
   image: "images/covers/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte.jpg"
   alt: "Störung beim Internetanbieter: So sicherst du deine Rechte"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 549285c9daa23be591ded8a766eb388a863b4861aea899a57c97bb313ab20c9f
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur – Verbraucherportal Telekommunikation: Vertrag und Laufzeit"

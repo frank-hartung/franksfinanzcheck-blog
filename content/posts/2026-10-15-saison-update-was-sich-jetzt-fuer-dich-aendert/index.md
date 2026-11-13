@@ -116,6 +116,12 @@ cover:
   image: "images/covers/2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert.jpg"
   alt: "Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: c7fc7e3d5d05908c4c4aebb2edef196d1702278a6ba8a6ce584b2e0faf53ddf9
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Inflationsrate im September 2026 bei +3,3 % (Pressemitteilung Nr. 364 vom 13. Oktober 2026)"

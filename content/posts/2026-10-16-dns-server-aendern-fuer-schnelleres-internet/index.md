@@ -23,6 +23,12 @@ cover:
   image: "images/covers/2026-10-16-dns-server-aendern-fuer-schnelleres-internet.jpg"
   alt: "DNS-Server ändern für schnelleres Internet"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 55a8ea27e34efc16163725b0adaa247de2be5828897ad1559b3ef8cf8af72521
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur – Fachthemen Telekommunikation"

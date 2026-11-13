@@ -21,9 +21,15 @@ redaktionelle_pruefung:
 
 inspiration: "Mesh-WLAN nachrüsten: Für welche Wohnung sich das lohnt"
 cover:
-  image: "images/covers/2026-11-09-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung.jpg"
+  image: "images/covers/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung.jpg"
   alt: "Mesh WLAN nachrüsten: Schluss mit Funklöchern in der Wohnung"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 9d9150b5ab8e08a50ce018350f8bacb1737b06152e8b97c5759213cd6d78b1d7
+    geprueft_am: 2026-11-13
 kurzantwort: "Das Nachrüsten von Mesh WLAN lohnt sich besonders in Wohnungen ab etwa 80 Quadratmetern oder bei massiven Wänden, um Funklöcher durch ein intelligentes Netzwerk mehrerer Knotenpunkte zu eliminieren. Im Gegensatz zu herkömmlichen Repeatern sorgt die Mesh-Technologie für eine unterbrechungsfreie Verbindung mit nur einem einzigen Netzwerknamen in der gesamten Wohnfläche."
 faktenfrische_aliases:
   - "2026-11-09-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung"
@@ -181,3 +187,9 @@ Nein, das ist gerade der große Vorteil. Die Knotenpunkte kommunizieren kabellos
 _Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information und stellt keine Anlage-, Rechts- oder Steuerberatung dar. Prüfe Konditionen und Bedingungen immer beim jeweiligen Anbieter._
 
 ---
+
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
+
+*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
+
+_Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information und stellt keine Anlage-, Rechts- oder Steuerberatung dar. Prüfe Konditionen und Bedingungen immer beim jeweiligen Anbieter._

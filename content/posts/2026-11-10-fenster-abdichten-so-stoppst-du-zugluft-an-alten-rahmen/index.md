@@ -21,9 +21,15 @@ redaktionelle_pruefung:
 
 inspiration: "Undichte Fenster abdichten: Was bei alten Rahmen zuerst hilft"
 cover:
-  image: "images/covers/2026-10-30-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen.jpg"
+  image: "images/covers/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen.jpg"
   alt: "Fenster abdichten: So stoppst du Zugluft an alten Rahmen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 78cb072b8898e0f8ffa080e37dd245a4a055838266fa118ed80013be47e36400
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Referenzseite bundesnetzagentur.de"

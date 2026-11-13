@@ -27,6 +27,12 @@ cover:
   image: "images/covers/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig.jpg"
   alt: "Gasabschlag berechnen: So planst du die Heizsaison richtig"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: e7b11ebab1237af15da5bc9f07f3d12f27f665303904ff909d7fb3826ded8d61
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Verbraucherzentrale – Heizung: 10 einfache Tipps zum Heizkosten-Sparen"
@@ -158,7 +164,7 @@ Vor der Handarbeit die Grundsatzfrage: Lohnt der Wechsel überhaupt, oder ist de
 
 
 
-**Weiterlesen:** [Mehr zum Thema Strom und Gas sparen](../../pillar/strom-sparen/) · [Balkonkraftwerk Förderung](../../posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/) · [Fenster abdichten](../../posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/)
+**Weiterlesen:** [Mehr zum Thema Strom und Gas sparen](../../pillar/strom-sparen/) · [Balkonkraftwerk Förderung](../../posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/)
 **Lesetipp:** [Preisgarantie Gas: So sicherst du dir günstige Tarife](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/)
 
 ## Häufige Fragen

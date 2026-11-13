@@ -1,6 +1,6 @@
 # SUCHRADAR – Status
 
-> Stand: 2026-11-13 15:36:31 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
+> Stand: 2026-11-12 16:09:00 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
 > Schlüssellos · 0 € · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md`
 
 ## Lauf
@@ -8,21 +8,21 @@
 | Kennzahl | Wert |
 |---|---|
 | Anfragen geplant | 25 |
-| Erfolgreich | 22 |
+| Erfolgreich | 23 |
 | Aus dem Zwischenspeicher | 0 |
-| Fehlgeschlagen | 3 |
+| Fehlgeschlagen | 2 |
 | Übersprungen (Budget) | 0 |
-| Treffer gesamt | 187 |
+| Treffer gesamt | 197 |
 | Davon organisch | 0 |
-| Eigene Treffer | 0 von 22 Anfragen |
+| Eigene Treffer | 0 von 23 Anfragen |
 
 ## Datenqualität
 
 | Kennzahl | Wert |
 |---|---|
-| Anfragen mit echtem Suchindex | 0 von 22 |
-| Anfragen nur mit Wissens-Rückfall | 22 |
-| Organische Treffer | 0 von 187 |
+| Anfragen mit echtem Suchindex | 0 von 23 |
+| Anfragen nur mit Wissens-Rückfall | 23 |
+| Organische Treffer | 0 von 197 |
 | Rückfall-Anteil | 100 % |
 | Aussagekraft | keine |
 
@@ -32,7 +32,7 @@ _Nur organische Treffer gehen in Rang und Wettbewerb ein. Der Wikipedia-Rückfal
 
 | Anbieter | Abrufe | Limit |
 |---|---|---|
-| wikipedia | 22 | 300 |
+| wikipedia | 23 | 300 |
 
 ## Eigene Sichtbarkeit
 
@@ -48,7 +48,6 @@ _Keine Treffer ausgewertet._
 |---|---|
 | franksfinanzcheck.de | Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://opnxng.com: keine Treffer / |
 | Gaskosten senken | Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://opnxng.com: keine Treffer / htt |
-| Urlaubskosten planen | Kein Anbieter lieferte Treffer für 'Urlaubskosten planen': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://opnxng.com: keine Treffer / |
 
 ## Einordnung
 

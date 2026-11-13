@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-13T15:22:27Z",
-  "modus": "kandidaten",
-  "commit": "c4bf63c5c7cb8a9044ab51c5d9807444c55fc468",
+  "generated_at": "2026-11-13T13:06:33Z",
+  "modus": "live",
+  "commit": "481b888e12fc80a8e2ba5db684013ddca4e3ce5b",
   "kapazitaet": {
     "stichtag": "2026-11-13",
     "basis": "2026-11-13",
@@ -98,25 +98,14 @@
         "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler"
       ],
       "anzahl": 2
-    },
-    {
-      "check": "T5-lesbarkeit",
-      "dimension": "technik",
-      "wirkung": "blockiert",
-      "entscheidung": "auto",
-      "quelle": "scripts/readability_check.py (via publish_gate.readability_failures)",
-      "artikel": [
-        "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar"
-      ],
-      "anzahl": 1
     }
   ],
   "befundlage": {
-    "offen": 150,
-    "seiten": 38,
+    "offen": 155,
+    "seiten": 39,
     "live_befunde": 94,
     "live_seiten": 24,
-    "ueberholt": 95,
+    "ueberholt": 96,
     "ohne_fassung": 15,
     "nicht_entscheidbar": 0,
     "aeltester_tage": 14,
@@ -323,7 +312,7 @@
       ]
     },
     "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
-      "sha256": "e2105edf555a9f1f14cbf7f63954b9df1a1551bb5888b025943a7f282e3667b2",
+      "sha256": "885d3ba3733109d0496d0f4610e7a0a786c511e310d2472bcbef11314ba3b686",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -524,7 +513,7 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "ea4c07b6ff241f21b932b0e9c99b7e75f4495d3967956bf5465b7fbc9d8d3277",
+      "sha256": "c4cbdb32291d79b98af139162d47b4a18fbd25c3405d104017fdd2de6762d613",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1129,7 +1118,7 @@
       "checks": []
     },
     "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
-      "sha256": "76d47bf8dd9d6cbf294f367b0b1cfac4ffb897fd13b1ec5c9607dda75f82258b",
+      "sha256": "b5aa8342e8a8e6fe57594a9dbaea52ba605d36942e065fad1034442f685aeacc",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1208,7 +1197,7 @@
       ]
     },
     "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
-      "sha256": "51b78fe59c59c08826168499a0aec8e88aeea280ebbe5f95d2add594e13145a4",
+      "sha256": "0bb339ebf97b5578eade49d589f61feb7483d6e647d21c3649b7876ebb350495",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1420,7 +1409,7 @@
       "checks": []
     },
     "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck": {
-      "sha256": "e656acb4651be290caa78176f667fccf82b7f8c0d6be763692c9ad70a22fee1b",
+      "sha256": "7fc685b7028540d26591b9eb6cdb5abcf6ef8e430368925b11ccf0021539942e",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1452,7 +1441,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-28",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1513,7 +1502,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-28",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1556,7 +1545,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-28",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1617,7 +1606,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-28",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1725,11 +1714,11 @@
       "checks": []
     },
     "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": {
-      "sha256": "008370ba7f9ba117d2a859e898e7f90551027c07e3ecbc24c26d22d3a28eaef6",
-      "urteil": "blockiert",
+      "sha256": "b027a36aece240020458c4d3f0b3faa2d8bb2861b77c92f0fe4a7723493bfe97",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "blockiert",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -1739,15 +1728,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-12",
-      "siegel_drift": "geändert – neu geprüft",
-      "checks": [
-        {
-          "check": "T5-lesbarkeit",
-          "dimension": "technik",
-          "wirkung": "blockiert",
-          "detail": "Flesch 59.6 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)"
-        }
-      ]
+      "siegel_drift": "unverändert",
+      "checks": []
     },
     "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem": {
       "sha256": "651b141c35a5aa9b6d5017f881915e0c86a8eb5ef3adce5e79594b03e0a2cf54",
@@ -1829,7 +1811,7 @@
       "checks": []
     },
     "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
-      "sha256": "5eaf1eb17551d79b6fa5f07bdf339e9b19d4fd18c6348981dfa58dfc4810a292",
+      "sha256": "05a0a30956760835994f59784acdcd8dcd7be7fe263f817cf6129726ce6a2712",
       "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1868,7 +1850,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-24",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "Q2-quellen-vorhanden",

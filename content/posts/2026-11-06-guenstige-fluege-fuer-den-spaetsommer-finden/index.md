@@ -21,6 +21,12 @@ cover:
   image: "images/covers/2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden.jpg"
   alt: "Günstige Flüge für den Spätsommer finden"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 54bfaff8e93f5560b86cf70bfdf3c350101edd40b2fe1a7e236ea4c5c71bdecb
+    geprueft_am: 2026-11-13
 faktencheck: 2026-11-07
 ---
 

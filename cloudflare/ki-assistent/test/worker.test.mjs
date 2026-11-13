@@ -12,6 +12,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
   corsHeaders, vorschauHost, erlaubteHerkunft, proxyBaseUrl, turnstilePruefen, handle, HINWEIS,
+  KI_KOPFZEILE, KI_KOPFZEILE_WERT,
 } from '../worker.js';
 
 const ENV = { ALLOWED_ORIGIN: 'https://franksfinanzcheck.de' };
@@ -206,4 +207,40 @@ test('M-04: erlaubteHerkunft ist exakt (kein Präfix/Suffix)', () => {
   assert.equal(erlaubteHerkunft('https://franksfinanzcheck.de', ENV), true);
   assert.equal(erlaubteHerkunft('https://franksfinanzcheck.de/', ENV), false);
   assert.equal(erlaubteHerkunft('http://franksfinanzcheck.de', ENV), false);
+});
+
+// ---------------------------------------------------------------------------
+// #1028 · Maschinenlesbare Offenlegung nach Art. 50 Abs. 1 KI-VO
+// ---------------------------------------------------------------------------
+// BEFUND 13.11.2026: Der Worker schickte den Hinweis nur im JSON-Körper mit
+// (`data.hinweis`), und der Client hat ihn nie gelesen. Wer die API direkt
+// aufruft oder nur die Kopfzeilen sieht (Proxy, Monitoring), erfuhr nichts.
+// Diese Tests halten beide Ebenen fest: Leitung UND Körper.
+test('#1028: jede Antwort trägt die KI-Offenlegung als Kopfzeile', async () => {
+  const n = netz();
+  const r = await handle(frage(GUT), BASIS_ENV, n.holen);
+  assert.equal(r.status, 200);
+  assert.equal(r.headers.get(KI_KOPFZEILE), KI_KOPFZEILE_WERT);
+  assert.match(r.headers.get(KI_KOPFZEILE), /ai-act=art-50-1/);
+});
+
+test('#1028: auch Fehlerantworten sagen, dass eine KI antwortet', async () => {
+  // Eine Offenlegung, die nur im Erfolgsfall mitkommt, ist keine: Genau im
+  // Fehlerfall (Rate-Limit, Turnstile, Provider-Ausfall) weiß der Aufrufer
+  // sonst nicht, womit er gesprochen hat.
+  // Headers-Objekt wie im echten Request – ein nacktes {} hat kein `.get`.
+  const r = await handle({ method: 'GET', headers: new Headers() }, BASIS_ENV, async () => {
+    throw new Error('darf nicht aufgerufen werden');
+  });
+  assert.equal(r.status, 405);
+  assert.equal(r.headers.get(KI_KOPFZEILE), KI_KOPFZEILE_WERT);
+});
+
+test('#1028: der Hinweis im Körper nennt KI und Beratungsgrenze', async () => {
+  const n = netz();
+  const r = await handle(frage(GUT), BASIS_ENV, n.holen);
+  const daten = await r.json();
+  assert.match(daten.hinweis, /KI/);
+  assert.match(daten.hinweis, /keine Anlage-/);
+  assert.equal(daten.ki, true, 'das Feld `ki` ist die maschinenlesbare Marke im Körper');
 });

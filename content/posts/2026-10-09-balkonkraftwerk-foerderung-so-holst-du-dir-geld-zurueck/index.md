@@ -24,9 +24,15 @@ redaktionelle_pruefung:
 
 inspiration: "Balkonkraftwerk-Förderung: Diese Zuschüsse gibt es noch"
 cover:
-  image: "images/covers/2026-10-06-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck.jpg"
+  image: "images/covers/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck.jpg"
   alt: "Balkonkraftwerk Förderung: So holst du dir Geld zurück"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 0c9befa31ad7a66f31b0abff639bb79e43ed18a47fbc1bd6c06aea1edac12f4f
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur – Solaranlagen und andere EE-Anlagen (Marktstammdatenregister, Steckersolargeräte)"
@@ -190,7 +196,7 @@ Das hängt von Standort, Verbrauch und Anschaffungspreis ab. Die Modellrechnung 
 
 Ob mehrere Anlagen gefördert werden, regelt jede Richtlinie selbst. Frag bei der Förderstelle nach, bevor du zwei Geräte bestellst.
 
-**Weiterlesen:** [Ratgeber Strom sparen](../../pillar/strom-sparen/) · [Fenster abdichten](../../posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/)
+**Weiterlesen:** [Ratgeber Strom sparen](../../pillar/strom-sparen/)
 **Lesetipp:** [Energiediebe stoppen: So findest du Stromfresser](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/)
 
 ---

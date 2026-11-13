@@ -25,6 +25,12 @@ cover:
   image: "images/covers/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss.jpg"
   alt: "Preiswert surfen: So findest du den optimalen DSL‑Anschluss"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 16e6706d22cc08972da01741816085074aa37b5daefbd85410a7a2cbab4b15e6
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur – Fachthemen Telekommunikation"

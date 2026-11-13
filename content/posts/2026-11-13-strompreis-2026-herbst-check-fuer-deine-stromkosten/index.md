@@ -21,9 +21,15 @@ redaktionelle_pruefung:
 
 inspiration: "Strompreis im Herbst 2026: Jetzt wechseln oder warten?"
 cover:
-  image: "images/covers/2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten.jpg"
+  image: "images/covers/2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten.jpg"
   alt: "Strompreis 2026: Herbst-Check für deine Stromkosten"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: db56633bc101286956a8f35cb57fa925f76b986ab45dcb18bfc9aee0ca01600f
+    geprueft_am: 2026-11-13
 faktencheck: 2026-11-09
 kurzantwort: "Die Bundesnetzagentur prognostiziert, dass der durchschnittliche Haushaltstrompreis 2026 um rund 5 % auf etwa 38 Cent pro Kilowattstunde steigt (). Ein leichter Anstieg ist also zu erwarten, was einen Tarifwechsel attraktiv macht, wenn dein aktueller Vertrag deutlich darüber liegt."
 faktenfrische_aliases:
@@ -311,3 +317,9 @@ Der Herbst 2026 kann kommen – du bist bestens vorbereitet.
 _Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information und stellt keine Anlage‑, Rechts‑ oder Steuerberatung dar. Prüfe Konditionen und Bedingungen immer beim jeweiligen Anbieter._
 
 ---
+
+👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
+
+*Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
+
+_Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information und stellt keine Anlage‑, Rechts‑ oder Steuerberatung dar. Prüfe Konditionen und Bedingungen immer beim jeweiligen Anbieter._

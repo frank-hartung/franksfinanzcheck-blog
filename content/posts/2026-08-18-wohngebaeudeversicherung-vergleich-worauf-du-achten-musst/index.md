@@ -13,6 +13,12 @@ cover:
   image: "images/covers/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst.jpg"
   alt: "Wohngebäudeversicherung Vergleich: Worauf du achten musst"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: b606810d3a07ca75b56ee7a5dc94d20255de97f1c004fd98cc182e1bcf99e058
+    geprueft_am: 2026-11-13
 kurzantwort: "Eine gute Wohngebäudeversicherung schützt nicht nur gegen Feuer, Leitungswasser, Sturm und Hagel. Wirklich wichtig sind im Vergleich vor allem Elementarschutz, grobe Fahrlässigkeit, eine saubere Neuwertregelung und passende Klauseln für Rohre, Nebengebäude oder Photovoltaik. Wer nur auf den Beitrag schaut, vergleicht zu kurz."
 social_posted: true
 keywords: ["Wohngebäudeversicherung Vergleich", "Gebäudeversicherung Elementarschutz", "Haus Versicherung Vergleich", "Wohngebäude Tarifcheck", "Grobe Fahrlässigkeit Gebäude", "Wohngebäudeversicherung"]

@@ -27,6 +27,12 @@ cover:
   image: "images/covers/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten.jpg"
   alt: "Energieausweis: Was er für deine Fixkosten bedeutet"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 88d77519f664fd37c2fff7382848416aa4d675c75d532d8129d472d90efb2203
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Referenzseite bundesnetzagentur.de"

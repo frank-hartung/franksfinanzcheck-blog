@@ -10,7 +10,7 @@ pillar: "internet-dsl"
 author: "Frank Hartung"
 keywords: ["Router Standort", "WLAN Empfang verbessern", "WLAN Tipps", "WLAN-Frust lösen", "WLAN-Frust", "WLAN Frust lösen", "DSL-Vergleich"]
 pin_title: "WLAN-Frust lösen: So findest du den besten Router Standort"
-pin_description: "*Werbung | WLAN-Empfang verbessern ohne Kosten: Optimiere deinen Router Standort mit einfachen Tipps für stabiles Internet in jedem Raum. Lies jetzt mehr. Mehr Spartipps auf FranksFinanzcheck! #router #standort #wlan"
+pin_description: "*Werbung | WLAN Empfang verbessern ohne Kosten: Optimiere deinen Router Standort mit einfachen Tipps für stabiles Internet in jedem Raum. Lies jetzt mehr. Mehr Spartipps auf FranksFinanzcheck! #router #standort #wlan"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -21,9 +21,15 @@ redaktionelle_pruefung:
 
 inspiration: "Router-Position optimieren: Mehr Empfang ohne neues Gerät"
 cover:
-  image: "images/covers/2026-11-09-wlan-frust-loesen-so-findest-du-den-besten-router-standort.jpg"
+  image: "images/covers/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort.jpg"
   alt: "WLAN-Frust lösen: So findest du den besten Router Standort"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 6d3be14777874562f43dbc3aa5ea5673cf88f714c8f9b3867038ae4291c60d94
+    geprueft_am: 2026-11-13
 faktencheck: 2026-11-09
 faktenfrische_aliases:
   - "2026-11-09-wlan-frust-loesen-so-findest-du-den-besten-router-standort"

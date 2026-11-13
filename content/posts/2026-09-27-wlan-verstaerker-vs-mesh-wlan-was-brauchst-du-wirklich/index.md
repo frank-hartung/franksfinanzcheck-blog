@@ -18,6 +18,12 @@ cover:
   image: "images/covers/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich.jpg"
   alt: "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 986b56a89c8167cd99640722e46a23eedf13cee7c0edccad95925b125e435b73
+    geprueft_am: 2026-11-13
 quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
@@ -194,7 +200,7 @@ Die Frage „WLAN‑Verstärker oder Mesh‑WLAN?“ beantwortet sich fast von s
 
 Bleibt der Grundsatz, der mir bei jeder Netzwerkfrage am meisten Geld gespart hat: **Miss zweimal, kauf einmal.**
 
-**Weiterlesen:** [Pillar Internet & DSL](../../pillar/internet-dsl/) · [WLAN verbessern in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) · [DNS‑Server wechseln für schnelleres Internet](../../posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/) · [Wie viel Streaming‑Bandbreite](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/)
+**Weiterlesen:** [Pillar Internet & DSL](../../pillar/internet-dsl/) · [WLAN verbessern in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) · [DNS‑Server wechseln für schnelleres Internet](../../posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/)
 
 ## Häufige Fragen
 

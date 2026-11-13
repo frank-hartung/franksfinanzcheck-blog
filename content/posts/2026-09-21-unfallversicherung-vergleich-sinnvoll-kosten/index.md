@@ -15,6 +15,12 @@ cover:
   image: "images/covers/2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten.jpg"
   alt: "Unfallversicherung Vergleich 2026: Sinn, Kosten und Leistungen im Überblick"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 75b193959123dd3eb7ff2b3de9681c4795d2bd56b8562941152f0484807c5c2d
+    geprueft_am: 2026-11-13
 pin_title: "Unfallversicherung 2026: Sinnvoll? Kosten & Leistungen im Check"
 pin_description: "*Werbung | Für wen sich eine private Unfallversicherung lohnt, was gute Tarife kosten und welche Punkte wie Progression, Gliedertaxe und Unfallrente wirklich zählen. Mehr Spartipps auf FranksFinanzcheck! #unfallversicherung #unfallversicherungkosten #gliedertaxe"
 quellen:

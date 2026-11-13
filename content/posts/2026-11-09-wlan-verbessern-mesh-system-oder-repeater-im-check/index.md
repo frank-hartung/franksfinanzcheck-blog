@@ -26,6 +26,12 @@ cover:
   image: "images/covers/2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check.jpg"
   alt: "WLAN verbessern: Mesh-System oder Repeater im Check?"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: bac0a840229aee8220cdb0c5b6eab2bcfed9f98244111462aa03d0303d2c095c
+    geprueft_am: 2026-11-13
 faktencheck: 2026-11-10
 ---
 

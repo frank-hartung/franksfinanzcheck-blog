@@ -1,7 +1,7 @@
 {
  "2026-08-10-dsl-wechselbonus-sichern": {
   "title": "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag",
-  "ts": "2026-10-14T15:12:21+00:00",
+  "ts": "2026-11-13T15:28:44+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -10,7 +10,7 @@
  },
  "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": {
   "title": "Sicher heizen: Was sie abdeckt und wie lange sie läuft",
-  "ts": "2026-10-19T13:11:39+00:00",
+  "ts": "2026-11-13T15:28:45+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -18,17 +18,17 @@
   }
  },
  "2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026": {
-  "design": {
-   "badge": "VERSICHERUNGEN",
-   "savings": "",
-   "v": 3
-  },
   "title": "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026",
-  "ts": "2026-08-25T16:23:26+00:00"
+  "ts": "2026-11-13T15:28:46+00:00",
+  "design": {
+   "v": 3,
+   "badge": "VERSICHERUNGEN",
+   "savings": ""
+  }
  },
  "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
   "title": "Preisgarantie Gas: So sicherst du günstige Tarife",
-  "ts": "2026-11-11T16:00:37+00:00",
+  "ts": "2026-11-13T15:28:47+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -37,7 +37,7 @@
  },
  "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden": {
   "title": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
-  "ts": "2026-10-14T15:12:30+00:00",
+  "ts": "2026-11-13T15:28:48+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -46,7 +46,7 @@
  },
  "2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel": {
   "title": "DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis",
-  "ts": "2026-10-19T00:12:53+00:00",
+  "ts": "2026-11-13T15:28:49+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -55,7 +55,7 @@
  },
  "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": {
   "title": "Sparen im Herbst: Spartipps für die goldene Jahreszeit",
-  "ts": "2026-10-14T15:12:33+00:00",
+  "ts": "2026-11-13T15:28:50+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -63,17 +63,17 @@
   }
  },
  "2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke": {
-  "design": {
-   "badge": "INTERNET & DSL",
-   "savings": "",
-   "v": 3
-  },
   "title": "WLAN verbessern: So bringst du stabilen Speed in jede Ecke",
-  "ts": "2026-08-31T16:50:48+00:00"
+  "ts": "2026-11-13T15:28:50+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
  },
  "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
   "title": "Kostenloses Girokonto: Ein Konto ohne Gebühren finden",
-  "ts": "2026-10-26T14:13:59+00:00",
+  "ts": "2026-11-13T15:28:52+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
@@ -81,17 +81,17 @@
   }
  },
  "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
-  "design": {
-   "badge": "VERSICHERUNGEN",
-   "savings": "",
-   "v": 3
-  },
   "title": "Privathaftpflicht: Warum so wichtig und was sie kostet",
-  "ts": "2026-08-26T13:47:41+00:00"
+  "ts": "2026-11-13T15:28:53+00:00",
+  "design": {
+   "v": 3,
+   "badge": "VERSICHERUNGEN",
+   "savings": ""
+  }
  },
  "2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst": {
   "title": "Wohngebäudeversicherung Vergleich: Worauf du achten musst",
-  "ts": "2026-10-14T15:12:39+00:00",
+  "ts": "2026-11-13T15:28:53+00:00",
   "design": {
    "v": 3,
    "badge": "VERSICHERUNGEN",
@@ -100,7 +100,7 @@
  },
  "2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet": {
   "title": "DSL-Vergleich: So findest du den günstigsten Internettarif",
-  "ts": "2026-10-14T15:12:42+00:00",
+  "ts": "2026-11-13T15:28:54+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -109,7 +109,7 @@
  },
  "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": {
   "title": "Energiediebe stoppen: So kannst du Stromfresser finden",
-  "ts": "2026-10-14T15:12:45+00:00",
+  "ts": "2026-11-13T15:28:55+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -118,7 +118,7 @@
  },
  "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause": {
   "title": "DSL-Tarif für dein Zuhause: Das passende Angebot finden",
-  "ts": "2026-10-14T13:46:34+00:00",
+  "ts": "2026-11-13T15:28:56+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -127,7 +127,7 @@
  },
  "2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier": {
   "title": "Haushaltsbuch führen: App, Excel oder Stift im Vergleich",
-  "ts": "2026-10-19T00:06:56+00:00",
+  "ts": "2026-11-13T15:28:57+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
@@ -136,7 +136,7 @@
  },
  "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": {
   "title": "Mietwagen ohne Kautionsfallen: So sparst du im Urlaub",
-  "ts": "2026-10-14T15:12:51+00:00",
+  "ts": "2026-11-13T15:28:57+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -145,7 +145,7 @@
  },
  "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
   "title": "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht",
-  "ts": "2026-10-14T15:12:54+00:00",
+  "ts": "2026-11-13T15:28:58+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -154,7 +154,7 @@
  },
  "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen": {
   "title": "Preisgarantie Gas: Was bei Preiserhöhung hilft",
-  "ts": "2026-10-26T14:13:50+00:00",
+  "ts": "2026-11-13T15:28:59+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -163,7 +163,7 @@
  },
  "2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet": {
   "title": "DNS-Server wechseln: Datenschutz, Filter und Einrichtung",
-  "ts": "2026-10-14T13:46:35+00:00",
+  "ts": "2026-11-13T15:29:00+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -171,35 +171,35 @@
   }
  },
  "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife": {
-  "design": {
-   "badge": "INTERNET & DSL",
-   "savings": "bis zu 360 € im Jahr sparen",
-   "v": 3
-  },
   "title": "Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 €",
-  "ts": "2026-08-26T00:41:04+00:00"
+  "ts": "2026-11-13T15:29:01+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": "bis zu 360 € im Jahr sparen"
+  }
  },
  "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen": {
-  "design": {
-   "badge": "VERSICHERUNGEN",
-   "savings": "",
-   "v": 3
-  },
   "title": "Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen",
-  "ts": "2026-08-26T00:39:25+00:00"
+  "ts": "2026-11-13T15:29:02+00:00",
+  "design": {
+   "v": 3,
+   "badge": "VERSICHERUNGEN",
+   "savings": ""
+  }
  },
  "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich": {
-  "design": {
-   "badge": "KONTO & FINANZEN",
-   "savings": "",
-   "v": 3
-  },
   "title": "Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich",
-  "ts": "2026-08-25T16:24:42+00:00"
+  "ts": "2026-11-13T15:29:02+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
+   "savings": ""
+  }
  },
  "2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen": {
   "title": "September-Roadtrip: Clevere Wege zum Mietwagen-Schnäppchen",
-  "ts": "2026-10-14T15:13:00+00:00",
+  "ts": "2026-11-13T15:29:06+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -208,7 +208,7 @@
  },
  "2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen": {
   "title": "Kreditkarte vergleichen: Kostenlos und sicher zahlen",
-  "ts": "2026-10-14T15:13:03+00:00",
+  "ts": "2026-11-13T15:29:07+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
@@ -217,7 +217,7 @@
  },
  "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": {
   "title": "DNS-Hack testen: Antwortzeit statt gefühltem Tempo",
-  "ts": "2026-10-14T13:46:36+00:00",
+  "ts": "2026-11-13T15:29:08+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -226,7 +226,7 @@
  },
  "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
   "title": "Finanzielle Freiheit erreichen: Denke dich reich – Geld",
-  "ts": "2026-10-21T13:40:35+00:00",
+  "ts": "2026-11-13T15:29:08+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -235,7 +235,7 @@
  },
  "2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum": {
   "title": "Frugalismus für Einsteiger: Mit kleinen Schritten sparen",
-  "ts": "2026-10-26T14:13:53+00:00",
+  "ts": "2026-11-13T15:29:10+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -244,7 +244,7 @@
  },
  "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler": {
   "title": "Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick",
-  "ts": "2026-10-19T00:09:35+00:00",
+  "ts": "2026-11-13T15:29:11+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -253,7 +253,7 @@
  },
  "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort": {
   "title": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
-  "ts": "2026-10-14T15:13:12+00:00",
+  "ts": "2026-11-13T15:29:11+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -262,7 +262,7 @@
  },
  "2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster": {
   "title": "Notgroschen: Die Wahrheit über das finanzielle Polster",
-  "ts": "2026-10-14T15:13:15+00:00",
+  "ts": "2026-11-13T15:29:12+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -271,7 +271,7 @@
  },
  "2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag": {
   "title": "5 einfache Frugalismus-Tricks für den Alltag: Geld sparen",
-  "ts": "2026-10-14T15:13:18+00:00",
+  "ts": "2026-11-13T15:29:13+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -280,7 +280,7 @@
  },
  "2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026": {
   "title": "50-30-20-Regel: Beherrsche dein Budget – Fixkosten senken",
-  "ts": "2026-10-14T15:13:21+00:00",
+  "ts": "2026-11-13T15:29:14+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -298,7 +298,7 @@
  },
  "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer": {
   "title": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
-  "ts": "2026-10-19T00:09:36+00:00",
+  "ts": "2026-11-13T15:29:15+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -307,7 +307,7 @@
  },
  "2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser": {
   "title": "Standby Kosten reduzieren: So entlarvst du Stromfresser",
-  "ts": "2026-10-14T15:13:26+00:00",
+  "ts": "2026-11-13T15:29:15+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -316,7 +316,7 @@
  },
  "2026-09-17-versicherung-update-was-sich-jetzt-fuer-dich-aendert": {
   "title": "Versicherungsbeiträge steigen: Sonderkündigung prüfen",
-  "ts": "2026-10-19T00:09:37+00:00",
+  "ts": "2026-11-13T15:29:16+00:00",
   "design": {
    "v": 3,
    "badge": "VERSICHERUNGEN",
@@ -325,7 +325,7 @@
  },
  "2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug": {
   "title": "Finanzieller Puffer: Der Rechenweg in fünf Minuten",
-  "ts": "2026-10-19T13:11:33+00:00",
+  "ts": "2026-11-13T15:29:17+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -334,7 +334,7 @@
  },
  "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": {
   "title": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
-  "ts": "2026-10-19T00:07:06+00:00",
+  "ts": "2026-11-13T15:29:18+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -343,7 +343,7 @@
  },
  "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro": {
   "title": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
-  "ts": "2026-10-19T00:07:07+00:00",
+  "ts": "2026-11-13T15:29:18+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -361,7 +361,7 @@
  },
  "2026-09-21-ratenkredit-vergleich-zinsen-kosten-fallen": {
   "title": "Ratenkredit Vergleich 2026: Zinsen, Kosten & Fallen",
-  "ts": "2026-10-14T15:13:35+00:00",
+  "ts": "2026-11-13T15:29:20+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
@@ -370,7 +370,7 @@
  },
  "2026-09-21-tierkrankenversicherung-hund-katze-kosten": {
   "title": "Tierkrankenversicherung für Hund & Katze: Kosten realistisch",
-  "ts": "2026-10-29T10:59:01+00:00",
+  "ts": "2026-11-13T15:29:20+00:00",
   "design": {
    "v": 3,
    "badge": "VERSICHERUNGEN",
@@ -379,7 +379,7 @@
  },
  "2026-09-21-unfallversicherung-vergleich-sinnvoll-kosten": {
   "title": "Unfallversicherung Vergleich 2026: Sinnvoll? Kosten",
-  "ts": "2026-10-14T15:13:41+00:00",
+  "ts": "2026-11-13T15:29:21+00:00",
   "design": {
    "v": 3,
    "badge": "VERSICHERUNGEN",
@@ -388,7 +388,7 @@
  },
  "2026-09-21-zahnzusatzversicherung-kosten-leistungen-vergleich": {
   "title": "Zahnzusatzversicherung 2026: Tarife & Erstattung",
-  "ts": "2026-10-14T15:13:44+00:00",
+  "ts": "2026-11-13T15:29:22+00:00",
   "design": {
    "v": 3,
    "badge": "VERSICHERUNGEN",
@@ -397,7 +397,7 @@
  },
  "2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag": {
   "title": "5 einfache Frugalismus-Tricks für den Alltag",
-  "ts": "2026-10-14T15:13:47+00:00",
+  "ts": "2026-11-13T15:29:23+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -406,7 +406,7 @@
  },
  "2026-09-24-internet-dsl-update-was-sich-jetzt-fuer-dich-aendert": {
   "title": "DSL-Tarif prüfen: Effektivpreis statt Lockpreis",
-  "ts": "2026-10-19T00:09:39+00:00",
+  "ts": "2026-11-13T15:29:24+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -433,7 +433,7 @@
  },
  "2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {
   "title": "DSL Hacks: Was brauchst du wirklich? – Schnelles Internet",
-  "ts": "2026-10-21T13:40:40+00:00",
+  "ts": "2026-11-13T15:29:25+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -442,7 +442,7 @@
  },
  "2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert": {
   "title": "Girocard, Debitkarte oder Maestro: Welche Karte passt?",
-  "ts": "2026-10-19T00:09:40+00:00",
+  "ts": "2026-11-13T15:29:27+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
@@ -451,7 +451,7 @@
  },
  "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": {
   "title": "Last Minute Urlaub: So findest du echte Reiseschnäppchen",
-  "ts": "2026-10-14T13:46:38+00:00",
+  "ts": "2026-11-13T15:29:29+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -459,13 +459,13 @@
   }
  },
  "2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
-  "design": {
-   "badge": "STROM & GAS SPAREN",
-   "savings": "",
-   "v": 3
-  },
   "title": "Gasabschlag berechnen: So planst du die Heizsaison richtig",
-  "ts": "2026-10-02T20:11:39+00:00"
+  "ts": "2026-11-13T15:29:29+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
  },
  "2026-10-02-notgroschen-aufbauen-dein-finanzielles-sicherheitsnetz": {
   "design": {
@@ -478,7 +478,7 @@
  },
  "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {
   "title": "Preiswert surfen: DSL, Kabel oder Glasfaser im Vergleich",
-  "ts": "2026-10-19T00:09:42+00:00",
+  "ts": "2026-11-13T15:29:30+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -513,17 +513,17 @@
   "ts": "2026-10-02T20:11:41+00:00"
  },
  "2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage": {
-  "design": {
-   "badge": "GELD SPAREN & FRUGALISMUS",
-   "savings": "",
-   "v": 3
-  },
   "title": "Weihnachten Budget planen: Ohne Schulden durch die Feiertage",
-  "ts": "2026-10-02T20:11:43+00:00"
+  "ts": "2026-11-13T15:29:31+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
  },
  "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest": {
   "title": "Büroausstattung steuerlich clever absetzen: So geht's",
-  "ts": "2026-10-14T15:14:01+00:00",
+  "ts": "2026-11-13T15:29:32+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -532,7 +532,7 @@
  },
  "2026-10-05-die-50-30-20-regel-einfach-erklaert": {
   "title": "Die 50-30-20-Regel einfach erklärt",
-  "ts": "2026-10-14T15:14:04+00:00",
+  "ts": "2026-11-13T15:29:33+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -604,7 +604,7 @@
  },
  "2026-10-06-markt-update-was-sich-jetzt-fuer-dich-aendert": {
   "title": "Google-Regeln für Ratgeber: Erfahrung und Quellen",
-  "ts": "2026-10-19T00:09:43+00:00",
+  "ts": "2026-11-13T15:29:34+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -613,7 +613,7 @@
  },
  "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": {
   "title": "7 Gewohnheiten für finanzielle Freiheit: Welche Routinen",
-  "ts": "2026-10-19T13:11:45+00:00",
+  "ts": "2026-11-13T15:29:35+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -631,7 +631,7 @@
  },
  "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
   "title": "Campingurlaub planen: Budget für Platz und Fahrt",
-  "ts": "2026-10-26T14:13:56+00:00",
+  "ts": "2026-11-13T15:29:36+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -649,7 +649,7 @@
  },
  "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
   "title": "Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel rechnet",
-  "ts": "2026-10-19T00:07:16+00:00",
+  "ts": "2026-11-13T15:29:37+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -685,7 +685,7 @@
  },
  "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": {
   "title": "Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer",
-  "ts": "2026-10-12T23:03:33+00:00",
+  "ts": "2026-11-13T15:29:37+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -721,7 +721,7 @@
  },
  "2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich": {
   "title": "Notgroschen aufbauen: Wie viel reicht wirklich?",
-  "ts": "2026-10-14T15:14:27+00:00",
+  "ts": "2026-11-13T15:29:38+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -739,7 +739,7 @@
  },
  "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": {
   "title": "Urlaub sparen: Budget, Buchung und Kosten im Blick",
-  "ts": "2026-10-14T15:14:30+00:00",
+  "ts": "2026-11-13T15:29:39+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -766,7 +766,7 @@
  },
  "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": {
   "title": "Smart Home: So prüfst du echte Stromersparnis – Smarte",
-  "ts": "2026-10-21T13:40:44+00:00",
+  "ts": "2026-11-13T15:29:40+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -855,17 +855,17 @@
   "ts": "2026-10-08T00:13:08+00:00"
  },
  "brand-franksfinanzcheck": {
-  "design": {
-   "badge": "FRUGALISMUS · TARIFE · VERSICHERUNGEN",
-   "savings": "",
-   "v": 3
-  },
   "title": "FranksFinanzcheck – Geld sparen leicht gemacht",
-  "ts": "2026-09-28T23:14:54+00:00"
+  "ts": "2026-11-13T15:30:21+00:00",
+  "design": {
+   "v": 3,
+   "badge": "FRUGALISMUS · TARIFE · VERSICHERUNGEN",
+   "savings": ""
+  }
  },
  "pillar-frugalismus": {
   "title": "Haushaltsbudget & Frugalismus: Ratgeber für Notgroschen",
-  "ts": "2026-10-14T15:15:14+00:00",
+  "ts": "2026-11-13T15:30:22+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -874,7 +874,7 @@
  },
  "pillar-internet-dsl": {
   "title": "Internet, DSL & Mobilfunk: Ratgeber für schnelles Netz",
-  "ts": "2026-10-14T15:15:17+00:00",
+  "ts": "2026-11-13T15:30:23+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -883,7 +883,7 @@
  },
  "pillar-konto-karten": {
   "title": "Konto & Karten: Ratgeber für gebührenfreie Finanzen",
-  "ts": "2026-10-14T15:15:20+00:00",
+  "ts": "2026-11-13T15:30:23+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
@@ -891,17 +891,17 @@
   }
  },
  "pillar-mietwagen": {
-  "design": {
-   "badge": "GÜNSTIG REISEN",
-   "savings": "",
-   "v": 3
-  },
   "title": "Mietwagen & Reisen: Der große Ratgeber zum Geld sparen",
-  "ts": "2026-09-11T22:56:52+00:00"
+  "ts": "2026-11-13T15:30:24+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
  },
  "pillar-strom-sparen": {
   "title": "Strom & Gas sparen: Ratgeber für niedrige Energiekosten",
-  "ts": "2026-10-14T15:15:23+00:00",
+  "ts": "2026-11-13T15:30:25+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -909,17 +909,17 @@
   }
  },
  "pillar-versicherungen": {
-  "design": {
-   "badge": "VERSICHERUNGEN",
-   "savings": "",
-   "v": 3
-  },
   "title": "Versicherungen: Der große Ratgeber für den richtigen Schutz",
-  "ts": "2026-09-11T22:56:58+00:00"
+  "ts": "2026-11-13T15:30:26+00:00",
+  "design": {
+   "v": 3,
+   "badge": "VERSICHERUNGEN",
+   "savings": ""
+  }
  },
  "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck": {
   "title": "Balkonkraftwerk Förderung: So holst du dir Geld zurück",
-  "ts": "2026-10-14T15:14:42+00:00",
+  "ts": "2026-11-13T15:29:42+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -946,7 +946,7 @@
  },
  "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": {
   "title": "Energiekosten senken: Smarte Helfer für den Haushalt",
-  "ts": "2026-10-14T15:14:45+00:00",
+  "ts": "2026-11-13T15:29:43+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -982,7 +982,7 @@
  },
  "2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle": {
   "title": "VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?",
-  "ts": "2026-10-14T15:14:48+00:00",
+  "ts": "2026-11-13T15:29:44+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -1000,7 +1000,7 @@
  },
  "2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert": {
   "title": "Energiepreise 2026: Strom- und Gasvertrag prüfen",
-  "ts": "2026-10-19T00:09:46+00:00",
+  "ts": "2026-11-13T15:29:41+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1009,7 +1009,7 @@
  },
  "2026-10-09-7-gewohnheiten-fuer-finanzielle-freiheit": {
   "title": "7 Gewohnheiten für finanzielle Freiheit",
-  "ts": "2026-10-14T15:14:39+00:00",
+  "ts": "2026-11-13T15:29:41+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -1072,7 +1072,7 @@
  },
  "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt": {
   "title": "Dein Weg zu geringeren Monatskosten: Schritt für Schritt",
-  "ts": "2026-10-14T15:14:51+00:00",
+  "ts": "2026-11-13T15:29:44+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -1081,7 +1081,7 @@
  },
  "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten": {
   "title": "Energieausweis: Was er für deine Fixkosten bedeutet",
-  "ts": "2026-10-14T15:14:54+00:00",
+  "ts": "2026-11-13T15:29:45+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1090,7 +1090,7 @@
  },
  "2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle": {
   "title": "Haushaltskosten reduzieren: So gewinnst du die Kontrolle",
-  "ts": "2026-10-14T15:14:57+00:00",
+  "ts": "2026-11-13T15:29:46+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -1099,7 +1099,7 @@
  },
  "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
   "title": "Kleine Energiespar‑Tricks: Deine Kosten sofort senken",
-  "ts": "2026-10-14T15:15:00+00:00",
+  "ts": "2026-11-13T15:29:47+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1117,7 +1117,7 @@
  },
  "2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig": {
   "title": "Wärmepumpe vs. Gasheizung 2026: So entscheidest du richtig",
-  "ts": "2026-10-14T15:15:05+00:00",
+  "ts": "2026-11-13T15:29:48+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1126,7 +1126,7 @@
  },
  "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden": {
   "title": "Geld abheben im Ausland: Wo die Gebühren wirklich entstehen",
-  "ts": "2026-10-13T09:21:15+00:00",
+  "ts": "2026-11-13T15:28:46+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
@@ -1135,7 +1135,7 @@
  },
  "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan": {
   "title": "Abos und Verträge: Der stille Posten im Haushaltsplan",
-  "ts": "2026-10-13T09:21:17+00:00",
+  "ts": "2026-11-13T15:28:51+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -1144,7 +1144,7 @@
  },
  "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn": {
   "title": "Warmwasser sparen: Die Rechnung hinter – Warmwasserkosten",
-  "ts": "2026-10-21T13:40:31+00:00",
+  "ts": "2026-11-13T15:29:03+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1153,7 +1153,7 @@
  },
  "2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen": {
   "title": "Lastschrift und Dauerauftrag: Was du prüfen solltest",
-  "ts": "2026-10-13T09:21:20+00:00",
+  "ts": "2026-11-13T15:29:04+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
@@ -1162,7 +1162,7 @@
  },
  "2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen": {
   "title": "Umzug mit Internet: Anschluss und Rufnummer mitnehmen",
-  "ts": "2026-10-13T09:21:22+00:00",
+  "ts": "2026-11-13T15:29:09+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -1171,7 +1171,7 @@
  },
  "2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet": {
   "title": "Grundversorgung Strom und Gas: Was sie leistet und kostet",
-  "ts": "2026-11-11T12:59:02+00:00",
+  "ts": "2026-11-13T15:29:19+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1180,7 +1180,7 @@
  },
  "2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist": {
   "title": "Einlagensicherung: Wie viel Guthaben geschützt ist",
-  "ts": "2026-10-13T09:21:25+00:00",
+  "ts": "2026-11-13T15:29:24+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
@@ -1189,7 +1189,7 @@
  },
  "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
   "title": "Zählerstand ablesen und melden: Schätzwerte vermeiden",
-  "ts": "2026-10-13T09:21:27+00:00",
+  "ts": "2026-11-13T15:29:26+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1198,7 +1198,7 @@
  },
  "2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet": {
   "title": "Großeinkauf und Vorrat: Wann Bevorraten sich rechnet",
-  "ts": "2026-10-13T09:21:28+00:00",
+  "ts": "2026-11-13T15:29:28+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -1207,7 +1207,7 @@
  },
  "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen": {
   "title": "Der erste eigene Haushalt: Fixkosten von Anfang an ordnen",
-  "ts": "2026-10-13T09:21:30+00:00",
+  "ts": "2026-11-13T15:29:34+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -1216,7 +1216,7 @@
  },
  "2026-10-12-stromfresser-im-haushalt-entlarven": {
   "title": "Stromfresser im Haushalt entlarven",
-  "ts": "2026-10-13T09:21:32+00:00",
+  "ts": "2026-11-13T15:29:48+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1225,7 +1225,7 @@
  },
  "2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt": {
   "title": "Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt",
-  "ts": "2026-10-14T13:46:36+00:00",
+  "ts": "2026-11-13T15:29:04+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1234,7 +1234,7 @@
  },
  "2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte": {
   "title": "Störung beim Internetanbieter: So sicherst du deine Rechte",
-  "ts": "2026-10-13T09:30:49+00:00",
+  "ts": "2026-11-13T15:29:05+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -1243,7 +1243,7 @@
  },
  "2026-10-14-heizperiode-vorbereiten-im-spaetsommer": {
   "title": "Heizperiode vorbereiten im Spätsommer",
-  "ts": "2026-11-13T12:25:00+00:00",
+  "ts": "2026-11-13T15:29:49+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1261,7 +1261,7 @@
  },
  "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert": {
   "title": "Herbst-Check: Strom, Versicherung, Konto und Internet",
-  "ts": "2026-10-24T13:39:28+00:00",
+  "ts": "2026-11-13T15:29:50+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -1270,7 +1270,7 @@
  },
  "2026-10-16-dns-server-aendern-fuer-schnelleres-internet": {
   "title": "DNS-Server ändern für schnelleres Internet",
-  "ts": "2026-10-19T00:07:20+00:00",
+  "ts": "2026-11-13T15:29:51+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -1279,7 +1279,7 @@
  },
  "2026-10-19-urlaubskasse-clever-aufbessern": {
   "title": "Urlaubskasse clever aufbessern",
-  "ts": "2026-10-19T11:08:57+00:00",
+  "ts": "2026-11-13T15:29:52+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -1288,7 +1288,7 @@
  },
  "2026-10-21-mietwagen-fallen-im-urlaub-vermeiden": {
   "title": "Mietwagen-Fallen im Urlaub vermeiden",
-  "ts": "2026-10-21T13:40:49+00:00",
+  "ts": "2026-11-13T15:29:52+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -1297,7 +1297,7 @@
  },
  "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick": {
   "title": "Stromkosten senken: Clevere Haushaltsgeräte im Überblick",
-  "ts": "2026-10-23T08:53:54+00:00",
+  "ts": "2026-11-13T15:29:54+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1324,7 +1324,7 @@
  },
  "2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen": {
   "title": "Stromanbieter wechseln: Tarife prüfen und Kosten senken",
-  "ts": "2026-10-29T09:50:52+00:00",
+  "ts": "2026-11-13T15:29:53+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1333,7 +1333,7 @@
  },
  "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
   "title": "Strategisch sparen: So kannst du deine Reisekasse füllen",
-  "ts": "2026-10-25T13:37:09+00:00",
+  "ts": "2026-11-13T15:29:57+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -1342,7 +1342,7 @@
  },
  "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto": {
   "title": "Bankgebühren senken: 7 Schritte zum günstigeren Konto",
-  "ts": "2026-10-24T17:43:14+00:00",
+  "ts": "2026-11-13T15:29:55+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
@@ -1351,7 +1351,7 @@
  },
  "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks": {
   "title": "Energieeffizienz im Haushalt: 5 schnelle Spartricks",
-  "ts": "2026-10-24T17:43:18+00:00",
+  "ts": "2026-11-13T15:29:55+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1360,7 +1360,7 @@
  },
  "2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen": {
   "title": "ETF-Sparplan starten: Deine Schritt-für-Schritt-Anleitung",
-  "ts": "2026-10-31T09:33:17+00:00",
+  "ts": "2026-11-13T15:29:56+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -1396,7 +1396,7 @@
  },
  "2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht": {
   "title": "Frugalismus Familie: Clever sparen ohne Verzicht",
-  "ts": "2026-10-27T09:23:01+00:00",
+  "ts": "2026-11-13T15:29:58+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -1405,7 +1405,7 @@
  },
  "2026-10-26-gastarife-vergleichen-vor-dem-herbst": {
   "title": "Gastarife vergleichen: Kosten, Fristen und Verbrauch prüfen",
-  "ts": "2026-11-13T12:25:03+00:00",
+  "ts": "2026-11-13T15:29:57+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1414,7 +1414,7 @@
  },
  "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege": {
   "title": "Flugvergleich im Winter: So findest du echte Billigflüge",
-  "ts": "2026-10-28T10:19:33+00:00",
+  "ts": "2026-11-13T15:30:00+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -1423,7 +1423,7 @@
  },
  "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": {
   "title": "Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar",
-  "ts": "2026-10-28T10:05:54+00:00",
+  "ts": "2026-11-13T15:30:01+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1432,7 +1432,7 @@
  },
  "2026-10-28-dsl-und-internet-flat-guenstig-sichern": {
   "title": "DSL- und Internet-Flat günstig sichern",
-  "ts": "2026-10-28T14:59:34+00:00",
+  "ts": "2026-11-13T15:29:59+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -1459,7 +1459,7 @@
  },
  "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem": {
   "title": "Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas",
-  "ts": "2026-11-11T16:00:52+00:00",
+  "ts": "2026-11-13T15:30:01+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1468,7 +1468,7 @@
  },
  "2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden": {
   "title": "Kostenloses Girokonto ohne Gebühren finden",
-  "ts": "2026-10-31T10:29:10+00:00",
+  "ts": "2026-11-13T15:30:02+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
@@ -1486,7 +1486,7 @@
  },
  "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten": {
   "title": "Energieeffiziente Geräte: So sinken deine Fixkosten",
-  "ts": "2026-11-01T15:34:15+00:00",
+  "ts": "2026-11-13T15:30:03+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1504,7 +1504,7 @@
  },
  "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck": {
   "title": "Flugverspätung Entschädigung: So holst du dein Geld zurück",
-  "ts": "2026-11-01T15:34:22+00:00",
+  "ts": "2026-11-13T15:30:04+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -1513,7 +1513,7 @@
  },
  "2026-11-02-last-minute-urlaubsangebote-sichern": {
   "title": "Last-Minute Urlaubsangebote sichern",
-  "ts": "2026-11-03T12:07:48+00:00",
+  "ts": "2026-11-13T15:30:04+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -1522,7 +1522,7 @@
  },
  "2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen": {
   "title": "Günstigen Mietwagen für den Urlaub buchen",
-  "ts": "2026-11-04T16:06:52+00:00",
+  "ts": "2026-11-13T15:30:05+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -1549,7 +1549,7 @@
  },
  "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang": {
   "title": "Waschmaschine beladen: Weniger Kosten bei jedem Waschgang",
-  "ts": "2026-11-05T11:25:17+00:00",
+  "ts": "2026-11-13T15:30:06+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1558,7 +1558,7 @@
  },
  "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden": {
   "title": "Günstige Flüge für den Spätsommer finden",
-  "ts": "2026-11-13T12:25:06+00:00",
+  "ts": "2026-11-13T15:30:07+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -1576,7 +1576,7 @@
  },
  "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub": {
   "title": "Reisekasse füllen: 7 Wege zu mehr Budget für den Urlaub",
-  "ts": "2026-11-09T07:29:13+00:00",
+  "ts": "2026-11-13T15:30:08+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -1585,7 +1585,7 @@
  },
  "2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check": {
   "title": "WLAN verbessern: Mesh-System oder Repeater im Check?",
-  "ts": "2026-11-09T07:29:15+00:00",
+  "ts": "2026-11-13T15:30:09+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -1675,7 +1675,7 @@
  },
  "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen": {
   "title": "Fenster abdichten: So stoppst du Zugluft an alten Rahmen",
-  "ts": "2026-11-10T12:26:24+00:00",
+  "ts": "2026-11-13T15:30:09+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1711,7 +1711,7 @@
  },
  "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee": {
   "title": "Kaffeemaschine Stromverbrauch: Was kostet die Tasse Kaffee?",
-  "ts": "2026-11-10T12:02:31+00:00",
+  "ts": "2026-11-13T15:30:10+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1747,7 +1747,7 @@
  },
  "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
   "title": "WLAN-Frust lösen: So findest du den besten Router Standort",
-  "ts": "2026-11-10T12:02:48+00:00",
+  "ts": "2026-11-13T15:30:11+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -1756,7 +1756,7 @@
  },
  "2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif": {
   "title": "Handytarife vergleichen: So findest du den günstigsten Tarif",
-  "ts": "2026-11-10T12:49:20+00:00",
+  "ts": "2026-11-13T15:30:07+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -1765,7 +1765,7 @@
  },
  "2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten": {
   "title": "Kreditkarte ohne Jahresgebühr: Die besten kostenlosen Karten",
-  "ts": "2026-11-11T16:00:56+00:00",
+  "ts": "2026-11-13T15:30:12+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
@@ -1828,7 +1828,7 @@
  },
  "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
   "title": "Wie viel Streaming‑Bandbreite: Du wirklich brauchst",
-  "ts": "2026-11-12T17:16:20+00:00",
+  "ts": "2026-11-13T15:30:12+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -1846,7 +1846,7 @@
  },
  "2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
   "title": "Deine nächtliche Grundlast Strom: Stromverbrauch nachts",
-  "ts": "2026-11-13T12:17:33+00:00",
+  "ts": "2026-11-13T15:30:13+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1855,7 +1855,7 @@
  },
  "2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten": {
   "title": "Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten",
-  "ts": "2026-11-13T12:17:36+00:00",
+  "ts": "2026-11-13T15:30:14+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1864,7 +1864,7 @@
  },
  "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom": {
   "title": "Spülmaschine beladen: So sparst du Wasser und Strom",
-  "ts": "2026-11-13T12:17:43+00:00",
+  "ts": "2026-11-13T15:30:15+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1872,8 +1872,8 @@
   }
  },
  "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": {
-  "title": "Heizölpreise vergleichen: So planst du deine Bestellung",
-  "ts": "2026-11-13T15:17:47+00:00",
+  "title": "Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden",
+  "ts": "2026-11-13T15:30:16+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1882,7 +1882,7 @@
  },
  "2026-11-13-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten": {
   "title": "Mehrwegflaschen Pfand: So optimierst du deine Fixkosten",
-  "ts": "2026-11-13T12:17:50+00:00",
+  "ts": "2026-11-13T15:30:17+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1891,7 +1891,7 @@
  },
  "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung": {
   "title": "Mesh WLAN nachrüsten: Schluss mit Funklöchern in der Wohnung",
-  "ts": "2026-11-13T12:17:53+00:00",
+  "ts": "2026-11-13T15:30:18+00:00",
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
@@ -1900,7 +1900,7 @@
  },
  "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten": {
   "title": "Strompreis 2026: Herbst-Check für deine Stromkosten",
-  "ts": "2026-11-13T12:17:59+00:00",
+  "ts": "2026-11-13T15:30:19+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1909,7 +1909,7 @@
  },
  "2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst": {
   "title": "Geschenkkarte: Was du beim Kauf und Aufladen wissen musst",
-  "ts": "2026-11-13T12:17:40+00:00",
+  "ts": "2026-11-13T15:30:15+00:00",
   "design": {
    "v": 3,
    "badge": "KONTO & FINANZEN",
@@ -1918,7 +1918,7 @@
  },
  "2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst": {
   "title": "Secondhand Kleidung: So erkennst du Qualität & sparst",
-  "ts": "2026-11-13T12:17:56+00:00",
+  "ts": "2026-11-13T15:30:19+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
@@ -1927,10 +1927,19 @@
  },
  "2026-11-13-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste": {
   "title": "Weniger Spontankäufe: Dein Essensplan Woche ohne Reste",
-  "ts": "2026-11-13T12:18:03+00:00",
+  "ts": "2026-11-13T15:30:21+00:00",
   "design": {
    "v": 3,
    "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-11-13-tagesgeld-und-zinsen-so-parkst-du-dein-geld-sicher": {
+  "title": "Tagesgeld und Zinsen: So parkst du dein Geld sicher",
+  "ts": "2026-11-13T15:30:20+00:00",
+  "design": {
+   "v": 3,
+   "badge": "KONTO & FINANZEN",
    "savings": ""
   }
  }

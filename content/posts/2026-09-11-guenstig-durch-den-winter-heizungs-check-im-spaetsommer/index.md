@@ -13,6 +13,12 @@ cover:
   image: "images/covers/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer.jpg"
   alt: "Günstig durch den Winter: Heizungs-Check im Spätsommer"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 5c9c6d153a8bb8aa2c98d6ccedabb4e8c4087eb9772277757b950613f78d6ea1
+    geprueft_am: 2026-11-13
 kurzantwort: "Ein guter Heizungs-Check beginnt vor dem ersten Dauerbetrieb: Probelauf starten, Heizkörper und Thermostate prüfen, sichtbare Lecks ausschließen und den Anlagendruck mit dem Sollwert der Anlage vergleichen. Entlüften kannst du nach Anleitung oft selbst. Wiederkehrender Druckverlust, Störungen, Gas- oder Abgasgeruch und Arbeiten am Wärmeerzeuger gehören zum Fachbetrieb."
 social_posted: true
 keywords: ["Heizungs-Check", "Heizkosten senken", "Heizung vorbereiten", "Energie sparen Winter", "Thermostat prüfen", "Günstig durch den Winter", "Gaspreisgarantie", "Heizungs-Check vor dem Frost"]

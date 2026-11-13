@@ -15,11 +15,20 @@ redaktionelle_pruefung:
   risikoklasse: "erhoeht"
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
+cover:
+  image: "images/covers/2026-11-13-tagesgeld-und-zinsen-so-parkst-du-dein-geld-sicher.jpg"
+  alt: "Tagesgeld und Zinsen: So parkst du dein Geld sicher"
+  caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: be67b24b71d8bdb7fb21474a2f7d8306f5021da153031094bc20e4f5b2cb0d36
+    geprueft_am: 2026-11-13
+
 ---
 
 Du hast ein paar Euro übrig, willst sie sicher parken und dabei Zinsen kassieren – doch die Angebote schwanken und die Bedingungen verstecken sich oft im Kleingedruckten. In diesem Ratgeber zeige ich dir, wie du das passende Tagesgeldkonto findest, versteckte Kosten erkennst und deine Rendite realistisch einschätzt.  
-
-**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 ## Was ist Tagesgeld und warum gilt es als sicher  
 

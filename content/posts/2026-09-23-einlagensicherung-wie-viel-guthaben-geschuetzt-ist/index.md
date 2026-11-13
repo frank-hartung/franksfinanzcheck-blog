@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist.jpg"
   alt: "Einlagensicherung: Wie viel Guthaben geschützt ist"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 23d2343d8e345d8afef69d8e59d1cffe15e0767361924374b5735666e15d5706
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "BaFin – Einlagensicherung: Schutz von Bankguthaben"

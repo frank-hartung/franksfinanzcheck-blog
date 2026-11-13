@@ -23,9 +23,15 @@ redaktionelle_pruefung:
 
 inspiration: "Mehr Geld für den Urlaub: So polsterst du deine Reisekasse auf"
 cover:
-  image: "images/covers/2026-10-14-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.jpg"
+  image: "images/covers/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen.jpg"
   alt: "Strategisch sparen: So kannst du deine Reisekasse füllen"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 3235c18f03cb362199ce9d77d9d6a727ffbdb74206b93e023168cb3fa59b50f4
+    geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
     titel: "Reise & Mobilität"

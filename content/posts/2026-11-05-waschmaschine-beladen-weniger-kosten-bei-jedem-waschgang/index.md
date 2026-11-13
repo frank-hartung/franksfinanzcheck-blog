@@ -24,6 +24,12 @@ cover:
   image: "images/covers/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang.jpg"
   alt: "Waschmaschine beladen: Weniger Kosten bei jedem Waschgang"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: a9fecbf1169bba4e296664ed28786f4cfb266e88fda4dc2ddfa18303032272bb
+    geprueft_am: 2026-11-13
 kurzantwort: "Eine volle Trommel bei normaler Koch- und Buntwäsche spart Energie, Wasser und Geld. Das Umweltbundesamt empfiehlt sie ausdrücklich, mit einer Handbreit Luft über der Wäsche. In der Modellrechnung dieses Artikels (Annahmen im Abschnitt Modellrechnung, Strompreis laut BDEW Oktober 2026) kosten 100 volle Ladungen im Jahr rund 57 Euro und 200 halbe Ladungen bei gleicher Wäschemenge rund 85 bis 99 Euro. Der Unterschied liegt in diesem Modell bei rund 28 bis 42 Euro pro Jahr. Das ist eine Rechnung mit Quellenwerten, keine Messung in deinem Haushalt."
 quellen:
   - id: "Q1"
