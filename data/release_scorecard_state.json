@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-13T13:32:45Z",
+  "generated_at": "2026-11-13T14:47:49Z",
   "modus": "kandidaten",
-  "commit": "0df785f25d0d68b364968394eafed173d433a112",
+  "commit": "01542e636a4a5b59f0078f6d108dc0db0e70a405",
   "kapazitaet": {
     "stichtag": "2026-11-13",
     "basis": "2026-11-13",
@@ -101,11 +101,11 @@
     }
   ],
   "befundlage": {
-    "offen": 155,
-    "seiten": 39,
+    "offen": 150,
+    "seiten": 38,
     "live_befunde": 94,
     "live_seiten": 24,
-    "ueberholt": 100,
+    "ueberholt": 95,
     "ohne_fassung": 15,
     "nicht_entscheidbar": 0,
     "aeltester_tage": 14,
@@ -326,7 +326,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-27",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan": {
@@ -513,7 +513,7 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "c4cbdb32291d79b98af139162d47b4a18fbd25c3405d104017fdd2de6762d613",
+      "sha256": "ea4c07b6ff241f21b932b0e9c99b7e75f4495d3967956bf5465b7fbc9d8d3277",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -527,7 +527,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1132,7 +1132,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-11",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden": {
@@ -1211,7 +1211,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-03",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {
@@ -1423,7 +1423,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-11-23",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": {
@@ -1811,7 +1811,7 @@
       "checks": []
     },
     "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
-      "sha256": "05a0a30956760835994f59784acdcd8dcd7be7fe263f817cf6129726ce6a2712",
+      "sha256": "5eaf1eb17551d79b6fa5f07bdf339e9b19d4fd18c6348981dfa58dfc4810a292",
       "urteil": "warnung",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1825,7 +1825,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-02-07",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "Q2-quellen-vorhanden",
