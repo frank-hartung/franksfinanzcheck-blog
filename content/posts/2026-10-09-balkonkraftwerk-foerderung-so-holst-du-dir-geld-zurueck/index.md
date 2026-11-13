@@ -190,7 +190,7 @@ Das hängt von Standort, Verbrauch und Anschaffungspreis ab. Die Modellrechnung 
 
 Ob mehrere Anlagen gefördert werden, regelt jede Richtlinie selbst. Frag bei der Förderstelle nach, bevor du zwei Geräte bestellst.
 
-**Weiterlesen:** [Ratgeber Strom sparen](../../pillar/strom-sparen/)
+**Weiterlesen:** [Ratgeber Strom sparen](../../pillar/strom-sparen/) · [Fenster abdichten](../../posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/)
 **Lesetipp:** [Energiediebe stoppen: So findest du Stromfresser](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/)
 
 ---

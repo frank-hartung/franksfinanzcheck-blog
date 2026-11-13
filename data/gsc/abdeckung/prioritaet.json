@@ -4,13 +4,23 @@
  "seiten": [
   {
    "grund": "verlinkt",
-   "impressionen": 179,
+   "impressionen": 191,
    "inlinks": 18,
    "lastmod_tage": null,
    "outlinks": 2,
-   "position": 40.94,
+   "position": 41.64,
    "score": 11.0,
    "url": "/pillar/internet-dsl/"
+  },
+  {
+   "grund": "verlinkt",
+   "impressionen": 38,
+   "inlinks": 16,
+   "lastmod_tage": null,
+   "outlinks": 5,
+   "position": 36.34,
+   "score": 11.0,
+   "url": "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/"
   },
   {
    "grund": "verlinkt",
@@ -24,22 +34,12 @@
   },
   {
    "grund": "verlinkt",
-   "impressionen": 29,
-   "inlinks": 16,
-   "lastmod_tage": null,
-   "outlinks": 5,
-   "position": 36.55,
-   "score": 10.67,
-   "url": "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/"
-  },
-  {
-   "grund": "verlinkt",
-   "impressionen": 27,
+   "impressionen": 28,
    "inlinks": 11,
    "lastmod_tage": null,
    "outlinks": 3,
-   "position": 56.52,
-   "score": 10.0,
+   "position": 57.14,
+   "score": 10.33,
    "url": "/pillar/konto-karten/"
   },
   {
@@ -64,6 +64,16 @@
   },
   {
    "grund": "verlinkt",
+   "impressionen": 17,
+   "inlinks": 9,
+   "lastmod_tage": null,
+   "outlinks": 5,
+   "position": 13.59,
+   "score": 8.31,
+   "url": "/pillar/versicherungen/"
+  },
+  {
+   "grund": "verlinkt",
    "impressionen": 21,
    "inlinks": 7,
    "lastmod_tage": null,
@@ -74,22 +84,12 @@
   },
   {
    "grund": "verlinkt",
-   "impressionen": 16,
-   "inlinks": 9,
-   "lastmod_tage": null,
-   "outlinks": 5,
-   "position": 19.81,
-   "score": 7.35,
-   "url": "/pillar/versicherungen/"
-  },
-  {
-   "grund": "verlinkt",
-   "impressionen": 11,
+   "impressionen": 12,
    "inlinks": 6,
    "lastmod_tage": null,
    "outlinks": 8,
-   "position": 6.36,
-   "score": 7.03,
+   "position": 11.0,
+   "score": 6.9,
    "url": "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/"
   },
   {
@@ -125,7 +125,7 @@
   {
    "grund": "verlinkt",
    "impressionen": 7,
-   "inlinks": 11,
+   "inlinks": 12,
    "lastmod_tage": null,
    "outlinks": 9,
    "position": 9.86,
@@ -151,6 +151,16 @@
    "position": 8.67,
    "score": 5.13,
    "url": "/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/"
+  },
+  {
+   "grund": "verlinkt",
+   "impressionen": 11,
+   "inlinks": 4,
+   "lastmod_tage": null,
+   "outlinks": 7,
+   "position": 59.27,
+   "score": 4.67,
+   "url": "/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/"
   },
   {
    "grund": "kein redaktioneller Inlink",
@@ -204,16 +214,6 @@
   },
   {
    "grund": "verlinkt",
-   "impressionen": 3,
-   "inlinks": 4,
-   "lastmod_tage": null,
-   "outlinks": 9,
-   "position": 7.67,
-   "score": 4.23,
-   "url": "/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/"
-  },
-  {
-   "grund": "verlinkt",
    "impressionen": 2,
    "inlinks": 6,
    "lastmod_tage": null,
@@ -245,7 +245,7 @@
   {
    "grund": "verlinkt",
    "impressionen": 1,
-   "inlinks": 10,
+   "inlinks": 11,
    "lastmod_tage": null,
    "outlinks": 11,
    "position": 7.0,
@@ -265,12 +265,22 @@
   {
    "grund": "verlinkt",
    "impressionen": 1,
-   "inlinks": 8,
+   "inlinks": 9,
    "lastmod_tage": null,
    "outlinks": 7,
    "position": 9.0,
    "score": 3.43,
    "url": "/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/"
+  },
+  {
+   "grund": "verlinkt",
+   "impressionen": 7,
+   "inlinks": 4,
+   "lastmod_tage": null,
+   "outlinks": 9,
+   "position": 30.43,
+   "score": 3.33,
+   "url": "/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/"
   },
   {
    "grund": "verlinkt",
@@ -295,22 +305,22 @@
   {
    "grund": "verlinkt",
    "impressionen": 4,
-   "inlinks": 4,
-   "lastmod_tage": null,
-   "outlinks": 7,
-   "position": 65.0,
-   "score": 2.33,
-   "url": "/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/"
-  },
-  {
-   "grund": "verlinkt",
-   "impressionen": 4,
    "inlinks": 6,
    "lastmod_tage": null,
    "outlinks": 4,
    "position": 33.5,
    "score": 2.33,
    "url": "/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/"
+  },
+  {
+   "grund": "verlinkt",
+   "impressionen": 2,
+   "inlinks": 2,
+   "lastmod_tage": null,
+   "outlinks": 6,
+   "position": 95.5,
+   "score": 1.67,
+   "url": "/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/"
   },
   {
    "grund": "verlinkt",
@@ -345,7 +355,7 @@
   {
    "grund": "verlinkt",
    "impressionen": 0,
-   "inlinks": 29,
+   "inlinks": 30,
    "lastmod_tage": null,
    "outlinks": 5,
    "position": null,
@@ -385,9 +395,9 @@
   {
    "grund": "verlinkt",
    "impressionen": 0,
-   "inlinks": 10,
+   "inlinks": 11,
    "lastmod_tage": null,
-   "outlinks": 7,
+   "outlinks": 8,
    "position": null,
    "score": 1.0,
    "url": "/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/"
@@ -395,7 +405,7 @@
   {
    "grund": "verlinkt",
    "impressionen": 0,
-   "inlinks": 3,
+   "inlinks": 4,
    "lastmod_tage": null,
    "outlinks": 6,
    "position": null,
@@ -697,7 +707,7 @@
    "impressionen": 0,
    "inlinks": 4,
    "lastmod_tage": null,
-   "outlinks": 7,
+   "outlinks": 8,
    "position": null,
    "score": 1.0,
    "url": "/posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/"
@@ -737,7 +747,7 @@
    "impressionen": 0,
    "inlinks": 6,
    "lastmod_tage": null,
-   "outlinks": 7,
+   "outlinks": 8,
    "position": null,
    "score": 1.0,
    "url": "/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/"
@@ -765,7 +775,7 @@
   {
    "grund": "verlinkt",
    "impressionen": 0,
-   "inlinks": 16,
+   "inlinks": 17,
    "lastmod_tage": null,
    "outlinks": 8,
    "position": null,
@@ -785,7 +795,7 @@
   {
    "grund": "verlinkt",
    "impressionen": 0,
-   "inlinks": 2,
+   "inlinks": 3,
    "lastmod_tage": null,
    "outlinks": 8,
    "position": null,
@@ -805,7 +815,7 @@
   {
    "grund": "verlinkt",
    "impressionen": 0,
-   "inlinks": 23,
+   "inlinks": 24,
    "lastmod_tage": null,
    "outlinks": 9,
    "position": null,
@@ -847,7 +857,7 @@
    "impressionen": 0,
    "inlinks": 4,
    "lastmod_tage": null,
-   "outlinks": 4,
+   "outlinks": 5,
    "position": null,
    "score": 1.0,
    "url": "/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/"
@@ -855,7 +865,7 @@
   {
    "grund": "verlinkt",
    "impressionen": 0,
-   "inlinks": 3,
+   "inlinks": 4,
    "lastmod_tage": null,
    "outlinks": 8,
    "position": null,
@@ -925,16 +935,6 @@
   {
    "grund": "verlinkt",
    "impressionen": 0,
-   "inlinks": 2,
-   "lastmod_tage": null,
-   "outlinks": 6,
-   "position": null,
-   "score": 1.0,
-   "url": "/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/"
-  },
-  {
-   "grund": "verlinkt",
-   "impressionen": 0,
    "inlinks": 4,
    "lastmod_tage": null,
    "outlinks": 4,
@@ -945,12 +945,32 @@
   {
    "grund": "verlinkt",
    "impressionen": 0,
+   "inlinks": 2,
+   "lastmod_tage": null,
+   "outlinks": 6,
+   "position": null,
+   "score": 1.0,
+   "url": "/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/"
+  },
+  {
+   "grund": "verlinkt",
+   "impressionen": 0,
    "inlinks": 3,
    "lastmod_tage": null,
    "outlinks": 6,
    "position": null,
    "score": 1.0,
    "url": "/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/"
+  },
+  {
+   "grund": "verlinkt",
+   "impressionen": 0,
+   "inlinks": 2,
+   "lastmod_tage": null,
+   "outlinks": 4,
+   "position": null,
+   "score": 1.0,
+   "url": "/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/"
   },
   {
    "grund": "verlinkt",
@@ -1133,16 +1153,16 @@
    "url": "/werkzeuge/tarifwechsel-entscheidungsbaum/"
   }
  ],
- "stand": "2026-11-12",
+ "stand": "2026-11-13",
  "welle1": [
   "/pillar/internet-dsl/",
-  "/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/",
   "/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/",
+  "/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/",
   "/pillar/konto-karten/",
   "/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/",
   "/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/",
-  "/impressum/",
   "/pillar/versicherungen/",
+  "/impressum/",
   "/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
   "/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/",
   "/pillar/",
@@ -1150,22 +1170,23 @@
   "/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/",
   "/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/",
   "/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/",
+  "/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/",
   "/",
   "/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/",
   "/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/",
   "/posts/",
   "/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/",
-  "/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
   "/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/",
   "/ueber/",
   "/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/",
   "/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
   "/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/",
   "/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/",
+  "/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
   "/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/",
   "/werkzeuge/balkonkraftwerk-rechner/",
-  "/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/",
   "/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/",
+  "/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/",
   "/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/",
   "/pillar/frugalismus/",
   "/pillar/mietwagen/",
@@ -1173,18 +1194,17 @@
   "/posts/2026-08-10-dsl-wechselbonus-sichern/",
   "/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/",
   "/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/",
-  "/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/",
-  "/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/"
+  "/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/"
  ],
  "welle1_absolut": [
   "https://franksfinanzcheck.de/pillar/internet-dsl/",
-  "https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/",
   "https://franksfinanzcheck.de/posts/2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren/",
+  "https://franksfinanzcheck.de/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/",
   "https://franksfinanzcheck.de/pillar/konto-karten/",
   "https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/",
   "https://franksfinanzcheck.de/posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/",
-  "https://franksfinanzcheck.de/impressum/",
   "https://franksfinanzcheck.de/pillar/versicherungen/",
+  "https://franksfinanzcheck.de/impressum/",
   "https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/",
   "https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/",
   "https://franksfinanzcheck.de/pillar/",
@@ -1192,22 +1212,23 @@
   "https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/",
   "https://franksfinanzcheck.de/posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/",
   "https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/",
+  "https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/",
   "https://franksfinanzcheck.de/",
   "https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/",
   "https://franksfinanzcheck.de/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/",
   "https://franksfinanzcheck.de/posts/",
   "https://franksfinanzcheck.de/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/",
-  "https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
   "https://franksfinanzcheck.de/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/",
   "https://franksfinanzcheck.de/ueber/",
   "https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/",
   "https://franksfinanzcheck.de/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/",
   "https://franksfinanzcheck.de/posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/",
   "https://franksfinanzcheck.de/posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/",
+  "https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/",
   "https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/",
   "https://franksfinanzcheck.de/werkzeuge/balkonkraftwerk-rechner/",
-  "https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/",
   "https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/",
+  "https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/",
   "https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/",
   "https://franksfinanzcheck.de/pillar/frugalismus/",
   "https://franksfinanzcheck.de/pillar/mietwagen/",
@@ -1215,10 +1236,10 @@
   "https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/",
   "https://franksfinanzcheck.de/posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/",
   "https://franksfinanzcheck.de/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/",
-  "https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/",
-  "https://franksfinanzcheck.de/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/"
+  "https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/"
  ],
  "welle2": [
+  "/posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/",
   "/posts/2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet/",
   "/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/",
   "/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/",
@@ -1271,9 +1292,10 @@
   "/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/",
   "/posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/",
   "/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/",
-  "/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/",
   "/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/",
+  "/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/",
   "/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/",
+  "/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/",
   "/aenderungsprotokoll/",
   "/cockpit/",
   "/methodik/",
