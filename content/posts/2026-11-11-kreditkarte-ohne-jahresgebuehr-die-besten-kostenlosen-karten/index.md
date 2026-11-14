@@ -1,5 +1,5 @@
 ---
-title: "Kreditkarte ohne Jahresgebühr: Kosten und Bedingungen vergleichen"
+title: "Kreditkarte ohne Jahresgebühr: Kosten richtig vergleichen"
 description: "Kreditkarte ohne Jahresgebühr: Vergleiche Auslandskosten, Bargeld, Teilzahlung und Bedingungen, bevor du eine Karte auswählst."
 date: 2026-11-11T12:15:03Z
 draft: true
@@ -25,8 +25,8 @@ cover:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
     verfahren: "generate_covers.py (Pillow, deterministisch)"
-    sha256: 271b3f6d80e6226831ba937939e194688dba893da3fbe027798ca682b50098c7
-    geprueft_am: 2026-11-13
+    sha256: 0d09969416c7561591b93717607efc84f9ecab05e58b28a39b627bcb6912b855
+    geprueft_am: 2026-11-14
 quellen:
   - id: "Q1"
     titel: "Bargeld, Karten, Reiseschecks: Das richtige Zahlungsmittel im Ausland"
