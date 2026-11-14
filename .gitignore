@@ -188,3 +188,11 @@ data/cwv/labor/
 
 # #900: temporäre Hugo-Builds für Messläufe (nie committen)
 public.site/
+
+# #679: deutsches Hunspell-Wörterbuch (4,4 MB, GPLv2/v3).
+# Nicht versioniert – es ist ein Fremd-Artefakt, kein Quelltext. Bei Bedarf
+# holt `python3 scripts/hunspell_worterbuch_holen.py` es reproduzierbar nach.
+# Der Ersatz (scripts/hunspell_ersatz.py) meldet ohne Wörterbuch ehrlich
+# Exit 3 statt „alles richtig“.
+data/hunspell/*.aff
+data/hunspell/*.dic
