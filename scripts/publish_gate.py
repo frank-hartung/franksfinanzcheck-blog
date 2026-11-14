@@ -769,6 +769,61 @@ def kurzantwort_failures(candidates):
     return fehlend, None
 
 
+def quellen_failures(candidates):
+    """Gate-Kontrolle: jeder Kandidat braucht eine belegte Quellenbasis.
+
+    Hintergrund (Nachlauf-Wache #1146 … #1204, 09.–13.11.2026): Nach jedem
+    Automatik-Commit meldete die Nachlauf-Wache als Klasse
+    „M4: Keine Quelle im Frontmatter (quellen)“ an bereits LIVE gegangenen
+    Artikeln – elf Tickets in fünf Tagen, immer derselbe Satz. Der Befund war
+    jedes Mal echt: die Metadaten-Wache erkennt ihn, blockt aber nicht (C34),
+    und das Publish-Gate hatte für dieses Frontmatter-Feld keine Regel. Ein
+    Artikel ohne Quellenbasis konnte also live gehen und fiel der Wache erst
+    danach auf.
+
+    Die Schreiber liegen außerhalb dieses Gates und sind belegt:
+    `faktenfrische.py` schreibt den kanonischen `quellen:`-Block aus dem
+    Recherche-Dossier (`fm_setze_quellen`). Fehlt er, ist die Belegkette
+    unvollständig – und ein Ratgeber ohne Belegkette ist auf einem
+    Finanzblog keine Frage der Darstellung, sondern der Haftung.
+
+    Regel: Jeder Kandidat mit `draft: false` braucht ein nicht-leeres
+    `quellen:` im Frontmatter (Liste mit Inhalt, nicht `quellen: []`).
+    Verhalten wie bei der Kurzantwort (#1110): der Kandidat wird
+    zurückgestellt, der Text bleibt erhalten, die Redaktion ergänzt die
+    Belege und gibt frei. Kein Heiler erfindet Quellen (C15).
+
+    Rückgabe: ({slug: [grund]}, None).
+    """
+    fehlend = {}
+    for slug in candidates:
+        path = os.path.join(POSTS_DIR, slug, "index.md")
+        if not os.path.exists(path):
+            continue
+        try:
+            with open(path, encoding="utf-8") as fh:
+                content = fh.read()
+        except OSError:
+            continue
+        if not re.search(r"(?m)^draft:\s*false\b", content):
+            continue
+        # `quellen:` mit Listeninhalt (auch eingerückt) zählt; `quellen: []`
+        # und ein nacktes `quellen:` ohne Folgetext nicht.
+        treffer = re.search(
+            r"(?m)^quellen:[ \t]*(?P<inline>[^\n#]*)\n(?P<block>(?:[ \t]+[^\n]*\n?)*)",
+            content,
+        )
+        wert = (treffer.group("inline").strip() if treffer else "")
+        block = (treffer.group("block").strip() if treffer else "")
+        hat_liste = bool(block) or wert.startswith("-")
+        if not hat_liste and wert in ("", "[]", "null", "~"):
+            fehlend[slug] = [
+                "Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen "
+                "nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)"
+            ]
+    return fehlend, None
+
+
 def r5_self_heal_candidates(candidates):
     """Letzte deterministische Heilung für R5-ABSATZ-HART.
 
@@ -1021,6 +1076,7 @@ def main():
     duplicate_fail, duplicate_tool_error = duplicate_failures(candidates)
     uniq_fail, uniq_tool_error = uniqueness_failures(candidates)
     kurz_fail, kurz_tool_error = kurzantwort_failures(candidates)
+    quellen_fail, quellen_tool_error = quellen_failures(candidates)
     for w in (len_warn, seo_warn, facts_warn):
         if w:
             print(f"⚠ {w}")
@@ -1200,6 +1256,9 @@ def main():
         if slug in kurz_fail:
             reasons.append("Kurzantwort-Gate nicht bestanden: "
                            + "; ".join(kurz_fail[slug]))
+        if slug in quellen_fail:
+            reasons.append("Quellen-Gate nicht bestanden: "
+                           + "; ".join(quellen_fail[slug]))
 
         if reasons:
             if slug in review_human_holds and slug in review_fail:
