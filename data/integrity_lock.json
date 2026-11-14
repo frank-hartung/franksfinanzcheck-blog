@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-11-14T18:03:55.019259+00:00",
-  "head": "eba82d7",
+  "signed_at": "2026-11-14T17:49:40.890160+00:00",
+  "head": "389d4c8",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -471,7 +471,7 @@
     {
       "date": "2026-11-14",
       "art": "set-current",
-      "head": "eba82d7",
+      "head": "389d4c8",
       "geaendert": [
         "scripts/generate_covers.py"
       ],
@@ -482,12 +482,12 @@
           "urteil": "VERSIEGELBAR",
           "commits": [
             {
-              "sha": "d3ed6b9",
+              "sha": "389d4c8",
               "datum": "2026-11-14",
-              "betreff": "Faktenfrische wiederherstellen und Veröffentlichung absichern (#1218)"
+              "betreff": "governance(spam-schutz): Status aktualisiert"
             }
           ],
-          "commits_art": "seit-signatur"
+          "commits_art": "letzte-commits"
         }
       ],
       "prev_sha256": "30bcd9f50c739461cf7afe23a6b197f94d9810b3487d9386578e25c45b9ac6e3",
