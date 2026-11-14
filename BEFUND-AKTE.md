@@ -2,16 +2,16 @@
 
 _Stand 2026-11-14 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**155 offene Befunde auf 39 Seiten · davon 25 Live-Seiten mit 97 Befunden · ältester 15 Tage · Frist 14 Tage.**
+**151 offene Befunde auf 39 Seiten · davon 25 Live-Seiten mit 97 Befunden · ältester 15 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 155 |
+| Offene Befunde | 151 |
 | Seiten betroffen | 39 (davon live: 25) |
 | Text seit dem Befund geändert | 102 |
-| Altbestand ohne Fassungs-Hash | 15 |
+| Altbestand ohne Fassungs-Hash | 11 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
-| Über der Frist (14 Tage) | 15 |
+| Über der Frist (14 Tage) | 11 |
 | In Eskalation (21 Tage) | 0 |
 
 ## So schließt du einen Befund
@@ -32,7 +32,7 @@ _Stand 2026-11-14 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 117 von 155 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 113 von 151 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -276,7 +276,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden ab16029999747466a63
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden b057dee3603e09f494b5 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
+### `2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn` · **LIVE** (blockiert) · Risikoklasse erhoeht · 5 Befund(e)
 
 Datei: `content/posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/index.md`
 
@@ -334,6 +334,22 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6ad7358a9afcfef3bab
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7c375a3e1a9bfab1468c --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ea11d36614fa115503b4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f7b1c869dd8e442eaf16 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
+
+Datei: `content/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `98eb45f772ad7a0aac7b` | luecke | 3 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt im Text Referenzwerte (120 € Strom, 80 € Kfz), für die in der Quelle keine Marktdaten oder Durchschnittswerte als Beleg vorliegen. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+| `b7f0d52968d89cdf8c5b` | praezision | 3 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne Nennung konkreter rechtlicher Grundlagen (DSGVO) unpräzise, während die Quelle explizit auf rechtliche Verbraucherthemen fokussiert. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+| `be911855d67f998be662` | luecke | 3 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Ratgeber nennt keinen Regulierungsrahmen für Reisebuchungen (z. B. Fluggastrechte oder Stornierungsregeln), obwohl die Quelle diese als zentrale Informationsbereiche ausweist. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 98eb45f772ad7a0aac7b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden b7f0d52968d89cdf8c5b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden be911855d67f998be662 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
@@ -462,22 +478,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 04ae33652c1c5eb4e2b
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5223a3c7287ff81939cd --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9800545ae945ec280b34 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden bc0e4f2eb357a682c674 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` · **LIVE** · Risikoklasse standard · 3 Befund(e)
-
-Datei: `content/posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `98eb45f772ad7a0aac7b` | luecke | 3 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt im Text Referenzwerte (120 € Strom, 80 € Kfz), für die in der Quelle keine Marktdaten oder Durchschnittswerte als Beleg vorliegen. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
-| `b7f0d52968d89cdf8c5b` | praezision | 3 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne Nennung konkreter rechtlicher Grundlagen (DSGVO) unpräzise, während die Quelle explizit auf rechtliche Verbraucherthemen fokussiert. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
-| `be911855d67f998be662` | luecke | 3 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Ratgeber nennt keinen Regulierungsrahmen für Reisebuchungen (z. B. Fluggastrechte oder Stornierungsregeln), obwohl die Quelle diese als zentrale Informationsbereiche ausweist. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 98eb45f772ad7a0aac7b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden b7f0d52968d89cdf8c5b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden be911855d67f998be662 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen` · nicht im Live-Bestand · 4 Befund(e)
@@ -630,23 +630,15 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden cc0de46a82ad9085150
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d553d0d6c7706a69ad13 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-10-28-dsl-und-internet-flat-guenstig-sichern` · nicht im Live-Bestand · 5 Befund(e)
+### `2026-10-28-dsl-und-internet-flat-guenstig-sichern` · nicht im Live-Bestand · 1 Befund(e)
 
 Seite: `2026-10-28-dsl-und-internet-flat-guenstig-sichern`
 
 | Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
 |---|---|---|---|---|---|
-| `05be346e82c80b2a8664` | luecke | 15 T | Altbestand ohne Fassungs-Hash – am heutigen Text prüfen | Wechselboni von 50 € bis 100 € werden genannt, jedoch fehlt jede belegbare Angabe zu deren Höhe oder Häufigkeit. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-| `d0a5cf7bb64eb0cd46c8` | luecke | 15 T | Altbestand ohne Fassungs-Hash – am heutigen Text prüfen | Der Artikel erwähnt keinen regulatorischen Rahmen (z. B. Informations‑ und Preisbindungspflichten der Bundesnetzagentur) obwohl die Fundstelle darauf hinweist, dass solche Vorgaben existieren. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-| `ec53e181336df8dc61ac` | luecke | 15 T | Altbestand ohne Fassungs-Hash – am heutigen Text prüfen | Der Artikel behauptet, dass DSL‑Verträge häufig eine Laufzeit von 24 Monaten haben und danach eine Kündigungsfrist von einem Monat gilt, ohne dafür eine Quelle anzugeben. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-| `f3f9184bfca9b097f68e` | luecke | 15 T | Altbestand ohne Fassungs-Hash – am heutigen Text prüfen | Die 50‑30‑20‑Regel wird als allgemein gültige Budget‑Methode dargestellt, ohne Hinweis, dass es sich um ein Modell handelt oder Quelle dafür zu nennen. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
 | `fb4d2260f4fa291c35ae` | praezision | 15 T | Altbestand ohne Fassungs-Hash – am heutigen Text prüfen | Die Angabe, dass für zwei HD‑Streams gleichzeitig etwa 30 Mbit/s benötigt werden, ist nicht durch Daten belegt und lässt Spielraum für Fehlinterpretationen. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
 
 ```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 05be346e82c80b2a8664 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden d0a5cf7bb64eb0cd46c8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden ec53e181336df8dc61ac --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden f3f9184bfca9b097f68e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden fb4d2260f4fa291c35ae --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
