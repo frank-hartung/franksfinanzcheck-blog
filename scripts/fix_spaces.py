@@ -53,6 +53,50 @@ from post_utils import join_article  # noqa: E402  – Naht-SSOT (FM-Grenze)
 NBSP = "\u00a0"
 
 # Abkürzungen, nach denen KEIN Satzende folgt (Schutz für Regel D)
+# ---------------------------------------------------------------------------
+# PLATZHALTER (Dauerheilung 14.11.2026)
+# ---------------------------------------------------------------------------
+# BEFUND: Bis zum 14.11.2026 benutzten ALLE Masken dieses Moduls das
+# Paragrafenzeichen als Platzhalter – die Schutz-Token („§Z0§“, „§DOM0§“,
+# „§BANG0§“), der Abkürzungspunkt („§“), das Dezimalkomma („§§“) und das
+# Ausrufezeichen im Wort („§EX§“). Regel D stellte danach mit
+# `.replace("§", ".")` und Regel E mit `.replace("§§", ",")` zurück – also
+# JEDES „§“ der Zeile, nicht nur das eigene. Sobald eine der beiden Regeln
+# auf einer Zeile griff, geschah zweierlei:
+#   1. Die Schutz-Token wurden zerstört und nie zurückgetauscht:
+#      „Die Datei tabelle.csv liegt bereit.Öffne sie.“
+#        → „Die Datei .Z0. liegt bereit. Öffne sie.“
+#      „… 3 Euro.Mehr im [Rechner](/werkzeuge/rechner/).“ → „[Rechner.Z0..“
+#      Die Schutzzone vom 10.11.2026 (#1098) fraß damit genau das, was sie
+#      schützen sollte.
+#   2. Ein ECHTES Paragrafenzeichen im Text wurde zum Satzzeichen:
+#      „Nach § 20 EStG gilt das.Mehr dazu“ → „Nach . 20 EStG gilt das. Mehr dazu“
+#      „Nach §§ 305 ff. BGB gilt,dass“     → „Nach , 305 ff. BGB gilt, dass“
+#      Auf einer Finanz- und Rechtsseite (YMYL) ist das eine verfälschte
+#      Rechtsquelle – und kein Guard sucht nach einem fehlenden „§“.
+# Im Bestand war am 14.11.2026 noch keine Zeile betroffen (beide Auslöser
+# müssen auf derselben Zeile zusammentreffen); der Defekt war scharf.
+#
+# REGEL: Ein Platzhalter darf im Text nicht vorkommen KÖNNEN, und jede Maske
+# stellt nur ihr EIGENES Zeichen zurück. Deshalb stehen die Platzhalter im
+# privaten Unicode-Bereich (U+E000 ff.) – kein Satzzeichen, kein Buchstabe,
+# keine Ziffer, kein Leerraum; keine Regel dieses Moduls kann sie treffen.
+# Trägt eine Zeile doch eines dieser Zeichen, wird sie nicht angefasst
+# (fail-closed, siehe `fix_line_safe`).
+T_AUF = "\ue000"        # öffnet ein Schutz-Token
+T_ZU = "\ue001"         # schließt ein Schutz-Token
+P_PUNKT = "\ue002"      # Punkt einer Abkürzung (Regel D)
+P_KOMMA = "\ue003"      # Dezimalkomma (Regel E)
+P_BANG = "\ue004"       # Ausrufezeichen im Wort (Regel D)
+PLATZHALTER = (T_AUF, T_ZU, P_PUNKT, P_KOMMA, P_BANG)
+RE_PLATZHALTER = re.compile("[" + "".join(PLATZHALTER) + "]")
+
+
+def _token(art: str, nr: int) -> str:
+    """Schutz-Token einer Maske: eindeutig je Art und Nummer, ohne Textzeichen."""
+    return f"{T_AUF}{art}{nr}{T_ZU}"
+
+
 ABKUERZUNGEN = (
     "z\\.\\s?B\\.", "d\\.\\s?h\\.", "u\\.\\s?a\\.", "u\\.\\s?ä\\.", "v\\.\\s?a\\.",
     "usw\\.", "etc\\.", "bzw\\.", "ca\\.", "inkl\\.", "exkl\\.", "Nr\\.",
@@ -69,7 +113,10 @@ RE_MISSING_AFTER_PUNCT = re.compile(r"([a-zäöüßA-ZÄÖÜ0-9\)])([.!?])([a-z�
 RE_MISSING_AFTER_COMMA = re.compile(r"([a-zäöüßA-ZÄÖÜ0-9\)]),([a-zäöüßA-ZÄÖÜ])")
 # Achtung: „3,5" / „1,2" (Dezimalzahlen) sind keine Komma-Fehler – geschützt
 RE_COMMA_NUMBER = re.compile(r"\d,\d")
-RE_SPACE_BEFORE_PUNCT = re.compile(r" +([,.;:!?])")
+# „![“ öffnet ein Markdown-Bild und ist kein Satzzeichen: „Text ![Bild](a.svg)“
+# darf sein Leerzeichen nicht verlieren (14.11.2026, gefunden vom Kreuztest
+# test_fix_spaces_platzhalter – im Bestand stand noch kein Bild mitten im Satz).
+RE_SPACE_BEFORE_PUNCT = re.compile(r" +([,.;:?]|!(?!\[))")
 # Regel-D-Schutz: Ausrufezeichen/Zwischenruf *zwischen* Wortteilen ist kein
 # Satzende (FRITZ!Box, Adobe!-Schreibweisen, „24!-Aktion“).
 RE_INWORD_BANG = re.compile(r"(?<=[A-Za-z0-9\u00c4\u00d6\u00dc\u00e4\u00f6\u00fc\u00df])[!](?=[A-Za-z0-9\u00c4\u00d6\u00dc\u00e4\u00f6\u00fc\u00df])")
@@ -186,13 +233,13 @@ def _mask_bang(line: str) -> tuple[str, list]:
 
     def put(m):
         held.append(m.group(0))
-        return f"§BANG{len(held) - 1}§"
+        return _token("BANG", len(held) - 1)
     return BANG_RE.sub(put, line), held
 
 
 def _unmask_bang(line: str, held: list) -> str:
     for i, val in enumerate(held):
-        line = line.replace(f"§BANG{i}§", val)
+        line = line.replace(_token("BANG", i), val)
     return line
 
 
@@ -211,13 +258,13 @@ def _mask_domains(line: str) -> tuple[str, list]:
 
     def put(m):
         held.append(m.group(0))
-        return f"§DOM{len(held) - 1}§"
+        return _token("DOM", len(held) - 1)
     return RE_DOMAIN_SAFE.sub(put, line), held
 
 
 def _unmask_domains(line: str, held: list) -> str:
     for i, val in enumerate(held):
-        line = line.replace(f"§DOM{i}§", val)
+        line = line.replace(_token("DOM", i), val)
     return line
 
 
@@ -244,8 +291,9 @@ def _is_protected(line: str) -> bool:
 #
 # Deshalb gilt jetzt: Alles, was ein ZIEL ist (Markdown-Ziel, HTML-Attribut),
 # und alles, was ein DATEINAME ist, wird vor ALLEN Regeln tokenisiert. Die
-# Token (§Z0§) enthalten weder Punkt noch Leerzeichen; keine Regel kann sie
-# treffen. Der Selbsttest friert die Fälle ein.
+# Token enthalten weder Punkt noch Leerzeichen noch ein anderes Textzeichen
+# (siehe PLATZHALTER oben); keine Regel kann sie treffen und keine Rückstellung
+# einer anderen Maske kann sie zerstören. Der Selbsttest friert die Fälle ein.
 RE_MD_ZIEL = re.compile(r"\]\([^)\n]*\)")
 RE_HTML_ATTRIBUT = re.compile(
     r"(?i)\b(?:src|href|srcset|poster)\s*=\s*(?:\"[^\"]*\"|'[^']*')")
@@ -268,7 +316,7 @@ RE_URL = re.compile(r"https?://[^\s)\]\}]+(?:\s+[^\s)\]\}]+)*")
 
 
 def _mask_urls(line: str) -> tuple[str, list[tuple[str, str]]]:
-    """Ersetzt URLs und alle übrigen Ziele/Dateinamen durch Token (§Z0§, …).
+    """Ersetzt URLs und alle übrigen Ziele/Dateinamen durch Schutz-Token.
 
     Der Name bleibt aus Kompatibilitätsgründen (Aufrufer, Doku, Tests), die
     Funktion schützt aber seit dem 10.11.2026 mehr als nur http(s)-URLs:
@@ -279,7 +327,7 @@ def _mask_urls(line: str) -> tuple[str, list[tuple[str, str]]]:
     held: list[tuple[str, str]] = []
 
     def _repl(m):
-        tok = f"§Z{len(held)}§"
+        tok = _token("Z", len(held))
         held.append((tok, m.group(0)))
         return tok
 
@@ -325,10 +373,10 @@ def fix_line(line: str) -> tuple[str, int]:
     def _comma(m):
         return m.group(1) + ", " + m.group(2)
     # Dezimalzahlen temporär maskieren
-    masked = RE_COMMA_NUMBER.sub(lambda m: m.group(0).replace(",", "§§"), line)
+    masked = RE_COMMA_NUMBER.sub(lambda m: m.group(0).replace(",", P_KOMMA), line)
     line2, n = RE_MISSING_AFTER_COMMA.subn(_comma, masked)
     if n:
-        line = line2.replace("§§", ",")
+        line = line2.replace(P_KOMMA, ",")
         changed += n
 
     # D) Fehlendes Leerzeichen nach .!? (Abkürzungen schützen)
@@ -336,12 +384,12 @@ def fix_line(line: str) -> tuple[str, int]:
         return m.group(1) + m.group(2) + " " + m.group(3)
     # Abkürzungen temporär maskieren (Punkt durch Platzhalter ersetzen)
     def _mask_abk(m):
-        return m.group(0).replace(".", "§")
+        return m.group(0).replace(".", P_PUNKT)
     masked2 = ABK_RE.sub(_mask_abk, line)
-    masked2 = RE_INWORD_BANG.sub("§EX§", masked2)     # FRITZ!Box-Angriffsschutz
+    masked2 = RE_INWORD_BANG.sub(P_BANG, masked2)     # FRITZ!Box-Angriffsschutz
     line3, n = RE_MISSING_AFTER_PUNCT.subn(_punct, masked2)
     if n:
-        line = line3.replace("§EX§", "!").replace("§", ".")
+        line = line3.replace(P_BANG, "!").replace(P_PUNKT, ".")
         changed += n
 
     # F) Geschütztes Leerzeichen zwischen Zahl und %/€ sicherstellen
@@ -363,11 +411,26 @@ def fix_line(line: str) -> tuple[str, int]:
 
 
 def fix_line_safe(line: str) -> tuple[str, int]:
-    """fix_line mit URL-Maskierung (URLs werden nie veraendert)."""
+    """fix_line mit URL-Maskierung (URLs werden nie veraendert).
+
+    Fail-closed in beide Richtungen (14.11.2026):
+      * Trägt die Zeile schon ein Platzhalter-Zeichen, wäre nicht mehr
+        unterscheidbar, was Text und was Maske ist – sie bleibt unberührt.
+      * Bleibt nach der Rückstellung ein Platzhalter stehen, hat eine Regel
+        ein Token beschädigt – dann gilt die Zeile als nicht geheilt und das
+        Original bleibt stehen. Ein halb zurückgetauschtes Token im Artikel
+        ist immer schlimmer als ein fehlendes Leerzeichen.
+    """
+    if RE_PLATZHALTER.search(line):
+        return line, 0
     masked, urls = _mask_urls(line)
     out, n = fix_line(masked)
-    for tok, u in urls:
+    # Rückwärts zurücktauschen: ein Ziel kann ein früher gesetztes Token
+    # enthalten (HTML-Attribut um eine URL), nie umgekehrt.
+    for tok, u in reversed(urls):
         out = out.replace(tok, u)
+    if RE_PLATZHALTER.search(out):
+        return line, 0
     return out, n
 
 
@@ -377,6 +440,9 @@ def fix_body(body: str) -> tuple[str, int]:
     out: list[str] = []
     changed = 0
     for line in lines:
+        if RE_PLATZHALTER.search(line):
+            out.append(line)                 # fail-closed, siehe fix_line_safe
+            continue
         if "|" in line:
             # TABELLENZEILEN: Nur die sicheren Regeln anwenden – nbsp
             # zwischen Zahl und %/€ sowie „z.B.“ → „z. B.“. Alle anderen
@@ -386,8 +452,10 @@ def fix_body(body: str) -> tuple[str, int]:
             new = re.sub(r"(\d)[ \u00a0]+([%€])",
                          lambda m: m.group(1) + NBSP + m.group(2), masked)
             new = re.sub(r"([zZ])\.B\.", r"\1. B.", new)
-            for tok, u in urls:
+            for tok, u in reversed(urls):
                 new = new.replace(tok, u)
+            if RE_PLATZHALTER.search(new):
+                new = line                   # fail-closed, siehe fix_line_safe
             if new != line:
                 changed += 1
             out.append(new)
@@ -460,6 +528,49 @@ SELBSTTEST = [
     # muss hier weiter greifen (sonst wäre die Härtung eine Abschaltung).
     ("Satz.Neuer Anfang bleibt geheilt", "Satz. Neuer Anfang bleibt geheilt"),
     ("Das ist z.B.so nicht gemeint", "Das ist z. B. so nicht gemeint"),
+    # ----------------------------------------------------------------
+    # PLATZHALTER (Dauerheilung 14.11.2026). Bis dahin stellten Regel D
+    # und Regel E JEDES „§“ der Zeile zurück – auch das der Schutz-Token
+    # und das echte Paragrafenzeichen. Jeder Fall kombiniert deshalb eine
+    # greifende Regel mit etwas, das sie nicht anfassen darf.
+    # ----------------------------------------------------------------
+    # Regel D greift – das Ziel auf derselben Zeile bleibt ganz
+    ("Die Datei tabelle.csv liegt bereit.Öffne sie.",
+     "Die Datei tabelle.csv liegt bereit. Öffne sie."),
+    ("![A](bild.name.png) und Satz.Neuer Satz",
+     "![A](bild.name.png) und Satz. Neuer Satz"),
+    ("Das kostet 3 Euro.Mehr steht im [Rechner](/werkzeuge/rechner/).",
+     "Das kostet 3 Euro. Mehr steht im [Rechner](/werkzeuge/rechner/)."),
+    ("Dann.Weiter geht es mit https://a.de/b?c=1.2",
+     "Dann. Weiter geht es mit https://a.de/b?c=1.2"),
+    ('<a href="https://a.de/b.html">Link</a> steht da.Mehr folgt',
+     '<a href="https://a.de/b.html">Link</a> steht da. Mehr folgt'),
+    # Regel E greift – das Ziel bleibt ganz
+    ("Hallo,Welt steht in daten.json und [weiter](/go/dsl/)",
+     "Hallo, Welt steht in daten.json und [weiter](/go/dsl/)"),
+    # Regel D greift – Domain und Marke bleiben ganz
+    ("Die Seite www.example.de hilft.Schau rein",
+     "Die Seite www.example.de hilft. Schau rein"),
+    ("Die FRITZ!Box hilft.Schau rein", "Die FRITZ!Box hilft. Schau rein"),
+    # Das Paragrafenzeichen ist Text, kein Platzhalter (YMYL: Rechtsquelle)
+    ("Nach § 20 EStG gilt das.Mehr dazu unten",
+     "Nach § 20 EStG gilt das. Mehr dazu unten"),
+    ("Nach §§ 305 ff. BGB gilt das.Mehr dazu",
+     "Nach §§ 305 ff. BGB gilt das. Mehr dazu"),
+    ("Nach §§ 305 ff. BGB gilt,dass es zählt",
+     "Nach §§ 305 ff. BGB gilt, dass es zählt"),
+    ("Laut § 309 Nr. 9 BGB sind 3,5 Monate zu lang,sagt das Gesetz.Stimmt",
+     "Laut § 309 Nr. 9 BGB sind 3,5 Monate zu lang, sagt das Gesetz. Stimmt"),
+    # „![“ ist Bild-Markup, kein Satzzeichen – Regel C lässt das Leerzeichen
+    ("Siehe ![Merkkarte](abbildung-merkkarte.svg) im Text",
+     "Siehe ![Merkkarte](abbildung-merkkarte.svg) im Text"),
+    ("Das stimmt ! Wirklich", "Das stimmt! Wirklich"),
+    # Die frühere Token-Schreibweise ist heute gewöhnlicher Text
+    ("Der Text §Z0§ bleibt stehen.Auch hier", "Der Text §Z0§ bleibt stehen. Auch hier"),
+    # Fail-closed: eine Zeile, die schon ein Platzhalter-Zeichen trägt,
+    # wird nicht angefasst – auch wenn eine Regel greifen würde.
+    ("Fremdes \ue000Z0\ue001 Zeichen.Bleibt so", "Fremdes \ue000Z0\ue001 Zeichen.Bleibt so"),
+    ("Fremder \ue002 Punkt,bleibt so", "Fremder \ue002 Punkt,bleibt so"),
 ]
 
 
