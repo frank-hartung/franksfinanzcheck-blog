@@ -118,7 +118,7 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 |---|---|---|---|---|
 | **F4-fachbefund** | faktenalter | blockiert | Mensch (Herausgeber/Redaktion) | 25 |
 | **T1w-zeichenlaenge-optimum** | technik | warnung | Maschine (deterministisch) | 2 |
-| **T5-lesbarkeit** | technik | blockiert | Maschine (deterministisch) | 1 |
+| **T6-textverstaendnis** | technik | blockiert | Maschine (deterministisch) | 1 |
 
 - **F4-fachbefund** – Schließweg: scripts/faktenfrische_befund_ledger.py (via publish_gate.fakten_befund_failures) · betroffen: `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas`, `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026`, `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit`, `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren`, `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden`, `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` …
 
@@ -260,7 +260,7 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 
 ### `2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar` (blockiert, Risikoklasse standard)
 
-- **T5-lesbarkeit** [technik]: Flesch 58.5 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)
+- **T6-textverstaendnis** [technik]: R5-ABSATZ-HART: Absatz mit 7 Sätzen (Limit 6): Die Verbraucherzentrale empfiehlt zwei Siegel als Hilfe: „Grüner Strom Label“ und „ok-powe…
 
 ## Warnungen ohne Blockade (2 Artikel)
 

@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-14T19:12:40Z",
+  "generated_at": "2026-11-14T20:13:18Z",
   "modus": "kandidaten",
-  "commit": "1d3b1f930e6c1c9f325a6d87c68839291cc7ca41",
+  "commit": "4a13ac89ae6de5764ccd6966ec83d4cb3e87666b",
   "kapazitaet": {
     "stichtag": "2026-11-14",
     "basis": "2026-11-14",
@@ -101,11 +101,11 @@
       "anzahl": 2
     },
     {
-      "check": "T5-lesbarkeit",
+      "check": "T6-textverstaendnis",
       "dimension": "technik",
       "wirkung": "blockiert",
       "entscheidung": "auto",
-      "quelle": "scripts/readability_check.py (via publish_gate.readability_failures)",
+      "quelle": "scripts/textverstaendnis_guard.py (via publish_gate.textverstaendnis_failures)",
       "artikel": [
         "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar"
       ],
@@ -1734,7 +1734,7 @@
       "checks": []
     },
     "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": {
-      "sha256": "3507491a30ef27b13c716e610f1dd097ae83ee6c6c9ee6482da38c5e05b1eff1",
+      "sha256": "9c998af811eba6a3bffde517786f9c7f125ac08912375f2c68505d1454546124",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1748,13 +1748,13 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-12",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
-          "check": "T5-lesbarkeit",
+          "check": "T6-textverstaendnis",
           "dimension": "technik",
           "wirkung": "blockiert",
-          "detail": "Flesch 58.5 (Mindestwert 60) – ein Artikel unter dieser Schwelle zieht den Bestands-Durchschnitt nach unten (#585)"
+          "detail": "R5-ABSATZ-HART: Absatz mit 7 Sätzen (Limit 6): Die Verbraucherzentrale empfiehlt zwei Siegel als Hilfe: „Grüner Strom Label“ und „ok-powe…"
         }
       ]
     },
