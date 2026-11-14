@@ -66,6 +66,15 @@ budget:
   # Messung mit 126 Artikeln vom 10.11.2026 belegt Limit 18 (16 + 2 Reserve).
   # Prüffristen, Rechercheintervalle, Takt, Nachholfrist und Mindestdeckung
   # bleiben unverändert.
+  # NACHMESSUNG 14.11.2026 (132 Artikel, 131 mit Frist): Der Stresstest
+  # rechnet seinen Tag jetzt aus dem Bestand (späteste Frist + Nachholfrist,
+  # `faktenfrische_kapazitaet.vollrueckstand_stichtag`) statt aus der
+  # Konstante 09.02.2027, die seit der ersten Prüfung nach dem 04.11.2026
+  # keinen Vollrückstand mehr beschrieb. Gemessen am 18.02.2027: nötiges
+  # Budget 17, Abbau in 7 Tagen, 0 Folgefristen gerissen. Limit 18 ließ damit
+  # nur noch einen Reserveplatz; nach der Regel vom 10.11.2026 (nötig + 2)
+  # gilt Limit 19. Je 8 weitere Seiten steigt das nötige Budget um 1 – ab
+  # 144 Seiten mit Frist meldet der Test die aufgebrauchte Reserve.
   max_treffer_je_artikel: 6     # so viele Fundstellen ins Dossier
   max_quellen_frontmatter: 4    # so viele Belege in den Artikel
   web_max_zeichen: 1800         # Klartext-Auszug je Webseite
@@ -84,7 +93,7 @@ budget:
   #  Die Heilung ist nicht „weniger messen“: Die Intervalle oben
   #  bleiben unangetastet. Es wird mehr geliefert.
   auto_skalierung: true         # Budget folgt dem Bedarf (unten)
-  hartes_limit_pro_lauf: 18     # 16 nötige + 2 Reserveplätze im +97-Tage-Stresstest
+  hartes_limit_pro_lauf: 19     # 17 nötige + 2 Reserveplätze im Vollrückstands-Stresstest (14.11.2026)
   #  Das harte Limit ist der Vertrag mit der Deckungs-Wache
   #  (scripts/faktenfrische_kapazitaet.py, Governance C45): Es muss
   #  den Bedarf auch an einem Spitzentag decken. Reicht es nicht

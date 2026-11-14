@@ -538,32 +538,84 @@ class RepoZustandTest(unittest.TestCase):
                                 "hartes Limit muss über dem Plan liegen")
 
     def test_vollrueckstand_nach_97_tagen_behaelt_reserve(self):
-        """Eingefrorener +97-Tage-Stresstest, kein beobachteter Betriebszustand."""
-        stichtag = dt.date(2027, 2, 9)  # 04.11.2026 + 97 Tage
+        """Vollrückstand: jede Seite überfällig, die Nachholfrist verbraucht.
+
+        Der Tag kommt aus dem Bestand (späteste Frist + Nachholfrist), nicht
+        aus dem Kalender. Bis zum 14.11.2026 stand hier der 09.02.2027
+        (04.11.2026 + 90 + 7 = 97 Tage); seit im Bestand eine Seite mit Frist
+        11.02.2027 liegt, war das kein Vollrückstand mehr – der Test meldete
+        eine „neue“ Frist, die es im Vollrückstand nicht geben kann
+        (`kap.vollrueckstand_stichtag`). Kein beobachteter Betriebszustand.
+        """
+        stichtag = kap.vollrueckstand_stichtag(self.artikel, self.cfg)
+        self.assertIsNotNone(stichtag, "Der Bestand nennt keine einzige Frist")
         laeufe, hinweise = kap.laeufe_aus_workflow()
         self.assertIsNotNone(laeufe, f"Laufplan nicht lesbar: {hinweise}")
         horizont = int(kap.planung(self.cfg)["horizont_tage"])
+        nachhol = int(kap.planung(self.cfg)["nachhol_frist_tage"])
         lauftage = kap.lauftage_aus_workflow(stichtag, horizont)
         self.assertIsNotNone(lauftage, "Der echte Laufkalender fehlt")
         emp = kap.empfohlenes_budget(self.artikel, self.cfg, laeufe, stichtag,
                                      lauftage=lauftage)
         plan = emp["plan"]
+        # Die Voraussetzung des Szenarios, gemessen statt angenommen: Jede
+        # Seite mit Frist ist überfällig. Sonst misst der Test etwas anderes,
+        # als sein Name sagt – so wie vom 13. bis 14.11.2026.
+        mit_frist = sum(1 for art in self.artikel
+                        if ff.faelligkeit(art, self.cfg, stichtag).get("frist"))
+        self.assertEqual(plan["ueberfaellig"], mit_frist,
+                         f"Kein Vollrückstand am {stichtag}: "
+                         f"{plan['ueberfaellig']} von {mit_frist} Seiten überfällig")
+        self.assertEqual(plan["verletzungen_neu"], 0,
+                         "Im Vollrückstand gibt es keine neue Frist")
+        lage = (f"{mit_frist} Seiten am {stichtag}, Abbau in "
+                f"{plan['abbau_tage']} Tagen (erlaubt {nachhol}), nötiges "
+                f"Budget {emp['budget']}, hartes Limit {emp['limit']}, "
+                f"Folgefristen gerissen: {plan['verletzungen_folge']}")
+        rat = ("`budget.hartes_limit_pro_lauf` in "
+               "data/agent_reach/faktenfrische.yaml neu messen und anheben "
+               "(nötiges Budget plus Reserve) – Betreiberentscheidung")
         self.assertTrue(emp["erreicht"],
-                        "Das harte Limit erfüllt Abbau UND neue/folgende Fristen "
-                        f"nicht gleichzeitig: Abbau={plan['abbau_tage']} Tage, "
-                        f"neue Fristen={plan['verletzungen_neu']}, "
-                        f"Folgefristen={plan['verletzungen_folge']}")
-        self.assertTrue(plan["puenktlich"], "Neue oder Folgefrist gerissen")
+                        f"Das harte Limit baut den Vollrückstand nicht "
+                        f"fristgerecht ab: {lage}. {rat}.")
+        self.assertTrue(plan["puenktlich"], f"Folgefrist gerissen: {lage}")
         self.assertTrue(plan["rueckstand_abgebaut"],
-                        "Der Alt-Rückstand bleibt über die Nachholfrist")
-        self.assertLessEqual(plan["abbau_tage"],
-                             int(kap.planung(self.cfg)["nachhol_frist_tage"]))
+                        f"Der Alt-Rückstand bleibt über die Nachholfrist: {lage}")
+        self.assertLessEqual(plan["abbau_tage"], nachhol)
         self.assertLess(emp["budget"], emp["limit"],
-                        "Der Vollrückstand verbraucht die gesamte Reserve")
+                        f"Der Vollrückstand verbraucht die gesamte Reserve: "
+                        f"{lage}. {rat}.")
         bedarf = kap.bedarf_je_tag(self.artikel, self.cfg, stichtag)
         mindest = int(kap.planung(self.cfg)["min_deckung_prozent"])
         self.assertGreater(kap.kapazitaet_je_tag(emp["budget"], laeufe),
                            bedarf * mindest / 100.0)
+
+    def test_vollrueckstand_tag_folgt_dem_bestand(self):
+        """Die frühere Konstante ist ein Sonderfall der Regel – und nur der."""
+        def seite(slug, geprueft):
+            return {"slug": slug, "titel": "Haushaltsbuch führen",
+                    "beschreibung": "", "keywords": [], "pillar": "",
+                    "faktencheck": geprueft}
+        alt = [seite("a", dt.date(2026, 10, 20)), seite("b", dt.date(2026, 11, 4))]
+        status = ff.faelligkeit(alt[1], self.cfg, dt.date(2026, 11, 4))
+        self.assertEqual(status["frist"] - dt.date(2026, 11, 4),
+                         dt.timedelta(days=90),
+                         "Probe-Seite ist nicht mehr Standardintervall 90")
+        nachhol = int(kap.planung(self.cfg)["nachhol_frist_tage"])
+        erwartet = dt.date(2026, 11, 4) + dt.timedelta(days=90 + nachhol)
+        self.assertEqual(kap.vollrueckstand_stichtag(alt, self.cfg), erwartet)
+        if nachhol == 7:
+            self.assertEqual(erwartet, dt.date(2027, 2, 9),
+                             "04.11.2026 + 97 Tage war der 09.02.2027")
+        # Eine später geprüfte Seite verschiebt den Tag – genau das hat die
+        # Konstante am 13.11.2026 nicht mitgemacht.
+        neu = alt + [seite("c", dt.date(2026, 11, 13))]
+        self.assertEqual(kap.vollrueckstand_stichtag(neu, self.cfg),
+                         erwartet + dt.timedelta(days=9))
+        # Der Messtag selbst spielt keine Rolle.
+        self.assertEqual(
+            kap.vollrueckstand_stichtag(neu, self.cfg, dt.date(2031, 1, 1)),
+            kap.vollrueckstand_stichtag(neu, self.cfg, dt.date(2026, 11, 14)))
 
     def test_empfehlung_ist_im_korridor(self):
         laeufe, _ = kap.laeufe_aus_workflow()
