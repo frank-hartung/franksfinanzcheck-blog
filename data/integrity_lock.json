@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-11-13T20:53:01.065770+00:00",
-  "head": "6c8a2d6",
+  "signed_at": "2026-11-14T18:03:55.019259+00:00",
+  "head": "eba82d7",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -35,7 +35,7 @@
     "scripts/check_covers.py": "f2d9eb9e9133740bba0bd6eb6812d54783ba4aad086297c2d2d407adc8be1d0d",
     "scripts/content_audit.py": "45e07881f24005e63decd400fd2974499511fcc7d45ae21c5973e997f55695e3",
     "scripts/fazit_schmiede.py": "6061f841227adefff0105331ba13d1d10fad0cd87c7c3364fe35593158ab0ca4",
-    "scripts/generate_covers.py": "2127d70cfae30a795b417e253478f6151d0dfa6d9a5b6571e3011a8562e0f42d",
+    "scripts/generate_covers.py": "dc09671b92c76d9e1e86a12327a720e7192789c8a975cb878d454ba9370578ff",
     "scripts/hardcases_guard.py": "15ffd843f106c7e7dfc4246d8e4ab7944e2db0238bb35bdd4529414d29631996",
     "scripts/internal_linker.py": "6273ffb63c128c5ead3abb657dd61a95c317b5d98f570b673d343a1654793d54",
     "scripts/lektor_guard.py": "eb8b8e43f264c86506952785efb889925f4c5df42ddee6d7bec952330b6d3491",
@@ -59,44 +59,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "7e28ca760a4f34867103d962168be51e0b6a9396bd9bfd9f8059ffaa22a63096",
-  "audit_start_sha256": "79477e38dbe6dc60d11bd53fe92333e4de5cec38e54d4a17f73bb1504dd7cdb5",
+  "files_sha256": "513c07e546237c98807ffe8d53e21eed0e1015703623b019101a7def58b461ca",
+  "audit_start_sha256": "ed17e1f416294b2271125c8cc39c4b59e1b3804f9ce71fafd3727dc7cfb59536",
   "audit": [
-    {
-      "date": "2026-11-01",
-      "art": "heal",
-      "head": "c48585aed",
-      "geaendert": [
-        "data/skill_lizenzen.json"
-      ],
-      "herkunft": [
-        {
-          "pfad": "data/skill_lizenzen.json",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "c48585aed",
-              "datum": "2026-11-01",
-              "betreff": "fix(skills): Merge-Schäden geheilt, Social-Pack im Stand von main integriert"
-            },
-            {
-              "sha": "4603f2328",
-              "datum": "2026-11-01",
-              "betreff": "Merge branch 'main' into arena/0e533ae6-franksfinanzcheck-blog"
-            },
-            {
-              "sha": "cbc43ad63",
-              "datum": "2026-11-01",
-              "betreff": "feat(skills): Themen-Portfolio (P1–P7), Siegel für Wache+Register, Lektorat ins eigene Haus (#1004)"
-            }
-          ],
-          "commits_art": "letzte-commits"
-        }
-      ],
-      "files_sha256": "629623c39212a747b9b8bca6028236c5f2c5d8d0e65164de3e9022784e17df75",
-      "prev_sha256": null
-    },
     {
       "date": "2026-11-01",
       "art": "heal",
@@ -120,7 +85,7 @@
         }
       ],
       "files_sha256": "df967fde0eb2be279f1e96857855ac76808dc13b4b6b94313cfb26a1b51f398b",
-      "prev_sha256": "79477e38dbe6dc60d11bd53fe92333e4de5cec38e54d4a17f73bb1504dd7cdb5"
+      "prev_sha256": null
     },
     {
       "date": "2026-11-01",
@@ -500,8 +465,33 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "a0e5363a4f3932beb84b3230b41eb6a005491531ae5f1712d887b458d94c7943",
-      "files_sha256": "7e28ca760a4f34867103d962168be51e0b6a9396bd9bfd9f8059ffaa22a63096"
+      "files_sha256": "7e28ca760a4f34867103d962168be51e0b6a9396bd9bfd9f8059ffaa22a63096",
+      "prev_sha256": "a0e5363a4f3932beb84b3230b41eb6a005491531ae5f1712d887b458d94c7943"
+    },
+    {
+      "date": "2026-11-14",
+      "art": "set-current",
+      "head": "eba82d7",
+      "geaendert": [
+        "scripts/generate_covers.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/generate_covers.py",
+          "klasse": "fest",
+          "urteil": "VERSIEGELBAR",
+          "commits": [
+            {
+              "sha": "d3ed6b9",
+              "datum": "2026-11-14",
+              "betreff": "Faktenfrische wiederherstellen und Veröffentlichung absichern (#1218)"
+            }
+          ],
+          "commits_art": "seit-signatur"
+        }
+      ],
+      "prev_sha256": "30bcd9f50c739461cf7afe23a6b197f94d9810b3487d9386578e25c45b9ac6e3",
+      "files_sha256": "513c07e546237c98807ffe8d53e21eed0e1015703623b019101a7def58b461ca"
     }
   ]
 }
