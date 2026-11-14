@@ -239,6 +239,45 @@ class FeedWerteTests(BauproduktFixture):
                 self.feed(root)
                 self.assertTrue(self.m5()[0])
 
+    def test_deterministischer_renderer_ist_kein_trainiertes_ki_bild(self):
+        # Der Renderer liefert algorithmicMedia ohne KI-Bild-Deklaration;
+        # trotzdem muss sein belegter Typ am richtigen Bild im Feed stehen.
+        self.quelle(extra=("cover:\n  image: images/covers/probe.jpg\n"
+                           "  ki_pruefung:\n    digital_source_type: algorithmicMedia\n"))
+        medium = ET.SubElement(self.item, q(MEDIA, "content"), {"url": COVER})
+        credit = ET.SubElement(medium, q(MEDIA, "credit"), {
+            "role": "digitalsourcetype", "scheme": kp.IPTC_VOKABULAR})
+        credit.text = "algorithmicMedia"
+        self.feed()
+        self.assertEqual(self.m5()[0], [])
+        for fehler in ("wert", "bild", "ohne-credit", "doppelt"):
+            with self.subTest(fehler=fehler):
+                root = copy.deepcopy(self.rss)
+                item = root.find("./channel/item")
+                bild = item.find(q(MEDIA, "content"))
+                eintrag = bild.find(q(MEDIA, "credit"))
+                if fehler == "wert":
+                    eintrag.text = ART
+                elif fehler == "bild":
+                    bild.set("url", BASE + "images/covers/anderes.jpg")
+                elif fehler == "ohne-credit":
+                    bild.remove(eintrag)
+                else:
+                    bild.append(copy.deepcopy(eintrag))
+                self.feed(root)
+                self.assertTrue(any("media:credit" in f["text"] for f in self.m5()[0]))
+        # Ein trainierter Typ ohne KI-Deklaration bleibt ein Widerspruch.
+        self.quelle(extra=("cover:\n  image: images/covers/probe.jpg\n"
+                           f"  ki_pruefung:\n    digital_source_type: {ART}\n"))
+        self.feed()
+        self.assertTrue(any("widerspricht" in f["text"] for f in self.m5()[0]))
+        # Umgekehrt darf algorithmicMedia kein deklariertes KI-Bild sein.
+        self.quelle(extra=("cover:\n  image: images/covers/probe.jpg\n"
+                           "  ai_generated: true\n"
+                           "  ki_pruefung:\n    digital_source_type: algorithmicMedia\n"))
+        self.feed()
+        self.assertTrue(any("widerspricht" in f["text"] for f in self.m5()[0]))
+
     def test_iptc_credit_muss_im_richtigen_medium_mit_wert_stehen(self):
         self.bild_ergaenzen()
         self.assertEqual(self.m5()[0], [], "das echte Template verschachtelt media:credit")

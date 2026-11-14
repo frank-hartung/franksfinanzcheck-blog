@@ -33,9 +33,20 @@ cover:
     geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
-    titel: "Bundesnetzagentur – Energie"
-    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    titel: "Lieferantenwechsel – Informationen für Verbraucherinnen und Verbraucher"
+    url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Lieferantenwechsel/start.html"
     herausgeber: "Bundesnetzagentur"
+    recherchiert_am: 2026-11-13
+  - id: "Q2"
+    titel: "Ist ein Tarif mit Ökostrom und Ökogas überhaupt sinnvoll?"
+    url: "https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/ist-ein-tarif-mit-oekostrom-und-oekogas-ueberhaupt-sinnvoll-8207"
+    herausgeber: "Verbraucherzentrale"
+    recherchiert_am: 2026-11-13
+  - id: "Q3"
+    titel: "Ersatzversorgung"
+    url: "https://www.bundesnetzagentur.de/DE/Vportal/Energie/Vertragsarten/Ersatzversorgung/start.html"
+    herausgeber: "Bundesnetzagentur"
+    recherchiert_am: 2026-11-13
 faktencheck: 2026-10-28
 ---
 
@@ -63,11 +74,9 @@ Viele Haushalte nutzen bereits Smart Meter. Diese Geräte zeigen dir genau, wann
 
 Physikalisch gesehen kommt aus deiner Steckdose immer der gleiche Mix. Es gibt kein separates Kabel für Windstrom oder Sonnenenergie. Man kann sich das Stromnetz wie einen großen See vorstellen.
 
-Viele Erzeuger schütten Wasser hinein. Die einen schütten sauberes Quellwasser ein, die anderen schmutziges Brauchwasser. Wenn du einen Ökotarif buchst, verpflichtest du den Anbieter, genau deine verbrauchte Menge als sauberes Wasser in den See zu leiten. Je mehr Menschen dies tun, desto sauberer wird der gesamte See. 
+Viele Erzeuger speisen Strom in dieses gemeinsame Netz ein. Ein Ökostromtarif ordnet deinem Verbrauch bilanziell Strom aus erneuerbaren Quellen zu; das bedeutet aber nicht, dass genau dieser Strom physisch aus deiner Steckdose kommt.
 
-Ein wichtiger Punkt sind die Herkunftsnachweise. Diese Zertifikate belegen, woher der Strom stammt. Du wirst im Register des Umweltbundesamtes verwaltet. Seriöse Anbieter gehen aber einen Schritt weiter.
-
-Du investierst zusätzlich in neue Anlagen. Nur so wächst der Anteil der erneuerbaren Energien am Gesamtnetz. Ein reiner Handel mit Zertifikaten verändert die Welt kaum. Deshalb schauen wir im nächsten Schritt auf die Qualität der Tarife.
+Herkunftsnachweise belegen die erneuerbare Herkunft der entsprechend vermarkteten Strommenge. Der Kauf solcher Nachweise allein sorgt nicht automatisch für den Bau neuer Anlagen. Die Verbraucherzentrale erklärt, warum der zusätzliche Nutzen vom konkreten Tarif und seinen Kriterien abhängt ([Q2](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/ist-ein-tarif-mit-oekostrom-und-oekogas-ueberhaupt-sinnvoll-8207)).
 
 ## Warum lohnt es sich, Ökostrom Tarife zu vergleichen?
 
@@ -218,7 +227,7 @@ Nein, für den Bezug von Ökostrom ist kein spezieller Zähler erforderlich. Dei
 Das ist ein weit verbreiteter Irrtum. Oft sind Ökotarife von alternativen Anbietern deutlich günstiger als die Grundversorgungstarife der lokalen Stadtwerke. Da erneuerbare Energien in der Erzeugung immer günstiger werden, spiegelt sich das oft in den Endkundenpreisen wider. Ein Vergleich zeigt dir schnell, dass grünes Gewissen und Sparen Hand in Hand gehen können.
 
 ### Was bedeutet "echter" Ökostrom?
-"Echter" Ökostrom zeichnet sich dadurch aus, dass der Anbieter nicht nur Strom aus alten Wasserkraftwerken vermarktet. Ein echter Ökostrom-Versorger treibt die Energiewende aktiv voran. Das geschieht durch Investitionen in neue Anlagen zur Stromerzeugung aus Sonne, Wind oder Biomasse. Nur so erhöht sich der Anteil der Erneuerbaren im Netz wirklich. Siegel wie ok-power oder Grüner Strom garantieren diesen zusätzlichen Nutzen für die Umwelt.
+Ein Herkunftsnachweis allein belegt noch keinen zusätzlichen Ausbau erneuerbarer Energien. Die Verbraucherzentrale empfiehlt deshalb unter anderem die Labels ok-power und Grüner Strom als Orientierung für einen zusätzlichen Energiewendenutzen. Die Kriterien unterscheiden sich: Sie können neben neuen Anlagen auch andere Energiewendeprojekte umfassen. Prüfe, ob das Label für deinen konkreten Tarif gilt ([Q2](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/ist-ein-tarif-mit-oekostrom-und-oekogas-ueberhaupt-sinnvoll-8207)).
 
 ### Wie liest man das Strometikett richtig?
 Jeder Versorger muss einmal im Jahr ein Strometikett veröffentlichen. Dort siehst du den Mix des Anbieters im Vergleich zum bundesweiten Durchschnitt. Achte auf den Anteil der erneuerbaren Energien und die CO2-Emissionen. Ein reiner Ökostromanbieter weist dort ausschließlich erneuerbare Energien aus. Das Etikett hilft dir, die Werbeversprechen mit den harten Fakten der Erzeugung zu vergleichen.

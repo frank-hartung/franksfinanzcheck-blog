@@ -13,7 +13,12 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
+import editorial_review_gate as review_gate
 import faktenfrische_befund_ledger as ledger
+import park_state
+import reserve_blocker_klassen
+import reserve_custody
+import reserve_pool
 
 SLUG = "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu"
 ARTICLE = ROOT / "content" / "posts" / SLUG / "index.md"
@@ -45,11 +50,45 @@ class Heizol1072Tests(unittest.TestCase):
 
     def test_replacement_is_held_and_has_no_irrelevant_affiliate_route(self):
         self.assertIs(self.fm["draft"], True)
-        self.assertIs(self.fm["reserve"], True)
+        self.assertNotIn("reserve", self.fm)
+        self.assertIn("Redaktionelle Prüfung", self.fm["reserve_blocked"])
         self.assertIs(self.fm["affiliate_exempt"], True)
         self.assertNotIn("/go/", self.body)
         self.assertIn("keine Preisprognose", self.body)
         self.assertIn("redaktionelle Abnahme erforderlich", self.body)
+
+    def test_hold_is_effective_and_not_eligible_for_automatic_deletion(self):
+        raw = ARTICLE.read_text(encoding="utf-8")
+        self.assertTrue(park_state.reserve_hold(raw))
+        self.assertEqual(reserve_custody.zustand(raw), reserve_custody.ZUSTAND_BLOCKIERT)
+        self.assertNotIn(ARTICLE, reserve_pool.reserve_drafts())
+        loeschbar, bewertung = reserve_blocker_klassen.gate_befund_loeschbar(
+            self.fm["reserve_blocked"])
+        self.assertFalse(loeschbar)
+        self.assertEqual(bewertung["klasse"], reserve_blocker_klassen.MENSCHLICH)
+        reaktivierbar, _ = reserve_custody.rueckholbar(self.fm["reserve_blocked"])
+        self.assertFalse(reaktivierbar)
+        result = review_gate.evaluate_path(ARTICLE)
+        self.assertEqual(result["risk"], review_gate.RISK_ELEVATED)
+        self.assertEqual(result["status"], "ausstehend")
+        # Elevated risk alone is not the YMYL high-risk publication gate; the
+        # explicit reserve hold above is the operative publication safeguard.
+        self.assertFalse(result["blocking"])
+
+    def test_cover_alt_and_sources_do_not_reintroduce_old_claims(self):
+        # The image actually carries the current title, not a promise of an
+        # optimal purchase date. The rejected electricity/gas landing page
+        # must not silently reappear as a heating-oil source.
+        self.assertEqual(self.fm["cover"]["alt"], self.fm["title"])
+        sources = self.fm["quellen"]
+        self.assertTrue(sources)
+        self.assertNotIn(
+            "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+            [source["url"] for source in sources],
+        )
+        self.assertTrue(all(source.get("recherchiert_am") for source in sources))
+        self.assertLess(str(self.fm["faktencheck"]),
+                        str(sources[0]["recherchiert_am"]))
 
     def test_all_five_findings_are_closed_by_current_text_decisions(self):
         fassungen, aliases = ledger.bestand_identitaeten()

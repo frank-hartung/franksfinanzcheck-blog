@@ -38,6 +38,7 @@ on:
       # Generator + Logik der Akte selbst.
       - "scripts/faktenfrische_befund_akte.py"
       - "scripts/faktenfrische_befund_ledger.py"
+      - "scripts/f4_entscheidungsvorlage.py"
       # Wird aufgerufen (git_sync.sh) – W1 des Trigger-Wache.
       - "scripts/git_sync.sh"
       - "scripts/befund_akte_sync.sh"

@@ -50,6 +50,7 @@ POSTS = ROOT / "content" / "posts"
 sys.path.insert(0, str(ROOT / "scripts"))
 import reserve_artifacts as artifacts  # noqa: E402
 import cadence_guard  # noqa: E402 – PUBLICATION_DAYS/load_posts (SSOT)
+import park_state  # noqa: E402 – bewusste Halte- und Reserve-Sperren
 from publikations_weiterleitung import weiterleitungsquellen  # noqa: E402
 
 
@@ -72,8 +73,15 @@ def is_draft(text: str) -> bool:
     return bool(re.search(r"(?m)^draft:\s*true\s*$", _frontmatter(text)))
 
 
+def eligible_reserve(text: str) -> bool:
+    """Nur ein Reserve-Entwurf ohne bewusste Sperre ist ein Kandidat."""
+    return (is_draft(text) and is_reserve(text)
+            and not park_state.reserve_hold(text)
+            and park_state.state_of(text) != "hold")
+
+
 def reserve_drafts(posts_dir: Path = POSTS) -> list:
-    """Alle Reserve-Entwürfe (draft: true + reserve: true), älteste zuerst.
+    """Alle ungesperrten Reserve-Entwürfe, älteste zuerst.
 
     Premium-Fix 15.09.2026 (#287): Wenn data/reserve-readiness.json
     hash-gesicherte ready-Zertifikate trägt, kommen zertifizierte
@@ -86,7 +94,9 @@ def reserve_drafts(posts_dir: Path = POSTS) -> list:
         return out
     for index in sorted(posts_dir.glob("*/index.md")):
         text = index.read_text(encoding="utf-8")
-        if is_draft(text) and is_reserve(text):
+        # Eine versehentlich zurückgekehrte Pool-Fahne darf eine bewusste
+        # Ausmusterung oder einen Park-Hold nicht überstimmen.
+        if eligible_reserve(text):
             out.append(index)
     return _prefer_certified(out)
 
@@ -429,6 +439,12 @@ def publish_to_min(min_per_day: int | None = None,
                           "data/weiterleitungen.yaml")
                 continue
             original = index.read_text(encoding="utf-8")
+            # Zwischen Auflistung und Schreibgriff kann sich ein Hold ergeben;
+            # vor der Promotion nochmals anhand der gelesenen Fassung prüfen.
+            if not eligible_reserve(original):
+                print(f"  ⛔ Reserve zurückgestellt: {index.parent.name} "
+                      "ist kein ungesperrter Reserve-Entwurf")
+                continue
             titel = _titel(original) if rt is not None else ""
             treffer = sperr_treffer(titel, gesperrt, rt) if titel else None
             if treffer:

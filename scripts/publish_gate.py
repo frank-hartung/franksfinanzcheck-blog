@@ -512,7 +512,8 @@ def editorial_review_failures(candidates):
     fachlicher Blocker. Ein Werkzeugfehler ist davon strikt getrennt: Dann
     stoppt das Publish-Gate fail-closed, vernichtet aber keinen Artikel.
 
-    Rückgabe: ({slug: [befunde]}, warnung, werkzeugfehler, {hochrisiko-slugs})
+    Rückgabe: ({slug: [befunde]}, warnung, werkzeugfehler,
+               {Slugs mit Hochrisiko oder expliziter Reserve-Sperre})
     """
     try:
         sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
@@ -521,21 +522,21 @@ def editorial_review_failures(candidates):
         return {}, f"Redaktionelle YMYL-Prüfung nicht ladbar: {exc}", True, set()
 
     failed = {}
-    high_risk = set()
+    human_holds = set()
     try:
         for slug in candidates:
             path = os.path.join(POSTS_DIR, slug, "index.md")
             result = erg.evaluate_path(path)
-            if result.get("risk") == erg.RISK_HIGH:
-                high_risk.add(slug)
+            if result.get("risk") == erg.RISK_HIGH or result.get("reserve_hold"):
+                human_holds.add(slug)
             if result.get("blocking"):
                 failed[slug] = [
                     f"{finding.get('code')}: {finding.get('detail')}"
                     for finding in result.get("findings", [])
                 ] or ["redaktionelle Freigabe nicht nachgewiesen"]
     except Exception as exc:  # noqa: BLE001 - Beweisweg muss fail-closed sein
-        return {}, f"Redaktionelle YMYL-Prüfung lief nicht durch: {exc}", True, high_risk
-    return failed, None, False, high_risk
+        return {}, f"Redaktionelle Prüfung lief nicht durch: {exc}", True, human_holds
+    return failed, None, False, human_holds
 
 
 def readability_failures(candidates):
@@ -1011,7 +1012,7 @@ def main():
     integ_fail, integ_warn, integ_tool_error = affiliate_integrity_failures(candidates)
     intent_fail, intent_warn, intent_tool_error = affiliate_intent_failures(candidates)
     offen_fail, offen_warn, offen_tool_error = offenlegung_failures(candidates)
-    review_fail, review_warn, review_tool_error, review_high_risk = \
+    review_fail, review_warn, review_tool_error, review_human_holds = \
         editorial_review_failures(candidates)
     r5_fail = title_integrity_failures(candidates)
     keyword_fail, keyword_warn = keyword_failures(candidates)
@@ -1178,7 +1179,7 @@ def main():
                            "Produkt als Anker/Satz versprechen): "
                             + "; ".join(intent_fail[slug]))
         if slug in review_fail:
-            reasons.append("Redaktionelle YMYL-Freigabe nicht bestanden: "
+            reasons.append("Redaktionelle Freigabe/Sperre nicht bestanden: "
                            + "; ".join(review_fail[slug]))
         if slug in r5_fail:
             reasons.append("Cover-Text-Komplettheit (check_titles R5) nicht bestanden – "
@@ -1201,11 +1202,10 @@ def main():
                            + "; ".join(kurz_fail[slug]))
 
         if reasons:
-            if slug in review_high_risk and slug in review_fail:
-                # YMYL-Fund ist eine REDAKTIONSAUFGABE, kein Wegwerf-Grund.
-                # Anders als ein kaputter Neu-Text bleibt der Entwurf erhalten:
-                # Quellen, Zahlen und Prüfer müssen nachvollziehbar ergänzt und
-                # anschließend versiegelt werden. hold = niemals Auto-Requeue.
+            if slug in review_human_holds and slug in review_fail:
+                # Hochrisiko-Funde UND explizite Reserve-Sperren gehören der
+                # Redaktion, auch bei neuen Slugs: Niemals den Text verwerfen.
+                # hold bedeutet Entwurf erhalten, keine automatische Re-Queue.
                 gated.append((slug, reasons))
                 demoted.append(slug)
                 editorial_holds.append(slug)
@@ -1218,7 +1218,10 @@ def main():
                     try:
                         sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
                         import park_state
-                        grund = "ymyl-review: " + "; ".join(review_fail[slug])
+                        label = ("redaktioneller-hold: "
+                                 if any(r.startswith("E20:") for r in review_fail[slug])
+                                 else "ymyl-review: ")
+                        grund = label + "; ".join(review_fail[slug])
                         if len(grund) > 180:
                             grund = grund[:177] + "…"
                         park_state.hold(path, grund)

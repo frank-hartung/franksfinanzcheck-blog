@@ -660,7 +660,7 @@ befunde:
   verboten_behauptend:
   - heizöl-preise erreichen ihr tief meist in den monaten januar und februar
   rest_risiko: Keine Monatsprognose oder Ersparnis zugesagt; der Entwurf bleibt zurückgestellt.
-  ledger_fassung_sha256: 28af839d6e5dfff3b780343158e19322fedeba4430e6e129604b41d566224229
+  ledger_fassung_sha256: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
   geprueft_fassung: 28af839d6e5dfff3b780343158e19322fedeba4430e6e129604b41d566224229
   entschieden_am: '2026-11-13'
   entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
@@ -683,7 +683,7 @@ befunde:
   verboten_behauptend:
   - kosten um 10 % bis 20 % im herbst eingespart werden können
   rest_risiko: Eine Angebotsanfrage oder frühere Bestellung garantiert keine Ersparnis.
-  ledger_fassung_sha256: 28af839d6e5dfff3b780343158e19322fedeba4430e6e129604b41d566224229
+  ledger_fassung_sha256: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
   geprueft_fassung: 28af839d6e5dfff3b780343158e19322fedeba4430e6e129604b41d566224229
   entschieden_am: '2026-11-13'
   entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
@@ -707,7 +707,7 @@ befunde:
   verboten_behauptend:
   - tiefpreis von 0,80 €/liter ohne quell
   rest_risiko: Die Formel vergleicht individuelle Angebote, nicht Marktpreise oder Zeitpunkte.
-  ledger_fassung_sha256: 28af839d6e5dfff3b780343158e19322fedeba4430e6e129604b41d566224229
+  ledger_fassung_sha256: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
   geprueft_fassung: 28af839d6e5dfff3b780343158e19322fedeba4430e6e129604b41d566224229
   entschieden_am: '2026-11-13'
   entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
@@ -730,7 +730,7 @@ befunde:
   verboten_behauptend:
   - typische fehler beim heizölkauf bis zu 15 % mehrkosten
   rest_risiko: Individuelle Kostenfolgen werden nicht pauschal beziffert.
-  ledger_fassung_sha256: 28af839d6e5dfff3b780343158e19322fedeba4430e6e129604b41d566224229
+  ledger_fassung_sha256: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
   geprueft_fassung: 28af839d6e5dfff3b780343158e19322fedeba4430e6e129604b41d566224229
   entschieden_am: '2026-11-13'
   entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
@@ -753,7 +753,7 @@ befunde:
   - bestimmten saisonalen bestellzeitpunkt können wir ohne
   verboten_behauptend: []
   rest_risiko: Persönliche Erinnerungsroutinen sind keine Marktregel oder Preisprognose.
-  ledger_fassung_sha256: 28af839d6e5dfff3b780343158e19322fedeba4430e6e129604b41d566224229
+  ledger_fassung_sha256: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
   geprueft_fassung: 28af839d6e5dfff3b780343158e19322fedeba4430e6e129604b41d566224229
   entschieden_am: '2026-11-13'
   entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
@@ -1019,20 +1019,6 @@ befunde:
   typ: praezision
   befund: Behauptung, dass Überladung der Maschine zu schnellerem Verschleiß und teuren
     Reparaturen führt, wird ohne konkrete Daten oder Messgröße angegeben.
-  entscheidung: 'Heutiger Text geprueft: Überladung behauptet heute nur noch kauselich
-    (''kann die Lager beschädigen''), keine konkreten Reparaturkosten oder Verschleißdaten
-    mehr als Tatsache.'
-  status: ueberholt
-  abgeloest_am: '2026-11-10'
-  abgeloest_durch: WF-7B6B-1148-DAUERHEILUNG-HIGHEND-2026-11-10.md
-  abloesung_grund: >-
-    Der Artikel wurde am 10.11.2026 unter WF-7B6B (PR #1163, Issue #1148) neu belegt:
-    acht Quellen im Frontmatter, neue Modellrechnung mit offengelegten Annahmen,
-    die unbelegten Aussagen entfernt. Die Anker dieser Entscheidung stammen aus der
-    Fassung vom 05.11.2026; die Pruefung gilt dieser Fassung, nicht dem heutigen Text.
-    Die Sperre gegen die alte Behauptung bleibt in Kraft.
-  belegtyp: ergaenzt
-  beleg_url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
   entscheidung: 'Paket C, entschieden am 12.11.2026: Die Folgebehauptung „Überladung
     führt zu Verschleiß und teuren Reparaturen“ ist gestrichen. Sie stützte sich
     allein auf FORUM WASCHEN (ikw.org) – keine Domain der Allowlist, und die Kausalaussage
@@ -1064,18 +1050,6 @@ befunde:
   befund: Aussage, dass das richtige Beladen allein die Fixkosten senkt, ohne weitere
     Maßnahmen, ist ein pauschales Leistungsversprechen ohne Nennung von Mechanismen
     oder Grenzen.
-  entscheidung: 'Heutiger Text geprueft: ''richtiges Beladen senkt die Fixkosten''
-    heute als Moglichkeit (''kann die Fixkosten senken'') und als Modellbeispiel dargestellt,
-    nicht als pauschales Leistungsversprechen.'
-  status: ueberholt
-  abgeloest_am: '2026-11-10'
-  abgeloest_durch: WF-7B6B-1148-DAUERHEILUNG-HIGHEND-2026-11-10.md
-  abloesung_grund: >-
-    Der Artikel wurde am 10.11.2026 unter WF-7B6B (PR #1163, Issue #1148) neu belegt:
-    acht Quellen im Frontmatter, neue Modellrechnung mit offengelegten Annahmen,
-    die unbelegten Aussagen entfernt. Die Anker dieser Entscheidung stammen aus der
-    Fassung vom 05.11.2026; die Pruefung gilt dieser Fassung, nicht dem heutigen Text.
-    Die Sperre gegen die alte Behauptung bleibt in Kraft.
   entscheidung: 'Paket B, entschieden am 12.11.2026: Der Rückfall saß in den Meta-Flächen
     – `description` und `pin_description` behaupteten weiter „senkt deine Fixkosten“,
     der Body „senkt die Betriebskosten … nachhaltig“. Alle drei Stellen stehen wieder
@@ -1108,18 +1082,6 @@ befunde:
   befund: Die Modellrechnung (0,9 kWh/50 L bei vollem Waschgang, 0,6 kWh/35 L bei
     halbem Waschgang, Strompreis 0,40 €/kWh, Wasserpreis 0,005 €/L) und die daraus
     resultierende Jahresersparnis von 22 € fehlen einer fundierten Quelle.
-  entscheidung: 'Heutiger Text geprueft: Modellrechnung (0,9 kWh/50 L, 0,6 kWh/35
-    L, 0,40 €/kWh, 0,005 €/L, 22 €/Jahr) steht heute durchgehend als ''Ergebnis der
-    Modellrechnung'' mit offengelegten Annahmen da; keine Außenbehauptung mehr.'
-  status: ueberholt
-  abgeloest_am: '2026-11-10'
-  abgeloest_durch: WF-7B6B-1148-DAUERHEILUNG-HIGHEND-2026-11-10.md
-  abloesung_grund: >-
-    Der Artikel wurde am 10.11.2026 unter WF-7B6B (PR #1163, Issue #1148) neu belegt:
-    acht Quellen im Frontmatter, neue Modellrechnung mit offengelegten Annahmen,
-    die unbelegten Aussagen entfernt. Die Anker dieser Entscheidung stammen aus der
-    Fassung vom 05.11.2026; die Pruefung gilt dieser Fassung, nicht dem heutigen Text.
-    Die Sperre gegen die alte Behauptung bleibt in Kraft.
   entscheidung: 'Paket A, entschieden am 12.11.2026: Die Modellrechnung ist heute
     vollständig offengelegt (Annahmen, Rechenwege, „Ergebnis der Modellrechnung“).
     Der frühere Beleg (Bundesnetzagentur-Startseite) trug keinen der Werte; er ist
@@ -1151,18 +1113,6 @@ befunde:
   befund: Die Aussage, dass bei 4 Waschgängen pro Woche ein durchschnittlicher Haushalt
     rund 5 € jährlich an Strom‑ und Wasserkosten spart, ist nicht mit einer Quelle
     belegt.
-  entscheidung: 'Heutiger Text geprueft: ''rund 5 € jährlich'' steht heute nur noch
-    als Modelljahr-Beispiel (''im Modelljahr rund 5 €''), keine versprochene Ersparnis
-    mehr.'
-  status: ueberholt
-  abgeloest_am: '2026-11-10'
-  abgeloest_durch: WF-7B6B-1148-DAUERHEILUNG-HIGHEND-2026-11-10.md
-  abloesung_grund: >-
-    Der Artikel wurde am 10.11.2026 unter WF-7B6B (PR #1163, Issue #1148) neu belegt:
-    acht Quellen im Frontmatter, neue Modellrechnung mit offengelegten Annahmen,
-    die unbelegten Aussagen entfernt. Die Anker dieser Entscheidung stammen aus der
-    Fassung vom 05.11.2026; die Pruefung gilt dieser Fassung, nicht dem heutigen Text.
-    Die Sperre gegen die alte Behauptung bleibt in Kraft.
   entscheidung: 'Paket A, entschieden am 12.11.2026: Die alte „rund 5 € im Modelljahr“-Aussage
     existiert nicht mehr; der Artikel rechnet 100 volle gegen 200 halbe Ladungen
     und kommt auf 28 bis 42 € pro Jahr – ausgewiesen als Ergebnis der Modellrechnung.
@@ -1191,18 +1141,6 @@ befunde:
   typ: luecke
   befund: Angabe, dass ein optimal beladener Trommel (ca. 80 % Kapazität) bis zu 15 %
     weniger Wasser und Energie verbraucht, wird nicht durch eine Quelle belegt.
-  entscheidung: 'Heutiger Text geprueft: ''80 % Kapazität / bis zu 15 % weniger''
-    steht heute nur noch als gekennzeichnetes Modellbeispiel mit Beispielwerten, keine
-    Tatsachenbehauptung mehr.'
-  status: ueberholt
-  abgeloest_am: '2026-11-10'
-  abgeloest_durch: WF-7B6B-1148-DAUERHEILUNG-HIGHEND-2026-11-10.md
-  abloesung_grund: >-
-    Der Artikel wurde am 10.11.2026 unter WF-7B6B (PR #1163, Issue #1148) neu belegt:
-    acht Quellen im Frontmatter, neue Modellrechnung mit offengelegten Annahmen,
-    die unbelegten Aussagen entfernt. Die Anker dieser Entscheidung stammen aus der
-    Fassung vom 05.11.2026; die Pruefung gilt dieser Fassung, nicht dem heutigen Text.
-    Die Sperre gegen die alte Behauptung bleibt in Kraft.
   entscheidung: 'Paket A, entschieden am 12.11.2026: Die „bis zu 15 %“-Angabe ist
     entfallen. Der Artikel nennt seine Annahmen und sagt in der Kurzantwort ausdrücklich,
     dass es eine Rechnung mit Quellenwerten und keine Messung im Haushalt ist. Beleg:

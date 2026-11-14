@@ -290,18 +290,13 @@ class RaceUndKonfliktTests(GitSyncTestBase):
         self.assertEqual(self.origin_read(md), "# Mastodon (Stand B)\n")
         self.assertIn("B", self.origin_read(ics))
 
-    def test_faktenfrische_artefakte_konflikt_heilt_frischer_lauf_gewinnt(self):
-        """Issue #497: Faktenfrische-Queue und Dossiers sind Snapshots.
+    def test_faktenfrische_dossiers_konflikt_heilt_frischer_lauf_gewinnt(self):
+        """Laufbezogene Dossiers bleiben automatisch lösbar (#497).
 
-        Sie werden vollständig aus dem aktuellen Lauf erzeugt und sind keine
-        redaktionellen Quellen. Ein paralleler Bot darf den Rebase deshalb
-        nicht blockieren; der frische Faktenlauf gewinnt deterministisch.
-        Redaktioneller Content bleibt durch den separaten Content-Test
-        weiterhin fail-closed.
+        Anders als die Dossiers enthält die Queue seit dem Ledger-Ausbau
+        fortgeschriebene Fachbefunde und darf nicht mehr blind ersetzt werden.
         """
         artefakte = {
-            "data/faktenfrische_queue.json":
-                ('{"lauf": "alt"}\n', '{"lauf": "frisch"}\n'),
             "data/research/artikel/probe.md":
                 ("# Dossier alt\n", "# Dossier frisch\n"),
             "data/research/artikel/probe.json":
@@ -320,6 +315,75 @@ class RaceUndKonfliktTests(GitSyncTestBase):
         self.assertIn("Bot-Artefakt-Konflikte automatisch gelöst", res.stdout)
         for pfad, (_, frisch) in artefakte.items():
             self.assertEqual(self.origin_read(pfad), frisch)
+
+    def _faktenfrische_konflikt_bleibt_unangetastet(self, pfad, basis, a, b,
+                                                      env_extra=None):
+        # Die echte Attributdatei bewirkt auch bei ansonsten konfliktfreien
+        # Textänderungen einen Konflikt. git_sync darf ihn nicht mit --theirs
+        # verdecken: beide Seiten enthalten möglicherweise neue Befunde.
+        attrs = (REPO_ROOT / ".gitattributes").read_text(encoding="utf-8")
+        self._commit(self.bot_a, ".gitattributes", attrs, "Schutz")
+        self._commit(self.bot_a, pfad, basis, "Basis")
+        self.assertEqual(self.run_sync(["--push-only"], repo=self.bot_a).returncode, 0)
+        subprocess.run(["git", "-C", str(self.bot_b), "pull", "-q", "--ff-only"], check=True)
+        self._commit(self.bot_a, pfad, a, "A: Fakten")
+        self.assertEqual(self.run_sync(["--push-only"], repo=self.bot_a).returncode, 0)
+        self._commit(self.bot_b, pfad, b, "B: Fakten")
+        vorher = subprocess.check_output(["git", "-C", str(self.bot_b), "rev-parse", "HEAD"], text=True)
+        res = self.run_sync(["--push-only"], env_extra=env_extra)
+        self.assertEqual(res.returncode, 1, res.stdout + res.stderr)
+        self.assertIn("Faktenfrische-Konflikt", res.stdout)
+        self.assertEqual(self.origin_read(pfad), a)
+        self.assertEqual((self.bot_b / pfad).read_text(encoding="utf-8"), b)
+        self.assertEqual(subprocess.check_output(
+            ["git", "-C", str(self.bot_b), "rev-parse", "HEAD"], text=True), vorher)
+        self.assertEqual(subprocess.check_output(
+            ["git", "-C", str(self.bot_b), "status", "--porcelain"], text=True), "")
+
+    def test_faktenfrische_queue_konflikt_verwirft_keine_seite(self):
+        self._faktenfrische_konflikt_bleibt_unangetastet(
+            "data/faktenfrische_queue.json", '{"a": 1, "b": 1}\n',
+            '{"a": 2, "b": 1}\n', '{"a": 1, "b": 2}\n')
+
+    def test_faktenfrische_entscheidungen_konflikt_verwirft_keine_seite(self):
+        self._faktenfrische_konflikt_bleibt_unangetastet(
+            "data/faktenfrische_entscheidungen.yaml", "a: 1\nb: 1\n",
+            "a: 2\nb: 1\n", "a: 1\nb: 2\n")
+
+    def test_f4_vorlage_konflikt_verwirft_keine_seite(self):
+        self._faktenfrische_konflikt_bleibt_unangetastet(
+            "F4-ENTSCHEIDUNGSVORLAGE.md", "Akte\nMitte\nEnde\n",
+            "Akte neu\nMitte\nEnde\n", "Akte\nMitte\nEnde neu\n")
+
+    def test_gepruefter_heizoel_reserve_entwurf_bleibt_auch_mit_pool_politik_erhalten(self):
+        pfad = ("content/posts/2026-11-13-heizoel-preise-2026-"
+                "so-findest-du-den-optimalen-kaufzeitpu/index.md")
+        kopf = "---\ndraft: true\nreserve: true\n---\n"
+        self._faktenfrische_konflikt_bleibt_unangetastet(
+            pfad, kopf + "Anfang\nMitte\nEnde\n",
+            kopf + "Redaktion\nMitte\nEnde\n", kopf + "Anfang\nMitte\nBot\n",
+            env_extra={"GIT_SYNC_RESERVE_POLICY": "reserve-verwaltet",
+                       "GIT_SYNC_BESTAND_POLICY": "bestand-gewinnt"})
+
+    def test_gepruefter_live_oekostrom_bleibt_auch_mit_bestandspolitik_erhalten(self):
+        pfad = ("content/posts/2026-10-28-oekostrom-anbieter-wechseln-"
+                "sicher-gruen-und-bezahlbar/index.md")
+        kopf = "---\ndraft: false\n---\n"
+        self._faktenfrische_konflikt_bleibt_unangetastet(
+            pfad, kopf + "Anfang\nMitte\nEnde\n",
+            kopf + "Redaktion\nMitte\nEnde\n", kopf + "Anfang\nMitte\nBot\n",
+            env_extra={"GIT_SYNC_RESERVE_POLICY": "reserve-verwaltet",
+                       "GIT_SYNC_BESTAND_POLICY": "bestand-gewinnt"})
+
+    def test_kreditkarten_entwurf_bleibt_auch_mit_reservepolitik_erhalten(self):
+        pfad = ("content/posts/2026-11-11-kreditkarte-ohne-jahresgebuehr-"
+                "die-besten-kostenlosen-karten/index.md")
+        kopf = "---\ndraft: true\nreserve: true\n---\n"
+        self._faktenfrische_konflikt_bleibt_unangetastet(
+            pfad, kopf + "Anfang\nMitte\nEnde\n",
+            kopf + "Redaktion\nMitte\nEnde\n", kopf + "Anfang\nMitte\nBot\n",
+            env_extra={"GIT_SYNC_RESERVE_POLICY": "reserve-verwaltet",
+                       "GIT_SYNC_BESTAND_POLICY": "bestand-gewinnt"})
 
     def test_jsonl_konflikt_wird_union_gemerget(self):
         base_jsonl = 'data/history.jsonl'

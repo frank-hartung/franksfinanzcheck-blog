@@ -93,9 +93,15 @@ def bezugsdatum() -> dt.date:
         return dt.date.today()
 
 
-def entscheidungen() -> dict[tuple[str, str], list[dict]]:
-    """(slug, befund_id) → Entscheidungen in zeitlicher Reihenfolge."""
+def entscheidungen(aliases: dict[str, str]) -> dict[tuple[str, str], list[dict]]:
+    """Entscheidungen an die heutige Artikelidentität binden, nie schließen.
+
+    Slugs ändern sich durch Datums-Lifts. Das Ledger löst sie über dieselbe
+    Alias-Karte auf; die redaktionelle Vorlage darf frühere Entscheidungen
+    deshalb nicht fälschlich als „neu“ ausgeben.
+    """
     import yaml
+    import faktenfrische_befund_ledger as ledger
     try:
         daten = yaml.safe_load(ENTSCHEIDUNGEN.read_text(encoding="utf-8")) or {}
     except Exception as exc:  # noqa: BLE001 – fail-closed: ohne Entscheidungen kein Dossier
@@ -105,7 +111,8 @@ def entscheidungen() -> dict[tuple[str, str], list[dict]]:
     for eintrag in liste or []:
         if not isinstance(eintrag, dict):
             continue
-        schluessel = (str(eintrag.get("slug") or ""), str(eintrag.get("befund_id") or ""))
+        slug = ledger.canonical_slug(str(eintrag.get("slug") or ""), aliases)
+        schluessel = (slug, str(eintrag.get("befund_id") or ""))
         register.setdefault(schluessel, []).append(eintrag)
     for treffer in register.values():
         treffer.sort(key=lambda e: str(e.get("entschieden_am") or ""))
@@ -170,9 +177,11 @@ def baue(stichtag: dt.date) -> str:
     import faktenfrische_befund_akte as akte
     import faktenfrische_befund_ledger as ledger
 
-    befunde = ledger.befunde_mit_status(stichtag=stichtag)
+    fassungen, aliases = ledger.bestand_identitaeten()
+    befunde = ledger.befunde_mit_status(stichtag=stichtag, fassungen=fassungen,
+                                        aliases=aliases)
     live = akte.live_seiten()
-    entschieden = entscheidungen()
+    entschieden = entscheidungen(aliases)
 
     offen = [b for b in befunde if b["slug"] in live]
     neu = [b for b in offen if (b["slug"], b["id"]) not in entschieden]
@@ -190,10 +199,10 @@ def baue(stichtag: dt.date) -> str:
              "(`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die "
              "Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.")
     z.append("")
-    z.append(f"**{len(offen)} offene Live-Befunde auf {len(seiten)} Artikeln.** Davon sind "
-             f"**{len(alt)}** bereits früher entschieden und durch eine spätere Textänderung")
-    z.append(f"wieder geöffnet worden (fassungsgebundene Bindung, kein Rückfall). "
-             f"**{len(neu)}** Befunde sind neu.")
+    z.append(f"**{len(offen)} offene Live-Befunde auf {len(seiten)} Artikeln.** Für "
+             f"**{len(alt)}** gibt es frühere Entscheidungen zu diesem Befund;")
+    z.append(f"die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. "
+             f"**{len(neu)}** Befunde haben keine frühere aktive Entscheidung.")
     z.append("")
     z.append(f"Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus "
              f"`data/faktenfrische_befunde_state.json`,")

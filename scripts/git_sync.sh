@@ -584,16 +584,19 @@ PYMERGE
             safe=0
           fi
           ;;
-        data/faktenfrische_queue.json|data/research/artikel/*)
-          # REPARATUR 01.10.2026 (Issue #497 – „Faktenfrische (Bestand) rot trotz
-          # erfolgreicher Recherche“): Queue und Dossiers sind vollständig aus
-          # dem aktuellen Lauf erzeugte Maschinen-Artefakte. Parallel laufende
-          # Bots dürfen sie nicht als fachlichen Content-Konflikt blockieren;
-          # der frische Lauf gewinnt deterministisch (--theirs). Die
-          # Fakten-Historie bleibt davon getrennt und wird oben als JSONL-Union
-          # zusammengeführt. Artikel unter content/ bleiben bewusst ein harter
-          # Konflikt, damit redaktionelle Änderungen niemals überschrieben
-          # werden.
+        data/faktenfrische_queue.json|data/faktenfrische_entscheidungen.yaml|data/faktenfrische_befunde_1072.yaml|data/faktenfrische_befunde_state.json|data/faktenfrische_merge_quarantaene_*.json|BEFUND-AKTE.md|F4-ENTSCHEIDUNGSVORLAGE.md)
+          # Die Queue ist seit dem Ledger-Ausbau kein ersetzbarer Snapshot:
+          # `fachbefunde` wird aus früheren Läufen fortgeschrieben. --theirs
+          # kann Befunde des parallelen Laufs verlieren. Die übrigen Dateien
+          # enthalten Entscheidungen bzw. daraus abgeleitete Zustände. Keine
+          # Seite raten oder automatisch verwerfen: beide Stände sichern und
+          # fachlich/strukturell abgleichen; anschließend Akte neu ableiten.
+          echo "    ↪ Faktenfrische-Konflikt: beide Fassungen prüfen; keine automatische Übernahme ($f)."
+          safe=0
+          ;;
+        data/research/artikel/*)
+          # Recherchedossiers bleiben laufbezogene Einzelartefakte (#497).
+          # Artikel unter content/ und die Befund-Queue oben bleiben tabu.
           git checkout --theirs -- "$f" >/dev/null 2>&1 || safe=0
           git add -- "$f"
           ;;
@@ -656,6 +659,15 @@ PYVERIFY
           else
             safe=0
           fi
+          ;;
+        content/posts/*-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu/index.md|content/posts/*-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/index.md|content/posts/*-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten/index.md)
+          # #1207: Heizöl und Ökostrom fielen zurück; der Kreditkarten-Draft
+          # wurde ebenfalls geändert und enthielt in beiden Fassungen Befunde.
+          # Auch ein Reserve-Flag bedeutet hier KEINEN Vorrang für eine alte
+          # Bot-Fassung. Beide Seiten sichern und redaktionell abgleichen;
+          # die generische Reserve-/Bestandspolitik darf keine verwerfen.
+          echo "    ↪ Faktenfrische-Konflikt: redaktionelle Artikel-Fassungen prüfen; keine automatische Übernahme ($f)."
+          safe=0
           ;;
         content/posts/*/index.md)
           # REPARATUR 15.09.2026 (Issue #295):

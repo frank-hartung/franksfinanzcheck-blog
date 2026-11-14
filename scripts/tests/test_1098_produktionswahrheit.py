@@ -29,6 +29,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -224,6 +225,23 @@ class Entscheidungsvorlage(unittest.TestCase):
         cls.befunde = [b for b in ledger.befunde_mit_status(stichtag=cls.stichtag)
                        if b["slug"] in cls.live]
         cls.text = vorlage.ZIEL.read_text(encoding="utf-8")
+
+    def test_dossier_ordnen_vorentscheidungen_ueber_alias_zu(self):
+        # Ein Datums-Lift darf eine aktive Vorentscheidung nicht in „neu“
+        # verwandeln. Andere Artikel mit derselben ID bleiben getrennt.
+        with tempfile.TemporaryDirectory() as tmp:
+            datei = Path(tmp) / "entscheidungen.yaml"
+            datei.write_text(
+                "entscheidungen:\n"
+                "- slug: alt\n  befund_id: b\n  entschieden_am: '2026-11-01'\n"
+                "- slug: mittel\n  befund_id: b\n  entschieden_am: '2026-11-02'\n"
+                "- slug: anders\n  befund_id: b\n  entschieden_am: '2026-11-03'\n",
+                encoding="utf-8")
+            with patch.object(self.vorlage, "ENTSCHEIDUNGEN", datei):
+                register = self.vorlage.entscheidungen({"alt": "mittel", "mittel": "neu"})
+            self.assertEqual([e["slug"] for e in register[("neu", "b")]], ["alt", "mittel"])
+            self.assertEqual(len(register[("anders", "b")]), 1)
+            self.assertNotIn(("alt", "b"), register)
 
     def test_jeder_offene_live_befund_steht_im_dossier(self):
         fehlend = [b["id"] for b in self.befunde if b["id"] not in self.text]

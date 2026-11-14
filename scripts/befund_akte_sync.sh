@@ -20,12 +20,15 @@ for versuch in 1 2 3 4 5; do
   git fetch --no-tags origin refs/heads/main
   git reset --hard FETCH_HEAD
   python3 scripts/faktenfrische_befund_akte.py --schreiben
-  if git diff -I'^[[:space:]]*"erzeugt":' --quiet -- BEFUND-AKTE.md data/faktenfrische_befunde_state.json; then
-    git checkout -- BEFUND-AKTE.md data/faktenfrische_befunde_state.json
-    echo 'Akte und Zustand sind aktuell.'
+  # Die F4-Vorlage ist ebenfalls eine Projektion: Sie muss auf demselben
+  # Ledger-/Text- und Aktenstand liegen, sonst fehlen offene Live-Befunde.
+  python3 scripts/f4_entscheidungsvorlage.py
+  if git diff -I'^[[:space:]]*"erzeugt":' --quiet -- BEFUND-AKTE.md data/faktenfrische_befunde_state.json F4-ENTSCHEIDUNGSVORLAGE.md; then
+    git checkout -- BEFUND-AKTE.md data/faktenfrische_befunde_state.json F4-ENTSCHEIDUNGSVORLAGE.md
+    echo 'Akte, Zustand und F4-Vorlage sind aktuell.'
     exit 0
   fi
-  git add -- BEFUND-AKTE.md data/faktenfrische_befunde_state.json
+  git add -- BEFUND-AKTE.md data/faktenfrische_befunde_state.json F4-ENTSCHEIDUNGSVORLAGE.md
   python3 scripts/konfliktmarker_wache.py --staged
   git commit -m 'chore(faktenfrische): Akte und Stand nachgezogen [skip ci]'
   if git push origin HEAD:refs/heads/main; then

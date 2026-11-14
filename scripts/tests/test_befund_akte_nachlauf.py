@@ -111,11 +111,17 @@ class SyncTests(unittest.TestCase):
         shutil.copy(ROOT / 'scripts/befund_akte_sync.sh', self.seed / 'scripts')
         (self.seed / 'quelle').write_text('eins', encoding='utf-8')
         (self.seed / 'BEFUND-AKTE.md').write_text('alt', encoding='utf-8')
+        (self.seed / 'F4-ENTSCHEIDUNGSVORLAGE.md').write_text('alt', encoding='utf-8')
         (self.seed / 'data/faktenfrische_befunde_state.json').write_text('alt', encoding='utf-8')
         (self.seed / 'scripts/faktenfrische_befund_akte.py').write_text(
             "from pathlib import Path\ns = Path('quelle').read_text()\n"
             "Path('BEFUND-AKTE.md').write_text(s)\n"
             "Path('data/faktenfrische_befunde_state.json').write_text(s)\n", encoding='utf-8')
+        (self.seed / 'scripts/f4_entscheidungsvorlage.py').write_text(
+            "import os\nfrom pathlib import Path\n"
+            "if os.environ.get('F4_FAIL'): raise SystemExit(2)\n"
+            "Path('F4-ENTSCHEIDUNGSVORLAGE.md').write_text(Path('quelle').read_text())\n",
+            encoding='utf-8')
         (self.seed / 'scripts/konfliktmarker_wache.py').write_text('pass\n', encoding='utf-8')
         self.git('-C', str(self.seed), 'add', '.')
         self.git('-C', str(self.seed), 'commit', '-m', 'initial')
@@ -140,6 +146,15 @@ class SyncTests(unittest.TestCase):
         r = self.sync(); self.assertEqual(r.returncode, 0, r.stderr)
         self.assertEqual(sha, self.git('--git-dir', str(self.origin), 'rev-parse', 'main'))
         self.assertEqual(self.git('--git-dir', str(self.origin), 'show', 'main:BEFUND-AKTE.md'), 'eins')
+        self.assertEqual(self.git('--git-dir', str(self.origin), 'show',
+                                  'main:F4-ENTSCHEIDUNGSVORLAGE.md'), 'eins')
+
+    def test_f4_erzeugungsfehler_veroeffentlicht_nichts(self):
+        r = self.sync(dict(self.env, F4_FAIL='1'))
+        self.assertNotEqual(r.returncode, 0)
+        for path in ('BEFUND-AKTE.md', 'F4-ENTSCHEIDUNGSVORLAGE.md',
+                     'data/faktenfrische_befunde_state.json'):
+            self.assertEqual(self.git('--git-dir', str(self.origin), 'show', 'main:' + path), 'alt')
 
     def test_push_rennen_berechnet_auf_neuem_stand(self):
         bindir = self.base / 'bin'; bindir.mkdir()
@@ -159,7 +174,8 @@ exec "{real_git}" "$@"
         env = dict(self.env, PATH=str(bindir) + os.pathsep + os.environ['PATH'],
                    OTHER=str(self.other), RACE_DONE=str(self.base / 'done'))
         r = self.sync(env); self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
-        for path in ('quelle', 'BEFUND-AKTE.md', 'data/faktenfrische_befunde_state.json'):
+        for path in ('quelle', 'BEFUND-AKTE.md', 'F4-ENTSCHEIDUNGSVORLAGE.md',
+                     'data/faktenfrische_befunde_state.json'):
             self.assertEqual(self.git('--git-dir', str(self.origin), 'show', 'main:' + path), 'zwei')
 
     def test_unsauberes_checkout_und_falscher_ref_stoppen(self):
@@ -202,7 +218,10 @@ class WorkflowTests(unittest.TestCase):
 
     def test_faktenlauf_committet_auch_nur_akte(self):
         text = (ROOT / '.github/workflows/faktenfrische.yml').read_text(encoding='utf-8')
-        self.assertIn('git status --porcelain -- content/ data/ FAKTENFRISCHE-REPORT.md BEFUND-AKTE.md', text)
+        self.assertIn('git status --porcelain -- content/ data/ FAKTENFRISCHE-REPORT.md BEFUND-AKTE.md F4-ENTSCHEIDUNGSVORLAGE.md', text)
+        self.assertIn('python3 scripts/f4_entscheidungsvorlage.py', text)
+        self.assertIn("steps.akte.outcome == 'failure'", text)
+        self.assertIn('set -Eeuo pipefail\n          python3 scripts/faktenfrische_befund_akte.py', text)
 
 
 if __name__ == '__main__':

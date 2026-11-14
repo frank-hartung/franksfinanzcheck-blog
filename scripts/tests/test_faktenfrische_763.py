@@ -104,6 +104,87 @@ def paragraphs(text):
     return [norm(p) for p in re.split(r'\n\s*\n', text) if p.strip()]
 
 
+def ausstehende_f4_folgepruefung(befund, entscheidungen, fassungen, aliases):
+    """Ein alter, entschieden gewesener Befund bleibt für F4 OFFEN.
+
+    Das ist weder eine inhaltliche Entwarnung noch eine Folgeentscheidung.
+    Für den historischen #763-Regressionstest unterscheiden wir lediglich
+    die erneute Prüfung eines bereits dokumentierten Befunds an verändertem
+    Text von einem neuen Befund. Nur ein belegter Original-Fassungsanker und
+    eine echte frühere Entscheidung zählen; ein neuer Fund oder eine neu
+    gemeldete Fassung darf nicht als solche Folgeprüfung verschwinden.
+    """
+    import faktenfrische_befund_ledger as ledger
+
+    slug = ledger.canonical_slug(str(befund.get('slug') or ''), aliases)
+    eintrag = dict(befund, slug=slug)
+    if ledger.fassung_status(eintrag, fassungen, KORRIGIERT_AM)['status'] != 'ueberholt':
+        return False
+    befund_hashes = {befund.get('fassung_sha256'), befund.get('text_sha256')}
+    befund_hashes = {h for h in befund_hashes if isinstance(h, str)
+                     and ledger.HASH_RE.fullmatch(h)}
+    try:
+        gesehen = dt.date.fromisoformat(str(befund.get('zuletzt_gesehen') or '')[:10])
+    except ValueError:
+        return False
+    for (entschiedener_slug, befund_id), entscheidung in entscheidungen.items():
+        if (befund_id != befund.get('id')
+                or ledger.canonical_slug(entschiedener_slug, aliases) != slug
+                or entscheidung.get('befund_fassung') not in befund_hashes
+                or not ledger.HASH_RE.fullmatch(str(entscheidung.get('geprueft_fassung') or ''))):
+            continue
+        try:
+            entschieden_am = dt.date.fromisoformat(str(entscheidung.get('entschieden_am') or '')[:10])
+        except ValueError:
+            continue
+        if gesehen <= entschieden_am:
+            return True
+    return False
+
+
+class Faktenfrische763FolgepruefungTests(unittest.TestCase):
+    """Gegenproben: Die F4-Unterscheidung ist kein Freibrief für neue Funde."""
+
+    def setUp(self):
+        self.alt_slug = '2026-10-14-beispiel'
+        self.slug = '2026-10-25-beispiel'
+        self.aliases = {self.alt_slug: self.slug}
+        self.befund = {'slug': self.slug, 'id': 'befund-1',
+                       'fassung_sha256': 'a' * 64, 'text_sha256': 'b' * 64,
+                       'zuletzt_gesehen': '2026-11-11 12:08 UTC'}
+        self.entscheidungen = {(self.alt_slug, 'befund-1'): {
+            'befund_fassung': 'a' * 64, 'geprueft_fassung': 'c' * 64,
+            'entschieden_am': '2026-11-11'}}
+        self.fassungen = {self.slug: {'text': 'd' * 64, 'pruef': 'e' * 64}}
+
+    def pruefe(self, befund=None, entscheidungen=None, fassungen=None):
+        return ausstehende_f4_folgepruefung(
+            self.befund if befund is None else befund,
+            self.entscheidungen if entscheidungen is None else entscheidungen,
+            self.fassungen if fassungen is None else fassungen, self.aliases)
+
+    def test_ueberholte_folgepruefung_wird_als_solche_erkannt(self):
+        self.assertTrue(self.pruefe())
+
+    def test_neuer_befund_oder_fremde_entscheidung_bleibt_rot(self):
+        self.assertFalse(self.pruefe(entscheidungen={}))
+        self.assertFalse(self.pruefe(befund=dict(self.befund, id='neu')))
+        self.assertFalse(self.pruefe(entscheidungen={
+            ('2026-10-25-fremd', 'befund-1'): next(iter(self.entscheidungen.values()))}))
+
+    def test_neue_fassung_oder_neuer_lauf_bleibt_rot(self):
+        self.assertFalse(self.pruefe(befund=dict(
+            self.befund, fassung_sha256='f' * 64, text_sha256='f' * 64)))
+        self.assertFalse(self.pruefe(befund=dict(
+            self.befund, zuletzt_gesehen='2026-11-12 09:00 UTC')))
+        self.assertFalse(self.pruefe(befund=dict(self.befund, zuletzt_gesehen='')))
+
+    def test_aktuelle_oder_fehlende_seite_ist_keine_alte_folgefassung(self):
+        self.assertFalse(self.pruefe(fassungen={self.slug: {
+            'text': 'b' * 64, 'pruef': 'a' * 64}}))
+        self.assertFalse(self.pruefe(fassungen={}))
+
+
 class Faktenfrische763Tests(unittest.TestCase):
     """Die neun Befunde aus dem Report vom 15.10.2026 – je einer pro Art.
 
@@ -255,6 +336,29 @@ class Faktenfrische763Tests(unittest.TestCase):
         for need in (r'120 (euro|€)', r'500 (euro|€)', r'150 euro statt 300 euro',
                      r'frei gewählte annahmen'):
             self.assertTrue(re.search(need, joined), f'Budget-Anker „{need}“ fehlt.')
+
+    def test_reisekasse_praezisierungen_und_recherche_bleiben_erhalten(self):
+        """Die Lesbarkeitsreparatur darf keine rechtliche Pauschalaussage öffnen.
+
+        Die drei früheren F4-Entscheidungen sind damit nicht neu getroffen;
+        der fassungsgebundene Ledger entscheidet über den offenen Status.
+        """
+        fm, body = read(REISE)
+        pin = norm(fm['pin_description'])
+        self.assertRegex(pin, r'(zwölf|12) monate')
+        self.assertIn('annahmen', pin)
+        self.assertNotIn('bis zum sommer', pin)
+        datenschutz = body.split('### Sind Cashback‑Apps sicher für meine Daten?', 1)[1].split('###', 1)[0]
+        self.assertEqual(datenschutz.count('Das lässt sich nicht pauschal zusagen.'), 1)
+        self.assertIn('DSGVO', datenschutz)
+        self.assertIn('unter bestimmten Voraussetzungen', datenschutz)
+        flug = body.split('### Welche Regeln gelten für Flugreisen?', 1)[1].split('###', 1)[0]
+        self.assertIn('Drittstaat', flug)
+        self.assertIn('EU-Fluggesellschaft', flug)
+        self.assertNotIn('von und nach Deutschland', flug)
+        urls = {q['url'] for q in fm['quellen']}
+        self.assertIn('https://www.verbraucherzentrale.de/wissen/digitale-welt/datenschutz/datenauskunft-so-erfahren-sie-was-unternehmen-ueber-sie-wissen-44238', urls)
+        self.assertIn('https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/unterwegs-sein/fluggastrechte-auf-einen-blick-wann-habe-ich-welchen-anspruch-10366', urls)
 
 
 class Faktenfrische763MetaTests(unittest.TestCase):
@@ -424,38 +528,47 @@ class Faktenfrische763MetaTests(unittest.TestCase):
                 self.assertFalse(finds, f'Harte Textverständnis-Regeln: {finds}')
 
     def test_faktenfrische_queue_haelt_befunde_geschlossen(self):
-        """Kein OFFENER BEFUND und keine ARBEIT darf die zwei Slugs führen.
+        """Neue Befunde bleiben rot; alte F4-Folgeprüfungen bleiben sichtbar.
 
-        MESSHÖHE (07.11.2026, #1072; Dauerheilung 10.11.2026, #1126)
-        -------------------------------------------------------------
-        Maßgeblich sind die FACHLICHEN Befunde, nicht die Arbeitsliste.
-        Zwei Fehler waren zu trennen:
+        #763 prüft die Korrektur der neun Befunde vom 15.10.; F4 prüft jede
+        spätere Fassung gesondert. Drei spätere Reisekasse-Befunde wurden am
+        11.11. menschlich für eine andere Fassung entschieden und sind heute
+        zu Recht erneut offen. Eine erneute menschliche Prüfung können weder
+        dieser Test noch die neun Text-Invarianten ersetzen.
 
-          * Der Test las `offen` und hielt das für „offene Befunde“. Eine
-            turnusgemäß wieder aufgenommene Seite („frisch geprüft vor
-            23 Tagen") machte ihn am 07.11. rot – ein Fehlalarm.
-          * Die Queue selbst war widersprüchlich: `offen` führte Seiten, die
-            im selben Eintrag `faellig: false` und eine Frist in der Zukunft
-            trugen. Genau das meldet #1126.
-
-        Beides ist geheilt. `offen` führt nur noch ARBEIT (fällig,
-        befundbehaftet, abgebrochen); der Vorlauf steht in `vorlauf`. Der
-        Test prüft deshalb (a) das Ledger, (b) dass die Seiten nirgends als
-        Arbeit geführt werden und (c) dass kein Vorratseintrag einen Befund
-        mitschleppt. Ein neuer Lauf, der die Fehler erneut meldet, schreibt
-        sie ins Ledger und macht diese Prüfung rot.
+        Ein neuer/erneut gemeldeter Befund ohne passend gebundene Entscheidung
+        macht diese Regression weiterhin rot. Bereits früher entschiedene,
+        heute fassungsoffene Fälle müssen dagegen im echten Ledger, in der
+        Befundakte und (bei Live-Seiten) in der F4-Vorlage erscheinen. Die
+        Arbeitslisten-Trennung von #1126 bleibt unabhängig davon geschützt.
         """
+        import faktenfrische_befund_akte as akte
         import faktenfrische_befund_ledger as ledger
         kerne = {kern_von(s) for s in (HEIZ, REISE)}
-        for eintrag in ledger.offene_befunde(
-                ROOT / "data" / "faktenfrische_queue.json"):
-            kern = kern_von(eintrag.get("slug") or "")
-            self.assertNotIn(kern, kerne,
-                             f'Offener Befund zurückgekehrt für '
-                             f'{eintrag.get("slug")}: {eintrag.get("typ")} – '
-                             f'{eintrag.get("text")}')
-        self.assertFalse(offene_befunde((HEIZ, REISE)),
-                         "Queue meldet offenen Befund für eine der zwei Seiten")
+        fassungen, aliases = ledger.bestand_identitaeten()
+        entscheidungen = ledger.entscheidungen_laden()
+        offen = [eintrag for eintrag in ledger.offene_befunde(
+            ROOT / "data" / "faktenfrische_queue.json")
+                 if kern_von(eintrag.get('slug')) in kerne
+                 or kern_von(eintrag.get('ursprungs_slug')) in kerne]
+        self.assertEqual(offen, offene_befunde((HEIZ, REISE)),
+                         'Die Gleis-Sicht darf offene Befunde nicht ausblenden')
+        folge = [e for e in offen if ausstehende_f4_folgepruefung(
+            e, entscheidungen, fassungen, aliases)]
+        neu = [e for e in offen if e not in folge]
+        self.assertFalse(neu, f'Neuer oder erneut gemeldeter Befund: {neu}')
+
+        status = json_load(ROOT / 'data' / 'faktenfrische_befunde_state.json')
+        akten_ids = {(e.get('slug'), e.get('id')) for e in status.get('befunde', [])}
+        f4_text = (ROOT / 'F4-ENTSCHEIDUNGSVORLAGE.md').read_text(encoding='utf-8')
+        live = akte.live_seiten()
+        for eintrag in folge:
+            self.assertIn((eintrag['slug'], eintrag['id']), akten_ids,
+                          'Offene Folgeprüfung fehlt in der Befundakte')
+            if eintrag['slug'] in live:
+                self.assertIn(eintrag['id'], f4_text,
+                              'Offener Live-Befund fehlt in der F4-Vorlage')
+
         self.assertFalse(eintraege_in_offen((HEIZ, REISE)),
                          "Frisch geprüfte Seite steht als ARBEIT in `offen` "
                          "(#1126) – sie gehört in den Vorlauf")

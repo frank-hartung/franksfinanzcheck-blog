@@ -196,10 +196,6 @@
 {{- if gt (len $citList) 0 -}}
   {{- $out = merge $out (dict "citation" $citList) -}}
 {{- end -}}
-{{- with .Params.faktencheck -}}
-  {{- $out = merge $out (dict "sdDatePublished" (printf "%v" .)) -}}
-{{- end -}}
-
 {{- /* ---------- KI-Herkunft → schema.org/creditText (#1028) ----------
      `creditText` ist die schema.org-Eigenschaft für einen maschinenlesbaren
      Quellen-/Dankvermerk am Werk. Sie trägt dieselbe Aussage wie der

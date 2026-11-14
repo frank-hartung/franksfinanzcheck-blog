@@ -4,12 +4,10 @@
 Scorecard blockiert, bis der Herausgeber die heutigen Fassungen bestätigt.
 Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
-**Bezugsstand: 2026-11-12** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
+**Bezugsstand: 2026-11-14** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
 
-**87 offene Live-Befunde auf 21 Artikeln.** Davon sind **77** bereits früher entschieden und durch eine spätere Textänderung
-wieder geöffnet worden (fassungsgebundene Bindung, kein Rückfall). **10** Befunde sind neu.
-**83 offene Live-Befunde auf 21 Artikeln.** Davon sind **80** bereits früher entschieden und durch eine spätere Textänderung
-wieder geöffnet worden (fassungsgebundene Bindung, kein Rückfall). **3** Befunde sind neu.
+**97 offene Live-Befunde auf 25 Artikeln.** Für **78** gibt es frühere Entscheidungen zu diesem Befund;
+die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **19** Befunde haben keine frühere aktive Entscheidung.
 
 Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus `data/faktenfrische_befunde_state.json`,
 `data/faktenfrische_entscheidungen.yaml`, dem Scorecard-Siegel und den heutigen Artikeln.
@@ -17,23 +15,29 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 
 ## Neu ohne frühere Entscheidung
 
-- `7a87eaaa2b863ba8cc46` · `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` · Ein relevanter regulatorischer Rahmen (z. B. Vorgaben der Bundesnetzagentur oder BDEW) wird nicht genannt, obwohl die Fundstelle darauf hinweist, dass solche Vorgaben existieren.
-- `9d67a5e6bd11212c7c1e` · `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` · Die Aussage, dass bestimmte Gerätegruppen (TV‑Ecke, Homeoffice, alte Audio‑Technik) zuerst zu senken „lohnt“, wird ohne messbare Daten oder Vergleichskriterien gemacht.
-- `a54abc1cad73d20fb689` · `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` · Die konkreten Jahreskosten (z. B. 32 € für 10 W Standby) beruhen auf dem nicht belegten Strompreis und werden nicht als Modellrechnung gekennzeichnet.
-- `a7d1cf6485921e117919` · `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` · Der angegebene durchschnittliche Strompreis von 37,3 Cent/kWh (BDEW‑Schnitt) wird ohne Quellenangabe genannt.
-- `a7f69a854430d62a4a3e` · `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` · Die Empfehlung, dass ein günstigerer Arbeitspreis der zweite wichtigste Hebel sei, fehlt jede Quelle oder regulatorische Einordnung.
-- `33278b9e7942ebfdbbac` · `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` · Definition des Begriffs „Last Minute“ (maximal 14 Tage zwischen Buchung und Abreise) wird mit dem Deutschen Reiseverband angegeben, jedoch fehlt ein Nachweis.
-- `6ad7358a9afcfef3babb` · `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` · Angabe, dass Preisalarme keinen Tiefstpreis garantieren, wird nicht durch konkrete Zahlen oder Vergleichsstudien belegt.
-- `7c375a3e1a9bfab1468c` · `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` · Hinweis auf § 651r BGB (Insolvenzsicherung bei Pauschalreisen) enthält keinen Verweis auf eine Rechtsquelle oder Verbraucherzentrale‑Information.
-- `ea11d36614fa115503b4` · `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` · Behauptung, dass Nachlässe von bis zu 50 % nur Einzelfälle sind, wird ohne Quellenangabe präsentiert.
-- `f7b1c869dd8e442eaf16` · `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` · Aussage, dass der „beste Zeitpunkt zum Buchen“ ein Modellwert sei, bleibt vage und ohne messbare Daten oder Studien untermauert.
 - `6b5921bdc76490587167` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Seit 2026 nutzen die großen Anbieter die Technik mit dem Namen Vectoring; das ist ein Modellwert. Sie senkt das Rauschen auf der Leitung. In der Stadt sind damit bis zu 250 Mbps stabil drin.
 - `8436b91bdb63a6316979` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Preisgarantie über mindestens 12 Monate; ohne Garantie darf der Anbieter bald erhöhen, oft um bis zu 10 %.
 - `a4ff01e649b789f19e6a` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Für 50 Mbps zahlst du heute meist ca. 20–40 € im Monat; das ist ein Beispielwert.
+- `4d0125136c5b940946e4` · `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` · Lichtsteuerung: Bedarfssteuerung – 2 bis 5 % des Stromverbrauchs.
+- `7aeb2098034d16a46885` · `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` · Anbieter locken mit Neukundenboni, die nach der üblichen Erstlaufzeit entfallen; danach steigt der Arbeitspreis massiv an.
+- `ea97b5dd6695de127fd2` · `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` · Heizungssteuerung: Smarte Thermostate können Heizkosten einsparen. Die Spanne von 10 bis 25 % ist ein Beispielwert aus der Rechnung unten.
+- `1dc0f20f9ab3a6b783bc` · `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten` · Behauptung, dass ein fehlender Ausweis zu empfindlichen Bußgeldern führt, fehlt eine belegbare Quelle.
+- `7b94ca07b36c0b7cb1cc` · `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten` · Aussage, dass Baudenkmäler von der Ausweispflicht befreit sind, wird nicht durch die angegebene Quelle gestützt.
+- `985f506ee04087bf7253` · `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten` · Angabe, dass ein Wechsel von Energieeffizienzklasse F zu C über 2.000 € Jahresersparnis bringt, ist unbelegt.
+- `ee321fa37210590f7e9b` · `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten` · Keine Quelle für die Angabe, dass ein Energieausweis ein volles Jahrzehnt gültig ist, sofern keine größeren Umbauten erfolgen.
+- `19ab248b17415c73edfb` · `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` · Thermostat um 1 °C senken | 4 % – 6 % der Heizkosten
+- `372bb51051e8bd7c5f71` · `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` · Viele Anbieter belohnen einen niedrigen Verbrauch mit besseren Konditionen
+- `6aaff85e3a7591d0c5b2` · `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` · für dich entstehen keine Mehrkosten
+- `7e6087a4117a857a92c8` · `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` · Durch diese zwei Maßnahmen sparst du in dieser Beispielrechnung jährlich rund 140 €
+- `e28b4ad1f6d608d2ec77` · `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` · Strom (LED‑Umrüstung) | 100 € – 140 € | etwa 8 %
+- `04ae33652c1c5eb4e2b8` · `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` · Ein kurzer Check spart dir oft mehrere hundert Euro im Jahr.
+- `5223a3c7287ff81939cd` · `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` · Faustregel: ... mehr als 5 % deines Nettoeinkommens ... Meist sinken diese Kosten um über 80 %
+- `9800545ae945ec280b34` · `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` · Ein Wechsel ist für dich in der Regel komplett kostenlos als Beispielwert.
+- `bc0e4f2eb357a682c674` · `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` · Bei einem normalen Einkommen sollten die Gebühren fast Null sein.
 
 ## `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas`
 
-- Datei-SHA256 (heute): `43bea50827aa5dd18a0d64e0a1fddc9724526e6b9368fc27260f4a7b934a1a0c`
+- Datei-SHA256 (heute): `3867377b50060312656be633a4bf47b8257f8dff9532e279b5983c055a0bb49b`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -74,7 +78,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026`
 
-- Datei-SHA256 (heute): `cfe312477a65d85c976d7fa9c2f450a7e648a7a6fbec77f8195facae75144498`
+- Datei-SHA256 (heute): `efbf890ff4aec5965d8ff8306f46e4b263d7c63cf012cd6e899e38d24d943dbf`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -115,7 +119,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit`
 
-- Datei-SHA256 (heute): `7018b66e59b1bcfa05d858ac191f1192e8acc49d32093b3cb4c4ee1e0001be9f`
+- Datei-SHA256 (heute): `cd3d8f297e7373a5089b090761b23cd9492e1fbff4365ed33f89b013c0ae5b10`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -184,7 +188,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren`
 
-- Datei-SHA256 (heute): `9e734c481a719be5133ed29b7da89084c5c38318d5b7aaae08462dd5343bb6cd`
+- Datei-SHA256 (heute): `7f4491dfde027e982a05d7d60913496b05cf76b36cc9ec2c9aaf4b1336395cdd`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -249,7 +253,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden`
 
-- Datei-SHA256 (heute): `fe4da273026dc45590952cc30dda0347a439572d44d7e269c6d9370186e7dfdb`
+- Datei-SHA256 (heute): `eb1284a9947f4059bef9626da2bfe88c20a8904d026a3225fed69fdf5ce30984`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -313,7 +317,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub`
 
-- Datei-SHA256 (heute): `f4611f6f494dccd48c989316bf35e444b48ff95612cf28d84a41b917d309fa19`
+- Datei-SHA256 (heute): `aa1c55b1ee6bba0dd79f83ddb7fa15eccf0639d2397b3adb6876e15afcd3284d`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -381,7 +385,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps`
 
-- Datei-SHA256 (heute): `ea4c07b6ff241f21b932b0e9c99b7e75f4495d3967956bf5465b7fbc9d8d3277`
+- Datei-SHA256 (heute): `cef307629ad061c2fafe8dee40649f8a286be8281b70753b209bb4a54dd94b55`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -425,7 +429,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen`
 
-- Datei-SHA256 (heute): `c6f053b5d0891db6d90bf8e09c35323767f07cb1102531c3011c9b7e0e013199`
+- Datei-SHA256 (heute): `c712e60c5b1f151d850f93734af32d77b0edd1f0e1577cba47405c779a6e7fb9`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -488,7 +492,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn`
 
-- Datei-SHA256 (heute): `b01232e40215bf02ade7c1d602cd49444600f28799d932f46301383ebcf017f3`
+- Datei-SHA256 (heute): `e734792bef3461b04b53f22d8bb8defafa87454f344ec0acdf664a9940751d4f`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -551,7 +555,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen`
 
-- Datei-SHA256 (heute): `bc00bcd7e3b3b1e5c00d2726d2d25cea9b85c94146a84314f60ad55da524eac1`
+- Datei-SHA256 (heute): `19d3ac14265c278b2e87269552599c4fdb6312780812513a83ad0383767c2240`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -615,7 +619,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich`
 
-- Datei-SHA256 (heute): `acd64b0c73ddb4a4c7ca105b77f23ae33eee405a95b687d86ff9b03d098a16a1`
+- Datei-SHA256 (heute): `1c5ebb2a24f143b29d0aa2d971ba5bb846820e9d1c596f7c148cdb3880d72338`
 - Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -646,7 +650,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum`
 
-- Datei-SHA256 (heute): `a5a42d3c4bfe74c05034eacbb2379f3c1a166ef88a792fe33dcd70fc957c0a0c`
+- Datei-SHA256 (heute): `d1b6b81fa8354c73b3b10ff4096922a3dca1bd0cc62101b052b9db376d5958a5`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -687,7 +691,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler`
 
-- Datei-SHA256 (heute): `2485db024268708d641b80af15d76aeaffdd1a2d3a851ba9472535dc7dafb95c`
+- Datei-SHA256 (heute): `235e6ed4099954eac29e6388ab1bae4326bec2924b4c193523794546b114d028`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -728,7 +732,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag`
 
-- Datei-SHA256 (heute): `cd9b385db0377231038ca61eadf0d637e1d7331b799bd4d4d539b8b7686f699c`
+- Datei-SHA256 (heute): `2c0939529353ce62221e98edba23e07a2513ba389cd49de1463ec86d1bf2a1ec`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -770,7 +774,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026`
 
-- Datei-SHA256 (heute): `1c62f1509053adae76bbf78dbd3f6a15710943df1a06c97ffd532a46a82eb344`
+- Datei-SHA256 (heute): `d9bb67f46ddfe9332c4395df16288ec64e2be13e237eb1a54aee226b88ba77d7`
 - Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -802,7 +806,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser`
 
-- Datei-SHA256 (heute): `e842f0aeb31496611e1223dfadd8dbf98d1e93e0e930a1b8cf8a984041d6c7a9`
+- Datei-SHA256 (heute): `e974c8854d98f5c3087961c9935145c6cc3b0006e517c7de9670f267903c56db`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -865,7 +869,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor`
 
-- Datei-SHA256 (heute): `51a70f17145738a5873653bd675e6ad7b0b0e8d40c23c5f0ed015389e5b4a783`
+- Datei-SHA256 (heute): `85c27b558f696e272486aca45dc5b896a5a76a5696cb69a7c0623156c8e40813`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -928,7 +932,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp`
 
-- Datei-SHA256 (heute): `f58e1f9805f0c9ea56e092bf12fa6b1cf12791ac72e773c09b1a1ac249412b88`
+- Datei-SHA256 (heute): `f79f4a62375467124e2b60200923ad633038b09da9cef7e49e7ecb21d449ff69`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -991,7 +995,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss`
 
-- Datei-SHA256 (heute): `e539597aff23833a43fd04bab059f5ee4c3f26541961b26b42a1d037ca3952c5`
+- Datei-SHA256 (heute): `8869ee88315fcf7e0c65efafd676cf1d8da7bd0fe8b90886b96acc0ef705a8c7`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1027,7 +1031,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust`
 
-- Datei-SHA256 (heute): `6907defc1f56c3352dce52ccea25d125c7f1aa8301a6ba4489c35e1f83ad1570`
+- Datei-SHA256 (heute): `44c0eb036d54cc18a2779dc051dce3905328ce3186de405c49999acf19eb4ce7`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1062,140 +1066,232 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 **Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
 
-> Frank Hartung hat die konkrete neue Fassung am 07.11.2026 in der Arena-Session bestätigt. Der allgemeine VZ-Übersichtslink ist durch den konkreten Ratgeber Online-Reisebüros ersetzt und um einen Buchungscheck für Leistungsangaben, Anbieter, Endpreis und Storno ergänzt.
-
-Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
-
-## `2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen`
-
-- Datei-SHA256 (heute): `6b994161e047d28d3f0958905dd549b169ebbe2dc908adea3033b81d42310a61`
-- Offene Live-Befunde: **5**
-
-| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
-|---|---|---|---|---|
-| `7067eabb89a917ae67a4` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu unklaren Angeboten und Problemen mit Online-Buchu… |
-| `af2ccb4222eeb195222f` | praezision | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht automatisch, ob das Auto zum individuellen Url… |
-| `d9c8b522bf1dcaed0340` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Verbraucherzentrale beschreibt, dass sich eine Pauschalreise unter bestimmten Bedingungen auf eine andere Person… |
-| `e2975509f3f130de0755` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Verbraucherzentrale empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im Blick zu behalten. |
-| `f1704e45e970a8f4b078` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Bei einer Pauschalreise gilt die Mitteilung als rechtzeitig, wenn sie dem Veranstalter spätestens sieben Tage vor Rei… |
-
-### `7067eabb89a917ae67a4`
-
-**Befund:** Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu unklaren Angeboten und Problemen mit Online-Buchungen.
-
-**Frühere Entscheidung (2026-11-04):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 04.11.2026)
-
-> Verbraucherzentrale-Hinweise zu Buchungsproblemen, Übertragbarkeit von Pauschalreisen (§ 651e BGB, Sieben-Tage-Frist) und Budgetplanung artikel-eigen ergänzt; Mietwagen-Aussage präzisiert.
-
-Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
-
-### `af2ccb4222eeb195222f`
-
-**Befund:** Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht automatisch, ob das Auto zum individuellen Urlaub passt – ohne Messgröße bleibt die Aussage ungenau.
-
-**Frühere Entscheidung (2026-11-04):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 04.11.2026)
-
-> Verbraucherzentrale-Hinweise zu Buchungsproblemen, Übertragbarkeit von Pauschalreisen (§ 651e BGB, Sieben-Tage-Frist) und Budgetplanung artikel-eigen ergänzt; Mietwagen-Aussage präzisiert.
-
-Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
-
-### `d9c8b522bf1dcaed0340`
-
-**Befund:** Die Verbraucherzentrale beschreibt, dass sich eine Pauschalreise unter bestimmten Bedingungen auf eine andere Person übertragen lässt.
-
-**Frühere Entscheidung (2026-11-04):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 04.11.2026)
-
-> Verbraucherzentrale-Hinweise zu Buchungsproblemen, Übertragbarkeit von Pauschalreisen (§ 651e BGB, Sieben-Tage-Frist) und Budgetplanung artikel-eigen ergänzt; Mietwagen-Aussage präzisiert.
-
-Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
-
-### `e2975509f3f130de0755`
-
-**Befund:** Die Verbraucherzentrale empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im Blick zu behalten.
-
-**Frühere Entscheidung (2026-11-04):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 04.11.2026)
-
-> Verbraucherzentrale-Hinweise zu Buchungsproblemen, Übertragbarkeit von Pauschalreisen (§ 651e BGB, Sieben-Tage-Frist) und Budgetplanung artikel-eigen ergänzt; Mietwagen-Aussage präzisiert.
-
-Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
-
-### `f1704e45e970a8f4b078`
-
-**Befund:** Bei einer Pauschalreise gilt die Mitteilung als rechtzeitig, wenn sie dem Veranstalter spätestens sieben Tage vor Reisebeginn zugeht (§ 651e BGB).
-
-**Frühere Entscheidung (2026-11-04):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 04.11.2026)
-
-> Verbraucherzentrale-Hinweise zu Buchungsproblemen, Übertragbarkeit von Pauschalreisen (§ 651e BGB, Sieben-Tage-Frist) und Budgetplanung artikel-eigen ergänzt; Mietwagen-Aussage präzisiert.
 > Am heutigen Text geprüft (SHA-256 aaf1b8fc6568): Die verlangte Quelle steht im Abschnitt „Welche Kosten gehören in ein Campingbudget?“ inline – „Die Verbraucherzentrale erklärt in ihrem Ratgeber [Online-Reisebüros](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen/onlinereisebueros-so-vermeiden-sie-pr“. Der Befund trifft die heutige Fassung damit nicht mehr.
 
 Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
-## `2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang`
+## `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt`
 
-- Datei-SHA256 (heute): `29813f27905b35508ec50aad059034d17dc7f6613a5eca8d80ddd73f1eca80af`
+- Datei-SHA256 (heute): `522d1a3657ed9b383d08d0c40417ab31021341547dde1556ab1a0ea9899c615b`
+- Offene Live-Befunde: **3**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `4d0125136c5b940946e4` | luecke | **neu** | 5 % in Zeile 12 gekennzeichnet | Lichtsteuerung: Bedarfssteuerung – 2 bis 5 % des Stromverbrauchs. |
+| `7aeb2098034d16a46885` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Anbieter locken mit Neukundenboni, die nach der üblichen Erstlaufzeit entfallen; danach steigt der Arbeitspreis massi… |
+| `ea97b5dd6695de127fd2` | luecke | **neu** | 25 % in Zeile 12 gekennzeichnet | Heizungssteuerung: Smarte Thermostate können Heizkosten einsparen. Die Spanne von 10 bis 25 % ist ein Beispielwert au… |
+
+### `4d0125136c5b940946e4`
+
+**Befund:** Lichtsteuerung: Bedarfssteuerung – 2 bis 5 % des Stromverbrauchs.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 12: 5 % – gekennzeichnet („beispielwert“)
+
+### `7aeb2098034d16a46885`
+
+**Befund:** Anbieter locken mit Neukundenboni, die nach der üblichen Erstlaufzeit entfallen; danach steigt der Arbeitspreis massiv an.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `ea97b5dd6695de127fd2`
+
+**Befund:** Heizungssteuerung: Smarte Thermostate können Heizkosten einsparen. Die Spanne von 10 bis 25 % ist ein Beispielwert aus der Rechnung unten.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 12: 25 % – gekennzeichnet („beispielwert“)
+
+## `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten`
+
+- Datei-SHA256 (heute): `0eac1e40d006bd5159aa965f3f7b1e1589423151ce51cafd9aadd5908e290c0d`
+- Offene Live-Befunde: **4**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `1dc0f20f9ab3a6b783bc` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Behauptung, dass ein fehlender Ausweis zu empfindlichen Bußgeldern führt, fehlt eine belegbare Quelle. |
+| `7b94ca07b36c0b7cb1cc` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Aussage, dass Baudenkmäler von der Ausweispflicht befreit sind, wird nicht durch die angegebene Quelle gestützt. |
+| `985f506ee04087bf7253` | luecke | **neu** | nicht mehr im Text: 2.000 € | Angabe, dass ein Wechsel von Energieeffizienzklasse F zu C über 2.000 € Jahresersparnis bringt, ist unbelegt. |
+| `ee321fa37210590f7e9b` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Keine Quelle für die Angabe, dass ein Energieausweis ein volles Jahrzehnt gültig ist, sofern keine größeren Umbauten… |
+
+### `1dc0f20f9ab3a6b783bc`
+
+**Befund:** Behauptung, dass ein fehlender Ausweis zu empfindlichen Bußgeldern führt, fehlt eine belegbare Quelle.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `7b94ca07b36c0b7cb1cc`
+
+**Befund:** Aussage, dass Baudenkmäler von der Ausweispflicht befreit sind, wird nicht durch die angegebene Quelle gestützt.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `985f506ee04087bf7253`
+
+**Befund:** Angabe, dass ein Wechsel von Energieeffizienzklasse F zu C über 2.000 € Jahresersparnis bringt, ist unbelegt.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Im heutigen Text nicht mehr vorhanden: 2.000 €
+
+### `ee321fa37210590f7e9b`
+
+**Befund:** Keine Quelle für die Angabe, dass ein Energieausweis ein volles Jahrzehnt gültig ist, sofern keine größeren Umbauten erfolgen.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+## `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken`
+
+- Datei-SHA256 (heute): `e6160660df59917bae02a6666dab669ed63c5b4e7cdd23181d0560253b614551`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `4284fd2d9c9005e7af8f` | praezision | 2026-11-11 · 2. Entscheidung | kein Wert genannt (Aussage/Präzision) | Behauptung, dass Überladung der Maschine zu schnellerem Verschleiß und teuren Reparaturen führt, wird ohne konkrete D… |
-| `84e247f17354e224c973` | praezision | 2026-11-11 · 2. Entscheidung | kein Wert genannt (Aussage/Präzision) | Aussage, dass das richtige Beladen allein die Fixkosten senkt, ohne weitere Maßnahmen, ist ein pauschales Leistungsve… |
-| `a2a7dc69f10393af6531` | luecke | 2026-11-11 · 2. Entscheidung | nicht mehr im Text: 0,40 €, 0,005 € · 0,9 kWh in Zeile 19 gekennzeichnet · 0,6 kWh in Zeile 122 ohne Kennzeichnung · 22 € in Zeile 119 ohne Kennzeichnung | Die Modellrechnung (0,9 kWh/50 L bei vollem Waschgang, 0,6 kWh/35 L bei halbem Waschgang, Strompreis 0,40 €/kWh, Wass… |
-| `cb794331f1cc0c715a55` | luecke | 2026-11-11 · 2. Entscheidung | 5 € in Zeile 19 gekennzeichnet | Die Aussage, dass bei 4 Waschgängen pro Woche ein durchschnittlicher Haushalt rund 5 € jährlich an Strom‑ und Wasserk… |
-| `e6729081522126e972c2` | luecke | 2026-11-11 · 2. Entscheidung | nicht mehr im Text: 15 % · 80 % in Zeile 132 gekennzeichnet | Angabe, dass ein optimal beladener Trommel (ca. 80 % Kapazität) bis zu 15 % weniger Wasser und Energie verbraucht, wi… |
+| `19ab248b17415c73edfb` | luecke | **neu** | 4 % in Zeile 9 ohne Kennzeichnung · 6 % in Zeile 5 ohne Kennzeichnung | Thermostat um 1 °C senken \| 4 % – 6 % der Heizkosten |
+| `372bb51051e8bd7c5f71` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Viele Anbieter belohnen einen niedrigen Verbrauch mit besseren Konditionen |
+| `6aaff85e3a7591d0c5b2` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | für dich entstehen keine Mehrkosten |
+| `7e6087a4117a857a92c8` | luecke | **neu** | 140 € in Zeile 34 ohne Kennzeichnung | Durch diese zwei Maßnahmen sparst du in dieser Beispielrechnung jährlich rund 140 € |
+| `e28b4ad1f6d608d2ec77` | luecke | **neu** | 100 € in Zeile 34 ohne Kennzeichnung · 140 € in Zeile 34 ohne Kennzeichnung · 8 % in Zeile 34 ohne Kennzeichnung | Strom (LED‑Umrüstung) \| 100 € – 140 € \| etwa 8 % |
 
-### `4284fd2d9c9005e7af8f`
+### `19ab248b17415c73edfb`
 
-**Befund:** Behauptung, dass Überladung der Maschine zu schnellerem Verschleiß und teuren Reparaturen führt, wird ohne konkrete Daten oder Messgröße angegeben.
+**Befund:** Thermostat um 1 °C senken | 4 % – 6 % der Heizkosten
 
-**Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
 
-> Die Quelle steht mit Namen im Artikel: „Forum Waschen rät, die Nennbeladung des Geräts nicht zu überschreiten, weil sonst Zuverlässigkeit und Gerätesicherheit leiden können.“ Die Behauptung „teure Reparaturen“ steht nicht mehr im Text.
+- Heute in Zeile 9: 4 % – **ohne** Kennzeichnung
+- Heute in Zeile 5: 6 % – **ohne** Kennzeichnung
 
-Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+### `372bb51051e8bd7c5f71`
 
-### `84e247f17354e224c973`
+**Befund:** Viele Anbieter belohnen einen niedrigen Verbrauch mit besseren Konditionen
 
-**Befund:** Aussage, dass das richtige Beladen allein die Fixkosten senkt, ohne weitere Maßnahmen, ist ein pauschales Leistungsversprechen ohne Nennung von Mechanismen oder Grenzen.
-
-**Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
-
-> Der Artikel behauptet keinen Allein-Effekt: „Es ist ein kleiner Baustein in deinem persönlichen Fixkosten-Cockpit“, und der Abschnitt „Fixkosten-Check“ verweist auf den Tarifvergleich. Ein pauschales Leistungsversprechen ist nicht mehr enthalten.
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
 
 Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
-### `a2a7dc69f10393af6531`
+### `6aaff85e3a7591d0c5b2`
 
-**Befund:** Die Modellrechnung (0,9 kWh/50 L bei vollem Waschgang, 0,6 kWh/35 L bei halbem Waschgang, Strompreis 0,40 €/kWh, Wasserpreis 0,005 €/L) und die daraus resultierende Jahresersparnis von 22 € fehlen einer fundierten Quelle.
+**Befund:** für dich entstehen keine Mehrkosten
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `7e6087a4117a857a92c8`
+
+**Befund:** Durch diese zwei Maßnahmen sparst du in dieser Beispielrechnung jährlich rund 140 €
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 34: 140 € – **ohne** Kennzeichnung
+
+### `e28b4ad1f6d608d2ec77`
+
+**Befund:** Strom (LED‑Umrüstung) | 100 € – 140 € | etwa 8 %
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 34: 100 € – **ohne** Kennzeichnung
+- Heute in Zeile 34: 140 € – **ohne** Kennzeichnung
+- Heute in Zeile 34: 8 % – **ohne** Kennzeichnung
+
+## `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto`
+
+- Datei-SHA256 (heute): `b32493dc909ff879f2fede1acf9324d01aaba8ee9466ae444bbda03b34bd483e`
+- Offene Live-Befunde: **4**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `04ae33652c1c5eb4e2b8` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Ein kurzer Check spart dir oft mehrere hundert Euro im Jahr. |
+| `5223a3c7287ff81939cd` | luecke | **neu** | 5 % in Zeile 57 ohne Kennzeichnung · 80 % in Zeile 79 ohne Kennzeichnung | Faustregel: ... mehr als 5 % deines Nettoeinkommens ... Meist sinken diese Kosten um über 80 % |
+| `9800545ae945ec280b34` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Ein Wechsel ist für dich in der Regel komplett kostenlos als Beispielwert. |
+| `bc0e4f2eb357a682c674` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Bei einem normalen Einkommen sollten die Gebühren fast Null sein. |
+
+### `04ae33652c1c5eb4e2b8`
+
+**Befund:** Ein kurzer Check spart dir oft mehrere hundert Euro im Jahr.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `5223a3c7287ff81939cd`
+
+**Befund:** Faustregel: ... mehr als 5 % deines Nettoeinkommens ... Meist sinken diese Kosten um über 80 %
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 57: 5 % – **ohne** Kennzeichnung
+- Heute in Zeile 79: 80 % – **ohne** Kennzeichnung
+
+### `9800545ae945ec280b34`
+
+**Befund:** Ein Wechsel ist für dich in der Regel komplett kostenlos als Beispielwert.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `bc0e4f2eb357a682c674`
+
+**Befund:** Bei einem normalen Einkommen sollten die Gebühren fast Null sein.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+## `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen`
+
+- Datei-SHA256 (heute): `fac590ed6a0f6fce465d7c85014cdbf457e9afd5a4e58fc57b8534e4eda817a5`
+- Offene Live-Befunde: **3**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `98eb45f772ad7a0aac7b` | luecke | 2026-11-11 · 1. Entscheidung | 500 € in Zeile 67 gekennzeichnet · 120 € in Zeile 26 gekennzeichnet · 80 € in Zeile 25 gekennzeichnet | Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt im Text Referenzwerte (120 € Strom, 80 € Kfz), für… |
+| `b7f0d52968d89cdf8c5b` | praezision | 2026-11-11 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne Nennung konkreter rechtlicher Grundlagen (DSGVO) u… |
+| `be911855d67f998be662` | luecke | 2026-11-11 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Der Ratgeber nennt keinen Regulierungsrahmen für Reisebuchungen (z. B. Fluggastrechte oder Stornierungsregeln), obwoh… |
+
+### `98eb45f772ad7a0aac7b`
+
+**Befund:** Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt im Text Referenzwerte (120 € Strom, 80 € Kfz), für die in der Quelle keine Marktdaten oder Durchschnittswerte als Beleg vorliegen.
 
 **Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
 
-> Am heutigen Text geprüft (SHA-256 d2e6413dcd25): Die Zahl steht weiterhin im Artikel, ist aber ausdrücklich als Modell-/Beispielwert gekennzeichnet: „- **Kostenfaktor:** In der Modellrechnung kostet eine volle Ladung rund 0,57 Euro, zwei halbe Ladungen kosten rund 0,85 bis 0,99 Euro.“. Beanstandet war die Zahl OHNE Kennzeichnung; das trifft nicht mehr zu.
+> Am heutigen Text geprüft (SHA-256 f5cf5ca16db6): Die Zahl steht weiterhin im Artikel, ist aber ausdrücklich als Modell-/Beispielwert gekennzeichnet: „**Beispielrechnung:** Die angenommenen Einsparungen betragen 120 € im Jahr für Strom, 25 € pro Monat für ungenutzte Abos und 80 € im Jahr für die Kfz‑Versicherung, insgesamt 500 € nach zwölf“. Beanstandet war die Zahl OHNE Kennzeichnung; das trifft nicht mehr zu.
 
-- Im heutigen Text nicht mehr vorhanden: 0,40 €, 0,005 €
-- Heute in Zeile 19: 0,9 kWh – gekennzeichnet („modellrechnung“)
-- Heute in Zeile 122: 0,6 kWh – **ohne** Kennzeichnung
-- Heute in Zeile 119: 22 € – **ohne** Kennzeichnung
+- Heute in Zeile 67: 500 € – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 26: 120 € – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 25: 80 € – gekennzeichnet („modellrechnung“)
 
-### `cb794331f1cc0c715a55`
+### `b7f0d52968d89cdf8c5b`
 
-**Befund:** Die Aussage, dass bei 4 Waschgängen pro Woche ein durchschnittlicher Haushalt rund 5 € jährlich an Strom‑ und Wasserkosten spart, ist nicht mit einer Quelle belegt.
-
-**Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
-
-> Die Aussage „rund 5 € jährlich bei vier Waschgängen“ steht in der heutigen Fassung nicht mehr. Die Modellrechnung nennt stattdessen den Rechenweg samt Quelle: „In der Modellrechnung kostet eine volle Ladung rund 0,57 Euro, zwei halbe Ladungen kosten rund 0,85 bis 0,99 Euro.“
-
-- Heute in Zeile 19: 5 € – gekennzeichnet („modellrechnung“)
-
-### `e6729081522126e972c2`
-
-**Befund:** Angabe, dass ein optimal beladener Trommel (ca. 80 % Kapazität) bis zu 15 % weniger Wasser und Energie verbraucht, wird nicht durch eine Quelle belegt.
+**Befund:** Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne Nennung konkreter rechtlicher Grundlagen (DSGVO) unpräzise, während die Quelle explizit auf rechtliche Verbraucherthemen fokussiert.
 
 **Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
 
-> Die Angabe „80 % Kapazität ⇒ bis zu 15 % weniger“ steht nicht mehr im Text. Die Modellrechnung arbeitet mit offen genannten Werten (0,9 bzw. 0,7 kWh je Ladung), nennt Vattenfall und Stromauskunft als Quelle und kennzeichnet jedes Ergebnis als Modellrechnung.
+> Die rechtliche Grundlage ist jetzt benannt: „Nach der DSGVO muss der Anbieter Zweck und Rechtsgrundlage der Verarbeitung nennen und dir Auskunft und Löschung deiner Daten ermöglichen.“ Der Befund (kein rechtlicher Rahmen) ist damit erledigt.
 
-- Im heutigen Text nicht mehr vorhanden: 15 %
-- Heute in Zeile 132: 80 % – gekennzeichnet („modellrechnung“)
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `be911855d67f998be662`
+
+**Befund:** Der Ratgeber nennt keinen Regulierungsrahmen für Reisebuchungen (z. B. Fluggastrechte oder Stornierungsregeln), obwohl die Quelle diese als zentrale Informationsbereiche ausweist.
+
+**Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
+
+> Der Rahmen steht jetzt im Artikel: „Bei Pauschalreisen gilt das Pauschalreiserecht mit Storno- und Insolvenzregeln (§§ 651a ff. BGB), bei Flügen die EU-Fluggastrechte-Verordnung 261/2004.“
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ---
 
@@ -1280,16 +1376,25 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden a4ff01e649b789f19e6
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 089b89138417e63a3dcf --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1158934e7a18c7b2099b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3716cfd3ab5aec6d774b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7067eabb89a917ae67a4 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden af2ccb4222eeb195222f --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden d9c8b522bf1dcaed0340 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden e2975509f3f130de0755 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden f1704e45e970a8f4b078 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4284fd2d9c9005e7af8f --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 84e247f17354e224c973 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden a2a7dc69f10393af6531 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden cb794331f1cc0c715a55 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden e6729081522126e972c2 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4d0125136c5b940946e4 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7aeb2098034d16a46885 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ea97b5dd6695de127fd2 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1dc0f20f9ab3a6b783bc --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7b94ca07b36c0b7cb1cc --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 985f506ee04087bf7253 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ee321fa37210590f7e9b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 19ab248b17415c73edfb --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 372bb51051e8bd7c5f71 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6aaff85e3a7591d0c5b2 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7e6087a4117a857a92c8 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden e28b4ad1f6d608d2ec77 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 04ae33652c1c5eb4e2b8 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5223a3c7287ff81939cd --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9800545ae945ec280b34 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden bc0e4f2eb357a682c674 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 98eb45f772ad7a0aac7b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden b7f0d52968d89cdf8c5b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden be911855d67f998be662 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_akte.py --schreiben
 python3 scripts/release_scorecard.py --live --streng
 ```

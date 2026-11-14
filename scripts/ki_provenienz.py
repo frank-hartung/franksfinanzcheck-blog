@@ -736,22 +736,12 @@ def feed_daten(pfad: Path) -> tuple[list[dict], list[str]]:
         raus.append({
             "guid": guid, "guids": guids, "links": links,
             "slug": _slug_aus_url(guid),
-            "scope": (scope.text or "").strip() if scope is not None else "",
-            "ai_generated": item.find(f"{NAMESPACE_KURZ}:ai-generated", ns) is not None,
-            "describedby": bool(beschrieben),
-            # Media RSS (Yahoo-Spezifikation) erlaubt `media:credit` sowohl als
-            # direktes Kind von <item> als auch INNERHALB von <media:content>.
-            # Unsere Vorlage (layouts/rss.xml) schreibt den Credit in
-            # <media:content>, weil er dort zum konkreten Bild gehört. Wer nur
-            # `item.find()` prüft, sieht 50 korrekte Angaben als fehlend an –
-            # die Meldung „Feed-Item trägt kein media:credit“ war damit ein
-            # Messfehler, kein Bestandsfehler (Befund 13.11.2026, 50 Funde).
-            "media_credit": (item.find("media:credit", ns) is not None
-                             or item.find("media:content/media:credit", ns)
-                             is not None),
             "scope": scopes[0] if scopes else "", "scopes": scopes,
             "ai_generated": werte == ["true"], "ai_werte": werte,
             "describedby": bool(beschrieben), "describedby_ziele": beschrieben,
+            # Media RSS erlaubt Credits direkt am Item und im media:content.
+            # Beide Fundorte bleiben mitsamt Rolle, Schema und Bildbezug für
+            # die strengere Prüfung erhalten; bloße Existenz ist kein Beleg.
             "media_credit": bool(freie_credits or any(m["credits"] for m in medien)),
             "medien": medien, "freie_credits": freie_credits,
             "description": beschreibungen[0] if beschreibungen else "",

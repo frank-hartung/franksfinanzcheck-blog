@@ -35,6 +35,20 @@ class StrukturHeilerTests(unittest.TestCase):
         self.assertEqual(geheilt, [])
         self.assertEqual(len(offen), 1)
 
+    def test_entwurf_hat_vorrang_vor_live_auch_bei_jungerem_live_partner(self):
+        bestand = {
+            "live/index.md": heiler._artikel(
+                "live", True, "2026-01-03", "Energie sparen beginnt beim Zähler."),
+            "draft/index.md": heiler._artikel(
+                "draft", False, "2026-01-01", "Urlaub planen beginnt beim Budget."),
+        }
+        for auch_live in (False, True):
+            with self.subTest(auch_live=auch_live):
+                geheilt, offen = heiler.heilen(bestand, auch_live=auch_live, schreibe=False)
+                self.assertEqual(offen, [])
+                self.assertEqual([t["ziel"] for t in geheilt], ["draft"])
+                self.assertLess(geheilt[0]["nachher"], heiler.KRITISCH_AB)
+
     def test_generatoren_schreiben_kein_generisches_geruest_mehr_vor(self):
         for datei in ("scripts/claude_writer.py", "scripts/poppy_repurpose.py"):
             text = (ROOT / datei).read_text(encoding="utf-8")

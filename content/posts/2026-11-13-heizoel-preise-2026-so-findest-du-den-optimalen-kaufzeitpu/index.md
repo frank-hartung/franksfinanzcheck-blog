@@ -3,7 +3,7 @@ title: "Heizölpreise vergleichen: So planst du deine Bestellung"
 description: "Heizöl bestellen ohne unbelegte Spartipps: So vergleichst du Angebote, prüfst Lieferkosten und planst den Tank rechtzeitig."
 date: 2026-11-13T11:26:17Z
 draft: true
-reserve: true
+reserve_blocked: "Redaktionelle Prüfung und Quellenprüfung ausstehend; keine automatische Veröffentlichung (#1072)."
 faktenfrische_aliases:
   - "2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu"
   - "2026-11-05-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu"
@@ -31,7 +31,7 @@ engine_level: "draft"
 inspiration: "Heizöl kaufen: Angebote vergleichen und Bestellung planen"
 cover:
   image: "images/covers/2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu.jpg"
-  alt: "Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden"
+  alt: "Heizölpreise vergleichen: So planst du deine Bestellung"
   caption: "Tipp von FranksFinanzcheck"
   ki_pruefung:
     digital_source_type: algorithmicMedia
@@ -42,9 +42,11 @@ cover:
 faktencheck: 2026-11-03
 quellen:
   - id: "Q1"
-    titel: "Referenzseite bundesnetzagentur.de"
-    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
-    herausgeber: "Bundesnetzagentur"
+    titel: "Heizöl-Preisvergleich: Test von 2024 (keine aktuelle Preisprognose)"
+    url: "https://www.test.de/Heizoelvergleichsportale-im-Test-4942406-0/"
+    herausgeber: "Stiftung Warentest"
+    datum: 2024-05-28
+    recherchiert_am: 2026-11-13
 ---
 
 Ein fast leerer Tank kann die Planung unter Zeitdruck setzen. Trotzdem lässt sich daraus kein verlässlich bester Monat ableiten: Preise hängen vom Angebot ab. Sie hängen auch vom Zeitpunkt ab. Ohne eine passende, datierte Preisreihe wäre eine Monatsprognose oder ein beziffertes Sparversprechen nicht belastbar. Dieser Ratgeber hilft dir beim fairen Vergleich. Er hilft auch bei der Vorbereitung.

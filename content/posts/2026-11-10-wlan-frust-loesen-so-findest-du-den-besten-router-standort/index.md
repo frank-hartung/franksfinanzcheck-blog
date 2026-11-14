@@ -30,10 +30,16 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: 6d3be14777874562f43dbc3aa5ea5673cf88f714c8f9b3867038ae4291c60d94
     geprueft_am: 2026-11-13
+quellen:
+  - id: "Q1"
+    titel: "WLAN-Router und Repeater richtig platzieren"
+    url: "https://www.heise.de/ratgeber/WLAN-optimieren-26-Tipps-fuer-besseren-WLAN-Empfang-4052384.html?seite=2"
+    herausgeber: "heise online"
+    recherchiert_am: 2026-11-13
 faktencheck: 2026-11-09
 faktenfrische_aliases:
   - "2026-11-09-wlan-frust-loesen-so-findest-du-den-besten-router-standort"
-kurzantwort: "Der optimale Router-Standort ist eine zentrale, leicht erhöhte Position in etwa 1 bis 1,5 Metern Höhe ohne direkte Hindernisse wie Wände oder Schränke. Halten Sie mindestens 30 Zentimeter Abstand zu anderen elektronischen Geräten und Metallflächen, um Signalstörungen effektiv zu vermeiden. So erzielen Sie ohne Zusatzkosten die bestmögliche WLAN-Abdeckung in allen Räumen."
+kurzantwort: "Stelle den Router möglichst zentral und frei auf, statt ihn im Schrank zu verstecken. Wände, Metall und andere Funkquellen können das Signal schwächen oder stören. Teste mehrere Standorte: Welche Position am besten funktioniert, hängt von Wohnung und Geräten ab."
 ---
 
 Stell dir vor, du sitzt abends auf dem Sofa. Du möchtest deine Lieblingsserie streamen. Doch das Bild stockt. Der Ladekreis dreht sich endlos.
@@ -126,12 +132,12 @@ Hier ist eine Übersicht der häufigsten Fehler:
 | Router am Boden | Signal wird gedämpft | Auf Kopfhöhe platzieren |
 | Im Metallschrank | Fast kein Empfang außen | Offenes Regal nutzen |
 | Hinter dem Fernseher | Starke Störungen | Frei stehend positionieren |
-| Neben der Mikrowelle | Verbindungsabbrüche | Abstand von 2 Metern halten |
+| Neben der Mikrowelle | Mögliche Funkstörungen | Abstand vergrößern und Empfang testen |
 | In der Ecke | Signal verschwindet in der Wand | Mittig an die Wand stellen |
 
 Ein besonderer Punkt sind andere elektrische Geräte. Die Mikrowelle nutzt oft die gleiche Frequenz wie das WLAN.
 
-Wenn du Popcorn machst, bricht dein Stream ab. Auch Bluetooth-Lautsprecher oder Babyfone können stören. Halte daher Abstand zu anderen Funkquellen. Das stabilisiert dein Netz spürbar.
+Eine laufende Mikrowelle kann den Empfang stören. Auch Bluetooth-Lautsprecher oder Babyfone können Funkkanäle mitbenutzen. Vergrößere den Abstand und teste, ob sich dein Empfang verbessert.
 
 Prüfe im Sinne des 4K-Prüfpfads regelmäßig deinen Aufbau. Haben sich neue Störquellen eingeschlichen?
 

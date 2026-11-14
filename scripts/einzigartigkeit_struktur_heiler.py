@@ -152,7 +152,10 @@ def befunde(bestand: dict) -> list[dict]:
 def ziel_eintrag(treffer: dict) -> dict:
     """Heil-Ziel: nicht-live vor live, dann der jüngere Artikel."""
     a, b = treffer["a"], treffer["b"]
-    return sorted([a, b], key=lambda e: (e["live"], str(e["date"] or "")))[-1]
+    # Das Maximum wird gewählt: Ein Entwurf muss deshalb höher sortieren als
+    # ein Live-Artikel. Sonst bleibt bei gemischten Paaren die heilbare
+    # Struktur offen – oder --auch-live verändert unnötig den Live-Text.
+    return sorted([a, b], key=lambda e: (not e["live"], str(e["date"] or "")))[-1]
 
 
 def ersetze_struktur(raw: str, variante: tuple[str, str]) -> str:
@@ -264,6 +267,14 @@ def selftest() -> list[str]:
     g, o = heilen(live_paar, schreibe=False)
     if g or not o:
         fehler.append("Fall 5: Live-Artikel ohne --auch-live geheilt")
+    # Fall 9: Ein gemischtes Paar heilt den Entwurf, auch wenn der Live-
+    # Partner jünger ist und selbst wenn --auch-live gesetzt wird.
+    gemischt = {"live/index.md": _artikel("live", True, "2026-01-03", eigen_a),
+                "draft/index.md": _artikel("draft", False, "2026-01-01", eigen_b)}
+    for auch_live in (False, True):
+        g, o = heilen(gemischt, auch_live=auch_live, schreibe=False)
+        if len(g) != 1 or g[0]["ziel"] != "draft" or o:
+            fehler.append(f"Fall 9: Entwurf im gemischten Paar nicht bevorzugt: {g} / {o}")
     # Fall 6: Ersetzung ist zielgenau - Fliesstext bleibt, Struktur verschwindet.
     neu = ersetze_struktur(paar["a/index.md"]["_roh"], POOL[0])
     if hat_struktur(neu) or "Stromkosten senken beginnt" not in neu:
@@ -290,7 +301,7 @@ def main() -> int:
             print("SELBSTTEST ROT:")
             [print(" -", f) for f in fehler]
             return 2
-        print(f"✅ Selbsttest: 8 eingefrorene Fälle (Struktur-Erkennung, Pool-Sicherheit, Freibrief-Schutz, Live-/Siegel-Schutz) stimmen.")
+        print("✅ Selbsttest: 9 eingefrorene Fälle (Struktur-Erkennung, Pool-Sicherheit, Freibrief-Schutz, Live-/Siegel-Schutz und Entwurfs-Vorrang) stimmen.")
         return 0
     bestand = cu.lade_bestand()
     if not bestand:

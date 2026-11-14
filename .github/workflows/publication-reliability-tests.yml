@@ -17,6 +17,11 @@ on:
       # #634: Auch reine Zustands-/Merge-Vertragsänderungen brauchen den
       # Offline-Nachweis; content-reserve läuft auf PR-Refs absichtlich nicht.
       - 'data/reserve-*.json'
+      # Queue/Entscheidungen/Register sind Prüfgrundlage der Suite: Auch ein
+      # reiner Bot-Daten-PR darf ihre semantischen Verträge nicht auslassen.
+      - 'data/faktenfrische_*'
+      - 'BEFUND-AKTE.md'
+      - 'F4-ENTSCHEIDUNGSVORLAGE.md'
       - '.gitattributes'
       - 'scripts/**'
       # Die Dependabot-Policy wird in der Suite strukturell geprüft.

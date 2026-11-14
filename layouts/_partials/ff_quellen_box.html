@@ -15,6 +15,9 @@
      Agent-Reach-Recherche, gefiltert auf die Allowlist amtlicher
      und etablierter Herausgeber (data/agent_reach/faktenfrische.yaml).
      Affiliate-Partner sind dort bewusst NICHT belegfähig.
+     Bei manuell nachgetragenen Quellen kann `recherchiert_am` je
+     Quelle vom älteren allgemeinen Faktencheck abweichen. Dann darf
+     der alte Stempel nicht als Recherchezeitpunkt dieser Quelle gelten.
 
      VERTRAG:
        * Ohne `quellen` rendert NICHTS (kein leerer Kasten).
@@ -26,6 +29,10 @@
 {{- $quellen := .Params.quellen -}}
 {{- if $quellen }}
 {{- $geprueft := .Params.faktencheck -}}
+{{- $einzelneRecherche := false -}}
+{{- range $quellen -}}
+  {{- with .recherchiert_am -}}{{- $einzelneRecherche = true -}}{{- end -}}
+{{- end -}}
 <section class="ff-quellen" aria-labelledby="ff-quellen-{{ .File.UniqueID }}">
   <header class="ff-quellen__head">
     <span class="ff-quellen__sigil" aria-hidden="true">
@@ -38,7 +45,7 @@
     <h2 class="ff-quellen__title" id="ff-quellen-{{ .File.UniqueID }}">Quellen &amp; Faktenstand</h2>
     {{- with $geprueft }}
     <span class="ff-quellen__stamp">
-      Quellen recherchiert am <time datetime="{{ . }}">{{ dateFormat "02.01.2006" . }}</time>
+      {{ if $einzelneRecherche }}Faktencheck{{ else }}Quellen recherchiert am{{ end }} <time datetime="{{ . }}">{{ dateFormat "02.01.2006" . }}</time>
     </span>
     {{- end }}
   </header>
@@ -58,6 +65,7 @@
       <span class="ff-quellen__meta">
         {{- with .herausgeber }}<span class="ff-quellen__publisher">{{ . }}</span>{{ end -}}
         {{- with .datum }}<span class="ff-quellen__date">{{ dateFormat "02.01.2006" . }}</span>{{ end -}}
+        {{- with .recherchiert_am }}<span class="ff-quellen__date">recherchiert am <time datetime="{{ . }}">{{ dateFormat "02.01.2006" . }}</time></span>{{ end -}}
       </span>
     </li>
     {{- end }}

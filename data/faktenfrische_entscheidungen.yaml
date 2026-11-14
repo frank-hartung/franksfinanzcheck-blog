@@ -3335,130 +3335,6 @@ entscheidungen:
     nur abgeleitete Bildzeile geaendert.'
   vorgaenger_geprueft_fassung: a628247a97b7075b144bba5ac67889b3906a6c749d71336b7c77d70b02b621e5
   folgeentscheidung: true
-- slug: 2026-10-14-heizperiode-vorbereiten-im-spaetsommer
-  befund_ursprung_slug: 2026-10-14-heizperiode-vorbereiten-im-spaetsommer
-  befund_id: 61ed9d03642fa5afa89e
-  befund_fassung: 03af3ebe8b01c8276c2d2ba9624807d080592390fa81c1c49ce047d9cf88135e
-  geprueft_fassung: a1f9905fbaec9bd99b0a1736e3b9b812ba98763e420998b05987139c39b71506
-  typ: praezision
-  beanstandung: Die pauschale Einordnung der Behördenseite als 'kein Beleg für Tipps'
-    greift zu kurz; die Fundstelle ist das zentrale Aufsichtsportal für den regulierten
-    Energiemarkt (Strom/Gas).
-  beleg: ''
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
-  entschieden_am: '2026-11-11'
-  fassung_wechsel: true
-  begruendung: 'Text am 11.11.2026 praezisiert: Die Bundesnetzagentur wird nicht mehr
-    pauschal als ''kein Beleg fuer Tipps'' abgetan, sondern als Aufsichtsbehoerde
-    des regulierten Strom- und Gasmarkts und amtliche Fundstelle eingeordnet - mit
-    der klaren Grenze, dass sie keine festen Sparquoten belegt und keinen Dienst wie
-    CHECK24 empfiehlt.'
-- slug: 2026-10-14-heizperiode-vorbereiten-im-spaetsommer
-  befund_ursprung_slug: 2026-10-14-heizperiode-vorbereiten-im-spaetsommer
-  befund_id: bbd476563a6a52c57957
-  befund_fassung: 03af3ebe8b01c8276c2d2ba9624807d080592390fa81c1c49ce047d9cf88135e
-  geprueft_fassung: a1f9905fbaec9bd99b0a1736e3b9b812ba98763e420998b05987139c39b71506
-  typ: luecke
-  beanstandung: Der Artikel verweist für Informationen zum Stromverbrauch von Routern
-    auf die Bundesnetzagentur, verlinkt jedoch die Fachabteilung für Energie statt
-    die zuständige Abteilung für Telekommunikation.
-  beleg: ''
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
-  entschieden_am: '2026-11-11'
-  fassung_wechsel: true
-  begruendung: 'Router-Absatz korrigiert: Der Verweis auf die Energie-Fachabteilung
-    der Bundesnetzagentur ist entfernt; der Text sagt jetzt, dass es keine amtliche
-    Liste mit einem festen Wert je Geraet gibt. Der Router-Stromverbrauch wird ueber
-    Herstellerangaben und ein Steckdosen-Messgeraet bestimmt.'
-- slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
-  befund_ursprung_slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
-  befund_id: 98eb45f772ad7a0aac7b
-  befund_fassung: 66ed7c316cbe7b939230e8e79bda1f6fc9dcd44ef556c3aacf4f5c9dde9e92f7
-  geprueft_fassung: 10b0aed58f99a8134577d0130f00dd31b5bcd43ff1baf6313ff30cfb95086cfa
-  typ: luecke
-  beanstandung: Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt
-    im Text Referenzwerte (120 € Strom, 80 € Kfz), für die in der Quelle keine Marktdaten
-    oder Durchschnittswerte als Beleg vorliegen.
-  beleg: ''
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
-  entschieden_am: '2026-11-11'
-  fassung_wechsel: true
-  begruendung: 'PIN-Beschreibung am 11.11.2026 auf die Modellrechnung des Artikels
-    umgestellt: Die 500 Euro stehen jetzt ausdruecklich als frei gewaehlte Annahmen
-    der Beispielrechnung, nicht als Marktdurchschnitt oder Sparversprechen; der Fliesstext
-    kennzeichnet die Betraege bereits als solche.'
-- slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
-  befund_ursprung_slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
-  befund_id: b7f0d52968d89cdf8c5b
-  befund_fassung: 66ed7c316cbe7b939230e8e79bda1f6fc9dcd44ef556c3aacf4f5c9dde9e92f7
-  geprueft_fassung: 10b0aed58f99a8134577d0130f00dd31b5bcd43ff1baf6313ff30cfb95086cfa
-  typ: praezision
-  beanstandung: Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne
-    Nennung konkreter rechtlicher Grundlagen (DSGVO) unpräzise, während die Quelle
-    explizit auf rechtliche Verbraucherthemen fokussiert.
-  beleg: ''
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
-  entschieden_am: '2026-11-11'
-  fassung_wechsel: true
-  begruendung: 'FAQ-Antwort zur Datensicherheit ergaenzt: Die DSGVO (Verordnung (EU)
-    2016/679) ist als rechtlicher Rahmen genannt, samt Verarbeitungsgrundlage und
-    Rechten auf Auskunft, Berichtigung, Loeschung und Widerruf. Die Antwort bleibt
-    bei der Eigenentscheidung ueber die Einwilligung.'
-- slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
-  befund_ursprung_slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
-  befund_id: be911855d67f998be662
-  befund_fassung: 66ed7c316cbe7b939230e8e79bda1f6fc9dcd44ef556c3aacf4f5c9dde9e92f7
-  geprueft_fassung: 10b0aed58f99a8134577d0130f00dd31b5bcd43ff1baf6313ff30cfb95086cfa
-  typ: luecke
-  beanstandung: Der Ratgeber nennt keinen Regulierungsrahmen für Reisebuchungen (z.
-    B. Fluggastrechte oder Stornierungsregeln), obwohl die Quelle diese als zentrale
-    Informationsbereiche ausweist.
-  beleg: ''
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
-  entschieden_am: '2026-11-11'
-  fassung_wechsel: true
-  begruendung: 'FAQ-Antwort zu Flugreisen ergaenzt: Die EU-Fluggastrechte-Verordnung
-    (EG) Nr. 261/2004 ist als Regulierungsrahmen fuer Annullierung, grosse Verspaetung
-    und Nichtbefoerderung genannt; Storno-, Zahlungs- und Mietbedingungen verweisen
-    auf die Vertragsbedingungen des Anbieters.'
-- slug: 2026-10-14-heizperiode-vorbereiten-im-spaetsommer
-  befund_ursprung_slug: 2026-10-14-heizperiode-vorbereiten-im-spaetsommer
-  befund_id: 61ed9d03642fa5afa89e
-  befund_fassung: 03af3ebe8b01c8276c2d2ba9624807d080592390fa81c1c49ce047d9cf88135e
-  geprueft_fassung: 04a5b4b70c6147eb31ad14a03bc1b4f22a4b851f498f25f2b188877ef22e1dc4
-  typ: praezision
-  beanstandung: Die pauschale Einordnung der Behördenseite als 'kein Beleg für Tipps'
-    greift zu kurz; die Fundstelle ist das zentrale Aufsichtsportal für den regulierten
-    Energiemarkt (Strom/Gas).
-  beleg: ''
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
-  entschieden_am: '2026-11-11'
-  fassung_wechsel: true
-  begruendung: 'Text (final) praezisiert: Die Bundesnetzagentur ist als Aufsichtsbehoerde
-    des regulierten Strom- und Gasmarkts und amtliche Fundstelle eingeordnet, ausdruecklich
-    mit der Grenze, dass sie keine festen Sparquoten belegt und keinen Dienst wie
-    CHECK24 empfiehlt.'
-  vorgaenger_geprueft_fassung: a1f9905fbaec9bd99b0a1736e3b9b812ba98763e420998b05987139c39b71506
-  folgeentscheidung: true
-- slug: 2026-10-14-heizperiode-vorbereiten-im-spaetsommer
-  befund_ursprung_slug: 2026-10-14-heizperiode-vorbereiten-im-spaetsommer
-  befund_id: bbd476563a6a52c57957
-  befund_fassung: 03af3ebe8b01c8276c2d2ba9624807d080592390fa81c1c49ce047d9cf88135e
-  geprueft_fassung: 04a5b4b70c6147eb31ad14a03bc1b4f22a4b851f498f25f2b188877ef22e1dc4
-  typ: luecke
-  beanstandung: Der Artikel verweist für Informationen zum Stromverbrauch von Routern
-    auf die Bundesnetzagentur, verlinkt jedoch die Fachabteilung für Energie statt
-    die zuständige Abteilung für Telekommunikation.
-  beleg: ''
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
-  entschieden_am: '2026-11-11'
-  fassung_wechsel: true
-  begruendung: 'Router-Absatz (final) korrigiert: kein Verweis mehr auf die Energie-Fachabteilung
-    der Bundesnetzagentur; der Text sagt, dass es keine amtliche Liste mit festem
-    Wert je Geraet gibt. Verbrauch wird ueber Herstellerangaben und Steckdosen-Messgeraet
-    bestimmt.'
-  vorgaenger_geprueft_fassung: a1f9905fbaec9bd99b0a1736e3b9b812ba98763e420998b05987139c39b71506
-  folgeentscheidung: true
 - slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
   befund_ursprung_slug: 2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026
   befund_id: 30caa57be394afb62947
@@ -5069,21 +4945,12 @@ entscheidungen:
   befund_ursprung_slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
   befund_id: 98eb45f772ad7a0aac7b
   befund_fassung: 66ed7c316cbe7b939230e8e79bda1f6fc9dcd44ef556c3aacf4f5c9dde9e92f7
-  geprueft_fassung: 1de49c02dce70503e4bb2c1a1c6bd13df2d80273cc3091bf44ba31b7eb5a3f09
   geprueft_fassung: 32e70c4b2085c07d279305c58550029394929fa1b1938b04b714db4c37f491f3
   typ: luecke
   beanstandung: Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt
     im Text Referenzwerte (120 € Strom, 80 € Kfz), für die in der Quelle keine Marktdaten
     oder Durchschnittswerte als Beleg vorliegen.
   beleg: ''
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
-  entschieden_am: '2026-11-11'
-  fassung_wechsel: true
-  begruendung: 'PIN-Beschreibung (final) als Beispielrechnung des Artikels gekennzeichnet:
-    Die 500 Euro stehen als frei gewaehlte Annahmen, nicht als Marktdurchschnitt oder
-    Sparversprechen; der Fliesstext kennzeichnet sie ebenso.'
-  vorgaenger_geprueft_fassung: 10b0aed58f99a8134577d0130f00dd31b5bcd43ff1baf6313ff30cfb95086cfa
-  folgeentscheidung: true
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
   entschieden_am: '2026-11-11'
   fassung_wechsel: true
@@ -5097,21 +4964,12 @@ entscheidungen:
   befund_ursprung_slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
   befund_id: b7f0d52968d89cdf8c5b
   befund_fassung: 66ed7c316cbe7b939230e8e79bda1f6fc9dcd44ef556c3aacf4f5c9dde9e92f7
-  geprueft_fassung: 1de49c02dce70503e4bb2c1a1c6bd13df2d80273cc3091bf44ba31b7eb5a3f09
   geprueft_fassung: 32e70c4b2085c07d279305c58550029394929fa1b1938b04b714db4c37f491f3
   typ: praezision
   beanstandung: Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne
     Nennung konkreter rechtlicher Grundlagen (DSGVO) unpräzise, während die Quelle
     explizit auf rechtliche Verbraucherthemen fokussiert.
   beleg: ''
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
-  entschieden_am: '2026-11-11'
-  fassung_wechsel: true
-  begruendung: 'FAQ (final) nennt die DSGVO (Verordnung (EU) 2016/679) als rechtlichen
-    Rahmen: Verarbeitungsgrundlage sowie Rechte auf Auskunft, Berichtigung, Loeschung
-    und Widerruf; die Eigenentscheidung ueber die Einwilligung bleibt.'
-  vorgaenger_geprueft_fassung: 10b0aed58f99a8134577d0130f00dd31b5bcd43ff1baf6313ff30cfb95086cfa
-  folgeentscheidung: true
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
   entschieden_am: '2026-11-11'
   fassung_wechsel: true
@@ -5123,20 +4981,12 @@ entscheidungen:
   befund_ursprung_slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
   befund_id: be911855d67f998be662
   befund_fassung: 66ed7c316cbe7b939230e8e79bda1f6fc9dcd44ef556c3aacf4f5c9dde9e92f7
-  geprueft_fassung: 1de49c02dce70503e4bb2c1a1c6bd13df2d80273cc3091bf44ba31b7eb5a3f09
   geprueft_fassung: 32e70c4b2085c07d279305c58550029394929fa1b1938b04b714db4c37f491f3
   typ: luecke
   beanstandung: Der Ratgeber nennt keinen Regulierungsrahmen für Reisebuchungen (z.
     B. Fluggastrechte oder Stornierungsregeln), obwohl die Quelle diese als zentrale
     Informationsbereiche ausweist.
   beleg: ''
-  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
-  entschieden_am: '2026-11-11'
-  fassung_wechsel: true
-  begruendung: FAQ (final) nennt die EU-Fluggastrechte-Verordnung (EG) Nr. 261/2004
-    als Regulierungsrahmen fuer Annullierung, grosse Verspaetung und Nichtbefoerderung;
-    Storno-, Zahlungs- und Mietbedingungen verweisen auf die Vertragsbedingungen.
-  vorgaenger_geprueft_fassung: 10b0aed58f99a8134577d0130f00dd31b5bcd43ff1baf6313ff30cfb95086cfa
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
   entschieden_am: '2026-11-11'
   fassung_wechsel: true
@@ -5149,39 +4999,42 @@ entscheidungen:
   befund_fassung: 6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2
   geprueft_fassung: e1c28aa72d49c371b539c09da48c0183025baaedf2a7e04e35d52ebb371c7d43
   typ: luecke
-  beanstandung: Die 50‑30‑20‑Regel für die Urlaubsbudget‑Aufteilung wird ohne Quellenangabe
-    präsentiert.
+  beanstandung: Die 50‑30‑20‑Regel für die Urlaubsbudget‑Aufteilung wird ohne
+    Quellenangabe präsentiert.
   beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
   entschieden_am: '2026-11-12'
   fassung_wechsel: true
   begruendung: 'Am 12.11.2026 am überarbeiteten Text neu entschieden: Die 50-30-20-Aufteilung
-    steht heute ausdrücklich als „einfaches Modell für dein Budget im Urlaub“ und
-    „keine feste Vorgabe“ da – also als Planungshilfe, nicht als Regel mit Studienbeleg.
-    Die Beleg-Url der Verbraucherzentrale steht jetzt zusätzlich im Quellenverzeichnis
-    des Artikels; eine Prozent- oder Marktaussage wird nicht mehr behauptet.'
+    steht heute ausdrücklich als „einfaches Modell für dein Budget im Urlaub“
+    und „keine feste Vorgabe“ da – also als Planungshilfe, nicht als Regel mit
+    Studienbeleg. Die Beleg-Url der Verbraucherzentrale steht jetzt zusätzlich
+    im Quellenverzeichnis des Artikels; eine Prozent- oder Marktaussage wird nicht
+    mehr behauptet.'
   vorgaenger_geprueft_fassung: b4955624402d38f03eed81400cd4c2e9e622b16bf1e4cdd58f7e56ba647f139b
   projektion: betrieb-v3
   folgeentscheidung: true
+
 - slug: 2026-11-02-last-minute-urlaubsangebote-sichern
   befund_ursprung_slug: 2026-11-02-last-minute-urlaubsangebote-sichern
   befund_id: 274c32d1a16e9dffcf1a
   befund_fassung: 6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2
   geprueft_fassung: e1c28aa72d49c371b539c09da48c0183025baaedf2a7e04e35d52ebb371c7d43
   typ: luecke
-  beanstandung: Die Angabe, dass das Weglassen der Vollkasko‑Selbstbeteiligung die
-    Kosten um 10 % bis 20 % senken kann, ist nicht mit einer Quelle belegt.
+  beanstandung: Die Angabe, dass das Weglassen der Vollkasko‑Selbstbeteiligung
+    die Kosten um 10 % bis 20 % senken kann, ist nicht mit einer Quelle belegt.
   beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
   entschieden_am: '2026-11-12'
   fassung_wechsel: true
-  begruendung: 'Am 12.11.2026 neu entschieden: Die 10-bis-20-Prozent-Angabe ist heute
-    als „Faustregel“ und „gängige Regel für den Markt“ gekennzeichnet; sie wird nicht
-    als Messwert und nicht als garantierte Ersparnis behauptet. Damit trägt die Dämpfung
-    die Entscheidung, nicht eine Zahl.'
+  begruendung: 'Am 12.11.2026 neu entschieden: Die 10-bis-20-Prozent-Angabe ist
+    heute als „Faustregel“ und „gängige Regel für den Markt“ gekennzeichnet; sie
+    wird nicht als Messwert und nicht als garantierte Ersparnis behauptet. Damit
+    trägt die Dämpfung die Entscheidung, nicht eine Zahl.'
   vorgaenger_geprueft_fassung: b4955624402d38f03eed81400cd4c2e9e622b16bf1e4cdd58f7e56ba647f139b
   projektion: betrieb-v3
   folgeentscheidung: true
+
 - slug: 2026-11-02-last-minute-urlaubsangebote-sichern
   befund_ursprung_slug: 2026-11-02-last-minute-urlaubsangebote-sichern
   befund_id: 5c572a933edece129bba
@@ -5194,32 +5047,34 @@ entscheidungen:
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
   entschieden_am: '2026-11-12'
   fassung_wechsel: true
-  begruendung: 'Am 12.11.2026 neu entschieden: Die Gleichsetzung „Stornogebühr entspricht
-    einem Tagespreis“ ist im überarbeiteten Text nicht mehr enthalten. Übrig bleibt
-    der Verweis auf den eigenen Vertrag. Für eine gestrichene Aussage gibt es keine
-    Beleg-Url – Hausregel: beleglos ist nur die Streichung.'
+  begruendung: 'Am 12.11.2026 neu entschieden: Die Gleichsetzung „Stornogebühr
+    entspricht einem Tagespreis“ ist im überarbeiteten Text nicht mehr enthalten.
+    Übrig bleibt der Verweis auf den eigenen Vertrag. Für eine gestrichene Aussage
+    gibt es keine Beleg-Url – Hausregel: beleglos ist nur die Streichung.'
   vorgaenger_geprueft_fassung: b4955624402d38f03eed81400cd4c2e9e622b16bf1e4cdd58f7e56ba647f139b
   projektion: betrieb-v3
   folgeentscheidung: true
+
 - slug: 2026-11-02-last-minute-urlaubsangebote-sichern
   befund_ursprung_slug: 2026-11-02-last-minute-urlaubsangebote-sichern
   befund_id: 9d9d4afc8d6c421a0d14
   befund_fassung: 6bede033ef351c40fe2e937f364852ab5a06b4fa1f613170d9a525de6e600cd2
   geprueft_fassung: e1c28aa72d49c371b539c09da48c0183025baaedf2a7e04e35d52ebb371c7d43
   typ: luecke
-  beanstandung: Die Behauptung, dass Last‑Minute‑Deals wegen Restkapazitäten zu niedrigeren
-    Preisen führen, fehlt eine fundierte Quelle.
+  beanstandung: Die Behauptung, dass Last‑Minute‑Deals wegen Restkapazitäten zu
+    niedrigeren Preisen führen, fehlt eine fundierte Quelle.
   beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
   entschieden_am: '2026-11-12'
   fassung_wechsel: true
   begruendung: 'Am 12.11.2026 neu entschieden: Der Preiseffekt kurz vor Reisebeginn
-    steht heute als „scheinbar“ und „logische Einschätzung für den Markt“ da – eine
-    Erwartung, keine Marktprognose mit Datenanspruch. Beleg und Quellenverzeichnis
+    steht heute als „scheinbar“ und „logische Einschätzung für den Markt“ da –
+    eine Erwartung, keine Marktprognose mit Datenanspruch. Beleg und Quellenverzeichnis
     sind deckungsgleich.'
   vorgaenger_geprueft_fassung: b4955624402d38f03eed81400cd4c2e9e622b16bf1e4cdd58f7e56ba647f139b
   projektion: betrieb-v3
   folgeentscheidung: true
+
 - slug: 2026-11-02-last-minute-urlaubsangebote-sichern
   befund_ursprung_slug: 2026-11-02-last-minute-urlaubsangebote-sichern
   befund_id: fb50388539a0e8b4461c
@@ -5232,13 +5087,14 @@ entscheidungen:
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
   entschieden_am: '2026-11-12'
   fassung_wechsel: true
-  begruendung: 'Am 12.11.2026 neu entschieden: CHECK24 ist heute ein Beispiel („ein
-    guter Dienst für die Suche“), keine ausschließliche Empfehlung. Der Text verlangt
-    zusätzlich den Vergleich der Endsumme und der Bedingungen. Ein Superlativ wird
-    nicht mehr behauptet.'
+  begruendung: 'Am 12.11.2026 neu entschieden: CHECK24 ist heute ein Beispiel
+    („ein guter Dienst für die Suche“), keine ausschließliche Empfehlung. Der
+    Text verlangt zusätzlich den Vergleich der Endsumme und der Bedingungen. Ein
+    Superlativ wird nicht mehr behauptet.'
   vorgaenger_geprueft_fassung: b4955624402d38f03eed81400cd4c2e9e622b16bf1e4cdd58f7e56ba647f139b
   projektion: betrieb-v3
   folgeentscheidung: true
+
 - slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
   befund_ursprung_slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
   befund_id: 4284fd2d9c9005e7af8f
@@ -5252,38 +5108,41 @@ entscheidungen:
   entschieden_am: '2026-11-12'
   fassung_wechsel: true
   begruendung: 'Paket C, entschieden am 12.11.2026: Die Folgebehauptung „Überladung
-    führt zu Verschleiß und teuren Reparaturen“ ist gestrichen. Sie stützte sich allein
-    auf FORUM WASCHEN (ikw.org) – keine Domain der Allowlist, und die Kausalaussage
-    war im Quellentext nicht belegt. Geblieben sind zwei belegbare Sätze: die Empfehlung,
-    die Nennbeladung nicht zu überschreiten (im Text der Quelle Q4 zugeordnet), und
-    die Kostenfolge eines wiederholten Waschgangs, die der Artikel selbst herleitet.
-    Beleglosigkeit wird als Streichung geführt, nicht als Beleg.'
+    führt zu Verschleiß und teuren Reparaturen“ ist gestrichen. Sie stützte sich
+    allein auf FORUM WASCHEN (ikw.org) – keine Domain der Allowlist, und die Kausalaussage
+    war im Quellentext nicht belegt. Geblieben sind zwei belegbare Sätze: die
+    Empfehlung, die Nennbeladung nicht zu überschreiten (im Text der Quelle Q4
+    zugeordnet), und die Kostenfolge eines wiederholten Waschgangs, die der Artikel
+    selbst herleitet. Beleglosigkeit wird als Streichung geführt, nicht als Beleg.'
   vorgaenger_geprueft_fassung: 6bce91f5cc8d0105fd5a826e66ce6f9fca5bec481fa8a5f202fb6e30e5b9840e
   projektion: betrieb-v3
   folgeentscheidung: true
+
 - slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
   befund_ursprung_slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
   befund_id: 84e247f17354e224c973
   befund_fassung: e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3
   geprueft_fassung: d2de44d6edf218d75a4c02dfc136f42f017d0244e39312472a8c5d4aa9fc7872
   typ: praezision
-  beanstandung: Aussage, dass das richtige Beladen allein die Fixkosten senkt, ohne
-    weitere Maßnahmen, ist ein pauschales Leistungsversprechen ohne Nennung von Mechanismen
-    oder Grenzen.
+  beanstandung: Aussage, dass das richtige Beladen allein die Fixkosten senkt,
+    ohne weitere Maßnahmen, ist ein pauschales Leistungsversprechen ohne Nennung
+    von Mechanismen oder Grenzen.
   beleg: https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
   entschieden_am: '2026-11-12'
   fassung_wechsel: true
   begruendung: 'Paket B, entschieden am 12.11.2026: Der Rückfall saß in den Meta-Flächen
     – `description` und `pin_description` behaupteten weiter „senkt deine Fixkosten“,
-    der Body „senkt die Betriebskosten … nachhaltig“. Alle drei Stellen stehen wieder
-    in der Möglichkeitsform, der Body nennt den Effekt als kleinen Baustein und nicht
-    als Alleinursache. Die Prüfung deckte bis dahin nur den Body ab; deshalb prüft
-    der Regressionstest jetzt auch Titel, Beschreibung, Kurzantwort und Pin-Text.
-    Beleg: BDEW-Strompreisanalyse (Q3 im Artikel) trägt den Strompreis der Rechnung.'
+    der Body „senkt die Betriebskosten … nachhaltig“. Alle drei Stellen stehen
+    wieder in der Möglichkeitsform, der Body nennt den Effekt als kleinen Baustein
+    und nicht als Alleinursache. Die Prüfung deckte bis dahin nur den Body ab;
+    deshalb prüft der Regressionstest jetzt auch Titel, Beschreibung, Kurzantwort
+    und Pin-Text. Beleg: BDEW-Strompreisanalyse (Q3 im Artikel) trägt den Strompreis
+    der Rechnung.'
   vorgaenger_geprueft_fassung: 6bce91f5cc8d0105fd5a826e66ce6f9fca5bec481fa8a5f202fb6e30e5b9840e
   projektion: betrieb-v3
   folgeentscheidung: true
+
 - slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
   befund_ursprung_slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
   befund_id: a2a7dc69f10393af6531
@@ -5291,20 +5150,22 @@ entscheidungen:
   geprueft_fassung: d2de44d6edf218d75a4c02dfc136f42f017d0244e39312472a8c5d4aa9fc7872
   typ: luecke
   beanstandung: Die Modellrechnung (0,9 kWh/50 L bei vollem Waschgang, 0,6 kWh/35 L
-    bei halbem Waschgang, Strompreis 0,40 €/kWh, Wasserpreis 0,005 €/L) und die daraus
-    resultierende Jahresersparnis von 22 € fehlen einer fundierten Quelle.
+    bei halbem Waschgang, Strompreis 0,40 €/kWh, Wasserpreis 0,005 €/L) und die
+    daraus resultierende Jahresersparnis von 22 € fehlen einer fundierten Quelle.
   beleg: https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
   entschieden_am: '2026-11-12'
   fassung_wechsel: true
-  begruendung: 'Paket A, entschieden am 12.11.2026: Die Modellrechnung ist heute vollständig
-    offengelegt (Annahmen, Rechenwege, „Ergebnis der Modellrechnung“). Der frühere
-    Beleg (Bundesnetzagentur-Startseite) trug keinen der Werte; er ist durch die BDEW-Strompreisanalyse
-    ersetzt, die im Artikel als Q3 zitiert ist und den Strompreis von 0,373 €/kWh
-    trägt. Die Wasser- und Verbrauchswerte bleiben als Szenario gekennzeichnet.'
+  begruendung: 'Paket A, entschieden am 12.11.2026: Die Modellrechnung ist heute
+    vollständig offengelegt (Annahmen, Rechenwege, „Ergebnis der Modellrechnung“).
+    Der frühere Beleg (Bundesnetzagentur-Startseite) trug keinen der Werte; er
+    ist durch die BDEW-Strompreisanalyse ersetzt, die im Artikel als Q3 zitiert
+    ist und den Strompreis von 0,373 €/kWh trägt. Die Wasser- und Verbrauchswerte
+    bleiben als Szenario gekennzeichnet.'
   vorgaenger_geprueft_fassung: 6bce91f5cc8d0105fd5a826e66ce6f9fca5bec481fa8a5f202fb6e30e5b9840e
   projektion: betrieb-v3
   folgeentscheidung: true
+
 - slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
   befund_ursprung_slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
   befund_id: cb794331f1cc0c715a55
@@ -5312,76 +5173,82 @@ entscheidungen:
   geprueft_fassung: d2de44d6edf218d75a4c02dfc136f42f017d0244e39312472a8c5d4aa9fc7872
   typ: luecke
   beanstandung: Die Aussage, dass bei 4 Waschgängen pro Woche ein durchschnittlicher
-    Haushalt rund 5 € jährlich an Strom‑ und Wasserkosten spart, ist nicht mit einer
-    Quelle belegt.
+    Haushalt rund 5 € jährlich an Strom‑ und Wasserkosten spart, ist nicht mit
+    einer Quelle belegt.
   beleg: https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
   entschieden_am: '2026-11-12'
   fassung_wechsel: true
   begruendung: 'Paket A, entschieden am 12.11.2026: Die alte „rund 5 € im Modelljahr“-Aussage
-    existiert nicht mehr; der Artikel rechnet 100 volle gegen 200 halbe Ladungen und
-    kommt auf 28 bis 42 € pro Jahr – ausgewiesen als Ergebnis der Modellrechnung.
+    existiert nicht mehr; der Artikel rechnet 100 volle gegen 200 halbe Ladungen
+    und kommt auf 28 bis 42 € pro Jahr – ausgewiesen als Ergebnis der Modellrechnung.
     Beleg für den Preisanteil ist die BDEW-Strompreisanalyse (Q3 im Artikel).'
   vorgaenger_geprueft_fassung: 6bce91f5cc8d0105fd5a826e66ce6f9fca5bec481fa8a5f202fb6e30e5b9840e
   projektion: betrieb-v3
   folgeentscheidung: true
+
 - slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
   befund_ursprung_slug: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
   befund_id: e6729081522126e972c2
   befund_fassung: e0467fc165072c1ae734ff7e7a6ab099dfb5d9a9fbeb67676534a0ce005b29c3
   geprueft_fassung: d2de44d6edf218d75a4c02dfc136f42f017d0244e39312472a8c5d4aa9fc7872
   typ: luecke
-  beanstandung: Angabe, dass ein optimal beladener Trommel (ca. 80 % Kapazität) bis
-    zu 15 % weniger Wasser und Energie verbraucht, wird nicht durch eine Quelle belegt.
+  beanstandung: Angabe, dass ein optimal beladener Trommel (ca. 80 % Kapazität)
+    bis zu 15 % weniger Wasser und Energie verbraucht, wird nicht durch eine Quelle
+    belegt.
   beleg: https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
   entschieden_am: '2026-11-12'
   fassung_wechsel: true
-  begruendung: 'Paket A, entschieden am 12.11.2026: Die „bis zu 15 %“-Angabe ist entfallen.
-    Der Artikel nennt seine Annahmen und sagt in der Kurzantwort ausdrücklich, dass
-    es eine Rechnung mit Quellenwerten und keine Messung im Haushalt ist. Beleg: BDEW-Strompreisanalyse
-    (Q3); Verbrauchswerte sind als Quelle bzw. Szenario benannt.'
+  begruendung: 'Paket A, entschieden am 12.11.2026: Die „bis zu 15 %“-Angabe ist
+    entfallen. Der Artikel nennt seine Annahmen und sagt in der Kurzantwort ausdrücklich,
+    dass es eine Rechnung mit Quellenwerten und keine Messung im Haushalt ist.
+    Beleg: BDEW-Strompreisanalyse (Q3); Verbrauchswerte sind als Quelle bzw. Szenario
+    benannt.'
   vorgaenger_geprueft_fassung: 6bce91f5cc8d0105fd5a826e66ce6f9fca5bec481fa8a5f202fb6e30e5b9840e
   projektion: betrieb-v3
   folgeentscheidung: true
+
 - slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
   befund_ursprung_slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
   befund_id: 785eee76d888bb05ad96
   befund_fassung: cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf
   geprueft_fassung: 8ac687755f34263c980b7ffd282bb7492f9ac2cc71d10a60c62d5d8dcaf711ff
   typ: luecke
-  beanstandung: Die im Rechenbeispiel genutzte Kilometerpauschale von 0,20 €/km wird
-    als Referenzwert ohne Quellenangabe (z. B. Branchenverband) angeführt.
+  beanstandung: Die im Rechenbeispiel genutzte Kilometerpauschale von 0,20 €/km
+    wird als Referenzwert ohne Quellenangabe (z. B. Branchenverband) angeführt.
   beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
   entschieden_am: '2026-11-12'
   fassung_wechsel: true
   begruendung: 'Am 12.11.2026 an die heutige Fassung gebunden: Die Beleg-Url steht
     jetzt im Quellenverzeichnis des Artikels (vorher war sie nur im Register genannt),
-    und die Kurzantwort führt keine Zahlen mit leeren Zitatklammern mehr. Die Entscheidung
-    selbst bleibt unverändert.'
+    und die Kurzantwort führt keine Zahlen mit leeren Zitatklammern mehr. Die
+    Entscheidung selbst bleibt unverändert.'
   vorgaenger_geprueft_fassung: 2e0bf5d87784e28b64fb68a123c8a49791870b59e5861cf09aec4c937943b9a8
   projektion: betrieb-v3
   folgeentscheidung: true
+
 - slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
   befund_ursprung_slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
   befund_id: 843ec148e23841b7bf35
   befund_fassung: cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf
   geprueft_fassung: 8ac687755f34263c980b7ffd282bb7492f9ac2cc71d10a60c62d5d8dcaf711ff
   typ: luecke
-  beanstandung: Der als Handlungsschritt empfohlene '4K-Prüfpfad' wird im Text nicht
-    erläutert und ist in der genannten Quelle nicht enthalten.
+  beanstandung: Der als Handlungsschritt empfohlene '4K-Prüfpfad' wird im Text
+    nicht erläutert und ist in der genannten Quelle nicht enthalten.
   beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
   entschieden_am: '2026-11-12'
   fassung_wechsel: true
   begruendung: 'Am 12.11.2026 an die heutige Fassung gebunden: Die Beleg-Url steht
     jetzt im Quellenverzeichnis des Artikels (vorher war sie nur im Register genannt),
-    und die Kurzantwort führt keine Zahlen mit leeren Zitatklammern mehr. Die Entscheidung
-    selbst bleibt unverändert.'
+    und die Kurzantwort führt keine Zahlen mit leeren Zitatklammern mehr. Die
+    Entscheidung selbst bleibt unverändert.'
   vorgaenger_geprueft_fassung: 2e0bf5d87784e28b64fb68a123c8a49791870b59e5861cf09aec4c937943b9a8
   projektion: betrieb-v3
   folgeentscheidung: true
+
 - slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
   befund_ursprung_slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
   befund_id: def43a04853be4c35f7f
@@ -5396,29 +5263,104 @@ entscheidungen:
   fassung_wechsel: true
   begruendung: 'Am 12.11.2026 an die heutige Fassung gebunden: Die Beleg-Url steht
     jetzt im Quellenverzeichnis des Artikels (vorher war sie nur im Register genannt),
-    und die Kurzantwort führt keine Zahlen mit leeren Zitatklammern mehr. Die Entscheidung
-    selbst bleibt unverändert.'
+    und die Kurzantwort führt keine Zahlen mit leeren Zitatklammern mehr. Die
+    Entscheidung selbst bleibt unverändert.'
   vorgaenger_geprueft_fassung: 2e0bf5d87784e28b64fb68a123c8a49791870b59e5861cf09aec4c937943b9a8
   projektion: betrieb-v3
   folgeentscheidung: true
+
 - slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
   befund_ursprung_slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
   befund_id: f064ea49ccefde26aef9
   befund_fassung: cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf
   geprueft_fassung: 8ac687755f34263c980b7ffd282bb7492f9ac2cc71d10a60c62d5d8dcaf711ff
   typ: praezision
-  beanstandung: Das Versprechen, CHECK24 vergleiche 'alle großen Anbieter', ist ein
-    Vollständigkeitsversprechen ohne Nennung von Auswahlkriterien oder der Marktabdeckung.
+  beanstandung: Das Versprechen, CHECK24 vergleiche 'alle großen Anbieter', ist
+    ein Vollständigkeitsversprechen ohne Nennung von Auswahlkriterien oder der
+    Marktabdeckung.
   beleg: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
   entschieden_am: '2026-11-12'
   fassung_wechsel: true
   begruendung: 'Am 12.11.2026 an die heutige Fassung gebunden: Die Beleg-Url steht
     jetzt im Quellenverzeichnis des Artikels (vorher war sie nur im Register genannt),
-    und die Kurzantwort führt keine Zahlen mit leeren Zitatklammern mehr. Die Entscheidung
-    selbst bleibt unverändert.'
+    und die Kurzantwort führt keine Zahlen mit leeren Zitatklammern mehr. Die
+    Entscheidung selbst bleibt unverändert.'
   vorgaenger_geprueft_fassung: 2e0bf5d87784e28b64fb68a123c8a49791870b59e5861cf09aec4c937943b9a8
   projektion: betrieb-v3
+  folgeentscheidung: true
+- slug: 2026-10-14-heizperiode-vorbereiten-im-spaetsommer
+  befund_ursprung_slug: 2026-10-14-heizperiode-vorbereiten-im-spaetsommer
+  befund_id: 61ed9d03642fa5afa89e
+  befund_fassung: 03af3ebe8b01c8276c2d2ba9624807d080592390fa81c1c49ce047d9cf88135e
+  geprueft_fassung: a1f9905fbaec9bd99b0a1736e3b9b812ba98763e420998b05987139c39b71506
+  typ: praezision
+  beanstandung: Die pauschale Einordnung der Behördenseite als 'kein Beleg für Tipps'
+    greift zu kurz; die Fundstelle ist das zentrale Aufsichtsportal für den regulierten
+    Energiemarkt (Strom/Gas).
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
+  entschieden_am: '2026-11-11'
+  fassung_wechsel: true
+  begruendung: 'Text am 11.11.2026 praezisiert: Die Bundesnetzagentur wird nicht mehr
+    pauschal als ''kein Beleg fuer Tipps'' abgetan, sondern als Aufsichtsbehoerde
+    des regulierten Strom- und Gasmarkts und amtliche Fundstelle eingeordnet - mit
+    der klaren Grenze, dass sie keine festen Sparquoten belegt und keinen Dienst wie
+    CHECK24 empfiehlt.'
+- slug: 2026-10-14-heizperiode-vorbereiten-im-spaetsommer
+  befund_ursprung_slug: 2026-10-14-heizperiode-vorbereiten-im-spaetsommer
+  befund_id: bbd476563a6a52c57957
+  befund_fassung: 03af3ebe8b01c8276c2d2ba9624807d080592390fa81c1c49ce047d9cf88135e
+  geprueft_fassung: a1f9905fbaec9bd99b0a1736e3b9b812ba98763e420998b05987139c39b71506
+  typ: luecke
+  beanstandung: Der Artikel verweist für Informationen zum Stromverbrauch von Routern
+    auf die Bundesnetzagentur, verlinkt jedoch die Fachabteilung für Energie statt
+    die zuständige Abteilung für Telekommunikation.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
+  entschieden_am: '2026-11-11'
+  fassung_wechsel: true
+  begruendung: 'Router-Absatz korrigiert: Der Verweis auf die Energie-Fachabteilung
+    der Bundesnetzagentur ist entfernt; der Text sagt jetzt, dass es keine amtliche
+    Liste mit einem festen Wert je Geraet gibt. Der Router-Stromverbrauch wird ueber
+    Herstellerangaben und ein Steckdosen-Messgeraet bestimmt.'
+- slug: 2026-10-14-heizperiode-vorbereiten-im-spaetsommer
+  befund_ursprung_slug: 2026-10-14-heizperiode-vorbereiten-im-spaetsommer
+  befund_id: 61ed9d03642fa5afa89e
+  befund_fassung: 03af3ebe8b01c8276c2d2ba9624807d080592390fa81c1c49ce047d9cf88135e
+  geprueft_fassung: 04a5b4b70c6147eb31ad14a03bc1b4f22a4b851f498f25f2b188877ef22e1dc4
+  typ: praezision
+  beanstandung: Die pauschale Einordnung der Behördenseite als 'kein Beleg für Tipps'
+    greift zu kurz; die Fundstelle ist das zentrale Aufsichtsportal für den regulierten
+    Energiemarkt (Strom/Gas).
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
+  entschieden_am: '2026-11-11'
+  fassung_wechsel: true
+  begruendung: 'Text (final) praezisiert: Die Bundesnetzagentur ist als Aufsichtsbehoerde
+    des regulierten Strom- und Gasmarkts und amtliche Fundstelle eingeordnet, ausdruecklich
+    mit der Grenze, dass sie keine festen Sparquoten belegt und keinen Dienst wie
+    CHECK24 empfiehlt.'
+  vorgaenger_geprueft_fassung: a1f9905fbaec9bd99b0a1736e3b9b812ba98763e420998b05987139c39b71506
+  folgeentscheidung: true
+- slug: 2026-10-14-heizperiode-vorbereiten-im-spaetsommer
+  befund_ursprung_slug: 2026-10-14-heizperiode-vorbereiten-im-spaetsommer
+  befund_id: bbd476563a6a52c57957
+  befund_fassung: 03af3ebe8b01c8276c2d2ba9624807d080592390fa81c1c49ce047d9cf88135e
+  geprueft_fassung: 04a5b4b70c6147eb31ad14a03bc1b4f22a4b851f498f25f2b188877ef22e1dc4
+  typ: luecke
+  beanstandung: Der Artikel verweist für Informationen zum Stromverbrauch von Routern
+    auf die Bundesnetzagentur, verlinkt jedoch die Fachabteilung für Energie statt
+    die zuständige Abteilung für Telekommunikation.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
+  entschieden_am: '2026-11-11'
+  fassung_wechsel: true
+  begruendung: 'Router-Absatz (final) korrigiert: kein Verweis mehr auf die Energie-Fachabteilung
+    der Bundesnetzagentur; der Text sagt, dass es keine amtliche Liste mit festem
+    Wert je Geraet gibt. Verbrauch wird ueber Herstellerangaben und Steckdosen-Messgeraet
+    bestimmt.'
+  vorgaenger_geprueft_fassung: a1f9905fbaec9bd99b0a1736e3b9b812ba98763e420998b05987139c39b71506
   folgeentscheidung: true
 - slug: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
   befund_ursprung_slug: 2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu

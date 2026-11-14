@@ -128,6 +128,19 @@ jobs:
         self.assertGreater(geprueft, 50)
         self.assertEqual(befunde, [], "\n".join(str(b) for b in befunde))
 
+    def test_ki_transparenz_testet_alle_modalitaeten_im_annotierten_lauf(self):
+        import yaml
+        workflow = yaml.safe_load((ROOT / ".github/workflows/deploy.yml").read_text(encoding="utf-8"))
+        schritt = next(s for s in workflow["jobs"]["deploy"]["steps"]
+                       if s.get("name") == "KI-Transparenz – Text, Bild und Provenienz testen")
+        command = schritt["run"]
+        self.assertEqual(command.count("python3 -m unittest"), 1)
+        self.assertIn('python3 scripts/ci_tests.py --titel "KI-Transparenz"', command)
+        for modul in ("test_ki_audio_markierung", "test_ki_provenienz_gate",
+                      "test_ki_provenienz_auslieferung", "test_pinterest_ki_provenienz",
+                      "test_ki_frist_freigabe"):
+            self.assertIn(f"scripts.tests.{modul}", command)
+
     def test_gate_vertrag(self):
         ergebnis = subprocess.run(
             [sys.executable, str(SKRIPT), "--gate"], capture_output=True, text=True)

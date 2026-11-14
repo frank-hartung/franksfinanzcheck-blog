@@ -1765,6 +1765,9 @@ def queue_invariante(daten: dict) -> list[str]:
          `text`); Befunde stehen ausschließlich in `fachbefunde`.
       5. Jeder Eintrag nennt `slug`, `faellig` und `frist` (auch `null` ist
          eine Aussage) – ein Vorratseintrag ohne Termin ist keine Planung.
+      6. Die Kopie in `offen` bzw. `vorlauf` ist feldgleich zum Vorrat.
+         Gleiche Slugs bei abweichender Frist oder Begründung sind keine
+         Partition, sondern zwei widersprechende Aussagen.
 
     Geprüft wird der DATENSATZ, nicht die Absicht: Der Schreiber darf einen
     widersprüchlichen Stand gar nicht erst persistieren (fail-closed).
@@ -1808,6 +1811,28 @@ def queue_invariante(daten: dict) -> list[str]:
         if extra:
             fehler.append("Eintrag steht nur in `offen`/`vorlauf`: "
                           + ", ".join(extra))
+
+    # Gleiche Slugs reichen nicht: Eine veränderte Frist, ein fehlendes Feld
+    # oder eine andere Begründung in einer Kopie wäre ein zweiter Datenstand.
+    # Python hält 0 und False für gleich; JSON tut das nicht. Deshalb auch
+    # verschachtelte Werte typgetreu vergleichen.
+    def feldgleich(a, b):
+        if type(a) is not type(b):
+            return False
+        if isinstance(a, dict):
+            return a.keys() == b.keys() and all(feldgleich(a[k], b[k]) for k in a)
+        if isinstance(a, list):
+            return len(a) == len(b) and all(feldgleich(x, y) for x, y in zip(a, b))
+        return a == b
+
+    for slug in sorted(set(vorrat) & (set(offen) | set(vorlauf))):
+        teil = offen[slug] if slug in offen else vorlauf[slug]
+        if not feldgleich(vorrat[slug], teil):
+            felder = sorted(k for k in set(vorrat[slug]) | set(teil)
+                            if k not in vorrat[slug] or k not in teil
+                            or not feldgleich(vorrat[slug][k], teil[k]))
+            fehler.append(f"Vorrat und Partition widersprechen sich bei {slug}: "
+                          + ", ".join(felder))
 
     # Befund-Einträge müssen im Ledger belegt sein – ein gesetztes `befund`
     # ohne Eintrag wäre eine Behauptung, keine Messung.
@@ -1863,10 +1888,14 @@ def queue_invariante(daten: dict) -> list[str]:
         if not isinstance(eintrag.get("faellig"), bool):
             fehler.append(f"Arbeitsvorrat-Eintrag ohne boolesches "
                           f"`faellig`: {slug}")
+        for feld in ("befund", "unvollstaendig"):
+            if feld in eintrag and not isinstance(eintrag[feld], bool):
+                fehler.append(f"Arbeitsvorrat-Eintrag ohne boolesches "
+                              f"`{feld}`: {slug}")
 
-    if daten.get("schema") != QUEUE_SCHEMA:
+    if type(daten.get("schema")) is not int or daten["schema"] != QUEUE_SCHEMA:
         fehler.append(f"`schema` ist {daten.get('schema')!r}, "
-                      f"erwartet {QUEUE_SCHEMA}")
+                      f"erwartet Ganzzahl {QUEUE_SCHEMA}")
     return fehler
 
 
@@ -1944,11 +1973,45 @@ def queue_normalisieren(apply: bool = False, pfad: str = QUEUE_PFAD) -> dict:
     if not quelle.exists():
         return {"ok": False, "fehler": f"Queue fehlt: {pfad}"}
     try:
-        alt = json.loads(quelle.read_text(encoding="utf-8"))
+        # Derselbe strenge Leser wie im Ledger: Doppelte JSON-Schlüssel
+        # dürfen nicht unbemerkt von der Migration überschrieben werden.
+        alt = ledger._json_object(quelle)
     except (OSError, ValueError) as exc:
         return {"ok": False, "fehler": f"Queue nicht lesbar: {exc}"}
-    if not isinstance(alt, dict):
-        return {"ok": False, "fehler": "Queue ist kein Objekt"}
+
+    schema = alt.get("schema")
+    if schema is not None and (type(schema) is not int or schema not in (1, QUEUE_SCHEMA)):
+        return {"ok": False, "fehler": f"Unbekanntes Queue-Schema: {schema!r}"}
+    if schema == QUEUE_SCHEMA:
+        probleme = queue_invariante(alt)
+        if probleme:
+            return {"ok": False, "fehler": "Queue widersprüchlich: " + "; ".join(probleme)}
+    elif (isinstance(alt.get("offen"), list)
+          and isinstance(alt.get("arbeitsvorrat"), list)
+          and json.dumps(alt["offen"], sort_keys=True)
+          != json.dumps(alt["arbeitsvorrat"], sort_keys=True)):
+        # In Schema 1 waren beide Namen Aliase. Ein Widerspruch könnte
+        # Einträge nur in einem der Felder tragen – nicht blind verwerfen.
+        return {"ok": False, "fehler": "Schema-1-Listen `offen` und `arbeitsvorrat` widersprechen sich"}
+
+    bestand = alt.get("arbeitsvorrat")
+    if not isinstance(bestand, list):
+        # Schema 1: `offen` war die einzige Liste.
+        bestand = alt.get("offen")
+    if not isinstance(bestand, list):
+        return {"ok": False, "fehler": "Weder `arbeitsvorrat` noch `offen` "
+                                       "ist eine Liste"}
+    for roh in bestand:
+        if not isinstance(roh, dict):
+            return {"ok": False, "fehler": "Arbeitsvorrat-Eintrag ist kein "
+                                           "Objekt"}
+        # Auch in älteren Schemata darf ein String wie "false" nicht durch
+        # bool(...) als True interpretiert oder beim Neuableiten überschrieben
+        # werden. Bei unklaren Fakten muss ein Mensch den Datensatz prüfen.
+        for feld in ("faellig", "befund", "unvollstaendig"):
+            if feld in roh and not isinstance(roh[feld], bool):
+                return {"ok": False, "fehler": f"{roh.get('slug', '?')}: "
+                                               f"`{feld}` ist nicht boolesch"}
 
     try:
         fachbefunde = ledger.zusammenfuehren(alt, [])
@@ -1959,19 +2022,8 @@ def queue_normalisieren(apply: bool = False, pfad: str = QUEUE_PFAD) -> dict:
     offene_slugs = {b.get("slug") for b in offene}
     offene_slugs |= {b.get("ursprungs_slug") for b in offene}
 
-    bestand = alt.get("arbeitsvorrat")
-    if not isinstance(bestand, list):
-        # Schema 1: `offen` war die einzige Liste.
-        bestand = alt.get("offen")
-    if not isinstance(bestand, list):
-        return {"ok": False, "fehler": "Weder `arbeitsvorrat` noch `offen` "
-                                       "ist eine Liste"}
-
     eintraege = []
     for roh in bestand:
-        if not isinstance(roh, dict):
-            return {"ok": False, "fehler": "Arbeitsvorrat-Eintrag ist kein "
-                                           "Objekt"}
         eintrag = dict(roh)
         # Der Ledger ist die Wahrheit über offene Befunde – nicht das Feld
         # einer alten Datei. `befund` wird deshalb neu gesetzt, nie geerbt.
@@ -1990,6 +2042,12 @@ def queue_normalisieren(apply: bool = False, pfad: str = QUEUE_PFAD) -> dict:
             erzeugt=alt.get("erzeugt") or jetzt_utc())
     except ValueError as exc:
         return {"ok": False, "fehler": str(exc)}
+
+    # Erweiterungsfelder gehören dem vorhandenen Datensatz. Der Schemawechsel
+    # darf sie nicht still löschen, auch wenn der Generator sie nicht kennt.
+    for feld, wert in alt.items():
+        if feld not in neu:
+            neu[feld] = wert
 
     bericht = {
         "ok": True,

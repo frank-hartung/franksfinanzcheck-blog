@@ -95,6 +95,18 @@ def _truthy(value):
     return str(value).strip().lower() in ("true", "yes", "1")
 
 
+def reserve_hold(content):
+    """Bewusste Reserve-Ausmusterung, auch bei widersprüchlicher Pool-Fahne.
+
+    Schon das Vorhandensein des Schlüssels stoppt die Veröffentlichung:
+    unvollständige oder irrtümlich auf `false` gesetzte Marker dürfen eine
+    redaktionelle Sperre nicht stillschweigend aufheben. Der Schlüssel muss
+    nach menschlicher Prüfung bewusst entfernt werden.
+    """
+    return bool(re.search(r"(?m)^reserve_(?:blocked|retired)[ \t]*:",
+                          _frontmatter(content)))
+
+
 def state_of(content):
     """Zustand der Post-Park-Maschine: live | queue | hold | manual | lost
     (plus Sonderfall "stale" über is_stale_flag())."""
@@ -274,11 +286,17 @@ def hold(path, grund, when=None, do_fix=True):
 
 
 def release(path, do_fix=True):
-    """Promotion/ Freigabe: live + alle Park-Felder weg (sonst hinterlässt
-    jede Promotion müde Flag-Reste, die wie ein verlorener Zustand aussehen).
-    body: unverändert."""
+    """Promotion/ Freigabe: live + alle Park-Felder weg.
+
+    Explizite Reserve-Sperren haben Vorrang vor einer Re-Queue-Fahne; sie
+    müssen nach redaktioneller Prüfung bewusst entfernt werden. Der Body
+    bleibt unverändert.
+    """
     if not do_fix:
         return True
+    with open(path, encoding="utf-8") as f:
+        if reserve_hold(f.read()):
+            return False
     return _apply(path, {
         "draft": False,
         "cadence_wait": None,

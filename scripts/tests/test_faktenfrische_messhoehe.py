@@ -131,6 +131,28 @@ class QueueSchemaVertrag(unittest.TestCase):
                                 f"Die Wache übersieht: {name}")
         self.assertEqual(faktenfrische.queue_invariante(qd), [])
 
+    def test_partition_muss_feldgleich_zum_arbeitsvorrat_sein(self):
+        """Gleiche Slugs verbergen sonst verschiedene Fristen und Aussagen."""
+        for liste, index, feld, wert in (
+            ("vorlauf", 0, "frist", "2027-01-01"),
+            ("vorlauf", 0, "grund", "andere Begründung"),
+            ("offen", 0, "faellig", 1),  # Python: 1 == True; JSON: ungleich
+            ("offen", 1, "zusaetzlich", {"behauptung": True}),
+        ):
+            with self.subTest(liste=liste, feld=feld):
+                q = json.loads(json.dumps(bauen()))
+                q[liste][index][feld] = wert
+                fehler = faktenfrische.queue_invariante(q)
+                self.assertTrue(any("Vorrat und Partition" in f and feld in f
+                                    for f in fehler), fehler)
+
+    def test_nicht_boolesche_befund_flags_sind_ungueltig(self):
+        for feld in ("befund", "unvollstaendig"):
+            with self.subTest(feld=feld):
+                vorrat = [dict(VORRAT[0], **{feld: "false"})]
+                with self.assertRaisesRegex(ValueError, "boolesch"):
+                    bauen(vorrat=vorrat)
+
     def test_artefakt_ist_widerspruchsfrei(self):
         """Die committete Queue muss die Regel erfüllen – nicht erst der Lauf."""
         q = artefakt()
@@ -218,6 +240,73 @@ class MigrationUndIdempotenz(unittest.TestCase):
             # Zweiter Lauf ändert nichts (Byte-Vergleich ohne Zeitstempel).
             faktenfrische.queue_normalisieren(apply=True, pfad=str(pfad))
             self.assertEqual(pfad.read_text(encoding="utf-8"), einmal)
+
+    def test_widerspruch_wird_nicht_weg_normalisiert(self):
+        gueltig = json.loads(json.dumps(bauen()))
+        widerspruch = json.loads(json.dumps(gueltig))
+        widerspruch["vorlauf"][0]["frist"] = "2027-01-01"
+        alias = json.loads(json.dumps(gueltig))
+        alias.pop("schema")
+        alias["offen"] = []  # Schema-1-Alias ohne den vorhandenen Vorrat
+        zukunft = dict(gueltig, schema=99)
+        for name, daten in (("Schema 2", widerspruch), ("Alias", alias),
+                            ("unbekanntes Schema", zukunft)):
+            with self.subTest(fall=name), tempfile.TemporaryDirectory() as tmp:
+                pfad = Path(tmp) / "queue.json"
+                roh = json.dumps(daten, ensure_ascii=False)
+                pfad.write_text(roh, encoding="utf-8")
+                bericht = faktenfrische.queue_normalisieren(apply=True, pfad=str(pfad))
+                self.assertFalse(bericht["ok"], bericht)
+                self.assertEqual(pfad.read_text(encoding="utf-8"), roh)
+
+    def test_migration_verweigert_unechte_schema_und_flag_typen(self):
+        alt = json.loads(json.dumps(bauen()))
+        alt.pop("schema")
+        alt.pop("vorlauf")
+        alt["offen"] = alt["arbeitsvorrat"]
+        faelle = []
+        for feld, wert in (("faellig", 1), ("befund", "false"),
+                           ("unvollstaendig", "false")):
+            daten = json.loads(json.dumps(alt))
+            daten["arbeitsvorrat"][0][feld] = wert
+            daten["offen"][0][feld] = wert
+            faelle.append((feld, daten))
+        faelle.extend((f"schema={wert!r}", dict(alt, schema=wert))
+                      for wert in (True, 1.0, 2.0, "2"))
+        for name, daten in faelle:
+            with self.subTest(fall=name), tempfile.TemporaryDirectory() as tmp:
+                pfad = Path(tmp) / "queue.json"
+                roh = json.dumps(daten, ensure_ascii=False)
+                pfad.write_text(roh, encoding="utf-8")
+                bericht = faktenfrische.queue_normalisieren(apply=True, pfad=str(pfad))
+                self.assertFalse(bericht["ok"], bericht)
+                self.assertEqual(pfad.read_text(encoding="utf-8"), roh)
+
+    def test_migration_erhaelt_unbekannte_erweiterungsfelder(self):
+        alt = bauen()
+        alt["zusatz"] = {"nachweis": ["bleibt", 1, False]}
+        with tempfile.TemporaryDirectory() as tmp:
+            pfad = Path(tmp) / "queue.json"
+            pfad.write_text(json.dumps(alt, ensure_ascii=False), encoding="utf-8")
+            bericht = faktenfrische.queue_normalisieren(apply=True, pfad=str(pfad))
+            self.assertTrue(bericht["ok"], bericht)
+            self.assertEqual(json.loads(pfad.read_text(encoding="utf-8"))["zusatz"],
+                             alt["zusatz"])
+
+    def test_migration_und_ledger_verweigern_doppelte_json_schluessel(self):
+        for roh in (
+            '{"arbeitsvorrat": [], "arbeitsvorrat": [], "fachbefunde": [], "laeufe": []}',
+            '{"arbeitsvorrat": [], "fachbefunde": [{"id": "a", "id": "b"}], "laeufe": []}',
+        ):
+            with self.subTest(json=roh), tempfile.TemporaryDirectory() as tmp:
+                pfad = Path(tmp) / "queue.json"
+                pfad.write_text(roh, encoding="utf-8")
+                bericht = faktenfrische.queue_normalisieren(apply=True, pfad=str(pfad))
+                self.assertFalse(bericht["ok"], bericht)
+                self.assertIn("Doppelter JSON-Schlüssel", bericht["fehler"])
+                self.assertEqual(pfad.read_text(encoding="utf-8"), roh)
+                with self.assertRaisesRegex(ledger.LedgerFehler, "Doppelter JSON-Schlüssel"):
+                    ledger.offene_befunde(pfad)
 
     def test_cli_bietet_den_trockenlauf(self):
         ergebnis = subprocess.run(

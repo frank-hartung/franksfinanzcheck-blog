@@ -344,21 +344,34 @@ def validate_article(fm: dict, body: str, *, today: dt.date | None = None,
                      ignore_hash: bool = False) -> dict:
     """Reine Prüfung; geeignet für Gate, CLI und Unit-Tests."""
     today = today or dt.date.today()
-    risk = inferred_risk(fm)
+    inferred = inferred_risk(fm)
+    risk = inferred
     review = fm.get("redaktionelle_pruefung") or {}
     if not isinstance(review, dict):
         review = {}
     declared = str(review.get("risikoklasse") or "").strip().lower()
     status = str(review.get("status") or "").strip().lower()
+    reserve_hold = any(key in fm for key in ("reserve_blocked", "reserve_retired"))
     findings: list[dict] = []
 
+    # Auch ein direkter Draft-Flip darf die bewusste Sperre nicht umgehen.
+    # Drafts bleiben als Arbeitsmaterial erhalten und werden von --published
+    # nicht beanstandet; live gilt die Sperre unabhängig von der Risikoklasse.
+    if reserve_hold and fm.get("draft") is not True:
+        findings.append(_finding(
+            "E20", "Explizite Reserve-Sperre: redaktionelle Prüfung vor Veröffentlichung erforderlich"))
+
     # Eine manuell niedrigere Einstufung darf die automatische Erkennung nie
-    # aushebeln. Höherstufungen sind erlaubt.
+    # aushebeln. Höherstufungen müssen hingegen auch wirklich wirksam sein:
+    # Ein ausdrücklich als hoch markierter Text braucht die Hochrisiko-Prüfung,
+    # selbst wenn sein Titel alleine nur ein niedrigeres Risiko erkennen lässt.
     if declared and declared not in RISK_ORDER:
         findings.append(_finding("E01", f"unbekannte Risikoklasse „{declared}“"))
-    elif declared and RISK_ORDER.get(declared, -1) < RISK_ORDER[risk]:
+    elif declared and RISK_ORDER[declared] < RISK_ORDER[inferred]:
         findings.append(_finding(
-            "E02", f"Risikoklasse darf nicht von {risk} auf {declared} herabgestuft werden"))
+            "E02", f"Risikoklasse darf nicht von {inferred} auf {declared} herabgestuft werden"))
+    elif declared:
+        risk = declared
 
     # Ein alter, als aktuell bezeichneter Artikelstand ist unabhängig von der
     # Risikoklasse ein Publikationsfehler (realer Fund: „Stand 2024“ in einem
@@ -374,6 +387,7 @@ def validate_article(fm: dict, body: str, *, today: dt.date | None = None,
     if risk != RISK_HIGH:
         return {
             "risk": risk, "declared_risk": declared or None, "status": status or None,
+            "reserve_hold": reserve_hold,
             "approved": False, "blocking": bool(findings), "findings": findings,
         }
 
@@ -382,6 +396,7 @@ def validate_article(fm: dict, body: str, *, today: dt.date | None = None,
             "E03", "Hochrisiko-Thema ohne redaktionelle_pruefung (Freigabe fehlt)"))
         return {
             "risk": risk, "declared_risk": None, "status": None,
+            "reserve_hold": reserve_hold,
             "approved": False, "blocking": True, "findings": findings,
         }
 
@@ -602,6 +617,7 @@ def validate_article(fm: dict, body: str, *, today: dt.date | None = None,
         "risk": risk,
         "declared_risk": declared or None,
         "status": status or None,
+        "reserve_hold": reserve_hold,
         "approved": approved,
         "blocking": bool(findings),
         "findings": findings,

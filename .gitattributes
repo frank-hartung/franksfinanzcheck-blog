@@ -89,6 +89,22 @@ data/reserve-quarantine.json merge=binary
 data/reserve-intake.json merge=binary
 data/reserve-janitor-state.json merge=binary
 
+# FAKTENFRISCHE: Die Queue enthält neben Planung auch fortgeschriebene
+# Fachbefunde; Schließakte und Register enthalten echte Entscheidungen und
+# Fassungsbindungen. Beim Merge 043978da/525d00c1 vermischte Git vier gültige
+# Elternfassungen zu kaputtem JSON und YAML mit doppelten Schlüsseln. Auch ein
+# syntaktisch gültiger Zeilen-Mix wäre keine belegte Entscheidung. Parallele
+# Änderungen müssen deshalb sichtbar konflikten; insbesondere darf git_sync
+# bei der Queue nicht einfach eine Seite verwerfen. Den Zustand/Akte nach
+# belegter Auflösung aus den Quellen neu ableiten (siehe Incident-Dokument).
+data/faktenfrische_queue.json merge=binary
+data/faktenfrische_entscheidungen.yaml merge=binary
+data/faktenfrische_befunde_1072.yaml merge=binary
+data/faktenfrische_befunde_state.json merge=binary
+data/faktenfrische_merge_quarantaene_*.json merge=binary
+/BEFUND-AKTE.md merge=binary
+/F4-ENTSCHEIDUNGSVORLAGE.md merge=binary
+
 # Die sechs wiederhergestellten Redaktionsfassungen bleiben auch nach einem
 # Datums-Lift unteilbar: kein stiller Zusammenschnitt von geprüften Absätzen.
 # Die Reserve-Konfliktpolitik in git_sync.sh entscheidet weiterhin anhand der
@@ -99,6 +115,15 @@ content/posts/*-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/index.m
 content/posts/*-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/index.md merge=binary
 content/posts/*-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/index.md merge=binary
 content/posts/*-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/index.md merge=binary
+
+# PR #1207 setzte Heizöl und Ökostrom beim Cover-Nachzug zurück und änderte
+# den Kreditkarten-Entwurf. Dessen beide Fassungen enthielten Fachbefunde.
+# Parallele Änderungen dürfen nicht still zu einem nie geprüften Artikel
+# zusammengesetzt werden. Auch ein ganzer veralteter Stand ist kein Freibrief:
+# git_sync stoppt Konflikte und Rückfalltests prüfen das Merge-Ergebnis.
+content/posts/*-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu/index.md merge=binary
+content/posts/*-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/index.md merge=binary
+content/posts/*-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten/index.md merge=binary
 
 # Die QUELLTEXT-Wachen unter dem Siegel (16.10.2026, Vorgang WF-6F7F / #783):
 # Am 15.10.2026 wurden in `scripts/redaktions_standard.py` bei einem Rebase

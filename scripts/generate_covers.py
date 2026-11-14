@@ -121,12 +121,14 @@ except ImportError:
     sys.exit("FEHLER: pillow nicht installiert –  pip install pillow")
 
 try:
-    import pillow_avif  # noqa: F401 – Aktiviert AVIF-Support in Pillow
-    AVIF_OK = True
+    import pillow_avif  # noqa: F401 – registriert AVIF in älteren Pillow-Versionen
 except ImportError:
-    AVIF_OK = False
-    print("HINWEIS: pillow-avif-plugin fehlt – AVIF-Varianten werden übersprungen "
-          "(pip install pillow-avif-plugin)")
+    pass
+Image.init()
+AVIF_OK = "AVIF" in Image.SAVE
+if not AVIF_OK:
+    print("HINWEIS: kein AVIF-Encoder verfügbar – AVIF-Varianten werden "
+          "übersprungen (Pillow mit AVIF-Unterstützung installieren)")
 
 
 def save_modern_variants(img, out_path, force=False):
@@ -145,22 +147,27 @@ def save_modern_variants(img, out_path, force=False):
 
 
 def load_font(size):
-    """Cover-Font: nur Inter Bold (Frank-Wahl 11.08. spaet - das ruhige G)."""
-    candidates = [
-        os.path.join(BLOG_DIR, "static", "fonts", "Inter-Bold.ttf"),
-        "/usr/share/fonts/truetype/inter/Inter-Bold.ttf",
-    ]
-    for path in candidates:
-        if os.path.exists(path):
-            try:
-                return ImageFont.truetype(path, size)
-            except Exception:
-                continue
-    # Sabotage-Schutz: NIEMALS auf einen anderen Font ausweichen - lieber
-    # laut scheitern als leise falsch branden (Lektion vom "G bei Geld").
-    print("🛑 FONT-PACT VERLETZT: static/fonts/Inter-Bold.ttf fehlt!")
-    print("   Kein Cover wird falsch gerendert. `python3 scripts/bake_fonts.py --file Inter-Bold.ttf` zuerst.")
-    sys.exit(2)
+    """Die versionierte Schrift und das feste Layout der bestehenden Cover.
+
+    Pillow wählt ohne ``layout_engine`` automatisch RAQM, sobald die
+    Systembibliothek FriBidi vorhanden ist; sonst BASIC. Beide Renderpfade
+    liefern unterschiedliche Pixel, obwohl Schrift und Pillow-Version gleich
+    sind. Die bestehenden Cover wurden mit BASIC erstellt. Die explizite Wahl
+    macht Generator und Herkunftsprüfung unabhängig vom Runner (Issue #1211).
+    Ein System-Fallback wäre eine zweite, nicht versionierte Schriftquelle.
+    """
+    path = os.path.join(BLOG_DIR, "static", "fonts", "Inter-Bold.ttf")
+    try:
+        # Pillow sucht bei einem Dateinamen nach OSError selbständig in
+        # System-Fontordnern – selbst bei einem absoluten Pfad. Ein offener
+        # Stream unterbindet diesen versteckten Fallback vollständig.
+        with open(path, "rb") as schrift:
+            return ImageFont.truetype(schrift, size, layout_engine=ImageFont.Layout.BASIC)
+    except OSError as exc:
+        print(f"🛑 FONT-PACT VERLETZT: versionierte Schrift {path} nicht lesbar: {exc}")
+        print("   Kein Cover wird mit einer Systemschrift gerendert. "
+              "`python3 scripts/bake_fonts.py --file Inter-Bold.ttf` zuerst.")
+        raise SystemExit(2) from exc
 
 
 def wrap_text(text, font, max_width, draw):
