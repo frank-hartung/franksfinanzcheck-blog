@@ -1,5 +1,5 @@
-generated_at: '2026-11-13T11:31:51Z'
-day: '2026-11-13'
+generated_at: '2026-11-14T10:55:27Z'
+day: '2026-11-14'
 mode: deterministic
 teams:
   trending:
@@ -252,54 +252,51 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: Energiekosten senken mit Smart-Home-Geräten
-    pillar: strom-sparen
-    signal: niche_hook
-    source: topics:Energiekosten senken mit Smart-Home-Geräten
-    score: 0.55
-    keywords:
-    - Smart-Home
-    - Energiekosten
-    - Strom sparen
-  - topic: 'Haustier im Alltag: Diese laufenden Ausgaben kommen dazu'
-    pillar: frugalismus
-    signal: niche_hook
-    source: 'topics:Haustier im Alltag: Diese laufenden Ausgaben kommen dazu'
-    score: 0.55
-    keywords:
-    - Haustier Kosten
-    - Tierarzt Rücklage
-    - Haustier Budget
-  - topic: 'Jahresabschluss-Check: Diese 4 Versicherungen solltest du im Dezember
-      kündigen'
+  - topic: 10 Tipps für günstige Reiseversicherungen
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Jahresabschluss-Check: Diese 4 Versicherungen solltest du im Dezember
-      kündigen'
+    source: topics:10 Tipps für günstige Reiseversicherungen
     score: 0.55
     keywords:
-    - Versicherungen prüfen Jahresende
-    - Policen kündigen Dezember
-    - Unnötige Versicherungen kündigen
-    - Doppelversicherung vermeiden
-  - topic: 'Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?'
+    - Reiseversicherung
+    - Versicherungsvergleich
+    - Günstige Versicherungen
+  - topic: Günstige Kreditkarten für den Alltag finden
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?'
+    source: topics:Günstige Kreditkarten für den Alltag finden
     score: 0.55
     keywords:
-    - Konto eröffnen
-    - Schufa
-    - Konto ohne Schufa
-  - topic: 'Versicherungen im Vergleich: Was du wissen musst'
+    - Kreditkarte
+    - Günstige Karten
+    - Alltag
+  - topic: 'Hund & Katze: Lohnt sich eine Tierversicherung?'
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Versicherungen im Vergleich: Was du wissen musst'
+    source: 'topics:Hund & Katze: Lohnt sich eine Tierversicherung?'
     score: 0.55
     keywords:
-    - Versicherungen
-    - Vergleich
-    - Wissenswertes
+    - Tierversicherung
+    - Hundeversicherung
+    - Katzenversicherung
+  - topic: Preiswerter DSL-Anschluss für Zuhause
+    pillar: internet-dsl
+    signal: niche_hook
+    source: topics:Preiswerter DSL-Anschluss für Zuhause
+    score: 0.55
+    keywords:
+    - DSL
+    - Anschluss
+    - Preiswert
+  - topic: 'VPN für Zuhause: Brauchst du das wirklich?'
+    pillar: internet-dsl
+    signal: niche_hook
+    source: 'topics:VPN für Zuhause: Brauchst du das wirklich?'
+    score: 0.55
+    keywords:
+    - VPN Zuhause
+    - VPN sinnvoll
+    - Internet Sicherheit
   - topic: Wie du deine Bankgebühren um 50 % reduzieren kannst
     pillar: konto-karten
     signal: niche_hook
