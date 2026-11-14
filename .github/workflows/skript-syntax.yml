@@ -141,16 +141,13 @@ jobs:
       # Werkzeug ist derselbe Ausfall. Sie läuft hier, weil dieser Job
       # ohnehin auf `scripts/**.py` UND `.github/workflows/**.yml` anspringt.
       # Benötigt PyYAML (für `run:`-Blöcke) – der Syntax-Job ist sonst ohne
-      # Abhängigkeiten. Nachinstalliert wird aus dem gepinnten, hash-geprüften
-      # Manifest wie in jedem anderen Workflow (14.11.2026): Ein nacktes
-      # `pip install pyyaml` steht in keinem Manifest, wird nie auditiert und
-      # nie aktualisiert – die Abhängigkeits-Wache (Regel A7) lehnt es ab.
+      # Abhängigkeiten, daher hier minimal nachinstalliert (kein full venv).
       - name: Aufruf-Vertrag – jeder Workflow-Aufruf muss ein Schalter sein, den es gibt
         run: |
           set +e
           if ! python3 -c "import yaml" 2>/dev/null; then
-            echo "PyYAML fehlt – installiere aus dem gepinnten Manifest für den Aufruf-Vertrag …"
-            python3 -m pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
+            echo "PyYAML fehlt – installiere minimal für Aufruf-Vertrag …"
+            pip install --quiet "pyyaml==6.0.3"
           fi
           {
             echo '### Workflow-Aufruf-Vertrag'

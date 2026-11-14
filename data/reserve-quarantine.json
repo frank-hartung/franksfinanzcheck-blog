@@ -1,16 +1,29 @@
 {
+  "2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
+    "datei_sha256": "8ed8c9c0fc7b7a71f5a08c08dfbfc0921d85b6e4e9f621ee21827084d5f6cb9c",
+    "first": "2026-11-14T19:15:16Z",
+    "grund": "Zeichenlänge (check_length.py) nicht bestanden",
+    "hits": 1,
+    "klasse": "heilbar",
+    "laeufe": [
+      "lokal:2026-11-14"
+    ],
+    "last": "2026-11-14T19:15:16Z",
+    "lauf": "lokal:2026-11-14",
+    "signatur": "zeichenlänge (check_length.py) nicht bestanden"
+  },
   "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten": {
-    "datei_sha256": "e4b8e6ffd20f75daa9700cec6e0e657f12642ac37a185f0ba391a697ab402ebc",
+    "datei_sha256": "4a4b5fdef79a13f4349912ed059821f30bc2688aa4e66977907292b207078c9c",
     "fassung_gewechselt": true,
-    "first": "2026-11-13T17:04:42Z",
+    "first": "2026-11-14T19:15:16Z",
     "grund": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
     "hits": 1,
     "klasse": "menschlich",
     "laeufe": [
-      "lokal:2026-11-13"
+      "lokal:2026-11-14"
     ],
-    "last": "2026-11-13T19:34:33Z",
-    "lauf": "lokal:2026-11-13",
+    "last": "2026-11-14T19:15:16Z",
+    "lauf": "lokal:2026-11-14",
     "signatur": "faktenfrische nicht bestanden: <n>c<n>e<n>d<n>f<n>da<n>ec<n> (luecke): der hinweis, dass ein anbieterwechsel im durchschnitt <n>‑<n> wochen dauert, fehlt eine nachweisbare quelle.; <n>b<n>daf<n>f<n>a<"
   }
 }

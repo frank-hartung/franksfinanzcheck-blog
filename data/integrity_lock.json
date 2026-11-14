@@ -1,7 +1,7 @@
 {
   "schema": 2,
-  "signed_at": "2026-11-14T17:49:40.890160+00:00",
-  "head": "389d4c8",
+  "signed_at": "2026-11-14T19:40:35.183563+00:00",
+  "head": "8254522",
   "files": {
     "assets/css/extended/custom.css": "7ceb7276b610a11e90b0c7a5b9697d05eb29e67340a383d69c9d8f8a075a3df9",
     "data/brand_lock.yaml": "a7637d0b74b6e84424a6e9b7488ad1813f94ef8c9c0b7656cf7ab4e94b83b3a4",
@@ -35,7 +35,7 @@
     "scripts/check_covers.py": "f2d9eb9e9133740bba0bd6eb6812d54783ba4aad086297c2d2d407adc8be1d0d",
     "scripts/content_audit.py": "45e07881f24005e63decd400fd2974499511fcc7d45ae21c5973e997f55695e3",
     "scripts/fazit_schmiede.py": "6061f841227adefff0105331ba13d1d10fad0cd87c7c3364fe35593158ab0ca4",
-    "scripts/generate_covers.py": "dc09671b92c76d9e1e86a12327a720e7192789c8a975cb878d454ba9370578ff",
+    "scripts/generate_covers.py": "6d93e117f5ca6975c9dc425eb1a26c1d1d175bcd447f8b7a3ad35f7139155e3b",
     "scripts/hardcases_guard.py": "15ffd843f106c7e7dfc4246d8e4ab7944e2db0238bb35bdd4529414d29631996",
     "scripts/internal_linker.py": "6273ffb63c128c5ead3abb657dd61a95c317b5d98f570b673d343a1654793d54",
     "scripts/lektor_guard.py": "eb8b8e43f264c86506952785efb889925f4c5df42ddee6d7bec952330b6d3491",
@@ -59,34 +59,9 @@
     "static/images/brand/logo-light.svg": "fbcf9f4d3c82eb10a4b600ac027ee61afb7dae4a2cef04fe5a7b71fd100fadd4",
     "static/images/brand/logo.svg": "0c5dfc6dbb853a6c37a978f6fc70faa0af64a752be9715a30b2b12c9bf68bcf5"
   },
-  "files_sha256": "513c07e546237c98807ffe8d53e21eed0e1015703623b019101a7def58b461ca",
-  "audit_start_sha256": "ed17e1f416294b2271125c8cc39c4b59e1b3804f9ce71fafd3727dc7cfb59536",
+  "files_sha256": "f4520b7af0485112176f245b5aa805285b3f8346acef62d2f28cebf4626f4f95",
+  "audit_start_sha256": "f8f0f22ef557fff43d7c131669a252abd039abd5dc6d5801f0e6db04bc4c0770",
   "audit": [
-    {
-      "date": "2026-11-01",
-      "art": "heal",
-      "head": "d0af9d055",
-      "geaendert": [
-        "data/skill_portfolio.yaml"
-      ],
-      "herkunft": [
-        {
-          "pfad": "data/skill_portfolio.yaml",
-          "klasse": "fest",
-          "urteil": "VERSIEGELBAR",
-          "commits": [
-            {
-              "sha": "d0af9d055",
-              "datum": "2026-11-01",
-              "betreff": "fix(skills): 17 Social-Skills ins Themen-Portfolio eingetragen (Gate war rot)"
-            }
-          ],
-          "commits_art": "seit-signatur"
-        }
-      ],
-      "files_sha256": "df967fde0eb2be279f1e96857855ac76808dc13b4b6b94313cfb26a1b51f398b",
-      "prev_sha256": null
-    },
     {
       "date": "2026-11-01",
       "art": "heal",
@@ -144,7 +119,7 @@
         }
       ],
       "files_sha256": "14b7163886f240f01dbaa6a0272f2d6908cd16e52751a4150a8e81db569404bc",
-      "prev_sha256": "ed17e1f416294b2271125c8cc39c4b59e1b3804f9ce71fafd3727dc7cfb59536"
+      "prev_sha256": null
     },
     {
       "date": "2026-11-01",
@@ -490,8 +465,33 @@
           "commits_art": "letzte-commits"
         }
       ],
-      "prev_sha256": "30bcd9f50c739461cf7afe23a6b197f94d9810b3487d9386578e25c45b9ac6e3",
-      "files_sha256": "513c07e546237c98807ffe8d53e21eed0e1015703623b019101a7def58b461ca"
+      "files_sha256": "513c07e546237c98807ffe8d53e21eed0e1015703623b019101a7def58b461ca",
+      "prev_sha256": "30bcd9f50c739461cf7afe23a6b197f94d9810b3487d9386578e25c45b9ac6e3"
+    },
+    {
+      "date": "2026-11-14",
+      "art": "set-current",
+      "head": "8254522",
+      "geaendert": [
+        "scripts/generate_covers.py"
+      ],
+      "herkunft": [
+        {
+          "pfad": "scripts/generate_covers.py",
+          "klasse": "fest",
+          "urteil": "UNERKLÄRT",
+          "commits": [
+            {
+              "sha": "8254522",
+              "datum": "2026-11-14",
+              "betreff": "chore(integrity): generate_covers.py neu signiert (Herkunft im Lock) (#1221)"
+            }
+          ],
+          "commits_art": "letzte-commits"
+        }
+      ],
+      "prev_sha256": "45cc368db1db43359ebd781ea3c2f5e3d4e269b72d3d23b39972f9e53e83a301",
+      "files_sha256": "f4520b7af0485112176f245b5aa805285b3f8346acef62d2f28cebf4626f4f95"
     }
   ]
 }

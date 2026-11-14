@@ -336,14 +336,17 @@ jobs:
       #   2 Beweisstand/Konfiguration · 3 keine Quelle · 4 Prüfung unvollständig
       #   5 Seite abgebrochen (Beweise gesichert)
       - name: Unvollständige Recherche melden (mit Ursache)
-        if: steps.lauf.outcome == 'failure' || steps.nachlese.outcome == 'failure'
+        if: always() && (steps.lauf.outcome == 'failure' || steps.nachlese.outcome == 'failure')
         # Ausdrücke gehen über `env`, nie direkt in `run:` – Template-Injection
         # ist die Fehlerklasse aus dem Tiefencheck vom 30.10.2026 (#973).
         env:
           LAUF_EXIT: ${{ steps.lauf.outputs.exit }}
           NACHLESE: ${{ steps.nachlese.outcome }}
         run: |
-          rc="${LAUF_EXIT}"
+          rc="${LAUF_EXIT:-}"
+          if [ -z "${rc}" ]; then
+            rc="?"
+          fi
           if [ "${rc}" = "0" ]; then
             grund="Die Recherche selbst lief durch; die Nachlese der Dossier-Befunde ist fehlgeschlagen – das Ledger wurde nicht ergänzt."
           else
@@ -377,7 +380,7 @@ jobs:
       # gesichert. Der Schließpfad des Deckungs-Befunds steht im Ticket mit
       # Label `faktenfrische-deckung` (Schritt „Deckungs-Ticket melden“).
       - name: Unterdeckung oder Befund ohne Schließweg melden (roter Job)
-        if: steps.deckung.outcome == 'failure' || steps.aktenwache.outcome == 'failure' || steps.akte.outcome == 'failure'
+        if: always() && (steps.deckung.outcome == 'failure' || steps.aktenwache.outcome == 'failure' || steps.akte.outcome == 'failure')
         env:
           DECKUNG: ${{ steps.deckung.outcome }}
           AKTE: ${{ steps.aktenwache.outcome }}
