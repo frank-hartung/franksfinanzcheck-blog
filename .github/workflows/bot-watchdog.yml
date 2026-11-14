@@ -104,6 +104,7 @@ permissions:
   contents: write    # für den Routing-Zustand (data/alert_router_state.json)
   issues: write
   actions: write     # Status lesen UND die zuständige Reparatur-Workflow dispatchen
+  pull-requests: read  # Check 11: offene Änderungsvorschläge nur LESEN (scripts/pr_bestand_wache.py)
 
 concurrency:
   group: bot-watchdog
@@ -198,6 +199,7 @@ jobs:
               "scripts/bot_watchdog.py --selftest" \
               "scripts/watchdog_recovery.py --selftest" \
               "scripts/cadence_guard.py --selftest" \
+              "scripts/pr_bestand_wache.py --selftest" \
               "scripts/skript_syntax_wache.py --selftest" \
               "scripts/skript_syntax_heiler.py --selftest"; do
             # shellcheck disable=SC2086
