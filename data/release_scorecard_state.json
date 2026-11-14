@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-14T20:13:18Z",
+  "generated_at": "2026-11-14T20:52:48Z",
   "modus": "kandidaten",
-  "commit": "4a13ac89ae6de5764ccd6966ec83d4cb3e87666b",
+  "commit": "fb23fee627af9309b3ab81f3a1491819b01a6c14",
   "kapazitaet": {
     "stichtag": "2026-11-14",
     "basis": "2026-11-14",
@@ -1748,7 +1748,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-12",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "T6-textverstaendnis",
