@@ -202,12 +202,15 @@ Dieser Zweig ändert die Artikel **nicht**. Es sind sieben veröffentlichte Seit
 
 Grenze: Das Fach-Ticket schließt nicht von selbst. Der Befund fällt aus Messung und Bericht, sobald kein Vorschlag mehr liegt; das Ticket schließt der Mensch, der entschieden hat. So hält es der Alarm-Router bei jedem Befund mit menschlichem Besitzer.
 
-### Rot aus `main`: zwei Defekte aus #1222 mitgeheilt
+### Rot aus `main`: drei Ursachen, zwei davon hier geheilt
 
-Während dieser Arbeit wurde #1222 nach `main` zusammengeführt, mit roter Prüfung `regression`. Danach schlugen auf `main` 3 von 6137 Tests fehl (lokaler Lauf der ganzen Suite am 14.11.2026), und jeder Vorschlag erbte das Rot. Der Inhaber hat am 14.11.2026 ausdrücklich beauftragt, beide Ursachen in diesem Zweig zu beheben.
+Die Prüfung `regression` war am 14.11.2026 bei jedem Änderungsvorschlag rot, auch auf Ständen, die diesen Zweig nicht enthalten (Läufe 43626365365, 43628208008, 43629528335 und 43633806749; die roten Tests stehen als Anmerkungen am jeweiligen Lauf). Nach D11 darf so nichts zusammengeführt werden. Der Inhaber hat am 14.11.2026 beauftragt, die Ursachen in diesem Zweig zu beheben.
 
-- **`.github/workflows/skript-syntax.yml`, Zeile 150:** `pip install --quiet pyyaml` ohne feste Version. Die Abhängigkeits-Wache lehnt das ab (Regel A7, zwei Tests in `test_abhaengigkeits_wache`). Die Zeile installiert jetzt aus `requirements-ci.txt` mit `--require-hashes`, wie die übrigen Workflows.
-- **`scripts/tests/test_publication_reliability.py`:** Der Test `test_publish_gate_heilt_r5_vor_der_harten_pruefung` legt alle Gates still außer der R5-Heilung. Das mit #1222 neue Quellen-Gate fehlte in dieser Liste und stellte den Testartikel zurück. Es ist ergänzt; das Quellen-Gate selbst prüft `test_publish_gate_quellen.py`. Am Gate ist nichts geändert.
+| Ursache | Stand |
+|---|---|
+| `scripts/pinterest_duplicate_guard.py` las die Artikel in der Reihenfolge des Dateisystems. Bei zwei Seiten mit gleichem Pin-Text behielt die zuerst gelesene den Text. War die zweite ein bytegebundener Reserve-Entwurf, wurde nur sie übersprungen und die Dublette blieb stehen. Lokal kam die Reihenfolge passend, in CI nicht: `test_normaler_entwurf_wird_weiterhin_eindeutig` war dort rot, lokal grün. | **Hier geheilt.** Die Artikel werden sortiert gelesen, und ein bytegebundener Entwurf behält seinen Text immer; die übrigen Seiten der Gruppe bekommen einen neuen. Drei neue Tests drehen die Reihenfolge des Dateisystems in beide Richtungen; mit dem alten Stand schlagen alle drei fehl (Gegenprobe am 14.11.2026). Der heutige Bestand hat keine Dublette, die Änderung schreibt also nichts um (`python3 scripts/pinterest_duplicate_guard.py`). |
+| Das mit #1222 eingeführte Quellen-Gate ließ `test_publish_gate_heilt_r5_vor_der_harten_pruefung` scheitern. Der Test legt alle Gates still außer der R5-Heilung; das neue Gate fehlte in dieser Liste. | **Hier geheilt**, nur im Test (`scripts/tests/test_publication_reliability.py`). Am Gate ist nichts geändert; es hat seinen eigenen Test (`test_publish_gate_quellen.py`). |
+| `.github/workflows/skript-syntax.yml` installierte PyYAML ohne feste Version (#1222); die Abhängigkeits-Wache lehnt das ab (Regel A7, zwei Tests). | **Auf `main` geheilt**, während dieser Zweig dieselbe Zeile korrigierte (`pyyaml==6.0.3`). Übernommen ist die Fassung von `main`; dieser Zweig ändert die Datei nicht. |
 
 ### Was beim Inhaber bleibt
 
@@ -231,6 +234,9 @@ Die Erklärung gehört in `docs/FREIGABE-VORLAGE-KI-VO-KENNZEICHNUNG-BESTAND.md`
 |---|---|
 | Gesamte Testsuite vor der Übernahme von #1222 (`python3 -m unittest discover -s scripts/tests`) | 6102 Tests, 0 Fehlschläge; der eine Fehler des ersten Laufs war das fehlende Bauprodukt und ist nach `hugo` grün (`test_ki_provenienz_gate`, 32 Tests) |
 | Gesamte Testsuite nach der Übernahme von #1222 | 6137 Tests, 3 Fehlschläge, alle drei aus `main` (Abschnitt „Rot aus `main`“); nach der Heilung laufen die betroffenen Module grün (`test_publication_reliability`, `test_abhaengigkeits_wache`, `test_publish_gate_quellen`, `test_workflow_aufruf_vertrag`: 160 Tests mit drei Workflow-Tests) |
+| `scripts.tests.test_reserve_schreibschutz` | 17 Tests grün, auch unter einer um 97 Tage vorgestellten Uhr (`selftest_clock.py --trap-modul`) |
+| Uhr-Probe für die geänderten Module (`selftest_clock.py --offset 97`) | grün: `test_faktenfrische_kapazitaet`, `test_pr_bestand_wache`, `test_bot_watchdog_meldetakt` |
+| `python3 scripts/selftest_ki.py --trap-workflows` | 171 Selbsttests ohne Modell und ohne Netz grün |
 | `npm run test:faktenfrische` | 183 Tests grün |
 | `python3 scripts/governance_contract.py` | 47 Regeln erfüllt |
 | `python3 scripts/pr_bestand_wache.py --selftest` | 21 Fälle grün |
@@ -246,5 +252,5 @@ Die Erklärung gehört in `docs/FREIGABE-VORLAGE-KI-VO-KENNZEICHNUNG-BESTAND.md`
 - `scripts/faktenfrische_kapazitaet.py`, `scripts/tests/test_faktenfrische_kapazitaet.py`, `data/agent_reach/faktenfrische.yaml`, `docs/ANLEITUNG-FAKTENFRISCHE.md` – Stresstest
 - `scripts/pr_bestand_wache.py`, `scripts/tests/test_pr_bestand_wache.py` – neu
 - `scripts/bot_watchdog.py`, `scripts/tests/test_bot_watchdog_meldetakt.py`, `.github/workflows/bot-watchdog.yml` – Check 11
-- `.github/workflows/skript-syntax.yml`, `scripts/tests/test_publication_reliability.py` – Rot aus #1222 geheilt
+- `scripts/pinterest_duplicate_guard.py`, `scripts/tests/test_reserve_schreibschutz.py`, `scripts/tests/test_publication_reliability.py` – Rot aus `main` geheilt
 - `data/faktenfrische_entscheidungen.yaml` – vier Einträge angefügt; `BEFUND-AKTE.md`, `data/faktenfrische_befunde_state.json` – vom Werkzeug neu geschrieben
