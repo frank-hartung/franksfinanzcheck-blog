@@ -1,6 +1,6 @@
 # Offene Änderungsvorschläge: Bestandsaufnahme und Bereinigung – 14.11.2026
 
-**Auftrag:** Die fünf am Morgen des 14.11.2026 offenen Änderungsvorschläge (#1217, #1174, #1173, #1171, #1167) vollständig und dauerhaft klären.
+**Auftrag:** Die fünf am 14.11.2026 offenen Änderungsvorschläge (#1217, #1174, #1173, #1171, #1167) vollständig und dauerhaft klären.
 **Messstand:** `main` bei `389d4c8b5` (14.11.2026, 17:16 UTC). Alle Zahlen dieses Berichts sind an diesem Stand gemessen; die Befehle stehen jeweils dabei.
 
 ## Ergebnis in vier Sätzen
