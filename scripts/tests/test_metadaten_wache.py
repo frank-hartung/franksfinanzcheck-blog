@@ -244,5 +244,22 @@ class SnippetHeilungTests(unittest.TestCase):
         self.assertEqual(len(messages), 1)
 
 
+class RepositoryMetadatenRegression(unittest.TestCase):
+    """Auch redaktionelle Änderungen müssen die echte Quelle prüfen.
+
+    #1179: Ein 65-Zeichen-Titel in einem Entwurf machte alle E2E-Läufe
+    rot, obwohl die isolierten Parser-Tests grün waren. Nicht nur Live-
+    Seiten prüfen: M1/M2/M7 gelten bewusst auch für Entwürfe. Keine
+    Heilung, keine Freigabe und kein Netzwerk in diesem Regressionstest.
+    """
+
+    def test_bestand_einschliesslich_entwuerfe_erfuellt_metadatenvertrag(self):
+        findings, count, healed = w.run(heilen=False)
+        self.assertGreater(count, 0, "Ein leerer Bestand ist kein grüner Nachweis")
+        self.assertEqual(healed, [])
+        self.assertEqual(findings, [], "\n".join(
+            f"{f['file']}: {f['rule']} {f['msg']}" for f in findings))
+
+
 if __name__ == "__main__":
     unittest.main()

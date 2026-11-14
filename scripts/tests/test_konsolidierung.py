@@ -515,6 +515,25 @@ class RollenpaarWache(unittest.TestCase):
                             for b in befunde), befunde)
         self.assertEqual(befunde[0]["url"], self.B)
 
+    def test_vorwarnung_genau_im_siebentagefenster(self):
+        import copy
+        vorher = copy.deepcopy(self.register)
+        for rest in (-1, 0, 1, 7, 8):
+            with self.subTest(rest=rest):
+                heute = dt.date(2026, 11, 13) - dt.timedelta(days=rest)
+                warnungen = k.rollenfristen_warnungen(
+                    self.tmp, self.register, heute=heute)
+                self.assertEqual(len(warnungen), 2 if 0 <= rest <= 7 else 0)
+                self.assertTrue(all(w['tage'] == rest for w in warnungen))
+        self.assertEqual(self.register, vorher, "Warnung darf Fristen nicht ändern")
+
+    def test_defekte_frist_bleibt_harter_befund_statt_warnung(self):
+        self.register[self.A]['wiedervorlage'] = 'kein Datum'
+        warnungen = k.rollenfristen_warnungen(
+            self.tmp, self.register, heute=dt.date(2026, 11, 12))
+        self.assertEqual([w['url'] for w in warnungen], [self.B])
+        self.assertTrue(any('kein Datum' in b['text'] for b in self._pruefen()))
+
     def test_vollstaendig_belegt_gruen(self):
         self._verlinken()
         self.assertEqual(self._pruefen(), [])

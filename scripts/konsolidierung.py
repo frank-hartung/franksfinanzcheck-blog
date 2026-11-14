@@ -496,6 +496,32 @@ def rollenpaar_pruefen(a: str, b: str, root: Path = ROOT,
     return befunde
 
 
+def rollenfristen_warnungen(root: Path = ROOT, register: dict | None = None,
+                            heute: dt.date | None = None) -> list[dict]:
+    """Sieben Tage Vorlauf vor R2-Blockade, ohne Fristen zu verlängern.
+
+    Der tägliche Gesundheitscheck und Deploy rufen --rollenpaare bereits
+    auf. Eine Actions-Annotation macht die Wiedervorlage sichtbar, BEVOR
+    sie die Auslieferung blockiert. Überfällige/defekte Fristen bleiben
+    ausschließlich harte Befunde in rollenpaar_pruefen.
+    """
+    heute = heute or dt.date.today()
+    reg = register if register is not None else _gsc().entscheidungen()
+    urls = sorted({url for paar in rollenpaare(root, reg)
+                   for url in (paar["a"], paar["b"])})
+    warnungen = []
+    for url in urls:
+        frist = (reg.get(url, {}).get("wiedervorlage") or "")[:10]
+        try:
+            rest = (dt.date.fromisoformat(frist) - heute).days
+        except ValueError:
+            continue  # Die harte R2-Prüfung meldet ungültige Daten.
+        if 0 <= rest <= 7:
+            warnungen.append({"url": url, "wiedervorlage": frist,
+                              "tage": rest})
+    return warnungen
+
+
 def rollenpaare_pruefen(root: Path = ROOT, register: dict | None = None,
                         heute: dt.date | None = None) -> list[dict]:
     """Alle dokumentierten Rollenpaare prüfen. Leer = grün."""
@@ -753,8 +779,10 @@ def main(argv: list[str] | None = None) -> int:
     if args.rollenpaare:
         paare = rollenpaare()
         befunde = rollenpaare_pruefen()
+        warnungen = rollenfristen_warnungen()
         if args.json:
-            print(json.dumps({"paare": paare, "befunde": befunde},
+            print(json.dumps({"paare": paare, "befunde": befunde,
+                              "warnungen": warnungen},
                              ensure_ascii=False, indent=1))
             return 1 if befunde else 0
         for paar in paare:
@@ -765,6 +793,13 @@ def main(argv: list[str] | None = None) -> int:
             print(f"            ↔ {paar['b']}")
             print(f"  Struktur: {len(st['gemeinsam'])} gemeinsame "
                   f"Zwischenüberschrift(en), {schnitt} wörtliche Sätze")
+        for warnung in warnungen:
+            # Register-URLs dürfen keine zusätzlichen Actions-Befehle erzeugen.
+            url = (warnung['url'].replace('%', '%25')
+                   .replace(chr(13), '%0D').replace(chr(10), '%0A'))
+            print(f"::warning title=R2-Wiedervorlage::In {warnung['tage']} Tagen "
+                  f"({warnung['wiedervorlage']}) Rollenentscheidung für {url} "
+                  "neu bewerten – Frist nicht automatisch verlängern.")
         for befund in befunde:
             print(f"🛑 {befund['regel']} {befund['url']}: {befund['text']}")
         if not paare:
