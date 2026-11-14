@@ -171,3 +171,4 @@ jobs:
       # bevor der Watchdog ihn im Ausfall braucht.
       - name: Heiler selbst prüfen
         run: python3 scripts/skript_syntax_heiler.py --selftest
+# CI trigger 2026-11-14T18:40Z
