@@ -755,6 +755,12 @@ def main(argv: list[str]) -> int:
         return 2
     if "--selftest" in argv:
         return selftest()
+    # AUFRUF-VERTRAG (14.11.2026, scripts/workflow_aufruf_vertrag.py):
+    # Der Workflow nennt diesen Schalter ausdrücklich; ohne diese Zeile wäre
+    # er ein stiller No-Op – der Lauf wäre richtig, der Name aber nirgends
+    # im Werkzeug und damit nicht prüfbar.
+    if "--source-only" in argv:
+        print("Entity-Wache: Quellprüfung ausdrücklich angefordert (--source-only).")
     F = Findings()
     if "--public" in argv:
         i = argv.index("--public")

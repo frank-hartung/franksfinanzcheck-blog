@@ -132,8 +132,43 @@ jobs:
           fi
           [ "$selbst" = "0" ] && [ "$befund" = "0" ]
 
+      # AUFRUF-VERTRAG (14.11.2026, Lauf 43618889770)
+      # `.github/workflows/deploy.yml` rief `ki_audio_markierung.py --check`;
+      # das Werkzeug kannte nur `--gate`. Der Schritt endete mit Exit 2, das
+      # Siegel war an JEDEM Deploy rot, obwohl 44 von 44 Tonspuren korrekt
+      # markiert waren. Diese Stufe vergleicht JEDEN Skriptaufruf in den
+      # Workflows mit dem argparse/sys.argv des Skripts – und ein gelöschtes
+      # Werkzeug ist derselbe Ausfall. Sie läuft hier, weil dieser Job
+      # ohnehin auf `scripts/**.py` UND `.github/workflows/**.yml` anspringt.
+      # Benötigt PyYAML (für `run:`-Blöcke) – der Syntax-Job ist sonst ohne
+      # Abhängigkeiten, daher hier minimal nachinstalliert (kein full venv).
+      - name: Aufruf-Vertrag – jeder Workflow-Aufruf muss ein Schalter sein, den es gibt
+        run: |
+          set +e
+          if ! python3 -c "import yaml" 2>/dev/null; then
+            echo "PyYAML fehlt – installiere minimal für Aufruf-Vertrag …"
+            pip install --quiet pyyaml
+          fi
+          {
+            echo '### Workflow-Aufruf-Vertrag'
+            echo '```'
+            python3 scripts/workflow_aufruf_vertrag.py || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          python3 scripts/workflow_aufruf_vertrag.py --selftest
+          selbst=$?
+          python3 scripts/workflow_aufruf_vertrag.py --check
+          befund=$?
+          if [ "$selbst" != "0" ]; then
+            echo "::error::Selbsttest des Aufruf-Vertrags rot (Exit $selbst) – die Prüfung selbst ist defekt."
+          elif [ "$befund" != "0" ]; then
+            echo "::error::Aufruf-Vertrag: ein Workflow nennt einen Schalter, den das Werkzeug nicht kennt (oder ein Skript fehlt). Heilung: Aufruf anpassen ODER den Schalter im Skript als dokumentierten Alias führen – niemals das Siegel dafür rot werden lassen."
+          fi
+          [ "$selbst" = "0" ] && [ "$befund" = "0" ]
+
       # Der Heiler ist Teil des Vertrags, nicht nur der Wache: Sein
       # Selbsttest läuft hier mit, damit ein kaputter Heiler auffällt,
       # bevor der Watchdog ihn im Ausfall braucht.
       - name: Heiler selbst prüfen
         run: python3 scripts/skript_syntax_heiler.py --selftest
+# CI trigger 2026-11-14T18:40Z

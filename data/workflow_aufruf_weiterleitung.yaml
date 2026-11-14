@@ -1,0 +1,23 @@
+# ============================================================
+#  WEITERLEITUNGEN FÜR DEN AUFRUF-VERTRAG (14.11.2026)
+#  ------------------------------------------------------------
+#  Geprüft von `scripts/workflow_aufruf_vertrag.py`.
+#
+#  Hier stehen NUR Adapter: Skripte, die ihre Argumente unverändert an ein
+#  anderes Skript weiterreichen, statt sie selbst auszuwerten. Die Wache
+#  übernimmt dann die Schalter des Ziels für den Adapter – sie prüft also die
+#  echte Verdrahtung statt eine Ausnahme zu glauben.
+#
+#  REGEL: Jeder Eintrag braucht `ziel` und `grund`. Ein Eintrag, der keinen
+#  Aufruf mehr betrifft, wird selbst zum Befund (A4) – Ausnahmen altern hier
+#  genauso sichtbar wie überall im Haus.
+# ============================================================
+adapter:
+  hemingway_check.py:
+    ziel: readability_check.py
+    grund: >-
+      Hemingway-Check ist bewusst ein dünner Adapter: `main(argv)` reicht
+      `sys.argv[1:]` unverändert an `readability_check.main()` weiter (siehe
+      Modulkopf und `_selftest` A1). `--gate-bestand` wird dort ausgewertet
+      (`readability_check.py`, Gate über den Bestand) und steht deshalb nicht
+      im Adapter selbst.

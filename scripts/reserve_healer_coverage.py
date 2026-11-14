@@ -261,6 +261,23 @@ AUSNAHMEN: dict[str, str] = {
         "Provider-Ausfälle und Schreibschutz nicht zuverlässig ab. Fehlende "
         "oder ungeprüfte Antworten bleiben im redaktionellen Hold; fachliche "
         "Prüfung und Freigabe sind weiterhin erforderlich (#1110).",
+    # Quellenbasis (14.11.2026): `quellen_failures` schließt die Ticket-Klasse
+    # der Nachlauf-Wache (#1146 … #1204), die elfmal in fünf Tagen
+    # „M4: Keine Quelle im Frontmatter“ an bereits live gegangenen Artikeln
+    # meldete. Bewusst KEIN Reserve-Heiler: der Schreiber ist
+    # `faktenfrische.py` (`fm_setze_quellen`) und arbeitet aus dem
+    # Recherche-Dossier – also aus einem Beleg, den diese Kette nicht hat.
+    # Ein Heiler hier müsste Quellen erfinden oder aus dem Artikeltext
+    # zurückraten; beides ist auf einem YMYL-Finanzblog Haftung, nicht Heilung
+    # (C15). Der Kandidat bleibt als Hold erhalten, die Redaktion ergänzt die
+    # Belege, der Rest der Kette prüft sie danach wie jeden anderen Lauf.
+    "quellen_failures":
+        "Die Quellenbasis ist ein Beleg, kein Formatfeld. Ein Reserve-Heiler "
+        "darf sie nicht erfinden (C15). Geschrieben wird sie von "
+        "`faktenfrische.py` aus dem Recherche-Dossier; fehlt das Dossier, ist "
+        "die Recherche unvollständig und nicht die Darstellung. Fehlende "
+        "Belege bleiben im redaktionellen Hold, bis die Redaktion sie "
+        "nachträgt (#1146–#1204).",
 
 }
 

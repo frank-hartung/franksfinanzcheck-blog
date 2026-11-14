@@ -423,8 +423,17 @@ def heal_pin_text_sync() -> None:
 
 
 def main():
+    # AUFRUF-VERTRAG (14.11.2026, scripts/workflow_aufruf_vertrag.py):
+    # Der Workflow nennt diesen Schalter ausdrücklich; ohne diese Zeile wäre
+    # er ein stiller No-Op – der Lauf wäre richtig, der Name aber nirgends
+    # im Werkzeug und damit nicht prüfbar.
     dry_run = "--dry-run" in sys.argv
     list_boards = "--list-boards" in sys.argv
+    if "--auto" in sys.argv and dry_run:
+        print("🛑 --auto und --dry-run schließen sich aus – nichts verändert.")
+        return 2
+    if "--auto" in sys.argv:
+        print("📌 Pinterest-Lauf ausdrücklich angefordert (--auto).")
     audit_profile = "--audit-profile" in sys.argv
 
     if audit_profile:
