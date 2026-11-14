@@ -1,6 +1,6 @@
 # Offene Änderungsvorschläge: Bestandsaufnahme und Bereinigung – 14.11.2026
 
-**Auftrag:** Die fünf offenen Änderungsvorschläge (#1217, #1174, #1173, #1171, #1167) vollständig und dauerhaft klären.
+**Auftrag:** Die fünf am Morgen des 14.11.2026 offenen Änderungsvorschläge (#1217, #1174, #1173, #1171, #1167) vollständig und dauerhaft klären.
 **Messstand:** `main` bei `389d4c8b5` (14.11.2026, 17:16 UTC). Alle Zahlen dieses Berichts sind an diesem Stand gemessen; die Befehle stehen jeweils dabei.
 
 ## Ergebnis in vier Sätzen
@@ -9,6 +9,10 @@
 2. Was aus den Vorschlägen noch fehlte und ohne Fachentscheidung nachziehbar war, ist in diesem Zweig nachgezogen: ein bisher unentdeckter, scharfer Defekt im Leerzeichen-Generator (`scripts/fix_spaces.py`), der Paragrafenzeichen und Linkziele zerstören konnte.
 3. Was eine menschliche Entscheidung braucht, ist unten einzeln benannt – mit Befehl, Zahl und Fundstelle, nicht als Sammelhinweis.
 4. Zwei rote Prüfungen auf `main` stammen nicht aus den fünf Vorschlägen, treffen aber jeden künftigen Vorschlag; sie stehen im Abschnitt „Was auf `main` rot ist“.
+
+## Stand nach der Bereinigung
+
+Alle fünf Vorschläge sind am 14.11.2026 ohne Zusammenführen geschlossen, jeder mit einem Vermerk, der Grund und Fundstelle nennt. Ihre Zweige bleiben erhalten; ein Vorschlag lässt sich jederzeit wieder öffnen. Offen ist allein #1220 mit der Heilung aus diesem Zweig.
 
 ## Die fünf Vorschläge im Einzelnen
 
