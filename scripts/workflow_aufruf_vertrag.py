@@ -358,7 +358,11 @@ def selftest() -> int:
                 "on: push\njobs:\n  j:\n    runs-on: ubuntu-24.04\n"
                 "    steps:\n      - name: s\n        run: |\n"
                 f"          {run}\n", encoding="utf-8")
-            return befunde(root)[0]
+            try:
+                return befunde(root)[0]
+            except VertragsFehler as exc:
+                fehler.append(f"Selbsttest-Setup fehlgeschlagen ({name}): {exc}")
+                return []
 
         if proben("gut", "python3 scripts/werkzeug.py --gate --dir public"):
             fehler.append("gültiger Aufruf wurde gemeldet")
@@ -390,6 +394,7 @@ def selftest() -> int:
         # Ein Aufruf, dessen Argumente ein anderes Werkzeug sind, darf nicht
         # dem ersten zugeschlagen werden (`ci_tests.py … -- python3 -m unittest`).
         _zahlen = None
+    # Falls PyYAML im Selbsttest-Setup fehlt, steht der Fehler bereits in `fehler`.
     for f in fehler:
         print(f"❌ {f}")
     if fehler:

@@ -140,9 +140,15 @@ jobs:
       # Workflows mit dem argparse/sys.argv des Skripts – und ein gelöschtes
       # Werkzeug ist derselbe Ausfall. Sie läuft hier, weil dieser Job
       # ohnehin auf `scripts/**.py` UND `.github/workflows/**.yml` anspringt.
+      # Benötigt PyYAML (für `run:`-Blöcke) – der Syntax-Job ist sonst ohne
+      # Abhängigkeiten, daher hier minimal nachinstalliert (kein full venv).
       - name: Aufruf-Vertrag – jeder Workflow-Aufruf muss ein Schalter sein, den es gibt
         run: |
           set +e
+          if ! python3 -c "import yaml" 2>/dev/null; then
+            echo "PyYAML fehlt – installiere minimal für Aufruf-Vertrag …"
+            pip install --quiet pyyaml
+          fi
           {
             echo '### Workflow-Aufruf-Vertrag'
             echo '```'
