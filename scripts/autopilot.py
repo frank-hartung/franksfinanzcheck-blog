@@ -148,7 +148,16 @@ def main():
         print(open(STATUS_FILE, encoding="utf-8").read())
         return 0
 
+    # AUFRUF-VERTRAG (14.11.2026, scripts/workflow_aufruf_vertrag.py):
+    # Der Workflow nennt diesen Schalter ausdrücklich; ohne diese Zeile wäre
+    # er ein stiller No-Op – der Lauf wäre richtig, der Name aber nirgends
+    # im Werkzeug und damit nicht prüfbar.
     dry = "--dry-run" in sys.argv
+    if "--run" in sys.argv and dry:
+        print("🛑 --run und --dry-run schließen sich aus – nichts verändert.")
+        return 2
+    if "--run" in sys.argv:
+        print("🤖 Autopilot-Lauf ausdrücklich angefordert (--run).")
     return run_pipeline(dry_run=dry)
 
 

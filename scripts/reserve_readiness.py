@@ -98,6 +98,38 @@ def gate_findings(text: str) -> list[str]:
     return list(dict.fromkeys(out))
 
 
+def nicht_beweisbar_grund(text: str, max_zeilen: int = 5) -> str:
+    """Kurzdiagnose für „<Wache> NICHT BEWEISBAR“ – ohne Fortschrittsrauschen.
+
+    WARUM (14.11.2026, Reserve-Lauf 43609259760): Der Gate-Text begann mit der
+    Fortschrittszeile „Publish-Gate: 1 Kandidat(en) für heute → […]“. Wird
+    dieser Text als Ganzes zur Fehlermeldung, ist die erste Zeile der Meldung
+    (und damit das, was im Ticket sichtbar bleibt) eine Erfolgsmeldung. Die
+    verwertbare Zeile – welche Wache nicht messbar war und warum – steht
+    dahinter. Hier wird genau sie herausgezogen.
+
+    Bewusst zeilenweise und ohne mehrzeilige Regexe (Hausregel: keine
+    rückverfolgenden Muster auf mehrzeiligen Eingaben).
+    """
+    zeilen = (text or "").splitlines()
+    for i, zeile in enumerate(zeilen):
+        if "NICHT BEWEISBAR" not in zeile:
+            continue
+        block = [zeile.strip()]
+        for folge in zeilen[i + 1:i + max_zeilen]:
+            if not folge.strip():
+                break
+            block.append(folge.strip())
+        return " · ".join(block)[:600]
+    # Kein Marker gefunden: wenigstens die erste inhaltliche Zeile, nie das
+    # Fortschritts-Echo der Kandidatenliste.
+    for zeile in zeilen:
+        blank = zeile.strip()
+        if blank and not blank.startswith("Publish-Gate:"):
+            return blank[:600]
+    return "Publish-Gate nicht beweisbar – Details im Lauf-Log"
+
+
 def grund_aus_funden(funde: list[str]) -> str:
     """Erster verwertbarer Fund als Kurzbegründung (ohne Überschriftszeile)."""
     for fund in funde:
@@ -207,7 +239,7 @@ def certify_one(index) -> dict:
             proof_bytes = index.read_bytes()
             ready, gate_text = capture_gate(index)
             if not ready and "NICHT BEWEISBAR" in gate_text:
-                raise MeasurementUnavailable(gate_text.strip())
+                raise MeasurementUnavailable(nicht_beweisbar_grund(gate_text))
             if ready and index.read_bytes() != proof_bytes:
                 ready = False
                 details = ["Gate-Vorheilung hat die Messfassung verändert – "
@@ -242,6 +274,18 @@ def certify_one(index) -> dict:
                     # REPARATUR 15.09.2026 (#295): der KONKRETE Gate-Fund,
                     # nicht der Platzhalter („Details im Workflow-Log“).
                     reason = grund_aus_funden(details)
+        except (MeasurementUnavailable, ops.WorkInterrupted):
+            # EIGENER ABBRUCH, NICHT NOCHMALS VERPACKT (14.11.2026).
+            # Vorher fing dieser Zweig auch das `MeasurementUnavailable`, das
+            # drei Zeilen oben ABSICHTLICH geworfen wird, und verpackte es in
+            # ein zweites „Produktions-Gate nicht messbar“. Ergebnis im
+            # Ticket (Reserve-Lauf 43609259760): die Diagnose begann mit der
+            # Fortschrittszeile „Publish-Gate: 1 Kandidat(en) für heute → […]“
+            # und die eigentliche Ursache („… NICHT BEWEISBAR“) stand dahinter
+            # im abgeschnittenen Rest. Ein Befund, dessen erste Zeile Rauschen
+            # ist, wird nicht gelesen – genau so entstand das Dauer-Ticket
+            # „Reserve niedrig“. Der Abbruch behält jetzt seinen Text.
+            raise
         except Exception as exc:
             raise MeasurementUnavailable(f"Produktions-Gate nicht messbar: {exc}") from exc
         finally:

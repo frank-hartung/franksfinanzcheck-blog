@@ -912,6 +912,16 @@ def main():
     do_fix = "--fix" in sys.argv
     selftest = "--selftest" in sys.argv
     include_drafts = "--include-drafts" in sys.argv
+    # AUFRUF-VERTRAG (14.11.2026, scripts/workflow_aufruf_vertrag.py):
+    # content-engine-v2.yml ruft `--fix --new-only`. Das Werkzeug kannte den
+    # Schalter nicht; da es `sys.argv` liest statt argparse, wurde er STILL
+    # verworfen – der Engine-Lauf heilte damit den GESAMTEN Bestand statt nur
+    # die heute erzeugten Artikel. Ein No-Op an genau dieser Stelle schreibt
+    # also in fremde, längst veröffentlichte Seiten. `--new-only` grenzt die
+    # Heilung jetzt auf Artikel mit dem heutigen Datum im Slug ein (Hausform
+    # `JJJJ-MM-TT-…`); der Bericht bleibt vollständig.
+    new_only = "--new-only" in sys.argv
+    heute = __import__("datetime").date.today().isoformat()
 
     if selftest:
         errs = _selftest()
@@ -957,6 +967,11 @@ def main():
     if do_fix:
         print(f"\n🔧 KEYWORD-HEALING: {len(articles)} Artikel prüfen, {len(critical)} kritisch, {len([r for r in results if r['score']<80])} unter 80…")
         to_heal = [r for r in results if r["score"] < 100]
+        if new_only:
+            vorher = len(to_heal)
+            to_heal = [r for r in to_heal if str(r.get("file", "")).startswith(heute)]
+            print(f"🔒 --new-only: Heilung auf Artikel vom {heute} begrenzt "
+                  f"({len(to_heal)} von {vorher} Kandidaten).")
         to_heal_sorted = sorted(to_heal, key=lambda x: x["score"])
         for r in to_heal_sorted:
             path = r.get("path")
