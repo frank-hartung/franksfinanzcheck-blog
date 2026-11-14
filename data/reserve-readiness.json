@@ -1,118 +1,212 @@
 {
   "target": 6,
-  "ready": 0,
-  "pool_size": 12,
-  "generated_at": "2026-11-14T15:15:52Z",
-  "repariert_am": "2026-11-14T15:15:52Z",
-  "repariert_grund": "Snapshot-Heiler #661: defekter Nachweis, Nachmessung durch reserve_readiness.py nötig",
+  "ready": 9,
+  "pool_size": 11,
+  "generated_at": "2026-11-14T19:15:16Z",
   "candidates": [
     {
       "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
-      "ready": false,
+      "ready": true,
       "sha256": "ff4c55ac20b3266a1b41c9ee22db6d66498d0912df2a5dcb120c986bb11ffbce",
-      "reason": "Zertifikat beschädigt – Nachmessung nötig (#661)",
-      "details": [
-        "Zertifikat beschädigt – Nachmessung nötig (#661)"
-      ]
+      "flesch": 66.7,
+      "measured_at": "2026-11-14T19:02:50Z",
+      "score": 0.974,
+      "parts": {
+        "spelling": 0.94,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.96,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
     },
     {
       "slug": "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee",
-      "ready": false,
+      "ready": true,
       "sha256": "90a1ea61374612813c3196c08ec0f2feef27b1d80ec078bddaf06f76817b7575",
-      "reason": "Zertifikat beschädigt – Nachmessung nötig (#661)",
-      "details": [
-        "Zertifikat beschädigt – Nachmessung nötig (#661)"
-      ]
+      "flesch": 60.4,
+      "measured_at": "2026-11-14T19:04:12Z",
+      "score": 0.952,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.92,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
     },
     {
       "slug": "2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
       "ready": false,
       "sha256": "61f802a7f162f689c38ccf66620192952fbf570f358b583f9fab1e6e9101742b",
-      "reason": "Zertifikat beschädigt – Nachmessung nötig (#661)",
+      "flesch": 73.7,
+      "measured_at": "2026-11-14T19:05:30Z",
+      "reason": "Zeichenlänge (check_length.py) nicht bestanden",
       "details": [
-        "Zertifikat beschädigt – Nachmessung nötig (#661)"
-      ]
+        "🛑 2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
+        "Zeichenlänge (check_length.py) nicht bestanden",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 0.94,
+      "parts": {
+        "spelling": 0.9,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.7,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
     },
     {
       "slug": "2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
-      "ready": false,
+      "ready": true,
       "sha256": "524b4b03665b31184405ba6b37c2ff86ef9a41b74fec63b28c33d6d041fb414d",
-      "reason": "Zertifikat beschädigt – Nachmessung nötig (#661)",
-      "details": [
-        "Zertifikat beschädigt – Nachmessung nötig (#661)"
-      ]
+      "flesch": 61.9,
+      "measured_at": "2026-11-14T19:06:40Z",
+      "score": 0.98,
+      "parts": {
+        "spelling": 0.96,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
     },
     {
       "slug": "2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst",
-      "ready": false,
+      "ready": true,
       "sha256": "01883d9970559cbc2aca768af9ca2c3a913664c90e41d900fcb6017a751c52d9",
-      "reason": "Zertifikat beschädigt – Nachmessung nötig (#661)",
-      "details": [
-        "Zertifikat beschädigt – Nachmessung nötig (#661)"
-      ]
+      "flesch": 62.7,
+      "measured_at": "2026-11-14T19:07:51Z",
+      "score": 0.988,
+      "parts": {
+        "spelling": 0.94,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
     },
     {
       "slug": "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
-      "ready": false,
+      "ready": true,
       "sha256": "7a14e36357722f7832e2fe3b2f1357909374c15bb3ccea4351a13fb2a6723952",
-      "reason": "Zertifikat beschädigt – Nachmessung nötig (#661)",
-      "details": [
-        "Zertifikat beschädigt – Nachmessung nötig (#661)"
-      ]
-    },
-    {
-      "slug": "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
-      "ready": false,
-      "sha256": "9568345cab832a4b5c16dccd022143d4020b133c0b1f6b31e2eb257a7ede37fd",
-      "reason": "Zertifikat beschädigt – Nachmessung nötig (#661)",
-      "details": [
-        "Zertifikat beschädigt – Nachmessung nötig (#661)"
-      ]
+      "flesch": 63.6,
+      "measured_at": "2026-11-14T19:09:08Z",
+      "score": 0.93,
+      "parts": {
+        "spelling": 0.72,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.96,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
     },
     {
       "slug": "2026-11-13-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
-      "ready": false,
+      "ready": true,
       "sha256": "a8f0c0fee75ea0fa08a4f1afd89ae1a6cc4df0140e265a3395f643f249863c09",
-      "reason": "Zertifikat beschädigt – Nachmessung nötig (#661)",
-      "details": [
-        "Zertifikat beschädigt – Nachmessung nötig (#661)"
-      ]
+      "flesch": 66.0,
+      "measured_at": "2026-11-14T19:10:22Z",
+      "score": 0.934,
+      "parts": {
+        "spelling": 0.8200000000000001,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.9,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.9
+      }
     },
     {
       "slug": "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
-      "ready": false,
+      "ready": true,
       "sha256": "5410f7f70046418f46c2e8acecc85dd3eb0d443d874b69c99e9e6d46a0a4c9dc",
-      "reason": "Zertifikat beschädigt – Nachmessung nötig (#661)",
-      "details": [
-        "Zertifikat beschädigt – Nachmessung nötig (#661)"
-      ]
+      "flesch": 61.6,
+      "measured_at": "2026-11-14T19:11:36Z",
+      "score": 0.966,
+      "parts": {
+        "spelling": 0.9,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.86,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
     },
     {
       "slug": "2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst",
-      "ready": false,
+      "ready": true,
       "sha256": "a0734a9dc0c239daf281441f2dee25fa0f82d7b67548549f821723d0509a7aac",
-      "reason": "Zertifikat beschädigt – Nachmessung nötig (#661)",
-      "details": [
-        "Zertifikat beschädigt – Nachmessung nötig (#661)"
-      ]
+      "flesch": 62.8,
+      "measured_at": "2026-11-14T19:12:55Z",
+      "score": 0.936,
+      "parts": {
+        "spelling": 0.7,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.96,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
     },
     {
       "slug": "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ready": false,
       "sha256": "f38cb3fb974ec47a9aef42a2770a76ad2bafcd47eae7c82e7723281faebc438f",
-      "reason": "Zertifikat beschädigt – Nachmessung nötig (#661)",
+      "flesch": 60.6,
+      "measured_at": "2026-11-14T19:14:06Z",
+      "reason": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
       "details": [
-        "Zertifikat beschädigt – Nachmessung nötig (#661)"
-      ]
+        "🛑 2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erforderten zwingend einen Smart Meter, wird ohne Angabe von Voraussetzungen, Kosten oder Verfügbarkeit präzisiert.; 77d809de9e06d1d6910d (luecke): Es wird eine Prognose für den Strompreis 2026 angegeben („Trends erkennen“, „Netzentgelte steigen“), ohne dass dafür aktuelle Marktdaten oder offizielle Prognosen genannt werden.; ad7c0a90ef52ff35130e (luecke): Der Artikel behauptet, dass Preisgarantien vor Preissteigerungen schützen, liefert jedoch keine Quelle für diese Aussage.; f227178fbda2cc59c350 (luecke): Die Aussage, dass Ökostrom‑Tarife häufig günstiger als die Grundversorgung seien, wird nicht durch eine Quelle belegt.",
+        "Profi-Affiliate-Check nicht bestanden: A5: 6 Affiliate-Links (> 5)",
+        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…wichtiger hinweis dieser artikel dient ausschließlich der allgemeinen information und…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…stellt keine anlage rechts oder steuerberatung dar prüfe konditionen und…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…bedingungen immer beim jeweiligen anbieter jetzt vergleichen und sparen jetzt…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…fixkosten auf check24 prüfen wichtiger hinweis dieser artikel dient ausschließlich…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…der allgemeinen information und stellt keine anlage rechts oder steuerberatung…“ – doppelte Passage, manuell reparieren",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 0.954,
+      "parts": {
+        "spelling": 0.92,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.7,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
     },
     {
       "slug": "2026-11-13-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste",
-      "ready": false,
+      "ready": true,
       "sha256": "20d7b2a4d68cc60821e4101faec679f6bc85183fec24c0d7a904672f92411aca",
-      "reason": "Zertifikat beschädigt – Nachmessung nötig (#661)",
-      "details": [
-        "Zertifikat beschädigt – Nachmessung nötig (#661)"
-      ]
+      "flesch": 68.3,
+      "measured_at": "2026-11-14T19:15:16Z",
+      "score": 0.982,
+      "parts": {
+        "spelling": 0.96,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
     }
-  ]
+  ],
+  "measurement": {
+    "kind": "full"
+  }
 }

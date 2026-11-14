@@ -45,6 +45,27 @@ import json
 import datetime as _dt
 
 
+# ----------------------------------------------------------------------
+#  PROBELAUF-GRENZE (Befund 15.11.2026)
+#  Ein `--dry-run`, der nur die Hälfte abschaltet, ist schlimmer als keiner:
+#  Man liest „Probelauf" und bekommt trotzdem geänderte Manifeste. Deshalb
+#  hängt JEDER Schreibzugriff dieses Skripts an dieser einen Prüfung – Bild,
+#  Frontmatter und Manifest gleichermaßen.
+# ----------------------------------------------------------------------
+TROCKEN = False
+UNTERDRUECKT = 0
+
+
+def schreiben_erlaubt(ziel: str) -> bool:
+    """Darf diese Datei geschrieben werden? (Nein im Probelauf.)"""
+    global UNTERDRUECKT
+    if not TROCKEN:
+        return True
+    UNTERDRUECKT += 1
+    print(f"   [probelauf] würde schreiben: {os.path.relpath(ziel, BLOG_DIR)}")
+    return False
+
+
 def load_manifest():
     try:
         return json.load(open(MANIFEST_PATH, encoding="utf-8"))
@@ -53,6 +74,8 @@ def load_manifest():
 
 
 def save_manifest(manifest):
+    if not schreiben_erlaubt(MANIFEST_PATH):
+        return
     os.makedirs(os.path.dirname(MANIFEST_PATH), exist_ok=True)
     tmp = MANIFEST_PATH + ".tmp"
     json.dump(manifest, open(tmp, "w", encoding="utf-8"),
@@ -565,6 +588,8 @@ def make_cover(title, slug, out_path, force=False, badge=None, savings=None):
         d.text((tx0 + trust_sign + trust_gap, trust_y - 3), trust_txt,
                font=trust_font, fill=CREAM)
 
+    if not schreiben_erlaubt(out_path):
+        return 0
     img.save(out_path, "JPEG", quality=88)
     # HERKUNFT IN DIE DATEI (#1028, 13.11.2026)
     # Das Cover ist deterministisch gezeichnet – kein Bildmodell, kein
@@ -627,6 +652,8 @@ def ensure_cover_in_frontmatter(md_path, slug, title=None, caption=None,
                 content = (content[:m_img.start()]
                            + f'{m_img.group(1)}"{image_path}"'
                            + content[m_img.end():])
+                if not schreiben_erlaubt(md_path):
+                    return False
                 with open(md_path, "w", encoding="utf-8") as f:
                     f.write(content)
                 return True
@@ -642,6 +669,8 @@ def ensure_cover_in_frontmatter(md_path, slug, title=None, caption=None,
                 content = (content[:m_blk.end()]
                        + extra_cover_lines
                        + content[m_blk.end():])
+                if not schreiben_erlaubt(md_path):
+                    return False
                 with open(md_path, "w", encoding="utf-8") as f:
                     f.write(content)
                 return True
@@ -663,6 +692,8 @@ def ensure_cover_in_frontmatter(md_path, slug, title=None, caption=None,
                     + f'{m_alt.group(1)}"{plain_title}"'
                     + content[m_alt.end():]
                 )
+                if not schreiben_erlaubt(md_path):
+                    return False
                 with open(md_path, "w", encoding="utf-8") as f:
                     f.write(content)
                 return True
@@ -679,6 +710,8 @@ def ensure_cover_in_frontmatter(md_path, slug, title=None, caption=None,
         parts = content.split("---", 2)
         if len(parts) == 3:
             content = join_article(parts[1] + block, parts[2], parts[0])
+    if not schreiben_erlaubt(md_path):
+        return False
     with open(md_path, "w", encoding="utf-8") as f:
         f.write(content)
     return True
@@ -804,17 +837,52 @@ def ensure_brand_cover(force=False, protected=None):
     return made, variants
 
 
-def main():
+def cli_parser():
+    """Echte CLI statt `"--flag" in sys.argv` (Befund 15.11.2026).
+
+    WARUM DAS EIN BEFUND IST UND KEINE KOSMETIK:
+    Bis hierher wurden die Schalter per `in sys.argv` gelesen. Ein `--help`
+    fiel damit durch, galt als „kein Schalter gesetzt" und startete den
+    VOLLLAUF – der nicht nur Cover rendert, sondern `data/lcp_images.json`
+    und `data/fcp_images.json` neu schreibt. Ein Aufruf, der nichts tun
+    sollte, veränderte also den Bestand. Dasselbe galt für jeden Tippfehler
+    (`--frce`, `--slgu`): stillschweigend Volllauf statt Fehlermeldung.
+
+    Diese CLI ist deshalb fail-closed: unbekannte Schalter sind ein Fehler
+    (Exit 2), `--help` gibt Hilfe aus (Exit 0), und `--dry-run` zeigt die
+    Wirkung, ohne eine einzige Datei anzufassen.
+    """
+    import argparse
+    p = argparse.ArgumentParser(
+        prog="generate_covers.py",
+        description="Cover rendern, Frontmatter ergänzen, Bild-Manifeste schreiben.",
+        epilog="Ohne Schalter: nur neue und gedriftete Cover. "
+               "`--dry-run` ändert nie etwas.")
+    p.add_argument("--force", action="store_true",
+                   help="alle Cover neu rendern (ignoriert den Design-Fingerprint)")
+    p.add_argument("--pillars", action="store_true",
+                   help="nur die sechs Ratgeber-Cover (Premium-Parität)")
+    p.add_argument("--posts-only", action="store_true",
+                   help="nur Artikel, keine Ratgeber (altes Verhalten)")
+    p.add_argument("--slug", metavar="SLUG", default=None,
+                   help="genau ein Artikel/Cover nach Slug")
+    p.add_argument("--dry-run", action="store_true",
+                   help="nur zeigen, was geschähe – schreibt nichts")
+    return p
+
+
+def main(argv=None):
     from ki_cover_provenienz import protected_paths
+    args = cli_parser().parse_args(argv)
     protected = {str(p) for p in protected_paths()}
-    force = "--force" in sys.argv  # alle Covers neu generieren (neue Umbruch-Regel)
-    nur_pillars = "--pillars" in sys.argv      # nur die 6 Ratgeber (Premium-Parität)
-    nur_posts = "--posts-only" in sys.argv     # altes Verhalten (kompatibel)
-    only_slug = None
-    if "--slug" in sys.argv:
-        i = sys.argv.index("--slug")
-        if i + 1 < len(sys.argv):
-            only_slug = sys.argv[i + 1].strip()
+    force = args.force
+    nur_pillars = args.pillars
+    nur_posts = args.posts_only
+    only_slug = (args.slug or "").strip() or None
+    global TROCKEN
+    TROCKEN = bool(args.dry_run)
+    if TROCKEN:
+        print("=== PROBELAUF (--dry-run): es wird nichts geschrieben ===")
     os.makedirs(OUT_DIR, exist_ok=True)
     files = [] if nur_pillars else list_post_paths()
     covers = 0
@@ -902,20 +970,31 @@ def main():
         variants += pv
     try:
         from lcp_image_optimizer import build_manifest as build_lcp_manifest, write_manifest as write_lcp_manifest
-        write_lcp_manifest(build_lcp_manifest())
-        print("  ✓ LCP-Manifest aktualisiert (data/lcp_images.json)")
+        if schreiben_erlaubt(os.path.join(BLOG_DIR, "data", "lcp_images.json")):
+            write_lcp_manifest(build_lcp_manifest())
+            print("  ✓ LCP-Manifest aktualisiert (data/lcp_images.json)")
     except Exception as exc:
         print(f"WARNUNG: LCP-Manifest konnte nicht aktualisiert werden: {exc}")
     try:
         from fcp_image_optimizer import build_manifest as build_fcp_manifest, write_manifest as write_fcp_manifest
-        write_fcp_manifest(build_fcp_manifest())
-        print("  ✓ FCP-Manifest aktualisiert (data/fcp_images.json)")
+        if schreiben_erlaubt(os.path.join(BLOG_DIR, "data", "fcp_images.json")):
+            write_fcp_manifest(build_fcp_manifest())
+            print("  ✓ FCP-Manifest aktualisiert (data/fcp_images.json)")
     except Exception as exc:
         print(f"WARNUNG: FCP-Manifest konnte nicht aktualisiert werden: {exc}")
 
-    print(f"\nFertig: {covers} Cover erstellt, {frontmatter} Frontmatter ergänzt, "
-          f"{variants} responsive Varianten nachgezogen "
-          f"(von {len(files)} Artikeln).")
+    if TROCKEN:
+        # Ein Probelauf, der „133 Cover erstellt" meldet, obwohl nichts
+        # geschrieben wurde, ist eine Falschaussage im Log. Deshalb eigene,
+        # unmissverstaendliche Zeile.
+        print(f"\nPROBELAUF beendet: {covers} Cover WÄREN nötig, "
+              f"{frontmatter} Frontmatter-Ergänzungen und {variants} Varianten "
+              f"wären nötig, {UNTERDRUECKT} Schreibzugriffe unterdrückt "
+              f"({len(files)} Artikel geprüft). Es wurde NICHTS geändert.")
+    else:
+        print(f"\nFertig: {covers} Cover erstellt, {frontmatter} Frontmatter ergänzt, "
+              f"{variants} responsive Varianten nachgezogen "
+              f"(von {len(files)} Artikeln).")
 
 
 if __name__ == "__main__":
