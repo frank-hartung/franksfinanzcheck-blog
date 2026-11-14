@@ -38,7 +38,10 @@ TITLE_MAX = 100
 
 def _read_posts():
     posts = []
-    for path in glob.glob(os.path.join(BLOG_DIR, "content", "posts", "*", "index.md")):
+    # Sortiert (14.11.2026): `glob` liefert die Reihenfolge des Dateisystems.
+    # Welche Seite einer Dublette ihren Text behält, hing damit vom Rechner
+    # ab – lokal blieb der Test grün, in CI stand er rot.
+    for path in sorted(glob.glob(os.path.join(BLOG_DIR, "content", "posts", "*", "index.md"))):
         content = open(path, encoding="utf-8").read()
         slug = os.path.basename(os.path.dirname(path))
         # Frontmatter extrahieren
@@ -68,6 +71,18 @@ def _read_posts():
             "keywords": fm_list("keywords") or fm_list("tags"),
         })
     return posts
+
+def _halter_zuerst(group):
+    """Die Dublettengruppe so ordnen, dass der Text-Halter vorn steht.
+
+    Ein bytegebundener Reserve-Entwurf (#900) darf nicht geändert werden –
+    also behält ER den Text, und die übrigen Seiten bekommen einen neuen.
+    Stand er zufällig nicht vorn, wurde bisher nur er übersprungen und die
+    Dublette blieb stehen. Die Sortierung ist stabil: Ohne bytegebundenen
+    Entwurf behält wie bisher die erste Seite (nach Slug) ihren Text.
+    """
+    return sorted(group, key=lambda g: not schutz.ist_bytegebunden(g["content"]))
+
 
 def _build_hashtags(keywords, slug):
     """Hashtags für einen neu erzeugten Pin-Text – Regel in der SSOT (#729)."""
@@ -158,7 +173,7 @@ def main():
             problems.append(("P4", slugs, f"DUPLIKAT pin_description: {d[:80]}…"))
             if DO_FIX:
                 existing = set(desc_map.keys())
-                for g in group[1:]:
+                for g in _halter_zuerst(group)[1:]:
                     # #900: bytegebundene Reserve-Entwürfe nicht anfassen.
                     if schutz.ist_bytegebunden(g["content"]):
                         print("  ⏸ " + schutz.schutzvermerk(g["slug"], "pinterest_duplicate_guard.py"))
@@ -187,7 +202,7 @@ def main():
             problems.append(("P4b", slugs, f"DUPLIKAT pin_title: {t}"))
             if DO_FIX:
                 existing = set(title_map.keys())
-                for g in group[1:]:
+                for g in _halter_zuerst(group)[1:]:
                     if schutz.ist_bytegebunden(g["content"]):
                         print("  ⏸ " + schutz.schutzvermerk(g["slug"], "pinterest_duplicate_guard.py"))
                         continue

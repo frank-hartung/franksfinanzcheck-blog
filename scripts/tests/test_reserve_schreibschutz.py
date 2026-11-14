@@ -132,6 +132,83 @@ class DuplicateGuardTest(unittest.TestCase):
         self.assertNotIn('"Gleicher Text"', nachher,
                          "Der Guard hat den normalen Entwurf nicht mehr geheilt")
 
+    def _run_in_reihenfolge(self, umgekehrt, slugs=("erst", "zweit")):
+        """Reserve-Entwurf und normaler Entwurf mit gleichem Pin-Text.
+
+        `umgekehrt` dreht die Reihenfolge, in der das Dateisystem die Ordner
+        liefert. Genau daran hing der Test bis zum 14.11.2026: Lokal kam
+        `erst` zuerst, in CI `zweit` – dort blieb die Dublette stehen und die
+        Prüfung `regression` war rot, ohne dass jemand Code angefasst hatte.
+        """
+        reserve_slug, normal_slug = slugs
+        gleich = "Gleicher Text"
+        reserve = RESERVE_ENTWURF.replace("Alter Pin-Text", gleich)
+        normal = NORMALER_ENTWURF.replace("Alter Pin-Text", gleich)
+        echtes_glob = pdg.glob.glob
+
+        def glob_in_reihenfolge(muster, *a, **kw):
+            treffer = sorted(echtes_glob(muster, *a, **kw))
+            return treffer[::-1] if umgekehrt else treffer
+
+        with tempfile.TemporaryDirectory() as tmp:
+            wurzel = Path(tmp)
+            posts = wurzel / "content" / "posts"
+            for slug, inhalt in ((reserve_slug, reserve), (normal_slug, normal)):
+                (posts / slug).mkdir(parents=True)
+                (posts / slug / "index.md").write_text(inhalt, encoding="utf-8")
+            with patch.object(pdg, "BLOG_DIR", str(wurzel)), \
+                    patch.object(pdg, "DO_FIX", True), \
+                    patch.object(pdg.glob, "glob", glob_in_reihenfolge):
+                pdg.main()
+            return ((posts / reserve_slug / "index.md").read_text(encoding="utf-8"),
+                    (posts / normal_slug / "index.md").read_text(encoding="utf-8"),
+                    reserve)
+
+    def test_ergebnis_haengt_nicht_an_der_reihenfolge_des_dateisystems(self):
+        for umgekehrt in (False, True):
+            with self.subTest(umgekehrt=umgekehrt):
+                reserve_nachher, normal_nachher, reserve_vorher = \
+                    self._run_in_reihenfolge(umgekehrt)
+                self.assertEqual(reserve_vorher, reserve_nachher,
+                                 "bytegebundener Entwurf wurde geschrieben")
+                self.assertNotIn('"Gleicher Text"', normal_nachher,
+                                 "Die Dublette blieb stehen")
+
+    def test_reserve_entwurf_haelt_den_text_auch_wenn_er_spaeter_sortiert(self):
+        # Der normale Entwurf steht nach Slug VOR dem Reserve-Entwurf. Früher
+        # behielt dann er den Text, der Reserve-Entwurf wurde übersprungen –
+        # und beide trugen weiter denselben Pin-Text.
+        for umgekehrt in (False, True):
+            with self.subTest(umgekehrt=umgekehrt):
+                reserve_nachher, normal_nachher, reserve_vorher = \
+                    self._run_in_reihenfolge(umgekehrt, slugs=("z-reserve", "a-normal"))
+                self.assertEqual(reserve_vorher, reserve_nachher)
+                self.assertNotIn('"Gleicher Text"', normal_nachher)
+
+    def test_zwei_normale_entwuerfe_der_erste_nach_slug_behaelt_den_text(self):
+        gleich = NORMALER_ENTWURF.replace("Alter Pin-Text", "Gleicher Text")
+        for umgekehrt in (False, True):
+            with self.subTest(umgekehrt=umgekehrt), tempfile.TemporaryDirectory() as tmp:
+                wurzel = Path(tmp)
+                posts = wurzel / "content" / "posts"
+                for slug in ("a-frueh", "b-spaet"):
+                    (posts / slug).mkdir(parents=True)
+                    (posts / slug / "index.md").write_text(gleich, encoding="utf-8")
+                echtes_glob = pdg.glob.glob
+
+                def glob_in_reihenfolge(muster, *a, _u=umgekehrt, **kw):
+                    treffer = sorted(echtes_glob(muster, *a, **kw))
+                    return treffer[::-1] if _u else treffer
+
+                with patch.object(pdg, "BLOG_DIR", str(wurzel)), \
+                        patch.object(pdg, "DO_FIX", True), \
+                        patch.object(pdg.glob, "glob", glob_in_reihenfolge):
+                    pdg.main()
+                self.assertEqual(gleich, (posts / "a-frueh" / "index.md")
+                                 .read_text(encoding="utf-8"))
+                self.assertNotIn('"Gleicher Text"', (posts / "b-spaet" / "index.md")
+                                 .read_text(encoding="utf-8"))
+
 
 class SeoHealerTest(unittest.TestCase):
     def test_heal_article_verweigert_reserve_entwurf(self):
