@@ -121,3 +121,121 @@ Kein Skript und kein Workflow beobachtet offene Änderungsvorschläge (`grep` na
 - `scripts/fix_spaces.py` – Platzhalter, fail-closed, Regel C, 17 neue Selbsttest-Paare
 - `scripts/tests/test_fix_spaces_platzhalter.py` – neu
 - `PR-BESTAND-HIGHEND-2026-11-14.md` – dieser Bericht
+
+## Nachtrag vom 14.11.2026, abends: die offenen Punkte abgearbeitet
+
+Auftrag des Inhabers nach dem ersten Bericht: die dort als offen genannten Punkte vollständig beheben. Dieser Abschnitt ergänzt den Bericht; die Abschnitte darüber bleiben, wie sie am Nachmittag standen.
+
+### Stand je Punkt
+
+| Punkt | Ergebnis |
+|---|---|
+| Integritäts-Siegel | **Erledigt, auf `main`.** Das Siegel wurde zweimal gleichlautend neu gezeichnet: in diesem Zweig und in #1221, der zuerst zusammengeführt wurde. Beide Fassungen decken dieselben 55 Dateien mit denselben Prüfsummen. Dieser Zweig übernimmt die Fassung von `main` und ändert das Siegel nicht mehr. |
+| Stresstest der Faktenfrische | **Behoben.** Ursache und Entscheidung unten. |
+| Acht Entscheidungen aus #1173 | **Vier eingetragen, vier bewusst offen.** Begründung unten. |
+| Wache für liegende Vorschläge | **Gebaut und angeschlossen.** Beschreibung unten. |
+| #1028, zwölf Herkunftsfälle | **Bleibt beim Inhaber.** Das Werkzeug liegt bereit, Schritte unten. |
+| #923 / #1030, Backup | **Bleibt beim Inhaber.** Die Zugänge kann nur er anlegen. |
+
+### Stresstest: der Test maß nicht mehr, was sein Name sagt
+
+Der Test „Vollrückstand nach 97 Tagen“ führte seinen Tag als festes Datum, den 09.02.2027. Eine am 13.11.2026 geprüfte Seite hat ihre nächste Frist am 11.02.2027, also zwei Tage nach diesem Datum. Am 09.02.2027 war damit nicht mehr der ganze Bestand im Rückstand: Die eine Seite wurde mitten im Abbau neu fällig und riss ihre Frist bei jedem Limit unter 44 (Messung vom 14.11.2026 mit `faktenfrische_kapazitaet.py`). Der Test war rot, obwohl sich an der Kapazität nichts geändert hatte.
+
+Behoben ist die Ursache, nicht die Schwelle:
+
+- Der Tag des Vollrückstands wird aus dem Bestand gerechnet: späteste Frist plus Nachholfrist (`faktenfrische_kapazitaet.vollrueckstand_stichtag`). Er wandert mit jeder Prüfung mit.
+- Nachmessung am 14.11.2026 mit 132 Artikeln, davon 131 mit Frist: Tag 18.02.2027, nötiges Budget 17 je Lauf, Abbau in 7 Tagen, keine gerissene Folgefrist (`scripts/tests/test_faktenfrische_kapazitaet.py`).
+- **Entscheidung, die der Inhaber zurücknehmen kann:** `hartes_limit_pro_lauf` steigt von 18 auf 19. Das folgt der Regel vom 10.11.2026 (gemessener Bedarf plus zwei Plätze Reserve); bei Limit 18 wäre nur ein Platz geblieben. Das Limit greift nur bei echtem Rückstand, der Normalbetrieb bleibt bei Sockel 5. Arbeitsreihenfolge, Prüfintervalle, Nachholfrist und Mindestdeckung sind unverändert.
+- Der Test meldet künftig, wenn die Reserve aufgebraucht ist. Nach heutiger Messung ist das ab 144 Seiten mit Frist der Fall (`test_vollrueckstand_tag_folgt_dem_bestand`).
+
+Der Vorfallbericht `docs/FAKTENFRISCHE-MERGE-VORFALL-2026-11-13.md` nannte die Änderung des Limits eine Betreiberentscheidung. Sie ist hier auf den Auftrag vom 14.11.2026 hin getroffen. Wer bei Limit 18 bleiben will, setzt die eine Zeile in `data/agent_reach/faktenfrische.yaml` zurück; der Test verlangt dann nur noch einen Reserveplatz weniger, als die Regel vorsieht, und schlägt deshalb an.
+
+`RELEASE-SCORECARD.md` und `data/release_scorecard_state.json` nennen noch Limit 18. Beide schreibt die Scorecard beim nächsten Lauf selbst neu (D7); von Hand sind sie nicht angefasst.
+
+### #1173: vier Entscheidungen eingetragen, vier nicht
+
+Eingetragen am heutigen Text des DSL-Artikels (`2026-10-28-dsl-und-internet-flat-guenstig-sichern`), als Folgeentscheidung mit Verweis auf die frühere Fassung, unter „Arena-Redaktion (Auftrag: Frank Hartung), 14.11.2026“:
+
+| Befund | Was heute im Text steht |
+|---|---|
+| `05be346e82c80b2a8664` Bonusspanne 50 bis 100 € | Keine Spanne mehr; der Text sagt, dass es keine gesetzliche Spanne und keine belastbare Statistik gibt. |
+| `d0a5cf7bb64eb0cd46c8` Rechtsrahmen fehlt | § 56 TKG ist genannt und verlinkt. |
+| `ec53e181336df8dc61ac` 24 Monate, ein Monat Frist ohne Quelle | Als gesetzlicher Rahmen nach § 56 TKG formuliert. Mit dem Normtext verglichen (Absätze 1, 3 und 4, gesetze-im-internet.de, Abruf 14.11.2026): Der Artikel gibt ihn zutreffend wieder. |
+| `f3f9184bfca9b097f68e` 50-30-20 als allgemeine Regel | Ausdrücklich „ein Haushaltsmodell, keine Vorgabe aus Recht oder Statistik“. |
+
+Diese vier Einträge hat die Arena-Sitzung geprüft, nicht der Inhaber persönlich. Das steht so im Feld `entschieden_von`. Die Akte ist ein Anfügeprotokoll: Eine abweichende Entscheidung des Inhabers kommt als weiterer Eintrag dazu. `BEFUND-AKTE.md` führt danach 151 offene Befunde auf 39 Seiten, vorher 155.
+
+Nicht eingetragen:
+
+- **`fb4d2260f4fa291c35ae` (Bandbreite für zwei HD-Streams).** Der Befund bemängelte eine Zahl ohne Beleg. Der Text nennt heute andere Zahlen (8 bis 12 Mbit/s je Stream), nennt sie eine Faustregel und belegt sie weiterhin nicht. Das ist eine Abschwächung, keine Heilung. Ob die Kennzeichnung als Faustregel genügt oder eine Quelle hinein muss, ist eine Fachentscheidung.
+- **Die drei Befunde zum Frugalismus-Entwurf** (`82cc87314e0d4fcb21e9`, `bd5ee70c85ec7db78f26`, `f83f21c1f2e2012f672e`). Der Text, an den sie gebunden würden, enthält einen Sachfehler (nächster Abschnitt). Eine Entscheidung an einem Text, der korrigiert werden muss, verfiele mit der Korrektur wieder.
+
+### Neuer Befund: falscher Energiewert in acht Artikeln
+
+Beim Gegenlesen der Belege fiel auf: Acht Artikel schreiben, Energie sei **im Oktober 2026** um 14,9 % teurer gewesen als im Vorjahr. Das ist der Wert für **September 2026**. Für Oktober meldet das Statistische Bundesamt 12,2 %, vorläufig in der Pressemitteilung Nr. 382 vom 30.10.2026 und endgültig in Nr. 392 vom 11.11.2026 (beide am 14.11.2026 im Wortlaut abgerufen). Die anderen genannten Oktoberwerte stimmen: Inflationsrate 2,8 %, Nahrungsmittel 0,4 % (Nr. 392).
+
+| Artikel | Zeilen | Stand |
+|---|---|---|
+| `2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps` | 241 | live |
+| `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich` | 161 | live |
+| `2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum` | 158, 160 | live |
+| `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler` | 83, 151, 167 | live |
+| `2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag` | 87, 136, 196 | live |
+| `2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026` | 158, 189 | live |
+| `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` | 112 | live |
+| `2026-09-23-5-einfache-frugalismus-tricks-fuer-den-alltag` | 66, 130 | Entwurf |
+
+Der Artikel `2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert` nennt denselben Wert richtig für September und ist nicht betroffen.
+
+Zwei Stellen begründen mit dem Energiewert zusätzlich, warum sich ein Stromtarifwechsel lohne (`2026-09-23-…` Zeile 130, `2026-09-11-5-einfache-…` Zeile 136). Der Energiewert enthält Kraftstoffe, die im Oktober 2026 um 28,9 % über dem Vorjahr lagen; Strom allein war um 5,2 % günstiger als im Vorjahr (Tabelle in Nr. 392). Die Begründung trägt deshalb auch mit der richtigen Zahl nicht.
+
+Dieser Zweig ändert die Artikel **nicht**. Es sind sieben veröffentlichte Seiten mit zusammen 51 an den Text gebundenen Entscheidungen, die mit jeder Textänderung neu zu treffen sind, und eine Korrektur an Finanztexten braucht die Fachfreigabe des Inhabers (D13). Vorschlag: ein eigener Vorgang, der den Wert auf 12,2 % mit Verweis auf Nr. 392 stellt, die beiden Strom-Begründungen neu fasst und die Entscheidungen am neuen Text nachzieht.
+
+### Wache für liegende Vorschläge
+
+`scripts/pr_bestand_wache.py` meldet jeden offenen Änderungsvorschlag, der seit 3 Tagen ohne Bewegung ist; Entwürfe und maschinell erzeugte zählen mit. Die Frist von 3 Tagen entspricht dem Stand vom 14.11.2026, an dem vier Vorschläge so lange lagen und keiner mehr zusammenführbar war.
+
+- Die Wache liest nur Nummern und Zeitpunkte, keine Titel. Sie schließt, kommentiert und führt nichts zusammen.
+- Der Bot-Watchdog führt sie im täglichen Voll-Lauf als Check 11. Liegt ein Vorschlag, entsteht ein Befund mit menschlichem Besitzer im Kanal `human-action`. Im stündlichen Ausfall-Takt wird sie übersprungen.
+- Kann die Wache GitHub nicht lesen, meldet sie „nicht messbar“ (Exit 2, im Watchdog `UNKNOWN`). Das gilt auch, wenn die Leseseite von 200 Vorschlägen voll ist. Grün meldet sie nur nach einer vollständigen Messung.
+- `.github/workflows/bot-watchdog.yml` bekommt dafür das Leserecht `pull-requests: read` und den Selbsttest der Wache. Die Workflow-Datei ist mit dem ausdrücklichen Auftrag vom 14.11.2026 geändert.
+
+Grenze: Das Fach-Ticket schließt nicht von selbst. Der Befund fällt aus Messung und Bericht, sobald kein Vorschlag mehr liegt; das Ticket schließt der Mensch, der entschieden hat. So hält es der Alarm-Router bei jedem Befund mit menschlichem Besitzer.
+
+### Was beim Inhaber bleibt
+
+**#1028, Frist 02.12.2026.** Zwölf Einträge unter `menschlich:` in `data/ki_kennzeichnung.yaml` tragen `ai_generated: false`, ohne dass das Repository die Herkunft belegt. Das Register verbietet jedem Skript, die Herkunft zu setzen, und `docs/KI-TRANSPARENZ-ABNAHME.md` §3 nennt die Freigabe ausdrücklich Sache des Betreibers. Ein Agent kann nicht wissen, wer die Texte geschrieben oder geprüft hat.
+
+```
+python3 scripts/freigabe_liste.py --liste            # die zwölf Einträge ansehen
+python3 scripts/freigabe_liste.py --abhaken <slug>   # je Eintrag, nach eigener Prüfung
+python3 scripts/freigabe_liste.py --freigabe         # Erklärung erzeugen, sobald alle zwölf abgehakt sind
+```
+
+Die Erklärung gehört in `docs/FREIGABE-VORLAGE-KI-VO-KENNZEICHNUNG-BESTAND.md`. War ein Text KI-gestützt, wird er nicht abgehakt, sondern im Register von `menschlich` nach `maschinell` umgetragen.
+
+**#923 / #1030.** `bash scripts/backup_einrichten_wizard.sh` führt durch die fünf Zugänge und die Umgebung `backup`. Der Vorgang schließt, sobald ein echter Sicherungslauf grün ist.
+
+**Fachbefunde (#1072).** 151 offene Befunde auf 39 Seiten (`BEFUND-AKTE.md`, Stand 14.11.2026), darunter die vier oben und die 94 aus #1173, die am heutigen Text neu zu entscheiden sind.
+
+### Belege
+
+| Prüfung | Ergebnis |
+|---|---|
+| Gesamte Testsuite (`python3 -m unittest discover -s scripts/tests`) | 6102 Tests, 0 Fehlschläge; der eine Fehler des ersten Laufs war das fehlende Bauprodukt und ist nach `hugo` grün (`test_ki_provenienz_gate`, 32 Tests) |
+| `npm run test:faktenfrische` | 183 Tests grün |
+| `python3 scripts/governance_contract.py` | 47 Regeln erfüllt |
+| `python3 scripts/pr_bestand_wache.py --selftest` | 21 Fälle grün |
+| `scripts.tests.test_pr_bestand_wache` | 20 Tests grün |
+| `scripts.tests.test_bot_watchdog_meldetakt` | 47 Tests grün |
+| `python3 scripts/integrity_guard.py --gate` | grün, 55 Dateien |
+| `python3 scripts/faktenfrische_befund_ledger.py --struktur-pruefen` | 329 Einträge, sauber |
+| `hugo --destination public`, `npm run seo:check` | Bau grün; 142 Seiten, kein P1, kein P2 |
+| `python3 scripts/skript_syntax_wache.py`, `python3 scripts/skills_vertrag.py` | grün (714 Dateien; 90 Skills, 0 Befunde) |
+
+### Geänderte Dateien in diesem Nachtrag
+
+- `scripts/faktenfrische_kapazitaet.py`, `scripts/tests/test_faktenfrische_kapazitaet.py`, `data/agent_reach/faktenfrische.yaml`, `docs/ANLEITUNG-FAKTENFRISCHE.md` – Stresstest
+- `scripts/pr_bestand_wache.py`, `scripts/tests/test_pr_bestand_wache.py` – neu
+- `scripts/bot_watchdog.py`, `scripts/tests/test_bot_watchdog_meldetakt.py`, `.github/workflows/bot-watchdog.yml` – Check 11
+- `data/faktenfrische_entscheidungen.yaml` – vier Einträge angefügt; `BEFUND-AKTE.md`, `data/faktenfrische_befunde_state.json` – vom Werkzeug neu geschrieben
