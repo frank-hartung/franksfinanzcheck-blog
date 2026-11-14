@@ -202,6 +202,13 @@ Dieser Zweig ändert die Artikel **nicht**. Es sind sieben veröffentlichte Seit
 
 Grenze: Das Fach-Ticket schließt nicht von selbst. Der Befund fällt aus Messung und Bericht, sobald kein Vorschlag mehr liegt; das Ticket schließt der Mensch, der entschieden hat. So hält es der Alarm-Router bei jedem Befund mit menschlichem Besitzer.
 
+### Rot aus `main`: zwei Defekte aus #1222 mitgeheilt
+
+Während dieser Arbeit wurde #1222 nach `main` zusammengeführt, mit roter Prüfung `regression`. Danach schlugen auf `main` 3 von 6137 Tests fehl (lokaler Lauf der ganzen Suite am 14.11.2026), und jeder Vorschlag erbte das Rot. Der Inhaber hat am 14.11.2026 ausdrücklich beauftragt, beide Ursachen in diesem Zweig zu beheben.
+
+- **`.github/workflows/skript-syntax.yml`, Zeile 150:** `pip install --quiet pyyaml` ohne feste Version. Die Abhängigkeits-Wache lehnt das ab (Regel A7, zwei Tests in `test_abhaengigkeits_wache`). Die Zeile installiert jetzt aus `requirements-ci.txt` mit `--require-hashes`, wie die übrigen Workflows.
+- **`scripts/tests/test_publication_reliability.py`:** Der Test `test_publish_gate_heilt_r5_vor_der_harten_pruefung` legt alle Gates still außer der R5-Heilung. Das mit #1222 neue Quellen-Gate fehlte in dieser Liste und stellte den Testartikel zurück. Es ist ergänzt; das Quellen-Gate selbst prüft `test_publish_gate_quellen.py`. Am Gate ist nichts geändert.
+
 ### Was beim Inhaber bleibt
 
 **#1028, Frist 02.12.2026.** Zwölf Einträge unter `menschlich:` in `data/ki_kennzeichnung.yaml` tragen `ai_generated: false`, ohne dass das Repository die Herkunft belegt. Das Register verbietet jedem Skript, die Herkunft zu setzen, und `docs/KI-TRANSPARENZ-ABNAHME.md` §3 nennt die Freigabe ausdrücklich Sache des Betreibers. Ein Agent kann nicht wissen, wer die Texte geschrieben oder geprüft hat.
@@ -222,7 +229,8 @@ Die Erklärung gehört in `docs/FREIGABE-VORLAGE-KI-VO-KENNZEICHNUNG-BESTAND.md`
 
 | Prüfung | Ergebnis |
 |---|---|
-| Gesamte Testsuite (`python3 -m unittest discover -s scripts/tests`) | 6102 Tests, 0 Fehlschläge; der eine Fehler des ersten Laufs war das fehlende Bauprodukt und ist nach `hugo` grün (`test_ki_provenienz_gate`, 32 Tests) |
+| Gesamte Testsuite vor der Übernahme von #1222 (`python3 -m unittest discover -s scripts/tests`) | 6102 Tests, 0 Fehlschläge; der eine Fehler des ersten Laufs war das fehlende Bauprodukt und ist nach `hugo` grün (`test_ki_provenienz_gate`, 32 Tests) |
+| Gesamte Testsuite nach der Übernahme von #1222 | 6137 Tests, 3 Fehlschläge, alle drei aus `main` (Abschnitt „Rot aus `main`“); nach der Heilung laufen die betroffenen Module grün (`test_publication_reliability`, `test_abhaengigkeits_wache`, `test_publish_gate_quellen`, `test_workflow_aufruf_vertrag`: 160 Tests mit drei Workflow-Tests) |
 | `npm run test:faktenfrische` | 183 Tests grün |
 | `python3 scripts/governance_contract.py` | 47 Regeln erfüllt |
 | `python3 scripts/pr_bestand_wache.py --selftest` | 21 Fälle grün |
@@ -238,4 +246,5 @@ Die Erklärung gehört in `docs/FREIGABE-VORLAGE-KI-VO-KENNZEICHNUNG-BESTAND.md`
 - `scripts/faktenfrische_kapazitaet.py`, `scripts/tests/test_faktenfrische_kapazitaet.py`, `data/agent_reach/faktenfrische.yaml`, `docs/ANLEITUNG-FAKTENFRISCHE.md` – Stresstest
 - `scripts/pr_bestand_wache.py`, `scripts/tests/test_pr_bestand_wache.py` – neu
 - `scripts/bot_watchdog.py`, `scripts/tests/test_bot_watchdog_meldetakt.py`, `.github/workflows/bot-watchdog.yml` – Check 11
+- `.github/workflows/skript-syntax.yml`, `scripts/tests/test_publication_reliability.py` – Rot aus #1222 geheilt
 - `data/faktenfrische_entscheidungen.yaml` – vier Einträge angefügt; `BEFUND-AKTE.md`, `data/faktenfrische_befunde_state.json` – vom Werkzeug neu geschrieben
