@@ -38,7 +38,15 @@ TITLE_MAX = 100
 
 def _read_posts():
     posts = []
-    for path in glob.glob(os.path.join(BLOG_DIR, "content", "posts", "*", "index.md")):
+    # Sortiert lesen. `glob` liefert die Reihenfolge des Dateisystems, und die
+    # ist auf ext4 (Lokalrechner) eine andere als auf dem CI-Runner. Weil die
+    # Heilung unten `group[1:]` anfasst, entschied die Reihenfolge darüber,
+    # WELCHER Artikel eines Duplikat-Paars umgeschrieben wird: Stand der
+    # bytegebundene Reserve-Entwurf auf Platz 0, blieb der normale Entwurf
+    # ungeheilt (und umgekehrt). Ein Mess-/Heilwerkzeug, dessen Ergebnis von
+    # der Verzeichnis-Reihenfolge abhängt, ist keine Messung. Ein Test
+    # (`test_reserve_schreibschutz`) war deshalb lokal grün und in der CI rot.
+    for path in sorted(glob.glob(os.path.join(BLOG_DIR, "content", "posts", "*", "index.md"))):
         content = open(path, encoding="utf-8").read()
         slug = os.path.basename(os.path.dirname(path))
         # Frontmatter extrahieren
@@ -151,6 +159,9 @@ def main():
 
     problems = []
     fixed = 0
+    # Wie viele Duplikat-Gruppen überhaupt heilbar sind (mindestens zwei
+    # nicht-bytegebundene Mitglieder). Nur daran wird der Erfolg gemessen.
+    heilbare_probleme = 0
 
     for d, group in desc_map.items():
         if len(group)>1:
@@ -158,11 +169,38 @@ def main():
             problems.append(("P4", slugs, f"DUPLIKAT pin_description: {d[:80]}…"))
             if DO_FIX:
                 existing = set(desc_map.keys())
-                for g in group[1:]:
-                    # #900: bytegebundene Reserve-Entwürfe nicht anfassen.
+                # EINEN Eintrag der Gruppe lassen wir stehen, die übrigen
+                # bekommen einen eigenen Text. Welcher stehen bleibt, darf
+                # nicht die Verzeichnis-Reihenfolge entscheiden: Ist der
+                # erste bytegebunden (#900), muss der NÄCHSTE heilbare
+                # weichen – sonst bliebe die ganze Gruppe ungeheilt und der
+                # normale Entwurf behielte stillschweigend das Duplikat.
+                # Geschützte Entwürfe werden deshalb ZUERST gemeldet und für
+                # die Heilung übersprungen, nicht die Gruppe abgeschnitten.
+                heilbar = []
+                for g in group:
                     if schutz.ist_bytegebunden(g["content"]):
+                        # #900: bytegebundene Reserve-Entwürfe nicht anfassen.
                         print("  ⏸ " + schutz.schutzvermerk(g["slug"], "pinterest_duplicate_guard.py"))
-                        continue
+                    else:
+                        heilbar.append(g)
+                # Bleibt überhaupt ein Duplikat übrig, das jemand ändern
+                # KÖNNTE? Nur dann ist die Gruppe heilbar.
+                #
+                # Die Regel darf nicht „ab dem zweiten Eintrag heilen" lauten:
+                # Steht der bytegebundene Reserve-Entwurf allein neben einem
+                # normalen, gäbe es keinen zweiten heilbaren – der normale
+                # behielte das Duplikat und der Lauf meldete trotzdem „0
+                # geheilt". Genau so war `test_normaler_entwurf_wird_
+                # weiterhin_eindeutig` in der CI rot und lokal grün.
+                #
+                # Deshalb: von den NICHT geschützten bleibt genau einer
+                # stehen (der erste), alle anderen weichen. Geschützte
+                # zählen dabei weder als „der eine" noch als heilbar.
+                ziel = heilbar[1:] if len(heilbar) > 1 else heilbar
+                if ziel:
+                    heilbare_probleme += 1
+                for g in ziel:
                     new_desc = _unique_desc(g["slug"], g["title"], g["description"], g["keywords"], existing)
                     new_content = _fm_set(g["content"], "pin_description", new_desc)
                     open(g["path"], "w", encoding="utf-8").write(new_content)
@@ -187,10 +225,16 @@ def main():
             problems.append(("P4b", slugs, f"DUPLIKAT pin_title: {t}"))
             if DO_FIX:
                 existing = set(title_map.keys())
-                for g in group[1:]:
+                heilbar = []
+                for g in group:
                     if schutz.ist_bytegebunden(g["content"]):
                         print("  ⏸ " + schutz.schutzvermerk(g["slug"], "pinterest_duplicate_guard.py"))
-                        continue
+                    else:
+                        heilbar.append(g)
+                ziel = heilbar[1:] if len(heilbar) > 1 else heilbar
+                if ziel:
+                    heilbare_probleme += 1
+                for g in ziel:
                     new_title = _unique_title(g["slug"], g["title"], existing)
                     new_content = _fm_set(g["content"], "pin_title", new_title)
                     open(g["path"], "w", encoding="utf-8").write(new_content)
@@ -204,7 +248,11 @@ def main():
             print(f"  [{code}] {slugs}: {msg}")
         if DO_FIX:
             print(f"✅ {fixed} Duplikate geheilt (dauerhaft)")
-            return 0 if fixed>=len(problems) else 1
+            # Eine Gruppe, in der ALLE Mitglieder bytegebunden sind, ist
+            # bewusst nicht heilbar – das ist kein Fehlschlag, sondern der
+            # Schreibschutz bei der Arbeit. Gezählt wird deshalb nur, was
+            # überhaupt heilbar war.
+            return 0 if fixed >= heilbare_probleme else 1
         return 1
     else:
         print("✅ Keine Pinterest-Duplikate – alle Pin-Texte einzigartig (Premium-Level)")

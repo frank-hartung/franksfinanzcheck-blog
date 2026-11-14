@@ -132,6 +132,33 @@ class DuplicateGuardTest(unittest.TestCase):
         self.assertNotIn('"Gleicher Text"', nachher,
                          "Der Guard hat den normalen Entwurf nicht mehr geheilt")
 
+    def test_heilung_haengt_nicht_an_der_verzeichnisreihenfolge(self):
+        """Der Befund, an dem die CI rot war und der Rechner grün.
+
+        `glob.glob()` liefert die Reihenfolge des Dateisystems. Die Heilung
+        fasste `group[1:]` an – also entschied die Reihenfolge darüber, ob
+        der NORMALE Entwurf ein Duplikat behielt. Auf ext4 stand der
+        Reserve-Entwurf hinten (Test grün), auf dem CI-Runner vorn (Test
+        rot). Beide Reihenfolgen müssen dasselbe Ergebnis liefern.
+        """
+        import glob as glob_mod
+        echter_glob = glob_mod.glob
+        ergebnisse = {}
+        try:
+            for dreh in (False, True):
+                def sortiert(muster, _dreh=dreh, _echt=echter_glob):
+                    return sorted(_echt(muster), reverse=_dreh)
+
+                glob_mod.glob = sortiert
+                nachher = self._run(NORMALER_ENTWURF.replace(
+                    "Alter Pin-Text", "Gleicher Text"))
+                ergebnisse[dreh] = '"Gleicher Text"' not in nachher
+        finally:
+            glob_mod.glob = echter_glob
+        self.assertEqual(ergebnisse, {False: True, True: True},
+                         "Heilung hängt an der Verzeichnisreihenfolge – "
+                         "lokal ext4, in der CI eine andere")
+
 
 class SeoHealerTest(unittest.TestCase):
     def test_heal_article_verweigert_reserve_entwurf(self):
