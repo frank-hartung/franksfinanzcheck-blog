@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 14.11.2026 13:20 (Europe/Berlin)  
+> Automatisch aktualisiert: 14.11.2026 19:45 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -30,7 +30,7 @@
 ### Mo, 23. November 2026
 - **07:30** ⏳ Wohngebäudeversicherung Vergleich: Worauf du achten musst — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/
-- **11:30** ⏳ Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 € — _zahl_ · Evergreen  
+- **07:30** ⏳ Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 € — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/
 ### Mi, 25. November 2026
 - **07:30** ⏳ September-Roadtrip: Clevere Wege zum Mietwagen-Schnäppchen — _zahl_ · Evergreen  

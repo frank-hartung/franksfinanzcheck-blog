@@ -934,6 +934,18 @@ def main():
         sys.exit(0)
 
     do_fix = "--fix" in args
+    # AUFRUF-VERTRAG (14.11.2026, scripts/workflow_aufruf_vertrag.py):
+    # blog-health-daily.yml ruft `--check`. Bis heute war das ein stiller No-Op
+    # (die Vorgabe ist bereits der Prüfmodus) – ein Aufruf, der „prüfen“ sagt
+    # und im Werkzeug nirgends vorkommt, ist nicht prüfbar und lädt zum
+    # Vertauschen ein: Wer später `--fix` zur Vorgabe macht, heilt plötzlich,
+    # wo geprüft werden sollte. Beide Modi sind jetzt ausdrücklich und
+    # schließen sich aus.
+    if "--check" in args and do_fix:
+        print("🛑 --check und --fix schließen sich aus – nichts verändert.")
+        sys.exit(2)
+    if "--check" in args:
+        print("Kadenz-Prüfung ausdrücklich angefordert (--check, ohne Schreiben).")
     if "--integrity" in args:
         # Nur die Park-Zustände klären – KEINE Kadenz-Heilung, KEINE
         # Promotion. Für Wartung von Hand und für CI-Schritte, die Flags
