@@ -1600,7 +1600,17 @@ jobs:
           python3 scripts/ki_audio_markierung.py --write \
             --dir public/audio/articles
           markierung=$?
-          python3 scripts/ki_audio_markierung.py --check \
+          # NACHGEFÜHRT 14.11.2026: Hier stand `--check`, das Werkzeug kannte
+          # nur `--gate`. argparse beendet unbekannte Schalter mit Exit 2 –
+          # jeder Deploy meldete „write=0 / check=2“ als Werkzeugbefund, das
+          # Siegel war dauerhaft rot, obwohl keine einzige Tonspur fehlte
+          # (Lauf 43618889770: 44/44 markiert). Das Werkzeug akzeptiert den
+          # alten Namen weiter (Alias), dieser Aufruf nennt jetzt den
+          # kanonischen. Die Klasse ist durch
+          # `scripts/workflow_aufruf_vertrag.py` dauerhaft geschlossen: der
+          # Vertrag liest JEDEN Skriptaufruf in den Workflows und vergleicht
+          # die Schalter mit dem argparse des Skripts.
+          python3 scripts/ki_audio_markierung.py --gate \
             --dir public/audio/articles
           kontrolle=$?
           set -e

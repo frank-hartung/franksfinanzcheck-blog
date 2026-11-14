@@ -810,6 +810,13 @@ def main() -> int:
     if "--selftest" in argv:
         return selftest()
 
+    # AUFRUF-VERTRAG (14.11.2026, scripts/workflow_aufruf_vertrag.py):
+    # Der Workflow nennt diesen Schalter ausdrücklich; ohne diese Zeile wäre
+    # er ein stiller No-Op – der Lauf wäre richtig, der Name aber nirgends
+    # im Werkzeug und damit nicht prüfbar.
+    # `--build` ist der Name aus social-autopilot.yml und social-video.yml.
+    if "--build" in argv:
+        print("🗓️  Kalender-Neubau ausdrücklich angefordert (--build).")
     only = None
     if "--channel" in argv:
         i = argv.index("--channel")

@@ -58,29 +58,29 @@ Den **Ökostrom Anbieter wechseln** ist heute einfacher als früher. Es ist ein 
 
 Dennoch gibt es bei der Wahl des passenden Tarifs viele Details zu beachten. Nicht jedes Angebot, das grün glänzt, hilft der Umwelt wirklich weiter.
 
-Hier schauen wir uns an, wie du Transparenz in deine Stromrechnung bringst. Wir nutzen dafür den 4K-Prüfpfad von Franks Fixkosten-Kompass. So behältst du die volle Kontrolle über deine monatlichen Kosten.
+Hier zeigen wir dir, wie du deine Stromrechnung klarer machst. Wir nutzen den 4K-Prüfpfad von Franks Fixkosten-Kompass. So behältst du die volle Kontrolle über deine Kosten jeden Monat.
 
 **Das Wichtigste in Kürze**
 - Wann der neue Tarif starten kann, richtet sich nach Laufzeit und Kündigungsfrist deines bisherigen Vertrags.
-- Seit dem 6. Juni 2025 ist der technische Stromlieferantenwechsel an Werktagen binnen 24 Stunden möglich; diese Prozessfrist verkürzt keine Vertragsfrist (Bundesnetzagentur, [Q1](https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Lieferantenwechsel/start.html)).
+- Seit dem 6. Juni 2025 ist der technische Anbieterwechsel an Werktagen binnen 24 Stunden möglich. Diese Frist verkürzt keine Vertragsfrist (Bundesnetzagentur, [Q1](https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Lieferantenwechsel/start.html)).
 - Die Verbraucherzentrale empfiehlt für einen zusätzlichen Beitrag zur Energiewende unter anderem Tarife mit dem [ok-power- oder Grüner-Strom-Label (Q2)](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/ist-ein-tarif-mit-oekostrom-und-oekogas-ueberhaupt-sinnvoll-8207).
 - Eine mögliche Ersparnis hängt von deinem Verbrauch, den vollständigen Jahreskosten und den Vertragsbedingungen ab; ein fester Sparbetrag lässt sich nicht versprechen.
 
 ## Wie funktioniert der Strommarkt im Jahr 2026?
 
-Der deutsche Strommarkt hat sich in den letzten Jahren stark gewandelt. Im Jahr 2026 ist die Digitalisierung der Stromzähler weit fortgeschritten.
+Der deutsche Strommarkt hat sich stark gewandelt. Im Jahr 2026 sind viele Zähler digital. Das macht den Markt klarer.
 
-Viele Haushalte nutzen bereits Smart Meter. Diese Geräte zeigen dir genau, wann du wie viel Energie verbrauchst. Das macht es leichter, Tarife zu bewerten. Wenn du den **Ökostrom Anbieter wechseln** möchtest, nutzt du diese Daten für eine präzise Suche. 
+Viele Haushalte nutzen schon Smart Meter. Sie zeigen dir, wann du wie viel Strom nutzt. So kannst du Tarife besser prüfen. Willst du den **Ökostrom Anbieter wechseln**, helfen dir diese Daten bei der Suche. 
 
 Physikalisch gesehen kommt aus deiner Steckdose immer der gleiche Mix. Es gibt kein separates Kabel für Windstrom oder Sonnenenergie. Man kann sich das Stromnetz wie einen großen See vorstellen.
 
-Viele Erzeuger speisen Strom in dieses gemeinsame Netz ein. Ein Ökostromtarif ordnet deinem Verbrauch bilanziell Strom aus erneuerbaren Quellen zu; das bedeutet aber nicht, dass genau dieser Strom physisch aus deiner Steckdose kommt.
+Viele Erzeuger speisen Strom in dieses Netz ein. Ein Ökotarif ordnet deinem Verbrauch Strom aus grünen Quellen zu. Das heißt nicht, dass genau dieser Strom bei dir ankommt.
 
-Herkunftsnachweise belegen die erneuerbare Herkunft der entsprechend vermarkteten Strommenge. Der Kauf solcher Nachweise allein sorgt nicht automatisch für den Bau neuer Anlagen. Die Verbraucherzentrale erklärt, warum der zusätzliche Nutzen vom konkreten Tarif und seinen Kriterien abhängt ([Q2](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/ist-ein-tarif-mit-oekostrom-und-oekogas-ueberhaupt-sinnvoll-8207)).
+Nachweise belegen die grüne Herkunft der verkauften Menge. Ihr Kauf allein baut nicht gleich neue Anlagen. Die Verbraucherzentrale erklärt, warum der zusätzliche Nutzen vom konkreten Tarif und seinen Kriterien abhängt ([Q2](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/ist-ein-tarif-mit-oekostrom-und-oekogas-ueberhaupt-sinnvoll-8207)).
 
 ## Warum lohnt es sich, Ökostrom Tarife zu vergleichen?
 
-Ein Vergleich ist die Basis für jede [finanzielle](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) Entscheidung im Haushalt. Viele Menschen bleiben jahrelang in der teuren Grundversorgung.
+Ein Vergleich ist die Basis für jede Geld-Entscheidung im Haushalt. Viele bleiben jahrelang in der teuren Grundversorgung.
 
 Das kostet unnötig Geld. Wer regelmäßig **Ökostrom Tarife vergleichen** geht, findet oft bessere Konditionen. Dabei geht es nicht nur um den Preis pro Kilowattstunde. Es geht um das Gesamtpaket.
 
@@ -100,9 +100,9 @@ Du bist nicht mehr an lange Laufzeiten gebunden. Wenn der Markt sich ändert, re
 
 Der Begriff Ökostrom ist gesetzlich nicht streng geschützt. Jeder darf seinen Strom grün nennen, wenn er entsprechende Zertifikate kauft. Das führt oft zu Verwirrung. Damit du sicher bist, dass dein Geld wirklich die Energiewende unterstützt, solltest du auf Gütesiegel achten. 
 
-Die Verbraucherzentrale empfiehlt das „Grüner Strom Label“ und das „ok-power-Label“ als Orientierung für Tarife mit einem zusätzlichen Beitrag zur Energiewende ([Q2](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/ist-ein-tarif-mit-oekostrom-und-oekogas-ueberhaupt-sinnvoll-8207)). Die Labels haben eigene Kriterien; sie sind kein Preisvergleich und versprechen weder einen günstigen Tarif noch eine persönliche Ersparnis. Prüfe deshalb, ob das Siegel für genau den Tarif gilt, den du abschließen möchtest, und vergleiche dessen Jahresgesamtkosten.
+Die Verbraucherzentrale empfiehlt zwei Siegel als Hilfe: „Grüner Strom Label“ und „ok-power-Label“. Sie zeigen Tarife mit Nutzen für die Energiewende ([Q2](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/ist-ein-tarif-mit-oekostrom-und-oekogas-ueberhaupt-sinnvoll-8207)). Die Siegel haben eigene Regeln. Sie sind kein Preisvergleich. Sie versprechen keinen günstigen Preis. Prüfe daher: Gilt das Siegel für deinen Tarif? Und vergleiche die Gesamtkosten pro Jahr.
 
-Achte auch auf die Unternehmensstruktur. Gehört der Anbieter zu einem großen Kohlekonzern? Oder ist es eine unabhängige Genossenschaft?
+Achte auch auf die Firma dahinter. Gehört der Anbieter zu einem Kohlekonzern? Oder ist er eine freie Genossenschaft?
 
 Viele Haushalte bevorzugen Anbieter, die komplett unabhängig von fossilen Brennstoffen sind. Diese Informationen findest du oft im Impressum oder in den Tarifdetails der Vergleichsportale. Ein seriöser Anbieter versteckt seine Herkunft nicht. Er legt offen, welche Kraftwerke hinter dem Strom stehen.
 

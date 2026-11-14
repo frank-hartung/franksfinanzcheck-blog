@@ -44,7 +44,14 @@ def set_lastmod(path, date):
 
 
 def main():
+    # AUFRUF-VERTRAG (14.11.2026, scripts/workflow_aufruf_vertrag.py):
+    # Der Workflow nennt diesen Schalter ausdrücklich; ohne diese Zeile wäre
+    # er ein stiller No-Op – der Lauf wäre richtig, der Name aber nirgends
+    # im Werkzeug und damit nicht prüfbar.
     mode_all = "--all" in sys.argv
+    if "--git-changed" in sys.argv and mode_all:
+        print("🛑 --git-changed und --all schließen sich aus – nichts verändert.")
+        return 2
     date = datetime.date.today().isoformat()
 
     if mode_all:
