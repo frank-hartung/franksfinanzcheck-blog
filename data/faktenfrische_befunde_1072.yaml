@@ -1,6 +1,6 @@
-stand: '2026-11-13'
+stand: '2026-11-14'
 issue: 1072
-lauf: 2026-11-13 13:25 UTC
+lauf: 2026-11-14 16:30 UTC
 runden:
 - stand: '2026-11-05'
   lauf: 2026-11-05 12:43 UTC
@@ -28,7 +28,17 @@ runden:
     Faustregel ergänzt, ohne eine Preis-, Saison- oder Ersparnisbehauptung
     hinzuzufügen; die fünf Befunde wurden am neuen Text erneut gebunden. Anschließend
     den Umfang auf Premium-Mindestmaß erweitert (Verfahrensabschnitte ohne Preis-,
-    Saison- oder Ersparnisbehauptung) und die Bindung ein zweites Mal erneuert."
+    Saison- oder Ersparnisbehauptung) und die Bindung ein zweites Mal erneuert. Anschliessend Zustandsreparatur 14.11.2026: Die drei Mietwagen-Anker aus Paket D waren nach einem Umbau gerissen; der Artikel wurde am heutigen Text erneut gelesen, die drei Befunde bleiben fachlich erledigt (Rechenannahmen offengelegt, Preisaussage als Einschaetzung gekennzeichnet, Portal-Vergleich ohne Allaussage), Anker auf die Fassung ccf014be umgebunden."
+- stand: '2026-11-14'
+  lauf: 2026-11-14 16:30 UTC
+  umfang: "Zustandsreparatur der Registerdatei. Fuenf Befunde trugen einen
+    zweiten, ueberholten Entscheidungskopf aus dem Merge zweier Staende; er wurde
+    entfernt, die gueltige Entscheidung vom 12.11.2026 bleibt samt Vorgaengertext
+    erhalten. Drei Mietwagen-Anker aus Paket D waren nach einem Artikelumbau
+    gerissen; der Artikel wurde am heutigen Text erneut gelesen (Rechenannahmen
+    offengelegt, Preisaussage als Einschaetzung gekennzeichnet, Portal-Vergleich
+    ohne Allaussage), die Anker auf die Fassung ccf014be umgebunden und im Ledger
+    als Folgeentscheidung dokumentiert."
 recherche:
   methode: Redaktionelle Prüfung jedes Befunds am jeweils dokumentierten Textstand;
   nachpruefung_2026_11_12: Zweite Runde für die Befunde, deren Anker der Umbau vom
@@ -913,15 +923,15 @@ befunde:
   belegtyp: ergaenzt
   beleg_url: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
   anker:
-  - kilometerpauschale 0,20 € pro km
-  - 'annahme: 7 tage mietdauer'
+  - jeder kilometer extra kostet 20 cent
+  - wir rechnen mit sieben tagen miete
   verboten_behauptend:
   - kilometerpauschale von 0,20 €/km wird als referenzwert
   rest_risiko: Die tatsächliche Pauschale hängt vom Anbieter und Vertrag ab.
   ledger_fassung_sha256: cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf
-  geprueft_fassung: 8ac687755f34263c980b7ffd282bb7492f9ac2cc71d10a60c62d5d8dcaf711ff
+  geprueft_fassung: ccf014bed68a3ec80be3a4efd0ee1880c1a2b43a73693efc236658a09d3b484b
   projektion: betrieb-v3
-  entschieden_am: '2026-11-12'
+  entschieden_am: '2026-11-14'
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
 - id: 843ec148e23841b7bf35
   artikel: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
@@ -972,15 +982,15 @@ befunde:
   belegtyp: ergaenzt
   beleg_url: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
   anker:
-  - einschätzung, keine garantierte marktprognose
-  - keine marktgarantie
+  - das ist eine einschätzung der lage
+  - es ist keine garantie für jeden fall
   verboten_behauptend:
   - preisprognose (anstieg in den letzten 3 wochen)
   rest_risiko: Ein Buchungsvorlauf ist keine Preissicherheit.
   ledger_fassung_sha256: cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf
-  geprueft_fassung: 8ac687755f34263c980b7ffd282bb7492f9ac2cc71d10a60c62d5d8dcaf711ff
+  geprueft_fassung: ccf014bed68a3ec80be3a4efd0ee1880c1a2b43a73693efc236658a09d3b484b
   projektion: betrieb-v3
-  entschieden_am: '2026-11-12'
+  entschieden_am: '2026-11-14'
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
 - id: f064ea49ccefde26aef9
   artikel: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
@@ -1001,17 +1011,17 @@ befunde:
   belegtyp: ergaenzt
   beleg_url: https://www.verbraucherzentrale.de/wissen/reise-mobilitaet
   anker:
-  - viele anbieter
-  - vergleichsportale wie check24
+  - nutze portale wie check24
+  - viele firmen auf einen blick
   verboten_behauptend:
   - check24 vergleiche 'alle großen anbieter'
   - vollständigkeitsversprechen
   rest_risiko: Portale können einzelne Konditionen zeigen, aber keine Vollständigkeit
     zusichern.
   ledger_fassung_sha256: cbc2979ad5cc123f9cdf74a1823644e621e12b8709238db829bb74e3d4391dcf
-  geprueft_fassung: 8ac687755f34263c980b7ffd282bb7492f9ac2cc71d10a60c62d5d8dcaf711ff
+  geprueft_fassung: ccf014bed68a3ec80be3a4efd0ee1880c1a2b43a73693efc236658a09d3b484b
   projektion: betrieb-v3
-  entschieden_am: '2026-11-12'
+  entschieden_am: '2026-11-14'
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 12.11.2026)
 - id: 4284fd2d9c9005e7af8f
   artikel: 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang
@@ -1019,20 +1029,6 @@ befunde:
   typ: praezision
   befund: Behauptung, dass Überladung der Maschine zu schnellerem Verschleiß und teuren
     Reparaturen führt, wird ohne konkrete Daten oder Messgröße angegeben.
-  entscheidung: 'Heutiger Text geprueft: Überladung behauptet heute nur noch kauselich
-    (''kann die Lager beschädigen''), keine konkreten Reparaturkosten oder Verschleißdaten
-    mehr als Tatsache.'
-  status: ueberholt
-  abgeloest_am: '2026-11-10'
-  abgeloest_durch: WF-7B6B-1148-DAUERHEILUNG-HIGHEND-2026-11-10.md
-  abloesung_grund: >-
-    Der Artikel wurde am 10.11.2026 unter WF-7B6B (PR #1163, Issue #1148) neu belegt:
-    acht Quellen im Frontmatter, neue Modellrechnung mit offengelegten Annahmen,
-    die unbelegten Aussagen entfernt. Die Anker dieser Entscheidung stammen aus der
-    Fassung vom 05.11.2026; die Pruefung gilt dieser Fassung, nicht dem heutigen Text.
-    Die Sperre gegen die alte Behauptung bleibt in Kraft.
-  belegtyp: ergaenzt
-  beleg_url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
   entscheidung: 'Paket C, entschieden am 12.11.2026: Die Folgebehauptung „Überladung
     führt zu Verschleiß und teuren Reparaturen“ ist gestrichen. Sie stützte sich
     allein auf FORUM WASCHEN (ikw.org) – keine Domain der Allowlist, und die Kausalaussage
@@ -1064,18 +1060,6 @@ befunde:
   befund: Aussage, dass das richtige Beladen allein die Fixkosten senkt, ohne weitere
     Maßnahmen, ist ein pauschales Leistungsversprechen ohne Nennung von Mechanismen
     oder Grenzen.
-  entscheidung: 'Heutiger Text geprueft: ''richtiges Beladen senkt die Fixkosten''
-    heute als Moglichkeit (''kann die Fixkosten senken'') und als Modellbeispiel dargestellt,
-    nicht als pauschales Leistungsversprechen.'
-  status: ueberholt
-  abgeloest_am: '2026-11-10'
-  abgeloest_durch: WF-7B6B-1148-DAUERHEILUNG-HIGHEND-2026-11-10.md
-  abloesung_grund: >-
-    Der Artikel wurde am 10.11.2026 unter WF-7B6B (PR #1163, Issue #1148) neu belegt:
-    acht Quellen im Frontmatter, neue Modellrechnung mit offengelegten Annahmen,
-    die unbelegten Aussagen entfernt. Die Anker dieser Entscheidung stammen aus der
-    Fassung vom 05.11.2026; die Pruefung gilt dieser Fassung, nicht dem heutigen Text.
-    Die Sperre gegen die alte Behauptung bleibt in Kraft.
   entscheidung: 'Paket B, entschieden am 12.11.2026: Der Rückfall saß in den Meta-Flächen
     – `description` und `pin_description` behaupteten weiter „senkt deine Fixkosten“,
     der Body „senkt die Betriebskosten … nachhaltig“. Alle drei Stellen stehen wieder
@@ -1108,18 +1092,6 @@ befunde:
   befund: Die Modellrechnung (0,9 kWh/50 L bei vollem Waschgang, 0,6 kWh/35 L bei
     halbem Waschgang, Strompreis 0,40 €/kWh, Wasserpreis 0,005 €/L) und die daraus
     resultierende Jahresersparnis von 22 € fehlen einer fundierten Quelle.
-  entscheidung: 'Heutiger Text geprueft: Modellrechnung (0,9 kWh/50 L, 0,6 kWh/35
-    L, 0,40 €/kWh, 0,005 €/L, 22 €/Jahr) steht heute durchgehend als ''Ergebnis der
-    Modellrechnung'' mit offengelegten Annahmen da; keine Außenbehauptung mehr.'
-  status: ueberholt
-  abgeloest_am: '2026-11-10'
-  abgeloest_durch: WF-7B6B-1148-DAUERHEILUNG-HIGHEND-2026-11-10.md
-  abloesung_grund: >-
-    Der Artikel wurde am 10.11.2026 unter WF-7B6B (PR #1163, Issue #1148) neu belegt:
-    acht Quellen im Frontmatter, neue Modellrechnung mit offengelegten Annahmen,
-    die unbelegten Aussagen entfernt. Die Anker dieser Entscheidung stammen aus der
-    Fassung vom 05.11.2026; die Pruefung gilt dieser Fassung, nicht dem heutigen Text.
-    Die Sperre gegen die alte Behauptung bleibt in Kraft.
   entscheidung: 'Paket A, entschieden am 12.11.2026: Die Modellrechnung ist heute
     vollständig offengelegt (Annahmen, Rechenwege, „Ergebnis der Modellrechnung“).
     Der frühere Beleg (Bundesnetzagentur-Startseite) trug keinen der Werte; er ist
@@ -1151,18 +1123,6 @@ befunde:
   befund: Die Aussage, dass bei 4 Waschgängen pro Woche ein durchschnittlicher Haushalt
     rund 5 € jährlich an Strom‑ und Wasserkosten spart, ist nicht mit einer Quelle
     belegt.
-  entscheidung: 'Heutiger Text geprueft: ''rund 5 € jährlich'' steht heute nur noch
-    als Modelljahr-Beispiel (''im Modelljahr rund 5 €''), keine versprochene Ersparnis
-    mehr.'
-  status: ueberholt
-  abgeloest_am: '2026-11-10'
-  abgeloest_durch: WF-7B6B-1148-DAUERHEILUNG-HIGHEND-2026-11-10.md
-  abloesung_grund: >-
-    Der Artikel wurde am 10.11.2026 unter WF-7B6B (PR #1163, Issue #1148) neu belegt:
-    acht Quellen im Frontmatter, neue Modellrechnung mit offengelegten Annahmen,
-    die unbelegten Aussagen entfernt. Die Anker dieser Entscheidung stammen aus der
-    Fassung vom 05.11.2026; die Pruefung gilt dieser Fassung, nicht dem heutigen Text.
-    Die Sperre gegen die alte Behauptung bleibt in Kraft.
   entscheidung: 'Paket A, entschieden am 12.11.2026: Die alte „rund 5 € im Modelljahr“-Aussage
     existiert nicht mehr; der Artikel rechnet 100 volle gegen 200 halbe Ladungen
     und kommt auf 28 bis 42 € pro Jahr – ausgewiesen als Ergebnis der Modellrechnung.
@@ -1191,18 +1151,6 @@ befunde:
   typ: luecke
   befund: Angabe, dass ein optimal beladener Trommel (ca. 80 % Kapazität) bis zu 15 %
     weniger Wasser und Energie verbraucht, wird nicht durch eine Quelle belegt.
-  entscheidung: 'Heutiger Text geprueft: ''80 % Kapazität / bis zu 15 % weniger''
-    steht heute nur noch als gekennzeichnetes Modellbeispiel mit Beispielwerten, keine
-    Tatsachenbehauptung mehr.'
-  status: ueberholt
-  abgeloest_am: '2026-11-10'
-  abgeloest_durch: WF-7B6B-1148-DAUERHEILUNG-HIGHEND-2026-11-10.md
-  abloesung_grund: >-
-    Der Artikel wurde am 10.11.2026 unter WF-7B6B (PR #1163, Issue #1148) neu belegt:
-    acht Quellen im Frontmatter, neue Modellrechnung mit offengelegten Annahmen,
-    die unbelegten Aussagen entfernt. Die Anker dieser Entscheidung stammen aus der
-    Fassung vom 05.11.2026; die Pruefung gilt dieser Fassung, nicht dem heutigen Text.
-    Die Sperre gegen die alte Behauptung bleibt in Kraft.
   entscheidung: 'Paket A, entschieden am 12.11.2026: Die „bis zu 15 %“-Angabe ist
     entfallen. Der Artikel nennt seine Annahmen und sagt in der Kurzantwort ausdrücklich,
     dass es eine Rechnung mit Quellenwerten und keine Messung im Haushalt ist. Beleg:

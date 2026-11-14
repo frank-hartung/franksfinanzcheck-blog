@@ -6031,3 +6031,61 @@ entscheidungen:
     eine aeltere Fassung.'
   vorgaenger_geprueft_fassung: 32e70c4b2085c07d279305c58550029394929fa1b1938b04b714db4c37f491f3
   folgeentscheidung: true
+- slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
+  befund_ursprung_slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
+  befund_id: 785eee76d888bb05ad96
+  befund_fassung: ccf014bed68a3ec80be3a4efd0ee1880c1a2b43a73693efc236658a09d3b484b
+  geprueft_fassung: ccf014bed68a3ec80be3a4efd0ee1880c1a2b43a73693efc236658a09d3b484b
+  typ: luecke
+  beanstandung: Die im Rechenbeispiel genutzte Kilometerpauschale von 0,20 €/km wird
+    als Referenzwert ohne Quellenangabe (z. B. Branchenverband) angeführt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 14.11.2026'
+  entschieden_am: '2026-11-14'
+  fassung_wechsel: false
+  begruendung: 'Am heutigen Text (ccf014be) nachgeprueft: Die Modellrechnung nennt
+    die Mietdauer ausdruecklich (''wir rechnen mit sieben tagen miete''), den Tagessatz
+    (''40 euro am tag'') und den Kilometersatz (''jeder kilometer extra kostet 20
+    cent''). Alles sind offengelegte Rechenannahmen, keine Marktbehauptung; die Kilometrpauschale
+    steht nicht als Referenzwert fuer den Markt. Befund bleibt behoben, Anker auf
+    die heutige Fassung umgebunden.'
+  vorgaenger_geprueft_fassung: 8ac687755f34263c980b7ffd282bb7492f9ac2cc71d10a60c62d5d8dcaf711ff
+  folgeentscheidung: true
+- slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
+  befund_ursprung_slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
+  befund_id: def43a04853be4c35f7f
+  befund_fassung: ccf014bed68a3ec80be3a4efd0ee1880c1a2b43a73693efc236658a09d3b484b
+  geprueft_fassung: ccf014bed68a3ec80be3a4efd0ee1880c1a2b43a73693efc236658a09d3b484b
+  typ: luecke
+  beanstandung: Die Preisprognose (Anstieg in den letzten 3 Wochen) und der empfohlene
+    Buchungsvorlauf (3-4 Wochen) sind Marktdaten ohne Beleg durch die Fachquelle.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 14.11.2026'
+  entschieden_am: '2026-11-14'
+  fassung_wechsel: false
+  begruendung: 'Am heutigen Text (ccf014be) nachgeprueft: Die Preisaussage ist als
+    Einschaetzung gekennzeichnet (''das ist eine einschaetzung der lage'') und ausdruecklich
+    begrenzt (''es ist keine garantie fuer jeden fall''). Der Text behauptet keine
+    Marktprognose; die Fruehbucher-Regel ist als Faustregel benannt. Befund bleibt
+    behoben, Anker auf die heutige Fassung umgebunden.'
+  vorgaenger_geprueft_fassung: 8ac687755f34263c980b7ffd282bb7492f9ac2cc71d10a60c62d5d8dcaf711ff
+  folgeentscheidung: true
+- slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
+  befund_ursprung_slug: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen
+  befund_id: f064ea49ccefde26aef9
+  befund_fassung: ccf014bed68a3ec80be3a4efd0ee1880c1a2b43a73693efc236658a09d3b484b
+  geprueft_fassung: ccf014bed68a3ec80be3a4efd0ee1880c1a2b43a73693efc236658a09d3b484b
+  typ: praezision
+  beanstandung: Das Versprechen, CHECK24 vergleiche 'alle großen Anbieter', ist ein
+    Vollständigkeitsversprechen ohne Nennung von Auswahlkriterien oder der Marktabdeckung.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 14.11.2026'
+  entschieden_am: '2026-11-14'
+  fassung_wechsel: false
+  begruendung: 'Am heutigen Text (ccf014be) nachgeprueft: Der Text nennt die Portale
+    konkret (''nutze portale wie check24'') und beschreibt den Vergleich als eigene
+    Beobachtung (''viele firmen auf einen blick''), nicht als Vollstaendigkeitsversprechen
+    ueber alle grossen Anbieter. Keine Superlativ- oder Allaussage. Befund bleibt
+    behoben, Anker auf die heutige Fassung umgebunden.'
+  vorgaenger_geprueft_fassung: 8ac687755f34263c980b7ffd282bb7492f9ac2cc71d10a60c62d5d8dcaf711ff
+  folgeentscheidung: true
