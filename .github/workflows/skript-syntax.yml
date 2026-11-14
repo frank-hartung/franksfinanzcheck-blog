@@ -147,7 +147,7 @@ jobs:
           set +e
           if ! python3 -c "import yaml" 2>/dev/null; then
             echo "PyYAML fehlt – installiere minimal für Aufruf-Vertrag …"
-            pip install --quiet pyyaml
+            pip install --quiet "pyyaml==6.0.3"
           fi
           {
             echo '### Workflow-Aufruf-Vertrag'
