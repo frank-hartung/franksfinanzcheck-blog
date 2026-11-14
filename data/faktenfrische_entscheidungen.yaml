@@ -5070,19 +5070,25 @@ entscheidungen:
   befund_id: 98eb45f772ad7a0aac7b
   befund_fassung: 66ed7c316cbe7b939230e8e79bda1f6fc9dcd44ef556c3aacf4f5c9dde9e92f7
   geprueft_fassung: 1de49c02dce70503e4bb2c1a1c6bd13df2d80273cc3091bf44ba31b7eb5a3f09
-  geprueft_fassung: 32e70c4b2085c07d279305c58550029394929fa1b1938b04b714db4c37f491f3
   typ: luecke
   beanstandung: Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt
     im Text Referenzwerte (120 € Strom, 80 € Kfz), für die in der Quelle keine Marktdaten
     oder Durchschnittswerte als Beleg vorliegen.
   beleg: ''
+  vorgaenger_geprueft_fassung: 10b0aed58f99a8134577d0130f00dd31b5bcd43ff1baf6313ff30cfb95086cfa
+  folgeentscheidung: true
   entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
   entschieden_am: '2026-11-11'
   fassung_wechsel: true
   begruendung: 'PIN-Beschreibung (final) als Beispielrechnung des Artikels gekennzeichnet:
     Die 500 Euro stehen als frei gewaehlte Annahmen, nicht als Marktdurchschnitt oder
     Sparversprechen; der Fliesstext kennzeichnet sie ebenso.'
-  vorgaenger_geprueft_fassung: 10b0aed58f99a8134577d0130f00dd31b5bcd43ff1baf6313ff30cfb95086cfa
+- slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  befund_ursprung_slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  befund_id: 98eb45f772ad7a0aac7b
+  befund_fassung: 66ed7c316cbe7b939230e8e79bda1f6fc9dcd44ef556c3aacf4f5c9dde9e92f7
+  geprueft_fassung: 32e70c4b2085c07d279305c58550029394929fa1b1938b04b714db4c37f491f3
+  vorgaenger_geprueft_fassung: 1de49c02dce70503e4bb2c1a1c6bd13df2d80273cc3091bf44ba31b7eb5a3f09
   folgeentscheidung: true
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
   entschieden_am: '2026-11-11'
@@ -5098,19 +5104,25 @@ entscheidungen:
   befund_id: b7f0d52968d89cdf8c5b
   befund_fassung: 66ed7c316cbe7b939230e8e79bda1f6fc9dcd44ef556c3aacf4f5c9dde9e92f7
   geprueft_fassung: 1de49c02dce70503e4bb2c1a1c6bd13df2d80273cc3091bf44ba31b7eb5a3f09
-  geprueft_fassung: 32e70c4b2085c07d279305c58550029394929fa1b1938b04b714db4c37f491f3
   typ: praezision
   beanstandung: Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne
     Nennung konkreter rechtlicher Grundlagen (DSGVO) unpräzise, während die Quelle
     explizit auf rechtliche Verbraucherthemen fokussiert.
   beleg: ''
+  vorgaenger_geprueft_fassung: 10b0aed58f99a8134577d0130f00dd31b5bcd43ff1baf6313ff30cfb95086cfa
+  folgeentscheidung: true
   entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
   entschieden_am: '2026-11-11'
   fassung_wechsel: true
   begruendung: 'FAQ (final) nennt die DSGVO (Verordnung (EU) 2016/679) als rechtlichen
     Rahmen: Verarbeitungsgrundlage sowie Rechte auf Auskunft, Berichtigung, Loeschung
     und Widerruf; die Eigenentscheidung ueber die Einwilligung bleibt.'
-  vorgaenger_geprueft_fassung: 10b0aed58f99a8134577d0130f00dd31b5bcd43ff1baf6313ff30cfb95086cfa
+- slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  befund_ursprung_slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  befund_id: b7f0d52968d89cdf8c5b
+  befund_fassung: 66ed7c316cbe7b939230e8e79bda1f6fc9dcd44ef556c3aacf4f5c9dde9e92f7
+  geprueft_fassung: 32e70c4b2085c07d279305c58550029394929fa1b1938b04b714db4c37f491f3
+  vorgaenger_geprueft_fassung: 1de49c02dce70503e4bb2c1a1c6bd13df2d80273cc3091bf44ba31b7eb5a3f09
   folgeentscheidung: true
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
   entschieden_am: '2026-11-11'
@@ -5124,19 +5136,26 @@ entscheidungen:
   befund_id: be911855d67f998be662
   befund_fassung: 66ed7c316cbe7b939230e8e79bda1f6fc9dcd44ef556c3aacf4f5c9dde9e92f7
   geprueft_fassung: 1de49c02dce70503e4bb2c1a1c6bd13df2d80273cc3091bf44ba31b7eb5a3f09
-  geprueft_fassung: 32e70c4b2085c07d279305c58550029394929fa1b1938b04b714db4c37f491f3
   typ: luecke
   beanstandung: Der Ratgeber nennt keinen Regulierungsrahmen für Reisebuchungen (z.
     B. Fluggastrechte oder Stornierungsregeln), obwohl die Quelle diese als zentrale
     Informationsbereiche ausweist.
   beleg: ''
+  vorgaenger_geprueft_fassung: 10b0aed58f99a8134577d0130f00dd31b5bcd43ff1baf6313ff30cfb95086cfa
+  folgeentscheidung: true
   entschieden_von: 'Arena-Redaktion (Herausgeber-Auftrag: Frank Hartung), 11.11.2026'
   entschieden_am: '2026-11-11'
   fassung_wechsel: true
   begruendung: FAQ (final) nennt die EU-Fluggastrechte-Verordnung (EG) Nr. 261/2004
     als Regulierungsrahmen fuer Annullierung, grosse Verspaetung und Nichtbefoerderung;
     Storno-, Zahlungs- und Mietbedingungen verweisen auf die Vertragsbedingungen.
-  vorgaenger_geprueft_fassung: 10b0aed58f99a8134577d0130f00dd31b5bcd43ff1baf6313ff30cfb95086cfa
+- slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  befund_ursprung_slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  befund_id: be911855d67f998be662
+  befund_fassung: 66ed7c316cbe7b939230e8e79bda1f6fc9dcd44ef556c3aacf4f5c9dde9e92f7
+  geprueft_fassung: 32e70c4b2085c07d279305c58550029394929fa1b1938b04b714db4c37f491f3
+  vorgaenger_geprueft_fassung: 1de49c02dce70503e4bb2c1a1c6bd13df2d80273cc3091bf44ba31b7eb5a3f09
+  folgeentscheidung: true
   entschieden_von: Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
   entschieden_am: '2026-11-11'
   fassung_wechsel: true
@@ -5949,4 +5968,66 @@ entscheidungen:
     entschieden – keine Preis-, Saison- oder Ersparnisbehauptung; die fünf #1072-Befunde
     bleiben gestrichen.'
   vorgaenger_geprueft_fassung: 6ac3696f40db0786dbaf9e3d23eef5288b0fb2b7107d3de9b05cfbf5f7cb2c01
+  folgeentscheidung: true
+- slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  befund_ursprung_slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  befund_id: 98eb45f772ad7a0aac7b
+  befund_fassung: e8b916f8673f87372d49203bcfc1814365c626bbb00da05411a19f7ec1cb5a02
+  geprueft_fassung: e8b916f8673f87372d49203bcfc1814365c626bbb00da05411a19f7ec1cb5a02
+  typ: luecke
+  beanstandung: Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt
+    im Text Referenzwerte (120 € Strom, 80 € Kfz), für die in der Quelle keine Marktdaten
+    oder Durchschnittswerte als Beleg vorliegen.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
+  entschieden_am: '2026-11-14'
+  fassung_wechsel: false
+  begruendung: 'Am heutigen Text (Fassung e8b916f8) nachgeprueft: Sparversprechen
+    500 Euro ist inhaltlich erledigt. Die 500 Euro stehen ausdruecklich als frei gewaehlte
+    Annahmen der Modellrechnung, nicht als Marktdurchschnitt; die DSGVO ist benannt;
+    Fluggastrechte-Verordnung 261/2004 und Pauschalreiserecht sind als Regulierungsrahmen
+    genannt. Die fruehere Entscheidung bleibt inhaltlich gueltig, sie band nur an
+    eine aeltere Fassung.'
+  vorgaenger_geprueft_fassung: 32e70c4b2085c07d279305c58550029394929fa1b1938b04b714db4c37f491f3
+  folgeentscheidung: true
+- slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  befund_ursprung_slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  befund_id: b7f0d52968d89cdf8c5b
+  befund_fassung: e8b916f8673f87372d49203bcfc1814365c626bbb00da05411a19f7ec1cb5a02
+  geprueft_fassung: e8b916f8673f87372d49203bcfc1814365c626bbb00da05411a19f7ec1cb5a02
+  typ: praezision
+  beanstandung: Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne
+    Nennung konkreter rechtlicher Grundlagen (DSGVO) unpräzise, während die Quelle
+    explizit auf rechtliche Verbraucherthemen fokussiert.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
+  entschieden_am: '2026-11-14'
+  fassung_wechsel: false
+  begruendung: 'Am heutigen Text (Fassung e8b916f8) nachgeprueft: Cashback/DSGVO ist
+    inhaltlich erledigt. Die 500 Euro stehen ausdruecklich als frei gewaehlte Annahmen
+    der Modellrechnung, nicht als Marktdurchschnitt; die DSGVO ist benannt; Fluggastrechte-Verordnung
+    261/2004 und Pauschalreiserecht sind als Regulierungsrahmen genannt. Die fruehere
+    Entscheidung bleibt inhaltlich gueltig, sie band nur an eine aeltere Fassung.'
+  vorgaenger_geprueft_fassung: 32e70c4b2085c07d279305c58550029394929fa1b1938b04b714db4c37f491f3
+  folgeentscheidung: true
+- slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  befund_ursprung_slug: 2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen
+  befund_id: be911855d67f998be662
+  befund_fassung: e8b916f8673f87372d49203bcfc1814365c626bbb00da05411a19f7ec1cb5a02
+  geprueft_fassung: e8b916f8673f87372d49203bcfc1814365c626bbb00da05411a19f7ec1cb5a02
+  typ: luecke
+  beanstandung: Der Ratgeber nennt keinen Regulierungsrahmen für Reisebuchungen (z.
+    B. Fluggastrechte oder Stornierungsregeln), obwohl die Quelle diese als zentrale
+    Informationsbereiche ausweist.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
+  entschieden_am: '2026-11-14'
+  fassung_wechsel: false
+  begruendung: 'Am heutigen Text (Fassung e8b916f8) nachgeprueft: Regulierungsrahmen
+    Reise ist inhaltlich erledigt. Die 500 Euro stehen ausdruecklich als frei gewaehlte
+    Annahmen der Modellrechnung, nicht als Marktdurchschnitt; die DSGVO ist benannt;
+    Fluggastrechte-Verordnung 261/2004 und Pauschalreiserecht sind als Regulierungsrahmen
+    genannt. Die fruehere Entscheidung bleibt inhaltlich gueltig, sie band nur an
+    eine aeltere Fassung.'
+  vorgaenger_geprueft_fassung: 32e70c4b2085c07d279305c58550029394929fa1b1938b04b714db4c37f491f3
   folgeentscheidung: true

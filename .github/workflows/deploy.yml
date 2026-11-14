@@ -976,7 +976,6 @@ jobs:
           # das gerade nicht messen kann.
           python3 scripts/ci_tests.py --titel "KI-Transparenz" -- \
             python3 -m unittest scripts.tests.test_ki_transparenz_render scripts.tests.test_ki_cover_provenienz scripts.tests.test_ki_cover_generator_schutz scripts.tests.test_ki_cover_render_audit scripts.tests.test_ki_provenienz_render scripts.tests.test_ki_bild_markierung scripts.tests.test_ki_provenienz_gate scripts.tests.test_ki_provenienz_auslieferung scripts.tests.test_pinterest_ki_provenienz scripts.tests.test_ki_frist_freigabe -v
-            python3 -m unittest scripts.tests.test_ki_transparenz_render scripts.tests.test_ki_cover_provenienz scripts.tests.test_ki_cover_generator_schutz scripts.tests.test_ki_cover_render_audit scripts.tests.test_ki_provenienz_render scripts.tests.test_ki_bild_markierung scripts.tests.test_ki_audio_markierung -v
 
       - name: KI-Cover – Herkunft und Originaldatei prüfen
         run: python3 scripts/ki_cover_provenienz.py --gate
