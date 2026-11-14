@@ -12,7 +12,7 @@ author: "Frank Hartung"
 keywords: ["Reisekasse füllen", "Urlaubsbudget", "Geld für Urlaub sparen", "Cashback Tipps", "Strategisch sparen", "Strategisch", "Reisekasse", "Frugalismus"]
 pinwand: Günstig reisen | Reisebudget & Mietwagen
 pin_title: "Mehr Geld für den Urlaub: So polsterst du deine Reisekasse auf"
-pin_description: "*Werbung | Der Traumurlaub scheitert am Budget? Mit diesen 7 Alltags-Tricks füllt sich deine Urlaubskasse fast von allein – vom Cashback-Konto über No-Spend-Tage bis zum cleveren Verkaufen. So sind bis zum Sommer 500 € mehr drin. Jetzt lesen!"
+pin_description: "*Werbung | Der Traumurlaub scheitert am Budget? Mit diesen 7 Alltags-Tricks füllt sich deine Urlaubskasse fast von allein – vom Cashback-Konto über No-Spend-Tage bis zum cleveren Verkaufen. In der Beispielrechnung des Artikels kommen so bis zum Sommer 500 € zusammen – als frei gewählte Annahmen, nicht als Marktdurchschnitt. Jetzt lesen!"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "relaxed"
@@ -38,7 +38,7 @@ quellen:
     url: "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
     herausgeber: "Verbraucherzentrale"
 faktencheck: 2026-11-11
-lastmod: 2026-10-28
+lastmod: 2026-11-11
 kurzantwort: "Rechne die Sparrate so: Reisekosten minus bereits Erspartem, geteilt durch die Monate bis zur Zahlung. Cashback ist ein Extra, keine Grundlage. Modellrechnungen nennen ihre Annahmen."
 ---
 
@@ -188,11 +188,16 @@ Rechne: Kosten der Reise minus Geld, das schon da ist. Teile den Rest durch die 
 
 ### Sind Cashback‑Apps sicher für meine Daten?
 
+Das lässt sich nicht pauschal zusagen. Anbieter mit Sitz in der EU müssen sich an die DSGVO halten (Verordnung (EU) 2016/679): Sie dürfen nur Daten verarbeiten, für die eine Rechtsgrundlage besteht, und du hast Rechte auf Auskunft, Berichtigung, Löschung und Widerruf einer Einwilligung. Sieh dir trotzdem Anbieter, Berechtigungen und Datenschutzhinweise an. Frag auch: Wie lösche ich mein Konto und meine Daten? Rechtliche Pflichten ersetzen nicht deine eigene Entscheidung über die Zustimmung.
 Das lässt sich nicht pauschal zusagen. Sieh dir Anbieter, Berechtigungen und Datenschutzhinweise an. Frag auch: Wie lösche ich mein Konto und meine Daten? Nach der DSGVO muss der Anbieter Zweck und Rechtsgrundlage der Verarbeitung nennen und dir Auskunft und Löschung deiner Daten ermöglichen. Diese Pflichten ersetzen nicht deine eigene Entscheidung über die Zustimmung.
 
 ### Muss ich jedes Jahr meine Versicherung wechseln?
 
 Nein. Prüfen und Wechseln sind zwei Schritte. Vergleiche den nötigen Schutz, deinen Eigenanteil, die Ausschlüsse, den Preis und die [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/). Der niedrigere Beitrag allein ist kein Grund für den Wechsel.
+
+### Welche Regeln gelten für Flugreisen?
+
+Bei Flügen von und nach Deutschland und innerhalb der EU gilt die EU-Fluggastrechte-Verordnung (EG) Nr. 261/2004. Sie regelt Ansprüche bei Annullierung, großer Verspätung und Nichtbeförderung – unabhängig vom Ticketpreis. Stornierungs-, Zahlungs- und Mietbedingungen stehen dagegen in den Vertragsbedingungen deines Anbieters; lies sie vor der Buchung. Was bei Verspätung oder Ausfall gilt, steht in [unserem Leitfaden zur Flugverspätung](../../posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/).
 
 ### Brauche ich ein separates Konto?
 

@@ -57,6 +57,9 @@
 #    python3 scripts/faktenfrische.py --file <pfad>    # ein Artikel
 #    python3 scripts/faktenfrische.py --offline        # ohne Netz (GEO-Reife)
 #    python3 scripts/faktenfrische.py --selftest       # eingefrorene Fälle
+#    python3 scripts/faktenfrische.py --queue-normalisieren [--apply]
+#                                                      # Queue auf Schema 2 heben
+#                                                      # (offen=Arbeit, vorlauf=Termin)
 #
 #  EXIT: 0 gelaufen · 1 offene fachliche Befunde (nur --strict)
 #        2 Selbsttest rot / Konfigurationsfehler
@@ -1643,34 +1646,67 @@ def selftest() -> int:
             abbruch = "Abbruch"
         pruefe("ST8e", abbruch, "Abbruch")
 
-    # ST9 – ZWEI NAMEN, EINE WAHRHEIT (Dauerheilung 07.11.2026).
+    # ST9 – OFFEN IST ARBEIT, VORLAUF IST KEINE (Dauerheilung #1126, 10.11.2026).
     # Der Selbsttest prüft den Queue-Datensatz an der reinen Funktion: kein
     # Netz, keine Uhr, keine Datei – ein Selbsttest, der `main()` ruft, hing
     # am Recherche-Netz und wurde von der KI-Probe (#138) zu Recht erschlagen.
     #
-    # Was hier festgehalten wird: `arbeitsvorrat` trägt FRISTEN und ist KEINE
-    # Befundliste; `fachbefunde` trägt Befunde mit id/typ/text/fassung. Wird
-    # wieder über `offen` gemessen, entstehen Fehlalarme (turnusgemäße
-    # Wiederaufnahme am 07.11.) und echte Rückfälle bleiben unsichtbar.
-    vorratsliste = [{"slug": "2026-10-14-heiz", "titel": "Heiz",
-                     "grund": "frisch geprüft vor 23 Tagen", "faellig": False,
-                     "frist": "2026-11-14", "geo": 100}]
-    befundliste = [{"id": "a" * 20, "slug": "2026-10-14-heiz", "typ": "luecke",
+    # Was hier festgehalten wird: `offen` führt AUSSCHLIESSLICH Arbeit
+    # (fällig, befundbehaftet, abgebrochen); der turnusgemäße Vorlauf steht
+    # getrennt in `vorlauf`, beide zusammen in `arbeitsvorrat`. `fachbefunde`
+    # trägt Befunde mit id/typ/text/fassung. Vorher konnte ein Eintrag in
+    # `offen` stehen und im selben Atemzug „frisch geprüft, Frist in 7 Tagen“
+    # sagen – der Widerspruch, der #1126 und drei Aktentests rot machte.
+    vorratsliste = [
+        {"slug": "2026-10-14-heiz", "titel": "Heiz",
+         "grund": "frisch geprüft vor 23 Tagen", "faellig": False,
+         "frist": "2026-11-14", "geo": 100},
+        {"slug": "2026-10-14-gas", "titel": "Gas",
+         "grund": "31 Tage seit letzter Prüfung", "faellig": True,
+         "frist": "2026-11-10", "geo": 83},
+        {"slug": "2026-10-14-strom", "titel": "Strom",
+         "grund": "frisch geprüft vor 20 Tagen", "faellig": False,
+         "frist": "2026-11-18", "geo": 100, "befund": True},
+        {"slug": "2026-10-14-dsl", "titel": "DSL",
+         "grund": "Lauf abgebrochen", "faellig": False,
+         "frist": "2026-11-20", "geo": 67, "unvollstaendig": True},
+    ]
+    befundliste = [{"id": "a" * 20, "slug": "2026-10-14-strom", "typ": "luecke",
                     "text": "Quelle fehlt", "fassung_sha256": "b" * 64}]
     qd = queue_daten_bauen(uebersicht={"befunde": 1}, fachbefunde=befundliste,
                            kapazitaet={}, abbrueche=[], arbeitsvorrat=vorratsliste,
-                           laeufe=[], erzeugt="2026-11-07 13:00 UTC")
-    pruefe("ST9a", "arbeitsvorrat" in qd, True)
-    pruefe("ST9b", qd["offen"], qd["arbeitsvorrat"])     # Alias, gleicher Inhalt
-    pruefe("ST9c", [e["slug"] for e in qd["arbeitsvorrat"]], ["2026-10-14-heiz"])
+                           laeufe=[], erzeugt="2026-11-10 13:00 UTC")
+    pruefe("ST9a", qd.get("schema"), QUEUE_SCHEMA)
+    pruefe("ST9b", [e["slug"] for e in qd["offen"]],
+           ["2026-10-14-gas", "2026-10-14-strom", "2026-10-14-dsl"])
+    pruefe("ST9c", [e["slug"] for e in qd["vorlauf"]], ["2026-10-14-heiz"])
+    pruefe("ST9d", [e["status"] for e in qd["arbeitsvorrat"]],
+           ["vorlauf", "faellig", "befund", "unvollstaendig"])
     # Der Vorrat ist KEINE Befundliste: ihm fehlt die Befund-id.
-    pruefe("ST9d", any("id" in v for v in qd["arbeitsvorrat"]), False)
+    pruefe("ST9e", any("id" in v or "text" in v for v in qd["arbeitsvorrat"]),
+           False)
     # Und der Befund ist im Befundfeld – nicht im Vorrat.
-    pruefe("ST9e", [b["id"] for b in qd["fachbefunde"]], ["a" * 20])
-    # Eine Seite darf gleichzeitig im Vorrat stehen UND einen offenen Befund
-    # haben – die beiden Felder widersprechen sich nicht, sie messen anderes.
-    pruefe("ST9f", qd["arbeitsvorrat"][0]["slug"],
-           qd["fachbefunde"][0]["slug"])
+    pruefe("ST9f", [b["id"] for b in qd["fachbefunde"]], ["a" * 20])
+    # Die Zerlegung ist vollständig und überschneidungsfrei.
+    pruefe("ST9g", {e["slug"] for e in qd["offen"]} |
+           {e["slug"] for e in qd["vorlauf"]},
+           {e["slug"] for e in qd["arbeitsvorrat"]})
+    pruefe("ST9h", queue_invariante(qd), [])
+    # Sabotage 1: ein Vorlauf-Eintrag rutscht zurück in `offen` – genau der
+    # Zustand, den #1126 gemeldet hat. Die Wache MUSS ihn nennen.
+    kaputt = {**qd, "offen": qd["offen"] + qd["vorlauf"]}
+    pruefe("ST9i", any("Vorlauf-Artikel" in f
+                       for f in queue_invariante(kaputt)), True)
+    # Sabotage 2: ein Arbeitseintrag verschwindet aus `offen` – die
+    # Zerlegung wäre unvollständig und die Arbeit unsichtbar.
+    kaputt2 = {**qd, "offen": qd["offen"][:-1]}
+    pruefe("ST9j", bool(queue_invariante(kaputt2)), True)
+    # Sabotage 3: Befunddaten wandern in die Arbeitsliste – dieselbe
+    # Schein-Sicherheit wie vor dem 07.11., nur in die andere Richtung.
+    kaputt3 = {**qd, "offen": [dict(e, id="c" * 20) if e["slug"].endswith("gas")
+                               else e for e in qd["offen"]]}
+    pruefe("ST9k", any("Befunddaten" in f
+                       for f in queue_invariante(kaputt3)), True)
 
     if fehler:
         print("🛑 Selbsttest FAKTENFRISCHE rot:")
@@ -1682,40 +1718,301 @@ def selftest() -> int:
 
 
 # ----------------------------------------------------------------------
-# Queue-Datensatz: EIN Datensatz, ZWEI Feldnamen
+# Queue-Datensatz: DREI FELDER, EINE WAHRHEIT (Schema 2)
 # ----------------------------------------------------------------------
+
+QUEUE_SCHEMA = 2
+# Die vier Zustände eines Arbeitsvorrat-Eintrags. Drei davon sind ARBEIT
+# (`offen`), einer ist VORLAUF:
+#   faellig        – die Frist ist erreicht/überschritten
+#   befund         – ein offener Fachbefund hängt an der Seite (F4)
+#   unvollstaendig – der Lauf konnte die Seite nicht abschließen (Retry)
+#   vorlauf        – Frist rückt näher, aber weder fällig noch befundbehaftet
+QUEUE_STATUS_ARBEIT = ("faellig", "befund", "unvollstaendig")
+QUEUE_STATUS = QUEUE_STATUS_ARBEIT + ("vorlauf",)
+
+
+def queue_status_von(eintrag: dict) -> str:
+    """Den Zustand eines Vorrat-Eintrags aus seinen Fakten ableiten.
+
+    Die eine Stelle, an der `faellig`/`befund`/`unvollstaendig` zu einem
+    Namen werden. Reihenfolge = Priorität der Begründung: Ein abgebrochener
+    Lauf und ein offener Befund sind konkreter als die reine Fälligkeit.
+    """
+    if bool(eintrag.get("unvollstaendig")):
+        return "unvollstaendig"
+    if bool(eintrag.get("befund")):
+        return "befund"
+    if bool(eintrag.get("faellig")):
+        return "faellig"
+    return "vorlauf"
+
+
+def queue_invariante(daten: dict) -> list[str]:
+    """Widersprüche im Queue-Datensatz – leere Liste heißt: beweisbar sauber.
+
+    Der Vertrag von Schema 2 (Dauerheilung #1126, 10.11.2026):
+
+      1. `arbeitsvorrat` ist die OBERMENGE; `offen` und `vorlauf` sind eine
+         lückenlose, überschneidungsfreie Zerlegung (disjunkte Partition).
+      2. `offen` führt ausschließlich ARBEIT – niemals einen Eintrag mit
+         `status: vorlauf`. Damit kann „offen“ nicht wieder eine Seite
+         führen, die laut eigener Angabe „frisch geprüft“ und erst in
+         sieben Tagen fällig ist (der Befund zu #1126).
+      3. `vorlauf` führt niemals fällige, befundbehaftete oder abgebrochene
+         Arbeit – sonst wäre die Zerlegung eine zweite Wahrheit.
+      4. Kein Eintrag der Arbeitsliste transportiert Befunddaten (`id`,
+         `text`); Befunde stehen ausschließlich in `fachbefunde`.
+      5. Jeder Eintrag nennt `slug`, `faellig` und `frist` (auch `null` ist
+         eine Aussage) – ein Vorratseintrag ohne Termin ist keine Planung.
+
+    Geprüft wird der DATENSATZ, nicht die Absicht: Der Schreiber darf einen
+    widersprüchlichen Stand gar nicht erst persistieren (fail-closed).
+    """
+    fehler: list[str] = []
+    for feld in ("arbeitsvorrat", "offen", "vorlauf", "fachbefunde"):
+        if not isinstance(daten.get(feld), list):
+            fehler.append(f"`{feld}` fehlt oder ist keine Liste")
+    if fehler:
+        return fehler
+
+    def index(entries: list) -> dict[str, dict]:
+        idx: dict[str, dict] = {}
+        for eintrag in entries:
+            if not isinstance(eintrag, dict):
+                fehler.append("Eintrag ist kein Objekt")
+                continue
+            slug = eintrag.get("slug")
+            if not isinstance(slug, str) or not slug.strip():
+                fehler.append("Eintrag ohne Slug")
+                continue
+            if slug in idx:
+                fehler.append(f"Slug doppelt im Vorrat: {slug}")
+            idx[slug] = eintrag
+        return idx
+
+    vorrat = index(daten["arbeitsvorrat"])
+    offen = index(daten["offen"])
+    vorlauf = index(daten["vorlauf"])
+
+    doppelt = set(offen) & set(vorlauf)
+    if doppelt:
+        fehler.append("Slug steht in `offen` UND `vorlauf`: "
+                      + ", ".join(sorted(doppelt)))
+    if set(offen) | set(vorlauf) != set(vorrat):
+        fehlt = sorted(set(vorrat) - (set(offen) | set(vorlauf)))
+        extra = sorted((set(offen) | set(vorlauf)) - set(vorrat))
+        if fehlt:
+            fehler.append("Eintrag fehlt in `offen`/`vorlauf`: "
+                          + ", ".join(fehlt))
+        if extra:
+            fehler.append("Eintrag steht nur in `offen`/`vorlauf`: "
+                          + ", ".join(extra))
+
+    # Befund-Einträge müssen im Ledger belegt sein – ein gesetztes `befund`
+    # ohne Eintrag wäre eine Behauptung, keine Messung.
+    befund_slugs = {b.get("slug") for b in daten["fachbefunde"]
+                    if isinstance(b, dict)}
+    befund_slugs |= {b.get("ursprungs_slug") for b in daten["fachbefunde"]
+                     if isinstance(b, dict)}
+
+    for slug, eintrag in offen.items():
+        status = eintrag.get("status")
+        if status == "vorlauf":
+            fehler.append(f"`offen` führt einen Vorlauf-Artikel: {slug} "
+                          f"(„{eintrag.get('grund', 'ohne Grund')}“)")
+        elif status == "befund" and slug not in befund_slugs:
+            fehler.append(f"`offen` behauptet Befund, das Ledger kennt keinen: "
+                          f"{slug}")
+        elif status not in QUEUE_STATUS_ARBEIT:
+            fehler.append(f"`offen`-Eintrag mit unbekanntem Status "
+                          f"{status!r}: {slug}")
+        elif status == "faellig" and not eintrag.get("faellig"):
+            fehler.append(f"`offen`-Eintrag behauptet Fälligkeit, "
+                          f"`faellig` ist falsch: {slug}")
+        elif status == "befund" and not eintrag.get("befund"):
+            fehler.append(f"`offen`-Eintrag behauptet Befund, "
+                          f"`befund` ist falsch: {slug}")
+        elif status == "unvollstaendig" and not eintrag.get("unvollstaendig"):
+            fehler.append(f"`offen`-Eintrag behauptet Abbruch, "
+                          f"`unvollstaendig` ist falsch: {slug}")
+
+    for slug, eintrag in vorlauf.items():
+        status = eintrag.get("status")
+        if status != "vorlauf":
+            fehler.append(f"`vorlauf` führt Arbeit (Status {status!r}): {slug}")
+        if eintrag.get("faellig"):
+            fehler.append(f"`vorlauf` führt eine fällige Seite: {slug}")
+        if eintrag.get("befund"):
+            fehler.append(f"`vorlauf` führt eine befundbehaftete Seite: {slug}")
+        if eintrag.get("unvollstaendig"):
+            fehler.append(f"`vorlauf` führt eine abgebrochene Seite: {slug}")
+
+    for slug, eintrag in {**offen, **vorlauf}.items():
+        # Der Status ist eine ABLEITUNG, keine Behauptung: Wer ihn von Hand
+        # setzt, kann `offen` und `vorlauf` gegeneinander verdrehen, ohne dass
+        # die Zerlegung auffällt. Diese Zeile schließt die letzte Lücke.
+        erwartet = queue_status_von(eintrag)
+        if eintrag.get("status") != erwartet:
+            fehler.append(f"Status {eintrag.get('status')!r} passt nicht zu den "
+                          f"Fakten ({erwartet!r}): {slug}")
+        if "id" in eintrag or "text" in eintrag:
+            fehler.append(f"Befunddaten im Arbeitsvorrat: {slug}")
+        if "frist" not in eintrag:
+            fehler.append(f"Arbeitsvorrat-Eintrag ohne `frist`: {slug}")
+        if not isinstance(eintrag.get("faellig"), bool):
+            fehler.append(f"Arbeitsvorrat-Eintrag ohne boolesches "
+                          f"`faellig`: {slug}")
+
+    if daten.get("schema") != QUEUE_SCHEMA:
+        fehler.append(f"`schema` ist {daten.get('schema')!r}, "
+                      f"erwartet {QUEUE_SCHEMA}")
+    return fehler
+
 
 def queue_daten_bauen(*, uebersicht, fachbefunde, kapazitaet, abbrueche,
                       arbeitsvorrat, laeufe, erzeugt) -> dict:
     """Der Queue-Datensatz – rein, ohne Datei, ohne Netz, ohne Uhr.
 
-    07.11.2026 (Dauerheilung): Dieses Feld hieß bis heute nur `offen`, und
-    drei Rückfall-Tests (#763, #823, #911) lasen daraus „offene Befunde“.
-    Es ist aber der ARBEITSVORRAT: Seiten, die noch nicht dran waren, mit
-    ihrer Frist. Beide Richtungen waren falsch –
+    SCHEMA 2 (Dauerheilung #1126, 10.11.2026)
+    -----------------------------------------
+    Bis heute hieß die Arbeitssliste nur `offen`; am 07.11. wurde sie
+    zusätzlich `arbeitsvorrat` genannt und `offen` als gleichlautender Alias
+    stehen gelassen. Damit war der Name ehrlich, der Inhalt aber nicht: Ein
+    Eintrag konnte „offen“ heißen und gleichzeitig sagen „frisch geprüft vor
+    23 Tagen (Frist in 7 Tagen), `faellig: false`“ – ein Satz, der sich
+    selbst widerspricht (#1126). Wer die Queue liest, musste wissen, dass
+    „offen“ nicht „offen“ bedeutet.
 
-      * FEHLALARM: Am 07.11. rutschte die Heizperiode turnusgemäß wieder in
-        den Vorrat („frisch geprüft vor 23 Tagen“) → Test rot, Sachlage
-        unverändert. Genau dieser Fehlalarm hat den CI-Job
-        „Code-Regression“ und damit jeden PR blockiert.
-      * SCHEIN-SICHERHEIT: Ein echter zurückgekehrter Befund steht in
-        `fachbefunde`; über `offen` gemessen wäre er unsichtbar gewesen.
+    Jetzt gilt EINE Regel, an der Erzeuger, Migration und Wächter hängen:
 
-    Deshalb heißt das Feld jetzt, was es ist: `arbeitsvorrat`. `offen`
-    bleibt als gleichlautender Alias stehen (Altleser brechen nicht), und
-    weil BEIDE aus derselben Liste stammen, kann nichts auseinanderlaufen.
-    Gemessen wird ein Befund dort, wo er steht: in `fachbefunde`.
+      * `offen`    = ARBEIT. Fällig, befundbehaftet oder abgebrochen.
+      * `vorlauf`  = Seiten, deren Frist rückt, die aber (noch) keine Arbeit
+                     sind – mit Grund und Frist.
+      * `arbeitsvorrat` = die Obermenge beider (Planung/Kapazität).
+      * `fachbefunde`   = Befunde, ausschließlich hier.
+
+    Ein Eintrag trägt seinen Zustand selbst (`status`), abgeleitet aus
+    `faellig`/`befund`/`unvollstaendig` – keine zweite Wahrheit. Vor dem
+    Zurückgeben prüft `queue_invariante` die Zerlegung; ein widersprüchlicher
+    Datensatz wird verweigert (fail-closed), nicht geschrieben.
     """
-    return {
+    eintraege: list[dict] = []
+    gesehen: set[str] = set()
+    for roh in arbeitsvorrat:
+        if not isinstance(roh, dict):
+            raise ValueError("Arbeitsvorrat-Eintrag ist kein Objekt")
+        eintrag = dict(roh)
+        slug = eintrag.get("slug")
+        if not isinstance(slug, str) or not slug.strip():
+            raise ValueError("Arbeitsvorrat-Eintrag ohne Slug")
+        if slug in gesehen:
+            raise ValueError(f"Slug doppelt im Arbeitsvorrat: {slug}")
+        gesehen.add(slug)
+        eintrag["status"] = queue_status_von(eintrag)
+        eintraege.append(eintrag)
+
+    daten = {
+        "schema": QUEUE_SCHEMA,
         "erzeugt": erzeugt,
         "uebersicht": uebersicht,
         "fachbefunde": fachbefunde,
         "kapazitaet": kapazitaet,
         "abbrueche": abbrueche,
-        "arbeitsvorrat": arbeitsvorrat,
-        "offen": arbeitsvorrat,          # Alias für ältere Leser (gleicher Inhalt)
+        "arbeitsvorrat": eintraege,
+        "offen": [e for e in eintraege if e["status"] in QUEUE_STATUS_ARBEIT],
+        "vorlauf": [e for e in eintraege if e["status"] == "vorlauf"],
         "laeufe": laeufe,
     }
+    probleme = queue_invariante(daten)
+    if probleme:
+        raise ValueError("Queue nicht widerspruchsfrei: " + "; ".join(probleme))
+    return daten
+
+
+def queue_normalisieren(apply: bool = False, pfad: str = QUEUE_PFAD) -> dict:
+    """Eine BESTEHENDE Queue auf Schema 2 heben – ohne Lauf, Netz oder Uhr.
+
+    Die Migration ist bewusst keine Neuerzeugung: Sie liest den vorhandenen
+    Arbeitsvorrat, ergänzt die beiden Fakten, die der Erzeuger kennt
+    (`befund` aus dem Ledger, `unvollstaendig` aus dem Eintrag), und lässt
+    `queue_daten_bauen` die Zerlegung rechnen. Kein Eintrag wird gelöscht,
+    keine Frist, kein Grund und kein `erzeugt`-Stempel erfunden. Zweimal
+    ausgeführt ändert sie nichts (idempotent).
+    """
+    quelle = Path(pfad)
+    if not quelle.exists():
+        return {"ok": False, "fehler": f"Queue fehlt: {pfad}"}
+    try:
+        alt = json.loads(quelle.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        return {"ok": False, "fehler": f"Queue nicht lesbar: {exc}"}
+    if not isinstance(alt, dict):
+        return {"ok": False, "fehler": "Queue ist kein Objekt"}
+
+    try:
+        fachbefunde = ledger.zusammenfuehren(alt, [])
+        offene = ledger.offene_eintraege(fachbefunde,
+                                         ledger.entscheidungen_laden())
+    except Exception as exc:  # noqa: BLE001 – Ledger bleibt die eine Quelle
+        return {"ok": False, "fehler": f"Ledger nicht lesbar: {exc}"}
+    offene_slugs = {b.get("slug") for b in offene}
+    offene_slugs |= {b.get("ursprungs_slug") for b in offene}
+
+    bestand = alt.get("arbeitsvorrat")
+    if not isinstance(bestand, list):
+        # Schema 1: `offen` war die einzige Liste.
+        bestand = alt.get("offen")
+    if not isinstance(bestand, list):
+        return {"ok": False, "fehler": "Weder `arbeitsvorrat` noch `offen` "
+                                       "ist eine Liste"}
+
+    eintraege = []
+    for roh in bestand:
+        if not isinstance(roh, dict):
+            return {"ok": False, "fehler": "Arbeitsvorrat-Eintrag ist kein "
+                                           "Objekt"}
+        eintrag = dict(roh)
+        # Der Ledger ist die Wahrheit über offene Befunde – nicht das Feld
+        # einer alten Datei. `befund` wird deshalb neu gesetzt, nie geerbt.
+        eintrag["befund"] = eintrag.get("slug") in offene_slugs
+        eintrag["unvollstaendig"] = bool(eintrag.get("unvollstaendig"))
+        eintraege.append(eintrag)
+
+    try:
+        neu = queue_daten_bauen(
+            uebersicht=alt.get("uebersicht") or {},
+            fachbefunde=fachbefunde,
+            kapazitaet=alt.get("kapazitaet") or {},
+            abbrueche=alt.get("abbrueche") or [],
+            arbeitsvorrat=eintraege,
+            laeufe=alt.get("laeufe") or [],
+            erzeugt=alt.get("erzeugt") or jetzt_utc())
+    except ValueError as exc:
+        return {"ok": False, "fehler": str(exc)}
+
+    bericht = {
+        "ok": True,
+        "geschrieben": False,
+        "vorher": {"schema": alt.get("schema"),
+                   "offen": len(alt.get("offen") or []),
+                   "vorlauf": len(alt.get("vorlauf") or [])},
+        "nachher": {"schema": neu["schema"],
+                    "arbeitsvorrat": len(neu["arbeitsvorrat"]),
+                    "offen": len(neu["offen"]),
+                    "vorlauf": len(neu["vorlauf"]),
+                    "befund": sum(1 for e in neu["offen"]
+                                  if e["status"] == "befund"),
+                    "unvollstaendig": sum(1 for e in neu["offen"]
+                                          if e["status"] == "unvollstaendig")},
+    }
+    if apply:
+        tmp = Path(str(quelle) + ".tmp")
+        with tmp.open("w", encoding="utf-8") as fh:
+            json.dump(neu, fh, ensure_ascii=False, indent=2)
+        tmp.replace(quelle)
+        bericht["geschrieben"] = True
+    return bericht
 
 
 # ----------------------------------------------------------------------
@@ -1736,10 +2033,30 @@ def main() -> int:
     p.add_argument("--offline", action="store_true", help="ohne Netzabruf (nur GEO-Reife)")
     p.add_argument("--strict", action="store_true", help="Exit 1 bei offenen Befunden")
     p.add_argument("--selftest", action="store_true")
+    p.add_argument("--queue-normalisieren", action="store_true",
+                   help="bestehende Queue auf Schema 2 heben (offen=Arbeit, "
+                        "vorlauf=Termine); ohne --apply Trockenlauf, ohne "
+                        "Recherche, Netz oder Artikeländerung")
     args = p.parse_args()
 
     if args.selftest:
         return selftest()
+    if args.queue_normalisieren:
+        if args.apply and selftest() != 0:
+            return 2
+        bericht = queue_normalisieren(apply=args.apply)
+        if not bericht.get("ok"):
+            print(f"🛑 Queue-Migration nicht möglich: {bericht['fehler']}",
+                  file=sys.stderr)
+            return 2
+        n = bericht["nachher"]
+        print(f"{'✅' if bericht['geschrieben'] else 'Trockenlauf:'} "
+              f"Queue-Schema {n['schema']} · {n['arbeitsvorrat']} Einträge · "
+              f"offen {n['offen']} (Befund {n['befund']}, "
+              f"unvollständig {n['unvollstaendig']}) · "
+              f"Vorlauf {n['vorlauf']}"
+              + ("" if bericht["geschrieben"] else " – mit --apply schreiben"))
+        return 0
     if args.max is not None and args.max < 1:
         p.error("--max muss mindestens 1 sein")
 
@@ -1876,20 +2193,39 @@ def main() -> int:
     report_schreiben(laeufe, uebersicht, trocken=not args.apply,
                      abbrueche=abbrueche)
 
-    # Arbeitsvorrat = Seiten, die noch nicht dran waren (mit Frist). Das ist
-    # KEINE Befundliste; die Begründung steht bei `queue_daten_bauen`.
-    arbeitsvorrat_eintraege = [
-        {"slug": a["slug"], "titel": a["titel"],
-         "grund": a["_faellig"]["grund"],
-         "faellig": bool(a["_faellig"]["faellig"]),
-         "frist": (a["_faellig"]["frist"].isoformat()
-                   if a["_faellig"].get("frist") else None),
-         "geo": a["_geo"]["prozent"]}
-        for a in unvollstaendig + arbeitsvorrat[budget:]]
-    queue_daten = queue_daten_bauen(
-        uebersicht=uebersicht, fachbefunde=fachbefunde, kapazitaet=kapazitaet,
-        abbrueche=abbrueche, arbeitsvorrat=arbeitsvorrat_eintraege,
-        laeufe=laeufe, erzeugt=jetzt_utc())
+    # Arbeitsvorrat = Seiten, die noch nicht dran waren (mit Frist) PLUS die
+    # in diesem Lauf abgebrochenen. Das ist KEINE Befundliste; die Begründung
+    # steht bei `queue_daten_bauen`. Drei Felder, eine Wahrheit (#1126):
+    # `offen` führt nur Arbeit, `vorlauf` nur Termine, `arbeitsvorrat` beide.
+    offene_slugs = {b.get("slug") for b in offene_fachbefunde}
+    offene_slugs |= {b.get("ursprungs_slug") for b in offene_fachbefunde}
+
+    def vorrats_eintrag(art: dict, abgebrochen: bool = False) -> dict:
+        return {
+            "slug": art["slug"], "titel": art["titel"],
+            "grund": art["_faellig"]["grund"],
+            "faellig": bool(art["_faellig"]["faellig"]),
+            "frist": (art["_faellig"]["frist"].isoformat()
+                      if art["_faellig"].get("frist") else None),
+            "geo": art["_geo"]["prozent"],
+            "befund": art["slug"] in offene_slugs,
+            "unvollstaendig": abgebrochen,
+        }
+
+    arbeitsvorrat_eintraege = (
+        [vorrats_eintrag(a, abgebrochen=True) for a in unvollstaendig]
+        + [vorrats_eintrag(a) for a in arbeitsvorrat[budget:]])
+    try:
+        queue_daten = queue_daten_bauen(
+            uebersicht=uebersicht, fachbefunde=fachbefunde,
+            kapazitaet=kapazitaet, abbrueche=abbrueche,
+            arbeitsvorrat=arbeitsvorrat_eintraege, laeufe=laeufe,
+            erzeugt=jetzt_utc())
+    except ValueError as exc:
+        # Fail-closed: Ein widersprüchlicher Datensatz wird nicht geschrieben.
+        # Die vorherige Queue bleibt stehen; der Lauf ist laut rot (#1126).
+        print(f"🛑 Queue nicht widerspruchsfrei baubar: {exc}", file=sys.stderr)
+        return 2
     queue_tmp = Path(str(QUEUE_PFAD) + ".tmp")
     with queue_tmp.open("w", encoding="utf-8") as fh:
         json.dump(queue_daten, fh, ensure_ascii=False, indent=2)

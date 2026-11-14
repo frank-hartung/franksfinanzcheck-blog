@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-13 11:46:42 UTC",
+ "generated_at": "2026-11-14 11:08:03 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 129,
- "checked_links": 309,
+ "checked_articles": 133,
+ "checked_links": 319,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -217,8 +217,30 @@
    "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Kreditkarten“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   },
   {
+   "code": "IW4",
+   "slug": "2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst",
+   "line": 116,
+   "route": "kredit",
+   "slot": "mid",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "Verbotenes Paar: Artikelthema „Tagesgeld der C24 Bank“ → Route „Ratenkredit“. Geldanlage-Interesse darf nicht im Ratenkredit-Rechner landen. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/tagesgeld/?"
+  },
+  {
+   "code": "IW4",
+   "slug": "2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst",
+   "line": 256,
+   "route": "kredit",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "Verbotenes Paar: Artikelthema „Tagesgeld der C24 Bank“ → Route „Ratenkredit“. Geldanlage-Interesse darf nicht im Ratenkredit-Rechner landen. – Der Anker nennt das Ziel ehrlich, deshalb kein Täuschungs-Fund, aber ein redaktioneller Prüfpunkt: Fehlt dem Artikel das Hauptangebot /go/tagesgeld/?"
+  },
+  {
    "code": "IW2",
-   "slug": "2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+   "slug": "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
    "line": 18,
    "route": "allgemein",
    "slot": "top",
@@ -229,7 +251,7 @@
   },
   {
    "code": "IW2",
-   "slug": "2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+   "slug": "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
    "line": 60,
    "route": "allgemein",
    "slot": "mid",
@@ -240,7 +262,7 @@
   },
   {
    "code": "IW2",
-   "slug": "2026-11-12-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+   "slug": "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
    "line": 131,
    "route": "allgemein",
    "slot": "end",
@@ -251,30 +273,30 @@
   },
   {
    "code": "IW2",
-   "slug": "2026-11-12-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
-   "line": 147,
+   "slug": "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
+   "line": 146,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
    "severity": "P3",
    "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „DSL- & Internettarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Handytarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   },
   {
    "code": "IW2",
-   "slug": "2026-11-12-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
-   "line": 154,
+   "slug": "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
+   "line": 152,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
    "severity": "P3",
    "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „DSL- & Internettarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Handytarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   },
   {
    "code": "IW2",
-   "slug": "2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten",
-   "line": 275,
+   "slug": "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+   "line": 276,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
@@ -284,7 +306,7 @@
   },
   {
    "code": "IW2",
-   "slug": "2026-11-12-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+   "slug": "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
    "line": 282,
    "route": "allgemein",
    "slot": "end",
@@ -292,6 +314,17 @@
    "severity": "P3",
    "blocking": false,
    "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-13-tagesgeld-und-zinsen-so-parkst-du-dein-geld-sicher",
+   "line": 75,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Tagesgeld der C24 Bank“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
   }
  ],
  "errors": []

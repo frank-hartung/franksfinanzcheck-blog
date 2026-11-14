@@ -284,6 +284,10 @@ def check(pkg: dict, channel_cfg: dict, meta: dict,
     """Prüft ein Beitrags-Paket. (freigabe, verstöße, kennzahlen)."""
     history = history or []
     violations: list[str] = []
+    if pkg.get("channel") == "pinterest" and pkg.get("ki_kennzeichnung_fehler"):
+        violations.append(f"KI-Provenienz nicht sendbar: {pkg['ki_kennzeichnung_fehler']}")
+    if pkg.get("ki_bild_fehler"):
+        violations.append(f"KI-Bild nicht sendbar: {pkg['ki_bild_fehler']}")
     text = pkg.get("text") or ""
     comment = pkg.get("comment") or ""
     url = pkg.get("url") or ""

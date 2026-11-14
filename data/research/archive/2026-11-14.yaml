@@ -1,5 +1,5 @@
-generated_at: '2026-10-15T08:35:17Z'
-day: '2026-10-15'
+generated_at: '2026-11-14T10:55:27Z'
+day: '2026-11-14'
 mode: deterministic
 teams:
   trending:
@@ -28,13 +28,13 @@ teams:
     pillar: versicherungen
     signal: trending
     source: aktuelle_entwicklungen:versicherung-beitragsanpassung-jahresende
-    score: 0.65
+    score: 0.7
   - topic: Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste
       Ergebnis nimmt, lässt oft bares Geld liegen.
     pillar: versicherungen
     signal: trending
     source: aktuelle_entwicklungen:versicherung-vergleichsportale-nicht-vollstaendig
-    score: 0.65
+    score: 0.7
   - topic: Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
       sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
       inzwischen öfter als nur beim Kontowechsel.
@@ -83,58 +83,72 @@ teams:
     signal: news
     source: aktuelle_entwicklungen:energie-variable-vs-fest
     score: 0.85
+  - topic: Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende –
+      ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
+      statt sie automatisch zu verlängern.
+    pillar: versicherungen
+    signal: news
+    source: aktuelle_entwicklungen:versicherung-beitragsanpassung-jahresende
+    score: 0.8
+  - topic: Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste
+      Ergebnis nimmt, lässt oft bares Geld liegen.
+    pillar: versicherungen
+    signal: news
+    source: aktuelle_entwicklungen:versicherung-vergleichsportale-nicht-vollstaendig
+    score: 0.8
   evergreen:
-  - topic: 5 einfache Schritte zum Aufbau eines Notgroschens
+  - topic: 'Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung'
     pillar: frugalismus
     signal: evergreen
-    source: topics:5 einfache Schritte zum Aufbau eines Notgroschens
+    source: 'topics:Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung'
     score: 0.85
     keywords: []
-  - topic: Wie du mit einem Smart-Plug Energie sparen kannst
+  - topic: Heizperiode vorbereiten im Spätsommer
     pillar: strom-sparen
     signal: evergreen
-    source: topics:Wie du mit einem Smart-Plug Energie sparen kannst
+    source: topics:Heizperiode vorbereiten im Spätsommer
     score: 0.85
     keywords:
-    - Smart-Plug
-    - Energie sparen
-    - Haushaltsgeräte
-  - topic: Die besten Tarife für ein günstiges Handy-Abonnement
+    - Gasrechnung senken
+    - Heizkosten sparen
+    - Herbst Vorbereitung
+    - Heizung prüfen
+  - topic: Die besten DSL-Tarife für Zuhause und unterwegs
     pillar: internet-dsl
     signal: evergreen
-    source: topics:Die besten Tarife für ein günstiges Handy-Abonnement
+    source: topics:Die besten DSL-Tarife für Zuhause und unterwegs
     score: 0.85
     keywords:
-    - günstiges Handy-Abonnement
-    - Tarifvergleich
-    - Mobilfunk
-  - topic: Versteckte Kosten im Mietwagenvertrag entschlüsseln
+    - DSL-Tarife
+    - Zuhause
+    - unterwegs
+  - topic: Mietwagen-Tarife im Vergleich für den Urlaub
     pillar: mietwagen
     signal: evergreen
-    source: topics:Versteckte Kosten im Mietwagenvertrag entschlüsseln
+    source: topics:Mietwagen-Tarife im Vergleich für den Urlaub
     score: 0.85
     keywords:
-    - Mietwagenvertrag
-    - versteckte Kosten
-    - Urlaubskasse
-  - topic: 10 Tipps für günstige Reisekreditkarten
+    - Mietwagen
+    - Tarife
+    - Vergleich
+  - topic: Kontoeröffnung mit günstigen Gebühren
     pillar: konto-karten
     signal: evergreen
-    source: topics:10 Tipps für günstige Reisekreditkarten
+    source: topics:Kontoeröffnung mit günstigen Gebühren
     score: 0.85
     keywords:
-    - Reisekreditkarten
-    - günstige Karten
-    - Reisekosten sparen
-  - topic: 'Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
+    - Kontoeröffnung
+    - Günstige Gebühren
+    - Kontenvergleich
+  - topic: 'Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
     pillar: versicherungen
     signal: evergreen
-    source: 'topics:Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
+    source: 'topics:Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
     score: 0.85
     keywords:
-    - Rechtsschutzversicherung
-    - Rechtsschutz Leistungen
-    - Rechtsstreit versichern
+    - Versicherungen prüfen Jahresende
+    - Policen kündigen Dezember
+    - überversichert was kündigen
   pain_points:
   - topic: Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft merken
       Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
@@ -197,16 +211,6 @@ teams:
     source: pain_points:hausrat-unterschaetzt
     score: 0.7
   viral_outliers:
-  - topic: 'Dein Haus sicher schützen: Das Vorsorge-Update 2026'
-    pillar: versicherungen
-    signal: viral_outlier
-    source: pinterest_plan
-    score: 0.85
-  - topic: 'Privathaftpflicht: Warum sie unverzichtbar ist'
-    pillar: versicherungen
-    signal: viral_outlier
-    source: pinterest_plan
-    score: 0.84
   - topic: 'Preisgarantie Gas: So schützt du dich vor Preissprüngen'
     pillar: strom-sparen
     signal: viral_outlier
@@ -227,68 +231,81 @@ teams:
     signal: viral_outlier
     source: pinterest_plan
     score: 0.81
-  - topic: 'Wohngebäudeversicherung: Worauf du wirklich achten musst'
-    pillar: versicherungen
-    signal: viral_outlier
-    source: pinterest_plan
-    score: 0.81
   - topic: 'Haushaltsbuch führen: App, Excel oder Papier?'
     pillar: konto-karten
     signal: viral_outlier
     source: pinterest_plan
     score: 0.81
+  - topic: 'Sicher heizen: Gaspreisgarantie gegen den Preisschock'
+    pillar: strom-sparen
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.79
+  - topic: 'Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht'
+    pillar: frugalismus
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.78
+  - topic: 'Spätsommer-Schnäppchen: Mietwagen jetzt günstig buchen'
+    pillar: mietwagen
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.77
   niche_hooks:
-  - topic: DSL-Tarife mit hoher Geschwindigkeit vergleichen
-    pillar: internet-dsl
-    signal: niche_hook
-    source: topics:DSL-Tarife mit hoher Geschwindigkeit vergleichen
-    score: 0.55
-    keywords:
-    - DSL-Tarif
-    - Internetgeschwindigkeit
-    - Tarife vergleichen
-  - topic: Günstige Flüge für den Spätsommer finden
-    pillar: mietwagen
-    signal: niche_hook
-    source: topics:Günstige Flüge für den Spätsommer finden
-    score: 0.55
-    keywords:
-    - Flugtickets günstig
-    - Flugvergleich
-    - Reisebudget sparen
-  - topic: Mietwagen-Tarife im Vergleich für den Urlaub
-    pillar: mietwagen
-    signal: niche_hook
-    source: topics:Mietwagen-Tarife im Vergleich für den Urlaub
-    score: 0.55
-    keywords:
-    - Mietwagen
-    - Tarife
-    - Vergleich
-  - topic: 'Risikolebensversicherung für Familien: Die richtige Summe finden'
+  - topic: 10 Tipps für günstige Reiseversicherungen
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Risikolebensversicherung für Familien: Die richtige Summe finden'
+    source: topics:10 Tipps für günstige Reiseversicherungen
     score: 0.55
     keywords:
-    - Risikolebensversicherung
-    - Versicherungssumme berechnen
-    - Familie absichern
-  - topic: Wie du deine monatlichen Ausgaben reduzieren kannst
-    pillar: frugalismus
+    - Reiseversicherung
+    - Versicherungsvergleich
+    - Günstige Versicherungen
+  - topic: Günstige Kreditkarten für den Alltag finden
+    pillar: konto-karten
     signal: niche_hook
-    source: topics:Wie du deine monatlichen Ausgaben reduzieren kannst
-    score: 0.55
-    keywords: []
-  - topic: 'Zweite Welle Gaspreis-Anpassung: Jetzt sichern'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Zweite Welle Gaspreis-Anpassung: Jetzt sichern'
+    source: topics:Günstige Kreditkarten für den Alltag finden
     score: 0.55
     keywords:
-    - Gaspreis
-    - Gastarif wechseln
-    - Heizkosten senken
+    - Kreditkarte
+    - Günstige Karten
+    - Alltag
+  - topic: 'Hund & Katze: Lohnt sich eine Tierversicherung?'
+    pillar: versicherungen
+    signal: niche_hook
+    source: 'topics:Hund & Katze: Lohnt sich eine Tierversicherung?'
+    score: 0.55
+    keywords:
+    - Tierversicherung
+    - Hundeversicherung
+    - Katzenversicherung
+  - topic: Preiswerter DSL-Anschluss für Zuhause
+    pillar: internet-dsl
+    signal: niche_hook
+    source: topics:Preiswerter DSL-Anschluss für Zuhause
+    score: 0.55
+    keywords:
+    - DSL
+    - Anschluss
+    - Preiswert
+  - topic: 'VPN für Zuhause: Brauchst du das wirklich?'
+    pillar: internet-dsl
+    signal: niche_hook
+    source: 'topics:VPN für Zuhause: Brauchst du das wirklich?'
+    score: 0.55
+    keywords:
+    - VPN Zuhause
+    - VPN sinnvoll
+    - Internet Sicherheit
+  - topic: Wie du deine Bankgebühren um 50 % reduzieren kannst
+    pillar: konto-karten
+    signal: niche_hook
+    source: topics:Wie du deine Bankgebühren um 50 % reduzieren kannst
+    score: 0.55
+    keywords:
+    - Bankgebühren sparen
+    - Konto-gebühren
+    - Gebühren-reduzierung
 live_web:
   enabled: false
   findings: []

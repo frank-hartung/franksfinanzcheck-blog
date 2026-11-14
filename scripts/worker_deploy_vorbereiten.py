@@ -244,23 +244,32 @@ class _KeineWeiterleitung(urllib.request.HTTPRedirectHandler):
         raise OSError(f"Unerwartete Weiterleitung HTTP {code}")
 
 
+class HealthFehler(ValueError):
+    """Fester, geheimnisfreier Grund für einen ungesunden Health-Check."""
+
+
 def _hole_oeffentlichen_bau(url: str = NEWSLETTER_HEALTHZ, timeout: float = 10.0) -> str:
+    """Nur ein gesunder, lesbarer Health-Check kann den Deploy belegen."""
     anfrage = urllib.request.Request(url, headers={
         "accept": "application/json",
+        "cache-control": "no-cache",
         "user-agent": "franksfinanzcheck-worker-deploy-nachweis/1.0",
     })
     opener = urllib.request.build_opener(_KeineWeiterleitung())
     try:
-        antwort = opener.open(anfrage, timeout=timeout)
+        with opener.open(anfrage, timeout=timeout) as antwort:
+            if getattr(antwort, "status", None) != 200:
+                raise HealthFehler("Health-Check antwortet nicht mit HTTP 200")
+            roh = antwort.read(65_537)
     except urllib.error.HTTPError as fehler:
-        if fehler.code != 503:
-            fehler.close()
-            raise OSError(f"HTTP {fehler.code}") from None
-        antwort = fehler
-    with antwort:
-        daten = json.loads(antwort.read(65_536).decode("utf-8"))
-    if not isinstance(daten, dict):
-        raise ValueError("Kein JSON-Objekt")
+        status = fehler.code
+        fehler.close()
+        raise HealthFehler(f"Health-Check antwortet mit HTTP {status}") from None
+    if len(roh) > 65_536:
+        raise HealthFehler("Health-Antwort überschreitet das Größenlimit")
+    daten = json.loads(roh.decode("utf-8"))
+    if not isinstance(daten, dict) or daten.get("ok") is not True:
+        raise HealthFehler("Health-Check meldet kein `ok: true`")
     bau = daten.get("bau")
     return bau.strip() if isinstance(bau, str) else ""
 
@@ -273,7 +282,11 @@ def deploy_nachweis(
     pausen: tuple[float, ...] = NACHWEIS_PAUSEN,
     schlaf=time.sleep,
 ) -> tuple[int, str]:
-    """Prüft nach `wrangler deploy`, dass der neue Build-Stempel live auf /healthz antwortet."""
+    """Prüft nach `wrangler deploy` den gesunden /healthz-Stand und Build-Stempel.
+
+    Der Stempel ist ein manuell gepflegter Versionswert, kein Commit-Hash;
+    der erfolgreiche Wrangler-Schritt ist deshalb ein eigener Teil des Beweises.
+    """
     if name not in WORKER:
         return 1, f"Unbekannter Worker: {name}"
     if name != "newsletter-worker":
@@ -289,16 +302,22 @@ def deploy_nachweis(
             schlaf(pausen[nr - 1])
         try:
             ist = holen()
+        except HealthFehler as fehler:
+            # HealthFehler enthält ausschließlich feste eigene Texte bzw. den
+            # HTTP-Status, niemals Antworttext oder Transportdetails.
+            letzter_grund = str(fehler)
+            continue
         except (OSError, ValueError) as fehler:
             letzter_grund = f"Netz-/Formatfehler ({type(fehler).__name__})"
             continue
         if ist == soll:
-            return 0, (f"✅ Live-Deploy-Nachweis erbracht: `/healthz` meldet Build `{soll}` "
-                       f"(Versuch {nr + 1}).")
+            return 0, (f"✅ Live-Deploy-Nachweis erbracht: `/healthz` ist gesund und meldet "
+                       f"Build `{soll}` (Versuch {nr + 1}).")
         letzter_grund = "Build-Stempel noch alt oder leer"
-    return 1, (f"Live-Deploy-Nachweis fehlgeschlagen: `/healthz` liefert nach "
-               f"{len(pausen) + 1} Versuchen nicht den erwarteten Build `{soll}` "
-               f"({letzter_grund}). Custom-Domain/Route in Cloudflare prüfen.")
+    return 1, (f"Live-Deploy-Nachweis fehlgeschlagen: `/healthz` ist nach "
+               f"{len(pausen) + 1} Versuchen nicht gesund oder liefert nicht den erwarteten "
+               f"Build `{soll}` ({letzter_grund}). Health/KV und Custom-Domain/Route "
+               "in Cloudflare prüfen.")
 
 
 def _selftest() -> int:

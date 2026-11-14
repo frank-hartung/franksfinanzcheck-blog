@@ -118,13 +118,17 @@ class EichprobeTests(unittest.TestCase):
 
 
 class HeilungsTests(unittest.TestCase):
-    def test_09_vorfall_wird_geheilt_und_nachgemessen(self):
+    def test_09_vorfall_wird_teilweise_geheilt_und_nachgemessen(self):
         t = pss.Transport()
         erg = ergebnis(transport=t)
-        self.assertEqual(erg.klasse, pss.KLASSE_GEHEILT)
-        self.assertEqual(erg.code, 0)
+        # Der Bypass wurde NICHT gesendet und bleibt an: Ein realistischer
+        # Stub darf daraus kein vollständig „geheilt“ erfinden.
+        self.assertEqual(erg.klasse, pss.KLASSE_OFFEN)
+        self.assertEqual(erg.code, 1)
         self.assertEqual(erg.lage.vorher["reviewer"], einrichter.KLASSE_MACHBAR)
         self.assertEqual(erg.lage.nachher["reviewer"], einrichter.KLASSE_ERFUELLT)
+        self.assertEqual(erg.lage.nachher["branch"], einrichter.KLASSE_ERFUELLT)
+        self.assertEqual(erg.lage.nachher["bypass"], einrichter.KLASSE_OBERFLAECHE)
         self.assertEqual(erg.beleg["eichprobe"], "bestanden")
         self.assertTrue(erg.lage.schritte)
 
@@ -163,6 +167,8 @@ class HeilungsTests(unittest.TestCase):
         self.assertEqual(erg.klasse, pss.KLASSE_OFFEN)
         self.assertEqual(erg.code, 1)
         self.assertTrue(any(pss.KLASSE_RECHT in g for g in erg.lage.gruende))
+        self.assertTrue(any("Administration: write" in g for g in erg.lage.gruende))
+        self.assertNotIn("Environments: write", " ".join(erg.lage.gruende))
         self.assertTrue(any(pss.KLASSE_OBERFLAECHE in g for g in erg.lage.gruende))
         self.assertEqual(erg.lage.schritte, [])
         self.assertEqual(erg.lage.nachher["reviewer"], einrichter.KLASSE_MACHBAR)
@@ -192,18 +198,73 @@ class HeilungsTests(unittest.TestCase):
         self.assertTrue(pss.verschlechterungen(
             {"reviewer": "ERFUELLT"}, {"branch": "ERFUELLT"}))
 
-    def test_17_verschlechterung_nach_eingriff_ist_exit_2(self):
-        # Start: Reviewer ERFUELLT, Branch MACHBAR. Nach dem Eingriff ist der
-        # Reviewer weg – ein Heiler, der lockert, darf das nicht als Erfolg
-        # buchen (D7: ganze Messung, kein Teilerfolg).
-        start = {**pss.SICHER, "can_admins_bypass": True,
-                 "deployment_branch_policy": None}
-        danach = {**start, "protection_rules": []}
-        t = pss.Transport(umgebung=start, danach=danach)
+    def test_17_fehlender_nachweis_nach_schreiben_ist_exit_2_und_benennt_teilaktion(self):
+        # Selbst wenn GitHub beide Requests annimmt: fehlt danach der Reviewer,
+        # gibt es kein Grün und die bereits angenommenen Schritte bleiben sichtbar.
+        danach = {**pss.SICHER, "protection_rules": []}
+        t = pss.Transport(danach=danach)
         erg = ergebnis(transport=t)
-        self.assertEqual(erg.klasse, pss.KLASSE_VERSCHLECHTERUNG)
+        self.assertEqual(erg.klasse, pss.KLASSE_NICHT_BELEGBAR)
         self.assertEqual(erg.code, 2)
-        self.assertTrue(any("schlechter" in g for g in erg.lage.gruende))
+        self.assertEqual(len(erg.lage.schritte), 2)
+        self.assertTrue(any("Nachmessung" in g for g in erg.lage.gruende))
+
+    def test_17a_bereits_geschuetztes_environment_wird_nicht_geaendert(self):
+        start = {**pss.SICHER, "deployment_branch_policy": None}
+        t = pss.Transport(umgebung=start)
+        erg = ergebnis(transport=t)
+        self.assertEqual(erg.klasse, pss.KLASSE_OFFEN)
+        self.assertEqual(erg.lage.nachher["branch"], einrichter.KLASSE_ABWEICHUNG)
+        self.assertFalse([m for m, _u, _k in t.rufe if m != "GET"])
+
+    def test_17b_abweichung_bedeutet_nicht_automatisch_lockere_policy(self):
+        self.assertEqual(pss.verschlechterungen(
+            {"branch": "MACHBAR"}, {"branch": "ABWEICHUNG"}), [])
+
+    def test_17c_verweigerter_branch_post_meldet_bereits_angenommenen_put(self):
+        class PostVerweigert(pss.Transport):
+            def __call__(self, methode, url, token, koerper):
+                if methode == "POST":
+                    self.rufe.append((methode, url, koerper))
+                    return 403, {}, b"{}"
+                return super().__call__(methode, url, token, koerper)
+
+        erg = ergebnis(transport=PostVerweigert())
+        self.assertEqual(erg.klasse, pss.KLASSE_OFFEN)
+        self.assertEqual(len(erg.lage.schritte), 1)
+        self.assertIn("Environment-PUT", erg.lage.schritte[0])
+        self.assertEqual(erg.lage.nachher["branch"], einrichter.KLASSE_ABWEICHUNG)
+        self.assertTrue(any("RECHT" in g for g in erg.lage.gruende))
+
+    def test_17d_404_wird_nicht_automatisch_angelegt(self):
+        rufe = []
+
+        def nicht_sichtbar(methode, url, token, koerper):
+            rufe.append(methode)
+            return 404, {}, b"{}"
+
+        erg = ergebnis(transport=nicht_sichtbar)
+        self.assertEqual(erg.klasse, pss.KLASSE_NICHT_BELEGBAR)
+        self.assertEqual(erg.code, 2)
+        self.assertEqual(erg.lage.nachher, {})
+        self.assertIn("404", " ".join(erg.lage.gruende))
+        self.assertEqual(rufe, ["GET"])
+
+    def test_17e_serverfehler_nach_schreibversuch_ist_nicht_belegbar(self):
+        for methode_mit_fehler in ("PUT", "POST"):
+            with self.subTest(methode=methode_mit_fehler):
+                class Serverfehler(pss.Transport):
+                    def __call__(self, methode, url, token, koerper):
+                        antwort = super().__call__(methode, url, token, koerper)
+                        return (500, {}, b"{}") if methode == methode_mit_fehler else antwort
+
+                erg = ergebnis(transport=Serverfehler())
+                self.assertEqual(erg.klasse, pss.KLASSE_NICHT_BELEGBAR)
+                self.assertEqual(erg.code, 2)
+                self.assertIn(methode_mit_fehler, " ".join(erg.lage.schritte))
+                self.assertIn("unbekannt", " ".join(erg.lage.schritte))
+                self.assertIn("HTTP 500", " ".join(erg.lage.gruende))
+                self.assertIn("unbekannt", pss.als_md(erg))
 
     def test_18_pruefen_schreibt_nicht(self):
         t = pss.Transport()

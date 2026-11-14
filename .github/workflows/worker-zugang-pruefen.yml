@@ -28,11 +28,11 @@
 #  Step Summary und meldet jeden Befund als genau eine Annotation.
 #  Kein Wrangler, kein Deploy, keine Ressourcen-Erzeugung.
 #
-#  Umgebung: Das Environment `cloudflare-produktion` bleibt Pflicht –
-#  die Secrets liegen dort, und die Freigabe dokumentiert, wer die
-#  Produktionszugänge geprüft hat. Ein grüner Lauf hier ersetzt
-#  ausdrücklich KEINEN Deploy: erst der vollständige grüne Lauf von
-#  „Cloudflare-Worker deployen“ schließt WF-829B.
+#  Umgebung: Vor dem Environment prüft ein eigener, geheimnisfreier Job
+#  sowohl `main` als auch Reviewer, Branch-Regel und Admin-Bypass. Erst
+#  danach wird `cloudflare-produktion` angefordert. Nach einer ggf. langen
+#  Freigabewartezeit wird die Policy vor der Verwendung der Secrets erneut
+#  gelesen. Ein grüner Lauf hier ersetzt ausdrücklich KEINEN Deploy.
 #
 #  Runbook: docs/SICHERHEIT-BETRIEB-RUNBOOK.md, A4 (Einrichtung) und
 #  D2 (Worker-Rot eingrenzen).
@@ -50,10 +50,48 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  production-policy:
+    name: Produktions-Environment absichern (vor Zugangsprüfung)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      # Diese Prüfung läuft auch auf einem anderen Ref und schlägt dort rot
+      # fehl, statt einen vollständig übersprungenen Workflow grün zu melden.
+      - name: Nur von main prüfen (vor dem Environment)
+        env:
+          REF: ${{ github.ref }}
+        run: |
+          if [ "$REF" != "refs/heads/main" ]; then
+            echo "::error::Der Produktionszugang wird nur von main geprüft."
+            exit 1
+          fi
+
+      - name: Repository auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Environment-Guard selbsttesten (offline)
+        run: python3 scripts/worker_environment_guard.py --selftest
+
+      - name: Produktions-Environment absichern (vor Zugriff auf Secrets)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python3 scripts/worker_environment_guard.py --check
+
   zugang:
     name: Zugang lesend prüfen
+    needs: production-policy
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    permissions:
+      actions: read
+      contents: read
     environment:
       name: cloudflare-produktion
     steps:
@@ -62,14 +100,14 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Nur von main prüfen
+      # Die Policy kann sich ändern, während der Job auf Freigabe wartet.
+      # Secrets sind im Job verfügbar, werden aber erst NACH diesem Schritt
+      # an einen Prozess übergeben; eine unlesbare Policy bleibt fail-closed.
+      - name: Produktions-Environment absichern (nach Freigabe)
         env:
-          REF: ${{ github.ref }}
-        run: |
-          if [ "$REF" != "refs/heads/main" ]; then
-            echo "::error::Der Produktionszugang wird nur von main geprüft (Ref: $REF)."
-            exit 1
-          fi
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python3 scripts/worker_environment_guard.py --check
 
       - name: Python bereitstellen
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0

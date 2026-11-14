@@ -1027,6 +1027,30 @@ await run('#922: eigener Prüf-Workflow rot (nur lesend) → derselbe Einrichtun
          '<!-- alert-runbook: worker-deploy-zugang -->', 'Fail-closed – gewollt, kein Betriebsausfall',
          'cloudflare-produktion', 'worker_zugang.py --selftest'],
   null, ['Häufigste Ursachen', 'API-Key abgelaufen', 'Code-Regression']);
+// Auch der neue geheimnisfreie Vorab-Guard und die Nachmessung nach einer
+// Freigabe gehören zur Policy-Diagnose, nicht zum allgemeinen Workflow-Rat.
+for (const [runId, jobName, stepName] of [
+  [9223, 'Produktions-Environment absichern (vor Zugangsprüfung)',
+   'Produktions-Environment absichern (vor Zugriff auf Secrets)'],
+  [9224, 'Zugang lesend prüfen', 'Produktions-Environment absichern (nach Freigabe)'],
+]) {
+  await run('#922: Policy-Gate im Prüfworkflow → Environment-Rat (' + runId + ')',
+    { workflowName: 'Deploy-Zugang prüfen', branch: 'main', event: 'workflow_dispatch',
+      conclusion: 'failure', runId,
+      jobs: [{ name: jobName, conclusion: 'failure', html_url: 'https://x/jobs/wz-policy',
+               steps: [{ name: stepName, conclusion: 'failure' }] }] },
+    true, ['<!-- alert-runbook: worker-deploy-zugang -->', 'Environment zuerst absichern',
+           'Required Reviewer', '`can_admins_bypass=false`'],
+    null, ['Häufigste Ursachen', 'API-Key abgelaufen', 'Code-Regression']);
+}
+await run('#922: Policy-Drift nach Deploy-Freigabe → Environment-Rat',
+  { workflowName: WORKER_DEPLOY, branch: 'main', event: 'workflow_dispatch', conclusion: 'failure',
+    runId: 9225,
+    jobs: [{ name: 'Deploy newsletter-worker', conclusion: 'failure', html_url: 'https://x/jobs/wd-policy',
+             steps: [{ name: 'Produktions-Environment absichern (nach Freigabe)', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: worker-deploy-zugang -->', 'Environment zuerst absichern'],
+  null, ['Häufigste Ursachen', 'API-Key abgelaufen']);
+
 await run('#922: roter Selbsttest der Zugangsprüfung → Selbsttest-Rat, NICHT Zugangs-Rat',
   { workflowName: 'Deploy-Zugang prüfen', branch: 'main', event: 'workflow_dispatch', conclusion: 'failure',
     runId: 9222,

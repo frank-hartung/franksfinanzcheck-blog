@@ -44,6 +44,7 @@
     "nacht-planung::planung:2026-11-11": "2026-11-11T08:42:21+01:00",
     "nacht-planung::planung:2026-11-12": "2026-11-12T04:46:22+01:00",
     "nacht-planung::planung:2026-11-13": "2026-11-13T09:43:02+01:00",
+    "nacht-planung::planung:2026-11-14": "2026-11-14T04:06:53+01:00",
     "reach-signale-kuratieren::signal:https://www.heise.de/bestenlisten/testbericht/saugroboter-eufy-c30-edge-im-test-kleine-station-fairer-preis-grosse-leistung/34bhq0b?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag": "2026-11-09T21:39:50+01:00",
     "reach-signale-kuratieren::signal:https://www.heise.de/news/Neues-iPad-mini-koennte-deutlich-teurer-werden-11483675.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag": "2026-10-12T21:17:05+02:00",
     "reach-signale-kuratieren::signal:https://www.spiegel.de/wirtschaft/erneuerbare-energien-solarstromproduktion-uebertrifft-bereits-vorjahreswert-a-b90835bc-a613-44e1-9186-851ac443b0f2#ref=rss": "2026-10-04T16:20:48+02:00",
@@ -108,7 +109,7 @@
   },
   "letzter_lauf": {
     "kanal-konfig-drift": "2026-11-06T17:55:19+01:00",
-    "nacht-planung": "2026-11-13T09:43:02+01:00",
+    "nacht-planung": "2026-11-14T04:06:53+01:00",
     "reach-signale-kuratieren": "2026-11-09T21:39:50+01:00",
     "standby-erinnerung": "2026-10-04T23:53:19+02:00",
     "stiller-kanal": "2026-11-08T23:26:29+01:00",
@@ -161,7 +162,8 @@
     "slot:2026-11-10:03:40": "2026-11-10T04:28:17+01:00",
     "slot:2026-11-11:03:40": "2026-11-11T08:42:21+01:00",
     "slot:2026-11-12:03:40": "2026-11-12T04:46:22+01:00",
-    "slot:2026-11-13:03:40": "2026-11-13T09:43:02+01:00"
+    "slot:2026-11-13:03:40": "2026-11-13T09:43:02+01:00",
+    "slot:2026-11-14:03:40": "2026-11-14T04:06:53+01:00"
   },
   "version": 1,
   "zaehler": {
@@ -211,7 +213,8 @@
       "2026-11-10": 1,
       "2026-11-11": 1,
       "2026-11-12": 1,
-      "2026-11-13": 1
+      "2026-11-13": 1,
+      "2026-11-14": 1
     },
     "reach-signale-kuratieren": {
       "2026-10-04": 6,

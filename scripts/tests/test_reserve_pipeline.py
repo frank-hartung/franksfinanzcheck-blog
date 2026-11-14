@@ -962,6 +962,19 @@ class DeckungsWacheTests(unittest.TestCase):
         self.assertGreaterEqual(len(b["gedeckt"]), 9,
                                 "die Regeln werden aus publish_gate.py gelesen")
 
+    def test_kurzantwort_bleibt_redaktioneller_hold_statt_scheinheilung(self):
+        bericht = rhc.deckung()
+        ausnahmen = {eintrag["regel"]: eintrag["grund"] for eintrag in bericht["ausnahmen"]}
+        self.assertIn("kurzantwort_failures", ausnahmen)
+        self.assertIn("redaktionell", ausnahmen["kurzantwort_failures"])
+        self.assertNotIn("kurzantwort_failures", rhc.REGEL_HEILER)
+        # Ohne die begründete Zuständigkeit muss die Wache wieder rot sein.
+        ohne = dict(rhc.AUSNAHMEN)
+        del ohne["kurzantwort_failures"]
+        luecken = rhc.deckung(ausnahmen=ohne)["luecken"]
+        self.assertIn(("kurzantwort_failures", "keine-deckung"),
+                      {(eintrag["regel"], eintrag["art"]) for eintrag in luecken})
+
     def test_fehlender_heiler_wird_erkannt(self):
         """Der reale #349-Fall: Regel im Gate, Heiler nicht in der Kette."""
         kette = [e for e in rf.HEALER_CHAIN

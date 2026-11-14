@@ -38,7 +38,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from faktenfrische_gleis import (  # noqa: E402
-    arbeitsliste_traegt_befunde, offene_befunde)
+    arbeitsliste_traegt_befunde, eintraege_in_offen, offene_befunde)
 sys.path.insert(0, str(ROOT / 'scripts'))
 import faktenfrische  # noqa: E402
 
@@ -489,21 +489,19 @@ class Faktenfrische823MetaTests(unittest.TestCase):
     def test_faktenfrische_queue_haelt_befunde_geschlossen(self):
         """Kein OFFENER BEFUND darf die zwei Slugs wieder führen.
 
-        WARUM NUR DAS LEDGER GEMESSEN WIRD (07.11.2026, #1072; Nachzug
-        08.11.2026, #1126)
-        ------------------------------------------------
+        WARUM LEDGER UND NICHT `offen` (07.11.2026, #1072; Dauerheilung
+        10.11.2026, #1126)
+        --------------------------------------------------------------
         Frühere Fassungen lasen `queue['offen']` und hielten das für die
-        Befundliste. `offen` ist aber der ARBEITSVORRAT: Seiten, deren
-        Faktencheck fällig wird, stehen dort mit Grund und Frist – ohne jeden
-        Fachbefund. Der Test wurde damit rot, sobald eine Seite turnusgemäß
-        wieder in den Vorlauf rutschte (Fehlalarm), und er wäre grün
+        Befundliste. F4 (Fachbefund) ist aber nicht F1
+        (Faktencheck-Fälligkeit). Der Test wurde rot, sobald eine Seite
+        turnusgemäß in den Vorlauf rutschte (Fehlalarm), und er wäre grün
         geblieben, wenn ein echter Befund zurückgekehrt wäre (blinde Stelle).
-        F4 (Fachbefund) ist nicht F1 (Faktencheck-Fälligkeit).
 
-        Gemessen wird deshalb dort, wo Befunde stehen: im Ledger
-        (`data/faktenfrische_queue.json` → `fachbefunde`, gelesen über
-        `faktenfrische_befund_ledger`). Die Arbeitsliste darf die Seiten
-        führen – sie darf nur keinen Befund transportieren.
+        Seit Schema 2 ist auch die Datei eindeutig: `offen` führt nur ARBEIT,
+        der turnusgemäße Vorlauf steht in `vorlauf`. Dieser Test misst
+        deshalb dreifach – Ledger (Befund), `offen` (keine Arbeit) und
+        Arbeitsvorrat (kein Befund im Termin).
         """
         import faktenfrische_befund_ledger as ledger
         queue = ROOT / 'data' / 'faktenfrische_queue.json'
@@ -517,6 +515,9 @@ class Faktenfrische823MetaTests(unittest.TestCase):
                              f'{eintrag.get("typ")} – {eintrag.get("text")}')
         self.assertFalse(offene_befunde((SAISON, DNS)),
                          'Queue meldet offenen Befund für eine der zwei Seiten')
+        self.assertFalse(eintraege_in_offen((SAISON, DNS)),
+                         'Frisch geprüfte Seite steht als ARBEIT in `offen` '
+                         '(#1126) – sie gehört in den Vorlauf')
         self.assertFalse(arbeitsliste_traegt_befunde((SAISON, DNS)),
                          'Queue-Eintrag transportiert einen Befund')
 

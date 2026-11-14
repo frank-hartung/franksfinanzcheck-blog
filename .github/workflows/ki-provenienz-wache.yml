@@ -2,10 +2,12 @@
 # =====================================================
 # WARUM DIESER LAUF EXISTIERT
 # ---------------------------
-# Art. 50 Abs. 2 KI-VO verlangt für Bestandssysteme bis 02.12.2026 eine
-# maschinenlesbare Kennzeichnung KI-erzeugter Inhalte. Am 05.11.2026 wurde
-# dafür ein Gate eingebaut, das 78 Seiten aus `content/posts` prüfte und
-# grün war. Gemessen am 07.11.2026 am gebauten Baum lagen daneben:
+# Art. 50 Abs. 2 KI-VO betrifft die maschinenlesbare Markierung durch
+# Anbieter; Art. 111 Abs. 4 nennt für vor dem 02.08.2026 in Verkehr gebrachte
+# Bestandssysteme den 02.12.2026. Diese Wache prüft Betreiber-Signale und
+# ersetzt weder Anbieter-Nachweise noch die Rollenprüfung je System.
+# Am 05.11.2026 prüfte ein Gate nur 78 Seiten aus `content/posts` und war
+# grün. Gemessen am 07.11.2026 am gebauten Baum lagen daneben:
 #
 #   · 109 reguläre Seiten werden ausgeliefert, geprüft wurden 78. Sechs
 #     Ratgeber-Säulen (`pillar/`) tragen eine synthetische Stimme und waren
@@ -60,13 +62,32 @@ on:
       - "layouts/**"
       # Register der Erzeugungsart + Herkunfts-Nachweise je Artikel.
       - "data/ki_kennzeichnung.yaml"
+      - "data/ki_provenienz_state.json"
+      - "data/recht-fristen.yaml"
       # Sichtbare Stimme: die Aria-Texte offenbaren die maschinelle Tonspur.
       - "static/premium/ff-voice.js"
       # Messwerkzeuge selbst.
       - "scripts/ki_provenienz.py"
       - "scripts/ki_provenienz_gate.py"
+      - "scripts/ki_kennzeichnung_gate.py"
       - "scripts/ki_bild_markierung.py"
+      - "scripts/ki_cover_provenienz.py"
+      - "scripts/ki_frist_freigabe.py"
+      - "scripts/fristen_check.py"
+      - "scripts/deploy_drift_guard.py"
       - "scripts/image_optimizer.py"
+      - "scripts/social_images.py"
+      - "scripts/social_copywriter.py"
+      - "scripts/generate_pins.py"
+      - "scripts/pinterest_engine.py"
+      - "scripts/pinterest_hashtags.py"
+      - "scripts/social_studio.py"
+      - "scripts/social_gate.py"
+      - "scripts/social_channels/pinterest.py"
+      - "scripts/tests/test_ki_provenienz_auslieferung.py"
+      - "scripts/tests/test_pinterest_ki_provenienz.py"
+      - "scripts/tests/test_ki_frist_freigabe.py"
+      - ".github/workflows/fristen-check.yml"
       # Wird aufgerufen (git_sync.sh) – W1 der Trigger-Wache.
       - "scripts/git_sync.sh"
       - ".github/workflows/ki-provenienz-wache.yml"
@@ -118,7 +139,9 @@ jobs:
           label: "Prüf-Build (KI-Provenienz-Wache)"
 
       - name: KI-Provenienz – Selbsttest (Wache muss lauffähig sein)
-        run: python3 scripts/ki_provenienz_gate.py --selftest
+        run: |
+          python3 scripts/ki_provenienz_gate.py --selftest
+          python3 -m unittest scripts.tests.test_ki_provenienz_auslieferung scripts.tests.test_pinterest_ki_provenienz scripts.tests.test_ki_frist_freigabe -v
 
       # Exit-Code wird aufgehoben, nicht verschluckt: Die Heilung muss
       # committet sein, BEVOR der Lauf rot wird – sonst repariert die Wache

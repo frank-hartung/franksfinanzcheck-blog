@@ -6,7 +6,7 @@ draft: true
 tags: ["Tagesgeld und Zinsen"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
-keywords: ["Tagesgeld", "Zinsen vergleichen", "Geld sicher anlegen"]
+keywords: ["Zinsen vergleichen", "Geld sicher anlegen", "Tagesgeld und Zinsen"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
@@ -26,6 +26,8 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: be67b24b71d8bdb7fb21474a2f7d8306f5021da153031094bc20e4f5b2cb0d36
     geprueft_am: 2026-11-13
+pin_title: "Tagesgeld und Zinsen: So parkst du dein Geld sicher"
+pin_description: "*Werbung | Tagesgeld und Zinsen: So parkst du dein Geld sicher – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen… Mehr Spartipps auf FranksFinanzcheck! #zinsen #vergleichen #geld"
 ---
 
 Du hast ein paar Euro übrig, willst sie sicher parken und dabei Zinsen kassieren – doch die Angebote schwanken und die Bedingungen verstecken sich oft im Kleingedruckten. In diesem Ratgeber zeige ich dir, wie du das passende Tagesgeldkonto findest, versteckte Kosten erkennst und deine Rendite realistisch einschätzt.  

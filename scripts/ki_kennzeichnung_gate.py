@@ -19,10 +19,11 @@
 #  Aufruf:
 #    python3 scripts/ki_kennzeichnung_gate.py            # Report
 #    python3 scripts/ki_kennzeichnung_gate.py --gate     # Exit 1 bei Fund
-#    python3 scripts/ki_kennzeichnung_gate.py --fix      # heilen: ai_generated: true
+#    python3 scripts/ki_kennzeichnung_gate.py --fix      # nur belegtes K1 heilen
 #    python3 scripts/ki_kennzeichnung_gate.py --selftest
 #  Im Deploy läuft --fix; die Heilung committet der Gate-Heilungspfad.
-#  Über-Kennzeichnen ist rechtlich unschädlich, Unter-Kennzeichnen nicht.
+#  Ungeklärte Herkunft ist keine KI-Tatsachenbehauptung: K2 bleibt rot und
+#  wird von einem Menschen geklärt, nicht automatisch auf true gesetzt.
 # ============================================================
 from __future__ import annotations
 
@@ -31,28 +32,19 @@ import re
 import sys
 from pathlib import Path
 
+try:
+    from . import ki_provenienz as kp
+except ImportError:  # direkter Aufruf als Skript
+    import ki_provenienz as kp
+
 ROOT = Path(__file__).resolve().parent.parent
 POSTS = ROOT / "content" / "posts"
 REGISTER = ROOT / "data" / "ki_kennzeichnung.yaml"
 
 
 def register_lesen(pfad: Path = REGISTER) -> dict[str, set[str]]:
-    """Einfacher, abhängigkeitsfreier Leser für das Listenformat."""
-    daten: dict[str, set[str]] = {"maschinell": set(), "menschlich": set()}
-    aktuell = None
-    if not pfad.exists():
-        return daten
-    for zeile in pfad.read_text(encoding="utf-8").splitlines():
-        if not zeile.strip() or zeile.lstrip().startswith("#"):
-            continue
-        m = re.match(r"^([a-z_]+):\s*$", zeile)
-        if m:
-            aktuell = m.group(1) if m.group(1) in daten else None
-            continue
-        m = re.match(r"^\s+-\s+([A-Za-z0-9._-]+)\s*$", zeile)
-        if m and aktuell:
-            daten[aktuell].add(m.group(1))
-    return daten
+    """Derselbe strikte Leser wie die Provenienz-Wache (kein Leer-Fallback)."""
+    return kp.register_datei(pfad)
 
 
 def slug_von(pfad: Path) -> str:
@@ -134,19 +126,22 @@ def selbsttest() -> int:
         erwartet = {"bot-falsch", "ohne-feld", "maschine-als-mensch"}
         if set(funde) != erwartet:
             fehler.append(f"Funde {sorted(funde)} statt {sorted(erwartet)}")
-        for p, _ in pruefen(posts, reg):
-            heilen(p)
-        if pruefen(posts, reg):
-            fehler.append("Heilung nicht vollständig")
-        if "ai_generated: true" not in (posts / "ohne-feld" / "index.md").read_text(encoding="utf-8"):
-            fehler.append("fehlendes Feld nicht ergänzt")
+        for p, grund in pruefen(posts, reg):
+            if grund.startswith("K1 "):
+                heilen(p)
+        verbleibend = {slug_von(p) for p, _ in pruefen(posts, reg)}
+        if verbleibend != {"ohne-feld"}:
+            fehler.append(f"Heilung oder offene Herkunft falsch: {verbleibend}")
+        if "ai_generated:" in (posts / "ohne-feld" / "index.md").read_text(encoding="utf-8"):
+            fehler.append("ungeklärte Herkunft wurde zur KI-Behauptung")
         if "ai_generated: false" not in (posts / "mensch" / "index.md").read_text(encoding="utf-8"):
             fehler.append("menschlicher Artikel wurde verändert")
-    reg_echt = register_lesen()
-    if not reg_echt["maschinell"]:
-        fehler.append("Register data/ki_kennzeichnung.yaml leer oder unlesbar")
-    if reg_echt["maschinell"] & reg_echt["menschlich"]:
-        fehler.append("Register widersprüchlich: Slug zugleich maschinell und menschlich")
+    try:
+        reg_echt = register_lesen()
+        if not reg_echt["maschinell"]:
+            fehler.append("Register data/ki_kennzeichnung.yaml ohne maschinelle Einträge")
+    except kp.WerkzeugFehler as exc:
+        fehler.append(str(exc))
     for f in fehler:
         print(f"❌ {f}")
     if fehler:
@@ -164,20 +159,28 @@ def main(argv=None) -> int:
     a = ap.parse_args(argv)
     if a.selftest:
         return selbsttest()
-    funde = pruefen()
-    for p, grund in funde:
-        rel = p.relative_to(ROOT)
-        if a.fix and heilen(p):
-            print(f"::notice title=KI-Kennzeichnung geheilt::{rel}: {grund} → ai_generated: true")
-        else:
-            print(f"::error title=KI-Kennzeichnung::{rel}: {grund}")
-    if not funde:
-        print("✅ KI-Kennzeichnung: alle Artikel korrekt gekennzeichnet.")
-    if a.gate and funde:
-        return 1
-    if a.fix:
-        return 1 if pruefen() else 0
-    return 0
+    try:
+        reg = register_lesen(REGISTER)
+        funde = pruefen(POSTS, reg)
+        for p, grund in funde:
+            rel = p.relative_to(ROOT)
+            # K1 beruht auf einer positiven Register-Angabe. K2 dagegen ist
+            # nur ungeklärt: Daraus darf kein Skript eine KI-Herkunft erfinden.
+            if a.fix and grund.startswith("K1 ") and heilen(p):
+                print(f"::notice title=KI-Kennzeichnung geheilt::{rel}: {grund} → ai_generated: true")
+            else:
+                print(f"::error title=KI-Kennzeichnung::{rel}: {grund}")
+        if not funde:
+            print("✅ KI-Kennzeichnung: Registerangaben und Artikel stimmen überein; Herkunft ungeklärter Einträge separat prüfen.")
+        if a.gate and funde:
+            return 1
+        if a.fix:
+            return 1 if pruefen(POSTS, reg) else 0
+        return 0
+    except (kp.WerkzeugFehler, OSError, UnicodeError) as exc:
+        print(f"::error title=KI-Kennzeichnung nicht messbar::{exc}")
+        kp.werkzeugbefund_melden("ki_kennzeichnung", str(exc))
+        return 2
 
 
 if __name__ == "__main__":

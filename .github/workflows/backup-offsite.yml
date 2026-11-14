@@ -410,6 +410,7 @@ jobs:
       - name: Selbsttest (Export, Probe, Einrichtungsprüfung – fail-closed)
         run: |
           python3 scripts/kv_backup.py --selftest
+          python3 -m unittest scripts.tests.test_backup_einrichtung.KVExportIntegritaet
           python3 scripts/backup_einrichtung.py --selftest
 
       # WF-9E5A / #761: Statt nur „gesetzt?“ prüft jeder Punkt live, ob er

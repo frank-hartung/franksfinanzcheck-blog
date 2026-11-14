@@ -7,9 +7,11 @@
 #    a) hier unter `menschlich` steht (bewusste Entscheidung des Betreibers)
 #       ODER
 #    b) einen freigegebenen Block `redaktionelle_pruefung` hat (status:
-#       freigegeben) – dann hat ein Mensch die redaktionelle Verantwortung
-#       übernommen (Ausnahme nach Art. 50 Abs. 4 UAbs. 2).
-#  Alles andere setzt das Gate auf `ai_generated: true` („Mit KI erstellt“).
+#       freigegeben). Beide Einträge sind nur Prüfansätze: Sie beweisen
+#       weder die Herkunft noch eine tatsächliche inhaltliche Prüfung und
+#       Verantwortungsübernahme für die veröffentlichte Fassung.
+#  Ungeklärte Herkunft bleibt ein Befund für Menschen; das Gate erfindet
+#  daraus kein `ai_generated: true`. Die Wache führt offene Einträge samt Alter.
 #  Artikel unter `maschinell` dürfen NIE auf false gesetzt werden, auch nicht
 #  über `menschlich` (Lehre aus Commit 1a8a6d10, der 9 Bot-Artikel still
 #  auf false stellte).
@@ -44,9 +46,10 @@ maschinell:
 
 # Unter dem Konto des Betreibers committet (frank-hartung), Herkunft aus
 # dem Repo allein NICHT belegbar – teils lauten die Commits „optimize
-# articles …“, was auf KI-Agenten hindeutet. BITTE PRÜFEN: Hat ein Mensch
-# den Text geschrieben oder vor Veröffentlichung geprüft, bleibt der Eintrag.
-# Sonst Eintrag löschen – das Gate setzt dann ai_generated: true.
+# articles …“, was auf KI-Agenten hindeutet. BITTE PRÜFEN: Herkunft und
+# tatsächliche inhaltliche Prüfung für die veröffentlichte Fassung klären.
+# Register und Kennzeichnung erst nach belegter Entscheidung ändern; das
+# bloße Löschen eines Eintrags belegt keine KI-Herkunft oder Freigabe.
 menschlich:
   - 2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel
   - 2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit

@@ -23,8 +23,11 @@ from __future__ import annotations
 import contextlib
 import io
 import json
+import os
 import re
+import subprocess
 import sys
+import textwrap
 import unittest
 import urllib.error
 from pathlib import Path
@@ -399,6 +402,58 @@ class Verdrahtung(unittest.TestCase):
         self.assertIn("name: cloudflare-produktion", deploy_job)
         self.assertIn("secrets.CF_WORKERS_DEPLOY_TOKEN", deploy_job)
         self.assertIn('worker_zugang.py --pruefen --worker "$WORKER"', deploy_job)
+
+    def test_pruefworkflow_sperrt_vor_environment_und_nach_freigabe(self):
+        # Eine main-Prüfung innerhalb des Environment-Jobs ist zu spät:
+        # GitHub gibt Environment-Secrets bereits beim Start dieses Jobs frei.
+        policy = self.pruef.split("  production-policy:\n", 1)[1].split("\n  zugang:\n", 1)[0]
+        zugang = self.pruef.split("  zugang:\n", 1)[1]
+        kopf = policy.split("    steps:", 1)[0]
+        self.assertNotRegex(kopf, r"(?m)^    if:")  # fremder Ref muss rot werden
+        self.assertIn("actions: read", kopf)
+        self.assertNotIn("environment:", policy)
+        self.assertNotIn("secrets.", policy)
+        self.assertLess(policy.index("Nur von main prüfen (vor dem Environment)"),
+                        policy.index("actions/checkout@"))
+        self.assertIn('if [ "$REF" != "refs/heads/main" ]; then', policy)
+        self.assertIn("exit 1", policy)
+        self.assertIn("worker_environment_guard.py --selftest", policy)
+        guard = policy.split("- name: Produktions-Environment absichern (vor Zugriff auf Secrets)", 1)[1]
+        self.assertIn("run: python3 scripts/worker_environment_guard.py --check", guard)
+        self.assertIn("GITHUB_TOKEN: ${{ github.token }}", guard)
+        self.assertNotIn("continue-on-error", guard)
+        self.assertNotRegex(guard, r"(?m)^\s+if:")
+        self.assertIn("needs: production-policy", zugang)
+        self.assertIn("if: github.ref == 'refs/heads/main'", zugang)
+        self.assertIn("actions: read", zugang.split("    steps:", 1)[0])
+        vor_secret = zugang.split("secrets.CF_WORKERS_DEPLOY_TOKEN", 1)[0]
+        self.assertIn("Produktions-Environment absichern (nach Freigabe)", vor_secret)
+        self.assertIn("worker_environment_guard.py --check", vor_secret)
+        nachpruefung = vor_secret.split("- name: Produktions-Environment absichern (nach Freigabe)", 1)[1]
+        self.assertNotIn("continue-on-error", nachpruefung)
+        self.assertNotRegex(nachpruefung, r"(?m)^\s+if:")
+
+    def test_pruefworkflow_ref_gate_als_shell_ausgefuehrt(self):
+        schritt = self.pruef.split("- name: Nur von main prüfen (vor dem Environment)", 1)[1]
+        zeilen = schritt.split("        run: |\n", 1)[1].split("\n      - name:", 1)[0]
+        shell = textwrap.dedent(zeilen)
+        for ref, erwartet in (("refs/heads/main", 0), ("refs/heads/feature", 1),
+                              ("refs/tags/main", 1), ("", 1)):
+            with self.subTest(ref=ref):
+                proc = subprocess.run(["bash", "-c", shell], env=dict(os.environ, REF=ref),
+                                      capture_output=True, text=True, timeout=10)
+                self.assertEqual(proc.returncode, erwartet, proc.stdout + proc.stderr)
+
+    def test_deploy_prueft_nach_freigabe_vor_cloudflare_zugang_erneut(self):
+        deploy = self.deploy.split("  deploy:\n", 1)[1].split("\n  abschluss:\n", 1)[0]
+        self.assertIn("needs: [plan, production-policy]", deploy)
+        self.assertIn("actions: read", deploy.split("    steps:", 1)[0])
+        vor_secret = deploy.split("secrets.CF_WORKERS_DEPLOY_TOKEN", 1)[0]
+        self.assertIn("Produktions-Environment absichern (nach Freigabe)", vor_secret)
+        self.assertIn("worker_environment_guard.py --check", vor_secret)
+        nachpruefung = vor_secret.split("- name: Produktions-Environment absichern (nach Freigabe)", 1)[1]
+        self.assertNotIn("continue-on-error", nachpruefung)
+        self.assertNotRegex(nachpruefung, r"(?m)^\s+if:")
 
     def test_eigener_pruefworkflow_deployt_nicht(self):
         self.assertIn("workflow_dispatch:", self.pruef)

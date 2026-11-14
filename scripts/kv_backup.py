@@ -79,14 +79,9 @@ def _http(methode: str, url: str, token: str, koerper: dict | None = None) -> di
         with urllib.request.urlopen(anfrage, timeout=60) as antwort:
             roh = antwort.read().decode("utf-8")
     except urllib.error.HTTPError as fehler:
-        try:
-            roh = fehler.read().decode("utf-8", "replace")
-        except Exception:  # noqa: BLE001 – ein Fehler beim Fehlerlesen darf nicht werfen
-            roh = ""
-        try:
-            return json.loads(roh) if roh else {"success": False, "_status": fehler.code}
-        except ValueError:
-            return {"success": False, "_status": fehler.code, "_roh": roh[:200]}
+        # HTTP-Fehler können auch einen JSON-Körper mit success=true enthalten.
+        # Niemals einen Fehlerkörper als erfolgreichen Wert interpretieren.
+        return {"success": False, "_status": fehler.code}
     except (urllib.error.URLError, TimeoutError, OSError) as fehler:
         raise NetzwekFehler(
             "Cloudflare-API nicht erreichbar "
@@ -103,37 +98,60 @@ HTTP = _http  # im Selbsttest austauschbar
 
 
 def kv_schluessel(token: str, konto: str, ns: str) -> list[dict]:
-    alle, cursor = [], ""
+    """Alle Seiten lesen; ungültige oder zyklische Antworten sind kein Leerstand."""
+    alle, cursor, gesehen, namen = [], "", set(), set()
     while True:
         q = {"limit": "1000"}
         if cursor:
             q["cursor"] = cursor
         url = f"{API}/accounts/{konto}/storage/kv/namespaces/{ns}/keys?{urllib.parse.urlencode(q)}"
         d = HTTP("GET", url, token)
-        if not d.get("success", False):
-            raise RuntimeError(f"KV-Schlüsselliste fehlgeschlagen: {d.get('errors')}")
-        alle.extend(d.get("result") or [])
-        cursor = ((d.get("result_info") or {}).get("cursor") or "")
-        if not cursor:
+        if not isinstance(d, dict) or d.get("success") is not True:
+            raise RuntimeError("KV-Schlüsselliste fehlgeschlagen – Zugang und Cloudflare-Status prüfen")
+        seite, info = d.get("result"), d.get("result_info")
+        if not isinstance(seite, list) or (info is not None and not isinstance(info, dict)):
+            raise RuntimeError("KV-Schlüsselliste: ungültige Seite oder Paginierung")
+        for eintrag in seite:
+            if not isinstance(eintrag, dict) or not isinstance(eintrag.get("name"), str) or not eintrag["name"]:
+                raise RuntimeError("KV-Schlüsselliste: ungültiger Schlüssel")
+            name = eintrag["name"]
+            if name in namen:
+                raise RuntimeError("KV-Schlüsselliste: doppelter Schlüssel – Export nicht konsistent")
+            namen.add(name)
+            ablauf = eintrag.get("expiration")
+            if ablauf is not None and (isinstance(ablauf, bool) or not isinstance(ablauf, int) or ablauf <= 0):
+                raise RuntimeError("KV-Schlüsselliste: ungültige Ablaufzeit")
+        alle.extend(seite)
+        # Cloudflares Cursor-Pagination erlaubt auch fehlendes result_info
+        # bzw. cursor am Ende; nur ein vorhandener Cursor führt zur nächsten Seite.
+        cursor = info.get("cursor") if info is not None else None
+        if cursor is None or cursor == "":
             return alle
+        if not isinstance(cursor, str) or cursor in gesehen:
+            raise RuntimeError("KV-Schlüsselliste: ungültiger oder wiederholter Cursor")
+        gesehen.add(cursor)
 
 
 def kv_werte(token: str, konto: str, ns: str, namen: list[str]) -> dict[str, str]:
+    """Nur vollständig gelesene Textwerte sichern; fehlende Werte sind kein Erfolg.
+
+    Ein Einzellesen als Fallback ist gefährlich: Die Values-API liefert rohen
+    Text, auch JSON, und Fehlerkörper können wie Nutzdaten aussehen. Statt
+    solcher Mehrdeutigkeit bricht ein fehlgeschlagener Bulk-Aufruf ab.
+    """
     werte: dict[str, str] = {}
     for i in range(0, len(namen), 100):
         teil = namen[i:i + 100]
         url = f"{API}/accounts/{konto}/storage/kv/namespaces/{ns}/bulk/get"
-        try:
-            d = HTTP("POST", url, token, {"keys": teil, "type": "text"})
-            if not d.get("success", False):
-                raise RuntimeError(str(d.get("errors")))
-            werte.update(((d.get("result") or {}).get("values")) or {})
-        except (RuntimeError, urllib.error.HTTPError):
-            # Rueckfall: einzeln lesen (aelteres API-Verhalten)
-            for name in teil:
-                url1 = f"{API}/accounts/{konto}/storage/kv/namespaces/{ns}/values/{urllib.parse.quote(name, safe='')}"
-                d1 = HTTP("GET", url1, token)
-                werte[name] = d1.get("_roh") if "_roh" in d1 else json.dumps(d1)
+        d = HTTP("POST", url, token, {"keys": teil, "type": "text"})
+        if not isinstance(d, dict) or d.get("success") is not True:
+            raise RuntimeError("KV-Werte konnten nicht gelesen werden – Zugang und Cloudflare-Status prüfen")
+        result = d.get("result")
+        gefunden = result.get("values") if isinstance(result, dict) else None
+        if (not isinstance(gefunden, dict) or set(gefunden) != set(teil)
+                or any(not isinstance(wert, str) for wert in gefunden.values())):
+            raise RuntimeError("KV-Werte unvollständig oder ungültig – Export abgebrochen (möglicherweise zwischenzeitlich geändert)")
+        werte.update(gefunden)
     return werte
 
 
@@ -162,6 +180,8 @@ def _d1_abfrage(url: str, token: str, sql: str, zweck: str) -> list:
     seiten = d.get("result")
     if not isinstance(seiten, list) or not seiten or not isinstance(seiten[0], dict):
         raise RuntimeError(f"D1-{zweck}: Antwort ohne Ergebnisblock")
+    if seiten[0].get("success") is False:
+        raise RuntimeError(f"D1-{zweck}: Abfrage fehlgeschlagen")
     zeilen = seiten[0].get("results")
     if not isinstance(zeilen, list):
         raise RuntimeError(f"D1-{zweck}: Antwort ohne Zeilenliste")
@@ -174,7 +194,11 @@ def d1_export(token: str, konto: str, db: str) -> dict[str, list]:
                     "SELECT name FROM sqlite_master WHERE type='table' "
                     "AND name NOT LIKE 'sqlite_%' AND name NOT LIKE '_cf_%'",
                     "Tabellenliste")
-    tabellen = [r["name"] for r in d if isinstance(r, dict) and isinstance(r.get("name"), str)]
+    if any(not isinstance(r, dict) or not isinstance(r.get("name"), str) or not r["name"] for r in d):
+        raise RuntimeError("D1-Tabellenliste: ungültiger Tabellenname")
+    tabellen = [r["name"] for r in d]
+    if len(set(tabellen)) != len(tabellen):
+        raise RuntimeError("D1-Tabellenliste: doppelte Tabelle")
     if not tabellen:
         # Eine leere Datenbank hat keine Nutztabellen – das ist ein Befund,
         # kein Grund, sie stillschweigend als gesichert zu zählen.
@@ -182,9 +206,9 @@ def d1_export(token: str, konto: str, db: str) -> dict[str, list]:
                            "(falsche Datenbank?) oder Variable entfernen")
     aus = {}
     for t in tabellen:
-        if not t.replace("_", "").isalnum():
-            continue
-        aus[t] = _d1_abfrage(url, token, f'SELECT * FROM "{t}"', f'Tabelle {t}')
+        # SQLite-Identifier escapen statt Tabellen mit Sonderzeichen auszulassen.
+        identifier = t.replace('"', '""')
+        aus[t] = _d1_abfrage(url, token, f'SELECT * FROM "{identifier}"', 'Tabelle')
     return aus
 
 
@@ -418,7 +442,7 @@ def selbsttest() -> int:
             exportieren(env)
             raise AssertionError("F-E1: D1-Störung darf den Export nicht still leeren")
         except RuntimeError as e:
-            assert "Tabelle klicks" in str(e) and "7403" in str(e), str(e)
+            assert "D1-Tabelle" in str(e) and "7403" in str(e), str(e)
         schalter["d1_ausfall"] = False
 
         # ---- F-E2: leere D1-Datenbank ist ein Befund, kein grünes „0 Zeilen“.

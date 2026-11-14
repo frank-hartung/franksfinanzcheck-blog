@@ -10,6 +10,7 @@ from __future__ import annotations
 import io
 import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -42,8 +43,8 @@ class Transport:
     """Aufzeichnender Netzersatz: jeder Aufruf bleibt nachweisbar."""
 
     def __init__(self, umgebung=None, regeln=None, schreiben=200):
-        self.umgebung = LIVE_HEUTE if umgebung is None else umgebung
-        self.regeln = [] if regeln is None else regeln
+        self.umgebung = json.loads(json.dumps(LIVE_HEUTE if umgebung is None else umgebung))
+        self.regeln = json.loads(json.dumps([] if regeln is None else regeln))
         self.schreiben = schreiben
         self.rufe: list[tuple[str, str, object]] = []
 
@@ -55,6 +56,16 @@ class Transport:
                 return antwort(200, {"total_count": len(self.regeln),
                                      "branch_policies": self.regeln})
             return antwort(200, self.umgebung)
+        if self.schreiben >= 400:
+            return antwort(self.schreiben, {})
+        if methode == "PUT":
+            self.umgebung["deployment_branch_policy"] = koerper["deployment_branch_policy"]
+            self.umgebung["protection_rules"] = [
+                {"type": "required_reviewers", "reviewers": [
+                    {"type": r["type"], "reviewer": {"id": r["id"]}}
+                    for r in koerper["reviewers"]]}, {"type": "branch_policy"}]
+        elif methode == "POST":
+            self.regeln.append(dict(koerper))
         return antwort(self.schreiben, {})
 
     @property
@@ -180,7 +191,7 @@ class Endpunktgrenzen(unittest.TestCase):
 
 
 class NurVerschaerfen(unittest.TestCase):
-    def test_bestehende_reviewer_bleiben_und_der_neue_kommt_dazu(self):
+    def test_bestehende_reviewer_werden_nicht_um_neue_berechtigte_erweitert(self):
         daten = {"protection_rules": [
             {"type": "required_reviewers", "reviewers": [{"type": "User",
                                                           "reviewer": {"id": 7}}]},
@@ -189,12 +200,13 @@ class NurVerschaerfen(unittest.TestCase):
         ], "can_admins_bypass": True, "deployment_branch_policy": None}
         transport = Transport(umgebung=daten)
         lagen = einrichten.planen(daten, None)
-        einrichten.schreiben(lagen, daten, repo=REPO, token=TOKEN, reviewer_id=42,
-                             transport=transport)
-        koerper = next(k for k in transport.koerper if isinstance(k, dict)
-                       and "reviewers" in k)
-        self.assertEqual({(e["type"], e["id"]) for e in koerper["reviewers"]},
-                         {("User", 7), ("Team", 8), ("User", 42)})
+        self.assertEqual(next(l.klasse for l in lagen if l.ziel == "reviewer"),
+                         einrichten.KLASSE_ABWEICHUNG)
+        rest, schritte = einrichten.schreiben(lagen, daten, repo=REPO, token=TOKEN,
+                                             reviewer_id=42, transport=transport)
+        self.assertEqual(transport.rufe, [])
+        self.assertEqual(schritte, [])
+        self.assertEqual(rest, lagen)
 
     def test_schreiben_setzt_nie_bypass_wartezeit_oder_selbstfreigabe(self):
         transport = Transport(umgebung=LIVE_HEUTE)
@@ -233,11 +245,100 @@ class NurVerschaerfen(unittest.TestCase):
         regeln = [{"name": "main", "type": "branch"}, {"name": "release/*", "type": "branch"}]
         lagen = einrichten.planen(daten, regeln)
         lage = next(l for l in lagen if l.ziel == "branch")
-        self.assertEqual(lage.klasse, einrichten.KLASSE_MACHBAR)
+        self.assertEqual(lage.klasse, einrichten.KLASSE_ABWEICHUNG)
         transport = Transport(umgebung=daten, regeln=regeln)
         einrichten.schreiben(lagen, daten, repo=REPO, token=TOKEN, reviewer_id=42,
                              transport=transport)
-        self.assertNotIn("DELETE", [m for m, _u, _k in transport.rufe])
+        self.assertEqual(transport.rufe, [])
+
+    def test_schutz_oder_unbekannte_werte_sperren_automatisches_schreiben(self):
+        faelle = [
+            ({**LIVE_HEUTE, "can_admins_bypass": False}, None),
+            ({**LIVE_HEUTE, "can_admins_bypass": None}, None),
+            ({**LIVE_HEUTE, "protection_rules": [{"type": "wait_timer", "wait_timer": 30}]}, None),
+            ({**LIVE_HEUTE, "protection_rules": [{"type": "other_rule"}]}, None),
+            ({**LIVE_HEUTE, "protection_rules": [{"type": "required_reviewers",
+                                                   "reviewers": [{"type": "Bot", "id": 5}]}]}, None),
+            ({**LIVE_HEUTE, "deployment_branch_policy": {"protected_branches": True,
+                                                         "custom_branch_policies": False}}, None),
+            ({**LIVE_HEUTE, "deployment_branch_policy": {"protected_branches": False,
+                                                         "custom_branch_policies": True}}, []),
+            ({"can_admins_bypass": True, "deployment_branch_policy": None}, None),
+            (None, None),
+        ]
+        for daten, regeln in faelle:
+            with self.subTest(daten=daten):
+                lagen = einrichten.planen(daten, regeln)
+                self.assertFalse(any(l.klasse == einrichten.KLASSE_MACHBAR for l in lagen))
+                transport = Transport(umgebung=daten)
+                _rest, schritte = einrichten.schreiben(lagen, daten, repo=REPO, token=TOKEN,
+                                                      reviewer_id=42, transport=transport)
+                self.assertFalse(schritte)
+                self.assertFalse(transport.rufe)
+
+    def test_veraltete_vormessung_schreibt_nichts(self):
+        geaendert = {**LIVE_HEUTE, "can_admins_bypass": False}
+        transport = Transport(umgebung=geaendert)
+        with self.assertRaises(einrichten.BefundFehler):
+            einrichten.schreiben(einrichten.planen(LIVE_HEUTE, None), LIVE_HEUTE,
+                                 repo=REPO, token=TOKEN, reviewer_id=42, transport=transport)
+        self.assertEqual([m for m, _u, _k in transport.rufe], ["GET"])
+
+    def test_unbekannter_befund_und_widerspruechlicher_plan_sperren_schreiben(self):
+        basis = guard.abweichungen(LIVE_HEUTE, None)
+        with patch.object(guard, "abweichungen", return_value=basis + ["Neue, unbekannte Regel"]):
+            lagen = einrichten.planen(LIVE_HEUTE, None)
+        self.assertFalse(any(l.klasse == einrichten.KLASSE_MACHBAR for l in lagen))
+        transport = Transport()
+        widerspruch = einrichten.planen(LIVE_HEUTE, None) + [
+            einrichten.Lage("unbekannt", einrichten.KLASSE_UNBEKANNT, "?", "")]
+        with self.assertRaises(einrichten.BefundFehler):
+            einrichten.schreiben(widerspruch, LIVE_HEUTE, repo=REPO, token=TOKEN,
+                                 reviewer_id=42, transport=transport)
+        self.assertFalse(transport.rufe)
+
+    def test_ignorierter_put_stoppt_vor_dem_branch_post(self):
+        transport = Transport()
+
+        def ignoriert(methode, url, token, koerper):
+            if methode == "PUT":
+                transport.rufe.append((methode, url, koerper))
+                return antwort(200, {})
+            return transport(methode, url, token, koerper)
+
+        with self.assertRaises(einrichten.WerkzeugFehler) as ctx:
+            einrichten.schreiben(einrichten.planen(LIVE_HEUTE, None), LIVE_HEUTE,
+                                 repo=REPO, token=TOKEN, reviewer_id=42, transport=ignoriert)
+        self.assertIn("Zwischenstand", str(ctx.exception))
+        self.assertNotIn("POST", [m for m, _u, _k in transport.rufe])
+
+    def test_ignorierter_post_wird_bei_nachmessung_abgelehnt(self):
+        transport = Transport()
+
+        def ignoriert(methode, url, token, koerper):
+            if methode == "POST":
+                transport.rufe.append((methode, url, koerper))
+                return antwort(201, {})
+            return transport(methode, url, token, koerper)
+
+        with self.assertRaises(einrichten.WerkzeugFehler) as ctx:
+            einrichten.schreiben(einrichten.planen(LIVE_HEUTE, None), LIVE_HEUTE,
+                                 repo=REPO, token=TOKEN, reviewer_id=42, transport=ignoriert)
+        self.assertIn("Nachmessung", str(ctx.exception))
+        self.assertIn("POST", [m for m, _u, _k in transport.rufe])
+
+    def test_erfolgreiche_teilheilung_bleibt_wegen_bypass_offen(self):
+        transport = Transport()
+        rest, schritte = einrichten.schreiben(einrichten.planen(LIVE_HEUTE, None), LIVE_HEUTE,
+                                             repo=REPO, token=TOKEN, reviewer_id=42,
+                                             transport=transport)
+        self.assertEqual({l.ziel: l.klasse for l in rest},
+                         {"reviewer": einrichten.KLASSE_ERFUELLT,
+                          "branch": einrichten.KLASSE_ERFUELLT,
+                          "bypass": einrichten.KLASSE_OBERFLAECHE})
+        self.assertEqual(len(schritte), 2)
+        self.assertEqual([m for m, _u, _k in transport.rufe],
+                         ["GET", "PUT", "GET", "GET", "POST", "GET", "GET"])
 
 
 class RechteUndStoerung(unittest.TestCase):
@@ -249,6 +350,8 @@ class RechteUndStoerung(unittest.TestCase):
                                  transport=transport)
         text = str(ctx.exception)
         self.assertIn("Recht", text)
+        self.assertIn("Administration: write", text)
+        self.assertNotIn("Environments: read/write", text)
         self.assertIn("Inhaber", text)
         self.assertEqual(ctx.exception.exit_code, 1)
 
@@ -260,6 +363,7 @@ class RechteUndStoerung(unittest.TestCase):
             einrichten.stand(REPO, TOKEN, transport=verweigert)
         self.assertEqual(ctx.exception.exit_code, 2)
         self.assertIn("Recht", str(ctx.exception))
+        self.assertIn("Actions: read", str(ctx.exception))
 
     def test_umgebung_vorhanden_aber_unerreichbar_ist_klasse_zwei(self):
         def kaputt(methode, url, token, koerper):
@@ -269,13 +373,38 @@ class RechteUndStoerung(unittest.TestCase):
             einrichten.stand(REPO, TOKEN, transport=kaputt)
         self.assertEqual(ctx.exception.exit_code, 2)
 
-    def test_fehlendes_environment_wird_als_anlegbar_gemeldet(self):
+    def test_404_bedeutet_nicht_automatisch_anlegen(self):
         def vier(methode, url, token, koerper):
             return antwort(404, {})
 
         umgebung, regeln = einrichten.stand(REPO, TOKEN, transport=vier)
         self.assertIsNone(umgebung)
         self.assertIsNone(regeln)
+        self.assertTrue(all(l.klasse == einrichten.KLASSE_OFFEN
+                            for l in einrichten.planen(umgebung, regeln)))
+
+    def test_500_beim_schreiben_ist_unsicher_und_nennt_den_versuch(self):
+        for fehler_methode in ("PUT", "POST"):
+            with self.subTest(methode=fehler_methode):
+                transport = Transport()
+
+                def nach_schreiben_fehler(methode, url, token, koerper):
+                    # Die API kann den Zustand verändert haben, bevor sie
+                    # einen Serverfehler liefert: die Wirkung ist unbekannt.
+                    ergebnis = transport(methode, url, token, koerper)
+                    return antwort(500, {}) if methode == fehler_methode else ergebnis
+
+                with self.assertRaises(einrichten.WerkzeugFehler) as ctx:
+                    einrichten.schreiben(einrichten.planen(LIVE_HEUTE, None), LIVE_HEUTE,
+                                         repo=REPO, token=TOKEN, reviewer_id=42,
+                                         transport=nach_schreiben_fehler)
+                self.assertIn("HTTP 500", str(ctx.exception))
+                self.assertIn(fehler_methode, " ".join(ctx.exception.schritte))
+                self.assertIn("unbekannt", " ".join(ctx.exception.schritte))
+                if fehler_methode == "PUT":
+                    self.assertNotIn("POST", [m for m, _u, _k in transport.rufe])
+                else:
+                    self.assertIn("Environment-PUT", ctx.exception.schritte[0])
 
     def test_antworttexte_erscheinen_in_keiner_meldung(self):
         def body(methode, url, token, koerper):
@@ -308,6 +437,46 @@ class Geheimnisfreiheit(unittest.TestCase):
         self.assertEqual([l["klasse"] for l in daten["lagen"]],
                          [einrichten.KLASSE_MACHBAR, einrichten.KLASSE_OBERFLAECHE,
                           einrichten.KLASSE_MACHBAR])
+
+    def test_404_bei_letzter_nachmessung_meldet_nicht_belegbar_und_teilaktion(self):
+        erfuellt = einrichten.planen(SICHER, REGELN_MAIN)
+        with patch.object(einrichten, "_repo", return_value=REPO), \
+             patch.object(einrichten, "_token", return_value=TOKEN), \
+             patch.object(einrichten, "stand", side_effect=[(LIVE_HEUTE, None), (None, None)]), \
+             patch.object(einrichten, "schreiben", return_value=(erfuellt, ["Environment-PUT angenommen"])):
+            puffer = io.StringIO()
+            with patch.object(sys, "stdout", puffer):
+                code = einrichten.main(["--anwenden", "--reviewer-id", "42", "--json"])
+        self.assertEqual(code, 2)
+        daten = json.loads(puffer.getvalue())
+        self.assertIn("404", daten["fehler"])
+        self.assertEqual(daten["schritte"], ["Environment-PUT angenommen"])
+        self.assertNotIn("angelegt", daten["fehler"].replace("nicht automatisch angelegt", ""))
+
+    def test_schreibabbruch_meldet_schritte_als_text_json_und_im_bericht(self):
+        for klasse in (einrichten.WerkzeugFehler, einrichten.BefundFehler):
+            for json_ausgabe in (False, True):
+                with self.subTest(klasse=klasse.__name__, json=json_ausgabe), \
+                     tempfile.TemporaryDirectory() as tmp:
+                    pfad = Path(tmp) / "bericht.md"
+                    fehler = klasse("Abbruch", schritte=["Environment-PUT angenommen",
+                                                        "Branch-POST versucht (Wirkung unbekannt)."])
+                    with patch.object(einrichten, "_repo", return_value=REPO), \
+                         patch.object(einrichten, "_token", return_value=TOKEN), \
+                         patch.object(einrichten, "stand", return_value=(LIVE_HEUTE, None)), \
+                         patch.object(einrichten, "schreiben", side_effect=fehler):
+                        puffer = io.StringIO()
+                        argumente = ["--anwenden", "--reviewer-id", "42"]
+                        argumente += ["--json"] if json_ausgabe else ["--md", str(pfad)]
+                        with patch.object(sys, "stdout", puffer):
+                            code = einrichten.main(argumente)
+                    self.assertEqual(code, fehler.exit_code)
+                    self.assertNotIn(TOKEN, puffer.getvalue())
+                    if json_ausgabe:
+                        self.assertEqual(json.loads(puffer.getvalue())["schritte"], fehler.schritte)
+                    else:
+                        self.assertIn("Branch-POST versucht", puffer.getvalue())
+                        self.assertIn("Environment-PUT angenommen", pfad.read_text(encoding="utf-8"))
 
     def test_warnstufe_annotiert_als_warnung_statt_fehler(self):
         umgebung = {"GITHUB_KOMMANDOS": "an"}

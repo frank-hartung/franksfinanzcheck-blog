@@ -1,9 +1,13 @@
 """Vertrag des Worker-Deploys (Sicherheitsaudit 14.10.2026, M-14)."""
 from __future__ import annotations
 
+import io
+import json
 import sys
 import unittest
+import urllib.error
 from pathlib import Path
+from unittest.mock import patch
 
 try:
     import yaml
@@ -87,6 +91,14 @@ class WorkflowVertrag(unittest.TestCase):
         self.assertGreater(pos_nachweis, pos_deploy,
                            "Nach wrangler deploy muss der Live-Build-Stempel geprüft werden")
 
+    def test_922_deploy_und_nachweis_sind_eigene_obligatorische_schritte(self):
+        deploy = self.text.split("  deploy:\n", 1)[1].split("\n  abschluss:\n", 1)[0]
+        schritt = deploy.split("- name: Deploy-Nachweis\n", 1)[1]
+        self.assertLess(deploy.index("wrangler deploy --config"), deploy.index("- name: Deploy-Nachweis"))
+        self.assertIn('python3 scripts/worker_deploy_vorbereiten.py --nachweis "$WORKER"', schritt)
+        self.assertIn("set -euo pipefail", schritt)
+        self.assertNotRegex(schritt, r"(?m)^\s+(if|continue-on-error):")
+
 
 class KeinScheinGruen815(unittest.TestCase):
     """WF-E813/#815: Kein Skip-Grün; produktive Bindung statt Kopierzwang."""
@@ -139,6 +151,94 @@ class KeinScheinGruen815(unittest.TestCase):
             "newsletter-worker", holen=lambda: "alt", pausen=(0.0,), schlaf=lambda _: None)
         self.assertEqual(code_alt, 1)
         self.assertIn("fehlgeschlagen", text_alt)
+
+
+class HealthNachweis(unittest.TestCase):
+    """Ein passender Stempel auf einer kaputten /healthz-Seite ist kein Erfolg."""
+
+    class Antwort(io.BytesIO):
+        def __init__(self, body, status=200):
+            super().__init__(body)
+            self.status = status
+
+    class Opener:
+        def __init__(self, *antworten):
+            self.antworten = list(antworten)
+            self.rufe = []
+
+        def open(self, request, timeout):
+            self.rufe.append((request, timeout))
+            wert = self.antworten.pop(0)
+            if isinstance(wert, Exception):
+                raise wert
+            return wert
+
+    def antwort(self, daten, status=200):
+        return self.Antwort(json.dumps(daten).encode(), status)
+
+    def nachweis(self, opener, *, pausen=()):
+        with patch("urllib.request.build_opener", return_value=opener):
+            return wdv.deploy_nachweis("newsletter-worker", holen=wdv._hole_oeffentlichen_bau,
+                                      pausen=pausen, schlaf=lambda _: None)
+
+    def setUp(self):
+        text = (ROOT / "newsletter-worker" / "wrangler.toml").read_text(encoding="utf-8")
+        self.soll = wdv.BUILD_RE.search(wdv._toml_ohne_kommentare(text)).group(1)
+
+    def test_200_ok_true_und_stempel_beweisen_gesunden_deploy(self):
+        opener = self.Opener(self.antwort({"ok": True, "bau": self.soll}))
+        code, bericht = self.nachweis(opener)
+        self.assertEqual(code, 0, bericht)
+        request, _ = opener.rufe[0]
+        self.assertEqual(request.get_method(), "GET")
+        self.assertEqual(request.get_header("Cache-control"), "no-cache")
+
+    def test_503_und_ungesundes_200_mit_passendem_stempel_sind_nicht_gruen(self):
+        http_503 = urllib.error.HTTPError(wdv.NEWSLETTER_HEALTHZ, 503, "unavailable", {},
+                                           io.BytesIO(json.dumps({"ok": False,
+                                                                  "bau": self.soll}).encode()))
+        for antwort in (http_503, self.antwort({"ok": False, "bau": self.soll}),
+                        self.antwort({"bau": self.soll}),
+                        self.antwort({"ok": "true", "bau": self.soll}),
+                        self.antwort({"ok": True, "bau": self.soll}, status=503),
+                        self.Antwort(b"{"), self.Antwort(b"x" * 65_537)):
+            with self.subTest(antwort=repr(antwort)):
+                code, bericht = self.nachweis(self.Opener(antwort))
+                self.assertEqual(code, 1, bericht)
+                self.assertIn("fehlgeschlagen", bericht)
+
+    def test_voruebergehender_503_wird_erneut_geprueft(self):
+        http_503 = urllib.error.HTTPError(wdv.NEWSLETTER_HEALTHZ, 503, "unavailable", {},
+                                           io.BytesIO(b"{}"))
+        opener = self.Opener(http_503, self.antwort({"ok": True, "bau": self.soll}))
+        code, bericht = self.nachweis(opener, pausen=(0,))
+        self.assertEqual(code, 0, bericht)
+        self.assertEqual(len(opener.rufe), 2)
+
+    def test_abweichender_stempel_oder_unlesbare_antwort_bleibt_offen(self):
+        for antwort in (self.antwort({"ok": True, "bau": "alt"}),
+                        self.antwort({"ok": True}), self.antwort([]),
+                        self.Antwort(b"\xff"), urllib.error.URLError("GEHEIME_NETZDETAILS"),
+                        TimeoutError("GEHEIME_NETZDETAILS")):
+            with self.subTest(antwort=repr(antwort)):
+                code, bericht = self.nachweis(self.Opener(antwort))
+                self.assertEqual(code, 1, bericht)
+                self.assertIn("fehlgeschlagen", bericht)
+                self.assertNotIn("GEHEIME_NETZDETAILS", bericht)
+
+    def test_weiterleitungen_werden_nicht_verfolgt_und_503_wird_benannt(self):
+        with self.assertRaises(OSError):
+            wdv._KeineWeiterleitung().redirect_request(None, None, 302, "Found", {},
+                                                       "https://example.invalid/")
+        for status in (302, 503):
+            with self.subTest(status=status):
+                fehler = urllib.error.HTTPError(wdv.NEWSLETTER_HEALTHZ, status,
+                                                "GEHEIMER_ANTWORTTEXT", {}, io.BytesIO(b"{}"))
+                code, bericht = self.nachweis(self.Opener(fehler))
+                self.assertEqual(code, 1)
+                self.assertIn(f"HTTP {status}", bericht)
+                self.assertNotIn("GEHEIMER_ANTWORTTEXT", bericht)
+                self.assertTrue(fehler.fp.closed)
 
 
 if __name__ == "__main__":

@@ -8,9 +8,9 @@
 #  und der Lauf meldete trotzdem grün. Die Antwort darauf war ein
 #  Stellvertreter-Gate: `worker_environment_guard.py --check` liest die
 #  Schutzregeln des GitHub-Environments und bricht den Lauf rot ab, solange
-#  sie fehlen. Richtig – aber diese Regeln kann das Repository nicht selbst
-#  setzen (live gemessen: PUT → 403, `administration=write` fehlt;
-#  `can_admins_bypass` hat in REST und GraphQL keinen Schreibweg).
+#  sie fehlen. Richtig – aber der damalige Schreibversuch wurde mit HTTP 403
+#  verweigert. `can_admins_bypass` ist als REST-Schreibparameter nicht offiziell
+#  dokumentiert; dieser Einrichter setzt ihn nicht (siehe Runbook A4).
 #
 #  Die Folge war ein strukturell unmöglicher Lauf: Jeder `push` nach `main`
 #  auf einen Worker-Pfad löste EINEN Produktions-Deploy aus, der vor dem
@@ -23,9 +23,9 @@
 #        `refs/heads/main`. Auf `push`/`pull_request` läuft ausschließlich
 #        der geheimnisfreie Testjob; JEDER dort ausgeführte Deploy-Job ist
 #        ein harter Befund, kein „nicht nötig".
-#    V2  Ein geplanter Deploy darf nie still ausbleiben: Plan, Produktions-
-#        Gate und Deploy müssen `success` sein. `skipped`, `failure` und
-#        `cancelled` sind rot – mit dem Job beim Namen genannt.
+#    V2  Ein geplanter Deploy darf nie still ausbleiben: Tests aller Worker,
+#        Plan, Produktions-Gate und Deploy müssen `success` sein. `skipped`,
+#        `failure` und `cancelled` sind rot – mit dem Job beim Namen genannt.
 #
 #  Das Skript liest nur `needs.*.result` und `github`-Werte aus der
 #  Umgebung (jeder Wert kommt über `env:` aus dem Workflow, nie direkt aus
@@ -114,11 +114,9 @@ def entscheiden(umgebung: Mapping[str, str]) -> dict:
     if ereignis == EREIGNIS_DEPLOY:
         if ref != HAUPTZWEIG:
             befunde.append(f"Deploy lief auf {ref}, erlaubt ist nur {HAUPTZWEIG}.")
-        for job in ("plan", "production-policy", "deploy"):
+        for job in ("tests", "plan", "production-policy", "deploy"):
             if ergebnisse[job] != GRUEN:
                 befunde.append(f"Job `{job}` ist `{ergebnisse[job]}`, nicht `{GRUEN}`.")
-        if ergebnisse["tests"] != AUSGESETZT:
-            befunde.append(f"Testjob lief im Deploy-Lauf ({ergebnisse['tests']}).")
         titel = "Deploy-Beweis" if not befunde else "Deploy-Beweis fehlgeschlagen"
         einsatz = f"Auslieferung von {', '.join(geplant)}"
     else:
@@ -169,7 +167,7 @@ def _fall(**kwargs) -> Mapping[str, str]:
         "REF": HAUPTZWEIG,
         "GEPLANT": '["newsletter-worker"]',
         "ERGEBNIS_PLAN": GRUEN,
-        "ERGEBNIS_TESTS": AUSGESETZT,
+        "ERGEBNIS_TESTS": GRUEN,
         "ERGEBNIS_POLICY": GRUEN,
         "ERGEBNIS_DEPLOY": GRUEN,
     }
@@ -206,19 +204,20 @@ def _selftest() -> int:
     probe("12 unbekanntes Ereignis", _fall(EREIGNIS="schedule"), CODE_WERKZEUG)
     probe("13 fehlendes Ergebnis", _fall(ERGEBNIS_POLICY=""), CODE_WERKZEUG)
     probe("14 Matrix nur teilweise grün", _fall(ERGEBNIS_DEPLOY="cancelled"), CODE_ROT)
+    probe("15 Deploy ohne allgemeinen Testjob", _fall(ERGEBNIS_TESTS=AUSGESETZT), CODE_ROT)
 
     # Das Urteil muss den blockierenden Job beim Namen nennen (kein stummes Rot).
     urteil = entscheiden(_fall(ERGEBNIS_DEPLOY=AUSGESETZT))
     if not any("deploy" in text for text in urteil["befunde"]):
-        fehler.append("15 Befund nennt den übersprungenen Job nicht")
+        fehler.append("16 Befund nennt den übersprungenen Job nicht")
     if "Beweis" not in als_md(entscheiden(_fall())):
-        fehler.append("16 Zusammenfassung nennt den Beweis nicht")
+        fehler.append("17 Zusammenfassung nennt den Beweis nicht")
 
     if fehler:
         for text in fehler:
             print("❌ " + text)
         return 2
-    print(f"✅ SELBSTTEST OK — {16} Lagen geprüft: echter Deploy grün, "
+    print(f"✅ SELBSTTEST OK — {17} Lagen geprüft: echter Deploy grün, "
           "jeder Skip, jede Teillieferung und jeder Push-Deploy rot.")
     return 0
 

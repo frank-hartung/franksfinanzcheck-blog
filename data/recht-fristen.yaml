@@ -77,6 +77,7 @@ fristen:
       - "Dauerwache prüfen: ki-provenienz-wache.yml grün und ki_provenienz_gate.py --wache ohne offene Eskalation; Alter ungeklärter menschlich-Einträge in data/ki_provenienz_state.json gegen die Frist führen"
       - "Tonspur und Feed live prüfen: sichtbares KI-Siegel an der Lesehilfe (beide Themen, Kontrast via a11y_audit.py) und /index.xml mit ffki:ai-generated, ffki:ai-generated-scope und rel=describedby auf Kanal- und Item-Ebene"
       - "Ergebnis und offene Nachweise im RECHT-UPDATE-REPORT.md dokumentieren; vor Abschluss Betreiberfreigabe und Live-Prüfung durchführen"
+      - "Abschluss ausschließlich nach dokumentierter Anbieter-, Bild-, Register- und Live-Abnahme samt Betreiberfreigabe gemäß docs/KI-TRANSPARENZ-ABNAHME.md §5; kein unbedingter erledigt-Aufruf"
 
   # ------------------------------------------------------------
   # 3) EU-US Data Privacy Framework: Zertifizierung prüfen

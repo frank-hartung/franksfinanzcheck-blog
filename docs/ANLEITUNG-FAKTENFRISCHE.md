@@ -224,12 +224,33 @@ Was daran bindend ist:
 
 **Arbeitsliste ist kein Befund.** Wer wissen will, ob ein Befund offen ist,
 fragt das **Ledger** (`scripts/faktenfrische_befund_ledger.py`), nicht
-`data/faktenfrische_queue.json`: mit dem Vorlauf von 14 Tagen stehen Seiten
-dort turnusmäßig wieder, sobald ihre Frist näher rückt – mit dem Grund
-„frisch geprüft vor N Tagen“ und ohne einen offenen Befund. Genau diese
-Verwechslung machte am 07.11.2026 drei Aktentests (#763, #823, #911) rot,
-ohne dass ein Sachfehler zurückkam; sie prüfen jetzt über
-`scripts/tests/faktenfrische_gleis.py`.
+`data/faktenfrische_queue.json`. Seit **Queue-Schema 2** (10.11.2026, #1126)
+ist auch die Datei selbst eindeutig:
+
+| Feld | Inhalt |
+|---|---|
+| `offen` | **Arbeit** – fällig (`status: faellig`), offener Fachbefund (`befund`) oder abgebrochener Lauf (`unvollstaendig`) |
+| `vorlauf` | **Termin** – Frist rückt näher, aber weder fällig noch befundbehaftet („frisch geprüft vor N Tagen“) |
+| `arbeitsvorrat` | Obermenge beider (Planung/Kapazität) |
+| `fachbefunde` | Befunde – ausschließlich hier |
+
+Bis zum 10.11. war `offen` ein Alias des Arbeitsvorrats: Eine Seite stand dort
+turnusmäßig mit dem Grund „frisch geprüft vor N Tagen“, `faellig: false` und
+einer Frist in der Zukunft – ein Eintrag, der sich selbst widersprach. Genau
+diese Doppeldeutigkeit machte am 07.11.2026 drei Aktentests (#763, #823, #911)
+rot, ohne dass ein Sachfehler zurückkam, und hielt `regression` repo-weit rot
+(#1126). Jetzt gilt: `offen` führt **nur** Arbeit; `queue_invariante` prüft die
+Zerlegung vor jedem Schreiben und verweigert einen widersprüchlichen Datensatz.
+Die Aktentests prüfen über `scripts/tests/faktenfrische_gleis.py` das Ledger,
+den Vorlauf und den Arbeitsvorrat – alle drei Messhöhen.
+
+Bestehende Dateien hebt die idempotente Migration ohne Netz und ohne
+Artikeländerung:
+
+```sh
+python3 scripts/faktenfrische.py --queue-normalisieren          # Trockenlauf
+python3 scripts/faktenfrische.py --queue-normalisieren --apply  # schreiben
+```
 
 **Vertrag:** C45 verlangt die Marker `bestand_trajektorie`,
 `projektions_ausgangspunkt` und `kadenz_horizont` – wer die Heilung löscht,

@@ -67,7 +67,7 @@ class EntscheidungsTests(unittest.TestCase):
         lage = {
             "EREIGNIS": "workflow_dispatch", "REF": "refs/heads/main",
             "GEPLANT": '["newsletter-worker"]', "ERGEBNIS_PLAN": "success",
-            "ERGEBNIS_TESTS": "skipped", "ERGEBNIS_POLICY": "success",
+            "ERGEBNIS_TESTS": "success", "ERGEBNIS_POLICY": "success",
             "ERGEBNIS_DEPLOY": "success",
         }
         lage.update(kwargs)
@@ -85,7 +85,7 @@ class EntscheidungsTests(unittest.TestCase):
         self.assertIn("Kein Deploy", urteil["titel"])
 
     def test_03_jeder_skip_ist_rot_und_genannt(self):
-        for feld in ("ERGEBNIS_PLAN", "ERGEBNIS_POLICY", "ERGEBNIS_DEPLOY"):
+        for feld in ("ERGEBNIS_TESTS", "ERGEBNIS_PLAN", "ERGEBNIS_POLICY", "ERGEBNIS_DEPLOY"):
             with self.subTest(feld=feld):
                 urteil = abschluss.entscheiden(self.lage(**{feld: "skipped"}))
                 self.assertEqual(urteil["code"], 1)
@@ -137,9 +137,12 @@ class TriggerVertragTests(unittest.TestCase):
             self.assertIn("github.event_name == 'workflow_dispatch'", block,
                           f"Job {job} ist nicht auf den Zuruf begrenzt")
 
-    def test_03_testjob_nie_auf_zuruf(self):
-        self.assertIn("github.event_name != 'workflow_dispatch'",
-                      _job(self.text, "tests"))
+    def test_03_testjob_laeuft_auch_auf_zuruf_vor_dem_plan(self):
+        tests = _job(self.text, "tests")
+        self.assertNotRegex(tests.split("    steps:", 1)[0], r"(?m)^    if:")
+        self.assertNotIn("environment:", tests)
+        self.assertNotIn("secrets.", tests)
+        self.assertIn("needs: tests", _job(self.text, "plan"))
 
     def test_04_abschluss_immer_und_vollstaendig_verdrahtet(self):
         block = _job(self.text, "abschluss")

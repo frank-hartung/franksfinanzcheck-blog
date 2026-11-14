@@ -14,10 +14,10 @@
   "letzte_dauer_ms": 10932.4
  },
  "https://priv.au": {
-  "erfolge": 1,
+  "erfolge": 2,
   "fehler": 0,
-  "letzte_antwort": "2026-10-24T11:49:35.712562+02:00",
+  "letzte_antwort": "2026-11-14T14:31:59.783694+02:00",
   "letzter_fehler": "",
-  "letzte_dauer_ms": 13689.9
+  "letzte_dauer_ms": 14269.3
  }
 }

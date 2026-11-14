@@ -54,12 +54,13 @@
 #  roten Lauf samt Nachführung von #922. Acht rote Läufe seit dem 27.10.
 #  Der parallele Selbstheilungs-Workflow lief siebenmal grün, viermal
 #  davon mit ausgeführtem Live-Heiljob – ohne eine Zeile am Environment
-#  zu ändern: Ihm fehlt `administration=write` (live 403), und
-#  `can_admins_bypass` hat in REST wie GraphQL keinen Schreibweg.
+#  zu ändern: Ihm fehlt `administration=write` (live 403). Das Feld
+#  `can_admins_bypass` ist als REST-Schreibparameter nicht dokumentiert;
+#  dieses Repository hat den Schreibweg nicht verifiziert.
 #
 #  DESHALB AB JETZT:
-#    · `workflow_dispatch` → Plan, Produktions-Gate, Deploy (unverändert,
-#      inklusive des harten Stopps VOR den Cloudflare-Secrets).
+#    · `workflow_dispatch` → geheimnisfreie Tests aller Worker, Plan,
+#      Produktions-Gate, Deploy (inklusive hartem Stopp vor den Secrets).
 #    · `push` / `pull_request` → NUR der geheimnisfreie Testjob. Kein
 #      Environment, kein Secret, kein Wrangler, kein Freigabe-Versuch.
 #    · `abschluss` (immer) beweist die Trennung: Ein geplanter Deploy darf
@@ -132,12 +133,12 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Push/PR: NUR Tests. Kein Environment, kein Secret, kein Wrangler.
-  # Der Name bleibt bei „Worker-Tests", damit ein roter Test vom Fehler-
-  # Alerting als Code-Regression (Runbook-Klasse `worker-deploy`) erkannt wird.
+  # Jeder Lauf prüft alle Worker ohne Environment, Secret oder Wrangler.
+  # Auf Push/PR ist dies der einzige operative Job; beim Dispatch muss er vor
+  # dem Plan grün sein. So kann ein zuvor roter Testjob im selben belegten
+  # Deploy-Lauf wieder grün werden, ohne #922 durch einen Test-Push zu schließen.
   tests:
     name: Worker-Tests (ohne Deployment)
-    if: github.event_name != 'workflow_dispatch'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -161,6 +162,7 @@ jobs:
 
   plan:
     name: Deploy planen
+    needs: tests
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
@@ -215,6 +217,9 @@ jobs:
     if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && needs.plan.outputs.worker != '[]' && needs.plan.outputs.worker != ''
     runs-on: ubuntu-24.04
     timeout-minutes: 15
+    permissions:
+      actions: read
+      contents: read
     environment:
       name: cloudflare-produktion
     strategy:
@@ -236,6 +241,15 @@ jobs:
             echo "::error::Worker werden nur von main deployt (Ref: $REF)."
             exit 1
           fi
+
+      # Das Vorab-Gate kann älter sein als die Freigabe. Vor dem ersten
+      # Schritt mit Cloudflare-Zugang erneut prüfen; eine geänderte oder
+      # unlesbare Policy stoppt auch diesen Job fail-closed.
+      - name: Produktions-Environment absichern (nach Freigabe)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python3 scripts/worker_environment_guard.py --check
 
       - name: Node bereitstellen
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
@@ -315,6 +329,15 @@ jobs:
             *) echo "::error::Unbekannter Worker: $WORKER"; exit 1 ;;
           esac
           WRANGLER_SEND_METRICS=false tools/wrangler/node_modules/.bin/wrangler deploy --config "$VERZ/wrangler.toml"
+
+      # Ein eigener Schritt macht den Nachweis über die Actions-Jobs-API
+      # belegbar. Insbesondere darf #922 nicht allein wegen eines grünen
+      # Environment-Gates oder eines anderen Workers geschlossen werden.
+      - name: Deploy-Nachweis
+        env:
+          WORKER: ${{ matrix.worker }}
+        run: |
+          set -euo pipefail
           python3 scripts/worker_deploy_vorbereiten.py --nachweis "$WORKER"
           {
             echo "## ✅ Worker deployt: $WORKER"

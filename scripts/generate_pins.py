@@ -25,12 +25,14 @@ import os
 import re
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 
 BLOG_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 POSTS_DIR = os.path.join(BLOG_DIR, "content", "posts")
 from post_utils import list_post_paths, slug_of
 import pinterest_hashtags as ph  # Hashtag-SSOT (#729) – eine Regel, eine Quelle
+import ki_provenienz as kp  # deklarierte Zielartikel-/Cover-Angaben (#1028)
 
 BASE_URL = os.environ.get("BLOG_BASE_URL", "https://franksfinanzcheck.de")
 # UTM-Attribution (Premium 25.08.2026) – wie pinterest_engine.PIN_UTM:
@@ -55,7 +57,9 @@ def build_api_description(post):
     base = (post["description"] or post["title"]).strip().replace("&", "und")
     if not base.lstrip().startswith("*Werbung"):
         base = "*Werbung | " + base
-    desc, _ = ph.heile(base[:478])
+    base = kp.social_hinweis(base, ki_text=post.get("ki_text") is True,
+                             ki_bild=post.get("ki_bild") is True)
+    desc, _ = ph.heile(base)
     if not ph.tags_normalisiert(desc):
         desc = ph.heile(desc + HAUS_TAGS)[0]
     return desc
@@ -65,7 +69,11 @@ def load_posts():
     """Liest alle Artikel mit pinned-Flag."""
     posts = []
     for path in list_post_paths():
-        content = open(path, encoding="utf-8").read()
+        with open(path, encoding="utf-8") as datei:
+            content = datei.read()
+        # Nicht aus dem Slug oder aus Registern raten: nur ausdrückliche
+        # Frontmatter-Erklärungen weitergeben. Defekte YAML hält den Lauf an.
+        ki_text, ki_bild = kp.social_erklaerungen(kp.kopf_von(content))
         m = re.search(r"^title:\s*[\"']?(.+?)[\"']?\s*$", content, re.M)
         d = re.search(r"^description:\s*[\"']?(.+?)[\"']?\s*$", content, re.M)
         pt = re.search(r"^pin_title:\s*[\"']?(.+?)[\"']?\s*$", content, re.M)
@@ -81,6 +89,8 @@ def load_posts():
             # Vorrang; Fallback ist Artikel-Titel/Meta-Description.
             "title": (pt.group(1) if pt else (m.group(1) if m else slug)).strip()[:100],
             "description": (pd.group(1) if pd else (d.group(1) if d else "")).strip(),
+            "ki_text": ki_text,
+            "ki_bild": ki_bild,
             "cover": (c.group(1) if c else "").strip(),
             "pinned": (pinned.group(1) if pinned else "false") == "true",
             # Drafts sind nicht live → ein Pin darauf ist ein toter Link
@@ -103,8 +113,14 @@ def get_boards(token):
     return data.get("items", [])
 
 
-def create_pin(token, board_id, title, description, link, image_url):
-    """Erstellt einen Pin über die API v5."""
+def create_pin(token, board_id, post, link, image_url):
+    """Erstellt einen Pin erst nach erneuter Quell- und Payloadprüfung."""
+    kopf = kp.social_post_quelle(post)
+    kp.social_ziel_pruefen(link, post["slug"], BASE_URL)
+    kp.social_bild_pruefen(kopf, image_url, BASE_URL)
+    description = build_api_description(post)
+    kp.social_beschreibung_pruefen(description, ki_text=post["ki_text"],
+                                    ki_bild=post["ki_bild"])
     body = {
         "board_id": board_id,
         "media_source": {
@@ -114,7 +130,7 @@ def create_pin(token, board_id, title, description, link, image_url):
         },
         "description": description,
         "link": link,
-        "title": title[:100],
+        "title": post["title"][:100],
     }
     req = urllib.request.Request(
         f"{API}/pins",
@@ -223,31 +239,32 @@ def main():
         return
 
     ok = 0
+    failed = 0
     for p in run_list:
-        image = p["cover"]
-        if image.startswith("/"):
-            image = BASE_URL + image
-        elif not image.startswith("http"):
-            image = f"{BASE_URL}/images/covers/{p['slug']}.jpg"
+        image = p["cover"] or f"images/covers/{p['slug']}.jpg"
+        if not urllib.parse.urlsplit(image).scheme:
+            image = urllib.parse.urljoin(BASE_URL.rstrip("/") + "/", image.lstrip("/"))
         link = f"{BASE_URL}/posts/{p['slug']}/{PIN_UTM}"
         # Werbekennzeichnung (deutsches Recht): Artikel enthalten Affiliate-
         # Links. Die kuratierte pin_description traegt bereits *Werbung;
         # nur der Fallback bekommt den Prefix (Doppel-Prefix vermeiden).
-        desc = build_api_description(p)
         try:
-            result = create_pin(token, board_id, p["title"], desc, link, image)
+            result = create_pin(token, board_id, p, link, image)
             mark_pinned(p)
             ok += 1
             print(f"  ✅ Gepinnt: {p['title'][:55]}")
             print(f"     Pin-ID: {result.get('id', '?')}")
         except urllib.error.HTTPError as e:
+            failed += 1
             err = e.read().decode()[:200]
             print(f"  ❌ Fehler bei '{p['title'][:40]}': HTTP {e.code} – {err}")
         except Exception as e:
+            failed += 1
             print(f"  ❌ Fehler bei '{p['title'][:40]}': {e}")
 
-    print(f"\nFertig: {ok} von {len(to_pin)} Artikeln gepinnt.")
+    print(f"\nFertig: {ok} von {len(run_list)} versuchten Artikeln gepinnt, {failed} Fehler.")
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
