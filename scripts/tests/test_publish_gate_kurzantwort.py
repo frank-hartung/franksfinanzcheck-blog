@@ -72,6 +72,27 @@ class KurzantwortGateTests(unittest.TestCase):
         fehlend, _ = pg.kurzantwort_failures([])
         self.assertEqual({}, fehlend)
 
+    def test_ableitung_aus_body_ist_ziffernfrei_und_ohne_leere_klammern(self):
+        import generate_drafts as gd
+        import metadaten_wache as mw
+        body = (
+            "Wenn du deinen Stromverbrauch nachts am Zähler abliest, erkennst du "
+            "stille Dauerläufer im Haushalt sofort. Schon kleine Anpassungen an "
+            "Steckerleisten und Geräteeinstellungen entlasten deine Jahresrechnung.\n\n"
+            "**Das Wichtigste in Kürze**\n"
+            "- In der Beispielrechnung sparst du 180 € (Modellrechnung) pro Jahr.\n"
+            "- Schaltbare Steckerleisten und ein Tarifvergleich senken deine laufenden "
+            "Fixkosten dauerhaft ohne Komfortverlust.\n\n"
+            "## Überblick\n\nWeiterer Text.\n"
+        )
+        ka = gd.ableite_kurzantwort_aus_body(body, "Fallback.")
+        self.assertTrue(ka)
+        self.assertNotIn("()", ka)
+        self.assertRegex(ka, r"^[^0-9]+$")
+        self.write_post("2026-11-13-geburt-kurzantwort", kurzantwort=ka)
+        fehlend, _ = pg.kurzantwort_failures(["2026-11-13-geburt-kurzantwort"])
+        self.assertEqual({}, fehlend)
+
 
 if __name__ == "__main__":
     unittest.main()

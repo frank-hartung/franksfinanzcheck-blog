@@ -216,6 +216,38 @@ class KanalquelleTest(unittest.TestCase):
         text = (ROOT / "layouts/rss.xml").read_text(encoding="utf-8", errors="ignore")
         self.assertIn(f'xmlns:ffki="{kp.NAMESPACE}"', text)
 
+    def test_feed_credit_wird_auch_in_media_content_gefunden(self):
+        # Media RSS erlaubt `media:credit` als Kind von <item> UND innerhalb
+        # von <media:content>. Unsere Vorlage schreibt ihn nach innen, weil er
+        # dort zum konkreten Bild gehört. Ein `item.find("media:credit")`
+        # übersieht das und meldet korrekt markierte Items als fehlend –
+        # real passiert am 13.11.2026: 50 Funde, alle falsch. Der Test hält
+        # beide Schreibweisen fest, damit die Regel nicht wieder verengt.
+        import tempfile
+
+        kopf = ('<?xml version="1.0" encoding="utf-8"?><rss version="2.0" '
+                'xmlns:media="http://search.yahoo.com/mrss/"><channel>')
+        faelle = {
+            "direkt": '<item><guid>https://x.test/posts/a/</guid>'
+                      '<media:credit role="digitalsourcetype">algorithmicMedia'
+                      '</media:credit></item>',
+            "verschachtelt": '<item><guid>https://x.test/posts/b/</guid>'
+                             '<media:content url="https://x.test/c.jpg" medium="image">'
+                             '<media:credit role="digitalsourcetype">algorithmicMedia'
+                             '</media:credit></media:content></item>',
+            "ohne": '<item><guid>https://x.test/posts/c/</guid>'
+                    '<media:content url="https://x.test/d.jpg" medium="image"/>'
+                    '</item>',
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            pfad = Path(tmp) / "index.xml"
+            pfad.write_text(kopf + "".join(faelle.values()) + "</channel></rss>",
+                            encoding="utf-8")
+            items = {i["slug"]: i["media_credit"] for i in kp.feed_items(pfad)}
+        self.assertTrue(items.get("a"), "credit als item-Kind nicht erkannt")
+        self.assertTrue(items.get("b"), "credit in media:content nicht erkannt")
+        self.assertFalse(items.get("c"), "Item ohne credit wurde als belegt gezählt")
+
 
 class ErwartungTest(unittest.TestCase):
     """Was eine Seite deklarieren MUSS – und was sie nie behaupten darf."""

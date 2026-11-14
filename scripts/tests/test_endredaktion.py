@@ -488,5 +488,59 @@ class TestSpamSchutz(EndredaktionTempFall):
         self.assertNotIn("cadence_wait", self.lies(pfad))
 
 
+class TestReserveIsolationUndE9(EndredaktionTempFall):
+    """Regressionstests WF-D4E0 (#1121): Reserve-Isolation & E9 U+2011."""
+
+    def test_reserve_und_reserve_blocked_entwuerfe_bleiben_aussen_vor(self):
+        p_res = self.schreibe_post("2026-11-10-reserve-kandidat",
+                                   extra_fm="reserve: true\n")
+        p_blk = self.schreibe_post("2026-11-11-blockierter-kandidat",
+                                   extra_fm='reserve_blocked: "2026-11-11"\n')
+        p_reg = self.schreibe_post("2026-11-12-echter-redaktionsentwurf")
+        vorher_res = self.lies(p_res)
+        vorher_blk = self.lies(p_blk)
+
+        wartende = [a["slug"] for a in er.wartende_entwuerfe()]
+        self.assertEqual(wartende, ["2026-11-12-echter-redaktionsentwurf"])
+
+        er.lauf(er.lade_config())
+        self.assertEqual(self.lies(p_res), vorher_res,
+                         "endredaktion darf Reserve-Entwürfe nicht anfassen")
+        self.assertEqual(self.lies(p_blk), vorher_blk,
+                         "endredaktion darf reserve_blocked-Entwürfe nicht anfassen")
+
+    def test_e9_erkennt_geschuetzten_bindestrich_und_ergaenzt_nur_fehlenden_teil(self):
+        # 1) Mit U+2011 in „Affiliate‑Links (Werbung)“ + /go/-CTA darf E9 NICHT feuern
+        body_u2011 = (
+            guter_body(mit_link=False)
+            + "\n\n👉 [**Jetzt Stromtarife vergleichen**](/go/strom/)\n\n"
+            "*Dieser Artikel enthält Affiliate\u2011Links (Werbung). Beim "
+            "Abschluss über einen Link erhalten wir eine Provision – für dich "
+            "entstehen keine Mehrkosten.*\n"
+        )
+        p_ok = self.schreibe_post("2026-11-12-u2011-ok", body=body_u2011,
+                                  ai_generated=True)
+        art_ok = er.artikel_laden(p_ok)
+        self.assertEqual([f for f in er.pruefe_artikel(art_ok) if f["code"] == "E9"], [])
+
+        # 2) Hat der Entwurf bereits den CTA, aber noch keine Offenlegung, wird NUR
+        #    die Offenlegung ergänzt (kein zweiter CTA-Block angehängt).
+        body_nur_cta = (
+            guter_body(mit_link=False)
+            + "\n\n👉 [**Jetzt Stromtarife vergleichen**](/go/strom/)\n"
+        )
+        p_fix = self.schreibe_post("2026-11-12-nur-cta", body=body_nur_cta,
+                                   ai_generated=True)
+        art_fix = er.artikel_laden(p_fix)
+        funde_vor = [f for f in er.pruefe_artikel(art_fix) if f["code"] == "E9"]
+        self.assertEqual(len(funde_vor), 1)
+
+        er.deterministische_fixes(art_fix, funde_vor)
+        geheilt = self.lies(p_fix)
+        self.assertEqual(geheilt.count("/go/"), 1, "CTA darf nicht verdoppelt werden")
+        self.assertEqual([f for f in er.pruefe_artikel(er.artikel_laden(p_fix))
+                          if f["code"] == "E9"], [])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,5 +1,8 @@
 {
   "target": 6,
+  "ready": 11,
+  "pool_size": 12,
+  "generated_at": "2026-11-13T19:34:33Z",
   "ready": 2,
   "pool_size": 12,
   "generated_at": "2026-11-13T16:49:38Z",
@@ -7,6 +10,12 @@
     {
       "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
       "ready": true,
+      "sha256": "ff4c55ac20b3266a1b41c9ee22db6d66498d0912df2a5dcb120c986bb11ffbce",
+      "flesch": 66.7,
+      "measured_at": "2026-11-13T19:19:33Z",
+      "score": 0.974,
+      "parts": {
+        "spelling": 0.94,
       "sha256": "31f0b23aee344a7e51cf8a1cef6cf911260c5348fbedbc70acd6ef21dd48e290",
       "flesch": 67.3,
       "measured_at": "2026-11-13T16:40:57Z",
@@ -24,6 +33,10 @@
     {
       "slug": "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee",
       "ready": true,
+      "sha256": "90a1ea61374612813c3196c08ec0f2feef27b1d80ec078bddaf06f76817b7575",
+      "flesch": 60.4,
+      "measured_at": "2026-11-13T19:21:04Z",
+      "score": 0.952,
       "sha256": "219af3df662835374e87eb15f2021e5f400bde3faabdada398ff47ee1a10eefa",
       "flesch": 60.4,
       "measured_at": "2026-11-13T16:41:59Z",
@@ -32,6 +45,7 @@
         "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
+        "typography": 0.92,
         "typography": 0.94,
         "uniqueness": 1.0,
         "affiliate": 1.0,
@@ -40,6 +54,16 @@
     },
     {
       "slug": "2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
+      "ready": true,
+      "sha256": "a6b2cbc8c4fed5a5236bd9c81b0b0d0ccc1ca5a23ea82bf8207488624460a2dd",
+      "flesch": 69.9,
+      "measured_at": "2026-11-13T19:22:27Z",
+      "score": 0.978,
+      "parts": {
+        "spelling": 0.94,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
       "ready": false,
       "sha256": "cec5719ae18892fb80c81e107f1b7e1db4e9d8ce20d769de85b344bee67af7b3",
       "flesch": 60.6,
@@ -56,11 +80,16 @@
         "typography": 0.7,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 1.0
+        "readability": 0.95
       }
     },
     {
       "slug": "2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
+      "ready": true,
+      "sha256": "524b4b03665b31184405ba6b37c2ff86ef9a41b74fec63b28c33d6d041fb414d",
+      "flesch": 61.9,
+      "measured_at": "2026-11-13T19:23:46Z",
+      "score": 0.98,
       "ready": false,
       "sha256": "791dddbff89025956c0095ce94ee47579e00a707555510893decde815824fff1",
       "flesch": 62.1,
@@ -77,13 +106,18 @@
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.98,
-        "uniqueness": 0.9,
+        "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.95
       }
     },
     {
       "slug": "2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst",
+      "ready": true,
+      "sha256": "01883d9970559cbc2aca768af9ca2c3a913664c90e41d900fcb6017a751c52d9",
+      "flesch": 62.7,
+      "measured_at": "2026-11-13T19:25:03Z",
+      "score": 0.988,
       "ready": false,
       "sha256": "1aee2472756875bc67969dcaf44ea3cf2fa01b5ae5dbb8e9b6e0eb29607e073a",
       "flesch": 62.7,
@@ -96,8 +130,8 @@
       ],
       "score": 0.958,
       "parts": {
-        "spelling": 0.9,
-        "meta": 0.85,
+        "spelling": 0.94,
+        "meta": 1.0,
         "structure": 1.0,
         "typography": 1.0,
         "uniqueness": 1.0,
@@ -107,6 +141,11 @@
     },
     {
       "slug": "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
+      "ready": true,
+      "sha256": "7a14e36357722f7832e2fe3b2f1357909374c15bb3ccea4351a13fb2a6723952",
+      "flesch": 63.6,
+      "measured_at": "2026-11-13T19:26:27Z",
+      "score": 0.954,
       "ready": false,
       "sha256": "0bcbea6247ff33e6478947f160d657a359883c7429c50b94666b9498bb3b4512",
       "flesch": 63.8,
@@ -142,17 +181,22 @@
       ],
       "score": 1.0,
       "parts": {
-        "spelling": 1.0,
+        "spelling": 0.84,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 1.0,
+        "typography": 0.96,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 1.0
+        "readability": 0.95
       }
     },
     {
       "slug": "2026-11-13-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
+      "ready": true,
+      "sha256": "a8f0c0fee75ea0fa08a4f1afd89ae1a6cc4df0140e265a3395f643f249863c09",
+      "flesch": 66.0,
+      "measured_at": "2026-11-13T19:27:48Z",
+      "score": 0.938,
       "ready": false,
       "sha256": "bb128bf63198f7b52b3f6352610d1c9232adf334c6106a7f61505381d65f057b",
       "flesch": 66.4,
@@ -165,17 +209,22 @@
       ],
       "score": 0.918,
       "parts": {
-        "spelling": 0.8,
-        "meta": 0.85,
+        "spelling": 0.84,
+        "meta": 1.0,
         "structure": 1.0,
         "typography": 0.9,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.95
+        "readability": 0.9
       }
     },
     {
       "slug": "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
+      "ready": true,
+      "sha256": "5410f7f70046418f46c2e8acecc85dd3eb0d443d874b69c99e9e6d46a0a4c9dc",
+      "flesch": 61.6,
+      "measured_at": "2026-11-13T19:29:08Z",
+      "score": 0.966,
       "ready": false,
       "sha256": "f8d19d99f0860d56b74ffa944dac14ad174c76add0fe8ba129cf5b9195c52b09",
       "flesch": 60.8,
@@ -188,7 +237,7 @@
       ],
       "score": 0.962,
       "parts": {
-        "spelling": 0.88,
+        "spelling": 0.9,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.86,
@@ -199,6 +248,11 @@
     },
     {
       "slug": "2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst",
+      "ready": true,
+      "sha256": "a0734a9dc0c239daf281441f2dee25fa0f82d7b67548549f821723d0509a7aac",
+      "flesch": 62.8,
+      "measured_at": "2026-11-13T19:30:34Z",
+      "score": 0.956,
       "ready": false,
       "sha256": "b091589ebb387a2ed07f87c44cc1793461f4ecb522b0eee060fab1df09068bd5",
       "flesch": 62.9,
@@ -212,7 +266,7 @@
       "score": 0.933,
       "parts": {
         "spelling": 0.8,
-        "meta": 0.85,
+        "meta": 1.0,
         "structure": 1.0,
         "typography": 0.96,
         "uniqueness": 1.0,
@@ -221,6 +275,12 @@
       }
     },
     {
+      "slug": "2026-11-13-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste",
+      "ready": true,
+      "sha256": "20d7b2a4d68cc60821e4101faec679f6bc85183fec24c0d7a904672f92411aca",
+      "flesch": 68.3,
+      "measured_at": "2026-11-13T19:31:55Z",
+      "score": 0.982,
       "slug": "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ready": false,
       "sha256": "971666714ee9d0071f4ceadd24d9bac751c41d0b9d98c55a714984eea39cab7b",
@@ -239,15 +299,40 @@
         "spelling": 0.96,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.7,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 1.0
+        "readability": 0.95
       }
     },
     {
-      "slug": "2026-11-13-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste",
+      "slug": "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu",
+      "ready": true,
+      "sha256": "9568345cab832a4b5c16dccd022143d4020b133c0b1f6b31e2eb257a7ede37fd",
+      "flesch": 60.4,
+      "measured_at": "2026-11-13T19:33:14Z",
+      "score": 0.924,
+      "parts": {
+        "spelling": 0.92,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 1.0,
+        "uniqueness": 1.0,
+        "affiliate": 0.5,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ready": false,
+      "sha256": "67bdadcf7fcd2168e642f9e025d4fb700d52141d768227ab8f2832e9f108884a",
+      "flesch": 62.8,
+      "measured_at": "2026-11-13T19:34:33Z",
+      "reason": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
+      "details": [
+        "🛑 2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erforderten zwingend einen Smart Meter, wird ohne Angabe von Voraussetzungen, Kosten oder Verfügbarkeit präzisiert.; 77d809de9e06d1d6910d (luecke): Es wird eine Prognose für den Strompreis 2026 angegeben („Trends erkennen“, „Netzentgelte steigen“), ohne dass dafür aktuelle Marktdaten oder offizielle Prognosen genannt werden.; ad7c0a90ef52ff35130e (luecke): Der Artikel behauptet, dass Preisgarantien vor Preissteigerungen schützen, liefert jedoch keine Quelle für diese Aussage.; f227178fbda2cc59c350 (luecke): Die Aussage, dass Ökostrom‑Tarife häufig günstiger als die Grundversorgung seien, wird nicht durch eine Quelle belegt.",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
       "sha256": "e386366046e67f6f0093ae2fff783fd4642d7e4cc42775b9c685a2009abc0258",
       "flesch": 60.8,
       "measured_at": "2026-11-13T16:49:38Z",
@@ -255,19 +340,20 @@
       "details": [
         "Umfang: 805 Wörter / 5918 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
       ],
-      "score": 0.895,
+      "score": 0.954,
       "parts": {
-        "spelling": 0.96,
-        "meta": 0.85,
-        "structure": 0.7,
-        "typography": 0.8,
+        "spelling": 0.92,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.7,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.95
+        "readability": 1.0
       }
     }
   ],
   "measurement": {
+    "kind": "full"
     "kind": "partial",
     "run_id": "43464812707",
     "run_attempt": "1"

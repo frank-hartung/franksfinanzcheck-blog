@@ -390,5 +390,80 @@ class VerdrahtungTests(unittest.TestCase):
         self.assertIn("reserve-quarantine.json", guard)
 
 
+class WfD4e0QuarantaeneUndKlassenTests(unittest.TestCase):
+    """Regressionstests WF-D4E0 (#1121): Teilstring-Kollisionen, MENSCHLICH-Sitzfreigabe, Lift-Hash."""
+
+    def test_gate_befunde_keine_teilstring_falle_fuer_menschlich_holds(self):
+        import reserve_blocker_klassen as bk
+        faelle = [
+            ("Kurzantwort-Gate nicht bestanden: Kurzantwort fehlt – `kurzantwort` im Frontmatter (M4, #1110)",
+             bk.MENSCHLICH, True, False),
+            ("Einzigartigkeits-Gate U1–U2 nicht bestanden (gleiche Passage/Titel-Zwilling, #714)",
+             bk.MENSCHLICH, True, False),
+            ("Redundanz-Gate D1–D6 nicht bestanden: D2-NEAR: Fast-Duplikat",
+             bk.MENSCHLICH, True, False),
+            ("Faktenfrische nicht bestanden: 1c6e4d2f (luecke): unbelegte Prognose",
+             bk.MENSCHLICH, True, False),
+            ("Reserve-Qualitäts-Gate: Umfang: 763 Wörter / 5693 Zeichen; Premium verlangt mindestens 1.400 Wörter",
+             bk.HEILBAR, False, False),
+        ]
+        for grund, erw_klasse, erw_ausmusterbar, erw_loeschbar in faelle:
+            info = bk.gate_befund_klasse(grund)
+            self.assertEqual(info["klasse"], erw_klasse, f"{grund}: {info}")
+            self.assertEqual(bk.gate_befund_ausmusterbar(grund)[0], erw_ausmusterbar, grund)
+            self.assertEqual(bk.gate_befund_loeschbar(grund)[0], erw_loeschbar, grund)
+
+    def test_lift_to_today_aendert_datei_hash_nicht_und_menschlich_gibt_platz_frei(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            posts = Path(tmp) / "posts"
+            zustand = Path(tmp) / "q.json"
+            datei = posts / "2026-11-12-hold-kandidat" / "index.md"
+            datei.parent.mkdir(parents=True, exist_ok=True)
+            datei.write_text(
+                "---\n"
+                'title: "Hold-Kandidat"\n'
+                "date: 2026-11-12T03:00:00Z\n"
+                "draft: true\n"
+                "reserve: true\n"
+                "faktenfrische_aliases:\n"
+                '  - "2026-11-11-hold-kandidat"\n'
+                "---\n\nUnveränderter Artikelkörper.\n",
+                encoding="utf-8",
+            )
+            h1 = rq.datei_hash(datei)
+            grund = "Faktenfrische nicht bestanden: 1c6e4d2f (luecke): unbelegte Aussage"
+            rq.record([{"slug": "2026-11-12-hold-kandidat", "ready": False,
+                        "reason": grund}], zustand, posts, apply=True, run_key="run:1")
+            self.assertEqual(int(rq.load_state(zustand)["2026-11-12-hold-kandidat"]["hits"]), 1)
+
+            # Simuliere täglichen Lift (date + faktenfrische_aliases ändern sich, Prosa identisch)
+            datei.write_text(
+                "---\n"
+                'title: "Hold-Kandidat"\n'
+                "date: 2026-11-13T03:00:00Z\n"
+                "draft: true\n"
+                "reserve: true\n"
+                "faktenfrische_aliases:\n"
+                '  - "2026-11-11-hold-kandidat"\n'
+                '  - "2026-11-12-hold-kandidat"\n'
+                "---\n\nUnveränderter Artikelkörper.\n",
+                encoding="utf-8",
+            )
+            self.assertEqual(rq.datei_hash(datei), h1,
+                             "lift_to_today darf den Quarantäne-Hash nicht täglich zurücksetzen")
+
+            blocked = rq.record([{"slug": "2026-11-12-hold-kandidat", "ready": False,
+                                  "reason": grund}], zustand, posts, apply=True, run_key="run:2")
+            self.assertEqual(len(blocked), 1)
+            nachher = datei.read_text(encoding="utf-8")
+            self.assertNotIn("reserve: true", nachher)
+            self.assertIn("reserve_blocked:", nachher)
+
+            # Rückholung darf MENSCHLICH NICHT automatisch reaktivieren, Janitor darf NICHT löschen
+            pfad_c = Path(tmp) / "c.json"
+            lage = cu.bestandsaufnahme(posts, pfad=pfad_c)
+            self.assertEqual(cu.rueckholen(lage, posts), [])
+
+
 if __name__ == "__main__":
     unittest.main()

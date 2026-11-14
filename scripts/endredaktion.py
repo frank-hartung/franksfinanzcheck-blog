@@ -200,6 +200,8 @@ def artikel_laden(path: str) -> dict | None:
         "description": feld("description"),
         "ai_generated": re.search(r"(?m)^ai_generated:\s*true", fm) is not None,
         "draft": re.search(r"(?m)^draft:\s*true", fm) is not None,
+        "reserve": re.search(r"(?m)^reserve:\s*(?:true|yes|1)\s*$", fm) is not None,
+        "reserve_blocked": re.search(r"(?m)^reserve_blocked:", fm) is not None,
         "cadence_wait": re.search(r"(?m)^cadence_wait:\s*true", fm) is not None,
         "endredaktion_status": feld("endredaktion_status"),
     }
@@ -222,11 +224,21 @@ def artikel_speichern(artikel: dict) -> bool:
 
 
 def wartende_entwuerfe() -> list[dict]:
-    """Alle Posts mit draft: true (älteste zuerst – Fairness der Queue)."""
+    """Alle Posts mit draft: true außerhalb des Reserve-Pools (älteste zuerst).
+
+    WF-D4E0 (#1121): Reserve-Kandidaten (`reserve: true`) und ausgemusterte
+    Reserve-Holds (`reserve_blocked:`) gehören ausschließlich der Reserve-
+    Pipeline (`reserve_finisher` / `reserve_quarantine`). Griff die tägliche
+    Endredaktion hier hinein, hängte E9 mehrfach generische CTA-/Disclaimer-
+    Blöcke an (`R15-PHRASEN-DOPPEL`) oder konkurrierte mit `cadence_wait` gegen
+    den Vorrat.
+    """
     entwuerfe = []
     for path in post_utils.list_post_paths():
         artikel = artikel_laden(path)
-        if artikel and artikel["draft"]:
+        if (artikel and artikel["draft"]
+                and not artikel.get("reserve")
+                and not artikel.get("reserve_blocked")):
             entwuerfe.append(artikel)
     entwuerfe.sort(key=lambda a: a["slug"])
     return entwuerfe
@@ -337,8 +349,11 @@ def pruefe_artikel(artikel: dict, cfg: dict | None = None) -> list[dict]:
                           fixbar=True))
 
     # E9 – Offenlegung: KI-Artikel brauchen CTA + Werbe-Kennzeichnung
-    hat_offenlegung = ("Transparenz:" in body
-                       or "Affiliate-Links (Werbung)" in body)
+    # (auch U+2011 geschützter Bindestrich aus compound_guard / cta_builder)
+    body_hyph = body.replace("\u2011", "-")
+    hat_offenlegung = ("Transparenz:" in body_hyph
+                       or "Affiliate-Links (Werbung)" in body_hyph
+                       or "Partnerlinks" in body_hyph)
     hat_cta = ("check24" in body.lower() or "/go/" in body.lower())
     if artikel["ai_generated"] and not (hat_offenlegung and hat_cta):
         funde.append(fund("E9", "gelb",
@@ -508,10 +523,28 @@ def deterministische_fixes(artikel: dict, funde: list[dict]) -> list[str]:
             angewandt.append(f"Titel → „{neu}“")
 
     if "E9" in codes and artikel["ai_generated"]:
-        artikel["body"] = (artikel["body"].rstrip()
-                           + "\n\n" + ks.cta_block()
-                           + "\n" + ks.DISCLAIMER + "\n")
-        angewandt.append("CTA-Block + Werbe-Offenlegung angehängt")
+        body_hyph = artikel["body"].replace("\u2011", "-")
+        hat_offen = ("Transparenz:" in body_hyph
+                     or "Affiliate-Links (Werbung)" in body_hyph
+                     or "Partnerlinks" in body_hyph)
+        hat_cta = ("check24" in artikel["body"].lower()
+                   or "/go/" in artikel["body"].lower())
+        hat_disclaimer = "keine Anlage-, Rechts- oder Steuerberatung" in body_hyph
+        zusatz = []
+        if not hat_cta:
+            zusatz.append(ks.cta_block().strip())
+        elif not hat_offen:
+            zusatz.append(
+                "*Dieser Artikel enthält Affiliate-Links (Werbung). Beim "
+                "Abschluss über einen Link erhalten wir eine Provision – für "
+                "dich entstehen keine Mehrkosten.*"
+            )
+        if not hat_disclaimer:
+            zusatz.append(ks.DISCLAIMER)
+        if zusatz:
+            artikel["body"] = (artikel["body"].rstrip()
+                               + "\n\n" + "\n\n".join(zusatz) + "\n")
+            angewandt.append("CTA-Block + Werbe-Offenlegung ergänzt")
 
     if "E11" in codes:
         neu = ks.clip_text(

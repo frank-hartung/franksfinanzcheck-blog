@@ -57,7 +57,9 @@ def strip_markdown_links(text):
     out = re.sub(r"\]\((?:[^()]|\([^()]*\))*\)", "", out)
     out = out.replace("[", "").replace("]", "")
     out = re.sub(r"https?://[^\s<>\"')]+", "", out, flags=re.I)
+    out = re.sub(r"\(\s*\)", "", out)
     out = re.sub(r"[*_`#>]", "", out)
+    out = re.sub(r"\s+([.,;:!?])", r"\1", out)
     return re.sub(r"\s+", " ", out).strip()
 
 
