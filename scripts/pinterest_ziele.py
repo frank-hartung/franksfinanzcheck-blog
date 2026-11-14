@@ -603,7 +603,14 @@ def main() -> int:
     if "--selftest" in sys.argv:
         print("✅ Pinterest-Zielwache-Selbsttest ok")
         return 0
+    # AUFRUF-VERTRAG (14.11.2026, scripts/workflow_aufruf_vertrag.py):
+    # Der Workflow nennt diesen Schalter ausdrücklich; ohne diese Zeile wäre
+    # er ein stiller No-Op – der Lauf wäre richtig, der Name aber nirgends
+    # im Werkzeug und damit nicht prüfbar.
     fix = "--fix" in sys.argv
+    if "--check" in sys.argv and fix:
+        print("🛑 --check und --fix schließen sich aus – nichts verändert.")
+        return 2
     try:
         offen, geheilt = heile(BLOG_DIR, fix=fix)
     except QuellenFehler as exc:

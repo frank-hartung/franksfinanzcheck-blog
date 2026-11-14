@@ -1125,7 +1125,18 @@ def main():
               f"Index): dieser Commit kann den Hugo-Build nicht am Frontmatter "
               f"töten.")
         return 0
+    # AUFRUF-VERTRAG (14.11.2026, scripts/workflow_aufruf_vertrag.py):
+    # publication-reliability-tests.yml ruft `--check`. Das war ein stiller
+    # No-Op (die Vorgabe heilt nicht) – und damit ein Aufruf, dessen Name im
+    # Werkzeug nicht existiert. Der Prüfmodus ist jetzt ausdrücklich; ein
+    # gleichzeitiges `--fix` ist ein Widerspruch und schreibt nichts.
     fix = "--fix" in sys.argv
+    if "--check" in sys.argv and fix:
+        print("❌ FM-Grenzen: --check und --fix schließen sich aus – nichts "
+              "verändert (fail-closed).")
+        return 2
+    if "--check" in sys.argv:
+        print("FM-Grenzen: Prüfmodus ausdrücklich angefordert (--check, ohne Heilung).")
     (hart, kleber, heilungen, unheilbar, residual, geprüfte,
      (doppel_funde, doppel_heilungen)) = run(fix)
     write_report(hart, kleber, heilungen, unheilbar, residual, geprüfte,

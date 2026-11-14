@@ -797,8 +797,17 @@ def selbsttest() -> int:
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     gruppe = parser.add_mutually_exclusive_group()
-    gruppe.add_argument("--gate", action="store_true",
-                        help="Exit 1, wenn eine ausgelieferte Tonspur nicht markiert ist")
+    # `--check` ist der Name, den der Deploy-Pfad seit dem 13.11.2026 benutzt
+    # (`.github/workflows/deploy.yml`, Schritt „Tonspuren mit KI-Herkunft
+    # markieren“). Das Werkzeug kannte nur `--gate`; argparse beendet einen
+    # unbekannten Schalter mit Exit 2. Folge (belegt: Lauf 43618889770,
+    # 14.11.2026): `write=0 / check=2` → Werkzeugbefund `ki-tonspur-markierung`
+    # → Auslieferungs-Siegel an JEDEM Deploy rot, obwohl 44 von 44 Tonspuren
+    # korrekt markiert waren. Beide Namen sind jetzt derselbe Schalter; der
+    # Selbsttest prüft die Gleichheit (scripts/tests/test_ki_audio_cli.py).
+    gruppe.add_argument("--gate", "--check", dest="gate", action="store_true",
+                        help="Exit 1, wenn eine ausgelieferte Tonspur nicht markiert "
+                             "ist (Alias: --check)")
     gruppe.add_argument("--write", action="store_true", help="Markierung setzen")
     gruppe.add_argument("--entfernen", action="store_true", help="eigene Angaben entfernen")
     gruppe.add_argument("--selftest", action="store_true")

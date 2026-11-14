@@ -484,6 +484,13 @@ def main(argv=None) -> int:
     if "--installationszeile" in args:
         print(INSTALLATIONSZEILE)
         return 0
+    # AUFRUF-VERTRAG (14.11.2026, scripts/workflow_aufruf_vertrag.py):
+    # Der Workflow nennt diesen Schalter ausdrücklich; ohne diese Zeile wäre
+    # er ein stiller No-Op – der Lauf wäre richtig, der Name aber nirgends
+    # im Werkzeug und damit nicht prüfbar.
+    if "--check" in args and "--installationszeile" in args:
+        print("🛑 --check und --installationszeile schließen sich aus.")
+        return 2
     if "--audit-workflows" in args:
         befunde = audit_workflows()
         if befunde:
