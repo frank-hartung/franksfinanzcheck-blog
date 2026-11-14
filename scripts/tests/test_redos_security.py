@@ -104,6 +104,27 @@ class WacheIstScharf(unittest.TestCase):
         self.assertEqual(len(funde), 1)
         self.assertEqual(funde[0].regel, redos_guard.REGEL_SYNTAX)
 
+    def test_ausgeschlossener_cache_bringt_keine_fremdquellen_in_den_scan(self) -> None:
+        # Ein lokaler CPython-Quellbuild unter .cache brachte Tests für andere
+        # Regex-Engines (z. B. \\X) in den Repository-Scan und ließ ihn
+        # abstürzen. Cache-Code ist keine vom Repo ausgelieferte Quelle.
+        with tempfile.TemporaryDirectory() as tmp:
+            wurzel = Path(tmp)
+            (wurzel / "scripts").mkdir()
+            for nummer in range(21):
+                (wurzel / "scripts" / f"leer{nummer}.py").write_text("WERT = 1\n")
+            cache = wurzel / ".cache" / "fremd"
+            cache.mkdir(parents=True)
+            (cache / "historisch.py").write_text(_historische_quelle())
+            (cache / "kaputt.py").write_text("def halb(:\n")
+            ergebnis = subprocess.run(
+                [sys.executable, str(WACHE), "--root", str(wurzel), "--json"],
+                capture_output=True, text=True, cwd=str(ROOT), timeout=300, check=False)
+            self.assertEqual(ergebnis.returncode, 0, ergebnis.stdout + ergebnis.stderr)
+            bericht = json.loads(ergebnis.stdout)
+            self.assertEqual(bericht["funde"], [])
+            self.assertEqual(bericht["geprueft"], 21)
+
 
 class BestandIstFrei(unittest.TestCase):
     def test_repository_lauf_ist_gruen(self) -> None:

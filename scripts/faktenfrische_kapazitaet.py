@@ -87,9 +87,9 @@
 #    python3 scripts/faktenfrische_kapazitaet.py            # Klartext
 #    python3 scripts/faktenfrische_kapazitaet.py --json     # maschinell
 #    python3 scripts/faktenfrische_kapazitaet.py --wache    # Exit 1, wenn
-#                                        der Rückstand nicht fristgerecht
-#                                        abbaubar ist ODER der Spitzentag
-#                                        reißt (Workflow-Schritt)
+#                                        eine neue/Folgefrist reißt, der
+#                                        Rückstand nicht fristgerecht abgebaut
+#                                        wird ODER der Spitzentag reißt
 #    python3 scripts/faktenfrische_kapazitaet.py --budget-empfehlung
 #                                        # nur die Zahl für --max
 #    python3 scripts/faktenfrische_kapazitaet.py --stichtag 2026-11-26
@@ -102,8 +102,8 @@
 #                                        # Gegenprobe wäre ein Scheinnachweis
 #    python3 scripts/faktenfrische_kapazitaet.py --selftest # Sabotage-Proben
 #
-#  EXIT: 0 = Plan gedeckt · 1 = Rückstand nicht fristgerecht abbaubar
-#        oder Spitzentag reißt die Frist (nur mit --wache) ·
+#  EXIT: 0 = Plan gedeckt · 1 = Frist verletzt, Rückstand nicht rechtzeitig
+#        abgebaut oder Spitzentag reißt (nur mit --wache) ·
 #        2 = Werkzeugfehler oder unzulässige Messart (fail-closed)
 # ============================================================
 from __future__ import annotations
@@ -444,8 +444,19 @@ def eintraege_bauen(artikel: list[dict], cfg: dict, stichtag: dt.date) -> list[d
     eintraege = []
     for art in artikel:
         status = ff.faelligkeit(art, cfg, stichtag)
+        try:
+            prio = int(status["prio"])
+        except (KeyError, TypeError, ValueError) as exc:
+            raise ValueError(f"{art.get('slug') or '(ohne Slug)'}: Priorität der "
+                             "Fälligkeitsregel fehlt oder ist ungültig") from exc
         frist = status.get("frist")
         if frist is None:
+            if not status.get("faellig") or prio != 0:
+                # Ohne Erstrecherche und ohne Frist kann der echte Lauf die
+                # Seite nicht auswählen. Ein synthetischer Termin würde eine
+                # Prüfung erfinden und die Trajektorie zu Unrecht begrünen.
+                raise ValueError(f"{art.get('slug') or '(ohne Slug)'}: keine Frist "
+                                 "und keine fällige Erstrecherche; Deckung nicht beweisbar")
             frist = stichtag
             ziel = stichtag
         else:
@@ -455,7 +466,10 @@ def eintraege_bauen(artikel: list[dict], cfg: dict, stichtag: dt.date) -> list[d
             "titel": art.get("titel") or "",
             "bereich": art.get("bereich", "artikel"),
             "klasse": status.get("klasse") or "standard",
-            "prio": int(status.get("prio") or 9),
+            # 0 bedeutet Erstrecherche und ist die höchste Priorität. Ein
+            # ``or 9`` würde die gültige 0 verwerfen; dann sortiert die
+            # Projektion anders als der echte Lauf (edf_schluessel).
+            "prio": prio,
             "intervall": int(status.get("intervall") or 0),
             "frist": frist,
             "ziel": ziel,
@@ -513,7 +527,11 @@ def simuliere(eintraege: list[dict], budget: int, stichtag: dt.date,
                                      # benennen – nur als Zählung.
                                      "tag": tag.isoformat(),
                                      "tage_zu_spaet": (tag - e["frist"]).days,
-                                     "vorher_faellig": e["slug"] in alt_rueckstand,
+                                     # Nur die erste Runde gehört zur Altlast.
+                                     # Eine spätere Frist derselben Seite ist
+                                     # ein neuer Termin auf dem Weg des Bots.
+                                     "vorher_faellig": (e["runde"] == 0
+                                                         and e["slug"] in alt_rueckstand),
                                      "folgeprüfung": e["runde"] > 0})
                     gemeldet.add(key)
         melde_verspaetungen()
@@ -667,10 +685,17 @@ def plan(artikel: list[dict], cfg: dict, budget: int, laeufe: float,
         "verletzungen_neu": len(neu_verletzt),
         "verletzungen_folge": len(folge_verletzt),
         "verletzungen_folge_seiten": len({v["slug"] for v in folge_verletzt}),
-        "verletzungen": (alt_verletzt + neu_verletzt + folge_verletzt)[:20],
+        # Erst die neuen/folgenden Verletzungen anzeigen: Ein großer alter
+        # Rückstand darf die Ursache des roten Zukunftsplans nicht aus den
+        # auf 20 begrenzten Details verdrängen. Innerhalb der Gruppen bleibt
+        # die zeitliche Simulationsreihenfolge erhalten.
+        "verletzungen": ([v for v in lauf["verletzungen"] if not v["vorher_faellig"]]
+                         + alt_verletzt)[:20],
         "offen_im_horizont": lauf["offen_gesamt"],
         "puenktlich": not neu_verletzt and not folge_verletzt,
-        "rueckstand_abgebaut": (not alt_verletzt) or (
+        # Fällig am Stichtag ist bereits Arbeit, auch wenn sie erst morgen
+        # als Verspätung zählt. Keine Verspätungsmeldung ist kein Abbaubeleg.
+        "rueckstand_abgebaut": (not faellig) or (
             lauf["abbau_tag"] is not None
             and lauf["abbau_tag"] <= int(p["nachhol_frist_tage"])),
         # Der Weg als Datum (#1107): „rot“ ohne Tag ist eine Meinung.
@@ -1419,12 +1444,42 @@ def messe(artikel: list[dict], cfg: dict, laeufe: float, stichtag: dt.date,
     return ergebnis
 
 
+def wache_befund(ergebnis: dict) -> str | None:
+    """Ein Urteil für Klartext und JSON; das Ausgabeformat ist kein Bypass."""
+    if not ergebnis["empfehlung_erreicht"]:
+        # Die Empfehlung verlangt ZWEI Bedingungen gleichzeitig. Ein roter
+        # Plan kann den Alt-Rückstand abbauen und trotzdem neue Fristen
+        # reißen; ihn pauschal als nicht abgebaut zu melden ist falsch. Bei
+        # explizitem --budget kann der ausgewählte Plan zudem außerhalb des
+        # untersuchten Korridors liegen – seine Details gelten nur für ihn.
+        details = []
+        if not ergebnis["rueckstand_abgebaut"]:
+            details.append("Alt-Rückstand nicht fristgerecht abgebaut")
+        if not ergebnis["puenktlich"]:
+            details.append("neue oder Folgefristen verletzt")
+        ausgewahlter_plan = ("; ".join(details) if details else
+                             "Alt-Rückstand und Fristen erfüllt")
+        return ("Faktenfrische strukturell unterdeckt: Im Budgetkorridor erfüllt "
+                "kein Plan gleichzeitig Fristtreue und fristgerechten "
+                f"Rückstandsabbau. Ausgewählter Plan: {ausgewahlter_plan} (#912).")
+    if not ergebnis["puenktlich"] or not ergebnis["rueckstand_abgebaut"]:
+        return ("Der laufende Plan reißt eine Frist oder baut den Rückstand "
+                "nicht rechtzeitig ab – Kapazität erhöhen (#912).")
+    if ergebnis.get("spitze_stichtag") and not ergebnis.get("spitze_puenktlich", True):
+        return (f"Spitzentag reißt die Frist: am {ergebnis['spitze_stichtag']} "
+                f"kämen {int(ergebnis.get('spitze_offen', 0))} von "
+                f"{int(ergebnis.get('spitze_frisch', 0))} heute noch frischen Seiten "
+                "zu spät – Bündelung der Prüftermine, Takt oder Limit in "
+                "data/agent_reach/faktenfrische.yaml entscheiden (#1039).")
+    return None
+
+
 def main() -> int:
     p = argparse.ArgumentParser(
         description="Faktenfrische-Deckung: Bedarf, Angebot, Abbauplan")
     p.add_argument("--json", action="store_true", help="maschinenlesbar")
     p.add_argument("--wache", action="store_true",
-                   help="Exit 1, wenn der Rückstand nicht fristgerecht abbaubar ist")
+                   help="Exit 1 bei fehlender Fristtreue, unzureichendem Rückstandsabbau oder Spitzentag")
     p.add_argument("--budget-empfehlung", action="store_true",
                    help="nur das empfohlene Budget je Lauf ausgeben")
     p.add_argument("--budget", type=int, help="Budget je Lauf überschreiben")
@@ -1442,6 +1497,10 @@ def main() -> int:
 
     if args.selftest:
         return selftest()
+    if args.budget_empfehlung and args.wache:
+        print("🛑 --budget-empfehlung gibt nur eine Zahl aus und ersetzt keine "
+              "vollständige --wache; bitte getrennt aufrufen.", file=sys.stderr)
+        return 2
 
     try:
         cfg = ff.lade_config()
@@ -1527,9 +1586,14 @@ def main() -> int:
         print(f"🛑 Deckung nicht beweisbar: {exc}", file=sys.stderr)
         return 2
 
+    befund = wache_befund(ergebnis) if args.wache else None
     if args.json:
+        # stdout bleibt gültiges JSON; ein angefordertes Wache-Urteil wirkt
+        # trotzdem auf den Exit-Code und meldet Details separat auf stderr.
         print(json.dumps(ergebnis, ensure_ascii=False, indent=2))
-        return 0
+        if befund:
+            print(f"::error::{befund}", file=sys.stderr)
+        return 1 if befund else 0
 
     print(klartext(ergebnis, hinweise))
     if ergebnis.get("projektion", {}).get("eingefroren"):
@@ -1538,27 +1602,14 @@ def main() -> int:
     if ergebnis["empfehlung_erreicht"] and ergebnis["empfohlenes_budget"] > ergebnis["budget"]:
         print(f"\n→ Empfohlenes Budget für diesen Lauf: {ergebnis['empfohlenes_budget']} "
               f"(Sockel {ergebnis['sockel']}, Limit {ergebnis['hartes_limit']})")
-    elif not ergebnis["empfehlung_erreicht"]:
-        print(f"\n⚠️ Auch mit dem harten Limit von {ergebnis['hartes_limit']} je Lauf ist der "
-              "Rückstand nicht fristgerecht abbaubar – Kadenz oder Intervall "
-              "müssen entschieden werden (SSOT faktenfrische.yaml).")
+    elif not ergebnis["empfehlung_erreicht"] and not befund:
+        # Auch die nicht-wachende Textausgabe darf die beiden Anforderungen
+        # nicht verwechseln. Bei --wache folgt dasselbe Urteil als Fehler.
+        print(f"\n⚠️ {wache_befund(ergebnis)}")
 
-    if args.wache:
-        if not ergebnis["empfehlung_erreicht"]:
-            print("::error::Faktenfrische strukturell unterdeckt – auch das harte "
-                  "Limit baut den Rückstand nicht fristgerecht ab (#912).")
-            return 1
-        if not ergebnis["puenktlich"] or not ergebnis["rueckstand_abgebaut"]:
-            print("::error::Der laufende Plan reißt eine Frist oder baut den Rückstand "
-                  "nicht rechtzeitig ab – Kapazität erhöhen (#912).")
-            return 1
-        if ergebnis.get("spitze_stichtag") and not ergebnis.get("spitze_puenktlich", True):
-            print(f"::error::Spitzentag reißt die Frist: am {ergebnis['spitze_stichtag']} "
-                  f"kämen {int(ergebnis.get('spitze_offen', 0))} von "
-                  f"{int(ergebnis.get('spitze_frisch', 0))} heute noch frischen Seiten "
-                  f"zu spät – Bündelung der Prüftermine, Takt oder Limit in "
-                  f"data/agent_reach/faktenfrische.yaml entscheiden (#1039).")
-            return 1
+    if befund:
+        print(f"::error::{befund}")
+        return 1
     return 0
 
 

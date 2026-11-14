@@ -106,7 +106,7 @@ Nutze auch den Preis-Alarm der Portale. Du gibst deinen Wunschpreis ein. Das Por
 
 Faustregel für Frühbucher: Wer drei Monate vorher bucht, zahlt oft am wenigsten. Das gilt besonders für beliebte Ziele wie Mallorca oder Kreta. Dort sind die Autos im Sommer knapp. Wer zu spät kommt, zahlt drauf. Oder er bekommt nur noch sehr große und teure Wagen.
 
-## Häufige Fehler und wie du sie vermeidest
+## Diese Fehler kosten dich unnötig Geld – so vermeidest du sie
 
 Der größte Fehler sind die Kilometer. Viele Leute schätzen ihre Wege falsch ein. Dann kosten die extra Kilometer sehr viel Geld. Das können schnell hundert Euro sein. Vermeide das durch Planung. Schau dir deine Route vorher auf der Karte an. Nimm im Zweifel lieber das Paket mit allen Kilometern inklusive.
 

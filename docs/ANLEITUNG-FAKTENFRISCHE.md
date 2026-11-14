@@ -65,14 +65,19 @@ Am 27.10.2026 war genau das der Fall:
 Die Intervalle wurden **nicht** angefasst. Weniger messen wäre keine Heilung.
 Es wird mehr geliefert:
 
-- **`planung.vorlauf_tage` (7):** Eine Seite wird *arbeitbar*, bevor sie
-  fällig wird. Wer erst am Stichtag anfängt, arbeitet an einer roten Scorecard.
+- **`planung.vorlauf_tage`:** Eine Seite wird *arbeitbar*, bevor sie
+  fällig wird. Der aktuelle Wert steht in der SSOT (ursprünglich sieben,
+  seit 06.11.2026 14 Tage). Wer erst am Stichtag anfängt, arbeitet an einer
+  roten Scorecard.
 - **`budget.auto_skalierung`:** Der Lauf nimmt so viele Seiten, wie die
-  Deckungsrechnung für einen fristgerechten Abbau braucht – nie unter
-  `max_artikel_pro_lauf` (Sockel), nie über `hartes_limit_pro_lauf`.
+  Deckungsrechnung für fristgerechten Abbau **und** neue sowie folgende
+  Fristen braucht – nie unter `max_artikel_pro_lauf` (Sockel), nie über
+  `hartes_limit_pro_lauf`.
 - **`planung.nachhol_frist_tage` (7):** Ein Rückstand, der sich nicht binnen
-  sieben Tagen abbauen lässt, macht den Lauf rot. Das ist ein Alarm **mit
-  Schließpfad** (Governance C14) – grün, sobald der Plan konvergiert.
+  sieben Tagen abbauen lässt, macht den Lauf rot. Auch bei fristgerechtem
+  Abbau bleibt er rot, wenn eine neue oder spätere Frist verletzt wird.
+  Beides ist getrennt auszuweisen; die Wache darf das eine nicht als das
+  andere ausgeben.
 
 Die Rechnung selbst steht in `scripts/faktenfrische_kapazitaet.py`; sie liest
 ausschließlich die eine Fälligkeitsregel (`faktenfrische.faelligkeit`) und den
@@ -86,7 +91,7 @@ sonst ist es ein Dauer-Spitzenbetrieb. Reicht die Kapazität nicht, wird der
 
 ```bash
 python3 scripts/faktenfrische_kapazitaet.py            # Bedarf, Angebot, Abbauplan
-python3 scripts/faktenfrische_kapazitaet.py --wache    # Exit 1, wenn nicht abbaubar
+python3 scripts/faktenfrische_kapazitaet.py --wache    # Exit 1 bei Fristriss, fehlendem Abbau oder Spitzentag
 python3 scripts/faktenfrische_kapazitaet.py --json     # maschinenlesbar
 python3 scripts/faktenfrische_kapazitaet.py --stichtag 2026-12-31 --json
 #   → Projektion: Stichtag 2026-12-31 ab heute gerechnet (Weg des Bots),
@@ -508,6 +513,18 @@ dem 03.10.2026 nicht mehr. Der erste verfügbare Anbieter gewinnt, bei Ausfall r
 nächste nach. Ohne jeden Schlüssel läuft alles außer der Fachprüfung; die
 Belegkette wird dann deterministisch aus den belegfähigen Fundstellen gebildet.
 
+**Abgrenzung redaktionell versiegelter YMYL-Quellen:** Das jeweils letzte
+automatische Dossier ist eine austauschbare Signalsammlung, nicht die Historie
+aller früher redaktionell geprüften Quellen. Beim Saison-Entwurf ersetzte die
+Prüfung #826 die Pseudoquelle des Automaten durch drei tatsächlich geprüfte
+Belege; ihr Siegel bindet Quellen, Text und Prüfprotokoll und ist in
+`data/editorial_review_history.jsonl` dokumentiert. Der #823-Regressionstest
+prüft daher Siegel **und** zugehörigen Historieneintrag, einschließlich
+Gegenproben für veränderte URLs und fehlende Historie. Eine spätere Recherche
+mit anderen Treffern darf diese Freigabe nicht überschreiben. Das ändert nichts
+am obigen Dossier- und Allowlist-Vertrag für KI-Vorschläge und begründet keine
+neue menschliche Prüfung.
+
 > **Korrektur 02.10.2026:** Die frühere Browser-Brücke über ein geteiltes
 > Fremdkonto ist ersatzlos entfernt – sie wurde im Betrieb nie genutzt, die
 > Fachprüfung war damit dauerhaft „übersprungen".
@@ -524,11 +541,16 @@ Belegkette wird dann deterministisch aus den belegfähigen Fundstellen gebildet.
 ## Was der Leser sieht
 
 `layouts/_partials/ff_quellen_box.html` rendert am Artikelende die Box
-**„Quellen & Faktenstand“** – nummerierte Belege mit Herausgeber und Datum,
-dazu der Prüfstempel „Fakten geprüft am …“. Dieselben Daten gehen als
-`citation` in das Article-JSON-LD (`schema_article.html`), das Prüfdatum als
-`sdDatePublished`. **Eine Quelle, zwei Ausspielwege** – Sichtbares und Schema
-können nicht auseinanderlaufen.
+**„Quellen & Faktenstand“** mit nummerierten Belegen. Liegt für einen
+manuellen Nachtrag `recherchiert_am` vor, zeigt die Box dieses Datum je
+Quelle und den bisherigen allgemeinen Faktencheck getrennt. Ohne Einzelstempel
+bleibt die bisherige Anzeige des Recherchezeitpunkts erhalten.
+
+Dieselben Quellen gehen als `citation` in das Article-JSON-LD. Ein belegtes
+Quellen-Publikationsdatum `datum` wird dort als `datePublished` ausgegeben –
+nicht das Recherche- oder Faktencheckdatum. `sdDatePublished` bezeichnet laut
+[Schema.org](https://schema.org/sdDatePublished) die Veröffentlichung der
+strukturierten Daten selbst und wird ohne belegten Zeitpunkt nicht ausgegeben.
 
 Ohne `quellen:` rendert nichts. Kein leerer Kasten, kein Platzhalter.
 

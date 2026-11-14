@@ -82,7 +82,7 @@ WIEDERHOLUNG = frozenset({"MAX_REPEAT", "MIN_REPEAT"})
 # Verzeichnisse, die CodeQL selbst nicht als eigenen Quelltext analysiert.
 AUSGESCHLOSSEN = frozenset({
     ".git", "node_modules", ".venv", "venv", "__pycache__", ".mypy_cache",
-    ".pytest_cache", ".ruff_cache", "public", "resources", "build", "dist",
+    ".cache", ".pytest_cache", ".ruff_cache", "public", "resources", "build", "dist",
 })
 AUSGESCHLOSSENER_PFAD = ".claude/skills/impeccable/scripts"
 # Stichproben für Zeichenklassen. Die historische Fundstelle ist ASCII; die

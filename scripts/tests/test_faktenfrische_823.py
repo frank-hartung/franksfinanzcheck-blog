@@ -24,6 +24,7 @@ Dauerhaftigkeit heißt hier dreierlei:
 
 Kein Ersatz für eine Fachprüfung: Rückfall-Schutz, kein Wahrheitsbeweis.
 """
+import copy
 import datetime as dt
 import json
 from decimal import Decimal
@@ -41,6 +42,7 @@ from faktenfrische_gleis import (  # noqa: E402
     arbeitsliste_traegt_befunde, eintraege_in_offen, offene_befunde)
 sys.path.insert(0, str(ROOT / 'scripts'))
 import faktenfrische  # noqa: E402
+import editorial_review_gate  # noqa: E402
 
 SAISON = '2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert'
 DNS = '2026-10-16-dns-server-aendern-fuer-schnelleres-internet'
@@ -81,6 +83,36 @@ def read(slug):
 
 def raw_of(slug):
     return (resolve(slug) / 'index.md').read_text(encoding='utf-8')
+
+
+def redaktioneller_quellennachweis(fm, body, pfad, historie):
+    """Nur ein historisch belegtes, zur ganzen Fassung passendes Siegel zählt.
+
+    Der YMYL-Nachlauf #826 ersetzte die Pseudoquelle des Saison-Dossiers:
+    Signale im jeweils letzten Automatenlauf sind austauschbar, die
+    geprüften URLs stehen in der versiegelten Fassung.
+    Das Siegel bindet auch Quellen und Prüfprotokoll. Ein einzelnes Feld
+    ``status: freigegeben`` oder ein erfundener Hash genügt nicht.
+    """
+    pruefung = fm.get('redaktionelle_pruefung') or {}
+    pruefer = pruefung.get('pruefer') or {}
+    digest = pruefung.get('inhalt_sha256')
+    if (pruefung.get('risikoklasse') != 'hoch'
+            or pruefung.get('status') != 'freigegeben'
+            or not pruefer.get('name') or not pruefer.get('rolle')
+            or not fm.get('quellen') or not digest
+            or editorial_review_gate.content_fingerprint(fm, body) != digest):
+        return False
+    return any(
+        e.get('path') == pfad and e.get('sha256') == digest
+        and e.get('risk') == 'hoch'
+        and e.get('reviewer') == pruefer['name']
+        and e.get('reviewer_role') == pruefer['rolle']
+        and str(e.get('reviewed_at')) == str(pruefung.get('pruefdatum'))
+        and str(e.get('next_review')) == str(pruefung.get('naechste_pruefung'))
+        and e.get('sealed_at')
+        for e in historie
+    )
 
 
 def norm(text):
@@ -389,28 +421,51 @@ class Faktenfrische823MetaTests(unittest.TestCase):
         _, saison_body = read(SAISON)
         self.assertRegex(saison_body, r'\*\*Stand: \d{2}\.\d{2}\.\d{4}\.\*\*')
 
-    def test_quellen_bleiben_an_das_dossier_gebunden(self):
-        """Anti-Halluzinations-Parität für redaktionelle Handarbeit: Jede URL
-        im Frontmatter muss wörtlich im Recherche-Dossier des Laufs stehen."""
-        for slug in (SAISON, DNS):
-            with self.subTest(slug=slug):
-                dossier = ROOT / 'data' / 'research' / 'artikel' / f'{slug}.json'
-                if not dossier.is_file():
-                    self.skipTest(f'Dossier für {slug} nicht vorhanden')
-                urls = {t['url'] for t in json.loads(
-                    dossier.read_text(encoding='utf-8')).get('treffer', [])}
-                fm, _ = read(slug)
-                for q in fm.get('quellen') or []:
-                    self.assertIn(q['url'], urls,
-                                  f'Quelle nicht vom Dossier gedeckt: {q["url"]}')
-                # Das heise-Quellendatum muss zum Dossier passen (nicht erfunden).
-                if slug == DNS:
-                    d = json.loads(dossier.read_text(encoding='utf-8'))
-                    heise = next((t for t in d['treffer'] if 'heise.de' in t['url']), None)
-                    q2 = next((q for q in fm['quellen'] if 'heise.de' in q['url']), None)
-                    if heise and heise.get('datum') and q2 and q2.get('datum'):
-                        self.assertTrue(heise['datum'].startswith(str(q2['datum'])),
-                                        f'Quellen-Datum weicht vom Dossier ab: {q2["datum"]}')
+    def test_quellen_haben_belegte_herkunft(self):
+        """DNS-Quellen brauchen den Recherchelauf; YMYL den Review-Beleg.
+
+        #826 ersetzte beim Saison-Artikel die Pseudoquelle des Automaten durch
+        eine redaktionelle Belegkette und versiegelte diese. Ein späterer
+        automatischer Signallauf kann andere Treffer liefern; er darf weder das
+        alte Siegel überschreiben noch sich als dessen Herkunft ausgeben.
+        """
+        fm, body = read(SAISON)
+        historie = [json.loads(line) for line in
+                    (ROOT / 'data/editorial_review_history.jsonl').read_text(encoding='utf-8').splitlines()
+                    if line.strip()]
+        pfad = (resolve(SAISON) / 'index.md').relative_to(ROOT).as_posix()
+        self.assertTrue(redaktioneller_quellennachweis(fm, body, pfad, historie),
+                        'Saison-Quellen brauchen die zum Text passende, historisch belegte YMYL-Prüfung')
+
+        dossier = ROOT / 'data' / 'research' / 'artikel' / f'{DNS}.json'
+        self.assertTrue(dossier.is_file(), f'Dossier für {DNS} fehlt')
+        d = json.loads(dossier.read_text(encoding='utf-8'))
+        urls = {t['url'] for t in d.get('treffer', [])}
+        fm, _ = read(DNS)
+        for q in fm.get('quellen') or []:
+            self.assertIn(q['url'], urls, f'Quelle nicht vom Dossier gedeckt: {q["url"]}')
+        heise = next((t for t in d['treffer'] if 'heise.de' in t['url']), None)
+        q2 = next((q for q in fm['quellen'] if 'heise.de' in q['url']), None)
+        if heise and heise.get('datum') and q2 and q2.get('datum'):
+            self.assertTrue(heise['datum'].startswith(str(q2['datum'])),
+                            f'Quellen-Datum weicht vom Dossier ab: {q2["datum"]}')
+
+    def test_redaktioneller_quellennachweis_hat_gegenproben(self):
+        fm, body = read(SAISON)
+        historie = [json.loads(line) for line in
+                    (ROOT / 'data/editorial_review_history.jsonl').read_text(encoding='utf-8').splitlines()
+                    if line.strip()]
+        pfad = (resolve(SAISON) / 'index.md').relative_to(ROOT).as_posix()
+        self.assertTrue(redaktioneller_quellennachweis(fm, body, pfad, historie))
+        geaendert = copy.deepcopy(fm)
+        geaendert['quellen'][0]['url'] = 'https://www.destatis.de/nicht-die-gepruefte-quelle'
+        self.assertFalse(redaktioneller_quellennachweis(geaendert, body, pfad, historie))
+        self.assertFalse(redaktioneller_quellennachweis(fm, body + '\nNeue Aussage.', pfad, historie))
+        self.assertFalse(redaktioneller_quellennachweis(fm, body, pfad, []))
+        self.assertFalse(redaktioneller_quellennachweis(fm, body, 'andere/datei.md', historie))
+        geaendert = copy.deepcopy(fm)
+        geaendert['redaktionelle_pruefung']['status'] = 'ausstehend'
+        self.assertFalse(redaktioneller_quellennachweis(geaendert, body, pfad, historie))
 
     def test_rechenbeispiele_dns_rechnen_auf(self):
         """Die ms-Modelle im DNS-Artikel: Zellen müssen untereinander stimmen,

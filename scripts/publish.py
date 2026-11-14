@@ -60,6 +60,13 @@ def publish(path):
     if "draft: true" not in content:
         print(f"  – übersprungen (kein Entwurf): {slug_of(path)}")
         return 0
+    # Auch --all und --force-cadence dürfen eine explizite Reserve-Sperre
+    # nicht beseitigen. Erst die redaktionelle Prüfung und das bewusste
+    # Entfernen des Markers machen den Entwurf wieder freigabefähig.
+    if park_state.reserve_hold(content):
+        print(f"  ⛔ nicht veröffentlicht: {slug_of(path)} hat eine "
+              "Reserve-Sperre; redaktionelle Prüfung ausstehend")
+        return 0
     # Alias-Quellen sind strukturell nicht publizierbar. Dieser Schutz sitzt
     # vor jeder Heilung und jedem Frontmatter-Schreibzugriff, damit eine
     # manuelle Freigabe den fail-closed Deploy-Schutz nicht umgehen kann.
@@ -87,7 +94,9 @@ def publish(path):
     content = re.sub(r"(?m)^date:\s*.*$", f"date: {heute}", content, count=1)
     with open(path, "w", encoding="utf-8") as f:
         f.write(content)
-    park_state.release(path, do_fix=True)      # draft:false + cadence_* weg
+    if not park_state.release(path, do_fix=True):  # draft:false + cadence_* weg
+        print(f"  ⛔ Freigabe verweigert: {slug_of(path)}")
+        return 0
     print(f"  ✓ veröffentlicht: {slug_of(path)} (neu datiert {heute})")
     return 1
 

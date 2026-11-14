@@ -504,9 +504,17 @@ def regel_m5(bau: Path, root: Path):
         credits = item["freie_credits"] + [c for m in item["medien"] for c in m["credits"]]
         ki_credits = [c for c in credits if c["rolle"] == "digitalsourcetype"
                       or c["schema"] == kp.IPTC_VOKABULAR]
-        if seite.quellentyp and not seite.ki_bild:
-            funde.append(_fund("M5", f"{kennung}: IPTC-Erzeugungsart ohne deklariertes KI-Cover"))
-        elif seite.ki_bild and seite.quellentyp:
+        # algorithmicMedia beschreibt den deterministischen Renderer, nicht
+        # ein mit trainierten Modellen erzeugtes KI-Cover. Dieser belegte Typ
+        # ist auch ohne cover.ai_generated zulässig, muss aber ebenso exakt
+        # am tatsächlichen Feed-Bild stehen. Trainierte Typen ohne Deklaration
+        # und algorithmicMedia mit KI-Bild-Deklaration bleiben Widersprüche.
+        widerspruch = (seite.quellentyp and
+                       ((not seite.ki_bild and seite.quellentyp != "algorithmicMedia")
+                        or (seite.ki_bild and seite.quellentyp == "algorithmicMedia")))
+        if widerspruch:
+            funde.append(_fund("M5", f"{kennung}: IPTC-Erzeugungsart widerspricht der KI-Cover-Deklaration"))
+        elif seite.quellentyp:
             original = kp.pfad_wert(seite.kopf, ("cover", "image")) or ""
             bild_url = urljoin(basis, quote(original.lstrip("/"), safe="/%:@-._~"))
             bild = _feed_url_pfad(bild_url, basis)

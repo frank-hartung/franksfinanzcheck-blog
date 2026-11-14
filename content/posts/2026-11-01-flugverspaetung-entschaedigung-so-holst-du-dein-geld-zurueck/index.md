@@ -30,8 +30,19 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: b284ab6f9a980457b6a7c4cdac407766c345924d38986271e2fee0b10e4e8e4b
     geprueft_am: 2026-11-13
+quellen:
+  - id: "Q1"
+    titel: "Mein Flug war verspätet: Bekomme ich eine Entschädigung?"
+    url: "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/unterwegs-sein/mein-flug-war-verspaetet-bekomme-ich-eine-entschaedigung-27877"
+    herausgeber: "Verbraucherzentrale"
+    recherchiert_am: 2026-11-13
+  - id: "Q2"
+    titel: "FAQ zu Fluggastrechten: Alles Wichtige rund ums Thema"
+    url: "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/unterwegs-sein/faq-zu-fluggastrechten-alles-wichtige-rund-ums-thema-39125"
+    herausgeber: "Verbraucherzentrale"
+    recherchiert_am: 2026-11-13
 faktencheck: 2026-11-01
-kurzantwort: "Bei einer Flugverspätung von mindestens drei Stunden am Zielort haben Reisende nach EU-Recht Anspruch auf eine Entschädigung von bis zu 600 Euro pro Person. Um das Geld zurückzuerhalten, kann die Forderung entweder direkt bei der Airline eingereicht oder über spezialisierte Online-Dienstleister geltend gemacht werden."
+kurzantwort: "Bei mindestens drei Stunden Verspätung am Endziel kann ein Anspruch auf Ausgleich bestehen. Je nach Strecke sind grundsätzlich 250, 400 oder 600 Euro pro Person vorgesehen; Kürzungen sind möglich. Voraussetzung ist, dass die EU-Fluggastrechte anwendbar sind und keine nachgewiesene Ausnahme greift. Die Forderung kannst du zunächst direkt bei der Airline stellen."
 ---
 
 Du stehst am Flughafen. Die Urlaubsstimmung ist groß. Plötzlich ändert sich die Anzeige am Gate. Dein Flug hat Verspätung.
@@ -45,10 +56,10 @@ Diese Regeln schützen dich als Fluggast. Du kannst bei langen Wartezeiten Geld 
 Das füllt die Urlaubskasse wieder auf. Es mindert den Stress der Verspätung. Hier erfährst du alles Wichtige. Wir schauen uns an, wie du dein Recht durchsetzt.
 
 **Das Wichtigste in Kürze**
-* Anspruch auf Geld besteht oft ab drei Stunden Verspätung am Zielort; das ist ein Modellwert.
+* Ab drei Stunden Verspätung am Endziel kann ein Anspruch auf Ausgleich bestehen; Ausnahmen sind möglich.
 * Die Höhe der Zahlung richtet sich nach der Flugstrecke.
 * Du hast in Deutschland drei Jahre Zeit für die Forderung.
-* Außergewöhnliche Umstände wie Unwetter befreien die Airline von der Zahlung.
+* Nachgewiesene außergewöhnliche Umstände können die Airline von der Ausgleichszahlung befreien; Betreuung bleibt davon unabhängig.
 
 
 
@@ -63,9 +74,9 @@ Hinter diesem Begriff verbirgt sich ein [Schutzschild](../../posts/2026-10-09-vp
 
 Sogar Flüge von außerhalb in die EU zählen dazu. Voraussetzung ist hier ein Sitz der Airline in der EU.
 
-Diese Regeln heißen oft Fluggastrechte. Du legst fest, was eine Fluggesellschaft leisten muss. Das betrifft nicht nur Geld. Es geht auch um Betreuung vor Ort. 
+Diese Regeln heißen oft Fluggastrechte. Sie legen fest, was eine Fluggesellschaft leisten muss. Das betrifft nicht nur Geld. Es geht auch um Betreuung vor Ort.
 
-Stell dir vor, du wartest ewig am Flughafen. Die Airline muss dir dann Essen anbieten. Auch Getränke gehören dazu. Oft gibt es Gutscheine für den Snack-Stand.
+Stell dir vor, du wartest lange am Flughafen. Ab bestimmten, von der Flugstrecke abhängigen Wartezeiten muss die Airline Mahlzeiten und Getränke anbieten. Dafür gibt es häufig Gutscheine.
 
 Das ist die Grundversorgung. Du bist unabhängig von der späteren Entschädigung. Viele Menschen verwechseln das.
 
@@ -73,7 +84,7 @@ Ein Sandwich am Flughafen ist kein Verzicht auf Geld. Es ist eine sofortige Hilf
 
 Die Rechte greifen bei verschiedenen Problemen. Dazu gehören Annullierungen oder große Verspätungen. Auch bei Überbuchungen bist du geschützt. Die Airline darf dich nicht einfach stehen lassen.
 
-Sie muss dich ans Ziel bringen. Wenn das viel zu spät passiert, greift der [finanzielle](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) Ausgleich.
+Je nach Situation kommen Ersatzbeförderung oder Erstattung in Betracht. Bei einer erheblichen Verspätung am Endziel kann zusätzlich ein [finanzieller](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) Ausgleich entstehen.
 
 Das ist ein fester Betrag. Er soll den Zeitverlust entschädigen. Er ist kein Schadensersatz für verpasste Termine. Es ist eine pauschale Zahlung für die Unannehmlichkeit.
 
@@ -83,21 +94,17 @@ Nicht jede Minute Verspätung bringt Geld. Es gibt klare Grenzen. Die wichtigste
 
 Es zählt, wann es am Ziel ankommt. Die Tür muss offen sein.
 
- Liegt diese Zeit drei Stunden über dem Plan; das ist ein Beispielwert? Dann solltest du hellhörig werden. Ab diesem Moment rückt eine Flugverspätung Entschädigung in greifbare Nähe. 
+Liegt diese Zeit mindestens drei Stunden über dem Plan, kann ein Anspruch auf Ausgleich entstehen. Entscheidend sind zusätzlich der Anwendungsbereich der Verordnung und der Grund der Verspätung.
 
- Kurze Strecken sind Flüge bis 1.500 Kilometer; das ist ein Modellwert. Mittelstrecken gehen bis 3.500 Kilometer.
-
-Alles darüber gilt als Langstrecke. Je weiter der Flug, desto höher der mögliche Betrag.
+Die Ausgleichshöhe richtet sich nach Strecke und Reiseziel: Bei Flügen bis 1.500 Kilometer sind es grundsätzlich 250 Euro. Für längere Strecken innerhalb der EU sowie bestimmte Strecken bis 3.500 Kilometer außerhalb der EU kommen 400 Euro in Betracht, für weitere Langstrecken 600 Euro. Unter bestimmten Voraussetzungen kann die Zahlung halbiert werden.
 
 Das System ist einfach aufgebaut. Es soll fair für alle Seiten sein. Die Airline hat bei langen Flügen mehr Aufwand bei der Planung. Du hast bei langen Verspätungen auf Langstrecken mehr Frust.
 
-Ein wichtiger Punkt ist der Grund der Verspätung. Hier wird es oft knifflig. Die Airline muss schuld sein. Ein technischer Defekt am Flugzeug ist meistens ihre Schuld.
+Ein wichtiger Punkt ist der Grund der Verspätung. Gewöhnliche technische Defekte gelten grundsätzlich nicht als außergewöhnliche Umstände.
 
-Das gehört zum normalen Betrieb. Personalmangel ist ebenfalls ein Problem der Airline. Anders sieht es bei äußeren Einflüssen aus. Das sind die "außergewöhnlichen Umstände".
+Extremes Wetter oder Vulkanausbrüche können dagegen außergewöhnliche Umstände sein. Die Airline muss nachweisen, dass diese die Verspätung verursacht haben und sie trotz aller zumutbaren Maßnahmen nicht vermeiden konnte. Nur dann entfällt der Ausgleich; Betreuungsleistungen bleiben davon unberührt.
 
-Dazu gehört extremes Wetter wie Schneestürme oder Vulkanausbrüche. Auch politische Unruhen zählen dazu. In diesen Fällen muss die Airline kein Geld zahlen. Sie muss dich aber trotzdem betreuen.
-
-**Faustregel:** Wenn die Airline die Verspätung durch bessere Organisation hätte verhindern können, stehen deine Chancen auf Geld sehr gut.
+**Faustregel:** Dokumentiere den Grund und prüfe den Einzelfall. Ob zumutbare Maßnahmen die Verspätung hätten verhindern können, ist für die Ausnahme entscheidend.
 
 ## Warum lohnt sich der Aufwand?
 
@@ -111,7 +118,7 @@ Wenn du für einen Flug bezahlt hast, kaufst du eine Transportleistung. Diese Le
 
 Es ist kein Geschenk der Airline. Es ist dein vertragliches Recht.
 
-Viele Airlines hoffen darauf, dass Gäste ihre Rechte nicht kennen. Du sparst so Millionen. Wer sich wehrt, bekommt sein Geld meistens. 
+Viele Reisende kennen ihre Rechte nicht. Eine sachliche Forderung hilft dir, einen möglichen Anspruch prüfen zu lassen; der Ausgang hängt vom Einzelfall ab.
 
 Zudem ist der Prozess heute einfacher als früher. Du musst keinen Anwalt im Koffer haben. Es gibt klare Wege. Du kannst es selbst versuchen.
 
@@ -129,9 +136,9 @@ Ein weiterer Fehler ist die mangelnde Dokumentation. Verlasse dich nicht auf die
 
 Frage nach dem Grund der Verspätung. Lass dir diesen Grund schriftlich geben.
 
-Wenn die Airline später behauptet, es war das Wetter, hast du einen Beleg für den technischen Defekt. Diese Beweise sind Gold wert. Du entscheidst oft über Erfolg oder Misserfolg.
+Eine schriftliche Auskunft und deine Aufzeichnungen können helfen, eine spätere Ablehnung zu prüfen. Ob ein außergewöhnlicher Umstand vorlag, muss die Airline belegen.
 
- In Deutschland hast du drei Jahre Zeit; das ist ein Rechenbeispiel. Die Frist beginnt am Ende des Jahres, in dem die Verspätung war. Viele Menschen denken nach einem Jahr, es sei zu spät.
+In Deutschland gilt grundsätzlich die regelmäßige Verjährungsfrist von drei Jahren. Sie beginnt am Ende des Jahres, in dem der Anspruch entstanden ist. Viele Menschen denken nach einem Jahr, es sei zu spät.
 
 Das ist falsch. Du kannst auch alte Fälle prüfen.
 
@@ -151,10 +158,10 @@ Wenn du dich entscheidest, dein Geld einzufordern, brauchst du Struktur. Wildes 
 Airlines haben oft automatisierte Prozesse. Du musst in dieses Raster passen. So gehst du vor:
 
 1. **Unterlagen sammeln:** Suche deine Boardkarte und die Buchungsbestätigung raus. Ohne Buchungscode geht gar nichts. Das ist deine Identität für diesen Flug.
-2. **Verspätung prüfen:** Nutze einen Online-Rechner. Es gibt viele kostenlose Tools. Gib deine Flugnummer und das Datum ein. Das Tool sagt dir sofort, ob ein Anspruch besteht.
+2. **Verspätung prüfen:** Ein kostenloser Online-Rechner kann eine erste Einschätzung geben. Ob ein Anspruch tatsächlich besteht, hängt vom Einzelfall ab.
 3. **Airline kontaktieren:** Schreibe die Fluggesellschaft direkt an. Nutze dafür ein Musterformular. Viele Verbraucherzentralen bieten solche Vorlagen an. Fordere eine konkrete Summe.
- Zwei bis drei Wochen sind fair; das ist eine Modellannahme. Weise darauf hin, dass du bei Ablehnung weitere Schritte prüfst.
-5. **Optionen abwägen:** Wenn die Airline ablehnt oder schweigt, hast du zwei Wege. Du kannst zur Schlichtungsstelle gehen. Oder du nutzt ein Fluggast-Portal. Diese Portale behalten eine Provision, aber sie tragen das Risiko.
+4. **Frist setzen:** Zwei bis drei Wochen sind eine mögliche Frist für die Antwort. Weise darauf hin, dass du bei Ablehnung weitere Schritte prüfst.
+5. **Optionen abwägen:** Wenn die Airline ablehnt oder schweigt, prüfe eine zuständige Schlichtungsstelle oder ein Fluggast-Portal. Portale haben unterschiedliche Gebühren- und Risikomodelle; lies die Bedingungen vorab.
 
 
 
@@ -169,9 +176,9 @@ Um den Nutzen zu verstehen, hilft ein Blick auf die Zahlen. Wir nutzen hier eine
 * **Annahme 1:** Flug von Frankfurt nach Mallorca (Kurzstrecke < 1.500 km).
 * **Annahme 2:** Verspätung bei Ankunft beträgt 4 Stunden.
 * **Annahme 3:** Die Airline ist für den Fehler verantwortlich (z. B. Technik).
-* **Rechnung:** Laut EU-Regeln stehen jedem Passagier bei dieser Strecke 250 € zu (Modellwert nach Verordnung).
+* **Rechnung:** Bei erfüllten Voraussetzungen beträgt der Ausgleich auf dieser Kurzstrecke 250 € pro Person.
 * **Rechenschritt:** 4 Personen mal 250 € ergibt 1.000 € Gesamtsumme (Ergebnis der Modellrechnung).
-* **Variante mit Dienstleister:** Ein Portal behält oft 30 % Provision als Gebühr.
+* **Variante mit Dienstleister:** Für das Beispiel nehmen wir eine Provision von 30 % an; die tatsächlichen Gebühren variieren.
 * **Rechenprobe:** 1.000 € minus 300 € Gebühr (30 %) ergibt 700 € Auszahlung (Ergebnis der Modellrechnung).
 
 In diesem Beispiel bekommt die Familie 700 € oder 1.000 € zurück. Das ist ein erheblicher Betrag für die Haushaltskasse.
@@ -180,17 +187,13 @@ Es deckt vielleicht die Kosten für den Mietwagen oder mehrere Restaurantbesuche
 
 ## Was kostet dich die Durchsetzung?
 
- Du behältst 100 % der Summe; das ist ein Modellwert.
+Wenn du die Forderung selbst durchsetzt, fällt keine Portalprovision an; mögliche sonstige Kosten solltest du gesondert prüfen.
 
 Aber Airlines sind manchmal stur. Du schickst Standard‑Absagen. Hier brauchst du einen langen Atem. Wer keine Lust auf Papierkrieg hat, zahlt mit einem Teil der Entschädigung. 
 
- Die Provision liegt meist zwischen 20 % und 35 %; das ist ein Beispielwert. Das klingt viel.
+Die Provision und mögliche Zusatzkosten hängen vom Dienstleister und Vertrag ab. Manche Portale kaufen Forderungen auf, andere vermitteln die Durchsetzung. Vergleiche vorher, ob Kosten auch bei Misserfolg entstehen können. Eine Auszahlung ist nicht garantiert.
 
-Aber dafür hast du keine Arbeit. Die Portale haben Anwälte und Datenbanken. Sie wissen genau, wie das Wetter an jedem Tag überall war. Du kannst Lügen der Airlines schnell entlarven. 
-
-Für viele Haushalte ist das ein fairer Deal. Man gibt einen Teil ab, um den Rest sicher zu bekommen. Es ist eine Risiko-Abwägung.
-
-Wenn du sicher bist, dass die Airline zahlt, mach es selbst. Wenn du Widerstand spürst, ist ein Profi oft die bessere Wahl. So sicherst du dir dein Geld, ohne selbst zum Rechtsexperten zu werden. Es ist eine Frage der Prioritäten in deinem Fixkosten-Cockpit.
+Du kannst zunächst selbst an die Airline schreiben. Bei einer Ablehnung kannst du unabhängige Beratung, Schlichtung oder ein Portal erwägen und Aufwand, Kosten und Risiken vergleichen.
 
 ## Anschlusskosten im Blick: Das Beispiel Mietwagen
 
@@ -208,15 +211,15 @@ Das spart dir den Ärger mit Zusatzkosten. Denke immer einen Schritt weiter. Der
 
 ## Welche Rolle spielt die Schlichtungsstelle?
 
-Wenn du mit der Airline streitest, gibt es einen neutralen Helfer. In Deutschland ist das oft die Schlichtungsstelle für den öffentlichen Personenverkehr (söp).
+Wenn du mit der Airline streitest, kann eine Schlichtungsstelle helfen. In Deutschland kommen je nach Fluggesellschaft die Schlichtungsstelle Reise & Verkehr oder die Schlichtungsstelle Luftverkehr beim Bundesamt für Justiz infrage.
 
-Dieser Weg ist für dich als Verbraucher kostenlos. Die Schlichtung ist eine Alternative zum Gericht. Experten prüfen deinen Fall. Du machst einen Vorschlag zur Einigung. 
+Die Schlichtung ist für Verbraucher in der Regel kostenlos und eine Alternative zum Gericht. Die zuständige Stelle prüft deinen Fall und kann eine Einigung vorschlagen.
 
 Die Airlines müssen nicht mitmachen. Aber viele große Gesellschaften tun es. Ein Schlichtungsverfahren dauert oft einige Monate. Es braucht Geduld.
 
 Aber es ist ein mächtiges Werkzeug. Du zeigst der Airline, dass du es ernst meinst. Oft lenken Unternehmen ein, sobald die Schlichtungsstelle fragt. Du willst teure Gerichtsverfahren vermeiden. 
 
-Nutze diesen Weg, wenn du keine Provision an ein Portal zahlen willst. Es ist der offizielle Weg des Staates.
+Prüfe diesen Weg, wenn du keine Provision an ein Portal zahlen willst. Welche Stelle zuständig ist, hängt von der Fluggesellschaft ab.
 
 Er schützt deine Interessen als kleiner Bürger gegen große Konzerne. Es passt perfekt zum Ziel, Kosten zu kontrollieren. Du investierst Zeit statt Geld. Am Ende steht oft eine faire Lösung.
 
@@ -227,7 +230,7 @@ Damit du nichts vergisst, hilft eine Liste. Drucke sie aus oder speichere sie au
 * [ ] Boardkarte und Buchungsbelege sicher aufbewahren (nicht wegwerfen!).
 * [ ] Foto von der Abflugtafel mit der Verspätungsanzeige machen.
 * [ ] Grund der Verspätung beim Bodenpersonal erfragen und notieren.
-* [ ] Verpflegungsgutscheine fordern (ab 2 Stunden bei Kurzstrecke); das ist ein Modellwert.
+* [ ] Bei ausreichender Wartezeit Betreuung einfordern: Bei Kurzstrecken beginnt sie grundsätzlich ab zwei Stunden.
 * [ ] Keine Verzichtserklärungen unterschreiben.
 * [ ] Genaue Uhrzeit der Landung und der Türöffnung notieren.
 * [ ] Kontaktdaten von Mitreisenden für Zeugenaussagen tauschen.
@@ -238,9 +241,7 @@ Airlines lehnen Forderungen oft pauschal ab. Sie nutzen Textbausteine. "Außerge
 
 Lass dich davon nicht abschrecken. Das ist oft ein Test. Die Airline schaut, wer hartnäckig bleibt. Wenn du Belege hast, widerspreche der Ablehnung. 
 
-Frage nach konkreten Beweisen für das Wetter oder den Streik. Oft stellt sich heraus, dass andere Flugzeuge zur gleichen Zeit gestartet sind.
-
-Dann kann das Wetter kein Grund gewesen sein. In diesem Moment bricht die Argumentation der Airline zusammen. Hier zeigt sich, wie wichtig deine eigene Recherche ist. 
+Frage nach konkreten Nachweisen für Wetter oder Streik und danach, welche zumutbaren Maßnahmen die Airline geprüft hat. Dass andere Flugzeuge gestartet sind, kann ein Hinweis sein, widerlegt den angegebenen Grund aber nicht automatisch.
 
 Bleib sachlich und freundlich. Drohe nicht sofort mit dem Anwalt. Verweise auf die Rechtslage.
 
@@ -250,11 +251,11 @@ Oft reicht ein zweiter, bestimmter Brief aus. Die Airline merkt, dass du deine H
 
 Eine Flugverspätung Entschädigung ist ein wichtiger Teil deiner Reiseplanung. Es geht nicht um Gier.
 
-Es geht um einen fairen Ausgleich. In deinem persönlichen Fixkosten-Cockpit ist das ein Punkt unter "Konditionen rechnen". Du hast für Pünktlichkeit bezahlt. Wenn diese Leistung fehlt, steht dir eine Gutschrift zu. 
+Es geht um einen fairen Ausgleich. In deinem persönlichen Fixkosten-Cockpit ist das ein Punkt unter "Konditionen rechnen". Ob dir eine Zahlung zusteht, hängt von den genannten Voraussetzungen ab.
 
 Nutze die Tools und Wege, die es heute gibt. Ob du es selbst machst oder Hilfe suchst, ist zweitrangig.
 
-Wichtig ist, dass du handelst. Das Geld gehört in deine Tasche, nicht in die Bilanz einer Fluggesellschaft, die Fehler gemacht hat. So hältst du Kurs bei deinen Finanzen. Auch wenn der Flieger mal stehen bleibt, bleibt dein Budget in Bewegung.
+Wichtig ist, dass du deine Unterlagen sicherst und einen möglichen Anspruch prüfst. So behältst du auch bei einer Verspätung deine Optionen im Blick.
 
 
 
@@ -264,19 +265,19 @@ Wichtig ist, dass du handelst. Das Geld gehört in deine Tasche, nicht in die Bi
 ## Häufige Fragen
 
 ### Ab wie vielen Stunden gibt es Geld?
-In der Regel hast du ab einer Verspätung von drei Stunden am Zielort Anspruch auf eine Zahlung; das ist ein Rechenbeispiel. Es zählt die Zeit, zu der die erste Tür des Flugzeugs geöffnet wird. Kleinere Verspätungen unter drei Stunden berechtigen meist nur zu Betreuungsleistungen wie Essen oder Getränken.
+Ab mindestens drei Stunden Verspätung am Endziel kann ein Ausgleichsanspruch entstehen, sofern die EU-Regeln anwendbar sind und keine nachgewiesene Ausnahme greift. Für die Ankunft zählt grundsätzlich, wann die erste Flugzeugtür geöffnet wird. Betreuungsleistungen können bereits vorher zustehen; die Wartezeit hängt von der Strecke ab.
 
 ### Gilt das Recht auch bei Billigfliegern?
-Ja, die EU-Verordnung unterscheidet nicht zwischen Luxus-Airlines und Billigfliegern. Sobald die Airline in der EU startet oder dort ihren Sitz hat, gelten die Regeln. Auch bei einem sehr günstigen Ticketpreis kann die Entschädigung deutlich höher sein als der Flugpreis selbst.
+Ja, die EU-Verordnung unterscheidet nicht zwischen Luxus-Airlines und Billigfliegern. Sie gilt insbesondere bei einem Abflug aus der EU oder bei einem Flug aus einem Drittland in die EU mit einer EU-Fluggesellschaft. Auch bei einem günstigen Ticket kann der Ausgleich höher sein als der Flugpreis.
 
 ### Was passiert bei einem Streik?
-Streiks sind ein schwieriges Thema. Wenn das Personal der Airline streikt (z. B. Piloten oder Kabine), hast du oft Anspruch auf Geld. Streikt hingegen das Personal am Flughafen (z. B. Sicherheit oder Gepäck), gilt das oft als außergewöhnlicher Umstand. In diesem Fall muss die Airline meist nicht zahlen.
+Streiks sind ein schwieriges Thema. Ein Streik des eigenen Airline-Personals kann anders bewertet werden als ein Streik Dritter. Ob außergewöhnliche Umstände vorlagen und alle zumutbaren Maßnahmen ergriffen wurden, muss die Airline im Einzelfall nachweisen.
 
 ### Wie lange kann ich die Entschädigung rückwirkend fordern?
-In Deutschland gilt die regelmäßige Verjährungsfrist von drei Jahren; das ist ein Rechenbeispiel. Diese Frist wird zum Jahresende berechnet. Wenn dein Flug im Sommer vor zwei Jahren verspätet war, hast du also noch bis zum 31. Dezember des nächsten Jahres Zeit, deine Forderung zu stellen.
+In Deutschland gilt grundsätzlich die regelmäßige Verjährungsfrist von drei Jahren. Sie beginnt zum Jahresende des Anspruchsjahres. Wenn dein Flug im Sommer vor zwei Jahren verspätet war, hast du also noch bis zum 31. Dezember des nächsten Jahres Zeit, deine Forderung zu stellen.
 
 ### Was ist, wenn ich einen Anschlussflug verpasse?
- Kommst du dort mehr als drei Stunden zu spät an, hast du Anspruch auf Entschädigung; das ist eine Modellannahme. Das gilt auch dann, wenn der erste Flug nur eine kleine Verspätung hatte, die aber zum Verpassen des Anschlusses führte.
+Kommst du bei einer einheitlichen Buchung mindestens drei Stunden verspätet am Endziel an, kann ein Anspruch bestehen, auch wenn der erste Flug nur wenig verspätet war. Anwendungsbereich und außergewöhnliche Umstände bleiben zu prüfen.
 
 ---
 

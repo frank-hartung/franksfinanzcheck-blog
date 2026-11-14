@@ -190,6 +190,15 @@ jobs:
           python3 scripts/konfliktmarker_wache.py
           python3 scripts/artefakt_waechter.py --md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
 
+      # Die Faktenfrische-Queue kann syntaktisch gültig sein und trotzdem
+      # zwei verschiedene Aussagen für denselben Slug führen. Zusätzlich zu
+      # A1/A2/A5 prüfen wir deshalb Partition, belegte Entscheidungsketten und
+      # den realen Git-Merge-Vertrag – auch bei reinen Daten-PRs.
+      - name: Faktenfrische-Artefakte und Merge-Schutz
+        run: |
+          python3 -m unittest scripts.tests.test_faktenfrische_messhoehe.QueueSchemaVertrag scripts.tests.test_faktenfrische_messhoehe.MigrationUndIdempotenz scripts.tests.test_faktenfrische_merge_schutz scripts.tests.test_faktenfrische_1072_heizoel scripts.tests.test_oekostrom_rueckfall scripts.tests.test_kreditkarte_rueckfall -v
+          python3 scripts/faktenfrische_befund_ledger.py --wache
+
       # BEDEUTUNG STATT NUR SYNTAX (24.10.2026, Blockade des GSC-Bestands)
       # Der Artefakt-Wächter oben hat den Schaden vom 21.10.2026 gefunden –
       # drei Search-Console-Dateien, in denen Git zwei Läufe übereinander

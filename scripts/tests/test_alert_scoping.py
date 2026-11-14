@@ -618,7 +618,9 @@ class VerhaltensSimulation(unittest.TestCase):
             # an genau diesen zwei echten Kanälen.
             identitaeten = {name: ident_modul.identitaet(name)
                             for name in ("Layout-AI", "Content-Engine v2",
+                                         "Kadenz-Endkontrolle (Mo/Mi/Fr – 2–3 LIVE erzwingen)",
                                          "E2E-Tests (Playwright)", "Deploy auf GitHub Pages",
+                                         "Blog-Gesundheits-Check (täglich)",
                                          "Offsite-Backup",
                                          "Sicherheits-Wache",
                                          "Affiliate-Integritäts-Wache (täglich)",

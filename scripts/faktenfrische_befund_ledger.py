@@ -1105,8 +1105,21 @@ def _normalisiere_fassungen(fassungen) -> dict[str, dict]:
 def _json_object(path: Path) -> dict:
     if not path.exists():
         return {}
+
+    def ohne_doppelte_schluessel(paare):
+        # json.loads nimmt sonst still den letzten Wert – auch bei tief
+        # verschachtelten Befunden. Ein Merge-Duplikat darf weder als leeres
+        # Ledger erscheinen noch beim nächsten Schreiben verschwinden.
+        objekt = {}
+        for schluessel, wert in paare:
+            if schluessel in objekt:
+                raise LedgerFehler(f"Doppelter JSON-Schlüssel `{schluessel}`")
+            objekt[schluessel] = wert
+        return objekt
+
     try:
-        data = json.loads(path.read_text(encoding="utf-8"))
+        data = json.loads(path.read_text(encoding="utf-8"),
+                          object_pairs_hook=ohne_doppelte_schluessel)
     except (OSError, ValueError) as exc:
         raise LedgerFehler(f"{path.name} nicht lesbar: {exc}") from exc
     if not isinstance(data, dict):

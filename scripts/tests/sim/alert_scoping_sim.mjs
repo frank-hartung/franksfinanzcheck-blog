@@ -384,6 +384,89 @@ await run('#608-Gegenprobe: Fachkanal blieb geschlossen → generischer Alarm fa
     openIssues: [] },
   true, ['TAGESDEFIZIT', 'engine-deficit', 'Häufigste Ursachen']);
 
+// #1213: Exit 3 der Kadenz-Endabnahme ist ein Classifier, dessen konkrete
+// Fehlerausgabe im (continue-on-error) Release-Schritt steht – kein API-Key-Rat.
+const kadenzName = 'Kadenz-Endkontrolle (Mo/Mi/Fr – 2–3 LIVE erzwingen)';
+const releaseCrash = { name: 'RELEASE-CRASH – Endabnahme blockiert', conclusion: 'failure' };
+const gateCrash = { name: 'KADENZ-GATE-CRASH – Vorprüfung oder Endabnahme unklassifiziert', conclusion: 'failure' };
+await run('#1213: Release-Crash → konkrete Endabnahme-Triage',
+  { workflowName: kadenzName, branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'endkontrolle', conclusion: 'failure', html_url: 'https://x/jobs/1213', steps: [releaseCrash] }] },
+  true, ['<!-- alert-runbook: kadenz-release-crash -->', 'Exit 3',
+         'Final gates and validated reserve', 'faktenfrische_befund_ledger.py --wache'],
+  null, ['Häufigste Ursachen', 'API-Key abgelaufen', 'du musst nichts manuell prüfen']);
+await run('Kadenz-Vorprüfung rot → getrenntes Gate-Runbook',
+  { workflowName: kadenzName, branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'endkontrolle', conclusion: 'failure', html_url: 'https://x/jobs/gate', steps: [gateCrash] }] },
+  true, ['<!-- alert-runbook: kadenz-gate-crash -->', 'Vorprüfung', 'cover-crash'],
+  null, ['Häufigste Ursachen', 'API-Key abgelaufen']);
+await run('Gleichnamiger Schritt in fremdem Workflow → kein Kadenz-Runbook',
+  { workflowName: 'Layout-AI', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'layout-audit', conclusion: 'failure', html_url: 'https://x/jobs/layout', steps: [releaseCrash] }] },
+  true, ['<!-- alert-runbook: layout-audit -->'], null, ['kadenz-release-crash']);
+await run('Crash neben frischem Defizit → Crash bleibt laut',
+  { workflowName: kadenzName, branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'endkontrolle', conclusion: 'failure', html_url: 'https://x/jobs/mixed',
+             steps: [releaseCrash, { name: 'TAGESDEFIZIT – Fachmeldung engine-deficit ist zuständig', conclusion: 'failure' }] }],
+    openIssues: [{ number: 601, body: '<!-- engine-deficit-id: tagesdefizit -->',
+                   labels: [{ name: 'engine-deficit' }], updated_at: '2026-09-21T17:18:00Z' }] },
+  true, ['<!-- alert-runbook: kadenz-release-crash -->']);
+await run('#1213: bestehender allgemeiner Rat wird auf Crash-Triage nachgeführt',
+  { workflowName: kadenzName, branch: 'main', event: 'schedule', conclusion: 'failure', runId: 43478433327,
+    jobs: [{ name: 'endkontrolle', conclusion: 'failure', html_url: 'https://x/jobs/1213', steps: [releaseCrash] }],
+    openIssues: [{ number: 1213, title: 'Wartung', body: '<!-- alert-key: WF-1F8C -->\n<!-- alert-runbook: allgemein -->',
+                   created_at: '2026-09-20T00:00:00Z', labels: [{ name: 'auto-report' }] }] },
+  false, [], { anzahl: 1, nummer: 1213,
+               imBody: ['<!-- alert-runbook: kadenz-release-crash -->', 'Final gates and validated reserve'],
+               nichtImBody: ['API-Key abgelaufen', 'Häufigste Ursachen'] });
+
+// #1216: Den bisherigen Blog-Health-Schrittnamen und den neuen, isolierten
+// Deploy-Schritt wirklich durch das Produktionsskript routen. Eine rote
+// Wache kann ein Inhalts- ODER Werkzeugbefund sein; der Schrittname beweist
+// keinen der beiden und erst recht keinen API-Key-Ausfall.
+const healthName = 'Blog-Gesundheits-Check (täglich)';
+const deployName = 'Deploy auf GitHub Pages';
+const rollenName = 'Rollenpaare – Struktur, Wiedervorlage und Rollenlinks (fail-closed)';
+for (const [workflowName, name] of [
+  [healthName, 'Run python3 scripts/konsolidierung.py --rollenpaare'],
+  [healthName, rollenName], [deployName, rollenName],
+]) {
+  await run('#1216: Rollenpaar-Schritt → redaktionelle Triage (' + workflowName + ')',
+    { workflowName, branch: 'main', event: 'schedule', conclusion: 'failure',
+      jobs: [{ name: 'gate', conclusion: 'failure', html_url: 'https://x/jobs/1216',
+               steps: [{ name, conclusion: 'failure' }] }] },
+    true, ['<!-- alert-runbook: rollenpaar-wache -->', 'Wiedervorlage',
+           'konsolidierung.py --rollenpaare --json', 'beweist noch nicht', 'Fristen nicht bloß verlängern'],
+    null, ['API-Key abgelaufen', 'Häufigste Ursachen', 'du musst nichts manuell prüfen']);
+}
+await run('#1216-Gegenprobe: gleicher Schritt in fremdem Workflow → kein Rollenpaar-Rat',
+  { workflowName: 'Bot-Watchdog', branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'watchdog', conclusion: 'failure', html_url: 'https://x/jobs/other',
+             steps: [{ name: rollenName, conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: allgemein -->'], null, ['alert-runbook: rollenpaar-wache']);
+await run('#1216-Gegenprobe: Selbsttest zuerst rot → nicht als Rollenpaar ausgeben',
+  { workflowName: healthName, branch: 'main', event: 'schedule', conclusion: 'failure',
+    jobs: [{ name: 'gate', conclusion: 'failure', html_url: 'https://x/jobs/selftest',
+             steps: [{ name: 'Run python3 scripts/konsolidierung.py --selftest', conclusion: 'failure' },
+                     { name: rollenName, conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: selbsttest -->'], null, ['alert-runbook: rollenpaar-wache']);
+await run('#1216: historisches zusammengesetztes Deploy-Gate → Ursache offen lassen',
+  { workflowName: deployName, branch: 'main', event: 'push', conclusion: 'failure',
+    jobs: [{ name: 'deploy', conclusion: 'failure', html_url: 'https://x/jobs/composite',
+             steps: [{ name: 'Weiterleitungen – Selbsttest, Quelle und Unit-Tests (fail-closed)', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: weiterleitungen-gate -->', 'beweist nicht, welcher Befehl',
+         'konsolidierung.py --rollenpaare'],
+  null, ['API-Key abgelaufen', 'alert-runbook: selbsttest', 'du musst nichts manuell prüfen']);
+await run('#1216: bestehender allgemeiner Rat wird aktualisiert',
+  { workflowName: healthName, branch: 'main', event: 'schedule', conclusion: 'failure', runId: 43604272212,
+    jobs: [{ name: 'gate', conclusion: 'failure', html_url: 'https://x/jobs/1216',
+             steps: [{ name: rollenName, conclusion: 'failure' }] }],
+    openIssues: [{ number: 1216, title: 'Wartung', body: '<!-- alert-key: WF-3CAD -->\n<!-- alert-runbook: allgemein -->',
+                   created_at: '2026-09-20T00:00:00Z', labels: [{ name: 'auto-report' }] }] },
+  false, [], { anzahl: 1, nummer: 1216,
+               imBody: ['<!-- alert-runbook: rollenpaar-wache -->', 'Wiedervorlage'],
+               nichtImBody: ['API-Key abgelaufen', 'Häufigste Ursachen'] });
+
 // 9. WF-7B6B / #654: Install-Schritt rot (npm ci) → Manifest-Diagnose statt des
 //    irreführenden API-Key-Rats. Vorfall: package.json war ungültiges JSON, npm ci
 //    brach in Sekunde 1 ab – die Meldung riet trotzdem zu Schlüsseln.
@@ -1073,8 +1156,40 @@ await run('CodeQL: Analyse-Störung ohne Gate-Rot → Störungs-Rat, kein Heilun
   { workflowName: 'CodeQL-Sicherheitswache', branch: 'main', event: 'push', conclusion: 'failure',
     jobs: [{ name: 'CodeQL (python)', conclusion: 'failure', html_url: 'https://x/jobs/cq2',
              steps: [{ name: 'CodeQL initialisieren', conclusion: 'failure' }] }] },
-  true, ['<!-- alert-runbook: codeql -->', 'Analyse- oder Upload-Störung, kein Code-Befund', 'githubstatus'],
+  true, ['<!-- alert-runbook: codeql -->', 'Fehler außerhalb des Security-Gates', 'githubstatus'],
   null, ['im Code heilen, nicht wegdrücken', 'Häufigste Ursachen', 'API-Key abgelaufen']);
+
+// #1210: Der ReDoS-Job ist unabhängig vom CodeQL-Upload und führt auch den
+// GSC-Inlink-Test aus. Der tatsächlich rote Schritt muss den Rat bestimmen.
+await run('#1210: ReDoS-Sicherheitsvertrag rot → Test-/Bestandsdiagnose',
+  { workflowName: 'CodeQL-Sicherheitswache', branch: 'main', event: 'push', conclusion: 'failure',
+    jobs: [{ name: 'ReDoS-Wache (unabhängig vom SARIF-Upload)', conclusion: 'failure',
+             html_url: 'https://x/jobs/cq3',
+             steps: [{ name: 'Sicherheitsvertrag zu Alert Nr. 87', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: codeql-redos -->', 'Offline-Prüfung oder Regressionstest fehlgeschlagen',
+         'scripts.tests.test_gsc_abdeckung', 'Sicherheitsvertrag zu Alert Nr. 87'],
+  null, ['<!-- alert-runbook: codeql -->', 'API-Key abgelaufen']);
+await run('#1210: Gate-Fund hat bei gleichzeitig roter ReDoS-Wache Vorrang',
+  { workflowName: 'CodeQL-Sicherheitswache', branch: 'main', event: 'push', conclusion: 'failure',
+    jobs: [{ name: 'CodeQL (python)', conclusion: 'failure', html_url: 'https://x/jobs/cq4',
+             steps: [{ name: 'Sicherheits-Gate (null Security-Fundstellen)', conclusion: 'failure' }] },
+           { name: 'ReDoS-Wache (unabhängig vom SARIF-Upload)', conclusion: 'failure', html_url: 'https://x/jobs/cq5',
+             steps: [{ name: 'Sicherheitsvertrag zu Alert Nr. 87', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: codeql-fund -->', 'Sicherheitsvertrag zu Alert Nr. 87'],
+  null, ['<!-- alert-runbook: codeql-redos -->']);
+await run('#1210: ReDoS-Checkoutfehler ist kein bewiesener Testbefund',
+  { workflowName: 'CodeQL-Sicherheitswache', branch: 'main', event: 'push', conclusion: 'failure',
+    jobs: [{ name: 'ReDoS-Wache (unabhängig vom SARIF-Upload)', conclusion: 'failure',
+             html_url: 'https://x/jobs/cq6', steps: [{ name: 'Checkout', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: codeql -->', 'Fehler außerhalb des Security-Gates'],
+  null, ['<!-- alert-runbook: codeql-redos -->']);
+await run('#1210: gleicher Prüf-Schritt in anderem Workflow erhält keinen CodeQL-Rat',
+  { workflowName: 'Bot-Watchdog', branch: 'main', event: 'push', conclusion: 'failure',
+    jobs: [{ name: 'ReDoS-Wache (unabhängig vom SARIF-Upload)', conclusion: 'failure',
+             html_url: 'https://x/jobs/cq7',
+             steps: [{ name: 'Sicherheitsvertrag zu Alert Nr. 87', conclusion: 'failure' }] }] },
+  true, ['<!-- alert-runbook: allgemein -->'],
+  null, ['<!-- alert-runbook: codeql-redos -->']);
 // 27.10.2026 (WF-E813/#815): Der Skript-Syntax-Lauf prüft den LIEGENDEN
 //     Stand (#864) und seit dieser Stufe die Trigger-Vollständigkeit. Er stand
 //     nicht auf der Wacht-Liste; jetzt hat er einen eigenen Rat, der weder

@@ -200,6 +200,18 @@ class DeckungsTest(unittest.TestCase):
         self.assertGreaterEqual(p["deckung_prozent"], 110)
         self.assertTrue(p["rueckstand_abgebaut"])
 
+    def test_am_heutigen_stichtag_offener_rueckstand_ist_nicht_abgebaut(self):
+        # Am Fälligkeitstag gibt es noch keine VERSPÄTUNG. Ohne Lauftag ist
+        # die fällige Arbeit trotzdem offen und darf nicht als erledigt gelten.
+        seite = ueberfaellig(1)[0]
+        seite["faktencheck"] = PROBETAG - dt.timedelta(days=30)
+        p = kap.plan([seite], cfg_probe(), 1, 1.0, PROBETAG,
+                     horizont_tage=0, lauftage=set())
+        self.assertEqual(p["faellig"], 1)
+        self.assertEqual(p["verletzungen_alt"], 0)
+        self.assertIsNone(p["abbau_tage"])
+        self.assertFalse(p["rueckstand_abgebaut"])
+
     def test_grosser_rueckstand_zieht_die_auto_skalierung_nach(self):
         # 60 Seiten bei 3 je Tag bräuchten 19 Tage – die Frist ist 7. Genau
         # dafür existiert `budget.auto_skalierung` (Sockel 3, Limit 10).
@@ -238,6 +250,65 @@ class ReihenfolgeTest(unittest.TestCase):
                                         cfg_probe(), PROBETAG)
         nach_ziel = sorted(eintraege, key=lambda e: (e["ziel"], e["frist"]))
         self.assertEqual(nach_ziel[0]["slug"], "standard-alt")
+
+    def test_erstrecherche_hat_auch_in_der_simulation_vorrang(self):
+        # Der echte Lauf priorisiert Erstrecherche (prio 0) vor einer alten
+        # Frist. ``status.get('prio') or 9`` verwandelte diese 0 in 9 und ließ
+        # den simulierten Bot die andere Seite wählen. Verglichen wird mit der
+        # echten Auswahlregel, nicht einer zweiten Test-Sortierung.
+        neu = {"slug": "neu", "titel": "Heizung", "beschreibung": "",
+               "keywords": [], "pillar": "", "bereich": "artikel",
+               "faktencheck": None}
+        alt = {"slug": "alt", "titel": "Aufräumen", "beschreibung": "",
+               "keywords": [], "pillar": "", "bereich": "artikel",
+               "faktencheck": PROBETAG - dt.timedelta(days=200)}
+        cfg = cfg_probe()
+        bestand = [dict(a, _faellig=ff.faelligkeit(a, cfg, PROBETAG))
+                   for a in (alt, neu)]
+        echte_auswahl = sorted(bestand,
+                               key=lambda a: ff.edf_schluessel(a, a["_faellig"]))[0]
+        eintraege = kap.eintraege_bauen(bestand, cfg, PROBETAG)
+        self.assertEqual(next(e for e in eintraege if e["slug"] == "neu")["prio"], 0)
+        lauf = kap.simuliere(eintraege, 1, PROBETAG, 0, {PROBETAG})
+        self.assertEqual(echte_auswahl["slug"], "neu")
+        self.assertEqual(list(lauf["letzte_pruefung"]), [echte_auswahl["slug"]])
+
+    def test_erstrecherche_wird_danach_zum_normalen_folgetermin(self):
+        neu = {"slug": "neu", "titel": "Heizung", "beschreibung": "",
+               "keywords": [], "pillar": "", "bereich": "artikel",
+               "faktencheck": None}
+        alt = {"slug": "alt", "titel": "Aufräumen", "beschreibung": "",
+               "keywords": [], "pillar": "", "bereich": "artikel",
+               "faktencheck": PROBETAG - dt.timedelta(days=200)}
+        eintraege = kap.eintraege_bauen([alt, neu], cfg_probe(), PROBETAG)
+        morgen = PROBETAG + dt.timedelta(days=1)
+        lauf = kap.simuliere(eintraege, 1, PROBETAG, 1, {PROBETAG, morgen})
+        self.assertEqual(lauf["letzte_pruefung"], {"neu": PROBETAG, "alt": morgen})
+
+    def test_deaktivierte_erstrecherche_erzeugt_keinen_erfundenen_prueftermin(self):
+        neu = {"slug": "neu", "titel": "Heizung", "beschreibung": "",
+               "keywords": [], "pillar": "", "faktencheck": None}
+        cfg = cfg_probe()
+        cfg["intervalle"]["erstrecherche_bei_erstellung"] = False
+        status = ff.faelligkeit(neu, cfg, PROBETAG)
+        self.assertFalse(status["faellig"])
+        self.assertIsNone(status["frist"])
+        with self.assertRaisesRegex(ValueError, "neu.*Frist|Frist.*neu"):
+            kap.eintraege_bauen([neu], cfg, PROBETAG)
+
+    def test_ungueltige_oder_fehlende_prioritaet_ist_keine_erstrecherche(self):
+        neu = {"slug": "neu", "titel": "Heizung", "beschreibung": "",
+               "keywords": [], "pillar": "", "faktencheck": None}
+        status = ff.faelligkeit(neu, cfg_probe(), PROBETAG)
+        for wert in (None, "ungueltig"):
+            with self.subTest(prio=wert), \
+                    mock.patch.object(ff, "faelligkeit", return_value=dict(status, prio=wert)):
+                with self.assertRaisesRegex(ValueError, "[Pp]riorit"):
+                    kap.eintraege_bauen([neu], cfg_probe(), PROBETAG)
+        del status["prio"]
+        with mock.patch.object(ff, "faelligkeit", return_value=status):
+            with self.assertRaisesRegex(ValueError, "[Pp]riorit"):
+                kap.eintraege_bauen([neu], cfg_probe(), PROBETAG)
 
     def test_keine_seite_verhungert_im_horizont(self):
         # Genug Kapazität: Jede Seite wird innerhalb ihres Horizonts erledigt.
@@ -467,7 +538,7 @@ class RepoZustandTest(unittest.TestCase):
                                 "hartes Limit muss über dem Plan liegen")
 
     def test_vollrueckstand_nach_97_tagen_behaelt_reserve(self):
-        """Die reale +97-Tage-Falle vom 04.11.2026 bleibt geschlossen."""
+        """Eingefrorener +97-Tage-Stresstest, kein beobachteter Betriebszustand."""
         stichtag = dt.date(2027, 2, 9)  # 04.11.2026 + 97 Tage
         laeufe, hinweise = kap.laeufe_aus_workflow()
         self.assertIsNotNone(laeufe, f"Laufplan nicht lesbar: {hinweise}")
@@ -478,7 +549,10 @@ class RepoZustandTest(unittest.TestCase):
                                      lauftage=lauftage)
         plan = emp["plan"]
         self.assertTrue(emp["erreicht"],
-                        "Das harte Limit baut den Vollrückstand nicht fristgerecht ab")
+                        "Das harte Limit erfüllt Abbau UND neue/folgende Fristen "
+                        f"nicht gleichzeitig: Abbau={plan['abbau_tage']} Tage, "
+                        f"neue Fristen={plan['verletzungen_neu']}, "
+                        f"Folgefristen={plan['verletzungen_folge']}")
         self.assertTrue(plan["puenktlich"], "Neue oder Folgefrist gerissen")
         self.assertTrue(plan["rueckstand_abgebaut"],
                         "Der Alt-Rückstand bleibt über die Nachholfrist")
@@ -942,6 +1016,39 @@ class KadenzHorizontTest(unittest.TestCase):
         self.assertIsNone(p["kadenz_horizont"]["erstverletzung"])
         self.assertGreater(p["kadenz_horizont"]["rueckstand_verletzungen"], 0)
 
+    def test_folgetermin_einer_altlast_ist_ein_neuer_weg_befund(self):
+        # Ein alter Rückstand wird am ersten Tag erledigt. Reißt später der
+        # NEUE Folgetermin, ist er nicht wieder die alte Verspätung: Sonst
+        # widerspricht „Weg frei“ dem roten Pünktlichkeitsurteil.
+        alt = ueberfaellig(1)
+        p = kap.plan(alt, cfg_probe(), 1, 1.0, PROBETAG,
+                     horizont_tage=31, lauftage={PROBETAG})
+        kh = p["kadenz_horizont"]
+        self.assertTrue(p["rueckstand_abgebaut"])
+        self.assertFalse(p["puenktlich"])
+        self.assertEqual(p["verletzungen_alt"], 1)
+        self.assertEqual(p["verletzungen_folge"], 1)
+        self.assertFalse(kh["weg_frei"])
+        self.assertEqual(kh["verletzungen"], 1)
+        self.assertEqual(kh["rueckstand_verletzungen"], 1)
+        self.assertEqual(kh["erstverletzung"],
+                         (PROBETAG + dt.timedelta(days=31)).isoformat())
+
+    def test_neuer_termin_bleibt_bei_grossem_altrueckstand_sichtbar(self):
+        # Die API liefert nur 20 Details. Mehr als 20 alte Verspätungen
+        # dürfen den Grund für ein NEU gerissenes Ziel nicht verdrängen.
+        alt = ueberfaellig(25)
+        neu = {"slug": "neue-frist", "titel": "Heizung Winter saisonal",
+               "beschreibung": "", "keywords": ["Heizung"], "pillar": "energie",
+               "faktencheck": PROBETAG - dt.timedelta(days=29)}
+        p = kap.plan(alt + [neu], cfg_probe(), 1, 1.0, PROBETAG,
+                     horizont_tage=2)
+        self.assertGreater(p["verletzungen_alt"], 20)
+        self.assertEqual(p["verletzungen_neu"], 1)
+        self.assertEqual(p["kadenz_horizont"]["erstverletzung_seite"], "neue-frist")
+        self.assertTrue(any(v["slug"] == "neue-frist" for v in p["verletzungen"]))
+        self.assertLessEqual(len(p["verletzungen"]), 20)
+
     def test_weg_frei_nennt_den_horizont(self):
         bundel = kap_probe_bundel(8)
         cfg = cfg_probe(budget=2, limit=10)
@@ -1032,6 +1139,107 @@ class MessungSelbstheilungTest(unittest.TestCase):
         daten = json.loads(puffer.getvalue())
         self.assertFalse(daten["projektion"]["trajektorie"])
         self.assertEqual(daten["projektion"]["ausgangspunkt"], PROBETAG.isoformat())
+
+
+class WacheAusgabeTest(unittest.TestCase):
+    """Das Ausgabeformat darf das Urteil einer angeforderten Wache nicht ändern."""
+
+    @staticmethod
+    def _lauf(args, messung):
+        out, err = io.StringIO(), io.StringIO()
+        with mock.patch.object(ff, "heute", return_value=PROBETAG), \
+                mock.patch.object(ff, "lade_config", return_value=cfg_probe()), \
+                mock.patch.object(kap, "laeufe_aus_workflow", return_value=(1.0, [])), \
+                mock.patch.object(kap, "lauftage_aus_workflow", return_value={PROBETAG}), \
+                mock.patch.object(kap, "bestand", return_value=ueberfaellig(1)), \
+                mock.patch.object(kap, "messe", return_value=messung), \
+                mock.patch.object(kap, "klartext", return_value="Messung"), \
+                mock.patch.object(sys, "argv", ["faktenfrische_kapazitaet.py", *args]), \
+                contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
+            rc = kap.main()
+        return rc, out.getvalue(), err.getvalue()
+
+    def test_json_und_klartext_haben_dasselbe_wache_urteil(self):
+        gut = {"empfehlung_erreicht": True, "puenktlich": True,
+               "rueckstand_abgebaut": True, "budget": 5,
+               "empfohlenes_budget": 5, "sockel": 5, "hartes_limit": 18,
+               "spitze_geprueft": 2}
+        faelle = (
+            ({}, 0),
+            ({"empfehlung_erreicht": False}, 1),
+            ({"puenktlich": False}, 1),
+            ({"rueckstand_abgebaut": False}, 1),
+            ({"spitze_stichtag": "2026-11-15", "spitze_puenktlich": False,
+              "spitze_offen": 3, "spitze_frisch": 8}, 1),
+        )
+        for aenderung, erwartet in faelle:
+            with self.subTest(aenderung=aenderung):
+                messung = dict(gut, **aenderung)
+                json_rc, json_out, json_err = self._lauf(["--wache", "--json"], messung)
+                text_rc, text_out, _ = self._lauf(["--wache"], messung)
+                self.assertEqual(json.loads(json_out), messung)
+                self.assertEqual(json_rc, erwartet, json_err)
+                self.assertEqual(text_rc, erwartet, text_out)
+                if erwartet:
+                    self.assertIn("::error::", json_err)
+                    self.assertIn("::error::", text_out)
+
+    def test_unterdeckung_benennt_fristriss_und_altlast_getrennt(self):
+        grund = {"empfehlung_erreicht": False, "puenktlich": False,
+                 "rueckstand_abgebaut": True}
+        meldung = kap.wache_befund(grund)
+        self.assertIn("Budgetkorridor", meldung)
+        self.assertIn("neue oder Folgefristen verletzt", meldung)
+        self.assertNotIn("Alt-Rückstand nicht fristgerecht abgebaut", meldung)
+        altlast = kap.wache_befund(dict(grund, puenktlich=True,
+                                       rueckstand_abgebaut=False))
+        self.assertIn("Alt-Rückstand nicht fristgerecht abgebaut", altlast)
+        self.assertNotIn("neue oder Folgefristen verletzt", altlast)
+        # Ein manuell gewähltes Budget außerhalb des Korridors kann beides
+        # schaffen, ohne die rote Korridor-Empfehlung zu widerlegen.
+        ausserhalb = kap.wache_befund(dict(grund, puenktlich=True))
+        self.assertIn("kein Plan gleichzeitig", ausserhalb)
+        self.assertIn("Alt-Rückstand und Fristen erfüllt", ausserhalb)
+
+    def test_auch_die_klare_ausgabe_verwechselt_fristriss_nicht_mit_altlast(self):
+        messung = {"empfehlung_erreicht": False, "puenktlich": False,
+                   "rueckstand_abgebaut": True, "budget": 18,
+                   "empfohlenes_budget": 18, "sockel": 5, "hartes_limit": 18}
+        for args, erwartet in (([], 0), (["--wache"], 1)):
+            with self.subTest(args=args):
+                rc, out, _ = self._lauf(args, messung)
+                self.assertEqual(rc, erwartet, out)
+                self.assertIn("neue oder Folgefristen verletzt", out)
+                self.assertNotIn("Rückstand nicht fristgerecht abbaubar", out)
+                self.assertNotIn("Alt-Rückstand nicht fristgerecht abgebaut", out)
+
+    def test_json_wache_erkennt_einen_echt_simulierten_engpass(self):
+        out, err = io.StringIO(), io.StringIO()
+        cfg = cfg_probe(budget=1, limit=10)
+        with mock.patch.object(ff, "heute", return_value=PROBETAG), \
+                mock.patch.object(ff, "lade_config", return_value=cfg), \
+                mock.patch.object(kap, "bestand", return_value=kap_probe_bundel(12)), \
+                mock.patch.object(sys, "argv", ["faktenfrische_kapazitaet.py", "--laeufe", "1",
+                                               "--budget", "1", "--wache", "--json"]), \
+                contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
+            rc = kap.main()
+        daten = json.loads(out.getvalue())
+        self.assertTrue(daten["empfehlung_erreicht"])
+        self.assertFalse(daten["puenktlich"])
+        self.assertEqual(rc, 1, err.getvalue())
+        self.assertIn("::error::", err.getvalue())
+
+    def test_json_ohne_wache_bleibt_ein_lesbarer_bericht(self):
+        messung = {"empfehlung_erreicht": False}
+        rc, out, _ = self._lauf(["--json"], messung)
+        self.assertEqual(rc, 0)
+        self.assertEqual(json.loads(out), messung)
+
+    def test_budget_nur_ausgeben_kann_keine_wache_ersetzen(self):
+        rc, _, err = self._lauf(["--budget-empfehlung", "--wache"], {})
+        self.assertEqual(rc, 2)
+        self.assertIn("--budget-empfehlung", err)
+        self.assertIn("--wache", err)
 
 
 class AusfallToleranzTest(unittest.TestCase):

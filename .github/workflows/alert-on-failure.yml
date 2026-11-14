@@ -531,6 +531,13 @@ jobs:
               failedStepNames.some(s => String(s).includes('Website bauen'));
             const codeqlGateFailed = isCodeql &&
               failedStepNames.some(s => String(s).includes('Sicherheits-Gate'));
+            // #1210: Der unabhängige ReDoS-Job führt auch GSC-Regressionen
+            // aus. Ein roter Test dort ist weder ein SARIF-Fund noch eine
+            // nachgewiesene Analyse-/Upload-Störung. Nur konkrete Prüfschritte
+            // klassifizieren – Checkout/Setup/fehlende Jobdaten bleiben offen.
+            const codeqlRedosFailed = isCodeql && failedJobs.some(j =>
+              String(j.name).startsWith('ReDoS-Wache') && j.steps.some(s =>
+                /^(Eigenprüfung der Rückfallsperre|Python-Bestand auf Alert-Nr\.-87-Strukturen prüfen|Sicherheitsvertrag zu Alert Nr\. 87|Linearer Frontmatter-Parser der GSC-Abdeckung)/.test(String(s))));
             // WF-A535 #632 / Content-Engine v2: the final status step is a
             // classifier, not necessarily the root cause. Phase 0.5 has a
             // more specific signature; otherwise its ::error:: annotation
@@ -542,6 +549,30 @@ jobs:
               failedStepNames.some(s => String(s).includes('Phase 0.5 – Kadenz-Gate sicherstellen'));
             const engineFinalClassifierFailed = isContentEngine &&
               failedStepNames.some(s => String(s).includes('Do not report a quota deficit as success'));
+            // #1213: Die Kadenz-Endabnahme klassifiziert einen Exit 3 korrekt
+            // als RELEASE-CRASH, aber der zentrale Alarm riet bisher trotzdem
+            // zu API-Keys. Der rote Schritt ist nur der Classifier: Die
+            // konkrete Ursache steht im vorangehenden Release-Schritt, dessen
+            // continue-on-error sein Ergebnis als "success" anzeigen kann.
+            const isKadenzEndkontrolle = wfName === 'Kadenz-Endkontrolle (Mo/Mi/Fr – 2–3 LIVE erzwingen)';
+            const kadenzReleaseCrash = isKadenzEndkontrolle &&
+              failedStepNames.some(s => String(s).includes('RELEASE-CRASH – Endabnahme blockiert'));
+            const kadenzGateCrash = isKadenzEndkontrolle &&
+              failedStepNames.some(s => String(s).includes('KADENZ-GATE-CRASH – Vorprüfung oder Endabnahme unklassifiziert'));
+            // #1216/#1181: Ein Rollenpaar kann wegen einer überfälligen
+            // Redaktionsentscheidung rot sein; das ist weder ein API-Key-
+            // Problem noch zwingend ein kaputter Selbsttest. Nur den ERSTEN
+            // roten Schritt und nur die beiden bekannten Workflows routen.
+            const ersteFehlerzeile = String(failedStepNames[0] || '');
+            const rollenpaarWache =
+              (wfName === 'Blog-Gesundheits-Check (täglich)' || wfName === 'Deploy auf GitHub Pages') &&
+              (ersteFehlerzeile === 'Run python3 scripts/konsolidierung.py --rollenpaare' ||
+               ersteFehlerzeile === 'Rollenpaare – Struktur, Wiedervorlage und Rollenlinks (fail-closed)');
+            // Vor dem eigenen Rollenpaar-Schritt bündelte der Deploy unter
+            // diesem Namen Selbsttests, Quellen, Unit-Tests UND Rollenpaare.
+            // Aus dem Namen allein ist die Ursache nicht beweisbar.
+            const weiterleitungenKomposit = wfName === 'Deploy auf GitHub Pages' &&
+              ersteFehlerzeile === 'Weiterleitungen – Selbsttest, Quelle und Unit-Tests (fail-closed)';
             // WF-9E5A / #761 (15.10.2026): Offsite-Backup. „Voraussetzungen
             // prüfen“ ist absichtlich rot, solange ein Zugang fehlt, falsch oder
             // abgelaufen ist (fail-closed) – eine Einrichtungsaufgabe, bei der
@@ -660,6 +691,10 @@ jobs:
             // ================================================================
             const runbookKlasse = enginePhase05Failed ? 'engine-fruehabbruch'
               : engineFinalClassifierFailed ? 'engine-schlussklassifikation'
+              : kadenzReleaseCrash ? 'kadenz-release-crash'
+              : kadenzGateCrash ? 'kadenz-gate-crash'
+              : rollenpaarWache ? 'rollenpaar-wache'
+              : weiterleitungenKomposit ? 'weiterleitungen-gate'
               : (backupEinrichtung || backupFrischEinrichtung) ? 'backup-einrichtung'
               : backupFrist ? 'backup-frist'
               // 01.11.2026 (#923): Der Rückweg-Beweis hat einen eigenen Rat –
@@ -697,6 +732,7 @@ jobs:
               : (workerZugangFailed || zugangsPruefungFailed) ? 'worker-deploy-zugang'
               : (isWorkerDeploy && !workerTestsFailed) ? 'worker-deploy'
               : codeqlGateFailed ? 'codeql-fund'
+              : codeqlRedosFailed ? 'codeql-redos'
               : isCodeql ? 'codeql'
               // 27.10.2026: eigener Rat für den liegenden Stand (Syntax oder
               // Trigger-Vollständigkeit). Ein generischer „API-Key?"-Rat wäre
@@ -721,7 +757,7 @@ jobs:
             const labelsOf = issue => (issue.labels || [])
               .map(l => typeof l === 'string' ? l : (l && l.name) || '')
               .filter(Boolean);
-            const routedToEngineDeficit = failedStepNames.some(s =>
+            const routedToEngineDeficit = !kadenzReleaseCrash && !kadenzGateCrash && failedStepNames.some(s =>
               String(s).includes('TAGESDEFIZIT') && String(s).includes('engine-deficit')
             );
             const freshForThisRun = issue => {
@@ -876,6 +912,33 @@ jobs:
                     '2. Öffne dessen Log und lies die `::error::`-Annotation. Sie unterscheidet FRÜHABBRUCH, TAGESDEFIZIT, RELEASE-CRASH und SYNCHRONVERLUST und nennt den zuständigen Schritt.',
                     '3. Folge der dort genannten Diagnose. API-Schlüssel nur ändern, wenn der Pre-Flight-Schritt den Key ausdrücklich als Ursache nennt.'
                   ]
+              : runbookKlasse === 'kadenz-release-crash'
+                ? [
+                    '1. **RELEASE-CRASH (Exit 3):** Die Endabnahme konnte Bau oder Gate nicht ausführen; das ist kein Tagesdefizit und kein Hinweis auf einen KI-API-Key.',
+                    '2. Im betroffenen Lauf das Log von **„Final gates and validated reserve (no AI dependency)“** öffnen – auch wenn es wegen `continue-on-error` als erfolgreich erscheint. Die Ausgabe von `publication_release.py` nennt den gescheiterten Hugo-Build oder Werkzeugaufruf und dessen Fehler.',
+                    '3. Bei einem unbeweisbaren Faktenfrische-Ledger zuerst `python3 scripts/artefakt_waechter.py` und `python3 scripts/faktenfrische_befund_ledger.py --wache` ausführen; Konfliktseiten sichern und anhand `docs/FAKTENFRISCHE-MERGE-VORFALL-2026-11-13.md` abgleichen. Keine Daten pauschal überschreiben oder Entscheidungen erfinden. Andere Ursachen nach der konkreten Fehlermeldung reparieren.',
+                    '4. Ein späterer erfolgreicher Lauf auf `main` ist der Produktionsnachweis; ein bloßer Neustart oder grüner Branch-Test genügt nicht.'
+                  ]
+              : runbookKlasse === 'kadenz-gate-crash'
+                ? [
+                    '1. **KADENZ-GATE-CRASH:** Die Vorprüfung oder Endabnahme brach ohne eine zuordenbare Defizit-/Release-Klasse ab. Es ist kein Nachweis für ein Tagesdefizit oder einen KI-API-Key.',
+                    '2. Im Lauf den ersten fehlgeschlagenen Vorprüfungsschritt und danach **„Final gates and validated reserve (no AI dependency)“** prüfen. Bei `cover-crash` steht der Fehler im Cover-/Artikelcheck; bei fehlendem Exit-Code die vorherige Abbruchstelle suchen.',
+                    '3. Die konkrete Fehlermeldung beheben und den nächsten erfolgreichen Lauf auf `main` abwarten; das Gate nicht umgehen.'
+                  ]
+              : runbookKlasse === 'rollenpaar-wache'
+                ? [
+                    '1. **Rollenpaar-Prüfung rot:** Der Schritt misst Seitenstruktur, dokumentierte Entscheidung, Wiedervorlage, Eigentümer, Rollenlinks und Nachfrage. Ein roter Schritt allein beweist noch nicht, welcher dieser Befunde oder ob ein Werkzeugfehler vorliegt.',
+                    '2. Das Schrittlog öffnen oder lokal `python3 scripts/konsolidierung.py --rollenpaare --json` ausführen. Bei einem Werkzeugfehler zusätzlich `python3 scripts/konsolidierung.py --selftest` und die Fehlermeldung prüfen.',
+                    '3. Eine überfällige Wiedervorlage in `data/gsc/abdeckung/entscheidungen.yaml` braucht eine tatsächlich belegte redaktionelle Neubewertung. Fristen nicht bloß verlängern und fehlende Rollenlinks oder Nachfragebelege nicht als erledigt behaupten.',
+                    '4. Anschließend den nächsten erfolgreichen Lauf auf `main` abwarten. Ein Neustart oder ein lokaler Test allein ist kein Produktionsnachweis.'
+                  ]
+              : runbookKlasse === 'weiterleitungen-gate'
+                ? [
+                    '1. **Zusammengesetztes Weiterleitungs-Gate rot:** Der Schritt enthält Selbsttests, Quell- und Zielprüfungen sowie Unit-Tests; ältere Läufe enthielten zusätzlich die Rollenpaar-Prüfung. Der Schrittname beweist nicht, welcher Befehl gescheitert ist.',
+                    '2. Das Lauf-Log öffnen und den ersten fehlgeschlagenen Befehl samt Ausgabe prüfen. Lokal einzeln nachfahren: `python3 scripts/weiterleitungen.py --selftest`, `--check`, `--verify` und `python3 scripts/konsolidierung.py --rollenpaare`.',
+                    '3. Bei einem Rollenpaar-Befund die Wiedervorlage und Belege redaktionell prüfen; bei einem Selbsttest- oder Werkzeugfehler den Code reparieren. Nichts pauschal freigeben oder Fristen künstlich verlängern.',
+                    '4. Erst ein erfolgreicher Deploy auf `main` belegt die Auslieferung.'
+                  ]
                 : runbookKlasse === 'backup-einrichtung'
                 ? [
                     '1. **Einrichtung unvollständig – ein Neustart hilft nicht.** „Voraussetzungen prüfen“ ist absichtlich rot (fail-closed): Mindestens ein Zugang oder Ziel der Sicherung fehlt, ist falsch oder abgelaufen. Bis das erledigt ist, werden Abonnenten und Einwilligungsnachweise NICHT gesichert.',
@@ -999,10 +1062,16 @@ jobs:
                             '2. **Im Code heilen, nicht wegdrücken:** Den gemeldeten Ausdruck so schreiben, dass die Regel-Klasse strukturell entfällt – vollständig verankerte Einzelmuster statt Anker-in-Alternation, und Muster ohne Metazeichen direkt aus dem Inhalt bauen, statt nachträglich mit Teil-Escapes zu arbeiten. Ein Dismiss braucht eine datierte, begründete Ausnahme; „geht auch anders nicht“ ist keine.',
                             '3. Nach dem Heilungs-Push schließt der nächste grüne Lauf auf `main` diese Meldung automatisch. Lokal nachfahren über die `::error`-Annotationen des Laufs (der SARIF-Diagnose-Schritt listet jede Fundstelle mit Regel und Ort).'
                           ]
+                      : runbookKlasse === 'codeql-redos'
+                        ? [
+                            '1. **ReDoS-Wache: Offline-Prüfung oder Regressionstest fehlgeschlagen.** Der unabhängige Job prüft auch die GSC-Abdeckung. Ein roter Test belegt weder einen SARIF-Fund noch eine Analyse- oder Upload-Störung.',
+                            '2. Den oben genannten roten Schritt und seine Testnamen/Annotationen lesen. Lokal nachfahren: `python3 scripts/redos_guard.py --selftest`, `python3 scripts/redos_guard.py`, `python3 -m unittest scripts.tests.test_redos_security scripts.tests.test_gsc_abdeckung -v` und `python3 scripts/gsc_abdeckung.py --selftest`. Bei fehlenden redaktionellen Inlinks die betroffenen Seiten sinnvoll verlinken statt die Wache zu lockern.',
+                            '3. Auch andere rote Jobs getrennt prüfen. Erst ein vollständig grüner Lauf auf `main` ist der Produktionsnachweis.'
+                          ]
                       : runbookKlasse === 'codeql'
                         ? [
-                            '1. **Analyse- oder Upload-Störung, kein Code-Befund.** Rot ist ein CodeQL-Schritt vor oder nach dem Gate (Initialisierung, Analyse, SARIF-Upload). Das Security-Gate selbst hat nichts beanstandet.',
-                            '2. Log des roten Schritts lesen – häufig: GitHub-Ausfall (https://www.githubstatus.com), SARIF-Größenlimit oder Runner-Störung. Danach den Lauf erneut starten.',
+                            '1. **Fehler außerhalb des Security-Gates oder unbekannte Joblage.** Aus dieser Meldung allein folgt weder ein Code-Befund noch eine Analyse- oder Upload-Störung; das Gate kann auch übersprungen worden sein.',
+                            '2. Den oben genannten roten Job und Schritt samt Log lesen. Bei einer tatsächlich gemeldeten Analyse- oder Upload-Störung kommen GitHub-Status (https://www.githubstatus.com), SARIF-Größenlimit oder Runner in Betracht; Checkout-/Setup- und andere Fehler getrennt behandeln.',
                             '3. Die Offline-Wachen bleiben davon unabhängig die Quelle der Wahrheit für F-01–F-10: `npm run test:sicherheit`.'
                           ]
                       : runbookKlasse === 'skript-syntax'
@@ -1055,7 +1124,9 @@ jobs:
               '---',
               istSicherheitsWache
                 ? '*Automatisch erstellt. Der Vorgang bleibt bis zum vollständigen erfolgreichen Live-Nachweis offen.*'
-                : '*Automatisch erstellt vom Fehler-Alerting-Workflow – du musst nichts manuell prüfen.*'
+                : (kadenzReleaseCrash || kadenzGateCrash || rollenpaarWache || weiterleitungenKomposit)
+                  ? '*Automatisch erstellt. Die Ursache muss anhand des genannten Schritts geprüft werden; die Meldung bleibt bis zu einem erfolgreichen Lauf offen.*'
+                  : '*Automatisch erstellt vom Fehler-Alerting-Workflow – du musst nichts manuell prüfen.*'
             );
             const body = lines.join('\n');
 

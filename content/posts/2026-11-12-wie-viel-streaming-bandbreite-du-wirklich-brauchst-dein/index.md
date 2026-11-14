@@ -30,8 +30,14 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: cf5369124c0fe68f972c8c08377292d6535d15df3ebfaa5fe5e83d23d0ced017
     geprueft_am: 2026-11-13
+quellen:
+  - id: "Q1"
+    titel: "Netflix-Stream hängt – was tun?"
+    url: "https://www.heise.de/tipps-tricks/Netflix-Stream-haengt-was-tun-3920607.html"
+    herausgeber: "heise online"
+    recherchiert_am: 2026-11-13
 faktencheck: 2026-11-09
-kurzantwort: "Für einen einzelnen HD‑Stream (1080 p) brauchst du etwa 5 Mbps; ein SD‑Stream kommt mit rund 3 Mbps aus, ein 4K‑Stream erfordert mindestens 15 Mbps – Netflix empfiehlt diese Werte (). Mehrere gleichzeitige Streams bedeuten einfach die Summe des jeweiligen Bedarfs, z. B. zwei HD‑Streams ≈ 10 Mbps."
+kurzantwort: "Als Orientierung nennt heise für Netflix etwa 3 bis 5 Mbit/s für HD und 15 Mbit/s für 4K. Für gleichzeitig laufende Streams kannst du die jeweiligen Richtwerte addieren und Reserve für weitere Nutzung einplanen. Der tatsächliche Bedarf hängt vom Dienst, der Bildqualität und einer stabilen Verbindung ab."
 faktenfrische_aliases:
   - "2026-11-09-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein"
   - "2026-11-10-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein"
@@ -44,7 +50,7 @@ Meistens liegt das Problem an einer zu geringen Bandbreite für deine Streams. H
 **Das Wichtigste in Kürze**
 
 * Prüfe zuerst, wie viele Personen bei dir gleichzeitig im Netz sind.
-* Ein stabiles [Internetgeschwindigkeit](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) von 15 bis 25 Mbps pro 4K-Stream ist ideal.
+* Für Netflix nennt heise 15 Mbit/s als Orientierung für einen stabilen 4K-Stream. Andere Dienste und parallele Nutzung können mehr verlangen.
 * Streich unnötige Geräte aus deiner Planung, um Geld zu sparen.
 * Nutze unsere Checkliste für 4K, um deinen echten Bedarf zu finden.
 * Ein kleiner Puffer schützt dich vor Schwankungen im Netz.
@@ -76,11 +82,11 @@ Auch die Entfernung zum nächsten grauen Kasten auf der Straße spielt eine Roll
 
 ## Modellrechnung: Dein Bedarf für 4 K‑Streaming und Co.
 
-Hier zeigen wir dir, wie du deinen Bedarf ganz leicht selbst ausrechnest. Wir nutzen dafür feste Werte aus der Praxis. So bekommst du ein Gefühl für die Zahlen in deinem Haushalt.
+Hier zeigen wir dir eine Modellrechnung für deinen Haushalt. Die Werte sind bewusst gewählte Planungsannahmen, keine garantierten Mindestanforderungen für jeden Streaming-Dienst.
 
 **Annahmen für dieses Beispiel:**
-* Ein Stream in 4K braucht etwa 25 Mbps für ein flüssiges Bild.
-* Ein Stream in HD (1080p) kommt mit 5 Mbps gut aus.
+* Für einen 4K-Stream rechnen wir beispielhaft mit 25 Mbit/s; das liegt über dem von heise genannten Netflix-Richtwert von 15 Mbit/s.
+* Für einen HD-Stream nehmen wir 5 Mbit/s an.
 * Wir gehen von einer typischen Nutzung am Abend aus.
 
 **Die einfache Formel:**
@@ -97,13 +103,13 @@ Gesamt-Bandbreite = (Anzahl der 4K-Geräte × 25 Mbps) + (Anzahl der HD-Geräte 
 
 ## Checkliste für den Bandbreiten‑Check
 
-Nutze diese Tabelle, um deinen eigenen Wert zu finden. Schau dir an, welche Situationen bei dir oft vorkommen.
+Nutze diese Tabelle als Modell mit 25 Mbit/s je 4K- und 5 Mbit/s je HD-Stream. Für Gaming und Video-Call nehmen wir beispielhaft 10 beziehungsweise 7 Mbit/s zusätzlich an; der tatsächliche Bedarf variiert.
 
 | Situation | Bedarf in Mbps | Wichtiger Hinweis |
 | :--- | :--- | :--- |
 | Ein einzelner 4K-Film | 25 | Gilt für ein Gerät im Haus |
 | Zwei 4K-Filme gleichzeitig | 50 | Für Paare in getrennten Räumen |
-| Ein 4K-Film und zwei HD-Streams | 55 | Typisch für Familien am Abend |
+| Ein 4K-Film und zwei HD-Streams | 35 | Modell: 25 + 2 × 5 |
 | Gaming und ein 4K-Stream | 35 | Spiele brauchen eine stabile Leitung |
 | Video-Call und ein HD-Stream | 12 | Wichtig für das Home-Office |
 
@@ -117,7 +123,7 @@ Das ist wichtig für Filme und Serien. Doch für Video-Anrufe oder das Senden vo
 
 Ein zweiter Fehler liegt oft in der Wohnung selbst. Viele Menschen stellen den Router in einen Schrank oder hinter die Couch. Das dämpft das Signal extrem stark.
 
-Ein schlechtes WLAN halbiert oft die Leistung, die eigentlich aus der Dose kommt. Teste dein Tempo mal direkt mit einem Kabel am Router. Wenn es dort viel schneller ist, liegt das Problem an deinem Funknetz. Hier helfen oft kleine Verstärker oder ein besserer Platz für den Router.
+Ein schlechtes WLAN kann die nutzbare Geschwindigkeit deutlich verringern. Teste dein Tempo auch mit einem geeigneten LAN-Kabel direkt am Router und vergleiche mehrere Messungen. Ist es dort deutlich schneller, kann das Funknetz ein Engpass sein. Ein besserer Routerstandort oder ein Repeater kann helfen.
 
 Der dritte Fehler betrifft den Wechsel des Anbieters. Viele Kunden springen zu einem neuen Tarif, ohne die [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) zu kennen.
 
@@ -127,7 +133,7 @@ Wenn du zu früh kündigst, zahlst du oft doppelt oder musst hohe Gebühren trag
 
 Hier ist eine einfache Regel für deinen Alltag. Sie hilft dir, wenn du schnell entscheiden musst.
 
-**Faustregel:** Rechne pro Gerät mit 25 Mbps für 4K und mit 5 Mbps für HD. Addiere alle Geräte, die zur gleichen Zeit laufen sollen. Schlage am Ende noch einmal 10 % als Sicherheit oben drauf. Dieser Puffer fängt kleine Schwankungen in der Leitung ab. So bleibt dein Bild auch dann scharf, wenn das Netz mal kurz etwas langsamer wird.
+**Planungsbeispiel:** Rechne pro gleichzeitigem Stream mit 25 Mbit/s für 4K und 5 Mbit/s für HD und addiere die Werte. Weitere Nutzung braucht zusätzlich Kapazität. Ein Puffer kann Schwankungen abfedern, garantiert aber keine ruckelfreie Wiedergabe.
 
 Diese Regel ist ein sicherer Anker für deine Planung. Wenn du zum Beispiel auf 60 Mbps kommst, ist ein Tarif mit 100 Mbps eine gute Wahl. Ein Tarif mit nur 50 Mbps wäre in diesem Fall zu knapp bemessen. Mit der Faustregel verhinderst du Frust beim nächsten Filmabend.
 
@@ -137,7 +143,7 @@ Gehe [Schritt für Schritt](../../posts/2026-10-12-dein-weg-zu-geringeren-monats
 
 1. Logge dich in das Menü deines Routers ein. Dort steht meistens genau, mit welchem Tempo er verbunden ist. Notiere dir diesen Wert für den Download.
 2. Vergleiche diese Zahl mit deiner eigenen Modellrechnung von oben. Passt die Leistung zu deinem echten Bedarf?
-3. Schau in deine letzte Rechnung vom Anbieter. Wie viel Speed bezahlst du jeden Monat? Wenn du 100 Mbps zahlst, aber nur 40 Mbps ankommen, gibt es ein Problem.
+3. Schau in deine letzte Rechnung vom Anbieter. Wie viel Speed bezahlst du jeden Monat? Wenn du 100 Mbit/s gebucht hast und wiederholt deutlich weniger ankommen, prüfe die vertraglich vereinbarten Geschwindigkeiten und miss unter geeigneten Bedingungen erneut.
 4. Nutze unsere Checkliste, um zu sehen, ob du zu viel Kapazität gebucht hast. Vielleicht reicht ein kleinerer und günstigerer Tarif völlig aus.
 5. Mache einmal im Jahr einen Check deiner Kosten. Wenn dein Vertrag ausläuft, kannst du oft zu besseren Konditionen wechseln. Nutze dafür einen Vergleich im Netz.
 
@@ -157,9 +163,9 @@ Ein weiterer Grund kann ein alter Router sein. Er schafft es dann nicht, die vie
 
 ### Wie viel Internetgeschwindigkeit brauche ich für mehrere Geräte?
 
-Hier hilft die Summe der Einzelwerte. Wenn drei Leute gleichzeitig HD-Filme schauen, brauchst du 3 × 5 Mbps, also 15 Mbps.
+Hier hilft die Summe der Einzelwerte. Bei der obigen Annahme von 5 Mbit/s je HD-Stream ergeben drei gleichzeitige Streams 3 × 5 = 15 Mbit/s.
 
- Wenn aber zwei Personen gleichzeitig in 4K streamen wollen, sollten es schon 100 Mbps sein; das ist ein Beispielwert. So hast du genug Reserven für alle Nutzer im Haus.
+Für zwei gleichzeitige 4K-Streams ergeben die obigen Annahmen 2 × 25 = 50 Mbit/s. Plane je nach weiterer Nutzung und tatsächlicher Verbindung zusätzliche Reserve ein; 100 Mbit/s sind nicht grundsätzlich erforderlich.
 
 ### Lohnt sich ein Upgrade auf 100 Mbps, wenn ich selten 4 K schaue?
 

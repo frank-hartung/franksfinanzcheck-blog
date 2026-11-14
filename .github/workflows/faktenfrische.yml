@@ -178,7 +178,10 @@ jobs:
         if: always()
         continue-on-error: true
         run: |
+          set -Eeuo pipefail
           python3 scripts/faktenfrische_befund_akte.py --schreiben \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+          python3 scripts/f4_entscheidungsvorlage.py \
             | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Belege & Dossiers committen
@@ -196,7 +199,7 @@ jobs:
           # Wurzelverzeichnisse vermeidet den früheren pathspec-Fehler, wenn
           # in einem Lauf kein Dossier erzeugt wurde. Gestagt werden danach
           # ausschließlich die fachlich-owned Pfade.
-          if git status --porcelain -- content/ data/ FAKTENFRISCHE-REPORT.md BEFUND-AKTE.md | grep -q .; then
+          if git status --porcelain -- content/ data/ FAKTENFRISCHE-REPORT.md BEFUND-AKTE.md F4-ENTSCHEIDUNGSVORLAGE.md | grep -q .; then
             bash scripts/git_sync.sh \
               "content(fakten): Belegkette aufgefrischt (Agent Reach + Claude)" \
               content/ \
@@ -206,6 +209,7 @@ jobs:
               data/faktenfrische_befunde_state.json \
               data/faktenfrische_entscheidungen.yaml \
               BEFUND-AKTE.md \
+              F4-ENTSCHEIDUNGSVORLAGE.md \
               FAKTENFRISCHE-REPORT.md
           else
             echo "Keine Änderungen."
@@ -373,11 +377,15 @@ jobs:
       # gesichert. Der Schließpfad des Deckungs-Befunds steht im Ticket mit
       # Label `faktenfrische-deckung` (Schritt „Deckungs-Ticket melden“).
       - name: Unterdeckung oder Befund ohne Schließweg melden (roter Job)
-        if: steps.deckung.outcome == 'failure' || steps.aktenwache.outcome == 'failure'
+        if: steps.deckung.outcome == 'failure' || steps.aktenwache.outcome == 'failure' || steps.akte.outcome == 'failure'
         env:
           DECKUNG: ${{ steps.deckung.outcome }}
           AKTE: ${{ steps.aktenwache.outcome }}
+          ERZEUGUNG: ${{ steps.akte.outcome }}
         run: |
+          if [ "$ERZEUGUNG" = "failure" ]; then
+            echo "::error::Befundakte oder F4-Entscheidungsvorlage konnte nicht erzeugt werden – die redaktionellen Unterlagen können veraltet sein. Den Erzeugungsschritt prüfen und nachziehen."
+          fi
           if [ "$DECKUNG" = "failure" ]; then
             echo "::error::Faktenfrische unterdeckt – der Rückstand ist nicht fristgerecht abbaubar oder der Spitzentag reißt (#912, #1039). Schließpfad: Issue mit Label 'faktenfrische-deckung' (Deckungs-Ticket, ein Ticket ein Pfad), Details im Schritt davor, im Report und in RELEASE-SCORECARD.md."
           fi

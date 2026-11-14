@@ -30,10 +30,15 @@ except ImportError as exc:  # pragma: no cover
     raise SystemExit("FEHLER: Pillow fehlt – installiere: pip install pillow pillow-avif-plugin") from exc
 
 try:
-    import pillow_avif  # noqa: F401 – registriert AVIF in Pillow
-    AVIF_OK = True
-except Exception:
-    AVIF_OK = False
+    import pillow_avif  # noqa: F401 – registriert AVIF in älteren Pillow-Versionen
+except ImportError:
+    pass  # Pillow ab Version 11 unterstützt AVIF auch ohne separates Plugin.
+
+# Entscheidend ist der tatsächlich verfügbare Encoder, nicht der Import des
+# optionalen Plugins. Andernfalls meldet der Heiler Erfolg, obwohl das Audit
+# weiterhin alle AVIFs vermisst (Issue #1208).
+Image.init()
+AVIF_OK = "AVIF" in Image.SAVE
 
 BLOG_DIR = Path(__file__).resolve().parents[1]
 STATIC_IMAGES = BLOG_DIR / "static" / "images"
@@ -227,7 +232,11 @@ def optimize_cover_image(source: str | Path, image: Image.Image | None = None, f
         KI_ORIGINAL_UEBERSPRUNGEN.append(rel(source))
         return []
 
-    img = (image.copy() if image is not None else Image.open(source)).convert("RGB")
+    if image is None:
+        with Image.open(source) as original:
+            img = original.convert("RGB")
+    else:
+        img = image.convert("RGB")
     src_w, src_h = img.size
     base_dir = source.parent
     stem = source.stem
@@ -243,13 +252,17 @@ def optimize_cover_image(source: str | Path, image: Image.Image | None = None, f
             save_jpeg(resize_to_width(img, width), out)
             made.append(rel(out))
 
-    # WebP/AVIF in allen responsiven Breiten + 1000px-Rootvariante.
-    for width in (*RESPONSIVE_WIDTHS, min(FULL_WIDTH, src_w)):
+    # WebP/AVIF in allen responsiven Breiten + Rootvariante. Die Rolle ist
+    # explizit: Ist das Original z. B. genau 720 px breit, brauchen 720/ und
+    # der Root zwei Pfade mit derselben Breite. Ein Vergleich nur der Breite
+    # behandelte früher beide Durchläufe als Root und ließ 720/ ewig fehlen.
+    groessen = [(w, False) for w in RESPONSIVE_WIDTHS]
+    groessen.append((min(FULL_WIDTH, src_w), True))
+    for width, ist_root in groessen:
         if width > src_w:
             continue
         resized = resize_to_width(img, width)
-        rw, rh = resized.size
-        if width == min(FULL_WIDTH, src_w):
+        if ist_root:
             webp = base_dir / "webp" / f"{stem}.webp"
             avif = base_dir / "avif" / f"{stem}.avif"
         else:
@@ -281,8 +294,8 @@ def looks_like_webp(path: Path) -> bool:
 
 
 def expected_variants(source: Path) -> list[Path]:
-    img = Image.open(source)
-    src_w, _ = img.size
+    with Image.open(source) as img:
+        src_w, _ = img.size
     stem = source.stem
     filename = source.name
     base = source.parent

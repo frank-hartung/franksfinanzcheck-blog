@@ -4,7 +4,7 @@ import io
 import sys
 import tempfile
 import unittest
-from contextlib import redirect_stdout
+from contextlib import ExitStack, redirect_stdout
 from pathlib import Path
 from unittest.mock import patch
 
@@ -88,6 +88,28 @@ class EditorialReviewGateTests(unittest.TestCase):
 
     def test_kreditkarte_wird_nicht_durch_wortpraefix_hochgestuft(self):
         self.assertNotEqual(gate.classify_text("Kreditkarte vergleichen"), gate.RISK_HIGH)
+
+    def test_hoehere_manuelle_risikoklasse_ist_wirksam(self):
+        fm = {"title": "WLAN-Reichweite verbessern",
+              "redaktionelle_pruefung": {"risikoklasse": "hoch",
+                                         "status": "ausstehend"}}
+        result = gate.validate_article(fm, "Text", today=self.TODAY)
+        self.assertEqual(result["risk"], gate.RISK_HIGH)
+        self.assertTrue(result["blocking"])
+        self.assertIn("E05", self.codes(result))
+        fm["redaktionelle_pruefung"]["risikoklasse"] = "erhoeht"
+        result = gate.validate_article(fm, "Text", today=self.TODAY)
+        self.assertEqual(result["risk"], gate.RISK_ELEVATED)
+        self.assertFalse(result["blocking"])
+
+    def test_automatisches_risiko_darf_nicht_herabgestuft_werden(self):
+        fm = {"title": "Baufinanzierung für Familien",
+              "redaktionelle_pruefung": {"risikoklasse": "standard",
+                                         "status": "ausstehend"}}
+        result = gate.validate_article(fm, "Text", today=self.TODAY)
+        self.assertEqual(result["risk"], gate.RISK_HIGH)
+        self.assertTrue(result["blocking"])
+        self.assertIn("E02", self.codes(result))
 
     def test_vollstaendige_freigabe_besteht(self):
         body = self.body()
@@ -209,11 +231,43 @@ class EditorialReviewGateTests(unittest.TestCase):
                 )
                 self.assertEqual(gate.main(["--published", "--strict", "--json"]), 1)
 
+    def test_reserve_hold_blocks_a_direct_live_flip_at_any_risk(self):
+        for marker in ('reserve_blocked', 'reserve_retired'):
+            with self.subTest(marker=marker):
+                fm = {"title": "WLAN-Reichweite verbessern", "draft": True,
+                      marker: "Redaktionelle Prüfung ausstehend"}
+                draft = gate.validate_article(fm, "Text", today=self.TODAY)
+                self.assertTrue(draft["reserve_hold"])
+                self.assertFalse(draft["blocking"])
+                fm["draft"] = False
+                live = gate.validate_article(fm, "Text", today=self.TODAY)
+                self.assertTrue(live["blocking"])
+                self.assertIn("E20", self.codes(live))
+                del fm["draft"]  # Hugo's default is live, not draft.
+                self.assertIn("E20", self.codes(
+                    gate.validate_article(fm, "Text", today=self.TODAY)))
+
+    def test_published_gate_finds_a_direct_live_flip_with_a_reserve_hold(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            posts = Path(tmp) / "posts"
+            article = posts / "held" / "index.md"
+            article.parent.mkdir(parents=True)
+            article.write_text(
+                '---\ntitle: "Heizölpreise vergleichen"\ndraft: true\n'
+                'reserve_blocked: "Redaktionelle Prüfung"\n---\nText.\n',
+                encoding="utf-8")
+            with patch.object(gate, "POSTS", posts), redirect_stdout(io.StringIO()):
+                self.assertEqual(gate.main(["--published", "--strict"]), 0)
+                article.write_text(article.read_text(encoding="utf-8").replace(
+                    "draft: true", "draft: false"), encoding="utf-8")
+                self.assertEqual(gate.main(["--published", "--strict"]), 1)
+
     def test_deploy_hat_published_bestands_gate(self):
         workflow = (Path(__file__).resolve().parents[2] / ".github" / "workflows" / "deploy.yml").read_text(encoding="utf-8")
         self.assertIn("editorial_review_gate.py --published --strict", workflow)
 
     def test_publish_gate_behaelt_ymyl_entwurf_statt_ihn_zu_loeschen(self):
+        """Review-Hold isoliert messen; ausgefallene Faktenakte bleibt fail-closed."""
         with tempfile.TemporaryDirectory() as tmp:
             posts = Path(tmp) / "posts"
             slug = dt.date.today().isoformat() + "-baufinanzierung-test"
@@ -235,23 +289,70 @@ class EditorialReviewGateTests(unittest.TestCase):
                 publish_gate.POSTS_DIR = str(posts)
                 publish_gate.DRY_RUN = False
                 publish_gate.STRICT = True
-                with patch.object(publish_gate, "todays_live_candidates", return_value=[slug]), \
-                     patch.object(publish_gate, "r5_self_heal_candidates", return_value=0), \
-                     patch.object(publish_gate, "keyword_self_heal_candidates", return_value=0), \
-                     patch.object(publish_gate, "check_length_failures", return_value=(set(), None)), \
-                     patch.object(publish_gate, "seo_audit_failures", return_value=(set(), None)), \
-                     patch.object(publish_gate, "faktenfrische_failures", return_value=({}, None, False)), \
-                     patch.object(publish_gate, "affiliate_profi_failures", return_value=({}, None)), \
-                     patch.object(publish_gate, "affiliate_integrity_failures", return_value=({}, None, False)), \
-                     patch.object(publish_gate, "affiliate_intent_failures", return_value=({}, None, False)), \
-                     patch.object(publish_gate, "offenlegung_failures", return_value=({}, None, False)), \
-                     patch.object(publish_gate, "title_integrity_failures", return_value=set()), \
-                     patch.object(publish_gate, "keyword_failures", return_value=({}, None)), \
-                     patch.object(publish_gate, "readability_failures", return_value=({}, None)), \
-                     patch.object(publish_gate, "textverstaendnis_failures", return_value=({}, None)), \
-                     patch.object(audit_log, "log_event"), \
-                     redirect_stdout(io.StringIO()):
+                # Unabhängige Gates isolieren: Eine kaputte Produktions-Queue
+                # darf diesen Review-Test nicht unbemerkt in einen Test des
+                # Fakten-Hartstopps verwandeln (Vorfall 14.11.2026).
+                rueckgaben = {
+                    "todays_live_candidates": [slug],
+                    "r5_self_heal_candidates": 0,
+                    "keyword_self_heal_candidates": 0,
+                    "check_length_failures": (set(), None),
+                    "seo_audit_failures": (set(), None),
+                    "faktenfrische_failures": ({}, None, False),
+                    "fakten_befund_failures": ({}, None, False),
+                    "affiliate_profi_failures": ({}, None),
+                    "affiliate_integrity_failures": ({}, None, False),
+                    "affiliate_intent_failures": ({}, None, False),
+                    "offenlegung_failures": ({}, None, False),
+                    "title_integrity_failures": set(),
+                    "keyword_failures": ({}, None),
+                    "readability_failures": ({}, None),
+                    "textverstaendnis_failures": ({}, None),
+                    "duplicate_failures": ({}, None),
+                    "uniqueness_failures": ({}, None),
+                    "kurzantwort_failures": ({}, None),
+                }
+                with ExitStack() as stack:
+                    for name, wert in rueckgaben.items():
+                        stack.enter_context(patch.object(publish_gate, name, return_value=wert))
+                    stack.enter_context(patch.object(audit_log, "log_event"))
+                    stack.enter_context(redirect_stdout(io.StringIO()))
+                    original = article.read_bytes()
+                    # Eine ausgefallene Messung darf nicht als roter Inhalt
+                    # behandelt werden: weder zurückstufen noch löschen.
+                    with patch.object(publish_gate, "fakten_befund_failures",
+                                      return_value=({}, "Faktenakte defekt", True)):
+                        self.assertEqual(publish_gate.main(), 1)
+                        self.assertEqual(article.read_bytes(), original)
+                    # Erst mit messbarer Faktenakte wird der YMYL-Hold geprüft.
                     self.assertEqual(publish_gate.main(), 1)
+
+                    # Ein versehentlich live gesetzter Reserve-Hold kann auch
+                    # bei geringerem Risiko und einem neuen Slug nicht als
+                    # mangelhafter Neu-Artikel verworfen werden (E20).
+                    held_slug = dt.date.today().isoformat() + "-heizoel-hold"
+                    held = posts / held_slug / "index.md"
+                    held.parent.mkdir()
+                    held.write_text(
+                        "---\n"
+                        'title: "Heizölpreise vergleichen"\n'
+                        f"date: {dt.date.today().isoformat()}\n"
+                        "draft: false\n"
+                        'reserve_blocked: "Redaktionelle Prüfung ausstehend"\n'
+                        'redaktionelle_pruefung:\n  risikoklasse: "erhoeht"\n'
+                        '  status: "ausstehend"\n'
+                        "---\n\nFachlicher Entwurf bleibt erhalten.\n",
+                        encoding="utf-8",
+                    )
+                    with patch.object(publish_gate, "todays_live_candidates",
+                                      return_value=[held_slug]):
+                        self.assertEqual(publish_gate.main(), 1)
+                    self.assertTrue(held.exists())
+                    held_text = held.read_text(encoding="utf-8")
+                    self.assertIn("draft: true", held_text)
+                    self.assertIn("reserve_blocked:", held_text)
+                    self.assertIn('cadence_grund: "redaktioneller-hold:', held_text)
+                    self.assertIn("Fachlicher Entwurf bleibt erhalten", held_text)
             finally:
                 publish_gate.POSTS_DIR, publish_gate.DRY_RUN, publish_gate.STRICT = old
             self.assertTrue(article.exists())
@@ -259,6 +360,18 @@ class EditorialReviewGateTests(unittest.TestCase):
             self.assertIn("draft: true", text)
             self.assertIn("cadence_grund: \"ymyl-review:", text)
             self.assertNotIn("cadence_wait:", text)
+
+    def test_defekte_faktenakte_ist_ein_werkzeugfehler(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            queue = Path(tmp) / "queue.json"
+            decisions = Path(tmp) / "entscheidungen.yaml"
+            queue.write_text('{"fachbefunde": [', encoding="utf-8")
+            decisions.write_text("entscheidungen: []\n", encoding="utf-8")
+            findings, warning, tool_error = publish_gate.fakten_befund_failures(
+                ["baufinanzierung-test"], queue_path=queue, decisions_path=decisions)
+        self.assertEqual(findings, {})
+        self.assertTrue(tool_error)
+        self.assertIn("nicht beweisbar", warning)
 
     def test_selbsttest_ist_gruen(self):
         self.assertEqual(gate.selftest(), [])

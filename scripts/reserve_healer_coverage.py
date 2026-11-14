@@ -160,18 +160,6 @@ REGEL_HEILER: dict[str, tuple[str, ...]] = {
 # Pflicht, damit eine künftige Regel nicht zwischen „gedeckt“ und „vergessen“
 # fällt.
 AUSNAHMEN: dict[str, str] = {
-    # #1110: Das Gate verlangt eine inhaltlich passende Kurzantwort. Der
-    # Generator der Kette kann bei fehlendem Feld helfen, deckt aber nicht
-    # alle Fälle: ein leeres vorhandenes Feld wird übersprungen, Provider
-    # können fehlen und YMYL-Schreibschutz kann Änderungen verhindern.
-    # Eine bloße Tabellen-Zuordnung zum Generator wäre deshalb Schein-Deckung.
-    # Das Publish-Gate bleibt unverändert aktiv; fehlende Antworten sind ein
-    # redaktioneller Hold und erfordern fachliche Prüfung und Freigabe.
-    "kurzantwort_failures":
-        "Fehlende oder leere Kurzantworten bleiben bis zur redaktionellen "
-        "Ergänzung und Prüfung im Hold. Der Generator kann unterstützen, "
-        "deckt aber leere Felder, Provider-Ausfälle und YMYL-Schreibschutz "
-        "nicht zuverlässig ab und ersetzt keine fachliche Freigabe (#1110).",
     # #912: Ein fachlicher Befund ist keine automatisch heilbare Formatregel.
     # Die Faktenfrische recherchiert und korrigiert, darf aber einen offenen
     # Befund nicht durch einen Lauf-/Quellenstempel oder Modellantwort schließen.
@@ -247,22 +235,6 @@ AUSNAHMEN: dict[str, str] = {
         "am Entwurf müsste Rechtsangaben umschreiben, ohne sie zu prüfen "
         "(C15). Der Kandidat bleibt als Hold erhalten; zuständig ist die "
         "Redaktion (#714).",
-    # Kurzantwort-Pflicht (10.11.2026, #1110 als #1170 aus main): Das harte
-    # Gate verlangt für jeden veröffentlichten Post ein nicht-leeres
-    # `kurzantwort` im Frontmatter. Die Regel kam ohne Deckungszeile – die
-    # Reserve-Kette hätte den Vorrat Nacht für Nacht an einer Regel geparkt,
-    # die keiner ihrer Heiler kennt (Klassenbefund dieser Wache, #349).
-    # Bewusst KEIN Auto-Heiler: Die Kurzantwort ist die redaktionelle
-    # Aussage des Artikels in ein bis zwei Sätzen (M4). Ein Generator am
-    # Entwurf würde sie erfinden und als Redaktionsaussage ausgeben – genau
-    # der Schein, den C15 verbietet. Der Kandidat bleibt als Entwurf/Hold
-    # erhalten; die Redaktion ergänzt den Satz und gibt frei.
-    "kurzantwort_failures":
-        "Die Kurzantwort ist eine redaktionelle Aussage über den Artikel "
-        "(M4, #1110) – kein Formatfeld, das ein Werkzeug erzeugen darf. Ein "
-        "Heiler würde sie erfinden und als Redaktionsaussage veröffentlichen "
-        "(C15). Der Kandidat bleibt als Entwurf/Hold erhalten; die Redaktion "
-        "ergänzt die Kurzantwort und gibt frei.",
     # Kurzantwort-Verlust (10.11.2026): `kurzantwort_failures` wurde mit #1110
     # (06.11.2026) eine ablehnende Publish-Gate-Regel – die Deckungstabelle
     # bekam keinen Eintrag, und der Reserve-Finisher verweigerte seitdem VOR
@@ -281,12 +253,15 @@ AUSNAHMEN: dict[str, str] = {
     # Ein dritter Schreiber in der Reserve-Kette wäre eine zweite Wahrheit
     # über denselben Text – und würde den Fund verdecken statt ihn zu beheben.
     "kurzantwort_failures":
-        "Die Kurzantwort ist Inhalt, nicht Format: Ein Reserve-Heiler müsste "
-        "sie erfinden, statt sie zurückzuholen (C15). Geheilt wird an den "
-        "beiden echten Stellen – `pflichtfeld_verlust_wache.py --fix` stellt "
-        "ein verlorenes Feld aus HEAD wieder her, `generate_kurzantworten.py` "
-        "erzeugt eine fehlende mit KI-Provider und YMYL-Sperre. Der Entwurf "
-        "bleibt bis dahin zurückgestellt (#1110).",
+        "Die Kurzantwort ist eine redaktionelle Aussage, kein Formatfeld. "
+        "Ein Reserve-Heiler darf sie nicht erfinden (C15). "
+        "`pflichtfeld_verlust_wache.py --fix` kann ein verlorenes Feld aus "
+        "HEAD wiederherstellen; `generate_kurzantworten.py` kann mit "
+        "KI-Provider und YMYL-Sperre unterstützen. Beide decken leere Felder, "
+        "Provider-Ausfälle und Schreibschutz nicht zuverlässig ab. Fehlende "
+        "oder ungeprüfte Antworten bleiben im redaktionellen Hold; fachliche "
+        "Prüfung und Freigabe sind weiterhin erforderlich (#1110).",
+
 }
 
 # ---------------------------------------------------------------------------

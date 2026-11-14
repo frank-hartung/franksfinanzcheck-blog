@@ -123,7 +123,7 @@ Sinkt sie stark ab, brauchst du bessere Dichtungen. Faustregel: Jede undichte St
 - [ ] **Bewegungsmelder** für Keller und Flure nachrüsten: So vergisst niemand mehr das Ausschalten. Die Montage ist oft ohne Fachmann möglich.
 - [ ] **Heizkörper** vor jeder Heizperiode gründlich entlüften: Das sorgt für eine gleichmäßige Wärme. Der Kessel muss weniger Druck aufbauen.
 - [ ] **Thermostate** auf feste Zeiten für Absenkungen einstellen: Nachts reichen oft 17 Grad in den Wohnräumen aus. Das spart massiv Brennstoff.
-- [ ] **Fensterdichtungen** auf Risse oder Lücken kontrollieren: Klebe neue Dichtungen ein, wenn du einen Luftzug spürst. Das Material kostet nur wenige Euro.
+- [ ] [**Fensterdichtungen**](../../posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/) auf Risse oder Lücken kontrollieren: Klebe neue Dichtungen ein, wenn du einen Luftzug spürst. Das Material kostet nur wenige Euro.
 
 Erledige jede Woche eine Aufgabe aus dieser Liste. So wirst du [Schritt für Schritt](../../posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/) sparsamer. Du hast keinen Zeitdruck und siehst stetig Fortschritte. Dokumentiere deine Taten in einem kleinen Heft.
 

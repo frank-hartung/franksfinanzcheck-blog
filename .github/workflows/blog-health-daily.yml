@@ -221,7 +221,8 @@ jobs:
       # beantwortet. Sie ersetzt keine Schwelle: Regel F bleibt unverändert
       # streng, die Alternative wird nur prüfbar.
       - run: python3 scripts/konsolidierung.py --selftest
-      - run: python3 scripts/konsolidierung.py --rollenpaare
+      - name: Rollenpaare – Struktur, Wiedervorlage und Rollenlinks (fail-closed)
+        run: python3 scripts/konsolidierung.py --rollenpaare
 
       - run: |
           git config user.name "Agent (Arena.ai)"

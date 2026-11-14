@@ -341,8 +341,12 @@ def promote_requeue_to_min(posts_dir=None, validator=None) -> list[str]:
         if blocked:
             print("  ⛔ Re-Queue-Fallback zurückgestellt "
                   "(Weiterleitungsquelle): " + ", ".join(blocked))
+        held = sorted({p['slug'] for p in all_waiting if p.get('reserve_hold')})
+        if held:
+            print("  ⛔ Re-Queue-Fallback zurückgestellt "
+                  "(Reserve-Sperre): " + ", ".join(held))
         waiting = [p for p in all_waiting
-                   if p['slug'] not in redirect_sources]
+                   if p['slug'] not in redirect_sources and not p.get('reserve_hold')]
         waiting.sort(key=lambda p: (p['date_raw'], p['slug']))
         if not waiting:
             break
@@ -352,6 +356,9 @@ def promote_requeue_to_min(posts_dir=None, validator=None) -> list[str]:
                 break
             index = Path(post['path'])
             original = index.read_text(encoding='utf-8')
+            if park_state.reserve_hold(original):
+                print(f"  ⛔ Re-Queue-Fallback zurückgestellt (Reserve-Sperre): {post['slug']}")
+                continue
             accepted = False
             try:
                 iso = cg.now_utc_iso()
@@ -360,8 +367,8 @@ def promote_requeue_to_min(posts_dir=None, validator=None) -> list[str]:
                     return published
                 text = re.sub(r"(?m)^date:\s*.*$", f"date: {iso}", original, count=1)
                 index.write_text(text, encoding='utf-8')
-                park_state.release(str(index), do_fix=True)
-                accepted = bool(validator(index))
+                released = park_state.release(str(index), do_fix=True)
+                accepted = released and bool(validator(index))
             finally:
                 if not accepted:
                     index.write_text(original, encoding='utf-8')

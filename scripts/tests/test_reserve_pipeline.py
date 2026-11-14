@@ -36,6 +36,7 @@ aus demselben Lauf, ebenfalls hier festgenagelt:
      versioniert. Am 22.09. verschwand ein quarantänisierter Kandidat spurlos,
      weil die Staging-Politik ihn für fremden Content hielt.
 """
+import ast
 import contextlib
 import datetime as dt
 import os
@@ -974,6 +975,15 @@ class DeckungsWacheTests(unittest.TestCase):
         luecken = rhc.deckung(ausnahmen=ohne)["luecken"]
         self.assertIn(("kurzantwort_failures", "keine-deckung"),
                       {(eintrag["regel"], eintrag["art"]) for eintrag in luecken})
+
+    def test_ausnahmen_haben_keine_still_ueberschriebenen_schluessel(self):
+        baum = ast.parse((SCRIPTS / "reserve_healer_coverage.py").read_text(encoding="utf-8"))
+        zuweisung = next(k for k in baum.body if isinstance(k, ast.AnnAssign)
+                         and isinstance(k.target, ast.Name) and k.target.id == "AUSNAHMEN")
+        self.assertIsInstance(zuweisung.value, ast.Dict)
+        schluessel = [ast.literal_eval(k) for k in zuweisung.value.keys]
+        self.assertEqual(len(schluessel), len(set(schluessel)),
+                         "Doppelte Ausnahme überschreibt eine redaktionelle Begründung")
 
     def test_fehlender_heiler_wird_erkannt(self):
         """Der reale #349-Fall: Regel im Gate, Heiler nicht in der Kette."""

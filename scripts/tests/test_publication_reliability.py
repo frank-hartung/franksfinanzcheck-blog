@@ -15,6 +15,7 @@ import bot_status
 import check_uniqueness as twin
 import grammar_check
 import profi_polish
+import park_state
 import publication_check as pc
 import publication_release as pr
 import publish as manual_publish
@@ -98,6 +99,74 @@ class DeliveryTests(unittest.TestCase):
         self.assertEqual(published, [])
         self.assertEqual(post.read_bytes(), before)
         self.assertIn('Weiterleitungsquelle', output.getvalue())
+
+    @patch('reserve_pool.now_utc_iso', lambda: '2026-09-07T12:00:00Z')
+    @patch('reserve_pool.datetime.date', Monday)
+    def test_reserve_hold_outweighs_a_conflicting_pool_flag(self):
+        blocked = self.post('a-blocked', reserve=True)
+        retired = self.post('b-retired', reserve=True)
+        held = self.post('c-park-hold', reserve=True)
+        available = self.post('d-available', reserve=True)
+        for post, marker in (
+            (blocked, 'reserve_blocked: "Redaktionelle Prüfung ausstehend"'),
+            (retired, 'reserve_retired: true'),
+            (held, 'cadence_grund: "fachliche Prüfung ausstehend"'),
+        ):
+            post.write_text(post.read_text().replace('reserve: true\n---',
+                                                     'reserve: true\n' + marker + '\n---'))
+        before = {post: post.read_bytes() for post in (blocked, retired, held)}
+        self.assertEqual(rp.reserve_drafts(self.posts), [available])
+        validated = []
+        with redirect_stdout(io.StringIO()):
+            published = rp.publish_to_min(
+                posts_dir=self.posts,
+                validator=lambda post: validated.append(post.parent.name) or True)
+        self.assertEqual(published, ['d-available'])
+        self.assertEqual(validated, ['d-available'])
+        for post, original in before.items():
+            self.assertEqual(post.read_bytes(), original)
+
+    @patch('reserve_pool.now_utc_iso', lambda: '2026-09-07T12:00:00Z')
+    @patch('reserve_pool.datetime.date', Monday)
+    def test_reserve_rechecks_hold_before_writing(self):
+        post = self.post('a-held', reserve=True)
+        post.write_text(post.read_text().replace('reserve: true\n---',
+                        'reserve: true\nreserve_blocked: "Redaktionelle Prüfung"\n---'))
+        before = post.read_bytes()
+        validated = []
+        # Simuliert einen veralteten Kandidaten-Snapshot nach einer Sperre.
+        with patch.object(rp, 'reserve_drafts', return_value=[post]), \
+             redirect_stdout(io.StringIO()):
+            published = rp.publish_to_min(
+                posts_dir=self.posts,
+                validator=lambda p: validated.append(p) or True)
+        self.assertEqual(published, [])
+        self.assertEqual(validated, [])
+        self.assertEqual(post.read_bytes(), before)
+
+    def test_manual_publish_does_not_remove_explicit_reserve_holds(self):
+        for marker in ('reserve_blocked: "Redaktionelle Prüfung"',
+                       'reserve_retired: true', 'reserve_retired: false'):
+            with self.subTest(marker=marker):
+                post = self.post('held-' + str(len(list(self.posts.iterdir()))), draft=True)
+                post.write_text(post.read_text().replace('reserve: false\n---',
+                                                        marker + '\n---'))
+                before = post.read_bytes()
+                with patch.object(manual_publish, 'POSTS_DIR', str(self.posts)), \
+                     redirect_stdout(io.StringIO()) as output:
+                    count = manual_publish.publish(str(post))
+                self.assertEqual(count, 0)
+                self.assertEqual(post.read_bytes(), before)
+                self.assertIn('Reserve-Sperre', output.getvalue())
+
+    def test_park_release_does_not_clear_an_explicit_reserve_hold(self):
+        post = self.post('held-queue', draft=True)
+        post.write_text(post.read_text().replace(
+            'draft: true\n', 'draft: true\ncadence_wait: true\n'
+            'reserve_blocked: "Redaktionelle Prüfung"\n'))
+        before = post.read_bytes()
+        self.assertFalse(park_state.release(post))
+        self.assertEqual(post.read_bytes(), before)
 
     def test_manual_publish_cannot_bypass_redirect_source_guard(self):
         slug = 'alias-source'
@@ -183,6 +252,69 @@ class DeliveryTests(unittest.TestCase):
         self.assertIn('draft: false', accepted.read_text())
         self.assertNotIn('cadence_wait:', accepted.read_text())
         self.assertIn('draft: false', live.read_text())
+
+    def test_requeue_fallback_does_not_promote_a_reserve_hold(self):
+        class FixedDateTime(dt.datetime):
+            @classmethod
+            def now(cls, tz=None):
+                return cls(2026, 9, 7, 12, 0, tzinfo=dt.timezone.utc)
+
+        self.post('live', draft=False)
+        held = self.post('a-held')
+        available = self.post('b-available')
+        for post in (held, available):
+            post.write_text(post.read_text().replace(
+                'draft: true\n', 'draft: true\ncadence_wait: true\n'))
+        held.write_text(held.read_text().replace(
+            'cadence_wait: true\n',
+            'cadence_wait: true\nreserve_blocked: "Redaktionelle Prüfung"\n'))
+        before = held.read_bytes()
+        validated = []
+        with patch.object(pr.dt, 'datetime', FixedDateTime), \
+             patch('cadence_guard.now_utc_iso', lambda: '2026-09-07T12:00:00Z'), \
+             redirect_stdout(io.StringIO()):
+            published = pr.promote_requeue_to_min(
+                posts_dir=self.posts,
+                validator=lambda post: validated.append(post.parent.name) or True)
+        self.assertEqual(published, ['b-available'])
+        self.assertEqual(validated, ['b-available'])
+        self.assertEqual(held.read_bytes(), before)
+
+    def test_cadence_does_not_promote_a_reserve_hold(self):
+        import cadence_guard as cg
+        held = self.post('a-held')
+        available = self.post('b-available')
+        for post in (held, available):
+            post.write_text(post.read_text().replace(
+                'draft: true\n', 'draft: true\ncadence_wait: true\n'))
+        held.write_text(held.read_text().replace(
+            'cadence_wait: true\n',
+            'cadence_wait: true\nreserve_retired: true\n'))
+        before = held.read_bytes()
+        posts = cg.load_posts(self.posts)
+        with patch('cadence_guard.datetime.date', Monday), \
+             redirect_stdout(io.StringIO()):
+            promoted = cg.requeue_to_capacity(
+                posts, max_d=1, now_fn=lambda: '2026-09-07T12:00:00Z')
+        self.assertEqual([p['slug'] for p in promoted], ['b-available'])
+        self.assertEqual(held.read_bytes(), before)
+
+    def test_cadence_rechecks_a_stale_candidate_snapshot(self):
+        import cadence_guard as cg
+        held = self.post('held')
+        held.write_text(held.read_text().replace(
+            'draft: true\n', 'draft: true\ncadence_wait: true\n'))
+        posts = cg.load_posts(self.posts)
+        held.write_text(held.read_text().replace(
+            'cadence_wait: true\n',
+            'cadence_wait: true\nreserve_blocked: "Redaktionelle Prüfung"\n'))
+        before = held.read_bytes()
+        with patch('cadence_guard.datetime.date', Monday), \
+             redirect_stdout(io.StringIO()):
+            promoted = cg.requeue_to_capacity(
+                posts, max_d=1, now_fn=lambda: '2026-09-07T12:00:00Z')
+        self.assertEqual(promoted, [])
+        self.assertEqual(held.read_bytes(), before)
 
     def test_requeue_alias_source_is_never_promoted(self):
         """Auch der Fallback überspringt eine Quelle aus der Redirect-SSOT."""

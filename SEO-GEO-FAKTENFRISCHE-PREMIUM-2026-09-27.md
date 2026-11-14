@@ -83,6 +83,11 @@ Schreibvorgang wird geprüft, dass der Body byte-identisch geblieben ist.
 
 ## 2. GEO: Belegkette wird sichtbar UND maschinenlesbar
 
+> **Korrektur 13.11.2026:** `sdDatePublished` bezeichnet das Veröffentlichungsdatum
+> der strukturierten Daten, nicht das Faktencheckdatum. Es wird deshalb nicht
+> mehr aus `faktencheck` befüllt. Die folgende Passage beschreibt den damaligen
+> Stand; die aktuelle Ausgabe ist in `docs/ANLEITUNG-FAKTENFRISCHE.md` erklärt.
+
 **Neu:** `layouts/_partials/ff_quellen_box.html` (Posts + Ratgeber-Silos),
 CSS-Block „Quellen & Faktenstand“ in `z-premium-blog.css`,
 `citation` + `sdDatePublished` in `layouts/_partials/schema_article.html`.

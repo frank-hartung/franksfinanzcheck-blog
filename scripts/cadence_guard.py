@@ -282,6 +282,7 @@ def load_posts(posts_dir=None):
             "date_raw": raw_iso or date_iso,
             "draft": bool(re.search(r"(?m)^draft:\s*true\s*$", content)),
             "wait": bool(re.search(r"(?m)^cadence_wait:\s*true\s*$", content)),
+            "reserve_hold": park_state.reserve_hold(content),
             # Park-Zustand (single source of truth: scripts/park_state.py)
             "state": park["state"],          # live|queue|hold|manual|lost
             "grund": park["grund"],
@@ -472,7 +473,7 @@ def requeue_to_capacity(posts, max_d, do_fix=True, now_fn=None):
     else:
         redirect_sources = set()
     waiting = [p for p in posts
-               if p["draft"] and p["wait"]
+               if p["draft"] and p["wait"] and not p.get("reserve_hold")
                and p["slug"] not in redirect_sources]
     blocked = sorted({p["slug"] for p in posts
                       if p["draft"] and p["wait"]
@@ -480,18 +481,29 @@ def requeue_to_capacity(posts, max_d, do_fix=True, now_fn=None):
     if blocked:
         print("  ⛔ Re-Queue zurückgestellt (Weiterleitungsquelle): "
               + ", ".join(blocked))
+    held = sorted({p["slug"] for p in posts
+                   if p["draft"] and p["wait"] and p.get("reserve_hold")})
+    if held:
+        print("  ⛔ Re-Queue zurückgestellt (Reserve-Sperre): " + ", ".join(held))
     waiting.sort(key=lambda p: (p["date_raw"], p["slug"]))
     promoted = []
     for p in waiting[:capacity]:
         if not do_fix:
             break
+        # Vor dem ersten Schreibgriff noch einmal prüfen, falls die Sperre
+        # nach dem Laden der Kandidatenliste hinzugefügt wurde.
+        if park_state.reserve_hold(Path(p["path"]).read_text(encoding="utf-8")):
+            print(f"  ⛔ Re-Queue zurückgestellt (Reserve-Sperre): {p['slug']}")
+            continue
         iso = now_fn()
         _set_date(p["path"], iso)
         # release() = draft: false + SÄMTLICHE Park-Felder weg. Das ist der
         # entscheidende Unterschied zum alten Einzelflaggen-Löschen: danach ist
         # der Post wieder eindeutig "live" und kann nicht als "lost" fehl-
         # gedeutet werden (und ein spätes Gate-Halten schreibt seinen Grund).
-        park_state.release(p["path"], do_fix=True)
+        if not park_state.release(p["path"], do_fix=True):
+            print(f"  ⛔ Re-Queue-Freigabe verweigert: {p['slug']}")
+            continue
         promoted.append(p)
         print(f"  ♻️  Re-Queue → live: {p['slug']} (neu datiert {today.isoformat()})")
     return promoted

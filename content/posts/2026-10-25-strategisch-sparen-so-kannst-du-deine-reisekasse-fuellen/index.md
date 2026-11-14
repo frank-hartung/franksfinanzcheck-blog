@@ -12,14 +12,14 @@ author: "Frank Hartung"
 keywords: ["Reisekasse füllen", "Urlaubsbudget", "Geld für Urlaub sparen", "Cashback Tipps", "Strategisch sparen", "Strategisch", "Reisekasse", "Frugalismus"]
 pinwand: Günstig reisen | Reisebudget & Mietwagen
 pin_title: "Mehr Geld für den Urlaub: So polsterst du deine Reisekasse auf"
-pin_description: "*Werbung | Der Traumurlaub scheitert am Budget? Mit diesen 7 Alltags-Tricks füllt sich deine Urlaubskasse fast von allein – vom Cashback-Konto über No-Spend-Tage bis zum cleveren Verkaufen. In der Beispielrechnung des Artikels kommen so bis zum Sommer 500 € zusammen – als frei gewählte Annahmen, nicht als Marktdurchschnitt. Jetzt lesen!"
+pin_description: "*Werbung | Plane deine Reisekasse mit einer festen Sparrate und prüfe deine Fixkosten. Im Beispiel ergeben frei gewählte Annahmen über zwölf Monate 500 € – kein Marktdurchschnitt. Jetzt lesen!"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "relaxed"
 redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
-  aenderungsgrund: "Fachliche Korrektur zu #763; am 16.10.2026 zusätzlich Lesbarkeits-Heilung und Glättung der Transparenz-Hinweise; redaktionelle Freigabe weiterhin ausstehend"
+  aenderungsgrund: "Fachliche Korrektur zu #763; am 13.11.2026 Datenschutz-Dublette bereinigt, Modellzeitraum und Fluggastrechte präzisiert; redaktionelle Freigabe weiterhin ausstehend"
 
 inspiration: "Mehr Geld für den Urlaub: So polsterst du deine Reisekasse auf"
 cover:
@@ -37,8 +37,18 @@ quellen:
     titel: "Reise & Mobilität"
     url: "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
     herausgeber: "Verbraucherzentrale"
+  - id: "Q2"
+    titel: "Datenauskunft: So erfahren Sie, was Unternehmen über Sie wissen"
+    url: "https://www.verbraucherzentrale.de/wissen/digitale-welt/datenschutz/datenauskunft-so-erfahren-sie-was-unternehmen-ueber-sie-wissen-44238"
+    herausgeber: "Verbraucherzentrale"
+    recherchiert_am: 2026-11-13
+  - id: "Q3"
+    titel: "Fluggastrechte auf einen Blick: Wann habe ich welchen Anspruch?"
+    url: "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/unterwegs-sein/fluggastrechte-auf-einen-blick-wann-habe-ich-welchen-anspruch-10366"
+    herausgeber: "Verbraucherzentrale"
+    recherchiert_am: 2026-11-13
 faktencheck: 2026-11-11
-lastmod: 2026-11-11
+lastmod: 2026-11-13
 kurzantwort: "Rechne die Sparrate so: Reisekosten minus bereits Erspartem, geteilt durch die Monate bis zur Zahlung. Cashback ist ein Extra, keine Grundlage. Modellrechnungen nennen ihre Annahmen."
 ---
 
@@ -167,7 +177,7 @@ Am ersten Tag jedes Monats stellst du vier kurze Fragen. Schreib die Antworten i
 - [ ] Boni ohne Auszahlung sind nicht eingeplant.
 - [ ] Storno, Zahlung und Mietregeln sind gelesen.
 
-Reguliert ist dabei nur, was der Anbieter schuldet, nicht was du sparst: Bei Pauschalreisen gilt das Pauschalreiserecht mit Storno- und Insolvenzregeln (§§ 651a ff. BGB), bei Flügen die EU-Fluggastrechte-Verordnung 261/2004. Lies die Bedingungen, bevor du zahlst – dort steht, was im Streitfall gilt.
+Reguliert ist dabei nur, was der Anbieter schuldet, nicht was du sparst: Bei Pauschalreisen gilt das Pauschalreiserecht mit Storno- und Insolvenzregeln (§§ 651a ff. BGB). Bei Flügen können die EU-Fluggastrechte gelten, wenn die Voraussetzungen erfüllt sind. Lies zusätzlich die Bedingungen, bevor du zahlst.
 
 ## Passende Beiträge zum Weiterlesen
 
@@ -188,8 +198,7 @@ Rechne: Kosten der Reise minus Geld, das schon da ist. Teile den Rest durch die 
 
 ### Sind Cashback‑Apps sicher für meine Daten?
 
-Das lässt sich nicht pauschal zusagen. Anbieter mit Sitz in der EU müssen sich an die DSGVO halten (Verordnung (EU) 2016/679): Sie dürfen nur Daten verarbeiten, für die eine Rechtsgrundlage besteht, und du hast Rechte auf Auskunft, Berichtigung, Löschung und Widerruf einer Einwilligung. Sieh dir trotzdem Anbieter, Berechtigungen und Datenschutzhinweise an. Frag auch: Wie lösche ich mein Konto und meine Daten? Rechtliche Pflichten ersetzen nicht deine eigene Entscheidung über die Zustimmung.
-Das lässt sich nicht pauschal zusagen. Sieh dir Anbieter, Berechtigungen und Datenschutzhinweise an. Frag auch: Wie lösche ich mein Konto und meine Daten? Nach der DSGVO muss der Anbieter Zweck und Rechtsgrundlage der Verarbeitung nennen und dir Auskunft und Löschung deiner Daten ermöglichen. Diese Pflichten ersetzen nicht deine eigene Entscheidung über die Zustimmung.
+Das lässt sich nicht pauschal zusagen. Die DSGVO (Verordnung (EU) 2016/679) regelt die Verarbeitung personenbezogener Daten. Du kannst Auskunft verlangen und Daten unter bestimmten Voraussetzungen berichtigen oder löschen lassen. Sieh dir Anbieter, Berechtigungen und Datenschutzhinweise an. Prüfe auch, wie du dein Konto schließen und deine Daten löschen lassen kannst.
 
 ### Muss ich jedes Jahr meine Versicherung wechseln?
 
@@ -197,7 +206,7 @@ Nein. Prüfen und Wechseln sind zwei Schritte. Vergleiche den nötigen Schutz, d
 
 ### Welche Regeln gelten für Flugreisen?
 
-Bei Flügen von und nach Deutschland und innerhalb der EU gilt die EU-Fluggastrechte-Verordnung (EG) Nr. 261/2004. Sie regelt Ansprüche bei Annullierung, großer Verspätung und Nichtbeförderung – unabhängig vom Ticketpreis. Stornierungs-, Zahlungs- und Mietbedingungen stehen dagegen in den Vertragsbedingungen deines Anbieters; lies sie vor der Buchung. Was bei Verspätung oder Ausfall gilt, steht in [unserem Leitfaden zur Flugverspätung](../../posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/).
+Für Abflüge aus der EU und für Flüge aus einem Drittstaat in die EU mit einer EU-Fluggesellschaft kann die EU-Fluggastrechte-Verordnung (EG) Nr. 261/2004 gelten. Sie regelt unter Voraussetzungen Ansprüche bei Annullierung, großer Verspätung und Nichtbeförderung. Ob ein Anspruch besteht, hängt vom Einzelfall ab. Prüfe vor der Buchung auch Stornierungs-, Zahlungs- und Mietbedingungen. Mehr dazu steht in [unserem Leitfaden zur Flugverspätung](../../posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/).
 
 ### Brauche ich ein separates Konto?
 
