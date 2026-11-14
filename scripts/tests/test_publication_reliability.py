@@ -544,7 +544,12 @@ class R5HoldRecoveryTests(unittest.TestCase):
                      patch.object(pg, 'readability_failures', return_value=({}, None)), \
                      patch.object(pg, 'textverstaendnis_failures', return_value=({}, None)), \
                      patch.object(pg, 'keyword_failures', return_value=({}, None)), \
+                     patch.object(pg, 'quellen_failures', return_value=({}, None)), \
                      patch.object(pg, 'keyword_self_heal_candidates', return_value=0):
+                    # Das Quellen-Gate (#1222, 14.11.2026) ist wie jedes andere
+                    # Gate hier stillgelegt: Dieser Test prüft allein, dass die
+                    # R5-Heilung VOR der harten Prüfung greift. Das Quellen-Gate
+                    # selbst prüft `test_publish_gate_quellen.py`.
                     self.assertEqual(pg.main(), 0)
             finally:
                 pg.POSTS_DIR, pg.DRY_RUN, pg.STRICT = old
