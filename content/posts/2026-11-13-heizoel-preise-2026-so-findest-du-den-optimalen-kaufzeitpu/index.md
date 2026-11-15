@@ -18,13 +18,13 @@ redaktionelle_pruefung:
 kurzantwort: "Einen verlässlich besten Monat oder garantierten Tiefpreis kann dieser Ratgeber nicht nennen. Vergleiche konkrete Angebote für dieselbe Liefermenge und Lieferadresse, rechne sämtliche ausgewiesenen Kosten ein und plane die Bestellung, bevor der Tank knapp wird."
 affiliate_exempt: true
 affiliate_exempt_reason: "Für Heizöl ist keine passende, registrierte Partnerroute vorhanden (CHECK24 führt kein Heizöl); ein Strom- oder Gastarif-CTA wäre sachfremd. Der Artikel bleibt deshalb bewusst ohne Affiliate-CTA."
-tags: ["Heizkosten senken"]
+tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Heizölpreise", "Heizöl bestellen", "Heizkosten", "Angebote vergleichen", "Lieferkosten"]
+keywords: ["Heizölpreise", "Heizöl bestellen", "Heizkosten", "Angebote vergleichen", "Lieferkosten", "Heizölpreise vergleichen", "vergleichen", "Bestellung"]
 pin_title: "Heizöl bestellen: Angebote sorgfältig vergleichen"
-pin_description: "Heizölangebote nachvollziehbar vergleichen: Liefermenge, Gesamtpreis, Zusatzkosten und Lieferbedingungen prüfen – ohne unbelegte Preisprognose."
+pin_description: "*Werbung | Heizöl bestellen ohne unbelegte Spartipps: So vergleichst du Angebote, prüfst Lieferkosten und planst den Tank rechtzeitig. Mehr Spartipps auf FranksFinanzcheck! #heizoelpreise #heizoel #bestellen"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"

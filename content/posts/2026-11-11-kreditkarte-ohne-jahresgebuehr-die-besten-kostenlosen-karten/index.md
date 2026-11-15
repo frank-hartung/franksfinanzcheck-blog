@@ -6,7 +6,7 @@ draft: true
 tags: ["Kreditkarte und Kredit"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
-keywords: ["Kreditkarte ohne Gebühren", "Kreditkarten Vergleich", "Kostenlose Kreditkarte", "Kreditkarte ohne Jahresgebühr", "Kreditkarte", "Jahresgebühr"]
+keywords: ["Kreditkarte ohne Gebühren", "Kreditkarten Vergleich", "Kostenlose Kreditkarte", "Kreditkarte ohne Jahresgebühr", "Kreditkarte", "Jahresgebühr", "vergleichen"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
@@ -16,7 +16,7 @@ redaktionelle_pruefung:
   status: "ausstehend"
   aenderungsgrund: "Entwurf am 13.11.2026 zu Gebühren, Teilzahlung und Kartenwahl überarbeitet; fachliche und redaktionelle Freigabe ausstehend"
 pin_title: "Kreditkarte ohne Jahresgebühr: Kosten und Bedingungen vergleichen"
-pin_description: "*Werbung | Keine Jahresgebühr bedeutet nicht automatisch kostenlos. Vergleiche Kartenart, Fremdwährung, Bargeld und Rückzahlung. Mehr Spartipps auf FranksFinanzcheck!"
+pin_description: "*Werbung | Kreditkarte ohne Jahresgebühr: Vergleiche Auslandskosten, Bargeld, Teilzahlung und Bedingungen, bevor du eine Karte auswählst. Mehr Spartipps auf FranksFinanzcheck! #kreditkarte #ohne #gebuehren"
 cover:
   image: "images/covers/2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten.jpg"
   alt: "Kreditkarte ohne Jahresgebühr: Kosten und Bedingungen vergleichen"
