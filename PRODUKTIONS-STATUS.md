@@ -1,18 +1,18 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-11-14 23:48 UTC  
+**Stand:** 2026-11-15 23:54 UTC  
 **Stufe:** OK  
-**Befund:** Letzter Publikationstag (2026-11-13): 2 Artikel – Ziel erfüllt. – Bestand: 2 von Gates gehalten (ältester 5 Tage: faktenfrische: 11a92bff688ccbb5a485 (luecke): Die Behauptung, dass bis zum Sommer 500 € mehr im Urlaubsbudget verfügbar sind, fehlt eine Quellenangabe.; 1d4896d8ed60f5b6921f (pr…)
+**Befund:** Letzter Publikationstag (2026-11-13): 2 Artikel – Ziel erfüllt. – Bestand: 1 von Gates gehalten (ältester 4 Tage: faktenfrische: 6d89862b38c33c827817 (praezision): Die pauschale Behauptung, Hardware bleibe stets Eigentum des Nutzers, ist unpräzise, da die Bundesnetzagentur die Kupfer-Glas-M…)
 
 | Kennzahl | Wert |
 |---|---|
-| Heute | 2026-11-14 (Samstag) |
+| Heute | 2026-11-15 (Sonntag) |
 | Publikationstag heute | nein |
 | Artikel letzter Publikationstag (2026-11-13) | 2 |
-| Letzter Artikel überhaupt | 2026-11-13 (1 Tage her) |
+| Letzter Artikel überhaupt | 2026-11-13 (2 Tage her) |
 | Live-Artikel gesamt | 84 |
 | Förderfähig in der Re-Queue | 0 |
-| Von Gates gehalten (braucht Korrektur) | 2 |
+| Von Gates gehalten (braucht Korrektur) | 1 |
 | Mindestziel/Tag | 2 |
 
 _Wird bei jedem Lauf aktualisiert (auch bei Leerlauf) – diese Datei kann nicht einfrieren._
