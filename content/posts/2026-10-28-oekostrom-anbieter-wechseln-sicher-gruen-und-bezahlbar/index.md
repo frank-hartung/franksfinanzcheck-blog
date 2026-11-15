@@ -100,7 +100,9 @@ Du bist nicht mehr an lange Laufzeiten gebunden. Wenn der Markt sich ändert, re
 
 Der Begriff Ökostrom ist gesetzlich nicht streng geschützt. Jeder darf seinen Strom grün nennen, wenn er entsprechende Zertifikate kauft. Das führt oft zu Verwirrung. Damit du sicher bist, dass dein Geld wirklich die Energiewende unterstützt, solltest du auf Gütesiegel achten. 
 
-Die Verbraucherzentrale empfiehlt zwei Siegel als Hilfe: „Grüner Strom Label“ und „ok-power-Label“. Sie zeigen Tarife mit Nutzen für die Energiewende ([Q2](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/ist-ein-tarif-mit-oekostrom-und-oekogas-ueberhaupt-sinnvoll-8207)). Die Siegel haben eigene Regeln. Sie sind kein Preisvergleich. Sie versprechen keinen günstigen Preis. Prüfe daher: Gilt das Siegel für deinen Tarif? Und vergleiche die Gesamtkosten pro Jahr.
+Die Verbraucherzentrale empfiehlt zwei Siegel als Hilfe: „Grüner Strom Label“ und „ok-power-Label“. Sie zeigen Tarife mit Nutzen für die Energiewende ([Q2](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/ist-ein-tarif-mit-oekostrom-und-oekogas-ueberhaupt-sinnvoll-8207)). Die Siegel haben eigene Regeln.
+
+Sie sind kein Preisvergleich. Sie versprechen keinen günstigen Preis. Prüfe daher: Gilt das Siegel für deinen Tarif? Und vergleiche die Gesamtkosten pro Jahr.
 
 Achte auch auf die Firma dahinter. Gehört der Anbieter zu einem Kohlekonzern? Oder ist er eine freie Genossenschaft?
 

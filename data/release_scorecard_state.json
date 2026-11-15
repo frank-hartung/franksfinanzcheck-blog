@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "generated_at": "2026-11-15T11:49:42Z",
-  "modus": "kandidaten",
-  "commit": "ddfaa927c6ff70e736bcc0bb64f4aab1f42cd9b2",
+  "generated_at": "2026-11-15T12:44:51Z",
+  "modus": "live",
+  "commit": "b2e261b6d4242514d4ddb359d8f4701019ace297",
   "kapazitaet": {
     "stichtag": "2026-11-15",
     "basis": "2026-11-15",
     "projiziert": false,
     "artikel": 131,
-    "faellig": 1,
+    "faellig": 0,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
@@ -25,7 +25,7 @@
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
-    "abbau_tage": 0,
+    "abbau_tage": null,
     "verletzungen_alt": 0,
     "verletzungen_neu": 0,
     "verletzungen_folge": 0,
@@ -79,6 +79,7 @@
         "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
         "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
         "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss",
+        "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit",
         "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
         "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
         "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt",
@@ -87,7 +88,7 @@
         "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto",
         "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen"
       ],
-      "anzahl": 26
+      "anzahl": 27
     },
     {
       "check": "T1w-zeichenlaenge-optimum",
@@ -100,24 +101,13 @@
         "2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler"
       ],
       "anzahl": 2
-    },
-    {
-      "check": "T6-textverstaendnis",
-      "dimension": "technik",
-      "wirkung": "blockiert",
-      "entscheidung": "auto",
-      "quelle": "scripts/textverstaendnis_guard.py (via publish_gate.textverstaendnis_failures)",
-      "artikel": [
-        "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar"
-      ],
-      "anzahl": 1
     }
   ],
   "befundlage": {
-    "offen": 156,
-    "seiten": 40,
-    "live_befunde": 102,
-    "live_seiten": 26,
+    "offen": 165,
+    "seiten": 43,
+    "live_befunde": 105,
+    "live_seiten": 27,
     "ueberholt": 102,
     "ohne_fassung": 11,
     "nicht_entscheidbar": 5,
@@ -144,6 +134,7 @@
       "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor": 5,
       "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": 5,
       "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": 3,
+      "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": 3,
       "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": 3,
       "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": 5,
       "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": 3,
@@ -1309,22 +1300,29 @@
       "checks": []
     },
     "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": {
-      "sha256": "4b795e5d50eff5de5c9a3d33f5279dfe723517ae245fe52e4c0a4ad27eb95bb3",
-      "urteil": "freigabe-reif",
+      "sha256": "ba6ce4926c2c95fa969390de62e5e28fbbd71821328863c7a9b0b3d14f7376f5",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "naechste_pruefung": "2026-12-30",
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "25d6b9a720f981e8e9df (praezision): Bei der Bewertung flexibler Kosten sollte die moderate Preisentwicklung bei Nahrungsmitteln (+0,4 %) den stark steigenden Energiekosten gegenübergestellt werden, um Sparpotenziale zu priorisieren.; 3693b612533c24dcd1ea (luecke): Der Ratgeber empfiehlt die Prüfung von Stromverträgen, vernachlässigt aber den massiven Preistrend bei Energie von +12,2 %, der die Kalk"
+        }
+      ]
     },
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": {
       "sha256": "44c0eb036d54cc18a2779dc051dce3905328ce3186de405c49999acf19eb4ce7",
@@ -1352,7 +1350,7 @@
       ]
     },
     "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
-      "sha256": "4a4a079656db7532d4c812ec6761d7ea5f413aa00971d45423659e4f44f6b234",
+      "sha256": "b8ece623681fd18da2b650b9441b6d494f0dbbb62a49f87dd2db84710758ab06",
       "urteil": "freigabe-reif",
       "risikoklasse": "erhoeht",
       "dimensionen": {
@@ -1365,8 +1363,8 @@
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-21",
-      "siegel_drift": "unverändert",
+      "naechste_pruefung": "2026-12-30",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": {
@@ -1682,7 +1680,7 @@
       ]
     },
     "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
-      "sha256": "7f74c6af3efff4c7e3f86742948e1b1774bbef9733942aa18227fad36aa86533",
+      "sha256": "baa445857bd19044d23dd4ced774e999c0a21196319ccbbb42460e2e1e5b4ad9",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1696,7 +1694,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-11",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1743,11 +1741,11 @@
       "checks": []
     },
     "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": {
-      "sha256": "9c998af811eba6a3bffde517786f9c7f125ac08912375f2c68505d1454546124",
-      "urteil": "blockiert",
+      "sha256": "59a78606e482c94cef2c1d5e343b39e7041cb6bef8b6f92a0a933d3c9fa1ee26",
+      "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
-        "technik": "blockiert",
+        "technik": "bestanden",
         "quellen": "bestanden",
         "faktenalter": "bestanden",
         "affiliate": "bestanden",
@@ -1757,15 +1755,8 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-12",
-      "siegel_drift": "unverändert",
-      "checks": [
-        {
-          "check": "T6-textverstaendnis",
-          "dimension": "technik",
-          "wirkung": "blockiert",
-          "detail": "R5-ABSATZ-HART: Absatz mit 7 Sätzen (Limit 6): Die Verbraucherzentrale empfiehlt zwei Siegel als Hilfe: „Grüner Strom Label“ und „ok-powe…"
-        }
-      ]
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": []
     },
     "2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem": {
       "sha256": "c3a3ee37cc303d2b87aedff4373545815b52b447e53eca269d34628c1f609993",
