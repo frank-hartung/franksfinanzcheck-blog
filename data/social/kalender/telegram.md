@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 14.11.2026 19:45 (Europe/Berlin)  
+> Automatisch aktualisiert: 15.11.2026 00:03 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -24,6 +24,9 @@
 ### Sa, 28. November 2026
 - **07:00** ⏳ Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/
+### So, 29. November 2026
+- **07:00** ⏳ Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/
 
 ## Zuletzt veröffentlicht
 

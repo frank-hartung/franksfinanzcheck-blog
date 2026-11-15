@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Instagram
 
-> Automatisch aktualisiert: 14.11.2026 19:45 (Europe/Berlin)  
+> Automatisch aktualisiert: 15.11.2026 00:03 (Europe/Berlin)  
 > Profil: https://www.instagram.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `instagram.ics`
 
@@ -36,6 +36,9 @@
 ### Sa, 28. November 2026
 - **11:45** ⏳ WLAN-Frust lösen: So findest du den besten Router Standort — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/
+### So, 29. November 2026
+- **11:45** ⏳ Fenster abdichten: So stoppst du Zugluft an alten Rahmen — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/
 
 ## Zuletzt veröffentlicht
 

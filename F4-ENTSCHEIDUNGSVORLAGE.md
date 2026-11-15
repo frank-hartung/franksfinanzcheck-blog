@@ -4,7 +4,7 @@
 Scorecard blockiert, bis der Herausgeber die heutigen Fassungen bestätigt.
 Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
-**Bezugsstand: 2026-11-14** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
+**Bezugsstand: 2026-11-15** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
 
 **97 offene Live-Befunde auf 25 Artikeln.** Für **78** gibt es frühere Entscheidungen zu diesem Befund;
 die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **19** Befunde haben keine frühere aktive Entscheidung.

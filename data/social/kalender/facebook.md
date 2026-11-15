@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Facebook (Seite)
 
-> Automatisch aktualisiert: 14.11.2026 19:45 (Europe/Berlin)  
+> Automatisch aktualisiert: 15.11.2026 00:03 (Europe/Berlin)  
 > Profil: https://www.facebook.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `facebook.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Sa, 14. November 2026
-- **19:45** ⚪ Wohngebäudeversicherung Vergleich: Worauf du achten musst — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/
 ### So, 15. November 2026
 - **09:45** ⏳ Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/
@@ -26,13 +23,13 @@
 - **15:15** ⏳ Energieausweis: Was er für deine Fixkosten bedeutet — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/
 ### Di, 17. November 2026
-- **09:45** ⏳ Wie viel Streaming‑Bandbreite: Du wirklich brauchst — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/
+- **09:45** ⏳ Wohngebäudeversicherung Vergleich: Worauf du achten musst — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/
 - **15:15** ⏳ Waschmaschine beladen: Weniger Kosten bei jedem Waschgang — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/
 ### Mi, 18. November 2026
-- **09:45** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
+- **09:45** ⏳ Wie viel Streaming‑Bandbreite: Du wirklich brauchst — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/
 - **15:15** ⏳ Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/
 ### Do, 19. November 2026
@@ -46,8 +43,8 @@
 - **15:15** ⏳ Fenster abdichten: So stoppst du Zugluft an alten Rahmen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/
 ### Sa, 21. November 2026
-- **09:45** ⏳ DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
+- **09:45** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 - **15:15** ⏳ Gasrechnung senken: Fehler im Spätsommer vermeiden — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/
 ### So, 22. November 2026
@@ -56,8 +53,8 @@
 - **15:15** ⏳ Preisgarantie Gas: So sicherst du günstige Tarife — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/
 ### Mo, 23. November 2026
-- **09:45** ⏳ DSL-Vergleich: So findest du den günstigsten Internettarif — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/
+- **09:45** ⏳ DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-14-internet-dsl-wechseln-praxis-tipps-fuer-den-anbieterwechsel/
 - **15:15** ⏳ Energiediebe stoppen: So kannst du Stromfresser finden — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/
 ### Di, 24. November 2026
@@ -66,25 +63,30 @@
 - **15:15** ⏳ Mietwagen ohne Kautionsfallen: So sparst du im Urlaub — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/
 ### Mi, 25. November 2026
-- **09:45** ⏳ Haushaltsbuch führen: App, Excel oder Stift im Vergleich — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/
+- **09:45** ⏳ DSL-Vergleich: So findest du den günstigsten Internettarif — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/
 - **15:15** ⏳ Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/
 ### Do, 26. November 2026
-- **09:45** ⏳ DNS-Server wechseln: Datenschutz, Filter und Einrichtung — _nutzen_ · Launch  
+- **09:45** ⏳ Haushaltsbuch führen: App, Excel oder Stift im Vergleich — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/
+- **15:15** ⏳ DNS-Server wechseln: Datenschutz, Filter und Einrichtung — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/
-- **15:15** ⏳ Warmwasser sparen: Die Rechnung hinter – Warmwasserkosten — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/
 ### Fr, 27. November 2026
-- **09:45** ⏳ WLAN verbessern: So bringst du stabilen Speed in jede Ecke — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/
-- **15:15** ⏳ Preisgarantie Gas: Was bei Preiserhöhung hilft — _nutzen_ · Launch  
+- **09:45** ⏳ Preisgarantie Gas: Was bei Preiserhöhung hilft — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/
+- **15:15** ⏳ WLAN verbessern: So bringst du stabilen Speed in jede Ecke — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/
 ### Sa, 28. November 2026
-- **09:45** ⏳ Störung beim Internetanbieter: So sicherst du deine Rechte — _nutzen_ · Launch  
+- **09:45** ⏳ Warmwasser sparen: Die Rechnung hinter – Warmwasserkosten — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/
+- **15:15** ⏳ Störung beim Internetanbieter: So sicherst du deine Rechte — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-08-31-stoerung-beim-internetanbieter-so-sicherst-du-deine-rechte/
-- **15:15** ⏳ Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/
+### So, 29. November 2026
+- **09:45** ⏳ Lastschrift und Dauerauftrag: Was du prüfen solltest — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/
+- **15:15** ⏳ Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 € — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/
 
 ## Zuletzt veröffentlicht
 
