@@ -734,6 +734,47 @@ def empfohlenes_budget(artikel: list[dict], cfg: dict, laeufe: float,
 # ============================================================
 #  Spitzenlast: der Bündeltag wird mitgemessen (#1039)
 # ============================================================
+def vollrueckstand_stichtag(artikel: list[dict], cfg: dict,
+                            stichtag: dt.date | None = None) -> dt.date | None:
+    """Der erste Tag, an dem JEDE Seite ihre Nachholfrist ausgeschöpft hat.
+
+    WARUM ES DIESE FUNKTION GIBT (14.11.2026)
+    -----------------------------------------
+    Der Vollrückstands-Stresstest fragt: Der Bot fällt so lange aus, bis auch
+    die zuletzt geprüfte Seite überfällig ist und ihre Nachholfrist verbraucht
+    hat – schafft das harte Limit den Abbau dann noch fristgerecht?
+
+    Bis zum 14.11.2026 stand dieser Tag als Konstante im Test: 09.02.2027,
+    gerechnet als 04.11.2026 + 90 Tage Standardintervall + 7 Tage Nachholfrist.
+    Das stimmte, solange die jüngste Prüfung im Bestand vom 04.11.2026 war.
+    Mit der ersten Seite, die danach geprüft wurde (13.11.2026, Frist
+    11.02.2027), beschrieb die Konstante keinen Vollrückstand mehr: Am
+    09.02.2027 war diese Seite noch nicht überfällig, wartete im Lauf hinter
+    130 überfälligen und riss ihre Frist – bei jedem Limit unter 44. Der Test
+    meldete eine Kapazitätslücke, gemessen hatte er sein eigenes Verfallsdatum.
+
+    Ein eingefrorener Kalendertag gegen einen lebenden Bestand altert in beide
+    Richtungen: erst entstehen „neue“ Fristen, die es im Vollrückstand nicht
+    gibt, später schrumpft der Rückstand, und der Test prüft nichts mehr.
+    Deshalb wird der Tag aus dem Bestand abgeleitet, den er belasten soll:
+
+        späteste Frist im Bestand + Nachholfrist
+
+    Für den Bestand vom 04.11.2026 ergibt das weiterhin den 09.02.2027.
+    Seiten ohne Frist (Erstrecherche) zählen nicht – sie haben keinen Termin,
+    der verstreichen könnte. Ohne eine einzige Frist gibt es keinen solchen
+    Tag (None).
+    """
+    stichtag = stichtag or ff.heute()
+    fristen = [status["frist"] for status in
+               (ff.faelligkeit(art, cfg, stichtag) for art in artikel)
+               if status.get("frist")]
+    if not fristen:
+        return None
+    return max(fristen) + dt.timedelta(
+        days=int(planung(cfg)["nachhol_frist_tage"]))
+
+
 def spitzenlast_stichtage(artikel: list[dict], cfg: dict,
                           stichtag: dt.date,
                           horizont_tage: int | None = None) -> list[dt.date]:
@@ -1370,6 +1411,23 @@ def selftest() -> int:
     pruefe("ST15j", any("im eingefrorenen Stand" in z for z in zeilen), True)
     pruefe("ST15k", any("Eingefrorene Gegenprobe" in z
                         for z in diagnose_zeilen(weg_messung, markdown=False)), False)
+
+    # ST16 – Vollrückstands-Tag folgt dem Bestand, nicht dem Kalender
+    # (14.11.2026). Die Probe-Seiten sind saisonal (Intervall 30) und am
+    # PROBETAG − 31 geprüft: Frist = PROBETAG − 1.
+    nachhol = int(planung(cfg)["nachhol_frist_tage"])
+    voll = _probe_ueberfaellig(3)
+    pruefe("ST16a", vollrueckstand_stichtag(voll, cfg, PROBETAG),
+           PROBETAG - dt.timedelta(days=1) + dt.timedelta(days=nachhol))
+    # Der Messtag ändert den Vollrückstands-Tag nicht – er hängt am Bestand.
+    pruefe("ST16b", vollrueckstand_stichtag(voll, cfg, PROBETAG + dt.timedelta(days=400)),
+           vollrueckstand_stichtag(voll, cfg, PROBETAG))
+    # Eine später geprüfte Seite verschiebt ihn um genau ihren Vorsprung.
+    spaeter = dict(voll[0], slug="probe-spaeter",
+                   faktencheck=voll[0]["faktencheck"] + dt.timedelta(days=9))
+    pruefe("ST16c", vollrueckstand_stichtag(voll + [spaeter], cfg, PROBETAG),
+           vollrueckstand_stichtag(voll, cfg, PROBETAG) + dt.timedelta(days=9))
+    pruefe("ST16d", vollrueckstand_stichtag([], cfg, PROBETAG), None)
 
     if fehler:
         print("❌ Selbsttest Faktenfrische-Kapazität rot:")

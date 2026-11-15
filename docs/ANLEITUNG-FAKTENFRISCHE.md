@@ -632,9 +632,20 @@ Die SSOT (`data/agent_reach/faktenfrische.yaml`) ist nachgemessen:
 - **Sockel 5** ist die kleinste getestete Untergrenze, die einen siebentägigen
   Ausfall bei Start an Tag 3, 10 oder 20 mit der echten Automatik ohne
   Fristverletzung übersteht.
-- **Hartes Limit 18** lässt im +97-Tage-Vollrückstand zwei Plätze über dem
-  gemessenen Bedarf von 16. Das Limit ist eine Obergrenze für Rückstände,
-  nicht das tägliche Normalbudget.
+- **Hartes Limit 19** lässt im Vollrückstand zwei Plätze über dem gemessenen
+  Bedarf von 17 (Nachmessung vom 14.11.2026 mit 132 Artikeln, davon 131 mit
+  Frist; `scripts/tests/test_faktenfrische_kapazitaet.py`). Das Limit ist
+  eine Obergrenze für Rückstände, nicht das tägliche Normalbudget.
+  Bis zum 14.11.2026 galt Limit 18 bei einem gemessenen Bedarf von 16
+  (Messung vom 10.11.2026 mit 126 Artikeln).
+- **Der Tag des Vollrückstands wird aus dem Bestand gerechnet**, nicht mehr
+  als festes Datum geführt: späteste Frist im Bestand plus Nachholfrist
+  (`faktenfrische_kapazitaet.vollrueckstand_stichtag`). Ein festes Datum
+  beschreibt nur so lange einen Vollrückstand, bis die nächste Seite
+  geprüft wird; danach liegt deren neue Frist hinter dem Datum, und der
+  Test misst etwas anderes, als sein Name sagt. Steigt der Bedarf auf das
+  Limit, meldet der Test die aufgebrauchte Reserve – nach heutiger
+  Messung ab 144 Seiten mit Frist.
 - Intervalle, Publikationstakt, Vorlauf 14, Mindestdeckung und menschliche
   Fachfreigaben bleiben unverändert.
 - Eine Gegenprobe mit dem früheren Sockel 4 bleibt im Regressionstest rot;

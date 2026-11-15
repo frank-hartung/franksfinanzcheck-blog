@@ -177,7 +177,7 @@ class UebersprungeneMessungTestCase(unittest.TestCase):
                             f"{key} wurde im Ausfall-Takt nicht gemessen")
         # … und alles andere ist ausdrücklich nicht gemessen, nie grün.
         for key in ("CHECK1B", "CHECK4", "CHECK5", "CHECK5B", "CHECK6", "CHECK7",
-                    "CHECK8", "CHECK9", "CHECK9B", "CHECK10"):
+                    "CHECK8", "CHECK9", "CHECK9B", "CHECK10", "CHECK11"):
             self.assertEqual(env[key], bw.TRIAGE_SKIP, f"{key} ist kein ÜBERSPRUNGEN")
         # Keine Workflow-Bedingung darf daraus einen Befund oder ein Grün lesen.
         for key, wert in env.items():

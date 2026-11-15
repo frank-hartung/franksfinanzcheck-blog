@@ -1706,7 +1706,7 @@ def run_all(triage=False):
         # ausgeführte Messung ist kein Grün).
         for key in ("CHECK4", "CHECK5", "CHECK5B", "CHECK6", "CHECK7",
                     "CHECK7_OWNER", "CHECK7_CHANNEL", "CHECK8", "CHECK9",
-                    "CHECK9B", "CHECK10"):
+                    "CHECK9B", "CHECK10", "CHECK11"):
             env[key] = TRIAGE_SKIP
         return env, findings, slug
 
@@ -1826,7 +1826,47 @@ def run_all(triage=False):
     else:
         env["CHECK9B"] = "OK"
 
+    # 11 Offene Änderungsvorschläge ohne Bewegung – MIT BESITZER (Mensch).
+    # Chronische Klasse: gehört in den Voll-Lauf, nie in den Ausfall-Takt.
+    pr_befund, pr_text = check_pr_bestand()
+    env["CHECK11"] = pr_text
+    if pr_befund is not None:
+        findings.append(pr_befund)
+
     return env, findings, slug
+
+
+def check_pr_bestand(messe=None):
+    """Check 11 – offene Änderungsvorschläge ohne Bewegung (14.11.2026).
+
+    Rückgabe ``(Befund-oder-None, CHECK11-Text)``. Die Messung selbst liegt
+    in `scripts/pr_bestand_wache.py`; hier bekommt sie Besitzer und
+    Schließpfad (D12): Nur ein Mensch entscheidet, ob ein Vorschlag
+    zusammengeführt, aktualisiert oder geschlossen wird – der Befund ist
+    deshalb `human`, P3. Er fällt aus Messung und Bericht, sobald keiner
+    mehr liegt; das Fach-Ticket schließt der Mensch, der entschieden hat.
+
+    Nicht messbar ist kein Grün und kein Befund (C2, „Offline ist kein
+    Ausfall“): Der Text sagt UNKNOWN, ein Ticket entsteht daraus nicht.
+    """
+    try:
+        import pr_bestand_wache as pbw  # noqa: PLC0415 – Wache gehört zum Bestand
+    except ImportError as fehler:
+        return None, f"UNKNOWN (PR-Bestands-Wache nicht importierbar: {fehler})"
+    try:
+        messung = (messe or pbw.messe)()
+    except pbw.NichtMessbar as grund:
+        return None, f"UNKNOWN (nicht messbar: {str(grund)[:160]})"
+    liegend = messung["liegend"]
+    if not liegend:
+        return None, f"OK ({messung['kurztext']})"
+    befund = _f(
+        pbw.BEFUND_ID, "Offene Änderungsvorschläge liegen ohne Bewegung",
+        "P3", "human",
+        detail=messung["kurztext"] + ".",
+        next_step=pbw.NAECHSTER_SCHRITT,
+        evidence=[pbw.zeile(eintrag) for eintrag in liegend[:20]])
+    return befund, f"HUMAN ({messung['kurztext']})"
 
 
 def split_findings(findings):
@@ -1869,6 +1909,7 @@ def write_report(env, findings):
         f"- **Check 9 (Pinterest-Duplikate):** {env.get('CHECK9','?')}",
         f"- **Check 9b (Pinterest-Report-Provenienz):** {env.get('CHECK9B','?')}",
         f"- **Check 10 (Pinterest-Kanal geparkt?):** {env.get('CHECK10','?')}",
+        f"- **Check 11 (Änderungsvorschläge ohne Bewegung):** {env.get('CHECK11','?')}",
         "",
         "## Alarm-Routing",
         "",
@@ -2240,6 +2281,47 @@ def selftest():
                           "nicht ausgeführte Messung muss als solche lesbar sein")
     except Exception as e:
         errors.append(f"Ausfall-Takt-Selftest Exception: {e}")
+
+    # Check 11 – PR-Bestand (14.11.2026): Besitzer, Schließpfad, kein
+    # stilles Grün. Gemessen wird mit eingespeisten Messungen, ohne Netz.
+    try:
+        import pr_bestand_wache as pbw
+        liegt = {"kurztext": "2 von 3 offenen seit 3 Tagen oder länger ohne "
+                             "Bewegung, ältester Stillstand 4 Tage (#7)",
+                 "liegend": [
+                     {"nummer": 7, "ruhe_tage": 4, "alter_tage": 6,
+                      "entwurf": False, "konflikt": True, "maschinell": False},
+                     {"nummer": 9, "ruhe_tage": 3, "alter_tage": 3,
+                      "entwurf": True, "konflikt": False, "maschinell": False}]}
+        befund, text = check_pr_bestand(lambda: liegt)
+        if befund is None or befund.owner != "human" or befund.severity != "P3":
+            errors.append("PR-Bestand: liegende Vorschläge ergeben keinen "
+                          "Befund mit menschlichem Besitzer (D12)")
+        elif befund.akut:
+            errors.append("PR-Bestand ist akut markiert – ein chronischer "
+                          "Befund im Stundentakt wäre Taktfeuer (#676)")
+        elif not befund.next_step or len(befund.evidence) != 2:
+            errors.append("PR-Bestand: Befund ohne nächsten Schritt oder Beleg")
+        if not text.startswith("HUMAN ("):
+            errors.append(f"PR-Bestand: CHECK11 nennt den Besitzer nicht ({text!r})")
+        frei = {"kurztext": "1 offen, keiner seit 3 Tagen oder länger ohne "
+                            "Bewegung", "liegend": []}
+        befund, text = check_pr_bestand(lambda: frei)
+        if befund is not None or not text.startswith("OK ("):
+            errors.append("PR-Bestand: ohne liegenden Vorschlag bleibt ein "
+                          "Befund stehen – kein Schließpfad (D12)")
+
+        def blind():
+            raise pbw.NichtMessbar("HTTP 403")
+        befund, text = check_pr_bestand(blind)
+        if befund is not None or not text.startswith("UNKNOWN"):
+            errors.append("PR-Bestand: nicht messbar wird als Befund oder als "
+                          "Grün gelesen (Vertrag C2)")
+        for token in ("OK", "WARN", "FAIL"):
+            if token in text:
+                errors.append(f"PR-Bestand: UNKNOWN-Text enthält {token!r}")
+    except Exception as e:
+        errors.append(f"PR-Bestand-Selftest Exception: {e}")
 
     if errors:
         print("🛑 BOT-WATCHDOG SELFTEST FEHLGESCHLAGEN:")
