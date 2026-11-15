@@ -124,7 +124,7 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 
 ## Offene Fachbefunde (F4) – was die Redaktion entscheiden muss
 
-**155** offene Befunde auf **39** Seiten (live: 97 auf 25 Artikeln) · ältester **16 Tage** · Frist 14 Tage · über der Frist: **15**.
+**151** offene Befunde auf **39** Seiten (live: 97 auf 25 Artikeln) · ältester **16 Tage** · Frist 14 Tage · über der Frist: **11**.
 
 **Ein Prüfdatum schließt keinen Fachbefund.** F1 (Alter) und F4 (Inhalt) sind getrennte Verträge; die Maschine entscheidet nie fachlich. Die Arbeitsdatei mit jeder Befund-ID, dem Fassungsstand und dem fertigen Entscheidungsbefehl ist `BEFUND-AKTE.md` (`python3 scripts/faktenfrische_befund_akte.py --schreiben`).
 
@@ -134,7 +134,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden <ID> --von "<Name>"
 
 ⚠️ **102 Befunde** wurden an einem älteren Text erhoben; der Text wurde seither geändert. Entschieden wird der HEUTIGE Text – genau das macht `--entscheiden` fassungsgebunden.
 
-🔴 **Eskalation:** 15 Befunde sind älter als 14 Tage. Fachliche Entscheidung: Herausgeber.
+🔴 **Eskalation:** 11 Befunde sind älter als 14 Tage. Fachliche Entscheidung: Herausgeber.
 
 ✅ **F1 (Faktenalter) ist nicht die Ursache:** Die Deckung trägt den Bestand; rot ist der Inhalt, nicht der Takt.
 
@@ -151,7 +151,7 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 | **Deckung** | **156 %** |
 | Rückstand abgebaut | in 0 Tagen (Frist 7 Tage) |
 | Nächste Frist | `2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert` am 2026-11-19 (in 4 Tagen) |
-| Empfohlenes Budget | 5 je Lauf (Limit 18) |
+| Empfohlenes Budget | 5 je Lauf (Limit 19) |
 | Spitzentag (#1039) | ✅ mitgemessen (57 Bündeltage, kein Befund) |
 
 ✅ Deckung ausreichend: Der Takt kann den Bestand halten. Ein roter Faktenstand ist damit ein echter Inhaltsbefund (F4), kein Kadenz-Artefakt.

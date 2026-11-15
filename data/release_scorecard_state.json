@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-15T09:39:59Z",
+  "generated_at": "2026-11-15T10:20:08Z",
   "modus": "kandidaten",
-  "commit": "b0bfaf4be848eff82a331b7969d00b3b31e93c9f",
+  "commit": "eaa1c3b5663109643464fb14fc7c2c0ab8bd4364",
   "kapazitaet": {
     "stichtag": "2026-11-15",
     "basis": "2026-11-15",
@@ -49,7 +49,7 @@
     "sockel": 5,
     "empfohlenes_budget": 5,
     "empfehlung_erreicht": true,
-    "hartes_limit": 18,
+    "hartes_limit": 19,
     "spitze_geprueft": 57
   },
   "ursachen": [
@@ -113,16 +113,16 @@
     }
   ],
   "befundlage": {
-    "offen": 155,
+    "offen": 151,
     "seiten": 39,
     "live_befunde": 97,
     "live_seiten": 25,
     "ueberholt": 102,
-    "ohne_fassung": 15,
+    "ohne_fassung": 11,
     "nicht_entscheidbar": 0,
     "aeltester_tage": 16,
     "frist_tage": 14,
-    "ueber_frist": 15,
+    "ueber_frist": 11,
     "je_slug": {
       "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": 3,
       "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": 3,
