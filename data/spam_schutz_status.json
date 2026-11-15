@@ -1,9 +1,8 @@
 {
-  "stand": "2026-11-15T09:41:40Z",
+  "stand": "2026-11-15T17:57:33Z",
   "urteil": "rot",
   "probleme": [
-    "KI-Anteil live: 85.7 % (rot ab 65 %)",
-    "KI-Artikel ohne Werbe-Offenlegung: 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt"
+    "KI-Anteil live: 85.7 % (rot ab 65 %)"
   ],
   "kpis": {
     "live_artikel": 84,
@@ -16,8 +15,6 @@
     "near_dup_beispiele": [],
     "thin_live": [],
     "titel_duplikate": [],
-    "offenlegung_fehlt": [
-      "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt"
-    ]
+    "offenlegung_fehlt": []
   }
 }
