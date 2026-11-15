@@ -1,6 +1,6 @@
 # SUCHRADAR – Status
 
-> Stand: 2026-11-14 14:40:00 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
+> Stand: 2026-11-15 15:07:23 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
 > Schlüssellos · 0 € · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md`
 
 ## Lauf
@@ -46,7 +46,7 @@ _Keine Treffer ausgewertet._
 
 | Suchbegriff | Meldung |
 |---|---|
-| franksfinanzcheck.de | Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://opnxng.com: keine Treffer / |
+| franksfinanzcheck.de | Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://opnxng.com: https://opnxng. |
 | Gaskosten senken | Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://opnxng.com: keine Treffer / htt |
 | Urlaubskosten planen | Kein Anbieter lieferte Treffer für 'Urlaubskosten planen': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://opnxng.com: keine Treffer / |
 

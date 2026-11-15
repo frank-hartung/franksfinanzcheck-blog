@@ -1,5 +1,5 @@
 {
- "zeitstempel": "2026-11-14T14:40:00.095943+02:00",
+ "zeitstempel": "2026-11-15T15:07:23.938037+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 25,
  "zaehlung": {
@@ -26,7 +26,7 @@
  "fehler": [
   {
    "anfrage": "franksfinanzcheck.de",
-   "fehler": "Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: keine Treffer | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
+   "fehler": "Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: https://opnxng.com/search?q=franksfinanzcheck.de&language=de&categories=general&pageno=1&safesearch=0: HTTP Error 502: Bad Gateway | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blocka"
   },
   {
    "anfrage": "Gaskosten senken",
