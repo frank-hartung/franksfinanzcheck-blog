@@ -1,0 +1,77 @@
+{
+  "slug": "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet",
+  "titel": "Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel rechnet",
+  "erzeugt": "2026-11-15 12:14 UTC",
+  "faellig": {
+    "faellig": false,
+    "prio": 9,
+    "klasse": "YMYL",
+    "grund": "frisch geprüft vor 39 Tagen (Intervall 45 Tage)",
+    "alter_tage": 39,
+    "intervall": 45,
+    "frist": "2026-11-21",
+    "restlaufzeit": 6
+  },
+  "geo": {
+    "punkte": 5,
+    "maximum": 6,
+    "prozent": 83,
+    "offen": [
+      "Mindestens eine Tabelle (extrahierbare Struktur)"
+    ],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": true,
+      "zahlen": true,
+      "tabelle": false,
+      "faktencheck": true
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesnetzagentur.de",
+      "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "datum": "",
+      "quelle": "bundesnetzagentur.de",
+      "kanal": "web",
+      "auszug": "1.   [Homepage](https://www.bundesnetzagentur.de/DE/Home/home_node.html \"Zur Startseite\")\n2.   [Fachthemen](https://www.bundesnetzagentur.de/DE/Themen/start.html \"Themen\")\n3.   [UntermenuOeffnen](javascript:void(0))[Energie](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html \"Energie\")**Telekom­munikation**[Digitales](https://www.bundesnetzagentur.de/DE/Fachthemen/Digitales/start.html \"Alle Fachthemen rund um Digitales\")[Post](https://www.bundesnetzagentur.de/DE/Fachthemen/Post/start.html \"Post\")[Eisenbahnen](https://www.bundesnetzagentur.de/DE/Fachthemen/Eisenbahnen/start.html \"Eisenbahnen\")[BNetzA Data Hub](https://www.bundesnetzagentur.de/DE/Fachthemen/DataHub/start.html \"BNetzA Data Hub\")[Beschlusskammern](https://www.bundesnetzagentur.de/DE/Beschlusskammern/BK_Start.html \"Beschlusskammern\") \n4.   **Telekom­munikation**\n5.   [UntermenuOeffnen](javascript:void(0))[Breitbandversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Breitband/start.html \"Breitband\")[Kupfer-Glas-Migration](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Kupfer-Glas/start.html \"Kupfer Glas Migration, Glasfaserausbau\")[Funk und Frequenzen](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Frequenzen/start.html \"Frequenzen\")[Nummerierung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Nummerierung/start.html \"Nummerierung\")[Unternehmenspflichten](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Unternehmenspflichten/start.html \"Unternehmenspflichten\")[Technik und Produktsicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Technik/start.html \"Technik\")[Öffentliche Sicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/OeffentlicheSicher",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Bundesnetzagentur",
+      "rang": 1,
+      "zitierbar": true
+    },
+    {
+      "titel": "O2 mit mäßigen Geschäftszahlen",
+      "url": "https://www.heise.de/news/O2-mit-maessigen-Geschaeftszahlen-11525319.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+      "datum": "2026-11-14T15:29",
+      "quelle": "heise online",
+      "kanal": "rss",
+      "auszug": "Der Mobilfunker O2 Telefónica verzeichnet weiter zurückgehende Umsätze, nur im Festnetz gibt es noch Wachstum. Um Kosten zu senken, baut der Konzern Jobs ab.",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "heise online",
+      "rang": 3,
+      "zitierbar": true
+    },
+    {
+      "titel": "US-Regulierungsbehörde genehmigt Ausnahmen vom Router-Verbot",
+      "url": "https://www.heise.de/news/US-Regulierungsbehoerde-genehmigt-Ausnahmen-vom-Router-Verbot-11525357.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+      "datum": "2026-11-14T18:07",
+      "quelle": "heise online",
+      "kanal": "rss",
+      "auszug": "Für das im März in den USA verhängte Verbot für im Ausland hergestellte Router verteilt die Regulierungsbehörde FCC weitere Ausnahmegenehmigungen.",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "heise online",
+      "rang": 3,
+      "zitierbar": false
+    }
+  ],
+  "befunde": [],
+  "fehler": [],
+  "fassung_sha256": "6ec40fb0d9190b364213c0cf958c9c70a54745bb877aebfc4939194464f223e6",
+  "text_sha256": "f4863ed948a4b1e16b45f478f120c09f0146cc0558d4488c41d17f022bde2dd9",
+  "fachpruefung": "geprüft (gemini:gemini-3-flash-preview); 2 Befund(e) ohne belegbaren Textanker verworfen"
+}

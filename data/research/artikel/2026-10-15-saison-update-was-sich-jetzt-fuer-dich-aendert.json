@@ -1,16 +1,16 @@
 {
   "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
   "titel": "Herbst-Check: Strom, Versicherung, Konto und Internet",
-  "erzeugt": "2026-11-13 12:33 UTC",
+  "erzeugt": "2026-11-15 12:12 UTC",
   "faellig": {
     "faellig": false,
     "prio": 9,
     "klasse": "saisonal",
-    "grund": "frisch geprüft vor 24 Tagen (Intervall 30 Tage)",
-    "alter_tage": 24,
+    "grund": "frisch geprüft vor 26 Tagen (Intervall 30 Tage)",
+    "alter_tage": 26,
     "intervall": 30,
     "frist": "2026-11-19",
-    "restlaufzeit": 6
+    "restlaufzeit": 4
   },
   "geo": {
     "punkte": 6,
@@ -41,7 +41,14 @@
       "zitierbar": true
     }
   ],
-  "befunde": [],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Ein Preisrutsch für Neukunden lässt sich daraus nicht ableiten.",
+      "stelle": "Ein Preisrutsch für Neukunden lässt sich daraus nicht ableiten.",
+      "beleg": ""
+    }
+  ],
   "fehler": [
     "Statistisches Bundesamt – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
   ],

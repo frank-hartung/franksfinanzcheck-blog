@@ -6,8 +6,8 @@ Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
 **Bezugsstand: 2026-11-15** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
 
-**97 offene Live-Befunde auf 25 Artikeln.** Für **78** gibt es frühere Entscheidungen zu diesem Befund;
-die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **19** Befunde haben keine frühere aktive Entscheidung.
+**105 offene Live-Befunde auf 27 Artikeln.** Für **83** gibt es frühere Entscheidungen zu diesem Befund;
+die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **22** Befunde haben keine frühere aktive Entscheidung.
 
 Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus `data/faktenfrische_befunde_state.json`,
 `data/faktenfrische_entscheidungen.yaml`, dem Scorecard-Siegel und den heutigen Artikeln.
@@ -18,6 +18,9 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 - `6b5921bdc76490587167` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Seit 2026 nutzen die großen Anbieter die Technik mit dem Namen Vectoring; das ist ein Modellwert. Sie senkt das Rauschen auf der Leitung. In der Stadt sind damit bis zu 250 Mbps stabil drin.
 - `8436b91bdb63a6316979` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Preisgarantie über mindestens 12 Monate; ohne Garantie darf der Anbieter bald erhöhen, oft um bis zu 10 %.
 - `a4ff01e649b789f19e6a` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Für 50 Mbps zahlst du heute meist ca. 20–40 € im Monat; das ist ein Beispielwert.
+- `25d6b9a720f981e8e9df` · `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit` · Bei der Bewertung flexibler Kosten sollte die moderate Preisentwicklung bei Nahrungsmitteln (+0,4 %) den stark steigenden Energiekosten gegenübergestellt werden, um Sparpotenziale zu priorisieren.
+- `3693b612533c24dcd1ea` · `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit` · Der Ratgeber empfiehlt die Prüfung von Stromverträgen, vernachlässigt aber den massiven Preistrend bei Energie von +12,2 %, der die Kalkulation der Fixkosten aktuell dominiert.
+- `c877eeff8842942c0071` · `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit` · Die allgemeine Budget-Transparenz ist ohne Einbezug der Inflationsrate von 2,8 % unvollständig, da Preissteigerungen die Planungssicherheit der 'festen Kosten' kontinuierlich untergraben.
 - `4d0125136c5b940946e4` · `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` · Lichtsteuerung: Bedarfssteuerung – 2 bis 5 % des Stromverbrauchs.
 - `7aeb2098034d16a46885` · `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` · Anbieter locken mit Neukundenboni, die nach der üblichen Erstlaufzeit entfallen; danach steigt der Arbeitspreis massiv an.
 - `ea97b5dd6695de127fd2` · `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` · Heizungssteuerung: Smarte Thermostate können Heizkosten einsparen. Die Spanne von 10 bis 25 % ist ein Beispielwert aus der Rechnung unten.
@@ -1029,6 +1032,41 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 - Heute in Zeile 58: 40 € – gekennzeichnet („beispielwert“)
 
+## `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit`
+
+- Datei-SHA256 (heute): `ba6ce4926c2c95fa969390de62e5e28fbbd71821328863c7a9b0b3d14f7376f5`
+- Offene Live-Befunde: **3**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `25d6b9a720f981e8e9df` | praezision | **neu** | nicht mehr im Text: 0,4 % | Bei der Bewertung flexibler Kosten sollte die moderate Preisentwicklung bei Nahrungsmitteln (+0,4 %) den stark steige… |
+| `3693b612533c24dcd1ea` | luecke | **neu** | nicht mehr im Text: 12,2 % | Der Ratgeber empfiehlt die Prüfung von Stromverträgen, vernachlässigt aber den massiven Preistrend bei Energie von +1… |
+| `c877eeff8842942c0071` | praezision | **neu** | 2,8 % in Zeile 109 ohne Kennzeichnung | Die allgemeine Budget-Transparenz ist ohne Einbezug der Inflationsrate von 2,8 % unvollständig, da Preissteigerungen… |
+
+### `25d6b9a720f981e8e9df`
+
+**Befund:** Bei der Bewertung flexibler Kosten sollte die moderate Preisentwicklung bei Nahrungsmitteln (+0,4 %) den stark steigenden Energiekosten gegenübergestellt werden, um Sparpotenziale zu priorisieren.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Im heutigen Text nicht mehr vorhanden: 0,4 %
+
+### `3693b612533c24dcd1ea`
+
+**Befund:** Der Ratgeber empfiehlt die Prüfung von Stromverträgen, vernachlässigt aber den massiven Preistrend bei Energie von +12,2 %, der die Kalkulation der Fixkosten aktuell dominiert.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Im heutigen Text nicht mehr vorhanden: 12,2 %
+
+### `c877eeff8842942c0071`
+
+**Befund:** Die allgemeine Budget-Transparenz ist ohne Einbezug der Inflationsrate von 2,8 % unvollständig, da Preissteigerungen die Planungssicherheit der 'festen Kosten' kontinuierlich untergraben.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 109: 2,8 % – **ohne** Kennzeichnung
+
 ## `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust`
 
 - Datei-SHA256 (heute): `44c0eb036d54cc18a2779dc051dce3905328ce3186de405c49999acf19eb4ce7`
@@ -1067,6 +1105,69 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 **Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
 
 > Am heutigen Text geprüft (SHA-256 aaf1b8fc6568): Die verlangte Quelle steht im Abschnitt „Welche Kosten gehören in ein Campingbudget?“ inline – „Die Verbraucherzentrale erklärt in ihrem Ratgeber [Online-Reisebüros](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen/onlinereisebueros-so-vermeiden-sie-pr“. Der Befund trifft die heutige Fassung damit nicht mehr.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+## `2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen`
+
+- Datei-SHA256 (heute): `15b2cb59b7a850dc596fc4409fe3ab6a453ae5f6410565f25066142fb3f6d420`
+- Offene Live-Befunde: **5**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `7067eabb89a917ae67a4` | luecke | 2026-11-11 · 2. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu unklaren Angeboten und Problemen mit Online-Buchu… |
+| `af2ccb4222eeb195222f` | praezision | 2026-11-11 · 2. Entscheidung | kein Wert genannt (Aussage/Präzision) | Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht automatisch, ob das Auto zum individuellen Url… |
+| `d9c8b522bf1dcaed0340` | luecke | 2026-11-11 · 2. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Verbraucherzentrale beschreibt, dass sich eine Pauschalreise unter bestimmten Bedingungen auf eine andere Person… |
+| `e2975509f3f130de0755` | luecke | 2026-11-11 · 2. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Verbraucherzentrale empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im Blick zu behalten. |
+| `f1704e45e970a8f4b078` | luecke | 2026-11-11 · 2. Entscheidung | kein Wert genannt (Aussage/Präzision) | Bei einer Pauschalreise gilt die Mitteilung als rechtzeitig, wenn sie dem Veranstalter spätestens sieben Tage vor Rei… |
+
+### `7067eabb89a917ae67a4`
+
+**Befund:** Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu unklaren Angeboten und Problemen mit Online-Buchungen.
+
+**Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
+
+> Am heutigen Text geprüft (SHA-256 de2780e91953): Die verlangte Quelle steht im Abschnitt „Wie setzt du ein realistisches Reisebudget?“ inline – „Die Verbraucherzentrale sammelt [Hinweise zu Reisebuchungen und Problemen mit Online-Buchungen](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen), wenn ein “. Der Befund trifft die heutige Fassung damit nicht mehr.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `af2ccb4222eeb195222f`
+
+**Befund:** Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht automatisch, ob das Auto zum individuellen Urlaub passt – ohne Messgröße bleibt die Aussage ungenau.
+
+**Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
+
+> Am heutigen Text geprüft (SHA-256 de2780e91953): Die verlangte Quelle steht im Abschnitt „Wie setzt du ein realistisches Reisebudget?“ inline – „Die Verbraucherzentrale sammelt [Hinweise zu Reisebuchungen und Problemen mit Online-Buchungen](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen), wenn ein “. Der Befund trifft die heutige Fassung damit nicht mehr.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `d9c8b522bf1dcaed0340`
+
+**Befund:** Die Verbraucherzentrale beschreibt, dass sich eine Pauschalreise unter bestimmten Bedingungen auf eine andere Person übertragen lässt.
+
+**Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
+
+> Am heutigen Text geprüft (SHA-256 de2780e91953): Die verlangte Quelle steht im Abschnitt „Wie setzt du ein realistisches Reisebudget?“ inline – „Die Verbraucherzentrale sammelt [Hinweise zu Reisebuchungen und Problemen mit Online-Buchungen](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen), wenn ein “. Der Befund trifft die heutige Fassung damit nicht mehr.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `e2975509f3f130de0755`
+
+**Befund:** Die Verbraucherzentrale empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im Blick zu behalten.
+
+**Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
+
+> Am heutigen Text geprüft (SHA-256 de2780e91953): Die verlangte Quelle steht im Abschnitt „Wie setzt du ein realistisches Reisebudget?“ inline – „Die Verbraucherzentrale sammelt [Hinweise zu Reisebuchungen und Problemen mit Online-Buchungen](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen), wenn ein “. Der Befund trifft die heutige Fassung damit nicht mehr.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `f1704e45e970a8f4b078`
+
+**Befund:** Bei einer Pauschalreise gilt die Mitteilung als rechtzeitig, wenn sie dem Veranstalter spätestens sieben Tage vor Reisebeginn zugeht (§ 651e BGB).
+
+**Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
+
+> Am heutigen Text geprüft (SHA-256 de2780e91953): Die verlangte Quelle steht im Abschnitt „Wie setzt du ein realistisches Reisebudget?“ inline – „Die Verbraucherzentrale sammelt [Hinweise zu Reisebuchungen und Problemen mit Online-Buchungen](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet/urlaub-buchen), wenn ein “. Der Befund trifft die heutige Fassung damit nicht mehr.
 
 Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
@@ -1252,7 +1353,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen`
 
-- Datei-SHA256 (heute): `fac590ed6a0f6fce465d7c85014cdbf457e9afd5a4e58fc57b8534e4eda817a5`
+- Datei-SHA256 (heute): `baa445857bd19044d23dd4ced774e999c0a21196319ccbbb42460e2e1e5b4ad9`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1373,9 +1474,17 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden f7b1c869dd8e442eaf1
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6b5921bdc76490587167 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8436b91bdb63a6316979 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a4ff01e649b789f19e6a --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 25d6b9a720f981e8e9df --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3693b612533c24dcd1ea --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden c877eeff8842942c0071 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 089b89138417e63a3dcf --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1158934e7a18c7b2099b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3716cfd3ab5aec6d774b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7067eabb89a917ae67a4 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden af2ccb4222eeb195222f --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d9c8b522bf1dcaed0340 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden e2975509f3f130de0755 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden f1704e45e970a8f4b078 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4d0125136c5b940946e4 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7aeb2098034d16a46885 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ea97b5dd6695de127fd2 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"

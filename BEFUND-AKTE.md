@@ -2,13 +2,13 @@
 
 _Stand 2026-11-15 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**151 offene Befunde auf 39 Seiten · davon 25 Live-Seiten mit 97 Befunden · ältester 16 Tage · Frist 14 Tage.**
+**165 offene Befunde auf 43 Seiten · davon 27 Live-Seiten mit 105 Befunden · ältester 16 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 151 |
-| Seiten betroffen | 39 (davon live: 25) |
-| Text seit dem Befund geändert | 97 |
+| Offene Befunde | 165 |
+| Seiten betroffen | 43 (davon live: 27) |
+| Text seit dem Befund geändert | 102 |
 | Altbestand ohne Fassungs-Hash | 11 |
 | Nicht entscheidbar (Seite fehlt) | 5 |
 | Über der Frist (14 Tage) | 11 |
@@ -32,7 +32,7 @@ _Stand 2026-11-15 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 108 von 151 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 113 von 165 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -122,6 +122,26 @@ Datei: `content/posts/2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortve
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 089b89138417e63a3dcf --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1158934e7a18c7b2099b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3716cfd3ab5aec6d774b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
+
+Datei: `content/posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `7067eabb89a917ae67a4` | luecke | 12 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu unklaren Angeboten und Problemen mit Online-Buchungen. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+| `af2ccb4222eeb195222f` | praezision | 12 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht automatisch, ob das Auto zum individuellen Urlaub passt – ohne Messgröße bleibt die Aussage ungenau. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+| `d9c8b522bf1dcaed0340` | luecke | 12 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Verbraucherzentrale beschreibt, dass sich eine Pauschalreise unter bestimmten Bedingungen auf eine andere Person übertragen lässt. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+| `e2975509f3f130de0755` | luecke | 12 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Verbraucherzentrale empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im Blick zu behalten. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+| `f1704e45e970a8f4b078` | luecke | 12 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Bei einer Pauschalreise gilt die Mitteilung als rechtzeitig, wenn sie dem Veranstalter spätestens sieben Tage vor Reisebeginn zugeht (§ 651e BGB). | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7067eabb89a917ae67a4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden af2ccb4222eeb195222f --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d9c8b522bf1dcaed0340 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden e2975509f3f130de0755 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden f1704e45e970a8f4b078 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren` · **LIVE** (blockiert) · Risikoklasse erhoeht · 5 Befund(e)
@@ -480,6 +500,22 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9800545ae945ec280b3
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden bc0e4f2eb357a682c674 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit` · **LIVE** · Risikoklasse standard · 3 Befund(e)
+
+Datei: `content/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `25d6b9a720f981e8e9df` | praezision | 0 T | Text unverändert seit dem Befund | Bei der Bewertung flexibler Kosten sollte die moderate Preisentwicklung bei Nahrungsmitteln (+0,4 %) den stark steigenden Energiekosten gegenübergestellt werden, um Sparpotenziale zu priorisieren. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `3693b612533c24dcd1ea` | luecke | 0 T | Text unverändert seit dem Befund | Der Ratgeber empfiehlt die Prüfung von Stromverträgen, vernachlässigt aber den massiven Preistrend bei Energie von +12,2 %, der die Kalkulation der Fixkosten aktuell dominiert. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `c877eeff8842942c0071` | praezision | 0 T | Text unverändert seit dem Befund | Die allgemeine Budget-Transparenz ist ohne Einbezug der Inflationsrate von 2,8 % unvollständig, da Preissteigerungen die Planungssicherheit der 'festen Kosten' kontinuierlich untergraben. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 25d6b9a720f981e8e9df --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3693b612533c24dcd1ea --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden c877eeff8842942c0071 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen` · nicht im Live-Bestand · 4 Befund(e)
 
 Seite: `2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen`
@@ -708,6 +744,38 @@ Seite: `2026-10-19-urlaubskasse-clever-aufbessern`
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 17cddd994cefcdc30f31 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 676fdb5ff70228b06bdc --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 88051266499d4040f7f3 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert` · nicht im Live-Bestand · 1 Befund(e)
+
+Seite: `2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `784d0b3715d53d5c3bb2` | luecke | 0 T | Text unverändert seit dem Befund | Ein Preisrutsch für Neukunden lässt sich daraus nicht ableiten. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 784d0b3715d53d5c3bb2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-11-13-tagesgeld-und-zinsen-so-parkst-du-dein-geld-sicher` · nicht im Live-Bestand · 5 Befund(e)
+
+Seite: `2026-11-13-tagesgeld-und-zinsen-so-parkst-du-dein-geld-sicher`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `32467bdd3433317393b9` | luecke | 0 T | Text unverändert seit dem Befund | Auszahlungsgebühr – selten, aber bei manchen Anbietern möglich. | [Quelle](https://www.bundesbank.de/de/presse/pressenotizen) |
+| `ad932db898c534874507` | luecke | 0 T | Text unverändert seit dem Befund | Durch die gesetzliche Einlagensicherung ist dein Geld bis zu einem hohen Betrag geschützt. | [Quelle](https://www.bundesbank.de/de/presse/pressenotizen) |
+| `ccf8977f44f05ea2de0a` | luecke | 0 T | Text unverändert seit dem Befund | Mindesteinlage – manchmal 1 000 €, häufig aber keine Mindestgrenze. | [Quelle](https://www.bundesbank.de/de/presse/pressenotizen) |
+| `d561837e6b7d7ee02a8e` | luecke | 0 T | Text unverändert seit dem Befund | Neukunden‑Zins – Oft 6‑12 Monate, danach Rückkehr zum Basissatz. | [Quelle](https://www.bundesbank.de/de/presse/pressenotizen) |
+| `fc0e4ba836f5e544d957` | luecke | 0 T | Text unverändert seit dem Befund | Kündigungsfrist – in der Regel sofort, bei Sonderkonditionen kann es Einschränkungen geben. | [Quelle](https://www.bundesbank.de/de/presse/pressenotizen) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 32467bdd3433317393b9 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ad932db898c534874507 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ccf8977f44f05ea2de0a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d561837e6b7d7ee02a8e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden fc0e4ba836f5e544d957 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub` · nicht im Live-Bestand · 5 Befund(e)

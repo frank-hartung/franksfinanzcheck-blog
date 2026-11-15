@@ -31,21 +31,15 @@ cover:
     geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
-    titel: "Telekommunikationsgesetz § 56: Vertragslaufzeit und Kündigung"
-    url: "https://www.gesetze-im-internet.de/tkg_2021/__56.html"
-    herausgeber: "Bundesministerium der Justiz"
-    datum: "2026-10-07"
-  - id: "Q2"
-    titel: "Telekommunikationsgesetz § 59: Anbieterwechsel und Rufnummernmitnahme"
-    url: "https://www.gesetze-im-internet.de/tkg_2021/__59.html"
-    herausgeber: "Bundesministerium der Justiz"
-    datum: "2026-10-07"
-  - id: "Q3"
-    titel: "Anbieterwechsel und Umzug"
-    url: "https://www.bundesnetzagentur.de/DE/Vportal/TK/InternetTelefon/Wechsel/artikel.html"
+    titel: "Referenzseite bundesnetzagentur.de"
+    url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
     herausgeber: "Bundesnetzagentur"
-    datum: "2026-10-07"
-faktencheck: "2026-10-07"
+  - id: "Q2"
+    titel: "O2 mit mäßigen Geschäftszahlen"
+    url: "https://www.heise.de/news/O2-mit-maessigen-Geschaeftszahlen-11525319.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag"
+    herausgeber: "heise online"
+    datum: "2026-11-14"
+faktencheck: 2026-11-15
 kurzantwort: "Vergleiche beim DSL-Wechsel den gesamten Preis, die Vertragslaufzeit, den Router und den Termin der Umstellung. Prüfe zuerst deinen Vertrag und beauftrage den neuen Anbieter mit der Koordination des Wechsels. Bewahre alle Bestätigungen auf."
 ---
 
