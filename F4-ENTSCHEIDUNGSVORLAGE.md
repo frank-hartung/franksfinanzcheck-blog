@@ -388,7 +388,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps`
 
-- Datei-SHA256 (heute): `cef307629ad061c2fafe8dee40649f8a286be8281b70753b209bb4a54dd94b55`
+- Datei-SHA256 (heute): `79fbff3730d124bb56e55661edc57a412a557f5a2c8d8ad5cbc88553c1c5c6f3`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1353,7 +1353,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen`
 
-- Datei-SHA256 (heute): `baa445857bd19044d23dd4ced774e999c0a21196319ccbbb42460e2e1e5b4ad9`
+- Datei-SHA256 (heute): `608d95b2231b9ba583f4747457f1a5698f784d49a8a4f7a6bd6b053ebe58929b`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
