@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 15.11.2026 13:49 (Europe/Berlin)  
+> Automatisch aktualisiert: 15.11.2026 20:24 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -13,8 +13,8 @@
 ## Kommende Beiträge
 
 ### Mo, 16. November 2026
-- **07:30** ⏳ WLAN verbessern: So bringst du stabilen Speed in jede Ecke — _zahl_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/
+- **07:30** ⏳ Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 € — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/
 - **11:30** ⏳ Waschmaschine beladen: Weniger Kosten bei jedem Waschgang — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/
 ### Mi, 18. November 2026
@@ -30,21 +30,22 @@
 ### Mo, 23. November 2026
 - **07:30** ⏳ Wohngebäudeversicherung Vergleich: Worauf du achten musst — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-18-wohngebaeudeversicherung-vergleich-worauf-du-achten-musst/
-- **07:30** ⏳ Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 € — _zahl_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/
-### Mi, 25. November 2026
 - **07:30** ⏳ September-Roadtrip: Clevere Wege zum Mietwagen-Schnäppchen — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-09-02-september-roadtrip-clevere-wege-zum-mietwagen-schnaeppchen/
-- **11:30** ⏳ Kreditkarte vergleichen: Kostenlos und sicher zahlen — _zahl_ · Evergreen  
+### Mi, 25. November 2026
+- **07:30** ⏳ Kreditkarte vergleichen: Kostenlos und sicher zahlen — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen/
-### Fr, 27. November 2026
-- **07:30** ⏳ Frugalismus für Einsteiger: Mit kleinen Schritten sparen — _zahl_ · Evergreen  
+- **11:30** ⏳ Frugalismus für Einsteiger: Mit kleinen Schritten sparen — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/
-- **11:30** ⏳ Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich — _zahl_ · Evergreen  
+### Fr, 27. November 2026
+- **07:30** ⏳ Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/
+- **11:30** ⏳ Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/
 
 ## Zuletzt veröffentlicht
 
+- ✅ 15.11.2026 16:51 · WLAN verbessern: So bringst du stabilen Speed in jede Ecke → https://mastodon.social/@FranksFinanzcheck/117621252329123391
 - ✅ 13.11.2026 14:13 · Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas → https://mastodon.social/@FranksFinanzcheck/117609307232793284
 - ✅ 11.11.2026 13:47 · Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen → https://mastodon.social/@FranksFinanzcheck/117597882570629474
 - ✅ 10.11.2026 00:48 · Preisgarantie Gas: Was bei Preiserhöhung hilft → https://mastodon.social/@FranksFinanzcheck/117589153983480017
@@ -54,7 +55,6 @@
 - ✅ 06.11.2026 14:01 · Energieausweis: Was er für deine Fixkosten bedeutet → https://mastodon.social/@FranksFinanzcheck/117569625233274475
 - ✅ 04.11.2026 21:27 · Mietwagen ohne Kautionsfallen: So sparst du im Urlaub → https://mastodon.social/@FranksFinanzcheck/117560053046296367
 - ✅ 04.11.2026 14:04 · Haushaltsbuch führen: App, Excel oder Stift im Vergleich → https://mastodon.social/@FranksFinanzcheck/117558312939140189
-- ✅ 03.11.2026 21:09 · Energiediebe stoppen: So kannst du Stromfresser finden → https://mastodon.social/@FranksFinanzcheck/117554322337329380
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
