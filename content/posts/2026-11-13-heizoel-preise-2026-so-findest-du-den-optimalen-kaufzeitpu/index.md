@@ -86,7 +86,7 @@ Diese Schritte sagen nichts über die Marktentwicklung. Sie sorgen dafür, dass 
 
 ## Bestellung rechtzeitig planen
 
-Prüfe den Tankstand regelmäßig. Achte auf die Lieferbedingungen, die dir Anbieter nennen. Brauchst du einen engen Termin, kläre Verfügbarkeit und Zusatzkosten vorab. eine pauschale Lieferdauer können wir ohne belastbare Quelle nicht empfehlen. Einen bestimmten saisonalen Bestellzeitpunkt können wir ohne belastbare Quelle ebenfalls nicht empfehlen.
+Prüfe den Tankstand regelmäßig. Achte auf die Lieferbedingungen, die dir Anbieter nennen. Brauchst du einen engen Termin, kläre Verfügbarkeit und Zusatzkosten vorab. Eine pauschale Lieferdauer können wir ohne belastbare Quelle nicht empfehlen. Einen bestimmten saisonalen Bestellzeitpunkt können wir ohne belastbare Quelle ebenfalls nicht empfehlen.
 
 Lege fest, wann du Angebote einholst. Notiere Tankstand und Datum. Das ist eine Erinnerungshilfe. Es ist keine Marktregel. Es ist keine Preisgarantie.
 

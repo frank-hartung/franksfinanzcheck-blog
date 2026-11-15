@@ -12,7 +12,7 @@ author: "Frank Hartung"
 keywords: ["Reisekasse füllen", "Urlaubsbudget", "Geld für Urlaub sparen", "Cashback Tipps", "Strategisch sparen", "Strategisch", "Reisekasse", "Frugalismus"]
 pinwand: Günstig reisen | Reisebudget & Mietwagen
 pin_title: "Mehr Geld für den Urlaub: So polsterst du deine Reisekasse auf"
-pin_description: "*Werbung | Reisekasse füllen mit realistischem Sparplan: Fixkosten prüfen, Sparrate rechnen, Cashback nur als Extra. Modellrechnungen mit offen genannten Annahmen. Mehr Spartipps auf FranksFinanzcheck! #reisekasse #fuellen #urlaubsbudget"
+pin_description: "*Werbung | Der Traumurlaub scheitert am Budget? Mit diesen 7 Alltags-Tricks füllt sich deine Urlaubskasse fast von allein – vom Cashback-Konto über No-Spend-Tage bis zum cleveren Verkaufen. So sind bis zum Sommer 500 € mehr drin. Jetzt lesen!"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "relaxed"

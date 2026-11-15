@@ -2,7 +2,7 @@
 title: "Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar"
 description: Willst du den Ökostrom Anbieter wechseln? Erfahre hier, wie du Tarife prüfst, seriöse Labels erkennst und deine Fixkosten clever reduzierst.
 date: 2026-11-06T02:31:24Z
-kurzantwort: "Du kannst den neuen Ökostromtarif beauftragen; sein Lieferbeginn richtet sich nach Laufzeit und Kündigungsfrist deines aktuellen Vertrags. Der technische Wechsel ist seit dem 6. Juni 2025 an Werktagen binnen 24 Stunden möglich, verkürzt diese Vertragsfristen aber nicht (Bundesnetzagentur, Q1). Für zusätzlichen Energiewendenutzen empfiehlt die Verbraucherzentrale Tarife mit ok-power- oder Grüner-Strom-Label (Q2); vergleiche außerdem die Jahresgesamtkosten."
+kurzantwort: "Du kannst den neuen Ökostromtarif beauftragen; sein Lieferbeginn richtet sich nach Laufzeit und Kündigungsfrist deines aktuellen Vertrags. Der technische Wechsel ist seit dem 6. Juni 2025 an Werktagen binnen 24 Stunden möglich, verkürzt diese Vertragsfristen aber nicht (Bundesnetzagentur, Q1). Für zusätzlichen Energiewendenutzen empfiehlt die Verbraucherzentrale-Tarife mit ok-power- oder Grüner-Strom-Label (Q2); vergleiche außerdem die Jahresgesamtkosten."
 draft: false
 reserve_published: 2026-11-06
 tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromkosten senken"]
