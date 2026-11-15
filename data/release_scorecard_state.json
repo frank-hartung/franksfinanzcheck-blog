@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "generated_at": "2026-11-14T21:38:57Z",
+  "generated_at": "2026-11-15T02:02:43Z",
   "modus": "kandidaten",
-  "commit": "73737aa78e28fc3ba1fa76d35689edff7a48bae9",
+  "commit": "7acb0946adfcc6abd72b6bd3e5e3a6411d914c62",
   "kapazitaet": {
-    "stichtag": "2026-11-14",
-    "basis": "2026-11-14",
+    "stichtag": "2026-11-15",
+    "basis": "2026-11-15",
     "projiziert": false,
     "artikel": 132,
     "faellig": 1,
@@ -14,7 +14,7 @@
     "naechste_frist": {
       "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
       "frist": "2026-11-19",
-      "restlaufzeit": 5
+      "restlaufzeit": 4
     },
     "budget": 5,
     "laeufe_je_tag": 1.0,
@@ -36,7 +36,7 @@
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
       "geprueft": true,
-      "bis": "2027-03-14",
+      "bis": "2027-03-15",
       "tage": 120,
       "weg_frei": true,
       "erstverletzung": null,
@@ -50,7 +50,7 @@
     "empfohlenes_budget": 5,
     "empfehlung_erreicht": true,
     "hartes_limit": 18,
-    "spitze_geprueft": 58
+    "spitze_geprueft": 57
   },
   "ursachen": [
     {
@@ -120,7 +120,7 @@
     "ueberholt": 102,
     "ohne_fassung": 15,
     "nicht_entscheidbar": 0,
-    "aeltester_tage": 15,
+    "aeltester_tage": 16,
     "frist_tage": 14,
     "ueber_frist": 15,
     "je_slug": {
