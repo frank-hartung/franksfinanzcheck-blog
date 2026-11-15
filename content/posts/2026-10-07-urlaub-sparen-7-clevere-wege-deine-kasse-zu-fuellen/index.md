@@ -68,7 +68,7 @@ Urlaub sparen heißt nicht, jede schöne Sache zu streichen. Es heißt, vor der 
 
 ## Wie setzt du ein realistisches Reisebudget?
 
-Beginne mit dem Betrag, den du für die Reise einsetzen kannst, ohne Miete oder wichtige Rechnungen zu gefährden. Trenne die [Reisekasse](../../posts/2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub/) von deinem Alltag. Wenn du noch nicht genug zurückgelegt hast, verschiebe die Reise oder wähle eine kleinere Variante. Ein Urlaub sollte nicht mit einem Kredit beginnen, den du nach der Rückkehr bereust.
+Beginne mit dem Betrag, den du für die Reise einsetzen kannst, ohne Miete oder wichtige Rechnungen zu gefährden. Trenne die Reisekasse von deinem Alltag. Wenn du noch nicht genug zurückgelegt hast, verschiebe die Reise oder wähle eine kleinere Variante. Ein Urlaub sollte nicht mit einem Kredit beginnen, den du nach der Rückkehr bereust.
 
 Teile das Budget in gut erkennbare Gruppen: Anfahrt, Unterkunft, Essen, Aktivitäten, Versicherung und freie Reserve. Du musst nicht jeden Betrag gleich genau kennen. Markiere, welche Preise bereits feststehen und welche nur Schätzungen sind. So siehst du, wo noch eine Information fehlt.
 
@@ -82,7 +82,7 @@ Richte ein eigenes Sparziel ein. Du kannst Geld regelmäßig beiseitelegen, wenn
 
 Mach aus dem Ziel keinen Test deiner Disziplin. Wenn eine Rechnung dazwischenkommt, darfst du den Plan ändern. Prüfe dann, ob du den Reisezeitraum verschieben oder Kosten senken willst. Nimm kein Geld aus einer wichtigen Rücklage, nur damit die Buchung heute klappt.
 
-Eine separate [Reisekasse](../../posts/2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub/) hilft, das übrige Geld nicht versehentlich auszugeben. Sie muss kein besonderes Konto sein. Wichtig ist, dass du den Zweck erkennst und die Bedingungen verstehst. Prüfe mögliche Kosten und Zugriff, bevor du ein neues Produkt eröffnest.
+Eine separate Reisekasse hilft, das übrige Geld nicht versehentlich auszugeben. Sie muss kein besonderes Konto sein. Wichtig ist, dass du den Zweck erkennst und die Bedingungen verstehst. Prüfe mögliche Kosten und Zugriff, bevor du ein neues Produkt eröffnest.
 
 ## Was gehört in den Preisvergleich?
 

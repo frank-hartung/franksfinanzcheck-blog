@@ -107,7 +107,7 @@ Prüfen Sie auch die Versicherung für das Auto genau. Ein Schutz ohne Selbstbet
 
 
 **Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/)
-**Lesetipp:** [Reisekasse füllen: 7 Wege zu mehr Budget für den Urlaub](../../posts/2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub/)
+**Lesetipp:** Reisekasse füllen: 7 Wege zu mehr Budget für den Urlaub
 
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 

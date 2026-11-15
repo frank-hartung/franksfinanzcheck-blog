@@ -67,7 +67,7 @@ Du brauchst keinen neuen Vertrag und kein Bonusprogramm zum Start. Prüfe zuerst
 ## Wie viel musst du für deine Reise sparen?
 
 
-Darum geht es hier konkret: [Reisekasse füllen](../../posts/2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub/).
+Darum geht es hier konkret: Reisekasse füllen.
 
 
 Darum geht es hier konkret: Reisekasse füllen.
