@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "generated_at": "2026-11-15T10:20:08Z",
+  "generated_at": "2026-11-15T11:12:07Z",
   "modus": "kandidaten",
-  "commit": "eaa1c3b5663109643464fb14fc7c2c0ab8bd4364",
+  "commit": "2589d9d2cce6b7729e6eed1437066f5aab0ce357",
   "kapazitaet": {
     "stichtag": "2026-11-15",
     "basis": "2026-11-15",
     "projiziert": false,
-    "artikel": 132,
+    "artikel": 131,
     "faellig": 1,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
@@ -19,9 +19,9 @@
     "budget": 5,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 5.0,
-    "bedarf_je_tag": 3.2,
-    "bedarf_je_woche": 22.4,
-    "deckung_prozent": 156.3,
+    "bedarf_je_tag": 3.167,
+    "bedarf_je_woche": 22.2,
+    "deckung_prozent": 157.9,
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
@@ -31,7 +31,7 @@
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
     "verletzungen": [],
-    "offen_im_horizont": 132,
+    "offen_im_horizont": 131,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
@@ -80,13 +80,14 @@
         "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp",
         "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss",
         "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust",
+        "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
         "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt",
         "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
         "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
         "2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto",
         "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen"
       ],
-      "anzahl": 25
+      "anzahl": 26
     },
     {
       "check": "T1w-zeichenlaenge-optimum",
@@ -113,13 +114,13 @@
     }
   ],
   "befundlage": {
-    "offen": 151,
-    "seiten": 39,
-    "live_befunde": 97,
-    "live_seiten": 25,
+    "offen": 156,
+    "seiten": 40,
+    "live_befunde": 102,
+    "live_seiten": 26,
     "ueberholt": 102,
     "ohne_fassung": 11,
-    "nicht_entscheidbar": 0,
+    "nicht_entscheidbar": 5,
     "aeltester_tage": 16,
     "frist_tage": 14,
     "ueber_frist": 11,
@@ -144,6 +145,7 @@
       "2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp": 5,
       "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": 3,
       "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": 3,
+      "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": 5,
       "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": 3,
       "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten": 4,
       "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": 5,
@@ -770,7 +772,7 @@
       ]
     },
     "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": {
-      "sha256": "498400ee6d1b20eb30c0e6ee3a7ada317cae8000239f197d01dd39d9a13321cb",
+      "sha256": "83877bffe27362d26247db08159285a7548ace3a3c718edbb9050874aa369392",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -784,7 +786,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-12",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich": {
@@ -1386,13 +1388,13 @@
       "checks": []
     },
     "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": {
-      "sha256": "8cd3fef9e9d0c0d70ab9af232196da5e063f41cdde1bbd930d82167da652160b",
-      "urteil": "freigabe-reif",
+      "sha256": "15b2cb59b7a850dc596fc4409fe3ab6a453ae5f6410565f25066142fb3f6d420",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
@@ -1400,8 +1402,15 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-03",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "7067eabb89a917ae67a4 (luecke): Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu unklaren Angeboten und Problemen mit Online-Buchungen.; af2ccb4222eeb195222f (praezision): Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht automatisch, ob das Auto zum individuellen Urlaub passt – ohne Messgröße bleibt die Aussage ungenau.; d9c8b522bf1dcaed0340 (luecke): Die Ve"
+        }
+      ]
     },
     "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": {
       "sha256": "ad2d7bad5e5fbeda072820f4bad0fe4d014ba998f07b7b136e0d54b12ae9554c",
@@ -1673,7 +1682,7 @@
       ]
     },
     "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen": {
-      "sha256": "fac590ed6a0f6fce465d7c85014cdbf457e9afd5a4e58fc57b8534e4eda817a5",
+      "sha256": "7f74c6af3efff4c7e3f86742948e1b1774bbef9733942aa18227fad36aa86533",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1687,7 +1696,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-11",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
