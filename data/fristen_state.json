@@ -1,9 +1,18 @@
 {
+  "affiliate-partnerbedingungen": {
+    "issue": 1233
+  },
   "bfsg-barrierefreiheit-bewertung": {
     "erledigt_am": "2026-10-10",
     "last_done": "2026-10-10"
   },
+  "dpf-zertifizierung-pruefen": {
+    "issue": 1232
+  },
   "ki-vo-kennzeichnung-bestand": {
     "issue": 1028
+  },
+  "rechtslage-screening": {
+    "issue": 1234
   }
 }
