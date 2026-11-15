@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Reddit
 
-> Automatisch aktualisiert: 15.11.2026 00:03 (Europe/Berlin)  
+> Automatisch aktualisiert: 15.11.2026 13:49 (Europe/Berlin)  
 > Profil: https://www.reddit.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `reddit.ics`
 
@@ -12,7 +12,9 @@
 
 ## Kommende Beiträge
 
-_Aktuell nichts eingeplant – der Autopilot füllt den Plan beim nächsten Lauf._
+### So, 15. November 2026
+- **14:15** ⏳ Waschmaschine beladen: Weniger Kosten bei jedem Waschgang — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/
 
 ## Zuletzt veröffentlicht
 

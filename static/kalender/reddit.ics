@@ -5,4 +5,19 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Reddit
 X-WR-TIMEZONE:Europe/Berlin
+BEGIN:VEVENT
+UID:reddit:2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-w
+ aschgang:nutzen:2026-11-15@franksfinanzcheck.de
+DTSTAMP:20261115T124942Z
+DTSTART:20261115T131500Z
+DTEND:20261115T133000Z
+SUMMARY:Reddit: Waschmaschine beladen: Weniger Kosten bei jedem Waschg
+ ang (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Reddit\nArtikel: h
+ ttps://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-beladen-we
+ niger-kosten-bei-jedem-waschgang/
+URL:https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-belade
+ n-weniger-kosten-bei-jedem-waschgang/
+STATUS:TENTATIVE
+END:VEVENT
 END:VCALENDAR
