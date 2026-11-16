@@ -1,6 +1,6 @@
 {
   "target": 6,
-  "ready": 7,
+  "ready": 4,
   "pool_size": 11,
   "generated_at": "2026-11-14T19:15:16Z",
   "candidates": [
@@ -77,54 +77,24 @@
     },
     {
       "slug": "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
-      "ready": true,
+      "ready": false,
       "sha256": "7a14e36357722f7832e2fe3b2f1357909374c15bb3ccea4351a13fb2a6723952",
-      "flesch": 63.6,
       "measured_at": "2026-11-14T19:09:08Z",
-      "score": 0.93,
-      "parts": {
-        "spelling": 0.72,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.96,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-13-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
-      "ready": true,
+      "ready": false,
       "sha256": "a8f0c0fee75ea0fa08a4f1afd89ae1a6cc4df0140e265a3395f643f249863c09",
-      "flesch": 66.0,
       "measured_at": "2026-11-14T19:10:22Z",
-      "score": 0.934,
-      "parts": {
-        "spelling": 0.8200000000000001,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.9,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.9
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
-      "ready": true,
+      "ready": false,
       "sha256": "5410f7f70046418f46c2e8acecc85dd3eb0d443d874b69c99e9e6d46a0a4c9dc",
-      "flesch": 61.6,
       "measured_at": "2026-11-14T19:11:36Z",
-      "score": 0.966,
-      "parts": {
-        "spelling": 0.9,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.86,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst",
