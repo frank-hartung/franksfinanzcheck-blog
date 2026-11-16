@@ -1,17 +1,17 @@
 {
   "counts": {
-    "amber": 1,
-    "green": 9,
+    "amber": 2,
+    "green": 8,
     "info": 2,
     "red": 0
   },
-  "fingerprint": "c0e52bebedd7",
-  "generated": "2026-11-09T13:56:59+00:00",
+  "fingerprint": "be2996b2aa7a",
+  "generated": "2026-11-16T13:42:05+00:00",
   "issue_action": "report",
   "last": {
     "action": "report",
     "changed": true,
-    "fingerprint": "c0e52bebedd7",
+    "fingerprint": "be2996b2aa7a",
     "verdict": "AMBER"
   },
   "steps": {
@@ -23,7 +23,7 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "/tmp/automation-report.md",
-      "ts": "2026-11-09T13:56:52+00:00"
+      "ts": "2026-11-16T13:41:56+00:00"
     },
     "build": {
       "actionable": false,
@@ -33,17 +33,17 @@
       "level": "green",
       "message": "Schritt erfolgreich (Report folgt nicht)",
       "report": "",
-      "ts": "2026-11-09T13:56:55+00:00"
+      "ts": "2026-11-16T13:42:00+00:00"
     },
     "click-chain": {
-      "actionable": false,
-      "code": "ok",
+      "actionable": true,
+      "code": "chain_gap",
       "exit": 0,
-      "findings": 0,
-      "level": "green",
-      "message": "in Ordnung",
+      "findings": 4,
+      "level": "amber",
+      "message": "/go/strom/ ohne data-klick=affiliate_click (Klick unsichtbar für die Umsatzmessung); /go/strom/ ohne data-klick-slug (Ziel-Klick nicht zuordenbar); /go/strom/ ohne ?subid= (die Quelle des Klicks geht verloren); /go/strom/ ohne data-klick-placement (Klick im Funnel keiner Stelle zuordenbar)",
       "report": "CLICK-CHAIN-REPORT.md",
-      "ts": "2026-11-09T13:56:58+00:00"
+      "ts": "2026-11-16T13:42:02+00:00"
     },
     "clicks": {
       "actionable": false,
@@ -53,7 +53,7 @@
       "level": "info",
       "message": "Datenlage offen (noch kein Export/Import)",
       "report": "CLICK-REPORT.md",
-      "ts": "2026-11-09T13:56:57+00:00"
+      "ts": "2026-11-16T13:42:02+00:00"
     },
     "cwv": {
       "actionable": false,
@@ -63,7 +63,7 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "CWV-REPORT.md",
-      "ts": "2026-11-09T13:56:56+00:00"
+      "ts": "2026-11-16T13:42:00+00:00"
     },
     "decay": {
       "actionable": false,
@@ -73,17 +73,17 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "DECAY-REPORT.md",
-      "ts": "2026-11-09T13:56:55+00:00"
+      "ts": "2026-11-16T13:42:00+00:00"
     },
     "lesbarkeit": {
       "actionable": true,
       "code": "read_draft",
       "exit": 0,
-      "findings": 3,
+      "findings": 1,
       "level": "amber",
-      "message": "2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen/index.md (Entwurf) – Flesch 41.7 < Publish-Schwelle 60; 2026-11-02-last-minute-urlaubsangebote-sichern/index.md (Entwurf) – Flesch 49.9 < Publish-Schwelle 60; 2026-11-09-handytarife-vergleichen-so-findest-du-den-guenstigsten-tarif/index.md (Entw",
+      "message": "2026-11-16-e-auto-laden-so-senkst-du-deine-stromkosten/index.md (Entwurf) – Flesch 55.9 < Publish-Schwelle 60",
       "report": "LESBARKEIT-REPORT.md",
-      "ts": "2026-11-09T13:56:57+00:00"
+      "ts": "2026-11-16T13:42:02+00:00"
     },
     "live-policy": {
       "actionable": false,
@@ -93,7 +93,7 @@
       "level": "green",
       "message": "in Ordnung (2 Hinweis(e))",
       "report": "LIVE-POLICY-REPORT.md",
-      "ts": "2026-11-09T13:56:59+00:00"
+      "ts": "2026-11-16T13:42:04+00:00"
     },
     "pinperf": {
       "actionable": false,
@@ -103,7 +103,7 @@
       "level": "info",
       "message": "Datenlage offen (noch kein Export/Import)",
       "report": "PINTEREST-PERF-REPORT.md",
-      "ts": "2026-11-09T13:56:57+00:00"
+      "ts": "2026-11-16T13:42:02+00:00"
     },
     "revenue-funnel": {
       "actionable": false,
@@ -113,7 +113,7 @@
       "level": "green",
       "message": "in Ordnung (2 Hinweis(e))",
       "report": "REVENUE-FUNNEL-REPORT.md",
-      "ts": "2026-11-09T13:56:57+00:00"
+      "ts": "2026-11-16T13:42:02+00:00"
     },
     "scorecard": {
       "actionable": false,
@@ -123,7 +123,7 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "EDITORIAL-SCORECARD.md",
-      "ts": "2026-11-09T13:56:59+00:00"
+      "ts": "2026-11-16T13:42:05+00:00"
     },
     "secrets": {
       "actionable": false,
@@ -133,7 +133,7 @@
       "level": "green",
       "message": "in Ordnung",
       "report": "SECRETS-REPORT.md",
-      "ts": "2026-11-09T13:56:57+00:00"
+      "ts": "2026-11-16T13:42:01+00:00"
     }
   },
   "verdict": "AMBER",
