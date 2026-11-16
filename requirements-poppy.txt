@@ -20,6 +20,6 @@
 pyyaml==6.0.3
 feedparser==6.0.14
 pypdf==6.21.4
-youtube-transcript-api==1.2.4
+youtube-transcript-api==1.2.5
 trafilatura==2.3.1
 lxml_html_clean==0.4.6
