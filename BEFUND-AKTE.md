@@ -2,16 +2,16 @@
 
 _Stand 2026-11-16 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**177 offene Befunde auf 47 Seiten · davon 30 Live-Seiten mit 111 Befunden · ältester 17 Tage · Frist 14 Tage.**
+**209 offene Befunde auf 54 Seiten · davon 34 Live-Seiten mit 129 Befunden · ältester 17 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 177 |
-| Seiten betroffen | 47 (davon live: 30) |
-| Text seit dem Befund geändert | 107 |
+| Offene Befunde | 209 |
+| Seiten betroffen | 54 (davon live: 34) |
+| Text seit dem Befund geändert | 168 |
 | Altbestand ohne Fassungs-Hash | 11 |
 | Nicht entscheidbar (Seite fehlt) | 5 |
-| Über der Frist (14 Tage) | 22 |
+| Über der Frist (14 Tage) | 27 |
 | In Eskalation (21 Tage) | 0 |
 
 ## So schließt du einen Befund
@@ -32,7 +32,7 @@ _Stand 2026-11-16 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 118 von 177 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 179 von 209 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -372,6 +372,74 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden b7f0d52968d89cdf8c5
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden be911855d67f998be662 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
+
+Datei: `content/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `6b5921bdc76490587167` | luecke | 4 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Seit 2026 nutzen die großen Anbieter die Technik mit dem Namen Vectoring; das ist ein Modellwert. Sie senkt das Rauschen auf der Leitung. In der Stadt sind damit bis zu 250 Mbps stabil drin. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `8436b91bdb63a6316979` | praezision | 4 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Preisgarantie über mindestens 12 Monate; ohne Garantie darf der Anbieter bald erhöhen, oft um bis zu 10 %. | – |
+| `a4ff01e649b789f19e6a` | luecke | 4 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Für 50 Mbps zahlst du heute meist ca. 20–40 € im Monat; das ist ein Beispielwert. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6b5921bdc76490587167 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8436b91bdb63a6316979 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden a4ff01e649b789f19e6a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten` · **LIVE** (blockiert) · Risikoklasse standard · 4 Befund(e)
+
+Datei: `content/posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `1dc0f20f9ab3a6b783bc` | luecke | 3 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Behauptung, dass ein fehlender Ausweis zu empfindlichen Bußgeldern führt, fehlt eine belegbare Quelle. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `7b94ca07b36c0b7cb1cc` | luecke | 3 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Aussage, dass Baudenkmäler von der Ausweispflicht befreit sind, wird nicht durch die angegebene Quelle gestützt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `985f506ee04087bf7253` | luecke | 3 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Angabe, dass ein Wechsel von Energieeffizienzklasse F zu C über 2.000 € Jahresersparnis bringt, ist unbelegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `ee321fa37210590f7e9b` | luecke | 3 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Keine Quelle für die Angabe, dass ein Energieausweis ein volles Jahrzehnt gültig ist, sofern keine größeren Umbauten erfolgen. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1dc0f20f9ab3a6b783bc --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7b94ca07b36c0b7cb1cc --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 985f506ee04087bf7253 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ee321fa37210590f7e9b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` · **LIVE** (blockiert) · Risikoklasse standard · 4 Befund(e)
+
+Datei: `content/posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `04ae33652c1c5eb4e2b8` | luecke | 3 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Ein kurzer Check spart dir oft mehrere hundert Euro im Jahr. | – |
+| `5223a3c7287ff81939cd` | luecke | 3 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Faustregel: ... mehr als 5 % deines Nettoeinkommens ... Meist sinken diese Kosten um über 80 % | – |
+| `9800545ae945ec280b34` | luecke | 3 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Ein Wechsel ist für dich in der Regel komplett kostenlos als Beispielwert. | – |
+| `bc0e4f2eb357a682c674` | luecke | 3 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Bei einem normalen Einkommen sollten die Gebühren fast Null sein. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 04ae33652c1c5eb4e2b8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5223a3c7287ff81939cd --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9800545ae945ec280b34 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden bc0e4f2eb357a682c674 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
+
+Datei: `content/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `25d6b9a720f981e8e9df` | praezision | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Bei der Bewertung flexibler Kosten sollte die moderate Preisentwicklung bei Nahrungsmitteln (+0,4 %) den stark steigenden Energiekosten gegenübergestellt werden, um Sparpotenziale zu priorisieren. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `3693b612533c24dcd1ea` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Ratgeber empfiehlt die Prüfung von Stromverträgen, vernachlässigt aber den massiven Preistrend bei Energie von +12,2 %, der die Kalkulation der Fixkosten aktuell dominiert. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `c877eeff8842942c0071` | praezision | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die allgemeine Budget-Transparenz ist ohne Einbezug der Inflationsrate von 2,8 % unvollständig, da Preissteigerungen die Planungssicherheit der 'festen Kosten' kontinuierlich untergraben. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 25d6b9a720f981e8e9df --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3693b612533c24dcd1ea --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden c877eeff8842942c0071 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
 
 Datei: `content/posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/index.md`
@@ -412,22 +480,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 89adecebaae75c14740
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a1a269b73a1b9c2dfc88 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
-
-Datei: `content/posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `6b5921bdc76490587167` | luecke | 4 T | Text unverändert seit dem Befund | Seit 2026 nutzen die großen Anbieter die Technik mit dem Namen Vectoring; das ist ein Modellwert. Sie senkt das Rauschen auf der Leitung. In der Stadt sind damit bis zu 250 Mbps stabil drin. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-| `8436b91bdb63a6316979` | praezision | 4 T | Text unverändert seit dem Befund | Preisgarantie über mindestens 12 Monate; ohne Garantie darf der Anbieter bald erhöhen, oft um bis zu 10 %. | – |
-| `a4ff01e649b789f19e6a` | luecke | 4 T | Text unverändert seit dem Befund | Für 50 Mbps zahlst du heute meist ca. 20–40 € im Monat; das ist ein Beispielwert. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6b5921bdc76490587167 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8436b91bdb63a6316979 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden a4ff01e649b789f19e6a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
 ### `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
 
 Datei: `content/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/index.md`
@@ -442,24 +494,6 @@ Datei: `content/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-hau
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4d0125136c5b940946e4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7aeb2098034d16a46885 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ea97b5dd6695de127fd2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten` · **LIVE** (blockiert) · Risikoklasse standard · 4 Befund(e)
-
-Datei: `content/posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `1dc0f20f9ab3a6b783bc` | luecke | 3 T | Text unverändert seit dem Befund | Behauptung, dass ein fehlender Ausweis zu empfindlichen Bußgeldern führt, fehlt eine belegbare Quelle. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `7b94ca07b36c0b7cb1cc` | luecke | 3 T | Text unverändert seit dem Befund | Aussage, dass Baudenkmäler von der Ausweispflicht befreit sind, wird nicht durch die angegebene Quelle gestützt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `985f506ee04087bf7253` | luecke | 3 T | Text unverändert seit dem Befund | Angabe, dass ein Wechsel von Energieeffizienzklasse F zu C über 2.000 € Jahresersparnis bringt, ist unbelegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `ee321fa37210590f7e9b` | luecke | 3 T | Text unverändert seit dem Befund | Keine Quelle für die Angabe, dass ein Energieausweis ein volles Jahrzehnt gültig ist, sofern keine größeren Umbauten erfolgen. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1dc0f20f9ab3a6b783bc --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7b94ca07b36c0b7cb1cc --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 985f506ee04087bf7253 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden ee321fa37210590f7e9b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
@@ -482,38 +516,108 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7e6087a4117a857a92c
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e28b4ad1f6d608d2ec77 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` · **LIVE** (blockiert) · Risikoklasse standard · 4 Befund(e)
+### `2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro` · **LIVE** · Risikoklasse standard · 5 Befund(e)
 
-Datei: `content/posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/index.md`
+Datei: `content/posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/index.md`
 
 | Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
 |---|---|---|---|---|---|
-| `04ae33652c1c5eb4e2b8` | luecke | 3 T | Text unverändert seit dem Befund | Ein kurzer Check spart dir oft mehrere hundert Euro im Jahr. | – |
-| `5223a3c7287ff81939cd` | luecke | 3 T | Text unverändert seit dem Befund | Faustregel: ... mehr als 5 % deines Nettoeinkommens ... Meist sinken diese Kosten um über 80 % | – |
-| `9800545ae945ec280b34` | luecke | 3 T | Text unverändert seit dem Befund | Ein Wechsel ist für dich in der Regel komplett kostenlos als Beispielwert. | – |
-| `bc0e4f2eb357a682c674` | luecke | 3 T | Text unverändert seit dem Befund | Bei einem normalen Einkommen sollten die Gebühren fast Null sein. | – |
+| `334751e6f61ad0033fe4` | luecke | 14 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quellenangabe. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `36759a5efe5e8e5163d0` | luecke | 14 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird ohne Quelle angegeben. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `942922d1afd7844618e9` | luecke | 14 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt rund 180 € im Jahr“ wird nicht belegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `d41f0d5ce8798df0211b` | praezision | 14 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“ ist ein Superlativ ohne messbare Daten oder Vergleichskriterien. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `e139d0769faadd04392a` | luecke | 14 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne Quellenangabe genannt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
 
 ```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 04ae33652c1c5eb4e2b8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5223a3c7287ff81939cd --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9800545ae945ec280b34 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden bc0e4f2eb357a682c674 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 334751e6f61ad0033fe4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 36759a5efe5e8e5163d0 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 942922d1afd7844618e9 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d41f0d5ce8798df0211b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden e139d0769faadd04392a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
+### `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig` · **LIVE** · Risikoklasse standard · 5 Befund(e)
 
-Datei: `content/posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/index.md`
+Datei: `content/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/index.md`
 
 | Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
 |---|---|---|---|---|---|
-| `25d6b9a720f981e8e9df` | praezision | 1 T | Text unverändert seit dem Befund | Bei der Bewertung flexibler Kosten sollte die moderate Preisentwicklung bei Nahrungsmitteln (+0,4 %) den stark steigenden Energiekosten gegenübergestellt werden, um Sparpotenziale zu priorisieren. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
-| `3693b612533c24dcd1ea` | luecke | 1 T | Text unverändert seit dem Befund | Der Ratgeber empfiehlt die Prüfung von Stromverträgen, vernachlässigt aber den massiven Preistrend bei Energie von +12,2 %, der die Kalkulation der Fixkosten aktuell dominiert. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
-| `c877eeff8842942c0071` | praezision | 1 T | Text unverändert seit dem Befund | Die allgemeine Budget-Transparenz ist ohne Einbezug der Inflationsrate von 2,8 % unvollständig, da Preissteigerungen die Planungssicherheit der 'festen Kosten' kontinuierlich untergraben. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `04e40219cb4ff593b415` | praezision | 13 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Angabe, dass Anbieter den Abschlag auf elf oder zwölf Raten verteilen, ist ohne Beleg ungenau, da die Ratenzahl vertraglich variieren kann. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `2d01dc2629ad9c81f569` | luecke | 13 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Aussage, dass die Grundversorgung fast immer der teuerste Tarif ist, wird nicht durch eine Quelle belegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `3fd64026f55df4965cc9` | luecke | 13 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Angabe, dass ein Grad weniger Raumtemperatur rund 6 % Heizenergie einspart, fehlt eine Quellenangabe. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `799c93c89a10fc3cf267` | luecke | 13 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Das Sonderkündigungsrecht bei Preiserhöhungen im Winter wird genannt, ohne regulatorische Grundlage zu nennen. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `cd81b3d9001b04c0a4e1` | luecke | 13 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Behauptung, der Grundtarif der Stadtwerke sei ausschließlich eine Notversorgung und nie ein Bestpreis, ist unbelegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
 
 ```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 25d6b9a720f981e8e9df --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3693b612533c24dcd1ea --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden c877eeff8842942c0071 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 04e40219cb4ff593b415 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2d01dc2629ad9c81f569 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3fd64026f55df4965cc9 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 799c93c89a10fc3cf267 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden cd81b3d9001b04c0a4e1 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` · **LIVE** · Risikoklasse standard · 3 Befund(e)
+
+Datei: `content/posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `58f03a64adaaf8125959` | praezision | 13 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Während der Artikel vor hohen Kosten für Festmenüs warnt, liegt die Preissteigerung bei Nahrungsmitteln laut Destatis im Oktober 2026 bei lediglich +0,4 % und damit deutlich unter der allgemeinen Inflation. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `a7f5f01ef15a38839a0d` | praezision | 13 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Pauschale für 'Anreise und Mobilität' (10 % des Budgets) berücksichtigt nicht die überdurchschnittliche Preissteigerung bei Energie von +14,9 %, die Fahrtkosten im Vergleich zum Vorjahr massiv verteuern kann. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `bcc2bdf06220d5097133` | luecke | 13 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Modellrechnung für das Weihnachtsbudget (600 €) lässt die aktuelle Teuerungsrate unberücksichtigt. Laut Statistischen Bundesamt liegt die Inflationsrate im Oktober 2026 bei +2,8 %, was als Referenzwert für die Budgetplanung zum Vorjahr fehlt. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 58f03a64adaaf8125959 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden a7f5f01ef15a38839a0d --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden bcc2bdf06220d5097133 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang` · **LIVE** · Risikoklasse standard · 5 Befund(e)
+
+Datei: `content/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `4284fd2d9c9005e7af8f` | praezision | 11 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Behauptung, dass Überladung der Maschine zu schnellerem Verschleiß und teuren Reparaturen führt, wird ohne konkrete Daten oder Messgröße angegeben. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `84e247f17354e224c973` | praezision | 11 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Aussage, dass das richtige Beladen allein die Fixkosten senkt, ohne weitere Maßnahmen, ist ein pauschales Leistungsversprechen ohne Nennung von Mechanismen oder Grenzen. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `a2a7dc69f10393af6531` | luecke | 11 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Modellrechnung (0,9 kWh/50 L bei vollem Waschgang, 0,6 kWh/35 L bei halbem Waschgang, Strompreis 0,40 €/kWh, Wasserpreis 0,005 €/L) und die daraus resultierende Jahresersparnis von 22 € fehlen einer fundierten Quelle. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `cb794331f1cc0c715a55` | luecke | 11 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Aussage, dass bei 4 Waschgängen pro Woche ein durchschnittlicher Haushalt rund 5 € jährlich an Strom‑ und Wasserkosten spart, ist nicht mit einer Quelle belegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `e6729081522126e972c2` | luecke | 11 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Angabe, dass ein optimal beladener Trommel (ca. 80 % Kapazität) bis zu 15 % weniger Wasser und Energie verbraucht, wird nicht durch eine Quelle belegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4284fd2d9c9005e7af8f --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 84e247f17354e224c973 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden a2a7dc69f10393af6531 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden cb794331f1cc0c715a55 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden e6729081522126e972c2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken` · **LIVE** · Risikoklasse standard · 1 Befund(e)
+
+Datei: `content/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `a10511ed618384aa7b88` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Artikel nennt keine regulatorischen Vorgaben oder Zertifizierungen (z. B. CE‑Kennzeichnung, Sicherheitsanforderungen) für Smart‑Home‑Geräte, obwohl solche Vorgaben von der Bundesnetzagentur beschrieben werden. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden a10511ed618384aa7b88 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks` · **LIVE** · Risikoklasse standard · 3 Befund(e)
+
+Datei: `content/posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `0d1977a0b6a7b59136f2` | praezision | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Bezeichnung als 'beste Tarife' ist ein Superlativ ohne messbare Daten oder eigene Vergleichsmetrik. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `228ef205074fdc3fb4b3` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Heiz-Faustwert (6 % Ersparnis pro Grad) fehlt in der angegebenen Quelle und ist nicht am Satz belegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `d7c301604b02d49e8d65` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der behauptete Budgetanteil von 30 % für Energie ist ein spezifischer Marktwert, der in der angegebenen Quelle nicht vorkommt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 0d1977a0b6a7b59136f2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 228ef205074fdc3fb4b3 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d7c301604b02d49e8d65 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung` · **LIVE** · Risikoklasse erhoeht · 2 Befund(e)
@@ -530,32 +634,24 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 26b1c694d76bcc7af50
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9593e535bce55f4283e6 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken` · **LIVE** · Risikoklasse standard · 1 Befund(e)
+### `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden` · nicht im Live-Bestand · 5 Befund(e)
 
-Datei: `content/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `a10511ed618384aa7b88` | luecke | 0 T | Text unverändert seit dem Befund | Der Artikel nennt keine regulatorischen Vorgaben oder Zertifizierungen (z. B. CE‑Kennzeichnung, Sicherheitsanforderungen) für Smart‑Home‑Geräte, obwohl solche Vorgaben von der Bundesnetzagentur beschrieben werden. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden a10511ed618384aa7b88 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks` · **LIVE** · Risikoklasse standard · 3 Befund(e)
-
-Datei: `content/posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/index.md`
+Seite: `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden`
 
 | Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
 |---|---|---|---|---|---|
-| `0d1977a0b6a7b59136f2` | praezision | 0 T | Text unverändert seit dem Befund | Die Bezeichnung als 'beste Tarife' ist ein Superlativ ohne messbare Daten oder eigene Vergleichsmetrik. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `228ef205074fdc3fb4b3` | luecke | 0 T | Text unverändert seit dem Befund | Der Heiz-Faustwert (6 % Ersparnis pro Grad) fehlt in der angegebenen Quelle und ist nicht am Satz belegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `d7c301604b02d49e8d65` | luecke | 0 T | Text unverändert seit dem Befund | Der behauptete Budgetanteil von 30 % für Energie ist ein spezifischer Marktwert, der in der angegebenen Quelle nicht vorkommt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `176642ea8acfa44f1152` | luecke | 16 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Behauptung, dass Inlands‑Überweisungen in der Regel kostenlos sind, fehlt eine entsprechende Quelle. | – |
+| `2520f45d441ef87614e3` | luecke | 16 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Behauptung, dass ein kostenloses Girokonto keine reguläre Kontoführungsgebühr erhebt, wird nicht durch die bereitgestellten Quellen belegt. | – |
+| `33bda5941052d9334598` | luecke | 16 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Quantitative Aussage, dass ein kostenloses Girokonto mindestens ein Drittel der bisherigen Kontokosten einsparen kann, ist unbelegt. | – |
+| `7406eaba3aa749c46f4b` | luecke | 16 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Zeitangabe, dass die Kontoeröffnung meist innerhalb weniger Werktage abgeschlossen ist, wird nicht durch die genannten Quellen gestützt. | – |
+| `9f47e6d2aa8cf2a8ff91` | luecke | 16 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Angabe, dass die meisten Banken ein Mindestguthaben von ein paar hundert Euro verlangen, fehlt eine fundierte Quelle. | – |
 
 ```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 0d1977a0b6a7b59136f2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 228ef205074fdc3fb4b3 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden d7c301604b02d49e8d65 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 176642ea8acfa44f1152 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2520f45d441ef87614e3 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 33bda5941052d9334598 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7406eaba3aa749c46f4b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9f47e6d2aa8cf2a8ff91 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu` · nicht im Live-Bestand · 5 Befund(e)
@@ -692,6 +788,38 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden c6d20c93f94cee2ae5a
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f6a30c4191c47f5cdf0a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check` · nicht im Live-Bestand · 3 Befund(e)
+
+Seite: `2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `6d89862b38c33c827817` | praezision | 6 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die pauschale Behauptung, Hardware bleibe stets Eigentum des Nutzers, ist unpräzise, da die Bundesnetzagentur die Kupfer-Glas-Migration begleitet, die oft providerseitige Technikwechsel und neue Netzabschlusspunkte erfordert. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `72bbf29e4ef70a71ad06` | luecke | 6 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Aussagen zu Markttrends wie hohen Neukundenrabatten und Wechselprämien werden als Marktfakten ohne Bezug zu offiziellen Referenzwerten oder Berichten der Aufsichtsbehörde dargestellt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `f0103f4c6a777aaa4845` | luecke | 6 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Ratgeber thematisiert den Anbieterwechsel und Bandbreiten, lässt aber den regulatorischen Rahmen der Bundesnetzagentur zur Breitbandversorgung und zum Verbraucherschutz bei Minderleistung unerwähnt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6d89862b38c33c827817 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 72bbf29e4ef70a71ad06 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden f0103f4c6a777aaa4845 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `frugalismus` · nicht im Live-Bestand · 3 Befund(e)
+
+Seite: `frugalismus`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `760cdea8544be9d1c7c0` | luecke | 5 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die im 'Zins-Marktradar Q4 2026' genannten Benchmark-Daten für Tagesgeld (3,10–3,45 %) und Dispozinsen (11,5–13,8 %) werden der Bundesbank und BaFin zugeschrieben, sind jedoch in den Recherche-Fundstellen nicht belegt. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `cacd65ac080f79a719ae` | praezision | 5 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Ratgeber thematisiert Fixkosten-Senkungen allgemein, lässt aber die laut Destatis signifikante Preissteigerung bei Energie (+12,2 %) unerwähnt, die den Spielraum für die angestrebte 50-Prozent-Quote prägt. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `d2bfec8aa9b7a0807f0e` | luecke | 5 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die 50–30–20-Budgetformel wird als Destatis-Standardmodell ausgewiesen; die angegebene Quelle des Statistischen Bundesamtes enthält jedoch nur Daten zum Verbraucherpreisindex, keine Budget-Verteilungsschlüssel. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 760cdea8544be9d1c7c0 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden cacd65ac080f79a719ae --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d2bfec8aa9b7a0807f0e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten` · nicht im Live-Bestand · 4 Befund(e)
 
 Seite: `2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten`
@@ -708,6 +836,64 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 228c9da3c42ee90e34b
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7728690d5c2f7c141d8d --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden cc0de46a82ad90851506 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d553d0d6c7706a69ad13 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-11-13-tagesgeld-und-zinsen-so-parkst-du-dein-geld-sicher` · nicht im Live-Bestand · 5 Befund(e)
+
+Seite: `2026-11-13-tagesgeld-und-zinsen-so-parkst-du-dein-geld-sicher`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `32467bdd3433317393b9` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Auszahlungsgebühr – selten, aber bei manchen Anbietern möglich. | [Quelle](https://www.bundesbank.de/de/presse/pressenotizen) |
+| `ad932db898c534874507` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Durch die gesetzliche Einlagensicherung ist dein Geld bis zu einem hohen Betrag geschützt. | [Quelle](https://www.bundesbank.de/de/presse/pressenotizen) |
+| `ccf8977f44f05ea2de0a` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Mindesteinlage – manchmal 1 000 €, häufig aber keine Mindestgrenze. | [Quelle](https://www.bundesbank.de/de/presse/pressenotizen) |
+| `d561837e6b7d7ee02a8e` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Neukunden‑Zins – Oft 6‑12 Monate, danach Rückkehr zum Basissatz. | [Quelle](https://www.bundesbank.de/de/presse/pressenotizen) |
+| `fc0e4ba836f5e544d957` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Kündigungsfrist – in der Regel sofort, bei Sonderkonditionen kann es Einschränkungen geben. | [Quelle](https://www.bundesbank.de/de/presse/pressenotizen) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 32467bdd3433317393b9 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ad932db898c534874507 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ccf8977f44f05ea2de0a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d561837e6b7d7ee02a8e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden fc0e4ba836f5e544d957 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-11-16-die-50-30-20-regel-bringt-ordnung-wohin-mit-dem-gehalt` · nicht im Live-Bestand · 5 Befund(e)
+
+Seite: `2026-11-16-die-50-30-20-regel-bringt-ordnung-wohin-mit-dem-gehalt`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `30d4af7eef58e74bd3b6` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | 20 % des Einkommens für Sparen/Vorsorge | – |
+| `676ef4593c35f53c18f1` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Faustregel: Fixkosten > 60 % erfordern Handlungsbedarf | – |
+| `7fe714402ea2428ccea8` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | 50 % des Einkommens in lebensnotwendige Ausgaben | – |
+| `9051f78fea0408adbe70` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Vertragschecks senken die Fixlast | – |
+| `b11782f36d73e5a16b7a` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | 30 % des Einkommens für Wünsche | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 30d4af7eef58e74bd3b6 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 676ef4593c35f53c18f1 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7fe714402ea2428ccea8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9051f78fea0408adbe70 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden b11782f36d73e5a16b7a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-11-16-stabile-gaskosten-lohnt-sich-eine-preisgarantie-fuer-dich` · nicht im Live-Bestand · 4 Befund(e)
+
+Seite: `2026-11-16-stabile-gaskosten-lohnt-sich-eine-preisgarantie-fuer-dich`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `05ae2eeee6a578aac17b` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Keine Datenbasis für die Angabe, dass 24‑Monats‑Garantie üblich sei. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `2980f6b227953c5ac8af` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Keine Quelle für die Aussage, dass die eingeschränkte Preisgarantie von den meisten Kunden bevorzugt wird. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `c32c41bdd629ae4646c1` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Keine Quelle für die Aussage, welche Kosten von einer Preisgarantie tatsächlich abgedeckt werden. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `d557c9fcb4562042612b` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Unbelegte Behauptung zur Ersatzversorgung bei Anbieterinsolvenz. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 05ae2eeee6a578aac17b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2980f6b227953c5ac8af --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden c32c41bdd629ae4646c1 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d557c9fcb4562042612b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-10-28-dsl-und-internet-flat-guenstig-sichern` · nicht im Live-Bestand · 1 Befund(e)
@@ -742,22 +928,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 82badcfa80493134c12
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden b44fd9621fb708f45c90 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check` · nicht im Live-Bestand · 3 Befund(e)
-
-Seite: `2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `6d89862b38c33c827817` | praezision | 6 T | Text unverändert seit dem Befund | Die pauschale Behauptung, Hardware bleibe stets Eigentum des Nutzers, ist unpräzise, da die Bundesnetzagentur die Kupfer-Glas-Migration begleitet, die oft providerseitige Technikwechsel und neue Netzabschlusspunkte erfordert. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-| `72bbf29e4ef70a71ad06` | luecke | 6 T | Text unverändert seit dem Befund | Aussagen zu Markttrends wie hohen Neukundenrabatten und Wechselprämien werden als Marktfakten ohne Bezug zu offiziellen Referenzwerten oder Berichten der Aufsichtsbehörde dargestellt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-| `f0103f4c6a777aaa4845` | luecke | 6 T | Text unverändert seit dem Befund | Der Ratgeber thematisiert den Anbieterwechsel und Bandbreiten, lässt aber den regulatorischen Rahmen der Bundesnetzagentur zur Breitbandversorgung und zum Verbraucherschutz bei Minderleistung unerwähnt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6d89862b38c33c827817 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 72bbf29e4ef70a71ad06 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden f0103f4c6a777aaa4845 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
 ### `2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert` · nicht im Live-Bestand · 5 Befund(e)
 
 Seite: `2026-09-29-konto-karten-update-was-sich-jetzt-fuer-dich-aendert`
@@ -776,22 +946,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 766e3df5f10bb91ff03
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d11731ee598db94f14c0 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ef34d0d6243902be1bc9 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f48dd250f165f647c90a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `frugalismus` · nicht im Live-Bestand · 3 Befund(e)
-
-Seite: `frugalismus`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `760cdea8544be9d1c7c0` | luecke | 5 T | Text unverändert seit dem Befund | Die im 'Zins-Marktradar Q4 2026' genannten Benchmark-Daten für Tagesgeld (3,10–3,45 %) und Dispozinsen (11,5–13,8 %) werden der Bundesbank und BaFin zugeschrieben, sind jedoch in den Recherche-Fundstellen nicht belegt. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
-| `cacd65ac080f79a719ae` | praezision | 5 T | Text unverändert seit dem Befund | Der Ratgeber thematisiert Fixkosten-Senkungen allgemein, lässt aber die laut Destatis signifikante Preissteigerung bei Energie (+12,2 %) unerwähnt, die den Spielraum für die angestrebte 50-Prozent-Quote prägt. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
-| `d2bfec8aa9b7a0807f0e` | luecke | 5 T | Text unverändert seit dem Befund | Die 50–30–20-Budgetformel wird als Destatis-Standardmodell ausgewiesen; die angegebene Quelle des Statistischen Bundesamtes enthält jedoch nur Daten zum Verbraucherpreisindex, keine Budget-Verteilungsschlüssel. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 760cdea8544be9d1c7c0 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden cacd65ac080f79a719ae --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden d2bfec8aa9b7a0807f0e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-10-19-urlaubskasse-clever-aufbessern` · nicht im Live-Bestand · 3 Befund(e)
@@ -822,26 +976,6 @@ Seite: `2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert`
 ```bash
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 784d0b3715d53d5c3bb2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8fea8173e9c360979fc7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-11-13-tagesgeld-und-zinsen-so-parkst-du-dein-geld-sicher` · nicht im Live-Bestand · 5 Befund(e)
-
-Seite: `2026-11-13-tagesgeld-und-zinsen-so-parkst-du-dein-geld-sicher`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `32467bdd3433317393b9` | luecke | 1 T | Text unverändert seit dem Befund | Auszahlungsgebühr – selten, aber bei manchen Anbietern möglich. | [Quelle](https://www.bundesbank.de/de/presse/pressenotizen) |
-| `ad932db898c534874507` | luecke | 1 T | Text unverändert seit dem Befund | Durch die gesetzliche Einlagensicherung ist dein Geld bis zu einem hohen Betrag geschützt. | [Quelle](https://www.bundesbank.de/de/presse/pressenotizen) |
-| `ccf8977f44f05ea2de0a` | luecke | 1 T | Text unverändert seit dem Befund | Mindesteinlage – manchmal 1 000 €, häufig aber keine Mindestgrenze. | [Quelle](https://www.bundesbank.de/de/presse/pressenotizen) |
-| `d561837e6b7d7ee02a8e` | luecke | 1 T | Text unverändert seit dem Befund | Neukunden‑Zins – Oft 6‑12 Monate, danach Rückkehr zum Basissatz. | [Quelle](https://www.bundesbank.de/de/presse/pressenotizen) |
-| `fc0e4ba836f5e544d957` | luecke | 1 T | Text unverändert seit dem Befund | Kündigungsfrist – in der Regel sofort, bei Sonderkonditionen kann es Einschränkungen geben. | [Quelle](https://www.bundesbank.de/de/presse/pressenotizen) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 32467bdd3433317393b9 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden ad932db898c534874507 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden ccf8977f44f05ea2de0a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden d561837e6b7d7ee02a8e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden fc0e4ba836f5e544d957 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub` · nicht im Live-Bestand · 5 Befund(e)
