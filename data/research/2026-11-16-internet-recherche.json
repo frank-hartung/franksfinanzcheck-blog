@@ -1,0 +1,229 @@
+{
+  "datum": "2026-11-16",
+  "erzeugt_utc": "2026-11-16 15:53 UTC",
+  "agent_reach": "Agent Reach v1.5.0",
+  "kanal_ok": 7,
+  "kanal_fehler": 1,
+  "ergebnisse": {
+    "rss": {
+      "Tagesschau – alle Meldungen": {
+        "treffer": [
+          {
+            "titel": "Die EU will europäischen Stahl konkurrenzfähig machen",
+            "url": "https://www.tagesschau.de/wirtschaft/weltwirtschaft/stahl-eu-china-massnahmen-100.html",
+            "datum": "2026-11-16T14:53",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Stahlgipfel in Salzgitter: Unternehmen fordern Entlastung beim Strompreis",
+            "url": "https://www.tagesschau.de/wirtschaft/stahlgipfel-klimawandel-produktion-100.html",
+            "datum": "2026-11-16T14:52",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Depardieu akzeptiert Belästigungsurteil und bittet um Entschuldigung",
+            "url": "https://www.tagesschau.de/ausland/europa/depardieu-belaestigung-urteil-entschuldigung-100.html",
+            "datum": "2026-11-16T14:46",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Tesla kündigt Milliarden-Investition in Werk in Brandenburg an",
+            "url": "https://www.tagesschau.de/inland/regional/brandenburg/tesla-investitionen-brandenburg-100.html",
+            "datum": "2026-11-16T15:10",
+            "quelle": "Tagesschau – alle Meldungen"
+          },
+          {
+            "titel": "Älterer Programmfehler löste Ausfall von Microsoft-Diensten aus",
+            "url": "https://www.tagesschau.de/wirtschaft/unternehmen/microsoft-stoerung-fehler-100.html",
+            "datum": "2026-11-16T14:22",
+            "quelle": "Tagesschau – alle Meldungen"
+          }
+        ],
+        "fehler": null
+      },
+      "DER SPIEGEL – Wirtschaft": {
+        "treffer": [
+          {
+            "titel": "Tesla will Milliardensumme für Robotaxi-Bau in Deutschland investieren",
+            "url": "https://www.spiegel.de/wirtschaft/unternehmen/tesla-investiert-milliardensumme-fuer-robotaxi-bau-in-deutschland-a-65132952-1c63-4862-b2ce-f82c5def838f#ref=rss",
+            "datum": "Mon, 16 Nov 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Maldon Salt: Nobelsalz-Hersteller muss sich für K+S-Beimischung rechtfertigen",
+            "url": "https://www.spiegel.de/wirtschaft/noble-speisesalze-maldon-salt-muss-sich-fuer-k-s-beimischung-rechtferitgen-a-e7a7603b-ba2b-44e9-9b26-d37ba3236ec9#ref=rss",
+            "datum": "Mon, 16 Nov 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Commerzbank: EU genehmigt Übernahme durch Unicredit",
+            "url": "https://www.spiegel.de/wirtschaft/eu-genehmigt-uebernahme-der-commerzbank-durch-unicredit-a-d345f44c-486c-43ed-968c-6d33229c6372#ref=rss",
+            "datum": "Mon, 16 Nov 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Haushalt: Rechnungshof-Präsident Ansgar Heveling sieht bei Subventionen viel Sparpotenzial",
+            "url": "https://www.spiegel.de/wirtschaft/bundeshaushalt-rechnungshof-praesident-ansgar-heveling-sieht-bei-subventionen-viel-sparpotenzial-a-288a2b18-a2fb-4f3b-a484-e638d21040ee#ref=rss",
+            "datum": "Mon, 16 Nov 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          },
+          {
+            "titel": "Bitcoin kostete zeitweise nur noch rund 62.500 Dollar",
+            "url": "https://www.spiegel.de/wirtschaft/bitcoin-kostete-zeitweise-nur-noch-rund-62-500-dollar-a-ce2126df-8f14-49c2-bfda-cb46bfcb1b67#ref=rss",
+            "datum": "Mon, 16 Nov 2026",
+            "quelle": "DER SPIEGEL – Wirtschaft"
+          }
+        ],
+        "fehler": null
+      },
+      "heise online (Internet/Telekommunikation)": {
+        "treffer": [
+          {
+            "titel": "Tesla will drei Milliarden Euro in Werk in Grünheide stecken",
+            "url": "https://www.heise.de/news/Tesla-will-drei-Milliarden-Euro-in-Werk-in-Gruenheide-stecken-11526787.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-11-16T16:04",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "In-Ears JLab Epic Lab Edition im Test: Hi-Res per Dongle auch für iPhones",
+            "url": "https://www.heise.de/bestenlisten/testbericht/in-ear-kopfhoerer-jlab-epic-lab-edition-im-test-hi-res-per-dongle-auch-fuer-iphones/fms9s9z?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-11-16T16:00",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Kein Lenkrad, kein Pedal: Tesla verkauft Cybercab für 30.000 Dollar mit Haken",
+            "url": "https://www.heise.de/news/Kein-Lenkrad-kein-Pedal-Tesla-verkauft-Cybercab-fuer-30-000-Dollar-mit-Haken-11526690.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-11-16T15:42",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "Samsung will Rechenzentrumsbetreiber für KI-Firmen werden",
+            "url": "https://www.heise.de/news/Samsung-will-Rechenzentrumsbetreiber-fuer-KI-Firmen-werden-11526352.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+            "datum": "2026-11-16T15:17",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          },
+          {
+            "titel": "heise+ | CCS: CO₂ – vom Erdboden verschluckt",
+            "url": "https://www.heise.de/hintergrund/CCS-CO-vom-Erdboden-verschluckt-11520246.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus",
+            "datum": "2026-11-16T15:00",
+            "quelle": "heise online (Internet/Telekommunikation)"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "youtube": {
+      "Strompreis senken Anbieter wechseln": {
+        "treffer": [
+          {
+            "titel": "Geld sparen mit Strom/Gas Anbieter Wechsel | Frugalismus Tipps",
+            "url": "https://www.youtube.com/watch?v=TmCaACcZgN8",
+            "kanal": "BusinessWikinger",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Dein Stromtarifwechsel in nur 5 Schritten - SPARE bis zu €850!",
+            "url": "https://www.youtube.com/watch?v=U4K-J6fDdqw",
+            "kanal": "Verträge, Vorsorge & Sparpotenziale",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Drastically reduce electricity costs when growing – online calculator shows your savings potential!",
+            "url": "https://www.youtube.com/watch?v=I0_3kUfiS84",
+            "kanal": "Growtutorials",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Vergleichsportale VS Energievermittler24.de (Sparen durch Stromanbieter wechseln)",
+            "url": "https://www.youtube.com/watch?v=1ujV_wftSdA",
+            "kanal": "Strom & Gas Energievermittler24",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Strom- und Gastarife vergleichen - worauf muss man achten?",
+            "url": "https://www.youtube.com/watch?v=iMg2XuocVgs",
+            "kanal": "Tipps zum Nebenkosten senken",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      },
+      "ETF Sparplan für Anfänger erklärt": {
+        "treffer": [
+          {
+            "titel": "Alles über ETFs in nur 15 Minuten: Index, Sparplan, Steuern",
+            "url": "https://www.youtube.com/watch?v=r80NOOdFIn8",
+            "kanal": "Finanztip",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "So fängst du 2026 mit dem Investieren an (in 10 Min!)",
+            "url": "https://www.youtube.com/watch?v=eTCTGwFO1-Y",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF Sparplan: Schritt-für-Schritt zum ETF Portfolio",
+            "url": "https://www.youtube.com/watch?v=LCLpqN99_iU",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF kaufen 2024: Anleitung zum Sparen mit ETFs - in 3 Schritten zur Geldanlage mit ETF Sparplan",
+            "url": "https://www.youtube.com/watch?v=JoQ9_KliPWk",
+            "kanal": "Stiftung Warentest",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "ETF einfach erklärt (explainity® Erklärvideo)",
+            "url": "https://www.youtube.com/watch?v=YVB2TV0ziIE",
+            "kanal": "explainity ® Erklärvideos",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      },
+      "Kreditkarten Vergleich ohne Jahresgebühr": {
+        "treffer": [
+          {
+            "titel": "Kreditkarten ohne Auslandsgebühren (2026) Welche lohnt sich wirklich?",
+            "url": "https://www.youtube.com/watch?v=2HuHTzSNDvE",
+            "kanal": "GeldRat",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten Vergleich: Die besten kostenlosen Kreditkarten 2025! | Finanzfluss",
+            "url": "https://www.youtube.com/watch?v=r0VXMVcN1k4",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten-Vergleich 2026: NEUER Testsieger? Die besten kostenlosen Kreditkarten! | Finanzfluss",
+            "url": "https://www.youtube.com/watch?v=jNOYUslvA1I",
+            "kanal": "Finanzfluss",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "0€ Kreditkarten Vergleich (2026) Welche ist die Beste?",
+            "url": "https://www.youtube.com/watch?v=6onQLIHJ-R0",
+            "kanal": "GeldRat",
+            "quelle": "YouTube"
+          },
+          {
+            "titel": "Kreditkarten Vergleich, Test online kostenlos beantragen (unbedingt ansehen!)",
+            "url": "https://www.youtube.com/watch?v=zNxtV6nPw98",
+            "kanal": "GeldWiki",
+            "quelle": "YouTube"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "github": {
+      "haushaltsbuch": {
+        "treffer": [],
+        "fehler": "gh-Fehler: gh: To use GitHub CLI in a GitHub Actions workflow, set the GH_TOKEN environment variable. Example:"
+      }
+    }
+  }
+}
