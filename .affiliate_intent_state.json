@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-15 11:42:08 UTC",
+ "generated_at": "2026-11-16 12:20:50 UTC",
  "exit_code": 0,
  "modus": "FIX",
  "checked_articles": 132,
- "checked_links": 314,
+ "checked_links": 312,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -209,28 +209,6 @@
    "code": "IW2",
    "slug": "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
    "line": 272,
-   "route": "allgemein",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
-   "slug": "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
-   "line": 278,
-   "route": "allgemein",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
-   "slug": "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
-   "line": 287,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
