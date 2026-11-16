@@ -6,26 +6,26 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-10-12-energieausweis-was-das-dokument-fuer-deine-fix
- kosten:nutzen:2026-11-21@franksfinanzcheck.de
-DTSTAMP:20261115T192418Z
-DTSTART:20261121T060000Z
-DTEND:20261121T061500Z
-SUMMARY:Telegram (Kanal): Energieausweis: Was er für deine Fixkosten b
- edeutet (nutzen)
+UID:telegram:2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-
+ aus-dem:nutzen:2026-11-16@franksfinanzcheck.de
+DTSTAMP:20261116T134652Z
+DTSTART:20261116T170000Z
+DTEND:20261116T171500Z
+SUMMARY:Telegram (Kanal): Gaspreiserhöhung Sonderkündigungsrecht: Grun
+ dversorgung Gas (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-12-energieausweis
- -was-das-dokument-fuer-deine-fixkosten/
-URL:https://franksfinanzcheck.de/posts/2026-10-12-energieausweis-was-d
- as-dokument-fuer-deine-fixkosten/
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoeh
+ ung-sonderkuendigungsrecht-raus-aus-dem/
+URL:https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-so
+ nderkuendigungsrecht-raus-aus-dem/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dei
- n-geld-zurueck:nutzen:2026-11-22@franksfinanzcheck.de
-DTSTAMP:20261115T192418Z
-DTSTART:20261122T060000Z
-DTEND:20261122T061500Z
+ n-geld-zurueck:nutzen:2026-11-21@franksfinanzcheck.de
+DTSTAMP:20261116T134652Z
+DTSTART:20261121T060000Z
+DTEND:20261121T061500Z
 SUMMARY:Telegram (Kanal): Flugverspätung Entschädigung: So holst du de
  in Geld zurück (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
@@ -36,26 +36,26 @@ URL:https://franksfinanzcheck.de/posts/2026-11-01-flugverspaetung-ents
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:telegram:2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-b
- ezahlbar:nutzen:2026-11-28@franksfinanzcheck.de
-DTSTAMP:20261115T192418Z
-DTSTART:20261128T060000Z
-DTEND:20261128T061500Z
-SUMMARY:Telegram (Kanal): Ökostrom Anbieter wechseln: Sicher\, grün un
- d bezahlbar (nutzen)
+UID:telegram:2026-10-12-energieausweis-was-das-dokument-fuer-deine-fix
+ kosten:nutzen:2026-11-22@franksfinanzcheck.de
+DTSTAMP:20261116T134652Z
+DTSTART:20261122T060000Z
+DTEND:20261122T061500Z
+SUMMARY:Telegram (Kanal): Energieausweis: Was er für deine Fixkosten b
+ edeutet (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbi
- eter-wechseln-sicher-gruen-und-bezahlbar/
-URL:https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-w
- echseln-sicher-gruen-und-bezahlbar/
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-12-energieausweis
+ -was-das-dokument-fuer-deine-fixkosten/
+URL:https://franksfinanzcheck.de/posts/2026-10-12-energieausweis-was-d
+ as-dokument-fuer-deine-fixkosten/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-rou
- ter-standort:nutzen:2026-11-29@franksfinanzcheck.de
-DTSTAMP:20261115T192418Z
-DTSTART:20261129T060000Z
-DTEND:20261129T061500Z
+ ter-standort:nutzen:2026-11-28@franksfinanzcheck.de
+DTSTAMP:20261116T134652Z
+DTSTART:20261128T060000Z
+DTEND:20261128T061500Z
 SUMMARY:Telegram (Kanal): WLAN-Frust lösen: So findest du den besten R
  outer Standort (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
@@ -63,6 +63,21 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
  sen-so-findest-du-den-besten-router-standort/
 URL:https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so
  -findest-du-den-besten-router-standort/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:telegram:2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-b
+ ezahlbar:nutzen:2026-11-29@franksfinanzcheck.de
+DTSTAMP:20261116T134652Z
+DTSTART:20261129T060000Z
+DTEND:20261129T061500Z
+SUMMARY:Telegram (Kanal): Ökostrom Anbieter wechseln: Sicher\, grün un
+ d bezahlbar (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
+ Artikel: https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbi
+ eter-wechseln-sicher-gruen-und-bezahlbar/
+URL:https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-w
+ echseln-sicher-gruen-und-bezahlbar/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

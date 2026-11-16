@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 15.11.2026 20:24 (Europe/Berlin)  
+> Automatisch aktualisiert: 16.11.2026 14:46 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -12,18 +12,21 @@
 
 ## Kommende Beiträge
 
+### Mo, 16. November 2026
+- **18:00** ⏳ Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/
 ### Sa, 21. November 2026
-- **07:00** ⏳ Energieausweis: Was er für deine Fixkosten bedeutet — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/
-### So, 22. November 2026
 - **07:00** ⏳ Flugverspätung Entschädigung: So holst du dein Geld zurück — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/
+### So, 22. November 2026
+- **07:00** ⏳ Energieausweis: Was er für deine Fixkosten bedeutet — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/
 ### Sa, 28. November 2026
-- **07:00** ⏳ Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/
-### So, 29. November 2026
 - **07:00** ⏳ WLAN-Frust lösen: So findest du den besten Router Standort — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/
+### So, 29. November 2026
+- **07:00** ⏳ Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/
 
 ## Zuletzt veröffentlicht
 

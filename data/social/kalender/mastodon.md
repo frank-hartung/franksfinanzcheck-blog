@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 15.11.2026 20:24 (Europe/Berlin)  
+> Automatisch aktualisiert: 16.11.2026 14:46 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -13,8 +13,6 @@
 ## Kommende Beiträge
 
 ### Mo, 16. November 2026
-- **07:30** ⏳ Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 € — _zahl_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/
 - **11:30** ⏳ Waschmaschine beladen: Weniger Kosten bei jedem Waschgang — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/
 ### Mi, 18. November 2026
@@ -42,9 +40,15 @@
   https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/
 - **11:30** ⏳ Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/
+### Mo, 30. November 2026
+- **07:30** ⏳ Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/
+- **11:30** ⏳ Notgroschen: Die Wahrheit über das finanzielle Polster — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/
 
 ## Zuletzt veröffentlicht
 
+- ✅ 16.11.2026 14:46 · Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 € → https://mastodon.social/@FranksFinanzcheck/117626425285672414
 - ✅ 15.11.2026 16:51 · WLAN verbessern: So bringst du stabilen Speed in jede Ecke → https://mastodon.social/@FranksFinanzcheck/117621252329123391
 - ✅ 13.11.2026 14:13 · Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas → https://mastodon.social/@FranksFinanzcheck/117609307232793284
 - ✅ 11.11.2026 13:47 · Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen → https://mastodon.social/@FranksFinanzcheck/117597882570629474
@@ -54,7 +58,6 @@
 - ✅ 06.11.2026 20:58 · Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar → https://mastodon.social/@FranksFinanzcheck/117571265279215472
 - ✅ 06.11.2026 14:01 · Energieausweis: Was er für deine Fixkosten bedeutet → https://mastodon.social/@FranksFinanzcheck/117569625233274475
 - ✅ 04.11.2026 21:27 · Mietwagen ohne Kautionsfallen: So sparst du im Urlaub → https://mastodon.social/@FranksFinanzcheck/117560053046296367
-- ✅ 04.11.2026 14:04 · Haushaltsbuch führen: App, Excel oder Stift im Vergleich → https://mastodon.social/@FranksFinanzcheck/117558312939140189
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
