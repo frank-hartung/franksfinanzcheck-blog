@@ -1,9 +1,9 @@
 ---
 title: "Secondhand Kleidung: So erkennst du Qualität & sparst"
 description: Erfahre, wie du hochwertige Secondhand Kleidung erkennst. Mit meinen Tipps prüfst du Stoffe und Nähte, um beim Kleidung sparen echte Qualität zu finden.
-date: 2026-11-13T11:51:03Z
-draft: true
-reserve: true
+date: 2026-11-16T15:55:45Z
+draft: false
+reserve_published: 2026-11-16
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"

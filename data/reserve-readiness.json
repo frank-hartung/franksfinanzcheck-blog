@@ -1,8 +1,8 @@
 {
   "target": 6,
-  "ready": 4,
-  "pool_size": 11,
-  "generated_at": "2026-11-14T19:15:16Z",
+  "ready": 6,
+  "pool_size": 10,
+  "generated_at": "2026-11-16T16:03:11Z",
   "candidates": [
     {
       "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
@@ -41,21 +41,21 @@
     {
       "slug": "2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
       "ready": false,
-      "sha256": "61f802a7f162f689c38ccf66620192952fbf570f358b583f9fab1e6e9101742b",
-      "flesch": 73.7,
-      "measured_at": "2026-11-14T19:05:30Z",
+      "sha256": "7070cd07d271ff28de11feba35381193707d74d8bf2e7dff67ec1c30b27a27c0",
+      "flesch": 70.2,
+      "measured_at": "2026-11-16T15:59:25Z",
       "reason": "Zeichenlänge (check_length.py) nicht bestanden",
       "details": [
         "🛑 2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
         "Zeichenlänge (check_length.py) nicht bestanden",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
       ],
-      "score": 0.94,
+      "score": 0.962,
       "parts": {
-        "spelling": 0.9,
+        "spelling": 0.86,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.7,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.95
@@ -64,50 +64,72 @@
     {
       "slug": "2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
       "ready": false,
-      "sha256": "524b4b03665b31184405ba6b37c2ff86ef9a41b74fec63b28c33d6d041fb414d",
-      "measured_at": "2026-11-14T19:06:40Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
-    },
-    {
-      "slug": "2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst",
-      "ready": false,
-      "sha256": "01883d9970559cbc2aca768af9ca2c3a913664c90e41d900fcb6017a751c52d9",
-      "measured_at": "2026-11-14T19:07:51Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
+      "sha256": "cd7d5b717f79f7f623bd2dae73e2614b7be89fe6d55d7c97e73597e70bc2376a",
+      "flesch": 61.9,
+      "measured_at": "2026-11-16T16:00:18Z",
+      "reason": "Redundanz-Gate D1–D6 nicht bestanden: D3-X: Absatz wortgleich in 2 Artikeln (content/posts/2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/index.md ≈ content/posts/2026-11-16-die-50-30-20-regel-bringt-ordnu; D4-X: Fast-Dup",
+      "details": [
+        "🛑 2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
+        "Redundanz-Gate D1–D6 nicht bestanden: D3-X: Absatz wortgleich in 2 Artikeln (content/posts/2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/index.md ≈ content/posts/2026-11-16-die-50-30-20-regel-bringt-ordnu; D4-X: Fast-Duplikat über Artikel (Ratio 1.00, content/posts/2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/index.md ≈ content/posts/2026-11-16-die-50-30-20-regel-bring",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 0.976,
+      "parts": {
+        "spelling": 0.94,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
     },
     {
       "slug": "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
-      "ready": false,
-      "sha256": "7a14e36357722f7832e2fe3b2f1357909374c15bb3ccea4351a13fb2a6723952",
-      "measured_at": "2026-11-14T19:09:08Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
-    },
-    {
-      "slug": "2026-11-13-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
-      "ready": false,
-      "sha256": "a8f0c0fee75ea0fa08a4f1afd89ae1a6cc4df0140e265a3395f643f249863c09",
-      "measured_at": "2026-11-14T19:10:22Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
-    },
-    {
-      "slug": "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
-      "ready": false,
-      "sha256": "5410f7f70046418f46c2e8acecc85dd3eb0d443d874b69c99e9e6d46a0a4c9dc",
-      "measured_at": "2026-11-14T19:11:36Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
-    },
-    {
-      "slug": "2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst",
       "ready": true,
-      "sha256": "a0734a9dc0c239daf281441f2dee25fa0f82d7b67548549f821723d0509a7aac",
-      "flesch": 62.8,
-      "measured_at": "2026-11-14T19:12:55Z",
-      "score": 0.936,
+      "sha256": "e25212d0820d8b781bd6150d2ea0c0d3cc0395d71ead9a25732228dcc10be799",
+      "flesch": 63.6,
+      "measured_at": "2026-11-16T16:01:15Z",
+      "score": 0.946,
       "parts": {
-        "spelling": 0.7,
+        "spelling": 0.8,
         "meta": 1.0,
         "structure": 1.0,
         "typography": 0.96,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
+    },
+    {
+      "slug": "2026-11-13-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
+      "ready": true,
+      "sha256": "2e5d9a26e9c0fa06ef07e9f1c7fcdb90ab9d8e4ad1f94e077e1b7c8db2b6abe4",
+      "flesch": 66.0,
+      "measured_at": "2026-11-16T16:02:13Z",
+      "score": 0.93,
+      "parts": {
+        "spelling": 0.8,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.9,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.9
+      }
+    },
+    {
+      "slug": "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
+      "ready": true,
+      "sha256": "6538d82340749edaae9ff9b9eb8732f218c8292a670060b7251bf2a6476ea5ce",
+      "flesch": 61.6,
+      "measured_at": "2026-11-16T16:03:07Z",
+      "score": 0.962,
+      "parts": {
+        "spelling": 0.88,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.86,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 1.0
@@ -116,23 +138,19 @@
     {
       "slug": "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ready": false,
-      "sha256": "f38cb3fb974ec47a9aef42a2770a76ad2bafcd47eae7c82e7723281faebc438f",
-      "flesch": 60.6,
-      "measured_at": "2026-11-14T19:14:06Z",
-      "reason": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
+      "sha256": "306a653428e54a85cb4c6260bb161d1172540f4dacdd2debf6a3c8f32ef3a447",
+      "flesch": 63.4,
+      "measured_at": "2026-11-16T16:03:09Z",
+      "reason": "Reserve-Qualitäts-Gate: FAQ: nur 2 Fragen (Premium verlangt 4)",
       "details": [
-        "🛑 2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
-        "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erforderten zwingend einen Smart Meter, wird ohne Angabe von Voraussetzungen, Kosten oder Verfügbarkeit präzisiert.; 77d809de9e06d1d6910d (luecke): Es wird eine Prognose für den Strompreis 2026 angegeben („Trends erkennen“, „Netzentgelte steigen“), ohne dass dafür aktuelle Marktdaten oder offizielle Prognosen genannt werden.; ad7c0a90ef52ff35130e (luecke): Der Artikel behauptet, dass Preisgarantien vor Preissteigerungen schützen, liefert jedoch keine Quelle für diese Aussage.; f227178fbda2cc59c350 (luecke): Die Aussage, dass Ökostrom‑Tarife häufig günstiger als die Grundversorgung seien, wird nicht durch eine Quelle belegt.",
-        "Profi-Affiliate-Check nicht bestanden: A5: 6 Affiliate-Links (> 5)",
-        "Textverständnis-Gate nicht bestanden: R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…wichtiger hinweis dieser artikel dient ausschließlich der allgemeinen information und…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…stellt keine anlage rechts oder steuerberatung dar prüfe konditionen und…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…bedingungen immer beim jeweiligen anbieter jetzt vergleichen und sparen jetzt…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…fixkosten auf check24 prüfen wichtiger hinweis dieser artikel dient ausschließlich…“ – doppelte Passage, manuell reparieren; R15-PHRASEN-DOPPEL: identische 10-Wort-Sequenz im Fließtext: „…der allgemeinen information und stellt keine anlage rechts oder steuerberatung…“ – doppelte Passage, manuell reparieren",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+        "FAQ: nur 2 Fragen (Premium verlangt 4)"
       ],
-      "score": 0.954,
+      "score": 0.98,
       "parts": {
-        "spelling": 0.92,
+        "spelling": 0.9,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.7,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 1.0
@@ -154,9 +172,53 @@
         "affiliate": 1.0,
         "readability": 0.95
       }
+    },
+    {
+      "slug": "2026-11-16-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater",
+      "ready": false,
+      "sha256": "f00de6672d3655cdf56082393d0f0e26dbd2da854e6658b7c79413dbbffa6267",
+      "flesch": 66.3,
+      "measured_at": "2026-11-16T16:03:11Z",
+      "reason": "Reserve-Qualitäts-Gate: RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Plane mit etwa fünf Jahren.",
+      "details": [
+        "RS5: 3 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Plane mit etwa fünf Jahren."
+      ],
+      "score": 0.802,
+      "parts": {
+        "spelling": 0.13999999999999993,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.94,
+        "uniqueness": 0.9,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
     }
   ],
   "measurement": {
-    "kind": "full"
+    "kind": "partial",
+    "run_id": "43893696707",
+    "run_attempt": "1"
+  },
+  "ausgebucht": {
+    "at": "2026-11-16T15:58:30Z",
+    "slugs": [
+      "2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst",
+      "2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst"
+    ],
+    "tool": "scripts/reserve_recert.py"
+  },
+  "recert": {
+    "at": "2026-11-16T16:03:11Z",
+    "renewed": [
+      "2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
+      "2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
+      "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
+      "2026-11-13-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
+      "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
+      "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "2026-11-16-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater"
+    ],
+    "tool": "scripts/reserve_recert.py"
   }
 }
