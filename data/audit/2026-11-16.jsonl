@@ -29,3 +29,4 @@
 {"ts": "2026-11-16T15:44:37Z", "module": "fix_linebreaks", "action": "apply", "input": {"files": 135}, "output": {"changes": 113}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-11-16T15:44:38Z", "module": "fix_spaces", "action": "apply", "input": {"files": 135}, "output": {"fixes": 76}, "status": "ok", "critical": false, "commit": null}
 {"ts": "2026-11-16T15:46:39Z", "module": "pinterest_pin_text_sync", "action": "apply", "input": {"posts": 129}, "output": {"changed": 0}, "status": "ok", "critical": false, "commit": null}
+{"ts": "2026-11-16T15:53:53Z", "module": "affiliate_profi_check", "action": "fix", "input": {}, "output": {"problems": 0, "fixed": 5}, "status": "ok", "critical": false, "commit": null}

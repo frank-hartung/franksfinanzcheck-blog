@@ -78,7 +78,7 @@ DNS steht für Domain Name System. Ein DNS-Server übersetzt Domainnamen wie `ex
 
 Betriebssystem, Router und DNS-Server können Antworten zwischenspeichern. Deshalb wird nicht bei jedem Seitenaufruf eine neue Anfrage gesendet.
 
-Die DNS-Auflösung ist nur ein Schritt. Ein anderer DNS-Server kann diesen Schritt verändern. Er erhöht aber nicht die vertragliche Bandbreite. Und er repariert kein schwaches WLAN. Das Ergebnis hängt vom Anschluss, vom Dienst, von der Route und vom Zwischenspeicher ab.
+Die DNS-Auflösung ist nur ein Schritt. Ein anderer DNS-Server kann diesen Schritt verändern. Er erhöht aber nicht die vertragliche [Bandbreite](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/). Und er repariert kein schwaches WLAN. Das Ergebnis hängt vom Anschluss, vom Dienst, von der Route und vom Zwischenspeicher ab.
 
 ## Welche öffentlichen DNS-Server gibt es?
 

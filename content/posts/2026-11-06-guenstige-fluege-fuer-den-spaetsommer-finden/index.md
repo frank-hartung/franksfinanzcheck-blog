@@ -108,6 +108,8 @@ Prüfen Sie auch die Versicherung für das Auto genau. Ein Schutz ohne Selbstbet
 
 
 **Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/)
+**Lesetipp:** [Flugverspätung Entschädigung: So holst du dein Geld zurück](../../posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/)
+
 **Lesetipp:** Reisekasse füllen: 7 Wege zu mehr Budget für den Urlaub
 
 ## FAQ – die wichtigsten Fragen kurz beantwortet

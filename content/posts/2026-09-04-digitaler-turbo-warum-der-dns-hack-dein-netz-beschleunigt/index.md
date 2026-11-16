@@ -170,7 +170,7 @@ Tipps zur Fehlersuche, wenn nach einem Wechsel etwas nicht funktioniert, findest
 ## Häufige Fragen
 
 ### Macht ein schnellerer DNS-Server Downloads schneller?
-Nein. Die DNS-Antwort hilft dem Gerät, eine Domain einem Server zuzuordnen. Sie erhöht weder die vertragliche Bandbreite noch die WLAN-Geschwindigkeit. Bei einzelnen Abläufen kann eine andere Auflösungszeit auffallen. Einen pauschalen Vorteil belegt das nicht.
+Nein. Die DNS-Antwort hilft dem Gerät, eine Domain einem Server zuzuordnen. Sie erhöht weder die vertragliche [Bandbreite](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/) noch die WLAN-Geschwindigkeit. Bei einzelnen Abläufen kann eine andere Auflösungszeit auffallen. Einen pauschalen Vorteil belegt das nicht.
 
 ### Bedeutet ein niedriger Messwert, dass meine Daten verschlüsselt sind?
 Nein. `Query time` ist ein Zeitwert, keine Datenschutzprüfung. Die gezeigten `dig`-Befehle fragen klassisches DNS ab. DoH und DoT sind getrennte Protokolle und müssen auf Gerät oder Router passend eingerichtet sein.

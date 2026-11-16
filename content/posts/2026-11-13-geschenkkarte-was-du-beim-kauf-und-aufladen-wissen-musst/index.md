@@ -8,7 +8,7 @@ tags: ["Girokonto", "Kreditkarte und Kredit", "Tagesgeld und Zinsen"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
-keywords: ["Geschenkkarte", "Gutschein aufladen", "Karte verschenken", "Aufladen"]
+keywords: ["Geschenkkarte", "Gutschein aufladen", "Karte verschenken"]
 pin_title: "Geschenkkarte: Was du beim Kauf und Aufladen wissen musst"
 pin_description: "*Werbung | Eine Geschenkkarte ist praktisch, birgt aber oft versteckte Kosten. Wir zeigen dir, wie du beim Gutschein aufladen und Karte verschenken Geld sparst. Mehr Spartipps auf FranksFinanzcheck! #geschenkkarte #gutschein #aufladen"
 ai_generated: true

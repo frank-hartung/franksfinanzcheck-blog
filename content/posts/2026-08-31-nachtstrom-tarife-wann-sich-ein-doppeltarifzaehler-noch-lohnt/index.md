@@ -157,7 +157,7 @@ Vergleiche die beiden Zeilen mit dem Vorjahr. Steigt der Hochtarifanteil und sin
 
 Die einzige Zahl, die du [wirklich brauchst](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/), ist dein Nachtanteil. Ermitteln lässt er sich in einer Woche.
 
-Notiere sieben Tage lang, wann deine großen Verbraucher laufen: Waschmaschine, Trockner, Geschirrspüler, Ladegeräte, Elektroheizung, falls vorhanden; das ist ein Modellwert. Notiere dazu die Uhrzeit und die übliche Laufzeit. Ein Blatt mit drei Spalten reicht.
+Notiere sieben Tage lang, wann deine großen Verbraucher laufen: [Waschmaschine](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/), Trockner, Geschirrspüler, Ladegeräte, Elektroheizung, falls vorhanden; das ist ein Modellwert. Notiere dazu die Uhrzeit und die übliche Laufzeit. Ein Blatt mit drei Spalten reicht.
 
 Danach vergleichst du deine Liste mit den Zeitfenstern deines Tarifs. Steht der größte Teil deiner Läufe außerhalb des günstigen Fensters, hast du zwei Möglichkeiten: das Verhalten ändern oder den Tarif prüfen. Beides ist legitim. Nur eines davon passt zu deinem Alltag.
 

@@ -8,7 +8,7 @@ tags: ["Budget planen"]
 categories: ["Ratgeber"]
 pillar: "konto-karten"
 author: "Frank Hartung"
-keywords: ["Wohin mit dem gehalt", "50 30 20 Regel Budget", "Kontomodell", "Geld einteilen lernen", "Die 50-30-20-Regel bringt Ordnung"]
+keywords: ["Wohin mit dem gehalt", "50 30 20 Regel Budget", "Kontomodell", "Geld einteilen lernen", "Die 50-30-20-Regel bringt Ordnung", "Die 50 30 20 Regel bringt Ordnung", "50-30-20-Regel"]
 pinwand: "Budget & Haushaltskasse: clever planen"
 pin_title: Wohin mit dem Gehalt? Die 50-30-20-Regel bringt Ordnung rein
 pin_description: "*Werbung | Am 15. ist das Konto leer? Die 50-30-20-Regel ist der Klassiker unter den Budget-Methoden, weil sie so einfach ist: 50 % für Fixkosten, 30 % zum Leben, 20 % für deine Ziele. Wir zeigen die Umsetzung mit und ohne App. Jetzt durchstarten!"
@@ -25,6 +25,7 @@ cover:
   image: "images/covers/2026-11-16-die-50-30-20-regel-bringt-ordnung-wohin-mit-dem-gehalt.jpg"
   alt: "Die 50-30-20-Regel bringt Ordnung: Wohin mit dem Gehalt?"
   caption: "Tipp von FranksFinanzcheck"
+faktencheck: 2026-11-16
 ---
 
 Stell dir einen beispielhaften Haushalt vor. Das monatliche Nettoeinkommen liegt in diesem Modellfall bei 2.500 €. Jeden Monat stellt sich nach dem Geldeingang die gleiche Frage: **Wohin mit dem Gehalt?** Trotz eines soliden Einkommens ist das Konto am Ende des Monats oft leer. Kleine Ausgaben summieren sich unbemerkt. Die Miete, der Strom und diverse Abos buchen automatisch ab. Ohne einen klaren Plan verschwindet das Geld in einem schwarzen Loch aus Alltagskosten und Spontankäufen. Wer seine Finanzen im Griff haben will, braucht eine einfache Struktur.
@@ -73,7 +74,7 @@ Diese Methode ist so erfolgreich, weil sie einfach ist. Du brauchst kein komplex
 
  In diesem Modell darfst du 30 % deines Geldes ohne schlechtes Gewissen ausgeben; das ist ein Modellwert. Das verhindert Frust. Wer nur spart, verliert schnell die Motivation. Hier ist der Genuss fest eingeplant. Das macht das System langfristig tragfähig.
 
-Zudem sorgt das Modell für Sicherheit. In unserer Beispielrechnung baust du mit 20 % deines Einkommens ein Polster auf. Das schützt dich vor unvorhersehbaren Ereignissen. Eine kaputte Waschmaschine oder eine Autoreparatur werfen dich dann nicht mehr aus der Bahn. Du handelst proaktiv statt reaktiv.
+Zudem sorgt das Modell für Sicherheit. In unserer Beispielrechnung baust du mit 20 % deines Einkommens ein Polster auf. Das schützt dich vor unvorhersehbaren Ereignissen. Eine kaputte [Waschmaschine](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/) oder eine Autoreparatur werfen dich dann nicht mehr aus der Bahn. Du handelst proaktiv statt reaktiv.
 
 **Faustregel:** Wenn deine Fixkosten dauerhaft mehr als 60 % deines Nettoeinkommens fressen, besteht dringender Handlungsbedarf bei deinen Verträgen.
 
@@ -99,7 +100,7 @@ Auch die fehlende Kontrolle der Kündigungsfristen kostet bares Geld. Wer den Te
 | :--- | :--- | :--- | :--- |
 | Grundbedürfnisse | 50 % | 1.250 € | Wohnen, Essen, Energie |
 | Wünsche | 30 % | 750 € | Freizeit, Hobby, Urlaub |
-| Sparen/Vorsorge | 20 % | 500 € | Notgroschen, Depot, Schulden |
+| Sparen/Vorsorge | 20 % | 500 € | [Notgroschen](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/), Depot, Schulden |
 
 
 
@@ -123,7 +124,7 @@ Wenn du merkst, dass die 50 % für deine Grundbedürfnisse nicht reichen, musst
 
 **Kosten sehen:** Wir erfassen zuerst alle Beträge. Oft sind Abos dabei, die du gar nicht mehr nutzt. In diesem Modellfall streichen wir diese sofort. Jede kleine Ersparnis erhöht deinen Spielraum in den anderen Kategorien.
 
-**Konditionen rechnen:** Wir schauen uns die Details an. Was leistet dein Internetvertrag wirklich? Brauchst du die maximale Bandbreite? Oft reicht ein kleinerer Tarif völlig aus. In unserer Beispielrechnung prüfen wir Leistung gegen Preis.
+**Konditionen rechnen:** Wir schauen uns die Details an. Was leistet dein Internetvertrag wirklich? Brauchst du die maximale [Bandbreite](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/)? Oft reicht ein kleinerer Tarif völlig aus. In unserer Beispielrechnung prüfen wir Leistung gegen Preis.
 
 **Kündigungsfenster sichern:** Wir machen Termine sichtbar. Wer seine Verträge im Blick hat, wird nicht von Preiserhöhungen überrascht. Das gibt dir die Macht zurück. Du entscheidest, wann du wechselst.
 
@@ -147,7 +148,7 @@ In diesem Modellfall nutzt du dieses Geld für Dinge, die dein Leben bereichern.
 
 ## Das Ziel: Finanzielle Freiheit durch Struktur
 
-Finanzielle Ordnung bedeutet Freiheit. Wenn du weißt, **wohin mit dem Gehalt** es fließen soll, hast du weniger Stress. Du musst nicht mehr jeden Tag überlegen, ob du dir etwas leisten kannst. Ein Blick auf dein Spaßkonto genügt.
+[Finanzielle](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) Ordnung bedeutet Freiheit. Wenn du weißt, **wohin mit dem Gehalt** es fließen soll, hast du weniger Stress. Du musst nicht mehr jeden Tag überlegen, ob du dir etwas leisten kannst. Ein Blick auf dein Spaßkonto genügt.
 
 Das Ziel ist ein System, das ohne täglichen Aufwand funktioniert. Die 50–30–20-Regel ist das Fundament dafür. Sie gibt dir die Richtung vor. Mein 4K-Prüfpfad sorgt dafür, dass dein Fundament nicht zu teuer wird. So bleibt am Ende mehr Geld für die Dinge, die dir wirklich wichtig sind.
 
@@ -160,7 +161,7 @@ Handel nur, wenn die Rechnung für dich Sinn ergibt. Ein Wechsel des Anbieters m
 ## Häufige Fragen
 
 ### Was mache ich, wenn meine Fixkosten über 50 % liegen?
-In diesem Modellfall solltest du zuerst alle [Verträge prüfen](../../posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/). Nutze den 4K-Prüfpfad, um unnötige Kosten zu finden. Oft lassen sich durch einen Tarifwechsel bei Strom oder Versicherungen Beträge einsparen. Wenn das nicht reicht, musst du deine 30-Prozent-Kategorie für Wünsche vorübergehend kürzen, bis die Fixkosten sinken.
+In diesem Modellfall solltest du zuerst alle [Verträge prüfen](../../posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/). Nutze den 4K-Prüfpfad, um unnötige Kosten zu finden. Oft lassen sich durch einen [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) bei Strom oder Versicherungen Beträge einsparen. Wenn das nicht reicht, musst du deine 30-Prozent-Kategorie für Wünsche vorübergehend kürzen, bis die Fixkosten sinken.
 
 ### Zählen Kreditschulden zu den 50 % oder den 20 %?
 Das kommt auf die Art des Kredits an. In unserer Beispielrechnung gehören notwendige Raten für eine Immobilie zu den 50 % (Wohnen). Konsumschulden für Möbel oder Technik solltest du jedoch aus der 20-Prozent-Kategorie tilgen. Ziel ist es, diese Schulden so schnell wie möglich loszuwerden, um den Sparanteil zu erhöhen.

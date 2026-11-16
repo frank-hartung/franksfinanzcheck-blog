@@ -1,0 +1,52 @@
+{
+  "slug": "2026-11-16-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater",
+  "titel": "WLAN verbessern: Lohnt sich Mesh oder reicht ein Repeater?",
+  "erzeugt": "2026-11-16 15:55 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 0,
+    "klasse": "standard",
+    "grund": "Erstrecherche – noch nie faktengeprüft",
+    "alter_tage": null,
+    "intervall": 90,
+    "frist": null,
+    "restlaufzeit": null
+  },
+  "geo": {
+    "punkte": 4,
+    "maximum": 6,
+    "prozent": 67,
+    "offen": [
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
+      "Sichtbares Prüfdatum (`faktencheck:`)"
+    ],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": false,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": false
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesnetzagentur.de",
+      "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "datum": "",
+      "quelle": "bundesnetzagentur.de",
+      "kanal": "web",
+      "auszug": "*   [Breitbandversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Breitband/start.html)\n        *   [Kupfer-Glas-Migration](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Kupfer-Glas/start.html)\n        *   [Funk und Frequenzen](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Frequenzen/start.html)\n        *   [Nummerierung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Nummerierung/start.html)\n        *   [Unternehmenspflichten](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Unternehmenspflichten/start.html)\n        *   [Technik und Produktsicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Technik/start.html)\n        *   [Öffentliche Sicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/OeffentlicheSicherheit/start.html)\n        *   [Grundversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Grundversorgung/start.html)\n\n1.   [Homepage](https://www.bundesnetzagentur.de/DE/Home/home_node.html \"Zur Startseite\")\n2.   [Fachthemen](https://www.bundesnetzagentur.de/DE/Themen/start.html \"Themen\")\n3.   [UntermenuOeffnen](javascript:void(0))[Energie](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html \"Energie\")**Telekom­munikation**[Digitales](https://www.bundesnetzagentur.de/DE/Fachthemen/Digitales/start.html \"Alle Fachthemen rund um Digitales\")[Post](https://www.bundesnetzagentur.de/DE/Fachthemen/Post/start.html \"Post\")[Eisenbahnen](https://www.bundesnetzagentur.de/DE/Fachthemen/Eisenbahnen/start.html \"Eisenbahnen\")[BNetzA Data Hub](https://www.bundesnetzagentur.de/DE/Fachthemen/DataHub/start.html \"BNetzA Data Hub\")[Beschlusskammern](https://www.bundesnetzagentur.de/DE/Beschlusskammer",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Bundesnetzagentur",
+      "rang": 1,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [],
+  "fehler": [],
+  "fassung_sha256": "b70a1300ff9796137a7789a4b4dbc20e36f276c9bce80121eb98426dd8bec76c",
+  "text_sha256": "91e4e2e85d1be409b13532606a7927bbff8a0f0c9374f487132fda809de55b16",
+  "fachpruefung": "Fehler: gemini: HTTPError; groq: HTTPError; cloudflare: TimeoutError"
+}
