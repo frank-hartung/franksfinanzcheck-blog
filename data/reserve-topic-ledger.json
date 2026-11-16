@@ -752,6 +752,14 @@
     "letzter_versuch": "2026-10-26",
     "sperre_bis": "2026-10-29"
   },
+  "WLAN-Verstärker vs. Mesh-WLAN: Was lohnt sich wirklich?": {
+    "fehler": 0,
+    "grund": "produziert: wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-11-16",
+    "letzter_versuch": "2026-11-16",
+    "sperre_bis": "2027-05-15"
+  },
   "Waschmaschine richtig beladen: So sparst du Strom und Wasser": {
     "fehler": 0,
     "grund": "produziert: waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
