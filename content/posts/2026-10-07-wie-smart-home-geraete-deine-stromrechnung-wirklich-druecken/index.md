@@ -41,7 +41,7 @@ quellen:
     url: "https://www.umweltbundesamt.de/themen/klima-energie/energiesparen/energiesparen-im-haushalt/energiesparpaket-in-bibliotheken"
     herausgeber: "Umweltbundesamt"
     datum: "2026-10-07"
-faktencheck: "2026-10-07"
+faktencheck: 2026-11-16
 kurzantwort: "Ein Smart-Home-Gerät spart nicht automatisch Strom. Miss zuerst den Verbrauch und prüfe, ob eine Schaltregel unnötige Laufzeit vermeidet. Rechne den Eigenverbrauch der Technik und die Kosten der Anschaffung mit ein."
 ---
 

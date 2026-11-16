@@ -38,7 +38,7 @@ quellen:
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
     datum: "2023-01-01"
-faktencheck: 2026-10-06
+faktencheck: 2026-11-16
 kurzantwort: "Reduziere die Raumtemperatur um einen Grad, nutze LED‑Leuchten, stelle den Kühlschrank auf 4 °C und das Gefrierfach auf –18 °C, installiere Zeitschaltuhren für Geräte und ziehe regelmäßig die Dichtungen von Fenstern und Türen nach. Durch diese fünf Schritte lässt sich der Haushaltsstromverbrauch meist um 10 % – 15 % senken."
 ---
 

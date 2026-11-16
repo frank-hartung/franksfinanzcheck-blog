@@ -1,16 +1,16 @@
 {
   "slug": "2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks",
   "titel": "Energieeffizienz im Haushalt: 5 schnelle Spartricks",
-  "erzeugt": "2026-11-15 12:13 UTC",
+  "erzeugt": "2026-11-16 13:06 UTC",
   "faellig": {
     "faellig": false,
     "prio": 9,
     "klasse": "YMYL",
-    "grund": "frisch geprüft vor 40 Tagen (Intervall 45 Tage)",
-    "alter_tage": 40,
+    "grund": "frisch geprüft vor 41 Tagen (Intervall 45 Tage)",
+    "alter_tage": 41,
     "intervall": 45,
     "frist": "2026-11-20",
-    "restlaufzeit": 5
+    "restlaufzeit": 4
   },
   "geo": {
     "punkte": 6,
@@ -41,12 +41,31 @@
       "zitierbar": true
     }
   ],
-  "befunde": [],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Der behauptete Budgetanteil von 30 % für Energie ist ein spezifischer Marktwert, der in der angegebenen Quelle nicht vorkommt.",
+      "stelle": "Deutsche Haushalte geben rund 30 % ihres Budgets für Energie aus.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der Heiz-Faustwert (6 % Ersparnis pro Grad) fehlt in der angegebenen Quelle und ist nicht am Satz belegt.",
+      "stelle": "Ein Grad weniger spart rund 6 % deiner Heizkosten ein.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Bezeichnung als 'beste Tarife' ist ein Superlativ ohne messbare Daten oder eigene Vergleichsmetrik.",
+      "stelle": "Die besten Tarife findest du über unseren Partner-Vergleich",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
+    }
+  ],
   "fehler": [
     "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
     "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
   ],
   "fassung_sha256": "ebec8f0883e7636eafde92519827d150227bd96f95b5f38a6ee9c66009902502",
   "text_sha256": "a936e4db4dfcf80f6d0dfa6c860e5e89dc0d0bd20d2bd121bc24d93442f23a7d",
-  "fachpruefung": "Fehler: gemini: IncompleteResponseError; groq: HTTPError; cloudflare: TimeoutError"
+  "fachpruefung": "geprüft (gemini:gemini-3-flash-preview); 2 Befund(e) ohne belegbaren Textanker verworfen"
 }

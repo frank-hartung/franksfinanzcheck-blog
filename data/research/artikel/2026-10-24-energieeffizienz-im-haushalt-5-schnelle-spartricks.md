@@ -1,11 +1,11 @@
 # Faktenfrische: Energieeffizienz im Haushalt: 5 schnelle Spartricks
 
-> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-15 12:13 UTC.
+> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-16 13:06 UTC.
 > Agent-Reach-Kanäle, nur lesend. Fundstellen sind Signale, keine Freigabe.
 
 - **Artikel:** `content/posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/index.md`
 - **Themenwelt:** strom-sparen
-- **Fälligkeit:** frisch geprüft vor 40 Tagen (Intervall 45 Tage) (Klasse: YMYL)
+- **Fälligkeit:** frisch geprüft vor 41 Tagen (Intervall 45 Tage) (Klasse: YMYL)
 - **GEO-Reife:** 6/6 (100 %)
 - **Suchbegriffe:** Energieeffizienz, Energie sparen, Energieeffizienz im Haushalt, Spartricks, Strompreis, Gaspreis, Energie, Heizkosten, Photovoltaik, Grundversorgung, Haushalt, schnelle
 - **Kanäle:** rss:Bundesnetzagentur – Pressemitteilungen, rss:Verbraucherzentrale – Energie, web:bundesnetzagentur.de
@@ -29,9 +29,11 @@
 
 ## Fachliche Befunde (KI-Fachprüfung)
 
-Status: Fehler: gemini: IncompleteResponseError; groq: HTTPError; cloudflare: TimeoutError
+Status: geprüft (gemini:gemini-3-flash-preview); 2 Befund(e) ohne belegbaren Textanker verworfen
 
-_Keine Befunde gemeldet; Prüfstatus siehe oben._
+- **luecke** – Der behauptete Budgetanteil von 30 % für Energie ist ein spezifischer Marktwert, der in der angegebenen Quelle nicht vorkommt. (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
+- **luecke** – Der Heiz-Faustwert (6 % Ersparnis pro Grad) fehlt in der angegebenen Quelle und ist nicht am Satz belegt. (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
+- **praezision** – Die Bezeichnung als 'beste Tarife' ist ein Superlativ ohne messbare Daten oder eigene Vergleichsmetrik. (Beleg: <https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html>)
 
 ## Offene GEO-Punkte
 

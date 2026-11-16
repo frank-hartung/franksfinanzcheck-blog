@@ -1,11 +1,11 @@
 # Faktenfrische: Herbst-Check: Strom, Versicherung, Konto und Internet
 
-> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-15 12:12 UTC.
+> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-16 13:05 UTC.
 > Agent-Reach-Kanäle, nur lesend. Fundstellen sind Signale, keine Freigabe.
 
 - **Artikel:** `content/posts/2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert/index.md`
 - **Themenwelt:** frugalismus
-- **Fälligkeit:** frisch geprüft vor 26 Tagen (Intervall 30 Tage) (Klasse: saisonal)
+- **Fälligkeit:** frisch geprüft vor 27 Tagen (Intervall 30 Tage) (Klasse: saisonal)
 - **GEO-Reife:** 6/6 (100 %)
 - **Suchbegriffe:** Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen, Saison Update, Herbst-Check, Herbst Check, DSL-Vergleich, Inflation, Verbraucherpreise, Sparquote, Haushaltsbudget, Herbst
 - **Kanäle:** rss:Statistisches Bundesamt – Pressemitteilungen, web:destatis.de
@@ -31,9 +31,9 @@
 
 ## Fachliche Befunde (KI-Fachprüfung)
 
-Status: geprüft (groq:openai/gpt-oss-120b); 1 Befund(e) ohne belegbaren Textanker verworfen
+Status: geprüft (groq:openai/gpt-oss-120b)
 
-- **luecke** – Ein Preisrutsch für Neukunden lässt sich daraus nicht ableiten.
+- **veraltet** – Die Preise für Energie sind zuletzt um 14,9 % gestiegen. Das meldet das Statistische Bundesamt. (Beleg: <https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html>)
 
 ## Offene GEO-Punkte
 

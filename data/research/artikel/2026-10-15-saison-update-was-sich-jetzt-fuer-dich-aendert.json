@@ -1,16 +1,16 @@
 {
   "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
   "titel": "Herbst-Check: Strom, Versicherung, Konto und Internet",
-  "erzeugt": "2026-11-15 12:12 UTC",
+  "erzeugt": "2026-11-16 13:05 UTC",
   "faellig": {
     "faellig": false,
     "prio": 9,
     "klasse": "saisonal",
-    "grund": "frisch geprüft vor 26 Tagen (Intervall 30 Tage)",
-    "alter_tage": 26,
+    "grund": "frisch geprüft vor 27 Tagen (Intervall 30 Tage)",
+    "alter_tage": 27,
     "intervall": 30,
     "frist": "2026-11-19",
-    "restlaufzeit": 4
+    "restlaufzeit": 3
   },
   "geo": {
     "punkte": 6,
@@ -43,10 +43,10 @@
   ],
   "befunde": [
     {
-      "typ": "luecke",
-      "text": "Ein Preisrutsch für Neukunden lässt sich daraus nicht ableiten.",
-      "stelle": "Ein Preisrutsch für Neukunden lässt sich daraus nicht ableiten.",
-      "beleg": ""
+      "typ": "veraltet",
+      "text": "Die Preise für Energie sind zuletzt um 14,9 % gestiegen. Das meldet das Statistische Bundesamt.",
+      "stelle": "Die Preise für Energie sind zuletzt um 14,9 % gestiegen. Das meldet das Statistische Bundesamt.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
     }
   ],
   "fehler": [
@@ -54,5 +54,5 @@
   ],
   "fassung_sha256": "74edb65d844de6d4b9978d6e6f4694242f74c0ceefdd525b08d39462a3e62225",
   "text_sha256": "c411d781ab66569fc2561e38eb3e5e19be4617adc26f5c8d14544075f8722799",
-  "fachpruefung": "geprüft (groq:openai/gpt-oss-120b); 1 Befund(e) ohne belegbaren Textanker verworfen"
+  "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)"
 }

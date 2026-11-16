@@ -35,14 +35,12 @@ cover:
     geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
-    titel: "Verbraucherpreisindex und Inflationsrate"
+    titel: "Referenzseite destatis.de"
     url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
     herausgeber: "Statistisches Bundesamt"
-    datum: "2023-01-01"
-faktencheck: 2026-10-07
+faktencheck: 2026-11-16
 kurzantwort: "Ja, du kannst deine Haushaltskosten sofort senken, indem du den 4K‑Prüfpfad (Kategorien, Kosten, Konsum, Kontrollen) anwendest. Analysiere jede Ausgabe, streiche unwichtige Abos und wechsle zu günstigeren Anbietern. Die Beispielrechnung im Artikel zeigt, wie dabei vierstellige Beträge im Jahr zusammenkommen können. Der Schlüssel liegt in konsequenter Kontrolle und regelmäßiger Nachprüfung."
 ---
-
 
 Haushaltskosten im Check: Wusstest du, wie viel Geld Jahr für Jahr in veralteten Verträgen stecken bleibt, ohne dass du es merkst? Oft belasten nicht die großen Einmalkäufe dein Budget. Es ist die Summe kleiner, regelmäßiger Abbuchungen. Ein vergessener Streaming-Dienst oder ein teurer Stromtarif fressen dein Geld.
 
