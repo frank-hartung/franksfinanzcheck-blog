@@ -60,6 +60,7 @@
     "reach-signale-kuratieren::signal:https://www.tagesschau.de/inland/cdu-klausur-merz-hoppermann-100.html": "2026-10-12T21:17:05+02:00",
     "reach-signale-kuratieren::signal:https://www.tagesschau.de/inland/innenpolitik/haushalt-steuerplaene-bundesregierung-100.html": "2026-11-09T21:39:50+01:00",
     "reach-signale-kuratieren::signal:https://www.tagesschau.de/wirtschaft/finanzen/marktbericht-suedzucker-100.html": "2026-10-04T16:20:48+02:00",
+    "reach-signale-kuratieren::signal:https://www.tagesschau.de/wirtschaft/stahlgipfel-klimawandel-produktion-100.html": "2026-11-16T19:23:28+01:00",
     "reach-signale-kuratieren::signal:https://www.tagesschau.de/wirtschaft/unternehmen/vodafone-stellenabbau-102.html": "2026-11-09T21:39:50+01:00",
     "reach-signale-kuratieren::signal:https://www.tagesschau.de/wirtschaft/verbraucher/luftfahrt-flugtickets-preise-100.html": "2026-10-05T17:55:29+02:00",
     "reach-signale-kuratieren::signal:https://www.youtube.com/watch?v=1ujV_wftSdA": "2026-10-19T19:44:50+02:00",
@@ -99,6 +100,7 @@
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/konjunktur/inflation-eurozone-anstieg-102.html": "2026-10-04T16:20:48+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/konjunktur/inflation-eurozone-oktober-102.html": "2026-11-04T18:57:22+01:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/konjunktur/inflation-tankrabatt-spritpreise-oktober-100.html": "2026-11-11T17:05:03+01:00",
+    "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/stahlgipfel-klimawandel-produktion-100.html": "2026-11-16T19:23:28+01:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/unternehmen/volkswagen-vw-arbeitskampf-tarifvertrag-100.html": "2026-10-04T16:20:48+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/unternehmen/vw-tarifvertraege-sparkurs-100.html": "2026-10-04T16:20:48+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/verbraucher/bgh-urteil-rechtsschutzversicherung-100.html": "2026-11-11T23:40:24+01:00",
@@ -113,10 +115,10 @@
   "letzter_lauf": {
     "kanal-konfig-drift": "2026-11-06T17:55:19+01:00",
     "nacht-planung": "2026-11-16T08:54:15+01:00",
-    "reach-signale-kuratieren": "2026-11-09T21:39:50+01:00",
+    "reach-signale-kuratieren": "2026-11-16T19:23:28+01:00",
     "standby-erinnerung": "2026-10-04T23:53:19+02:00",
     "stiller-kanal": "2026-11-15T16:51:11+01:00",
-    "verbraucher-nachrichten": "2026-11-12T13:34:27+01:00",
+    "verbraucher-nachrichten": "2026-11-16T19:23:28+01:00",
     "wochenbericht": "2026-11-08T19:28:44+01:00"
   },
   "marker": {
@@ -230,7 +232,8 @@
       "2026-10-19": 2,
       "2026-10-26": 2,
       "2026-11-02": 4,
-      "2026-11-09": 4
+      "2026-11-09": 4,
+      "2026-11-16": 1
     },
     "standby-erinnerung": {
       "2026-10-04": 8
@@ -257,7 +260,8 @@
       "2026-11-04": 1,
       "2026-11-08": 1,
       "2026-11-11": 2,
-      "2026-11-12": 1
+      "2026-11-12": 1,
+      "2026-11-16": 1
     },
     "wochenbericht": {
       "2026-10-18": 1,

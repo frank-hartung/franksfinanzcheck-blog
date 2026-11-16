@@ -9,6 +9,13 @@
 # ============================================================
 version: 1
 vorschlaege:
+- titel: 'Stahlgipfel in Salzgitter: Unternehmen fordern Entlastung beim Strompreis'
+  url: https://www.tagesschau.de/wirtschaft/stahlgipfel-klimawandel-produktion-100.html
+  quelle: Tagesschau – alle Meldungen
+  erfasst: '2026-11-16T19:23:28'
+  brief: 2026-11-16-internet-recherche.json
+  status: offen
+  notiz: Automatisch erfasst aus 2026-11-16-internet-recherche.json – Quellenprüfung erforderlich.
 - titel: Bundeskabinett beschließt Aufbau einer Gasreserve
   url: https://www.tagesschau.de/inland/gasreserve-126.html
   quelle: Tagesschau Wirtschaft (RSS)
@@ -352,4 +359,4 @@ vorschlaege:
   brief: 2026-09-28-internet-recherche.json
   status: offen
   notiz: Automatisch erfasst aus 2026-09-28-internet-recherche.json – Quellenprüfung erforderlich.
-zuletzt_ergaenzt: '2026-11-12T13:34:27'
+zuletzt_ergaenzt: '2026-11-16T19:23:28'
