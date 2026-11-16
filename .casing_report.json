@@ -1,32 +1,20 @@
 {
- "stand": "2026-11-15T12:57:52Z",
+ "stand": "2026-11-16T14:00:41Z",
  "modus": "fix · Bestand · +Pinterest-Plan",
- "dateien": 3,
- "gepruefte_dateien": 136,
- "woerter": 256179,
- "erkannte_befunde": 3,
+ "dateien": 1,
+ "gepruefte_dateien": 137,
+ "woerter": 256790,
+ "erkannte_befunde": 1,
  "befunde": 0,
  "hart": 0,
- "gefixt": 3,
+ "gefixt": 1,
  "geparkt": [],
  "dateien_liste": [
-  {
-   "pfad": "content/posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/index.md",
-   "erkannte_befunde": 1,
-   "befunde": 0,
-   "woerter": 2326
-  },
   {
    "pfad": "content/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/index.md",
    "erkannte_befunde": 1,
    "befunde": 0,
    "woerter": 2016
-  },
-  {
-   "pfad": "content/posts/2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu/index.md",
-   "erkannte_befunde": 1,
-   "befunde": 0,
-   "woerter": 1432
   }
  ]
 }
