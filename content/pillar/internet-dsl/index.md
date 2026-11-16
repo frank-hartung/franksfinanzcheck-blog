@@ -218,7 +218,7 @@ Nutze diesen strukturierten Ablauf, um alle Altverträge risikolos zu optimieren
       <input type="checkbox" id="chk-dsl-5" class="ff-audit-item__checkbox">
       <label for="chk-dsl-5" class="ff-audit-item__content">
         <strong>5. Festnetz-Wechsel beauftragen (Nicht selbst kündigen!)</strong>
-        Neuen Anbieter beauftragen und Wechselauftrag erteilen – der neue Provider kündigt beim Altanbieter für nahtlosen Übergang.
+        Neuen Anbieter beauftragen und Wechselauftrag erteilen – der neue Provider kündigt beim Altanbieter für nahtlosen Übergang.  
       </label>
     </li>
     <li class="ff-audit-item">

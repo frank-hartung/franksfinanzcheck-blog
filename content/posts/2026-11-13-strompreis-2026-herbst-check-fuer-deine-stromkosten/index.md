@@ -43,6 +43,7 @@ quellen:
     herausgeber: "Bundesnetzagentur"
 ---
 
+
 Draußen färben sich die Blätter bunt und die Tage werden kürzer.  
 Während du die Heizung langsam hochdrehst, landet oft Post in deinem Briefkasten.  
 Viele Versorger passen jetzt ihre Abschläge an oder schicken die Jahresrechnung.  
@@ -54,9 +55,9 @@ Dieser Leitfaden führt dich mit meinem 4K‑Prüfpfad sicher durch den Tarif‑
 So triffst du eine Entscheidung auf Basis von harten Fakten statt Bauchgefühl.
 
 **Das Wichtigste in Kürze**  
-- **Prüfpflicht:** Nutze den Herbst für einen systematischen Check deiner Stromverträge.  
-- **Datenbasis:** Deine aktuelle Jahresabrechnung ist das wichtigste Werkzeug für den Vergleich.  
-- **Strategie:** Ein Wechsel ist kein Selbstläufer – sondern das Ergebnis einer klaren Rechnung.  
+- **Prüfpflicht:** Nutze den Herbst für einen systematischen Check deiner Stromverträge.
+- **Datenbasis:** Deine aktuelle Jahresabrechnung ist das wichtigste Werkzeug für den Vergleich.
+- **Strategie:** Ein Wechsel ist kein Selbstläufer – sondern das Ergebnis einer klaren Rechnung.
 - **Zeitpunkt:** Vor der dunklen Jahreszeit sicherst du dir oft bessere Konditionen für den Winter.
 
 ---
@@ -139,26 +140,22 @@ Mein 4K‑Prüfpfad hilft dir dabei, den Überblick zu behalten.
 Wir lassen uns nicht von bunten Werbebannern blenden.  
 Wir schauen auf die nackten Zahlen.
 
-### 1. Kosten sehen  
-Zuerst sammelst du alle Daten.  
+### 1. Kosten sehen Zuerst sammelst du alle Daten.
 Wie viel hast du im letzten Jahr verbraucht?  
 Schau in deine letzte Abrechnung.  
 Notiere dir deinen aktuellen Arbeitspreis pro Kilowattstunde und den Grundpreis pro Monat.
 
-### 2. Konditionen rechnen  
-Jetzt vergleichst du.  
+### 2. Konditionen rechnen Jetzt vergleichst du.
 Nutze dafür Vergleichsportale, aber sei kritisch.  
 Achte auf die [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/).  
 Ich empfehle meistens Laufzeiten von maximal 12 Monaten (Beispielrechnung).
 
-### 3. Kündigungsfenster sichern  
-Wann kannst du frühestens aus deinem alten Vertrag raus?  
-Viele Verträge haben eine [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) von 1 Monat (Annahme) zum Monatsende.  
+### 3. Kündigungsfenster sichern Wann kannst du frühestens aus deinem alten Vertrag raus?
+Viele Verträge haben eine Kündigungsfrist von 1 Monat (Annahme) zum Monatsende.  
 Schau genau in deine Vertragsunterlagen.  
 Verpasse diesen Termin nicht.
 
-### 4. Kurs halten  
-Hast du ein besseres Angebot gefunden?  
+### 4. Kurs halten Hast du ein besseres Angebot gefunden?
 Dann handle sofort.  
 Wenn nicht, bleib bei deinem Anbieter und prüfe in 3 Monaten (Annahme) erneut.  
 Nur wenn die Rechnung für dich aufgeht, ist ein Wechsel sinnvoll.
@@ -170,17 +167,17 @@ Wir nehmen einen Musterhaushalt an.
 Bitte beachte, dass dies eine Modellrechnung ist.  
 Deine tatsächlichen Werte weichen davon ab.
 
-**Annahmen für die Modellrechnung:**  
-- Jährlicher Verbrauch: 3.500 kWh (Modellrechnung).  
-- Aktueller Tarif (Grundversorgung): 42 Cent pro kWh (Modellrechnung) und 150 € Grundpreis pro Jahr (Modellrechnung).  
+**Annahmen für die Modellrechnung:**
+- Jährlicher Verbrauch: 3.500 kWh (Modellrechnung).
+- Aktueller Tarif (Grundversorgung): 42 Cent pro kWh (Modellrechnung) und 150 € Grundpreis pro Jahr (Modellrechnung).
 - Neuer Tarif (Wettbewerber): 32 Cent pro kWh (Modellrechnung) und 120 € Grundpreis pro Jahr (Modellrechnung).
 
 **Schritt 1: Bisherigen Tarif in der Modellrechnung ansetzen**  
-- Mengenanteil im Altvertrag: 3.500 kWh mal 0,42 € ergibt 1.470 € im Jahr (Modellrechnung).  
+- Mengenanteil im Altvertrag: 3.500 kWh mal 0,42 € ergibt 1.470 € im Jahr (Modellrechnung).
 - Inklusive 150 € Grundgebühr liegen die alten Jahreskosten bei 1.620 € (Modellrechnung).
 
 **Schritt 2: Neuen Wahltarif gegenrechnen**  
-- Verbrauchskosten im neuen Tarif: Bei 0,32 € je kWh fallen für 3.500 kWh genau 1.120 € an (Modellrechnung).  
+- Verbrauchskosten im neuen Tarif: Bei 0,32 € je kWh fallen für 3.500 kWh genau 1.120 € an (Modellrechnung).
 - Zuzüglich 120 € Grundpreis ergibt sich eine neue Jahressumme von 1.240 € (Modellrechnung).
 
 **Schritt 3: Ersparnis ermitteln**  
@@ -199,16 +196,12 @@ Viele Menschen machen beim Wechseln Fehler, die sie teuer zu stehen kommen.
 Das liegt oft an mangelnder Information oder Zeitdruck.  
 Hier sind die häufigsten Stolperfallen:
 
-- **Nur auf den Bonus schauen:** Viele Anbieter locken mit hohen Wechselprämien.  
-  Diese werden oft erst nach 1 Jahr (Annahme) ausgezahlt.  
+- **Nur auf den Bonus schauen:** Viele Anbieter locken mit hohen Wechselprämien. Diese werden oft erst nach 1 Jahr (Annahme) ausgezahlt.
   Ist der Grundpreis zu hoch, zahlst du im zweiten Jahr drauf.  
-- **Zu lange Laufzeiten:** Verträge über 24 Monate (Beispielrechnung) binden dich zu lange.  
-  Der Energiemarkt ändert sich schnell.  
+- **Zu lange Laufzeiten:** Verträge über 24 Monate (Beispielrechnung) binden dich zu lange. Der Energiemarkt ändert sich schnell.
   Bleib flexibel mit 12 Monaten (Beispielrechnung) Laufzeit.  
-- **[Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) vergessen:** Wer zu spät dran ist, bleibt ein weiteres Jahr im teuren Tarif.  
-  Markiere dir den Termin rot im Kalender.  
-- **Vorauskasse oder Pakettarife:** Davon rate ich dringend ab.  
-  Geht der Anbieter pleite, ist dein Geld weg.  
+- **Kündigungsfrist vergessen:** Wer zu spät dran ist, bleibt ein weiteres Jahr im teuren Tarif. Markiere dir den Termin rot im Kalender.
+- **Vorauskasse oder Pakettarife:** Davon rate ich dringend ab. Geht der Anbieter pleite, ist dein Geld weg.
   Pakettarife bestrafen dich bei Abweichungen vom geplanten Verbrauch.
 
 ## So gehst du vor: Deine Checkliste für den Herbst
@@ -216,11 +209,11 @@ Hier sind die häufigsten Stolperfallen:
 Damit du nichts vergisst, habe ich dir eine Schrittfolge erstellt.  
 So arbeitest du das Thema Strom effizient ab.
 
-1. **Unterlagen suchen:** Hol dir die letzte Jahresabrechnung deines aktuellen Versorgers.  
-2. **Zählerstand prüfen:** Notiere dir deinen aktuellen Messwert.  
-3. **Vergleich starten:** Nutze einen Online‑Preisrechner mit deiner PLZ und deinem Jahresverbrauch.  
-4. **Tarife filtern:** Wähle 12 Monate (Annahme) Laufzeit und Preisgarantie.  
-5. **Rechnung prüfen:** Vergleiche das beste Angebot mit deinem aktuellen Tarif.  
+1. **Unterlagen suchen:** Hol dir die letzte Jahresabrechnung deines aktuellen Versorgers.
+2. **Zählerstand prüfen:** Notiere dir deinen aktuellen Messwert.
+3. **Vergleich starten:** Nutze einen Online‑Preisrechner mit deiner PLZ und deinem Jahresverbrauch.
+4. **Tarife filtern:** Wähle 12 Monate (Annahme) Laufzeit und Preisgarantie.
+5. **Rechnung prüfen:** Vergleiche das beste Angebot mit deinem aktuellen Tarif.
 6. **Wechsel beauftragen:** Füll das Online‑Formular aus, wenn die Ersparnis stimmt.
 
 ## Die Rolle von dynamischen Tarifen im Jahr 2026
@@ -257,37 +250,26 @@ Werde selbst aktiv und nimm deine Fixkosten in die Hand.
 Hier kannst du direkt prüfen, ob ein Wechsel für dich sinnvoll ist:  
 [Stromanbieter vergleichen und wechseln](/go/strom/)
 
-**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/)  
-**Lesetipp:** [Waschmaschine beladen: Weniger Kosten bei jedem Waschgang](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/)
+**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) **Lesetipp:** [Waschmaschine beladen: Weniger Kosten bei jedem Waschgang](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/)
 
 ## Häufige Fragen
 
-### Muss ich meinen alten Vertrag selbst kündigen?  
-Meist übernimmt dein neuer Anbieter die Kündigung für dich.  
-Das ist der sicherste Weg für einen reibungslosen Übergang.  
-Läuft deine Frist in weniger als 3 Wochen (Beispielrechnung) ab, kündige lieber selbst – das ist ein Modellwert.  
+### Muss ich meinen alten Vertrag selbst kündigen? Meist übernimmt dein neuer Anbieter die Kündigung für dich.
+Das ist der sicherste Weg für einen reibungslosen Übergang. Läuft deine Frist in weniger als 3 Wochen (Beispielrechnung) ab, kündige lieber selbst – das ist ein Modellwert.
 So verhinderst du eine ungewollte Vertragsverlängerung.
 
-### Was passiert, wenn mein neuer Anbieter pleitegeht?  
-In Deutschland ist die Stromversorgung gesetzlich gesichert.  
-Niemand sitzt plötzlich im Dunkeln.  
-Bei einer Insolvenz springt sofort der örtliche Grundversorger ein.  
+### Was passiert, wenn mein neuer Anbieter pleitegeht? In Deutschland ist die Stromversorgung gesetzlich gesichert.
+Niemand sitzt plötzlich im Dunkeln. Bei einer Insolvenz springt sofort der örtliche Grundversorger ein.
 Du hast dann Zeit, dir in Ruhe einen neuen Anbieter zu suchen.
 
-### Wie lange dauert ein Wechsel bis zum Lieferbeginn?  
-Der technisch-marktkommunikative Lieferantenwechsel selbst läuft im Stromnetz kurzfristig ab; wann deine neue Belieferung tatsächlich startet, richtet sich vor allem nach der Kündigungsfrist und Restlaufzeit deines bisherigen Vertrags.  
-Die Umstellung am Zähler merkst du im Alltag nicht.  
-Es ändert sich lediglich der Vertragspartner für deine monatlichen Abschläge.
+### Wie lange dauert ein Wechsel bis zum Lieferbeginn? Der technisch-marktkommunikative Lieferantenwechsel selbst läuft im Stromnetz kurzfristig ab; wann deine neue Belieferung tatsächlich startet, richtet sich vor allem nach der Kündigungsfrist und Restlaufzeit deines bisherigen Vertrags.
+Die Umstellung am Zähler merkst du im Alltag nicht. Es ändert sich lediglich der Vertragspartner für deine monatlichen Abschläge.
 
-### Sind Ökostrom‑Tarife teurer als herkömmlicher Strom?  
-Das hängt vom jeweiligen Netzgebiet und Tarifmodell ab.  
-In vielen Postleitzahlenbereichen liegen Ökostrom‑Wahltarife unter dem Preis der örtlichen Grundversorgung – entscheidend bleibt jedoch der konkrete Vergleich von Arbeits- und Grundpreis an deinem Wohnort.  
-Viele überregionale Versorger führen heute reine Ökostrom‑Tarife im Sortiment.
+### Sind Ökostrom‑Tarife teurer als herkömmlicher Strom? Das hängt vom jeweiligen Netzgebiet und Tarifmodell ab.
+In vielen Postleitzahlenbereichen liegen Ökostrom‑Wahltarife unter dem Preis der örtlichen Grundversorgung – entscheidend bleibt jedoch der konkrete Vergleich von Arbeits- und Grundpreis an deinem Wohnort. Viele überregionale Versorger führen heute reine Ökostrom‑Tarife im Sortiment.
 
-### Kann ich trotz Schulden beim alten Anbieter wechseln?  
-Ein Wechsel ist prinzipiell möglich, aber oft schwierig.  
-Viele Anbieter führen eine Bonitätsprüfung durch.  
-Bei Schulden kann der neue Anbieter dich ablehnen.  
+### Kann ich trotz Schulden beim alten Anbieter wechseln? Ein Wechsel ist prinzipiell möglich, aber oft schwierig.
+Viele Anbieter führen eine Bonitätsprüfung durch. Bei Schulden kann der neue Anbieter dich ablehnen.
 Vereinbare in diesem Fall zuerst eine Ratenzahlung mit deinem aktuellen Versorger.
 
 ## Typische Fehler bei der Anbieterwahl

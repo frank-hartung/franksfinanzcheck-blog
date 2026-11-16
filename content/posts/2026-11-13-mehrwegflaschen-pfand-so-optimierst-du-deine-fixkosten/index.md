@@ -42,6 +42,7 @@ faktenfrische_aliases:
   - "2026-11-12-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten"
 ---
 
+
 Stapeln sich in deiner Küche auch die leeren Getränkekisten? Viele Menschen sehen das Mehrwegflaschen Pfand als lästige Pflicht an. Dabei ist jede leere Flasche bares Geld. Du bezahlst diesen Betrag bereits an der Kasse.
 
 Es ist eine Art zinsloses Darlehen an den Handel – du leihst dem Supermarkt dein Geld ohne Gegenleistung. Wer seine leeren Gefäße konsequent zurückbringt, handelt wirtschaftlich klug. In meinem Fixkosten-Cockpit bei FranksFinanzcheck betrachten wir genau solche kleinen Posten. Kleinvieh macht auch Mist.
@@ -216,7 +217,7 @@ Das führt zu unnötigen Wegen, wenn du in verschiedenen Läden einkaufst. Versu
 Oft liegt es an einem verschmutzten oder beschädigten Etikett. Drehe die Flasche und versuche es erneut. Wenn das nicht hilft, muss das Personal die Flasche manuell annehmen. Laut Gesetz müssen Händler die Gebinde zurücknehmen, die sie im Sortiment führen. Das gilt besonders für Einwegpfand. Bei Mehrweg sind die Regeln etwas lockerer, wenn der Händler genau diese Marke nicht führt.
 
 ### Wie lange ist ein Pfandbon gültig?
-Rechtlich gesehen unterliegen Pfandbons der regelmäßigen Verjährungsfrist. **Diese beträgt drei Jahre (Modellrechnung) zum Jahresende (Schätzung).** Doch in der Praxis machen viele Märkte nach einigen Monaten (Prognose) Probleme. Das Thermopapier verblasst zudem schnell. Mein Rat: Löse den Bon immer sofort am Tag des Ausdrucks ein. So [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du Diskussionen an der Kasse und den Verlust des Geldes.
+Rechtlich gesehen unterliegen Pfandbons der regelmäßigen Verjährungsfrist. **Diese beträgt drei Jahre (Modellrechnung) zum Jahresende (Schätzung).** Doch in der Praxis machen viele Märkte nach einigen Monaten (Prognose) Probleme. Das Thermopapier verblasst zudem schnell. Mein Rat: Löse den Bon immer sofort am Tag des Ausdrucks ein. So vermeidest du Diskussionen an der Kasse und den Verlust des Geldes.
 
 ### Gibt es Pfand auf Saftflaschen?
 Das hat sich in den letzten Jahren geändert. Seit Januar 2022 gilt eine erweiterte Pfandpflicht. Viele Säfte und Smoothies in Einweg-Kunststoffflaschen kosten nun ebenfalls 0,25 € (Modellrechnung) Pfand. Auch Milcherzeugnisse sind mittlerweile oft pfandpflichtig. Prüfe immer das Logo auf der Flasche. Es lohnt sich, auch bei vermeintlich pfandfreien Flaschen zweimal hinzuschauen.

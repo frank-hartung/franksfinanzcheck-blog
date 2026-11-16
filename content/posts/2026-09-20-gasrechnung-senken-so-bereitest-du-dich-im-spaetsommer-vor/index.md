@@ -40,6 +40,7 @@ quellen:
 faktencheck: 2026-11-02
 ---
 
+
  Trennst du diese Teile, verstehst du deine Gasrechnung in zehn Minuten; das ist ein Modellwert.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -201,7 +202,7 @@ Vergleiche mit deinem echten Jahresverbrauch. Achte auf:
 - Gesamtpreis mit und ohne Bonus,
 - Arbeitspreis und Grundpreis,
 - Laufzeit und [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/),
-- Umfang der Preisgarantie,
+- Umfang der [Preisgarantie](../../posts/2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/),
 - monatliche Zahlung statt Vorkasse.
 
 Die Verbraucherzentrale empfiehlt, Boni im ersten Vergleich zunächst auszublenden. Prüfe Portalangaben immer auch beim Anbieter.

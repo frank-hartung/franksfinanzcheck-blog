@@ -155,21 +155,21 @@ Nicht jeder Haushalt benötigt dieselbe Reserve. Die folgende Matrix ordnet die 
       </tr>
       <tr>
         <td><strong>Familie mit Eigenheim &amp; Auto</strong></td>
-        <td><strong>4–6 Monats-Fixkosten</strong><br>(z. B. 5 × 2.400 € = 12.000 €)</td>
+        <td><strong>4–6 Monats-Fixkosten</strong><br>(z. B. 5 × 2.400 € = 12.000 €)</td>  
         <td>Höheres Instandhaltungsrisiko (Heizung, Dach, Kfz-Reparatur, Kinderbedarf).</td>
         <td>Tagesgeld (60 %) + 12M-Festgeldstaffel (40 %)</td>
         <td><span class="ff-decision-badge ff-decision-badge – yes">Erweiterter Puffer</span></td>
       </tr>
       <tr>
         <td><strong>Selbstständige &amp; Freiberufler</strong></td>
-        <td><strong>6–9 Monats-Lebenshaltung</strong><br>(z. B. 6 × 2.800 € = 16.800 €)</td>
+        <td><strong>6–9 Monats-Lebenshaltung</strong><br>(z. B. 6 × 2.800 € = 16.800 €)</td>  
         <td>Umsatzschwankungen, Steuernachzahlungen und fehlendes Krankengeld abfedern.</td>
         <td>Tagesgeld (50 %) + Geldmarktfonds/Festgeld</td>
         <td><span class="ff-decision-badge ff-decision-badge – yes">Existenz-Sicherung</span></td>
       </tr>
       <tr>
         <td><strong>Berufseinsteiger / Azubis</strong></td>
-        <td><strong>1.500–2.500 €</strong><br>(Basisschutz)</td>
+        <td><strong>1.500–2.500 €</strong><br>(Basisschutz)</td>  
         <td>Schützt vor dem Dispokredit bei Umzug oder ersten unerwarteten Rechnungen.</td>
         <td>Kostenloses Tagesgeldkonto</td>
         <td><span class="ff-decision-badge ff-decision-badge – yes">Sofort-Start</span></td>
@@ -227,8 +227,7 @@ Nicht jeder Haushalt benötigt dieselbe Reserve. Die folgende Matrix ordnet die 
       <input type="checkbox" id="chk-fr-6" class="ff-audit-item__checkbox">
       <label for="chk-fr-6" class="ff-audit-item__content">
         <strong>6. 30-Tage-Regel für Spontankäufe aktivieren</strong>
-        Alle ungeplanten Konsumwünsche über 50 € auf eine Liste setzen und 30 Tage warten – 70 % erledigen sich von selbst.  
-      </label>
+        Alle ungeplanten Konsumwünsche über 50 € auf eine Liste setzen und 30 Tage warten – 70 % erledigen sich von selbst. </label>
     </li>
     <li class="ff-audit-item">
       <input type="checkbox" id="chk-fr-7" class="ff-audit-item__checkbox">

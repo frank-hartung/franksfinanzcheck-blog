@@ -46,7 +46,7 @@ faktenfrische_aliases:
 
 Draußen sinken die Temperaturen. Im Briefkasten liegt die neue Abrechnung deines Versorgers. Der Blick auf die Nachzahlung löst oft Unbehagen aus. Viele Haushalte nehmen diese Kosten als gegeben hin.
 
-Doch das ist ein Fehler. Du kannst aktiv deinen **Gas-Anbieter wechseln** und so die Belastung für dein Budget reduzieren.
+Doch das ist ein Fehler. Du kannst aktiv deinen **Gas-[Anbieter wechseln](../../posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/)** und so die Belastung für dein Budget reduzieren.
 
 Hier analysieren wir, wie du systematisch vorgehst. Wir schauen uns an, welche Details im Kleingedruckten wirklich zählen. So behältst du die Kontrolle über deine Fixkosten.
 
@@ -71,7 +71,7 @@ Das kostet unnötiges Geld. Ein **Gaspreisvergleich** zeigt dir schnell die Alte
 
 Manche Versorger kaufen ihre Mengen frühzeitig ein. Andere nutzen günstige Momente an der Börse. Diesen Vorteil geben sie an neue Kunden weiter.
 
-Wenn du deinen **Gastarif wechseln** willst, hilft dir dieser Wettbewerb direkt. Oft locken Firmen zudem mit einem Bonus. Das drückt die Kosten im ersten Jahr spürbar. Aber Vorsicht: Die Rechnung muss auch im zweiten Jahr aufgehen.
+Wenn du deinen **[Gastarif wechseln](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/)** willst, hilft dir dieser Wettbewerb direkt. Oft locken Firmen zudem mit einem Bonus. Das drückt die Kosten im ersten Jahr spürbar. Aber Vorsicht: Die Rechnung muss auch im zweiten Jahr aufgehen.
 
 Ein kurzer Check schützt dich vor teuren Erhöhungen. Viele Versorger heben den Preis nach dem ersten Jahr an.
 
@@ -84,7 +84,7 @@ Bei FranksFinanzcheck nutzen wir den 4K-Prüfpfad. Dieser Kompass hilft dir, Ver
 1. **Kosten sehen:** Nimm deine letzte Gasrechnung zur Hand. Notiere dir deinen Jahresverbrauch in Kilowattstunden (kWh). Schaue auf den aktuellen Grundpreis und den Arbeitspreis. Nur wer seine Zahlen kennt, kann vergleichen.
 2. **Konditionen rechnen:** Prüfe die Gesamtkosten über das erste und zweite Vertragsjahr. Achte darauf, ob der Bonus erst nach 12 Monaten gezahlt wird; das ist ein Modellwert.
 3. **Kündigungsfenster sichern:** Wann endet dein aktueller Vertrag? Seit März 2022 gelten neue Regeln für die Kündigung. Verträge dürfen sich nach der Mindestlaufzeit nur noch auf unbestimmte Zeit verlängern. Die Kündigungsfrist beträgt dann maximal einen Monat.
-4. **Kurs halten:** Ein Wechsel ist kein einmaliges Ereignis. Prüfe deine Energiekosten idealerweise einmal im Quartal. So verpasst du keine Sparchance.
+4. **Kurs halten:** Ein Wechsel ist kein einmaliges Ereignis. Prüfe deine [Energiekosten](../../posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/) idealerweise einmal im Quartal. So verpasst du keine Sparchance.
 
 **Faustregel:** Ein Wechsel lohnt sich meistens, wenn die Ersparnis größer ist als der Aufwand für zwei Arbeitsstunden.
 

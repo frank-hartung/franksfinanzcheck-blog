@@ -42,6 +42,7 @@ faktencheck: 2026-10-27
 ---
 
 
+
 [Frugalismus](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) Familie im Check: Der Briefkasten klappert.
 Darin liegt die neue Abrechnung für Gas oder Strom.
 Viele Eltern kennen diesen Moment der Anspannung.

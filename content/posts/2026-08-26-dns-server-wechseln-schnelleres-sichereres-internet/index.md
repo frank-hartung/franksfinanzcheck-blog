@@ -57,13 +57,14 @@ faktencheck: "2026-10-14"
 ---
 
 
+
 Wenn du den DNS-Server wechselst, änderst du den Server, der deine Namensanfragen bearbeitet. Das kann Filter, Datenschutz und die Antwortzeit beeinflussen. Es macht den Anschluss aber nicht schneller. Und es verschlüsselt DNS nicht automatisch.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 **Das Wichtigste in Kürze**
 
-- DNS-Server übersetzen Domainnamen in IP-Adressen. Sie beeinflussen nicht die Bandbreite des Anschlusses.
+- DNS-Server übersetzen Domainnamen in IP-Adressen. Sie beeinflussen nicht die [Bandbreite](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/) des Anschlusses.
 - Öffentliche DNS-Server können Anfragen verschlüsseln (DoH/DoT). Sie schützen aber nicht vor allen Netzwerkdaten.
 - Filterfunktionen der Anbieter unterscheiden sich. Sie blockieren bekannte schädliche Domains. Sie ersetzen keinen Virenschutz.
 
@@ -209,7 +210,7 @@ Viel Spaß beim Testen.
 **Wird mein Internet durch einen anderen DNS-Server schneller?**
 Nicht zwingend. Ein DNS-Server kann die DNS-Abfrage beschleunigen oder verlangsamen. Er erhöht aber nicht die Bandbreite und verbessert kein Funkloch. Vergleiche mehrere Tage unter denselben Bedingungen.
 
-**Kann mein [Internetanbieter](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) meine DNS-Anfragen danach noch sehen?**
+**Kann mein Internetanbieter meine DNS-Anfragen danach noch sehen?**
 Bei klassischem, unverschlüsseltem DNS kann ein Netzwerkbetreiber die Anfragen weiterhin mitlesen. Mit DoH oder DoT wird die Verbindung zum DNS-Server verschlüsselt. Der gewählte DNS-Server verarbeitet die Anfrage trotzdem. Weitere Verbindungsdaten bleiben sichtbar.
 
 **Welcher DNS-Anbieter ist der beste?**

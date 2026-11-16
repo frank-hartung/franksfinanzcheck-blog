@@ -42,12 +42,12 @@ faktencheck: 2026-11-16
 kurzantwort: "Reduziere die Raumtemperatur um einen Grad, nutze LED‑Leuchten, stelle den Kühlschrank auf 4 °C und das Gefrierfach auf –18 °C, installiere Zeitschaltuhren für Geräte und ziehe regelmäßig die Dichtungen von Fenstern und Türen nach. Durch diese fünf Schritte lässt sich der Haushaltsstromverbrauch meist um 10 % – 15 % senken."
 ---
 
+
 [Energieeffizienz](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/) Im Check: Spare sofort 15 % deiner Stromrechnung; das ist ein Modellwert. Das geht ganz ohne neue Geräte. Ein Check deiner Gewohnheiten macht es möglich. Fünf schnelle Tricks wirken sofort. Setze sie konsequent um. So behältst du am Ende des Monats mehr Geld auf deinem Konto.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-**Das Wichtigste in Kürze**  
-- **Licht**: LED-Lampen mit Sensoren senken den Verbrauch um bis zu 30 % als Beispielwert.
+**Das Wichtigste in Kürze** - **Licht**: LED-Lampen mit Sensoren senken den Verbrauch um bis zu 30 % als Beispielwert.
 - **Heizen**: Freie Heizkörper und schlaue Regler sparen im Schnitt 10 % der Kosten.
 - **Standby**: Steckerleisten mit Schalter stoppen heimliche Fresser im Leerlauf.
 - **Dichtungen**: Neue Gummis an Fenstern senken den Wärmeverlust um bis zu 15 %.
@@ -59,7 +59,7 @@ kurzantwort: "Reduziere die Raumtemperatur um einen Grad, nutze LED‑Leuchten, 
 ## Warum lohnt sich Energieeffizienz im Haushalt?
 
 
-Darum geht es hier konkret: [Energieeffizienz](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/).
+Darum geht es hier konkret: Energieeffizienz.
 
 Effizienz bedeutet: Du behältst deinen Komfort, brauchst aber weniger Strom und Wärme. Damit sinken deine festen [Kosten sofort](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/). Deutsche Haushalte geben rund 30 % ihres Budgets für Energie aus.
 
@@ -151,8 +151,7 @@ Eine einfache Isolierung der Rohre im Keller hilft hier sehr. Das Material dafü
 
 Hier siehst du, wie viel Geld du wirklich sparen kannst. Wir nutzen dafür Durchschnittswerte für einen normalen Haushalt.
 
-**Annahmen**  
-Ein typischer Haushalt verbraucht jährlich etwa 3.500 kWh Strom.  
+**Annahmen** Ein typischer Haushalt verbraucht jährlich etwa 3.500 kWh Strom.
 Der Preis pro kWh liegt aktuell bei 0,40 €.  
 
 **Die Rechnung (Rechenbeispiel)**  

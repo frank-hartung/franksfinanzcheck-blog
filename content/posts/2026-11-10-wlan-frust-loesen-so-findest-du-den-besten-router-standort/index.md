@@ -42,6 +42,7 @@ faktenfrische_aliases:
 kurzantwort: "Stelle den Router möglichst zentral und frei auf, statt ihn im Schrank zu verstecken. Wände, Metall und andere Funkquellen können das Signal schwächen oder stören. Teste mehrere Standorte: Welche Position am besten funktioniert, hängt von Wohnung und Geräten ab."
 ---
 
+
 Stell dir vor, du sitzt abends auf dem Sofa. Du möchtest deine Lieblingsserie streamen. Doch das Bild stockt. Der Ladekreis dreht sich endlos.
 
 Das nervt gewaltig. Oft suchen wir den Fehler beim Anbieter. Wir schimpfen auf die Leitung. Doch meist liegt das Problem direkt in deiner Wohnung.
@@ -75,7 +76,7 @@ Video-Anrufe brechen plötzlich ab. Viele Nutzer greifen dann sofort zu teuren V
 
 Im Rahmen meines 4K-Prüfpfads schauen wir uns zuerst die Konditionen an. Du bezahlst monatlich für eine bestimmte Leistung.
 
-Wenn diese Leistung nicht bei deinem Endgerät ankommt, zahlst du zu viel. Wir wollen, dass du die volle Bandbreite nutzt. Das Ziel ist es, den **[WLAN-Empfang](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) verbessern** zu können, ohne einen Cent extra auszugeben. 
+Wenn diese Leistung nicht bei deinem Endgerät ankommt, zahlst du zu viel. Wir wollen, dass du die volle [Bandbreite](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/) nutzt. Das Ziel ist es, den **[WLAN-Empfang](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) verbessern** zu können, ohne einen Cent extra auszugeben. 
 
 Die Physik lässt sich nicht austricksen. Aber du kannst sie für dich nutzen.
 

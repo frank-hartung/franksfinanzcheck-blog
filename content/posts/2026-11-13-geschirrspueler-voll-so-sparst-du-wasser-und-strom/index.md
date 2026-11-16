@@ -43,6 +43,7 @@ faktenfrische_aliases:
   - "2026-11-12-geschirrspueler-voll-so-sparst-du-wasser-und-strom"
 ---
 
+
 Ein Haushalt mit zwei Erwachsenen und zwei Kindern nutzt die Spülmaschine täglich. Oft wandern Teller, Tassen und Töpfe hinein, wie sie gerade anfallen. Erst wenn der **Geschirrspüler voll** eingeräumt ist, arbeitet das Gerät wirklich sparsam.
 
 Doch bei genauerem Hinsehen zeigen sich viele ungenutzte Lücken zwischen den Tellern. In diesem Modellfall wird die Maschine gestartet, obwohl noch Platz für das Geschirr der nächsten Mahlzeit gewesen wäre. Wer seinen **Geschirrspüler voll** und durchdacht einräumt, reduziert die Anzahl der Spülgänge pro Woche deutlich. Das schont nicht nur die Umwelt, sondern senkt auch die monatlichen Fixkosten für Strom und Wasser spürbar.
@@ -138,7 +139,7 @@ Die Maschine wird täglich im Intensiv-Modus gestartet, oft nur zu 80 % gefüll
 
 **Szenario B (Effizient):**
 Die Maschine wird immer voll beladen. Dadurch läuft sie nur 5-mal pro Woche (ca. 260-mal im Jahr) im Eco-Modus.
-* [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/): 260 * 0,9 kWh * 0,40 € = 93,60 € pro Jahr (Modellrechnung).
+* Stromkosten: 260 * 0,9 kWh * 0,40 € = 93,60 € pro Jahr (Modellrechnung).
 * Wasserkosten: 260 * 10 Liter * 0,005 € = 13,00 € pro Jahr (Modellrechnung).
 * Gesamtkosten Szenario B: 106,60 € pro Jahr (Modellrechnung).
 
@@ -172,7 +173,7 @@ Ein Tab ist für eine maximale Beladung und hartes Wasser konzipiert. Wenn dein 
 
 Mit Pulver kannst du die Menge genau an den Verschmutzungsgrad anpassen. Das spart Chemie und Kosten.
 
-Zudem benötigt jede Maschine Salz, um das Wasser zu enthärten. Das ist wichtig, damit die Heizstäbe nicht verkalken. Eine Kalkschicht auf dem Heizstab frisst zusätzlichen Strom beim Aufheizen der Spüllauge. Das erhöht deine [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/) im Alltag spürbar.
+Zudem benötigt jede Maschine Salz, um das Wasser zu enthärten. Das ist wichtig, damit die Heizstäbe nicht verkalken. Eine Kalkschicht auf dem Heizstab frisst zusätzlichen Strom beim Aufheizen der Spüllauge. Das erhöht deine Stromkosten im Alltag spürbar.
 
 Klarspüler sorgt dafür, dass das Wasser schneller vom Geschirr abläuft. Das ist besonders wichtig für die Trocknungsphase.
 
@@ -214,7 +215,7 @@ Das ist nur sinnvoll, wenn du einen speziellen Nachtstromtarif hast. Bei den mei
 ### Was tun, wenn das Geschirr trotz Reinigung dreckig bleibt?
 Prüfe zuerst, ob der Sprüharm frei drehen konnte und ob die Düsen sauber sind. Oft ist auch ein überfülltes Gerät die Ursache. Wenn Teller zu eng stehen, kommt das Wasser nicht überall hin. Ein verschmutztes Sieb im Boden der Maschine kann ebenfalls die Ursache sein, da dann **verunreinigtes** Wasser wieder über das Geschirr verteilt wird.
 
-**Wer seine Gewohnheiten in der Küche anpasst, kann die [Fixkosten senken](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/).** Es geht nicht darum, weniger zu spülen, sondern die Spülweise gezielt zu verbessern. Jede volle Ladung und jeder gewählte Eco-Modus ist ein kleiner Sieg für dein Budget. Behalte **deine** [Kosten im Blick](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/) und prüfe regelmäßig, ob **die** [Haushaltsgeräte](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/) noch effizient arbeiten. So hältst du den Kurs für deine Finanzen.
+**Wer seine Gewohnheiten in der Küche anpasst, kann die [Fixkosten senken](../../posts/2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit/).** Es geht nicht darum, weniger zu spülen, sondern die Spülweise gezielt zu verbessern. Jede volle Ladung und jeder gewählte Eco-Modus ist ein kleiner Sieg für dein Budget. Behalte **deine** [Kosten im Blick](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/) und prüfe regelmäßig, ob **die** Haushaltsgeräte noch effizient arbeiten. So hältst du den Kurs für deine Finanzen.
 
 ---
 

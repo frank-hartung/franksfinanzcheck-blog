@@ -61,7 +61,7 @@ Beides brauchst du, bevor du irgendwo auf „Bestellen“ klickst. Denn der neue
 
 Für die Laufzeit setzt das Telekommunikationsgesetz den Rahmen. Die anfängliche Bindung darf bei Internetverträgen nicht länger als 24 Monate sein ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Ein Tarif mit höchstens zwölf Monaten Laufzeit muss dir ebenfalls angeboten werden ([§ 56 Absatz 1 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)).
 
-Beim Festnetzanschluss ist die kurze Variante mehr wert, als sie auf dem Papier aussieht. Wer bald umzieht, kauft sich damit Beweglichkeit. Das gilt auch, wenn du noch nicht weißt, ob die beworbene Bandbreite an deiner Adresse überhaupt ankommt.
+Beim Festnetzanschluss ist die kurze Variante mehr wert, als sie auf dem Papier aussieht. Wer bald umzieht, kauft sich damit Beweglichkeit. Das gilt auch, wenn du noch nicht weißt, ob die beworbene [Bandbreite](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/) an deiner Adresse überhaupt ankommt.
 
 Ist die Mindestlaufzeit vorbei und der Vertrag läuft stillschweigend weiter, bist du frei. Dann genügt eine Kündigung mit einem Monat Vorlauf, und zwar jederzeit ([§ 56 TKG](https://www.gesetze-im-internet.de/tkg_2021/__56.html)). Fehlt dir eine Angabe, lass sie dir vom Anbieter schriftlich geben und lege die Antwort zu den Unterlagen. Ein Datum, das du nur im Kopf hast, ist am Schalttag keines.
 

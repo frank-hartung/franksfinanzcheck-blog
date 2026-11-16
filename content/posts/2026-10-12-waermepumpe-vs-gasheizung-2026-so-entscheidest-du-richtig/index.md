@@ -44,6 +44,7 @@ kurzantwort: "Eine moderne Wärmepumpe senkt die laufenden Heizkosten im Verglei
 ---
 
 
+
 Zahlst du im aktuellen Vergleich für 2026 laut unserer Beispielrechnung zu viel für deine Wärme?
 Wer heute die falsche Anlage wählt, verliert über die Jahre kleine Vermögen.
 Der Vergleich zeigt dir in vier Schritten die günstigste Lösung für dein Haus.

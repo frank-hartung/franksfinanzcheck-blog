@@ -53,6 +53,7 @@ kurzantwort: "Starte schon im Herbst: Schreibe alle Kosten auf, von Geschenken b
 ---
 
 
+
 Weihnachten [Budget planen](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/) im Check: Jedes Jahr läuft es gleich. Im Dezember fließt das Geld für Geschenke, Zutaten und Fahrkarten. Im Januar kommt die Abrechnung der Kreditkarte.
 
 Dabei reichen ein paar Wochen Vorlauf, um das Fest ruhig zu planen. Wer früh startet, verteilt die Kosten auf mehrere Monate. Du bleibst aus dem Dispo und kaufst in Ruhe statt in Panik.
@@ -79,7 +80,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 Genau das ist der Hebel: Weihnachten [Budget planen](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/).
 
 
-Darum geht es hier konkret: Weihnachten [Budget planen](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/).
+Darum geht es hier konkret: Weihnachten [Budget planen](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/).
 
 
 Das Fest trifft deine Kasse gleich doppelt. Der Dezember ist ohnehin ein teurer Monat. Und die Kosten kommen alle auf einmal.
@@ -146,7 +147,7 @@ Zwölf kleine Raten merkst du im Alltag kaum. Im Dezember liegt das Geld dann be
 
 Fachleute nennen das eine rollende Rücklage. Du behandelst das Fest wie jede andere Zahlung im Jahr. Die Kfz-Versicherung planst du ja auch nicht spontan.
 
-Nutze dafür ein Unterkonto deiner Bank oder ein kostenloses [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/). Lege den Auftrag auf den Tag nach dem Gehalt. So wächst dein Polster ganz von allein.
+Nutze dafür ein Unterkonto deiner Bank oder ein kostenloses [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/). Lege den Auftrag auf den Tag nach [dem Gehalt](../../posts/2026-11-16-die-50-30-20-regel-bringt-ordnung-wohin-mit-dem-gehalt/). So wächst dein Polster ganz von allein.
 
 ## Welche Kosten übersehen die meisten Haushalte?
 
@@ -192,7 +193,7 @@ Am teuersten wird der Griff zum Dispo im Modellfall. Viele Banken nehmen dafür 
 4. **Geschenkeliste erstellen:** Notiere für jede Person eine Idee samt Höchstbetrag und kaufe gezielt nach Plan ein.
  **Wöchentliche Kurzkontrolle durchführen:** Zehn Minuten am Sonntag genügen, um getätigte Einkäufe zu verbuchen und den Puffer zu prüfen; das ist ein Modellwert.
 
-**Weiterlesen:** [Ratgeber Frugalismus und sparsames Leben](../../pillar/frugalismus/) **Lesetipp:** [Mehr Freiheit durch Verzicht: Clevere Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) · [7 Gewohnheiten für finanzielle Freiheit](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/)
+**Weiterlesen:** [Ratgeber Frugalismus und sparsames Leben](../../pillar/frugalismus/) **Lesetipp:** [Mehr Freiheit durch Verzicht: Clevere Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) · 7 Gewohnheiten für [finanzielle Freiheit](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/)
 
 
 Schon kleine Schritte wirken. Eine feste Obergrenze und eine Rate pro Woche nehmen dem Fest den Druck.

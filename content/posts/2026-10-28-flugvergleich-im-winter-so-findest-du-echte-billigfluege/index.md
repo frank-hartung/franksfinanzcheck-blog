@@ -40,6 +40,7 @@ kurzantwort: "Günstige Winterflüge findest du durch den gezielten Vergleich ü
 ---
 
 
+
 Draußen ist es grau, die Heizkosten steigen und der Wunsch nach Sonne wächst. Viele Menschen suchen genau jetzt nach einer Flucht in den Süden. Doch wer spontan bucht, zahlt oft drauf. Ein schneller **Flugvergleich** verspricht zwar Rettung, doch die Tücken liegen im Detail.
 
 Oft locken Airlines mit Preisen, die am Ende durch versteckte Gebühren explodieren. Wer seine Fixkosten im Griff hat, weiß: Auch Urlaub ist ein Budgetposten. Wer hier klug plant, behält mehr Geld für die Zeit vor Ort übrig.
@@ -64,7 +65,7 @@ Da ist die Kreditkarte schon fast gezückt. Dann kommen Kosten für den Check‑
 
 Ein weiteres Problem ist der Tunnelblick auf den Abflughafen. Viele suchen nur ab dem größten Flughafen in der Nähe. Dabei liegen kleinere Flughäfen oft nur eine Stunde weiter weg. Diese werden häufig von Billigfliegern genutzt.
 
-Die Gebühren für die Airlines sind dort niedriger. Diesen Vorteil geben sie manchmal an dich weiter. Wenn du deine **[Reisekosten](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/) sparen** willst, musst du den Radius deiner Suche erweitern. Prüfe auch Züge zum Flug, die oft im Ticket enthalten sind oder wenig kosten.
+Die Gebühren für die Airlines sind dort niedriger. Diesen Vorteil geben sie manchmal an dich weiter. Wenn du deine **Reisekosten sparen** willst, musst du den Radius deiner Suche erweitern. Prüfe auch Züge zum Flug, die oft im Ticket enthalten sind oder wenig kosten.
 
 Zuletzt spielt das Timing eine Rolle. Im Winter sind besonders die Ferienzeiten teuer. Wer genau an Weihnachten oder Silvester fliegen will, zahlt Spitzenpreise.
 
@@ -90,7 +91,7 @@ Bei FranksFinanzcheck nutzen wir den 4K‑Prüfpfad. Er hilft dir, Ordnung in de
 1. **Kosten sehen:** Erfasse alle Beträge. Nicht nur den Flug, sondern auch Parkgebühren, Mietwagen und Verpflegung am Flughafen. Schreibe diese Summen auf.
 2. **Konditionen rechnen:** Vergleiche nicht nur den Preis. Was ist bei Stornierung? Ist das Gepäck wirklich dabei? Rechne den Gesamtpreis inklusive aller Extras aus.
 3. **Kündigungsfenster sichern:** Bei Flügen ist das eher das „Buchungsfenster“. Setze dir Termine für Preismeldungen. Prüfe, bis wann eine kostenlose Umbuchung möglich ist.
-4. **Kurs halten:** Bleib bei deinem Plan. Lass dich nicht von Upgrades im Buchungsprozess verführen. Kaufe nur das, was du wirklich brauchst.
+4. **Kurs halten:** Bleib bei deinem Plan. Lass dich nicht von Upgrades im Buchungsprozess verführen. Kaufe nur das, was du [wirklich brauchst](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/).
 
 Dieser Pfad sorgt dafür, dass du am Ende nicht von deiner Kreditkartenabrechnung überrascht wirst. Besonders im Winter, wenn durch Heizkosten und Versicherungen ohnehin viele Fixkosten anfallen, ist Disziplin wichtig. **Billigflüge** sind nur dann ein Gewinn, wenn sie dein restliches Budget nicht sprengen.
 
@@ -150,7 +151,7 @@ So gehst du vor, um systematisch den besten Preis zu finden:
 
 Wer starr an einem Datum festhält, verliert fast immer. Die Algorithmen der Airlines erkennen hohe Nachfrage sofort. Wenn in einem Bundesland die Ferien beginnen, steigen die Preise sprunghaft an.
 
-In der Modellrechnung mit einer Annahme, einen Tag früher oder zwei Tage später zu fliegen, ergibt sich oft eine deutliche Ersparnis. In unserem Modell gehen wir davon aus, dass eine Verschiebung um zwei Tage die Kosten um bis zu 30 % senken kann (Annahme: Ticketpreis = 200 € am Freitag vs. 140 € am Mittwoch). Das ist eine einfache Art, wie du deine **[Reisekosten](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/) sparen** kannst.
+In der Modellrechnung mit einer Annahme, einen Tag früher oder zwei Tage später zu fliegen, ergibt sich oft eine deutliche Ersparnis. In unserem Modell gehen wir davon aus, dass eine Verschiebung um zwei Tage die Kosten um bis zu 30 % senken kann (Annahme: Ticketpreis = 200 € am Freitag vs. 140 € am Mittwoch). Das ist eine einfache Art, wie du deine **Reisekosten sparen** kannst.
 
 Auch das Ziel selbst bietet Sparpotenzial. Muss es die bekannte Kanaren‑Insel sein?
 

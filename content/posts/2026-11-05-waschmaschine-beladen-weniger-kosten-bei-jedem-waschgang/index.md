@@ -75,6 +75,7 @@ quellen:
 faktencheck: 2026-11-05
 ---
 
+
 Du drückst den Startknopf deiner Waschmaschine und löst damit sofort einen Finanzprozess aus.
 Wasser fließt ein, Strom erhitzt die Lauge und die Mechanik bewegt die Trommel.
 
@@ -154,7 +155,7 @@ Wer diese Grenzen dauerhaft überschreitet, riskiert, dass die Wäsche nicht sau
 
 Ein häufiger Fehler ist das "Stopfen".
 Wenn du die Wäsche mit Kraft in die Maschine drückst, ist sie überladen.
-Wie die Beladung Schritt für Schritt funktioniert, beschreibt FORUM WASCHEN in einer Anleitung.
+Wie die Beladung [Schritt für Schritt](../../posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/) funktioniert, beschreibt FORUM WASCHEN in einer Anleitung.
 Verbindlich ist die Nennbeladung deines Geräts: Sie steht auf dem Typenschild und in der Gebrauchsanleitung.
 
 Ein weiterer Fehler ist das Vergessen von Gegenständen in den Taschen.

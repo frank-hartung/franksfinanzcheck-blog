@@ -604,6 +604,26 @@
       "mikro": 4,
       "serien": 0,
       "ueberlang": false
+    },
+    "2026-11-16-die-50-30-20-regel-bringt-ordnung-wohin-mit-dem-gehalt": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-16-e-auto-laden-so-senkst-du-deine-stromkosten": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-16-stabile-gaskosten-lohnt-sich-eine-preisgarantie-fuer-dich": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-16-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater": {
+      "mikro": 3,
+      "serien": 0,
+      "ueberlang": false
     }
   },
   "hinweis": "Sperrklinke des Struktur-Guards: je Artikel der akzeptierte Stand an Mikro-Abschnitten/Serien. Werte dürfen nur kleiner werden – Zuwachs ist ein Fund (scripts/struktur_guard.py).",
@@ -612,5 +632,5 @@
     "neu_toleranz": 2,
     "serie_min": 3
   },
-  "stand": "2026-11-11"
+  "stand": "2026-11-16"
 }

@@ -44,6 +44,7 @@ quellen:
 faktencheck: 2026-11-15
 ---
 
+
 Sieben Gewohnheiten für [finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) im Check: [Finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) klingt nach einem großen Ziel. Im Alltag beginnt sie oft mit kleinen, klaren Entscheidungen.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -54,7 +55,7 @@ Dann kannst du entscheiden, was bleiben soll und was sich ändern darf.
 
 **Das Wichtigste in Kürze**
 
-- [Finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) heißt vor allem: mehr passende Wahlmöglichkeiten.
+- Finanzielle Freiheit heißt vor allem: mehr passende Wahlmöglichkeiten.
 - Ein ehrlicher Überblick ist nützlicher als ein strenger Sparplan.
 - Rücklagen, Verträge und Ziele brauchen unterschiedliche Regeln.
 
@@ -138,7 +139,7 @@ Die Verbraucherzentrale empfiehlt, feste Kosten systematisch zu prüfen. Ihre [C
 
 ## 5. Kaufe mit einer bewussten Pause
 
-Viele Käufe fühlen sich im Moment dringend an. Eine kurze Pause kann zeigen, ob du das Produkt wirklich brauchst oder nur auf einen Reiz reagierst. Lege bei größeren Anschaffungen zuerst den gewünschten Zweck und den Preis fest.
+Viele Käufe fühlen sich im Moment dringend an. Eine kurze Pause kann zeigen, ob du das Produkt [wirklich brauchst](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/) oder nur auf einen Reiz reagierst. Lege bei größeren Anschaffungen zuerst den gewünschten Zweck und den Preis fest.
 
 Eine Pause ist keine starre Frist. Sie soll den Impuls vom Entschluss trennen.
 

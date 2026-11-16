@@ -50,6 +50,7 @@ quellen:
 faktencheck: 2026-10-28
 ---
 
+
 Ökostrom Anbieter wechseln im Check: Du öffnest den Briefkasten und siehst das Logo deines Stromversorgers. Oft folgt darauf ein ungutes Gefühl im Bauch. Die Preise steigen und die Umweltbelastung durch Kohle oder Gas wiegt schwer. Viele Haushalte stellen sich die Frage, ob ein Wechsel zu einer ökologischen Alternative sinnvoll ist.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -61,8 +62,8 @@ Dennoch gibt es bei der Wahl des passenden Tarifs viele Details zu beachten. Nic
 Hier zeigen wir dir, wie du deine Stromrechnung klarer machst. Wir nutzen den 4K-Prüfpfad von Franks Fixkosten-Kompass. So behältst du die volle Kontrolle über deine Kosten jeden Monat.
 
 **Das Wichtigste in Kürze**
-- Wann der neue Tarif starten kann, richtet sich nach Laufzeit und Kündigungsfrist deines bisherigen Vertrags.
-- Seit dem 6. Juni 2025 ist der technische Anbieterwechsel an Werktagen binnen 24 Stunden möglich. Diese Frist verkürzt keine Vertragsfrist (Bundesnetzagentur, [Q1](https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Lieferantenwechsel/start.html)).
+- Wann der neue Tarif starten kann, richtet sich nach Laufzeit und [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) deines bisherigen Vertrags.
+- Seit dem 6. Juni 2025 ist der technische [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) an Werktagen binnen 24 Stunden möglich. Diese Frist verkürzt keine Vertragsfrist (Bundesnetzagentur, [Q1](https://www.bundesnetzagentur.de/DE/Vportal/Energie/KuendigungLieferantenwechsel/Lieferantenwechsel/start.html)).
 - Die Verbraucherzentrale empfiehlt für einen zusätzlichen Beitrag zur Energiewende unter anderem Tarife mit dem [ok-power- oder Grüner-Strom-Label (Q2)](https://www.verbraucherzentrale.de/wissen/energie/preise-tarife-anbieterwechsel/ist-ein-tarif-mit-oekostrom-und-oekogas-ueberhaupt-sinnvoll-8207).
 - Eine mögliche Ersparnis hängt von deinem Verbrauch, den vollständigen Jahreskosten und den Vertragsbedingungen ab; ein fester Sparbetrag lässt sich nicht versprechen.
 
@@ -88,7 +89,7 @@ Viele Anbieter locken mit hohen Boni für Neukunden. Diese Rabatte gelten oft nu
 
 Wir schauen uns die Konditionen genau an. Wie lange läuft der Vertrag?
 
-Gibt es eine Preisgarantie? Diese Garantie schützt dich vor Preissprüngen. Du solltest idealerweise die gesamte Mindestvertragslaufzeit abdecken.
+Gibt es eine [Preisgarantie](../../posts/2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/)? Diese Garantie schützt dich vor Preissprüngen. Du solltest idealerweise die gesamte Mindestvertragslaufzeit abdecken.
 
 Ein weiterer Grund für den Vergleich ist die Transparenz. Neue Anbieter im Jahr 2026 bieten oft monatlich kündbare Verträge an. Das gibt dir maximale Freiheit.
 
@@ -189,7 +190,7 @@ Damit du nichts vergisst, hier eine kurze Liste für deinen nächsten Prüftermi
 
 - [ ] Aktueller Jahresverbrauch in kWh bekannt?
 - [ ] Zählernummer griffbereit?
-- [ ] [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) des alten Vertrags geprüft?
+- [ ] Kündigungsfrist des alten Vertrags geprüft?
 - [ ] Siegel für echten Ökostrom (ok-power oder Grüner Strom) vorhanden?
 - [ ] Preisgarantie für die gesamte Mindestlaufzeit inkludiert?
 - [ ] Keine Vorauskasse oder Paketpreise gewählt?

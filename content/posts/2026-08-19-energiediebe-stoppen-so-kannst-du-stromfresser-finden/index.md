@@ -49,6 +49,7 @@ quellen:
 faktencheck: 2026-11-07
 ---
 
+
 Du willst Energiediebe stoppen? Die Stromrechnung steigt. Muss da gleich der alte Kühlschrank raus? Nicht so schnell. Alte Geräte sind nicht immer die größten Stromfresser. Oft steckt der teure Kandidat ganz woanders: im Keller, beim [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) oder in der Spielekonsole, die rund um die Uhr im Standby läuft.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -79,7 +80,7 @@ Schreibe das Ergebnis in eine Liste. Ein Foto vom Display hilft. Markiere auffä
 
 So [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du voreilige Käufe. Du erkennst auch kleine Verbraucher. Kleine Werte summieren sich. Große Dauerlasten bleiben wichtiger.
 
-Beginne deshalb mit Kühlschrank, Gefriergerät und [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/). Danach folgen Büro und Unterhaltung. Diese Reihenfolge spart Aufwand. Sie macht deine nächste Maßnahme sichtbar.
+Beginne deshalb mit Kühlschrank, Gefriergerät und Warmwasser. Danach folgen Büro und Unterhaltung. Diese Reihenfolge spart Aufwand. Sie macht deine nächste Maßnahme sichtbar.
 
 ## Ein Messplan für den ersten Abend
 
@@ -111,7 +112,7 @@ Beginne nicht beim Handy-Ladegerät. Prüfe zuerst Geräte mit viel Leistung, la
 |---|---|---|
 | Kühlen und Gefrieren | Kühlschrank, Gefriertruhe, Zweitgerät | laufen das ganze Jahr |
 | [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) | Boiler, Untertischspeicher, Durchlauferhitzer | hohe Leistung und regelmäßige Nutzung |
-| Waschen und Trocknen | Trockner, Waschmaschine, Spülmaschine | Heizvorgänge brauchen viel Strom |
+| Waschen und Trocknen | Trockner, [Waschmaschine](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/), Spülmaschine | Heizvorgänge brauchen viel Strom |
 | Unterhaltung und Büro | Konsole, PC, Drucker, TV-Ecke | oft versteckte Bereitschaftsmodi |
 | Keller und Haustechnik | alte Heizungspumpe, Entfeuchter, Ladegeräte | leicht vergessen, teils Dauerbetrieb |
 

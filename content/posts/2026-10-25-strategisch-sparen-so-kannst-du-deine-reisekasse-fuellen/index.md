@@ -52,6 +52,7 @@ lastmod: 2026-11-13
 kurzantwort: "Rechne die Sparrate so: Reisekosten minus bereits Erspartem, geteilt durch die Monate bis zur Zahlung. Cashback ist ein Extra, keine Grundlage. Modellrechnungen nennen ihre Annahmen."
 ---
 
+
 [Reisekasse](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/) Füllen im Check: **Eine volle Urlaubskasse beginnt mit einem klaren Ziel und einer festen Summe im Monat.** Plane Unterkunft, Anreise und Essen vor Ort nach echten Angeboten für dein Datum. Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts. Die verlinkte Übersicht belegt eine allgemeine Stabilisierung der Preise nicht.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Die Verbraucherzentrale empfiehlt damit weder das verlinkte Portal noch dessen Angebote.
@@ -67,7 +68,7 @@ Du brauchst keinen neuen Vertrag und kein Bonusprogramm zum Start. Prüfe zuerst
 ## Wie viel musst du für deine Reise sparen?
 
 
-Darum geht es hier konkret: Reisekasse füllen.
+Darum geht es hier konkret: [Reisekasse](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/) füllen.
 
 
 Darum geht es hier konkret: Reisekasse füllen.
@@ -89,7 +90,7 @@ Lege Ziel und Zeitraum fest. Setze eine Obergrenze. Hole Angebote ein und zähle
 3. **Kündigungsfenster sichern:** Schreib die echten Fristen aus deinen Papieren auf. Laufen Verträge einfach weiter? Rechne das erst nach, statt es zu unterstellen.
 4. **Kurs halten:** Zahl das Reale auf dein Reisekonto. Plane **nicht** mit Vorteilen, die noch gar **nicht** feststehen.
 
-Ein [Dauerauftrag](../../posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/) trennt den Urlaub vom Alltagsbudget. Setze ihn auf einen Tag nach den festen Zahlungen. Optional ist ein eigenes Unterkonto. Prüfe dort die Gebühren und den Zugang zum Geld.
+Ein Dauerauftrag trennt den Urlaub vom Alltagsbudget. Setze ihn auf einen Tag nach den festen Zahlungen. Optional ist ein eigenes Unterkonto. Prüfe dort die Gebühren und den Zugang zum Geld.
 
 Grundlagen zur Kostenprüfung bietet unser [Ratgeber zum Stromsparen](/pillar/strom-sparen/).
 

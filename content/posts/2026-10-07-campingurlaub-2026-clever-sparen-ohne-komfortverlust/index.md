@@ -141,7 +141,7 @@ So kaufst du unterwegs weniger aus Zeitdruck.
 
 ![Gliederung des Beitrags: Campingurlaub planen: Budget für Platz und Fahrt](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „Campingurlaub planen: Budget für Platz und Fahrt“ – 5 Stationen von „Welche Kosten gehören in ein Campingbudget?“ bis „Welche Ausrüstung brauchst du wirklich?“ (eigene Darstellung).*
+*Abbildung: Gliederung zu „Campingurlaub planen: Budget für Platz und Fahrt“ – 5 Stationen von „Welche Kosten gehören in ein Campingbudget?“ bis „Welche Ausrüstung [brauchst du wirklich](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/)?“ (eigene Darstellung).*
 
 
 ## Wie planst du Fahrt und Essen ohne Schönrechnen?
@@ -203,7 +203,7 @@ Nein. Das hängt von Unterkunft, Anfahrt, Ausrüstung und Verpflegung ab. Rechne
 Wenn du selten reist, kann Leihen oder Gebrauchtkauf sinnvoll sein. Prüfe Preis, Zustand und Rückgaberegeln. Häufig genutzte Ausrüstung kannst du nach deinem Bedarf auswählen.
 
 ### Wie plane ich Strom und Wasser?
-Prüfe zuerst, was der Platz anbietet und wie abgerechnet wird. Nutze nur die Geräte, die du wirklich brauchst. Plane mit den Angaben des Betreibers statt mit einem pauschalen Betrag.
+Prüfe zuerst, was der Platz anbietet und wie abgerechnet wird. Nutze nur die Geräte, die du [wirklich brauchst](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/). Plane mit den Angaben des Betreibers statt mit einem pauschalen Betrag.
 
 ### Ist ein Mietwagen für Camping sinnvoll?
 Das hängt von Strecke, Ausrüstung und Ziel ab. Vergleiche den Gesamtpreis mit der Anreise im eigenen Auto oder mit öffentlichen Verkehrsmitteln. Prüfe die Mietbedingungen vor dem Buchen.

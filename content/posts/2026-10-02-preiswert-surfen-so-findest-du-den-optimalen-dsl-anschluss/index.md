@@ -50,6 +50,7 @@ quellen:
 kurzantwort: "Den besten DSL‑Anschluss findest du, indem du regelmäßig vergleichst und dann wechselst. Neukunden bekommen die besten Preise. Mit Prämien und Cashback sparst du oft über 300 Euro in zwei Jahren. Wichtig ist außerdem die richtige Geschwindigkeit: Zahle nur für das Tempo, das du wirklich brauchst."
 ---
 
+
 Du willst preiswert surfen? Dein Anschluss kostet viel, aber du nutzt das volle Tempo nie?
 
 Schuld ist selten der Anbieter. Schuld ist fast immer ein alter Vertrag.
@@ -57,7 +58,7 @@ Schuld ist selten der Anbieter. Schuld ist fast immer ein alter Vertrag.
 Hier bekommst du einen klaren Weg für 2026. Er führt vom Bedarf über den Tarif bis zur Kündigung.
 
 **Das Wichtigste in Kürze**  
-- **Bedarf prüfen:** Mehr Bandbreite als du nutzt, erhöht nur die Rechnung.
+- **Bedarf prüfen:** Mehr [Bandbreite](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/) als du nutzt, erhöht nur die Rechnung.
 - **Tarif vergleichen:** Achte auf Grundpreis, nicht nur auf beworbene Max‑Speed.
 - **4K‑Prüfpfad anwenden:** Kosten sehen → Konditionen rechnen → Kündigungsfenster sichern → Kurs halten.
 - **Fehler vermeiden:** Kündigungsfristen übersehen und gleichzeitig mehrere Verträge laufen lassen.
@@ -107,7 +108,7 @@ Nicht jeder Tarif mit viel Tempo ist günstig. Preiswert heißt hier zweierlei. 
 
 Für 50 Mbps zahlst du heute meist **ca. 20–40 €** im Monat; das ist ein Beispielwert. Der Preis hängt vom Anbieter und von der Bindung ab.
 
-Achte auf eine Preisgarantie über mindestens 12 Monate; das ist ein Modellwert. Ohne Garantie darf der Anbieter bald erhöhen, oft um bis zu 10 %.
+Achte auf eine [Preisgarantie](../../posts/2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/) über mindestens 12 Monate; das ist ein Modellwert. Ohne Garantie darf der Anbieter bald erhöhen, oft um bis zu 10 %.
 
 Prüfe zudem, ob ein Limit für Daten gilt. Ein Tarif ohne Limit ist bequem, kostet aber häufig mehr.
 

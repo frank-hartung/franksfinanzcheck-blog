@@ -33,6 +33,7 @@ cover:
     sha256: bac0a840229aee8220cdb0c5b6eab2bcfed9f98244111462aa03d0303d2c095c
     geprueft_am: 2026-11-13
 faktencheck: 2026-11-10
+kurzantwort: "Ein Mesh‑System liefert in einem mehrstöckigen Haus gleichmäßig schnelle Verbindungen – einzelne Nodes behalten meist über 70 % der Ausgangsgeschwindigkeit bei Quelle. Ein WLAN‑Repeater erweitert lediglich das Reichweite‑Signal, dabei halbiert er häufig die Bandbreite Quelle. Für flächendeckendes, leistungsstarkes WLAN ist daher ein Mesh‑System die bessere Wahl."
 ---
 
 Du sitzt im Homeoffice und die Videokonferenz bricht ab. Im Schlafzimmer lädt der Film nicht. Solche Funklöcher nerven im Alltag gewaltig. Oft liegt es nicht am Anbieter, sondern an der Hardware in den eigenen vier Wänden.

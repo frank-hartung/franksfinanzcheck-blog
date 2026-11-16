@@ -132,7 +132,7 @@ Die häufigste Panne ist die Kündigung zum falschen Zeitpunkt. Wer zu früh kü
 
 Frage eins: Welche Leistung nutze ich tatsächlich im Rechenbeispiel? Ein Abo, das du in den letzten acht Wochen nicht geöffnet hast, ist eine gute Kandidatin.
 
-Frage zwei: Was kostet mich ein Ersatz? Bei Software, Cloud-Speicher oder Nachschlagewerken gibt es fast immer eine kostenlose Alternative. Vergleiche nicht mit dem Ideal, sondern mit dem, was du wirklich brauchst.
+Frage zwei: Was kostet mich ein Ersatz? Bei Software, Cloud-Speicher oder Nachschlagewerken gibt es fast immer eine kostenlose Alternative. Vergleiche nicht mit dem Ideal, sondern mit dem, was du [wirklich brauchst](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/).
 
 Frage drei: Welche Frist läuft? Trage das späteste Kündigungsdatum in deinen Kalender ein. Nicht das Datum, an dem du kündigen willst – das Datum, an dem du kündigen musst.
 

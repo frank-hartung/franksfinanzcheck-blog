@@ -53,7 +53,7 @@ lastmod: 2026-11-13
 kurzantwort: "Keine Jahresgebühr bedeutet nur, dass für die Karte unter den genannten Bedingungen kein jährliches Entgelt anfällt. Prüfe zusätzlich Kartenart, Fremdwährung, Bargeld, Zinsen und mögliche Kontokosten."
 ---
 
-Karten ohne Jahresgebühr können Geld sparen, wenn sie zu deinem Alltag passen. 0 € Jahresgebühr bezieht sich aber nur auf diesen einen Preis. Was kostet es, Geld abzuheben oder im Ausland zu zahlen? Und fallen Zinsen an?
+Karten ohne Jahresgebühr können Geld sparen, wenn sie zu deinem Alltag passen. 0 € Jahresgebühr bezieht sich aber nur auf diesen einen Preis. Was kostet es, Geld abzuheben oder im Ausland zu zahlen? Und fallen Zinsen an?
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Weder die Verbraucherzentrale noch die BaFin empfehlen dadurch das verlinkte Portal oder ein bestimmtes Kartenangebot.
 
@@ -106,9 +106,9 @@ Ein Automat oder Händler bietet dir die direkte Umrechnung in Euro an? Schau au
 
 Auch ohne diese Umrechnung zählen der Kurs deines Kartenanbieters und dessen mögliche Gebühren.
 
-**Rechenbeispiel – frei gewählte Annahmen, keine Marktdaten:** Du zahlst mit der Karte in fremder Währung. Das sind im Beispiel 1.200 € im Jahr. Beide Karten nutzen denselben angenommenen Wechselkurs. Karte A nimmt 1 % auf diesen Umsatz, Karte B kein Entgelt dafür.
+**Rechenbeispiel – frei gewählte Annahmen, keine Marktdaten:** Du zahlst mit der Karte in fremder Währung. Das sind im Beispiel 1.200 € im Jahr. Beide Karten nutzen denselben angenommenen Wechselkurs. Karte A nimmt 1 % auf diesen Umsatz, Karte B kein Entgelt dafür.
 
-Der Unterschied bei diesem Posten beträgt 12 €: 1.200 € × 1 % = 12 €. Das heißt nicht, dass 1 % üblich ist oder eine Karte insgesamt 12 € günstiger wäre. Andere Kurse, Kosten für Konto und Automat sowie Zinsen sind nicht eingerechnet.
+Der Unterschied bei diesem Posten beträgt 12 €: 1.200 € × 1 % = 12 €. Das heißt nicht, dass 1 % üblich ist oder eine Karte insgesamt 12 € günstiger wäre. Andere Kurse, Kosten für Konto und Automat sowie Zinsen sind nicht eingerechnet.
 
 ## Teilzahlung und Zinsen: die Abrechnung prüfen
 

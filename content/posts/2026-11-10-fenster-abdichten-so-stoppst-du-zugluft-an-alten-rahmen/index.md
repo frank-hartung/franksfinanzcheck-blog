@@ -42,6 +42,7 @@ faktenfrische_aliases:
   - "2026-11-09-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen"
 ---
 
+
 Fenster abdichten im Check: Draußen sinken die Temperaturen.  
 Du sitzt auf dem Sofa und spürst einen kühlen Hauch am Nacken.  
 Die Heizung läuft auf Hochtouren, doch das Zimmer bleibt kühl.  

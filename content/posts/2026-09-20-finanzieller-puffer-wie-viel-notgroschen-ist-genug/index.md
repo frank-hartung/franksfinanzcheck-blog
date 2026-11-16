@@ -46,7 +46,8 @@ faktencheck: "2026-10-13"
 ---
 
 
-Finanzieller Puffer im Check: Die Waschmaschine stirbt am Monatsende. Das Auto muss in die Werkstatt. Oder dein Arbeitgeber zahlt später als gedacht. Genau für solche Momente brauchst du einen **finanziellen Puffer**.
+
+Finanzieller Puffer im Check: Die [Waschmaschine](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/) stirbt am Monatsende. Das Auto muss in die Werkstatt. Oder dein Arbeitgeber zahlt später als gedacht. Genau für solche Momente brauchst du einen **finanziellen Puffer**.
 
  Bei 1.500 € Fixkosten sind das 4.500 € bis 9.000 €; das ist ein Modellwert. Das ist viel Geld, aber kein Fantasiewert.
 
@@ -139,7 +140,7 @@ Oder direkt hier: Trag deine notwendigen Monatsausgaben ein und der Rechner zeig
 
 Ein [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) muss vor allem eines können: **sofort verfügbar sein**. Hohe Rendite ist hier Nebensache. Wenn du das Geld erst kündigen oder verkaufen musst, ist es für den Notfall zu träge.
 
-Darum landet der Puffer in den meisten Fällen am besten auf einem separaten [Tagesgeldkonto](../../posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/). Das Geld ist nicht direkt im Girokonto sichtbar, aber meist binnen kurzer Zeit verfügbar. Genau das ist der Punkt.
+Darum landet der Puffer in den meisten Fällen am besten auf einem separaten Tagesgeldkonto. Das Geld ist nicht direkt im Girokonto sichtbar, aber meist binnen kurzer Zeit verfügbar. Genau das ist der Punkt.
 
 ### Kontotypen im Vergleich
 

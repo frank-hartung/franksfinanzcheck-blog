@@ -42,6 +42,7 @@ faktencheck: 2026-11-13
 kurzantwort: "Ja, ein Energieausweis ist beim Verkauf oder der Neuvermietung einer Immobilie gesetzlich verpflichtend. Die Kosten hängen davon ab, ob ein einfacher Verbrauchsausweis oder ein detaillierter Bedarfsausweis erstellt wird. Eine gute Energieeffizienzklasse senkt die laufenden Heizkosten deutlich und stärkt deine Position bei Verkauf oder Vermietung."
 ---
 
+
 Ein fehlender Energieausweis kann beim Verkauf oder bei der Vermietung teure Bußgelder auslösen. Du hast einen Käufer für dein Haus gefunden und der Termin vor Ort läuft gut. Dann fragt der Interessent nach den Heizkosten und will das offizielle Dokument sehen.
 
 Jetzt zählt das richtige Papier. Es ist mehr als eine lästige Pflicht für Vermieter oder Verkäufer. Ein aktueller Ausweis stärkt deine Position im Gespräch um den Preis massiv.
@@ -63,7 +64,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Wenn du über einen Link ka
 
 Der **Energieausweis** ist der Steckbrief für deine Immobilie. Er fasst alle Energie‑Merkmale eines Gebäudes in wenigen Seiten zusammen.
 
-Das Dokument macht Häuser bundesweit vergleichbar. Es wirkt wie das Etikett an deinem Kühlschrank oder deiner Waschmaschine. So erkennst du sofort, ob das Haus Energie verschwendet oder sparsam arbeitet.
+Das Dokument macht Häuser bundesweit vergleichbar. Es wirkt wie das Etikett an deinem Kühlschrank oder deiner [Waschmaschine](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/). So erkennst du sofort, ob das Haus Energie verschwendet oder sparsam arbeitet.
 
 Der Ausweis enthält Daten zu Heizung und [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/). Auch die Qualität der Dämmung wird detailliert bewertet. Er ist die Basis für meinen Franks Fixkosten‑Kompass. Er hilft beim ersten Schritt: Kosten erkennen.
 
@@ -116,7 +117,7 @@ Das Farbspektrum von Grün bis Rot gibt die Richtung vor. Dein Gebäude erhält 
 
 Zwei Werte stehen im Fokus: Endenergie und Primärenergie. Die Endenergie zeigt die Menge, die du am Monatsende wirklich bezahlst. Dazu gehören etwa Erdgas, Heizöl oder der Strom für deine [Wärmepumpe](../../posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/).
 
-Die Primärenergie rechnet auch die Gewinnung und den Weg des Brennstoffs mit ein. Eine [Wärmepumpe](../../posts/2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig/) schneidet hier sehr gut ab, da sie freie Wärme aus der Luft nutzt. Reine Stromheizungen landen wegen hoher Verluste oft im roten Bereich.
+Die Primärenergie rechnet auch die Gewinnung und den Weg des Brennstoffs mit ein. Eine Wärmepumpe schneidet hier sehr gut ab, da sie freie Wärme aus der Luft nutzt. Reine Stromheizungen landen wegen hoher Verluste oft im roten Bereich.
 
 Die Klasse bestimmt deine monatlichen Fixkosten stark. Ein Wechsel von Klasse F zu C spart in der Modellrechnung unten über zweitausend Euro im Jahr. Nutze den Ausweis als Fahrplan für deine Ersparnis.
 

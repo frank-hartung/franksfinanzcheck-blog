@@ -56,6 +56,7 @@ kurzantwort: "Ein Doppeltarifzähler erfasst Strom getrennt nach Zeiten: nachts 
 ---
 
 
+
 Die Idee klingt einleuchtend: Strom, der nachts fließt, ist billiger. Also verschiebe ich [Waschmaschine](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/), Trockner und Geschirrspüler in die Nacht und spare.
 
 Ob das stimmt, entscheidet nicht die Idee, sondern eine einzige Zahl: der Anteil deines Verbrauchs, der tatsächlich in die günstigen Stunden fällt. Wer diesen Anteil nicht kennt, wettet auf einen Rabatt, den er nie erreicht. Wer einen Nachtstromtarif prüft, misst deshalb zuerst den eigenen Nachtanteil – nicht den Rabatt auf dem Papier.
@@ -148,13 +149,13 @@ Die beiden Nachtanteile im Vergleich, gerechnet mit den Annahmen von oben:
 
 Ein Doppeltarif verändert nicht nur den Preis, sondern auch das Bild auf der Abrechnung. Statt einer Verbrauchszeile stehen dort zwei. Prüfe beide getrennt, statt nur die Gesamtsumme anzusehen.
 
-Vergleiche die beiden Zeilen mit dem Vorjahr. Steigt der Hochtarifanteil und sinkt der Niedertarifanteil, hat sich dein Verhalten verschoben. Vielleicht läuft die Waschmaschine jetzt früher, oder ein neues Gerät verbraucht tagsüber Strom. Diese Verschiebung ist in der Summe oft unsichtbar, in den zwei Zeilen aber klar.
+Vergleiche die beiden Zeilen mit dem Vorjahr. Steigt der Hochtarifanteil und sinkt der Niedertarifanteil, hat sich dein Verhalten verschoben. Vielleicht läuft die [Waschmaschine](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/) jetzt früher, oder ein neues Gerät verbraucht tagsüber Strom. Diese Verschiebung ist in der Summe oft unsichtbar, in den zwei Zeilen aber klar.
 
  Wenn du diesen Wert über zwei Jahre verfolgst, kennst du deinen Nachtanteil, ohne eine Woche lang Buch zu führen; das ist ein Beispielwert.
 
 ## Das 7-Tage-Protokoll
 
-Die einzige Zahl, die du wirklich brauchst, ist dein Nachtanteil. Ermitteln lässt er sich in einer Woche.
+Die einzige Zahl, die du [wirklich brauchst](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/), ist dein Nachtanteil. Ermitteln lässt er sich in einer Woche.
 
 Notiere sieben Tage lang, wann deine großen Verbraucher laufen: Waschmaschine, Trockner, Geschirrspüler, Ladegeräte, Elektroheizung, falls vorhanden; das ist ein Modellwert. Notiere dazu die Uhrzeit und die übliche Laufzeit. Ein Blatt mit drei Spalten reicht.
 

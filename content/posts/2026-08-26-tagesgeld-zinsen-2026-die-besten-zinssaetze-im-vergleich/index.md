@@ -43,6 +43,7 @@ quellen:
 faktencheck: "2026-10-13"
 ---
 
+
 Tagesgeldkonto im Check: Das Girokonto zahlt dir weiter 0,0 %; das ist ein Modellwert.
 
 Viele Banken geben dir heute **ca. 1,7 % bis 3,2 %**; das ist ein Beispielwert. Dein Geld bleibt dabei täglich verfügbar. Für den **[Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/)** gibt es keinen besseren Platz.
@@ -157,7 +158,7 @@ Stand: Oktober 2026. Die Zinsen ändern sich täglich. Vergleiche deshalb kurz v
 
 ## Rechenbeispiel: Was bringt das Tagesgeld konkret?
 
-Nehmen wir an, du parkst einen **[Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) von ca. 15.000 €**:
+Nehmen wir an, du parkst einen **Notgroschen von ca. 15.000 €**:
 
 {{< chart dataset="tagesgeld_modell" >}}
 
@@ -178,7 +179,7 @@ Diese Summe deckt fast einen Monat Versicherungen. Oder einen kurzen Urlaub.
 ## Schritt-für-Schritt: So eröffnest du ein Tagesgeldkonto
 
 1. **Angebot prüfen:** Prüfe Zinssatz, Zinsgarantie und Einlagensicherung beim [Tagesgeldkonto der C24 Bank](/go/tagesgeld/) und gleiche die Konditionen mit deinem bisherigen Konto ab.
-2. **Konditionen prüfen:** Achte besonders auf die Dauer der Zinsgarantie und die Details zur Einlagensicherung.
+2. **Konditionen prüfen:** Achte besonders auf die Dauer der Zinsgarantie und die Details zur [Einlagensicherung](../../posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/).
 3. **Antrag online stellen:** Fülle das Formular mit deinen persönlichen Daten und der IBAN deines Girokontos aus.
 4. **Legitimation:** Führe das Videoident-Verfahren per Smartphone durch oder nutze die eID deines Personalausweises.
  **Konto aktivieren:** Nach erfolgreicher Prüfung erhältst du deine Zugangsdaten meist innerhalb von 24 bis 48 Stunden; das ist ein Modellwert.

@@ -295,7 +295,7 @@ Möchtest du deine laufenden Energiekosten dauerhaft ohne bürokratischen Aufwan
   <div class="ff-course-series-box__head">
     <span class="ff-course-series-box__badge">Kostenlose E-Mail-Serie</span>
     <h3 class="ff-course-series-box__title">Der 4-Tage Energie-Autopilot</h3>
-    <p class="ff-course-series-box__sub">In vier kompakten Lektionen zu dauerhaft niedrigen Nebenkosten – fundiert, werbefrei und sofort umsetzbar.</p> </div>
+    <p class="ff-course-series-box__sub">In vier kompakten Lektionen zu dauerhaft niedrigen Nebenkosten – fundiert, werbefrei und sofort umsetzbar.</p> </div>  
   <div class="ff-course-syllabus">
     <div class="ff-course-day">
       <span class="ff-course-day__tag">Tag 1</span>

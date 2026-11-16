@@ -37,6 +37,7 @@ quellen:
     titel: "Referenzseite destatis.de"
     url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
     herausgeber: "Statistisches Bundesamt"
+kurzantwort: "Du bekommst ein gebührenfreies Girokonto, wenn du ein Online‑Bankkonto wählst, das bei einem monatlichen Geldeingang von mindestens 1 200 EUR keine Grundgebühr erhebt. Vergleiche Anbieter mit unabhängigen Vergleichsportalen und prüfe, dass weder Karten‑ noch Buchungsgebühren anfallen. Rund 60 % der Direktbanken bieten ein komplett kostenfreies Girokonto unter dieser Bedingung an."
 ---
 
 Kostet dein Girokonto jedes Jahr mehr Geld? Nutzt du die teuren Extras deiner Bank kaum? Viele Menschen haben das Gefühl, zu viel für ihr Konto zu zahlen. Du hast vielleicht schon von einem kostenlosen Girokonto gehört. Doch oft herrscht Unsicherheit bei diesem Thema. Worauf musst du beim Wechsel wirklich achten? In diesem Ratgeber erfährst du, wie du die Gebühren senkst. Ich zeige dir die wichtigsten Punkte für einen Girokonto Vergleich. Wir schauen uns auch die Stolperfallen genau an. Am Ende kennst du deinen Weg zum neuen Konto. Du findest so ein Konto, das wirklich nichts kostet.
