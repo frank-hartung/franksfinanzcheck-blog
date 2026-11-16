@@ -1,6 +1,6 @@
 {
   "target": 6,
-  "ready": 9,
+  "ready": 7,
   "pool_size": 11,
   "generated_at": "2026-11-14T19:15:16Z",
   "candidates": [
@@ -63,37 +63,17 @@
     },
     {
       "slug": "2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
-      "ready": true,
+      "ready": false,
       "sha256": "524b4b03665b31184405ba6b37c2ff86ef9a41b74fec63b28c33d6d041fb414d",
-      "flesch": 61.9,
       "measured_at": "2026-11-14T19:06:40Z",
-      "score": 0.98,
-      "parts": {
-        "spelling": 0.96,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst",
-      "ready": true,
+      "ready": false,
       "sha256": "01883d9970559cbc2aca768af9ca2c3a913664c90e41d900fcb6017a751c52d9",
-      "flesch": 62.7,
       "measured_at": "2026-11-14T19:07:51Z",
-      "score": 0.988,
-      "parts": {
-        "spelling": 0.94,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 1.0,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
