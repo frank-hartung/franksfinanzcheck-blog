@@ -1,6 +1,6 @@
 # 🚦 COCKPIT – franksfinanzcheck.de
 
-**Stand:** 2026-11-15 23:55 UTC · generiert von `scripts/cockpit.py`
+**Stand:** 2026-11-17 02:52 UTC · generiert von `scripts/cockpit.py`
 
 > Eine Seite statt 70+ Status-Dateien. Jeder Bereich bekommt eine Ampel und einen Satz Begründung. Wer tiefer graben will, findet die Quelle unter jedem Bereich – diese Datei archiviert nichts, sie verweist nur.
 
@@ -10,7 +10,7 @@
 |---|---|---|
 | Content-Pipeline | 🟡 | 1 Prüfpunkt(e) auffällig (lesbarkeit) |
 | SEO & Technik | 🟢 | in Ordnung |
-| Affiliate & Umsatz | 🟢 | in Ordnung (2 Kennzahl(en) noch ohne Datenlage) |
+| Affiliate & Umsatz | 🟡 | 1 Prüfpunkt(e) auffällig (click-chain) |
 | Secrets & Zugänge | 🔴 | 1 Zugang/Zugänge abgelehnt: PINTEREST_ACCESS_TOKEN – Re-Auth nötig |
 | Social-Automation | 🟢 | 1/10 Kanäle live (Mastodon) |
 | Newsletter | 🔴 | noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen) |
@@ -21,8 +21,8 @@
 
 ### Content-Pipeline — 🟡 GELB
 - 1 Prüfpunkt(e) auffällig (lesbarkeit)
-- lesbarkeit: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen/index.md (Entwurf) – Flesch 41.7 < Publish-Schwelle 60; 2026-11-02-last-minute-urlaubsangebote-sichern/index.md (E…
-- Artikel-Reserve 9/6 bereit
+- lesbarkeit: 2026-11-16-e-auto-laden-so-senkst-du-deine-stromkosten/index.md (Entwurf) – Flesch 55.9 < Publish-Schwelle 60
+- Artikel-Reserve 6/6 bereit
 
 Quellen: `data/governance_status.json`, `data/reserve-readiness.json`, `PRODUKTIONS-STATUS.md`
 
@@ -32,8 +32,9 @@ Quellen: `data/governance_status.json`, `data/reserve-readiness.json`, `PRODUKTI
 
 Quellen: `data/governance_status.json`, `data/gsc/abdeckung/befund.json`
 
-### Affiliate & Umsatz — 🟢 GRÜN
-- in Ordnung (2 Kennzahl(en) noch ohne Datenlage)
+### Affiliate & Umsatz — 🟡 GELB
+- 1 Prüfpunkt(e) auffällig (click-chain)
+- click-chain: /go/strom/ ohne data-klick=affiliate_click (Klick unsichtbar für die Umsatzmessung); /go/strom/ ohne data-klick-slug (Ziel-Klick nicht zuordenbar); /go/strom/ ohne ?subi…
 
 Quellen: `data/governance_status.json`, `AFFILIATE-INTEGRITY-REPORT.md`, `AFFILIATE-INTENT-REPORT.md`
 
@@ -47,13 +48,13 @@ Quellen: `data/governance_status.json`, `data/secrets_state.json`, `docs/PINTERE
 ### Social-Automation — 🟢 GRÜN
 - 1/10 Kanäle live (Mastodon)
 - 9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md
-- letzter erfolgreicher Post vor 0.3 Tag(en)
+- letzter erfolgreicher Post vor 0.1 Tag(en)
 
 Quellen: `data/social/state.yaml`, `data/social/channels.yaml`, `SOCIAL-PERF-REPORT.md`, `docs/RUNBUCH-SOCIAL-SECRETS.md`
 
 ### Newsletter — 🔴 ROT
 - noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)
-- 5 Artikel in der Warteschlange, ältester 16 Tag(e) alt
+- 5 Artikel in der Warteschlange, ältester 18 Tag(e) alt
 
 Quellen: `data/newsletter_journal.jsonl`, `data/newsletter_state.json`, `data/newsletter_kadenz.json`
 

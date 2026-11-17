@@ -1,13 +1,13 @@
 {
-  "generated": "2026-11-15T23:55:40Z",
+  "generated": "2026-11-17T02:52:40Z",
   "overall": "rot",
   "buckets": {
     "Content-Pipeline": {
       "level": "gelb",
       "lines": [
         "1 Prüfpunkt(e) auffällig (lesbarkeit)",
-        "lesbarkeit: 2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen/index.md (Entwurf) – Flesch 41.7 < Publish-Schwelle 60; 2026-11-02-last-minute-urlaubsangebote-sichern/index.md (E…",
-        "Artikel-Reserve 9/6 bereit"
+        "lesbarkeit: 2026-11-16-e-auto-laden-so-senkst-du-deine-stromkosten/index.md (Entwurf) – Flesch 55.9 < Publish-Schwelle 60",
+        "Artikel-Reserve 6/6 bereit"
       ],
       "sources": [
         "data/governance_status.json",
@@ -27,9 +27,10 @@
       ]
     },
     "Affiliate & Umsatz": {
-      "level": "gruen",
+      "level": "gelb",
       "lines": [
-        "in Ordnung (2 Kennzahl(en) noch ohne Datenlage)"
+        "1 Prüfpunkt(e) auffällig (click-chain)",
+        "click-chain: /go/strom/ ohne data-klick=affiliate_click (Klick unsichtbar für die Umsatzmessung); /go/strom/ ohne data-klick-slug (Ziel-Klick nicht zuordenbar); /go/strom/ ohne ?subi…"
       ],
       "sources": [
         "data/governance_status.json",
@@ -55,7 +56,7 @@
       "lines": [
         "1/10 Kanäle live (Mastodon)",
         "9 im Standby ohne Zugangsdaten (Bluesky, LinkedIn, X (Twitter), Threads, Facebook (Seite), Instagram, Pinterest, Telegram (Kanal), Reddit) – docs/RUNBUCH-SOCIAL-SECRETS.md",
-        "letzter erfolgreicher Post vor 0.3 Tag(en)"
+        "letzter erfolgreicher Post vor 0.1 Tag(en)"
       ],
       "sources": [
         "data/social/state.yaml",
@@ -68,7 +69,7 @@
       "level": "rot",
       "lines": [
         "noch kein echter Listenversand protokolliert (nur Tests/Bestätigungen)",
-        "5 Artikel in der Warteschlange, ältester 16 Tag(e) alt"
+        "5 Artikel in der Warteschlange, ältester 18 Tag(e) alt"
       ],
       "sources": [
         "data/newsletter_journal.jsonl",
