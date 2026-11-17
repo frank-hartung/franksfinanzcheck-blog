@@ -222,7 +222,9 @@ Das hängt von deiner Lage und dem Zweck des Geldes ab. Ein Puffer für kurzfris
 Prüfe sie, wenn sich Preis oder Bedarf ändern und wenn ein Vertrag zur Verlängerung ansteht. Eine regelmäßige Erinnerung hilft. Sie ersetzt aber nicht den Blick in die Vertragsbedingungen.
 
 ### Ist ein Tagesgeldkonto für jede Rücklage nötig?
-Nein. Entscheidend ist, dass du den Betrag passend aufbewahrst und bei Bedarf erreichst. Vergleiche Bedingungen und Schutz, bevor du ein Konto auswählst.### Wie bleibe ich nach der ersten Woche dran?
+Nein. Entscheidend ist, dass du den Betrag passend aufbewahrst und bei Bedarf erreichst. Vergleiche Bedingungen und Schutz, bevor du ein Konto auswählst.
+
+### Wie bleibe ich nach der ersten Woche dran?
 
 Kopple die Gewohnheit an etwas Festes. Etwa den Kontoblick an den Montagskaffee. Nach einigen Wochen läuft es von allein. Ein verpasster Tag ist kein Abbruch.
 
