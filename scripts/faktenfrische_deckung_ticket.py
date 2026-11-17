@@ -63,7 +63,7 @@ KAP = ROOT / "scripts" / "faktenfrische_kapazitaet.py"
 SSOT = "data/agent_reach/faktenfrische.yaml"
 LABEL = "faktenfrische-deckung"
 LABEL_FARBE = "b60205"
-LABEL_TEXT = ("Faktenfrische-Deckung: roter Deckungs-Nachweis (Kadenz/Spitzentag) "
+LABEL_TEXT = ("Faktenfrische-Deckung: roter Nachweis (Kadenz/Spitzentag) "
               "– ein Ticket, ein Schließpfad (#1039)")
 MARKER = "<!-- wache-id: faktenfrische-deckung -->"
 TITEL = "Faktenfrische-Deckung rot – Bündel-/Spitzentag oder Kadenz (#1039)"
@@ -537,6 +537,8 @@ def selftest() -> int:
     pruefe("D8e", "kein Betriebsnachweis" in ticket_body(echt, None,
                                                          heute=dt.date(2026, 11, 10)),
            False)
+    # D9 (#1191): GitHub-REST-API lehnt Label-Beschreibungen > 100 Zeichen ab.
+    pruefe("D9", len(LABEL_TEXT) <= 100 and len(LABEL) <= 50, True)
 
     if fehler:
         print("❌ Selbsttest Deckungs-Ticket rot:")

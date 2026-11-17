@@ -1130,7 +1130,16 @@ def heilen(root: Path = ROOT, *, trocken: bool = False) -> dict:
         if not trocken:
             (root / "static" / rel).unlink()
 
-    # 4) Vorlagenvertrag: melden, nicht selbst an fassbaren Code gehen -----
+    # 4) llms.txt-Bestands-Drift (#1236) ----------------------------------
+    # Reine Bestands-Drift (z. B. nach Veröffentlichung neuer Live-Artikel,
+    # bevor der nachgelagerte IndexNow-Lauf generate_llms_txt.py erreicht)
+    # ist deterministisch aus dem Generator heilbar – analog zum RSS-Spiegel.
+    # Strenge Grenze (kein Scheingrün): Fehlt der KI-Abschnitt oder einer
+    # der inhaltlichen Anker in der bestehenden ODER der erzeugten Fassung,
+    # wird NICHT geheilt; Regel M9 meldet den Befund fail-closed.
+    _llms_heilen(root, eingriffe, eskalation, trocken=trocken)
+
+    # 5) Vorlagenvertrag: melden, nicht selbst an fassbaren Code gehen -----
     for v in kanal_vertrag(root):
         datei = root / v.datei
         if not datei.is_file():
@@ -1145,6 +1154,83 @@ def heilen(root: Path = ROOT, *, trocken: bool = False) -> dict:
 
     return {"eingriffe": eingriffe, "eskalation": eskalation, "revision": sha,
             "trocken": trocken}
+
+
+_LLMS_PFLICHT_ANKER = (
+    "KI-Kennzeichnung",
+    "ai-generated",
+    "DigitalSourceType",
+    "Art. 50",
+    "kein Herkunftsbeweis",
+)
+
+
+def _llms_hat_pflichtanker(text: str) -> bool:
+    """Prüft, ob llms.txt alle Pflichtanker der KI-Herkunftsaussage trägt."""
+    if "KI-Kennzeichnung" not in text:
+        return False
+    flach = " ".join(text.split())
+    return all(" ".join(anker.split()) in flach for anker in _LLMS_PFLICHT_ANKER[1:])
+
+
+def _llms_heilen(root: Path, eingriffe: list[dict], eskalation: list[dict],
+                 *, trocken: bool = False) -> None:
+    """Zieht static/llms.txt bei reiner Bestands-Drift aus dem Generator nach (#1236)."""
+    generator = root / "scripts" / "generate_llms_txt.py"
+    llms = root / "static" / "llms.txt"
+    if not generator.is_file() or not llms.is_file():
+        return
+    try:
+        alt = llms.read_text(encoding="utf-8")
+    except OSError:
+        return
+    if not _llms_hat_pflichtanker(alt):
+        return
+    try:
+        pruefung = subprocess.run(
+            [sys.executable, str(generator), "--check"],
+            cwd=root, capture_output=True, text=True, timeout=60, check=False,
+        )
+    except (OSError, subprocess.SubprocessError) as exc:
+        eskalation.append({"grund": "llms", "datei": "static/llms.txt",
+                           "text": f"Generator-Prüfung nicht ausführbar ({exc})"})
+        return
+    if pruefung.returncode == 0:
+        return
+    if trocken:
+        eingriffe.append({
+            "art": "llms", "datei": "static/llms.txt",
+            "text": "aus scripts/generate_llms_txt.py nachgezogen (Bestands-Drift)",
+        })
+        return
+    try:
+        lauf = subprocess.run(
+            [sys.executable, str(generator)],
+            cwd=root, capture_output=True, text=True, timeout=60, check=False,
+        )
+        neu = llms.read_text(encoding="utf-8") if lauf.returncode == 0 else ""
+    except (OSError, subprocess.SubprocessError) as exc:
+        eskalation.append({"grund": "llms", "datei": "static/llms.txt",
+                           "text": f"Generator-Nachzug fehlgeschlagen ({exc})"})
+        return
+    if lauf.returncode != 0 or not _llms_hat_pflichtanker(neu):
+        # Sicherheitsnetz: verliert der Generator einen Pflichtanker, alte
+        # Fassung zurücklegen und laut eskalieren statt M9 zu verdecken.
+        try:
+            llms.write_text(alt, encoding="utf-8")
+        except OSError:
+            pass
+        eskalation.append({
+            "grund": "llms", "datei": "static/llms.txt",
+            "text": "Generator liefert keine vollständige KI-Kennzeichnung – "
+                    "kein automatischer Nachzug",
+        })
+        return
+    if neu != alt:
+        eingriffe.append({
+            "art": "llms", "datei": "static/llms.txt",
+            "text": "aus scripts/generate_llms_txt.py nachgezogen (Bestands-Drift)",
+        })
 
 
 def _anker_einsetzen(text: str) -> str:

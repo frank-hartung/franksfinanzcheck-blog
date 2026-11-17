@@ -242,7 +242,7 @@ Ein Vergleich dauert nur wenige Minuten deiner Zeit.
 
 Es ist der logische nächste Schritt nach der Abdichtung.  
 Hier kannst du prüfen, ob dein Tarif noch passt:  
-<a href="/go/strom/" rel="sponsored">Stromanbieter vergleichen und [Fixkosten prüfen](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/)</a>  
+[Stromanbieter vergleichen](/go/strom/) und [Fixkosten prüfen](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/)  
 
 Dieser Check hilft dir, das gesparte Geld zu behalten.  
 Weniger Verbrauch bedeutet doppelten Nutzen bei einem günstigen Tarif.  

@@ -218,7 +218,8 @@ class WorkflowTests(unittest.TestCase):
 
     def test_faktenlauf_committet_auch_nur_akte(self):
         text = (ROOT / '.github/workflows/faktenfrische.yml').read_text(encoding='utf-8')
-        self.assertIn('git status --porcelain -- content/ data/ FAKTENFRISCHE-REPORT.md BEFUND-AKTE.md F4-ENTSCHEIDUNGSVORLAGE.md', text)
+        self.assertIn('git status --porcelain -- content/ data/ BEFUND-AKTE.md F4-ENTSCHEIDUNGSVORLAGE.md', text)
+        self.assertNotIn('FAKTENFRISCHE-REPORT.md\n          else', text)
         self.assertIn('python3 scripts/f4_entscheidungsvorlage.py', text)
         self.assertIn("steps.akte.outcome == 'failure'", text)
         self.assertIn('set -Eeuo pipefail\n          python3 scripts/faktenfrische_befund_akte.py', text)

@@ -102,7 +102,7 @@ export async function ladeLaufzeit(lader = (name) => import(name)) {
   try {
     const lighthouseModul = await lader('lighthouse');
     const playwrightModul = await lader('playwright-core');
-    const browserModul = await lader('./e2e/browser.mjs');
+    const browserModul = await lader('../e2e/browser.mjs');
     const lighthouse = lighthouseModul?.default ?? lighthouseModul;
     const chromium = playwrightModul?.chromium;
     const resolveLaunchOptions = browserModul?.resolveLaunchOptions;

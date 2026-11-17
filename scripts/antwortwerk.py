@@ -128,11 +128,44 @@ def belegfaehig(url: str, allowlist: dict, sperrliste: list[str]) -> dict | None
 
 
 # ------------------------------------------------------- Passagen bewerten
+_BEUGUNG_ENDUNGEN = ("ungen", "ern", "nen", "en", "er", "es", "em", "e", "n", "s")
+_UMLAUT_MAP = str.maketrans({"ä": "a", "ö": "o", "ü": "u"})
+
+
+def _begriff_stamm(wort: str) -> str:
+    """Konservativer deutscher Wortstamm (≥ 5 Zeichen) für Beugungsformen (#1194).
+
+    Trifft Plural-/Kasusformen wie „Strompreise“ ↔ „Strompreis“,
+    „Kündigungsfristen“ ↔ „Kündigungsfrist“ oder „Zinssätze“ ↔ „Zinssatz“,
+    ohne kurze Stämme zu verwässern.
+    """
+    w = (wort or "").lower().strip()
+    for endung in _BEUGUNG_ENDUNGEN:
+        if w.endswith(endung) and len(w) - len(endung) >= 5:
+            return w[: -len(endung)]
+    return w
+
+
+def _begriff_trifft(begriff: str, satz_klein: str, satz_woerter_faltung: list[str]) -> bool:
+    b = begriff.lower()
+    if b in satz_klein:
+        return True
+    stamm = _begriff_stamm(b)
+    if len(stamm) < 5:
+        return False
+    if stamm in satz_klein:
+        return True
+    gefaltet = stamm.translate(_UMLAUT_MAP)
+    return any(gefaltet in w for w in satz_woerter_faltung)
+
+
 def passagen(text: str, begriffe: list[str], max_saetze: int = 4) -> list[dict]:
     """Die aussagekräftigsten Sätze einer Seite, nach Begriffsdeckung.
 
     Bewusst schlicht und deterministisch: Wer nachvollziehen will, warum
-    ein Satz im Dossier steht, soll das in zehn Sekunden können.
+    ein Satz im Dossier steht, soll das in zehn Sekunden können. Seit #1194
+    auch beugungstolerant (Plural/Kasus/Umlaut ab 5 Zeichen Stamm), damit
+    amtliche Belegseiten nicht an „Strompreise“ vs. „Strompreis“ scheitern.
     """
     roh = re.sub(r"\s+", " ", text or "").strip()
     if not roh:
@@ -144,7 +177,8 @@ def passagen(text: str, begriffe: list[str], max_saetze: int = 4) -> list[dict]:
         if not (60 <= len(satz) <= 400):
             continue
         klein = satz.lower()
-        deckung = sum(1 for b in begriffe if b in klein)
+        gefaltete = [w.translate(_UMLAUT_MAP) for w in _WORT.findall(klein)]
+        deckung = sum(1 for b in begriffe if _begriff_trifft(b, klein, gefaltete))
         if not deckung:
             continue
         # Zahlen sind in einem Finanzblog das Wertvollste an einem Satz.
@@ -551,6 +585,25 @@ def selftest() -> list[str]:
     roh = (ROOT / "data" / "werkbank.yaml").read_text(encoding="utf-8")
     verdacht = re.findall(r"(?:sk-|gsk_|ak_|pplx-)[A-Za-z0-9_\-]{12,}", roh)
     pruefe("ST15", not verdacht, f"Schlüsselverdacht in der SSOT: {verdacht}")
+
+    # ST16 – Beugungs-/Umlaut-Toleranz in passagen() + Gegenprobe (#1194).
+    beug_treffer = passagen(
+        "Der durchschnittliche Strompreis für Haushalte lag 2026 bei 37,3 Cent je Kilowattstunde. "
+        "Der Zinssatz für täglich fällige Einlagen betrug laut Bundesbank 3,1 Prozent im Mittel.",
+        ["strompreise", "zinssätze"],
+    )
+    beug_leer = passagen(
+        "Ein Spaziergang im Stadtpark dauert bei ruhigem Wetter ungefähr dreißig Minuten am Nachmittag.",
+        ["strompreise", "kündigungsfristen"],
+    )
+    pruefe("ST16", len(beug_treffer) == 2 and beug_leer == [],
+           f"Beugungs-Abgleich fehlerhaft: {beug_treffer} / {beug_leer}")
+
+    # ST17 – Amtliche/Kammer-Quellen für Verbraucherrecht in der Allowlist (#1194).
+    al17 = lade_allowlist(ssot)
+    pruefe("ST17",
+           all(belegfaehig(f"https://www.{d}/info", al17, []) for d in ("bmjv.de", "bmj.de", "ihk.de")),
+           "bmjv.de/bmj.de/ihk.de fehlen in der Allowlist")
 
     return fehler
 

@@ -285,7 +285,10 @@ def check_page(path: str, base: str, F: Findings, hugo: bool = True) -> dict:
         except Exception as exc:
             F.add("S1", rel, f"JSON-LD nicht parsebar: {exc}")
             continue
-        blocks = data if isinstance(data, list) else [data]
+        if isinstance(data, dict) and isinstance(data.get("@graph"), list):
+            blocks = data["@graph"]
+        else:
+            blocks = data if isinstance(data, list) else [data]
         for blk in blocks:
             if not isinstance(blk, dict):
                 F.add("S1", rel, "JSON-LD-Block ist kein Objekt")

@@ -349,12 +349,54 @@ class VertragsCtaTests(unittest.TestCase):
         self.assertEqual(fehlende, [], "Registerlücken:\n" + "\n".join(fehlende))
 
 
-if __name__ == "__main__":
-    unittest.main()
+class FazitSchmiedeUndCacheTests(unittest.TestCase):
+    """Dauerschutz #1230: Fazit-Schmiede-SSOT (C34) + AST-Cache-Invalidierung."""
 
-    # Der Dauerkraft-Beweis „neue Route, die es heute nicht gibt" lebt in
-    # `HausTemplateTests.test_neue_route_waere_automatisch_erfasst` – dort
-    # mit der echten `Ziel`-Signatur (saetze/anker je Slot).
+    def test_jede_route_der_fazit_schmiede_ist_haus_template(self):
+        import fazit_schmiede as fs
+
+        smap, luecke = dg._ssot_wert("fazit_schmiede", "generate_fazit_text.sentence_map")
+        self.assertEqual(luecke, "")
+        for route in list(smap.keys()) + ["fluege"]:
+            block = fs.generate_fazit_text("Strompreis 2026: So wechselst du sicher", route)
+            absatz = [z for z in block.splitlines() if z.strip() and not z.startswith("#")][0]
+            grund = dg.haus_template_grund(absatz)
+            self.assertIn("fazit_schmiede.generate_fazit_text", grund, route)
+
+    def test_s3_einzeln_mit_rs5_und_internem_link_erkannt(self):
+        s3, luecke = dg._ssot_wert("fazit_schmiede", "generate_fazit_text.s3")
+        self.assertEqual(luecke, "")
+        self.assertIn("fazit_schmiede", dg.haus_template_grund(s3))
+        self.assertIn("fazit_schmiede",
+                      dg.haus_template_grund(s3[:-1] + "; das ist ein Rechenbeispiel."))
+        verlinkt = s3.replace(
+            "fünf Minuten",
+            "[fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/)",
+        )[:-1] + "; das ist ein Modellwert."
+        self.assertIn("fazit_schmiede", dg.haus_template_grund(verlinkt))
+
+    def test_eigener_redaktionssatz_neben_s3_bleibt_gemessen(self):
+        """Kein Freibrief (C19): echter Fließtext neben S3 hebt die Ausnahme auf."""
+        s3, _ = dg._ssot_wert("fazit_schmiede", "generate_fazit_text.s3")
+        self.assertEqual(dg.haus_template_grund(REDAKTION + " " + s3), "")
+        self.assertEqual(
+            dg.haus_template_grund("Bei 3.500 kWh sparst du 180 Euro; das ist ein Rechenbeispiel."),
+            "",
+        )
+
+    def test_ast_cache_invalidiert_bei_dateiaenderung(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            mod = Path(tmp) / "probe_ssot.py"
+            mod.write_text('FORMEL = "Erste Fassung der SSOT-Konstante"\n', encoding="utf-8")
+            baum1, err1 = dg._ssot_baum(mod)
+            self.assertEqual(err1, "")
+            baum1b, _ = dg._ssot_baum(mod)
+            self.assertIs(baum1, baum1b, "AST-Cache wurde nicht wiederverwendet")
+            mod.write_text('FORMEL = "Zweite, laengere Fassung der SSOT-Konstante"\n',
+                           encoding="utf-8")
+            baum2, err2 = dg._ssot_baum(mod)
+            self.assertEqual(err2, "")
+            self.assertIsNot(baum1, baum2, "AST-Cache invalidierte nach Änderung nicht")
 
 
 if __name__ == "__main__":

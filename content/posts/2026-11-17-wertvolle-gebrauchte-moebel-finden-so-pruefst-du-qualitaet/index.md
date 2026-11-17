@@ -63,7 +63,7 @@ Du gestaltest deine Wohnung individuell. Du [vermeidest](../../posts/2026-10-05-
 
 ## Der 4K-Check für deine neue Einrichtung
 
-Beim Kauf nutzen wir den bewährten 4K-Prüfpfad von Franks Finanzcheck. So behältst du die Kontrolle über deine Fixkosten und Ausgaben.
+Beim Kauf nutzen wir den bewährten 4K-Prüfpfad von FranksFinanzcheck. So behältst du die Kontrolle über deine Fixkosten und Ausgaben.
 
 1. **Kosten sehen:** Erfasse nicht nur den Kaufpreis. Denke an die Fahrtkosten zum Abholort. Kalkuliere Material für die Reinigung ein. Brauchst du einen Mietwagen? Diese Beträge gehören zum Gesamtpreis.
 2. **Konditionen rechnen:** Vergleiche den Zustand mit dem Preis. Ist das Stück sofort nutzbar? Musst du viel Zeit investieren? Rechne den Aufwand ehrlich gegen die Ersparnis.

@@ -307,6 +307,41 @@ def issue_oeffnen(bericht: dict, runner=None) -> str | None:
     return titel
 
 
+def issues_schliessen(bericht: dict, runner=None, *,
+                      vollstaendig: bool = True) -> list[int]:
+    """Schließt offene Nachlauf-Issues erst bei vollständig grünem Stand (C14/C2).
+
+    Kein Schließen bei Teilprüfung (`--nur`) oder Werkzeugfehler: nur ein
+    vollständiger Lauf ohne Befunde und ohne Werkzeugausfall beweist, dass
+    der gemeldete Zustand auf `main` behoben ist (#1229).
+    """
+    if not vollstaendig or not bericht.get("gruen"):
+        return []
+    if bericht.get("befunde") or bericht.get("werkzeugfehler"):
+        return []
+    runner = runner or _gh
+    roh = runner(["issue", "list", "--label", LABEL, "--state", "open",
+                  "--limit", "20", "--json", "number"])
+    try:
+        offene = json.loads(roh or "[]")
+    except ValueError:
+        return []
+    geschlossen: list[int] = []
+    stand = str(bericht.get("stand") or "")
+    for eintrag in offene:
+        nr = eintrag.get("number") if isinstance(eintrag, dict) else None
+        if not isinstance(nr, int):
+            continue
+        runner([
+            "issue", "close", str(nr), "--reason", "completed",
+            "--comment",
+            f"Geschlossen: Nachlauf-Wache vollständig grün (Stand {stand}, "
+            "0 Befunde, 0 Werkzeugfehler).",
+        ])
+        geschlossen.append(nr)
+    return geschlossen
+
+
 def _text(bericht: dict) -> str:
     zeilen = []
     if bericht["gruen"]:
@@ -405,6 +440,26 @@ def selbsttest() -> int:
         fest("K7 Werkzeugfehler getrennt", vierter["werkzeugfehler"]
                and not vierter["befunde"] and not vierter["gruen"])
 
+        # C14: Schließpfad nur bei vollständig grünem Lauf (nie bei Befund,
+        # Werkzeugfehler oder Teilprüfung).
+        aufrufe: list[list[str]] = []
+
+        def _fake_gh(cmd: list[str]) -> str:
+            aufrufe.append(cmd)
+            if cmd[:2] == ["issue", "list"]:
+                return json.dumps([{"number": 1229}])
+            return ""
+
+        fest("K9a kein Schließen bei Befund",
+             issues_schliessen(bericht, runner=_fake_gh) == [])
+        fest("K9b kein Schließen bei Werkzeugfehler",
+             issues_schliessen(vierter, runner=_fake_gh) == [])
+        fest("K9c kein Schließen bei Teilprüfung",
+             issues_schliessen(dritter, runner=_fake_gh, vollstaendig=False) == [])
+        fest("K9d Schließen bei vollständig grün",
+             issues_schliessen(dritter, runner=_fake_gh, vollstaendig=True) == [1229]
+             and any(c[:3] == ["issue", "close", "1229"] for c in aufrufe))
+
         # C15: Der Selbsttest schreibt nie in den echten Baum
         echt = os.path.join(ROOT, STATE_REL)
         fest("K8 schreibfrei", not os.path.exists(echt)
@@ -448,15 +503,20 @@ def main(argv: list[str] | None = None) -> int:
         print(_text(bericht))
     if args.issue:
         try:
-            titel = issue_oeffnen(bericht)
+            if bericht["gruen"] and set(bereiche) == set(BEREICHE):
+                geschlossen = issues_schliessen(bericht, vollstaendig=True)
+                if geschlossen:
+                    liste = ", ".join(f"#{n}" for n in geschlossen)
+                    print(f"::notice::Nachlauf-Wache grün – geschlossen: {liste}")
+            else:
+                titel = issue_oeffnen(bericht)
+                if titel:
+                    print(f"::notice::Nachlauf-Wache: Issue geöffnet – {titel}")
+                elif bericht["befunde"]:
+                    print("::notice::Nachlauf-Wache: Befund bereits gemeldet – kein "
+                          "zweites Issue.")
         except Exception as fehler:                  # noqa: BLE001
-            print(f"::warning::Nachlauf-Wache: Issue nicht geöffnet ({fehler})")
-        else:
-            if titel:
-                print(f"::notice::Nachlauf-Wache: Issue geöffnet – {titel}")
-            elif bericht["befunde"]:
-                print("::notice::Nachlauf-Wache: Befund bereits gemeldet – kein "
-                      "zweites Issue.")
+            print(f"::warning::Nachlauf-Wache: Issue-Pflege fehlgeschlagen ({fehler})")
     if bericht["werkzeugfehler"]:
         return 2
     return 0 if not bericht["befunde"] else 1

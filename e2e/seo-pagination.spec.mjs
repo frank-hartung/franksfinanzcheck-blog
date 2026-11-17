@@ -23,8 +23,10 @@ test.describe('SEO-Regressionen: Pagination, Sitemap, Metadaten', () => {
       }
       expect(await page.title()).toContain('Seite 2');
       await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', SITE_ORIGIN + path);
-      const schemas = await page.locator('script[type="application/ld+json"]').allTextContents();
-      expect(schemas.some(s => JSON.parse(s)['@type'] === 'CollectionPage')).toBe(false);
+      const schemas = (await page.locator('script[type="application/ld+json"]').allTextContents())
+        .map(JSON.parse)
+        .flatMap(d => (Array.isArray(d?.['@graph']) ? d['@graph'] : [d]));
+      expect(schemas.some(s => s?.['@type'] === 'CollectionPage')).toBe(false);
     }
   });
   test('Werkzeuge: prägnanter einzigartiger Titel', async ({ page }) => {
@@ -64,9 +66,11 @@ test.describe('SEO-Regressionen: Pagination, Sitemap, Metadaten', () => {
     await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute('content', title);
     await expect(page.locator('meta[name=robots]')).toHaveAttribute('content', /max-image-preview:large/);
     await page.goto(await newestArticlePath(page));
-    const data = (await page.locator('script[type="application/ld+json"]').allTextContents()).map(JSON.parse);
-    const article = data.find(d => d['@type'] === 'Article');
-    const person = data.find(d => d['@type'] === 'Person');
+    const data = (await page.locator('script[type="application/ld+json"]').allTextContents())
+      .map(JSON.parse)
+      .flatMap(d => (Array.isArray(d?.['@graph']) ? d['@graph'] : [d]));
+    const article = data.find(d => d?.['@type'] === 'Article');
+    const person = data.find(d => d?.['@type'] === 'Person');
     expect(article.author.jobTitle).toBe(person.jobTitle);
     const modified = await page.locator('meta[property="article:modified_time"]').getAttribute('content');
     expect(Date.parse(modified)).toBe(Date.parse(article.dateModified));
