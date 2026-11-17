@@ -8,7 +8,7 @@ X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:telegram:2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-rou
  ter-standort:nutzen:2026-11-17@franksfinanzcheck.de
-DTSTAMP:20261117T143828Z
+DTSTAMP:20261117T144131Z
 DTSTART:20261117T170000Z
 DTEND:20261117T171500Z
 SUMMARY:Telegram (Kanal): WLAN-Frust lösen: So findest du den besten R
@@ -23,7 +23,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-
  aus-dem:nutzen:2026-11-21@franksfinanzcheck.de
-DTSTAMP:20261117T143828Z
+DTSTAMP:20261117T144131Z
 DTSTART:20261121T060000Z
 DTEND:20261121T061500Z
 SUMMARY:Telegram (Kanal): Gaspreiserhöhung Sonderkündigungsrecht: Grun
@@ -38,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dei
  n-geld-zurueck:nutzen:2026-11-22@franksfinanzcheck.de
-DTSTAMP:20261117T143828Z
+DTSTAMP:20261117T144131Z
 DTSTART:20261122T060000Z
 DTEND:20261122T061500Z
 SUMMARY:Telegram (Kanal): Flugverspätung Entschädigung: So holst du de
@@ -53,7 +53,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem
  -waschgang:nutzen:2026-11-28@franksfinanzcheck.de
-DTSTAMP:20261117T143828Z
+DTSTAMP:20261117T144131Z
 DTSTART:20261128T060000Z
 DTEND:20261128T061500Z
 SUMMARY:Telegram (Kanal): Waschmaschine beladen: Weniger Kosten bei je
@@ -68,7 +68,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brau
  chst-dein:nutzen:2026-11-29@franksfinanzcheck.de
-DTSTAMP:20261117T143828Z
+DTSTAMP:20261117T144131Z
 DTSTART:20261129T060000Z
 DTEND:20261129T061500Z
 SUMMARY:Telegram (Kanal): Wie viel Streaming‑Bandbreite: Du wirklich b
