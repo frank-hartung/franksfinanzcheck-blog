@@ -250,7 +250,9 @@ Nutze dein Kündigungsfenster aus dem 4K‑Prüfpfad. Hebe den Brief mit der Erh
 
 Jetzt hast du alles beisammen. Du findest einen günstigen Anschluss, umgehst die Fallen und senkst deine festen Kosten.
 
- Rechne die Summe für 24 Monate aus; das ist ein Modellwert. Dann surfst du entspannt und sparsam.### Welche Rolle spielt der Router beim Tempo?
+Rechne die Summe für 24 Monate aus; das ist ein Modellwert. Dann surfst du entspannt und sparsam.
+
+### Welche Rolle spielt der Router beim Tempo?
 
 Viel. Ein alter Router bremst die Leitung. Stell ihn frei, nicht in einen Schrank. Per Kabel misst du am ehrlichsten.
 

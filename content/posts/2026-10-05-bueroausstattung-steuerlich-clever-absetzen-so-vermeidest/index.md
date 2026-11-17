@@ -197,7 +197,9 @@ Ja. Büroausstattung und Tagespauschale sind zwei getrennte Posten. Beide gehör
 
 Dann kann das Finanzamt die Ausgabe streichen. Hebe Nachweise bis zum fertigen Steuerbescheid auf. Läuft eine Abschreibung, hebe sie über die ganze Nutzungsdauer auf.
 
-Mit Inventur, sauberen Belegen und der 800-Euro-Grenze im Kopf kannst du deine Büroausstattung steuerlich clever absetzen; das ist ein Rechenbeispiel. Dann macht dir auch das Finanzamt keinen Strich durch die Rechnung.### Zählt ein zweiter Bildschirm als Arbeitsmittel?
+Mit Inventur, sauberen Belegen und der 800-Euro-Grenze im Kopf kannst du deine Büroausstattung steuerlich clever absetzen; das ist ein Rechenbeispiel. Dann macht dir auch das Finanzamt keinen Strich durch die Rechnung.
+
+### Zählt ein zweiter Bildschirm als Arbeitsmittel?
 
 Ja, wenn du ihn für die Arbeit nutzt. Notiere den Zweck zum Beleg. Bei gemischter Nutzung teilst du den Betrag auf.
 

@@ -6190,3 +6190,118 @@ entscheidungen:
     dort nicht genannt: Der Abschnitt sagt ausdrücklich ''Wir nennen auch keine feste
     Quote für den Einkauf im Alltag'', Cashback sei ein Extra und keine Grundlage,
     und ausgezahlt werde nur nach den Regeln des jeweiligen Programms.'
+- slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  befund_ursprung_slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  befund_id: 96b7b7768d402884810c
+  befund_fassung: ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4
+  geprueft_fassung: 445d1416391a64465b76a3faceaadf27fe9447bda28417a55ccfd2827ecaf2db
+  typ: luecke
+  beanstandung: Aussage, dass Einlagen bis 100.000 € durch die deutsche Einlagensicherung
+    geschützt sind, wird nicht belegt.
+  beleg: https://www.bundesbank.de/de/aufgaben/finanzaufsicht/einzelaspekte/einlagensicherung-597886
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 17.11.2026'
+  entschieden_am: '2026-11-17'
+  fassung_wechsel: true
+  begruendung: 'Am 17.11.2026 gegen die Primärquelle geprüft. Die früher verlinkte
+    Bundesbank-Seite .../bankenaufsicht/einlagensicherung/einlagensicherung-602936
+    ist tot (läuft ins Leere); im FAQ-Antworttext und im Frontmatter-Block quellen
+    steht jetzt die geprüfte Seite ''Einlagensicherung'' (.../finanzaufsicht/einzelaspekte/einlagensicherung-597886).
+    Inhaltlich übernommen: gesetzlicher Anspruch bis 100.000 Euro je Einleger und
+    je Bank einschließlich Zinsansprüchen, Auszahlung spätestens sieben Arbeitstage
+    nach Feststellung des Entschädigungsfalls, erhöhter Schutz von 500.000 Euro für
+    bis zu sechs Monate bei besonders schutzwürdigen Einlagen. Ergänzt wurde außerdem
+    der fehlende Punkt vor ''Moderne Apps sind zudem sicher''. Die Aussage ist damit
+    belegt statt nur behauptet.'
+  vorgaenger_geprueft_fassung: c93cf918555f3c3022510ac39f5fe69f35daf130e90dc84450a586735e524416
+  folgeentscheidung: true
+- slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  befund_ursprung_slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  befund_id: 33e736ac6afe996b491a
+  befund_fassung: ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4
+  geprueft_fassung: 445d1416391a64465b76a3faceaadf27fe9447bda28417a55ccfd2827ecaf2db
+  typ: luecke
+  beanstandung: Behauptung, dass Echtzeit‑Überweisungen bei kostenlosen Konten generell
+    gebührenfrei sind, fehlt jede Quelle.
+  beleg: https://www.bundesbank.de/de/aufgaben/unbarer-zahlungsverkehr/veroeffentlichungen/fragen-und-antworten-zu-echtzeitueberweisungen-und-empfaengerueberpruefung
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 17.11.2026'
+  entschieden_am: '2026-11-17'
+  fassung_wechsel: true
+  begruendung: 'Der Befund ist berechtigt, und die Aussage war sachlich falsch: Eine
+    generelle Gebührenfreiheit von Echtzeit-Überweisungen gibt es nicht. Die Bundesbank
+    (Fragen und Antworten zu Echtzeitüberweisungen und Empfängerüberprüfung, geprüft
+    am 17.11.2026) formuliert die Rechtslage so: Die Kosten für Echtzeitüberweisungen
+    dürfen nicht höher sein als die Kosten für herkömmliche Überweisungen gleicher
+    Art - Preisparität also, nicht Kostenlosigkeit. Der Artikel nennt deshalb in Kurzantwort,
+    Wichtigstes in Kürze, Kostenfaktoren, Extras, 10-Minuten-Check und in der Vergleichstabelle
+    nur noch diese Preisparität, mit den Stichtagen 09.01.2025 (Empfangspflicht) und
+    09.10.2025 (Sendepflicht). Die unbelegte Gratis-Aussage ist entfernt.'
+  vorgaenger_geprueft_fassung: c93cf918555f3c3022510ac39f5fe69f35daf130e90dc84450a586735e524416
+  folgeentscheidung: true
+- slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  befund_ursprung_slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  befund_id: a25bb6bbcb25ba8b0e22
+  befund_fassung: ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4
+  geprueft_fassung: 445d1416391a64465b76a3faceaadf27fe9447bda28417a55ccfd2827ecaf2db
+  typ: luecke
+  beanstandung: Angabe von Dispozinsen von 8 % bis 11 % ohne Quellenangabe.
+  beleg: https://www.bundesbank.de/de/statistiken/geld-und-kapitalmaerkte/zinssaetze-und-renditen/mfi-zinsstatistik-bestaende-neugeschaeft--650658
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 17.11.2026'
+  entschieden_am: '2026-11-17'
+  fassung_wechsel: true
+  begruendung: 'Die Spanne ''ca. 8 % bis 11 %'' hatte keine Quelle und ist aus der
+    Vergleichstabelle entfernt. An ihre Stelle tritt der amtliche Messwert: Bundesbank
+    MFI-Zinsstatistik, Bestände, Zeitreihe BBIM1.M.DE.B.A2Z1.A.R.A.2250.EUR.N - revolvierende
+    Kredite und Überziehungskredite an private Haushalte, September 2026: 9,59 % p.a.
+    effektiv bei 28.552 Mio Euro Volumen; die acht Vormonate lagen zwischen 9,19 %
+    und 9,46 % (Statistikstand laut Seitenstempel 02.11.2026, geprüft am 17.11.2026).
+    Der Artikel benennt den Wert ausdrücklich als Durchschnitt über alle Banken und
+    verweist für den eigenen Satz auf das Preisverzeichnis des Kontomodells.'
+  vorgaenger_geprueft_fassung: c93cf918555f3c3022510ac39f5fe69f35daf130e90dc84450a586735e524416
+  folgeentscheidung: true
+- slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  befund_ursprung_slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  befund_id: 1dbeb2f8c51e78d11d49
+  befund_fassung: ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4
+  geprueft_fassung: 445d1416391a64465b76a3faceaadf27fe9447bda28417a55ccfd2827ecaf2db
+  typ: luecke
+  beanstandung: Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 €
+    an reinen Gebühren kosten, ist unbelegt.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 17.11.2026'
+  entschieden_am: '2026-11-17'
+  fassung_wechsel: true
+  begruendung: 'Beleglos entschieden, weil es keinen zulässigen Beleg gibt: In der
+    Quellen-Allowlist (data/agent_reach/faktenfrische.yaml) findet sich keine amtliche
+    oder verbraucherschützerische Erhebung zu durchschnittlichen Jahresgebühren von
+    Filialbanken, und Vergleichsportale außerhalb der Allowlist dürfen als Beleg nicht
+    herhalten. Die unbelegte Marktbehauptung ''ca. 140 Euro bis 240 Euro'' ist deshalb
+    aus dem Artikel entfernt. Die Tabelle rechnet jetzt offen mit zwei benannten Modellannahmen
+    (10,00 Euro Kontoführung im Monat und 15,00 Euro Karte im Jahr, zusammen 135,00
+    Euro im Jahr), ist als Modellrechnung gekennzeichnet, und der Text verweist Leser
+    auf beide Preis- und Leistungsverzeichnisse, statt eine Marktzahl zu behaupten.'
+  vorgaenger_geprueft_fassung: c93cf918555f3c3022510ac39f5fe69f35daf130e90dc84450a586735e524416
+  folgeentscheidung: true
+- slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  befund_ursprung_slug: 2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren
+  befund_id: f94f8ba1e4342e67e45a
+  befund_fassung: ed3e5a5a9e0b3005db02a9bf3923e77c1594cf34d99455f885f0a26775b6c4b4
+  geprueft_fassung: 445d1416391a64465b76a3faceaadf27fe9447bda28417a55ccfd2827ecaf2db
+  typ: luecke
+  beanstandung: Angabe, dass ein Kontowechsel 120 € bis 180 € im Jahr spart, fehlt
+    jede Quelle.
+  beleg: https://www.gesetze-im-internet.de/zkg/__22.html
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 17.11.2026'
+  entschieden_am: '2026-11-17'
+  fassung_wechsel: true
+  begruendung: 'Die Sparspanne von 120 Euro bis 180 Euro im Jahr war unbelegt und
+    steht nirgends mehr im Artikel; auch pin_description wirbt nicht länger mit ''bis
+    zu 120 Euro im Jahr sparen''. Der Artikel sagt stattdessen, dass die Ersparnis
+    den Gebühren im eigenen alten Preisverzeichnis entspricht. Belegt wird nur noch,
+    was gesetzlich feststeht: der Kontowechselservice nach Paragraf 21 ff. ZKG - die
+    neue Bank muss die alte Bank innerhalb von zwei Geschäftstagen nach der Ermächtigung
+    beauftragen (Paragraf 22 ZKG) und erhält dafür die Daueraufträge, die Lastschriftmandate
+    und die Buchungen der letzten 13 Monate; die Ermächtigung ist auch im Online-Banking
+    möglich (Paragraf 21 Absatz 4 ZKG). Dieselbe Quelle trägt jetzt auch die FAQ-Antwort
+    zum Lastschriftumzug. Deshalb der ZKG-Beleg statt einer erfundenen Sparzahl.'
+  vorgaenger_geprueft_fassung: c93cf918555f3c3022510ac39f5fe69f35daf130e90dc84450a586735e524416
+  folgeentscheidung: true

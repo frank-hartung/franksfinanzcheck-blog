@@ -160,7 +160,9 @@ Nicht unbedingt. Prüfe, ob dein vorhandenes Gerät zum Anschluss passt. Verglei
 Der Anbieterwechsel soll den Anschluss möglichst ohne Unterbrechung ermöglichen. Für die Dauer gelten Regeln in [§ 59 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html). Halte den vereinbarten Termin fest und melde Probleme rasch.
 
 ### Wie vergleiche ich DSL-Angebote fair?
-Nutze denselben Zeitraum und addiere Grundpreis, Rabatt, Gebühren und Routerkosten. Prüfe außerdem die Leistung an deiner Adresse und die Vertragsbedingungen.### Was kostet ein Wechsel wirklich?
+Nutze denselben Zeitraum und addiere Grundpreis, Rabatt, Gebühren und Routerkosten. Prüfe außerdem die Leistung an deiner Adresse und die Vertragsbedingungen.
+
+### Was kostet ein Wechsel wirklich?
 
 Meist nichts. Der neue Anbieter übernimmt die Portierung. Prüfe nur die Schlussrechnung des alten Vertrags. Dort können Restgebühren stehen.
 
