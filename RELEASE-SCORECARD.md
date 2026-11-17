@@ -1,6 +1,6 @@
 # Release-Scorecard – die Produktionswahrheit
 
-**Stand:** 2026-11-17 · **Modus:** live · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
+**Stand:** 2026-11-17 · **Modus:** kandidaten · **Engine:** `scripts/release_scorecard.py` · **SSOT:** `data/release_scorecard.yaml`
 
 > Eine Zeile pro Artikel, acht Dimensionen, ein Wahrheitsort. Was hier rot ist, ist rot – nichts wird weggeklammert.
 
@@ -76,7 +76,7 @@
 | `2026-09-28-zaehlerstand-ablesen-und-melden-schaetzwerte-vermeiden` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-11-27 | **freigabe-reif** |
 | `2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2027-01-11 | **freigabe-reif** |
 | `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-11 | **blockiert** |
-| `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-03 | **blockiert** |
+| `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-03 | **freigabe-reif** |
 | `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-27 | **blockiert** |
 | `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` | ✅ bestanden | ✅ bestanden | ❌ blockiert | ✅ bestanden | ✅ bestanden | geprüft (kein Hochrisiko) | nicht erforderlich | 2026-12-03 | **blockiert** |
 | `2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest` | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | ✅ bestanden | geprüft (erhöht) | nicht erforderlich | 2026-12-27 | **freigabe-reif** |
@@ -118,14 +118,14 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 
 | Check | Dimension | Wirkung | Entscheidet | Artikel |
 |---|---|---|---|---|
-| **F4-fachbefund** | faktenalter | blockiert | Mensch (Herausgeber/Redaktion) | 36 |
+| **F4-fachbefund** | faktenalter | blockiert | Mensch (Herausgeber/Redaktion) | 35 |
 | **T1w-zeichenlaenge-optimum** | technik | warnung | Maschine (deterministisch) | 3 |
 
 - **F4-fachbefund** – Schließweg: scripts/faktenfrische_befund_ledger.py (via publish_gate.fakten_befund_failures) · betroffen: `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas`, `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026`, `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit`, `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren`, `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden`, `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub` …
 
 ## Offene Fachbefunde (F4) – was die Redaktion entscheiden muss
 
-**224** offene Befunde auf **58** Seiten (live: 137 auf 36 Artikeln) · ältester **18 Tage** · Frist 14 Tage · über der Frist: **37**.
+**207** offene Befunde auf **54** Seiten (live: 132 auf 35 Artikeln) · ältester **18 Tage** · Frist 14 Tage · über der Frist: **37**.
 
 **Ein Prüfdatum schließt keinen Fachbefund.** F1 (Alter) und F4 (Inhalt) sind getrennte Verträge; die Maschine entscheidet nie fachlich. Die Arbeitsdatei mit jeder Befund-ID, dem Fassungsstand und dem fertigen Entscheidungsbefehl ist `BEFUND-AKTE.md` (`python3 scripts/faktenfrische_befund_akte.py --schreiben`).
 
@@ -133,9 +133,7 @@ _Die Dimension sagt, wo es weh tut; der Check sagt, was zu tun ist. Besitz und E
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden <ID> --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-⚠️ **168 Befunde** wurden an einem älteren Text erhoben; der Text wurde seither geändert. Entschieden wird der HEUTIGE Text – genau das macht `--entscheiden` fassungsgebunden.
-
-❌ **5 Befunde** sind nicht entscheidbar (Seite fehlt) – das ist ein Strukturfehler, kein Redaktionsrückstand.
+⚠️ **166 Befunde** wurden an einem älteren Text erhoben; der Text wurde seither geändert. Entschieden wird der HEUTIGE Text – genau das macht `--entscheiden` fassungsgebunden.
 
 🔴 **Eskalation:** 37 Befunde sind älter als 14 Tage. Fachliche Entscheidung: Herausgeber.
 
@@ -159,7 +157,7 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 
 ✅ Deckung ausreichend: Der Takt kann den Bestand halten. Ein roter Faktenstand ist damit ein echter Inhaltsbefund (F4), kein Kadenz-Artefakt.
 
-## Blockierende Funde (36 Artikel)
+## Blockierende Funde (35 Artikel)
 
 ### `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas` (blockiert, Risikoklasse standard)
 
@@ -236,10 +234,6 @@ _Ein Faktenalter wird nicht „plötzlich“ rot: Es wird überfällig, weil der
 ### `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` (blockiert, Risikoklasse standard)
 
 - **F4-fachbefund** [faktenalter]: 33278b9e7942ebfdbbac (luecke): Definition des Begriffs „Last Minute“ (maximal 14 Tage zwischen Buchung und Abreise) wird mit dem Deutschen Reiseverband angegeben, jedoch fehlt ein Nachweis.; 6ad7358a9afcfef3babb (praezision): Angabe, dass Preisalarme keinen Tiefstpreis garantieren, wird nicht durch konkrete Zahlen oder Vergleichsstudien belegt.; 7c375a3e1a9bfab1468c (luecke): Hinweis auf § 651r BGB (Insolvenzsicherung bei Pauschalreisen) enthält keinen Verweis auf eine Rechtsquelle oder Verbraucherzentrale‑Information.; ea11d36614fa115503b4 (luecke): Behauptung, dass Nachlässe von bis zu 50 % nur Einzelfälle sind, wird ohne Quellenangabe präsentiert.; f7b1c869dd8e442eaf16 (praezision): Aussage, dass der „beste Zeitpunkt zum Buchen“ ein Modellwert sei, bleibt vage und ohne messbare Daten oder Studien untermauert.
-
-### `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig` (blockiert, Risikoklasse standard)
-
-- **F4-fachbefund** [faktenalter]: 04e40219cb4ff593b415 (praezision): Die Angabe, dass Anbieter den Abschlag auf elf oder zwölf Raten verteilen, ist ohne Beleg ungenau, da die Ratenzahl vertraglich variieren kann.; 2d01dc2629ad9c81f569 (luecke): Die Aussage, dass die Grundversorgung fast immer der teuerste Tarif ist, wird nicht durch eine Quelle belegt.; 3fd64026f55df4965cc9 (luecke): Die Angabe, dass ein Grad weniger Raumtemperatur rund 6 % Heizenergie einspart, fehlt eine Quellenangabe.; 799c93c89a10fc3cf267 (luecke): Das Sonderkündigungsrecht bei Preiserhöhungen im Winter wird genannt, ohne regulatorische Grundlage zu nennen.; cd81b3d9001b04c0a4e1 (luecke): Die Behauptung, der Grundtarif der Stadtwerke sei ausschließlich eine Notversorgung und nie ein Bestpreis, ist unbelegt.
 
 ### `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` (blockiert, Risikoklasse standard)
 
