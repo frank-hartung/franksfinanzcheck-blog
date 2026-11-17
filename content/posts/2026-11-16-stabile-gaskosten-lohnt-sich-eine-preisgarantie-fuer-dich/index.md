@@ -32,7 +32,7 @@ faktencheck: 2026-11-16
 
 Der Briefkasten klappert. Du ziehst einen Umschlag heraus. Absender: Dein Energieversorger. Oft bedeutet das nichts Gutes für dein Konto.
 
-Die Kosten für Energie schwanken stark. Mal sinken sie, dann schießen sie plötzlich wieder nach oben. Viele Menschen fragen sich, wie sie ihre Fixkosten planen können. Eine **gas [preisgarantie](../../posts/2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/)** bietet hier eine Lösung.
+Die Kosten für Energie schwanken stark. Mal sinken sie, dann schießen sie plötzlich wieder nach oben. Viele Menschen fragen sich, wie sie ihre Fixkosten planen können. Eine **gas preisgarantie** bietet hier eine Lösung.
 
 Du versprichst Schutz vor Überraschungen. Doch hält sie immer, was der Name verspricht?
 

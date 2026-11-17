@@ -43,7 +43,7 @@ quellen:
 faktencheck: 2026-11-01
 ---
 
-Du willst sicher heizen? Eine [Preisgarantie](../../posts/2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/) kann helfen, deine Gaskosten besser zu planen.
+Du willst sicher heizen? Eine Preisgarantie kann helfen, deine Gaskosten besser zu planen.
 
 Sie ist aber keine Flatrate fürs Heizen. Sie hält nur bestimmte Teile des Preises fest. Verbrauchst du mehr oder steigen nicht geschützte Preisbestandteile, kann die Rechnung trotzdem höher werden.
 
