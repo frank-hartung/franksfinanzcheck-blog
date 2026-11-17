@@ -1,6 +1,6 @@
 {
-  "erzeugt": "2026-11-16T19:53:20Z",
-  "stichtag": "2026-11-16",
+  "erzeugt": "2026-11-17T04:12:37Z",
+  "stichtag": "2026-11-17",
   "offen": 209,
   "seiten": 54,
   "live_seiten": 34,
@@ -9,10 +9,10 @@
   "ohne_fassung": 11,
   "seite_fehlt": 5,
   "nicht_entscheidbar": 5,
-  "aeltester_tage": 17,
+  "aeltester_tage": 18,
   "frist_tage": 14,
   "eskalation_tage": 21,
-  "ueber_frist": 27,
+  "ueber_frist": 37,
   "in_eskalation": 0,
   "je_seite": {
     "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": 3,
@@ -77,7 +77,7 @@
       "typ": "luecke",
       "text": "Behauptung, dass Inlands‑Überweisungen in der Regel kostenlos sind, fehlt eine entsprechende Quelle.",
       "beleg": "",
-      "alter_tage": 16,
+      "alter_tage": 17,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -88,7 +88,7 @@
       "typ": "luecke",
       "text": "Behauptung, dass ein kostenloses Girokonto keine reguläre Kontoführungsgebühr erhebt, wird nicht durch die bereitgestellten Quellen belegt.",
       "beleg": "",
-      "alter_tage": 16,
+      "alter_tage": 17,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -99,7 +99,7 @@
       "typ": "luecke",
       "text": "Quantitative Aussage, dass ein kostenloses Girokonto mindestens ein Drittel der bisherigen Kontokosten einsparen kann, ist unbelegt.",
       "beleg": "",
-      "alter_tage": 16,
+      "alter_tage": 17,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -110,7 +110,7 @@
       "typ": "luecke",
       "text": "Zeitangabe, dass die Kontoeröffnung meist innerhalb weniger Werktage abgeschlossen ist, wird nicht durch die genannten Quellen gestützt.",
       "beleg": "",
-      "alter_tage": 16,
+      "alter_tage": 17,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -121,7 +121,7 @@
       "typ": "luecke",
       "text": "Angabe, dass die meisten Banken ein Mindestguthaben von ein paar hundert Euro verlangen, fehlt eine fundierte Quelle.",
       "beleg": "",
-      "alter_tage": 16,
+      "alter_tage": 17,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -132,7 +132,7 @@
       "typ": "praezision",
       "text": "Die Bewerbung des Vergleichsportals mit dem Superlativ 'Die besten Tarife' erfolgt ohne messbare Daten oder Auswahlkriterien in der Recherchegrundlage.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 15,
+      "alter_tage": 16,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -143,7 +143,7 @@
       "typ": "luecke",
       "text": "Die im Artikel als Fakten genannten Gaspreise für Oktober 2026 (11 bis 13 Cent/kWh) sind nicht durch die Fundstelle belegt, die lediglich eine allgemeine Themenübersicht darstellt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 15,
+      "alter_tage": 16,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -154,7 +154,7 @@
       "typ": "luecke",
       "text": "Der für den Verbraucherschutz zentrale Regulierungsrahmen (Sonderkündigungsrecht, Informationspflichten der Versorger) wird in der Fundstelle nicht inhaltlich bestätigt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 15,
+      "alter_tage": 16,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -165,7 +165,7 @@
       "typ": "luecke",
       "text": "Für den angeführten BDEW-Durchschnittspreis von 11,93 Cent/kWh fehlt in den Recherche-Fundstellen ein entsprechender Beleg.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 15,
+      "alter_tage": 16,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -176,7 +176,7 @@
       "typ": "luecke",
       "text": "Der Artikel lässt den in der Quelle explizit genannten Regulierungsrahmen der 'Unternehmenspflichten' unerwähnt, der für den Schutz der Verbraucher beim Anbieterwechsel zentral ist.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 15,
+      "alter_tage": 16,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -187,7 +187,7 @@
       "typ": "luecke",
       "text": "Die im Artikel genannte Ersparnis-Berechnung der Bundesnetzagentur für Januar 2026 (360 €) wird durch die allgemeine Übersichtsseite der Behörde nicht gestützt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 15,
+      "alter_tage": 16,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -198,7 +198,7 @@
       "typ": "luecke",
       "text": "Der Artikel behauptet, dass eine Preisänderung meist einen Monat vorher angekündigt werden muss, ohne dafür eine Quelle anzugeben.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 15,
+      "alter_tage": 16,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -209,7 +209,7 @@
       "typ": "praezision",
       "text": "Die Behauptung, dass eine Preisgarantie einen Teil des Risikos auf den Anbieter überträgt und dafür ein höherer Startpreis üblich ist, fehlt eine konkrete Quelle und bleibt vage.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 15,
+      "alter_tage": 16,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -220,7 +220,7 @@
       "typ": "praezision",
       "text": "Die Aussage, dass man „in der Regel“ zum Zeitpunkt der Preisänderung Sonderkündigungsrecht hat, ist unpräzise und wird nicht durch eine konkrete Regelung belegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 15,
+      "alter_tage": 16,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -231,7 +231,7 @@
       "typ": "luecke",
       "text": "Der angegebene durchschnittliche Gaspreis von 11,93 Cent/kWh für 2026 (laut BDEW) wird nicht durch eine Quelle belegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 15,
+      "alter_tage": 16,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -242,7 +242,7 @@
       "typ": "luecke",
       "text": "Die Angabe, dass die Verbraucherzentrale etwa 6 % weniger Heizenergie pro Grad niedrigerer Raumtemperatur nennt, fehlt eine Quellenangabe.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 15,
+      "alter_tage": 16,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -253,7 +253,7 @@
       "typ": "luecke",
       "text": "Die Aussage, dass die Verbraucherzentrale empfiehlt, Boni im ersten Vergleich auszublenden, fehlt eine Quellenangabe.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 14,
+      "alter_tage": 15,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -264,7 +264,7 @@
       "typ": "luecke",
       "text": "Der angegebene BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird nicht belegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 14,
+      "alter_tage": 15,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -275,7 +275,7 @@
       "typ": "praezision",
       "text": "Die pauschale Formulierung, dass bei zentraler Heizung der Vermieter oder die Eigentümergemeinschaft den Anbieter wählt, ist zu ungenau und nicht belegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 14,
+      "alter_tage": 15,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -286,7 +286,7 @@
       "typ": "luecke",
       "text": "Der Artikel behauptet, dass laut Bundesnetzagentur Preisänderungen klar angekündigt und begründet sein müssen, liefert jedoch keinen Beleg dafür.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 14,
+      "alter_tage": 15,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -297,7 +297,7 @@
       "typ": "luecke",
       "text": "Es wird angegeben, dass bei einer Preisänderung in der Regel ein Sonderkündigungsrecht besteht, ohne dafür eine Quelle zu nennen.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 14,
+      "alter_tage": 15,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -308,7 +308,7 @@
       "typ": "luecke",
       "text": "Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quellenangabe.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 14,
+      "alter_tage": 15,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -319,7 +319,7 @@
       "typ": "luecke",
       "text": "Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird ohne Quelle angegeben.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 14,
+      "alter_tage": 15,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -330,7 +330,7 @@
       "typ": "luecke",
       "text": "Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt rund 180 € im Jahr“ wird nicht belegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 14,
+      "alter_tage": 15,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -341,7 +341,7 @@
       "typ": "praezision",
       "text": "Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“ ist ein Superlativ ohne messbare Daten oder Vergleichskriterien.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 14,
+      "alter_tage": 15,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -352,7 +352,7 @@
       "typ": "luecke",
       "text": "Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne Quellenangabe genannt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 14,
+      "alter_tage": 15,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -363,7 +363,7 @@
       "typ": "praezision",
       "text": "Die Angabe, dass Anbieter den Abschlag auf elf oder zwölf Raten verteilen, ist ohne Beleg ungenau, da die Ratenzahl vertraglich variieren kann.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -374,7 +374,7 @@
       "typ": "luecke",
       "text": "Die Aussage, dass die Grundversorgung fast immer der teuerste Tarif ist, wird nicht durch eine Quelle belegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -385,7 +385,7 @@
       "typ": "luecke",
       "text": "Die Angabe, dass ein Grad weniger Raumtemperatur rund 6 % Heizenergie einspart, fehlt eine Quellenangabe.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -396,7 +396,7 @@
       "typ": "luecke",
       "text": "Das Sonderkündigungsrecht bei Preiserhöhungen im Winter wird genannt, ohne regulatorische Grundlage zu nennen.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -407,7 +407,7 @@
       "typ": "luecke",
       "text": "Die Behauptung, der Grundtarif der Stadtwerke sei ausschließlich eine Notversorgung und nie ein Bestpreis, ist unbelegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -418,7 +418,7 @@
       "typ": "praezision",
       "text": "Während der Artikel vor hohen Kosten für Festmenüs warnt, liegt die Preissteigerung bei Nahrungsmitteln laut Destatis im Oktober 2026 bei lediglich +0,4 % und damit deutlich unter der allgemeinen Inflation.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -429,7 +429,7 @@
       "typ": "praezision",
       "text": "Die Pauschale für 'Anreise und Mobilität' (10 % des Budgets) berücksichtigt nicht die überdurchschnittliche Preissteigerung bei Energie von +14,9 %, die Fahrtkosten im Vergleich zum Vorjahr massiv verteuern kann.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -440,7 +440,7 @@
       "typ": "luecke",
       "text": "Die Modellrechnung für das Weihnachtsbudget (600 €) lässt die aktuelle Teuerungsrate unberücksichtigt. Laut Statistischen Bundesamt liegt die Inflationsrate im Oktober 2026 bei +2,8 %, was als Referenzwert für die Budgetplanung zum Vorjahr fehlt.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -451,7 +451,7 @@
       "typ": "luecke",
       "text": "Es fehlt der für Campingbuchungen relevante Regulierungsrahmen (Unterscheidung Mietrecht bei Stellplätzen vs. Reiserecht), den die Fundstelle für den Bereich Reise nur allgemein andeutet.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -462,7 +462,7 @@
       "typ": "luecke",
       "text": "Die Preisangabe von 20 bis 45 € pro Nacht wird als realistischer Wert positioniert, ist jedoch nicht durch Marktdaten oder eine Referenzstelle in den Fundstellen belegt.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -473,7 +473,7 @@
       "typ": "praezision",
       "text": "Der Verweis auf die Verbraucherzentrale zur Prüfung von Buchungsangaben führt auf eine allgemeine Übersichtsseite ohne konkrete Checklisten für Camping-Angebote.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -484,7 +484,7 @@
       "typ": "luecke",
       "text": "Die Verbraucherzentrale sammelt Hinweise zu Reisebuchungen, auch zu unklaren Angeboten und Problemen mit Online-Buchungen.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -495,7 +495,7 @@
       "typ": "praezision",
       "text": "Ein Mietwagenvergleich kann Angebote sichtbar machen, prüft aber nicht automatisch, ob das Auto zum individuellen Urlaub passt – ohne Messgröße bleibt die Aussage ungenau.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -506,7 +506,7 @@
       "typ": "luecke",
       "text": "Die Verbraucherzentrale beschreibt, dass sich eine Pauschalreise unter bestimmten Bedingungen auf eine andere Person übertragen lässt.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -517,7 +517,7 @@
       "typ": "luecke",
       "text": "Die Verbraucherzentrale empfiehlt, größere Ausgaben vorauszuplanen und das eigene Budget im Blick zu behalten.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -528,7 +528,7 @@
       "typ": "luecke",
       "text": "Bei einer Pauschalreise gilt die Mitteilung als rechtzeitig, wenn sie dem Veranstalter spätestens sieben Tage vor Reisebeginn zugeht (§ 651e BGB).",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -540,7 +540,7 @@
       "typ": "luecke",
       "text": "Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -552,7 +552,7 @@
       "typ": "luecke",
       "text": "Die Aussage, dass durch frühzeitige Bestellung Kosten um 10 % bis 20 % im Herbst eingespart werden können, ist unbelegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -564,7 +564,7 @@
       "typ": "luecke",
       "text": "Die Modellrechnung verwendet einen Tiefpreis von 0,80 €/Liter, ohne dass diese Preisangabe belegt wird.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -576,7 +576,7 @@
       "typ": "luecke",
       "text": "Es wird angegeben, dass typische Fehler beim Heizölkauf bis zu 15 % Mehrkosten verursachen können, jedoch fehlt ein Nachweis für diese Zahl.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -588,7 +588,7 @@
       "typ": "praezision",
       "text": "Die Faustregel, dass man bestellen sollte, wenn Preise vier Wochen unter dem Schnitt der letzten 12 Monate liegen, wird ohne Messgrundlage oder Quelle genannt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 13,
+      "alter_tage": 14,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -599,7 +599,7 @@
       "typ": "luecke",
       "text": "Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 € an reinen Gebühren kosten, ist unbelegt.",
       "beleg": "",
-      "alter_tage": 12,
+      "alter_tage": 13,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -610,7 +610,7 @@
       "typ": "luecke",
       "text": "Behauptung, dass Echtzeit‑Überweisungen bei kostenlosen Konten generell gebührenfrei sind, fehlt jede Quelle.",
       "beleg": "",
-      "alter_tage": 12,
+      "alter_tage": 13,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -621,7 +621,7 @@
       "typ": "luecke",
       "text": "Aussage, dass Einlagen bis 100.000 € durch die deutsche Einlagensicherung geschützt sind, wird nicht belegt.",
       "beleg": "",
-      "alter_tage": 12,
+      "alter_tage": 13,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -632,7 +632,7 @@
       "typ": "luecke",
       "text": "Angabe von Dispozinsen von 8 % bis 11 % ohne Quellenangabe.",
       "beleg": "",
-      "alter_tage": 12,
+      "alter_tage": 13,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -643,7 +643,7 @@
       "typ": "luecke",
       "text": "Angabe, dass ein Kontowechsel 120 € bis 180 € im Jahr spart, fehlt jede Quelle.",
       "beleg": "",
-      "alter_tage": 12,
+      "alter_tage": 13,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -654,7 +654,7 @@
       "typ": "praezision",
       "text": "Die im Teaser und Text genannten monatlichen Ersparnisse von 350 € bis 600 € werden als Marktfakten ohne Quellenbeleg oder methodische Herleitung (z. B. Referenzhaushalt des Statistischen Bundesamtes) angeführt.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 12,
+      "alter_tage": 13,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -665,7 +665,7 @@
       "typ": "luecke",
       "text": "Der Ratgeber empfiehlt Tarifwechsel bei Energie zur Kostensenkung, verschweigt aber den aktuellen Markttrend massiv steigender Energiepreise (+14,9 %), was die Kalkulation der 50-Prozent-Fixkostenquote gefährdet.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 12,
+      "alter_tage": 13,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -676,7 +676,7 @@
       "typ": "veraltet",
       "text": "Die Einschätzung zur Inflation ist unpräzise: Die aktuelle Inflationsrate liegt laut Destatis bei +2,8 % (Oktober 2026), wodurch die genannten Tagesgeldzinsen von 0,5 % bis 1,5 % den Wertverlust deutlich weniger ausgleichen als suggeriert.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 12,
+      "alter_tage": 13,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -687,7 +687,7 @@
       "typ": "luecke",
       "text": "Angaben zum Fremdwährungsentgelt von „fast zwei Prozent“ bei Zahlungen in fremder Währung fehlen jede belegbare Referenz.",
       "beleg": "",
-      "alter_tage": 12,
+      "alter_tage": 13,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -698,7 +698,7 @@
       "typ": "praezision",
       "text": "Formulierungen wie „einige Anbieter ohne Auslandsgebühr gehören zu den besten Karten für Reisen“ sind pauschal und ohne messbare Daten unpräzise.",
       "beleg": "",
-      "alter_tage": 12,
+      "alter_tage": 13,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -709,7 +709,7 @@
       "typ": "luecke",
       "text": "Die Aussage, dass die kostenlose Sperr‑Notrufnummer 116 für alle Karten in Deutschland gilt, wird nicht durch eine Quelle gestützt.",
       "beleg": "",
-      "alter_tage": 12,
+      "alter_tage": 13,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -720,7 +720,7 @@
       "typ": "luecke",
       "text": "Die Angabe, dass Sollzinsen bei Teilzahlung zwischen 12 % und 20 % liegen, ist nicht mit einer Quelle belegt.",
       "beleg": "",
-      "alter_tage": 12,
+      "alter_tage": 13,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -731,7 +731,7 @@
       "typ": "luecke",
       "text": "Die Behauptung, dass eine gute Kreditkarte im Jahr nichts kostet (keine Jahres‑ und keine Fremdwährungsgebühr), wird ohne jegliche Quelle angegeben.",
       "beleg": "",
-      "alter_tage": 12,
+      "alter_tage": 13,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -742,7 +742,7 @@
       "typ": "luecke",
       "text": "Der Ratgeber vernachlässigt bei der Kalkulation der Sparfähigkeit die massive Preissteigerung bei Energie (+14,9 %), die das Budget für monatliche Sparraten erheblich belastet.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 11,
+      "alter_tage": 12,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -753,7 +753,7 @@
       "typ": "veraltet",
       "text": "Die im Rechenbeispiel zur Realrendite genutzte Inflationsrate von 2 % ist veraltet; die vorläufige Rate für Oktober 2026 beträgt laut Statistischem Bundesamt 2,8 %.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 11,
+      "alter_tage": 12,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -764,7 +764,7 @@
       "typ": "praezision",
       "text": "Die Kalkulation der Fixkostenersparnis bei Energie (Strom/Gas) ist unpräzise, da sie den aktuellen Preisanstieg von +14,9 % bei Energieprodukten nicht einbezieht.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 11,
+      "alter_tage": 12,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -775,7 +775,7 @@
       "typ": "luecke",
       "text": "Bei den Einsparpotenzialen für Lebensmittel fehlt der Bezug zur aktuellen Preissteigerung von +0,4 % bei Nahrungsmitteln.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 11,
+      "alter_tage": 12,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -786,7 +786,7 @@
       "typ": "veraltet",
       "text": "Der Artikel nutzt Kostenszenarien für 2024/2025, während aktuelle Daten für Oktober 2026 eine Inflationsrate von +2,8 % ausweisen.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 11,
+      "alter_tage": 12,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -797,7 +797,7 @@
       "typ": "luecke",
       "text": "Die im Rechenbeispiel genutzte Kilometerpauschale von 0,20 €/km wird als Referenzwert ohne Quellenangabe (z. B. Branchenverband) angeführt.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 11,
+      "alter_tage": 12,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -808,7 +808,7 @@
       "typ": "luecke",
       "text": "Der als Handlungsschritt empfohlene '4K-Prüfpfad' wird im Text nicht erläutert und ist in der genannten Quelle nicht enthalten.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 11,
+      "alter_tage": 12,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -819,7 +819,7 @@
       "typ": "luecke",
       "text": "Die Preisprognose (Anstieg in den letzten 3 Wochen) und der empfohlene Buchungsvorlauf (3-4 Wochen) sind Marktdaten ohne Beleg durch die Fachquelle.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 11,
+      "alter_tage": 12,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -830,7 +830,7 @@
       "typ": "praezision",
       "text": "Das Versprechen, CHECK24 vergleiche 'alle großen Anbieter', ist ein Vollständigkeitsversprechen ohne Nennung von Auswahlkriterien oder der Marktabdeckung.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 11,
+      "alter_tage": 12,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -841,7 +841,7 @@
       "typ": "praezision",
       "text": "Behauptung, dass Überladung der Maschine zu schnellerem Verschleiß und teuren Reparaturen führt, wird ohne konkrete Daten oder Messgröße angegeben.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 11,
+      "alter_tage": 12,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -852,7 +852,7 @@
       "typ": "praezision",
       "text": "Aussage, dass das richtige Beladen allein die Fixkosten senkt, ohne weitere Maßnahmen, ist ein pauschales Leistungsversprechen ohne Nennung von Mechanismen oder Grenzen.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 11,
+      "alter_tage": 12,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -863,7 +863,7 @@
       "typ": "luecke",
       "text": "Die Modellrechnung (0,9 kWh/50 L bei vollem Waschgang, 0,6 kWh/35 L bei halbem Waschgang, Strompreis 0,40 €/kWh, Wasserpreis 0,005 €/L) und die daraus resultierende Jahresersparnis von 22 € fehlen einer fundierten Quelle.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 11,
+      "alter_tage": 12,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -874,7 +874,7 @@
       "typ": "luecke",
       "text": "Die Aussage, dass bei 4 Waschgängen pro Woche ein durchschnittlicher Haushalt rund 5 € jährlich an Strom‑ und Wasserkosten spart, ist nicht mit einer Quelle belegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 11,
+      "alter_tage": 12,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -885,7 +885,7 @@
       "typ": "luecke",
       "text": "Angabe, dass ein optimal beladener Trommel (ca. 80 % Kapazität) bis zu 15 % weniger Wasser und Energie verbraucht, wird nicht durch eine Quelle belegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 11,
+      "alter_tage": 12,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -896,7 +896,7 @@
       "typ": "praezision",
       "text": "Während Meal Prep als großer Sparhebel betont wird, zeigt die Marktlage für Nahrungsmittel eine moderate Teuerung von nur 0,4 %, was die Priorisierung der Sparbemühungen relativiert.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 10,
+      "alter_tage": 11,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -907,7 +907,7 @@
       "typ": "luecke",
       "text": "Der Ratgeber empfiehlt die Revision von Fixkosten, lässt aber die drastische Preissteigerung bei Energie von +14,9 % unerwähnt, die ein wesentlicher Treiber der Haushaltsausgaben ist.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 10,
+      "alter_tage": 11,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -918,7 +918,7 @@
       "typ": "veraltet",
       "text": "Die Budget-Tipps berücksichtigen nicht die aktuelle Inflationsrate von 2,8 % (Stand Oktober 2026), was die Kaufkraft-Annahmen im Haushaltsbuch beeinflusst.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 10,
+      "alter_tage": 11,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -929,7 +929,7 @@
       "typ": "luecke",
       "text": "Der Ratgeber nennt Sparbeispiele für Heizkosten, lässt aber die aktuelle Preissteigerung bei Energie von +14,9 % (Stand Oktober 2026) unerwähnt, die den finanziellen Druck auf Haushalte massiv erhöht.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 10,
+      "alter_tage": 11,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -940,7 +940,7 @@
       "typ": "praezision",
       "text": "Die in Aussicht gestellten Ersparnisse von bis zu 200 € werden nicht ins Verhältnis zur aktuellen Inflationsrate von +2,8 % gesetzt, welche die reale Kaufkraft des gesparten Geldes mindert.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 10,
+      "alter_tage": 11,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -951,7 +951,7 @@
       "typ": "praezision",
       "text": "Beim Fokus auf Lebensmittelplanung fehlt der Hinweis auf die vergleichsweise moderate Preissteigerung von +0,4 % bei Nahrungsmitteln, was diesen Hebel gegenüber den stark steigenden Energiekosten relativiert.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 10,
+      "alter_tage": 11,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -962,7 +962,7 @@
       "typ": "veraltet",
       "text": "Die Kalkulation der Fixkosten (Energie 140 €) und die Empfehlung zur Senkung der Kosten ignorieren den aktuellen Markttrend massiv steigender Energiepreise (+14,9 %), was die 50-Prozent-Quote für notwendige Ausgaben gefährdet.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 10,
+      "alter_tage": 11,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -973,7 +973,7 @@
       "typ": "luecke",
       "text": "Der Ratgeber verspricht eine 'planbare' Budgetierung, lässt aber die aktuelle Inflationsrate von 2,8 % unerwähnt, die insbesondere den Block der notwendigen Ausgaben (Nahrungsmittel +0,4 %) dynamisch belastet.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 10,
+      "alter_tage": 11,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -984,7 +984,7 @@
       "typ": "luecke",
       "text": "Die kalkulierte Ersparnis bei Energiekosten (15 €/Monat) berücksichtigt nicht den aktuellen Markttrend massiv steigender Preise (+14,9 % bei Energie).",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 10,
+      "alter_tage": 11,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -995,7 +995,7 @@
       "typ": "luecke",
       "text": "Die pauschalen Jahressparwerte von 300 € bis 1.000 € werden in Marktfakten-Positur ohne Nennung einer Referenzquelle oder eines Absenders (z. B. Destatis) aufgeführt.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 10,
+      "alter_tage": 11,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1006,7 +1006,7 @@
       "typ": "praezision",
       "text": "Die Sparversprechen im Bereich Lebensmittel vernachlässigen die Inflationsrate bei Nahrungsmitteln (+0,4 %), was Modellrechnungen ohne Inflationsbereinigung ungenau macht.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 10,
+      "alter_tage": 11,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1017,7 +1017,7 @@
       "typ": "luecke",
       "text": "Der Artikel empfiehlt, Kühl- und Gefriergeräte mindestens 24 Stunden, besser mehrere Tage zu messen, liefert jedoch keine Quelle für diese Messdauer.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 9,
+      "alter_tage": 10,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1028,7 +1028,7 @@
       "typ": "luecke",
       "text": "Es wird kein regulatorischer Rahmen (z. B. Aufgaben der Bundesnetzagentur) genannt, obwohl das Thema Stromversorgung berührt wird; entsprechende Vorgaben fehlen im Text.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 9,
+      "alter_tage": 10,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1039,7 +1039,7 @@
       "typ": "luecke",
       "text": "Die Aussage, dass Verbraucherzentralen oder Bibliotheken Messgeräte verleihen, wird ohne Beleg gemacht.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 9,
+      "alter_tage": 10,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1050,7 +1050,7 @@
       "typ": "luecke",
       "text": "Die Berechnung mit einem Arbeitspreis von 0,37 €/kWh wird angegeben, ohne dass ein aktueller Preis‑ oder Marktwert belegt wird.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 9,
+      "alter_tage": 10,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1061,7 +1061,7 @@
       "typ": "luecke",
       "text": "Das Amortisationsbeispiel (Kaufpreis 650 €, Amortisationszeit 10,3 Jahre) enthält keine Quelle für die zugrunde liegenden Annahmen oder Preise.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 9,
+      "alter_tage": 10,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1072,7 +1072,7 @@
       "typ": "luecke",
       "text": "Angaben zu gesetzlichen Vorgaben für Warmwassertemperaturen zur Vermeidung von Legionellen werden nicht durch die bereitgestellten Quellen gestützt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 9,
+      "alter_tage": 10,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1083,7 +1083,7 @@
       "typ": "luecke",
       "text": "Die Aussage, dass Warmwasser der zweitgrößte Kostenposten im Haushalt ist, wird nicht durch eine der bereitgestellten Quellen belegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 9,
+      "alter_tage": 10,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1094,7 +1094,7 @@
       "typ": "luecke",
       "text": "Die Behauptung, dass Warmwasser in der Heizkostenabrechnung üblicherweise als eigener Block ausgewiesen wird, fehlt eine Quellenangabe.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 9,
+      "alter_tage": 10,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1105,7 +1105,7 @@
       "typ": "luecke",
       "text": "Verweise auf die Verbraucherzentrale (Tipps zum Heizkosten sparen, Heizung optimieren) können nicht mit den angegebenen Fundstellen belegt werden.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 9,
+      "alter_tage": 10,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1116,7 +1116,7 @@
       "typ": "luecke",
       "text": "Der Preis von 0,30 € pro Kilowattstunde in der Modellrechnung ist nicht mit einer Quelle belegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 9,
+      "alter_tage": 10,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1127,7 +1127,7 @@
       "typ": "luecke",
       "text": "Der Text nennt eine angeblich gängige Faustregel von 20 % Rabatt im Spätsommer (Beispiel 300 € → 240 €) ohne Quellenangabe.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 9,
+      "alter_tage": 10,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1138,7 +1138,7 @@
       "typ": "luecke",
       "text": "Es wird angegeben, dass Flüge an Dienstagen und Mittwochen günstiger seien und an Freitagen bzw. Sonntagen teurer, ohne Beleg.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 9,
+      "alter_tage": 10,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1149,7 +1149,7 @@
       "typ": "luecke",
       "text": "Die Empfehlung, Flüge vier bis acht Wochen im Voraus zu buchen, weil die Preise dann am niedrigsten seien, wird nicht belegt.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 9,
+      "alter_tage": 10,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1160,7 +1160,7 @@
       "typ": "luecke",
       "text": "Der Artikel behauptet, dass im Spätsommer die Nachfrage nach Flügen sinkt und dadurch die Preise fallen, ohne dafür eine Quelle anzugeben.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 9,
+      "alter_tage": 10,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1171,7 +1171,7 @@
       "typ": "luecke",
       "text": "Behauptet wird, dass Kombi‑Deals für Flug + Mietwagen typischerweise 5–15 % Einsparungen bringen, ohne Nachweis.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 9,
+      "alter_tage": 10,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1182,7 +1182,7 @@
       "typ": "luecke",
       "text": "Die im Marktradar angegebenen Durchschnittspreise für Strom (37,3 ct/kWh) und Gas (12,23 ct/kWh) werden ohne Quellenangabe genannt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 9,
+      "alter_tage": 10,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1193,7 +1193,7 @@
       "typ": "luecke",
       "text": "Die Aussage, dass bei Preiserhöhungen ein gesetzliches 14‑tägiges Sonderkündigungsrecht besteht, fehlt eine rechtliche Quellenangabe.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 9,
+      "alter_tage": 10,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1204,7 +1204,7 @@
       "typ": "luecke",
       "text": "Die Behauptung, dass ein Lieferantenwechsel und ein technischer Anschlusswechsel nicht dasselbe seien, wird nicht durch eine Quelle belegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 9,
+      "alter_tage": 10,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1216,7 +1216,7 @@
       "typ": "luecke",
       "text": "Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 7,
+      "alter_tage": 8,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1228,7 +1228,7 @@
       "typ": "praezision",
       "text": "Die Empfehlung, dynamische Tarife erforderten zwingend einen Smart Meter, wird ohne Angabe von Voraussetzungen, Kosten oder Verfügbarkeit präzisiert.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 7,
+      "alter_tage": 8,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1240,7 +1240,7 @@
       "typ": "luecke",
       "text": "Es wird eine Prognose für den Strompreis 2026 angegeben („Trends erkennen“, „Netzentgelte steigen“), ohne dass dafür aktuelle Marktdaten oder offizielle Prognosen genannt werden.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 7,
+      "alter_tage": 8,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1252,7 +1252,7 @@
       "typ": "luecke",
       "text": "Der Artikel behauptet, dass Preisgarantien vor Preissteigerungen schützen, liefert jedoch keine Quelle für diese Aussage.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 7,
+      "alter_tage": 8,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1264,7 +1264,7 @@
       "typ": "luecke",
       "text": "Die Aussage, dass Ökostrom‑Tarife häufig günstiger als die Grundversorgung seien, wird nicht durch eine Quelle belegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 7,
+      "alter_tage": 8,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1275,7 +1275,7 @@
       "typ": "luecke",
       "text": "Ein relevanter regulatorischer Rahmen (z. B. Vorgaben der Bundesnetzagentur oder BDEW) wird nicht genannt, obwohl die Fundstelle darauf hinweist, dass solche Vorgaben existieren.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 6,
+      "alter_tage": 7,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1286,7 +1286,7 @@
       "typ": "praezision",
       "text": "Die Aussage, dass bestimmte Gerätegruppen (TV‑Ecke, Homeoffice, alte Audio‑Technik) zuerst zu senken „lohnt“, wird ohne messbare Daten oder Vergleichskriterien gemacht.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 6,
+      "alter_tage": 7,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1297,7 +1297,7 @@
       "typ": "luecke",
       "text": "Die konkreten Jahreskosten (z. B. 32 € für 10 W Standby) beruhen auf dem nicht belegten Strompreis und werden nicht als Modellrechnung gekennzeichnet.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 6,
+      "alter_tage": 7,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1308,7 +1308,7 @@
       "typ": "luecke",
       "text": "Der angegebene durchschnittliche Strompreis von 37,3 Cent/kWh (BDEW‑Schnitt) wird ohne Quellenangabe genannt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 6,
+      "alter_tage": 7,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1319,7 +1319,7 @@
       "typ": "luecke",
       "text": "Die Empfehlung, dass ein günstigerer Arbeitspreis der zweite wichtigste Hebel sei, fehlt jede Quelle oder regulatorische Einordnung.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 6,
+      "alter_tage": 7,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1330,7 +1330,7 @@
       "typ": "luecke",
       "text": "Empfehlung, den Handytarif einmal jährlich bzw. vierteljährlich zu prüfen, fehlt eine Quellenangabe.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 6,
+      "alter_tage": 7,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1341,7 +1341,7 @@
       "typ": "luecke",
       "text": "Der Artikel behauptet, dass Verträge nach sechs Monaten die Preise erhöhen, ohne dafür eine Quelle anzugeben.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 6,
+      "alter_tage": 7,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1352,7 +1352,7 @@
       "typ": "praezision",
       "text": "Die Aussage, dass CHECK24 alle aktuellen Angebote liefert, ist ein Vollständigkeitsversprechen ohne Messgröße.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 6,
+      "alter_tage": 7,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1363,7 +1363,7 @@
       "typ": "praezision",
       "text": "Die Regel „Datenvolumen halbieren, das du wirklich brauchst“ wird als allgemeine Faustregel präsentiert, ohne Messdaten oder Quelle.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 6,
+      "alter_tage": 7,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1374,7 +1374,7 @@
       "typ": "luecke",
       "text": "Die Faustregel, dass zusätzliche Gebühren mindestens 5 % der Grundgebühr betragen müssen, wird nicht belegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 6,
+      "alter_tage": 7,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1385,7 +1385,7 @@
       "typ": "praezision",
       "text": "Die pauschale Behauptung, Hardware bleibe stets Eigentum des Nutzers, ist unpräzise, da die Bundesnetzagentur die Kupfer-Glas-Migration begleitet, die oft providerseitige Technikwechsel und neue Netzabschlusspunkte erfordert.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 6,
+      "alter_tage": 7,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1396,7 +1396,7 @@
       "typ": "luecke",
       "text": "Aussagen zu Markttrends wie hohen Neukundenrabatten und Wechselprämien werden als Marktfakten ohne Bezug zu offiziellen Referenzwerten oder Berichten der Aufsichtsbehörde dargestellt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 6,
+      "alter_tage": 7,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1407,7 +1407,7 @@
       "typ": "luecke",
       "text": "Der Ratgeber thematisiert den Anbieterwechsel und Bandbreiten, lässt aber den regulatorischen Rahmen der Bundesnetzagentur zur Breitbandversorgung und zum Verbraucherschutz bei Minderleistung unerwähnt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 6,
+      "alter_tage": 7,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1418,7 +1418,7 @@
       "typ": "luecke",
       "text": "Definition des Begriffs „Last Minute“ (maximal 14 Tage zwischen Buchung und Abreise) wird mit dem Deutschen Reiseverband angegeben, jedoch fehlt ein Nachweis.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1429,7 +1429,7 @@
       "typ": "praezision",
       "text": "Angabe, dass Preisalarme keinen Tiefstpreis garantieren, wird nicht durch konkrete Zahlen oder Vergleichsstudien belegt.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1440,7 +1440,7 @@
       "typ": "luecke",
       "text": "Hinweis auf § 651r BGB (Insolvenzsicherung bei Pauschalreisen) enthält keinen Verweis auf eine Rechtsquelle oder Verbraucherzentrale‑Information.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1451,7 +1451,7 @@
       "typ": "luecke",
       "text": "Behauptung, dass Nachlässe von bis zu 50 % nur Einzelfälle sind, wird ohne Quellenangabe präsentiert.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1462,7 +1462,7 @@
       "typ": "praezision",
       "text": "Aussage, dass der „beste Zeitpunkt zum Buchen“ ein Modellwert sei, bleibt vage und ohne messbare Daten oder Studien untermauert.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1473,7 +1473,7 @@
       "typ": "luecke",
       "text": "Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt im Text Referenzwerte (120 € Strom, 80 € Kfz), für die in der Quelle keine Marktdaten oder Durchschnittswerte als Beleg vorliegen.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1484,7 +1484,7 @@
       "typ": "praezision",
       "text": "Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne Nennung konkreter rechtlicher Grundlagen (DSGVO) unpräzise, während die Quelle explizit auf rechtliche Verbraucherthemen fokussiert.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1495,7 +1495,7 @@
       "typ": "luecke",
       "text": "Der Ratgeber nennt keinen Regulierungsrahmen für Reisebuchungen (z. B. Fluggastrechte oder Stornierungsregeln), obwohl die Quelle diese als zentrale Informationsbereiche ausweist.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1506,7 +1506,7 @@
       "typ": "luecke",
       "text": "Die im 'Zins-Marktradar Q4 2026' genannten Benchmark-Daten für Tagesgeld (3,10–3,45 %) und Dispozinsen (11,5–13,8 %) werden der Bundesbank und BaFin zugeschrieben, sind jedoch in den Recherche-Fundstellen nicht belegt.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1517,7 +1517,7 @@
       "typ": "praezision",
       "text": "Der Ratgeber thematisiert Fixkosten-Senkungen allgemein, lässt aber die laut Destatis signifikante Preissteigerung bei Energie (+12,2 %) unerwähnt, die den Spielraum für die angestrebte 50-Prozent-Quote prägt.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1528,7 +1528,7 @@
       "typ": "luecke",
       "text": "Die 50–30–20-Budgetformel wird als Destatis-Standardmodell ausgewiesen; die angegebene Quelle des Statistischen Bundesamtes enthält jedoch nur Daten zum Verbraucherpreisindex, keine Budget-Verteilungsschlüssel.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1539,7 +1539,7 @@
       "typ": "luecke",
       "text": "Seit 2026 nutzen die großen Anbieter die Technik mit dem Namen Vectoring; das ist ein Modellwert. Sie senkt das Rauschen auf der Leitung. In der Stadt sind damit bis zu 250 Mbps stabil drin.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 4,
+      "alter_tage": 5,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1550,7 +1550,7 @@
       "typ": "praezision",
       "text": "Preisgarantie über mindestens 12 Monate; ohne Garantie darf der Anbieter bald erhöhen, oft um bis zu 10 %.",
       "beleg": "",
-      "alter_tage": 4,
+      "alter_tage": 5,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1561,7 +1561,7 @@
       "typ": "luecke",
       "text": "Für 50 Mbps zahlst du heute meist ca. 20–40 € im Monat; das ist ein Beispielwert.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 4,
+      "alter_tage": 5,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1572,7 +1572,7 @@
       "typ": "luecke",
       "text": "Eine typische Auslandseinsatzgebühr liegt bei 1 % des Umsatzes.",
       "beleg": "",
-      "alter_tage": 4,
+      "alter_tage": 5,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1583,7 +1583,7 @@
       "typ": "luecke",
       "text": "Du hast eine Jahresgebühr von 60 € und kündigst erst 30 Tage nach Ablauf der Frist.",
       "beleg": "",
-      "alter_tage": 4,
+      "alter_tage": 5,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1594,7 +1594,7 @@
       "typ": "luecke",
       "text": "Du investierst 15 Minuten in den CHECK24‑Filter und sparst im Schnitt 5 Minuten pro Anbieter.",
       "beleg": "",
-      "alter_tage": 4,
+      "alter_tage": 5,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1605,7 +1605,7 @@
       "typ": "luecke",
       "text": "Keine versteckten Kosten, wenn die Karte „keine Jahres‑ und keine Auslandseinsatzgebühr“ nennt.",
       "beleg": "",
-      "alter_tage": 4,
+      "alter_tage": 5,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1616,7 +1616,7 @@
       "typ": "luecke",
       "text": "Behauptung, dass ein fehlender Ausweis zu empfindlichen Bußgeldern führt, fehlt eine belegbare Quelle.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 3,
+      "alter_tage": 4,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1627,7 +1627,7 @@
       "typ": "luecke",
       "text": "Aussage, dass Baudenkmäler von der Ausweispflicht befreit sind, wird nicht durch die angegebene Quelle gestützt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 3,
+      "alter_tage": 4,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1638,7 +1638,7 @@
       "typ": "luecke",
       "text": "Angabe, dass ein Wechsel von Energieeffizienzklasse F zu C über 2.000 € Jahresersparnis bringt, ist unbelegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 3,
+      "alter_tage": 4,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1649,7 +1649,7 @@
       "typ": "luecke",
       "text": "Keine Quelle für die Angabe, dass ein Energieausweis ein volles Jahrzehnt gültig ist, sofern keine größeren Umbauten erfolgen.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 3,
+      "alter_tage": 4,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1660,7 +1660,7 @@
       "typ": "luecke",
       "text": "Ein kurzer Check spart dir oft mehrere hundert Euro im Jahr.",
       "beleg": "",
-      "alter_tage": 3,
+      "alter_tage": 4,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1671,7 +1671,7 @@
       "typ": "luecke",
       "text": "Faustregel: ... mehr als 5 % deines Nettoeinkommens ... Meist sinken diese Kosten um über 80 %",
       "beleg": "",
-      "alter_tage": 3,
+      "alter_tage": 4,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1682,7 +1682,7 @@
       "typ": "luecke",
       "text": "Ein Wechsel ist für dich in der Regel komplett kostenlos als Beispielwert.",
       "beleg": "",
-      "alter_tage": 3,
+      "alter_tage": 4,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1693,7 +1693,7 @@
       "typ": "luecke",
       "text": "Bei einem normalen Einkommen sollten die Gebühren fast Null sein.",
       "beleg": "",
-      "alter_tage": 3,
+      "alter_tage": 4,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1704,7 +1704,7 @@
       "typ": "praezision",
       "text": "Bei der Bewertung flexibler Kosten sollte die moderate Preisentwicklung bei Nahrungsmitteln (+0,4 %) den stark steigenden Energiekosten gegenübergestellt werden, um Sparpotenziale zu priorisieren.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 1,
+      "alter_tage": 2,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1715,7 +1715,7 @@
       "typ": "luecke",
       "text": "Der Ratgeber empfiehlt die Prüfung von Stromverträgen, vernachlässigt aber den massiven Preistrend bei Energie von +12,2 %, der die Kalkulation der Fixkosten aktuell dominiert.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 1,
+      "alter_tage": 2,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1726,7 +1726,7 @@
       "typ": "praezision",
       "text": "Die allgemeine Budget-Transparenz ist ohne Einbezug der Inflationsrate von 2,8 % unvollständig, da Preissteigerungen die Planungssicherheit der 'festen Kosten' kontinuierlich untergraben.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 1,
+      "alter_tage": 2,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1737,7 +1737,7 @@
       "typ": "luecke",
       "text": "Auszahlungsgebühr – selten, aber bei manchen Anbietern möglich.",
       "beleg": "https://www.bundesbank.de/de/presse/pressenotizen",
-      "alter_tage": 1,
+      "alter_tage": 2,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1748,7 +1748,7 @@
       "typ": "luecke",
       "text": "Durch die gesetzliche Einlagensicherung ist dein Geld bis zu einem hohen Betrag geschützt.",
       "beleg": "https://www.bundesbank.de/de/presse/pressenotizen",
-      "alter_tage": 1,
+      "alter_tage": 2,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1759,7 +1759,7 @@
       "typ": "luecke",
       "text": "Mindesteinlage – manchmal 1 000 €, häufig aber keine Mindestgrenze.",
       "beleg": "https://www.bundesbank.de/de/presse/pressenotizen",
-      "alter_tage": 1,
+      "alter_tage": 2,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1770,7 +1770,7 @@
       "typ": "luecke",
       "text": "Neukunden‑Zins – Oft 6‑12 Monate, danach Rückkehr zum Basissatz.",
       "beleg": "https://www.bundesbank.de/de/presse/pressenotizen",
-      "alter_tage": 1,
+      "alter_tage": 2,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1781,7 +1781,7 @@
       "typ": "luecke",
       "text": "Kündigungsfrist – in der Regel sofort, bei Sonderkonditionen kann es Einschränkungen geben.",
       "beleg": "https://www.bundesbank.de/de/presse/pressenotizen",
-      "alter_tage": 1,
+      "alter_tage": 2,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1792,7 +1792,7 @@
       "typ": "luecke",
       "text": "Der Artikel nennt keine regulatorischen Vorgaben oder Zertifizierungen (z. B. CE‑Kennzeichnung, Sicherheitsanforderungen) für Smart‑Home‑Geräte, obwohl solche Vorgaben von der Bundesnetzagentur beschrieben werden.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1803,7 +1803,7 @@
       "typ": "praezision",
       "text": "Die Bezeichnung als 'beste Tarife' ist ein Superlativ ohne messbare Daten oder eigene Vergleichsmetrik.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1814,7 +1814,7 @@
       "typ": "luecke",
       "text": "Der Heiz-Faustwert (6 % Ersparnis pro Grad) fehlt in der angegebenen Quelle und ist nicht am Satz belegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1825,7 +1825,7 @@
       "typ": "luecke",
       "text": "Der behauptete Budgetanteil von 30 % für Energie ist ein spezifischer Marktwert, der in der angegebenen Quelle nicht vorkommt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1836,7 +1836,7 @@
       "typ": "luecke",
       "text": "20 % des Einkommens für Sparen/Vorsorge",
       "beleg": "",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1847,7 +1847,7 @@
       "typ": "luecke",
       "text": "Faustregel: Fixkosten > 60 % erfordern Handlungsbedarf",
       "beleg": "",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1858,7 +1858,7 @@
       "typ": "luecke",
       "text": "50 % des Einkommens in lebensnotwendige Ausgaben",
       "beleg": "",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1869,7 +1869,7 @@
       "typ": "luecke",
       "text": "Vertragschecks senken die Fixlast",
       "beleg": "",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1880,7 +1880,7 @@
       "typ": "luecke",
       "text": "30 % des Einkommens für Wünsche",
       "beleg": "",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1891,7 +1891,7 @@
       "typ": "luecke",
       "text": "Keine Datenbasis für die Angabe, dass 24‑Monats‑Garantie üblich sei.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1902,7 +1902,7 @@
       "typ": "luecke",
       "text": "Keine Quelle für die Aussage, dass die eingeschränkte Preisgarantie von den meisten Kunden bevorzugt wird.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1913,7 +1913,7 @@
       "typ": "luecke",
       "text": "Keine Quelle für die Aussage, welche Kosten von einer Preisgarantie tatsächlich abgedeckt werden.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1924,7 +1924,7 @@
       "typ": "luecke",
       "text": "Unbelegte Behauptung zur Ersatzversorgung bei Anbieterinsolvenz.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "ueberholt",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1935,7 +1935,7 @@
       "typ": "luecke",
       "text": "Angaben zu möglichen Einsparungen beim Kfz‑Versicherungswechsel (150 €‑400 € bzw. 180 €‑350 €) sind ohne Quellenangabe; keine der genannten Zahlen findet sich in den bereitgestellten Statistiken.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 17,
+      "alter_tage": 18,
       "fassung_status": "ohne-fassung",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1946,7 +1946,7 @@
       "typ": "luecke",
       "text": "Die Behauptung, technische Maßnahmen beim Heizen senken den Energieverbrauch um 8 %‑12 %, wird nicht belegt; die bereitgestellten Daten enthalten lediglich die allgemeine Preisentwicklung von Energie (+14,9 %).",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 17,
+      "alter_tage": 18,
       "fassung_status": "ohne-fassung",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1957,7 +1957,7 @@
       "typ": "praezision",
       "text": "Die Aussage, der Herbst sei die „lukrativste Spar‑Saison des Jahres“, ist nicht durch messbare Daten gestützt; ein Vergleich mit anderen Jahreszeiten fehlt.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 17,
+      "alter_tage": 18,
       "fassung_status": "ohne-fassung",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1968,7 +1968,7 @@
       "typ": "luecke",
       "text": "Gesamteinsparungen von 500 €‑1.300 € pro Haushalt werden als Modellrechnung präsentiert, jedoch ohne Kennzeichnung als Modell und ohne Quellenangabe.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 17,
+      "alter_tage": 18,
       "fassung_status": "ohne-fassung",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1979,7 +1979,7 @@
       "typ": "luecke",
       "text": "Das angegebene Sparpotenzial von 50 €‑80 € durch saisonale Lebensmittel‑ und Vorratshaltung ist nicht mit einer Quelle untermauert.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 17,
+      "alter_tage": 18,
       "fassung_status": "ohne-fassung",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -1990,7 +1990,7 @@
       "typ": "luecke",
       "text": "Der Artikel nennt eine Kautionshöhe von 900 € bis 2.500 €, ohne dass die Verbraucherzentrale diese Spanne angibt.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 17,
+      "alter_tage": 18,
       "fassung_status": "ohne-fassung",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2001,7 +2001,7 @@
       "typ": "luecke",
       "text": "Die angegebene Ersparnis von 145 € bei einer einwöchigen Anmietung ist nicht durch Zahlen der Verbraucherzentrale gedeckt.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 17,
+      "alter_tage": 18,
       "fassung_status": "ohne-fassung",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2012,7 +2012,7 @@
       "typ": "luecke",
       "text": "Die Behauptung, dass Flughafen‑Mietstationen 15 %‑25 % teurer sind, wird von der Verbraucherzentrale nicht bestätigt.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 17,
+      "alter_tage": 18,
       "fassung_status": "ohne-fassung",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2023,7 +2023,7 @@
       "typ": "luecke",
       "text": "Die Aussage, dass eine „Zero‑Excess“-Option die Kaution komplett auf 0 € senkt und dafür 5 €‑12 € pro Tag kostet, wird von der Verbraucherzentrale nicht belegt.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 17,
+      "alter_tage": 18,
       "fassung_status": "ohne-fassung",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2034,7 +2034,7 @@
       "typ": "luecke",
       "text": "Der Hinweis, dass eine Vollkasko ohne Selbstbeteiligung nur 3 €‑8 € pro Tag mehr kostet, fehlt in den Angaben der Verbraucherzentrale.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 17,
+      "alter_tage": 18,
       "fassung_status": "ohne-fassung",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2045,7 +2045,7 @@
       "typ": "praezision",
       "text": "Die Angabe, dass für zwei HD‑Streams gleichzeitig etwa 30 Mbit/s benötigt werden, ist nicht durch Daten belegt und lässt Spielraum für Fehlinterpretationen.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 17,
+      "alter_tage": 18,
       "fassung_status": "ohne-fassung",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2056,7 +2056,7 @@
       "typ": "luecke",
       "text": "Die Behauptung, dass bis zum Sommer 500 € mehr im Urlaubsbudget verfügbar sind, fehlt eine Quellenangabe.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 7,
+      "alter_tage": 8,
       "fassung_status": "seite-fehlt",
       "entscheidbar": false,
       "nicht_entscheidbar_grund": "Seite ist im Bestand nicht lesbar – Entscheidung würde eine gelöschte Seite bestätigen."
@@ -2067,7 +2067,7 @@
       "typ": "praezision",
       "text": "Die Aussage, dass Cashback‑Portale „seit vielen Jahren am Markt etabliert“ sind, ist ein unpräzises Superlativ ohne messbare Daten.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 7,
+      "alter_tage": 8,
       "fassung_status": "seite-fehlt",
       "entscheidbar": false,
       "nicht_entscheidbar_grund": "Seite ist im Bestand nicht lesbar – Entscheidung würde eine gelöschte Seite bestätigen."
@@ -2078,7 +2078,7 @@
       "typ": "luecke",
       "text": "Die Aussage, dass eine 5 %ige Reduktion der Fixkosten bei 800 € Aufwand 40 € im Monat bzw. 480 € im Jahr spart, wird nicht durch die angeführte Quelle belegt.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 7,
+      "alter_tage": 8,
       "fassung_status": "seite-fehlt",
       "entscheidbar": false,
       "nicht_entscheidbar_grund": "Seite ist im Bestand nicht lesbar – Entscheidung würde eine gelöschte Seite bestätigen."
@@ -2089,7 +2089,7 @@
       "typ": "luecke",
       "text": "Angaben zu typischen Kündigungsfristen von ein bis drei Monaten werden von der Quelle nicht bestätigt.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 7,
+      "alter_tage": 8,
       "fassung_status": "seite-fehlt",
       "entscheidbar": false,
       "nicht_entscheidbar_grund": "Seite ist im Bestand nicht lesbar – Entscheidung würde eine gelöschte Seite bestätigen."
@@ -2100,7 +2100,7 @@
       "typ": "luecke",
       "text": "Der genannte durchschnittliche Cashback‑Satz von 2 % der Ausgaben ist nicht durch die Quelle gestützt.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 7,
+      "alter_tage": 8,
       "fassung_status": "seite-fehlt",
       "entscheidbar": false,
       "nicht_entscheidbar_grund": "Seite ist im Bestand nicht lesbar – Entscheidung würde eine gelöschte Seite bestätigen."
@@ -2111,7 +2111,7 @@
       "typ": "luecke",
       "text": "Der Hinweis, dass Festpreis‑Tarife in der Regel einen Aufschlag enthalten, fehlt jede Beleggrundlage.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 6,
+      "alter_tage": 7,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2122,7 +2122,7 @@
       "typ": "luecke",
       "text": "Die Behauptung, die Bundesnetzagentur fordere die getrennte Angabe von Grund‑ und Arbeitspreis, wird nicht durch die verlinkte Quelle belegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 6,
+      "alter_tage": 7,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2133,7 +2133,7 @@
       "typ": "praezision",
       "text": "Die Aussage, dass variable Tarife mit Preisgarantie oder Deckel im Vergleich „selten ganz oben“ stehen, ist ein untermauertes Superlativ ohne Messgröße.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 6,
+      "alter_tage": 7,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2144,7 +2144,7 @@
       "typ": "luecke",
       "text": "Die Aussage, dass variable Tarife das Marktpreisrisiko vollständig auf den Kunden übertragen, wird ohne Quellenangabe gemacht.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 6,
+      "alter_tage": 7,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2155,7 +2155,7 @@
       "typ": "luecke",
       "text": "Die Behauptung, dass sich die Energiemärkte 2026 wieder stärker bewegen, wird ohne aktuelle Marktdaten belegt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 6,
+      "alter_tage": 7,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2166,7 +2166,7 @@
       "typ": "luecke",
       "text": "Für die herkömmliche Girocard werden häufig Gebühren von etwa 0,99 Euro monatlich erhoben – Angabe fehlt in den bereitgestellten Quellen.",
       "beleg": "https://www.verbraucherzentrale.de/aktuelle-meldungen",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2177,7 +2177,7 @@
       "typ": "luecke",
       "text": "Ein schneller Kontowechsel sei jederzeit kostenlos und sichere dauerhaft die besten Zinsen – diese Aussage fehlt in den bereitgestellten Quellen.",
       "beleg": "https://www.tagesschau.de/wirtschaft/unternehmen/faq-nvidia-spionage-100.html",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2188,7 +2188,7 @@
       "typ": "luecke",
       "text": "Die Maestro‑Funktion soll seit Juli 2023 schrittweise eingestellt werden – keine Quelle dafür vorhanden.",
       "beleg": "https://www.verbraucherzentrale.de/aktuelle-meldungen",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2199,7 +2199,7 @@
       "typ": "luecke",
       "text": "Befristete Sonderzinsen bei Tagesgeldkonten und deren starke Absenkung nach der Aktionsphase werden behauptet, ohne dass die angegebenen Quellen dies belegen.",
       "beleg": "https://www.tagesschau.de/wirtschaft/unternehmen/faq-nvidia-spionage-100.html",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2210,7 +2210,7 @@
       "typ": "luecke",
       "text": "Viele Banken stellen ihre Standardkarten auf kostenlose Debit‑Visas oder Mastercards um – ohne aktuelle Quelle belegt.",
       "beleg": "https://www.verbraucherzentrale.de/aktuelle-meldungen",
-      "alter_tage": 5,
+      "alter_tage": 6,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2221,7 +2221,7 @@
       "typ": "luecke",
       "text": "Ein Mietwagen ist oft ein teurer Posten. Er kostet meistens fast so viel wie der Flug oder das Hotel.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 4,
+      "alter_tage": 5,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2232,7 +2232,7 @@
       "typ": "luecke",
       "text": "Geld sollte innerhalb von 48 Stunden zurück sein.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 4,
+      "alter_tage": 5,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2243,7 +2243,7 @@
       "typ": "luecke",
       "text": "Die Preise werden dort fair und offen gezeigt.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "alter_tage": 4,
+      "alter_tage": 5,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2254,7 +2254,7 @@
       "typ": "luecke",
       "text": "Lichtsteuerung: Bedarfssteuerung – 2 bis 5 % des Stromverbrauchs.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 3,
+      "alter_tage": 4,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2265,7 +2265,7 @@
       "typ": "luecke",
       "text": "Anbieter locken mit Neukundenboni, die nach der üblichen Erstlaufzeit entfallen; danach steigt der Arbeitspreis massiv an.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 3,
+      "alter_tage": 4,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2276,7 +2276,7 @@
       "typ": "luecke",
       "text": "Heizungssteuerung: Smarte Thermostate können Heizkosten einsparen. Die Spanne von 10 bis 25 % ist ein Beispielwert aus der Rechnung unten.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 3,
+      "alter_tage": 4,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2287,7 +2287,7 @@
       "typ": "luecke",
       "text": "Thermostat um 1 °C senken | 4 % – 6 % der Heizkosten",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 3,
+      "alter_tage": 4,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2298,7 +2298,7 @@
       "typ": "luecke",
       "text": "Viele Anbieter belohnen einen niedrigen Verbrauch mit besseren Konditionen",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 3,
+      "alter_tage": 4,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2309,7 +2309,7 @@
       "typ": "luecke",
       "text": "für dich entstehen keine Mehrkosten",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 3,
+      "alter_tage": 4,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2320,7 +2320,7 @@
       "typ": "luecke",
       "text": "Durch diese zwei Maßnahmen sparst du in dieser Beispielrechnung jährlich rund 140 €",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 3,
+      "alter_tage": 4,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2331,7 +2331,7 @@
       "typ": "luecke",
       "text": "Strom (LED‑Umrüstung) | 100 € – 140 € | etwa 8 %",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 3,
+      "alter_tage": 4,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2342,7 +2342,7 @@
       "typ": "luecke",
       "text": "Ein Preisrutsch für Neukunden lässt sich daraus nicht ableiten.",
       "beleg": "",
-      "alter_tage": 1,
+      "alter_tage": 2,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2353,7 +2353,7 @@
       "typ": "luecke",
       "text": "Der Ratgeber versäumt es, den für den Verbraucherschutz zentralen Regulierungsrahmen der 'Unternehmenspflichten' zu nennen, den die Bundesnetzagentur explizit als Fachthema führt.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2364,7 +2364,7 @@
       "typ": "praezision",
       "text": "Die Empfehlung zum Preisvergleich lässt den aktuellen Marktdruck (sinkende Umsätze bei O2) außer Acht, der für die Verhandlung von Rückholangeboten bei Kündigung entscheidend sein kann.",
       "beleg": "https://www.heise.de/news/O2-mit-maessigen-Geschaeftszahlen-11525319.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
@@ -2375,7 +2375,7 @@
       "typ": "veraltet",
       "text": "Die Preise für Energie sind zuletzt um 14,9 % gestiegen. Das meldet das Statistische Bundesamt.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
-      "alter_tage": 0,
+      "alter_tage": 1,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""
