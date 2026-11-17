@@ -6,8 +6,8 @@ Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
 **Bezugsstand: 2026-11-17** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
 
-**129 offene Live-Befunde auf 34 Artikeln.** Für **101** gibt es frühere Entscheidungen zu diesem Befund;
-die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **28** Befunde haben keine frühere aktive Entscheidung.
+**137 offene Live-Befunde auf 36 Artikeln.** Für **101** gibt es frühere Entscheidungen zu diesem Befund;
+die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **36** Befunde haben keine frühere aktive Entscheidung.
 
 Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus `data/faktenfrische_befunde_state.json`,
 `data/faktenfrische_entscheidungen.yaml`, dem Scorecard-Siegel und den heutigen Artikeln.
@@ -36,6 +36,11 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 - `6aaff85e3a7591d0c5b2` · `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` · für dich entstehen keine Mehrkosten
 - `7e6087a4117a857a92c8` · `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` · Durch diese zwei Maßnahmen sparst du in dieser Beispielrechnung jährlich rund 140 €
 - `e28b4ad1f6d608d2ec77` · `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` · Strom (LED‑Umrüstung) | 100 € – 140 € | etwa 8 %
+- `1eae5c7e2bbd95a3362c` · `2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick` · Tabelle mit konkreten kWh‑Werten und Euro‑Ersparnissen für neue vs. alte Geräte.
+- `8547ce3daa75aabb30d4` · `2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick` · Annahme von 40 ct/kWh und daraus resultierende Jahres‑Ersparnis von 52 € für einen Kühlschrank‑Tausch.
+- `c8b197692bd0023c87bf` · `2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick` · Behauptung, dass ein neuer Wärmepumpentrockner „sogar noch schneller“ die Anschaffungskosten amortisiert.
+- `e40a2ee5c7baa5f8567b` · `2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick` · Sparsame Geräte senken deinen Verbrauch in der Beispielrechnung unten um bis zu 40 %.
+- `feb71513c6fb7064dc92` · `2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick` · Der Stromverbrauch von Kühlschrank und Waschmaschine macht in der Modellrechnung rund 30 % der Kosten im Haushalt aus.
 - `04ae33652c1c5eb4e2b8` · `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` · Ein kurzer Check spart dir oft mehrere hundert Euro im Jahr.
 - `5223a3c7287ff81939cd` · `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` · Faustregel: ... mehr als 5 % deines Nettoeinkommens ... Meist sinken diese Kosten um über 80 %
 - `9800545ae945ec280b34` · `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` · Ein Wechsel ist für dich in der Regel komplett kostenlos als Beispielwert.
@@ -43,6 +48,9 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 - `0d1977a0b6a7b59136f2` · `2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks` · Die Bezeichnung als 'beste Tarife' ist ein Superlativ ohne messbare Daten oder eigene Vergleichsmetrik.
 - `228ef205074fdc3fb4b3` · `2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks` · Der Heiz-Faustwert (6 % Ersparnis pro Grad) fehlt in der angegebenen Quelle und ist nicht am Satz belegt.
 - `d7c301604b02d49e8d65` · `2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks` · Der behauptete Budgetanteil von 30 % für Energie ist ein spezifischer Marktwert, der in der angegebenen Quelle nicht vorkommt.
+- `3bfeb0118af92a780a47` · `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen` · Bei 5 % Rendite im Jahr entstehen rund 30.000 € – keine Quelle für die angenommene Rendite angegeben.
+- `ed2161154dcee85da1ee` · `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen` · Angabe, dass die Einrichtung eines Sparplans meist weniger als 15 Minuten dauert, fehlt belegt.
+- `f593fe21275bd9dcefef` · `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen` · Behauptung, dass einige Broker bereits ab 1 € monatlich starten, ohne Quelle.
 
 ## `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas`
 
@@ -1377,7 +1385,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken`
 
-- Datei-SHA256 (heute): `652a2deff6b8618d27bff2b8296d9dcc46c64b4e406026b92fad150c3be0c6fa`
+- Datei-SHA256 (heute): `ff91998d622b03e8942366507838340195cc86ecdf3d4d1d9c5f17d753de43e7`
 - Offene Live-Befunde: **1**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1527,6 +1535,60 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 - Heute in Zeile 34: 140 € – **ohne** Kennzeichnung
 - Heute in Zeile 34: 8 % – **ohne** Kennzeichnung
 
+## `2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick`
+
+- Datei-SHA256 (heute): `6729d3a18e8d0401ad56c097e8483bdb33985711480bd91dd27b01474ad5f844`
+- Offene Live-Befunde: **5**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `1eae5c7e2bbd95a3362c` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Tabelle mit konkreten kWh‑Werten und Euro‑Ersparnissen für neue vs. alte Geräte. |
+| `8547ce3daa75aabb30d4` | luecke | **neu** | 40 ct in Zeile 10 gekennzeichnet · 52 € in Zeile 76 gekennzeichnet | Annahme von 40 ct/kWh und daraus resultierende Jahres‑Ersparnis von 52 € für einen Kühlschrank‑Tausch. |
+| `c8b197692bd0023c87bf` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Behauptung, dass ein neuer Wärmepumpentrockner „sogar noch schneller“ die Anschaffungskosten amortisiert. |
+| `e40a2ee5c7baa5f8567b` | luecke | **neu** | 40 % in Zeile 10 gekennzeichnet | Sparsame Geräte senken deinen Verbrauch in der Beispielrechnung unten um bis zu 40 %. |
+| `feb71513c6fb7064dc92` | luecke | **neu** | 30 % in Zeile 11 gekennzeichnet | Der Stromverbrauch von Kühlschrank und Waschmaschine macht in der Modellrechnung rund 30 % der Kosten im Haushalt aus. |
+
+### `1eae5c7e2bbd95a3362c`
+
+**Befund:** Tabelle mit konkreten kWh‑Werten und Euro‑Ersparnissen für neue vs. alte Geräte.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `8547ce3daa75aabb30d4`
+
+**Befund:** Annahme von 40 ct/kWh und daraus resultierende Jahres‑Ersparnis von 52 € für einen Kühlschrank‑Tausch.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 10: 40 ct – gekennzeichnet („beispielrechnung“)
+- Heute in Zeile 76: 52 € – gekennzeichnet („modellrechnung“)
+
+### `c8b197692bd0023c87bf`
+
+**Befund:** Behauptung, dass ein neuer Wärmepumpentrockner „sogar noch schneller“ die Anschaffungskosten amortisiert.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `e40a2ee5c7baa5f8567b`
+
+**Befund:** Sparsame Geräte senken deinen Verbrauch in der Beispielrechnung unten um bis zu 40 %.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 10: 40 % – gekennzeichnet („beispielrechnung“)
+
+### `feb71513c6fb7064dc92`
+
+**Befund:** Der Stromverbrauch von Kühlschrank und Waschmaschine macht in der Modellrechnung rund 30 % der Kosten im Haushalt aus.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 11: 30 % – gekennzeichnet („modellrechnung“)
+
 ## `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto`
 
 - Datei-SHA256 (heute): `770570c6da962c9cd564e680da8d23c9e4f2e07fd871ae25a6b0c9e32217692a`
@@ -1606,6 +1668,42 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 **Frühere Entscheidung:** keine – dieser Befund ist neu.
 
 - Heute in Zeile 7: 30 % – gekennzeichnet („beispielwert“)
+
+## `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen`
+
+- Datei-SHA256 (heute): `449cc011a51d9b828eb1e99942f34e995cceb75201e41aa20a8552ccf41cb7ad`
+- Offene Live-Befunde: **3**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `3bfeb0118af92a780a47` | luecke | **neu** | 5 % in Zeile 3 gekennzeichnet · 30.000 € in Zeile 12 gekennzeichnet | Bei 5 % Rendite im Jahr entstehen rund 30.000 € – keine Quelle für die angenommene Rendite angegeben. |
+| `ed2161154dcee85da1ee` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Angabe, dass die Einrichtung eines Sparplans meist weniger als 15 Minuten dauert, fehlt belegt. |
+| `f593fe21275bd9dcefef` | luecke | **neu** | 1 € in Zeile 13 ohne Kennzeichnung | Behauptung, dass einige Broker bereits ab 1 € monatlich starten, ohne Quelle. |
+
+### `3bfeb0118af92a780a47`
+
+**Befund:** Bei 5 % Rendite im Jahr entstehen rund 30.000 € – keine Quelle für die angenommene Rendite angegeben.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 3: 5 % – gekennzeichnet („modellwert“)
+- Heute in Zeile 12: 30.000 € – gekennzeichnet („beispielwert“)
+
+### `ed2161154dcee85da1ee`
+
+**Befund:** Angabe, dass die Einrichtung eines Sparplans meist weniger als 15 Minuten dauert, fehlt belegt.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `f593fe21275bd9dcefef`
+
+**Befund:** Behauptung, dass einige Broker bereits ab 1 € monatlich starten, ohne Quelle.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 13: 1 € – **ohne** Kennzeichnung
 
 ## `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen`
 
@@ -1836,6 +1934,11 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 372bb51051e8bd7c5f7
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6aaff85e3a7591d0c5b2 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7e6087a4117a857a92c8 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e28b4ad1f6d608d2ec77 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1eae5c7e2bbd95a3362c --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8547ce3daa75aabb30d4 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden c8b197692bd0023c87bf --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden e40a2ee5c7baa5f8567b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden feb71513c6fb7064dc92 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 04ae33652c1c5eb4e2b8 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5223a3c7287ff81939cd --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9800545ae945ec280b34 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
@@ -1843,6 +1946,9 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden bc0e4f2eb357a682c67
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 0d1977a0b6a7b59136f2 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 228ef205074fdc3fb4b3 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d7c301604b02d49e8d65 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3bfeb0118af92a780a47 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ed2161154dcee85da1ee --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden f593fe21275bd9dcefef --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 98eb45f772ad7a0aac7b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden b7f0d52968d89cdf8c5b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden be911855d67f998be662 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"

@@ -280,6 +280,14 @@
     "letzter_versuch": "2026-10-25",
     "sperre_bis": "2026-10-28"
   },
+  "Gebrauchte Möbel: So erkennst du solide Ware": {
+    "fehler": 0,
+    "grund": "produziert: wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-11-17",
+    "letzter_versuch": "2026-11-17",
+    "sperre_bis": "2027-05-16"
+  },
   "Geld-Vorsätze 2027: Die 8 Neujahrsziele, die wirklich funktionieren": {
     "abgleich_fehler": 2,
     "fehler": 1,
@@ -744,6 +752,14 @@
     "infra_fehler": 0,
     "letzter_versuch": "2026-10-12",
     "sperre_bis": "2026-10-15"
+  },
+  "Vorratsplanung im Haushalt: So kaufst du seltener und günstiger ein": {
+    "fehler": 0,
+    "grund": "produziert: vorrat-planen-leicht-gemacht-so-sparst-du-beim",
+    "infra_fehler": 0,
+    "letzter_erfolg": "2026-11-17",
+    "letzter_versuch": "2026-11-17",
+    "sperre_bis": "2027-05-16"
   },
   "WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?": {
     "fehler": 1,

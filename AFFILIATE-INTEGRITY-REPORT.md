@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-11-16 12:20:47 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-11-17 12:41:05 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 84 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
+**Geprüfte Live-Artikel:** 86 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -96,6 +96,8 @@
 | 2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen | 4 → 4 ✅ | /go/allgemein/, /go/strom/ |
 | 2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort | 2 → 3 ✅ | /go/dsl/ |
 | 2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein | 3 → 3 ✅ | /go/dsl/ |
+| 2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst | 2 → 3 ✅ | /go/kreditkarte/ |
+| 2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst | 3 → 3 ✅ | /go/allgemein/ |
 
 ## Hinweise (nicht blockierend)
 

@@ -1,29 +1,97 @@
 {
-  "2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
-    "datei_sha256": "8ed8c9c0fc7b7a71f5a08c08dfbfc0921d85b6e4e9f621ee21827084d5f6cb9c",
-    "first": "2026-11-14T19:15:16Z",
+  "2026-11-17-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
+    "datei_sha256": "936b4665b7e5d238d98dc9d92108d72fdd4810f6d5cd95071efefefb32227b38",
+    "fassung_gewechselt": true,
+    "first": "2026-11-17T12:42:58Z",
     "grund": "Zeichenlänge (check_length.py) nicht bestanden",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "lokal:2026-11-14"
+      "run:44080678514"
     ],
-    "last": "2026-11-14T19:15:16Z",
-    "lauf": "lokal:2026-11-14",
+    "last": "2026-11-17T13:01:37Z",
+    "lauf": "run:44080678514",
     "signatur": "zeichenlänge (check_length.py) nicht bestanden"
   },
-  "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten": {
-    "datei_sha256": "4a4b5fdef79a13f4349912ed059821f30bc2688aa4e66977907292b207078c9c",
+  "2026-11-17-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten": {
+    "datei_sha256": "9c5cb504892af6f7ee82b5c0b3e47134674b03aa241ed2820325d79d4453b1d0",
+    "first": "2026-11-17T12:42:58Z",
+    "grund": "Redundanz-Gate D1–D6 nicht bestanden: D3-X: Absatz wortgleich in 2 Artikeln (content/posts/2026-11-16-die-50-30-20-regel-bringt-ordnung-wohin-mit-dem-gehalt/index.md ≈ content/posts/2026-11-17-gas-anbieter-wechseln-strategie; D4-X: Fast-Dup",
+    "hits": 1,
+    "klasse": "menschlich",
+    "laeufe": [
+      "run:44080678514"
+    ],
+    "last": "2026-11-17T13:01:37Z",
+    "lauf": "run:44080678514",
+    "signatur": "redundanz-gate d<n>–d<n> nicht bestanden: d<n>-x: absatz wortgleich in <n> artikeln (content/posts/<slug>/index.md ≈ content/posts/<slug>; d<n>-x: fast-dup"
+  },
+  "2026-11-17-strompreis-2026-herbst-check-fuer-deine-stromkosten": {
+    "datei_sha256": "9bb9f3436dfaf05dca13b681f7d93067d41f177cfaf9351704a7f3a7b4818aca",
     "fassung_gewechselt": true,
-    "first": "2026-11-14T19:15:16Z",
+    "first": "2026-11-17T13:01:37Z",
     "grund": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
     "hits": 1,
     "klasse": "menschlich",
     "laeufe": [
-      "lokal:2026-11-14"
+      "run:44080678514"
     ],
-    "last": "2026-11-14T19:15:16Z",
-    "lauf": "lokal:2026-11-14",
+    "last": "2026-11-17T13:01:37Z",
+    "lauf": "run:44080678514",
     "signatur": "faktenfrische nicht bestanden: <n>c<n>e<n>d<n>f<n>da<n>ec<n> (luecke): der hinweis, dass ein anbieterwechsel im durchschnitt <n>‑<n> wochen dauert, fehlt eine nachweisbare quelle.; <n>b<n>daf<n>f<n>a<"
+  },
+  "2026-11-17-vorrat-planen-leicht-gemacht-so-sparst-du-beim": {
+    "datei_sha256": "335bc7220d2af7c2b47315dc3a1fd89593a4410184865dbd74cae0bea1ed0f5e",
+    "first": "2026-11-17T13:01:37Z",
+    "grund": "Reserve-Qualitäts-Gate: Umfang: 854 Wörter / 6166 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
+    "hits": 1,
+    "klasse": "heilbar",
+    "laeufe": [
+      "run:44080678514"
+    ],
+    "last": "2026-11-17T13:01:37Z",
+    "lauf": "run:44080678514",
+    "signatur": "reserve-qualitäts-gate: umfang: <n> wörter / <n> zeichen; premium verlangt mindestens <n>.<n> wörter und <n><score> zeichen"
+  },
+  "2026-11-17-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste": {
+    "datei_sha256": "0229c090d8a70338cea56cf06c34d754cd13501d5bb724b7403d64b392f57d94",
+    "first": "2026-11-17T12:42:58Z",
+    "grund": "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
+    "hits": 1,
+    "klasse": "unheilbar",
+    "laeufe": [
+      "run:44080678514"
+    ],
+    "last": "2026-11-17T13:01:37Z",
+    "lauf": "run:44080678514",
+    "signatur": "quellen-gate nicht bestanden: quellenbasis fehlt – veröffentlichte ratgeber brauchen einen nicht-leeren `quellen:`-block im frontmatter (m<n>, #<n>–#<n>)"
+  },
+  "2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet": {
+    "datei_sha256": "71004d592d4c32a87aab6e9e47a725a8af8baf1e6508418bc9dbfefc4cbc8512",
+    "fassung_gewechselt": true,
+    "first": "2026-11-17T13:01:37Z",
+    "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+    "hits": 1,
+    "klasse": "heilbar",
+    "laeufe": [
+      "run:44080678514"
+    ],
+    "last": "2026-11-17T13:01:37Z",
+    "lauf": "run:44080678514",
+    "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
+  },
+  "2026-11-17-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater": {
+    "datei_sha256": "43b76d41b0a356a217391ed4b5780297db6f81ecb1fb8814f071d428baee1a55",
+    "fassung_gewechselt": true,
+    "first": "2026-11-17T13:01:37Z",
+    "grund": "Faktenfrische nicht bestanden: 37a962cd1e769a2aae1b (luecke): Keine Quelle für die Behauptung, dass Mesh‑WLAN ein nahtloses Funknetz ohne Verbindungsabbrüche beim Raumwechsel bietet.; 8269201d221bcc779cd6 (luecke): Keine Quelle für die Auss",
+    "hits": 1,
+    "klasse": "menschlich",
+    "laeufe": [
+      "run:44080678514"
+    ],
+    "last": "2026-11-17T13:01:37Z",
+    "lauf": "run:44080678514",
+    "signatur": "faktenfrische nicht bestanden: <n>a<n>cd<n>e<n>a<n>aae<n>b (luecke): keine quelle für die behauptung, dass mesh‑wlan ein nahtloses funknetz ohne verbindungsabbrüche beim raumwechsel bietet.; <n>d<n>bc"
   }
 }
