@@ -327,6 +327,137 @@ class RueckfallTest(unittest.TestCase):
             self.assertEqual(ledger.offene_befunde(queue, dec, fassungen), [])
 
 
+def fassung_von(fm: str, body: str) -> dict:
+    """Fassungs-Dict einer Seite – dieselbe Form wie `bestand_identitaeten`."""
+    artikel = {"fm": fm, "body": body}
+    return {"seite": {"text": ledger.text_hash(artikel),
+                      "pruef": ledger.pruef_hash(artikel)}}
+
+
+class TypografieTest(unittest.TestCase):
+    """Typografie-Heilung ist Betriebsarbeit und öffnet keine Entscheidung.
+
+    DER DEFEKT (17.11.2026, Integritäts-Siegel)
+    -------------------------------------------
+    Zwei Werkzeuge heilen ausschließlich Leerraum: `fix_spaces.py`
+    (doppelte Leerzeichen, fehlendes Leerzeichen nach Punkt/Komma,
+    NBSP vor %/€) und `fix_linebreaks.py` (Hard-Break-Spuren,
+    zusammengeführte Zeilen). Der Lauf vom 16.11.2026 (15:44 UTC, 135
+    Dateien, 113 + 76 Änderungen, data/audit/2026-11-16.jsonl) verschob
+    damit die Aussage-Hashes von fünf am 13.11.2026 entschiedenen
+    Heizöl-Befunden. In der Folge standen 168 von 209 offenen Befunden als
+    „Text seit dem Befund geändert", `test_faktenfrische_1072_heizoel`
+    verlangte die fünf Befunde geschlossen und JEDES Pull-Request-Gate
+    wurde rot, ohne dass ein Satz geändert worden war.
+
+    DIE REGEL
+    ---------
+    Zwischenraum außerhalb von Zaun-Code ist keine Aussage. Silben, Ziffern,
+    Überschriften, Linkziele und Tabellenzellen bleiben gebunden. Zaun-Code
+    bleibt zeichengenau, weil Einrückung dort Programmtext ist. Die
+    Prüffassung (`pruef_hash`) sieht weiterhin jede Leerstelle.
+    """
+
+    def test_typografie_aendert_den_aussage_hash_nicht(self):
+        basis = art("# H\n\nDer Abschlag bleibt eine Vorauszahlung.\n")
+        for name, body in {
+            "doppeltes Leerzeichen": "# H\n\nDer  Abschlag bleibt eine Vorauszahlung.\n",
+            "Leerzeichen vor Satzzeichen": "# H\n\nDer Abschlag bleibt eine Vorauszahlung .\n",
+            "fehlendes Leerzeichen": "# H\n\nDer Abschlag bleibt eineVorauszahlung.\n",
+            "NBSP statt Leerzeichen": "# H\n\nDer Abschlag bleibt eine\u00a0Vorauszahlung.\n",
+            "Zeilenumbruch": "# H\n\nDer Abschlag bleibt eine\nVorauszahlung.\n",
+            "zusätzliche Leerzeilen": "\n\n# H\n\n\n\nDer Abschlag bleibt eine Vorauszahlung.\n\n\n",
+            "Tabs": "# H\n\nDer\tAbschlag\tbleibt\teine Vorauszahlung.\n",
+        }.items():
+            with self.subTest(form=name):
+                self.assertEqual(ledger.text_hash(basis),
+                                 ledger.text_hash(art(body)))
+
+    def test_echte_aenderung_oeffnet_weiterhin_sofort(self):
+        basis = art("# H\n\nDer Abschlag bleibt eine Vorauszahlung.\n")
+        for name, body in {
+            "Ziffer": "# H\n\nDer Abschlag bleibt eine Vorauszahlung von 80 Euro.\n",
+            "Silbe": "# H\n\nDer Abschlag ist eine Vorauszahlung.\n",
+            "Überschrift": "# H\n\nDer Abschlag bleibt eine Vorauszahlung.\n\n## Neu\n",
+            "Linkziel": "# H\n\nDer Abschlag bleibt eine [Vorauszahlung](/go/x/).\n",
+        }.items():
+            with self.subTest(form=name):
+                self.assertNotEqual(ledger.text_hash(basis),
+                                    ledger.text_hash(art(body)))
+
+    def test_zaun_code_bleibt_zeichengenau(self):
+        """Einrückung in Code ist Bedeutung – dort gilt die Neutralisierung nicht."""
+        a = "```python\nif x:\n    y = 1\n```\n"
+        b = "```python\nif x:\n  y = 1\n```\n"
+        self.assertNotEqual(ledger.ohne_zwischenraum(a),
+                            ledger.ohne_zwischenraum(b))
+        self.assertEqual(ledger.text_hash(art(a)), ledger.text_hash(art(a)))
+
+    def test_prueffassung_sieht_die_typografie_weiterhin(self):
+        a = art("# H\n\nDer Abschlag bleibt eine Vorauszahlung.\n")
+        b = art("# H\n\nDer  Abschlag bleibt eine Vorauszahlung.\n")
+        self.assertNotEqual(ledger.pruef_hash(a), ledger.pruef_hash(b))
+
+    def test_die_echten_heiler_halten_den_aussage_hash(self):
+        """Nicht die Theorie, sondern `fix_spaces.fix_body` selbst.
+
+        Der Aufruf ist der Produktionspfad ohne Schreibzugriff. Er darf den
+        Aussage-Hash nicht bewegen – sonst öffnet der nächste Wartungslauf
+        wieder eine menschliche Entscheidung.
+        """
+        import fix_linebreaks
+        import fix_spaces
+
+        roh = ("## Das Wichtigste\n\n"
+               "Der Abschlag bleibt eine Vorauszahlung.Der Preis liegt bei 3,5 Cent/kWh.\n"
+               "Ein  doppeltes Leerzeichen , und www. anbieter. de bleiben Typografie .\n")
+        fm = "title: \"T\"\ndescription: \"D\"\nkurzantwort: \"K\"\n"
+        nach_spaces, _ = fix_spaces.fix_body(roh)
+        nach_umbruechen, _ = fix_linebreaks.self_heal(nach_spaces)
+        self.assertNotEqual(nach_spaces, roh,
+                            "Der Heiler hat nichts verändert – der Test prüft nichts")
+        self.assertEqual(ledger.text_hash({"fm": fm, "body": roh}),
+                         ledger.text_hash({"fm": fm, "body": nach_spaces}))
+        self.assertEqual(ledger.text_hash({"fm": fm, "body": roh}),
+                         ledger.text_hash({"fm": fm, "body": nach_umbruechen}))
+
+    def test_entscheidung_ueberlebt_die_echten_heiler(self):
+        """Ende-zu-Ende: Entscheidung am Text, dann heilt der Betrieb ihn."""
+        import fix_linebreaks
+        import fix_spaces
+
+        fm = "title: \"T\"\ndescription: \"D\"\nkurzantwort: \"K\"\n"
+        body = "## H\n\nDer Abschlag bleibt eine Vorauszahlung.Der Preis: 3,5 Cent.\n"
+        finding = {"typ": "luecke", "text": "Zahl ohne Beleg"}
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp = Path(tmp)
+            queue = tmp / "queue.json"
+            dec = tmp / "decisions.yaml"
+            fassung = ledger.body_hash("Befundfassung")
+            entry = {"id": ledger.befund_id("seite", finding), "slug": "seite",
+                     "fassung_sha256": fassung, "text_sha256": fassung,
+                     **finding, "beleg": "",
+                     "zuletzt_gesehen": "2026-11-17 06:00 UTC"}
+            queue.write_text(json.dumps({"fachbefunde": [entry]}), encoding="utf-8")
+            fassungen = fassung_von(fm, body)
+            ledger.entscheidung_anfuegen(
+                entry["id"], "Redaktion",
+                "Zahl im heutigen Text geprüft und als Modellwert gekennzeichnet",
+                queue_path=queue, decisions_path=dec, fassungen=fassungen,
+                heute=dt.date(2026, 11, 17))
+            self.assertEqual(ledger.offene_befunde(queue, dec, fassungen), [])
+            geheilt, _ = fix_spaces.fix_body(body)
+            geheilt, _ = fix_linebreaks.self_heal(geheilt)
+            self.assertNotEqual(geheilt, body, "Der Heiler hat nichts verändert")
+            nachher = fassung_von(fm, geheilt)
+            self.assertEqual(
+                ledger.offene_befunde(queue, dec, nachher), [],
+                "Typografie-Heilung hat die dokumentierte Entscheidung geöffnet")
+            # Und eine echte Aussageänderung öffnet weiterhin sofort.
+            geaendert = fassung_von(fm, geheilt.replace("3,5", "4,2"))
+            self.assertEqual(len(ledger.offene_befunde(queue, dec, geaendert)), 1)
+
+
 class BestandTest(unittest.TestCase):
     """Der echte Bestand: zwischen Betriebsflächen und Aussage unterscheidbar."""
 

@@ -119,9 +119,21 @@ updates:
         update-types: ["minor", "patch"]
     # Piper-Major-Versionen weiterhin nicht automatisch als Versionsupdate
     # vorschlagen; Sicherheitsupdates sind von dieser SemVer-Regel ausgenommen.
+    #
+    # `hugo` ist KEIN frei bumpbares Paket (17.11.2026, PR #1241):
+    # Die Version steht koordiniert an drei Stellen – hier
+    # (`requirements-hugo.txt`), im verifizierten PyPI-Fallback der Action
+    # (`.github/actions/install-hugo/action.yml`) und als Default in den
+    # Workflows. `test_local_verification.py` (C25) verlangt deshalb GENAU
+    # EINEN geprüften Linux-Wheel-Hash. Dependabot schreibt bei hugo aber alle
+    # Plattform-Hashes derselben Version in eine Zeile; der PR ist damit
+    # strukturell nicht mergebar – er kann die drei Stellen nicht mitziehen.
+    # Ein hugo-Bump ist ein eigener, geprüfter Vorgang (Hash verifizieren,
+    # Action-Fallback und Workflow-Default mitziehen, Build gegen den Bestand).
     ignore:
       - dependency-name: "piper-tts"
         update-types: ["version-update:semver-major"]
+      - dependency-name: "hugo"
 
   # n8n-Host: Image-Tags in docker-compose.yml und das Whisper-Dockerfile.
   - package-ecosystem: "docker-compose"

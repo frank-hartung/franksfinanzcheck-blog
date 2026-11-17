@@ -321,9 +321,22 @@ def heile_datei(rel: str, head_text: str | None, work_text: str) -> tuple[str, l
         kandidat = "\n".join(lines[:fm_start] + fm_lines + lines[fm_ende:])
         # Sicherheit gegen einen doch vorhandenen Restschlüssel: genau EIN
         # Top-Level-Feld (Naht-SSOT), Body unverändert.
-        prefix, fm_neu, body = pu.split_article(kandidat)
-        fm_neu = pu.doppel_freies_feld(fm_neu, key)
-        kandidat = pu.join_article(fm_neu, body, prefix)
+        #
+        # WARUM HIER NICHT `pu.join_article` (17.11.2026, Integritäts-Siegel)
+        # -------------------------------------------------------------------
+        # `join_article` setzt die Naht KANONISCH (`---\n\n` + Body ohne
+        # führende Umbrüche). Dieser Heiler darf aber ausschließlich das
+        # verlorene Feld zurückschreiben – jede andere Zeile ist fremdes
+        # Eigentum (Redaktion, Typografie-Heilung, Diff-Hygiene). Stand am
+        # 16.11.2026 im Ökostrom-Artikel ein zusätzlicher Leerzeilen-Rest nach
+        # der schließenden Grenze, glättete `join_article` ihn weg; Beweis 1
+        # („Body bytegleich“) schlug deshalb fehl und der Heiler verweigerte
+        # die Arbeit, obwohl er sie belegen konnte. Der Fehlschlag war stumm –
+        # die Kurzantwort blieb weg (M4). Darum: nur den FM-Block normalisieren
+        # und in die ORIGINAL-Zeilen zurückspleißen.
+        fm_neu = pu.doppel_freies_feld("\n".join(fm_lines), key)
+        kandidat = "\n".join(lines[:fm_start] + fm_neu.split("\n")
+                             + lines[fm_ende:])
         # Beweis 1: Body bytegleich (Naht-SSOT normalisiert identisch).
         if pu.split_article(kandidat)[2] != pu.split_article(text)[2]:
             continue

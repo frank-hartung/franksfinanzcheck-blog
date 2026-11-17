@@ -1,6 +1,6 @@
-stand: '2026-11-13'
+stand: '2026-11-17'
 issue: 1072
-lauf: 2026-11-13 13:25 UTC
+lauf: 2026-11-17 12:45 UTC
 runden:
 - stand: '2026-11-05'
   lauf: 2026-11-05 12:43 UTC
@@ -29,6 +29,19 @@ runden:
     hinzuzufügen; die fünf Befunde wurden am neuen Text erneut gebunden. Anschließend
     den Umfang auf Premium-Mindestmaß erweitert (Verfahrensabschnitte ohne Preis-,
     Saison- oder Ersparnisbehauptung) und die Bindung ein zweites Mal erneuert."
+- stand: '2026-11-17'
+  lauf: 2026-11-17 12:45 UTC
+  umfang: >-
+    Fünf Heizöl-Befunde erneut am heutigen, weiterhin zurückgestellten Draft
+    gebunden (Projektion betrieb-v4). Anlass war keine Textänderung der
+    Redaktion, sondern die Typografie-Heilung des Betriebs (fix_spaces/
+    fix_linebreaks, Lauf 16.11.2026, 135 Dateien), die den byte-genauen
+    v3-Anker verschoben hat. betrieb-v4 nimmt Zwischenraum außerhalb von
+    Zaun-Code aus der Aussagefläche; Silben, Ziffern, Überschriften und
+    Linkziele bleiben gebunden. Der Befundgegenstand wurde am heutigen Text
+    erneut geprüft (Saisonprognosen und unbelegte Preis-/Sparzahlen weiterhin
+    gestrichen); Veröffentlichung bleibt bis zur Fachabnahme gesperrt.
+
 recherche:
   methode: Redaktionelle Prüfung jedes Befunds am jeweils dokumentierten Textstand;
   nachpruefung_2026_11_12: Zweite Runde für die Befunde, deren Anker der Umbau vom
@@ -40,6 +53,13 @@ recherche:
     Saisonprognosen und unbelegte Preis-/Sparzahlen entfernt; keine unpassende
     Bundesnetzagentur-Quelle mehr als Beleg geführt. Folgeentscheidungen sind an
     den Text-Hash vom 13.11.2026 gebunden. Draft bleibt bis zur Fachabnahme gesperrt.
+  nachpruefung_2026_11_17: Keine neue fachliche Runde, sondern die Bindung an den
+    unveränderten Aussageinhalt nach einer reinen Typografie-Heilung des Betriebs
+    (fix_spaces/fix_linebreaks, 16.11.2026). Geprüft wurde erneut, dass keine
+    Preis-, Saison- oder Ersparnisbehauptung im Draft steht; die fünf
+    Folgeentscheidungen binden deshalb an die Projektion `betrieb-v4`
+    (Zwischenraum außerhalb von Zaun-Code zählt nicht als Aussage). Eine
+    inhaltliche Änderung würde den Befund weiterhin sofort öffnen.
   abrufe:
   - url: https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html
     titel: Startseite Energie – Bundesnetzagentur
@@ -661,9 +681,10 @@ befunde:
   - heizöl-preise erreichen ihr tief meist in den monaten januar und februar
   rest_risiko: Keine Monatsprognose oder Ersparnis zugesagt; der Entwurf bleibt zurückgestellt.
   ledger_fassung_sha256: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
-  geprueft_fassung: 28af839d6e5dfff3b780343158e19322fedeba4430e6e129604b41d566224229
-  entschieden_am: '2026-11-13'
-  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
+  geprueft_fassung: cc6e563cc61f836bd6e22d7f5ee133e3faaa66872ecee6b5f8c16bf3c02eb287
+  projektion: betrieb-v4
+  entschieden_am: '2026-11-17'
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 17.11.2026'
 - id: 3ad2eefed314eb172c26
   artikel: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
   titel: 'Heizölpreise vergleichen: So planst du deine Bestellung'
@@ -684,9 +705,10 @@ befunde:
   - kosten um 10 % bis 20 % im herbst eingespart werden können
   rest_risiko: Eine Angebotsanfrage oder frühere Bestellung garantiert keine Ersparnis.
   ledger_fassung_sha256: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
-  geprueft_fassung: 28af839d6e5dfff3b780343158e19322fedeba4430e6e129604b41d566224229
-  entschieden_am: '2026-11-13'
-  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
+  geprueft_fassung: cc6e563cc61f836bd6e22d7f5ee133e3faaa66872ecee6b5f8c16bf3c02eb287
+  projektion: betrieb-v4
+  entschieden_am: '2026-11-17'
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 17.11.2026'
 - id: 43788c2cdcdfda52e753
   artikel: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
   titel: 'Heizölpreise vergleichen: So planst du deine Bestellung'
@@ -708,9 +730,10 @@ befunde:
   - tiefpreis von 0,80 €/liter ohne quell
   rest_risiko: Die Formel vergleicht individuelle Angebote, nicht Marktpreise oder Zeitpunkte.
   ledger_fassung_sha256: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
-  geprueft_fassung: 28af839d6e5dfff3b780343158e19322fedeba4430e6e129604b41d566224229
-  entschieden_am: '2026-11-13'
-  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
+  geprueft_fassung: cc6e563cc61f836bd6e22d7f5ee133e3faaa66872ecee6b5f8c16bf3c02eb287
+  projektion: betrieb-v4
+  entschieden_am: '2026-11-17'
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 17.11.2026'
 - id: 5eedec8afbdef6a4ca49
   artikel: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
   titel: 'Heizölpreise vergleichen: So planst du deine Bestellung'
@@ -731,9 +754,10 @@ befunde:
   - typische fehler beim heizölkauf bis zu 15 % mehrkosten
   rest_risiko: Individuelle Kostenfolgen werden nicht pauschal beziffert.
   ledger_fassung_sha256: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
-  geprueft_fassung: 28af839d6e5dfff3b780343158e19322fedeba4430e6e129604b41d566224229
-  entschieden_am: '2026-11-13'
-  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
+  geprueft_fassung: cc6e563cc61f836bd6e22d7f5ee133e3faaa66872ecee6b5f8c16bf3c02eb287
+  projektion: betrieb-v4
+  entschieden_am: '2026-11-17'
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 17.11.2026'
 - id: 81881c5bc61824d25f5a
   artikel: 2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu
   titel: 'Heizölpreise vergleichen: So planst du deine Bestellung'
@@ -754,9 +778,10 @@ befunde:
   verboten_behauptend: []
   rest_risiko: Persönliche Erinnerungsroutinen sind keine Marktregel oder Preisprognose.
   ledger_fassung_sha256: c13cf12ed8da9b5f194b07f6e0788c810acaeedded9cd17db2b598bfc6b20546
-  geprueft_fassung: 28af839d6e5dfff3b780343158e19322fedeba4430e6e129604b41d566224229
-  entschieden_am: '2026-11-13'
-  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 13.11.2026'
+  geprueft_fassung: cc6e563cc61f836bd6e22d7f5ee133e3faaa66872ecee6b5f8c16bf3c02eb287
+  projektion: betrieb-v4
+  entschieden_am: '2026-11-17'
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 17.11.2026'
 - id: 0a2bec9dc02e16c057ee
   artikel: 2026-11-02-last-minute-urlaubsangebote-sichern
   titel: Last-Minute Urlaubsangebote sichern

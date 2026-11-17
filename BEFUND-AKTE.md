@@ -2,15 +2,15 @@
 
 _Stand 2026-11-17 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**209 offene Befunde auf 54 Seiten · davon 34 Live-Seiten mit 129 Befunden · ältester 18 Tage · Frist 14 Tage.**
+**197 offene Befunde auf 51 Seiten · davon 34 Live-Seiten mit 129 Befunden · ältester 18 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 209 |
-| Seiten betroffen | 54 (davon live: 34) |
+| Offene Befunde | 197 |
+| Seiten betroffen | 51 (davon live: 34) |
 | Text seit dem Befund geändert | 168 |
 | Altbestand ohne Fassungs-Hash | 11 |
-| Nicht entscheidbar (Seite fehlt) | 5 |
+| Nicht entscheidbar (Seite fehlt) | 0 |
 | Über der Frist (14 Tage) | 37 |
 | In Eskalation (21 Tage) | 0 |
 
@@ -32,7 +32,7 @@ _Stand 2026-11-17 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 179 von 209 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 179 von 197 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -592,6 +592,20 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden cb794331f1cc0c715a5
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e6729081522126e972c2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung` · **LIVE** · Risikoklasse erhoeht · 2 Befund(e)
+
+Datei: `content/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `26b1c694d76bcc7af50f` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Ratgeber versäumt es, den für den Verbraucherschutz zentralen Regulierungsrahmen der 'Unternehmenspflichten' zu nennen, den die Bundesnetzagentur explizit als Fachthema führt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `9593e535bce55f4283e6` | praezision | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Empfehlung zum Preisvergleich lässt den aktuellen Marktdruck (sinkende Umsätze bei O2) außer Acht, der für die Verhandlung von Rückholangeboten bei Kündigung entscheidend sein kann. | [Quelle](https://www.heise.de/news/O2-mit-maessigen-Geschaeftszahlen-11525319.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 26b1c694d76bcc7af50f --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9593e535bce55f4283e6 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken` · **LIVE** · Risikoklasse standard · 1 Befund(e)
 
 Datei: `content/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/index.md`
@@ -620,20 +634,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 228ef205074fdc3fb4b
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d7c301604b02d49e8d65 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung` · **LIVE** · Risikoklasse erhoeht · 2 Befund(e)
-
-Datei: `content/posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `26b1c694d76bcc7af50f` | luecke | 1 T | Text unverändert seit dem Befund | Der Ratgeber versäumt es, den für den Verbraucherschutz zentralen Regulierungsrahmen der 'Unternehmenspflichten' zu nennen, den die Bundesnetzagentur explizit als Fachthema führt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-| `9593e535bce55f4283e6` | praezision | 1 T | Text unverändert seit dem Befund | Die Empfehlung zum Preisvergleich lässt den aktuellen Marktdruck (sinkende Umsätze bei O2) außer Acht, der für die Verhandlung von Rückholangeboten bei Kündigung entscheidend sein kann. | [Quelle](https://www.heise.de/news/O2-mit-maessigen-Geschaeftszahlen-11525319.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 26b1c694d76bcc7af50f --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9593e535bce55f4283e6 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
 ### `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden` · nicht im Live-Bestand · 5 Befund(e)
 
 Seite: `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden`
@@ -652,28 +652,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2520f45d441ef87614e
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 33bda5941052d9334598 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7406eaba3aa749c46f4b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9f47e6d2aa8cf2a8ff91 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu` · nicht im Live-Bestand · 5 Befund(e)
-
-Seite: `2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu`
-
-Herkunft nach Datums-Lift: `2026-11-01-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu` → `2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu`. Befund-ID und Fassungsanker bleiben unverändert; das Re-Dating ist keine fachliche Entscheidung.
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `0b564f460c41218244bd` | luecke | 14 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Artikel behauptet, dass Heizöl‑Preise ihr Tief meist in den Monaten Januar und Februar erreichen, ohne dafür eine Quelle anzugeben. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `3ad2eefed314eb172c26` | luecke | 14 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Aussage, dass durch frühzeitige Bestellung Kosten um 10 % bis 20 % im Herbst eingespart werden können, ist unbelegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `43788c2cdcdfda52e753` | luecke | 14 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Modellrechnung verwendet einen Tiefpreis von 0,80 €/Liter, ohne dass diese Preisangabe belegt wird. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `5eedec8afbdef6a4ca49` | luecke | 14 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Es wird angegeben, dass typische Fehler beim Heizölkauf bis zu 15 % Mehrkosten verursachen können, jedoch fehlt ein Nachweis für diese Zahl. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `81881c5bc61824d25f5a` | praezision | 14 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Faustregel, dass man bestellen sollte, wenn Preise vier Wochen unter dem Schnitt der letzten 12 Monate liegen, wird ohne Messgrundlage oder Quelle genannt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 0b564f460c41218244bd --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3ad2eefed314eb172c26 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 43788c2cdcdfda52e753 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5eedec8afbdef6a4ca49 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 81881c5bc61824d25f5a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-11-04-guenstigen-mietwagen-fuer-den-urlaub-buchen` · nicht im Live-Bestand · 4 Befund(e)
@@ -820,6 +798,22 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden cacd65ac080f79a719a
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d2bfec8aa9b7a0807f0e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-10-19-urlaubskasse-clever-aufbessern` · nicht im Live-Bestand · 3 Befund(e)
+
+Seite: `2026-10-19-urlaubskasse-clever-aufbessern`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `17cddd994cefcdc30f31` | luecke | 5 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Ein Mietwagen ist oft ein teurer Posten. Er kostet meistens fast so viel wie der Flug oder das Hotel. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+| `676fdb5ff70228b06bdc` | luecke | 5 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Geld sollte innerhalb von 48 Stunden zurück sein. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+| `88051266499d4040f7f3` | luecke | 5 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Preise werden dort fair und offen gezeigt. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 17cddd994cefcdc30f31 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 676fdb5ff70228b06bdc --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 88051266499d4040f7f3 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten` · nicht im Live-Bestand · 4 Befund(e)
 
 Seite: `2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten`
@@ -946,56 +940,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 766e3df5f10bb91ff03
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d11731ee598db94f14c0 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ef34d0d6243902be1bc9 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f48dd250f165f647c90a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-10-19-urlaubskasse-clever-aufbessern` · nicht im Live-Bestand · 3 Befund(e)
-
-Seite: `2026-10-19-urlaubskasse-clever-aufbessern`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `17cddd994cefcdc30f31` | luecke | 5 T | Text unverändert seit dem Befund | Ein Mietwagen ist oft ein teurer Posten. Er kostet meistens fast so viel wie der Flug oder das Hotel. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
-| `676fdb5ff70228b06bdc` | luecke | 5 T | Text unverändert seit dem Befund | Geld sollte innerhalb von 48 Stunden zurück sein. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
-| `88051266499d4040f7f3` | luecke | 5 T | Text unverändert seit dem Befund | Die Preise werden dort fair und offen gezeigt. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 17cddd994cefcdc30f31 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 676fdb5ff70228b06bdc --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 88051266499d4040f7f3 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert` · nicht im Live-Bestand · 2 Befund(e)
-
-Seite: `2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `784d0b3715d53d5c3bb2` | luecke | 2 T | Text unverändert seit dem Befund | Ein Preisrutsch für Neukunden lässt sich daraus nicht ableiten. | – |
-| `8fea8173e9c360979fc7` | veraltet | 1 T | Text unverändert seit dem Befund | Die Preise für Energie sind zuletzt um 14,9 % gestiegen. Das meldet das Statistische Bundesamt. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 784d0b3715d53d5c3bb2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8fea8173e9c360979fc7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub` · nicht im Live-Bestand · 5 Befund(e)
-
-Seite: `2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `11a92bff688ccbb5a485` | luecke | 8 T | Seite nicht lesbar – nicht entscheidbar | Die Behauptung, dass bis zum Sommer 500 € mehr im Urlaubsbudget verfügbar sind, fehlt eine Quellenangabe. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
-| `1d4896d8ed60f5b6921f` | praezision | 8 T | Seite nicht lesbar – nicht entscheidbar | Die Aussage, dass Cashback‑Portale „seit vielen Jahren am Markt etabliert“ sind, ist ein unpräzises Superlativ ohne messbare Daten. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
-| `4d2bc6c3e60fb9b4a719` | luecke | 8 T | Seite nicht lesbar – nicht entscheidbar | Die Aussage, dass eine 5 %ige Reduktion der Fixkosten bei 800 € Aufwand 40 € im Monat bzw. 480 € im Jahr spart, wird nicht durch die angeführte Quelle belegt. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
-| `76b5cdfda85516962cf8` | luecke | 8 T | Seite nicht lesbar – nicht entscheidbar | Angaben zu typischen Kündigungsfristen von ein bis drei Monaten werden von der Quelle nicht bestätigt. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
-| `b292db236a31ea0a1629` | luecke | 8 T | Seite nicht lesbar – nicht entscheidbar | Der genannte durchschnittliche Cashback‑Satz von 2 % der Ausgaben ist nicht durch die Quelle gestützt. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 11a92bff688ccbb5a485 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1d4896d8ed60f5b6921f --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4d2bc6c3e60fb9b4a719 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 76b5cdfda85516962cf8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden b292db236a31ea0a1629 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ---

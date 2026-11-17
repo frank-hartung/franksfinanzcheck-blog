@@ -39,6 +39,28 @@ class LocalVerificationTests(unittest.TestCase):
                     with self.subTest(path=path.name):
                         self.assertEqual(expected, found)
 
+    def test_dependabot_bumpt_hugo_nicht_allein(self):
+        """`hugo` ist dreifach gekoppelt gepinnt – kein automatischer Bump.
+
+        WARUM (17.11.2026, PR #1241)
+        ---------------------------
+        Dependabot schreibt bei `hugo` ALLE Plattform-Hashes derselben
+        Version in eine Zeile. C25 erwartet genau EINEN geprüften
+        Linux-Wheel-Hash, der zum verifizierten PyPI-Fallback der
+        install-hugo-Action passt. Ein Dependabot-PR kann die drei Stellen
+        (requirements-hugo.txt, action.yml, Workflow-Default) nicht mitziehen
+        und ist deshalb strukturell rot. Ohne diese Sperre kommt derselbe
+        rote PR jede Woche wieder – die Schleife ist der Fehler, nicht der PR.
+        """
+        cfg = yaml.safe_load((ROOT / '.github/dependabot.yml').read_text())
+        pip_bloecke = [u for u in cfg['updates']
+                       if u.get('package-ecosystem') == 'pip']
+        self.assertTrue(pip_bloecke, 'pip-Block fehlt – Dependabot deckt Python nicht mehr ab')
+        ignores = {i.get('dependency-name')
+                   for block in pip_bloecke for i in (block.get('ignore') or [])}
+        self.assertIn('hugo', ignores,
+                      'hugo darf nicht automatisch gebumpt werden (C25, #1241)')
+
     def test_regression_runs_real_build_even_after_failure(self):
         workflow = yaml.safe_load((ROOT / '.github/workflows/publication-reliability-tests.yml').read_text())
         steps = workflow['jobs']['regression']['steps']

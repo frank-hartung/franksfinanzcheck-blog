@@ -80,8 +80,10 @@ nicht, was richtig ist (das prüft die Redaktion, nicht das Modell).
 - [Frugalismus & Budget](https://franksfinanzcheck.de/pillar/frugalismus/): Haushaltsbudget ordnen, 50–30–20-Regel anwenden, Notgroschen krisenfest aufbauen, Geldlecks schließen und finanzielle Unabhängigkeit erreichen.
 - [Mietwagen & Reisen](https://franksfinanzcheck.de/pillar/mietwagen/): Mietwagen günstig buchen, versteckte Schalter-Fallen vermeiden, Flugpreise drücken und die Reisekasse optimal aufbessern.
 
-## Alle Artikel (neueste zuerst, 84 Beiträge)
+## Alle Artikel (neueste zuerst, 86 Beiträge)
 
+- [Secondhand Kleidung: So erkennst du Qualität & sparst](https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst/): Erfahre, wie du hochwertige Secondhand Kleidung erkennst. Mit meinen Tipps prüfst du Stoffe und Nähte, um beim Kleidung sparen echte Qualität zu finden.
+- [Geschenkkarte: Was du beim Kauf und Aufladen wissen musst](https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst/): Eine Geschenkkarte ist praktisch, birgt aber oft versteckte Kosten. Wir zeigen dir, wie du beim Gutschein aufladen und Karte verschenken Geld sparst.
 - [Wie viel Streaming‑Bandbreite: Du wirklich brauchst](https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/): Streaming Bandbreite: Ruckel So sparst du jeden Monat bares Geld. Schritt für Schritt erklärt – ohne Fachchinesisch. Mit praktischen Tipps für den Alltag.
 - [Fenster abdichten: So stoppst du Zugluft an alten Rahmen](https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/): Fenster abdichten leicht gemacht: Mit diesen Tipps kannst du Zugluft stoppen und effektiv Heizkosten senken. Erfahre jetzt, worauf es ankommt.
 - [WLAN-Frust lösen: So findest du den besten Router Standort](https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/): WLAN Empfang verbessern ohne Kosten: Optimiere deinen Router Standort mit einfachen Tipps für stabiles Internet in jedem Raum. Lies jetzt mehr.
@@ -176,4 +178,4 @@ nicht, was richtig ist (das prüft die Redaktion, nicht das Modell).
 - RSS-Feed (neueste Artikel): https://franksfinanzcheck.de/index.xml
 
 *Diese Datei wird automatisch aus den Live-Inhalten erzeugt
-(scripts/generate_llms_txt.py). Stand: 2026-11-13.*
+(scripts/generate_llms_txt.py). Stand: 2026-11-17.*

@@ -507,7 +507,24 @@ def simuliere(eintraege: list[dict], budget: int, stichtag: dt.date,
     verletzt: list[dict] = []
     gemeldet: set[tuple[str, int]] = set()
     abbau_tag: int | None = None
+    # RÜCKSTAND IST ÜBERFÄLLIG – NICHT „HEUTE FÄLLIG“ (17.11.2026, #1241)
+    # ------------------------------------------------------------------
+    # Für `puenktlich` zählt eine Verspätung nur dann als Altlast, wenn die
+    # Frist bereits VOR dem Stichtag lag. Eine Seite, deren Frist HEUTE
+    # abläuft, ist noch pünktlich – sie kann heute arbeiten. Wurde sie
+    # trotzdem nicht bedient, verschwand die Verspätung als „Altlast“ aus
+    # `puenktlich`; `empfohlenes_budget` sah keinen Grund, das Budget zu
+    # heben, und die Seite war am nächsten Tag einen Tag zu spät. Belegt am
+    # 17.11.2026: drei Seiten mit Frist 27.11.2026 (Intervall 45) rutschten
+    # bei Sockel 5 auf den 28.11. und rissen die Ausfalltoleranz – obwohl der
+    # Plan „pünktlich“ meldete.
+    #
+    # `alt_rueckstand` bleibt die Arbeitsmenge für den Abbau-Nachweis (jede
+    # heute fällige Seite ist Arbeit), `ueberfaellig` ist die strengere Menge
+    # für das Pünktlichkeitsurteil.
     alt_rueckstand = {e["slug"] for e in eintraege if e["bereits_faellig"]}
+    ueberfaellig = {e["slug"] for e in eintraege
+                    if e["bereits_faellig"] and e["frist"] < stichtag}
     for offset in range(horizont_tage + 1):
         tag = stichtag + dt.timedelta(days=offset)
         # Stand zu BEGINN des Tages (#1107): Ein Restart an diesem Tag verarbeitet
@@ -527,11 +544,15 @@ def simuliere(eintraege: list[dict], budget: int, stichtag: dt.date,
                                      # benennen – nur als Zählung.
                                      "tag": tag.isoformat(),
                                      "tage_zu_spaet": (tag - e["frist"]).days,
-                                     # Nur die erste Runde gehört zur Altlast.
+                                     # Nur die erste Runde gehört zur Altlast –
+                                     # und nur, wenn die Frist schon VOR dem
+                                     # Stichtag lag. Eine heute fällige Seite,
+                                     # die heute keinen Platz bekommt, ist eine
+                                     # NEUE Verspätung (17.11.2026, #1241).
                                      # Eine spätere Frist derselben Seite ist
                                      # ein neuer Termin auf dem Weg des Bots.
                                      "vorher_faellig": (e["runde"] == 0
-                                                         and e["slug"] in alt_rueckstand),
+                                                         and e["slug"] in ueberfaellig),
                                      "folgeprüfung": e["runde"] > 0})
                     gemeldet.add(key)
         melde_verspaetungen()

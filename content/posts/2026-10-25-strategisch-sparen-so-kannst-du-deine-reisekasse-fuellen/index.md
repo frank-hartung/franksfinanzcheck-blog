@@ -12,7 +12,7 @@ author: "Frank Hartung"
 keywords: ["Reisekasse füllen", "Urlaubsbudget", "Geld für Urlaub sparen", "Cashback Tipps", "Strategisch sparen", "Strategisch", "Reisekasse", "Frugalismus"]
 pinwand: Günstig reisen | Reisebudget & Mietwagen
 pin_title: "Mehr Geld für den Urlaub: So polsterst du deine Reisekasse auf"
-pin_description: "*Werbung | Der Traumurlaub scheitert am Budget? Mit diesen 7 Alltags-Tricks füllt sich deine Urlaubskasse fast von allein – vom Cashback-Konto über No-Spend-Tage bis zum cleveren Verkaufen. So sind bis zum Sommer 500 € mehr drin. Jetzt lesen!"
+pin_description: "*Werbung | Der Traumurlaub scheitert am Budget? Mit diesen 7 Alltags-Tricks füllt sich deine Urlaubskasse fast von allein – vom Cashback-Konto über No-Spend-Tage bis zum cleveren Verkaufen. Mit offen genannten Annahmen kommen über zwölf Monate bis zu 500 € zusammen. Jetzt lesen!"
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "relaxed"
@@ -50,6 +50,8 @@ quellen:
 faktencheck: 2026-11-11
 lastmod: 2026-11-13
 kurzantwort: "Rechne die Sparrate so: Reisekosten minus bereits Erspartem, geteilt durch die Monate bis zur Zahlung. Cashback ist ein Extra, keine Grundlage. Modellrechnungen nennen ihre Annahmen."
+faktenfrische_aliases:
+  - "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub"
 ---
 
 

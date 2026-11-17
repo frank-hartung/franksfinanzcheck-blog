@@ -86,6 +86,22 @@ def pruefe(fm: dict, body: str) -> list[str]:
     return fehler
 
 
+def _ersetze_robust(text: str, alt: str, neu: str) -> str:
+    """Ersetzt eine Zeichenkette unabhängig von der Typografie des Bestands.
+
+    `fix_spaces` setzt vor `%` und `€` ein geschütztes Leerzeichen
+    (U+00A0/U+202F). Ein Test, der `"= 12 €"` wörtlich ersetzt, sabotiert
+    dann NICHTS – er bleibt grün, obwohl er rot sein müsste. Genau so stand es
+    am 17.11.2026 im Bestand: Der Sabotage-Fall unten lief ins Leere.
+    """
+    teile = re.split(r"\s+", alt.strip())
+    muster = r"[\s\u00a0\u202f]+".join(re.escape(t) for t in teile)
+    neu_text, treffer = re.subn(muster, neu, text, count=1)
+    if treffer != 1:
+        raise AssertionError(f"Sabotage traf nicht (Typografie geändert?): {alt!r}")
+    return neu_text
+
+
 class KreditkarteRueckfallTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -139,7 +155,9 @@ class KreditkarteRueckfallTests(unittest.TestCase):
         alt = copy.deepcopy(self.fm)
         alt["pin_description"] = "Kostenlose Karten haben meist keine Mindesteinkommensvorgabe."
         self.assertTrue(pruefe(alt, self.body))
-        self.assertTrue(pruefe(self.fm, self.body.replace("= 12 €", "= 120 €")))
+        # Typografie-robust: der Bestand trägt NBSP vor `€` (fix_spaces).
+        self.assertTrue(pruefe(self.fm, _ersetze_robust(
+            self.body, "= 12 €", "= 120 €")))
         alt_body = self.body.replace("Nicht zwingend.", "Ja, immer.", 1)
         self.assertNotEqual(alt_body, self.body)
         self.assertTrue(pruefe(self.fm, alt_body))

@@ -688,15 +688,17 @@ def _frontmatter(art: dict) -> dict:
 # Randleerzeilen. Ein Artikel, der auf "\n" endete, bekam dadurch einen
 # anderen Hash, obwohl der Satz derselbe war – dieselbe Klasse von Fehler
 # wie die Betriebsflächen, nur unsichtbar.
-PROJEKTIONEN = ("betrieb-v3", "betrieb-v3-rand", "betrieb-v2",
+PROJEKTIONEN = ("betrieb-v4", "betrieb-v3", "betrieb-v3-rand", "betrieb-v2",
                 "betrieb-v2-rand", "betrieb-v1", "betrieb-v1-rand", "roh-rand")
-_BETRIEBSREGEL = {"betrieb-v3": "betrieb-v2", "betrieb-v3-rand": "betrieb-v2",
+_BETRIEBSREGEL = {"betrieb-v4": "betrieb-v2",
+                  "betrieb-v3": "betrieb-v2", "betrieb-v3-rand": "betrieb-v2",
                   "betrieb-v2": "betrieb-v2", "betrieb-v2-rand": "betrieb-v2",
                   "betrieb-v1": "betrieb-v1", "betrieb-v1-rand": "betrieb-v1",
                   "roh-rand": "keine"}
 # "nackt" = ohne Rand-Leerzeilen (neue + randneutrale Anker)
 # "ein"   = mit genau einer Schlusszeile (Beweisform der gespeicherten Anker)
-_RAND_ART = {"betrieb-v3": "nackt", "betrieb-v3-rand": "ein",
+_RAND_ART = {"betrieb-v4": "nackt",
+             "betrieb-v3": "nackt", "betrieb-v3-rand": "ein",
              "betrieb-v2": "nackt", "betrieb-v1": "nackt", "roh-rand": "nackt",
              "betrieb-v2-rand": "ein", "betrieb-v1-rand": "ein"}
 # v3 normalisiert zusätzlich FOLGEN VON LEERZEILEN (10.11.2026, #1098).
@@ -708,7 +710,29 @@ _RAND_ART = {"betrieb-v3": "nackt", "betrieb-v3-rand": "ein",
 # NEUE Entscheidungen auf höchstens eine zusammengezogen. Die älteren
 # Projektionen bleiben unverändert, damit dokumentierte Entscheidungen ihre
 # Bindung behalten.
-_BLANK_NORMALISIEREN = {"betrieb-v3": True, "betrieb-v3-rand": True}
+_BLANK_NORMALISIEREN = {"betrieb-v4": True,
+                        "betrieb-v3": True, "betrieb-v3-rand": True}
+# v4 (17.11.2026, Integritäts-Siegel / #1072) nimmt ZWISCHENRAUM aus der
+# Aussagefläche. Anlass ist derselbe Fehler wie bei den Betriebsflächen, nur
+# in der letzten noch offenen Ebene: Der Betrieb heilt TYPOGRAFIE
+# (`fix_spaces.py`, `fix_linebreaks.py`) – und jede eingefügte oder entfernte
+# Leerstelle änderte den Hash, obwohl kein Satz, keine Zahl und keine
+# Überschrift angefasst wurde.
+#
+# Der Beleg vom 17.11.2026: Der Lauf vom 16.11.2026 (15:44 UTC, Audit
+# `fix_linebreaks`/`fix_spaces`, 135 Dateien, 113 + 76 Änderungen) verschob
+# genau die Aussage-Hashes, an die am 13.11.2026 fünf Heizöl-Entscheidungen
+# gebunden waren. 168 von 209 offenen Befunden standen danach als „Text seit
+# dem Befund geändert" – und das PR-Gate verlangt die fünf Heizöl-Befunde
+# geschlossen. Jeder Pull Request wurde damit rot, obwohl niemand eine
+# Aussage geändert hatte.
+#
+# Deshalb gilt für NEUE Entscheidungen: Zwischenraum (Leerzeichen, Tabs,
+# NBSP, Zeilenumbrüche, Leerzeilen) ist keine Aussage. Ein Zaun-Code-Block
+# (``` / ~~~) bleibt unangetastet – dort trägt Zwischenraum Bedeutung. Eine
+# geänderte Silbe, Ziffer, Überschrift oder Linkroute ändert den Hash
+# weiterhin sofort; die Gegenprobe steht im Selbsttest (Fall n).
+_ZWISCHENRAUM_NEUTRAL = {"betrieb-v4"}
 
 
 def aussage_body(body: str, projektion: str = PROJEKTIONEN[0]) -> str:
@@ -790,8 +814,53 @@ def aussage_body(body: str, projektion: str = PROJEKTIONEN[0]) -> str:
     #   "ein"   – mit genau einer schließenden Zeile (die Form, in der
     #             Artikel gespeichert werden und in der der Alt-Hash rechnete).
     if _RAND_ART[projektion] == "ein":
-        return text.rstrip("\n") + "\n"
-    return text.strip("\n")
+        text = text.rstrip("\n") + "\n"
+    else:
+        text = text.strip("\n")
+    if projektion in _ZWISCHENRAUM_NEUTRAL:
+        text = ohne_zwischenraum(text)
+    return text
+
+
+def ohne_zwischenraum(text: str) -> str:
+    """Dieselbe Aussage ohne jeden Zwischenraum – Zaun-Code bleibt roh.
+
+    WARUM (17.11.2026, Integritäts-Siegel / #1072)
+    ----------------------------------------------
+    Zwei Werkzeuge des Betriebs heilen ausschließlich Typografie:
+
+      * `fix_spaces.py` – doppelte Leerzeichen, fehlendes Leerzeichen nach
+        Punkt/Komma, „z.B." → „z. B.", NBSP zwischen Zahl und %/€.
+      * `fix_linebreaks.py` – Hard-Break-Spuren, Zeilen zusammenführen,
+        Umbrüche in Schutzkontexten zurückbauen.
+
+    Beide ändern **keine** Aussage, aber byte-genau sehr wohl den Hash. Der
+    Lauf vom 16.11.2026 (135 Dateien, 113 + 76 Änderungen) riss damit 168
+    dokumentierte Entscheidungen auf und färbte jedes PR-Gate rot.
+
+    Die Neutralisierung entfernt deshalb Leerraum jeder Art (Leerzeichen,
+    Tab, NBSP, Zeilenumbruch) AUSSERHALB von Zaun-Code-Blöcken. Dort trägt
+    Zwischenraum Bedeutung (Einrückung, Ausrichtung) und bleibt deshalb
+    zeichengenau. Alles, was eine Aussage trägt – Silben, Ziffern,
+    Überschriften, Linkziele, Tabellenzellen –, enthält Nicht-Leerraum und
+    ändert den Hash weiterhin sofort.
+
+    Bewusste Grenze: „80 Euro" und „80Euro" gelten als dieselbe Aussage
+    (ein Leerzeichen ist kein Satz). Wer diesen Unterschied prüfen will,
+    nimmt `pruef_hash` – der bleibt vollständig und byte-genau.
+    """
+    # Zaun-Code (``` oder ~~~) ausnehmen: Er wird zeichengenau gehasht, weil
+    # Einrückung dort Programmtext ist. Wir zerlegen in Segmente und werfen
+    # Zwischenraum nur außerhalb weg.
+    segmente = re.split(r"(?ms)^([ \t]*(?:```|~~~).*?^[ \t]*(?:```|~~~)[ \t]*$)",
+                        str(text or ""))
+    ergebnis: list[str] = []
+    for i, segment in enumerate(segmente):
+        if i % 2:
+            ergebnis.append(segment)          # Zaun-Code: unverändert
+        else:
+            ergebnis.append(re.sub(r"\s+", "", segment))
+    return "".join(ergebnis)
 
 
 def text_hash(art: dict, projektion: str = PROJEKTIONEN[0]) -> str:
@@ -803,6 +872,9 @@ def text_hash(art: dict, projektion: str = PROJEKTIONEN[0]) -> str:
     Seit dem 07.11.2026 gilt dasselbe für die Flächen, die fremde Werkzeuge
     schreiben (Weiterlesen-Zeile, Abbildungen, Transparenz, Disclaimer,
     Werkzeug-Anhang) – Begründung und Beweis: `aussage_body()`.
+    Seit dem 17.11.2026 gilt es zusätzlich für Zwischenraum, also für die
+    reine Typografie-Heilung des Betriebs – Begründung und Grenze:
+    `ohne_zwischenraum()`.
     """
     fm = _frontmatter(art)
     material = {
@@ -940,11 +1012,18 @@ def bestand_identitaeten() -> tuple[dict[str, dict], dict[str, str]]:
             "text_v1": _text_hash_nackt(art, "betrieb-v1"),
             "text_v1_rand": _text_hash_nackt(art, "betrieb-v1-rand"),
             # Die Projektion, die bis 10.11.2026 die Vorgabe war. Neue
-            # Entscheidungen binden an `text` (v3); dokumentierte
+            # Entscheidungen binden an `text` (v4); dokumentierte
             # Entscheidungen der v2-Zeit bleiben gültig, solange der Text
             # unter v2 unverändert ist.
             "text_v2": _text_hash_nackt(art, "betrieb-v2"),
             "text_v2_rand": _text_hash_nackt(art, "betrieb-v2-rand"),
+            # Die Projektion, die bis 17.11.2026 die Vorgabe war (Betriebs-
+            # flächen und Leerzeilen fein, Zwischenraum byte-genau). Sie wird
+            # NIE für neue Entscheidungen geschrieben; sie hält die vor dem
+            # 17.11.2026 gebundenen Entscheidungen gültig, solange der Text
+            # unter v3 unverändert ist (#1072, Integritäts-Siegel).
+            "text_v3": _text_hash_nackt(art, "betrieb-v3"),
+            "text_v3_rand": _text_hash_nackt(art, "betrieb-v3-rand"),
         }
         roh = _frontmatter(art).get("faktenfrische_aliases") or []
         if not isinstance(roh, list):
@@ -1073,7 +1152,9 @@ def _normalisiere_fassungen(fassungen) -> dict[str, dict]:
             ergebnis[str(slug)] = {"text": wert, "pruef": wert,
                                    "text_alt": wert, "text_alt_nackt": wert,
                                    "text_alt_ein": wert, "text_v1": wert,
-                                   "text_v1_rand": wert}
+                                   "text_v1_rand": wert, "text_v2": wert,
+                                   "text_v2_rand": wert, "text_v3": wert,
+                                   "text_v3_rand": wert}
         elif isinstance(wert, dict):
             ergebnis[str(slug)] = {"text": wert.get("text") or "",
                                    "pruef": wert.get("pruef") or "",
@@ -1095,7 +1176,14 @@ def _normalisiere_fassungen(fassungen) -> dict[str, dict]:
                                    "text_v2": (wert.get("text_v2")
                                                or wert.get("text") or ""),
                                    "text_v2_rand": (wert.get("text_v2_rand")
-                                                    or wert.get("text") or "")}
+                                                    or wert.get("text") or ""),
+                                   # v3 bleibt rückwärts lesbar. Fehlt der
+                                   # Wert (Altaufrufer), wird bewusst NICHT
+                                   # `text` eingesetzt: sonst würde ein
+                                   # v4-Hash als v3-Lesart ausgegeben und die
+                                   # Rückwärtsbindung wäre eine Scheinprüfung.
+                                   "text_v3": wert.get("text_v3") or "",
+                                   "text_v3_rand": wert.get("text_v3_rand") or ""}
     return ergebnis
 
 
@@ -1313,7 +1401,8 @@ def _entscheidung_schliesst(decision: dict | None, entry: dict,
                      aktuell.get("text_alt_blind"),
                      aktuell.get("text_alt_blind_nackt"),
                      aktuell.get("text_v1"), aktuell.get("text_v1_rand"),
-                     aktuell.get("text_v2"), aktuell.get("text_v2_rand")):
+                     aktuell.get("text_v2"), aktuell.get("text_v2_rand"),
+                     aktuell.get("text_v3"), aktuell.get("text_v3_rand")):
             if not wert:
                 continue
             moeglich.add(wert)
@@ -2102,6 +2191,47 @@ def selftest() -> int:
                        + "".join(betrieb.values()))
         assert len(offene_befunde(queue_path, decisions, {"seite": echt})) == 1, \
             "Echter Satz hat die Entscheidung NICHT geöffnet"
+
+        # (n) TYPOGRAFIE IST KEINE AUSSAGE (17.11.2026, Integritäts-Siegel).
+        #     `fix_spaces.py` und `fix_linebreaks.py` heilen ausschließlich
+        #     Leerraum. Vor dieser Projektion riss jede solche Heilung eine
+        #     dokumentierte Entscheidung auf: Der Lauf vom 16.11.2026 (135
+        #     Dateien, 113 + 76 Änderungen) öffnete 168 Befunde und färbte
+        #     jedes PR-Gate rot, ohne dass ein Satz, eine Zahl oder eine
+        #     Überschrift angefasst wurde. Hier wird jede Schreibart
+        #     nachgestellt – und die Gegenprobe bleibt: eine Ziffer öffnet.
+        typo_varianten = {
+            "doppeltes_leerzeichen": satz.replace("Der Abschlag",
+                                                  "Der   Abschlag"),
+            "leerzeichen_vor_satzzeichen": satz.replace("Vorauszahlung.",
+                                                        "Vorauszahlung ."),
+            "fehlendes_leerzeichen": satz.replace("Vorauszahlung. Er",
+                                                  "Vorauszahlung.Er"),
+            "geschuetztes_leerzeichen": satz.replace("bleibt eine",
+                                                     "bleibt\u00a0eine"),
+            "zeilenumbruch": satz.replace("bleibt eine", "bleibt\n eine"),
+            "leerzeilen": satz.replace("\n\n", "\n\n\n"),
+            "abgeschnittene_randzeilen": satz.rstrip("\n"),
+        }
+        for name, variante in typo_varianten.items():
+            assert offene_befunde(queue_path, decisions,
+                                  {"seite": fassung(variante)}) == [], \
+                f"Typografie `{name}` hat die Entscheidung geöffnet"
+        # Gegenprobe 1: eine Ziffer ist eine Aussage – sofort offen.
+        assert len(offene_befunde(
+            queue_path, decisions,
+            {"seite": fassung(satz + "\nDie Frist beträgt 14 Tage.\n")})) == 1, \
+            "Neue Ziffer hat die Entscheidung NICHT geöffnet"
+        # Gegenprobe 2: Zaun-Code bleibt zeichengenau – Einrückung ist dort
+        # Programmtext, nicht Typografie.
+        assert ohne_zwischenraum("```python\na = 1\n```") != \
+            ohne_zwischenraum("```python\na  =  1\n```"), \
+            "Zwischenraum im Zaun-Code wurde als bedeutungslos behandelt"
+        # Und die Prüffassung sieht die Typografie weiterhin vollständig.
+        assert pruef_hash({"fm": fm, "body": satz}) != \
+            pruef_hash({"fm": fm,
+                        "body": typo_varianten["doppeltes_leerzeichen"]}), \
+            "Prüffassung ist blind für Typografie geworden"
 
         # (m) UMBIENDUNG: Altentscheidungen überleben die Projektionsänderung.
         #     Am 07.11.2026 banden 104 Entscheidungen an den ROHEN Body (mit

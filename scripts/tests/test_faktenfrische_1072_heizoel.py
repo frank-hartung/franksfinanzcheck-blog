@@ -97,6 +97,39 @@ class Heizol1072Tests(unittest.TestCase):
         self.assertEqual(noch_offen, set(),
                          f"Heizöl-F4-Befunde wieder offen: {sorted(noch_offen)}")
 
+    def test_typografie_heilung_oeffnet_die_fuenf_befunde_nicht(self):
+        """Der Lauf vom 16.11.2026, der dieses Gate zuletzt rot gemacht hat.
+
+        `fix_spaces.py` und `fix_linebreaks.py` heilen ausschließlich
+        Leerraum. Vor der Projektion `betrieb-v4` verschob jede eingefügte
+        Leerstelle den Aussage-Hash und riss die fünf dokumentierten
+        Entscheidungen auf – das PR-Gate verlangt sie aber geschlossen.
+        Hier läuft der echte Produktionspfad (ohne Schreibzugriff) über den
+        echten Artikel: Der Befundstand muss unverändert bleiben.
+        """
+        import fix_linebreaks
+        import fix_spaces
+        import post_utils
+
+        raw = ARTICLE.read_text(encoding="utf-8")
+        _, fm, body = post_utils.split_article(raw)
+        geheilt, _ = fix_spaces.fix_body(body)
+        geheilt, _ = fix_linebreaks.self_heal(geheilt)
+        vorher = ledger.text_hash({"fm": fm, "body": body})
+        # Gegenprobe: Die alte, byte-genaue Projektion ist NICHT der Anker –
+        # sonst prüfte dieser Test nur, dass sich nichts bewegt.
+        self.assertNotEqual(vorher, ledger.text_hash({"fm": fm, "body": body},
+                                                    "betrieb-v3"),
+                            "v3 und v4 sind identisch – der Test misst nichts")
+        self.assertEqual(vorher, ledger.text_hash({"fm": fm, "body": geheilt}),
+                         "Typografie-Heilung verschiebt den Aussage-Hash")
+        fassungen, aliases = ledger.bestand_identitaeten()
+        offen = ledger.offene_befunde(
+            fassungen={SLUG: {"text": vorher,
+                              "pruef": ledger.pruef_hash({"fm": fm, "body": geheilt})}},
+            aliases=aliases)
+        self.assertEqual(FINDING_IDS.intersection(e["id"] for e in offen), set(),
+                         "Heilung hat einen der fünf Befunde wieder geöffnet")
 
 if __name__ == "__main__":
     unittest.main()
