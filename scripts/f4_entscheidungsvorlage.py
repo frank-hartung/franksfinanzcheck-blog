@@ -286,7 +286,7 @@ def baue(stichtag: dt.date) -> str:
     z.append("```")
     z.append("")
     z.append("_Jede Entscheidung ist fassungsgebunden: Sie gilt für den heute geprüften")
-    z.append("Text (Projektion `betrieb-v3`). Ändert sich ein Satz, öffnet der Befund")
+    z.append("Text (Projektion `betrieb-v4`). Ändert sich ein Satz, öffnet der Befund")
     z.append("erneut – das ist gewollt. Abgeleitete Blöcke und Leerzeilen öffnen nichts._")
     z.append("")
     return "\n".join(z)

@@ -54,8 +54,16 @@ class DependabotActionsPolicyTest(unittest.TestCase):
         self.assertEqual(groups["python"]["patterns"], ["*"])
         for group in groups.values():
             self.assertEqual(set(group["update-types"]), {"minor", "patch"})
-        self.assertEqual(entry["ignore"], [{"dependency-name": "piper-tts",
-                                           "update-types": ["version-update:semver-major"]}])
+        # `hugo` ist seit 17.11.2026 ausgenommen (PR #1241): Die Version steht
+        # koordiniert in `requirements-hugo.txt`, im verifizierten PyPI-Fallback
+        # der install-hugo-Action und als Workflow-Default; C25 verlangt genau
+        # EINEN geprüften Linux-Wheel-Hash. Dependabot schreibt bei hugo alle
+        # Plattform-Hashes in eine Zeile und ist damit strukturell rot.
+        self.assertEqual(entry["ignore"], [
+            {"dependency-name": "piper-tts",
+             "update-types": ["version-update:semver-major"]},
+            {"dependency-name": "hugo"},
+        ])
 
     def test_kein_exakt_doppeltes_ecosystem_verzeichnis(self):
         gesehen = set()

@@ -267,6 +267,28 @@ class Vorfall1110Tests(unittest.TestCase):
             wache._feld_block(pu.split_article(self.text)[1], "kurzantwort"))
 
 
+    def test_heilung_laesst_die_naht_zeichengenau(self):
+        """Nur das Feld kommt zurück – die Naht bleibt zeichengenau.
+
+        Die Typografie-Heilung des Betriebs erzeugt Stände mit einem
+        zusätzlichen Leerzeilen-Rest nach der schließenden Grenze. Ein Heiler,
+        der die ganze Datei über `pu.join_article` neu zusammensetzt, glättet
+        diese Naht, scheitert danach an seinem eigenen Beweis (Body bytegleich)
+        und verweigert die Arbeit – stumm, ohne Befund. Deshalb wird hier ein
+        bewusst NICHT-kanonischer Naht-Stand geprüft (17.11.2026).
+        """
+        beschaedigt = _ohne(self.text, "kurzantwort")
+        extra = beschaedigt.replace("---\n\n", "---\n\n\n", 1)
+        self.assertNotEqual(extra, beschaedigt)
+        self.assertIn("---\n\n\n", extra)
+        neu, heals = wache.heile_datei(VORFALL, self.text, extra)
+        self.assertEqual([h["feld"] for h in heals], ["kurzantwort"])
+        self.assertEqual(pu.split_article(neu)[2], pu.split_article(extra)[2],
+                         "Der Heiler hat Bytes außerhalb des Feldes angefasst")
+        self.assertIn("---\n\n\n", neu, "Die Naht wurde geglättet")
+        self.assertNotIn("Kurzantwort fehlt", wache._m4_befunde(VORFALL, neu))
+
+
 class VerdrahtungTests(unittest.TestCase):
     """Die Wache steht im Weg – sonst ist sie Prosa (C49)."""
 

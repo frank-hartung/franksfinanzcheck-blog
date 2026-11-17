@@ -28,6 +28,13 @@ on:
       - "data/entity.yaml"
       - "hugo.toml"
       - "content/_index.md"
+      # JEDER Beitrag zählt (17.11.2026): `--source-only` prüft E6 über
+      # `content/**`. Am 17.11. schrieb die Redaktion „Franks Finanzcheck“
+      # (mit Leerzeichen) in einen neuen Beitrag – dieser Lauf sprang nicht
+      # an, weil `content/posts/**` nicht in der Liste stand. Der Fehler
+      # erreichte `main` und wäre erst bei der nächsten Marken-Änderung
+      # aufgefallen, also irgendwann und ohne Besitzer.
+      - "content/posts/**"
       - "content/ueber/**"
       - "content/impressum/**"
       - "content/presse/**"
@@ -52,6 +59,13 @@ on:
       - "data/entity.yaml"
       - "hugo.toml"
       - "content/_index.md"
+      # JEDER Beitrag zählt (17.11.2026): `--source-only` prüft E6 über
+      # `content/**`. Am 17.11. schrieb die Redaktion „Franks Finanzcheck“
+      # (mit Leerzeichen) in einen neuen Beitrag – dieser Lauf sprang nicht
+      # an, weil `content/posts/**` nicht in der Liste stand. Der Fehler
+      # erreichte `main` und wäre erst bei der nächsten Marken-Änderung
+      # aufgefallen, also irgendwann und ohne Besitzer.
+      - "content/posts/**"
       - "content/ueber/**"
       - "content/impressum/**"
       - "content/presse/**"

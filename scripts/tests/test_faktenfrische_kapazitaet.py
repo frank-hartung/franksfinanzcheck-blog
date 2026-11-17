@@ -1364,11 +1364,66 @@ class AusfallToleranzTest(unittest.TestCase):
 
     def test_gegenprobe_mit_altem_sockel_4_reisst_die_frist(self):
         # Gegenprobe: der alte Sockel 4 reißt im selben 7-Tage-Ausfall
-        # ab Tag 10 zwei Fristen. Damit belegt der Test die Wirksamkeit
+        # ab Tag 10 Fristen. Damit belegt der Test die Wirksamkeit
         # der kleinsten Betriebsanpassung und prüft nicht nur einen Happy Path.
+        #
+        # Seit 17.11.2026 hebt `empfohlenes_budget` das Budget bei einem
+        # drohenden Termin selbst an (Sockel ist die Untergrenze, das harte
+        # Limit die Obergrenze). Eine Gegenprobe, die nur den Sockel senkt,
+        # wäre deshalb wirkungslos: Die Automatik fährt einfach über den
+        # Sockel. Die Gegenprobe muss den KORRIDOR schließen, sonst prüft sie
+        # nichts.
         cfg = ff.lade_config()
         cfg["budget"]["max_artikel_pro_lauf"] = 4
+        cfg["budget"]["hartes_limit_pro_lauf"] = 4
         self.assertGreater(self._verletzungen(cfg, 10), 0)
+
+
+class HeuteFaelligTest(unittest.TestCase):
+    """„Heute fällig“ ist keine Altlast – sonst schweigt die Automatik.
+
+    DER BEFUND (17.11.2026, PR-Serie #1237–#1243)
+    =============================================
+    Eine Seite, deren Frist HEUTE abläuft, ist noch pünktlich: Sie kann heute
+    arbeiten. `simuliere` stufte ihre Verspätung trotzdem als Altlast ein
+    (`vorher_faellig=True`), weil `bereits_faellig` auch „heute fällig“ heißt.
+    `puenktlich` zählt aber nur NEUE Verspätungen – also hob
+    `empfohlenes_budget` das Budget nie an, und die Seite war am nächsten Tag
+    einen Tag zu spät. Belegt am Bestand: drei Seiten mit Frist 27.11.2026
+    (Intervall 45) rutschten am 28.11. nach, bei Sockel 5 und Plan-Urteil
+    „pünktlich“. Die Ausfalltoleranz (7 Tage) war damit gerissen, ohne dass
+    eine Wache anschlug.
+    """
+
+    HEUTE = dt.date(2026, 11, 27)
+
+    def _eintrag(self, frist: dt.date) -> dict:
+        return {"slug": "seite", "titel": "Seite", "bereich": "artikel",
+                "klasse": "standard", "prio": 2, "intervall": 45,
+                "frist": frist, "ziel": frist - dt.timedelta(days=14),
+                "_vorlauf": 14, "bereits_faellig": True,
+                "restlaufzeit": (frist - self.HEUTE).days}
+
+    def _lauf(self, frist: dt.date) -> dict:
+        # Stichtag ist der Fristtag selbst; an diesem Tag läuft der Bot nicht
+        # (Ausfall/Überlast). Die Verspätung wird am Folgetag sichtbar – und
+        # genau dort entscheidet sich, ob sie „neu“ oder „Altlast“ ist.
+        return kap.simuliere([self._eintrag(frist)], 1, self.HEUTE, 1, set())
+
+    def test_heute_faellige_seite_zaehlt_als_neue_verspaetung(self):
+        lauf = self._lauf(self.HEUTE)
+        self.assertTrue(lauf["verletzungen"], "Verspätung nicht gemeldet")
+        self.assertEqual([v["vorher_faellig"] for v in lauf["verletzungen"]],
+                         [False],
+                         "Eine heute fällige Seite gilt fälschlich als Altlast – "
+                         "dann hebt `empfohlenes_budget` das Budget nie an")
+
+    def test_ueberfaellige_seite_zaehlt_weiter_als_altlast(self):
+        lauf = self._lauf(self.HEUTE - dt.timedelta(days=3))
+        self.assertTrue(lauf["verletzungen"], "Verspätung nicht gemeldet")
+        self.assertEqual([v["vorher_faellig"] for v in lauf["verletzungen"]],
+                         [True],
+                         "Echter Rückstand muss Altlast bleiben (Abbau-Nachweis)")
 
 
 if __name__ == "__main__":

@@ -104,11 +104,11 @@ Setze dir ein klares Ziel für jeden Monat. Prüfe dieses Ziel nach jeder Buchun
 
 Ein weiterer Tipp aus dem 4K‑Prüfpfad lautet: **Kündigungsfenster sichern**. Das ist der dritte Schritt im Pfad. Notiere dir das Datum für die Absage. Bis zu diesem Tag kannst du den Vertrag ohne Kosten ändern. Schau kurz vor diesem Tag noch einmal nach Preisen. Findest du ein besseres Angebot? Dann buche um. So nutzt du sinkende Preise aus. Das gibt dir Flexibilität und spart Geld.
 
-## Häufige Fehler und wie du sie vermeidest
+## Typische Stolperfallen – und wie du sie umgehst
 
 Fehler beim Mieten kosten viel Geld. Wer die Fallen kennt, kann sie umgehen. Hier siehst du die häufigsten Fehler in einer Liste.
 
-| Fehler | Warum er teuer wird | Wie du ihn vermeidest |
+| Stolperfalle | Warum sie ins Geld geht | Deine Gegenmaßnahme |
 | :--- | :--- | :--- |
 | Nur den Grundpreis vergleichen | Extras bleiben unbemerkt | Rechnung für alles machen |
 | Kaution nicht hinterfragen | Geld blockiert, Zinsen fehlen | Höhe prüfen, Rückgabe fordern |

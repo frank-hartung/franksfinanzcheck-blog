@@ -74,7 +74,11 @@ ohne Netzwerk, ohne API, determinisch. Läuft lokal, im Premium-Governance-Lauf
                      Befund und Entscheidung hängen am TEXT (ohne Quellen),
                      nicht an der Prüffassung – sonst macht die eigene
                      Quellenpflege oder die Heilung des Textes den Befund
-                     unschließbar (21 von 57 am 03.11.2026). Entscheidung per
+                     unschließbar (21 von 57 am 03.11.2026). Zwischenraum
+                     außerhalb von Zaun-Code ist ebenfalls keine Aussage:
+                     Typografie-Heilung (fix_spaces/fix_linebreaks) öffnet
+                     keine Entscheidung, eine geänderte Silbe/Ziffer schon
+                     (Projektion `betrieb-v4`, 17.11.2026). Entscheidung per
                      Befehl mit Person und Begründung, Arbeitsliste
                      BEFUND-AKTE.md mit Frist, und ein Scorecard-Ticket, das
                      die Kadenz nur nennt, wenn F1 wirklich blockiert (#912)
@@ -4022,7 +4026,11 @@ def c45_frischhalte_deckung(script_texts, wflows, root=BLOG_DIR):
 # solange Menschen nicht entschieden haben, wäre der nächste Dauerläufer):
 #   a) Zwei Hashes: `pruef_hash` (inkl. Quellen, für die KI-Antwort) und
 #      `text_hash` (Aussageflächen, für die Entscheidung). Quellenpflege
-#      öffnet keine Entscheidung, eine Textänderung schon.
+#      öffnet keine Entscheidung, eine Textänderung schon. Seit dem
+#      17.11.2026 gilt dasselbe für Zwischenraum (Projektion `betrieb-v4`):
+#      `fix_spaces`/`fix_linebreaks` heilen Typografie, nicht Aussagen –
+#      vorher riss der Wartungslauf vom 16.11.2026 (135 Dateien) 168
+#      dokumentierte Entscheidungen auf und färbte jedes PR-Gate rot.
 #   b) Eine Entscheidung nennt `befund_fassung` UND `geprueft_fassung` –
 #      Zuordnung und tatsächlich gelesener Text. Auch Altbestand ohne Hash
 #      ist damit am heutigen Text entscheidbar.
@@ -4050,7 +4058,14 @@ C46_LEDGER_MARKER = ("def text_hash(", "def befunde_mit_status(",
                      # käme beim nächsten Marketer-Lauf zurück.
                      "BETRIEBS_FLAECHEN", "def aussage_body(",
                      "def betriebsflaeche(",
-                     "def bindung_auf_feine_projektion(")
+                     "def bindung_auf_feine_projektion(",
+                     # 17.11.2026 (Integritäts-Siegel): Typografie ist keine
+                     # Aussage. Ohne diese Marker könnte ein Refactoring die
+                     # Zwischenraum-Neutralisierung entfernen – und der
+                     # nächste `fix_spaces`-Lauf öffnete wieder alle
+                     # Entscheidungen, die an einen geheilten Text gebunden
+                     # sind.
+                     "def ohne_zwischenraum(", "betrieb-v4")
 C46_AKTE_MARKER = ("def akte_bauen(", "BEFUND-AKTE.md", "frist_tage",
                    "eskalation_tage", "def wache(")
 C46_TICKET_MARKER = ("def ticket_body(", "F4-fachbefund", "BEFUND-AKTE.md",

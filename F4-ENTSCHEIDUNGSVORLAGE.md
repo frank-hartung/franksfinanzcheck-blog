@@ -1644,7 +1644,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen`
 
-- Datei-SHA256 (heute): `55050d876c05988d7b6fc66c3ccfee8ff65126594db28ec3f3fb3d50a1cd6b7d`
+- Datei-SHA256 (heute): `3919939ad04c614d87c0200a36c049529cc239f8999c42a769c9231117be2c6d`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1894,5 +1894,5 @@ python3 scripts/release_scorecard.py --live --streng
 ```
 
 _Jede Entscheidung ist fassungsgebunden: Sie gilt für den heute geprüften
-Text (Projektion `betrieb-v3`). Ändert sich ein Satz, öffnet der Befund
+Text (Projektion `betrieb-v4`). Ändert sich ein Satz, öffnet der Befund
 erneut – das ist gewollt. Abgeleitete Blöcke und Leerzeilen öffnen nichts._

@@ -90,6 +90,7 @@ sys.path.insert(0, os.path.join(BLOG_DIR, "scripts"))
 
 import post_utils as pu  # noqa: E402
 import faktenfrische_befund_ledger as ledger  # noqa: E402
+import reserve_schreibschutz as schutz  # noqa: E402
 from net_safety import pruefe_url_ziel, sicherer_abruf  # noqa: E402
 
 try:  # gemeinsamer Multi-Provider-Zugang (nur Standardbibliothek)
@@ -1518,7 +1519,31 @@ def verarbeite_seite(art: dict, cfg: dict, *, trocken: bool = False,
     Eine Seite ist eine Einheit. Wirft sie, fängt `main()` den Fehler und
     arbeitet weiter – die Beweise des Laufs (Queue, Report, Ledger) dürfen
     nicht an einer einzelnen Seite sterben (#984).
+
+    BYTEGEBUNDENE RESERVE-ENTWÜRFE BLEIBEN UNANGETASTET (#900/#462)
+    ---------------------------------------------------------------
+    Am 17.11.2026 lagen vier Reserve-Entwürfe vom selben Tag im Bestand, die
+    dieser Lauf „auffrischte“ (`a4b3e8942`, `ba515c051`). Damit zeigte das
+    Reife-Zertifikat `data/reserve-readiness.json` auf Bytes, die es nicht
+    mehr gab – der Nachweis war ungültig, ohne dass eine Zeile fehlschlug.
+    Genau die Fehlklasse, gegen die `reserve_schreibschutz` gebaut wurde:
+    drei Heiler fragen den Schutz, dieser fragte ihn nicht. Ein Entwurf, der
+    auf seine Veröffentlichung wartet, ist kein Faktenfrische-Kandidat: Er
+    wird gemeldet und übersprungen, nie geschrieben.
     """
+    try:
+        roh = Path(art["pfad"]).read_text(encoding="utf-8")
+    except (KeyError, OSError):
+        roh = ""
+    if schutz.ist_bytegebunden(roh):
+        print(f"\n▸ {art['titel'][:70]}\n  Fälligkeit: {art['_faellig']['grund']}")
+        print("  ⏸ " + schutz.schutzvermerk(art["slug"], "faktenfrische.py"))
+        return (lauf_eintrag(
+            art, art, {"treffer": [], "fehler": []}, [], [],
+            "übersprungen (bytegebundener Reserve-Entwurf)",
+            ["unangetastet: bytegebundener Reserve-Entwurf (#900) – "
+             "Nachmessung gehört zur Reserve-Kette, nicht in diesen Lauf"]),
+            False)
     print(f"\n▸ {art['titel'][:70]}\n  Fälligkeit: {art['_faellig']['grund']}")
     dossier = recherchiere(art, cfg, offline=trocken)
     print(f"  Fundstellen: {len(dossier['treffer'])}"
@@ -1747,8 +1772,13 @@ def selftest() -> int:
     ]
     befundliste = [{"id": "a" * 20, "slug": "2026-10-14-strom", "typ": "luecke",
                     "text": "Quelle fehlt", "fassung_sha256": "b" * 64}]
+    # Der Abbruch ist ein BELEG (17.11.2026): Ein `unvollstaendig` ohne
+    # Eintrag in `abbrueche` und ohne offenen Befund wäre eine Behauptung –
+    # genau die, die eine frisch geprüfte Seite für immer zur ARBEIT machte.
+    abbruchliste = [{"slug": "2026-10-14-dsl", "fehler": "Timeout beim Abruf"}]
     qd = queue_daten_bauen(uebersicht={"befunde": 1}, fachbefunde=befundliste,
-                           kapazitaet={}, abbrueche=[], arbeitsvorrat=vorratsliste,
+                           kapazitaet={}, abbrueche=abbruchliste,
+                           arbeitsvorrat=vorratsliste,
                            laeufe=[], erzeugt="2026-11-10 13:00 UTC")
     pruefe("ST9a", qd.get("schema"), QUEUE_SCHEMA)
     pruefe("ST9b", [e["slug"] for e in qd["offen"]],
@@ -1806,6 +1836,16 @@ QUEUE_STATUS_ARBEIT = ("faellig", "befund", "unvollstaendig")
 QUEUE_STATUS = QUEUE_STATUS_ARBEIT + ("vorlauf",)
 
 
+def lauf_ist_geprueft(lauf: dict) -> bool:
+    """Hat dieser Lauf die Fachprüfung abgeschlossen?
+
+    Dieselbe Regel wie in `verarbeite_seite` (`status.startswith("geprüft (")`):
+    Alles andere – Ausfall, Timeout, unvollständige Antwort – lässt Arbeit
+    stehen. Eine zweite Worterkennung daneben wäre eine zweite Wahrheit.
+    """
+    return str(lauf.get("fachpruefung") or "").startswith("geprüft (")
+
+
 def queue_status_von(eintrag: dict) -> str:
     """Den Zustand eines Vorrat-Eintrags aus seinen Fakten ableiten.
 
@@ -1820,6 +1860,23 @@ def queue_status_von(eintrag: dict) -> str:
     if bool(eintrag.get("faellig")):
         return "faellig"
     return "vorlauf"
+
+
+def feldgleich(a, b) -> bool:
+    """Typgetreuer Wertvergleich für JSON-Daten.
+
+    Gleiche Slugs reichen nicht: Eine veränderte Frist, ein fehlendes Feld
+    oder eine andere Begründung in einer Kopie wäre ein zweiter Datenstand.
+    Python hält 0 und False für gleich; JSON tut das nicht. Deshalb auch
+    verschachtelte Werte typgetreu vergleichen.
+    """
+    if type(a) is not type(b):
+        return False
+    if isinstance(a, dict):
+        return a.keys() == b.keys() and all(feldgleich(a[k], b[k]) for k in a)
+    if isinstance(a, list):
+        return len(a) == len(b) and all(feldgleich(x, y) for x, y in zip(a, b))
+    return a == b
 
 
 def queue_invariante(daten: dict) -> list[str]:
@@ -1886,19 +1943,6 @@ def queue_invariante(daten: dict) -> list[str]:
             fehler.append("Eintrag steht nur in `offen`/`vorlauf`: "
                           + ", ".join(extra))
 
-    # Gleiche Slugs reichen nicht: Eine veränderte Frist, ein fehlendes Feld
-    # oder eine andere Begründung in einer Kopie wäre ein zweiter Datenstand.
-    # Python hält 0 und False für gleich; JSON tut das nicht. Deshalb auch
-    # verschachtelte Werte typgetreu vergleichen.
-    def feldgleich(a, b):
-        if type(a) is not type(b):
-            return False
-        if isinstance(a, dict):
-            return a.keys() == b.keys() and all(feldgleich(a[k], b[k]) for k in a)
-        if isinstance(a, list):
-            return len(a) == len(b) and all(feldgleich(x, y) for x, y in zip(a, b))
-        return a == b
-
     for slug in sorted(set(vorrat) & (set(offen) | set(vorlauf))):
         teil = offen[slug] if slug in offen else vorlauf[slug]
         if not feldgleich(vorrat[slug], teil):
@@ -1914,6 +1958,19 @@ def queue_invariante(daten: dict) -> list[str]:
                     if isinstance(b, dict)}
     befund_slugs |= {b.get("ursprungs_slug") for b in daten["fachbefunde"]
                      if isinstance(b, dict)}
+    # Ein Abbruch ist ebenfalls ein Beleg – er steht in `abbrueche` mit dem
+    # Slug der Seite. Ohne ihn ist `unvollstaendig` eine unbelegte Behauptung
+    # (siehe die Prüfungen unten).
+    abbruch_slugs = {a.get("slug") for a in (daten.get("abbrueche") or [])
+                     if isinstance(a, dict)}
+    # Dritter Beleg: der Lauf-Eintrag selbst. `verarbeite_seite` gibt eine
+    # Seite als „nicht abgeschlossen“ zurück, wenn die Fachprüfung nicht
+    # „geprüft (…)“ lautet (Ausfall, Timeout, unvollständige Antwort). Diese
+    # Seite braucht einen Wiederholungslauf – und der Lauf steht mit seinem
+    # Status in `laeufe`. Ein `unvollstaendig` ohne diese drei Belege wäre
+    # eine Behauptung, die niemand mehr einlösen kann.
+    offene_laeufe = {l.get("slug") for l in (daten.get("laeufe") or [])
+                     if isinstance(l, dict) and not lauf_ist_geprueft(l)}
 
     for slug, eintrag in offen.items():
         status = eintrag.get("status")
@@ -1935,6 +1992,21 @@ def queue_invariante(daten: dict) -> list[str]:
         elif status == "unvollstaendig" and not eintrag.get("unvollstaendig"):
             fehler.append(f"`offen`-Eintrag behauptet Abbruch, "
                           f"`unvollstaendig` ist falsch: {slug}")
+
+    # Die beiden Behauptungen werden STATUSUNABHÄNGIG geprüft (17.11.2026).
+    # Vorher hingen sie in einer `elif`-Kette: Ein Eintrag mit Status
+    # `unvollstaendig` kam an der Befund-Prüfung nie vorbei. Genau so stand am
+    # 17.11.2026 eine Seite in `offen`, deren `befund: true` das Ledger nicht
+    # kannte und deren `unvollstaendig: true` kein Lauf als Abbruch führte –
+    # ARBEIT, die niemand je abschließen konnte (#1126-Klasse).
+    for slug, eintrag in {**offen, **vorlauf}.items():
+        if eintrag.get("befund") and slug not in befund_slugs:
+            fehler.append(f"`befund` ist gesetzt, das Ledger kennt keinen "
+                          f"offenen Befund für: {slug}")
+        if eintrag.get("unvollstaendig") and slug not in abbruch_slugs \
+                and slug not in befund_slugs and slug not in offene_laeufe:
+            fehler.append(f"`unvollstaendig` ist gesetzt, aber kein Abbruch "
+                          f"und kein Befund belegt ihn: {slug}")
 
     for slug, eintrag in vorlauf.items():
         status = eintrag.get("status")
@@ -2056,11 +2128,7 @@ def queue_normalisieren(apply: bool = False, pfad: str = QUEUE_PFAD) -> dict:
     schema = alt.get("schema")
     if schema is not None and (type(schema) is not int or schema not in (1, QUEUE_SCHEMA)):
         return {"ok": False, "fehler": f"Unbekanntes Queue-Schema: {schema!r}"}
-    if schema == QUEUE_SCHEMA:
-        probleme = queue_invariante(alt)
-        if probleme:
-            return {"ok": False, "fehler": "Queue widersprüchlich: " + "; ".join(probleme)}
-    elif (isinstance(alt.get("offen"), list)
+    if schema != QUEUE_SCHEMA and (isinstance(alt.get("offen"), list)
           and isinstance(alt.get("arbeitsvorrat"), list)
           and json.dumps(alt["offen"], sort_keys=True)
           != json.dumps(alt["arbeitsvorrat"], sort_keys=True)):
@@ -2095,22 +2163,87 @@ def queue_normalisieren(apply: bool = False, pfad: str = QUEUE_PFAD) -> dict:
         return {"ok": False, "fehler": f"Ledger nicht lesbar: {exc}"}
     offene_slugs = {b.get("slug") for b in offene}
     offene_slugs |= {b.get("ursprungs_slug") for b in offene}
+    abbrueche = alt.get("abbrueche") or []
+    abbruch_slugs = {a.get("slug") for a in abbrueche if isinstance(a, dict)}
+    offene_laeufe = {l.get("slug") for l in (alt.get("laeufe") or [])
+                     if isinstance(l, dict) and not lauf_ist_geprueft(l)}
 
-    eintraege = []
-    for roh in bestand:
-        eintrag = dict(roh)
-        # Der Ledger ist die Wahrheit über offene Befunde – nicht das Feld
-        # einer alten Datei. `befund` wird deshalb neu gesetzt, nie geerbt.
-        eintrag["befund"] = eintrag.get("slug") in offene_slugs
-        eintrag["unvollstaendig"] = bool(eintrag.get("unvollstaendig"))
-        eintraege.append(eintrag)
+    def _fakten_neu(eintrag: dict) -> dict:
+        """Nur die ABGELEITETEN Fakten neu setzen – Frist, Grund, Geo bleiben.
+
+        Mehr heilt die Normalisierung nicht: Was ein Mensch an Fristen oder
+        an der Zerlegung verdreht hat, ist ein Befund und wird unten
+        verweigert, nicht stillschweigend überschrieben.
+        """
+        neu = dict(eintrag)
+        slug = neu.get("slug")
+        neu["befund"] = slug in offene_slugs
+        neu["unvollstaendig"] = (slug in abbruch_slugs
+                                 or slug in offene_slugs
+                                 or slug in offene_laeufe)
+        neu["status"] = queue_status_von(neu)
+        return neu
+
+    # VORABPRÜFUNG AM ABGELEITETEN DATENSATZ (17.11.2026)
+    # ---------------------------------------------------
+    # Zwei Dinge waren bisher falsch: Die Vorabprüfung verweigerte eine
+    # Queue, deren `befund`/`unvollstaendig` nur noch nicht neu abgeleitet
+    # waren (also genau die Fälle, für die es die Normalisierung gibt), und
+    # sie erbte `unvollstaendig` ungeprüft weiter. Jetzt wird das Ergebnis
+    # der Ableitung geprüft – und was danach noch widersprüchlich ist
+    # (Frist neben dem Vorrat, Alias-Verlust, falscher Typ), wird verweigert.
+    if schema == QUEUE_SCHEMA:
+        vorrat_neu = [_fakten_neu(e) for e in alt.get("arbeitsvorrat") or []]
+        nach_slug = {e.get("slug"): e for e in vorrat_neu}
+
+        def _feldgleich_zum_vorrat(liste: list) -> bool:
+            """Stehen in dieser Liste dieselben FRISTEN wie im Vorrat?
+
+            Nur dann darf die Zerlegung neu gerechnet werden. Weicht eine
+            Frist oder ein Grund ab, ist nicht entscheidbar, welche der
+            beiden Fassungen gilt – das bleibt ein Befund (fail-closed) und
+            wird nicht überschrieben.
+            """
+            for eintrag in liste:
+                soll = nach_slug.get(eintrag.get("slug"))
+                if soll is None or not feldgleich(_fakten_neu(eintrag), soll):
+                    return False
+            return True
+
+        if _feldgleich_zum_vorrat(alt.get("offen") or []) \
+                and _feldgleich_zum_vorrat(alt.get("vorlauf") or []):
+            # Die Zerlegung ist eine Ableitung: Status und Listenzugehörigkeit
+            # werden neu gerechnet. Genau das ist der Befund vom 17.11.2026 –
+            # eine Seite lag mit abgeleitetem Status `unvollstaendig` in
+            # `vorlauf`, weil das Flag geerbt und nie neu geprüft wurde.
+            probe = dict(
+                alt, arbeitsvorrat=vorrat_neu,
+                offen=[e for e in vorrat_neu
+                       if e["status"] in QUEUE_STATUS_ARBEIT],
+                vorlauf=[e for e in vorrat_neu if e["status"] == "vorlauf"])
+        else:
+            probe = dict(
+                alt, arbeitsvorrat=vorrat_neu,
+                offen=[_fakten_neu(e) for e in alt.get("offen") or []],
+                vorlauf=[_fakten_neu(e) for e in alt.get("vorlauf") or []])
+        probleme = queue_invariante(probe)
+        if probleme:
+            return {"ok": False,
+                    "fehler": "Queue widersprüchlich: " + "; ".join(probleme)}
+
+    # Der Ledger ist die Wahrheit über offene Befunde, `abbrueche` die über
+    # Abbrüche – nicht das Feld einer alten Datei. Beide Fakten werden
+    # deshalb neu gesetzt, nie geerbt. Ein geerbtes `unvollstaendig` machte
+    # eine frisch geprüfte Seite für immer zur ARBEIT – der Befund vom
+    # 17.11.2026 (#1126-Klasse).
+    eintraege = [_fakten_neu(roh) for roh in bestand]
 
     try:
         neu = queue_daten_bauen(
             uebersicht=alt.get("uebersicht") or {},
             fachbefunde=fachbefunde,
             kapazitaet=alt.get("kapazitaet") or {},
-            abbrueche=alt.get("abbrueche") or [],
+            abbrueche=abbrueche,
             arbeitsvorrat=eintraege,
             laeufe=alt.get("laeufe") or [],
             erzeugt=alt.get("erzeugt") or jetzt_utc())

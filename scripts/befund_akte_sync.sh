@@ -23,14 +23,20 @@ for versuch in 1 2 3 4 5; do
   # Die F4-Vorlage ist ebenfalls eine Projektion: Sie muss auf demselben
   # Ledger-/Text- und Aktenstand liegen, sonst fehlen offene Live-Befunde.
   python3 scripts/f4_entscheidungsvorlage.py
-  if git diff -I'^[[:space:]]*"erzeugt":' --quiet -- BEFUND-AKTE.md data/faktenfrische_befunde_state.json F4-ENTSCHEIDUNGSVORLAGE.md; then
-    git checkout -- BEFUND-AKTE.md data/faktenfrische_befunde_state.json F4-ENTSCHEIDUNGSVORLAGE.md
-    echo 'Akte, Zustand und F4-Vorlage sind aktuell.'
+  # Und die Queue: `befund`/`unvollstaendig` sind BELEGTE Fakten (Ledger,
+  # `abbrueche`) – nicht Besitz des letzten Laufs. Am 17.11.2026 stand eine
+  # Seite als ARBEIT in `offen`, deren Text inzwischen überholt war: Der
+  # Lauf war durch, die Behauptung blieb (#1126-Klasse). Diese Zeile leitet
+  # sie auf jedem Inhalts-Push neu ab; ohne Änderung schreibt sie nichts.
+  python3 scripts/faktenfrische.py --queue-normalisieren --apply
+  if git diff -I'^[[:space:]]*"erzeugt":' --quiet -- BEFUND-AKTE.md data/faktenfrische_befunde_state.json F4-ENTSCHEIDUNGSVORLAGE.md data/faktenfrische_queue.json; then
+    git checkout -- BEFUND-AKTE.md data/faktenfrische_befunde_state.json F4-ENTSCHEIDUNGSVORLAGE.md data/faktenfrische_queue.json
+    echo 'Akte, Zustand, Queue und F4-Vorlage sind aktuell.'
     exit 0
   fi
-  git add -- BEFUND-AKTE.md data/faktenfrische_befunde_state.json F4-ENTSCHEIDUNGSVORLAGE.md
+  git add -- BEFUND-AKTE.md data/faktenfrische_befunde_state.json F4-ENTSCHEIDUNGSVORLAGE.md data/faktenfrische_queue.json
   python3 scripts/konfliktmarker_wache.py --staged
-  git commit -m 'chore(faktenfrische): Akte und Stand nachgezogen [skip ci]'
+  git commit -m 'chore(faktenfrische): Akte, Stand und Queue nachgezogen [skip ci]'
   if git push origin HEAD:refs/heads/main; then
     echo 'Akte und Zustand auf demselben Quellstand veröffentlicht.'
     exit 0

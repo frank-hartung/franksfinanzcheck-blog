@@ -113,6 +113,13 @@ class SyncTests(unittest.TestCase):
         (self.seed / 'BEFUND-AKTE.md').write_text('alt', encoding='utf-8')
         (self.seed / 'F4-ENTSCHEIDUNGSVORLAGE.md').write_text('alt', encoding='utf-8')
         (self.seed / 'data/faktenfrische_befunde_state.json').write_text('alt', encoding='utf-8')
+        # Die Queue ist seit dem 17.11.2026 ebenfalls Projektion: Der Sync
+        # leitet ihre beleggebundenen Fakten neu ab (`--queue-normalisieren`).
+        (self.seed / 'data/faktenfrische_queue.json').write_text('alt', encoding='utf-8')
+        (self.seed / 'scripts/faktenfrische.py').write_text(
+            "from pathlib import Path\n"
+            "Path('data/faktenfrische_queue.json')"
+            ".write_text(Path('quelle').read_text())\n", encoding='utf-8')
         (self.seed / 'scripts/faktenfrische_befund_akte.py').write_text(
             "from pathlib import Path\ns = Path('quelle').read_text()\n"
             "Path('BEFUND-AKTE.md').write_text(s)\n"
@@ -148,12 +155,16 @@ class SyncTests(unittest.TestCase):
         self.assertEqual(self.git('--git-dir', str(self.origin), 'show', 'main:BEFUND-AKTE.md'), 'eins')
         self.assertEqual(self.git('--git-dir', str(self.origin), 'show',
                                   'main:F4-ENTSCHEIDUNGSVORLAGE.md'), 'eins')
+        self.assertEqual(self.git('--git-dir', str(self.origin), 'show',
+                                  'main:data/faktenfrische_queue.json'), 'eins',
+                         "Die nachgezogene Queue wurde nicht veröffentlicht")
 
     def test_f4_erzeugungsfehler_veroeffentlicht_nichts(self):
         r = self.sync(dict(self.env, F4_FAIL='1'))
         self.assertNotEqual(r.returncode, 0)
         for path in ('BEFUND-AKTE.md', 'F4-ENTSCHEIDUNGSVORLAGE.md',
-                     'data/faktenfrische_befunde_state.json'):
+                     'data/faktenfrische_befunde_state.json',
+                     'data/faktenfrische_queue.json'):
             self.assertEqual(self.git('--git-dir', str(self.origin), 'show', 'main:' + path), 'alt')
 
     def test_push_rennen_berechnet_auf_neuem_stand(self):
@@ -175,7 +186,8 @@ exec "{real_git}" "$@"
                    OTHER=str(self.other), RACE_DONE=str(self.base / 'done'))
         r = self.sync(env); self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
         for path in ('quelle', 'BEFUND-AKTE.md', 'F4-ENTSCHEIDUNGSVORLAGE.md',
-                     'data/faktenfrische_befunde_state.json'):
+                     'data/faktenfrische_befunde_state.json',
+                     'data/faktenfrische_queue.json'):
             self.assertEqual(self.git('--git-dir', str(self.origin), 'show', 'main:' + path), 'zwei')
 
     def test_unsauberes_checkout_und_falscher_ref_stoppen(self):
