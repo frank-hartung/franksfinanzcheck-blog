@@ -94,12 +94,14 @@ PREMIUM = "static/premium"
 API = ("insel", "ablage", "zwischenablage", "bericht", "melden", "sicher", "bereit")
 
 # <script>-Tags in extend_head.html (alle, auch JSON-LD-Dateninseln): Der
-# Bootstrap teilt sich das vorhandene Consent-Skript, damit der <head> nicht
-# wächst – 58 Kinder sind die Lighthouse-Messgrenze (dom_audit.LIMIT.head_children)
-# und Artikel-Seiten liegen bei 48–58. Repo-Regel (docs/LAYOUT-AUTOMATISIERUNG.md):
-# „Wer ein Tag ergänzt, nimmt ein anderes weg." Steigt diese Zahl, muss hier
-# eine Begründung stehen, nicht nur eine neue Zahl.
-HEAD_SKRIPT_ERWARTET = 8
+# Bootstrap teilt sich das vorhandene Consent-Skript, und seit #1248
+# (17.11.2026) bündelt extend_head.html alle JSON-LD-Knoten einer Seite
+# in EINEM Schema.org-`@graph`-Tag statt in Einzel-Tags (8 → 2; Artikelseiten
+# 53 → 50, Design-Varianten 54 → 51, Budget ≤ 52). Repo-Regel
+# (docs/LAYOUT-AUTOMATISIERUNG.md): „Wer ein Tag ergänzt, nimmt ein anderes
+# weg." Steigt diese Zahl, muss hier eine Begründung stehen, nicht nur eine
+# neue Zahl.
+HEAD_SKRIPT_ERWARTET = 2
 
 # Begründete Ausnahmen: data/robustheit_ausnahmen.yaml (Vertrag je Eintrag:
 # pfad, regel, grund, entscheidung, faellig). Ausnahmen werden im Bericht

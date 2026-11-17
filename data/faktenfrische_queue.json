@@ -10,7 +10,7 @@
     "budget": 5,
     "budget_quelle": "Sockel (Erstellungstakt (--neu))",
     "geo_schnitt": 94,
-    "befunde": 209,
+    "befunde": 204,
     "befunde_im_lauf": 9,
     "fachbefunde": [
       {
@@ -1727,56 +1727,6 @@
         "fassung_sha256": "99ac16bb17807df7665e658d6c02bd867f0875e986125ae5f06bbbe2e493ef60",
         "text_sha256": "6849b2fed4695900343dff1bf8fb451c2e5a543c6d7b416e18008f20f92862da",
         "zuletzt_gesehen": "2026-11-10 12:57 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die Behauptung, dass bis zum Sommer 500 € mehr im Urlaubsbudget verfügbar sind, fehlt eine Quellenangabe.",
-        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-        "id": "11a92bff688ccbb5a485",
-        "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
-        "fassung_sha256": "3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37",
-        "text_sha256": "0aee05b5b2cf4a978fb3295c8cb20ea1292679ef8503d530ba6f296ccdc6541e",
-        "zuletzt_gesehen": "2026-11-09 13:19 UTC"
-      },
-      {
-        "typ": "praezision",
-        "text": "Die Aussage, dass Cashback‑Portale „seit vielen Jahren am Markt etabliert“ sind, ist ein unpräzises Superlativ ohne messbare Daten.",
-        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-        "id": "1d4896d8ed60f5b6921f",
-        "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
-        "fassung_sha256": "3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37",
-        "text_sha256": "0aee05b5b2cf4a978fb3295c8cb20ea1292679ef8503d530ba6f296ccdc6541e",
-        "zuletzt_gesehen": "2026-11-09 13:19 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Die Aussage, dass eine 5 %ige Reduktion der Fixkosten bei 800 € Aufwand 40 € im Monat bzw. 480 € im Jahr spart, wird nicht durch die angeführte Quelle belegt.",
-        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-        "id": "4d2bc6c3e60fb9b4a719",
-        "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
-        "fassung_sha256": "3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37",
-        "text_sha256": "0aee05b5b2cf4a978fb3295c8cb20ea1292679ef8503d530ba6f296ccdc6541e",
-        "zuletzt_gesehen": "2026-11-09 13:19 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Angaben zu typischen Kündigungsfristen von ein bis drei Monaten werden von der Quelle nicht bestätigt.",
-        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-        "id": "76b5cdfda85516962cf8",
-        "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
-        "fassung_sha256": "3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37",
-        "text_sha256": "0aee05b5b2cf4a978fb3295c8cb20ea1292679ef8503d530ba6f296ccdc6541e",
-        "zuletzt_gesehen": "2026-11-09 13:19 UTC"
-      },
-      {
-        "typ": "luecke",
-        "text": "Der genannte durchschnittliche Cashback‑Satz von 2 % der Ausgaben ist nicht durch die Quelle gestützt.",
-        "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-        "id": "b292db236a31ea0a1629",
-        "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
-        "fassung_sha256": "3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37",
-        "text_sha256": "0aee05b5b2cf4a978fb3295c8cb20ea1292679ef8503d530ba6f296ccdc6541e",
-        "zuletzt_gesehen": "2026-11-09 13:19 UTC"
       },
       {
         "typ": "luecke",
@@ -4149,56 +4099,6 @@
     },
     {
       "typ": "luecke",
-      "text": "Die Behauptung, dass bis zum Sommer 500 € mehr im Urlaubsbudget verfügbar sind, fehlt eine Quellenangabe.",
-      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "id": "11a92bff688ccbb5a485",
-      "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
-      "fassung_sha256": "3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37",
-      "text_sha256": "0aee05b5b2cf4a978fb3295c8cb20ea1292679ef8503d530ba6f296ccdc6541e",
-      "zuletzt_gesehen": "2026-11-09 13:19 UTC"
-    },
-    {
-      "typ": "praezision",
-      "text": "Die Aussage, dass Cashback‑Portale „seit vielen Jahren am Markt etabliert“ sind, ist ein unpräzises Superlativ ohne messbare Daten.",
-      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "id": "1d4896d8ed60f5b6921f",
-      "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
-      "fassung_sha256": "3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37",
-      "text_sha256": "0aee05b5b2cf4a978fb3295c8cb20ea1292679ef8503d530ba6f296ccdc6541e",
-      "zuletzt_gesehen": "2026-11-09 13:19 UTC"
-    },
-    {
-      "typ": "luecke",
-      "text": "Die Aussage, dass eine 5 %ige Reduktion der Fixkosten bei 800 € Aufwand 40 € im Monat bzw. 480 € im Jahr spart, wird nicht durch die angeführte Quelle belegt.",
-      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "id": "4d2bc6c3e60fb9b4a719",
-      "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
-      "fassung_sha256": "3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37",
-      "text_sha256": "0aee05b5b2cf4a978fb3295c8cb20ea1292679ef8503d530ba6f296ccdc6541e",
-      "zuletzt_gesehen": "2026-11-09 13:19 UTC"
-    },
-    {
-      "typ": "luecke",
-      "text": "Angaben zu typischen Kündigungsfristen von ein bis drei Monaten werden von der Quelle nicht bestätigt.",
-      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "id": "76b5cdfda85516962cf8",
-      "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
-      "fassung_sha256": "3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37",
-      "text_sha256": "0aee05b5b2cf4a978fb3295c8cb20ea1292679ef8503d530ba6f296ccdc6541e",
-      "zuletzt_gesehen": "2026-11-09 13:19 UTC"
-    },
-    {
-      "typ": "luecke",
-      "text": "Der genannte durchschnittliche Cashback‑Satz von 2 % der Ausgaben ist nicht durch die Quelle gestützt.",
-      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
-      "id": "b292db236a31ea0a1629",
-      "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
-      "fassung_sha256": "3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37",
-      "text_sha256": "0aee05b5b2cf4a978fb3295c8cb20ea1292679ef8503d530ba6f296ccdc6541e",
-      "zuletzt_gesehen": "2026-11-09 13:19 UTC"
-    },
-    {
-      "typ": "luecke",
       "text": "Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
       "id": "1c6e4d2f12da24ec4081",
@@ -4784,6 +4684,68 @@
       "fehler": [],
       "fachpruefung": "Fehler: gemini: HTTPError; groq: HTTPError; cloudflare: TimeoutError",
       "aenderungen": []
+    }
+  ],
+  "ausgemusterte_entwurfsbefunde": [
+    {
+      "typ": "luecke",
+      "text": "Die Behauptung, dass bis zum Sommer 500 € mehr im Urlaubsbudget verfügbar sind, fehlt eine Quellenangabe.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "11a92bff688ccbb5a485",
+      "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
+      "fassung_sha256": "3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37",
+      "text_sha256": "0aee05b5b2cf4a978fb3295c8cb20ea1292679ef8503d530ba6f296ccdc6541e",
+      "zuletzt_gesehen": "2026-11-09 13:19 UTC",
+      "ausgemustert_am": "2026-11-17 13:48 UTC",
+      "ausgemustert_grund": "Unveröffentlichter Entwurf aus dem Bestand entfernt (keine fachliche Freigabe, #1191)"
+    },
+    {
+      "typ": "praezision",
+      "text": "Die Aussage, dass Cashback‑Portale „seit vielen Jahren am Markt etabliert“ sind, ist ein unpräzises Superlativ ohne messbare Daten.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "1d4896d8ed60f5b6921f",
+      "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
+      "fassung_sha256": "3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37",
+      "text_sha256": "0aee05b5b2cf4a978fb3295c8cb20ea1292679ef8503d530ba6f296ccdc6541e",
+      "zuletzt_gesehen": "2026-11-09 13:19 UTC",
+      "ausgemustert_am": "2026-11-17 13:48 UTC",
+      "ausgemustert_grund": "Unveröffentlichter Entwurf aus dem Bestand entfernt (keine fachliche Freigabe, #1191)"
+    },
+    {
+      "typ": "luecke",
+      "text": "Die Aussage, dass eine 5 %ige Reduktion der Fixkosten bei 800 € Aufwand 40 € im Monat bzw. 480 € im Jahr spart, wird nicht durch die angeführte Quelle belegt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "4d2bc6c3e60fb9b4a719",
+      "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
+      "fassung_sha256": "3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37",
+      "text_sha256": "0aee05b5b2cf4a978fb3295c8cb20ea1292679ef8503d530ba6f296ccdc6541e",
+      "zuletzt_gesehen": "2026-11-09 13:19 UTC",
+      "ausgemustert_am": "2026-11-17 13:48 UTC",
+      "ausgemustert_grund": "Unveröffentlichter Entwurf aus dem Bestand entfernt (keine fachliche Freigabe, #1191)"
+    },
+    {
+      "typ": "luecke",
+      "text": "Angaben zu typischen Kündigungsfristen von ein bis drei Monaten werden von der Quelle nicht bestätigt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "76b5cdfda85516962cf8",
+      "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
+      "fassung_sha256": "3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37",
+      "text_sha256": "0aee05b5b2cf4a978fb3295c8cb20ea1292679ef8503d530ba6f296ccdc6541e",
+      "zuletzt_gesehen": "2026-11-09 13:19 UTC",
+      "ausgemustert_am": "2026-11-17 13:48 UTC",
+      "ausgemustert_grund": "Unveröffentlichter Entwurf aus dem Bestand entfernt (keine fachliche Freigabe, #1191)"
+    },
+    {
+      "typ": "luecke",
+      "text": "Der genannte durchschnittliche Cashback‑Satz von 2 % der Ausgaben ist nicht durch die Quelle gestützt.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "id": "b292db236a31ea0a1629",
+      "slug": "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub",
+      "fassung_sha256": "3ae3519296355d2117c908c3dcf1440809f0a0a5b19c38f682800519b98e7a37",
+      "text_sha256": "0aee05b5b2cf4a978fb3295c8cb20ea1292679ef8503d530ba6f296ccdc6541e",
+      "zuletzt_gesehen": "2026-11-09 13:19 UTC",
+      "ausgemustert_am": "2026-11-17 13:48 UTC",
+      "ausgemustert_grund": "Unveröffentlichter Entwurf aus dem Bestand entfernt (keine fachliche Freigabe, #1191)"
     }
   ]
 }

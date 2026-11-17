@@ -1,7 +1,7 @@
 # Fachprüfungs-Register (automatisch erzeugt: scripts/fachpruefung_register.py)
 # Stand: 19.10.2026. Keine Freigabe. Jeder Eintrag braucht einen benannten Menschen als Prüfer.
 # Quellen je Aussage: docs/ANLEITUNG-REDAKTIONELLE-YMYL-PRUEFUNG.md (Schritte 1–5).
-anzahl: 19
+anzahl: 20
 pruefer_status: "offen – kein benannter fachpruefer und keine Redaktionsprüfung mit Belegkette"
 beitraege:
   - slug: "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden"
@@ -308,3 +308,20 @@ beitraege:
       - "Lege nun deinen monatlichen Betrag fest, zum Beispiel 50 €."
       - "Wir nehmen an, du zahlst jeden Monat 50 € in deinen Plan ein."
       - "Über einen Zeitraum von 20 Jahren ergibt das eine Summe von 12.000 € an Eigenkapital."
+  - slug: "2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst"
+    titel: "Geschenkkarte: Was du beim Kauf und Aufladen wissen musst"
+    pillar: "konto-karten"
+    risikoklasse: "standard"
+    status: "ausstehend"
+    pruefer: null  # hier eintragen: Name, Rolle, Typ, Datum
+    zahlen_fundstellen:
+      - "Annahme 1: Du kaufst eine Karte mit einem Startwert von 50,00 €."
+      - "Annahme 2: Die Aktivierungsgebühr beträgt einmalig 4,95 €."
+      - "Annahme 3: Nach 12 Monaten (Annahme) ohne Nutzung fällt eine monatliche Gebühr von 2,00 € (Annahme) an."
+      - "Die Rechnung: Kaufpreis: 50,00 € (Annahme 1)."
+      - "Abzug Aktivierung: 50,00 € – 4,95 € = 45,05 € (Annahme 2)."
+      - "Wert nach 12 Monaten: 45,05 € (Annahme 3)."
+      - "Wert nach 18 Monaten: 45,05 € – (6 Monate 2,00 €) = 33,05 € (Annahme 3)."
+      - "Ergebnis der Modellrechnung: In diesem fiktiven Szenario sinkt der Wert nach 18 Monaten auf 33,05 €."
+      - "Der effektive Verlust beträgt somit 16,95 € (Modellrechnung) in diesem Beispiel."
+      - "Wenn du für ein Guthaben von 50 € (Modellrechnung) samt Gebühren insgesamt 55 € (Beispielrechnung) zahlst, ist das ein schlechtes Geschäft."

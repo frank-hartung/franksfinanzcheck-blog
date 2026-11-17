@@ -474,6 +474,10 @@ def refill_to_min(posts_dir=None, validator=None, *, finalize: bool = True) -> l
         except Exception as exc:  # noqa: BLE001 – Nachfüllung bleibt trotzdem stehen
             print(f"⚠ Draft-Link-Heiler nach Nachfüllung: {exc}")
         try:
+            run(sys.executable, 'scripts/abgeleitete_register.py', '--fix')
+        except Exception as exc:  # noqa: BLE001 – Ableitung blockiert Live-Gang nicht (C34)
+            print(f"⚠ Abgeleitete Register nach Nachfüllung: {exc}")
+        try:
             run('hugo', '--minify', '--cleanDestinationDir')
             run(sys.executable, 'scripts/publish_gate.py')
         except Exception as exc:  # noqa: BLE001
@@ -680,6 +684,14 @@ def _dispatch(args) -> int:
     # die Konvergenz den Nachschub zurück in den Vorrat und greift den
     # nächsten Kandidaten – begrenzt, nie endlos.
     refill_until_min(finalize=True)
+    # #1236 / #1229: Abgeleitete Register (static/llms.txt,
+    # data/fachpruefung_register.yaml) nach jeder Live-Freischaltung im selben
+    # Lauf nachziehen, damit weder Deploy (Regel M9) noch Nachlauf-Wache auf
+    # einen veralteten Spiegel laufen.
+    try:
+        run(sys.executable, 'scripts/abgeleitete_register.py', '--fix')
+    except Exception as exc:  # noqa: BLE001 – C34: kein Geiselnehmen der Auslieferung
+        print(f"⚠ Abgeleitete Register in Endabnahme: {exc}")
 
     import publication_check as receipt
     day = dt.datetime.now(dt.timezone.utc).date()

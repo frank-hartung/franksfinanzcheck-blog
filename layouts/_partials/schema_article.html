@@ -33,6 +33,15 @@
      redaktionelles `lastmod`-Frontmatter, sonst Publikationsdatum.
      ============================================================ */ -}}
 
+{{- /* ---------- Kontext: direkt (<script>) oder als Knoten im @graph (#1248) ---------- */ -}}
+{{- $asDict := false -}}
+{{- $ctx := . -}}
+{{- if reflect.IsMap . -}}
+  {{- $asDict = .asDict | default false -}}
+  {{- $ctx = .page -}}
+{{- end -}}
+{{- $out := dict -}}
+{{- with $ctx -}}
 {{- /* ---------- Werte (rohe Strings – jsonify escapt genau einmal) ---------- */ -}}
 {{- $title := .Title | plainify | htmlUnescape | chomp -}}
 {{- $desc := or .Description (.Summary | plainify) | htmlUnescape | chomp -}}
@@ -101,7 +110,7 @@
      maschinenlesbar auf /transparenz/ – dieselbe Seite, die auch die sichtbare
      Kennzeichnung im Artikelkopf verlinkt (ff_offenlegung.html). Eine Wahrheit,
      zwei Kanäle: Leser und Maschine. */ -}}
-{{- $out := dict
+{{- $out = dict
   "@context" "https://schema.org"
   "@type" "Article"
   "@id" (printf "%s#article" .Permalink)
@@ -235,5 +244,9 @@
 {{- if gt (len $credit) 0 -}}
   {{- $out = merge $out (dict "creditText" (delimit $credit " ")) -}}
 {{- end -}}
-
+{{- end -}}
+{{- if $asDict -}}
+  {{- return $out -}}
+{{- else -}}
 <script type="application/ld+json">{{ $out | jsonify | safeJS }}</script>
+{{- end -}}

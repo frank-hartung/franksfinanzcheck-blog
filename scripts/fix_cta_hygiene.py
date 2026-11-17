@@ -69,13 +69,58 @@ REL_ATTR_RE = re.compile(
     r'''\{\s*rel\s*=\s*(?:"[^"]*"|'[^']*')\s*\}'''
 )
 
+# Klasse 3 (17.11.2026, #1247): Rohes `<a href="/go/slug/" ...>Text</a>` in
+# Markdown umgeht `render-link.html` (es fehlen `nofollow noopener`,
+# `data-klick`, `data-partner`, `data-route`; ein darin verschachtelter
+# Markdown-Link rendert als Klartext). Wird deterministisch in kanonisches
+# Markdown `[Text](/go/slug/)` überführt; ein eingebetteter Markdown-Link am
+# Ende (`<a>Anker und [Ziel](url)</a>`) wird sauber ausgeklammert.
+RAW_GO_ANCHOR_RE = re.compile(
+    r'''<\s*a\b(?=[^>]*\bhref\s*=\s*["'](?P<href>(?:https?://(?:www\.)?franksfinanzcheck\.de)?/go/[A-Za-z0-9\-]+(?:/[^"'\s]*)?)["'])[^>]*>'''
+    r"(?P<inner>[^<\n]+?)"
+    r"<\s*/\s*a\s*>",
+    re.I,
+)
+
+_TRAILING_MD_LINK_RE = re.compile(
+    r"^(?P<lead>.+?)(?P<join>\s+(?:und|oder|sowie|,|–|-)\s+)"
+    r"(?P<md>\[[^\]\n]+\]\([^)\n]+\))(?P<tail>[^\[\]]*)$"
+)
+
+
+def _raw_go_to_markdown(match: re.Match) -> str:
+    href = re.sub(r"^https?://(?:www\.)?franksfinanzcheck\.de", "", match.group("href"))
+    if "?" not in href and "#" not in href and not href.endswith("/"):
+        href += "/"
+    inner = match.group("inner").strip()
+    if not inner:
+        return match.group(0)
+    nested = _TRAILING_MD_LINK_RE.match(inner)
+    if nested and "[" not in nested.group("lead") and "]" not in nested.group("lead"):
+        lead = nested.group("lead").strip()
+        if lead:
+            return f"[{lead}]({href}){nested.group('join')}{nested.group('md')}{nested.group('tail')}"
+    if "[" in inner or "]" in inner:
+        return match.group(0)
+    return f"[{inner}]({href})"
+
 
 def hygiene_text(text: str) -> tuple[str, int]:
     """Liefert (ggf. geheilten Text, Anzahl Korrekturen). Idempotent."""
     new, n = CANONICAL_CTA_RE.subn(
         lambda m: m.group("prefix") + "Die besten" + m.group("rest"), text)
     new, n2 = REL_ATTR_RE.subn(r"\1", new)
-    return new, n + n2
+    n3 = 0
+
+    def _sub_raw(m: re.Match) -> str:
+        nonlocal n3
+        repl = _raw_go_to_markdown(m)
+        if repl != m.group(0):
+            n3 += 1
+        return repl
+
+    new = RAW_GO_ANCHOR_RE.sub(_sub_raw, new)
+    return new, n + n2 + n3
 
 
 def hygiene_file(path: Path) -> int:
@@ -145,6 +190,24 @@ def run_selftest() -> list:
         out, n7 = hygiene_text(klammer)
         if n7 != 0 or out != klammer:
             fehler.append("rel-Strip greift außerhalb von /go/-Links")
+        # Klasse 3 (17.11.2026, #1247): rohes <a href="/go/..."> → Markdown
+        raw_simple = 'Vergleich: <a href="/go/strom" rel="sponsored">Stromanbieter prüfen</a>.\n'
+        out, n8 = hygiene_text(raw_simple)
+        if n8 != 1 or out != "Vergleich: [Stromanbieter prüfen](/go/strom/).\n":
+            fehler.append(f"Rohes /go/-<a> nicht geheilt (n={n8}): {out!r}")
+        raw_nested = (
+            '<a href="/go/strom/" rel="sponsored">Stromanbieter vergleichen '
+            "und [Fixkosten prüfen](../../posts/a/)</a>  \n"
+        )
+        out_n, n9 = hygiene_text(raw_nested)
+        erw_n = "[Stromanbieter vergleichen](/go/strom/) und [Fixkosten prüfen](../../posts/a/)  \n"
+        if n9 != 1 or out_n != erw_n:
+            fehler.append(f"Verschachteltes /go/-<a> nicht sauber getrennt (n={n9}): {out_n!r}")
+        if hygiene_text(out_n) != (out_n, 0):
+            fehler.append("Klasse-3-Heilung ist nicht idempotent")
+        ext_anchor = 'Extern: <a href="https://example.org/">Beispiel</a>.\n'
+        if hygiene_text(ext_anchor) != (ext_anchor, 0):
+            fehler.append("Klasse-3-Heilung fasst Nicht-/go/-Links an")
         # Entwurfs-Filter
         draft = d / "d.md"
         live = d / "l.md"

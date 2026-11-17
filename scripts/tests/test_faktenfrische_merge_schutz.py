@@ -117,7 +117,10 @@ class WiederhergestellteBelege(unittest.TestCase):
         # anderen Slug als in der Queue. Die ID bleibt über alle Lifts stabil;
         # alle alten Snapshot-IDs müssen als Fachbefund erhalten sein.
         queue = json.loads((ROOT / "data/faktenfrische_queue.json").read_text(encoding="utf-8"))
-        bekannte_ids = {b["id"] for b in queue["fachbefunde"]}
+        bekannte_ids = (
+            {b["id"] for b in queue["fachbefunde"]}
+            | {b["id"] for b in (queue.get("ausgemusterte_entwurfsbefunde") or [])}
+        )
         self.assertTrue({b["id"] for b in snapshot["befunde"]} <= bekannte_ids)
         for lauf in archiv["aeltere_laeufe_nicht_in_main"]:
             for befund in lauf["befunde"]:

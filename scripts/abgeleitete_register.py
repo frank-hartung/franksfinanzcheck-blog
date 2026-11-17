@@ -64,6 +64,7 @@ class Register:
     skript: str        # repo-relativ, der EINZIGE Schreiber
     modul: str         # Importname des Schreibers (für den Selbsttest)
     zweck: str         # wofür die Ableitung gebraucht wird
+    probe: Tuple[str, str] = ("anzahl:", "anzahl :")  # Sabotage-Paar für Selbsttest
 
 
 REGISTER: Tuple[Register, ...] = (
@@ -72,6 +73,14 @@ REGISTER: Tuple[Register, ...] = (
         skript="scripts/fachpruefung_register.py",
         modul="fachpruefung_register",
         zweck="Prüfpfad für YMYL-Beiträge (Zahlenfundstellen, offener Prüfer)",
+        probe=("anzahl:", "anzahl :"),
+    ),
+    Register(
+        pfad="static/llms.txt",
+        skript="scripts/generate_llms_txt.py",
+        modul="generate_llms_txt",
+        zweck="Maschinenlesbares Verzeichnis für KI-Antwortmaschinen (Regel M9, #1236)",
+        probe=("# FranksFinanzcheck", "#  FranksFinanzcheck"),
     ),
 )
 
@@ -136,13 +145,17 @@ def selftest() -> int:
         except Exception as exc:  # noqa: BLE001 – jeder Importfehler ist ein Befund
             fehler.append(f"{register.modul}: nicht importierbar ({exc})")
             continue
-        if not (hasattr(modul, "render") and hasattr(modul, "collect")):
-            fehler.append(f"{register.modul}: render/collect fehlen – "
+        if hasattr(modul, "render") and hasattr(modul, "collect"):
+            erwartet = modul.render(modul.collect())
+        elif hasattr(modul, "build"):
+            erwartet = modul.build()
+        else:
+            fehler.append(f"{register.modul}: render/collect bzw. build fehlen – "
                           "der Nachzug wäre blind")
             continue
         # Drift-Erkennung selbst beweisen: zwei Fassungen, ein Unterschied.
-        erwartet = modul.render(modul.collect())
-        getampert = erwartet.replace("anzahl:", "anzahl :", 1)
+        suchtext, ersatz = register.probe
+        getampert = erwartet.replace(suchtext, ersatz, 1)
         if getampert == erwartet:
             fehler.append(f"{register.modul}: Sabotage hat nichts geändert (Probe taugt nicht)")
         elif not _abweichung(erwartet, getampert):

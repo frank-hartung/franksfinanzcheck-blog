@@ -489,5 +489,74 @@ class BildAbleitungTest(unittest.TestCase):
         self.assertIn("SystemExit", quelle)
 
 
+class LlmsDriftHeilungTest(unittest.TestCase):
+    """#1236: Bestands-Drift der llms.txt wird geheilt, Sabotage nie verdeckt."""
+
+    @staticmethod
+    def _baue_baum(tmp: Path, *, generator_text: str, datei_text: str) -> None:
+        (tmp / "scripts").mkdir(parents=True, exist_ok=True)
+        (tmp / "static").mkdir(parents=True, exist_ok=True)
+        (tmp / "static" / "llms.txt").write_text(datei_text, encoding="utf-8")
+        (tmp / "scripts" / "generate_llms_txt.py").write_text(
+            "import pathlib, sys\n"
+            f"SOLL = {generator_text!r}\n"
+            "pfad = pathlib.Path(__file__).resolve().parents[1] / 'static/llms.txt'\n"
+            "if '--check' in sys.argv:\n"
+            "    raise SystemExit(0 if pfad.read_text('utf-8') == SOLL else 1)\n"
+            "pfad.write_text(SOLL, encoding='utf-8')\n",
+            encoding="utf-8",
+        )
+
+    def test_heilt_reine_bestandsdrift_idempotent(self):
+        basis = (
+            "# FranksFinanzcheck\n## KI-Kennzeichnung\n"
+            "ai-generated DigitalSourceType Art. 50 kein Herkunftsbeweis\n"
+        )
+        alt = basis + "## Live (84)\n"
+        neu = basis + "## Live (86)\n"
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            self._baue_baum(tmp, generator_text=neu, datei_text=alt)
+            eingriffe: list[dict] = []
+            eskalation: list[dict] = []
+            kp._llms_heilen(tmp, eingriffe, eskalation, trocken=True)
+            self.assertEqual([e["art"] for e in eingriffe], ["llms"])
+            self.assertEqual((tmp / "static/llms.txt").read_text("utf-8"), alt)
+
+            eingriffe.clear()
+            kp._llms_heilen(tmp, eingriffe, eskalation, trocken=False)
+            self.assertEqual([e["art"] for e in eingriffe], ["llms"])
+            self.assertEqual(eskalation, [])
+            self.assertEqual((tmp / "static/llms.txt").read_text("utf-8"), neu)
+
+            # Idempotenz: zweiter Lauf greift nicht erneut ein.
+            eingriffe.clear()
+            kp._llms_heilen(tmp, eingriffe, eskalation, trocken=False)
+            self.assertEqual(eingriffe, [])
+
+    def test_verdeckt_keine_fehlende_oder_sabotierte_ki_aussage(self):
+        gueltig = (
+            "# FranksFinanzcheck\n## KI-Kennzeichnung\n"
+            "ai-generated DigitalSourceType Art. 50 kein Herkunftsbeweis\n"
+        )
+        sabotiert = gueltig.replace("kein Herkunftsbeweis", "Echtheitsgarantie")
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            # a) Datei hat keinen gültigen KI-Abschnitt → M9 bleibt rot, kein stilles Überschreiben.
+            self._baue_baum(tmp, generator_text=gueltig, datei_text=sabotiert)
+            eingriffe: list[dict] = []
+            eskalation: list[dict] = []
+            kp._llms_heilen(tmp, eingriffe, eskalation, trocken=False)
+            self.assertEqual(eingriffe, [])
+            self.assertEqual((tmp / "static/llms.txt").read_text("utf-8"), sabotiert)
+
+            # b) Generator verliert Pflichtanker → Rollback auf alte Fassung + Eskalation.
+            self._baue_baum(tmp, generator_text=sabotiert, datei_text=gueltig)
+            kp._llms_heilen(tmp, eingriffe, eskalation, trocken=False)
+            self.assertEqual(eingriffe, [])
+            self.assertEqual([e["grund"] for e in eskalation], ["llms"])
+            self.assertEqual((tmp / "static/llms.txt").read_text("utf-8"), gueltig)
+
+
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()

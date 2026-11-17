@@ -188,6 +188,21 @@ for (var i = 0; i < kandidaten.length; i++) {
   if (m && Number(m[1]) < 0) inset = Math.abs(Number(m[1]));
   var w = r.width + inset * 2;
   var h = r.height + inset * 2;
+  /* Stretched-Card-Links (zzzz-seo-und-teilen.css, #1248): ::after mit
+     position:absolute + inset:0 dehnt die echte Klickfläche auf den
+     positionierten Karten-Container (el.offsetParent) aus. */
+  var content = style.getPropertyValue('content');
+  if (
+    style.getPropertyValue('position') === 'absolute' &&
+    content && content !== 'none' && content !== 'normal' &&
+    m && Number(m[1]) === 0 &&
+    window.getComputedStyle(el).position === 'static' &&
+    el.offsetParent && el.offsetParent !== document.body
+  ) {
+    var pr = el.offsetParent.getBoundingClientRect();
+    w = Math.max(w, pr.width);
+    h = Math.max(h, pr.height);
+  }
   var kleiner = Math.min(w, h);
   ergebnis.geprueft++;
   if (kleiner < 24) ergebnis.unter24++;

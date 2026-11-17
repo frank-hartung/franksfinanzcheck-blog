@@ -658,6 +658,28 @@ def prune_state(root: Path, slugs: set[str], cover_bases_deleted: set[str], *, d
         return str(k) in cover_bases_deleted or str(k) in slugs
 
     out["covers_manifest"] = prune_json_file(root / "data" / "covers_manifest.json", by_cover)
+    # #1191: Verwaiste Entwurfs-Fachbefunde im Faktenfrische-Ledger auditiert
+    # ausmustern (nur wenn die gelöschte Reserve-Datei keinen Live-Nachweis und
+    # keine menschliche Entscheidung trägt; Live-Seiten bleiben unantastbar).
+    out["faktenfrische_befunde"] = 0
+    if slugs and (root / "data" / "faktenfrische_queue.json").is_file():
+        try:
+            import faktenfrische_befund_ledger as fbl
+            res = fbl.bereinige_geloeschte(
+                queue_path=root / "data" / "faktenfrische_queue.json",
+                decisions_path=root / "data" / "faktenfrische_entscheidungen.yaml",
+                dossier_dir=root / "data" / "research" / "artikel",
+                nur_slugs=slugs,
+                apply=True,
+            )
+            out["faktenfrische_befunde"] = int(res.get("anzahl", 0))
+            if out["faktenfrische_befunde"] > 0 and root.resolve() == ROOT.resolve():
+                import faktenfrische_befund_akte as fba
+                import f4_entscheidungsvorlage as f4v
+                fba.akte_schreiben()
+                f4v.schreiben()
+        except Exception as exc:  # noqa: BLE001 – PyYAML-freier Pfad bleibt lauffähig
+            print(f"  ⚠ faktenfrische-Ledger-Bereinigung übersprungen: {exc}")
     return out
 
 

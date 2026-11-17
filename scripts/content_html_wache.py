@@ -60,6 +60,8 @@ VERBOTEN: tuple[tuple[str, str, str], ...] = (
     ("data-html-uri", r"(?i)data\s*:\s*text/html", "HTML als Daten-URL."),
     ("template-code", r"\{\{[<%][^}]*\b(readFile|resources\.|os\.|getenv|exec|transform\.Unmarshal)\b",
      "Vorlagen-Zugriff aus einer Inhaltsdatei (Dateien/Umgebung lesen)."),
+    ("roh-affiliate-link", r'''<\s*a\b[^>]*\bhref\s*=\s*["'][^"']*/go/[A-Za-z0-9_-]+''',
+     "Roher <a>-Tag auf /go/ umgeht render-link.html (fehlendes nofollow/noopener/data-klick, #1247) — Markdown [Text](/go/slug/) nutzen."),
 )
 
 # Interne Seiten, die nicht indexiert werden dürfen.
@@ -193,6 +195,7 @@ def selftest() -> int:
                 "javascript-uri": '<a href="javascript:alert(1)">klick</a>',
                 "data-html-uri": '<a href="data:text/html;base64,PHNjcmlwdD4=">klick</a>',
                 "template-code": '{{< readFile "hugo.toml" >}}',
+                "roh-affiliate-link": '<a href="/go/strom/" rel="sponsored">Stromanbieter vergleichen</a>',
             }[name]
             sauber.write_text(f"---\ntitle: Probe\n---\n\n{probe}\n", encoding="utf-8")
             code, fehler, _ = bestand_pruefen(w)

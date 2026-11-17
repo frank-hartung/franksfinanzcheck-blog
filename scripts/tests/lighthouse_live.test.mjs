@@ -19,11 +19,11 @@
 
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { test } from 'node:test';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import {
   LaufzeitFehler,
@@ -237,6 +237,26 @@ test('Laufzeit lässt sich vollständig injizieren (kein Paket nötig)', async (
   assert.equal(typeof laufzeit.lighthouse, 'function');
   assert.equal(typeof laufzeit.chromium.launch, 'function');
   assert.equal(typeof laufzeit.resolveLaunchOptions, 'function');
+});
+
+test('Alle relativen lader()-Pfade lösen ab scripts/ auf echte Dateien auf (#1152)', async () => {
+  // #1152 (WF-0032): `lader('./e2e/browser.mjs')` suchte unter `scripts/e2e/`
+  // statt `../e2e/` – der injizierte Mock oben winkte den falschen Pfad durch.
+  const quelle = readFileSync(SKRIPT, 'utf8');
+  const relativ = [...quelle.matchAll(/\blader\(\s*['"](\.[^'"]+)['"]\s*\)/g)].map((m) => m[1]);
+  assert.ok(relativ.length >= 1, 'kein relativer lader()-Pfad gefunden');
+  for (const ziel of relativ) {
+    const aufgeloest = fileURLToPath(new URL(ziel, pathToFileURL(SKRIPT)));
+    assert.ok(existsSync(aufgeloest), `Relativer Import ${ziel} fehlt unter ${aufgeloest}`);
+  }
+  // Wenn node_modules installiert ist, muss auch der UNGEMOCKTE Standard-Lader tragen.
+  const lhPaket = path.resolve(HIER, '..', '..', 'node_modules', 'lighthouse');
+  if (existsSync(lhPaket)) {
+    const echt = await ladeLaufzeit();
+    assert.equal(typeof echt.lighthouse, 'function');
+    assert.equal(typeof echt.chromium.launch, 'function');
+    assert.equal(typeof echt.resolveLaunchOptions, 'function');
+  }
 });
 
 test('Der Modulkopf verkauft keine Laufzeitpakete als Voraussetzung (#1026)', () => {
