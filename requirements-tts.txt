@@ -19,5 +19,5 @@
 #  dort und nur dort, damit es keine zweite Wahrheit gibt.
 # ============================================================
 edge-tts==7.3.1
-miniaudio==1.71
+miniaudio==1.72
 piper-tts==1.8.0
