@@ -27,6 +27,12 @@ cover:
   image: "images/covers/2026-11-16-die-50-30-20-regel-bringt-ordnung-wohin-mit-dem-gehalt.jpg"
   alt: "Die 50-30-20-Regel bringt Ordnung: Wohin mit dem Gehalt?"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: dfc496f42fdbf21a8b4ab765b1903f0d005377b75997361a02e326d8bb91d5b1
+    geprueft_am: 2026-11-17
 faktencheck: 2026-11-16
 ---
 

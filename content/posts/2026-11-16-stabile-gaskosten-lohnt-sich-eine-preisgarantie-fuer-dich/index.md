@@ -27,6 +27,12 @@ cover:
   image: "images/covers/2026-11-16-stabile-gaskosten-lohnt-sich-eine-preisgarantie-fuer-dich.jpg"
   alt: "Stabile Gaskosten: Lohnt sich eine Preisgarantie für dich?"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 780243fb2a89978a199d954f83acdcd59ee0217a10fb8237671212862b4af068
+    geprueft_am: 2026-11-17
 faktencheck: 2026-11-16
 ---
 
