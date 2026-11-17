@@ -37,7 +37,7 @@ quellen:
     titel: "Bundesnetzagentur - Energie"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html"
     herausgeber: "Bundesnetzagentur"
-faktencheck: 2026-10-07
+faktencheck: 2026-11-17
 kurzantwort: "Der gezielte Austausch veralteter Großgeräte gegen moderne, sparsame Modelle sowie die konsequente Nutzung von Eco‑Programmen und schaltbaren Steckerleisten senken den laufenden Strombedarf spürbar. Die Beispielrechnung im Artikel zeigt, ab welchem Jahresverbrauch sich ein Gerätetausch für dein Haushaltsbudget rechnet."
 ---
 

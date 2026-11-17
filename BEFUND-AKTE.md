@@ -2,12 +2,12 @@
 
 _Stand 2026-11-17 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**209 offene Befunde auf 54 Seiten · davon 34 Live-Seiten mit 129 Befunden · ältester 18 Tage · Frist 14 Tage.**
+**224 offene Befunde auf 58 Seiten · davon 36 Live-Seiten mit 137 Befunden · ältester 18 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 209 |
-| Seiten betroffen | 54 (davon live: 34) |
+| Offene Befunde | 224 |
+| Seiten betroffen | 58 (davon live: 36) |
 | Text seit dem Befund geändert | 168 |
 | Altbestand ohne Fassungs-Hash | 11 |
 | Nicht entscheidbar (Seite fehlt) | 5 |
@@ -32,7 +32,7 @@ _Stand 2026-11-17 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 179 von 209 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 179 von 224 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -634,6 +634,42 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 26b1c694d76bcc7af50
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9593e535bce55f4283e6 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick` · **LIVE** · Risikoklasse standard · 5 Befund(e)
+
+Datei: `content/posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `1eae5c7e2bbd95a3362c` | luecke | 0 T | Text unverändert seit dem Befund | Tabelle mit konkreten kWh‑Werten und Euro‑Ersparnissen für neue vs. alte Geräte. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `8547ce3daa75aabb30d4` | luecke | 0 T | Text unverändert seit dem Befund | Annahme von 40 ct/kWh und daraus resultierende Jahres‑Ersparnis von 52 € für einen Kühlschrank‑Tausch. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `c8b197692bd0023c87bf` | luecke | 0 T | Text unverändert seit dem Befund | Behauptung, dass ein neuer Wärmepumpentrockner „sogar noch schneller“ die Anschaffungskosten amortisiert. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `e40a2ee5c7baa5f8567b` | luecke | 0 T | Text unverändert seit dem Befund | Sparsame Geräte senken deinen Verbrauch in der Beispielrechnung unten um bis zu 40 %. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `feb71513c6fb7064dc92` | luecke | 0 T | Text unverändert seit dem Befund | Der Stromverbrauch von Kühlschrank und Waschmaschine macht in der Modellrechnung rund 30 % der Kosten im Haushalt aus. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1eae5c7e2bbd95a3362c --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8547ce3daa75aabb30d4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden c8b197692bd0023c87bf --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden e40a2ee5c7baa5f8567b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden feb71513c6fb7064dc92 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen` · **LIVE** · Risikoklasse erhoeht · 3 Befund(e)
+
+Datei: `content/posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `3bfeb0118af92a780a47` | luecke | 0 T | Text unverändert seit dem Befund | Bei 5 % Rendite im Jahr entstehen rund 30.000 € – keine Quelle für die angenommene Rendite angegeben. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `ed2161154dcee85da1ee` | luecke | 0 T | Text unverändert seit dem Befund | Angabe, dass die Einrichtung eines Sparplans meist weniger als 15 Minuten dauert, fehlt belegt. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `f593fe21275bd9dcefef` | luecke | 0 T | Text unverändert seit dem Befund | Behauptung, dass einige Broker bereits ab 1 € monatlich starten, ohne Quelle. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3bfeb0118af92a780a47 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ed2161154dcee85da1ee --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden f593fe21275bd9dcefef --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden` · nicht im Live-Bestand · 5 Befund(e)
 
 Seite: `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden`
@@ -746,11 +782,11 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3a69bd57886154a18b8
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4f777954306ac7b21e03 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten` · nicht im Live-Bestand · 5 Befund(e)
+### `2026-11-17-strompreis-2026-herbst-check-fuer-deine-stromkosten` · nicht im Live-Bestand · 5 Befund(e)
 
-Seite: `2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten`
+Seite: `2026-11-17-strompreis-2026-herbst-check-fuer-deine-stromkosten`
 
-Herkunft nach Datums-Lift: `2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten` → `2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten`. Befund-ID und Fassungsanker bleiben unverändert; das Re-Dating ist keine fachliche Entscheidung.
+Herkunft nach Datums-Lift: `2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten` → `2026-11-17-strompreis-2026-herbst-check-fuer-deine-stromkosten`. Befund-ID und Fassungsanker bleiben unverändert; das Re-Dating ist keine fachliche Entscheidung.
 
 | Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
 |---|---|---|---|---|---|
@@ -976,6 +1012,40 @@ Seite: `2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert`
 ```bash
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 784d0b3715d53d5c3bb2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8fea8173e9c360979fc7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-10-21-mietwagen-fallen-im-urlaub-vermeiden` · nicht im Live-Bestand · 4 Befund(e)
+
+Seite: `2026-10-21-mietwagen-fallen-im-urlaub-vermeiden`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `4246118449c91859654d` | praezision | 0 T | Text unverändert seit dem Befund | Die Faustregel lautet: Jede Zusatzoption sollte höchstens ein Drittel der Miete kosten. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+| `4f62641b3af8d53ba65d` | praezision | 0 T | Text unverändert seit dem Befund | Ein Navi kostet oft zehn Euro oder mehr pro Tag. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+| `5f76a2f9b3a57de72e73` | praezision | 0 T | Text unverändert seit dem Befund | Ein Schutz ohne Eigenanteil ist meist teurer pro Tag. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+| `6df8b77e2840e62c5711` | luecke | 0 T | Text unverändert seit dem Befund | Frühbucherrabatte gelten meist nur bis zu einer bestimmten Anzahl Tage vor Mietbeginn. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4246118449c91859654d --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4f62641b3af8d53ba65d --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5f76a2f9b3a57de72e73 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6df8b77e2840e62c5711 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet` · nicht im Live-Bestand · 3 Befund(e)
+
+Seite: `2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `842ddd33d3dd6b0b97f7` | luecke | 0 T | Text unverändert seit dem Befund | Muffiger Geruch deutet oft auf tiefliegenden Schimmel oder Feuchtigkeit hin. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `d3e210fb738bd77ef594` | luecke | 0 T | Text unverändert seit dem Befund | Neue Möbel verlieren oft sofort nach dem Kauf massiv an Wert. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `da84fa452f879ea8f2da` | luecke | 0 T | Text unverändert seit dem Befund | Die Eigenleistung lohnt sich finanziell, wenn die Ersparnis den Zeitaufwand rechtfertigt. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 842ddd33d3dd6b0b97f7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d3e210fb738bd77ef594 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden da84fa452f879ea8f2da --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub` · nicht im Live-Bestand · 5 Befund(e)

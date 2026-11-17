@@ -1,31 +1,31 @@
 {
   "slug": "2026-10-21-mietwagen-fallen-im-urlaub-vermeiden",
   "titel": "Mietwagen-Fallen im Urlaub vermeiden",
-  "erzeugt": "2026-10-22 09:35 UTC",
+  "erzeugt": "2026-11-17 13:48 UTC",
   "faellig": {
-    "faellig": true,
-    "prio": 0,
+    "faellig": false,
+    "prio": 9,
     "klasse": "saisonal",
-    "grund": "Erstrecherche – noch nie faktengeprüft",
-    "alter_tage": null,
-    "intervall": 30
+    "grund": "frisch geprüft vor 26 Tagen (Intervall 30 Tage)",
+    "alter_tage": 26,
+    "intervall": 30,
+    "frist": "2026-11-21",
+    "restlaufzeit": 4
   },
   "geo": {
-    "punkte": 3,
+    "punkte": 5,
     "maximum": 6,
-    "prozent": 50,
+    "prozent": 83,
     "offen": [
-      "Kurzantwort-Box (direkte Antwort für AI Overviews)",
-      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
-      "Sichtbares Prüfdatum (`faktencheck:`)"
+      "Kurzantwort-Box (direkte Antwort für AI Overviews)"
     ],
     "treffer": {
       "kurzantwort": false,
       "faq": true,
-      "quellen": false,
+      "quellen": true,
       "zahlen": true,
       "tabelle": true,
-      "faktencheck": false
+      "faktencheck": true
     }
   },
   "treffer": [
@@ -45,32 +45,34 @@
   ],
   "befunde": [
     {
-      "typ": "luecke",
-      "text": "Die Aussage, dass jede Zusatzoption höchstens ein Drittel der Miete kosten sollte, ist nicht durch die Verbraucherzentrale belegt.",
+      "typ": "praezision",
+      "text": "Die Faustregel lautet: Jede Zusatzoption sollte höchstens ein Drittel der Miete kosten.",
+      "stelle": "Die Faustregel lautet: Jede Zusatzoption sollte höchstens ein Drittel der Miete kosten.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "praezision",
+      "text": "Ein Navi kostet oft zehn Euro oder mehr pro Tag.",
+      "stelle": "Ein Navi kostet oft zehn Euro oder mehr pro Tag.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
+    },
+    {
+      "typ": "praezision",
+      "text": "Ein Schutz ohne Eigenanteil ist meist teurer pro Tag.",
+      "stelle": "Schutz ohne Eigenanteil | Höherer Tagessatz",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
     },
     {
       "typ": "luecke",
-      "text": "Die Behauptung, dass die Voll‑zu‑Voll‑Tankregel meist die beste Wahl ist, wird von der Quelle nicht bestätigt.",
-      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
-    },
-    {
-      "typ": "luecke",
-      "text": "Die Angabe, dass ein Navigationsgerät zehn Euro oder mehr pro Tag kostet, fehlt in der Quelle.",
-      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
-    },
-    {
-      "typ": "luecke",
-      "text": "Die Aussage, dass ein Frühbucherrabatt nur bis zu einer bestimmten Anzahl von Tagen vor Mietbeginn gilt, ist nicht durch die Quelle belegt.",
-      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
-    },
-    {
-      "typ": "luecke",
-      "text": "Die Empfehlung, ausschließlich CHECK24 zu nutzen, wird von der Quelle nicht unterstützt und lässt andere Vergleichsplattformen außen vor.",
+      "text": "Frühbucherrabatte gelten meist nur bis zu einer bestimmten Anzahl Tage vor Mietbeginn.",
+      "stelle": "Ein Rabatt für Frühbucher lohnt sich oft sehr. Er gilt meist nur bis zu einer bestimmten Zahl an Tagen vor dem Start.",
       "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
     }
   ],
   "fehler": [
-    "Verbraucherzentrale – Reise: Feed nicht lesbar"
-  ]
+    "Verbraucherzentrale – Reise: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+  ],
+  "fassung_sha256": "0f027cd79211fc676ca65a91d1c6abe2cf17c4781726c095c237a004336622d2",
+  "text_sha256": "8d7241723f528fe89fbca9cca77abd35ad556a0020989735c562ad28926a77e9",
+  "fachpruefung": "geprüft (groq:openai/gpt-oss-120b); 1 Befund(e) ohne belegbaren Textanker verworfen"
 }

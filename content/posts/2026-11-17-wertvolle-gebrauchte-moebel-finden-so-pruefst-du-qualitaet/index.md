@@ -25,6 +25,7 @@ cover:
   image: "images/covers/2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet.jpg"
   alt: "Wertvolle Gebrauchte Möbel finden: So prüfst du Qualität"
   caption: "Tipp von FranksFinanzcheck"
+faktencheck: 2026-11-17
 ---
 
 Du stehst in einer Garage oder in einem staubigen Hinterhof. Vor dir steht ein Schrank. Er sieht auf den ersten Blick gut aus. Der Preis ist verlockend niedrig.
