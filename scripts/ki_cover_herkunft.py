@@ -47,10 +47,19 @@ DREI BELEGE, EIN WERKZEUG
    Attestation falsch geworden – dann ist das ein Befund, kein Rauschen.
    Zusätzlich: Steht `trainedAlgorithmicMedia` im Frontmatter, gehört die
    Datei dem KI-Weg (`ki_bild_markierung.py`), nicht diesem.
+4. `--heilen` zieht den Beleg (1) für genau die Cover nach, die die Messung
+   (3) im selben Lauf BESTANDEN haben. Der Befund dahinter: Der Beleg war
+   bis 17.11.2026 ein manueller Schritt – kein Workflow schrieb ihn. Sechs
+   Reserve-Entwürfe mit pixelidentisch reproduzierbaren Covern hielten damit
+   den Deploy an (#1236-Folge, Lauf 44123560026), obwohl an den Bildern
+   nichts falsch war. Abweichende Cover heilt `--heilen` ausdrücklich NICHT:
+   Eine Erklärung, die die eigene Messung widerlegt, wäre schlimmer als der
+   Befund. `--pruefen` bleibt die harte Instanz.
 
 Aufruf:
   python3 scripts/ki_cover_herkunft.py --attestieren [--trocken]
   python3 scripts/ki_cover_herkunft.py --markieren [--trocken] [--force]
+  python3 scripts/ki_cover_herkunft.py --heilen [--trocken]  # Belege nachziehen
   python3 scripts/ki_cover_herkunft.py --pruefen        # Exit 0/1/2
   python3 scripts/ki_cover_herkunft.py --selftest
 
@@ -312,20 +321,24 @@ def markieren(root: Path = ROOT, trocken: bool = False, force: bool = False):
     return geschrieben, uebersprungen, fehler
 
 
-def pruefen(root: Path = ROOT):
-    """Reproduktionswache: Rendert jedes Cover neu und verlangt Pixelgleichheit.
+def messung(root: Path = ROOT) -> dict:
+    """Ein Render-Durchlauf, strukturiert: Sätze UND ihre Klassen.
 
-    Das ist der eigentliche Beweis. Eine Attestation im Frontmatter ist eine
-    Erklärung; die Pixelgleichheit ist eine Messung. Wer die Renderer-Version
-    ändert, ohne neu zu rendern, bekommt hier einen Befund – nicht in einem
-    halben Jahr bei einer Aufsicht.
+    `pruefen()` braucht die Sätze für das Protokoll, `heilen()` braucht die
+    Klassen: Nachgezogen werden darf ein Beleg NUR für ein Cover, das die
+    Pixelmessung gerade bestanden hat. Ein Cover, das vom Renderer abweicht,
+    ist eine Entscheidung (neu rendern oder Beleg zurückziehen) und bleibt
+    ein harter Befund – sonst schriebe die Heilung eine Herkunftserklärung,
+    die die eigene Messung widerlegt.
     """
+    ergebnis = {"befunde": [], "geprueft": 0, "ausserhalb": 0,
+                "ohne_beleg": [], "abweichung": []}
     kp, gc = _kern()
     try:
         import cover_render_check as crc
     except ImportError as exc:
         raise WerkzeugFehler(f"Render-Wache nicht ladbar: {exc}") from exc
-    befunde, geprueft, ausserhalb = [], 0, 0
+    befunde = ergebnis["befunde"]
     with tempfile.TemporaryDirectory(prefix="cover-herkunft-") as tmp:
         for pfad, _fm, cover in kp.collect(root):
             slug = pfad.parent.name
@@ -334,7 +347,7 @@ def pruefen(root: Path = ROOT):
             if not im_renderbereich(pfad):
                 # Kein Renderer-Lauf für diese Seite (Markenbild auf einer
                 # statischen Seite). Gezählt, nicht bewertet.
-                ausserhalb += 1
+                ergebnis["ausserhalb"] += 1
                 continue
             try:
                 ziel = kp.local_cover(root, cover.get("image"))
@@ -354,16 +367,73 @@ def pruefen(root: Path = ROOT):
                 crc.render_to(gc, titel, badge, savings, neu)
             except Exception as exc:
                 raise WerkzeugFehler(f"{slug}: Render nicht möglich ({exc})") from exc
-            geprueft += 1
+            ergebnis["geprueft"] += 1
             if not crc.same_pixels(str(ziel), neu):
                 befunde.append(f"{slug}: Bild weicht vom Renderer ab – die "
                                "Herkunftsangabe ist damit nicht mehr belegt "
                                "(Cover neu rendern, dann Beleg nachziehen)")
+                ergebnis["abweichung"].append(slug)
                 continue
             if not beleg_vorhanden(cover):
                 befunde.append(f"{slug}: reproduzierbar, aber ohne Beleg im "
                                "Frontmatter (--attestieren schreibt ihn)")
-    return befunde, geprueft, ausserhalb
+                ergebnis["ohne_beleg"].append(slug)
+    return ergebnis
+
+
+def pruefen(root: Path = ROOT):
+    """Reproduktionswache: Rendert jedes Cover neu und verlangt Pixelgleichheit.
+
+    Das ist der eigentliche Beweis. Eine Attestation im Frontmatter ist eine
+    Erklärung; die Pixelgleichheit ist eine Messung. Wer die Renderer-Version
+    ändert, ohne neu zu rendern, bekommt hier einen Befund – nicht in einem
+    halben Jahr bei einer Aufsicht.
+    """
+    m = messung(root)
+    return m["befunde"], m["geprueft"], m["ausserhalb"]
+
+
+def heilen(root: Path = ROOT, trocken: bool = False) -> dict:
+    """Belege nachziehen, die die Messung bereits trägt – und sonst nichts.
+
+    BEFUND, DER DIESEN EINGRIFF NÖTIG MACHT (17.11.2026, Folge von #1236):
+    Nachdem die llms.txt-Drift geheilt war, stand derselbe Deploy-Lauf
+    (44123560026) einen Schritt weiter erneut still – „Cover-Herkunft –
+    Reproduktionswache (fail-closed)", Exit 1. Sechs Reserve-Entwürfe der
+    Tage 16./17.11. hatten Cover, die der Renderer PIXELIDENTISCH
+    nachzeichnete, aber keinen Beleg im Frontmatter. An den Bildern war
+    nichts falsch; `generate_covers.py` schreibt die IPTC-Markierung in die
+    Datei, den Frontmatter-Beleg aber schreibt nur `--attestieren` – und das
+    lief in keinem Workflow mit. Ein neuer Entwurf fror damit die
+    Auslieferung ein, bis ein Mensch den Beleg von Hand nachzog (zuletzt
+    13.11.2026 für 132 Cover).
+
+    Geheilt wird ausschließlich die Klasse „reproduzierbar, aber ohne Beleg":
+    Die Pixelmessung ist in diesem Lauf bereits grün gelaufen, der Beleg
+    erklärt also genau das, was gemessen wurde. Alles Übrige bleibt hart:
+      · „Bild weicht vom Renderer ab" → Entscheidung (neu rendern oder Beleg
+        zurückziehen), nie eine Heilung.
+      · fehlende Bilddatei, nicht ableitbare Erwartung → Befund.
+      · Render nicht möglich → WerkzeugFehler (Exit 2), blinde Messung.
+    Fremde Belege (KI-Cover, `trainedAlgorithmicMedia`) tastet `attestieren()`
+    ohnehin nicht an; der Lauf ist idempotent.
+
+    Rückgabe: {geschrieben, fehler, hart, geprueft, ausserhalb, trocken}.
+    """
+    m = messung(root)
+    geschrieben, fehler = 0, []
+    for slug in m["ohne_beleg"]:
+        try:
+            anz, _uebersprungen, slug_fehler = attestieren(root, trocken=trocken,
+                                                           nur=slug)
+        except WerkzeugFehler as exc:
+            fehler.append(f"{slug}: {exc}")
+            continue
+        geschrieben += anz
+        fehler.extend(slug_fehler)
+    return {"geschrieben": geschrieben, "fehler": fehler,
+            "hart": list(m["abweichung"]), "geprueft": m["geprueft"],
+            "ausserhalb": m["ausserhalb"], "trocken": trocken}
 
 
 def selbsttest() -> int:
@@ -398,13 +468,25 @@ def selbsttest() -> int:
             fehler.append(f"Wache prüfte {geprueft} statt 1 Cover")
         if not any("ohne Beleg" in b for b in befunde):
             fehler.append("Wache merkt einen fehlenden Beleg nicht")
-        # 2) Attestation schreiben, dann muss Ruhe sein.
-        geschrieben, _, _ = attestieren(root)
-        if geschrieben != 1:
-            fehler.append(f"attestieren schrieb {geschrieben} statt 1")
+        # 2) Heilung zieht den Beleg nach – und zwar NUR, weil die
+        # Pixelmessung in Schritt 1 grün war (das Cover ist reproduzierbar).
+        # Trockenlauf plant ohne zu schreiben, Echtlauf schreibt, der zweite
+        # Lauf schweigt (Idempotenz).
+        trocken = heilen(root, trocken=True)
+        if trocken["geschrieben"] != 1:
+            fehler.append(f"heilen(trocken=True) plante {trocken['geschrieben']} statt 1")
+        if FRONTMATTER_FELD in artikel.read_text(encoding="utf-8"):
+            fehler.append("heilen(trocken=True) hat trotz Trockenlauf geschrieben")
+        lauf = heilen(root)
+        if lauf["geschrieben"] != 1:
+            fehler.append(f"heilen schrieb {lauf['geschrieben']} statt 1 Beleg")
+        if lauf["hart"]:
+            fehler.append(f"heilen meldet im sauberen Fall harte Befunde: {lauf['hart']}")
         befunde, _, _ = pruefen(root)
         if befunde:
-            fehler.append(f"nach der Attestation noch Befunde: {befunde}")
+            fehler.append(f"nach der Heilung noch Befunde: {befunde}")
+        if heilen(root)["geschrieben"] != 0:
+            fehler.append("heilen ist nicht idempotent")
         # 3) Bild manipulieren → die Attestation ist nicht mehr belegt.
         # Gemessen wird das an den PIXELN (die Wache vergleicht Bilder, nicht
         # Bytes). Ein angehängtes Nullbyte änderte kein Pixel – die Probe
@@ -417,6 +499,14 @@ def selbsttest() -> int:
         befunde, _, _ = pruefen(root)
         if not any("weicht vom Renderer ab" in b for b in befunde):
             fehler.append("Wache merkt ein manipuliertes Bild nicht")
+        # 3b) Die Heilung darf ein abweichendes Cover NICHT attestieren: Der
+        # Beleg wäre eine Herkunftserklärung, die die eigene Messung
+        # widerlegt. Er muss als harter Befund stehen bleiben.
+        lauf = heilen(root)
+        if lauf["geschrieben"] != 0:
+            fehler.append("heilen attestiert ein Cover, das vom Renderer abweicht")
+        if slug not in lauf["hart"]:
+            fehler.append("heilen nennt das abweichende Cover nicht als hart")
         # 4) Fremder KI-Beleg wird nicht überschrieben.
         # 4) Fremder KI-Beleg wird nicht überschrieben. Der Beleg steht nach
         # Schritt 2 bereits im Frontmatter – hier wird nur sein WERT auf den
@@ -466,6 +556,9 @@ def main(argv=None) -> int:
                         help="IPTC algorithmicMedia in die Bilddatei schreiben")
     parser.add_argument("--pruefen", action="store_true",
                         help="Reproduktionswache: Cover nachrendern und vergleichen")
+    parser.add_argument("--heilen", action="store_true",
+                        help="Belege nachziehen für Cover, die die Pixelmessung "
+                             "bestanden haben (abweichende bleiben hart)")
     parser.add_argument("--selftest", action="store_true", help="Sabotage-Proben")
     parser.add_argument("--trocken", action="store_true", help="nur zeigen, nichts schreiben")
     parser.add_argument("--force", action="store_true", help="fremde Angabe ersetzen")
@@ -475,6 +568,30 @@ def main(argv=None) -> int:
     if args.selftest:
         return selbsttest()
     try:
+        if args.heilen:
+            # Heilung VOR der Wache, nie statt ihr: `--pruefen` bleibt die
+            # harte Instanz und meldet jedes Cover, das die Heilung bewusst
+            # nicht angefasst hat (Abweichung, fehlende Datei).
+            ergebnis = heilen(trocken=args.trocken)
+            if args.json:
+                print(json.dumps(ergebnis, ensure_ascii=False, indent=2))
+            else:
+                if ergebnis["geschrieben"]:
+                    print(f"🔧 Cover-Herkunft: {ergebnis['geschrieben']} Beleg(e) "
+                          f"{'geplant' if args.trocken else 'nachgezogen'} – die "
+                          "Pixelmessung war für genau diese Cover bereits grün.")
+                for slug in ergebnis["hart"]:
+                    print(f"::warning title=Cover-Herkunft::{slug}: Bild weicht vom "
+                          "Renderer ab – keine Heilung (Entscheidung: neu rendern "
+                          "oder Beleg zurückziehen). Die Wache bleibt hart.")
+                for f in ergebnis["fehler"]:
+                    print(f"::error title=Cover-Herkunft::{f}")
+                print(f"Cover-Herkunft (Heilung): {ergebnis['geprueft']} Cover "
+                      f"gemessen, {ergebnis['geschrieben']} Beleg(e) "
+                      f"{'geplant' if args.trocken else 'nachgezogen'}, "
+                      f"{len(ergebnis['hart'])} harte(r) Befund(e) für die Wache, "
+                      f"{len(ergebnis['fehler'])} Schreibfehler.")
+            return 1 if ergebnis["fehler"] else 0
         if args.pruefen:
             befunde, geprueft, ausserhalb = pruefen()
             if args.json:

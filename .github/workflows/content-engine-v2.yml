@@ -345,6 +345,16 @@ jobs:
           echo "== Cover generieren =="
           pip install -q --require-hashes -r "$GITHUB_WORKSPACE/requirements-ci.txt"
           python3 scripts/generate_covers.py || echo "⚠ Cover-Fehler (nicht kritisch)"
+          echo "== Cover-Herkunft: Belege nachziehen (nur reproduzierbare Cover) =="
+          # generate_covers.py schreibt die IPTC-Markierung in die Bilddatei,
+          # den Frontmatter-Beleg (cover.ki_pruefung) aber niemand: Ohne ihn
+          # ist die Reproduktionswache im Deploy fail-closed rot und die
+          # Auslieferung steht – obwohl das Cover pixelidentisch nachzeichbar
+          # ist (17.11.2026, Folge von #1236: sechs Reserve-Entwürfe).
+          # --heilen attestiert ausschließlich Cover, deren Pixelmessung im
+          # selben Lauf grün war; abweichende bleiben hart. Best effort hier,
+          # weil der Deploy dieselbe Heilung VOR seiner Wache fährt.
+          python3 scripts/ki_cover_herkunft.py --heilen || echo "⚠ Cover-Belege nicht nachgezogen – der Deploy heilt vor der Wache nach"
           echo "== Einzigartigkeit =="
           python3 scripts/check_uniqueness.py || echo "⚠ Uniqueness (nicht blockierend)"
           echo "== Pinterest-Duplikat-Guard (P4 – Premium, 17.09.2026) =="

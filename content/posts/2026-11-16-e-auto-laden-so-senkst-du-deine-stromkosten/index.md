@@ -19,6 +19,12 @@ cover:
   image: "images/covers/2026-11-16-e-auto-laden-so-senkst-du-deine-stromkosten.jpg"
   alt: "E-Auto laden: So senkst du deine Stromkosten"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 3dc216344a15d7577fe226c9078493f329e7c7c1e7cf745910010692189cf57a
+    geprueft_am: 2026-11-17
 pin_title: "E-Auto laden: So senkst du deine Stromkosten"
 pin_description: "*Werbung | E-Auto laden: So senkst du deine Stromkosten – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten… Mehr Spartipps auf FranksFinanzcheck! #eauto #ladekosten #stromtarif"
 quellen:

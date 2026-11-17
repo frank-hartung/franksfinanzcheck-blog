@@ -663,7 +663,7 @@ jobs:
         run: python3 scripts/tag_governance.py --apply
 
       # ============ KI-PROVENIENZ: SELBSTHEILUNG VOR DEM BUILD (#1028) ============
-      # Art. 50 Abs. 2 KI-VO, Frist 02.12.2026. Zwei Quellen-Drifts machen die
+      # Art. 50 Abs. 2 KI-VO, Frist 02.12.2026. Drei Quellen-Drifts machen die
       # Kennzeichnung wirkungslos, obwohl jede Vorlage korrekt aussieht:
       #   1) Der Anker {#ki-hinweis} im Impressum fehlt → jedes
       #      rel="describedby" und jedes ffki:describedby im Feed läuft ins
@@ -675,10 +675,29 @@ jobs:
       #      NUR wenn eindeutig ist, welche Fassung den Kanal trägt. Tragen
       #      beide unterschiedliche Fassungen, ist das eine Entscheidung und
       #      bleibt ein Fund (keine Erfindung).
+      #   3) static/llms.txt weicht vom Generator ab (Regel M9). BEFUND
+      #      17.11.2026 (#1236, #1249, #1250): Am 16.11. gingen zwei Artikel
+      #      live (`draft: false`), ohne dass generate_llms_txt.py mitlief.
+      #      Der Schritt maß die Drift korrekt, gab sie aber als Fund aus
+      #      (Exit 1) und hielt damit 15 Deploy-Läufe in Folge an – zwei
+      #      Artikel in der Quelle, keiner öffentlich nachgewiesen, Watchdog
+      #      auf 404. Seit #1255 heilt `_llms_heilen()` diesen Drift selbst:
+      #      mit Gegenprobe (Abschnitt + alle M9-Anker) und bytegenauem
+      #      Rollback, falls der Generator seine Herkunftsaussage verloren
+      #      hat. Ein Kennzeichnungsbefund bleibt ein Kennzeichnungsbefund;
+      #      abgeschaltet wurde nichts. Werkzeugfehler sind getrennt: bricht
+      #      der Generator ab, ist die Messung blind (W0, Exit 2) und geht
+      #      über werkzeugbefund.py – nicht als Inhaltsfund.
+      #      Der Heilungsdiff wird weiter unten von „Gate-Heilungen
+      #      committen (konvergent)" mit `git add -A` gesichert, damit der
+      #      nächste Lauf nicht denselben Drift neu heilt. Erzeugerseite
+      #      zieht publication_release.py die abgeleiteten Register
+      #      (abgeleitete_register.py --fix) direkt nach jeder
+      #      Live-Freischaltung nach.
       # `--source-only`, weil der Build hier noch nicht existiert: Ein Heillauf,
       # der mangels Bauprodukt „kein Bauprodukt" meldet, würde jeden Deploy
       # stoppen. Die ausgelieferte Wahrheit prüfen M1/M4/M5 NACH dem Build.
-      - name: KI-Provenienz – Selbstheilung (Anker + Feed-Spiegelung, VOR dem Build)
+      - name: KI-Provenienz – Selbstheilung (Anker + Feed-Spiegelung + llms.txt, VOR dem Build)
         run: python3 scripts/ki_provenienz_gate.py --heilen --source-only
 
       # ---------------------------------------------------------------
@@ -743,9 +762,28 @@ jobs:
       # grünes Gate liefern. --pruefen ist fail-closed: ein driftendes oder
       # unbelegtes Cover bricht den Deploy ab, bevor etwas gebaut wird.
       # Runbook: docs/KI-TRANSPARENZ-ABNAHME.md (§4 Live-Akzeptanz)
+      #
+      # SELBSTHEILUNG VOR DER WACHE (17.11.2026, Folge von #1236):
+      # Nachdem die llms.txt-Drift geheilt war, stand Lauf 44123560026 einen
+      # Schritt weiter erneut still – „Reproduktionswache", Exit 1, Auslieferung
+      # übersprungen. Befund: 137 Cover waren pixelidentisch reproduzierbar,
+      # sechs Reserve-Entwürfe der Tage 16./17.11. trugen aber keinen Beleg im
+      # Frontmatter. `generate_covers.py` schreibt die IPTC-Markierung in die
+      # Bilddatei; den Frontmatter-Beleg schrieb bis hierher NUR ein manueller
+      # `--attestieren`-Lauf (zuletzt 13.11.2026 für 132 Cover) – kein Workflow.
+      # Jeder neue Entwurf fror damit die Auslieferung ein, obwohl an seinen
+      # Bildern nichts falsch war.
+      # `--heilen` zieht den Beleg ausschließlich für Cover nach, deren
+      # Pixelmessung in demselben Lauf GRÜN war. Ein Cover, das vom Renderer
+      # abweicht, wird ausdrücklich nicht attestiert (eine Erklärung, die die
+      # eigene Messung widerlegt, wäre schlimmer als der Befund) und bleibt für
+      # die Wache hart. Die Wache selbst wurde nicht abgeschwächt: Sie läuft
+      # unverändert fail-closed direkt danach.
       # ----------------------------------------------------------------
       - name: Cover-Herkunft – Selbsttest (Wache muss lauffähig sein)
         run: python3 scripts/ki_cover_herkunft.py --selftest
+      - name: Cover-Herkunft – Belege nachziehen (selbstheilend, VOR der Wache)
+        run: python3 scripts/ki_cover_herkunft.py --heilen
       - name: Cover-Herkunft – Reproduktionswache (fail-closed)
         run: python3 scripts/ki_cover_herkunft.py --pruefen
 

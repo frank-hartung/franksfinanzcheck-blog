@@ -103,6 +103,29 @@ HINWEIS_UEBERSCHRIFT = re.compile(r"^(#{1,6})\s+(.*Hinweis zu KI.*Inhalten.*?)\s
 RSS_QUELLE = "layouts/rss.xml"
 RSS_SPIEGEL = "layouts/_default/rss.xml"
 
+#: Die Maschinenlese-Datei für KI-Antwortmaschinen ist ein Erzeugnis des
+#: Generators aus dem Live-Bestand (Regel M9): die geprüfte Fassung muss die
+#: ausgelieferte sein. Driftet sie – etwa weil Artikel live geschaltet wurden,
+#: ohne dass der Generator mitlief – heilt `_llms_heilen()` sie nach.
+LLMS_TXT = "static/llms.txt"
+LLMS_GENERATOR = "scripts/generate_llms_txt.py"
+#: Überschrift des Herkunfts-Abschnitts. Ohne ihn weiß eine Antwortmaschine
+#: das Wichtigste nicht (Regel M9, #1028).
+LLMS_ABSCHNITT = "KI-Kennzeichnung"
+#: Die Angaben, ohne die ein Sprachmodell den Korpus falsch einordnet: Es
+#: muss erkennen können, was maschinell entstanden ist, was das NICHT beweist
+#: und dass der Zitier-Rahmen weiter gilt. Geprüft wird auf inhaltliche Anker,
+#: nicht auf den Wortlaut – der Generator darf den Text umformulieren, aber
+#: nicht den Sachverhalt verlieren. Dieselbe Liste ist die Abnahmegrenze der
+#: Heilung: Fehlt ein Anker in der frisch erzeugten Fassung, wird sie nicht
+#: ausgeliefert, sondern bytegenau zurückgerollt.
+LLMS_ANKER = (
+    ("ai-generated", "nennt die maschinenlesbare Kennzeichnung nicht"),
+    ("DigitalSourceType", "nennt die Erzeugungsart in Bild/Ton nicht"),
+    ("Art. 50", "verwechselt Betreiber-Erklärung und Anbieterpflicht"),
+    ("kein Herkunftsbeweis", "behauptet mehr, als die Angaben tragen"),
+)
+
 LEDGER = "data/ki_provenienz_history.jsonl"
 STATE = "data/ki_provenienz_state.json"
 
@@ -1156,50 +1179,134 @@ def heilen(root: Path = ROOT, *, trocken: bool = False) -> dict:
             "trocken": trocken}
 
 
-_LLMS_PFLICHT_ANKER = (
-    "KI-Kennzeichnung",
-    "ai-generated",
-    "DigitalSourceType",
-    "Art. 50",
-    "kein Herkunftsbeweis",
-)
+def llms_mangel(text: str) -> list[str]:
+    """Was einer llms.txt-Fassung fehlt, um ausgeliefert zu werden.
+
+    Dieselben Anker wie Regel M9 – ein Wahrheitsort. Die Heilung schreibt
+    keine Fassung, die die Prüfung danach trotzdem rot macht, und keine, die
+    die Herkunftsaussage verloren hat.
+    """
+    mangel: list[str] = []
+    if LLMS_ABSCHNITT not in text:
+        mangel.append(f"Abschnitt „{LLMS_ABSCHNITT}“ fehlt")
+    # Zeilenumbrüche sind Formatierung, nicht Inhalt (wie in M9): Ein Satz,
+    # der über zwei Zeilen läuft, ist derselbe Satz.
+    flach = " ".join(text.split())
+    mangel += [grund for anker, grund in LLMS_ANKER
+               if " ".join(anker.split()) not in flach]
+    return mangel
+
+
+#: Pflichtanker der KI-Herkunftsaussage – abgeleitet aus dem Vokabular oben,
+#: nicht doppelt gepflegt. Zwei Kopien würden auseinanderlaufen: Die Prüfung
+#: forderte dann einen Anker, den die Heilung nicht kennt, oder umgekehrt.
+_LLMS_PFLICHT_ANKER = (LLMS_ABSCHNITT,) + tuple(anker for anker, _ in LLMS_ANKER)
 
 
 def _llms_hat_pflichtanker(text: str) -> bool:
     """Prüft, ob llms.txt alle Pflichtanker der KI-Herkunftsaussage trägt."""
-    if "KI-Kennzeichnung" not in text:
-        return False
-    flach = " ".join(text.split())
-    return all(" ".join(anker.split()) in flach for anker in _LLMS_PFLICHT_ANKER[1:])
+    return not llms_mangel(text)
+
+
+def llms_drift(root: Path = ROOT) -> str:
+    """M9: Weicht `static/llms.txt` vom Generator ab?
+
+    EINE Messung, zwei Leser: Regel M9 prüft damit, `_llms_heilen()` heilt
+    damit. Getrennte Messwege wären genau die „zwei Wahrheiten“, gegen die
+    dieses Modul existiert – die Heilung könnte grün schreiben, während die
+    Prüfung weiter rot misst.
+
+    Gemessen wird gegen den Generator DES übergebenen Baums (`root`), nicht
+    gegen den des Repos: Der Generator leitet sein Ziel aus `__file__` ab
+    (`BLOG_DIR`), schreibt also immer in denselben Baum, aus dem er stammt.
+    Damit ist die Messung auch in einer Prüfliage ehrlich, solange die
+    Prüfliage einen eigenen Generator mitbringt (Unit-Tests) – und
+    `unmessbar`, wenn sie keinen hat (Selbsttest-Fixture des Gates).
+
+    Rückgabe:
+      ``""``          aktuell – die geprüfte Fassung ist die erzeugte
+      ``"fehlend"``   Datei fehlt (Generator ist da)
+      ``"drift"``     Inhalt weicht vom Generator-Stand ab (Inhaltsbefund)
+      ``"werkzeug"``  Generator bricht ab – die Messung ist blind. Das ist
+                      KEIN Inhaltsurteil (Exit-Klasse W0 im Gate).
+      ``"unmessbar"`` kein Generator im Baum: nichts, womit man messen
+                      könnte. Ein verlorener Generator ist kein stiller
+                      Zustand – `scripts/abgeleitete_register.py` führt
+                      `static/llms.txt` mit seinem EINZIGEN Schreiber und
+                      meldet den Verlust im Deploy.
+    """
+    generator = root / LLMS_GENERATOR
+    if not generator.is_file():
+        return "unmessbar"
+    if not (root / LLMS_TXT).is_file():
+        return "fehlend"
+    try:
+        lauf = subprocess.run([sys.executable, str(generator), "--check"],
+                              cwd=root, capture_output=True, text=True,
+                              timeout=60, check=False)
+    except (OSError, subprocess.SubprocessError):
+        return "werkzeug"
+    if lauf.returncode == 0:
+        return ""
+    # Drift ist ein ERGEBNIS (der Generator sagt „DRIFT: …" und geht mit 1);
+    # ein Absturz ist ein WERKZEUGFALL (Traceback auf stderr). Beides in
+    # einen Topf zu werfen hieße, einen Werkzeugfehler als Inhaltsbefund
+    # auszugeben – genau die Vermischung, die den Befund vom 17.11.2026
+    # unlesbar machte (#1236: Inhaltsbefunde von Werkzeugfehlern trennen).
+    if "DRIFT:" in (lauf.stdout or ""):
+        return "drift"
+    if (lauf.stderr or "").strip():
+        return "werkzeug"
+    return "drift"
 
 
 def _llms_heilen(root: Path, eingriffe: list[dict], eskalation: list[dict],
                  *, trocken: bool = False) -> None:
-    """Zieht static/llms.txt bei reiner Bestands-Drift aus dem Generator nach (#1236)."""
-    generator = root / "scripts" / "generate_llms_txt.py"
-    llms = root / "static" / "llms.txt"
-    if not generator.is_file() or not llms.is_file():
+    """Zieht static/llms.txt bei Bestands-Drift aus dem Generator nach (#1236).
+
+    Reine Bestands-Drift (z. B. nach Veröffentlichung neuer Live-Artikel,
+    bevor der nachgelagerte IndexNow-Lauf generate_llms_txt.py erreicht) ist
+    deterministisch aus dem Generator heilbar – analog zum RSS-Spiegel. Die
+    richtige Fassung steht vor der Heilung fest: Es ist das Erzeugnis des
+    Generators aus demselben Live-Bestand, den M9 misst.
+
+    Strenge Grenze (kein Scheingrün):
+      · Trägt die BESTEHENDE Fassung den KI-Abschnitt oder einen Anker
+        nicht, wird nicht geheilt – das ist ein Kennzeichnungsbefund, den
+        Regel M9 fail-closed meldet. Eine Heilung darüber hinweg würde ihn
+        zudecken.
+      · Trägt die ERZEUGTE Fassung einen Pflichtanker nicht, geht die alte
+        bytegenau zurück und der Fall eskaliert laut.
+      · Fehlt die Datei ganz, wird sie erzeugt (sonst hätte ein gelöschter
+        Kanal keinen Schließweg außer Handarbeit) – dieselbe Gegenprobe.
+      · Bricht der Generator ab, ist die Messung blind: Werkzeugbefund, kein
+        Inhaltsurteil (Regel M9 meldet W0, Exit 2).
+    """
+    generator = root / LLMS_GENERATOR
+    llms = root / LLMS_TXT
+    if not generator.is_file():
         return
-    try:
-        alt = llms.read_text(encoding="utf-8")
-    except OSError:
+    drift = llms_drift(root)
+    if drift in ("", "unmessbar"):
         return
-    if not _llms_hat_pflichtanker(alt):
+    if drift == "werkzeug":
+        eskalation.append({
+            "grund": "llms-werkzeug", "datei": LLMS_TXT,
+            "text": f"Drift der {LLMS_TXT} nicht messbar – {LLMS_GENERATOR} "
+                    "bricht ab. Blinde Messung (W0), kein Inhaltsurteil; "
+                    "die Regel M9 meldet denselben Zustand."})
         return
-    try:
-        pruefung = subprocess.run(
-            [sys.executable, str(generator), "--check"],
-            cwd=root, capture_output=True, text=True, timeout=60, check=False,
-        )
-    except (OSError, subprocess.SubprocessError) as exc:
-        eskalation.append({"grund": "llms", "datei": "static/llms.txt",
-                           "text": f"Generator-Prüfung nicht ausführbar ({exc})"})
-        return
-    if pruefung.returncode == 0:
-        return
+    alt = ""
+    if llms.is_file():
+        try:
+            alt = llms.read_text(encoding="utf-8")
+        except OSError:
+            return
+        if not _llms_hat_pflichtanker(alt):
+            return
     if trocken:
         eingriffe.append({
-            "art": "llms", "datei": "static/llms.txt",
+            "art": "llms", "datei": LLMS_TXT,
             "text": "aus scripts/generate_llms_txt.py nachgezogen (Bestands-Drift)",
         })
         return
@@ -1210,25 +1317,29 @@ def _llms_heilen(root: Path, eingriffe: list[dict], eskalation: list[dict],
         )
         neu = llms.read_text(encoding="utf-8") if lauf.returncode == 0 else ""
     except (OSError, subprocess.SubprocessError) as exc:
-        eskalation.append({"grund": "llms", "datei": "static/llms.txt",
+        eskalation.append({"grund": "llms", "datei": LLMS_TXT,
                            "text": f"Generator-Nachzug fehlgeschlagen ({exc})"})
         return
     if lauf.returncode != 0 or not _llms_hat_pflichtanker(neu):
         # Sicherheitsnetz: verliert der Generator einen Pflichtanker, alte
         # Fassung zurücklegen und laut eskalieren statt M9 zu verdecken.
+        mangel = "; ".join(llms_mangel(neu)) or f"Exit {lauf.returncode}"
         try:
-            llms.write_text(alt, encoding="utf-8")
+            if alt:
+                llms.write_text(alt, encoding="utf-8")
+            else:
+                llms.unlink(missing_ok=True)
         except OSError:
             pass
         eskalation.append({
-            "grund": "llms", "datei": "static/llms.txt",
+            "grund": "llms", "datei": LLMS_TXT,
             "text": "Generator liefert keine vollständige KI-Kennzeichnung – "
-                    "kein automatischer Nachzug",
+                    f"kein automatischer Nachzug ({mangel})",
         })
         return
     if neu != alt:
         eingriffe.append({
-            "art": "llms", "datei": "static/llms.txt",
+            "art": "llms", "datei": LLMS_TXT,
             "text": "aus scripts/generate_llms_txt.py nachgezogen (Bestands-Drift)",
         })
 

@@ -26,6 +26,12 @@ cover:
   image: "images/covers/2026-11-17-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater.jpg"
   alt: "WLAN verbessern: Lohnt sich Mesh oder reicht ein Repeater?"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 5be9ce909f29b13878552ec6cbcd9ad2b8d0683370311dec656a912e45b4daa8
+    geprueft_am: 2026-11-17
 faktenfrische_aliases:
   - "2026-11-16-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater"
 faktencheck: 2026-11-17
