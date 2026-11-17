@@ -6,7 +6,7 @@ Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
 **Bezugsstand: 2026-11-17** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
 
-**132 offene Live-Befunde auf 35 Artikeln.** Für **96** gibt es frühere Entscheidungen zu diesem Befund;
+**127 offene Live-Befunde auf 34 Artikeln.** Für **91** gibt es frühere Entscheidungen zu diesem Befund;
 die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **36** Befunde haben keine frühere aktive Entscheidung.
 
 Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus `data/faktenfrische_befunde_state.json`,
@@ -202,71 +202,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 - Heute in Zeile 76: 50 € – gekennzeichnet („annahme“)
 - Heute in Zeile 76: 80 € – gekennzeichnet („annahme“)
-
-## `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren`
-
-- Datei-SHA256 (heute): `7f4491dfde027e982a05d7d60913496b05cf76b36cc9ec2c9aaf4b1336395cdd`
-- Offene Live-Befunde: **5**
-
-| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
-|---|---|---|---|---|
-| `1dbeb2f8c51e78d11d49` | luecke | 2026-11-11 · 2. Entscheidung | nicht mehr im Text: 150 €, 250 € | Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 € an reinen Gebühren kosten, ist unbelegt. |
-| `33e736ac6afe996b491a` | luecke | 2026-11-11 · 2. Entscheidung | kein Wert genannt (Aussage/Präzision) | Behauptung, dass Echtzeit‑Überweisungen bei kostenlosen Konten generell gebührenfrei sind, fehlt jede Quelle. |
-| `96b7b7768d402884810c` | luecke | 2026-11-11 · 2. Entscheidung | 100.000 € in Zeile 215 ohne Kennzeichnung | Aussage, dass Einlagen bis 100.000 € durch die deutsche Einlagensicherung geschützt sind, wird nicht belegt. |
-| `a25bb6bbcb25ba8b0e22` | luecke | 2026-11-11 · 2. Entscheidung | 8 % in Zeile 5 gekennzeichnet · 11 % in Zeile 92 ohne Kennzeichnung | Angabe von Dispozinsen von 8 % bis 11 % ohne Quellenangabe. |
-| `f94f8ba1e4342e67e45a` | luecke | 2026-11-11 · 2. Entscheidung | nicht mehr im Text: 180 € · 120 € in Zeile 88 ohne Kennzeichnung | Angabe, dass ein Kontowechsel 120 € bis 180 € im Jahr spart, fehlt jede Quelle. |
-
-### `1dbeb2f8c51e78d11d49`
-
-**Befund:** Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 € an reinen Gebühren kosten, ist unbelegt.
-
-**Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
-
-> Am heutigen Text geprüft (SHA-256 e9703a3c6f17): Die verlangte Quelle steht im Abschnitt „Häufige Fragen (FAQ)“ inline – „Hat die Bank eine deutsche Lizenz, sind Einlagen bis 100.000 € pro Kunde und Bank gesetzlich gesichert ([Deutsche Bundesbank zur Einlagensicherung](https://www.bundesbank.de/de/auf“. Der Befund trifft die heutige Fassung damit nicht mehr.
-
-- Im heutigen Text nicht mehr vorhanden: 150 €, 250 €
-
-### `33e736ac6afe996b491a`
-
-**Befund:** Behauptung, dass Echtzeit‑Überweisungen bei kostenlosen Konten generell gebührenfrei sind, fehlt jede Quelle.
-
-**Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
-
-> Die Pauschalaussage ist ersetzt: In der Kurzantwort steht „ob Echtzeit-Überweisungen gratis sind, steht im Preisverzeichnis deines Kontos“, die Vergleichstabelle nennt „oft ca. 0,50 € / Vorgang | oft 0,00 € | je nach Nutzung“, und die PIN-Beschreibung sagt jetzt „Konten mit Gratiskarte und oft auch Echtzeit-Überweisung … was dein Preisverzeichnis zusagt, entscheidet“.
-
-Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
-
-### `96b7b7768d402884810c`
-
-**Befund:** Aussage, dass Einlagen bis 100.000 € durch die deutsche Einlagensicherung geschützt sind, wird nicht belegt.
-
-**Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
-
-> Am heutigen Text geprüft (SHA-256 e9703a3c6f17): Die verlangte Quelle steht im Abschnitt „Häufige Fragen (FAQ)“ inline – „Hat die Bank eine deutsche Lizenz, sind Einlagen bis 100.000 € pro Kunde und Bank gesetzlich gesichert ([Deutsche Bundesbank zur Einlagensicherung](https://www.bundesbank.de/de/auf“. Der Befund trifft die heutige Fassung damit nicht mehr.
-
-- Heute in Zeile 215: 100.000 € – **ohne** Kennzeichnung
-
-### `a25bb6bbcb25ba8b0e22`
-
-**Befund:** Angabe von Dispozinsen von 8 % bis 11 % ohne Quellenangabe.
-
-**Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
-
-> Am heutigen Text geprüft (SHA-256 e9703a3c6f17): Die verlangte Quelle steht im Abschnitt „Häufige Fragen (FAQ)“ inline – „Hat die Bank eine deutsche Lizenz, sind Einlagen bis 100.000 € pro Kunde und Bank gesetzlich gesichert ([Deutsche Bundesbank zur Einlagensicherung](https://www.bundesbank.de/de/auf“. Der Befund trifft die heutige Fassung damit nicht mehr.
-
-- Heute in Zeile 5: 8 % – gekennzeichnet („modellwert“)
-- Heute in Zeile 92: 11 % – **ohne** Kennzeichnung
-
-### `f94f8ba1e4342e67e45a`
-
-**Befund:** Angabe, dass ein Kontowechsel 120 € bis 180 € im Jahr spart, fehlt jede Quelle.
-
-**Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
-
-> Am heutigen Text geprüft (SHA-256 e9703a3c6f17): Die verlangte Quelle steht im Abschnitt „Häufige Fragen (FAQ)“ inline – „Hat die Bank eine deutsche Lizenz, sind Einlagen bis 100.000 € pro Kunde und Bank gesetzlich gesichert ([Deutsche Bundesbank zur Einlagensicherung](https://www.bundesbank.de/de/auf“. Der Befund trifft die heutige Fassung damit nicht mehr.
-
-- Im heutigen Text nicht mehr vorhanden: 180 €
-- Heute in Zeile 88: 120 € – **ohne** Kennzeichnung
 
 ## `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden`
 
@@ -1078,7 +1013,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss`
 
-- Datei-SHA256 (heute): `2ad5aa69e09eed102a9c3b07ac5b2f26f1c00f475c572e163fc9db519f5bfedd`
+- Datei-SHA256 (heute): `28adcfd0a90d88117a02d2d946eacd4ad9ad4525819df3029de6aa60ddbeea1f`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1157,7 +1092,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit`
 
-- Datei-SHA256 (heute): `82b108570fa1f93bfd675b77e72089cd1e10c62eed32be40cd37f57d5eae3981`
+- Datei-SHA256 (heute): `24b8600162fcdb0555694fa1bb82cd6b3f34d7005c1446de027d58879d875b8a`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1768,11 +1703,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6b0aa3429d97e8c74ed
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7f66ec82ee1a3f095b0c --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 84c991c5d152b14a2675 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a70e7adc97c58317ccc1 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1dbeb2f8c51e78d11d49 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 33e736ac6afe996b491a --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 96b7b7768d402884810c --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden a25bb6bbcb25ba8b0e22 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden f94f8ba1e4342e67e45a --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 43470330b3b48c9cee49 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8ddc1025e45be176ad3a --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 95d6d2877620e5a056ce --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
