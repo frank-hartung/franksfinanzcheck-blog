@@ -84,6 +84,28 @@ def _halter_zuerst(group):
     return sorted(group, key=lambda g: not schutz.ist_bytegebunden(g["content"]))
 
 
+def _heilbar(group) -> bool:
+    """Kann dieses Werkzeug die Dublette überhaupt auflösen?
+
+    Die Heilung lässt GENAU EINEN Text stehen (`_halter_zuerst(group)[0]`)
+    und schreibt alle übrigen um. Teilen sich zwei bytegebundene
+    Reserve-Entwürfe denselben Text (#900), ist keiner von beiden
+    schreibbar – die Gruppe ist dann keine Heil-, sondern eine
+    Entscheidungsaufgabe am Text, und der Lauf muss das sagen.
+
+    WARUM DIE ZÄHLUNG HIER STEHT (17.11.2026, Vorgang #1227)
+    --------------------------------------------------------
+    Vorher hieß die Erfolgsbedingung `fixed >= len(problems)`. Eine Gruppe,
+    in der alle Mitglieder bytegebunden sind, ist aber konstruktiv nicht
+    heilbar: Der Zähler konnte sie nie erreichen, der Lauf blieb für immer
+    rot – ein Befund ohne Schließweg. Gezählt wird deshalb nur, was
+    heilbar war; nicht heilbare Gruppen werden einzeln gemeldet und bleiben
+    rot (sie brauchen einen Menschen).
+    """
+    geschuetzt = [g for g in group if schutz.ist_bytegebunden(g["content"])]
+    return len(geschuetzt) <= 1
+
+
 def _build_hashtags(keywords, slug):
     """Hashtags für einen neu erzeugten Pin-Text – Regel in der SSOT (#729)."""
     return ph.tags_bauen(keywords, slug)
@@ -166,12 +188,21 @@ def main():
 
     problems = []
     fixed = 0
+    heilbare_probleme = 0
+    nicht_heilbar = []
 
     for d, group in desc_map.items():
         if len(group)>1:
             slugs = ", ".join(g["slug"] for g in group)
             problems.append(("P4", slugs, f"DUPLIKAT pin_description: {d[:80]}…"))
+            if DO_FIX and not _heilbar(group):
+                nicht_heilbar.append(("P4", slugs))
+                print(f"  ⛔ P4 {slugs}: nicht heilbar – zwei bytegebundene "
+                      f"Reserve-Entwürfe teilen denselben Text; Entscheidung "
+                      f"am Text nötig (#900)")
+                continue
             if DO_FIX:
+                heilbare_probleme += 1
                 existing = set(desc_map.keys())
                 for g in _halter_zuerst(group)[1:]:
                     # #900: bytegebundene Reserve-Entwürfe nicht anfassen.
@@ -200,7 +231,14 @@ def main():
         if len(group)>1:
             slugs = ", ".join(g["slug"] for g in group)
             problems.append(("P4b", slugs, f"DUPLIKAT pin_title: {t}"))
+            if DO_FIX and not _heilbar(group):
+                nicht_heilbar.append(("P4b", slugs))
+                print(f"  ⛔ P4b {slugs}: nicht heilbar – zwei bytegebundene "
+                      f"Reserve-Entwürfe teilen denselben Text; Entscheidung "
+                      f"am Text nötig (#900)")
+                continue
             if DO_FIX:
+                heilbare_probleme += 1
                 existing = set(title_map.keys())
                 for g in _halter_zuerst(group)[1:]:
                     if schutz.ist_bytegebunden(g["content"]):
@@ -218,8 +256,16 @@ def main():
         for code, slugs, msg in problems:
             print(f"  [{code}] {slugs}: {msg}")
         if DO_FIX:
-            print(f"✅ {fixed} Duplikate geheilt (dauerhaft)")
-            return 0 if fixed>=len(problems) else 1
+            print(f"✅ {fixed} Duplikate geheilt (dauerhaft), "
+                  f"{heilbare_probleme} heilbare Gruppe(n)")
+            if nicht_heilbar:
+                print(f"🛑 {len(nicht_heilbar)} Gruppe(n) bleiben offen: "
+                      + ", ".join(f"{code} {slugs}" for code, slugs
+                                  in nicht_heilbar)
+                      + " – hier entscheidet ein Mensch, welcher Entwurf "
+                        "seinen Text behält (#900)")
+                return 1
+            return 0 if fixed>=heilbare_probleme else 1
         return 1
     else:
         print("✅ Keine Pinterest-Duplikate – alle Pin-Texte einzigartig (Premium-Level)")

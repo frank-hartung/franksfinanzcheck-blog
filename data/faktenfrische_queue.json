@@ -4964,7 +4964,7 @@
       "faellig": false,
       "frist": "2026-11-19",
       "geo": 100,
-      "befund": true,
+      "befund": false,
       "unvollstaendig": true,
       "status": "unvollstaendig"
     },
@@ -5295,8 +5295,8 @@
       "frist": "2026-11-29",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
@@ -5306,8 +5306,8 @@
       "frist": "2026-11-29",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen",
@@ -5350,8 +5350,8 @@
       "frist": "2026-12-01",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
@@ -5361,8 +5361,8 @@
       "frist": "2026-12-01",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
@@ -5383,8 +5383,8 @@
       "frist": "2026-12-01",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     }
   ],
   "offen": [
@@ -5395,7 +5395,7 @@
       "faellig": false,
       "frist": "2026-11-19",
       "geo": 100,
-      "befund": true,
+      "befund": false,
       "unvollstaendig": true,
       "status": "unvollstaendig"
     },
@@ -5407,8 +5407,8 @@
       "frist": "2026-11-29",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
@@ -5418,8 +5418,8 @@
       "frist": "2026-11-29",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
@@ -5429,8 +5429,8 @@
       "frist": "2026-12-01",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
@@ -5440,8 +5440,8 @@
       "frist": "2026-12-01",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
@@ -5451,8 +5451,8 @@
       "frist": "2026-12-01",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     }
   ],
   "vorlauf": [

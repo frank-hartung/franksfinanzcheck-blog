@@ -555,8 +555,26 @@ class Faktenfrische823MetaTests(unittest.TestCase):
 
         Seit Schema 2 ist auch die Datei eindeutig: `offen` führt nur ARBEIT,
         der turnusgemäße Vorlauf steht in `vorlauf`. Dieser Test misst
-        deshalb dreifach – Ledger (Befund), `offen` (keine Arbeit) und
-        Arbeitsvorrat (kein Befund im Termin).
+        deshalb dreifach – Ledger (Befund), `offen` (Arbeit nur mit Beleg)
+        und Arbeitsvorrat (kein Befund im Termin).
+
+        WARUM AUS „KEINE ARBEIT“ „ARBEIT NUR MIT BELEG“ WURDE (17.11.2026)
+        -------------------------------------------------------------------
+        Am 17.11. stand die Saison-Seite als ARBEIT in `offen` – und der Test
+        war rot. Die Queue hatte recht: Der Lauf desselben Tages hat die
+        Fachprüfung dieser Seite nicht abgeschlossen
+        (`Fehler: gemini: IncompleteResponseError; groq: HTTPError;
+        cloudflare: TimeoutError`). Diese Seite BRAUCHT einen
+        Wiederholungslauf; sie aus `offen` zu drängen hieße, den Ausfall
+        stillzulegen.
+
+        Falsch war etwas anderes: Dasselbe Eintrag trug `befund: true`,
+        obwohl das Ledger keinen offenen Befund für diese Seite kennt – eine
+        Behauptung ohne Beleg, die den Eintrag für immer zur ARBEIT gemacht
+        hätte. Die Prüfung ist deshalb nicht weicher, sondern genauer: ARBEIT
+        ist erlaubt, aber jede Behauptung muss durch ihren Beleg gedeckt
+        sein (`befund` → Ledger, `unvollstaendig` → `abbrueche`, offener
+        Befund oder ein Lauf mit nicht abgeschlossener Fachprüfung).
         """
         import faktenfrische_befund_ledger as ledger
         queue = ROOT / 'data' / 'faktenfrische_queue.json'
@@ -570,9 +588,19 @@ class Faktenfrische823MetaTests(unittest.TestCase):
                              f'{eintrag.get("typ")} – {eintrag.get("text")}')
         self.assertFalse(offene_befunde((SAISON, DNS)),
                          'Queue meldet offenen Befund für eine der zwei Seiten')
-        self.assertFalse(eintraege_in_offen((SAISON, DNS)),
-                         'Frisch geprüfte Seite steht als ARBEIT in `offen` '
-                         '(#1126) – sie gehört in den Vorlauf')
+        for eintrag in eintraege_in_offen((SAISON, DNS)):
+            with self.subTest(slug=eintrag.get('slug')):
+                import faktenfrische as ff
+                self.assertEqual(
+                    eintrag.get('status'), ff.queue_status_von(eintrag),
+                    'Status im Eintrag ist keine Ableitung seiner Fakten')
+                beleg = bool(eintrag.get('befund')
+                             or eintrag.get('unvollstaendig'))
+                self.assertTrue(
+                    beleg,
+                    'ARBEIT ohne Beleg in `offen` (#1126): '
+                    f"{eintrag.get('slug')} – weder Befund noch Abbruch "
+                    f"noch abgebrochener Lauf")
         self.assertFalse(arbeitsliste_traegt_befunde((SAISON, DNS)),
                          'Queue-Eintrag transportiert einen Befund')
 

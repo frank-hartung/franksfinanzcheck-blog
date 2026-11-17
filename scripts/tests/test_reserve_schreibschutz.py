@@ -210,6 +210,71 @@ class DuplicateGuardTest(unittest.TestCase):
                                  .read_text(encoding="utf-8"))
 
 
+class HeilbarkeitsTest(unittest.TestCase):
+    """Der Schließweg: heilbar heißt zählbar, unheilbar heißt gemeldet.
+
+    Befund vom 17.11.2026 (Vorgang #1227): Der Guard beendete sich mit
+    `fixed >= len(problems)`. Eine Gruppe aus zwei bytegebundenen
+    Reserve-Entwürfen ist konstruktiv nicht heilbar – der Zähler konnte sie
+    nie erreichen, der Lauf blieb für immer rot. Ein Befund ohne Schließweg
+    ist kein Befund, sondern eine Sackgasse.
+
+    Die zweite Hälfte ist die Gegenprobe zur Gegenprobe: Ein Umbau, der
+    „nur die heilbaren zählt“, darf nicht heilen, was er nicht darf. Genau
+    das täte die Fassung aus #1227 (sie heilt nur den ERSTEN nicht
+    geschützten Eintrag): Steht ein bytegebundener Entwurf neben zwei
+    normalen, bliebe die Dublette zwischen ihm und dem zweiten normalen
+    Entwurf stehen – bei Rückgabe 0.
+    """
+
+    GLEICH = "Gleicher Text"
+
+    def _projekt(self, inhalt_map):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        wurzel = Path(tmp.name)
+        posts = wurzel / "content" / "posts"
+        for slug, inhalt in inhalt_map.items():
+            (posts / slug).mkdir(parents=True)
+            (posts / slug / "index.md").write_text(inhalt, encoding="utf-8")
+        return wurzel, posts
+
+    def _fix(self, inhalt_map):
+        wurzel, posts = self._projekt(inhalt_map)
+        with patch.object(pdg, "BLOG_DIR", str(wurzel)), \
+                patch.object(pdg, "DO_FIX", True):
+            code = pdg.main()
+        return code, {slug: (posts / slug / "index.md").read_text(encoding="utf-8")
+                      for slug in inhalt_map}
+
+    def test_geschuetzter_entwurf_und_zwei_normale_werden_alle_eindeutig(self):
+        reserve = RESERVE_ENTWURF.replace("Alter Pin-Text", self.GLEICH)
+        normal = NORMALER_ENTWURF.replace("Alter Pin-Text", self.GLEICH)
+        code, nachher = self._fix({"a-reserve": reserve, "b-normal": normal,
+                                   "c-normal": normal})
+        self.assertEqual(code, 0)
+        self.assertEqual(nachher["a-reserve"], reserve,
+                         "bytegebundener Entwurf wurde geschrieben")
+        for slug in ("b-normal", "c-normal"):
+            self.assertNotIn(f'"{self.GLEICH}"', nachher[slug],
+                             f"{slug}: Dublette blieb neben dem geschützten "
+                             f"Entwurf stehen")
+
+    def test_zwei_geschuetzte_entwuerfe_melden_statt_zu_scheitern(self):
+        reserve = RESERVE_ENTWURF.replace("Alter Pin-Text", self.GLEICH)
+        code, nachher = self._fix({"a-reserve": reserve, "b-reserve": reserve})
+        self.assertEqual(code, 1, "Unheilbare Gruppe muss rot bleiben")
+        for slug in ("a-reserve", "b-reserve"):
+            self.assertEqual(nachher[slug], reserve,
+                             "Ein bytegebundener Entwurf wurde geschrieben")
+
+    def test_reine_normale_gruppe_bleibt_gruen(self):
+        normal = NORMALER_ENTWURF.replace("Alter Pin-Text", self.GLEICH)
+        code, nachher = self._fix({"a-normal": normal, "b-normal": normal})
+        self.assertEqual(code, 0)
+        self.assertNotIn(f'"{self.GLEICH}"', nachher["b-normal"])
+
+
 class SeoHealerTest(unittest.TestCase):
     def test_heal_article_verweigert_reserve_entwurf(self):
         artikel = {"slug": "kandidat", "reserve": True, "content": RESERVE_ENTWURF,

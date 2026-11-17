@@ -4,6 +4,13 @@
 #1240, #1241, #1242, #1243) · **Wurzel auf `main`:** `cf1937daf` ·
 **Kein PR wurde umgangen, kein Befund stillschweigend geschlossen.**
 
+Zwei Runden, ein Vorgang: §§1–6 heilen den Befund auf `main` (Typografie
+öffnete Entscheidungen). §7 heilt, was der Merge des Tagesbestands aufgedeckt
+hat – vier Wurzeln, die kein Test erfunden hat: ein nicht mergebarer PR (und
+damit gar nicht startende Gates), eine Marken-Falschschreibung samt blindem
+Trigger, Queue-Behauptungen ohne Beleg und zwei Tests, die nicht mehr prüften,
+was sie behaupteten.
+
 ---
 
 ## 1. Der Befund
@@ -215,13 +222,17 @@ Zusätzlich die vollständige Suite und die Uhr-Probe (`--offset 97`), also gena
 die zwei Schritte, die im PR-Gate `regression` heißen:
 
 ```text
-python3 -m unittest discover -s scripts/tests          ✅ 6167 Tests (41 skipped)
-python3 scripts/selftest_clock.py --trap-discover scripts/tests --offset 97  ✅ 6167 Tests
-python3 scripts/governance_contract.py                 ✅ 47 Regeln (auch C46)
-python3 scripts/faktenfrische_befund_ledger.py --wache ✅ 197 offen / 51 Seiten
+python3 -m unittest discover -s scripts/tests          ✅ 6178 Tests (39 skipped, zweite Runde)
+python3 scripts/selftest_clock.py --trap-discover scripts/tests --offset 97  ✅ 6178 Tests
+python3 scripts/governance_contract.py --quick         ✅ 47 Regeln (auch C46)
+python3 scripts/faktenfrische_befund_ledger.py --wache ✅ 212 offen / 55 Seiten
 python3 scripts/integrity_guard.py --gate              ✅ 55 Kerndateien
 hugo --minify --destination public --cleanDestinationDir ✅ 127 Seiten
 ```
+
+(Die Zahlen der ersten Messung – 6167 Tests, 197 offen / 51 Seiten – galten für
+`main` am 17.11. vormittags; nach dem Merge des Tagesbestands sind es 6178 Tests
+und 212 offene Befunde auf 55 Seiten.)
 
 Vergleichsmessung (Beleg, dass die Reparatur nichts verdeckt):
 
@@ -250,7 +261,7 @@ vorher, lokal wurde er für die Messung nachgezogen.
 | #1242 Docker `python:3.14-slim` → `3.15-slim` | dito | dito |
 | #1243 Docker `n8n` 2.46.3 → 2.47.2 | dito | dito |
 | #1241 pip (hugo + composio) | hugo ist koordiniert gepinnt und **kann** nicht als Dependabot-PR grün werden | `hugo` ausgenommen; PR wird als überholt geschlossen, Dependabot erzeugt die Werkbank-Aktualisierung ohne hugo neu |
-| #1227 (eigener PR, CONFLICTING) | löst drei Ordnungs-Tests durch EINEN schwächeren ab und schreibt die `.ics` neu – `main` sortiert bereits und bevorzugt `ist_bytegebunden` | als überholt geschlossen; die Absicht (Reihenfolge-Unabhängigkeit) ist in `main` erfüllt und durch `test_reserve_schreibschutz.DuplicateGuardTest` belegt |
+| #1227 (eigener PR, CONFLICTING) | entfernt `_halter_zuerst` und zählt nur noch `heilbare_probleme`. Die Zählung ist berechtigt (eine Gruppe aus zwei bytegebundenen Entwürfen ist konstruktiv unheilbar – der Lauf war für immer rot), die Entfernung ist ein **Rückfall**: Sie heilt nur den ERSTEN nicht geschützten Eintrag. Mit `a-reserve`, `b-normal`, `c-normal` bleibt die Dublette zwischen `a-reserve` und `b-normal` stehen – bei Rückgabe 0. Gemessen, nicht behauptet (siehe §7.5) | als überholt geschlossen; die berechtigte Hälfte (Schließweg für unheilbare Gruppen) ist in `main` geheilt, die schädliche Hälfte durch einen Test verhindert |
 
 Kein PR wird „durchgedrückt“: die Reihenfolge ist Reparatur-Commit → `main` →
 Dependabot-PRs rebasen → Checks → Merge. #1241 und #1227 werden **begründet**
@@ -258,10 +269,130 @@ geschlossen, nicht stillgelegt.
 
 ---
 
-## 7. Was ausdrücklich **nicht** getan wurde
+## 7. Zweite Runde: was der Merge von `main` aufgedeckt hat
+
+Der PR war auf GitHub **nicht mergebar** (`mergeable_state: dirty`). Genau
+deshalb fehlten die großen Gates: Für einen konfliktbehafteten PR legt GitHub
+keinen Merge-Commit an, und `pull_request`-Workflows mit Pfadfilter laufen
+gegen genau diesen Ref. Es war also kein Queue-Problem, sondern die Folge der
+Konflikte – und der Konflikt lag in vier generierten Flächen.
+
+### 7.1 Konflikte an der Quelle geheilt, nicht händisch zusammengesetzt
+
+`BEFUND-AKTE.md`, `data/faktenfrische_befunde_state.json`,
+`F4-ENTSCHEIDUNGSVORLAGE.md`, `data/lcp_images.json` wurden nach dem Merge neu
+**erzeugt** (`faktenfrische_befund_akte.py --schreiben`,
+`f4_entscheidungsvorlage.py`, `lcp_image_optimizer.py --fix`). Stand danach:
+212 offene Befunde auf 55 Seiten (36 live), ältester 18 Tage, 37 über der Frist;
+F4-Vorlage 1966 Zeilen; LCP 86 Seiten, 0 Probleme.
+
+### 7.2 Die Marke: Falschschreibung im Beitrag **und** der blinde Trigger
+
+`entity_marken_gate.py --source-only` meldete auf dem gemergten Baum:
+
+```text
+FEHLER [E6] content/posts/2026-11-17-wertvolle-gebrauchte-moebel-…/index.md:
+  Falschschreibung der Marke: „Franks Finanzcheck“ statt „FranksFinanzcheck“
+```
+
+Drei Dinge gehören dazu, und alle drei sind geheilt:
+
+1. **Der Text** ist korrigiert („…von FranksFinanzcheck“). Er stand in einem
+   bytegebundenen Reserve-Entwurf (`draft + reserve`, #900) – die
+   Nachzertifizierung ist hier ausdrücklich nicht möglich, weil `hunspell` in
+   der Sandbox fehlt; `reserve_recert.py --fix` verweigert fail-closed, statt
+   `spelling=0.5` zu erfinden. Der Drift bestand schon vorher: `a4b3e8942` und
+   `ba515c051` haben vier Reserve-Entwürfe angefasst, ohne neu zu zertifizieren.
+2. **Der Schreiber** ist geheilt: `faktenfrische.py` fragt jetzt
+   `reserve_schreibschutz.ist_bytegebunden` – wie die drei anderen Heiler – und
+   überspringt bytegebundene Entwürfe mit Meldung, statt sie „aufzufrischen“.
+   Damit kann kein Lauf mehr ein gültiges Zertifikat auf alte Bytes zeigen lassen.
+3. **Der Trigger** ist geheilt: `content/posts/**` stand nicht in der Pfadliste,
+   obwohl die E6-Prüfung `content/**` liest. Der Fehler erreichte `main`, ohne
+   dass ein Lauf ansprang. Neu: `scripts/tests/test_entity_gate_trigger.py`
+   hält beides fest – die Pfadliste **und** eine Gegenprobe, die eine
+   Falschschreibung im Beitrag finden muss (sonst wäre die Wache nur Papier).
+
+### 7.3 Die Queue: Behauptungen brauchen einen Beleg
+
+`test_faktenfrische_823.test_faktenfrische_queue_haelt_befunde_geschlossen` war
+rot: `2026-10-15-saison-update-…` stand als ARBEIT in `offen`, mit
+`befund: true` – obwohl das Ledger für diese Seite keinen offenen Befund kennt.
+
+**Die Messung hat den ersten Verdacht widerlegt.** Der Eintrag war nicht
+pauschal falsch: Im `laeufe`-Block derselben Queue steht für genau diese Seite
+
+```text
+Fehler: gemini: IncompleteResponseError; groq: HTTPError; cloudflare: TimeoutError
+```
+
+Der Lauf hat die Fachprüfung dieser Seite also **nicht abgeschlossen**. Sie
+braucht einen Wiederholungslauf; sie aus `offen` zu drängen hieße, den Ausfall
+stillzulegen. Falsch war die zweite Behauptung (`befund: true` ohne
+Ledger-Eintrag) und die Art, wie sie entstand. Drei Wurzeln, alle geheilt:
+
+* `queue_invariante` prüfte die beiden Fakten in einer `elif`-Kette: Ein Eintrag
+  mit Status `unvollstaendig` kam an der Befund-Prüfung nie vorbei. Jetzt werden
+  `befund` und `unvollstaendig` **statusunabhängig** geprüft – und
+  `unvollstaendig` braucht einen von drei Belegen: einen Abbruch in
+  `abbrueche`, einen offenen Befund im Ledger oder einen Lauf-Eintrag, dessen
+  Fachprüfung nicht mit `geprüft (` beginnt (`lauf_ist_geprueft`, dieselbe Regel
+  wie im Erzeuger).
+* `queue_normalisieren` hat `unvollstaendig` geerbt (`bool(eintrag.get(…))`).
+  Ein einmal gesetztes Flag machte eine Seite für immer zur ARBEIT. Jetzt wird
+  abgeleitet statt geerbt – mit einer Vorabprüfung am **abgeleiteten**
+  Datensatz: Status und Listenzugehörigkeit werden neu gerechnet, Frist-,
+  Alias- und Typ-Widersprüche bleiben fail-closed (`feldgleich`).
+* Der Nachzug ist verdrahtet: `befund_akte_sync.sh` (läuft auf **jeden**
+  Inhalts-Push und alle drei Stunden) ruft `faktenfrische.py
+  --queue-normalisieren --apply` und committet die Queue mit. Damit ist die
+  Behauptung ein Projektionsstand, kein Besitz des letzten Laufs.
+
+Und der Test selbst wurde **genauer**, nicht weicher: Statt „gar keine Arbeit“
+prüft er jetzt für beide Seiten „Arbeit nur mit Beleg“ — Status muss die
+Ableitung seiner Fakten sein, und jeder Arbeitseintrag braucht Befund, Abbruch
+oder abgebrochenen Lauf. Ergebnis am Bestand: `offen` führt 6 Einträge (5 mit
+Ledger-Befund, 1 mit abgebrochenem Lauf), der unbegründete `befund` ist weg.
+
+### 7.4 Ein Test, der an 400 Bytes hing
+
+`test_artikel_des_tages_tragen_heute_im_frontmatter` suchte das Tagesdatum in
+den ersten 400 Zeichen. Der neue Artikel des Tages („Vorrat planen leicht
+gemacht“) hat eine längere Beschreibung; `date: 2026-11-17` begann bei Zeichen
+397 und war abgeschnitten. Der Test war rot, die Seite war richtig. Geprüft wird
+jetzt der Frontmatter-Bereich zwischen den beiden Zäunen – dieselbe Aussage,
+ohne Byte-Budget – und der Test verlangt zusätzlich, dass es überhaupt einen
+Kandidaten gibt (eine Messung ohne Gegenstand ist kein Grün).
+
+### 7.5 Der Pinterest-Guard: Schließweg **und** Gegenprobe
+
+`pinterest_duplicate_guard.py` beendete sich mit `fixed >= len(problems)`. Eine
+Gruppe aus zwei bytegebundenen Entwürfen ist konstruktiv nicht heilbar – der
+Zähler konnte sie nie erreichen, der Lauf blieb für immer rot. Jetzt zählt er
+nur heilbare Gruppen; unheilbare werden einzeln gemeldet und bleiben rot (sie
+brauchen einen Menschen, nicht ein Werkzeug).
+
+`_halter_zuerst` bleibt: Genau dieser Halter entscheidet, ob eine Gruppe aus
+drei Mitgliedern (ein geschützter, zwei normale) wirklich eindeutig wird.
+Gegenprobe mit dem Code aus #1227 im Worktree:
+
+```text
+FAIL test_geschuetzter_entwurf_und_zwei_normale_werden_alle_eindeutig
+  AssertionError: "Gleicher Text" unexpectedly found in … b-normal
+FAIL test_zwei_geschuetzte_entwuerfe_melden_statt_zu_scheitern
+  AssertionError: 0 != 1
+```
+
+Beides ist im aktuellen Stand grün (20 Tests in
+`test_reserve_schreibschutz`).
+
+---
+
+## 8. Was ausdrücklich **nicht** getan wurde
 
 * **Keine pauschale Schließung.** Die verbleibenden offenen Befunde
-  (202 auf 51 Seiten, davon 134 auf 34 Live-Seiten, 37 über der 14-Tage-Frist)
+  (212 auf 55 Seiten, davon 36 auf Live-Seiten, 37 über der 14-Tage-Frist –
+  Stand nach dem Merge des Tagesbestands)
   bleiben offen. Sie brauchen eine fachliche Entscheidung am heutigen Text – die
   nimmt diese Reparatur niemandem ab. Issue #1072 (Redaktionsakte) und #1193
   (Produktionswahrheit) bleiben inhaltlich offen.
@@ -277,7 +408,7 @@ geschlossen, nicht stillgelegt.
 
 ---
 
-## 8. Rollback
+## 9. Rollback
 
 1. `PROJEKTIONEN[0]` wieder auf `betrieb-v3` setzen (und die Marker in C46
    entfernen) – die alten Hashes sind unverändert vorhanden, die

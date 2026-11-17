@@ -245,11 +245,59 @@ class KandidatenTests(unittest.TestCase):
             self.assertTrue(lh._ist_entwurf(text),
                             f"{pfad} ist kein Entwurf – Scope-Verletzung")
 
-    def test_artikel_des_tages_tragen_heute_im_frontmatter(self):
+    def test_hole_neue_erkennt_das_datum_auch_hinter_langem_frontmatter(self):
+        """Der Befund vom 17.11.2026 als Gegenprobe ohne Uhr.
+
+        Der alte Test schnitt die ersten 400 Zeichen ab und suchte dort das
+        Tagesdatum. Der neue Artikel des Tages („Vorrat planen leicht
+        gemacht“) überschritt diese Grenze: `date: 2026-11-17` begann bei
+        Zeichen 397. Der Test war rot, die Seite war richtig.
+
+        Diese Gegenprobe ist uhr-unabhängig (sie setzt das Datum selbst) und
+        prüft die Funktion, nicht die Textmenge: Ein Frontmatter mit langem
+        Kopf muss erkannt werden – und ein Datum von gestern nicht.
+        """
         import datetime
+        from unittest.mock import patch
+        import post_utils
+
         heute = datetime.date.today().isoformat()
-        for pfad in lh.hole_neue():
-            self.assertIn(heute, Path(pfad).read_text(encoding="utf-8")[:400])
+        gestern = (datetime.date.today() - datetime.timedelta(days=1)).isoformat()
+        kopf = ("---\ntitle: \"" + "Langer Titel " * 15 + "\"\n"
+                "description: \"" + "Sehr ausführliche Beschreibung. " * 6 + "\"\n"
+                "kurzantwort: \"" + "Kurzantwort mit Substanz. " * 5 + "\"\n")
+        with tempfile.TemporaryDirectory() as tmp:
+            heute_pfad = Path(tmp) / "heute.md"
+            heute_pfad.write_text(f"{kopf}date: {heute}T09:00:00Z\n---\n\nText.\n",
+                                  encoding="utf-8")
+            gestern_pfad = Path(tmp) / "gestern.md"
+            gestern_pfad.write_text(f"{kopf}date: {gestern}\n---\n\nText.\n",
+                                    encoding="utf-8")
+            with patch.object(post_utils, "list_post_paths",
+                              return_value=[str(heute_pfad), str(gestern_pfad)]):
+                self.assertEqual(lh.hole_neue(), [str(heute_pfad)],
+                                 "Quelle erkennt das Tagesdatum nicht "
+                                 "(oder nimmt das falsche Datum mit)")
+
+    def test_quelle_und_frontmatter_stimmen_ueberein(self):
+        """Bidirektional: `hole_neue()` liefert GENAU die Beiträge von heute.
+
+        Diese Prüfung ist an jedem Kalendertag gültig (auch in der Uhr-Probe
+        mit verschobenem `today`): Sie vergleicht die Funktion mit dem
+        Frontmatter des Bestands, statt eine bestimmte Anzahl zu erwarten.
+        Fehlt ein Beitrag oder kommt einer dazu, ist sie rot.
+        """
+        import datetime
+        import post_utils
+
+        heute = datetime.date.today().isoformat()
+        erwartet = set()
+        for pfad in post_utils.list_post_paths():
+            teile = Path(pfad).read_text(encoding="utf-8").split("---", 2)
+            if len(teile) >= 3 and f"date: {heute}" in teile[1]:
+                erwartet.add(pfad)
+        self.assertEqual(set(lh.hole_neue()), erwartet,
+                         "Quelle und Frontmatter widersprechen sich")
 
 
 class NachsorgeAuswahlTests(unittest.TestCase):

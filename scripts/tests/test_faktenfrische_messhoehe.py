@@ -70,11 +70,16 @@ FACHBEFUND = [{"id": "a" * 20, "slug": "befund", "typ": "luecke",
                "text": "Quelle fehlt", "fassung_sha256": "b" * 64}]
 
 
+# Der Abbruch ist ein BELEG: Ein `unvollstaendig` ohne diesen Eintrag wäre
+# eine Behauptung – genau die Fehlklasse vom 17.11.2026 (#1126-Klasse).
+ABBRUCH = [{"slug": "abbruch", "fehler": "Timeout beim Abruf"}]
+
+
 def bauen(vorrat=None, fachbefunde=None, erzeugt="2026-11-10 13:00 UTC"):
     return faktenfrische.queue_daten_bauen(
         uebersicht={}, fachbefunde=(FACHBEFUND if fachbefunde is None
                                     else fachbefunde),
-        kapazitaet={}, abbrueche=[],
+        kapazitaet={}, abbrueche=list(ABBRUCH),
         arbeitsvorrat=(VORRAT if vorrat is None else vorrat),
         laeufe=[], erzeugt=erzeugt)
 
@@ -209,6 +214,71 @@ class QueueSchemaVertrag(unittest.TestCase):
     def test_schreiber_verweigert_doppelten_slug(self):
         with self.assertRaises(ValueError):
             bauen(vorrat=VORRAT + [dict(VORRAT[0])])
+
+
+class BelegpflichtTest(unittest.TestCase):
+    """Behauptungen ohne Beleg sind Widersprüche (17.11.2026, #1126-Klasse).
+
+    Am 17.11. stand eine Seite als ARBEIT in `offen`, mit `befund: true` –
+    das Ledger kannte für sie keinen offenen Befund. Die Invariante ließ das
+    durch, weil die Befundprüfung in einer `elif`-Kette hinter dem Status
+    `unvollstaendig` stand. Diese Tests nageln beide Belegketten fest –
+    und die Gegenprobe: Ein echter Ausfall im Lauf ist ein gültiger Beleg
+    (die Seite braucht einen Wiederholungslauf, sie ist keine Lüge).
+    """
+
+    def test_befund_ohne_ledger_eintrag_ist_ein_widerspruch(self):
+        q = bauen()
+        q["offen"][0]["befund"] = True          # „fällig“ hat keinen Befund
+        fehler = faktenfrische.queue_invariante(q)
+        self.assertTrue(any("`befund` ist gesetzt" in f for f in fehler), fehler)
+
+    def test_unvollstaendig_ohne_beleg_ist_ein_widerspruch(self):
+        q = bauen()
+        q["offen"][0]["unvollstaendig"] = True  # weder Abbruch noch Befund
+        fehler = faktenfrische.queue_invariante(q)
+        self.assertTrue(any("`unvollstaendig` ist gesetzt" in f for f in fehler),
+                        fehler)
+
+    def test_abgebrochener_lauf_ist_ein_gueltiger_beleg(self):
+        vorrat = [dict(VORRAT[0], unvollstaendig=True)]
+        qd = faktenfrische.queue_daten_bauen(
+            uebersicht={}, fachbefunde=[], kapazitaet={}, abbrueche=[],
+            arbeitsvorrat=vorrat, erzeugt="2026-11-17 13:00 UTC",
+            laeufe=[{"slug": vorrat[0]["slug"],
+                     "fachpruefung": "Fehler: gemini: TimeoutError"}])
+        self.assertEqual(qd["offen"][0]["status"], "unvollstaendig")
+        self.assertEqual(faktenfrische.queue_invariante(qd), [])
+
+    def test_normalisierung_erbt_keine_unbelegte_behauptung(self):
+        """Der Befund vom 17.11.2026 im Kleinen.
+
+        Die Seite `vorlauf` ist nicht fällig und hat keinen Befund – ein
+        geerbtes `unvollstaendig` hielt sie trotzdem in der Arbeit. Nach der
+        Normalisierung steht sie wieder im Vorlauf, das Flag ist weg. Der
+        befundbehaftete Eintrag behält seins (der Ledger ist der Beleg).
+        """
+        q = bauen()
+        for ort in (q["arbeitsvorrat"], q["vorlauf"]):
+            for eintrag in ort:
+                if eintrag["slug"] == "vorlauf":
+                    eintrag["unvollstaendig"] = True
+        with tempfile.TemporaryDirectory() as tmp:
+            pfad = Path(tmp) / "queue.json"
+            pfad.write_text(json.dumps(q, ensure_ascii=False), encoding="utf-8")
+            bericht = faktenfrische.queue_normalisieren(apply=True, pfad=str(pfad))
+            self.assertTrue(bericht["ok"], bericht)
+            neu = json.loads(pfad.read_text(encoding="utf-8"))
+            self.assertEqual(faktenfrische.queue_invariante(neu), [])
+            self.assertEqual([e["slug"] for e in neu["vorlauf"]], ["vorlauf"])
+            self.assertFalse(neu["vorlauf"][0]["unvollstaendig"],
+                             "Ein unbelegtes Flag hält eine Seite in der Arbeit")
+            befund = [e for e in neu["offen"] if e["slug"] == "befund"][0]
+            self.assertTrue(befund["unvollstaendig"],
+                            "Ein belegter Befund muss Arbeit bleiben")
+            einmal = pfad.read_text(encoding="utf-8")
+            faktenfrische.queue_normalisieren(apply=True, pfad=str(pfad))
+            self.assertEqual(pfad.read_text(encoding="utf-8"), einmal)
 
 
 class MigrationUndIdempotenz(unittest.TestCase):

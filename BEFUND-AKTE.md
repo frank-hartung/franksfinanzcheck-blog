@@ -8,7 +8,7 @@ _Stand 2026-11-17 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 |---|---|
 | Offene Befunde | 212 |
 | Seiten betroffen | 55 (davon live: 36) |
-| Text seit dem Befund geändert | 168 |
+| Text seit dem Befund geändert | 171 |
 | Altbestand ohne Fassungs-Hash | 11 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
 | Über der Frist (14 Tage) | 37 |
@@ -32,7 +32,7 @@ _Stand 2026-11-17 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 179 von 212 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 182 von 212 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -926,6 +926,22 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden c32c41bdd629ae4646c
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d557c9fcb4562042612b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet` · nicht im Live-Bestand · 3 Befund(e)
+
+Seite: `2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `842ddd33d3dd6b0b97f7` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Muffiger Geruch deutet oft auf tiefliegenden Schimmel oder Feuchtigkeit hin. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `d3e210fb738bd77ef594` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Neue Möbel verlieren oft sofort nach dem Kauf massiv an Wert. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `da84fa452f879ea8f2da` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Eigenleistung lohnt sich finanziell, wenn die Ersparnis den Zeitaufwand rechtfertigt. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 842ddd33d3dd6b0b97f7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d3e210fb738bd77ef594 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden da84fa452f879ea8f2da --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-10-28-dsl-und-internet-flat-guenstig-sichern` · nicht im Live-Bestand · 1 Befund(e)
 
 Seite: `2026-10-28-dsl-und-internet-flat-guenstig-sichern`
@@ -994,22 +1010,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4246118449c91859654
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4f62641b3af8d53ba65d --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5f76a2f9b3a57de72e73 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6df8b77e2840e62c5711 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet` · nicht im Live-Bestand · 3 Befund(e)
-
-Seite: `2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `842ddd33d3dd6b0b97f7` | luecke | 0 T | Text unverändert seit dem Befund | Muffiger Geruch deutet oft auf tiefliegenden Schimmel oder Feuchtigkeit hin. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
-| `d3e210fb738bd77ef594` | luecke | 0 T | Text unverändert seit dem Befund | Neue Möbel verlieren oft sofort nach dem Kauf massiv an Wert. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
-| `da84fa452f879ea8f2da` | luecke | 0 T | Text unverändert seit dem Befund | Die Eigenleistung lohnt sich finanziell, wenn die Ersparnis den Zeitaufwand rechtfertigt. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 842ddd33d3dd6b0b97f7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden d3e210fb738bd77ef594 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden da84fa452f879ea8f2da --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ---
