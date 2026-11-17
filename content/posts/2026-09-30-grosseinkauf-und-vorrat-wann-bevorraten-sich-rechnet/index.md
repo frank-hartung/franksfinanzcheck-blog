@@ -220,7 +220,7 @@ Ein Vorrat bindet Geld, bis er verbraucht ist. Halte die Menge deshalb so, dass 
 
 Einmal im Quartal reicht. Streiche Artikel, die seit einem Jahr kaum verbraucht wurden. Sie kosten Platz und Aufmerksamkeit.
 
-**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [Der erste eigene Haushalt](../../posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/) · [ETF-Sparplan starten](../../posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/)
+**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [Der erste eigene Haushalt](../../posts/2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen/) · [ETF-Sparplan starten](../../posts/2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen/) · [Secondhand Kleidung](../../posts/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst/)
 **Lesetipp:** [Abos und Verträge: Der stille Posten im Haushaltsplan](../../posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/)
 
 ---

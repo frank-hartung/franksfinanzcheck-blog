@@ -139,7 +139,9 @@ class KreditkarteRueckfallTests(unittest.TestCase):
         alt = copy.deepcopy(self.fm)
         alt["pin_description"] = "Kostenlose Karten haben meist keine Mindesteinkommensvorgabe."
         self.assertTrue(pruefe(alt, self.body))
-        self.assertTrue(pruefe(self.fm, self.body.replace("= 12 €", "= 120 €")))
+        alt_120 = re.sub(r"=\s*12\s*€", "= 120 €", self.body)
+        self.assertNotEqual(alt_120, self.body)
+        self.assertTrue(pruefe(self.fm, alt_120))
         alt_body = self.body.replace("Nicht zwingend.", "Ja, immer.", 1)
         self.assertNotEqual(alt_body, self.body)
         self.assertTrue(pruefe(self.fm, alt_body))
