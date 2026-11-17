@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-17T19:08:55Z",
+  "generated_at": "2026-11-17T20:23:45Z",
   "modus": "kandidaten",
-  "commit": "ba66f41bbffa97ebdbb8953b684e07456dc2397d",
+  "commit": "0da79a8f56366c34a84c0060237150c1e3c1d1d6",
   "kapazitaet": {
     "stichtag": "2026-11-17",
     "basis": "2026-11-17",
@@ -63,7 +63,6 @@
         "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
         "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
         "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
-        "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren",
         "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden",
         "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
         "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps",
@@ -96,7 +95,7 @@
         "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
         "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang"
       ],
-      "anzahl": 35
+      "anzahl": 34
     },
     {
       "check": "T1w-zeichenlaenge-optimum",
@@ -113,11 +112,11 @@
     }
   ],
   "befundlage": {
-    "offen": 207,
-    "seiten": 54,
-    "live_befunde": 132,
-    "live_seiten": 35,
-    "ueberholt": 166,
+    "offen": 202,
+    "seiten": 53,
+    "live_befunde": 127,
+    "live_seiten": 34,
+    "ueberholt": 161,
     "ohne_fassung": 11,
     "nicht_entscheidbar": 0,
     "aeltester_tage": 18,
@@ -127,7 +126,6 @@
       "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas": 3,
       "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": 3,
       "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit": 5,
-      "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": 5,
       "2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden": 5,
       "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub": 5,
       "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": 3,
@@ -371,29 +369,22 @@
       "checks": []
     },
     "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
-      "sha256": "7f4491dfde027e982a05d7d60913496b05cf76b36cc9ec2c9aaf4b1336395cdd",
-      "urteil": "blockiert",
+      "sha256": "3ae643c164624a684d339ccf87e5d9228f7ce7aec53c56cf3ae2ef3769fc0a3d",
+      "urteil": "freigabe-reif",
       "risikoklasse": "erhoeht",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "blockiert",
+        "faktenalter": "bestanden",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "unverändert",
-      "checks": [
-        {
-          "check": "F4-fachbefund",
-          "dimension": "faktenalter",
-          "wirkung": "blockiert",
-          "detail": "1dbeb2f8c51e78d11d49 (luecke): Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 € an reinen Gebühren kosten, ist unbelegt.; 33e736ac6afe996b491a (luecke): Behauptung, dass Echtzeit‑Überweisungen bei kostenlosen Konten generell gebührenfrei sind, fehlt jede Quelle.; 96b7b7768d402884810c (luecke): Aussage, dass Einlagen bis 100.000 € durch die deutsche Einlagensicherung geschützt sind"
-        }
-      ]
+      "naechste_pruefung": "2027-01-01",
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": []
     },
     "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
       "sha256": "4cf98921770f299d0c868dece4d1359ec8aed7003c196335f855be5ca1c3e80c",
@@ -1245,7 +1236,7 @@
       "checks": []
     },
     "2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss": {
-      "sha256": "2ad5aa69e09eed102a9c3b07ac5b2f26f1c00f475c572e163fc9db519f5bfedd",
+      "sha256": "28adcfd0a90d88117a02d2d946eacd4ad9ad4525819df3029de6aa60ddbeea1f",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1259,7 +1250,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-27",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1295,7 +1286,7 @@
       ]
     },
     "2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest": {
-      "sha256": "c57a34744051d1d41422ecc11c30956c2d79e32c27a70ac2308541929e9e55a9",
+      "sha256": "4803d11ac3a3f7c05ecbb5bb03f6668ba9098400914ed1fe10013bf5fa1af33a",
       "urteil": "freigabe-reif",
       "risikoklasse": "erhoeht",
       "dimensionen": {
@@ -1309,7 +1300,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-27",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen": {
@@ -1331,7 +1322,7 @@
       "checks": []
     },
     "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": {
-      "sha256": "82b108570fa1f93bfd675b77e72089cd1e10c62eed32be40cd37f57d5eae3981",
+      "sha256": "24b8600162fcdb0555694fa1bb82cd6b3f34d7005c1446de027d58879d875b8a",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1345,7 +1336,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-30",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1381,7 +1372,7 @@
       ]
     },
     "2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
-      "sha256": "cd7877803b9225ecc4bc846bc35d1bff9d2ba139b7ecdbf219c5943e43780bcf",
+      "sha256": "1a3ef948b9900ec6a4d8386dddde8628cc61be35dda865dccb813ba7f3fcd923",
       "urteil": "freigabe-reif",
       "risikoklasse": "erhoeht",
       "dimensionen": {
@@ -1395,7 +1386,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-30",
-      "siegel_drift": "unverändert",
+      "siegel_drift": "geändert – neu geprüft",
       "checks": []
     },
     "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": {
