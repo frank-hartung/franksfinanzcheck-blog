@@ -280,6 +280,26 @@ def api_schluessel() -> str | None:
     return wert or None
 
 
+def diagnose_hinweis(stoerungen: list[str], hat_schluessel: bool) -> str | None:
+    """Klartext-Ursache bei PSI-Drosselung (HTTP 429, #1152) – ändert nie den Exit-Code (C2)."""
+    if not stoerungen:
+        return None
+    ist_429 = any(re.search(r"\b429\b|Too Many Requests", s, re.I) for s in stoerungen)
+    if not ist_429:
+        return None
+    if not hat_schluessel:
+        return (
+            "Hinweis (#1152): PageSpeed Insights drosselt anonyme Abrufe (HTTP 429) "
+            "und `PSI_API_KEY` ist nicht gesetzt. Betreiber-Abhilfe: kostenlosen "
+            "PageSpeed-Insights-API-Schlüssel als GitHub-Actions-Secret `PSI_API_KEY` "
+            "hinterlegen (docs/ANLEITUNG-WEB-VITALS.md)."
+        )
+    return (
+        "Hinweis (#1152): PageSpeed Insights meldet HTTP 429 trotz gesetztem "
+        "`PSI_API_KEY` – Tages-/Minutenkontingent im Google-Cloud-Projekt prüfen."
+    )
+
+
 # --------------------------------------------------------------------------
 #  Bericht
 # --------------------------------------------------------------------------
@@ -418,6 +438,14 @@ def selftest() -> int:
     muss(schwaerze("ohne Schlüssel") == "ohne Schlüssel",
          "Schwärzung verändert Text ohne Schlüssel")
 
+    # 9. #1152: Klare 429-/PSI_API_KEY-Diagnose ohne C2-Aufweichung.
+    h_ohne = diagnose_hinweis(["/: HTTPError – HTTP Error 429: Too Many Requests"], False) or ""
+    h_mit = diagnose_hinweis(["/: HTTPError – HTTP Error 429: Too Many Requests"], True) or ""
+    muss("PSI_API_KEY" in h_ohne and "Secret" in h_ohne, "429 ohne Key muss Secret nennen")
+    muss("trotz gesetztem" in h_mit, "429 mit Key muss Kontingent nennen")
+    muss(diagnose_hinweis(["/: TimeoutError – timed out"], False) is None,
+         "Nicht-429 darf keinen falschen Kontingent-Hinweis ausgeben")
+
     # 9. Transiente Antworten werden begrenzt wiederholt, 404 nicht.
     import io as _io
     import urllib.error as _ue
@@ -543,13 +571,17 @@ def main(argv: list[str] | None = None) -> int:
             print(f"🛑 Zielliste nicht lesbar: {exc}", file=sys.stderr)
             return 2
 
-    punkte, stoerungen = messe(ziele, args.basis, args.strategie, api_schluessel(),
+    schluessel = api_schluessel()
+    punkte, stoerungen = messe(ziele, args.basis, args.strategie, schluessel,
                               args.fixture)
+    hinweis = diagnose_hinweis(stoerungen, bool(schluessel))
 
     if not punkte:
         print("🛑 Keine Seite messbar – das ist eine Störung, kein Befund.", file=sys.stderr)
         for s in stoerungen:
             print("  ·", s, file=sys.stderr)
+        if hinweis:
+            print(f"  💡 {hinweis}", file=sys.stderr)
         return 2
 
     urteil, anzahl = gesamturteil(punkte)
@@ -558,13 +590,17 @@ def main(argv: list[str] | None = None) -> int:
         schreibe(punkte, args.strategie, datum, urteil)
 
     if args.json:
-        print(json.dumps({"datum": datum, "strategie": args.strategie, "urteil": urteil,
-                          "geprueft": anzahl, "seiten": punkte, "stoerungen": stoerungen},
-                         ensure_ascii=False, indent=2))
+        payload = {"datum": datum, "strategie": args.strategie, "urteil": urteil,
+                   "geprueft": anzahl, "seiten": punkte, "stoerungen": stoerungen}
+        if hinweis:
+            payload["hinweis"] = hinweis
+        print(json.dumps(payload, ensure_ascii=False, indent=2))
     else:
         print(text, end="")
         for s in stoerungen:
             print(f"⚠️  Störung: {s}")
+        if hinweis:
+            print(f"💡 {hinweis}")
 
     # Ein Befund ist ein Befund – auch wenn einzelne Seiten nicht messbar waren.
     if "SCHLECHT" in [p["urteil"] for p in punkte]:

@@ -1626,6 +1626,155 @@ def nachlese_anwenden(dossier_dir: Path = DOSSIERS,
     return ergebnis
 
 
+def _jemals_live_slugs(root: Path = ROOT) -> set[str]:
+    """Slugs mit öffentlichem Auslieferungsnachweis (nie still ausmustern, #1191)."""
+    live: set[str] = set()
+    llms = root / "static" / "llms.txt"
+    if llms.is_file():
+        for m in re.finditer(r"/(?:posts|pillar)/([a-z0-9][a-z0-9-]*)/",
+                             llms.read_text(encoding="utf-8", errors="replace")):
+            live.add(m.group(1))
+    sc = root / "data" / "release_scorecard.json"
+    if sc.is_file():
+        try:
+            obj = json.loads(sc.read_text(encoding="utf-8"))
+        except ValueError:
+            obj = {}
+        for liste in (obj.get("artikel"), obj.get("articles"), obj.get("pages")):
+            if isinstance(liste, list):
+                for item in liste:
+                    if isinstance(item, dict) and item.get("slug"):
+                        live.add(str(item["slug"]))
+    return live
+
+
+def bereinige_geloeschte(*, queue_path: Path = QUEUE,
+                         decisions_path: Path = ENTSCHEIDUNGEN,
+                         dossier_dir: Path = DOSSIERS,
+                         fassungen: dict | None = None,
+                         aliases: dict[str, str] | None = None,
+                         live_slugs: set[str] | None = None,
+                         nur_slugs: set[str] | None = None,
+                         apply: bool = False) -> dict:
+    """Mustert verwaiste Fachbefunde GELÖSCHTER Entwürfe auditiert aus (#1191).
+
+    Bewusst fail-closed (keine fachliche Entscheidung durch die Maschine, C46):
+      1. Seiten im Bestand (inkl. Re-Dating-Aliasse) bleiben UNANGETASTET.
+      2. Slugs mit Live-Nachweis (`llms.txt`, `release_scorecard.json`) bleiben
+         UNANGETASTET (`geschont`) – verschwindet je ein Live-Artikel, bleibt
+         `--wache` rot.
+      3. Befunde mit vorhandener menschlicher Entscheidung in
+         `faktenfrische_entscheidungen.yaml` bleiben UNANGETASTET (`geschont`).
+      4. Jeder ausgemusterte Entwurfsbefund bleibt vollständig im Anfüge-Audit
+         `ausgemusterte_entwurfsbefunde` der Queue erhalten; zugehörige Dossiers
+         werden entfernt, damit `--nachlese` den Waisen nicht neu einträgt.
+    """
+    if fassungen is None or aliases is None:
+        gef_fassungen, gef_aliases = bestand_identitaeten()
+        if fassungen is None:
+            fassungen = gef_fassungen
+        if aliases is None:
+            aliases = gef_aliases
+    fassungen = _normalisiere_fassungen(fassungen)
+    if live_slugs is None:
+        live_slugs = _jemals_live_slugs()
+    entsch = entscheidungen_laden(decisions_path)
+    entschiedene_ids = {bid for (_s, bid) in entsch}
+    entschiedene_slugs = {canonical_slug(s, aliases) for (s, _bid) in entsch} | {s for (s, _bid) in entsch}
+
+    queue = _json_object(queue_path)
+    fachbefunde = queue.get("fachbefunde")
+    if not isinstance(fachbefunde, list):
+        fachbefunde = []
+
+    behalten: list[dict] = []
+    auszumustern: list[dict] = []
+    geschont: list[dict] = []
+    erlaubt = {str(s) for s in nur_slugs} if nur_slugs is not None else None
+
+    for eintrag in fachbefunde:
+        if not isinstance(eintrag, dict):
+            behalten.append(eintrag)
+            continue
+        roh_slug = str(eintrag.get("slug") or "")
+        kanon = canonical_slug(roh_slug, aliases)
+        bid = str(eintrag.get("id") or "")
+        if erlaubt is not None and roh_slug not in erlaubt and kanon not in erlaubt:
+            behalten.append(eintrag)
+            continue
+        if kanon in fassungen or roh_slug in fassungen:
+            behalten.append(eintrag)
+            continue
+        if roh_slug in live_slugs or kanon in live_slugs:
+            behalten.append(eintrag)
+            geschont.append({"slug": roh_slug, "id": bid, "grund": "live-nachweis"})
+            continue
+        if bid in entschiedene_ids or kanon in entschiedene_slugs or roh_slug in entschiedene_slugs:
+            behalten.append(eintrag)
+            geschont.append({"slug": roh_slug, "id": bid, "grund": "menschliche-entscheidung"})
+            continue
+        auszumustern.append(eintrag)
+
+    dossiers_entfernt: list[str] = []
+    if apply and auszumustern:
+        jetzt = _jetzt()
+        archiv = queue.get("ausgemusterte_entwurfsbefunde")
+        if not isinstance(archiv, list):
+            archiv = []
+        bekannt = {(str(a.get("slug")), str(a.get("id")))
+                   for a in archiv if isinstance(a, dict)}
+        for e in auszumustern:
+            schluessel = (str(e.get("slug")), str(e.get("id")))
+            if schluessel not in bekannt:
+                kopie = dict(e)
+                kopie["ausgemustert_am"] = jetzt
+                kopie["ausgemustert_grund"] = (
+                    "Unveröffentlichter Entwurf aus dem Bestand entfernt "
+                    "(keine fachliche Freigabe, #1191)"
+                )
+                archiv.append(kopie)
+                bekannt.add(schluessel)
+        queue["fachbefunde"] = behalten
+        queue["ausgemusterte_entwurfsbefunde"] = archiv
+
+        entfernte_keys = {(str(e.get("slug")), str(e.get("id"))) for e in auszumustern}
+        ueb = queue.get("uebersicht")
+        if isinstance(ueb, dict):
+            if isinstance(ueb.get("fachbefunde"), list):
+                ueb["fachbefunde"] = [
+                    x for x in ueb["fachbefunde"]
+                    if not (isinstance(x, dict)
+                            and (str(x.get("slug")), str(x.get("id"))) in entfernte_keys)
+                ]
+            if isinstance(ueb.get("befunde"), int):
+                ueb["befunde"] = max(0, ueb["befunde"] - len(auszumustern))
+
+        tmp = Path(str(queue_path) + ".tmp")
+        try:
+            tmp.write_text(json.dumps(queue, ensure_ascii=False, indent=2),
+                           encoding="utf-8")
+            tmp.replace(queue_path)
+        except OSError as exc:
+            raise LedgerFehler(f"{Path(queue_path).name} nicht schreibbar: {exc}") from exc
+
+        if Path(dossier_dir).is_dir():
+            waise_slugs = {str(e.get("slug")) for e in auszumustern if e.get("slug")}
+            for s in sorted(waise_slugs):
+                for ext in (".json", ".md"):
+                    dp = Path(dossier_dir) / f"{s}{ext}"
+                    if dp.is_file():
+                        dp.unlink()
+                        dossiers_entfernt.append(dp.name)
+
+    return {
+        "ausgemustert": auszumustern,
+        "anzahl": len(auszumustern),
+        "geschont": geschont,
+        "dossiers_entfernt": dossiers_entfernt,
+        "geschrieben": bool(apply and auszumustern),
+    }
+
+
 # ----------------------------------------------------------------------
 # Entscheiden – der Schließpfad (statt Handarbeit an einer YAML-Datei)
 # ----------------------------------------------------------------------
@@ -2430,6 +2579,49 @@ def selftest() -> int:
         assert entscheidungen_laden(decisions)[("seite", b_id)][
             "geprueft_fassung"] == hash_a
 
+        # (o) #1191: Verwaiste Entwurfsbefunde auditiert ausmustern – aber NIE
+        # bestehende Seiten, Live-Slugs oder menschlich entschiedene Befunde.
+        q1191 = decisions.parent / "queue1191.json"
+        d1191 = decisions.parent / "dossiers1191"
+        d1191.mkdir()
+        (d1191 / "entwurf-weg.json").write_text("{}", encoding="utf-8")
+        q1191.write_text(json.dumps({
+            "uebersicht": {"befunde": 4, "fachbefunde": [
+                {"id": "a" * 20, "slug": "entwurf-weg", "typ": "luecke", "text": "Waise"},
+                {"id": "b" * 20, "slug": "live-weg", "typ": "luecke", "text": "Live"},
+            ]},
+            "fachbefunde": [
+                {"id": "a" * 20, "slug": "entwurf-weg", "fassung_sha256": hash_a,
+                 "typ": "luecke", "text": "Waise"},
+                {"id": "b" * 20, "slug": "live-weg", "fassung_sha256": hash_a,
+                 "typ": "luecke", "text": "Live"},
+                {"id": b_id, "slug": "seite", "fassung_sha256": hash_a,
+                 "typ": "luecke", "text": "Entschieden"},
+                {"id": "c" * 20, "slug": "aktiv", "fassung_sha256": hash_a,
+                 "typ": "luecke", "text": "Im Bestand"},
+            ],
+        }), encoding="utf-8")
+        res1191 = bereinige_geloeschte(
+            queue_path=q1191, decisions_path=decisions, dossier_dir=d1191,
+            fassungen={"aktiv": {"pruef": hash_a, "text": hash_a}},
+            aliases={}, live_slugs={"live-weg"}, apply=True,
+        )
+        assert res1191["anzahl"] == 1 and res1191["geschrieben"], res1191
+        assert len(res1191["geschont"]) == 2, res1191
+        assert not (d1191 / "entwurf-weg.json").exists(), res1191
+        nach1191 = json.loads(q1191.read_text(encoding="utf-8"))
+        assert [x["slug"] for x in nach1191["fachbefunde"]] == [
+            "live-weg", "seite", "aktiv"], nach1191
+        assert len(nach1191["ausgemusterte_entwurfsbefunde"]) == 1, nach1191
+        assert nach1191["uebersicht"]["befunde"] == 3, nach1191
+        # Idempotenz
+        res1191b = bereinige_geloeschte(
+            queue_path=q1191, decisions_path=decisions, dossier_dir=d1191,
+            fassungen={"aktiv": {"pruef": hash_a, "text": hash_a}},
+            aliases={}, live_slugs={"live-weg"}, apply=True,
+        )
+        assert res1191b["anzahl"] == 0 and not res1191b["geschrieben"], res1191b
+
     print("✅ Faktenfrische-Befundledger: zwei Hashes, fassungsgebundene "
           "Entscheidung, Textänderung bleibt schließbar, Folgeentscheidung "
           "mit Kette (#912), Quellenpflege öffnet "
@@ -2454,8 +2646,11 @@ if __name__ == "__main__":
     parser.add_argument("--beleg", default="", help="fakultativer Beleg (URL)")
     parser.add_argument("--nachlese", action="store_true",
                         help="Dossier-Befunde finden, die im Ledger fehlen")
+    parser.add_argument("--bereinige-geloeschte", action="store_true",
+                        help="verwaiste Fachbefunde gelöschter Entwürfe auditiert "
+                             "ausmustern (#1191; mit --apply schreiben)")
     parser.add_argument("--apply", action="store_true",
-                        help="mit --nachlese: fehlende Befunde ins Ledger ergänzen")
+                        help="mit --nachlese/--bereinige-geloeschte/--reparieren schreiben")
     parser.add_argument("--wache", action="store_true",
                         help="Exit 1, wenn ein offener Befund keinen Schließweg hat")
     parser.add_argument("--struktur-pruefen", action="store_true",
@@ -2469,6 +2664,21 @@ if __name__ == "__main__":
     try:
         if args.selftest:
             raise SystemExit(selftest())
+        if args.bereinige_geloeschte:
+            bericht = bereinige_geloeschte(apply=args.apply)
+            if args.json:
+                print(json.dumps(bericht, ensure_ascii=False, indent=2))
+            elif bericht["geschrieben"]:
+                print(f"✅ {bericht['anzahl']} verwaiste(r) Entwurfsbefund(e) "
+                      f"auditiert ausgemustert (geschont: {len(bericht['geschont'])}, "
+                      f"Dossiers entfernt: {len(bericht['dossiers_entfernt'])}).")
+            else:
+                modus = "Keine" if args.apply else f"Trockenlauf: {bericht['anzahl']}"
+                print(f"{modus} verwaiste(n) Entwurfsbefund(e) "
+                      f"(geschont: {len(bericht['geschont'])}).")
+                for e in bericht["ausgemustert"]:
+                    print(f"   - {e.get('slug')} · {e.get('id')}: {str(e.get('text', ''))[:90]}")
+            raise SystemExit(0)
         if args.nachlese:
             if args.apply:
                 ergebnis = nachlese_anwenden()

@@ -79,7 +79,9 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 import traceback
+import urllib.error
 import urllib.parse
 import urllib.request
 
@@ -528,32 +530,110 @@ def passt(text: str, begriffe: list[str]) -> int:
     return sum(1 for b in begriffe if b.lower() in klein)
 
 
+def _abruf_mit_kurzretry(url: str, headers: dict[str, str]) -> bytes:
+    """Ein Kurz-Retry bei transientem Netz-/TLS-Fehler (nie bei HTTP 4xx, #1191)."""
+    letzter: Exception | None = None
+    for versuch in range(2):
+        try:
+            _status, _kopf, daten = sicherer_abruf(
+                url,
+                headers=headers,
+                timeout=TIMEOUT_STD,
+                max_bytes=MAX_ABRUF_BYTES,
+                erlaube_loopback=False,
+            )
+            return daten
+        except ValueError:
+            raise
+        except urllib.error.HTTPError as exc:
+            if 400 <= exc.code < 500 and exc.code != 429:
+                raise
+            letzter = exc
+        except Exception as exc:  # noqa: BLE001
+            letzter = exc
+        if versuch == 0:
+            time.sleep(1.0)
+    if letzter is not None:
+        raise letzter
+    raise RuntimeError("Abruf ohne Ergebnis")
+
+
+def _stdlib_feed_eintraege(daten: bytes) -> list[dict] | None:
+    """Sicherer RSS-2.0-/Atom-Fallback ohne `feedparser` (#1191)."""
+    import safe_xml
+    try:
+        wurzel = safe_xml.fromstring(daten, max_bytes=4 * 1024 * 1024)
+    except safe_xml.ParseError:
+        return None
+
+    def _lokal(tag: str) -> str:
+        return tag.rsplit("}", 1)[-1] if "}" in tag else tag
+
+    def _kind_text(el, namen: tuple[str, ...]) -> str:
+        for k in el:
+            if _lokal(k.tag) in namen and (k.text or "").strip():
+                return k.text.strip()
+        return ""
+
+    eintraege: list[dict] = []
+    for el in wurzel.iter():
+        art = _lokal(el.tag)
+        if art not in ("item", "entry"):
+            continue
+        link = _kind_text(el, ("link",))
+        if not link:
+            for k in el:
+                if _lokal(k.tag) == "link":
+                    href = (k.attrib.get("href") or "").strip()
+                    rel = (k.attrib.get("rel") or "alternate").strip()
+                    if href and rel in ("alternate", ""):
+                        link = href
+                        break
+        eintraege.append({
+            "title": _kind_text(el, ("title",)),
+            "link": link,
+            "summary": _kind_text(el, ("description", "summary", "content")),
+            "published": _kind_text(el, ("pubDate", "published")),
+            "updated": _kind_text(el, ("updated", "date")),
+        })
+    return eintraege
+
+
 def sammle_rss(feed: dict, begriffe: list[str], limit: int) -> tuple[list[dict], str | None]:
     try:
-        import feedparser
+        import feedparser  # type: ignore[import-not-found]
     except ImportError:
-        return [], "feedparser nicht installiert (pip install feedparser)"
+        feedparser = None
     name = feed.get("name") or "Feed"
     url = feed.get("url") or ""
+    kopf = {
+        "User-Agent": USER_AGENT,
+        "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.8",
+    }
     try:
-        _status, _kopf, daten = sicherer_abruf(
-            url,
-            headers={"User-Agent": USER_AGENT},
-            timeout=TIMEOUT_STD,
-            max_bytes=MAX_ABRUF_BYTES,
-            erlaube_loopback=False,
-        )
-        parsed = feedparser.parse(daten)
+        daten = _abruf_mit_kurzretry(url, kopf)
     except ValueError as exc:
         if "Groessenlimit" in str(exc):
             return [], f"{name}: Feed überschreitet das Größenlimit"
         return [], f"{name}: Abruf fehlgeschlagen ({exc})"
     except Exception as exc:  # noqa: BLE001
         return [], f"{name}: Abruf fehlgeschlagen ({exc})"
-    if getattr(parsed, "bozo", 0) and not parsed.entries:
-        return [], f"{name}: Feed nicht lesbar"
+    rohe_eintraege: list = []
+    if feedparser is not None:
+        parsed = feedparser.parse(daten)
+        rohe_eintraege = list(getattr(parsed, "entries", None) or [])
+        if not rohe_eintraege and getattr(parsed, "bozo", 0):
+            fb = _stdlib_feed_eintraege(daten)
+            if fb is None:
+                return [], f"{name}: Feed nicht lesbar"
+            rohe_eintraege = fb
+    else:
+        fb = _stdlib_feed_eintraege(daten)
+        if fb is None:
+            return [], f"{name}: Feed nicht lesbar"
+        rohe_eintraege = fb
     treffer = []
-    for e in parsed.entries[:60]:
+    for e in rohe_eintraege[:60]:
         titel = (e.get("title") or "").strip()
         zusammenfassung = re.sub(r"<[^>]+>", " ", e.get("summary", "") or "")[:400]
         score = passt(f"{titel} {zusammenfassung}", begriffe)
@@ -584,13 +664,7 @@ def sammle_web(url: str, begriffe: list[str], max_zeichen: int) -> tuple[dict | 
         return None, f"{domain_von(url)}: Ziel abgelehnt ({ziel_grund})"
     ziel = f"https://r.jina.ai/{url}"
     try:
-        _status, _kopf, daten = sicherer_abruf(
-            ziel,
-            headers={"User-Agent": USER_AGENT},
-            timeout=TIMEOUT_STD,
-            max_bytes=MAX_ABRUF_BYTES,
-            erlaube_loopback=False,
-        )
+        daten = _abruf_mit_kurzretry(ziel, {"User-Agent": USER_AGENT})
         text = daten.decode("utf-8", errors="replace")
     except ValueError as exc:
         if "Groessenlimit" in str(exc):
@@ -893,8 +967,8 @@ def claude_fachpruefung(art: dict, dossier: dict, cfg: dict,
             antwort = llm_client.chat(
                 provider, system=SYSTEM_PROMPT, prompt=user,
                 temperature=float(ccfg.get("temperatur", 0.2)),
-                max_tokens=int(ccfg.get("max_tokens", 4096)),
-                timeout=int(ccfg.get("timeout", 30)), attempts=int(ccfg.get("versuche", 1)),
+                max_tokens=int(ccfg.get("max_tokens", 8192)),
+                timeout=int(ccfg.get("timeout", 60)), attempts=int(ccfg.get("versuche", 2)),
                 require_complete=True, raise_on_error=True, log_errors=False)
         except Exception as exc:  # noqa: BLE001 - Lauf darf daran nicht sterben
             fehler.append(f"{provider}: {type(exc).__name__}")

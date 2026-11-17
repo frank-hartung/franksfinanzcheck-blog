@@ -135,6 +135,12 @@ quellen_allowlist:
   - domain: gesetze-im-internet.de
     herausgeber: "Bundesministerium der Justiz"
     rang: 1
+  - domain: bmjv.de
+    herausgeber: "Bundesministerium der Justiz und für Verbraucherschutz"
+    rang: 1
+  - domain: bmj.de
+    herausgeber: "Bundesministerium der Justiz"
+    rang: 1
   - domain: bafin.de
     herausgeber: "BaFin"
     rang: 1
@@ -164,6 +170,9 @@ quellen_allowlist:
     rang: 2
   - domain: dena.de
     herausgeber: "Deutsche Energie-Agentur"
+    rang: 2
+  - domain: ihk.de
+    herausgeber: "Industrie- und Handelskammer"
     rang: 2
   - domain: tagesschau.de
     herausgeber: "tagesschau"
@@ -243,9 +252,9 @@ standard:
 claude:
   modell_fallback: []
   temperatur: 0.2          # Faktenarbeit, keine Kreativität
-  max_tokens: 4096
-  timeout: 30              # je Versuch; bei Ausfall zügig zum nächsten Anbieter
-  versuche: 1              # pro Anbieter; Redundanz über die Routing-Kette
+  max_tokens: 8192         # #1191: verhindert IncompleteResponseError bei langen Dossiers
+  timeout: 60              # #1191: verhindert TimeoutError bei Volltext-Prüfungen
+  versuche: 2              # #1191: ein Kurz-Retry gegen transiente 429/503 je Anbieter
 
 # --- Meldewesen -----------------------------------------------------
 melden:

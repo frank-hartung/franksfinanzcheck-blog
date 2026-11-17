@@ -170,7 +170,7 @@
 #                 bestehende Auswertungen wie `if: env.ARTIKEL_ERSTELLT
 #                 == 'true'` unverändert nutzbar – nur ehrlicher:
 #                 gesetzt wird sie erst NACHweislich erfolgreichem Push.
-#    GIT_SYNC_TRIES        Gesamt-Runden Rebase+Push   (Default: 3)
+#    GIT_SYNC_TRIES        Gesamt-Runden Rebase+Push   (Default: 5, #1244–#1246)
 #    GIT_SYNC_FETCH_TRIES  Fetch-Versuche pro Runde    (Default: 3)
 #    GIT_SYNC_BACKOFF      Backoff-Basis in Sekunden   (Default: 4)
 #    GIT_SYNC_BESTAND_POLICY  hart (Default) | bestand-gewinnt  (#590, s. o.)
@@ -196,7 +196,7 @@ GIT_USER="${GIT_USER:-Automation-Bot}"
 GIT_MAIL="${GIT_MAIL:-automation-bot@users.noreply.github.com}"
 DRY_RUN="${DRY_RUN:-0}"
 SYNC_OK_VAR="${SYNC_OK_VAR:-GEHEILT}"
-GIT_SYNC_TRIES="${GIT_SYNC_TRIES:-3}"
+GIT_SYNC_TRIES="${GIT_SYNC_TRIES:-5}"
 GIT_SYNC_FETCH_TRIES="${GIT_SYNC_FETCH_TRIES:-3}"
 GIT_SYNC_BACKOFF="${GIT_SYNC_BACKOFF:-4}"
 # #590 (WF-A535): Umgang mit Konflikten auf BESTANDS-Artikeln.
@@ -317,9 +317,31 @@ ist_ref_fehlt() {
 #  Reparatur: docs/PFLICHT-CHECK-RUNBOOK.md, Abschnitt „Direkte Pushes“.
 ist_schutz_fehler() {
   printf '%s' "$1" | grep -qiE \
-    'GH006|GH013|GH014|protected branch|repository rule|rule violation|'\
-'required status check|changes must be made through a pull request|hook '\
-'declined|push declined|update-ref failed|must be signed'
+    'GH001|GH006|GH007|GH013|GH014|push protection|protected branch|'\
+'repository rule|rule violation|required status check|'\
+'changes must be made through a pull request|hook declined|push declined|'\
+'update-ref failed|must be signed'
+}
+
+# --- Push-Rennen (paralleler Bot-Commit auf main, #1244–#1246) ----------------
+#  Trennt echte Gleichzeitigkeit (non-fast-forward / cannot lock ref) sauber von
+#  HTTP-/Netzwerk-Transients, damit die Abschlussmeldung die wahre Klasse nennt.
+ist_push_rennen() {
+  printf '%s' "$1" | grep -qiE \
+    'non-fast-forward|fetch first|cannot lock ref|stale info'
+}
+
+# --- Geheimnis-freie Kurzdiagnose für Log/Annotation (#1244–#1246) ------------
+saeubere_git_diagnose() {
+  printf '%s\n' "$1" | sed -E \
+    -e 's#(https?://)[^/@[:space:]]+@#\1[redacted]@#g' \
+    -e 's#(x-access-token:|gh[pousr]_|github_pat_|Bearer[[:space:]]+)[^@[:space:]"'\'']+#\1[redacted]#g'
+}
+
+# --- HTTP/1.1 + größerer postBuffer nach fehlgeschlagenem Netzwerk-Schritt ----
+aktiviere_http_fallback() {
+  git config http.version HTTP/1.1        2>/dev/null || true
+  git config http.postBuffer 33554432     2>/dev/null || true  # 32 MiB
 }
 
 backoff_sekunden() {  # $1 = Rundennummer (1-basiert)
@@ -365,8 +387,7 @@ fetch_mit_retry() {
       sleep "$(backoff_sekunden "$i")"
       # Bekannte Gegenmittel bei HTTP/2-/Buffer-Transients nachrüsten
       # (schadet nie, hilft bei großen Pushes und Proxy-Zickereien):
-      git config http.version HTTP/1.1        2>/dev/null || true
-      git config http.postBuffer 33554432     2>/dev/null || true  # 32 MiB
+      aktiviere_http_fallback
     fi
   done
   SYNC_FAIL_URSACHE=netzwerk
@@ -902,7 +923,7 @@ rebase_gegen_origin() {
 #  wiederholt – bis zu GIT_SYNC_TRIES Mal mit exponentiellem Backoff.
 # ========================================================================
 sync_und_push() {
-  local runde out
+  local runde out letzte_diag=""
   for (( runde = 1; runde <= GIT_SYNC_TRIES; runde++ )); do
     SYNC_FAIL_URSACHE=""
 
@@ -914,10 +935,12 @@ sync_und_push() {
       # (als gelöscht) nicht mehr existiert.
       konfliktmarker_notbremse push || return 1
       if out=$(git push origin "HEAD:refs/heads/$BRANCH" 2>&1); then
-        printf '%s\n' "$out" | sed 's/^/  push: /'
+        saeubere_git_diagnose "$out" | sed 's/^/  push: /'
         return 0
       fi
+      out=$(saeubere_git_diagnose "$out")
       printf '%s\n' "$out" | sed 's/^/  push: /'
+      letzte_diag=$(printf '%s\n' "$out" | grep -E 'fatal:|error:|! \[rejected\]|! \[remote rejected\]|remote:' | tail -n 1 | tr -s ' ' | cut -c 1-180 || true)
       if ist_schutz_fehler "$out"; then
         SYNC_FAIL_URSACHE=schutz
         echo "::error::git_sync.sh: Push auf origin/$BRANCH von "\
@@ -935,8 +958,16 @@ sync_und_push() {
              "'contents: write' im Workflow, Branch-Schutz und den Token."
         return 1
       fi
-      echo "  push: Versuch $runde/$GIT_SYNC_TRIES fehlgeschlagen – "\
-           "angleichen und erneut versuchen."
+      if ist_push_rennen "$out"; then
+        SYNC_FAIL_URSACHE=push_rennen
+      else
+        SYNC_FAIL_URSACHE=netzwerk
+        # #1244–#1246: fetch lief über HTTP/2 oft noch durch, erst der Push
+        # scheiterte an HTTP/2-Stream-/5xx-Transients → Fallback auch hier.
+        aktiviere_http_fallback
+      fi
+      echo "  push: Versuch $runde/$GIT_SYNC_TRIES fehlgeschlagen "\
+           "(Klasse: $SYNC_FAIL_URSACHE) – angleichen und erneut versuchen."
     else
       case "$SYNC_FAIL_URSACHE" in
         ref_fehlt)
@@ -1022,12 +1053,17 @@ sync_und_push() {
   done
 
   SYNC_FAIL_URSACHE="${SYNC_FAIL_URSACHE:-netzwerk}"
+  local diag_zusatz=""
+  if [ -n "${letzte_diag:-}" ]; then
+    diag_zusatz=" Letzte Git-Meldung: ${letzte_diag}."
+  fi
   echo "::error::git_sync.sh: Synchronisation nach $GIT_SYNC_TRIES Runden "\
-       "fehlgeschlagen (zuletzt: $SYNC_FAIL_URSACHE). Mögliche Ursachen: "\
-       "GitHub-Transient, fehlende 'contents: write'-Berechtigung, "\
+       "fehlgeschlagen (zuletzt: $SYNC_FAIL_URSACHE).${diag_zusatz} "\
+       "Mögliche Ursachen: GitHub-Transient, paralleles Push-Rennen "\
+       "(push_rennen), fehlende 'contents: write'-Berechtigung, "\
        "Branch-Schutz (Ruleset mit Pflicht-Check ohne Bypass-Akteur – "\
-       "docs/PFLICHT-CHECK-RUNBOOK.md), ein zwischenzeitlich gelöschtes "\
-       "Ziel-Ref (ref_fehlt) oder ein anderer Workflow schreibt gleichzeitig."
+       "docs/PFLICHT-CHECK-RUNBOOK.md) oder ein zwischenzeitlich gelöschtes "\
+       "Ziel-Ref (ref_fehlt)."
   return 1
 }
 

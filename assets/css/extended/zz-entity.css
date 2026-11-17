@@ -68,6 +68,22 @@
   text-underline-offset: 0.18em;
 }
 
+/* WCAG 2.2 SC 2.5.8 Zielgröße (Minimum, ≥ 24×24 CSS-px, #1248):
+   Freistehende Entity-Verweise und Listenverweise erhalten eine echte
+   klickbare Mindesthöhe von ≥ 24 px, ohne den Zeilenrhythmus aufzublähen. */
+.ff-entity-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding-block: 3px;
+}
+
+.ff-entity-punkte a {
+  display: inline-block;
+  min-height: 24px;
+  padding-block: 2px;
+}
+
 .ff-entity-punkte a:hover,
 .ff-entity-links a:hover {
   text-decoration-thickness: 2px;

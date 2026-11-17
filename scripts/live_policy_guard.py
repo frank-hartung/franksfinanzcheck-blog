@@ -296,14 +296,29 @@ def check_page(live_html: str, local_html: str, url: str, F: list, soft: list,
     live_ld = re.search(r"<script[^>]*ld\+json[^>]*>(.*?)</script>", live_html, re.S | re.I)
     if live_ld:
         block = live_ld.group(1)
-        if '\\"' in block:
-            F.append(("L3", f"{url}: Live-JSON-LD enthält escapte Quotes – der "
-                            "Doppel-Escape ist IM CACHE noch live (CDN vpurgen)"))
-        else:
-            try:
-                json.loads(block)
-            except json.JSONDecodeError as exc:
+
+        def _hat_doppel_escape(knoten) -> bool:
+            if isinstance(knoten, str):
+                s = knoten.strip()
+                return len(s) >= 2 and s[0] == '"' and s[-1] == '"'
+            if isinstance(knoten, list):
+                return any(_hat_doppel_escape(x) for x in knoten)
+            if isinstance(knoten, dict):
+                return any(_hat_doppel_escape(v) for v in knoten.values())
+            return False
+
+        try:
+            geparst = json.loads(block)
+        except json.JSONDecodeError as exc:
+            if '\\"' in block:
+                F.append(("L3", f"{url}: Live-JSON-LD enthält escapte Quotes – der "
+                                "Doppel-Escape ist IM CACHE noch live (CDN vpurgen)"))
+            else:
                 F.append(("L3", f"{url}: Live-JSON-LD ist kein gültiges JSON ({exc.msg})"))
+        else:
+            if _hat_doppel_escape(geparst):
+                F.append(("L3", f"{url}: Live-JSON-LD enthält escapte Quotes – der "
+                                "Doppel-Escape ist IM CACHE noch live (CDN vpurgen)"))
     else:
         soft.append(("L3", f"{url} liefert live kein JSON-LD mit aus"))
 

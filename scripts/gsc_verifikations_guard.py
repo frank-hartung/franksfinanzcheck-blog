@@ -205,7 +205,10 @@ def jsonld_bloecke(html: str) -> list[dict]:
         if isinstance(daten, list):
             out.extend(d for d in daten if isinstance(d, dict))
         elif isinstance(daten, dict):
-            out.append(daten)
+            if isinstance(daten.get("@graph"), list):
+                out.extend(d for d in daten["@graph"] if isinstance(d, dict))
+            else:
+                out.append(daten)
     return out
 
 

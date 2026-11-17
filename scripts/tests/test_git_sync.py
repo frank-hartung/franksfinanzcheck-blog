@@ -1236,5 +1236,97 @@ class ReserveNachweisWahrheitTests(GitSyncTestBase):
         self.assertEqual(vorher, self._nachweis(), "Nachweis wurde trotz Ausfall verändert")
 
 
+class TestPushHaertung1244(GitSyncTestBase):
+    """Härtung #1244–#1246: Schutz-Codes, HTTP/1.1-Fallback, Push-Rennen, Redaktion."""
+
+    def _hook(self, text: str) -> None:
+        hook = self.origin / "hooks" / "pre-receive"
+        hook.write_text("#!/usr/bin/env bash\n" + text + "\nexit 1\n", encoding="utf-8")
+        hook.chmod(0o755)
+
+    def _commit_b(self) -> None:
+        (self.bot_b / "probe.txt").write_text("neu\n", encoding="utf-8")
+        subprocess.run(["git", "-C", str(self.bot_b), "add", "probe.txt"], check=True)
+        subprocess.run(["git", "-C", str(self.bot_b), "commit", "-q", "-m", "probe"],
+                       check=True)
+
+    def test_push_protection_und_gh001_sind_schutz_ohne_retry(self):
+        for code in ("GH001: Large files detected", "GH007: Your push would publish",
+                     "Push cannot contain secrets (push protection)"):
+            with self.subTest(code=code):
+                self._hook(f'echo "remote: error: {code}" >&2')
+                self._commit_b()
+                res = self.run_sync(["--push-only"], repo=self.bot_b,
+                                    env_extra={"GIT_SYNC_TRIES": "5"})
+                self.assertEqual(res.returncode, 1)
+                self.assertIn("Ursache: schutz", res.stdout + res.stderr)
+                self.assertNotIn("Versuch 2/5", res.stdout + res.stderr)
+                subprocess.run(["git", "-C", str(self.bot_b), "reset", "-q", "--hard", "HEAD~1"],
+                               check=True)
+
+    def test_push_transient_aktiviert_http11_und_schwaerzt_token(self):
+        real_git = subprocess.run(
+            ["which", "git"], capture_output=True, text=True, check=True
+        ).stdout.strip()
+        bin_dir = Path(self.tmp.name) / "fakebin"
+        bin_dir.mkdir(exist_ok=True)
+        shim = bin_dir / "git"
+        shim.write_text(
+            "#!/usr/bin/env bash\n"
+            'if [ "${1:-}" = "push" ]; then\n'
+            '  echo "fatal: unable to access \'https://x-access-token:ghs_GEHEIM123456@github.com/o/r.git/\': HTTP 502" >&2\n'
+            "  exit 128\n"
+            "fi\n"
+            f'exec "{real_git}" "$@"\n',
+            encoding="utf-8",
+        )
+        shim.chmod(0o755)
+        self._commit_b()
+        res = self.run_sync(
+            ["--push-only"],
+            repo=self.bot_b,
+            env_extra={"GIT_SYNC_TRIES": "2", "PATH": f"{bin_dir}:{os.environ['PATH']}"},
+        )
+        out = res.stdout + res.stderr
+        self.assertEqual(res.returncode, 1)
+        self.assertIn("zuletzt: netzwerk", out)
+        self.assertNotIn("ghs_GEHEIM123456", out)
+        self.assertIn("[redacted]", out)
+        self.assertIn("HTTP 502", out)
+        http_ver = subprocess.run(
+            ["git", "-C", str(self.bot_b), "config", "--get", "http.version"],
+            capture_output=True, text=True, check=True,
+        ).stdout.strip()
+        self.assertEqual(http_ver, "HTTP/1.1")
+
+    def test_push_rennen_wird_als_eigene_klasse_gemeldet(self):
+        real_git = subprocess.run(
+            ["which", "git"], capture_output=True, text=True, check=True
+        ).stdout.strip()
+        bin_dir = Path(self.tmp.name) / "fakebin_race"
+        bin_dir.mkdir(exist_ok=True)
+        shim = bin_dir / "git"
+        shim.write_text(
+            "#!/usr/bin/env bash\n"
+            'if [ "${1:-}" = "push" ]; then\n'
+            '  echo " ! [rejected] HEAD -> main (fetch first)" >&2\n'
+            '  echo "error: failed to push some refs" >&2\n'
+            "  exit 1\n"
+            "fi\n"
+            f'exec "{real_git}" "$@"\n',
+            encoding="utf-8",
+        )
+        shim.chmod(0o755)
+        self._commit_b()
+        res = self.run_sync(
+            ["--push-only"],
+            repo=self.bot_b,
+            env_extra={"GIT_SYNC_TRIES": "2", "PATH": f"{bin_dir}:{os.environ['PATH']}"},
+        )
+        out = res.stdout + res.stderr
+        self.assertEqual(res.returncode, 1)
+        self.assertIn("zuletzt: push_rennen", out)
+
+
 if __name__ == "__main__":
     unittest.main()

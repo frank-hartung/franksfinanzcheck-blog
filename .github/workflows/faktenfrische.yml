@@ -199,7 +199,7 @@ jobs:
           # Wurzelverzeichnisse vermeidet den früheren pathspec-Fehler, wenn
           # in einem Lauf kein Dossier erzeugt wurde. Gestagt werden danach
           # ausschließlich die fachlich-owned Pfade.
-          if git status --porcelain -- content/ data/ FAKTENFRISCHE-REPORT.md BEFUND-AKTE.md F4-ENTSCHEIDUNGSVORLAGE.md | grep -q .; then
+          if git status --porcelain -- content/ data/ BEFUND-AKTE.md F4-ENTSCHEIDUNGSVORLAGE.md | grep -q .; then
             bash scripts/git_sync.sh \
               "content(fakten): Belegkette aufgefrischt (Agent Reach + Claude)" \
               content/ \
@@ -209,8 +209,7 @@ jobs:
               data/faktenfrische_befunde_state.json \
               data/faktenfrische_entscheidungen.yaml \
               BEFUND-AKTE.md \
-              F4-ENTSCHEIDUNGSVORLAGE.md \
-              FAKTENFRISCHE-REPORT.md
+              F4-ENTSCHEIDUNGSVORLAGE.md
           else
             echo "Keine Änderungen."
           fi

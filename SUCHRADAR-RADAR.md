@@ -1,6 +1,6 @@
 # SUCHRADAR – Status
 
-> Stand: 2026-11-16 16:12:51 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
+> Stand: 2026-11-17 17:04:13 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
 > Schlüssellos · 0 € · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md`
 
 ## Lauf
@@ -13,18 +13,18 @@
 | Fehlgeschlagen | 3 |
 | Übersprungen (Budget) | 0 |
 | Treffer gesamt | 187 |
-| Davon organisch | 0 |
+| Davon organisch | 10 |
 | Eigene Treffer | 0 von 22 Anfragen |
 
 ## Datenqualität
 
 | Kennzahl | Wert |
 |---|---|
-| Anfragen mit echtem Suchindex | 0 von 22 |
-| Anfragen nur mit Wissens-Rückfall | 22 |
-| Organische Treffer | 0 von 187 |
-| Rückfall-Anteil | 100 % |
-| Aussagekraft | keine |
+| Anfragen mit echtem Suchindex | 1 von 22 |
+| Anfragen nur mit Wissens-Rückfall | 21 |
+| Organische Treffer | 10 von 187 |
+| Rückfall-Anteil | 95 % |
+| Aussagekraft | eingeschraenkt |
 
 _Nur organische Treffer gehen in Rang und Wettbewerb ein. Der Wikipedia-Rückfall verhindert leere Läufe, ist aber kein Ranking._
 
@@ -32,7 +32,8 @@ _Nur organische Treffer gehen in Rang und Wettbewerb ein. Der Wikipedia-Rückfal
 
 | Anbieter | Abrufe | Limit |
 |---|---|---|
-| wikipedia | 22 | 300 |
+| searxng | 1 | 400 |
+| wikipedia | 21 | 300 |
 
 ## Eigene Sichtbarkeit
 
@@ -40,15 +41,26 @@ _Kein eigener Treffer in den gemessenen Anfragen._
 
 ## Wettbewerb
 
-_Keine Treffer ausgewertet._
+| Domäne | Treffer | Top 3 | Ø Rang | Bester Rang |
+|---|---|---|---|---|
+| ing.de | 1 | 1 | 1.0 | 1 |
+| lexware.de | 1 | 1 | 2.0 | 2 |
+| bank99.at | 1 | 1 | 3.0 | 3 |
+| schuldnerberatung.de | 1 | 0 | 4.0 | 4 |
+| sparkasse.de | 1 | 0 | 5.0 | 5 |
+| ndr.de | 1 | 0 | 6.0 | 6 |
+| peaks.com | 1 | 0 | 7.0 | 7 |
+| meetadam.io | 1 | 0 | 8.0 | 8 |
+| sparkasse-koelnbonn.de | 1 | 0 | 9.0 | 9 |
+| sparschweinclub.de | 1 | 0 | 10.0 | 10 |
 
 ## Störungen
 
 | Suchbegriff | Meldung |
 |---|---|
-| franksfinanzcheck.de | Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://opnxng.com: https://opnxng. |
-| Gaskosten senken | Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://opnxng.com: https://opnxng.com/ |
-| Urlaubskosten planen | Kein Anbieter lieferte Treffer für 'Urlaubskosten planen': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://opnxng.com: https://opnxng. |
+| franksfinanzcheck.de | Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://priv.au: keine Treffer / ht |
+| Gaskosten senken | Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://priv.au: keine Treffer / https: |
+| Urlaubskosten planen | Kein Anbieter lieferte Treffer für 'Urlaubskosten planen': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer / https://priv.au: keine Treffer / ht |
 
 ## Einordnung
 

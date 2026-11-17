@@ -171,6 +171,27 @@ REST_SCHMUCK_RE = re.compile(
 
 _HAUS_CTA_REGISTER: list | None = None
 _HAUS_FORMELN: list | None = None
+_SSOT_BAUM_CACHE: dict[tuple[str, int, int], ast.Module] = {}
+_HAUS_TEXTE_CACHE: tuple[tuple, list] | None = None
+_HAUS_FAZIT_CACHE: tuple[tuple, tuple[re.Pattern | None, tuple[str, ...]]] | None = None
+
+# Interner Markdown-Link → sichtbarer Ankertext (für Fazit-Template-Vergleich,
+# #1230: internal_linker verlinkt z. B. „[fünf Minuten](../../posts/…/)“ im
+# deterministischen S3-Satz aus fazit_schmiede.generate_fazit_text).
+_INTERNER_LINK_ANKER_RE = re.compile(
+    r"\[([^\]\n]+)\]\(\s*(?:\.{1,2}/|/)(?![/])[^)\s]*\)"
+)
+# RS5-Modellwert-Zusatz am Satzende („… fünf Minuten reichen; das ist ein
+# Rechenbeispiel.“, #1230). Greift ausschließlich NACH nachgewiesenem
+# fazit_schmiede-Baustein – niemals allein auf freiem Fließtext.
+_RS5_MODELLZUSATZ_RE = re.compile(
+    r"\bdas ist (?:ein (?:rechenbeispiel|modellwert|beispielwert)|eine modellannahme)\b"
+)
+# SSOT-Pflichtquellen der deterministischen Fazit-Schmiede (versiegelt, #1230).
+FAZIT_TEXT_QUELLEN = (
+    ("fazit_schmiede", "generate_fazit_text.sentence_map"),
+    ("fazit_schmiede", "generate_fazit_text.s3"),
+)
 
 # Klartext-Hausformeln anderer SSOTs: (modul, attribut). Auch hier gilt:
 # abgeleitet, nicht abgeschrieben. Steht die Formel im erzeugenden Modul,
@@ -188,36 +209,83 @@ HAUS_TEXT_QUELLEN = (
 _PLATZHALTER_RE = re.compile(r"\{[^{}]*\}")
 
 
+def _ssot_baum(pfad: Path) -> tuple[ast.Module | None, str]:
+    """AST einer SSOT-Datei mit `(pfad, mtime_ns, size)`-Cache (#1230).
+
+    Vor #1230 parste `haus_texte()` bei jedem Absatzaufruf alle vier SSOT-Module
+    neu (~49 s pro Reserve-Kandidat, >120 s auf dem Gesamtbestand). Der
+    Stat-Schlüssel hält den Lauf im Millisekundenbereich und invalidiert bei
+    jeder Dateiänderung oder Sabotage-Probe sofort."""
+    try:
+        gel = pfad.resolve()
+        st = gel.stat()
+    except OSError as exc:
+        return None, f"{pfad.name} nicht lesbar: {exc}"
+    key = (str(gel), st.st_mtime_ns, st.st_size)
+    baum = _SSOT_BAUM_CACHE.get(key)
+    if baum is not None:
+        return baum, ""
+    try:
+        baum = ast.parse(gel.read_text(encoding="utf-8"))
+    except OSError as exc:
+        return None, f"{pfad.name} nicht lesbar: {exc}"
+    except SyntaxError as exc:
+        return None, f"{pfad.name} ist kein gültiges Python (Z. {exc.lineno})"
+    _SSOT_BAUM_CACHE[key] = baum
+    return baum, ""
+
+
+_SKRIPT_ORDNER = os.path.dirname(os.path.abspath(__file__))
+
+
+def _ssot_datei_signatur(modul: str) -> tuple:
+    basis = os.path.dirname(os.path.abspath(__file__))
+    datei = os.path.join(basis, f"{modul}.py")
+    try:
+        st = os.stat(datei)
+        return (datei, st.st_mtime_ns, st.st_size)
+    except OSError:
+        return (datei, -1, -1)
+
+
 def _ssot_wert(modul: str, attribut: str):
-    """Modulkonstante aus der QUELLDATEI lesen (AST) – nie per Import.
+    """Modul- oder Funktionskonstante aus der QUELLDATEI lesen (AST) – nie per Import.
 
-    Warum nicht `__import__`: `ki_shared`, `cta_builder` und `news_writer`
-    ziehen PyYAML (und damit eine ganze Kette) nach. In jeder Umgebung ohne
-    PyYAML – PR-Pfad, C6-Selbsttest, lokale Probe – wäre die Haus-Template-
-    Erkennung damit STILL ausgefallen: Die Ausnahme verschwindet, die Wache
-    misst vertraglich vorgeschriebene CTA-Blöcke wieder als Plagiat, und
-    Issue #676 kehrt als Dauer-Fehlalarm zurück, der den Deploy einfriert.
+    Warum nicht `__import__`: `ki_shared`, `cta_builder`, `news_writer` und
+    `fazit_schmiede` ziehen PyYAML (und damit eine ganze Kette) nach. In jeder
+    Umgebung ohne PyYAML – PR-Pfad, C6-Selbsttest, lokale Probe – wäre die
+    Haus-Template-Erkennung damit STILL ausgefallen: Die Ausnahme verschwindet,
+    die Wache misst vertraglich vorgeschriebene CTA-Blöcke wieder als Plagiat,
+    und Issue #676 kehrt als Dauer-Fehlalarm zurück, der den Deploy einfriert.
 
-    Fail-open ist hier teurer als ein Fehler. Ein AST-Lesezugriff auf eine
-    Modulkonstante hat keine Import-Nebenwirkungen, braucht keine
-    Abhängigkeit des Produzenten und liest trotzdem DIESELBE Quelle – keine
-    zweite, abschreibbare Zeichenkette.
+    Unterstützt `("modul", "KONSTANTE")` für Modulkonstanten sowie
+    `("modul", "funktion.lokal")` für literal auswertbare Konstanten in einer
+    benannten Generatorfunktion (z. B. `fazit_schmiede.generate_fazit_text.s3`,
+    #1230 – versiegeltes Modul, keine zweite Zeichenkette).
 
     Rückgabe: (wert, lücke). `lücke` ist leer, wenn gelesen wurde; sonst der
     Grund. Eine Lücke wird von `haus_template_luecken()` laut gemeldet und
     stoppt den Gate-Lauf (Exit 2) – eine blinde Wache ist kein Grün."""
     pfad = Path(__file__).resolve().parent / f"{modul}.py"
-    try:
-        baum = ast.parse(pfad.read_text(encoding="utf-8"))
-    except OSError as exc:
-        return None, f"{pfad.name} nicht lesbar: {exc}"
-    except SyntaxError as exc:
-        return None, f"{pfad.name} ist kein gültiges Python (Z. {exc.lineno})"
-    for knoten in baum.body:
+    baum, fehler = _ssot_baum(pfad)
+    if baum is None:
+        return None, fehler
+    koerper = baum.body
+    ziel_name = attribut
+    if "." in attribut:
+        fn_name, ziel_name = attribut.split(".", 1)
+        fn_knoten = next(
+            (k for k in baum.body if isinstance(k, ast.FunctionDef) and k.name == fn_name),
+            None,
+        )
+        if fn_knoten is None:
+            return None, f"{modul}.{fn_name} nicht gefunden"
+        koerper = fn_knoten.body
+    for knoten in koerper:
         if not isinstance(knoten, ast.Assign):
             continue
         for ziel in knoten.targets:
-            if isinstance(ziel, ast.Name) and ziel.id == attribut:
+            if isinstance(ziel, ast.Name) and ziel.id == ziel_name:
                 try:
                     return ast.literal_eval(knoten.value), ""
                 except (ValueError, SyntaxError):
@@ -246,7 +314,7 @@ def haus_template_luecken() -> list:
     misst sie wieder als Duplikat. Das ist kein Zustand, den man verschweigt
     (C33: eine fehlgeschlagene Messung ist kein leerer Vorrat)."""
     luecken = []
-    for modul, attribut in HAUS_TEXT_QUELLEN:
+    for modul, attribut in HAUS_TEXT_QUELLEN + FAZIT_TEXT_QUELLEN:
         _wert, grund = _ssot_wert(modul, attribut)
         if grund:
             luecken.append(f"{modul}.{attribut}: {grund}")
@@ -292,14 +360,27 @@ def haus_formeln() -> list:
 
 def haus_texte() -> list:
     """Klartext-Hausformeln ohne Platzhalter, in Vergleichsform (SSOT)."""
+    global _HAUS_TEXTE_CACHE
+    module = tuple(dict.fromkeys(m for m, _ in HAUS_TEXT_QUELLEN))
+    sig = (tuple(HAUS_TEXT_QUELLEN), tuple(_ssot_datei_signatur(m) for m in module))
+    if _HAUS_TEXTE_CACHE is not None and _HAUS_TEXTE_CACHE[0] == sig:
+        return _HAUS_TEXTE_CACHE[1]
     texte = []
     for modul, attribut in HAUS_TEXT_QUELLEN:
         wert, _luecke = _ssot_wert(modul, attribut)
+        if isinstance(wert, dict):
+            for schluessel, eintrag in wert.items():
+                if isinstance(eintrag, str) and not _PLATZHALTER_RE.search(eintrag):
+                    form = _vergleichsform(eintrag)
+                    if len(form) >= 40:
+                        texte.append((f"{modul}.{attribut}[{schluessel}]", form))
+            continue
         if not isinstance(wert, str) or _PLATZHALTER_RE.search(wert):
             continue
         form = _vergleichsform(wert)
         if len(form) >= 40:          # nur echte Formeln, keine Marker-Wörter
             texte.append((f"{modul}.{attribut}", form))
+    _HAUS_TEXTE_CACHE = (sig, texte)
     return texte
 
 
@@ -405,6 +486,90 @@ def ist_navigation(text: str) -> bool:
     return _tb.ist_nur_navigation(text)
 
 
+def _fazit_s1_muster() -> re.Pattern | None:
+    """Liest den S1-f-String (`Der Hebel bei **{cleantitle}** …`) aus der SSOT."""
+    pfad = Path(__file__).resolve().parent / "fazit_schmiede.py"
+    baum, _fehler = _ssot_baum(pfad)
+    if baum is None:
+        return None
+    fn = next(
+        (k for k in baum.body if isinstance(k, ast.FunctionDef) and k.name == "generate_fazit_text"),
+        None,
+    )
+    if fn is None:
+        return None
+    for knoten in fn.body:
+        if not isinstance(knoten, ast.Assign):
+            continue
+        if not any(isinstance(z, ast.Name) and z.id == "s1" for z in knoten.targets):
+            continue
+        if not isinstance(knoten.value, ast.JoinedStr):
+            return None
+        feste = [
+            _vergleichsform(teil.value)
+            for teil in knoten.value.values
+            if isinstance(teil, ast.Constant) and isinstance(teil.value, str)
+        ]
+        feste = [t for t in feste if len(t) >= 8]
+        if len(feste) >= 2 and sum(len(t) for t in feste) >= 45:
+            # Titel-Einschub auf max. 140 Zeichen begrenzt (kein Freibrief).
+            return re.compile(r"\s+.{1,140}?\s+".join(re.escape(t) for t in feste))
+    return None
+
+
+def haus_fazit_bausteine() -> tuple[re.Pattern | None, tuple[str, ...]]:
+    """Alle Bausteine aus `fazit_schmiede.generate_fazit_text` (SSOT, #1230)."""
+    global _HAUS_FAZIT_CACHE
+    sig = (_ssot_datei_signatur("fazit_schmiede"),)
+    if _HAUS_FAZIT_CACHE is not None and _HAUS_FAZIT_CACHE[0] == sig:
+        return _HAUS_FAZIT_CACHE[1]
+    saetze: set[str] = set()
+    s3, _ = _ssot_wert("fazit_schmiede", "generate_fazit_text.s3")
+    if isinstance(s3, str) and len(_vergleichsform(s3)) >= 40:
+        saetze.add(_vergleichsform(s3).rstrip("."))
+    smap, _ = _ssot_wert("fazit_schmiede", "generate_fazit_text.sentence_map")
+    if isinstance(smap, dict):
+        for v in smap.values():
+            if isinstance(v, str) and len(_vergleichsform(v)) >= 40:
+                saetze.add(_vergleichsform(v).rstrip("."))
+    geordnet = tuple(sorted(saetze, key=len, reverse=True))
+    wert = (_fazit_s1_muster(), geordnet)
+    _HAUS_FAZIT_CACHE = (sig, wert)
+    return wert
+
+
+def ist_haus_fazit(text: str) -> bool:
+    """True, wenn der Absatz NUR aus Bausteinen der Fazit-Schmiede besteht (#1230).
+
+    Bewusst genauso streng wie `ist_haus_cta` (C19/C34, kein Freibrief):
+      1. mindestens ein wörtlicher Baustein aus `fazit_schmiede.generate_fazit_text`
+         (`s3` oder `sentence_map[route]`) muss enthalten sein,
+      2. interne Link-Klammern werden auf ihren Ankertext entpackt (damit
+         `[fünf Minuten](../../posts/…/)` den SSOT-Wortlaut weiter trifft),
+      3. der optionale RS5-Zusatz (`; das ist ein Rechenbeispiel.` /
+         `Modellwert` / `Modellannahme`) wird nur nach Baustein-Treffer entfernt,
+      4. bleibt irgendein eigener Redaktionssatz übrig, greift die Ausnahme NICHT.
+    """
+    if not text or "http://" in text or "https://" in text:
+        return False
+    s1_re, bausteine = haus_fazit_bausteine()
+    if not bausteine:
+        return False
+    entpackt = _INTERNER_LINK_ANKER_RE.sub(r"\1", text)
+    rest = _vergleichsform(entpackt)
+    treffer = False
+    for b in bausteine:
+        if b in rest:
+            rest = rest.replace(b, " ")
+            treffer = True
+    if not treffer:
+        return False
+    if s1_re is not None:
+        rest = s1_re.sub(" ", rest)
+    rest = _RS5_MODELLZUSATZ_RE.sub(" ", rest)
+    return REST_SCHMUCK_RE.sub("", rest) == ""
+
+
 def haus_template_grund(text: str) -> str:
     """Warum ein Block ausgenommen ist – Ausnahmen müssen sichtbar sein.
 
@@ -423,6 +588,8 @@ def haus_template_grund(text: str) -> str:
             return f"Haus-Text (`{quelle}`)"
     if ist_haus_cta(text):
         return "Haus-CTA (Bausteine aus affiliate_intent_contract)"
+    if ist_haus_fazit(text):
+        return "Haus-Fazit (Bausteine aus fazit_schmiede.generate_fazit_text, #1230)"
     if ist_navigation(text):
         return ("Navigation (interner Link, kein Fließtext – SSOT "
                 "template_boilerplate.ist_nur_navigation, Issue #824)")
