@@ -64,7 +64,7 @@ So hältst du finanziell Kurs.
 **Das Wichtigste in Kürze**
 * **Sofortiges Handeln:** Dein Gaspreiserhöhung Sonderkündigungsrecht erlaubt dir den Ausstieg ohne lange Fristen.
 * **Grundtarif-Falle:** Die Preise in der Grundversorgung liegen oft deutlich über den Tarifen alternativer Anbieter.
-* **Wechsel-Vorteil:** Ein Vergleich findet Tarife mit [Preisgarantie](../../posts/2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/) und sichert dich gegen weitere Sprünge ab.
+* **Wechsel-Vorteil:** Ein Vergleich findet Tarife mit Preisgarantie und sichert dich gegen weitere Sprünge ab.
 * **Bonus-Check:** Eine Gasanbieter Wechsel Prämie senkt die Kosten im ersten Jahr (Modellrechnung), erfordert aber eine genaue Prüfung.
 
 ## Kosten sehen: Warum wird dein Gas jetzt teurer?

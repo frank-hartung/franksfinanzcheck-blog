@@ -25,6 +25,12 @@ cover:
   image: "images/covers/2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet.jpg"
   alt: "Wertvolle Gebrauchte Möbel finden: So prüfst du Qualität"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: cadd62703d3c9d823cdb71a27cd907d1a9a1ab1f072051b8ee495d19c167455c
+    geprueft_am: 2026-11-17
 faktencheck: 2026-11-17
 ---
 

@@ -27,12 +27,18 @@ cover:
   image: "images/covers/2026-11-16-stabile-gaskosten-lohnt-sich-eine-preisgarantie-fuer-dich.jpg"
   alt: "Stabile Gaskosten: Lohnt sich eine Preisgarantie für dich?"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 780243fb2a89978a199d954f83acdcd59ee0217a10fb8237671212862b4af068
+    geprueft_am: 2026-11-17
 faktencheck: 2026-11-16
 ---
 
 Der Briefkasten klappert. Du ziehst einen Umschlag heraus. Absender: Dein Energieversorger. Oft bedeutet das nichts Gutes für dein Konto.
 
-Die Kosten für Energie schwanken stark. Mal sinken sie, dann schießen sie plötzlich wieder nach oben. Viele Menschen fragen sich, wie sie ihre Fixkosten planen können. Eine **gas [preisgarantie](../../posts/2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/)** bietet hier eine Lösung.
+Die Kosten für Energie schwanken stark. Mal sinken sie, dann schießen sie plötzlich wieder nach oben. Viele Menschen fragen sich, wie sie ihre Fixkosten planen können. Eine **gas preisgarantie** bietet hier eine Lösung.
 
 Du versprichst Schutz vor Überraschungen. Doch hält sie immer, was der Name verspricht?
 

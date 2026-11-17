@@ -25,6 +25,12 @@ cover:
   image: "images/covers/2026-11-17-vorrat-planen-leicht-gemacht-so-sparst-du-beim.jpg"
   alt: "Vorrat planen leicht gemacht: So sparst"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 696663d862716e2bfd3d7df56666ca491d581c5319f60baca685af554baea4b0
+    geprueft_am: 2026-11-17
 faktencheck: 2026-11-17
 ---
 

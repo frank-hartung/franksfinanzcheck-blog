@@ -6,7 +6,7 @@ Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
 **Bezugsstand: 2026-11-17** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
 
-**137 offene Live-Befunde auf 36 Artikeln.** Für **101** gibt es frühere Entscheidungen zu diesem Befund;
+**132 offene Live-Befunde auf 35 Artikeln.** Für **96** gibt es frühere Entscheidungen zu diesem Befund;
 die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **36** Befunde haben keine frühere aktive Entscheidung.
 
 Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus `data/faktenfrische_befunde_state.json`,
@@ -54,13 +54,13 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 
 ## `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas`
 
-- Datei-SHA256 (heute): `ba26b60dfbd589f3c71eb776c7a97a6bf2ed5f18bd1a5abb3a6cbf16b472a96b`
+- Datei-SHA256 (heute): `3867377b50060312656be633a4bf47b8257f8dff9532e279b5983c055a0bb49b`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
 | `124ff2c3cd3917c274aa` | praezision | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Bewerbung des Vergleichsportals mit dem Superlativ 'Die besten Tarife' erfolgt ohne messbare Daten oder Auswahlkr… |
-| `7bdec96c0329769bebe6` | luecke | 2026-11-04 · 1. Entscheidung | 13 Cent in Zeile 3 ohne Kennzeichnung | Die im Artikel als Fakten genannten Gaspreise für Oktober 2026 (11 bis 13 Cent/kWh) sind nicht durch die Fundstelle b… |
+| `7bdec96c0329769bebe6` | luecke | 2026-11-04 · 1. Entscheidung | 13 Cent in Zeile 97 ohne Kennzeichnung | Die im Artikel als Fakten genannten Gaspreise für Oktober 2026 (11 bis 13 Cent/kWh) sind nicht durch die Fundstelle b… |
 | `a56734aa032e0ed9e0c4` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Der für den Verbraucherschutz zentrale Regulierungsrahmen (Sonderkündigungsrecht, Informationspflichten der Versorger… |
 
 ### `124ff2c3cd3917c274aa`
@@ -81,7 +81,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Superlativ entfernt; Gaspreis-Spanne Okt. 2026 gestrichen und durch BDEW-Gaspreisanalyse Herbst 2026 (12,23 ct/kWh EFH) mit Link ersetzt; Regulierungsrahmen (Sonderkündigung/Ankündigung) mit Bundesnetzagentur-Beleg ergänzt.
 
-- Heute in Zeile 3: 13 Cent – **ohne** Kennzeichnung
+- Heute in Zeile 97: 13 Cent – **ohne** Kennzeichnung
 
 ### `a56734aa032e0ed9e0c4`
 
@@ -95,7 +95,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026`
 
-- Datei-SHA256 (heute): `2db5376d94532e96a232f6b8bc0188f8c061958e1201a75ed64af572e2151082`
+- Datei-SHA256 (heute): `40e15ac56e03820c5f9e92337b1bface6a0856dfc5ae854c1c3c2f888e5fa841`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -886,7 +886,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor`
 
-- Datei-SHA256 (heute): `602fbdc87d05cac076aef130fab5f315e27a2cdd29e3c4f62a673a1584ccbe71`
+- Datei-SHA256 (heute): `85c27b558f696e272486aca45dc5b896a5a76a5696cb69a7c0623156c8e40813`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1076,79 +1076,16 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
-## `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig`
-
-- Datei-SHA256 (heute): `51a4de1ead204c71d9a9066b48823858aaba14826ebd8d88dd0c6941aac40ac7`
-- Offene Live-Befunde: **5**
-
-| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
-|---|---|---|---|---|
-| `04e40219cb4ff593b415` | praezision | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Angabe, dass Anbieter den Abschlag auf elf oder zwölf Raten verteilen, ist ohne Beleg ungenau, da die Ratenzahl v… |
-| `2d01dc2629ad9c81f569` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Aussage, dass die Grundversorgung fast immer der teuerste Tarif ist, wird nicht durch eine Quelle belegt. |
-| `3fd64026f55df4965cc9` | luecke | 2026-11-04 · 1. Entscheidung | 6 % in Zeile 9 ohne Kennzeichnung | Die Angabe, dass ein Grad weniger Raumtemperatur rund 6 % Heizenergie einspart, fehlt eine Quellenangabe. |
-| `799c93c89a10fc3cf267` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Das Sonderkündigungsrecht bei Preiserhöhungen im Winter wird genannt, ohne regulatorische Grundlage zu nennen. |
-| `cd81b3d9001b04c0a4e1` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Behauptung, der Grundtarif der Stadtwerke sei ausschließlich eine Notversorgung und nie ein Bestpreis, ist unbelegt. |
-
-### `04e40219cb4ff593b415`
-
-**Befund:** Die Angabe, dass Anbieter den Abschlag auf elf oder zwölf Raten verteilen, ist ohne Beleg ungenau, da die Ratenzahl vertraglich variieren kann.
-
-**Frühere Entscheidung (2026-11-04):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 04.11.2026)
-
-> Ratenzahl-Aussage relativiert (vertraglich verschieden); Grundversorgung-Superlative abgeschwächt; 6-%-Faustwert belegt; Sonderkündigung mit Regulierungsgrundlage (Bundesnetzagentur) versehen.
-
-Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
-
-### `2d01dc2629ad9c81f569`
-
-**Befund:** Die Aussage, dass die Grundversorgung fast immer der teuerste Tarif ist, wird nicht durch eine Quelle belegt.
-
-**Frühere Entscheidung (2026-11-04):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 04.11.2026)
-
-> Ratenzahl-Aussage relativiert (vertraglich verschieden); Grundversorgung-Superlative abgeschwächt; 6-%-Faustwert belegt; Sonderkündigung mit Regulierungsgrundlage (Bundesnetzagentur) versehen.
-
-Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
-
-### `3fd64026f55df4965cc9`
-
-**Befund:** Die Angabe, dass ein Grad weniger Raumtemperatur rund 6 % Heizenergie einspart, fehlt eine Quellenangabe.
-
-**Frühere Entscheidung (2026-11-04):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 04.11.2026)
-
-> Ratenzahl-Aussage relativiert (vertraglich verschieden); Grundversorgung-Superlative abgeschwächt; 6-%-Faustwert belegt; Sonderkündigung mit Regulierungsgrundlage (Bundesnetzagentur) versehen.
-
-- Heute in Zeile 9: 6 % – **ohne** Kennzeichnung
-
-### `799c93c89a10fc3cf267`
-
-**Befund:** Das Sonderkündigungsrecht bei Preiserhöhungen im Winter wird genannt, ohne regulatorische Grundlage zu nennen.
-
-**Frühere Entscheidung (2026-11-04):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 04.11.2026)
-
-> Ratenzahl-Aussage relativiert (vertraglich verschieden); Grundversorgung-Superlative abgeschwächt; 6-%-Faustwert belegt; Sonderkündigung mit Regulierungsgrundlage (Bundesnetzagentur) versehen.
-
-Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
-
-### `cd81b3d9001b04c0a4e1`
-
-**Befund:** Die Behauptung, der Grundtarif der Stadtwerke sei ausschließlich eine Notversorgung und nie ein Bestpreis, ist unbelegt.
-
-**Frühere Entscheidung (2026-11-04):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 04.11.2026)
-
-> Ratenzahl-Aussage relativiert (vertraglich verschieden); Grundversorgung-Superlative abgeschwächt; 6-%-Faustwert belegt; Sonderkündigung mit Regulierungsgrundlage (Bundesnetzagentur) versehen.
-
-Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
-
 ## `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss`
 
-- Datei-SHA256 (heute): `2d04c9bc404b602f8886610aa1b4e8e632db2d734f0df344f520dd0f558e9daa`
+- Datei-SHA256 (heute): `2ad5aa69e09eed102a9c3b07ac5b2f26f1c00f475c572e163fc9db519f5bfedd`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
 | `6b5921bdc76490587167` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Seit 2026 nutzen die großen Anbieter die Technik mit dem Namen Vectoring; das ist ein Modellwert. Sie senkt das Rausc… |
-| `8436b91bdb63a6316979` | praezision | **neu** | 12 Monate in Zeile 11 ohne Kennzeichnung · 10 % in Zeile 40 ohne Kennzeichnung | Preisgarantie über mindestens 12 Monate; ohne Garantie darf der Anbieter bald erhöhen, oft um bis zu 10 %. |
-| `a4ff01e649b789f19e6a` | luecke | **neu** | 40 € in Zeile 59 gekennzeichnet | Für 50 Mbps zahlst du heute meist ca. 20–40 € im Monat; das ist ein Beispielwert. |
+| `8436b91bdb63a6316979` | praezision | **neu** | 12 Monate in Zeile 10 ohne Kennzeichnung · 10 % in Zeile 39 ohne Kennzeichnung | Preisgarantie über mindestens 12 Monate; ohne Garantie darf der Anbieter bald erhöhen, oft um bis zu 10 %. |
+| `a4ff01e649b789f19e6a` | luecke | **neu** | 40 € in Zeile 58 gekennzeichnet | Für 50 Mbps zahlst du heute meist ca. 20–40 € im Monat; das ist ein Beispielwert. |
 
 ### `6b5921bdc76490587167`
 
@@ -1164,8 +1101,8 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 **Frühere Entscheidung:** keine – dieser Befund ist neu.
 
-- Heute in Zeile 11: 12 Monate – **ohne** Kennzeichnung
-- Heute in Zeile 40: 10 % – **ohne** Kennzeichnung
+- Heute in Zeile 10: 12 Monate – **ohne** Kennzeichnung
+- Heute in Zeile 39: 10 % – **ohne** Kennzeichnung
 
 ### `a4ff01e649b789f19e6a`
 
@@ -1173,7 +1110,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 **Frühere Entscheidung:** keine – dieser Befund ist neu.
 
-- Heute in Zeile 59: 40 € – gekennzeichnet („beispielwert“)
+- Heute in Zeile 58: 40 € – gekennzeichnet („beispielwert“)
 
 ## `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage`
 
@@ -1897,11 +1834,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6ad7358a9afcfef3bab
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7c375a3e1a9bfab1468c --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ea11d36614fa115503b4 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f7b1c869dd8e442eaf16 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 04e40219cb4ff593b415 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2d01dc2629ad9c81f569 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3fd64026f55df4965cc9 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 799c93c89a10fc3cf267 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden cd81b3d9001b04c0a4e1 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6b5921bdc76490587167 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8436b91bdb63a6316979 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a4ff01e649b789f19e6a --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"

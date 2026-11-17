@@ -47,7 +47,7 @@ quellen:
 faktencheck: 2026-11-01
 ---
 
-Ein Tarifportal findet in Sekunden hunderte Gastarife. Danach kommt die echte Arbeit: Filter zurücksetzen, Bonus ausblenden und schauen, ob [Preisgarantie](../../posts/2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/) und Laufzeit zueinander passen.
+Ein Tarifportal findet in Sekunden hunderte Gastarife. Danach kommt die echte Arbeit: Filter zurücksetzen, Bonus ausblenden und schauen, ob Preisgarantie und Laufzeit zueinander passen.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 

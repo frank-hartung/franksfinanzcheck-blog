@@ -299,6 +299,17 @@ schritte:
     grund: >-
       Ohne lauffähige Wache bliebe die Cover-Herkunft ungeprüft – ein
       ungeklärtes Cover dürfte nicht ausgeliefert werden.
+  - name: Cover-Herkunft – Belege nachziehen (selbstheilend, VOR der Wache)
+    klasse: inhalt
+    schuetzt: Cover-Herkunft – Reproduktionswache (fail-closed)
+    grund: >-
+      Dieser Schritt schreibt eine Herkunftserklärung ins Frontmatter
+      (cover.ki_pruefung) – allerdings nur für Cover, deren Pixelmessung im
+      selben Lauf grün war. Ein abweichendes Cover wird nicht attestiert und
+      bleibt für die Wache hart (#1236-Folge, Lauf 44123560026: sechs
+      reproduzierbare Cover ohne Beleg hielten die Auslieferung an). Eine
+      blinde Attestation wäre eine falsche Erklärung, deshalb darf der
+      Schritt blockieren, wenn er nicht schreiben kann.
   - name: Cover-Herkunft – Reproduktionswache (fail-closed)
     klasse: inhalt
     grund: >-
@@ -318,15 +329,19 @@ schritte:
     klasse: inhalt
     grund: Gebaute Seiten mit kaputter Überschriftenstruktur gehen nicht live.
 
-  - name: KI-Provenienz – Selbstheilung (Anker + Feed-Spiegelung, VOR dem Build)
+  - name: KI-Provenienz – Selbstheilung (Anker + Feed-Spiegelung + llms.txt, VOR dem Build)
     klasse: inhalt
     grund: >
       Dieser Schritt schreibt an kennzeichnungspflichtige Quellen: den Anker
       {#ki-hinweis} im Impressum (Ziel jedes rel="describedby" und jedes
-      ffki:describedby im Feed) und die Bytgleichheit der beiden RSS-Vorlagen.
-      Scheitert er, fehlt der maschinenlesbaren KI-Kennzeichnung das Ziel –
-      ein Kennzeichnungsbefund (Art. 50 KI-VO, Frist 02.12.2026), kein
-      Technikfehler. Er darf blockieren.
+      ffki:describedby im Feed), die Bytgleichheit der beiden RSS-Vorlagen und
+      static/llms.txt, den Kanal für KI-Antwortmaschinen (Regel M9, Erzeugnis
+      von generate_llms_txt.py – Nachzug nur mit Gegenprobe und bytegenauem
+      Rollback, #1236/#1255). Scheitert er, fehlt der maschinenlesbaren
+      KI-Kennzeichnung das Ziel – ein Kennzeichnungsbefund (Art. 50 KI-VO,
+      Frist 02.12.2026), kein Technikfehler. Er darf blockieren. Ein
+      abgebrochener Generator ist dagegen eine blinde Messung (W0, Exit 2) und
+      geht über werkzeugbefund.py, nicht als Inhaltsfund.
 
   - name: KI-Provenienz – Selbsttest
     klasse: gate-selbsttest

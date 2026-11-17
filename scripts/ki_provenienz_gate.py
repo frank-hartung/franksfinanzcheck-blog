@@ -59,18 +59,36 @@ M7  Spiegelung    layouts/rss.xml und layouts/_default/rss.xml sind bytgleich
 M9  llms.txt      Der Kanal für KI-Antwortmaschinen nennt die Herkunft:
     maschinenlesbare Kennzeichnung, Erzeugungsart in Bild und Ton,
     Betreiber-Erklärung statt Anbieterpflicht, kein Herkunftsbeweis.
+    Und die Datei ist das ERZEUGNIS des Generators: Weicht sie von
+    `scripts/generate_llms_txt.py` ab, ist die geprüfte Fassung nicht die
+    ausgelieferte (dieselbe Logik wie M7 beim RSS-Spiegel).
 
 SELBSTHEILUNG
 -------------
 `--heilen` repariert, was deterministisch reparierbar ist (Impressum-Anker,
-RSS-Spiegelung, unmarkierte Bild-Ableitungen), schreibt jede Zeile in das
-append-only-Ledger `data/ki_provenienz_history.jsonl` und meldet alles
-Übrige als Eskalation. Eine Heilung, die eine Entscheidung erfindet, ist
-schlimmer als keine: Anbieter-Auskünfte, Bildherkunft und die Belege der
-`menschlich`-Einträge bleiben Menschen vorbehalten.
+RSS-Spiegelung, unmarkierte Bild-Ableitungen, Bestands-Drift der
+`static/llms.txt`), schreibt jede Zeile in das append-only-Ledger
+`data/ki_provenienz_history.jsonl` und meldet alles Übrige als Eskalation.
+Eine Heilung, die eine Entscheidung erfindet, ist schlimmer als keine:
+Anbieter-Auskünfte, Bildherkunft und die Belege der `menschlich`-Einträge
+bleiben Menschen vorbehalten. Die llms.txt ist die Ausnahme, die keine ist:
+Ihre richtige Fassung steht vor der Heilung fest – sie ist das Erzeugnis des
+Generators aus demselben Live-Bestand, den M9 misst. Geschrieben wird sie
+nur nach bestandener Gegenprobe (Abschnitt + alle M9-Anker), sonst geht die
+alte Fassung bytegenau zurück (#1236).
 
 `--wache` heilt, misst nach, führt das Alter der ungeklärten Register-
 Einträge in `data/ki_provenienz_state.json` und sagt, was offen ist.
+
+INHALTSBEFUND ≠ WERKZEUGFEHLER
+------------------------------
+Blind ist nicht rot: Fehlt ein Messwerkzeug (PyYAML, Pillow) oder bricht der
+llms.txt-Generator ab, ist das W0 und Exit 2 – nie ein Kennzeichnungsbefund.
+M9 warf beides zusammen; ein defekter Generator hätte denselben Deploy-Stopp
+ausgelöst wie eine wirklich kennzeichnungsfreie Datei und dieselbe Reparatur
+verlangt. Das Gate wurde für die Heilung nicht abgeschaltet: Ein echter
+Kennzeichnungsbefund blockiert weiter (Art. 50 Abs. 2 KI-VO, Frist
+02.12.2026).
 
 Aufruf
 ------
@@ -557,17 +575,13 @@ def regel_m6(root: Path):
     return funde
 
 
-# Die Angaben, ohne die ein Sprachmodell den Korpus falsch einordnet:
-# Es muss erkennen können, was maschinell entstanden ist, was das NICHT
-# beweist und dass der Zitier-Rahmen weiter gilt. Geprüft wird auf
-# inhaltliche Anker, nicht auf den Wortlaut – der Generator darf den Text
-# umformulieren, aber nicht den Sachverhalt verlieren.
-LLMS_ANKER = (
-    ("ai-generated", "nennt die maschinenlesbare Kennzeichnung nicht"),
-    ("DigitalSourceType", "nennt die Erzeugungsart in Bild/Ton nicht"),
-    ("Art. 50", "verwechselt Betreiber-Erklärung und Anbieterpflicht"),
-    ("kein Herkunftsbeweis", "behauptet mehr, als die Angaben tragen"),
-)
+# Die Angaben, ohne die ein Sprachmodell den Korpus falsch einordnet, stehen
+# als Vokabular in `ki_provenienz.py` – dieselbe Liste ist dort die
+# Abnahmegrenze der Heilung (`_llms_heilen`). Zwei Kopien würden
+# auseinanderlaufen: Die Prüfung forderte dann einen Anker, den die Heilung
+# nicht kennt, oder umgekehrt.
+LLMS_ANKER = kp.LLMS_ANKER
+LLMS_ABSCHNITT = kp.LLMS_ABSCHNITT
 
 
 def regel_m9(root: Path):
@@ -590,7 +604,7 @@ def regel_m9(root: Path):
         text = datei.read_text(encoding="utf-8")
     except OSError as exc:
         return [_fund("M9", f"static/llms.txt nicht lesbar: {exc}", "static/llms.txt")]
-    if "KI-Kennzeichnung" not in text:
+    if LLMS_ABSCHNITT not in text:
         return [_fund("M9", "static/llms.txt hat keinen Abschnitt zur "
                             "KI-Kennzeichnung (`generate_llms_txt.py` laufen lassen)",
                       "static/llms.txt")]
@@ -604,23 +618,28 @@ def regel_m9(root: Path):
                       "static/llms.txt")]
     # Der Generator ist die Quelle: Weicht die Datei ab, ist die geprüfte
     # Fassung nicht die ausgelieferte (dieselbe Logik wie M7 beim RSS-Spiegel).
-    # Nur für den ECHTEN Repo-Baum: Der Generator liest `content/` des Repos,
-    # nicht die Prüfliage des Selbsttests. Eine Drift-Messung gegen ein
-    # Fixture wäre immer rot und damit wertlos.
-    if root.resolve() != ROOT.resolve():
-        return []
-    import subprocess  # noqa: PLC0415
-    import sys  # noqa: PLC0415
-    try:
-        lauf = subprocess.run([sys.executable, str(root / "scripts" / "generate_llms_txt.py"),
-                               "--check"], capture_output=True, text=True, timeout=60)
-    except (OSError, subprocess.SubprocessError) as exc:
-        return [_fund("M9", f"Drift-Prüfung der llms.txt nicht möglich ({exc})",
-                      "static/llms.txt")]
-    if lauf.returncode != 0:
+    # Gemessen wird über `kp.llms_drift()` – denselben Weg, den die Heilung
+    # nimmt (eine Messung, keine zwei Wahrheiten). `unmessbar` heißt:
+    # Prüfliage des Selbsttests; der Generator rechnet aus dem echten
+    # Repo-Baum, eine Messung gegen ein Fixture wäre immer rot und damit
+    # wertlos.
+    # `fehlend` kann hier nicht ankommen: Ohne Datei meldet M9 weiter oben
+    # bereits „Kanal nicht prüfbar" und gibt nicht „weicht ab" aus.
+    drift = kp.llms_drift(root)
+    if drift == "drift":
         return [_fund("M9", "static/llms.txt weicht vom Generator ab – die geprüfte "
                             "Fassung ist nicht die ausgelieferte "
                             "(`generate_llms_txt.py` laufen lassen)", "static/llms.txt")]
+    if drift == "werkzeug":
+        # Blind ≠ rot: Ein Generator, der nicht läuft, ist ein Messausfall
+        # (Exit 2) und kein Kennzeichnungsbefund. Bis 17.11.2026 warf M9
+        # beides zusammen – ein defekter Generator hätte denselben
+        # Deploy-Stopp ausgelöst wie eine wirklich kennzeichnungsfreie Datei
+        # und dieselbe Reparatur verlangt (#1236: echte Inhaltsbefunde von
+        # technischen Werkzeugfehlern trennen).
+        return [_fund("W0", f"Drift-Prüfung der llms.txt nicht möglich – "
+                            f"{kp.LLMS_GENERATOR} bricht ab. Regel M9 "
+                            "ist blind, nicht grün.", "static/llms.txt")]
     return []
 
 
@@ -1178,6 +1197,26 @@ def selbsttest() -> int:
         llms.write_text(llms_original, encoding="utf-8")
         if any(f["regel"] == "M9" for f in pruefen(root)[0]):
             fehler.append("M9 bleibt nach der Wiederherstellung rot")
+
+        # 8c) Heilung der llms.txt: Gegenprobe und Prüfliagen-Trennung.
+        # Zwei Dinge dürfen nie passieren: (a) die Heilung schreibt eine
+        # Fassung, die M9 danach trotzdem rot macht – dann wäre öffentlich
+        # erreichbar, was die Prüfung ablehnt; (b) die Heilung schreibt in
+        # eine Prüfliage, die keinen eigenen Generator mitbringt. Misst sie
+        # dort gegen den Generator des Repos, würde die echte static/llms.txt
+        # mit Fixture-Inhalt überschrieben.
+        if kp.llms_mangel(llms_original):
+            fehler.append("llms_mangel() lehnt die gültige Generator-Fassung ab")
+        if not kp.llms_mangel("# FranksFinanzcheck\n\nNur Zitierhinweise.\n"):
+            fehler.append("llms_mangel() lässt eine Fassung ohne Herkunftsaussage durch")
+        if kp.llms_drift(root) != "unmessbar":
+            fehler.append("llms_drift() misst eine Prüfliage ohne eigenen Generator")
+        vor_heilung = llms.read_bytes()
+        ergebnis = heilen(root)
+        if any(e["art"] == "llms" for e in ergebnis["eingriffe"]):
+            fehler.append("heilen() meldet eine llms.txt-Heilung in einer Prüfliage")
+        if llms.read_bytes() != vor_heilung:
+            fehler.append("heilen() hat die llms.txt der Prüfliage verändert")
 
         # 9) Heilung des Impressum-Ankers + Belegzeile
         imp = root / kp.IMPRESSUM
