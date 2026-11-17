@@ -2,13 +2,13 @@
 
 _Stand 2026-11-17 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**219 offene Befunde auf 57 Seiten · davon 36 Live-Seiten mit 137 Befunden · ältester 18 Tage · Frist 14 Tage.**
+**214 offene Befunde auf 56 Seiten · davon 35 Live-Seiten mit 132 Befunden · ältester 18 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 219 |
-| Seiten betroffen | 57 (davon live: 36) |
-| Text seit dem Befund geändert | 171 |
+| Offene Befunde | 214 |
+| Seiten betroffen | 56 (davon live: 35) |
+| Text seit dem Befund geändert | 166 |
 | Altbestand ohne Fassungs-Hash | 11 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
 | Über der Frist (14 Tage) | 37 |
@@ -32,7 +32,7 @@ _Stand 2026-11-17 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 182 von 219 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 177 von 214 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -126,26 +126,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 36759a5efe5e8e5163d
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 942922d1afd7844618e9 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d41f0d5ce8798df0211b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e139d0769faadd04392a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
-
-Datei: `content/posts/2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `04e40219cb4ff593b415` | praezision | 14 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Angabe, dass Anbieter den Abschlag auf elf oder zwölf Raten verteilen, ist ohne Beleg ungenau, da die Ratenzahl vertraglich variieren kann. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `2d01dc2629ad9c81f569` | luecke | 14 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Aussage, dass die Grundversorgung fast immer der teuerste Tarif ist, wird nicht durch eine Quelle belegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `3fd64026f55df4965cc9` | luecke | 14 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Angabe, dass ein Grad weniger Raumtemperatur rund 6 % Heizenergie einspart, fehlt eine Quellenangabe. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `799c93c89a10fc3cf267` | luecke | 14 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Das Sonderkündigungsrecht bei Preiserhöhungen im Winter wird genannt, ohne regulatorische Grundlage zu nennen. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `cd81b3d9001b04c0a4e1` | luecke | 14 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Behauptung, der Grundtarif der Stadtwerke sei ausschließlich eine Notversorgung und nie ein Bestpreis, ist unbelegt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 04e40219cb4ff593b415 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2d01dc2629ad9c81f569 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3fd64026f55df4965cc9 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 799c93c89a10fc3cf267 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden cd81b3d9001b04c0a4e1 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
