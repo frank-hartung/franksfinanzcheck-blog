@@ -1,13 +1,12 @@
 # Release-Bestand – Selbstheilung
 
-**Stand:** 2026-11-15T12:44:51Z · **Status:** bestaetigt
+**Stand:** 2026-11-17T14:20:11Z · **Status:** nichts-zu-heilen
 
 Die Scorecard misst; dieser Lauf heilt nur die sichere, deterministische Teilmenge.
 Fachbefunde und Freigaben bleiben menschlich. Ein verworfener Versuch wird vollständig zurückgerollt.
 
 | Artikel | Ziel-Checks | Heiler |
 |---|---|---|
-| `2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar` | T6-textverstaendnis | r5_absatz_splitter |
 
 ## Übergabe an Redaktion/Fachwache
 
@@ -28,13 +27,22 @@ Fachbefunde und Freigaben bleiben menschlich. Ein verworfener Versuch wird volls
 - `2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
+- `2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
+- `2026-10-02-gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
+- `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
+- `2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
+- `2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
+- `2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
+- `2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
+- `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
 - `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
+- `2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang` (F4-fachbefund): menschlicher Prüfstand: F4-fachbefund
