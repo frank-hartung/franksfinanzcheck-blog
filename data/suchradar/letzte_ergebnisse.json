@@ -1,5 +1,5 @@
 {
- "zeitstempel": "2026-11-16T16:12:51.173353+02:00",
+ "zeitstempel": "2026-11-17T17:04:13.698767+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 25,
  "zaehlung": {
@@ -9,32 +9,33 @@
   "uebersprungen": 0
  },
  "treffer_gesamt": 187,
- "treffer_organisch": 0,
+ "treffer_organisch": 10,
  "datenqualitaet": {
   "anfragen_erfolgreich": 22,
-  "anfragen_organisch": 0,
-  "anfragen_rueckfall": 22,
+  "anfragen_organisch": 1,
+  "anfragen_rueckfall": 21,
   "treffer_gesamt": 187,
-  "treffer_organisch": 0,
-  "treffer_rueckfall": 187,
-  "rueckfall_anteil": 1.0,
+  "treffer_organisch": 10,
+  "treffer_rueckfall": 177,
+  "rueckfall_anteil": 0.947,
   "anbieter": {
-   "wikipedia": 22
+   "wikipedia": 21,
+   "searxng": 1
   },
-  "aussagekraft": "keine"
+  "aussagekraft": "eingeschraenkt"
  },
  "fehler": [
   {
    "anfrage": "franksfinanzcheck.de",
-   "fehler": "Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: https://opnxng.com/search?q=franksfinanzcheck.de&language=de&categories=general&pageno=1&safesearch=0: Remote end closed connection without response | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: kei"
+   "fehler": "Kein Anbieter lieferte Treffer für 'franksfinanzcheck.de': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   },
   {
    "anfrage": "Gaskosten senken",
-   "fehler": "Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: https://opnxng.com/search?q=Gaskosten+senken&language=de&categories=general&pageno=1&safesearch=0: Remote end closed connection without response | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treff"
+   "fehler": "Kein Anbieter lieferte Treffer für 'Gaskosten senken': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   },
   {
    "anfrage": "Urlaubskosten planen",
-   "fehler": "Kein Anbieter lieferte Treffer für 'Urlaubskosten planen': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://opnxng.com: https://opnxng.com/search?q=Urlaubskosten+planen&language=de&categories=general&pageno=1&safesearch=0: Remote end closed connection without response | https://priv.au: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: kei"
+   "fehler": "Kein Anbieter lieferte Treffer für 'Urlaubskosten planen': searxng: SearXNG: keine Instanz lieferte Treffer – https://paulgo.io: keine Treffer | https://priv.au: keine Treffer | https://opnxng.com: keine Treffer | https://baresearch.org: keine Treffer | duckduckgo: DuckDuckGo: keine Treffer (Blockade oder  Markup-Änderung?) | duckduckgo_lite: DuckDuckGo Lite: keine Treffer (Blockade oder  Markup-Änderung?) | mojeek: Mojeek: robots.txt verbietet /search | wikipedia: keine Treffer"
   }
  ],
  "rang": [
@@ -55,7 +56,7 @@
    "delta": 0,
    "titel": "",
    "url": "",
-   "quelle": "wikipedia",
+   "quelle": "searxng",
    "sichtbar": false
   },
   {
@@ -120,16 +121,6 @@
   },
   {
    "anfrage": "Stromanbieter wechseln",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Umstellung",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -249,6 +240,16 @@
    "sichtbar": false
   },
   {
+   "anfrage": "Versicherung",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
    "anfrage": "Versicherungen kündigen",
    "eigener_rang": 0,
    "vorher": 0,
@@ -260,11 +261,113 @@
   }
  ],
  "wettbewerb": {
-  "domaenen": [],
-  "domaenen_gesamt": 0,
+  "domaenen": [
+   {
+    "domaene": "ing.de",
+    "treffer": 1,
+    "top3": 1,
+    "bester_rang": 1,
+    "durchschnitts_rang": 1.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "lexware.de",
+    "treffer": 1,
+    "top3": 1,
+    "bester_rang": 2,
+    "durchschnitts_rang": 2.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "bank99.at",
+    "treffer": 1,
+    "top3": 1,
+    "bester_rang": 3,
+    "durchschnitts_rang": 3.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "schuldnerberatung.de",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 4,
+    "durchschnitts_rang": 4.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "sparkasse.de",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 5,
+    "durchschnitts_rang": 5.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "ndr.de",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 6,
+    "durchschnitts_rang": 6.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "peaks.com",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 7,
+    "durchschnitts_rang": 7.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "meetadam.io",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 8,
+    "durchschnitts_rang": 8.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "sparkasse-koelnbonn.de",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 9,
+    "durchschnitts_rang": 9.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   },
+   {
+    "domaene": "sparschweinclub.de",
+    "treffer": 1,
+    "top3": 0,
+    "bester_rang": 10,
+    "durchschnitts_rang": 10.0,
+    "anfragen": [
+     "Fixkosten senken"
+    ]
+   }
+  ],
+  "domaenen_gesamt": 10,
   "merkmale": {}
  },
  "quota": {
-  "wikipedia": 22
+  "searxng": 1,
+  "wikipedia": 21
  }
 }

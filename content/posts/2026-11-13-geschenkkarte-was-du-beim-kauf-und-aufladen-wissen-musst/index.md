@@ -44,6 +44,8 @@ Eine **Geschenkkarte** liegt dort oft monatelang zwischen alten Quittungen.
 Du fragst dich sofort, wie [viel Guthaben](../../posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/) noch auf dem Chip schlummert.
 Viele Haushalte nutzen diese Karten für spontane Einkäufe oder als schnelles Präsent.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 Hinter dem bunten Design lauern jedoch oft Fristen und versteckte Gebühren.
 Du solltest diese Kleinstbeträge genau prüfen, um deine Fixkosten im Griff zu behalten.
 Ein bewusster Umgang mit dem digitalen Geld schont dein monatliches Budget.

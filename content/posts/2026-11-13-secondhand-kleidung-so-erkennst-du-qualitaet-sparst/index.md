@@ -8,7 +8,7 @@ tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget 
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["Secondhand Kleidung", "Gebraucht kaufen Qualität", "Kleidung sparen", "Secondhand", "Kleidung"]
+keywords: ["Secondhand Kleidung", "Gebraucht kaufen Qualität", "Kleidung sparen", "Secondhand"]
 pin_title: "Secondhand Kleidung: So erkennst du Qualität & sparst"
 pin_description: "*Werbung | Erfahre, wie du hochwertige Secondhand Kleidung erkennst. Mit meinen Tipps prüfst du Stoffe und Nähte, um beim Kleidung sparen echte Qualität zu finden. Mehr Spartipps auf FranksFinanzcheck! #secondhand #kleidung #gebraucht"
 ai_generated: true

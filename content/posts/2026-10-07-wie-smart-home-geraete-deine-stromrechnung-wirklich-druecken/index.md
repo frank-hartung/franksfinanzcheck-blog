@@ -47,6 +47,8 @@ kurzantwort: "Ein Smart-Home-Gerät spart nicht automatisch Strom. Miss zuerst d
 
 Du glaubst, ein Smart Home senkt automatisch deine Stromrechnung? In der Praxis spart ein vernetztes Gerät nur dann, wenn es gezielt eingesetzt wird.  
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 **Transparenz:** Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
 Eine smarte Lösung braucht eine klare Aufgabe. Sie kann Licht ausschalten oder eine unnötige Laufzeit verhindern. Ob sich das auszahlt, hängt vom Gerät und deinem Alltag ab.  

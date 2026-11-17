@@ -38,9 +38,8 @@ quellen:
     titel: "Referenzseite destatis.de"
     url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
     herausgeber: "Statistisches Bundesamt"
-faktencheck: 2026-10-07
+faktencheck: 2026-11-17
 ---
-
 
  Davon bleiben am Ende vielleicht 50 € für dich frei; das ist ein Modellwert. Du willst dieses Geld nicht einfach nur auf dem Sparbuch parken. Dein Ziel ist es, das Kapital langfristig und sicher zu vermehren.
 

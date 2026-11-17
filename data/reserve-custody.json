@@ -63,9 +63,9 @@
   },
   "deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
     "seit": "2026-11-12",
-    "slug": "2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
+    "slug": "2026-11-17-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
     "titel": "Deine nächtliche Grundlast Strom: Stromverbrauch nachts",
-    "zuletzt_im_pool": "2026-11-16",
+    "zuletzt_im_pool": "2026-11-17",
     "zustand": "pool"
   },
   "dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet": {
@@ -96,7 +96,7 @@
     "seit": "2026-10-30",
     "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
     "titel": "Energieeffiziente Geräte: So sinken deine Fixkosten",
-    "zuletzt_im_pool": "2026-11-16",
+    "zuletzt_im_pool": "2026-11-17",
     "zustand": "pool"
   },
   "energieeffizienz-im-haushalt-5-schnelle-spartricks": {
@@ -165,9 +165,9 @@
   },
   "gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten": {
     "seit": "2026-11-09",
-    "slug": "2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
+    "slug": "2026-11-17-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
     "titel": "Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten",
-    "zuletzt_im_pool": "2026-11-16",
+    "zuletzt_im_pool": "2026-11-17",
     "zustand": "pool"
   },
   "gasabschlag-berechnen-so-planst-du-die-heizsaison-richtig": {
@@ -207,7 +207,7 @@
     "seit": "2026-11-09",
     "slug": "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
     "titel": "Geschirrspüler voll beladen: Wasser und Strom sparen",
-    "zuletzt_im_pool": "2026-11-16",
+    "zuletzt_im_pool": "2026-11-17",
     "zustand": "pool"
   },
   "handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": {
@@ -254,7 +254,7 @@
     "seit": "2026-11-09",
     "slug": "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee",
     "titel": "Kaffeemaschine Stromverbrauch: Was kostet die Tasse Kaffee?",
-    "zuletzt_im_pool": "2026-11-16",
+    "zuletzt_im_pool": "2026-11-17",
     "zustand": "pool"
   },
   "kleine-energiespar-tricks-die-deine-kosten-sofort-senken": {
@@ -280,14 +280,14 @@
     "seit": "2026-11-09",
     "slug": "2026-11-13-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
     "titel": "Mehrwegflaschen Pfand: So optimierst du deine Fixkosten",
-    "zuletzt_im_pool": "2026-11-16",
+    "zuletzt_im_pool": "2026-11-17",
     "zustand": "pool"
   },
   "mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung": {
     "seit": "2026-11-09",
     "slug": "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
     "titel": "Mesh WLAN nachrüsten: Schluss mit Funklöchern in der Wohnung",
-    "zuletzt_im_pool": "2026-11-16",
+    "zuletzt_im_pool": "2026-11-17",
     "zustand": "pool"
   },
   "oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar": {
@@ -332,9 +332,9 @@
   },
   "strompreis-2026-herbst-check-fuer-deine-stromkosten": {
     "seit": "2026-11-09",
-    "slug": "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+    "slug": "2026-11-17-strompreis-2026-herbst-check-fuer-deine-stromkosten",
     "titel": "Strompreis 2026: Herbst-Check für deine Stromkosten",
-    "zuletzt_im_pool": "2026-11-16",
+    "zuletzt_im_pool": "2026-11-17",
     "zustand": "pool"
   },
   "urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": {
@@ -347,6 +347,13 @@
     "titel": "Urlaub sparen: Budget, Buchung und Kosten im Blick",
     "zuletzt_im_pool": "2026-10-15",
     "zuletzt_reaktiviert": "2026-10-07",
+    "zustand": "pool"
+  },
+  "vorrat-planen-leicht-gemacht-so-sparst-du-beim": {
+    "seit": "2026-11-17",
+    "slug": "2026-11-17-vorrat-planen-leicht-gemacht-so-sparst-du-beim",
+    "titel": "Vorrat planen leicht gemacht: So sparst",
+    "zuletzt_im_pool": "2026-11-17",
     "zustand": "pool"
   },
   "vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle": {
@@ -389,9 +396,16 @@
   },
   "weniger-spontankaeufe-dein-essensplan-woche-ohne-reste": {
     "seit": "2026-11-13",
-    "slug": "2026-11-13-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste",
+    "slug": "2026-11-17-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste",
     "titel": "Weniger Spontankäufe: Dein Essensplan Woche ohne Reste",
-    "zuletzt_im_pool": "2026-11-16",
+    "zuletzt_im_pool": "2026-11-17",
+    "zustand": "pool"
+  },
+  "wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet": {
+    "seit": "2026-11-17",
+    "slug": "2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
+    "titel": "Wertvolle Gebrauchte Möbel finden: So prüfst du Qualität",
+    "zuletzt_im_pool": "2026-11-17",
     "zustand": "pool"
   },
   "wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": {
@@ -418,6 +432,13 @@
     "slug": "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort",
     "titel": "WLAN-Frust lösen: So findest du den besten Router Standort",
     "zuletzt_im_pool": "2026-11-10",
+    "zustand": "pool"
+  },
+  "wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater": {
+    "seit": "2026-11-17",
+    "slug": "2026-11-17-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater",
+    "titel": "WLAN verbessern: Lohnt sich Mesh oder reicht ein Repeater?",
+    "zuletzt_im_pool": "2026-11-17",
     "zustand": "pool"
   },
   "wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich": {

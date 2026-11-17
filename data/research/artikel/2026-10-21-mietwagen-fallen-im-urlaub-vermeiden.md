@@ -1,12 +1,12 @@
 # Faktenfrische: Mietwagen-Fallen im Urlaub vermeiden
 
-> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-10-22 09:35 UTC.
+> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-17 13:48 UTC.
 > Agent-Reach-Kanäle, nur lesend. Fundstellen sind Signale, keine Freigabe.
 
 - **Artikel:** `content/posts/2026-10-21-mietwagen-fallen-im-urlaub-vermeiden/index.md`
 - **Themenwelt:** mietwagen
-- **Fälligkeit:** Erstrecherche – noch nie faktengeprüft (Klasse: saisonal)
-- **GEO-Reife:** 3/6 (50 %)
+- **Fälligkeit:** frisch geprüft vor 26 Tagen (Intervall 30 Tage) (Klasse: saisonal)
+- **GEO-Reife:** 5/6 (83 %)
 - **Suchbegriffe:** Mietwagen Tipps, Urlaub Mietwagen, Reisekosten sparen, Mietwagen-Fallen im Urlaub vermeiden, Mietwagen Fallen im Urlaub vermeiden, Mietwagen-Fallen, Mietwagen buchen, Mietwagen Kaution, Mietwagen, Kaution, Selbstbeteiligung, Reise
 - **Kanäle:** rss:Verbraucherzentrale – Reise, web:verbraucherzentrale.de
 
@@ -31,18 +31,17 @@
 
 ## Fachliche Befunde (KI-Fachprüfung)
 
-- **luecke** – Die Aussage, dass jede Zusatzoption höchstens ein Drittel der Miete kosten sollte, ist nicht durch die Verbraucherzentrale belegt. (Beleg: <https://www.verbraucherzentrale.de/wissen/reise-mobilitaet>)
-- **luecke** – Die Behauptung, dass die Voll‑zu‑Voll‑Tankregel meist die beste Wahl ist, wird von der Quelle nicht bestätigt. (Beleg: <https://www.verbraucherzentrale.de/wissen/reise-mobilitaet>)
-- **luecke** – Die Angabe, dass ein Navigationsgerät zehn Euro oder mehr pro Tag kostet, fehlt in der Quelle. (Beleg: <https://www.verbraucherzentrale.de/wissen/reise-mobilitaet>)
-- **luecke** – Die Aussage, dass ein Frühbucherrabatt nur bis zu einer bestimmten Anzahl von Tagen vor Mietbeginn gilt, ist nicht durch die Quelle belegt. (Beleg: <https://www.verbraucherzentrale.de/wissen/reise-mobilitaet>)
-- **luecke** – Die Empfehlung, ausschließlich CHECK24 zu nutzen, wird von der Quelle nicht unterstützt und lässt andere Vergleichsplattformen außen vor. (Beleg: <https://www.verbraucherzentrale.de/wissen/reise-mobilitaet>)
+Status: geprüft (groq:openai/gpt-oss-120b); 1 Befund(e) ohne belegbaren Textanker verworfen
+
+- **praezision** – Die Faustregel lautet: Jede Zusatzoption sollte höchstens ein Drittel der Miete kosten. (Beleg: <https://www.verbraucherzentrale.de/wissen/reise-mobilitaet>)
+- **praezision** – Ein Navi kostet oft zehn Euro oder mehr pro Tag. (Beleg: <https://www.verbraucherzentrale.de/wissen/reise-mobilitaet>)
+- **praezision** – Ein Schutz ohne Eigenanteil ist meist teurer pro Tag. (Beleg: <https://www.verbraucherzentrale.de/wissen/reise-mobilitaet>)
+- **luecke** – Frühbucherrabatte gelten meist nur bis zu einer bestimmten Anzahl Tage vor Mietbeginn. (Beleg: <https://www.verbraucherzentrale.de/wissen/reise-mobilitaet>)
 
 ## Offene GEO-Punkte
 
 - Kurzantwort-Box (direkte Antwort für AI Overviews)
-- Belegkette im Frontmatter (`quellen:` → citation-Schema)
-- Sichtbares Prüfdatum (`faktencheck:`)
 
 ## Kanal-Störungen
 
-- Verbraucherzentrale – Reise: Feed nicht lesbar
+- Verbraucherzentrale – Reise: Abruf fehlgeschlagen (HTTP Error 404: Not Found)

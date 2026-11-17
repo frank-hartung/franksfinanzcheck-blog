@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-11-16T15:47:44+00:00",
+  "generatedAt": "2026-11-17T13:40:57+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -1358,22 +1358,6 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
-    "/posts/2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/": {
-      "image": "images/covers/2026-11-13-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
     "/posts/2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst/": {
       "image": "images/covers/2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst.jpg",
       "type": "single",
@@ -1390,24 +1374,8 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
-    "/posts/2026-11-16-die-50-30-20-regel-bringt-ordnung-wohin-mit-dem-gehalt/": {
-      "image": "images/covers/2026-11-16-die-50-30-20-regel-bringt-ordnung-wohin-mit-dem-gehalt.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
-    "/posts/2026-11-16-stabile-gaskosten-lohnt-sich-eine-preisgarantie-fuer-dich/": {
-      "image": "images/covers/2026-11-16-stabile-gaskosten-lohnt-sich-eine-preisgarantie-fuer-dich.jpg",
+    "/posts/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst/": {
+      "image": "images/covers/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
