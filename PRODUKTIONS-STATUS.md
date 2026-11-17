@@ -1,8 +1,8 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-11-17 01:04 UTC  
+**Stand:** 2026-11-17 02:52 UTC  
 **Stufe:** OK  
-**Befund:** Letzter Publikationstag (2026-11-16): 2 Artikel – Ziel erfüllt. – Bestand: 3 von Gates gehalten (ältester 6 Tage: faktenfrische: 05ae2eeee6a578aac17b (luecke): Keine Datenbasis für die Angabe, dass 24‑Monats‑Garantie üblich sei.; 2980f6b227953c5ac8af (luecke): Keine Quelle für die Aussage, …)
+**Befund:** Letzter Publikationstag (2026-11-16): 2 Artikel – Ziel erfüllt. – Bestand: 3 von Gates gehalten (ältester 6 Tage: faktenfrische: 30d4af7eef58e74bd3b6 (luecke): 20 % des Einkommens für Sparen/Vorsorge; 676ef4593c35f53c18f1 (luecke): Faustregel: Fixkosten > 60 % erfordern Handlungsbedarf; 7fe…)
 
 | Kennzahl | Wert |
 |---|---|
