@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-17T20:23:45Z",
+  "generated_at": "2026-11-17T22:31:15Z",
   "modus": "kandidaten",
-  "commit": "0da79a8f56366c34a84c0060237150c1e3c1d1d6",
+  "commit": "2fa9cddbefdf18e5cb2dc24893ab29c395ed94b2",
   "kapazitaet": {
     "stichtag": "2026-11-17",
     "basis": "2026-11-17",
@@ -383,7 +383,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-01",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
@@ -1250,7 +1250,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-27",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1300,7 +1300,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-27",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-10-05-erster-eigener-haushalt-fixkosten-richtig-ordnen": {
@@ -1336,7 +1336,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-30",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1386,7 +1386,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-30",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": {
