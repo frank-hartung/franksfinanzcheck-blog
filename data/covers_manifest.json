@@ -1242,8 +1242,8 @@
   }
  },
  "2026-10-14-heizperiode-vorbereiten-im-spaetsommer": {
-  "title": "Heizperiode vorbereiten im Spätsommer",
-  "ts": "2026-11-13T15:29:49+00:00",
+  "title": "Gasrechnung senken: Heizperiode vorbereiten im Spätsommer",
+  "ts": "2026-11-17T12:26:41+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1404,8 +1404,8 @@
   }
  },
  "2026-10-26-gastarife-vergleichen-vor-dem-herbst": {
-  "title": "Gastarife vergleichen: Kosten, Fristen und Verbrauch prüfen",
-  "ts": "2026-11-13T15:29:57+00:00",
+  "title": "Gasvergleich: Kosten, Fristen und Verbrauch prüfen",
+  "ts": "2026-11-17T12:26:43+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -1557,8 +1557,8 @@
   }
  },
  "2026-11-06-guenstige-fluege-fuer-den-spaetsommer-finden": {
-  "title": "Günstige Flüge für den Spätsommer finden",
-  "ts": "2026-11-13T15:30:07+00:00",
+  "title": "Flugtickets günstig: Günstige Flüge für den Spätsommer",
+  "ts": "2026-11-17T12:26:45+00:00",
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
@@ -1967,6 +1967,69 @@
   "design": {
    "v": 3,
    "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-11-17-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
+  "title": "Deine nächtliche Grundlast Strom: Stromverbrauch nachts",
+  "ts": "2026-11-17T13:03:17+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-11-17-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten": {
+  "title": "Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten",
+  "ts": "2026-11-17T13:03:19+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-11-17-strompreis-2026-herbst-check-fuer-deine-stromkosten": {
+  "title": "Strompreis 2026: Herbst-Check für deine Stromkosten",
+  "ts": "2026-11-17T13:03:21+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
+   "savings": ""
+  }
+ },
+ "2026-11-17-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste": {
+  "title": "Weniger Spontankäufe: Dein Essensplan Woche ohne Reste",
+  "ts": "2026-11-17T13:03:25+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-11-17-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater": {
+  "title": "WLAN verbessern: Lohnt sich Mesh oder reicht ein Repeater?",
+  "ts": "2026-11-17T13:03:30+00:00",
+  "design": {
+   "v": 3,
+   "badge": "INTERNET & DSL",
+   "savings": ""
+  }
+ },
+ "2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet": {
+  "title": "Wertvolle Gebrauchte Möbel finden: So prüfst du Qualität",
+  "ts": "2026-11-17T13:03:28+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
+   "savings": ""
+  }
+ },
+ "2026-11-17-vorrat-planen-leicht-gemacht-so-sparst-du-beim": {
+  "title": "Vorrat planen leicht gemacht: So sparst",
+  "ts": "2026-11-17T13:03:23+00:00",
+  "design": {
+   "v": 3,
+   "badge": "GELD SPAREN & FRUGALISMUS",
    "savings": ""
   }
  }
