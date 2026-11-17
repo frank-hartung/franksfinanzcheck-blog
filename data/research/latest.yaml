@@ -1,5 +1,5 @@
-generated_at: '2026-11-16T12:01:42Z'
-day: '2026-11-16'
+generated_at: '2026-11-17T12:26:45Z'
+day: '2026-11-17'
 mode: deterministic
 teams:
   trending:
@@ -252,60 +252,61 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 5 Fehler beim Mietwagen-Buchen und wie du sie vermeidest
-    pillar: mietwagen
-    signal: niche_hook
-    source: topics:5 Fehler beim Mietwagen-Buchen und wie du sie vermeidest
-    score: 0.55
-    keywords:
-    - Mietwagen
-    - Fehler
-    - vermeiden
-  - topic: 'DSL-Anbieter wechseln: Wie du den besten Tarif findest'
+  - topic: 'DSL-Tarife im Vergleich: Welcher ist der beste?'
     pillar: internet-dsl
     signal: niche_hook
-    source: 'topics:DSL-Anbieter wechseln: Wie du den besten Tarif findest'
+    source: 'topics:DSL-Tarife im Vergleich: Welcher ist der beste?'
     score: 0.55
     keywords:
+    - DSL-Tarife
+    - Internetvergleich
     - DSL-Anbieter
-    - Wechsel
-    - Tarif
-  - topic: 'Fahrradversicherung fürs E-Bike: Lohnt sich der Schutz?'
+  - topic: Günstige Versicherungen für dein Zuhause finden
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Fahrradversicherung fürs E-Bike: Lohnt sich der Schutz?'
+    source: topics:Günstige Versicherungen für dein Zuhause finden
     score: 0.55
     keywords:
-    - Fahrradversicherung
-    - E-Bike versichern
-    - Fahrraddiebstahl Schutz
-  - topic: 'Kfz-Versicherung wechseln zum 1. Januar: Diese Fristen gelten'
-    pillar: versicherungen
-    signal: niche_hook
-    source: 'topics:Kfz-Versicherung wechseln zum 1. Januar: Diese Fristen gelten'
-    score: 0.55
-    keywords:
-    - Kfz Versicherung Wechselsaison
-    - Kfz Versicherung kündigen Frist
-    - Kfz Versicherung wechseln Januar
-  - topic: 'Konto kündigen und wechseln: Schritt-für-Schritt-Anleitung'
+    - Versicherungen
+    - Zuhause
+    - Günstig
+  - topic: 'Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?'
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Konto kündigen und wechseln: Schritt-für-Schritt-Anleitung'
+    source: 'topics:Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?'
     score: 0.55
     keywords:
-    - Konto wechseln
-    - Kontowechsel Anleitung
-    - Girokonto kündigen
-  - topic: Mietwagen-Kosten im Ausland minimieren
-    pillar: mietwagen
+    - Konto eröffnen
+    - Schufa
+    - Konto ohne Schufa
+  - topic: Kostenloses Girokonto ohne Gebühren finden
+    pillar: konto-karten
     signal: niche_hook
-    source: topics:Mietwagen-Kosten im Ausland minimieren
+    source: topics:Kostenloses Girokonto ohne Gebühren finden
     score: 0.55
     keywords:
-    - Mietwagen
-    - Ausland
-    - Kosten minimieren
+    - Kostenloses Girokonto
+    - Girokonto Vergleich
+    - Kontoführungsgebühren sparen
+  - topic: 'Smart Home: Diese Geräte sparen wirklich Strom'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Smart Home: Diese Geräte sparen wirklich Strom'
+    score: 0.55
+    keywords:
+    - Smart Home
+    - Energie sparen
+    - Smarte Steckdosen
+  - topic: 'Strompreis-Entwicklung: Wie du dich vor hohen Kosten schützen kannst'
+    pillar: strom-sparen
+    signal: niche_hook
+    source: 'topics:Strompreis-Entwicklung: Wie du dich vor hohen Kosten schützen
+      kannst'
+    score: 0.55
+    keywords:
+    - Strompreis
+    - Entwicklung
+    - Kosten sparen
 live_web:
   enabled: false
   findings: []

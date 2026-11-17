@@ -1,5 +1,5 @@
-generated_at: '2026-11-16T12:01:43Z'
-start_date: '2026-11-17'
+generated_at: '2026-11-17T12:26:45Z'
+start_date: '2026-11-18'
 cadence: Mo/Mi/Fr · 2–3 Artikel/Tag (DAUERVORGABE)
 slots:
 - date: '2026-11-18'
@@ -59,8 +59,6 @@ slots:
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [niche_hook] Kfz-Versicherung wechseln zum 1. Januar: Diese Fristen gelten
-
     - [evergreen] Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember
 
     - [news] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
@@ -69,7 +67,10 @@ slots:
 
     - [trending] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
     – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
-    statt sie automatisch zu verlängern.'
+    statt sie automatisch zu verlängern.
+
+    - [pain_point] Policen werden automatisch verlängert und Jahr für Jahr teurer
+    – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel.'
 - date: '2026-11-25'
   weekday: Wed
   slot: 4
@@ -96,108 +97,45 @@ slots:
 - date: '2026-11-27'
   weekday: Fri
   slot: 5
-  topic: 'Elementarschadenversicherung: Warum sie zunehmend wichtiger wird'
-  pillar: versicherungen
-  source: topics
-  campaign: kfz-wechselsaison-2027
-  cta: Jetzt Kfz-Versicherung vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [news] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
-    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
-    statt sie automatisch zu verlängern.
-
-    - [trending] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
-    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
-    statt sie automatisch zu verlängern.
-
-    - [niche_hook] Fahrradversicherung fürs E-Bike: Lohnt sich der Schutz?
-
-    - [niche_hook] Kfz-Versicherung wechseln zum 1. Januar: Diese Fristen gelten'
-- date: '2026-11-30'
-  weekday: Mon
-  slot: 6
-  topic: 'Hund & Katze: Lohnt sich eine Tierversicherung?'
-  pillar: versicherungen
-  source: topics
-  campaign: kfz-wechselsaison-2027
-  cta: Jetzt Kfz-Versicherung vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [niche_hook] Fahrradversicherung fürs E-Bike: Lohnt sich der Schutz?
-
-    - [pain_point] Policen werden automatisch verlängert und Jahr für Jahr teurer
-    – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel.
-
-    - [evergreen] Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember
-
-    - [news] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
-    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
-    statt sie automatisch zu verlängern.'
-- date: '2026-12-02'
-  weekday: Wed
-  slot: 7
-  topic: 'DSL-Tarife im Vergleich: Welcher ist der beste?'
+  topic: 'Black Friday DSL-Deals: Diese Angebote lohnen sich wirklich'
   pillar: internet-dsl
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
+  source: campaign:black-friday-tarife-2026
+  campaign: black-friday-tarife-2026
+  cta: Jetzt DSL- & Handytarife vergleichen
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
     - [evergreen] Die besten DSL-Tarife für Zuhause und unterwegs
 
-    - [niche_hook] DSL-Anbieter wechseln: Wie du den besten Tarif findest
+    - [viral_outlier] Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen
+
+    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall
+
+    - [niche_hook] DSL-Tarife im Vergleich: Welcher ist der beste?'
+- date: '2026-11-30'
+  weekday: Mon
+  slot: 6
+  topic: 'Handyvertrag wechseln: Wann sich der Wechselbonus wirklich lohnt'
+  pillar: internet-dsl
+  source: campaign:black-friday-tarife-2026
+  campaign: black-friday-tarife-2026
+  cta: Jetzt DSL- & Handytarife vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
 
     - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
     Rechnung bleibt hoch, der Speed trotzdem mau.
 
-    - [viral_outlier] Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen'
-- date: '2026-12-04'
-  weekday: Fri
-  slot: 8
-  topic: 'Carsharing statt eigenem Wagen: So rechnest du nach'
-  pillar: mietwagen
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [niche_hook] 5 Fehler beim Mietwagen-Buchen und wie du sie vermeidest
-
-    - [niche_hook] Mietwagen-Kosten im Ausland minimieren
-
-    - [evergreen] Mietwagen-Tarife im Vergleich für den Urlaub
-
-    - [pain_point] Mietwagen-Buchungen mit hoher Kaution und versteckten Zusatzgebühren
-    verderben die Urlaubskasse – die Fallen liegen im Kleingedruckten.'
-- date: '2026-12-07'
-  weekday: Mon
-  slot: 9
-  topic: '5G-Router als DSL-Ersatz: Für wen sich der Wechsel lohnt'
-  pillar: internet-dsl
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
+    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall
 
     - [trending] Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als
     sie im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
     als der reine Anbieterwechsel.
 
-    - [evergreen] Die besten DSL-Tarife für Zuhause und unterwegs
-
-    - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
-    Rechnung bleibt hoch, der Speed trotzdem mau.
-
-    - [niche_hook] DSL-Anbieter wechseln: Wie du den besten Tarif findest'
-- date: '2026-12-09'
+    - [niche_hook] DSL-Tarife im Vergleich: Welcher ist der beste?'
+- date: '2026-12-02'
   weekday: Wed
-  slot: 10
+  slot: 7
   topic: Energieeffiziente Geräte für dein Zuhause
   pillar: strom-sparen
   source: topics
@@ -217,11 +155,30 @@ slots:
 
     - [trending] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise
     neu an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.'
-- date: '2026-12-11'
+- date: '2026-12-04'
   weekday: Fri
-  slot: 11
-  topic: 'Preisbremse ausgelaufen: So wehrst du dich gegen die Gaspreiserhöhung im
-    Grundtarif'
+  slot: 8
+  topic: Die Vorteile von Frugalismus für dein Finanzbudget
+  pillar: frugalismus
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [evergreen] Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung
+
+    - [viral_outlier] Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht
+
+    - [pain_point] Frugalismus wird oft als reiner Verzicht missverstanden – dabei
+    geht es um bewussten Konsum, nicht um Askese.
+
+    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
+    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.'
+- date: '2026-12-07'
+  weekday: Mon
+  slot: 9
+  topic: 'Strompreis im Herbst 2026: Jetzt wechseln oder warten?'
   pillar: strom-sparen
   source: topics
   campaign: winter-energie-2026-27
@@ -229,32 +186,77 @@ slots:
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [news] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise neu
-    an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.
-
-    - [viral_outlier] Preisgarantie Gas: So schützt du dich vor Preissprüngen
-
-    - [trending] Rund um den Jahreswechsel kündigen viele Grundversorger ihre Preise
-    neu an – das ist traditionell das größte Zeitfenster für einen günstigeren Wechsel.
-
     - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
-    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.'
-- date: '2026-12-14'
-  weekday: Mon
-  slot: 12
-  topic: Mietwagen-Tarife im Vergleich für den Urlaub
-  pillar: mietwagen
+    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
+
+    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
+    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.
+
+    - [news] Zwischen variablen Tarifen und Festpreisverträgen gibt es 2026 wieder
+    größere Preisunterschiede – pauschale Empfehlungen greifen hier zu kurz, es kommt
+    auf den eigenen Verbrauch an.
+
+    - [evergreen] Heizperiode vorbereiten im Spätsommer'
+- date: '2026-12-09'
+  weekday: Wed
+  slot: 10
+  topic: Strom und Gas vergleichen und sparen
+  pillar: strom-sparen
   source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
+  campaign: winter-energie-2026-27
+  cta: Jetzt Strom- & Gaspreise vergleichen
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [evergreen] Mietwagen-Tarife im Vergleich für den Urlaub
+    - [niche_hook] Smart Home: Diese Geräte sparen wirklich Strom
 
-    - [pain_point] Mietwagen-Buchungen mit hoher Kaution und versteckten Zusatzgebühren
-    verderben die Urlaubskasse – die Fallen liegen im Kleingedruckten.
+    - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
+    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
 
-    - [viral_outlier] Spätsommer-Schnäppchen: Mietwagen jetzt günstig buchen
+    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
+    höher aus als erwartet – der Schock kommt mit der Heizperiode.
 
-    - [niche_hook] 5 Fehler beim Mietwagen-Buchen und wie du sie vermeidest'
+    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
+    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.'
+- date: '2026-12-11'
+  weekday: Fri
+  slot: 11
+  topic: 'Zahnzusatzversicherung: Lohnt sich der Abschluss?'
+  pillar: versicherungen
+  source: topics
+  campaign: kfz-wechselsaison-2027
+  cta: Jetzt Kfz-Versicherung vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [pain_point] Policen werden automatisch verlängert und Jahr für Jahr teurer
+    – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel.
+
+    - [evergreen] Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember
+
+    - [news] Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende
+    – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
+    statt sie automatisch zu verlängern.
+
+    - [news] Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das
+    erstbeste Ergebnis nimmt, lässt oft bares Geld liegen.'
+- date: '2026-12-14'
+  weekday: Mon
+  slot: 12
+  topic: 'Versicherungen im Vergleich: Was du wissen musst'
+  pillar: versicherungen
+  source: topics
+  campaign: kfz-wechselsaison-2027
+  cta: Jetzt Kfz-Versicherung vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [evergreen] Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember
+
+    - [pain_point] Viele unterschätzen, was Hausrat im Ernstfall wirklich kostet –
+    oder zahlen umgekehrt für überhöhte Summen ohne Prüfung.
+
+    - [niche_hook] Günstige Versicherungen für dein Zuhause finden
+
+    - [pain_point] Policen werden automatisch verlängert und Jahr für Jahr teurer
+    – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel.'
