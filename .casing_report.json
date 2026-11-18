@@ -1,20 +1,32 @@
 {
- "stand": "2026-11-16T14:00:41Z",
+ "stand": "2026-11-18T14:34:20Z",
  "modus": "fix · Bestand · +Pinterest-Plan",
- "dateien": 1,
- "gepruefte_dateien": 137,
- "woerter": 256790,
- "erkannte_befunde": 1,
- "befunde": 0,
+ "dateien": 3,
+ "gepruefte_dateien": 145,
+ "woerter": 273047,
+ "erkannte_befunde": 24,
+ "befunde": 23,
  "hart": 0,
  "gefixt": 1,
  "geparkt": [],
  "dateien_liste": [
   {
+   "pfad": "content/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/index.md",
+   "erkannte_befunde": 11,
+   "befunde": 11,
+   "woerter": 1766
+  },
+  {
    "pfad": "content/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/index.md",
    "erkannte_befunde": 1,
    "befunde": 0,
-   "woerter": 2016
+   "woerter": 2025
+  },
+  {
+   "pfad": "content/posts/2026-11-18-deine-naechtliche-grundlast-strom-so-erkennst-du-wo/index.md",
+   "erkannte_befunde": 12,
+   "befunde": 12,
+   "woerter": 3637
   }
  ]
 }
