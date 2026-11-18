@@ -1,6 +1,6 @@
 {
   "target": 6,
-  "ready": 5,
+  "ready": 3,
   "pool_size": 12,
   "generated_at": "2026-11-17T13:01:37Z",
   "candidates": [
@@ -23,20 +23,10 @@
     },
     {
       "slug": "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee",
-      "ready": true,
+      "ready": false,
       "sha256": "90a1ea61374612813c3196c08ec0f2feef27b1d80ec078bddaf06f76817b7575",
-      "flesch": 60.4,
       "measured_at": "2026-11-17T12:52:32Z",
-      "score": 0.952,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.92,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
@@ -74,20 +64,10 @@
     },
     {
       "slug": "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
-      "ready": true,
+      "ready": false,
       "sha256": "6538d82340749edaae9ff9b9eb8732f218c8292a670060b7251bf2a6476ea5ce",
-      "flesch": 61.6,
       "measured_at": "2026-11-17T12:55:37Z",
-      "score": 0.962,
-      "parts": {
-        "spelling": 0.88,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.86,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 1.0
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-17-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
