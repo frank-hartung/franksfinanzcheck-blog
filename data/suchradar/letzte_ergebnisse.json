@@ -1,5 +1,5 @@
 {
- "zeitstempel": "2026-11-17T17:04:13.698767+02:00",
+ "zeitstempel": "2026-11-18T16:45:38.297966+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 25,
  "zaehlung": {
@@ -130,16 +130,6 @@
    "sichtbar": false
   },
   {
-   "anfrage": "Umzug Checkliste",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
    "anfrage": "Umzug sparen",
    "eigener_rang": 0,
    "vorher": 0,
@@ -250,6 +240,16 @@
    "sichtbar": false
   },
   {
+   "anfrage": "Versicherung Selbstständige",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
    "anfrage": "Versicherungen kündigen",
    "eigener_rang": 0,
    "vorher": 0,
@@ -273,7 +273,7 @@
     ]
    },
    {
-    "domaene": "lexware.de",
+    "domaene": "falk-ratgeber.de",
     "treffer": 1,
     "top3": 1,
     "bester_rang": 2,
@@ -283,7 +283,7 @@
     ]
    },
    {
-    "domaene": "bank99.at",
+    "domaene": "geldkiste.blog",
     "treffer": 1,
     "top3": 1,
     "bester_rang": 3,
@@ -293,7 +293,7 @@
     ]
    },
    {
-    "domaene": "schuldnerberatung.de",
+    "domaene": "finanzenfroh.com",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 4,
@@ -303,7 +303,7 @@
     ]
    },
    {
-    "domaene": "sparkasse.de",
+    "domaene": "sparschweinclub.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 5,
@@ -313,7 +313,7 @@
     ]
    },
    {
-    "domaene": "ndr.de",
+    "domaene": "das-wohnen-und-leben-magazin.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 6,
@@ -323,7 +323,7 @@
     ]
    },
    {
-    "domaene": "peaks.com",
+    "domaene": "finanz-junkie.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 7,
@@ -333,7 +333,7 @@
     ]
    },
    {
-    "domaene": "meetadam.io",
+    "domaene": "geldfinanzen24.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 8,
@@ -343,7 +343,7 @@
     ]
    },
    {
-    "domaene": "sparkasse-koelnbonn.de",
+    "domaene": "cluvon.com",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 9,
@@ -353,7 +353,7 @@
     ]
    },
    {
-    "domaene": "sparschweinclub.de",
+    "domaene": "budgetheldin.de",
     "treffer": 1,
     "top3": 0,
     "bester_rang": 10,

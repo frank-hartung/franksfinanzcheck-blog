@@ -1,6 +1,6 @@
 # SUCHRADAR – Status
 
-> Stand: 2026-11-17 17:04:13 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
+> Stand: 2026-11-18 16:45:38 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
 > Schlüssellos · 0 € · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md`
 
 ## Lauf
@@ -44,15 +44,15 @@ _Kein eigener Treffer in den gemessenen Anfragen._
 | Domäne | Treffer | Top 3 | Ø Rang | Bester Rang |
 |---|---|---|---|---|
 | ing.de | 1 | 1 | 1.0 | 1 |
-| lexware.de | 1 | 1 | 2.0 | 2 |
-| bank99.at | 1 | 1 | 3.0 | 3 |
-| schuldnerberatung.de | 1 | 0 | 4.0 | 4 |
-| sparkasse.de | 1 | 0 | 5.0 | 5 |
-| ndr.de | 1 | 0 | 6.0 | 6 |
-| peaks.com | 1 | 0 | 7.0 | 7 |
-| meetadam.io | 1 | 0 | 8.0 | 8 |
-| sparkasse-koelnbonn.de | 1 | 0 | 9.0 | 9 |
-| sparschweinclub.de | 1 | 0 | 10.0 | 10 |
+| falk-ratgeber.de | 1 | 1 | 2.0 | 2 |
+| geldkiste.blog | 1 | 1 | 3.0 | 3 |
+| finanzenfroh.com | 1 | 0 | 4.0 | 4 |
+| sparschweinclub.de | 1 | 0 | 5.0 | 5 |
+| das-wohnen-und-leben-magazin.de | 1 | 0 | 6.0 | 6 |
+| finanz-junkie.de | 1 | 0 | 7.0 | 7 |
+| geldfinanzen24.de | 1 | 0 | 8.0 | 8 |
+| cluvon.com | 1 | 0 | 9.0 | 9 |
+| budgetheldin.de | 1 | 0 | 10.0 | 10 |
 
 ## Störungen
 
