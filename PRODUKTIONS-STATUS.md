@@ -1,8 +1,8 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-11-18 15:39 UTC  
+**Stand:** 2026-11-18 21:56 UTC  
 **Stufe:** OK  
-**Befund:** Letzter Publikationstag (2026-11-18): 2 Artikel – Ziel erfüllt. – Bestand: 3 von Gates gehalten (ältester 7 Tage: faktenfrische: 6d89862b38c33c827817 (praezision): Die pauschale Behauptung, Hardware bleibe stets Eigentum des Nutzers, ist unpräzise, da die Bundesnetzagentur die Kupfer-Glas-M…)
+**Befund:** Letzter Publikationstag (2026-11-18): 2 Artikel – Ziel erfüllt. – Bestand: 3 von Gates gehalten (ältester 7 Tage: faktenfrische: 05ae2eeee6a578aac17b (luecke): Keine Datenbasis für die Angabe, dass 24‑Monats‑Garantie üblich sei.; 2980f6b227953c5ac8af (luecke): Keine Quelle für die Aussage, …)
 
 | Kennzahl | Wert |
 |---|---|
