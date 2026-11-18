@@ -45,7 +45,7 @@ budget:
   # `max_artikel_pro_lauf`-Zeile doppelt in der Datei (Rest eines
   # Heil-Laufs, #1021). PyYAML nimmt still den letzten Wert – der
   # Artefakt-Wächter hat den Doppel-Schlüssel gefunden.
-  max_artikel_pro_lauf: 5       # Sockel = Untergrenze; Automatik hebt bis zum Limit
+  max_artikel_pro_lauf: 10      # Sockel = Untergrenze; Automatik hebt bis zum Limit
   # 02.11.2026 (#912): 112 Seiten benötigen 3,01 Prüfungen/Tag bei
   # 110 % Mindestdeckung – Sockel 3 → 4. 04.11.2026 (#1039): 4 → 12.
   # 06.11.2026 (#1107): Die Bündel-Begründung von #1039 war ein MESSFEHLER
@@ -66,6 +66,10 @@ budget:
   # Messung mit 126 Artikeln vom 10.11.2026 belegt Limit 18 (16 + 2 Reserve).
   # Prüffristen, Rechercheintervalle, Takt, Nachholfrist und Mindestdeckung
   # bleiben unverändert.
+  # NACHMESSUNG 18.11.2026 (aktueller Bestand nach den neuen Entwürfen):
+  # Der 7-Tage-Ausfalltest meldet 14 Fristverletzungen bei Sockel 5 ab Tag 3;
+  # Sockel 10 ist die kleinste gemessene Untergrenze mit 0 Verletzungen bei
+  # den Starttagen 3, 10 und 20. Limit 19 allein ändert das Messergebnis nicht.
   # NACHMESSUNG 14.11.2026 (132 Artikel, 131 mit Frist): Der Stresstest
   # rechnet seinen Tag jetzt aus dem Bestand (späteste Frist + Nachholfrist,
   # `faktenfrische_kapazitaet.vollrueckstand_stichtag`) statt aus der

@@ -6305,3 +6305,110 @@ entscheidungen:
     zum Lastschriftumzug. Deshalb der ZKG-Beleg statt einer erfundenen Sparzahl.'
   vorgaenger_geprueft_fassung: c93cf918555f3c3022510ac39f5fe69f35daf130e90dc84450a586735e524416
   folgeentscheidung: true
+- slug: 2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert
+  befund_ursprung_slug: 2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert
+  befund_id: 108c4ad3f4adcb4d2a1b
+  befund_fassung: 74edb65d844de6d4b9978d6e6f4694242f74c0ceefdd525b08d39462a3e62225
+  geprueft_fassung: e7f61cd03d8e4e1fb74d417646da77f95a5bb7c9fbc776f1ef0e6279e894532b
+  typ: veraltet
+  beanstandung: Die Steigerung der Energiepreise wird mit 14,9 % angegeben, die aktuelle
+    Destatis-Statistik weist jedoch nur +12,7 % aus.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 18.11.2026'
+  entschieden_am: '2026-11-18'
+  fassung_wechsel: true
+  begruendung: Auf ausdrückliche fachliche Freigabe von Frank Hartung wurde die Energiepreis-Angabe
+    von 14,9 % auf 12,7 % umgestellt und an den aktuellen Destatis-Verbraucherpreisindex
+    gebunden (Q1). Der beanstandete Widerspruch zwischen Text und aktueller Statistik
+    ist damit nicht mehr enthalten; der Artikel bleibt bis zur erneuten Gesamtfreigabe
+    ein Entwurf mit ausstehendem redaktionellen Siegel.
+- slug: 2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert
+  befund_ursprung_slug: 2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert
+  befund_id: 211613734bc20a8603e5
+  befund_fassung: 74edb65d844de6d4b9978d6e6f4694242f74c0ceefdd525b08d39462a3e62225
+  geprueft_fassung: e7f61cd03d8e4e1fb74d417646da77f95a5bb7c9fbc776f1ef0e6279e894532b
+  typ: luecke
+  beanstandung: Bei der Erwähnung von Konten "ohne Grundgebühr" fehlt die notwendige
+    Eingrenzung auf die Zielgruppe (Verbraucher) und der regulatorische Rahmen des
+    Zahlungskontengesetzes.
+  beleg: https://www.gesetze-im-internet.de/zkg/
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 18.11.2026'
+  entschieden_am: '2026-11-18'
+  fassung_wechsel: true
+  begruendung: 'Der Girokonto-Absatz wurde wie freigegeben präzisiert: ausdrücklich
+    für Verbraucher formuliert und durch den Satz zum Zahlungskontengesetz ergänzt,
+    der die Vergleichbarkeit von Zahlungskontoentgelten und den Wechsel von Zahlungskonten
+    regelt. Die Belegkette nennt dafür das Zahlungskontengesetz (Q4) sowie den BaFin-Kontenvergleich
+    (Q3); damit trägt der Text die geforderte Zielgruppen- und Rahmeneinordnung.'
+- slug: 2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert
+  befund_ursprung_slug: 2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert
+  befund_id: 2bbbd4141968a4365ab6
+  befund_fassung: 74edb65d844de6d4b9978d6e6f4694242f74c0ceefdd525b08d39462a3e62225
+  geprueft_fassung: e7f61cd03d8e4e1fb74d417646da77f95a5bb7c9fbc776f1ef0e6279e894532b
+  typ: luecke
+  beanstandung: Beim Versicherungscheck fehlt der Hinweis auf die Prüfung der Notwendigkeit
+    (existenzielle Risiken), wie sie die Verbraucherzentrale als ersten Schritt priorisiert.
+  beleg: https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/welche-versicherung-brauche-ich-12605
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 18.11.2026'
+  entschieden_am: '2026-11-18'
+  fassung_wechsel: true
+  begruendung: 'Der Versicherungsabsatz wurde wie freigegeben präzisiert: Zuerst werden
+    existenzielle Risiken benannt und abgesichert, danach erst Beitrag und Leistung
+    geprüft. Das entspricht der Verbraucherzentrale-Einordnung, existenzielle Risiken
+    vorzuziehen; der bestehende Q2-Beleg bleibt damit zur Aussage passend, ohne eine
+    neue Markt- oder Beitragsbehauptung einzuführen.'
+- slug: 2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert
+  befund_ursprung_slug: 2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert
+  befund_id: b28c1e2fb42f8f2ba34c
+  befund_fassung: 74edb65d844de6d4b9978d6e6f4694242f74c0ceefdd525b08d39462a3e62225
+  geprueft_fassung: e7f61cd03d8e4e1fb74d417646da77f95a5bb7c9fbc776f1ef0e6279e894532b
+  typ: praezision
+  beanstandung: Das Versprechen, Portale zeigten die "besten Tarife auf einen Blick",
+    ist unpräzise, da sie nur Marktausschnitte abbilden und staatlich zertifizierte
+    Vergleiche ignorieren.
+  beleg: ''
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 18.11.2026'
+  entschieden_am: '2026-11-18'
+  fassung_wechsel: true
+  begruendung: Die pauschale Formulierung „beste Tarife auf einen Blick“ wurde wie
+    freigegeben ersetzt durch „eine Auswahl an Tarifen auf einen Blick“. Damit behauptet
+    der Text keine Vollständigkeit und keine staatliche oder objektive Spitzenstellung
+    der Portale mehr; die Aussage bleibt eine Beschreibung der als Rechenhilfe gedachten
+    Funktion, keine Empfehlung bestimmter Tarife.
+- slug: 2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert
+  befund_ursprung_slug: 2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert
+  befund_id: 8fea8173e9c360979fc7
+  befund_fassung: 74edb65d844de6d4b9978d6e6f4694242f74c0ceefdd525b08d39462a3e62225
+  geprueft_fassung: e7f61cd03d8e4e1fb74d417646da77f95a5bb7c9fbc776f1ef0e6279e894532b
+  typ: veraltet
+  beanstandung: Die Preise für Energie sind zuletzt um 14,9 % gestiegen. Das meldet
+    das Statistische Bundesamt.
+  beleg: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 18.11.2026'
+  entschieden_am: '2026-11-18'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung an die geänderte Fassung: Der beanstandete 14,9‑%‑Satz
+    ist nicht mehr enthalten. Der Satz lautet jetzt mit der aktuellen Destatis-VPI-Angabe
+    12,7 % Verbraucherpreise Energie (Q1), ist als aktueller amtlicher Wert formuliert
+    und ersetzt die nun überholte Pressemitteilungs-Angabe. Das alte Inhaltssiegel
+    wurde entfernt; eine erneute Gesamtfreigabe ist ausstehend.'
+  vorgaenger_geprueft_fassung: 2b0dad1058c36178dfb7088e51b3c29a53d8bbcf6018dad94fc766e81276a267
+  folgeentscheidung: true
+- slug: 2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert
+  befund_ursprung_slug: 2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert
+  befund_id: 784d0b3715d53d5c3bb2
+  befund_fassung: 74edb65d844de6d4b9978d6e6f4694242f74c0ceefdd525b08d39462a3e62225
+  geprueft_fassung: e7f61cd03d8e4e1fb74d417646da77f95a5bb7c9fbc776f1ef0e6279e894532b
+  typ: luecke
+  beanstandung: Ein Preisrutsch für Neukunden lässt sich daraus nicht ableiten.
+  beleg: https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_364_611.html
+  entschieden_von: 'Arena-Redaktion (Auftrag: Frank Hartung), 18.11.2026'
+  entschieden_am: '2026-11-18'
+  fassung_wechsel: true
+  begruendung: 'Folgeentscheidung an die geänderte Fassung: Der Satz „Ein Preisrutsch
+    für Neukunden lässt sich daraus nicht ableiten.“ steht unverändert im Text. Er
+    bleibt eine ausdrückliche Abgrenzung, kein Sparversprechen; die beanstandete Brücke
+    von amtlichen Vorjahres- bzw. Indexwerten zu Neukundenpreisen wird nicht gezogen.
+    Die frühere Belegbegründung bleibt damit auf den heutigen Text anwendbar.'
+  vorgaenger_geprueft_fassung: 2b0dad1058c36178dfb7088e51b3c29a53d8bbcf6018dad94fc766e81276a267
+  folgeentscheidung: true

@@ -1297,13 +1297,12 @@ class WacheAusgabeTest(unittest.TestCase):
 class AusfallToleranzTest(unittest.TestCase):
     """Die Ausfalltoleranz von 7 Tagen trägt der Vorlauf (#1107, 06.11.2026).
 
-    Operativer Sockel 5, Ausfalltoleranz 7 Tage. Die erneute Messung am
-    vollständigen 126-Artikel-Bestand zeigte zwei knappe Fristüberschreitungen
-    mit Sockel 4; Sockel 5 ist die kleinste getestete Anpassung, die die
-    Ausfallstarts an Tag 3, 10 und 20 abfängt. Das ist eine Betriebsreserve,
-    keine Änderung fachlicher Intervalle. Gemessen wird mit der ECHTEN
-    Automatik (`empfohlenes_budget` an jedem Lauftag), nicht mit einem festen
-    Budget.
+    Ausfalltoleranz 7 Tage. Die Messung vom 18.11.2026 am erweiterten
+    Bestand zeigte 14 Fristüberschreitungen mit Sockel 5 ab Tag 3; Sockel 10
+    ist die kleinste gemessene Anpassung, die die Ausfallstarts an Tag 3, 10
+    und 20 abfängt. Das ist eine Betriebsreserve, keine Änderung fachlicher
+    Intervalle. Gemessen wird mit der ECHTEN Automatik (`empfohlenes_budget`
+    an jedem Lauftag), nicht mit einem festen Budget.
 
     Verletzung = zwischen zwei Prüfterminen liegt mehr als das Intervall und
     die Frist liegt im Beobachtungsfenster. Starttage 1 und 2 bleiben bewusst
@@ -1354,8 +1353,8 @@ class AusfallToleranzTest(unittest.TestCase):
 
     def test_sieben_tage_ausfall_ist_mit_sockel_5_und_vorlauf_14_tragbar(self):
         cfg = ff.lade_config()
-        self.assertEqual(int(cfg["budget"]["max_artikel_pro_lauf"]), 5,
-                         "Gemessene Betriebsuntergrenze: Sockel 5")
+        self.assertEqual(int(cfg["budget"]["max_artikel_pro_lauf"]), 10,
+                         "Gemessene Betriebsuntergrenze: Sockel 10 (18.11.2026)")
         self.assertEqual(int(cfg["planung"]["vorlauf_tage"]), 14,
                          "Der Vorlauf trägt die 7-Tage-Toleranz")
         for start in (3, 10, 20):

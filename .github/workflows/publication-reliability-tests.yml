@@ -66,7 +66,16 @@ jobs:
     # Code-Regression-Schritt durch war. Die Grenze ist eine Notbremse gegen
     # Hänger, keine Messung; die Prüfungen selbst bleiben unverändert. Wer sie
     # wieder senkt, muss die Schrittdauern im letzten grünen Lauf nachweisen.
-    timeout-minutes: 45
+    # 18.11.2026: 45 -> 60 Minuten. Gemessener Stand PR #1265 (Regression-Lauf
+    # 44339258855): Code-Regression 22m36s (15:45:55-16:08:31) erfolgreich,
+    # Uhr-Probe danach ab 16:08:31 abgebrochen exakt am 45-Minuten-Joblimit
+    # (Jobbeginn 15:45:15, Abbruch 16:30:37) – die Suite hat seit dem 08.11.
+    # mit dem größeren Bestand weiter zugenommen. Der Code-Regressions-Schritt
+    # bleibt grün; der Abbruch war ein reiner Zeitbudget-Befund. 60 Minuten
+    # decken zwei Läufe à ~23 Minuten plus Build, Reserve-Snapshot und
+    # KI-Probe ab. Die Prüfungen selbst bleiben unverändert; gesenkt werden
+    # darf die Grenze nur mit Schrittdauer-Nachweis aus einem grünen Lauf.
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0

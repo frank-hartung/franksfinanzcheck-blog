@@ -629,7 +629,7 @@ Betriebs-/Kapazitätsfehler.
 
 Die SSOT (`data/agent_reach/faktenfrische.yaml`) ist nachgemessen:
 
-- **Sockel 5** ist die kleinste getestete Untergrenze, die einen siebentägigen
+- **Sockel 10** ist die kleinste gemessene Untergrenze für den erweiterten Bestand vom 18.11.2026, die einen siebentägigen
   Ausfall bei Start an Tag 3, 10 oder 20 mit der echten Automatik ohne
   Fristverletzung übersteht.
 - **Hartes Limit 19** lässt im Vollrückstand zwei Plätze über dem gemessenen

@@ -2,16 +2,16 @@
 
 _Stand 2026-11-18 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**213 offene Befunde auf 56 Seiten · davon 35 Live-Seiten mit 129 Befunden · ältester 19 Tage · Frist 14 Tage.**
+**217 offene Befunde auf 57 Seiten · davon 37 Live-Seiten mit 137 Befunden · ältester 19 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 213 |
-| Seiten betroffen | 56 (davon live: 35) |
-| Text seit dem Befund geändert | 161 |
+| Offene Befunde | 217 |
+| Seiten betroffen | 57 (davon live: 37) |
+| Text seit dem Befund geändert | 172 |
 | Altbestand ohne Fassungs-Hash | 11 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
-| Über der Frist (14 Tage) | 48 |
+| Über der Frist (14 Tage) | 51 |
 | In Eskalation (21 Tage) | 0 |
 
 ## So schließt du einen Befund
@@ -32,7 +32,7 @@ _Stand 2026-11-18 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 172 von 213 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 183 von 217 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -424,6 +424,22 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8436b91bdb63a631697
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a4ff01e649b789f19e6a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
+
+Datei: `content/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `4d0125136c5b940946e4` | luecke | 5 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Lichtsteuerung: Bedarfssteuerung – 2 bis 5 % des Stromverbrauchs. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `7aeb2098034d16a46885` | luecke | 5 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Anbieter locken mit Neukundenboni, die nach der üblichen Erstlaufzeit entfallen; danach steigt der Arbeitspreis massiv an. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `ea97b5dd6695de127fd2` | luecke | 5 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Heizungssteuerung: Smarte Thermostate können Heizkosten einsparen. Die Spanne von 10 bis 25 % ist ein Beispielwert aus der Rechnung unten. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4d0125136c5b940946e4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7aeb2098034d16a46885 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ea97b5dd6695de127fd2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten` · **LIVE** (blockiert) · Risikoklasse standard · 4 Befund(e)
 
 Datei: `content/posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/index.md`
@@ -558,22 +574,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 89adecebaae75c14740
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a1a269b73a1b9c2dfc88 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` · **LIVE** (blockiert) · Risikoklasse standard · 3 Befund(e)
-
-Datei: `content/posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `4d0125136c5b940946e4` | luecke | 5 T | Text unverändert seit dem Befund | Lichtsteuerung: Bedarfssteuerung – 2 bis 5 % des Stromverbrauchs. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `7aeb2098034d16a46885` | luecke | 5 T | Text unverändert seit dem Befund | Anbieter locken mit Neukundenboni, die nach der üblichen Erstlaufzeit entfallen; danach steigt der Arbeitspreis massiv an. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `ea97b5dd6695de127fd2` | luecke | 5 T | Text unverändert seit dem Befund | Heizungssteuerung: Smarte Thermostate können Heizkosten einsparen. Die Spanne von 10 bis 25 % ist ein Beispielwert aus der Rechnung unten. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4d0125136c5b940946e4 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7aeb2098034d16a46885 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden ea97b5dd6695de127fd2 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
 ### `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken` · **LIVE** (blockiert) · Risikoklasse standard · 5 Befund(e)
 
 Datei: `content/posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/index.md`
@@ -630,7 +630,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden ed2161154dcee85da1e
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f593fe21275bd9dcefef --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck` · **LIVE** · Risikoklasse standard · 2 Befund(e)
+### `2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck` · **LIVE** (blockiert) · Risikoklasse standard · 2 Befund(e)
 
 Datei: `content/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/index.md`
 
@@ -642,6 +642,42 @@ Datei: `content/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld
 ```bash
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a74029dd4e284794d697 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden c45ea4bb1a6f2330679a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer` · **LIVE** · Risikoklasse standard · 3 Befund(e)
+
+Datei: `content/posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `045ff990e44a7035e9a0` | luecke | 16 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Es fehlt der Hinweis auf die behördliche Anlaufstelle für Anfragen und Beschwerden im Bereich Energie, die über die rein zivilrechtliche Meldung beim Vermieter hinausgeht. | – |
+| `8919c2d1145af782d17a` | luecke | 16 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Ratgeber empfiehlt Tarifvergleiche und Mängelmeldungen, lässt aber den für den Energiemarkt relevanten Regulierungsrahmen für den Verbraucherschutz (Schlichtungsverfahren) unerwähnt. | – |
+| `c39938841291b1e9e140` | praezision | 16 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Markttransparenz und der Verbraucherschutz im Energiesektor werden durch das 'Verbraucher-Radar' der Bundesnetzagentur statistisch erfasst; dieser Kontext fehlt bei der Einordnung von Marktdaten. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 045ff990e44a7035e9a0 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8919c2d1145af782d17a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden c39938841291b1e9e140 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier` · **LIVE** · Risikoklasse standard · 5 Befund(e)
+
+Datei: `content/posts/2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `4afb8daed73677ee6224` | luecke | 14 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Angabe, dass 58 % der Nutzer ihr Haushaltsbuch digital führen, beruft sich angeblich auf Statista 2025, jedoch wird keine Quelle genannt. | – |
+| `9eb9a90899cc8ca66020` | luecke | 14 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Sparpotenzial‑Beispiele (z. B. DSL‑Tarifwechsel von 44 € auf 24 €) enthalten konkrete Zahlen ohne Quellenangabe. | – |
+| `b4bd085bc84a6131b644` | luecke | 14 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Behauptung, dass 60 % der Haushalte in Deutschland ihr Geld nicht nachverfolgen, wird mit einer Auswertung der Stiftung Warentest angegeben, jedoch fehlt ein entsprechender Nachweis. | – |
+| `baed76dc211bd15dd46f` | praezision | 14 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Versprechen, dass ein Haushaltsbuch „schnell“ zeigt, welche Posten sich lohnen, ist nicht quantifiziert und fehlt an konkreten Evidenzangaben. | – |
+| `d7c3cfb422310cf26ca6` | praezision | 14 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Aussage, dass die 50‑30‑20‑Regel für ein Nettoeinkommen von 2.500 € realistisch sei, wird ohne Hinweis auf regionale Unterschiede oder empirische Daten präsentiert. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4afb8daed73677ee6224 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9eb9a90899cc8ca66020 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden b4bd085bc84a6131b644 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden baed76dc211bd15dd46f --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d7c3cfb422310cf26ca6 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden` · nicht im Live-Bestand · 5 Befund(e)
@@ -1006,24 +1042,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden a8ddfb1310192fb9c28
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden c6ab40eeb8dea1d1c3da --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden c858896722ed308b0271 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden cd38bc25c828bedd7b72 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert` · nicht im Live-Bestand · 4 Befund(e)
-
-Seite: `2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `108c4ad3f4adcb4d2a1b` | veraltet | 0 T | Text unverändert seit dem Befund | Die Steigerung der Energiepreise wird mit 14,9 % angegeben, die aktuelle Destatis-Statistik weist jedoch nur +12,7 % aus. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
-| `211613734bc20a8603e5` | luecke | 0 T | Text unverändert seit dem Befund | Bei der Erwähnung von Konten "ohne Grundgebühr" fehlt die notwendige Eingrenzung auf die Zielgruppe (Verbraucher) und der regulatorische Rahmen des Zahlungskontengesetzes. | – |
-| `2bbbd4141968a4365ab6` | luecke | 0 T | Text unverändert seit dem Befund | Beim Versicherungscheck fehlt der Hinweis auf die Prüfung der Notwendigkeit (existenzielle Risiken), wie sie die Verbraucherzentrale als ersten Schritt priorisiert. | – |
-| `b28c1e2fb42f8f2ba34c` | praezision | 0 T | Text unverändert seit dem Befund | Das Versprechen, Portale zeigten die "besten Tarife auf einen Blick", ist unpräzise, da sie nur Marktausschnitte abbilden und staatlich zertifizierte Vergleiche ignorieren. | – |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 108c4ad3f4adcb4d2a1b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 211613734bc20a8603e5 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2bbbd4141968a4365ab6 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden b28c1e2fb42f8f2ba34c --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ---
