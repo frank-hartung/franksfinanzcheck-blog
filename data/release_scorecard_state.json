@@ -1,14 +1,14 @@
 {
   "version": 1,
-  "generated_at": "2026-11-18T13:22:19Z",
-  "modus": "kandidaten",
-  "commit": "740804f68d9151c8f6a6637a892a66cc0bbd18de",
+  "generated_at": "2026-11-18T13:52:50Z",
+  "modus": "live",
+  "commit": "f7ebdf4671ecb31a8539f1d72ee3325736b31872",
   "kapazitaet": {
     "stichtag": "2026-11-18",
     "basis": "2026-11-18",
     "projiziert": false,
-    "artikel": 139,
-    "faellig": 2,
+    "artikel": 140,
+    "faellig": 3,
     "ueberfaellig": 0,
     "ueberfaellig_max_tage": 0,
     "naechste_frist": {
@@ -19,9 +19,9 @@
     "budget": 5,
     "laeufe_je_tag": 1.0,
     "kapazitaet_je_tag": 5.0,
-    "bedarf_je_tag": 3.333,
-    "bedarf_je_woche": 23.3,
-    "deckung_prozent": 150.0,
+    "bedarf_je_tag": 3.356,
+    "bedarf_je_woche": 23.5,
+    "deckung_prozent": 149.0,
     "horizont_tage": 120,
     "vorlauf_tage": 14,
     "nachhol_frist_tage": 7,
@@ -31,7 +31,7 @@
     "verletzungen_folge": 0,
     "verletzungen_folge_seiten": 0,
     "verletzungen": [],
-    "offen_im_horizont": 139,
+    "offen_im_horizont": 140,
     "puenktlich": true,
     "rueckstand_abgebaut": true,
     "kadenz_horizont": {
@@ -50,7 +50,7 @@
     "empfohlenes_budget": 5,
     "empfehlung_erreicht": true,
     "hartes_limit": 19,
-    "spitze_geprueft": 58
+    "spitze_geprueft": 59
   },
   "ursachen": [
     {
@@ -85,6 +85,7 @@
         "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung",
         "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen",
         "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken",
+        "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck",
         "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt",
         "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
         "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken",
@@ -95,7 +96,7 @@
         "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen",
         "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang"
       ],
-      "anzahl": 34
+      "anzahl": 35
     },
     {
       "check": "T1w-zeichenlaenge-optimum",
@@ -112,10 +113,10 @@
     }
   ],
   "befundlage": {
-    "offen": 202,
-    "seiten": 53,
-    "live_befunde": 127,
-    "live_seiten": 34,
+    "offen": 213,
+    "seiten": 56,
+    "live_befunde": 129,
+    "live_seiten": 35,
     "ueberholt": 161,
     "ohne_fassung": 11,
     "nicht_entscheidbar": 0,
@@ -148,6 +149,7 @@
       "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": 2,
       "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": 5,
       "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": 1,
+      "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck": 2,
       "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": 3,
       "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten": 4,
       "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": 5,
@@ -1465,22 +1467,29 @@
       ]
     },
     "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck": {
-      "sha256": "6966dae9c3cfeb5d02efd93e529364480578b0e7ef0f7e9e4d827cec1b76cc5a",
-      "urteil": "freigabe-reif",
+      "sha256": "0d0832ffcc1e4f39137bad419bcf3288826bde8bd901feea4e268a09e4fccb00",
+      "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
         "technik": "bestanden",
         "quellen": "bestanden",
-        "faktenalter": "bestanden",
+        "faktenalter": "blockiert",
         "affiliate": "bestanden",
         "redundanz": "bestanden",
         "ymyl": "bestanden",
         "freigabe": "nicht erforderlich",
         "revision": "bestanden"
       },
-      "naechste_pruefung": "2026-11-23",
-      "siegel_drift": "unverändert",
-      "checks": []
+      "naechste_pruefung": "2027-01-02",
+      "siegel_drift": "geändert – neu geprüft",
+      "checks": [
+        {
+          "check": "F4-fachbefund",
+          "dimension": "faktenalter",
+          "wirkung": "blockiert",
+          "detail": "a74029dd4e284794d697 (luecke): Eine separate Meldung beim Netzbetreiber ist im Standardfall nicht mehr nötig.; c45ea4bb1a6f2330679a (luecke): Keine bundesweite Zuschusspflicht: Zuschüsse kommen, wenn überhaupt, von Städten, Gemeinden oder Ländern."
+        }
+      ]
     },
     "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": {
       "sha256": "522d1a3657ed9b383d08d0c40417ab31021341547dde1556ab1a0ea9899c615b",
@@ -1908,7 +1917,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-24",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
@@ -1987,7 +1996,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-25",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst": {
