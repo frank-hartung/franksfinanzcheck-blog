@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-18T13:52:50Z",
-  "modus": "live",
-  "commit": "f7ebdf4671ecb31a8539f1d72ee3325736b31872",
+  "generated_at": "2026-11-18T14:09:32Z",
+  "modus": "kandidaten",
+  "commit": "eee844d69b9bb68f70325a00495c63ea2ac1b6b0",
   "kapazitaet": {
     "stichtag": "2026-11-18",
     "basis": "2026-11-18",
@@ -1481,7 +1481,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-02",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
