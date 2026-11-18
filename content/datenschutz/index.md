@@ -32,7 +32,7 @@ Verantwortlich im Sinne der Datenschutz-Grundverordnung (DSGVO) und anderer Date
 
 | Verarbeitung | Zweck | Rechtsgrundlage | Speicherdauer | Empfänger |
 |---|---|---|---|---|
-| Aufruf der Website (Server-Logfiles) | Auslieferung, Sicherheit, Stabilität | Art. 6 Abs. 1 lit. f DSGVO | Vom Hosting-Anbieter festgelegt; wir haben darauf keinen Einfluss | GitHub (Hosting); Cloudflare (CDN, Schutz und DNS) |
+| Aufruf der Website (Server-Logfiles) | Auslieferung, Sicherheit, Stabilität | Art. 6 Abs. 1 lit. f DSGVO | Vom Hosting-Anbieter festgelegt; wir haben darauf keinen Einfluss | GitHub (Hosting); Cloudflare (DNS) |
 | Klickzähler für Partnerlinks (`/go/`) | Aggregierte Zählung von Klicks je Partner und Artikel | Art. 6 Abs. 1 lit. f DSGVO | Tageszähler bis zu 13 Monate | Cloudflare (Workers und Datenbank) |
 | Feedback „War dieser Ratgeber hilfreich?“ | Verbesserung der Ratgeber, Schutz vor Mehrfachabgaben | Art. 6 Abs. 1 lit. f DSGVO | Missbrauchsschutz-Hash 6 Stunden; Zähler ohne Personenbezug | Cloudflare (Workers) |
 | Newsletter-Anmeldung und -Versand | Versand des Newsletters, Nachweis der Einwilligung | Art. 6 Abs. 1 lit. a und f DSGVO | Siehe Abschnitt 8 | Cloudflare, GitHub, Resend |
@@ -49,7 +49,7 @@ Ob ein Speichern oder Auslesen von Informationen auf deinem Endgerät erlaubt is
 
 ### Hosting
 
-Diese Website wird von **GitHub Pages** ausgeliefert (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA). **Vorgeschaltet ist das CDN von Cloudflare, Inc.** (101 Townsend St., San Francisco, CA 94107, USA), das Zugriffe entgegennimmt, technisch absichert und beschleunigt. Cloudflare verarbeitet dabei technische Zugriffsdaten wie IP-Adresse, Zeitpunkt, angeforderte Adresse, Browsertyp und Referrer sowie Sicherheitsmerkmale zur Abwehr von Angriffen. Die Server-Logfiles und Aufbewahrungsfristen richten sich nach Cloudflare.
+Diese Website wird von **GitHub Pages** ausgeliefert (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA). Die Domain franksfinanzcheck.de zeigt direkt auf die Server von GitHub Pages. Zum Stand 11. Oktober 2026 ist kein Proxy von Cloudflare vor die Website geschaltet.
 
 GitHub verarbeitet beim Abruf technische Zugriffsdaten wie IP-Adresse, Zeitpunkt, angeforderte Adresse, Browsertyp und Referrer. Die Server stehen auch außerhalb der EU, insbesondere in den USA. Weitere Informationen: [GitHub-Datenschutzerklärung](https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement).
 
@@ -57,7 +57,7 @@ GitHub verarbeitet beim Abruf technische Zugriffsdaten wie IP-Adresse, Zeitpunkt
 
 ### Domain und DNS
 
-Die Verwaltung der Domain (DNS) übernimmt **Cloudflare, Inc.** (101 Townsend St., San Francisco, CA 94107, USA). Weitere Informationen: [Cloudflare-Datenschutzhinweise](https://www.cloudflare.com/privacypolicy/).
+Die Verwaltung der Domain (DNS) übernimmt **Cloudflare, Inc.** (101 Townsend St., San Francisco, CA 94107, USA). Cloudflare erhält dabei keine Informationen über Seitenaufrufe, sondern nur die Auflösung des Domainnamens. Weitere Informationen: [Cloudflare-Datenschutzhinweise](https://www.cloudflare.com/privacypolicy/).
 
 ### Server-Logfiles
 
@@ -230,7 +230,7 @@ Wir setzen folgende Dienstleister ein:
 | Dienstleister | Aufgabe | Sitz |
 |---|---|---|
 | GitHub, Inc. | Hosting der Website, Ausführung der Versand-Automatisierung | USA |
-| Cloudflare, Inc. | CDN, Schutz, DNS, Cloudflare Workers, Workers KV, Datenbank | USA (mit Infrastruktur weltweit) |
+| Cloudflare, Inc. | DNS, Cloudflare Workers, Workers KV, Datenbank | USA (mit Infrastruktur weltweit) |
 | Resend | Versand der Newsletter-E-Mails | USA |
 
 Mit Dienstleistern, die personenbezogene Daten in unserem Auftrag verarbeiten, schließen wir Verträge nach Art. 28 DSGVO.
