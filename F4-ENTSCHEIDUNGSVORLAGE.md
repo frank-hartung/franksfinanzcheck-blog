@@ -6,7 +6,7 @@ Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
 **Bezugsstand: 2026-11-18** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
 
-**142 offene Live-Befunde auf 38 Artikeln.** Für **104** gibt es frühere Entscheidungen zu diesem Befund;
+**137 offene Live-Befunde auf 37 Artikeln.** Für **99** gibt es frühere Entscheidungen zu diesem Befund;
 die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **38** Befunde haben keine frühere aktive Entscheidung.
 
 Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus `data/faktenfrische_befunde_state.json`,
@@ -333,70 +333,6 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 - Heute in Zeile 120: 650 € – **ohne** Kennzeichnung
 - Heute in Zeile 121: 10,3 Jahre – **ohne** Kennzeichnung
-
-## `2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier`
-
-- Datei-SHA256 (heute): `174ce022a532d82cb155330e8408a8dfd89ada298cee89046f39fe8a9179ec56`
-- Offene Live-Befunde: **5**
-
-| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
-|---|---|---|---|---|
-| `4afb8daed73677ee6224` | luecke | 2026-11-11 · 2. Entscheidung | nicht mehr im Text: 58 % | Angabe, dass 58 % der Nutzer ihr Haushaltsbuch digital führen, beruft sich angeblich auf Statista 2025, jedoch wird k… |
-| `9eb9a90899cc8ca66020` | luecke | 2026-11-11 · 2. Entscheidung | 44 € in Zeile 120 ohne Kennzeichnung · 24 € in Zeile 15 ohne Kennzeichnung | Sparpotenzial‑Beispiele (z. B. DSL‑Tarifwechsel von 44 € auf 24 €) enthalten konkrete Zahlen ohne Quellenangabe. |
-| `b4bd085bc84a6131b644` | luecke | 2026-11-11 · 2. Entscheidung | 60 % in Zeile 123 ohne Kennzeichnung | Behauptung, dass 60 % der Haushalte in Deutschland ihr Geld nicht nachverfolgen, wird mit einer Auswertung der Stiftu… |
-| `baed76dc211bd15dd46f` | praezision | 2026-11-11 · 2. Entscheidung | kein Wert genannt (Aussage/Präzision) | Versprechen, dass ein Haushaltsbuch „schnell“ zeigt, welche Posten sich lohnen, ist nicht quantifiziert und fehlt an… |
-| `d7c3cfb422310cf26ca6` | praezision | 2026-11-11 · 2. Entscheidung | 2.500 € in Zeile 101 gekennzeichnet | Die Aussage, dass die 50‑30‑20‑Regel für ein Nettoeinkommen von 2.500 € realistisch sei, wird ohne Hinweis auf region… |
-
-### `4afb8daed73677ee6224`
-
-**Befund:** Angabe, dass 58 % der Nutzer ihr Haushaltsbuch digital führen, beruft sich angeblich auf Statista 2025, jedoch wird keine Quelle genannt.
-
-**Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
-
-> Die 58-%-Statista-Angabe steht nicht mehr im Artikel; die Vorentscheidung hat sie entfernt. Die Sparbeträge stehen nur noch in der Tabelle „Modell-Monatsersparnis“ mit dem Hinweis „Summe der Annahmen oben“.
-
-- Im heutigen Text nicht mehr vorhanden: 58 %
-
-### `9eb9a90899cc8ca66020`
-
-**Befund:** Sparpotenzial‑Beispiele (z. B. DSL‑Tarifwechsel von 44 € auf 24 €) enthalten konkrete Zahlen ohne Quellenangabe.
-
-**Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
-
-> Das DSL-Beispiel (44 € → 24 €) steht ausschließlich in der Tabelle „Modell-Monatsersparnis“; Überschrift und Summenzeile kennzeichnen die Werte als Annahmen. Eine Marktbehauptung ist nicht mehr enthalten.
-
-- Heute in Zeile 120: 44 € – **ohne** Kennzeichnung
-- Heute in Zeile 15: 24 € – **ohne** Kennzeichnung
-
-### `b4bd085bc84a6131b644`
-
-**Befund:** Behauptung, dass 60 % der Haushalte in Deutschland ihr Geld nicht nachverfolgen, wird mit einer Auswertung der Stiftung Warentest angegeben, jedoch fehlt ein entsprechender Nachweis.
-
-**Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
-
-> Die 60-%-Angabe ist nicht mehr im Text; die unbelegte Stiftung-Warentest-Zuordnung wurde in der Vorentscheidung entfernt. Übrig bleiben die als Modell gekennzeichneten Beispielbeträge.
-
-- Heute in Zeile 123: 60 % – **ohne** Kennzeichnung
-
-### `baed76dc211bd15dd46f`
-
-**Befund:** Versprechen, dass ein Haushaltsbuch „schnell“ zeigt, welche Posten sich lohnen, ist nicht quantifiziert und fehlt an konkreten Evidenzangaben.
-
-**Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
-
-> Die Geschwindigkeitszusage ist quantifiziert und markiert: „Oft reicht schon ein gemeinsamer Monatscheck von 15 Minuten; das ist ein Rechenbeispiel.“ Ein pauschales „schnell“ ohne Maß trägt die Passage nicht mehr.
-
-Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
-
-### `d7c3cfb422310cf26ca6`
-
-**Befund:** Die Aussage, dass die 50‑30‑20‑Regel für ein Nettoeinkommen von 2.500 € realistisch sei, wird ohne Hinweis auf regionale Unterschiede oder empirische Daten präsentiert.
-
-**Frühere Entscheidung (2026-11-11):** Frank Hartung (Herausgeber-Auftrag über Arena-Session, 11.11.2026)
-
-> Am heutigen Text geprüft (SHA-256 905288727fca): Die Zahl steht weiterhin im Artikel, ist aber ausdrücklich als Modell-/Beispielwert gekennzeichnet: „Bei 2.500 € netto heißt das: 1.250 € Fixkosten, 750 € Freizeit, 500 € Sparrate; das ist ein Beispielwert.“. Beanstandet war die Zahl OHNE Kennzeichnung; das trifft nicht mehr zu.
-
-- Heute in Zeile 101: 2.500 € – gekennzeichnet („beispielwert“)
 
 ## `2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub`
 
@@ -733,7 +669,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum`
 
-- Datei-SHA256 (heute): `8bb7a48d2e86b77e181bb4143d75f3c342e914d025e981df533a9fc6d14981b8`
+- Datei-SHA256 (heute): `d1b6b81fa8354c73b3b10ff4096922a3dca1bd0cc62101b052b9db376d5958a5`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1911,11 +1847,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8ddc1025e45be176ad3
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 95d6d2877620e5a056ce --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ab16029999747466a638 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden b057dee3603e09f494b5 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4afb8daed73677ee6224 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 9eb9a90899cc8ca66020 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden b4bd085bc84a6131b644 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden baed76dc211bd15dd46f --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden d7c3cfb422310cf26ca6 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 0051151e6c46f4c2bdb3 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 0790f52160dfaa819917 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 53c3fde8e986e6560890 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
