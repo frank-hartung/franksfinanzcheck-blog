@@ -4,7 +4,7 @@ description: Wie hoch ist der Kaffeemaschine Stromverbrauch? Wir vergleichen Kap
 date: 2026-11-18T04:28:52Z
 draft: false
 reserve_published: 2026-11-18
-tags: ["Stromkosten senken"]
+tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"

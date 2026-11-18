@@ -4,11 +4,11 @@ description: Du willst Mesh WLAN nachrüsten? Erfahre hier, ob sich die Investit
 date: 2026-11-18T04:29:13Z
 draft: false
 reserve_published: 2026-11-18
-tags: ["WLAN verbessern"]
+tags: ["WLAN verbessern", "DSL-Vergleich", "Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["Mesh WLAN", "WLAN nachrüsten", "Abdeckung Wohnung", "Mesh WLAN nachrüsten", "Nachrüsten"]
+keywords: ["Mesh WLAN", "WLAN nachrüsten", "Abdeckung Wohnung", "Mesh WLAN nachrüsten", "Nachrüsten", "Funklöchern", "DSL-Vergleich", "Internetvertrag wechseln"]
 pin_title: "Mesh WLAN nachrüsten: Schluss mit Funklöchern in der Wohnung"
 pin_description: "*Werbung | Du willst Mesh WLAN nachrüsten? Erfahre hier, ob sich die Investition für deine Wohnung lohnt und wie du die Abdeckung deiner Wohnung optimierst. Mehr Spartipps auf FranksFinanzcheck! #mesh #wlan #nachruesten"
 ai_generated: true
@@ -43,7 +43,6 @@ quellen:
     herausgeber: "Bundesnetzagentur"
 faktencheck: 2026-11-10
 ---
-
 
 Du sitzt abends entspannt auf dem Sofa. Du möchtest deine neue Lieblingsserie streamen. Doch statt scharfer Bilder siehst du nur den grauen Ladekreis. Der Router im Flur kapituliert vor den massiven Wänden deiner Wohnung.
 
