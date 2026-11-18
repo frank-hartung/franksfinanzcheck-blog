@@ -59,7 +59,7 @@ quellen:
     url: "https://www.energiemagazin.com/balkonkraftwerk/vereinfachte-regeln/"
     herausgeber: "energiemagazin.com (Branchenratgeber)"
     datum: "2026-10-09"
-faktencheck: 2026-10-09
+faktencheck: 2026-11-18
 kurzantwort: "Bundesweit gibt es keinen Zuschuss für Balkonkraftwerke. Beim Kauf sparst du jedoch die Umsatzsteuer, weil für Solarmodule und wesentliche Komponenten der Nullsteuersatz gilt. Regionale Zuschüsse von Städten und Ländern sind budgetabhängig, und viele verlangen den Antrag vor dem Kauf."
 ---
 

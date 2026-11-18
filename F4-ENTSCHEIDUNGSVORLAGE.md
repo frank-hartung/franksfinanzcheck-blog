@@ -6,8 +6,8 @@ Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
 **Bezugsstand: 2026-11-18** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
 
-**127 offene Live-Befunde auf 34 Artikeln.** Für **91** gibt es frühere Entscheidungen zu diesem Befund;
-die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **36** Befunde haben keine frühere aktive Entscheidung.
+**129 offene Live-Befunde auf 35 Artikeln.** Für **91** gibt es frühere Entscheidungen zu diesem Befund;
+die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **38** Befunde haben keine frühere aktive Entscheidung.
 
 Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus `data/faktenfrische_befunde_state.json`,
 `data/faktenfrische_entscheidungen.yaml`, dem Scorecard-Siegel und den heutigen Artikeln.
@@ -24,6 +24,8 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 - `26b1c694d76bcc7af50f` · `2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung` · Der Ratgeber versäumt es, den für den Verbraucherschutz zentralen Regulierungsrahmen der 'Unternehmenspflichten' zu nennen, den die Bundesnetzagentur explizit als Fachthema führt.
 - `9593e535bce55f4283e6` · `2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung` · Die Empfehlung zum Preisvergleich lässt den aktuellen Marktdruck (sinkende Umsätze bei O2) außer Acht, der für die Verhandlung von Rückholangeboten bei Kündigung entscheidend sein kann.
 - `a10511ed618384aa7b88` · `2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken` · Der Artikel nennt keine regulatorischen Vorgaben oder Zertifizierungen (z. B. CE‑Kennzeichnung, Sicherheitsanforderungen) für Smart‑Home‑Geräte, obwohl solche Vorgaben von der Bundesnetzagentur beschrieben werden.
+- `a74029dd4e284794d697` · `2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck` · Eine separate Meldung beim Netzbetreiber ist im Standardfall nicht mehr nötig.
+- `c45ea4bb1a6f2330679a` · `2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck` · Keine bundesweite Zuschusspflicht: Zuschüsse kommen, wenn überhaupt, von Städten, Gemeinden oder Ländern.
 - `4d0125136c5b940946e4` · `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` · Lichtsteuerung: Bedarfssteuerung – 2 bis 5 % des Stromverbrauchs.
 - `7aeb2098034d16a46885` · `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` · Anbieter locken mit Neukundenboni, die nach der üblichen Erstlaufzeit entfallen; danach steigt der Arbeitspreis massiv an.
 - `ea97b5dd6695de127fd2` · `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` · Heizungssteuerung: Smarte Thermostate können Heizkosten einsparen. Die Spanne von 10 bis 25 % ist ein Beispielwert aus der Rechnung unten.
@@ -1272,6 +1274,32 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
+## `2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck`
+
+- Datei-SHA256 (heute): `0d0832ffcc1e4f39137bad419bcf3288826bde8bd901feea4e268a09e4fccb00`
+- Offene Live-Befunde: **2**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `a74029dd4e284794d697` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Eine separate Meldung beim Netzbetreiber ist im Standardfall nicht mehr nötig. |
+| `c45ea4bb1a6f2330679a` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Keine bundesweite Zuschusspflicht: Zuschüsse kommen, wenn überhaupt, von Städten, Gemeinden oder Ländern. |
+
+### `a74029dd4e284794d697`
+
+**Befund:** Eine separate Meldung beim Netzbetreiber ist im Standardfall nicht mehr nötig.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `c45ea4bb1a6f2330679a`
+
+**Befund:** Keine bundesweite Zuschusspflicht: Zuschüsse kommen, wenn überhaupt, von Städten, Gemeinden oder Ländern.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
 ## `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt`
 
 - Datei-SHA256 (heute): `522d1a3657ed9b383d08d0c40417ab31021341547dde1556ab1a0ea9899c615b`
@@ -1784,6 +1812,8 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden d9c8b522bf1dcaed034
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden e2975509f3f130de0755 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f1704e45e970a8f4b078 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a10511ed618384aa7b88 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden a74029dd4e284794d697 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden c45ea4bb1a6f2330679a --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4d0125136c5b940946e4 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7aeb2098034d16a46885 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ea97b5dd6695de127fd2 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
