@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-18T04:31:56Z",
+  "generated_at": "2026-11-18T12:41:53Z",
   "modus": "kandidaten",
-  "commit": "5860c4598f16cf22daa8642ec6022012e452adc6",
+  "commit": "18b4315b75b0bd16c41c6934170d27ce99ae2cb4",
   "kapazitaet": {
     "stichtag": "2026-11-18",
     "basis": "2026-11-18",
@@ -1908,7 +1908,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-24",
-      "siegel_drift": "neu versiegelt",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
@@ -1987,7 +1987,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-02-08",
-      "siegel_drift": "neu versiegelt",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst": {
