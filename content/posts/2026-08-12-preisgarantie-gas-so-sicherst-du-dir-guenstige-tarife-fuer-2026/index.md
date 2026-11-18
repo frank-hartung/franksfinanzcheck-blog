@@ -58,7 +58,7 @@ Dieser Leitfaden führt dich in zehn Minuten von der Jahresrechnung bis zur sich
 💡 **Schnell-Tipp von FranksFinanzcheck:** Tarife kannst du über unseren Partner-Vergleich prüfen: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-## Preisgarantie Gas 2026: Gaspreisgarantie: So startest du ohne Stress
+## Gaspreisgarantie 2026: Gaspreisgarantie: So startest du ohne Stress
 
 Lege die letzte Gasrechnung neben den Vertrag. Notiere den Verbrauch in kWh, den Preis je kWh und den festen Preis im Jahr. Mehr brauchst du für den ersten Vergleich nicht. Mit diesen drei Werten erkennst du rasch, ob ein Angebot wirklich zu deinem Haushalt passt.
 
@@ -276,7 +276,7 @@ Nach der Portalsuche bleiben höchstens drei Kandidaten übrig. Übertrage sie i
 
 Streiche jedes Angebot mit Vorkasse, unklarer Garantie oder einem Preis, der nur durch einen schwer verständlichen Bonus gewinnt. Prüfe bei den übrigen Kandidaten auch, ob der Anbieter den Abschlag monatlich erhebt und ob eine Paketmenge enthalten ist.
 
-Falls zwei Tarife fast gleich teuer sind, gewinnt nicht automatisch der mit dem größten Bonus. Bevorzuge die klarere Klausel, den besseren Preis ohne Bonus und die passendere Kündigungsfrist. Bei den übrigen Tarifen entscheidest du nach Gesamtpreis und gewünschter Sicherheit.
+Falls zwei Tarife fast gleich teuer sind, gewinnt nicht automatisch der mit dem größten Bonus. Bevorzuge die klarere Klausel, den besseren Preis ohne Bonus und die passendere [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/). Bei den übrigen Tarifen entscheidest du nach Gesamtpreis und gewünschter Sicherheit.
 
 Halte auch den Abrufzeitpunkt und deine Postleitzahl fest. So bleibt später klar, für welchen Ort und welchen Verbrauch das Angebot galt. Energiepreise können sich zwischen Suche und Abschluss ändern.
 

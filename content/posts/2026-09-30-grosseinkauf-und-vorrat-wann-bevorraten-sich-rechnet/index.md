@@ -114,7 +114,7 @@ Für die Praxis hilft eine grobe Ordnung. Sie ersetzt keine Prüfung des Einzelf
 
 **Konserven und Gläser.** Sie halten über Monate und vertragen Wärme besser als Frischware. Achte auf Dellen und Beulen, die ein Zeichen für Beschädigung sein können.
 
-**Tiefkühlware.** Sie braucht dauerhaft Platz. Ist das Gefrierfach voll, sinkt die Effizienz – der Kompressor arbeitet mehr, und der Stromverbrauch steigt.
+**Tiefkühlware.** Sie braucht dauerhaft Platz. Ist das Gefrierfach voll, sinkt die Effizienz – der Kompressor arbeitet mehr, und der [Stromverbrauch](../../posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/) steigt.
 
 **Getränke.** Sie sind schwer und brauchen viel Raum. Der Preisunterschied zwischen Kasten und Einzelflasche ist oft gering, das Gewicht aber erheblich.
 

@@ -28,7 +28,7 @@
  },
  "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026": {
   "title": "Preisgarantie Gas: So sicherst du günstige Tarife",
-  "ts": "2026-11-16T15:52:55+00:00",
+  "ts": "2026-11-18T17:05:53+00:00",
   "design": {
    "v": 3,
    "badge": "STROM & GAS SPAREN",
@@ -2111,6 +2111,15 @@
   "design": {
    "v": 3,
    "badge": "GÜNSTIG REISEN",
+   "savings": ""
+  }
+ },
+ "2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung": {
+  "title": "Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung",
+  "ts": "2026-11-18T17:06:04+00:00",
+  "design": {
+   "v": 3,
+   "badge": "STROM & GAS SPAREN",
    "savings": ""
   }
  }

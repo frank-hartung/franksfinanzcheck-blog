@@ -70,7 +70,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Was sind Fluggastrechte?
 
-Hinter diesem Begriff verbirgt sich ein [Schutzschild](../../posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/) für Reisende. Die Europäische Union hat strenge Regeln erlassen. Diese gelten für fast alle Flüge innerhalb der EU. Auch Flüge aus der EU in andere Länder sind abgedeckt.
+Hinter diesem Begriff verbirgt sich ein [Schutzschild](../../posts/2026-10-09-vpn-zu Hause-schutzschild-oder-unnoetige-fixkosten-falle/) für Reisende. Die Europäische Union hat strenge Regeln erlassen. Diese gelten für fast alle Flüge innerhalb der EU. Auch Flüge aus der EU in andere Länder sind abgedeckt.
 
 Sogar Flüge von außerhalb in die EU zählen dazu. Voraussetzung ist hier ein Sitz der Airline in der EU.
 
@@ -96,7 +96,7 @@ Es zählt, wann es am Ziel ankommt. Die Tür muss offen sein.
 
 Liegt diese Zeit mindestens drei Stunden über dem Plan, kann ein Anspruch auf Ausgleich entstehen. Entscheidend sind zusätzlich der Anwendungsbereich der Verordnung und der Grund der Verspätung.
 
-Die Ausgleichshöhe richtet sich nach Strecke und Reiseziel: Bei Flügen bis 1.500 Kilometer sind es grundsätzlich 250 Euro. Für längere Strecken innerhalb der EU sowie bestimmte Strecken bis 3.500 Kilometer außerhalb der EU kommen 400 Euro in Betracht, für weitere Langstrecken 600 Euro. Unter bestimmten Voraussetzungen kann die Zahlung halbiert werden.
+Die Ausgleichshöhe richtet sich nach Strecke und Reiseziel: Bei Flügen bis 1.500 Kilometer sind es grundsätzlich 250 €. Für längere Strecken innerhalb der EU sowie bestimmte Strecken bis 3.500 Kilometer außerhalb der EU kommen 400 € in Betracht, für weitere Langstrecken 600 €. Unter bestimmten Voraussetzungen kann die Zahlung halbiert werden.
 
 Das System ist einfach aufgebaut. Es soll fair für alle Seiten sein. Die Airline hat bei langen Flügen mehr Aufwand bei der Planung. Du hast bei langen Verspätungen auf Langstrecken mehr Frust.
 

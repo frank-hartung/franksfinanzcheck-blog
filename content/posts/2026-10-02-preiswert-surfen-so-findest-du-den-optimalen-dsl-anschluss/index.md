@@ -90,7 +90,7 @@ Ein Film in Full‑HD braucht rund 10 Mbps. In 4K sind es etwa 25 Mbps. Eine Vid
 
  Du bleibst fast immer unter 100 Mbps; das ist ein Modellwert.
 
-| Haushaltsprofil | Typische Nutzung | Sinnvolle Bandbreite |
+| Haushaltsprofil | Typische Nutzung | Sinnvolle [Bandbreite](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/) |
 |-----------------|------------------|----------------------|
 | Single‑Haushalt | Streaming, surfen, Homeoffice | 50 Mbps |
 | Paar‑Haushalt | Zwei Streams parallel, Homeoffice | 100 Mbps |

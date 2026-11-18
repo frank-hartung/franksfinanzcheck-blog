@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-18T14:09:32Z",
+  "generated_at": "2026-11-18T16:49:26Z",
   "modus": "kandidaten",
-  "commit": "eee844d69b9bb68f70325a00495c63ea2ac1b6b0",
+  "commit": "059b4885ebc1742cd759c244e538dda818eb9cb4",
   "kapazitaet": {
     "stichtag": "2026-11-18",
     "basis": "2026-11-18",
@@ -371,7 +371,7 @@
       "checks": []
     },
     "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren": {
-      "sha256": "3ae643c164624a684d339ccf87e5d9228f7ce7aec53c56cf3ae2ef3769fc0a3d",
+      "sha256": "0b7f68ffa531e8e62fd6aaa2a41d0393ba6b85df35033a4485bfa1d6f2f7a9a5",
       "urteil": "freigabe-reif",
       "risikoklasse": "erhoeht",
       "dimensionen": {
@@ -529,7 +529,7 @@
       ]
     },
     "2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps": {
-      "sha256": "cef307629ad061c2fafe8dee40649f8a286be8281b70753b209bb4a54dd94b55",
+      "sha256": "79fbff3730d124bb56e55661edc57a412a557f5a2c8d8ad5cbc88553c1c5c6f3",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1442,7 +1442,7 @@
       ]
     },
     "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": {
-      "sha256": "ff91998d622b03e8942366507838340195cc86ecdf3d4d1d9c5f17d753de43e7",
+      "sha256": "3a34a19d61a40a3961270c0e7e06cf53b2285fc903cb47907dc6180ef9b4d949",
       "urteil": "blockiert",
       "risikoklasse": "standard",
       "dimensionen": {
@@ -1921,7 +1921,7 @@
       "checks": []
     },
     "2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort": {
-      "sha256": "d73ef8ccac3218660fa4c61406e5d4bb650abe93a11c4b0561cf1c385942201d",
+      "sha256": "4111f489631c0a24ba0ddef8fbe0c3b32f4da96c16fcce7197771e488cb571e2",
       "urteil": "freigabe-reif",
       "risikoklasse": "standard",
       "dimensionen": {

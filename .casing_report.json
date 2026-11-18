@@ -1,32 +1,38 @@
 {
- "stand": "2026-11-18T14:34:20Z",
+ "stand": "2026-11-18T17:09:11Z",
  "modus": "fix · Bestand · +Pinterest-Plan",
- "dateien": 3,
+ "dateien": 4,
  "gepruefte_dateien": 145,
- "woerter": 273047,
- "erkannte_befunde": 24,
- "befunde": 23,
+ "woerter": 273156,
+ "erkannte_befunde": 13,
+ "befunde": 12,
  "hart": 0,
  "gefixt": 1,
  "geparkt": [],
  "dateien_liste": [
   {
-   "pfad": "content/posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/index.md",
-   "erkannte_befunde": 11,
-   "befunde": 11,
-   "woerter": 1766
-  },
-  {
    "pfad": "content/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/index.md",
    "erkannte_befunde": 1,
    "befunde": 0,
-   "woerter": 2025
+   "woerter": 2035
   },
   {
    "pfad": "content/posts/2026-11-18-deine-naechtliche-grundlast-strom-so-erkennst-du-wo/index.md",
-   "erkannte_befunde": 12,
-   "befunde": 12,
+   "erkannte_befunde": 2,
+   "befunde": 2,
    "woerter": 3637
+  },
+  {
+   "pfad": "content/posts/2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung/index.md",
+   "erkannte_befunde": 5,
+   "befunde": 5,
+   "woerter": 1129
+  },
+  {
+   "pfad": "content/posts/2026-11-18-vorrat-planen-leicht-gemacht-so-sparst-du-beim/index.md",
+   "erkannte_befunde": 5,
+   "befunde": 5,
+   "woerter": 831
   }
  ]
 }

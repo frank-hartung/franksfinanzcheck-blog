@@ -93,7 +93,7 @@ Die Gebühr im Monat ist nur die Spitze. Dahinter stecken viele kleine Posten. S
 Typische Kostenfaktoren sind heutzutage:
 
 - Monatliche Grundgebühren für die Kontoverwaltung,
-- Jährliche Kosten für die Girocard (oft ca. 10 € bis 15 €); das ist ein Modellwert.
+- Jährliche Kosten für die Girocard (oft ca. 10 € bis 15 €); das ist ein Modellwert.
 - Einzelgebühren für Leistungen wie SMS-TANs – für eine Echtzeit-Überweisung darf seit 2025 kein Aufpreis gegenüber einer normalen Überweisung verlangt werden,
 - Hohe Gebühren für Abhebungen an Fremdautomaten,
 - Hohe Dispozinsen, die bei Kontoüberzug sofort greifen,
@@ -128,7 +128,7 @@ Viele zahlen heute mit dem Handy. Bargeld bleibt trotzdem wichtig. Gute Anbieter
 - Gebührenfreies Abheben im Einzelhandel (z. B. bei Supermärkten),
 - Transparente Regeln für die Nutzung im Ausland.
 
-Manche Banken nehmen 2 € bis 5 € pro Abhebung; das ist ein Rechenbeispiel. Damit ist deine Ersparnis schnell weg.
+Manche Banken nehmen 2 € bis 5 € pro Abhebung; das ist ein Rechenbeispiel. Damit ist deine Ersparnis schnell weg.
 
 ### 4. Dispozins nicht ignorieren
 

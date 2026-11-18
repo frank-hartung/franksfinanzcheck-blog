@@ -120,7 +120,7 @@ Moderne Maschinen wiegen die Wäsche zwar oft ab.
 
 Du passt die Wassermenge dann automatisch an.
 Doch die Ersparnis bei einer halben Ladung bleibt gering.
-Der Stromverbrauch für das Aufheizen ist unverhältnismäßig hoch.
+Der [Stromverbrauch](../../posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/) für das Aufheizen ist unverhältnismäßig hoch.
 Warte lieber, bis genug Wäsche für eine volle Trommel bereitliegt.
 
 In meinem 4K-Prüfpfad ordnen wir diesen Bereich dem Schritt "Kurs halten" zu.
