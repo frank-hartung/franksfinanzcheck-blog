@@ -153,7 +153,7 @@ Lass uns eine einfache Modellrechnung machen. Wir nehmen an, du kaufst Hardware 
 
 **Beispielrechnung Hardware-Kosten:**
 * Annahme: Kauf eines WLAN-Repeaters für 50,00 €.
-* Annahme: Stromverbrauch des Repeaters von 5 Watt.
+* Annahme: [Stromverbrauch](../../posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/) des Repeaters von 5 Watt.
 * Annahme: Strompreis von 0,40 € pro Kilowattstunde.
 * Rechnung [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/) pro Jahr: (5 Watt * 24 Stunden * 365 Tage) / 1000 * 0,40 € = 17,52 €.
 * Gesamtkosten im ersten Jahr: 50,00 € + 17,52 € = 67,52 €.

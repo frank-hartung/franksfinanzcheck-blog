@@ -65,7 +65,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Ein herkömmlicher Router sendet sein Signal von einem festen Punkt aus. Je weiter du dich entfernst, desto schwächer wird die Verbindung. Wände, Möbel und sogar Wasserleitungen dämpfen die Wellen. Ein Mesh-System hingegen besteht aus mehreren kleinen Stationen.
 
-Diese Stationen nennen wir Knotenpunkte. Sie arbeiten zusammen und bilden ein einziges, großes Funknetz. Wenn du dein Mesh WLAN nachrüsten möchtest, kaufst du meist ein Set. Dieses Set besteht aus einer Basisstation und mehreren Satelliten.
+Diese Stationen nennen wir Knotenpunkte. Sie arbeiten zusammen und bilden ein einziges, großes Funknetz. Wenn du dein [Mesh WLAN](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) nachrüsten möchtest, kaufst du meist ein Set. Dieses Set besteht aus einer Basisstation und mehreren Satelliten.
 
 Dein Handy wechselt automatisch zum stärksten Sender. Du merkst diesen Wechsel beim Herumlaufen in der Wohnung nicht. Es gibt keine kurzen Abbrüche wie bei klassischen Repeatern. Das System steuert den Datenverkehr intelligent im Hintergrund.
 

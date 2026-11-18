@@ -98,7 +98,7 @@ Der Markt für smarte Technik ist riesig. Nicht jedes Gadget hilft dir jedoch be
 Diese Geräte ersetzen deine alten manuellen Drehregler. Du erstellst individuelle Zeitpläne für jeden Raum. So ist das Badezimmer morgens warm, während die Temperatur tagsüber sinkt. Viele Systeme erkennen offene Fenster und regeln die Zufuhr automatisch ab.
 
 ### Smarte Zwischenstecker (smart Plugs)
-Diese Stecker trennen Gerätegruppen komplett vom Netz. Du legst fest, dass Kaffeemaschine und Toaster nachts stromlos bleiben. Auch für Stehlampen im Wohnzimmer sind sie perfekt geeignet. Du [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) damit unnötige Brenndauer und senkst den Verbrauch.
+Diese Stecker trennen Gerätegruppen komplett vom Netz. Du legst fest, dass [Kaffeemaschine](../../posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/) und Toaster nachts stromlos bleiben. Auch für Stehlampen im Wohnzimmer sind sie perfekt geeignet. Du [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) damit unnötige Brenndauer und senkst den Verbrauch.
 
 ### Vernetzte Beleuchtung
 LED-Leuchtmittel sind bereits sehr sparsam. Erst Bewegungsmelder und Helligkeitssensoren machen sie wirklich smart. Im Flur oder Keller brennt das Licht oft stundenlang ungenutzt. Ein Sensor löst dieses Problem dauerhaft und spart Energie.

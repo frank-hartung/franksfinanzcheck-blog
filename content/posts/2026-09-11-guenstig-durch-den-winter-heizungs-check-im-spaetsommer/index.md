@@ -166,7 +166,7 @@ Es gibt keine feste Regel wie „55 °C für jedes gedämmte Haus“. Heizfläch
 
 ## Schritt 7: Rohrdämmung und Pumpe ansehen
 
-Frei liegende Heizungsrohre in kalten Räumen sollten gedämmt sein. Prüfe, ob die Dämmung fehlt oder kaputt ist. Eigentümer können einfache Abschnitte selbst nachrüsten. Bei Armaturen und engen Stellen hilft ein Fachbetrieb.
+Frei liegende Heizungsrohre in kalten Räumen sollten gedämmt sein. Prüfe, ob die Dämmung fehlt oder kaputt ist. Eigentümer können einfache Abschnitte selbst [nachrüsten](../../posts/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung/). Bei Armaturen und engen Stellen hilft ein Fachbetrieb.
 
 Alte Pumpen ohne Regelung können viel Strom brauchen. Notiere Hersteller und Typ, statt sie selbst auszubauen. Ein Fachbetrieb prüft, ob Tausch, neue Einstellung oder ein hydraulischer Abgleich sinnvoll ist.
 

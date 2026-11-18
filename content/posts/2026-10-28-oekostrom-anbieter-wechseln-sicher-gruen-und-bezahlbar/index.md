@@ -129,7 +129,7 @@ Um die Wirkung auf dein Portemonnaie zu verstehen, hilft eine Beispielrechnung. 
 
 **Annahmen der Modellrechnung:**
 - Haushaltstyp: 3 Personen in einer Stadtwohnung.
-- Jährlicher Stromverbrauch: 3.500 kWh.
+- Jährlicher [Stromverbrauch](../../posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/): 3.500 kWh.
 - Aktueller Tarif (Grundversorgung): 46 Cent pro kWh Arbeitspreis + 120 € Grundpreis pro Jahr.
 - Neuer Ökotarif: 31 Cent pro kWh Arbeitspreis + 140 € Grundpreis pro Jahr.
 
