@@ -2,7 +2,7 @@
   "target": 6,
   "ready": 4,
   "pool_size": 12,
-  "generated_at": "2026-11-18T15:39:06Z",
+  "generated_at": "2026-11-18T21:55:58Z",
   "candidates": [
     {
       "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
@@ -170,19 +170,19 @@
     {
       "slug": "2026-11-18-vorrat-planen-leicht-gemacht-so-sparst-du-beim",
       "ready": false,
-      "sha256": "993f7a27154df56a6653d0fb18d8a114dcd7c9ede5c2f60917ee1a71d326eb2d",
-      "flesch": 62.9,
-      "measured_at": "2026-11-18T12:46:46Z",
+      "sha256": "c838a6345b58182c55e8f9ab563e8dca1e03f6d5b004cbad02fa559f4ac59758",
+      "flesch": 63.2,
+      "measured_at": "2026-11-18T21:55:58Z",
       "reason": "Reserve-Qualitäts-Gate: Umfang: 881 Wörter / 6447 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
       "details": [
         "Umfang: 881 Wörter / 6447 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
       ],
-      "score": 0.877,
+      "score": 0.907,
       "parts": {
         "spelling": 0.88,
         "meta": 1.0,
         "structure": 0.7,
-        "typography": 0.56,
+        "typography": 0.86,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 0.95
@@ -261,15 +261,13 @@
   ],
   "measurement": {
     "kind": "partial",
-    "run_id": "44337397179",
+    "run_id": "44406169530",
     "run_attempt": "1"
   },
   "recert": {
-    "at": "2026-11-18T15:39:06Z",
+    "at": "2026-11-18T21:55:58Z",
     "renewed": [
-      "2026-11-18-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
-      "2026-11-18-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
-      "2026-11-18-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich"
+      "2026-11-18-vorrat-planen-leicht-gemacht-so-sparst-du-beim"
     ],
     "tool": "scripts/reserve_recert.py"
   }
