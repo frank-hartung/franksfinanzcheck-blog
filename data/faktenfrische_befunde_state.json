@@ -1,10 +1,10 @@
 {
-  "erzeugt": "2026-11-18T01:20:40Z",
+  "erzeugt": "2026-11-18T13:25:26Z",
   "stichtag": "2026-11-18",
-  "offen": 202,
-  "seiten": 53,
-  "live_seiten": 34,
-  "live_befunde": 127,
+  "offen": 213,
+  "seiten": 56,
+  "live_seiten": 35,
+  "live_befunde": 129,
   "ueberholt": 161,
   "ohne_fassung": 11,
   "seite_fehlt": 0,
@@ -40,12 +40,15 @@
     "2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit": 3,
     "2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust": 3,
     "2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung": 2,
+    "2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich": 5,
     "2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen": 5,
     "2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken": 1,
     "2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert": 5,
+    "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck": 2,
     "2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt": 3,
     "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten": 4,
     "2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken": 5,
+    "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert": 4,
     "2026-10-19-urlaubskasse-clever-aufbessern": 3,
     "2026-10-21-mietwagen-fallen-im-urlaub-vermeiden": 4,
     "2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick": 5,
@@ -64,8 +67,8 @@
     "2026-11-13-tagesgeld-und-zinsen-so-parkst-du-dein-geld-sicher": 5,
     "2026-11-16-die-50-30-20-regel-bringt-ordnung-wohin-mit-dem-gehalt": 5,
     "2026-11-16-stabile-gaskosten-lohnt-sich-eine-preisgarantie-fuer-dich": 4,
-    "2026-11-17-strompreis-2026-herbst-check-fuer-deine-stromkosten": 5,
-    "2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet": 3,
+    "2026-11-18-strompreis-2026-herbst-check-fuer-deine-stromkosten": 5,
+    "2026-11-18-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet": 3,
     "frugalismus": 3,
     "strom-sparen": 3
   },
@@ -1039,7 +1042,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-17-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-18-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "1c6e4d2f12da24ec4081",
       "typ": "luecke",
@@ -1051,7 +1054,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-17-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-18-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "5b539daf371f7362a3ef",
       "typ": "praezision",
@@ -1063,7 +1066,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-17-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-18-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "77d809de9e06d1d6910d",
       "typ": "luecke",
@@ -1075,7 +1078,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-17-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-18-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "ad7c0a90ef52ff35130e",
       "typ": "luecke",
@@ -1087,7 +1090,7 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-17-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-18-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ursprungs_slug": "2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "id": "f227178fbda2cc59c350",
       "typ": "luecke",
@@ -1814,7 +1817,8 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
+      "slug": "2026-11-18-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
+      "ursprungs_slug": "2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
       "id": "842ddd33d3dd6b0b97f7",
       "typ": "luecke",
       "text": "Muffiger Geruch deutet oft auf tiefliegenden Schimmel oder Feuchtigkeit hin.",
@@ -1825,7 +1829,8 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
+      "slug": "2026-11-18-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
+      "ursprungs_slug": "2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
       "id": "d3e210fb738bd77ef594",
       "typ": "luecke",
       "text": "Neue Möbel verlieren oft sofort nach dem Kauf massiv an Wert.",
@@ -1836,7 +1841,8 @@
       "nicht_entscheidbar_grund": ""
     },
     {
-      "slug": "2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
+      "slug": "2026-11-18-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
+      "ursprungs_slug": "2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
       "id": "da84fa452f879ea8f2da",
       "typ": "luecke",
       "text": "Die Eigenleistung lohnt sich finanziell, wenn die Ersparnis den Zeitaufwand rechtfertigt.",
@@ -2293,6 +2299,127 @@
       "text": "Behauptung, dass einige Broker bereits ab 1 € monatlich starten, ohne Quelle.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
       "alter_tage": 1,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich",
+      "id": "7312c88fd0b751847ccf",
+      "typ": "praezision",
+      "text": "Ein Konto für Tagesgeld ist die beste Wahl für dich.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich",
+      "id": "a8ddfb1310192fb9c280",
+      "typ": "luecke",
+      "text": "Die 50–30–20-Regel hilft dir bei der Ordnung deines Geldes.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich",
+      "id": "c6ab40eeb8dea1d1c3da",
+      "typ": "luecke",
+      "text": "Als sicherer Rahmen gilt seit langer Zeit eine einfache Faustregel. Spare etwa drei bis sechs Netto-Monatslöhne an.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich",
+      "id": "c858896722ed308b0271",
+      "typ": "praezision",
+      "text": "Dein Sparbetrag steigt dadurch leicht um fünf bis zehn Prozent an.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich",
+      "id": "cd38bc25c828bedd7b72",
+      "typ": "luecke",
+      "text": "Viele Experten raten zu 10 % des Nettolohns.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck",
+      "id": "a74029dd4e284794d697",
+      "typ": "luecke",
+      "text": "Eine separate Meldung beim Netzbetreiber ist im Standardfall nicht mehr nötig.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck",
+      "id": "c45ea4bb1a6f2330679a",
+      "typ": "luecke",
+      "text": "Keine bundesweite Zuschusspflicht: Zuschüsse kommen, wenn überhaupt, von Städten, Gemeinden oder Ländern.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
+      "id": "108c4ad3f4adcb4d2a1b",
+      "typ": "veraltet",
+      "text": "Die Steigerung der Energiepreise wird mit 14,9 % angegeben, die aktuelle Destatis-Statistik weist jedoch nur +12,7 % aus.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
+      "id": "211613734bc20a8603e5",
+      "typ": "luecke",
+      "text": "Bei der Erwähnung von Konten \"ohne Grundgebühr\" fehlt die notwendige Eingrenzung auf die Zielgruppe (Verbraucher) und der regulatorische Rahmen des Zahlungskontengesetzes.",
+      "beleg": "",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
+      "id": "2bbbd4141968a4365ab6",
+      "typ": "luecke",
+      "text": "Beim Versicherungscheck fehlt der Hinweis auf die Prüfung der Notwendigkeit (existenzielle Risiken), wie sie die Verbraucherzentrale als ersten Schritt priorisiert.",
+      "beleg": "",
+      "alter_tage": 0,
+      "fassung_status": "aktuell",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
+      "id": "b28c1e2fb42f8f2ba34c",
+      "typ": "praezision",
+      "text": "Das Versprechen, Portale zeigten die \"besten Tarife auf einen Blick\", ist unpräzise, da sie nur Marktausschnitte abbilden und staatlich zertifizierte Vergleiche ignorieren.",
+      "beleg": "",
+      "alter_tage": 0,
       "fassung_status": "aktuell",
       "entscheidbar": true,
       "nicht_entscheidbar_grund": ""

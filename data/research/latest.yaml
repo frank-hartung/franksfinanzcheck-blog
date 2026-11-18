@@ -1,5 +1,5 @@
-generated_at: '2026-11-17T12:26:45Z'
-day: '2026-11-17'
+generated_at: '2026-11-18T12:14:23Z'
+day: '2026-11-18'
 mode: deterministic
 teams:
   trending:
@@ -252,61 +252,63 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 'DSL-Tarife im Vergleich: Welcher ist der beste?'
+  - topic: 'Black Friday DSL-Deals: Diese Angebote lohnen sich wirklich'
     pillar: internet-dsl
     signal: niche_hook
-    source: 'topics:DSL-Tarife im Vergleich: Welcher ist der beste?'
+    source: 'topics:Black Friday DSL-Deals: Diese Angebote lohnen sich wirklich'
     score: 0.55
     keywords:
-    - DSL-Tarife
-    - Internetvergleich
-    - DSL-Anbieter
-  - topic: Günstige Versicherungen für dein Zuhause finden
-    pillar: versicherungen
+    - Black Friday Internet Angebote
+    - DSL Deals Black Friday
+    - Internet Tarif Angebote November
+  - topic: 'Flugverspätung: So bekommst du deine Entschädigung'
+    pillar: mietwagen
     signal: niche_hook
-    source: topics:Günstige Versicherungen für dein Zuhause finden
+    source: 'topics:Flugverspätung: So bekommst du deine Entschädigung'
     score: 0.55
     keywords:
-    - Versicherungen
-    - Zuhause
-    - Günstig
-  - topic: 'Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?'
+    - Flugverspätung Entschädigung
+    - Fluggastrechte
+    - Entschädigung beantragen
+  - topic: 'Gebrauchte Möbel: So erkennst du solide Ware'
+    pillar: frugalismus
+    signal: niche_hook
+    source: 'topics:Gebrauchte Möbel: So erkennst du solide Ware'
+    score: 0.55
+    keywords:
+    - Gebrauchte Möbel
+    - Secondhand Möbel
+    - Möbel aufarbeiten
+  - topic: 'Homeoffice: So planst du die Leitung für zwei Arbeitsplätze'
+    pillar: internet-dsl
+    signal: niche_hook
+    source: 'topics:Homeoffice: So planst du die Leitung für zwei Arbeitsplätze'
+    score: 0.55
+    keywords:
+    - Homeoffice Internet
+    - Bandbreite Arbeitsplatz
+    - Leitung teilen
+  - topic: 'Restschuldversicherung beim Ratenkredit: Wann sie sinnvoll ist und wie
+      du sie widerrufst'
     pillar: konto-karten
     signal: niche_hook
-    source: 'topics:Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?'
+    source: 'topics:Restschuldversicherung beim Ratenkredit: Wann sie sinnvoll ist
+      und wie du sie widerrufst'
     score: 0.55
     keywords:
-    - Konto eröffnen
-    - Schufa
-    - Konto ohne Schufa
-  - topic: Kostenloses Girokonto ohne Gebühren finden
+    - Restschuldversicherung widerrufen
+    - Ratenkredit Absicherung sinnvoll
+    - Kredit Umschuldung Kosten
+    - Versteckte Kreditgebühren
+  - topic: 'Sparziel sichtbar machen: So bleiben deine Vorsätze im Alltag'
     pillar: konto-karten
     signal: niche_hook
-    source: topics:Kostenloses Girokonto ohne Gebühren finden
+    source: 'topics:Sparziel sichtbar machen: So bleiben deine Vorsätze im Alltag'
     score: 0.55
     keywords:
-    - Kostenloses Girokonto
-    - Girokonto Vergleich
-    - Kontoführungsgebühren sparen
-  - topic: 'Smart Home: Diese Geräte sparen wirklich Strom'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Smart Home: Diese Geräte sparen wirklich Strom'
-    score: 0.55
-    keywords:
-    - Smart Home
-    - Energie sparen
-    - Smarte Steckdosen
-  - topic: 'Strompreis-Entwicklung: Wie du dich vor hohen Kosten schützen kannst'
-    pillar: strom-sparen
-    signal: niche_hook
-    source: 'topics:Strompreis-Entwicklung: Wie du dich vor hohen Kosten schützen
-      kannst'
-    score: 0.55
-    keywords:
-    - Strompreis
-    - Entwicklung
-    - Kosten sparen
+    - Sparziel
+    - Vorsätze durchhalten
+    - Motivation sparen
 live_web:
   enabled: false
   findings: []

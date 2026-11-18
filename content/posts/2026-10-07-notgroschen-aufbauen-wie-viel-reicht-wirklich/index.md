@@ -28,7 +28,7 @@ quellen:
     titel: "Referenzseite destatis.de"
     url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
     herausgeber: "Statistisches Bundesamt"
-faktencheck: 2026-10-08
+faktencheck: 2026-11-18
 kurzantwort: "Du solltest mindestens drei bis sechs Monatsausgaben ansparen – das entspricht bei einem Nettoeinkommen von 2 000 € etwa 6 000 € – 12 000 €. Die Verbraucherzentrale empfiehlt diesen Betrag als sicheren Puffer"
 ---
 

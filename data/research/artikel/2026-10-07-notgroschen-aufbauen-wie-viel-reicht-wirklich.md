@@ -1,12 +1,12 @@
 # Faktenfrische: Notgroschen aufbauen: Wie viel reicht wirklich?
 
-> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-10-08 11:35 UTC.
+> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-18 13:23 UTC.
 > Agent-Reach-Kanäle, nur lesend. Fundstellen sind Signale, keine Freigabe.
 
 - **Artikel:** `content/posts/2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich/index.md`
 - **Themenwelt:** frugalismus
-- **Fälligkeit:** Erstrecherche – noch nie faktengeprüft (Klasse: YMYL)
-- **GEO-Reife:** 3/6 (50 %)
+- **Fälligkeit:** frisch geprüft vor 41 Tagen (Intervall 45 Tage) (Klasse: YMYL)
+- **GEO-Reife:** 6/6 (100 %)
 - **Suchbegriffe:** Notgroschen aufbauen: Wie viel reicht wirklich?, Notgroschen aufbauen, Notgroschen, Inflation, Verbraucherpreise, Sparquote, Haushaltsbudget, aufbauen, reicht, wirklich
 - **Kanäle:** rss:Statistisches Bundesamt – Pressemitteilungen, web:destatis.de
 
@@ -27,18 +27,22 @@
 > 
 > # Verbraucherpreisindex und Inflationsrate
 > 
-> [**+3,3%**Inflations­rate (vorläufig)](https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/09/PD26_348_611.html "Inflationsrate im September 
+> [**+2,8%**Inflations­rate](https://www.destatis.de/DE/Themen/Wirtschaft/Konjunkturindikatoren/Basisdaten/vpi001j.html "Verbraucherpreisindex für De
 
 ## Fachliche Befunde (KI-Fachprüfung)
 
-_Keine Fachprüfung in diesem Lauf (kein KI-Schlüssel GROQ_API_KEY/GEMINI_API_KEY oder keine Befunde)._
+Status: geprüft (groq:openai/gpt-oss-120b)
+
+- **luecke** – Als sicherer Rahmen gilt seit langer Zeit eine einfache Faustregel. Spare etwa drei bis sechs Netto-Monatslöhne an. (Beleg: <https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html>)
+- **luecke** – Die 50–30–20-Regel hilft dir bei der Ordnung deines Geldes. (Beleg: <https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html>)
+- **luecke** – Viele Experten raten zu 10 % des Nettolohns. (Beleg: <https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html>)
+- **praezision** – Ein Konto für Tagesgeld ist die beste Wahl für dich. (Beleg: <https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html>)
+- **praezision** – Dein Sparbetrag steigt dadurch leicht um fünf bis zehn Prozent an. (Beleg: <https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html>)
 
 ## Offene GEO-Punkte
 
-- Kurzantwort-Box (direkte Antwort für AI Overviews)
-- Belegkette im Frontmatter (`quellen:` → citation-Schema)
-- Sichtbares Prüfdatum (`faktencheck:`)
+- keine
 
 ## Kanal-Störungen
 
-- Statistisches Bundesamt – Pressemitteilungen: Feed nicht lesbar
+- Statistisches Bundesamt – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)

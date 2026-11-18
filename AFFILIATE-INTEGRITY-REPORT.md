@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-11-17 12:41:05 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-11-18 12:33:12 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 86 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
+**Geprüfte Live-Artikel:** 88 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -93,10 +93,12 @@
 | 2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem | 1 → 3 ✅ | /go/gas/ |
 | 2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck | 2 → 3 ✅ | /go/fluege/ |
 | 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang | 2 → 3 ✅ | /go/strom/ |
-| 2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen | 4 → 4 ✅ | /go/allgemein/, /go/strom/ |
+| 2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen | 3 → 4 ✅ | /go/allgemein/, /go/strom/ |
+| 2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee | 2 → 3 ✅ | /go/strom/ |
 | 2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort | 2 → 3 ✅ | /go/dsl/ |
 | 2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein | 3 → 3 ✅ | /go/dsl/ |
 | 2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst | 2 → 3 ✅ | /go/kreditkarte/ |
+| 2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung | 2 → 3 ✅ | /go/dsl/ |
 | 2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst | 3 → 3 ✅ | /go/allgemein/ |
 
 ## Hinweise (nicht blockierend)
@@ -105,7 +107,6 @@
 - 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub: 5 Affiliate-Links im Artikel – Anti-Stuffing prüfen (affiliate_profi_check.py A5)
 - 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt: Redaktionell ausgenommen von der Mindestpflicht für Affiliate-Links: Reiner DNS-Messtest ohne passendes Tarifangebot – ein Tarif-CTA wäre sachfremd.
 - 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster: 4 Affiliate-Links im Artikel – Anti-Stuffing prüfen (affiliate_profi_check.py A5)
-- 2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen: Klick-Attribution (data-klick=affiliate_click) fehlt an mindestens einem Gateway-Link – Umsatz-Messung pro Artikel unvollständig (Prüfpunkt: render-link.html)
 - 2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen: 4 Affiliate-Links im Artikel – Anti-Stuffing prüfen (affiliate_profi_check.py A5)
 
 ## Begründete Ausnahmen (kein Affiliate-CTA – redaktionelle Entscheidung)

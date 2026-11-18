@@ -2,12 +2,12 @@
 
 _Stand 2026-11-18 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**202 offene Befunde auf 53 Seiten · davon 34 Live-Seiten mit 127 Befunden · ältester 19 Tage · Frist 14 Tage.**
+**213 offene Befunde auf 56 Seiten · davon 35 Live-Seiten mit 129 Befunden · ältester 19 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 202 |
-| Seiten betroffen | 53 (davon live: 34) |
+| Offene Befunde | 213 |
+| Seiten betroffen | 56 (davon live: 35) |
 | Text seit dem Befund geändert | 161 |
 | Altbestand ohne Fassungs-Hash | 11 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
@@ -32,7 +32,7 @@ _Stand 2026-11-18 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 172 von 202 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 172 von 213 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -630,6 +630,20 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden ed2161154dcee85da1e
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f593fe21275bd9dcefef --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck` · **LIVE** · Risikoklasse standard · 2 Befund(e)
+
+Datei: `content/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `a74029dd4e284794d697` | luecke | 0 T | Text unverändert seit dem Befund | Eine separate Meldung beim Netzbetreiber ist im Standardfall nicht mehr nötig. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `c45ea4bb1a6f2330679a` | luecke | 0 T | Text unverändert seit dem Befund | Keine bundesweite Zuschusspflicht: Zuschüsse kommen, wenn überhaupt, von Städten, Gemeinden oder Ländern. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden a74029dd4e284794d697 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden c45ea4bb1a6f2330679a --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden` · nicht im Live-Bestand · 5 Befund(e)
 
 Seite: `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden`
@@ -720,11 +734,11 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 3a69bd57886154a18b8
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4f777954306ac7b21e03 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-11-17-strompreis-2026-herbst-check-fuer-deine-stromkosten` · nicht im Live-Bestand · 5 Befund(e)
+### `2026-11-18-strompreis-2026-herbst-check-fuer-deine-stromkosten` · nicht im Live-Bestand · 5 Befund(e)
 
-Seite: `2026-11-17-strompreis-2026-herbst-check-fuer-deine-stromkosten`
+Seite: `2026-11-18-strompreis-2026-herbst-check-fuer-deine-stromkosten`
 
-Herkunft nach Datums-Lift: `2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten` → `2026-11-17-strompreis-2026-herbst-check-fuer-deine-stromkosten`. Befund-ID und Fassungsanker bleiben unverändert; das Re-Dating ist keine fachliche Entscheidung.
+Herkunft nach Datums-Lift: `2026-11-09-strompreis-2026-herbst-check-fuer-deine-stromkosten` → `2026-11-18-strompreis-2026-herbst-check-fuer-deine-stromkosten`. Befund-ID und Fassungsanker bleiben unverändert; das Re-Dating ist keine fachliche Entscheidung.
 
 | Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
 |---|---|---|---|---|---|
@@ -886,9 +900,11 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden c32c41bdd629ae4646c
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d557c9fcb4562042612b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet` · nicht im Live-Bestand · 3 Befund(e)
+### `2026-11-18-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet` · nicht im Live-Bestand · 3 Befund(e)
 
-Seite: `2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet`
+Seite: `2026-11-18-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet`
+
+Herkunft nach Datums-Lift: `2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet` → `2026-11-18-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet`. Befund-ID und Fassungsanker bleiben unverändert; das Re-Dating ist keine fachliche Entscheidung.
 
 | Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
 |---|---|---|---|---|---|
@@ -970,6 +986,44 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4246118449c91859654
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4f62641b3af8d53ba65d --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5f76a2f9b3a57de72e73 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6df8b77e2840e62c5711 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich` · nicht im Live-Bestand · 5 Befund(e)
+
+Seite: `2026-10-07-notgroschen-aufbauen-wie-viel-reicht-wirklich`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `7312c88fd0b751847ccf` | praezision | 0 T | Text unverändert seit dem Befund | Ein Konto für Tagesgeld ist die beste Wahl für dich. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `a8ddfb1310192fb9c280` | luecke | 0 T | Text unverändert seit dem Befund | Die 50–30–20-Regel hilft dir bei der Ordnung deines Geldes. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `c6ab40eeb8dea1d1c3da` | luecke | 0 T | Text unverändert seit dem Befund | Als sicherer Rahmen gilt seit langer Zeit eine einfache Faustregel. Spare etwa drei bis sechs Netto-Monatslöhne an. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `c858896722ed308b0271` | praezision | 0 T | Text unverändert seit dem Befund | Dein Sparbetrag steigt dadurch leicht um fünf bis zehn Prozent an. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `cd38bc25c828bedd7b72` | luecke | 0 T | Text unverändert seit dem Befund | Viele Experten raten zu 10 % des Nettolohns. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7312c88fd0b751847ccf --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden a8ddfb1310192fb9c280 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden c6ab40eeb8dea1d1c3da --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden c858896722ed308b0271 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden cd38bc25c828bedd7b72 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert` · nicht im Live-Bestand · 4 Befund(e)
+
+Seite: `2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `108c4ad3f4adcb4d2a1b` | veraltet | 0 T | Text unverändert seit dem Befund | Die Steigerung der Energiepreise wird mit 14,9 % angegeben, die aktuelle Destatis-Statistik weist jedoch nur +12,7 % aus. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `211613734bc20a8603e5` | luecke | 0 T | Text unverändert seit dem Befund | Bei der Erwähnung von Konten "ohne Grundgebühr" fehlt die notwendige Eingrenzung auf die Zielgruppe (Verbraucher) und der regulatorische Rahmen des Zahlungskontengesetzes. | – |
+| `2bbbd4141968a4365ab6` | luecke | 0 T | Text unverändert seit dem Befund | Beim Versicherungscheck fehlt der Hinweis auf die Prüfung der Notwendigkeit (existenzielle Risiken), wie sie die Verbraucherzentrale als ersten Schritt priorisiert. | – |
+| `b28c1e2fb42f8f2ba34c` | praezision | 0 T | Text unverändert seit dem Befund | Das Versprechen, Portale zeigten die "besten Tarife auf einen Blick", ist unpräzise, da sie nur Marktausschnitte abbilden und staatlich zertifizierte Vergleiche ignorieren. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 108c4ad3f4adcb4d2a1b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 211613734bc20a8603e5 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2bbbd4141968a4365ab6 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden b28c1e2fb42f8f2ba34c --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ---

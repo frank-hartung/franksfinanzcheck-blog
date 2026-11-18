@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-17 12:41:09 UTC",
+ "generated_at": "2026-11-18 12:33:14 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 136,
- "checked_links": 325,
+ "checked_articles": 138,
+ "checked_links": 331,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -185,17 +185,6 @@
   },
   {
    "code": "IW2",
-   "slug": "2026-11-13-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
-   "line": 186,
-   "route": "allgemein",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
    "slug": "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
    "line": 17,
    "route": "dsl",
@@ -207,19 +196,8 @@
   },
   {
    "code": "IW2",
-   "slug": "2026-11-13-strompreis-2026-herbst-check-fuer-deine-stromkosten",
-   "line": 254,
-   "route": "allgemein",
-   "slot": "end",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
    "slug": "2026-11-13-tagesgeld-und-zinsen-so-parkst-du-dein-geld-sicher",
-   "line": 77,
+   "line": 104,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
@@ -253,6 +231,28 @@
    "code": "IW2",
    "slug": "2026-11-16-e-auto-laden-so-senkst-du-deine-stromkosten",
    "line": 108,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-17-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
+   "line": 196,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-17-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+   "line": 187,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",

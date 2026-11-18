@@ -1,15 +1,15 @@
 {
   "target": 6,
-  "ready": 3,
+  "ready": 4,
   "pool_size": 12,
-  "generated_at": "2026-11-17T13:01:37Z",
+  "generated_at": "2026-11-18T12:48:12Z",
   "candidates": [
     {
       "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
       "ready": true,
       "sha256": "ff4c55ac20b3266a1b41c9ee22db6d66498d0912df2a5dcb120c986bb11ffbce",
       "flesch": 66.7,
-      "measured_at": "2026-11-17T12:51:28Z",
+      "measured_at": "2026-11-18T12:43:17Z",
       "score": 0.962,
       "parts": {
         "spelling": 0.88,
@@ -22,18 +22,11 @@
       }
     },
     {
-      "slug": "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee",
-      "ready": false,
-      "sha256": "90a1ea61374612813c3196c08ec0f2feef27b1d80ec078bddaf06f76817b7575",
-      "measured_at": "2026-11-17T12:52:32Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
-    },
-    {
       "slug": "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
       "ready": true,
       "sha256": "e25212d0820d8b781bd6150d2ea0c0d3cc0395d71ead9a25732228dcc10be799",
       "flesch": 63.6,
-      "measured_at": "2026-11-17T12:53:34Z",
+      "measured_at": "2026-11-18T12:43:49Z",
       "score": 0.946,
       "parts": {
         "spelling": 0.8,
@@ -50,7 +43,7 @@
       "ready": true,
       "sha256": "2e5d9a26e9c0fa06ef07e9f1c7fcdb90ab9d8e4ad1f94e077e1b7c8db2b6abe4",
       "flesch": 66.0,
-      "measured_at": "2026-11-17T12:54:37Z",
+      "measured_at": "2026-11-18T12:44:22Z",
       "score": 0.93,
       "parts": {
         "spelling": 0.8,
@@ -63,21 +56,55 @@
       }
     },
     {
-      "slug": "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
-      "ready": false,
-      "sha256": "6538d82340749edaae9ff9b9eb8732f218c8292a670060b7251bf2a6476ea5ce",
-      "measured_at": "2026-11-17T12:55:37Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
+      "slug": "2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
+      "ready": true,
+      "sha256": "b236c1c9e5dc5fc8e3ac93799c679829ed063442daaf5b33e5d8a1417e03167c",
+      "flesch": 61.9,
+      "measured_at": "2026-11-18T12:44:50Z",
+      "score": 0.976,
+      "parts": {
+        "spelling": 0.94,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.98,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 0.95
+      }
     },
     {
-      "slug": "2026-11-17-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
+      "slug": "2026-11-18-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
       "ready": false,
-      "sha256": "5d730ad27967fe0667d9419fae21f23bde191fb806c92fa856446e25e0f76d27",
+      "sha256": "c7d3d2a0966adc42e7b8ab9b77477c82f0dec998e824f6b0f557a61fc58bcd12",
+      "flesch": 70.3,
+      "measured_at": "2026-11-18T12:45:18Z",
+      "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+      "details": [
+        "🛑 2026-11-18-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+        "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+      ],
+      "score": 0.966,
+      "parts": {
+        "spelling": 0.86,
+        "meta": 1.0,
+        "structure": 1.0,
+        "typography": 0.94,
+        "uniqueness": 1.0,
+        "affiliate": 1.0,
+        "readability": 1.0
+      }
+    },
+    {
+      "slug": "2026-11-18-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
+      "ready": false,
+      "sha256": "605e611243994a19072ac676ccf0bc69b70450f35d58d72c66d86977a4585c78",
       "flesch": 70.1,
-      "measured_at": "2026-11-17T12:56:38Z",
+      "measured_at": "2026-11-18T12:45:49Z",
       "reason": "Zeichenlänge (check_length.py) nicht bestanden",
       "details": [
-        "🛑 2026-11-17-deine-naechtliche-grundlast-strom-so-erkennst-du-wo: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "🛑 2026-11-18-deine-naechtliche-grundlast-strom-so-erkennst-du-wo: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Zeichenlänge (check_length.py) nicht bestanden",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
@@ -93,37 +120,38 @@
       }
     },
     {
-      "slug": "2026-11-17-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
+      "slug": "2026-11-18-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
       "ready": false,
-      "sha256": "974e5ad2540fbedf857ef60890c83fc1f7ababb0120c82b7b718f98eb78be6b9",
-      "flesch": 61.9,
-      "measured_at": "2026-11-17T12:57:37Z",
-      "reason": "Redundanz-Gate D1–D6 nicht bestanden: D3-X: Absatz wortgleich in 2 Artikeln (content/posts/2026-11-16-die-50-30-20-regel-bringt-ordnung-wohin-mit-dem-gehalt/index.md ≈ content/posts/2026-11-17-gas-anbieter-wechseln-strategie; D4-X: Fast-Dup",
+      "sha256": "234f4fb9f21c83c082c763b13d8a9a7fde18e0108d80c1b53c372a8bf4c5848a",
+      "flesch": 63.6,
+      "measured_at": "2026-11-18T12:46:16Z",
+      "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
-        "🛑 2026-11-17-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
-        "Redundanz-Gate D1–D6 nicht bestanden: D3-X: Absatz wortgleich in 2 Artikeln (content/posts/2026-11-16-die-50-30-20-regel-bringt-ordnung-wohin-mit-dem-gehalt/index.md ≈ content/posts/2026-11-17-gas-anbieter-wechseln-strategie; D4-X: Fast-Duplikat über Artikel (Ratio 1.00, content/posts/2026-11-16-die-50-30-20-regel-bringt-ordnung-wohin-mit-dem-gehalt/index.md ≈ content/posts/2026-11-17-gas-anbieter-wechseln-st; D4-X: Fast-Duplikat über Artikel (Ratio 0.94, content/posts/2026-11-17-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater/index.md ≈ content/posts/2026-11-17-gas-anbieter-wechseln-",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+        "🛑 2026-11-18-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+        "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
       ],
-      "score": 0.976,
+      "score": 0.972,
       "parts": {
-        "spelling": 0.94,
+        "spelling": 0.88,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.98,
+        "typography": 0.96,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.95
+        "readability": 1.0
       }
     },
     {
-      "slug": "2026-11-17-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-18-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ready": false,
-      "sha256": "1aa20791e1ba5545577c1024e08052fac5677650ebc351eea2c2478e03325ff3",
+      "sha256": "32f8b1b31f76bfa43bc265809927242d308aa194e05f2284dbaa45d90dc520f2",
       "flesch": 63.8,
-      "measured_at": "2026-11-17T12:58:36Z",
+      "measured_at": "2026-11-18T12:46:44Z",
       "reason": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
       "details": [
-        "🛑 2026-11-17-strompreis-2026-herbst-check-fuer-deine-stromkosten: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "🛑 2026-11-18-strompreis-2026-herbst-check-fuer-deine-stromkosten: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
         "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erforderten zwingend einen Smart Meter, wird ohne Angabe von Voraussetzungen, Kosten oder Verfügbarkeit präzisiert.; 77d809de9e06d1d6910d (luecke): Es wird eine Prognose für den Strompreis 2026 angegeben („Trends erkennen“, „Netzentgelte steigen“), ohne dass dafür aktuelle Marktdaten oder offizielle Prognosen genannt werden.; ad7c0a90ef52ff35130e (luecke): Der Artikel behauptet, dass Preisgarantien vor Preissteigerungen schützen, liefert jedoch keine Quelle für diese Aussage.; f227178fbda2cc59c350 (luecke): Die Aussage, dass Ökostrom‑Tarife häufig günstiger als die Grundversorgung seien, wird nicht durch eine Quelle belegt.",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
       ],
@@ -139,14 +167,14 @@
       }
     },
     {
-      "slug": "2026-11-17-vorrat-planen-leicht-gemacht-so-sparst-du-beim",
+      "slug": "2026-11-18-vorrat-planen-leicht-gemacht-so-sparst-du-beim",
       "ready": false,
-      "sha256": "689ac0265b805a5f0d9e10e281aa4b8c1ce2c70e7973375c2b2e13da29d14e8e",
-      "flesch": 64.0,
-      "measured_at": "2026-11-17T12:58:38Z",
-      "reason": "Reserve-Qualitäts-Gate: Umfang: 854 Wörter / 6166 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
+      "sha256": "993f7a27154df56a6653d0fb18d8a114dcd7c9ede5c2f60917ee1a71d326eb2d",
+      "flesch": 62.9,
+      "measured_at": "2026-11-18T12:46:46Z",
+      "reason": "Reserve-Qualitäts-Gate: Umfang: 881 Wörter / 6447 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
       "details": [
-        "Umfang: 854 Wörter / 6166 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
+        "Umfang: 881 Wörter / 6447 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
       ],
       "score": 0.877,
       "parts": {
@@ -160,14 +188,14 @@
       }
     },
     {
-      "slug": "2026-11-17-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste",
+      "slug": "2026-11-18-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste",
       "ready": false,
-      "sha256": "0779222e451896f663a77575561969ab9ad712d99e9c71cc392945d0f4e0d453",
+      "sha256": "439636c4004bd4f8076de4ff9747244c73564323f8afc2fd087e283099a06df5",
       "flesch": 68.4,
-      "measured_at": "2026-11-17T12:59:37Z",
+      "measured_at": "2026-11-18T12:47:15Z",
       "reason": "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
       "details": [
-        "🛑 2026-11-17-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "🛑 2026-11-18-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
@@ -183,15 +211,15 @@
       }
     },
     {
-      "slug": "2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
+      "slug": "2026-11-18-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
       "ready": false,
-      "sha256": "e4b9ff093d43301b8320e47311bad6edf115c1daf5640bb210a291fabac6a5b6",
-      "flesch": 69.8,
-      "measured_at": "2026-11-17T13:00:38Z",
-      "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+      "sha256": "bd48d804353c07e31daa3d25c5b05f876f120b2917059d37a7f5612ece462dbf",
+      "flesch": 69.7,
+      "measured_at": "2026-11-18T12:47:45Z",
+      "reason": "Faktenfrische nicht bestanden: 842ddd33d3dd6b0b97f7 (luecke): Muffiger Geruch deutet oft auf tiefliegenden Schimmel oder Feuchtigkeit hin.; d3e210fb738bd77ef594 (luecke): Neue Möbel verlieren oft sofort nach dem Kauf massiv an Wert.; da84fa",
       "details": [
-        "🛑 2026-11-17-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
-        "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+        "🛑 2026-11-18-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "Faktenfrische nicht bestanden: 842ddd33d3dd6b0b97f7 (luecke): Muffiger Geruch deutet oft auf tiefliegenden Schimmel oder Feuchtigkeit hin.; d3e210fb738bd77ef594 (luecke): Neue Möbel verlieren oft sofort nach dem Kauf massiv an Wert.; da84fa452f879ea8f2da (luecke): Die Eigenleistung lohnt sich finanziell, wenn die Ersparnis den Zeitaufwand rechtfertigt.",
         "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
       ],
@@ -207,26 +235,23 @@
       }
     },
     {
-      "slug": "2026-11-17-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater",
+      "slug": "2026-11-18-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater",
       "ready": false,
-      "sha256": "dbb5a3f1f992e0bfb81dea84204d8a8d0f877c19b0372e279e93612f485b89cb",
-      "flesch": 67.0,
-      "measured_at": "2026-11-17T13:01:37Z",
-      "reason": "Faktenfrische nicht bestanden: 37a962cd1e769a2aae1b (luecke): Keine Quelle für die Behauptung, dass Mesh‑WLAN ein nahtloses Funknetz ohne Verbindungsabbrüche beim Raumwechsel bietet.; 8269201d221bcc779cd6 (luecke): Keine Quelle für die Auss",
+      "sha256": "3c6fb9404b41f0f50d3450f459e000d4fe1dfdb33a9ffcf640413cfd83e9db20",
+      "flesch": 66.7,
+      "measured_at": "2026-11-18T12:48:12Z",
+      "reason": "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
       "details": [
-        "🛑 2026-11-17-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
-        "Faktenfrische nicht bestanden: 37a962cd1e769a2aae1b (luecke): Keine Quelle für die Behauptung, dass Mesh‑WLAN ein nahtloses Funknetz ohne Verbindungsabbrüche beim Raumwechsel bietet.; 8269201d221bcc779cd6 (luecke): Keine Quelle für die Aussage, dass ein einfacher Verstärker oft nur einen zweistelligen Betrag kostet.; c4e268c0d80e71c5f35c (luecke): Keine Quelle für den angenommenen Strompreis von 0,40 €/kWh in der Modellrechnung.; c55e9771bf93f6f50732 (luecke): Keine Quelle für die Angabe, dass Mesh‑Systeme ein drittes Funkband nur für die interne Kommunikation nutzen.; d73d59fad88cc3d3dd2f (luecke): Keine Quelle für die Aussage, dass WLAN‑Repeater die verfügbare Bandbreite oft halbieren.",
-        "Textverständnis-Gate nicht bestanden: R17-KEYWORD-KASUS: Keyword klein geschrieben: „mesh WLAN oder repeater“ statt „Mesh WLAN oder Repeater“ (maschinell eingesetztes Keyword, bitte korrigieren)",
-        "Redundanz-Gate D1–D6 nicht bestanden: D4-X: Fast-Duplikat über Artikel (Ratio 0.94, content/posts/2026-11-17-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater/index.md ≈ content/posts/2026-11-16-die-50-30-20-regel-bri; D4-X: Fast-Duplikat über Artikel (Ratio 0.94, content/posts/2026-11-17-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater/index.md ≈ content/posts/2026-11-17-gas-anbieter-wechseln-",
+        "🛑 2026-11-18-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
-      "score": 0.956,
+      "score": 0.972,
       "parts": {
-        "spelling": 0.8200000000000001,
+        "spelling": 0.86,
         "meta": 1.0,
         "structure": 1.0,
-        "typography": 0.92,
+        "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
         "readability": 1.0
@@ -235,7 +260,7 @@
   ],
   "measurement": {
     "kind": "full",
-    "run_id": "44080678514",
+    "run_id": "44299652570",
     "run_attempt": "1"
   }
 }

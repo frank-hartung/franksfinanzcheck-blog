@@ -1,16 +1,16 @@
 {
   "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
   "titel": "Herbst-Check: Strom, Versicherung, Konto und Internet",
-  "erzeugt": "2026-11-17 13:47 UTC",
+  "erzeugt": "2026-11-18 13:23 UTC",
   "faellig": {
     "faellig": false,
     "prio": 9,
     "klasse": "saisonal",
-    "grund": "frisch geprüft vor 28 Tagen (Intervall 30 Tage)",
-    "alter_tage": 28,
+    "grund": "frisch geprüft vor 29 Tagen (Intervall 30 Tage)",
+    "alter_tage": 29,
     "intervall": 30,
     "frist": "2026-11-19",
-    "restlaufzeit": 2
+    "restlaufzeit": 1
   },
   "geo": {
     "punkte": 6,
@@ -41,11 +41,36 @@
       "zitierbar": true
     }
   ],
-  "befunde": [],
+  "befunde": [
+    {
+      "typ": "veraltet",
+      "text": "Die Steigerung der Energiepreise wird mit 14,9 % angegeben, die aktuelle Destatis-Statistik weist jedoch nur +12,7 % aus.",
+      "stelle": "Die Preise für Energie sind zuletzt um 14,9 % gestiegen. Das meldet das Statistische Bundesamt.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
+    },
+    {
+      "typ": "praezision",
+      "text": "Das Versprechen, Portale zeigten die \"besten Tarife auf einen Blick\", ist unpräzise, da sie nur Marktausschnitte abbilden und staatlich zertifizierte Vergleiche ignorieren.",
+      "stelle": "Vergleichsportale nehmen dir den größten Teil der Rechenarbeit ab und zeigen dir die besten Tarife auf einen Blick.",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Bei der Erwähnung von Konten \"ohne Grundgebühr\" fehlt die notwendige Eingrenzung auf die Zielgruppe (Verbraucher) und der regulatorische Rahmen des Zahlungskontengesetzes.",
+      "stelle": "Ein Wechsel zu einer Bank ohne Grundgebühr kann dann sofort eine Ersparnis bringen.",
+      "beleg": ""
+    },
+    {
+      "typ": "luecke",
+      "text": "Beim Versicherungscheck fehlt der Hinweis auf die Prüfung der Notwendigkeit (existenzielle Risiken), wie sie die Verbraucherzentrale als ersten Schritt priorisiert.",
+      "stelle": "Du prüfst die Bedingungen deiner Versicherung und suchst nach günstigeren Angeboten mit gleicher oder besserer Leistung.",
+      "beleg": ""
+    }
+  ],
   "fehler": [
     "Statistisches Bundesamt – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
   ],
   "fassung_sha256": "74edb65d844de6d4b9978d6e6f4694242f74c0ceefdd525b08d39462a3e62225",
-  "text_sha256": "c411d781ab66569fc2561e38eb3e5e19be4617adc26f5c8d14544075f8722799",
-  "fachpruefung": "Fehler: gemini: IncompleteResponseError; groq: HTTPError; cloudflare: TimeoutError"
+  "text_sha256": "2b0dad1058c36178dfb7088e51b3c29a53d8bbcf6018dad94fc766e81276a267",
+  "fachpruefung": "geprüft (gemini:gemini-3-flash-preview); 1 Befund(e) ohne belegbaren Textanker verworfen"
 }
