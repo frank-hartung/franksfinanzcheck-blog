@@ -4,7 +4,7 @@ Stand 24.10.2026. Geprüft werden BEDEUTUNGS-Invarianten, keine starren
 Formulierungen (Lehre aus #763: Ein Test, den jede harmlose Umformung bricht,
 schützt nichts). Nummerierung wie im Issue:
 
-  B1 saison · veraltet   – „Neukundenpreise stark nach unten“ vs. destatis +14,9 %
+  B1 saison · veraltet   – „Neukundenpreise stark nach unten“ vs. destatis +12,7 %
   B2 saison · luecke     – 420-€-Stromersparnis ohne Beleg/Kennzeichnung
   B3 saison · luecke     – 9,90-€-Kontogebühr / >1.300-€-Ersparnis ohne Beleg
   B4 saison · luecke     – „nach 24 Monaten massiv teurer“ ohne Quelle
@@ -214,12 +214,12 @@ class Faktenfrische823Tests(unittest.TestCase):
         # ein geschütztes Leerzeichen (U+00A0), und `norm()` glättet es. Ein
         # Test, den eine typografische Feinheit bricht, schützt den Inhalt
         # nicht – genau die Lehre aus #763, die dieses Modul selbst aufstellt.
-        self.assertIn('14,9 %', joined, 'destatis-Zahl 14,9 % fehlt (Befund 1).')
-        para = [c for c in chunks(body) if '14,9' in c]
+        self.assertIn('12,7 %', joined, 'destatis-Zahl 12,7 % fehlt (Befund 1).')
+        para = [c for c in chunks(body) if '12,7' in c]
         self.assertTrue(para and any('statistische' in p and 'bundesamt' in p for p in para),
-                        'Die 14,9 % müssen dem Statistischen Bundesamt zugeordnet sein.')
-        self.assertTrue(re.search(r'energie[^.]{0,80}14,9|14,9[^.]{0,80}(energie|gestiegen)',
-                                  joined), '14,9 % müssen als Energiepreis-Anstieg stehen.')
+                        'Die 12,7 % müssen dem Statistischen Bundesamt zugeordnet sein.')
+        self.assertTrue(re.search(r'energie[^.]{0,80}12,7|12,7[^.]{0,80}(energie|gestiegen)',
+                                  joined), '12,7 % müssen als Energiepreis-Anstieg stehen.')
 
     # --- B2: 420-€-Stromersparnis ohne Beleg (luecke) ----------------------
     def test_b2_strom_ersparnis_nur_als_gekennzeichnetes_modell(self):

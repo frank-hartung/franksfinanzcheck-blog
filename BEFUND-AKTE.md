@@ -2,12 +2,12 @@
 
 _Stand 2026-11-18 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**213 offene Befunde auf 56 Seiten · davon 35 Live-Seiten mit 129 Befunden · ältester 19 Tage · Frist 14 Tage.**
+**209 offene Befunde auf 55 Seiten · davon 35 Live-Seiten mit 129 Befunden · ältester 19 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 213 |
-| Seiten betroffen | 56 (davon live: 35) |
+| Offene Befunde | 209 |
+| Seiten betroffen | 55 (davon live: 35) |
 | Text seit dem Befund geändert | 161 |
 | Altbestand ohne Fassungs-Hash | 11 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
@@ -32,7 +32,7 @@ _Stand 2026-11-18 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 172 von 213 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 172 von 209 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -630,7 +630,7 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden ed2161154dcee85da1e
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f593fe21275bd9dcefef --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
-### `2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck` · **LIVE** · Risikoklasse standard · 2 Befund(e)
+### `2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck` · **LIVE** (blockiert) · Risikoklasse standard · 2 Befund(e)
 
 Datei: `content/posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/index.md`
 
@@ -1006,24 +1006,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden a8ddfb1310192fb9c28
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden c6ab40eeb8dea1d1c3da --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden c858896722ed308b0271 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden cd38bc25c828bedd7b72 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert` · nicht im Live-Bestand · 4 Befund(e)
-
-Seite: `2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `108c4ad3f4adcb4d2a1b` | veraltet | 0 T | Text unverändert seit dem Befund | Die Steigerung der Energiepreise wird mit 14,9 % angegeben, die aktuelle Destatis-Statistik weist jedoch nur +12,7 % aus. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
-| `211613734bc20a8603e5` | luecke | 0 T | Text unverändert seit dem Befund | Bei der Erwähnung von Konten "ohne Grundgebühr" fehlt die notwendige Eingrenzung auf die Zielgruppe (Verbraucher) und der regulatorische Rahmen des Zahlungskontengesetzes. | – |
-| `2bbbd4141968a4365ab6` | luecke | 0 T | Text unverändert seit dem Befund | Beim Versicherungscheck fehlt der Hinweis auf die Prüfung der Notwendigkeit (existenzielle Risiken), wie sie die Verbraucherzentrale als ersten Schritt priorisiert. | – |
-| `b28c1e2fb42f8f2ba34c` | praezision | 0 T | Text unverändert seit dem Befund | Das Versprechen, Portale zeigten die "besten Tarife auf einen Blick", ist unpräzise, da sie nur Marktausschnitte abbilden und staatlich zertifizierte Vergleiche ignorieren. | – |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 108c4ad3f4adcb4d2a1b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 211613734bc20a8603e5 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2bbbd4141968a4365ab6 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden b28c1e2fb42f8f2ba34c --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ---

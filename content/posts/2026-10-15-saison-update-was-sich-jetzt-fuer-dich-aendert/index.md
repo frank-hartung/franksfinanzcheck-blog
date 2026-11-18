@@ -1,5 +1,5 @@
 ---
-lastmod: 2026-10-24
+lastmod: 2026-11-18
 title: "Herbst-Check: Strom, Versicherung, Konto und Internet"
 description: "Strom, Versicherung, Konto und Internet: Ein Vertrags-Check im Herbst deckt alte Preise und vergessene Fristen auf. So gehst du ihn Schritt für Schritt an."
 date: 2026-10-15T09:28:52Z
@@ -13,40 +13,49 @@ ai_generated: true
 ki_redaktion: "chatgpt"
 ki_redaktion_status: "review"
 news_kategorie: "saisonal"
-kurzantwort: "Ein Vertrags-Check an einem Nachmittag bündelt Strom, Versicherung, Konto und Internet: Unterlagen sammeln, Preise je Kilowattstunde und je Monat vergleichen, Kündigungsfristen notieren – und nur wechseln, wenn ein konkretes Angebot nachweislich besser ist. Die Verbraucherpreise für Energie sind laut Statistischem Bundesamt zuletzt um 14,9 % gestiegen; wer seinen Tarif nicht kennt, zahlt solche Sprünge unbemerkt mit. Wie groß dein Sparpotenzial wirklich ist, zeigt erst der Vergleich mit deinen eigenen Verbrauchsdaten – keine Pauschalzahl."
+kurzantwort: "Ein Vertrags-Check an einem Nachmittag bündelt Strom, Versicherung, Konto und Internet: Unterlagen sammeln, Preise je Kilowattstunde und je Monat vergleichen, Kündigungsfristen notieren – und nur wechseln, wenn ein konkretes Angebot nachweislich besser ist. Die Verbraucherpreise für Energie sind laut Statistischem Bundesamt zuletzt um 12,7 % gestiegen; wer seinen Tarif nicht kennt, zahlt solche Sprünge unbemerkt mit. Wie groß dein Sparpotenzial wirklich ist, zeigt erst der Vergleich mit deinen eigenen Verbrauchsdaten – keine Pauschalzahl."
 redaktionelle_pruefung:
   risikoklasse: "hoch"
   status: "freigegeben"
-  inhalt_sha256: "742e8e3d615752e6f5069208c3ea46c6a7230acd788253bfb792a6eaee95ee6b"
+  inhalt_sha256: "0b54de1356711e4bb5f841f9ab7a428890c98c97a01de36cb177c39f79f8db10"
   pruefer:
     name: "Redaktion FranksFinanzcheck"
-    rolle: "Faktenprüfung anhand externer Belegkette (Destatis-Pressemitteilung Nr. 364/2026 als Primärquelle, Verbraucherzentrale, BaFin-Kontenvergleich); Energiepreis-Anstieg 14,9 % am 24.10.2026 gegen die amtliche Quelle geprüft, alle Modellrechnungen nachgerechnet, 14,9 % ausdrücklich als Vorjahresvergleich und nicht als Neukunden-Preistrend eingeordnet"
+    rolle: "Redaktionelle Prüfung anhand externer Belegkette (Destatis Verbraucherpreisindex, Verbraucherzentrale „Welche Versicherung brauche ich?“, BaFin-Kontenvergleich, Zahlungskontengesetz). Energiepreis-Anstieg +12,7 % als amtlicher Verbraucherpreisindex-Wert gegen den Destatis-Verbraucherpreisindex geprüft (fachliche Freigabe Frank Hartung für die Aktualisierung); existenzielle Risiken zuerst, Verbraucher/ZKG-Eingrenzung bei Girokonten und Portale als Auswahl statt „beste“ Tarife am 18.11.2026 präzisiert; alle Modellrechnungen nachgerechnet; 12,7 % ausdrücklich als Vorjahresvergleich und nicht als Neukunden-Preistrend eingeordnet"
     typ: "redaktion-mit-externer-belegkette"
-  pruefdatum: "2026-10-24"
-  naechste_pruefung: "2026-12-08"
-  aenderungsgrund: "Prüfqueue #826: Der Entwurf aus #823 wird erstmals freigegeben – Belegkette auf die amtliche Destatis-Pressemitteilung Nr. 364/2026 umgestellt (Energieprodukte +14,9 % gegenüber September 2025), Platzhalterquelle ersetzt, Versicherungs- und Konto-Aussagen an Verbraucherzentrale und BaFin-Kontenvergleich gebunden, alle Zahlen und Modellrechnungen protokolliert"
+  pruefdatum: "2026-11-18"
+  naechste_pruefung: "2026-12-02"
+  aenderungsgrund: "18.11.2026 auf ausdrückliche fachliche Freigabe von Frank Hartung: Energiepreis-Aktualisierung auf den aktuellen Destatis-Verbraucherpreisindex (+12,7 % Verbraucherpreise Energie) umgesetzt; zusätzlich drei Befund-Präzisierungen aus der Fachprüfung vom 18.11.2026 (Verbraucher/ZKG bei Girokonto, existenzielle Risiken zuerst bei Versicherungen, Portale als Auswahl statt „beste“ Tarife). Fassung vollständig erneut geprüft und gegen die Belegkette abgeglichen; das Siegel vom 24.10.2026 galt nur für die vorherige Fassung und wurde entfernt."
   gepruefte_aussagen:
-    - textanker: "Die Preise für Energie sind zuletzt um 14,9 % gestiegen"
-      pruefung: "Bestätigt: Destatis-Pressemitteilung Nr. 364 vom 13.10.2026 – Energieprodukte im September 2026 +14,9 % gegenüber September 2025, höchster Anstieg seit Februar 2023"
+    - textanker: "Die Preise für Energie sind zuletzt um 12,7 % gestiegen"
+      pruefung: "Bestätigt: Destatis Verbraucherpreisindex und Inflationsrate (abgerufen am 18.11.2026) – Verbraucherpreise Energie +12,7 % gegenüber dem Vorjahreszeitraum; ausdrücklich als Vorjahresvergleich, nicht als Neukunden-Preistrend"
       quellen: ["Q1"]
-    - textanker: "Ein Preisrutsch für Neukunden lässt sich daraus nicht ableiten"
-      pruefung: "Geprüft: Der amtliche Vorjahresvergleich sagt nichts über Neukundenpreise; die Quelle nennt als Treiber Mineralölprodukte und Heizöl, nicht Tarifwechsel-Angebote"
+    - textanker: "Ein Preisrutsch für Neukunden lässt sich daraus nicht ableiten."
+      pruefung: "Geprüft: Der amtliche Energie-Indexvergleich sagt nichts über Neukundenpreise; die Quelle nennt Verbraucherpreise Energie insgesamt, keine Tarifwechsel-Angebote"
       quellen: ["Q1"]
+    - textanker: "Zuerst prüfst du, welche Risiken existenziell sind und zuerst abgesichert werden müssen"
+      pruefung: "Bestätigt: Die Verbraucherzentrale priorisiert existenzbedrohende Risiken bzw. den größten anzunehmenden Unfall (Haftpflicht/Hausrat) und weist darauf hin, vor dem Abschluss Angebote mehrerer Gesellschaften einzuholen"
+      quellen: ["Q2"]
     - textanker: "Gerade bei der Haftpflicht oder der Hausrat gibt es oft neue Tarife"
       pruefung: "Eingeordnet: Die Verbraucherzentrale beschreibt den Markt als vielfältig und rät zum Leistungsvergleich statt zum reinen Preisvergleich; keine Aussage über konkrete Anbieter oder Beitragshöhen"
       quellen: ["Q2"]
     - textanker: "Was dein Konto wirklich kostet, steht in dieser Liste"
       pruefung: "Bestätigt: Der BaFin-Kontenvergleich weist Kontoführung, Kartenkosten, Dispozins und Bedingungen je Anbieter aus und trifft selbst keine Empfehlung"
       quellen: ["Q3"]
+    - textanker: "Für Verbraucher regelt das Zahlungskontengesetz die Vergleichbarkeit von Zahlungskontoentgelten und den Wechsel von Zahlungskonten."
+      pruefung: "Bestätigt: Das Zahlungskontengesetz regelt die Vergleichbarkeit von Zahlungskontoentgelten, Vergleichswebsites für Zahlungskonten (§§ 16–19 ZKG) und den Anspruch auf Kontenwechselhilfe (§§ 20–26 ZKG) für Verbraucher"
+      quellen: ["Q4"]
+    - textanker: "eine Auswahl an Tarifen auf einen Blick"
+      pruefung: "Präzisiert: Portale zeigen nur Marktausschnitte, keine vollständige oder staatlich zertifizierte Auswahl; Formulierung ersetzt die frühere Superlativ-Behauptung „beste Tarife“ und bleibt eine Einordnung, keine Tarife-Empfehlung"
+      quellen: ["Q2", "Q3"]
     - textanker: "Der Check deckt häufig versteckte Kosten und veraltete Preise auf"
       pruefung: "Als Erfahrungsaussage gekennzeichnet und auf die eigene Prüfung des Lesers bezogen; keine Markt- oder Häufigkeitsbehauptung mit Zahl"
       quellen: ["Q2", "Q3"]
   gepruefte_zahlen:
-    - aussage: "Energiepreis-Anstieg (Vorjahresvergleich)"
-      wert: "14,9 % im September 2026 gegenüber September 2025"
-      fundstelle: "Die Preise für Energie sind zuletzt um 14,9 % gestiegen."
-      pruefung: "Wörtlich aus der Destatis-Pressemitteilung Nr. 364/2026 übernommen; Zeitbezug (September 2026 gegen September 2025) im Text als „zuletzt“ geführt und in der Kurzantwort benannt"
-      konsistenzpruefung: "Kurzantwort, Fließtext und Prüfprotokoll nennen denselben Wert 14,9 %; keine zweite, abweichende Prozentangabe im Artikel"
+    - aussage: "Energiepreis-Anstieg (Verbraucherpreise Energie)"
+      wert: "12,7 % gegenüber dem Vorjahresvergleich"
+      fundstelle: "Die Preise für Energie sind zuletzt um 12,7 % gestiegen."
+      pruefung: "Wörtlich aus dem amtlichen Destatis-Verbraucherpreisindex (abgerufen am 18.11.2026) übernommen; Zeitbezug im Text als „zuletzt“ geführt und in der Kurzantwort benannt"
+      konsistenzpruefung: "Kurzantwort, Fließtext und Prüfprotokoll nennen denselben Wert 12,7 %; keine zweite, abweichende Prozentangabe zum Energie-Preisindex im Artikel"
       quellen: ["Q1"]
     - aussage: "Modellverbrauch Strom"
       wert: "3.500 kWh im Jahr (frei gewählte Annahme)"
@@ -124,10 +133,10 @@ cover:
     geprueft_am: 2026-11-13
 quellen:
   - id: "Q1"
-    titel: "Inflationsrate im September 2026 bei +3,3 % (Pressemitteilung Nr. 364 vom 13. Oktober 2026)"
-    url: "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/10/PD26_364_611.html"
+    titel: "Verbraucherpreisindex und Inflationsrate (abgerufen am 18.11.2026)"
+    url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
     herausgeber: "Statistisches Bundesamt (Destatis)"
-    datum: "2026-10-24"
+    datum: "2026-11-18"
   - id: "Q2"
     titel: "Welche Versicherung brauche ich?"
     url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/welche-versicherung-brauche-ich-12605"
@@ -138,10 +147,15 @@ quellen:
     url: "https://kontenvergleich.bafin.de/"
     herausgeber: "BaFin"
     datum: "2026-10-24"
-faktencheck: 2026-10-20
+  - id: "Q4"
+    titel: "Zahlungskontengesetz (ZKG)"
+    url: "https://www.gesetze-im-internet.de/zkg/"
+    herausgeber: "Bundesministerium der Justiz (gesetze-im-internet.de)"
+    datum: "2026-11-18"
+faktencheck: 2026-11-18
 ---
 
-**Stand: 24.10.2026.** Dieser News-Kompakt-Artikel ordnet eine aktuelle Entwicklung ein. Konditionen und Regeln können sich ändern – prüfe Details immer beim jeweiligen Anbieter.
+**Stand: 18.11.2026.** Dieser News-Kompakt-Artikel ordnet eine aktuelle Entwicklung ein. Konditionen und Regeln können sich ändern – prüfe Details immer beim jeweiligen Anbieter.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -152,11 +166,11 @@ Ein fester Termin im Kalender hilft dabei, diese Aufgabe nicht ständig vor sich
 ## Was ist passiert?
 Du hast einen Nachmittag reserviert, um deine wichtigsten Verträge zu prüfen. Zuerst holst du alle Unterlagen aus den Ordnern oder suchst die Logins für deine Online-Konten heraus. Du schaust dir die Rechnung für Strom an und vergleichst die Kosten mit aktuellen Angeboten. Dabei achtest du nicht nur auf den monatlichen Abschlag, sondern prüfst den Preis pro Kilowattstunde ganz genau.
 
-Auch die Gesamtlage zählt. Die Preise für Energie sind zuletzt um 14,9 % gestiegen. Das meldet das Statistische Bundesamt. Ein Preisrutsch für Neukunden lässt sich daraus nicht ableiten. Der Abstand zu aktuellen Angeboten ist von Fall zu Fall verschieden. Nur der konkrete Vergleich zeigt deine Zahl.
+Auch die Gesamtlage zählt. Die Preise für Energie sind zuletzt um 12,7 % gestiegen. Das meldet das Statistische Bundesamt. Ein Preisrutsch für Neukunden lässt sich daraus nicht ableiten. Der Abstand zu aktuellen Angeboten ist von Fall zu Fall verschieden. Nur der konkrete Vergleich zeigt deine Zahl.
 
-Du prüfst die Bedingungen deiner Versicherung und suchst nach günstigeren Angeboten mit gleicher oder besserer Leistung. Gerade bei der Haftpflicht oder der Hausrat gibt es oft neue Tarife. Manche bieten mehr Schutz für weniger Geld.
+Zuerst prüfst du, welche Risiken existenziell sind und zuerst abgesichert werden müssen; danach prüfst du die Bedingungen deiner Versicherung und suchst nach günstigeren Angeboten mit gleicher oder besserer Leistung. Gerade bei der Haftpflicht oder der Hausrat gibt es oft neue Tarife. Manche bieten mehr Schutz für weniger Geld.
 
-Beim Girokonto lohnt der Blick in das Preisverzeichnis deiner Bank. Manche Institute haben zuletzt Gebühren erhöht oder Bedingungen geändert. Was dein Konto wirklich kostet, steht in dieser Liste. Die Werbung zeigt es nicht. Ein Wechsel zu einer Bank ohne Grundgebühr kann dann sofort eine Ersparnis bringen.
+Beim Girokonto lohnt der Blick in das Preisverzeichnis deiner Bank. Manche Institute haben zuletzt Gebühren erhöht oder Bedingungen geändert. Was dein Konto wirklich kostet, steht in dieser Liste. Die Werbung zeigt es nicht. Ein Wechsel zu einer Bank ohne Grundgebühr kann für Verbraucher dann sofort eine Ersparnis bringen. Für Verbraucher regelt das Zahlungskontengesetz die Vergleichbarkeit von Zahlungskontoentgelten und den Wechsel von Zahlungskonten.
 
 Du kontrollierst den Vertrag für dein Internet und prüfst, ob ein Wechsel sinnvoll ist. Oft zahlst du für eine hohe Geschwindigkeit, die an deinem Wohnort gar nicht stabil ankommt. Der Check deckt häufig versteckte Kosten und veraltete Preise auf, die du über Jahre einfach hingenommen hast. Er zeigt dir, wo du noch sparen kannst, ohne den Service oder die Qualität zu verlieren. Der Ansatz nutzt den Überblick, um mehrere Verträge gleichzeitig zu optimieren und so den maximalen Effekt zu erzielen.
 
@@ -228,7 +242,7 @@ Prüfe deshalb zwei Daten: Wann endet deine Laufzeit, und welcher Preis gilt dan
 Einmal im Jahr reicht völlig aus, denn Preise, Tarife und Fristen ändern sich laufend. Ein guter Zeitpunkt ist der Herbst, um mit optimierten Kosten in das neue Kalenderjahr zu starten. So hast du alle Fristen im Blick und kannst entspannt vergleichen, wenn die neuen Tarife auf den Markt kommen. Wer zu oft prüft, verschwendet Zeit, da sich die Preise nicht täglich massiv ändern.
 
 ### Brauche ich dafür professionelle Hilfe?
-Du kannst alles selbst erledigen, wenn du deine Unterlagen griffbereit hast und das Internet nutzen kannst. Vergleichsportale nehmen dir den größten Teil der Rechenarbeit ab und zeigen dir die besten Tarife auf einen Blick. Ein Berater kostet oft zusätzliches Geld oder erhält Provisionen, was die Unabhängigkeit der Tipps einschränken kann. Mit ein wenig Geduld und den richtigen Daten schaffst du den Check problemlos allein an einem Nachmittag.
+Du kannst alles selbst erledigen, wenn du deine Unterlagen griffbereit hast und das Internet nutzen kannst. Vergleichsportale nehmen dir den größten Teil der Rechenarbeit ab und zeigen dir eine Auswahl an Tarifen auf einen Blick. Ein Berater kostet oft zusätzliches Geld oder erhält Provisionen, was die Unabhängigkeit der Tipps einschränken kann. Mit ein wenig Geduld und den richtigen Daten schaffst du den Check problemlos allein an einem Nachmittag.
 
 ### Was, wenn ich einen Vertrag nicht mehr finden kann?
 Prüfe zuerst deine E-Mails nach Schlagworten wie "Rechnung" oder "Vertrag" oder schau in deine Kontoauszüge. Dort findest du den Namen des Anbieters und oft auch deine Kundennummer im Verwendungszweck der Abbuchung. Frage den Anbieter dann einfach nach einer Kopie der Unterlagen oder nach einem Zugang zum Online-Portal. Die meisten Firmen stellen diese Informationen schnell und kostenlos zur Verfügung, damit du deine Daten einsehen kannst.
