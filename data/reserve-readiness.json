@@ -2,7 +2,7 @@
   "target": 6,
   "ready": 4,
   "pool_size": 12,
-  "generated_at": "2026-11-18T12:48:12Z",
+  "generated_at": "2026-11-18T15:39:06Z",
   "candidates": [
     {
       "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
@@ -75,9 +75,9 @@
     {
       "slug": "2026-11-18-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
       "ready": false,
-      "sha256": "c7d3d2a0966adc42e7b8ab9b77477c82f0dec998e824f6b0f557a61fc58bcd12",
+      "sha256": "fbae9073252c1d4d8ddbfec39cf18f7f870403cc686522ad970d17c07c2dda34",
       "flesch": 70.3,
-      "measured_at": "2026-11-18T12:45:18Z",
+      "measured_at": "2026-11-18T15:37:53Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
         "🛑 2026-11-18-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -99,16 +99,17 @@
     {
       "slug": "2026-11-18-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
       "ready": false,
-      "sha256": "605e611243994a19072ac676ccf0bc69b70450f35d58d72c66d86977a4585c78",
-      "flesch": 70.1,
-      "measured_at": "2026-11-18T12:45:49Z",
+      "sha256": "cefe2d5e2e281f74303e8ff79eeee4b47904472cba8dd699aa5c08d91c9e1929",
+      "flesch": 73.4,
+      "measured_at": "2026-11-18T15:38:32Z",
       "reason": "Zeichenlänge (check_length.py) nicht bestanden",
       "details": [
         "🛑 2026-11-18-deine-naechtliche-grundlast-strom-so-erkennst-du-wo: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Zeichenlänge (check_length.py) nicht bestanden",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft).",
+        "Messfassung wurde durch die Gate-Vorheilung verändert und danach bytegenau zurückgestellt – der Befund oben gilt für die HEILFASSUNG, nicht für die Datei auf der Platte (Vorheilung prüft seit #884 den Publikations-Vertrag)"
       ],
-      "score": 0.972,
+      "score": 0.962,
       "parts": {
         "spelling": 0.86,
         "meta": 1.0,
@@ -116,15 +117,15 @@
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 1.0
+        "readability": 0.95
       }
     },
     {
       "slug": "2026-11-18-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
       "ready": false,
-      "sha256": "234f4fb9f21c83c082c763b13d8a9a7fde18e0108d80c1b53c372a8bf4c5848a",
+      "sha256": "8a25a005ca745208b8a49b3b45fb3439565cbfd18ba2924fc5173e02898c4c8d",
       "flesch": 63.6,
-      "measured_at": "2026-11-18T12:46:16Z",
+      "measured_at": "2026-11-18T15:39:06Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
         "🛑 2026-11-18-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -259,8 +260,17 @@
     }
   ],
   "measurement": {
-    "kind": "full",
-    "run_id": "44299652570",
+    "kind": "partial",
+    "run_id": "44337397179",
     "run_attempt": "1"
+  },
+  "recert": {
+    "at": "2026-11-18T15:39:06Z",
+    "renewed": [
+      "2026-11-18-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
+      "2026-11-18-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
+      "2026-11-18-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich"
+    ],
+    "tool": "scripts/reserve_recert.py"
   }
 }
