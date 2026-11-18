@@ -1,9 +1,9 @@
 ---
 title: "Kaffeemaschine Stromverbrauch: Was kostet die Tasse Kaffee?"
 description: Wie hoch ist der Kaffeemaschine Stromverbrauch? Wir vergleichen Kapselmaschine Kosten und Vollautomaten für günstigen Kaffee zuhause. Jetzt rechnen!
-date: 2026-11-10T11:34:25Z
-draft: true
-reserve: true
+date: 2026-11-18T04:28:52Z
+draft: false
+reserve_published: 2026-11-18
 tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"

@@ -1,9 +1,9 @@
 ---
 title: "Mesh WLAN nachrüsten: Schluss mit Funklöchern in der Wohnung"
 description: Du willst Mesh WLAN nachrüsten? Erfahre hier, ob sich die Investition für deine Wohnung lohnt und wie du die Abdeckung deiner Wohnung optimierst.
-date: 2026-11-13T11:26:17Z
-draft: true
-reserve: true
+date: 2026-11-18T04:29:13Z
+draft: false
+reserve_published: 2026-11-18
 tags: ["WLAN verbessern"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"

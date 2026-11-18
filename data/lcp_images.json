@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-11-17T13:40:57+00:00",
+  "generatedAt": "2026-11-18T04:31:20+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -1326,6 +1326,22 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
+    "/posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/": {
+      "image": "images/covers/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
     "/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/": {
       "image": "images/covers/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort.jpg",
       "type": "single",
@@ -1360,6 +1376,22 @@
     },
     "/posts/2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst/": {
       "image": "images/covers/2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
+    "/posts/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung/": {
+      "image": "images/covers/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
