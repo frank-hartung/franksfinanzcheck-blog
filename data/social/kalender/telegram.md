@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 18.11.2026 15:15 (Europe/Berlin)  
+> Automatisch aktualisiert: 18.11.2026 23:37 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -12,21 +12,18 @@
 
 ## Kommende Beiträge
 
-### Mi, 18. November 2026
-- **18:00** ⏳ Fenster abdichten: So stoppst du Zugluft an alten Rahmen — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/
 ### Sa, 21. November 2026
-- **07:00** ⏳ Flugverspätung Entschädigung: So holst du dein Geld zurück — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/
-### So, 22. November 2026
 - **07:00** ⏳ Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/
+### So, 22. November 2026
+- **07:00** ⏳ Flugverspätung Entschädigung: So holst du dein Geld zurück — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/
 ### Sa, 28. November 2026
-- **07:00** ⏳ WLAN-Frust lösen: So findest du den besten Router Standort — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/
-### So, 29. November 2026
 - **07:00** ⏳ Waschmaschine beladen: Weniger Kosten bei jedem Waschgang — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/
+### So, 29. November 2026
+- **07:00** ⏳ WLAN-Frust lösen: So findest du den besten Router Standort — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/
 
 ## Zuletzt veröffentlicht
 

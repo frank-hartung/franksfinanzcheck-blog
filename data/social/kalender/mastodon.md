@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 18.11.2026 15:15 (Europe/Berlin)  
+> Automatisch aktualisiert: 18.11.2026 23:37 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -12,9 +12,6 @@
 
 ## Kommende Beiträge
 
-### Mi, 18. November 2026
-- **11:30** ⏳ WLAN-Frust lösen: So findest du den besten Router Standort — _frage_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/
 ### Fr, 20. November 2026
 - **07:30** ⏳ Fenster abdichten: So stoppst du Zugluft an alten Rahmen — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/
@@ -38,7 +35,7 @@
 ### Mo, 30. November 2026
 - **07:30** ⏳ Kreditkarte vergleichen: Kostenlos und sicher zahlen — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen/
-- **11:30** ⏳ Frugalismus für Einsteiger: Mit kleinen Schritten sparen — _zahl_ · Evergreen  
+- **07:30** ⏳ Frugalismus für Einsteiger: Mit kleinen Schritten sparen — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/
 ### Mi, 02. Dezember 2026
 - **07:30** ⏳ Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich — _zahl_ · Evergreen  
@@ -48,6 +45,7 @@
 
 ## Zuletzt veröffentlicht
 
+- ✅ 18.11.2026 23:37 · WLAN-Frust lösen: So findest du den besten Router Standort → https://mastodon.social/@FranksFinanzcheck/117639837069950225
 - ✅ 18.11.2026 15:15 · Flugverspätung Entschädigung: So holst du dein Geld zurück → https://mastodon.social/@FranksFinanzcheck/117637863727269953
 - ✅ 17.11.2026 00:45 · Waschmaschine beladen: Weniger Kosten bei jedem Waschgang → https://mastodon.social/@FranksFinanzcheck/117628781271452138
 - ✅ 16.11.2026 14:46 · Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 € → https://mastodon.social/@FranksFinanzcheck/117626425285672414
@@ -57,7 +55,6 @@
 - ✅ 10.11.2026 00:48 · Preisgarantie Gas: Was bei Preiserhöhung hilft → https://mastodon.social/@FranksFinanzcheck/117589153983480017
 - ✅ 09.11.2026 15:01 · DNS-Server wechseln: Datenschutz, Filter und Einrichtung → https://mastodon.social/@FranksFinanzcheck/117586845999926723
 - ✅ 08.11.2026 23:26 · Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht → https://mastodon.social/@FranksFinanzcheck/117583170393481412
-- ✅ 06.11.2026 20:58 · Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar → https://mastodon.social/@FranksFinanzcheck/117571265279215472
 
 ## Zurückgestellt (Autopilot hat blockiert)
 

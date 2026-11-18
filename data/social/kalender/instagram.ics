@@ -7,10 +7,10 @@ X-WR-CALNAME:FranksFinanzcheck – Instagram
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
 UID:instagram:2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-al
- ten-rahmen:nutzen:2026-11-18@franksfinanzcheck.de
-DTSTAMP:20261118T141549Z
-DTSTART:20261118T174500Z
-DTEND:20261118T180000Z
+ ten-rahmen:nutzen:2026-11-19@franksfinanzcheck.de
+DTSTAMP:20261118T223740Z
+DTSTART:20261119T104500Z
+DTEND:20261119T110000Z
 SUMMARY:Instagram: Fenster abdichten: So stoppst du Zugluft an alten R
  ahmen (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -21,41 +21,11 @@ URL:https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-bra
- uchst-dein:nutzen:2026-11-19@franksfinanzcheck.de
-DTSTAMP:20261118T141549Z
-DTSTART:20261119T104500Z
-DTEND:20261119T110000Z
-SUMMARY:Instagram: Wie viel Streaming‑Bandbreite: Du wirklich brauchst
-  (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-ba
- ndbreite-du-wirklich-brauchst-dein/
-URL:https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-b
- andbreite-du-wirklich-brauchst-dein/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:instagram:2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus
- -aus-dem:nutzen:2026-11-21@franksfinanzcheck.de
-DTSTAMP:20261118T141549Z
+UID:instagram:2026-11-01-flugverspaetung-entschaedigung-so-holst-du-de
+ in-geld-zurueck:nutzen:2026-11-21@franksfinanzcheck.de
+DTSTAMP:20261118T223740Z
 DTSTART:20261121T104500Z
 DTEND:20261121T110000Z
-SUMMARY:Instagram: Gaspreiserhöhung Sonderkündigungsrecht: Grundversor
- gung Gas (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-son
- derkuendigungsrecht-raus-aus-dem/
-URL:https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-so
- nderkuendigungsrecht-raus-aus-dem/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:instagram:2026-11-01-flugverspaetung-entschaedigung-so-holst-du-de
- in-geld-zurueck:nutzen:2026-11-22@franksfinanzcheck.de
-DTSTAMP:20261118T141549Z
-DTSTART:20261122T104500Z
-DTEND:20261122T110000Z
 SUMMARY:Instagram: Flugverspätung Entschädigung: So holst du dein Geld
   zurück (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -66,26 +36,26 @@ URL:https://franksfinanzcheck.de/posts/2026-11-01-flugverspaetung-ents
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jede
- m-waschgang:nutzen:2026-11-24@franksfinanzcheck.de
-DTSTAMP:20261118T141549Z
-DTSTART:20261124T104500Z
-DTEND:20261124T110000Z
-SUMMARY:Instagram: Waschmaschine beladen: Weniger Kosten bei jedem Was
- chgang (nutzen)
+UID:instagram:2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus
+ -aus-dem:nutzen:2026-11-22@franksfinanzcheck.de
+DTSTAMP:20261118T223740Z
+DTSTART:20261122T104500Z
+DTEND:20261122T110000Z
+SUMMARY:Instagram: Gaspreiserhöhung Sonderkündigungsrecht: Grundversor
+ gung Gas (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-beladen
- -weniger-kosten-bei-jedem-waschgang/
-URL:https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-belade
- n-weniger-kosten-bei-jedem-waschgang/
+ : https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-son
+ derkuendigungsrecht-raus-aus-dem/
+URL:https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-so
+ nderkuendigungsrecht-raus-aus-dem/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-ro
- uter-standort:nutzen:2026-11-26@franksfinanzcheck.de
-DTSTAMP:20261118T141549Z
-DTSTART:20261126T104500Z
-DTEND:20261126T110000Z
+ uter-standort:nutzen:2026-11-24@franksfinanzcheck.de
+DTSTAMP:20261118T223740Z
+DTSTART:20261124T104500Z
+DTEND:20261124T110000Z
 SUMMARY:Instagram: WLAN-Frust lösen: So findest du den besten Router S
  tandort (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -96,11 +66,41 @@ URL:https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:instagram:2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-w
- issen-musst:nutzen:2026-11-28@franksfinanzcheck.de
-DTSTAMP:20261118T141549Z
+UID:instagram:2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jede
+ m-waschgang:nutzen:2026-11-26@franksfinanzcheck.de
+DTSTAMP:20261118T223740Z
+DTSTART:20261126T104500Z
+DTEND:20261126T110000Z
+SUMMARY:Instagram: Waschmaschine beladen: Weniger Kosten bei jedem Was
+ chgang (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-beladen
+ -weniger-kosten-bei-jedem-waschgang/
+URL:https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-belade
+ n-weniger-kosten-bei-jedem-waschgang/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-bra
+ uchst-dein:nutzen:2026-11-28@franksfinanzcheck.de
+DTSTAMP:20261118T223740Z
 DTSTART:20261128T104500Z
 DTEND:20261128T110000Z
+SUMMARY:Instagram: Wie viel Streaming‑Bandbreite: Du wirklich brauchst
+  (nutzen)
+DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
+ : https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-ba
+ ndbreite-du-wirklich-brauchst-dein/
+URL:https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-b
+ andbreite-du-wirklich-brauchst-dein/
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:instagram:2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-w
+ issen-musst:nutzen:2026-11-29@franksfinanzcheck.de
+DTSTAMP:20261118T223740Z
+DTSTART:20261129T104500Z
+DTEND:20261129T110000Z
 SUMMARY:Instagram: Geschenkkarte: Was du beim Kauf und Aufladen wissen
   musst (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -112,10 +112,10 @@ STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:instagram:2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-
- sparst:nutzen:2026-11-29@franksfinanzcheck.de
-DTSTAMP:20261118T141549Z
-DTSTART:20261129T104500Z
-DTEND:20261129T110000Z
+ sparst:nutzen:2026-12-01@franksfinanzcheck.de
+DTSTAMP:20261118T223740Z
+DTSTART:20261201T104500Z
+DTEND:20261201T110000Z
 SUMMARY:Instagram: Secondhand Kleidung: So erkennst du Qualität & spar
  st (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
@@ -123,21 +123,6 @@ DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
  o-erkennst-du-qualitaet-sparst/
 URL:https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-
  so-erkennst-du-qualitaet-sparst/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:instagram:2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-
- tasse-kaffee:nutzen:2026-12-01@franksfinanzcheck.de
-DTSTAMP:20261118T141549Z
-DTSTART:20261201T104500Z
-DTEND:20261201T110000Z
-SUMMARY:Instagram: Kaffeemaschine Stromverbrauch: Was kostet die Tasse
-  Kaffee? (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Instagram\nArtikel
- : https://franksfinanzcheck.de/posts/2026-11-10-kaffeemaschine-stromv
- erbrauch-was-kostet-die-tasse-kaffee/
-URL:https://franksfinanzcheck.de/posts/2026-11-10-kaffeemaschine-strom
- verbrauch-was-kostet-die-tasse-kaffee/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

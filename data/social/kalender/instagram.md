@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Instagram
 
-> Automatisch aktualisiert: 18.11.2026 15:15 (Europe/Berlin)  
+> Automatisch aktualisiert: 18.11.2026 23:37 (Europe/Berlin)  
 > Profil: https://www.instagram.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `instagram.ics`
 
@@ -12,33 +12,30 @@
 
 ## Kommende Beiträge
 
-### Mi, 18. November 2026
-- **18:45** ⏳ Fenster abdichten: So stoppst du Zugluft an alten Rahmen — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/
 ### Do, 19. November 2026
-- **11:45** ⏳ Wie viel Streaming‑Bandbreite: Du wirklich brauchst — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/
+- **11:45** ⏳ Fenster abdichten: So stoppst du Zugluft an alten Rahmen — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/
 ### Sa, 21. November 2026
-- **11:45** ⏳ Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/
-### So, 22. November 2026
 - **11:45** ⏳ Flugverspätung Entschädigung: So holst du dein Geld zurück — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/
+### So, 22. November 2026
+- **11:45** ⏳ Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/
 ### Di, 24. November 2026
-- **11:45** ⏳ Waschmaschine beladen: Weniger Kosten bei jedem Waschgang — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/
-### Do, 26. November 2026
 - **11:45** ⏳ WLAN-Frust lösen: So findest du den besten Router Standort — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/
+### Do, 26. November 2026
+- **11:45** ⏳ Waschmaschine beladen: Weniger Kosten bei jedem Waschgang — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/
 ### Sa, 28. November 2026
+- **11:45** ⏳ Wie viel Streaming‑Bandbreite: Du wirklich brauchst — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/
+### So, 29. November 2026
 - **11:45** ⏳ Geschenkkarte: Was du beim Kauf und Aufladen wissen musst — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst/
-### So, 29. November 2026
+### Di, 01. Dezember 2026
 - **11:45** ⏳ Secondhand Kleidung: So erkennst du Qualität & sparst — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst/
-### Di, 01. Dezember 2026
-- **11:45** ⏳ Kaffeemaschine Stromverbrauch: Was kostet die Tasse Kaffee? — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/
 
 ## Zuletzt veröffentlicht
 
