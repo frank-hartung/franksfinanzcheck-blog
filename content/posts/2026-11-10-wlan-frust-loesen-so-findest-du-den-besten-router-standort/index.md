@@ -103,7 +103,7 @@ Das Kabel kostet nur wenige Euro. Ein neuer Router ist dagegen mit einer deutlic
 
 ## Welche Hindernisse fressen dein Signal?
 
-Nicht alle Gegenstände sind gleich schlimm für dein WLAN. Manche Materialien wirken wie ein [Schutzschild](../../posts/2026-10-09-vpn-zu Hause-schutzschild-oder-unnoetige-fixkosten-falle/).
+Nicht alle Gegenstände sind gleich schlimm für dein WLAN. Manche Materialien wirken wie ein [Schutzschild](../../posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/).
 
 Du lässt kaum Wellen durch. Wenn du diese Störer kennst, kannst du sie umgehen. Das hilft dir massiv dabei, den **[WLAN-Empfang](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) verbessern** zu können.
 
@@ -204,7 +204,7 @@ Nutze Apps, um die Signalstärke zu messen. Es gibt viele kostenlose Programme f
 
 
 **Weiterlesen:** [Ratgeber Internet Dsl](../../pillar/internet-dsl/)
-**Lesetipp:** [VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?](../../posts/2026-10-09-vpn-zu Hause-schutzschild-oder-unnoetige-fixkosten-falle/)
+**Lesetipp:** [VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?](../../posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/)
 
 ## Häufige Fragen
 

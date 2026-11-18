@@ -153,7 +153,7 @@ Ein Wechsel lohnt sich im Oktober 2026 besonders oft, wenn:
 - dein aktueller Anbieter keine Treue-Rabatte gewährt,
 - die Verbindungsqualität nicht mehr deinen Anforderungen entspricht.
 
-Ein Wechsel senkt oft nicht nur den Preis. Oft bringt er dir bei gleichen Kosten auch mehr Tempo. Wie du den Tarif findest, der zu deinem Zuhause passt, steht in unserem Ratgeber: [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zu Hause/).
+Ein Wechsel senkt oft nicht nur den Preis. Oft bringt er dir bei gleichen Kosten auch mehr Tempo. Wie du den Tarif findest, der zu deinem Zuhause passt, steht in unserem Ratgeber: [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/).
 
 ## Wann ein hoher Bonus trotzdem die falsche Wahl ist
 
