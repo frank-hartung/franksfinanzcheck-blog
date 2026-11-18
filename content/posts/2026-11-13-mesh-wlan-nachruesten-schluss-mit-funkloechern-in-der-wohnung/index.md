@@ -161,7 +161,7 @@ Durch das einmalige Nachrüsten schaffst du eine solide Basis. Danach kannst du 
 
 Mit einem stabilen Mesh-System im Hintergrund bist du flexibel bei der Wahl deines Providers. Die Hardware gehört dir und funktioniert mit jedem neuen Anschluss weiter. So behältst du die volle Kontrolle über deine Technik-Kosten.
 
-**Weiterlesen:** [Ratgeber Internet Dsl](../../pillar/internet-dsl/) **Lesetipp:** [VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?](../../posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/)
+**Weiterlesen:** [Ratgeber Internet Dsl](../../pillar/internet-dsl/) **Lesetipp:** [VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?](../../posts/2026-10-09-vpn-zu Hause-schutzschild-oder-unnoetige-fixkosten-falle/)
 
 ## Häufige Fragen
 

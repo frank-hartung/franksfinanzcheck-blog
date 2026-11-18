@@ -61,7 +61,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Warum Secondhand Kleidung dein Budget schont
 
-[Frugalismus](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/) bedeutet klugen Ressourceneinsatz. Mit **Secondhand Kleidung** brichst du aus dem schnellen Zyklus der Modeindustrie aus.
+[Frugalismus](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/) Bedeutet klugen Ressourceneinsatz. Mit **Secondhand Kleidung** brichst du aus dem schnellen Zyklus der Modeindustrie aus.
 
 Neue Textilien verlieren sofort nach dem Kauf massiv an Wert.
 Diesen Wertverlust nutzt du beim Gebrauchtkauf zu deinem finanziellen Vorteil. Du kaufst Qualität zu einem Bruchteil des ursprünglichen Preises.

@@ -169,7 +169,7 @@ Auch beim Router zählt Augenmaß. Hängen dein Festnetz, ein Notruf oder wichti
 
 Nutze dann lieber die Sparfunktion im Gerät statt den harten Schalter. Beim Kühlschrank gilt ohnehin: Niemals nachts abschalten! Halte dort lieber die Roste auf der Rückseite frei von Staub, taue Eis rechtzeitig ab und wähle innen keine unnötig eisige Stufe.
 
-Der größte Fehler passiert jedoch oft auf dem Papier. Viele senken ihre **Grundlast Strom** mit viel Fleiß, bleiben aber jahrelang in einem teuren alten Vertrag. Wer beides verbindet – weniger Verbrauch in der Nacht und einen günstigen Preis pro Einheit – , holt für sein Budget das Beste heraus.
+Der größte Fehler passiert jedoch oft auf dem Papier. Viele senken ihre **Grundlast Strom** mit viel Fleiß, bleiben aber jahrelang in einem teuren alten Vertrag. Wer beides verbindet – weniger Verbrauch in der Nacht und einen günstigen Preis pro Einheit –, holt für sein Budget das Beste heraus.
 
 ## Dein 4K-Pfad für dauerhaft niedrige Stromkosten
 
