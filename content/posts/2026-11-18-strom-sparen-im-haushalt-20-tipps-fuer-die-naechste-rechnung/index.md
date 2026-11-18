@@ -19,6 +19,8 @@ redaktionelle_pruefung:
 
 Du hast die Stromrechnung im Briefkasten liegen und fragst dich, warum sie jedes Mal höher ist, obwohl du nichts geändert hast? Der Herbst bringt oft Nachzahlungen, weil viele Haushalte erst dann merken, dass ihr Tarif nicht mehr passt. Mit klaren Schritten und einfachen Verhaltensänderungen kannst du den Verbrauch senken und die Kosten im Griff behalten.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 ## Energieverbrauch im Überblick – die Basis verstehen
 
 Ein erster Blick auf die größten Verbraucher hilft, gezielt zu handeln. Viele Geräte laufen im Hintergrund und ziehen Strom, obwohl du sie nicht nutzt. Die folgende Tabelle fasst typische Haushaltsgeräte und ihren ungefähren Jahresverbrauch zusammen – als Orientierung, nicht als exakte Messung.
