@@ -9,6 +9,27 @@
 # ============================================================
 version: 1
 vorschlaege:
+- titel: '"An der Zinsschraube drehen", um die Inflation zu bekämpfen'
+  url: https://www.tagesschau.de/wirtschaft/finanzen/inflation-interview-bundesbankpraesident-nagel-100.html
+  quelle: Tagesschau Wirtschaft (RSS)
+  erfasst: '2026-11-18T11:39:37'
+  brief: ''
+  status: offen
+  notiz: RSS-Trigger des Schaltwerks – Quellenprüfung erforderlich.
+- titel: Stromsteuersenkung und Spritpreisdeckel - zeitlich begrenzt
+  url: https://www.tagesschau.de/inland/innenpolitik/koalitionsausschuss-einigung-stromsteuer-spritpreisdeckel-100.html
+  quelle: Tagesschau Wirtschaft (RSS)
+  erfasst: '2026-11-18T11:39:37'
+  brief: ''
+  status: offen
+  notiz: RSS-Trigger des Schaltwerks – Quellenprüfung erforderlich.
+- titel: 'Stromsteuersenkung und Spritpreisdeckel: Was die Entlastungen im Alltag bringen könnten'
+  url: https://www.tagesschau.de/inland/innenpolitik/was-bringt-stromsteuer-senkung-koalitionsausschuss-100.html
+  quelle: Tagesschau Wirtschaft (RSS)
+  erfasst: '2026-11-18T11:39:37'
+  brief: ''
+  status: offen
+  notiz: RSS-Trigger des Schaltwerks – Quellenprüfung erforderlich.
 - titel: 'Stahlgipfel in Salzgitter: Unternehmen fordern Entlastung beim Strompreis'
   url: https://www.tagesschau.de/wirtschaft/stahlgipfel-klimawandel-produktion-100.html
   quelle: Tagesschau – alle Meldungen
@@ -359,4 +380,4 @@ vorschlaege:
   brief: 2026-09-28-internet-recherche.json
   status: offen
   notiz: Automatisch erfasst aus 2026-09-28-internet-recherche.json – Quellenprüfung erforderlich.
-zuletzt_ergaenzt: '2026-11-16T19:23:28'
+zuletzt_ergaenzt: '2026-11-18T11:39:37'

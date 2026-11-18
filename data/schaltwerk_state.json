@@ -48,6 +48,7 @@
     "nacht-planung::planung:2026-11-15": "2026-11-15T09:24:36+01:00",
     "nacht-planung::planung:2026-11-16": "2026-11-16T08:54:15+01:00",
     "nacht-planung::planung:2026-11-17": "2026-11-17T11:38:10+01:00",
+    "nacht-planung::planung:2026-11-18": "2026-11-18T11:39:37+01:00",
     "reach-signale-kuratieren::signal:https://www.heise.de/bestenlisten/testbericht/saugroboter-eufy-c30-edge-im-test-kleine-station-fairer-preis-grosse-leistung/34bhq0b?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag": "2026-11-09T21:39:50+01:00",
     "reach-signale-kuratieren::signal:https://www.heise.de/news/Neues-iPad-mini-koennte-deutlich-teurer-werden-11483675.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag": "2026-10-12T21:17:05+02:00",
     "reach-signale-kuratieren::signal:https://www.spiegel.de/wirtschaft/erneuerbare-energien-solarstromproduktion-uebertrifft-bereits-vorjahreswert-a-b90835bc-a613-44e1-9186-851ac443b0f2#ref=rss": "2026-10-04T16:20:48+02:00",
@@ -91,11 +92,14 @@
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/ausland/amerika/uruguay-erneuerbare-energie-klima-100.html": "2026-10-20T08:33:00+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/inland/bericht-aus-berlin-stromsteuer-100.html": "2026-10-26T12:30:43+01:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/inland/gasreserve-126.html": "2026-11-12T13:34:27+01:00",
+    "verbraucher-nachrichten::rss:https://www.tagesschau.de/inland/innenpolitik/koalitionsausschuss-einigung-stromsteuer-spritpreisdeckel-100.html": "2026-11-18T11:39:37+01:00",
+    "verbraucher-nachrichten::rss:https://www.tagesschau.de/inland/innenpolitik/was-bringt-stromsteuer-senkung-koalitionsausschuss-100.html": "2026-11-18T11:39:37+01:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/arbeitsmarkt/ig-metall-tarifverhandlungen-104.html": "2026-10-07T09:10:22+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/arbeitsmarkt/ig-metall-warnstreiks-120.html": "2026-11-02T08:37:08+01:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/dorfkneipe-rettung-brandenburg-100.html": "2026-10-25T13:31:56+01:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/energie/bundesnetzagentur-gaskraftwerke-100.html": "2026-11-03T17:30:15+01:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/energie/gasspeicher-vorgaben-ziel-verfehlt-100.html": "2026-11-01T17:46:48+01:00",
+    "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/finanzen/inflation-interview-bundesbankpraesident-nagel-100.html": "2026-11-18T11:39:37+01:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/finanzen/marktberichte/marktbericht-dax-asml-tsmc-berichtssaison-102.html": "2026-10-15T07:50:53+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/ig-metall-wirtschaftsmeldung-oktober2026-100.html": "2026-10-27T20:36:38+01:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/konjunktur/inflation-eurozone-anstieg-102.html": "2026-10-04T16:20:48+02:00",
@@ -115,11 +119,11 @@
   },
   "letzter_lauf": {
     "kanal-konfig-drift": "2026-11-06T17:55:19+01:00",
-    "nacht-planung": "2026-11-17T11:38:10+01:00",
+    "nacht-planung": "2026-11-18T11:39:37+01:00",
     "reach-signale-kuratieren": "2026-11-16T19:23:28+01:00",
     "standby-erinnerung": "2026-10-04T23:53:19+02:00",
     "stiller-kanal": "2026-11-15T16:51:11+01:00",
-    "verbraucher-nachrichten": "2026-11-16T19:23:28+01:00",
+    "verbraucher-nachrichten": "2026-11-18T11:39:37+01:00",
     "wochenbericht": "2026-11-08T19:28:44+01:00"
   },
   "marker": {
@@ -172,7 +176,8 @@
     "slot:2026-11-14:03:40": "2026-11-14T04:06:53+01:00",
     "slot:2026-11-15:03:40": "2026-11-15T09:24:36+01:00",
     "slot:2026-11-16:03:40": "2026-11-16T08:54:15+01:00",
-    "slot:2026-11-17:03:40": "2026-11-17T11:38:10+01:00"
+    "slot:2026-11-17:03:40": "2026-11-17T11:38:10+01:00",
+    "slot:2026-11-18:03:40": "2026-11-18T11:39:37+01:00"
   },
   "version": 1,
   "zaehler": {
@@ -226,7 +231,8 @@
       "2026-11-14": 1,
       "2026-11-15": 1,
       "2026-11-16": 1,
-      "2026-11-17": 1
+      "2026-11-17": 1,
+      "2026-11-18": 1
     },
     "reach-signale-kuratieren": {
       "2026-10-04": 6,
@@ -264,7 +270,8 @@
       "2026-11-08": 1,
       "2026-11-11": 2,
       "2026-11-12": 1,
-      "2026-11-16": 1
+      "2026-11-16": 1,
+      "2026-11-18": 3
     },
     "wochenbericht": {
       "2026-10-18": 1,
