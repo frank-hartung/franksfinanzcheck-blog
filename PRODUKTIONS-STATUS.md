@@ -1,6 +1,6 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-11-18 21:56 UTC  
+**Stand:** 2026-11-18 23:35 UTC  
 **Stufe:** OK  
 **Befund:** Letzter Publikationstag (2026-11-18): 2 Artikel – Ziel erfüllt. – Bestand: 3 von Gates gehalten (ältester 7 Tage: faktenfrische: 05ae2eeee6a578aac17b (luecke): Keine Datenbasis für die Angabe, dass 24‑Monats‑Garantie üblich sei.; 2980f6b227953c5ac8af (luecke): Keine Quelle für die Aussage, …)
 
