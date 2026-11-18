@@ -291,7 +291,7 @@ Wer seine Kosten sieht, seine Konditionen rechnet und das Kündigungsfenster nut
 
 
 
-**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/)
+**Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) · [Kaffeemaschine Stromverbrauch](../../posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/)
 **Lesetipp:** [Energieeffizienz im Haushalt: 5 schnelle Spartricks](../../posts/2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks/)
 
 ## Häufige Fragen

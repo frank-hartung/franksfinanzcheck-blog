@@ -217,7 +217,7 @@ Wenn ein Betrag nicht passt, bitte den Anbieter um eine Aufstellung. So lässt s
 
 Du erkennst, ob ein Posten einmalig anfällt oder wiederkehrt.
 
-**Weiterlesen:** [Ratgeber Internet und DSL](../../pillar/internet-dsl/) · [Handytarif vergleichen: Worauf es ankommt](../../posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/) · [Preiswert surfen: DSL-Anschluss prüfen](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/)
+**Weiterlesen:** [Ratgeber Internet und DSL](../../pillar/internet-dsl/) · [Handytarif vergleichen: Worauf es ankommt](../../posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/) · [Preiswert surfen: DSL-Anschluss prüfen](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/) · [Mesh WLAN nachrüsten](../../posts/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung/)
 
 ## Häufige Fragen
 
