@@ -61,7 +61,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ![Merkkarte: Kernaussagen zu DSL-Vergleich: So findest du den günstigsten Internettarif](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „[DSL-Vergleich](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/): So findest du den günstigsten Internettarif“ (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „DSL-Vergleich: So findest du den günstigsten Internettarif“ (eigene Darstellung aus diesem Beitrag).*
 
 
 ## Wie berechnest du den echten Effektivpreis?
