@@ -540,16 +540,6 @@
       "serien": 0,
       "ueberlang": false
     },
-    "2026-11-09-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten": {
-      "mikro": 0,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub": {
-      "mikro": 1,
-      "serien": 0,
-      "ueberlang": false
-    },
     "2026-11-09-wlan-verbessern-mesh-system-oder-repeater-im-check": {
       "mikro": 1,
       "serien": 0,
@@ -560,37 +550,7 @@
       "serien": 0,
       "ueberlang": false
     },
-    "2026-11-10-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten": {
-      "mikro": 1,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-11-10-geschirrspueler-voll-so-sparst-du-wasser-und-strom": {
-      "mikro": 0,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-11-10-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": {
-      "mikro": 2,
-      "serien": 0,
-      "ueberlang": false
-    },
     "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee": {
-      "mikro": 1,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-11-10-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung": {
-      "mikro": 1,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-11-10-strompreis-2026-herbst-check-fuer-deine-stromkosten": {
-      "mikro": 2,
-      "serien": 0,
-      "ueberlang": false
-    },
-    "2026-11-10-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
       "mikro": 1,
       "serien": 0,
       "ueberlang": false
@@ -601,7 +561,47 @@
       "ueberlang": false
     },
     "2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten": {
-      "mikro": 4,
+      "mikro": 3,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst": {
+      "mikro": 2,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-13-heizoel-preise-2026-so-findest-du-den-optimalen-kaufzeitpu": {
+      "mikro": 9,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-13-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-13-tagesgeld-und-zinsen-so-parkst-du-dein-geld-sicher": {
+      "mikro": 0,
       "serien": 0,
       "ueberlang": false
     },
@@ -620,7 +620,52 @@
       "serien": 0,
       "ueberlang": false
     },
-    "2026-11-16-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater": {
+    "2026-11-18-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-18-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
+      "mikro": 4,
+      "serien": 0,
+      "ueberlang": true
+    },
+    "2026-11-18-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung": {
+      "mikro": 2,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-18-strompreis-2026-herbst-check-fuer-deine-stromkosten": {
+      "mikro": 2,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-18-vorrat-planen-leicht-gemacht-so-sparst-du-beim": {
+      "mikro": 10,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-18-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-18-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet": {
+      "mikro": 2,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-18-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater": {
       "mikro": 3,
       "serien": 0,
       "ueberlang": false
@@ -632,5 +677,5 @@
     "neu_toleranz": 2,
     "serie_min": 3
   },
-  "stand": "2026-11-16"
+  "stand": "2026-11-18"
 }
