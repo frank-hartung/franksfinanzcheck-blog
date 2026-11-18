@@ -6,7 +6,7 @@ Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
 **Bezugsstand: 2026-11-18** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
 
-**137 offene Live-Befunde auf 37 Artikeln.** Für **99** gibt es frühere Entscheidungen zu diesem Befund;
+**142 offene Live-Befunde auf 38 Artikeln.** Für **104** gibt es frühere Entscheidungen zu diesem Befund;
 die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **38** Befunde haben keine frühere aktive Entscheidung.
 
 Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus `data/faktenfrische_befunde_state.json`,
@@ -204,6 +204,71 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 - Heute in Zeile 76: 50 € – gekennzeichnet („annahme“)
 - Heute in Zeile 76: 80 € – gekennzeichnet („annahme“)
+
+## `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren`
+
+- Datei-SHA256 (heute): `46c44cb0d33816a504c0826c81e9eec650e926b3db4f58abcef3bdbf067cae01`
+- Offene Live-Befunde: **5**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `1dbeb2f8c51e78d11d49` | luecke | 2026-11-17 · 3. Entscheidung | nicht mehr im Text: 150 €, 250 € | Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 € an reinen Gebühren kosten, ist unbelegt. |
+| `33e736ac6afe996b491a` | luecke | 2026-11-17 · 3. Entscheidung | kein Wert genannt (Aussage/Präzision) | Behauptung, dass Echtzeit‑Überweisungen bei kostenlosen Konten generell gebührenfrei sind, fehlt jede Quelle. |
+| `96b7b7768d402884810c` | luecke | 2026-11-17 · 3. Entscheidung | 100.000 € in Zeile 217 gekennzeichnet | Aussage, dass Einlagen bis 100.000 € durch die deutsche Einlagensicherung geschützt sind, wird nicht belegt. |
+| `a25bb6bbcb25ba8b0e22` | luecke | 2026-11-17 · 3. Entscheidung | 8 % in Zeile 5 gekennzeichnet · 11 % in Zeile 78 gekennzeichnet | Angabe von Dispozinsen von 8 % bis 11 % ohne Quellenangabe. |
+| `f94f8ba1e4342e67e45a` | luecke | 2026-11-17 · 3. Entscheidung | nicht mehr im Text: 180 € · 120 € in Zeile 90 gekennzeichnet | Angabe, dass ein Kontowechsel 120 € bis 180 € im Jahr spart, fehlt jede Quelle. |
+
+### `1dbeb2f8c51e78d11d49`
+
+**Befund:** Behauptung, dass klassische Filialbanken jährlich 150 € bis 250 € an reinen Gebühren kosten, ist unbelegt.
+
+**Frühere Entscheidung (2026-11-17):** Arena-Redaktion (Auftrag: Frank Hartung), 17.11.2026
+
+> Beleglos entschieden, weil es keinen zulässigen Beleg gibt: In der Quellen-Allowlist (data/agent_reach/faktenfrische.yaml) findet sich keine amtliche oder verbraucherschützerische Erhebung zu durchschnittlichen Jahresgebühren von Filialbanken, und Vergleichsportale außerhalb der Allowlist dürfen als Beleg nicht herhalten. Die unbelegte Marktbehauptung 'ca. 140 Euro bis 240 Euro' ist deshalb aus dem Artikel entfernt. Die Tabelle rechnet jetzt offen mit zwei benannten Modellannahmen (10,00 Euro Kontoführung im Monat und 15,00 Euro Karte im Jahr, zusammen 135,00 Euro im Jahr), ist als Modellrechnung gekennzeichnet, und der Text verweist Leser auf beide Preis- und Leistungsverzeichnisse, statt eine Marktzahl zu behaupten.
+
+- Im heutigen Text nicht mehr vorhanden: 150 €, 250 €
+
+### `33e736ac6afe996b491a`
+
+**Befund:** Behauptung, dass Echtzeit‑Überweisungen bei kostenlosen Konten generell gebührenfrei sind, fehlt jede Quelle.
+
+**Frühere Entscheidung (2026-11-17):** Arena-Redaktion (Auftrag: Frank Hartung), 17.11.2026
+
+> Der Befund ist berechtigt, und die Aussage war sachlich falsch: Eine generelle Gebührenfreiheit von Echtzeit-Überweisungen gibt es nicht. Die Bundesbank (Fragen und Antworten zu Echtzeitüberweisungen und Empfängerüberprüfung, geprüft am 17.11.2026) formuliert die Rechtslage so: Die Kosten für Echtzeitüberweisungen dürfen nicht höher sein als die Kosten für herkömmliche Überweisungen gleicher Art - Preisparität also, nicht Kostenlosigkeit. Der Artikel nennt deshalb in Kurzantwort, Wichtigstes in Kürze, Kostenfaktoren, Extras, 10-Minuten-Check und in der Vergleichstabelle nur noch diese Preisparität, mit den Stichtagen 09.01.2025 (Empfangspflicht) und 09.10.2025 (Sendepflicht). Die unbelegte Gratis-Aussage ist entfernt.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `96b7b7768d402884810c`
+
+**Befund:** Aussage, dass Einlagen bis 100.000 € durch die deutsche Einlagensicherung geschützt sind, wird nicht belegt.
+
+**Frühere Entscheidung (2026-11-17):** Arena-Redaktion (Auftrag: Frank Hartung), 17.11.2026
+
+> Am 17.11.2026 gegen die Primärquelle geprüft. Die früher verlinkte Bundesbank-Seite .../bankenaufsicht/einlagensicherung/einlagensicherung-602936 ist tot (läuft ins Leere); im FAQ-Antworttext und im Frontmatter-Block quellen steht jetzt die geprüfte Seite 'Einlagensicherung' (.../finanzaufsicht/einzelaspekte/einlagensicherung-597886). Inhaltlich übernommen: gesetzlicher Anspruch bis 100.000 Euro je Einleger und je Bank einschließlich Zinsansprüchen, Auszahlung spätestens sieben Arbeitstage nach Feststellung des Entschädigungsfalls, erhöhter Schutz von 500.000 Euro für bis zu sechs Monate bei besonders schutzwürdigen Einlagen. Ergänzt wurde außerdem der fehlende Punkt vor 'Moderne Apps sind zudem sicher'. Die Aussage ist damit belegt statt nur behauptet.
+
+- Heute in Zeile 217: 100.000 € – gekennzeichnet („beispielwert“)
+
+### `a25bb6bbcb25ba8b0e22`
+
+**Befund:** Angabe von Dispozinsen von 8 % bis 11 % ohne Quellenangabe.
+
+**Frühere Entscheidung (2026-11-17):** Arena-Redaktion (Auftrag: Frank Hartung), 17.11.2026
+
+> Die Spanne 'ca. 8 % bis 11 %' hatte keine Quelle und ist aus der Vergleichstabelle entfernt. An ihre Stelle tritt der amtliche Messwert: Bundesbank MFI-Zinsstatistik, Bestände, Zeitreihe BBIM1.M.DE.B.A2Z1.A.R.A.2250.EUR.N - revolvierende Kredite und Überziehungskredite an private Haushalte, September 2026: 9,59 % p.a. effektiv bei 28.552 Mio Euro Volumen; die acht Vormonate lagen zwischen 9,19 % und 9,46 % (Statistikstand laut Seitenstempel 02.11.2026, geprüft am 17.11.2026). Der Artikel benennt den Wert ausdrücklich als Durchschnitt über alle Banken und verweist für den eigenen Satz auf das Preisverzeichnis des Kontomodells.
+
+- Heute in Zeile 5: 8 % – gekennzeichnet („modellwert“)
+- Heute in Zeile 78: 11 % – gekennzeichnet („modellwert“)
+
+### `f94f8ba1e4342e67e45a`
+
+**Befund:** Angabe, dass ein Kontowechsel 120 € bis 180 € im Jahr spart, fehlt jede Quelle.
+
+**Frühere Entscheidung (2026-11-17):** Arena-Redaktion (Auftrag: Frank Hartung), 17.11.2026
+
+> Die Sparspanne von 120 Euro bis 180 Euro im Jahr war unbelegt und steht nirgends mehr im Artikel; auch pin_description wirbt nicht länger mit 'bis zu 120 Euro im Jahr sparen'. Der Artikel sagt stattdessen, dass die Ersparnis den Gebühren im eigenen alten Preisverzeichnis entspricht. Belegt wird nur noch, was gesetzlich feststeht: der Kontowechselservice nach Paragraf 21 ff. ZKG - die neue Bank muss die alte Bank innerhalb von zwei Geschäftstagen nach der Ermächtigung beauftragen (Paragraf 22 ZKG) und erhält dafür die Daueraufträge, die Lastschriftmandate und die Buchungen der letzten 13 Monate; die Ermächtigung ist auch im Online-Banking möglich (Paragraf 21 Absatz 4 ZKG). Dieselbe Quelle trägt jetzt auch die FAQ-Antwort zum Lastschriftumzug. Deshalb der ZKG-Beleg statt einer erfundenen Sparzahl.
+
+- Im heutigen Text nicht mehr vorhanden: 180 €
+- Heute in Zeile 90: 120 € – gekennzeichnet („annahme“)
 
 ## `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden`
 
@@ -447,7 +512,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen`
 
-- Datei-SHA256 (heute): `c712e60c5b1f151d850f93734af32d77b0edd1f0e1577cba47405c779a6e7fb9`
+- Datei-SHA256 (heute): `58d22983e085be932735ef354a1bf51c444930cd9b45c800da9d4dc7b479c8d9`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1712,12 +1777,12 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen`
 
-- Datei-SHA256 (heute): `3919939ad04c614d87c0200a36c049529cc239f8999c42a769c9231117be2c6d`
+- Datei-SHA256 (heute): `e760d26f61ae181e73711c60676637eec0a68a021e02ade1e12bcbbfe83ca4a6`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `98eb45f772ad7a0aac7b` | luecke | 2026-11-11 · 1. Entscheidung | 500 € in Zeile 68 gekennzeichnet · 120 € in Zeile 27 gekennzeichnet · 80 € in Zeile 26 gekennzeichnet | Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt im Text Referenzwerte (120 € Strom, 80 € Kfz), für… |
+| `98eb45f772ad7a0aac7b` | luecke | 2026-11-11 · 1. Entscheidung | 500 € in Zeile 67 gekennzeichnet · 120 € in Zeile 26 gekennzeichnet · 80 € in Zeile 25 gekennzeichnet | Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt im Text Referenzwerte (120 € Strom, 80 € Kfz), für… |
 | `b7f0d52968d89cdf8c5b` | praezision | 2026-11-11 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne Nennung konkreter rechtlicher Grundlagen (DSGVO) u… |
 | `be911855d67f998be662` | luecke | 2026-11-11 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Der Ratgeber nennt keinen Regulierungsrahmen für Reisebuchungen (z. B. Fluggastrechte oder Stornierungsregeln), obwoh… |
 
@@ -1729,9 +1794,9 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 f5cf5ca16db6): Die Zahl steht weiterhin im Artikel, ist aber ausdrücklich als Modell-/Beispielwert gekennzeichnet: „**Beispielrechnung:** Die angenommenen Einsparungen betragen 120 € im Jahr für Strom, 25 € pro Monat für ungenutzte Abos und 80 € im Jahr für die Kfz‑Versicherung, insgesamt 500 € nach zwölf“. Beanstandet war die Zahl OHNE Kennzeichnung; das trifft nicht mehr zu.
 
-- Heute in Zeile 68: 500 € – gekennzeichnet („modellrechnung“)
-- Heute in Zeile 27: 120 € – gekennzeichnet („modellrechnung“)
-- Heute in Zeile 26: 80 € – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 67: 500 € – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 26: 120 € – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 25: 80 € – gekennzeichnet („modellrechnung“)
 
 ### `b7f0d52968d89cdf8c5b`
 
@@ -1836,6 +1901,11 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6b0aa3429d97e8c74ed
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7f66ec82ee1a3f095b0c --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 84c991c5d152b14a2675 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a70e7adc97c58317ccc1 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1dbeb2f8c51e78d11d49 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 33e736ac6afe996b491a --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 96b7b7768d402884810c --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden a25bb6bbcb25ba8b0e22 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden f94f8ba1e4342e67e45a --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 43470330b3b48c9cee49 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 8ddc1025e45be176ad3a --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 95d6d2877620e5a056ce --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"

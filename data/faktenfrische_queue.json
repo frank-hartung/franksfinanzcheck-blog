@@ -4937,9 +4937,9 @@
       "faellig": false,
       "frist": "2026-11-19",
       "geo": 100,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
+      "befund": false,
+      "unvollstaendig": false,
+      "status": "vorlauf"
     },
     {
       "slug": "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
@@ -5246,8 +5246,8 @@
       "frist": "2026-11-29",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
@@ -5257,8 +5257,8 @@
       "frist": "2026-11-29",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen",
@@ -5301,8 +5301,8 @@
       "frist": "2026-12-01",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
@@ -5312,8 +5312,8 @@
       "frist": "2026-12-01",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
@@ -5334,8 +5334,8 @@
       "frist": "2026-12-01",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
@@ -5355,9 +5355,9 @@
       "faellig": false,
       "frist": "2026-12-02",
       "geo": 83,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
+      "befund": true,
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
@@ -5367,8 +5367,8 @@
       "frist": "2026-12-02",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
@@ -5378,11 +5378,101 @@
       "frist": "2026-12-02",
       "geo": 100,
       "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     }
   ],
   "offen": [
+    {
+      "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
+      "titel": "Sparen im Herbst: Spartipps für die goldene Jahreszeit",
+      "grund": "frisch geprüft vor 19 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-29",
+      "geo": 100,
+      "befund": true,
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
+    },
+    {
+      "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
+      "titel": "Mietwagen ohne Kautionsfallen: So sparst du im Urlaub",
+      "grund": "frisch geprüft vor 19 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-11-29",
+      "geo": 100,
+      "befund": true,
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
+    },
+    {
+      "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
+      "titel": "Sicher heizen: Was sie abdeckt und wie lange sie läuft",
+      "grund": "frisch geprüft vor 17 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-12-01",
+      "geo": 100,
+      "befund": true,
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
+    },
+    {
+      "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
+      "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
+      "grund": "frisch geprüft vor 17 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-12-01",
+      "geo": 100,
+      "befund": true,
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
+    },
+    {
+      "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
+      "titel": "Preisgarantie Gas: Was bei Preiserhöhung hilft",
+      "grund": "frisch geprüft vor 17 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-12-01",
+      "geo": 100,
+      "befund": true,
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
+    },
+    {
+      "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
+      "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
+      "grund": "frisch geprüft vor 16 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-12-02",
+      "geo": 83,
+      "befund": true,
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
+    },
+    {
+      "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
+      "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
+      "grund": "frisch geprüft vor 16 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-12-02",
+      "geo": 100,
+      "befund": true,
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
+    },
+    {
+      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
+      "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
+      "grund": "frisch geprüft vor 16 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-12-02",
+      "geo": 100,
+      "befund": true,
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
+    }
+  ],
+  "vorlauf": [
     {
       "slug": "2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert",
       "titel": "Herbst-Check: Strom, Versicherung, Konto und Internet",
@@ -5390,89 +5480,10 @@
       "faellig": false,
       "frist": "2026-11-19",
       "geo": 100,
-      "befund": true,
-      "unvollstaendig": true,
-      "status": "unvollstaendig"
-    },
-    {
-      "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
-      "titel": "Sparen im Herbst: Spartipps für die goldene Jahreszeit",
-      "grund": "frisch geprüft vor 19 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-29",
-      "geo": 100,
-      "befund": true,
+      "befund": false,
       "unvollstaendig": false,
-      "status": "befund"
+      "status": "vorlauf"
     },
-    {
-      "slug": "2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub",
-      "titel": "Mietwagen ohne Kautionsfallen: So sparst du im Urlaub",
-      "grund": "frisch geprüft vor 19 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-11-29",
-      "geo": 100,
-      "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
-    },
-    {
-      "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
-      "titel": "Sicher heizen: Was sie abdeckt und wie lange sie läuft",
-      "grund": "frisch geprüft vor 17 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-01",
-      "geo": 100,
-      "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
-    },
-    {
-      "slug": "2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026",
-      "titel": "Preisgarantie Gas: So sicherst du günstige Tarife",
-      "grund": "frisch geprüft vor 17 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-01",
-      "geo": 100,
-      "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
-    },
-    {
-      "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
-      "titel": "Preisgarantie Gas: Was bei Preiserhöhung hilft",
-      "grund": "frisch geprüft vor 17 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-01",
-      "geo": 100,
-      "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor",
-      "titel": "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen",
-      "grund": "frisch geprüft vor 16 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-02",
-      "geo": 100,
-      "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
-    },
-    {
-      "slug": "2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro",
-      "titel": "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung",
-      "grund": "frisch geprüft vor 16 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-02",
-      "geo": 100,
-      "befund": true,
-      "unvollstaendig": false,
-      "status": "befund"
-    }
-  ],
-  "vorlauf": [
     {
       "slug": "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
       "titel": "Flugvergleich im Winter: So findest du echte Billigflüge",
@@ -5821,17 +5832,6 @@
       "faellig": false,
       "frist": "2026-12-02",
       "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
-      "titel": "Heizungs-Check vor dem Frost: Probelauf, Thermostate, Druck",
-      "grund": "frisch geprüft vor 16 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-02",
-      "geo": 83,
       "befund": false,
       "unvollstaendig": false,
       "status": "vorlauf"
