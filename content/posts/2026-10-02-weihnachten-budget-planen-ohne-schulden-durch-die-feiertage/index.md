@@ -193,7 +193,7 @@ Am teuersten wird der Griff zum Dispo im Modellfall. Viele Banken nehmen dafür 
 4. **Geschenkeliste erstellen:** Notiere für jede Person eine Idee samt Höchstbetrag und kaufe gezielt nach Plan ein.
  **Wöchentliche Kurzkontrolle durchführen:** Zehn Minuten am Sonntag genügen, um getätigte Einkäufe zu verbuchen und den Puffer zu prüfen; das ist ein Modellwert.
 
-**Weiterlesen:** [Ratgeber Frugalismus und sparsames Leben](../../pillar/frugalismus/) **Lesetipp:** [Mehr Freiheit durch Verzicht: Clevere Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) · 7 Gewohnheiten für [finanzielle Freiheit](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/)
+**Weiterlesen:** [Ratgeber Frugalismus und sparsames Leben](../../pillar/frugalismus/) **Lesetipp:** [Mehr Freiheit durch Verzicht: Clevere Frugalismus-Tipps](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) · sieben Gewohnheiten für [finanzielle Freiheit](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/)
 
 
 Schon kleine Schritte wirken. Eine feste Obergrenze und eine Rate pro Woche nehmen dem Fest den Druck.

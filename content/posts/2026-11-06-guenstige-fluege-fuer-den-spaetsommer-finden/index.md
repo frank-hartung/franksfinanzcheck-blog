@@ -110,7 +110,7 @@ Prüfen Sie auch die Versicherung für das Auto genau. Ein Schutz ohne Selbstbet
 **Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/)
 **Lesetipp:** [Flugverspätung Entschädigung: So holst du dein Geld zurück](../../posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/)
 
-**Lesetipp:** Reisekasse füllen: 7 Wege zu mehr Budget für den Urlaub
+**Lesetipp:** Reisekasse füllen: sieben Wege zu mehr Budget für den Urlaub
 
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 
@@ -124,7 +124,7 @@ Kleine Flughäfen in der Region sind oft ein echter Geheimtipp. Sie verlangen vo
 Vergleichen Sie nicht nur die Miete pro Tag für das Auto. Achten Sie auf Gebühren für den zweiten Fahrer oder das Navi. Auch Kindersitze kosten bei vielen Vermietern extra Geld pro Tag. Nutzen Sie Portale wie CHECK24 für einen klaren Blick auf alle Kosten. Wählen Sie am besten die Tankregel Voll-zu-Voll für faire Preise beim Sprit.
 
 ### Lohnt sich ein Kombi-Deal für Flug und Mietwagen?
-Ja, das lohnt sich in den meisten Fällen für Ihr Budget. Wenn Sie beide Leistungen zusammen buchen, gewähren Anbieter oft Rabatte. Das liegt an geringeren Kosten für die Vermittlung der Kunden. Sie sparen so oft zwischen 5 und 15 % vom Gesamtpreis. Zudem haben Sie nur einen Ansprechpartner für Ihre gesamte Reiseplanung.
+Ja, das lohnt sich in den meisten Fällen für Ihr Budget. Wenn Sie beide Leistungen zusammen buchen, gewähren Anbieter oft Rabatte. Das liegt an geringeren Kosten für die Vermittlung der Kunden. Sie sparen so oft zwischen 5 % und 15 % vom Gesamtpreis. Zudem haben Sie nur einen Ansprechpartner für Ihre gesamte Reiseplanung.
 
 ### Was ist der wichtigste Tipp, um das Reisebudget zu schonen?
 Bleiben Sie bei allen Daten und Orten so flexibel wie möglich. Ein Tag früher oder später spart oft mehr als jeder Rabattcode. Kombinieren Sie diese Flexibilität mit einem guten Preis-Alert im Internet. Prüfen Sie am Ende immer den Gesamtpreis inklusive aller Gebühren und Steuern. So behalten Sie die volle Kontrolle über Ihre Ausgaben im Urlaub.

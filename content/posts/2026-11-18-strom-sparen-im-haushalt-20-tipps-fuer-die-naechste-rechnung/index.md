@@ -129,15 +129,25 @@ Viele versuchen zu sparen, doch kleine Stolperfallen kosten am Ende mehr. Die Ta
 
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 
-### Wie viel Prozent meines Stromverbrauchs kann ich realistisch senken? Durch einfache Verhaltensänderungen und Geräteoptimierung lassen sich etwa 10‑20 % einsparen. Das entspricht einer **Faustregel**: Jeder 5 % weniger Verbrauch reduziert die Jahresrechnung um etwa 5 % des jeweiligen Gerätepunkts.
+### Wie viel Prozent meines Stromverbrauchs kann ich realistisch senken?
 
-### Lohnt sich der Umstieg auf LED‑Leuchten? Ja. LED verbraucht bis zu 85 % weniger Energie als Glühbirnen und hat eine lange Lebensdauer. Die Anschaffungskosten amortisieren sich meist innerhalb von zwei Jahren.
+Durch einfache Verhaltensänderungen und Geräteoptimierung lassen sich etwa 10‑20 % einsparen. Das entspricht einer **Faustregel**: Jeder 5 % weniger Verbrauch reduziert die Jahresrechnung um etwa 5 % des jeweiligen Gerätepunkts.
 
-### Was ist beim Tarifwechsel besonders wichtig? Achte auf den Arbeitspreis, den Grundpreis und das Kündigungsfenster. Ein günstiger Arbeitspreis kann durch hohe Grundgebühren wieder aufgehoben werden.
+### Lohnt sich der Umstieg auf LED‑Leuchten?
 
-### Wie oft sollte ich meine Stromrechnung prüfen? Einmal pro Quartal reicht, um ungewöhnliche Entwicklungen zu erkennen. Das passt gut zum 4K‑Prüfpfad „Kurs halten“.
+Ja. LED verbraucht bis zu 85 % weniger Energie als Glühbirnen und hat eine lange Lebensdauer. Die Anschaffungskosten amortisieren sich meist innerhalb von zwei Jahren.
 
-### Gibt es Förderungen für energieeffiziente Geräte? Manche Bundesprogramme unterstützen den Kauf von energieeffizienten Geräten. Informiere dich bei deiner Kommune oder über CHECK24, wo aktuelle Förderungen gelistet sind.
+### Was ist beim Tarifwechsel besonders wichtig?
+
+Achte auf den Arbeitspreis, den Grundpreis und das Kündigungsfenster. Ein günstiger Arbeitspreis kann durch hohe Grundgebühren wieder aufgehoben werden.
+
+### Wie oft sollte ich meine Stromrechnung prüfen?
+
+Einmal pro Quartal reicht, um ungewöhnliche Entwicklungen zu erkennen. Das passt gut zum 4K‑Prüfpfad „Kurs halten“.
+
+### Gibt es Förderungen für energieeffiziente Geräte?
+
+Manche Bundesprogramme unterstützen den Kauf von energieeffizienten Geräten. Informiere dich bei deiner Kommune oder über CHECK24, wo aktuelle Förderungen gelistet sind.
 
 Strom sparen ist kein einmaliger Akt, sondern ein kontinuierlicher Prozess. Nutze den 4K‑Prüfpfad, erstelle eine Übersicht deiner wiederkehrenden Kosten, rechne die Konditionen nach und sichere dir das Kündigungsfenster. Dann prüfe quartalsweise, ob deine Maßnahmen noch sinnvoll sind.
 

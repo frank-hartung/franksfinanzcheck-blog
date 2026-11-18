@@ -119,15 +119,25 @@ Die Kosten setzen sich aus den Anschaffungskosten für Lagerbehälter und eventu
 
 ## Häufige Fragen
 
-### Wie oft sollte ich meine Bestände prüfen? Ein kurzer Check alle sieben Tage (Beispielwert) reicht aus, um Engpässe zu erkennen; das ist ein Modellwert.
+### Wie oft sollte ich meine Bestände prüfen?
 
-### Welche Produkte eignen sich am besten für den Vorrat? Lang haltbare Grundnahrungsmittel, Tiefkühlware und nicht‑schnell verderbliche Getränke.
+Ein kurzer Check alle sieben Tage (Beispielwert) reicht aus, um Engpässe zu erkennen; das ist ein Modellwert.
 
-### Wie verhindere ich, dass Lebensmittel im Kühlschrank verderben? Beschrifte Behälter mit Kauf‑ und Haltbarkeitsdatum. **Nutze die First‑In‑Erste‑Out‑Methode.**
+### Welche Produkte eignen sich am besten für den Vorrat?
 
-### Was mache ich, wenn ich plötzlich mehr Platz brauche? Reduziere die Menge von Produkten mit kurzer Haltbarkeit und kaufe sie wöchentlich.
+Lang haltbare Grundnahrungsmittel, Tiefkühlware und nicht‑schnell verderbliche Getränke.
 
-### Wie kann ich den Einkauf Rhythmus an meine Urlaubszeit anpassen? Plane vor der Abreise einen zusätzlichen Vorrats‑Check und kaufe ggf. größere Mengen.
+### Wie verhindere ich, dass Lebensmittel im Kühlschrank verderben?
+
+Beschrifte Behälter mit Kauf‑ und Haltbarkeitsdatum. **Nutze die First‑In‑Erste‑Out‑Methode.**
+
+### Was mache ich, wenn ich plötzlich mehr Platz brauche?
+
+Reduziere die Menge von Produkten mit kurzer Haltbarkeit und kaufe sie wöchentlich.
+
+### Wie kann ich den Einkauf Rhythmus an meine Urlaubszeit anpassen?
+
+Plane vor der Abreise einen zusätzlichen Vorrats‑Check und kaufe ggf. größere Mengen.
 
 Durch Vorrat planen und einen klaren Einkauf‑Rhythmus sparst du nicht nur Geld, sondern gewinnst auch Kontrolle über deinen Lebensmittel‑Bestand. Setze die Schritte jetzt um, und du wirst die Veränderung spüren.
 

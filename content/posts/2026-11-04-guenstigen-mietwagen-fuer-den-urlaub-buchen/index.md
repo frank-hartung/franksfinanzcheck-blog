@@ -86,12 +86,12 @@ Andere Regeln sind oft teuer. Manche Firmen füllen den Tank für dich auf. Daf�
 
 > **Rechenbeispiel:**
 > Hier ist ein Beispiel für die Kosten. Wir rechnen mit sieben Tagen Miete.
-> Die Miete kostet 40 Euro am Tag. Das macht 280 Euro.
-> Dazu kommt der Schutz für 10 Euro am Tag. Das sind 70 Euro.
-> Ein zweiter Fahrer kostet 5 Euro am Tag. Das sind 35 Euro.
-> Du fährst 300 Kilometer. Jeder Kilometer extra kostet 20 Cent. Das macht 60 Euro.
-> Am Ende zahlst du 445 Euro für die Woche.
-> Die Kaution von 500 Euro kommt nicht dazu. Die Bank sperrt diesen Betrag nur.
+> Die Miete kostet 40 € am Tag. Das macht 280 €.
+> Dazu kommt der Schutz für 10 € am Tag. Das sind 70 €.
+> Ein zweiter Fahrer kostet 5 € am Tag. Das sind 35 €.
+> Du fährst 300 Kilometer. Jeder Kilometer extra kostet 20 Cent. Das macht 60 €.
+> Am Ende zahlst du 445 € für die Woche.
+> Die Kaution von 500 € kommt nicht dazu. Die Bank sperrt diesen Betrag nur.
 > Nach der Reise gibt sie das Geld wieder frei.
 
 Dieses Beispiel zeigt die Wirkung der Extras. Kleine Beträge summieren sich schnell. Ein genauer Blick auf die Kilometer lohnt sich. Wenn du viel fährst, nimm ein Paket ohne Limit. Das macht die Rechnung einfacher. Du hast dann volle Kontrolle über dein Budget.

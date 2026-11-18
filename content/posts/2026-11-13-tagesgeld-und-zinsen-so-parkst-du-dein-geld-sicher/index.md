@@ -39,7 +39,7 @@ Du hast etwas Geld übrig. Du willst es sicher parken. Und du willst Zinsen mitn
 
 Tagesgeld ist ein spezielles Konto für dein Erspartes. Du kannst jederzeit über dein Geld verfügen. Es gibt keine festen Laufzeiten oder Kündigungsfristen. Du kannst das Konto ohne Vorankündigung wieder schließen. Das Geld liegt bei einer Bank. Diese Bank nutzt dein Guthaben für ihr Geschäft. Dafür zahlt sie dir einen Zins. Dieser Zins ist variabel. Die Bank kann ihn also täglich an den Markt anpassen. Das ist der größte Unterschied zum Festgeld. Dort bleibt der Zins über Jahre gleich.
 
-Die Sicherheit ist das wichtigste Argument für diese Anlage. Dein Geld ist durch die gesetzliche Sicherung für Einlagen geschützt. In der gesamten EU gilt ein hoher Standard. Beträge bis zu 100.000 Euro pro Kunde und Bank sind sicher. Das ist eine klare Garantie vom Staat. Selbst wenn eine Bank pleitegeht, bleibt dein Erspartes erhalten. Du bekommst dein Geld innerhalb weniger Tage zurück. Im Gegensatz zu Aktien gibt es hier keine Schwankungen beim Kurs. Du siehst jeden Tag den gleichen oder einen höheren Betrag. Du bekommst nur die Zinsen oben drauf. Das macht das Konto zum idealen Ort für deinen Notgroschen. Experten raten oft zu drei Monatsgehältern auf diesem Konto. So bist du für kaputte Autos oder Waschmaschinen gerüstet.
+Die Sicherheit ist das wichtigste Argument für diese Anlage. Dein Geld ist durch die gesetzliche Sicherung für Einlagen geschützt. In der gesamten EU gilt ein hoher Standard. Beträge bis zu 100.000 € pro Kunde und Bank sind sicher. Das ist eine klare Garantie vom Staat. Selbst wenn eine Bank pleitegeht, bleibt dein Erspartes erhalten. Du bekommst dein Geld innerhalb weniger Tage zurück. Im Gegensatz zu Aktien gibt es hier keine Schwankungen beim Kurs. Du siehst jeden Tag den gleichen oder einen höheren Betrag. Du bekommst nur die Zinsen oben drauf. Das macht das Konto zum idealen Ort für deinen Notgroschen. Experten raten oft zu drei Monatsgehältern auf diesem Konto. So bist du für kaputte Autos oder Waschmaschinen gerüstet.
 
 ## 4K-Prüfpfad für das optimale Tagesgeldkonto
 
@@ -62,33 +62,33 @@ Bei Tagesgeld lohnt sich ein genauer Blick in die Details. Viele Banken locken m
 | :--- | :--- | :--- |
 | Neukunden-Zins | Höhe und Dauer der Garantie für den Zins | Oft 6 bis 12 Monate, danach folgt der Basissatz |
 | Basissatz | Zins nach Ablauf der ersten Phase | Meist deutlich niedriger als der Start-Zins |
-| Mindesteinlage | Kleinster Betrag für die Eröffnung | Oft ab 1 Euro, selten 1.000 Euro oder mehr |
+| Mindesteinlage | Kleinster Betrag für die Eröffnung | Oft ab 1 €, selten 1.000 € oder mehr |
 | Auszahlungsgebühr | Kosten beim Abheben von Geld | Bei seriösen Banken fast immer kostenlos |
 | Kündigungsfrist | Zeit bis zur Schließung des Kontos | In der Regel täglich möglich ohne jede Frist |
 
 Ein typisches Beispiel zeigt die Falle. Ein hoher Zins für Neukunden wirkt auf den ersten Blick toll. Legst du das Geld aber länger an, schwindet der Vorteil. Du musst die Mischkalkulation verstehen.
 
 > **Rechenbeispiel:**
-> Hier folgt ein genaues Beispiel für deine Planung. Wir nehmen eine Summe von 10.000 Euro an.
+> Hier folgt ein genaues Beispiel für deine Planung. Wir nehmen eine Summe von 10.000 € an.
 >
 > **Schritt 1: Die ersten sechs Monate.**
-> Du erhältst einen Zins für Neukunden von 1,5 Prozent im Jahr.
-> Die Rechnung lautet: 10.000 Euro mal 0,015 geteilt durch 2.
-> Das ergibt einen Ertrag von genau 75 Euro für das erste halbe Jahr.
+> Du erhältst einen Zins für Neukunden von 1,5 % im Jahr.
+> Die Rechnung lautet: 10.000 € mal 0,015 geteilt durch 2.
+> Das ergibt einen Ertrag von genau 75 € für das erste halbe Jahr.
 >
 > **Schritt 2: Die zweiten sechs Monate.**
-> Der Zins sinkt nun auf den Basissatz von 0,5 Prozent im Jahr.
-> Die Rechnung lautet: 10.000 Euro mal 0,005 geteilt durch 2.
-> Das ergibt einen Ertrag von 25 Euro für das zweite halbe Jahr.
+> Der Zins sinkt nun auf den Basissatz von 0,5 % im Jahr.
+> Die Rechnung lautet: 10.000 € mal 0,005 geteilt durch 2.
+> Das ergibt einen Ertrag von 25 € für das zweite halbe Jahr.
 >
 > **Schritt 3: Das Gesamtergebnis nach 12 Monaten.**
-> Addiere beide Beträge: 75 Euro plus 25 Euro.
-> Nach einem Jahr hast du insgesamt 100 Euro an Zinsen verdient.
+> Addiere beide Beträge: 75 € plus 25 €.
+> Nach einem Jahr hast du insgesamt 100 € an Zinsen verdient.
 >
 > **Vergleich als Faustregel:**
-> Ein anderes Konto bietet dauerhaft 1,2 Prozent Zinsen ohne Senkung.
-> Dort hättest du nach einem Jahr 120 Euro auf dem Konto.
-> Das vermeintliche Top-Angebot mit 1,5 Prozent war also am Ende schlechter.
+> Ein anderes Konto bietet dauerhaft 1,2 % Zinsen ohne Senkung.
+> Dort hättest du nach einem Jahr 120 € auf dem Konto.
+> Das vermeintliche Top-Angebot mit 1,5 % war also am Ende schlechter.
 
 Das Beispiel zeigt deutlich: Ein hoher Start-Zins bringt nicht automatisch mehr Geld. Du musst die gesamte Laufzeit im Auge behalten. Rechne immer mit dem Zeitraum, den du wirklich planst. Wenn du bereit bist, alle sechs Monate zu wechseln, nimm den hohen Zins. Wenn du Ruhe willst, wähle den stabilen Basissatz.
 
@@ -112,13 +112,13 @@ Ein oft unterschätzter Punkt ist die Häufigkeit der Zinszahlung. Manche Banken
 ## FAQ – die wichtigsten Fragen kurz beantwortet
 
 ### Wie sicher ist das Geld auf einem Tagesgeldkonto?
-Dein Geld ist durch die gesetzliche Sicherung für Einlagen sehr gut geschützt. In der EU sind Beträge bis zu 100.000 Euro pro Person und Bank garantiert. Das gilt auch bei einer Pleite der Bank. Diese Sicherheit macht das Tagesgeld zu einer der stabilsten Anlagen überhaupt. Es gibt kein Risiko durch Kursschwankungen wie bei Aktien. Dein Kapital bleibt in der Summe immer erhalten.
+Dein Geld ist durch die gesetzliche Sicherung für Einlagen sehr gut geschützt. In der EU sind Beträge bis zu 100.000 € pro Person und Bank garantiert. Das gilt auch bei einer Pleite der Bank. Diese Sicherheit macht das Tagesgeld zu einer der stabilsten Anlagen überhaupt. Es gibt kein Risiko durch Kursschwankungen wie bei Aktien. Dein Kapital bleibt in der Summe immer erhalten.
 
 ### Was bedeutet „Befristeter Neukunden-Zins“?
 Das ist ein spezieller Lockvogel-Zins für neue Kunden. Er gilt meist nur für einen festen Zeitraum von drei bis zwölf Monaten. Danach stuft die Bank dich als Bestandskunden ein. Du erhältst dann nur noch den regulären Basissatz. Dieser liegt oft weit unter dem Angebot für Neukunden. Als Neukunde giltst du meist, wenn du in den letzten sechs oder zwölf Monaten kein Konto bei dieser Bank hattest.
 
 ### Muss ich eine Mindesteinlage leisten?
-Das hängt stark vom Anbieter ab. Viele Banken verlangen heute gar keine Mindesteinlage mehr. Du kannst also schon mit einem Euro starten. Einige wenige Institute setzen Grenzen von 500 oder 1.000 Euro fest. Das dient der Bank zur Senkung der Verwaltungskosten. Prüfe diese Grenze vor der Eröffnung in den Details des Angebots. Für kleine Sparraten eignen sich Konten ohne Mindestsumme am besten.
+Das hängt stark vom Anbieter ab. Viele Banken verlangen heute gar keine Mindesteinlage mehr. Du kannst also schon mit einem Euro starten. Einige wenige Institute setzen Grenzen von 500 oder 1.000 € fest. Das dient der Bank zur Senkung der Verwaltungskosten. Prüfe diese Grenze vor der Eröffnung in den Details des Angebots. Für kleine Sparraten eignen sich Konten ohne Mindestsumme am besten.
 
 ### Wie oft sollte ich mein Tagesgeldkonto überprüfen?
 Ein Check alle sechs Monate ist eine gute Faustregel. So verpasst du keine großen Sprünge am Markt. Wenn die Zinsen allgemein steigen, passen manche Banken ihre Sätze schneller an als andere. Ein kurzer Vergleich auf CHECK24 zeigt dir sofort, ob du noch richtig liegst. Ein Wechsel ist heute kein großer Aufwand mehr. Er lässt sich komplett digital vom Sofa aus erledigen.
