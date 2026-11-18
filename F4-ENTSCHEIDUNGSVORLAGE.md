@@ -1168,7 +1168,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung`
 
-- Datei-SHA256 (heute): `be10e08bf7e3a8eb7a5624c3e80367a482cbdad372837781c6296d8a7e71900b`
+- Datei-SHA256 (heute): `a0efabe0bd528431f8c609fc4e9f61caaf180127837718f9af75dec5ac027115`
 - Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1257,7 +1257,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken`
 
-- Datei-SHA256 (heute): `ff91998d622b03e8942366507838340195cc86ecdf3d4d1d9c5f17d753de43e7`
+- Datei-SHA256 (heute): `5370e7b51453a83a58406672987de55fbddb6f25d289e19068e71b44541c1a20`
 - Offene Live-Befunde: **1**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1622,7 +1622,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang`
 
-- Datei-SHA256 (heute): `ed9be10eefdb85f7a281e202cc673fa18b3dba5cd786a5eec2697f6121f326e3`
+- Datei-SHA256 (heute): `4204f00081cea77cb3c9cadfef9c56e2eccaf3dcef018c71d76c57141e423bfd`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
