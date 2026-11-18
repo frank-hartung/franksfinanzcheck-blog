@@ -25,6 +25,13 @@ cover:
   image: "images/covers/2026-11-18-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich.jpg"
   alt: "Ferienwohnung Vergleich: So rechnest du Kosten ehrlich"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: 745f4fae5a98d201b817ff03dba350606b8711776d6200e6b535b72837c47231
+    geprueft_am: 2026-11-18
+
 ---
 
 Du scrollst durch endlose Listen von Unterkünften für deinen Sommerurlaub.

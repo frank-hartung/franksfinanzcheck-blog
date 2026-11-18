@@ -25,6 +25,13 @@ cover:
   image: "images/covers/2026-11-18-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich.jpg"
   alt: "Carsharing Kosten: Lohnt sich das Auto teilen für dich?"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: dfd5eef39e4b12dc7e53ab9c9a331d0a8540265a530f8dba26ad222c06739b27
+    geprueft_am: 2026-11-18
+
 ---
 
 Carsharing Kosten im Check: Stell dir vor, vor deinem Haus steht ein großer Haufen Blech. Er glänzt in der Sonne. Er verspricht dir Freiheit. Aber dieser Haufen Blech bewegt sich fast nie.
