@@ -3,10 +3,10 @@ title: "Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung"
 description: "Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit…"
 date: 2026-11-18T13:31:17Z
 draft: true
-tags: ["Stromkosten senken"]
+tags: ["Stromkosten senken", "Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
-keywords: ["Strom sparen Tipps", "Energiekosten senken", "Stromverbrauch reduzieren"]
+keywords: ["Strom sparen Tipps", "Energiekosten senken", "Stromverbrauch reduzieren", "Strom sparen im Haushalt", "Frugalismus", "Geld sparen"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
@@ -15,6 +15,12 @@ redaktionelle_pruefung:
   risikoklasse: "standard"
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
+pin_title: "Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung"
+pin_description: "*Werbung | Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit… Mehr Spartipps auf FranksFinanzcheck! #strom #sparen #tipps"
+cover:
+  image: "images/covers/2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung.jpg"
+  alt: "Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung"
+  caption: "Tipp von FranksFinanzcheck"
 ---
 
 Du hast die Stromrechnung im Briefkasten liegen und fragst dich, warum sie jedes Mal höher ist, obwohl du nichts geändert hast? Der Herbst bringt oft Nachzahlungen, weil viele Haushalte erst dann merken, dass ihr Tarif nicht mehr passt. Mit klaren Schritten und einfachen Verhaltensänderungen kannst du den Verbrauch senken und die Kosten im Griff behalten.
