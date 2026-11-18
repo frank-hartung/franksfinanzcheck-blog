@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "generated_at": "2026-11-18T15:45:33Z",
+  "generated_at": "2026-11-18T16:49:26Z",
   "modus": "kandidaten",
-  "commit": "a2ac930d191f3b2070af97d6987f9dd108ce51b3",
+  "commit": "059b4885ebc1742cd759c244e538dda818eb9cb4",
   "kapazitaet": {
     "stichtag": "2026-11-18",
     "basis": "2026-11-18",
@@ -385,7 +385,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-01-01",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-08-17-privathaftpflicht-warum-sie-so-wichtig-ist-und-was-sie-kostet": {
@@ -543,7 +543,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-19",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1456,7 +1456,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2026-12-31",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": [
         {
           "check": "F4-fachbefund",
@@ -1935,7 +1935,7 @@
         "revision": "bestanden"
       },
       "naechste_pruefung": "2027-02-07",
-      "siegel_drift": "geändert – neu geprüft",
+      "siegel_drift": "unverändert",
       "checks": []
     },
     "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein": {
