@@ -1,13 +1,13 @@
 {
-  "stand": "2026-11-17T19:59:44Z",
+  "stand": "2026-11-18T19:33:41Z",
   "urteil": "rot",
   "probleme": [
-    "KI-Anteil live: 86.0 % (rot ab 65 %)"
+    "KI-Anteil live: 86.4 % (rot ab 65 %)"
   ],
   "kpis": {
-    "live_artikel": 86,
-    "ki_artikel": 74,
-    "ki_anteil_prozent": 86.0,
+    "live_artikel": 88,
+    "ki_artikel": 76,
+    "ki_anteil_prozent": 86.4,
     "tempo_max_pro_tag": 2,
     "tempo_letzte7_tage": 6,
     "auto_freigaben_letzte7_tage": 0,
