@@ -103,7 +103,7 @@ Gesamt-Bandbreite = (Anzahl der 4K-Geräte × 25 Mbps) + (Anzahl der HD-Geräte 
 
 ## Checkliste für den Bandbreiten‑Check
 
-Nutze diese Tabelle als Modell mit 25 Mbit/s je 4K- und 5 Mbit/s je HD-Stream. Für Gaming und Video-Call nehmen wir beispielhaft 10 beziehungsweise 7 Mbit/s zusätzlich an; der tatsächliche Bedarf variiert.
+Nutze diese Tabelle als Modell mit 25 Mbit/s je 4K- und 5 Mbit/s je HD-Stream; das ist ein Modellwert. Für Gaming und Video-Call nehmen wir beispielhaft 10 beziehungsweise 7 Mbit/s zusätzlich an; der tatsächliche Bedarf variiert.
 
 | Situation | Bedarf in Mbps | Wichtiger Hinweis |
 | :--- | :--- | :--- |
@@ -146,6 +146,8 @@ Gehe [Schritt für Schritt](../../posts/2026-10-12-dein-weg-zu-geringeren-monats
 3. Schau in deine letzte Rechnung vom Anbieter. Wie viel Speed bezahlst du jeden Monat? Wenn du 100 Mbit/s gebucht hast und wiederholt deutlich weniger ankommen, prüfe die vertraglich vereinbarten Geschwindigkeiten und miss unter geeigneten Bedingungen erneut.
 4. Nutze unsere Checkliste, um zu sehen, ob du zu viel Kapazität gebucht hast. Vielleicht reicht ein kleinerer und günstigerer Tarif völlig aus.
 5. Mache einmal im Jahr einen Check deiner Kosten. Wenn dein Vertrag ausläuft, kannst du oft zu besseren Konditionen wechseln. Nutze dafür einen Vergleich im Netz.
+
+**Faustregel:** Vergleiche nie den Preis allein, sondern den Preis für die Leistung, die du tatsächlich nutzt.
 
 ## Häufige Fragen
 

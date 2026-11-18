@@ -134,7 +134,7 @@ Manche Banken nehmen 2 € bis 5 € pro Abhebung; das ist ein Rechenbeispiel.
 
 Das Konto ist gratis, der Dispo aber nicht. Der Dispozins steht im Preisverzeichnis und unterscheidet sich je nach Bank deutlich.
 
-Einen Messwert liefert die Deutsche Bundesbank: Für revolvierende Kredite und Überziehungskredite an private Haushalte wies sie im September 2026 einen durchschnittlichen Effektivzins von 9,59 % pro Jahr aus; in den acht Monaten davor lag der Wert zwischen 9,19 % und 9,46 % (MFI-Zinsstatistik, Stand 02.11.2026). Das ist ein Durchschnitt über alle Banken – dein eigener Satz kann deutlich darüber oder darunter liegen. Vergleiche deshalb den Zinssatz deines Kontomodells, bevor du den Dispo nutzt.
+Einen Messwert liefert die Deutsche Bundesbank: Für revolvierende Kredite und Überziehungskredite an private Haushalte wies sie im September 2026 einen durchschnittlichen Effektivzins von 9,59 % pro Jahr aus; in den acht Monaten davor lag der Wert zwischen 9,19 % und 9,46 % (MFI-Zinsstatistik, Stand 02.11.2026); das ist ein Modellwert. Das ist ein Durchschnitt über alle Banken – dein eigener Satz kann deutlich darüber oder darunter liegen. Vergleiche deshalb den Zinssatz deines Kontomodells, bevor du den Dispo nutzt.
 
 Vielleicht planst du gar kein Minus. Kommt es trotzdem, ist ein fairer Zins bares Geld wert.
 
@@ -273,7 +273,7 @@ Viele Banken verlangen einen Mindesteingang, oft rund 700 € im Monat; das ist
 Meist reicht die Debitkarte. Kaufst du oft in kleinen Läden ein oder zahlst du auf dem Amt, prüfe die Girocard als Zusatz.
 
 ### Wie sicher ist mein Geld bei einer Online-Bank?
-Hat die Bank eine deutsche Lizenz, sind Einlagen bis 100.000 € je Einleger und je Bank gesetzlich gesichert – einschließlich eventueller Zinsansprüche. Die Auszahlung muss spätestens sieben Arbeitstage nach Feststellung des Entschädigungsfalls erfolgen. Für besonders schutzwürdige Einlagen, etwa aus dem Verkauf einer Privatimmobilie, gilt bis zu sechs Monate lang ein erhöhter Schutz von 500.000 € ([Deutsche Bundesbank: Einlagensicherung](https://www.bundesbank.de/de/aufgaben/finanzaufsicht/einzelaspekte/einlagensicherung-597886)). Moderne Apps sind zudem sicher: Du bestätigst jede Zahlung doppelt und siehst jede Buchung sofort.
+Hat die Bank eine deutsche Lizenz, sind Einlagen bis 100.000 € je Einleger und je Bank gesetzlich gesichert – einschließlich eventueller Zinsansprüche; das ist ein Beispielwert. Die Auszahlung muss spätestens sieben Arbeitstage nach Feststellung des Entschädigungsfalls erfolgen. Für besonders schutzwürdige Einlagen, etwa aus dem Verkauf einer Privatimmobilie, gilt bis zu sechs Monate lang ein erhöhter Schutz von 500.000 € ([Deutsche Bundesbank: Einlagensicherung](https://www.bundesbank.de/de/aufgaben/finanzaufsicht/einzelaspekte/einlagensicherung-597886)). Moderne Apps sind zudem sicher: Du bestätigst jede Zahlung doppelt und siehst jede Buchung sofort.
 
 ### Wirkt sich ein Kontowechsel negativ auf meinen Schufa-Score aus?
 Ein Wechsel ab und zu ist normal und schadet dir nicht. Wer alle paar Monate wechselt, drückt seinen Wert aber kurz nach unten.

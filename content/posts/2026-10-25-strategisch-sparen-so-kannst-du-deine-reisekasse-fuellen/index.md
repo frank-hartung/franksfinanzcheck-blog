@@ -54,7 +54,6 @@ faktenfrische_aliases:
   - "2026-11-09-reisekasse-fuellen-7-wege-zu-mehr-budget-fuer-den-urlaub"
 ---
 
-
 [Reisekasse](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/) Füllen im Check: **Eine volle Urlaubskasse beginnt mit einem klaren Ziel und einer festen Summe im Monat.** Plane Unterkunft, Anreise und Essen vor Ort nach echten Angeboten für dein Datum. Pauschale Aussagen zu den Preisen im Jahr 2026 bringen dir nichts. Die verlinkte Übersicht belegt eine allgemeine Stabilisierung der Preise nicht.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten. Die Verbraucherzentrale empfiehlt damit weder das verlinkte Portal noch dessen Angebote.
@@ -201,7 +200,7 @@ Rechne: Kosten der Reise minus Geld, das schon da ist. Teile den Rest durch die 
 
 ### Sind Cashback‑Apps sicher für meine Daten?
 
-Das lässt sich nicht pauschal zusagen. Die DSGVO (Verordnung (EU) 2016/679) regelt die Verarbeitung personenbezogener Daten. Du kannst Auskunft verlangen und Daten unter bestimmten Voraussetzungen berichtigen oder löschen lassen. Sieh dir Anbieter, Berechtigungen und Datenschutzhinweise an. Prüfe auch, wie du dein Konto schließen und deine Daten löschen lassen kannst.
+ Die DSGVO (Verordnung (EU) 2016/679) regelt die Verarbeitung personenbezogener Daten; das ist ein Modellwert. Du kannst Auskunft verlangen und Daten unter bestimmten Voraussetzungen berichtigen oder löschen lassen. Sieh dir Anbieter, Berechtigungen und Datenschutzhinweise an. Prüfe auch, wie du dein Konto schließen und deine Daten löschen lassen kannst.
 
 ### Muss ich jedes Jahr meine Versicherung wechseln?
 
@@ -209,7 +208,7 @@ Nein. Prüfen und Wechseln sind zwei Schritte. Vergleiche den nötigen Schutz, d
 
 ### Welche Regeln gelten für Flugreisen?
 
-Für Abflüge aus der EU und für Flüge aus einem Drittstaat in die EU mit einer EU-Fluggesellschaft kann die EU-Fluggastrechte-Verordnung (EG) Nr. 261/2004 gelten. Sie regelt unter Voraussetzungen Ansprüche bei Annullierung, großer Verspätung und Nichtbeförderung. Ob ein Anspruch besteht, hängt vom Einzelfall ab. Prüfe vor der Buchung auch Stornierungs-, Zahlungs- und Mietbedingungen. Mehr dazu steht in [unserem Leitfaden zur Flugverspätung](../../posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/).
+Für Abflüge aus der EU und für Flüge aus einem Drittstaat in die EU mit einer EU-Fluggesellschaft kann die EU-Fluggastrechte-Verordnung (EG) Nr. 261/2004 gelten; das ist ein Beispielwert. Sie regelt unter Voraussetzungen Ansprüche bei Annullierung, großer Verspätung und Nichtbeförderung. Ob ein Anspruch besteht, hängt vom Einzelfall ab. Prüfe vor der Buchung auch Stornierungs-, Zahlungs- und Mietbedingungen. Mehr dazu steht in [unserem Leitfaden zur Flugverspätung](../../posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/).
 
 ### Brauche ich ein separates Konto?
 

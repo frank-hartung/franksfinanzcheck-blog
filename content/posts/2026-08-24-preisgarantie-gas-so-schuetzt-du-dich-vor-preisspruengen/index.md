@@ -282,7 +282,7 @@ Haushaltskunden müssen grundsätzlich mindestens einen Monat vor der Änderung 
 **Bleibt mein Abschlag trotz Garantie gleich?**
 Nicht zwingend. Verbrauchsprognose oder ausgenommene Preisbestandteile können den Abschlag verändern. Verlange eine nachvollziehbare Berechnung.
 
-**Sollte ich wegen steigender Börsenpreise sofort 24 Monate abschließen?**. Das ist ein Modellwert.
+**Sollte ich wegen steigender Börsenpreise sofort 24 Monate abschließen?**; das ist ein Modellwert. Das ist ein Modellwert.
 Nein. Vergleiche zuerst aktuellen Gesamtpreis, Garantieumfang und Aufpreis für die längere Bindung.
 
 **Was mache ich bei einer unklaren oder möglicherweise unzulässigen Erhöhung?**

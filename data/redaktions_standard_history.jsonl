@@ -351,3 +351,12 @@
 {"zeit": "2026-11-16T23:26:12.206784+00:00", "slug": "2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
 {"zeit": "2026-11-18T15:40:40.928657+00:00", "slug": "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
 {"zeit": "2026-11-18T15:40:40.928657+00:00", "slug": "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
+{"zeit": "2026-11-18T18:19:53.217176+00:00", "slug": "2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-18T18:19:53.217176+00:00", "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-18T18:19:53.217176+00:00", "slug": "2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-18T18:19:53.217176+00:00", "slug": "2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-18T18:19:53.217176+00:00", "slug": "2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-18T18:19:53.217176+00:00", "slug": "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein", "regel": "RS3", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-18T18:19:53.217176+00:00", "slug": "2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein", "regel": "RS5", "aktion": "fix-deterministisch"}
+{"zeit": "2026-11-18T18:19:53.217176+00:00", "slug": "2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
+{"zeit": "2026-11-18T18:19:53.217176+00:00", "slug": "2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: H2-Anzahl verändert – Heilung verworfen"}

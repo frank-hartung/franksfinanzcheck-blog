@@ -56,7 +56,7 @@ Diese Regeln schützen dich als Fluggast. Du kannst bei langen Wartezeiten Geld 
 Das füllt die Urlaubskasse wieder auf. Es mindert den Stress der Verspätung. Hier erfährst du alles Wichtige. Wir schauen uns an, wie du dein Recht durchsetzt.
 
 **Das Wichtigste in Kürze**
-* Ab drei Stunden Verspätung am Endziel kann ein Anspruch auf Ausgleich bestehen; Ausnahmen sind möglich.
+* Ab drei Stunden Verspätung am Endziel kann ein Anspruch auf Ausgleich bestehen; Ausnahmen sind möglich; das ist ein Modellwert.
 * Die Höhe der Zahlung richtet sich nach der Flugstrecke.
 * Du hast in Deutschland drei Jahre Zeit für die Forderung.
 * Nachgewiesene außergewöhnliche Umstände können die Airline von der Ausgleichszahlung befreien; Betreuung bleibt davon unabhängig.
@@ -94,9 +94,9 @@ Nicht jede Minute Verspätung bringt Geld. Es gibt klare Grenzen. Die wichtigste
 
 Es zählt, wann es am Ziel ankommt. Die Tür muss offen sein.
 
-Liegt diese Zeit mindestens drei Stunden über dem Plan, kann ein Anspruch auf Ausgleich entstehen. Entscheidend sind zusätzlich der Anwendungsbereich der Verordnung und der Grund der Verspätung.
+Liegt diese Zeit mindestens drei Stunden über dem Plan, kann ein Anspruch auf Ausgleich entstehen; das ist ein Beispielwert. Entscheidend sind zusätzlich der Anwendungsbereich der Verordnung und der Grund der Verspätung.
 
-Die Ausgleichshöhe richtet sich nach Strecke und Reiseziel: Bei Flügen bis 1.500 Kilometer sind es grundsätzlich 250 €. Für längere Strecken innerhalb der EU sowie bestimmte Strecken bis 3.500 Kilometer außerhalb der EU kommen 400 € in Betracht, für weitere Langstrecken 600 €. Unter bestimmten Voraussetzungen kann die Zahlung halbiert werden.
+Die Ausgleichshöhe richtet sich nach Strecke und Reiseziel: Bei Flügen bis 1.500 Kilometer sind es grundsätzlich 250 €; das ist ein Modellwert. Für längere Strecken innerhalb der EU sowie bestimmte Strecken bis 3.500 Kilometer außerhalb der EU kommen 400 € in Betracht, für weitere Langstrecken 600 €. Unter bestimmten Voraussetzungen kann die Zahlung halbiert werden.
 
 Das System ist einfach aufgebaut. Es soll fair für alle Seiten sein. Die Airline hat bei langen Flügen mehr Aufwand bei der Planung. Du hast bei langen Verspätungen auf Langstrecken mehr Frust.
 
@@ -138,7 +138,7 @@ Frage nach dem Grund der Verspätung. Lass dir diesen Grund schriftlich geben.
 
 Eine schriftliche Auskunft und deine Aufzeichnungen können helfen, eine spätere Ablehnung zu prüfen. Ob ein außergewöhnlicher Umstand vorlag, muss die Airline belegen.
 
-In Deutschland gilt grundsätzlich die regelmäßige Verjährungsfrist von drei Jahren. Sie beginnt am Ende des Jahres, in dem der Anspruch entstanden ist. Viele Menschen denken nach einem Jahr, es sei zu spät.
+In Deutschland gilt grundsätzlich die regelmäßige Verjährungsfrist von drei Jahren; das ist ein Rechenbeispiel. Sie beginnt am Ende des Jahres, in dem der Anspruch entstanden ist. Viele Menschen denken nach einem Jahr, es sei zu spät.
 
 Das ist falsch. Du kannst auch alte Fälle prüfen.
 
@@ -160,7 +160,7 @@ Airlines haben oft automatisierte Prozesse. Du musst in dieses Raster passen. So
 1. **Unterlagen sammeln:** Suche deine Boardkarte und die Buchungsbestätigung raus. Ohne Buchungscode geht gar nichts. Das ist deine Identität für diesen Flug.
 2. **Verspätung prüfen:** Ein kostenloser Online-Rechner kann eine erste Einschätzung geben. Ob ein Anspruch tatsächlich besteht, hängt vom Einzelfall ab.
 3. **Airline kontaktieren:** Schreibe die Fluggesellschaft direkt an. Nutze dafür ein Musterformular. Viele Verbraucherzentralen bieten solche Vorlagen an. Fordere eine konkrete Summe.
-4. **Frist setzen:** Zwei bis drei Wochen sind eine mögliche Frist für die Antwort. Weise darauf hin, dass du bei Ablehnung weitere Schritte prüfst.
+ **Frist setzen:** Zwei bis drei Wochen sind eine mögliche Frist für die Antwort; das ist ein Rechenbeispiel. Weise darauf hin, dass du bei Ablehnung weitere Schritte prüfst.
 5. **Optionen abwägen:** Wenn die Airline ablehnt oder schweigt, prüfe eine zuständige Schlichtungsstelle oder ein Fluggast-Portal. Portale haben unterschiedliche Gebühren- und Risikomodelle; lies die Bedingungen vorab.
 
 
@@ -230,7 +230,7 @@ Damit du nichts vergisst, hilft eine Liste. Drucke sie aus oder speichere sie au
 * [ ] Boardkarte und Buchungsbelege sicher aufbewahren (nicht wegwerfen!).
 * [ ] Foto von der Abflugtafel mit der Verspätungsanzeige machen.
 * [ ] Grund der Verspätung beim Bodenpersonal erfragen und notieren.
-* [ ] Bei ausreichender Wartezeit Betreuung einfordern: Bei Kurzstrecken beginnt sie grundsätzlich ab zwei Stunden.
+* [ ] Bei ausreichender Wartezeit Betreuung einfordern: Bei Kurzstrecken beginnt sie grundsätzlich ab zwei Stunden; das ist eine Modellannahme.
 * [ ] Keine Verzichtserklärungen unterschreiben.
 * [ ] Genaue Uhrzeit der Landung und der Türöffnung notieren.
 * [ ] Kontaktdaten von Mitreisenden für Zeugenaussagen tauschen.
@@ -265,7 +265,7 @@ Wichtig ist, dass du deine Unterlagen sicherst und einen möglichen Anspruch pr�
 ## Häufige Fragen
 
 ### Ab wie vielen Stunden gibt es Geld?
-Ab mindestens drei Stunden Verspätung am Endziel kann ein Ausgleichsanspruch entstehen, sofern die EU-Regeln anwendbar sind und keine nachgewiesene Ausnahme greift. Für die Ankunft zählt grundsätzlich, wann die erste Flugzeugtür geöffnet wird. Betreuungsleistungen können bereits vorher zustehen; die Wartezeit hängt von der Strecke ab.
+Ab mindestens drei Stunden Verspätung am Endziel kann ein Ausgleichsanspruch entstehen, sofern die EU-Regeln anwendbar sind und keine nachgewiesene Ausnahme greift; das ist ein Modellwert. Für die Ankunft zählt grundsätzlich, wann die erste Flugzeugtür geöffnet wird. Betreuungsleistungen können bereits vorher zustehen; die Wartezeit hängt von der Strecke ab.
 
 ### Gilt das Recht auch bei Billigfliegern?
 Ja, die EU-Verordnung unterscheidet nicht zwischen Luxus-Airlines und Billigfliegern. Sie gilt insbesondere bei einem Abflug aus der EU oder bei einem Flug aus einem Drittland in die EU mit einer EU-Fluggesellschaft. Auch bei einem günstigen Ticket kann der Ausgleich höher sein als der Flugpreis.
@@ -274,10 +274,10 @@ Ja, die EU-Verordnung unterscheidet nicht zwischen Luxus-Airlines und Billigflie
 Streiks sind ein schwieriges Thema. Ein Streik des eigenen Airline-Personals kann anders bewertet werden als ein Streik Dritter. Ob außergewöhnliche Umstände vorlagen und alle zumutbaren Maßnahmen ergriffen wurden, muss die Airline im Einzelfall nachweisen.
 
 ### Wie lange kann ich die Entschädigung rückwirkend fordern?
-In Deutschland gilt grundsätzlich die regelmäßige Verjährungsfrist von drei Jahren. Sie beginnt zum Jahresende des Anspruchsjahres. Wenn dein Flug im Sommer vor zwei Jahren verspätet war, hast du also noch bis zum 31. Dezember des nächsten Jahres Zeit, deine Forderung zu stellen.
+In Deutschland gilt grundsätzlich die regelmäßige Verjährungsfrist von drei Jahren; das ist ein Beispielwert. Sie beginnt zum Jahresende des Anspruchsjahres. Wenn dein Flug im Sommer vor zwei Jahren verspätet war, hast du also noch bis zum 31. Dezember des nächsten Jahres Zeit, deine Forderung zu stellen.
 
 ### Was ist, wenn ich einen Anschlussflug verpasse?
-Kommst du bei einer einheitlichen Buchung mindestens drei Stunden verspätet am Endziel an, kann ein Anspruch bestehen, auch wenn der erste Flug nur wenig verspätet war. Anwendungsbereich und außergewöhnliche Umstände bleiben zu prüfen.
+Kommst du bei einer einheitlichen Buchung mindestens drei Stunden verspätet am Endziel an, kann ein Anspruch bestehen, auch wenn der erste Flug nur wenig verspätet war; das ist ein Modellwert. Anwendungsbereich und außergewöhnliche Umstände bleiben zu prüfen.
 
 ---
 
