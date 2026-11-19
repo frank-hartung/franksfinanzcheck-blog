@@ -9,3 +9,6 @@
 2026-11-19T02:27:29+01:00 · bluesky · BLUESKY_IDENTIFIER / BLUESKY_APP_PASSWORD fehlen
 2026-11-19T02:27:29+01:00 · linkedin · LINKEDIN_ACCESS_TOKEN fehlt
 2026-11-19T02:27:29+01:00 · threads · THREADS_ACCESS_TOKEN fehlt
+2026-11-19T10:28:03+01:00 · facebook · FACEBOOK_PAGE_TOKEN fehlt
+2026-11-19T10:28:03+01:00 · instagram · INSTAGRAM_ACCESS_TOKEN fehlt
+2026-11-19T10:28:03+01:00 · pinterest · kein lebender Pinterest-Token (pinterest_token.py)
