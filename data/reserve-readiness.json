@@ -2,14 +2,14 @@
   "target": 6,
   "ready": 4,
   "pool_size": 12,
-  "generated_at": "2026-11-18T21:55:58Z",
+  "generated_at": "2026-11-19T12:34:56Z",
   "candidates": [
     {
       "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
       "ready": true,
       "sha256": "ff4c55ac20b3266a1b41c9ee22db6d66498d0912df2a5dcb120c986bb11ffbce",
       "flesch": 66.7,
-      "measured_at": "2026-11-18T12:43:17Z",
+      "measured_at": "2026-11-19T12:28:46Z",
       "score": 0.962,
       "parts": {
         "spelling": 0.88,
@@ -26,7 +26,7 @@
       "ready": true,
       "sha256": "e25212d0820d8b781bd6150d2ea0c0d3cc0395d71ead9a25732228dcc10be799",
       "flesch": 63.6,
-      "measured_at": "2026-11-18T12:43:49Z",
+      "measured_at": "2026-11-19T12:29:25Z",
       "score": 0.946,
       "parts": {
         "spelling": 0.8,
@@ -43,7 +43,7 @@
       "ready": true,
       "sha256": "2e5d9a26e9c0fa06ef07e9f1c7fcdb90ab9d8e4ad1f94e077e1b7c8db2b6abe4",
       "flesch": 66.0,
-      "measured_at": "2026-11-18T12:44:22Z",
+      "measured_at": "2026-11-19T12:30:06Z",
       "score": 0.93,
       "parts": {
         "spelling": 0.8,
@@ -60,7 +60,7 @@
       "ready": true,
       "sha256": "b236c1c9e5dc5fc8e3ac93799c679829ed063442daaf5b33e5d8a1417e03167c",
       "flesch": 61.9,
-      "measured_at": "2026-11-18T12:44:50Z",
+      "measured_at": "2026-11-19T12:30:41Z",
       "score": 0.976,
       "parts": {
         "spelling": 0.94,
@@ -73,14 +73,14 @@
       }
     },
     {
-      "slug": "2026-11-18-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
+      "slug": "2026-11-19-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
       "ready": false,
-      "sha256": "fbae9073252c1d4d8ddbfec39cf18f7f870403cc686522ad970d17c07c2dda34",
+      "sha256": "52fff694bdfa3a4960ba02cf84e60f0463245f48e6951e9e2a7737af765800f2",
       "flesch": 70.3,
-      "measured_at": "2026-11-18T15:37:53Z",
+      "measured_at": "2026-11-19T12:31:17Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
-        "🛑 2026-11-18-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "🛑 2026-11-19-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
         "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
         "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
@@ -97,19 +97,18 @@
       }
     },
     {
-      "slug": "2026-11-18-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
+      "slug": "2026-11-19-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
       "ready": false,
-      "sha256": "cefe2d5e2e281f74303e8ff79eeee4b47904472cba8dd699aa5c08d91c9e1929",
+      "sha256": "dc627ccc3224e5d72bb7cfe0186f941bd6c8fafefa912d7fff46fd838ffcd060",
       "flesch": 73.4,
-      "measured_at": "2026-11-18T15:38:32Z",
+      "measured_at": "2026-11-19T12:31:55Z",
       "reason": "Zeichenlänge (check_length.py) nicht bestanden",
       "details": [
-        "🛑 2026-11-18-deine-naechtliche-grundlast-strom-so-erkennst-du-wo: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "🛑 2026-11-19-deine-naechtliche-grundlast-strom-so-erkennst-du-wo: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Zeichenlänge (check_length.py) nicht bestanden",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft).",
-        "Messfassung wurde durch die Gate-Vorheilung verändert und danach bytegenau zurückgestellt – der Befund oben gilt für die HEILFASSUNG, nicht für die Datei auf der Platte (Vorheilung prüft seit #884 den Publikations-Vertrag)"
+        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
-      "score": 0.962,
+      "score": 0.972,
       "parts": {
         "spelling": 0.86,
         "meta": 1.0,
@@ -117,18 +116,18 @@
         "typography": 1.0,
         "uniqueness": 1.0,
         "affiliate": 1.0,
-        "readability": 0.95
+        "readability": 1.0
       }
     },
     {
-      "slug": "2026-11-18-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
+      "slug": "2026-11-19-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
       "ready": false,
-      "sha256": "8a25a005ca745208b8a49b3b45fb3439565cbfd18ba2924fc5173e02898c4c8d",
-      "flesch": 63.6,
-      "measured_at": "2026-11-18T15:39:06Z",
+      "sha256": "435409fd88e1bd424fe3047749fb0f17721864989b5f23deedfead3bb38e1dd4",
+      "flesch": 63.8,
+      "measured_at": "2026-11-19T12:32:30Z",
       "reason": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
       "details": [
-        "🛑 2026-11-18-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "🛑 2026-11-19-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
         "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
         "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
@@ -145,14 +144,14 @@
       }
     },
     {
-      "slug": "2026-11-18-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+      "slug": "2026-11-19-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ready": false,
-      "sha256": "32f8b1b31f76bfa43bc265809927242d308aa194e05f2284dbaa45d90dc520f2",
+      "sha256": "e66f494326ae3b0639f22dafaa356c0d29df6e5e86a57a28ac946c8fa1e3209e",
       "flesch": 63.8,
-      "measured_at": "2026-11-18T12:46:44Z",
+      "measured_at": "2026-11-19T12:33:06Z",
       "reason": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
       "details": [
-        "🛑 2026-11-18-strompreis-2026-herbst-check-fuer-deine-stromkosten: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "🛑 2026-11-19-strompreis-2026-herbst-check-fuer-deine-stromkosten: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
         "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erforderten zwingend einen Smart Meter, wird ohne Angabe von Voraussetzungen, Kosten oder Verfügbarkeit präzisiert.; 77d809de9e06d1d6910d (luecke): Es wird eine Prognose für den Strompreis 2026 angegeben („Trends erkennen“, „Netzentgelte steigen“), ohne dass dafür aktuelle Marktdaten oder offizielle Prognosen genannt werden.; ad7c0a90ef52ff35130e (luecke): Der Artikel behauptet, dass Preisgarantien vor Preissteigerungen schützen, liefert jedoch keine Quelle für diese Aussage.; f227178fbda2cc59c350 (luecke): Die Aussage, dass Ökostrom‑Tarife häufig günstiger als die Grundversorgung seien, wird nicht durch eine Quelle belegt.",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
       ],
@@ -168,11 +167,11 @@
       }
     },
     {
-      "slug": "2026-11-18-vorrat-planen-leicht-gemacht-so-sparst-du-beim",
+      "slug": "2026-11-19-vorrat-planen-leicht-gemacht-so-sparst-du-beim",
       "ready": false,
-      "sha256": "c838a6345b58182c55e8f9ab563e8dca1e03f6d5b004cbad02fa559f4ac59758",
+      "sha256": "1da23468f474b33aafeb1006dd52e365c66ef72123b4eeae07935ba38d2e8018",
       "flesch": 63.2,
-      "measured_at": "2026-11-18T21:55:58Z",
+      "measured_at": "2026-11-19T12:33:08Z",
       "reason": "Reserve-Qualitäts-Gate: Umfang: 881 Wörter / 6447 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
       "details": [
         "Umfang: 881 Wörter / 6447 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen"
@@ -189,14 +188,14 @@
       }
     },
     {
-      "slug": "2026-11-18-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste",
+      "slug": "2026-11-19-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste",
       "ready": false,
-      "sha256": "439636c4004bd4f8076de4ff9747244c73564323f8afc2fd087e283099a06df5",
+      "sha256": "2aa112cc28316f21608b6cf7bc3e962e6301f551a91ecf04491766a06a35a408",
       "flesch": 68.4,
-      "measured_at": "2026-11-18T12:47:15Z",
+      "measured_at": "2026-11-19T12:33:43Z",
       "reason": "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
       "details": [
-        "🛑 2026-11-18-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "🛑 2026-11-19-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
@@ -212,14 +211,14 @@
       }
     },
     {
-      "slug": "2026-11-18-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
+      "slug": "2026-11-19-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
       "ready": false,
-      "sha256": "bd48d804353c07e31daa3d25c5b05f876f120b2917059d37a7f5612ece462dbf",
+      "sha256": "eab0d738ae11b5862fffeb649b704f76af323871735ffa753521b22e042dd1f9",
       "flesch": 69.7,
-      "measured_at": "2026-11-18T12:47:45Z",
+      "measured_at": "2026-11-19T12:34:21Z",
       "reason": "Faktenfrische nicht bestanden: 842ddd33d3dd6b0b97f7 (luecke): Muffiger Geruch deutet oft auf tiefliegenden Schimmel oder Feuchtigkeit hin.; d3e210fb738bd77ef594 (luecke): Neue Möbel verlieren oft sofort nach dem Kauf massiv an Wert.; da84fa",
       "details": [
-        "🛑 2026-11-18-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
+        "🛑 2026-11-19-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
         "Faktenfrische nicht bestanden: 842ddd33d3dd6b0b97f7 (luecke): Muffiger Geruch deutet oft auf tiefliegenden Schimmel oder Feuchtigkeit hin.; d3e210fb738bd77ef594 (luecke): Neue Möbel verlieren oft sofort nach dem Kauf massiv an Wert.; da84fa452f879ea8f2da (luecke): Die Eigenleistung lohnt sich finanziell, wenn die Ersparnis den Zeitaufwand rechtfertigt.",
         "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
@@ -236,14 +235,14 @@
       }
     },
     {
-      "slug": "2026-11-18-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater",
+      "slug": "2026-11-19-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater",
       "ready": false,
-      "sha256": "3c6fb9404b41f0f50d3450f459e000d4fe1dfdb33a9ffcf640413cfd83e9db20",
-      "flesch": 66.7,
-      "measured_at": "2026-11-18T12:48:12Z",
+      "sha256": "d28b1d19de5f6aec8731b6b1ef908a9fb77183465cb8c6143f356e109138d717",
+      "flesch": 67.0,
+      "measured_at": "2026-11-19T12:34:56Z",
       "reason": "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
       "details": [
-        "🛑 2026-11-18-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "🛑 2026-11-19-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
         "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
         "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
       ],
@@ -260,15 +259,8 @@
     }
   ],
   "measurement": {
-    "kind": "partial",
-    "run_id": "44406169530",
+    "kind": "full",
+    "run_id": "44519276595",
     "run_attempt": "1"
-  },
-  "recert": {
-    "at": "2026-11-18T21:55:58Z",
-    "renewed": [
-      "2026-11-18-vorrat-planen-leicht-gemacht-so-sparst-du-beim"
-    ],
-    "tool": "scripts/reserve_recert.py"
   }
 }
