@@ -403,6 +403,23 @@ class Verdrahtung(unittest.TestCase):
         self.assertIn("secrets.CF_WORKERS_DEPLOY_TOKEN", deploy_job)
         self.assertIn('worker_zugang.py --pruefen --worker "$WORKER"', deploy_job)
 
+    def test_pruefung_bekommt_den_token_unter_der_erwarteten_env_variable(self):
+        # worker_zugang.py liest den Token unter `CF_WORKERS_DEPLOY_TOKEN`
+        # (scripts/worker_zugang.py, TOKEN_VARIABLE). Die Workflows legen
+        # den Wert außerdem für wrangler unter `CLOUDFLARE_API_TOKEN` ab.
+        # Ein Mapping nur auf ersterem Namen lässt die Zugangsprüfung
+        # ewig mit „nicht lesbar“ fail-closed brechen – beobachtet an
+        # Lauf 44530529303 (20.11.2026), gemeldet von der Inhaberin/dem
+        # Inhaber nach hinterlegtem Environment-Secret.
+        for datei in ("worker-deploy.yml", "worker-zugang-pruefen.yml"):
+            inhalt = (ROOT / ".github" / "workflows" / datei).read_text(encoding="utf-8")
+            zuschnitt = inhalt.split("worker_zugang.py --pruefen", 1)[0]
+            self.assertIn(
+                "CF_WORKERS_DEPLOY_TOKEN: ${{ secrets.CF_WORKERS_DEPLOY_TOKEN }}",
+                zuschnitt,
+                f"{datei} reicht den Token dem Prüfer nicht unter dem erwarteten Namen herein",
+            )
+
     def test_pruefworkflow_sperrt_vor_environment_und_nach_freigabe(self):
         # Eine main-Prüfung innerhalb des Environment-Jobs ist zu spät:
         # GitHub gibt Environment-Secrets bereits beim Start dieses Jobs frei.
