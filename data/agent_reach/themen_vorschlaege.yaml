@@ -9,6 +9,13 @@
 # ============================================================
 version: 1
 vorschlaege:
+- titel: Heizen wird wegen steigender Energiepreise immer teurer
+  url: https://www.tagesschau.de/wirtschaft/verbraucher/heizkosten-anstieg-100.html
+  quelle: Tagesschau Wirtschaft (RSS)
+  erfasst: '2026-11-19T19:38:11'
+  brief: ''
+  status: offen
+  notiz: RSS-Trigger des Schaltwerks – Quellenprüfung erforderlich.
 - titel: '"An der Zinsschraube drehen", um die Inflation zu bekämpfen'
   url: https://www.tagesschau.de/wirtschaft/finanzen/inflation-interview-bundesbankpraesident-nagel-100.html
   quelle: Tagesschau Wirtschaft (RSS)
@@ -380,4 +387,4 @@ vorschlaege:
   brief: 2026-09-28-internet-recherche.json
   status: offen
   notiz: Automatisch erfasst aus 2026-09-28-internet-recherche.json – Quellenprüfung erforderlich.
-zuletzt_ergaenzt: '2026-11-18T11:39:37'
+zuletzt_ergaenzt: '2026-11-19T19:38:11'
