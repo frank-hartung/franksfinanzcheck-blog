@@ -9,7 +9,7 @@ tags: ["Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["finanzielle freiheit erreichen", "geld mindset", "vermögen aufbauen", "sparroutinen", "Finanzielle"]
+keywords: ["finanzielle freiheit erreichen", "geld mindset", "vermögen aufbauen", "sparroutinen", "Finanzielle", "Finanzielle Freiheit", "Sparroutine"]
 pinwand: Geld sparen im Alltag | Frugalismus-Tipps
 pin_title: "Finanzielle Freiheit: Wie du eine Sparroutine aufbaust"
 pin_description: "*Werbung | Ein Sparziel wird greifbar, wenn Betrag und Rhythmus feststehen. Prüfe, welche Rate nach Fixkosten und Rücklage auch in einem teuren Monat bleibt. Teste die Sparrate über einen vollständigen Abrechnungsmonat. Musst du dafür auf den Dispo zurückgreifen, ist die Rate höher als der freie Betrag."

@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-11-04
-title: "Gaspreisgarantie: Welche Kosten sind geschützt und wie lange?"
+title: "Gaspreisgarantie: Welche Kosten sind geschützt"
 description: "Was bleibt beim Gasvertrag wirklich fest? Lies in der Preisgarantie nach, welche Preisbestandteile sie erfasst und wann der Schutz endet."
 date: 2026-08-10T09:29:05Z
 draft: false

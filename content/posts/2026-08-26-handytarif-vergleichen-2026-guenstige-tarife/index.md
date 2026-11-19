@@ -45,6 +45,8 @@ faktencheck: "2026-10-13"
 
 Du brauchst nicht den günstigsten Handytarif auf einer Liste, sondern einen, der dort funktioniert, wo du ihn nutzt. Eine schlecht versorgte Bahnstrecke wird durch zusätzliches Datenvolumen nicht besser. Und für ein ungenutztes Datenpolster zahlst du auch dann, wenn der Preis pro Gigabyte niedrig aussieht.
 
+**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+
 **Transparenz:** Der gekennzeichnete Partnervergleich kann uns bei einem Abschluss eine Provision bringen. Für dich entstehen dadurch keine Mehrkosten.
 
 ## Bedarf aus der Rechnung ablesen

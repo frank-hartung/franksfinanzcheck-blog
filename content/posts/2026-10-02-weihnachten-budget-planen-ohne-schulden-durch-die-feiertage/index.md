@@ -1,5 +1,5 @@
 ---
-title: "Weihnachtsbudget planen: Geschenke und Feiertage ohne Schulden"
+title: "Weihnachtsbudget planen: Geschenke und Feiertage"
 description: "Plane Weihnachten vom verfügbaren Betrag aus. Reserviere zuerst Geld für Fahrten und Essen und verteile den Rest auf deine Geschenkeliste."
 date: 2026-10-02T19:45:00Z
 lastmod: 2026-11-04
@@ -10,7 +10,7 @@ tags: ["Budget planen", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["Weihnachten Budget planen", "Weihnachten sparen", "Geschenkebudget", "Dispo vermeiden", "Weihnachtsgeld anlegen", "Weihnachten"]
+keywords: ["Weihnachten Budget planen", "Weihnachten sparen", "Geschenkebudget", "Dispo vermeiden", "Weihnachtsgeld anlegen", "Weihnachten", "Weihnachtsbudget planen", "Weihnachtsbudget"]
 pinwand: "Budget & Sparen | Familienfinanzen"
 pin_title: "Weihnachtsbudget planen: Geschenke und Feiertage ohne Schulden"
 pin_description: "*Werbung | Plane Weihnachten vom verfügbaren Betrag aus. Reserviere zuerst Geld für Fahrten und Essen und verteile den Rest auf deine Geschenkeliste. Schreibe auch Porto, Verpackung und Wege auf die Liste. Solche Beträge fehlen leicht im Geschenkebudget, obwohl sie spätestens im Dezember bezahlt werden müssen."
@@ -51,8 +51,6 @@ quellen:
     datum: "2026-10-02"
 kurzantwort: "Starte schon im Herbst: Schreibe alle Kosten auf, von Geschenken bis zur Fahrt. Teile sie auf sechs Töpfe auf und rechne die Summe auf die Wochen bis Heiligabend um. Lege das Geld auf ein eigenes Tagesgeldkonto, zahle nur aus diesem Topf und meide Dispo und Raten. So startest du ohne Schulden ins neue Jahr."
 ---
-
-
 
 Weihnachten [Budget planen](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/) im Check: Jedes Jahr läuft es gleich. Im Dezember fließt das Geld für Geschenke, Zutaten und Fahrkarten. Im Januar kommt die Abrechnung der Kreditkarte.
 

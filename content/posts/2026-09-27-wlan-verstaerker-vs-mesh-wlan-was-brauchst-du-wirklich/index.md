@@ -9,7 +9,7 @@ tags: ["WLAN verbessern"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["DSL Hacks", "Schnelles Internet zuhause", "Mesh Netzwerk", "WLAN-Verstärker vs. Mesh-WLAN", "WLAN Verstärker vs. Mesh WLAN", "WLAN-Verstärker", "Mesh-WLAN"]
+keywords: ["DSL Hacks", "Schnelles Internet zuhause", "Mesh Netzwerk", "WLAN-Verstärker vs. Mesh-WLAN", "WLAN Verstärker vs. Mesh WLAN", "WLAN-Verstärker", "Mesh-WLAN", "WLAN-Repeater oder Mesh"]
 pin_title: "WLAN-Repeater oder Mesh: Was passt zu deiner Wohnung?"
 pin_description: "*Werbung | Ein Funkloch in einem Zimmer oder schwaches WLAN auf mehreren Etagen? Prüfe Standort und Signal zum Router, bevor du Repeater oder Mesh kaufst. Prüfe den vorgesehenen Standort des Repeaters mit dem Handy. Empfängt es dort kaum ein Signal vom Router, kann auch ein neues Gerät diesen Standort nicht beliebig ausgleichen."
 ai_generated: true

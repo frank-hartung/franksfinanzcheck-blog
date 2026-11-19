@@ -1,5 +1,5 @@
 ---
-title: "Energie sparen: Welche kleinen Änderungen sich im Alltag lohnen"
+title: "Energie sparen: Welche kleinen Änderungen sich im Alltag"
 description: "Teste eine Änderung beim Kochen, Heizen oder Waschen. Notiere Verbrauch und Nutzung vorher und nachher, statt mit pauschalen Sparquoten zu planen."
 
 date: 2026-10-21T01:39:08Z
@@ -11,7 +11,7 @@ tags: ["Stromkosten senken", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Kleine Energiespar‑Tricks", "Energiespar", "Stromkosten senken"]
+keywords: ["Kleine Energiespar‑Tricks", "Energiespar", "Stromkosten senken", "Energie sparen", "Änderungen", "Frugalismus", "Geld sparen", "minimalistisch leben"]
 pin_title: "Energie sparen: Welche kleinen Änderungen sich im Alltag lohnen"
 pin_description: "*Werbung | Teste eine Änderung beim Kochen, Heizen oder Waschen. Notiere Verbrauch und Nutzung vorher und nachher, statt mit pauschalen Sparquoten zu planen. Schätze nicht gleichzeitig Nutzungsdauer und Geräteleistung. Wenn du eine der beiden Größen misst, wird die Rechnung nachvollziehbarer und die Unsicherheit kleiner."
 ai_generated: true

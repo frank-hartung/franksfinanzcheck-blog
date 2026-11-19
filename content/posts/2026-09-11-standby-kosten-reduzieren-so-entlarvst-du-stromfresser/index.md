@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-11-04
-title: "Standby-Verbrauch messen: Was kostet der Bereitschaftsbetrieb?"
+title: "Standby-Verbrauch messen: Was kostet"
 description: "Was kostet der Bereitschaftsbetrieb? Miss die Leistung an der Steckdose und rechne mit den Stunden, in denen das Gerät tatsächlich im Standby bleibt."
 date: 2026-09-11T20:00:23Z
 draft: false
@@ -8,7 +8,7 @@ tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Standby Kosten", "Stromfresser entlarven", "Geräte abschalten sparen", "Dauerverbraucher", "Standby Kosten reduzieren", "reduzieren"]
+keywords: ["Standby Kosten", "Stromfresser entlarven", "Geräte abschalten sparen", "Dauerverbraucher", "Standby Kosten reduzieren", "reduzieren", "Standby-Verbrauch messen", "Standby Verbrauch messen"]
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 pin_title: "Standby-Verbrauch messen: Was kostet der Bereitschaftsbetrieb?"
 pin_description: "*Werbung | Was kostet der Bereitschaftsbetrieb? Miss die Leistung an der Steckdose und rechne mit den Stunden, in denen das Gerät tatsächlich im Standby bleibt. Unterscheide Standby von Aufgaben im Hintergrund. Ein Router oder eine Kühltruhe erfüllt auch nachts eine Funktion und sollte nicht einfach über eine Steckerleiste abgeschaltet werden."

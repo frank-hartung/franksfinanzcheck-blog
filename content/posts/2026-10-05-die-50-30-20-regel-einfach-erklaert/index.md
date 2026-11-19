@@ -1,12 +1,12 @@
 ---
-title: "50-30-20-Regel: Was tun, wenn die Miete kaum Spielraum lässt?"
+title: "50-30-20-Regel: Was tun, wenn die Miete kaum Spielraum"
 description: "Passt die 50-30-20-Regel zu deiner Miete? Ordne zuerst die festen Verpflichtungen ein und passe die Anteile an dein wirklich verfügbares Einkommen an."
 date: 2026-10-05T11:53:21Z
 draft: true
 tags: ["Budget planen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
-keywords: ["Die 50-30-20-Regel einfach erklärt", "Die 50 30 20 Regel einfach erklärt", "50-30-20-Regel"]
+keywords: ["Die 50-30-20-Regel einfach erklärt", "Die 50 30 20 Regel einfach erklärt", "50-30-20-Regel", "50 30 20 Regel"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"

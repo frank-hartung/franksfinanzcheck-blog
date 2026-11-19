@@ -1,5 +1,5 @@
 ---
-title: "Internet-Flats vergleichen: Was kostet der Anschluss insgesamt?"
+title: "Internet-Flats vergleichen: Was kostet der Anschluss"
 description: "Eine günstige Internet-Flat erkennst du am Gesamtpreis. Rechne Router und Einrichtung mit und kläre, wie lange du an den Anschluss gebunden bist."
 date: 2026-10-28T10:52:20Z
 draft: true

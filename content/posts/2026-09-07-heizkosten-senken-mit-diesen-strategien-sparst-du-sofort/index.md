@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-11-04
-title: "Heizkosten senken: Welche Maßnahmen passen zu deiner Wohnung?"
+title: "Heizkosten senken: Welche Maßnahmen passen zu"
 description: "Bevor du in Heiztechnik investierst, prüfe Heizzeiten, Thermostate und freie Heizflächen. Vergleiche den Verbrauch nur unter ähnlichen Bedingungen."
 date: 2026-09-23T08:59:05Z
 draft: false
@@ -40,8 +40,6 @@ quellen:
     datum: "2026-08-24"
 faktencheck: 2026-11-02
 ---
-
-
 
 Heizkosten sinken selten durch einen Trick. Meist hilft die einfache Kombination: ein Grad weniger, richtig lüften, Wärme nicht hinter dem Sofa verstecken und den Verbrauch regelmäßig ablesen.
 

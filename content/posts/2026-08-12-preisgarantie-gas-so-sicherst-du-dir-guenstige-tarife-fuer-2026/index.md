@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-11-07
-title: "Gaspreisgarantie: Wann sich ein fester Preis lohnt"
+title: "Preisgarantie Gas: So sicherst du günstige Tarife"
 description: "Lege zwei Gasangebote nebeneinander: Rechne mit demselben Jahresverbrauch und prüfe, ob die Preisgarantie so lange läuft wie der Vertrag."
 date: 2026-08-12T08:35:12Z
 draft: false

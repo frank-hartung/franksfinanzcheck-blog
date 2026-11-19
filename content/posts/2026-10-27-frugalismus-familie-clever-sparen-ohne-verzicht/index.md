@@ -9,7 +9,7 @@ tags: ["Frugalismus", "Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["Frugalismus Familie", "Sparen mit Kindern", "Familienbudget", "Frugalismus", "Geld sparen", "minimalistisch leben"]
+keywords: ["Frugalismus Familie", "Sparen mit Kindern", "Familienbudget", "Frugalismus", "Geld sparen", "minimalistisch leben", "Frugalismus mit Familie"]
 pin_title: "Frugalismus mit Familie: Gemeinsam über Ausgaben entscheiden"
 pin_description: "*Werbung | Beim Sparen in der Familie sind nicht alle Ausgaben gleich wichtig. Legt gemeinsam fest, was bleiben soll und bei welchem Posten ihr Neues ausprobiert. Beziehe auch unbezahlte Zeit in die Entscheidung ein. Eine günstigere Einkaufsroute lohnt nicht für jede Familie, wenn sie den ganzen Samstag in Anspruch nimmt."
 ai_generated: true
@@ -40,8 +40,6 @@ quellen:
     datum: "2024-01-01"
 faktencheck: 2026-10-27
 ---
-
-
 
 [Frugalismus](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) Familie im Check: Der Briefkasten klappert.
 Darin liegt die neue Abrechnung für Gas oder Strom.

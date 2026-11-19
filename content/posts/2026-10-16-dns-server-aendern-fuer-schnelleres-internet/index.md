@@ -7,7 +7,7 @@ draft: true
 tags: ["DNS und Netzsicherheit", "WLAN verbessern"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
-keywords: ["DNS Server wechseln", "Internet schneller machen", "DSL Tipps", "DNS-Server ändern für schnelleres Internet", "DNS Server ändern für schnelleres Internet", "DNS-Server", "schnelleres"]
+keywords: ["DNS Server wechseln", "Internet schneller machen", "DSL Tipps", "DNS-Server ändern für schnelleres Internet", "DNS Server ändern für schnelleres Internet", "DNS-Server", "schnelleres", "DNS-Server wechseln"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"

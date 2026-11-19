@@ -21,7 +21,7 @@ cover:
     geprueft_am: 2026-11-13
 kurzantwort: "Eine Gaspreisgarantie dämpft Preissprünge nur bei den vertraglich geschützten Bestandteilen. Erhöht der Anbieter trotzdem den Preis, vergleichst du Änderungsgrund und Klausel, notierst das Wirksamkeitsdatum und prüfst dein Sonderkündigungsrecht. Reagiere auf dein konkretes Schreiben – nicht auf kurzfristige Börsenmeldungen."
 social_posted: true
-keywords: ["Preisgarantie Gas", "Gaspreissprünge", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich", "Gaspreisgarantie", "Preiserhöhung"]
+keywords: ["Preisgarantie Gas", "Gaspreissprünge", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich", "Gaspreisgarantie", "Preiserhöhung", "Gaspreis trotz Garantie erhöht"]
 pin_title: "Gaspreis trotz Garantie erhöht: So prüfst du das Schreiben"
 pin_description: "*Werbung | Eine Gaspreiserhöhung trotz Garantie? Vergleiche die geänderte Preisposition mit den Bedingungen und prüfe Datum und Begründung im Schreiben. Lies im Preisschreiben, welche Bestandteile sich ändern. Ein steigender Abschlag allein beweist noch keinen Verstoß gegen die vereinbarte Preisgarantie."
 pin_text_sync: false

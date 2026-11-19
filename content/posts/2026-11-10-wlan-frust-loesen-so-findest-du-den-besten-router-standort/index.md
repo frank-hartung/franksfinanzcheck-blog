@@ -1,5 +1,5 @@
 ---
-title: "WLAN verbessern: So findest du einen guten Platz für den Router"
+title: "WLAN verbessern: So findest du einen guten Platz"
 description: "Stelle den Router probeweise höher und frei von Hindernissen auf. Vergleiche die Signalqualität vorher und nachher am selben Platz in der Wohnung."
 date: 2026-11-11T06:30:46Z
 draft: false
@@ -8,7 +8,7 @@ tags: ["DSL-Vergleich", "Internet und Mobilfunk", "WLAN verbessern", "DNS und Ne
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["Router Standort", "WLAN Empfang verbessern", "WLAN Tipps", "WLAN-Frust lösen", "WLAN-Frust", "WLAN Frust lösen", "DSL-Vergleich"]
+keywords: ["Router Standort", "WLAN Empfang verbessern", "WLAN Tipps", "WLAN-Frust lösen", "WLAN-Frust", "WLAN Frust lösen", "DSL-Vergleich", "WLAN verbessern"]
 pin_title: "WLAN verbessern: So findest du einen guten Platz für den Router"
 pin_description: "*Werbung | Stelle den Router probeweise höher und frei von Hindernissen auf. Vergleiche die Signalqualität vorher und nachher am selben Platz in der Wohnung. Markiere dir den alten Standort, bevor du den Router verschiebst. Wenn ein Raum besser und ein anderer schlechter versorgt wird, kannst du beide Varianten direkt vergleichen."
 ai_generated: true

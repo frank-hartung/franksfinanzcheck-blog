@@ -1,5 +1,5 @@
 ---
-title: "Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte und Passform"
+title: "Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte"
 description: "Prüfe bei gebrauchter Kleidung Nähte, Stoff und Passform. Rechne mögliche Reparaturen und Versand ein, bevor du den Preis mit Neuware vergleichst."
 date: 2026-11-16T15:55:45Z
 draft: false
@@ -8,7 +8,7 @@ tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget 
 categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
-keywords: ["Secondhand Kleidung", "Gebraucht kaufen Qualität", "Kleidung sparen", "Secondhand"]
+keywords: ["Secondhand Kleidung", "Gebraucht kaufen Qualität", "Kleidung sparen", "Secondhand", "Secondhand-Kleidung kaufen", "Secondhand Kleidung kaufen", "Secondhand-Kleidung"]
 pin_title: "Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte und Passform"
 pin_description: "*Werbung | Prüfe bei gebrauchter Kleidung Nähte, Stoff und Passform. Rechne mögliche Reparaturen und Versand ein, bevor du den Preis mit Neuware vergleichst. Prüfe eine kleine Schadstelle bei gutem Licht. Eine lose Naht lässt sich anders kalkulieren als abgeriebener Stoff, bei dem auch eine Reparatur kaum Halt findet."
 ai_generated: true

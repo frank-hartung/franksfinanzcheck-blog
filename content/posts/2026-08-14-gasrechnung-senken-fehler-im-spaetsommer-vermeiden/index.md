@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-11-04
-title: "Gasrechnung senken: Welche Fehler lassen sich vor der Heizperiode vermeiden?"
+title: "Gasrechnung senken: Welche Fehler lassen sich vor"
 description: "Ist dein Gasabschlag gestiegen? Vergleiche die Zählerstände auf der Rechnung mit deinen Notizen, bevor du Verbrauch, Tarif oder Abschlag änderst."
 date: 2026-08-14T08:35:12Z
 draft: false
@@ -43,7 +43,6 @@ quellen:
     herausgeber: "Bundesnetzagentur"
 faktencheck: 2026-11-01
 ---
-
 
 Wer seine [Gasrechnung senken](../../posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/) will, sollte jetzt handeln. Die ersten kalten Nächte sind da. In diesen Wochen entscheidet sich, wie teuer dein Winter wird.
 

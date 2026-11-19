@@ -1,5 +1,5 @@
 ---
-title: "Smart Home: Spart die Automatisierung mehr Strom, als sie verbraucht?"
+title: "Smart Home: Spart die Automatisierung mehr Strom"
 description: "Spart eine smarte Steckdose wirklich Strom? Vergleiche die vermiedene Laufzeit mit Eigenverbrauch und Kaufpreis, bevor du weitere Geräte ausstattest."
 date: 2026-10-14T14:57:12Z
 draft: false
@@ -9,7 +9,7 @@ tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Smart Home", "Strom sparen", "smarte Steckdose", "Stand-by-Verbrauch", "Stromkosten senken", "Stromersparnis"]
+keywords: ["Smart Home", "Strom sparen", "smarte Steckdose", "Stand-by-Verbrauch", "Stromkosten senken", "Stromersparnis", "Automatisierung"]
 pin_title: "Smart Home: Spart die Automatisierung mehr Strom, als sie verbraucht?"
 pin_description: "*Werbung | Spart eine smarte Steckdose wirklich Strom? Vergleiche die vermiedene Laufzeit mit Eigenverbrauch und Kaufpreis, bevor du weitere Geräte ausstattest. Rechne den Eigenverbrauch des Steuergeräts auch in Zeiten ohne geschaltete Last mit. Eine Steckdose, die ganzjährig läuft, spart nicht automatisch bei einem selten genutzten Gerät."
 ai_generated: true

@@ -1,12 +1,12 @@
 ---
-title: "Handytarife vergleichen: Welche Leistungen nutzt du wirklich?"
+title: "Handytarife vergleichen: Welche Leistungen nutzt"
 description: "Vergleiche Handytarife mit den Verbrauchsdaten der letzten Monate. Prüfe zuerst Netz und Datenvolumen und dann den Preis nach Ablauf der Aktion."
 date: 2026-11-09T13:26:24Z
 draft: true
 tags: ["Internet und Mobilfunk"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
-keywords: ["Handytarif vergleichen", "Handyvertrag wechseln", "Günstiger Handytarif", "Handytarife vergleichen", "Handytarife", "vergleichen"]
+keywords: ["Handytarif vergleichen", "Handyvertrag wechseln", "Günstiger Handytarif", "Handytarife vergleichen", "Handytarife", "vergleichen", "Leistungen"]
 author: "Frank Hartung"
 ai_generated: true
 ki_redaktion: "claude"
