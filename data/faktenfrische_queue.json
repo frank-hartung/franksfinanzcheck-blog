@@ -5322,9 +5322,9 @@
       "faellig": false,
       "frist": "2026-12-01",
       "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
+      "befund": true,
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
@@ -5344,9 +5344,9 @@
       "faellig": false,
       "frist": "2026-12-02",
       "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
+      "befund": true,
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
@@ -5428,11 +5428,33 @@
       "status": "unvollstaendig"
     },
     {
+      "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+      "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
+      "grund": "frisch geprüft vor 17 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-12-01",
+      "geo": 100,
+      "befund": true,
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
+    },
+    {
       "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
       "titel": "Preisgarantie Gas: Was bei Preiserhöhung hilft",
       "grund": "frisch geprüft vor 17 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-12-01",
+      "geo": 100,
+      "befund": true,
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
+    },
+    {
+      "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+      "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
+      "grund": "frisch geprüft vor 16 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-12-02",
       "geo": 100,
       "befund": true,
       "unvollstaendig": true,
@@ -5810,28 +5832,6 @@
       "faellig": false,
       "frist": "2026-11-29",
       "geo": 83,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
-      "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
-      "grund": "frisch geprüft vor 17 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-01",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
-      "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
-      "grund": "frisch geprüft vor 16 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-02",
-      "geo": 100,
       "befund": false,
       "unvollstaendig": false,
       "status": "vorlauf"
