@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-18 12:33:14 UTC",
+ "generated_at": "2026-11-19 12:24:02 UTC",
  "exit_code": 0,
  "modus": "FIX",
- "checked_articles": 138,
- "checked_links": 331,
+ "checked_articles": 141,
+ "checked_links": 338,
  "healed_count": 0,
  "healed": [],
  "findings": [
@@ -185,17 +185,6 @@
   },
   {
    "code": "IW2",
-   "slug": "2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung",
-   "line": 17,
-   "route": "dsl",
-   "slot": "top",
-   "owner": "human",
-   "severity": "P3",
-   "blocking": false,
-   "problem": "top-CTA führt zu „DSL- & Internettarife“, das Artikelthema ist aber „Handytarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
-  },
-  {
-   "code": "IW2",
    "slug": "2026-11-13-tagesgeld-und-zinsen-so-parkst-du-dein-geld-sicher",
    "line": 104,
    "route": "allgemein",
@@ -240,8 +229,8 @@
   },
   {
    "code": "IW2",
-   "slug": "2026-11-17-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
-   "line": 196,
+   "slug": "2026-11-18-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
+   "line": 216,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
@@ -251,8 +240,19 @@
   },
   {
    "code": "IW2",
-   "slug": "2026-11-17-strompreis-2026-herbst-check-fuer-deine-stromkosten",
-   "line": 187,
+   "slug": "2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung",
+   "line": 135,
+   "route": "allgemein",
+   "slot": "end",
+   "owner": "human",
+   "severity": "P3",
+   "blocking": false,
+   "problem": "end-CTA führt zu „CHECK24-Vergleichsportal“, das Artikelthema ist aber „Stromtarife“ (ohne Kontextbeweis an der CTA) – Anker nennt das Ziel, also ehrliches Cross-Selling (Prüfpunkt, keine Täuschung)"
+  },
+  {
+   "code": "IW2",
+   "slug": "2026-11-18-strompreis-2026-herbst-check-fuer-deine-stromkosten",
+   "line": 186,
    "route": "allgemein",
    "slot": "end",
    "owner": "human",
