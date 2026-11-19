@@ -1,6 +1,6 @@
 ---
 title: "Energiediebe stoppen: So kannst du Stromfresser finden"
-description: "Suche Stromfresser dort, wo Geräte lange laufen. Miss den Verbrauch über einen typischen Nutzungszeitraum, bevor du über einen Ersatz nachdenkst."
+description: "Energiediebe stoppen: Suche Stromfresser dort, wo Geräte lange laufen. Miss den Verbrauch über einen typischen Nutzungszeitraum, bevor du über einen…"
 date: 2026-08-19T08:35:12Z
 lastmod: 2026-11-07
 draft: false
@@ -22,8 +22,8 @@ cover:
 kurzantwort: "Stromfresser findest du am zuverlässigsten mit einem Energiekostenmessgerät. Miss Kühlgeräte sieben Tage lang und Geräte mit wechselnden Programmen über mehrere vollständige Nutzungen. Rechne dann Jahresverbrauch mal persönlichem Strompreis. Erst wenn die jährliche Ersparnis den Kaufpreis in sinnvoller Zeit ausgleicht, lohnt ein Austausch."
 social_posted: true
 keywords: ["Energiediebe stoppen", "Stromfresser finden", "Strom sparen Haushalt", "Standby Stromfresser", "Stromkosten senken"]
-pin_title: "Energiediebe stoppen: So kannst du Stromfresser finden"
-pin_description: "*Werbung | Suche Stromfresser dort, wo Geräte lange laufen. Miss den Verbrauch über einen typischen Nutzungszeitraum, bevor du über einen Ersatz nachdenkst. Fang beim Kühlschrank nicht mit dem Typenschild an. Ein Messwert über mehrere typische Tage erfasst auch die Pausen zwischen den Kühlzyklen."
+pin_title: "Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe"
+pin_description: "*Werbung | Welche Geräte treiben deine Stromrechnung wirklich in die Höhe? Wir zeigen die 5 größten Stromfresser – inklusive Euro-Beträgen pro Jahr und Sofort-Tipps gegen Standby-Kosten. Jetzt checken und bis zu 300 € im Jahr sparen."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
   - titel: "BDEW-Strompreisanalyse Herbst 2026: 37,3 ct/kWh für Haushalte"
@@ -48,7 +48,6 @@ quellen:
     datum: "2026-11-07"
 faktencheck: 2026-11-07
 ---
-
 
 Du willst Energiediebe stoppen? Die Stromrechnung steigt. Muss da gleich der alte Kühlschrank raus? Nicht so schnell. Alte Geräte sind nicht immer die größten Stromfresser. Oft steckt der teure Kandidat ganz woanders: im Keller, beim [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) oder in der Spielekonsole, die rund um die Uhr im Standby läuft.
 

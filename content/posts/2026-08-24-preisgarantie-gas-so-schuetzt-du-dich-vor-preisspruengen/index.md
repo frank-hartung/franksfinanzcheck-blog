@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-07
-title: "Gaspreis trotz Garantie erhöht: So prüfst du das Schreiben"
-description: "Eine Gaspreiserhöhung trotz Garantie? Vergleiche die geänderte Preisposition mit den Bedingungen und prüfe Datum und Begründung im Schreiben."
+title: "Preisgarantie Gas: So prüfst du das Schreiben"
+description: "Preisgarantie Gas: Eine Gaspreiserhöhung trotz Garantie? Vergleiche die geänderte Preisposition mit den Bedingungen und prüfe Datum und Begründung…"
 date: 2026-08-24T08:35:12Z
 draft: false
 tags: ["Gastarif wechseln", "Heizkosten senken"]
@@ -59,9 +59,9 @@ Wichtig wird es erst, wenn dein Anbieter den Preis wirklich ändert oder deine G
 💡 **Schnell-Tipp von FranksFinanzcheck:** Tarife kannst du über unseren Partner-Vergleich prüfen: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-![Merkkarte: Kernaussagen zu Gaspreis trotz Garantie erhöht: So prüfst du das Schreiben](abbildung-merkkarte.svg)
+![Merkkarte: Kernaussagen zu Preisgarantie Gas: So prüfst du das Schreiben](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „Gaspreis trotz Garantie erhöht: So prüfst du das Schreiben“ (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Preisgarantie Gas: So prüfst du das Schreiben“ (eigene Darstellung aus diesem Beitrag).*
 
 
 ## Wenn ein neuer Preis im Brief steht
@@ -155,9 +155,9 @@ Rechne den neuen Jahrespreis aus und vergleiche ihn. Wenn ein Sonderkündigungsr
 
 Kündige selbst, schriftlich, und verlange eine Bestätigung. Beim normalen Wechsel kann der neue Anbieter die Kündigung für dich übernehmen. Bei einer Sonderkündigung wegen der Erhöhung rät die Bundesnetzagentur: Handle selbst.
 
-![Gliederung des Beitrags: Gaspreis trotz Garantie erhöht: So prüfst du das Schreiben](abbildung-ablauf.svg)
+![Gliederung des Beitrags: Preisgarantie Gas: So prüfst du das Schreiben](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „Gaspreis trotz Garantie erhöht: So prüfst du das Schreiben“ – 5 Stationen von „Wenn ein neuer Preis im Brief steht“ bis „Preisänderung erhalten: diese fünf Punkte markieren“ (eigene Darstellung).*
+*Abbildung: Gliederung zu „Preisgarantie Gas: So prüfst du das Schreiben“ – 5 Stationen von „Wenn ein neuer Preis im Brief steht“ bis „Preisänderung erhalten: diese fünf Punkte markieren“ (eigene Darstellung).*
 
 ## Jahrespreis nach einer Erhöhung rechnen
 

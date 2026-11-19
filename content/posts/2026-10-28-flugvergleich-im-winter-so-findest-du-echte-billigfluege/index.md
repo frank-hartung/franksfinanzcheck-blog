@@ -1,6 +1,6 @@
 ---
 title: "Flugvergleich im Winter: So findest du echte Billigflüge"
-description: "Vergleiche Winterflüge für denselben Reiseplan. Nimm Gepäck, Anfahrt zum Flughafen und ungünstige Abflugzeiten in die Entscheidung mit auf."
+description: "Flugvergleich: Vergleiche Winterflüge für denselben Reiseplan. Nimm Gepäck, Anfahrt zum Flughafen und ungünstige Abflugzeiten in die Entscheidung mit…"
 date: 2026-10-30T11:29:25Z
 draft: false
 reserve_published: 2026-10-30

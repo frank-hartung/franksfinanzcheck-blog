@@ -1,6 +1,6 @@
 ---
 title: "Finanzieller Puffer: Der Rechenweg in fünf Minuten"
-description: "Rechne deinen Puffer in Monaten statt in runden Zielbeträgen. Addiere unvermeidbare Ausgaben und ziehe Rücklagen für schon geplante Käufe ab."
+description: "Finanzieller Puffer: Rechne deinen Puffer in Monaten statt in runden Zielbeträgen. Addiere unvermeidbare Ausgaben und ziehe Rücklagen für schon…"
 date: 2026-09-21T09:29:03Z
 lastmod: 2026-10-13
 draft: false
@@ -45,7 +45,7 @@ quellen:
 faktencheck: "2026-10-13"
 ---
 
-Wie lange könntest du deine laufenden Kosten ohne Gehalt bezahlen? Als Rechenbeispiel betrachten wir eine Rücklage für drei bis sechs Monate. Das ist ein Vergleichsrahmen, keine Vorgabe für jeden Haushalt.
+Finanzieller Puffer im Check: Wie lange könntest du deine laufenden Kosten ohne Gehalt bezahlen? Als Rechenbeispiel betrachten wir eine Rücklage für drei bis sechs Monate. Das ist ein Vergleichsrahmen, keine Vorgabe für jeden Haushalt.
 
  Bei 1.500 € Fixkosten sind das 4.500 € bis 9.000 €; das ist ein Modellwert. Das ist viel Geld, aber kein Fantasiewert.
 

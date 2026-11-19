@@ -1,6 +1,6 @@
 ---
 title: "Preiswert surfen: DSL, Kabel oder Glasfaser im Vergleich"
-description: "DSL, Kabel oder Glasfaser: Prüfe zuerst die Anschlüsse an deiner Adresse. Vergleiche danach Upload, Vertragslaufzeit und Kosten über denselben Zeitraum."
+description: "Preiswert surfen: DSL, Kabel oder Glasfaser: Prüfe zuerst die Anschlüsse an deiner Adresse. Vergleiche danach Upload, Vertragslaufzeit und Kosten über…"
 date: 2026-10-05T19:22:11Z
 draft: false
 reserve_published: 2026-10-02

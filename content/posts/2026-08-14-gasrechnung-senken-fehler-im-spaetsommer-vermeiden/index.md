@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-04
 title: "Gasrechnung senken: Welche Fehler lassen sich vor"
-description: "Ist dein Gasabschlag gestiegen? Vergleiche die Zählerstände auf der Rechnung mit deinen Notizen, bevor du Verbrauch, Tarif oder Abschlag änderst."
+description: "Gasrechnung senken: Ist dein Gasabschlag gestiegen? Vergleiche die Zählerstände auf der Rechnung mit deinen Notizen, bevor du Verbrauch, Tarif oder…"
 date: 2026-08-14T08:35:12Z
 draft: false
 tags: ["Gasrechnung prüfen", "Heizkosten senken", "Gastarif wechseln"]

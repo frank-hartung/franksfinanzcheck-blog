@@ -42,7 +42,7 @@ quellen:
 faktencheck: 2026-11-10
 ---
 
-Ein Gerät mit zwei Watt Bereitschaftsleistung fällt auf einer einzelnen Rechnung kaum auf. Laufen im Modell zehn solcher Geräte rund um die Uhr, ergeben 20 Watt × 8.760 Stunden rund 175 kWh im Jahr. Bei angenommenen 37 Cent pro kWh sind das knapp 65 €.
+Standby Kosten im Check: Ein Gerät mit zwei Watt Bereitschaftsleistung fällt auf einer einzelnen Rechnung kaum auf. Laufen im Modell zehn solcher Geräte rund um die Uhr, ergeben 20 Watt × 8.760 Stunden rund 175 kWh im Jahr. Bei angenommenen 37 Cent pro kWh sind das knapp 65 €.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 

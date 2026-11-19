@@ -1,6 +1,6 @@
 ---
 title: "Haushaltskosten reduzieren: So gewinnst du die Kontrolle"
-description: "Was belastet dein Haushaltsbudget am stärksten? Trenne feste Abbuchungen von veränderlichen Ausgaben und prüfe eine Kategorie nach der anderen."
+description: "Haushaltskosten: Was belastet dein Haushaltsbudget am stärksten? Trenne feste Abbuchungen von veränderlichen Ausgaben und prüfe eine Kategorie…"
 
 date: 2026-10-19T16:43:01Z
 draft: false
@@ -42,7 +42,7 @@ faktencheck: 2026-11-16
 kurzantwort: "Ja, du kannst deine Haushaltskosten sofort senken, indem du den 4K‑Prüfpfad (Kategorien, Kosten, Konsum, Kontrollen) anwendest. Analysiere jede Ausgabe, streiche unwichtige Abos und wechsle zu günstigeren Anbietern. Die Beispielrechnung im Artikel zeigt, wie dabei vierstellige Beträge im Jahr zusammenkommen können. Der Schlüssel liegt in konsequenter Kontrolle und regelmäßiger Nachprüfung."
 ---
 
-Eine jährliche Abbuchung fällt im Monatsbudget leicht unter den Tisch. Sammle zuerst die wiederkehrenden Zahlungen eines ganzen Jahres und rechne sie auf Monatsbeträge um.
+Haushaltskosten im Check: Eine jährliche Abbuchung fällt im Monatsbudget leicht unter den Tisch. Sammle zuerst die wiederkehrenden Zahlungen eines ganzen Jahres und rechne sie auf Monatsbeträge um.
 
 Mit System schaffst du dir finanziellen Spielraum. Du gewinnst die Kontrolle über dein Konto zurück.
 

@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-04
 title: "Sieben Gewohnheiten: Für den Umgang mit deinem Geld"
-description: "Wähle eine von sieben Geldgewohnheiten und gib ihr einen festen Termin. Kontrolliere beim nächsten Kontoauszug, ob sie im Alltag tatsächlich funktioniert."
+description: "7 Gewohnheiten für finanzielle Freiheit: Wähle eine von sieben Geldgewohnheiten und gib ihr einen festen Termin. Kontrolliere beim nächsten Kontoauszug…"
 date: 2026-10-09T02:12:31Z
 draft: false
 reserve_published: 2026-10-09

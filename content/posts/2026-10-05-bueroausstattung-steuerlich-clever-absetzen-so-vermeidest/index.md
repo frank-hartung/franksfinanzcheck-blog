@@ -1,6 +1,6 @@
 ---
 title: "Büroausstattung steuerlich clever absetzen: So geht's"
-description: "Schreibtisch, Monitor oder Bürostuhl für die Arbeit gekauft? Sammle Belege und halte fest, wie du die Anschaffung beruflich und privat nutzt."
+description: "Büroausstattung steuerlich clever absetzen: Schreibtisch, Monitor oder Bürostuhl für die Arbeit gekauft? Sammle Belege und halte fest, wie du die…"
 date: 2026-10-07T13:32:02Z
 draft: false
 reserve_published: 2026-10-07

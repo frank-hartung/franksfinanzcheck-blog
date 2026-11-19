@@ -21,8 +21,8 @@ cover:
     geprueft_am: 2026-11-13
 kurzantwort: "Ein DNS-Server übersetzt Domainnamen in IP-Adressen. Ein Wechsel ändert vor allem, welcher Resolver deine Anfragen erhält. Er erhöht nicht die Bandbreite und verschlüsselt DNS nicht automatisch. Für verschlüsselte Anfragen brauchst du DNS over HTTPS (DoH) oder DNS over TLS (DoT). Das verlagert das Vertrauen auf den gewählten DNS-Anbieter."
 keywords: ["DNS-Server wechseln", "DNS-Resolver wechseln", "öffentliche DNS-Server", "DNS over HTTPS", "DNS over TLS", "DNS-Datenschutz", "FRITZ!Box DNS ändern", "DNS Server wechseln"]
-pin_title: "DNS-Server wechseln: Datenschutz, Filter und Einrichtung"
-pin_description: "*Werbung | Ein anderer DNS-Server verändert die Namensauflösung, nicht deine gebuchte Bandbreite. Prüfe Filter, Datenschutz und Rückweg zur alten Einstellung. Schreibe die alte DNS-Einstellung auf, bevor du sie änderst. Wenn ein Dienst danach nicht erreichbar ist, kannst du denselben Aufruf mit beiden Einstellungen vergleichen."
+pin_title: "DNS wechseln leicht gemacht: Mehr Tempo ohne neuen Tarif"
+pin_description: "*Werbung | Du brauchst keinen teureren Tarif für schnelleres Netz – nur den richtigen DNS-Server: Unsere Anleitung zeigt den Wechsel für Windows, Mac, Android, iPhone und FRITZ!Box – jeweils in unter 5 Minuten. Kostenlos, sicher, jederzeit rückgängig zu machen. Jetzt lesen!"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 quellen:
   - titel: "IP-Adressen und Filtervarianten von 1.1.1.1"
@@ -55,8 +55,6 @@ quellen:
     herausgeber: "FRITZ! Knowledge Base"
 faktencheck: "2026-10-14"
 ---
-
-
 
 Wenn du den DNS-Server wechselst, änderst du den Server, der deine Namensanfragen bearbeitet. Das kann Filter, Datenschutz und die Antwortzeit beeinflussen. Es macht den Anschluss aber nicht schneller. Und es verschlüsselt DNS nicht automatisch.
 

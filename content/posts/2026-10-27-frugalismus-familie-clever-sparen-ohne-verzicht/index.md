@@ -1,6 +1,6 @@
 ---
 title: "Frugalismus mit Familie: Gemeinsam über Ausgaben entscheiden"
-description: "Beim Sparen in der Familie sind nicht alle Ausgaben gleich wichtig. Legt gemeinsam fest, was bleiben soll und bei welchem Posten ihr Neues ausprobiert."
+description: "Frugalismus Familie: Beim Sparen in der Familie sind nicht alle Ausgaben gleich wichtig. Legt gemeinsam fest, was bleiben soll und bei welchem Posten ihr…"
 date: 2026-10-30T01:04:22Z
 lastmod: 2026-11-04
 draft: false

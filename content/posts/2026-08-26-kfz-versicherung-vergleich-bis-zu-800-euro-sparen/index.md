@@ -24,8 +24,8 @@ kurzantwort: "Der günstigste Zeitpunkt für einen Kfz-Versicherungsvergleich is
 
 social_posted: true
 keywords: ["Kfz-Versicherung Vergleich", "Kfz-Versicherung wechseln", "Autoversicherung Vergleich", "Schadenfreiheitsklasse", "Kfz-Versicherung kündigen", "Kfz Haftpflicht", "Teilkasko Vollkasko", "30. November Kündigungsfrist"]
-pin_title: "Kfz-Versicherung: Frist und Leistungsumfang prüfen"
-pin_description: "*Werbung | Vergleiche bei der Kfz-Police Jahresbeitrag und Leistungen. Für die Kündigung zählen das Ende deines Versicherungsjahres und die Frist in deiner Police. Lass dir zwei Angebote mit identischer Selbstbeteiligung rechnen. Sonst vergleichst du nicht nur Preise, sondern auch den Betrag, den du bei einem Schaden selbst tragen musst."
+pin_title: "Kfz-Versicherung zum 30. November: 3 Fehler, die Geld kosten"
+pin_description: "*Werbung | Der Wechselstichtag 30. November ist die Gelegenheit: Wer bei Kfz, Haftpflicht und Hausrat klug vorgeht, spart hunderte Euro. Diese 3 typischen Fehler solltest du vermeiden. Jetzt den Versicherungs-Guide lesen."
 pinwand: "Versicherungen clever wechseln & sparen"
 quellen:
   - id: "Q1"

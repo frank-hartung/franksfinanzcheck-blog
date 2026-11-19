@@ -1,6 +1,6 @@
 ---
 title: "Bankgebühren senken: 7 Schritte zum günstigeren Konto"
-description: "Gehe die Kontogebühren anhand echter Buchungen durch. Prüfe, welche Entgelte für Karte, Geldautomat und Überweisung bei deiner Nutzung anfallen."
+description: "Bankgebühren: Gehe die Kontogebühren anhand echter Buchungen durch. Prüfe, welche Entgelte für Karte, Geldautomat und Überweisung bei deiner…"
 date: 2026-10-26T01:13:39Z
 draft: false
 reserve_published: 2026-10-26

@@ -24,8 +24,8 @@ kurzantwort: "Ein Anbieterwechsel bei Internet und DSL ist heute meist ein Verwa
 
 social_posted: true
 keywords: ["DSL wechseln", "Internet Anbieterwechsel", "DSL Tarifvergleich", "Highspeed Internet", "Router mieten oder kaufen", "Internet & DSL wechseln", "DSL-Anbieterwechsel", "DSL Anbieterwechsel"]
-pin_title: "DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis"
-pin_description: "*Werbung | Beim DSL-Wechsel soll der neue Anschluss rechtzeitig bereitstehen. Kläre den Schalttermin und vergleiche die Gesamtkosten statt nur den Einstiegspreis. Frag vor dem Wechsel nach dem Rückgabeweg für den alten Router. Bewahre den Einlieferungsbeleg auf, damit nicht nachträglich Geräteentgelt zur letzten Rechnung hinzukommt."
+pin_title: "Internet und DSL wechseln: Praxis-Tipps ohne Ausfall"
+pin_description: "*Werbung | DSL-Anbieterwechsel ohne Internet-Loch: Portierung, Kündigung durch den Neuanbieter und der echte Effektivpreis über 24 Monate. Wer diese 4 Phasen kennt, spart 280 bis 380 Euro und behält jederzeit Anschluss. Jetzt die Schritt-für-Schritt-Anleitung lesen."
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
@@ -42,7 +42,6 @@ quellen:
     datum: "2026-08-05"
 faktencheck: "2026-10-13"
 ---
-
 
 Viele zahlen beim Internet nicht deshalb zu viel, weil die Leitung so teuer wäre. Sie zahlen zu viel, weil alte Verträge still weiterlaufen. Bestandskunden rutschen dann oft in Tarife, die deutlich teurer sind als aktuelle Neukundenangebote – bei gleicher Technik im Keller.
 

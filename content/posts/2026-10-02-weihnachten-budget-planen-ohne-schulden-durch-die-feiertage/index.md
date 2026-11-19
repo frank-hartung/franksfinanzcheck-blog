@@ -1,5 +1,5 @@
 ---
-title: "Weihnachtsbudget planen: Geschenke und Feiertage"
+title: "Weihnachten Budget planen: Geschenke und Feiertage"
 description: "Plane Weihnachten vom verfügbaren Betrag aus. Reserviere zuerst Geld für Fahrten und Essen und verteile den Rest auf deine Geschenkeliste."
 date: 2026-10-02T19:45:00Z
 lastmod: 2026-11-04

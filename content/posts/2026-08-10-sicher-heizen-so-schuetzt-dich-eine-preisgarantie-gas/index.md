@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-04
-title: "Gaspreisgarantie: Welche Kosten sind geschützt"
-description: "Was bleibt beim Gasvertrag wirklich fest? Lies in der Preisgarantie nach, welche Preisbestandteile sie erfasst und wann der Schutz endet."
+title: "Sicher heizen: Welche Kosten sind geschützt"
+description: "Sicher heizen: Was bleibt beim Gasvertrag wirklich fest? Lies in der Preisgarantie nach, welche Preisbestandteile sie erfasst und wann der Schutz endet."
 date: 2026-08-10T09:29:05Z
 draft: false
 tags: ["Heizkosten senken", "Gastarif wechseln"]

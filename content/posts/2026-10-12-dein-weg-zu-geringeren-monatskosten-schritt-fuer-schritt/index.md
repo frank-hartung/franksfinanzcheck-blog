@@ -1,6 +1,6 @@
 ---
 title: "Dein Weg zu geringeren Monatskosten: Schritt für Schritt"
-description: "Sortiere regelmäßige Abbuchungen nach Jahresbetrag und Kündigungstermin. Beginne mit einem Vertrag, dessen Leistung du nicht mehr vollständig nutzt."
+description: "Dein Weg zu geringeren: Sortiere regelmäßige Abbuchungen nach Jahresbetrag und Kündigungstermin. Beginne mit einem Vertrag, dessen Leistung du…"
 date: 2026-10-19T01:20:46Z
 draft: false
 reserve_published: 2026-10-19

@@ -1,38 +1,20 @@
 {
- "stand": "2026-11-18T17:09:11Z",
+ "stand": "2026-11-19T14:41:59Z",
  "modus": "fix · Bestand · +Pinterest-Plan",
- "dateien": 4,
+ "dateien": 1,
  "gepruefte_dateien": 145,
- "woerter": 273156,
- "erkannte_befunde": 13,
- "befunde": 12,
+ "woerter": 274345,
+ "erkannte_befunde": 2,
+ "befunde": 2,
  "hart": 0,
- "gefixt": 1,
+ "gefixt": 0,
  "geparkt": [],
  "dateien_liste": [
   {
-   "pfad": "content/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/index.md",
-   "erkannte_befunde": 1,
-   "befunde": 0,
-   "woerter": 2035
-  },
-  {
-   "pfad": "content/posts/2026-11-18-deine-naechtliche-grundlast-strom-so-erkennst-du-wo/index.md",
+   "pfad": "content/posts/2026-11-19-deine-naechtliche-grundlast-strom-so-erkennst-du-wo/index.md",
    "erkannte_befunde": 2,
    "befunde": 2,
-   "woerter": 3637
-  },
-  {
-   "pfad": "content/posts/2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung/index.md",
-   "erkannte_befunde": 5,
-   "befunde": 5,
-   "woerter": 1129
-  },
-  {
-   "pfad": "content/posts/2026-11-18-vorrat-planen-leicht-gemacht-so-sparst-du-beim/index.md",
-   "erkannte_befunde": 5,
-   "befunde": 5,
-   "woerter": 831
+   "woerter": 3655
   }
  ]
 }

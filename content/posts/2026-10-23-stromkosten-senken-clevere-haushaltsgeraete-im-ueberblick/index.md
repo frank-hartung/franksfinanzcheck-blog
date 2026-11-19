@@ -1,6 +1,6 @@
 ---
 title: "Stromkosten senken: Clevere Haushaltsgeräte im Überblick"
-description: "Lohnt der Austausch eines Haushaltsgeräts? Vergleiche dessen gemessenen Verbrauch mit dem neuen Gerät und rechne die Anschaffungskosten mit ein."
+description: "Stromkosten: Lohnt der Austausch eines Haushaltsgeräts? Vergleiche dessen gemessenen Verbrauch mit dem neuen Gerät und rechne die…"
 date: 2026-10-23T12:49:18Z
 draft: false
 reserve_published: 2026-10-23
@@ -41,7 +41,7 @@ faktencheck: 2026-11-17
 kurzantwort: "Der gezielte Austausch veralteter Großgeräte gegen moderne, sparsame Modelle sowie die konsequente Nutzung von Eco‑Programmen und schaltbaren Steckerleisten senken den laufenden Strombedarf spürbar. Die Beispielrechnung im Artikel zeigt, ab welchem Jahresverbrauch sich ein Gerätetausch für dein Haushaltsbudget rechnet."
 ---
 
-Ein älteres Gerät auszutauschen spart nicht automatisch Geld. Entscheidend ist, ob der niedrigere Verbrauch den Kaufpreis während der erwarteten Nutzung ausgleichen kann.
+Stromkosten im Check: Ein älteres Gerät auszutauschen spart nicht automatisch Geld. Entscheidend ist, ob der niedrigere Verbrauch den Kaufpreis während der erwarteten Nutzung ausgleichen kann.
 
 Mit klugen Käufen und einem klaren Plan drückst du deinen Verbrauch auf Dauer.  
 Dieser Check zeigt dir deine größten Stromfresser. Eine einfache Modellrechnung macht dein Sparpotenzial sichtbar.

@@ -24,8 +24,8 @@ kurzantwort: "Vergleiche dieselbe Bandbreite am selben Anschluss. Addiere über 
 
 social_posted: true
 keywords: ["DSL-Vergleich", "Günstigeres Internet", "DSL-Tarife vergleichen", "Internetvertrag wechseln", "Internetanbieter wechseln", "DSL Vergleich", "günstiges Internet"]
-pin_title: "DSL-Vergleich: So findest du den günstigsten Internettarif"
-pin_description: "*Werbung | Ein DSL-Angebot ist nicht allein wegen des Rabatts günstig. Rechne alle Monate, die Anschlussgebühr und die Routermiete auf denselben Zeitraum um. Rechne zusätzlich den Fall durch, dass du nach einem Jahr umziehst. Ein kleiner Preisvorteil über zwei Jahre kann weniger wert sein als eine kürzere vertragliche Bindung."
+pin_title: "DSL & Internet Flat: Schnell surfen ab 9,99 €/Monat"
+pin_description: "*Werbung | Du zahlst noch über 30 € für dein Internet? DSL- und Kabeltarife gibt es schon ab 9,99 € im Monat – mit Wechselbonus und FRITZ!Box-Rabatt obendrauf. Vergleichen, wechseln, sparen: Der Wechsel-Service übernimmt sogar die Kündigung. Jetzt Speed checken!"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"

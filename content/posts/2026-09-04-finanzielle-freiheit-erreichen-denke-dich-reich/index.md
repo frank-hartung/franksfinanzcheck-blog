@@ -1,6 +1,6 @@
 ---
 title: "Finanzielle Freiheit: Wie du eine Sparroutine aufbaust"
-description: "Ein Sparziel wird greifbar, wenn Betrag und Rhythmus feststehen. Prüfe, welche Rate nach Fixkosten und Rücklage auch in einem teuren Monat bleibt."
+description: "finanzielle freiheit erreichen: Ein Sparziel wird greifbar, wenn Betrag und Rhythmus feststehen. Prüfe, welche Rate nach Fixkosten und Rücklage auch in…"
 kurzantwort: "Finanzielle Freiheit entsteht meist nicht durch ein höheres Einkommen, sondern durch klare Gewohnheiten: Ausgaben steuern, Sparraten automatisieren und früh breit gestreut investieren. Schon 300 € monatlich können bei 7 % Rendite in 20 Jahren auf rund 156.000 € anwachsen."
 date: 2026-09-16T08:58:26Z
 lastmod: 2026-11-04

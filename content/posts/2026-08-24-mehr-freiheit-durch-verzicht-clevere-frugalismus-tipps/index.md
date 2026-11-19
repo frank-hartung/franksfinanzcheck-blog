@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-04
 title: "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht"
-description: "Weniger ausgeben, ohne auf alles zu verzichten: Wähle eine Ausgabe, die dir wenig bringt, und entscheide bewusst, wofür du das Geld verwenden willst."
+description: "Frugalismus-Tipps: Weniger ausgeben, ohne auf alles zu verzichten: Wähle eine Ausgabe, die dir wenig bringt, und entscheide bewusst, wofür du das Geld…"
 date: 2026-08-24T08:35:12Z
 draft: false
 tags: ["Frugalismus", "Geld sparen im Alltag", "Budget planen", "Haushaltsbuch führen"]
@@ -25,7 +25,7 @@ kurzantwort: "Frugalismus bedeutet nicht knauseriger Verzicht, sondern das bewus
 social_posted: true
 keywords: ["Frugalismus-Tipps", "Geld sparen im Alltag", "50 30 20 Regel", "Finanzielle Freiheit", "Notgroschen aufbauen", "Tagesgeld Zinsen", "Frugalismus Tipps"]
 pin_title: "Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht"
-pin_description: "*Werbung | Weniger ausgeben, ohne auf alles zu verzichten: Wähle eine Ausgabe, die dir wenig bringt, und entscheide bewusst, wofür du das Geld verwenden willst. Behalte bei deinem ersten Versuch auch die Alternative im Blick: Selbst zu kochen kostet Zutaten und Zeit. Erst der Vergleich mit deinem üblichen Einkauf zeigt den Unterschied."
+pin_description: "*Werbung | Frugalismus mit System: Die 50-30-20-Regel als Kompass, 5 Hacks für den Alltag und eine Fallstudie mit rund 380 € Ersparnis pro Monat. So gewinnst du Zeit und finanzielle Freiheit. Jetzt Guide lesen!"
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 quellen:
   - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"

@@ -1,6 +1,6 @@
 ---
 title: "Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte"
-description: "Prüfe bei gebrauchter Kleidung Nähte, Stoff und Passform. Rechne mögliche Reparaturen und Versand ein, bevor du den Preis mit Neuware vergleichst."
+description: "Secondhand Kleidung: Prüfe bei gebrauchter Kleidung Nähte, Stoff und Passform. Rechne mögliche Reparaturen und Versand ein, bevor du den Preis mit…"
 date: 2026-11-16T15:55:45Z
 draft: false
 reserve_published: 2026-11-16
