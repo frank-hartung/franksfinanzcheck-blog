@@ -1,6 +1,6 @@
 ---
 title: "Umzug mit Internet: Anschluss und Rufnummer mitnehmen"
-description: "Umzug mit Internet: Prüfe Verfügbarkeit, Fristen und Rufnummernmitnahme früh. So planst du den Wechsel und verringerst das Risiko einer Anschlusslücke."
+description: "Nimm den Internetanschluss in deine Umzugsplanung auf: Kläre Verfügbarkeit, Schalttermin und Rufnummernmitnahme für die neue Adresse."
 date: 2026-09-04T06:10:00Z
 lastmod: 2026-11-04
 draft: false
@@ -10,7 +10,7 @@ pillar: "internet-dsl"
 author: "Frank Hartung"
 keywords: ["Umzug Internet", "Rufnummer mitnehmen", "Internet ummelden", "DSL Umzug", "Umzug mit Internet"]
 pin_title: "Umzug mit Internet: Anschluss und Rufnummer mitnehmen"
-pin_description: "*Werbung | Umzug mit Internet: Prüfe Verfügbarkeit, Fristen und Rufnummernmitnahme früh. So planst du den Wechsel und verringerst das Risiko einer Anschlusslücke. Mehr Spartipps auf FranksFinanzcheck! #umzug #internet #rufnummer"
+pin_description: "*Werbung | Nimm den Internetanschluss in deine Umzugsplanung auf: Kläre Verfügbarkeit, Schalttermin und Rufnummernmitnahme für die neue Adresse. Fordere den Umzugstermin schriftlich an und kläre den Zugang zur Anschlussdose. Ohne Zutritt zur Wohnung hilft dir auch ein bestätigter Technikertermin wenig."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -189,6 +189,8 @@ Vergleiche die beiden Rechnungen Zeile für Zeile. Notiere, welcher Anbieter wel
 Zahle nichts doppelt, ohne es zu prüfen. Melde die Überschneidung schriftlich und verweise auf beide Rechnungen. Behalte die Nachweise, bis die Sache geklärt ist.
 
 **Faustregel:** Plane vor dem Umzug alle laufenden Verträge mindestens drei Monate im Voraus – Nachsendeauftrag, Versicherungen und Energieanbieter laufen sonst in die alte Wohnung weiter.
+
+**Für deinen nächsten Check:** Fordere den Umzugstermin schriftlich an und kläre den Zugang zur Anschlussdose. Ohne Zutritt zur Wohnung hilft dir auch ein bestätigter Technikertermin wenig.
 
 ## Häufige Fragen
 

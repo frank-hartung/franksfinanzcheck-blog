@@ -1,6 +1,6 @@
 ---
 title: "Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel rechnet"
-description: "DSL-Anbieter wechseln: Vergleiche Gesamtpreis, Vertragslaufzeit, Router und Wechseltermin. So prüfst du Angebote ohne falsche Lockversprechen."
+description: "Lohnt die Treue zum DSL-Anbieter? Vergleiche das Rückholangebot mit dem Preis eines Wechsels einschließlich Router, Bereitstellung und Laufzeit."
 date: 2026-10-12T06:02:26Z
 draft: false
 reserve_published: 2026-10-12
@@ -9,8 +9,8 @@ categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
 keywords: ["DSL-Anbieter wechseln", "DSL wechseln", "Internetanbieter", "Vertragslaufzeit", "Anbieterwechsel", "DSL Anbieter wechseln", "DSL-Anbieter", "Treue-Falle beim DSL-Vertrag"]
-pin_title: "DSL-Anbieter wechseln: Gesamtpreis statt Lockpreis"
-pin_description: "*Werbung | DSL-Anbieter wechseln: Vergleiche Gesamtpreis, Vertragslaufzeit, Router und Wechseltermin. So prüfst du Angebote ohne falsche Lockversprechen. Mehr Spartipps auf FranksFinanzcheck! #dslanbieterwechseln #dslwechseln #internetanbieter"
+pin_title: "Treue-Falle beim DSL-Vertrag: Wann sich der Wechsel rechnet"
+pin_description: "*Werbung | Lohnt die Treue zum DSL-Anbieter? Vergleiche das Rückholangebot mit dem Preis eines Wechsels einschließlich Router, Bereitstellung und Laufzeit. Bitte bei einem Rückholangebot um die Vertragszusammenfassung. Prüfe darin nicht nur den neuen Preis, sondern auch, ob eine neue Mindestlaufzeit beginnt."
 ai_generated: true
 ai_provider: "Editorial revision"
 engine_level: "draft"
@@ -142,6 +142,8 @@ Wenn dein alter Anbieter weiter abrechnet oder ein Gerät zurückfordert, vergle
 Wenn du deine Festnetznummer behalten willst, gib das beim neuen Anbieter an. Anbieterwechsel und Rufnummernmitnahme regelt [§ 59 TKG](https://www.gesetze-im-internet.de/tkg_2021/__59.html). Prüfe die Nummer im Auftrag, bevor du ihn abschickst.
 
 **Faustregel:** Entscheide nach Preis, Leistung und Wechselablauf zusammen. Ein günstiger Startpreis reicht nicht, wenn der Gesamtpreis oder die Bedingungen unklar bleiben.
+
+**Für deinen nächsten Check:** Bitte bei einem Rückholangebot um die Vertragszusammenfassung. Prüfe darin nicht nur den neuen Preis, sondern auch, ob eine neue Mindestlaufzeit beginnt.
 
 **Weiterlesen:** [Ratgeber Internet und DSL](../../pillar/internet-dsl/) · [DSL-Vergleich: Anschluss und Tarif prüfen](../../posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-internet/) · [Preiswert surfen: DSL-Anschluss prüfen](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/) · [Kfz-Versicherung Vergleich 2026](../../posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/)
 

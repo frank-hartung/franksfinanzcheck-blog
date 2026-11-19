@@ -28,6 +28,26 @@ meta:
   angelegt: "2026-10-01"
 
 eintraege:
+  - datum: "2026-11-19"
+    typ: korrektur
+    titel: "Kfz-Wechsel: Vertragsende statt pauschalem November-Stichtag"
+    was: >-
+      Der Kfz-Ratgeber erhält einen datierten Korrekturhinweis: Der 30. November setzt
+      ein Vertragsende am 31. Dezember und eine einmonatige Kündigungsfrist voraus.
+      Das Rechenbeispiel vergleicht unterschiedliche Leistungen und belegt keine
+      Durchschnittsersparnis. Der Herbst-Ratgeber unterscheidet die Fälle jetzt auch im Text.
+    warum: >-
+      Einstieg und Kurzantwort der gesiegelten Kfz-Fassung verallgemeinern Aussagen,
+      die der Abschnitt zur Vertragslaufzeit und die Modelltabelle im selben Beitrag einschränken.
+      Der Hinweis ist keine neue Fachfreigabe des Beitrags.
+    quelle:
+      name: "Verbraucherzentrale – Kfz-Versicherung überprüfen (Quelle Q1 im Artikel)"
+      url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/kfzversicherung-ueberpruefen-und-mehrere-hundert-euro-sparen-11490"
+    belegklasse: amtlich
+    seiten:
+      - pfad: "/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/"
+        name: "Kfz-Versicherung: Korrekturhinweis"
+
   - datum: "2026-10-19"
     typ: korrektur
     titel: "Fixkosten-Index Q4 2026: Bezug des Strompreises offengelegt"

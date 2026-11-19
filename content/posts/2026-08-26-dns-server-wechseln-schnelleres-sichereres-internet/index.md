@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-04
 title: "DNS-Server wechseln: Datenschutz, Filter und Einrichtung"
-description: "DNS-Server wechseln: So vergleichst du Resolver, aktivierst DoH/DoT und richtest sie sicher ein. Bandbreite und WLAN werden nicht schneller."
+description: "Ein anderer DNS-Server verändert die Namensauflösung, nicht deine gebuchte Bandbreite. Prüfe Filter, Datenschutz und Rückweg zur alten Einstellung."
 date: 2026-08-26T06:00:00Z
 draft: false
 tags: ["DNS und Netzsicherheit", "WLAN verbessern"]
@@ -21,8 +21,8 @@ cover:
     geprueft_am: 2026-11-13
 kurzantwort: "Ein DNS-Server übersetzt Domainnamen in IP-Adressen. Ein Wechsel ändert vor allem, welcher Resolver deine Anfragen erhält. Er erhöht nicht die Bandbreite und verschlüsselt DNS nicht automatisch. Für verschlüsselte Anfragen brauchst du DNS over HTTPS (DoH) oder DNS over TLS (DoT). Das verlagert das Vertrauen auf den gewählten DNS-Anbieter."
 keywords: ["DNS-Server wechseln", "DNS-Resolver wechseln", "öffentliche DNS-Server", "DNS over HTTPS", "DNS over TLS", "DNS-Datenschutz", "FRITZ!Box DNS ändern", "DNS Server wechseln"]
-pin_title: "DNS wechseln leicht gemacht: Mehr Tempo ohne neuen Tarif"
-pin_description: "*Werbung | Du brauchst keinen teureren Tarif für schnelleres Netz – nur den richtigen DNS-Server: Unsere Anleitung zeigt den Wechsel für Windows, Mac, Android, iPhone und FRITZ!Box – jeweils in unter 5 Minuten. Kostenlos, sicher, jederzeit rückgängig zu machen. Jetzt lesen!"
+pin_title: "DNS-Server wechseln: Datenschutz, Filter und Einrichtung"
+pin_description: "*Werbung | Ein anderer DNS-Server verändert die Namensauflösung, nicht deine gebuchte Bandbreite. Prüfe Filter, Datenschutz und Rückweg zur alten Einstellung. Schreibe die alte DNS-Einstellung auf, bevor du sie änderst. Wenn ein Dienst danach nicht erreichbar ist, kannst du denselben Aufruf mit beiden Einstellungen vergleichen."
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 quellen:
   - titel: "IP-Adressen und Filtervarianten von 1.1.1.1"
@@ -204,6 +204,8 @@ Teste zuerst zwei Anbieter. Nicht zehn. Nicht fünf. Zwei. Das reicht für den A
 Mach dir keine Sorgen, wenn du etwas nicht sofort verstehst. Du wirst es sehen, wenn es funktioniert. Seiten bauen sich schneller auf. Das ist der beste Beweis. Und wenn nicht? Dann zurück auf Anfang. Kein Schaden.
 
 Viel Spaß beim Testen.
+
+**Für deinen nächsten Check:** Schreibe die alte DNS-Einstellung auf, bevor du sie änderst. Wenn ein Dienst danach nicht erreichbar ist, kannst du denselben Aufruf mit beiden Einstellungen vergleichen.
 
 ## Häufige Fragen
 

@@ -22,8 +22,8 @@ cover:
     sha256: ac4a52fc20b40a32cc2cc2dc0ddbaf5bfc72f0f69a3ee7c16389cd59ec59a8b6
     geprueft_am: 2026-11-13
 savings: "oft 80 bis 100 % Erstattung"
-pin_title: "Zahnzusatzversicherung 2026: Kosten, Leistungen & Fallen im Check"
-pin_description: "*Werbung | Zahnzusatzversicherung 2026 im großen Vergleich: Was gute Tarife kosten, welche Leistungen zählen und wie du Zahnstaffel, GOZ und Gesundheitsfragen prüfst. #zahnzusatzversicherung #zahnersatzkosten #implantatkosten"
+pin_title: "Zahnzusatzversicherung 2026: Tarife & Erstattung"
+pin_description: "*Werbung | Ein hoher Erstattungssatz sagt wenig über deinen Eigenanteil aus. Prüfe Bezugsbetrag, Leistungsstaffel und bereits angeratene Behandlungen. Lass dir zeigen, worauf sich der beworbene Prozentsatz bezieht. Ob der Zuschuss der Krankenkasse bereits enthalten ist, macht für den eigenen Rechnungsanteil einen Unterschied."
 quellen:
   - id: "Q1"
     titel: "Zahnzusatzversicherungen: Lohnt sich ein Abschluss?"
@@ -249,6 +249,7 @@ redaktionelle_pruefung:
       pruefung: "Marktübliche jährliche Budgets für professionelle Zahnreinigung/Prophylaxe in guten Tarifen"
       konsistenzpruefung: "Konsistent mit dem Baustein Zahnbehandlung/Prophylaxe"
       quellen: ["Q1"]
+summary: "Ein hoher Erstattungssatz sagt wenig über deinen Eigenanteil aus. Prüfe Bezugsbetrag, Leistungsstaffel und bereits angeratene Behandlungen."
 ---
 
 Sobald Zahnersatz plötzlich Thema wird, steigen die Kosten oft schnell. Nicht ein bisschen teuer, sondern richtig teuer. Ein Implantat, eine Krone oder eine aufwendigere Versorgung kann aus einem normalen Zahnarzttermin in kurzer Zeit eine Rechnung von **1.000 € bis 4.000 €** machen.

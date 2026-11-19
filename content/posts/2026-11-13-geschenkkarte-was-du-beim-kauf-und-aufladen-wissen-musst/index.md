@@ -1,6 +1,6 @@
 ---
 title: "Geschenkkarte: Was du beim Kauf und Aufladen wissen musst"
-description: Eine Geschenkkarte ist praktisch, birgt aber oft versteckte Kosten. Wir zeigen dir, wie du beim Gutschein aufladen und Karte verschenken Geld sparst.
+description: "Prüfe vor dem Kauf einer Geschenkkarte, wo und wie lange sie einlösbar ist. Bewahre Beleg und Restguthaben zusammen auf, bis alles verbraucht ist."
 date: 2026-11-16T15:11:53Z
 reserve_published: 2026-11-16
 draft: false
@@ -10,7 +10,7 @@ pillar: "konto-karten"
 author: "Frank Hartung"
 keywords: ["Geschenkkarte", "Gutschein aufladen", "Karte verschenken"]
 pin_title: "Geschenkkarte: Was du beim Kauf und Aufladen wissen musst"
-pin_description: "*Werbung | Eine Geschenkkarte ist praktisch, birgt aber oft versteckte Kosten. Wir zeigen dir, wie du beim Gutschein aufladen und Karte verschenken Geld sparst. Mehr Spartipps auf FranksFinanzcheck! #geschenkkarte #gutschein #aufladen"
+pin_description: "*Werbung | Prüfe vor dem Kauf einer Geschenkkarte, wo und wie lange sie einlösbar ist. Bewahre Beleg und Restguthaben zusammen auf, bis alles verbraucht ist. Bewahre den Nachweis über die Aufladung getrennt vom Guthabencode auf. Wer nur den Kassenbon hat, sollte den noch einlösbaren Code nicht öffentlich teilen."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -257,6 +257,8 @@ Im Gegenzug erwartest du Flexibilität beim späteren Einkauf.
 Doch diese Flexibilität endet abrupt bei einer Zahlungsunfähigkeit des Unternehmens.
 
 
+
+**Für deinen nächsten Check:** Bewahre den Nachweis über die Aufladung getrennt vom Guthabencode auf. Wer nur den Kassenbon hat, sollte den noch einlösbaren Code nicht öffentlich teilen.
 
 **Weiterlesen:** [Ratgeber Konto Karten](../../pillar/konto-karten/)
 **Lesetipp:** [Bankgebühren senken: 7 Schritte zum günstigeren Konto](../../posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/)

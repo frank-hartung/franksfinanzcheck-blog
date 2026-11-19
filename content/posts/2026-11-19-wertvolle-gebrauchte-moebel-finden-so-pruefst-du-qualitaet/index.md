@@ -1,6 +1,6 @@
 ---
-title: "Wertvolle Gebrauchte Möbel finden: So prüfst du Qualität"
-description: Erfahre, wie du hochwertige gebrauchte Möbel erkennst und Fehlkäufe vermeidest. Profi-Tipps zur Prüfung von Substanz und Material für dein Zuhause.
+title: "Gebrauchte Möbel: Woran erkennst du gute Qualität?"
+description: "Prüfe bei gebrauchten Möbeln Verbindungen, Maße und Oberfläche. Rechne Transport und Reparatur in den Preis ein, bevor du ein Angebot annimmst."
 kurzantwort: Echtes Holz erkennst du an der durchgehenden Maserung an den Kanten. Ein kräftiges Rütteln entlarvt lockere Leimverbindungen sofort. Muffiger Geruch deutet oft auf tiefliegenden Schimmel oder Feuchtigkeit hin.
 date: 2026-11-19T12:03:47Z
 draft: true
@@ -10,8 +10,8 @@ categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
 keywords: ["Gebrauchte Möbel", "Secondhand Möbel", "Möbel aufarbeiten", "Wertvolle Gebrauchte Möbel finden", "Wertvolle", "Gebrauchte", "Qualität"]
-pin_title: "Wertvolle Gebrauchte Möbel finden: So prüfst du Qualität"
-pin_description: "*Werbung | Erfahre, wie du hochwertige gebrauchte Möbel erkennst und Fehlkäufe vermeidest. Profi-Tipps zur Prüfung von Substanz und Material für dein Zuhause. Mehr Spartipps auf FranksFinanzcheck! #gebrauchte #moebel #secondhand"
+pin_title: "Gebrauchte Möbel: Woran erkennst du gute Qualität?"
+pin_description: "*Werbung | Prüfe bei gebrauchten Möbeln Verbindungen, Maße und Oberfläche. Rechne Transport und Reparatur in den Preis ein, bevor du ein Angebot annimmst. Miss Türen und Treppenhaus vor der Abholung aus. Ein günstiger Schrank wird teuer, wenn für den Transport überraschend ein anderer Wagen gemietet werden muss."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -188,6 +188,8 @@ Sichere die Ladung gut. Nutze Decken zum Schutz der Oberflächen. Verzurre alles
 Schubladen solltest du herausnehmen oder mit Klebeband sichern. Aber Achtung: Klebeband kann den Lack beschädigen. Nutze lieber Stretchfolie. So kommt dein Schatz sicher im neuen Zuhause an.
 
 
+
+**Für deinen nächsten Check:** Miss Türen und Treppenhaus vor der Abholung aus. Ein günstiger Schrank wird teuer, wenn für den Transport überraschend ein anderer Wagen gemietet werden muss.
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
 **Lesetipp:** [Secondhand Kleidung: So erkennst du Qualität & sparst](../../posts/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst/)

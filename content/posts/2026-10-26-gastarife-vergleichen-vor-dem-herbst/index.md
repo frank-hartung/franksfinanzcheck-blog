@@ -1,6 +1,6 @@
 ---
 title: "Gastarife vergleichen: Kosten, Fristen und Verbrauch prüfen"
-description: "Gastarife fundiert vergleichen: Gesamtkosten und Vertragsbedingungen prüfen, Preisänderungen einordnen und den Gasverbrauch realistisch berechnen."
+description: "Zwei Gastarife lassen sich mit demselben Jahresverbrauch vergleichen. Achte neben dem Arbeitspreis auf Grundpreis, Laufzeit und Ende der Garantie."
 lastmod: 2026-11-04
 date: 2026-10-26T10:36:12Z
 draft: true
@@ -17,8 +17,8 @@ redaktionelle_pruefung:
   status: "ausstehend"
   aenderungsgrund: "Fachliche Überarbeitung nach den Faktenfrische-Befunden (#911); Abgleich der Regeln mit der Bundesnetzagentur und der Verbraucherzentrale am 30.10.2026; am 01.11.2026 zwei Absätze eigenständig formuliert (Duplikat-Befund D3-X/D4-X gegenüber dem Stromanbieter-Artikel); am 03.11.2026 sieben Passagen (Prüfvermerk, Preisänderung, Modellrechnung, Grundpreis, Angebotssicherung, Checkliste, Bonus) eigenständig formuliert, damit keine Textdopplung zum Stromanbieter-Artikel entsteht (Einzigartigkeits-Befund #1027); Fakten und Quellen unverändert; redaktionelle Schlussprüfung ausstehend"
 kurzantwort: "Vergleiche Gastarife mit deinem echten Jahresverbrauch und den vollständigen Kosten aus Arbeitspreis und Grundpreis, mit und ohne Bonus. Prüfe Laufzeit, Kündigungsfrist und den genauen Umfang einer Preisgarantie im Vertrag; eine einheitliche Standarddauer gibt es nicht. Die Bundesnetzagentur genehmigt keine Endkundenpreise, setzt aber die Regeln für Wechsel und Preisänderungen. Ein Grad weniger Raumtemperatur senkt den Verbrauch nach Angaben der Verbraucherzentrale um etwa sechs Prozent."
-pin_title: "Gastarife vergleichen: Kosten und Fristen prüfen"
-pin_description: "*Werbung | Gastarife fundiert vergleichen: Gesamtkosten und Vertragsbedingungen prüfen, Preisänderungen einordnen und den Gasverbrauch realistisch berechnen. Mehr Spartipps auf FranksFinanzcheck! #gasvergleich #gaskosten #sparen"
+pin_title: "Gastarife vergleichen: Kosten, Fristen und Verbrauch prüfen"
+pin_description: "*Werbung | Zwei Gastarife lassen sich mit demselben Jahresverbrauch vergleichen. Achte neben dem Arbeitspreis auf Grundpreis, Laufzeit und Ende der Garantie. Lege neben den beworbenen Monatspreis den erwarteten Jahresbetrag. Ein niedriger Abschlag senkt nicht den Arbeitspreis und verhindert keine Nachzahlung."
 cover:
   image: "images/covers/2026-10-26-gastarife-vergleichen-vor-dem-herbst.jpg"
   alt: "Gastarife und Jahreskosten vergleichen"
@@ -166,6 +166,8 @@ Für den Vergleich brauchst du Postleitzahl und Verbrauch. Halte zwei Preise fes
 - Stimmen die Angaben im Portal mit den Unterlagen überein?
 - Ist die Zahlungsweise für dich tragbar?
 - Hast du Angebot und Vertrag gespeichert?
+
+**Für deinen nächsten Check:** Lege neben den beworbenen Monatspreis den erwarteten Jahresbetrag. Ein niedriger Abschlag senkt nicht den Arbeitspreis und verhindert keine Nachzahlung.
 
 ## Häufige Fragen
 

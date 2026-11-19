@@ -1,6 +1,6 @@
 ---
 title: "Heizperiode vorbereiten im Spätsommer"
-description: "Heizperiode vorbereiten: Heizkörper prüfen, Verbrauch messen, Tarife mit Grundpreis vergleichen – offene Rechenwege statt Sparversprechen."
+description: "Noch vor der Heizperiode lohnt ein Probelauf. Prüfe, ob Thermostate reagieren und welche Auffälligkeiten du an Verwaltung oder Fachbetrieb melden solltest."
 date: 2026-10-14T09:48:27Z
 draft: true
 tags: ["Gasrechnung prüfen", "Heizkosten senken"]
@@ -26,7 +26,7 @@ cover:
     sha256: a04dc716e9cb6e2258efe374567e41a0cfb1198aec0196af59817cf40590005f
     geprueft_am: 2026-11-13
 pin_title: "Heizperiode vorbereiten im Spätsommer"
-pin_description: "*Werbung | Heizperiode vorbereiten: Heizkörper nach Bedarf prüfen, Verbrauch messen und Tarife mit Grundpreis vergleichen. Rechenwege offen, ohne Sparversprechen. Mehr Spartipps auf FranksFinanzcheck! #gasrechnung #senken #heizkosten"
+pin_description: "*Werbung | Noch vor der Heizperiode lohnt ein Probelauf. Prüfe, ob Thermostate reagieren und welche Auffälligkeiten du an Verwaltung oder Fachbetrieb melden solltest. Prüfe nach dem ersten Probelauf auch die nächste Abrechnung. Höhere Raumtemperaturen und gestiegene Tarife beeinflussen den Betrag auf unterschiedliche Weise."
 quellen:
   - id: "Q1"
     titel: "Bundesnetzagentur - Energie"
@@ -156,6 +156,8 @@ Der Brenner und die Filter sind keine Dinge für Laien. Am Außenfühler solltes
 - [Energiediebe stoppen: So kannst du Stromfresser finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/)
 
 **Faustregel:** Schlafe eine Nacht über große Anschaffungen – der Preis, der am nächsten Morgen noch überzeugt, ist selten der falsche.
+
+**Für deinen nächsten Check:** Prüfe nach dem ersten Probelauf auch die nächste Abrechnung. Höhere Raumtemperaturen und gestiegene Tarife beeinflussen den Betrag auf unterschiedliche Weise.
 
 ## Häufige Fragen
 

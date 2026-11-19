@@ -43,9 +43,8 @@
            schmalen Displays wichtig: Der nächste Schritt darf nicht erst nach
            dem Saison-Hinweis und dem ausführlichen Kostenprofil erscheinen. */ -}}
     <div class="ff-home-ctas">
-        <a href="{{ "cockpit/" | relURL }}" class="ff-btn ff-btn-primary" data-klick="cta_click" data-klick-cta="home-cockpit" data-klick-slug="home-cockpit" data-klick-placement="start-hero">Fixkosten-Cockpit starten <span aria-hidden="true">→</span></a>
-        <a href="#fixkosten-kompass" class="ff-btn ff-btn-secondary" data-klick="cta_click" data-klick-cta="home-kompass" data-klick-slug="home-kompass" data-klick-placement="start-hero">4K-Prüfpfad ansehen</a>
-        <a href="{{ "posts/" | relURL }}" class="ff-btn ff-btn-outline" data-klick="cta_click" data-klick-cta="home-ratgeber" data-klick-slug="home-ratgeber" data-klick-placement="start-hero">Alle Ratgeber</a>
+        <a href="{{ "cockpit/" | relURL }}" class="ff-btn ff-btn-primary" data-klick="cta_click" data-klick-cta="home-cockpit" data-klick-slug="home-cockpit" data-klick-placement="start-hero">Fixkosten-Check starten <span aria-hidden="true">→</span></a>
+        <a href="{{ "posts/" | relURL }}" class="ff-btn ff-btn-outline" data-klick="cta_click" data-klick-cta="home-ratgeber" data-klick-slug="home-ratgeber" data-klick-placement="start-hero">Aktuelle Ratgeber ansehen</a>
     </div>
     {{- /* Der Hinweis ergänzt den Lead, ohne dessen Antwort-zuerst-Satz zu
            verwässern. Quelle und Saison sind mit Badge/Block identisch. */ -}}
@@ -58,26 +57,19 @@
     </div>
 </article>
 
-<div class="ff-pinterest-cta">
-  <div class="ff-pinterest-cta-logo">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#E60023" width="56" height="56" aria-hidden="true">
-      <path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.64 7.86 6.36 9.31-.09-.79-.17-2.01.03-2.87.19-.78 1.2-5.01 1.2-5.01s-.3-.61-.3-1.52c0-1.42.82-2.48 1.85-2.48.87 0 1.29.65 1.29 1.44 0 .87-.56 2.18-.85 3.4-.24 1.02.51 1.85 1.51 1.85 1.82 0 3.22-1.92 3.22-4.69 0-2.45-1.76-4.17-4.28-4.17-2.92 0-4.63 2.19-4.63 4.45 0 .88.34 1.83.76 2.34.08.1.1.19.07.29-.08.32-.25 1.02-.28 1.16-.04.19-.15.23-.34.14-1.25-.58-2.03-2.41-2.03-3.88 0-3.16 2.29-6.06 6.61-6.06 3.47 0 6.17 2.47 6.17 5.78 0 3.45-2.17 6.22-5.19 6.22-1.01 0-1.97-.53-2.29-1.15l-.62 2.37c-.23.87-.84 1.96-1.25 2.63.94.29 1.94.45 2.98.45 5.52 0 10-4.48 10-10S17.52 2 12 2z"/>
-    </svg>
-  </div>
-  <div class="ff-pinterest-cta-text">
-    <strong>Folge mir auf Pinterest</strong>
-    <span>Montags, mittwochs und freitags neue Spartipps, Infografiken und Vergleichs-Ideen – direkt auf dein Pin-Board.</span>
-  </div>
-  <a class="ff-pinterest-cta-btn" href="https://www.pinterest.de/franksfinanzcheck/" target="_blank" rel="noopener noreferrer me">
-    Jetzt folgen
-  </a>
-</div>
-
-{{- /* Saison-Fokus folgt im Template direkt auf den Hero. Sicht-, Lese-
-       und Tastaturreihenfolge sind auf allen Bildschirmbreiten identisch. */ -}}
 {{- partial "home_season.html" (dict "modus" "block") }}
 
-{{- /* Der Kompass ist der dauerhafte Produktkern hinter allen sechs Themen.
-       Er bleibt außerhalb des saisonalen Datenpfads: Jahreszeit und Produkt-
-       positionierung können sich nicht gegenseitig überschreiben. */ -}}
+<section class="ff-startauswahl" aria-labelledby="startauswahl">
+  <header class="ff-topics-heading"><p class="ff-topics-eyebrow">Redaktionelle Auswahl</p>
+    <h2 id="startauswahl">Vier Ratgeber für deinen Fixkosten-Check</h2></header>
+  <ul class="ff-topics-grid" role="list">
+    {{- range .Params.startauswahl }}
+      {{- $guide := site.GetPage .page }}
+      {{- if not $guide }}{{ errorf "Startauswahl: Ratgeber %s fehlt" .page }}{{ end }}
+      <li><article class="ff-startkarte"><h3><a href="{{ $guide.RelPermalink }}">{{ $guide.Title }}</a></h3><p class="ff-topic-description">{{ .teaser }}</p></article></li>
+    {{- end }}
+  </ul>
+</section>
+{{- partial "home_clusters.html" . }}
 {{- partial "fixkosten_kompass.html" (dict "mode" "home") }}
+<header class="ff-posts-feed-heading"><h2>Weitere Spartipps</h2><p>Neu im Blog: Ideen für dein Haushaltsbudget, von laufenden Rechnungen bis zum nächsten Einkauf.</p></header>

@@ -158,7 +158,7 @@
   </header>
   {{- if (ne (.Param "hideSummary") true) }}
   <div class="entry-content">
-    <p>{{ .Summary | plainify | htmlUnescape | partial "nbsp_sicherung.html" }}{{ if .Truncated }}...{{ end }}</p>
+    <p>{{ if .Params.summary }}{{ .Summary | plainify }}{{ else if .Description }}{{ .Description }}{{ else }}{{ .Summary | plainify | htmlUnescape | partial "nbsp_sicherung.html" }}{{ if .Truncated }}...{{ end }}{{ end }}</p>
   </div>
   {{- end }}
   {{- if not (.Param "hideMeta") }}
@@ -207,7 +207,7 @@
 {{- /* Ratgeber-Cluster am Seitenende: verlinkt alle sechs Pillar-Pages,
        ohne den redaktionellen Einstieg und die Artikelliste zu unterbrechen. */}}
 {{- if and .IsHome (eq $paginator.PageNumber 1) }}
-{{- partial "home_clusters.html" . }}
+
 {{- /* ENTITY-BOX (25.10.2026): sichtbare Marken-Definition + Abgrenzung
        zu FINANZCHECK.de am Ende der Startseite. Vertrag und Begründung:
        layouts/_partials/entity_box.html · Wache: entity_marken_gate.py */ -}}

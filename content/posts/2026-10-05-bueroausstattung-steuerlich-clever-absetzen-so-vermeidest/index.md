@@ -1,6 +1,6 @@
 ---
 title: "Büroausstattung steuerlich clever absetzen: So geht's"
-description: "Büroausstattung steuerlich clever absetzen: Welche Geräte sofort zählen, wann du abschreiben musst und welche fünf Fehler dich bares Geld kosten."
+description: "Schreibtisch, Monitor oder Bürostuhl für die Arbeit gekauft? Sammle Belege und halte fest, wie du die Anschaffung beruflich und privat nutzt."
 date: 2026-10-07T13:32:02Z
 draft: false
 reserve_published: 2026-10-07
@@ -10,7 +10,7 @@ pillar: "frugalismus"
 author: "Frank Hartung"
 keywords: ["Büroausstattung steuerlich clever absetzen", "Büroausstattung", "Steuerlich", "Vermeidest"]
 pin_title: "Büroausstattung steuerlich clever absetzen: So geht's"
-pin_description: "*Werbung | Büroausstattung steuerlich clever absetzen: Welche Geräte sofort zählen, wann du abschreiben musst und welche fünf Fehler dich bares Geld kosten. Mehr Spartipps auf FranksFinanzcheck! #bueroausstattung #steuerlich #vermeidest"
+pin_description: "*Werbung | Schreibtisch, Monitor oder Bürostuhl für die Arbeit gekauft? Sammle Belege und halte fest, wie du die Anschaffung beruflich und privat nutzt. Halte den Kaufbeleg und das Datum des Nutzungsbeginns fest. Bei einem gemischt genutzten Gerät ist außerdem die nachvollziehbare Aufteilung wichtiger als eine geschätzte Erstattung."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -171,6 +171,8 @@ Plane auch die Erstattung ein. Wer das Geld nicht sofort ausgibt, sondern auf ei
 Wer im Dezember bestellt, verschiebt den Abzug oft ins Folgejahr. Es zählt das Datum der Anschaffung.
 
 Noch ein Hinweis zur Einordnung: Dieser Text erklärt die allgemeinen Regeln und ersetzt keine Steuerberatung. Hast du ein echtes Arbeitszimmer oder bist selbstständig, hilft der Blick ins Gesetz. Auch ein Lohnsteuerhilfeverein ist eine gute Adresse.
+
+**Für deinen nächsten Check:** Halte den Kaufbeleg und das Datum des Nutzungsbeginns fest. Bei einem gemischt genutzten Gerät ist außerdem die nachvollziehbare Aufteilung wichtiger als eine geschätzte Erstattung.
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) · [Großeinkauf und Vorrat](../../posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/) · [Frugalismus Familie](../../posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/)
 **Lesetipp:** [Weihnachten Budget planen: Ohne Schulden durch die Feiertage](../../posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/)

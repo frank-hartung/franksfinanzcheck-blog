@@ -24,8 +24,8 @@ cover:
     sha256: 9f3bf1dd5c72e95b1fbf0d5ff8a110feb9554ee183e33030c668441ac774f515
     geprueft_am: 2026-11-13
 savings: "über 2.000 € Zinsdifferenz"
-pin_title: "Ratenkredit 2026: Zinsen vergleichen & Fallen umgehen"
-pin_description: "*Werbung | Ratenkredit Vergleich 2026: Welche Zinsen realistisch sind, wann sich Umschuldung und Dispo-Ablösung lohnen und welche 5 Fallen du umgehen musst. Mehr Spartipps auf FranksFinanzcheck! #ratenkredit #ratenkreditvergleich #ratenkreditzinsen"
+pin_title: "Ratenkredit Vergleich 2026: Zinsen, Kosten & Fallen"
+pin_description: "*Werbung | Vergleiche Ratenkredite mit demselben Betrag und derselben Laufzeit. Lege effektiven Jahreszins, Gesamtbetrag und mögliche Zusatzkosten nebeneinander. Achte auf die letzte Rate und optionale Zusatzprodukte. Eine kleinere Monatsrate kann allein durch eine längere Laufzeit entstehen und sagt nichts über den Gesamtpreis aus."
 quellen:
   - id: "Q1"
     titel: "MFI-Zinsstatistik für den Euroraum: Juli 2026 (Pressemitteilung vom 02.09.2026)"
@@ -363,6 +363,7 @@ redaktionelle_pruefung:
       pruefung: "Verbraucherzentrale rät von Restschuldversicherungen in der Regel ab; Aufschlagspanne dokumentiert"
       konsistenzpruefung: "Identisch mit Fehler-2-Absatz"
       quellen: ["Q3"]
+summary: "Vergleiche Ratenkredite mit demselben Betrag und derselben Laufzeit. Lege effektiven Jahreszins, Gesamtbetrag und mögliche Zusatzkosten nebeneinander."
 ---
 
 Dein Girokonto steht mit rund 3.000 € im Minus. Der Dispo verlangt dafür im Schnitt 11,30 % Zinsen im Jahr. Ein Ratenkredit kostet laut Bundesbank im Schnitt nur 7,60 % – und löst den Dispo mit einer einzigen Überweisung ab.

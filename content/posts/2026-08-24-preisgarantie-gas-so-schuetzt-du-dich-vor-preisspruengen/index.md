@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-07
-title: "Preisgarantie Gas: Was bei Preiserhöhung hilft"
-description: "Preisgarantie Gas: Steigt der Preis trotz Garantie? So prüfst du die Klausel, rechnest Marktrisiken ein und nutzt Widerspruch oder Sonderkündigung."
+title: "Gaspreis trotz Garantie erhöht: So prüfst du das Schreiben"
+description: "Eine Gaspreiserhöhung trotz Garantie? Vergleiche die geänderte Preisposition mit den Bedingungen und prüfe Datum und Begründung im Schreiben."
 date: 2026-08-24T08:35:12Z
 draft: false
 tags: ["Gastarif wechseln", "Heizkosten senken"]
@@ -22,8 +22,8 @@ cover:
 kurzantwort: "Eine Gaspreisgarantie dämpft Preissprünge nur bei den vertraglich geschützten Bestandteilen. Erhöht der Anbieter trotzdem den Preis, vergleichst du Änderungsgrund und Klausel, notierst das Wirksamkeitsdatum und prüfst dein Sonderkündigungsrecht. Reagiere auf dein konkretes Schreiben – nicht auf kurzfristige Börsenmeldungen."
 social_posted: true
 keywords: ["Preisgarantie Gas", "Gaspreissprünge", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich", "Gaspreisgarantie", "Preiserhöhung"]
-pin_title: "Preisgarantie Gas: So schützt du dich vor Preissprüngen"
-pin_description: "*Werbung | Preisgarantie Gas: Steigt der Preis trotz Garantie? So prüfst du die Klausel, rechnest Marktrisiken ein und nutzt Widerspruch oder Sonderkündigung. Mehr Spartipps auf FranksFinanzcheck! #preisgarantie #gas #gaspreisspruenge"
+pin_title: "Gaspreis trotz Garantie erhöht: So prüfst du das Schreiben"
+pin_description: "*Werbung | Eine Gaspreiserhöhung trotz Garantie? Vergleiche die geänderte Preisposition mit den Bedingungen und prüfe Datum und Begründung im Schreiben. Lies im Preisschreiben, welche Bestandteile sich ändern. Ein steigender Abschlag allein beweist noch keinen Verstoß gegen die vereinbarte Preisgarantie."
 pin_text_sync: false
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
@@ -59,9 +59,9 @@ Wichtig wird es erst, wenn dein Anbieter den Preis wirklich ändert oder deine G
 💡 **Schnell-Tipp von FranksFinanzcheck:** Tarife kannst du über unseren Partner-Vergleich prüfen: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-![Merkkarte: Kernaussagen zu Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-merkkarte.svg)
+![Merkkarte: Kernaussagen zu Gaspreis trotz Garantie erhöht: So prüfst du das Schreiben](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „Preisgarantie Gas: Was bei Preiserhöhung hilft“ (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Gaspreis trotz Garantie erhöht: So prüfst du das Schreiben“ (eigene Darstellung aus diesem Beitrag).*
 
 
 ## Wenn ein neuer Preis im Brief steht
@@ -155,9 +155,9 @@ Rechne den neuen Jahrespreis aus und vergleiche ihn. Wenn ein Sonderkündigungsr
 
 Kündige selbst, schriftlich, und verlange eine Bestätigung. Beim normalen Wechsel kann der neue Anbieter die Kündigung für dich übernehmen. Bei einer Sonderkündigung wegen der Erhöhung rät die Bundesnetzagentur: Handle selbst.
 
-![Gliederung des Beitrags: Preisgarantie Gas: Was bei Preiserhöhung hilft](abbildung-ablauf.svg)
+![Gliederung des Beitrags: Gaspreis trotz Garantie erhöht: So prüfst du das Schreiben](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „Preisgarantie Gas: Was bei Preiserhöhung hilft“ – 5 Stationen von „Wenn ein neuer Preis im Brief steht“ bis „Preisänderung erhalten: diese fünf Punkte markieren“ (eigene Darstellung).*
+*Abbildung: Gliederung zu „Gaspreis trotz Garantie erhöht: So prüfst du das Schreiben“ – 5 Stationen von „Wenn ein neuer Preis im Brief steht“ bis „Preisänderung erhalten: diese fünf Punkte markieren“ (eigene Darstellung).*
 
 ## Jahrespreis nach einer Erhöhung rechnen
 
@@ -268,6 +268,8 @@ Prüfe nach dem Wechsel auch die Schlussrechnung. Ein sauberer neuer Vertrag hei
 Preissprünge am Markt verdienen Aufmerksamkeit, aber keine Panik. Entscheidend ist dein Vertrag. Prüfe Garantie, neue Preise und Frist; rechne danach den Jahresbetrag.
 
 Wenn heute ein Preisschreiben im Postfach liegt, fotografiere zuerst den Zählerstand. Markiere dann die fünf Pflichtpunkte. So wird aus Marktangst eine konkrete Entscheidung.
+
+**Für deinen nächsten Check:** Lies im Preisschreiben, welche Bestandteile sich ändern. Ein steigender Abschlag allein beweist noch keinen Verstoß gegen die vereinbarte Preisgarantie.
 
 **Weiterlesen:** [Preisgarantie verständlich erklärt](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) · [Gastarif Schritt für Schritt vergleichen](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/) · [Balkonkraftwerk Förderung](../../posts/2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck/) · [Grundversorgung Strom und Gas](../../posts/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet/) · [Energieausweis](../../posts/2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten/)
 

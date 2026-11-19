@@ -1,6 +1,6 @@
 ---
 title: "Geld abheben im Ausland: Wo die Gebühren wirklich entstehen"
-description: "Geld abheben im Ausland: die zwei Gebühren am Automaten, die Abrechnung in Euro und wie du deine Karte schon vor der Reise prüfst."
+description: "Am Geldautomaten im Ausland können Gebühren und Wechselkursaufschläge zusammenkommen. So liest du die Anzeige vor dem Abheben."
 date: 2026-08-12T06:10:00Z
 lastmod: 2026-11-04
 draft: false
@@ -10,7 +10,7 @@ pillar: "konto-karten"
 author: "Frank Hartung"
 keywords: ["Geld abheben im Ausland", "Auslandsgebühren Karte", "Automatengebühr", "Fremdwährungsgebühr", "Kreditkarte oh", "e Ausla", "Kreditkarte", "Kreditkarte Ausland Gebühren"]
 pin_title: "Geld abheben im Ausland: Wo die Gebühren wirklich entstehen"
-pin_description: "*Werbung | Geld abheben im Ausland: welche zwei Gebühren am Automaten zusammenkommen, was die Abrechnung in Euro bedeutet und wie du vor der Reise deine Karte prüfst. Mehr Spartipps auf FranksFinanzcheck! #geldabheben #auslandsgebuehren #girokonto"
+pin_description: "*Werbung | Am Geldautomaten im Ausland können Gebühren und Wechselkursaufschläge zusammenkommen. So liest du die Anzeige vor dem Abheben. Fotografiere im Zweifel die Gebührenanzeige vor der Bestätigung. So kannst du den am Automaten angezeigten Betrag später vom Entgelt deiner eigenen Bank unterscheiden."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -196,6 +196,8 @@ Prüfe außerdem, ob die Karte im Ausland für Abhebungen freigegeben war. Fehlt
 * **Belege sammeln.** Bewahre bis zur Schlussrechnung alle Automatenbelege auf.
 
 **Faustregel:** Vergleiche vor einer Auslandsreise die Gebühren für Abhebung und Kartenzahlung deiner bestehenden Karten – der günstigste Reisekurs gewinnt nichts, wenn jede Abhebung fünf Euro kostet.
+
+**Für deinen nächsten Check:** Fotografiere im Zweifel die Gebührenanzeige vor der Bestätigung. So kannst du den am Automaten angezeigten Betrag später vom Entgelt deiner eigenen Bank unterscheiden.
 
 ## Häufige Fragen
 

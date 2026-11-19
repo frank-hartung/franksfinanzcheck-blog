@@ -1,6 +1,6 @@
 ---
 title: "Girocard, Debitkarte oder Maestro: Welche Karte passt?"
-description: "Girocard, Debitkarte oder Maestro im Vergleich: Einsatz, Kosten und Prüfpunkte für dein Konto. Einordnung mit Prüfhinweisen."
+description: "Girocard, Debitkarte und Kreditkarte unterscheiden sich bei Akzeptanz und Abrechnung. Prüfe die Logos deiner Karte, besonders vor einer Reise."
 date: 2026-09-29T10:48:18Z
 draft: true
 tags: ["Girokonto"]
@@ -21,8 +21,8 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: 732eac56e0fa8a0334d87d5178b3e2fa8610b24c80acd154b2f9c2e7c4ae3423
     geprueft_am: 2026-11-13
-pin_title: "Girocard, Debitkarte oder Maestro: Welche Karte dein Konto braucht"
-pin_description: "*Werbung | Girocard, Debitkarte oder Maestro im Vergleich: Einsatz, Kosten und Prüfpunkte für dein Konto. Einordnung mit Prüfhinweisen. Mehr Spartipps auf FranksFinanzcheck! #debitkarte #oder #maestro"
+pin_title: "Girocard, Debitkarte oder Maestro: Welche Karte passt?"
+pin_description: "*Werbung | Girocard, Debitkarte und Kreditkarte unterscheiden sich bei Akzeptanz und Abrechnung. Prüfe die Logos deiner Karte, besonders vor einer Reise. Nimm vor einer Mietwagenbuchung nicht allein das Logo auf der Karte als Beleg. Prüfe in den Abholbedingungen, welche Kartenart die Station für die Kaution akzeptiert."
 quellen:
   - id: "Q1"
     titel: "Referenzseite verbraucherzentrale.de"
@@ -120,3 +120,5 @@ Ein langfristiger Blick auf die Zinsentwicklungen hilft dir sehr. Du kannst zuk�
 *Transparenz: Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
 
 _Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information und stellt keine Anlage-, Rechts- oder Steuerberatung dar. Prüfe Konditionen und Bedingungen immer beim jeweiligen Anbieter._
+
+**Für deinen nächsten Check:** Nimm vor einer Mietwagenbuchung nicht allein das Logo auf der Karte als Beleg. Prüfe in den Abholbedingungen, welche Kartenart die Station für die Kaution akzeptiert.

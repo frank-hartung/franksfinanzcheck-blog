@@ -1,6 +1,6 @@
 ---
 title: "Energiediebe stoppen: So kannst du Stromfresser finden"
-description: "Energiediebe stoppen: Stromfresser finden statt raten. Mit Messplan, Kostenformel und Amortisationscheck senkst du unnötigen Verbrauch gezielt."
+description: "Suche Stromfresser dort, wo Geräte lange laufen. Miss den Verbrauch über einen typischen Nutzungszeitraum, bevor du über einen Ersatz nachdenkst."
 date: 2026-08-19T08:35:12Z
 lastmod: 2026-11-07
 draft: false
@@ -22,8 +22,8 @@ cover:
 kurzantwort: "Stromfresser findest du am zuverlässigsten mit einem Energiekostenmessgerät. Miss Kühlgeräte sieben Tage lang und Geräte mit wechselnden Programmen über mehrere vollständige Nutzungen. Rechne dann Jahresverbrauch mal persönlichem Strompreis. Erst wenn die jährliche Ersparnis den Kaufpreis in sinnvoller Zeit ausgleicht, lohnt ein Austausch."
 social_posted: true
 keywords: ["Energiediebe stoppen", "Stromfresser finden", "Strom sparen Haushalt", "Standby Stromfresser", "Stromkosten senken"]
-pin_title: "Stromfresser im Haushalt entlarven: Die 5 größten Energiediebe"
-pin_description: "*Werbung | Welche Geräte treiben deine Stromrechnung wirklich in die Höhe? Wir zeigen die 5 größten Stromfresser – inklusive Euro-Beträgen pro Jahr und Sofort-Tipps gegen Standby-Kosten. Jetzt checken und bis zu 300 € im Jahr sparen."
+pin_title: "Energiediebe stoppen: So kannst du Stromfresser finden"
+pin_description: "*Werbung | Suche Stromfresser dort, wo Geräte lange laufen. Miss den Verbrauch über einen typischen Nutzungszeitraum, bevor du über einen Ersatz nachdenkst. Fang beim Kühlschrank nicht mit dem Typenschild an. Ein Messwert über mehrere typische Tage erfasst auch die Pausen zwischen den Kühlzyklen."
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
   - titel: "BDEW-Strompreisanalyse Herbst 2026: 37,3 ct/kWh für Haushalte"
@@ -272,6 +272,8 @@ Stromfresser findest du nicht am Alter oder an einer warmen Oberfläche, sondern
 Heute reicht ein erster Handgriff: Leih oder kauf ein Messgerät und lass es eine Woche am verdächtigsten Kühlgerät laufen. Danach hast du eine Zahl statt eines Verdachts.
 
 **Faustregel:** Miss den Verbrauch verdächtiger Geräte einzeln mit einem Messgerät – nur was dauerhaft und unnötig läuft, kostet dich wirklich Geld.
+
+**Für deinen nächsten Check:** Fang beim Kühlschrank nicht mit dem Typenschild an. Ein Messwert über mehrere typische Tage erfasst auch die Pausen zwischen den Kühlzyklen.
 
 **Weiterlesen:** Standby-Kosten gezielt [reduzieren](../../posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/)
 

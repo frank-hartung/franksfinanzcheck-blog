@@ -1,6 +1,6 @@
 ---
-title: "Weniger Spontankäufe: Dein Essensplan Woche ohne Reste"
-description: "Mit einem klaren Essensplan für die Woche vermeidest du Spontankäufe, verwertest Vorräte komplett und entlastest dein monatliches Haushaltsbudget."
+title: "Wochenplan fürs Essen: Weniger Reste und spontane Einkäufe"
+description: "Plane Mahlzeiten mit den Lebensmitteln, die zuerst verbraucht werden müssen. Ergänze auf der Einkaufsliste nur die Zutaten, die dir noch fehlen."
 date: 2026-11-19T12:03:47Z
 draft: true
 reserve: true
@@ -9,8 +9,8 @@ categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
 keywords: ["Essensplan Woche", "Einkauf planen", "Lebensmittel sparen", "Weniger Spontankäufe", "Wocheneinkauf"]
-pin_title: "Weniger Spontankäufe: Dein Essensplan Woche ohne Reste"
-pin_description: "*Werbung | Mit einem klaren Essensplan für die Woche vermeidest du Spontankäufe, verwertest Vorräte komplett und entlastest dein Budget. Mehr Spartipps auf FranksFinanzcheck! #essensplan #woche #einkauf"
+pin_title: "Wochenplan fürs Essen: Weniger Reste und spontane Einkäufe"
+pin_description: "*Werbung | Plane Mahlzeiten mit den Lebensmitteln, die zuerst verbraucht werden müssen. Ergänze auf der Einkaufsliste nur die Zutaten, die dir noch fehlen. Plane eine Mahlzeit ein, deren Zutaten sich verschieben lassen. Wenn ein Termin dazwischenkommt, kannst du frische Lebensmittel zuerst aufbrauchen."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -134,6 +134,8 @@ Mit unserem klaren Pfad in vier Schritten wird deine Planung schnell zur festen 
 2. **Konditionen rechnen:** Schau im Laden immer auf den Preis pro Kilo statt auf rote Schilder, und prüfe genauso nüchtern deine festen Verträge für Strom, Internet oder Konto.
 3. **Kündigungsfenster sichern:** Streiche alte Kochboxen oder Liefer-Abos rechtzeitig, wenn sie nicht mehr zu deinem echten Alltag passen.
 4. **Kurs halten:** Nimm dir einmal pro Woche kurz Zeit für Schrank-Blick und Liste und sammle dir nach und nach eine feste Auswahl an einfachen Lieblingsessen.
+
+**Für deinen nächsten Check:** Plane eine Mahlzeit ein, deren Zutaten sich verschieben lassen. Wenn ein Termin dazwischenkommt, kannst du frische Lebensmittel zuerst aufbrauchen.
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
 **Lesetipp:** [Großeinkauf und Vorrat: Wann Bevorraten sich rechnet](../../posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/)

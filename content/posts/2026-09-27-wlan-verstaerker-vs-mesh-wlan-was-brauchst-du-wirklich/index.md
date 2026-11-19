@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-10-13
-title: "DSL Hacks: Was brauchst du wirklich? – Schnelles Internet"
-description: "DSL Hacks: WLAN-Verstärker oder Mesh-WLAN? So findest du 2026 heraus, was dein Zuhause wirklich braucht – mit Kosten und Entscheidungshilfe."
+title: "WLAN-Repeater oder Mesh: Was passt zu deiner Wohnung?"
+description: "Ein Funkloch in einem Zimmer oder schwaches WLAN auf mehreren Etagen? Prüfe Standort und Signal zum Router, bevor du Repeater oder Mesh kaufst."
 date: 2026-09-28T01:05:48Z
 draft: false
 reserve_published: 2026-09-28
@@ -10,8 +10,8 @@ categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
 keywords: ["DSL Hacks", "Schnelles Internet zuhause", "Mesh Netzwerk", "WLAN-Verstärker vs. Mesh-WLAN", "WLAN Verstärker vs. Mesh WLAN", "WLAN-Verstärker", "Mesh-WLAN"]
-pin_title: "Funklöcher adé: WLAN-Verstärker oder Mesh-System?"
-pin_description: "*Werbung | Ein Zimmer mit Empfang, das nächste ohne – das Kästchen aus dem Elektromarkt hilft da oft nur halb: Wir zeigen, wann ein 30-€-Repeater reicht, wann nur ein Mesh-System Ruhe bringt und was beide Lösungen wirklich kosten. Jetzt lesen!"
+pin_title: "WLAN-Repeater oder Mesh: Was passt zu deiner Wohnung?"
+pin_description: "*Werbung | Ein Funkloch in einem Zimmer oder schwaches WLAN auf mehreren Etagen? Prüfe Standort und Signal zum Router, bevor du Repeater oder Mesh kaufst. Prüfe den vorgesehenen Standort des Repeaters mit dem Handy. Empfängt es dort kaum ein Signal vom Router, kann auch ein neues Gerät diesen Standort nicht beliebig ausgleichen."
 ai_generated: true
 kurzantwort: "Ein WLAN-Verstärker (Repeater) für 20 bis 60 Euro genügt, wenn nur ein einzelner Raum schlecht versorgt ist und dein Grundspeed stimmt. Mesh-WLAN für 150 bis 400 Euro lohnt sich, wenn mehrere Räume oder Etagen betroffen sind und viele Geräte gleichzeitig unterwegs sein sollen. Wichtig: Prüfe vor jedem Kauf, ob nicht dein Internetvertrag selbst der Flaschenhals ist – dann hilft die beste WLAN-Technik nichts."
 cover:
@@ -41,7 +41,7 @@ faktencheck: "2026-10-13"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 ---
 
-DSL Hacks im Check: Du kennst das: Im Wohnzimmer läuft der Stream flüssig, im Schlafzimmer bricht das WLAN zusammen, und im Home‑Office wird die Videokonferenz zum Zufallsspiel. Die erste Vermutung ist fast immer dieselbe: „Der Vertrag ist zu langsam.“
+Wenn ein Video neben dem Router flüssig läuft und im Arbeitszimmer stockt, ist ein teurerer Internettarif nicht der erste Test. Entscheidend ist, wie das Signal vom Router bis zum Gerät gelangt.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -199,6 +199,8 @@ Die Frage „WLAN‑Verstärker oder Mesh‑WLAN?“ beantwortet sich fast von s
 **Ein Funkloch, kleines Budget, sonst alles gut:** Ein Repeater für unter 60 € ist die ehrliche, unkomplizierte Lösung im Modellfall. **Mehrere Räume oder Etagen, viele Geräte, Lösung für Jahre:** Dann ist Mesh das Geld wert und der Repeater nur eine Hängebrücke. **Grundtempo stimmt nicht:** Dann bringt die beste Funktechnik nichts – erst der Anschluss muss liefern, danach darf man ihn verteilen.
 
 Bleibt der Grundsatz, der mir bei jeder Netzwerkfrage am meisten Geld gespart hat: **Miss zweimal, kauf einmal.**
+
+**Für deinen nächsten Check:** Prüfe den vorgesehenen Standort des Repeaters mit dem Handy. Empfängt es dort kaum ein Signal vom Router, kann auch ein neues Gerät diesen Standort nicht beliebig ausgleichen.
 
 **Weiterlesen:** [Pillar Internet & DSL](../../pillar/internet-dsl/) · [WLAN verbessern in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) · [DNS‑Server wechseln für schnelleres Internet](../../posts/2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet/) · [Wie viel Streaming‑Bandbreite](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/)
 

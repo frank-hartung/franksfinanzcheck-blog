@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-04
-title: "Standby Kosten reduzieren: So entlarvst du Stromfresser"
-description: "Standby-Kosten berechnen und senken: So misst du Bereitschaftsverbrauch, priorisierst Gerätegruppen und schaltest ab, ohne Wichtiges zu verlieren."
+title: "Standby-Verbrauch messen: Was kostet der Bereitschaftsbetrieb?"
+description: "Was kostet der Bereitschaftsbetrieb? Miss die Leistung an der Steckdose und rechne mit den Stunden, in denen das Gerät tatsächlich im Standby bleibt."
 date: 2026-09-11T20:00:23Z
 draft: false
 tags: ["Stromkosten senken"]
@@ -10,8 +10,8 @@ pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Standby Kosten", "Stromfresser entlarven", "Geräte abschalten sparen", "Dauerverbraucher", "Standby Kosten reduzieren", "reduzieren"]
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
-pin_title: "Standby-Kosten senken: Diese Gerätegruppen lohnen zuerst"
-pin_description: "*Werbung | Standby Kosten: Standby-Kosten berechnen und gezielt senken: So misst du Bereitschaftsverbrauch, priorisierst Gerätegruppen und schaltest ab, ohne wichtige… Mehr Spartipps auf FranksFinanzcheck! #standbykosten #stromfresserentlarven #geraeteabschaltensparen"
+pin_title: "Standby-Verbrauch messen: Was kostet der Bereitschaftsbetrieb?"
+pin_description: "*Werbung | Was kostet der Bereitschaftsbetrieb? Miss die Leistung an der Steckdose und rechne mit den Stunden, in denen das Gerät tatsächlich im Standby bleibt. Unterscheide Standby von Aufgaben im Hintergrund. Ein Router oder eine Kühltruhe erfüllt auch nachts eine Funktion und sollte nicht einfach über eine Steckerleiste abgeschaltet werden."
 ai_generated: true
 inspiration: "Standby-Falle & Co.: Die 5 schlimmsten Stromfresser im Check"
 cover:
@@ -42,8 +42,7 @@ quellen:
 faktencheck: 2026-11-10
 ---
 
-
-Standby Kosten im Check: Zwei Watt im Standby wirken harmlos; das ist ein Modellwert. Zehn Geräte mit zusammen 20 Watt kosten bei 37 Cent pro kWh aber knapp **65 € im Jahr**. Kein [finanzieller](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) Weltuntergang – nur ein teures rotes Lämpchen.
+Ein Gerät mit zwei Watt Bereitschaftsleistung fällt auf einer einzelnen Rechnung kaum auf. Laufen im Modell zehn solcher Geräte rund um die Uhr, ergeben 20 Watt × 8.760 Stunden rund 175 kWh im Jahr. Bei angenommenen 37 Cent pro kWh sind das knapp 65 €.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -258,6 +257,8 @@ Der Messwert zählt.
 Standby-Kosten sinken am schnellsten, wenn du Gruppen statt Kleinkram prüfst. Miss TV-Ecke und Arbeitsplatz, rechne mit deinem Strompreis und schalte nur unkritische Funktionen ab.
 
 Dein nächster Schritt dauert zehn Minuten: Miss heute Abend die TV-Leiste im ausgeschalteten Zustand; das ist ein Rechenbeispiel. Liegt sie deutlich über 5 Watt, prüfst du Schnellstart, Konsole und Soundanlage einzeln.
+
+**Für deinen nächsten Check:** Unterscheide Standby von Aufgaben im Hintergrund. Ein Router oder eine Kühltruhe erfüllt auch nachts eine Funktion und sollte nicht einfach über eine Steckerleiste abgeschaltet werden.
 
 **Weiterlesen:** [Stromfresser im ganzen Haushalt finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/)
 

@@ -24,8 +24,8 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: cc2fcc0a13d42130ecb43b5dc80b00c4efe8b4b07d4b1a91bd3a9e672c5b0e14
     geprueft_am: 2026-11-13
-pin_title: "Versicherungsbeiträge steigen: Sonderkündigung und Stichtage prüfen"
-pin_description: "*Werbung | Zum Jahresende steigen oft Beiträge oder Bedingungen ändern sich. So prüfst du Versicherungen klug, nutzt Fristen und vermeidest unnötige Mehrkosten. Mehr Spartipps auf FranksFinanzcheck! #versicherungupdate #versicherungenpruefen"
+pin_title: "Versicherungsbeiträge steigen: Sonderkündigung prüfen"
+pin_description: "*Werbung | Der Versicherungsbeitrag steigt? Lies Anlass, Leistungsänderung und Wirksamkeitsdatum in der Mitteilung, bevor du ein Kündigungsrecht annimmst. Lege die alte und die neue Leistungsbeschreibung nebeneinander. Ein höherer Preis bei erweitertem Schutz ist nicht derselbe Fall wie eine reine Beitragserhöhung."
 quellen:
   - id: "Q1"
     titel: "Wichtige Versicherungen im Überblick: Was Sie wirklich brauchen"
@@ -150,6 +150,7 @@ redaktionelle_pruefung:
       pruefung: "Redaktioneller Erfahrungswert; FAQ-Antwort wiederholt den belegten Wert"
       konsistenzpruefung: "Dritte identische Verwendung der Spanne im Artikel"
       quellen: ["Q1"]
+summary: "Der Versicherungsbeitrag steigt? Lies Anlass, Leistungsänderung und Wirksamkeitsdatum in der Mitteilung, bevor du ein Kündigungsrecht annimmst."
 ---
 
 **Stand: 17.09.2026.** Dieses **Versicherung-Update** zeigt, warum gerade jetzt ein Blick auf deine Policen wichtig ist – und warum Bequemlichkeit in diesem Bereich schnell teuer wird.

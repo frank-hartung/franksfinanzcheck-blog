@@ -1,6 +1,6 @@
 ---
-title: "Smart Home: So prüfst du echte Stromersparnis – Smarte"
-description: "Smart Home spart nicht automatisch Strom. Erfahre, wie du Verbrauch misst, Schaltregeln sicher wählst und Kosten mit einem klaren Modell prüfst."
+title: "Smart Home: Spart die Automatisierung mehr Strom, als sie verbraucht?"
+description: "Spart eine smarte Steckdose wirklich Strom? Vergleiche die vermiedene Laufzeit mit Eigenverbrauch und Kaufpreis, bevor du weitere Geräte ausstattest."
 date: 2026-10-14T14:57:12Z
 draft: false
 reserve_published: 2026-10-14
@@ -10,8 +10,8 @@ categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Smart Home", "Strom sparen", "smarte Steckdose", "Stand-by-Verbrauch", "Stromkosten senken", "Stromersparnis"]
-pin_title: "Smart Home: So prüfst du echte Stromersparnis"
-pin_description: "*Werbung | Smart Home spart nicht automatisch Strom. Erfahre, wie du Verbrauch misst, Schaltregeln sicher wählst und Kosten mit einem klaren Modell prüfst. Mehr Spartipps auf FranksFinanzcheck! #smarthome #stromsparen #smartesteckdose"
+pin_title: "Smart Home: Spart die Automatisierung mehr Strom, als sie verbraucht?"
+pin_description: "*Werbung | Spart eine smarte Steckdose wirklich Strom? Vergleiche die vermiedene Laufzeit mit Eigenverbrauch und Kaufpreis, bevor du weitere Geräte ausstattest. Rechne den Eigenverbrauch des Steuergeräts auch in Zeiten ohne geschaltete Last mit. Eine Steckdose, die ganzjährig läuft, spart nicht automatisch bei einem selten genutzten Gerät."
 ai_generated: true
 ai_provider: "Editorial revision"
 engine_level: "draft"
@@ -166,6 +166,8 @@ Schreibe die Annahmen auf. So erkennst du später, ob sich Nutzung oder Preis ge
 **Faustregel:** Kaufe keine smarte Technik wegen eines pauschalen Sparversprechens. Miss zuerst, was dein Gerät verbraucht, und prüfe dann die Kosten der Lösung.
 
 Ein hoher Strompreis und ein hoher Geräteverbrauch sind zwei verschiedene Fragen. Ein Smart‑Home‑System ändert nicht automatisch den Tarif. Wenn du auch Stromverträge prüfen willst, vergleiche die Bedingungen selbst. Der folgende Partnerlink führt zu Stromtarifen, nicht zu Smart‑Home‑Geräten.  
+
+**Für deinen nächsten Check:** Rechne den Eigenverbrauch des Steuergeräts auch in Zeiten ohne geschaltete Last mit. Eine Steckdose, die ganzjährig läuft, spart nicht automatisch bei einem selten genutzten Gerät.
 
 **Weiterlesen:** [Ratgeber Strom sparen](../../pillar/strom-sparen/) · [Stand‑by‑Kosten prüfen](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/) · [Stromfresser im Haushalt finden](../../posts/2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden/) · [Gaspreiserhöhung Sonderkündigungsrecht](../../posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/) · [Kaffeemaschine Stromverbrauch](../../posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/)
 

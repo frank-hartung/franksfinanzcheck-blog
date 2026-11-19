@@ -21,8 +21,8 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: 75b193959123dd3eb7ff2b3de9681c4795d2bd56b8562941152f0484807c5c2d
     geprueft_am: 2026-11-13
-pin_title: "Unfallversicherung 2026: Sinnvoll? Kosten & Leistungen im Check"
-pin_description: "*Werbung | Für wen sich eine private Unfallversicherung lohnt, was gute Tarife kosten und welche Punkte wie Progression, Gliedertaxe und Unfallrente wirklich zählen. Mehr Spartipps auf FranksFinanzcheck! #unfallversicherung #unfallversicherungkosten #gliedertaxe"
+pin_title: "Unfallversicherung Vergleich 2026: Sinnvoll? Kosten"
+pin_description: "*Werbung | Eine Unfallversicherung ersetzt nicht jedes entfallene Einkommen. Prüfe, wann der Vertrag bei bleibender Beeinträchtigung leistet und wie viel. Trenne die einmalige Leistung nach einem Unfall von laufenden Ausgaben. Prüfe, welchen finanziellen Bedarf du mit dem Vertrag überhaupt abdecken willst."
 quellen:
   - id: "Q1"
     titel: "Private Unfallversicherung – überflüssig oder sinnvoll?"
@@ -188,6 +188,7 @@ redaktionelle_pruefung:
       pruefung: "Wiederholung der dokumentierten Orientierungsempfehlung"
       konsistenzpruefung: "Dritte identische Verwendung im Artikel"
       quellen: ["Q1"]
+summary: "Eine Unfallversicherung ersetzt nicht jedes entfallene Einkommen. Prüfe, wann der Vertrag bei bleibender Beeinträchtigung leistet und wie viel."
 ---
 
 Ein Sturz auf der Treppe. Ein Radunfall.

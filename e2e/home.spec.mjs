@@ -15,6 +15,11 @@ test.describe('Startseite', () => {
     expect(await h1.count(), 'Startseite: genau ein H1').toBe(1);
     expect((await h1.first().textContent()).trim().length).toBeGreaterThan(10);
 
+    const auswahl = page.getByRole('region', { name: 'Vier Ratgeber für deinen Fixkosten-Check' });
+    await expect(auswahl.getByRole('link')).toHaveCount(4);
+    await expect(page.getByRole('link', { name: 'Fixkosten-Check starten' })).toHaveAttribute('href', /\/cockpit\/$/);
+    await expect(page.getByRole('heading', { name: 'Weitere Spartipps', exact: true })).toBeVisible();
+
     // Teaser: Pager zeigt 8 Beiträge pro Seite – mindestens 6 erwartet
     const teasers = page.locator('article.post-entry');
     expect(await teasers.count(), 'Startseite: Artikel-Teaser sichtbar').toBeGreaterThanOrEqual(6);

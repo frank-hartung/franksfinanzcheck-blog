@@ -1,6 +1,6 @@
 ---
 title: "Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer"
-description: "Handyvertrag kündigen: Prüfe Laufzeit, Kündigungsweg und Gesamtkosten. So wechselst du informiert, ohne veraltete Fristen oder Sparversprechen."
+description: "Für die Kündigung deines Handyvertrags zählt nicht nur der Versand. Prüfe Enddatum, Eingangsbestätigung und Ablauf der Rufnummernmitnahme."
 date: 2026-10-12T06:02:53Z
 draft: false
 reserve_published: 2026-10-12
@@ -9,8 +9,8 @@ categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
 keywords: ["Handyvertrag kündigen", "Handyvertrag", "Mobilfunkvertrag", "Kündigungsfrist", "Tarifwechsel"]
-pin_title: "Handyvertrag kündigen: Enddatum und Nachweis sichern"
-pin_description: "*Werbung | Handyvertrag kündigen: Prüfe Laufzeit, Kündigungsweg und Gesamtkosten. So wechselst du informiert, ohne veraltete Fristen oder Sparversprechen. Mehr Spartipps auf FranksFinanzcheck! #handyvertragkuendigen #handyvertrag #mobilfunkvertrag"
+pin_title: "Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer"
+pin_description: "*Werbung | Für die Kündigung deines Handyvertrags zählt nicht nur der Versand. Prüfe Enddatum, Eingangsbestätigung und Ablauf der Rufnummernmitnahme. Speichere die Bestätigung unabhängig vom Kundenportal. Wenn der Zugang nach Vertragsende wegfällt, hast du Enddatum und Vorgangsnummer trotzdem zur Hand."
 ai_generated: true
 ai_provider: "Editorial revision"
 engine_level: "draft"
@@ -216,6 +216,8 @@ Vergleiche die erste Rechnung mit dem Angebot und der Bestätigung. Prüfe Grund
 Wenn ein Betrag nicht passt, bitte den Anbieter um eine Aufstellung. So lässt sich die Rechnung besser prüfen.
 
 Du erkennst, ob ein Posten einmalig anfällt oder wiederkehrt.
+
+**Für deinen nächsten Check:** Speichere die Bestätigung unabhängig vom Kundenportal. Wenn der Zugang nach Vertragsende wegfällt, hast du Enddatum und Vorgangsnummer trotzdem zur Hand.
 
 **Weiterlesen:** [Ratgeber Internet und DSL](../../pillar/internet-dsl/) · [Handytarif vergleichen: Worauf es ankommt](../../posts/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife/) · [Preiswert surfen: DSL-Anschluss prüfen](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/) · [Mesh WLAN nachrüsten](../../posts/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung/)
 
