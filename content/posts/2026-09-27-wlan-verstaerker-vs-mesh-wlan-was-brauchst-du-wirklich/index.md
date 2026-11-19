@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-10-13
-title: "WLAN-Repeater oder Mesh: Was passt zu deiner Wohnung?"
-description: "Ein Funkloch in einem Zimmer oder schwaches WLAN auf mehreren Etagen? Prüfe Standort und Signal zum Router, bevor du Repeater oder Mesh kaufst."
+title: "DSL Hacks: Was passt zu deiner Wohnung?"
+description: "DSL Hacks: Ein Funkloch in einem Zimmer oder schwaches WLAN auf mehreren Etagen? Prüfe Standort und Signal zum Router, bevor du Repeater oder…"
 date: 2026-09-28T01:05:48Z
 draft: false
 reserve_published: 2026-09-28
@@ -9,9 +9,9 @@ tags: ["WLAN verbessern"]
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["DSL Hacks", "Schnelles Internet zuhause", "Mesh Netzwerk", "WLAN-Verstärker vs. Mesh-WLAN", "WLAN Verstärker vs. Mesh WLAN", "WLAN-Verstärker", "Mesh-WLAN"]
-pin_title: "WLAN-Repeater oder Mesh: Was passt zu deiner Wohnung?"
-pin_description: "*Werbung | Ein Funkloch in einem Zimmer oder schwaches WLAN auf mehreren Etagen? Prüfe Standort und Signal zum Router, bevor du Repeater oder Mesh kaufst. Prüfe den vorgesehenen Standort des Repeaters mit dem Handy. Empfängt es dort kaum ein Signal vom Router, kann auch ein neues Gerät diesen Standort nicht beliebig ausgleichen."
+keywords: ["DSL Hacks", "Schnelles Internet zuhause", "Mesh Netzwerk", "WLAN-Verstärker vs. Mesh-WLAN", "WLAN Verstärker vs. Mesh WLAN", "WLAN-Verstärker", "Mesh-WLAN", "WLAN-Repeater oder Mesh"]
+pin_title: "Funklöcher adé: WLAN-Verstärker oder Mesh-System?"
+pin_description: "*Werbung | Ein Zimmer mit Empfang, das nächste ohne – das Kästchen aus dem Elektromarkt hilft da oft nur halb: Wir zeigen, wann ein 30-€-Repeater reicht, wann nur ein Mesh-System Ruhe bringt und was beide Lösungen wirklich kosten. Jetzt lesen!"
 ai_generated: true
 kurzantwort: "Ein WLAN-Verstärker (Repeater) für 20 bis 60 Euro genügt, wenn nur ein einzelner Raum schlecht versorgt ist und dein Grundspeed stimmt. Mesh-WLAN für 150 bis 400 Euro lohnt sich, wenn mehrere Räume oder Etagen betroffen sind und viele Geräte gleichzeitig unterwegs sein sollen. Wichtig: Prüfe vor jedem Kauf, ob nicht dein Internetvertrag selbst der Flaschenhals ist – dann hilft die beste WLAN-Technik nichts."
 cover:
@@ -41,7 +41,7 @@ faktencheck: "2026-10-13"
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 ---
 
-Wenn ein Video neben dem Router flüssig läuft und im Arbeitszimmer stockt, ist ein teurerer Internettarif nicht der erste Test. Entscheidend ist, wie das Signal vom Router bis zum Gerät gelangt.
+DSL Hacks im Check: Wenn ein Video neben dem Router flüssig läuft und im Arbeitszimmer stockt, ist ein teurerer Internettarif nicht der erste Test. Entscheidend ist, wie das Signal vom Router bis zum Gerät gelangt.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 

@@ -9,7 +9,7 @@ tags: ["Heizkosten senken", "Gastarif wechseln", "Gasrechnung prüfen", "Stromko
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Ökostrom Anbieter wechseln", "Grüner Strom günstig", "Ökostrom Tarife vergleichen"]
+keywords: ["Ökostrom Anbieter wechseln", "Grüner Strom günstig", "Ökostrom Tarife vergleichen", "Ökostromanbieter wechseln", "Ökostromanbieter"]
 pin_title: "Ökostromanbieter wechseln: Tarif, Herkunft und Preis prüfen"
 pin_description: "*Werbung | Ökostromtarife unterscheiden sich bei Herkunftsnachweis, Vertragsbindung und Preis. Prüfe diese Punkte getrennt, bevor du den Wechsel beauftragst. Setze bei beiden Tarifen denselben Verbrauch an. Nur dann erkennst du, ob ein Preisunterschied vom Tarif oder lediglich von einer anderen Verbrauchsschätzung kommt."
 ai_generated: true

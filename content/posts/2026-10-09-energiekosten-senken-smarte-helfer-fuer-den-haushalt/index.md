@@ -1,6 +1,6 @@
 ---
 title: "Energiekosten senken: Smarte Helfer für den Haushalt"
-description: "Welche smarte Steuerung passt zum Haushalt? Miss erst den Verbrauch ohne Automatik und prüfe danach, welche unnötigen Betriebsstunden entfallen."
+description: "Energiekosten: Welche smarte Steuerung passt zum Haushalt? Miss erst den Verbrauch ohne Automatik und prüfe danach, welche unnötigen…"
 
 date: 2026-10-16T18:36:02Z
 lastmod: 2026-11-04

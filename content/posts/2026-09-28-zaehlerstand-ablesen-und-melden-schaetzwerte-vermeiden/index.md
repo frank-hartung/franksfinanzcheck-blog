@@ -1,6 +1,6 @@
 ---
 title: "Zählerstand ablesen und melden: Schätzwerte vermeiden"
-description: "Lies Zählernummer und Stand am Gerät ab, fotografiere die Anzeige und bewahre die Meldebestätigung auf. So kannst du spätere Schätzwerte erkennen."
+description: "Zählerstand ablesen: Lies Zählernummer und Stand am Gerät ab, fotografiere die Anzeige und bewahre die Meldebestätigung auf. So kannst du spätere…"
 date: 2026-09-28T06:10:00Z
 lastmod: 2026-10-13
 draft: false

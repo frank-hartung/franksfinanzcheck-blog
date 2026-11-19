@@ -1,14 +1,16 @@
 {
   "slug": "mietwagen",
   "titel": "Mietwagen & Reisen: Der große Ratgeber zum Geld sparen",
-  "erzeugt": "2026-10-27 10:01 UTC",
+  "erzeugt": "2026-11-19 13:51 UTC",
   "faellig": {
-    "faellig": true,
-    "prio": 1,
+    "faellig": false,
+    "prio": 9,
     "klasse": "saisonal",
-    "grund": "30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal)",
-    "alter_tage": 30,
-    "intervall": 30
+    "grund": "frisch geprüft vor 23 Tagen (Intervall 30 Tage)",
+    "alter_tage": 23,
+    "intervall": 30,
+    "frist": "2026-11-26",
+    "restlaufzeit": 7
   },
   "geo": {
     "punkte": 5,
@@ -43,6 +45,9 @@
   ],
   "befunde": [],
   "fehler": [
-    "Verbraucherzentrale – Reise: Feed nicht lesbar"
-  ]
+    "Verbraucherzentrale – Reise: Abruf fehlgeschlagen (HTTP Error 404: Not Found)"
+  ],
+  "fassung_sha256": "e1af3a523f9a86400f7284a81ed15c4947051702b636cae0e1b9a24524e064f8",
+  "text_sha256": "43cfd1496eadc8fdd8cefd3404f694dc4355161faa2ae79fe08f32bf856da253",
+  "fachpruefung": "geprüft (groq:openai/gpt-oss-120b); 5 Befund(e) ohne belegbaren Textanker verworfen"
 }

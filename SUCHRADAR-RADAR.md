@@ -1,6 +1,6 @@
 # SUCHRADAR – Status
 
-> Stand: 2026-11-18 16:45:38 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
+> Stand: 2026-11-19 16:51:42 Uhr · Anbieter: searxng, duckduckgo, duckduckgo_lite, mojeek, wikipedia
 > Schlüssellos · 0 € · Anleitung: `docs/ANLEITUNG-SUCHRADAR.md`
 
 ## Lauf
@@ -13,18 +13,18 @@
 | Fehlgeschlagen | 3 |
 | Übersprungen (Budget) | 0 |
 | Treffer gesamt | 187 |
-| Davon organisch | 10 |
+| Davon organisch | 0 |
 | Eigene Treffer | 0 von 22 Anfragen |
 
 ## Datenqualität
 
 | Kennzahl | Wert |
 |---|---|
-| Anfragen mit echtem Suchindex | 1 von 22 |
-| Anfragen nur mit Wissens-Rückfall | 21 |
-| Organische Treffer | 10 von 187 |
-| Rückfall-Anteil | 95 % |
-| Aussagekraft | eingeschraenkt |
+| Anfragen mit echtem Suchindex | 0 von 22 |
+| Anfragen nur mit Wissens-Rückfall | 22 |
+| Organische Treffer | 0 von 187 |
+| Rückfall-Anteil | 100 % |
+| Aussagekraft | keine |
 
 _Nur organische Treffer gehen in Rang und Wettbewerb ein. Der Wikipedia-Rückfall verhindert leere Läufe, ist aber kein Ranking._
 
@@ -32,8 +32,7 @@ _Nur organische Treffer gehen in Rang und Wettbewerb ein. Der Wikipedia-Rückfal
 
 | Anbieter | Abrufe | Limit |
 |---|---|---|
-| searxng | 1 | 400 |
-| wikipedia | 21 | 300 |
+| wikipedia | 22 | 300 |
 
 ## Eigene Sichtbarkeit
 
@@ -41,18 +40,7 @@ _Kein eigener Treffer in den gemessenen Anfragen._
 
 ## Wettbewerb
 
-| Domäne | Treffer | Top 3 | Ø Rang | Bester Rang |
-|---|---|---|---|---|
-| ing.de | 1 | 1 | 1.0 | 1 |
-| falk-ratgeber.de | 1 | 1 | 2.0 | 2 |
-| geldkiste.blog | 1 | 1 | 3.0 | 3 |
-| finanzenfroh.com | 1 | 0 | 4.0 | 4 |
-| sparschweinclub.de | 1 | 0 | 5.0 | 5 |
-| das-wohnen-und-leben-magazin.de | 1 | 0 | 6.0 | 6 |
-| finanz-junkie.de | 1 | 0 | 7.0 | 7 |
-| geldfinanzen24.de | 1 | 0 | 8.0 | 8 |
-| cluvon.com | 1 | 0 | 9.0 | 9 |
-| budgetheldin.de | 1 | 0 | 10.0 | 10 |
+_Keine Treffer ausgewertet._
 
 ## Störungen
 

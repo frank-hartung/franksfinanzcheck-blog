@@ -1,6 +1,6 @@
 {
   "strompreis-entwicklung": {
-    "zuletzt": "2026-10-15"
+    "zuletzt": "2026-11-19"
   },
   "gaspreis-entwicklung": {
     "zuletzt": "2026-10-22"
@@ -10,5 +10,8 @@
   },
   "kontofuehrungsgebuehren": {
     "zuletzt": "2026-11-05"
+  },
+  "kuendigungsfristen-recht": {
+    "zuletzt": "2026-11-19"
   }
 }

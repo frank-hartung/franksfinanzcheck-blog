@@ -1,6 +1,6 @@
 ---
 title: "Energieeffizienz im Haushalt: 5 schnelle Spartricks"
-description: "Beim Stromsparen zählt die Kombination aus Leistung und Laufzeit. Prüfe fünf typische Anwendungen und beginne dort, wo eine Änderung messbar ist."
+description: "Energieeffizienz: Beim Stromsparen zählt die Kombination aus Leistung und Laufzeit. Prüfe fünf typische Anwendungen und beginne dort, wo eine…"
 date: 2026-10-26T01:14:06Z
 draft: false
 reserve_published: 2026-10-26
@@ -42,7 +42,7 @@ faktencheck: 2026-11-16
 kurzantwort: "Reduziere die Raumtemperatur um einen Grad, nutze LED‑Leuchten, stelle den Kühlschrank auf 4 °C und das Gefrierfach auf –18 °C, installiere Zeitschaltuhren für Geräte und ziehe regelmäßig die Dichtungen von Fenstern und Türen nach. Durch diese fünf Schritte lässt sich der Haushaltsstromverbrauch meist um 10 % – 15 % senken."
 ---
 
-Wer den Stromverbrauch senken möchte, braucht einen Ausgangswert. Lies den Zähler ab oder nutze ein Messgerät, bevor du eine Einstellung änderst. Erst der Vergleich zeigt den Unterschied.
+Energieeffizienz im Check: Wer den Stromverbrauch senken möchte, braucht einen Ausgangswert. Lies den Zähler ab oder nutze ein Messgerät, bevor du eine Einstellung änderst. Erst der Vergleich zeigt den Unterschied.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 

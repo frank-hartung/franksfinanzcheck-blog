@@ -1,6 +1,6 @@
 ---
 title: "Warmwasser sparen: Was kostet dich eine Dusche?"
-description: "Was kostet eine Dusche? Miss den Durchfluss und notiere die Dauer. Für die Rechnung macht es einen Unterschied, wie dein Wasser erwärmt wird."
+description: "Warmwasser sparen: Was kostet eine Dusche? Miss den Durchfluss und notiere die Dauer. Für die Rechnung macht es einen Unterschied, wie dein Wasser…"
 date: 2026-08-26T06:10:00Z
 lastmod: 2026-11-07
 draft: false
@@ -8,7 +8,7 @@ tags: ["Heizkosten senken", "Gasrechnung prüfen"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Warmwasser sparen", "Warmwasserkosten senken", "Heizkostenabrechnung", "Duschkosten", "Warmwasser", "Frugalismus", "Geld sparen"]
+keywords: ["Warmwasser sparen", "Warmwasserkosten senken", "Heizkostenabrechnung", "Duschkosten", "Warmwasser", "Frugalismus", "Geld sparen", "minimalistisch leben"]
 pin_title: "Warmwasser sparen: Was kostet dich eine Dusche?"
 pin_description: "*Werbung | Was kostet eine Dusche? Miss den Durchfluss und notiere die Dauer. Für die Rechnung macht es einen Unterschied, wie dein Wasser erwärmt wird. Miss, wie lange es dauert, einen Eimer mit bekanntem Volumen zu füllen. Damit lässt sich der Durchfluss berechnen, ohne dass du eine Schätzung aus der Werbung übernehmen musst."
 ai_generated: true

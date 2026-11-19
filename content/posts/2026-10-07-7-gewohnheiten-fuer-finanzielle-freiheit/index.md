@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-04
-title: "Sieben Gewohnheiten für den Umgang mit deinem Geld"
-description: "Wähle eine von sieben Geldgewohnheiten und gib ihr einen festen Termin. Kontrolliere beim nächsten Kontoauszug, ob sie im Alltag tatsächlich funktioniert."
+title: "Sieben Gewohnheiten: Für den Umgang mit deinem Geld"
+description: "7 Gewohnheiten für finanzielle Freiheit: Wähle eine von sieben Geldgewohnheiten und gib ihr einen festen Termin. Kontrolliere beim nächsten Kontoauszug…"
 date: 2026-10-09T02:12:31Z
 draft: false
 reserve_published: 2026-10-09
@@ -9,7 +9,7 @@ reserve_intake: "2026-10-05 – WF-B594: triage-reif, Risikoklasse standard, Fak
 tags: ["Frugalismus", "Geld sparen im Alltag", "Budget planen"]
 categories: ["Ratgeber"]
 pillar: "frugalismus"
-keywords: ["7 Gewohnheiten für finanzielle Freiheit", "Finanzielle Freiheit", "Budget planen", "Rücklagen bilden", "Fixkosten prüfen", "Gewohnheiten", "finanzielle"]
+keywords: ["7 Gewohnheiten für finanzielle Freiheit", "Finanzielle Freiheit", "Budget planen", "Rücklagen bilden", "Fixkosten prüfen", "Gewohnheiten", "finanzielle", "Sieben Gewohnheiten"]
 author: "Frank Hartung"
 ai_generated: true
 ai_provider: "Editorial revision"
@@ -43,7 +43,6 @@ quellen:
     datum: "2026-10-07"
 faktencheck: 2026-11-15
 ---
-
 
 Sieben Gewohnheiten für [finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) im Check: [Finanzielle Freiheit](../../posts/2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps/) klingt nach einem großen Ziel. Im Alltag beginnt sie oft mit kleinen, klaren Entscheidungen.
 

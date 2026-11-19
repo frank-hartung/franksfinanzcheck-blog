@@ -2205,6 +2205,28 @@
   },
   "fachbefunde": [
     {
+      "id": "1b7c9b9cac0290f71242",
+      "slug": "2026-08-10-dsl-wechselbonus-sichern",
+      "fassung_sha256": "48bfccbc14a6fa49a7ac6c5a077a23bfd723973fee892880ecca7f84b132fa6b",
+      "text_sha256": "af037ea121477d0853771b4407f1b204786c99c9c600b99cd094677e10402ae1",
+      "typ": "luecke",
+      "text": "Aktuelle Wechselangebote ermöglichen oft Einsparungen von ca. 10 € bis 25 € pro Monat im Vergleich zu veralteten Bestandskundentarifen.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "zuletzt_gesehen": "2026-11-19 13:54 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "ee260c27a6bfdd60fa04",
+      "slug": "2026-08-10-dsl-wechselbonus-sichern",
+      "fassung_sha256": "48bfccbc14a6fa49a7ac6c5a077a23bfd723973fee892880ecca7f84b132fa6b",
+      "text_sha256": "af037ea121477d0853771b4407f1b204786c99c9c600b99cd094677e10402ae1",
+      "typ": "luecke",
+      "text": "Ein Tarif mit ca. 200 € bis 300 € Bonus wirkt auf den ersten Blick unschlagbar; das ist ein Modellwert.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "zuletzt_gesehen": "2026-11-19 13:54 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
       "typ": "praezision",
       "text": "Die Bewerbung des Vergleichsportals mit dem Superlativ 'Die besten Tarife' erfolgt ohne messbare Daten oder Auswahlkriterien in der Recherchegrundlage.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
@@ -2230,6 +2252,50 @@
       "slug": "2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas",
       "fassung_sha256": "98a213340f9575bbf5467cc47ce3fe215a6b35fdff87c861ec458c2dd958076b",
       "zuletzt_gesehen": "2026-11-01 11:29 UTC"
+    },
+    {
+      "id": "1d4095501e717fb30d7b",
+      "slug": "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden",
+      "fassung_sha256": "ca6965fdd7332f41447bae9547ac796edc582cb935cc860b1b7432d738274a9c",
+      "text_sha256": "0330d7e6b58dd159eea14117c2c5175be908d71c450a928351602f3c8c581dce",
+      "typ": "luecke",
+      "text": "Der Hinweis auf einen „Wochenend‑Effekt“ bei Devisenkursen wird ohne Quellenangabe gemacht.",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-19 13:55 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "77520584b5afd8ebd7f7",
+      "slug": "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden",
+      "fassung_sha256": "ca6965fdd7332f41447bae9547ac796edc582cb935cc860b1b7432d738274a9c",
+      "text_sha256": "0330d7e6b58dd159eea14117c2c5175be908d71c450a928351602f3c8c581dce",
+      "typ": "luecke",
+      "text": "Es wird angegeben, dass der Kurs am Automaten häufig über dem Referenzkurs der Bank liegt, jedoch fehlt ein Beleg dafür.",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-19 13:55 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "a3be3d50280d4fe0a1d8",
+      "slug": "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden",
+      "fassung_sha256": "ca6965fdd7332f41447bae9547ac796edc582cb935cc860b1b7432d738274a9c",
+      "text_sha256": "0330d7e6b58dd159eea14117c2c5175be908d71c450a928351602f3c8c581dce",
+      "typ": "luecke",
+      "text": "Der Artikel behauptet, dass der Betreiber des Automaten ein eigenes Entgelt verlangt, ohne dafür eine Quelle anzugeben.",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-19 13:55 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "d6cc7bae16dead3e610b",
+      "slug": "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden",
+      "fassung_sha256": "ca6965fdd7332f41447bae9547ac796edc582cb935cc860b1b7432d738274a9c",
+      "text_sha256": "0330d7e6b58dd159eea14117c2c5175be908d71c450a928351602f3c8c581dce",
+      "typ": "praezision",
+      "text": "Die Empfehlung, nur Automaten von Banken und nicht von Aufstellern in Touristenzonen zu nutzen, ist unspezifisch und nicht durch Daten belegt.",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-19 13:55 UTC",
+      "herkunft": "dossier-nachlese"
     },
     {
       "typ": "luecke",
@@ -3581,6 +3647,28 @@
       "zuletzt_gesehen": "2026-11-13 12:35 UTC"
     },
     {
+      "id": "7c2624072c861d136c96",
+      "slug": "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
+      "fassung_sha256": "d6b9a72def7ff8dac7aae9b481bf2c9ae0d5c582a211d2d616b1300c364361db",
+      "text_sha256": "fce20800cae12767e85dd0cc83b701b4b3aa55e3137056d0a1f46f9ad4c8dad8",
+      "typ": "luecke",
+      "text": "Die pauschale Behauptung zu Preisunterschieden zwischen Standardtarifen und Angeboten ist ein Marktdatum ohne Beleg oder eigene Messung (Regel 9a/9e).",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "zuletzt_gesehen": "2026-11-19 13:50 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "d9d3004fbc05895c3f79",
+      "slug": "2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt",
+      "fassung_sha256": "d6b9a72def7ff8dac7aae9b481bf2c9ae0d5c582a211d2d616b1300c364361db",
+      "text_sha256": "fce20800cae12767e85dd0cc83b701b4b3aa55e3137056d0a1f46f9ad4c8dad8",
+      "typ": "praezision",
+      "text": "Die Aussage zum steigenden Strompreis ist unpräzise; die Quelle belegt einen konkreten Anstieg der Energiepreise um +12,7 %.",
+      "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      "zuletzt_gesehen": "2026-11-19 13:50 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
       "typ": "luecke",
       "text": "Behauptung, dass ein fehlender Ausweis zu empfindlichen Bußgeldern führt, fehlt eine belegbare Quelle.",
       "stelle": "Ein fehlender Energieausweis kann beim Verkauf oder bei der Vermietung teure Bußgelder auslösen.",
@@ -4131,6 +4219,50 @@
       "text": "Die Angabe, dass für zwei HD‑Streams gleichzeitig etwa 30 Mbit/s benötigt werden, ist nicht durch Daten belegt und lässt Spielraum für Fehlinterpretationen.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
       "zuletzt_gesehen": "2026-10-30 11:01 UTC"
+    },
+    {
+      "id": "381dd90113dd1ee72f39",
+      "slug": "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
+      "fassung_sha256": "0065b3b8f00d97f80cfc1e406cb2e6a3d5078925a1dbc290c9a27c141a3274b6",
+      "text_sha256": "048e53bc3ce9e801c73fed65c3e1edd5b2467d4ddfded1772047532e130b9cb9",
+      "typ": "praezision",
+      "text": "Das Versprechen, 'alle Gebühren' auf Portalen zu sehen, ist ohne Messgröße unpräzise, da Portale systembedingt nur eine Marktauswahl zeigen.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "zuletzt_gesehen": "2026-11-19 13:51 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "4483a81dd1c292034cd0",
+      "slug": "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
+      "fassung_sha256": "0065b3b8f00d97f80cfc1e406cb2e6a3d5078925a1dbc290c9a27c141a3274b6",
+      "text_sha256": "048e53bc3ce9e801c73fed65c3e1edd5b2467d4ddfded1772047532e130b9cb9",
+      "typ": "praezision",
+      "text": "Die Warnung vor einer 'sehr hohen Strafgebühr' am Gate ist ein Superlativ ohne messbare Daten oder konkrete Preisbeispiele.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "zuletzt_gesehen": "2026-11-19 13:51 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "6f4b591e9cadb27adf49",
+      "slug": "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
+      "fassung_sha256": "0065b3b8f00d97f80cfc1e406cb2e6a3d5078925a1dbc290c9a27c141a3274b6",
+      "text_sha256": "048e53bc3ce9e801c73fed65c3e1edd5b2467d4ddfded1772047532e130b9cb9",
+      "typ": "luecke",
+      "text": "Bei der Erwähnung von Stornierungen durch Airlines fehlt der Hinweis auf den rechtlichen Rahmen (z. B. EU-Fluggastrechte).",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "zuletzt_gesehen": "2026-11-19 13:51 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "cf60024b74a5e86b50c0",
+      "slug": "2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege",
+      "fassung_sha256": "0065b3b8f00d97f80cfc1e406cb2e6a3d5078925a1dbc290c9a27c141a3274b6",
+      "text_sha256": "048e53bc3ce9e801c73fed65c3e1edd5b2467d4ddfded1772047532e130b9cb9",
+      "typ": "luecke",
+      "text": "Die statistische Aussage zur Preisgünstigkeit von Dienstag und Mittwoch ist eine Marktprognose ohne Beleg in der genannten Quelle.",
+      "beleg": "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet",
+      "zuletzt_gesehen": "2026-11-19 13:51 UTC",
+      "herkunft": "dossier-nachlese"
     },
     {
       "id": "176642ea8acfa44f1152",
@@ -4779,6 +4911,39 @@
       "zuletzt_gesehen": "2026-11-17 13:49 UTC"
     },
     {
+      "id": "2841f905d6afd6b62283",
+      "slug": "2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung",
+      "fassung_sha256": "9e103c7fc6693c828a2456fcc69eb4b766c47744c1e85f3e72ceee02351ac479",
+      "text_sha256": "d143a160c052f7c5a26eb6640512911468494693d8f7019cf3c27631a1db5d78",
+      "typ": "luecke",
+      "text": "Der Artikel nutzt einen Pauschalpreis von 30 Cent/kWh als Marktfakt ohne Quellenbeleg. Referenzwerte für den Energiemarkt unterliegen der Aufsicht der Bundesnetzagentur.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "zuletzt_gesehen": "2026-11-19 13:50 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "517fa8859b484cd76465",
+      "slug": "2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung",
+      "fassung_sha256": "9e103c7fc6693c828a2456fcc69eb4b766c47744c1e85f3e72ceee02351ac479",
+      "text_sha256": "d143a160c052f7c5a26eb6640512911468494693d8f7019cf3c27631a1db5d78",
+      "typ": "luecke",
+      "text": "Der relevante Regulierungsrahmen für den Energiemarkt und die damit verbundenen Unternehmenspflichten gegenüber Verbrauchern werden nicht erwähnt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "zuletzt_gesehen": "2026-11-19 13:50 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "e11e305aefae61e25820",
+      "slug": "2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung",
+      "fassung_sha256": "9e103c7fc6693c828a2456fcc69eb4b766c47744c1e85f3e72ceee02351ac479",
+      "text_sha256": "d143a160c052f7c5a26eb6640512911468494693d8f7019cf3c27631a1db5d78",
+      "typ": "praezision",
+      "text": "Die Empfehlung eines einzelnen Portals zur Prüfung von Förderungen oder Tarifen suggeriert eine Marktvollständigkeit, die ohne Nennung von Auswahlkriterien unpräzise ist.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "zuletzt_gesehen": "2026-11-19 13:50 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
       "typ": "luecke",
       "text": "Die im 'Zins-Marktradar Q4 2026' genannten Benchmark-Daten für Tagesgeld (3,10–3,45 %) und Dispozinsen (11,5–13,8 %) werden der Bundesbank und BaFin zugeschrieben, sind jedoch in den Recherche-Fundstellen nicht belegt.",
       "beleg": "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
@@ -4807,6 +4972,50 @@
       "fassung_sha256": "adf20e5c45365e82154c2a4dad019c9d19f11e25a4c3c3516d33a80b1cb9dc55",
       "text_sha256": "e54a9d241a31dcdd0638d1161dc5f7f38a47f161e40e62638caf4d19e00fc881",
       "zuletzt_gesehen": "2026-11-11 12:08 UTC"
+    },
+    {
+      "id": "088b234647d33a67dc6d",
+      "slug": "internet-dsl",
+      "fassung_sha256": "e71a52838afac4a63b6de6dc5675f67276a2bf2b63fab4a668f422dc6d38ac47",
+      "text_sha256": "4bc4fd7a020860e382c4c32e877907c0a55dbccf102c9a6945836fbcddd70948",
+      "typ": "praezision",
+      "text": "Die Bezeichnung als 'Markt-Benchmarks' suggeriert eine Marktabdeckung ohne Nennung von Messgrößen, Datenbasis oder Auswahlkriterien.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "zuletzt_gesehen": "2026-11-19 13:52 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "b8885c27121a5cc10a85",
+      "slug": "internet-dsl",
+      "fassung_sha256": "e71a52838afac4a63b6de6dc5675f67276a2bf2b63fab4a668f422dc6d38ac47",
+      "text_sha256": "4bc4fd7a020860e382c4c32e877907c0a55dbccf102c9a6945836fbcddd70948",
+      "typ": "praezision",
+      "text": "Die BNetzA 'garantiert' die Weiterversorgung nicht selbst; sie überwacht die gesetzlichen Anbieterpflichten, die den technischen Prozess regeln.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "zuletzt_gesehen": "2026-11-19 13:52 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "5bf7111c673ee53be341",
+      "slug": "konto-karten",
+      "fassung_sha256": "05cbb2a1097b1af7109628797ea381c3ab52b6fb51e49b20560689878401fe0b",
+      "text_sha256": "948463f5b4fab20465abe4e9625a37590d9f8542400f6e9bb216c38bfda76184",
+      "typ": "praezision",
+      "text": "Superlativ „Mehrfach als Testsieger ausgezeichnet“ ohne messbare Daten oder Quelle.",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-19 13:53 UTC",
+      "herkunft": "dossier-nachlese"
+    },
+    {
+      "id": "b3c137c4bb2ebd44eb74",
+      "slug": "konto-karten",
+      "fassung_sha256": "05cbb2a1097b1af7109628797ea381c3ab52b6fb51e49b20560689878401fe0b",
+      "text_sha256": "948463f5b4fab20465abe4e9625a37590d9f8542400f6e9bb216c38bfda76184",
+      "typ": "luecke",
+      "text": "Keine Quelle für die Aussage, dass viele Banken Neukunden‑Zinsgarantien für drei bis sechs Monate bieten.",
+      "beleg": "",
+      "zuletzt_gesehen": "2026-11-19 13:53 UTC",
+      "herkunft": "dossier-nachlese"
     },
     {
       "typ": "luecke",
@@ -5322,9 +5531,9 @@
       "faellig": false,
       "frist": "2026-12-01",
       "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
+      "befund": true,
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
@@ -5344,9 +5553,9 @@
       "faellig": false,
       "frist": "2026-12-02",
       "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
+      "befund": true,
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
     },
     {
       "slug": "2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer",
@@ -5428,11 +5637,33 @@
       "status": "unvollstaendig"
     },
     {
+      "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
+      "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
+      "grund": "frisch geprüft vor 17 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-12-01",
+      "geo": 100,
+      "befund": true,
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
+    },
+    {
       "slug": "2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen",
       "titel": "Preisgarantie Gas: Was bei Preiserhöhung hilft",
       "grund": "frisch geprüft vor 17 Tagen (Intervall 30 Tage)",
       "faellig": false,
       "frist": "2026-12-01",
+      "geo": 100,
+      "befund": true,
+      "unvollstaendig": true,
+      "status": "unvollstaendig"
+    },
+    {
+      "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
+      "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
+      "grund": "frisch geprüft vor 16 Tagen (Intervall 30 Tage)",
+      "faellig": false,
+      "frist": "2026-12-02",
       "geo": 100,
       "befund": true,
       "unvollstaendig": true,
@@ -5813,28 +6044,6 @@
       "befund": false,
       "unvollstaendig": false,
       "status": "vorlauf"
-    },
-    {
-      "slug": "2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden",
-      "titel": "Gasrechnung senken: Fehler im Spätsommer vermeiden",
-      "grund": "frisch geprüft vor 17 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-01",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
-    },
-    {
-      "slug": "2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort",
-      "titel": "Heizkosten senken: Mit diesen Strategien sparst du sofort",
-      "grund": "frisch geprüft vor 16 Tagen (Intervall 30 Tage)",
-      "faellig": false,
-      "frist": "2026-12-02",
-      "geo": 100,
-      "befund": false,
-      "unvollstaendig": false,
-      "status": "vorlauf"
     }
   ],
   "laeufe": [
@@ -6061,5 +6270,10 @@
       "ausgemustert_am": "2026-11-17 15:45 UTC",
       "ausgemustert_grund": "Unveröffentlichter Entwurf aus dem Bestand entfernt (keine fachliche Freigabe, #1191)"
     }
-  ]
+  ],
+  "nachlese": {
+    "zeit": "2026-11-19 13:57 UTC",
+    "ergaenzt": 19,
+    "quelle": "data/research/artikel"
+  }
 }

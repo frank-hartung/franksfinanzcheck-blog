@@ -1,5 +1,5 @@
 ---
-title: "Gaspreiserhöhung in der Grundversorgung: Wann kannst du kündigen?"
+title: "Gaspreiserhöhung in der Grundversorgung: Wann kannst"
 description: "Dein Grundversorger erhöht den Gaspreis? Prüfe zuerst, ob du tatsächlich in der Grundversorgung bist, und lies das Wirksamkeitsdatum im Schreiben."
 date: 2026-11-09T11:26:53Z
 draft: false

@@ -1,6 +1,6 @@
 ---
 title: "Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick"
-description: "Rabatte, Vorräte und kleine Abos: Prüfe fünf typische Ausgabenfallen daran, was du tatsächlich nutzt, statt allein auf den Stückpreis zu schauen."
+description: "Frugalismus-Tipps: Rabatte, Vorräte und kleine Abos: Prüfe fünf typische Ausgabenfallen daran, was du tatsächlich nutzt, statt allein auf den Stückpreis…"
 date: 2026-09-07T23:25:42Z
 lastmod: 2026-11-07
 draft: false
@@ -50,7 +50,6 @@ quellen:
     datum: "2026-10-30"
 faktencheck: 2026-11-06
 ---
-
 
 [Frugalismus](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) Im Alltag scheitert selten am guten Vorsatz. Meist scheitert er an kleinen Fehlkäufen, unklaren Routinen und dem Gefühl, Sparen müsse sofort weh tun.
 

@@ -100,6 +100,9 @@ Dabei nutzen wir den 4K-Prüfpfad von FranksFinanzcheck für deine Kostenkontrol
 
 ## Die Mechanik des Sparens: Warum die Beladung zählt
 
+
+Darum geht es hier konkret: Waschmaschine beladen.
+
 Beim Waschen geht es um Reibung.
 Die Wäschestücke müssen sich aneinander reiben, um Schmutz effektiv zu lösen.
 Ist die Maschine zu leer, fallen die Stücke wirkungslos im Wasser herum.
@@ -268,6 +271,9 @@ Wenn die Maschine muffig riecht, neigen viele dazu, mehr Waschmittel oder höher
 Beides kostet Geld.
 Einmal im Monat ein Waschgang bei 60 Grad mit Vollwaschmittel reinigt die Maschine von Bakterien.
 Das ist eine Investition in die Langlebigkeit deines Geräts.
+
+
+Genau das ist der Hebel: Waschmaschine beladen.
 
 ## Fazit: Kleinvieh macht auch Mist
 

@@ -24,8 +24,8 @@ kurzantwort: "Ein Haushaltsbuch funktioniert nur dann dauerhaft, wenn die Method
 
 social_posted: true
 keywords: ["Haushaltsbuch führen", "Haushaltsbuch App", "Excel Haushaltsbuch Vorlage", "Ausgaben tracken", "50 30 20 Regel", "Budgetplanung", "Fixkosten senken"]
-pin_title: "Haushaltsbuch führen: App, Excel oder Stift im Vergleich"
-pin_description: "*Werbung | App, Tabelle oder Papier: Wähle ein Haushaltsbuch, das du auch nächste Woche noch nutzt. Trenne regelmäßige Abbuchungen von einzelnen Einkäufen. Buche eine jährliche Versicherung gedanklich auf zwölf Monate um. So kannst du sie mit einem Monatsabo vergleichen, ohne den nächsten Zahlungstermin aus den Augen zu verlieren."
+pin_title: "Haushaltsbuch führen: App, Excel oder Papier?"
+pin_description: "*Werbung | Haushaltsplanung, die im Alltag hält: App, Excel-Tabelle oder Stift im ehrlichen Vergleich. Mit der 50-30-20-Regel und einem einfachen Wochen-Ritual sparst du bis zu 430 Euro im Monat. Jetzt die Vorlage und Tipps lesen."
 pinwand: "Budget & Haushaltskasse: clever planen"
 quellen:
   - titel: "Gesetzliche Einlagensicherung in Deutschland"

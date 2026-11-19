@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-07
 title: "5 einfache Frugalismus-Tricks für den Alltag: Geld sparen"
-description: "Suche einen Spartipp, der zu deinem Tagesablauf passt. Vergleiche den Kassenbon oder Kontoauszug danach mit einer typischen Woche davor."
+description: "5 einfache Frugalismus-Tricks für den Alltag: Suche einen Spartipp, der zu deinem Tagesablauf passt. Vergleiche den Kassenbon oder Kontoauszug…"
 date: 2026-09-14T12:53:44Z
 draft: false
 reserve_published: 2026-09-14
@@ -24,8 +24,8 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: 91d1c3b08fffa5855688932bdef57986f31ad862c0a03ac58e75e48e7da73e07
     geprueft_am: 2026-11-13
-pin_title: "5 einfache Frugalismus-Tricks für den Alltag: Geld sparen"
-pin_description: "*Werbung | Suche einen Spartipp, der zu deinem Tagesablauf passt. Vergleiche den Kassenbon oder Kontoauszug danach mit einer typischen Woche davor. Probiere eine Veränderung pro Woche aus. So erkennst du, ob eine kleinere Packung, ein anderer Einkaufsweg oder der Verzicht auf ein ungenutztes Abo den Unterschied macht."
+pin_title: "Frugalismus für Einsteiger: 5 Tricks, die sofort funktionieren"
+pin_description: "*Werbung | Frugalismus klingt nach Verzicht – ist aber cleveres Priorisieren: Diese 5 Einsteiger-Tricks zeigen, wie du ohne Verzichtsgefühl 100 € und mehr im Monat freischaufelst. Inklusive der beliebten 30-Tage-Wunschliste. Jetzt starten!"
 pinwand: "Geld sparen im Alltag | Frugalismus-Tipps"
 quellen:
   - titel: "Wirtschaftsrechnungen: Konsumausgaben privater Haushalte"

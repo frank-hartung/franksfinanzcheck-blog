@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 18.11.2026 23:37 (Europe/Berlin)  
+> Automatisch aktualisiert: 19.11.2026 15:30 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -15,7 +15,7 @@
 ### Fr, 20. November 2026
 - **07:30** ⏳ Fenster abdichten: So stoppst du Zugluft an alten Rahmen — _takeaway_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/
-- **11:30** ⏳ Wie viel Streaming‑Bandbreite: Du wirklich brauchst — _mythos_ · Launch  
+- **11:30** ⏳ Wie viel Bandbreite brauchst du fürs Streaming? — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/
 ### Mo, 23. November 2026
 - **07:30** ⏳ Wohngebäudeversicherung Vergleich: Worauf du achten musst — _zahl_ · Evergreen  
@@ -25,12 +25,12 @@
 ### Mi, 25. November 2026
 - **07:30** ⏳ Geschenkkarte: Was du beim Kauf und Aufladen wissen musst — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst/
-- **11:30** ⏳ Secondhand Kleidung: So erkennst du Qualität & sparst — _nutzen_ · Launch  
+- **11:30** ⏳ Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst/
 ### Fr, 27. November 2026
-- **07:30** ⏳ Kaffeemaschine Stromverbrauch: Was kostet die Tasse Kaffee? — _zahl_ · Launch  
+- **07:30** ⏳ Kaffeemaschine: Was kostet eine Tasse wirklich? — _zahl_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/
-- **11:30** ⏳ Mesh WLAN nachrüsten: Schluss mit Funklöchern in der Wohnung — _mythos_ · Launch  
+- **11:30** ⏳ Mesh-WLAN nachrüsten: Wann lohnt sich die Investition? — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung/
 ### Mo, 30. November 2026
 - **07:30** ⏳ Kreditkarte vergleichen: Kostenlos und sicher zahlen — _zahl_ · Evergreen  
@@ -38,7 +38,7 @@
 - **07:30** ⏳ Frugalismus für Einsteiger: Mit kleinen Schritten sparen — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/
 ### Mi, 02. Dezember 2026
-- **07:30** ⏳ Tagesgeld-Zinsen 2026: Die besten Zinssätze im Vergleich — _zahl_ · Evergreen  
+- **07:30** ⏳ Tagesgeld vergleichen: Was bleibt nach dem Aktionszins? — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/
 - **11:30** ⏳ Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/
@@ -61,7 +61,7 @@
 - 🚫 24.10. 07:30 · Strategisch sparen so kannst du deine reisekasse fuellen · Artikel nicht mehr im Bestand
 - 🚫 30.10. 11:30 · Heizoel preise 2026 so findest du den optimalen kaufzeitpu · Artikel nicht mehr im Bestand
 - 🚫 07.11. 11:30 · Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht · Mo/Mi/Fr-Kadenz: Sendetermin Sa 07.11.2026 fiel auf keinen Publikationstag; seit Umstellung vom 06.11.2026 (nur Mo/Mi/Fr) stellt der Plan-Roll die Artikel automatisch auf den nächsten Publikationstag ein.
-- 🚫 07.11. 17:30 · Preisgarantie Gas: Was bei Preiserhöhung hilft · Mo/Mi/Fr-Kadenz: Sendetermin Sa 07.11.2026 fiel auf keinen Publikationstag; seit Umstellung vom 06.11.2026 (nur Mo/Mi/Fr) stellt der Plan-Roll die Artikel automatisch auf den nächsten Publikationstag ein.
+- 🚫 07.11. 17:30 · Gaspreis trotz Garantie erhöht: So prüfst du das Schreiben · Mo/Mi/Fr-Kadenz: Sendetermin Sa 07.11.2026 fiel auf keinen Publikationstag; seit Umstellung vom 06.11.2026 (nur Mo/Mi/Fr) stellt der Plan-Roll die Artikel automatisch auf den nächsten Publikationstag ein.
 - 🚫 11.11. 07:30 · Reisekasse fuellen 7 wege zu mehr budget fuer den urlaub · Artikel nicht mehr im Bestand
 - 🚫 13.11. 07:30 · Wlan verbessern mesh system oder repeater im check · Artikel nicht mehr im Bestand
 - 🚫 14.11. 17:30 · Wohngebäudeversicherung Vergleich: Worauf du achten musst · Mo/Mi/Fr-Kadenz: Sendetermin Sa 14.11.2026 fiel auf keinen Publikationstag; seit Umstellung vom 06.11.2026 (nur Mo/Mi/Fr) stellt der Plan-Roll die Artikel automatisch auf den nächsten Publikationstag ein.

@@ -427,3 +427,8 @@
 {"ts": "2026-11-18T15:43:33Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 10}
 {"ts": "2026-11-18T16:46:09Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
 {"ts": "2026-11-18T16:46:09Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 10}
+{"ts": "2026-11-19T13:38:31Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-26-handytarif-vergleichen-2026-guenstige-tarife", "rules": ["B2", "B3"]}
+{"ts": "2026-11-19T13:38:31Z", "module": "spam_guard", "action": "blog-fix", "slug": "2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich", "rules": ["B3", "B5"]}
+{"ts": "2026-11-19T13:38:32Z", "module": "spam_guard", "action": "feed-fix", "rules": ["F2"]}
+{"ts": "2026-11-19T13:38:32Z", "module": "spam_guard", "action": "csv-fix", "file": "/home/runner/work/franksfinanzcheck-blog/franksfinanzcheck-blog/data/pins_upload.csv", "kept": 0}
+{"ts": "2026-11-19T13:38:32Z", "module": "spam_guard", "action": "run", "channels": ["blog", "feed", "csv", "api"], "fix": true, "hard": 13}

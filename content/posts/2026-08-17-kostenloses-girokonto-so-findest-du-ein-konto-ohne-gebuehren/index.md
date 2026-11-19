@@ -24,8 +24,8 @@ kurzantwort: "Ein echtes kostenloses Girokonto kostet dich keine Gebühr im Mona
 
 social_posted: true
 keywords: ["Kostenloses Girokonto", "Girokonto ohne Gebühren", "C24 Bank", "Girokonto Vergleich", "Kontoführungsgebühren", "Bank wechseln", "loses Giroko"]
-pin_title: "Kostenloses Girokonto: Ein Konto ohne Gebühren finden"
-pin_description: "*Werbung | Ein Girokonto ohne Grundpreis kann im Alltag trotzdem kosten. Prüfe Geldeingang, Kartenpreis und Bargeldgebühren mit deinen eigenen Buchungen. Rechne einen Monat ohne den geforderten Geldeingang durch. Besonders bei schwankendem Einkommen zeigt dieser zweite Fall mehr als die Werbung mit null Euro Grundgebühr."
+pin_title: "Kostenloses Girokonto: Nie wieder Kontoführungsgebühren zahlen"
+pin_description: "*Werbung | 5 €, 8 € oder mehr pro Monat fürs Girokonto? Das muss nicht sein: Dauerhaft kostenlose Konten mit Gratiskarte und Echtzeit-Überweisung warten auf dich. Jetzt vergleichen und bis zu 120 € im Jahr sparen – der Kontowechsel-Service macht den Umzug in 10 Minuten."
 pinwand: "Budget & Haushaltskasse: clever planen"
 quellen:
   - titel: "Einlagensicherung"

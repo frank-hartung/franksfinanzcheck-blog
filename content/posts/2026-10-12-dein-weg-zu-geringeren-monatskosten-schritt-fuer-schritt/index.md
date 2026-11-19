@@ -1,6 +1,6 @@
 ---
 title: "Dein Weg zu geringeren Monatskosten: Schritt für Schritt"
-description: "Sortiere regelmäßige Abbuchungen nach Jahresbetrag und Kündigungstermin. Beginne mit einem Vertrag, dessen Leistung du nicht mehr vollständig nutzt."
+description: "Dein Weg zu geringeren: Sortiere regelmäßige Abbuchungen nach Jahresbetrag und Kündigungstermin. Beginne mit einem Vertrag, dessen Leistung du…"
 date: 2026-10-19T01:20:46Z
 draft: false
 reserve_published: 2026-10-19
@@ -36,7 +36,7 @@ quellen:
     url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
     herausgeber: "Statistisches Bundesamt"
     datum: "2026-09-01"
-faktencheck: 2026-10-07
+faktencheck: 2026-11-19
 kurzantwort: "Erstelle zuerst ein lückenloses Ausgaben-Protokoll. Identifiziere alle wiederkehrenden Kosten. Ersetze teure Verträge durch günstigere Alternativen. Setze dir ein konkretes monatliches Sparziel. Prüfe es wöchentlich."
 ---
 

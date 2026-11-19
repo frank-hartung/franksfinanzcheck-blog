@@ -24,8 +24,8 @@ kurzantwort: "Einen Mietwagen komplett ohne Kaution gibt es in der Praxis nur in
 
 social_posted: true
 keywords: ["Mietwagen buchen", "Mietwagen ohne Kaution", "Mietwagen-Kaution Kreditkarte", "Vollkasko ohne Selbstbeteiligung", "Mietwagen Fallen", "Mietwagen Versicherung", "günstige Mietwagen", "Mietwagen ohne Kautionsfallen"]
-pin_title: "Mietwagen ohne Kautionsfallen: So sparst du im Urlaub"
-pin_description: "*Werbung | Bevor du den Mietwagen buchst, kläre Höhe und Zahlungsart der Kaution. Prüfe auch, ob der verfügbare Kartenrahmen für die Abholung reicht. Prüfe den Kartenrahmen nach der Hotelbuchung noch einmal. Bereits reservierte Beträge können dazu führen, dass die Kaution am Schalter nicht mehr vollständig blockiert werden kann."
+pin_title: "Mietwagen-Fallen im Urlaub: 7 Kostenfallen & wie du sie umgehst"
+pin_description: "*Werbung | Versteckte Kosten beim Mietwagen? Nicht mit uns: Diese 7 Fallen – von der Vollkasko-Masche bis zur Tankregelung – kosten Urlauber jedes Jahr Hunderte Euro. So schützt du dich vor bösen Überraschungen am Schalter. Jetzt lesen!"
 pinwand: "Günstig reisen | Reisebudget & Mietwagen"
 quellen:
   - id: "Q1"

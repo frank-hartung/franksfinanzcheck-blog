@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-11-07
-title: "Gaspreisgarantie: Wann sich ein fester Preis lohnt"
+title: "Preisgarantie Gas: So sicherst du günstige Tarife"
 description: "Lege zwei Gasangebote nebeneinander: Rechne mit demselben Jahresverbrauch und prüfe, ob die Preisgarantie so lange läuft wie der Vertrag."
 date: 2026-08-12T08:35:12Z
 draft: false
@@ -58,7 +58,7 @@ Dieser Leitfaden führt dich in zehn Minuten von der Jahresrechnung bis zur sich
 💡 **Schnell-Tipp von FranksFinanzcheck:** Tarife kannst du über unseren Partner-Vergleich prüfen: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-## Gaspreisgarantie 2026: Gaspreisgarantie: So startest du ohne Stress
+## Preisgarantie Gas 2026: Gaspreisgarantie 2026: Gaspreisgarantie: So startest du
 
 Lege die letzte Gasrechnung neben den Vertrag. Notiere den Verbrauch in kWh, den Preis je kWh und den festen Preis im Jahr. Mehr brauchst du für den ersten Vergleich nicht. Mit diesen drei Werten erkennst du rasch, ob ein Angebot wirklich zu deinem Haushalt passt.
 

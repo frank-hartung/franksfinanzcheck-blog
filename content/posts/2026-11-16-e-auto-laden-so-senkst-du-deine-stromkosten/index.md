@@ -134,3 +134,5 @@ Jetzt hast du das Wissen für niedrige Kosten. Du kennst die Tricks für günsti
 ---
 
 _Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information und stellt keine Anlage-, Rechts- oder Steuerberatung dar. Prüfe Konditionen und Bedingungen immer beim jeweiligen Anbieter._
+
+*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*

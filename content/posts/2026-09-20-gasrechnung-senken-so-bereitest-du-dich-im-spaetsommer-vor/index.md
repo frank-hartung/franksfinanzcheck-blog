@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-04
 title: "Gasrechnung lesen: Zählerstand, kWh und Abschlag einordnen"
-description: "Stimmt der Gasverbrauch auf der Rechnung? Gleiche Zählernummer, Ablesezeitraum und Stände ab, bevor du die Umrechnung in Kilowattstunden prüfst."
+description: "Gasrechnung prüfen: Stimmt der Gasverbrauch auf der Rechnung? Gleiche Zählernummer, Ablesezeitraum und Stände ab, bevor du die Umrechnung in…"
 date: 2026-09-25T12:15:37Z
 draft: false
 reserve_published: 2026-09-25

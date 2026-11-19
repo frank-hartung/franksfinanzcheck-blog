@@ -1,76 +1,36 @@
 {
   "target": 6,
-  "ready": 4,
+  "ready": 0,
   "pool_size": 12,
   "generated_at": "2026-11-19T12:34:56Z",
   "candidates": [
     {
       "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
-      "ready": true,
+      "ready": false,
       "sha256": "ff4c55ac20b3266a1b41c9ee22db6d66498d0912df2a5dcb120c986bb11ffbce",
-      "flesch": 66.7,
       "measured_at": "2026-11-19T12:28:46Z",
-      "score": 0.962,
-      "parts": {
-        "spelling": 0.88,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.96,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
-      "ready": true,
+      "ready": false,
       "sha256": "e25212d0820d8b781bd6150d2ea0c0d3cc0395d71ead9a25732228dcc10be799",
-      "flesch": 63.6,
       "measured_at": "2026-11-19T12:29:25Z",
-      "score": 0.946,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.96,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-13-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
-      "ready": true,
+      "ready": false,
       "sha256": "2e5d9a26e9c0fa06ef07e9f1c7fcdb90ab9d8e4ad1f94e077e1b7c8db2b6abe4",
-      "flesch": 66.0,
       "measured_at": "2026-11-19T12:30:06Z",
-      "score": 0.93,
-      "parts": {
-        "spelling": 0.8,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.9,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.9
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
-      "ready": true,
+      "ready": false,
       "sha256": "b236c1c9e5dc5fc8e3ac93799c679829ed063442daaf5b33e5d8a1417e03167c",
-      "flesch": 61.9,
       "measured_at": "2026-11-19T12:30:41Z",
-      "score": 0.976,
-      "parts": {
-        "spelling": 0.94,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-19-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",

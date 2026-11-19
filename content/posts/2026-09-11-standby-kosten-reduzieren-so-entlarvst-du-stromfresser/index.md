@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-11-04
-title: "Standby-Verbrauch messen: Was kostet der Bereitschaftsbetrieb?"
+title: "Standby-Verbrauch messen: Was kostet"
 description: "Was kostet der Bereitschaftsbetrieb? Miss die Leistung an der Steckdose und rechne mit den Stunden, in denen das Gerät tatsächlich im Standby bleibt."
 date: 2026-09-11T20:00:23Z
 draft: false
@@ -8,7 +8,7 @@ tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
-keywords: ["Standby Kosten", "Stromfresser entlarven", "Geräte abschalten sparen", "Dauerverbraucher", "Standby Kosten reduzieren", "reduzieren"]
+keywords: ["Standby Kosten", "Stromfresser entlarven", "Geräte abschalten sparen", "Dauerverbraucher", "Standby Kosten reduzieren", "reduzieren", "Standby-Verbrauch messen", "Standby Verbrauch messen"]
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 pin_title: "Standby-Verbrauch messen: Was kostet der Bereitschaftsbetrieb?"
 pin_description: "*Werbung | Was kostet der Bereitschaftsbetrieb? Miss die Leistung an der Steckdose und rechne mit den Stunden, in denen das Gerät tatsächlich im Standby bleibt. Unterscheide Standby von Aufgaben im Hintergrund. Ein Router oder eine Kühltruhe erfüllt auch nachts eine Funktion und sollte nicht einfach über eine Steckerleiste abgeschaltet werden."
@@ -42,7 +42,7 @@ quellen:
 faktencheck: 2026-11-10
 ---
 
-Ein Gerät mit zwei Watt Bereitschaftsleistung fällt auf einer einzelnen Rechnung kaum auf. Laufen im Modell zehn solcher Geräte rund um die Uhr, ergeben 20 Watt × 8.760 Stunden rund 175 kWh im Jahr. Bei angenommenen 37 Cent pro kWh sind das knapp 65 €.
+Standby Kosten im Check: Ein Gerät mit zwei Watt Bereitschaftsleistung fällt auf einer einzelnen Rechnung kaum auf. Laufen im Modell zehn solcher Geräte rund um die Uhr, ergeben 20 Watt × 8.760 Stunden rund 175 kWh im Jahr. Bei angenommenen 37 Cent pro kWh sind das knapp 65 €.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 

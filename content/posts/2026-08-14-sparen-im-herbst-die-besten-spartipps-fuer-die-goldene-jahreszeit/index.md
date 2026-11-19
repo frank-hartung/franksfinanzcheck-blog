@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-04
 title: "Sparen im Herbst: Spartipps für die goldene Jahreszeit"
-description: "Mit Beginn der Heizzeit verschieben sich die Haushaltsausgaben. Prüfe, welche Beträge regelmäßig anfallen und wofür du im Herbst Geld zurücklegen willst."
+description: "Sparen im Herbst: Mit Beginn der Heizzeit verschieben sich die Haushaltsausgaben. Prüfe, welche Beträge regelmäßig anfallen und wofür du im Herbst…"
 date: 2026-09-18T08:38:46Z
 draft: false
 tags: ["Heizkosten senken", "Geld sparen im Alltag", "Budget planen", "Kfz-Versicherung"]
@@ -35,7 +35,7 @@ quellen:
 faktencheck: 2026-10-30
 ---
 
-Wenn die Heizperiode beginnt, ändern sich manche Ausgaben sofort. Andere, etwa der Versicherungsbeitrag, werden erst später im Jahr fällig. Trenne beides in deiner Planung.
+Sparen im Herbst im Check: Wenn die Heizperiode beginnt, ändern sich manche Ausgaben sofort. Andere, etwa der Versicherungsbeitrag, werden erst später im Jahr fällig. Trenne beides in deiner Planung.
 
 Beginne mit der Police: Welches Versicherungsjahr und welche Kündigungsfrist sind dort vereinbart?
 

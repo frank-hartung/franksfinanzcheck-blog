@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-04
-title: "Gasrechnung senken: Welche Fehler lassen sich vor der Heizperiode vermeiden?"
-description: "Ist dein Gasabschlag gestiegen? Vergleiche die Zählerstände auf der Rechnung mit deinen Notizen, bevor du Verbrauch, Tarif oder Abschlag änderst."
+title: "Gasrechnung senken: Welche Fehler lassen sich vor"
+description: "Gasrechnung senken: Ist dein Gasabschlag gestiegen? Vergleiche die Zählerstände auf der Rechnung mit deinen Notizen, bevor du Verbrauch, Tarif oder…"
 date: 2026-08-14T08:35:12Z
 draft: false
 tags: ["Gasrechnung prüfen", "Heizkosten senken", "Gastarif wechseln"]
@@ -44,7 +44,6 @@ quellen:
 faktencheck: 2026-11-01
 ---
 
-
 Wer seine [Gasrechnung senken](../../posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/) will, sollte jetzt handeln. Die ersten kalten Nächte sind da. In diesen Wochen entscheidet sich, wie teuer dein Winter wird.
 
 Ein früher Vergleich gibt dir Zeit, Angebote und Kündigungsfristen zu prüfen. Ob ein späteres Angebot günstiger ist, lässt sich nicht vorhersagen.
@@ -58,9 +57,9 @@ Das meiste Geld bleibt aus einem Grund liegen: Viele werfen **Preis, Verbrauch u
 💡 **Schnell-Tipp von FranksFinanzcheck:** Tarife kannst du über unseren Partner-Vergleich prüfen: [**Gas-Anbieter vergleichen & wechseln**](/go/gas/)
 _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
-![Merkkarte: Kernaussagen zu Gasrechnung senken: Welche Fehler lassen sich vor der Heizperiode vermeiden?](abbildung-merkkarte.svg)
+![Merkkarte: Kernaussagen zu Gasrechnung senken: Welche Fehler lassen sich vor](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „Gasrechnung senken: Welche Fehler lassen sich vor der Heizperiode vermeiden?“ (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Gasrechnung senken: Welche Fehler lassen sich vor“ (eigene Darstellung aus diesem Beitrag).*
 
 
 ## Starte mit einem kleinen Check
@@ -187,9 +186,9 @@ Bei angenommenen 2.000 € verbrauchsabhängigen Heizkosten wären 6 % rechner
 
 Eines noch: Du darfst die Effekte nicht einfach addieren. Lies den Zähler jeden Monat ab. So siehst du schwarz auf weiß, was deine Schritte wirklich bringen.
 
-![Gliederung des Beitrags: Gasrechnung senken: Welche Fehler lassen sich vor der Heizperiode vermeiden?](abbildung-ablauf.svg)
+![Gliederung des Beitrags: Gasrechnung senken: Welche Fehler lassen sich vor](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „Gasrechnung senken: Welche Fehler lassen sich vor der Heizperiode vermeiden?“ – 5 Stationen von „Starte mit einem kleinen Check“ bis „Fehler 4: Den Heizungs-Check bis zum ersten Frost verschieben“ (eigene Darstellung).*
+*Abbildung: Gliederung zu „Gasrechnung senken: Welche Fehler lassen sich vor“ – 5 Stationen von „Starte mit einem kleinen Check“ bis „Fehler 4: Den Heizungs-Check bis zum ersten Frost verschieben“ (eigene Darstellung).*
 
 
 ## Dein Spätsommer-Check in 45 Minuten

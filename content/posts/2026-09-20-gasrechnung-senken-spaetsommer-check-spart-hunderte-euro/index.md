@@ -1,6 +1,6 @@
 ---
 title: "Gasrechnung in 60 Minuten: Ablauf für Tarif und Heizung"
-description: "Nutze eine Stunde für zwei getrennte Fragen: Passt der Gaspreis zu deinem Verbrauch, und welche Einstellungen an der Heizung kannst du selbst ändern?"
+description: "Gasrechnung senken: Nutze eine Stunde für zwei getrennte Fragen: Passt der Gaspreis zu deinem Verbrauch, und welche Einstellungen an der Heizung…"
 date: 2026-09-25T12:15:40Z
 lastmod: 2026-11-04
 draft: false
@@ -43,8 +43,6 @@ quellen:
     herausgeber: "Bundesnetzagentur"
 faktencheck: 2026-11-02
 ---
-
-
 
 Willst du deine [Gasrechnung senken](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/), solltest du im Spätsommer handeln. Eine Stunde im September erspart dir den hektischen Samstag im November. Nicht, weil jeder Check automatisch hunderte Euro bringt. Sondern weil du so früh siehst, ob Tarif, Abschlag, Heizkörper oder Fachbetrieb deine Aufmerksamkeit brauchen.
 
