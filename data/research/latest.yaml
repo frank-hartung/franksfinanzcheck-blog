@@ -1,5 +1,5 @@
-generated_at: '2026-11-18T12:14:23Z'
-day: '2026-11-18'
+generated_at: '2026-11-19T12:08:08Z'
+day: '2026-11-19'
 mode: deterministic
 teams:
   trending:
@@ -252,63 +252,58 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: 'Black Friday DSL-Deals: Diese Angebote lohnen sich wirklich'
-    pillar: internet-dsl
-    signal: niche_hook
-    source: 'topics:Black Friday DSL-Deals: Diese Angebote lohnen sich wirklich'
-    score: 0.55
-    keywords:
-    - Black Friday Internet Angebote
-    - DSL Deals Black Friday
-    - Internet Tarif Angebote November
-  - topic: 'Flugverspätung: So bekommst du deine Entschädigung'
-    pillar: mietwagen
-    signal: niche_hook
-    source: 'topics:Flugverspätung: So bekommst du deine Entschädigung'
-    score: 0.55
-    keywords:
-    - Flugverspätung Entschädigung
-    - Fluggastrechte
-    - Entschädigung beantragen
-  - topic: 'Gebrauchte Möbel: So erkennst du solide Ware'
+  - topic: Die Vorteile von Frugalismus für dein Finanzbudget
     pillar: frugalismus
     signal: niche_hook
-    source: 'topics:Gebrauchte Möbel: So erkennst du solide Ware'
+    source: topics:Die Vorteile von Frugalismus für dein Finanzbudget
+    score: 0.55
+    keywords: []
+  - topic: 'Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung'
+    pillar: frugalismus
+    signal: niche_hook
+    source: 'topics:Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung'
+    score: 0.55
+    keywords: []
+  - topic: 'Städtetrip im Winter: So planst du die Tageskasse'
+    pillar: mietwagen
+    signal: niche_hook
+    source: 'topics:Städtetrip im Winter: So planst du die Tageskasse'
     score: 0.55
     keywords:
-    - Gebrauchte Möbel
-    - Secondhand Möbel
-    - Möbel aufarbeiten
-  - topic: 'Homeoffice: So planst du die Leitung für zwei Arbeitsplätze'
+    - Städtetrip Kosten
+    - Winter Städtereise
+    - Nebenkosten Urlaub
+  - topic: 'Störung beim Internetanbieter: Diese Rechte hast du'
     pillar: internet-dsl
     signal: niche_hook
-    source: 'topics:Homeoffice: So planst du die Leitung für zwei Arbeitsplätze'
+    source: 'topics:Störung beim Internetanbieter: Diese Rechte hast du'
     score: 0.55
     keywords:
-    - Homeoffice Internet
-    - Bandbreite Arbeitsplatz
-    - Leitung teilen
-  - topic: 'Restschuldversicherung beim Ratenkredit: Wann sie sinnvoll ist und wie
-      du sie widerrufst'
-    pillar: konto-karten
+    - Internetstörung Rechte
+    - Minderung Internetausfall
+    - Anbieter Entschädigung
+  - topic: 'Weihnachtsbudget planen: Ohne Schulden durch die Feiertage'
+    pillar: frugalismus
     signal: niche_hook
-    source: 'topics:Restschuldversicherung beim Ratenkredit: Wann sie sinnvoll ist
-      und wie du sie widerrufst'
+    source: 'topics:Weihnachtsbudget planen: Ohne Schulden durch die Feiertage'
     score: 0.55
     keywords:
-    - Restschuldversicherung widerrufen
-    - Ratenkredit Absicherung sinnvoll
-    - Kredit Umschuldung Kosten
-    - Versteckte Kreditgebühren
-  - topic: 'Sparziel sichtbar machen: So bleiben deine Vorsätze im Alltag'
-    pillar: konto-karten
+    - Weihnachten Budget planen
+    - Weihnachten sparen
+    - Geschenkebudget
+    - Weihnachten ohne Schulden
+  - topic: 'Zahnzusatzversicherung ohne Wartezeit: Welche Tarife sofort leisten (und
+      wo der Haken liegt)'
+    pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Sparziel sichtbar machen: So bleiben deine Vorsätze im Alltag'
+    source: 'topics:Zahnzusatzversicherung ohne Wartezeit: Welche Tarife sofort leisten
+      (und wo der Haken liegt)'
     score: 0.55
     keywords:
-    - Sparziel
-    - Vorsätze durchhalten
-    - Motivation sparen
+    - Zahnzusatzversicherung ohne Wartezeit
+    - Zahnersatz Kosten übernehmen
+    - Tarife Sofortleistung Haken
+    - Zahnarztkosten Versicherung
 live_web:
   enabled: false
   findings: []
