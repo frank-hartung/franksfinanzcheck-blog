@@ -6,39 +6,24 @@ METHOD:PUBLISH
 X-WR-CALNAME:FranksFinanzcheck – Telegram (Kanal)
 X-WR-TIMEZONE:Europe/Berlin
 BEGIN:VEVENT
-UID:telegram:2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-rou
- ter-standort:nutzen:2026-11-19@franksfinanzcheck.de
-DTSTAMP:20261119T143029Z
-DTSTART:20261119T170000Z
-DTEND:20261119T171500Z
-SUMMARY:Telegram (Kanal): WLAN verbessern: So findest du einen guten P
- latz (nutzen)
-DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loe
- sen-so-findest-du-den-besten-router-standort/
-URL:https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so
- -findest-du-den-besten-router-standort/
-STATUS:TENTATIVE
-END:VEVENT
-BEGIN:VEVENT
-UID:telegram:2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem
- -waschgang:nutzen:2026-11-21@franksfinanzcheck.de
-DTSTAMP:20261119T143029Z
+UID:telegram:2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alt
+ en-rahmen:nutzen:2026-11-21@franksfinanzcheck.de
+DTSTAMP:20261119T224120Z
 DTSTART:20261121T060000Z
 DTEND:20261121T061500Z
-SUMMARY:Telegram (Kanal): Waschmaschine beladen: Weniger Kosten bei je
- dem Waschgang (nutzen)
+SUMMARY:Telegram (Kanal): Fenster abdichten: So stoppst du Zugluft an 
+ alten Rahmen (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-
- beladen-weniger-kosten-bei-jedem-waschgang/
-URL:https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-belade
- n-weniger-kosten-bei-jedem-waschgang/
+ Artikel: https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdich
+ ten-so-stoppst-du-zugluft-an-alten-rahmen/
+URL:https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so
+ -stoppst-du-zugluft-an-alten-rahmen/
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dei
  n-geld-zurueck:nutzen:2026-11-22@franksfinanzcheck.de
-DTSTAMP:20261119T143029Z
+DTSTAMP:20261119T224120Z
 DTSTART:20261122T060000Z
 DTEND:20261122T061500Z
 SUMMARY:Telegram (Kanal): Flugverspätung: Wann kommt eine Entschädigun
@@ -53,7 +38,7 @@ END:VEVENT
 BEGIN:VEVENT
 UID:telegram:2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-
  aus-dem:nutzen:2026-11-28@franksfinanzcheck.de
-DTSTAMP:20261119T143029Z
+DTSTAMP:20261119T224120Z
 DTSTART:20261128T060000Z
 DTEND:20261128T061500Z
 SUMMARY:Telegram (Kanal): Gaspreiserhöhung in der Grundversorgung: Wan
@@ -66,18 +51,18 @@ URL:https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-so
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:telegram:2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brau
- chst-dein:nutzen:2026-11-29@franksfinanzcheck.de
-DTSTAMP:20261119T143029Z
+UID:telegram:2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-rou
+ ter-standort:nutzen:2026-11-29@franksfinanzcheck.de
+DTSTAMP:20261119T224120Z
 DTSTART:20261129T060000Z
 DTEND:20261129T061500Z
-SUMMARY:Telegram (Kanal): Wie viel Bandbreite brauchst du fürs Streami
- ng? (nutzen)
+SUMMARY:Telegram (Kanal): Router Standort: So findest du einen guten P
+ latz (nutzen)
 DESCRIPTION:Status: geplant\nWinkel: nutzen\nKanal: Telegram (Kanal)\n
- Artikel: https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-strea
- ming-bandbreite-du-wirklich-brauchst-dein/
-URL:https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-b
- andbreite-du-wirklich-brauchst-dein/
+ Artikel: https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loe
+ sen-so-findest-du-den-besten-router-standort/
+URL:https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so
+ -findest-du-den-besten-router-standort/
 STATUS:TENTATIVE
 END:VEVENT
 END:VCALENDAR

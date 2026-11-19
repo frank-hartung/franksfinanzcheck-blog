@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – LinkedIn
 
-> Automatisch aktualisiert: 19.11.2026 15:30 (Europe/Berlin)  
+> Automatisch aktualisiert: 19.11.2026 23:41 (Europe/Berlin)  
 > Profil: https://www.linkedin.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `linkedin.ics`
 
@@ -22,7 +22,7 @@
 - **07:45** ⏳ Waschmaschine beladen: Weniger Kosten bei jedem Waschgang — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/
 ### Mi, 25. November 2026
-- **07:45** ⏳ WLAN verbessern: So findest du einen guten Platz — _nutzen_ · Launch  
+- **07:45** ⏳ Router Standort: So findest du einen guten Platz — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/
 ### Do, 26. November 2026
 - **07:45** ⏳ Fenster abdichten: So stoppst du Zugluft an alten Rahmen — _nutzen_ · Launch  
