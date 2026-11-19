@@ -1,0 +1,236 @@
+{
+  "frage": "Welche gesetzlichen Kündigungsfristen gelten aktuell für Verbraucherverträge in Deutschland?",
+  "zeitpunkt": "2026-11-19T14:40:33Z",
+  "abrufdatum": "2026-11-19",
+  "begriffe": [
+    "gesetzlichen",
+    "kündigungsfristen",
+    "gelten",
+    "verbraucherverträge"
+  ],
+  "suche": {
+    "anbieter": "searxng",
+    "versuche": [
+      {
+        "anbieter": "searxng",
+        "ergebnis": "treffer",
+        "hinweis": "12 Ergebnisse"
+      }
+    ],
+    "anzahl": 12
+  },
+  "belege": [
+    {
+      "url": "https://www.ihk.de/koeln/hauptnavigation/recht-steuern/faire-verbrauchervertraege-5329466",
+      "titel": "Faire Verbraucherverträge: Informationen für Mitgliedsunternehmen ...",
+      "domain": "ihk.de",
+      "herausgeber": "Industrie- und Handelskammer",
+      "rang": 2,
+      "leseweg": "jina",
+      "abgerufen_am": "2026-11-19",
+      "passagen": [
+        {
+          "satz": "Seit 2021 bzw. 2022 gilt das „Gesetz für faire Verbraucherverträge“.",
+          "punkte": 18,
+          "deckung": 1
+        },
+        {
+          "satz": "März 2022 entstanden ist, ist § 309 des Bürgerlichen Gesetzbuchs in der bis zu diesem Tag geltenden Fassung anzuwenden.“ Bei Altverträgen kann man argumentieren, dass das Schuldverhältnis – also der Vertrag – bereits vor dem 1.",
+          "punkte": 18,
+          "deckung": 1
+        },
+        {
+          "satz": "Title: Faire Verbraucherverträge: Informationen für Mitgliedsunternehmen URL Source: https://www.ihk.de/koeln/hauptnavigation/recht-steuern/faire-verbrauchervertraege-5329466 Markdown Content: Das Gesetz für faire Verbraucherverträge enthält Änderungen zu Gunsten des Verbraucherschutzes. **Hinweis:** Wir beraten Sie als Mitglieder der IHK Köln gerne auch persönlich.",
+          "punkte": 17,
+          "deckung": 1
+        },
+        {
+          "satz": "März 2022 entstanden ist und somit weiter die damaligen Regeln gelten.",
+          "punkte": 14,
+          "deckung": 1
+        }
+      ],
+      "browser_belegt": true
+    },
+    {
+      "url": "https://www.ihk.de/hagen/recht/rechtsthemen/gesetz-fuer-verbrauchervertraege-5562054",
+      "titel": "Gesetz für Verbraucherverträge - SIHK zu Hagen",
+      "domain": "ihk.de",
+      "herausgeber": "Industrie- und Handelskammer",
+      "rang": 2,
+      "leseweg": "jina",
+      "abgerufen_am": "2026-11-19",
+      "passagen": [
+        {
+          "satz": "Title: Gesetz für Verbraucherverträge URL Source: https://www.ihk.de/hagen/recht/rechtsthemen/gesetz-fuer-verbrauchervertraege-5562054 Markdown Content: Das Gesetz für faire Verbraucherverträge enthält Änderungen zu Gunsten des Verbraucherschutzes.",
+          "punkte": 17,
+          "deckung": 1
+        },
+        {
+          "satz": "März 2022: Eine Vereinbarung, wonach sich der Verbrauchervertrag stillschweigend verlängert, ist nur dann wirksam, wenn das Vertragsverhältnis auf unbestimmte Zeit verlängert wird und dem Verbraucher das Recht eingeräumt wird, das verlängerte Vertragsverhältnis jederzeit mit einer Frist von höchstens einem Monat zu kündigen.",
+          "punkte": 14,
+          "deckung": 1
+        },
+        {
+          "satz": "Für die Kündigung zum Ablauf der zunächst vorgesehenen Vertragsdauer darf nur eine Kündigungsfrist von maximal einem Monat vorgesehen werden.",
+          "punkte": 10,
+          "deckung": 1
+        },
+        {
+          "satz": "Eine stillschweigende Verlängerung der anfänglichen Vertragslaufzeit ist nur zulässig, wenn dem Kunden ein Kündigungsrecht zusteht, welches er jederzeit unter Einhaltung einer Kündigungsfrist von einem Monat ausüben kann.",
+          "punkte": 10,
+          "deckung": 1
+        }
+      ],
+      "browser_belegt": false
+    }
+  ],
+  "verworfen": [
+    {
+      "url": "https://rechtsanwalt24.de/ratgeber/vertrag-kuendigen-fristen-muster-haeufigsten",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://smartvertragscheck.de/ratgeber/kuendigungsfristen",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.ihk-muenchen.de/ratgeber/recht/vertragsrecht/vertragskuendigung/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.schuldnerberatung.de/verbrauchervertrag/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.bundesverbraucherhilfe.de/ratgeber/laufzeitvertraege-kuendigen-kuendigungsbutton/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://easyrechtssicher.de/blog/gesetz-fuer-faire-verbrauchervertraege",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://blog.orgamax.de/unternehmer-news/verbrauchervertr%C3%A4ge-mit-laufzeit-das-gilt-f%C3%BCr-k%C3%BCndigung-und-verl%C3%A4ngerung",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.ra-kuschnir.de/ratgeber/vertragsrecht/vertrag-kuendigen/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.bundesverbraucherhilfe.de/ratgeber/kuendigungsbutton-vertragslaufzeiten-abonnements/",
+      "grund": "nicht belegfähig (Sperrliste/Allowlist)"
+    },
+    {
+      "url": "https://www.verbraucherzentrale.de/wissen/vertraege-reklamation/kundenrechte/gesetz-fuer-fairere-vertraege-mehr-schutz-bei-kosten-und-laufzeiten-55274",
+      "grund": "keine Passage mit Bezug zur Frage"
+    }
+  ],
+  "antwort": {
+    "weg": "groq",
+    "text": "Für Verbraucherverträge, die sich stillschweigend verlängern, muss dem Verbraucher das Recht eingeräumt sein, das verlängerte Vertragsverhältnis jederzeit mit einer Kündigungsfrist von höchstens einem Monat zu beenden [2]. Auch für die Kündigung zum Ablauf der ursprünglich vereinbarten Vertragsdauer darf die Kündigungsfrist maximal einen Monat betragen [2]. Das „Gesetz für faire Verbraucherverträge“, das seit 2021/2022 gilt, enthält diese Vorgaben [1].",
+    "hinweis": "Freier Groq-Zugang, streng an die Belege gebunden.",
+    "beleglage": {
+      "weg": "extraktiv",
+      "text": "- Seit 2021 bzw. 2022 gilt das „Gesetz für faire Verbraucherverträge“. [1]\n- März 2022 entstanden ist, ist § 309 des Bürgerlichen Gesetzbuchs in der bis zu diesem Tag geltenden Fassung anzuwenden.“ Bei Altverträgen kann man argumentieren, dass das Schuldverhältnis – also der Vertrag – bereits vor dem 1. [1]\n- Title: Faire Verbraucherverträge: Informationen für Mitgliedsunternehmen URL Source: https://www.ihk.de/koeln/hauptnavigation/recht-steuern/faire-verbrauchervertraege-5329466 Markdown Content: Das Gesetz für faire Verbraucherverträge enthält Änderungen zu Gunsten des Verbraucherschutzes. **Hinweis:** Wir beraten Sie als Mitglieder der IHK Köln gerne auch persönlich. [1]\n- Title: Gesetz für Verbraucherverträge URL Source: https://www.ihk.de/hagen/recht/rechtsthemen/gesetz-fuer-verbrauchervertraege-5562054 Markdown Content: Das Gesetz für faire Verbraucherverträge enthält Änderungen zu Gunsten des Verbraucherschutzes. [2]\n- März 2022 entstanden ist und somit weiter die damaligen Regeln gelten. [1]\n- März 2022: Eine Vereinbarung, wonach sich der Verbrauchervertrag stillschweigend verlängert, ist nur dann wirksam, wenn das Vertragsverhältnis auf unbestimmte Zeit verlängert wird und dem Verbraucher das Recht eingeräumt wird, das verlängerte Vertragsverhältnis jederzeit mit einer Frist von höchstens einem Monat zu kündigen. [2]\n- Für die Kündigung zum Ablauf der zunächst vorgesehenen Vertragsdauer darf nur eine Kündigungsfrist von maximal einem Monat vorgesehen werden. [2]\n- Eine stillschweigende Verlängerung der anfänglichen Vertragslaufzeit ist nur zulässig, wenn dem Kunden ein Kündigungsrecht zusteht, welches er jederzeit unter Einhaltung einer Kündigungsfrist von einem Monat ausüben kann. [2]",
+      "aussagen": [
+        {
+          "satz": "Seit 2021 bzw. 2022 gilt das „Gesetz für faire Verbraucherverträge“.",
+          "beleg": 1,
+          "punkte": 18
+        },
+        {
+          "satz": "März 2022 entstanden ist, ist § 309 des Bürgerlichen Gesetzbuchs in der bis zu diesem Tag geltenden Fassung anzuwenden.“ Bei Altverträgen kann man argumentieren, dass das Schuldverhältnis – also der Vertrag – bereits vor dem 1.",
+          "beleg": 1,
+          "punkte": 18
+        },
+        {
+          "satz": "Title: Faire Verbraucherverträge: Informationen für Mitgliedsunternehmen URL Source: https://www.ihk.de/koeln/hauptnavigation/recht-steuern/faire-verbrauchervertraege-5329466 Markdown Content: Das Gesetz für faire Verbraucherverträge enthält Änderungen zu Gunsten des Verbraucherschutzes. **Hinweis:** Wir beraten Sie als Mitglieder der IHK Köln gerne auch persönlich.",
+          "beleg": 1,
+          "punkte": 17
+        },
+        {
+          "satz": "Title: Gesetz für Verbraucherverträge URL Source: https://www.ihk.de/hagen/recht/rechtsthemen/gesetz-fuer-verbrauchervertraege-5562054 Markdown Content: Das Gesetz für faire Verbraucherverträge enthält Änderungen zu Gunsten des Verbraucherschutzes.",
+          "beleg": 2,
+          "punkte": 17
+        },
+        {
+          "satz": "März 2022 entstanden ist und somit weiter die damaligen Regeln gelten.",
+          "beleg": 1,
+          "punkte": 14
+        },
+        {
+          "satz": "März 2022: Eine Vereinbarung, wonach sich der Verbrauchervertrag stillschweigend verlängert, ist nur dann wirksam, wenn das Vertragsverhältnis auf unbestimmte Zeit verlängert wird und dem Verbraucher das Recht eingeräumt wird, das verlängerte Vertragsverhältnis jederzeit mit einer Frist von höchstens einem Monat zu kündigen.",
+          "beleg": 2,
+          "punkte": 14
+        },
+        {
+          "satz": "Für die Kündigung zum Ablauf der zunächst vorgesehenen Vertragsdauer darf nur eine Kündigungsfrist von maximal einem Monat vorgesehen werden.",
+          "beleg": 2,
+          "punkte": 10
+        },
+        {
+          "satz": "Eine stillschweigende Verlängerung der anfänglichen Vertragslaufzeit ist nur zulässig, wenn dem Kunden ein Kündigungsrecht zusteht, welches er jederzeit unter Einhaltung einer Kündigungsfrist von einem Monat ausüben kann.",
+          "beleg": 2,
+          "punkte": 10
+        }
+      ],
+      "hinweis": "Wörtliche Passagen, nach Relevanz geordnet. Keine Umformulierung."
+    }
+  },
+  "browser_beweis": [
+    {
+      "url": "https://www.ihk.de/koeln/hauptnavigation/recht-steuern/faire-verbrauchervertraege-5329466",
+      "endstand_url": "https://www.ihk.de/koeln/hauptnavigation/recht-steuern/faire-verbrauchervertraege-5329466",
+      "status": 200,
+      "titel": "⁣Faire Verbraucherverträge: Informationen für Mitgliedsunternehmen - IHK Köln",
+      "text_laenge": 7323,
+      "auszug": "Zum Hauptinhalt springen Login Kontakt Suche Menü Betrugsversuch per Brief \"Aktualisierung Ihrer Unternehmensdaten – Wichtige Frist\": zweite Phishing-Welle! Mehr erfahren Nr. 5329466 Recht Faire Verbraucherverträge: Informationen für Mitgliedsunternehmen Das Gesetz für faire Verbraucherverträge enthält Änderungen zu Gunsten des Verbraucherschutzes. Verbot von Abtretungsausschlüssen in AGB Automatische Vertragsverlängerung Kündigungsbutton Hinweis: Wir beraten Sie als Mitglieder der IHK Köln gerne auch persönlich. Bitte beachten Sie: Wenn Sie mit Ihrem Gewerbe nicht im Bezirk der IHK Köln ansäs",
+      "treffer": [
+        {
+          "begriff": "gesetzlichen",
+          "gefunden": false
+        },
+        {
+          "begriff": "kündigungsfristen",
+          "gefunden": false
+        },
+        {
+          "begriff": "gelten",
+          "gefunden": true
+        }
+      ],
+      "belegt": true,
+      "konsolenfehler": [],
+      "gemessen_am": "2026-11-19T14:41:05.158Z",
+      "zustand": "bereit"
+    },
+    {
+      "url": "https://www.ihk.de/hagen/recht/rechtsthemen/gesetz-fuer-verbrauchervertraege-5562054",
+      "endstand_url": "https://www.ihk.de/hagen/recht/rechtsthemen/gesetz-fuer-verbrauchervertraege-5562054",
+      "status": 200,
+      "titel": "⁣Gesetz für Verbraucherverträge - SIHK zu Hagen",
+      "text_laenge": 6109,
+      "auszug": "Zum Hauptinhalt springen Kontakt Suche Menü Achtung vor gefälschten IHK-Schreiben! Kriminelle fordern derzeit per QR-Code zur Aktualisierung von Unternehmensdaten auf. Bitte scannen Sie den enthaltenen QR-Code nicht! Mehr erfahren Nr. 5562054 Gesetz für Verbraucherverträge Das Gesetz für faire Verbraucherverträge enthält Änderungen zu Gunsten des Verbraucherschutzes. Bereits am 1. Oktober 2021 und 1. März 2022 sind Teile dieses Gesetzes in Kraft getreten. Am 1. Juli 2022 folgen weitere Neuerungen. Unwirksamkeit von Abtretungsausschlüssen in Allgemeinen Geschäftsbedingungen (AGBen) Einwilligung",
+      "treffer": [
+        {
+          "begriff": "gesetzlichen",
+          "gefunden": false
+        },
+        {
+          "begriff": "kündigungsfristen",
+          "gefunden": false
+        },
+        {
+          "begriff": "gelten",
+          "gefunden": false
+        }
+      ],
+      "belegt": false,
+      "konsolenfehler": [],
+      "gemessen_am": "2026-11-19T14:41:11.208Z",
+      "zustand": "bereit"
+    }
+  ]
+}
