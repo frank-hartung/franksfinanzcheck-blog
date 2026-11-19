@@ -1,20 +1,29 @@
 {
-  "stand": "2026-11-18T19:33:41Z",
+  "stand": "2026-11-19T19:37:01Z",
   "urteil": "rot",
   "probleme": [
-    "KI-Anteil live: 86.4 % (rot ab 65 %)"
+    "KI-Anteil live: 87.5 % (rot ab 65 %)",
+    "Thin Content live: 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen",
+    "KI-Artikel ohne Werbe-Offenlegung: 2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten, 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang, 2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen"
   ],
   "kpis": {
     "live_artikel": 88,
-    "ki_artikel": 76,
-    "ki_anteil_prozent": 86.4,
+    "ki_artikel": 77,
+    "ki_anteil_prozent": 87.5,
     "tempo_max_pro_tag": 2,
     "tempo_letzte7_tage": 6,
     "auto_freigaben_letzte7_tage": 0,
     "near_dup_paare": 0,
     "near_dup_beispiele": [],
-    "thin_live": [],
+    "thin_live": [
+      "2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen"
+    ],
     "titel_duplikate": [],
-    "offenlegung_fehlt": []
+    "offenlegung_fehlt": [
+      "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten",
+      "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang",
+      "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen",
+      "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee"
+    ]
   }
 }
