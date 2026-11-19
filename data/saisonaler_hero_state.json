@@ -2,13 +2,13 @@
   "version": 1,
   "saisons": {
     "herbst": {
-      "updated": "2026-10-30T11:30:57Z",
-      "fingerprint": "7427b5de07359afdd3e91aeb13706f22f2ee5913e0a931aa117a87710a0fa297",
-      "model": "groq:openai/gpt-oss-120b",
-      "research_brief": "data/research/saisonal/2026-10-30-internet-recherche.md",
-      "research_sha256": "5aeb63e6fe864e5ec8d56270b723ecb3ff01f4aec2ffa221367c31a10a52508f",
-      "research_json": "data/research/saisonal/2026-10-30-internet-recherche.json",
-      "research_json_sha256": "37daf71c2eef9e033596977f245de3c645f7abf3195639b781ac15c779b744a5"
+      "updated": "2026-11-19T14:36:55Z",
+      "fingerprint": "f30fc16ff6dacf56931a9925b41d8b82617fcd63dfa0d1f193d62e8f9580281f",
+      "model": "approved-seasonal-baseline",
+      "research_brief": "",
+      "research_sha256": "",
+      "set_current": true,
+      "reason": "redaktionell geänderter Saison-Hero automatisch als geprüfte Basis übernommen (SEO/GEO-Vertrag und Startseiten-Wache bestanden)"
     }
   }
 }
