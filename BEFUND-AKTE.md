@@ -2,12 +2,12 @@
 
 _Stand 2026-11-19 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quelle: `data/faktenfrische_queue.json` + `data/faktenfrische_entscheidungen.yaml` (eine Regel, zwei Leser)._
 
-**256 offene Befunde auf 65 Seiten · davon 42 Live-Seiten mit 160 Befunden · ältester 20 Tage · Frist 14 Tage.**
+**275 offene Befunde auf 72 Seiten · davon 46 Live-Seiten mit 172 Befunden · ältester 20 Tage · Frist 14 Tage.**
 
 | Kennzahl | Wert |
 |---|---|
-| Offene Befunde | 256 |
-| Seiten betroffen | 65 (davon live: 42) |
+| Offene Befunde | 275 |
+| Seiten betroffen | 72 (davon live: 46) |
 | Text seit dem Befund geändert | 241 |
 | Altbestand ohne Fassungs-Hash | 15 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
@@ -32,7 +32,7 @@ _Stand 2026-11-19 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 256 von 256 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 256 von 275 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -776,6 +776,70 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden baed76dc211bd15dd46
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden d7c3cfb422310cf26ca6 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-08-10-dsl-wechselbonus-sichern` · **LIVE** · Risikoklasse standard · 2 Befund(e)
+
+Datei: `content/posts/2026-08-10-dsl-wechselbonus-sichern/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `1b7c9b9cac0290f71242` | luecke | 0 T | Text unverändert seit dem Befund | Aktuelle Wechselangebote ermöglichen oft Einsparungen von ca. 10 € bis 25 € pro Monat im Vergleich zu veralteten Bestandskundentarifen. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `ee260c27a6bfdd60fa04` | luecke | 0 T | Text unverändert seit dem Befund | Ein Tarif mit ca. 200 € bis 300 € Bonus wirkt auf den ersten Blick unschlagbar; das ist ein Modellwert. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1b7c9b9cac0290f71242 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ee260c27a6bfdd60fa04 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden` · **LIVE** · Risikoklasse erhoeht · 4 Befund(e)
+
+Datei: `content/posts/2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `1d4095501e717fb30d7b` | luecke | 0 T | Text unverändert seit dem Befund | Der Hinweis auf einen „Wochenend‑Effekt“ bei Devisenkursen wird ohne Quellenangabe gemacht. | – |
+| `77520584b5afd8ebd7f7` | luecke | 0 T | Text unverändert seit dem Befund | Es wird angegeben, dass der Kurs am Automaten häufig über dem Referenzkurs der Bank liegt, jedoch fehlt ein Beleg dafür. | – |
+| `a3be3d50280d4fe0a1d8` | luecke | 0 T | Text unverändert seit dem Befund | Der Artikel behauptet, dass der Betreiber des Automaten ein eigenes Entgelt verlangt, ohne dafür eine Quelle anzugeben. | – |
+| `d6cc7bae16dead3e610b` | praezision | 0 T | Text unverändert seit dem Befund | Die Empfehlung, nur Automaten von Banken und nicht von Aufstellern in Touristenzonen zu nutzen, ist unspezifisch und nicht durch Daten belegt. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1d4095501e717fb30d7b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 77520584b5afd8ebd7f7 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden a3be3d50280d4fe0a1d8 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d6cc7bae16dead3e610b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt` · **LIVE** · Risikoklasse standard · 2 Befund(e)
+
+Datei: `content/posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `7c2624072c861d136c96` | luecke | 0 T | Text unverändert seit dem Befund | Die pauschale Behauptung zu Preisunterschieden zwischen Standardtarifen und Angeboten ist ein Marktdatum ohne Beleg oder eigene Messung (Regel 9a/9e). | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+| `d9d3004fbc05895c3f79` | praezision | 0 T | Text unverändert seit dem Befund | Die Aussage zum steigenden Strompreis ist unpräzise; die Quelle belegt einen konkreten Anstieg der Energiepreise um +12,7 %. | [Quelle](https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7c2624072c861d136c96 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d9d3004fbc05895c3f79 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege` · **LIVE** · Risikoklasse standard · 4 Befund(e)
+
+Datei: `content/posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `381dd90113dd1ee72f39` | praezision | 0 T | Text unverändert seit dem Befund | Das Versprechen, 'alle Gebühren' auf Portalen zu sehen, ist ohne Messgröße unpräzise, da Portale systembedingt nur eine Marktauswahl zeigen. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+| `4483a81dd1c292034cd0` | praezision | 0 T | Text unverändert seit dem Befund | Die Warnung vor einer 'sehr hohen Strafgebühr' am Gate ist ein Superlativ ohne messbare Daten oder konkrete Preisbeispiele. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+| `6f4b591e9cadb27adf49` | luecke | 0 T | Text unverändert seit dem Befund | Bei der Erwähnung von Stornierungen durch Airlines fehlt der Hinweis auf den rechtlichen Rahmen (z. B. EU-Fluggastrechte). | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+| `cf60024b74a5e86b50c0` | luecke | 0 T | Text unverändert seit dem Befund | Die statistische Aussage zur Preisgünstigkeit von Dienstag und Mittwoch ist eine Marktprognose ohne Beleg in der genannten Quelle. | [Quelle](https://www.verbraucherzentrale.de/wissen/reise-mobilitaet) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 381dd90113dd1ee72f39 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4483a81dd1c292034cd0 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6f4b591e9cadb27adf49 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden cf60024b74a5e86b50c0 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden` · nicht im Live-Bestand · 5 Befund(e)
 
 Seite: `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden`
@@ -1202,6 +1266,50 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden d0a5cf7bb64eb0cd46c
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ec53e181336df8dc61ac --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f3f9184bfca9b097f68e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden fb4d2260f4fa291c35ae --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung` · nicht im Live-Bestand · 3 Befund(e)
+
+Seite: `2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `2841f905d6afd6b62283` | luecke | 0 T | Text unverändert seit dem Befund | Der Artikel nutzt einen Pauschalpreis von 30 Cent/kWh als Marktfakt ohne Quellenbeleg. Referenzwerte für den Energiemarkt unterliegen der Aufsicht der Bundesnetzagentur. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `517fa8859b484cd76465` | luecke | 0 T | Text unverändert seit dem Befund | Der relevante Regulierungsrahmen für den Energiemarkt und die damit verbundenen Unternehmenspflichten gegenüber Verbrauchern werden nicht erwähnt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `e11e305aefae61e25820` | praezision | 0 T | Text unverändert seit dem Befund | Die Empfehlung eines einzelnen Portals zur Prüfung von Förderungen oder Tarifen suggeriert eine Marktvollständigkeit, die ohne Nennung von Auswahlkriterien unpräzise ist. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2841f905d6afd6b62283 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 517fa8859b484cd76465 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden e11e305aefae61e25820 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `internet-dsl` · nicht im Live-Bestand · 2 Befund(e)
+
+Seite: `internet-dsl`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `088b234647d33a67dc6d` | praezision | 0 T | Text unverändert seit dem Befund | Die Bezeichnung als 'Markt-Benchmarks' suggeriert eine Marktabdeckung ohne Nennung von Messgrößen, Datenbasis oder Auswahlkriterien. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `b8885c27121a5cc10a85` | praezision | 0 T | Text unverändert seit dem Befund | Die BNetzA 'garantiert' die Weiterversorgung nicht selbst; sie überwacht die gesetzlichen Anbieterpflichten, die den technischen Prozess regeln. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 088b234647d33a67dc6d --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden b8885c27121a5cc10a85 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
+### `konto-karten` · nicht im Live-Bestand · 2 Befund(e)
+
+Seite: `konto-karten`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `5bf7111c673ee53be341` | praezision | 0 T | Text unverändert seit dem Befund | Superlativ „Mehrfach als Testsieger ausgezeichnet“ ohne messbare Daten oder Quelle. | – |
+| `b3c137c4bb2ebd44eb74` | luecke | 0 T | Text unverändert seit dem Befund | Keine Quelle für die Aussage, dass viele Banken Neukunden‑Zinsgarantien für drei bis sechs Monate bieten. | – |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 5bf7111c673ee53be341 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden b3c137c4bb2ebd44eb74 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ---

@@ -40,7 +40,7 @@ quellen:
     url: "https://www.heise.de/thema/WLAN"
     herausgeber: "heise online"
     datum: "2026-08-05"
-faktencheck: "2026-10-13"
+faktencheck: 2026-11-19
 ---
 
 Ein DSL-Tarif mit Bonus kann im ersten Jahr günstiger sein und im zweiten deutlich mehr kosten. Lege die Rechnung deines bisherigen Anbieters neben das neue Angebot und markiere das Ende der Rabattphase.

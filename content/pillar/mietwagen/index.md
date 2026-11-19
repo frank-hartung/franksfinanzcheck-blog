@@ -20,7 +20,7 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: 79e98f6a09b515a7501dfa4d375f3baf2c1a6489b3371791ffe96686dc131e90
     geprueft_am: 2026-11-13
-faktencheck: 2026-10-27
+faktencheck: 2026-11-19
 quellen:
   - id: "Q1"
     titel: "Referenzseite verbraucherzentrale.de"

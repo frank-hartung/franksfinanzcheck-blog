@@ -1,11 +1,11 @@
 # Faktenfrische: Mietwagen & Reisen: Der große Ratgeber zum Geld sparen
 
-> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-10-27 10:01 UTC.
+> Automatisch erzeugt von `scripts/faktenfrische.py` am 2026-11-19 13:51 UTC.
 > Agent-Reach-Kanäle, nur lesend. Fundstellen sind Signale, keine Freigabe.
 
 - **Artikel:** `content/pillar/mietwagen/index.md`
 - **Themenwelt:** mietwagen
-- **Fälligkeit:** 30 Tage seit letzter Prüfung (Intervall 30 Tage, saisonal) (Klasse: saisonal)
+- **Fälligkeit:** frisch geprüft vor 23 Tagen (Intervall 30 Tage) (Klasse: saisonal)
 - **GEO-Reife:** 5/6 (83 %)
 - **Suchbegriffe:** Mietwagen buchen, Mietwagen günstig, Mietwagen Fallen, Flüge sparen, Urlaubskasse aufbessern, Mietwagen, Kaution, Selbstbeteiligung, Reise, Reisen, große, Ratgeber
 - **Kanäle:** rss:Verbraucherzentrale – Reise, web:verbraucherzentrale.de
@@ -31,7 +31,9 @@
 
 ## Fachliche Befunde (KI-Fachprüfung)
 
-_Keine Fachprüfung in diesem Lauf (kein KI-Schlüssel GROQ_API_KEY/GEMINI_API_KEY oder keine Befunde)._
+Status: geprüft (groq:openai/gpt-oss-120b); 5 Befund(e) ohne belegbaren Textanker verworfen
+
+_Keine Befunde gemeldet; Prüfstatus siehe oben._
 
 ## Offene GEO-Punkte
 
@@ -39,4 +41,4 @@ _Keine Fachprüfung in diesem Lauf (kein KI-Schlüssel GROQ_API_KEY/GEMINI_API_K
 
 ## Kanal-Störungen
 
-- Verbraucherzentrale – Reise: Feed nicht lesbar
+- Verbraucherzentrale – Reise: Abruf fehlgeschlagen (HTTP Error 404: Not Found)

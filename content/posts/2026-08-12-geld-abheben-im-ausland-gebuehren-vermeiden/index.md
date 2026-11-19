@@ -46,7 +46,7 @@ quellen:
     url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/girokonto-was-sie-darueber-wissen-sollten-4990"
     herausgeber: "Verbraucherzentrale"
     datum: "2026-08-12"
-faktencheck: 2026-10-13
+faktencheck: 2026-11-19
 kurzantwort: "Beim Abheben im Ausland rechnen in der Regel zwei Stellen ab: der Betreiber des Automaten und deine Bank. Ob und wie viel deine Bank für Abhebungen außerhalb des Euro-Raums verlangt, steht im Preis- und Leistungsverzeichnis deines Kontos. Bietet der Automat zusätzlich eine Abrechnung in Euro an, entscheidest du selbst, ob du sie annimmst."
 ---
 

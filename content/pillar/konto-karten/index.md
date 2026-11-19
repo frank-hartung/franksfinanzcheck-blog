@@ -20,7 +20,7 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: 0b8b9c563f798f617300e7ee32e20583045971cd6dc69abab61be87a5d542a40
     geprueft_am: 2026-11-13
-faktencheck: "2026-10-13"
+faktencheck: 2026-11-19
 quellen:
   - titel: "Gesetzliche Einlagensicherung in Deutschland"
     url: "https://www.bundesbank.de/de/aufgaben/bankenaufsicht/einlagensicherung/einlagensicherung-602936"
@@ -31,6 +31,7 @@ quellen:
     herausgeber: "Verbraucherzentrale"
     datum: "2026-09-28"
 ---
+
 Viele Filialbanken und Sparkassen erheben Monat für Monat Kontoführungsgebühren, berechnen Buchungszeilen oder verlangen teure Jahresgebühren für Kreditkarten. Im Laufe eines Jahres fließen so schnell 60&nbsp;€ bis 180&nbsp;€ für Standardleistungen vom Konto ab, die moderne Direkt- und Neobanken komplett kostenlos zur Verfügung stellen. Die gute Nachricht: Wer einmal umstellt, spart dauerhaft – das gesamte Banking auf null Euro Gebühren, die passende Kreditkarte für Reisen und die besten Zinsen für den Notgroschen.
 
 ## Das Wichtigste auf einen Blick

@@ -36,7 +36,7 @@ quellen:
     url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html"
     herausgeber: "Statistisches Bundesamt"
     datum: "2026-09-01"
-faktencheck: 2026-10-07
+faktencheck: 2026-11-19
 kurzantwort: "Erstelle zuerst ein lückenloses Ausgaben-Protokoll. Identifiziere alle wiederkehrenden Kosten. Ersetze teure Verträge durch günstigere Alternativen. Setze dir ein konkretes monatliches Sparziel. Prüfe es wöchentlich."
 ---
 

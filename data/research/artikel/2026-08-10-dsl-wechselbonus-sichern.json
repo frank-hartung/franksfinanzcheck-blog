@@ -1,0 +1,62 @@
+{
+  "slug": "2026-08-10-dsl-wechselbonus-sichern",
+  "titel": "DSL-Wechselbonus sichern: So sparst du beim Internetvertrag",
+  "erzeugt": "2026-11-19 13:54 UTC",
+  "faellig": {
+    "faellig": false,
+    "prio": 9,
+    "klasse": "YMYL",
+    "grund": "frisch geprüft vor 37 Tagen (Intervall 45 Tage)",
+    "alter_tage": 37,
+    "intervall": 45,
+    "frist": "2026-11-27",
+    "restlaufzeit": 8
+  },
+  "geo": {
+    "punkte": 6,
+    "maximum": 6,
+    "prozent": 100,
+    "offen": [],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": true,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": true
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Referenzseite bundesnetzagentur.de",
+      "url": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "datum": "",
+      "quelle": "bundesnetzagentur.de",
+      "kanal": "web",
+      "auszug": "1.   [Homepage](https://www.bundesnetzagentur.de/DE/Home/home_node.html \"Zur Startseite\")\n2.   [Fachthemen](https://www.bundesnetzagentur.de/DE/Themen/start.html \"Themen\")\n3.   [UntermenuOeffnen](javascript:void(0))[Energie](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html \"Energie\")**Telekom­munikation**[Digitales](https://www.bundesnetzagentur.de/DE/Fachthemen/Digitales/start.html \"Alle Fachthemen rund um Digitales\")[Post](https://www.bundesnetzagentur.de/DE/Fachthemen/Post/start.html \"Post\")[Eisenbahnen](https://www.bundesnetzagentur.de/DE/Fachthemen/Eisenbahnen/start.html \"Eisenbahnen\")[BNetzA Data Hub](https://www.bundesnetzagentur.de/DE/Fachthemen/DataHub/start.html \"BNetzA Data Hub\")[Beschlusskammern](https://www.bundesnetzagentur.de/DE/Beschlusskammern/BK_Start.html \"Beschlusskammern\") \n4.   **Telekom­munikation**\n5.   [UntermenuOeffnen](javascript:void(0))[Breitbandversorgung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Breitband/start.html \"Breitband\")[Kupfer-Glas-Migration](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Kupfer-Glas/start.html \"Kupfer Glas Migration, Glasfaserausbau\")[Funk und Frequenzen](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Frequenzen/start.html \"Frequenzen\")[Nummerierung](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Nummerierung/start.html \"Nummerierung\")[Unternehmenspflichten](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Unternehmenspflichten/start.html \"Unternehmenspflichten\")[Technik und Produktsicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/Technik/start.html \"Technik\")[Öffentliche Sicherheit](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/OeffentlicheSicher",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "Bundesnetzagentur",
+      "rang": 1,
+      "zitierbar": true
+    }
+  ],
+  "befunde": [
+    {
+      "typ": "luecke",
+      "text": "Aktuelle Wechselangebote ermöglichen oft Einsparungen von ca. 10 € bis 25 € pro Monat im Vergleich zu veralteten Bestandskundentarifen.",
+      "stelle": "Aktuelle Wechselangebote ermöglichen oft Einsparungen von ca. 10 € bis 25 € pro Monat im Vergleich zu veralteten Bestandskundentarifen.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    },
+    {
+      "typ": "luecke",
+      "text": "Ein Tarif mit ca. 200 € bis 300 € Bonus wirkt auf den ersten Blick unschlagbar; das ist ein Modellwert.",
+      "stelle": "Ein Tarif mit ca. 200 € bis 300 € Bonus wirkt auf den ersten Blick unschlagbar; das ist ein Modellwert.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
+    }
+  ],
+  "fehler": [],
+  "fassung_sha256": "48bfccbc14a6fa49a7ac6c5a077a23bfd723973fee892880ecca7f84b132fa6b",
+  "text_sha256": "af037ea121477d0853771b4407f1b204786c99c9c600b99cd094677e10402ae1",
+  "fachpruefung": "geprüft (cloudflare:@cf/openai/gpt-oss-120b); 3 Befund(e) ohne belegbaren Textanker verworfen"
+}

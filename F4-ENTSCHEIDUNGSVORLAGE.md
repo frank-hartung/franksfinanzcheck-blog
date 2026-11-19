@@ -6,8 +6,8 @@ Dieses Dokument schreibt nichts in den Ledger und erzeugt keine Entscheidung.
 
 **Bezugsstand: 2026-11-19** – der Stand der Befundakte (`erzeugt` aus `data/faktenfrische_befunde_state.json`), nicht die Wanduhr. So ist die Vorlage reproduzierbar und `--check` uhrfest.
 
-**160 offene Live-Befunde auf 42 Artikeln.** Für **122** gibt es frühere Entscheidungen zu diesem Befund;
-die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **38** Befunde haben keine frühere aktive Entscheidung.
+**172 offene Live-Befunde auf 46 Artikeln.** Für **122** gibt es frühere Entscheidungen zu diesem Befund;
+die heutige Fassung ist erneut zu prüfen – ein Rückfall ist möglich. **50** Befunde haben keine frühere aktive Entscheidung.
 
 Erzeugt von `scripts/f4_entscheidungsvorlage.py` aus `data/faktenfrische_befunde_state.json`,
 `data/faktenfrische_entscheidungen.yaml`, dem Scorecard-Siegel und den heutigen Artikeln.
@@ -15,6 +15,12 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 
 ## Neu ohne frühere Entscheidung
 
+- `1b7c9b9cac0290f71242` · `2026-08-10-dsl-wechselbonus-sichern` · Aktuelle Wechselangebote ermöglichen oft Einsparungen von ca. 10 € bis 25 € pro Monat im Vergleich zu veralteten Bestandskundentarifen.
+- `ee260c27a6bfdd60fa04` · `2026-08-10-dsl-wechselbonus-sichern` · Ein Tarif mit ca. 200 € bis 300 € Bonus wirkt auf den ersten Blick unschlagbar; das ist ein Modellwert.
+- `1d4095501e717fb30d7b` · `2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden` · Der Hinweis auf einen „Wochenend‑Effekt“ bei Devisenkursen wird ohne Quellenangabe gemacht.
+- `77520584b5afd8ebd7f7` · `2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden` · Es wird angegeben, dass der Kurs am Automaten häufig über dem Referenzkurs der Bank liegt, jedoch fehlt ein Beleg dafür.
+- `a3be3d50280d4fe0a1d8` · `2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden` · Der Artikel behauptet, dass der Betreiber des Automaten ein eigenes Entgelt verlangt, ohne dafür eine Quelle anzugeben.
+- `d6cc7bae16dead3e610b` · `2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden` · Die Empfehlung, nur Automaten von Banken und nicht von Aufstellern in Touristenzonen zu nutzen, ist unspezifisch und nicht durch Daten belegt.
 - `6b5921bdc76490587167` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Seit 2026 nutzen die großen Anbieter die Technik mit dem Namen Vectoring; das ist ein Modellwert. Sie senkt das Rauschen auf der Leitung. In der Stadt sind damit bis zu 250 Mbps stabil drin.
 - `8436b91bdb63a6316979` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Preisgarantie über mindestens 12 Monate; ohne Garantie darf der Anbieter bald erhöhen, oft um bis zu 10 %.
 - `a4ff01e649b789f19e6a` · `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss` · Für 50 Mbps zahlst du heute meist ca. 20–40 € im Monat; das ist ein Beispielwert.
@@ -29,6 +35,8 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 - `4d0125136c5b940946e4` · `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` · Lichtsteuerung: Bedarfssteuerung – 2 bis 5 % des Stromverbrauchs.
 - `7aeb2098034d16a46885` · `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` · Anbieter locken mit Neukundenboni, die nach der üblichen Erstlaufzeit entfallen; danach steigt der Arbeitspreis massiv an.
 - `ea97b5dd6695de127fd2` · `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt` · Heizungssteuerung: Smarte Thermostate können Heizkosten einsparen. Die Spanne von 10 bis 25 % ist ein Beispielwert aus der Rechnung unten.
+- `7c2624072c861d136c96` · `2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt` · Die pauschale Behauptung zu Preisunterschieden zwischen Standardtarifen und Angeboten ist ein Marktdatum ohne Beleg oder eigene Messung (Regel 9a/9e).
+- `d9d3004fbc05895c3f79` · `2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt` · Die Aussage zum steigenden Strompreis ist unpräzise; die Quelle belegt einen konkreten Anstieg der Energiepreise um +12,7 %.
 - `1dc0f20f9ab3a6b783bc` · `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten` · Behauptung, dass ein fehlender Ausweis zu empfindlichen Bußgeldern führt, fehlt eine belegbare Quelle.
 - `7b94ca07b36c0b7cb1cc` · `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten` · Aussage, dass Baudenkmäler von der Ausweispflicht befreit sind, wird nicht durch die angegebene Quelle gestützt.
 - `985f506ee04087bf7253` · `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten` · Angabe, dass ein Wechsel von Energieeffizienzklasse F zu C über 2.000 € Jahresersparnis bringt, ist unbelegt.
@@ -53,10 +61,42 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 - `3bfeb0118af92a780a47` · `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen` · Bei 5 % Rendite im Jahr entstehen rund 30.000 € – keine Quelle für die angenommene Rendite angegeben.
 - `ed2161154dcee85da1ee` · `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen` · Angabe, dass die Einrichtung eines Sparplans meist weniger als 15 Minuten dauert, fehlt belegt.
 - `f593fe21275bd9dcefef` · `2026-10-24-etf-sparplan-starten-schritt-fuer-schritt-zum-monatlichen` · Behauptung, dass einige Broker bereits ab 1 € monatlich starten, ohne Quelle.
+- `381dd90113dd1ee72f39` · `2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege` · Das Versprechen, 'alle Gebühren' auf Portalen zu sehen, ist ohne Messgröße unpräzise, da Portale systembedingt nur eine Marktauswahl zeigen.
+- `4483a81dd1c292034cd0` · `2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege` · Die Warnung vor einer 'sehr hohen Strafgebühr' am Gate ist ein Superlativ ohne messbare Daten oder konkrete Preisbeispiele.
+- `6f4b591e9cadb27adf49` · `2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege` · Bei der Erwähnung von Stornierungen durch Airlines fehlt der Hinweis auf den rechtlichen Rahmen (z. B. EU-Fluggastrechte).
+- `cf60024b74a5e86b50c0` · `2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege` · Die statistische Aussage zur Preisgünstigkeit von Dienstag und Mittwoch ist eine Marktprognose ohne Beleg in der genannten Quelle.
+
+## `2026-08-10-dsl-wechselbonus-sichern`
+
+- Datei-SHA256 (heute): `a78ecb1cccf20534e2195d4d313c15e8a06d846a71e2fe29a22d14e3d965bb57`
+- Offene Live-Befunde: **2**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `1b7c9b9cac0290f71242` | luecke | **neu** | 10 € in Zeile 17 ohne Kennzeichnung · 25 € in Zeile 17 ohne Kennzeichnung | Aktuelle Wechselangebote ermöglichen oft Einsparungen von ca. 10 € bis 25 € pro Monat im Vergleich zu veralteten Best… |
+| `ee260c27a6bfdd60fa04` | luecke | **neu** | 200 € in Zeile 43 gekennzeichnet · 300 € in Zeile 43 gekennzeichnet | Ein Tarif mit ca. 200 € bis 300 € Bonus wirkt auf den ersten Blick unschlagbar; das ist ein Modellwert. |
+
+### `1b7c9b9cac0290f71242`
+
+**Befund:** Aktuelle Wechselangebote ermöglichen oft Einsparungen von ca. 10 € bis 25 € pro Monat im Vergleich zu veralteten Bestandskundentarifen.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 17: 10 € – **ohne** Kennzeichnung
+- Heute in Zeile 17: 25 € – **ohne** Kennzeichnung
+
+### `ee260c27a6bfdd60fa04`
+
+**Befund:** Ein Tarif mit ca. 200 € bis 300 € Bonus wirkt auf den ersten Blick unschlagbar; das ist ein Modellwert.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Heute in Zeile 43: 200 € – gekennzeichnet („modellwert“)
+- Heute in Zeile 43: 300 € – gekennzeichnet („modellwert“)
 
 ## `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas`
 
-- Datei-SHA256 (heute): `d300df6e98d8f1f909cc09a03111d0ea4166beb2e1357396a4cd7cf4f97b63d0`
+- Datei-SHA256 (heute): `58592e0a4ba95b0ba2048ab62842ec12712b78b67d841f19c2dd1872d7bd98d1`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -95,9 +135,53 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
+## `2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden`
+
+- Datei-SHA256 (heute): `f844c911d647376418b076950aaaac984acaf6f154999ace9553ecd8925e1daf`
+- Offene Live-Befunde: **4**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `1d4095501e717fb30d7b` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Der Hinweis auf einen „Wochenend‑Effekt“ bei Devisenkursen wird ohne Quellenangabe gemacht. |
+| `77520584b5afd8ebd7f7` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Es wird angegeben, dass der Kurs am Automaten häufig über dem Referenzkurs der Bank liegt, jedoch fehlt ein Beleg dafür. |
+| `a3be3d50280d4fe0a1d8` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Der Artikel behauptet, dass der Betreiber des Automaten ein eigenes Entgelt verlangt, ohne dafür eine Quelle anzugeben. |
+| `d6cc7bae16dead3e610b` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Die Empfehlung, nur Automaten von Banken und nicht von Aufstellern in Touristenzonen zu nutzen, ist unspezifisch und… |
+
+### `1d4095501e717fb30d7b`
+
+**Befund:** Der Hinweis auf einen „Wochenend‑Effekt“ bei Devisenkursen wird ohne Quellenangabe gemacht.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `77520584b5afd8ebd7f7`
+
+**Befund:** Es wird angegeben, dass der Kurs am Automaten häufig über dem Referenzkurs der Bank liegt, jedoch fehlt ein Beleg dafür.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `a3be3d50280d4fe0a1d8`
+
+**Befund:** Der Artikel behauptet, dass der Betreiber des Automaten ein eigenes Entgelt verlangt, ohne dafür eine Quelle anzugeben.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `d6cc7bae16dead3e610b`
+
+**Befund:** Die Empfehlung, nur Automaten von Banken und nicht von Aufstellern in Touristenzonen zu nutzen, ist unspezifisch und nicht durch Daten belegt.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
 ## `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026`
 
-- Datei-SHA256 (heute): `6c93bdbd23492f53ff41b924abc18d991e8086d6a5c9751e40820119f970302f`
+- Datei-SHA256 (heute): `f69c85da03de5d925c09a816248e3344692428137c05b82913f0bcaaa4b7be90`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -138,16 +222,16 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden`
 
-- Datei-SHA256 (heute): `97e7bb2ecdd19f55fc2a4387abeeab609bed6e25e4441f8350742b18cbb68eea`
+- Datei-SHA256 (heute): `115938bc96ea4c3efbe80a7d490fa2e49282b1672b06aa23e71d779baa9d9c7f`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
 | `437b809ffbf41e5af434` | luecke | 2026-11-11 · 2. Entscheidung | kein Wert genannt (Aussage/Präzision) | Keine Quelle für die Aussage, dass das Gesetz bei einem Tarifwechsel die Grundversorgung garantiert – regulatorischer… |
-| `9fbacd9942c2dfa1447f` | luecke | 2026-11-11 · 2. Entscheidung | 6 % in Zeile 4 ohne Kennzeichnung | Keine Quelle für die Behauptung, dass ein Grad weniger Raumtemperatur rund 6 % Energie einspart – Prozent‑Angabe fehlt. |
-| `da30cbb5fbc8c801daf0` | luecke | 2026-11-11 · 2. Entscheidung | 15 % in Zeile 70 gekennzeichnet | Keine Quelle für die Angabe, dass durch Optimierungsmaßnahmen 10‑15 % Einsparungen realistisch sind – Prozent‑Wert un… |
+| `9fbacd9942c2dfa1447f` | luecke | 2026-11-11 · 2. Entscheidung | 6 % in Zeile 3 ohne Kennzeichnung | Keine Quelle für die Behauptung, dass ein Grad weniger Raumtemperatur rund 6 % Energie einspart – Prozent‑Angabe fehlt. |
+| `da30cbb5fbc8c801daf0` | luecke | 2026-11-11 · 2. Entscheidung | 15 % in Zeile 69 gekennzeichnet | Keine Quelle für die Angabe, dass durch Optimierungsmaßnahmen 10‑15 % Einsparungen realistisch sind – Prozent‑Wert un… |
 | `db8a69f08dc0020adebd` | luecke | 2026-11-11 · 2. Entscheidung | kein Wert genannt (Aussage/Präzision) | Keine Quelle für die Aussage, dass im Oktober 2026 bessere Gaspreise gelten – Preis‑Trend‑Behauptung fehlt. |
-| `e834f4702e87194affe7` | luecke | 2026-11-11 · 2. Entscheidung | 18.000 kWh in Zeile 43 ohne Kennzeichnung | Keine Quelle für die Angabe, dass ein Einfamilienhaus typischerweise 18.000 kWh/Jahr verbraucht – Verbrauchszahl ist… |
+| `e834f4702e87194affe7` | luecke | 2026-11-11 · 2. Entscheidung | 18.000 kWh in Zeile 42 ohne Kennzeichnung | Keine Quelle für die Angabe, dass ein Einfamilienhaus typischerweise 18.000 kWh/Jahr verbraucht – Verbrauchszahl ist… |
 
 ### `437b809ffbf41e5af434`
 
@@ -167,7 +251,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 eccbb868494f): Die verlangte Quelle steht im Abschnitt „Was Verbrauchsmaßnahmen realistisch bringen?“ inline – „Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892) nennt rund 6 % weniger Heiz“. Der Befund trifft die heutige Fassung damit nicht mehr.
 
-- Heute in Zeile 4: 6 % – **ohne** Kennzeichnung
+- Heute in Zeile 3: 6 % – **ohne** Kennzeichnung
 
 ### `da30cbb5fbc8c801daf0`
 
@@ -177,7 +261,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 eccbb868494f): Die verlangte Quelle steht im Abschnitt „Was Verbrauchsmaßnahmen realistisch bringen?“ inline – „Die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/heizen-und-warmwasser/heizung-10-einfache-tipps-zum-heizkosten-sparen-13892) nennt rund 6 % weniger Heiz“. Der Befund trifft die heutige Fassung damit nicht mehr.
 
-- Heute in Zeile 70: 15 % – gekennzeichnet („beispielwert“)
+- Heute in Zeile 69: 15 % – gekennzeichnet („beispielwert“)
 
 ### `db8a69f08dc0020adebd`
 
@@ -197,7 +281,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Die Verbrauchszahl ist als Annahme gekennzeichnet: „Bei angenommenen 18.000 kWh im Jahr ergibt ein Cent Unterschied je kWh rechnerisch 180 € im Jahr.“ Der Artikel behauptet keinen typischen Haushaltsverbrauch mehr; die Zahl ist Rechenannahme im Beispiel.
 
-- Heute in Zeile 43: 18.000 kWh – **ohne** Kennzeichnung
+- Heute in Zeile 42: 18.000 kWh – **ohne** Kennzeichnung
 
 ## `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit`
 
@@ -575,7 +659,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen`
 
-- Datei-SHA256 (heute): `8f99b5c39c31cfdd7d8d82c5c960201a702e960c33b7e7a0846b3bdcf59e8c56`
+- Datei-SHA256 (heute): `a6380d23e1cce288cc8a3b0550be6e83fa0afff81793e46d5c0d99712c0947b6`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -638,7 +722,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn`
 
-- Datei-SHA256 (heute): `bea4b8f0ceb13e659d1ff542f3d6a2d7b1f22b5da1b57c3e9ee8358ed4fd611e`
+- Datei-SHA256 (heute): `e56fbb7dba2837c6a4b3d917d6fa9402e6e306655978405b265640be698eba64`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -765,7 +849,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich`
 
-- Datei-SHA256 (heute): `caa1182d7b3c4fa7ca323ebe77034e3346ef43f77cd1592762f78c0cbff85bb1`
+- Datei-SHA256 (heute): `6b6c478aef727c9da2fea914da6d220ea84c7c00d27dbe2d41162e98a4626e22`
 - Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -878,7 +962,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort`
 
-- Datei-SHA256 (heute): `d2fedef28e5786c96cb4f958b7ca0ddaa4ef8c0529966a4d767f25b2125ec5fb`
+- Datei-SHA256 (heute): `045de3c7841dbb757c327dff9c35b6c2d91b6194de8c2ce86c3d12d325d95191`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1034,7 +1118,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser`
 
-- Datei-SHA256 (heute): `c82a0bd064f84b7f5c0f5c3f3a28f60379c3dc45c19f5fb77fd44b769eba960b`
+- Datei-SHA256 (heute): `643ddbcf7ac2b810fcc38c21d3245524778704e2a7cfc79c637ce6e2f9d394c1`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1388,14 +1472,14 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage`
 
-- Datei-SHA256 (heute): `d1ac8f2e63d75d74cb9bb8df1f8f21b5075fe592f80db557e561baacd380ad1d`
+- Datei-SHA256 (heute): `a221593d964dde20259df4dc4be092fa432625726699ee7a37606b214ff4e82b`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `58f03a64adaaf8125959` | praezision | 2026-11-11 · 2. Entscheidung | 0,4 % in Zeile 61 gekennzeichnet | Während der Artikel vor hohen Kosten für Festmenüs warnt, liegt die Preissteigerung bei Nahrungsmitteln laut Destatis… |
-| `a7f5f01ef15a38839a0d` | praezision | 2026-11-11 · 2. Entscheidung | 10 % in Zeile 28 ohne Kennzeichnung · 14,9 % in Zeile 61 gekennzeichnet | Die Pauschale für 'Anreise und Mobilität' (10 % des Budgets) berücksichtigt nicht die überdurchschnittliche Preisstei… |
-| `bcc2bdf06220d5097133` | luecke | 2026-11-11 · 2. Entscheidung | 600 € in Zeile 61 gekennzeichnet · 2,8 % in Zeile 61 gekennzeichnet | Die Modellrechnung für das Weihnachtsbudget (600 €) lässt die aktuelle Teuerungsrate unberücksichtigt. Laut Statistis… |
+| `58f03a64adaaf8125959` | praezision | 2026-11-11 · 2. Entscheidung | 0,4 % in Zeile 59 gekennzeichnet | Während der Artikel vor hohen Kosten für Festmenüs warnt, liegt die Preissteigerung bei Nahrungsmitteln laut Destatis… |
+| `a7f5f01ef15a38839a0d` | praezision | 2026-11-11 · 2. Entscheidung | 10 % in Zeile 26 ohne Kennzeichnung · 14,9 % in Zeile 59 gekennzeichnet | Die Pauschale für 'Anreise und Mobilität' (10 % des Budgets) berücksichtigt nicht die überdurchschnittliche Preisstei… |
+| `bcc2bdf06220d5097133` | luecke | 2026-11-11 · 2. Entscheidung | 600 € in Zeile 59 gekennzeichnet · 2,8 % in Zeile 59 gekennzeichnet | Die Modellrechnung für das Weihnachtsbudget (600 €) lässt die aktuelle Teuerungsrate unberücksichtigt. Laut Statistis… |
 
 ### `58f03a64adaaf8125959`
 
@@ -1405,7 +1489,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 7f8e2a19d909): Die verlangte Quelle steht im Abschnitt „Welche Modellrechnung zeigt dir die passende Wochenrate?“ inline – „Zur Einordnung der Preise: Die Inflation lag im Oktober 2026 bei +2,8 %, Nahrungsmittel verteuerten sich mit +0,4 % deutlich schwächer, Energie dagegen mit +14,9 % stark ([Destatis“. Der Befund trifft die heutige Fassung damit nicht mehr.
 
-- Heute in Zeile 61: 0,4 % – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 59: 0,4 % – gekennzeichnet („modellrechnung“)
 
 ### `a7f5f01ef15a38839a0d`
 
@@ -1415,8 +1499,8 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 7f8e2a19d909): Die verlangte Quelle steht im Abschnitt „Welche Modellrechnung zeigt dir die passende Wochenrate?“ inline – „Zur Einordnung der Preise: Die Inflation lag im Oktober 2026 bei +2,8 %, Nahrungsmittel verteuerten sich mit +0,4 % deutlich schwächer, Energie dagegen mit +14,9 % stark ([Destatis“. Der Befund trifft die heutige Fassung damit nicht mehr.
 
-- Heute in Zeile 28: 10 % – **ohne** Kennzeichnung
-- Heute in Zeile 61: 14,9 % – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 26: 10 % – **ohne** Kennzeichnung
+- Heute in Zeile 59: 14,9 % – gekennzeichnet („modellrechnung“)
 
 ### `bcc2bdf06220d5097133`
 
@@ -1426,19 +1510,19 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 7f8e2a19d909): Die verlangte Quelle steht im Abschnitt „Welche Modellrechnung zeigt dir die passende Wochenrate?“ inline – „Zur Einordnung der Preise: Die Inflation lag im Oktober 2026 bei +2,8 %, Nahrungsmittel verteuerten sich mit +0,4 % deutlich schwächer, Energie dagegen mit +14,9 % stark ([Destatis“. Der Befund trifft die heutige Fassung damit nicht mehr.
 
-- Heute in Zeile 61: 600 € – gekennzeichnet („modellrechnung“)
-- Heute in Zeile 61: 2,8 % – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 59: 600 € – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 59: 2,8 % – gekennzeichnet („modellrechnung“)
 
 ## `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit`
 
-- Datei-SHA256 (heute): `3367d665bcaa2dfed9247bc5d13cd5333b0b615a51b76f5f5a4468b8fd389979`
+- Datei-SHA256 (heute): `6a837acbbaebd41da928747088cb234eb96ae51c588911b72b60e3ca9c629951`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
 | `25d6b9a720f981e8e9df` | praezision | **neu** | nicht mehr im Text: 0,4 % | Bei der Bewertung flexibler Kosten sollte die moderate Preisentwicklung bei Nahrungsmitteln (+0,4 %) den stark steige… |
 | `3693b612533c24dcd1ea` | luecke | **neu** | nicht mehr im Text: 12,2 % | Der Ratgeber empfiehlt die Prüfung von Stromverträgen, vernachlässigt aber den massiven Preistrend bei Energie von +1… |
-| `c877eeff8842942c0071` | praezision | **neu** | 2,8 % in Zeile 110 ohne Kennzeichnung | Die allgemeine Budget-Transparenz ist ohne Einbezug der Inflationsrate von 2,8 % unvollständig, da Preissteigerungen… |
+| `c877eeff8842942c0071` | praezision | **neu** | 2,8 % in Zeile 109 ohne Kennzeichnung | Die allgemeine Budget-Transparenz ist ohne Einbezug der Inflationsrate von 2,8 % unvollständig, da Preissteigerungen… |
 
 ### `25d6b9a720f981e8e9df`
 
@@ -1462,7 +1546,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 **Frühere Entscheidung:** keine – dieser Befund ist neu.
 
-- Heute in Zeile 110: 2,8 % – **ohne** Kennzeichnung
+- Heute in Zeile 109: 2,8 % – **ohne** Kennzeichnung
 
 ## `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust`
 
@@ -1596,7 +1680,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken`
 
-- Datei-SHA256 (heute): `f786131430dfbfa7050fd4662f443f38451a2dd5f3b82ffdd9972fc2292e091d`
+- Datei-SHA256 (heute): `ee328ffb9e6ee8d6bf93681b33ab95d58a3bcbacf0ac686e778a4384ac168ccb`
 - Offene Live-Befunde: **1**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1672,6 +1756,32 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 - Heute in Zeile 12: 25 % – gekennzeichnet („beispielwert“)
 
+## `2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt`
+
+- Datei-SHA256 (heute): `426268a92d932f92a38c34eae3d741479ed79973d63d9db28b60bf25b14edfec`
+- Offene Live-Befunde: **2**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `7c2624072c861d136c96` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Die pauschale Behauptung zu Preisunterschieden zwischen Standardtarifen und Angeboten ist ein Marktdatum ohne Beleg o… |
+| `d9d3004fbc05895c3f79` | praezision | **neu** | nicht mehr im Text: 12,7 % | Die Aussage zum steigenden Strompreis ist unpräzise; die Quelle belegt einen konkreten Anstieg der Energiepreise um +… |
+
+### `7c2624072c861d136c96`
+
+**Befund:** Die pauschale Behauptung zu Preisunterschieden zwischen Standardtarifen und Angeboten ist ein Marktdatum ohne Beleg oder eigene Messung (Regel 9a/9e).
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `d9d3004fbc05895c3f79`
+
+**Befund:** Die Aussage zum steigenden Strompreis ist unpräzise; die Quelle belegt einen konkreten Anstieg der Energiepreise um +12,7 %.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+- Im heutigen Text nicht mehr vorhanden: 12,7 %
+
 ## `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten`
 
 - Datei-SHA256 (heute): `7d08447c94a62b239efa60827d06fc292d79ab9b2cc46a41d6c908ed296cf41a`
@@ -1718,7 +1828,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken`
 
-- Datei-SHA256 (heute): `6a47b76dd9c6fa5aebfee1f7c66280c3a1f55b4fed48fa7ab4363bbd7dc3ad83`
+- Datei-SHA256 (heute): `90760f36b3993168198aa957715dbe05a58051f6fad7d1157730de6725f25fcd`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2048,6 +2158,50 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
+## `2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege`
+
+- Datei-SHA256 (heute): `5932d1585ecb9de0d4c0888ad281eeaab929bf819fc637bfae319582a183e9ca`
+- Offene Live-Befunde: **4**
+
+| Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
+|---|---|---|---|---|
+| `381dd90113dd1ee72f39` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Das Versprechen, 'alle Gebühren' auf Portalen zu sehen, ist ohne Messgröße unpräzise, da Portale systembedingt nur ei… |
+| `4483a81dd1c292034cd0` | praezision | **neu** | kein Wert genannt (Aussage/Präzision) | Die Warnung vor einer 'sehr hohen Strafgebühr' am Gate ist ein Superlativ ohne messbare Daten oder konkrete Preisbeis… |
+| `6f4b591e9cadb27adf49` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Bei der Erwähnung von Stornierungen durch Airlines fehlt der Hinweis auf den rechtlichen Rahmen (z. B. EU-Fluggastrec… |
+| `cf60024b74a5e86b50c0` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Die statistische Aussage zur Preisgünstigkeit von Dienstag und Mittwoch ist eine Marktprognose ohne Beleg in der gena… |
+
+### `381dd90113dd1ee72f39`
+
+**Befund:** Das Versprechen, 'alle Gebühren' auf Portalen zu sehen, ist ohne Messgröße unpräzise, da Portale systembedingt nur eine Marktauswahl zeigen.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `4483a81dd1c292034cd0`
+
+**Befund:** Die Warnung vor einer 'sehr hohen Strafgebühr' am Gate ist ein Superlativ ohne messbare Daten oder konkrete Preisbeispiele.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `6f4b591e9cadb27adf49`
+
+**Befund:** Bei der Erwähnung von Stornierungen durch Airlines fehlt der Hinweis auf den rechtlichen Rahmen (z. B. EU-Fluggastrechte).
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
+### `cf60024b74a5e86b50c0`
+
+**Befund:** Die statistische Aussage zur Preisgünstigkeit von Dienstag und Mittwoch ist eine Marktprognose ohne Beleg in der genannten Quelle.
+
+**Frühere Entscheidung:** keine – dieser Befund ist neu.
+
+Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
+
 ## `2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang`
 
 - Datei-SHA256 (heute): `f0565beb0e7e1ed8fdf1dab9f8a9601fd2354cb9e6cc07a3b0bf062298b15014`
@@ -2120,9 +2274,15 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 ## Schließweg (eine Zeile je Befund)
 
 ```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1b7c9b9cac0290f71242 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden ee260c27a6bfdd60fa04 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 124ff2c3cd3917c274aa --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7bdec96c0329769bebe6 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a56734aa032e0ed9e0c4 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1d4095501e717fb30d7b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 77520584b5afd8ebd7f7 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden a3be3d50280d4fe0a1d8 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d6cc7bae16dead3e610b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 30caa57be394afb62947 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 32a3ea879f2cf126b3a7 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden c583efe1ce02df3ca2d7 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
@@ -2243,6 +2403,8 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden c45ea4bb1a6f2330679
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4d0125136c5b940946e4 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7aeb2098034d16a46885 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ea97b5dd6695de127fd2 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7c2624072c861d136c96 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden d9d3004fbc05895c3f79 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 1dc0f20f9ab3a6b783bc --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 7b94ca07b36c0b7cb1cc --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 985f506ee04087bf7253 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
@@ -2275,6 +2437,10 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden f593fe21275bd9dcefe
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 98eb45f772ad7a0aac7b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden b7f0d52968d89cdf8c5b --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden be911855d67f998be662 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 381dd90113dd1ee72f39 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4483a81dd1c292034cd0 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 6f4b591e9cadb27adf49 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden cf60024b74a5e86b50c0 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 4284fd2d9c9005e7af8f --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 84e247f17354e224c973 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden a2a7dc69f10393af6531 --von "<Name>" --begruendung "<was am heutigen Text geprüft wurde>"
