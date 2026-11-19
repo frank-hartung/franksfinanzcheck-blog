@@ -1,7 +1,8 @@
 import { test, expect } from './fixtures.mjs';
 
-test('Kfz-Korrektur erreicht Leser vor dem Teaser der früher freigegebenen Fassung', async ({ page }) => {
+test('Kfz-Korrektur erreicht Leser vor dem Teaser der neuen Fassung', async ({ page }) => {
   await page.goto('/posts/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen/');
+  await expect(page.locator('h1')).toHaveText('Kfz-Versicherung vergleichen: Was ändert sich außer dem Beitrag?');
   const korrektur = page.locator('.ff-korrektur');
   await expect(korrektur).toContainText('Kündigungsfrist');
   await expect(korrektur).toContainText('keine durchschnittliche Ersparnis');
