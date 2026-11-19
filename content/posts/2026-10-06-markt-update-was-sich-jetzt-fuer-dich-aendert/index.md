@@ -1,6 +1,6 @@
 ---
 title: "Google-Regeln für Ratgeber: Erfahrung und Quellen"
-description: "Was die Google-Regeln für Ratgeber für Finanztexte bedeuten, erklärt dieser Entwurf. Noch nicht zur Veröffentlichung freigegeben."
+description: "Woran erkennst du einen belastbaren Finanzratgeber? Suche nach einer nachvollziehbaren Rechnung, benannten Quellen und der Person hinter dem Text."
 date: 2026-10-06T11:33:15Z
 draft: true
 tags: ["Geld sparen im Alltag", "Frugalismus", "Haushaltsbuch führen", "Budget planen"]
@@ -12,8 +12,8 @@ ai_generated: true
 ki_redaktion: "chatgpt"
 ki_redaktion_status: "review"
 news_kategorie: "seo_qualitaet"
-pin_title: "Google-Regeln für Finanzratgeber: Was Erfahrung und Quellen zählen"
-pin_description: "*Werbung | Google-Regeln für Finanzratgeber: Was Erfahrung und Quellen zählen – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun … Mehr Spartipps auf FranksFinanzcheck! #marktupdate #was #sich"
+pin_title: "Google-Regeln für Ratgeber: Erfahrung und Quellen"
+pin_description: "*Werbung | Woran erkennst du einen belastbaren Finanzratgeber? Suche nach einer nachvollziehbaren Rechnung, benannten Quellen und der Person hinter dem Text. Verfolge bei einer konkreten Zahl den Verweis bis zur Originalquelle. Ein Quellenverzeichnis hilft wenig, wenn es eine andere Frage oder einen anderen Zeitraum behandelt."
 cover:
   image: "images/covers/2026-10-06-markt-update-was-sich-jetzt-fuer-dich-aendert.jpg"
   alt: "Google-Regeln für Finanzratgeber: Was Erfahrung und Quellen zählen"
@@ -92,6 +92,8 @@ Viele Firmen messen ihren Erfolg an der Position in der Liste. Fällt eine Seite
 **Faustregel:** Offene Quellen schaffen Vertrauen und bringen mehr Klicks. Ein belegter Tipp lädt eher zum Klick ein. Leser bleiben länger auf der Seite. Das signalisiert Google: Diese Seite ist wertvoll. Ein klarer Quellenverweis wirkt wie ein Anker. Er gibt dem Leser die Chance, die Fakten selbst zu prüfen. Das schafft eine Bindung zwischen Leser und Seite.
 
 **Faustregel:** Eigene Erfahrung wirkt wie ein Stempel für gute Qualität. Berichtet ein Autor aus der Praxis, wirkt das echt. Suchmaschinen bewerten das positiv. Das stärkt die Autorität der Seite und hebt das Ranking. Persönliche Beispiele zeigen: Das Wissen wurde wirklich angewendet. Das unterscheidet einen Fachmann von einem reinen Schreiberling.
+
+**Für deinen nächsten Check:** Verfolge bei einer konkreten Zahl den Verweis bis zur Originalquelle. Ein Quellenverzeichnis hilft wenig, wenn es eine andere Frage oder einen anderen Zeitraum behandelt.
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) **Lesetipp:** [Büroausstattung steuerlich clever absetzen: So geht's](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/)
 

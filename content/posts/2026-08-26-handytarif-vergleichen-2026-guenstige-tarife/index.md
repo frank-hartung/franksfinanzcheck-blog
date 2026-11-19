@@ -1,7 +1,7 @@
 ---
-lastmod: 2026-11-04
-title: "Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 €"
-description: "Handytarif 2026 vergleichen: Allnet-Flats ab 4,99 €, 5G unter 15 € und wann LTE lohnt. Die 8-Punkte-Checkliste zeigt bis zu 360 € Sparpotenzial im Jahr."
+lastmod: 2026-11-19
+title: "Handytarife vergleichen: Welches Angebot passt zu dir?"
+description: "Welcher Handytarif passt zu dir? Vergleiche deinen Datenverbrauch mit Netzabdeckung, Laufzeit und Gesamtpreis einschließlich Anschlussgebühr."
 date: 2026-09-02T04:05:51Z
 draft: false
 tags: ["Internet und Mobilfunk"]
@@ -12,7 +12,7 @@ author: "Frank Hartung"
 ai_generated: false
 cover:
   image: "images/covers/2026-08-26-handytarif-vergleichen-2026-guenstige-tarife.jpg"
-  alt: "Handytarif 2026 vergleichen: Günstige Tarife ab 4,99 €"
+  alt: "Handytarife vergleichen: Welches Angebot passt zu dir?"
   caption: "Tipp von FranksFinanzcheck"
   ki_pruefung:
     digital_source_type: algorithmicMedia
@@ -20,12 +20,12 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: 4aa34844a52fdad70c93a690ffe12a9cc106339e9793f6c770230a4400e4123b
     geprueft_am: 2026-11-13
-kurzantwort: "Beim Handytarif-Vergleich 2026 zahlst du für eine solide Allnet-Flat mit 10-25 GB Datenvolumen im besten Netz zwischen 4,99 € und 14,99 € im Monat – 5G ist bei vielen Tarifen bereits inklusive. Entscheidend sind nicht nur der Preis, sondern Netzqualität an deinen Wohnorten, die LTE/5G-Abdeckung, inkludiertes EU-Roaming und eine Laufzeit von maximal 24 Monaten. Wer jetzt vergleicht und wechselt, spart gegenüber typischen Alttarifen (25-40 €) bis zu 360 € pro Jahr."
+kurzantwort: "Prüfe den Datenverbrauch auf deinen letzten Rechnungen und die Netzabdeckung an deinen üblichen Aufenthaltsorten. Vergleiche passende Angebote über dieselbe Laufzeit, einschließlich Anschlussgebühr und Preis nach Ablauf eines Rabatts."
 
 social_posted: true
 keywords: ["Handytarif 2026 vergleichen", "Handytarif-Vergleich", "Günstiger Handytarif", "Allnet Flat", "5G Tarif", "Handyvertrag wechseln", "LTE Tarif", "Mobilfunk Discounter"]
-pin_title: "Handytarif 2026 vergleichen: Allnet-Flats ab 4,99 Euro"
-pin_description: "*Werbung | Handytarife vergleichen 2026: Allnet-Flats ab 4,99 Euro, 5G unter 15 Euro und wann sich LTE noch lohnt. Mit der 8-Punkte-Checkliste entscheidest du in Minuten und sparst bis zu 360 Euro im Jahr. Jetzt die Vergleichsanleitung lesen."
+pin_title: "Handytarife vergleichen: Welches Angebot passt zu dir?"
+pin_description: "*Werbung | Welcher Handytarif passt zu dir? Vergleiche deinen Datenverbrauch mit Netzabdeckung, Laufzeit und Gesamtpreis einschließlich Anschlussgebühr. Trenne den Gerätepreis vom Tarif. Vergleiche das Paket mit einem separat gekauften Telefon und einem SIM-Vertrag für denselben Zeitraum."
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
@@ -43,238 +43,88 @@ quellen:
 faktencheck: "2026-10-13"
 ---
 
-Du willst Handytarif-vergleichen im Modellfall? Hast du deinen [Handyvertrag](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) schon genauer geprüft? Millionen zahlen Monat für Monat 25 bis 45 €. Für Leistung, die heute die Hälfte kostet.
+Du brauchst nicht den günstigsten Handytarif auf einer Liste, sondern einen, der dort funktioniert, wo du ihn nutzt. Eine schlecht versorgte Bahnstrecke wird durch zusätzliches Datenvolumen nicht besser. Und für ein ungenutztes Datenpolster zahlst du auch dann, wenn der Preis pro Gigabyte niedrig aussieht.
 
-Der Markt ist 2026 hart umkämpft als Beispielwert. Discounter und Submarken unterbieten sich mit Allnet-Flats. Teilweise ist 5G für unter 10 € drin.
+**Transparenz:** Der gekennzeichnete Partnervergleich kann uns bei einem Abschluss eine Provision bringen. Für dich entstehen dadurch keine Mehrkosten.
 
- Mit einem Wechsel sparst du bis zu **360 € im Jahr**; das ist ein Modellwert.
+## Bedarf aus der Rechnung ablesen
 
+Öffne die Verbrauchsübersicht für mehrere vollständige Abrechnungsmonate. Schau auf das **verbrauchte**, nicht das gebuchte Volumen. Notiere einen gewöhnlichen Monat und einen mit besonders hoher Nutzung. War der Spitzenwert die Ausnahme, etwa weil du im Urlaub dein Handy als Hotspot verwendet hast? Dann vergleiche die Kosten einer gelegentlichen Nachbuchung mit denen eines dauerhaft größeren Pakets.
 
+Wenn dein Telefon eine eigene Datenstatistik führt, prüfe das Startdatum. Ein Zähler, der seit dem letzten Sommer läuft, ist kein Monatsverbrauch. Auch ein Tarif mit gedrosselter Geschwindigkeit kann die Auswertung verzerren: Wer ab Monatsmitte kaum noch streamen konnte, hätte ohne Drosselung möglicherweise mehr Daten genutzt.
 
----
+## Netz vor Preis prüfen
 
-💡 **Schnell-Tipp von FranksFinanzcheck:** Starte den kostenlosen Vergleich und finde den besonders günstigen Tarif für dein Nutzungsverhalten: [**Jetzt Handytarife vergleichen**](/go/handytarife/)  
-_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
+Die Marke auf der SIM-Karte sagt nicht allein, wie gut das Netz in deiner Wohnung ist. Prüfe im Angebot das verwendete Netz und die Abdeckungskarte des Betreibers. Schau nicht nur auf die Adresse zu Hause, sondern auch auf den Arbeitsplatz und deine typischen Wege. Eine Karte ist eine Orientierung, kein Empfangsversprechen innerhalb eines Gebäudes.
 
-## Der Mobilfunkmarkt 2026: Drei Netze, Dutzende Anbieter
+Wenn der Empfang für deine Arbeit wichtig ist, teste nach Möglichkeit am konkreten Ort. Ein hoher Downloadwert auf dem Gehweg sagt wenig über die Gesprächsqualität am Schreibtisch. Für Videotelefonie zählt außerdem der Upload. Beziehe ein, welche Netztechnik dein Gerät unterstützt, bevor du für höhere Geschwindigkeiten zahlst.
 
-In Deutschland gibt es physisch nur drei Mobilfunknetze:
+## Gesamtkosten statt Aktionspreis
 
-- **Telekom (D1):** Passende Netzabdeckung und -Qualität, vor allem in ländlichen Regionen.
-- **Vodafone (D2):** Gute Netzqualität, stark in Ballungsräumen, Kabel-Kombivorteile.
-- **Telefónica / O2:** Besonders günstige Netzbetreiber-Konditionen, in Städten sehr gut, auf dem Land teils lückenhaft.
+Lege für zwei Angebote eine kleine Tabelle an. In die erste Zeile kommen alle Monatsentgelte während der Rabattphase. Die zweite enthält die Monate danach. Addiere Anschlussgebühr, Versand und nötige Zusatzkarten. Ziehe einen Bonus nur ab, wenn du die Bedingungen erfüllen kannst. Teile die Summe durch dieselbe Zahl von Monaten.
 
-Fast alle anderen Anbieter – von Congstar bis Klarmobil – sind Reseller oder Discounter. Sie nutzen eines der drei Netze. So surfst du auch im Discounter-Tarif im Netz der Telekom oder Vodafone. Das kostet oft nur einen Bruchteil des Original-Preises.
+**Modellrechnung, keine Marktangebote:** Ein Haushalt bezahlt im alten Tarif 34,99 € monatlich. Ein neuer Tarif kostet angenommen 9,99 € monatlich für 24 Monate, ohne Anschlussgebühr. Es geht nur um den Tarif, nicht um ein mitfinanziertes Smartphone.
 
-### Netzqualität nach Anwendungsfall
+| Vergleich über 24 Monate | Bisheriger Tarif | Beispielangebot |
+|---|---:|---:|
+| Monatspreis | 34,99 € | 9,99 € |
+| Summe für 24 Monate | 839,76 € | 239,76 € |
+| Differenz | | 600,00 € |
 
-| Anwendungsfall | Empfohlenes Netz |
-|:---|:---|
-| Ländliche Region, Homeoffice mit mobilen Daten | Telekom (D1) |
-| Stadt, Streaming, Social Media | Telekom oder Vodafone |
-| Stadt, WhatsApp, Surfen, E-Mails | O2 (besonders günstige Alternative) |
-| Reisen in Europa | alle drei (EU-Roaming inklusive) |
+Die Differenz beträgt hier 25 € pro Monat. Sie ist kein üblicher Wechselgewinn. Fielen einmalig 30 € für den Anschluss an, sänke der Vorteil auf 570 €. Läuft der Altvertrag noch parallel, gehören auch diese Zahlungen in die Rechnung. Mit dem [24-Monats-Effektivpreis-Rechner](../../werkzeuge/effektivpreis-rechner/) kannst du die Annahmen durch deine Beträge ersetzen.
 
-> 📡 **Tipp:** Überprüfe vor der Bestellung mit der offiziellen Netzabdeckungskarte des Netzbetreibers (Telekom, Vodafone, O2) die tatsächliche LTE-/5G-Abdeckung an deiner Wohnung und deinem Arbeitsplatz. Ein "gutes Netz" nützt dir nichts, wenn genau bei dir zu Hause Funklöcher sind.
+## Wann Flexibilität mehr wert ist
 
-## Die vier Tarif-Typen im Überblick
+Ein auf zwei Jahre gebundener Vertrag und ein monatlich kündbarer Tarif erfüllen unterschiedliche Aufgaben. Wenn ein Umzug bevorsteht oder du den Empfang erst ausprobieren willst, kann die kürzere Bindung wichtiger sein als ein niedrigerer Monatspreis. Notiere neben der Summe deshalb immer den frühesten möglichen Ausstieg.
 
-### 1. Prepaid-Tarife
+Bei Prepaid zahlst du vor der Nutzung. Das bedeutet nicht, dass jedes Paket ohne wiederkehrende Abbuchung auskommt: Eine Option kann sich bei ausreichendem Guthaben verlängern. Prüfe auch das Abrechnungsintervall. Ein Paket für vier Wochen wird häufiger fällig als eines pro Kalendermonat. Vergleiche in diesem Fall die Zahlungen für ein ganzes Jahr.
 
-Du lädst Guthaben im Voraus auf. Eine monatliche Grundgebühr gibt es nicht. Das passt für Gelegenheitsnutzer, Kinder oder als Zweitkarte.
+## Vor dem Abschluss: drei Fragen ans Kleingedruckte
 
-- **Vorteile:** Keine Vertragsbindung, volle Kostenkontrolle.
-- **Nachteile:** Meist weniger Datenvolumen, Komfort-Einschränkungen.
-- **Preis:** 4–10 € für 3–8 GB Allnet-Flat im Rechenfall.
+- **Was passiert nach Verbrauch des Volumens?** Drosselung und kostenpflichtige Datenautomatik haben unterschiedliche Folgen. Prüfe Preis und Abschaltmöglichkeit einer Nachbuchung.
+- **Was gilt unterwegs?** Telefonate aus Deutschland ins Ausland und die Nutzung einer SIM-Karte auf Reisen sind nicht dasselbe. Prüfe deine häufigsten Zielländer und bei Reisen auch die Roamingbedingungen.
+- **Ist das Gerät wirklich enthalten?** Addiere Anzahlung, Gerätezuschläge und mögliche Schlussrate. Vergleiche das Paket mit einem separat gekauften Telefon und einem reinen SIM-Tarif.
 
-### 2. Allnet-Flat mit Laufzeit (24 Monate)
+## Angebote auf dieselbe Leistung bringen
 
-Telefon- und SMS-Flat in alle Netze. Dazu kommt Datenvolumen. Der Klassiker ist der Vertrag mit Handy. Oft subventioniert der Anbieter das Gerät.
+Eine zusätzliche SIM fürs Tablet, eine Uhr mit Mobilfunk und eine Festnetzoption können den Tarifvergleich kippen. Ein Anbieter schließt eine weitere Karte ein, ein anderer berechnet sie monatlich, ein dritter verlangt nur für die Aktivierung Geld. In den Warenkorb gehören genau die Optionen, die du nutzen willst. Streiche Geschenke nicht als vermeintliche Ersparnis vom Preis ab, wenn du sie ohnehin nicht gekauft hättest.
 
-- **Vorteile:** Meist günstiger Monatspreis, Gerät finanzierbar.
-- **Nachteile:** 24 Monate gebunden, Preiserhöhungen möglich im Rechenbeispiel.
-- **Preis:** 7–20 € für 10–40 GB, mit Handy ab 25 €.
+Achte beim Vergleich eines alten Vertrages darauf, was du durch eine Änderung verlierst. Vielleicht enthält er eine zusätzliche Karte ohne Aufpreis oder einen Rabatt auf den Festnetzanschluss. Fällt dieser Rabatt beim Wechsel weg, ist selbst ein deutlich billigerer Mobilfunktarif nicht unbedingt günstiger für den Haushalt. Umgekehrt ist ein besonders großes Datenpaket im alten Vertrag kein Grund zu bleiben, wenn du es seit Monaten kaum brauchst.
 
-### 3. Flex-Tarife (monatlich kündbar)
+### Zwei Karten, ein Haushalt: eine andere Rechnung
 
-Volle Tarif-Leistung, nur 1 Monat Laufzeit; das ist ein Beispielwert. Seit 2022 gilt: Nach 24 Monaten muss der Anbieter in einen monatlich kündbaren Tarif wechseln.
+Angenommen, du vergleichst zwei Einzelverträge zu je 12 € monatlich mit einem Hauptvertrag für 18 € und einer zweiten Karte für 8 €. Ohne weitere Entgelte kosten die Einzelverträge zusammen 24 €, das Paket 26 € pro Monat. Auf zwölf Monate gerechnet sind das 288 € gegenüber 312 €. Die Bezeichnung „Partnerkarte“ allein sagt nichts darüber aus, welche Lösung weniger kostet.
 
-- **Vorteile:** Maximale Flexibilität.
-- **Nachteile:** Etwas teurer als 24-Monats-Tarife.
-- **Preis:** 8–18 € im Modellfall.
+Die Rechnung ändert sich, wenn eine Karte separat mehr Datenvolumen braucht oder du bei getrennten Verträgen ein zweites Netz als Ausweichmöglichkeit möchtest. Kläre auch, wer die Rechnung bekommt, ob sich beide Nummern einzeln mitnehmen lassen und was aus der zweiten Karte wird, wenn der Hauptvertrag endet. Ein gemeinsames Datenpaket ist kein vollwertiger Ersatz für zwei getrennte Pakete, wenn eine Person regelmäßig das ganze Volumen aufbraucht.
 
-### 4. 5G-Tarife
+## Den Gerätepreis aus dem Tarif herausrechnen
 
- Über 60 % der Haushalte haben 2026 schon ein 5G-Handy; das ist ein Modellwert.
+Bei einem Smartphone-Angebot ist die niedrige Anzahlung gut sichtbar. Die monatlichen Kosten verteilen sich dagegen über viele Rechnungen. Trenne die beiden Kaufentscheidungen: Welches Telefon hättest du ohne Vertrag gewählt? Und was würde ein für dich gleichwertiger SIM-Tarif ohne Gerät kosten?
 
-- **Vorteile:** Höhere Spitzengeschwindigkeiten, weniger überlastet in Städten.
-- **Nachteile:** Nur sinnvoll mit 5G-fähigem Gerät und an Orten mit 5G-Abdeckung.
-- **Preis:** 5G ist heute bereits ab ca. 8–12 € im Monat verfügbar; das ist ein Rechenbeispiel.
+**Modell für 24 Monate:** Ein Paket kostet 30 € monatlich plus 49 € für das Telefon. Insgesamt zahlst du 769 €. Ein vergleichbarer reiner SIM-Tarif kostet angenommen 12 € monatlich, also 288 € in zwei Jahren. Für das Gerät bleiben im Paket rechnerisch 481 €. Kostet dasselbe Gerät im Einzelkauf 450 €, ist der getrennte Kauf in diesem Beispiel 31 € günstiger. Prüfe, ob das Gerät nach der letzten Rate tatsächlich dir gehört und ob es eine Schlusszahlung gibt. Ein Mietgerät wäre kein gleichwertiger Vergleich.
 
-## Die 8-Punkte-Checkliste für den Tarifvergleich
+Vergiss das Ende des Vergleichszeitraums nicht. Sinkt der Paketpreis nach der letzten Geräterate automatisch? Kannst du die SIM weiter nutzen, wenn du das Gerät austauschst? Die Antwort findest du in der Vertragszusammenfassung und den Gerätebedingungen. Aus dem Namen des Tarifs lässt sie sich nicht ablesen.
 
-Bevor du einen Vertrag abschließt, prüfe systematisch diese acht Kriterien:
+## Unterwegs: Datenvolumen und Erreichbarkeit getrennt planen
 
-1. **Netz:** Passt die Netzqualität an Wohnung, Arbeitsplatz und auf den täglichen Wegen?
-2. **Datenvolumen:** Wie viel GB verbrauchst du wirklich? In den Einstellungen deines Smartphones unter "Mobiles Netz" / "Datennutzung" siehst du den exakten Verbrauch der letzten Monate.
- **Geschwindigkeit:** Reichen 25 Mbit/s (LTE) oder brauchst du 50–300 Mbit/s (5G); das ist ein Rechenbeispiel?
-4. **Telefonie & SMS:** Telefonie-Flat in alle deutschen Netze ist Standard. SMS-Flat immer seltener genutzt, aber meist inklusive.
-5. **EU-Roaming:** Seit 2017 innerhalb der EU ohne Aufpreis – achte aber auf die Faire-Use-Regelungen und die Schweiz (oft nicht inklusive).
-6. **Laufzeit:** Maximale 24 Monate, danach automatisch monatlich kündbar. Vorsicht bei "Flat mit Mindestlaufzeit 24 Monate und automatischer Verlängerung um 12 Monate".
-7. **Anschlussgebühr & Versand:** Manche Anbieter verlangen 20–40 € Bereitstellung. Gute Angebote erlassen diese im Aktionszeitraum.
-8. **Kündigung & Rufnummernmitnahme:** Die Mitnahme der alten Rufnummer ist gesetzlich kostenlos und einfach.
+Wer viel im WLAN ist, sieht auf der Mobilfunkrechnung oft nur einen kleinen Datenverbrauch. Fällt der heimische Anschluss einmal aus oder arbeitest du eine Woche mit dem Laptop über einen Hotspot, kann sich das ändern. Plane solche Ausnahmen nicht zwangsläufig als Dauervertrag ein. Prüfe stattdessen, was eine einmalige Buchung kosten würde und wie lange das zusätzliche Volumen verfügbar bleibt.
 
-## Welcher Tarif für welches Nutzungsverhalten?
+Ein weiterer Fall ist das Pendeln. Entscheidend ist nicht die höchste theoretische Geschwindigkeit am Bahnhof, sondern ob das Arbeitsgespräch auf der Strecke stabil bleibt. Frage bei einem Netzwechsel möglichst jemanden, der dieselbe Verbindung nutzt. Teste außerdem, ob dein Telefon WLAN-Telefonie unterstützt und ob dein Tarif diese Funktion vorsieht. Sie kann in der Wohnung helfen, ersetzt aber keinen Empfang unterwegs.
 
-| Nutzertyp | Empfohlenes Volumen | Preisspanne 2026 |
-|:---|---:|---:|
-| Gelegenheitsnutzer (WhatsApp, Telefon, E-Mail) | 3–8 GB | 4,99–7,99 € |
-| Normalnutzer (Social Media, Streaming unterwegs) | 10–25 GB | 7,99–14,99 € |
-| Power-User (HD-Streaming, Hotspot, Cloud) | 25–50 GB | 12,99–24,99 € |
-| Familie / mehrere Karten | 20+ GB + Multi-SIM | ab 14,99 € |
+## Wenn der Vertrag für jemand anderen gedacht ist
 
-## Beispielrechnung: 25 € pro Monat sparen
+Bei einem ersten Handy für ein Kind kann Kostenkontrolle wichtiger sein als viel Datenvolumen. Wer kann kostenpflichtige Optionen buchen? Wie wird das Guthaben aufgeladen, und ist eine automatische Aufladung aktiviert? Eine vermeintlich harte Kostengrenze wirkt anders, wenn nach jeder Unterschreitung eines Schwellenwerts automatisch neues Geld eingezogen wird.
 
-| Merkmal | Alter Vertrag | Neuer Vertrag |
-|:---|:---|:---|
-| Anbieter | Klassischer Netzbetreiber | Discounter im Telekom-Netz |
-| Netz | Telekom | Telekom |
-| Datenvolumen | 12 GB LTE | 25 GB 5G |
-| Telefonie/SMS | Flat | Flat |
-| EU-Roaming | ✅ | ✅ |
-| Laufzeit | Alttarif (unbegrenzt) | 24 Monate |
-| Monatspreis | 34,99 € | 9,99 € |
-| **Ersparnis pro Jahr** | – | **300 €** |
-| **Ersparnis über 24 Monate** | – | **600 €** |
+Für ein selten genutztes Zweithandy ist eine andere Frage wichtiger: Wie lange bleibt die Karte ohne aktive Nutzung erreichbar? Lies die Hinweise des Anbieters und sichere den Zugang zum Kundenkonto. Auch ein wenig genutzter Vertrag braucht eine aktuelle Kontaktadresse, damit Änderungen dich erreichen.
 
-Die Beispielrechnung zeigt: Mehr Leistung muss nicht mehr kosten. Im Beispiel verdoppelt sich das Datenvolumen, und 5G ist enthalten.
+## Die erste Rechnung kontrollieren
 
-Im Beispiel sinkt der Monatsbeitrag um 25 €. Die Rufnummer lässt sich in der Regel mitnehmen; was dabei anfällt, hängt vom Anbieter ab.
+Vergleiche die erste Abrechnung nicht nur mit dem beworbenen Monatspreis. Sie kann einen Teilmonat, die Freischaltung und bereits die nächste Abrechnungsperiode enthalten. Gehe die Positionen einzeln durch. Ein hoher erster Betrag ist nicht automatisch ein Fehler; ein unbestelltes Zusatzpaket ist aber auch dann klärungsbedürftig, wenn der Gesamtbetrag ungefähr passt.
 
+Markiere danach den ersten vollständigen Monat. Stimmen regelmäßiges Grundentgelt und Laufzeit des Rabatts mit der gespeicherten Auftragsbestätigung überein? Falls ein Bonus erst auf Antrag gezahlt wird, notiere Frist, Nachweis und zuständige Stelle. Bewahre auch die letzte Rechnung des alten Anbieters auf. So kannst du ein ordentlich berechnetes Restentgelt von einer ungewollten Doppelbelastung unterscheiden.
 
-## Die 5 häufigsten Fallstricke beim Vertragsabschluss
+## Wechsel vorbereiten
 
-### 1. Die Datenautomatik
+Lies Enddatum und Kündigungsfrist in deiner Vertragsübersicht nach. Wenn du die Nummer behalten möchtest, gleiche die beim alten Anbieter hinterlegten Kundendaten mit dem neuen Auftrag ab. Bewahre Kündigungsbestätigung, Vertragszusammenfassung und bestätigten Portierungstermin auf. Die Rufnummernmitnahme allein beendet nicht automatisch alle Zahlungspflichten aus dem alten Vertrag.
 
-Das Volumen ist aufgebraucht? Dann wird automatisch nachgebucht.
-
-Oft kostet das extra. Drei Nachbuchungen verdoppeln den Monatspreis. **Lösung:** Nimm einen Tarif mit Drosselung. Oder schalte die Datenautomatik ab.
-
-
-### 2. Lange Mindestlaufzeiten mit stillschweigender Verlängerung
-
-24 Monate Laufzeit; das ist eine Modellannahme. Dann verlängert sich der Vertrag oft automatisch.
-
-Willst du das nicht, musst du 3 Monate vorher kündigen; das ist ein Modellwert. Seit Dezember 2021 ist diese Praxis meist unwirksam. Doch einige Anbieter versuchen es weiter. **Empfehlung:** Kündige direkt nach der Aktivierung schriftlich.
-
-
-### 3. "EU-Roaming inklusive", aber mit Einschränkungen
-
-Die Schweiz, Großbritannien und die Türkei gehören **nicht** zur EU-Roaming-Verordnung. Reist du oft dorthin, wird es teuer.
-
-Bis zu 2 bis 5 € pro Megabyte sind möglich im Modellfall. **Ausweg:** Buche eine separate Option. Oder nutze eine lokale Prepaid-Karte.
-
-### 4. Lockpreise, die nach 12 Monaten steigen
-
-Aktionspreise gelten oft nur 6 bis 12 Monate als Beispielwert. Danach steigt der Preis um 5 bis 10 €. **Trick:** Trage das Aktionsende im Kalender ein. Vergleiche dann erneut.
-
-### 5. "Hotline kostet extra"
-
- **Lösung:** Ist dir Support wichtig, wähle eine 0800-Hotline; das ist ein Beispielwert.
-
-## Rufnummernmitnahme: So funktioniert der Wechsel
-
-1. **Alten Vertrag kündigen**, oder bei einem Laufzeitvertrag unter Einhaltung der Frist.
-2. **Rufnummernmitnahme beantragen:** Beim neuen Anbieter während der Bestellung "[Rufnummer mitnehmen](../../posts/2026-09-04-umzug-mit-internet-anschluss-und-rufnummer-mitnehmen/)" auswählen.
-3. **Opt-In bestätigen:** Bei sofortiger Mitnahme (vor Vertragsende) brauchst du vom alten Anbieter eine Opt-In-Erklärung.
-4. **Wechseltermin:** Die Mitnahme dauert in der Regel 1 Werktag. Du bekommst vorübergehend eine neue Nummer, die am Stichtag auf deine alte Nummer wechselt.
-5. **WhatsApp:** Nach dem Wechsel musst du ggf. in den WhatsApp-Einstellungen die Nummer ändern, damit Chatverläufe und Gruppen erhalten bleiben.
-
-> 💡 **Wichtig:** Die Rufnummernmitnahme ist seit 2022 für alle Anbieter gesetzlich **kostenlos**. Jede dafür berechnete Gebühr ist unrechtmäßig.
-
-## Zusatz-Tipp: Combo-Angebote nutzen
-
- Handy plus DSL aus einer Hand spart oft bis zu 20 € im Monat; das ist ein Modellwert.
-
-Aber Vorsicht: Prüfe vorher die Einzelpreise. Manchmal ist das Bündel teurer. Einen guten DSL-Tarif findest du über den [DSL-Vergleich](/go/dsl/). Mehr dazu steht in meinem [Ratgeber zum richtigen DSL-Tarif](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/).
-
-
-<!-- premium-length-2026 -->
-
-## Netz, nicht Logo: 2026 zählen die drei Infrastrukturen
-
-Discounter nutzen das Telekom-, Vodafone- oder O2-Netz. Ein 5G-Logo heißt nicht, dass 5G an deinem Bahnhof ankommt. Prüfe die Netzkarte.
-
-Teste 7 Tage, bevor du 24 Monate bindest; das ist ein Rechenbeispiel. Hängst du oft im WLAN, reichen 8 bis 15 GB. Pendelst du viel, zählt das Netz auf dem Land mehr. Der billigste Gigabyte-Preis in der Stadt hilft dir dort nicht.
-
-
-Starte die Rufnummernmitnahme parallel zum neuen Vertrag. Nicht erst danach. Die Portierung in 24 Stunden ist heute Standard. Mauert der Altanbieter, eskaliere mit der Vertragsnummer.
-
-Rechne Combo-Tarife nur, wenn beide Teile allein teurer sind. Ein günstiger SIM-Only plus eigener DSL-Wechsel gewinnt oft. Vor allem, wenn ein Teil nach der Rabattphase teuer wird.
-
-## Wann Flex-Tarife statt 24 Monate sinnvoller sind?
-
-Der günstigste Vertrag ist nicht automatisch der beste Vertrag. Gerade im Mobilfunk kann Flexibilität viel wert sein.
-
-Monatlich kündbare Tarife passen besonders gut, wenn:
-
-- Du bald umziehst,
-- du ein anderes Netz testen willst,
-- dein Datenverbrauch stark schwankt,
-- du nicht auf einen langen Rabatt-Trick hereinfallen willst.
-
-Der klassische 24-Monats-Tarif lohnt sich eher, wenn der Effektivpreis klar besser ist und du dein Nutzungsprofil gut kennst. Wer dagegen sowieso alle paar Monate neu nachdenken will, zahlt für Flex oft etwas mehr – kauft sich aber Ruhe und Beweglichkeit.
-
-## eSIM, Dual-SIM und Zweitkarte: Für wen das interessant ist
-
-2026 ist Mobilfunk nicht mehr nur „eine Karte, ein Vertrag“. Viele Geräte unterstützen inzwischen eSIM oder Dual-SIM. Das kann im Alltag sehr praktisch sein.
-
-Typische Vorteile:
-
-- Private und berufliche Nummer auf einem Gerät,
-- günstige Datenkarte zusätzlich zum Haupttarif,
-- Auslandsreise mit lokaler eSIM,
-- Test eines zweiten Netzes ohne großes Risiko.
-
-Gerade wer viel reist oder beruflich erreichbar sein muss, kann dadurch flexibler werden. Das ändert nicht den Grundsatz des Vergleichs. Aber es erweitert die Möglichkeiten deutlich.
-
-**Faustregel:** Prüfe vor einem Handytarif-Wechsel zuerst deinen echten Datenverbrauch der letzten drei Monate – eine großzügige Flatrate lohnt nicht, wenn du einen Bruchteil davon nutzt.
-
-## Fazit: Jetzt vergleichen lohnt sich wie nie
-
-Noch nie war der Markt so günstig als Modellannahme. Allnet-Flats mit 5G gibt es unter 10 €. Trotzdem zahlen Millionen 25 bis 40 € für alte Verträge.
-
-Ein Vergleich dauert 15 Minuten; das ist ein Rechenbeispiel. Er bringt **200 bis 360 € im Jahr**. Prüfe Netz, Volumen und Kleingedrucktes. Der Aufwand lohnt sich dauerhaft.
-
-
-**Weiterlesen:** [DSL-Tarif für dein Zuhause finden](../../posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/) · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [Pillar: Internet, DSL & Mobilfunk](../../pillar/internet-dsl/) · [VPN Zuhause](../../posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/)
-
-## Häufige Fragen
-
-### Welcher Handytarif ist der passende?
- Die meisten Nutzer liegen mit 10 bis 25 GB richtig; das ist eine Modellannahme. Im Telekom- oder Vodafone-Netz kostet das 7,99 bis 14,99 €.
-
-### Wie viel Datenvolumen brauche ich?
- Die meisten kommen mit 10 bis 15 GB aus; das ist ein Modellwert. Power-User brauchen 25 GB oder mehr. Vor allem bei Hotspot und HD-Streaming.
-
-### Lohnt sich 5G gegenüber LTE?
-Du brauchst ein 5G-Handy und gute Abdeckung vor Ort. Dann ist 5G die sichere Wahl. Auf dem Land reicht LTE oft völlig.
-
-### Kann ich meine Rufnummer behalten?
-Ja. Die Mitnahme ist gesetzlich garantiert und kostenlos. Sie geht auch während der Laufzeit. Der alte Anbieter muss nur zustimmen.
-
-### Was passiert am Ende der 24-monatigen Laufzeit?
-Der Vertrag verlängert sich nicht automatisch um 24 Monate; das ist ein Beispielwert. Er wird monatlich kündbar. Du kannst also jederzeit mit einem Monat Frist wechseln.
-
-### Was ist der Unterschied zwischen Prepaid und Vertrag?
- Er bindet dich aber 24 Monate; das ist ein Modellwert. Für die meisten ist ein flexibler Vertrag heute besser.
-
----
-
-👉 **Jetzt vergleichen und sparen:** [**→ Handytarife 2026 vergleichen**](/go/handytarife/)
-
-## Weiterrechnen und vertiefen
-
-- **Rechner:** [24-Monats-Effektivpreis-Rechner: Was der Tarif wirklich kostet](../../werkzeuge/effektivpreis-rechner/)
-
-*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
+**Dein nächster Schritt:** Notiere Datenbedarf, gewünschtes Netz und maximale Bindung. Vergleiche erst dann die Preise. Als Einstieg kannst du den [Partnervergleich für Handytarife](/go/handytarife/) nutzen. Wenn du schon ein konkretes Wechselangebot hast, hilft dir die [Checkliste zur Kündigung und Rufnummernmitnahme](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/).

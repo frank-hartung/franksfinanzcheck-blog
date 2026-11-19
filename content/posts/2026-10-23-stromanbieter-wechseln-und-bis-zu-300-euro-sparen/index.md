@@ -1,6 +1,6 @@
 ---
 title: "Stromanbieter wechseln: Tarife prüfen und Kosten senken"
-description: "Stromtarife fair vergleichen: Jahreskosten, Vertragsbedingungen und Kündigungsfristen prüfen – mit nachvollziehbarer Beispielrechnung."
+description: "Vergleiche Stromangebote mit dem Verbrauch aus der letzten Abrechnung. Prüfe die Kosten im ersten Jahr und nach dem Ende möglicher Boni getrennt."
 lastmod: 2026-10-30
 date: 2026-10-23T09:38:32Z
 draft: true
@@ -17,8 +17,8 @@ redaktionelle_pruefung:
   status: "ausstehend"
   aenderungsgrund: "Fachliche Überarbeitung nach den Faktenfrische-Befunden (#911); Abgleich der Regeln mit den Veröffentlichungen der Bundesnetzagentur am 30.10.2026; am 01.11.2026 YMYL-Disclaimer auf den Hausstandard (ki_shared.py DISCLAIMER) zurückgeführt, Duplikat-Befund D4-X gegenüber dem Gastarife-Artikel geheilt; redaktionelle Schlussprüfung ausstehend"
 kurzantwort: "Ob ein Stromwechsel Geld spart, hängt von deinem Jahresverbrauch, deinem alten Tarif und den vollständigen Kosten des neuen Angebots ab. Rechne Arbeitspreis mal Verbrauch plus Grundpreis und prüfe danach Laufzeit, Kündigungsfrist und Preisgarantie im Vertrag. Kündigung und Lieferantenwechsel sind für Haushaltskunden kostenfrei; der technische Wechsel ist seit dem 6. Juni 2025 an Werktagen binnen 24 Stunden möglich (Bundesnetzagentur)."
-pin_title: "Stromtarif vergleichen: Kosten und Bedingungen prüfen"
-pin_description: "*Werbung | Stromtarife fair vergleichen: Jahreskosten, Vertragsbedingungen und Kündigungsfristen prüfen – mit nachvollziehbarer Beispielrechnung. Mehr Spartipps auf FranksFinanzcheck! #stromanbieter #wechseln #stromvergleich"
+pin_title: "Stromanbieter wechseln: Tarife prüfen und Kosten senken"
+pin_description: "*Werbung | Vergleiche Stromangebote mit dem Verbrauch aus der letzten Abrechnung. Prüfe die Kosten im ersten Jahr und nach dem Ende möglicher Boni getrennt. Rechne einmal ohne den Neukundenbonus. Ist der Tarif dann deutlich teurer, wird das Ende der Bonusphase zu einem wichtigen Prüftermin."
 cover:
   image: "images/covers/2026-10-23-stromanbieter-wechseln-und-bis-zu-300-euro-sparen.jpg"
   alt: "Stromtarif und Jahreskosten vergleichen"
@@ -152,6 +152,8 @@ Der letzte Punkt ist der wichtigste. Ein günstiges Suchergebnis ist noch kein p
 - Wie lang ist die Frist und in welcher Form muss sie eingehen?
 - Ist die Zahlungsweise für dich tragbar, besonders bei Vorkasse?
 - Hast du das Angebot und die Unterlagen gespeichert?
+
+**Für deinen nächsten Check:** Rechne einmal ohne den Neukundenbonus. Ist der Tarif dann deutlich teurer, wird das Ende der Bonusphase zu einem wichtigen Prüftermin.
 
 ## Häufige Fragen
 

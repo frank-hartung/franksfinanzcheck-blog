@@ -1,6 +1,6 @@
 ---
-title: "Gaspreiserhöhung Sonderkündigungsrecht: Grundversorgung Gas"
-description: Nutze dein Gaspreiserhöhung Sonderkündigungsrecht. Ich zeige dir, wie du die Grundversorgung Gas kündigen kannst und beim Gastarife vergleichen sparst.
+title: "Gaspreiserhöhung in der Grundversorgung: Wann kannst du kündigen?"
+description: "Dein Grundversorger erhöht den Gaspreis? Prüfe zuerst, ob du tatsächlich in der Grundversorgung bist, und lies das Wirksamkeitsdatum im Schreiben."
 date: 2026-11-09T11:26:53Z
 draft: false
 reserve_published: 2026-11-09
@@ -9,8 +9,8 @@ categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Gaspreiserhöhung Sonderkündigungsrecht", "Grundversorgung Gas kündigen", "Gastarife vergleichen", "Gasanbieter Wechsel Prämie", "Gaspreiserhöhung", "Sonderkündigungsrecht", "Gaspreisgarantie", "Gastarif wechseln"]
-pin_title: "Gaspreiserhöhung Sonderkündigungsrecht: Raus aus dem"
-pin_description: "*Werbung | Nutze dein Gaspreiserhöhung Sonderkündigungsrecht. Ich zeige dir, wie du die Grundversorgung Gas kündigen kannst und beim Gastarife vergleichen sparst. Mehr Spartipps auf FranksFinanzcheck! #gaspreiserhoehung #sonderkuendigungsrecht #grundversorgung"
+pin_title: "Gaspreiserhöhung in der Grundversorgung: Wann kannst du kündigen?"
+pin_description: "*Werbung | Dein Grundversorger erhöht den Gaspreis? Prüfe zuerst, ob du tatsächlich in der Grundversorgung bist, und lies das Wirksamkeitsdatum im Schreiben. Bewahre das Preisschreiben mit dem Umschlag oder der elektronischen Zustellinformation auf. So kannst du Zugang und angekündigten Änderungstermin getrennt nachvollziehen."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -39,10 +39,7 @@ faktencheck: 2026-10-30
 kurzantwort: "Bei einer Gaspreiserhöhung besteht ein gesetzliches Sonderkündigungsrecht, mit dem der Vertrag meist bis zum Tag vor der Preisänderung beendet werden kann. In der Grundversorgung gilt zudem eine generelle Kündigungsfrist von nur zwei Wochen, wobei ein Anbieterwechsel oft eine jährliche Ersparnis von mehreren hundert Euro ermöglicht."
 ---
 
-Gaspreiserhöhung Sonderkündigungsrecht im Check: Du öffnest den Briefkasten. 
-Ein weißer Umschlag deines Gasanbieters liegt obenauf. 
-Du ahnst den Inhalt bereits. 
-Die staatliche Stütze für die Preise endet.
+Eine Gaspreiserhöhung ist kein guter Anlass für eine übereilte Kündigung. Kläre zuerst die Vertragsart: Für die Grundversorgung gelten andere Bedingungen als für einen Sondervertrag.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -304,6 +301,8 @@ Wenn alles passt, ist der Wechsel erfolgreich abgeschlossen.
 Du hast nun wieder Kurs auf deine finanziellen Ziele genommen.
 
 
+
+**Für deinen nächsten Check:** Bewahre das Preisschreiben mit dem Umschlag oder der elektronischen Zustellinformation auf. So kannst du Zugang und angekündigten Änderungstermin getrennt nachvollziehen.
 
 **Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/)
 **Lesetipp:** Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden

@@ -1,6 +1,6 @@
 ---
 title: "Lastschrift und Dauerauftrag: Was du prüfen solltest"
-description: "Lastschrift prüfen: Abbuchungen vom Konto laufen in drei Wegen. Wie du sie auseinanderhältst, erkennst, was du freigegeben hast, und richtig widersprichst."
+description: "Wer löst die Zahlung aus: du oder der Zahlungsempfänger? So unterscheidest du Dauerauftrag und Lastschrift und weißt, wo du eine Zahlung ändern kannst."
 date: 2026-08-28T06:10:00Z
 lastmod: 2026-10-13
 draft: false
@@ -10,7 +10,7 @@ pillar: "konto-karten"
 author: "Frank Hartung"
 keywords: ["Lastschrift prüfen", "Dauerauftrag", "Abbuchung widersprechen", "Kontoauszug kontrollieren", "Lastschrift und Dauerauftrag", "Lastschrift"]
 pin_title: "Lastschrift und Dauerauftrag: Was du prüfen solltest"
-pin_description: "*Werbung | Abbuchungen vom Konto laufen in drei Wegen. Wie du sie auseinanderhältst, erkennst, was du freigegeben hast, und richtig widersprichst. Mehr Spartipps auf FranksFinanzcheck! #lastschrift #dauerauftrag #kontoauszug"
+pin_description: "*Werbung | Wer löst die Zahlung aus: du oder der Zahlungsempfänger? So unterscheidest du Dauerauftrag und Lastschrift und weißt, wo du eine Zahlung ändern kannst. Prüfe nach einem Preiswechsel, ob du selbst den Dauerauftrag ändern musst. Bei einer Lastschrift kontrollierst du dagegen den Betrag, den der Empfänger eingezogen hat."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -195,6 +195,8 @@ Fehlt einer dieser Punkte, frage genau danach. Eine allgemeine Auskunft über Be
 Wenn die Antwort nicht kommt, wiederhole sie einmal mit Verweis auf dein Schreiben und setze eine neue Frist. Behalte den Verlauf in einer Datei. Diese Datei ist später mehr wert als jede Erinnerung.
 
 **Faustregel:** Sieh dir vor der Freigabe einer Lastschrift zuerst Vertragsbedingung und Mandatsreferenz an – unberechtigte Abbuchungen kannst du innerhalb von acht Wochen zurückgeben.
+
+**Für deinen nächsten Check:** Prüfe nach einem Preiswechsel, ob du selbst den Dauerauftrag ändern musst. Bei einer Lastschrift kontrollierst du dagegen den Betrag, den der Empfänger eingezogen hat.
 
 ## Häufige Fragen
 

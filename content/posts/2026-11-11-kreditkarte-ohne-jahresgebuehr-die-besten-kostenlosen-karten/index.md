@@ -1,6 +1,6 @@
 ---
 title: "Kreditkarte ohne Jahresgebühr: Kosten richtig vergleichen"
-description: "Kreditkarte ohne Jahresgebühr: Vergleiche Auslandskosten, Bargeld, Teilzahlung und Bedingungen, bevor du eine Karte auswählst."
+description: "Eine Kreditkarte ohne Jahresgebühr ist nicht bei jeder Nutzung kostenlos. Prüfe Abhebung, Fremdwährung und Zinsen bei Teilzahlung im Preisverzeichnis."
 date: 2026-11-11T12:15:03Z
 draft: true
 tags: ["Kreditkarte und Kredit"]
@@ -15,8 +15,8 @@ redaktionelle_pruefung:
   risikoklasse: "erhoeht"
   status: "ausstehend"
   aenderungsgrund: "Entwurf am 13.11.2026 zu Gebühren, Teilzahlung und Kartenwahl überarbeitet; fachliche und redaktionelle Freigabe ausstehend"
-pin_title: "Kreditkarte ohne Jahresgebühr: Kosten und Bedingungen vergleichen"
-pin_description: "*Werbung | Kreditkarte ohne Jahresgebühr: Vergleiche Auslandskosten, Bargeld, Teilzahlung und Bedingungen, bevor du eine Karte auswählst. Mehr Spartipps auf FranksFinanzcheck! #kreditkarte #ohne #gebuehren"
+pin_title: "Kreditkarte ohne Jahresgebühr: Kosten richtig vergleichen"
+pin_description: "*Werbung | Eine Kreditkarte ohne Jahresgebühr ist nicht bei jeder Nutzung kostenlos. Prüfe Abhebung, Fremdwährung und Zinsen bei Teilzahlung im Preisverzeichnis. Rechne eine Reise mit mehreren kleinen Abhebungen durch. Ein Mindestentgelt pro Vorgang kann wichtiger sein als der auf den ersten Blick niedrige Prozentsatz."
 cover:
   image: "images/covers/2026-11-11-kreditkarte-ohne-jahresgebuehr-die-besten-kostenlosen-karten.jpg"
   alt: "Kreditkarte ohne Jahresgebühr: Kosten und Bedingungen vergleichen"
@@ -164,6 +164,8 @@ Vergleiche die Angebote dann für denselben Zeitraum und dieselbe Nutzung. Einma
 ## Fazit: Die Nutzung entscheidet
 
 Dass die Jahresgebühr entfällt, ist ein guter Ausgangspunkt, aber noch kein vollständiger Vergleich. Entscheidend sind die Kosten und Bedingungen, die für deinen Alltag gelten. Nimm dir besonders bei Fremdwährung, Bargeld und Teilzahlung Zeit für das Preisblatt. Die Karte passt erst dann zu dir, wenn auch Abrechnung, Akzeptanz und mögliche Zusatzkosten für dich stimmen.
+
+**Für deinen nächsten Check:** Rechne eine Reise mit mehreren kleinen Abhebungen durch. Ein Mindestentgelt pro Vorgang kann wichtiger sein als der auf den ersten Blick niedrige Prozentsatz.
 
 ## Häufige Fragen
 

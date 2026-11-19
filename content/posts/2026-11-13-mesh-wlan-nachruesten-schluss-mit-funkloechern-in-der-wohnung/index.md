@@ -1,6 +1,6 @@
 ---
-title: "Mesh WLAN nachrüsten: Schluss mit Funklöchern in der Wohnung"
-description: Du willst Mesh WLAN nachrüsten? Erfahre hier, ob sich die Investition für deine Wohnung lohnt und wie du die Abdeckung deiner Wohnung optimierst.
+title: "Mesh-WLAN nachrüsten: Wann lohnt sich die Investition?"
+description: "Teste bei schlechtem WLAN erst die Verbindung per Kabel und den Standort des Routers. Prüfe danach, ob ein Mesh-System die betroffenen Räume erreicht."
 date: 2026-11-18T04:29:13Z
 draft: false
 reserve_published: 2026-11-18
@@ -9,8 +9,8 @@ categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
 keywords: ["Mesh WLAN", "WLAN nachrüsten", "Abdeckung Wohnung", "Mesh WLAN nachrüsten", "Nachrüsten", "Funklöchern", "DSL-Vergleich", "Internetvertrag wechseln"]
-pin_title: "Mesh WLAN nachrüsten: Schluss mit Funklöchern in der Wohnung"
-pin_description: "*Werbung | Du willst Mesh WLAN nachrüsten? Erfahre hier, ob sich die Investition für deine Wohnung lohnt und wie du die Abdeckung deiner Wohnung optimierst. Mehr Spartipps auf FranksFinanzcheck! #mesh #wlan #nachruesten"
+pin_title: "Mesh-WLAN nachrüsten: Wann lohnt sich die Investition?"
+pin_description: "*Werbung | Teste bei schlechtem WLAN erst die Verbindung per Kabel und den Standort des Routers. Prüfe danach, ob ein Mesh-System die betroffenen Räume erreicht. Prüfe, ob du die Mesh-Knoten per Netzwerkkabel verbinden kannst. Die Verbindung der Knoten untereinander kann wichtiger sein als der Abstand zum Endgerät."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -160,6 +160,8 @@ Bei FranksFinanzcheck betrachten wir Internetkosten als festen Teil der monatlic
 Durch das einmalige Nachrüsten schaffst du eine solide Basis. Danach kannst du dich auf das Kündigungsfenster konzentrieren. Prüfe alle zwei Jahre, ob dein DSL-Anbieter noch das beste Preis-Leistungs-Verhältnis bietet – dies dient als Rechenbeispiel.
 
 Mit einem stabilen Mesh-System im Hintergrund bist du flexibel bei der Wahl deines Providers. Die Hardware gehört dir und funktioniert mit jedem neuen Anschluss weiter. So behältst du die volle Kontrolle über deine Technik-Kosten.
+
+**Für deinen nächsten Check:** Prüfe, ob du die Mesh-Knoten per Netzwerkkabel verbinden kannst. Die Verbindung der Knoten untereinander kann wichtiger sein als der Abstand zum Endgerät.
 
 **Weiterlesen:** [Ratgeber Internet Dsl](../../pillar/internet-dsl/) **Lesetipp:** [VPN Zuhause: Schutzschild oder unnötige Fixkosten-Falle?](../../posts/2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle/)
 

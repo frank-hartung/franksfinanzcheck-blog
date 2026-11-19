@@ -1,6 +1,6 @@
 ---
 title: "Grundversorgung Strom und Gas: Was sie leistet und kostet"
-description: "Grundversorgung Strom und Gas: das Auffangnetz der Energieversorgung und meist der teuerste Tarif. Wie du hineingerätst und wieder herauskommst."
+description: "Grundversorgung oder Sondervertrag? Kläre zuerst, welcher Tarif für deinen Anschluss gilt, und vergleiche dann Grundpreis, Arbeitspreis und Fristen."
 date: 2026-09-21T06:10:00Z
 lastmod: 2026-10-13
 draft: false
@@ -9,8 +9,8 @@ categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Grundversorgung Strom", "Grundversorgung Gas", "Ersatzversorgung Umzug", "Energievertrag ohne Tarif", "Grundversorgung Strom und Gas", "Grundversorgung", "Gaspreisgarantie", "Gastarif wechseln"]
-pin_title: "Grundversorgung Strom und Gas: Was sie leistet"
-pin_description: "*Werbung | Die Grundversorgung ist das Auffangnetz der Energieversorgung und meist der teuerste Tarif. Wie du hineingerätst und wie du wieder herauskommst. Mehr Spartipps auf FranksFinanzcheck! #grundversorgung #strom #gas"
+pin_title: "Grundversorgung Strom und Gas: Was sie leistet und kostet"
+pin_description: "*Werbung | Grundversorgung oder Sondervertrag? Kläre zuerst, welcher Tarif für deinen Anschluss gilt, und vergleiche dann Grundpreis, Arbeitspreis und Fristen. Lies den Tarifnamen von der Rechnung ab. Nicht jeder Vertrag beim örtlichen Versorger ist ein Grundversorgungsvertrag; der Anbietername allein reicht zur Zuordnung nicht."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -182,6 +182,8 @@ Prüfe zusätzlich deinen Kontostand gegen die Abschläge. Eine Änderung der H�
 Wer jährlich einen Blick auf die Abrechnung wirft und die Werte notiert, erkennt Änderungen ohne Mühe. Wer sie nie notiert, beginnt jede Prüfung bei null.
 
 **Faustregel:** Prüfe nach einem Wechsel in die Grundversorgung sofort einen neuen Tarifvergleich – die Versorgung ist sicher, aber meist deutlich teurer als ein regulärer Vertrag.
+
+**Für deinen nächsten Check:** Lies den Tarifnamen von der Rechnung ab. Nicht jeder Vertrag beim örtlichen Versorger ist ein Grundversorgungsvertrag; der Anbietername allein reicht zur Zuordnung nicht.
 
 ## Häufige Fragen
 

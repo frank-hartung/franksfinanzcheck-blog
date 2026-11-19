@@ -25,8 +25,8 @@ kurzantwort: "Die Privathaftpflicht schützt dich vor hohen Forderungen. Solche 
 
 social_posted: true
 keywords: ["Privathaftpflicht", "Privathaftpflichtversicherung", "Haftpflichtversicherung Kosten", "Haftpflicht Vergleich", "Deckungssumme Haftpflicht", "Privathaftpflicht Vergleich", "Privathaftpflicht Kosten"]
-pin_title: "Privathaftpflicht: Warum sie unverzichtbar ist"
-pin_description: "*Werbung | Ein unachtsamer Moment, ein Millionenschaden: Die Privathaftpflicht ist die wichtigste Versicherung überhaupt. Hier lernst du, welche Schäden sie abdeckt und wie du Top-Schutz ab rund 35 Euro im Jahr findest. Jetzt lesen."
+pin_title: "Privathaftpflicht: Warum so wichtig und was sie kostet"
+pin_description: "*Werbung | Wer ist in deiner Privathaftpflicht mitversichert? Prüfe zuerst den versicherten Personenkreis und dann Deckungssumme, Ausschlüsse und Selbstbehalt. Prüfe vor einem Anbieterwechsel, ob Personen oder Risiken im Altvertrag eingeschlossen sind, die du im neuen Angebot zusätzlich vereinbaren müsstest."
 pinwand: "Versicherungen clever wechseln & sparen"
 quellen:
   - id: "Q1"
@@ -150,6 +150,7 @@ redaktionelle_pruefung:
       konsistenzpruefung: "48–96 € im Jahr decken sich mit der Single-Bandbreite (45–75 €) und dem Komfort-Beispieltarif (59 €)"
       rechenweg: "45 € bis 96 € Jahresbeitrag ÷ 12 Monate = ca. 4 bis 8 €/Monat"
       quellen: ["Q1", "Q3"]
+summary: "Wer ist in deiner Privathaftpflicht mitversichert? Prüfe zuerst den versicherten Personenkreis und dann Deckungssumme, Ausschlüsse und Selbstbehalt."
 ---
 
 Ein Moment der Unachtsamkeit reicht. Du bist kurz abgelenkt. Du rempelst jemanden an. Ein teures Gerät geht zu Bruch.

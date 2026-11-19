@@ -1,6 +1,6 @@
 ---
-title: "Secondhand Kleidung: So erkennst du Qualität & sparst"
-description: Erfahre, wie du hochwertige Secondhand Kleidung erkennst. Mit meinen Tipps prüfst du Stoffe und Nähte, um beim Kleidung sparen echte Qualität zu finden.
+title: "Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte und Passform"
+description: "Prüfe bei gebrauchter Kleidung Nähte, Stoff und Passform. Rechne mögliche Reparaturen und Versand ein, bevor du den Preis mit Neuware vergleichst."
 date: 2026-11-16T15:55:45Z
 draft: false
 reserve_published: 2026-11-16
@@ -9,8 +9,8 @@ categories: ["Ratgeber"]
 pillar: "frugalismus"
 author: "Frank Hartung"
 keywords: ["Secondhand Kleidung", "Gebraucht kaufen Qualität", "Kleidung sparen", "Secondhand"]
-pin_title: "Secondhand Kleidung: So erkennst du Qualität & sparst"
-pin_description: "*Werbung | Erfahre, wie du hochwertige Secondhand Kleidung erkennst. Mit meinen Tipps prüfst du Stoffe und Nähte, um beim Kleidung sparen echte Qualität zu finden. Mehr Spartipps auf FranksFinanzcheck! #secondhand #kleidung #gebraucht"
+pin_title: "Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte und Passform"
+pin_description: "*Werbung | Prüfe bei gebrauchter Kleidung Nähte, Stoff und Passform. Rechne mögliche Reparaturen und Versand ein, bevor du den Preis mit Neuware vergleichst. Prüfe eine kleine Schadstelle bei gutem Licht. Eine lose Naht lässt sich anders kalkulieren als abgeriebener Stoff, bei dem auch eine Reparatur kaum Halt findet."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -207,6 +207,8 @@ Es gibt verschiedene Quellen für **Secondhand Kleidung**. Jede hat ihre Vor- un
 Egal wo du kaufst: Bleibe kritisch. Frage dich immer: Würde ich dieses Teil auch zum vollen Neupreis kaufen? Wenn die Antwort "Nein" lautet, kaufst du nur über den Preis. Das ist selten eine gute Strategie für dein Budget.
 
 
+
+**Für deinen nächsten Check:** Prüfe eine kleine Schadstelle bei gutem Licht. Eine lose Naht lässt sich anders kalkulieren als abgeriebener Stoff, bei dem auch eine Reparatur kaum Halt findet.
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
 **Lesetipp:** [Frugalismus Familie: Clever sparen ohne Verzicht](../../posts/2026-10-27-frugalismus-familie-clever-sparen-ohne-verzicht/)

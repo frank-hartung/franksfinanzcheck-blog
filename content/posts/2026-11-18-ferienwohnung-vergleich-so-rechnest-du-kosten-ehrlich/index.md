@@ -1,6 +1,6 @@
 ---
-title: "Ferienwohnung Vergleich: So rechnest du Kosten ehrlich"
-description: Mit einem Ferienwohnung Vergleich deckst du versteckte Kosten auf. Lerne alles über Nebenkosten Ferienwohnung und wie du Urlaubskosten planen kannst.
+title: "Ferienwohnungen vergleichen: Was kostet eine Nacht mit Nebenkosten?"
+description: "Vergleiche Ferienwohnungen nach dem Endpreis je Nacht. Addiere Reinigung, Wäsche und Pflichtgebühren für dieselbe Belegung und Aufenthaltsdauer."
 kurzantwort: Der Mietpreis ist oft nur die Basis, während Gebühren für Putzen oder Wäsche den Preis treiben. Wer jede Mahlzeit auswärts isst, zahlt in der Wohnung am Ende oft mehr als im Hotel mit Halbpension.
 date: 2026-11-18T12:07:54Z
 draft: true
@@ -10,8 +10,8 @@ categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"
 keywords: ["Ferienwohnung Vergleich", "Nebenkosten Ferienwohnung", "Urlaubskosten planen", "Ferienwohnung", "Vergleich"]
-pin_title: "Ferienwohnung Vergleich: So rechnest du Kosten ehrlich"
-pin_description: "*Werbung | Mit einem Ferienwohnung Vergleich deckst du versteckte Kosten auf. Lerne alles über Nebenkosten Ferienwohnung und wie du Urlaubskosten planen kannst. Mehr Spartipps auf FranksFinanzcheck! #ferienwohnung #vergleich #nebenkosten"
+pin_title: "Ferienwohnungen vergleichen: Was kostet eine Nacht mit Nebenkosten?"
+pin_description: "*Werbung | Vergleiche Ferienwohnungen nach dem Endpreis je Nacht. Addiere Reinigung, Wäsche und Pflichtgebühren für dieselbe Belegung und Aufenthaltsdauer. Verteile eine einmalige Reinigung auf die tatsächliche Zahl der Nächte. Dieselbe Pauschale fällt bei einem Wochenende viel stärker ins Gewicht als bei zwei Wochen Urlaub."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -217,6 +217,8 @@ Das gilt auch für die schönste Zeit des Jahres.
 Nur wer die Zahlen kennt, kann entspannt genießen.
 
 
+
+**Für deinen nächsten Check:** Verteile eine einmalige Reinigung auf die tatsächliche Zahl der Nächte. Dieselbe Pauschale fällt bei einem Wochenende viel stärker ins Gewicht als bei zwei Wochen Urlaub.
 
 **Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/)
 **Lesetipp:** [Flugverspätung Entschädigung: So holst du dein Geld zurück](../../posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/)

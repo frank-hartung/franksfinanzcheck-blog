@@ -10,7 +10,7 @@ sitemap:
 lastmod: 2026-10-01
 ---
 
-Deine Fixkosten sind kein Sammelsurium aus Strom, Internet, Versicherungen und Kontogebühren. Sie sind ein System aus wiederkehrenden Beträgen, Bedingungen und Terminen. Das **Fixkosten-Cockpit** von FranksFinanzcheck bringt diese drei Dinge in eine Reihenfolge: Was kostet dich regelmäßig Geld, was solltest du zuerst prüfen und wann ist der richtige Zeitpunkt dafür?
+Leg eine Rechnung bereit. Trag den Betrag und den nächsten Prüftermin ein. Das Cockpit ordnet deine laufenden Kosten – ohne Anmeldung und ohne Übertragung deiner Eingaben.
 
 {{< fixkosten-cockpit >}}
 
@@ -27,6 +27,8 @@ Der Kompass ist unser verbindlicher Prüfpfad für alle Ratgeber. Er macht aus e
 3. **Beginne mit dem größten Betrag.** Er ist nicht automatisch der beste Wechselkandidat. Aber dort lohnt sich die gründliche Rechnung zuerst.
 4. **Prüf den passenden Ratgeber.** Dort findest du die Kriterien, die zum jeweiligen Vertrag gehören: bei Energie etwa Verbrauch und Preisgarantie, bei Versicherungen Leistung und Selbstbehalt.
 5. **Wiederhole den Check quartalsweise.** Ein ruhiger Termin im Kalender ist besser als ein Schnellwechsel unter Zeitdruck.
+
+**Modellrechnung, kein Sparversprechen:** Ein Haushalt mit einem Internetvertrag für 40 € im Monat zahlt über zwölf Monate 480 €. Bei gleicher Leistung kosten zwölf Monate zu 35 € plus einmalig 30 € Anschlussgebühr insgesamt 450 €. Die Differenz beträgt im ersten Jahr 30 €, nicht 60 €. Prüfe bei deinem Vertrag auch Routermiete, Mindestlaufzeit und den Preis nach einem Rabatt.
 
 ## Was das Cockpit bewusst nicht macht
 

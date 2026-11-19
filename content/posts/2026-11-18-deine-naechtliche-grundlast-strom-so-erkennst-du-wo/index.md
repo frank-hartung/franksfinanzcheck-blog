@@ -1,6 +1,6 @@
 ---
-title: "Deine nächtliche Grundlast Strom: Stromverbrauch nachts"
-description: "Grundlast Strom messen: So liest du deinen Stromverbrauch nachts am Zähler ab, findest stille Dauerläufer und senkst deine Stromkosten."
+title: "Grundlast messen: Wie viel Strom verbraucht dein Haushalt nachts?"
+description: "Lies den Stromzähler vor dem Schlafengehen und am Morgen ab. Berücksichtige laufende Geräte, bevor du den Nachtverbrauch auf ein Jahr hochrechnest."
 date: 2026-11-18T12:08:01Z
 reserve: true
 draft: true
@@ -9,8 +9,8 @@ categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Grundlast Strom", "Stromverbrauch nachts", "Zähler beobachten", "Standby Verbrauch", "Stromkosten senken"]
-pin_title: "Grundlast Strom: So misst du deinen Verbrauch nachts"
-pin_description: "*Werbung | Grundlast Strom messen: So liest du deinen Stromverbrauch nachts am Zähler ab, findest stille Dauerläufer und senkst deine Kosten. Mehr Spartipps auf FranksFinanzcheck! #grundlast #strom #stromverbrauch"
+pin_title: "Grundlast messen: Wie viel Strom verbraucht dein Haushalt nachts?"
+pin_description: "*Werbung | Lies den Stromzähler vor dem Schlafengehen und am Morgen ab. Berücksichtige laufende Geräte, bevor du den Nachtverbrauch auf ein Jahr hochrechnest. Wiederhole die Messung in einer zweiten typischen Nacht. Läuft beim ersten Mal die Spülmaschine, misst du mehr als den dauerhaften Grundbedarf."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -208,6 +208,8 @@ Wir schauen uns nun ein konkretes **Rechenbeispiel** für die Ersparnis an.
 
 **Die Rechnung im Detail:** Zuerst ermitteln wir die Differenz deiner Werte. Wir rechnen 0,4 kWh minus 0,3 kWh. Das ergibt einen Rest von 0,1 kWh für eine Nacht. Das ist dein Potenzial für die Ersparnis. Nun berechnen wir die Kosten für diesen kleinen Teil. Wir nehmen 0,1 kWh mal den Preis von 40 € pro MWh. Das ergibt Kosten von 0,004 € für eine einzige Nacht. Das klingt im ersten Moment nach sehr wenig Geld. Doch ein Jahr hat insgesamt 365 Tage. Wir rechnen also 0,004 € mal 365 Tage. Das Ergebnis ist eine Ersparnis von 1,46 € im Jahr. Dieses Rechenbeispiel zeigt dir den Effekt für nur ein kleines Gerät. Hast du viele solcher Quellen, steigt die Summe im Jahr schnell an. Jede gesparte kWh zählt für dein Konto am Ende vom Jahr.
 
+**Für deinen nächsten Check:** Wiederhole die Messung in einer zweiten typischen Nacht. Läuft beim ersten Mal die Spülmaschine, misst du mehr als den dauerhaften Grundbedarf.
+
 **Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/)
 **Lesetipp:** [Stromkosten senken: Clevere Haushaltsgeräte im Überblick](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/)
 
@@ -257,7 +259,6 @@ Messen Sie die Differenz am Zähler über einen ganzen Tag. Vergleichen Sie dies
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
 

@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-07
 title: "Campingurlaub planen: Budget für Platz und Fahrt"
-description: "Campingurlaub planen: Mit einem Budget für Platz, Anfahrt, Ausrüstung und Alltag erkennst du Zusatzkosten früh und wählst passend."
+description: "Was kostet der Campingurlaub pro Nacht? Addiere Stellplatz, Personenentgelte, Fahrt und Ausstattung und verteile die Summe auf die Aufenthaltsdauer."
 date: 2026-10-09T14:01:19Z
 draft: false
 reserve_published: 2026-10-09
@@ -11,8 +11,8 @@ categories: ["Ratgeber"]
 pillar: "mietwagen"
 author: "Frank Hartung"
 keywords: ["Campingurlaub planen", "Campingurlaub", "Campingplatz", "Reisebudget", "Campingkosten", "Ausrüstung"]
-pin_title: "Campingurlaub planen: Budget ohne Kostentricks"
-pin_description: "*Werbung | Campingurlaub planen: Mit einem Budget für Platz, Anfahrt, Ausrüstung und Alltag erkennst du Zusatzkosten früh und wählst passend. Mehr Spartipps auf FranksFinanzcheck! #campingurlaubplanen #campingurlaub #campingplatz"
+pin_title: "Campingurlaub planen: Budget für Platz und Fahrt"
+pin_description: "*Werbung | Was kostet der Campingurlaub pro Nacht? Addiere Stellplatz, Personenentgelte, Fahrt und Ausstattung und verteile die Summe auf die Aufenthaltsdauer. Rechne den Platzpreis mit der tatsächlichen Zahl von Personen. Prüfe zusätzlich, ob Strom, Dusche und Kurtaxe in der angezeigten Summe enthalten sind."
 ai_generated: true
 ai_provider: "Editorial revision"
 engine_level: "draft"
@@ -185,6 +185,8 @@ Wichtig für deine Rechte: Eine einzelne Stellplatzbuchung ist nicht automatisch
 Mach die Liste vor der Buchung. Ergänze sie, wenn du neue Informationen bekommst. Wenn sich der Gesamtpreis nicht mehr gut anfühlt, ändere den Reiseplan. Eine kürzere Strecke oder weniger Ausstattung kann besser passen als ein Urlaub, der dich danach belastet.
 
 **Faustregel:** Buche nicht nach dem niedrigsten Übernachtungspreis. Entscheide nach Gesamtpreis, Regeln und dem Komfort, den du wirklich nutzt.
+
+**Für deinen nächsten Check:** Rechne den Platzpreis mit der tatsächlichen Zahl von Personen. Prüfe zusätzlich, ob Strom, Dusche und Kurtaxe in der angezeigten Summe enthalten sind.
 
 **Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/) · [Mietwagen buchen und Bedingungen prüfen](../../posts/2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub/) · [Last-Minute-Urlaub planen](../../posts/2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp/) · [Urlaub sparen](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/) · [Strategisch sparen](../../posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/) · [Flugvergleich im Winter](../../posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/)
 

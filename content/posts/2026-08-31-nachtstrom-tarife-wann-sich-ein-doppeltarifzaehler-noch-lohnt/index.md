@@ -1,6 +1,6 @@
 ---
 title: "Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt"
-description: "Nachtstrom-Tarife können günstiger sein, müssen es aber nicht. So rechnest du Hoch- und Niedertarif, den Nachtanteil und den Vergleich zum Einheitstarif."
+description: "Ein Nachtstromtarif lohnt sich nicht allein wegen des niedrigen Arbeitspreises. Rechne mit deinem Tages- und Nachtverbrauch sowie den Zählerkosten."
 lastmod: 2026-11-04
 date: 2026-08-31T06:10:00Z
 draft: false
@@ -10,8 +10,8 @@ categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Nachtstrom Tarif", "Doppeltarifzähler", "Hochtarif Niedertarif", "Stromtarif Zähler", "Nachtstrom-Tarife", "Nachtstrom Tarife"]
-pin_title: "Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler noch lohnt"
-pin_description: "*Werbung | Nachtstrom klingt günstig, rechnet sich aber nur mit dem passenden Verbrauch. Wir zeigen die Rechnung, den nötigen Nachtanteil und wann ein Einheitstarif gewinnt. Mehr Spartipps auf FranksFinanzcheck! #nachtstrom #stromtarif #stromsparen"
+pin_title: "Nachtstrom-Tarife: Wann sich ein Doppeltarifzähler lohnt"
+pin_description: "*Werbung | Ein Nachtstromtarif lohnt sich nicht allein wegen des niedrigen Arbeitspreises. Rechne mit deinem Tages- und Nachtverbrauch sowie den Zählerkosten. Rechne die zusätzliche Grundgebühr des günstigeren Nachttarifs auf das ganze Jahr hoch. Sie muss zuerst verdient sein, bevor eine verschobene Kilowattstunde Geld spart."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -194,6 +194,8 @@ Ein Doppeltarif ist nur ein Hebel unter mehreren. Bevor du dich für ein Zählwe
 Diese Reihenfolge ist der Kern. Erst den Verbrauch, dann den Tarif, dann die Feinheiten wie das Zählwerk.
 
 **Faustregel:** Prüfe vor einem Nachtstromtarif, ob sich genug Verbrauch in die Niedertarifzeit verlagern lässt – sonst zahlt du den höheren Grundpreis ohne echte Ersparnis.
+
+**Für deinen nächsten Check:** Rechne die zusätzliche Grundgebühr des günstigeren Nachttarifs auf das ganze Jahr hoch. Sie muss zuerst verdient sein, bevor eine verschobene Kilowattstunde Geld spart.
 
 ## Häufige Fragen
 

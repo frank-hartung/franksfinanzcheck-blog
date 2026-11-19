@@ -1,6 +1,6 @@
 ---
 title: "Notgroschen aufbauen: Wie viel reicht wirklich?"
-description: "Notgroschen aufbauen: Wie viel reicht wirklich? – der Ratgeber von FranksFinanzcheck: Schritt für Schritt, mit Rechenbeispielen und Checklisten."
+description: "Wie viel Rücklage brauchst du kurzfristig? Trenne unerwartete Ausgaben von geplanten Jahresrechnungen und berechne die Lücke für deinen Haushalt."
 date: 2026-10-07T11:23:39Z
 draft: true
 tags: ["Notgroschen"]
@@ -22,7 +22,7 @@ cover:
     sha256: fe7946df28f4905e8dcc24e69ff0480598b7e04c851afa46d34292d126928159
     geprueft_am: 2026-11-13
 pin_title: "Notgroschen aufbauen: Wie viel reicht wirklich?"
-pin_description: "*Werbung | Notgroschen aufbauen: Wie viel reicht wirklich? – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten … Mehr Spartipps auf FranksFinanzcheck! #notgroschenaufbauen #notgroschen"
+pin_description: "*Werbung | Wie viel Rücklage brauchst du kurzfristig? Trenne unerwartete Ausgaben von geplanten Jahresrechnungen und berechne die Lücke für deinen Haushalt. Rechne einen Einkommensausfall und eine einzelne Reparatur getrennt. Sie belasten das Budget unterschiedlich und müssen nicht dieselbe Zielsumme ergeben."
 quellen:
   - id: "Q1"
     titel: "Referenzseite destatis.de"
@@ -127,6 +127,8 @@ Kennst du diese Fehler, bleibt dein Polster stabil. Ein kurzer Blick auf deine Z
 Ein zu kleines Ziel ist oft das größte Risiko. Wenn das Auto und die Heizung gleichzeitig kaputt gehen, wird es eng. Daher solltest du dein Ziel nach sechs Monaten prüfen. Reicht die Summe für alle Fixkosten aus? Wenn nicht, lege noch etwas mehr zur Seite.
 
 Auch die Inflation ist ein wichtiger Faktor für dein Geld. Alles wird mit der Zeit teurer. Daher muss auch dein Notgroschen mit der Zeit wachsen. Ein jährlicher Check hilft dir dabei. So bleibt die Kaufkraft deines Polsters immer erhalten.
+
+**Für deinen nächsten Check:** Rechne einen Einkommensausfall und eine einzelne Reparatur getrennt. Sie belasten das Budget unterschiedlich und müssen nicht dieselbe Zielsumme ergeben.
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
 **Lesetipp:** [Büroausstattung steuerlich clever absetzen: So geht's](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/)

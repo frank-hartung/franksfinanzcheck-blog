@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-04
-title: "Sicher heizen: Was sie abdeckt und wie lange sie läuft"
-description: "Gaspreisgarantie verständlich erklärt: Welche Teile geschützt sind, wann sich der Aufpreis lohnt und wie du Klausel und Gesamtpreis prüfst."
+title: "Gaspreisgarantie: Welche Kosten sind geschützt und wie lange?"
+description: "Was bleibt beim Gasvertrag wirklich fest? Lies in der Preisgarantie nach, welche Preisbestandteile sie erfasst und wann der Schutz endet."
 date: 2026-08-10T09:29:05Z
 draft: false
 tags: ["Heizkosten senken", "Gastarif wechseln"]
@@ -22,8 +22,8 @@ cover:
 kurzantwort: "Eine Gaspreisgarantie schützt nur die Teile des Preises, die im Vertrag stehen, und nur für eine feste Zeit. Meist ist der Einkauf des Gases erfasst. Steuern, Abgaben, Umlagen und Netzkosten können außen vor bleiben. Die Garantie lohnt sich, wenn Preis, Umfang und Laufzeit zusammenpassen. Sie lohnt sich nicht, wenn du schon zum Start deutlich zu viel zahlst."
 social_posted: true
 keywords: ["Sicher heizen", "Gaspreisgarantie", "Gastarif wechseln", "Heizkosten senken", "Gasvergleich", "Heizkosten", "Heizkosten sparen", "Brandschutz beim"]
-pin_title: "Sicher heizen: Gaspreisgarantie gegen den Preisschock"
-pin_description: "*Werbung | Eine Gaspreisgarantie schützt nur die Preisbestandteile, die im Vertrag stehen – und nur für die vereinbarte Zeit. So prüfst du Umfang, Laufzeit und Gesamtpreis, bevor du wechselst. Jetzt die Checkliste lesen."
+pin_title: "Gaspreisgarantie: Welche Kosten sind geschützt und wie lange?"
+pin_description: "*Werbung | Was bleibt beim Gasvertrag wirklich fest? Lies in der Preisgarantie nach, welche Preisbestandteile sie erfasst und wann der Schutz endet. Markiere auf der letzten Gasrechnung Grundpreis und Arbeitspreis. Vergleiche beide mit dem Angebot: Was dort nicht von der Garantie erfasst ist, kann sich weiter ändern."
 pin_text_sync: false
 pinwand: "Strom & Gas sparen | Tarife clever wechseln"
 quellen:
@@ -251,6 +251,8 @@ Der passende Tarif hängt von dir ab. Diese drei Fragen helfen dir weiter:
 Eine [Gaspreisgarantie](../../posts/2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort/) bringt dir echten Nutzen, wenn der Preis fair ist. Sie muss zudem die großen Risiken abdecken. Dann ist sie ein guter Baustein für dein Budget.
 
 Dein nächster Schritt: Lies im Tarif nach, was genau geschützt ist. Ist der Umfang klar und der Preis gut, kannst du ruhig wechseln.
+
+**Für deinen nächsten Check:** Markiere auf der letzten Gasrechnung Grundpreis und Arbeitspreis. Vergleiche beide mit dem Angebot: Was dort nicht von der Garantie erfasst ist, kann sich weiter ändern.
 
 **Weiterlesen:** [Gastarife mit Preisgarantie vergleichen](../../posts/2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026/) · [Bei Preissprüngen richtig reagieren](../../posts/2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen/) · [Ratgeber Strom und Gas sparen](../../pillar/strom-sparen/) · [Nachtstrom-Tarife](../../posts/2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt/)
 

@@ -1,6 +1,6 @@
 ---
 title: "Großeinkauf und Vorrat: Wann Bevorraten sich rechnet"
-description: "Großeinkauf planen: Großeinkauf lohnt nicht automatisch. Wie du Grundpreise vergleichst, Schwund einrechnest und einen Vorrat aufbaust, der nicht im Müll."
+description: "Beim Großeinkauf zählt der Preis je verbrauchter Portion. Rechne verdorbene Reste und Lagerplatz mit ein, bevor du zur größeren Packung greifst."
 date: 2026-09-30T06:10:00Z
 lastmod: 2026-11-06
 draft: false
@@ -10,7 +10,7 @@ pillar: "frugalismus"
 author: "Frank Hartung"
 keywords: ["Großeinkauf planen", "Vorrat anlegen", "Grundpreis vergleichen", "Lebensmittel sparen", "Großeinkauf und Vorrat", "Großeinkauf", "Bevorraten"]
 pin_title: "Großeinkauf und Vorrat: Wann Bevorraten sich rechnet"
-pin_description: "*Werbung | Großeinkauf lohnt nicht automatisch. Wie du Grundpreise vergleichst, Schwund einrechnest und einen Vorrat aufbaust, der nicht im Müll landet. Mehr Spartipps auf FranksFinanzcheck! #grosseinkauf #vorrat #sparen"
+pin_description: "*Werbung | Beim Großeinkauf zählt der Preis je verbrauchter Portion. Rechne verdorbene Reste und Lagerplatz mit ein, bevor du zur größeren Packung greifst. Rechne die große Packung einmal mit vollständigem Verbrauch und einmal mit einem Rest im Müll. Der zweite Fall zeigt, wie viel Spielraum der Mengenrabatt tatsächlich lässt."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -193,6 +193,8 @@ Solche Unterbrechungen sind in der Regel kurz. Sie entstehen durch Krankheit, We
 Führe ihn getrennt von deinem Kochvorrat. Sonst wandert er in den Alltag ab und ist im Ernstfall leer. Prüfe die Haltbarkeit einmal im Jahr und ersetze, was abgelaufen ist.
 
 **Faustregel:** Kauf nur so viel auf Vorrat, wie du innerhalb der Haltbarkeit sicher verbrauchst – ein Rabatt auf die Großpackung verliert seinen Wert im Mülleimer.
+
+**Für deinen nächsten Check:** Rechne die große Packung einmal mit vollständigem Verbrauch und einmal mit einem Rest im Müll. Der zweite Fall zeigt, wie viel Spielraum der Mengenrabatt tatsächlich lässt.
 
 ## Häufige Fragen
 

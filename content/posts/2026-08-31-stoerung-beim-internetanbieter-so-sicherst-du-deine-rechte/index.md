@@ -1,6 +1,6 @@
 ---
 title: "Störung beim Internetanbieter: So sicherst du deine Rechte"
-description: "Bei einer Störung beim Internetanbieter: So meldest du den Ausfall, hältst die Dauer fest und prüfst, was der Anbieter leisten muss."
+description: "Dokumentiere Ausfälle mit Zeitpunkt und Störungsmeldung. Unterscheide ein Problem im WLAN von einer Störung am Anschluss, bevor du Ansprüche prüfst."
 lastmod: 2026-10-13
 date: 2026-08-31T06:10:00Z
 draft: false
@@ -11,7 +11,7 @@ pillar: "internet-dsl"
 author: "Frank Hartung"
 keywords: ["Störung Internetanbieter", "Internetausfall melden", "Entstörung Frist", "Ausfall Entschädigung", "Störung beim Internetanbieter", "Internetanbieter", "DSL-Vergleich", "Internetvertrag wechseln"]
 pin_title: "Störung beim Internetanbieter: So sicherst du deine Rechte"
-pin_description: "*Werbung | Internet weg und die Hotline schweigt? So meldest du eine Störung richtig, belegst den Ausfall und prüfst deinen Entschädigungsanspruch. Mehr Spartipps auf FranksFinanzcheck! #internetstoerung #dsl #verbraucherrechte"
+pin_description: "*Werbung | Dokumentiere Ausfälle mit Zeitpunkt und Störungsmeldung. Unterscheide ein Problem im WLAN von einer Störung am Anschluss, bevor du Ansprüche prüfst. Bewahre die Vorgangsnummer neben deinem Störungsprotokoll auf. Ein dokumentierter Beginn hilft bei der Klärung mehr als die Erinnerung an einen besonders schlechten Abend."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -190,6 +190,8 @@ Prüfe erstens, ob die Rechnung den vollen Monat zeigt. Prüfe zweitens, ob die 
 Diese drei Punkte dauern [fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) und gehen ums Geld im Rechenfall. Sie zeigen auch, warum ein schriftlicher Verlauf hilft: Nach sechs Wochen kennt niemand mehr das Telefonat.
 
 **Faustregel:** Notiere bei jeder Störung Uhrzeit, Ticketnummer und wer am Telefon sprach. Eine vollständige Ablage ist dein Nachweis – bei der Erstattung wie beim Wechsel.
+
+**Für deinen nächsten Check:** Bewahre die Vorgangsnummer neben deinem Störungsprotokoll auf. Ein dokumentierter Beginn hilft bei der Klärung mehr als die Erinnerung an einen besonders schlechten Abend.
 
 ## Häufige Fragen
 

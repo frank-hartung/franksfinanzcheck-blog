@@ -1,6 +1,6 @@
 ---
 title: "Fenster abdichten: So stoppst du Zugluft an alten Rahmen"
-description: "Fenster abdichten leicht gemacht: Mit diesen Tipps kannst du Zugluft stoppen und effektiv Heizkosten senken. Erfahre jetzt, worauf es ankommt."
+description: "Zieht es am Fensterrahmen? Finde zuerst die undichte Stelle und prüfe, ob Dichtung oder Beschlag betroffen ist, bevor du Material kaufst."
 date: 2026-11-13T00:29:05Z
 draft: false
 reserve_published: 2026-11-13
@@ -10,7 +10,7 @@ pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Fenster abdichten", "Zugluft stoppen", "Heizkosten senken"]
 pin_title: "Fenster abdichten: So stoppst du Zugluft an alten Rahmen"
-pin_description: "*Werbung | Fenster abdichten leicht gemacht: Mit diesen Tipps kannst du Zugluft stoppen und effektiv Heizkosten senken. Erfahre jetzt, worauf es ankommt. Mehr Spartipps auf FranksFinanzcheck! #fenster #abdichten #zugluft"
+pin_description: "Zieht es am Fensterrahmen? Finde zuerst die undichte Stelle und prüfe, ob Dichtung oder Beschlag betroffen ist, bevor du Material kaufst. Teste die Dichtung an mehreren Stellen desselben Fensters. Ein Problem an einer Ecke erfordert nicht zwangsläufig neue Dichtungen für den ganzen Rahmen."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -40,15 +40,11 @@ kurzantwort: "Setze selbstklebende Dichtungsleiste und Fugendichtstoff rund um d
 faktenfrische_aliases:
   - "2026-11-05-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen"
   - "2026-11-09-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen"
+affiliate_exempt: true
+affiliate_exempt_reason: "Eine Fensterdichtung wird nach Zustand und Passform ausgewählt, nicht nach Stromanbieter."
 ---
 
-
-Fenster abdichten im Check: Draußen sinken die Temperaturen.  
-Du sitzt auf dem Sofa und spürst einen kühlen Hauch am Nacken.  
-Die Heizung läuft auf Hochtouren, doch das Zimmer bleibt kühl.  
-Ein Blick auf die alten Holzrahmen zeigt oft das Problem.
-
-**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+Spürst du am geschlossenen Fenster einen Luftzug, suche erst die undichte Stelle. Nicht jede Fuge lässt sich sinnvoll mit demselben Dichtband schließen.
 
 Die Dichtungen sind spröde oder fehlen ganz.  
 Teure neue Fenster sind meist nicht sofort nötig.  
@@ -65,8 +61,6 @@ So bleibt die Wärme dort, wo sie hingehört.
 * **Materialwahl:** Selbstklebende Gummidichtungen (EPDM) halten länger als einfacher Schaumstoff.
 * **Mechanik prüfen:** Das Justieren der Fensterflügel erhöht den Anpressdruck effektiv.
 * **Kostenkontrolle:** Kleine Maßnahmen verhindern, dass teure Heizenergie ungenutzt nach draußen verpufft.
-
-💡 **Schnell‑Tipp von FranksFinanzcheck:** Die besten Tarife findest du über unseren Partner‑Vergleich: [**Stromanbieter vergleichen & wechseln**](/go/strom/) _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ## Warum solltest du deine Fenster abdichten?
 
@@ -242,7 +236,6 @@ Ein Vergleich dauert nur wenige Minuten deiner Zeit.
 
 Es ist der logische nächste Schritt nach der Abdichtung.  
 Hier kannst du prüfen, ob dein Tarif noch passt:  
-[Stromanbieter vergleichen](/go/strom/) und [Fixkosten prüfen](../../posts/2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit/)  
 
 Dieser Check hilft dir, das gesparte Geld zu behalten.  
 Weniger Verbrauch bedeutet doppelten Nutzen bei einem günstigen Tarif.  
@@ -269,6 +262,8 @@ Dokumentiere die Zugluft am besten mit einem Video.
 Ein flatterndes Feuerzeug vor dem Fenster ist ein guter Beweis.  
 Frage im Zweifel einen Fachmann für Fensterbau um Rat.  
 Er kann die Beschläge professionell und dauerhaft einstellen.  
+**Für deinen nächsten Check:** Teste die Dichtung an mehreren Stellen desselben Fensters. Ein Problem an einer Ecke erfordert nicht zwangsläufig neue Dichtungen für den ganzen Rahmen.
+
 **Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) **Lesetipp:** Heizöl Preise: 2026 – Optimalen Kaufzeitpunkt finden
 
 ## Häufige Fragen
@@ -295,17 +290,10 @@ Besonders an Hauptstraßen ist dieser Effekt oft sofort verblüffend. Eine gute 
 
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Stromtarife vergleichen**](/go/strom/)
-
-*Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
-
 ---
-
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
 
 _Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information und stellt keine Anlage-, Rechts- oder Steuerberatung dar. Prüfe Konditionen und Bedingungen immer beim jeweiligen Anbieter._
 
 ---
-
 
 ---

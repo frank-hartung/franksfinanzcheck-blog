@@ -1,6 +1,6 @@
 ---
 title: "Mietwagen-Fallen im Urlaub vermeiden"
-description: "Mietwagen-Fallen im Urlaub vermeiden – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ."
+description: "Am Mietwagenschalter zählen die gebuchten Bedingungen. Prüfe Kaution, Tankregel und Schäden am Auto und dokumentiere die Rückgabe mit Beleg."
 date: 2026-10-21T09:43:01Z
 draft: true
 tags: ["Reisekosten sparen", "Mietwagen und Wohnmobil"]
@@ -16,7 +16,7 @@ redaktionelle_pruefung:
   status: "ausstehend"
   aenderungsgrund: "Erstentwurf – Risikoklasse bei der Redaktion vorgemerkt"
 pin_title: "Mietwagen-Fallen im Urlaub vermeiden"
-pin_description: "*Werbung | Mietwagen-Fallen im Urlaub vermeiden – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ. Mehr Spartipps auf FranksFinanzcheck! #mietwagen #tipps #urlaub"
+pin_description: "*Werbung | Am Mietwagenschalter zählen die gebuchten Bedingungen. Prüfe Kaution, Tankregel und Schäden am Auto und dokumentiere die Rückgabe mit Beleg. Fotografiere bei der Abholung auch Tankstand und Kilometerzähler. Vergleiche beides mit dem Protokoll, bevor du das Gelände verlässt."
 cover:
   image: "images/covers/2026-10-21-mietwagen-fallen-im-urlaub-vermeiden.jpg"
   alt: "Mietwagen-Fallen im Urlaub vermeiden"
@@ -132,6 +132,8 @@ Vergiss niemals die wichtigen Fristen für die Absage. Notiere dir das Datum fü
 
 
 
+**Für deinen nächsten Check:** Fotografiere bei der Abholung auch Tankstand und Kilometerzähler. Vergleiche beides mit dem Protokoll, bevor du das Gelände verlässt.
+
 **Weiterlesen:** [Ratgeber Mietwagen](../../pillar/mietwagen/)
 **Lesetipp:** [Urlaub sparen: Budget, Buchung und Kosten im Blick](../../posts/2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen/)
 
@@ -161,7 +163,7 @@ Nutze das Wissen aus diesem Text für deine nächste Reise. Prüfe jeden Vertrag
 
 Jetzt bist du an der Reihe. Gehe auf CHECK24 und vergleiche mindestens drei Angebote. Notiere dir alle Kosten für die gesamte Zeit. Wende den 4K‑Prüfpfad direkt auf deine Auswahl an. So behältst du die volle Kontrolle über deine Kosten. Wir wünschen dir eine gute Fahrt und einen tollen Urlaub.
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
+**Partnerangebot (Werbung):** [Mietwagenangebote vergleichen](/go/mietwagen/).
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
 

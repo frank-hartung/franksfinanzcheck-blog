@@ -1,6 +1,6 @@
 ---
 title: "Heizölpreise vergleichen: So planst du deine Bestellung"
-description: "Heizöl bestellen ohne unbelegte Spartipps: So vergleichst du Angebote, prüfst Lieferkosten und planst den Tank rechtzeitig."
+description: "Vergleiche Heizölangebote für dieselbe Menge, Lieferadresse und Lieferfrist. Prüfe den Gesamtpreis einschließlich Zuschlägen vor der Bestellung."
 date: 2026-11-13T11:26:17Z
 draft: true
 reserve_blocked: "Redaktionelle Prüfung und Quellenprüfung ausstehend; keine automatische Veröffentlichung (#1072)."
@@ -23,8 +23,8 @@ categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Heizölpreise", "Heizöl bestellen", "Heizkosten", "Angebote vergleichen", "Lieferkosten", "Heizölpreise vergleichen", "vergleichen", "Bestellung"]
-pin_title: "Heizöl bestellen: Angebote sorgfältig vergleichen"
-pin_description: "*Werbung | Heizöl bestellen ohne unbelegte Spartipps: So vergleichst du Angebote, prüfst Lieferkosten und planst den Tank rechtzeitig. Mehr Spartipps auf FranksFinanzcheck! #heizoelpreise #heizoel #bestellen"
+pin_title: "Heizölpreise vergleichen: So planst du deine Bestellung"
+pin_description: "*Werbung | Vergleiche Heizölangebote für dieselbe Menge, Lieferadresse und Lieferfrist. Prüfe den Gesamtpreis einschließlich Zuschlägen vor der Bestellung. Frage nach dem tatsächlich zahlbaren Betrag für deine Lieferstelle. Zuschläge für Zufahrt oder Lieferzeit können den günstigeren Listenpreis aufwiegen."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -188,6 +188,8 @@ Bleib auch dann beim Vorgehen, wenn jemand Eile macht. Ein kurz befristetes Ange
 **Faustregel:** Vergleiche nie einen Literpreis allein, sondern nur Gesamtbeträge für dieselbe Liefermenge, denselben Lieferort und denselben Zeitraum.
 
 
+
+**Für deinen nächsten Check:** Frage nach dem tatsächlich zahlbaren Betrag für deine Lieferstelle. Zuschläge für Zufahrt oder Lieferzeit können den günstigeren Listenpreis aufwiegen.
 
 **Weiterlesen:** [Ratgeber Strom sparen](../../pillar/strom-sparen/) · [Fenster abdichten: So stoppst du Zugluft an alten Rahmen](../../posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/)
 

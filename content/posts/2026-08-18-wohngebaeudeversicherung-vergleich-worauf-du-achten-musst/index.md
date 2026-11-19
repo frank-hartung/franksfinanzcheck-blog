@@ -22,8 +22,8 @@ cover:
 kurzantwort: "Eine gute Wohngebäudeversicherung schützt nicht nur gegen Feuer, Leitungswasser, Sturm und Hagel. Wirklich wichtig sind im Vergleich vor allem Elementarschutz, grobe Fahrlässigkeit, eine saubere Neuwertregelung und passende Klauseln für Rohre, Nebengebäude oder Photovoltaik. Wer nur auf den Beitrag schaut, vergleicht zu kurz."
 social_posted: true
 keywords: ["Wohngebäudeversicherung Vergleich", "Gebäudeversicherung Elementarschutz", "Haus Versicherung Vergleich", "Wohngebäude Tarifcheck", "Grobe Fahrlässigkeit Gebäude", "Wohngebäudeversicherung"]
-pin_title: "Wohngebäudeversicherung: Worauf du wirklich achten musst"
-pin_description: "*Werbung | Unwetter, Starkregen, Feuer: Die Wohngebäudeversicherung entscheidet im Ernstfall über dein Haus. Wir zeigen dir die wichtigen Klauseln, den Elementarschutz und wie du bis zu 340 Euro sparst. Jetzt den Vergleich lesen."
+pin_title: "Wohngebäudeversicherung Vergleich: Worauf du achten musst"
+pin_description: "*Werbung | Welche Schäden am Haus trägt deine Police? Vergleiche versicherte Gefahren, Selbstbehalt und Wiederaufbaukosten statt nur den Jahresbeitrag. Vergleiche zwei Angebote mit demselben Gebäudezustand. Fehlt in einem Antrag der ausgebaute Dachboden, ist der günstigere Beitrag noch kein besseres Angebot."
 pinwand: "Versicherungen clever wechseln & sparen"
 quellen:
   - id: "Q1"
@@ -153,6 +153,7 @@ redaktionelle_pruefung:
       pruefung: "Redaktioneller Beispieltarif; teurer Filial-/Maklertarif mit identischem Leistungsumfang wie der starke Tarif"
       konsistenzpruefung: "Höchster Wert der Vergleichstabelle; belegt die Preisspanne bei ähnlichen Leistungen"
       quellen: ["Q2"]
+summary: "Welche Schäden am Haus trägt deine Police? Vergleiche versicherte Gefahren, Selbstbehalt und Wiederaufbaukosten statt nur den Jahresbeitrag."
 ---
 
 Die [Wohngebäudeversicherung](../../posts/2026-08-12-dein-haus-sicher-schuetzen-das-neue-vorsorge-update-2026/) gehört zu den Policen, bei denen ein schwacher Vertrag richtig teuer werden kann. Entsteht am Haus ein großer Schaden, geht es nicht um ein paar hundert Euro. Es geht schnell um **fünfstellige oder sogar sechsstellige Summen**.

@@ -1,6 +1,6 @@
 ---
 title: "Einlagensicherung: Wie viel Guthaben geschützt ist"
-description: "Was Einlagensicherung leistet, was sie nicht abdeckt und wie du vor einer Geldanlage prüfst, wie viele Institute hinter einem Angebot stehen. Mit."
+description: "Mehrere Konten bedeuten nicht automatisch mehrfachen Schutz. Prüfe, welche Bank hinter jeder Marke steht und wie deine Einlagen dort zusammenzählen."
 date: 2026-09-23T06:10:00Z
 lastmod: 2026-10-13
 draft: false
@@ -10,7 +10,7 @@ pillar: "konto-karten"
 author: "Frank Hartung"
 keywords: ["Einlagensicherung", "Guthaben geschützt", "Bank Insolvenz", "Tagesgeld Sicherheit"]
 pin_title: "Einlagensicherung: Wie viel Guthaben geschützt ist"
-pin_description: "*Werbung | Was Einlagensicherung leistet, was sie nicht abdeckt und wie du vor einer Geldanlage prüfst, wie viele Institute hinter einem Angebot stehen. Mehr Spartipps auf FranksFinanzcheck! #einlagensicherung #tagesgeld #sparen"
+pin_description: "*Werbung | Mehrere Konten bedeuten nicht automatisch mehrfachen Schutz. Prüfe, welche Bank hinter jeder Marke steht und wie deine Einlagen dort zusammenzählen. Liste für jede Bank auch Guthaben auf dem Girokonto auf. Nur ein Blick auf das Tagesgeldkonto kann die Summe beim selben Institut unterschätzen."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -184,6 +184,8 @@ Das Ergebnis dieser Prüfung ist nicht immer ein Nachteil. Zwei Institute bedeut
 Die Verbraucherzentrale empfiehlt, beim Abschluss eines Girokontos Entgelte und Bedingungen zu lesen ([Ratgeber Girokonto](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/sparen-und-anlegen/girokonto-was-sie-darueber-wissen-sollten-4990)). Dieselbe Sorgfalt hilft beim Tagesgeld: Der Zins bindet den Blick, die Regeln treten zurück.
 
 **Faustregel:** Verteile größere Guthaben auf mehrere Banken innerhalb des Einlagensicherungsfonds – die gesetzliche Sicherung gilt pro Kunde und pro Institut, nicht pro Kontotyp.
+
+**Für deinen nächsten Check:** Liste für jede Bank auch Guthaben auf dem Girokonto auf. Nur ein Blick auf das Tagesgeldkonto kann die Summe beim selben Institut unterschätzen.
 
 ## Häufige Fragen
 

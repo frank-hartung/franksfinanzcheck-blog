@@ -22,8 +22,8 @@ cover:
 kurzantwort: "Eine Tierkrankenversicherung kann sich lohnen, wenn du hohe Tierarztkosten finanziell nicht gut abfedern kannst oder maximale Planbarkeit möchtest. Entscheidend ist nicht der billigste Monatsbeitrag, sondern das Zusammenspiel aus Leistungsumfang, Selbstbeteiligung, Erstattung und Ausschlüssen. Wer Hund oder Katze nur nach dem Beitrag absichert, vergleicht zu kurz."
 social_posted: true
 keywords: ["Tierkrankenversicherung Hund", "Tierkrankenversicherung Katze", "Tierarztkosten absichern", "Haustier Versicherung", "OP Versicherung Tier", "Tierkrankenversicherung für Hund & Katze", "Tierkrankenversicherung", "realistisch"]
-pin_title: "Tierkrankenversicherung: Hund & Katze richtig einschätzen"
-pin_description: "*Werbung | Tierkrankenversicherung für Hund und Katze: Wann sich OP-Schutz oder Vollschutz lohnt, was Tarife kosten und worauf du im Kleingedruckten achtest. Mehr Spartipps auf FranksFinanzcheck! #tierkrankenversicherung #hund #katze"
+pin_title: "Tierkrankenversicherung für Hund & Katze: Kosten realistisch"
+pin_description: "*Werbung | OP-Schutz oder Vollversicherung fürs Tier? Prüfe Erstattungsgrenze, Selbstbeteiligung und Ausschlüsse für Vorerkrankungen, bevor du Beiträge vergleichst. Spiele einen größeren Eingriff mit dem konkreten Tarif durch. Wende Selbstbehalt und Jahresgrenze in der vorgesehenen Reihenfolge an, bevor du den Eigenanteil beurteilst."
 pinwand: "Versicherung | Haustier & Finanzen"
 quellen:
   - id: "Q1"
@@ -225,6 +225,7 @@ redaktionelle_pruefung:
       pruefung: "Redaktionelle Prüfspanne; dritte Verwendung derselben Kernfrage"
       konsistenzpruefung: "Identisch mit den übrigen Verwendungen"
       quellen: ["Q1"]
+summary: "OP-Schutz oder Vollversicherung fürs Tier? Prüfe Erstattungsgrenze, Selbstbeteiligung und Ausschlüsse für Vorerkrankungen, bevor du Beiträge vergleichst."
 ---
 
 Ein Haustier kostet nicht nur Futter, Streu oder Zubehör. Teuer wird es oft dann, wenn gesundheitlich etwas passiert. Und das oft plötzlich. Eine OP, Diagnostik, Nachsorge oder längere Behandlung kann aus einer kleinen Rechnung schnell einen Budgetschock machen.

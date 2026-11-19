@@ -23,8 +23,8 @@ cover:
 kurzantwort: "Guter Schutz für dein Zuhause hat drei Teile: die passende Police für Gebäude oder Hausrat, einen Schutz gegen Naturgefahren und eine Summe, die zum heutigen Wert passt. Alte Verträge lassen gerade bei Starkregen und Rückstau Lücken. Wer seine Klauseln kennt, steht besser da und zahlt oft nicht mehr."
 social_posted: true
 keywords: ["Dein Haus sicher schützen", "Hausversicherung", "Hausratversicherung", "Elementarschadenversicherung", "Wohngebäudeversicherung", "Unterversicherung vermeiden", "Vorsorge-Update", "Haus Schutz Kosten"]
-pin_title: "Dein Haus sicher schützen: Das Vorsorge-Update 2026"
-pin_description: "*Werbung | Hausrat, Elementarschäden, Unterversicherung: Das Vorsorge-Update 2026 zeigt dir, welche Policen wirklich schützen und wo du bei deiner Immobilie Geld sparst. Ein Check, der sich in Minuten rechnet. Jetzt lesen."
+pin_title: "Dein Haus sicher schützen: Das neue Vorsorge-Update 2026"
+pin_description: "*Werbung | Gebäude und Hausrat sind nicht dasselbe. Ordne Schäden am Haus und an beweglichen Sachen getrennt zu und prüfe, ob Naturgefahren mitversichert sind. Stell dir vor, dass Wasser in den Keller eindringt. Wären die Schäden am Mauerwerk und die zerstörten Möbel in derselben Police versichert? Prüfe beide Fälle getrennt."
 pinwand: "Versicherungen clever wechseln & sparen"
 quellen:
   - id: "Q1"
@@ -200,6 +200,7 @@ redaktionelle_pruefung:
       pruefung: "Redaktionelles Beispiel für einen Billigtarif, der bei Unterversicherung oder fehlendem Elementarschutz nicht trägt"
       konsistenzpruefung: "Unterstreicht die Aussage, dass der Preis nicht alles ist; kein Widerspruch zu den Beispieltarifen"
       quellen: ["Q3"]
+summary: "Gebäude und Hausrat sind nicht dasselbe. Ordne Schäden am Haus und an beweglichen Sachen getrennt zu und prüfe, ob Naturgefahren mitversichert sind."
 ---
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.

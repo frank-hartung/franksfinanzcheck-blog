@@ -1,6 +1,6 @@
 ---
 title: "Energiepreise 2026: Strom- und Gasvertrag prüfen"
-description: "Strom- und Gasverträge im Herbst prüfen: Preisgarantie, Abschlag und Kündigungsfristen im Überblick. So sparst du jeden Monat bares Geld."
+description: "Lege deine letzte Energieabrechnung neben das Vertragsangebot. Prüfe Grundpreis, Arbeitspreis und Ende der Bindung mit demselben Jahresverbrauch."
 date: 2026-10-08T11:38:36Z
 lastmod: 2026-10-13
 draft: true
@@ -14,8 +14,8 @@ ki_redaktion: "chatgpt"
 ki_redaktion_status: "review"
 news_kategorie: "energie"
 kurzantwort: "Variable Tarife geben Marktpreise direkt an dich weiter – das Preisrisiko trägst du, nicht der Anbieter. Ein Festpreis kehrt das Verhältnis um, gilt aber nur für die Laufzeit des Vertrags und kostet meist einen Aufschlag. Vergleiche deshalb den Gesamtpreis aus Grund- und Arbeitspreis, achte auf Preisdeckel und Kündigungsfristen und rechne mit deinem echten Jahresverbrauch."
-pin_title: "Energiepreise 2026: Was du jetzt beim Strom- und Gasvertrag prüfen solltest"
-pin_description: "*Werbung | Energiepreise 2026: Was du jetzt beim Strom- und Gasvertrag prüfen solltest – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun … Mehr Spartipps auf FranksFinanzcheck! #energieupdate"
+pin_title: "Energiepreise 2026: Strom- und Gasvertrag prüfen"
+pin_description: "*Werbung | Lege deine letzte Energieabrechnung neben das Vertragsangebot. Prüfe Grundpreis, Arbeitspreis und Ende der Bindung mit demselben Jahresverbrauch. Vergleiche das Ende der Preisbindung mit dem Vertragsende. Nur wenn beide Daten feststehen, lässt sich der Zeitraum mit wirklich planbaren Kosten erkennen."
 cover:
   image: "images/covers/2026-10-08-energie-update-was-sich-jetzt-fuer-dich-aendert.jpg"
   alt: "Energiepreise 2026: Was du jetzt beim Strom- und Gasvertrag prüfen solltest"
@@ -108,6 +108,8 @@ Umgekehrt gilt derselbe Effekt in der Praxis: Ein Haushalt mit hohem Verbrauch z
 
 Derselbe Vertrag wird zum Nachteil, sobald die Preise am Markt fallen. Wer seinen Verbrauch kennt, kann diese Frage für sich selbst beantworten. Wer ihn nicht kennt, entscheidet leider blind.
 
+**Für deinen nächsten Check:** Vergleiche das Ende der Preisbindung mit dem Vertragsende. Nur wenn beide Daten feststehen, lässt sich der Zeitraum mit wirklich planbaren Kosten erkennen.
+
 **Weiterlesen:** Der [Ratgeber zu Strom und Gas](../../pillar/strom-sparen/) erklärt weitere Wege zur Tarifwahl. Im Beitrag [Grundversorgung Strom und Gas](../../posts/2026-09-21-grundversorgung-strom-und-gas-was-sie-leistet/) erfährst du, was gilt, wenn kein Sondervertrag greift.
 
 ## FAQ – die wichtigsten Fragen zur Meldung
@@ -137,7 +139,7 @@ Wer flexibel bleibt und seine eigenen Zahlen kennt, trifft die passende Wahl. Da
 ---
 ---
 
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)
+**Partnerangebot (Werbung):** [Stromtarife vergleichen](/go/strom/).
 
 *Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
 

@@ -346,3 +346,15 @@ main.main.ff-posts-index {
   .ff-topic-card:focus-visible,
   .ff-posts-jump:focus-visible { outline-color: Highlight !important; }
 }
+
+/* Redaktionelle Auswahl, unabhängig von den sechs Themenwelten. */
+.ff-startauswahl { margin-block: 2rem; }
+.ff-startkarte {
+  height: 100%;
+  padding: 1.25rem;
+  background: var(--entry);
+  border: 1px solid var(--ff-topic-line);
+  border-radius: 1rem;
+}
+.ff-startkarte h3 { margin-bottom: .65rem; }
+.ff-startkarte a { text-decoration: underline; text-underline-offset: .16em; }

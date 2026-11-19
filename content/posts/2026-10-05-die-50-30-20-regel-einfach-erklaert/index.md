@@ -1,6 +1,6 @@
 ---
-title: "Die 50-30-20-Regel einfach erklärt"
-description: "Die 50-30-20-Regel einfach erklärt – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ."
+title: "50-30-20-Regel: Was tun, wenn die Miete kaum Spielraum lässt?"
+description: "Passt die 50-30-20-Regel zu deiner Miete? Ordne zuerst die festen Verpflichtungen ein und passe die Anteile an dein wirklich verfügbares Einkommen an."
 date: 2026-10-05T11:53:21Z
 draft: true
 tags: ["Budget planen"]
@@ -21,8 +21,8 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: 6eb2bdd8dae8d036fa4615ebc1f8d0e59975786d2f48e34189dc20f8dbb107b1
     geprueft_am: 2026-11-13
-pin_title: "Die 50-30-20-Regel einfach erklärt"
-pin_description: "*Werbung | Die 50-30-20-Regel einfach erklärt – der große Ratgeber von FranksFinanzcheck: Schritt für Schritt erklärt, mit Rechenbeispielen, Checklisten und FAQ. Mehr Spartipps auf FranksFinanzcheck! #die #503020regel #einfach"
+pin_title: "50-30-20-Regel: Was tun, wenn die Miete kaum Spielraum lässt?"
+pin_description: "*Werbung | Passt die 50-30-20-Regel zu deiner Miete? Ordne zuerst die festen Verpflichtungen ein und passe die Anteile an dein wirklich verfügbares Einkommen an. Ziehe Jahresrechnungen anteilig mit ab, bevor du den freien Betrag verteilst. Ein hoher Kontostand am Monatsanfang ist noch keine Rücklage."
 quellen:
   - id: "Q1"
     titel: "Referenzseite destatis.de"
@@ -148,6 +148,8 @@ Ein weiterer Stolperstein ist, die Ausgaben nicht zu kategorisieren. Wenn du all
 ## Fazit: Die 50‑30‑20‑Regel einfach erklärt
 
 Der Hebel bei **Die 50‑30‑20‑Regel einfach erklärt** sitzt nicht im Verzicht, sondern im Nachrechnen. Bereits kleine Anpassungen im Konsumverhalten und regelmäßige Vertragsprüfungen summieren sich über das Jahr zu einer beachtlichen Ersparnis. Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen.  
+
+**Für deinen nächsten Check:** Ziehe Jahresrechnungen anteilig mit ab, bevor du den freien Betrag verteilst. Ein hoher Kontostand am Monatsanfang ist noch keine Rücklage.
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/) **Lesetipp:** [Weihnachten Budget planen: Ohne Schulden durch die Feiertage](../../posts/2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage/)
 

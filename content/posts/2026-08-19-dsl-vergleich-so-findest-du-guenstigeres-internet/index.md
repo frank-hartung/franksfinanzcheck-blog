@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-04
 title: "DSL-Vergleich: So findest du den günstigsten Internettarif"
-description: "DSL-Vergleich 2026: Tarife, Geschwindigkeiten & versteckte Kostenfallen im Check. So findest du günstigeres Internet und sparst bis zu 360 €."
+description: "Ein DSL-Angebot ist nicht allein wegen des Rabatts günstig. Rechne alle Monate, die Anschlussgebühr und die Routermiete auf denselben Zeitraum um."
 date: 2026-08-19T08:35:12Z
 draft: false
 tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
@@ -20,12 +20,12 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: 3335d3afaa59168f5caded03908955b93c714d70125276c974bbc5cf5e29d503
     geprueft_am: 2026-11-13
-kurzantwort: "Ein transparenter DSL-Vergleich berechnet die effektiven Monatspreise über die gesamte 24-monatige Vertragslaufzeit inklusive aller Aktionsrabatte, Router-Gebühren und Wechselprämien. Wer alle zwei Jahre seinen Festnetztarif wechselt, senkt die monatlichen Internetkosten im Schnitt von 44,95 € auf 24,95 €."
+kurzantwort: "Vergleiche dieselbe Bandbreite am selben Anschluss. Addiere über die gewünschte Laufzeit alle Grundpreise, Anschluss- und Routerkosten und ziehe nur tatsächlich nutzbare Gutschriften ab. Die Differenz hängt vom alten Vertrag und dem konkreten Angebot ab."
 
 social_posted: true
 keywords: ["DSL-Vergleich", "Günstigeres Internet", "DSL-Tarife vergleichen", "Internetvertrag wechseln", "Internetanbieter wechseln", "DSL Vergleich", "günstiges Internet"]
-pin_title: "DSL & Internet Flat: Schnell surfen ab 9,99 €/Monat"
-pin_description: "*Werbung | Du zahlst noch über 30 € für dein Internet? DSL- und Kabeltarife gibt es schon ab 9,99 € im Monat – mit Wechselbonus und FRITZ!Box-Rabatt obendrauf. Vergleichen, wechseln, sparen: Der Wechsel-Service übernimmt sogar die Kündigung. Jetzt Speed checken!"
+pin_title: "DSL-Vergleich: So findest du den günstigsten Internettarif"
+pin_description: "*Werbung | Ein DSL-Angebot ist nicht allein wegen des Rabatts günstig. Rechne alle Monate, die Anschlussgebühr und die Routermiete auf denselben Zeitraum um. Rechne zusätzlich den Fall durch, dass du nach einem Jahr umziehst. Ein kleiner Preisvorteil über zwei Jahre kann weniger wert sein als eine kürzere vertragliche Bindung."
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
@@ -43,8 +43,7 @@ quellen:
 faktencheck: "2026-10-13"
 ---
 
-
-[DSL-Vergleich](../../posts/2026-08-10-dsl-wechselbonus-sichern/) im Check: Der deutsche Telekommunikationsmarkt ist auch im Herbst 2026 ein Dickicht aus aggressiven Lockangeboten und komplexen Tarifstrukturen; das ist ein Modellwert. Provider werben oft mit extrem niedrigen Einstiegspreisen ab ca. 10 € bis 15 € in der ersten Vertragshälfte. (Stand: Oktober 2026). Doch Vorsicht: Im Kleingedruckten zeigt sich häufig, dass die monatliche Grundgebühr nach der ersten Phase auf rund 45 € bis 55 € ansteigt. Hinzu kommen oft versteckte Bereitstellungskosten, die das vermeintliche Schnäppchen verteuern.
+Eine lange Trefferliste macht den DSL-Vergleich nicht einfacher. Streiche zuerst Angebote, die an deiner Adresse nicht verfügbar sind oder deinen Bedarf beim Upload nicht decken.
 
 Ein unabhängiger **[DSL-Vergleich](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/)** bringt Licht ins Dunkel der Tarif-Dschungel; das ist ein Beispielwert. Diese Anleitung zeigt dir, wie du den echten Effektivpreis ermittelst, anstatt auf Marketing-Tricks hereinzufallen. Du erfährst, welche Bandbreite im aktuellen Jahr 2026 wirklich zu deinem digitalen Alltag passt und wie du über die gesamte Laufzeit hinweg bis zu ca. 300 € bis 400 € sparst.
 
@@ -52,7 +51,7 @@ Ein unabhängiger **[DSL-Vergleich](../../posts/2026-10-02-preiswert-surfen-so-f
 
 - Der tatsächliche Preis eines Tarifs lässt sich seriös nur über den Effektivpreis pro Monat bei einer Mindestlaufzeit von 24 Monaten vergleichen als Modellwert.
 - Für moderne Haushalte und intensives Homeoffice ist eine Bandbreite von ca. 50 bis 100 Mbit/s in der Regel vollkommen ausreichend.
-- Durch einen konsequenten [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) alle zwei Jahre lassen sich aktuell Einsparungen von rund 250 € bis 380 € erzielen.
+- Ein [Anbieterwechsel](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) ist auch mit Bonus nicht automatisch günstiger als ein neues Angebot deines bisherigen Anbieters.
 
 ---
 
@@ -63,6 +62,12 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 *Abbildung: Merkkarte zu „DSL-Vergleich: So findest du den günstigsten Internettarif“ (eigene Darstellung aus diesem Beitrag).*
 
+
+## Beispiel: 100 Mbit/s mit oder ohne lange Bindung?
+
+Angenommen, beide Anschlüsse liefern die für deinen Haushalt nötige Leistung. Tarif A ist monatlich kündbar, kostet 35 € pro Monat und einmalig 40 € für den Anschluss. Tarif B bindet dich 24 Monate: sechs Monate zu 20 €, danach 18 Monate zu 40 €, ohne Anschlussgebühr. Routerkosten fallen in diesem Modell nicht an.
+
+Über 24 Monate kostet A insgesamt 880 €, B dagegen 840 €. Der niedrigere Einstiegspreis spart in diesem Beispiel also 40 € über **zwei Jahre**. Brauchst du den Anschluss nur zwölf Monate, kostet A bis zur Kündigung 460 €. Bei B endet die Zahlungspflicht nicht mit dem Ende der Nutzung. Prüfe deshalb die Bindung getrennt vom rechnerischen Monatspreis. Die Beträge sind Modellannahmen, keine verfügbaren Angebote.
 
 ## Wie berechnest du den echten Effektivpreis?
 
@@ -142,7 +147,7 @@ Ein Bestandskunden-Tarif ohne Rabatt kostet oft ca. 45 € plus Hardware; das i
 
 ![Gliederung des Beitrags: DSL-Vergleich: So findest du den günstigsten Internettarif](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „DSL-Vergleich: So findest du den günstigsten Internettarif“ – 5 Stationen von „Wie berechnest du den echten Effektivpreis?“ bis „In drei Schritten zum neuen Internetanschluss“ (eigene Darstellung).*
+*Abbildung: Gliederung zu „DSL-Vergleich: So findest du den günstigsten Internettarif“ – 5 Stationen von „Beispiel: 100 Mbit/s mit oder ohne lange Bindung?“ bis „DSL, Kabel oder Glasfaser: Die Übertragungswege im Vergleich“ (eigene Darstellung).*
 
 ## So vergleichst du in 20 Minuten sauber
 
@@ -163,7 +168,7 @@ Ein Bestandskunden-Tarif ohne Rabatt kostet oft ca. 45 € plus Hardware; das i
 
 Glasfaser bietet oft die besten Latenzwerte, was besonders bei Online-Anwendungen spürbar ist als Beispielwert. Aber Achtung: Ein 100-Mbit-VDSL-Anschluss mit perfekter Verkabelung ist oft besser als ein 1.000-Mbit-Tarif, bei dem das WLAN-Signal nicht durch die Wände kommt.
 
-**Faustregel:** Wer alle zwei Jahre vergleicht und wechselt, sichert sich regelmäßig Neukunden-Vorteile und spart in der Regel zwischen ca. 250 € und 360 €.
+**Faustregel:** Vergleiche rechtzeitig vor dem Ende der Rabattphase und prüfe neben dem Preis auch die neue Bindung.
 
 ## Router kaufen oder mieten?
 
@@ -190,6 +195,8 @@ Die Ersparnis zwischen einem 250er und einem 100er Tarif liegt oft bei ca. 10 �
 Ein transparenter **DSL-Vergleich** ist der effektivste Weg, um die monatlichen Fixkosten im Griff zu behalten; das ist ein Modellwert. Wer die Dynamik des Marktes nutzt und alle zwei Jahre den Anbieter wechselt, kann dauerhaft ca. 300 € bis 360 € einsparen.
 
 Der beste Tarif ist derjenige, der genau deinen Bedarf deckt, ohne für ungenutzte Megabit oder unnötige Hardware-Miete zu bezahlen.
+
+**Für deinen nächsten Check:** Rechne zusätzlich den Fall durch, dass du nach einem Jahr umziehst. Ein kleiner Preisvorteil über zwei Jahre kann weniger wert sein als eine kürzere vertragliche Bindung.
 
 **Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/): So sparst du beim Internetvertrag · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): So bringst du Speed in jede Ecke · [WLAN-Frust lösen](../../posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/)
 

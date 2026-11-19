@@ -1,6 +1,6 @@
 ---
 title: "Die 50-30-20-Regel bringt Ordnung: Wohin mit dem Gehalt?"
-description: Wohin mit dem Gehalt? Nutze die 50-30-20-Regel für dein Budget. Frank Hartung zeigt dir, wie du Fixkosten prüfst und dein Geld klug einteilst.
+description: "Teile dein Gehalt erst nach Abzug unvermeidbarer Verpflichtungen ein. Nutze die 50-30-20-Regel, um Engpässe zu sehen, nicht als starres Monatsziel."
 kurzantwort: "Die Methode teilt das Geld in drei klare Bereiche auf: Fixkosten, Wünsche und Sparen. Ein automatisiertes System hilft dabei, das geld einteilen lernen dauerhaft umzusetzen. Regelmäßige Vertragschecks senken die Fixlast und erhöhen den Spielraum für Wünsche."
 date: 2026-11-16T15:23:44Z
 draft: true
@@ -12,8 +12,8 @@ pillar: "konto-karten"
 author: "Frank Hartung"
 keywords: ["Wohin mit dem gehalt", "50 30 20 Regel Budget", "Kontomodell", "Geld einteilen lernen", "Die 50-30-20-Regel bringt Ordnung", "Die 50 30 20 Regel bringt Ordnung", "50-30-20-Regel"]
 pinwand: "Budget & Haushaltskasse: clever planen"
-pin_title: Wohin mit dem Gehalt? Die 50-30-20-Regel bringt Ordnung rein
-pin_description: "*Werbung | Am 15. ist das Konto leer? Die 50-30-20-Regel ist der Klassiker unter den Budget-Methoden, weil sie so einfach ist: 50 % für Fixkosten, 30 % zum Leben, 20 % für deine Ziele. Wir zeigen die Umsetzung mit und ohne App. Jetzt durchstarten!"
+pin_title: "Die 50-30-20-Regel bringt Ordnung: Wohin mit dem Gehalt?"
+pin_description: "*Werbung | Teile dein Gehalt erst nach Abzug unvermeidbarer Verpflichtungen ein. Nutze die 50-30-20-Regel, um Engpässe zu sehen, nicht als starres Monatsziel. Ordne den Betrag für eine Jahresrechnung gleich beim Gehaltseingang zu. Er sieht sonst im Monatsbudget wie frei verfügbares Geld für Wünsche aus."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "relaxed"
@@ -191,6 +191,8 @@ In unserer Modellrechnung suchen wir nach den großen Hebeln. Strom, Gas und Ver
 ## Fazit: Die 50-30-20-Regel bringt Ordnung – Wohin mit dem Gehalt
 
  Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen; das ist ein Rechenbeispiel.
+
+**Für deinen nächsten Check:** Ordne den Betrag für eine Jahresrechnung gleich beim Gehaltseingang zu. Er sieht sonst im Monatsbudget wie frei verfügbares Geld für Wünsche aus.
 
 ## Häufige Fragen
 

@@ -79,7 +79,7 @@ export default defineConfig({
       // zusätzlich die A11y-Spec: Kontrast, Tap-Ziele und Fokus unterscheiden
       // sich im 390-px-Layout real. Ein Gate, das nur Desktop sieht, prüft
       // die Hälfte der Leser nicht.
-      testMatch: [/mobile\.spec\.mjs/, /a11y-axe\.spec\.mjs/],
+      testMatch: [/mobile\.spec\.mjs/, /a11y-axe\.spec\.mjs/, /archivredaktion\.spec\.mjs/],
     },
   ],
 

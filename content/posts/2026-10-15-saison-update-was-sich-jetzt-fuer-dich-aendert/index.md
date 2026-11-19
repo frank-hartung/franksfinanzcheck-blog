@@ -119,8 +119,8 @@ redaktionelle_pruefung:
       konsistenzpruefung: "133,80 × 10 = 1.338; die Zehn-Jahres-Zahl steht nur in dieser Zeile"
       rechenweg: "133,80 × 10 = 1.338"
       quellen: ["Q3"]
-pin_title: "Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen"
-pin_description: "*Werbung | Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen – aktuelle Einordnung von FranksFinanzcheck: was passiert ist, was es für dich bedeutet und was du jetzt tun … Mehr Spartipps auf FranksFinanzcheck! #saisonupdate #was #sich"
+pin_title: "Herbst-Check: Strom, Versicherung, Konto und Internet"
+pin_description: "*Werbung | Nutze den Herbst für einen Vertragskalender. Halte für Strom, Internet, Konto und Versicherungen fest, wann sich Preise oder Bedingungen ändern. Ordne die Dokumente nach Termin statt nach Anbieter. Ein kleiner Vertrag, dessen Kündigungsfrist morgen endet, verdient vor einer großen Rechnung ohne Zeitdruck Aufmerksamkeit."
 cover:
   image: "images/covers/2026-10-15-saison-update-was-sich-jetzt-fuer-dich-aendert.jpg"
   alt: "Vertrags-Check im Herbst: Strom, Versicherung, Konto und Internet prüfen"
@@ -153,6 +153,7 @@ quellen:
     herausgeber: "Bundesministerium der Justiz (gesetze-im-internet.de)"
     datum: "2026-11-18"
 faktencheck: 2026-11-18
+summary: "Nutze den Herbst für einen Vertragskalender. Halte für Strom, Internet, Konto und Versicherungen fest, wann sich Preise oder Bedingungen ändern."
 ---
 
 **Stand: 18.11.2026.** Dieser News-Kompakt-Artikel ordnet eine aktuelle Entwicklung ein. Konditionen und Regeln können sich ändern – prüfe Details immer beim jeweiligen Anbieter.

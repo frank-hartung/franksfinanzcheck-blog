@@ -1,6 +1,6 @@
 ---
 title: "Strompreis 2026: Herbst-Check für deine Stromkosten"
-description: Steigt der Strompreis 2026? Erfahre im Herbst-Check, ob du deinen Stromtarif wechseln solltest oder besser abwartest. Mit Franks 4K-Prüfpfad sparen.
+description: "Ist der neue Strompreis tatsächlich höher? Rechne Grundpreis und Arbeitspreis mit demselben Verbrauch durch und vergleiche die jährliche Differenz."
 date: 2026-11-18T12:08:01Z
 draft: true
 reserve: true
@@ -10,7 +10,7 @@ pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Strompreis 2026", "Stromanbieter wechseln jetzt", "Strompreis Prognose", "Stromtarif wechseln Herbst", "Strompreis", "Herbst-Check", "Stromkosten"]
 pin_title: "Strompreis 2026: Herbst-Check für deine Stromkosten"
-pin_description: "*Werbung | Steigt der Strompreis 2026? Erfahre im Herbst-Check, ob du deinen Stromtarif wechseln solltest oder besser abwartest. Mit Franks 4K-Prüfpfad sparen. Mehr Spartipps auf FranksFinanzcheck! #strompreis #stromanbieter #wechseln"
+pin_description: "*Werbung | Ist der neue Strompreis tatsächlich höher? Rechne Grundpreis und Arbeitspreis mit demselben Verbrauch durch und vergleiche die jährliche Differenz. Lege die alte und die neue Preiszeile nebeneinander. Rechne eine Änderung beim Grundpreis getrennt von der Änderung je Kilowattstunde durch."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -183,6 +183,8 @@ Sieh dir deine Kosten an und rechne die Konditionen nach. Sichere dein Kündigun
 
 Warte nicht auf die nächste Preiserhöhung deines Anbieters. Werde selbst aktiv und nimm deine Fixkosten in die Hand. Hier kannst du direkt prüfen, ob ein Wechsel für dich sinnvoll ist: [Stromanbieter vergleichen und wechseln](/go/strom/)
 
+**Für deinen nächsten Check:** Lege die alte und die neue Preiszeile nebeneinander. Rechne eine Änderung beim Grundpreis getrennt von der Änderung je Kilowattstunde durch.
+
 **Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/) **Lesetipp:** [Waschmaschine beladen: Weniger Kosten bei jedem Waschgang](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/)
 
 ## Häufige Fragen
@@ -228,5 +230,3 @@ Mit dieser Struktur bewaffnet, verliert das Thema Strom seinen Schrecken. Dein F
 _Wichtiger Hinweis: Dieser Artikel dient ausschließlich der allgemeinen Information und stellt keine Anlage-, Rechts- oder Steuerberatung dar. Prüfe Konditionen und Bedingungen immer beim jeweiligen Anbieter._
 
 ---
-
-👉 **Jetzt vergleichen und sparen:** [**→ Jetzt Fixkosten auf CHECK24 prüfen**](/go/allgemein/)

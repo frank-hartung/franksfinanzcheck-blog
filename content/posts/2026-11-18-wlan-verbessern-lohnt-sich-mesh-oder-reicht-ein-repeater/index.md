@@ -1,6 +1,6 @@
 ---
 title: "WLAN verbessern: Lohnt sich Mesh oder reicht ein Repeater?"
-description: Möchtest du dein WLAN verbessern? Wir klären, ob Mesh-WLAN oder ein günstiger Repeater für schnelles Internet zuhause sorgt. Jetzt Kosten & Nutzen…
+description: "Teste die Funkverbindung dort, wo ein Repeater stehen würde. Ist dort schon das Signal schwach, prüfe einen anderen Standort oder ein Netzwerkkabel."
 kurzantwort: WLAN-Repeater sind günstig in der Anschaffung, halbieren aber oft die verfügbare Bandbreite durch ihre Bauweise. Mesh-WLAN bietet ein nahtloses Funknetz ohne Verbindungsabbrüche beim Raumwechsel, kostet aber in der Anschaffung mehr.
 date: 2026-11-18T12:08:01Z
 draft: true
@@ -11,8 +11,8 @@ pillar: "internet-dsl"
 author: "Frank Hartung"
 keywords: ["WLAN verbessern", "Mesh WLAN oder Repeater", "WLAN verstärker", "Schnelles Internet zuhause", "Repeater"]
 pinwand: Internet & DSL | WLAN-Tipps & Tarife
-pin_title: "WLAN-Verstärker vs. Mesh-WLAN: Was lohnt sich wirklich? – So sparst du"
-pin_description: "*Werbung | Funklöcher im Schlafzimmer, Ruckeln im Homeoffice? Wir erklären verständlich den Unterschied zwischen WLAN-Repeater und Mesh-System – mit Kostenvergleich und klarer Empfehlung für jede Wohnungsgröße. Jetzt lesen! Inkl. Checkliste für 2 Schritte."
+pin_title: "WLAN verbessern: Lohnt sich Mesh oder reicht ein Repeater?"
+pin_description: "*Werbung | Teste die Funkverbindung dort, wo ein Repeater stehen würde. Ist dort schon das Signal schwach, prüfe einen anderen Standort oder ein Netzwerkkabel. Prüfe die Leistung nicht nur direkt neben dem neuen Knoten. Der relevante Messpunkt ist der Schreibtisch oder Fernseher, an dem die Verbindung vorher stockte."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -175,6 +175,8 @@ Ein gehacktes Netzwerk kann teuer werden. Setze lieber auf etablierte Marken. Di
 ## Fazit: WLAN verbessern – Lohnt sich Mesh oder reicht ein Repeater
 
 Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fest und wiederhole den Check jährlich – fünf Minuten reichen; das ist ein Modellwert.
+
+**Für deinen nächsten Check:** Prüfe die Leistung nicht nur direkt neben dem neuen Knoten. Der relevante Messpunkt ist der Schreibtisch oder Fernseher, an dem die Verbindung vorher stockte.
 
 **Weiterlesen:** [Ratgeber Internet DSL](../../pillar/internet-dsl/) **Lesetipp:** [Wie viel Streaming‑Bandbreite du wirklich brauchst](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/)
 

@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-04
 title: "DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis"
-description: "So kannst du DSL wechseln, ohne Stress: Rechne den Effektivpreis, vermeide Ausfallzeiten und prüfe Bonus, Router und Laufzeit vor dem Anbieterwechsel."
+description: "Beim DSL-Wechsel soll der neue Anschluss rechtzeitig bereitstehen. Kläre den Schalttermin und vergleiche die Gesamtkosten statt nur den Einstiegspreis."
 date: 2026-08-14T08:35:12Z
 draft: false
 tags: ["DSL-Vergleich", "Internet und Mobilfunk"]
@@ -24,8 +24,8 @@ kurzantwort: "Ein Anbieterwechsel bei Internet und DSL ist heute meist ein Verwa
 
 social_posted: true
 keywords: ["DSL wechseln", "Internet Anbieterwechsel", "DSL Tarifvergleich", "Highspeed Internet", "Router mieten oder kaufen", "Internet & DSL wechseln", "DSL-Anbieterwechsel", "DSL Anbieterwechsel"]
-pin_title: "Internet und DSL wechseln: Praxis-Tipps ohne Ausfall"
-pin_description: "*Werbung | DSL-Anbieterwechsel ohne Internet-Loch: Portierung, Kündigung durch den Neuanbieter und der echte Effektivpreis über 24 Monate. Wer diese 4 Phasen kennt, spart 280 bis 380 Euro und behält jederzeit Anschluss. Jetzt die Schritt-für-Schritt-Anleitung lesen."
+pin_title: "DSL-Anbieterwechsel: Ablauf, Ausfallzeiten und Effektivpreis"
+pin_description: "*Werbung | Beim DSL-Wechsel soll der neue Anschluss rechtzeitig bereitstehen. Kläre den Schalttermin und vergleiche die Gesamtkosten statt nur den Einstiegspreis. Frag vor dem Wechsel nach dem Rückgabeweg für den alten Router. Bewahre den Einlieferungsbeleg auf, damit nicht nachträglich Geräteentgelt zur letzten Rechnung hinzukommt."
 pinwand: "Internet & DSL | WLAN-Tipps & Tarife"
 quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
@@ -290,6 +290,8 @@ Diese Minute Aufmerksamkeit spart dir oft die ärgerlichsten Fehlentscheidungen.
 Ein **Internet Anbieterwechsel** ist heute deutlich einfacher, als viele denken im Rechenfall. Die große Kunst liegt nicht in der Technik, sondern im Rechnen. Wer Bonus, Grundgebühr, Routerkosten und Laufzeit sauber zusammennimmt, spart oft mehrere hundert Euro über zwei Jahre.
 
 Wichtig ist vor allem: Nicht vom schönsten Lockpreis blenden lassen. Der starke Tarif ist nicht der lauteste, sondern der mit dem besten Gesamtpaket. Genau so wird aus ein paar Minuten Vergleich ein echter Vorteil für deine Fixkosten.
+
+**Für deinen nächsten Check:** Frag vor dem Wechsel nach dem Rückgabeweg für den alten Router. Bewahre den Einlieferungsbeleg auf, damit nicht nachträglich Geräteentgelt zur letzten Rechnung hinzukommt.
 
 **Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/) · [WLAN in jede Ecke bringen](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/)
 

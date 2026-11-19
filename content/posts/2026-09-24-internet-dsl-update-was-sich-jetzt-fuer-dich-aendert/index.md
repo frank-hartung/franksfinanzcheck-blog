@@ -1,7 +1,7 @@
 ---
 lastmod: 2026-11-04
 title: "DSL-Tarif prüfen: Effektivpreis statt Lockpreis"
-description: "Internet & DSL-Update: Prüfe Bedarf, Effektivpreis und Wechseloptionen, bevor du für zu viel Leistung oder einen alten Vertrag zahlst."
+description: "Was kostet DSL nach dem Aktionsjahr? Addiere Rabattmonate, reguläre Monatsentgelte und Einmalkosten und teile die Summe durch die Vergleichsdauer."
 date: 2026-10-07T01:34:23Z
 draft: false
 reserve_published: 2026-10-07
@@ -26,8 +26,8 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: 8a765d99e3d2764bbbe49ea5f23f3ef8f2e036c8d269ed81791cbef15d1db0b0
     geprueft_am: 2026-11-13
-pin_title: "DSL-Tarif prüfen: Effektivpreis statt Lockpreis, Routermiete im Blick"
-pin_description: "*Werbung | Viele Haushalte zahlen bei Internet und DSL für zu viel Leistung oder zu alte Verträge. So prüfst du Bedarf, Effektivpreis und Wechseloptionen sinnvoll. Mehr Spartipps auf FranksFinanzcheck! #internetdslupdate #dslupdate #dslvergleich"
+pin_title: "DSL-Tarif prüfen: Effektivpreis statt Lockpreis"
+pin_description: "*Werbung | Was kostet DSL nach dem Aktionsjahr? Addiere Rabattmonate, reguläre Monatsentgelte und Einmalkosten und teile die Summe durch die Vergleichsdauer. Bewahre den Aktionszeitraum zusammen mit der Auftragsbestätigung auf. Prüfe auf der ersten regulären Rechnung, ob Gutschrift und Routerkosten der Bestellung entsprechen."
 quellen:
   - titel: "Breitbandmessung & Verbraucherschutz Telekommunikation"
     url: "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html"
@@ -331,6 +331,8 @@ Mehr brauchst du oft nicht. Genau diese drei Angaben zeigen schneller als jede W
 Das aktuelle **Internet & DSL‑Update** zeigt vor allem eines: Viele Haushalte zahlen nicht nur wegen schlechter Preise zu viel, sondern auch wegen unpassender Tarife. Mehr Mbit klingen stark, helfen aber nur dann, wenn sie wirklich gebraucht werden.
 
 Wenn du deinen Vertrag ehrlich auf Bedarf, Routerkosten und 24‑Monats‑Preis prüfst, sparst du oft **120 € bis 300 € pro Jahr** – manchmal mehr; das ist ein Modellwert. Genau deshalb ist der klügste Schritt aktuell oft nicht blindes Aufrüsten, sondern sauberes Nachrechnen.
+
+**Für deinen nächsten Check:** Bewahre den Aktionszeitraum zusammen mit der Auftragsbestätigung auf. Prüfe auf der ersten regulären Rechnung, ob Gutschrift und Routerkosten der Bestellung entsprechen.
 
 **Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [WLAN verbessern: So bringst du Speed in jede Ecke](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) · [DSL‑Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/)
 

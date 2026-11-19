@@ -1,6 +1,6 @@
 ---
-title: "Warmwasser sparen: Die Rechnung hinter – Warmwasserkosten"
-description: "Warmwasser braucht rund 16 Prozent der Haushaltsenergie. So liest du deinen Anteil auf der Abrechnung ab und drehst an den richtigen Stellen."
+title: "Warmwasser sparen: Was kostet dich eine Dusche?"
+description: "Was kostet eine Dusche? Miss den Durchfluss und notiere die Dauer. Für die Rechnung macht es einen Unterschied, wie dein Wasser erwärmt wird."
 date: 2026-08-26T06:10:00Z
 lastmod: 2026-11-07
 draft: false
@@ -9,8 +9,8 @@ categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"
 keywords: ["Warmwasser sparen", "Warmwasserkosten senken", "Heizkostenabrechnung", "Duschkosten", "Warmwasser", "Frugalismus", "Geld sparen"]
-pin_title: "Warmwasser sparen: Die Rechnung hinter dem Hahn"
-pin_description: "*Werbung | Warmwasser braucht rund 16 Prozent der Haushaltsenergie. So liest du deinen Anteil auf der Abrechnung ab und drehst an den richtigen Stellen. Mehr Spartipps auf FranksFinanzcheck! #warmwasser #sparen #warmwasserkosten"
+pin_title: "Warmwasser sparen: Was kostet dich eine Dusche?"
+pin_description: "*Werbung | Was kostet eine Dusche? Miss den Durchfluss und notiere die Dauer. Für die Rechnung macht es einen Unterschied, wie dein Wasser erwärmt wird. Miss, wie lange es dauert, einen Eimer mit bekanntem Volumen zu füllen. Damit lässt sich der Durchfluss berechnen, ohne dass du eine Schätzung aus der Werbung übernehmen musst."
 ai_generated: true
 ai_provider: "Content-Engine v2"
 engine_level: "draft"
@@ -199,6 +199,8 @@ Diese Gegenüberstellung dauert [fünf Minuten](../../posts/2026-09-20-finanziel
 **Ein voller Speicher ist nicht automatisch teuer.** Er verliert Wärme, aber er liefert auch sofort warmes Wasser. Wichtiger als die Größe ist die eingestellte Temperatur und die Dämmung.
 
 **Faustregel:** Prüfe vor der Anschaffung von Spararmaturen erst den tatsächlichen Warmwasserverbrauch pro Person im Haushalt – die Armatur amortisiert sich nur bei regelmäßigem Verbrauch.
+
+**Für deinen nächsten Check:** Miss, wie lange es dauert, einen Eimer mit bekanntem Volumen zu füllen. Damit lässt sich der Durchfluss berechnen, ohne dass du eine Schätzung aus der Werbung übernehmen musst.
 
 ## Häufige Fragen
 
