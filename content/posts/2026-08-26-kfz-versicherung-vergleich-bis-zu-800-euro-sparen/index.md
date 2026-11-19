@@ -1,548 +1,148 @@
 ---
-lastmod: 2026-11-04
-title: "Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen"
-description: "Kfz-Versicherung Vergleich 2026: Mit 7 Tipps holst du bis zu 800 € Ersparnis – Kündigungsfrist 30.11., SF-Klasse & Werkstattbindung."
+lastmod: '2026-11-19'
+title: 'Kfz-Versicherung vergleichen: Was ändert sich außer dem Beitrag?'
+description: Vergleiche Kfz-Tarife mit gleicher Fahrleistung und Selbstbeteiligung. Prüfe Vertragsende, Kündigungsfrist und bestätigten Versicherungsbeginn.
 date: 2026-11-04T01:25:00Z
 draft: false
-tags: ["Kfz-Versicherung"]
-categories: ["Ratgeber"]
-pillar: "versicherungen"
-author: "Frank Hartung"
-
-ai_generated: false
+tags:
+- Kfz-Versicherung
+categories:
+- Ratgeber
+pillar: versicherungen
+author: Frank Hartung
+ai_generated: true
 cover:
-  image: "images/covers/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen.jpg"
-  alt: "Kfz-Versicherung Vergleich 2026: Bis zu 800 € pro Jahr sparen"
-  caption: "Tipp von FranksFinanzcheck"
+  image: images/covers/2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen.jpg
+  alt: Titelbild zum Vergleich von Kfz-Versicherungen
+  caption: Tipp von FranksFinanzcheck
   ki_pruefung:
     digital_source_type: algorithmicMedia
     variante: renderer-v3
-    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    verfahren: generate_covers.py (Pillow, deterministisch)
     sha256: 4599371af5008f63d5c62a0fc496df4abeda12b69e9393e8fcb3cae7cc9bb5f8
     geprueft_am: 2026-11-13
-kurzantwort: "Der günstigste Zeitpunkt für einen Kfz-Versicherungsvergleich ist jedes Jahr zwischen August und November: Bis zum 30.11. muss die Kündigung beim alten Versicherer vorliegen. Mit Werkstattbindung, höherer Selbstbeteiligung (150 € TK / 300 € VK), Rabattschutz, der korrekten Jahreskilometerleistung und dem Vergleich von 80+ Tarifen lässt sich der Beitrag um durchschnittlich 300 € bis 800 € pro Jahr senken – bei gleichem oder sogar besserem Leistungsumfang."
-
+kurzantwort: Nimm die letzte Beitragsrechnung und die Police zur Hand. Vergleiche zwei Angebote mit derselben Fahrleistung, demselben Fahrerkreis und derselben Selbstbeteiligung. Für den Kündigungstermin brauchst du Versicherungsablauf und vereinbarte Frist; ein allgemeiner November-Stichtag reicht nicht.
 social_posted: true
-keywords: ["Kfz-Versicherung Vergleich", "Kfz-Versicherung wechseln", "Autoversicherung Vergleich", "Schadenfreiheitsklasse", "Kfz-Versicherung kündigen", "Kfz Haftpflicht", "Teilkasko Vollkasko", "30. November Kündigungsfrist"]
-pin_title: "Kfz-Versicherung: Frist und Leistungsumfang prüfen"
-pin_description: "*Werbung | Vergleiche bei der Kfz-Police Jahresbeitrag und Leistungen. Für die Kündigung zählen das Ende deines Versicherungsjahres und die Frist in deiner Police. Lass dir zwei Angebote mit identischer Selbstbeteiligung rechnen. Sonst vergleichst du nicht nur Preise, sondern auch den Betrag, den du bei einem Schaden selbst tragen musst."
-pinwand: "Versicherungen clever wechseln & sparen"
+keywords:
+- Kfz-Versicherung Vergleich
+- Kfz-Versicherung wechseln
+- Autoversicherung Vergleich
+- Schadenfreiheitsklasse
+- Kfz-Versicherung kündigen
+- Kfz Haftpflicht
+- Teilkasko Vollkasko
+- 30. November Kündigungsfrist
+pin_title: 'Kfz-Versicherung: Frist und Leistungsumfang prüfen'
+pin_description: '*Werbung | Vergleiche bei der Kfz-Police Jahresbeitrag und Leistungen. Für die Kündigung zählen das Ende deines Versicherungsjahres und die Frist in deiner Police. Lass dir zwei Angebote mit identischer Selbstbeteiligung rechnen. Sonst vergleichst du nicht nur Preise, sondern auch den Betrag, den du bei einem Schaden selbst tragen musst.'
+pinwand: Versicherungen clever wechseln & sparen
 quellen:
-  - id: "Q1"
-    titel: "Kfz-Versicherung überprüfen und mehrere hundert Euro sparen"
-    url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/kfzversicherung-ueberpruefen-und-mehrere-hundert-euro-sparen-11490"
-    herausgeber: "Verbraucherzentrale"
-    datum: "2026-10-30"
-  - id: "Q2"
-    titel: "Deutschlandweit neue Regionalklassen für fast zehn Millionen Autofahrende"
-    url: "https://www.gdv.de/gdv/medien/medieninformationen/regionalklassen-2027-medieninformation-69824"
-    herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
-    datum: "2026-10-30"
-  - id: "Q3"
-    titel: "§ 40 VVG – Kündigung bei Prämienerhöhung"
-    url: "https://www.gesetze-im-internet.de/vvg_2008/__40.html"
-    herausgeber: "Bundesministerium der Justiz (gesetze-im-internet.de)"
-    datum: "2026-10-30"
-  - id: "Q4"
-    titel: "Neue Typklassen für über 12 Millionen Autofahrer"
-    url: "https://www.gdv.de/gdv/medien/medieninformationen/typklassen-kfz-versicherung-medieninformation-147618"
-    herausgeber: "GDV Gesamtverband der Deutschen Versicherungswirtschaft"
-    datum: "2026-10-30"
-  - id: "Q5"
-    titel: "§ 96 VVG – Kündigung nach Veräußerung"
-    url: "https://www.gesetze-im-internet.de/vvg_2008/__96.html"
-    herausgeber: "Bundesministerium der Justiz (gesetze-im-internet.de)"
-    datum: "2026-10-30"
-faktencheck: "2026-10-30"
+- id: Q1
+  titel: Kfz-Versicherung überprüfen und mehrere hundert Euro sparen
+  url: https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/kfzversicherung-ueberpruefen-und-mehrere-hundert-euro-sparen-11490
+  herausgeber: Verbraucherzentrale
+  datum: '2026-10-30'
+- id: Q3
+  titel: § 40 VVG – Kündigung bei Prämienerhöhung
+  url: https://www.gesetze-im-internet.de/vvg_2008/__40.html
+  herausgeber: Bundesministerium der Justiz (gesetze-im-internet.de)
+  datum: '2026-10-30'
+- id: Q5
+  titel: § 96 VVG – Kündigung nach Veräußerung
+  url: https://www.gesetze-im-internet.de/vvg_2008/__96.html
+  herausgeber: Bundesministerium der Justiz (gesetze-im-internet.de)
+  datum: '2026-10-30'
+faktencheck: '2026-11-19'
 redaktionelle_pruefung:
-  risikoklasse: "hoch"
-  status: "freigegeben"
-  inhalt_sha256: "8da8bd265b4de4068c9f29b6b2f9423b775f484e4ab69ed0518e96587113a1bb"
+  risikoklasse: hoch
+  status: freigegeben
+  inhalt_sha256: "5bdc0847feee1f44c2fc0db85b73786fbb2e540def1f3adf4ccd04b173ca9f9b"
   pruefer:
-    name: "Redaktion FranksFinanzcheck"
-    rolle: "Faktenprüfung anhand externer Belegkette (Verbraucherzentrale Stand 08.10.2025, GDV-Regional- und Typklassenstatistik 2027, §§ 40 & 96 VVG); § 40 VVG-Kündigungsvoraussetzungen, Fahrzeugwechsel-/Veräußerungsregel nach § 96 VVG, Klassenstatistik 2027 und alle Rechenbeispiele am 30.10.2026 vollständig gegen Primärquellen geprüft"
-    typ: "redaktion-mit-externer-belegkette"
-  pruefdatum: "2026-10-30"
-  naechste_pruefung: "2026-12-14"
-  aenderungsgrund: "Vollständige Fach- und Belegprüfung am 30.10.2026 (#826): überarbeitete § 40 VVG-Darstellung gegen den Gesetzestext abgeglichen, unzutreffende Zwei-Wochen-Regel beim Fahrzeugwechsel durch die Rechtslage bei Neuzulassung bzw. Veräußerung (§ 96 VVG, Q5) ersetzt, unbelegte Quellenfußnote auf transparente Modellrechnungs-Einordnung umgestellt, Datums-Großschreibungsfehler sowie Einheiten- und Gedankenstrich-Stellen bereinigt. Zusatzversiegelung 01.11.2026 (W11-Heilung): Weiterlesen-Zeile von zwei Entwurfs-Zielen (Privathaftpflicht, Wohngebäude) auf Live-Artikel umgehängt (Abos und Verträge, Handyvertrag kündigen); Ratgeber Versicherungen bleibt verlinkt. Kein Fakt, keine Zahl, kein Rechenweg und keine Quelle geändert – Aussagen- und Zahlenprotokoll der Prüfung vom 30.10.2026 gilt unverändert."
+    name: Frank Hartung
+    rolle: Redaktionelle Fachfreigabe der vollständigen Fassung 8b1594a einschließlich Quellen- und Zahlenprotokoll
+    typ: redaktion-mit-externer-belegkette
+  pruefdatum: "2026-11-19"
+  naechste_pruefung: "2027-01-03"
+  aenderungsgrund: Vollständige Neufassung; Quellenabgleich am 19.11.2026. Frank Hartung hat die vollständige Fassung aus Commit 8b1594a zur Veröffentlichung freigegeben.
   gepruefte_aussagen:
-    - textanker: "entscheidend ist der Eingang, nicht der Versand"
-      pruefung: "Bestätigt: Die Kündigung muss spätestens bis 30. November beim Versicherer eingegangen sein (Verbraucherzentrale)"
-      quellen: ["Q1"]
-    - textanker: "Steigt die Prämie aufgrund einer Anpassungsklausel ohne entsprechenden Mehrschutz, kann nach § 40 VVG ein Sonderkündigungsrecht bestehen."
-      pruefung: "§ 40 VVG bestätigt: Erhöht der Versicherer auf Grund einer Anpassungsklausel die Prämie ohne Erweiterung des Versicherungsschutzes, kann innerhalb eines Monats nach Zugang der Mitteilung gekündigt werden"
-      quellen: ["Q3"]
-    - textanker: "Eine andere Typ- oder Regionalklasse allein sagt noch nicht, ob du kündigen kannst."
-      pruefung: "Bestätigt: Die unverbindliche GDV-Klassenberechnung allein begründet noch kein Kündigungsrecht; maßgeblich ist die konkrete Prämienerhöhung nach Vertragsbedingungen und § 40 VVG"
-      quellen: ["Q1", "Q2", "Q3"]
-    - textanker: "wird deine SF-Klasse 1:1 übernommen"
-      pruefung: "Bestätigt: Die Schadenfreiheitsklasse wird beim Anbieterwechsel in der Regel übernommen (Verbraucherzentrale)"
-      quellen: ["Q1"]
-    - textanker: "Der Gesamtverband der Deutschen Versicherungswirtschaft (GDV) berechnet jedes Jahr neu"
-      pruefung: "Bestätigt: Die GDV-Regionalstatistik wird jährlich neu berechnet und ist für Versicherer eine unverbindliche Empfehlung"
-      quellen: ["Q2"]
+  - textanker: Endet dein Versicherungsjahr am 31. Dezember und beträgt die Kündigungsfrist einen Monat
+    pruefung: 'Verbraucherzentrale: Abschnitt Unterschiedliche Kündigungstermine; Police und Frist maßgeblich.'
+    quellen:
+    - Q1
+  - textanker: Die Kündigung wirkt sofort, frühestens jedoch, wenn die Erhöhung wirksam wird.
+    pruefung: Tatbestand, Zugang und Wirkungsbeginn gegen Absatz 1 geprüft; Absatz 2 separat eingeordnet.
+    quellen:
+    - Q3
+  - textanker: Wusste der Erwerber nichts von der Versicherung, beginnt diese Monatsfrist erst mit seiner Kenntnis.
+    pruefung: 'Absatz 2: Berechtigter ist der Erwerber; Fristbeginn bei fehlender Kenntnis gesondert geregelt.'
+    quellen:
+    - Q5
+  - textanker: Ein Rabattschutz beim alten Anbieter ist keine Zusage des neuen.
+    pruefung: 'Verbraucherzentrale: Abschnitte Wann ist ein Wechsel nicht ratsam und Schadenfreiheitsklasse sichern.'
+    quellen:
+    - Q1
   gepruefte_zahlen:
-    - aussage: "Regionalklassen 2027 – geänderte Bezirke"
-      wert: "46 Bezirke höher, 63 Bezirke niedriger"
-      fundstelle: "In der Kfz-Haftpflicht werden 46 Bezirke höher eingestuft (rund 4,8 Millionen Autofahrende), 63 Bezirke niedriger (rund 5,2 Millionen)."
-      pruefung: "Gegen die GDV-Medieninformation vom 09.09.2026 abgeglichen (Regionalklassen 2027)"
-      konsistenzpruefung: "Dieselben Werte stehen in der Einleitung (109 von 413 Bezirken) und im Prüfprotokoll"
-      rechenweg: "46 + 63 = 109 geänderte Bezirke von 413"
-      quellen: ["Q2"]
-    - aussage: "Regionalklassen 2027 – unveränderte Bezirke"
-      wert: "304 Bezirke, über 32 Millionen Autofahrende"
-      fundstelle: "In 304 Bezirken mit mehr als 32 Millionen Autofahrenden bleibt die Klasse unverändert."
-      pruefung: "Gegen die GDV-Medieninformation vom 09.09.2026 abgeglichen"
-      konsistenzpruefung: "Passt zur Zahl der geänderten Bezirke (109 + 304 = 413)"
-      quellen: ["Q2"]
-    - aussage: "Kasko-Regionalklassen 2027"
-      wert: "je rund 2,4 Millionen höher und niedriger, rund 33 Millionen unverändert"
-      fundstelle: "Rund 2,4 Millionen Versicherte werden höher und rund 2,4 Millionen niedriger eingestuft, rund 33 Millionen behalten ihre Klasse."
-      pruefung: "Gegen die GDV-Medieninformation vom 09.09.2026 abgeglichen"
-      konsistenzpruefung: "Deckt sich mit der Aussage, dass die Kasko-Bewegung kleiner ausfällt als in der Haftpflicht"
-      quellen: ["Q2"]
-    - aussage: "Typklassen 2027 – geänderte Einstufungen"
-      wert: "rund 7,4 Millionen höher, rund 5,1 Millionen niedriger, rund 71 % unverändert"
-      fundstelle: "In der Haftpflicht steigen rund 7,4 Millionen Autofahrende in eine höhere und rund 5,1 Millionen in eine niedrigere Klasse – für rund 71 % der Versicherten ändert sich nichts."
-      pruefung: "Gegen die GDV-Typklasseninformation vom 30.09.2026 abgeglichen"
-      konsistenzpruefung: "71 Prozent entspricht den rund 30 Millionen unveränderten Versicherten"
-      rechenweg: "7,4 + 5,1 = 12,5 Millionen geändert; 71 Prozent von rund 42,5 Millionen sind rund 30 Millionen"
-      quellen: ["Q4"]
-    - aussage: "Typklassen-Stufen je Sparte"
-      wert: "16 Haftpflicht-, 24 Teilkasko-, 25 Vollkasko-Klassen"
-      fundstelle: "In der Haftpflicht gibt es 16 Klassen, in der Teilkasko 24 und in der Vollkasko 25."
-      pruefung: "Gegen die GDV-Typklasseninformation vom 30.09.2026 abgeglichen (16 Klassen von 10 bis 25, 25 Klassen von 10 bis 34, 24 Klassen von 10 bis 33)"
-      konsistenzpruefung: "Stimmt mit der Klassenlogik der übrigen Absätze überein"
-      quellen: ["Q4"]
-    - aussage: "Bandbreite jährlicher Beitragserhöhungen"
-      wert: "10 % bis 25 %"
-      fundstelle: "Erhöhungen zwischen 10 % und 25 % sind keine Seltenheit."
-      pruefung: "Marktbeobachtung der Redaktion aus Beitragsmitteilungen der Jahre 2024–2026; als Spanne gekennzeichnet"
-      konsistenzpruefung: "Plausibel zur dokumentierten Ersparnis-Spanne (300 bis 800 €), die solche Erhöhungen ausgleichen kann"
-      quellen: ["Q1"]
-    - aussage: "Ersparnis durch systematischen Vergleich"
-      wert: "300 bis 800 € im Jahr"
-      fundstelle: "Ein systematischer **Kfz-Versicherungsvergleich** spart **300 bis 800 €** im Jahr."
-      pruefung: "Redaktioneller Erfahrungswert aus den dokumentierten Eigenvergleichen 2016–2026; Verbraucherzentrale nennt ähnliche Größenordnungen (mehrere hundert Euro)"
-      konsistenzpruefung: "Deckungsgleich mit der Sparpotenzial-Tabelle (150–1.100 € je Ausgangslage)"
-      quellen: ["Q1"]
-    - aussage: "Empfohlene Selbstbeteiligung TK/VK"
-      wert: "150 € TK / 300 € VK"
-      fundstelle: "- Die größten Hebel: SF-Klasse prüfen, Selbstbeteiligung 150 € TK / 300 € VK, Werkstattbindung, realistischer Kilometerstand, enger Fahrerkreis und mindestens 5 bis 10 Angebote vergleichen."
-      pruefung: "Marktübliche Standard-Selbstbehalte; in der Beispielrechnung dokumentiert (0 € → 150 €/300 €)"
-      konsistenzpruefung: "Identisch mit den Werten der eigenen Vertragsentwicklung (Tabelle unten)"
-      quellen: ["Q1"]
-    - aussage: "Faustregel Fahrzeugwert für Kasko"
-      wert: "3.000 €"
-      fundstelle: "Das gilt, wenn der Wagen noch mehr als 3.000 € wert ist."
-      pruefung: "Redaktionelle Faustregel: Unter diesem Restwert lohnt sich Kasko meist nicht mehr; als Orientierungswert dokumentiert"
-      konsistenzpruefung: "Konsistent mit der Alters-Faustregel (Vollkasko bis 5 Jahre, Teilkasko 5–10 Jahre)"
-      quellen: ["Q1"]
-    - aussage: "Eigener Beitrag alt (2016) vs. optimiert (2026)"
-      wert: "1.040 € auf 412 €"
-      fundstelle: "| Jahresbeitrag | 1.040 € | 412 € |"
-      pruefung: "Redaktioneller Eigenvergleich (dokumentierte Verträge 2016 und 2026); Werte als persönliches Beispiel gekennzeichnet"
-      konsistenzpruefung: "Ersparnis 628 € liegt innerhalb der Ersparnis-Spanne (300–800 €)"
-      rechenweg: "1.040 € − 412 € = 628 € Ersparnis pro Jahr (−60 %)"
-      quellen: ["Q1"]
-    - aussage: "Selbstbeteiligung alt/neu (Eigenvergleich)"
-      wert: "0 €/0 € auf 150 €/300 €"
-      fundstelle: "| Selbstbeteiligung TK / VK | 0 € / 0 € | 150 € / 300 € |"
-      pruefung: "Dokumentierter Vertragsvergleich der Redaktion; identisch mit der empfohlenen Standard-SB"
-      konsistenzpruefung: "Deckungsgleich mit dem Hebel-Eintrag (150 € TK / 300 € VK)"
-      quellen: ["Q1"]
-    - aussage: "Mehrkosten ohne Selbstbeteiligung"
-      wert: "25 bis 40 %"
-      fundstelle: "Sie wählen 0 € Selbstbeteiligung und zahlen dafür oft 25 bis 40 % mehr Beitrag."
-      pruefung: "Marktübliche Aufschläge für 0-€-Selbstbeteiligung; mit Vergleichsrechnungen der Redaktion plausibilisiert"
-      konsistenzpruefung: "Größenordnung passend zu den dokumentierten SB-Ersparnissen (TK 15–20 %, VK 10–15 %) plus Grundbeitragseffekt"
-      quellen: ["Q1"]
-    - aussage: "Teilkasko-Selbstbeteiligung 150 €"
-      wert: "150 €"
-      fundstelle: "* **Teilkasko:** 150 € SB → ca."
-      pruefung: "Marktübliche Teilkasko-SB; identisch mit Eigenvergleich und Hebel-Empfehlung"
-      konsistenzpruefung: "Drei Belegstellen im Artikel verwenden denselben Wert"
-      quellen: ["Q1"]
-    - aussage: "Ersparnis durch 150 € SB (Teilkasko)"
-      wert: "15 bis 20 %"
-      fundstelle: "15 bis 20 % günstiger"
-      pruefung: "Marktübliche Beitragsreduktion bei 150 € Teilkasko-Selbstbehalt; aus Vergleichsrechnungen dokumentiert"
-      konsistenzpruefung: "Liegt unter der Vollkasko-Ersparnis-Logik und innerhalb der 25–40-%-Spanne für 0-€-SB"
-      quellen: ["Q1"]
-    - aussage: "Vollkasko-Selbstbeteiligung 300 €"
-      wert: "300 €"
-      fundstelle: "* **Vollkasko:** 300 € SB → ca."
-      pruefung: "Marktübliche Vollkasko-SB; identisch mit Eigenvergleich und Hebel-Empfehlung"
-      konsistenzpruefung: "Drei Belegstellen im Artikel verwenden denselben Wert"
-      quellen: ["Q1"]
-    - aussage: "Ersparnis durch 300 € SB (Vollkasko)"
-      wert: "10 bis 15 %"
-      fundstelle: "10 bis 15 % günstiger"
-      pruefung: "Marktübliche Beitragsreduktion bei 300 € Vollkasko-Selbstbehalt"
-      konsistenzpruefung: "Kleiner als die Teilkasko-Ersparnis (15–20 %), wie marktüblich"
-      quellen: ["Q1"]
-    - aussage: "Tragfähigkeits-Frage zur SB-Höhe"
-      wert: "300 €"
-      fundstelle: "Kannst du im Schadensfall 300 € selbst tragen?"
-      pruefung: "Beziffert dieEigenbeteiligung im Schadenfall; identisch mit der empfohlenen Vollkasko-SB"
-      konsistenzpruefung: "Wert konsistent zur SB-Empfehlung (300 € VK)"
-      quellen: ["Q1"]
-    - aussage: "Ersparnis durch Werkstattbindung (Absatz)"
-      wert: "10 bis 20 %"
-      fundstelle: "Dafür sparst du **10 bis 20 % Beitrag**."
-      pruefung: "Marktübliche Werkstattbindung-Rabatte; von der Redaktion in Vergleichsrechnungen nachgeprüft"
-      konsistenzpruefung: "Wird im Text zweimal identisch (10 bis 20 %) verwendet"
-      quellen: ["Q1"]
-    - aussage: "Mehrkosten bei zu hoher Kilometerangabe"
-      wert: "120 €"
-      fundstelle: "Dann zahlst du im Schnitt 120 € zu viel."
-      pruefung: "Beispielrechnung der Redaktion: 15.000 km angegeben, 11.000 km gefahren; Differenzbeitrag aus Vergleichsrechnungen"
-      konsistenzpruefung: "Gleiche Logik wie im Eigenvergleich der Tabelle (15.000 statt 11.800 km), dort mit einem anderen Beispielwert"
-      quellen: ["Q1"]
-    - aussage: "Aufschlag bei offenem Fahrerkreis"
-      wert: "bis zu 35 %"
-      fundstelle: "Tarife, bei denen \"jede Person das Fahrzeug fahren darf\", sind bis zu 35 % teurer."
-      pruefung: "Marktbeobachtung: Tarife mit uneingeschränktem Fahrerkreis sind deutlich teurer; Obergrenze als Spanne dokumentiert"
-      konsistenzpruefung: "Plausibel zwischen Werkstattbindung (10–20 %) und Anfängerzuschlägen"
-      quellen: ["Q1"]
-    - aussage: "Aufpreis Rabattschutz"
-      wert: "10 bis 15 %"
-      fundstelle: "Er kostet 10 bis 15 % Aufpreis."
-      pruefung: "Marktübliche Aufpreise für Rabattschutz ab hoher SF-Klasse"
-      konsistenzpruefung: "Empfehlung (ab SF 20 lohnt er sich) ist damit rechnerisch schlüssig"
-      quellen: ["Q1"]
-    - aussage: "Beitragssatz SF 0"
-      wert: "ca. 100 % (junge Fahrer deutlich mehr)"
-      fundstelle: "100 % (junge Fahrer deutlich mehr) |"
-      pruefung: "Korrigiert: SF 0 entspricht rund 100 % des Grundbeitrags; die frühere Angabe 230–260 % vermischte den Grund­satz mit Jugendzuschlägen"
-      konsistenzpruefung: "Skala der Tabelle (SF 5 ≈ 60 %, SF 10 ≈ 40 %) setzt SF 0 = 100 % voraus – jetzt konsistent"
-      quellen: ["Q1"]
-    - aussage: "Beitragssatz SF 5"
-      wert: "60 %"
-      fundstelle: "| SF 5 | 5 | 60 % |"
-      pruefung: "Orientierungswert marktüblicher SF-Tabellen (Kfz-Haftpflicht); unverbindlich, da vertriebsspezifisch"
-      konsistenzpruefung: "Liegt folgerichtig zwischen SF 0 (100 %) und SF 10 (40 %)"
-      quellen: ["Q1"]
-    - aussage: "Beitragssatz SF 10"
-      wert: "40 %"
-      fundstelle: "| SF 10 | 10 | 40 % |"
-      pruefung: "Orientierungswert marktüblicher SF-Tabellen (Kfz-Haftpflicht)"
-      konsistenzpruefung: "Liegt folgerichtig zwischen SF 5 (60 %) und SF 20 (28 %)"
-      quellen: ["Q1"]
-    - aussage: "Beitragssatz SF 20"
-      wert: "28 %"
-      fundstelle: "| SF 20 | 20 | 28 % |"
-      pruefung: "Orientierungswert marktüblicher SF-Tabellen (Kfz-Haftpflicht)"
-      konsistenzpruefung: "Liegt folgerichtig zwischen SF 10 (40 %) und SF 35 (20 %)"
-      quellen: ["Q1"]
-    - aussage: "Beitragssatz SF 35"
-      wert: "20 %"
-      fundstelle: "| SF 35 | 35 | 20 % |"
-      pruefung: "Orientierungswert marktüblicher SF-Tabellen (Kfz-Haftpflicht); unterste Spanne"
-      konsistenzpruefung: "Passt zur Rabattschutz-Empfehlung ab SF 20/hoher SF-Klasse"
-      quellen: ["Q1"]
-    - aussage: "Empfohlene Schlüsselverlust-Deckung"
-      wert: "500 € bis 1.000 €"
-      fundstelle: "- **Schlüsselverlust** (mindestens 500 €, besser 1.000 €)"
-      pruefung: "Redaktionelle Mindestempfehlung für die Schlüsselverlust-Summe; marktübliche Tarifbausteine"
-      konsistenzpruefung: "Konsistent mit dem Kfz-Leistungsblock (Klauseln-Liste)"
-      quellen: ["Q1"]
-    - aussage: "Mehrkosten alter Tarife"
-      wert: "25 bis 40 %"
-      fundstelle: "- ❌ *\"Alte Verträge sind immer die besonders günstigen.\"* Das Gegenteil ist der Fall: Alttarife aus den 2000er Jahren liegen im Schnitt 25 bis 40 % über aktuellen Vergleichstarifen."
-      pruefung: "Redaktionelle Marktbeobachtung im Abgleich mit Finanztest-Ausgaben 2024–2026 (im Artikel als Quelle benannt)"
-      konsistenzpruefung: "Deckungsgleich mit der Spanne für 0-€-SB-Mehrkosten (25–40 %) – beide beschreiben Struktur­nachteile von Alttarifen"
-      quellen: ["Q1"]
-    - aussage: "Sparpotenzial Fahranfänger"
-      wert: "150–300 €"
-      fundstelle: "| Fahranfänger, Tarif seit 3 Jahren | 150–300 € |"
-      pruefung: "Redaktioneller Erfahrungswert aus Eigenvergleichen; im Artikel mit Quelle benannt (Finanztest, CHECK24-Wechselstudie)"
-      konsistenzpruefung: "Unterster Bereich der Ersparnis-Spanne (300–800 €), passend zur Anfängersituation"
-      quellen: ["Q1"]
-    - aussage: "Sparpotenzial Mittelklasse SF 10"
-      wert: "400–600 €"
-      fundstelle: "| Mittelklasse-Fahrzeug, SF 10, 10 Jahre nicht verglichen | 400–600 € |"
-      pruefung: "Redaktioneller Erfahrungswert aus Eigenvergleichen"
-      konsistenzpruefung: "Mittlerer Bereich der Ersparnis-Spanne (300–800 €)"
-      quellen: ["Q1"]
-    - aussage: "Sparpotenzial Familie mit zwei Fahrzeugen"
-      wert: "600–1.100 €"
-      fundstelle: "| Familie, zwei Fahrzeuge, alte Tarife | 600–1.100 € |"
-      pruefung: "Redaktioneller Erfahrungswert aus Eigenvergleichen; zwei Verträge summieren sich"
-      konsistenzpruefung: "Oberster Bereich der Ersparnis-Spanne; konsistent, da zwei Fahrzeuge"
-      quellen: ["Q1"]
-    - aussage: "Sparpotenzial Premium-Fahrzeug"
-      wert: "200–400 €"
-      fundstelle: "| Premium-Fahrzeug, SF 30, Werkstattneuling | 200–400 € |"
-      pruefung: "Redaktioneller Erfahrungswert aus Eigenvergleichen"
-      konsistenzpruefung: "Unterhalb der Familien-Spanne, da einzelnes Fahrzeug mit hoher SF-Klasse"
-      quellen: ["Q1"]
-    - aussage: "Wert des Stichtags (Überschrift)"
-      wert: "800 €"
-      fundstelle: " – der Kalender, der 800 € wert sein kann"
-      pruefung: "Beziffert die Obergrenze der Ersparnis-Spanne (300 bis 800 €) im Jahreszyklus"
-      konsistenzpruefung: "Identisch mit der Ersparnis-Spanne aus dem Intro"
-      quellen: ["Q1"]
-    - aussage: "Ersparnis Werkstattbindung (Kapitel Stichtag)"
-      wert: "10 bis 20 %"
-      fundstelle: "Die Werkstattbindung spart 10 bis 20 %."
-      pruefung: "Marktübliche Rabatte für Werkstattbindung; doppelt im Artikel dokumentiert"
-      konsistenzpruefung: "Identisch mit dem Hebel-Absatz (10 bis 20 % Beitrag)"
-      quellen: ["Q1"]
-    - aussage: "Ersparnis über mehrere Jahre"
-      wert: "1.500 bis 4.000 €"
-      fundstelle: "Über mehrere Jahre summiert sich das leicht auf **1.500 bis 4.000 €**."
-      pruefung: "Hochrechnung der Jahresersparnis (300–800 €) über mehrere Jahre; Spanne dokumentiert"
-      konsistenzpruefung: "300 € × 5 Jahre = 1.500 €; 800 € × 5 Jahre = 4.000 € – konsistent"
-      rechenweg: "Jahresersparnis 300–800 € über rund fünf Wechselzyklen hochgerechnet"
-      quellen: ["Q1"]
-    - aussage: "Ersparnis Werkstattbindung (FAQ)"
-      wert: "10 bis 20 %"
-      fundstelle: "Für die meisten Fahrer ja: Sie spart 10 bis 20 % Beitrag bei gleichwertiger Reparaturqualität."
-      pruefung: "Marktübliche Rabatte für Werkstattbindung; FAQ-Antwort wiederholt den belegten Wert"
-      konsistenzpruefung: "Dritte identische Verwendung von 10 bis 20 % im Artikel"
-      quellen: ["Q1"]
-    - aussage: "Beitragserhöhung nach Schaden (SF-Rückstufung)"
-      wert: "15 bis 40 %"
-      fundstelle: "Ein gemeldeter Schaden führt in der Regel zur Rückstufung um mehrere SF-Klassen, was den Folgebeitrag um 15 bis 40 % erhöhen kann."
-      pruefung: "SF-Rückstufungen erhöhen den Folgebeitrag marktüblich in dieser Spanne; mit der SF-Tabelle des Artikels schlüssig"
-      konsistenzpruefung: "Beispiel: Rückstufung von SF 10 (40 %) auf SF 5 (60 %) entspräche +50 % – die Spanne bleibt als untere Grenze plausibel"
-      quellen: ["Q1"]
-    - aussage: "Kleinschaden-Schwelle"
-      wert: "1.000 €"
-      fundstelle: "1.000 € sind daher oft günstiger selbst zu bezahlen."
-      pruefung: "Redaktionelle Faustregel: Kleinschäden unterhalb dieser Schwelle selbst zahlen, um SF-Rückstufung zu vermeiden"
-      konsistenzpruefung: "Schlüssig gegen die dokumentierte Folgebeitrags-Erhöhung (15–40 %)"
-      quellen: ["Q1"]
-    - aussage: "Zweitwagen-/Multi-Car-Rabatt"
-      wert: "bis zu 20 %"
-      fundstelle: "Ja, viele Versicherer bieten einen Zweitwagen-Rabatt oder einen \"Multi-Car\"-Rabatt von bis zu 20 %."
-      pruefung: "Marktübliche Zweitwagen- und Multi-Car-Rabatte; Obergrenze dokumentiert"
-      konsistenzpruefung: "Unterhalb der Fahrerkreis-Spanne (bis 35 %), wie erwartet"
-      quellen: ["Q1"]
-summary: "Vergleiche bei der Kfz-Police Jahresbeitrag und Leistungen. Für die Kündigung zählen das Ende deines Versicherungsjahres und die Frist in deiner Police."
-korrektur: "19.11.2026: Der 30. November gilt bei Ablauf am 31. Dezember und einem Monat Kündigungsfrist. Das Rechenbeispiel vergleicht unterschiedliche Leistungen. Die Differenz ist keine durchschnittliche Ersparnis."
+  - aussage: Beitragsdifferenz im fiktiven Jahresmodell
+    wert: 628 €
+    fundstelle: "Angenommene Jahresbeiträge: 1.040 € im Altvertrag und 412 € im neuen Tarif. Die Differenz beträgt 628 € für ein Versicherungsjahr."
+    pruefung: Fiktive Eingaben der bisherigen Modelltabelle subtrahiert, keine Marktpreise. Q1 belegt den Vergleichsvorbehalt, nicht die Modellbeträge.
+    konsistenzpruefung: Unterschiedliche Tarifmerkmale schließen die Deutung als reinen Wechselgewinn aus.
+    rechenweg: 1.040 − 412 = 628 pro Versicherungsjahr
+    quellen:
+    - Q1
+summary: Vergleiche bei der Kfz-Police Jahresbeitrag und Leistungen. Für die Kündigung zählen das Ende deines Versicherungsjahres und die Frist in deiner Police.
+korrektur: '19.11.2026: Die Kündigungsfrist richtet sich nach dem Vertragsablauf. Die Differenz im Modell ist keine durchschnittliche Ersparnis.'
 ---
 
-Der Brief der Kfz-Versicherung flattert ins Haus. Oft ist eine saftige Erhöhung dabei.
+Nimm die letzte Beitragsrechnung und die Police zur Hand. Ein günstigeres Angebot kann denselben Schutz bieten – oder nur deshalb weniger kosten, weil du im Schadenfall mehr selbst trägst. Notiere zuerst, was beim Wechsel unverändert bleiben soll. Erst dann lohnt der Blick auf den Preis.
 
-**Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
+**Transparenz:** Der gekennzeichnete Partnerlink kann uns bei einem Abschluss eine Provision bringen. Für dich wird der Vertrag dadurch nicht teurer. Ein Portal bildet nicht zwingend den gesamten Markt ab. Hole bei Bedarf zusätzlich ein direktes Angebot ein.
 
-Erhöhungen zwischen 10 % und 25 % sind keine Seltenheit. Genau jetzt beginnt die wichtigste Phase. Die Rede ist von der **Wechselsaison zwischen September und November**.
+## Welcher Kündigungstermin gilt für meine Police?
 
-**30. November 2026, ein Montag:** bis dahin muss deine Kündigung beim alten Versicherer **eingegangen** sein – entscheidend ist der Eingang, nicht der Versand. Nur so wird der neue Vertrag zum 1. Januar wirksam. Wer den Stichtag verpasst, zahlt ein Jahr zu viel. Ein Wechsel lohnt sich vor allem dann, wenn Beitrag und Leistung nicht mehr zusammenpassen. Der Beitrag hat sich halbiert. Wie das geht, zeige ich dir hier. Ein systematischer **Kfz-Versicherungsvergleich** spart **300 bis 800 €** im Jahr. Und zwar ohne Verlust an Deckung.
+Endet dein Versicherungsjahr am 31. Dezember und beträgt die Kündigungsfrist einen Monat, muss die ordentliche Kündigung bis zum 30. November beim Versicherer eingehen. Prüfe beide Angaben in der Police und den Versicherungsbedingungen. Das Datum der letzten Abbuchung sagt dir nicht, wann dein Versicherungsjahr endet. Auch der Versand einer Kündigung ist noch kein Nachweis ihres Eingangs.
 
-**Das Wichtigste in Kürze**
+Bei einem unterjährigen Ablauf zählt dein persönliches Vertragsende. Rechne die vereinbarte Frist **zurück**, nicht vorwärts. Trage zusätzlich einen früheren Termin ein, an dem du Angebote einholst. So bleibt Zeit, eine abweichende Einstufung zu klären, bevor du eine Frist versäumst. Die [Verbraucherzentrale erklärt die unterschiedlichen Kündigungstermine](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/weitere-versicherungen/kfzversicherung-ueberpruefen-und-mehrere-hundert-euro-sparen-11490).
 
-- Der GDV hat die Regionalklassen für 2027 und die Typklassen für 2027 neu berechnet – in der Haftpflicht ändert sich die Regionalklasse in 109 der 413 Zulassungsbezirke, für die große Mehrheit bleibt es beim Alten.
-- Ordentlich kündigen kannst du bis **30.11.2026** (Eingang beim Versicherer!); bei einer Beitragserhöhung hast du zusätzlich **einen Monat Sonderkündigungsrecht** ab Mitteilung.
-- Die größten Hebel: SF-Klasse prüfen, Selbstbeteiligung 150 € TK / 300 € VK, Werkstattbindung, realistischer Kilometerstand, enger Fahrerkreis und mindestens 5 bis 10 Angebote vergleichen.
+## Was gilt bei einer Beitragserhöhung?
 
----
+Die ordentliche Kündigung und die Kündigung wegen einer Prämienerhöhung haben unterschiedliche Voraussetzungen. Erhöht der Versicherer aufgrund einer Anpassungsklausel die Prämie ohne entsprechende Änderung des Versicherungsumfangs, kannst du nach [§ 40 Abs. 1 VVG](https://www.gesetze-im-internet.de/vvg_2008/__40.html) innerhalb eines Monats nach Zugang der Mitteilung kündigen. Die Kündigung wirkt sofort, frühestens jedoch, wenn die Erhöhung wirksam wird. Der Versicherer muss in der Mitteilung auf das Kündigungsrecht hinweisen.
 
-## Was ändert sich 2027 bei Typ- und Regionalklassen?
+Hebe das Schreiben auf und notiere, wann es dir zugegangen ist. Eine andere Typ- oder Regionalklasse allein beantwortet nicht, ob die gesetzlichen Voraussetzungen in deinem Fall erfüllt sind. Vergleiche die Begründung und den Leistungsumfang. Umgekehrt nennt § 40 Abs. 2 VVG auch die Verminderung des Schutzes aufgrund einer Anpassungsklausel ohne entsprechende Prämiensenkung.
 
-Der Gesamtverband der Deutschen Versicherungswirtschaft (GDV) berechnet jedes Jahr neu, welche Fahrzeugmodelle und welche Zulassungsbezirke wie viele Schäden verursachen. Daraus entstehen zwei Einstufungen, die deinen Beitrag direkt beeinflussen:
+**Nicht verwechseln:** Beim Verkauf eines versicherten Fahrzeugs geht es nicht um einen teureren Tarif. [§ 96 Abs. 2 VVG](https://www.gesetze-im-internet.de/vvg_2008/__96.html) regelt das Kündigungsrecht des **Erwerbers**: Er kann mit sofortiger Wirkung oder zum Schluss der laufenden Versicherungsperiode kündigen. Das Recht erlischt grundsätzlich einen Monat nach dem Erwerb. Wusste der Erwerber nichts von der Versicherung, beginnt diese Monatsfrist erst mit seiner Kenntnis. Das ist kein pauschales zusätzliches Wechselrecht des Verkäufers.
 
-- **Typklasse:** Wie schadensträchtig ist dein Fahrzeugmodell? Je niedriger die Klasse, desto günstiger. In der Haftpflicht gibt es 16 Klassen, in der Teilkasko 24 und in der Vollkasko 25.
-- **Regionalklasse:** Wie schadensträchtig ist dein Zulassungsbezirk? Auch hier gilt: Je niedriger, desto günstiger.
+## Angebote auf dieselbe Grundlage stellen
 
-Die Regionalklassen 2027 hat der GDV am 9. September 2026 veröffentlicht; sie wirken bei laufenden Verträgen ab dem nächsten Versicherungsjahr, bei den meisten Policen also ab dem 1. Januar 2027. In der Kfz-Haftpflicht werden 46 Bezirke höher eingestuft (rund 4,8 Millionen Autofahrende), 63 Bezirke niedriger (rund 5,2 Millionen). In 304 Bezirken mit mehr als 32 Millionen Autofahrenden bleibt die Klasse unverändert. In der Kasko ist die Bewegung kleiner: Rund 2,4 Millionen Versicherte werden höher und rund 2,4 Millionen niedriger eingestuft, rund 33 Millionen behalten ihre Klasse. Die Typklassen für rund 33.000 Automodelle folgten am 30. September 2026: In der Haftpflicht steigen rund 7,4 Millionen Autofahrende in eine höhere und rund 5,1 Millionen in eine niedrigere Klasse – für rund 71 % der Versicherten ändert sich nichts.
+| Merkmal | Was du vor dem Preisvergleich klärst |
+|---|---|
+| Fahrleistung und Fahrerkreis | Setze in beiden Anfragen denselben realistischen Kilometerstand pro Jahr und dieselben Fahrer an. Ein günstiges Angebot für einen engeren Fahrerkreis beantwortet eine andere Frage. |
+| Selbstbeteiligung | Vergleiche Teil- und Vollkasko jeweils mit derselben Selbstbeteiligung. Eine niedrigere Prämie bei höherem Eigenanteil verlagert einen Teil des Risikos auf dich. |
+| Werkstattbindung | Prüfe, welche Werkstätten für dich erreichbar sind und was der Vertrag verlangt. Bei einem Leasingfahrzeug gehören auch die Vorgaben des Leasingvertrags daneben. |
+| Schadenfreiheitsklasse | Lass dir vom bisherigen Versicherer den Schadenverlauf bestätigen, den er bei einem Wechsel meldet. Frag den neuen Anbieter, wie er diesen Verlauf einstuft. Ein Rabattschutz beim alten Anbieter ist keine Zusage des neuen. |
+| Leistungen | Vergleiche die Bedingungen für die Schäden, die dir wichtig sind. Prüfe Ausschlüsse und Entschädigungsgrenzen im Wortlaut, statt nur gleich klingende Paketnamen nebeneinanderzustellen. |
 
-**Was heißt das für dich?** Prüfe deine Einstufung kostenlos auf dem GDV-Verbraucherportal dieversicherer.de – du brauchst nur deine Postleitzahl. Wurdest du hochgestuft, ist das der perfekte Anlass für einen Wechselvergleich: Die Klasse selbst kannst du nicht ändern (nur Fahrzeug oder Wohnort würden zählen), den Versicherer aber schon.
+## Modellrechnung: Beitrag ist nicht dasselbe wie Ersparnis
 
-Eine andere Typ- oder Regionalklasse allein sagt noch nicht, ob du kündigen kannst. Prüfe die Beitragsmitteilung: Steigt die Prämie aufgrund einer Anpassungsklausel ohne entsprechenden Mehrschutz, kann nach § 40 VVG ein Sonderkündigungsrecht bestehen. Die Kündigung muss innerhalb eines Monats nach Zugang der Mitteilung erfolgen; sie wirkt sofort, frühestens aber zum Wirksamwerden der Erhöhung.
+Angenommene Jahresbeiträge: 1.040 € im Altvertrag und 412 € im neuen Tarif. Die Differenz beträgt 628 € für ein Versicherungsjahr.
 
-## Gilt der 30.11. auch für deinen Vertrag?
+Im Modell ändern sich zugleich Selbstbeteiligung, Werkstattbindung, Kilometer, Fahrerkreis und SF-Klasse. Der Unterschied lässt sich nicht allein einem Anbieterwechsel zuschreiben. Eine höhere SF-Klasse entsteht nicht schon durch den Wechsel. Die Beträge sind fiktiv: weder ein aktuelles Angebot noch ein durchschnittlicher Wechselgewinn.
 
-Der Stichtag 30. November gilt nur für Verträge, die **zum Kalenderjahr** laufen (Versicherungsjahr = 1. Januar bis 31. Dezember). Das trifft auf die meisten älteren Verträge zu. Aber Vorsicht, drei Fallen:
+Fordere eine zweite Rechnung an, in der Fahrerkreis, Fahrleistung, Selbstbeteiligung und die vom neuen Anbieter bestätigte Einstufung zum Bedarf passen. Erst diese Variante zeigt, welchen Beitrag du für einen vergleichbaren Schutz angeboten bekommst. Passt eine Werkstattbindung nicht zu deinem Leasingvertrag, ist der entsprechende Tarif selbst dann keine gleichwertige Alternative, wenn sein Jahresbeitrag niedriger liegt.
 
-1. **Unterjährige Verträge:** Viele neuere Verträge starten mit dem Zulassungsdatum und enden entsprechend unterjährig. Dann gilt: **ein Monat Kündigungsfrist vor deinem persönlichen Ablaufdatum** (so steht es regelmäßig auch in den Versicherungsbedingungen, AKB), nicht der 30.11. Schau in deine Police, welches Datum dort als Hauptfälligkeit steht.
-2. **Eingang statt Versand:** Die Kündigung muss bis zum Stichtag **beim Versicherer eingegangen** sein. Ein Brief vom 29.11., der am 02.12. ankommt, ist zu spät. Nutze deshalb das Online-Kundenportal (mit Eingangsbestätigung) oder ein Einschreiben und plane mindestens eine Woche Puffer ein.
-3. **Abweichende Erstlaufzeiten:** Manche Verträge haben eine Erstlaufzeit bis 30.09. oder ein anderes Datum. Auch dann zählt dein individuelles Vertragsende plus ein Monat Frist.
+## Wechsel ohne Lücke planen
 
-**Faustregel für den Kalender:** Vergleiche in KW 42 (Mitte Oktober), entscheide in KW 44 und kündige spätestens in KW 46. Wer erst am 29.11. startet, vergleicht unter Druck und übersieht das Kleingedruckte.
-
-💡 **Schnell-Tipp von FranksFinanzcheck:** Starte jetzt den kostenlosen Vergleich und finde den besonders günstigen Tarif für dein Fahrzeug: [**Kfz-Versicherung vergleichen**](/go/kfz-versicherung/)  
-_(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
-
-## Die drei Bausteine der Kfz-Versicherung
-
-Bevor du vergleichst, solltest du verstehen, was du überhaupt vergleichst. Eine Kfz-Versicherung besteht aus drei Teilen:
-
-- **Kfz-Haftpflicht:** In Deutschland gesetzlich vorgeschrieben. Sie deckt Schäden ab, die du anderen zufügst (Personen-, Sach- und Vermögensschäden). **Deckungssumme:** mindestens 100 Mio. € pauschal, bei Personenschäden bis 15 Mio. € pro geschädigter Person.
-- **Teilkasko (TK):** Freiwillig. Deckt Schäden am eigenen Fahrzeug durch Diebstahl, Glasbruch, Sturm, Hagel, Blitz, Brand, Wildunfall und Marderbiss.
-- **Vollkasko (VK):** Erweitert die Teilkasko um selbst verschuldete Unfallschäden am eigenen Fahrzeug und Vandalismus. Empfehlenswert für Fahrzeuge bis etwa 8 bis 10 Jahre Alter.
-
-**Faustregel:** Auto bis 5 Jahre? Dann Vollkasko. 5 bis 10 Jahre? Teilkasko reicht. Älter als 10 Jahre? Dann genügt oft die Haftpflicht. Das gilt, wenn der Wagen noch mehr als 3.000 € wert ist.
-
-## Rechenbeispiel mit fiktiven Werten: von 1.040 € auf 412 €
-
-| Merkmal | Altvertrag (Beispiel) | Neuer Tarif (Beispiel) |
-|:---|:---|:---|
-| Jahresbeitrag | 1.040 € | 412 € |
-| Selbstbeteiligung TK / VK | 0 € / 0 € | 150 € / 300 € |
-| Werkstattbindung | nein | ja |
-| Jahreskilometer | 15.000 km (tatsächlich 11.800) | 12.000 km |
-| Fahrerkreis | beliebig | Partner + Hauptfahrer (ü30) |
-| Tarifgruppe | Klassisch | Direktversicherer mit Telematik-Option |
-| SF-Klasse | SF 12 | SF 22 |
-
-Die Ersparnis hat zwei Quellen. Ein Teil kommt von der höheren Schadenfreiheitsklasse. Der größere Teil kommt von der Optimierung. Im Beispiel werden Tarifmerkmale angepasst und der Tarif gewechselt. Die Werte sind zur Veranschaulichung gewählt, keine Erfahrungswerte.
-
-## Die 7 größten Sparhebel im Kfz-Versicherungsvergleich
-
-### 1. Die richtige Selbstbeteiligung wählen
-
-Viele fürchten die Selbstbeteiligung (SB). Sie wählen 0 € Selbstbeteiligung und zahlen dafür oft 25 bis 40 % mehr Beitrag. Dabei rechnet sich eine moderate SB fast immer:
-
-* **Teilkasko:** 150 € SB → ca. 15 bis 20 % günstiger
-* **Vollkasko:** 300 € SB → ca. 10 bis 15 % günstiger
-
-Kannst du im Schadensfall 300 € selbst tragen? Dann sparst du über die Jahre mehr. Deutlich mehr, als du je einzahlst.
-
-### 2. Werkstattbindung aktivieren
-
-Bei der Werkstattbindung repariert eine Partnerwerkstatt deinen Kaskoschaden. Dafür sparst du **10 bis 20 % Beitrag**.
-
-Die Werkstätten sind zertifiziert. Sie nehmen Original-Ersatzteile und geben Garantie. Achtung bei Leasing und Neuwagen: Die Werkstattbindung kann die Herstellergarantie gefährden. Prüfe darum, ob der Versicherer die Garantie sichert.
-
-### 3. Jahreskilometer realistisch ansetzen
-
-Die Prämie hängt stark an der Jahresfahrleistung. Du gibst beispielsweise 15.000 km an, fährst aber nur 11.000? Dann zahlst du im Schnitt 120 € zu viel.
-
-* Tipp: Den Tachostand einmal pro Jahr notieren und bei Vertragsabschluss den **Durchschnitt der letzten zwei bis drei Jahre** angeben.
-* Eine nachträgliche Korrektur nach unten ist meist möglich, zu viel gezahlte Beiträge werden erstattet.
-
-### 4. Fahrerkreis einschränken
-
-Tarife, bei denen "jede Person das Fahrzeug fahren darf", sind bis zu 35 % teurer. Schränke den Fahrerkreis ein auf:
-
-* Dich und deinen Partner
-* Ggf. die Kinder, die aber mindestens 23 oder 25 Jahre alt sein sollten
-
-Fahrer unter 23 Jahren verteuern die Prämie stark. Ihr Unfallrisiko ist statistisch viel höher.
-
-### 5. Rabattschutz und Fahrerschutz prüfen
-
-Der **Rabattschutz** hält deine SF-Klasse nach einem Unfall. Er kostet 10 bis 15 % Aufpreis. Für Fahrer mit hoher SF-Klasse (ab SF 20) lohnt er sich. Ein einziger Unfall kann dort hunderte Euro kosten.
-
-### 6. Die Schadenfreiheitsklasse (SF-Klasse) richtig einordnen
-
-Die SF-Klasse ist der mit Abstand wichtigste einzelne Prämienfaktor:
-
-| SF-Klasse | Schadenfreie Jahre | Ungefährer Beitrags-Satz |
-|:---:|:---:|---:|
-| SF 0 | 0 (Fahranfänger) | ca. 100 % (junge Fahrer deutlich mehr) |
-| SF 5 | 5 | 60 % |
-| SF 10 | 10 | 40 % |
-| SF 20 | 20 | 28 % |
-| SF 35 | 35 | 20 % |
-
-Wichtig: Beim Versichererwechsel wird deine SF-Klasse 1:1 übernommen – es gibt keinen "Reset".
-
-### 7. Den Stichtag 30.11. kennen und nutzen
-
-- **Kündigungsfrist:** Einen Monat zum Vertragsende, das bei den allermeisten Verträgen der **31.12.** ist.
-- **Sonderkündigungsrecht bei Beitragserhöhung:** Erhöht der Versicherer die Prämie aufgrund einer Anpassungsklausel ohne entsprechenden Mehrschutz, kannst du nach § 40 VVG innerhalb **eines Monats nach Zugang der Mitteilung** kündigen; die Kündigung wirkt sofort, frühestens aber zum Wirksamwerden der Erhöhung.
-- **Bei Fahrzeugwechsel oder Verkauf:** Meldest du ein anderes Fahrzeug neu an, schließt du über die neue eVB-Nummer direkt einen neuen Vertrag ab; beim Fahrzeugverkauf geht die bestehende Police zunächst auf die Käuferseite über, die innerhalb eines Monats nach dem Erwerb kündigen kann (§ 96 VVG).
-
-## Vergleichsprozess in sechs Schritten
-
-1. **Letzte Jahresrechnung und Fahrzeugschein bereitlegen.**
-2. **Aktuelle SF-Klasse, Jahreskilometer, gewünschte SB ermitteln.**
-3. **Vergleichsrechner starten:** [Jetzt Kfz-Versicherung vergleichen](/go/kfz-versicherung/).
-4. **Mindestens 5 bis 10 der besonders günstigen Angebote öffnen** und das Kleingedruckte prüfen (Deckungssumme, Mallorca-Police, Fahrerschutz, Wildunfall mit allen Tieren, grobe Fahrlässigkeit).
-5. **Neuen Vertrag bis 30.11. abschließen.**
-6. **Alten Vertrag schriftlich kündigen** (am besten per Einschreiben oder über das Kundenportal) und die Kündigungsbestätigung abwarten.
-
-## Was sollte eine gute Police unbedingt enthalten?
-
-- **Mindestdeckung 100 Mio. € pauschal**, mindestens 15 Mio. € pro Person
-- **Mallorca-Police** (Deckung bei Mietwagen im europäischen Ausland in gewohnter Höhe)
-- **Zusammenstoß mit Tieren aller Art** (nicht nur Haarwild)
-- **Erweiterte Wildschadenklausel**
-- **Grobe Fahrlässigkeit** (außer bei Vorsatz, Drogen/Alkohol)
-- **Schlüsselverlust** (mindestens 500 €, besser 1.000 €)
-- **Neupreisentschädigung** bei Neuwagen für mindestens 12, besser 24 Monate
-
-## Häufige Irrtümer
-
-- ❌ *"Direktversicherer sind immer schlecht im Schadensfall."* Tatsächlich schneiden Direktversicherer in Tests (Stiftung Warentest, Finanztip) regelmäßig mindestens so gut ab wie klassische Anbieter.
-- ❌ *"Alte Verträge sind immer die besonders günstigen."* Das Gegenteil ist der Fall: Alttarife aus den 2000er Jahren liegen im Schnitt 25 bis 40 % über aktuellen Vergleichstarifen.
-- ❌ *"Bei einem Wechsel verliere ich meine SF-Klasse."* Nein, die SF-Klasse ist an den Fahrer gebunden und wird 1:1 übertragen.
-- ❌ *"Eine Kündigung per E-Mail reicht."* Rechtlich ist die Textform ausreichend, aber der Versicherer muss den Eingang bestätigen. Sicherer ist das Online-Kundenportal oder ein Einschreiben.
-
-## Wie viel Sparpotenzial steckt wirklich drin?
-
-| Ausgangslage | Typische Ersparnis |
-|:---|---:|
-| Fahranfänger, Tarif seit 3 Jahren | 150–300 € |
-| Mittelklasse-Fahrzeug, SF 10, 10 Jahre nicht verglichen | 400–600 € |
-| Familie, zwei Fahrzeuge, alte Tarife | 600–1.100 € |
-| Premium-Fahrzeug, SF 30, Werkstattneuling | 200–400 € |
-
-*Hinweis: Illustrative Orientierungsbandbreiten aus redaktionellen Modellrechnungen (Stand Oktober 2026); die konkrete Ersparnis hängt von Fahrzeug, SF-Klasse, Region und Vorvertrag ab (vgl. Verbraucherzentrale & GDV).*
-
-<!-- premium-length-2026 -->
-
-## Stichtag 30.11. – der Kalender, der 800 € wert sein kann
-
-Kfz-Verträge laufen zum Kalenderjahr. Die Kündigung muss meist bis 30.11. raus.
-
-Bei manchen Verträgen gilt schon der 30.09. Wer im Oktober vergleicht, hat Ruhe. Wer am 29.11. startet, macht Fehler. Dann fehlt die SF-Klasse oder die Werkstattbindung.
-
-Übernimm die SF-Klasse aus der Vorversicherung. Schätze sie nicht. Prüfe die Zweitwagenregelung. Halte den Fahrerkreis eng.
-
-Gib die Kilometer ehrlich an, plus rund 2.000 km Puffer. Die Werkstattbindung spart 10 bis 20 %.
-
-Sie bindet dich an ein Netz. Bei einem 8 Jahre alten Auto ist das oft okay. Beim Leasing prüfe die Bedingungen.
-
-Ein 30-Minuten-Vergleich im Oktober schlägt jeden „Treue-Rabatt“. Der ist in Wahrheit ein Aufschlag fürs Nicht-Wechseln.
-
-<!-- premium-length-2026-b -->
-
-## SF-Klasse und Zweitwagen – wo 800 € herkommen
-
-Die SF-Klasse ist der größte Hebel. Nach der Regionalklasse. Falsch übertragen heißt falscher Preis.
-
-Nimm die Zweitwagenregelung über den Erstvertrag. Setze den Fahrerkreis eng. Gib Kilometer mit Puffer an. Nimm die Werkstattbindung nur, wenn das Netz passt.
-
-Es sollten Werkstätten in deiner Nähe sein. Notiere dir den 30.11. im Kalender. Vergleiche in KW 42, nicht in KW 48.
-
-## Fazit: Ein 30-Minuten-Vergleich, der sich auszahlt
-
-Der **Kfz-Versicherungsvergleich** ist ein starker Sparhebel. 30 bis 45 Minuten Arbeit bringen hunderte Euro.
-
-Über mehrere Jahre summiert sich das leicht auf **1.500 bis 4.000 €**. Nutze die Wochen bis zum 30.11. und prüfe deinen Tarif. Wechsle, wenn es sich lohnt.
-
-**Weiterlesen:** [Abos und Verträge: Der stille Posten im Haushaltsplan](../../posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/) · [Handyvertrag kündigen: Enddatum, Nachweis und Rufnummer](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) · [Ratgeber Versicherungen](../../pillar/versicherungen/)
+1. Halte Ablauf und Kündigungsfrist aus deiner Police fest. Prüfe bei einer Beitragsmitteilung gesondert, welcher Anlass und welche Frist genannt werden.
+2. Fordere Angebote auf derselben Grundlage an. Als Einstieg kannst du den [Partnervergleich für Kfz-Versicherungen](/go/kfz-versicherung/) nutzen. Sichere die konkreten Bedingungen, nicht nur die Ergebnisliste.
+3. Lass dir offene Punkte schriftlich erklären. Ein angezeigter Preis ist noch keine bestätigte Annahme in der erwarteten SF-Klasse.
+4. Kläre Annahme und Versicherungsbeginn rechtzeitig. Entscheidend ist der lückenlose Anschluss, nicht der früheste Termin, an dem du ein Formular ausfüllen kannst.
+5. Kündige anhand deiner eigenen Frist in der vorgesehenen Form. Bewahre die Nachricht, den Eingangsnachweis und die Bestätigung des Vertragsendes zusammen mit dem neuen Versicherungsschein auf.
 
 ## Häufige Fragen
 
-### Wann kann ich meine Kfz-Versicherung kündigen?
-Der reguläre Kündigungstermin ist der 30.11. zum 31.12. des Jahres – laut Kalender fällt der Stichtag 2026 auf einen Montag, entscheidend ist der Eingang beim Versicherer. Bei einer Beitragserhöhung, einem Fahrzeugverkauf oder einem Schadensfall gibt es zusätzlich ein Sonderkündigungsrecht.
+**Ist eine höhere Selbstbeteiligung günstiger?** Sie kann den Beitrag senken, erhöht aber deinen möglichen Eigenanteil. Lass dir den Tarif mit zwei Selbstbeteiligungen rechnen und prüfe, ob du den höheren Betrag bei einem Schaden tragen könntest.
 
-### Was tun, wenn ich den 30.11. verpasst habe?
-Prüfe zuerst die Beitragsmitteilung. Bei einer Prämienerhöhung aufgrund einer Anpassungsklausel ohne entsprechenden Mehrschutz kann § 40 VVG die Kündigung innerhalb eines Monats nach Zugang ermöglichen. Sie wirkt sofort, frühestens aber zum Wirksamwerden der Erhöhung. Prüfe außerdem deine Vertragslaufzeit und weitere Kündigungsgründe.
+**Was geschieht nach einem Schaden?** Lies die Rückstufungstabelle des konkreten Tarifs und frage nach den Folgen für deinen Vertrag. Aus einer einzelnen SF-Klasse lässt sich kein allgemeingültiger prozentualer Beitragsanstieg ableiten.
 
-### Ändert eine neue Regionalklasse automatisch meinen Beitrag?
-Der Versicherer berücksichtigt die neue Klasse nach seinen Vertragsbedingungen. Ob du kündigen kannst, hängt von der konkreten Beitragsanpassung und ihren Voraussetzungen ab – eine andere Klasse allein beantwortet das nicht. Prüfe die Mitteilung und gegebenenfalls § 40 VVG.
+**Kann ich die Beitragsdifferenz auf fünf Jahre hochrechnen?** Nicht als Prognose. Beitrag, Fahrleistung, SF-Klasse und Bedingungen können sich ändern. Prüfe die nächste Rechnung erneut. Ein sinnvoller Wechsel ist einer, bei dem Schutz, Frist und Beitrag für dich zusammenpassen.
 
-### Was ist der Unterschied zwischen Teilkasko und Vollkasko?
-Die Teilkasko deckt äußere Einwirkungen wie Diebstahl, Glasbruch, Wild, Sturm und Brand ab. Die Vollkasko übernimmt zusätzlich selbst verschuldete Unfallschäden am eigenen Fahrzeug und Vandalismus.
-
-### Lohnt sich die Werkstattbindung?
-Für die meisten Fahrer ja: Sie spart 10 bis 20 % Beitrag bei gleichwertiger Reparaturqualität. Achtung bei Leasing-Fahrzeugen oder gültiger Herstellergarantie – hier vorher die Vertragsbedingungen prüfen.
-
-### Wie wirkt sich ein Schaden auf die SF-Klasse aus?
-Ein gemeldeter Schaden führt in der Regel zur Rückstufung um mehrere SF-Klassen, was den Folgebeitrag um 15 bis 40 % erhöhen kann. Kleinschäden bis ca. 1.000 € sind daher oft günstiger selbst zu bezahlen.
-
-### Kann ich mehrere Fahrzeuge in einem Vertrag versichern?
-Ja, viele Versicherer bieten einen Zweitwagen-Rabatt oder einen "Multi-Car"-Rabatt von bis zu 20 %. Ein Vergleich kann sich hier besonders lohnen.
-
----
-
-👉 **Jetzt vergleichen und sparen:** [**→ Kfz-Versicherung 2026 vergleichen**](/go/kfz-versicherung/)
-
-*Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.*
+**Weiterlesen:** [Ratgeber Versicherungen](../../pillar/versicherungen/) · [Abos und Verträge im Haushaltsplan](../../posts/2026-08-17-abos-und-vertraege-stiller-posten-haushaltsplan/)

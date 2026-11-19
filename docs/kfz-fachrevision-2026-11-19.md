@@ -2,7 +2,9 @@
 
 **Freigabe der Ersatztexte:** Frank Hartung · 19. November 2026 · zur Übernahme in die nächste Artikelfassung. Die Freigabe gilt für die sieben Einträge der folgenden Tabelle, nicht für den vollständigen Artikel.
 
-**Veröffentlichungsstand:** Die veröffentlichte, signierte Fassung bleibt erreichbar. Der datierte Hinweis am Beitragsanfang korrigiert zwei Aussagen bereits jetzt. Diese Vorlage vergibt kein Prüfsiegel und ist kein zusätzlicher Hugo-Artikel.
+**Freigabe der Gesamtfassung:** Frank Hartung hat die vollständige Artikelfassung aus Commit `8b1594a` einschließlich Quellen- und Zahlenprotokoll am 19. November 2026 ausdrücklich zur Veröffentlichung freigegeben. Die freigegebene Fassung übernimmt die bestehende Artikeladresse. Für das Siegel wurde der Fundstellenanker um den bereits im Text stehenden Satzanfang „Angenommene Jahresbeiträge:“ vervollständigt; die Aussagen und Beträge blieben unverändert.
+
+**Stand vor der Gesamtfreigabe:** Die veröffentlichte, signierte Fassung bleibt erreichbar. Der datierte Hinweis am Beitragsanfang korrigiert zwei Aussagen bereits jetzt. Diese Vorlage vergibt kein Prüfsiegel und ist kein zusätzlicher Hugo-Artikel.
 
 | Stelle | Ersatz für die nächste Fassung |
 |---|---|
@@ -18,4 +20,4 @@
 
 ## Durchgeführter Quellen- und Zahlenabgleich · 19. November 2026
 
-Die [vollständige Ersatzfassung mit Prüfprotokoll](kfz-artikelfassung-2026-11-19.md) liegt zur persönlichen Abnahme bereit. Geprüft wurden die Verbraucherzentrale (Stand 08.10.2025: unterjähriger Ablauf, Eingang, SF-Klasse, Grenzen von Portalen), der Wortlaut von § 40 VVG (Tatbestand, Monatsfrist ab Zugang und Wirkung) und § 96 Abs. 2 VVG (Erwerber, Frist und Kenntnisausnahme). Die Links stehen direkt an den Aussagen. Die Differenz 1.040 − 412 = 628 wurde nachgerechnet. Frühere Pauschalquoten, GDV-Jahresstatistiken und Mehrjahresprognosen sind nicht Teil der Ersatzfassung. Der Quellenabgleich ist keine persönliche Fachfreigabe durch Frank Hartung. Bis zur fassungsbezogenen Abnahme bleibt der gesiegelte Live-Artikel unverändert.
+Die [vollständige Ersatzfassung mit Prüfprotokoll](kfz-artikelfassung-2026-11-19.md) liegt zur persönlichen Abnahme bereit. Geprüft wurden die Verbraucherzentrale (Stand 08.10.2025: unterjähriger Ablauf, Eingang, SF-Klasse, Grenzen von Portalen), der Wortlaut von § 40 VVG (Tatbestand, Monatsfrist ab Zugang und Wirkung) und § 96 Abs. 2 VVG (Erwerber, Frist und Kenntnisausnahme). Die Links stehen direkt an den Aussagen. Die Differenz 1.040 − 412 = 628 wurde nachgerechnet. Frühere Pauschalquoten, GDV-Jahresstatistiken und Mehrjahresprognosen sind nicht Teil der Ersatzfassung. Der Quellenabgleich ist keine persönliche Fachfreigabe durch Frank Hartung. Die anschließende persönliche Freigabe ist oben dokumentiert.
