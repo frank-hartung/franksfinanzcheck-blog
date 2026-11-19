@@ -1,5 +1,5 @@
-generated_at: '2026-11-18T12:14:23Z'
-start_date: '2026-11-19'
+generated_at: '2026-11-19T12:08:08Z'
+start_date: '2026-11-20'
 cadence: Mo/Mi/Fr · 2–3 Artikel/Tag (DAUERVORGABE)
 slots:
 - date: '2026-11-20'
@@ -69,8 +69,8 @@ slots:
     – ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
     statt sie automatisch zu verlängern.
 
-    - [pain_point] Policen werden automatisch verlängert und Jahr für Jahr teurer
-    – wer nie vergleicht, zahlt für alte Verträge deutlich zu viel.'
+    - [niche_hook] Zahnzusatzversicherung ohne Wartezeit: Welche Tarife sofort leisten
+    (und wo der Haken liegt)'
 - date: '2026-11-27'
   weekday: Fri
   slot: 4
@@ -105,13 +105,13 @@ slots:
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [niche_hook] Black Friday DSL-Deals: Diese Angebote lohnen sich wirklich
-
     - [evergreen] Die besten DSL-Tarife für Zuhause und unterwegs
 
     - [viral_outlier] Den richtigen DSL-Tarif finden: Geschwindigkeit richtig wählen
 
-    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall'
+    - [viral_outlier] Internet und DSL wechseln: Praxis-Tipps ohne Ausfall
+
+    - [niche_hook] Störung beim Internetanbieter: Diese Rechte hast du'
 - date: '2026-12-02'
   weekday: Wed
   slot: 6
@@ -123,8 +123,6 @@ slots:
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [niche_hook] Black Friday DSL-Deals: Diese Angebote lohnen sich wirklich
-
     - [pain_point] Viele zahlen für Internet-Bandbreite, die sie nie nutzen – die
     Rechnung bleibt hoch, der Speed trotzdem mau.
 
@@ -132,30 +130,13 @@ slots:
 
     - [trending] Beim Internet-Tarif zahlen viele Haushalte für mehr Bandbreite, als
     sie im Alltag tatsächlich nutzen – ein realistischer Bedarfscheck spart oft mehr
-    als der reine Anbieterwechsel.'
+    als der reine Anbieterwechsel.
+
+    - [evergreen] Die besten DSL-Tarife für Zuhause und unterwegs'
 - date: '2026-12-04'
   weekday: Fri
   slot: 7
-  topic: 'Campingurlaub 2026: So hältst du die Kosten im Rahmen'
-  pillar: mietwagen
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
-
-    - [evergreen] Mietwagen-Tarife im Vergleich für den Urlaub
-
-    - [pain_point] Mietwagen-Buchungen mit hoher Kaution und versteckten Zusatzgebühren
-    verderben die Urlaubskasse – die Fallen liegen im Kleingedruckten.
-
-    - [viral_outlier] Spätsommer-Schnäppchen: Mietwagen jetzt günstig buchen
-
-    - [niche_hook] Flugverspätung: So bekommst du deine Entschädigung'
-- date: '2026-12-07'
-  weekday: Mon
-  slot: 8
-  topic: Wie du deine Bankgebühren um 50 % reduzieren kannst
+  topic: 'Dispozinsen legal vermeiden: Die 3 besten Girokonten für den Kontowechsel'
   pillar: konto-karten
   source: topics
   campaign: null
@@ -163,38 +144,87 @@ slots:
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [niche_hook] Sparziel sichtbar machen: So bleiben deine Vorsätze im Alltag
+    - [trending] Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
+    sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
+    inzwischen öfter als nur beim Kontowechsel.
 
-    - [evergreen] Kontoeröffnung mit günstigen Gebühren
+    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
+    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.
 
-    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
-    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.
+    - [trending] Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der
+    genaue Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen
+    Monaten wieder fallen.
 
-    - [niche_hook] Restschuldversicherung beim Ratenkredit: Wann sie sinnvoll ist
-    und wie du sie widerrufst'
-- date: '2026-12-09'
-  weekday: Wed
-  slot: 9
-  topic: 'Städtetrip im Winter: So planst du die Tageskasse'
-  pillar: mietwagen
+    - [evergreen] Kontoeröffnung mit günstigen Gebühren'
+- date: '2026-12-07'
+  weekday: Mon
+  slot: 8
+  topic: 'Tagesgeld-Hopping 2026: Lohnt sich der Zins-Wechsel für Neukunden noch?'
+  pillar: konto-karten
   source: topics
   campaign: null
   cta: Jetzt bei CHECK24 vergleichen
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
-    - [evergreen] Mietwagen-Tarife im Vergleich für den Urlaub
+    - [trending] Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der
+    genaue Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen
+    Monaten wieder fallen.
 
-    - [pain_point] Mietwagen-Buchungen mit hoher Kaution und versteckten Zusatzgebühren
-    verderben die Urlaubskasse – die Fallen liegen im Kleingedruckten.
+    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
+    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.
 
-    - [viral_outlier] Spätsommer-Schnäppchen: Mietwagen jetzt günstig buchen
+    - [trending] Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
+    sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
+    inzwischen öfter als nur beim Kontowechsel.
 
-    - [niche_hook] Flugverspätung: So bekommst du deine Entschädigung'
+    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
+    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.'
+- date: '2026-12-09'
+  weekday: Wed
+  slot: 9
+  topic: 'Fixkosten-Check: In 30 Minuten dein größtes Sparpotenzial finden'
+  pillar: frugalismus
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [niche_hook] Die Vorteile von Frugalismus für dein Finanzbudget
+
+    - [evergreen] Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung
+
+    - [viral_outlier] Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht
+
+    - [pain_point] Frugalismus wird oft als reiner Verzicht missverstanden – dabei
+    geht es um bewussten Konsum, nicht um Askese.'
 - date: '2026-12-11'
   weekday: Fri
   slot: 10
-  topic: Reise- und Unfallversicherungen im Vergleich
+  topic: Günstigen Ratenkredit mit Bestzins sichern
+  pillar: konto-karten
+  source: topics
+  campaign: null
+  cta: Jetzt bei CHECK24 vergleichen
+  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
+    Fakten erfinden):
+
+    - [evergreen] Kontoeröffnung mit günstigen Gebühren
+
+    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
+    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.
+
+    - [trending] Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der
+    genaue Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen
+    Monaten wieder fallen.
+
+    - [pain_point] Kontoführungsgebühren steigen oft schleichend – wer nicht jährlich
+    vergleicht, zahlt für Leistungen, die es anderswo gratis gibt.'
+- date: '2026-12-14'
+  weekday: Mon
+  slot: 11
+  topic: Die verschiedenen Arten von Reiseversicherungen im Vergleich
   pillar: versicherungen
   source: topics
   campaign: kfz-wechselsaison-2027
@@ -213,10 +243,10 @@ slots:
 
     - [news] Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das
     erstbeste Ergebnis nimmt, lässt oft bares Geld liegen.'
-- date: '2026-12-14'
-  weekday: Mon
-  slot: 11
-  topic: 'Wärmepumpe vs. Gasheizung: Was lohnt sich 2026?'
+- date: '2026-12-16'
+  weekday: Wed
+  slot: 12
+  topic: Energiekosten senken mit kleinen Veränderungen
   pillar: strom-sparen
   source: topics
   campaign: winter-energie-2026-27
@@ -224,40 +254,13 @@ slots:
   research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
     Fakten erfinden):
 
+    - [pain_point] Der erste Gas-Abschlag nach einer Preisanpassung fällt oft deutlich
+    höher aus als erwartet – der Schock kommt mit der Heizperiode.
+
     - [evergreen] Heizperiode vorbereiten im Spätsommer
 
-    - [news] Zwischen variablen Tarifen und Festpreisverträgen gibt es 2026 wieder
-    größere Preisunterschiede – pauschale Empfehlungen greifen hier zu kurz, es kommt
-    auf den eigenen Verbrauch an.
-
-    - [trending] Zwischen variablen Tarifen und Festpreisverträgen gibt es 2026 wieder
-    größere Preisunterschiede – pauschale Empfehlungen greifen hier zu kurz, es kommt
-    auf den eigenen Verbrauch an.
-
     - [pain_point] Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft
-    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.'
-- date: '2026-12-16'
-  weekday: Wed
-  slot: 12
-  topic: 'Restschuldversicherung beim Ratenkredit: Wann sie sinnvoll ist und wie du
-    sie widerrufst'
-  pillar: konto-karten
-  source: topics
-  campaign: null
-  cta: Jetzt bei CHECK24 vergleichen
-  research_brief: 'TAGES-RECHERCHE (relevante Signale – als ANREGUNG nutzen, keine
-    Fakten erfinden):
+    merken Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
 
-    - [niche_hook] Restschuldversicherung beim Ratenkredit: Wann sie sinnvoll ist
-    und wie du sie widerrufst
-
-    - [trending] Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
-    sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
-    inzwischen öfter als nur beim Kontowechsel.
-
-    - [pain_point] Kreditkarten mit Gebühren und Fremdwährungsentgelt fressen im Urlaub
-    unbemerkt Geld – ein Kostenvergleich lohnt sich vor jeder Reise.
-
-    - [trending] Bei Tagesgeld und Zinsangeboten lohnt sich aktuell besonders der
-    genaue Blick auf Lockangebote mit befristeten Neukunden-Zinsen, die nach wenigen
-    Monaten wieder fallen.'
+    - [news] Im Herbst und Winter flattern die meisten Nachzahlungen der Energieversorger
+    ins Haus – der beste Zeitpunkt für einen Tarifcheck ist aber schon vorher.'

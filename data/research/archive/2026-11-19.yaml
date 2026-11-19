@@ -1,5 +1,5 @@
-generated_at: '2026-10-20T08:52:13Z'
-day: '2026-10-20'
+generated_at: '2026-11-19T12:08:08Z'
+day: '2026-11-19'
 mode: deterministic
 teams:
   trending:
@@ -28,13 +28,13 @@ teams:
     pillar: versicherungen
     signal: trending
     source: aktuelle_entwicklungen:versicherung-beitragsanpassung-jahresende
-    score: 0.65
+    score: 0.7
   - topic: Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste
       Ergebnis nimmt, lässt oft bares Geld liegen.
     pillar: versicherungen
     signal: trending
     source: aktuelle_entwicklungen:versicherung-vergleichsportale-nicht-vollstaendig
-    score: 0.65
+    score: 0.7
   - topic: Kontoführungsgebühren und Bedingungen für kostenlose Girokonten ändern
       sich bei vielen Banken deutlich häufiger als früher – ein Vergleich lohnt sich
       inzwischen öfter als nur beim Kontowechsel.
@@ -83,58 +83,72 @@ teams:
     signal: news
     source: aktuelle_entwicklungen:energie-variable-vs-fest
     score: 0.85
+  - topic: Viele Versicherer verschicken ihre Beitragsanpassungen zum Jahresende –
+      ein guter Anlass, bestehende Policen einmal jährlich wirklich zu vergleichen
+      statt sie automatisch zu verlängern.
+    pillar: versicherungen
+    signal: news
+    source: aktuelle_entwicklungen:versicherung-beitragsanpassung-jahresende
+    score: 0.8
+  - topic: Vergleichsportale zeigen selten alle Anbieter am Markt – wer nur das erstbeste
+      Ergebnis nimmt, lässt oft bares Geld liegen.
+    pillar: versicherungen
+    signal: news
+    source: aktuelle_entwicklungen:versicherung-vergleichsportale-nicht-vollstaendig
+    score: 0.8
   evergreen:
-  - topic: 5 einfache Schritte zum Aufbau eines Notgroschens
+  - topic: 'Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung'
     pillar: frugalismus
     signal: evergreen
-    source: topics:5 einfache Schritte zum Aufbau eines Notgroschens
+    source: 'topics:Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung'
     score: 0.85
     keywords: []
-  - topic: Wie du mit einem Smart-Plug Energie sparen kannst
+  - topic: Heizperiode vorbereiten im Spätsommer
     pillar: strom-sparen
     signal: evergreen
-    source: topics:Wie du mit einem Smart-Plug Energie sparen kannst
+    source: topics:Heizperiode vorbereiten im Spätsommer
     score: 0.85
     keywords:
-    - Smart-Plug
-    - Energie sparen
-    - Haushaltsgeräte
-  - topic: Die besten Tarife für ein günstiges Handy-Abonnement
+    - Gasrechnung senken
+    - Heizkosten sparen
+    - Herbst Vorbereitung
+    - Heizung prüfen
+  - topic: Die besten DSL-Tarife für Zuhause und unterwegs
     pillar: internet-dsl
     signal: evergreen
-    source: topics:Die besten Tarife für ein günstiges Handy-Abonnement
+    source: topics:Die besten DSL-Tarife für Zuhause und unterwegs
     score: 0.85
     keywords:
-    - günstiges Handy-Abonnement
-    - Tarifvergleich
-    - Mobilfunk
-  - topic: Versteckte Kosten im Mietwagenvertrag entschlüsseln
+    - DSL-Tarife
+    - Zuhause
+    - unterwegs
+  - topic: Mietwagen-Tarife im Vergleich für den Urlaub
     pillar: mietwagen
     signal: evergreen
-    source: topics:Versteckte Kosten im Mietwagenvertrag entschlüsseln
+    source: topics:Mietwagen-Tarife im Vergleich für den Urlaub
     score: 0.85
     keywords:
-    - Mietwagenvertrag
-    - versteckte Kosten
-    - Urlaubskasse
-  - topic: 10 Tipps für günstige Reisekreditkarten
+    - Mietwagen
+    - Tarife
+    - Vergleich
+  - topic: Kontoeröffnung mit günstigen Gebühren
     pillar: konto-karten
     signal: evergreen
-    source: topics:10 Tipps für günstige Reisekreditkarten
+    source: topics:Kontoeröffnung mit günstigen Gebühren
     score: 0.85
     keywords:
-    - Reisekreditkarten
-    - günstige Karten
-    - Reisekosten sparen
-  - topic: 'Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
+    - Kontoeröffnung
+    - Günstige Gebühren
+    - Kontenvergleich
+  - topic: 'Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
     pillar: versicherungen
     signal: evergreen
-    source: 'topics:Rechtsschutzversicherung: Diese Fälle deckt sie wirklich ab'
+    source: 'topics:Jahresrückblick Versicherungen: Diese Policen prüfst du im Dezember'
     score: 0.85
     keywords:
-    - Rechtsschutzversicherung
-    - Rechtsschutz Leistungen
-    - Rechtsstreit versichern
+    - Versicherungen prüfen Jahresende
+    - Policen kündigen Dezember
+    - überversichert was kündigen
   pain_points:
   - topic: Im Herbst flattern die meisten Strom-Nachzahlungen ins Haus – oft merken
       Haushalte erst dann, dass ihr Tarif zu teuer geworden ist.
@@ -197,16 +211,6 @@ teams:
     source: pain_points:hausrat-unterschaetzt
     score: 0.7
   viral_outliers:
-  - topic: 'Dein Haus sicher schützen: Das Vorsorge-Update 2026'
-    pillar: versicherungen
-    signal: viral_outlier
-    source: pinterest_plan
-    score: 0.85
-  - topic: 'Privathaftpflicht: Warum sie unverzichtbar ist'
-    pillar: versicherungen
-    signal: viral_outlier
-    source: pinterest_plan
-    score: 0.84
   - topic: 'Preisgarantie Gas: So schützt du dich vor Preissprüngen'
     pillar: strom-sparen
     signal: viral_outlier
@@ -227,71 +231,79 @@ teams:
     signal: viral_outlier
     source: pinterest_plan
     score: 0.81
-  - topic: 'Wohngebäudeversicherung: Worauf du wirklich achten musst'
-    pillar: versicherungen
-    signal: viral_outlier
-    source: pinterest_plan
-    score: 0.81
   - topic: 'Haushaltsbuch führen: App, Excel oder Papier?'
     pillar: konto-karten
     signal: viral_outlier
     source: pinterest_plan
     score: 0.81
+  - topic: 'Sicher heizen: Gaspreisgarantie gegen den Preisschock'
+    pillar: strom-sparen
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.79
+  - topic: 'Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht'
+    pillar: frugalismus
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.78
+  - topic: 'Spätsommer-Schnäppchen: Mietwagen jetzt günstig buchen'
+    pillar: mietwagen
+    signal: viral_outlier
+    source: pinterest_plan
+    score: 0.77
   niche_hooks:
-  - topic: Internet-Speed optimieren mit dem richtigen Router
+  - topic: Die Vorteile von Frugalismus für dein Finanzbudget
+    pillar: frugalismus
+    signal: niche_hook
+    source: topics:Die Vorteile von Frugalismus für dein Finanzbudget
+    score: 0.55
+    keywords: []
+  - topic: 'Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung'
+    pillar: frugalismus
+    signal: niche_hook
+    source: 'topics:Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung'
+    score: 0.55
+    keywords: []
+  - topic: 'Städtetrip im Winter: So planst du die Tageskasse'
+    pillar: mietwagen
+    signal: niche_hook
+    source: 'topics:Städtetrip im Winter: So planst du die Tageskasse'
+    score: 0.55
+    keywords:
+    - Städtetrip Kosten
+    - Winter Städtereise
+    - Nebenkosten Urlaub
+  - topic: 'Störung beim Internetanbieter: Diese Rechte hast du'
     pillar: internet-dsl
     signal: niche_hook
-    source: topics:Internet-Speed optimieren mit dem richtigen Router
+    source: 'topics:Störung beim Internetanbieter: Diese Rechte hast du'
     score: 0.55
     keywords:
-    - Internet-Speed
-    - Router
-    - Optimieren
-  - topic: 'Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?'
-    pillar: konto-karten
+    - Internetstörung Rechte
+    - Minderung Internetausfall
+    - Anbieter Entschädigung
+  - topic: 'Weihnachtsbudget planen: Ohne Schulden durch die Feiertage'
+    pillar: frugalismus
     signal: niche_hook
-    source: 'topics:Konto eröffnen ohne Schufa: Was sind die Möglichkeiten?'
+    source: 'topics:Weihnachtsbudget planen: Ohne Schulden durch die Feiertage'
     score: 0.55
     keywords:
-    - Konto eröffnen
-    - Schufa
-    - Konto ohne Schufa
-  - topic: Mietwagen-Fallen im Urlaub vermeiden
-    pillar: mietwagen
-    signal: niche_hook
-    source: topics:Mietwagen-Fallen im Urlaub vermeiden
-    score: 0.55
-    keywords:
-    - Mietwagen Tipps
-    - Urlaub Mietwagen
-    - Reisekosten sparen
-  - topic: Mietwagen-Kosten im Ausland minimieren
-    pillar: mietwagen
-    signal: niche_hook
-    source: topics:Mietwagen-Kosten im Ausland minimieren
-    score: 0.55
-    keywords:
-    - Mietwagen
-    - Ausland
-    - Kosten minimieren
-  - topic: 'Schufa-Eintrag löschen lassen: So gehst du richtig vor'
-    pillar: konto-karten
-    signal: niche_hook
-    source: 'topics:Schufa-Eintrag löschen lassen: So gehst du richtig vor'
-    score: 0.55
-    keywords:
-    - Schufa Eintrag löschen
-    - Negativeintrag entfernen
-    - Bonität verbessern
-  - topic: 'Versicherungen für Selbstständige: Die 5 wichtigsten im Überblick'
+    - Weihnachten Budget planen
+    - Weihnachten sparen
+    - Geschenkebudget
+    - Weihnachten ohne Schulden
+  - topic: 'Zahnzusatzversicherung ohne Wartezeit: Welche Tarife sofort leisten (und
+      wo der Haken liegt)'
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Versicherungen für Selbstständige: Die 5 wichtigsten im Überblick'
+    source: 'topics:Zahnzusatzversicherung ohne Wartezeit: Welche Tarife sofort leisten
+      (und wo der Haken liegt)'
     score: 0.55
     keywords:
-    - Versicherung Selbstständige
-    - Absicherung Freiberufler
-    - Existenzgründer Versicherung
+    - Zahnzusatzversicherung ohne Wartezeit
+    - Zahnersatz Kosten übernehmen
+    - Tarife Sofortleistung Haken
+    - Zahnarztkosten Versicherung
 live_web:
   enabled: false
   findings: []
