@@ -1,8 +1,8 @@
 # 🔗 AFFILIATE-INTEGRITY-REPORT (affiliate_integrity_gate.py)
 
-**Stand:** 2026-11-19 12:24:00 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
+**Stand:** 2026-11-20 12:24:22 UTC · **Status:** 🟢 Alle Affiliate-Links intakt, registriert und im gebauten HTML bewiesen
 
-**Geprüfte Live-Artikel:** 88 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 1
+**Geprüfte Live-Artikel:** 90 · **Automatisch geheilt:** 0 (–) · **Struktur-Funde:** 0 · **Render-Funde:** 0 · **Registry-Routen:** 20 · **Begründete Ausnahmen:** 5
 
 **Build:** public/ aktuell (kein Rebuild nötig)
 
@@ -33,9 +33,9 @@
 | 2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps | 3 → 3 ✅ | /go/girokonto/, /go/tagesgeld/ |
 | 2026-08-24-preisgarantie-gas-so-schuetzt-du-dich-vor-preisspruengen | 2 → 3 ✅ | /go/gas/ |
 | 2026-08-26-dns-server-wechseln-schnelleres-sichereres-internet | 0 → 1 ✅ | /go/dsl/ |
-| 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife | 2 → 3 ✅ | /go/dsl/, /go/handytarife/ |
-| 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen | 2 → 3 ✅ | /go/kfz-versicherung/ |
-| 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich | 2 → 3 ✅ | /go/tagesgeld/ |
+| 2026-08-26-handytarif-vergleichen-2026-guenstige-tarife | 0 → 1 ✅ | /go/handytarife/ |
+| 2026-08-26-kfz-versicherung-vergleich-bis-zu-800-euro-sparen | 0 → 1 ✅ | /go/kfz-versicherung/ |
+| 2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich | 0 → 1 ✅ | /go/tagesgeld/ |
 | 2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn | 0 → 1 ✅ | /go/gas/ |
 | 2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen | 0 → 1 ✅ | /go/girokonto/ |
 | 2026-08-31-nachtstrom-tarife-wann-sich-ein-doppeltarifzaehler-noch-lohnt | 1 → 2 ✅ | /go/strom/ |
@@ -78,7 +78,7 @@
 | 2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt | 2 → 3 ✅ | /go/strom/ |
 | 2026-10-09-vpn-zuhause-schutzschild-oder-unnoetige-fixkosten-falle | 2 → 3 ✅ | /go/dsl/ |
 | 2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt | 3 → 3 ✅ | /go/strom/ |
-| 2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten | 3 → 3 ✅ | /go/strom/, /go/wohngebaeudeversicherung/ |
+| 2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten | 0 → 0 redaktionelle Ausnahme | – |
 | 2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle | 3 → 3 ✅ | /go/unfallversicherung/ |
 | 2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken | 3 → 3 ✅ | /go/strom/ |
 | 2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig | 2 → 2 ✅ | /go/gas/ |
@@ -91,15 +91,17 @@
 | 2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege | 1 → 2 ✅ | /go/fluege/ |
 | 2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar | 2 → 3 ✅ | /go/strom/ |
 | 2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem | 1 → 3 ✅ | /go/gas/ |
+| 2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten | 3 → 3 ✅ | /go/strom/ |
 | 2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck | 2 → 3 ✅ | /go/fluege/ |
-| 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang | 2 → 3 ✅ | /go/strom/ |
-| 2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen | 3 → 4 ✅ | /go/allgemein/, /go/strom/ |
-| 2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee | 2 → 3 ✅ | /go/strom/ |
+| 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang | 0 → 0 redaktionelle Ausnahme | – |
+| 2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen | 0 → 0 redaktionelle Ausnahme | – |
+| 2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee | 0 → 0 redaktionelle Ausnahme | – |
 | 2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort | 2 → 3 ✅ | /go/dsl/ |
 | 2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein | 3 → 3 ✅ | /go/dsl/ |
 | 2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst | 2 → 3 ✅ | /go/kreditkarte/ |
 | 2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung | 2 → 3 ✅ | /go/dsl/ |
 | 2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst | 3 → 3 ✅ | /go/allgemein/ |
+| 2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten | 3 → 3 ✅ | /go/gas/ |
 
 ## Hinweise (nicht blockierend)
 
@@ -107,13 +109,20 @@
 - 2026-08-21-mietwagen-buchen-ohne-kaution-fallen-urlaub: 5 Affiliate-Links im Artikel – Anti-Stuffing prüfen (affiliate_profi_check.py A5)
 - 2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt: Redaktionell ausgenommen von der Mindestpflicht für Affiliate-Links: Reiner DNS-Messtest ohne passendes Tarifangebot – ein Tarif-CTA wäre sachfremd.
 - 2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster: 4 Affiliate-Links im Artikel – Anti-Stuffing prüfen (affiliate_profi_check.py A5)
-- 2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen: 4 Affiliate-Links im Artikel – Anti-Stuffing prüfen (affiliate_profi_check.py A5)
+- 2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten: Redaktionell ausgenommen von der Mindestpflicht für Affiliate-Links: Zum Lesen eines Energieausweises ist weder ein Stromvertrag noch eine Gebäudeversicherung erforderlich.
+- 2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang: Redaktionell ausgenommen von der Mindestpflicht für Affiliate-Links: Die passende Waschmaschinenbeladung hängt vom Programm ab, nicht vom Stromtarif.
+- 2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen: Redaktionell ausgenommen von der Mindestpflicht für Affiliate-Links: Eine Fensterdichtung wird nach Zustand und Passform ausgewählt, nicht nach Stromanbieter.
+- 2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee: Redaktionell ausgenommen von der Mindestpflicht für Affiliate-Links: Die Kosten pro Tasse werden mit den vorhandenen Geräten und dem eigenen Preis berechnet.
 
 ## Begründete Ausnahmen (kein Affiliate-CTA – redaktionelle Entscheidung)
 
 Für diese Artikel besteht keine Affiliate-CTA-Pflicht. Die Ausnahme unterdrückt ausschließlich den Befund „kein Affiliate-Link“ – Route, Deep-Link, Partner-ID, `rel=sponsored` und der Gateway-Beweis werden für jeden vorhandenen Link weiterhin geprüft. Eine halbe Angabe (Flag ohne Begründung, Begründung ohne Flag) ist fail-closed ein Fund.
 
 - `2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt` – Reiner DNS-Messtest ohne passendes Tarifangebot – ein Tarif-CTA wäre sachfremd.
+- `2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten` – Zum Lesen eines Energieausweises ist weder ein Stromvertrag noch eine Gebäudeversicherung erforderlich.
+- `2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang` – Die passende Waschmaschinenbeladung hängt vom Programm ab, nicht vom Stromtarif.
+- `2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen` – Eine Fensterdichtung wird nach Zustand und Passform ausgewählt, nicht nach Stromanbieter.
+- `2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee` – Die Kosten pro Tasse werden mit den vorhandenen Geräten und dem eigenen Preis berechnet.
 
 ---
 _Defekte CTA-Boxen werden NIE per Text-Patch geflickt, sondern komplett neu aus den geprüften Vorlagen (affiliate_marketer.py) generiert; nicht registrierte Linkziele werden auf die thematisch korrekte Route umgeroutet. Bestandsartikel werden nie gelöscht. Detektor-Selbsttest: `python3 scripts/affiliate_integrity_gate.py --selftest`._

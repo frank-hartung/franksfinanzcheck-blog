@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-19 12:24:00 UTC",
- "verdict_changed": false,
+ "generated_at": "2026-11-20 12:24:22 UTC",
+ "verdict_changed": true,
  "state_schema_version": 2,
  "exit_code": 0,
- "checked": 88,
+ "checked": 90,
  "healed": [],
  "healed_count": 0,
  "content_problems": [],
@@ -15,6 +15,10 @@
   "ok": true
  },
  "exemptions": {
-  "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": "Reiner DNS-Messtest ohne passendes Tarifangebot – ein Tarif-CTA wäre sachfremd."
+  "2026-09-04-digitaler-turbo-warum-der-dns-hack-dein-netz-beschleunigt": "Reiner DNS-Messtest ohne passendes Tarifangebot – ein Tarif-CTA wäre sachfremd.",
+  "2026-10-12-energieausweis-was-das-dokument-fuer-deine-fixkosten": "Zum Lesen eines Energieausweises ist weder ein Stromvertrag noch eine Gebäudeversicherung erforderlich.",
+  "2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang": "Die passende Waschmaschinenbeladung hängt vom Programm ab, nicht vom Stromtarif.",
+  "2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen": "Eine Fensterdichtung wird nach Zustand und Passform ausgewählt, nicht nach Stromanbieter.",
+  "2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee": "Die Kosten pro Tasse werden mit den vorhandenen Geräten und dem eigenen Preis berechnet."
  }
 }
