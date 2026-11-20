@@ -1,10 +1,10 @@
 ---
 title: "Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten"
 description: "Vor dem Gasanbieterwechsel brauchst du Verbrauch, Vertragsende und Zählerdaten. Prüfe, ob der neue Tarif auch nach dem ersten Vertragsjahr passt."
-date: 2026-11-18T12:08:01Z
+date: 2026-11-20T09:37:02Z
 
-draft: true
-reserve: true
+draft: false
+reserve_published: 2026-11-20
 tags: ["Gastarif wechseln"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"

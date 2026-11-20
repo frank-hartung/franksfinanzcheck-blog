@@ -1,7 +1,7 @@
 # Fachprüfungs-Register (automatisch erzeugt: scripts/fachpruefung_register.py)
 # Stand: 19.10.2026. Keine Freigabe. Jeder Eintrag braucht einen benannten Menschen als Prüfer.
 # Quellen je Aussage: docs/ANLEITUNG-REDAKTIONELLE-YMYL-PRUEFUNG.md (Schritte 1–5).
-anzahl: 20
+anzahl: 21
 pruefer_status: "offen – kein benannter fachpruefer und keine Redaktionsprüfung mit Belegkette"
 beitraege:
   - slug: "2026-08-12-geld-abheben-im-ausland-gebuehren-vermeiden"
@@ -95,7 +95,7 @@ beitraege:
       - "Das zweite Modell isoliert den Einfluss des Zinssatzes: 15.000 € Guthaben, zwölf Monate, keine Zu- oder Abflüsse, konstante Zinsen."
       - "Bei 1,90 % entstehen 285 € Bruttozins; bei 3,10 % sind es 465 €."
       - "Der Unterschied zwischen diesen beiden Modellkonten beträgt 180 €, nicht 465 €."
-      - "Die gesetzliche Einlagensicherung schützt grundsätzlich bis zu 100.000 € pro Person und Bank, nicht pro Konto."
+      - "Die gesetzliche [Einlagensicherung](../../posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/) schützt grundsätzlich bis zu 100.000 € pro Person und Bank, nicht pro Konto."
       - "Bei 2.000 € unverändertem Guthaben macht er über ein volles Jahr rechnerisch 10 € brutto aus: 2.000 € × 0,005."
       - "Für drei Monate sind es vereinfacht 2,50 €."
       - "Bei 20.000 € wären die Beträge zehnmal so hoch."
@@ -325,3 +325,18 @@ beitraege:
       - "Ergebnis der Modellrechnung: In diesem fiktiven Szenario sinkt der Wert nach 18 Monaten auf 33,05 €."
       - "Der effektive Verlust beträgt somit 16,95 € (Modellrechnung) in diesem Beispiel."
       - "Wenn du für ein Guthaben von 50 € (Modellrechnung) samt Gebühren insgesamt 55 € (Beispielrechnung) zahlst, ist das ein schlechtes Geschäft."
+  - slug: "2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten"
+    titel: "Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten"
+    pillar: "strom-sparen"
+    risikoklasse: "erhoeht"
+    status: "ausstehend"
+    pruefer: null  # hier eintragen: Name, Rolle, Typ, Datum
+    zahlen_fundstellen:
+      - "In einer Modellrechnung für ein Einfamilienhaus (20.000 kWh) beträgt die Ersparnis bei einem Wechsel aus der Grundversorgung 680 € (Annahme: Preisdifferenz von 3,4 Cent pro kWh)."
+      - "In einer Modellrechnung für eine Wohnung mit 10.000 kWh Verbrauch spart ein Cent Preisunterschied bereits 100 € pro Jahr (Rechnung: 10.000 mal 0,01 €)."
+      - "Annahmen für die Modellrechnung: Jahresverbrauch: 20.000 kWh Tarif A (Grundversorgung): 16 Cent/kWh Arbeitspreis, 120 € Grundpreis/Jahr Tarif B (Wettbewerber): 12,6 Cent/kWh Arbeitspreis, 120 € Grundpreis/Jahr Schritt 1:"
+      - "Addiert man den Grundpreis von 120 €, belaufen sich die Gesamtkosten auf 3.320 € pro Jahr."
+      - "Schritt 2: Kosten für Tarif B berechnen In dieser Modellrechnung liegen die Arbeitskosten bei 2.520 € (Rechnung: 20.000 kWh mal 0,126 €/kWh)."
+      - "Zusammen mit dem Grundpreis von 120 € ergeben sich Gesamtkosten von 2.640 € pro Jahr."
+      - "Schritt 3: Ersparnis ermitteln Die Differenz zwischen beiden Tarifen beträgt in dieser Modellrechnung genau 680 € pro Jahr (Rechnung: 3.320 € minus 2.640 €)."
+      - "Multipliziert mit dem Verbrauch von 20.000 kWh ergibt das 680 € (Rechnung: 20.000 mal 0,034 €)."

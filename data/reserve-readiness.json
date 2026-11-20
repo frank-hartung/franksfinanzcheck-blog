@@ -1,26 +1,9 @@
 {
   "target": 6,
-  "ready": 2,
-  "pool_size": 12,
-  "generated_at": "2026-11-19T17:37:26Z",
+  "ready": 1,
+  "pool_size": 10,
+  "generated_at": "2026-11-20T09:43:30Z",
   "candidates": [
-    {
-      "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
-      "ready": true,
-      "sha256": "132673bd5ddf79da9f7dcdeb7de3470b08760dff8fca3414222ceae84c1f9adb",
-      "flesch": 66.5,
-      "measured_at": "2026-11-19T17:33:22Z",
-      "score": 0.958,
-      "parts": {
-        "spelling": 0.86,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.96,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
-    },
     {
       "slug": "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
       "ready": true,
@@ -62,13 +45,6 @@
       }
     },
     {
-      "slug": "2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
-      "ready": false,
-      "sha256": "4e48cd4e38300fa7de8cb2d318024bd26a637c8cb8d0b721bbc368c0f1d13080",
-      "measured_at": "2026-11-19T17:34:45Z",
-      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
-    },
-    {
       "slug": "2026-11-19-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
       "ready": false,
       "sha256": "15068741f271496e02a84445c34125f5de27d0f89fa264a8b21e12b6adb6b34e",
@@ -95,14 +71,14 @@
     {
       "slug": "2026-11-19-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
       "ready": false,
-      "sha256": "b8259ecbdcc69e1039d6b4f34b30e3853c1a47b4c2e8113bc7f3d864c20cb83e",
+      "sha256": "6f68c9a4a4eb38e024e6e6650bc1578504811036222b4f496691a3222766ce05",
       "flesch": 73.3,
-      "measured_at": "2026-11-19T17:35:39Z",
+      "measured_at": "2026-11-20T09:41:51Z",
       "reason": "Zeichenlänge (check_length.py) nicht bestanden",
       "details": [
-        "🛑 2026-11-19-deine-naechtliche-grundlast-strom-so-erkennst-du-wo: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "🛑 2026-11-19-deine-naechtliche-grundlast-strom-so-erkennst-du-wo: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
         "Zeichenlänge (check_length.py) nicht bestanden",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
       ],
       "score": 0.927,
       "parts": {
@@ -118,9 +94,9 @@
     {
       "slug": "2026-11-19-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
       "ready": false,
-      "sha256": "d1c6d0ff5ed8c6ac0388f3366e110cc9d7c24462bb868b3adb7c255bc203db7b",
+      "sha256": "17744785cddc3909eb646608ff2addc3739a007bcb1c082f7507ad76277d3190",
       "flesch": 63.6,
-      "measured_at": "2026-11-19T17:35:41Z",
+      "measured_at": "2026-11-20T09:41:52Z",
       "reason": "Reserve-Qualitäts-Gate: RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Dieselbe Pauschale fällt bei einem Wochenende viel stärker ins Gewicht als bei zwei Wochen Urlaub.",
       "details": [
         "RS5: 1 Zahlenbehauptung(en) ohne Satzbeleg oder klare Modellannahme: Dieselbe Pauschale fällt bei einem Wochenende viel stärker ins Gewicht als bei zwei Wochen Urlaub."
@@ -139,9 +115,9 @@
     {
       "slug": "2026-11-19-strompreis-2026-herbst-check-fuer-deine-stromkosten",
       "ready": false,
-      "sha256": "37772b5d5d4796e26cb8e2ac89961545457a8f4c4c55230375fbc9d28862f426",
+      "sha256": "b63a2c89676da289f74bdc08efe032a527375b3c2874ec19f4936d93675d0540",
       "flesch": 63.6,
-      "measured_at": "2026-11-19T17:36:06Z",
+      "measured_at": "2026-11-20T09:42:16Z",
       "reason": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
       "details": [
         "🛑 2026-11-19-strompreis-2026-herbst-check-fuer-deine-stromkosten: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -162,16 +138,16 @@
     {
       "slug": "2026-11-19-vorrat-planen-leicht-gemacht-so-sparst-du-beim",
       "ready": false,
-      "sha256": "5af94ca600cef7d0dd3f29b6b2746af496f46abcb58112b9589ad0bbe6889af6",
+      "sha256": "dee8c7dd74c9a08fa2dbad320da46d6706d6f1d6db166510251daea2fcb72a06",
       "flesch": 65.0,
-      "measured_at": "2026-11-19T17:36:07Z",
+      "measured_at": "2026-11-20T09:42:17Z",
       "reason": "Reserve-Qualitäts-Gate: RS1: kein „Das Wichtigste in Kürze“-Modul",
       "details": [
         "RS1: kein „Das Wichtigste in Kürze“-Modul",
         "RS2: nur 1 Frage-H2 von 4 H2 (Standard: ≥ 2)",
         "RS3: keine markierte Faustregel mit Satzinhalt",
         "RS4: weder Schrittfolge (0 nummerierte Zeilen) noch Schritt-Überschriften (0)",
-        "Umfang: 462 Wörter / 3187 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
+        "Umfang: 467 Wörter / 3254 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
         "Struktur: nur 4 H2-Abschnitte (Minimum 5)",
         "FAQ: nur 0 Fragen (Premium verlangt 4)"
       ],
@@ -189,14 +165,14 @@
     {
       "slug": "2026-11-19-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste",
       "ready": false,
-      "sha256": "078f50976b9ffc7ed3200ee3cef065c30f7dbea6c25b9f2c71905e4c58c17822",
+      "sha256": "2f1719cc534a98e970248b47ab45e8644f997c0ec2d26465afce9fef01caef78",
       "flesch": 68.2,
-      "measured_at": "2026-11-19T17:36:33Z",
+      "measured_at": "2026-11-20T09:42:41Z",
       "reason": "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
       "details": [
-        "🛑 2026-11-19-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "🛑 2026-11-19-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
         "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
       ],
       "score": 0.98,
       "parts": {
@@ -212,9 +188,9 @@
     {
       "slug": "2026-11-19-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
       "ready": false,
-      "sha256": "5f95f67e7274f2f5b35273858380c1073d9dbb42597a3b27ebdffbf799fa345c",
+      "sha256": "dd771c8adb3d65e525ac1e40f82053dddc8767cce6b51bd23ea6eef910da3c1a",
       "flesch": 69.8,
-      "measured_at": "2026-11-19T17:37:01Z",
+      "measured_at": "2026-11-20T09:43:07Z",
       "reason": "Faktenfrische nicht bestanden: 842ddd33d3dd6b0b97f7 (luecke): Muffiger Geruch deutet oft auf tiefliegenden Schimmel oder Feuchtigkeit hin.; d3e210fb738bd77ef594 (luecke): Neue Möbel verlieren oft sofort nach dem Kauf massiv an Wert.; da84fa",
       "details": [
         "🛑 2026-11-19-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet: FAKTENFRISCHE-HOLD → Entwurf bleibt erhalten, keine Veröffentlichung",
@@ -236,14 +212,14 @@
     {
       "slug": "2026-11-19-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater",
       "ready": false,
-      "sha256": "f6c548a0973672d6b0d64dcb02fa1fa0656d6de73472ccf0b62650362c1288a4",
+      "sha256": "11062e7ef37963f9d2fbd9b4f1667d3ab6fa9875cad951d90f4220b8081ba75b",
       "flesch": 67.0,
-      "measured_at": "2026-11-19T17:37:26Z",
+      "measured_at": "2026-11-20T09:43:30Z",
       "reason": "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
       "details": [
-        "🛑 2026-11-19-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater: WIRD VERWORFEN (kein Artefakt, nächster Lauf versucht neues Thema)",
+        "🛑 2026-11-19-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater: PRÜFUNG NICHT BESTANDEN (Re-Queue-Post) → draft, Content erhalten",
         "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
-        "Ergebnis: 1/1 Artikel am Gate scheitern (1 verworfen, 0 → draft)."
+        "Ergebnis: 1/1 Artikel am Gate scheitern (0 verworfen, 1 → draft)."
       ],
       "score": 0.972,
       "parts": {
@@ -259,17 +235,12 @@
   ],
   "measurement": {
     "kind": "partial",
-    "run_id": "44578072535",
+    "run_id": "44708107217",
     "run_attempt": "1"
   },
   "recert": {
-    "at": "2026-11-19T17:37:26Z",
+    "at": "2026-11-20T09:43:30Z",
     "renewed": [
-      "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
-      "2026-11-13-geschirrspueler-voll-so-sparst-du-wasser-und-strom",
-      "2026-11-13-mehrwegflaschen-pfand-so-optimierst-du-deine-fixkosten",
-      "2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
-      "2026-11-19-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
       "2026-11-19-deine-naechtliche-grundlast-strom-so-erkennst-du-wo",
       "2026-11-19-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich",
       "2026-11-19-strompreis-2026-herbst-check-fuer-deine-stromkosten",
@@ -277,6 +248,14 @@
       "2026-11-19-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste",
       "2026-11-19-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet",
       "2026-11-19-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater"
+    ],
+    "tool": "scripts/reserve_recert.py"
+  },
+  "ausgebucht": {
+    "at": "2026-11-20T09:41:25Z",
+    "slugs": [
+      "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten",
+      "2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten"
     ],
     "tool": "scripts/reserve_recert.py"
   }
