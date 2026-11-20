@@ -1,6 +1,6 @@
 {
   "target": 6,
-  "ready": 3,
+  "ready": 2,
   "pool_size": 12,
   "generated_at": "2026-11-19T17:37:26Z",
   "candidates": [
@@ -63,20 +63,10 @@
     },
     {
       "slug": "2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten",
-      "ready": true,
+      "ready": false,
       "sha256": "4e48cd4e38300fa7de8cb2d318024bd26a637c8cb8d0b721bbc368c0f1d13080",
-      "flesch": 62.1,
       "measured_at": "2026-11-19T17:34:45Z",
-      "score": 0.976,
-      "parts": {
-        "spelling": 0.94,
-        "meta": 1.0,
-        "structure": 1.0,
-        "typography": 0.98,
-        "uniqueness": 1.0,
-        "affiliate": 1.0,
-        "readability": 0.95
-      }
+      "reason": "Zertifikat zurückgezogen: SHA-256 passt nicht mehr zum Entwurf; Nachzertifizierung nötig; vollständige Nachmessung nötig (reserve_recert.py --fix)"
     },
     {
       "slug": "2026-11-19-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich",
