@@ -1,6 +1,6 @@
 # Produktions-Wache – Content-Engine
 
-**Stand:** 2026-11-20 15:25 UTC  
+**Stand:** 2026-11-20 21:48 UTC  
 **Stufe:** OK  
 **Befund:** Letzter Publikationstag (2026-11-20): 2 Artikel – Ziel erfüllt. – Bestand: 4 von Gates gehalten (ältester 9 Tage: faktenfrische: 4232b77745f1559839a5 (luecke): Der Referenzwert für den Strompreis (0,35 €/kWh) wird als Rechenbasis genutzt, findet sich aber nicht in der Fachquelle der Bundesn…)
 
