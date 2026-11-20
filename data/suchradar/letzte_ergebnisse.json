@@ -1,5 +1,5 @@
 {
- "zeitstempel": "2026-11-19T16:51:42.492121+02:00",
+ "zeitstempel": "2026-11-20T16:33:05.633627+02:00",
  "eigene_domaene": "franksfinanzcheck.de",
  "anfragen_geplant": 25,
  "zaehlung": {
@@ -8,15 +8,15 @@
   "fehler": 3,
   "uebersprungen": 0
  },
- "treffer_gesamt": 187,
+ "treffer_gesamt": 190,
  "treffer_organisch": 0,
  "datenqualitaet": {
   "anfragen_erfolgreich": 22,
   "anfragen_organisch": 0,
   "anfragen_rueckfall": 22,
-  "treffer_gesamt": 187,
+  "treffer_gesamt": 190,
   "treffer_organisch": 0,
-  "treffer_rueckfall": 187,
+  "treffer_rueckfall": 190,
   "rueckfall_anteil": 1.0,
   "anbieter": {
    "wikipedia": 22
@@ -120,16 +120,6 @@
   },
   {
    "anfrage": "Stromanbieter wechseln",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Unfall mit Sommerreifen",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -250,6 +240,16 @@
   },
   {
    "anfrage": "Versicherungen kündigen",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Versicherungen prüfen Jahresende",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,

@@ -1,5 +1,5 @@
 {
- "stand": "2026-11-19T16:51:42.492121+02:00",
+ "stand": "2026-11-20T16:33:05.633627+02:00",
  "rankings": [
   {
    "anfrage": "DSL Anbieter Vergleich",
@@ -83,16 +83,6 @@
   },
   {
    "anfrage": "Stromanbieter wechseln",
-   "eigener_rang": 0,
-   "vorher": 0,
-   "delta": 0,
-   "titel": "",
-   "url": "",
-   "quelle": "wikipedia",
-   "sichtbar": false
-  },
-  {
-   "anfrage": "Unfall mit Sommerreifen",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
@@ -213,6 +203,16 @@
   },
   {
    "anfrage": "Versicherungen kündigen",
+   "eigener_rang": 0,
+   "vorher": 0,
+   "delta": 0,
+   "titel": "",
+   "url": "",
+   "quelle": "wikipedia",
+   "sichtbar": false
+  },
+  {
+   "anfrage": "Versicherungen prüfen Jahresende",
    "eigener_rang": 0,
    "vorher": 0,
    "delta": 0,
