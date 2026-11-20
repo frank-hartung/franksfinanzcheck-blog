@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – LinkedIn
 
-> Automatisch aktualisiert: 19.11.2026 23:41 (Europe/Berlin)  
+> Automatisch aktualisiert: 20.11.2026 15:08 (Europe/Berlin)  
 > Profil: https://www.linkedin.com/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `linkedin.ics`
 
@@ -12,36 +12,36 @@
 
 ## Kommende Beiträge
 
-### Fr, 20. November 2026
-- **07:45** ⏳ Gaspreiserhöhung in der Grundversorgung: Wann kannst — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/
 ### Mo, 23. November 2026
 - **07:45** ⏳ Flugverspätung: Wann kommt eine Entschädigung infrage? — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/
 ### Di, 24. November 2026
-- **07:45** ⏳ Waschmaschine beladen: Weniger Kosten bei jedem Waschgang — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/
-### Mi, 25. November 2026
-- **07:45** ⏳ Router Standort: So findest du einen guten Platz — _nutzen_ · Launch  
+- **07:45** ⏳ Router Standort: So findest du einen guten Platz – WLAN — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/
-### Do, 26. November 2026
+### Mi, 25. November 2026
 - **07:45** ⏳ Fenster abdichten: So stoppst du Zugluft an alten Rahmen — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/
-### Fr, 27. November 2026
+### Do, 26. November 2026
 - **07:45** ⏳ Wie viel Bandbreite brauchst du fürs Streaming? — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/
-### Mo, 30. November 2026
+### Fr, 27. November 2026
 - **07:45** ⏳ Geschenkkarte: Was du beim Kauf und Aufladen wissen musst — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst/
-### Di, 01. Dezember 2026
+### Mo, 30. November 2026
 - **07:45** ⏳ Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst/
-### Mi, 02. Dezember 2026
+### Di, 01. Dezember 2026
 - **07:45** ⏳ Kaffeemaschine: Was kostet eine Tasse wirklich? — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/
-### Do, 03. Dezember 2026
+### Mi, 02. Dezember 2026
 - **07:45** ⏳ Mesh-WLAN nachrüsten: Wann lohnt sich die Investition? — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-13-mesh-wlan-nachruesten-schluss-mit-funkloechern-in-der-wohnung/
+### Do, 03. Dezember 2026
+- **07:45** ⏳ Energieeffiziente Geräte: So sinken deine Fixkosten — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten/
+### Fr, 04. Dezember 2026
+- **07:45** ⏳ DSL-Wechselbonus sichern: So sparst du beim Internetvertrag — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-08-10-dsl-wechselbonus-sichern/
 
 ## Zuletzt veröffentlicht
 

@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Telegram (Kanal)
 
-> Automatisch aktualisiert: 19.11.2026 23:41 (Europe/Berlin)  
+> Automatisch aktualisiert: 20.11.2026 15:08 (Europe/Berlin)  
 > Profil: https://t.me/  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `telegram.ics`
 
@@ -12,18 +12,21 @@
 
 ## Kommende Beiträge
 
+### Fr, 20. November 2026
+- **18:00** ⏳ Geschenkkarte: Was du beim Kauf und Aufladen wissen musst — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-13-geschenkkarte-was-du-beim-kauf-und-aufladen-wissen-musst/
 ### Sa, 21. November 2026
-- **07:00** ⏳ Fenster abdichten: So stoppst du Zugluft an alten Rahmen — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/
+- **07:00** ⏳ Secondhand-Kleidung kaufen: So prüfst du Stoff, Nähte — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-13-secondhand-kleidung-so-erkennst-du-qualitaet-sparst/
 ### So, 22. November 2026
 - **07:00** ⏳ Flugverspätung: Wann kommt eine Entschädigung infrage? — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/
 ### Sa, 28. November 2026
-- **07:00** ⏳ Gaspreiserhöhung in der Grundversorgung: Wann kannst — _nutzen_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-10-30-gaspreiserhoehung-sonderkuendigungsrecht-raus-aus-dem/
-### So, 29. November 2026
-- **07:00** ⏳ Router Standort: So findest du einen guten Platz — _nutzen_ · Launch  
+- **07:00** ⏳ Router Standort: So findest du einen guten Platz – WLAN — _nutzen_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/
+### So, 29. November 2026
+- **07:00** ⏳ Fenster abdichten: So stoppst du Zugluft an alten Rahmen — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/
 
 ## Zuletzt veröffentlicht
 

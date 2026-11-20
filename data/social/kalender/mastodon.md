@@ -1,6 +1,6 @@
 # 🗓️ Veröffentlichungskalender – Mastodon
 
-> Automatisch aktualisiert: 19.11.2026 23:41 (Europe/Berlin)  
+> Automatisch aktualisiert: 20.11.2026 15:08 (Europe/Berlin)  
 > Profil: https://mastodon.social/@FranksFinanzcheck  
 > Zum Abonnieren im Handy/Outlook/Google-Kalender: `mastodon.ics`
 
@@ -13,8 +13,6 @@
 ## Kommende Beiträge
 
 ### Fr, 20. November 2026
-- **07:30** ⏳ Fenster abdichten: So stoppst du Zugluft an alten Rahmen — _takeaway_ · Launch  
-  https://franksfinanzcheck.de/posts/2026-11-10-fenster-abdichten-so-stoppst-du-zugluft-an-alten-rahmen/
 - **11:30** ⏳ Wie viel Bandbreite brauchst du fürs Streaming? — _mythos_ · Launch  
   https://franksfinanzcheck.de/posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/
 ### Mo, 23. November 2026
@@ -35,16 +33,22 @@
 ### Mo, 30. November 2026
 - **07:30** ⏳ Kreditkarte vergleichen: Kostenlos und sicher zahlen — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-09-03-kreditkarte-vergleichen-kostenlos-sicher-bezahlen/
+- **07:30** ⏳ Energieeffiziente Geräte: So sinken deine Fixkosten — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten/
+### Mi, 02. Dezember 2026
 - **07:30** ⏳ Frugalismus für Einsteiger: Mit kleinen Schritten sparen — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-mehr-freiheit-durch-bewussten-konsum/
-### Mi, 02. Dezember 2026
-- **07:30** ⏳ Tagesgeld vergleichen: Was bleibt nach dem Aktionszins? — _zahl_ · Evergreen  
-  https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/
-- **11:30** ⏳ Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick — _zahl_ · Evergreen  
+- **11:30** ⏳ Gas-Anbieter wechseln: Strategien gegen hohe Heizkosten — _nutzen_ · Launch  
+  https://franksfinanzcheck.de/posts/2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/
+### Fr, 04. Dezember 2026
+- **07:30** ⏳ Alltagsfehler vermeiden: 5 Frugalismus-Tipps im Überblick — _zahl_ · Evergreen  
   https://franksfinanzcheck.de/posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/
+- **11:30** ⏳ Tagesgeld vergleichen: Was bleibt nach dem Aktionszins? — _zahl_ · Evergreen  
+  https://franksfinanzcheck.de/posts/2026-08-26-tagesgeld-zinsen-2026-die-besten-zinssaetze-im-vergleich/
 
 ## Zuletzt veröffentlicht
 
+- ✅ 20.11.2026 15:08 · Fenster abdichten: So stoppst du Zugluft an alten Rahmen → https://mastodon.social/@FranksFinanzcheck/117649160681794420
 - ✅ 18.11.2026 23:37 · WLAN-Frust lösen: So findest du den besten Router Standort → https://mastodon.social/@FranksFinanzcheck/117639837069950225
 - ✅ 18.11.2026 15:15 · Flugverspätung Entschädigung: So holst du dein Geld zurück → https://mastodon.social/@FranksFinanzcheck/117637863727269953
 - ✅ 17.11.2026 00:45 · Waschmaschine beladen: Weniger Kosten bei jedem Waschgang → https://mastodon.social/@FranksFinanzcheck/117628781271452138
@@ -54,7 +58,6 @@
 - ✅ 11.11.2026 13:47 · Kfz-Versicherung Vergleich 2026: Bis zu 800 € sparen → https://mastodon.social/@FranksFinanzcheck/117597882570629474
 - ✅ 10.11.2026 00:48 · Preisgarantie Gas: Was bei Preiserhöhung hilft → https://mastodon.social/@FranksFinanzcheck/117589153983480017
 - ✅ 09.11.2026 15:01 · DNS-Server wechseln: Datenschutz, Filter und Einrichtung → https://mastodon.social/@FranksFinanzcheck/117586845999926723
-- ✅ 08.11.2026 23:26 · Frugalismus-Tipps: Mehr Freiheit durch klugen Verzicht → https://mastodon.social/@FranksFinanzcheck/117583170393481412
 
 ## Zurückgestellt (Autopilot hat blockiert)
 
