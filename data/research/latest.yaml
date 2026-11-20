@@ -1,5 +1,5 @@
-generated_at: '2026-11-19T12:08:08Z'
-day: '2026-11-19'
+generated_at: '2026-11-20T12:10:10Z'
+day: '2026-11-20'
 mode: deterministic
 teams:
   trending:
@@ -252,58 +252,60 @@ teams:
     source: pinterest_plan
     score: 0.77
   niche_hooks:
-  - topic: Die Vorteile von Frugalismus für dein Finanzbudget
+  - topic: '30-Tage-Konsumverzicht-Challenge: So sparst du ohne Verzicht auf Dauer'
     pillar: frugalismus
     signal: niche_hook
-    source: topics:Die Vorteile von Frugalismus für dein Finanzbudget
-    score: 0.55
-    keywords: []
-  - topic: 'Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung'
-    pillar: frugalismus
-    signal: niche_hook
-    source: 'topics:Ein Jahr ohne neue Kleidung kaufen: Die 365-Tage-Herausforderung'
-    score: 0.55
-    keywords: []
-  - topic: 'Städtetrip im Winter: So planst du die Tageskasse'
-    pillar: mietwagen
-    signal: niche_hook
-    source: 'topics:Städtetrip im Winter: So planst du die Tageskasse'
+    source: 'topics:30-Tage-Konsumverzicht-Challenge: So sparst du ohne Verzicht auf
+      Dauer'
     score: 0.55
     keywords:
-    - Städtetrip Kosten
-    - Winter Städtereise
-    - Nebenkosten Urlaub
-  - topic: 'Störung beim Internetanbieter: Diese Rechte hast du'
-    pillar: internet-dsl
-    signal: niche_hook
-    source: 'topics:Störung beim Internetanbieter: Diese Rechte hast du'
-    score: 0.55
-    keywords:
-    - Internetstörung Rechte
-    - Minderung Internetausfall
-    - Anbieter Entschädigung
-  - topic: 'Weihnachtsbudget planen: Ohne Schulden durch die Feiertage'
-    pillar: frugalismus
-    signal: niche_hook
-    source: 'topics:Weihnachtsbudget planen: Ohne Schulden durch die Feiertage'
-    score: 0.55
-    keywords:
-    - Weihnachten Budget planen
-    - Weihnachten sparen
-    - Geschenkebudget
-    - Weihnachten ohne Schulden
-  - topic: 'Zahnzusatzversicherung ohne Wartezeit: Welche Tarife sofort leisten (und
-      wo der Haken liegt)'
+    - Konsumverzicht
+    - Spar-Challenge
+    - Weniger konsumieren
+  - topic: 'Private Unfallversicherung: Für wen sie sich wirklich lohnt'
     pillar: versicherungen
     signal: niche_hook
-    source: 'topics:Zahnzusatzversicherung ohne Wartezeit: Welche Tarife sofort leisten
-      (und wo der Haken liegt)'
+    source: 'topics:Private Unfallversicherung: Für wen sie sich wirklich lohnt'
     score: 0.55
     keywords:
-    - Zahnzusatzversicherung ohne Wartezeit
-    - Zahnersatz Kosten übernehmen
-    - Tarife Sofortleistung Haken
-    - Zahnarztkosten Versicherung
+    - Unfallversicherung
+    - Private Unfallversicherung
+    - Absicherung
+  - topic: Reise- und Unfallversicherungen im Vergleich
+    pillar: versicherungen
+    signal: niche_hook
+    source: topics:Reise- und Unfallversicherungen im Vergleich
+    score: 0.55
+    keywords:
+    - Reiseversicherung
+    - Unfallversicherung
+    - Vergleich
+  - topic: 'Riester-Rente: Lohnt sie sich 2026 noch?'
+    pillar: konto-karten
+    signal: niche_hook
+    source: 'topics:Riester-Rente: Lohnt sie sich 2026 noch?'
+    score: 0.55
+    keywords: []
+  - topic: Stromfresser im Haushalt entlarven
+    pillar: strom-sparen
+    signal: niche_hook
+    source: topics:Stromfresser im Haushalt entlarven
+    score: 0.55
+    keywords:
+    - Stromfresser finden
+    - Strom sparen Tipps
+    - Energiekosten senken
+    - Standby Kosten
+  - topic: 'WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?'
+    pillar: internet-dsl
+    signal: niche_hook
+    source: 'topics:WLAN-Verstärker vs. Mesh-WLAN: Was brauchst du wirklich?'
+    score: 0.55
+    keywords:
+    - WLAN verbessern
+    - DSL Hacks
+    - Schnelles Internet zuhause
+    - Mesh Netzwerk
 live_web:
   enabled: false
   findings: []
