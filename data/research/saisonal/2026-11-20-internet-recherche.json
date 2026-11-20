@@ -1,0 +1,129 @@
+{
+  "datum": "2026-11-20",
+  "erzeugt_utc": "2026-11-20 14:14 UTC",
+  "agent_reach": "Agent Reach v1.5.0",
+  "kanal_ok": 4,
+  "kanal_fehler": 3,
+  "ergebnisse": {
+    "rss": {
+      "vzbv – Energie": {
+        "treffer": [
+          {
+            "titel": "„Senkung der Stromsteuer muss dauerhaft gesichert werden“",
+            "url": "https://www.vzbv.de/meldungen/senkung-der-stromsteuer-muss-dauerhaft-gesichert-werden",
+            "datum": "Wed, 18 Nov 2026",
+            "quelle": "vzbv – Energie"
+          },
+          {
+            "titel": "Haushaltsverhandlungen: „Senkung der Stromsteuer wird zur Farce“",
+            "url": "https://www.vzbv.de/meldungen/haushaltsverhandlungen-senkung-der-stromsteuer-wird-zur-farce",
+            "datum": "Thu, 12 Nov 2026",
+            "quelle": "vzbv – Energie"
+          },
+          {
+            "titel": "Gebäudetyp E: Was der neue Baustandard für Verbraucher bedeutet",
+            "url": "https://www.vzbv.de/meldungen/gebaeudetyp-e-was-der-neue-baustandard-fuer-verbraucher-bedeutet",
+            "datum": "Tue, 10 Nov 2026",
+            "quelle": "vzbv – Energie"
+          },
+          {
+            "titel": "Stromsteuersenkung: Entlastung darf keine Fata Morgana werden",
+            "url": "https://www.vzbv.de/meldungen/stromsteuersenkung-entlastung-darf-keine-fata-morgana-werden",
+            "datum": "Fri, 30 Oct 2026",
+            "quelle": "vzbv – Energie"
+          }
+        ],
+        "fehler": null
+      },
+      "vzbv – Finanzen": {
+        "treffer": [
+          {
+            "titel": "Altersvorsorgedepot auch in der betrieblichen Altersvorsorge nutzen",
+            "url": "https://www.vzbv.de/meldungen/altersvorsorgedepot-auch-der-betrieblichen-altersvorsorge-nutzen",
+            "datum": "Tue, 17 Nov 2026",
+            "quelle": "vzbv – Finanzen"
+          },
+          {
+            "titel": "Debeka-Sammelklage: Jetzt Ansprüche sichern",
+            "url": "https://www.vzbv.de/pressemitteilungen/debeka-sammelklage-jetzt-ansprueche-sichern",
+            "datum": "Tue, 17 Nov 2026",
+            "quelle": "vzbv – Finanzen"
+          },
+          {
+            "titel": "Riester-Rente von der Sparkasse? Dann bekommen Sie womöglich zu wenig",
+            "url": "https://www.vzbv.de/pressemitteilungen/riester-rente-von-der-sparkasse-dann-bekommen-sie-womoeglich-zu-wenig",
+            "datum": "Thu, 22 Oct 2026",
+            "quelle": "vzbv – Finanzen"
+          },
+          {
+            "titel": "Frühstartrente: Verpasste Chance für Kinder und Familien",
+            "url": "https://www.vzbv.de/meldungen/fruehstartrente-verpasste-chance-fuer-kinder-und-familien",
+            "datum": "Fri, 16 Oct 2026",
+            "quelle": "vzbv – Finanzen"
+          }
+        ],
+        "fehler": null
+      },
+      "Bundesnetzagentur – Presse": {
+        "treffer": [
+          {
+            "titel": "Die Bundesnetzagentur vergibt erstes Label für Datenvermittlungsdienste nach dem Data Governance Act (DGA)",
+            "url": "http://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/DE/2026/20261116_DataAct.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Presse"
+          },
+          {
+            "titel": "Verschiebung der Entscheidung zum WACC Gas",
+            "url": "http://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/DE/2026/20261105_WACC_Gas.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Presse"
+          },
+          {
+            "titel": "Ergebnisse der Ausschreibungen für Aufdach-Solaranlagen und Biomasseanlagen zum 1. Oktober 2026",
+            "url": "http://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/DE/2026/20261103_Solar2_Biomasse.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Presse"
+          },
+          {
+            "titel": "StromVKG - Ergebnisse der ersten Ausschreibung für Langzeitkapazitäten",
+            "url": "http://www.bundesnetzagentur.de/SharedDocs/Pressemitteilungen/DE/2026/20261103_StromVKG.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Presse"
+          }
+        ],
+        "fehler": null
+      },
+      "Bundesnetzagentur – Gasversorgung": {
+        "treffer": [
+          {
+            "titel": "Situationsbericht Lage der Gasversorgung in Deutschland (Stand 26. Oktober 2023; 13:00 Uhr)",
+            "url": "http://www.bundesnetzagentur.de/DE/Gasversorgung/aktuelle_gasversorgung/_downloads/2023/10_Oktober/231026_gaslage.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Gasversorgung"
+          },
+          {
+            "titel": "Situationsbericht Lage der Gasversorgung in Deutschland (Stand 19. Oktober 2023; 13:00 Uhr)",
+            "url": "http://www.bundesnetzagentur.de/DE/Gasversorgung/aktuelle_gasversorgung/_downloads/2023/10_Oktober/231019_gaslage.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Gasversorgung"
+          },
+          {
+            "titel": "Situationsbericht Lage der Gasversorgung in Deutschland (Stand 12. Oktober 2023; 13:00 Uhr)",
+            "url": "http://www.bundesnetzagentur.de/DE/Gasversorgung/aktuelle_gasversorgung/_downloads/2023/10_Oktober/231012_gaslage.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Gasversorgung"
+          },
+          {
+            "titel": "Situationsbericht Lage der Gasversorgung in Deutschland (Stand 5. Oktober 2023; 13:00 Uhr)",
+            "url": "http://www.bundesnetzagentur.de/DE/Gasversorgung/aktuelle_gasversorgung/_downloads/2023/10_Oktober/231005_gaslage.html",
+            "datum": "",
+            "quelle": "Bundesnetzagentur – Gasversorgung"
+          }
+        ],
+        "fehler": null
+      }
+    },
+    "youtube": {},
+    "github": {}
+  }
+}
