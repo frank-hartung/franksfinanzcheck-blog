@@ -288,7 +288,9 @@ class HighendHaertung815(unittest.TestCase):
             ziel = Path(tmp) / "index.md"
             ziel.write_text(original, encoding="utf-8")
             code_vor, _ = edge.b7_kommando(ziel, schreiben=False)
-            self.assertEqual(code_vor, 1)
+            # content/datenschutz/index.md ist bereits B7-konform (PR #1282):
+            # ein Vor-Proxy-Dryrun meldet keine offenen Änderungen mehr.
+            self.assertEqual(code_vor, 0)
             code_apply, _ = edge.b7_kommando(ziel, schreiben=True)
             self.assertEqual(code_apply, 0)
             umgestellt = ziel.read_text(encoding="utf-8")
