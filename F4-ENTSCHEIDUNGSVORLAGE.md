@@ -68,13 +68,13 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 
 ## `2026-08-10-dsl-wechselbonus-sichern`
 
-- Datei-SHA256 (heute): `a7ac175122293d13e9ad07c51c6388c90aa44749bb9514db739f53cb43f73445`
+- Datei-SHA256 (heute): `77fd3770d50686e99f32dcc9250ac71ef4bb6acf3c4597c6ec432f672b6a9483`
 - Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `1b7c9b9cac0290f71242` | luecke | **neu** | 10 € in Zeile 17 ohne Kennzeichnung · 25 € in Zeile 17 ohne Kennzeichnung | Aktuelle Wechselangebote ermöglichen oft Einsparungen von ca. 10 € bis 25 € pro Monat im Vergleich zu veralteten Best… |
-| `ee260c27a6bfdd60fa04` | luecke | **neu** | 200 € in Zeile 43 gekennzeichnet · 300 € in Zeile 43 gekennzeichnet | Ein Tarif mit ca. 200 € bis 300 € Bonus wirkt auf den ersten Blick unschlagbar; das ist ein Modellwert. |
+| `1b7c9b9cac0290f71242` | luecke | **neu** | 10 € in Zeile 18 ohne Kennzeichnung · 25 € in Zeile 18 ohne Kennzeichnung | Aktuelle Wechselangebote ermöglichen oft Einsparungen von ca. 10 € bis 25 € pro Monat im Vergleich zu veralteten Best… |
+| `ee260c27a6bfdd60fa04` | luecke | **neu** | 200 € in Zeile 44 gekennzeichnet · 300 € in Zeile 44 gekennzeichnet | Ein Tarif mit ca. 200 € bis 300 € Bonus wirkt auf den ersten Blick unschlagbar; das ist ein Modellwert. |
 
 ### `1b7c9b9cac0290f71242`
 
@@ -82,8 +82,8 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 
 **Frühere Entscheidung:** keine – dieser Befund ist neu.
 
-- Heute in Zeile 17: 10 € – **ohne** Kennzeichnung
-- Heute in Zeile 17: 25 € – **ohne** Kennzeichnung
+- Heute in Zeile 18: 10 € – **ohne** Kennzeichnung
+- Heute in Zeile 18: 25 € – **ohne** Kennzeichnung
 
 ### `ee260c27a6bfdd60fa04`
 
@@ -91,12 +91,12 @@ Regel: F4 ist per SSOT **menschlich** – die Maschine schließt hier nichts.
 
 **Frühere Entscheidung:** keine – dieser Befund ist neu.
 
-- Heute in Zeile 43: 200 € – gekennzeichnet („modellwert“)
-- Heute in Zeile 43: 300 € – gekennzeichnet („modellwert“)
+- Heute in Zeile 44: 200 € – gekennzeichnet („modellwert“)
+- Heute in Zeile 44: 300 € – gekennzeichnet („modellwert“)
 
 ## `2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas`
 
-- Datei-SHA256 (heute): `ed7b9597e7f9907e7c77b51773391de273ffb23fef2c8f2ebc51a77a6054718b`
+- Datei-SHA256 (heute): `1dbb57d8cb1476e64161fe19a81c4f8aeddb8c47bd6ec57d4e7540ac75acc38f`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -181,7 +181,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-12-preisgarantie-gas-so-sicherst-du-dir-guenstige-tarife-fuer-2026`
 
-- Datei-SHA256 (heute): `bac02c104ba652e82143ebf6071a5b38eeb84b1bb521dc86d250b1de0df9ee35`
+- Datei-SHA256 (heute): `37c4119659887f754d5705305149a13357dae3ac849e9152b40150d41ec47ad5`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -285,7 +285,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit`
 
-- Datei-SHA256 (heute): `50f88da0e40308275f383ee1e53fccd03e68664450b06513228cf8160b288a60`
+- Datei-SHA256 (heute): `bfab6e93434f95fb9bafe7b75b8be5fcef1f178314174715df0d3ea6cd795031`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -354,7 +354,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-17-kostenloses-girokonto-so-findest-du-ein-konto-ohne-gebuehren`
 
-- Datei-SHA256 (heute): `ea368aff3b4e0d103a56beb8fef4852c59d904aa2d71ba89cdc60bb2284638b3`
+- Datei-SHA256 (heute): `fa562cc80c5d625f366d796567a8d2959393f532f2ebecb7b076661923bae959`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -419,16 +419,16 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-19-energiediebe-stoppen-so-kannst-du-stromfresser-finden`
 
-- Datei-SHA256 (heute): `0bf2f962ad21e61e25efc678ec8ae661386aeed79f2290422fc5b787a8152ae1`
+- Datei-SHA256 (heute): `29947cf1af73822c2ed050941d012ea2dae133e1f1d2844b9f8ab833ef50a7f6`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `43470330b3b48c9cee49` | luecke | 2026-11-11 · 2. Entscheidung | 24 Stunden in Zeile 94 ohne Kennzeichnung | Der Artikel empfiehlt, Kühl- und Gefriergeräte mindestens 24 Stunden, besser mehrere Tage zu messen, liefert jedoch k… |
+| `43470330b3b48c9cee49` | luecke | 2026-11-11 · 2. Entscheidung | 24 Stunden in Zeile 95 ohne Kennzeichnung | Der Artikel empfiehlt, Kühl- und Gefriergeräte mindestens 24 Stunden, besser mehrere Tage zu messen, liefert jedoch k… |
 | `8ddc1025e45be176ad3a` | luecke | 2026-11-11 · 2. Entscheidung | kein Wert genannt (Aussage/Präzision) | Es wird kein regulatorischer Rahmen (z. B. Aufgaben der Bundesnetzagentur) genannt, obwohl das Thema Stromversorgung… |
 | `95d6d2877620e5a056ce` | luecke | 2026-11-11 · 2. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Aussage, dass Verbraucherzentralen oder Bibliotheken Messgeräte verleihen, wird ohne Beleg gemacht. |
-| `ab16029999747466a638` | luecke | 2026-11-11 · 2. Entscheidung | 0,37 € in Zeile 96 gekennzeichnet | Die Berechnung mit einem Arbeitspreis von 0,37 €/kWh wird angegeben, ohne dass ein aktueller Preis‑ oder Marktwert be… |
-| `b057dee3603e09f494b5` | luecke | 2026-11-11 · 2. Entscheidung | 650 € in Zeile 119 ohne Kennzeichnung · 10,3 Jahre in Zeile 120 ohne Kennzeichnung | Das Amortisationsbeispiel (Kaufpreis 650 €, Amortisationszeit 10,3 Jahre) enthält keine Quelle für die zugrunde liege… |
+| `ab16029999747466a638` | luecke | 2026-11-11 · 2. Entscheidung | 0,37 € in Zeile 97 gekennzeichnet | Die Berechnung mit einem Arbeitspreis von 0,37 €/kWh wird angegeben, ohne dass ein aktueller Preis‑ oder Marktwert be… |
+| `b057dee3603e09f494b5` | luecke | 2026-11-11 · 2. Entscheidung | 650 € in Zeile 120 ohne Kennzeichnung · 10,3 Jahre in Zeile 121 ohne Kennzeichnung | Das Amortisationsbeispiel (Kaufpreis 650 €, Amortisationszeit 10,3 Jahre) enthält keine Quelle für die zugrunde liege… |
 
 ### `43470330b3b48c9cee49`
 
@@ -438,7 +438,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 01a0b2abe713): Die verlangte Quelle steht im Abschnitt „Das Wichtigste in Kürze“ inline – „Diese Messdauer empfiehlt die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen/so-finden-sie-den-passenden-kuehlschrank-10573).“. Der Befund trifft die heutige Fassung damit nicht mehr.
 
-- Heute in Zeile 94: 24 Stunden – **ohne** Kennzeichnung
+- Heute in Zeile 95: 24 Stunden – **ohne** Kennzeichnung
 
 ### `8ddc1025e45be176ad3a`
 
@@ -468,7 +468,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 01a0b2abe713): Die verlangte Quelle steht im Abschnitt „Die Kostenformel, die du wirklich brauchst“ inline – „Der [BDEW](https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/) nennt für Haushalte im Oktober 2026 einen Durchschnittspreis von 37,3 Cent je kWh.“. Der Befund trifft die heutige Fassung damit nicht mehr.
 
-- Heute in Zeile 96: 0,37 € – gekennzeichnet („modellwert“)
+- Heute in Zeile 97: 0,37 € – gekennzeichnet („modellwert“)
 
 ### `b057dee3603e09f494b5`
 
@@ -478,8 +478,8 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 01a0b2abe713): Die verlangte Quelle steht im Abschnitt „Die Kostenformel, die du wirklich brauchst“ inline – „Der [BDEW](https://www.bdew.de/service/daten-und-grafiken/bdew-strompreisanalyse/) nennt für Haushalte im Oktober 2026 einen Durchschnittspreis von 37,3 Cent je kWh.“. Der Befund trifft die heutige Fassung damit nicht mehr.
 
-- Heute in Zeile 119: 650 € – **ohne** Kennzeichnung
-- Heute in Zeile 120: 10,3 Jahre – **ohne** Kennzeichnung
+- Heute in Zeile 120: 650 € – **ohne** Kennzeichnung
+- Heute in Zeile 121: 10,3 Jahre – **ohne** Kennzeichnung
 
 ## `2026-08-21-haushaltsbuch-fuehren-app-excel-oder-papier`
 
@@ -615,7 +615,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-24-mehr-freiheit-durch-verzicht-clevere-frugalismus-tipps`
 
-- Datei-SHA256 (heute): `961505d6c13ef2a637b2099ccd4b992c8dc8b56857fadcb0a3ef5f3882155c9b`
+- Datei-SHA256 (heute): `52f8f9b07bc0040164b3bd4172093b85fba2be4bc0ccd9c0bcb849b7dbe1ee4e`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -722,7 +722,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn`
 
-- Datei-SHA256 (heute): `641dc9a944d2a7858e59e8da995cbf1b90466adf8d242751dc34ca1c8367df1d`
+- Datei-SHA256 (heute): `815af18e3c2de40cd87d9247cabf49b2d128c6712eb5e2ffc773cf2d0d583efd`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -849,7 +849,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-04-finanzielle-freiheit-erreichen-denke-dich-reich`
 
-- Datei-SHA256 (heute): `c732ea0e6abaa4c79be95be85c6638c883ab1dd29c0c5d5877ddae6b2a4c2c06`
+- Datei-SHA256 (heute): `4f38b190222a4f18bdd60c522edc277a6e382e61b90ed17ba152b20371b99002`
 - Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -921,14 +921,14 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler`
 
-- Datei-SHA256 (heute): `052898a0f00030524c9498e453b4eae3f3f3e423a9787c564a9293fce257ab11`
+- Datei-SHA256 (heute): `edce526de4aa4a48b1f86fbe0637c95f73eb1905886e2dcfb813310c66136ae5`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `1e06a96f6f71e104ce0b` | praezision | 2026-11-11 · 3. Entscheidung | 0,4 % in Zeile 32 ohne Kennzeichnung | Während Meal Prep als großer Sparhebel betont wird, zeigt die Marktlage für Nahrungsmittel eine moderate Teuerung von… |
-| `81c6a707139046b83ccd` | luecke | 2026-11-11 · 3. Entscheidung | 14,9 % in Zeile 32 ohne Kennzeichnung | Der Ratgeber empfiehlt die Revision von Fixkosten, lässt aber die drastische Preissteigerung bei Energie von +14,9 %… |
-| `8cc00288af8a1f2b02d8` | veraltet | 2026-11-11 · 3. Entscheidung | 2,8 % in Zeile 32 ohne Kennzeichnung | Die Budget-Tipps berücksichtigen nicht die aktuelle Inflationsrate von 2,8 % (Stand Oktober 2026), was die Kaufkraft-… |
+| `1e06a96f6f71e104ce0b` | praezision | 2026-11-11 · 3. Entscheidung | 0,4 % in Zeile 33 ohne Kennzeichnung | Während Meal Prep als großer Sparhebel betont wird, zeigt die Marktlage für Nahrungsmittel eine moderate Teuerung von… |
+| `81c6a707139046b83ccd` | luecke | 2026-11-11 · 3. Entscheidung | 14,9 % in Zeile 33 ohne Kennzeichnung | Der Ratgeber empfiehlt die Revision von Fixkosten, lässt aber die drastische Preissteigerung bei Energie von +14,9 %… |
+| `8cc00288af8a1f2b02d8` | veraltet | 2026-11-11 · 3. Entscheidung | 2,8 % in Zeile 33 ohne Kennzeichnung | Die Budget-Tipps berücksichtigen nicht die aktuelle Inflationsrate von 2,8 % (Stand Oktober 2026), was die Kaufkraft-… |
 
 ### `1e06a96f6f71e104ce0b`
 
@@ -938,7 +938,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Die Priorisierung ist relativiert: „Hinweis zum Stand der Preise: Nach dem Indexstand des Statistischen Bundesamts lagen Nahrungsmittel im Oktober 2026 um +0,4 % über dem Niveau des Vorjahresmonats. Die Beispiele sind Orientierungswerte“ – mit eigener Quellenzeile darunter. Die Meal-Prep-Empfehlung steht damit neben dem belegten Preisfeld.
 
-- Heute in Zeile 32: 0,4 % – **ohne** Kennzeichnung
+- Heute in Zeile 33: 0,4 % – **ohne** Kennzeichnung
 
 ### `81c6a707139046b83ccd`
 
@@ -948,7 +948,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 5708f03841d4): Die verlangte Quelle steht im Abschnitt „Warum diese Frugalismus-Tipps dein Mindset verändern“ inline – „**Hinweis zum Stand der Preise:** Im Oktober 2026 lagen die Verbraucherpreise um **+2,8 %** über dem Vorjahr, Energie um **+14,9 %** und Nahrungsmittel um **+0,4 %** ([Statistische“. Der Befund trifft die heutige Fassung damit nicht mehr.
 
-- Heute in Zeile 32: 14,9 % – **ohne** Kennzeichnung
+- Heute in Zeile 33: 14,9 % – **ohne** Kennzeichnung
 
 ### `8cc00288af8a1f2b02d8`
 
@@ -958,11 +958,11 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 5708f03841d4): Die verlangte Quelle steht im Abschnitt „Warum diese Frugalismus-Tipps dein Mindset verändern“ inline – „**Hinweis zum Stand der Preise:** Im Oktober 2026 lagen die Verbraucherpreise um **+2,8 %** über dem Vorjahr, Energie um **+14,9 %** und Nahrungsmittel um **+0,4 %** ([Statistische“. Der Befund trifft die heutige Fassung damit nicht mehr.
 
-- Heute in Zeile 32: 2,8 % – **ohne** Kennzeichnung
+- Heute in Zeile 33: 2,8 % – **ohne** Kennzeichnung
 
 ## `2026-09-07-heizkosten-senken-mit-diesen-strategien-sparst-du-sofort`
 
-- Datei-SHA256 (heute): `ddb810395f846202e602273b951ef612802fce1526875782a44098eef2a7cc87`
+- Datei-SHA256 (heute): `bf1b63bf785e7c0ca2567a3377936253865cd9b69c579813d969906e747262fe`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1077,7 +1077,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer`
 
-- Datei-SHA256 (heute): `af358d0e9941e02c172b81bdde2280b375a784395f8edc570232ca8af2ea2951`
+- Datei-SHA256 (heute): `a0d611d116600721ae5ebf8aea2e03f00715f52bea66136173c870b9a127d1d1`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1118,15 +1118,15 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser`
 
-- Datei-SHA256 (heute): `8961567cdbfdfba2dfe3b9813965ae2e02972da12fc4a49839eb71ddc16e4f2c`
+- Datei-SHA256 (heute): `7c5a527b203b87d932ab10019586508f42e7bc9848194c6eaba4b80f4dd22434`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
 | `7a87eaaa2b863ba8cc46` | luecke | 2026-11-11 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Ein relevanter regulatorischer Rahmen (z. B. Vorgaben der Bundesnetzagentur oder BDEW) wird nicht genannt, obwohl die… |
 | `9d67a5e6bd11212c7c1e` | praezision | 2026-11-11 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Aussage, dass bestimmte Gerätegruppen (TV‑Ecke, Homeoffice, alte Audio‑Technik) zuerst zu senken „lohnt“, wird oh… |
-| `a54abc1cad73d20fb689` | luecke | 2026-11-11 · 1. Entscheidung | 32 € in Zeile 20 ohne Kennzeichnung | Die konkreten Jahreskosten (z. B. 32 € für 10 W Standby) beruhen auf dem nicht belegten Strompreis und werden nicht a… |
-| `a7d1cf6485921e117919` | luecke | 2026-11-11 · 1. Entscheidung | 37,3 Cent in Zeile 42 gekennzeichnet | Der angegebene durchschnittliche Strompreis von 37,3 Cent/kWh (BDEW‑Schnitt) wird ohne Quellenangabe genannt. |
+| `a54abc1cad73d20fb689` | luecke | 2026-11-11 · 1. Entscheidung | 32 € in Zeile 21 ohne Kennzeichnung | Die konkreten Jahreskosten (z. B. 32 € für 10 W Standby) beruhen auf dem nicht belegten Strompreis und werden nicht a… |
+| `a7d1cf6485921e117919` | luecke | 2026-11-11 · 1. Entscheidung | 37,3 Cent in Zeile 43 gekennzeichnet | Der angegebene durchschnittliche Strompreis von 37,3 Cent/kWh (BDEW‑Schnitt) wird ohne Quellenangabe genannt. |
 | `a7f69a854430d62a4a3e` | luecke | 2026-11-11 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Empfehlung, dass ein günstigerer Arbeitspreis der zweite wichtigste Hebel sei, fehlt jede Quelle oder regulatoris… |
 
 ### `7a87eaaa2b863ba8cc46`
@@ -1157,7 +1157,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Die Rechnung ist als Modell gekennzeichnet: „10 Watt rund um die Uhr entsprechen 87,6 kWh und bei 0,37 €/kWh rund 32 € im Jahr (Rechenbeispiel)“, dazu die Tabelle mit dem Rechenweg. Der Preis ist Rechenwert mit BDEW-Beleg.
 
-- Heute in Zeile 20: 32 € – **ohne** Kennzeichnung
+- Heute in Zeile 21: 32 € – **ohne** Kennzeichnung
 
 ### `a7d1cf6485921e117919`
 
@@ -1167,7 +1167,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 0964b3927ad1): Die verlangte Quelle steht im Abschnitt „So rechnest du wenige Watt in Jahreskosten um“ inline – „Der BDEW-Schnitt von 37,3 Cent pro kWh{{< beleg kennzahl="bdew-haushaltsstrompreis" kurz="BDEW" >}} dient hier nur als Rechenwert.“. Der Befund trifft die heutige Fassung damit nicht mehr.
 
-- Heute in Zeile 42: 37,3 Cent – gekennzeichnet („beispielwert“)
+- Heute in Zeile 43: 37,3 Cent – gekennzeichnet („beispielwert“)
 
 ### `a7f69a854430d62a4a3e`
 
@@ -1181,7 +1181,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-20-gasrechnung-senken-so-bereitest-du-dich-im-spaetsommer-vor`
 
-- Datei-SHA256 (heute): `7a7759c2404523c768036fce238cc499968835773795f7cdeaaf1b30fbdd68d1`
+- Datei-SHA256 (heute): `3541382f26ce0a2cc0a5afa78360de3291e0691eb3431ffac8343f8325fedcaa`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1244,14 +1244,14 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro`
 
-- Datei-SHA256 (heute): `6d016426b1ba811172b0e4cf3460f4f5da3f469a2d153a7f0877cd331de3c094`
+- Datei-SHA256 (heute): `3dbf2c2808b64297012ee15b81a1c2224035342c4a9505b1ad02dd4185fd953e`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `334751e6f61ad0033fe4` | luecke | 2026-11-11 · 2. Entscheidung | 20.000 kWh in Zeile 162 ohne Kennzeichnung · 360 € in Zeile 162 ohne Kennzeichnung | Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quel… |
-| `36759a5efe5e8e5163d0` | luecke | 2026-11-11 · 2. Entscheidung | 6 % in Zeile 3 ohne Kennzeichnung | Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird o… |
-| `942922d1afd7844618e9` | luecke | 2026-11-11 · 2. Entscheidung | 1 Cent in Zeile 3 ohne Kennzeichnung · 18.000 kWh in Zeile 7 ohne Kennzeichnung · 180 € in Zeile 7 ohne Kennzeichnung | Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt rund 180 € im Jahr“ wird nicht belegt. |
+| `334751e6f61ad0033fe4` | luecke | 2026-11-11 · 2. Entscheidung | 20.000 kWh in Zeile 163 ohne Kennzeichnung · 360 € in Zeile 163 ohne Kennzeichnung | Die Angabe, dass ein Gaslieferantenwechsel bei 20.000 kWh im Januar 2026 im Schnitt etwa 360 € spart, fehlt jede Quel… |
+| `36759a5efe5e8e5163d0` | luecke | 2026-11-11 · 2. Entscheidung | 6 % in Zeile 4 ohne Kennzeichnung | Die Faustregel der Verbraucherzentrale, dass pro Grad weniger Raumtemperatur der Heizbedarf um etwa 6 % sinkt, wird o… |
+| `942922d1afd7844618e9` | luecke | 2026-11-11 · 2. Entscheidung | 1 Cent in Zeile 4 ohne Kennzeichnung · 18.000 kWh in Zeile 8 ohne Kennzeichnung · 180 € in Zeile 8 ohne Kennzeichnung | Die Rechnung „1 Cent pro kWh bei 18.000 kWh Jahresverbrauch ergibt rund 180 € im Jahr“ wird nicht belegt. |
 | `d41f0d5ce8798df0211b` | praezision | 2026-11-11 · 2. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Aussage „Die besten Tarife findest du über unseren Partner‑Vergleich“ ist ein Superlativ ohne messbare Daten oder… |
 | `e139d0769faadd04392a` | luecke | 2026-11-11 · 2. Entscheidung | nicht mehr im Text: 11,93 Cent | Der BDEW‑Durchschnittspreis von 11,93 Cent/kWh für 2026 wird ohne Quellenangabe genannt. |
 
@@ -1263,8 +1263,8 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 02bad0a9c2f2): Die verlangte Quelle steht im Abschnitt „Wie du den Tarif fair vergleichst?“ inline – „Die [BDEW-Gaspreisanalyse Herbst 2026](https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/) nennt für Neukunden in Einfamilienhäusern einen Durchschnitt von 12,23 “. Der Befund trifft die heutige Fassung damit nicht mehr.
 
-- Heute in Zeile 162: 20.000 kWh – **ohne** Kennzeichnung
-- Heute in Zeile 162: 360 € – **ohne** Kennzeichnung
+- Heute in Zeile 163: 20.000 kWh – **ohne** Kennzeichnung
+- Heute in Zeile 163: 360 € – **ohne** Kennzeichnung
 
 ### `36759a5efe5e8e5163d0`
 
@@ -1274,7 +1274,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 02bad0a9c2f2): Die verlangte Quelle steht im Abschnitt „Wie du den Tarif fair vergleichst?“ inline – „Die [BDEW-Gaspreisanalyse Herbst 2026](https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/) nennt für Neukunden in Einfamilienhäusern einen Durchschnitt von 12,23 “. Der Befund trifft die heutige Fassung damit nicht mehr.
 
-- Heute in Zeile 3: 6 % – **ohne** Kennzeichnung
+- Heute in Zeile 4: 6 % – **ohne** Kennzeichnung
 
 ### `942922d1afd7844618e9`
 
@@ -1284,9 +1284,9 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 02bad0a9c2f2): Die verlangte Quelle steht im Abschnitt „Wie du den Tarif fair vergleichst?“ inline – „Die [BDEW-Gaspreisanalyse Herbst 2026](https://www.bdew.de/service/daten-und-grafiken/bdew-gaspreisanalyse/) nennt für Neukunden in Einfamilienhäusern einen Durchschnitt von 12,23 “. Der Befund trifft die heutige Fassung damit nicht mehr.
 
-- Heute in Zeile 3: 1 Cent – **ohne** Kennzeichnung
-- Heute in Zeile 7: 18.000 kWh – **ohne** Kennzeichnung
-- Heute in Zeile 7: 180 € – **ohne** Kennzeichnung
+- Heute in Zeile 4: 1 Cent – **ohne** Kennzeichnung
+- Heute in Zeile 8: 18.000 kWh – **ohne** Kennzeichnung
+- Heute in Zeile 8: 180 € – **ohne** Kennzeichnung
 
 ### `d41f0d5ce8798df0211b`
 
@@ -1310,15 +1310,15 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-09-30-last-minute-urlaub-so-schnappst-du-dir-das-sommer-schnaepp`
 
-- Datei-SHA256 (heute): `4c5f32c397033c2b1fee0b47948788b5e0be3d078aae3a3558835335812102f6`
+- Datei-SHA256 (heute): `28d530c69671f538b4143e5560093842fe04a2801a7baed1edade1014f50d533`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `33278b9e7942ebfdbbac` | luecke | 2026-11-11 · 1. Entscheidung | 14 Tage in Zeile 14 gekennzeichnet | Definition des Begriffs „Last Minute“ (maximal 14 Tage zwischen Buchung und Abreise) wird mit dem Deutschen Reiseverb… |
+| `33278b9e7942ebfdbbac` | luecke | 2026-11-11 · 1. Entscheidung | 14 Tage in Zeile 15 gekennzeichnet | Definition des Begriffs „Last Minute“ (maximal 14 Tage zwischen Buchung und Abreise) wird mit dem Deutschen Reiseverb… |
 | `6ad7358a9afcfef3babb` | praezision | 2026-11-11 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Angabe, dass Preisalarme keinen Tiefstpreis garantieren, wird nicht durch konkrete Zahlen oder Vergleichsstudien belegt. |
 | `7c375a3e1a9bfab1468c` | luecke | 2026-11-11 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Hinweis auf § 651r BGB (Insolvenzsicherung bei Pauschalreisen) enthält keinen Verweis auf eine Rechtsquelle oder Verb… |
-| `ea11d36614fa115503b4` | luecke | 2026-11-11 · 1. Entscheidung | 50 % in Zeile 10 ohne Kennzeichnung | Behauptung, dass Nachlässe von bis zu 50 % nur Einzelfälle sind, wird ohne Quellenangabe präsentiert. |
+| `ea11d36614fa115503b4` | luecke | 2026-11-11 · 1. Entscheidung | 50 % in Zeile 11 ohne Kennzeichnung | Behauptung, dass Nachlässe von bis zu 50 % nur Einzelfälle sind, wird ohne Quellenangabe präsentiert. |
 | `f7b1c869dd8e442eaf16` | praezision | 2026-11-11 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Aussage, dass der „beste Zeitpunkt zum Buchen“ ein Modellwert sei, bleibt vage und ohne messbare Daten oder Studien u… |
 
 ### `33278b9e7942ebfdbbac`
@@ -1329,7 +1329,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Die Definition ist an die Fundstelle gebunden: „Der Deutsche Reiseverband nennt höchstens 14 Tage zwischen Buchung und Abreise als Grenze. Das ZDF gibt diese Definition wieder“ – mit Link auf den ZDF-Ratgeber im selben Absatz; der frühere Zusatz „das ist ein Beispielwert“ ist entfernt.
 
-- Heute in Zeile 14: 14 Tage – gekennzeichnet („modellwert“)
+- Heute in Zeile 15: 14 Tage – gekennzeichnet („modellwert“)
 
 ### `6ad7358a9afcfef3babb`
 
@@ -1359,7 +1359,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Die Passage ist an die Fundstelle gebunden und ohne Zahlenversprechen: „Nachlässe von bis zu 50 % sind Einzelfälle, keine verlässliche Erwartung“ mit Link auf die Einordnung zu Last-Minute-Angeboten. Die frühere Modellwert-Formulierung ist entfernt; der Befund trifft die heutige Fassung nicht mehr.
 
-- Heute in Zeile 10: 50 % – **ohne** Kennzeichnung
+- Heute in Zeile 11: 50 % – **ohne** Kennzeichnung
 
 ### `f7b1c869dd8e442eaf16`
 
@@ -1436,14 +1436,14 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss`
 
-- Datei-SHA256 (heute): `002fbbf124a7ebcd4f39bec996a356770707ec6e987387001bca9d186659d281`
+- Datei-SHA256 (heute): `cc9fd16843c757466b153dee48da0a31290886469cf51344065c4a7b9da3527c`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
 | `6b5921bdc76490587167` | luecke | **neu** | kein Wert genannt (Aussage/Präzision) | Seit 2026 nutzen die großen Anbieter die Technik mit dem Namen Vectoring; das ist ein Modellwert. Sie senkt das Rausc… |
-| `8436b91bdb63a6316979` | praezision | **neu** | 12 Monate in Zeile 10 ohne Kennzeichnung · 10 % in Zeile 39 ohne Kennzeichnung | Preisgarantie über mindestens 12 Monate; ohne Garantie darf der Anbieter bald erhöhen, oft um bis zu 10 %. |
-| `a4ff01e649b789f19e6a` | luecke | **neu** | 40 € in Zeile 58 gekennzeichnet | Für 50 Mbps zahlst du heute meist ca. 20–40 € im Monat; das ist ein Beispielwert. |
+| `8436b91bdb63a6316979` | praezision | **neu** | 12 Monate in Zeile 11 ohne Kennzeichnung · 10 % in Zeile 40 ohne Kennzeichnung | Preisgarantie über mindestens 12 Monate; ohne Garantie darf der Anbieter bald erhöhen, oft um bis zu 10 %. |
+| `a4ff01e649b789f19e6a` | luecke | **neu** | 40 € in Zeile 59 gekennzeichnet | Für 50 Mbps zahlst du heute meist ca. 20–40 € im Monat; das ist ein Beispielwert. |
 
 ### `6b5921bdc76490587167`
 
@@ -1459,8 +1459,8 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 **Frühere Entscheidung:** keine – dieser Befund ist neu.
 
-- Heute in Zeile 10: 12 Monate – **ohne** Kennzeichnung
-- Heute in Zeile 39: 10 % – **ohne** Kennzeichnung
+- Heute in Zeile 11: 12 Monate – **ohne** Kennzeichnung
+- Heute in Zeile 40: 10 % – **ohne** Kennzeichnung
 
 ### `a4ff01e649b789f19e6a`
 
@@ -1468,18 +1468,18 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 **Frühere Entscheidung:** keine – dieser Befund ist neu.
 
-- Heute in Zeile 58: 40 € – gekennzeichnet („beispielwert“)
+- Heute in Zeile 59: 40 € – gekennzeichnet („beispielwert“)
 
 ## `2026-10-02-weihnachten-budget-planen-ohne-schulden-durch-die-feiertage`
 
-- Datei-SHA256 (heute): `2c141caae55b489122997642cdc9f39776edb009773dc4f220c0c31032f89d83`
+- Datei-SHA256 (heute): `8e44b7f68ca004bef7da2b3f8d558395f85c10e0f1b4d250e9bda17daf40876b`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `58f03a64adaaf8125959` | praezision | 2026-11-11 · 2. Entscheidung | 0,4 % in Zeile 59 gekennzeichnet | Während der Artikel vor hohen Kosten für Festmenüs warnt, liegt die Preissteigerung bei Nahrungsmitteln laut Destatis… |
-| `a7f5f01ef15a38839a0d` | praezision | 2026-11-11 · 2. Entscheidung | 10 % in Zeile 26 ohne Kennzeichnung · 14,9 % in Zeile 59 gekennzeichnet | Die Pauschale für 'Anreise und Mobilität' (10 % des Budgets) berücksichtigt nicht die überdurchschnittliche Preisstei… |
-| `bcc2bdf06220d5097133` | luecke | 2026-11-11 · 2. Entscheidung | 600 € in Zeile 59 gekennzeichnet · 2,8 % in Zeile 59 gekennzeichnet | Die Modellrechnung für das Weihnachtsbudget (600 €) lässt die aktuelle Teuerungsrate unberücksichtigt. Laut Statistis… |
+| `58f03a64adaaf8125959` | praezision | 2026-11-11 · 2. Entscheidung | 0,4 % in Zeile 60 gekennzeichnet | Während der Artikel vor hohen Kosten für Festmenüs warnt, liegt die Preissteigerung bei Nahrungsmitteln laut Destatis… |
+| `a7f5f01ef15a38839a0d` | praezision | 2026-11-11 · 2. Entscheidung | 10 % in Zeile 27 ohne Kennzeichnung · 14,9 % in Zeile 60 gekennzeichnet | Die Pauschale für 'Anreise und Mobilität' (10 % des Budgets) berücksichtigt nicht die überdurchschnittliche Preisstei… |
+| `bcc2bdf06220d5097133` | luecke | 2026-11-11 · 2. Entscheidung | 600 € in Zeile 60 gekennzeichnet · 2,8 % in Zeile 60 gekennzeichnet | Die Modellrechnung für das Weihnachtsbudget (600 €) lässt die aktuelle Teuerungsrate unberücksichtigt. Laut Statistis… |
 
 ### `58f03a64adaaf8125959`
 
@@ -1489,7 +1489,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 7f8e2a19d909): Die verlangte Quelle steht im Abschnitt „Welche Modellrechnung zeigt dir die passende Wochenrate?“ inline – „Zur Einordnung der Preise: Die Inflation lag im Oktober 2026 bei +2,8 %, Nahrungsmittel verteuerten sich mit +0,4 % deutlich schwächer, Energie dagegen mit +14,9 % stark ([Destatis“. Der Befund trifft die heutige Fassung damit nicht mehr.
 
-- Heute in Zeile 59: 0,4 % – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 60: 0,4 % – gekennzeichnet („modellrechnung“)
 
 ### `a7f5f01ef15a38839a0d`
 
@@ -1499,8 +1499,8 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 7f8e2a19d909): Die verlangte Quelle steht im Abschnitt „Welche Modellrechnung zeigt dir die passende Wochenrate?“ inline – „Zur Einordnung der Preise: Die Inflation lag im Oktober 2026 bei +2,8 %, Nahrungsmittel verteuerten sich mit +0,4 % deutlich schwächer, Energie dagegen mit +14,9 % stark ([Destatis“. Der Befund trifft die heutige Fassung damit nicht mehr.
 
-- Heute in Zeile 26: 10 % – **ohne** Kennzeichnung
-- Heute in Zeile 59: 14,9 % – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 27: 10 % – **ohne** Kennzeichnung
+- Heute in Zeile 60: 14,9 % – gekennzeichnet („modellrechnung“)
 
 ### `bcc2bdf06220d5097133`
 
@@ -1510,19 +1510,19 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 7f8e2a19d909): Die verlangte Quelle steht im Abschnitt „Welche Modellrechnung zeigt dir die passende Wochenrate?“ inline – „Zur Einordnung der Preise: Die Inflation lag im Oktober 2026 bei +2,8 %, Nahrungsmittel verteuerten sich mit +0,4 % deutlich schwächer, Energie dagegen mit +14,9 % stark ([Destatis“. Der Befund trifft die heutige Fassung damit nicht mehr.
 
-- Heute in Zeile 59: 600 € – gekennzeichnet („modellrechnung“)
-- Heute in Zeile 59: 2,8 % – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 60: 600 € – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 60: 2,8 % – gekennzeichnet („modellrechnung“)
 
 ## `2026-10-07-7-gewohnheiten-fuer-finanzielle-freiheit`
 
-- Datei-SHA256 (heute): `3fc8165ccd2874656d1ef2bed5e9287a350953f854a42100fa6f61e5eb1360c1`
+- Datei-SHA256 (heute): `fb646bb7e5e532c73754783dce04dfd5a28c0340ab9926afbced682e034128d8`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
 | `25d6b9a720f981e8e9df` | praezision | **neu** | nicht mehr im Text: 0,4 % | Bei der Bewertung flexibler Kosten sollte die moderate Preisentwicklung bei Nahrungsmitteln (+0,4 %) den stark steige… |
 | `3693b612533c24dcd1ea` | luecke | **neu** | nicht mehr im Text: 12,2 % | Der Ratgeber empfiehlt die Prüfung von Stromverträgen, vernachlässigt aber den massiven Preistrend bei Energie von +1… |
-| `c877eeff8842942c0071` | praezision | **neu** | 2,8 % in Zeile 109 ohne Kennzeichnung | Die allgemeine Budget-Transparenz ist ohne Einbezug der Inflationsrate von 2,8 % unvollständig, da Preissteigerungen… |
+| `c877eeff8842942c0071` | praezision | **neu** | 2,8 % in Zeile 110 ohne Kennzeichnung | Die allgemeine Budget-Transparenz ist ohne Einbezug der Inflationsrate von 2,8 % unvollständig, da Preissteigerungen… |
 
 ### `25d6b9a720f981e8e9df`
 
@@ -1546,11 +1546,11 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 **Frühere Entscheidung:** keine – dieser Befund ist neu.
 
-- Heute in Zeile 109: 2,8 % – **ohne** Kennzeichnung
+- Heute in Zeile 110: 2,8 % – **ohne** Kennzeichnung
 
 ## `2026-10-07-campingurlaub-2026-clever-sparen-ohne-komfortverlust`
 
-- Datei-SHA256 (heute): `88ca7fb1343a19b3f8200a8522815bfc8b655ea2ae7cceb5ada66cd9d0a7fa35`
+- Datei-SHA256 (heute): `21bdd843e6acbca66ba73fb6fe0facf465a19d2173190efbc49210909f6f8b1c`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1591,7 +1591,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung`
 
-- Datei-SHA256 (heute): `965589b83b5d81d67d4d90985b36cff1237f73e9b789e569eed4b2a3a0c7052a`
+- Datei-SHA256 (heute): `6f7316934722121e5ad67d1c3daaec3b4a07f9d64b21bd0c71e46392d6b3358d`
 - Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1617,7 +1617,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-07-urlaub-sparen-7-clevere-wege-deine-kasse-zu-fuellen`
 
-- Datei-SHA256 (heute): `b2807b72b0094f8826a381e4eb4de3d8f9d832f7ad2df22e26bde1d11edc9a89`
+- Datei-SHA256 (heute): `23ca544a915d888f47181d95e19316afb6d35784d2d40e97d5a697e4991f191a`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1680,7 +1680,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken`
 
-- Datei-SHA256 (heute): `ee328ffb9e6ee8d6bf93681b33ab95d58a3bcbacf0ac686e778a4384ac168ccb`
+- Datei-SHA256 (heute): `24ae6886a4e363dd3551177e6b9bf4fddf9c7d8988ade633a568d9a758c13c26`
 - Offene Live-Befunde: **1**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1697,7 +1697,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-09-balkonkraftwerk-foerderung-so-holst-du-dir-geld-zurueck`
 
-- Datei-SHA256 (heute): `eaa6d3e9d039bc366296ef265fdb46fda2239544bc6255a3f0c32bbbd8b306ce`
+- Datei-SHA256 (heute): `b6fd0b71ea464eca46d849c9f2cdfe034eb8d934ede4a0cafa43eb8ec030a989`
 - Offene Live-Befunde: **2**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1723,7 +1723,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt`
 
-- Datei-SHA256 (heute): `1e88c2006fa3a9ba0c8b7ed8e8ee9108fac88c79327a0a219a7d9a260f0e5c6f`
+- Datei-SHA256 (heute): `31866ba4a8eabafec77dad0bbdcd2759efdd00f6d5f0609d836c5aa7699041bf`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -1884,16 +1884,16 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-12-waermepumpe-vs-gasheizung-2026-so-entscheidest-du-richtig`
 
-- Datei-SHA256 (heute): `197070d2efbb97e76c5ce0411a0bf432917628988af2893a4536e349743c152c`
+- Datei-SHA256 (heute): `669a643e0796e2a80f663f424812d8fcc97d5086b7c9e0a2c927e2b9ddab33fe`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
 | `34e4bb2acfa235699da5` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Der Artikel erwähnt keinen regulatorischen Rahmen (z. B. Bundesnetzagentur) obwohl diese Institution für Strom‑ und G… |
-| `42b9d842341d892d42d0` | luecke | 2026-11-04 · 1. Entscheidung | 70 % in Zeile 9 gekennzeichnet | Angaben zu staatlichen Zuschüssen (bis zu 70 %) und deren Auswirkung auf den Eigenanteil fehlen eine Quellenangabe. |
+| `42b9d842341d892d42d0` | luecke | 2026-11-04 · 1. Entscheidung | 70 % in Zeile 10 gekennzeichnet | Angaben zu staatlichen Zuschüssen (bis zu 70 %) und deren Auswirkung auf den Eigenanteil fehlen eine Quellenangabe. |
 | `866d8b711dc2de369444` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Hinweis, dass ein spezieller Stromtarif für Wärmepumpen die Kosten senkt, wird nicht durch eine Quelle belegt. |
 | `bd4c46a336f33a639f05` | luecke | 2026-11-04 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Preisannahmen für Strom (30 ¢/kWh), Gas (10 ¢/kWh) und CO₂‑Aufschlag (5 ¢/kWh) werden ohne belegbare Daten präsentiert. |
-| `e76768fdef3ef5afa026` | luecke | 2026-11-04 · 1. Entscheidung | 12 Jahre in Zeile 10 ohne Kennzeichnung | Die behauptete Amortisationsdauer von 10‑12 Jahren für eine Wärmepumpe basiert auf einer Modellrechnung ohne nachweis… |
+| `e76768fdef3ef5afa026` | luecke | 2026-11-04 · 1. Entscheidung | 12 Jahre in Zeile 11 ohne Kennzeichnung | Die behauptete Amortisationsdauer von 10‑12 Jahren für eine Wärmepumpe basiert auf einer Modellrechnung ohne nachweis… |
 
 ### `34e4bb2acfa235699da5`
 
@@ -1913,7 +1913,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Preisannahmen als Modellrechnung mit Annahmen gekennzeichnet; Förderhinweis (bis 70 %) mit Quellenangabe versehen; Wärmepumpen-Tarif relativiert; Regulierungsrahmen Bundesnetzagentur erwähnt.
 
-- Heute in Zeile 9: 70 % – gekennzeichnet („beispielrechnung“)
+- Heute in Zeile 10: 70 % – gekennzeichnet („beispielrechnung“)
 
 ### `866d8b711dc2de369444`
 
@@ -1943,7 +1943,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Preisannahmen als Modellrechnung mit Annahmen gekennzeichnet; Förderhinweis (bis 70 %) mit Quellenangabe versehen; Wärmepumpen-Tarif relativiert; Regulierungsrahmen Bundesnetzagentur erwähnt.
 
-- Heute in Zeile 10: 12 Jahre – **ohne** Kennzeichnung
+- Heute in Zeile 11: 12 Jahre – **ohne** Kennzeichnung
 
 ## `2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick`
 
@@ -2001,7 +2001,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto`
 
-- Datei-SHA256 (heute): `9ab70b87bad318fd8a6bef03d89f807fb1c7e8b923762254d71d17b77cb8ec4d`
+- Datei-SHA256 (heute): `8f2b6943ed1c731c0d259a96ed04022f884253fb781989bf7e535f2f5cac3601`
 - Offene Live-Befunde: **4**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2046,7 +2046,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-24-energieeffizienz-im-haushalt-5-schnelle-spartricks`
 
-- Datei-SHA256 (heute): `1eb2c14bdb0035fbd75bf4d6d70f565c9dd027c0dbf1ec8218fc7e7f2813763e`
+- Datei-SHA256 (heute): `73a1d3a9ac4ec613dadb2df34b9f320fabe8a2caa960026699a25371e5d90c06`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2117,12 +2117,12 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen`
 
-- Datei-SHA256 (heute): `381cb2511aa268afb8d9cec01298809d7d5a1b92b756225fd391340fdfc69153`
+- Datei-SHA256 (heute): `16e6720319cb21931ce63fd53358d2cabb03d8a91031e51ce91fec318e946637`
 - Offene Live-Befunde: **3**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
-| `98eb45f772ad7a0aac7b` | luecke | 2026-11-11 · 1. Entscheidung | 500 € in Zeile 67 gekennzeichnet · 120 € in Zeile 26 gekennzeichnet · 80 € in Zeile 25 gekennzeichnet | Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt im Text Referenzwerte (120 € Strom, 80 € Kfz), für… |
+| `98eb45f772ad7a0aac7b` | luecke | 2026-11-11 · 1. Entscheidung | 500 € in Zeile 68 gekennzeichnet · 120 € in Zeile 27 gekennzeichnet · 80 € in Zeile 26 gekennzeichnet | Das Sparversprechen von '500 € mehr' in der PIN-Beschreibung nutzt im Text Referenzwerte (120 € Strom, 80 € Kfz), für… |
 | `b7f0d52968d89cdf8c5b` | praezision | 2026-11-11 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Die Einschätzung zur Datensicherheit von Cashback-Apps bleibt ohne Nennung konkreter rechtlicher Grundlagen (DSGVO) u… |
 | `be911855d67f998be662` | luecke | 2026-11-11 · 1. Entscheidung | kein Wert genannt (Aussage/Präzision) | Der Ratgeber nennt keinen Regulierungsrahmen für Reisebuchungen (z. B. Fluggastrechte oder Stornierungsregeln), obwoh… |
 
@@ -2134,9 +2134,9 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Am heutigen Text geprüft (SHA-256 f5cf5ca16db6): Die Zahl steht weiterhin im Artikel, ist aber ausdrücklich als Modell-/Beispielwert gekennzeichnet: „**Beispielrechnung:** Die angenommenen Einsparungen betragen 120 € im Jahr für Strom, 25 € pro Monat für ungenutzte Abos und 80 € im Jahr für die Kfz‑Versicherung, insgesamt 500 € nach zwölf“. Beanstandet war die Zahl OHNE Kennzeichnung; das trifft nicht mehr zu.
 
-- Heute in Zeile 67: 500 € – gekennzeichnet („modellrechnung“)
-- Heute in Zeile 26: 120 € – gekennzeichnet („modellrechnung“)
-- Heute in Zeile 25: 80 € – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 68: 500 € – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 27: 120 € – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 26: 80 € – gekennzeichnet („modellrechnung“)
 
 ### `b7f0d52968d89cdf8c5b`
 
@@ -2160,7 +2160,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege`
 
-- Datei-SHA256 (heute): `8d7e7c392218db444aaf917e1da151ba5f65100379d587307ce38d8220a780ac`
+- Datei-SHA256 (heute): `c770d4230abc0f325a9cd56ded2529b1703604eb11582726e92418d15ebf6e92`
 - Offene Live-Befunde: **4**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
@@ -2204,16 +2204,16 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 ## `2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang`
 
-- Datei-SHA256 (heute): `86433b45f0cdac4721347a9f1b8ec352ee8ac7cb82a1dad8ebe7a85703d5cc42`
+- Datei-SHA256 (heute): `4cd2ff447deb42c9f98bf472e107a643d84336405d4a97f6a726ec6702fe1c74`
 - Offene Live-Befunde: **5**
 
 | Befund | Typ | Frühere Entscheidung | Betroffene Werte heute | Befund |
 |---|---|---|---|---|
 | `4284fd2d9c9005e7af8f` | praezision | 2026-11-12 · 3. Entscheidung | kein Wert genannt (Aussage/Präzision) | Behauptung, dass Überladung der Maschine zu schnellerem Verschleiß und teuren Reparaturen führt, wird ohne konkrete D… |
 | `84e247f17354e224c973` | praezision | 2026-11-12 · 3. Entscheidung | kein Wert genannt (Aussage/Präzision) | Aussage, dass das richtige Beladen allein die Fixkosten senkt, ohne weitere Maßnahmen, ist ein pauschales Leistungsve… |
-| `a2a7dc69f10393af6531` | luecke | 2026-11-12 · 3. Entscheidung | nicht mehr im Text: 0,40 €, 0,005 € · 0,9 kWh in Zeile 18 gekennzeichnet · 0,6 kWh in Zeile 119 ohne Kennzeichnung · 22 € in Zeile 116 ohne Kennzeichnung | Die Modellrechnung (0,9 kWh/50 L bei vollem Waschgang, 0,6 kWh/35 L bei halbem Waschgang, Strompreis 0,40 €/kWh, Wass… |
-| `cb794331f1cc0c715a55` | luecke | 2026-11-12 · 3. Entscheidung | 5 € in Zeile 18 gekennzeichnet | Die Aussage, dass bei 4 Waschgängen pro Woche ein durchschnittlicher Haushalt rund 5 € jährlich an Strom‑ und Wasserk… |
-| `e6729081522126e972c2` | luecke | 2026-11-12 · 3. Entscheidung | nicht mehr im Text: 15 % · 80 % in Zeile 129 gekennzeichnet | Angabe, dass ein optimal beladener Trommel (ca. 80 % Kapazität) bis zu 15 % weniger Wasser und Energie verbraucht, wi… |
+| `a2a7dc69f10393af6531` | luecke | 2026-11-12 · 3. Entscheidung | nicht mehr im Text: 0,40 €, 0,005 € · 0,9 kWh in Zeile 19 gekennzeichnet · 0,6 kWh in Zeile 120 ohne Kennzeichnung · 22 € in Zeile 117 ohne Kennzeichnung | Die Modellrechnung (0,9 kWh/50 L bei vollem Waschgang, 0,6 kWh/35 L bei halbem Waschgang, Strompreis 0,40 €/kWh, Wass… |
+| `cb794331f1cc0c715a55` | luecke | 2026-11-12 · 3. Entscheidung | 5 € in Zeile 19 gekennzeichnet | Die Aussage, dass bei 4 Waschgängen pro Woche ein durchschnittlicher Haushalt rund 5 € jährlich an Strom‑ und Wasserk… |
+| `e6729081522126e972c2` | luecke | 2026-11-12 · 3. Entscheidung | nicht mehr im Text: 15 % · 80 % in Zeile 130 gekennzeichnet | Angabe, dass ein optimal beladener Trommel (ca. 80 % Kapazität) bis zu 15 % weniger Wasser und Energie verbraucht, wi… |
 
 ### `4284fd2d9c9005e7af8f`
 
@@ -2244,9 +2244,9 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 > Paket A, entschieden am 12.11.2026: Die Modellrechnung ist heute vollständig offengelegt (Annahmen, Rechenwege, „Ergebnis der Modellrechnung“). Der frühere Beleg (Bundesnetzagentur-Startseite) trug keinen der Werte; er ist durch die BDEW-Strompreisanalyse ersetzt, die im Artikel als Q3 zitiert ist und den Strompreis von 0,373 €/kWh trägt. Die Wasser- und Verbrauchswerte bleiben als Szenario gekennzeichnet.
 
 - Im heutigen Text nicht mehr vorhanden: 0,40 €, 0,005 €
-- Heute in Zeile 18: 0,9 kWh – gekennzeichnet („modellrechnung“)
-- Heute in Zeile 119: 0,6 kWh – **ohne** Kennzeichnung
-- Heute in Zeile 116: 22 € – **ohne** Kennzeichnung
+- Heute in Zeile 19: 0,9 kWh – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 120: 0,6 kWh – **ohne** Kennzeichnung
+- Heute in Zeile 117: 22 € – **ohne** Kennzeichnung
 
 ### `cb794331f1cc0c715a55`
 
@@ -2256,7 +2256,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 
 > Paket A, entschieden am 12.11.2026: Die alte „rund 5 € im Modelljahr“-Aussage existiert nicht mehr; der Artikel rechnet 100 volle gegen 200 halbe Ladungen und kommt auf 28 bis 42 € pro Jahr – ausgewiesen als Ergebnis der Modellrechnung. Beleg für den Preisanteil ist die BDEW-Strompreisanalyse (Q3 im Artikel).
 
-- Heute in Zeile 18: 5 € – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 19: 5 € – gekennzeichnet („modellrechnung“)
 
 ### `e6729081522126e972c2`
 
@@ -2267,7 +2267,7 @@ Kein Zahlenwert – die Beanstandung betrifft Aussage/Präzision.
 > Paket A, entschieden am 12.11.2026: Die „bis zu 15 %“-Angabe ist entfallen. Der Artikel nennt seine Annahmen und sagt in der Kurzantwort ausdrücklich, dass es eine Rechnung mit Quellenwerten und keine Messung im Haushalt ist. Beleg: BDEW-Strompreisanalyse (Q3); Verbrauchswerte sind als Quelle bzw. Szenario benannt.
 
 - Im heutigen Text nicht mehr vorhanden: 15 %
-- Heute in Zeile 129: 80 % – gekennzeichnet („modellrechnung“)
+- Heute in Zeile 130: 80 % – gekennzeichnet („modellrechnung“)
 
 ---
 

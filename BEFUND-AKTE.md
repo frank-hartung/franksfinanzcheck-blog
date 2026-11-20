@@ -8,7 +8,7 @@ _Stand 2026-11-20 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 |---|---|
 | Offene Befunde | 275 |
 | Seiten betroffen | 72 (davon live: 46) |
-| Text seit dem Befund geändert | 247 |
+| Text seit dem Befund geändert | 250 |
 | Altbestand ohne Fassungs-Hash | 15 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
 | Über der Frist (14 Tage) | 115 |
@@ -32,7 +32,7 @@ _Stand 2026-11-20 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 262 von 275 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 265 von 275 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -1248,6 +1248,22 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden c858896722ed308b027
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden cd38bc25c828bedd7b72 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung` · nicht im Live-Bestand · 3 Befund(e)
+
+Seite: `2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `2841f905d6afd6b62283` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Artikel nutzt einen Pauschalpreis von 30 Cent/kWh als Marktfakt ohne Quellenbeleg. Referenzwerte für den Energiemarkt unterliegen der Aufsicht der Bundesnetzagentur. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `517fa8859b484cd76465` | luecke | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der relevante Regulierungsrahmen für den Energiemarkt und die damit verbundenen Unternehmenspflichten gegenüber Verbrauchern werden nicht erwähnt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+| `e11e305aefae61e25820` | praezision | 1 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Empfehlung eines einzelnen Portals zur Prüfung von Förderungen oder Tarifen suggeriert eine Marktvollständigkeit, die ohne Nennung von Auswahlkriterien unpräzise ist. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2841f905d6afd6b62283 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 517fa8859b484cd76465 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden e11e305aefae61e25820 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-10-28-dsl-und-internet-flat-guenstig-sichern` · nicht im Live-Bestand · 5 Befund(e)
 
 Seite: `2026-10-28-dsl-und-internet-flat-guenstig-sichern`
@@ -1266,22 +1282,6 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden d0a5cf7bb64eb0cd46c
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ec53e181336df8dc61ac --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden f3f9184bfca9b097f68e --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden fb4d2260f4fa291c35ae --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung` · nicht im Live-Bestand · 3 Befund(e)
-
-Seite: `2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `2841f905d6afd6b62283` | luecke | 1 T | Text unverändert seit dem Befund | Der Artikel nutzt einen Pauschalpreis von 30 Cent/kWh als Marktfakt ohne Quellenbeleg. Referenzwerte für den Energiemarkt unterliegen der Aufsicht der Bundesnetzagentur. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `517fa8859b484cd76465` | luecke | 1 T | Text unverändert seit dem Befund | Der relevante Regulierungsrahmen für den Energiemarkt und die damit verbundenen Unternehmenspflichten gegenüber Verbrauchern werden nicht erwähnt. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-| `e11e305aefae61e25820` | praezision | 1 T | Text unverändert seit dem Befund | Die Empfehlung eines einzelnen Portals zur Prüfung von Förderungen oder Tarifen suggeriert eine Marktvollständigkeit, die ohne Nennung von Auswahlkriterien unpräzise ist. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 2841f905d6afd6b62283 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 517fa8859b484cd76465 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden e11e305aefae61e25820 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `internet-dsl` · nicht im Live-Bestand · 2 Befund(e)

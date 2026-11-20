@@ -1,11 +1,11 @@
 {
-  "erzeugt": "2026-11-20T02:39:11Z",
+  "erzeugt": "2026-11-20T12:14:19Z",
   "stichtag": "2026-11-20",
   "offen": 275,
   "seiten": 72,
   "live_seiten": 46,
   "live_befunde": 172,
-  "ueberholt": 247,
+  "ueberholt": 250,
   "ohne_fassung": 15,
   "seite_fehlt": 0,
   "nicht_entscheidbar": 0,
@@ -2820,6 +2820,39 @@
       "nicht_entscheidbar_grund": ""
     },
     {
+      "slug": "2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung",
+      "id": "2841f905d6afd6b62283",
+      "typ": "luecke",
+      "text": "Der Artikel nutzt einen Pauschalpreis von 30 Cent/kWh als Marktfakt ohne Quellenbeleg. Referenzwerte für den Energiemarkt unterliegen der Aufsicht der Bundesnetzagentur.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 1,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung",
+      "id": "517fa8859b484cd76465",
+      "typ": "luecke",
+      "text": "Der relevante Regulierungsrahmen für den Energiemarkt und die damit verbundenen Unternehmenspflichten gegenüber Verbrauchern werden nicht erwähnt.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 1,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung",
+      "id": "e11e305aefae61e25820",
+      "typ": "praezision",
+      "text": "Die Empfehlung eines einzelnen Portals zur Prüfung von Förderungen oder Tarifen suggeriert eine Marktvollständigkeit, die ohne Nennung von Auswahlkriterien unpräzise ist.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
+      "alter_tage": 1,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
       "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
       "id": "47f855cb4f0fe1e5c65f",
       "typ": "luecke",
@@ -3045,39 +3078,6 @@
       "typ": "praezision",
       "text": "Die Empfehlung, nur Automaten von Banken und nicht von Aufstellern in Touristenzonen zu nutzen, ist unspezifisch und nicht durch Daten belegt.",
       "beleg": "",
-      "alter_tage": 1,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung",
-      "id": "2841f905d6afd6b62283",
-      "typ": "luecke",
-      "text": "Der Artikel nutzt einen Pauschalpreis von 30 Cent/kWh als Marktfakt ohne Quellenbeleg. Referenzwerte für den Energiemarkt unterliegen der Aufsicht der Bundesnetzagentur.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 1,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung",
-      "id": "517fa8859b484cd76465",
-      "typ": "luecke",
-      "text": "Der relevante Regulierungsrahmen für den Energiemarkt und die damit verbundenen Unternehmenspflichten gegenüber Verbrauchern werden nicht erwähnt.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
-      "alter_tage": 1,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung",
-      "id": "e11e305aefae61e25820",
-      "typ": "praezision",
-      "text": "Die Empfehlung eines einzelnen Portals zur Prüfung von Förderungen oder Tarifen suggeriert eine Marktvollständigkeit, die ohne Nennung von Auswahlkriterien unpräzise ist.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/start.html",
       "alter_tage": 1,
       "fassung_status": "aktuell",
       "entscheidbar": true,
