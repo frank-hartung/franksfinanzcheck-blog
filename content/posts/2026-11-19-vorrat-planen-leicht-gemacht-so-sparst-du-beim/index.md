@@ -70,3 +70,6 @@ Wähle ein häufig gekauftes Lebensmittel. Notiere Bestand, gekaufte Menge und P
 Steht eine Reise bevor, verkürze den Planungszeitraum. Kaufe Frisches nur bis zur Abfahrt und nutze vorhandene Zutaten zuerst. Ein dauerhaft voller Kühlschrank ist nicht das Ziel; ein Vorrat, der zu deinem Kalender passt, schon.
 
 **Weiterlesen:** Der [Ratgeber zu Großeinkauf und Vorrat](../../posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/) zeigt, wie Lagerkosten und Verbrauch die Rechnung verändern.
+
+
+**Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)

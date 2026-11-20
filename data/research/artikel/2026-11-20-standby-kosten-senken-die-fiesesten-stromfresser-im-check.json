@@ -1,0 +1,42 @@
+{
+  "slug": "2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check",
+  "titel": "Standby Kosten senken: Die fiesesten Stromfresser im Check",
+  "erzeugt": "2026-11-20 09:36 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 0,
+    "klasse": "YMYL",
+    "grund": "Erstrecherche – noch nie faktengeprüft",
+    "alter_tage": null,
+    "intervall": 45,
+    "frist": null,
+    "restlaufzeit": null
+  },
+  "geo": {
+    "punkte": 4,
+    "maximum": 6,
+    "prozent": 67,
+    "offen": [
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
+      "Sichtbares Prüfdatum (`faktencheck:`)"
+    ],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": false,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": false
+    }
+  },
+  "treffer": [],
+  "befunde": [],
+  "fehler": [
+    "Bundesnetzagentur – Pressemitteilungen: Abruf fehlgeschlagen (HTTP Error 404: 404)",
+    "Verbraucherzentrale – Energie: Abruf fehlgeschlagen (HTTP Error 404: Not Found)",
+    "bundesnetzagentur.de: Jina-Reader-Abruf fehlgeschlagen (HTTP Error 401: Unauthorized)"
+  ],
+  "fassung_sha256": "29f3300b6cb2da8465738861dbb6f86022aefc39f66363c4faeed27b19cdafbf",
+  "text_sha256": "caedf694f23e97b9d68242222b470a8d605032b5ffa2014e2f0cf84a79d600ed",
+  "fachpruefung": "übersprungen (keine Fundstellen)"
+}

@@ -283,7 +283,7 @@ Nur bei Anzeichen wie Gluckern oder einem oben kühl bleibenden Heizkörper. Kom
 Das hängt von Gebäude und Anlage ab. Maßgeblich sind Sollbereich am Gerät und Herstellerunterlagen, nicht ein pauschaler Internetwert.
 
 ### Darf ich die Heizkurve selbst ändern?
-Wenn du Eigentümer bist, die Anleitung kennst und Änderungen dokumentierst, sind kleine Schritte möglich. Bei Unsicherheit übernimmt ein Fachbetrieb.
+Wenn du Eigentümer bist, die Anleitung kennst und [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) dokumentierst, sind kleine Schritte möglich. Bei Unsicherheit übernimmt ein Fachbetrieb.
 
 ### Spart der Check garantiert einen festen Prozentsatz?
 Nein. Er kann unnötige Verluste und Defekte aufdecken. Die Wirkung hängt vom Ausgangszustand ab.

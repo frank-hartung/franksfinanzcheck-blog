@@ -8,7 +8,7 @@ tags: ["DSL-Vergleich", "Internet und Mobilfunk", "WLAN verbessern", "DNS und Ne
 categories: ["Ratgeber"]
 pillar: "internet-dsl"
 author: "Frank Hartung"
-keywords: ["Internet tuning kostenlos", "DNS wechseln tutorial", "Schneller surfen", "DNS Sicherheit", "Internet-Tuning"]
+keywords: ["Internet tuning kostenlos", "DNS wechseln tutorial", "Schneller surfen", "DNS Sicherheit", "Internet-Tuning", "Internet-Tuning kostenlos", "DSL-Vergleich"]
 pinwand: Internet & DSL | WLAN-Tipps & Tarife
 pin_title: "Internet-Tuning für 0 €: DNS-Server wechseln Schritt für Schritt"
 pin_description: "*Werbung | Das beste Upgrade für dein Internet kostet nichts: Mit dem richtigen DNS-Server starten Seiten schneller, Streaming läuft stabiler und deine Daten sind besser geschützt. Unsere Bild-für-Bild-Anleitung führt dich durch jedes Gerät. Jetzt ausprobieren!"
@@ -31,13 +31,20 @@ cover:
     verfahren: "generate_covers.py (Pillow, deterministisch)"
     sha256: ca86d510020f9a808bbb43d94ba7233227d332de7225c52f46bce82a61aefa4b
     geprueft_am: 2026-11-20
+quellen:
+  - id: "Q1"
+    titel: "Glasfaserausbau: „Kupfer steht halt im Weg“"
+    url: "https://www.heise.de/news/Glasfaserausbau-Kupfer-steht-halt-im-Weg-11531556.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag"
+    herausgeber: "heise online"
+    datum: "2026-11-19"
+faktencheck: 2026-11-20
 ---
 
 Stell dir vor, du hast einen schnellen Sportwagen, aber der Navigationsdienst schickt dich ständig über Feldwege. Genau das passiert oft in deinem Heimnetzwerk. Dein Anbieter stellt dir zwar eine schnelle Leitung bereit. Doch die interne Wegbeschreibung zu den Webseiten ist oft langsam und veraltet. Das Ergebnis: Du wartest trotz teurem Tarif Sekunden, bis sich eine Seite aufbaut. Hier hilft **Internet-Tuning kostenlos**, indem du einfach die digitale Auskunft deines Anschlusses wechselst. In diesem Artikel erfährst du, warum das so wichtig ist und wie du typische Fehler [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/).
 
 Warum bremst der Standard-DNS deines Anbieters dein Internet aus?
 Wie findest du den schnellsten DNS-Server für deinen Standort?
-Welche Fehler solltest du beim Internet-Tuning unbedingt vermeiden?
+[Welche Fehler](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) solltest du beim Internet-Tuning unbedingt vermeiden?
 
 **Das Wichtigste in Kürze**
 * **Geschwindigkeit:** Ein DNS-Wechsel verkürzt die Antwortzeiten beim Aufruf von Webseiten spürbar.
@@ -56,7 +63,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Wenn du eine Adresse wie "google.de" in deinen Browser tippst, kann dein Computer damit erst einmal nichts anfangen. Er benötigt die IP-Adresse, eine lange Zahlenfolge. Der DNS-Server (Namensauflösung) fungiert hierbei als das Telefonbuch des Internets. Er schlägt die Adresse nach und sagt deinem Browser, wo er hinfahren muss. 
 
-Standardmäßig nutzt dein Router den Server deines Internetanbieters. Diese Server sind oft überlastet oder technisch nicht auf dem neuesten Stand. Wenn die Auskunft lange braucht, verzögert sich der gesamte Seitenaufbau. **Internet-Tuning kostenlos** bedeutet, dass du diese langsame Auskunft gegen eine schnellere Alternative austauschst. Das kostet dich keinen Cent, bringt aber oft einen spürbaren Effekt beim **schneller surfen**.
+Standardmäßig nutzt dein Router den Server deines Internetanbieters. Diese Server sind oft überlastet oder technisch nicht auf dem neuesten Stand. Wenn die Auskunft lange braucht, verzögert sich der gesamte Seitenaufbau. **Internet-Tuning kostenlos** bedeutet, dass du diese langsame Auskunft gegen eine schnellere Alternative austauschst. Das [kostet dich](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) keinen Cent, bringt aber oft einen spürbaren Effekt beim **schneller surfen**.
 
 Viele Nutzer denken bei Optimierung sofort an teure Repeater oder neue Verträge. Doch oft liegt die Bremse in der Software-Konfiguration. Ein DNS-Wechsel ist eine der effektivsten Methoden, um das Maximum aus deiner bestehenden Leitung herauszuholen. Dabei greifst du nicht in die Hardware ein, sondern optimierst lediglich den Kommunikationsweg.
 
@@ -108,7 +115,7 @@ Damit dein **DNS wechseln Tutorial** gelingt, gehen wir den Weg über den Router
 
 1. Öffne deinen Browser und gib die Adresse deines Routers ein (z. B. fritz.box).
 2. Logge dich mit deinem Passwort ein und navigiere zum Menüpunkt "Internet" und dann "Zugangsdaten".
-3. Suche den Reiter "DNS-Server". Hier steht meistens "Vom Internetanbieter zugewiesene DNSv4-Server verwenden".
+3. Suche den Reiter "DNS-Server". Hier steht meistens "Vom [Internetanbieter](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/) zugewiesene DNSv4-Server verwenden".
 4.  Wähle "Andere DNSv4-Server verwenden" und trage bei Bevorzugter DNS-Server die `1.1.1.1` ein.
 5.  Trage beim Alternativen DNS-Server die `1.0.0.1` ein (wichtig für die Ausfallsicherheit).
 6. Speichere die Einstellungen und starte den Router gegebenenfalls neu.
@@ -122,7 +129,7 @@ Nach diesem Vorgang nutzen alle Geräte in deinem Haushalt die neue, schnellere 
 
 ## Was kostet ein DNS-Wechsel wirklich?
 
-Die kurze Antwort lautet: Nichts außer fünf Minuten deiner Zeit; das ist ein Beispielwert. Es gibt keine versteckten Gebühren. Die großen Anbieter wie Google, Cloudflare oder Quad9 stellen diese Dienste kostenlos zur Verfügung. Du finanzierst dich meist über die Datenanalyse (bei Google) oder durch das Ziel, das Internet insgesamt schneller und sicherer zu machen (bei Cloudflare).
+Die kurze Antwort lautet: Nichts außer [fünf Minuten](../../posts/2026-09-20-finanzieller-puffer-wie-viel-notgroschen-ist-genug/) deiner Zeit; das ist ein Beispielwert. Es gibt keine versteckten Gebühren. Die großen Anbieter wie Google, Cloudflare oder Quad9 stellen diese Dienste kostenlos zur Verfügung. Du finanzierst dich meist über die Datenanalyse (bei Google) oder durch das Ziel, das Internet insgesamt schneller und sicherer zu machen (bei Cloudflare).
 
 Wenn du den 4K-Prüfpfad von Franks Fixkosten-Kompass anwendest, sieht die Rechnung so aus:
  Der DNS-Dienst selbst kostet 0 €; das ist ein Modellwert.
@@ -130,7 +137,7 @@ Wenn du den 4K-Prüfpfad von Franks Fixkosten-Kompass anwendest, sieht die Rechn
 * **Kündigungsfenster sichern:** Hier gibt es keine Fristen. Du kannst den DNS-Server sekündlich ändern oder zurücksetzen.
 * **Kurs halten:** Prüfe einmal im Quartal mit einem Speedtest, ob deine Leitung noch die versprochene Leistung bringt.
 
- Ein Wechsel von 50 Mbit/s auf 100 Mbit/s kostet monatlich oft 10 € bis 15 € mehr; das ist ein Rechenbeispiel. In einer Modellrechnung über 24 Monate wären das Zusatzkosten von 240 € bis 360 €. Wenn das Problem aber an der Namensauflösung liegt, bringt der teurere Tarif kaum Besserung beim Seitenaufbau. Das DNS-Tuning spart dir hier also indirekt sehr viel Geld, weil du den teuren Upgrade-Wunsch vermeidest.
+ Ein Wechsel von 50 Mbit/s auf 100 Mbit/s kostet monatlich oft 10 € bis 15 € mehr; das ist ein Rechenbeispiel. In einer Modellrechnung über 24 Monate wären das Zusatzkosten von 240 € bis 360 €. Wenn das Problem aber an der Namensauflösung liegt, bringt der teurere Tarif kaum Besserung beim Seitenaufbau. Das DNS-Tuning spart dir hier also indirekt sehr viel Geld, weil du den teuren Upgrade-Wunsch [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/).
 
 ## Welche DNS-Server bieten die beste DNS Sicherheit?
 

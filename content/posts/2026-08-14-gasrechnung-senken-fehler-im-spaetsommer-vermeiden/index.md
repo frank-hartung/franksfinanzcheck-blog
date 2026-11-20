@@ -59,7 +59,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ![Merkkarte: Kernaussagen zu Gasrechnung senken: Welche Fehler lassen sich vor](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „Gasrechnung senken: Welche Fehler lassen sich vor“ (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „[Gasrechnung senken](../../posts/2026-09-20-gasrechnung-senken-spaetsommer-check-spart-hunderte-euro/): Welche Fehler lassen sich vor“ (eigene Darstellung aus diesem Beitrag).*
 
 
 ## Starte mit einem kleinen Check
@@ -188,7 +188,7 @@ Eines noch: Du darfst die Effekte nicht einfach addieren. Lies den Zähler jeden
 
 ![Gliederung des Beitrags: Gasrechnung senken: Welche Fehler lassen sich vor](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „Gasrechnung senken: Welche Fehler lassen sich vor“ – 5 Stationen von „Starte mit einem kleinen Check“ bis „Fehler 4: Den Heizungs-Check bis zum ersten Frost verschieben“ (eigene Darstellung).*
+*Abbildung: Gliederung zu „Gasrechnung senken: Welche Fehler lassen sich vor“ – 5 Stationen von „Starte mit einem kleinen Check“ bis „Fehler 4: Den [Heizungs-Check](../../posts/2026-09-11-guenstig-durch-den-winter-heizungs-check-im-spaetsommer/) bis zum ersten Frost verschieben“ (eigene Darstellung).*
 
 
 ## Dein Spätsommer-Check in 45 Minuten

@@ -1,0 +1,54 @@
+{
+  "slug": "2026-11-20-internet-tuning-kostenlos-mehr-speed-fuer-dein-wlan",
+  "titel": "Internet-Tuning kostenlos: Mehr Speed für dein WLAN",
+  "erzeugt": "2026-11-20 09:36 UTC",
+  "faellig": {
+    "faellig": true,
+    "prio": 0,
+    "klasse": "standard",
+    "grund": "Erstrecherche – noch nie faktengeprüft",
+    "alter_tage": null,
+    "intervall": 90,
+    "frist": null,
+    "restlaufzeit": null
+  },
+  "geo": {
+    "punkte": 4,
+    "maximum": 6,
+    "prozent": 67,
+    "offen": [
+      "Belegkette im Frontmatter (`quellen:` → citation-Schema)",
+      "Sichtbares Prüfdatum (`faktencheck:`)"
+    ],
+    "treffer": {
+      "kurzantwort": true,
+      "faq": true,
+      "quellen": false,
+      "zahlen": true,
+      "tabelle": true,
+      "faktencheck": false
+    }
+  },
+  "treffer": [
+    {
+      "titel": "Glasfaserausbau: „Kupfer steht halt im Weg“",
+      "url": "https://www.heise.de/news/Glasfaserausbau-Kupfer-steht-halt-im-Weg-11531556.html?wt_mc=rss.red.ho.ho.atom.beitrag.beitrag",
+      "datum": "2026-11-19T17:09",
+      "quelle": "heise online",
+      "kanal": "rss",
+      "auszug": "Der Digitalminister wartet auf seinen Glasfaseranschluss. Vor Branchenvertretern in Berlin lobt Wildberger die Ausbau-Fortschritte, übt aber auch Selbstkritik.",
+      "score": 1,
+      "belegfaehig": true,
+      "herausgeber": "heise online",
+      "rang": 3,
+      "zitierbar": false
+    }
+  ],
+  "befunde": [],
+  "fehler": [
+    "bundesnetzagentur.de: Jina-Reader-Abruf fehlgeschlagen (HTTP Error 401: Unauthorized)"
+  ],
+  "fassung_sha256": "c3cfa949000c0852450fb02bb8cf4bd05e97f5ea93bf1283fa73db15d4bd6846",
+  "text_sha256": "c736f17c4827d08b88c1e491fa3e2257697f5f2d0196249f43a55cc10201e16c",
+  "fachpruefung": "geprüft (groq:openai/gpt-oss-120b)"
+}

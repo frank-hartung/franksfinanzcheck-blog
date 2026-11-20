@@ -52,7 +52,7 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 Viele Menschen denken, ein Gerät sei aus, wenn der Bildschirm schwarz ist. Das ist oft ein Irrtum. Moderne Technik befindet sich meist in einem Bereitschaftsmodus. Das Gerät wartet auf ein Signal der Fernbedienung oder hält die WLAN-Verbindung aufrecht. Dieser Zustand verbraucht permanent Energie. Wir sprechen hier von der sogenannten Grundlast. Das ist die Menge an Strom, die dein Haus verbraucht, selbst wenn du schläfst.
 
-Oft sind es veraltete Netzteile, die warm werden, obwohl kein Gerät lädt. Diese Wärme ist pure Energieverschwendung. Du bezahlst für Hitze, die du nicht brauchst. In der Summe ergeben diese kleinen Posten einen beachtlichen Gesamtbetrag. Wenn du deine Fixkosten senken willst, ist das der erste logische Schritt. Es ist der Bereich "Kosten sehen" in meinem 4K-Prüfpfad. Du musst erst einmal verstehen, wohin dein Geld fließt. Erst dann kannst du handeln.
+Oft sind es veraltete Netzteile, die warm werden, obwohl kein Gerät lädt. Diese Wärme ist pure Energieverschwendung. Du bezahlst für Hitze, die du nicht brauchst. In der Summe ergeben diese kleinen Posten einen beachtlichen Gesamtbetrag. Wenn du deine [Fixkosten senken](../../posts/2026-09-11-50-30-20-regel-beherrsche-dein-budget-im-jahr-2026/) willst, ist das der erste logische Schritt. Es ist der Bereich "Kosten sehen" in meinem 4K-Prüfpfad. Du musst erst einmal verstehen, wohin dein Geld fließt. Erst dann kannst du handeln.
 
 Die Technik hat sich zwar verbessert. Es gibt EU-Verordnungen für den Standby-Verbrauch neuer Geräte. Doch viele Haushalte nutzen ältere Schätze. Die Stereoanlage aus den 90ern oder der alte Zweit-Fernseher im Schlafzimmer sind oft wahre Energiefresser. Du stammst aus einer Zeit, in der Strom billig war. Heute sieht die Welt anders aus. Jede Kilowattstunde zählt für dein Budget.
 
@@ -62,7 +62,7 @@ Das Aufspüren dieser Diebe ist kein Hexenwerk. Du brauchst kein Studium der Ele
 
 Ein weiterer Trick ist der Blick auf den Stromzähler. Schalte alle offensichtlichen Lichter aus. Gehe zum Zähler und beobachte die Anzeige. Wenn die Zahlen sich immer noch schnell drehen, hast du ein Problem. **Nun kannst du die Sicherung für das Backup ausschalten.** So grenzt du den Bereich ein. Das ist Detektivarbeit, die sich am Ende bar auszahlt.
 
-Besonders tückisch sind Geräte mit externen Netzteilen. Diese schwarzen Kästen am Kabel ziehen oft Strom, solange sie in der Dose stecken. Selbst wenn das Handy gar nicht am Ladekabel hängt. Fühle mal an die Netzteile. Sind sie warm? Dann verbrauchen sie Strom. Das ist eine der einfachsten Methoden, um **Stromfresser entlarven** zu können.
+Besonders tückisch sind Geräte mit externen Netzteilen. Diese schwarzen Kästen am Kabel ziehen oft Strom, solange sie in der Dose stecken. Selbst wenn das Handy gar nicht am Ladekabel hängt. Fühle mal an die Netzteile. Sind sie warm? Dann verbrauchen sie Strom. Das ist eine der einfachsten Methoden, um **[Stromfresser entlarven](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/)** zu können.
 
 ## Die 5 schlimmsten Dauerverbraucher im Check
 
@@ -78,7 +78,7 @@ Computer, Monitore und Drucker sind oft dauerhaft im Standby. Ein Drucker, der n
 Diese Geräte müssen oft laufen. Aber brauchen sie nachts die volle Sendeleistung? Viele Router bieten eine Zeitsteuerung an. Damit schaltet sich das WLAN nachts aus. Das spart nicht nur Strom, sondern reduziert auch die Funkbelastung. Wenn du mehrere Repeater im Haus hast, summiert sich dieser Verbrauch schnell.
 
 ### 4. Küchengeräte mit Display
-Die Kaffeemaschine, die Mikrowelle oder der Backofen – viele haben heute eine Uhranzeige. Diese Displays brauchen Energie. Das ist zwar pro Gerät wenig, aber die Masse macht es. Wenn du in der Küche fünf Uhren hast, die alle unterschiedliche Zeiten anzeigen, ist das unnötig. Hier ist das Potenzial zum **Geräte abschalten sparen** besonders groß, da diese Dinge oft nur kurz genutzt werden.
+Die [Kaffeemaschine](../../posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/), die Mikrowelle oder der Backofen – viele haben heute eine Uhranzeige. Diese Displays brauchen Energie. Das ist zwar pro Gerät wenig, aber die Masse macht es. Wenn du in der Küche fünf Uhren hast, die alle unterschiedliche Zeiten anzeigen, ist das unnötig. Hier ist das Potenzial zum **Geräte abschalten sparen** besonders groß, da diese Dinge oft nur kurz genutzt werden.
 
 ### 5. Alte Kühlgeräte
 Zwar kein klassischer Standby, aber ein massiver **Dauerverbraucher**: Die alte Gefriertruhe im Keller. Du springst immer wieder an, um die Temperatur zu halten. Wenn die Dichtungen alt sind, arbeitet sie sich zu Tode. Solche Geräte sind oft die größten Einzelposten auf der Rechnung. Hier lohnt sich oft ein Austausch gegen ein modernes A-Klasse-Modell.
@@ -199,7 +199,7 @@ Besonders Kinder verstehen schnell, dass Energie wertvoll ist. Wenn sie lernen, 
  Neue Geräte dürfen im einfachen Standby oft nur noch 0,5 Watt verbrauchen; das ist ein Rechenbeispiel. Geräte mit Netzwerkverbindung (WLAN) dürfen etwas mehr verbrauchen. Das Problem sind meist die alten Geräte, die noch in vielen Haushalten stehen und vor diesen Regeln gebaut wurden.
 
 ### Schadet häufiges Ein- und Ausschalten meinen Geräten?
-In der Regel nicht. Moderne Schaltnetzteile sind für viele Schaltzyklen ausgelegt. Die Ausnahme sind, wie erwähnt, OLED-Fernseher oder Geräte, die langwierige Boot-Vorgänge haben (wie manche Smart-Home-Zentralen). Für die meisten Haushaltsgeräte ist das komplette Trennen vom Netz völlig unbedenklich.
+In der Regel nicht. Moderne Schaltnetzteile sind für viele Schaltzyklen ausgelegt. Die Ausnahme sind, wie erwähnt, OLED-Fernseher oder Geräte, die langwierige Boot-Vorgänge haben (wie manche Smart-Home-Zentralen). Für die meisten [Haushaltsgeräte](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/) ist das komplette Trennen vom Netz völlig unbedenklich.
 
 ### Lohnt sich der Kauf von smarten Steckdosen zum Stromsparen?
  Eine [smarte Steckdose](../../posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/) braucht etwa 0,5 bis 1 Watt für die eigene WLAN-Verbindung; das ist eine Modellannahme. Wenn sie ein Gerät ausschaltet, das vorher 10 Watt verbraucht hat, sparst du effektiv 9 Watt. Bei Geräten, die nur 1 Watt verbrauchen, lohnt es sich kaum.
@@ -208,7 +208,7 @@ In der Regel nicht. Moderne Schaltnetzteile sind für viele Schaltzyklen ausgele
 Standby ist ein offizieller Bereitschaftsmodus. "Schein-Aus" bedeutet, dass das Gerät am Hauptschalter ausgeschaltet wurde, aber das Netzteil trotzdem weiter Strom zieht. Das merkst du oft daran, dass das Netzteil warm bleibt. Hier hilft nur das Ziehen des Steckers oder eine Steckdosenleiste.
 
 ### Sollte ich den Router nachts wirklich ausschalten?
-Das kommt darauf an. Wenn du nachts kein Telefon über das Internet nutzt und keine Smart-Home-Geräte hast, die eine Verbindung brauchen, kannst du ihn ausschalten. Viele Router bieten jedoch eine Zeitfunktion für das WLAN an. Das spart fast genauso viel Strom, lässt aber die Grundfunktionen des Routers aktiv. Das ist oft der beste Kompromiss.
+Das kommt darauf an. Wenn du nachts kein Telefon über das Internet nutzt und keine [Smart-Home-Geräte](../../posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/) hast, die eine Verbindung brauchen, kannst du ihn ausschalten. Viele Router bieten jedoch eine Zeitfunktion für das WLAN an. Das spart fast genauso viel Strom, lässt aber die Grundfunktionen des Routers aktiv. Das ist oft der beste Kompromiss.
 
 Handle jetzt und nimm deine [Stromkosten](../../posts/2026-10-23-stromkosten-senken-clevere-haushaltsgeraete-im-ueberblick/) unter die Lupe. Es ist eine der einfachsten Möglichkeiten, deine monatlichen Fixkosten sofort zu senken. Viel Erfolg beim Entlarven deiner heimlichen Verbraucher!
 

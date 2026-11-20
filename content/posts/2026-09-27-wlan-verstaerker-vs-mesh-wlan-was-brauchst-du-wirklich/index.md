@@ -1,6 +1,6 @@
 ---
 lastmod: 2026-10-13
-title: "DSL Hacks: Was passt zu deiner Wohnung?"
+title: "DSL Hacks: Was passt zu deiner Wohnung? – Schnelles"
 description: "DSL Hacks: Ein Funkloch in einem Zimmer oder schwaches WLAN auf mehreren Etagen? Prüfe Standort und Signal zum Router, bevor du Repeater oder…"
 date: 2026-09-28T01:05:48Z
 draft: false
