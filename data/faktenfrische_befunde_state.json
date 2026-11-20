@@ -1,11 +1,11 @@
 {
-  "erzeugt": "2026-11-20T13:39:04Z",
+  "erzeugt": "2026-11-20T20:45:54Z",
   "stichtag": "2026-11-20",
   "offen": 293,
   "seiten": 78,
   "live_seiten": 51,
   "live_befunde": 188,
-  "ueberholt": 250,
+  "ueberholt": 252,
   "ohne_fassung": 15,
   "seite_fehlt": 0,
   "nicht_entscheidbar": 0,
@@ -2859,6 +2859,28 @@
       "nicht_entscheidbar_grund": ""
     },
     {
+      "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
+      "id": "91894b9b1535765acdca",
+      "typ": "luecke",
+      "text": "Der Artikel versäumt es, den gesetzlichen Regulierungsrahmen (z. B. Entschädigung bei Wechselproblemen) zu nennen, obwohl die Fachseite der Aufsichtsbehörde als Beleg angeführt wird.",
+      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
+      "alter_tage": 0,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
+      "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
+      "id": "f7b9c93c6a9be1368b06",
+      "typ": "veraltet",
+      "text": "Die Einstufung von Glasfaser als teure 'Premium-Variante' ist überholt, da neue Schnäppchentarife den Markt preislich verändern.",
+      "beleg": "https://www.heise.de/ratgeber/Router-Vertragslaufzeit-Tempo-So-finden-Sie-den-richtigen-Glasfasertarif-11526708.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus",
+      "alter_tage": 0,
+      "fassung_status": "ueberholt",
+      "entscheidbar": true,
+      "nicht_entscheidbar_grund": ""
+    },
+    {
       "slug": "2026-08-14-sparen-im-herbst-die-besten-spartipps-fuer-die-goldene-jahreszeit",
       "id": "47f855cb4f0fe1e5c65f",
       "typ": "luecke",
@@ -3227,28 +3249,6 @@
       "typ": "luecke",
       "text": "Der Artikel ignoriert die regulatorisch und technisch relevante Kupfer-Glas-Migration, welche die langfristige Verfügbarkeit und den Wechselzwang von DSL-Anschlüssen maßgeblich beeinflusst.",
       "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 0,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
-      "id": "91894b9b1535765acdca",
-      "typ": "luecke",
-      "text": "Der Artikel versäumt es, den gesetzlichen Regulierungsrahmen (z. B. Entschädigung bei Wechselproblemen) zu nennen, obwohl die Fachseite der Aufsichtsbehörde als Beleg angeführt wird.",
-      "beleg": "https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html",
-      "alter_tage": 0,
-      "fassung_status": "aktuell",
-      "entscheidbar": true,
-      "nicht_entscheidbar_grund": ""
-    },
-    {
-      "slug": "2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause",
-      "id": "f7b9c93c6a9be1368b06",
-      "typ": "veraltet",
-      "text": "Die Einstufung von Glasfaser als teure 'Premium-Variante' ist überholt, da neue Schnäppchentarife den Markt preislich verändern.",
-      "beleg": "https://www.heise.de/ratgeber/Router-Vertragslaufzeit-Tempo-So-finden-Sie-den-richtigen-Glasfasertarif-11526708.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus",
       "alter_tage": 0,
       "fassung_status": "aktuell",
       "entscheidbar": true,

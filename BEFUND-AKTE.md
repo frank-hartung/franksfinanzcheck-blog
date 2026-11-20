@@ -8,7 +8,7 @@ _Stand 2026-11-20 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 |---|---|
 | Offene Befunde | 293 |
 | Seiten betroffen | 78 (davon live: 51) |
-| Text seit dem Befund geändert | 250 |
+| Text seit dem Befund geändert | 252 |
 | Altbestand ohne Fassungs-Hash | 15 |
 | Nicht entscheidbar (Seite fehlt) | 0 |
 | Über der Frist (14 Tage) | 115 |
@@ -32,7 +32,7 @@ _Stand 2026-11-20 · erzeugt von `scripts/faktenfrische_befund_akte.py` · Quell
 
 Ein neues `faktencheck`-Datum schließt **keinen** Befund (F4 ≠ F1). Und: Ein Befund ist an den **Text** gebunden, nicht an die Quellen – eine automatische Quellenpflege öffnet keine erledigte Entscheidung, eine Textänderung dagegen schon.
 
-> **Wichtig – betrifft 265 von 293 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
+> **Wichtig – betrifft 267 von 293 Befunden** (in der Tabelle als Fassung markiert): Der Text ist seit dem Befund bereits geändert worden (Heilung) oder stammt aus dem Altbestand. Die Entscheidung bezieht sich ausdrücklich auf den HEUTIGEN Text – bitte diesen lesen, nicht den alten Befund abnicken. Diese Prüfung kann dir die Maschine nicht abnehmen – sie darf sie aber auch nicht verhindern.
 
 ## Seiten
 
@@ -860,6 +860,20 @@ python3 scripts/faktenfrische_befund_ledger.py --entscheiden b2611d9120121d0ad78
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden fcb8168c18bd423c5180 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
+### `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` · **LIVE** · Risikoklasse standard · 2 Befund(e)
+
+Datei: `content/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/index.md`
+
+| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
+|---|---|---|---|---|---|
+| `91894b9b1535765acdca` | luecke | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Der Artikel versäumt es, den gesetzlichen Regulierungsrahmen (z. B. Entschädigung bei Wechselproblemen) zu nennen, obwohl die Fachseite der Aufsichtsbehörde als Beleg angeführt wird. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
+| `f7b9c93c6a9be1368b06` | veraltet | 0 T | Text seit dem Befund geändert – bitte den HEUTIGEN Text prüfen | Die Einstufung von Glasfaser als teure 'Premium-Variante' ist überholt, da neue Schnäppchentarife den Markt preislich verändern. | [Quelle](https://www.heise.de/ratgeber/Router-Vertragslaufzeit-Tempo-So-finden-Sie-den-richtigen-Glasfasertarif-11526708.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus) |
+
+```bash
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden 91894b9b1535765acdca --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+python3 scripts/faktenfrische_befund_ledger.py --entscheiden f7b9c93c6a9be1368b06 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
+```
+
 ### `2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke` · **LIVE** · Risikoklasse standard · 3 Befund(e)
 
 Datei: `content/posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/index.md`
@@ -906,20 +920,6 @@ Datei: `content/posts/2026-08-19-dsl-vergleich-so-findest-du-guenstigeres-intern
 ```bash
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden 991bda7b2298b751f4e6 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 python3 scripts/faktenfrische_befund_ledger.py --entscheiden ae71596724d7a243217b --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-```
-
-### `2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause` · **LIVE** · Risikoklasse standard · 2 Befund(e)
-
-Datei: `content/posts/2026-08-20-so-findest-du-den-richtigen-dsl-tarif-fuer-dein-zuhause/index.md`
-
-| Befund-ID | Typ | Alter | Fassung | Beanstandung | Beleg |
-|---|---|---|---|---|---|
-| `91894b9b1535765acdca` | luecke | 0 T | Text unverändert seit dem Befund | Der Artikel versäumt es, den gesetzlichen Regulierungsrahmen (z. B. Entschädigung bei Wechselproblemen) zu nennen, obwohl die Fachseite der Aufsichtsbehörde als Beleg angeführt wird. | [Quelle](https://www.bundesnetzagentur.de/DE/Fachthemen/Telekommunikation/start.html) |
-| `f7b9c93c6a9be1368b06` | veraltet | 0 T | Text unverändert seit dem Befund | Die Einstufung von Glasfaser als teure 'Premium-Variante' ist überholt, da neue Schnäppchentarife den Markt preislich verändern. | [Quelle](https://www.heise.de/ratgeber/Router-Vertragslaufzeit-Tempo-So-finden-Sie-den-richtigen-Glasfasertarif-11526708.html?wt_mc=rss.red.ho.ho.atom.beitrag_plus.beitrag_plus) |
-
-```bash
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden 91894b9b1535765acdca --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
-python3 scripts/faktenfrische_befund_ledger.py --entscheiden f7b9c93c6a9be1368b06 --von "<Name>" --begruendung "<was geprüft/geändert wurde>"
 ```
 
 ### `2026-10-30-kostenloses-girokonto-ohne-gebuehren-finden` · nicht im Live-Bestand · 5 Befund(e)

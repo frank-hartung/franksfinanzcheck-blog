@@ -5959,7 +5959,7 @@
       "faellig": true,
       "frist": null,
       "geo": 67,
-      "befund": false,
+      "befund": true,
       "unvollstaendig": true,
       "status": "unvollstaendig"
     }
@@ -5972,7 +5972,7 @@
       "faellig": true,
       "frist": null,
       "geo": 67,
-      "befund": false,
+      "befund": true,
       "unvollstaendig": true,
       "status": "unvollstaendig"
     }
