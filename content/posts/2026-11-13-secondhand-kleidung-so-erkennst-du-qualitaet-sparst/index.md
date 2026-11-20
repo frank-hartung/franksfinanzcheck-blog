@@ -50,7 +50,7 @@ Woran erkennst du hochwertige Materialien bei gebrauchten Stücken? Welche Mäng
 * **Material vor Marke:** Naturfasern wie Wolle, Seide oder Bio-Baumwolle halten oft länger als synthetische Mischgewebe.
 * **Verarbeitung prüfen:** Achte auf doppelte Nähte, fest vernähte Knöpfe und leichtgängige Metallreißverschlüsse.
 * **Fehler vermeiden:** Ignoriere niemals unangenehme Gerüche oder Anzeichen von Mottenfraß.
-* **Kosten senken:** Ein hochwertiges gebrauchtes Stück ersetzt oft mehrere Billigkäufe und senkt so langfristig deine Ausgaben.
+* **[Kosten senken](../../posts/2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check/):** Ein hochwertiges gebrauchtes Stück ersetzt oft mehrere Billigkäufe und senkt so langfristig deine Ausgaben.
 
 
 
@@ -90,7 +90,7 @@ Knöpfe aus echtem Horn oder Perlmutt verraten einen wertigen Hersteller. Halte 
 In meinem Fixkosten-Cockpit nutze ich den 4K-Prüfpfad. Dieses System lässt sich hervorragend auf deine Garderobe übertragen. Es hilft dir, Impulskäufe zu vermeiden und deine Ausgaben zu strukturieren.
 
 1. **Kosten sehen:** Erfasse zuerst deine Ausgaben für Mode. Addiere alle Einkäufe der letzten 12 Monate (Modellrechnung). Oft erschrecken wir über die Summe der vielen kleinen Beträge.
-2. **Konditionen rechnen:** Vergleiche den Preis mit der erwarteten Nutzungsdauer. Ein billiges Shirt für 10 € (Beispielrechnung), das nach fünf Wäschen kaputt ist, kostet dich mehr als ein gebrauchtes Markenshirt für 20 € (Rechenbeispiel), das fünf Jahre hält (Annahme).
+2. **Konditionen rechnen:** Vergleiche den Preis mit der erwarteten Nutzungsdauer. Ein billiges Shirt für 10 € (Beispielrechnung), das nach fünf Wäschen kaputt ist, [kostet dich](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) mehr als ein gebrauchtes Markenshirt für 20 € (Rechenbeispiel), das fünf Jahre hält (Annahme).
 3. **Kündigungsfenster sichern:** Trenne dich rechtzeitig von Dingen, die du nicht trägst. Verkaufe sie weiter, solange sie noch einen Wert haben. So refinanzierst du neue Anschaffungen.
 4. **Kurs halten:** Bleibe bei deinem Plan. Kaufe nur, was du [wirklich brauchst](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/). Ein Schnäppchen ist nur dann ein gutes Angebot – wenn es eine Lücke in deinem Schrank füllt.
 

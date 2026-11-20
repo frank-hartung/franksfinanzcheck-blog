@@ -39,9 +39,10 @@ faktenfrische_aliases:
 faktencheck: 2026-11-17
 ---
 
+
 [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Im Check: Stell dir eine Wohnung mit **90 Quadratmetern** (Beispiel) vor. Der Router steht im Flur hinter einer massiven Wand. Im Wohnzimmer direkt daneben streamt der Fernseher flüssig. Doch zwei Türen weiter, im Homeoffice, bricht die Verbindung ständig ab.
 
-Die Videokonferenz ruckelt und Downloads dauern Stunden. Viele Menschen wollen in solch einer Situation ihr **[WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/)**, um endlich überall stabil arbeiten zu können.
+Die Videokonferenz ruckelt und Downloads dauern Stunden. Viele Menschen wollen in solch einer Situation ihr **WLAN verbessern**, um endlich überall stabil arbeiten zu können.
 
 Oft stellt sich dann die Frage: Reicht ein einfacher **WLAN‑Verstärker** oder muss es ein teures Mesh‑System sein? Hier schauen wir uns die harten Fakten an. Wir prüfen, welche Technik deine Fixkosten schont und wie viel Leistung du für dein Geld wirklich bekommst.
 
@@ -82,7 +83,7 @@ Mesh bedeutet „Gewebe“. Alle Knotenpunkte sind miteinander vernetzt.
 
 Fällt ein Knoten aus, suchen sich die Daten einen anderen Weg. Das System steuert aktiv, welches Gerät mit welchem Knoten verbunden ist. Wenn du vom Wohnzimmer ins Schlafzimmer gehst, **übergibt** das System die Verbindung nahtlos.
 
-Diese Technik sorgt für **[schnelles Internet](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/) zu Hause**, weil sie Funklöcher effektiv stopft. Mesh‑Systeme nutzen oft ein drittes Funkband nur für die interne Kommunikation.
+Diese Technik sorgt für **schnelles Internet zu Hause**, weil sie Funklöcher effektiv stopft. Mesh‑Systeme nutzen oft ein drittes Funkband nur für die interne Kommunikation.
 
 So bleibt die volle Geschwindigkeit für deine Endgeräte erhalten. In einem Haus mit Stahlbetondecken ist das oft die einzige Lösung, die wirklich funktioniert. Die Einrichtung erfolgt meist bequem per App. Das spart Zeit und Nerven.
 
@@ -151,7 +152,7 @@ Wenn du dein Heimnetz optimieren willst, folge diesem Plan. So verhinderst du Fe
 1. **Ist‑Zustand messen:** Lade eine Speed‑Test‑App auf dein Handy. Messe die Geschwindigkeit direkt am Router und dann in jedem Raum. Notiere die Werte.
 2. **Hardware wählen:** Entscheide basierend auf der Modellrechnung und deiner Wohnfläche zwischen Mesh und Repeater.
 3. **Testphase nutzen:** Behalte die Verpackung. Teste die neue Hardware ausgiebig. Wenn das Signal im Arbeitszimmer immer noch schwach ist, passt das Modell nicht.
-4. **Tarif‑Check:** Manchmal liegt es nicht am WLAN. Wenn dein DSL‑Vertrag alt ist, hilft die beste Hardware nicht. Ein Blick in einen Vergleichsrechner zeigt dir, ob du für weniger Geld mehr [Bandbreite](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/) bekommst.
+4. **Tarif‑Check:** Manchmal liegt es nicht am WLAN. Wenn dein DSL‑Vertrag alt ist, hilft die beste Hardware nicht. Ein Blick in einen Vergleichsrechner zeigt dir, ob du für weniger Geld mehr Bandbreite bekommst.
 
 Hier kannst du prüfen, ob ein neuer Tarif sinnvoll ist: [DSL‑Anbieterwechsel vergleichen]
 
@@ -177,7 +178,7 @@ Prüfe einmal deine aktuellen Konditionen, halte den Unterschied schriftlich fes
 
 **Für deinen nächsten Check:** Prüfe die Leistung nicht nur direkt neben dem neuen Knoten. Der relevante Messpunkt ist der Schreibtisch oder Fernseher, an dem die Verbindung vorher stockte.
 
-**Weiterlesen:** [Ratgeber Internet DSL](../../pillar/internet-dsl/) **Lesetipp:** [Wie viel Streaming‑Bandbreite du wirklich brauchst](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/)
+**Weiterlesen:** [Ratgeber Internet DSL](../../pillar/internet-dsl/) **Lesetipp:** Wie viel Streaming‑Bandbreite du wirklich brauchst
 
 ## Häufige Fragen
 
@@ -196,7 +197,7 @@ Für Gaming ist ein Repeater oft kritisch, weil die Verzögerung (Ping) durch di
 ### Was mache ich, wenn das WLAN trotz Mesh schlecht bleibt?
 In diesem Fall sind meist die Wände das Problem. Stahlbeton oder Wasserleitungen blockieren Funkwellen fast vollständig. Hier hilft oft nur **Powerline** (Internet über die Steckdose) oder das Verlegen eines flachen Netzwerkkabels unter der Fußleiste. Viele Mesh‑Knoten lassen sich auch per Kabel verbinden (LAN‑Backhaul), was die Leistung massiv steigert.
 
-Wer seine Fixkosten im Griff behalten will, prüft regelmäßig alle Verträge. Das WLAN ist nur ein Teil der Kette. Ein schneller Anschluss ist die Basis für alles Weitere. Nutze die Möglichkeiten, um dein **[schnelles Internet](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/) zu Hause** voll auszuschöpfen, ohne unnötig viel Geld für Hardware auszugeben, die du nicht brauchst.
+Wer seine Fixkosten im Griff behalten will, prüft regelmäßig alle Verträge. Das WLAN ist nur ein Teil der Kette. Ein schneller Anschluss ist die Basis für alles Weitere. Nutze die Möglichkeiten, um dein **schnelles Internet zu Hause** voll auszuschöpfen, ohne unnötig viel Geld für Hardware auszugeben, die du nicht brauchst.
 
 ---
 

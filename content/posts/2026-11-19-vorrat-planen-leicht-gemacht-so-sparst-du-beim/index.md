@@ -59,9 +59,9 @@ Rechne rückwärts vom nächsten geplanten Einkauf. Wie viele Mahlzeiten esst ih
 
 ## Modellrechnung: Wenn der Mengenrabatt verschwindet
 
-Angenommen, du brauchst in vier Wochen 40 Portionen. Einzeln kosten sie 1 € pro Portion, in der Großpackung 0,90 €. Kaufst und verbrauchst du alle 40, zahlst du 36 € statt 40 €. Die Differenz beträgt 4 € **für diese vier Wochen**, nicht automatisch jeden Monat.
+Angenommen, du brauchst in vier Wochen 40 Portionen. Einzeln kosten sie 1 € pro Portion, in der Großpackung 0,90 €. Kaufst und verbrauchst du alle 40, zahlst du 36 € statt 40 €. Die Differenz beträgt 4 € **für diese vier Wochen**, nicht automatisch jeden Monat.
 
-Brauchst du nur 36 Portionen und musst vier entsorgen, ist der Vorteil weg: 36 einzelne Portionen kosten ebenfalls 36 €. Bleiben die übrigen vier dagegen haltbar und ersetzen später einen Einkauf, sind sie kein Verlust. Schreib also auf, was tatsächlich im Müll landet, nicht nur, was am Ende der Woche noch im Schrank steht.
+Brauchst du nur 36 Portionen und musst vier entsorgen, ist der Vorteil weg: 36 einzelne Portionen kosten ebenfalls 36 €. Bleiben die übrigen vier dagegen haltbar und ersetzen später einen Einkauf, sind sie kein Verlust. Schreib also auf, was tatsächlich im Müll landet, nicht nur, was am Ende der Woche noch im Schrank steht.
 
 ## Ein einfacher Test für den nächsten Einkauf
 

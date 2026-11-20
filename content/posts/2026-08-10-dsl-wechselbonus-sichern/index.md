@@ -43,6 +43,7 @@ quellen:
 faktencheck: 2026-11-19
 ---
 
+
 Ein DSL-Tarif mit Bonus kann im ersten Jahr günstiger sein und im zweiten deutlich mehr kosten. Lege die Rechnung deines bisherigen Anbieters neben das neue Angebot und markiere das Ende der Rabattphase.
 
 Ein Problem bleibt aber: Ein hoher Bonus auf dem Werbebanner sieht toll aus. Das macht den Tarif aber noch lange nicht zum Schnäppchen. Erst wenn du Bonus, Grundgebühr, Anschlusskosten und Laufzeit genau zusammenrechnest, siehst du die Wahrheit: Sparst du wirklich – oder zahlst du nur eine hübsch verpackte Startprämie selbst?

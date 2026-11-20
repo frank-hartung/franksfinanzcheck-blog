@@ -29,6 +29,7 @@ cover:
 pin_title: "Tagesgeld und Zinsen: So parkst du dein Geld sicher"
 pin_description: "*Werbung | Vergleiche Tagesgeld nicht allein nach dem Aktionszins. Notiere Gültigkeitsdauer, Anschlusszins und Bedingungen der Bank für deine Anlagesumme. Setze für den Zeitraum nach einem Aktionszins einen zweiten, niedrigeren Satz an. So erkennst du, ob das Angebot auch ohne eine dauerhaft hohe Verzinsung passt."
 faktencheck: 2026-11-15
+kurzantwort: "Ein Aktionszins von 2,5 % p.a. gilt häufig nur für 6 Monate und fällt danach auf den Anschlusszins von etwa 0,5 % p.a.; das gilt meist ab einer Anlagesumme von 10 000 €. Prüfe deshalb die Gültigkeitsdauer, den zu erwartenden Anschlusszins und die Mindest‑ bzw. Höchst‑Anlagesumme, bevor du dich entscheidest."
 ---
 
 Du hast etwas Geld übrig. Du willst es sicher parken. Und du willst Zinsen mitnehmen. Doch Angebote schwanken stark. Die Bedingungen stehen oft versteckt im Kleingedruckten. In diesem Ratgeber zeige ich dir den Weg. So findest du das passende Tagesgeld für deine Ziele. So erkennst du versteckte Kosten sofort. So schätzt du deine Rendite realistisch ein. Dein Geld soll für dich arbeiten, während du ruhig schläfst.

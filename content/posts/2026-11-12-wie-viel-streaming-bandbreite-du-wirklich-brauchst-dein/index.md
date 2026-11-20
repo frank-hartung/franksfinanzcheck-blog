@@ -43,7 +43,7 @@ faktenfrische_aliases:
   - "2026-11-10-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein"
 ---
 
-Wenn ein Film stockt, kommen der Internetanschluss, das heimische WLAN und der Streamingdienst als Ursachen infrage. Ein Tarifwechsel löst nur einen Teil dieser Probleme.
+Wenn ein Film stockt, kommen der Internetanschluss, das heimische WLAN und der Streamingdienst als Ursachen infrage. Ein [Tarifwechsel](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) löst nur einen Teil dieser Probleme.
 
 Miss die Geschwindigkeit zuerst per Netzwerkkabel und danach am Fernseher per WLAN. Erst wenn beide Messungen zu niedrig ausfallen, lohnt sich ein Blick auf den Tarif.
 
@@ -78,7 +78,7 @@ Ein wichtiger Punkt ist dein Router im Flur oder Wohnzimmer. Wenn die Technik al
 
 Ein weiterer Faktor ist die Auslastung in deiner Nachbarschaft. Zu Stoßzeiten am Abend nutzen viele Menschen gleichzeitig das Netz. Das kann die Raten für alle Nutzer im Haus oder im Viertel senken.
 
-Auch die Entfernung zum nächsten grauen Kasten auf der Straße spielt eine Rolle. Je länger der Weg des Kabels ist, desto weniger kommt bei dir an. Achte auch auf die Kabel in deiner Wohnung. Alte Leitungen bremsen moderne Anschlüsse oft massiv aus.
+Auch die Entfernung zum nächsten grauen Kasten auf der Straße spielt eine Rolle. Je länger der Weg des Kabels ist, desto weniger kommt bei dir an. Achte auch auf die Kabel in [deiner Wohnung](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/). Alte Leitungen bremsen moderne Anschlüsse oft massiv aus.
 
 ## Modellrechnung: Dein Bedarf für 4 K‑Streaming und Co.
 

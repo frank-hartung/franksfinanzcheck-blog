@@ -218,7 +218,7 @@ Möglich sind Entgelte, die im Preis- und Leistungsverzeichnis stehen. Prüfe de
 
 ### Was mache ich, wenn mein Konto im Minus war?
 
-Dann kläre zusätzlich, welche Kosten für die Überziehung angefallen sind. Diese Posten gehören in dieselbe Reklamation wie die auslösende Buchung.
+Dann kläre zusätzlich, [welche Kosten](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) für die Überziehung angefallen sind. Diese Posten gehören in dieselbe Reklamation wie die auslösende Buchung.
 
 ### Reicht ein Screenshot als Nachweis?
 

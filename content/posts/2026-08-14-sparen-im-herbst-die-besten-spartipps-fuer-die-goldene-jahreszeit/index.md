@@ -41,7 +41,7 @@ Beginne mit der Police: Welches Versicherungsjahr und welche Kündigungsfrist si
 
 Heizkostenverträge solltest du vor dem ersten Frost prüfen. Auch Versicherer passen jetzt ihre Tarife an.
 
-Wer clever vorgeht, kann beim **Sparen im Herbst** seine Haushaltskosten spürbar senken. Wie viel zusammenkommt, hängt von Verträgen, Verbrauch und Preisen ab – die Beispielrechnungen unten legen ihre Annahmen offen. Sieben Hebel entscheiden über den Erfolg. Wir zeigen sie dir [Schritt für Schritt](../../posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/).
+Wer clever vorgeht, kann beim **Sparen im Herbst** seine [Haushaltskosten](../../posts/2026-10-12-haushaltskosten-reduzieren-so-gewinnst-du-die-kontrolle/) spürbar senken. Wie viel zusammenkommt, hängt von Verträgen, Verbrauch und Preisen ab – die Beispielrechnungen unten legen ihre Annahmen offen. Sieben Hebel entscheiden über den Erfolg. Wir zeigen sie dir [Schritt für Schritt](../../posts/2026-10-12-dein-weg-zu-geringeren-monatskosten-schritt-fuer-schritt/).
 
 **Das Wichtigste in Kürze**
 
@@ -53,7 +53,7 @@ Wer clever vorgeht, kann beim **Sparen im Herbst** seine Haushaltskosten spürba
 
 ---
 
-💡 **Schnell‑Tipp von FranksFinanzcheck:** Überprüfe deine Absicherung und spare bei den großen Policen – allen voran der Kfz-Versicherung: [**Jetzt Kfz-Versicherung vergleichen**](/go/kfz-versicherung/)
+💡 **Schnell‑Tipp von FranksFinanzcheck:** Überprüfe deine Absicherung und spare bei den großen Policen – allen voran der Kfz-Versicherung: [**Jetzt Kfz-Versicherung vergleichen**](/go/kfz-versicherung/)  
 _(Dieser Artikel enthält Affiliate‑Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.)_
 
 ![Merkkarte: Kernaussagen zu Sparen im Herbst: Spartipps für die goldene Jahreszeit](abbildung-merkkarte.svg)
@@ -92,7 +92,7 @@ Bei einem unterjährigen Vertrag ist dein persönlicher Ablauftermin maßgeblich
 
 Bevor die Heizung dauerhaft läuft, entlüfte die Heizkörper. Lass auch die Heizkurve prüfen.
 
-Ein Rechenbeispiel: Bei angenommenen 2.000 € verbrauchsabhängigen Heizkosten im Jahr entsprechen 8 % weniger Verbrauch 160 €. Ob eine Änderung am Thermostat diesen Verbrauchsrückgang bewirkt, ist damit nicht gesagt. Der Grundpreis bleibt gleich.
+Ein Rechenbeispiel: Bei angenommenen 2.000 € verbrauchsabhängigen Heizkosten im Jahr entsprechen 8 % weniger Verbrauch 160 €. Ob eine Änderung am Thermostat diesen Verbrauchsrückgang bewirkt, ist damit nicht gesagt. Der Grundpreis bleibt gleich.
 
 **Konkrete Maßnahmen:**
 

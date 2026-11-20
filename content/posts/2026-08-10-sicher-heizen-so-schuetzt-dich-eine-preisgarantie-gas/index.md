@@ -94,7 +94,7 @@ Das Wort Garantie heißt nicht, dass der Endpreis fest steht. Viele Anbieter neh
 |---|---|---|
 | Energiepreisgarantie | Fixiert meist nur Beschaffung und Vertrieb | Sind auch der Grundpreis und die Netzentgelte stabil? |
 | eingeschränkte Preisgarantie | Bestimmte Kostenfaktoren sind fest, andere variabel | Welche konkreten Umlagen oder Steuern nennt die Klausel als Ausnahme? |
-| volle Preisgarantie | Maximaler Schutz vor Erhöhungen | Gibt es dennoch Vorbehalte, etwa bei extremen Änderungen der Umsatzsteuer? |
+| volle Preisgarantie | Maximaler Schutz vor Erhöhungen | Gibt es dennoch Vorbehalte, etwa bei extremen [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) der Umsatzsteuer? |
 
 Lass dich von Namen nicht blenden. Es zählt allein die Liste im Vertrag. Dort steht, welcher Teil des Preises wirklich fest ist.
 

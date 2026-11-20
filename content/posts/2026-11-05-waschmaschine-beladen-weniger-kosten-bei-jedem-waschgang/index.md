@@ -77,6 +77,7 @@ affiliate_exempt: true
 affiliate_exempt_reason: "Die passende Waschmaschinenbeladung hängt vom Programm ab, nicht vom Stromtarif."
 ---
 
+
 Zwei halbvolle Waschgänge lassen sich manchmal zusammenlegen. Ob das sinnvoll ist, hängt vom Programm, der Textilart und der dafür zulässigen Beladung ab.
 
 Viele Haushalte verschenken hier bares Geld durch falsches Befüllen.

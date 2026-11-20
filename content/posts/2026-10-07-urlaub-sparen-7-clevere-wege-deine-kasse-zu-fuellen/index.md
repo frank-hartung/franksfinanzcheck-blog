@@ -56,7 +56,7 @@ faktencheck: 2026-11-03
 kurzantwort: "Setze zuerst einen Gesamtbetrag für die Reise fest. Rechne Anfahrt, Unterkunft, Essen, Versicherungen und Ausgaben vor Ort zusammen. Vergleiche Angebote nach den Leistungen und Bedingungen, die du wirklich brauchst."
 ---
 
-Urlaub sparen heißt nicht, jede schöne Sache zu streichen. Es heißt, vor der Buchung zu wissen, was dir wichtig ist und was du dafür ausgeben kannst. Der erste angezeigte Preis ist selten die ganze Reise. Plane deshalb Fahrt, Unterkunft, Essen und mögliche Änderungen zusammen.
+Urlaub sparen heißt nicht, jede schöne Sache zu streichen. Es heißt, vor der Buchung zu wissen, was dir wichtig ist und was du dafür ausgeben kannst. Der erste angezeigte Preis ist selten die ganze Reise. Plane deshalb Fahrt, Unterkunft, Essen und mögliche [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) zusammen.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
@@ -80,7 +80,7 @@ Ein Preisvergleich zeigt dir Angebote nebeneinander – ob Fahrzeuggröße, Koff
 
 Richte ein eigenes Sparziel ein. Du kannst Geld regelmäßig beiseitelegen, wenn es nach den nötigen Ausgaben übrig ist. Wähle einen Betrag, der sich auch in einem normalen Monat tragen lässt. Wenn deine Einnahmen schwanken, plane lieber mit einem kleineren festen Auftrag und ergänze ihn später freiwillig.
 
-Mach aus dem Ziel keinen Test deiner Disziplin. Wenn eine Rechnung dazwischenkommt, darfst du den Plan ändern. Prüfe dann, ob du den Reisezeitraum verschieben oder Kosten senken willst. Nimm kein Geld aus einer wichtigen Rücklage, nur damit die Buchung heute klappt.
+Mach aus dem Ziel keinen Test deiner Disziplin. Wenn eine Rechnung dazwischenkommt, darfst du den Plan ändern. Prüfe dann, ob du den Reisezeitraum verschieben oder [Kosten senken](../../posts/2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check/) willst. Nimm kein Geld aus einer wichtigen Rücklage, nur damit die Buchung heute klappt.
 
 Eine separate Reisekasse hilft, das übrige Geld nicht versehentlich auszugeben. Sie muss kein besonderes Konto sein. Wichtig ist, dass du den Zweck erkennst und die Bedingungen verstehst. Prüfe mögliche Kosten und Zugriff, bevor du ein neues Produkt eröffnest.
 
@@ -142,7 +142,7 @@ Eine Reserve muss nicht vollständig ausgegeben werden. Wenn sie nicht gebraucht
 
 ## Wie nutzt du den Plan nach der Reise?
 
-Sammle nach der Rückkehr deine Belege und Buchungen. Vergleiche sie mit deiner Liste. Markiere, was du geplant hattest und was neu dazu kam. So findest du heraus, welche Kosten du beim nächsten Mal früher prüfen willst.
+Sammle nach der Rückkehr deine Belege und Buchungen. Vergleiche sie mit deiner Liste. Markiere, was du geplant hattest und was neu dazu kam. So findest du heraus, [welche Kosten](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) du beim nächsten Mal früher prüfen willst.
 
 Werte nicht jeden Kauf als Fehler. Vielleicht war ein Umweg nötig oder ein schöner Abend das Geld wert.
 

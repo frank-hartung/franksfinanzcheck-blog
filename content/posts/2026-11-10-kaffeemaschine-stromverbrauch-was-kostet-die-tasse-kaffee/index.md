@@ -141,7 +141,7 @@ Ein häufiger Fehler ist die falsche Dosierung. Wer zu viel Pulver nutzt, wirft 
 
 Ein guter Kaffee schmeckt auch, wenn er nicht extrem stark gebrüht ist. Ein weiterer Fehler betrifft den **Kaffeemaschine Stromverbrauch**. Viele Nutzer schalten die Maschine nicht ganz aus. Der Standby-Modus verbraucht über das Jahr gesehen unnötig Energie.
 
-Vernachlässigte Pflege ist ebenfalls teuer. Kalk im Heizelement wirkt wie eine Isolierschicht. Die Maschine braucht dann länger zum Aufheizen und verbraucht mehr Strom. Im schlimmsten Fall geht das Gerät kaputt.
+Vernachlässigte Pflege ist ebenfalls teuer. Kalk im Heizelement wirkt wie eine Isolierschicht. Die Maschine braucht dann länger zum Aufheizen und verbraucht [mehr Strom](../../posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/). Im schlimmsten Fall geht das Gerät kaputt.
 
 Eine neue Anschaffung belastet dein Budget dann außerplanmäßig. In meinem 4K-Prüfpfad ist das der Punkt "Kündigungsfenster sichern" im übertragenen Sinne: Sichere die Lebensdauer deiner Geräte durch regelmäßige Wartung. Auch der Kauf von Spezialreiniger beim Hersteller ist oft ein teurer Fehler.
 

@@ -41,7 +41,7 @@ faktencheck: 2026-11-12
 
 Büroausstattung steuerlich clever absetzen: Das klingt nach Papierkrieg. Es sind aber nur drei Regeln. Schreibtisch, Monitor und Bürostuhl kosten im Jahr schnell ein paar hundert Euro.
 
-Vieles davon landet nie in der Steuererklärung. Mal fehlt der Beleg, mal weiß niemand, in welche Zeile die Ausgabe gehört. Hier liest du, was zählt, welche Grenzen gelten und welche Fehler das Finanzamt streicht.
+Vieles davon landet nie in der Steuererklärung. Mal fehlt der Beleg, mal weiß niemand, in welche Zeile die Ausgabe gehört. Hier liest du, was zählt, welche Grenzen gelten und [welche Fehler](../../posts/2026-08-14-gasrechnung-senken-fehler-im-spaetsommer-vermeiden/) das Finanzamt streicht.
 
 **Das Wichtigste in Kürze**
 

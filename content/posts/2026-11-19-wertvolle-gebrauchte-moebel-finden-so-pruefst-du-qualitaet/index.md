@@ -37,6 +37,7 @@ faktenfrische_aliases:
   - "2026-11-18-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet"
 ---
 
+
 Du stehst in einer Garage oder in einem staubigen Hinterhof. Vor dir steht ein Schrank. Er sieht auf den ersten Blick gut aus. Der Preis ist verlockend niedrig.
 
 Doch ist das Stück sein Geld wert? **Gebrauchte Möbel** zu kaufen ist eine Kunst für sich. Es geht um mehr als nur Optik. Es geht um die Substanz unter dem Lack. Wer hier genau hinschaut, spart langfristig viel Geld.
@@ -143,7 +144,7 @@ Bei lackierten Oberflächen ist der Aufwand höher. Du musst den alten Lack oft 
 * Rechnung: 150 (Wert) – 50 (Kauf) – 30 (Material) = 70 Einheiten Ersparnis durch Eigenleistung.
 * Ergebnis: Die Eigenleistung lohnt sich finanziell, wenn die Ersparnis den Zeitaufwand rechtfertigt.
 
-Wenn du hochwertige Materialien nutzt, hält das Ergebnis Jahrzehnte. Das ist nachhaltiger als jeder Neukauf. Du schaffst einen Wert, der bleibt. Das ist angewandter [Frugalismus](../../posts/2026-09-07-frugalismus-tipps-so-vermeidest-du-teure-alltagsfehler/) im Alltag.
+Wenn du hochwertige Materialien nutzt, hält das Ergebnis Jahrzehnte. Das ist nachhaltiger als jeder Neukauf. Du schaffst einen Wert, der bleibt. Das ist angewandter Frugalismus im Alltag.
 
 ## Qualitätsmerkmale im Überblick
 

@@ -163,7 +163,7 @@ Investierst du 30 € in neue LED-Lampen, hast du das Geld nach fünf Monaten z
 
 Rechne weitere Beispiele für deine eigene Situation durch. Schau auf deine letzte Abrechnung für die genauen Zahlen.
 
-Faustregel: Jede Investition, die sich in einem Jahr bezahlt macht, lohnt sich. Das ist eine Rendite, die kaum eine Bank bietet. Energie sparen ist also eine Form der Geldanlage. Je höher die Preise steigen, desto mehr sparst du.
+Faustregel: Jede Investition, die sich in einem Jahr bezahlt macht, lohnt sich. Das ist eine Rendite, die kaum eine Bank bietet. [Energie sparen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) ist also eine Form der Geldanlage. Je höher die Preise steigen, desto mehr sparst du.
 
 ## So gehst du vor: 4K-Prüfpfad für Energie sparen
 

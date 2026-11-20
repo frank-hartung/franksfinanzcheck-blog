@@ -38,6 +38,7 @@ faktenfrische_aliases:
   - "2026-11-18-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste"
 ---
 
+
 Es ist Dienstag am Abend. Dein Tag war lang.
 
 Im Kühlschrank brennt nur das Licht über einem halben Glas Pesto und welkem Salat. Wer jetzt hungrig in den Markt fährt oder Essen bestellt, zahlt fast immer drauf. Genau hier hilft dir ein klarer **Essensplan Woche**: Er nimmt dir am Feierabend den Druck ab, bremst teure Käufe aus Lust und Laune und bringt deine Vorräte auf den Teller statt in den Müll.
@@ -138,7 +139,7 @@ Mit unserem klaren Pfad in vier Schritten wird deine Planung schnell zur festen 
 **Für deinen nächsten Check:** Plane eine Mahlzeit ein, deren Zutaten sich verschieben lassen. Wenn ein Termin dazwischenkommt, kannst du frische Lebensmittel zuerst aufbrauchen.
 
 **Weiterlesen:** [Ratgeber Frugalismus](../../pillar/frugalismus/)
-**Lesetipp:** [Großeinkauf und Vorrat: Wann Bevorraten sich rechnet](../../posts/2026-09-30-grosseinkauf-und-vorrat-wann-bevorraten-sich-rechnet/)
+**Lesetipp:** Großeinkauf und Vorrat: Wann Bevorraten sich rechnet
 
 ## Häufige Fragen
 

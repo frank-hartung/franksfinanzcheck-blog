@@ -47,6 +47,7 @@ faktenfrische_aliases:
   - "2026-11-17-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten"
 ---
 
+
 Draußen sinken die Temperaturen. Im Briefkasten liegt die neue Abrechnung deines Versorgers. Der Blick auf die Nachzahlung löst oft Unbehagen aus. Viele Haushalte nehmen diese Kosten als gegeben hin.
 
 Doch das ist ein Fehler. Du kannst aktiv deinen **Gas-[Anbieter wechseln](../../posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/)** und so die Belastung für dein Budget [reduzieren](../../posts/2026-10-24-bankgebuehren-senken-7-schritte-zum-guenstigeren-konto/).
@@ -97,7 +98,7 @@ Ein weiterer Teil sind die Netzentgelte. Diese Kosten kann der Anbieter nicht be
 
 Der Arbeitspreis wird pro verbrauchter Kilowattstunde berechnet. Hier unterscheiden sich die Anbieter massiv. Ein kleiner Unterschied von wenigen Cent summiert sich bei hohem Verbrauch. In einer Modellrechnung für eine Wohnung mit 10.000 kWh Verbrauch spart ein Cent Preisunterschied bereits 100 € pro Jahr (Rechnung: 10.000 mal 0,01 €).
 
-Der Grundpreis ist eine fixe Gebühr. Er fällt unabhängig vom Verbrauch an. Er deckt die Kosten für die Abrechnung und den Zähler. **Für Single-Haushalte ist ein niedriger Grundpreis oft wichtiger als ein geringer Arbeitspreis.** Für Familien mit hohem Verbrauch ist es umgekehrt. Achte beim **Gas-[Anbieter wechseln](../../posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/)** also auf dein individuelles Profil.
+Der Grundpreis ist eine fixe Gebühr. Er fällt unabhängig vom Verbrauch an. Er deckt die Kosten für die Abrechnung und den Zähler. **Für Single-Haushalte ist ein niedriger Grundpreis oft wichtiger als ein geringer Arbeitspreis.** Für Familien mit hohem Verbrauch ist es umgekehrt. Achte beim **Gas-Anbieter wechseln** also auf dein individuelles Profil.
 
 ## So gehst du beim Wechsel vor
 
@@ -201,7 +202,7 @@ Nutze deine Macht als Konsument. Ein Wechsel signalisiert den Unternehmen, dass 
 **Für deinen nächsten Check:** Prüfe im neuen Vertrag, ab wann du beliefert werden sollst. Ein Wechselauftrag allein sagt noch nicht, wann die letzte Rechnung des bisherigen Anbieters kommt.
 
 **Weiterlesen:** [Ratgeber Strom Sparen](../../pillar/strom-sparen/)
-**Lesetipp:** [Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar](../../posts/2026-10-28-oekostrom-anbieter-wechseln-sicher-gruen-und-bezahlbar/)
+**Lesetipp:** Ökostrom Anbieter wechseln: Sicher, grün und bezahlbar
 
 ## Häufige Fragen
 

@@ -41,6 +41,7 @@ quellen:
 faktencheck: 2026-11-02
 ---
 
+
 Heizungs-Check im Check: Ein Heizkörper bleibt kalt, ein anderer gluckert. Bei einem Probelauf vor dem ersten Frost bleibt Zeit, solche Beobachtungen an den zuständigen Fachbetrieb oder die Hausverwaltung weiterzugeben.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -176,7 +177,7 @@ Typische Hinweise sind:
 - nahe Heizkörper sind überversorgt,
 - Strömungsgeräusche treten häufig auf,
 - die Anlage braucht hohe Pumpenleistung,
-- größere Änderungen am Heizsystem stehen an.
+- größere [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) am Heizsystem stehen an.
 
 Beim hydraulischen Abgleich findet ein Fachbetrieb die passende Wassermenge für jeden Heizkörper. Die BEG-Richtlinie 2026 nennt ihn neben Heizkurve, Pumpenleistung und Vorlauftemperatur als Teil der Heizungsoptimierung. Förder-Regeln ändern sich oft; prüfe sie vor dem Antrag neu.
 

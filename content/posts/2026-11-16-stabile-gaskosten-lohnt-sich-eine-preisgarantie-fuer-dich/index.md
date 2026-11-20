@@ -36,6 +36,7 @@ cover:
 faktencheck: 2026-11-16
 ---
 
+
 Der Briefkasten klappert. Du ziehst einen Umschlag heraus. Absender: Dein Energieversorger. Oft bedeutet das nichts Gutes für dein Konto.
 
 Die Kosten für Energie schwanken stark. Mal sinken sie, dann schießen sie plötzlich wieder nach oben. Viele Menschen fragen sich, wie sie ihre Fixkosten planen können. Eine **gas preisgarantie** bietet hier eine Lösung.
@@ -141,7 +142,7 @@ Dieses Fenster ist meist kurz. Wer die Post ungeöffnet liegen lässt, verpasst 
 **Typische Fehler im Überblick:**
 * **Zu kurze Garantie:** Du wählst nur 6 Monate Schutz und stehst im Winter vor einer Erhöhung; das ist ein Beispielwert.
 * **Bonus-Falle:** Du achtest nur auf den Einmalbonus, aber der Arbeitspreis ist extrem hoch.
-* **[Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) verpasst:** Der Vertrag verlängert sich automatisch zu schlechteren Konditionen.
+* **Kündigungsfrist verpasst:** Der Vertrag verlängert sich automatisch zu schlechteren Konditionen.
 * **Schätzung statt Ablesung:** Dein Abschlag ist zu hoch, weil dein Verbrauch falsch geschätzt wurde.
 * **Kleingedrucktes ignoriert:** Die Garantie gilt nur für 10 % des Gesamtpreises.
 
@@ -180,7 +181,7 @@ Es kommt auf deine Lebenssituation an. Wer in einer kleinen Wohnung lebt, hat ei
 
 Wenn du dich für eine **gas preisgarantie** entscheidest, lies genau nach. Steht dort "Nettopreisgarantie"? Dann können steigende Steuern deine Rechnung trotzdem erhöhen. Nur eine "Vollpreisgarantie" bietet maximalen Schutz.
 
-Diese ist aber oft deutlich teurer. Die meisten Kunden fahren mit einer eingeschränkten Preisgarantie am besten. Du deckst die [Energiekosten](../../posts/2026-10-09-energiekosten-senken-smarte-helfer-fuer-den-haushalt/) und Netzentgelte ab. Das sind die Teile, die am stärksten schwanken.
+Diese ist aber oft deutlich teurer. Die meisten Kunden fahren mit einer eingeschränkten Preisgarantie am besten. Du deckst die Energiekosten und Netzentgelte ab. Das sind die Teile, die am stärksten schwanken.
 
 ## Wie erkenne ich einen seriösen Anbieter?
 

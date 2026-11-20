@@ -287,7 +287,7 @@ Das hängt von der Karte und vom Netz ab. Viele Konten erlauben gratis Abheben a
 Nach § 22 ZKG übermittelt deine alte Bank der neuen deine Daueraufträge, die verfügbaren Lastschriftmandate und die Buchungen der letzten 13 Monate. Ab dem von dir bestimmten Datum führt die alte Bank keine Daueraufträge mehr aus und nimmt keine Lastschriften mehr an. Sag deinem Arbeitgeber und deinem Vermieter trotzdem selbst Bescheid.
 
 ### Lohnt sich der Wechsel nur wegen 5 € im Monat?
-Aus 5 € im Monat werden 60 € im Jahr; das ist ein Beispielwert. Der Wechsel kostet dich kaum Zeit und senkt deine festen Kosten dauerhaft.
+Aus 5 € im Monat werden 60 € im Jahr; das ist ein Beispielwert. Der Wechsel [kostet dich](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) kaum Zeit und senkt deine festen Kosten dauerhaft.
 
 ### Was kostet ein Kontowechsel?
 Der Wechsel selbst ist meistens gratis. Die neue Bank zieht viele Lastschriften selbst um. Prüfe nur die Schlussabrechnung deiner alten Bank.

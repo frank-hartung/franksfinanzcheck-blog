@@ -50,6 +50,7 @@ faktencheck: 2026-11-03
 kurzantwort: "Ein gutes Campingbudget erfasst mehr als den Stellplatz. Plane Anfahrt, mögliche Zusatzgebühren, Ausrüstung, Essen und einen Puffer getrennt. Vergleiche den Gesamtpreis mit deinen Bedürfnissen, nicht nur den Preis pro Nacht."
 ---
 
+
 Camping wirkt oft preiswert, solange du nur den Platz ansiehst. Zur Reise gehören aber auch Anfahrt, Essen, Ausrüstung und mögliche Gebühren vor Ort. Ein vollständiges Budget zeigt, was der Urlaub wirklich kostet. Es hilft dir auch, Komfort zu wählen, der zu dir passt.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -141,7 +142,7 @@ So kaufst du unterwegs weniger aus Zeitdruck.
 
 ![Gliederung des Beitrags: Campingurlaub planen: Budget für Platz und Fahrt](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „Campingurlaub planen: Budget für Platz und Fahrt“ – 5 Stationen von „Welche Kosten gehören in ein Campingbudget?“ bis „Welche Ausrüstung brauchst du wirklich?“ (eigene Darstellung).*
+*Abbildung: Gliederung zu „Campingurlaub planen: Budget für Platz und Fahrt“ – 5 Stationen von „[Welche Kosten](../../posts/2026-08-10-sicher-heizen-so-schuetzt-dich-eine-preisgarantie-gas/) gehören in ein Campingbudget?“ bis „Welche Ausrüstung brauchst du wirklich?“ (eigene Darstellung).*
 
 
 ## Wie planst du Fahrt und Essen ohne Schönrechnen?
@@ -156,7 +157,7 @@ Ein einfacher Plan senkt die Zahl der spontanen Einkäufe. Lass trotzdem Platz f
 
 Ein Budget darf echte Erholung enthalten.
 
-Nimm einen Puffer für kleine Änderungen mit. Wie hoch er ist, entscheidest du nach deinem Budget. Nutze dafür keine pauschale Prozentregel. Wenn der Puffer nicht gebraucht wird, bleibt er für die nächste Reise oder eine andere Rücklage verfügbar.
+Nimm einen Puffer für kleine [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) mit. Wie hoch er ist, entscheidest du nach deinem Budget. Nutze dafür keine pauschale Prozentregel. Wenn der Puffer nicht gebraucht wird, bleibt er für die nächste Reise oder eine andere Rücklage verfügbar.
 
 ## Welche Buchung passt zu deiner Reise?
 
@@ -220,7 +221,7 @@ Es gibt hier keinen belegten Einheitspreis. Hole für deinen Reisezeitraum ein k
 
 ### Wie halte ich Lebensmittel frisch?
 
-Kühle nur, was du [wirklich brauchst](../../posts/2026-11-12-wie-viel-streaming-bandbreite-du-wirklich-brauchst-dein/). Ein guter Kühler hält mehrere Tage. Kaufe frisch auf dem Weg ein. Tiefkühlware ist unterwegs oft unnötiger Ballast.
+Kühle nur, was du wirklich brauchst. Ein guter Kühler hält mehrere Tage. Kaufe frisch auf dem Weg ein. Tiefkühlware ist unterwegs oft unnötiger Ballast.
 
 ### Wie plane ich den Einkauf vor der Abreise?
 

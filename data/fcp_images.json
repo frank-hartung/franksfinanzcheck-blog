@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/fcp_image_optimizer.py",
-  "generatedAt": "2026-11-19T16:37:36+00:00",
+  "generatedAt": "2026-11-20T09:32:18+00:00",
   "strategy": {
     "goal": "Bildrequests dürfen Text-FCP/-LCP nicht verzögern; nur Artikelcover werden priorisiert.",
     "maxHighPriorityImagesPerPage": 1,
@@ -10,7 +10,7 @@
     "deferNonCriticalImages": true
   },
   "inputs": {
-    "lcpManifestPages": 88,
+    "lcpManifestPages": 90,
     "imageManifestSources": 132
   },
   "policies": [

@@ -50,6 +50,7 @@ quellen:
 kurzantwort: "Prüfe zuerst, welche Anschlüsse an deiner Adresse verfügbar sind. Vergleiche dann Upload, Download, Laufzeit und Gesamtpreis einschließlich Router. Ein Anbieterwechsel lohnt sich nur, wenn Preis und Leistung für deinen Haushalt besser passen."
 ---
 
+
 Du willst preiswert surfen? Dein Anschluss kostet viel, aber du nutzt das volle Tempo nie?
 
 Schuld ist selten der Anbieter. Schuld ist fast immer ein alter Vertrag.

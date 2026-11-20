@@ -43,7 +43,7 @@ quellen:
 faktencheck: "2026-10-13"
 ---
 
-Eine lange Trefferliste macht den DSL-Vergleich nicht einfacher. Streiche zuerst Angebote, die an deiner Adresse nicht verfügbar sind oder deinen Bedarf beim Upload nicht decken.
+Eine lange Trefferliste macht den [DSL-Vergleich](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/) nicht einfacher. Streiche zuerst Angebote, die an deiner Adresse nicht verfügbar sind oder deinen Bedarf beim Upload nicht decken.
 
 Ein unabhängiger **[DSL-Vergleich](../../posts/2026-10-02-preiswert-surfen-so-findest-du-den-optimalen-dsl-anschluss/)** bringt Licht ins Dunkel der Tarif-Dschungel; das ist ein Beispielwert. Diese Anleitung zeigt dir, wie du den echten Effektivpreis ermittelst, anstatt auf Marketing-Tricks hereinzufallen. Du erfährst, welche Bandbreite im aktuellen Jahr 2026 wirklich zu deinem digitalen Alltag passt und wie du über die gesamte Laufzeit hinweg bis zu ca. 300 € bis 400 € sparst.
 
@@ -65,9 +65,9 @@ _(Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen 
 
 ## Beispiel: 100 Mbit/s mit oder ohne lange Bindung?
 
-Angenommen, beide Anschlüsse liefern die für deinen Haushalt nötige Leistung. Tarif A ist monatlich kündbar, kostet 35 € pro Monat und einmalig 40 € für den Anschluss. Tarif B bindet dich 24 Monate: sechs Monate zu 20 €, danach 18 Monate zu 40 €, ohne Anschlussgebühr. Routerkosten fallen in diesem Modell nicht an.
+Angenommen, beide Anschlüsse liefern die für deinen Haushalt nötige Leistung. Tarif A ist monatlich kündbar, kostet 35 € pro Monat und einmalig 40 € für den Anschluss. Tarif B bindet dich 24 Monate: sechs Monate zu 20 €, danach 18 Monate zu 40 €, ohne Anschlussgebühr. Routerkosten fallen in diesem Modell nicht an.
 
-Über 24 Monate kostet A insgesamt 880 €, B dagegen 840 €. Der niedrigere Einstiegspreis spart in diesem Beispiel also 40 € über **zwei Jahre**. Brauchst du den Anschluss nur zwölf Monate, kostet A bis zur Kündigung 460 €. Bei B endet die Zahlungspflicht nicht mit dem Ende der Nutzung. Prüfe deshalb die Bindung getrennt vom rechnerischen Monatspreis. Die Beträge sind Modellannahmen, keine verfügbaren Angebote.
+Über 24 Monate kostet A insgesamt 880 €, B dagegen 840 €. Der niedrigere Einstiegspreis spart in diesem Beispiel also 40 € über **zwei Jahre**. Brauchst du den Anschluss nur zwölf Monate, kostet A bis zur Kündigung 460 €. Bei B endet die Zahlungspflicht nicht mit dem Ende der Nutzung. Prüfe deshalb die Bindung getrennt vom rechnerischen Monatspreis. Die Beträge sind Modellannahmen, keine verfügbaren Angebote.
 
 ## Wie berechnest du den echten Effektivpreis?
 
@@ -198,7 +198,7 @@ Der beste Tarif ist derjenige, der genau deinen Bedarf deckt, ohne für ungenutz
 
 **Für deinen nächsten Check:** Rechne zusätzlich den Fall durch, dass du nach einem Jahr umziehst. Ein kleiner Preisvorteil über zwei Jahre kann weniger wert sein als eine kürzere vertragliche Bindung.
 
-**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/): So sparst du beim Internetvertrag · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): So bringst du Speed in jede Ecke · [WLAN-Frust lösen](../../posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/)
+**Weiterlesen:** [Ratgeber Internet & DSL](../../pillar/internet-dsl/) · [DSL-Wechselbonus sichern](../../posts/2026-08-10-dsl-wechselbonus-sichern/): So sparst du beim Internetvertrag · [WLAN verbessern](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/): So bringst du [Speed in jede](../../posts/2026-08-14-wlan-verbessern-so-bringst-du-speed-in-jede-ecke/) Ecke · [WLAN-Frust lösen](../../posts/2026-11-10-wlan-frust-loesen-so-findest-du-den-besten-router-standort/)
 
 ## Häufige Fragen
 

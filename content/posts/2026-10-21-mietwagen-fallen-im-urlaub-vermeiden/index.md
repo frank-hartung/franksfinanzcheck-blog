@@ -33,6 +33,7 @@ quellen:
     url: "https://www.verbraucherzentrale.de/wissen/reise-mobilitaet"
     herausgeber: "Verbraucherzentrale"
 faktencheck: 2026-11-17
+kurzantwort: "Am Mietwagenschalter musst du sofort die vereinbarte Kaution (z. B. 200 €), die Tankregel (voll‑zu‑voll oder Voll‑zurück) und den Schadenstatus prüfen. Dokumentiere alle bestehenden Kratzer oder Dellen schriftlich und fotografisch, bevor du das Fahrzeug übergibst. Nimm den Rückgabe‑Beleg mit, er dient als Nachweis für die einwandfreie Rückgabe."
 ---
 
 Du hast endlich den Urlaub geplant. Das Hotel steht und die Koffer sind fast gepackt. Der nächste Schritt ist ein Auto für die Reise. Doch noch bevor du das erste Angebot anklickst, kommen Fragen auf. Welche Kosten kommen wirklich auf dich zu? In diesem Ratgeber zeige ich dir die Fallen im Kleingedruckten. Du lernst mit klaren Schritten, wie du deine Kosten für die Reise senkst. So bleibt am Ende mehr Geld für die Urlaubskasse übrig.

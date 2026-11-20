@@ -102,7 +102,7 @@ Ein Balkonkraftwerk fällt nur dann unter das vereinfachte Verfahren, wenn es di
 
 ## Standort und Ausrichtung entscheiden über den Ertrag
 
-Die Förderung ist nur ein Teil der Rechnung. Der Ertrag hängt stark davon ab, wohin die Module zeigen. Auch der Schatten zählt. Ein Balkon mit freiem Blick nach Süden liefert mehr Strom als eine Nordseite. Die bekommt nur wenige Stunden Sonne.
+Die Förderung ist nur ein Teil der Rechnung. Der Ertrag hängt stark davon ab, wohin die Module zeigen. Auch der Schatten zählt. Ein Balkon mit freiem Blick nach Süden liefert [mehr Strom](../../posts/2026-10-07-wie-smart-home-geraete-deine-stromrechnung-wirklich-druecken/) als eine Nordseite. Die bekommt nur wenige Stunden Sonne.
 
 Schatten ist der unterschätzte Faktor. Schon ein Nachbarbalkon, ein Baum oder ein Vordach kann die Leistung eines Moduls deutlich drücken. Prüfe deshalb an einem sonnigen Tag, wann die Fläche wirklich Sonne bekommt. Erst dann montierst du die Halterung.
 

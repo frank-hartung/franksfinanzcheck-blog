@@ -179,7 +179,7 @@ Achte auf Absender und Betreffzeile. Wenn ein Schreiben die Abschlagshöhe, den 
 
 Prüfe zusätzlich deinen Kontostand gegen die Abschläge. Eine Änderung der Höhe fällt auch dort auf, manchmal früher als im Briefkasten. Bei einer Erhöhung lohnt sich der Vergleich mit anderen Anbietern. Bei einer Senkung lohnt sich die Frage, wie sich der Abschlag anpassen lässt.
 
-Wer jährlich einen Blick auf die Abrechnung wirft und die Werte notiert, erkennt Änderungen ohne Mühe. Wer sie nie notiert, beginnt jede Prüfung bei null.
+Wer jährlich einen Blick auf die Abrechnung wirft und die Werte notiert, erkennt [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) ohne Mühe. Wer sie nie notiert, beginnt jede Prüfung bei null.
 
 **Faustregel:** Prüfe nach einem Wechsel in die Grundversorgung sofort einen neuen Tarifvergleich – die Versorgung ist sicher, aber meist deutlich teurer als ein regulärer Vertrag.
 

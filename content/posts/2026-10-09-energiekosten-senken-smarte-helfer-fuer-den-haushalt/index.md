@@ -82,7 +82,7 @@ Nutze für deine Fixkosten den 4K-Prüfpfad von FranksFinanzcheck. Dieser hilft 
 
 **Smart-Home-Geräte** wie intelligente Zwischenstecker sind dabei deine wichtigsten Detektive. Du misst den Durchfluss direkt an der Steckdose. Die Daten landen sofort auf deinem Smartphone. So erkennst du, ob die alte Tiefkühltruhe ein Fall für den Sperrmüll ist.
 
-Ein Beispiel: Ein Gerät mit nur 1 Watt Standby-Verbrauch kostet dich bei 30 Cent pro kWh etwa 3 bis 4 € im Jahr; das ist ein Modellwert. Für einen durchschnittlichen Haushalt liegen Standby-Lasten grob bei 50 bis 100 € pro Jahr – eine Spanne aus der Rechnung, keine Garantie. Sobald du diese Daten kennst, folgt der zweite Schritt: **Konditionen rechnen**.
+Ein Beispiel: Ein Gerät mit nur 1 Watt Standby-Verbrauch [kostet dich](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) bei 30 Cent pro kWh etwa 3 bis 4 € im Jahr; das ist ein Modellwert. Für einen durchschnittlichen Haushalt liegen Standby-Lasten grob bei 50 bis 100 € pro Jahr – eine Spanne aus der Rechnung, keine Garantie. Sobald du diese Daten kennst, folgt der zweite Schritt: **Konditionen rechnen**.
 
 Ein smartes Thermostat koste in der Annahme 50 €. Es spare jährlich etwa 15 € Heizkosten.
 

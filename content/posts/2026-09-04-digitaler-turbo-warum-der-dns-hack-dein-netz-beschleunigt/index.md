@@ -45,6 +45,7 @@ affiliate_exempt_reason: "Reiner DNS-Messtest ohne passendes Tarifangebot – ei
 ---
 
 
+
 **Transparenz:** Dieser Artikel enthält keine Partnerlinks und keine Werbung. Die genannten DNS-Dienste werden nicht vergütet; es fließt keine Provision.
 
 Ein DNS-Wechsel ist kein allgemeiner Internet-Turbo. Er ändert zunächst, welcher DNS-Server eine Domainanfrage beantwortet. Wenn du einen DNS-Server testen möchtest, kannst du einzelne Antwortzeiten vergleichen. Je nach Netz und Anbieter unterscheiden sich die Werte. Ein einzelner Messwert belegt keinen pauschalen Geschwindigkeitsgewinn. Er belegt auch keine kürzeren Ladezeiten für alle Websites.

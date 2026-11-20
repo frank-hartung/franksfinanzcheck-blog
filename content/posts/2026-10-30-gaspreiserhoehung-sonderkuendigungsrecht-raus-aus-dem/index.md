@@ -39,6 +39,7 @@ faktencheck: 2026-10-30
 kurzantwort: "Bei einer Gaspreiserhöhung besteht ein gesetzliches Sonderkündigungsrecht, mit dem der Vertrag meist bis zum Tag vor der Preisänderung beendet werden kann. In der Grundversorgung gilt zudem eine generelle Kündigungsfrist von nur zwei Wochen, wobei ein Anbieterwechsel oft eine jährliche Ersparnis von mehreren hundert Euro ermöglicht."
 ---
 
+
 Eine Gaspreiserhöhung ist kein guter Anlass für eine übereilte Kündigung. Kläre zuerst die Vertragsart: Für die Grundversorgung gelten andere Bedingungen als für einen Sondervertrag.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -277,7 +278,7 @@ Wenn du jetzt handelst, sicherst du dir diese aktuellen Konditionen.
 Zudem ist die psychologische Hürde oft das größte Hindernis. 
 Wir schieben unangenehme Aufgaben gerne auf.
 
-Doch die Rechnung zeigt: Jede Woche im teuren Tarif kostet dich bares Geld. 
+Doch die Rechnung zeigt: Jede Woche im teuren Tarif [kostet dich](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) bares Geld. 
 Ein Wechsel dauert oft kürzer als der wöchentliche Einkauf im Supermarkt. 
 Es ist eine der effizientesten Methoden, um deine Fixkosten spürbar zu senken.
 

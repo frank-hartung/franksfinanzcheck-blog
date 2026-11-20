@@ -44,6 +44,7 @@ faktenfrische_aliases:
   - "2026-11-18-deine-naechtliche-grundlast-strom-so-erkennst-du-wo"
 ---
 
+
 Abends gehen in deiner Wohnung alle Lichter aus. Im Keller läuft der Zähler trotzdem weiter.
 
 Kühlschrank, Router, Pumpen und alte Netzteile ziehen rund um die Uhr Strom. Genau dieser stille Bedarf heißt **Grundlast Strom**. Oft entscheidet er darüber, ob deine nächste Rechnung mit einem Plus oder einer Nachzahlung endet.
@@ -69,7 +70,7 @@ Zwischen Kaffee am Morgen, Büro zu Hause, Herd und [Waschmaschine](../../posts/
 
 In der Nacht ändert sich das Bild komplett. Alle schlafen.
 
-Licht, Fernseher, Herd und Laptop sind aus. Übrig bleibt fast nur die Technik, die ständig am Netz hängt. Darum ist der **[Stromverbrauch](../../posts/2026-11-10-kaffeemaschine-stromverbrauch-was-kostet-die-tasse-kaffee/) nachts** der beste Test für deine festen Kosten.
+Licht, Fernseher, Herd und Laptop sind aus. Übrig bleibt fast nur die Technik, die ständig am Netz hängt. Darum ist der **Stromverbrauch nachts** der beste Test für deine festen Kosten.
 
 Ein kleiner Sockel ist völlig normal und auch wichtig. Dein Kühlschrank hält das Essen frisch. Auch die Heizung oder das Telefon braucht etwas Strom. Teuer wird es erst, wenn alte Geräte im Keller, doppelte Stecker oder unnötige Lampen im Standby diesen Wert verdoppeln.
 
@@ -184,7 +185,7 @@ Auch beim Router zählt Augenmaß. Hängen dein Festnetz, ein Notruf oder wichti
 
 Nutze dann lieber die Sparfunktion im Gerät statt den harten Schalter. Beim Kühlschrank gilt ohnehin: Niemals nachts abschalten! Halte dort lieber die Roste auf der Rückseite frei von Staub, taue Eis rechtzeitig ab und wähle innen keine unnötig eisige Stufe.
 
-Der größte Fehler passiert jedoch oft auf dem Papier. Viele senken ihre **Grundlast Strom** mit viel Fleiß, bleiben aber jahrelang in einem teuren alten Vertrag. Wer beides verbindet – weniger Verbrauch in der Nacht und einen günstigen Preis pro Einheit – , holt für sein Budget das Beste heraus.
+Der größte Fehler passiert jedoch oft auf dem Papier. Viele senken ihre **Grundlast Strom** mit viel Fleiß, bleiben aber jahrelang in einem teuren alten Vertrag. Wer beides verbindet – weniger Verbrauch in der Nacht und einen günstigen Preis pro Einheit –, holt für sein Budget das Beste heraus.
 
 ## Dein 4K-Pfad für dauerhaft niedrige Stromkosten
 

@@ -41,6 +41,7 @@ quellen:
 faktencheck: 2026-10-27
 ---
 
+
 [Frugalismus](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) Familie im Check: Der Briefkasten klappert.
 Darin liegt die neue Abrechnung für Gas oder Strom.
 Viele Eltern kennen diesen Moment der Anspannung.
@@ -49,7 +50,7 @@ Reicht das Geld diesen Monat?
 Oft fressen ungeplante Ausgaben für die Kinder das mühsam Ersparte auf.
 Doch das muss nicht sein.
 Ein bewusster Lebensstil hilft dir dabei, den finanziellen Druck zu senken.
-Diesen Weg nennen Experten oft **[Frugalismus](../../posts/2026-09-11-5-einfache-frugalismus-tricks-fuer-den-alltag/) Familie**.
+Diesen Weg nennen Experten oft **Frugalismus Familie**.
 
 Dabei geht es nicht um Geiz.
 Es geht um die kluge Verteilung deiner Mittel – wie lässt sich ein bewusster **Verzicht** mit den Bedürfnissen von Kindern vereinbaren?  
@@ -251,7 +252,7 @@ So können sie eigene Fehler machen, ohne das Budget zu ruinieren.
 
 ## Praktische Checkliste für den frugaleren Alltag
 
-Nutze diese Liste, um sofort erste Änderungen umzusetzen.
+Nutze diese Liste, um sofort erste [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) umzusetzen.
 Du musst nicht alles sofort machen.
 Pick dir zwei oder drei Punkte heraus, die für euch am einfachsten sind.
 

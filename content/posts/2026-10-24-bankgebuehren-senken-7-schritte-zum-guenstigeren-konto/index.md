@@ -115,7 +115,7 @@ Viele erschrecken über die Summe. Doch genau das ist der erste Schritt zu besse
 
 Jeder Schritt kostet nur wenige Minuten. Das Ergebnis siehst du sofort in deinem Geldbeutel.
 
-Du sparst aus eigener Kraft. Schon kleine Änderungen bringen übers Jahr viel. Ganz ohne fremde Hilfe und ohne Risiko. Und wer seine Finanzen im Griff hat, lebt entspannter.
+Du sparst aus eigener Kraft. Schon kleine [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/) bringen übers Jahr viel. Ganz ohne fremde Hilfe und ohne Risiko. Und wer seine Finanzen im Griff hat, lebt entspannter.
 
 **Faustregel:** Zahlst du monatlich mehr als 5 % deines Nettoeinkommens für Bankgebühren? Dann wechsle deine Strategie. Meist sinken diese Kosten um über 80 %.
 

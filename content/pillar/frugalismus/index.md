@@ -63,12 +63,12 @@ Hier sind die aktuellen Benchmark-Daten für Sparrücklagen, Zinsen und Konsumau
   <div class="ff-radar-grid">
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">Top-Tagesgeldzinsen</div>
-      <div class="ff-radar-kpi__value">3,10–3,45 % p. a.</div>
+      <div class="ff-radar-kpi__value">3,10–3,45 % p. a.</div>  
       <div class="ff-radar-kpi__source">Führende Anbieter ohne befristete Lockangebote</div>
     </div>
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">Festgeld 12 Monate</div>
-      <div class="ff-radar-kpi__value">3,00–3,30 % p. a.</div>
+      <div class="ff-radar-kpi__value">3,00–3,30 % p. a.</div>  
       <div class="ff-radar-kpi__source">Feste Zinsgarantie für planbare Rücklagen</div>
     </div>
     <div class="ff-radar-kpi">
@@ -78,7 +78,7 @@ Hier sind die aktuellen Benchmark-Daten für Sparrücklagen, Zinsen und Konsumau
     </div>
     <div class="ff-radar-kpi">
       <div class="ff-radar-kpi__label">Dispozins Bundesdurchschnitt</div>
-      <div class="ff-radar-kpi__value">11,5–13,8 %</div>
+      <div class="ff-radar-kpi__value">11,5–13,8 %</div>  
       <div class="ff-radar-kpi__source">Vermeidbare Kosten bei Überziehung des Girokontos</div>
     </div>
   </div>

@@ -46,6 +46,7 @@ quellen:
     herausgeber: "Bundesnetzagentur"
 ---
 
+
 Draußen färben sich die Blätter bunt und die Tage werden kürzer.  
 Während du die Heizung langsam hochdrehst, landet oft Post in deinem Briefkasten.  
 Viele Versorger passen jetzt ihre Abschläge an oder schicken die Jahresrechnung.  
@@ -117,7 +118,7 @@ Zuerst sammelst du alle Daten. Wie viel hast du im letzten Jahr (Annahme) verbra
 Jetzt vergleichst du. Nutze dafür Vergleichsportale, aber sei kritisch. Achte auf die [Vertragslaufzeit](../../posts/2026-10-07-dsl-anbieter-wechseln-warum-treue-dich-bares-geld-kostet/). Ich empfehle meistens Laufzeiten von maximal 12 Monaten (Beispielrechnung).
 
 ### 3. Kündigungsfenster sichern
-Wann kannst du frühestens aus deinem alten Vertrag raus? Viele Verträge haben eine [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) von 1 Monat (Annahme) zum Monatsende. Schau genau in deine Vertragsunterlagen. Verpasse diesen Termin nicht.
+Wann kannst du frühestens aus deinem alten Vertrag raus? Viele Verträge haben eine Kündigungsfrist von 1 Monat (Annahme) zum Monatsende. Schau genau in deine Vertragsunterlagen. Verpasse diesen Termin nicht.
 
 ### 4. Kurs halten
 Hast du ein besseres Angebot gefunden? Dann handle sofort. Wenn nicht, bleib bei deinem Anbieter. Prüfe in 3 Monaten (Annahme) erneut. Nur wenn die Rechnung für dich aufgeht, ist ein Wechsel sinnvoll.
@@ -149,7 +150,7 @@ Viele Menschen machen beim Wechseln Fehler, die sie teuer zu stehen kommen. Das 
 
 - **Nur auf den Bonus schauen:** Viele Anbieter locken mit hohen Wechselprämien. Diese werden oft erst nach 1 Jahr (Annahme) ausgezahlt.
   Ist der Grundpreis zu hoch, zahlst du im zweiten Jahr (Annahme) drauf. - **Zu lange Laufzeiten:** Verträge über 24 Monate (Beispielrechnung) binden dich übermäßig. Der Energiemarkt ändert sich schnell.
-  Bleib flexibel mit 12 Monaten (Beispielrechnung) Laufzeit. - **[Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/) vergessen:** Wer zu spät dran ist, bleibt ein weiteres Jahr (Annahme) im teuren Tarif. Markiere dir den Termin rot im Kalender.
+  Bleib flexibel mit 12 Monaten (Beispielrechnung) Laufzeit. - **Kündigungsfrist vergessen:** Wer zu spät dran ist, bleibt ein weiteres Jahr (Annahme) im teuren Tarif. Markiere dir den Termin rot im Kalender.
 - **Vorauskasse oder Pakettarife:** Davon rate ich dringend ab. Geht der Anbieter pleite, ist dein Geld weg.
   Pakettarife bestrafen dich bei Abweichungen vom geplanten Verbrauch.
 
@@ -199,7 +200,7 @@ In Deutschland ist die Stromversorgung gesetzlich gesichert. Niemand sitzt plöt
 Bei einer Insolvenz springt sofort der örtliche Grundversorger ein. Du hast dann Zeit, dir in Ruhe einen neuen Anbieter zu suchen.
 
 ### Wie lange dauert ein Wechsel bis zum Lieferbeginn?
-Der technische Lieferantenwechsel läuft im Stromnetz kurzfristig ab. Wann deine neue Belieferung startet, richtet sich nach der [Kündigungsfrist](../../posts/2026-10-07-handyvertrag-kuendigen-raus-aus-der-kostenfalle-verlaengerung/).
+Der technische Lieferantenwechsel läuft im Stromnetz kurzfristig ab. Wann deine neue Belieferung startet, richtet sich nach der Kündigungsfrist.
 Auch die Restlaufzeit deines bisherigen Vertrags spielt eine Rolle. Die Umstellung am Zähler merkst du im Alltag nicht.
 
 ### Sind Ökostrom-Tarife teurer als herkömmlicher Strom?

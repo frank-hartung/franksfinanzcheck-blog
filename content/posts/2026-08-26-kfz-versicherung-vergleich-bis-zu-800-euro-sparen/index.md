@@ -123,7 +123,7 @@ Hebe das Schreiben auf und notiere, wann es dir zugegangen ist. Eine andere Typ-
 
 ## Modellrechnung: Beitrag ist nicht dasselbe wie Ersparnis
 
-Angenommene Jahresbeiträge: 1.040 € im Altvertrag und 412 € im neuen Tarif. Die Differenz beträgt 628 € für ein Versicherungsjahr.
+Angenommene Jahresbeiträge: 1.040 € im Altvertrag und 412 € im neuen Tarif. Die Differenz beträgt 628 € für ein Versicherungsjahr.
 
 Im Modell ändern sich zugleich Selbstbeteiligung, Werkstattbindung, Kilometer, Fahrerkreis und SF-Klasse. Der Unterschied lässt sich nicht allein einem Anbieterwechsel zuschreiben. Eine höhere SF-Klasse entsteht nicht schon durch den Wechsel. Die Beträge sind fiktiv: weder ein aktuelles Angebot noch ein durchschnittlicher Wechselgewinn.
 

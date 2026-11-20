@@ -69,23 +69,23 @@ Tagesgeld eignet sich nicht zum Bezahlen an der Kasse. In der Regel überweist d
 
 Notiere den **Jahreszinssatz**, den **Aktionszeitraum** und das **Guthaben, für das er gilt**. Prüfe, ob das Angebot an eine erstmalige Kontoeröffnung, zusätzlich eingezahltes Geld oder ein weiteres Produkt gebunden ist. Liegt ein Teil deiner Einlage über einer Betragsgrenze, rechne beide Teile getrennt.
 
-Ein Aktionszins von 3 % pro Jahr für drei Monate bedeutet nicht 3 % Ertrag in drei Monaten. Und ein heute genannter variabler Anschlusszins ist für die Zeit nach der Aktion keine Zusage. Rechne deshalb mindestens eine zweite Variante mit niedrigerem Anschlusszins durch.
+Ein Aktionszins von 3 % pro Jahr für drei Monate bedeutet nicht 3 % Ertrag in drei Monaten. Und ein heute genannter variabler Anschlusszins ist für die Zeit nach der Aktion keine Zusage. Rechne deshalb mindestens eine zweite Variante mit niedrigerem Anschlusszins durch.
 
 ### Beispiel: Der Anschlusszins entscheidet mit
 
-Angenommen, du legst 10.000 € für zwölf Monate an. Angebot A zahlt für drei Monate 3 % pro Jahr; für die übrigen neun Monate nehmen wir 1 % an. Angebot B zahlt in der Rechnung für das ganze Jahr 2 %. Alle Sätze sind **frei gewählte Modellannahmen**, keine Angebote. Wir rechnen vereinfacht in Monaten, ohne Steuern, Gebühren und Zinseszins.
+Angenommen, du legst 10.000 € für zwölf Monate an. Angebot A zahlt für drei Monate 3 % pro Jahr; für die übrigen neun Monate nehmen wir 1 % an. Angebot B zahlt in der Rechnung für das ganze Jahr 2 %. Alle Sätze sind **frei gewählte Modellannahmen**, keine Angebote. Wir rechnen vereinfacht in Monaten, ohne Steuern, Gebühren und Zinseszins.
 
 | Zeitraum | Angebot A | Angebot B |
 |---|---:|---:|
-| Erste drei Monate | 10.000 € × 3 % × 3/12 = 75 € | 10.000 € × 2 % × 3/12 = 50 € |
-| Weitere neun Monate | 10.000 € × 1 % × 9/12 = 75 € | 10.000 € × 2 % × 9/12 = 150 € |
-| Bruttoertrag für zwölf Monate | **150 €** | **200 €** |
+| Erste drei Monate | 10.000 € × 3 % × 3/12 = 75 € | 10.000 € × 2 % × 3/12 = 50 € |
+| Weitere neun Monate | 10.000 € × 1 % × 9/12 = 75 € | 10.000 € × 2 % × 9/12 = 150 € |
+| Bruttoertrag für zwölf Monate | **150 €** | **200 €** |
 
 Wer nach drei Monaten über das Geld verfügen muss, stellt eine andere Frage als jemand, der ein ganzes Jahr vergleicht. Bei einer vorzeitigen Entnahme ändern sich die verzinsten Beträge; bei einer Zinsänderung ändert sich der zweite Teil der Rechnung. Der höhere erste Satz gewinnt also nicht automatisch.
 
 ## Rechenbeispiel: Was bringt das Tagesgeld konkret?
 
-Das zweite Modell isoliert den Einfluss des Zinssatzes: **15.000 € Guthaben, zwölf Monate, keine Zu- oder Abflüsse, konstante Zinsen.** Bei 1,90 % entstehen 285 € Bruttozins; bei 3,10 % sind es 465 €. Der Unterschied zwischen diesen beiden Modellkonten beträgt 180 €, nicht 465 €. Die größere Differenz ergibt sich nur im Vergleich mit einem unverzinsten Konto. Unterjährige Zinsänderungen, Steuern und Zinseszins fehlen bewusst.
+Das zweite Modell isoliert den Einfluss des Zinssatzes: **15.000 € Guthaben, zwölf Monate, keine Zu- oder Abflüsse, konstante Zinsen.** Bei 1,90 % entstehen 285 € Bruttozins; bei 3,10 % sind es 465 €. Der Unterschied zwischen diesen beiden Modellkonten beträgt 180 €, nicht 465 €. Die größere Differenz ergibt sich nur im Vergleich mit einem unverzinsten Konto. Unterjährige Zinsänderungen, Steuern und Zinseszins fehlen bewusst.
 
 {{< chart dataset="tagesgeld_modell" >}}
 
@@ -95,11 +95,11 @@ Das zweite Modell isoliert den Einfluss des Zinssatzes: **15.000 € Guthaben, z
 
 Nicht das Logo im Vergleichsportal, sondern das kontoführende Institut ist für die Zuordnung der Einlage entscheidend. Lies im Informationsbogen für Einleger nach, welche Bank Vertragspartner ist und welches Sicherungssystem zuständig ist. Mehrere Marken können zu demselben Institut gehören.
 
-Die gesetzliche Einlagensicherung schützt grundsätzlich bis zu 100.000 € pro Person und Bank, nicht pro Konto. Guthaben bei derselben Bank werden für diese Grenze zusammen betrachtet. Für besondere Lebenssituationen können abweichende Regeln gelten. Im [Ratgeber zur Einlagensicherung](../../posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/) findest du die Einordnung. Eine hohe Verzinsung ersetzt diese Prüfung nicht.
+Die gesetzliche [Einlagensicherung](../../posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/) schützt grundsätzlich bis zu 100.000 € pro Person und Bank, nicht pro Konto. Guthaben bei derselben Bank werden für diese Grenze zusammen betrachtet. Für besondere Lebenssituationen können abweichende Regeln gelten. Im [Ratgeber zur Einlagensicherung](../../posts/2026-09-23-einlagensicherung-wie-viel-guthaben-geschuetzt-ist/) findest du die Einordnung. Eine hohe Verzinsung ersetzt diese Prüfung nicht.
 
 ## Was ein Prozentpunkt bei deinem Guthaben bedeutet
 
-Auf einem Werbebanner wirkt ein Zinsunterschied von einem halben Prozentpunkt leicht größer, als er für eine kleine Rücklage ist. Bei 2.000 € unverändertem Guthaben macht er über ein volles Jahr rechnerisch 10 € brutto aus: 2.000 € × 0,005. Für drei Monate sind es vereinfacht 2,50 €. Bei 20.000 € wären die Beträge zehnmal so hoch. Entscheide anhand der Differenz in Euro, ob sich eine weitere Kontoeröffnung für dich lohnt.
+Auf einem Werbebanner wirkt ein Zinsunterschied von einem halben Prozentpunkt leicht größer, als er für eine kleine Rücklage ist. Bei 2.000 € unverändertem Guthaben macht er über ein volles Jahr rechnerisch 10 € brutto aus: 2.000 € × 0,005. Für drei Monate sind es vereinfacht 2,50 €. Bei 20.000 € wären die Beträge zehnmal so hoch. Entscheide anhand der Differenz in Euro, ob sich eine weitere Kontoeröffnung für dich lohnt.
 
 Ein Kontowechsel hat keinen einheitlichen Wert für alle Haushalte. Wenn du Anmeldedaten, Referenzkonto und Steuerunterlagen für mehrere Banken verwalten musst, ist das ein zusätzlicher Aufwand. Bei größeren Einlagen lohnt dagegen ein genauer Blick auf die Verteilung und die Sicherungsgrenzen, selbst wenn die Zinssätze ähnlich sind. Das eine ist eine Ertragsfrage, das andere eine Sicherheitsfrage.
 
@@ -109,13 +109,13 @@ Ein Kontowechsel hat keinen einheitlichen Wert für alle Haushalte. Wenn du Anme
 
 ## Wenn sich das Guthaben verändert
 
-Die einfache Jahresrechnung setzt einen gleichbleibenden Betrag voraus. Für eine Rücklage, die du erst aufbaust, gilt das nicht. Angenommen, am Jahresanfang liegen 4.000 € auf dem Konto, nach sechs Monaten kommen weitere 2.000 € hinzu. Bei einem angenommenen Jahreszins von 2 % entstehen für die ersten sechs Monate 40 € brutto und für die zweiten sechs Monate 60 €. Zusammen sind das rund 100 €, ohne Zinseszins und bei vereinfachter Monatsrechnung.
+Die einfache Jahresrechnung setzt einen gleichbleibenden Betrag voraus. Für eine Rücklage, die du erst aufbaust, gilt das nicht. Angenommen, am Jahresanfang liegen 4.000 € auf dem Konto, nach sechs Monaten kommen weitere 2.000 € hinzu. Bei einem angenommenen Jahreszins von 2 % entstehen für die ersten sechs Monate 40 € brutto und für die zweiten sechs Monate 60 €. Zusammen sind das rund 100 €, ohne Zinseszins und bei vereinfachter Monatsrechnung.
 
-Wer stattdessen 6.000 € mit 2 % multipliziert, kommt auf 120 € und überschätzt den Ertrag. Der zusätzliche Betrag war nicht das ganze Jahr angelegt. Dasselbe gilt umgekehrt, wenn eine Reparatur ansteht und du Geld abhebst. Der täglich verfügbare Notgroschen erfüllt seinen Zweck gerade dann, wenn du ihn brauchst; weniger Zinsen nach einer Entnahme sind kein Fehler der Bank.
+Wer stattdessen 6.000 € mit 2 % multipliziert, kommt auf 120 € und überschätzt den Ertrag. Der zusätzliche Betrag war nicht das ganze Jahr angelegt. Dasselbe gilt umgekehrt, wenn eine Reparatur ansteht und du Geld abhebst. Der täglich verfügbare [Notgroschen](../../posts/2026-09-09-notgroschen-die-wahrheit-ueber-das-finanzielle-polster/) erfüllt seinen Zweck gerade dann, wenn du ihn brauchst; weniger Zinsen nach einer Entnahme sind kein Fehler der Bank.
 
 ## Fallstrick: Der Aktionszins gilt nur für einen Teilbetrag
 
-Ein hypothetisches Angebot zahlt 3 % pro Jahr für höchstens 10.000 € und 1 % für den darüberliegenden Anteil. Legst du 15.000 € für ein ganzes Jahr an und bleiben die Sätze unverändert, erhältst du 300 € auf die ersten 10.000 € und 50 € auf die übrigen 5.000 €. Insgesamt sind das 350 € brutto. Die Anzeige „3 %“ auf das gesamte Guthaben anzuwenden ergäbe dagegen 450 € und wäre für diesen Fall falsch.
+Ein hypothetisches Angebot zahlt 3 % pro Jahr für höchstens 10.000 € und 1 % für den darüberliegenden Anteil. Legst du 15.000 € für ein ganzes Jahr an und bleiben die Sätze unverändert, erhältst du 300 € auf die ersten 10.000 € und 50 € auf die übrigen 5.000 €. Insgesamt sind das 350 € brutto. Die Anzeige „3 %“ auf das gesamte Guthaben anzuwenden ergäbe dagegen 450 € und wäre für diesen Fall falsch.
 
 Ähnlich wichtig ist die Definition von neuem Geld. Manchmal gilt die Aktion nur für Beträge oberhalb eines früheren Kontostands oder nur für Einzahlungen von einer anderen Bank. Notiere, welcher Stichtag im Angebot steht. Eine Umbuchung zwischen zwei eigenen Konten beim selben Institut erfüllt eine solche Bedingung nicht schon deshalb, weil das Geld für dich auf einem neuen Konto liegt.
 

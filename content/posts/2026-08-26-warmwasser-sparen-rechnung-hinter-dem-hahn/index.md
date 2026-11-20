@@ -84,7 +84,7 @@ Wie dein Warmwasser entsteht, entscheidet über die Rechnung. Es gibt zwei Grund
 
 **Dezentral im Gerät.** Ein Durchlauferhitzer oder ein Boiler erwärmt das Wasser direkt dort, wo du es brauchst. Der Verbrauch erscheint auf deiner Stromrechnung. Bei Durchlauferhitzern fällt das an der Stromrechnung auf, weil die Leistungsaufnahme hoch ist.
 
-Wichtig ist, dass du weißt, welcher Weg in deiner Wohnung gilt. Wer im Bad einen kleinen Kasten mit Anzeige oder einen Warmwasserspeicher sieht, hat einen Durchlauferhitzer oder Boiler. Wer nur zwei Rohre sieht, hängt an der Zentralanlage.
+Wichtig ist, dass du weißt, welcher Weg in [deiner Wohnung](../../posts/2026-09-27-wlan-verstaerker-vs-mesh-wlan-was-brauchst-du-wirklich/) gilt. Wer im Bad einen kleinen Kasten mit Anzeige oder einen Warmwasserspeicher sieht, hat einen Durchlauferhitzer oder Boiler. Wer nur zwei Rohre sieht, hängt an der Zentralanlage.
 
 ## Warum die Abrechnung oft eine eigene Zeile braucht?
 

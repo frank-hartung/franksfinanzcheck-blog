@@ -54,7 +54,7 @@ Abos kündigen ist selten ein Erfolgserlebnis, und dabei ist es erstaunlich, wie
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
 
-Der Unterschied zu einer normalen Ausgabe liegt im Mechanismus: Du entscheidest einmal, danach entscheidet der [Dauerauftrag](../../posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/). Wer seine Kosten senken will, findet hier den größten Hebel mit dem geringsten Aufwand. Die Verbraucherzentrale zählt wiederkehrende Posten deshalb zu den ersten Stellen, an denen ein kleiner Haushalt ansetzt ([Effektiv sparen, auch mit kleinem Budget](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/effektiv-sparen-auch-mit-kleinem-budget-87610)).
+Der Unterschied zu einer normalen Ausgabe liegt im Mechanismus: Du entscheidest einmal, danach entscheidet der [Dauerauftrag](../../posts/2026-08-28-lastschrift-und-dauerauftrag-abbuchungen-pruefen/). Wer seine [Kosten senken](../../posts/2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check/) will, findet hier den größten Hebel mit dem geringsten Aufwand. Die Verbraucherzentrale zählt wiederkehrende Posten deshalb zu den ersten Stellen, an denen ein kleiner Haushalt ansetzt ([Effektiv sparen, auch mit kleinem Budget](https://www.verbraucherzentrale.de/wissen/geld-versicherungen/effektiv-sparen-auch-mit-kleinem-budget-87610)).
 
 ## Warum kleine Beträge so schwer zu greifen sind
 
@@ -154,7 +154,7 @@ Wenn du neue Abos künftig kontrollieren willst, hilft eine einfache Selbstaufla
 
 Setze zusätzlich eine Erinnerung auf vier Wochen; das ist ein Rechenbeispiel. Nach vier Wochen entscheidest du: behalten oder beenden. Zu diesem Zeitpunkt weißt du, ob du die Leistung wirklich nutzt. Später wird die Entscheidung nur schwerer, weil die Kündigung dann mehr Aufwand bedeutet und der Startvorteil verbraucht ist.
 
-Diese Regel kostet dich pro Vertrag zwei Minuten; das ist ein Rechenbeispiel. Sie verhindert, dass aus einem Testmonat ein Dauervertrag wird.
+Diese Regel [kostet dich](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) pro Vertrag zwei Minuten; das ist ein Rechenbeispiel. Sie verhindert, dass aus einem Testmonat ein Dauervertrag wird.
 
 ## Kündigen mit Nachweis
 

@@ -21,7 +21,14 @@ cover:
   image: "images/covers/2026-11-18-strom-sparen-im-haushalt-20-tipps-fuer-die-naechste-rechnung.jpg"
   alt: "Strom sparen im Haushalt: 20 Tipps für die nächste Rechnung"
   caption: "Tipp von FranksFinanzcheck"
+  ki_pruefung:
+    digital_source_type: algorithmicMedia
+    variante: renderer-v3
+    verfahren: "generate_covers.py (Pillow, deterministisch)"
+    sha256: dcc6f7ca2759a6d0d86684ae4a567feb178e5c2555c180cf5c52c6eaa4f1f63e
+    geprueft_am: 2026-11-20
 faktencheck: 2026-11-19
+kurzantwort: "Beginne mit dem Gerät, das du am häufigsten nutzt, etwa dem Kühlschrank. Ersetze ihn durch ein energieeffizientes Modell – das spart rund 30 % Strom (≈ 70 kWh/Jahr) – und prüfe den Unterschied am Zähler."
 ---
 
 Du hast die Stromrechnung im Briefkasten liegen und fragst dich, warum sie jedes Mal höher ist, obwohl du nichts geändert hast? Der Herbst bringt oft Nachzahlungen, weil viele Haushalte erst dann merken, dass ihr Tarif nicht mehr passt. Mit klaren Schritten und einfachen Verhaltensänderungen kannst du den Verbrauch senken und die Kosten im Griff behalten.

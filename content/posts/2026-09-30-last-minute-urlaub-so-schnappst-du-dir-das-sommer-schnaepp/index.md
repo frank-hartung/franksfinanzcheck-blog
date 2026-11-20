@@ -47,9 +47,10 @@ quellen:
 faktencheck: 2026-11-11
 ---
 
+
 ![Merkkarte: Kernaussagen zu Last Minute Urlaub: So findest du echte Reiseschnäppchen](abbildung-merkkarte.svg)
 
-*Abbildung: Merkkarte zu „Last Minute Urlaub: So findest du echte Reiseschnäppchen“ (eigene Darstellung aus diesem Beitrag).*
+*Abbildung: Merkkarte zu „Last Minute Urlaub: So [findest du echte](../../posts/2026-10-28-flugvergleich-im-winter-so-findest-du-echte-billigfluege/) Reiseschnäppchen“ (eigene Darstellung aus diesem Beitrag).*
 
 
 ## Last-Minute-Urlaub: So ordnest du mögliche Preisvorteile ein
@@ -129,7 +130,7 @@ Achte zusätzlich auf Selbstbeteiligung, Versicherungsschutz und Kilometergrenze
 
 **Nur auf den Startpreis schauen.** Das geht meist schief. Gepäck, Transfer und Verpflegung kommen oft dazu. Auch eine ungünstige Tankregel kann teuer werden. Rechne immer den Endpreis. Für alle Mitreisenden.
 
-**Ein Preisalarm als Tiefstpreis-Garantie verstehen.** Das ist ein Irrtum. Ein Alarm meldet beobachtete Änderungen. Er kennt nicht jedes Angebot. Vergleiche den Treffer mit ähnlichen Leistungen. Buche nicht allein wegen Zeitdruck.
+**Ein Preisalarm als Tiefstpreis-Garantie verstehen.** Das ist ein Irrtum. Ein Alarm meldet beobachtete [Änderungen](../../posts/2026-10-12-kleine-energiespar-tricks-die-deine-kosten-sofort-senken/). Er kennt nicht jedes Angebot. Vergleiche den Treffer mit ähnlichen Leistungen. Buche nicht allein wegen Zeitdruck.
 
 **Storno und Umbuchung übersehen.** Das wird teuer. Prüfe Fristen und Gebühren vor der Zahlung. Bei kurzfristigen Reisen bleibt wenig Zeit. Fehlende Dokumente lassen sich dann kaum noch klären. Abweichende Bedingungen auch nicht.
 
@@ -164,7 +165,7 @@ Auf dieser Annahme wäre Angebot B um 40 € günstiger. Das gilt nur, wenn Rei
 
 ![Gliederung des Beitrags: Last Minute Urlaub: So findest du echte Reiseschnäppchen](abbildung-ablauf.svg)
 
-*Abbildung: Gliederung zu „Last Minute Urlaub: So findest du echte Reiseschnäppchen“ – 5 Stationen von „Last-Minute-Urlaub: So ordnest du mögliche Preisvorteile ein“ bis „Typische Fehler, die das Urlaubsbudget belasten“ (eigene Darstellung).*
+*Abbildung: Gliederung zu „Last Minute Urlaub: So findest du echte Reiseschnäppchen“ – 5 Stationen von „Last-Minute-Urlaub: So ordnest du mögliche Preisvorteile ein“ bis „Typische Fehler, die das [Urlaubsbudget](../../posts/2026-10-25-strategisch-sparen-so-kannst-du-deine-reisekasse-fuellen/) belasten“ (eigene Darstellung).*
 
 
 ## Checkliste vor der Buchung
@@ -279,7 +280,7 @@ Gleiche Reisedaten, Personenzahl, Unterkunft, Verpflegung und Gepäck ab. Vergle
 Prüfe zunächst vorhandene Policen und Kartenleistungen. Entscheidend sind versicherte Personen, Deckung, Selbstbehalt, Ausschlüsse und Fristen. Eine Jahrespolice kann bei häufigen Reisen passen. Sie ist aber nicht automatisch günstiger oder umfassender.
 
 ### Kurzer Merksatz vor der Buchung
-Nimm dir Zeit. Der Rabatt auf dem Banner ist selten der echte Preis. Rechne nach. Frag nach. Vergleiche in Ruhe. So buchst du günstig. Und so [vermeidest](../../posts/2026-10-05-bueroausstattung-steuerlich-clever-absetzen-so-vermeidest/) du Überraschungen nach der Reise.
+Nimm dir Zeit. Der Rabatt auf dem Banner ist selten der echte Preis. Rechne nach. Frag nach. Vergleiche in Ruhe. So buchst du günstig. Und so vermeidest du Überraschungen nach der Reise.
 
 ## Weiterrechnen und vertiefen
 

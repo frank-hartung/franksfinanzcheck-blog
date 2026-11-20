@@ -159,15 +159,13 @@ Die folgende Matrix unterstützt dich bei der optimalen Wechselsituation:
       <tr>
         <td><strong>Glasfaser-Ausbaugebiet (FTTH verfügbar)</strong></td>
         <td>Technologiewechsel</td>
-        <td><span class="ff-decision-badge ff-decision-badge – warn">Mittel (Montage)</span></td>  
-        <td>Höhere Stabilität</td>
+        <td><span class="ff-decision-badge ff-decision-badge – warn">Mittel (Montage)</span></td> <td>Höhere Stabilität</td>
         <td>Kostenlosen Hausanschluss während der Nachfragebündelung sichern; Tarif vergleichen.</td>
       </tr>
       <tr>
         <td><strong>Anhaltende Leitungsstörungen / Unterversorgung</strong></td>
         <td>Sonderkündigung nach TKG</td>
-        <td><span class="ff-decision-badge ff-decision-badge – warn">Mittel (Messung)</span></td>  
-        <td>Sofortiger Ausstieg</td>
+        <td><span class="ff-decision-badge ff-decision-badge – warn">Mittel (Messung)</span></td> <td>Sofortiger Ausstieg</td>
         <td>BNetzA-Desktop-App nutzen (30 Messungen an 3 Tagen) → Fristlose Kündigung nach § 57 TKG.</td>
       </tr>
     </tbody>

@@ -42,6 +42,7 @@ faktenfrische_aliases:
 kurzantwort: "Stelle den Router möglichst zentral und frei auf, statt ihn im Schrank zu verstecken. Wände, Metall und andere Funkquellen können das Signal schwächen oder stören. Teste mehrere Standorte: Welche Position am besten funktioniert, hängt von Wohnung und Geräten ab."
 ---
 
+
 Stell dir vor, du sitzt abends auf dem Sofa. Du möchtest deine Lieblingsserie streamen. Doch das Bild stockt. Der Ladekreis dreht sich endlos.
 
 Das nervt gewaltig. Oft suchen wir den Fehler beim Anbieter. Wir schimpfen auf die Leitung. Doch meist liegt das Problem direkt in deiner Wohnung.

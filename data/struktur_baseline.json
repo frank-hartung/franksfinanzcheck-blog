@@ -669,6 +669,16 @@
       "mikro": 3,
       "serien": 0,
       "ueberlang": false
+    },
+    "2026-11-20-internet-tuning-kostenlos-mehr-speed-fuer-dein-wlan": {
+      "mikro": 0,
+      "serien": 0,
+      "ueberlang": false
+    },
+    "2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check": {
+      "mikro": 1,
+      "serien": 0,
+      "ueberlang": false
     }
   },
   "hinweis": "Sperrklinke des Struktur-Guards: je Artikel der akzeptierte Stand an Mikro-Abschnitten/Serien. Werte dürfen nur kleiner werden – Zuwachs ist ein Fund (scripts/struktur_guard.py).",
@@ -677,5 +687,5 @@
     "neu_toleranz": 2,
     "serie_min": 3
   },
-  "stand": "2026-11-18"
+  "stand": "2026-11-20"
 }

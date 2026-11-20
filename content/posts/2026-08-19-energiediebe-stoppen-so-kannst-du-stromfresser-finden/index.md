@@ -49,6 +49,7 @@ quellen:
 faktencheck: 2026-11-07
 ---
 
+
 Du willst Energiediebe stoppen? Die Stromrechnung steigt. Muss da gleich der alte Kühlschrank raus? Nicht so schnell. Alte Geräte sind nicht immer die größten Stromfresser. Oft steckt der teure Kandidat ganz woanders: im Keller, beim [Warmwasser](../../posts/2026-08-26-warmwasser-sparen-rechnung-hinter-dem-hahn/) oder in der Spielekonsole, die rund um die Uhr im Standby läuft.
 
 **Transparenz:** Dieser Artikel enthält Affiliate-Links (Werbung). Beim Abschluss über einen Link erhalten wir eine Provision – für dich entstehen keine Mehrkosten.
@@ -126,7 +127,7 @@ Für fest verbaute Geräte brauchst du einen Fachbetrieb. Dein Haushaltszähler 
 ### Die passende Messdauer
 
 - **Kühl- und Gefriergerät:** sieben vollständige Tage, dann auf ein Jahr hochrechnen. So empfiehlt es die [Verbraucherzentrale](https://www.verbraucherzentrale.de/wissen/energie/strom-sparen/so-finden-sie-den-passenden-kuehlschrank-10573), weil sich Kühl- und Abtauzyklen erst über eine Woche ausmitteln.
-- **Waschmaschine, Spülmaschine, Trockner:** drei bis fünf vollständige, typische Programme messen.
+- **[Waschmaschine](../../posts/2026-11-05-waschmaschine-beladen-weniger-kosten-bei-jedem-waschgang/), Spülmaschine, Trockner:** drei bis fünf vollständige, typische Programme messen.
 - **TV, PC und Konsole:** Betrieb und Bereitschaft getrennt erfassen.
 - **[Dauerverbraucher](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/):** aktuelle Leistung notieren und auf die tatsächliche Laufzeit hochrechnen.
 
@@ -199,7 +200,7 @@ Ein Ersatz lohnt sich, wenn der Jahresverbrauch hoch ist, die Nutzung real bleib
 | Freitag bis Montag | Kühlgerät ungestört Weitermessen lassen | Zwischenwerte notieren |
 | Dienstag darauf | Kühlgerät ablesen, auf ein Jahr hochrechnen | abschalten, nutzen oder ersetzen |
 
-Beim Zählertest schaltest du nicht blind Kühlgerät, Heizung oder Sicherheitskomponenten ab. Notiere stattdessen den Stand vor und nach einer typischen Nacht und prüfe, welche notwendigen [Dauerverbraucher](../../posts/2026-09-11-standby-kosten-reduzieren-so-entlarvst-du-stromfresser/) weiterlaufen.
+Beim Zählertest schaltest du nicht blind Kühlgerät, Heizung oder Sicherheitskomponenten ab. Notiere stattdessen den Stand vor und nach einer typischen Nacht und prüfe, welche notwendigen Dauerverbraucher weiterlaufen.
 
 ## Häufige Messfehler
 
