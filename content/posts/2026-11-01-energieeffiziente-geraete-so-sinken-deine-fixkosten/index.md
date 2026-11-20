@@ -4,7 +4,7 @@ description: "Energieeffiziente: Vergleiche bei Geräten nicht nur das Energiela
 date: 2026-11-20T09:39:41Z
 draft: false
 reserve_published: 2026-11-20
-tags: ["Stromkosten senken"]
+tags: ["Geld sparen im Alltag"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
 author: "Frank Hartung"

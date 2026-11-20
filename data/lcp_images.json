@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generatedBy": "scripts/lcp_image_optimizer.py",
-  "generatedAt": "2026-11-20T09:32:18+00:00",
+  "generatedAt": "2026-11-20T13:17:50+00:00",
   "strategy": {
     "preloadFormat": "avif",
     "widths": [
@@ -1278,6 +1278,22 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
+    "/posts/2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten/": {
+      "image": "images/covers/2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten.jpg",
+      "type": "single",
+      "reason": "Artikel-Cover oberhalb des Falzes",
+      "sizes": "(min-width: 768px) 720px, 100vw",
+      "widths": [
+        360,
+        480,
+        620,
+        720
+      ],
+      "format": "avif",
+      "loading": "eager",
+      "fetchpriority": "high",
+      "decoding": "async"
+    },
     "/posts/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck/": {
       "image": "images/covers/2026-11-01-flugverspaetung-entschaedigung-so-holst-du-dein-geld-zurueck.jpg",
       "type": "single",
@@ -1422,24 +1438,8 @@
       "fetchpriority": "high",
       "decoding": "async"
     },
-    "/posts/2026-11-20-internet-tuning-kostenlos-mehr-speed-fuer-dein-wlan/": {
-      "image": "images/covers/2026-11-20-internet-tuning-kostenlos-mehr-speed-fuer-dein-wlan.jpg",
-      "type": "single",
-      "reason": "Artikel-Cover oberhalb des Falzes",
-      "sizes": "(min-width: 768px) 720px, 100vw",
-      "widths": [
-        360,
-        480,
-        620,
-        720
-      ],
-      "format": "avif",
-      "loading": "eager",
-      "fetchpriority": "high",
-      "decoding": "async"
-    },
-    "/posts/2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check/": {
-      "image": "images/covers/2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check.jpg",
+    "/posts/2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten/": {
+      "image": "images/covers/2026-11-18-gas-anbieter-wechseln-strategien-gegen-hohe-heizkosten.jpg",
       "type": "single",
       "reason": "Artikel-Cover oberhalb des Falzes",
       "sizes": "(min-width: 768px) 720px, 100vw",
