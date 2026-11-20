@@ -100,7 +100,6 @@
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/verbraucher/heizkosten-anstieg-100.html": "2026-11-19T19:38:11+01:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/verbraucher/inflationsrate-deutschland-oktober-100.html": "2026-10-30T20:18:32+01:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/verbraucher/klimaschaeden-versicherungen-100.html": "2026-11-08T19:28:44+01:00",
-    "verbraucher-nachrichten::rss:https://www.tagesschau.de/wirtschaft/verbraucher/spritpreise-tankrabatt-120.html": "2026-10-06T00:34:19+02:00",
     "verbraucher-nachrichten::rss:https://www.tagesschau.de/wissen/klima/treibhausgase-so-hoch-wie-nie-100.html": "2026-10-27T15:22:48+01:00",
     "wochenbericht::wochenbericht:2026-10-18": "2026-10-18T19:17:16+02:00",
     "wochenbericht::wochenbericht:2026-11-08": "2026-11-08T19:28:44+01:00"
@@ -169,12 +168,10 @@
   "version": 1,
   "zaehler": {
     "kanal-konfig-drift": {
-      "2026-10-05": 1,
       "2026-10-13": 1,
       "2026-11-06": 1
     },
     "nacht-planung": {
-      "2026-10-05": 1,
       "2026-10-06": 1,
       "2026-10-07": 1,
       "2026-10-08": 1,
@@ -222,7 +219,6 @@
       "2026-11-19": 1
     },
     "reach-signale-kuratieren": {
-      "2026-10-05": 5,
       "2026-10-12": 5,
       "2026-10-19": 2,
       "2026-10-26": 2,
