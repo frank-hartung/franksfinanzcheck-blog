@@ -251,3 +251,16 @@ stoppen kann.
 **Verantwortlich:** Arena-Agent (Premium-Level)  
 **Datum:** 09.10.2026  
 **Version:** 1.0
+
+## Nachprüfung (20.11.2026)
+
+- GitHub #675 ist geschlossen und betrifft **Content-Engine v2**, nicht den
+  separaten Workflow **Sicherheits-Wache**.
+- [Content-Engine v2, Run 44762767540](https://github.com/frank-hartung/franksfinanzcheck-blog/actions/runs/44762767540): planmäßiger Lauf auf `main` erfolgreich.
+- Der ursprüngliche Text ist beim PR-Gate zu korrigieren: **Auch FEST-Drift
+  macht `--gate` rot (Exit 3)**. Der Regressionstest zu #675 prüft jetzt im
+  selben Replay, dass das PR-Gate den Lock unverändert lässt und erst der
+  getrennte Engine-Pfad (`--heal`) belegten Footer-Drift heilen kann.
+- Ein roter Check ist nicht automatisch eine Merge-Sperre. Die abgefragten
+  aktiven Ruleset-Regeln für `main` enthielten keinen Required Status Check.
+  Zur verbindlichen Durchsetzung siehe [Pflicht-Check-Runbook](docs/PFLICHT-CHECK-RUNBOOK.md).

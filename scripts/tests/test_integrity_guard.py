@@ -292,7 +292,12 @@ class WFA535DauerheilungTests(Fixture):
         self.assertEqual(crit, [],
                          "committete Footer-Änderung darf kein KRITISCH-Drift sein")
         self.assertEqual(fest, [self.FOOTER_REL])
+        vorher = self.lock_pfad.read_bytes()
         with contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(ig.gate(self.root), 3,
+                             "Das PR-Gate muss auch belegten Footer-Drift melden")
+            self.assertEqual(self.lock_pfad.read_bytes(), vorher,
+                             "Das PR-Gate darf den Lock nicht mitzeichnen")
             self.assertEqual(ig.heilen(self.root), 0,
                              "Engine-Schritt --heal muss belegten Footer-Drift "
                              "heilen (Exit 0) – der Vorfall #675 war Exit 3")
