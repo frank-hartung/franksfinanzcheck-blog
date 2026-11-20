@@ -1,114 +1,127 @@
 {
-  "2026-11-19-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich": {
-    "datei_sha256": "0e51fba2141955bba21f393bcb20d94209f850b3244eacf30a62782b78bc946c",
+  "2026-11-20-carsharing-kosten-lohnt-sich-das-auto-teilen-fuer-dich": {
+    "datei_sha256": "3c9104c4c06e9d53f82b72a60ef5115c7c4c9e0ae14be36b4879c36a143bfc87",
     "fassung_gewechselt": true,
-    "first": "2026-11-19T12:20:25Z",
+    "first": "2026-11-20T12:48:15Z",
     "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "run:44519276595"
+      "run:44731798346"
     ],
-    "last": "2026-11-19T12:34:56Z",
-    "lauf": "run:44519276595",
+    "last": "2026-11-20T12:48:15Z",
+    "lauf": "run:44731798346",
     "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
   },
-  "2026-11-19-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
-    "datei_sha256": "5a0c64ec226885fb04cc675fc74e264820dd9d78b36a3ada02ff320bd7cdd72a",
+  "2026-11-20-deine-naechtliche-grundlast-strom-so-erkennst-du-wo": {
+    "datei_sha256": "00627daffeb713a1da513f8083cfd6ecc834fa9a9dcff0eaf5aa6884411fa1a8",
     "fassung_gewechselt": true,
-    "first": "2026-11-19T12:20:25Z",
+    "first": "2026-11-20T12:24:47Z",
     "grund": "Zeichenlänge (check_length.py) nicht bestanden",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "run:44519276595"
+      "run:44731798346"
     ],
-    "last": "2026-11-19T12:34:56Z",
-    "lauf": "run:44519276595",
+    "last": "2026-11-20T12:48:15Z",
+    "lauf": "run:44731798346",
     "signatur": "zeichenlänge (check_length.py) nicht bestanden"
   },
-  "2026-11-19-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich": {
-    "datei_sha256": "4cd4c9ac0751d98c3d4ef90279298c2cb0bc24429cf555889524c73144970bcc",
+  "2026-11-20-ferienwohnung-vergleich-so-rechnest-du-kosten-ehrlich": {
+    "datei_sha256": "ab4767cc1cd491c0ea1b396f30989948c44329b06e00c90ac87f2649da7ef732",
     "fassung_gewechselt": true,
-    "first": "2026-11-19T12:34:56Z",
+    "first": "2026-11-20T12:24:47Z",
     "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "run:44519276595"
+      "run:44731798346"
     ],
-    "last": "2026-11-19T12:34:56Z",
-    "lauf": "run:44519276595",
+    "last": "2026-11-20T12:48:15Z",
+    "lauf": "run:44731798346",
     "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
   },
-  "2026-11-19-strompreis-2026-herbst-check-fuer-deine-stromkosten": {
-    "datei_sha256": "f2b410fb7d6eb5bea280bd77df44a9310d3360059cdca0293845880fbfd2c836",
+  "2026-11-20-heizperiode-beginn-2026-warum-der-gas-check-im-oktober": {
+    "datei_sha256": "58faf54e8c9ba2ff24d22bbe550af6c663c89bca7b00f600e4d3a902f9ceabec",
     "fassung_gewechselt": true,
-    "first": "2026-11-19T12:20:25Z",
+    "first": "2026-11-20T12:48:15Z",
+    "grund": "Faktenfrische nicht bestanden: Erstrecherche – noch nie faktengeprüft – keine Veröffentlichung ohne aktuellen Beleg",
+    "hits": 1,
+    "klasse": "heilbar",
+    "laeufe": [
+      "run:44731798346"
+    ],
+    "last": "2026-11-20T12:48:15Z",
+    "lauf": "run:44731798346",
+    "signatur": "faktenfrische nicht bestanden: erstrecherche – noch nie faktengeprüft – keine veröffentlichung ohne aktuellen beleg"
+  },
+  "2026-11-20-strompreis-2026-herbst-check-fuer-deine-stromkosten": {
+    "datei_sha256": "0026b6b0a3f4baf436f74e681781ad72d97fd429fa8fc0f0a091ac88e36ddd55",
+    "fassung_gewechselt": true,
+    "first": "2026-11-20T12:48:15Z",
     "grund": "Faktenfrische nicht bestanden: 1c6e4d2f12da24ec4081 (luecke): Der Hinweis, dass ein Anbieterwechsel im Durchschnitt 3‑6 Wochen dauert, fehlt eine nachweisbare Quelle.; 5b539daf371f7362a3ef (praezision): Die Empfehlung, dynamische Tarife erf",
     "hits": 1,
     "klasse": "menschlich",
     "laeufe": [
-      "run:44519276595"
+      "run:44731798346"
     ],
-    "last": "2026-11-19T12:34:56Z",
-    "lauf": "run:44519276595",
+    "last": "2026-11-20T12:48:15Z",
+    "lauf": "run:44731798346",
     "signatur": "faktenfrische nicht bestanden: <n>c<n>e<n>d<n>f<n>da<n>ec<n> (luecke): der hinweis, dass ein anbieterwechsel im durchschnitt <n>‑<n> wochen dauert, fehlt eine nachweisbare quelle.; <n>b<n>daf<n>f<n>a<"
   },
-  "2026-11-19-vorrat-planen-leicht-gemacht-so-sparst-du-beim": {
-    "datei_sha256": "1f5aa25176852a648595c2206750d92ce3d8683db69c438379c1ee47186e160f",
-    "fassung_gewechselt": true,
-    "first": "2026-11-19T12:20:25Z",
-    "grund": "Reserve-Qualitäts-Gate: Umfang: 881 Wörter / 6447 Zeichen; Premium verlangt mindestens 1.400 Wörter und 10.000 Zeichen",
+  "2026-11-20-vorrat-planen-leicht-gemacht-so-sparst-du-beim": {
+    "datei_sha256": "b9a69a65feb3f7a7e3bd4f40340d40cf7ccec46a404b0fbb587d97afb2a9f7d6",
+    "first": "2026-11-20T12:24:47Z",
+    "grund": "Reserve-Qualitäts-Gate: RS1: kein „Das Wichtigste in Kürze“-Modul",
     "hits": 1,
     "klasse": "heilbar",
     "laeufe": [
-      "run:44519276595"
+      "run:44731798346"
     ],
-    "last": "2026-11-19T12:34:56Z",
-    "lauf": "run:44519276595",
-    "signatur": "reserve-qualitäts-gate: umfang: <n> wörter / <n> zeichen; premium verlangt mindestens <n>.<n> wörter und <n><score> zeichen"
+    "last": "2026-11-20T12:48:15Z",
+    "lauf": "run:44731798346",
+    "signatur": "reserve-qualitäts-gate: rs<n>: kein „das wichtigste in kürze“-modul"
   },
-  "2026-11-19-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste": {
-    "datei_sha256": "be4e2ef574f876e6b09060b4c09b35424ddf32928a46bbbb49e6df77c1b943a8",
+  "2026-11-20-weniger-spontankaeufe-dein-essensplan-woche-ohne-reste": {
+    "datei_sha256": "c999f6283fb1f8efadf3af652a3319cd347320c39ad7902480b2de4d0145ffa9",
     "fassung_gewechselt": true,
-    "first": "2026-11-19T12:20:25Z",
+    "first": "2026-11-20T12:48:15Z",
     "grund": "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
     "hits": 1,
     "klasse": "unheilbar",
     "laeufe": [
-      "run:44519276595"
+      "run:44731798346"
     ],
-    "last": "2026-11-19T12:34:56Z",
-    "lauf": "run:44519276595",
+    "last": "2026-11-20T12:48:15Z",
+    "lauf": "run:44731798346",
     "signatur": "quellen-gate nicht bestanden: quellenbasis fehlt – veröffentlichte ratgeber brauchen einen nicht-leeren `quellen:`-block im frontmatter (m<n>, #<n>–#<n>)"
   },
-  "2026-11-19-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet": {
-    "datei_sha256": "e228deeaca3483481c8c9ed016766e5b1592fe1963aa4aba39f8137d18c0625f",
+  "2026-11-20-wertvolle-gebrauchte-moebel-finden-so-pruefst-du-qualitaet": {
+    "datei_sha256": "bec4240f0b503767faa7b8d9f17d9ca7a3ecae835323aba21fe026ec9ffad8f5",
     "fassung_gewechselt": true,
-    "first": "2026-11-19T12:20:25Z",
+    "first": "2026-11-20T12:24:47Z",
     "grund": "Faktenfrische nicht bestanden: 842ddd33d3dd6b0b97f7 (luecke): Muffiger Geruch deutet oft auf tiefliegenden Schimmel oder Feuchtigkeit hin.; d3e210fb738bd77ef594 (luecke): Neue Möbel verlieren oft sofort nach dem Kauf massiv an Wert.; da84fa",
     "hits": 1,
     "klasse": "menschlich",
     "laeufe": [
-      "run:44519276595"
+      "run:44731798346"
     ],
-    "last": "2026-11-19T12:34:56Z",
-    "lauf": "run:44519276595",
+    "last": "2026-11-20T12:48:15Z",
+    "lauf": "run:44731798346",
     "signatur": "faktenfrische nicht bestanden: <n>ddd<n>d<n>dd<n>b<n>b<n>f<n> (luecke): muffiger geruch deutet oft auf tiefliegenden schimmel oder feuchtigkeit hin.; d<n>e<n>fb<n>bd<n>ef<n> (luecke): neue möbel verli"
   },
-  "2026-11-19-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater": {
-    "datei_sha256": "2c6ae2ebe42296304197aebc2007c8640c867c09cf25b1cb0fe0b3076afa54a5",
+  "2026-11-20-wlan-verbessern-lohnt-sich-mesh-oder-reicht-ein-repeater": {
+    "datei_sha256": "bfb27c013ef7920043a04ebe63319679d9f016cf4a7b7241bbeedfb9cb2c5f4c",
     "fassung_gewechselt": true,
-    "first": "2026-11-19T12:20:25Z",
+    "first": "2026-11-20T12:48:15Z",
     "grund": "Quellen-Gate nicht bestanden: Quellenbasis fehlt – veröffentlichte Ratgeber brauchen einen nicht-leeren `quellen:`-Block im Frontmatter (M4, #1146–#1204)",
     "hits": 1,
     "klasse": "unheilbar",
     "laeufe": [
-      "run:44519276595"
+      "run:44731798346"
     ],
-    "last": "2026-11-19T12:34:56Z",
-    "lauf": "run:44519276595",
+    "last": "2026-11-20T12:48:15Z",
+    "lauf": "run:44731798346",
     "signatur": "quellen-gate nicht bestanden: quellenbasis fehlt – veröffentlichte ratgeber brauchen einen nicht-leeren `quellen:`-block im frontmatter (m<n>, #<n>–#<n>)"
   }
 }
