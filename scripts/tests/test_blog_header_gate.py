@@ -323,13 +323,17 @@ class ProxyDiagnose(unittest.TestCase):
         self.assertEqual(code, gate.EXIT_STOERUNG)
         self.assertNotIn("diagnose", daten)
 
-    def test_815_proxy_aktiv_erinnert_an_offenen_datenschutz_b7(self):
+    def test_815_proxy_aktiv_b7_erledigt_kein_offener_blocker(self):
         (code, bericht, daten), _ = _messen(
             [(200, {**PROXY, **GUT})], ziele=[gate.ZIELE[0]])
         self.assertEqual(code, gate.EXIT_OK)
-        self.assertTrue(any("Datenschutz-Folge B7 offen" in w for w in daten["warnungen"]))
-        self.assertTrue(any("Datenschutz-Folge B7 offen" in b for b in daten["abschluss_blocker"]))
-        self.assertIn("edge:b7:apply", bericht)
+        # B7 (Datenschutz-Folge) ist auf main eingearbeitet (PR #1282,
+        # squash-merged). Der Proxy-aktive Fall mit B7-konformer
+        # Datenschutzseite erzeugt keinen B7-Warn- und keinen
+        # Abschluss-Blocker mehr und verweist nicht auf edge:b7:apply.
+        self.assertFalse(any("Datenschutz-Folge B7" in w for w in daten["warnungen"]))
+        self.assertFalse(any("Datenschutz-Folge B7" in b for b in daten["abschluss_blocker"]))
+        self.assertNotIn("edge:b7:apply", bericht)
 
     def test_815_fehlende_datenschutzdatei_ist_ebenfalls_abschlussblocker(self):
         from unittest.mock import patch
