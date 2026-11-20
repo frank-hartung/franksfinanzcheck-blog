@@ -368,3 +368,4 @@
 {"zeit": "2026-11-20T09:33:29.627920+00:00", "slug": "2026-11-20-standby-kosten-senken-die-fiesesten-stromfresser-im-check", "regel": "RS5", "aktion": "fix-deterministisch"}
 {"zeit": "2026-11-20T15:26:17.559604+00:00", "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten", "regel": "RS1-RS6", "aktion": "fix-ki"}
 {"zeit": "2026-11-20T21:49:25.730256+00:00", "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
+{"zeit": "2026-11-20T23:22:21.121122+00:00", "slug": "2026-11-01-energieeffiziente-geraete-so-sinken-deine-fixkosten", "regel": "VERTRAG", "aktion": "ki-heilung-verworfen", "grund": "Struktur: Linkziele verändert – Heilung verworfen"}
