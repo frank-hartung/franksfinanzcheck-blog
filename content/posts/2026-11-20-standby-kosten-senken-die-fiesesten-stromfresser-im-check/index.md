@@ -3,7 +3,9 @@ title: "Standby Kosten senken: Die fiesesten Stromfresser im Check"
 description: Hohe Standby Kosten belasten dein Budget? Ich zeige dir, wie du heimliche Stromfresser entlarven kannst und welche Dauerverbraucher wirklich Geld kosten.
 kurzantwort: Heimliche Dauerverbraucher treiben die Grundlast deines Haushalts unbemerkt in die Höhe. Das Ziel ist es, gezielt Stromfresser entlarven zu können, statt wahllos Stecker zu ziehen.
 date: 2026-11-20T14:22:38Z
-draft: false
+draft: true
+cadence_demoted: 2026-11-20T15:23:41Z
+cadence_grund: "faktenfrische: 4232b77745f1559839a5 (luecke): Der Referenzwert für den Strompreis (0,35 €/kWh) wird als Rechenbasis genutzt, findet sich aber nicht in der Fachquelle der Bundesn…"
 tags: ["Stromkosten senken"]
 categories: ["Ratgeber"]
 pillar: "strom-sparen"
